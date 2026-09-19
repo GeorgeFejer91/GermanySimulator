@@ -65,8 +65,8 @@ const buildings=[
 {id:"post",name:"DEUTSCHE POST",x:3700,y:1260,w:650,h:400,hgt:170,doorX:4025,doorY:1690,sign:"BRIEF · FAX · WARTEMARKE"},
 {id:"rathaus",name:"RATHAUS",x:2750,y:2320,w:700,h:430,hgt:205,doorX:3100,doorY:2780,sign:"BÜRGERNÄHE NACH TERMINVEREINBARUNG"},
 {id:"baumarkt",name:"DIN-BAUMARKT",x:3700,y:2320,w:650,h:430,hgt:160,doorX:4025,doorY:2780,sign:"NORMGERECHTE SCHRAUBEN"},
-{id:"akw",kind:"nuclear",name:"AKW NULLLEISTUNG",x:4750,y:3370,w:850,h:420,hgt:155,doorX:5175,doorY:3820,sign:"STILLGELEGT · RÜCKBAU NUR MIT FORMULAR"},
-{id:"kohlewerk",kind:"coal",name:"KOHLEWERK DAUERBETRIEB",x:6250,y:3370,w:850,h:420,hgt:170,doorX:6675,doorY:3820,sign:"VOLL FUNKTIONSFÄHIG · AKTENZEICHEN CO₂"}
+{id:"akw",kind:"nuclear",name:"AKW · GESCHLOSSEN",x:4750,y:3370,w:850,h:420,hgt:155,doorX:5175,doorY:3820,sign:"STILLGELEGT · ZUGANG VERSIEGELT"},
+{id:"kohlewerk",kind:"coal",name:"KOHLEKRAFTWERK · IN BETRIEB",x:6250,y:3370,w:850,h:420,hgt:170,doorX:6675,doorY:3820,sign:"OFFEN · 24/7 · RAUCHFANG AKTIV"}
 ];
 const schreber={x:90,y:1210,w:560,h:570},policeGarden={x:2850,y:3250,w:1500,h:650},policePath={x1:4250,y1:3850,x2:3650,y2:3250,width:130};
 const BORDER_Y=1120,BORDER_BAND=72,crossingSigns=[],borderGates=roads.filter(r=>r.h===WORLD.h).map(r=>({x:r.x-55,w:r.w+110})),borderSegments=[];

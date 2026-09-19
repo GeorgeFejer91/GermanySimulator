@@ -90,7 +90,7 @@ const assetSources={
  wartemarke:"./assets/wartemarke.svg",rasen:"./assets/rasen-verboten.svg",muell:"./assets/muelltrennung.svg",
  db:"./assets/db-verspaetung.svg",baustelle:"./assets/baustelle.svg",fahrrad:"./assets/fahrrad.svg",kaffee:"./assets/kaffeeautomat.svg",pfandautomat:"./assets/pfandautomat.svg",
  faxbillboard:"./assets/fax-billboard.svg",faxgeraet:"./assets/faxgeraet.svg",faxkiosk:"./assets/telefon-fax-kiosk.svg",
- merkel:"./assets/merkel-cartoon.svg",polizeigarten:"./assets/polizei-garten-schild.svg",borderPourer:"./assets/border-pourer-sprite.png"
+ merkel:"./assets/merkel-cartoon.svg",merkelSprite:"./assets/merkel-sprite.png",polizeigarten:"./assets/polizei-garten-schild.svg",borderPourer:"./assets/border-pourer-sprite.png"
 };
 const assets={};for(const key in assetSources){const img=new Image();img.src=assetSources[key];assets[key]=img}
 const borderPourerSprite={canvas:null,cols:5,rows:6};
@@ -236,6 +236,7 @@ const borderPourerLines={
  berlin:["Das Rote Rathaus zu stürmen? This really muss ein Ende haben.","Mein Großvater was kein Nationalsozialist, sondern eine impressive Persönlichkeit und ein successful Bürgermeister."],
  germany:["Das Rote Rathaus zu stürmen? Das muss ein Ende haben.","Mein Großvater war kein Nationalsozialist, sondern eine beeindruckende Persönlichkeit und ein erfolgreicher Bürgermeister."]
 };
+const merkelLines=["Wir schaffen das.","Das Internet ist für uns alle Neuland.","Ausspähen unter Freunden, das geht gar nicht.","Scheitert der Euro, dann scheitert Europa."];
 const npcs=[
  {x:520,y:720,name:"HERR KLEIN",line:0,vx:16,vy:0,min:470,max:900},
  {x:1470,y:670,name:"FRAU MÜLLER",line:3,vx:-13,vy:0,min:1360,max:1760},
@@ -247,7 +248,7 @@ const npcs=[
  {x:2920,y:1880,name:"FRAU SPARKASSE",line:5,vx:13,vy:0,min:2700,max:3350},
  {x:4050,y:1880,name:"HERR POST",line:7,vx:-12,vy:0,min:3820,max:4300},
  {x:borderGates[1].x+borderGates[1].w/2,y:BORDER_Y+34,name:"FRIEDRICH MERZ · FIKTIONALE SATIRE",special:"borderPourer",dir:1,lane:1,state:"sideWalk",stateTimer:1.35,animTime:0,spriteRow:1,spriteFrame:0,spriteFlip:false,barkAt:0,lineIndex:0,minX:80,maxX:WORLD.w-80},
- {x:2900,y:2860,name:"ANGELA MERKEL · SATIRE",line:0,vx:15,vy:0,min:2740,max:3400,special:"merkel",barkAt:0},
+ {x:4620,y:3270,name:"ANGELA MERKEL · SATIRE",special:"merkel",route:[[4620,3270],[5750,3270],[6150,3270],[7200,3270],[7200,3880],[6120,3880],[5750,3880],[4620,3880]],target:1,facingX:1,facingY:0,animTime:0,spriteRow:2,spriteFrame:1,barkAt:0,lineIndex:0},
  {x:4200,y:3450,name:"HERR RASENAUFSICHT",line:8,vx:0,vy:10,min:3330,max:3820},
  {x:5100,y:720,name:"FRAU ORDNUNG",line:8,vx:13,vy:0,min:4750,max:5600},
  {x:6650,y:720,name:"HERR ARCHIV",line:3,vx:-11,vy:0,min:6250,max:7100},
@@ -306,6 +307,13 @@ function showWorldBark(speaker,msg,urgent=true){const box=document.getElementByI
 function policeBark(force=false){const now=performance.now();if(!force&&now-(policeBark.last||0)<2300)return;policeBark.last=now;showWorldBark("POLIZEI",pick(policeBarks[state.region]||policeBarks.germany),true)}
 function jaywalkerBark(){const speaker=state.region==="berlin"?"EMPÖRTE PASSANTEN · BERLIN":"EMPÖRTE PASSANTEN · DEUTSCHLAND";showWorldBark(speaker,pick(jaywalkerBarks[state.region]||jaywalkerBarks.germany),true)}
 function borderPourerDialogue(){return borderPourerLines[state.region]||borderPourerLines.germany}
+function merkelBehind(n){return (player.x-n.x)*(n.facingX||1)+(player.y-n.y)*(n.facingY||0)<-24}
+function updateMerkel(n,dt){
+ const target=n.route[n.target],dx=target[0]-n.x,dy=target[1]-n.y,d=Math.hypot(dx,dy)||1,speed=38;n.facingX=dx/d;n.facingY=dy/d;n.x+=n.facingX*speed*dt;n.y+=n.facingY*speed*dt;n.animTime+=dt;
+ if(Math.abs(dx)>Math.abs(dy))n.spriteRow=dx<0?1:2;else n.spriteRow=dy<0?3:4;n.spriteFrame=1+Math.floor(n.animTime*5)%2;
+ if(d<10){n.x=target[0];n.y=target[1];n.target=(n.target+1)%n.route.length}
+ const now=performance.now(),near=dist(player.x,player.y,n.x,n.y);if(near<165&&merkelBehind(n)&&now>(n.barkAt||0)){n.barkAt=now+6500;showWorldBark(n.name,"Sie stehen hinter mir.",false)}else if(near<360&&now>(n.barkAt||0)){const line=merkelLines[n.lineIndex++%merkelLines.length];n.barkAt=now+8500;showWorldBark(n.name,line,false)}
+}
 function updateBorderPourer(n,dt){
  const pourFrames=[1,2,3,2];n.animTime+=dt;n.stateTimer-=dt;
  if(n.state==="sideWalk"){
@@ -356,7 +364,7 @@ function interact(){if(state.dialogue){nextDialogue();return}if(state.modal)retu
  if(n.special==="borderPourer"){
    openDialogue(n.name,borderPourerDialogue(),"FM");
  }else if(n.special==="merkel"){
-   openDialogue("ANGELA MERKEL · SATIRE",["Wir schaffen das.","Historisches Zitat von 2015; im Spiel wird es als wiederkehrende satirische NPC-Zeile verwendet."],"AM");
+   openDialogue("ANGELA MERKEL · SATIRE",[merkelBehind(n)?"Sie stehen hinter mir.":merkelLines[n.lineIndex++%merkelLines.length],"Fiktionale Satirefigur im Energiebezirk."],"AM");
  }else openDialogue(n.name,[worldNpcLine(n.line),worldNpcLine((n.line+3)%npcLines.length)],"!");
  return
 }for(const p of props)if(p.id&&dist(player.x,player.y,p.x,p.y)<96){microInteract(p);return}for(const o of normObjects)if(!o.fixed&&dist(player.x,player.y,o.x,o.y)<92){if(state.mission===5){o.fixed=true;state.stadtbild++;toast("STADTBILD NORMIERT · "+o.label);updateHud()}else toast("DAS IST NOCH NICHT IHR VORGANG");return}toast("HIER IST NIEMAND ZUSTÄNDIG")}
@@ -434,12 +442,8 @@ function update(dt){
 
  for(const n of npcs){
    if(n.special==="borderPourer"){updateBorderPourer(n,dt);continue}
+   if(n.special==="merkel"){updateMerkel(n,dt);continue}
    if(n.vx){n.x+=n.vx*dt;if(n.x<n.min||n.x>n.max)n.vx*=-1}else{n.y+=n.vy*dt;if(n.y<n.min||n.y>n.max)n.vy*=-1}
-   if(n.special==="merkel"&&dist(player.x,player.y,n.x,n.y)<240&&performance.now()>(n.barkAt||0)){
-     n.barkAt=performance.now()+8500;
-     toast("ANGELA MERKEL · SATIRE: „WIR SCHAFFEN DAS.“");
-      speak("Wir schaffen das.");
-   }
  }
  state.ruleTimer+=dt;if(state.ruleTimer>8){state.ruleTimer=0;state.rule=(state.rule+1)%rules.length}
  for(const p of particles){p.t-=dt;p.y-=12*dt}particles=particles.filter(p=>p.t>0);
@@ -637,8 +641,8 @@ function sprite(x,y,label,type,accent){
  if(type==="bin"){ctx.fillStyle="#555b54";ctx.fillRect(-15,-34,30,34)}if(type==="chairs"){ctx.strokeStyle="#4f4e49";ctx.lineWidth=3;ctx.strokeRect(-26,-22,20,22);ctx.strokeRect(7,-22,20,22)}if(type==="hedge"){ctx.fillStyle="#4e594a";ctx.fillRect(-36,-28,72,28)}
  if(label&&s>.28){ctx.fillStyle="#171717";ctx.font="800 8px Arial";ctx.textAlign="center";ctx.fillText(label,0,18);ctx.textAlign="left"}ctx.restore()}
 function drawMerkelNpc(n){
- drawAsset("merkel",n.x,n.y,46,74);
- const p=project(n.x,n.y,0);
+ const p=project(n.x,n.y,0),img=assets.merkelSprite;
+ if(img&&img.complete&&img.naturalWidth){const fw=img.naturalWidth/3,fh=img.naturalHeight/5,s=clamp(p.s,.42,1.12),size=104;ctx.save();ctx.translate(p.x,p.y);ctx.scale(s,s);ctx.drawImage(img,(n.spriteFrame||0)*fw,(n.spriteRow||0)*fh,fw,fh,-size/2,-size+8,size,size);ctx.restore()}else drawAsset("merkel",n.x,n.y,46,74);
  if(p.x>-120&&p.x<width+120&&p.y>-140&&p.y<height+140){
    ctx.fillStyle="#171717";ctx.font="800 "+Math.max(7,8*p.s)+"px Arial";ctx.textAlign="center";
    ctx.fillText("ANGELA MERKEL · SATIRE",p.x,p.y+16*p.s);ctx.textAlign="left";
