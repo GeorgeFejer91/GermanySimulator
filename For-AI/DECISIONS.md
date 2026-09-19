@@ -43,3 +43,7 @@ The southern Berlin-side energy district deliberately contrasts a closed nuclear
 ## 2026-09-20 — Scarce legal walking space and default NPC complaints
 
 Level design makes forbidden surfaces more abundant than legal pedestrian space: grass and landscaped ground are off-limits by default, as are roads and other vehicle surfaces. Every traversable area must nevertheless retain a continuous, deliberately narrow sidewalk, marked crossing, or pedestrian path so the player is never forced to break a movement rule to make progress. The narrow route supports an intentional no-win social-pressure joke: nearby NPCs default to complaining that a legally walking player is in their way, then switch to complaining about walking on grass or in the street when the player moves aside. This contradiction is a fictional ambient-comedy rule, not permission to remove the legal route or make progression depend on unavoidable enforcement.
+
+## 2026-09-20 — Immediate GitHub Pages publication
+
+Completed repository changes are validated, committed, and pushed to `origin/main` immediately unless the user explicitly asks to hold them locally. The existing `.github/workflows/pages.yml` push trigger is the sole deployment path and publishes the repository root to GitHub Pages. Publication must remain a normal fast-forward push: never force-push, expose secrets or tool caches, or knowingly deploy a failing build.

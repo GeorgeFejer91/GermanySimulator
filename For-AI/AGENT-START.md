@@ -43,3 +43,7 @@ After relevant changes:
 4. Verify touch controls and layout at a mobile viewport.
 5. Check the browser console for errors and confirm every referenced asset loads.
 6. If deployment changed, verify the short root URL and `3d.html` on GitHub Pages.
+
+## Immediate publication
+
+After completing and validating repository changes, commit the intended project files and push `main` to `origin` immediately so the existing GitHub Pages workflow publishes them. Do not leave finished work only in the local worktree. Never force-push or publish secrets, tool caches, or a knowingly broken build; if publication fails, report the exact blocker and keep the validated local commit intact. An explicit user request to hold or keep work local overrides this rule.

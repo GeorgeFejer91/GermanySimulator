@@ -1,3 +1,6 @@
 .chatgpt/
+.codex-remote-attachments/
+.playwright-cli/
+output/
 .DS_Store
 Thumbs.db
