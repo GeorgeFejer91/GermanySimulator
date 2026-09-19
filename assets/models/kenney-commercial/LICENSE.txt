@@ -1,0 +1,21 @@
+City Kit Commercial 2.1
+
+Created and distributed by Kenney (https://kenney.nl/)
+
+License: Creative Commons Zero 1.0 Universal (CC0 1.0)
+https://creativecommons.org/publicdomain/zero/1.0/
+
+The content may be used for personal, educational, and commercial purposes.
+Crediting Kenney or kenney.nl is appreciated but not required.
+
+Source:
+https://kenney.nl/assets/city-kit-commercial
+
+Files retained by Germany Simulator:
+- building-a.glb
+- building-c.glb
+- building-g.glb
+- building-h.glb
+- building-m.glb
+- building-n.glb
+- Textures/colormap.png

@@ -4,6 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover,user-scalable=no">
 <title>Germany Simulator · 3D Prototype</title>
+<link rel="icon" href="./assets/faxgeraet.svg" type="image/svg+xml">
 <style>
 *{box-sizing:border-box;-webkit-user-select:none;user-select:none;-webkit-touch-callout:none}
 html,body,#app{margin:0;width:100%;height:100%;overflow:hidden;background:#77756f;font-family:Arial,sans-serif}
@@ -35,10 +36,11 @@ html,body,#app{margin:0;width:100%;height:100%;overflow:hidden;background:#77756
 </main>
 <script>
 (()=>{"use strict";
-const WORLD={w:4800,h:4000},player={x:1800,y:1760},keys={},police=[];
+const WORLD={w:9600,h:4000},player={x:5960,y:3900,facing:0},keys={},police=[];
 const roads=[
 {x:0,y:820,w:WORLD.w,h:260},{x:1050,y:0,w:260,h:WORLD.h},{x:0,y:2000,w:WORLD.w,h:240},
-{x:0,y:3000,w:WORLD.w,h:220},{x:2400,y:0,w:220,h:WORLD.h},{x:4400,y:0,w:180,h:WORLD.h}
+{x:0,y:3000,w:WORLD.w,h:220},{x:2400,y:0,w:220,h:WORLD.h},{x:4400,y:0,w:180,h:WORLD.h},
+{x:5850,y:0,w:220,h:WORLD.h},{x:7350,y:0,w:220,h:WORLD.h},{x:9000,y:0,w:180,h:WORLD.h}
 ];
 const crossings=[
 {x:1010,y:890,w:340,h:80},{x:1135,y:760,w:90,h:380},{x:2360,y:890,w:300,h:80},{x:2465,y:760,w:90,h:380},
@@ -62,9 +64,14 @@ const buildings=[
 {id:"sparkasse",name:"SPARKASSE",x:2750,y:1260,w:600,h:400,hgt:165,doorX:3050,doorY:1690,sign:"BERATUNG NUR MIT TERMIN"},
 {id:"post",name:"DEUTSCHE POST",x:3700,y:1260,w:650,h:400,hgt:170,doorX:4025,doorY:1690,sign:"BRIEF · FAX · WARTEMARKE"},
 {id:"rathaus",name:"RATHAUS",x:2750,y:2320,w:700,h:430,hgt:205,doorX:3100,doorY:2780,sign:"BÜRGERNÄHE NACH TERMINVEREINBARUNG"},
-{id:"baumarkt",name:"DIN-BAUMARKT",x:3700,y:2320,w:650,h:430,hgt:160,doorX:4025,doorY:2780,sign:"NORMGERECHTE SCHRAUBEN"}
+{id:"baumarkt",name:"DIN-BAUMARKT",x:3700,y:2320,w:650,h:430,hgt:160,doorX:4025,doorY:2780,sign:"NORMGERECHTE SCHRAUBEN"},
+{id:"akw",kind:"nuclear",name:"AKW NULLLEISTUNG",x:4750,y:3370,w:850,h:420,hgt:155,doorX:5175,doorY:3820,sign:"STILLGELEGT · RÜCKBAU NUR MIT FORMULAR"},
+{id:"kohlewerk",kind:"coal",name:"KOHLEWERK DAUERBETRIEB",x:6250,y:3370,w:850,h:420,hgt:170,doorX:6675,doorY:3820,sign:"VOLL FUNKTIONSFÄHIG · AKTENZEICHEN CO₂"}
 ];
 const schreber={x:90,y:1210,w:560,h:570},policeGarden={x:2850,y:3250,w:1500,h:650},policePath={x1:4250,y1:3850,x2:3650,y2:3250,width:130};
+const BORDER_Y=1120,BORDER_BAND=72,crossingSigns=[],borderGates=roads.filter(r=>r.h===WORLD.h).map(r=>({x:r.x-55,w:r.w+110})),borderSegments=[];
+for(let cursor=0,i=0;i<=borderGates.length;i++){const gate=borderGates[i],end=gate?gate.x:WORLD.w;if(end-cursor>24)borderSegments.push({x:cursor,w:end-cursor});if(gate)cursor=gate.x+gate.w}
+const fireSources=[];for(let x=52,i=0;x<WORLD.w;x+=104,i++)fireSources.push({x,y:BORDER_Y,active:true,intensity:.82+(i%5)*.035,seed:(i*47%101)/101});
 const props=[
 {x:2860,y:760,asset:"faxbillboard",id:"fax1"},{x:3500,y:1880,asset:"faxbillboard",id:"fax2"},{x:3980,y:2890,asset:"faxbillboard",id:"fax3"}
 ];
@@ -73,17 +80,18 @@ const npcs=[
 {x:2900,y:2860,vx:15,vy:0,min:2740,max:3400,special:"merkel"}
 ];
 const pickups=[{x:1980,y:870,type:"bratwurst",taken:false},{x:2110,y:880,type:"currywurst",taken:false},{x:4100,y:900,type:"brezel",taken:false},{x:3000,y:1910,type:"pfand",taken:false}];
-window.Germany3DBridge={WORLD,player,roads,crossings,buildings,schreber,policeGarden,policePath,props,pickups,getNPCs:()=>npcs,getPolice:()=>police};
+window.Germany3DBridge={WORLD,player,roads,crossings,crossingSigns,buildings,schreber,policeGarden,policePath,BORDER_Y,BORDER_BAND,borderGates,borderSegments,fireSources,props,pickups,getNPCs:()=>npcs,getPolice:()=>police};
 const dist=(a,b,c,d)=>Math.hypot(a-c,b-d);
 function blocked(x,y){if(x<25||y<25||x>WORLD.w-25||y>WORLD.h-25)return true;return buildings.some(b=>x>b.x-16&&x<b.x+b.w+16&&y>b.y-16&&y<b.y+b.h+16)}
 function say(s,l){document.getElementById("speaker").textContent=s;document.getElementById("line").textContent=l;const d=document.getElementById("dialogue");d.classList.add("show");clearTimeout(say.t);say.t=setTimeout(()=>d.classList.remove("show"),4500)}
 function interact(){const m=npcs.find(n=>n.special==="merkel"&&dist(player.x,player.y,n.x,n.y)<120);if(m){say("ANGELA MERKEL · SATIRE","Wir schaffen das.");return}const f=props.find(p=>dist(player.x,player.y,p.x,p.y)<150);if(f)say("FAX 3000 PRO","2,75× schneller beim Versand ausgedruckter Dokumente. Die Zukunft der Digitalisierung ist Papier.")}
-function update(dt){let dx=(keys.ArrowRight?1:0)-(keys.ArrowLeft?1:0),dy=(keys.ArrowDown?1:0)-(keys.ArrowUp?1:0);const l=Math.hypot(dx,dy)||1;dx/=l;dy/=l;const nx=player.x+dx*190*dt,ny=player.y+dy*190*dt;if(!blocked(nx,player.y))player.x=nx;if(!blocked(player.x,ny))player.y=ny;npcs.forEach(n=>{if(n.vx){n.x+=n.vx*dt;if(n.x<n.min||n.x>n.max)n.vx*=-1}if(n.vy){n.y+=n.vy*dt;if(n.y<n.min||n.y>n.max)n.vy*=-1}});document.getElementById("coords").textContent=Math.round(player.x)+" / "+Math.round(player.y);document.getElementById("district").textContent=player.x>2400?"DEUTSCHLAND OST":"BERLIN"}
+function update(dt){let dx=(keys.ArrowRight?1:0)-(keys.ArrowLeft?1:0),dy=(keys.ArrowDown?1:0)-(keys.ArrowUp?1:0);const l=Math.hypot(dx,dy)||1;dx/=l;dy/=l;if(dx||dy)player.facing=Math.atan2(dx,dy);const nx=player.x+dx*190*dt,ny=player.y+dy*190*dt;if(!blocked(nx,player.y))player.x=nx;if(!blocked(player.x,ny))player.y=ny;npcs.forEach(n=>{if(n.vx){n.x+=n.vx*dt;if(n.x<n.min||n.x>n.max)n.vx*=-1}if(n.vy){n.y+=n.vy*dt;if(n.y<n.min||n.y>n.max)n.vy*=-1}});document.getElementById("coords").textContent=Math.round(player.x)+" / "+Math.round(player.y);document.getElementById("district").textContent=player.x>2400?"DEUTSCHLAND OST":"BERLIN"}
 addEventListener("keydown",e=>{if(["ArrowUp","ArrowDown","ArrowLeft","ArrowRight"].includes(e.code))e.preventDefault();keys[e.code]=true;if(e.code==="KeyE")interact()});addEventListener("keyup",e=>keys[e.code]=false);
 document.querySelectorAll("[data-key]").forEach(b=>{const k=b.dataset.key;b.addEventListener("pointerdown",e=>{e.preventDefault();keys[k]=true;if(k==="KeyE")interact()});["pointerup","pointercancel","pointerleave"].forEach(t=>b.addEventListener(t,e=>{e.preventDefault();keys[k]=false}))});
-document.getElementById("home").onclick=()=>{player.x=1800;player.y=1760};
+document.getElementById("home").onclick=()=>{player.x=5960;player.y=3900};
 let last=performance.now();function loop(t){const dt=Math.min(.05,(t-last)/1000);last=t;update(dt);window.Germany3D?.sync();requestAnimationFrame(loop)}requestAnimationFrame(loop);
 })();
 </script>
+<script type="importmap">{"imports":{"three":"https://cdn.jsdelivr.net/npm/three@0.186.0/build/three.module.js"}}</script>
 <script type="module" src="./world3d.js"></script>
 </body></html>

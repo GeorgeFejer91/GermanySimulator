@@ -28,3 +28,12 @@ Backend, infrastructure, and asset-pipeline choices are deliberately conservativ
 ## Acceptance
 
 An asset change is complete only when the correct variant loads on desktop and mobile, missing files fail gracefully, the browser console stays clean, and gameplay/interactions remain unchanged unless the task explicitly changes them.
+
+## Local 3D buildings
+
+- Root `assets/models/` is the only authority for shipped model files.
+- The selected Kenney City Kit Commercial meshes are local CC0 GLB files; retain their local license and source record.
+- `world3d.js` may recolor model materials at runtime to the restrained concrete-gray bureaucracy palette. Do not restore the pack's bright commercial colors by default.
+- GLB loading is an enhancement. A missing model keeps its procedural building, and failure of the WebGL renderer returns to the canvas world without changing gameplay state.
+- Keep the selected model set bounded and measure total transfer size before adding another pack.
+- The power-plant landmark uses five local CC0 GLBs under `assets/models/power-plants/` (about 0.5 MB total): three selected Kenney Industrial meshes plus a nuclear transformer and warning sign from 3DAssets.dev. Preserve `LICENSES.md`, its AI-generation disclosure, source URLs, and checksums when replacing these files.

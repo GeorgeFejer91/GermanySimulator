@@ -11,7 +11,7 @@ Read this file before doing anything else in the repository.
 
 ## Canonical product
 
-This repository contains the canonical standalone version of the Germany Simulator game originally available at `https://ec-games.space/games/germany-simulator/`. It is the pseudo-3D “Grand Theft Amt” build with tilt, keyboard, and touch controls; a three-day fictional administration deadline; bilingual framing; regional Denglisch behavior; forms; wanted levels; police; and the optional 3D prototype.
+This repository contains the canonical standalone version of the Germany Simulator game originally available at `https://ec-games.space/games/germany-simulator/`. It is the pseudo-3D “Grand Theft Amt” build with keyboard and touch controls; a three-day fictional administration deadline; bilingual framing; regional Denglisch behavior; forms; wanted levels; police; and the optional 3D prototype. Device-tilt control has been intentionally removed.
 
 Do not substitute the later flat 2D prototype or rebuild the game from a different design. Extend this game in place.
 
@@ -29,6 +29,8 @@ Do not substitute the later flat 2D prototype or rebuild the game from a differe
 - Keep one deployable runtime tree at repository root; do not copy the game into a second folder.
 - Treat `assets/` as the single asset authority shared by the pseudo-3D game and the optional 3D mode.
 - Do not add servers, databases, frameworks, build systems, or asset services unless a demonstrated requirement cannot be met by the static game.
+- Route all character writing through the affectionate bureaucratic-satire and dialogue rules in [`GAMEPLAY.md`](./GAMEPLAY.md#satirical-voice-and-dialogue). NPCs should lead with alleged rule violations and procedural authority instead of plainly stating their underlying complaint, and their strange German sayings must follow the player’s current Berlin-Denglisch or German-only region.
+- Enforce that regional speech rule in both authored text and generated speech: Berlin characters speak Denglisch; after crossing the animated fire boundary into Deutschland, characters speak German only even when the interface is English. Preserve the browser-generated dialogue voice unless the user explicitly removes it.
 - Keep the satire clearly fictional. Do not present game procedures as real German law, policing, citizenship, or immigration guidance.
 
 ## Minimum validation

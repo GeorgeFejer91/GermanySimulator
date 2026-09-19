@@ -18,25 +18,53 @@ Mission order:
 ## Controls
 
 - Desktop: WASD or arrow keys move; Shift runs; E interacts.
-- Phone: device tilt moves after permission and calibration.
-- Mobile fallback: the on-screen directional dock and E action remain fully playable without motion permission.
-- Recalibration must remain available when tilt is active.
+- Phone: the on-screen directional dock moves and the E action interacts.
+- The game does not request motion permission and has no device-tilt or recalibration controls.
 
 ## Systems
 
-- Running for too long, jaywalking, lingering on roads, and entering protected lawn can raise the wanted level.
+- Running for too long, jaywalking, lingering on roads, evading an active police approach, random petty audits, and entering protected lawn can raise the wanted level. Repeat violations escalate the wanted stars up to five and call progressively larger police responses.
 - Schrebergarten and police-garden grass trigger deliberately disproportionate enforcement. The marked police-garden path is safe.
 - Police pursue the player, issue localized barks, reduce energy on contact, and escort the player to the station garden.
+- Zebra crossings are mapped onto the actual street intersections and marked with pedestrian-crossing signs. Crossing elsewhere provokes angry pedestrian dialogue before and during police escalation.
+- Forbidden ground should visibly outweigh legal pedestrian space. Grass and landscaped ground are forbidden to walk on by default, roads and other vehicle surfaces are forbidden by default, and every traversable area must still provide a continuous but deliberately narrow sidewalk, marked crossing, or pedestrian path where walking is legal.
+- The narrow legal route creates an intentional no-win social pressure system. NPCs occupying or passing through it complain that the player is in their way; if the player yields by stepping onto grass or a road, they immediately complain about that new rule violation instead. Ambient NPCs therefore default to finding something to complain about even while the player is obeying the movement rules, without removing the player's legal route through the world.
 - Bratwurst, Currywurst, and Brezel restore energy. Pfand bottles increase the Pfand count.
 - Forms pause world simulation and require every field before submission.
-- Berlin uses satirical Denglisch dialogue. Crossing the marked boundary switches characters to German-only dialogue.
+- Berlin uses satirical Denglisch dialogue. This is a hard world rule: after crossing the fire boundary into Deutschland, every character speaks German only. UI localization may remain English, but it must never translate Deutschland character dialogue or synthesized speech into English.
 - The HUD exposes mission, progress, energy, forms, Pfand, day, region, current rule, wanted status, and control mode.
-- Optional synthesized music and speech are local browser features and must remain user-toggleable.
+- Optional synthesized music and speech are local browser features and must remain user-toggleable. The local browser-generated dialogue voice is a valued part of the game; preserve it and make it speak the exact authored regional line.
+- Spoken modal dialogue is serialized: each voiced line finishes before the player can advance to the next one. Rapid police and angry-pedestrian barks triggered by concurrent illegal actions may interrupt one another instead of creating a stale speech backlog.
 
 ## World identity
 
-The world is a gray-beige pseudo-3D bureaucratic city with civic offices, a Faxviertel, Sparkasse/Post district, Rathaus/DIN zone, allotment gardens, a police garden, fax infrastructure, minor props, NPC complaints, and an optional Three.js prototype at `3d.html`.
+The world is a gray-beige bureaucratic city with civic offices, a Faxviertel, Sparkasse/Post district, Rathaus/DIN zone, eastern Ordnungsamt/Formulararchiv/Termin districts, allotment gardens, a police garden, fax infrastructure, minor props, and NPC complaints. The southern energy district places a visibly closed nuclear plant—silent cooling towers, closure barriers, and decommissioning signage—directly beside a visibly operating coal plant with an active smokestack. The playable land area is 9,600 × 4,000 world units—twice the original area. A highly visible but fully crossable Berlin/Deutschland wall of flames spans the map. It changes regional speech without acting as collision geometry. A fictional satirical border-pourer patrols the full line, alternating directional walk and pour animations while trying to douse it. The canonical root game progressively enables the Three.js world when available and otherwise retains the pseudo-3D canvas renderer. `3d.html` remains a direct renderer diagnostic. Both views preserve the same concrete-gray, repetitive-window, municipal-office visual direction rather than a colorful or cozy European look.
+
+## Satirical voice and dialogue
+
+The game is an affectionate satire of life in Germany, made with love for German culture and its capacity for self-irony. It exaggerates recognizable everyday interactions with people and institutions; the joke targets bureaucratic habits, social friction, and inflexible systems rather than expressing contempt for Germans.
+
+The creative shorthand “cultural autism” means an intentionally extreme caricature of rigid, indirect communication. It is not a diagnosis or a claim about autistic people. Apply it to all character dialogue through these rules:
+
+- A character usually avoids stating their actual concern directly. They instead announce the rule, paragraph, norm, process, quiet-hours clause, queue convention, or technicality the player has allegedly violated.
+- Characters treat their own interpretation as the only possible interpretation, even when it is incomplete, contradictory, or plainly wrong. Common sense and alternative readings do not persuade them.
+- The delivery stays serious, precise, and stubborn while the situation becomes increasingly specific, circular, and absurd. Characters should believe they are being helpful and correct.
+- Resolution normally requires the player to produce a stamped form, printed document, fax, written confirmation, lawyer, supervisor, or other recognized authority. A sensible explanation by itself is rarely enough.
+- Institutions default to fax machines, paper copies, signatures, stamps, appointments, and in-person handoffs even when a simple digital exchange would solve the problem.
+- Ambient characters default to complaining at the player. On a legal sidewalk they allege obstruction, queue, spacing, or right-of-way violations; after the player moves aside onto forbidden grass or roadway, they switch to the corresponding lawn or traffic complaint. The contradiction is the joke and should not be resolved into a socially approved position.
+- Berlin’s Denglisch and the German-only regional boundary remain delivery variants of this same voice; they do not replace the voice.
+
+Strange German idioms are a recurring part of the voice. Prefer recognizable sayings such as “Hast du Tomaten auf den Augen?”, “Jetzt haben wir den Salat”, “Das ist nicht mein Bier”, “Da wird der Hund in der Pfanne verrückt”, “Ich glaub, mein Schwein pfeift”, “Das Leben ist kein Ponyhof”, “Da liegt der Hase im Pfeffer”, and “Alles hat ein Ende, nur die Wurst hat zwei.” Characters may bureaucratically over-explain, misapply, or combine them, but the saying should connect to the current complaint, mission, or alleged rule rather than appear at random.
+
+Regional delivery follows the player’s in-game side of the marked boundary:
+
+- On the Berlin side, dialogue uses deliberately awkward Denglisch. German sayings may be partially translated or spliced into English bureaucracy, for example: “Hast du tomatoes on den Augen? The Gehwegordnung is very clearly marked.”
+- On the Germany side beyond the boundary, dialogue is fully German, for example: “Hast du Tomaten auf den Augen? Die Gehwegordnung ist eindeutig ausgeschildert.”
+- The interface can be English, but character text and browser-generated speech still follow the region rule. Deutschland dialogue must not be translated into English; Berlin dialogue must retain its authored Denglisch mixture.
+- Use the game’s current region state, not assumptions about real Berlin geography, to choose the language variant. The underlying joke, rule fixation, and character intent should remain equivalent on both sides.
+
+Dialogue should vary the alleged rule and bureaucratic mechanism so the joke does not collapse into one repeated catchphrase. The escalation may be surreal, but it must remain clearly fictional and internally consistent with the current mission.
 
 ## Satire boundary
 
-All deadlines, rules, procedures, penalties, immigration mechanics, and enforcement are fictional game satire. Political figures and posters are stylized satirical props and must not be used to imply unsupported factual claims or political endorsements.
+All deadlines, rules, procedures, penalties, immigration mechanics, and enforcement are fictional game satire. The exaggerated communication style is a comic lens, not a factual claim that every German person or institution behaves this way. Political figures and posters are stylized satirical props and must not be used to imply unsupported factual claims or political endorsements.
