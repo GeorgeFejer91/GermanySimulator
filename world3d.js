@@ -47,7 +47,7 @@ const GLTF_LOADER_URL="https://cdn.jsdelivr.net/npm/three@0.186.0/examples/jsm/l
     emberGeometry.attributes.position.needsUpdate=true;
   }
   const pp=bridge.policePath,ax=X(pp.x1),az=Z(pp.y1),bx=X(pp.x2),bz=Z(pp.y2),len=Math.hypot(bx-ax,bz-az),path=box(pp.width*S,.03,len,M.path,(ax+bx)/2,.04,(az+bz)/2);path.rotation.y=Math.atan2(bx-ax,bz-az);
-  function label(a,b){const c=document.createElement("canvas");c.width=768;c.height=150;const g=c.getContext("2d");g.fillStyle="#ded9cc";g.fillRect(0,0,768,150);g.fillStyle="#222";g.textAlign="center";g.font="900 42px Arial";g.fillText(a,384,65);g.font="700 20px Arial";g.fillText(b||"",384,112);const tx=new T.CanvasTexture(c);tx.colorSpace=T.SRGBColorSpace;const s=new T.Sprite(new T.SpriteMaterial({map:tx}));s.scale.set(4.6,.9,1);return s}
+  function label(a,b,bg="#ded9cc",fg="#222"){const c=document.createElement("canvas");c.width=768;c.height=150;const g=c.getContext("2d");g.fillStyle=bg;g.fillRect(0,0,768,150);g.fillStyle=fg;g.textAlign="center";g.font="900 42px Arial";g.fillText(a,384,65);g.font="700 20px Arial";g.fillText(b||"",384,112);const tx=new T.CanvasTexture(c);tx.colorSpace=T.SRGBColorSpace;const s=new T.Sprite(new T.SpriteMaterial({map:tx}));s.scale.set(4.6,.9,1);return s}
   function pedestrianSign(s){const g=new T.Group(),post=new T.Mesh(new T.CylinderGeometry(.035,.045,1.55,8),M.metal);post.position.y=.775;g.add(post);box(.58,.58,.06,M.cross,0,1.64,0,g);box(.48,.48,.07,M.blue,0,1.64,.04,g);const tri=new T.Mesh(new T.ConeGeometry(.19,.38,3),M.cross);tri.rotation.z=Math.PI;tri.position.set(0,1.64,.09);g.add(tri);g.position.set(X(s.x),0,Z(s.y));g.rotation.y=(s.turn||0)*Math.PI/2;world.add(g)}
   bridge.crossingSigns.forEach(pedestrianSign);
   const buildingModels={
@@ -93,7 +93,7 @@ const GLTF_LOADER_URL="https://cdn.jsdelivr.net/npm/three@0.186.0/examples/jsm/l
       slot.group.add(model);slot.model=model;slot.fallback.visible=false;registerMaterials(model,slot);
     }catch(e){console.warn("Keeping procedural building for "+slot.building.id,e)}
   }
-  const coalSmoke=[];
+  const coalSmoke=[],coalBelt=[];
   async function installPlantModel(slot,url,fit,placements,keepColors=false,fallback=null){
     if(!modelLoader)return;
     try{
@@ -115,18 +115,22 @@ const GLTF_LOADER_URL="https://cdn.jsdelivr.net/npm/three@0.186.0/examples/jsm/l
       const tower=(x,z,h,rb,rn,rt)=>{const geo=new T.LatheGeometry([new T.Vector2(rb,0),new T.Vector2(rn,h*.62),new T.Vector2(rt,h)],24),q=new T.Mesh(geo,mat(0x85847f,.96));q.position.set(x,0,z);coolingFallback.add(q)};
       tower(-5.1,-1.35,4.8,1.42,.78,1.08);tower(-2.05,-.55,4.35,1.25,.7,.96);box(7.5,2.8,3.7,mat(0x66645f,.98),3.2,1.4,.35,g);box(7.7,.14,3.9,mat(0x8d8a82),3.2,2.87,.35,g);
       box(2.5,1.5,1.8,M.metal,2.4,.75,-2.35,transformerFallback);box(.62,.82,.5,mat(0xd1b73f),-6.4,.95,d/2+.12,signFallback);
-      for(let x=-w/2+.55;x<w/2-.45;x+=1.15)box(.72,.11,.1,x%2<1?mat(0x762f29):M.cross,x,.62,d/2+.12,g);
-      const l=label(b.name,b.sign);l.position.set(0,3.35,d/2+.18);g.add(l);registerMaterials(g,slot);
+      for(let x=-w/2+.55;x<w/2-.45;x+=1.15){box(.82,.24,.1,x%2<1?mat(0x762f29):M.cross,x,.72,d/2+.12,g);box(.1,1.25,.1,M.metal,x-.42,.62,d/2+.08,g)}
+      const red=mat(0x762f29),slashA=box(5.8,.28,.14,red,3.2,1.45,2.23,g),slashB=box(5.8,.28,.14,red,3.2,1.45,2.24,g);slashA.rotation.z=.42;slashB.rotation.z=-.42;
+      const l=label("AKW · GESCHLOSSEN","STILLGELEGT · KEIN ZUTRITT","#762f29","#f4eee2");l.position.set(0,3.35,d/2+.18);g.add(l);registerMaterials(g,slot);
       installPlantModel(slot,powerModels.coolingTower,{x:2.8,y:4.8,z:2.8},[{x:-5.1,y:0,z:-1.35},{x:-2.05,y:0,z:-.55}],false,coolingFallback);
       installPlantModel(slot,powerModels.nuclearTransformer,{x:3.2,y:2.55,z:2.4},[{x:2.4,y:0,z:-2.35}],true,transformerFallback);
       installPlantModel(slot,powerModels.nuclearSign,{x:.62,y:1.7,z:.5},[{x:-6.4,y:0,z:d/2+.12}],true,signFallback);
     }else{
       const hallFallback=new T.Group(),stackFallback=new T.Group();g.add(hallFallback,stackFallback);box(w*.68,3.7,d*.58,mat(0x615f5a,.98),-1.15,1.85,-.25,hallFallback);box(w*.7,.15,d*.6,mat(0x8e8b83),-1.15,3.78,-.25,hallFallback);
       const stack=new T.Mesh(new T.CylinderGeometry(.45,.62,6.2,18),mat(0x5d5953,.94));stack.position.set(w*.32,3.1,.6);stackFallback.add(stack);box(5.5,.38,.55,M.metal,2.05,2.05,1.75,g).rotation.z=-.34;
-      const l=label(b.name,b.sign);l.position.set(0,3.55,d/2+.18);g.add(l);registerMaterials(g,slot);
+      const lit=new T.MeshStandardMaterial({color:0xffbf57,emissive:0x9d5313,emissiveIntensity:1.8,roughness:.5});for(let x=-6;x<2.2;x+=1.35){box(.62,.38,.08,lit,x,1.25,2.2,g);box(.62,.38,.08,lit,x,2.25,2.2,g)}
+      for(let j=0;j<7;j++){const q=box(.28,.22,.28,M.dark,0,0,0,g);coalBelt.push({mesh:q,index:j,from:new T.Vector3(-.55,1.15,1.75),to:new T.Vector3(4.65,2.95,1.75)})}
+      const gateL=box(3.1,.16,.1,mat(0x31553a),-w/2+.45,.78,d/2+.13,g),gateR=box(3.1,.16,.1,mat(0x31553a),w/2-.45,.78,d/2+.13,g);gateL.rotation.y=.82;gateR.rotation.y=-.82;
+      const l=label("KOHLEKRAFTWERK · IN BETRIEB","WEIT OFFEN · 24/7 · RAUCHFANG AKTIV","#31553a","#f4eee2");l.position.set(0,3.55,d/2+.18);g.add(l);registerMaterials(g,slot);
       installPlantModel(slot,powerModels.coalBuilding,{x:w*.72,y:4.65,z:d*.62},[{x:-1.15,y:0,z:-.25}],false,hallFallback);
       installPlantModel(slot,powerModels.coalStack,{x:1.45,y:6.2,z:1.45},[{x:w*.32,y:0,z:.6}],false,stackFallback);
-      for(let j=0;j<7;j++){const m=new T.MeshBasicMaterial({color:0x252321,transparent:true,depthWrite:false}),q=new T.Mesh(new T.SphereGeometry(.48,10,7),m);g.add(q);coalSmoke.push({mesh:q,x:w*.32,y:6.15,z:.6,index:j})}
+      for(let j=0;j<10;j++){const m=new T.MeshBasicMaterial({color:0x1d1c1a,transparent:true,depthWrite:false}),q=new T.Mesh(new T.SphereGeometry(.62,10,7),m);g.add(q);coalSmoke.push({mesh:q,x:w*.32,y:5.95,z:.6,index:j})}
     }
   }
   function building(b,i){
@@ -157,6 +161,9 @@ const GLTF_LOADER_URL="https://cdn.jsdelivr.net/npm/three@0.186.0/examples/jsm/l
     tx.generateMipmaps=false;tx.minFilter=T.LinearFilter;
     const q=new T.Sprite(new T.SpriteMaterial({map:tx,transparent:true,alphaTest:.02,depthWrite:false}));q.scale.set(2.5,2.5,1);q.userData={borderPourerSprite:true,grid};return q
   }
+  const merkelTexture=new T.TextureLoader().load("./assets/merkel-sprite.png");merkelTexture.colorSpace=T.SRGBColorSpace;merkelTexture.wrapS=merkelTexture.wrapT=T.RepeatWrapping;merkelTexture.repeat.set(1/3,1/5);merkelTexture.generateMipmaps=false;merkelTexture.minFilter=T.LinearFilter;
+  function merkelSprite(){const q=new T.Sprite(new T.SpriteMaterial({map:merkelTexture,transparent:true,alphaTest:.02,depthWrite:false}));q.scale.set(2.05,2.05,1);q.userData={merkelSprite:true};return q}
+  function syncMerkel(q,o){const tx=q.material.map;tx.offset.x=(o.spriteFrame||0)/3;tx.offset.y=1-((o.spriteRow||0)+1)/5;q.position.set(X(o.x),1.02,Z(o.y))}
   function syncBorderPourer(q,o){
     const tx=q.material.map,grid=q.userData.grid,frame=o.spriteFrame||0,row=o.spriteRow||0,flip=!!o.spriteFlip;
     tx.repeat.x=(flip?-1:1)/grid.cols;tx.repeat.y=1/grid.rows;tx.offset.x=(frame+(flip?1:0))/grid.cols;tx.offset.y=1-(row+1)/grid.rows;
@@ -166,7 +173,7 @@ const GLTF_LOADER_URL="https://cdn.jsdelivr.net/npm/three@0.186.0/examples/jsm/l
 
   const playerMesh=character("player");scene.add(playerMesh);
   const npcMeshes=new Map(),policeMeshes=new Map(),pickupMeshes=new Map();
-  bridge.getNPCs().forEach(n=>{const q=n.special==="borderPourer"?(borderPourerSprite()||character("npc")):character(n.special==="merkel"?"merkel":"npc");scene.add(q);npcMeshes.set(n,q)});
+  bridge.getNPCs().forEach(n=>{const q=n.special==="borderPourer"?(borderPourerSprite()||character("npc")):n.special==="merkel"?merkelSprite():character("npc");scene.add(q);npcMeshes.set(n,q)});
   bridge.pickups.forEach(p=>{const q=pickup(p.type);scene.add(q);pickupMeshes.set(p,q)});
   function updateBuildingOcclusion(){
     const cameraReach=15/S,px=bridge.player.x,py=bridge.player.y;
@@ -180,12 +187,12 @@ const GLTF_LOADER_URL="https://cdn.jsdelivr.net/npm/three@0.186.0/examples/jsm/l
       }
     }
   }
-  function updatePowerPlants(){const now=performance.now()*.00013;for(const p of coalSmoke){const t=(now+p.index/coalSmoke.length)%1;p.mesh.position.set(p.x+Math.sin(now*25+p.index)*.42*t,p.y+t*4.2,p.z+Math.cos(now*19+p.index)*.32*t);p.mesh.scale.setScalar(.82+t*1.45);p.mesh.material.opacity=.78*(1-t)}}
+  function updatePowerPlants(){const now=performance.now()*.00016;for(const p of coalSmoke){const t=(now+p.index/coalSmoke.length)%1;p.mesh.position.set(p.x+Math.sin(now*25+p.index)*.52*t,p.y+t*4.5,p.z+Math.cos(now*19+p.index)*.4*t);p.mesh.scale.setScalar(.9+t*1.8);p.mesh.material.opacity=.88*(1-t)}for(const p of coalBelt){const t=(now*4+p.index/coalBelt.length)%1;p.mesh.position.lerpVectors(p.from,p.to,t);p.mesh.rotation.x+=.05;p.mesh.rotation.z+=.04}}
   function resize(){renderer.setSize(innerWidth,innerHeight,false);camera.aspect=innerWidth/innerHeight;camera.updateProjectionMatrix()}resize();addEventListener("resize",resize,{passive:true});
   window.Germany3D={ready:true,sync(){
     syncChar(playerMesh,bridge.player,0);
     playerMesh.rotation.y=bridge.player.facing;
-    bridge.getNPCs().forEach(n=>{let q=npcMeshes.get(n);if(n.special==="borderPourer"&&!q?.userData.borderPourerSprite){const sprite=borderPourerSprite();if(sprite){if(q)scene.remove(q);q=sprite;scene.add(q);npcMeshes.set(n,q)}}if(!q){q=n.special==="borderPourer"?(borderPourerSprite()||character("npc")):character(n.special==="merkel"?"merkel":"npc");scene.add(q);npcMeshes.set(n,q)}if(q.userData.borderPourerSprite)syncBorderPourer(q,n);else syncChar(q,n,n.special==="merkel"?.08:0)});
+    bridge.getNPCs().forEach(n=>{let q=npcMeshes.get(n);if(n.special==="borderPourer"&&!q?.userData.borderPourerSprite){const sprite=borderPourerSprite();if(sprite){if(q)scene.remove(q);q=sprite;scene.add(q);npcMeshes.set(n,q)}}if(!q){q=n.special==="borderPourer"?(borderPourerSprite()||character("npc")):n.special==="merkel"?merkelSprite():character("npc");scene.add(q);npcMeshes.set(n,q)}if(q.userData.borderPourerSprite)syncBorderPourer(q,n);else if(q.userData.merkelSprite)syncMerkel(q,n);else syncChar(q,n)});
     const ps=bridge.getPolice();ps.forEach(p=>{let q=policeMeshes.get(p);if(!q){q=character("police");scene.add(q);policeMeshes.set(p,q)}syncChar(q,p,.04)});for(const [p,q] of policeMeshes)if(!ps.includes(p)){scene.remove(q);policeMeshes.delete(p)}
     bridge.pickups.forEach(p=>{const q=pickupMeshes.get(p);q.visible=!p.taken;if(q.visible){q.position.set(X(p.x),.2,Z(p.y));q.rotation.y+=.012}});
     updateFire(performance.now());updateBuildingOcclusion();updatePowerPlants();
