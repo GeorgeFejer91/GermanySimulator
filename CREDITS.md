@@ -18,18 +18,66 @@ The adjacent closed nuclear plant and operating coal plant use a bounded local C
 
 ## Music
 
-The background loop is synthesized at runtime with the Web Audio API. No third-party recording is bundled.
+The background catalog is synthesized at runtime with the Web Audio API. Every track is an original 8-bit arrangement using square-wave lead, triangle-wave bass, and synthetic percussion. No lyrics, MIDI files, sheet-music files, or third-party recordings are bundled.
 
-The current background theme is an original 8-bit instrumental arrangement of **"Erika"**, written by Herms Niel and published in 1938. The arrangement uses square-wave lead, triangle-wave bass, and synthetic 8-bit percussion; it contains no lyrics and does not sample any historical recording.
+The 26-track shuffled catalog gives every Bundesland a melody:
 
-Historical / notation references:
+- **Baden-Württemberg:** Badnerlied (including the “Frisch auf” refrain) and Württembergerlied. The catalog also keeps the distinct Swabian standards **Muss i denn** and **Auf de schwäbsche Eisebahne**.
+- **Bayern:** Bayernhymne.
+- **Berlin:** Berliner Luft.
+- **Brandenburg:** Fritze Bollmann, the 19th-century Brandenburg an der Havel folk song.
+- **Bremen:** An der Weser.
+- **Hamburg:** Stadt Hamburg an der Elbe Auen (Hammonia).
+- **Hessen:** Hessenlied.
+- **Mecklenburg-Vorpommern:** Wo de Ostseewellen trecken an den Strand, the Vorpommern-rooted Ostseewellenlied.
+- **Niedersachsen:** Auf der Lüneburger Heide.
+- **Nordrhein-Westfalen:** Westfalenlied.
+- **Rheinland-Pfalz:** Ein Jäger aus Kurpfalz.
+- **Saarland:** Glück auf, der Steiger kommt, representing the state's mining tradition.
+- **Sachsen:** Dar Vugelbärbaam, the Erzgebirge song.
+- **Sachsen-Anhalt:** An der Saale hellem Strande, written at the Rudelsburg near Naumburg.
+- **Schleswig-Holstein:** Schleswig-Holstein meerumschlungen.
+- **Thüringen:** Thüringen, holdes Land, plus **Thüringer Kloß-Kantinenjingle**, an original game composition.
 
-- Wikimedia Commons public-domain listing: https://commons.wikimedia.org/wiki/File:Erika-piano_instrumental.ogg
-- Melody / score notation and historical context: https://en.wikipedia.org/wiki/Erika_(song)
+The wider national and folk selection is **Erika**, **Deutschlandlied / German national anthem melody**, **Die Gedanken sind frei**, **Kein schöner Land**, **Das Wandern ist des Müllers Lust**, and **Der Mond ist aufgegangen**. The present national anthem is the third stanza of the Deutschlandlied; the game uses only Joseph Haydn's instrumental melody.
 
-Wikimedia Commons marks the underlying work public domain in Germany and other jurisdictions whose copyright term is the author's life plus 70 years or less because Niel died in 1954. Copyright status can differ in longer-term jurisdictions. This project does not redistribute the Commons recording.
+Notation and history references used for the transcriptions:
 
-The song was published during the Nazi period and was used as a Wehrmacht soldiers' song. Its use here is as an instrumental historical/parody reference inside a satirical game, not as ideological endorsement.
+- German national anthem (official federal history and attribution): https://www.bundesregierung.de/breg-de/schwerpunkte/nationalhymne-deutschland-461412
+- Deutschlandlied notation: https://www.lieder-archiv.de/deutschlandlied-notenblatt_300514.html
+- Regional-hymn overview and state associations: https://de.wikipedia.org/wiki/Regionalhymne
+- Regional-hymn MIDI reference catalog used to check the state transcriptions: https://midi.polyna.eu/anthems/germany.html
+- Badnerlied score in MusicXML and printable notation: https://www.franzdorfer.com/badnerlied
+- Badnerlied historical context and refrain: https://de.wikipedia.org/wiki/Badnerlied
+- Württembergerlied notation: https://www.lieder-archiv.de/preisend_mit_viel_schoenen_reden-notenblatt_700033.html
+- Bayernhymne notation: https://www.lieder-archiv.de/bayernhymne-notenblatt_600909.html
+- Berliner Luft notation: https://commons.wikimedia.org/wiki/File:Paul_Lincke_-_Berliner_Luft.mid
+- Fritze Bollmann melody and history: https://ingeb.org/Lieder/zubrande.html
+- An der Weser public-domain score: https://imslp.org/wiki/An_der_Weser_(Pressel,_Gustav)
+- Hamburg-Hymne notation: https://commons.wikimedia.org/wiki/File:Stadt_Hamburg.mid
+- Hessenlied official state history, authorship, and scores: https://hessen.de/wissen/das-hessenlied
+- Ostseewellenlied history and authorship: https://de.wikipedia.org/wiki/Ostseewellenlied
+- Ostseewellenlied notation: https://www.lieder-archiv.de/wo_die_ostseewellen_trecken_an_den_strand-notenblatt_320002.html
+- Auf der Lüneburger Heide notation: https://www.lieder-archiv.de/auf_der_lueneburger_heide-notenblatt_710192.html
+- Westfalenlied score history and MIDI references: https://de.wikipedia.org/wiki/Westfalenlied
+- Ein Jäger aus Kurpfalz notation: https://www.lieder-archiv.de/ein_jaeger_aus_kurpfalz-notenblatt_300102.html
+- Dar Vugelbärbaam notation: https://www.lieder-archiv.de/da_vugelbeerbaam-notenblatt_600038.html
+- An der Saale hellem Strande notation and Rudelsburg history: https://www.lieder-archiv.de/an_der_saale_hellem_strande-notenblatt_300135.html
+- Schleswig-Holstein meerumschlungen notation: https://www.lieder-archiv.de/schleswig_holstein_meerumschlungen-notenblatt_700038.html
+- Thüringen, holdes Land score and history: https://de.wikipedia.org/wiki/Th%C3%BCringen,_holdes_Land
+- Die Gedanken sind frei notation: https://www.lieder-archiv.de/die_gedanken_sind_frei-notenblatt_300470.html
+- Kein schöner Land notation: https://www.lieder-archiv.de/kein_schoener_land-notenblatt_300139.html
+- Muss i denn notation: https://www.lieder-archiv.de/muss_i_denn_muss_i_denn_zum_staedtele_naus-notenblatt_300352.html
+- Auf de schwäbsche Eisebahne notation: https://www.lieder-archiv.de/auf_de_schwaebsche_eisebahne-notenblatt_400120.html
+- Das Wandern ist des Müllers Lust notation: https://www.lieder-archiv.de/das_wandern_ist_des_muellers_lust-notenblatt_300146.html
+- Der Mond ist aufgegangen notation: https://www.lieder-archiv.de/der_mond_ist_aufgegangen-notenblatt_300017.html
+- Glück auf notation: https://www.lieder-archiv.de/glueck_auf_glueck_auf-notenblatt_300472.html
+- “Erika” public-domain recording listing: https://commons.wikimedia.org/wiki/File:Erika-piano_instrumental.ogg
+- “Erika” melody and historical context: https://en.wikipedia.org/wiki/Erika_(song)
+
+The arrangements use old or traditional underlying compositions, not modern performances or protected arrangements. “Erika” was published during the Nazi period and used as a Wehrmacht soldiers' song. Its place in this broader catalog is an instrumental historical/parody reference inside a satirical game, not an ideological endorsement.
+
+The requested 2012 song **Thüringer Klöße** by Fritz is not transcribed or bundled. Its official upload identifies Frank Kadanik as composer, Ilona Klein and Hans-Jürgen Gröschner as lyricists, Warner Music Germany production, and explicitly prohibits unauthorized use: https://www.youtube.com/watch?v=qJe3cdM7f1c. The similarly named in-game Kloß-Kantinenjingle is a new, independent composition and does not copy that protected melody.
 
 ## Phone tilt
 

@@ -720,49 +720,305 @@ function drawMinimap(){
 }
 function nearestInteract(){let label="",best=122;for(const b of buildings){const d=dist(player.x,player.y,b.doorX,b.doorY);if(d<best){best=d;label=b.name}}for(const n of npcs){const d=dist(player.x,player.y,n.x,n.y);if(d<best){best=d;label=n.special==="borderPourer"?(state.region==="berlin"?"SATIRE STATEMENT LISTENING":"SATIRISCHE ERKLÄRUNG ANHÖREN"):(state.region==="berlin"?"COMPLAINT LISTENING":"BESCHWERDE ANHÖREN")}}for(const p of props){if(!p.id)continue;const d=dist(player.x,player.y,p.x,p.y);if(d<best){best=d;label=p.label}}for(const o of normObjects){if(o.fixed)continue;const d=dist(player.x,player.y,o.x,o.y);if(d<best){best=d;label="AUSRICHTEN"}}const e=document.getElementById("interact-hint");e.hidden=!label;e.textContent=label?"E · "+label:""}
 function draw(){ctx.clearRect(0,0,width,height);if(!window.Germany3D?.ready)drawWorld();drawMinimap();nearestInteract()}
-const NOTE={
- B3:246.94,C4:261.63,D4:293.66,E4:329.63,FS4:369.99,G4:392,A4:440,B4:493.88,
- C5:523.25,D5:587.33,E5:659.25,FS5:739.99,G5:783.99,A5:880,B5:987.77
-};
-// "Erika" melody, rendered from notation as a local WebAudio chiptune.
-// Durations are quarter-note units; null denotes the characteristic pause.
+// Public-domain and traditional melodies arranged as local WebAudio chiptunes.
+// Notes are MIDI numbers, durations are quarter-note units, and null is a rest.
 const erikaA=[
- ["B4",1.5],["C5",.5],["D5",1],["D5",1],["D5",1],["G5",1],["G5",1],["B5",1],
- ["B5",1.5],["A5",.5],["G5",1],[null,3],
- ["FS5",1],["G5",1],["A5",1],[null,3],
- ["B5",1.5],["A5",.5],["G5",1],[null,3]
+ [71,1.5],[72,.5],[74,1],[74,1],[74,1],[79,1],[79,1],[83,1],
+ [83,1.5],[81,.5],[79,1],[null,3],
+ [78,1],[79,1],[81,1],[null,3],
+ [83,1.5],[81,.5],[79,1],[null,3]
 ];
 const erikaB=[
- ["D5",1.5],["G5",.5],["FS5",1],["FS5",1],["FS5",1],["FS5",1],["E5",1],["FS5",1],
- ["G5",1],[null,3],
- ["FS5",1.5],["G5",.5],["A5",1],["A5",1],["A5",1],["A5",1],
- ["D5",1.5],["C5",.5],["B4",1],[null,3]
+ [74,1.5],[79,.5],[78,1],[78,1],[78,1],[78,1],[76,1],[78,1],
+ [79,1],[null,3],
+ [78,1.5],[79,.5],[81,1],[81,1],[81,1],[81,1],
+ [74,1.5],[72,.5],[71,1],[null,3]
 ];
-const melody=[...erikaA,...erikaA,...erikaB,...erikaA];
-let audio=null,musicTimer=null,musicOn=true;
-function chip(a,freq,when,dur,type="square",gain=.045){const o=a.createOscillator(),g=a.createGain();o.type=type;o.frequency.value=freq;g.gain.setValueAtTime(.0001,when);g.gain.linearRampToValueAtTime(gain,when+.01);g.gain.setValueAtTime(gain,when+dur*.75);g.gain.exponentialRampToValueAtTime(.0001,when+dur);o.connect(g).connect(a.destination);o.start(when);o.stop(when+dur+.02)}
-function stamp(a,when,gain=.025){const o=a.createOscillator(),g=a.createGain();o.type="square";o.frequency.setValueAtTime(95,when);o.frequency.exponentialRampToValueAtTime(55,when+.055);g.gain.setValueAtTime(gain,when);g.gain.exponentialRampToValueAtTime(.0001,when+.07);o.connect(g).connect(a.destination);o.start(when);o.stop(when+.08)}
+const MUSIC=[
+ {title:"Erika",bpm:120,root:55,notes:[...erikaA,...erikaA,...erikaB,...erikaA]},
+ {title:"Deutschlandlied · Nationalhymne",bpm:100,root:53,notes:[
+  [65,1.5],[67,.5],[69,1],[67,1],[70,1],[69,1],[67,.5],[64,.5],
+  [65,1],[74,1],[72,1],[70,1],[69,1],[67,1],[69,.5],[65,.5],
+  [72,2],[65,1.5],[67,.5],[69,1],[67,1],[70,1],[69,1],[67,.5],
+  [64,.5],[65,1],[74,1],[72,1],[70,1],[69,1],[67,1],[69,.5],
+  [65,.5],[72,2],[67,1],[69,1],[67,.5],[64,.5],[60,1],[70,1],
+  [69,1],[67,.5],[64,.5],[60,1],[72,1],[70,1],[69,1.5],[69,.5],
+  [71,1],[71,.5],[72,.5],[72,2],[77,1.5],[76,.5],[76,.5],[74,.5],
+  [72,1],[74,1.5],[72,.5],[72,.5],[70,.5],[69,1],[67,1.5],[69,.25],
+  [70,.25],[72,.5],[74,.5],[70,.5],[67,.5],[65,1],[69,.5],[67,.5],
+  [65,2],[77,1.5],[76,.5],[76,.5],[74,.5],[72,1],[74,1.5],[72,.5],
+  [72,.5],[70,.5],[69,1],[67,1.5],[69,.25],[70,.25],[72,.5],[74,.5],
+  [70,.5],[67,.5],[65,1],[69,.5],[67,.5],[65,2]
+ ]},
+ {title:"Badnerlied · Baden-Württemberg",state:"Baden-Württemberg",bpm:112,root:55,notes:[
+  [62,1],[67,1],[67,1],[62,1],[62,1],[59,1],[62,.5],[59,.5],
+  [55,1],[67,1],[69,1.5],[69,.5],[69,1],[69,1],[71,2],[null,1],
+  [71,1],[64,1.5],[64,.5],[69,1.5],[67,.5],[66,1],[67,1],[69,1],
+  [71,1],[69,1.5],[66,.5],[69,.5],[67,.5],[66,.5],[64,.5],[62,2],
+  [null,1],[62,1],[69,1.5],[67,.5],[66,.5],[67,.5],[69,.5],[71,.5],
+  [72,2],[null,1],[74,1],[71,1.5],[69,.5],[67,.5],[66,.5],[67,.5],
+  [71,.5],[69,1],[74,.75],[74,.25],[74,.5],[72,.5],[71,.5],[69,.5],
+  [67,2],[null,.5],[66,.5],[67,.75],[71,.25],[74,2],[null,.5],[68,.5],
+  [69,.75],[71,.25],[74,1],[71,.5],[67,.5],[69,1],[71,.5],[69,.5],
+  [67,2],[null,1],[62,1],[67,1],[67,.75],[67,.25],[67,1],[null,1]
+ ]},
+ {title:"Württembergerlied · Württemberg",region:"Württemberg",bpm:114,root:55,notes:[
+  [62,.5],[62,.5],[67,1],[67,1],[66,1],[66,1],[59,1],[62,.5],
+  [59,.5],[55,1],[67,.5],[67,.5],[69,1],[71,1],[69,1],[71,1],
+  [69,.5],[74,.5],[73,.5],[71,.5],[69,1],[67,.5],[67,.5],[66,1.5],
+  [66,.5],[69,1.5],[69,.5],[62,2],[null,1],[62,.5],[62,.5],[72,1.5],
+  [69,.5],[71,1.5],[67,.5],[71,.5],[69,.5],[69,1],[null,1],[62,.5],
+  [62,.5],[72,1.5],[69,.5],[71,1.5],[67,.5],[71,.5],[69,.5],[69,1],
+  [null,1],[62,.5],[62,.5],[67,1],[67,1],[69,1],[69,1],[74,1.5],
+  [71,.5],[67,1],[69,.5],[66,.5],[64,.5],[72,.5],[71,.5],[69,.5],
+  [71,1],[69,1],[67,2]
+ ]},
+ {title:"Die Gedanken sind frei",bpm:120,root:57,notes:[
+  [64,.5],[64,.5],[69,1],[69,1],[73,.5],[69,.5],[64,2],[64,1],
+  [62,1],[59,1],[64,1],[61,1],[57,1],[64,.5],[64,.5],[69,1],
+  [69,1],[73,.5],[69,.5],[64,2],[64,1],[62,1],[59,1],[64,1],
+  [61,1],[57,1],[69,1],[68,1],[71,1.5],[68,.5],[69,1],[73,1],
+  [69,1],[68,1],[71,1.5],[68,.5],[69,1],[73,1],[69,1],[66,1],
+  [66,1],[69,.5],[66,.5],[64,2],[64,.5],[73,.5],[73,.5],[71,.5],
+  [69,1],[68,1],[69,2]
+ ]},
+ {title:"Kein schöner Land",bpm:102,root:55,notes:[
+  [62,.5],[62,.5],[62,.5],[67,1],[71,1],[69,.5],[67,.5],[69,1.5],
+  [62,.5],[62,.5],[62,.5],[67,1],[71,1],[69,.5],[67,.5],[69,1.5],
+  [71,.5],[67,.5],[69,.5],[71,.5],[74,.5],[72,.5],[71,.5],[69,.5],
+  [67,.5],[69,.5],[72,.5],[71,.5],[69,.5],[67,1],[69,1],[71,1],
+  [null,.5],[71,.5],[67,.5],[69,.5],[71,.5],[74,.5],[72,.5],[71,.5],
+  [69,.5],[67,.5],[69,.5],[72,.5],[71,.5],[69,.5],[67,1],[66,1],[67,1]
+ ]},
+ {title:"Muss i denn · Schwaben",region:"Schwaben",bpm:84,root:50,notes:[
+  [62,.25],[64,.25],[66,.5],[66,.25],[69,.25],[67,.5],[67,.25],[71,.25],
+  [69,.5],[69,.25],[67,.25],[66,1],[69,.5],[69,.25],[67,.25],[66,.5],
+  [66,.25],[69,.25],[67,.5],[67,.5],[64,.5],[69,.5],[66,1],[null,.5],
+  [62,.25],[64,.25],[66,.5],[66,.25],[69,.25],[67,.5],[67,.25],[71,.25],
+  [69,.5],[69,.25],[67,.25],[66,1],[69,.5],[69,.25],[67,.25],[66,.5],
+  [66,.25],[69,.25],[67,.5],[67,.5],[64,.5],[69,.5],[66,1],[null,.5],
+  [62,.25],[66,.25],[64,.75],[66,.25],[67,.5],[64,.5],[66,.75],[67,.25],
+  [69,.5],[69,.25],[69,.25],[71,.5],[71,.5],[74,.5],[73,.25],[71,.25],
+  [69,1],[null,.5],[62,.25],[66,.25],[69,.5],[69,.25],[71,.25],[69,.5],
+  [69,.25],[74,.25],[69,.5],[69,.25],[67,.25],[66,1],[69,.5],[69,.25],
+  [67,.25],[66,.5],[66,.25],[69,.25],[67,.5],[67,.5],[64,.5],[69,.5],[66,1]
+ ]},
+ {title:"Auf de schwäbsche Eisebahne · Schwaben",region:"Schwaben",bpm:116,root:48,notes:[
+  [67,.75],[67,.25],[67,.5],[67,.5],[67,.5],[67,.5],[72,.5],[72,.5],
+  [69,.5],[69,.5],[69,.5],[69,.5],[69,.5],[69,.5],[74,.5],[74,.5],
+  [76,.75],[74,.25],[76,.5],[74,.5],[74,.5],[72,.5],[67,1],[67,.5],
+  [67,.5],[69,.5],[71,.5],[72,.5],[72,.5],[72,.5],[null,.5],[67,.5],
+  [67,.5],[67,.5],[67,.5],[67,.5],[67,.5],[72,1],[69,.5],[69,.5],
+  [69,.5],[69,.5],[69,.5],[69,.5],[74,1],[76,.75],[74,.25],[76,.5],
+  [74,.5],[74,.5],[72,.5],[67,1],[67,.5],[67,.5],[69,.5],[71,.5],
+  [72,.5],[72,.5],[72,1]
+ ]},
+ {title:"Das Wandern ist des Müllers Lust",bpm:112,root:55,notes:[
+  [62,.5],[67,.75],[62,.25],[59,.5],[60,.5],[62,.75],[64,.25],[62,.5],
+  [67,.5],[71,.75],[69,.25],[67,.5],[69,.5],[71,.75],[72,.25],[71,.5],
+  [67,.5],[71,1],[69,1],[67,1],[null,.5],[62,.5],[69,.5],[69,.5],
+  [71,.25],[69,.25],[68,.25],[69,.25],[66,.5],[69,.5],[62,.5],[62,.5],
+  [69,.5],[69,.5],[71,.25],[69,.25],[68,.25],[69,.25],[66,.5],[69,.5],
+  [62,.5],[62,.5],[64,.5],[66,.5],[67,.5],[69,.5],[71,.75],[69,.25],
+  [67,.5],[71,.5],[74,1],[66,1],[67,1]
+ ]},
+ {title:"Der Mond ist aufgegangen",bpm:96,root:53,notes:[
+  [65,1],[67,1],[65,1],[70,1],[69,1],[67,2],[65,1],[69,1],
+  [69,1],[69,1],[74,1],[72,1],[70,2],[69,1],[69,1],[69,1],
+  [69,1],[70,1],[69,1],[67,2],[null,1],[65,1],[67,1],[65,1],
+  [70,1],[69,1],[67,2],[65,1],[69,1],[69,1],[69,1],[74,1],
+  [72,1],[70,2],[69,1],[69,1],[69,1],[69,1],[70,1],[69,1],
+  [67,1],[67,1],[65,1]
+ ]},
+ {title:"Glück auf, der Steiger kommt · Saarland",state:"Saarland",bpm:120,root:53,notes:[
+  [65,2],[64,1],[67,1],[65,2.75],[null,1.25],[69,2],[67,1],[70,1],
+  [69,2],[null,1],[65,.5],[67,.5],[69,1],[69,1],[69,1],[67,.5],
+  [69,.5],[70,1],[67,.75],[67,.25],[67,1],[67,.5],[69,.5],[70,1],
+  [74,1],[74,1],[72,.5],[70,.5],[72,1],[69,.75],[69,.25],[69,1],
+  [60,1],[65,2],[67,2],[69,1],[74,1],[72,1],[70,1],[72,2],
+  [70,1],[72,1],[69,2]
+ ]},
+ {title:"Bayernhymne · Bayern",state:"Bayern",bpm:94,root:54,notes:[
+  [66,.75],[70,.75],[73,1.83],[71,.75],[70,.75],[68,.75],[66,.75],[70,1],
+  [66,1],[61,1.83],[63,.75],[61,.5],[59,.5],[58,1.75],[null,.25],[61,.75],
+  [66,2.08],[65,.5],[68,1],[71,1.75],[70,.75],[68,.75],[66,.75],[65,1.83],
+  [66,.75],[63,.75],[61,1.75],[null,.25],[68,.75],[70,.75],[71,1.33],[70,.5],
+  [68,.75],[66,1.5],[65,.75],[68,.75],[70,.75],[71,1.33],[70,.5],[68,.75],
+  [66,.75],[73,1.75]
+ ]},
+ {title:"Berliner Luft · Berlin",state:"Berlin",bpm:122,root:51,notes:[
+  [67,.25],[70,.5],[67,.5],[65,.75],[63,.25],[67,.5],[63,.5],[58,.5],[null,.25],
+  [67,.25],[70,.75],[67,.25],[72,.75],[67,.25],[74,1],[null,.75],[68,.25],
+  [72,.5],[68,.5],[67,.75],[65,.25],[68,.5],[65,.5],[58,.5],[null,.25],[68,.25],
+  [72,.75],[68,.25],[74,.75],[68,.25],[72,1],[null,.75],[67,.25],[70,.5],
+  [67,.5],[65,.75],[63,.25],[67,.5],[63,.5],[58,.5],[null,.25],[67,.25],
+  [70,.75],[67,.25],[72,.75],[67,.25],[74,1],[null,.75],[74,.25],[77,.5],
+  [74,.5],[72,.75],[70,.25],[74,.5],[70,.5],[65,.5],[66,.5],[67,1],[69,1],
+  [70,1],[null,1.5],[70,1],[null,1],[70,1],[null,1],[70,3.5],[67,1.5],
+  [66,.5],[67,.5],[75,.5],[67,.5],[74,.5],[72,.5],[null,.5],[72,.5],
+  [null,.5],[72,.5],[null,1.5],[67,1.5],[66,.5],[67,.5],[75,.5],[67,.5],
+  [74,.5],[72,.5],[null,.5],[72,.5],[null,.5],[72,.5],[null,1.5],[72,1.5],
+  [70,.5],[68,.5],[67,.5],[65,.5],[64,.5],[67,.5],[null,.5],[67,.5],
+  [null,.5],[67,.5],[null,.5],[65,.75],[64,.25]
+ ]},
+ {title:"Fritze Bollmann · Brandenburg",state:"Brandenburg",bpm:118,root:52,notes:[
+  [64,1],[69,.92],[64,.75],[null,.25],[64,1],[66,.75],[null,.25],[66,1.25],
+  [null,.25],[69,.33],[68,1.25],[null,.25],[62,.33],[66,.66],[64,1.67],[null,.33],
+  [64,.66],[73,1],[71,.75],[null,.25],[69,.66],[71,.75],[null,.25],[66,.75],
+  [null,.25],[71,.66],[69,1.25],[null,.25],[69,.33],[71,.66],[73,1.67],[null,.33],
+  [64,.66],[73,.75],[null,.25],[71,.75],[null,.25],[69,.66],[71,.75],[null,.25],
+  [66,.75],[null,.25],[71,1],[69,1.25],[null,.25],[69,.33],[68,.66],[69,1.67],
+  [null,.33],[64,1],[69,.92],[64,.75],[null,.25],[64,1],[66,.75],[null,.25],
+  [66,1.25],[null,.25],[69,.33],[68,1.25],[null,.25],[62,.33],[66,.66],[64,1.67],
+  [null,.33],[64,.66],[73,1],[71,.75],[null,.25],[69,.66],[71,.75],[null,.25],
+  [66,.75],[null,.25],[71,.66],[69,1.25],[null,.25],[69,.33],[71,.66],[73,1.67],
+  [null,.33],[64,.66],[73,.75],[null,.25],[71,.75],[null,.25],[69,.66]
+ ]},
+ {title:"An der Weser · Bremen",state:"Bremen",bpm:96,root:50,notes:[
+  [62,1.5],[67,1],[62,.5],[71,1],[67,.5],[76,.5],[74,1],[71,.5],[67,.75],[66,.25],
+  [67,.5],[71,.75],[69,.25],[67,2],[66,.5],[null,.5],[66,.5],[64,1.5],[62,1.25],
+  [null,.33],[72,.5],[62,.5],[71,1],[null,1],[74,.5],[71,.5],[76,.5],[74,1],
+  [71,.5],[69,1],[67,.5],[null,.5],[71,.5],[null,.5],[71,3],[76,.75],[74,.25],
+  [72,.5],[71,1.5],[74,3.75],[71,.25],[67,.25],[71,.25],[74,.5],[null,.5],
+  [71,.5],[79,2.08],[78,.25],[76,.5],[78,2.5],[71,.5],[76,2.25],[74,.25],
+  [72,.5],[71,1.5],[63,1.33],[64,1.33],[null,1.67],[71,.75],[69,.25],[67,.5],
+  [76,.5],[74,.75],[72,.25],[71,1],[69,.25],[67,.25],[69,.25],[71,.5],[null,.5],
+  [71,.5],[67,.75],[66,.25],[67,.5],[72,.5],[71,.75],[69,.25],[71,.5],
+  [63,.25],[75,.25],[71,.25],[75,.25],[71,1],[null,.5],[71,.5]
+ ]},
+ {title:"Stadt Hamburg an der Elbe Auen · Hamburg",state:"Hamburg",bpm:100,root:48,notes:[
+  [48,1],[53,5],[55,.5],[57,1],[55,.5],[53,.5],[52,.5],[53,2],[48,1],[53,.5],
+  [57,.5],[60,1.5],[58,.5],[57,1],[55,1],[57,2],[53,1],[57,1],[60,2],[55,2],
+  [57,2],[null,.67],[57,.5],[55,.5],[53,.5],[52,.5],[55,1],[60,.5],[64,1],
+  [62,1],[60,3.5],[null,.5],[65,1],[60,.75],[65,.25],[69,2],[67,1],[64,.75],
+  [67,.25],[72,1],[70,1],[69,1.5],[65,2.5],[74,1.5],[70,3.5],[69,.75],
+  [67,.25],[72,1],[65,.5],[67,.5],[69,2],[67,2],[65,2.75]
+ ]},
+ {title:"Hessenlied · Hessen",state:"Hessen",bpm:96,root:53,notes:[
+  [60,.5],[65,1.5],[69,.25],[72,1.83],[74,.75],[69,.75],[74,.25],[72,.75],[null,.67],
+  [77,.5],[76,.75],[74,1],[72,.75],[70,.5],[74,.5],[72,1.75],[null,.25],[69,.75],
+  [null,.67],[60,.5],[65,1.5],[69,.25],[72,1.75],[74,.75],[69,.75],[74,.25],
+  [72,.75],[null,.67],[74,.5],[76,.75],[74,.5],[72,.5],[77,.75],[76,.5],
+  [74,2.25],[null,.25],[72,.75],[null,2.67],[72,4.83],[null,.67],[70,.5],
+  [74,.75],[72,.5],[74,.5],[72,.5],[70,.5],[69,.5],[70,.5],[69,.75],[67,.75],
+  [null,1.25],[72,.75],[77,1.75],[null,.25],[72,.75],[69,.75],[74,1.75],
+  [null,.25],[74,1.5],[79,1.75],[null,.25],[74,.75],[77,.75],[76,2.75],
+  [null,.25],[72,.75]
+ ]},
+ {title:"Wo de Ostseewellen trecken · Mecklenburg-Vorpommern",state:"Mecklenburg-Vorpommern",bpm:94,root:54,notes:[
+  [66,2],[64,1],[62,2],[61,1],[62,2],[61,1],[62,2],[66,1],[71,2],[69,1],
+  [64,7.75],[66,1],[67,2],[66,1],[67,2],[66,1],[67,2],[69,1],[73,2],
+  [71,1],[66,7.75],[69,1],[74,2],[73,1],[76,2.75],[74,2.75],[73,2],
+  [71,1],[74,3],[73,5.75],[71,2],[69,1],[73,1]
+ ]},
+ {title:"Auf der Lüneburger Heide · Niedersachsen",state:"Niedersachsen",bpm:114,root:48,notes:[
+  [60,.5],[64,.5],[69,.5],[67,.5],[66,.5],[67,.5],[69,.5],[67,.5],[66,.5],[67,.5],
+  [72,.75],[71,.25],[69,.5],[67,.5],[65,1],[62,.75],[65,.25],[71,.5],[69,.5],
+  [68,.5],[69,.5],[71,.5],[69,.5],[68,.5],[69,.5],[74,.75],[72,.25],[71,.5],
+  [69,.5],[67,1],[71,.75],[69,.25],[67,.5],[65,.5],[64,.5],[69,.5],[67,2],
+  [69,1],[68,.5],[69,.5],[71,1],[72,.75],[69,.25],[67,1],[72,.75],[69,.25],
+  [67,1],[72,1],[74,1],[67,1],[76,2.5],[74,.5],[72,.5],[69,.5],[67,1],
+  [72,.5],[76,.5],[77,1],[71,1],[72,1]
+ ]},
+ {title:"Westfalenlied · Nordrhein-Westfalen",state:"Nordrhein-Westfalen",bpm:104,root:53,notes:[
+  [62,.5],[63,.5],[64,.5],[65,1.5],[67,.5],[69,.5],[70,.5],[67,1.5],[69,.5],
+  [70,.5],[72,.5],[74,.5],[70,.5],[65,1],[63,.5],[57,.5],[58,1],[null,.5],
+  [62,.5],[63,.75],[64,.25],[65,1.5],[67,.5],[69,.75],[70,.25],[69,1],[67,1],
+  [69,.75],[70,.25],[72,1.5],[69,.75],[67,.5],[65,1.25],[null,.5],[65,.5],
+  [67,.75],[69,.25],[70,1.5],[69,.5],[67,.75],[65,1.25],[64,.5],[67,.5],
+  [69,.75],[67,.25],[72,1.5],[65,.5],[67,.75],[69,.25],[65,1],[null,.5],
+  [65,1],[67,.5],[69,2],[72,.75],[70,.25],[69,1],[null,.5],[65,.5],
+  [67,.5],[69,.5],[70,.75],[72,.25],[73,1.5],[64,.5],[65,1],[null,.5],
+  [62,.5],[63,.5],[64,.5],[65,1.5],[67,.5],[69,.75],[70,.25],[67,1.5],
+  [63,.5],[65,.75],[66,.25],[67,1.5],[69,.5],[70,.75],[72,.25],[69,1],
+  [null,.5],[65,.5],[70,.75],[72,.25],[74,2],[75,.5],[74,.5],[67,1],
+  [null,.5],[67,.5],[69,.75],[70,1.75],[69,.75],[67,.5],[65,.25],[74,1],
+  [null,.5],[65,.5],[70,.75],[72,.25],[74,2],[77,.5],[75,.5],[67,1],
+  [null,.5],[67,.5],[69,.75],[70,1.75],[69,.5],[67,.75],[69,.25],[70,1]
+ ]},
+ {title:"Ein Jäger aus Kurpfalz · Rheinland-Pfalz",state:"Rheinland-Pfalz",bpm:118,root:53,notes:[
+  [60,.5],[65,.5],[69,3],[72,1],[70,1],[69,1],[67,1],[65,.5],[64,.5],[67,3],
+  [72,.5],[69,1],[67,1],[65,1],[null,.5],[69,.5],[72,1.5],[70,.5],[69,1.5],
+  [72,.5],[77,.5],[72,1],[69,1],[67,1],[65,.5],[64,.5],[67,3],[72,.5],
+  [69,1],[67,1],[65,1],[null,.5],[69,.5],[72,1.5],[70,.5],[69,1.5],
+  [72,.5],[77,.5],[72,1],[69,1],[67,1],[65,.5],[64,.5],[67,3],
+  [72,.5],[69,1],[67,1],[65,1]
+ ]},
+ {title:"Dar Vugelbärbaam · Sachsen",state:"Sachsen",bpm:116,root:55,notes:[
+  [62,1],[67,1.5],[66,.5],[67,1],[59,1],[64,1.5],[62,.5],[60,1.5],
+  [66,.5],[64,1],[62,2],[null,1],[60,1.5],[66,.5],[64,1],[62,2],
+  [64,1],[62,1.5],[71,.5],[67,1],[62,3],[67,1.5],[66,.5],[67,1],
+  [59,1],[64,1.5],[62,2],[66,.5],[64,1],[62,2],[null,1],[60,1.5],
+  [66,.5],[64,1],[72,2],[66,1],[67,4]
+ ]},
+ {title:"An der Saale hellem Strande · Sachsen-Anhalt",state:"Sachsen-Anhalt",bpm:94,root:50,notes:[
+  [62,.5],[64,.5],[66,2],[64,.5],[62,.5],[64,2],[62,.5],[64,.5],[66,.5],
+  [67,.5],[69,1],[67,.5],[66,.5],[64,1],[null,1],[69,.5],[71,.5],[69,.5],
+  [67,.5],[64,2],[66,1],[69,1.5],[71,.5],[69,.5],[67,.5],[64,2],[66,1],
+  [69,1],[71,.5],[67,.5],[66,.5],[69,.5],[66,1],[64,1],[62,1]
+ ]},
+ {title:"Schleswig-Holstein meerumschlungen",state:"Schleswig-Holstein",bpm:96,root:51,notes:[
+  [63,.75],[67,.25],[68,2],[72,.5],[70,.5],[68,.5],[70,.5],[72,1.5],[70,.5],
+  [68,1],[70,.5],[72,.5],[73,1],[72,.5],[70,.5],[68,1],[70,1],[72,2],
+  [70,1.5],[68,1],[67,1.5],[72,1.5],[70,1],[68,1.5],[72,2],[70,1],
+  [68,1],[67,1],[65,1],[63,2],[68,1],[63,1],[70,1],[63,1],[72,1],
+  [73,.5],[72,.5],[70,2],[72,2],[73,3],[72,.5],[70,.5],[68,2],
+  [70,2],[72,2],[68,1],[63,1],[70,1],[63,1],[72,1],[73,.5],[72,.5],
+  [70,2],[72,2],[77,3],[73,.5],[70,.5],[75,2],[67,2],[68,2]
+ ]},
+ {title:"Thüringen, holdes Land",state:"Thüringen",bpm:104,root:52,notes:[
+  [71,1],[64,1],[66,1],[68,1.5],[69,.5],[66,1],[73,1],[71,1],[66,1],
+  [69,1.5],[68,1.5],[66,1],[68,1],[70,1],[71,1.5],[66,1.5],[75,.5],
+  [73,.5],[71,1],[70,1],[71,2],[null,1],[69,1],[68,.5],[66,.5],[64,.5],
+  [63,.5],[71,1.5],[69,.5],[68,1],[71,1],[69,.5],[68,.5],[66,.5],
+  [65,.5],[73,1.5],[71,.5],[69,1],[75,1],[73,1],[71,1],[76,1],
+  [75,.5],[73,.5],[71,1.5],[69,.5],[68,1],[66,.5],[68,.5],[69,4],
+  [76,1],[75,.5],[73,.5],[71,1.5],[69,.5],[68,2],[66,.5],[68,.5],
+  [69,1],[68,2]
+ ]},
+ {title:"Thüringer Kloß-Kantinenjingle · Original",region:"Thüringen",bpm:132,root:50,notes:[
+  [62,.25],[66,.25],[69,.5],[74,.5],[71,.5],[69,.25],[67,.25],[66,.5],
+  [64,.5],[62,.5],[57,.25],[61,.25],[64,.5],[69,.5],[67,.5],[66,.25],
+  [64,.25],[62,1],[null,.5],[69,.25],[71,.25],[74,.5],[78,.5],[76,.5],
+  [74,.25],[71,.25],[69,.5],[67,.5],[66,.5],[62,.25],[64,.25],[66,.5],
+  [69,.5],[71,.5],[74,1],[null,.5],[74,.25],[73,.25],[71,.5],[69,.5],
+  [67,.5],[66,.25],[64,.25],[62,.5],[57,.5],[61,.5],[64,.25],[66,.25],
+  [69,.5],[67,.5],[66,.5],[64,.5],[62,1.5]
+ ]}
+];
+let audio=null,musicTimer=null,musicBus=null,musicOn=true,musicBag=[],currentTune=-1;
+const midiFreq=note=>440*2**((note-69)/12);
+function nextTune(){
+ if(!musicBag.length){
+   musicBag=MUSIC.map((_,i)=>i);
+   for(let i=musicBag.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[musicBag[i],musicBag[j]]=[musicBag[j],musicBag[i]]}
+   if(musicBag.at(-1)===currentTune&&musicBag.length>1)[musicBag[0],musicBag[musicBag.length-1]]=[musicBag[musicBag.length-1],musicBag[0]];
+ }
+ currentTune=musicBag.pop();return MUSIC[currentTune]
+}
+function chip(a,freq,when,dur,type="square",gain=.045){const o=a.createOscillator(),g=a.createGain();o.type=type;o.frequency.value=freq;g.gain.setValueAtTime(.0001,when);g.gain.linearRampToValueAtTime(gain,when+.01);g.gain.setValueAtTime(gain,when+dur*.75);g.gain.exponentialRampToValueAtTime(.0001,when+dur);o.connect(g).connect(musicBus);o.start(when);o.stop(when+dur+.02)}
+function stamp(a,when,gain=.025){const o=a.createOscillator(),g=a.createGain();o.type="square";o.frequency.setValueAtTime(95,when);o.frequency.exponentialRampToValueAtTime(55,when+.055);g.gain.setValueAtTime(gain,when);g.gain.exponentialRampToValueAtTime(.0001,when+.07);o.connect(g).connect(musicBus);o.start(when);o.stop(when+.08)}
 function scheduleTheme(){
  if(!audio||!musicOn)return;
- const quarter=.5,start=audio.currentTime+.05;let t=start,beatIndex=0;
- for(const [note,quarters] of melody){
+ const tune=nextTune(),quarter=60/tune.bpm,start=audio.currentTime+.05,bassCycle=[tune.root,tune.root+7,tune.root+12,tune.root+7];let t=start,beatIndex=0;
+ document.getElementById("mute").title=`NOW PLAYING · ${tune.title}`;
+ for(const [note,quarters] of tune.notes){
    const dur=quarters*quarter;
-   if(note){
-     chip(audio,NOTE[note],t,Math.max(.07,dur*.88),"square",.031);
-     const bassCycle=["G4","D4","E4","D4"],bass=bassCycle[Math.floor(beatIndex/2)%bassCycle.length];
-     chip(audio,NOTE[bass]/2,t,Math.max(.06,dur*.92),"triangle",.017);
+   if(note!==null){
+     chip(audio,midiFreq(note),t,Math.max(.07,dur*.88),"square",.031);
+     const bass=bassCycle[Math.floor(beatIndex/2)%bassCycle.length];
+     chip(audio,midiFreq(bass),t,Math.max(.06,dur*.92),"triangle",.017);
    }else{
-     // Replace the historical pause with neutral 8-bit percussion rather than a recording.
-     stamp(audio,t,.021);stamp(audio,t+quarter,.018);stamp(audio,t+quarter*2,.021);
+     for(let beat=0;beat<quarters;beat++)stamp(audio,t+beat*quarter,beat%2?.018:.021);
    }
-   if(note&&beatIndex%2===0)stamp(audio,t,.006);
+   if(note!==null&&Math.floor(beatIndex)%2===0)stamp(audio,t,.006);
    t+=dur;beatIndex+=quarters;
  }
  clearTimeout(musicTimer);
- musicTimer=setTimeout(scheduleTheme,Math.max(100,(t-audio.currentTime-.12)*1000));
+ musicTimer=setTimeout(scheduleTheme,Math.max(100,(t-audio.currentTime+quarter*.5)*1000));
 }
-function startMusic(){if(!musicOn)return;if(!audio)audio=new (window.AudioContext||window.webkitAudioContext)();audio.resume();scheduleTheme()}
-document.getElementById("mute").onclick=()=>{musicOn=!musicOn;document.getElementById("mute").textContent=musicOn?"ERIKA 8-BIT ON":"ERIKA 8-BIT OFF";if(musicOn)startMusic();else clearTimeout(musicTimer)};
+function startMusic(){if(!musicOn)return;if(!audio)audio=new (window.AudioContext||window.webkitAudioContext)();audio.resume();musicBus=audio.createGain();musicBus.connect(audio.destination);scheduleTheme()}
+document.getElementById("mute").onclick=()=>{musicOn=!musicOn;document.getElementById("mute").textContent=musicOn?"MUSIC 8-BIT ON":"MUSIC 8-BIT OFF";if(musicOn)startMusic();else{clearTimeout(musicTimer);musicBus?.disconnect();musicBus=null}};
 function startGame(){startMusic();state.started=true;state.region=regionOf(player.y);document.getElementById("intro").classList.add("hidden");const lines=state.region==="berlin"?["Welcome in Berlin. Hier reden wir erstmal practical Denglisch.","Your mission ist simple: become German citizen in drei Behördentagen.","Aber careful: auf Schrebergarten grass kommt sofort die Polizei. No discussion.","Berlin liegt hinter der Brandmauer. You can cross sie freely."]:[ "Willkommen in Deutschland.","Ihr Ziel: Werden Sie innerhalb von drei völlig fiktiven Behördentagen deutscher Staatsbürger.","Dazu benötigen Sie vor allem Formulare. Sehr viele Formulare.","Wenn Sie den Rasen im Schrebergarten betreten, kommt die Polizei sofort.","Berlin liegt hinter der Brandmauer. Sie ist frei überquerbar."];openDialogue(state.region==="berlin"?"WELCOME TO BERLIN":"WILLKOMMEN IN DEUTSCHLAND",lines,"DE",()=>toast("ERSTER VORGANG · BÜRGERAMT"));updateHud()}
 document.querySelectorAll(".lang").forEach(btn=>btn.onclick=()=>{const choseEnglish=btn.dataset.lang==="en";state.lang="de";document.documentElement.lang="de";document.querySelectorAll(".lang").forEach(b=>{b.classList.toggle("active",b===btn);b.setAttribute("aria-pressed",String(b===btn))});if(choseEnglish){btn.textContent="Deutsch";btn.dataset.lang="de";const praise=document.getElementById("language-praise");praise.hidden=false;clearTimeout(praise.t);praise.t=setTimeout(()=>praise.hidden=true,2200)}updateHud()});
 document.getElementById("start").onclick=startGame;
