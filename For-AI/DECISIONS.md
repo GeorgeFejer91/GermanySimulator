@@ -51,3 +51,7 @@ Completed repository changes are validated, committed, and pushed to `origin/mai
 ## 2026-09-20 — Spoken audio and textbox lockstep
 
 Every recorded or synthesized character line is one presentation event with its textbox. The speech queue reveals the exact matching text only when playback begins and keeps it visible through the end of that audio; later queued lines cannot replace it early. Opening a modal dialogue cancels any active or queued bark speech before the modal displays and voices its own exact line. Music and non-verbal effects remain independent.
+
+## 2026-09-20 — Political-character quote ownership
+
+The satirical figure trying to extinguish the Brandmauer is Friedrich Merz; the energy-district figure is Angela Merkel. Each NPC declares its political identity and all ambient and interaction dialogue resolves through that identity's dedicated quote pool. Merz and Merkel lines must never be pooled, shared, or selected for the other figure, and speaker labels, textboxes, and synthesized or recorded voices must retain the same owner.
