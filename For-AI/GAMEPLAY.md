@@ -36,6 +36,7 @@ Mission order:
 - The HUD exposes mission, progress, energy, forms, Pfand, day, region, current rule, wanted status, and control mode.
 - Optional synthesized music and speech are local browser features and must remain user-toggleable. The local browser-generated dialogue voice is a valued part of the game; preserve it and make it speak the exact authored regional line.
 - All synthesized character speech is serialized: every voiced line plays once to completion, followed by a brief 250 ms pause before the next queued line. Spontaneous police, pedestrian, border, and ambient barks never overlap or interrupt one another. Modal dialogue still finishes before the player can advance.
+- Spoken character audio and text are locked together. A bark textbox appears only when that exact queued line begins, stays visible until its speech ends, and cannot be replaced by another bark while the first line is audible. Opening a modal dialogue cancels active and queued bark speech before showing and voicing the modal's exact line. This invariant covers synthesized speech and recorded quotations; it does not apply to music or non-verbal effects.
 
 ## World identity
 

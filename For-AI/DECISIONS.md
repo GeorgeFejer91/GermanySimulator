@@ -47,3 +47,7 @@ Level design makes forbidden surfaces more abundant than legal pedestrian space:
 ## 2026-09-20 — Immediate GitHub Pages publication
 
 Completed repository changes are validated, committed, and pushed to `origin/main` immediately unless the user explicitly asks to hold them locally. The existing `.github/workflows/pages.yml` push trigger is the sole deployment path and publishes the repository root to GitHub Pages. Publication must remain a normal fast-forward push: never force-push, expose secrets or tool caches, or knowingly deploy a failing build.
+
+## 2026-09-20 — Spoken audio and textbox lockstep
+
+Every recorded or synthesized character line is one presentation event with its textbox. The speech queue reveals the exact matching text only when playback begins and keeps it visible through the end of that audio; later queued lines cannot replace it early. Opening a modal dialogue cancels any active or queued bark speech before the modal displays and voices its own exact line. Music and non-verbal effects remain independent.
