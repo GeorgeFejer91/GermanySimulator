@@ -1,11 +1,157 @@
 <!doctype html>
 <html lang="en">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<meta http-equiv="refresh" content="0; url=./public/games/germany-simulator/">
-<title>Germany Simulator</title>
-<script>location.replace("./public/games/germany-simulator/");</script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#77746f">
+  <meta name="description" content="Germany Simulator: a fictional 2D bureaucratic open-world parody.">
+  <meta property="og:title" content="Germany Simulator">
+  <meta property="og:description" content="Survive three fictional administration days in a bureaucratic open-world parody.">
+  <meta property="og:type" content="website">
+  <meta name="twitter:card" content="summary">
+  <title>Germany Simulator</title>
+  <link rel="icon" href="./assets/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="./styles.css">
 </head>
-<body><a href="./public/games/germany-simulator/">Play Germany Simulator</a></body>
+<body>
+<main id="shell">
+  <canvas id="game" width="1280" height="720" aria-label="Germany Simulator 2D game world"></canvas>
+
+  <header class="top-hud">
+    <div class="brand">
+      <b>GERMANY</b><span>SIMULATOR</span>
+      <small>OPEN-WORLD ADMINISTRATION</small>
+    </div>
+    <div class="wanted">
+      <small>ORDNUNGSSTATUS</small>
+      <div id="stars" class="stars" aria-label="Wanted level"></div>
+      <em id="offence">AKTENLAGE: UNAUFFÄLLIG</em>
+    </div>
+    <div class="clock">
+      <b id="clock">08:00</b>
+      <small id="deadline">EINBÜRGERUNGSFRIST: 3 FIKTIVE BEHÖRDENTAGE</small>
+    </div>
+    <button id="pause-button" class="pause-button" type="button" aria-label="Spiel pausieren">PAUSE [P]</button>
+  </header>
+
+  <aside class="mission">
+    <small>AKTUELLER VORGANG</small>
+    <b id="mission-title">ANMELDUNG</b>
+    <p id="mission-text"></p>
+    <div class="progress"><i id="mission-progress"></i></div>
+  </aside>
+
+  <aside class="rule">
+    <small>REGEL DES AUGENBLICKS</small>
+    <b id="rule-id">§ 17.3b</b>
+    <p id="rule-text"></p>
+  </aside>
+
+  <aside class="stats">
+    <span>ENERGIE <b id="energy">100</b></span>
+    <span>FORMULARE <b id="forms-count">0</b></span>
+    <span>PFAND <b id="pfand-count">0</b></span>
+  </aside>
+
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+
+  <section id="dialogue" class="dialogue" hidden>
+    <div id="portrait" class="portrait" aria-hidden="true">§</div>
+    <div class="dialogue-copy">
+      <small id="speaker">SACHBEARBEITUNG</small>
+      <p id="dialogue-text"></p>
+      <div id="dialogue-choices" class="dialogue-choices" hidden></div>
+      <form id="dialogue-reply" class="dialogue-reply" hidden>
+        <input id="dialogue-reply-input" type="text" maxlength="220" autocomplete="off" placeholder="Eigene Antwort eingeben …">
+        <button type="submit">ANTWORTEN</button>
+      </form>
+    </div>
+    <button id="dialogue-next" type="button">WEITER [E]</button>
+  </section>
+
+  <section id="form-modal" class="modal" hidden aria-modal="true" role="dialog" aria-labelledby="form-title">
+    <form id="bureaucracy-form" class="paper">
+      <div class="paper-head">
+        <span>BUNDESREPUBLIK · SPIELFORMULAR</span>
+        <span id="form-code">G-17/4B</span>
+      </div>
+      <h2 id="form-title">Antrag auf Antragstellung</h2>
+      <p id="form-subtitle"></p>
+      <div id="form-fields" class="form-fields"></div>
+      <div class="paper-actions">
+        <span id="form-error"></span>
+        <button type="submit">FORMULAR EINREICHEN</button>
+      </div>
+    </form>
+  </section>
+
+  <section id="overlay" class="overlay" hidden>
+    <div class="overlay-card">
+      <small id="overlay-kicker">VERWALTUNGSVORGANG</small>
+      <h1 id="overlay-title">VORLÄUFIG ABGESCHLOSSEN</h1>
+      <p id="overlay-copy"></p>
+      <div class="overlay-actions">
+        <button id="overlay-button" type="button">WEITERSPIELEN</button>
+        <button id="overlay-restart" class="secondary-button" type="button">NEUER VORGANG</button>
+      </div>
+    </div>
+  </section>
+
+  <section id="start-screen" class="start-screen" aria-modal="true" role="dialog" aria-labelledby="start-title">
+    <div class="start-card">
+      <div class="start-stamp" aria-hidden="true">DE</div>
+      <div class="start-copy">
+        <p class="start-series">OPEN-WORLD ADMINISTRATION</p>
+        <h1 id="start-title">GERMANY<br>SIMULATOR</h1>
+        <p>Drei fiktive Behördentage. Acht Vorgänge. Eine Stadt, in der selbst spontane Bewegung genehmigungspflichtig wirkt.</p>
+        <dl class="start-controls">
+          <div><dt>WASD / PFEILE</dt><dd>Bewegen</dd></div>
+          <div><dt>SHIFT</dt><dd>Verdächtig schnell laufen</dd></div>
+          <div><dt>E</dt><dd>Interagieren</dd></div>
+          <div><dt>X</dt><dd>Offensichtlich schlechte Idee</dd></div>
+        </dl>
+        <div class="start-actions">
+          <button id="start-new" type="button">VORGANG ERÖFFNEN</button>
+          <button id="start-continue" class="secondary-button" type="button" hidden>LETZTEN STAND FORTSETZEN</button>
+        </div>
+        <p class="start-disclaimer">Satire mit frei erfundenen Regeln und Verfahren. Keine Rechts- oder Einwanderungsberatung.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="pause-screen" class="pause-screen" hidden aria-modal="true" role="dialog" aria-labelledby="pause-title">
+    <div class="pause-card">
+      <p>VORGANG VORÜBERGEHEND RUHEND</p>
+      <h2 id="pause-title">PAUSE</h2>
+      <div class="pause-actions">
+        <button id="resume-button" type="button">WEITERSPIELEN [P]</button>
+        <button id="restart-button" class="secondary-button" type="button">NEUER VORGANG</button>
+      </div>
+      <span id="save-status">SPIELSTAND WIRD LOKAL GESPEICHERT</span>
+    </div>
+  </section>
+
+  <footer class="help">
+    <span>WASD / PFEILE · BEWEGEN</span>
+    <span>SHIFT · VERDÄCHTIG SCHNELL</span>
+    <span>E · INTERAGIEREN</span>
+    <span>X · OFFENSICHTLICH SCHLECHTE IDEE</span>
+    <span>P · PAUSE</span>
+  </footer>
+
+  <div class="touch" aria-label="Touch controls">
+    <button data-key="ArrowUp">▲</button>
+    <button data-key="ArrowLeft">◀</button>
+    <button data-key="ArrowDown">▼</button>
+    <button data-key="ArrowRight">▶</button>
+    <button class="action run" data-key="ShiftLeft">RUN</button>
+    <button class="action" data-key="KeyE">E</button>
+    <button class="action danger" data-key="KeyX">X</button>
+  </div>
+
+  <div class="satire">SATIRE · FICTIONAL RULES · NOT LEGAL OR IMMIGRATION ADVICE</div>
+</main>
+<script src="./merkel-dialogue.js"></script>
+<script src="./game.js"></script>
+</body>
 </html>
