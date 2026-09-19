@@ -24,9 +24,9 @@ The game’s satire is rooted in love for German culture and German self-irony. 
 
 `game.js` remains the sole owner of gameplay state, movement, collisions, missions, and interactions. It exposes a small read-only rendering bridge consumed by `world3d.js`. When Three.js is available, the root game projects that state into the WebGL world and loads a bounded set of local CC0 building meshes; if Three.js or the model loader fails, the existing canvas renderer and procedural buildings remain playable. The renderer fades only a building lying between the camera and player, keeping the character legible without flattening the whole city. The standalone `3d.html` route remains a renderer-focused diagnostic surface, not a second gameplay authority.
 
-## 2026-09-19 — Crossable regional fire boundary
+## 2026-09-19 — Crossable regional Brandmauer
 
-Berlin character dialogue is Denglisch. Deutschland character dialogue is German-only, regardless of the selected interface language. Browser-generated speech speaks the exact regional line and remains a first-class, user-toggleable presentation feature. The border is a salient, fully crossable wall of semi-transparent procedural flames rather than physical collision geometry. `game.js` owns deterministic semantic fire sources; Canvas and Three.js own their respective flame, ember, and smoke presentation.
+Berlin lies behind the **Brandmauer**, and Berlin character dialogue is Denglisch. Deutschland character dialogue is German-only, regardless of the selected interface language. Browser-generated speech speaks the exact regional line and remains a first-class, user-toggleable presentation feature. The Brandmauer is a salient, fully crossable wall of semi-transparent procedural flames rather than physical collision geometry. `game.js` owns deterministic semantic fire sources; Canvas and Three.js own their respective flame, ember, and smoke presentation. Player-facing copy must call it the Brandmauer, never the Flammengrenze.
 
 ## 2026-09-19 — Doubled world area and rule-enforcement density
 

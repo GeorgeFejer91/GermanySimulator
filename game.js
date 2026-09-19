@@ -158,20 +158,20 @@ const englishText=new Map([
  ["Wer wartet, hat durch sichtbares Warten seine Wartebereitschaft nachzuweisen.","Anyone waiting must demonstrate willingness to wait by visibly waiting."],
  ["Zebrastreifen sind sichtbar, amtlich und mit angemessener Dankbarkeit zu benutzen.","Zebra crossings are visible, official, and must be used with appropriate gratitude."],
  ["Unangekündigte Ortsveränderungen können als spontane Absicht gewertet werden.","Unannounced changes of location may be treated as spontaneous intent."],
- ["In Berlin wird gedenglischt. Jenseits der Sprachgrenze wird ausschließlich Deutsch gesprochen.","Berlin speaks Denglisch. Beyond the language border, characters speak German only."]
+ ["Berlin liegt hinter der Brandmauer und dort wird gedenglischt. Auf der Deutschlandseite wird ausschließlich Deutsch gesprochen.","Berlin is behind the Brandmauer and speaks Denglisch. On the Germany side, characters speak German only."]
 ]);
 const formEnglish={a38:["Application Permit A38","Incomplete completeness is considered incomplete."],wohnung:["Landlord confirmation confirming a dwelling","Confirm that the dwelling in which you dwell is, in fact, a dwelling."],ergaenzung:["Supplementary sheet for the supplemented application","This form only became necessary because of the previous form."],steuer:["Tax registration questionnaire","The following numbers exist primarily to generate further numbers."],versicherung:["Application for evidence of evidence","Health is private. This form is not."],aufenthalt:["Application for continuation of presence","For your appointment you require evidence that your appointment occurred."],citizenship:["Application for German citizenship","Purely a game procedure. Not real law or a real requirement."]};
 function localize(text){return state.lang==="en"?(englishText.get(text)||text):text}
 function pointSegmentDistance(px,py,x1,y1,x2,y2){const dx=x2-x1,dy=y2-y1,l2=dx*dx+dy*dy;if(!l2)return Math.hypot(px-x1,py-y1);const t=clamp(((px-x1)*dx+(py-y1)*dy)/l2,0,1),x=x1+t*dx,y=y1+t*dy;return Math.hypot(px-x,py-y)}
 function onPoliceGardenPath(x,y){return pointSegmentDistance(x,y,policePath.x1,policePath.y1,policePath.x2,policePath.y2)<=policePath.width*.5}
 function onPoliceGardenGrass(x,y){return inRect(x,y,policeGarden)&&!onPoliceGardenPath(x,y)}
-function lawFor(msg){if(msg.includes("RASEN")||msg.includes("GRÜN")||msg.includes("FUSSBODEN"))return "SPIEL-§ 17.3b";if(msg.includes("FAHRBAHN")||msg.includes("QUERUNG")||msg.includes("STREIFEN"))return "SPIEL-§ 8a";if(msg.includes("ZÜGIG")||msg.includes("DYNAMIK")||msg.includes("FORTBEWEGUNG"))return "SPIEL-§ 4 Abs. 2";if(msg.includes("SPRACHGRENZE")||msg.includes("GRENZ"))return "SPIEL-§ B/DE 1";if(msg.includes("POLIZEI")||msg.includes("ENTZIEHUNG"))return "SPIEL-§ 23 FluchtV";return "SPIEL-§ 404"}
+function lawFor(msg){if(msg.includes("RASEN")||msg.includes("GRÜN")||msg.includes("FUSSBODEN"))return "SPIEL-§ 17.3b";if(msg.includes("FAHRBAHN")||msg.includes("QUERUNG")||msg.includes("STREIFEN"))return "SPIEL-§ 8a";if(msg.includes("ZÜGIG")||msg.includes("DYNAMIK")||msg.includes("FORTBEWEGUNG"))return "SPIEL-§ 4 Abs. 2";if(msg.includes("BRANDMAUER")||msg.includes("GRENZ"))return "SPIEL-§ B/DE 1";if(msg.includes("POLIZEI")||msg.includes("ENTZIEHUNG"))return "SPIEL-§ 23 FluchtV";return "SPIEL-§ 404"}
 function regionOf(y){return y>BORDER_Y?"berlin":"germany"}
 function showBorder(region){
  state.region=region;
  const box=document.getElementById("border-alert"),title=document.getElementById("border-title"),copy=document.getElementById("border-copy");
- if(region==="germany"){title.textContent="DEUTSCHLAND";copy.textContent="AB HIER NUR NOCH DEUTSCH.";speak("Willkommen in Deutschland. Ab hier nur noch Deutsch.",{urgent:true})}
- else{title.textContent="BERLIN";copy.textContent="WELCOME BACK. DENG-LISCH IST WIEDER ZULÄSSIG.";speak("Welcome back in Berlin. Denglisch ist wieder erlaubt.")}
+ if(region==="germany"){title.textContent="DEUTSCHLAND";copy.textContent="BERLIN LIEGT HINTER DER BRANDMAUER. AB HIER NUR NOCH DEUTSCH.";speak("Berlin liegt hinter der Brandmauer. Ab hier nur noch Deutsch.",{urgent:true})}
+ else{title.textContent="BERLIN";copy.textContent="BERLIN LIEGT HINTER DER BRANDMAUER. DENG-LISCH IST WIEDER ZULÄSSIG.";speak("Berlin liegt hinter der Brandmauer. Welcome back. Denglisch ist wieder erlaubt.")}
  box.hidden=false;clearTimeout(showBorder.t);showBorder.t=setTimeout(()=>box.hidden=true,2100);
  uiTone(region==="germany"?330:440,.12,"square",.04);updateHud()
 }
@@ -208,8 +208,8 @@ const buildings=[
 {id:"laermamt",name:"AMT FÜR ZIMMERLAUTSTÄRKE",x:4750,y:2320,w:850,h:430,hgt:165,doorX:5175,doorY:2780,sign:"FLÜSTERN NUR NACH ANTRAG"},
 {id:"faxlager",name:"BEZIRKSFAXLAGER",x:6250,y:2320,w:850,h:430,hgt:175,doorX:6675,doorY:2780,sign:"PAPIERWEG BESCHLEUNIGT"},
 {id:"reinigung",name:"STADTREINIGUNG",x:7800,y:2320,w:920,h:430,hgt:170,doorX:8260,doorY:2780,sign:"TRENNUNG VOR REINIGUNG"},
-{id:"akw",kind:"nuclear",name:"AKW NULLLEISTUNG",x:4750,y:3370,w:850,h:420,hgt:155,doorX:5175,doorY:3820,sign:"STILLGELEGT · RÜCKBAU NUR MIT FORMULAR"},
-{id:"kohlewerk",kind:"coal",name:"KOHLEWERK DAUERBETRIEB",x:6250,y:3370,w:850,h:420,hgt:170,doorX:6675,doorY:3820,sign:"VOLL FUNKTIONSFÄHIG · AKTENZEICHEN CO₂"}];
+{id:"akw",kind:"nuclear",name:"AKW · GESCHLOSSEN",x:4750,y:3370,w:850,h:420,hgt:155,doorX:5175,doorY:3820,sign:"STILLGELEGT · ZUGANG VERSIEGELT"},
+{id:"kohlewerk",kind:"coal",name:"KOHLEKRAFTWERK · IN BETRIEB",x:6250,y:3370,w:850,h:420,hgt:170,doorX:6675,doorY:3820,sign:"OFFEN · 24/7 · RAUCHFANG AKTIV"}];
 const missions=[
 {title:"ANMELDUNG I",text:"Gehen Sie zum Bürgeramt. Beantragen Sie die Erlaubnis, einen Antrag zu stellen.",target:"buergeramt",form:"a38"},
 {title:"ANMELDUNG II",text:"Die Wohnungsgeberbestätigung fehlt natürlich. Holen Sie sie bei der Hausverwaltung.",target:"hausverwaltung",form:"wohnung"},
@@ -230,7 +230,7 @@ const rules=[
 ["§5.1","Wer wartet, hat durch sichtbares Warten seine Wartebereitschaft nachzuweisen."],
 ["QuerO §9","Zebrastreifen sind sichtbar, amtlich und mit angemessener Dankbarkeit zu benutzen."],
 ["SpontV §3","Unangekündigte Ortsveränderungen können als spontane Absicht gewertet werden."],
-["Bln/DE §1","In Berlin wird gedenglischt. Jenseits der Sprachgrenze wird ausschließlich Deutsch gesprochen."]];
+["Bln/DE §1","Berlin liegt hinter der Brandmauer und dort wird gedenglischt. Auf der Deutschlandseite wird ausschließlich Deutsch gesprochen."]];
 const npcLines=["Also das ist jetzt aber auch nicht so gedacht.","Kann man machen. Muss man aber wirklich nicht.","Ich möchte mich nicht beschweren, aber ich beschwere mich.","Dafür gibt es bestimmt ein Formular.","Früher war hier weniger Vorgang.","Sie stehen minimal im Weg.","Das ist bestimmt wegen der Baustelle. Die ist seit 2009 da.","Dafür bin ich nicht zuständig.","Ordnung muss schon sein.","Haben Sie dafür einen Termin?"];
 const borderPourerLines={
  berlin:["Das Rote Rathaus zu stürmen? This really muss ein Ende haben.","Mein Großvater was kein Nationalsozialist, sondern eine impressive Persönlichkeit und ein successful Bürgermeister."],
@@ -297,9 +297,12 @@ function toast(msg){const e=document.getElementById("toast");e.textContent=msg;e
 function ensureAudio(){if(!audio)audio=new (window.AudioContext||window.webkitAudioContext)();audio.resume();return audio}
 function uiTone(freq=440,dur=.08,type="square",gain=.04){const a=ensureAudio(),o=a.createOscillator(),g=a.createGain(),t=a.currentTime;o.type=type;o.frequency.value=freq;g.gain.setValueAtTime(gain,t);g.gain.exponentialRampToValueAtTime(.0001,t+dur);o.connect(g).connect(a.destination);o.start(t);o.stop(t+dur+.02)}
 function playSiren(){const a=ensureAudio(),t=a.currentTime;for(let i=0;i<6;i++){const o=a.createOscillator(),g=a.createGain(),st=t+i*.18;o.type="sawtooth";o.frequency.setValueAtTime(i%2?920:620,st);o.frequency.linearRampToValueAtTime(i%2?620:920,st+.17);g.gain.setValueAtTime(.0001,st);g.gain.linearRampToValueAtTime(.065,st+.015);g.gain.exponentialRampToValueAtTime(.0001,st+.18);o.connect(g).connect(a.destination);o.start(st);o.stop(st+.19)}}
-function speak(text,{urgent=false,interrupt=false,done}={}){if(!state.voiceOn||!("speechSynthesis" in window)){if(done)done();return}if(interrupt)speechSynthesis.cancel();const u=new SpeechSynthesisUtterance(text);const voices=speechSynthesis.getVoices();u.voice=voices.find(v=>/^de(-|_)/i.test(v.lang))||voices.find(v=>/german/i.test(v.name))||null;u.lang="de-DE";u.rate=urgent?.98:.9;u.pitch=urgent?.72:.88;u.volume=1;if(done){let finished=false;const finish=()=>{if(!finished){finished=true;done()}};u.onend=finish;u.onerror=finish}speechSynthesis.speak(u)}
+const SPEECH_GAP_MS=250,speechQueue=[];let speechActive=false,speechPauseTimer=null,speechGeneration=0;
+function playQueuedSpeech(){if(speechActive||!speechQueue.length||!state.voiceOn)return;speechActive=true;const {text,urgent,done}=speechQueue.shift(),generation=speechGeneration,u=new SpeechSynthesisUtterance(text),voices=speechSynthesis.getVoices();u.voice=voices.find(v=>/^de(-|_)/i.test(v.lang))||voices.find(v=>/german/i.test(v.name))||null;u.lang="de-DE";u.rate=urgent?.98:.9;u.pitch=urgent?.72:.88;u.volume=1;let finished=false;const finish=()=>{if(finished||generation!==speechGeneration)return;finished=true;if(done)done();speechPauseTimer=setTimeout(()=>{speechActive=false;playQueuedSpeech()},SPEECH_GAP_MS)};u.onend=finish;u.onerror=finish;speechSynthesis.speak(u)}
+function speak(text,{urgent=false,done}={}){if(!state.voiceOn||!("speechSynthesis" in window)){if(done)done();return}speechQueue.push({text,urgent,done});playQueuedSpeech()}
+function stopSpeech(){speechGeneration++;speechQueue.length=0;speechActive=false;clearTimeout(speechPauseTimer);speechSynthesis.cancel()}
 function violationAlert(msg,level){const alert=document.getElementById("violation-alert"),app=document.getElementById("app");document.getElementById("violation-law").textContent=lawFor(msg);document.getElementById("violation-title").textContent=state.lang==="en"?"RULE VIOLATION":"ORDNUNGSWIDRIGKEIT";document.getElementById("violation-text").textContent=state.lang==="en"?localize(msg):msg;document.getElementById("violation-stars").textContent="★".repeat(level)+"☆".repeat(Math.max(0,5-level));alert.hidden=false;app.classList.remove("enforcement");void app.offsetWidth;app.classList.add("enforcement");clearTimeout(violationAlert.t);violationAlert.t=setTimeout(()=>{alert.hidden=true;app.classList.remove("enforcement")},2200);playSiren()}
-function showWorldBark(speaker,msg,urgent=true){const box=document.getElementById("police-bark");document.getElementById("bark-speaker").textContent=speaker;document.getElementById("police-bark-text").textContent=msg;box.hidden=false;clearTimeout(showWorldBark.t);showWorldBark.t=setTimeout(()=>box.hidden=true,3200);speak(msg,{urgent,interrupt:urgent});uiTone(urgent?1280:880,.06,"square",.035)}
+function showWorldBark(speaker,msg,urgent=true){const box=document.getElementById("police-bark");document.getElementById("bark-speaker").textContent=speaker;document.getElementById("police-bark-text").textContent=msg;box.hidden=false;clearTimeout(showWorldBark.t);showWorldBark.t=setTimeout(()=>box.hidden=true,3200);speak(msg,{urgent});uiTone(urgent?1280:880,.06,"square",.035)}
 function policeBark(force=false){const now=performance.now();if(!force&&now-(policeBark.last||0)<2300)return;policeBark.last=now;showWorldBark("POLIZEI",pick(policeBarks[state.region]||policeBarks.germany),true)}
 function jaywalkerBark(){const speaker=state.region==="berlin"?"EMPÖRTE PASSANTEN · BERLIN":"EMPÖRTE PASSANTEN · DEUTSCHLAND";showWorldBark(speaker,pick(jaywalkerBarks[state.region]||jaywalkerBarks.germany),true)}
 function borderPourerDialogue(){return borderPourerLines[state.region]||borderPourerLines.germany}
@@ -521,12 +524,16 @@ function drawPowerPlant(b){
  const hall={...b,kind:null,sign:"",x:b.x+(b.kind==="nuclear"?390:70),y:b.y+155,w:b.kind==="nuclear"?390:520,h:210,hgt:b.kind==="nuclear"?82:105,doorX:b.doorX,doorY:b.y+375};
  if(b.kind==="nuclear"){
    drawPlantTower(b.x+125,b.y+135,225,76,43,62);drawPlantTower(b.x+285,b.y+155,205,68,39,55);drawBuilding(hall);
+   const tl=project(hall.x+45,hall.y+hall.h+7,hall.hgt*1.5-20),tr=project(hall.x+hall.w-45,hall.y+hall.h+7,hall.hgt*1.5-20),bl=project(hall.x+45,hall.y+hall.h+7,18),br=project(hall.x+hall.w-45,hall.y+hall.h+7,18);ctx.strokeStyle="#762f29";ctx.lineWidth=Math.max(4,13*tl.s);ctx.beginPath();ctx.moveTo(tl.x,tl.y);ctx.lineTo(br.x,br.y);ctx.moveTo(tr.x,tr.y);ctx.lineTo(bl.x,bl.y);ctx.stroke();
    const left=project(b.x+45,b.y+b.h+7,18),right=project(b.x+b.w-45,b.y+b.h+7,18);ctx.strokeStyle="#762f29";ctx.lineWidth=Math.max(3,9*left.s);ctx.setLineDash([14*left.s,10*left.s]);ctx.beginPath();ctx.moveTo(left.x,left.y);ctx.lineTo(right.x,right.y);ctx.stroke();ctx.setLineDash([]);
  }else{
    drawBuilding(hall);drawPlantTower(b.x+690,b.y+150,275,27,21,24,true);
    const conveyor=project(b.x+560,b.y+230,70),feed=project(b.x+690,b.y+170,145);ctx.strokeStyle="#45433f";ctx.lineWidth=Math.max(5,13*conveyor.s);ctx.beginPath();ctx.moveTo(conveyor.x,conveyor.y);ctx.lineTo(feed.x,feed.y);ctx.stroke();
+   const now=performance.now()/1400;for(let i=0;i<6;i++){const f=(now+i/6)%1,x=conveyor.x+(feed.x-conveyor.x)*f,y=conveyor.y+(feed.y-conveyor.y)*f,r=Math.max(2,6*conveyor.s);ctx.fillStyle="#232220";ctx.beginPath();ctx.arc(x,y,r,0,Math.PI*2);ctx.fill()}
+   for(let i=0;i<5;i++){const q=project(hall.x+65+i*86,hall.y+hall.h+7,74);ctx.fillStyle="rgba(238,177,72,.88)";ctx.fillRect(q.x-13*q.s,q.y-7*q.s,26*q.s,14*q.s)}
+   const beacon=project(hall.x+hall.w*.5,hall.y+hall.h*.5,hall.hgt*1.5+26);ctx.fillStyle=Math.sin(performance.now()/180)>0?"#f1b334":"#7b4d1a";ctx.beginPath();ctx.arc(beacon.x,beacon.y,Math.max(2,7*beacon.s),0,Math.PI*2);ctx.fill();
  }
- const sign=project(b.x+b.w*.5,b.y+b.h+15,68);ctx.fillStyle=b.kind==="nuclear"?"#762f29":"#343a31";ctx.fillRect(sign.x-150*sign.s,sign.y-22*sign.s,300*sign.s,28*sign.s);ctx.fillStyle="#f0eadc";ctx.font="900 "+Math.max(8,11*sign.s)+"px Arial";ctx.textAlign="center";ctx.fillText(b.sign,sign.x,sign.y-4*sign.s);ctx.textAlign="left";
+ const sign=project(b.x+b.w*.5,b.y+b.h+15,72);ctx.fillStyle=b.kind==="nuclear"?"#762f29":"#31553a";ctx.fillRect(sign.x-170*sign.s,sign.y-27*sign.s,340*sign.s,34*sign.s);ctx.fillStyle="#f0eadc";ctx.font="900 "+Math.max(9,13*sign.s)+"px Arial";ctx.textAlign="center";ctx.fillText(b.kind==="nuclear"?"GESCHLOSSEN · KEIN ZUTRITT":"IN BETRIEB · OFFEN",sign.x,sign.y-9*sign.s);ctx.textAlign="left";
 }
 function drawBuilding(b){
  if(b.kind){drawPowerPlant(b);return}
@@ -598,7 +605,7 @@ function drawBorderSign(){
    const p=project(gate.x+gate.w/2,BORDER_Y,104);if(p.x<-260||p.x>width+260||p.y<-210||p.y>height+210)continue;const s=p.s;
    ctx.save();ctx.translate(p.x,p.y);ctx.scale(s,s);
    ctx.fillStyle="#d8d0bd";ctx.strokeStyle="#171717";ctx.lineWidth=5;ctx.fillRect(-154,-92,308,88);ctx.strokeRect(-154,-92,308,88);
-   ctx.fillStyle="#762f29";ctx.fillRect(-146,-84,292,18);ctx.fillStyle="#f2ede2";ctx.textAlign="center";ctx.font="900 10px Arial";ctx.fillText("AMTLICHE SPRACHGRENZE",0,-71);
+   ctx.fillStyle="#762f29";ctx.fillRect(-146,-84,292,18);ctx.fillStyle="#f2ede2";ctx.textAlign="center";ctx.font="900 10px Arial";ctx.fillText("AMTLICHE BRANDMAUER",0,-71);
    ctx.fillStyle="#171717";ctx.font="900 22px Arial";ctx.fillText("DEUTSCHLAND  ⇄  BERLIN",0,-42);
    ctx.font="800 11px Arial";ctx.fillText("NUR DEUTSCH          DENG-LISCH",0,-18);
    ctx.strokeStyle="#252525";ctx.lineWidth=7;ctx.beginPath();ctx.moveTo(-132,-3);ctx.lineTo(-132,105);ctx.moveTo(132,-3);ctx.lineTo(132,105);ctx.stroke();ctx.restore()
@@ -737,10 +744,10 @@ function scheduleTheme(){
 }
 function startMusic(){if(!musicOn)return;if(!audio)audio=new (window.AudioContext||window.webkitAudioContext)();audio.resume();scheduleTheme()}
 document.getElementById("mute").onclick=()=>{musicOn=!musicOn;document.getElementById("mute").textContent=musicOn?"ERIKA 8-BIT ON":"ERIKA 8-BIT OFF";if(musicOn)startMusic();else clearTimeout(musicTimer)};
-function startGame(){startMusic();state.started=true;state.region=regionOf(player.y);document.getElementById("intro").classList.add("hidden");const lines=state.region==="berlin"?["Welcome in Berlin. Hier reden wir erstmal practical Denglisch.","Your mission ist simple: become German citizen in drei Behördentagen.","Aber careful: auf Schrebergarten grass kommt sofort die Polizei. No discussion.","The Flammengrenze is crossable. Dahinter wird nicht mehr gedenglischt."]:[ "Willkommen in Deutschland.","Ihr Ziel: Werden Sie innerhalb von drei völlig fiktiven Behördentagen deutscher Staatsbürger.","Dazu benötigen Sie vor allem Formulare. Sehr viele Formulare.","Wenn Sie den Rasen im Schrebergarten betreten, kommt die Polizei sofort."];openDialogue(state.region==="berlin"?"WELCOME TO BERLIN":"WILLKOMMEN IN DEUTSCHLAND",lines,"DE",()=>toast("ERSTER VORGANG · BÜRGERAMT"));updateHud()}
+function startGame(){startMusic();state.started=true;state.region=regionOf(player.y);document.getElementById("intro").classList.add("hidden");const lines=state.region==="berlin"?["Welcome in Berlin. Hier reden wir erstmal practical Denglisch.","Your mission ist simple: become German citizen in drei Behördentagen.","Aber careful: auf Schrebergarten grass kommt sofort die Polizei. No discussion.","Berlin liegt hinter der Brandmauer. You can cross sie freely."]:[ "Willkommen in Deutschland.","Ihr Ziel: Werden Sie innerhalb von drei völlig fiktiven Behördentagen deutscher Staatsbürger.","Dazu benötigen Sie vor allem Formulare. Sehr viele Formulare.","Wenn Sie den Rasen im Schrebergarten betreten, kommt die Polizei sofort.","Berlin liegt hinter der Brandmauer. Sie ist frei überquerbar."];openDialogue(state.region==="berlin"?"WELCOME TO BERLIN":"WILLKOMMEN IN DEUTSCHLAND",lines,"DE",()=>toast("ERSTER VORGANG · BÜRGERAMT"));updateHud()}
 document.querySelectorAll(".lang").forEach(btn=>btn.onclick=()=>{const choseEnglish=btn.dataset.lang==="en";state.lang="de";document.documentElement.lang="de";document.querySelectorAll(".lang").forEach(b=>{b.classList.toggle("active",b===btn);b.setAttribute("aria-pressed",String(b===btn))});if(choseEnglish){btn.textContent="Deutsch";btn.dataset.lang="de";const praise=document.getElementById("language-praise");praise.hidden=false;clearTimeout(praise.t);praise.t=setTimeout(()=>praise.hidden=true,2200)}updateHud()});
 document.getElementById("start").onclick=startGame;
-document.getElementById("voice-toggle").onclick=()=>{state.voiceOn=!state.voiceOn;document.getElementById("voice-toggle").textContent=state.voiceOn?"VOICE ON":"VOICE OFF";if(!state.voiceOn&&"speechSynthesis" in window){speechSynthesis.cancel();state.dialogueVoiceToken=(state.dialogueVoiceToken||0)+1;setDialogueVoiceBusy(false)}};
+document.getElementById("voice-toggle").onclick=()=>{state.voiceOn=!state.voiceOn;document.getElementById("voice-toggle").textContent=state.voiceOn?"VOICE ON":"VOICE OFF";if(!state.voiceOn&&"speechSynthesis" in window){stopSpeech();state.dialogueVoiceToken=(state.dialogueVoiceToken||0)+1;setDialogueVoiceBusy(false)}};
 function keydown(e){if(["ArrowUp","ArrowDown","ArrowLeft","ArrowRight"].includes(e.code))e.preventDefault();keys[e.code]=true;if(e.repeat)return;if(e.code==="KeyE")interact()}function keyup(e){keys[e.code]=false}addEventListener("keydown",keydown);addEventListener("keyup",keyup);
 document.querySelectorAll(".control-dock [data-key]").forEach(btn=>{const code=btn.dataset.key,down=e=>{e.preventDefault();keys[code]=true;if(code==="KeyE")interact()},up=e=>{e.preventDefault();keys[code]=false};btn.addEventListener("pointerdown",down);btn.addEventListener("pointerup",up);btn.addEventListener("pointercancel",up);btn.addEventListener("pointerleave",up)});
 

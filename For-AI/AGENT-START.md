@@ -30,7 +30,7 @@ Do not substitute the later flat 2D prototype or rebuild the game from a differe
 - Treat `assets/` as the single asset authority shared by the pseudo-3D game and the optional 3D mode.
 - Do not add servers, databases, frameworks, build systems, or asset services unless a demonstrated requirement cannot be met by the static game.
 - Route all character writing through the affectionate bureaucratic-satire and dialogue rules in [`GAMEPLAY.md`](./GAMEPLAY.md#satirical-voice-and-dialogue). NPCs should lead with alleged rule violations and procedural authority instead of plainly stating their underlying complaint, and their strange German sayings must follow the player’s current Berlin-Denglisch or German-only region.
-- Enforce that regional speech rule in both authored text and generated speech: Berlin characters speak Denglisch; after crossing the animated fire boundary into Deutschland, characters speak German only even when the interface is English. Preserve the browser-generated dialogue voice unless the user explicitly removes it.
+- Enforce that regional speech rule in both authored text and generated speech: Berlin lies behind the animated **Brandmauer** and its characters speak Denglisch; after crossing out into Deutschland, characters speak German only even when the interface is English. The in-world boundary is always called the Brandmauer, never the Flammengrenze. Preserve the browser-generated dialogue voice unless the user explicitly removes it.
 - Keep the satire clearly fictional. Do not present game procedures as real German law, policing, citizenship, or immigration guidance.
 
 ## Minimum validation
