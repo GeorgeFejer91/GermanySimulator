@@ -26,7 +26,7 @@ The game’s satire is rooted in love for German culture and German self-irony. 
 
 ## 2026-09-19 — Crossable regional Brandmauer
 
-Berlin lies behind the **Brandmauer**, and Berlin character dialogue is Denglisch. Deutschland character dialogue is German-only, regardless of the selected interface language. Browser-generated speech speaks the exact regional line and remains a first-class, user-toggleable presentation feature. The Brandmauer is a salient, fully crossable wall of semi-transparent procedural flames rather than physical collision geometry. `game.js` owns deterministic semantic fire sources; Canvas and Three.js own their respective flame, ember, and smoke presentation. Player-facing copy must call it the Brandmauer, never the Flammengrenze.
+Berlin lies behind the **Brandmauer**, and Berlin character dialogue is Denglisch. Deutschland character dialogue is German-only, regardless of the selected interface language. The fictional male Brandmauer patrolman is the exception: his two statements stay pure German everywhere and prefer a German masculine synthesized voice. Browser-generated speech speaks the exact authored line and remains a first-class, user-toggleable presentation feature. The Brandmauer is a salient, fully crossable wall of semi-transparent procedural flames rather than physical collision geometry. `game.js` owns deterministic semantic fire sources; Canvas and Three.js own their respective flame, ember, and smoke presentation. Player-facing copy must call it the Brandmauer, never the Flammengrenze.
 
 ## 2026-09-19 — Doubled world area and rule-enforcement density
 
@@ -38,7 +38,7 @@ Device-orientation movement, motion permission, calibration, and recenter contro
 
 ## 2026-09-19 — Adjacent power-plant landmark
 
-The southern Berlin-side energy district deliberately contrasts a closed nuclear power plant with a fully operating coal plant immediately beside it. `game.js` owns the shared landmark footprint and collision; the canvas fallback draws deterministic procedural silhouettes, while `world3d.js` progressively adds a bounded local CC0 GLB subset and keeps procedural fallbacks for every imported component. The nuclear plant stays silent and barriered; only the coal plant emits animated smoke. Asset provenance, AI-generation disclosure, and checksums live beside the models in `assets/models/power-plants/LICENSES.md`.
+The southern Berlin-side energy district deliberately contrasts a closed nuclear power plant with a fully operating coal plant immediately beside it. `game.js` owns the shared landmark footprint and collision; the canvas fallback draws deterministic procedural silhouettes, while `world3d.js` progressively adds a bounded local CC0 GLB subset and keeps procedural fallbacks for every imported component. The nuclear plant stays silent behind sealed red barriers and an unmistakable closure mark. The coal plant has an open gate, lit windows, a moving conveyor, and the district's only animated power-station smoke. A user-supplied satirical Merkel sprite follows a fixed safe loop around both sites and has a directional behind-the-character reaction. Asset provenance, AI-generation disclosure, and checksums live beside the models in `assets/models/power-plants/LICENSES.md`; the user-supplied sprite provenance note lives in `CREDITS.md`.
 
 ## 2026-09-20 — Scarce legal walking space and default NPC complaints
 

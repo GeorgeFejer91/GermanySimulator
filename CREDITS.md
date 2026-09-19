@@ -41,7 +41,7 @@ The stylized Friedrich Merz poster is a simple code-drawn satirical prop. It doe
 
 The animated border-pourer sprite sheet was supplied by the user for this integration and is labeled **FIKTIONALE SATIRE** in-game. Its external redistribution provenance and license should be confirmed before publishing outside the user's project.
 
-The roaming Angela Merkel NPC is a deliberately simplified cartoon labeled **SATIRE**. Her recurring line, "Wir schaffen das", is a documented historical quote from August 2015. Reference: https://www.bundesregierung.de/breg-de/aktuelles/-vor-allem-ein-satz-des-anpackens--353854
+The roaming Angela Merkel sprite sheet was supplied by the user for this integration and is labeled **SATIRE** in-game. Its external redistribution provenance and license should be confirmed before publishing outside the user's project. Her recurring line, "Wir schaffen das", is a documented historical quote from August 2015. Reference: https://www.bundesregierung.de/breg-de/aktuelles/-vor-allem-ein-satz-des-anpackens--353854
 
 The FAX 3000 PRO advertising claim ("2.75× faster") is entirely fictional game copy.
 
