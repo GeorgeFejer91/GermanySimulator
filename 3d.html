@@ -36,11 +36,11 @@ html,body,#app{margin:0;width:100%;height:100%;overflow:hidden;background:#77756
 </main>
 <script>
 (()=>{"use strict";
-const WORLD={w:9840,h:4240},player={x:5960,y:3900,facing:0},keys={},police=[];
+const CITY={w:9840,h:4240},RAIL_GUTTER=560,WORLD={w:CITY.w+RAIL_GUTTER*2,h:CITY.h+RAIL_GUTTER*2},offsetWorldPoint=item=>({...item,x:item.x+RAIL_GUTTER,y:item.y+RAIL_GUTTER}),player={x:5960+RAIL_GUTTER,y:3900+RAIL_GUTTER,facing:0},keys={},police=[];
 const roads=[
-{x:0,y:820,w:WORLD.w,h:260},{x:1050,y:0,w:260,h:WORLD.h},{x:0,y:2000,w:WORLD.w,h:240},
-{x:0,y:3000,w:WORLD.w,h:220},{x:2400,y:0,w:220,h:WORLD.h},{x:4400,y:0,w:180,h:WORLD.h},
-{x:5850,y:0,w:220,h:WORLD.h},{x:7350,y:0,w:220,h:WORLD.h},{x:9000,y:0,w:180,h:WORLD.h}
+{x:RAIL_GUTTER,y:820+RAIL_GUTTER,w:CITY.w,h:260},{x:1050+RAIL_GUTTER,y:RAIL_GUTTER,w:260,h:CITY.h},{x:RAIL_GUTTER,y:2000+RAIL_GUTTER,w:CITY.w,h:240},
+{x:RAIL_GUTTER,y:3000+RAIL_GUTTER,w:CITY.w,h:220},{x:2400+RAIL_GUTTER,y:RAIL_GUTTER,w:220,h:CITY.h},{x:4400+RAIL_GUTTER,y:RAIL_GUTTER,w:180,h:CITY.h},
+{x:5850+RAIL_GUTTER,y:RAIL_GUTTER,w:220,h:CITY.h},{x:7350+RAIL_GUTTER,y:RAIL_GUTTER,w:220,h:CITY.h},{x:9000+RAIL_GUTTER,y:RAIL_GUTTER,w:180,h:CITY.h}
 ];
 const crossings=[
 {x:1010,y:890,w:340,h:80},{x:1135,y:760,w:90,h:380},{x:2360,y:890,w:300,h:80},{x:2465,y:760,w:90,h:380},
@@ -48,7 +48,7 @@ const crossings=[
 {x:2360,y:2070,w:300,h:80},{x:2465,y:1940,w:90,h:360},{x:4360,y:2070,w:260,h:80},{x:4445,y:1940,w:90,h:360},
 {x:1010,y:3060,w:340,h:80},{x:1135,y:2940,w:90,h:340},{x:2360,y:3060,w:300,h:80},{x:2465,y:2940,w:90,h:340},
 {x:4360,y:3060,w:260,h:80},{x:4445,y:2940,w:90,h:340},{x:3590,y:2985,w:120,h:270}
-];
+].map(offsetWorldPoint);
 const buildings=[
 {id:"buergeramt",name:"BÜRGERAMT",x:150,y:220,w:350,h:250,hgt:115,doorX:325,doorY:500,sign:"TERMIN NUR MIT TERMIN"},
 {id:"hausverwaltung",name:"HAUSVERWALTUNG",x:590,y:210,w:330,h:255,hgt:95,doorX:755,doorY:495,sign:"WOHNUNGSGEBERBESTÄTIGUNG"},
@@ -67,16 +67,16 @@ const buildings=[
 {id:"baumarkt",name:"DIN-BAUMARKT",x:3700,y:2320,w:650,h:430,hgt:160,doorX:4025,doorY:2780,sign:"NORMGERECHTE SCHRAUBEN"},
 {id:"akw",kind:"nuclear",name:"AKW · GESCHLOSSEN",x:4750,y:3370,w:850,h:420,hgt:155,doorX:5175,doorY:3820,sign:"STILLGELEGT · ZUGANG VERSIEGELT"},
 {id:"kohlewerk",kind:"coal",name:"KOHLEKRAFTWERK · IN BETRIEB",x:6250,y:3370,w:850,h:420,hgt:170,doorX:6675,doorY:3820,sign:"OFFEN · 24/7 · RAUCHFANG AKTIV"}
-];
-const schreber={x:90,y:1210,w:560,h:570},policeGarden={x:2850,y:3250,w:1500,h:650},policePath={x1:4250,y1:3850,x2:3650,y2:3250,width:130};
-const BORDER_Y=1120,BORDER_BAND=72,crossingSigns=[],borderGates=roads.filter(r=>r.h===WORLD.h).map(r=>({x:r.x-55,w:r.w+110})),borderSegments=[];
+].map(building=>({...offsetWorldPoint(building),doorX:building.doorX+RAIL_GUTTER,doorY:building.doorY+RAIL_GUTTER}));
+const schreber=offsetWorldPoint({x:90,y:1210,w:560,h:570}),policeGarden=offsetWorldPoint({x:2850,y:3250,w:1500,h:650}),policePath={x1:4250+RAIL_GUTTER,y1:3850+RAIL_GUTTER,x2:3650+RAIL_GUTTER,y2:3250+RAIL_GUTTER,width:130};
+const BORDER_Y=1120+RAIL_GUTTER,BORDER_BAND=72,crossingSigns=[],borderGates=roads.filter(r=>r.h===CITY.h).map(r=>({x:r.x-55,w:r.w+110})),borderSegments=[];
 for(let cursor=0,i=0;i<=borderGates.length;i++){const gate=borderGates[i],end=gate?gate.x:WORLD.w;if(end-cursor>24)borderSegments.push({x:cursor,w:end-cursor});if(gate)cursor=gate.x+gate.w}
 const wrap=(n,l)=>((n%l)+l)%l;
 function railPoint(loop,progress){const s=wrap(progress,loop.length),arc=loop.radius*Math.PI/2,w=loop.straightW,h=loop.straightH,r=loop.radius,x0=loop.minX,y0=loop.minY,x1=loop.maxX,y1=loop.maxY,cx0=x0+r,cx1=x1-r,cy0=y0+r,cy1=y1-r;let d=s,a;if(d<w)return{x:cx0+d,y:y0,angle:0,progress:s};d-=w;if(d<arc){a=-Math.PI/2+d/r;return{x:cx1+Math.cos(a)*r,y:cy0+Math.sin(a)*r,angle:a+Math.PI/2,progress:s}}d-=arc;if(d<h)return{x:x1,y:cy0+d,angle:Math.PI/2,progress:s};d-=h;if(d<arc){a=d/r;return{x:cx1+Math.cos(a)*r,y:cy1+Math.sin(a)*r,angle:a+Math.PI/2,progress:s}}d-=arc;if(d<w)return{x:cx1-d,y:y1,angle:Math.PI,progress:s};d-=w;if(d<arc){a=Math.PI/2+d/r;return{x:cx0+Math.cos(a)*r,y:cy1+Math.sin(a)*r,angle:a+Math.PI/2,progress:s}}d-=arc;if(d<h)return{x:x0,y:cy1-d,angle:-Math.PI/2,progress:s};d-=h;a=Math.PI+d/r;return{x:cx0+Math.cos(a)*r,y:cy0+Math.sin(a)*r,angle:a+Math.PI/2,progress:s}}
 function railLoop(id,inset,radius,dir){const loop={id,minX:inset,minY:inset,maxX:WORLD.w-inset,maxY:WORLD.h-inset,radius,dir};loop.straightW=loop.maxX-loop.minX-radius*2;loop.straightH=loop.maxY-loop.minY-radius*2;loop.length=2*(loop.straightW+loop.straightH)+2*Math.PI*radius;const count=Math.ceil(loop.length/55);loop.samples=Array.from({length:count},(_,i)=>railPoint(loop,loop.length*i/count));return loop}
-const railLoops=[railLoop("aussenring",64,600,1),railLoop("innenring",184,480,-1)],railTracks=railLoops,carOffsets=[780,520,260,0,-260,-520,-780],TRAIN_MIN_GAP=1820,TRAIN_BOUNCE_PAUSE=.72;
+const railLoops=[railLoop("aussenring",72,720,1),railLoop("innenring",232,560,-1)],railTracks=railLoops,carOffsets=[780,520,260,0,-260,-520,-780],TRAIN_MIN_GAP=1820,TRAIN_BOUNCE_PAUSE=.82;
 function syncTrain(train){const loop=railLoops[train.loopIndex],orientation=train.orientation,p=railPoint(loop,train.progress);train.x=p.x;train.y=p.y;train.angle=p.angle+(orientation<0?Math.PI:0);train.cars.forEach((car,i)=>{const q=railPoint(loop,train.progress+orientation*carOffsets[i]);car.x=q.x;car.y=q.y;car.angle=q.angle+(orientation<0?Math.PI:0)})}
-const trains=[[0,.04,1,184,94],[0,.29,-1,244,132],[0,.54,1,166,76],[0,.79,-1,218,118],[1,.165,-1,232,105],[1,.415,1,172,84],[1,.665,-1,252,145],[1,.915,1,194,98]].map((seed,i)=>{const loop=railLoops[seed[0]],train={id:"diagnostic-train-"+i,loopIndex:seed[0],progress:loop.length*seed[1],dir:seed[2],orientation:seed[2],baseSpeed:seed[3],speed:seed[3],acceleration:seed[4],pause:0,bouncePause:0,reversePending:false,collisionCooldown:0,motion:0,chaos:2+i*.7,bump:0,queued:false,x:0,y:0,angle:0,cars:carOffsets.map(()=>({x:0,y:0,angle:0}))};syncTrain(train);return train});
+const trains=[[0,.03,1,188,94],[0,.19,-1,252,132],[0,.35,1,170,76],[0,.51,-1,226,118],[0,.67,1,278,148],[0,.83,-1,202,88],[1,.07,-1,238,105],[1,.23,1,176,84],[1,.39,-1,264,145],[1,.55,1,198,98],[1,.71,-1,286,156],[1,.87,1,214,112]].map((seed,i)=>{const loop=railLoops[seed[0]],train={id:"diagnostic-train-"+i,loopIndex:seed[0],progress:loop.length*seed[1],dir:seed[2],orientation:seed[2],baseSpeed:seed[3],speed:seed[3],acceleration:seed[4],pause:0,bouncePause:0,reversePending:false,collisionCooldown:0,motion:0,chaos:2+i*.7,bump:0,queued:false,x:0,y:0,angle:0,cars:carOffsets.map(()=>({x:0,y:0,angle:0}))};syncTrain(train);return train});
 function railSeparation(from,to,length){return wrap(to-from+length/2,length)-length/2}
 function updateDiagnosticTrains(dt){for(const train of trains){train.collisionCooldown=Math.max(0,train.collisionCooldown-dt);if(train.bouncePause>0){train.bouncePause=Math.max(0,train.bouncePause-dt);if(train.bouncePause===0&&train.reversePending){train.dir*=-1;train.reversePending=false;train.speed=0}}train.chaos-=dt;if(train.chaos<=0){if(Math.random()<.4)train.pause=1.8+Math.random()*4;train.chaos=3.6+Math.random()*7.4}train.pause=Math.max(0,train.pause-dt);const target=train.pause>0||train.bouncePause>0?0:train.baseSpeed,rate=target<train.speed?train.acceleration*3.2:train.acceleration;train.speed+=Math.max(-rate*dt,Math.min(rate*dt,target-train.speed));train.motion=train.dir*Math.max(0,train.speed*dt);train.queued=false}const contacts=[];for(let pass=0;pass<3;pass++)for(let i=0;i<trains.length;i++)for(let j=i+1;j<trains.length;j++){const a=trains[i],b=trains[j];if(a.loopIndex!==b.loopIndex)continue;const length=railLoops[a.loopIndex].length,distance=Math.abs(railSeparation(a.progress,b.progress,length)),nextDistance=Math.abs(railSeparation(a.progress+a.motion,b.progress+b.motion,length));if(nextDistance>=TRAIN_MIN_GAP||nextDistance>=distance)continue;const closure=distance-nextDistance,factor=closure>0?Math.max(0,Math.min(1,(distance-TRAIN_MIN_GAP)/closure)):0;a.motion*=factor;b.motion*=factor;a.queued=b.queued=true;if(!contacts.some(pair=>pair[0]===a&&pair[1]===b))contacts.push([a,b])}for(const [a,b] of contacts)if(!a.reversePending&&!b.reversePending&&a.collisionCooldown<=0&&b.collisionCooldown<=0)for(const train of [a,b]){train.speed=0;train.bouncePause=TRAIN_BOUNCE_PAUSE;train.reversePending=true;train.collisionCooldown=1.35;train.bump=1;train.queued=true}for(const train of trains){const loop=railLoops[train.loopIndex];train.progress=wrap(train.progress+train.motion,loop.length);train.bump=train.reversePending?Math.max(.45,train.bump-dt*.65):Math.max(0,train.bump-dt*3);syncTrain(train)}}
 const fireSources=[];for(let x=52,i=0;x<WORLD.w;x+=104,i++)fireSources.push({x,y:BORDER_Y,active:true,intensity:.82+(i%5)*.035,seed:(i*47%101)/101});
@@ -86,12 +86,12 @@ const faxBillboardPool=[
 ];
 const props=[
 {x:2860,y:760,asset:"faxbillboard",billboard:faxBillboardPool[0],id:"fax1"},{x:3500,y:1880,asset:"faxbillboard",billboard:faxBillboardPool[1],id:"fax2"},{x:3980,y:2890,asset:"faxbillboard",billboard:faxBillboardPool[0],id:"fax3"}
-];
+].map(offsetWorldPoint);
 const npcs=[
 {x:520,y:720,vx:16,vy:0,min:470,max:900},{x:1470,y:670,vx:-13,vy:0,min:1360,max:1760},
 {x:4620,y:3270,special:"merkel",route:[[4620,3270],[5750,3270],[6150,3270],[7200,3270],[7200,3880],[6120,3880],[5750,3880],[4620,3880]],target:1,facingX:1,facingY:0,animTime:0,spriteRow:2,spriteFrame:1,line:0}
-];
-const pickups=[{x:1980,y:870,type:"bratwurst",taken:false},{x:2110,y:880,type:"currywurst",taken:false},{x:4100,y:900,type:"brezel",taken:false},{x:3000,y:1910,type:"pfand",taken:false}];
+].map(n=>({...offsetWorldPoint(n),min:n.min==null?n.min:n.min+RAIL_GUTTER,max:n.max==null?n.max:n.max+RAIL_GUTTER,route:n.route?.map(([x,y])=>[x+RAIL_GUTTER,y+RAIL_GUTTER])}));
+const pickups=[{x:1980,y:870,type:"bratwurst",taken:false},{x:2110,y:880,type:"currywurst",taken:false},{x:4100,y:900,type:"brezel",taken:false},{x:3000,y:1910,type:"pfand",taken:false}].map(offsetWorldPoint);
 window.Germany3DBridge={WORLD,player,roads,crossings,crossingSigns,buildings,schreber,policeGarden,policePath,BORDER_Y,BORDER_BAND,borderGates,borderSegments,railLoops,railTracks,trains,fireSources,props,pickups,getNPCs:()=>npcs,getPolice:()=>police};
 const dist=(a,b,c,d)=>Math.hypot(a-c,b-d);
 const MERKEL_AUDIO_LINE="Wir schaffen das.",merkelRecording=new Audio("./assets/merkel-wir-schaffen-das.mp3");merkelRecording.preload="auto";
@@ -104,7 +104,7 @@ function interact(){const m=npcs.find(n=>n.special==="merkel"&&dist(player.x,pla
 function update(dt){let dx=(keys.ArrowRight?1:0)-(keys.ArrowLeft?1:0),dy=(keys.ArrowDown?1:0)-(keys.ArrowUp?1:0);const l=Math.hypot(dx,dy)||1;dx/=l;dy/=l;if(dx||dy)player.facing=Math.atan2(dx,dy);const nx=player.x+dx*190*dt,ny=player.y+dy*190*dt;if(!blocked(nx,player.y))player.x=nx;if(!blocked(player.x,ny))player.y=ny;updateDiagnosticTrains(dt);npcs.forEach(n=>{if(n.special==="merkel")updateMerkel(n,dt);else{if(n.vx){n.x+=n.vx*dt;if(n.x<n.min||n.x>n.max)n.vx*=-1}if(n.vy){n.y+=n.vy*dt;if(n.y<n.min||n.y>n.max)n.vy*=-1}}});document.getElementById("coords").textContent=Math.round(player.x)+" / "+Math.round(player.y);document.getElementById("district").textContent=player.x>2400?"DEUTSCHLAND OST":"BERLIN"}
 addEventListener("keydown",e=>{if(["ArrowUp","ArrowDown","ArrowLeft","ArrowRight"].includes(e.code))e.preventDefault();keys[e.code]=true;if(e.code==="KeyE")interact()});addEventListener("keyup",e=>keys[e.code]=false);
 document.querySelectorAll("[data-key]").forEach(b=>{const k=b.dataset.key;b.addEventListener("pointerdown",e=>{e.preventDefault();keys[k]=true;if(k==="KeyE")interact()});["pointerup","pointercancel","pointerleave"].forEach(t=>b.addEventListener(t,e=>{e.preventDefault();keys[k]=false}))});
-document.getElementById("home").onclick=()=>{player.x=5960;player.y=3900};
+document.getElementById("home").onclick=()=>{player.x=5960+RAIL_GUTTER;player.y=3900+RAIL_GUTTER};
 let last=performance.now();function loop(t){const dt=Math.min(.05,(t-last)/1000);last=t;update(dt);window.Germany3D?.sync();requestAnimationFrame(loop)}requestAnimationFrame(loop);
 })();
 </script>

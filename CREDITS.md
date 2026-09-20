@@ -10,14 +10,15 @@ Six building meshes are selected from Kenney's **City Kit Commercial 2.1** and r
 
 ## Perimeter trains and station announcements
 
-Eight fictional `AMT-BAHN` consists use compact end cars from Kenney's
+Twelve fictional `AMT-BAHN` consists use compact end cars from Kenney's
 **Train Kit 1.1** and five full-length German n-Wagen passenger coaches per
 consist from Open L-Gauge's **[6w] DB n-Wagen** by DennisAkaTECHNO. The Kenney
 models are CC0 1.0. The converted n-Wagen is CC BY-NC-SA 4.0 and is therefore
 limited to this noncommercial game; modifications and complete LDraw creator
 attribution are recorded beside the GLB. The game clones these local assets
-across two continuous rounded perimeter loops around the slightly expanded
-9,840 × 4,240 world; the Canvas renderer keeps a
+across two continuous rounded perimeter loops around the 10,960 × 5,360 world.
+A 560-unit playable gutter separates the original city footprint from every
+side of both tracks. The Canvas renderer keeps a
 procedural red-and-white fallback with the same long-car dimensions.
 
 - Source: https://kenney.nl/assets/train-kit
@@ -29,44 +30,18 @@ procedural red-and-white fallback with the same long-car dimensions.
 - n-Wagen modifications, LDraw attribution, and checksums:
   `assets/models/open-l-gauge-nwagen/LICENSES.md`
 
-No Deutsche Bahn or Märklin logo, branded texture, voice recording, or cloned
-announcer voice is bundled. Nearby trains instead use the browser's installed
-German speech voice with a deliberately slow, flat delivery to read an original
-fictional announcement whose exact text is displayed simultaneously. Delay text
-is selected from the nearest train's live unexplained pause, train-on-train
-bump and reversal, queue, or player-obstruction state, and obstruction delay
-grows with the number of stopped trains. No extra
-recording or voice model is needed. The
-operational phrase pool was checked against public explanations of common rail
-announcements; the game recombines those short generic terms with invented
-destinations, platforms, and delay lengths.
+No Deutsche Bahn or Märklin logo, branded texture, or cloned real announcer
+voice is bundled. The former generated announcement-text library has been
+replaced by five user-supplied station-hall MP3s. They rotate as proximity-bound,
+distance-scaled ambient audio around either track and intentionally display no
+transcript or announcement textbox. The voice toggle mutes them, and leaving the
+rail vicinity or entering a modal stops the active recording.
 
-- VCD explanation of announcement categories: https://www.vcd.org/artikel/was-bedeuten-die-durchsagen-und-stoermeldungen-der-bahn/
-- Travelbook explanation with Deutsche Bahn spokesperson context: https://www.travelbook.de/reisen/zugreisen/verspaetungsdurchsagen-deutsche-bahn
-- T-Online overview of common disruption wording: https://www.t-online.de/leben/reisen/reisetipps/id_92315944/bahnansagen-was-bedeuten-verzoegerungen-im-betriebsablauf-und-co-.html
-- Deutsche Bahn explanation of connection-wait decisions: https://www.bahn.de/service/fahrplaene/anschlusszug-wartet-nicht
-- Deutsche Bahn explanation of how disruption reports reach announcements, displays, and DB Navigator: https://www.bahn.de/service/fahrplaene/stoerungsinformationen
-
-The deliberately excessive excuse library is made of newly written satirical
-lines inspired by passenger reports in the following community threads. These
-posts are anecdotes, not verified Deutsche Bahn records. The game therefore
-labels every such line `COMMUNITY-ANEKDOTE · FIKTIONALISIERT` and does not quote
-the posts verbatim.
-
-- Reddit r/bahn, absurd or funny reported delay reasons: https://www.reddit.com/r/bahn/comments/1v5cavy/was_war_der_absurdeste_lustigste_grund_f%C3%BCr_eine/
-- Reddit r/bahn, older collection including reported children, donkeys, horses, and a pony at railway facilities: https://www.reddit.com/r/bahn/comments/1c4toi4/kurioselustige_gr%C3%BCnde_warum_euer_zug_ausgefallen/
-- Reddit r/deutschebahn, reported delay announcements: https://www.reddit.com/r/deutschebahn/comments/1rla2lw/was_sind_eure_besten_versp%C3%A4tungsaussagen/
-- Reddit r/deutschebahn, newer collection including chicks, implausible snow, split-consist timing, and a broken driver's seat: https://www.reddit.com/r/deutschebahn/comments/1vqolmd/lustigste_bahn_versp%C3%A4tungs_erkl%C3%A4rungen/
-- Reddit r/deutschebahn, collection including playing children, a double-redirected diversion, cattle, and a relief driver in the wrong train: https://www.reddit.com/r/deutschebahn/comments/1mswi3t/was_war_der_kurioseste_grund_f%C3%BCr_eine_versp%C3%A4tung/
-- Reddit r/drehscheibe, discussion of an automatic delay forecast with no remaining reason: https://www.reddit.com/r/drehscheibe/comments/1u5wdr9/schreib_das_system_das_automatisch_wenn_eine/
-- LEO forum, collected unusual rail announcements: https://dict.leo.org/forum/viewGeneraldiscussion.php?idForum=9&idThread=1226524&lang=de&lp=ende
-- Vielfliegertreff forum, reported zero-minute delay and wrong-track announcements: https://www.vielfliegertreff.de/forum/threads/deutsche-bahn-frust-aber-auf-amuesante-art-und-weise.5668/
-
-The `spielende Kinder im Gleis` rewrite preserves the safety closure as the
-serious part and satirizes only its invented administrative follow-up. The
-Federal Police warns that tracks are not play areas, that trains cannot evade
-obstacles, and that entering railway facilities is life-threatening:
-https://bundespolizei.de/aktuelles/meldungen/sicherheit-auf-bahnanlagen
+The recordings were supplied directly for in-game use. No external source URL,
+Deutsche-Bahn-authenticity claim, or redistribution license was provided. Their
+source paths, durations, byte sizes, and SHA-256 checksums are recorded in
+`assets/audio/trains/PROVENANCE.md`; separate permission is required before any
+reuse outside this project.
 
 When the player blocks a train, the game rotates short excerpts from the current
 Eisenbahn-Bau- und Betriebsordnung. The excerpts are gameplay hints, not legal

@@ -1,7 +1,8 @@
 (function(){
 "use strict";
-const canvas=document.getElementById("game"),ctx=canvas.getContext("2d"),keys=Object.create(null),WORLD={w:9840,h:4240};
-const player={x:1800,y:1760,r:16,energy:100,facing:0,vx:0,vy:0};
+const canvas=document.getElementById("game"),ctx=canvas.getContext("2d"),keys=Object.create(null),CITY={w:9840,h:4240},RAIL_GUTTER=560,WORLD={w:CITY.w+RAIL_GUTTER*2,h:CITY.h+RAIL_GUTTER*2};
+const offsetWorldPoint=item=>({...item,x:item.x+RAIL_GUTTER,y:item.y+RAIL_GUTTER});
+const player={x:1800+RAIL_GUTTER,y:1760+RAIL_GUTTER,r:16,energy:100,facing:0,vx:0,vy:0};
 const GERMANNESS_MAX=15,LAW_POWER_THRESHOLD=9;
 const WURST_TYPES=Object.freeze({
  nuernberger:{label:"NÜRNBERGER ROSTBRATWURST",short:"NÜRNBERGER",color:"#b9845f",pieces:3,image:"./assets/wurst/nuernberger.webp",photo:"SCHLURCHER · CC BY 4.0",history:"Nuremberg's city council recorded quality rules for its bratwurst around 1313. Since 2003, the genuine Nürnberger Rostbratwurst has held EU protected geographical status and must be produced within the city."},
@@ -17,8 +18,8 @@ const WURST_TYPES=Object.freeze({
 const WURST_IDS=Object.keys(WURST_TYPES);
 const state={started:false,modal:false,dialogue:false,wanted:0,offence:"AKTENLAGE: UNAUFFÄLLIG",wantedCooldown:0,policeContactCooldown:0,runTimer:0,runWarned:false,roadTimer:0,roadWarned:false,jayCooldown:0,grassTimer:0,grassWarned:false,gardenCooldown:0,evasionTimer:0,pettyAuditTimer:16,mission:0,forms:0,pfand:0,germanness:0,wurstBadges:new Set(),lawUnlocked:false,lawCooldown:0,ampelClock:0,ampelWait:0,ampelWaitLight:null,crossingRun:null,wasOnRoad:false,crossRewardAt:-9,quizTimer:9,quizApproach:null,quizBag:[],day:1,minutes:480,stadtbild:0,citizen:false,gameOver:false,rule:0,ruleTimer:0,lang:"de",voiceOn:true,region:"berlin",regionCooldown:0};
 let police=[],policeVehicles=[],policeHelicopters=[],particles=[],width=innerWidth,height=innerHeight,dpr=1,last=performance.now();
-const horizontalRoads=[{x:0,y:820,w:WORLD.w,h:260},{x:0,y:2000,w:WORLD.w,h:240},{x:0,y:3000,w:WORLD.w,h:220}];
-const verticalRoads=[{x:1050,y:0,w:260,h:WORLD.h},{x:2400,y:0,w:220,h:WORLD.h},{x:4400,y:0,w:180,h:WORLD.h},{x:5850,y:0,w:220,h:WORLD.h},{x:7350,y:0,w:220,h:WORLD.h},{x:9000,y:0,w:180,h:WORLD.h}];
+const horizontalRoads=[{x:RAIL_GUTTER,y:820+RAIL_GUTTER,w:CITY.w,h:260},{x:RAIL_GUTTER,y:2000+RAIL_GUTTER,w:CITY.w,h:240},{x:RAIL_GUTTER,y:3000+RAIL_GUTTER,w:CITY.w,h:220}];
+const verticalRoads=[{x:1050+RAIL_GUTTER,y:RAIL_GUTTER,w:260,h:CITY.h},{x:2400+RAIL_GUTTER,y:RAIL_GUTTER,w:220,h:CITY.h},{x:4400+RAIL_GUTTER,y:RAIL_GUTTER,w:180,h:CITY.h},{x:5850+RAIL_GUTTER,y:RAIL_GUTTER,w:220,h:CITY.h},{x:7350+RAIL_GUTTER,y:RAIL_GUTTER,w:220,h:CITY.h},{x:9000+RAIL_GUTTER,y:RAIL_GUTTER,w:180,h:CITY.h}];
 const roads=[...horizontalRoads,...verticalRoads];
 const SIDEWALK_WIDTH=72,WALKWAY_WIDTH=84,NPC_BLOCK_DISTANCE=38,NPC_COMPLAINT_DISTANCE=82,SPRITE_AUDIO_RADIUS=240,SPRITE_AUDIO_RELEASE_RADIUS=310;
 const OFFENSE_TIMING=Object.freeze({warn:.3,sprint:5,road:2.6,grass:2.6,stationGrass:2,roadCooldown:5.4,grassCooldown:6.5,stationGrassCooldown:5.5,evasion:3.8,auditMin:18,auditRange:12,policeContactCooldown:5.8});
@@ -28,7 +29,7 @@ for(const h of horizontalRoads)for(const v of verticalRoads){
  crossings.push({x:v.x-40,y:h.y+Math.round((h.h-80)/2),w:v.w+80,h:80});
  crossings.push({x:v.x+Math.round((v.w-90)/2),y:h.y-60,w:90,h:h.h+120});
 }
-crossings.push({x:3590,y:2985,w:120,h:270},{x:6550,y:2985,w:120,h:270},{x:8200,y:2985,w:120,h:270});
+crossings.push(...[{x:3590,y:2985,w:120,h:270},{x:6550,y:2985,w:120,h:270},{x:8200,y:2985,w:120,h:270}].map(offsetWorldPoint));
 const trafficLights=[];
 for(let i=1;i<horizontalRoads.length*verticalRoads.length*2;i+=2){
  const c=crossings[i];trafficLights.push({id:trafficLights.length,x:c.x-24,y:c.y+18,phaseOffset:(trafficLights.length%6)*1.15,green:false,rewardCycle:-1});
@@ -38,9 +39,9 @@ for(const c of crossings){
  if(c.w>c.h){crossingSigns.push({x:c.x+18,y:c.y-26,turn:0},{x:c.x+c.w-18,y:c.y+c.h+26,turn:2})}
  else{crossingSigns.push({x:c.x-28,y:c.y+22,turn:1},{x:c.x+c.w+28,y:c.y+c.h-22,turn:3})}
 }
-const schreber={x:90,y:1210,w:560,h:570};
-const policeGarden={x:2850,y:3250,w:1500,h:650};
-const BORDER_Y=1120;
+const schreber=offsetWorldPoint({x:90,y:1210,w:560,h:570});
+const policeGarden=offsetWorldPoint({x:2850,y:3250,w:1500,h:650});
+const BORDER_Y=1120+RAIL_GUTTER;
 const BORDER_BAND=72;
 const borderGates=verticalRoads.map(r=>({x:r.x-55,w:r.w+110}));
 const borderSegments=[];
@@ -67,11 +68,11 @@ function makeRailLoop(id,inset,radius,dir){
  loop.straightW=loop.maxX-loop.minX-radius*2;loop.straightH=loop.maxY-loop.minY-radius*2;loop.length=2*(loop.straightW+loop.straightH)+2*Math.PI*radius;
  const count=Math.ceil(loop.length/55);loop.samples=Array.from({length:count},(_,i)=>pointOnRailLoop(loop,loop.length*i/count));return loop
 }
-const railLoops=[makeRailLoop("aussenring",64,600,1),makeRailLoop("innenring",184,480,-1)],railTracks=railLoops;
-const TRAIN_CAR_OFFSETS=[780,520,260,0,-260,-520,-780],TRAIN_CAR_HALF_LENGTH=112,TRAIN_CAR_HALF_WIDTH=46,TRAIN_MIN_GAP=1820,TRAIN_PLAYER_STOP_GAP=910,TRAIN_PLAYER_LOOKAHEAD=2100,TRAIN_BOUNCE_PAUSE=.72;
+const railLoops=[makeRailLoop("aussenring",72,720,1),makeRailLoop("innenring",232,560,-1)],railTracks=railLoops;
+const TRAIN_CAR_OFFSETS=[780,520,260,0,-260,-520,-780],TRAIN_CAR_HALF_LENGTH=112,TRAIN_CAR_HALF_WIDTH=46,TRAIN_MIN_GAP=1820,TRAIN_PLAYER_STOP_GAP=910,TRAIN_PLAYER_LOOKAHEAD=2100,TRAIN_BOUNCE_PAUSE=.82;
 const trainSeeds=[
- [0,.04,1,184,94],[0,.29,-1,244,132],[0,.54,1,166,76],[0,.79,-1,218,118],
- [1,.165,-1,232,105],[1,.415,1,172,84],[1,.665,-1,252,145],[1,.915,1,194,98]
+ [0,.03,1,188,94],[0,.19,-1,252,132],[0,.35,1,170,76],[0,.51,-1,226,118],[0,.67,1,278,148],[0,.83,-1,202,88],
+ [1,.07,-1,238,105],[1,.23,1,176,84],[1,.39,-1,264,145],[1,.55,1,198,98],[1,.71,-1,286,156],[1,.87,1,214,112]
 ];
 function syncTrainTransform(train){
  const loop=railLoops[train.loopIndex],orientation=train.orientation,center=pointOnRailLoop(loop,train.progress);train.x=center.x;train.y=center.y;train.angle=center.angle+(orientation<0?Math.PI:0);
@@ -82,7 +83,7 @@ const trains=trainSeeds.map((seed,i)=>{
 });
 const fireSources=[];
 for(let x=36,i=0;x<WORLD.w;x+=72,i++)fireSources.push({x,y:BORDER_Y,active:true,intensity:.82+(i%5)*.035,seed:(i*47%101)/101});
-const policePath={x1:4250,y1:3850,x2:3650,y2:3250,width:130};
+const policePath={x1:4250+RAIL_GUTTER,y1:3850+RAIL_GUTTER,x2:3650+RAIL_GUTTER,y2:3250+RAIL_GUTTER,width:130};
 const districtLots=[
  {x:2660,y:80,w:1650,h:620,fill:"#85827b"},
  {x:2660,y:1180,w:1650,h:650,fill:"#88857e"},
@@ -91,7 +92,7 @@ const districtLots=[
  {x:4660,y:1180,w:1090,h:650,fill:"#88847c"},{x:6150,y:1180,w:1100,h:650,fill:"#817f79"},{x:7650,y:1180,w:1250,h:650,fill:"#89867f"},
  {x:4660,y:2280,w:1090,h:520,fill:"#85827b"},{x:6150,y:2280,w:1100,h:520,fill:"#89857d"},{x:7650,y:2280,w:1250,h:520,fill:"#817f78"},
  {x:4660,y:3260,w:1090,h:660,fill:"#79766f"},{x:6150,y:3260,w:1100,h:660,fill:"#74726c"}
-];
+].map(offsetWorldPoint);
 const districtLabels=[
  {x:3000,y:120,text:"FAXVIERTEL"},
  {x:3000,y:1220,text:"SPARKASSEN- UND POSTBEZIRK"},
@@ -101,7 +102,7 @@ const districtLabels=[
  {x:4820,y:1220,text:"MIETPRÜFVIERTEL"},{x:6320,y:1220,text:"STRASSENQUERUNGSAMT"},{x:7820,y:1220,text:"FUNDBÜRO-ZONE"},
  {x:4820,y:2320,text:"LÄRMSCHUTZBEZIRK"},{x:6320,y:2320,text:"BEZIRKSFAXLAGER"},{x:7820,y:2320,text:"STADTREINIGUNGSKORRIDOR"},
  {x:4820,y:3290,text:"ENERGIEWENDE-SONDERBEZIRK"},{x:6320,y:3290,text:"KOHLE-BEREITSCHAFTSZONE"}
-];
+].map(offsetWorldPoint);
 
 const desktopBillboards=matchMedia("(min-width: 700px)"),faxBillboardPool=[
  {asset:"faxkraft",src:"./assets/billboards/fax/die-neue-faxkraft.webp"},
@@ -138,7 +139,7 @@ const props=[
  {x:7180,y:2890,asset:"baustelle",w:105,h:62,id:"baustelle-ost",label:"DAUERBAUSTELLE"},
  {x:8750,y:1880,asset:"pfandautomat",w:54,h:70,id:"pfandautomat-ost",label:"PFANDAUTOMAT"},
  {x:7600,y:3500,asset:"gartenzwerg",w:44,h:66},{x:8750,y:3420,asset:"gartenzwerg",w:44,h:66},{x:9400,y:3650,asset:"gartenzwerg",w:44,h:66}
-];
+].map(offsetWorldPoint);
 const assetSources={
  currywurst:"./assets/currywurst.svg",bratwurst:"./assets/bratwurst.svg",brezel:"./assets/brezel.svg",
  pfand:"./assets/pfandflasche.svg",gartenzwerg:"./assets/gartenzwerg.svg",ordner:"./assets/ordner.svg",
@@ -182,71 +183,18 @@ const policeBarks={
  berlin:["HALT! Stop mal immediately!","Nicht auf ze grass, bitte!","Ausweis, ID, irgendwas Officiales!","Please leave den Grünbereich sofort!","Das ist so wirklich not vorgesehen!","Bleiben Sie hinter ze line!"],
  germany:["HALT! STEHENBLEIBEN!","NICHT ÜBER DEN RASEN!","AUSWEIS BITTE!","SIE VERLASSEN SOFORT DEN GRÜNBEREICH!","DAS IST SO NICHT VORGESEHEN!","BLEIBEN SIE HINTER DER LINIE!"]
 };
-const trainAnnouncements=[
- "Grund dafür sind Verzögerungen im Betriebsablauf.",
- "Grund dafür ist die verspätete Bereitstellung des Zuges.",
- "Grund dafür ist eine technische Störung am Zug.",
- "Grund dafür ist eine Reparatur an einem Signal.",
- "Grund dafür ist eine Reparatur an einer Weiche.",
- "Grund dafür ist eine Störung an der Oberleitung.",
- "Grund dafür ist die Verspätung aus vorheriger Fahrt.",
- "Grund dafür ist das Warten auf einen vorausfahrenden Zug.",
- "Grund dafür sind Bauarbeiten auf der Strecke.",
- "Grund dafür ist ein kurzfristiger Personalausfall.",
- "Grund dafür ist eine kurzfristige Änderung im Betriebsablauf.",
- "Der Zug verkehrt heute in umgekehrter Wagenreihung. Das hilft Ihnen zeitlich nicht, ist aber immerhin eine Information."
-];
-const communityTrainExcuses=[
- "Aufgrund spielender Kinder im Gleis bleibt die Strecke gesperrt. Sicherheit geht vor; die voraussichtliche Dauer wird nach Eingang des Räumungsabschlussformulars bekannt gegeben.",
- "Die Weiterfahrt verzögert sich, weil eine Kuh links neben dem Zug den vorgesehenen Fahrweg derzeit persönlich begutachtet.",
- "Die Weiterfahrt verzögert sich, weil sich der Lokführer nach einer Toilettenpause ausgesperrt hat. Der Schlüssel reist im Gegenzug an.",
- "Die Fahrt endet vorzeitig, weil das Tanken vergessen wurde. Am jetzigen Bahnhof kann selbstverständlich nicht getankt werden.",
- "Die Abfahrt verschiebt sich, weil eine Wimper im Auge des Lokführers die sichere Weiterfahrt verwaltungsseitig nicht freigibt.",
- "Der neue Lokführer reist mit der Bahn an. Sein Zug hat Verspätung. Damit ist die Ursache nun vollständig kreisförmig dokumentiert.",
- "Ein Koffer war im Gleis. Der Koffer sitzt inzwischen wieder im Zug; die Verspätung bleibt aus Gründen der Vorgangskontinuität bestehen.",
- "Grund sind sonstige qualitative Mängel. Welche Qualität gemeint ist, unterliegt dem Betriebsgeheimnis.",
- "Alle Beteiligten wussten vom Halt in Fulda, mit Ausnahme der für den Halt zuständigen Person.",
- "Die Klimaanlage im vorderen Führerstand ist ausgefallen. Der Zug wird deshalb gewendet und rückwärts vorwärts weiterbetrieben.",
- "Im Tunnel werden Graffiti gesprüht. Die Polizei räumt den Tunnel; das Ergebnis bleibt wegen Dunkelheit leider unsichtbar.",
- "Wir warten auf ein verspätetes Schiff. Weitere Rückfragen zur Spurweite richten Sie bitte schriftlich an die Anschlusskoordination.",
- "Infolge von Störungen im Betriebsablauf beträgt die Verspätung derzeit null Minuten. Wir bitten auch hierfür vorsorglich um Entschuldigung.",
- "Auf dem Nebengleis sehen Sie den Grund für unsere Verspätung. Der dortige Zug sieht vermutlich wiederum uns.",
- "Die Leitstelle war vom täglichen Erscheinen dieses Zuges überrascht und musste zunächst einige Wagen zusammensuchen.",
- "Wir haben eine Weiche überfahren, die wir nicht überfahren wollten, und befinden uns zu zwei Dritteln im falschen Vorgang.",
- "Die Prognose hat eine Verspätung berechnet, die ein Mensch auf null setzte. Nun fehlt nur noch der Grund für den nicht vorhandenen Grund.",
- "Im Gleisfeld stehen ein Esel und am Bahnhof Pferde. Der tierische Anschluss ist gesichert; Ihrer leider nicht.",
- "Bitte steigen Sie nicht mit einem Pony in die Regionalbahn ein. Für mitgeführte Huftiere ist vor Fahrtantritt das Formular HUF 4b zu entwerten.",
- "Tiere im Gleis erwiesen sich als eine Gruppe Küken. Die Räumung erfolgt in Schrittgeschwindigkeit und ohne Anspruch auf einen früheren Anschluss.",
- "Als Ursache wurden Schnee und Eis gemeldet. Bei fünfunddreißig Grad Außentemperatur wird die Meldung derzeit klimatisch nachbearbeitet.",
- "Der vordere Zugteil hat fünfzehn Minuten, der hintere fünfundzwanzig. Der Zug bleibt trotzdem ein Zug; die Verspätung reist abschnittsweise.",
- "Der Sitz des Lokführers ist defekt. Wir fahren deshalb zurück, wenden den gesamten Zug und setzen die Vorwärtsfahrt anschließend in Gegenrichtung fort.",
- "Dem Lokführer wurde der Fahrplan nach Hamburg zugeteilt, obwohl der Zug nach Frankfurt soll. Das Ziel wird nach Abschluss der Unterlagenberichtigung festgelegt.",
- "Vor dem Zug kalbt derzeit eine Kuh. Der Nachwuchs wird fahrplanmäßig nicht erwartet, erhält aber bis auf Weiteres Vorrang vor sämtlichen Anschlüssen.",
- "Die verfügbare Gleiskapazität ist erschöpft. Das zuständige Gleis befindet sich weiterhin am vorgesehenen Ort, kann aus Kapazitätsgründen jedoch momentan nicht verwendet werden.",
- "Die planmäßige Umleitung wurde ungeplant erneut umgeleitet. Der Zug befindet sich damit korrekt auf der Ersatzstrecke der Ersatzstrecke; die Ankunftszeit wird nach Ermittlung des Zielortes nachgereicht.",
- "Die Ablösung des Triebfahrzeugführers sitzt versehentlich im falschen Zug. Dieser fährt immerhin ebenfalls in die richtige Himmelsrichtung, weshalb die Übergabe nur auf unbestimmte Zeit verschoben wird.",
- "Nach einer Wildschweinberührung wird der Fahrzeugzustand geprüft. Gesucht werden vorsorglich ein Fahrgast mit Kabelbindern und ein zweiter Fahrgast mit dem Formular zur privaten Bereitstellung von Kabelbindern.",
- "Wegen einer vorausgegangenen Überfüllung wurden Reisende aus dem kürzeren Zug gebeten. Das dadurch erhöhte Fahrgastaufkommen am Bahnsteig verlängert nun den Einstieg in den weiterhin verkürzten Zug.",
- "Die Fahrt fällt zur Stabilisierung des Betriebsablaufs aus. Der Betriebsablauf gilt als stabilisiert, sobald niemand mehr versucht, mit diesem Zug zu fahren.",
- "Der Halt ist während der Fahrt entfallen. Reisende, deren Bahnhof soeben mit hoher Geschwindigkeit passiert wurde, erreichen ihn nach einer betrieblich optimierten Rückreise.",
- "Der Fahrdienst meldet eingeschränkte Verfügbarkeit der Gleise. Alle vorhandenen Gleise sind sichtbar, aber keines fühlt sich für diesen Zug zuständig.",
- "Die Ursache wechselte während der Standzeit mehrfach zwischen Technik, Personal und Betriebsablauf. Maßgeblich ist jeweils die zuletzt automatisch fortgeschriebene Begründung; ältere Ursachen behalten ihre Verspätung."
-];
-const playerTrainExcuse="Wegen einer Person im Gleis ist der Fahrweg gesperrt. Der erste Zug steht, die nachfolgenden Züge stehen hinter dem ersten Zug, und die rechnerische Verspätung wird nun für jeden Wagen einzeln fortgeschrieben. Bitte verlassen Sie den Gleisbereich; der Räumungsabschluss kann erst nach tatsächlicher Räumung des Räumungsbereichs bestätigt werden.";
-const queuedTrainExcuse="Wegen eines vorausfahrenden Zuges, der seinerseits auf einen vorausfahrenden Zug wartet, verzögert sich die Weiterfahrt. Die Zugfolge bleibt vollständig erhalten, lediglich die Fortbewegung wurde bis auf Weiteres aus dem Betriebsablauf entfernt.";
-const collisionTrainExcuse="Wegen einer kurzfristigen Unstimmigkeit über die vorgeschriebene Fahrtrichtung haben zwei Züge denselben Gleisabschnitt gleichzeitig beansprucht. Nach vollständigem Stillstand setzen beide Verbände ihre Fahrt in der jeweils anderen Richtung fort. Die dadurch entstehende Verspätung gilt als betriebliche Neuorientierung.";
-const trainAnnouncementClosings=[
- "Die aktuelle Prognose wird automatisch fortgeschrieben und ist weder als Ankunftsversprechen noch als Hinweis auf eine noch existierende Anschlussmöglichkeit zu verstehen.",
- "Bitte beachten Sie, dass eine Änderung der Wagenreihung die Verspätung nicht beseitigt, sondern lediglich in umgekehrter Reihenfolge am Ziel eintreffen lässt.",
- "Weitere Informationen erhalten Sie, sobald dieselbe Information in einem anderen System mit einem abweichenden Zeitstempel vorliegt.",
- "Wir bitten um Geduld und darum, den Vorgang bis zur Wiederaufnahme des Vorgangs nicht durch eigenständige Pünktlichkeit zu stören."
+const TRAIN_ANNOUNCEMENT_AUDIO=[
+ "./assets/audio/trains/ice-0815-buxtehude-bahnhofshalle-subtle.mp3",
+ "./assets/audio/trains/ice-0815-marktversagen-bahnhofshalle-subtle.mp3",
+ "./assets/audio/trains/ice-0815-stalingrad-bahnhofshalle-subtle.mp3",
+ "./assets/audio/trains/ice-ardorf-hilter-bahnhofshalle-subtle.mp3",
+ "./assets/audio/trains/ice-96-oberkaka-bahnhofshalle-subtle.mp3"
 ];
 const railLawQuotes=[
  "EBO § 62 Absatz 2: „Der Aufenthalt innerhalb der Gleise ist nicht gestattet.“ Spielhinweis: Bitte räumen Sie den Fahrweg.",
  "EBO § 63 Absatz 2: „Von den Gleisen ist ein genügender Abstand zu halten.“ Spielhinweis: Ihr persönlicher Abstand beträgt derzeit Zugstau.",
  "EBO § 64 untersagt, „Fahrthindernisse zu bereiten oder andere betriebsstörende oder betriebsgefährdende Handlungen vorzunehmen.“ Dies ist ein Spielhinweis, keine Rechtsberatung."
 ];
-const trainDestinations=["Amtshausen","Formulararchiv","Zuständigkeitsprüfung","Berlin Hauptsache","Endstation Geduld","Bad Anschluss"],trainDelays=[5,8,12,17,23,35,47,63,90];
 const npcDenglisch=["Also this ist jetzt aber auch nicht so gedacht.","Kann man machen. Muss man aber really nicht.","Ich möchte mich nicht complainen, aber ich complain jetzt.","Dafür gibt es bestimmt ein Formular, probably online but not really.","Früher war hier weniger process.","Sie stehen minimal im way.","Das ist bestimmt wegen der Baustelle. Die ist since 2009 da.","Dafür bin ich not responsible.","Ordnung muss schon sein, you know.","Haben Sie dafür einen appointment?"];
 const jaywalkerBarks={
  berlin:["Think of the rules! Der Zebrastreifen ist literally right there!","Think of the Kinder! So überquert man keine Straße!","Schande! You ignored die amtlich weißen stripes!","Hast du Tomaten auf den Augen?! Use the official crossing!","Unfassbar! Erst schauen, then formgerecht queren!","Verkehrsrowdy! This crossing was not approved by anybody!"],
@@ -542,7 +490,8 @@ const buildings=[
 {id:"faxlager",name:"BEZIRKSFAXLAGER",x:6250,y:2320,w:850,h:430,hgt:175,doorX:6675,doorY:2780,sign:"PAPIERWEG BESCHLEUNIGT"},
 {id:"reinigung",name:"STADTREINIGUNG",x:7800,y:2320,w:920,h:430,hgt:170,doorX:8260,doorY:2780,sign:"TRENNUNG VOR REINIGUNG"},
 {id:"akw",kind:"nuclear",name:"AKW · GESCHLOSSEN",x:4750,y:3370,w:850,h:420,hgt:155,doorX:5175,doorY:3820,sign:"STILLGELEGT · ZUGANG VERSIEGELT"},
-{id:"kohlewerk",kind:"coal",name:"KOHLEKRAFTWERK · IN BETRIEB",x:6250,y:3370,w:850,h:420,hgt:170,doorX:6675,doorY:3820,sign:"OFFEN · 24/7 · RAUCHFANG AKTIV"}];
+{id:"kohlewerk",kind:"coal",name:"KOHLEKRAFTWERK · IN BETRIEB",x:6250,y:3370,w:850,h:420,hgt:170,doorX:6675,doorY:3820,sign:"OFFEN · 24/7 · RAUCHFANG AKTIV"}
+].map(building=>({...offsetWorldPoint(building),doorX:building.doorX+RAIL_GUTTER,doorY:building.doorY+RAIL_GUTTER}));
 const grassAreas=[],walkways=[];
 for(const b of buildings){
  const road=horizontalRoads.find(r=>r.y>b.y+b.h),top=b.y+b.h+6,bottom=road?.y-SIDEWALK_WIDTH;
@@ -602,7 +551,7 @@ const bayernWaypoints=Object.freeze([
  {x:5814,y:784,links:[2,4,9]},{x:7314,y:784,links:[3,5,10]},{x:8964,y:784,links:[4,11]},
  {x:1014,y:360,links:[0]},{x:2364,y:420,links:[1]},{x:4364,y:340,links:[2]},
  {x:5814,y:460,links:[3]},{x:7314,y:380,links:[4]},{x:8964,y:440,links:[5]}
-]);
+].map(offsetWorldPoint));
 const politicianLines=Object.freeze({merz:merzLines,merkel:merkelLines});
 const npcs=[
  {x:520,y:720,name:"HERR KLEIN",line:0,vx:16,vy:0,min:470,max:900},
@@ -627,7 +576,7 @@ const npcs=[
  {x:5200,y:2860,name:"FRAU RUHE",line:5,vx:12,vy:0,min:4750,max:5600},
  {x:6750,y:2860,name:"HERR FAXROLLE",line:4,vx:-13,vy:0,min:6250,max:7100},
  {x:8300,y:2860,name:"FRAU TRENNUNG",line:6,vx:12,vy:0,min:7800,max:8700}
- ];
+ ].map(n=>n.special==="borderPourer"?n:{...offsetWorldPoint(n),min:n.min==null?n.min:n.min+RAIL_GUTTER,max:n.max==null?n.max:n.max+RAIL_GUTTER,route:n.route?.map(([x,y])=>[x+RAIL_GUTTER,y+RAIL_GUTTER])});
 const crowdNames=["FRAU KRÜGER","HERR WEBER","FRAU WAGNER","HERR BECKER","FRAU HOFFMANN","HERR SCHÄFER","FRAU KOCH","HERR BAUER","FRAU RICHTER","HERR KLEINERT","FRAU WOLF","HERR SCHRÖDER"];
 const sidewalkSegments=[];
 for(let start=40,i=0;i<=verticalRoads.length;i++){
@@ -643,7 +592,7 @@ for(const road of horizontalRoads){
   npcs.push({x,y:y+(i-1)*15,name:crowdNames[j%crowdNames.length],line:(j*7+2)%npcLines.length,vx:(j%2?1:-1)*(13+j%5),vy:0,min:segment.min,max:segment.max,crowd:true,quizzer:j%3===0,pause:0,barkAt:0});
  }
 }
-const wurstSpots=[[1810,1830],[2380,1155],[3010,745],[4025,750],[5175,750],[6675,750],[8260,750],[5175,1880],[8260,2860]];
+const wurstSpots=[[1810,1830],[2380,1155],[3010,745],[4025,750],[5175,750],[6675,750],[8260,750],[5175,1880],[8260,2860]].map(([x,y])=>[x+RAIL_GUTTER,y+RAIL_GUTTER]);
 const wurstPickups=WURST_IDS.map((wurstType,i)=>({x:wurstSpots[i][0],y:wurstSpots[i][1],type:"wurst",wurstType,label:WURST_TYPES[wurstType].short,taken:false,value:14,variant:i,...WURST_TYPES[wurstType]}));
 const pickups=[
  {x:1980,y:870,type:"bratwurst",label:"BRATWURST",taken:false,value:35},
@@ -665,8 +614,8 @@ const pickups=[
  {x:5050,y:2890,type:"pfand",label:"PFAND",taken:false},{x:6800,y:2890,type:"brezel",label:"BREZEL",taken:false,value:22},{x:8500,y:2890,type:"pfand",label:"PFAND",taken:false},
  {x:5850,y:3500,type:"pfand",label:"PFAND",taken:false},{x:7350,y:3500,type:"currywurst",label:"CURRYWURST",taken:false,value:50},{x:9100,y:3500,type:"pfand",label:"PFAND",taken:false},
  ...wurstPickups
-];
-const normObjects=[{x:2210,y:1190,type:"bin",fixed:false,label:"MÜLLTONNE 4,6° SCHIEF"},{x:1650,y:650,type:"chairs",fixed:false,label:"STÜHLE NICHT FLUCHTGERECHT"},{x:570,y:1140,type:"hedge",fixed:false,label:"HECKE 3 CM ZU INDIVIDUELL"}];
+].map(item=>item.type==="wurst"?item:offsetWorldPoint(item));
+const normObjects=[{x:2210,y:1190,type:"bin",fixed:false,label:"MÜLLTONNE 4,6° SCHIEF"},{x:1650,y:650,type:"chairs",fixed:false,label:"STÜHLE NICHT FLUCHTGERECHT"},{x:570,y:1140,type:"hedge",fixed:false,label:"HECKE 3 CM ZU INDIVIDUELL"}].map(offsetWorldPoint);
 window.Germany3DBridge={WORLD,player,roads,crossings,crossingSigns,trafficLights,buildings,grassAreas,walkways,SIDEWALK_WIDTH,schreber,policeGarden,policePath,BORDER_Y,BORDER_BAND,borderGates,borderSegments,railLoops,railTracks,trains,fireSources,props,pickups,getNPCs:()=>npcs,getPolice:()=>police,getPoliceVehicles:()=>policeVehicles,getPoliceHelicopters:()=>policeHelicopters,getNpcSpriteCanvas:key=>npcSpriteAtlases[key]?.canvas||null,npcSpriteGrids:Object.fromEntries(Object.entries(npcSpriteAtlases).map(([key,{cols,rows}])=>[key,{cols,rows}]))};
 const forms={
 a38:{code:"A38/1",title:"Passierschein A38 zur Beantragung eines weiteren Antrags",subtitle:"Bitte vollständig ausfüllen. Unvollständige Vollständigkeit gilt als unvollständig.",fields:[["text","VOLLSTÄNDIGER NAME"],["text","GEBURTSORT IN HEUTIGEN GEMEINDEGRENZEN"],["select","MELDESTATUS",["gemeldet","noch nicht gemeldet","gefühltermaßen gemeldet"]],["text","AKTENZEICHEN, FALLS BEREITS VORHANDEN"],["check","Ich bestätige, dass ich dieses Formular freiwillig unfreiwillig ausfülle."]]},
@@ -713,6 +662,10 @@ function finishSpeechItem(done,generation){if(generation!==speechGeneration)retu
 function voiceHash(text){let h=0;for(let i=0;i<text.length;i++)h=(h*31+text.charCodeAt(i))>>>0;return h}
 function playSyntheticSpeech({text,urgent,masculine,voiceKey,start,done,lang="de-DE"},generation){if(generation!==speechGeneration)return;if(start)start();if(!("speechSynthesis" in window)){finishSpeechItem(done,generation);return}const u=new SpeechSynthesisUtterance(text),voices=speechSynthesis.getVoices(),languageVoices=voices.filter(v=>lang.startsWith("en")?/^en(-|_)/i.test(v.lang):/^de(-|_)/i.test(v.lang)||/german|deutsch/i.test(v.name)),h=voiceHash(voiceKey||text),railVoice=/^BAHN/.test(voiceKey||""),male=masculine||railVoice?languageVoices.find(v=>/conrad|markus|martin|stefan|hans|klaus|thorsten|yannick|male|männlich/i.test(v.name)):null;u.voice=male||languageVoices[h%Math.max(1,languageVoices.length)]||null;u.lang=lang;u.rate=railVoice?.76:(urgent?.96:.88)+(h%4)*.025;u.pitch=railVoice?.68:masculine?.68:(urgent?.76:.86)+(h%5)*.035;u.volume=railVoice?.94:1;let finished=false;const finish=()=>{if(finished)return;finished=true;finishSpeechItem(done,generation)};u.onend=finish;u.onerror=finish;speechSynthesis.speak(u)}
 function prepareRecording(url){if(recordingPromises.has(url))return recordingPromises.get(url);const a=ensureAudio(),promise=fetch(url).then(r=>{if(!r.ok)throw new Error("Recorded voice unavailable: "+url);return r.arrayBuffer()}).then(data=>a.decodeAudioData(data));recordingPromises.set(url,promise);return promise}
+let trainAnnouncementIndex=Math.floor(Math.random()*TRAIN_ANNOUNCEMENT_AUDIO.length),trainAnnouncementSource=null,trainAnnouncementGain=null,trainAnnouncementLoading=false,trainAnnouncementNextAt=0;
+function trainAnnouncementVolume(distance){return clamp(.08+(820-distance)*.00034,.08,.32)}
+function stopTrainAnnouncement(){if(!trainAnnouncementSource)return;const a=ensureAudio(),source=trainAnnouncementSource,gain=trainAnnouncementGain;trainAnnouncementSource=null;trainAnnouncementGain=null;trainAnnouncementNextAt=Math.max(trainAnnouncementNextAt,performance.now()+3500);if(gain){gain.gain.cancelScheduledValues(a.currentTime);gain.gain.setTargetAtTime(.0001,a.currentTime,.08)}try{source.stop(a.currentTime+.3)}catch{}}
+function playTrainAnnouncement(distance){if(!state.voiceOn||trainAnnouncementSource||trainAnnouncementLoading)return;trainAnnouncementLoading=true;const recording=TRAIN_ANNOUNCEMENT_AUDIO[trainAnnouncementIndex++%TRAIN_ANNOUNCEMENT_AUDIO.length];prepareRecording(recording).then(buffer=>{if(!state.started||state.modal||state.gameOver||!state.voiceOn)return;const a=ensureAudio(),source=a.createBufferSource(),gain=a.createGain();source.buffer=buffer;gain.gain.value=trainAnnouncementVolume(distance);source.connect(gain).connect(a.destination);trainAnnouncementSource=source;trainAnnouncementGain=gain;source.onended=()=>{if(trainAnnouncementSource===source){trainAnnouncementSource=null;trainAnnouncementGain=null;trainAnnouncementNextAt=performance.now()+3500}};source.start()}).catch(()=>trainAnnouncementNextAt=performance.now()+10000).finally(()=>trainAnnouncementLoading=false)}
 function playQueuedSpeech(){if(speechActive||!speechQueue.length||!state.voiceOn)return;speechActive=true;const item=speechQueue.shift(),generation=speechGeneration;if(!item.recording){playSyntheticSpeech(item,generation);return}prepareRecording(item.recording).then(buffer=>{if(generation!==speechGeneration)return;if(item.start)item.start();const source=ensureAudio().createBufferSource();recordedSpeechSource=source;source.buffer=buffer;source.connect(ensureAudio().destination);source.onended=()=>{if(recordedSpeechSource===source)recordedSpeechSource=null;finishSpeechItem(item.done,generation)};source.start()}).catch(()=>playSyntheticSpeech(item,generation))}
 function speak(text,{urgent=false,masculine=false,voiceKey="",start,done,lang="de-DE"}={}){if(!state.voiceOn||!("speechSynthesis" in window)){if(start)start();if(done)done();return}speechQueue.push({text,urgent,masculine,voiceKey,start,done,lang});playQueuedSpeech()}
 function speakRecorded(text,recording,{urgent=false,voiceKey="",start,done}={}){if(!state.voiceOn){if(start)start();if(done)done();return}speechQueue.push({text,urgent,voiceKey,start,done,recording});playQueuedSpeech()}
@@ -720,29 +673,25 @@ function prepareMerkelRecording(){return prepareRecording("./assets/merkel-wir-s
 function stopRecordedSpeech(){if(!recordedSpeechSource)return;try{recordedSpeechSource.stop()}catch{}recordedSpeechSource=null}
 function speakMerkelLine(text,{urgent=false,start,done}={}){if(text!==MERKEL_AUDIO_LINE){speak(text,{urgent,voiceKey:"ANGELA MERKEL",start,done});return}speakRecorded(text,"./assets/merkel-wir-schaffen-das.mp3",{urgent,voiceKey:"ANGELA MERKEL",start,done})}
 function hideWorldBark(){clearTimeout(showWorldBark.t);const box=document.getElementById("police-bark");box.hidden=true;box.classList.remove("law-quote","rail-announcement")}
-function stopSpeech(completeHumorScold=false){speechGeneration++;speechQueue.length=0;speechActive=false;clearTimeout(speechPauseTimer);if("speechSynthesis" in window)speechSynthesis.cancel();stopRecordedSpeech();hideWorldBark();cancelHumorScold(completeHumorScold)}
+function stopSpeech(completeHumorScold=false){speechGeneration++;speechQueue.length=0;speechActive=false;clearTimeout(speechPauseTimer);if("speechSynthesis" in window)speechSynthesis.cancel();stopRecordedSpeech();stopTrainAnnouncement();hideWorldBark();cancelHumorScold(completeHumorScold)}
 function violationAlert(msg,level){const alert=document.getElementById("violation-alert"),app=document.getElementById("app");document.getElementById("violation-law").textContent=lawFor(msg);document.getElementById("violation-title").textContent=state.lang==="en"?"RULE VIOLATION":"ORDNUNGSWIDRIGKEIT";document.getElementById("violation-text").textContent=state.lang==="en"?localize(msg):msg;document.getElementById("violation-stars").textContent="★".repeat(level)+"☆".repeat(Math.max(0,5-level));alert.hidden=false;app.classList.remove("enforcement");void app.offsetWidth;app.classList.add("enforcement");clearTimeout(violationAlert.t);violationAlert.t=setTimeout(()=>{alert.hidden=true;app.classList.remove("enforcement")},2200);playSiren()}
 function showWorldBark(speaker,msg,urgent=true,recording="",placement=""){const box=document.getElementById("police-bark"),speakerEl=document.getElementById("bark-speaker"),textEl=document.getElementById("police-bark-text"),start=()=>{speakerEl.textContent=speaker;textEl.textContent=msg;box.classList.toggle("law-quote",placement==="law");box.classList.toggle("rail-announcement",placement==="rail");box.hidden=false;uiTone(urgent?1280:880,.06,"square",.035)},done=()=>{if(speakerEl.textContent===speaker&&textEl.textContent===msg){box.hidden=true;box.classList.remove("law-quote","rail-announcement")}};if(!state.voiceOn){start();clearTimeout(showWorldBark.t);showWorldBark.t=setTimeout(done,placement==="law"?8500:Math.max(3200,Math.min(16000,msg.length*42)));return}const options={urgent,voiceKey:speaker,start,done};if(recording)speakRecorded(msg,recording,options);else if(speaker.startsWith("ANGELA MERKEL"))speakMerkelLine(msg,options);else speak(msg,{...options,masculine:speaker.startsWith("FRIEDRICH MERZ")||speaker.startsWith("BAHN")})}
-let trainAnnouncementIndex=Math.floor(Math.random()*trainAnnouncements.length),communityExcuseIndex=Math.floor(Math.random()*communityTrainExcuses.length),trainAnnouncementNearby=false,trainAnnouncementNextAt=0,railLawIndex=0,railHoldTimer=0,railHoldAnnouncementTimer=0,railLawNextAt=0,railHoldAnnouncementNextAt=0;
-function nextTrainAnnouncement(train=null){
- const dynamicReason=train?.blockedByPlayer?playerTrainExcuse:train?.incidentReason||(train?.queued?queuedTrainExcuse:""),community=!!dynamicReason||Math.random()<.76,reason=dynamicReason||(community?communityTrainExcuses[communityExcuseIndex++%communityTrainExcuses.length]:trainAnnouncements[trainAnnouncementIndex++%trainAnnouncements.length]),queueDepth=train?trains.filter(other=>other.loopIndex===train.loopIndex&&other.queued).length:0,service=pick(["Regionalexpress","Intercity","Regionalbahn"]),destination=pick(trainDestinations),delay=train?.blockedByPlayer?Math.max(12,queueDepth*11):train?.queued?Math.max(8,queueDepth*8):pick(trainDelays),platform=pick(["Null","eins","dreizehn","einunddreißig"]),closing=pick(trainAnnouncementClosings);
- return{speaker:community?"BAHNDURCHSAGE · COMMUNITY-ANEKDOTE · FIKTIONALISIERT":"BAHNSTEIGDURCHSAGE · FIKTIONALE SATIRE",text:`Achtung an Gleis ${platform}. Der ${service} nach ${destination} verspätet sich um voraussichtlich ${delay} Minuten. ${reason} ${closing} Wir entschuldigen uns in aller gebotenen Gründlichkeit.`}
-}
-function updateTrainAnnouncement(){let nearest=Infinity,nearestTrain=null;for(const train of trains)for(const car of train.cars){const d=dist(player.x,player.y,car.x,car.y);if(d<nearest){nearest=d;nearestTrain=train}}if(nearest>650){trainAnnouncementNearby=false;return}const now=performance.now(),box=document.getElementById("police-bark");if(nearest>=500||trainAnnouncementNearby||now<trainAnnouncementNextAt||speechActive||speechQueue.length||!box.hidden)return;trainAnnouncementNearby=true;trainAnnouncementNextAt=now+30000;const announcement=nextTrainAnnouncement(nearestTrain);showWorldBark(announcement.speaker,announcement.text,false,"","rail")}
+let railLawIndex=0,railHoldTimer=0,railHoldAnnouncementTimer=0,railLawNextAt=0,railHoldAnnouncementNextAt=0;
+function updateTrainAnnouncement(){let nearest=Infinity;for(const train of trains)for(const car of train.cars)nearest=Math.min(nearest,dist(player.x,player.y,car.x,car.y));if(trainAnnouncementSource){if(nearest>1100||state.modal||state.gameOver||!state.started||!state.voiceOn){stopTrainAnnouncement();return}const a=ensureAudio();trainAnnouncementGain.gain.setTargetAtTime(trainAnnouncementVolume(nearest),a.currentTime,.2);return}if(nearest<820&&state.started&&!state.modal&&!state.gameOver&&state.voiceOn&&performance.now()>=trainAnnouncementNextAt)playTrainAnnouncement(nearest)}
 function nearestRailLocation(loop,x,y){let nearest=null,best=Infinity;for(const sample of loop.samples){const d=(sample.x-x)**2+(sample.y-y)**2;if(d<best){best=d;nearest=sample}}return{progress:nearest.progress,distance:Math.sqrt(best)}}
 function signedRailSeparation(from,to,length){return wrapRailProgress(to-from+length/2,length)-length/2}
 function startTrainBounce(a,b){
  if(a.reversePending||b.reversePending||a.collisionCooldown>0||b.collisionCooldown>0)return;
- for(const train of [a,b]){train.speed=0;train.bouncePause=TRAIN_BOUNCE_PAUSE;train.reversePending=true;train.collisionCooldown=1.35;train.queued=true;train.bump=1;train.incidentReason=collisionTrainExcuse;train.incidentUntil=performance.now()+22000}
+ for(const train of [a,b]){train.speed=0;train.bouncePause=TRAIN_BOUNCE_PAUSE;train.reversePending=true;train.collisionCooldown=1.35;train.queued=true;train.bump=1;train.incidentReason="collision";train.incidentUntil=performance.now()+22000}trainAnnouncementNextAt=Math.min(trainAnnouncementNextAt,performance.now()+900)
 }
 function updateBorderTrains(dt){
- const groundObstacles=[{item:player,radius:player.r,player:true},...policeVehicles.map(item=>({item,radius:38})),...police.map(item=>({item,radius:14})),...npcs.filter(item=>!item.arrested).map(item=>({item,radius:13}))].filter(({item})=>item.x<720||item.y<720||item.x>WORLD.w-720||item.y>WORLD.h-720);let playerHolding=false,holdingTrain=null;
+ const groundObstacles=[{item:player,radius:player.r,player:true},...policeVehicles.map(item=>({item,radius:38})),...police.map(item=>({item,radius:14})),...npcs.filter(item=>!item.arrested).map(item=>({item,radius:13}))].filter(({item})=>item.x<900||item.y<900||item.x>WORLD.w-900||item.y>WORLD.h-900);let playerHolding=false;
  for(const train of trains){
   const loop=railLoops[train.loopIndex];train.collisionCooldown=Math.max(0,train.collisionCooldown-dt);if(train.bouncePause>0){train.bouncePause=Math.max(0,train.bouncePause-dt);if(train.bouncePause===0&&train.reversePending){train.dir*=-1;train.reversePending=false;train.speed=0}}
-  train.chaos-=dt;if(train.chaos<=0){const event=Math.random();if(event<.4){train.pause=1.8+Math.random()*4;train.incidentReason=communityTrainExcuses[Math.floor(Math.random()*communityTrainExcuses.length)];train.incidentUntil=performance.now()+18000}train.cruiseSpeed=train.baseSpeed*(.55+Math.random()*1.05);train.chaos=3.6+Math.random()*7.4}
+  train.chaos-=dt;if(train.chaos<=0){const event=Math.random();if(event<.55){train.pause=1.4+Math.random()*4.8;train.incidentReason="pause";train.incidentUntil=performance.now()+18000;trainAnnouncementNextAt=Math.min(trainAnnouncementNextAt,performance.now()+900)}train.cruiseSpeed=train.baseSpeed*(.5+Math.random()*1.15);train.chaos=2.8+Math.random()*5.5}
   if(train.pause>0)train.pause=Math.max(0,train.pause-dt);else if(train.incidentReason&&performance.now()>train.incidentUntil)train.incidentReason="";
   let groundGap=Infinity,groundBlocker=null;for(const obstacle of groundObstacles){const rail=nearestRailLocation(loop,obstacle.item.x,obstacle.item.y),forward=train.dir>0?wrapRailProgress(rail.progress-train.progress,loop.length):wrapRailProgress(train.progress-rail.progress,loop.length);if(rail.distance<58+obstacle.radius*.35&&forward<TRAIN_PLAYER_LOOKAHEAD&&forward<groundGap){groundGap=forward;groundBlocker=obstacle}}
-  const blockedByGround=!!groundBlocker;train.blockedByPlayer=!!groundBlocker?.player;train.blockedByObstacle=blockedByGround&&!train.blockedByPlayer;if(train.blockedByPlayer){playerHolding=true;holdingTrain=train}
+  const blockedByGround=!!groundBlocker;train.blockedByPlayer=!!groundBlocker?.player;train.blockedByObstacle=blockedByGround&&!train.blockedByPlayer;if(train.blockedByPlayer)playerHolding=true;
   const target=train.bouncePause>0||train.pause>0||blockedByGround?0:train.cruiseSpeed,rate=target<train.speed?train.acceleration*3.2:train.acceleration;train.speed+=clamp(target-train.speed,-rate*dt,rate*dt);const intended=Math.max(0,train.speed*dt),groundAllowed=blockedByGround?Math.max(0,groundGap-TRAIN_PLAYER_STOP_GAP):Infinity,advance=Math.min(intended,groundAllowed);train.motion=train.dir*advance;train.queued=blockedByGround&&advance+0.01<intended
  }
  const contacts=[];
@@ -754,7 +703,7 @@ function updateBorderTrains(dt){
  const now=performance.now(),box=document.getElementById("police-bark");railHoldTimer=playerHolding?railHoldTimer+dt:Math.max(0,railHoldTimer-dt*2.5);
  railHoldAnnouncementTimer=playerHolding?railHoldAnnouncementTimer+dt:Math.max(0,railHoldAnnouncementTimer-dt*2);
  if(railHoldTimer>1.15&&now>=railLawNextAt&&!speechActive&&!speechQueue.length&&box.hidden){railHoldTimer=0;railLawNextAt=now+13500;showWorldBark("BAHNAUFSICHT · AMTLICHER SPIELHINWEIS",railLawQuotes[railLawIndex++%railLawQuotes.length],true,"","law")}
- if(railHoldAnnouncementTimer>4.5&&now>=railHoldAnnouncementNextAt&&!speechActive&&!speechQueue.length&&box.hidden){railHoldAnnouncementTimer=0;railHoldAnnouncementNextAt=now+32000;trainAnnouncementNextAt=now+30000;const announcement=nextTrainAnnouncement(holdingTrain);showWorldBark(announcement.speaker,announcement.text,false,"","rail")}
+ if(railHoldAnnouncementTimer>4.5&&now>=railHoldAnnouncementNextAt){railHoldAnnouncementTimer=0;railHoldAnnouncementNextAt=now+18000;trainAnnouncementNextAt=0}
  updateTrainAnnouncement()
 }
 function announceCurrentRule(){const index=state.rule%rules.length,text=rules[index][1],recording=`./assets/voices/laws/thorsten-negative-rule-${String(index+1).padStart(2,"0")}.mp3`;speakRecorded(text,recording,{voiceKey:"REGEL DES AUGENBLICKS"})}

@@ -123,3 +123,11 @@ The police-car livery is an embedded body texture, not extra stripe geometry. Be
 ## 2026-09-20 — Local German police chase recordings
 
 The two-star police-car tier now owns the continuous chase-audio threshold. A real circa-2010 Polizei Essen Martinshorn recording from Work With Sounds (CC BY 4.0) loops at a restrained distance-scaled level, while Breviceps's German police-car pass-by (CC0) fires once per close approach behind a global cooldown. Higher wanted tiers raise urgency only slightly through bounded gain and playback-rate changes. Both MP3 files are local, total about 357 KB, and are decoded after the Start gesture; modal screens and a cleared response fade the loop. The original synthesized siren remains the alert and asset-failure fallback, so the static game adds no remote audio service or sound library.
+
+## 2026-09-21 — Rail-clearance gutter, denser traffic, and recorded announcements
+
+The canonical world is now 10,960 × 5,360 units. The established 9,840 × 4,240 city layout is translated intact into the center of a 560-unit playable perimeter gutter, and the two rail loops use broader 720- and 560-unit corner radii. This keeps the articulated train bodies clear of every building without changing mission-relative city layout or introducing a second coordinate authority.
+
+Each loop now begins with six seven-car trains in alternating directions. Distinct speed and acceleration constants, more frequent bounded speed changes, and more frequent unexplained stops drive repeated same-track contact. Existing hard separation still prevents passing or overlap; contact stops both consists for 0.82 seconds and reverses them without reordering their cars.
+
+Five user-supplied station-hall MP3s replace the generated train-announcement text and browser voice. A single dedicated Web Audio source rotates the recordings while the player is close to either loop, scales gain by distance, never opens a textbox, and stops outside the rail vicinity, during modal interruption, or when voice audio is disabled. The files are in-game-only pending separate redistribution permission; `assets/audio/trains/PROVENANCE.md` is their checksum and source-path authority. EBO obstruction hints remain separate exact visible-and-spoken gameplay warnings.
