@@ -74,9 +74,9 @@ for(let cursor=0,i=0;i<=borderGates.length;i++){const gate=borderGates[i],end=ga
 const wrap=(n,l)=>((n%l)+l)%l;
 function railPoint(loop,progress){const s=wrap(progress,loop.length),arc=loop.radius*Math.PI/2,w=loop.straightW,h=loop.straightH,r=loop.radius,x0=loop.minX,y0=loop.minY,x1=loop.maxX,y1=loop.maxY,cx0=x0+r,cx1=x1-r,cy0=y0+r,cy1=y1-r;let d=s,a;if(d<w)return{x:cx0+d,y:y0,angle:0,progress:s};d-=w;if(d<arc){a=-Math.PI/2+d/r;return{x:cx1+Math.cos(a)*r,y:cy0+Math.sin(a)*r,angle:a+Math.PI/2,progress:s}}d-=arc;if(d<h)return{x:x1,y:cy0+d,angle:Math.PI/2,progress:s};d-=h;if(d<arc){a=d/r;return{x:cx1+Math.cos(a)*r,y:cy1+Math.sin(a)*r,angle:a+Math.PI/2,progress:s}}d-=arc;if(d<w)return{x:cx1-d,y:y1,angle:Math.PI,progress:s};d-=w;if(d<arc){a=Math.PI/2+d/r;return{x:cx0+Math.cos(a)*r,y:cy1+Math.sin(a)*r,angle:a+Math.PI/2,progress:s}}d-=arc;if(d<h)return{x:x0,y:cy1-d,angle:-Math.PI/2,progress:s};d-=h;a=Math.PI+d/r;return{x:cx0+Math.cos(a)*r,y:cy0+Math.sin(a)*r,angle:a+Math.PI/2,progress:s}}
 function railLoop(id,inset,radius,dir){const loop={id,minX:inset,minY:inset,maxX:WORLD.w-inset,maxY:WORLD.h-inset,radius,dir};loop.straightW=loop.maxX-loop.minX-radius*2;loop.straightH=loop.maxY-loop.minY-radius*2;loop.length=2*(loop.straightW+loop.straightH)+2*Math.PI*radius;const count=Math.ceil(loop.length/55);loop.samples=Array.from({length:count},(_,i)=>railPoint(loop,loop.length*i/count));return loop}
-const railLoops=[railLoop("aussenring",68,300,1),railLoop("innenring",136,232,-1)],railTracks=railLoops,carOffsets=[132,0,-132];
+const railLoops=[railLoop("aussenring",68,300,1),railLoop("innenring",136,232,-1)],railTracks=railLoops,carOffsets=[260,130,0,-130,-260];
 function syncTrain(train){const loop=railLoops[train.loopIndex],p=railPoint(loop,train.progress);train.x=p.x;train.y=p.y;train.angle=p.angle+(train.dir<0?Math.PI:0);train.cars.forEach((car,i)=>{const q=railPoint(loop,train.progress+train.dir*carOffsets[i]);car.x=q.x;car.y=q.y;car.angle=q.angle+(train.dir<0?Math.PI:0)})}
-const trains=[[0,.04,188],[0,.07,226],[1,.5,210],[1,.53,174]].map((seed,i)=>{const loop=railLoops[seed[0]],train={id:"diagnostic-train-"+i,loopIndex:seed[0],progress:loop.length*seed[1],dir:loop.dir,speed:seed[2],x:0,y:0,angle:0,cars:carOffsets.map(()=>({x:0,y:0,angle:0}))};syncTrain(train);return train});
+const trains=[[0,.04,188],[0,.072,226],[1,.5,210],[1,.532,174]].map((seed,i)=>{const loop=railLoops[seed[0]],train={id:"diagnostic-train-"+i,loopIndex:seed[0],progress:loop.length*seed[1],dir:loop.dir,speed:seed[2],x:0,y:0,angle:0,cars:carOffsets.map(()=>({x:0,y:0,angle:0}))};syncTrain(train);return train});
 const fireSources=[];for(let x=52,i=0;x<WORLD.w;x+=104,i++)fireSources.push({x,y:BORDER_Y,active:true,intensity:.82+(i%5)*.035,seed:(i*47%101)/101});
 const faxBillboardPool=[
  {src:"./assets/billboards/fax/die-neue-faxkraft.webp"},
@@ -107,5 +107,5 @@ let last=performance.now();function loop(t){const dt=Math.min(.05,(t-last)/1000)
 })();
 </script>
 <script type="importmap">{"imports":{"three":"https://cdn.jsdelivr.net/npm/three@0.186.0/build/three.module.js"}}</script>
-<script type="module" src="./world3d.js?v=20260920-8"></script>
+<script type="module" src="./world3d.js?v=20260920-9"></script>
 </body></html>

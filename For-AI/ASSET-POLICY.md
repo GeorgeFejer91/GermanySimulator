@@ -51,7 +51,7 @@ An asset change is complete only when the correct variant loads on desktop and m
 
 ## Local 3D perimeter trains
 
-- `game.js` owns the two rounded-loop paths, eight train centers, 24 articulated car transforms, speed/pause chaos, same-lane spacing, player obstruction, and announcement timing. `world3d.js` only renders that state and must not run a second train simulation in the canonical game.
-- The WebGL renderer loads the three Kenney car models once and clones them into the eight articulated consists. Each car follows its shared semantic transform independently through curves. Keep their embedded geometry and shared texture local; there is no runtime asset host.
+- `game.js` owns the two rounded-loop paths, eight train centers, 40 articulated car transforms, speed/pause chaos, same-lane spacing, player obstruction, and announcement timing. Each five-car array belongs to one logical train. `world3d.js` only renders that state and must not run a second train simulation in the canonical game.
+- The WebGL renderer loads the three Kenney car models once and clones them into the eight articulated consists, using one front, three middle, and one rear body plus procedural flexible gangways. Each car follows its shared semantic transform independently through curves. Keep their embedded geometry and shared texture local; there is no runtime asset host.
 - Canvas and missing-model paths use the procedural red-and-white cars. Both representations must preserve two continuous tracks around the full perimeter, rounded corners, coupled cars, and the hard no-overlap/no-overtaking spacing rule.
 - German station announcements and EBO obstruction hints are synthesized locally by the browser from the exact visible string. They use the existing serialized speech and voice-toggle behavior; no recorded announcement asset or clone of a real DB employee is required. Community anecdotes must stay visibly labeled unverified and fictionalized.

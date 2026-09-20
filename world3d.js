@@ -99,18 +99,19 @@ const GLTF_LOADER_URL="https://cdn.jsdelivr.net/npm/three@0.186.0/examples/jsm/l
   ],trainModelPromise=modelLoader?Promise.all(trainModelUrls.map(url=>modelLoader.loadAsync(url))):null;
   function makeTrainCarFallback(){
     const g=new T.Group(),red=mat(0xc43d36,.72),white=mat(0xeee9df,.82),glass=mat(0x39454b,.42),wheel=mat(0x292a29,.55);
-    box(1.02,.82,2.5,white,0,.57,0,g);box(1.04,.3,2.46,red,0,.42,0,g);for(const side of [-1,1])for(let q=-.7;q<=.7;q+=.47)box(.055,.23,.3,glass,side*.54,.76,q,g);for(const side of [-1,1])for(const q of [-.72,.72]){const w=new T.Mesh(new T.CylinderGeometry(.14,.14,.08,10),wheel);w.rotation.z=Math.PI/2;w.position.set(side*.54,.17,q);g.add(w)}
+    box(1.16,.92,2.58,white,0,.62,0,g);box(1.18,.34,2.54,red,0,.45,0,g);for(const side of [-1,1])for(let q=-.75;q<=.75;q+=.5)box(.06,.26,.33,glass,side*.61,.83,q,g);for(const side of [-1,1])for(const q of [-.76,.76]){const w=new T.Mesh(new T.CylinderGeometry(.16,.16,.09,10),wheel);w.rotation.z=Math.PI/2;w.position.set(side*.6,.18,q);g.add(w)}
     return g
   }
   function fitTrainPart(model){
-    model.updateMatrixWorld(true);let bounds=new T.Box3().setFromObject(model),size=bounds.getSize(new T.Vector3());if(size.x>size.z){model.rotation.y=Math.PI/2;model.updateMatrixWorld(true);bounds=new T.Box3().setFromObject(model);size=bounds.getSize(new T.Vector3())}const center=bounds.getCenter(new T.Vector3()),s=Math.min(1.1/size.x,1.45/size.y,2.9/size.z);model.scale.setScalar(s);model.position.set(-center.x*s,-bounds.min.y*s,-center.z*s)
+    model.updateMatrixWorld(true);let bounds=new T.Box3().setFromObject(model),size=bounds.getSize(new T.Vector3());if(size.x>size.z){model.rotation.y=Math.PI/2;model.updateMatrixWorld(true);bounds=new T.Box3().setFromObject(model);size=bounds.getSize(new T.Vector3())}const center=bounds.getCenter(new T.Vector3()),s=Math.min(1.24/size.x,1.62/size.y,2.72/size.z);model.scale.setScalar(s);model.position.set(-center.x*s,-bounds.min.y*s,-center.z*s)
   }
   async function installTrainModel(slot){
     if(!trainModelPromise)return;
-    try{const sources=await trainModelPromise;for(let i=0;i<slot.cars.length;i++){const model=sources[i%sources.length].scene.clone(true);fitTrainPart(model);slot.cars[i].group.add(model);slot.cars[i].fallback.visible=false;slot.cars[i].model=model}}
+    try{const sources=await trainModelPromise;for(let i=0;i<slot.cars.length;i++){const sourceIndex=i===0?0:i===slot.cars.length-1?2:1,model=sources[sourceIndex].scene.clone(true);fitTrainPart(model);slot.cars[i].group.add(model);slot.cars[i].fallback.visible=false;slot.cars[i].model=model}}
     catch(e){console.warn("Keeping procedural AMT-Bahn train",e)}
   }
-  for(const train of bridge.trains||[]){const slot={train,cars:train.cars.map(()=>{const group=new T.Group(),fallback=makeTrainCarFallback();group.add(fallback);world.add(group);return{group,fallback,model:null}})};trainSlots.push(slot);installTrainModel(slot)}
+  const gangwayGeometry=new T.BoxGeometry(.42,.48,1),gangwayMaterial=mat(0x252625,.62);
+  for(const train of bridge.trains||[]){const slot={train,cars:train.cars.map(()=>{const group=new T.Group(),fallback=makeTrainCarFallback();group.add(fallback);world.add(group);return{group,fallback,model:null}}),gangways:train.cars.slice(1).map(()=>{const mesh=new T.Mesh(gangwayGeometry,gangwayMaterial);world.add(mesh);return mesh})};trainSlots.push(slot);installTrainModel(slot)}
   async function installBuildingModel(slot,url,w,h,d){
     if(!modelLoader)return;
     try{
@@ -234,7 +235,7 @@ const GLTF_LOADER_URL="https://cdn.jsdelivr.net/npm/three@0.186.0/examples/jsm/l
   window.Germany3D={ready:true,sync(){
     syncChar(playerMesh,bridge.player,0);
     playerMesh.rotation.y=bridge.player.facing;
-    for(const slot of trainSlots)for(let i=0;i<slot.cars.length;i++){const car=slot.train.cars[i],group=slot.cars[i].group;group.position.set(X(car.x),.07,Z(car.y));group.rotation.y=Math.PI/2-car.angle}
+    for(const slot of trainSlots){for(let i=0;i<slot.cars.length;i++){const car=slot.train.cars[i],group=slot.cars[i].group;group.position.set(X(car.x),.07,Z(car.y));group.rotation.y=Math.PI/2-car.angle}for(let i=0;i<slot.gangways.length;i++){const a=slot.train.cars[i],b=slot.train.cars[i+1],ax=X(a.x),az=Z(a.y),bx=X(b.x),bz=Z(b.y),mesh=slot.gangways[i],length=Math.hypot(bx-ax,bz-az);mesh.position.set((ax+bx)/2,.54,(az+bz)/2);mesh.rotation.y=Math.atan2(bx-ax,bz-az);mesh.scale.z=length}}
     const ns=bridge.getNPCs();ns.forEach(n=>{let q=npcMeshes.get(n);if(n.special&&!q?.userData[n.special+"Sprite"]){const sprite=specialSprite(n);if(sprite){if(q)scene.remove(q);q=sprite;scene.add(q);npcMeshes.set(n,q)}}if(!q){q=specialSprite(n)||character("npc");scene.add(q);npcMeshes.set(n,q)}if(q.userData.borderPourerSprite)syncBorderPourer(q,n);else if(q.userData.merkelSprite)syncMerkel(q,n);else if(q.userData.bayernSprite)syncBayern(q,n);else syncChar(q,n)});for(const [n,q] of npcMeshes)if(!ns.includes(n)){scene.remove(q);npcMeshes.delete(n)}
     const ps=bridge.getPolice();ps.forEach(p=>{let q=policeMeshes.get(p);if(!q){q=character("police");scene.add(q);policeMeshes.set(p,q)}syncChar(q,p,.04)});for(const [p,q] of policeMeshes)if(!ps.includes(p)){scene.remove(q);policeMeshes.delete(p)}
     bridge.pickups.forEach(p=>{const q=pickupMeshes.get(p);q.visible=!p.taken;if(q.visible){q.position.set(X(p.x),.2,Z(p.y));q.rotation.y+=.012}});

@@ -39,10 +39,18 @@ labels every such line `COMMUNITY-ANEKDOTE · FIKTIONALISIERT` and does not quot
 the posts verbatim.
 
 - Reddit r/bahn, absurd or funny reported delay reasons: https://www.reddit.com/r/bahn/comments/1v5cavy/was_war_der_absurdeste_lustigste_grund_f%C3%BCr_eine/
+- Reddit r/bahn, older collection including reported children, donkeys, horses, and a pony at railway facilities: https://www.reddit.com/r/bahn/comments/1c4toi4/kurioselustige_gr%C3%BCnde_warum_euer_zug_ausgefallen/
 - Reddit r/deutschebahn, reported delay announcements: https://www.reddit.com/r/deutschebahn/comments/1rla2lw/was_sind_eure_besten_versp%C3%A4tungsaussagen/
+- Reddit r/deutschebahn, newer collection including chicks, implausible snow, split-consist timing, and a broken driver's seat: https://www.reddit.com/r/deutschebahn/comments/1vqolmd/lustigste_bahn_versp%C3%A4tungs_erkl%C3%A4rungen/
 - Reddit r/drehscheibe, discussion of an automatic delay forecast with no remaining reason: https://www.reddit.com/r/drehscheibe/comments/1u5wdr9/schreib_das_system_das_automatisch_wenn_eine/
 - LEO forum, collected unusual rail announcements: https://dict.leo.org/forum/viewGeneraldiscussion.php?idForum=9&idThread=1226524&lang=de&lp=ende
 - Vielfliegertreff forum, reported zero-minute delay and wrong-track announcements: https://www.vielfliegertreff.de/forum/threads/deutsche-bahn-frust-aber-auf-amuesante-art-und-weise.5668/
+
+The `spielende Kinder im Gleis` rewrite preserves the safety closure as the
+serious part and satirizes only its invented administrative follow-up. The
+Federal Police warns that tracks are not play areas, that trains cannot evade
+obstacles, and that entering railway facilities is life-threatening:
+https://bundespolizei.de/aktuelles/meldungen/sicherheit-auf-bahnanlagen
 
 When the player blocks a train, the game rotates short excerpts from the current
 Eisenbahn-Bau- und Betriebsordnung. The excerpts are gameplay hints, not legal

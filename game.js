@@ -66,10 +66,10 @@ function makeRailLoop(id,inset,radius,dir){
  const count=Math.ceil(loop.length/55);loop.samples=Array.from({length:count},(_,i)=>pointOnRailLoop(loop,loop.length*i/count));return loop
 }
 const railLoops=[makeRailLoop("aussenring",68,300,1),makeRailLoop("innenring",136,232,-1)],railTracks=railLoops;
-const TRAIN_CAR_OFFSETS=[132,0,-132],TRAIN_MIN_GAP=455,TRAIN_PLAYER_STOP_GAP=250,TRAIN_PLAYER_LOOKAHEAD=720;
+const TRAIN_CAR_OFFSETS=[260,130,0,-130,-260],TRAIN_MIN_GAP=690,TRAIN_BRAKE_GAP=1020,TRAIN_PLAYER_STOP_GAP=390,TRAIN_PLAYER_LOOKAHEAD=980;
 const trainSeeds=[
- [0,.035,184],[0,.061,244],[0,.087,166],[0,.113,218],
- [1,.465,232],[1,.491,172],[1,.517,252],[1,.543,194]
+ [0,.035,184],[0,.066,244],[0,.097,166],[0,.128,218],
+ [1,.465,232],[1,.496,172],[1,.527,252],[1,.558,194]
 ];
 function syncTrainTransform(train){
  const loop=railLoops[train.loopIndex],center=pointOnRailLoop(loop,train.progress);train.x=center.x;train.y=center.y;train.angle=center.angle+(train.dir<0?Math.PI:0);
@@ -196,6 +196,7 @@ const trainAnnouncements=[
  "Der Zug verkehrt heute in umgekehrter Wagenreihung. Das hilft Ihnen zeitlich nicht, ist aber immerhin eine Information."
 ];
 const communityTrainExcuses=[
+ "Aufgrund spielender Kinder im Gleis bleibt die Strecke gesperrt. Sicherheit geht vor; die voraussichtliche Dauer wird nach Eingang des Räumungsabschlussformulars bekannt gegeben.",
  "Die Weiterfahrt verzögert sich, weil eine Kuh links neben dem Zug den vorgesehenen Fahrweg derzeit persönlich begutachtet.",
  "Die Weiterfahrt verzögert sich, weil sich der Lokführer nach einer Toilettenpause ausgesperrt hat. Der Schlüssel reist im Gegenzug an.",
  "Die Fahrt endet vorzeitig, weil das Tanken vergessen wurde. Am jetzigen Bahnhof kann selbstverständlich nicht getankt werden.",
@@ -211,7 +212,14 @@ const communityTrainExcuses=[
  "Auf dem Nebengleis sehen Sie den Grund für unsere Verspätung. Der dortige Zug sieht vermutlich wiederum uns.",
  "Die Leitstelle war vom täglichen Erscheinen dieses Zuges überrascht und musste zunächst einige Wagen zusammensuchen.",
  "Wir haben eine Weiche überfahren, die wir nicht überfahren wollten, und befinden uns zu zwei Dritteln im falschen Vorgang.",
- "Die Prognose hat eine Verspätung berechnet, die ein Mensch auf null setzte. Nun fehlt nur noch der Grund für den nicht vorhandenen Grund."
+ "Die Prognose hat eine Verspätung berechnet, die ein Mensch auf null setzte. Nun fehlt nur noch der Grund für den nicht vorhandenen Grund.",
+ "Im Gleisfeld stehen ein Esel und am Bahnhof Pferde. Der tierische Anschluss ist gesichert; Ihrer leider nicht.",
+ "Bitte steigen Sie nicht mit einem Pony in die Regionalbahn ein. Für mitgeführte Huftiere ist vor Fahrtantritt das Formular HUF 4b zu entwerten.",
+ "Tiere im Gleis erwiesen sich als eine Gruppe Küken. Die Räumung erfolgt in Schrittgeschwindigkeit und ohne Anspruch auf einen früheren Anschluss.",
+ "Als Ursache wurden Schnee und Eis gemeldet. Bei fünfunddreißig Grad Außentemperatur wird die Meldung derzeit klimatisch nachbearbeitet.",
+ "Der vordere Zugteil hat fünfzehn Minuten, der hintere fünfundzwanzig. Der Zug bleibt trotzdem ein Zug; die Verspätung reist abschnittsweise.",
+ "Der Sitz des Lokführers ist defekt. Wir fahren deshalb zurück, wenden den gesamten Zug und setzen die Vorwärtsfahrt anschließend in Gegenrichtung fort.",
+ "Dem Lokführer wurde der Fahrplan nach Hamburg zugeteilt, obwohl der Zug nach Frankfurt soll. Das Ziel wird nach Abschluss der Unterlagenberichtigung festgelegt."
 ];
 const railLawQuotes=[
  "EBO § 62 Absatz 2: „Der Aufenthalt innerhalb der Gleise ist nicht gestattet.“ Spielhinweis: Bitte räumen Sie den Fahrweg.",
@@ -577,7 +585,7 @@ function updateBorderTrains(dt){
   if(train.pause>0)train.pause=Math.max(0,train.pause-dt);
   const rail=playerRail[train.loopIndex],playerGap=train.dir>0?wrapRailProgress(rail.progress-train.progress,loop.length):wrapRailProgress(train.progress-rail.progress,loop.length),blockedByPlayer=rail.distance<58&&playerGap<TRAIN_PLAYER_LOOKAHEAD;
   train.blockedByPlayer=blockedByPlayer;if(blockedByPlayer)playerHolding=true;
-  let target=train.pause>0?0:train.cruiseSpeed;if(gap<900)target=Math.min(target,train.cruiseSpeed*clamp((gap-TRAIN_MIN_GAP)/(900-TRAIN_MIN_GAP),0,1));if(blockedByPlayer)target=0;
+  let target=train.pause>0?0:train.cruiseSpeed;if(gap<TRAIN_BRAKE_GAP)target=Math.min(target,train.cruiseSpeed*clamp((gap-TRAIN_MIN_GAP)/(TRAIN_BRAKE_GAP-TRAIN_MIN_GAP),0,1));if(blockedByPlayer)target=0;
   train.speed+=clamp(target-train.speed,-390*dt,135*dt);
   let allowed=Math.max(0,gap-TRAIN_MIN_GAP);if(blockedByPlayer)allowed=Math.min(allowed,Math.max(0,playerGap-TRAIN_PLAYER_STOP_GAP));const intended=Math.max(0,train.speed*dt),advance=Math.min(intended,allowed);train.queued=advance+0.01<intended||(!blockedByPlayer&&gap<TRAIN_MIN_GAP+18);train.progress=wrapRailProgress(train.progress+train.dir*advance,loop.length);syncTrainTransform(train)
  }
@@ -1097,8 +1105,8 @@ function drawDistrictLabels(){
 function drawPoster(){const p=project(1570,530,90);if(p.x<-160||p.x>width+160||p.y<-180||p.y>height+180)return;const s=p.s;ctx.save();ctx.translate(p.x,p.y);ctx.scale(s,s);ctx.fillStyle="#ded8cb";ctx.fillRect(-58,-72,116,84);ctx.strokeStyle="#222";ctx.strokeRect(-58,-72,116,84);ctx.fillStyle="#777";ctx.beginPath();ctx.ellipse(0,-43,20,25,0,0,Math.PI*2);ctx.fill();ctx.fillStyle="#494949";ctx.beginPath();ctx.moveTo(-22,-50);ctx.quadraticCurveTo(0,-72,24,-50);ctx.lineTo(17,-59);ctx.lineTo(-16,-59);ctx.closePath();ctx.fill();ctx.fillStyle="#222";ctx.font="900 8px Arial";ctx.textAlign="center";ctx.fillText("FRIEDRICH MERZ",0,-8);ctx.font="7px Arial";ctx.fillText("SATIRISCHER AUSHANG",0,3);ctx.restore()}
 function drawTrain(train){
  const centers=train.cars.map(car=>project(car.x,car.y,0));if(centers.every(p=>p.x<-220||p.x>width+220||p.y<-180||p.y>height+180))return;
- ctx.save();ctx.strokeStyle="#252525";ctx.lineWidth=7;for(let i=0;i<centers.length-1;i++){ctx.beginPath();ctx.moveTo(centers[i].x,centers[i].y);ctx.lineTo(centers[i+1].x,centers[i+1].y);ctx.stroke()}ctx.restore();
- for(let i=train.cars.length-1;i>=0;i--){const car=train.cars[i],p=centers[i],ahead=project(car.x+Math.cos(car.angle)*100,car.y+Math.sin(car.angle)*100,0),scale=Math.hypot(ahead.x-p.x,ahead.y-p.y)/100,angle=Math.atan2(ahead.y-p.y,ahead.x-p.x);ctx.save();ctx.translate(p.x,p.y);ctx.rotate(angle);ctx.scale(scale,scale);ctx.fillStyle="rgba(24,24,23,.28)";ctx.fillRect(-62,13,124,58);ctx.fillStyle="#eee9df";ctx.strokeStyle=train.queued?"#7b2d29":"#343434";ctx.lineWidth=4;ctx.beginPath();ctx.roundRect(-58,-54,116,66,i===0?18:9);ctx.fill();ctx.stroke();ctx.fillStyle="#c43d36";ctx.fillRect(-56,-16,112,23);ctx.fillStyle="#39454b";for(let w=-38;w<=38;w+=25)ctx.fillRect(w,-45,17,18);ctx.fillStyle="#2d2d2c";for(const wheel of [-36,36]){ctx.beginPath();ctx.arc(wheel,15,10,0,Math.PI*2);ctx.fill()}if(i===1){ctx.fillStyle="#f0eadf";ctx.font="900 10px Arial";ctx.textAlign="center";ctx.fillText("AMT-BAHN",0,1)}ctx.restore()}
+ ctx.save();ctx.lineCap="round";for(let i=0;i<centers.length-1;i++){ctx.strokeStyle="#202120";ctx.lineWidth=15;ctx.beginPath();ctx.moveTo(centers[i].x,centers[i].y);ctx.lineTo(centers[i+1].x,centers[i+1].y);ctx.stroke();ctx.strokeStyle="#5b5b56";ctx.lineWidth=5;ctx.stroke()}ctx.restore();
+ for(let i=train.cars.length-1;i>=0;i--){const car=train.cars[i],p=centers[i],ahead=project(car.x+Math.cos(car.angle)*100,car.y+Math.sin(car.angle)*100,0),scale=Math.hypot(ahead.x-p.x,ahead.y-p.y)/100,angle=Math.atan2(ahead.y-p.y,ahead.x-p.x),endCar=i===0||i===train.cars.length-1;ctx.save();ctx.translate(p.x,p.y);ctx.rotate(angle);ctx.scale(scale,scale);ctx.fillStyle="rgba(24,24,23,.28)";ctx.fillRect(-66,15,132,62);ctx.fillStyle="#eee9df";ctx.strokeStyle=train.queued?"#7b2d29":"#343434";ctx.lineWidth=4;ctx.beginPath();ctx.roundRect(-62,-58,124,72,endCar?17:6);ctx.fill();ctx.stroke();ctx.fillStyle="#c43d36";ctx.fillRect(-60,-17,120,25);ctx.fillStyle="#39454b";for(let w=-42;w<=42;w+=28)ctx.fillRect(w,-48,19,19);ctx.fillStyle="#2d2d2c";for(const wheel of [-39,39]){ctx.beginPath();ctx.arc(wheel,17,11,0,Math.PI*2);ctx.fill()}if(i===Math.floor(train.cars.length/2)){ctx.fillStyle="#f0eadf";ctx.font="900 10px Arial";ctx.textAlign="center";ctx.fillText("AMT-BAHN",0,1)}ctx.restore()}
 }
 function drawWorld(){
  drawGround();drawGarden();drawDistrictLabels();
