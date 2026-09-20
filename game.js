@@ -2,17 +2,35 @@
 "use strict";
 const canvas=document.getElementById("game"),ctx=canvas.getContext("2d"),keys=Object.create(null),WORLD={w:9600,h:4000};
 const player={x:1800,y:1760,r:16,energy:100,facing:0};
-const state={started:false,modal:false,dialogue:false,wanted:0,offence:"AKTENLAGE: UNAUFFÄLLIG",wantedCooldown:0,runTimer:0,runWarned:false,roadTimer:0,roadWarned:false,jayCooldown:0,grassTimer:0,grassWarned:false,gardenCooldown:0,evasionTimer:0,pettyAuditTimer:18,mission:0,forms:0,pfand:0,day:1,minutes:480,stadtbild:0,citizen:false,gameOver:false,rule:0,ruleTimer:0,lang:"de",voiceOn:true,region:"berlin",regionCooldown:0};
+const GERMANNESS_MAX=15,LAW_POWER_THRESHOLD=9;
+const WURST_TYPES=Object.freeze({
+ nuernberger:{label:"NÜRNBERGER ROSTBRATWURST",short:"NÜRNBERGER",mark:"N",color:"#b9845f",pieces:3},
+ frankfurter:{label:"FRANKFURTER WÜRSTCHEN",short:"FRANKFURTER",mark:"F",color:"#9d5a49",pieces:2},
+ thueringer:{label:"THÜRINGER ROSTBRATWURST",short:"THÜRINGER",mark:"T",color:"#a97550",pieces:1},
+ weisswurst:{label:"MÜNCHNER WEISSWURST",short:"WEISSWURST",mark:"W",color:"#d8c7aa",pieces:2},
+ bockwurst:{label:"BOCKWURST",short:"BOCKWURST",mark:"B",color:"#a34e3f",pieces:1},
+ knackwurst:{label:"KNACKWURST",short:"KNACKWURST",mark:"K",color:"#8b493b",pieces:2},
+ mettwurst:{label:"METTWURST",short:"METTWURST",mark:"M",color:"#93463c",pieces:1},
+ teewurst:{label:"TEEWURST",short:"TEEWURST",mark:"TW",color:"#b2614b",pieces:1},
+ currywurstBadge:{label:"BERLINER CURRYWURST",short:"CURRYWURST",mark:"C",color:"#bd563f",pieces:4}
+});
+const WURST_IDS=Object.keys(WURST_TYPES);
+const state={started:false,modal:false,dialogue:false,wanted:0,offence:"AKTENLAGE: UNAUFFÄLLIG",wantedCooldown:0,runTimer:0,runWarned:false,roadTimer:0,roadWarned:false,jayCooldown:0,grassTimer:0,grassWarned:false,gardenCooldown:0,evasionTimer:0,pettyAuditTimer:18,mission:0,forms:0,pfand:0,germanness:0,wurstBadges:new Set(),lawUnlocked:false,lawCooldown:0,ampelClock:0,ampelWait:0,ampelWaitLight:null,crossingRun:null,wasOnRoad:false,crossRewardAt:-9,quizTimer:9,quizApproach:null,quizBag:[],day:1,minutes:480,stadtbild:0,citizen:false,gameOver:false,rule:0,ruleTimer:0,lang:"de",voiceOn:true,region:"berlin",regionCooldown:0};
 let police=[],particles=[],width=innerWidth,height=innerHeight,dpr=1,last=performance.now();
 const horizontalRoads=[{x:0,y:820,w:WORLD.w,h:260},{x:0,y:2000,w:WORLD.w,h:240},{x:0,y:3000,w:WORLD.w,h:220}];
 const verticalRoads=[{x:1050,y:0,w:260,h:WORLD.h},{x:2400,y:0,w:220,h:WORLD.h},{x:4400,y:0,w:180,h:WORLD.h},{x:5850,y:0,w:220,h:WORLD.h},{x:7350,y:0,w:220,h:WORLD.h},{x:9000,y:0,w:180,h:WORLD.h}];
 const roads=[...horizontalRoads,...verticalRoads];
+const SIDEWALK_WIDTH=72,WALKWAY_WIDTH=84,NPC_BLOCK_DISTANCE=38,NPC_COMPLAINT_DISTANCE=82;
 const crossings=[];
 for(const h of horizontalRoads)for(const v of verticalRoads){
  crossings.push({x:v.x-40,y:h.y+Math.round((h.h-80)/2),w:v.w+80,h:80});
  crossings.push({x:v.x+Math.round((v.w-90)/2),y:h.y-60,w:90,h:h.h+120});
 }
 crossings.push({x:3590,y:2985,w:120,h:270},{x:6550,y:2985,w:120,h:270},{x:8200,y:2985,w:120,h:270});
+const trafficLights=[];
+for(let i=1;i<horizontalRoads.length*verticalRoads.length*2;i+=2){
+ const c=crossings[i];trafficLights.push({id:trafficLights.length,x:c.x-24,y:c.y+18,phaseOffset:(trafficLights.length%6)*1.15,green:false,rewardCycle:-1});
+}
 const crossingSigns=[];
 for(const c of crossings){
  if(c.w>c.h){crossingSigns.push({x:c.x+18,y:c.y-26,turn:0},{x:c.x+c.w-18,y:c.y+c.h+26,turn:2})}
@@ -52,6 +70,10 @@ const districtLabels=[
  {x:4820,y:3290,text:"ENERGIEWENDE-SONDERBEZIRK"},{x:6320,y:3290,text:"KOHLE-BEREITSCHAFTSZONE"}
 ];
 
+const desktopBillboards=matchMedia("(min-width: 700px)"),faxBillboardPool=[
+ {asset:"faxkraft",src:"./assets/billboards/fax/die-neue-faxkraft.webp"},
+ {asset:"faxfortschritt",src:"./assets/billboards/fax/fortschritt-per-fax.webp"}
+];
 const props=[
  {x:130,y:1180,asset:"gartenzwerg",w:42,h:64},
  {x:360,y:1260,asset:"gartenzwerg",w:42,h:64},
@@ -66,9 +88,9 @@ const props=[
  {x:1320,y:1185,asset:"fahrrad",w:88,h:56,id:"fahrrad",label:"FAHRRAD"},
  {x:455,y:545,asset:"kaffee",w:48,h:66,id:"kaffee",label:"KAFFEEAUTOMAT",used:false},
  {x:575,y:1170,asset:"pfandautomat",w:54,h:70,id:"pfandautomat",label:"PFANDAUTOMAT"},
- {x:2860,y:760,asset:"faxbillboard",w:210,h:118,id:"faxbillboard-nord",label:"FAX 3000 PRO"},
- {x:3500,y:1880,asset:"faxbillboard",w:210,h:118,id:"faxbillboard-mitte",label:"FAX 3000 PRO"},
- {x:3980,y:2890,asset:"faxbillboard",w:210,h:118,id:"faxbillboard-sued",label:"FAX 3000 PRO"},
+ {x:2860,y:760,asset:"faxbillboard",billboard:faxBillboardPool[0],w:210,h:118,id:"faxbillboard-nord",label:"FAX 3000 PRO"},
+ {x:3500,y:1880,asset:"faxbillboard",billboard:faxBillboardPool[1],w:210,h:118,id:"faxbillboard-mitte",label:"FAX 3000 PRO"},
+ {x:3980,y:2890,asset:"faxbillboard",billboard:faxBillboardPool[0],w:210,h:118,id:"faxbillboard-sued",label:"FAX 3000 PRO"},
  {x:3050,y:700,asset:"faxgeraet",w:66,h:54,id:"faxgeraet",label:"FAX 3000"},
  {x:2650,y:1160,asset:"faxkiosk",w:54,h:86,id:"faxkiosk",label:"ÖFFENTLICHES FAX"},
  {x:2940,y:3340,asset:"polizeigarten",w:94,h:74,id:"polizei-garten-a",label:"RASENKOMPETENZ"},
@@ -77,7 +99,7 @@ const props=[
  {x:3300,y:3450,asset:"gartenzwerg",w:44,h:66},
  {x:4000,y:3700,asset:"gartenzwerg",w:44,h:66},
  {x:5200,y:700,asset:"faxgeraet",w:66,h:54,id:"faxgeraet-ost",label:"FAX-AUSSENSTELLE"},
- {x:6750,y:1880,asset:"faxbillboard",w:210,h:118,id:"faxbillboard-ost",label:"FAX 3000 PRO"},
+ {x:6750,y:1880,asset:"faxbillboard",billboard:faxBillboardPool[1],w:210,h:118,id:"faxbillboard-ost",label:"FAX 3000 PRO"},
  {x:8350,y:2890,asset:"faxkiosk",w:54,h:86,id:"faxkiosk-ost",label:"ÖFFENTLICHES FAX"},
  {x:5600,y:1885,asset:"fahrrad",w:88,h:56,id:"fahrrad-ost",label:"FAHRRAD"},
  {x:7180,y:2890,asset:"baustelle",w:105,h:62,id:"baustelle-ost",label:"DAUERBAUSTELLE"},
@@ -92,6 +114,7 @@ const assetSources={
  faxbillboard:"./assets/fax-billboard.svg",faxgeraet:"./assets/faxgeraet.svg",faxkiosk:"./assets/telefon-fax-kiosk.svg",
  merkel:"./assets/merkel-cartoon.svg",merkelSprite:"./assets/merkel-sprite.png",polizeigarten:"./assets/polizei-garten-schild.svg",borderPourer:"./assets/border-pourer-sprite.png"
 };
+if(desktopBillboards.matches)for(const motif of faxBillboardPool)assetSources[motif.asset]=motif.src;
 const assets={};for(const key in assetSources){const img=new Image();img.src=assetSources[key];assets[key]=img}
 const borderPourerSprite={canvas:null,cols:5,rows:6};
 function prepareBorderPourerSprite(){
@@ -122,6 +145,59 @@ const npcDenglisch=["Also this ist jetzt aber auch nicht so gedacht.","Kann man 
 const jaywalkerBarks={
  berlin:["Think of the rules! Der Zebrastreifen ist literally right there!","Think of the Kinder! So überquert man keine Straße!","Schande! You ignored die amtlich weißen stripes!","Hast du Tomaten auf den Augen?! Use the official crossing!","Unfassbar! Erst schauen, then formgerecht queren!","Verkehrsrowdy! This crossing was not approved by anybody!"],
  germany:["Denken Sie an die Regeln! Der Zebrastreifen ist gleich dort!","Denken Sie an die Kinder! So überquert man keine Straße!","Schande! Sie haben die amtlich markierten Streifen missachtet!","Haben Sie Tomaten auf den Augen?! Benutzen Sie den offiziellen Überweg!","Unfassbar! Erst schauen, dann formgerecht queren!","Verkehrsrowdy! Diese Querung war von niemandem genehmigt!"]
+};
+const pedestrianBarks={
+ berlin:{
+  sidewalk:["HALT! You are standing im normierten Gehwegprofil!","Stop! Sie blockieren den Durchgang according to my interpretation!","Sie sind im way. I was hier first, administratively speaking!","Hast du schon Kehrwoche gemacht? Then respect die Gehordnung!","Das Leben ist kein Ponyhof. Move aus meiner Lauflinie!","Hast du tomatoes on den Augen? This is clearly mein Gehweg!"],
+  grass:["HALT! Off the grass! Runter vom Rasen, immediately!","STOP! Der Rasen is for looking, not for walking!","Haben Sie eine Halmbetretungserlaubnis? Of course not!","Jetzt haben wir den Salat, and Sie stehen mitten im Grünbereich!"],
+  road:["HALT! Off the street! Runter von der Fahrbahn!","STOP! The Zebrastreifen is literally right there!","Verkehrsrowdy! Your Querungswinkel is completely unapproved!","Hast du tomatoes on den Augen? Weg von der Straße!"]
+ },
+ germany:{
+  sidewalk:["HALT! Sie stehen im normierten Gehwegprofil!","STOPP! Sie blockieren den Durchgang nach meiner Auslegung!","Sie sind im Weg. Ich war verwaltungsrechtlich zuerst hier!","Hast du schon Kehrwoche gemacht? Dann kennen Sie doch die Gehwegordnung!","Das Leben ist kein Ponyhof. Verlassen Sie meine Lauflinie!","Haben Sie Tomaten auf den Augen? Das ist eindeutig mein Gehweg!",{text:"Nein, ich gehe hier nicht weg!",recording:"./assets/voices/thorsten-angry-nicht-weg.mp3"},{text:"Dümmer geht's nicht mehr.",recording:"./assets/voices/thorsten-angry-duemmer.mp3"},{text:"Das klappt einfach nicht!",recording:"./assets/voices/thorsten-angry-klappt-nicht.mp3"}],
+  grass:["HALT! Runter vom Rasen!","STOPP! Der Rasen ist anzusehen, nicht zu betreten!","Haben Sie eine Halmbetretungserlaubnis? Natürlich nicht!","Jetzt haben wir den Salat, und Sie stehen mitten in der Grünfläche!"],
+  road:["HALT! Runter von der Fahrbahn!","STOPP! Der Zebrastreifen ist gleich dort!","Verkehrsrowdy! Ihr Querungswinkel ist vollständig ungenehmigt!","Haben Sie Tomaten auf den Augen? Weg von der Straße!"]
+ }
+};
+// Current federal text checked against gesetze-im-internet.de on 2026-09-20.
+const lawPowerLines=[
+ "§ 183a StGB · Erregung öffentlichen Ärgernisses: Wer öffentlich sexuelle Handlungen vornimmt und dadurch absichtlich oder wissentlich ein Ärgernis erregt, wird mit Freiheitsstrafe bis zu einem Jahr oder mit Geldstrafe bestraft, wenn die Tat nicht in § 183 mit Strafe bedroht ist.",
+ "§ 118 Absatz 1 OWiG · Belästigung der Allgemeinheit: Ordnungswidrig handelt, wer eine grob ungehörige Handlung vornimmt, die geeignet ist, die Allgemeinheit zu belästigen oder zu gefährden und die öffentliche Ordnung zu beeinträchtigen.",
+ "§ 127 Absatz 1 OWiG · Herstellen oder Verwenden von Sachen, die zur Geld- oder Urkundenfälschung benutzt werden können: Ordnungswidrig handelt, wer ohne schriftliche Erlaubnis der zuständigen Stelle oder des sonst dazu Befugten Vordrucke für öffentliche Urkunden oder Beglaubigungszeichen herstellt, sich oder einem anderen verschafft, feilhält, verwahrt, einem anderen überläßt, einführt oder ausführt.",
+ "§ 27 Absatz 4 StVO · Verbände: Die seitliche Begrenzung geschlossen reitender oder zu Fuß marschierender Verbände muss, wenn nötig (§ 17 Absatz 1), mindestens nach vorn durch nicht blendende Leuchten mit weißem Licht, nach hinten durch Leuchten mit rotem Licht oder gelbem Blinklicht kenntlich gemacht werden.",
+ "§ 27 Absatz 6 StVO · Verbände: Auf Brücken darf nicht im Gleichschritt marschiert werden.",
+ "§ 30 Absatz 1 StVO · Umweltschutz, Sonn- und Feiertagsfahrverbot: Unnützes Hin- und Herfahren ist innerhalb geschlossener Ortschaften verboten, wenn Andere dadurch belästigt werden.",
+ "§ 911 BGB · Überfall: Früchte, die von einem Baume oder einem Strauche auf ein Nachbargrundstück hinüberfallen, gelten als Früchte dieses Grundstücks.",
+ "§ 919 Absatz 3 BGB · Grenzabmarkung: Die Kosten der Abmarkung sind von den Beteiligten zu gleichen Teilen zu tragen, sofern nicht aus einem zwischen ihnen bestehenden Rechtsverhältnis sich ein anderes ergibt.",
+ "§ 961 BGB · Eigentumsverlust bei Bienenschwärmen: Zieht ein Bienenschwarm aus, so wird er herrenlos, wenn nicht der Eigentümer ihn unverzüglich verfolgt oder wenn der Eigentümer die Verfolgung aufgibt.",
+ "§ 962 BGB · Verfolgungsrecht des Eigentümers: Der Eigentümer des Bienenschwarms darf bei der Verfolgung fremde Grundstücke betreten. Ist der Schwarm in eine fremde nicht besetzte Bienenwohnung eingezogen, so darf der Eigentümer des Schwarmes zum Zwecke des Einfangens die Wohnung öffnen und die Waben herausnehmen oder herausbrechen. Er hat den entstehenden Schaden zu ersetzen.",
+ "§ 963 BGB · Vereinigung von Bienenschwärmen: Vereinigen sich ausgezogene Bienenschwärme mehrerer Eigentümer, so werden die Eigentümer, welche ihre Schwärme verfolgt haben, Miteigentümer des eingefangenen Gesamtschwarms; die Anteile bestimmen sich nach der Zahl der verfolgten Schwärme.",
+ "§ 964 BGB · Vermischung von Bienenschwärmen: Ist ein Bienenschwarm in eine fremde besetzte Bienenwohnung eingezogen, so erstrecken sich das Eigentum und die sonstigen Rechte an den Bienen, mit denen die Wohnung besetzt war, auf den eingezogenen Schwarm. Das Eigentum und die sonstigen Rechte an dem eingezogenen Schwarme erlöschen.",
+ "§ 3 Absatz 2 Lebensmittelbestrahlungsverordnung · Verordnung über die Behandlung von Lebensmitteln mit Elektronen-, Gamma- und Röntgenstrahlen, Neutronen oder ultravioletten Strahlen: Die Angaben nach Absatz 1 sind gut sichtbar, in leicht lesbarer Schrift und unverwischbar anzugeben."
+];
+// Curated and lightly condensed from BAMF's 07.05.2025 Gesamtfragenkatalog; answer is a zero-based choice index.
+const citizenshipQuestions=[
+ {source:57,question:"Wer wird meistens zur Präsidentin/zum Präsidenten des Deutschen Bundestages gewählt?",choices:["die/der älteste Abgeordnete im Parlament","die Ministerpräsidentin/der Ministerpräsident des größten Bundeslandes","eine ehemalige Bundeskanzlerin/ein ehemaliger Bundeskanzler","eine Abgeordnete/ein Abgeordneter der stärksten Fraktion"],answer:3},
+ {source:69,question:"Die Bundesrepublik Deutschland hat einen dreistufigen Verwaltungsaufbau. Wie heißt die unterste politische Stufe?",choices:["Stadträte","Landräte","Gemeinden","Bezirksämter"],answer:2},
+ {source:102,question:"Womit kann man in der Bundesrepublik Deutschland geehrt werden, wenn man auf politischem, wirtschaftlichem, kulturellem, geistigem oder sozialem Gebiet eine besondere Leistung erbracht hat?",choices:["Bundesverdienstkreuz","Bundesadler","Vaterländischer Verdienstorden","Ehrentitel ‚Held der DDR‘"],answer:0},
+ {source:103,question:"Was wird in Deutschland als ‚Ampelkoalition‘ bezeichnet?",choices:["CDU und CSU","SPD, FDP und Bündnis 90/Die Grünen","CSU, Die Linke und Bündnis 90/Die Grünen","CDU und SPD"],answer:1},
+ {source:140,question:"Was macht eine Schöffin/ein Schöffe in Deutschland?",choices:["entscheidet mit Richterinnen/Richtern über Schuld und Strafe","gibt Bürgerinnen/Bürgern rechtlichen Rat","stellt Urkunden aus","verteidigt die Angeklagte/den Angeklagten"],answer:0},
+ {source:150,question:"Eine Gerichtsschöffin/ein Gerichtsschöffe in Deutschland ist …",choices:["die Stellvertretung des Stadtoberhaupts","eine ehrenamtliche Richterin/ein ehrenamtlicher Richter","ein Mitglied eines Gemeinderats","eine Person, die Jura studiert hat"],answer:1},
+ {source:183,question:"Wann war in der Bundesrepublik Deutschland das ‚Wirtschaftswunder‘?",choices:["40er Jahre","50er Jahre","70er Jahre","80er Jahre"],answer:1},
+ {source:186,question:"Im Jahr 1953 gab es in der DDR einen Aufstand, an den lange Zeit ein Feiertag erinnerte. Wann war das?",choices:["1. Mai","17. Juni","20. Juli","9. November"],answer:1},
+ {source:211,question:"Welcher Politiker steht für die ‚Ostverträge‘?",choices:["Helmut Kohl","Willy Brandt","Michail Gorbatschow","Ludwig Erhard"],answer:1},
+ {source:230,question:"Das Europäische Parlament wird regelmäßig gewählt, nämlich alle …",choices:["5 Jahre","6 Jahre","7 Jahre","8 Jahre"],answer:0},
+ {source:234,question:"Wo ist ein Sitz des Europäischen Parlaments?",choices:["London","Paris","Berlin","Straßburg"],answer:3},
+ {source:237,question:"2007 wurde das 50-jährige Jubiläum der ‚Römischen Verträge‘ gefeiert. Was war ihr Inhalt?",choices:["Beitritt Deutschlands zur NATO","Gründung der Europäischen Wirtschaftsgemeinschaft (EWG)","Verpflichtung Deutschlands zu Reparationsleistungen","Festlegung der Oder-Neiße-Linie"],answer:1},
+ {source:238,question:"An welchen Orten arbeitet das Europäische Parlament?",choices:["Paris, London und Den Haag","Straßburg, Luxemburg und Brüssel","Rom, Bern und Wien","Bonn, Zürich und Mailand"],answer:1},
+ {source:266,question:"Wann beginnt die gesetzliche Nachtruhe in Deutschland?",choices:["wenn die Sonne untergeht","wenn die Nachbarn schlafen gehen","um 0 Uhr, Mitternacht","um 22 Uhr"],answer:3},
+ {source:282,question:"Welches Ehrenamt müssen deutsche Staatsbürgerinnen und Staatsbürger übernehmen, wenn sie dazu aufgefordert werden?",choices:["Vereinstrainerin/Vereinstrainer","Wahlhelferin/Wahlhelfer","Bibliotheksaufsicht","Lehrerin/Lehrer"],answer:1},
+ {source:285,question:"Frau Frost arbeitet fest angestellt in einem Büro. Was muss sie nicht von ihrem Gehalt bezahlen?",choices:["Lohnsteuer","Beiträge zur Arbeitslosenversicherung","Beiträge zur Renten- und Krankenversicherung","Umsatzsteuer"],answer:3},
+ {source:291,question:"Warum muss man bei der Steuererklärung angeben, ob man zu einer Kirche gehört?",choices:["weil es eine an Einkommen- und Lohnsteuer geknüpfte Kirchensteuer gibt","weil das nur für die Statistik wichtig ist","weil Nichtmitglieder mehr Steuern zahlen","weil die Kirche die Steuererklärung bearbeitet"],answer:0},
+ {source:300,question:"Aus welchem Land kamen die ersten Gastarbeiterinnen und Gastarbeiter in die Bundesrepublik Deutschland?",choices:["Italien","Spanien","Portugal","Türkei"],answer:0}
+];
+const quizApproaches={
+ berlin:["Ah, Sie sind not from hier, oder? Dann one completely normale Prüfungsfrage.","Nein, aber wo kommen Sie ursprünglich originally her? Egal. Einbürgerungstest!","Your Gehweise ist auffällig international. Eine random Prüfungsfrage, bitte."],
+ germany:["Ach, Sie sind nicht von hier, oder? Dann eine ganz gewöhnliche Prüfungsfrage.","Nein, aber wo kommen Sie ursprünglich wirklich her? Egal. Einbürgerungstest!","Ihre Gehweise ist auffällig international. Eine zufällige Prüfungsfrage, bitte."]
 };
 const violationPools={
  jaywalk:["FAHRBAHNÜBERQUERUNG AUSSERHALB MARKIERTER GEOMETRIE","MISSACHTUNG AMTLICH WEISSER QUERUNGSSTREIFEN","DIAGONALE QUERUNG OHNE WINKELBESCHEINIGUNG"],
@@ -212,6 +288,15 @@ const buildings=[
 {id:"reinigung",name:"STADTREINIGUNG",x:7800,y:2320,w:920,h:430,hgt:170,doorX:8260,doorY:2780,sign:"TRENNUNG VOR REINIGUNG"},
 {id:"akw",kind:"nuclear",name:"AKW · GESCHLOSSEN",x:4750,y:3370,w:850,h:420,hgt:155,doorX:5175,doorY:3820,sign:"STILLGELEGT · ZUGANG VERSIEGELT"},
 {id:"kohlewerk",kind:"coal",name:"KOHLEKRAFTWERK · IN BETRIEB",x:6250,y:3370,w:850,h:420,hgt:170,doorX:6675,doorY:3820,sign:"OFFEN · 24/7 · RAUCHFANG AKTIV"}];
+const grassAreas=[],walkways=[];
+for(const b of buildings){
+ const road=horizontalRoads.find(r=>r.y>b.y+b.h),top=b.y+b.h+6,bottom=road?.y-SIDEWALK_WIDTH;
+ if(!bottom||bottom-top<36)continue;
+ const left=b.doorX-WALKWAY_WIDTH/2,right=b.doorX+WALKWAY_WIDTH/2,h=bottom-top;
+ if(left>b.x+8)grassAreas.push({x:b.x,y:top,w:left-b.x,h});
+ if(right<b.x+b.w-8)grassAreas.push({x:right,y:top,w:b.x+b.w-right,h});
+ walkways.push({x:left,y:top,w:WALKWAY_WIDTH,h});
+}
 const missions=[
 {title:"ANMELDUNG I",text:"Gehen Sie zum Bürgeramt. Beantragen Sie die Erlaubnis, einen Antrag zu stellen.",target:"buergeramt",form:"a38"},
 {title:"ANMELDUNG II",text:"Die Wohnungsgeberbestätigung fehlt natürlich. Holen Sie sie bei der Hausverwaltung.",target:"hausverwaltung",form:"wohnung"},
@@ -269,7 +354,24 @@ const npcs=[
  {x:5200,y:2860,name:"FRAU RUHE",line:5,vx:12,vy:0,min:4750,max:5600},
  {x:6750,y:2860,name:"HERR FAXROLLE",line:4,vx:-13,vy:0,min:6250,max:7100},
  {x:8300,y:2860,name:"FRAU TRENNUNG",line:6,vx:12,vy:0,min:7800,max:8700}
-];
+ ];
+const crowdNames=["FRAU KRÜGER","HERR WEBER","FRAU WAGNER","HERR BECKER","FRAU HOFFMANN","HERR SCHÄFER","FRAU KOCH","HERR BAUER","FRAU RICHTER","HERR KLEINERT","FRAU WOLF","HERR SCHRÖDER"];
+const sidewalkSegments=[];
+for(let start=40,i=0;i<=verticalRoads.length;i++){
+ const road=verticalRoads[i],end=road?road.x-SIDEWALK_WIDTH:WORLD.w-40;
+ if(end-start>180)sidewalkSegments.push({min:start,max:end});
+ if(road)start=road.x+road.w+SIDEWALK_WIDTH;
+}
+let crowdIndex=0;
+for(const road of horizontalRoads){
+ const y=road.y-SIDEWALK_WIDTH/2;
+ for(const segment of sidewalkSegments)for(let i=0;i<3;i++){
+  const f=(i+1)/4,x=segment.min+(segment.max-segment.min)*f,j=crowdIndex++;
+  npcs.push({x,y:y+(i-1)*15,name:crowdNames[j%crowdNames.length],line:(j*7+2)%npcLines.length,vx:(j%2?1:-1)*(13+j%5),vy:0,min:segment.min,max:segment.max,crowd:true,quizzer:j%3===0,pause:0,barkAt:0});
+ }
+}
+const wurstSpots=[[1810,1830],[2380,1155],[3010,745],[4025,750],[5175,750],[6675,750],[8260,750],[5175,1880],[8260,2860]];
+const wurstPickups=WURST_IDS.map((wurstType,i)=>({x:wurstSpots[i][0],y:wurstSpots[i][1],type:"wurst",wurstType,label:WURST_TYPES[wurstType].short,taken:false,value:14,variant:i,...WURST_TYPES[wurstType]}));
 const pickups=[
  {x:1980,y:870,type:"bratwurst",label:"BRATWURST",taken:false,value:35},
  {x:2110,y:880,type:"currywurst",label:"CURRYWURST",taken:false,value:50},
@@ -288,10 +390,11 @@ const pickups=[
  {x:5100,y:930,type:"pfand",label:"PFAND",taken:false},{x:6650,y:930,type:"brezel",label:"BREZEL",taken:false,value:22},{x:8200,y:930,type:"pfand",label:"PFAND",taken:false},
  {x:5350,y:1910,type:"currywurst",label:"CURRYWURST",taken:false,value:50},{x:6900,y:1910,type:"pfand",label:"PFAND",taken:false},{x:8450,y:1910,type:"bratwurst",label:"BRATWURST",taken:false,value:35},
  {x:5050,y:2890,type:"pfand",label:"PFAND",taken:false},{x:6800,y:2890,type:"brezel",label:"BREZEL",taken:false,value:22},{x:8500,y:2890,type:"pfand",label:"PFAND",taken:false},
- {x:5850,y:3500,type:"pfand",label:"PFAND",taken:false},{x:7350,y:3500,type:"currywurst",label:"CURRYWURST",taken:false,value:50},{x:9100,y:3500,type:"pfand",label:"PFAND",taken:false}
+ {x:5850,y:3500,type:"pfand",label:"PFAND",taken:false},{x:7350,y:3500,type:"currywurst",label:"CURRYWURST",taken:false,value:50},{x:9100,y:3500,type:"pfand",label:"PFAND",taken:false},
+ ...wurstPickups
 ];
 const normObjects=[{x:2210,y:1190,type:"bin",fixed:false,label:"MÜLLTONNE 4,6° SCHIEF"},{x:1650,y:650,type:"chairs",fixed:false,label:"STÜHLE NICHT FLUCHTGERECHT"},{x:570,y:1140,type:"hedge",fixed:false,label:"HECKE 3 CM ZU INDIVIDUELL"}];
-window.Germany3DBridge={WORLD,player,roads,crossings,crossingSigns,buildings,schreber,policeGarden,policePath,BORDER_Y,BORDER_BAND,borderGates,borderSegments,fireSources,props,pickups,getNPCs:()=>npcs,getPolice:()=>police,getBorderPourerCanvas:()=>borderPourerSprite.canvas,borderPourerGrid:{cols:borderPourerSprite.cols,rows:borderPourerSprite.rows}};
+window.Germany3DBridge={WORLD,player,roads,crossings,crossingSigns,trafficLights,buildings,grassAreas,walkways,SIDEWALK_WIDTH,schreber,policeGarden,policePath,BORDER_Y,BORDER_BAND,borderGates,borderSegments,fireSources,props,pickups,getNPCs:()=>npcs,getPolice:()=>police,getBorderPourerCanvas:()=>borderPourerSprite.canvas,borderPourerGrid:{cols:borderPourerSprite.cols,rows:borderPourerSprite.rows}};
 const forms={
 a38:{code:"A38/1",title:"Passierschein A38 zur Beantragung eines weiteren Antrags",subtitle:"Bitte vollständig ausfüllen. Unvollständige Vollständigkeit gilt als unvollständig.",fields:[["text","VOLLSTÄNDIGER NAME"],["text","GEBURTSORT IN HEUTIGEN GEMEINDEGRENZEN"],["select","MELDESTATUS",["gemeldet","noch nicht gemeldet","gefühltermaßen gemeldet"]],["text","AKTENZEICHEN, FALLS BEREITS VORHANDEN"],["check","Ich bestätige, dass ich dieses Formular freiwillig unfreiwillig ausfülle."]]},
 wohnung:{code:"WGB-88",title:"Wohnungsgeberbestätigung zur Bestätigung einer Wohnung",subtitle:"Bestätigen Sie, dass Ihre Wohnung tatsächlich eine Wohnung ist.",fields:[["text","ANSCHRIFT"],["text","WOHNUNGSGEBENDER WOHNUNGSGEBER"],["select","ART DER ÜBERLASSUNG",["vermietet","untervermietet","mysteriös überlassen"]],["text","TATSÄCHLICHES DATUM DER TATSACHE DES EINZUGS"],["check","Ich bestätige das Vorhandensein von Wänden und mindestens einer Tür."]]},
@@ -302,27 +405,43 @@ aufenthalt:{code:"ABH-404",title:"Antrag auf Fortsetzung der Anwesenheit",subtit
 citizenship:{code:"DE-1A",title:"Fiktiver Antrag auf deutsche Staatsangehörigkeit",subtitle:"Reines Spielverfahren. Keine echte Rechtslage oder Voraussetzung.",fields:[["text","NAME"],["select","KENNTNIS DER HAUSORDNUNG",["ausreichend","übertrieben","laminiert"]],["select","VERHÄLTNIS ZUR MÜLLTRENNUNG",["ambitioniert","akademisch","existenziell"]],["text","WARUM IST DIESES FORMULAR NICHT GEHEFTET?"],["check","Ich erkenne an, dass alle dargestellten Fristen und Regeln frei erfunden sind."]]}}
 function resize(){dpr=Math.min(devicePixelRatio||1,2);width=innerWidth;height=innerHeight;canvas.width=Math.round(width*dpr);canvas.height=Math.round(height*dpr);ctx.setTransform(dpr,0,0,dpr,0,0)}addEventListener("resize",resize);resize();
 const clamp=(v,a,b)=>Math.max(a,Math.min(b,v)),dist=(ax,ay,bx,by)=>Math.hypot(ax-bx,ay-by),inRect=(x,y,r)=>x>=r.x&&x<=r.x+r.w&&y>=r.y&&y<=r.y+r.h,pick=list=>list[Math.floor(Math.random()*list.length)];
-const onRoad=(x,y)=>roads.some(r=>inRect(x,y,r)),onCrossing=(x,y)=>crossings.some(r=>inRect(x,y,r)),onGardenGrass=(x,y)=>(x>schreber.x+20&&x<schreber.x+schreber.w-20&&y>schreber.y+20&&y<schreber.y+schreber.h-20)||onPoliceGardenGrass(x,y);
+const onRoad=(x,y)=>roads.some(r=>inRect(x,y,r)),onCrossing=(x,y)=>crossings.some(r=>inRect(x,y,r)),onGardenGrass=(x,y)=>grassAreas.some(r=>inRect(x,y,r))||(x>schreber.x+20&&x<schreber.x+schreber.w-20&&y>schreber.y+20&&y<schreber.y+schreber.h-20)||onPoliceGardenGrass(x,y);
 function blocked(x,y){if(x<25||y<25||x>WORLD.w-25||y>WORLD.h-25)return true;for(const b of buildings)if(x>b.x-player.r&&x<b.x+b.w+player.r&&y>b.y-player.r&&y<b.y+b.h+player.r)return true;return false}
+function blockingPedestrian(x,y){let nearest=null,best=NPC_BLOCK_DISTANCE;for(const n of npcs){if(n.special||n.arrested)continue;const d=dist(x,y,n.x,n.y);if(d<best){nearest=n;best=d}}return nearest}
 function toast(msg){const e=document.getElementById("toast");e.textContent=msg;e.classList.add("show");clearTimeout(toast.t);toast.t=setTimeout(()=>e.classList.remove("show"),2300)}
+function renderWurstBadges(){
+ const list=document.getElementById("wurst-badges");if(renderWurstBadges.count===state.wurstBadges.size&&list.childElementCount)return;renderWurstBadges.count=state.wurstBadges.size;list.innerHTML="";
+ for(const id of WURST_IDS){const def=WURST_TYPES[id],badge=document.createElement("span");badge.className="wurst-badge"+(state.wurstBadges.has(id)?" collected":"");badge.textContent=def.mark;badge.title=def.label;badge.style.setProperty("--wurst-color",def.color);list.appendChild(badge)}
+ document.getElementById("wurst-count").textContent=state.wurstBadges.size+"/"+WURST_IDS.length
+}
+function announceWurst(def){const box=document.getElementById("wurst-alert");document.getElementById("wurst-alert-text").textContent="UNLOCKED "+def.label+" · +1 GERMANNESS";box.hidden=false;box.classList.remove("show");void box.offsetWidth;box.classList.add("show");clearTimeout(announceWurst.t);announceWurst.t=setTimeout(()=>{box.hidden=true;box.classList.remove("show")},2800)}
 function ensureAudio(){if(!audio)audio=new (window.AudioContext||window.webkitAudioContext)();audio.resume();return audio}
 function uiTone(freq=440,dur=.08,type="square",gain=.04){const a=ensureAudio(),o=a.createOscillator(),g=a.createGain(),t=a.currentTime;o.type=type;o.frequency.value=freq;g.gain.setValueAtTime(gain,t);g.gain.exponentialRampToValueAtTime(.0001,t+dur);o.connect(g).connect(a.destination);o.start(t);o.stop(t+dur+.02)}
 function playSiren(){const a=ensureAudio(),t=a.currentTime;for(let i=0;i<6;i++){const o=a.createOscillator(),g=a.createGain(),st=t+i*.18;o.type="sawtooth";o.frequency.setValueAtTime(i%2?920:620,st);o.frequency.linearRampToValueAtTime(i%2?620:920,st+.17);g.gain.setValueAtTime(.0001,st);g.gain.linearRampToValueAtTime(.065,st+.015);g.gain.exponentialRampToValueAtTime(.0001,st+.18);o.connect(g).connect(a.destination);o.start(st);o.stop(st+.19)}}
-const SPEECH_GAP_MS=250,speechQueue=[];let speechActive=false,speechPauseTimer=null,speechGeneration=0;
-let merkelRecordingPromise=null,merkelRecordingSource=null;
+const SPEECH_GAP_MS=250,speechQueue=[],recordingPromises=new Map();let speechActive=false,speechPauseTimer=null,speechGeneration=0,recordedSpeechSource=null;
 function finishSpeechItem(done,generation){if(generation!==speechGeneration)return;if(done)done();speechPauseTimer=setTimeout(()=>{speechActive=false;playQueuedSpeech()},SPEECH_GAP_MS)}
-function playSyntheticSpeech({text,urgent,masculine,start,done},generation){if(generation!==speechGeneration)return;if(start)start();if(!("speechSynthesis" in window)){finishSpeechItem(done,generation);return}const u=new SpeechSynthesisUtterance(text),voices=speechSynthesis.getVoices(),german=voices.filter(v=>/^de(-|_)/i.test(v.lang)||/german|deutsch/i.test(v.name));u.voice=(masculine?german.find(v=>/conrad|markus|martin|stefan|hans|klaus|thorsten|yannick|male|männlich/i.test(v.name)):null)||german[0]||null;u.lang="de-DE";u.rate=urgent?.98:.9;u.pitch=masculine?.68:urgent?.72:.88;u.volume=1;let finished=false;const finish=()=>{if(finished)return;finished=true;finishSpeechItem(done,generation)};u.onend=finish;u.onerror=finish;speechSynthesis.speak(u)}
-function playQueuedSpeech(){if(speechActive||!speechQueue.length||!state.voiceOn)return;speechActive=true;const item=speechQueue.shift(),generation=speechGeneration;if(!item.recorded){playSyntheticSpeech(item,generation);return}prepareMerkelRecording().then(buffer=>{if(generation!==speechGeneration)return;if(item.start)item.start();const source=ensureAudio().createBufferSource();merkelRecordingSource=source;source.buffer=buffer;source.connect(ensureAudio().destination);source.onended=()=>{if(merkelRecordingSource===source)merkelRecordingSource=null;finishSpeechItem(item.done,generation)};source.start()}).catch(()=>playSyntheticSpeech(item,generation))}
-function speak(text,{urgent=false,masculine=false,start,done}={}){if(!state.voiceOn||!("speechSynthesis" in window)){if(start)start();if(done)done();return}speechQueue.push({text,urgent,masculine,start,done});playQueuedSpeech()}
-function prepareMerkelRecording(){const a=ensureAudio();return merkelRecordingPromise||=(fetch("./assets/merkel-wir-schaffen-das.mp3").then(r=>{if(!r.ok)throw new Error("Merkel recording unavailable");return r.arrayBuffer()}).then(data=>a.decodeAudioData(data)))}
-function stopMerkelRecording(){if(!merkelRecordingSource)return;try{merkelRecordingSource.stop()}catch{}merkelRecordingSource=null}
-function speakMerkelLine(text,{urgent=false,start,done}={}){if(text!==MERKEL_AUDIO_LINE){speak(text,{urgent,start,done});return}if(!state.voiceOn){if(start)start();if(done)done();return}speechQueue.push({text,urgent,start,done,recorded:true});playQueuedSpeech()}
+function voiceHash(text){let h=0;for(let i=0;i<text.length;i++)h=(h*31+text.charCodeAt(i))>>>0;return h}
+function playSyntheticSpeech({text,urgent,masculine,voiceKey,start,done},generation){if(generation!==speechGeneration)return;if(start)start();if(!("speechSynthesis" in window)){finishSpeechItem(done,generation);return}const u=new SpeechSynthesisUtterance(text),voices=speechSynthesis.getVoices(),german=voices.filter(v=>/^de(-|_)/i.test(v.lang)||/german|deutsch/i.test(v.name)),h=voiceHash(voiceKey||text),male=masculine?german.find(v=>/conrad|markus|martin|stefan|hans|klaus|thorsten|yannick|male|männlich/i.test(v.name)):null;u.voice=male||german[h%Math.max(1,german.length)]||null;u.lang="de-DE";u.rate=(urgent?.96:.88)+(h%4)*.025;u.pitch=masculine?.68:(urgent?.76:.86)+(h%5)*.035;u.volume=1;let finished=false;const finish=()=>{if(finished)return;finished=true;finishSpeechItem(done,generation)};u.onend=finish;u.onerror=finish;speechSynthesis.speak(u)}
+function prepareRecording(url){if(recordingPromises.has(url))return recordingPromises.get(url);const a=ensureAudio(),promise=fetch(url).then(r=>{if(!r.ok)throw new Error("Recorded voice unavailable: "+url);return r.arrayBuffer()}).then(data=>a.decodeAudioData(data));recordingPromises.set(url,promise);return promise}
+function playQueuedSpeech(){if(speechActive||!speechQueue.length||!state.voiceOn)return;speechActive=true;const item=speechQueue.shift(),generation=speechGeneration;if(!item.recording){playSyntheticSpeech(item,generation);return}prepareRecording(item.recording).then(buffer=>{if(generation!==speechGeneration)return;if(item.start)item.start();const source=ensureAudio().createBufferSource();recordedSpeechSource=source;source.buffer=buffer;source.connect(ensureAudio().destination);source.onended=()=>{if(recordedSpeechSource===source)recordedSpeechSource=null;finishSpeechItem(item.done,generation)};source.start()}).catch(()=>playSyntheticSpeech(item,generation))}
+function speak(text,{urgent=false,masculine=false,voiceKey="",start,done}={}){if(!state.voiceOn||!("speechSynthesis" in window)){if(start)start();if(done)done();return}speechQueue.push({text,urgent,masculine,voiceKey,start,done});playQueuedSpeech()}
+function speakRecorded(text,recording,{urgent=false,voiceKey="",start,done}={}){if(!state.voiceOn){if(start)start();if(done)done();return}speechQueue.push({text,urgent,voiceKey,start,done,recording});playQueuedSpeech()}
+function prepareMerkelRecording(){return prepareRecording("./assets/merkel-wir-schaffen-das.mp3")}
+function stopRecordedSpeech(){if(!recordedSpeechSource)return;try{recordedSpeechSource.stop()}catch{}recordedSpeechSource=null}
+function speakMerkelLine(text,{urgent=false,start,done}={}){if(text!==MERKEL_AUDIO_LINE){speak(text,{urgent,voiceKey:"ANGELA MERKEL",start,done});return}speakRecorded(text,"./assets/merkel-wir-schaffen-das.mp3",{urgent,voiceKey:"ANGELA MERKEL",start,done})}
 function hideWorldBark(){clearTimeout(showWorldBark.t);document.getElementById("police-bark").hidden=true}
-function stopSpeech(){speechGeneration++;speechQueue.length=0;speechActive=false;clearTimeout(speechPauseTimer);if("speechSynthesis" in window)speechSynthesis.cancel();stopMerkelRecording();hideWorldBark()}
+function stopSpeech(){speechGeneration++;speechQueue.length=0;speechActive=false;clearTimeout(speechPauseTimer);if("speechSynthesis" in window)speechSynthesis.cancel();stopRecordedSpeech();hideWorldBark()}
 function violationAlert(msg,level){const alert=document.getElementById("violation-alert"),app=document.getElementById("app");document.getElementById("violation-law").textContent=lawFor(msg);document.getElementById("violation-title").textContent=state.lang==="en"?"RULE VIOLATION":"ORDNUNGSWIDRIGKEIT";document.getElementById("violation-text").textContent=state.lang==="en"?localize(msg):msg;document.getElementById("violation-stars").textContent="★".repeat(level)+"☆".repeat(Math.max(0,5-level));alert.hidden=false;app.classList.remove("enforcement");void app.offsetWidth;app.classList.add("enforcement");clearTimeout(violationAlert.t);violationAlert.t=setTimeout(()=>{alert.hidden=true;app.classList.remove("enforcement")},2200);playSiren()}
-function showWorldBark(speaker,msg,urgent=true){const box=document.getElementById("police-bark"),speakerEl=document.getElementById("bark-speaker"),textEl=document.getElementById("police-bark-text"),start=()=>{speakerEl.textContent=speaker;textEl.textContent=msg;box.hidden=false;uiTone(urgent?1280:880,.06,"square",.035)},done=()=>{if(speakerEl.textContent===speaker&&textEl.textContent===msg)box.hidden=true};if(!state.voiceOn){start();clearTimeout(showWorldBark.t);showWorldBark.t=setTimeout(done,3200);return}const options={urgent,start,done};if(speaker.startsWith("ANGELA MERKEL"))speakMerkelLine(msg,options);else speak(msg,{...options,masculine:speaker.startsWith("FRIEDRICH MERZ")})}
+function showWorldBark(speaker,msg,urgent=true,recording=""){const box=document.getElementById("police-bark"),speakerEl=document.getElementById("bark-speaker"),textEl=document.getElementById("police-bark-text"),start=()=>{speakerEl.textContent=speaker;textEl.textContent=msg;box.hidden=false;uiTone(urgent?1280:880,.06,"square",.035)},done=()=>{if(speakerEl.textContent===speaker&&textEl.textContent===msg)box.hidden=true};if(!state.voiceOn){start();clearTimeout(showWorldBark.t);showWorldBark.t=setTimeout(done,3200);return}const options={urgent,voiceKey:speaker,start,done};if(recording)speakRecorded(msg,recording,options);else if(speaker.startsWith("ANGELA MERKEL"))speakMerkelLine(msg,options);else speak(msg,{...options,masculine:speaker.startsWith("FRIEDRICH MERZ")})}
 function policeBark(force=false){const now=performance.now();if(!force&&now-(policeBark.last||0)<2300)return;policeBark.last=now;showWorldBark("POLIZEI",pick(policeBarks[state.region]||policeBarks.germany),true)}
 function jaywalkerBark(){const speaker=state.region==="berlin"?"EMPÖRTE PASSANTEN · BERLIN":"EMPÖRTE PASSANTEN · DEUTSCHLAND";showWorldBark(speaker,pick(jaywalkerBarks[state.region]||jaywalkerBarks.germany),true)}
+function pedestrianBark(n,surface="sidewalk"){
+ const now=performance.now();if(!n||now<(n.barkAt||0)||(pedestrianBark.last&&now-pedestrianBark.last<3200))return false;
+ const line=pick(pedestrianBarks[state.region][surface]);n.barkAt=now+5600+Math.random()*2600;pedestrianBark.last=now;showWorldBark(n.name,typeof line==="string"?line:line.text,true,line.recording||"");return true
+}
+function nearestPedestrian(maxDistance=360){let nearest=null,best=maxDistance;for(const n of npcs){if(n.special)continue;const d=dist(player.x,player.y,n.x,n.y);if(d<best){nearest=n;best=d}}return nearest}
+function surfaceComplaint(surface){const n=nearestPedestrian();if(!pedestrianBark(n,surface)&&surface==="road")jaywalkerBark()}
+function playerSurface(){return onGardenGrass(player.x,player.y)?"grass":onRoad(player.x,player.y)&&!onCrossing(player.x,player.y)?"road":"sidewalk"}
 function politicianDialogue(n){return politicianLines[n.politician]||[]}
 function nextPoliticianLine(n){const lines=politicianDialogue(n);return lines.length?lines[n.lineIndex++%lines.length]:""}
 function merkelBehind(n){return (player.x-n.x)*(n.facingX||1)+(player.y-n.y)*(n.facingY||0)<-24}
@@ -354,13 +473,78 @@ function updateBorderPourer(n,dt){
  }
 }
 function softWarn(msg){toast((state.lang==="en"?"WARNING · ":"VERWARNUNG · ")+msg);uiTone(520,.055,"square",.025)}
+function addGermanness(amount,reason){
+ const before=state.germanness;state.germanness=clamp(state.germanness+amount,0,GERMANNESS_MAX);const sign=amount>0?"+":"";
+ if(state.germanness===before){toast(reason+" · GERMANNESS "+state.germanness+"/"+GERMANNESS_MAX);return}
+ particles.push({x:player.x,y:player.y,t:1.25,text:sign+amount+" GERMANNESS"});
+ if(before<LAW_POWER_THRESHOLD&&state.germanness>=LAW_POWER_THRESHOLD){
+  state.lawUnlocked=true;queueNationalAnthem();uiTone(740,.12,"square",.04);setTimeout(()=>uiTone(988,.18,"square",.035),120);
+  const instruction=state.region==="berlin"?"§-MACHT unlocked. Press § oder Q to quote ein Gesetz!":"§-MACHT freigeschaltet. Drücken Sie § oder Q, um ein Gesetz zu zitieren!";
+  toast("GERMANNESS "+state.germanness+"/"+GERMANNESS_MAX+" · §-MACHT FREIGESCHALTET · § ODER Q DRÜCKEN");showWorldBark("§-AMT",instruction,true);
+ }else toast(reason+" · GERMANNESS "+sign+amount);
+ updateHud();
+}
+function updateGermannessEvents(dt,mag){
+ state.ampelClock+=dt;state.lawCooldown=Math.max(0,state.lawCooldown-dt);
+ for(const light of trafficLights)light.green=Math.floor((state.ampelClock+light.phaseOffset)/6)%2===1;
+ const roadNow=onRoad(player.x,player.y);
+ if(!state.wasOnRoad&&roadNow){const crossingId=crossings.findIndex(c=>inRect(player.x,player.y,c));state.crossingRun={valid:crossingId>=0,crossingId}}
+ if(roadNow&&state.crossingRun&&!onCrossing(player.x,player.y))state.crossingRun.valid=false;
+ if(state.wasOnRoad&&!roadNow&&state.crossingRun?.valid&&state.ampelClock-state.crossRewardAt>4){state.crossRewardAt=state.ampelClock;addGermanness(1,"ZEBRASTREIFEN ORDNUNGSGEMÄSS BENUTZT")}
+ if(!roadNow)state.crossingRun=null;state.wasOnRoad=roadNow;
+ let waitingAt=null,best=135;for(const light of trafficLights){const d=dist(player.x,player.y,light.x,light.y);if(!light.green&&d<best){best=d;waitingAt=light}}
+ if(waitingAt&&mag<.05&&(!roadNow||onCrossing(player.x,player.y))){
+  if(state.ampelWaitLight!==waitingAt){state.ampelWaitLight=waitingAt;state.ampelWait=0}
+  state.ampelWait+=dt;const cycle=Math.floor((state.ampelClock+waitingAt.phaseOffset)/6);
+  if(state.ampelWait>=1.5&&waitingAt.rewardCycle!==cycle){waitingAt.rewardCycle=cycle;state.ampelWait=0;addGermanness(1,"BEI ROT GEWARTET")}
+ }else{state.ampelWaitLight=null;state.ampelWait=0}
+}
+function useLawPower(){
+ if(!state.started||state.modal)return;if(!state.lawUnlocked){toast("§-MACHT AB "+LAW_POWER_THRESHOLD+"/"+GERMANNESS_MAX+" GERMANNESS");return}if(state.lawCooldown>0){toast("§-MACHT NOCH "+Math.ceil(state.lawCooldown)+" SEKUNDEN IN BEARBEITUNG");return}
+ let target=null,best=Infinity;for(const n of npcs){if(n.special||n.arrested||!n.crowd||n===state.quizApproach)continue;const d=dist(player.x,player.y,n.x,n.y);if(d<best){best=d;target=n}}
+ if(!target){toast("KEINE ANDERE ZUSTÄNDIGE PERSON AUFFINDBAR");return}
+ const quote=pick(lawPowerLines);state.lawCooldown=14;state.wanted=0;state.wantedCooldown=0;state.offence="ZUSTÄNDIGKEIT ERFOLGREICH UMGELENKT";
+ if(!police.length){const a=Math.random()*Math.PI*2;police.push({x:clamp(target.x+Math.cos(a)*230,40,WORLD.w-40),y:clamp(target.y+Math.sin(a)*230,40,WORLD.h-40),speed:150,barkAt:0,divertedTarget:target})}
+ for(const p of police)p.divertedTarget=target;
+ showWorldBark("SIE · GESETZZITAT",quote,true);toast("§-MACHT AKTIV · "+target.name+" WIRD ÜBERPRÜFT");updateHud();
+}
+function nextCitizenshipQuestion(){
+ if(!state.quizBag.length){state.quizBag=citizenshipQuestions.map((_,i)=>i);for(let i=state.quizBag.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[state.quizBag[i],state.quizBag[j]]=[state.quizBag[j],state.quizBag[i]]}}
+ return citizenshipQuestions[state.quizBag.pop()]
+}
+function setQuizChoicesEnabled(enabled){document.querySelectorAll("#quiz-choices button").forEach(button=>button.disabled=!enabled)}
+function startCitizenshipQuiz(n){
+ stopSpeech();state.modal=true;state.quizNpc=n;state.quizQuestion=nextCitizenshipQuestion();const q=state.quizQuestion,remark=pick(quizApproaches[state.region]||quizApproaches.germany),prompt=remark+" "+q.question,modal=document.getElementById("quiz-modal"),choices=document.getElementById("quiz-choices");
+ document.getElementById("quiz-speaker").textContent=n.name+" · SPONTANE EINBÜRGERUNGSPRÜFUNG";document.getElementById("quiz-source").textContent="BAMF-GESAMTKATALOG 07.05.2025 · AUFGABE "+q.source;document.getElementById("quiz-prompt").textContent=prompt;choices.innerHTML="";
+ q.choices.forEach((choice,index)=>{const button=document.createElement("button");button.type="button";button.dataset.answer=index;button.textContent=String.fromCharCode(65+index)+" · "+choice;button.disabled=true;choices.appendChild(button)});
+ const token=state.quizVoiceToken=(state.quizVoiceToken||0)+1,reveal=()=>{if(token===state.quizVoiceToken)modal.hidden=false},done=()=>{if(token===state.quizVoiceToken)setQuizChoicesEnabled(true)};speak(prompt,{voiceKey:n.name,start:reveal,done});
+}
+function answerCitizenshipQuiz(index){
+ const q=state.quizQuestion;if(!q)return;state.quizVoiceToken=(state.quizVoiceToken||0)+1;document.getElementById("quiz-modal").hidden=true;state.modal=false;state.quizQuestion=null;state.quizNpc=null;
+ if(index===q.answer){uiTone(980,.1,"square",.04);addGermanness(1,"RICHTIG · AUFGABE "+q.source)}else{uiTone(170,.16,"sawtooth",.045);addGermanness(-1,"FALSCH · RICHTIG: "+q.choices[q.answer]);showWorldBark("ENTTÄUSCHTER PRÜFUNGSBEAUFTRAGTER","Nein! Nein! Nein!",true)}
+}
+document.getElementById("quiz-choices").addEventListener("click",event=>{const button=event.target.closest("button[data-answer]");if(button&&!button.disabled)answerCitizenshipQuiz(Number(button.dataset.answer))});
+function updateQuizEncounters(dt){
+ if(state.quizApproach)return;state.quizTimer-=dt;if(state.quizTimer>0)return;
+ let candidates=npcs.filter(n=>n.quizzer&&!n.quizAsked&&dist(player.x,player.y,n.x,n.y)<1800);if(!candidates.length)candidates=npcs.filter(n=>n.quizzer&&!n.quizAsked);if(!candidates.length){for(const n of npcs)if(n.quizzer)n.quizAsked=false;candidates=npcs.filter(n=>n.quizzer)}
+ if(candidates.length){candidates.sort((a,b)=>dist(player.x,player.y,a.x,a.y)-dist(player.x,player.y,b.x,b.y));state.quizApproach=pick(candidates.slice(0,Math.min(6,candidates.length)))}
+ state.quizTimer=22+Math.random()*18;
+}
 function wanted(level,msg,instant){const old=state.wanted;state.wanted=clamp(Math.max(state.wanted,level),0,5);state.offence=msg;state.wantedCooldown=14;const gained=state.wanted-old;if(instant||(gained>0&&state.wanted>=2))spawnPolice(instant?Math.max(3,state.wanted):Math.min(4,gained+(state.wanted>=3?1:0)));violationAlert(msg,state.wanted);toast(msg+" · "+state.wanted+" STERN"+(state.wanted===1?"":"E"));updateHud()}
 function escalate(msg,amount=1,instant=false){wanted(Math.min(5,Math.max(1,state.wanted+amount)),msg,instant)}
 function spawnPolice(n){for(let i=0;i<n;i++){const a=Math.random()*Math.PI*2,d=180+Math.random()*120,x=clamp(player.x+Math.cos(a)*d,40,WORLD.w-40),rawY=player.y+Math.sin(a)*d,y=state.region==="berlin"?clamp(rawY,BORDER_Y+45,WORLD.h-40):clamp(rawY,40,BORDER_Y-45);police.push({x,y,speed:105+state.wanted*12,barkAt:0})}policeBark(true)}
-function updateHud(){const stars=document.getElementById("stars"),wantedBox=document.querySelector(".wanted");stars.innerHTML="";wantedBox.classList.toggle("hot",state.wanted>0);for(let i=0;i<5;i++){const s=document.createElement("span");s.className="star"+(i<state.wanted?" active":"");s.textContent="★";stars.appendChild(s)}document.getElementById("offence").textContent=state.lang==="en"?(state.wanted?"ACTIVE VIOLATION FILE":"FILE STATUS: UNREMARKABLE"):state.offence;const m=missions[Math.min(state.mission,missions.length-1)];document.getElementById("mission-title").textContent=localize(m.title);document.getElementById("mission-text").textContent=localize(m.text);const frac=state.mission/missions.length+(state.mission===5?state.stadtbild/3/missions.length:0);document.getElementById("mission-progress").style.width=Math.min(100,frac*100)+"%";document.getElementById("energy").textContent=Math.round(player.energy);document.getElementById("forms").textContent=state.forms;document.getElementById("pfand").textContent=state.pfand;document.getElementById("day").textContent=state.day+"/3";const r=rules[state.rule%rules.length];document.getElementById("rule-id").textContent=r[0];document.getElementById("rule-text").textContent=localize(r[1]);document.getElementById("region-name").textContent=state.region==="berlin"?"BERLIN":"DEUTSCHLAND";document.getElementById("region-language").textContent=state.region==="berlin"?"Denglisch-Zone":"Nur Deutsch"}
+function updateHud(){
+ const stars=document.getElementById("stars"),wantedBox=document.querySelector(".wanted");stars.innerHTML="";wantedBox.classList.toggle("hot",state.wanted>0);
+ for(let i=0;i<5;i++){const s=document.createElement("span");s.className="star"+(i<state.wanted?" active":"");s.textContent="★";stars.appendChild(s)}
+ document.getElementById("offence").textContent=state.lang==="en"?(state.wanted?"ACTIVE VIOLATION FILE":"FILE STATUS: UNREMARKABLE"):state.offence;
+ const m=missions[Math.min(state.mission,missions.length-1)],frac=state.mission/missions.length+(state.mission===5?state.stadtbild/3/missions.length:0);document.getElementById("mission-title").textContent=localize(m.title);document.getElementById("mission-text").textContent=localize(m.text);document.getElementById("mission-progress").style.width=Math.min(100,frac*100)+"%";
+ document.getElementById("energy").textContent=Math.round(player.energy);document.getElementById("forms").textContent=state.forms;document.getElementById("pfand").textContent=state.pfand;document.getElementById("day").textContent=state.day+"/3";
+ const r=rules[state.rule%rules.length];document.getElementById("rule-id").textContent=r[0];document.getElementById("rule-text").textContent=localize(r[1]);document.getElementById("region-name").textContent=state.region==="berlin"?"BERLIN":"DEUTSCHLAND";document.getElementById("region-language").textContent=state.region==="berlin"?"Denglisch-Zone":"Nur Deutsch";
+ const fill=document.getElementById("germanness-fill"),power=document.getElementById("law-power"),lawButton=document.getElementById("law-action"),germannessPercent=state.germanness/GERMANNESS_MAX*100;fill.style.height=germannessPercent+"%";fill.style.filter="grayscale("+(100-germannessPercent)+"%) saturate("+(.25+germannessPercent*.0075)+")";fill.parentElement.setAttribute("aria-valuenow",state.germanness);document.getElementById("germanness-value").textContent=state.germanness+"/"+GERMANNESS_MAX;power.textContent=state.lawUnlocked?(state.lawCooldown>0?"§ IN BEARBEITUNG · "+Math.ceil(state.lawCooldown)+"s":"§ / Q · GESETZ ZITIEREN"):"§-MACHT AB "+LAW_POWER_THRESHOLD+"/"+GERMANNESS_MAX;lawButton.disabled=!state.lawUnlocked;lawButton.title=power.textContent;renderWurstBadges();
+}
 function openDialogue(speaker,lines,portrait,done){stopSpeech();state.modal=true;state.dialogue=true;state.dialogueData={speaker,lines,portrait:portrait||"§",done,i:0};renderDialogue()}
 function setDialogueVoiceBusy(busy){state.dialogueVoiceBusy=busy;document.getElementById("dialogue-next").disabled=busy;document.getElementById("dialogue-speak").disabled=busy}
-function speakDialogueLine(line){const token=state.dialogueVoiceToken=(state.dialogueVoiceToken||0)+1,speaker=state.dialogueData?.speaker||"",masculine=speaker.startsWith("FRIEDRICH MERZ"),done=()=>{if(token===state.dialogueVoiceToken)setDialogueVoiceBusy(false)};setDialogueVoiceBusy(state.voiceOn);if(speaker.startsWith("ANGELA MERKEL"))speakMerkelLine(line,{done});else speak(line,{masculine,done})}
+function speakDialogueLine(line){const token=state.dialogueVoiceToken=(state.dialogueVoiceToken||0)+1,speaker=state.dialogueData?.speaker||"",masculine=speaker.startsWith("FRIEDRICH MERZ"),done=()=>{if(token===state.dialogueVoiceToken)setDialogueVoiceBusy(false)};setDialogueVoiceBusy(state.voiceOn);if(speaker.startsWith("ANGELA MERKEL"))speakMerkelLine(line,{done});else speak(line,{masculine,voiceKey:speaker,done})}
 function renderDialogue(){const d=state.dialogueData,line=d.lines[d.i],borderMan=d.speaker.startsWith("FRIEDRICH MERZ");document.getElementById("dialogue").hidden=false;document.getElementById("speaker").textContent=d.speaker;document.getElementById("portrait").textContent=d.portrait;document.getElementById("dialogue-text").textContent=line;document.getElementById("dialogue-next").textContent=d.i===d.lines.length-1?(state.lang==="en"?"UNDERSTOOD":"VERSTANDEN"):(state.lang==="en"?"CONTINUE":"WEITER");document.getElementById("voice-state").textContent=state.voiceOn?(borderMan?"COMPUTERSTIMME · MÄNNLICH · NUR DEUTSCH":state.region==="berlin"?"COMPUTERSTIMME · DENG-LISCH":"COMPUTERSTIMME · NUR DEUTSCH"):(state.lang==="en"?"VOICE OFF":"STIMME AUS");speakDialogueLine(line)}
 function nextDialogue(){if(!state.dialogue||state.dialogueVoiceBusy)return;const d=state.dialogueData;d.i++;if(d.i<d.lines.length){renderDialogue();return}document.getElementById("dialogue").hidden=true;state.dialogue=false;state.modal=false;if(d.done)d.done()}document.getElementById("dialogue-next").onclick=nextDialogue;
 document.getElementById("dialogue-speak").onclick=()=>{if(state.dialogue&&!state.dialogueVoiceBusy)speakDialogueLine(state.dialogueData.lines[state.dialogueData.i])};
@@ -386,7 +570,7 @@ function interact(){if(state.dialogue){nextDialogue();return}if(state.modal)retu
  }else openDialogue(n.name,[worldNpcLine(n.line),worldNpcLine((n.line+3)%npcLines.length)],"!");
  return
 }for(const p of props)if(p.id&&dist(player.x,player.y,p.x,p.y)<96){microInteract(p);return}for(const o of normObjects)if(!o.fixed&&dist(player.x,player.y,o.x,o.y)<92){if(state.mission===5){o.fixed=true;state.stadtbild++;toast("STADTBILD NORMIERT · "+o.label);updateHud()}else toast("DAS IST NOCH NICHT IHR VORGANG");return}toast("HIER IST NIEMAND ZUSTÄNDIG")}
-function collect(){for(const p of pickups){if(p.taken||dist(player.x,player.y,p.x,p.y)>34)continue;p.taken=true;uiTone(p.type==="pfand"?660:880,.1,"square",.04);if(p.type==="pfand"){state.pfand++;toast(state.lang==="en"?"DEPOSIT +1 · ASSET LIQUID AGAIN":"PFAND +1 · VERMÖGEN WIEDER LIQUID")}else{player.energy=clamp(player.energy+p.value,0,100);toast(p.label+" +"+p.value+" ENERGIE");particles.push({x:p.x,y:p.y,t:1,text:"+ "+p.label})}updateHud()}}
+function collect(){for(const p of pickups){if(p.taken||dist(player.x,player.y,p.x,p.y)>34)continue;p.taken=true;uiTone(p.type==="pfand"?660:880,.1,"square",.04);if(p.type==="pfand"){state.pfand++;addGermanness(1,"PFAND +1 · VERMÖGEN WIEDER LIQUID")}else if(p.wurstType&&!state.wurstBadges.has(p.wurstType)){state.wurstBadges.add(p.wurstType);player.energy=clamp(player.energy+p.value,0,100);announceWurst(WURST_TYPES[p.wurstType]);addGermanness(1,"EXTRA WURST · "+p.short);particles.push({x:p.x,y:p.y,t:1.4,text:"EXTRA WURST! + "+p.short})}else{player.energy=clamp(player.energy+p.value,0,100);toast(p.label+" +"+p.value+" ENERGIE");particles.push({x:p.x,y:p.y,t:1,text:"+ "+p.label})}updateHud()}}
 function endGame(win){state.gameOver=true;state.modal=true;document.getElementById("end-modal").hidden=false;document.getElementById("end-kicker").textContent=win?"VERWALTUNGSVORGANG ABGESCHLOSSEN":"FIKTIVE SPIELFRIST ABGELAUFEN";document.getElementById("end-title").textContent=win?"EINBÜRGERUNG: VORLÄUFIG ERFOLGREICH":"AUSWEISUNG AUS DEM SPIEL";document.getElementById("end-copy").textContent=win?"Sie haben genügend Formulare ausgefüllt, Regeln überlebt und verdächtig viel Geduld nachgewiesen. Dieses Spiel bildet keine echte Einbürgerung ab.":"Die absichtlich absurde Drei-Tage-Frist ist abgelaufen. Reale Gesetze, Verfahren und Rechte sind anders. Hier müssen Sie leider noch einmal von vorne anfangen."}document.getElementById("restart").onclick=()=>location.reload();
 function update(dt){
  if(!state.started||state.modal)return;
@@ -397,10 +581,13 @@ function update(dt){
  const mag=Math.hypot(sx,fy);if(mag>1){sx/=mag;fy/=mag}
  const sprint=!!(keys.ShiftLeft||keys.ShiftRight);
  const speed=146*(sprint?1.58:1)*(player.energy<25?.84:1),px=player.x,py=player.y,nx=px+sx*speed*dt,ny=py-fy*speed*dt;
- if(!blocked(nx,player.y))player.x=nx;
- if(!blocked(player.x,ny))player.y=ny;
+ const hitX=sx?blockingPedestrian(nx,player.y):null;if(!blocked(nx,player.y)&&!hitX)player.x=nx;
+ const hitY=fy?blockingPedestrian(player.x,ny):null;if(!blocked(player.x,ny)&&!hitY)player.y=ny;
+ const bumped=hitX||hitY;if(bumped){bumped.pause=Math.max(bumped.pause||0,.48);pedestrianBark(bumped,playerSurface())}
  if(player.x!==px||player.y!==py)player.facing=Math.atan2(player.x-px,player.y-py);
  updateRegion();
+ updateGermannessEvents(dt,mag);
+ updateQuizEncounters(dt);
 
  if(mag>.05){
    player.energy=clamp(player.energy-dt*(sprint?1.25:.12),0,100);
@@ -416,22 +603,22 @@ function update(dt){
  state.jayCooldown=Math.max(0,state.jayCooldown-dt);
  const roadViolation=onRoad(player.x,player.y)&&!onCrossing(player.x,player.y);
  if(roadViolation){
-   state.roadTimer+=dt*(sprint?1.45:1);
-   if(state.roadTimer>.45&&!state.roadWarned){softWarn(state.lang==="en"?"PLEASE USE THE GEOMETRICALLY APPROVED CROSSING":"BITTE BENUTZEN SIE DIE GEOMETRISCH VORGESEHENE QUERUNGSSTELLE");jaywalkerBark();state.roadWarned=true}
-   if(state.roadTimer>1.55&&state.jayCooldown===0){state.jayCooldown=6;escalate(pick(violationPools.jaywalk),1,false);jaywalkerBark();state.roadTimer=0;state.roadWarned=false}
+   state.roadTimer+=dt;
+   if(state.roadTimer>.45&&!state.roadWarned){softWarn(state.lang==="en"?"PLEASE USE THE GEOMETRICALLY APPROVED CROSSING":"BITTE BENUTZEN SIE DIE GEOMETRISCH VORGESEHENE QUERUNGSSTELLE");surfaceComplaint("road");state.roadWarned=true}
+   if(state.roadTimer>3&&state.jayCooldown===0){state.jayCooldown=6;escalate(pick(violationPools.jaywalk),1,false);surfaceComplaint("road");state.roadTimer=0;state.roadWarned=false}
  }else{
-   state.roadTimer=Math.max(0,state.roadTimer-dt*3);if(state.roadTimer<.2)state.roadWarned=false
+   state.roadTimer=0;state.roadWarned=false
  }
 
  state.gardenCooldown=Math.max(0,state.gardenCooldown-dt);
  const grass=onGardenGrass(player.x,player.y),stationGrass=onPoliceGardenGrass(player.x,player.y);
  if(grass){
    state.grassTimer+=dt;
-   if(state.grassTimer>.45&&!state.grassWarned){softWarn(state.lang==="en"?"YOU ARE TOUCHING ADMINISTRATIVELY SENSITIVE GRASS":"SIE BERÜHREN VERWALTUNGSRELEVANTEN RASEN");state.grassWarned=true}
+   if(state.grassTimer>.45&&!state.grassWarned){softWarn(state.lang==="en"?"YOU ARE TOUCHING ADMINISTRATIVELY SENSITIVE GRASS":"SIE BERÜHREN VERWALTUNGSRELEVANTEN RASEN");surfaceComplaint("grass");state.grassWarned=true}
    const triggerAt=stationGrass?2.4:3.0;
    if(state.grassTimer>triggerAt&&state.gardenCooldown===0){state.gardenCooldown=8;escalate(pick(violationPools.grass),stationGrass?2:1,stationGrass);state.grassTimer=0;state.grassWarned=false}
  }else{
-   state.grassTimer=Math.max(0,state.grassTimer-dt*4);if(state.grassTimer<.15)state.grassWarned=false
+   state.grassTimer=0;state.grassWarned=false
  }
 
  state.pettyAuditTimer-=dt;
@@ -451,17 +638,27 @@ function update(dt){
  if(state.wanted>0&&state.wantedCooldown===0){state.wanted--;state.wantedCooldown=10;if(state.wanted===0)state.offence="AKTENLAGE: VORLÄUFIG UNAUFFÄLLIG"}
 
  for(let i=police.length-1;i>=0;i--){
-   const p=police[i],rdx=player.x-p.x,rdy=player.y-p.y,routeD=Math.hypot(rdx,rdy)||1,dx=player.x-p.x,dy=player.y-p.y,d=Math.hypot(dx,dy)||1;
-   p.x+=rdx/routeD*p.speed*dt;p.y+=rdy/routeD*p.speed*dt;
+   const p=police[i],target=p.escort?{x:policePath.x1,y:policePath.y1}:p.divertedTarget||player,rdx=target.x-p.x,rdy=target.y-p.y,d=Math.hypot(rdx,rdy)||1;p.x+=rdx/d*p.speed*dt;p.y+=rdy/d*p.speed*dt;
+   if(p.escort){const arrested=p.escort;arrested.x=p.x+18;arrested.y=p.y+18;if(d<34){const ni=npcs.indexOf(arrested);if(ni>=0)npcs.splice(ni,1);police.splice(i,1);showWorldBark("POLIZEI",state.region==="berlin"?"Spiel-Knast reached. Der Vorgang is now officially abgeschlossen!":"Spiel-Knast erreicht. Der Vorgang ist nun amtlich abgeschlossen!",true);toast(arrested.name+" · IN DEN SPIEL-KNAST ABGEFÜHRT")}continue}
+   if(p.divertedTarget){
+    if(d<30){const arrested=p.divertedTarget;arrested.arrested=true;if(state.quizApproach===arrested)state.quizApproach=null;for(const other of police)if(other.divertedTarget===arrested)other.divertedTarget=null;p.escort=arrested;p.speed=Math.max(220,p.speed);showWorldBark("POLIZEI",state.region==="berlin"?"Der andere Vorgang has priority. Bitte kommen Sie amtlich mit!":"Der andere Vorgang hat Vorrang. Bitte kommen Sie amtlich mit!",true);toast(arrested.name+" · FESTGENOMMEN · AUF DEM WEG ZUM SPIEL-KNAST")}
+    continue
+   }
    if(d<260&&performance.now()>(p.barkAt||0)){p.barkAt=performance.now()+2200+Math.random()*1800;policeBark()}
    if(d<30){police.splice(i,1);player.energy=Math.max(36,player.energy-12);player.x=policePath.x1;player.y=policePath.y1;state.wanted=Math.max(0,state.wanted-1);state.offence="PERSONALIEN FESTGESTELLT · HINWEIS ERTEILT";uiTone(180,.18,"sawtooth",.05);toast(state.lang==="en"?"POLICE ACTION · ESCORTED TO THE STATION GARDEN":"POLIZEILICHE MASSNAHME · IN DEN WACHEN-SCHREBERGARTEN BEGLEITET")}
    else if(state.wanted<2&&d>520)police.splice(i,1)
  }
 
  for(const n of npcs){
+   if(n.arrested)continue;
    if(n.special==="borderPourer"){updateBorderPourer(n,dt);continue}
    if(n.special==="merkel"){updateMerkel(n,dt);continue}
-   if(n.vx){n.x+=n.vx*dt;if(n.x<n.min||n.x>n.max)n.vx*=-1}else{n.y+=n.vy*dt;if(n.y<n.min||n.y>n.max)n.vy*=-1}
+   if(n===state.quizApproach){const dx=player.x-n.x,dy=player.y-n.y,d=Math.hypot(dx,dy)||1;if(d<78){state.quizApproach=null;n.quizAsked=true;startCitizenshipQuiz(n)}else{n.x+=dx/d*88*dt;n.y+=dy/d*88*dt}continue}
+   if(dist(player.x,player.y,n.x,n.y)<NPC_COMPLAINT_DISTANCE)pedestrianBark(n,playerSurface());
+   if((n.pause||0)>0){n.pause-=dt;continue}
+   const nextX=n.x+(n.vx||0)*dt,nextY=n.y+(n.vy||0)*dt;
+   if(dist(player.x,player.y,nextX,nextY)<NPC_BLOCK_DISTANCE){n.pause=.48;if(n.vx)n.vx*=-1;else n.vy*=-1;pedestrianBark(n,playerSurface());continue}
+   n.x=nextX;n.y=nextY;if(n.vx){if(n.x<n.min||n.x>n.max)n.vx*=-1}else if(n.y<n.min||n.y>n.max)n.vy*=-1
  }
  state.ruleTimer+=dt;if(state.ruleTimer>8){state.ruleTimer=0;state.rule=(state.rule+1)%rules.length}
  for(const p of particles){p.t-=dt;p.y-=12*dt}particles=particles.filter(p=>p.t>0);
@@ -519,7 +716,9 @@ function drawGround(){
    ctx.beginPath();ctx.moveTo(a.x,a.y);ctx.lineTo(b.x,b.y);ctx.stroke();
  }
 
- roads.forEach(r=>groundRect({x:r.x-26,y:r.y-26,w:r.w+52,h:r.h+52},"#aaa69d"));
+ roads.forEach(r=>groundRect({x:r.x-SIDEWALK_WIDTH,y:r.y-SIDEWALK_WIDTH,w:r.w+SIDEWALK_WIDTH*2,h:r.h+SIDEWALK_WIDTH*2},"#aaa69d"));
+ grassAreas.forEach(r=>groundRect(r,"#68705e","#596052"));
+ walkways.forEach(r=>groundRect(r,"#aaa69d","#858177"));
  roads.forEach(r=>groundRect(r,"#5c5b57","#4b4a47"));
  crossings.forEach(drawCrossing);
  groundRect(schreber,"#68705e","#4d5149");
@@ -639,6 +838,10 @@ function drawCrossingSign(sign){
  ctx.strokeStyle="#3a3b39";ctx.lineWidth=Math.max(2,4*s);ctx.beginPath();ctx.moveTo(ground.x,ground.y);ctx.lineTo(p.x,p.y);ctx.stroke();
  ctx.save();ctx.translate(p.x,p.y);ctx.scale(s,s);ctx.fillStyle="#1f4d79";ctx.strokeStyle="#e6e1d5";ctx.lineWidth=3;ctx.fillRect(-18,-18,36,36);ctx.strokeRect(-18,-18,36,36);ctx.fillStyle="#f1ede2";ctx.beginPath();ctx.moveTo(0,-13);ctx.lineTo(13,12);ctx.lineTo(-13,12);ctx.closePath();ctx.fill();ctx.strokeStyle="#1e1e1d";ctx.lineWidth=3;ctx.beginPath();ctx.arc(0,-5,3,0,Math.PI*2);ctx.moveTo(0,-2);ctx.lineTo(-2,6);ctx.moveTo(-2,2);ctx.lineTo(6,5);ctx.moveTo(-2,6);ctx.lineTo(-7,11);ctx.moveTo(-2,6);ctx.lineTo(4,12);ctx.stroke();ctx.restore()
 }
+function drawTrafficLight(light){
+ const ground=project(light.x,light.y,0),p=project(light.x,light.y,60);if(p.x<-80||p.x>width+80||p.y<-100||p.y>height+100)return;const s=p.s;
+ ctx.strokeStyle="#363735";ctx.lineWidth=Math.max(2,4*s);ctx.beginPath();ctx.moveTo(ground.x,ground.y);ctx.lineTo(p.x,p.y);ctx.stroke();ctx.save();ctx.translate(p.x,p.y);ctx.scale(s,s);ctx.fillStyle="#2d2e2c";ctx.fillRect(-12,-24,24,48);ctx.fillStyle=light.green?"#4b2725":"#df332c";ctx.beginPath();ctx.arc(0,-12,7,0,Math.PI*2);ctx.fill();ctx.fillStyle=light.green?"#36c469":"#284b31";ctx.beginPath();ctx.arc(0,12,7,0,Math.PI*2);ctx.fill();ctx.restore()
+}
 
 function drawAsset(name,x,y,w,h,angle=0){
  const p=project(x,y,0),img=assets[name];
@@ -648,6 +851,19 @@ function drawAsset(name,x,y,w,h,angle=0){
  ctx.save();ctx.translate(p.x,p.y);ctx.rotate(angle);
  ctx.drawImage(img,-w*p.s/2,-h*p.s,w*p.s,h*p.s);
  ctx.restore();return true
+}
+function drawWurstPickup(item){
+ const p=project(item.x,item.y,0);if(p.x<-120||p.x>width+120||p.y<-140||p.y>height+140)return;const s=clamp(p.s,.42,1.12),def=WURST_TYPES[item.wurstType],pieces=def.pieces;
+ ctx.save();ctx.translate(p.x,p.y);ctx.scale(s,s);ctx.rotate(Math.sin(performance.now()/550+item.variant)*.08);ctx.lineCap="round";
+ for(let i=0;i<pieces;i++){const y=(i-(pieces-1)/2)*9,x=pieces===4?(i-1.5)*12:0;ctx.strokeStyle="#292725";ctx.lineWidth=12;ctx.beginPath();ctx.moveTo(x-17,y);ctx.lineTo(x+17,y);ctx.stroke();ctx.strokeStyle=def.color;ctx.lineWidth=8;ctx.beginPath();ctx.moveTo(x-17,y);ctx.lineTo(x+17,y);ctx.stroke();ctx.strokeStyle="rgba(238,226,203,.65)";ctx.lineWidth=1.5;for(let g=-8;g<=8;g+=8){ctx.beginPath();ctx.moveTo(x+g-2,y-4);ctx.lineTo(x+g+2,y+4);ctx.stroke()}}
+ ctx.fillStyle="#eee9dc";ctx.strokeStyle="#171717";ctx.lineWidth=2;ctx.beginPath();ctx.arc(0,-25,11,0,Math.PI*2);ctx.fill();ctx.stroke();ctx.fillStyle="#171717";ctx.font="900 8px Arial";ctx.textAlign="center";ctx.fillText(def.mark,0,-22);ctx.font="900 7px Arial";ctx.fillText(def.short,0,25+pieces*2);ctx.restore()
+}
+function drawBillboard(prop){
+ const art=desktopBillboards.matches&&prop.billboard&&assets[prop.billboard.asset];
+ if(!art||!art.complete||!art.naturalWidth)return drawAsset(prop.asset,prop.x,prop.y,prop.w,prop.h);
+ const p=project(prop.x,prop.y,0),w=190*p.s,h=142.5*p.s,post=28*p.s;
+ if(p.x<-w||p.x>width+w||p.y<-h-post||p.y>height+post)return false;
+ ctx.save();ctx.translate(p.x,p.y);ctx.strokeStyle="#333432";ctx.lineWidth=Math.max(3,7*p.s);ctx.beginPath();ctx.moveTo(-w*.31,0);ctx.lineTo(-w*.31,-post);ctx.moveTo(w*.31,0);ctx.lineTo(w*.31,-post);ctx.stroke();ctx.fillStyle="#222";ctx.fillRect(-w/2-4*p.s,-h-post-4*p.s,w+8*p.s,h+8*p.s);ctx.drawImage(art,-w/2,-h-post,w,h);ctx.restore();return true
 }
 function sprite(x,y,label,type,accent){
  const p=project(x,y,0);
@@ -693,10 +909,11 @@ function drawWorld(){
  for(const f of fireSources)drawables.push({d:player.y-f.y,fn:()=>drawFireSource(f)});
  for(const n of npcs)drawables.push({d:player.y-n.y,fn:()=>n.special==="merkel"?drawMerkelNpc(n):n.special==="borderPourer"?drawBorderPourer(n):sprite(n.x,n.y,n.name,"person","#4f4d48")});
  for(const p of police)drawables.push({d:player.y-p.y,fn:()=>sprite(p.x,p.y,"POLIZEI","police")});
- for(const p of pickups)if(!p.taken)drawables.push({d:player.y-p.y,fn:()=>sprite(p.x,p.y,p.label,p.type==="pfand"?"pfand":p.type)});
+ for(const p of pickups)if(!p.taken)drawables.push({d:player.y-p.y,fn:()=>p.wurstType?drawWurstPickup(p):sprite(p.x,p.y,p.label,p.type==="pfand"?"pfand":p.type)});
  for(const o of normObjects)drawables.push({d:player.y-o.y,fn:()=>sprite(o.x,o.y,o.fixed?"NORMIERT":"! "+o.label,o.type,o.fixed?"#3f5b43":"#6c3d37")});
- for(const prop of props)drawables.push({d:player.y-prop.y,fn:()=>drawAsset(prop.asset,prop.x,prop.y,prop.w,prop.h)});
+ for(const prop of props)drawables.push({d:player.y-prop.y,fn:()=>prop.asset==="faxbillboard"?drawBillboard(prop):drawAsset(prop.asset,prop.x,prop.y,prop.w,prop.h)});
  for(const sign of crossingSigns)drawables.push({d:player.y-sign.y,fn:()=>drawCrossingSign(sign)});
+ for(const light of trafficLights)drawables.push({d:player.y-light.y,fn:()=>drawTrafficLight(light)});
  drawables.sort((a,b)=>b.d-a.d);for(const d of drawables)d.fn();
  for(const p of particles){const q=project(p.x,p.y,40);if(q){ctx.fillStyle="#111";ctx.font="800 10px Arial";ctx.textAlign="center";ctx.fillText(p.text,q.x,q.y);ctx.textAlign="left"}}
 }
@@ -713,6 +930,7 @@ function drawPlayer(){
 function drawMinimap(){
  const mw=Math.min(210,width-32),mh=Math.max(78,Math.round(mw*WORLD.h/WORLD.w)),x=width-mw-16,bottomGap=width<=760?200:44,y=height-mh-bottomGap,sx=mw/WORLD.w,sy=mh/WORLD.h;
  ctx.save();ctx.globalAlpha=.94;ctx.fillStyle="#d7d2c5";ctx.fillRect(x,y,mw,mh);ctx.strokeStyle="#222";ctx.lineWidth=2;ctx.strokeRect(x,y,mw,mh);
+ ctx.fillStyle="#6c7166";grassAreas.forEach(r=>ctx.fillRect(x+r.x*sx,y+r.y*sy,Math.max(1,r.w*sx),Math.max(1,r.h*sy)));
  ctx.fillStyle="#5d5b57";roads.forEach(r=>ctx.fillRect(x+r.x*sx,y+r.y*sy,Math.max(1,r.w*sx),Math.max(1,r.h*sy)));
  ctx.fillStyle="#eee9dc";crossings.forEach(c=>ctx.fillRect(x+c.x*sx,y+c.y*sy,Math.max(1,c.w*sx),Math.max(1,c.h*sy)));
  ctx.fillStyle="#6c7166";ctx.fillRect(x+schreber.x*sx,y+schreber.y*sy,schreber.w*sx,schreber.h*sy);ctx.fillRect(x+policeGarden.x*sx,y+policeGarden.y*sy,policeGarden.w*sx,policeGarden.h*sy);
@@ -989,9 +1207,10 @@ const MUSIC=[
   [69,.5],[67,.5],[66,.5],[64,.5],[62,1.5]
  ]}
 ];
-let audio=null,musicTimer=null,musicBus=null,musicOn=true,musicBag=[],currentTune=-1;
+let audio=null,musicTimer=null,musicBus=null,musicOn=true,musicBag=[],currentTune=-1,forcedTune=-1;
 const midiFreq=note=>440*2**((note-69)/12);
 function nextTune(){
+ if(forcedTune>=0){currentTune=forcedTune;forcedTune=-1;return MUSIC[currentTune]}
  if(!musicBag.length){
    musicBag=MUSIC.map((_,i)=>i);
    for(let i=musicBag.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[musicBag[i],musicBag[j]]=[musicBag[j],musicBag[i]]}
@@ -999,6 +1218,7 @@ function nextTune(){
  }
  currentTune=musicBag.pop();return MUSIC[currentTune]
 }
+function queueNationalAnthem(){forcedTune=1;if(!musicOn||!audio)return;clearTimeout(musicTimer);musicBus?.disconnect();musicBus=audio.createGain();musicBus.connect(audio.destination);scheduleTheme()}
 function chip(a,freq,when,dur,type="square",gain=.045){const o=a.createOscillator(),g=a.createGain();o.type=type;o.frequency.value=freq;g.gain.setValueAtTime(.0001,when);g.gain.linearRampToValueAtTime(gain,when+.01);g.gain.setValueAtTime(gain,when+dur*.75);g.gain.exponentialRampToValueAtTime(.0001,when+dur);o.connect(g).connect(musicBus);o.start(when);o.stop(when+dur+.02)}
 function stamp(a,when,gain=.025){const o=a.createOscillator(),g=a.createGain();o.type="square";o.frequency.setValueAtTime(95,when);o.frequency.exponentialRampToValueAtTime(55,when+.055);g.gain.setValueAtTime(gain,when);g.gain.exponentialRampToValueAtTime(.0001,when+.07);o.connect(g).connect(musicBus);o.start(when);o.stop(when+.08)}
 function scheduleTheme(){
@@ -1022,12 +1242,16 @@ function scheduleTheme(){
 }
 function startMusic(){if(!musicOn)return;if(!audio)audio=new (window.AudioContext||window.webkitAudioContext)();audio.resume();musicBus=audio.createGain();musicBus.connect(audio.destination);scheduleTheme()}
 document.getElementById("mute").onclick=()=>{musicOn=!musicOn;document.getElementById("mute").textContent=musicOn?"MUSIC 8-BIT ON":"MUSIC 8-BIT OFF";if(musicOn)startMusic();else{clearTimeout(musicTimer);musicBus?.disconnect();musicBus=null}};
-function startGame(){startMusic();state.started=true;state.region=regionOf(player.y);document.getElementById("intro").classList.add("hidden");const lines=state.region==="berlin"?["Welcome in Berlin. Hier reden wir erstmal practical Denglisch.","Your mission ist simple: become German citizen in drei Behördentagen.","Aber careful: auf Schrebergarten grass kommt sofort die Polizei. No discussion.","Berlin liegt hinter der Brandmauer. You can cross sie freely."]:[ "Willkommen in Deutschland.","Ihr Ziel: Werden Sie innerhalb von drei völlig fiktiven Behördentagen deutscher Staatsbürger.","Dazu benötigen Sie vor allem Formulare. Sehr viele Formulare.","Wenn Sie den Rasen im Schrebergarten betreten, kommt die Polizei sofort.","Berlin liegt hinter der Brandmauer. Sie ist frei überquerbar."];openDialogue(state.region==="berlin"?"WELCOME TO BERLIN":"WILLKOMMEN IN DEUTSCHLAND",lines,"DE",()=>toast("ERSTER VORGANG · BÜRGERAMT"));updateHud()}
-document.querySelectorAll(".lang").forEach(btn=>btn.onclick=()=>{const choseEnglish=btn.dataset.lang==="en";state.lang="de";document.documentElement.lang="de";document.querySelectorAll(".lang").forEach(b=>{b.classList.toggle("active",b===btn);b.setAttribute("aria-pressed",String(b===btn))});if(choseEnglish){btn.textContent="Deutsch";btn.dataset.lang="de";const praise=document.getElementById("language-praise");praise.hidden=false;clearTimeout(praise.t);praise.t=setTimeout(()=>praise.hidden=true,2200)}updateHud()});
+function startGame(){startMusic();prepareMerkelRecording().catch(()=>{});state.started=true;state.region=regionOf(player.y);document.getElementById("intro").classList.add("hidden");const lines=state.region==="berlin"?["Welcome in Berlin. Hier reden wir erstmal practical Denglisch.","Your mission ist simple: become German citizen in drei Behördentagen.","Aber careful: more than three seconds auf grass or street gibt einen Polizeistern. Use the Zebrastreifen.","Berlin liegt hinter der Brandmauer. You can cross sie freely."]:[ "Willkommen in Deutschland.","Ihr Ziel: Werden Sie innerhalb von drei völlig fiktiven Behördentagen deutscher Staatsbürger.","Dazu benötigen Sie vor allem Formulare. Sehr viele Formulare.","Wer länger als drei Sekunden auf Rasen oder Straße bleibt, erhält einen Polizeistern. Benutzen Sie den Zebrastreifen.","Berlin liegt hinter der Brandmauer. Sie ist frei überquerbar."];openDialogue(state.region==="berlin"?"WELCOME TO BERLIN":"WILLKOMMEN IN DEUTSCHLAND",lines,"DE",()=>toast("ERSTER VORGANG · BÜRGERAMT"));updateHud()}
+const languageOptions=document.getElementById("language-options");
+function sizeLanguageOptions(){const count=languageOptions.children.length;languageOptions.style.setProperty("--lang-font-size",32/count+"px");languageOptions.style.setProperty("--lang-padding",24/count+"px")}
+function addLanguageOption(){const oldRects=new Map([...languageOptions.children].map(btn=>[btn,btn.getBoundingClientRect()])),btn=document.createElement("button");btn.className="lang";btn.dataset.lang="de";btn.type="button";btn.textContent="Deutsch";btn.setAttribute("aria-label","Deutsch "+(languageOptions.children.length+1));btn.setAttribute("aria-pressed","false");languageOptions.append(btn);sizeLanguageOptions();if(matchMedia("(prefers-reduced-motion: reduce)").matches)return;for(const old of languageOptions.children){if(old===btn)continue;const before=oldRects.get(old),after=old.getBoundingClientRect();old.animate([{transform:`translateX(${before.left-after.left}px) scaleX(${before.width/after.width})`,transformOrigin:"left center"},{transform:"none",transformOrigin:"left center"}],{duration:260,easing:"cubic-bezier(.2,.8,.2,1)"})}btn.animate([{opacity:0,transform:"scale(.55)"},{opacity:1,transform:"scale(1)"}],{duration:260,easing:"cubic-bezier(.2,.8,.2,1)"})}
+sizeLanguageOptions();
+languageOptions.addEventListener("click",event=>{const btn=event.target.closest(".lang");if(!btn)return;const choseEnglish=btn.dataset.lang==="en";state.lang="de";document.documentElement.lang="de";languageOptions.querySelectorAll(".lang").forEach(b=>{b.classList.toggle("active",b===btn);b.setAttribute("aria-pressed",String(b===btn))});if(choseEnglish){btn.textContent="Deutsch";btn.dataset.lang="de";const praise=document.getElementById("language-praise");praise.hidden=false;clearTimeout(praise.t);praise.t=setTimeout(()=>praise.hidden=true,2200)}else addLanguageOption();updateHud()});
 document.getElementById("start").onclick=startGame;
 document.getElementById("voice-toggle").onclick=()=>{state.voiceOn=!state.voiceOn;document.getElementById("voice-toggle").textContent=state.voiceOn?"VOICE ON":"VOICE OFF";if(!state.voiceOn){stopSpeech();state.dialogueVoiceToken=(state.dialogueVoiceToken||0)+1;setDialogueVoiceBusy(false)}};
-function keydown(e){if(["ArrowUp","ArrowDown","ArrowLeft","ArrowRight"].includes(e.code))e.preventDefault();keys[e.code]=true;if(e.repeat)return;if(e.code==="KeyE")interact()}function keyup(e){keys[e.code]=false}addEventListener("keydown",keydown);addEventListener("keyup",keyup);
-document.querySelectorAll(".control-dock [data-key]").forEach(btn=>{const code=btn.dataset.key,down=e=>{e.preventDefault();keys[code]=true;if(code==="KeyE")interact()},up=e=>{e.preventDefault();keys[code]=false};btn.addEventListener("pointerdown",down);btn.addEventListener("pointerup",up);btn.addEventListener("pointercancel",up);btn.addEventListener("pointerleave",up)});
+ function keydown(e){if(["ArrowUp","ArrowDown","ArrowLeft","ArrowRight"].includes(e.code))e.preventDefault();keys[e.code]=true;if(e.repeat)return;if(e.code==="KeyE")interact();if(e.code==="KeyQ"||e.key==="§")useLawPower()}function keyup(e){keys[e.code]=false}addEventListener("keydown",keydown);addEventListener("keyup",keyup);
+document.querySelectorAll(".control-dock [data-key]").forEach(btn=>{const code=btn.dataset.key,down=e=>{e.preventDefault();keys[code]=true;if(code==="KeyE")interact();if(code==="KeyQ")useLawPower()},up=e=>{e.preventDefault();keys[code]=false};btn.addEventListener("pointerdown",down);btn.addEventListener("pointerup",up);btn.addEventListener("pointercancel",up);btn.addEventListener("pointerleave",up)});
 
 const appSurface=document.getElementById("app");
 function editableTarget(target){return !!(target&&target.closest&&target.closest('input, textarea, select, [contenteditable="true"]'))}

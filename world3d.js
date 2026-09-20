@@ -17,7 +17,10 @@ const GLTF_LOADER_URL="https://cdn.jsdelivr.net/npm/three@0.186.0/examples/jsm/l
   const plane=(w,d,m,x,z,y=.002)=>{const q=new T.Mesh(new T.PlaneGeometry(w,d),m);q.rotation.x=-Math.PI/2;q.position.set(x,y,z);world.add(q);return q};
   const rect=(r,m,y=.005)=>plane(r.w*S,r.h*S,m,X(r.x+r.w/2),Z(r.y+r.h/2),y);
   plane(bridge.WORLD.w*S,bridge.WORLD.h*S,M.ground,0,0,0);
-  bridge.roads.forEach(r=>{rect({x:r.x-28,y:r.y-28,w:r.w+56,h:r.h+56},M.walk,.008);rect(r,M.road,.015);const h=r.w>r.h,total=(h?r.w:r.h)*S;for(let p=-total/2+1;p<total/2-1;p+=2.2)box(h?1.1:.07,.018,h?.07:1.1,M.cross,X(r.x+r.w/2)+(h?p:0),.03,Z(r.y+r.h/2)+(h?0:p))});
+  const sidewalk=bridge.SIDEWALK_WIDTH||28;
+  bridge.roads.forEach(r=>rect({x:r.x-sidewalk,y:r.y-sidewalk,w:r.w+sidewalk*2,h:r.h+sidewalk*2},M.walk,.008));
+  (bridge.grassAreas||[]).forEach(r=>rect(r,M.grass,.011));(bridge.walkways||[]).forEach(r=>rect(r,M.path,.014));
+  bridge.roads.forEach(r=>{rect(r,M.road,.015);const h=r.w>r.h,total=(h?r.w:r.h)*S;for(let p=-total/2+1;p<total/2-1;p+=2.2)box(h?1.1:.07,.018,h?.07:1.1,M.cross,X(r.x+r.w/2)+(h?p:0),.03,Z(r.y+r.h/2)+(h?0:p))});
   bridge.crossings.forEach(c=>{for(let i=0;i<8;i++){const h=c.w>c.h,f=(i+.5)/8;box(h?c.w*S/8*.48:c.w*S,.025,h?c.h*S:c.h*S/8*.48,M.cross,X(c.x+c.w*(h?f:.5)),.04,Z(c.y+c.h*(h?.5:f)))}});rect(bridge.schreber,M.grass,.02);rect(bridge.policeGarden,M.grass,.021);
   const fireGround=new T.MeshBasicMaterial({color:0x5d3f31,transparent:true,opacity:.58,depthWrite:false});rect({x:0,y:bridge.BORDER_Y-18,w:bridge.WORLD.w,h:36},fireGround,.026);
   function makeFlameTexture(){
@@ -50,6 +53,9 @@ const GLTF_LOADER_URL="https://cdn.jsdelivr.net/npm/three@0.186.0/examples/jsm/l
   function label(a,b,bg="#ded9cc",fg="#222"){const c=document.createElement("canvas");c.width=768;c.height=150;const g=c.getContext("2d");g.fillStyle=bg;g.fillRect(0,0,768,150);g.fillStyle=fg;g.textAlign="center";g.font="900 42px Arial";g.fillText(a,384,65);g.font="700 20px Arial";g.fillText(b||"",384,112);const tx=new T.CanvasTexture(c);tx.colorSpace=T.SRGBColorSpace;const s=new T.Sprite(new T.SpriteMaterial({map:tx}));s.scale.set(4.6,.9,1);return s}
   function pedestrianSign(s){const g=new T.Group(),post=new T.Mesh(new T.CylinderGeometry(.035,.045,1.55,8),M.metal);post.position.y=.775;g.add(post);box(.58,.58,.06,M.cross,0,1.64,0,g);box(.48,.48,.07,M.blue,0,1.64,.04,g);const tri=new T.Mesh(new T.ConeGeometry(.19,.38,3),M.cross);tri.rotation.z=Math.PI;tri.position.set(0,1.64,.09);g.add(tri);g.position.set(X(s.x),0,Z(s.y));g.rotation.y=(s.turn||0)*Math.PI/2;world.add(g)}
   bridge.crossingSigns.forEach(pedestrianSign);
+  const trafficLightSlots=[];
+  function pedestrianLight(light){const g=new T.Group(),post=new T.Mesh(new T.CylinderGeometry(.035,.045,1.45,8),M.metal),red=new T.MeshBasicMaterial({color:0xdf332c}),green=new T.MeshBasicMaterial({color:0x284b31});post.position.y=.725;g.add(post);box(.42,.82,.22,M.dark,0,1.62,0,g);const redLamp=new T.Mesh(new T.SphereGeometry(.115,10,7),red),greenLamp=new T.Mesh(new T.SphereGeometry(.115,10,7),green);redLamp.position.set(0,1.82,.13);greenLamp.position.set(0,1.44,.13);g.add(redLamp,greenLamp);g.position.set(X(light.x),0,Z(light.y));world.add(g);trafficLightSlots.push({light,red,green})}
+  (bridge.trafficLights||[]).forEach(pedestrianLight);
   const buildingModels={
     buergeramt:"./assets/models/kenney-commercial/building-a.glb",
     auslaender:"./assets/models/kenney-commercial/building-g.glb",
@@ -154,7 +160,14 @@ const GLTF_LOADER_URL="https://cdn.jsdelivr.net/npm/three@0.186.0/examples/jsm/l
   fence(bridge.policeGarden);sheds(bridge.schreber,4);sheds(bridge.policeGarden,6);
   [[700,720],[1450,720],[2800,720],[4050,720],[5100,720],[6650,720],[8200,720],[700,1880],[2800,1880],[4050,1880],[5200,1880],[6750,1880],[8300,1880],[700,2860],[2800,2860],[4050,2860],[5200,2860],[6750,2860],[8300,2860]].forEach(([x,y])=>{const g=new T.Group(),p=new T.Mesh(new T.CylinderGeometry(.04,.05,2.5,8),M.metal);p.position.y=1.25;g.add(p);box(.45,.05,.05,M.metal,.12,2.4,0,g);g.position.set(X(x),0,Z(y));world.add(g)});
   [[260,1750],[800,1760],[2700,650],[3400,680],[4300,650],[5000,680],[6500,650],[8100,680],[2700,1800],[4200,1800],[5200,1800],[6800,1800],[8400,1800],[2800,2860],[4200,2860],[5200,2860],[6800,2860],[8400,2860],[700,3500],[1800,3500],[4650,3500],[6100,3500],[7700,3500],[9300,3500]].forEach(([x,y])=>{const g=new T.Group(),tr=new T.Mesh(new T.CylinderGeometry(.12,.16,1.3,7),mat(0x65594a));tr.position.y=.65;g.add(tr);const crown=new T.Mesh(new T.IcosahedronGeometry(.75,1),mat(0x4e5949));crown.position.y=1.7;g.add(crown);g.position.set(X(x),0,Z(y));world.add(g)});
-  function prop(p){if(p.asset==="faxbillboard"){const g=new T.Group(),c=document.createElement("canvas");c.width=768;c.height=250;const x=c.getContext("2d");x.fillStyle="#ded9cc";x.fillRect(0,0,768,250);x.strokeStyle="#222";x.lineWidth=12;x.strokeRect(6,6,756,238);x.fillStyle="#222";x.textAlign="center";x.font="900 50px Arial";x.fillText("FAX 3000 PRO",384,70);x.font="900 32px Arial";x.fillText("2,75× SCHNELLER",384,124);x.font="700 18px Arial";x.fillText("DIE ZUKUNFT DER DIGITALISIERUNG IST PAPIER",384,195);const tx=new T.CanvasTexture(c),board=new T.Mesh(new T.BoxGeometry(4.8,1.65,.12),new T.MeshStandardMaterial({map:tx,roughness:.9}));board.position.y=2.8;g.add(board);[-1.7,1.7].forEach(v=>box(.1,2.2,.1,M.metal,v,1.1,0,g));g.position.set(X(p.x),0,Z(p.y));world.add(g)}}
+  const billboardLoader=new T.TextureLoader(),desktopBillboards=matchMedia("(min-width: 700px)");
+  function faxFallbackTexture(){const c=document.createElement("canvas");c.width=768;c.height=250;const x=c.getContext("2d");x.fillStyle="#ded9cc";x.fillRect(0,0,768,250);x.strokeStyle="#222";x.lineWidth=12;x.strokeRect(6,6,756,238);x.fillStyle="#222";x.textAlign="center";x.font="900 50px Arial";x.fillText("FAX 3000 PRO",384,70);x.font="900 32px Arial";x.fillText("2,75× SCHNELLER",384,124);x.font="700 18px Arial";x.fillText("DIE ZUKUNFT DER DIGITALISIERUNG IST PAPIER",384,195);const tx=new T.CanvasTexture(c);tx.colorSpace=T.SRGBColorSpace;return tx}
+  function prop(p){
+    if(p.asset!=="faxbillboard")return;
+    const g=new T.Group(),art=desktopBillboards.matches&&p.billboard,bw=art?4.4:4.8,bh=art?3.3:1.65,tx=faxFallbackTexture(),material=new T.MeshStandardMaterial({map:tx,roughness:.9}),board=new T.Mesh(new T.BoxGeometry(bw,bh,.12),material);
+    board.position.y=art?3.5:2.8;g.add(board);[-bw*.35,bw*.35].forEach(v=>box(.1,art?2.3:2.2,.1,M.metal,v,art?1.15:1.1,0,g));g.position.set(X(p.x),0,Z(p.y));world.add(g);
+    if(art)billboardLoader.load(art.src,loaded=>{loaded.colorSpace=T.SRGBColorSpace;loaded.anisotropy=Math.min(4,renderer.capabilities.getMaxAnisotropy());material.map.dispose();material.map=loaded;material.needsUpdate=true},undefined,()=>{});
+  }
   bridge.props.forEach(prop);
   function character(kind){const g=new T.Group(),m=kind==="player"?M.player:kind==="police"?M.police:kind==="merkel"?M.merkel:M.npc;box(.42,.72,.3,m,0,.72,0,g);const head=new T.Mesh(new T.SphereGeometry(.2,10,7),M.skin);head.position.y=1.3;g.add(head);const lg=new T.CylinderGeometry(.06,.07,.5,8),ag=new T.CylinderGeometry(.05,.06,.48,8),ll=new T.Mesh(lg,m),rl=ll.clone(),la=new T.Mesh(ag,m),ra=la.clone();ll.position.set(-.1,.27,0);rl.position.set(.1,.27,0);la.position.set(-.27,.76,0);ra.position.set(.27,.76,0);g.add(ll,rl,la,ra);g.userData={ll,rl,la,ra};if(kind==="merkel"){const hair=new T.Mesh(new T.SphereGeometry(.22,10,7,0,Math.PI*2,0,Math.PI*.58),mat(0x5d5953));hair.position.y=1.39;g.add(hair)}if(kind==="police"){const cap=new T.Mesh(new T.CylinderGeometry(.21,.21,.08,10),M.dark);cap.position.y=1.52;g.add(cap)}return g}
   function syncChar(q,o,l=0){q.position.set(X(o.x),l,Z(o.y));const ph=performance.now()*.008+(o.x+o.y)*.02,s=Math.sin(ph)*.38;q.userData.ll.rotation.x=s;q.userData.rl.rotation.x=-s;q.userData.la.rotation.x=-s*.7;q.userData.ra.rotation.x=s*.7}
@@ -172,12 +185,12 @@ const GLTF_LOADER_URL="https://cdn.jsdelivr.net/npm/three@0.186.0/examples/jsm/l
     tx.repeat.x=(flip?-1:1)/grid.cols;tx.repeat.y=1/grid.rows;tx.offset.x=(frame+(flip?1:0))/grid.cols;tx.offset.y=1-(row+1)/grid.rows;
     q.position.set(X(o.x),1.25,Z(o.y));
   }
-  function pickup(type){const g=new T.Group();if(type==="pfand"){const m=new T.Mesh(new T.CylinderGeometry(.07,.09,.5,9),mat(0x566153));m.position.y=.25;g.add(m)}else{const col=type==="currywurst"?0x805143:type==="bratwurst"?0x9a7653:0x8a694b,m=mat(col),q=new T.Mesh(type==="brezel"?new T.TorusGeometry(.18,.055,8,18):new T.CapsuleGeometry(.08,.4,4,8),m);q.rotation.z=type==="brezel"?0:Math.PI/2;q.position.y=.2;g.add(q)}return g}
+  function pickup(item){const type=item.type,g=new T.Group();if(type==="pfand"){const m=new T.Mesh(new T.CylinderGeometry(.07,.09,.5,9),mat(0x566153));m.position.y=.25;g.add(m)}else if(item.wurstType){const m=mat(item.color),pieces=item.pieces||1;for(let i=0;i<pieces;i++){const q=new T.Mesh(new T.CapsuleGeometry(.065,.32,4,8),m);q.rotation.z=Math.PI/2;q.position.set(pieces===4?(i-1.5)*.18:0,.2+(i-(pieces-1)/2)*.13,0);g.add(q)}const seal=new T.Mesh(new T.TorusGeometry(.15,.035,8,18),mat(0xe4ddce));seal.rotation.x=Math.PI/2;seal.position.y=.6;g.add(seal)}else{const col=type==="currywurst"?0x805143:type==="bratwurst"?0x9a7653:0x8a694b,m=mat(col),q=new T.Mesh(type==="brezel"?new T.TorusGeometry(.18,.055,8,18):new T.CapsuleGeometry(.08,.4,4,8),m);q.rotation.z=type==="brezel"?0:Math.PI/2;q.position.y=.2;g.add(q)}return g}
 
   const playerMesh=character("player");scene.add(playerMesh);
   const npcMeshes=new Map(),policeMeshes=new Map(),pickupMeshes=new Map();
   bridge.getNPCs().forEach(n=>{const q=n.special==="borderPourer"?(borderPourerSprite()||character("npc")):n.special==="merkel"?merkelSprite():character("npc");scene.add(q);npcMeshes.set(n,q)});
-  bridge.pickups.forEach(p=>{const q=pickup(p.type);scene.add(q);pickupMeshes.set(p,q)});
+  bridge.pickups.forEach(p=>{const q=pickup(p);scene.add(q);pickupMeshes.set(p,q)});
   function updateBuildingOcclusion(){
     const cameraReach=15/S,px=bridge.player.x,py=bridge.player.y;
     for(const slot of buildingSlots){
@@ -195,9 +208,10 @@ const GLTF_LOADER_URL="https://cdn.jsdelivr.net/npm/three@0.186.0/examples/jsm/l
   window.Germany3D={ready:true,sync(){
     syncChar(playerMesh,bridge.player,0);
     playerMesh.rotation.y=bridge.player.facing;
-    bridge.getNPCs().forEach(n=>{let q=npcMeshes.get(n);if(n.special==="borderPourer"&&!q?.userData.borderPourerSprite){const sprite=borderPourerSprite();if(sprite){if(q)scene.remove(q);q=sprite;scene.add(q);npcMeshes.set(n,q)}}if(!q){q=n.special==="borderPourer"?(borderPourerSprite()||character("npc")):n.special==="merkel"?merkelSprite():character("npc");scene.add(q);npcMeshes.set(n,q)}if(q.userData.borderPourerSprite)syncBorderPourer(q,n);else if(q.userData.merkelSprite)syncMerkel(q,n);else syncChar(q,n)});
+    const ns=bridge.getNPCs();ns.forEach(n=>{let q=npcMeshes.get(n);if(n.special==="borderPourer"&&!q?.userData.borderPourerSprite){const sprite=borderPourerSprite();if(sprite){if(q)scene.remove(q);q=sprite;scene.add(q);npcMeshes.set(n,q)}}if(!q){q=n.special==="borderPourer"?(borderPourerSprite()||character("npc")):n.special==="merkel"?merkelSprite():character("npc");scene.add(q);npcMeshes.set(n,q)}if(q.userData.borderPourerSprite)syncBorderPourer(q,n);else if(q.userData.merkelSprite)syncMerkel(q,n);else syncChar(q,n)});for(const [n,q] of npcMeshes)if(!ns.includes(n)){scene.remove(q);npcMeshes.delete(n)}
     const ps=bridge.getPolice();ps.forEach(p=>{let q=policeMeshes.get(p);if(!q){q=character("police");scene.add(q);policeMeshes.set(p,q)}syncChar(q,p,.04)});for(const [p,q] of policeMeshes)if(!ps.includes(p)){scene.remove(q);policeMeshes.delete(p)}
     bridge.pickups.forEach(p=>{const q=pickupMeshes.get(p);q.visible=!p.taken;if(q.visible){q.position.set(X(p.x),.2,Z(p.y));q.rotation.y+=.012}});
+    for(const slot of trafficLightSlots){slot.red.color.setHex(slot.light.green?0x4b2725:0xdf332c);slot.green.color.setHex(slot.light.green?0x36c469:0x284b31)}
     updateFire(performance.now());updateBuildingOcclusion();updatePowerPlants();
     const px=X(bridge.player.x),pz=Z(bridge.player.y);camera.position.set(px,11.5,pz+14);camera.lookAt(px,1,pz-2.7);renderer.render(scene,camera);
   }};

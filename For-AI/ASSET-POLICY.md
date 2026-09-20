@@ -8,9 +8,11 @@ Use one asset authority at root `assets/`, with fidelity selected by the client.
 
 - Desktop billboard direction: high-resolution, Weimar-era-inspired commercial artwork with deterministic game-rendered copy. Avoid real propaganda, extremist symbols, political insignia, and text baked unreliably into generated images.
 - Mobile billboard direction: the existing minimalist fax-machine vector style or an equally small deterministic alternative.
+- The shipped desktop fax-ad pool is the two user-supplied, game-readable motifs under `assets/billboards/fax/`; the eagle-insignia variants from the source pack are intentionally not shipped. Both Canvas and Three.js use the same motif assignment, while viewports below 700 px keep `assets/fax-billboard.svg` and do not request the WebPs.
 - Share gameplay data, placement, copy, and interaction logic. Only the visual representation should vary by capability or viewport.
 - Load a desktop-only raster only when the desktop representation is actually selected. Do not make mobile download an unused high-resolution alternative.
 - Prefer WebP/AVIF for large raster delivery when browser support and visual QA are adequate; retain SVG for simple line art and signs.
+- The title screen uses the single transparent vectorized illustration at `assets/fax-wurst.svg`; animate that shipped SVG with CSS and do not add the generated raster as a second runtime variant.
 
 ## YAGNI rules
 

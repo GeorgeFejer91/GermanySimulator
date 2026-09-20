@@ -79,6 +79,19 @@ The arrangements use old or traditional underlying compositions, not modern perf
 
 The requested 2012 song **Thüringer Klöße** by Fritz is not transcribed or bundled. Its official upload identifies Frank Kadanik as composer, Ilona Klein and Hans-Jürgen Gröschner as lyricists, Warner Music Germany production, and explicitly prohibits unauthorized use: https://www.youtube.com/watch?v=qJe3cdM7f1c. The similarly named in-game Kloß-Kantinenjingle is a new, independent composition and does not copy that protected melody.
 
+## Pedestrian voices
+
+German browser speech remains the default for character dialogue, with the
+available installed German voices assigned across speakers. Three short angry
+pedestrian barks additionally use recordings from **Thorsten-Voice Dataset
+2021.06 emotional**, version 2.0, by Thorsten Müller and Dominik Kreutz. The
+dataset contains 2,400 German recordings (300 sentences across eight performed
+emotions) and is released under CC0 1.0 Universal.
+
+- Dataset DOI: https://doi.org/10.5281/zenodo.5525023
+- Project repository: https://github.com/thorstenMueller/Thorsten-Voice
+- Local clip IDs, conversion details, license, and checksums: `assets/voices/LICENSES.md`
+
 ## Phone tilt
 
 The same-device tilt controls adapt ECGaming's existing phone-tilt principles: screen-orientation-aware gravity projection, explicit permission where required, neutral calibration, deadzone, smoothing, stale-input release, and keyboard/touch fallback.
@@ -102,6 +115,35 @@ Her recurring line, "Wir schaffen das", is a documented historical quote from Au
 The game uses an approximately one-second excerpt of Merkel saying "Wir schaffen das" from phoenix's recording of the 31 August 2015 press conference. Source recording: https://www.youtube.com/watch?v=kDQki0MMFh4. The excerpt is included as a short attributed quotation for the game's satirical interaction; phoenix/rightsholder rights remain unaffected, and redistribution outside this project should be reviewed separately.
 
 The FAX 3000 PRO advertising claim ("2.75× faster") is entirely fictional game copy.
+
+## Fax billboard artwork
+
+The desktop fax-ad pool uses the simplified **Die neue Faxkraft** and **Fortschritt per Fax** placards from the user-supplied *Germany Simulator — Fax Billboard Pack*. They were resized to 960 × 720 WebP files for the game; the original PNGs are not shipped. The remaining pack variants are not used. The placards are fictional commercial satire, not government advertising or political endorsement. Their external redistribution provenance and license should be confirmed before publishing outside the user's project.
+
+## Title-screen fax-wurst artwork
+
+The transparent title-screen illustration was generated for this project with OpenAI's built-in image-generation tool, then color-traced with VTracer 0.6.15 into `assets/fax-wurst.svg`. No external photograph, logo, or third-party artwork is incorporated, and the generated raster is not part of the runtime.
+
+## Einbürgerungstest question source
+
+The roaming quiz encounters lightly adapt a small selection from the Bundesamt für Migration und Flüchtlinge's official **Gesamtfragenkatalog zum Test „Leben in Deutschland“ und zum „Einbürgerungstest“**, dated 7 May 2025. The source task number remains visible on every in-game question card.
+
+- Official catalog: https://www.bamf.de/SharedDocs/Anlagen/DE/Integration/Einbuergerung/gesamtfragenkatalog-lebenindeutschland.pdf?__blob=publicationFile&v=22
+- BAMF online test center: https://oet.bamf.de/ords/oetut/f?p=514:1
+
+The pedestrians' remarks, Germanness points, police diversion, and all surrounding presentation are fictional satire; they are not part of the official test or BAMF guidance.
+
+The wrong-answer `Nein! Nein! Nein!` sting is generated at runtime by the browser's installed German speech voice. It is not an audio extract from *Der Untergang* or any other film; no film recording is bundled.
+
+## §-power law text
+
+The law-power pool quotes current German federal provisions from the Federal Ministry of Justice and Federal Office of Justice service **Gesetze im Internet**, checked on 20 September 2026. The pool uses the statutory section numbers and wording, including long or obscure provisions rather than popular Internet-law myths.
+
+- Strafgesetzbuch § 183a, Erregung öffentlichen Ärgernisses: https://www.gesetze-im-internet.de/stgb/__183a.html
+- Ordnungswidrigkeitengesetz §§ 118 and 127: https://www.gesetze-im-internet.de/owig_1968/__118.html and https://www.gesetze-im-internet.de/owig_1968/__127.html
+- Straßenverkehrs-Ordnung §§ 27 and 30: https://www.gesetze-im-internet.de/stvo_2013/__27.html and https://www.gesetze-im-internet.de/stvo_2013/__30.html
+- Bürgerliches Gesetzbuch §§ 911, 919, and 961–964: https://www.gesetze-im-internet.de/bgb/__911.html, https://www.gesetze-im-internet.de/bgb/__919.html, and https://www.gesetze-im-internet.de/bgb/__961.html through https://www.gesetze-im-internet.de/bgb/__964.html
+- Lebensmittelbestrahlungsverordnung § 3: https://www.gesetze-im-internet.de/lmbestrv_2000/__3.html
 
 ## Legal framing
 

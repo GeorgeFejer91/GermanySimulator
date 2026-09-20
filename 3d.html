@@ -72,8 +72,12 @@ const schreber={x:90,y:1210,w:560,h:570},policeGarden={x:2850,y:3250,w:1500,h:65
 const BORDER_Y=1120,BORDER_BAND=72,crossingSigns=[],borderGates=roads.filter(r=>r.h===WORLD.h).map(r=>({x:r.x-55,w:r.w+110})),borderSegments=[];
 for(let cursor=0,i=0;i<=borderGates.length;i++){const gate=borderGates[i],end=gate?gate.x:WORLD.w;if(end-cursor>24)borderSegments.push({x:cursor,w:end-cursor});if(gate)cursor=gate.x+gate.w}
 const fireSources=[];for(let x=52,i=0;x<WORLD.w;x+=104,i++)fireSources.push({x,y:BORDER_Y,active:true,intensity:.82+(i%5)*.035,seed:(i*47%101)/101});
+const faxBillboardPool=[
+ {src:"./assets/billboards/fax/die-neue-faxkraft.webp"},
+ {src:"./assets/billboards/fax/fortschritt-per-fax.webp"}
+];
 const props=[
-{x:2860,y:760,asset:"faxbillboard",id:"fax1"},{x:3500,y:1880,asset:"faxbillboard",id:"fax2"},{x:3980,y:2890,asset:"faxbillboard",id:"fax3"}
+{x:2860,y:760,asset:"faxbillboard",billboard:faxBillboardPool[0],id:"fax1"},{x:3500,y:1880,asset:"faxbillboard",billboard:faxBillboardPool[1],id:"fax2"},{x:3980,y:2890,asset:"faxbillboard",billboard:faxBillboardPool[0],id:"fax3"}
 ];
 const npcs=[
 {x:520,y:720,vx:16,vy:0,min:470,max:900},{x:1470,y:670,vx:-13,vy:0,min:1360,max:1760},

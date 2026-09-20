@@ -52,6 +52,26 @@ Completed repository changes are validated, committed, and pushed to `origin/mai
 
 Every recorded or synthesized character line is one presentation event with its textbox. The speech queue reveals the exact matching text only when playback begins and keeps it visible through the end of that audio; later queued lines cannot replace it early. Opening a modal dialogue cancels any active or queued bark speech before the modal displays and voices its own exact line. Music and non-verbal effects remain independent.
 
+## 2026-09-20 — Dense obstructive pedestrians and timed surface enforcement
+
+Ordinary pedestrians densely occupy the narrow sidewalk network, automatically complain when the player enters an 82-unit personal-space radius, and use solid player collision so bumping into rude, stationary-or-reversing walkers is an intended navigation pressure. Building setbacks are visibly divided into forbidden grass with narrow legal door paths. Staying continuously on ordinary grass or a roadway outside a zebra crossing for more than three seconds adds one wanted star; leaving the surface resets that timer. The protected police garden retains its faster, stronger response.
+
+Pedestrian speech primarily uses the browser's installed German voices, assigned consistently across speakers and pitch/rate variants. A tiny on-demand subset of exact-text angry clips from the CC0 Thorsten-Voice 2021.06 Emotional dataset supplements German-side sidewalk barks; `assets/voices/LICENSES.md` is the durable provenance and checksum record. Berlin-side pedestrians remain Denglisch and therefore use exact authored browser speech rather than the German-only recordings.
+
+## 2026-09-20 — Germanness, Extra Wurst, and § diversion
+
+`game.js` owns one 0–15 Germanness value. Explicit lawful actions—Pfand collection, a first-time regional-sausage find, a complete zebra-crossing traversal, and waiting at a red pedestrian Ampel—raise it by one. Correct roaming citizenship-test answers also add one, while wrong answers subtract one without crossing below zero. Renderers only project traffic-light, pickup, badge, and meter state.
+
+Nine unique procedural sausage pickups share one data table across Canvas and WebGL. A first find permanently fills the corresponding 3×3 Wurstsammlerpass slot, announces `Extra Wurst! Unlocked …`, restores energy, and grants one Germanness point. No downloaded raster pack or generalized asset registry is needed.
+
+At 9 points, Germanness permanently unlocks a cooldown-bound physical `§` key, `Q` fallback, and touch button. The player receives an explicit activation prompt. Every power quotation is real, current federal statutory wording verified against the Federal Ministry of Justice's `gesetze-im-internet.de`; the pool deliberately favors obscure or linguistically dense provisions. Activation clears the player's wanted state and redirects police toward a disposable crowd NPC rather than a mission character. The police first catch the NPC, then visibly escort them to the station garden before removing them into the Spiel-Knast.
+
+The unlock forces the already-authored locally synthesized national-anthem arrangement to the front of the music queue while preserving the music-off preference. The HUD remains a compact edge gauge whose fill changes from gray toward saturated Schwarz-Rot-Gold as Germanness rises and reaches the undimmed flag at 15/15.
+
+Randomly timed encounters use ordinary crowd NPCs and pause the simulation only once the selected pedestrian reaches the player. Each encounter displays a region-appropriate intrusive remark followed by one four-choice question lightly adapted from the official BAMF `Gesamtfragenkatalog`, dated 7 May 2025, with its official task number visible. The deliberately obscure pool excludes questions about rights, antisemitism, National Socialism, and historical responsibility so those topics do not become the target of the joke.
+
+Wrong answers trigger a three-beat `Nein! Nein! Nein!` through the existing browser speech system, with matching on-screen text and the user's voice preference respected. No film audio is bundled: the requested *Der Untergang* extract has no verified reusable license and would conflict with the repository's local, attributable asset policy.
+
 ## 2026-09-20 — Political-character quote ownership
 
 The satirical figure trying to extinguish the Brandmauer is Friedrich Merz; the energy-district figure is Angela Merkel. Each NPC declares its political identity and all ambient and interaction dialogue resolves through that identity's dedicated quote pool. Merz and Merkel lines must never be pooled, shared, or selected for the other figure, and speaker labels, textboxes, and synthesized or recorded voices must retain the same owner.
