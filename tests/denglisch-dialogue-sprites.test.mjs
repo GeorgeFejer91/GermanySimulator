@@ -1,0 +1,22 @@
+import assert from "node:assert/strict";
+import {readFileSync} from "node:fs";
+
+const game=readFileSync("game.js","utf8"),world3d=readFileSync("world3d.js","utf8");
+const sourceIds=[...game.matchAll(/\{source:(\d+),question:/g)].map(([,id])=>id);
+const berlinMatch=game.match(/const berlinCitizenshipQuestions=(\{[\s\S]*?\});\s*const quizApproaches/);
+assert.ok(berlinMatch,"Berlin quiz copy must remain a literal object");
+const berlin=JSON.parse(berlinMatch[1]);
+assert.deepEqual(Object.keys(berlin),sourceIds,"every citizenship question needs Berlin Denglisch copy");
+for(const [source,copy] of Object.entries(berlin)){
+ assert.equal(copy.choices.length,4,`task ${source} needs four Denglisch choices`);
+ assert.match(copy.question,/\b(?:who|what|when|where|which|why|from|has|can|one|is|at|on|not|first|elected|celebrated|works|regular|remembered|economic|cultural|social)\b/i,`task ${source} question is not visibly Denglisch`);
+}
+assert.match(game,/state\.region==="berlin"\?"Choice ":""/,"every Berlin answer button needs a visible Denglisch marker");
+assert.match(game,/SPRITE_DIALOGUE_DISTANCE=150,SPRITE_DIALOGUE_RELEASE_DISTANCE=190/);
+assert.match(game,/function proximityDialogueReady\(n\)/);
+assert.match(game,/function insetSpriteSheet\(source,atlas\)/);
+assert.match(game,/merkel:\{canvas:null,cols:3,rows:5,pad:8,yBounds:\[0,330,648,962,1263,1619\]\}/);
+assert.match(game,/getNpcSpriteCanvas:key=>npcSpriteAtlases\[key\]/);
+assert.match(world3d,/new T\.CanvasTexture\(source\)/,"Three.js must use the normalized runtime atlas");
+assert.doesNotMatch(world3d,/TextureLoader\(\)\.load\("\.\/assets\/(?:merkel-sprite|bayern-walker-sprite)\.png"/);
+console.log("Berlin quiz, proximity dialogue, and sprite atlas contracts OK");

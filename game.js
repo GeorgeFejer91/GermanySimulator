@@ -20,7 +20,7 @@ let police=[],particles=[],width=innerWidth,height=innerHeight,dpr=1,last=perfor
 const horizontalRoads=[{x:0,y:820,w:WORLD.w,h:260},{x:0,y:2000,w:WORLD.w,h:240},{x:0,y:3000,w:WORLD.w,h:220}];
 const verticalRoads=[{x:1050,y:0,w:260,h:WORLD.h},{x:2400,y:0,w:220,h:WORLD.h},{x:4400,y:0,w:180,h:WORLD.h},{x:5850,y:0,w:220,h:WORLD.h},{x:7350,y:0,w:220,h:WORLD.h},{x:9000,y:0,w:180,h:WORLD.h}];
 const roads=[...horizontalRoads,...verticalRoads];
-const SIDEWALK_WIDTH=72,WALKWAY_WIDTH=84,NPC_BLOCK_DISTANCE=38,NPC_COMPLAINT_DISTANCE=82;
+const SIDEWALK_WIDTH=72,WALKWAY_WIDTH=84,NPC_BLOCK_DISTANCE=38,NPC_COMPLAINT_DISTANCE=82,SPRITE_DIALOGUE_DISTANCE=150,SPRITE_DIALOGUE_RELEASE_DISTANCE=190;
 const crossings=[];
 for(const h of horizontalRoads)for(const v of verticalRoads){
  crossings.push({x:v.x-40,y:h.y+Math.round((h.h-80)/2),w:v.w+80,h:80});
@@ -116,7 +116,17 @@ const assetSources={
 };
 if(desktopBillboards.matches)for(const motif of faxBillboardPool)assetSources[motif.asset]=motif.src;
 const assets={};for(const key in assetSources){const img=new Image();img.src=assetSources[key];assets[key]=img}
-const borderPourerSprite={canvas:null,cols:5,rows:6};
+const npcSpriteAtlases={
+ merkel:{canvas:null,cols:3,rows:5,pad:8,yBounds:[0,330,648,962,1263,1619]},
+ bayern:{canvas:null,cols:5,rows:4,pad:10,smoothing:false},
+ borderPourer:{canvas:null,cols:5,rows:6,pad:8}
+},borderPourerSprite=npcSpriteAtlases.borderPourer;
+function insetSpriteSheet(source,atlas){
+ const cell=256,c=document.createElement("canvas"),g=c.getContext("2d"),sw=source.width/atlas.cols,sh=source.height/atlas.rows,pad=atlas.pad||0;c.width=atlas.cols*cell;c.height=atlas.rows*cell;g.imageSmoothingEnabled=atlas.smoothing!==false;
+ for(let row=0;row<atlas.rows;row++)for(let col=0;col<atlas.cols;col++){const sy=atlas.yBounds?.[row]??row*sh,sourceHeight=atlas.yBounds?atlas.yBounds[row+1]-sy:sh;g.drawImage(source,col*sw,sy,sw,sourceHeight,col*cell+pad,row*cell+pad,cell-pad*2,cell-pad*2)}
+ atlas.canvas=c
+}
+function prepareTransparentSprite(key){const atlas=npcSpriteAtlases[key],img=assets[key+"Sprite"];if(!img||!img.naturalWidth||atlas.canvas)return;insetSpriteSheet(img,atlas)}
 function prepareBorderPourerSprite(){
  const img=assets.borderPourer;if(!img||!img.naturalWidth||borderPourerSprite.canvas)return;
  const fw=img.naturalWidth/borderPourerSprite.cols,fh=img.naturalHeight/borderPourerSprite.rows,c=document.createElement("canvas"),g=c.getContext("2d",{willReadFrequently:true});c.width=img.naturalWidth;c.height=img.naturalHeight;g.drawImage(img,0,0);
@@ -132,11 +142,10 @@ function prepareBorderPourerSprite(){
  g.clearRect(fw*3,fh*2,28,fh);g.clearRect(fw*4,fh*2,20,fh);
  for(let col=1;col<borderPourerSprite.cols;col++)g.clearRect(col*fw-2,0,4,c.height);
  for(let row=1;row<borderPourerSprite.rows;row++)g.clearRect(0,row*fh-2,c.width,4);
- const clean=document.createElement("canvas"),cg=clean.getContext("2d"),pad=5;clean.width=c.width;clean.height=c.height;
- for(let row=0;row<borderPourerSprite.rows;row++)for(let col=0;col<borderPourerSprite.cols;col++)cg.drawImage(c,col*fw,row*fh,fw,fh,col*fw+pad,row*fh+pad,fw-pad*2,fh-pad*2);
- borderPourerSprite.canvas=clean;
+ insetSpriteSheet(c,borderPourerSprite);
 }
 assets.borderPourer.addEventListener("load",prepareBorderPourerSprite,{once:true});if(assets.borderPourer.complete)prepareBorderPourerSprite();
+for(const key of ["merkel","bayern"]){assets[key+"Sprite"].addEventListener("load",()=>prepareTransparentSprite(key),{once:true});if(assets[key+"Sprite"].complete)prepareTransparentSprite(key)}
 const policeBarks={
  berlin:["HALT! Stop mal immediately!","Nicht auf ze grass, bitte!","Ausweis, ID, irgendwas Officiales!","Please leave den Grünbereich sofort!","Das ist so wirklich not vorgesehen!","Bleiben Sie hinter ze line!"],
  germany:["HALT! STEHENBLEIBEN!","NICHT ÜBER DEN RASEN!","AUSWEIS BITTE!","SIE VERLASSEN SOFORT DEN GRÜNBEREICH!","DAS IST SO NICHT VORGESEHEN!","BLEIBEN SIE HINTER DER LINIE!"]
@@ -204,6 +213,26 @@ const citizenshipQuestions=[
  {source:291,question:"Warum muss man bei der Steuererklärung angeben, ob man zu einer Kirche gehört?",choices:["weil es eine an Einkommen- und Lohnsteuer geknüpfte Kirchensteuer gibt","weil das nur für die Statistik wichtig ist","weil Nichtmitglieder mehr Steuern zahlen","weil die Kirche die Steuererklärung bearbeitet"],answer:0},
  {source:300,question:"Aus welchem Land kamen die ersten Gastarbeiterinnen und Gastarbeiter in die Bundesrepublik Deutschland?",choices:["Italien","Spanien","Portugal","Türkei"],answer:0}
 ];
+const berlinCitizenshipQuestions={
+ "57":{"question":"Who wird meistens as Präsidentin oder Präsident des Deutschen Bundestages elected?","choices":["the oldest Abgeordnete im Parlament","the Ministerpräsidentin or Ministerpräsident des largest Bundeslandes","a former Bundeskanzlerin or Bundeskanzler","an Abgeordnete or Abgeordneter der strongest Fraktion"]},
+ "69":{"question":"Die Bundesrepublik has einen three-level Verwaltungsaufbau. Wie heißt die lowest politische Stufe?","choices":["Stadträte, the city councillors","Landräte, the district chiefs","Gemeinden, the municipalities","Bezirksämter, the district offices"]},
+ "102":{"question":"Womit can one in der Bundesrepublik geehrt werden, wenn man auf politischem, economic, cultural, geistigem oder socialem Gebiet eine besondere Leistung erbracht hat?","choices":["with dem Bundesverdienstkreuz","with dem Bundesadler","with dem Vaterländischen Verdienstorden","with dem Ehrentitel ‘Held der DDR’"]},
+ "103":{"question":"What wird in Deutschland as ‘Ampelkoalition’ bezeichnet?","choices":["CDU and CSU","SPD, FDP and Bündnis 90/Die Grünen","CSU, Die Linke and Bündnis 90/Die Grünen","CDU and SPD"]},
+ "140":{"question":"What macht eine Schöffin oder ein Schöffe in Deutschland exactly?","choices":["decides mit Richterinnen und Richtern über Schuld und Strafe","gives Bürgerinnen und Bürgern rechtlichen Rat","issues Urkunden","defends die Angeklagte oder den Angeklagten"]},
+ "150":{"question":"Eine Gerichtsschöffin oder ein Gerichtsschöffe in Deutschland is …","choices":["the Stellvertretung des Stadtoberhaupts","an ehrenamtliche Richterin or ehrenamtlicher Richter","a Mitglied eines Gemeinderats","a Person, die Jura studied hat"]},
+ "183":{"question":"When war in der Bundesrepublik das so-called ‘Wirtschaftswunder’?","choices":["in den forties","in den fifties","in den seventies","in den eighties"]},
+ "186":{"question":"In 1953 gab es in der DDR einen Aufstand, remembered lange by einen Feiertag. On welchem Datum war das?","choices":["on 1. Mai","on 17. Juni","on 20. Juli","on 9. November"]},
+ "211":{"question":"Which Politiker steht für die ‘Ostverträge’?","choices":["Helmut Kohl","Willy Brandt","Michail Gorbatschow","Ludwig Erhard"]},
+ "230":{"question":"Das Europäische Parlament wird regular elected, nämlich every …","choices":["five Jahre","six Jahre","seven Jahre","eight Jahre"]},
+ "234":{"question":"Where ist ein Sitz des Europäischen Parlaments?","choices":["in London","in Paris","in Berlin","in Straßburg"]},
+ "237":{"question":"In 2007 wurde das 50-jährige anniversary der ‘Römischen Verträge’ celebrated. What war ihr Inhalt?","choices":["Deutschlands Beitritt zur NATO","the Gründung der Europäischen Wirtschaftsgemeinschaft, EWG","Deutschlands Verpflichtung zu Reparationsleistungen","the Festlegung der Oder-Neiße-Linie"]},
+ "238":{"question":"At welchen Orten arbeitet das Europäische Parlament?","choices":["Paris, London and Den Haag","Straßburg, Luxemburg and Brüssel","Rom, Bern and Wien","Bonn, Zürich and Mailand"]},
+ "266":{"question":"When beginnt die gesetzliche Nachtruhe in Deutschland?","choices":["when die Sonne untergeht","when die Nachbarn schlafen gehen","at 0 Uhr, Mitternacht","at 22 Uhr"]},
+ "282":{"question":"Which Ehrenamt müssen deutsche Staatsbürgerinnen und Staatsbürger übernehmen, wenn sie officially asked werden?","choices":["Vereinstrainerin or Vereinstrainer","Wahlhelferin or Wahlhelfer","Bibliotheksaufsicht","Lehrerin or Lehrer"]},
+ "285":{"question":"Frau Frost works fest angestellt in einem Büro. What muss sie not von ihrem Gehalt bezahlen?","choices":["Lohnsteuer","Beiträge zur Arbeitslosenversicherung","Beiträge zur Renten- and Krankenversicherung","Umsatzsteuer"]},
+ "291":{"question":"Why muss man bei der Steuererklärung angeben, ob man zu einer Kirche gehört?","choices":["because es eine an Einkommen- and Lohnsteuer geknüpfte Kirchensteuer gibt","because das only für die Statistik wichtig ist","because Nichtmitglieder more Steuern zahlen","because die Kirche die Steuererklärung bearbeitet"]},
+ "300":{"question":"From welchem Land kamen die first Gastarbeiterinnen und Gastarbeiter in die Bundesrepublik?","choices":["from Italien","from Spanien","from Portugal","from der Türkei"]}
+};
 const quizApproaches={
  berlin:["Ah, Sie sind not from hier, oder? Dann one completely normale Prüfungsfrage.","Nein, aber wo kommen Sie ursprünglich originally her? Egal. Einbürgerungstest!","Your Gehweise ist auffällig international. Eine random Prüfungsfrage, bitte.","Oh, what a lovely Name! How do you pronounce it? Really like this? Mache ich das richtig, oder ist der Name kaputt? Anyway.","Ihre Aussprache sounds very pleasant. Almost amtlich. One kleine Frage.","Ihr Deutsch klingt already quite convincing. Let us verify that completely beiläufig.","Was für ein beautiful Name. Ist die pronunciation korrekt, oder braucht sie eine DIN-Norm? Egal.","You look exceptionally eingebürgert today. Just one random Kontrolle.","Ihre Jacke ist very ordentlich. Sogar die Knöpfe look zuständig. Apropos.","Sie leben schon so long hier and still don't know: der, die oder das Flanschdichtungsprüfprotokoll? Really?","So viele Jahre in Deutschland and beim Artikel von Zwischenfeststellungsverfügung noch unsicher? Interessant.","You have such a trustworthy Formular-Gesicht. Da kann one kleine Prüfungsfrage nicht schaden."],
  germany:["Ach, Sie sind nicht von hier, oder? Dann eine ganz gewöhnliche Prüfungsfrage.","Nein, aber wo kommen Sie ursprünglich wirklich her? Egal. Einbürgerungstest!","Ihre Gehweise ist auffällig international. Eine zufällige Prüfungsfrage, bitte.","Oh, was für ein schöner Name! Wie spricht man ihn aus? Wirklich so? Mache ich das richtig, oder ist der Name kaputt? Wie auch immer.","Sie haben eine sehr angenehme Aussprache. Fast amtlich. Eine kleine Frage.","Ihr Deutsch klingt schon recht überzeugend. Prüfen wir das ganz beiläufig.","Was für ein schöner Name. Ist die Aussprache korrekt, oder braucht sie eine DIN-Norm? Egal.","Sie sehen heute außerordentlich eingebürgert aus. Nur eine zufällige Kontrolle.","Ihre Jacke ist sehr ordentlich. Sogar die Knöpfe wirken zuständig. Apropos.","Sie leben schon so lange hier und wissen immer noch nicht: der, die oder das Flanschdichtungsprüfprotokoll? Also wirklich.","So viele Jahre in Deutschland und beim Artikel von Zwischenfeststellungsverfügung noch unsicher? Interessant.","Sie haben so ein vertrauenswürdiges Formulargesicht. Da kann eine kleine Prüfungsfrage nicht schaden."]
@@ -421,7 +450,7 @@ const pickups=[
  ...wurstPickups
 ];
 const normObjects=[{x:2210,y:1190,type:"bin",fixed:false,label:"MÜLLTONNE 4,6° SCHIEF"},{x:1650,y:650,type:"chairs",fixed:false,label:"STÜHLE NICHT FLUCHTGERECHT"},{x:570,y:1140,type:"hedge",fixed:false,label:"HECKE 3 CM ZU INDIVIDUELL"}];
-window.Germany3DBridge={WORLD,player,roads,crossings,crossingSigns,trafficLights,buildings,grassAreas,walkways,SIDEWALK_WIDTH,schreber,policeGarden,policePath,BORDER_Y,BORDER_BAND,borderGates,borderSegments,fireSources,props,pickups,getNPCs:()=>npcs,getPolice:()=>police,getBorderPourerCanvas:()=>borderPourerSprite.canvas,borderPourerGrid:{cols:borderPourerSprite.cols,rows:borderPourerSprite.rows}};
+window.Germany3DBridge={WORLD,player,roads,crossings,crossingSigns,trafficLights,buildings,grassAreas,walkways,SIDEWALK_WIDTH,schreber,policeGarden,policePath,BORDER_Y,BORDER_BAND,borderGates,borderSegments,fireSources,props,pickups,getNPCs:()=>npcs,getPolice:()=>police,getNpcSpriteCanvas:key=>npcSpriteAtlases[key]?.canvas||null,npcSpriteGrids:Object.fromEntries(Object.entries(npcSpriteAtlases).map(([key,{cols,rows}])=>[key,{cols,rows}]))};
 const forms={
 a38:{code:"A38/1",title:"Passierschein A38 zur Beantragung eines weiteren Antrags",subtitle:"Bitte vollständig ausfüllen. Unvollständige Vollständigkeit gilt als unvollständig.",fields:[["text","VOLLSTÄNDIGER NAME"],["text","GEBURTSORT IN HEUTIGEN GEMEINDEGRENZEN"],["select","MELDESTATUS",["gemeldet","noch nicht gemeldet","gefühltermaßen gemeldet"]],["text","AKTENZEICHEN, FALLS BEREITS VORHANDEN"],["check","Ich bestätige, dass ich dieses Formular freiwillig unfreiwillig ausfülle."]]},
 wohnung:{code:"WGB-88",title:"Wohnungsgeberbestätigung zur Bestätigung einer Wohnung",subtitle:"Bestätigen Sie, dass Ihre Wohnung tatsächlich eine Wohnung ist.",fields:[["text","ANSCHRIFT"],["text","WOHNUNGSGEBENDER WOHNUNGSGEBER"],["select","ART DER ÜBERLASSUNG",["vermietet","untervermietet","mysteriös überlassen"]],["text","TATSÄCHLICHES DATUM DER TATSACHE DES EINZUGS"],["check","Ich bestätige das Vorhandensein von Wänden und mindestens einer Tür."]]},
@@ -476,17 +505,22 @@ function playerSurface(){return onGardenGrass(player.x,player.y)?"grass":onRoad(
 function politicianDialogue(n){return politicianLines[n.politician]||[]}
 function nextPoliticianLine(n){const lines=politicianDialogue(n);return lines.length?lines[n.lineIndex++%lines.length]:""}
 function merkelBehind(n){return (player.x-n.x)*(n.facingX||1)+(player.y-n.y)*(n.facingY||0)<-24}
+function proximityDialogueReady(n){
+ const near=dist(player.x,player.y,n.x,n.y);if(near>SPRITE_DIALOGUE_RELEASE_DISTANCE){n.dialogueNearby=false;return false}
+ if(near>=SPRITE_DIALOGUE_DISTANCE||n.dialogueNearby||performance.now()<(n.barkAt||0)||speechActive||speechQueue.length||!document.getElementById("police-bark").hidden)return false;
+ n.dialogueNearby=true;return true
+}
 function updateMerkel(n,dt){
  const target=n.route[n.target],dx=target[0]-n.x,dy=target[1]-n.y,d=Math.hypot(dx,dy)||1,speed=38;n.facingX=dx/d;n.facingY=dy/d;n.x+=n.facingX*speed*dt;n.y+=n.facingY*speed*dt;n.animTime+=dt;
  if(Math.abs(dx)>Math.abs(dy))n.spriteRow=dx<0?1:2;else n.spriteRow=dy<0?3:4;n.spriteFrame=1+Math.floor(n.animTime*5)%2;
  if(d<10){n.x=target[0];n.y=target[1];n.target=(n.target+1)%n.route.length}
- const now=performance.now(),near=dist(player.x,player.y,n.x,n.y);if(near<165&&merkelBehind(n)&&now>(n.barkAt||0)){n.barkAt=now+6500;showWorldBark(n.name,MERKEL_BEHIND_LINE,false)}else if(near<360&&now>(n.barkAt||0)){const line=nextPoliticianLine(n);n.barkAt=now+8500;if(line)showWorldBark(n.name,line,false)}
+ if(proximityDialogueReady(n)){const line=merkelBehind(n)?MERKEL_BEHIND_LINE:nextPoliticianLine(n);n.barkAt=performance.now()+(line===MERKEL_BEHIND_LINE?6500:8500);if(line)showWorldBark(n.name,line,false)}
 }
 function nextBayernClip(n){let index=Math.floor(Math.random()*bayernClips.length);if(index===n.lastClip)index=(index+1+Math.floor(Math.random()*(bayernClips.length-1)))%bayernClips.length;n.lastClip=index;return bayernClips[index]}
 function bayernBark(n,force=false){const now=performance.now();if((!force&&now<(n.barkAt||0))||state.region!=="germany")return false;const item=nextBayernClip(n);n.barkAt=now+9000+Math.random()*7000;showWorldBark(n.name,item.text,false,item.recording);return true}
 function chooseBayernTarget(n){n.targetSpot=pick(bayernWaypoints[n.spot].links)}
 function updateBayern(n,dt){
- const now=performance.now();if(!state.modal&&state.region==="germany"&&dist(player.x,player.y,n.x,n.y)<330&&now>(n.barkAt||0))bayernBark(n);
+ if(state.region==="germany"&&proximityDialogueReady(n))bayernBark(n);
  if(n.hangTimer>0){n.hangTimer-=dt;n.spriteFrame=2;return}
  const target=bayernWaypoints[n.targetSpot],dx=target.x-n.x,dy=target.y-n.y,d=Math.hypot(dx,dy)||1,speed=52;n.animTime+=dt;
  if(d<7){n.x=target.x;n.y=target.y;n.spot=n.targetSpot;n.hangTimer=2+Math.random()*4;chooseBayernTarget(n);n.spriteFrame=2;return}
@@ -508,9 +542,8 @@ function updateBorderPourer(n,dt){
   if(n.stateTimer<=0){n.state="sideWalk";n.stateTimer=1.25;n.animTime=0}
  }
  if(n.x<=n.minX||n.x>=n.maxX){n.x=clamp(n.x,n.minX,n.maxX);n.dir*=-1;n.state="sidePour";n.stateTimer=.9;n.animTime=0}
- const now=performance.now();
- if(dist(player.x,player.y,n.x,n.y)<310&&now>(n.barkAt||0)&&state.wanted<2){
-  const line=nextPoliticianLine(n);n.barkAt=now+8500+Math.random()*4500;if(line)showWorldBark(n.name,line,false);
+ if(state.wanted<2&&proximityDialogueReady(n)){
+  const line=nextPoliticianLine(n);n.barkAt=performance.now()+8500+Math.random()*4500;if(line)showWorldBark(n.name,line,false);
  }
 }
 function softWarn(msg){toast((state.lang==="en"?"WARNING · ":"VERWARNUNG · ")+msg);uiTone(520,.055,"square",.025)}
@@ -560,14 +593,14 @@ function nextCitizenshipQuestion(){
 }
 function setQuizChoicesEnabled(enabled){document.querySelectorAll("#quiz-choices button").forEach(button=>button.disabled=!enabled)}
 function startCitizenshipQuiz(n){
- stopSpeech();state.modal=true;state.quizNpc=n;state.quizQuestion=nextCitizenshipQuestion();const q=state.quizQuestion,remark=pick(quizApproaches[state.region]||quizApproaches.germany),prompt=remark+" "+q.question,modal=document.getElementById("quiz-modal"),choices=document.getElementById("quiz-choices");
+ stopSpeech();state.modal=true;state.quizNpc=n;state.quizQuestion=nextCitizenshipQuestion();const q=state.quizQuestion,copy=state.region==="berlin"?berlinCitizenshipQuestions[q.source]:q;state.quizCopy=copy;const remark=pick(quizApproaches[state.region]||quizApproaches.germany),prompt=remark+" "+copy.question,modal=document.getElementById("quiz-modal"),choices=document.getElementById("quiz-choices");
  document.getElementById("quiz-speaker").textContent=n.name+" · SPONTANE EINBÜRGERUNGSPRÜFUNG";document.getElementById("quiz-source").textContent="BAMF-GESAMTKATALOG 07.05.2025 · AUFGABE "+q.source;document.getElementById("quiz-prompt").textContent=prompt;choices.innerHTML="";
- q.choices.forEach((choice,index)=>{const button=document.createElement("button");button.type="button";button.dataset.answer=index;button.textContent=String.fromCharCode(65+index)+" · "+choice;button.disabled=true;choices.appendChild(button)});
+ copy.choices.forEach((choice,index)=>{const button=document.createElement("button");button.type="button";button.dataset.answer=index;button.textContent=(state.region==="berlin"?"Choice ":"")+String.fromCharCode(65+index)+" · "+choice;button.disabled=true;choices.appendChild(button)});
  const token=state.quizVoiceToken=(state.quizVoiceToken||0)+1,reveal=()=>{if(token===state.quizVoiceToken)modal.hidden=false},done=()=>{if(token===state.quizVoiceToken)setQuizChoicesEnabled(true)};speak(prompt,{voiceKey:n.name,start:reveal,done});
 }
 function answerCitizenshipQuiz(index){
- const q=state.quizQuestion;if(!q)return;state.quizVoiceToken=(state.quizVoiceToken||0)+1;document.getElementById("quiz-modal").hidden=true;state.modal=false;state.quizQuestion=null;state.quizNpc=null;
- if(index===q.answer){uiTone(980,.1,"square",.04);addGermanness(1,"RICHTIG · AUFGABE "+q.source)}else{uiTone(170,.16,"sawtooth",.045);addGermanness(-1,"FALSCH · RICHTIG: "+q.choices[q.answer]);showWorldBark("ENTTÄUSCHTER PRÜFUNGSBEAUFTRAGTER","Nein! Nein! Nein!",true,"./assets/voices/quiz-wrong-answer.mp3")}
+ const q=state.quizQuestion,copy=state.quizCopy||q;if(!q)return;state.quizVoiceToken=(state.quizVoiceToken||0)+1;document.getElementById("quiz-modal").hidden=true;state.modal=false;state.quizQuestion=null;state.quizCopy=null;state.quizNpc=null;
+ if(index===q.answer){uiTone(980,.1,"square",.04);addGermanness(1,"RICHTIG · AUFGABE "+q.source)}else{uiTone(170,.16,"sawtooth",.045);addGermanness(-1,"FALSCH · RICHTIG: "+copy.choices[q.answer]);showWorldBark("ENTTÄUSCHTER PRÜFUNGSBEAUFTRAGTER","Nein! Nein! Nein!",true,"./assets/voices/quiz-wrong-answer.mp3")}
 }
 document.getElementById("quiz-choices").addEventListener("click",event=>{const button=event.target.closest("button[data-answer]");if(button&&!button.disabled)answerCitizenshipQuiz(Number(button.dataset.answer))});
 function updateQuizEncounters(dt){
@@ -609,6 +642,7 @@ function microInteract(p){
 }
 
 function interact(){if(state.dialogue){nextDialogue();return}if(state.modal)return;const m=missions[Math.min(state.mission,missions.length-1)];for(const b of buildings){if(dist(player.x,player.y,b.doorX,b.doorY)<112){if(b.id===m.target){if(state.mission===5){if(state.stadtbild>=3)openDialogue("AMT FÜR STADTBILD",["Ausgezeichnet. Die Mülltonne steht wieder parallel zur gefühlten Bordsteinkante.","Die Stadt ist nun statistisch 14 Prozent weniger individuell.","Stempel B: optische Unbedenklichkeit."],"✓",()=>{state.mission++;updateHud()});else openDialogue("AMT FÜR STADTBILD",["Gemäß der rein fiktiven Gestaltungsvorschrift ist das Stadtbild zu normieren.","Richten Sie die Mülltonne, die Stühle und die Hecke aus.","Der politische Aushang ist eine satirische Requisite und keine Tatsachenbehauptung."],"FM",()=>toast("3 STADTBILD-ABWEICHUNGEN MARKIERT"))}else bureaucrat(b,m)}else if(b.id==="imbiss")openDialogue("WURST-INSEL",["Bratwurst +35 Energie. Currywurst +50 Verwaltungsmut.","Senf ist kein gültiges Aktenzeichen."],"🌭");else openDialogue(b.name,state.region==="berlin"?["Sie sind hier basically richtig, aber für einen anderen process.","Try Zuständigkeit. Oder Tuesday. Tuesday ist beliebt."]:["Sie sind hier grundsätzlich richtig, aber für einen anderen Vorgang.","Versuchen Sie es mit Zuständigkeit. Oder Dienstag."],"§");return}}for(const n of npcs)if(dist(player.x,player.y,n.x,n.y)<92){
+ if(n.special)n.dialogueNearby=true;
  if(n.special==="borderPourer"){
    openDialogue(n.name,politicianDialogue(n),"FM");
  }else if(n.special==="merkel"){
@@ -924,8 +958,8 @@ function sprite(x,y,label,type,accent){
  if(type==="bin"){ctx.fillStyle="#555b54";ctx.fillRect(-15,-34,30,34)}if(type==="chairs"){ctx.strokeStyle="#4f4e49";ctx.lineWidth=3;ctx.strokeRect(-26,-22,20,22);ctx.strokeRect(7,-22,20,22)}if(type==="hedge"){ctx.fillStyle="#4e594a";ctx.fillRect(-36,-28,72,28)}
  if(label&&s>.28){ctx.fillStyle="#171717";ctx.font="800 8px Arial";ctx.textAlign="center";ctx.fillText(label,0,18);ctx.textAlign="left"}ctx.restore()}
 function drawMerkelNpc(n){
- const p=project(n.x,n.y,0),img=assets.merkelSprite;
- if(img&&img.complete&&img.naturalWidth){const fw=img.naturalWidth/3,fh=img.naturalHeight/5,s=clamp(p.s,.42,1.12),size=104;ctx.save();ctx.translate(p.x,p.y);ctx.scale(s,s);ctx.drawImage(img,(n.spriteFrame||0)*fw,(n.spriteRow||0)*fh,fw,fh,-size/2,-size+8,size,size);ctx.restore()}else drawAsset("merkel",n.x,n.y,46,74);
+ const p=project(n.x,n.y,0),atlas=npcSpriteAtlases.merkel,img=atlas.canvas;
+ if(img){const fw=img.width/atlas.cols,fh=img.height/atlas.rows,s=clamp(p.s,.42,1.12),size=104;ctx.save();ctx.translate(p.x,p.y);ctx.scale(s,s);ctx.drawImage(img,(n.spriteFrame||0)*fw,(n.spriteRow||0)*fh,fw,fh,-size/2,-size+8,size,size);ctx.restore()}else drawAsset("merkel",n.x,n.y,46,74);
  if(p.x>-120&&p.x<width+120&&p.y>-140&&p.y<height+140){
    ctx.fillStyle="#171717";ctx.font="800 "+Math.max(7,8*p.s)+"px Arial";ctx.textAlign="center";
    ctx.fillText("ANGELA MERKEL · SATIRE",p.x,p.y+16*p.s);ctx.textAlign="left";
@@ -940,8 +974,8 @@ function drawBorderPourer(n){
  ctx.fillStyle="#171717";ctx.font="800 "+Math.max(7,8*p.s)+"px Arial";ctx.textAlign="center";ctx.fillText("FRIEDRICH MERZ · FIKTIONALE SATIRE",p.x,p.y+18*p.s);ctx.textAlign="left";
 }
 function drawBayernNpc(n){
- const p=project(n.x,n.y,0),img=assets.bayernSprite;if(!img||!img.complete||!img.naturalWidth){sprite(n.x,n.y,n.name,"person","#263b59");return}
- if(p.x<-160||p.x>width+160||p.y<-190||p.y>height+190)return;const fw=img.naturalWidth/5,fh=img.naturalHeight/4,s=clamp(p.s,.42,1.12),size=124;
+ const p=project(n.x,n.y,0),atlas=npcSpriteAtlases.bayern,img=atlas.canvas;if(!img){sprite(n.x,n.y,n.name,"person","#263b59");return}
+ if(p.x<-160||p.x>width+160||p.y<-190||p.y>height+190)return;const fw=img.width/atlas.cols,fh=img.height/atlas.rows,s=clamp(p.s,.42,1.12),size=124;
  ctx.save();ctx.translate(p.x,p.y);ctx.scale(s,s);ctx.imageSmoothingEnabled=false;ctx.drawImage(img,(n.spriteFrame||0)*fw,(n.spriteRow||0)*fh,fw,fh,-size/2,-size+8,size,size);ctx.restore();
  ctx.fillStyle="#171717";ctx.font="800 "+Math.max(7,8*p.s)+"px Arial";ctx.textAlign="center";ctx.fillText(n.name,p.x,p.y+18*p.s);ctx.textAlign="left"
 }
