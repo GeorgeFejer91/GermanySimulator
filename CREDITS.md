@@ -133,7 +133,7 @@ The roaming quiz encounters lightly adapt a small selection from the Bundesamt f
 
 The pedestrians' remarks, Germanness points, police diversion, and all surrounding presentation are fictional satire; they are not part of the official test or BAMF guidance.
 
-The wrong-answer `Nein! Nein! Nein!` sting is generated at runtime by the browser's installed German speech voice. It is not an audio extract from *Der Untergang* or any other film; no film recording is bundled.
+The wrong-answer `Nein! Nein! Nein!` sting uses the **Nein Nein Nein Hitler Sound** from QuickSounds under its attribution-required Standard License. Sounds by https://quicksounds.com. Source and license details: `assets/voices/LICENSES.md`. If the recording cannot load, the game falls back to the browser's installed German speech voice.
 
 ## §-power law text
 

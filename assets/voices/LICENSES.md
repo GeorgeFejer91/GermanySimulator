@@ -18,3 +18,20 @@ version 2.0, recorded by Thorsten Müller and optimized by Dominik Kreutz.
 
 Attribution is not required by CC0, but the source and recording IDs are kept
 here for durable provenance and reproducible replacement.
+
+## Einbürgerungstest wrong-answer sting
+
+`quicksounds-nein-nein-nein.mp3` is the **Nein Nein Nein Hitler Sound** from
+QuickSounds, used only as a synchronized wrong-answer effect in the game. The
+user supplied a YouTube reference whose description identifies QuickSounds as
+the source; the shipped file comes from the original QuickSounds download.
+
+- Sound page: https://quicksounds.com/sound/293/nein-nein-nein-hitler
+- License: https://quicksounds.com/page/license-agreement
+- License name: Standard License; attribution required; permits use in games
+  and apps, but not standalone redistribution outside the production.
+- Required credit: Sounds by https://quicksounds.com
+- SHA-256: `59AC76C4253FACEDEF05DA5BF11FA2668DFC01BFB080BDBD649DF1696D7B5BFF`
+
+This file is not relicensed under the repository's other asset licenses. Do
+not extract, republish, sublicense, or reuse it independently of the game.
