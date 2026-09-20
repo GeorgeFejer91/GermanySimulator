@@ -131,6 +131,8 @@ The animated border-pourer sprite sheet was supplied by the user for this integr
 
 The roaming Angela Merkel sprite sheet was supplied by the user for this integration and is labeled **SATIRE** in-game. Its external redistribution provenance and license should be confirmed before publishing outside the user's project.
 
+The fictional roaming Bayern-Beauftragter uses a user-supplied character sheet as its visual reference. The production 5×4 walk atlas was regenerated with OpenAI's built-in image-generation tool, then deterministically repacked into equal 256×256 transparent cells and palette-optimized. Its eight proximity lines are coherent excerpts from the user's local Bayern recording, selected from a local Whisper transcript and cut with FFmpeg. Source and shipped-audio checksums, exact transcripts, and cut intervals are recorded in `assets/voices/LICENSES.md`; external redistribution rights for the user-supplied inputs should be confirmed before publishing outside this project.
+
 Merkel's energy-district dialogue uses short historical quotations attributed to her rather than invented statements. The Atomausstieg/Fukushima lines are documented in the German Bundestag's reports on her 17 March and 9 June 2011 government statements and in the Federal Chancellor's 16 April 2011 video-podcast transcript:
 
 - https://www.bundestag.de/webarchiv/textarchiv/2011/33753604_kw11_regierungserklaerung_japan-204868

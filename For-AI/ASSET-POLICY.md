@@ -18,6 +18,7 @@ Use one asset authority at root `assets/`, with fidelity selected by the client.
 - The user-linked humor-form fax recording is an in-game-only local MP3 at `assets/fax-machine-paper-feed.mp3`. Preserve its source and checksum in `CREDITS.md`, do not claim a license that the source does not provide, and keep the synthesized Web Audio fax feed as the missing-file fallback.
 - The user-supplied opening music is one in-game-only local MP3 at `assets/intro-song.mp3`, trimmed by exactly 24 seconds at the start. It plays once before the synthesized catalog; preserve source and shipped checksums in `CREDITS.md` and do not claim external redistribution rights that have not been established.
 - Keep emotional pedestrian recordings to a small local MP3 subset with exact-text bark mappings, durable source and checksum records in `assets/voices/LICENSES.md`, and browser-speech fallback. Do not fetch the full dataset or depend on a remote audio host at runtime.
+- Keep the user-supplied Bayern recording as short, coherent mono MP3 excerpts under `assets/voices/bayern/`, with exact-text runtime mappings and checksums in `assets/voices/LICENSES.md`. The Bayern walker atlas is one optimized transparent 5×4 PNG shared by Canvas and Three.js; every 256×256 cell retains transparent inset, so no runtime frame-cleanup copy is needed.
 
 ## YAGNI rules
 

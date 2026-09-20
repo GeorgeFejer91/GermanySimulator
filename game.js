@@ -112,7 +112,7 @@ const assetSources={
  wartemarke:"./assets/wartemarke.svg",rasen:"./assets/rasen-verboten.svg",muell:"./assets/muelltrennung.svg",
  db:"./assets/db-verspaetung.svg",baustelle:"./assets/baustelle.svg",fahrrad:"./assets/fahrrad.svg",kaffee:"./assets/kaffeeautomat.svg",pfandautomat:"./assets/pfandautomat.svg",
  faxbillboard:"./assets/fax-billboard.svg",faxgeraet:"./assets/faxgeraet.svg",faxkiosk:"./assets/telefon-fax-kiosk.svg",
- merkel:"./assets/merkel-cartoon.svg",merkelSprite:"./assets/merkel-sprite.png",polizeigarten:"./assets/polizei-garten-schild.svg",borderPourer:"./assets/border-pourer-sprite.png"
+ merkel:"./assets/merkel-cartoon.svg",merkelSprite:"./assets/merkel-sprite.png",bayernSprite:"./assets/bayern-walker-sprite.png",polizeigarten:"./assets/polizei-garten-schild.svg",borderPourer:"./assets/border-pourer-sprite.png"
 };
 if(desktopBillboards.matches)for(const motif of faxBillboardPool)assetSources[motif.asset]=motif.src;
 const assets={};for(const key in assetSources){const img=new Image();img.src=assetSources[key];assets[key]=img}
@@ -340,6 +340,22 @@ const merkelLines=Object.freeze([
  "Wir müssen uns darauf einstellen, dass wir schneller aussteigen.",
  "Wir wollen das schaffen."
 ]);
+const bayernClips=Object.freeze([
+ {text:"Und als letzten Punkt: Baden-Württemberg. Ah, nicht Bayern.",recording:"./assets/voices/bayern/baden-wuerttemberg-not-bayern.mp3"},
+ {text:"Wie schön Bayern ist. Geh nach Bayern. In Bayern gibt's Bayern. Nur in Bayern gibt's Bayern.",recording:"./assets/voices/bayern/wie-schoen-bayern-ist.mp3"},
+ {text:"Für Bayern ist das wichtig. Stichwort Bayern.",recording:"./assets/voices/bayern/stichwort-bayern.mp3"},
+ {text:"Oh ja, man muss Bayern nicht mögen, man muss Bayern leben.",recording:"./assets/voices/bayern/bayern-leben.mp3"},
+ {text:"Warum? Weil Bayern.",recording:"./assets/voices/bayern/warum-weil-bayern.mp3"},
+ {text:"Ich will nur eins sagen: Bayern, Bayern, Bayern, Bayern.",recording:"./assets/voices/bayern/ich-will-nur-eins-sagen.mp3"},
+ {text:"Ein Bayern kam aus Bayern. Das war die Rettung Bayerns.",recording:"./assets/voices/bayern/rettung-bayerns.mp3"},
+ {text:"Gott schütze Bayern.",recording:"./assets/voices/bayern/gott-schuetze-bayern.mp3"}
+]);
+const bayernWaypoints=Object.freeze([
+ {x:1014,y:784,links:[1,6]},{x:2364,y:784,links:[0,2,7]},{x:4364,y:784,links:[1,3,8]},
+ {x:5814,y:784,links:[2,4,9]},{x:7314,y:784,links:[3,5,10]},{x:8964,y:784,links:[4,11]},
+ {x:1014,y:360,links:[0]},{x:2364,y:420,links:[1]},{x:4364,y:340,links:[2]},
+ {x:5814,y:460,links:[3]},{x:7314,y:380,links:[4]},{x:8964,y:440,links:[5]}
+]);
 const politicianLines=Object.freeze({merz:merzLines,merkel:merkelLines});
 const npcs=[
  {x:520,y:720,name:"HERR KLEIN",line:0,vx:16,vy:0,min:470,max:900},
@@ -353,6 +369,7 @@ const npcs=[
  {x:4050,y:1880,name:"HERR POST",line:7,vx:-12,vy:0,min:3820,max:4300},
  {x:borderGates[1].x+borderGates[1].w/2,y:BORDER_Y+34,name:"FRIEDRICH MERZ · FIKTIONALE SATIRE",special:"borderPourer",politician:"merz",dir:1,lane:1,state:"sideWalk",stateTimer:1.35,animTime:0,spriteRow:1,spriteFrame:0,spriteFlip:false,barkAt:0,lineIndex:0,minX:80,maxX:WORLD.w-80},
  {x:4620,y:3270,name:"ANGELA MERKEL · SATIRE",special:"merkel",politician:"merkel",route:[[4620,3270],[5750,3270],[6150,3270],[7200,3270],[7200,3880],[6120,3880],[5750,3880],[4620,3880]],target:1,facingX:1,facingY:0,animTime:0,spriteRow:2,spriteFrame:1,barkAt:0,lineIndex:0},
+ {x:1014,y:784,name:"BAYERN-BEAUFTRAGTER · SATIRE",special:"bayern",spot:0,targetSpot:1,hangTimer:0,animTime:0,spriteRow:1,spriteFrame:0,barkAt:0,lastClip:-1},
  {x:4200,y:3450,name:"HERR RASENAUFSICHT",line:8,vx:0,vy:10,min:3330,max:3820},
  {x:5100,y:720,name:"FRAU ORDNUNG",line:8,vx:13,vy:0,min:4750,max:5600},
  {x:6650,y:720,name:"HERR ARCHIV",line:3,vx:-11,vy:0,min:6250,max:7100},
@@ -462,6 +479,16 @@ function updateMerkel(n,dt){
  if(Math.abs(dx)>Math.abs(dy))n.spriteRow=dx<0?1:2;else n.spriteRow=dy<0?3:4;n.spriteFrame=1+Math.floor(n.animTime*5)%2;
  if(d<10){n.x=target[0];n.y=target[1];n.target=(n.target+1)%n.route.length}
  const now=performance.now(),near=dist(player.x,player.y,n.x,n.y);if(near<165&&merkelBehind(n)&&now>(n.barkAt||0)){n.barkAt=now+6500;showWorldBark(n.name,MERKEL_BEHIND_LINE,false)}else if(near<360&&now>(n.barkAt||0)){const line=nextPoliticianLine(n);n.barkAt=now+8500;if(line)showWorldBark(n.name,line,false)}
+}
+function nextBayernClip(n){let index=Math.floor(Math.random()*bayernClips.length);if(index===n.lastClip)index=(index+1+Math.floor(Math.random()*(bayernClips.length-1)))%bayernClips.length;n.lastClip=index;return bayernClips[index]}
+function bayernBark(n,force=false){const now=performance.now();if((!force&&now<(n.barkAt||0))||state.region!=="germany")return false;const item=nextBayernClip(n);n.barkAt=now+9000+Math.random()*7000;showWorldBark(n.name,item.text,false,item.recording);return true}
+function chooseBayernTarget(n){n.targetSpot=pick(bayernWaypoints[n.spot].links)}
+function updateBayern(n,dt){
+ const now=performance.now();if(!state.modal&&state.region==="germany"&&dist(player.x,player.y,n.x,n.y)<330&&now>(n.barkAt||0))bayernBark(n);
+ if(n.hangTimer>0){n.hangTimer-=dt;n.spriteFrame=2;return}
+ const target=bayernWaypoints[n.targetSpot],dx=target.x-n.x,dy=target.y-n.y,d=Math.hypot(dx,dy)||1,speed=52;n.animTime+=dt;
+ if(d<7){n.x=target.x;n.y=target.y;n.spot=n.targetSpot;n.hangTimer=2+Math.random()*4;chooseBayernTarget(n);n.spriteFrame=2;return}
+ n.x+=dx/d*speed*dt;n.y+=dy/d*speed*dt;n.spriteRow=Math.abs(dx)>Math.abs(dy)?(dx>0?1:3):(dy>0?0:2);n.spriteFrame=Math.floor(n.animTime*7)%5
 }
 function updateBorderPourer(n,dt){
  const pourFrames=[1,2,3,2];n.animTime+=dt;n.stateTimer-=dt;
@@ -582,6 +609,8 @@ function interact(){if(state.dialogue){nextDialogue();return}if(state.modal)retu
    openDialogue(n.name,politicianDialogue(n),"FM");
  }else if(n.special==="merkel"){
    openDialogue(n.name,[merkelBehind(n)?MERKEL_BEHIND_LINE:nextPoliticianLine(n)],"AM");
+ }else if(n.special==="bayern"){
+   bayernBark(n,true);
  }else openDialogue(n.name,[worldNpcLine(n.line),worldNpcLine((n.line+3)%npcLines.length)],"!");
  return
 }for(const p of props)if(p.id&&dist(player.x,player.y,p.x,p.y)<96){microInteract(p);return}for(const o of normObjects)if(!o.fixed&&dist(player.x,player.y,o.x,o.y)<92){if(state.mission===5){o.fixed=true;state.stadtbild++;toast("STADTBILD NORMIERT · "+o.label);updateHud()}else toast("DAS IST NOCH NICHT IHR VORGANG");return}toast("HIER IST NIEMAND ZUSTÄNDIG")}
@@ -668,6 +697,7 @@ function update(dt){
    if(n.arrested)continue;
    if(n.special==="borderPourer"){updateBorderPourer(n,dt);continue}
    if(n.special==="merkel"){updateMerkel(n,dt);continue}
+   if(n.special==="bayern"){updateBayern(n,dt);continue}
    if(n===state.quizApproach){const dx=player.x-n.x,dy=player.y-n.y,d=Math.hypot(dx,dy)||1;if(d<78){state.quizApproach=null;n.quizAsked=true;startCitizenshipQuiz(n)}else{n.x+=dx/d*88*dt;n.y+=dy/d*88*dt}continue}
    if(dist(player.x,player.y,n.x,n.y)<NPC_COMPLAINT_DISTANCE)pedestrianBark(n,playerSurface());
    if((n.pause||0)>0){n.pause-=dt;continue}
@@ -905,6 +935,12 @@ function drawBorderPourer(n){
  ctx.drawImage(sheet,n.spriteFrame*fw,n.spriteRow*fh,fw,fh,-size/2,-size+8,size,size);ctx.restore();
  ctx.fillStyle="#171717";ctx.font="800 "+Math.max(7,8*p.s)+"px Arial";ctx.textAlign="center";ctx.fillText("FRIEDRICH MERZ · FIKTIONALE SATIRE",p.x,p.y+18*p.s);ctx.textAlign="left";
 }
+function drawBayernNpc(n){
+ const p=project(n.x,n.y,0),img=assets.bayernSprite;if(!img||!img.complete||!img.naturalWidth){sprite(n.x,n.y,n.name,"person","#263b59");return}
+ if(p.x<-160||p.x>width+160||p.y<-190||p.y>height+190)return;const fw=img.naturalWidth/5,fh=img.naturalHeight/4,s=clamp(p.s,.42,1.12),size=124;
+ ctx.save();ctx.translate(p.x,p.y);ctx.scale(s,s);ctx.imageSmoothingEnabled=false;ctx.drawImage(img,(n.spriteFrame||0)*fw,(n.spriteRow||0)*fh,fw,fh,-size/2,-size+8,size,size);ctx.restore();
+ ctx.fillStyle="#171717";ctx.font="800 "+Math.max(7,8*p.s)+"px Arial";ctx.textAlign="center";ctx.fillText(n.name,p.x,p.y+18*p.s);ctx.textAlign="left"
+}
 function drawDistrictLabels(){
  for(const d of districtLabels){
    const p=project(d.x,d.y,4);
@@ -922,7 +958,7 @@ function drawWorld(){
  const drawables=[{d:0,fn:drawPlayer},{d:player.y-530,fn:drawPoster}];
  for(const b of buildings)drawables.push({d:player.y-(b.y+b.h),fn:()=>drawBuildingLayer(b)});
  for(const f of fireSources)drawables.push({d:player.y-f.y,fn:()=>drawFireSource(f)});
- for(const n of npcs)drawables.push({d:player.y-n.y,fn:()=>n.special==="merkel"?drawMerkelNpc(n):n.special==="borderPourer"?drawBorderPourer(n):sprite(n.x,n.y,n.name,"person","#4f4d48")});
+ for(const n of npcs)drawables.push({d:player.y-n.y,fn:()=>n.special==="merkel"?drawMerkelNpc(n):n.special==="borderPourer"?drawBorderPourer(n):n.special==="bayern"?drawBayernNpc(n):sprite(n.x,n.y,n.name,"person","#4f4d48")});
  for(const p of police)drawables.push({d:player.y-p.y,fn:()=>sprite(p.x,p.y,"POLIZEI","police")});
  for(const p of pickups)if(!p.taken)drawables.push({d:player.y-p.y,fn:()=>p.wurstType?drawWurstPickup(p):sprite(p.x,p.y,p.label,p.type==="pfand"?"pfand":p.type)});
  for(const o of normObjects)drawables.push({d:player.y-o.y,fn:()=>sprite(o.x,o.y,o.fixed?"NORMIERT":"! "+o.label,o.type,o.fixed?"#3f5b43":"#6c3d37")});
