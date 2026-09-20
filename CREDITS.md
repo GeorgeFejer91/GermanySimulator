@@ -96,7 +96,8 @@ low-arousal material; this is an editorial mapping of the dataset's categorical
 styles, not a claim that it contains numeric valence or arousal annotations.
 The same credited angry and disgusted references were used locally with
 XTTS-v2 to synthesize exact-text readings for all 13 excerpts in the §-power
-deck. The game ships only the compact generated MP3 files, not the model or a
+deck and complete-body readings for all 11 rotating `REGEL DES AUGENBLICKS`
+cards. The game ships only the compact generated MP3 files, not the model or a
 runtime cloning service, and falls back to browser speech if a reading is
 unavailable.
 

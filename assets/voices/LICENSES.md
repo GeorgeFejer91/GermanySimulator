@@ -73,6 +73,29 @@ fallback.
 | `laws/thorsten-negative-law-12.mp3` | 24.268 s | `9C45825C4F9D8C0D3F75A51FFFF37B6B1DDB1AC684661D8CFE4777769940E030` |
 | `laws/thorsten-negative-law-13.mp3` | 23.327 s | `458D9941D53485E7532B26EF6C8EA5261B4D72783CA568B6A4827F3CD37CB235` |
 
+### Rotating `REGEL DES AUGENBLICKS` readings
+
+The 11 `thorsten-negative-rule-*` files use the same model, negative-delivery
+references, output format, and validation workflow. Each file maps to the same
+one-based entry in the fixed `rules` deck and reads the complete displayed rule
+body. The fictional shorthand identifier remains visual because tokens such as
+`QuerO` and `Bln/DE` are not stable speech-model input. Runtime fallback sends
+the identical displayed body to the browser's German voice.
+
+| Shipped file | Duration | SHA-256 |
+| --- | ---: | --- |
+| `laws/thorsten-negative-rule-01.mp3` | 11.546 s | `BCA5FABCB8C17D1163A5A8A093758B2CF3898B02755C5D524CEAB96441DC9733` |
+| `laws/thorsten-negative-rule-02.mp3` | 6.243 s | `F322125773077F459227CE28399F10BD8069C5E836B48FB5BA9F1C7665A37AA5` |
+| `laws/thorsten-negative-rule-03.mp3` | 7.053 s | `96BADFBB61188A45BF606E34E85961F670DF4DF3E58B45DC727F8FF9D06166B6` |
+| `laws/thorsten-negative-rule-04.mp3` | 5.042 s | `5EA8B772E5131E317CF34E69B7663CD407E5DB56E8FC325FCE990EE1C1B0003E` |
+| `laws/thorsten-negative-rule-05.mp3` | 5.799 s | `FBA541D968F3E1335F20180F9C484D657E07C455357129C5A64A966F78898503` |
+| `laws/thorsten-negative-rule-06.mp3` | 5.564 s | `25A7D026FE66016F16838B44246BB4769EC30B66AAE4B17093C14E943FD45CB4` |
+| `laws/thorsten-negative-rule-07.mp3` | 7.523 s | `DDFD06A2663BBF270CD0BF8568111489DD631CEC048B6F25D02CAA5DA197DBE8` |
+| `laws/thorsten-negative-rule-08.mp3` | 7.027 s | `2FE394A08D37BA24218D135BFA342FC330C19E7731B39C92210705A4D625E1C0` |
+| `laws/thorsten-negative-rule-09.mp3` | 7.732 s | `1E96E78521DB085A0F6F5BD8517A487EBE9ACCA3A63DBE550AE2FDBCB4939E20` |
+| `laws/thorsten-negative-rule-10.mp3` | 6.034 s | `ED6251BAB5ADF2E0AC8066164094E3A26C5242B656F10035E5EB41F771BAA904` |
+| `laws/thorsten-negative-rule-11.mp3` | 11.572 s | `DFC51B035105D60B7AED58B75059FB29538D23E084F54B4970DCD145FDE18FD5` |
+
 ## Einbürgerungstest wrong-answer sting
 
 `quiz-wrong-answer.mp3` was supplied by the user from their local
