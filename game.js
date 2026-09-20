@@ -7,6 +7,7 @@ let police=[],particles=[],width=innerWidth,height=innerHeight,dpr=1,last=perfor
 const horizontalRoads=[{x:0,y:820,w:WORLD.w,h:260},{x:0,y:2000,w:WORLD.w,h:240},{x:0,y:3000,w:WORLD.w,h:220}];
 const verticalRoads=[{x:1050,y:0,w:260,h:WORLD.h},{x:2400,y:0,w:220,h:WORLD.h},{x:4400,y:0,w:180,h:WORLD.h},{x:5850,y:0,w:220,h:WORLD.h},{x:7350,y:0,w:220,h:WORLD.h},{x:9000,y:0,w:180,h:WORLD.h}];
 const roads=[...horizontalRoads,...verticalRoads];
+const SIDEWALK_WIDTH=72,WALKWAY_WIDTH=84,NPC_BLOCK_DISTANCE=38,NPC_COMPLAINT_DISTANCE=82;
 const crossings=[];
 for(const h of horizontalRoads)for(const v of verticalRoads){
  crossings.push({x:v.x-40,y:h.y+Math.round((h.h-80)/2),w:v.w+80,h:80});
@@ -212,6 +213,15 @@ const buildings=[
 {id:"reinigung",name:"STADTREINIGUNG",x:7800,y:2320,w:920,h:430,hgt:170,doorX:8260,doorY:2780,sign:"TRENNUNG VOR REINIGUNG"},
 {id:"akw",kind:"nuclear",name:"AKW · GESCHLOSSEN",x:4750,y:3370,w:850,h:420,hgt:155,doorX:5175,doorY:3820,sign:"STILLGELEGT · ZUGANG VERSIEGELT"},
 {id:"kohlewerk",kind:"coal",name:"KOHLEKRAFTWERK · IN BETRIEB",x:6250,y:3370,w:850,h:420,hgt:170,doorX:6675,doorY:3820,sign:"OFFEN · 24/7 · RAUCHFANG AKTIV"}];
+const grassAreas=[],walkways=[];
+for(const b of buildings){
+ const road=horizontalRoads.find(r=>r.y>b.y+b.h),top=b.y+b.h+6,bottom=road?.y-SIDEWALK_WIDTH;
+ if(!bottom||bottom-top<36)continue;
+ const left=b.doorX-WALKWAY_WIDTH/2,right=b.doorX+WALKWAY_WIDTH/2,h=bottom-top;
+ if(left>b.x+8)grassAreas.push({x:b.x,y:top,w:left-b.x,h});
+ if(right<b.x+b.w-8)grassAreas.push({x:right,y:top,w:b.x+b.w-right,h});
+ walkways.push({x:left,y:top,w:WALKWAY_WIDTH,h});
+}
 const missions=[
 {title:"ANMELDUNG I",text:"Gehen Sie zum Bürgeramt. Beantragen Sie die Erlaubnis, einen Antrag zu stellen.",target:"buergeramt",form:"a38"},
 {title:"ANMELDUNG II",text:"Die Wohnungsgeberbestätigung fehlt natürlich. Holen Sie sie bei der Hausverwaltung.",target:"hausverwaltung",form:"wohnung"},
@@ -302,27 +312,37 @@ aufenthalt:{code:"ABH-404",title:"Antrag auf Fortsetzung der Anwesenheit",subtit
 citizenship:{code:"DE-1A",title:"Fiktiver Antrag auf deutsche Staatsangehörigkeit",subtitle:"Reines Spielverfahren. Keine echte Rechtslage oder Voraussetzung.",fields:[["text","NAME"],["select","KENNTNIS DER HAUSORDNUNG",["ausreichend","übertrieben","laminiert"]],["select","VERHÄLTNIS ZUR MÜLLTRENNUNG",["ambitioniert","akademisch","existenziell"]],["text","WARUM IST DIESES FORMULAR NICHT GEHEFTET?"],["check","Ich erkenne an, dass alle dargestellten Fristen und Regeln frei erfunden sind."]]}}
 function resize(){dpr=Math.min(devicePixelRatio||1,2);width=innerWidth;height=innerHeight;canvas.width=Math.round(width*dpr);canvas.height=Math.round(height*dpr);ctx.setTransform(dpr,0,0,dpr,0,0)}addEventListener("resize",resize);resize();
 const clamp=(v,a,b)=>Math.max(a,Math.min(b,v)),dist=(ax,ay,bx,by)=>Math.hypot(ax-bx,ay-by),inRect=(x,y,r)=>x>=r.x&&x<=r.x+r.w&&y>=r.y&&y<=r.y+r.h,pick=list=>list[Math.floor(Math.random()*list.length)];
-const onRoad=(x,y)=>roads.some(r=>inRect(x,y,r)),onCrossing=(x,y)=>crossings.some(r=>inRect(x,y,r)),onGardenGrass=(x,y)=>(x>schreber.x+20&&x<schreber.x+schreber.w-20&&y>schreber.y+20&&y<schreber.y+schreber.h-20)||onPoliceGardenGrass(x,y);
+const onRoad=(x,y)=>roads.some(r=>inRect(x,y,r)),onCrossing=(x,y)=>crossings.some(r=>inRect(x,y,r)),onGardenGrass=(x,y)=>grassAreas.some(r=>inRect(x,y,r))||(x>schreber.x+20&&x<schreber.x+schreber.w-20&&y>schreber.y+20&&y<schreber.y+schreber.h-20)||onPoliceGardenGrass(x,y);
 function blocked(x,y){if(x<25||y<25||x>WORLD.w-25||y>WORLD.h-25)return true;for(const b of buildings)if(x>b.x-player.r&&x<b.x+b.w+player.r&&y>b.y-player.r&&y<b.y+b.h+player.r)return true;return false}
+function blockingPedestrian(x,y){let nearest=null,best=NPC_BLOCK_DISTANCE;for(const n of npcs){if(n.special)continue;const d=dist(x,y,n.x,n.y);if(d<best){nearest=n;best=d}}return nearest}
 function toast(msg){const e=document.getElementById("toast");e.textContent=msg;e.classList.add("show");clearTimeout(toast.t);toast.t=setTimeout(()=>e.classList.remove("show"),2300)}
 function ensureAudio(){if(!audio)audio=new (window.AudioContext||window.webkitAudioContext)();audio.resume();return audio}
 function uiTone(freq=440,dur=.08,type="square",gain=.04){const a=ensureAudio(),o=a.createOscillator(),g=a.createGain(),t=a.currentTime;o.type=type;o.frequency.value=freq;g.gain.setValueAtTime(gain,t);g.gain.exponentialRampToValueAtTime(.0001,t+dur);o.connect(g).connect(a.destination);o.start(t);o.stop(t+dur+.02)}
 function playSiren(){const a=ensureAudio(),t=a.currentTime;for(let i=0;i<6;i++){const o=a.createOscillator(),g=a.createGain(),st=t+i*.18;o.type="sawtooth";o.frequency.setValueAtTime(i%2?920:620,st);o.frequency.linearRampToValueAtTime(i%2?620:920,st+.17);g.gain.setValueAtTime(.0001,st);g.gain.linearRampToValueAtTime(.065,st+.015);g.gain.exponentialRampToValueAtTime(.0001,st+.18);o.connect(g).connect(a.destination);o.start(st);o.stop(st+.19)}}
-const SPEECH_GAP_MS=250,speechQueue=[];let speechActive=false,speechPauseTimer=null,speechGeneration=0;
-let merkelRecordingPromise=null,merkelRecordingSource=null;
+const SPEECH_GAP_MS=250,speechQueue=[],recordingPromises=new Map();let speechActive=false,speechPauseTimer=null,speechGeneration=0,recordedSpeechSource=null;
 function finishSpeechItem(done,generation){if(generation!==speechGeneration)return;if(done)done();speechPauseTimer=setTimeout(()=>{speechActive=false;playQueuedSpeech()},SPEECH_GAP_MS)}
-function playSyntheticSpeech({text,urgent,masculine,start,done},generation){if(generation!==speechGeneration)return;if(start)start();if(!("speechSynthesis" in window)){finishSpeechItem(done,generation);return}const u=new SpeechSynthesisUtterance(text),voices=speechSynthesis.getVoices(),german=voices.filter(v=>/^de(-|_)/i.test(v.lang)||/german|deutsch/i.test(v.name));u.voice=(masculine?german.find(v=>/conrad|markus|martin|stefan|hans|klaus|thorsten|yannick|male|männlich/i.test(v.name)):null)||german[0]||null;u.lang="de-DE";u.rate=urgent?.98:.9;u.pitch=masculine?.68:urgent?.72:.88;u.volume=1;let finished=false;const finish=()=>{if(finished)return;finished=true;finishSpeechItem(done,generation)};u.onend=finish;u.onerror=finish;speechSynthesis.speak(u)}
-function playQueuedSpeech(){if(speechActive||!speechQueue.length||!state.voiceOn)return;speechActive=true;const item=speechQueue.shift(),generation=speechGeneration;if(!item.recorded){playSyntheticSpeech(item,generation);return}prepareMerkelRecording().then(buffer=>{if(generation!==speechGeneration)return;if(item.start)item.start();const source=ensureAudio().createBufferSource();merkelRecordingSource=source;source.buffer=buffer;source.connect(ensureAudio().destination);source.onended=()=>{if(merkelRecordingSource===source)merkelRecordingSource=null;finishSpeechItem(item.done,generation)};source.start()}).catch(()=>playSyntheticSpeech(item,generation))}
-function speak(text,{urgent=false,masculine=false,start,done}={}){if(!state.voiceOn||!("speechSynthesis" in window)){if(start)start();if(done)done();return}speechQueue.push({text,urgent,masculine,start,done});playQueuedSpeech()}
-function prepareMerkelRecording(){const a=ensureAudio();return merkelRecordingPromise||=(fetch("./assets/merkel-wir-schaffen-das.mp3").then(r=>{if(!r.ok)throw new Error("Merkel recording unavailable");return r.arrayBuffer()}).then(data=>a.decodeAudioData(data)))}
-function stopMerkelRecording(){if(!merkelRecordingSource)return;try{merkelRecordingSource.stop()}catch{}merkelRecordingSource=null}
-function speakMerkelLine(text,{urgent=false,start,done}={}){if(text!==MERKEL_AUDIO_LINE){speak(text,{urgent,start,done});return}if(!state.voiceOn){if(start)start();if(done)done();return}speechQueue.push({text,urgent,start,done,recorded:true});playQueuedSpeech()}
+function voiceHash(text){let h=0;for(let i=0;i<text.length;i++)h=(h*31+text.charCodeAt(i))>>>0;return h}
+function playSyntheticSpeech({text,urgent,masculine,voiceKey,start,done},generation){if(generation!==speechGeneration)return;if(start)start();if(!("speechSynthesis" in window)){finishSpeechItem(done,generation);return}const u=new SpeechSynthesisUtterance(text),voices=speechSynthesis.getVoices(),german=voices.filter(v=>/^de(-|_)/i.test(v.lang)||/german|deutsch/i.test(v.name)),h=voiceHash(voiceKey||text),male=masculine?german.find(v=>/conrad|markus|martin|stefan|hans|klaus|thorsten|yannick|male|männlich/i.test(v.name)):null;u.voice=male||german[h%Math.max(1,german.length)]||null;u.lang="de-DE";u.rate=(urgent?.96:.88)+(h%4)*.025;u.pitch=masculine?.68:(urgent?.76:.86)+(h%5)*.035;u.volume=1;let finished=false;const finish=()=>{if(finished)return;finished=true;finishSpeechItem(done,generation)};u.onend=finish;u.onerror=finish;speechSynthesis.speak(u)}
+function prepareRecording(url){if(recordingPromises.has(url))return recordingPromises.get(url);const a=ensureAudio(),promise=fetch(url).then(r=>{if(!r.ok)throw new Error("Recorded voice unavailable: "+url);return r.arrayBuffer()}).then(data=>a.decodeAudioData(data));recordingPromises.set(url,promise);return promise}
+function playQueuedSpeech(){if(speechActive||!speechQueue.length||!state.voiceOn)return;speechActive=true;const item=speechQueue.shift(),generation=speechGeneration;if(!item.recording){playSyntheticSpeech(item,generation);return}prepareRecording(item.recording).then(buffer=>{if(generation!==speechGeneration)return;if(item.start)item.start();const source=ensureAudio().createBufferSource();recordedSpeechSource=source;source.buffer=buffer;source.connect(ensureAudio().destination);source.onended=()=>{if(recordedSpeechSource===source)recordedSpeechSource=null;finishSpeechItem(item.done,generation)};source.start()}).catch(()=>playSyntheticSpeech(item,generation))}
+function speak(text,{urgent=false,masculine=false,voiceKey="",start,done}={}){if(!state.voiceOn||!("speechSynthesis" in window)){if(start)start();if(done)done();return}speechQueue.push({text,urgent,masculine,voiceKey,start,done});playQueuedSpeech()}
+function speakRecorded(text,recording,{urgent=false,voiceKey="",start,done}={}){if(!state.voiceOn){if(start)start();if(done)done();return}speechQueue.push({text,urgent,voiceKey,start,done,recording});playQueuedSpeech()}
+function prepareMerkelRecording(){return prepareRecording("./assets/merkel-wir-schaffen-das.mp3")}
+function stopRecordedSpeech(){if(!recordedSpeechSource)return;try{recordedSpeechSource.stop()}catch{}recordedSpeechSource=null}
+function speakMerkelLine(text,{urgent=false,start,done}={}){if(text!==MERKEL_AUDIO_LINE){speak(text,{urgent,voiceKey:"ANGELA MERKEL",start,done});return}speakRecorded(text,"./assets/merkel-wir-schaffen-das.mp3",{urgent,voiceKey:"ANGELA MERKEL",start,done})}
 function hideWorldBark(){clearTimeout(showWorldBark.t);document.getElementById("police-bark").hidden=true}
-function stopSpeech(){speechGeneration++;speechQueue.length=0;speechActive=false;clearTimeout(speechPauseTimer);if("speechSynthesis" in window)speechSynthesis.cancel();stopMerkelRecording();hideWorldBark()}
+function stopSpeech(){speechGeneration++;speechQueue.length=0;speechActive=false;clearTimeout(speechPauseTimer);if("speechSynthesis" in window)speechSynthesis.cancel();stopRecordedSpeech();hideWorldBark()}
 function violationAlert(msg,level){const alert=document.getElementById("violation-alert"),app=document.getElementById("app");document.getElementById("violation-law").textContent=lawFor(msg);document.getElementById("violation-title").textContent=state.lang==="en"?"RULE VIOLATION":"ORDNUNGSWIDRIGKEIT";document.getElementById("violation-text").textContent=state.lang==="en"?localize(msg):msg;document.getElementById("violation-stars").textContent="★".repeat(level)+"☆".repeat(Math.max(0,5-level));alert.hidden=false;app.classList.remove("enforcement");void app.offsetWidth;app.classList.add("enforcement");clearTimeout(violationAlert.t);violationAlert.t=setTimeout(()=>{alert.hidden=true;app.classList.remove("enforcement")},2200);playSiren()}
-function showWorldBark(speaker,msg,urgent=true){const box=document.getElementById("police-bark"),speakerEl=document.getElementById("bark-speaker"),textEl=document.getElementById("police-bark-text"),start=()=>{speakerEl.textContent=speaker;textEl.textContent=msg;box.hidden=false;uiTone(urgent?1280:880,.06,"square",.035)},done=()=>{if(speakerEl.textContent===speaker&&textEl.textContent===msg)box.hidden=true};if(!state.voiceOn){start();clearTimeout(showWorldBark.t);showWorldBark.t=setTimeout(done,3200);return}const options={urgent,start,done};if(speaker.startsWith("ANGELA MERKEL"))speakMerkelLine(msg,options);else speak(msg,{...options,masculine:speaker.startsWith("FRIEDRICH MERZ")})}
+function showWorldBark(speaker,msg,urgent=true,recording=""){const box=document.getElementById("police-bark"),speakerEl=document.getElementById("bark-speaker"),textEl=document.getElementById("police-bark-text"),start=()=>{speakerEl.textContent=speaker;textEl.textContent=msg;box.hidden=false;uiTone(urgent?1280:880,.06,"square",.035)},done=()=>{if(speakerEl.textContent===speaker&&textEl.textContent===msg)box.hidden=true};if(!state.voiceOn){start();clearTimeout(showWorldBark.t);showWorldBark.t=setTimeout(done,3200);return}const options={urgent,voiceKey:speaker,start,done};if(recording)speakRecorded(msg,recording,options);else if(speaker.startsWith("ANGELA MERKEL"))speakMerkelLine(msg,options);else speak(msg,{...options,masculine:speaker.startsWith("FRIEDRICH MERZ")})}
 function policeBark(force=false){const now=performance.now();if(!force&&now-(policeBark.last||0)<2300)return;policeBark.last=now;showWorldBark("POLIZEI",pick(policeBarks[state.region]||policeBarks.germany),true)}
 function jaywalkerBark(){const speaker=state.region==="berlin"?"EMPÖRTE PASSANTEN · BERLIN":"EMPÖRTE PASSANTEN · DEUTSCHLAND";showWorldBark(speaker,pick(jaywalkerBarks[state.region]||jaywalkerBarks.germany),true)}
+function pedestrianBark(n,surface="sidewalk"){
+ const now=performance.now();if(!n||now<(n.barkAt||0)||(pedestrianBark.last&&now-pedestrianBark.last<3200))return false;
+ const line=pick(pedestrianBarks[state.region][surface]);n.barkAt=now+5600+Math.random()*2600;pedestrianBark.last=now;showWorldBark(n.name,typeof line==="string"?line:line.text,true,line.recording||"");return true
+}
+function nearestPedestrian(maxDistance=360){let nearest=null,best=maxDistance;for(const n of npcs){if(n.special)continue;const d=dist(player.x,player.y,n.x,n.y);if(d<best){nearest=n;best=d}}return nearest}
+function surfaceComplaint(surface){const n=nearestPedestrian();if(!pedestrianBark(n,surface)&&surface==="road")jaywalkerBark()}
+function playerSurface(){return onGardenGrass(player.x,player.y)?"grass":onRoad(player.x,player.y)&&!onCrossing(player.x,player.y)?"road":"sidewalk"}
 function politicianDialogue(n){return politicianLines[n.politician]||[]}
 function nextPoliticianLine(n){const lines=politicianDialogue(n);return lines.length?lines[n.lineIndex++%lines.length]:""}
 function merkelBehind(n){return (player.x-n.x)*(n.facingX||1)+(player.y-n.y)*(n.facingY||0)<-24}
@@ -360,7 +380,7 @@ function spawnPolice(n){for(let i=0;i<n;i++){const a=Math.random()*Math.PI*2,d=1
 function updateHud(){const stars=document.getElementById("stars"),wantedBox=document.querySelector(".wanted");stars.innerHTML="";wantedBox.classList.toggle("hot",state.wanted>0);for(let i=0;i<5;i++){const s=document.createElement("span");s.className="star"+(i<state.wanted?" active":"");s.textContent="★";stars.appendChild(s)}document.getElementById("offence").textContent=state.lang==="en"?(state.wanted?"ACTIVE VIOLATION FILE":"FILE STATUS: UNREMARKABLE"):state.offence;const m=missions[Math.min(state.mission,missions.length-1)];document.getElementById("mission-title").textContent=localize(m.title);document.getElementById("mission-text").textContent=localize(m.text);const frac=state.mission/missions.length+(state.mission===5?state.stadtbild/3/missions.length:0);document.getElementById("mission-progress").style.width=Math.min(100,frac*100)+"%";document.getElementById("energy").textContent=Math.round(player.energy);document.getElementById("forms").textContent=state.forms;document.getElementById("pfand").textContent=state.pfand;document.getElementById("day").textContent=state.day+"/3";const r=rules[state.rule%rules.length];document.getElementById("rule-id").textContent=r[0];document.getElementById("rule-text").textContent=localize(r[1]);document.getElementById("region-name").textContent=state.region==="berlin"?"BERLIN":"DEUTSCHLAND";document.getElementById("region-language").textContent=state.region==="berlin"?"Denglisch-Zone":"Nur Deutsch"}
 function openDialogue(speaker,lines,portrait,done){stopSpeech();state.modal=true;state.dialogue=true;state.dialogueData={speaker,lines,portrait:portrait||"§",done,i:0};renderDialogue()}
 function setDialogueVoiceBusy(busy){state.dialogueVoiceBusy=busy;document.getElementById("dialogue-next").disabled=busy;document.getElementById("dialogue-speak").disabled=busy}
-function speakDialogueLine(line){const token=state.dialogueVoiceToken=(state.dialogueVoiceToken||0)+1,speaker=state.dialogueData?.speaker||"",masculine=speaker.startsWith("FRIEDRICH MERZ"),done=()=>{if(token===state.dialogueVoiceToken)setDialogueVoiceBusy(false)};setDialogueVoiceBusy(state.voiceOn);if(speaker.startsWith("ANGELA MERKEL"))speakMerkelLine(line,{done});else speak(line,{masculine,done})}
+function speakDialogueLine(line){const token=state.dialogueVoiceToken=(state.dialogueVoiceToken||0)+1,speaker=state.dialogueData?.speaker||"",masculine=speaker.startsWith("FRIEDRICH MERZ"),done=()=>{if(token===state.dialogueVoiceToken)setDialogueVoiceBusy(false)};setDialogueVoiceBusy(state.voiceOn);if(speaker.startsWith("ANGELA MERKEL"))speakMerkelLine(line,{done});else speak(line,{masculine,voiceKey:speaker,done})}
 function renderDialogue(){const d=state.dialogueData,line=d.lines[d.i],borderMan=d.speaker.startsWith("FRIEDRICH MERZ");document.getElementById("dialogue").hidden=false;document.getElementById("speaker").textContent=d.speaker;document.getElementById("portrait").textContent=d.portrait;document.getElementById("dialogue-text").textContent=line;document.getElementById("dialogue-next").textContent=d.i===d.lines.length-1?(state.lang==="en"?"UNDERSTOOD":"VERSTANDEN"):(state.lang==="en"?"CONTINUE":"WEITER");document.getElementById("voice-state").textContent=state.voiceOn?(borderMan?"COMPUTERSTIMME · MÄNNLICH · NUR DEUTSCH":state.region==="berlin"?"COMPUTERSTIMME · DENG-LISCH":"COMPUTERSTIMME · NUR DEUTSCH"):(state.lang==="en"?"VOICE OFF":"STIMME AUS");speakDialogueLine(line)}
 function nextDialogue(){if(!state.dialogue||state.dialogueVoiceBusy)return;const d=state.dialogueData;d.i++;if(d.i<d.lines.length){renderDialogue();return}document.getElementById("dialogue").hidden=true;state.dialogue=false;state.modal=false;if(d.done)d.done()}document.getElementById("dialogue-next").onclick=nextDialogue;
 document.getElementById("dialogue-speak").onclick=()=>{if(state.dialogue&&!state.dialogueVoiceBusy)speakDialogueLine(state.dialogueData.lines[state.dialogueData.i])};
@@ -397,8 +417,9 @@ function update(dt){
  const mag=Math.hypot(sx,fy);if(mag>1){sx/=mag;fy/=mag}
  const sprint=!!(keys.ShiftLeft||keys.ShiftRight);
  const speed=146*(sprint?1.58:1)*(player.energy<25?.84:1),px=player.x,py=player.y,nx=px+sx*speed*dt,ny=py-fy*speed*dt;
- if(!blocked(nx,player.y))player.x=nx;
- if(!blocked(player.x,ny))player.y=ny;
+ const hitX=sx?blockingPedestrian(nx,player.y):null;if(!blocked(nx,player.y)&&!hitX)player.x=nx;
+ const hitY=fy?blockingPedestrian(player.x,ny):null;if(!blocked(player.x,ny)&&!hitY)player.y=ny;
+ const bumped=hitX||hitY;if(bumped){bumped.pause=Math.max(bumped.pause||0,.48);pedestrianBark(bumped,playerSurface())}
  if(player.x!==px||player.y!==py)player.facing=Math.atan2(player.x-px,player.y-py);
  updateRegion();
 
@@ -416,22 +437,22 @@ function update(dt){
  state.jayCooldown=Math.max(0,state.jayCooldown-dt);
  const roadViolation=onRoad(player.x,player.y)&&!onCrossing(player.x,player.y);
  if(roadViolation){
-   state.roadTimer+=dt*(sprint?1.45:1);
-   if(state.roadTimer>.45&&!state.roadWarned){softWarn(state.lang==="en"?"PLEASE USE THE GEOMETRICALLY APPROVED CROSSING":"BITTE BENUTZEN SIE DIE GEOMETRISCH VORGESEHENE QUERUNGSSTELLE");jaywalkerBark();state.roadWarned=true}
-   if(state.roadTimer>1.55&&state.jayCooldown===0){state.jayCooldown=6;escalate(pick(violationPools.jaywalk),1,false);jaywalkerBark();state.roadTimer=0;state.roadWarned=false}
+   state.roadTimer+=dt;
+   if(state.roadTimer>.45&&!state.roadWarned){softWarn(state.lang==="en"?"PLEASE USE THE GEOMETRICALLY APPROVED CROSSING":"BITTE BENUTZEN SIE DIE GEOMETRISCH VORGESEHENE QUERUNGSSTELLE");surfaceComplaint("road");state.roadWarned=true}
+   if(state.roadTimer>3&&state.jayCooldown===0){state.jayCooldown=6;escalate(pick(violationPools.jaywalk),1,false);surfaceComplaint("road");state.roadTimer=0;state.roadWarned=false}
  }else{
-   state.roadTimer=Math.max(0,state.roadTimer-dt*3);if(state.roadTimer<.2)state.roadWarned=false
+   state.roadTimer=0;state.roadWarned=false
  }
 
  state.gardenCooldown=Math.max(0,state.gardenCooldown-dt);
  const grass=onGardenGrass(player.x,player.y),stationGrass=onPoliceGardenGrass(player.x,player.y);
  if(grass){
    state.grassTimer+=dt;
-   if(state.grassTimer>.45&&!state.grassWarned){softWarn(state.lang==="en"?"YOU ARE TOUCHING ADMINISTRATIVELY SENSITIVE GRASS":"SIE BERÜHREN VERWALTUNGSRELEVANTEN RASEN");state.grassWarned=true}
+   if(state.grassTimer>.45&&!state.grassWarned){softWarn(state.lang==="en"?"YOU ARE TOUCHING ADMINISTRATIVELY SENSITIVE GRASS":"SIE BERÜHREN VERWALTUNGSRELEVANTEN RASEN");surfaceComplaint("grass");state.grassWarned=true}
    const triggerAt=stationGrass?2.4:3.0;
    if(state.grassTimer>triggerAt&&state.gardenCooldown===0){state.gardenCooldown=8;escalate(pick(violationPools.grass),stationGrass?2:1,stationGrass);state.grassTimer=0;state.grassWarned=false}
  }else{
-   state.grassTimer=Math.max(0,state.grassTimer-dt*4);if(state.grassTimer<.15)state.grassWarned=false
+   state.grassTimer=0;state.grassWarned=false
  }
 
  state.pettyAuditTimer-=dt;
@@ -519,7 +540,9 @@ function drawGround(){
    ctx.beginPath();ctx.moveTo(a.x,a.y);ctx.lineTo(b.x,b.y);ctx.stroke();
  }
 
- roads.forEach(r=>groundRect({x:r.x-26,y:r.y-26,w:r.w+52,h:r.h+52},"#aaa69d"));
+ roads.forEach(r=>groundRect({x:r.x-SIDEWALK_WIDTH,y:r.y-SIDEWALK_WIDTH,w:r.w+SIDEWALK_WIDTH*2,h:r.h+SIDEWALK_WIDTH*2},"#aaa69d"));
+ grassAreas.forEach(r=>groundRect(r,"#68705e","#596052"));
+ walkways.forEach(r=>groundRect(r,"#aaa69d","#858177"));
  roads.forEach(r=>groundRect(r,"#5c5b57","#4b4a47"));
  crossings.forEach(drawCrossing);
  groundRect(schreber,"#68705e","#4d5149");
@@ -713,6 +736,7 @@ function drawPlayer(){
 function drawMinimap(){
  const mw=Math.min(210,width-32),mh=Math.max(78,Math.round(mw*WORLD.h/WORLD.w)),x=width-mw-16,bottomGap=width<=760?200:44,y=height-mh-bottomGap,sx=mw/WORLD.w,sy=mh/WORLD.h;
  ctx.save();ctx.globalAlpha=.94;ctx.fillStyle="#d7d2c5";ctx.fillRect(x,y,mw,mh);ctx.strokeStyle="#222";ctx.lineWidth=2;ctx.strokeRect(x,y,mw,mh);
+ ctx.fillStyle="#6c7166";grassAreas.forEach(r=>ctx.fillRect(x+r.x*sx,y+r.y*sy,Math.max(1,r.w*sx),Math.max(1,r.h*sy)));
  ctx.fillStyle="#5d5b57";roads.forEach(r=>ctx.fillRect(x+r.x*sx,y+r.y*sy,Math.max(1,r.w*sx),Math.max(1,r.h*sy)));
  ctx.fillStyle="#eee9dc";crossings.forEach(c=>ctx.fillRect(x+c.x*sx,y+c.y*sy,Math.max(1,c.w*sx),Math.max(1,c.h*sy)));
  ctx.fillStyle="#6c7166";ctx.fillRect(x+schreber.x*sx,y+schreber.y*sy,schreber.w*sx,schreber.h*sy);ctx.fillRect(x+policeGarden.x*sx,y+policeGarden.y*sy,policeGarden.w*sx,policeGarden.h*sy);

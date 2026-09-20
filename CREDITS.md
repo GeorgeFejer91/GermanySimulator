@@ -79,6 +79,19 @@ The arrangements use old or traditional underlying compositions, not modern perf
 
 The requested 2012 song **Thüringer Klöße** by Fritz is not transcribed or bundled. Its official upload identifies Frank Kadanik as composer, Ilona Klein and Hans-Jürgen Gröschner as lyricists, Warner Music Germany production, and explicitly prohibits unauthorized use: https://www.youtube.com/watch?v=qJe3cdM7f1c. The similarly named in-game Kloß-Kantinenjingle is a new, independent composition and does not copy that protected melody.
 
+## Pedestrian voices
+
+German browser speech remains the default for character dialogue, with the
+available installed German voices assigned across speakers. Three short angry
+pedestrian barks additionally use recordings from **Thorsten-Voice Dataset
+2021.06 emotional**, version 2.0, by Thorsten Müller and Dominik Kreutz. The
+dataset contains 2,400 German recordings (300 sentences across eight performed
+emotions) and is released under CC0 1.0 Universal.
+
+- Dataset DOI: https://doi.org/10.5281/zenodo.5525023
+- Project repository: https://github.com/thorstenMueller/Thorsten-Voice
+- Local clip IDs, conversion details, license, and checksums: `assets/voices/LICENSES.md`
+
 ## Phone tilt
 
 The same-device tilt controls adapt ECGaming's existing phone-tilt principles: screen-orientation-aware gravity projection, explicit permission where required, neutral calibration, deadzone, smoothing, stale-input release, and keyboard/touch fallback.
