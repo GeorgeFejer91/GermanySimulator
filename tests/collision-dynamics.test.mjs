@@ -12,8 +12,8 @@ assert.match(game,/moveGroundResponder\(car,dx\/d\*step,dy\/d\*step,38\)/,"pursu
 assert.match(game,/moveGroundResponder\(p,rdx\/d\*step,rdy\/d\*step,14\)/,"foot police must use collision-aware movement");
 assert.match(game,/dynamicBlocker\(nx,player\.y,px,player\.y\)/,"the player must not walk deeper into response vehicles");
 assert.match(game,/groundObstacles=.*\.\.\.policeVehicles.*\.\.\.police.*\.\.\.npcs/,"trains must detect people and ground police responses");
-assert.match(game,/allowed=Math\.min\(allowed,Math\.max\(0,groundGap-TRAIN_PLAYER_STOP_GAP\)\)/,"trains must hard-limit advance before a ground obstacle");
-assert.match(game,/allowed=Math\.max\(0,gap-TRAIN_MIN_GAP\)/,"trains must retain same-track no-overlap spacing");
+assert.match(game,/groundAllowed=blockedByGround\?Math\.max\(0,groundGap-TRAIN_PLAYER_STOP_GAP\):Infinity/,"trains must hard-limit advance before a ground obstacle");
+assert.match(game,/available=Math\.max\(0,distance-TRAIN_MIN_GAP\).*a\.motion\*=factor;b\.motion\*=factor/,"opposing and following trains must share the same hard no-overlap spacing");
 assert.match(game,/headingX=velocity>10\?player\.vx\/velocity/,"cars must predict the player's current trajectory");
 assert.match(game,/slot=\(car\.index-\(policeVehicles\.length-1\)\/2\)\*82/,"cars must fan into blocking formation slots");
 assert.match(game,/if\(velocity<10\).*radius=175\+car\.index\*24/,"cars must orbit the player when no trajectory is available");

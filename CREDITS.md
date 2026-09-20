@@ -10,21 +10,32 @@ Six building meshes are selected from Kenney's **City Kit Commercial 2.1** and r
 
 ## Perimeter trains and station announcements
 
-Eight fictional `AMT-BAHN` consists use three compact models from Kenney's
-**Train Kit 1.1**. The models and their shared color map are released under
-CC0 1.0. The game repeats this bounded subset across two continuous rounded
-perimeter loops; the Canvas renderer keeps a procedural red-and-white fallback.
+Eight fictional `AMT-BAHN` consists use compact end cars from Kenney's
+**Train Kit 1.1** and five full-length German n-Wagen passenger coaches per
+consist from Open L-Gauge's **[6w] DB n-Wagen** by DennisAkaTECHNO. The Kenney
+models are CC0 1.0. The converted n-Wagen is CC BY-NC-SA 4.0 and is therefore
+limited to this noncommercial game; modifications and complete LDraw creator
+attribution are recorded beside the GLB. The game clones these local assets
+across two continuous rounded perimeter loops around the slightly expanded
+9,840 × 4,240 world; the Canvas renderer keeps a
+procedural red-and-white fallback with the same long-car dimensions.
 
 - Source: https://kenney.nl/assets/train-kit
 - Creator: Kenney, https://kenney.nl/
 - Local file and checksum record: `assets/models/kenney-trains/LICENSES.md`
+- n-Wagen source: https://open-l-gauge.eu/6wdb-n-wagen/
+- n-Wagen creator: DennisAkaTECHNO
+- n-Wagen license: https://creativecommons.org/licenses/by-nc-sa/4.0/
+- n-Wagen modifications, LDraw attribution, and checksums:
+  `assets/models/open-l-gauge-nwagen/LICENSES.md`
 
 No Deutsche Bahn or Märklin logo, branded texture, voice recording, or cloned
 announcer voice is bundled. Nearby trains instead use the browser's installed
 German speech voice with a deliberately slow, flat delivery to read an original
 fictional announcement whose exact text is displayed simultaneously. Delay text
-is selected from the nearest train's live pause, queue, or player-obstruction
-state, and obstruction delay grows with the number of queued trains. No extra
+is selected from the nearest train's live unexplained pause, train-on-train
+bump and reversal, queue, or player-obstruction state, and obstruction delay
+grows with the number of stopped trains. No extra
 recording or voice model is needed. The
 operational phrase pool was checked against public explanations of common rail
 announcements; the game recombines those short generic terms with invented
