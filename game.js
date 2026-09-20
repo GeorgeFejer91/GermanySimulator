@@ -1248,18 +1248,17 @@ const MUSIC=[
   [69,.5],[67,.5],[66,.5],[64,.5],[62,1.5]
  ]}
 ];
-let audio=null,musicTimer=null,musicBus=null,musicOn=true,musicDucked=false,currentTune=-1,forcedTune=-1,introMusicPlayed=false,introMusicSource=null;
+let audio=null,musicTimer=null,musicBus=null,musicOn=true,musicDucked=false,currentTune=-1,forcedTune=-1,introMusicFinished=false;
 const INTRO_MUSIC_AUDIO="./assets/intro-song.mp3";
-const introMusicData=fetch(INTRO_MUSIC_AUDIO).then(response=>response.ok?response.arrayBuffer():null).catch(()=>null);
-const MUSIC_LEVEL=.46,MUSIC_READOUT_LEVEL=.14;
-function setMusicDucked(ducked){musicDucked=ducked;if(!audio||!musicBus)return;const t=audio.currentTime,target=ducked?MUSIC_READOUT_LEVEL:MUSIC_LEVEL;musicBus.gain.cancelScheduledValues(t);musicBus.gain.setTargetAtTime(target,t,.045)}
+const introMusicAudio=new Audio(INTRO_MUSIC_AUDIO),MUSIC_LEVEL=.46,MUSIC_READOUT_LEVEL=.14,INTRO_MUSIC_LEVEL=.34,INTRO_MUSIC_READOUT_LEVEL=.1;introMusicAudio.preload="auto";introMusicAudio.playsInline=true;introMusicAudio.volume=INTRO_MUSIC_LEVEL;
+function setMusicDucked(ducked){musicDucked=ducked;introMusicAudio.volume=ducked?INTRO_MUSIC_READOUT_LEVEL:INTRO_MUSIC_LEVEL;if(!audio||!musicBus)return;const t=audio.currentTime,target=ducked?MUSIC_READOUT_LEVEL:MUSIC_LEVEL;musicBus.gain.cancelScheduledValues(t);musicBus.gain.setTargetAtTime(target,t,.045)}
 function createMusicBus(){const bus=audio.createGain(),filter=audio.createBiquadFilter();bus.gain.value=musicDucked?MUSIC_READOUT_LEVEL:MUSIC_LEVEL;filter.type="lowpass";filter.frequency.value=1600;filter.Q.value=.45;bus.connect(filter).connect(audio.destination);return bus}
 const midiFreq=note=>440*2**((note-69)/12);
 function nextTune(){
  if(forcedTune>=0){currentTune=forcedTune;forcedTune=-1;return MUSIC[currentTune]}
  const choices=[];MUSIC.forEach((tune,index)=>{if(index!==currentTune)for(let i=0;i<(tune.weight||1);i++)choices.push(index)});currentTune=choices[Math.floor(Math.random()*choices.length)];return MUSIC[currentTune]
 }
-function stopIntroMusic(){if(!introMusicSource)return;introMusicSource.onended=null;try{introMusicSource.stop()}catch{}introMusicSource=null}
+function stopIntroMusic(){if(introMusicFinished)return;introMusicFinished=true;introMusicAudio.pause()}
 function queueNationalAnthem(){forcedTune=1;if(!musicOn||!audio)return;clearTimeout(musicTimer);stopIntroMusic();musicBus?.disconnect();musicBus=createMusicBus();scheduleTheme()}
 function chip(a,freq,when,dur,type="triangle",gain=.028){const o=a.createOscillator(),g=a.createGain();o.type=type;o.frequency.value=freq;g.gain.setValueAtTime(.0001,when);g.gain.linearRampToValueAtTime(gain,when+.018);g.gain.setValueAtTime(gain,when+dur*.68);g.gain.exponentialRampToValueAtTime(.0001,when+dur);o.connect(g).connect(musicBus);o.start(when);o.stop(when+dur+.02)}
 function stamp(a,when,gain=.014){const o=a.createOscillator(),g=a.createGain();o.type="triangle";o.frequency.setValueAtTime(78,when);o.frequency.exponentialRampToValueAtTime(48,when+.065);g.gain.setValueAtTime(gain,when);g.gain.exponentialRampToValueAtTime(.0001,when+.08);o.connect(g).connect(musicBus);o.start(when);o.stop(when+.09)}
@@ -1282,12 +1281,10 @@ function scheduleTheme(){
  clearTimeout(musicTimer);
  musicTimer=setTimeout(scheduleTheme,Math.max(100,(t-audio.currentTime-.12)*1000));
 }
-function startMusic(){
- if(!musicOn||musicBus)return;if(!audio)audio=new (window.AudioContext||window.webkitAudioContext)();audio.resume();musicBus=createMusicBus();
- if(introMusicPlayed){scheduleTheme();return}introMusicPlayed=true;const bus=musicBus;document.getElementById("mute").title="NOW PLAYING · INTRO SONG";
- introMusicData.then(data=>{if(!data)throw new Error("Intro music unavailable");return audio.decodeAudioData(data.slice(0))}).then(buffer=>{if(!musicOn||musicBus!==bus)return;const source=audio.createBufferSource(),gain=audio.createGain();introMusicSource=source;source.buffer=buffer;gain.gain.value=.72;source.connect(gain).connect(bus);source.onended=()=>{if(introMusicSource!==source)return;introMusicSource=null;if(musicOn&&musicBus===bus)scheduleTheme()};source.start()}).catch(()=>{if(musicOn&&musicBus===bus)scheduleTheme()})
+function startMusic(event){
+ if(!musicOn)return;if(event){if(!audio)audio=new (window.AudioContext||window.webkitAudioContext)();audio.resume()}if(!introMusicFinished){introMusicAudio.play().catch(()=>{});return}if(musicBus)return;if(!audio)audio=new (window.AudioContext||window.webkitAudioContext)();audio.resume();musicBus=createMusicBus();scheduleTheme()
 }
-document.addEventListener("pointerdown",startMusic,{once:true,capture:true});document.addEventListener("keydown",startMusic,{once:true,capture:true});
+introMusicAudio.onerror=()=>{introMusicFinished=true};introMusicAudio.onplay=()=>document.getElementById("mute").title="NOW PLAYING · INTRO SONG";introMusicAudio.onended=()=>{introMusicFinished=true;startMusic()};document.addEventListener("pointerdown",startMusic,{once:true,capture:true});document.addEventListener("keydown",startMusic,{once:true,capture:true});startMusic();
 document.getElementById("mute").onclick=()=>{musicOn=!musicOn;document.getElementById("mute").textContent=musicOn?"MUSIC ON":"MUSIC OFF";if(musicOn)startMusic();else{clearTimeout(musicTimer);stopIntroMusic();musicBus?.disconnect();musicBus=null}};
 const humorPages=[
  {title:"1. Begriffsprüfung: Humor",text:"Dieses Spielformular dokumentiert ausschließlich die Kenntnisnahme eines kommunikativen Phänomens und ist keine Rechtsberatung. Humor bezeichnet hier eine erkennbare Abweichung zwischen dem wörtlich Erwartbaren und dem tatsächlich Dargestellten. Diese Abweichung kann durch Witz, Gegenteilsrede, Übertreibung, Untertreibung, Widersinn, Nachahmung, falsche Feierlichkeit oder absichtlich bürokratische Umständlichkeit entstehen. Sie kann Belustigung, Überraschung, Unbehagen, Kritik oder liebevolle Verspottung bezwecken. Ob eine bestimmte Person lacht, entscheidet nicht darüber, ob Humor beabsichtigt war. Ein misslungener, langweiliger oder geschmacklich abgelehnter Witz kann weiterhin als humoristische Mitteilung gemeint sein. Mit der Unterschrift wird weder Geschmack noch Zulässigkeit bescheinigt, sondern nur die Möglichkeit nichtwörtlicher Bedeutung anerkannt.",fields:[{type:"signature",label:"ERSTE HANDSCHRIFTLICHE UNTERSCHRIFT"},{type:"check",label:"Ich bestätige, dass Humor als Möglichkeit menschlicher Verständigung existiert."}],buttons:["WORTLAUT GESEHEN","NICHTLACHEN PROTOKOLLIEREN"]},
