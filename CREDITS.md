@@ -104,6 +104,19 @@ Omnibus-Type team, a Roman/blackletter hybrid selected for its more readable
 classical forms. It is loaded through Google Fonts and released under the SIL
 Open Font License 1.1: https://github.com/Omnibus-Type/Grenze
 
+## Humor-form fax sound
+
+The 4.128-second `Fax Sound Effect` recording used when either opening sheet is
+submitted was linked by the user for this integration. The source exposes no
+license metadata, so the file is treated as an in-game-only user-supplied asset;
+no broader redistribution license is claimed. The browser-generated fax sound
+remains the missing-file fallback.
+
+- Source: https://www.youtube.com/watch?v=vGy1NnHm-u8
+- Uploader shown by YouTube: `#1 Sound FX!`
+- Local file: `assets/fax-machine-paper-feed.mp3`
+- SHA-256: `c5f2ffd2b9349960fc77dfd2db9f53ab2ed5ad59bcb82cca2fe3dfc45ca238b7`
+
 ## Phone tilt
 
 The same-device tilt controls adapt ECGaming's existing phone-tilt principles: screen-orientation-aware gravity projection, explicit permission where required, neutral calibration, deadzone, smoothing, stale-input release, and keyboard/touch fallback.
