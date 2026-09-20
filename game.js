@@ -26,18 +26,18 @@ const OFFENSE_TIMING=Object.freeze({warn:.3,sprint:5,road:2.6,grass:2.6,stationG
 const POLICE_RESPONSE_CARS=[0,0,1,2,3,4],POLICE_RESPONSE_HELICOPTERS=[0,0,0,0,1,2];
 const crossings=[];
 for(const h of horizontalRoads)for(const v of verticalRoads){
- crossings.push({x:v.x-40,y:h.y+Math.round((h.h-80)/2),w:v.w+80,h:80});
- crossings.push({x:v.x+Math.round((v.w-90)/2),y:h.y-60,w:90,h:h.h+120});
+ crossings.push({x:v.x,y:h.y-80,w:v.w,h:80});
+ crossings.push({x:v.x-90,y:h.y,w:90,h:h.h});
 }
 crossings.push(...[{x:3590,y:2985,w:120,h:270},{x:6550,y:2985,w:120,h:270},{x:8200,y:2985,w:120,h:270}].map(offsetWorldPoint));
 const trafficLights=[];
 for(let i=1;i<horizontalRoads.length*verticalRoads.length*2;i+=2){
- const c=crossings[i];trafficLights.push({id:trafficLights.length,x:c.x-24,y:c.y+18,phaseOffset:(trafficLights.length%6)*1.15,green:false,rewardCycle:-1});
+ const c=crossings[i];trafficLights.push({id:trafficLights.length,x:c.x+c.w/2,y:c.y-24,phaseOffset:(trafficLights.length%6)*1.15,green:false,rewardCycle:-1});
 }
 const crossingSigns=[];
 for(const c of crossings){
- if(c.w>c.h){crossingSigns.push({x:c.x+18,y:c.y-26,turn:0},{x:c.x+c.w-18,y:c.y+c.h+26,turn:2})}
- else{crossingSigns.push({x:c.x-28,y:c.y+22,turn:1},{x:c.x+c.w+28,y:c.y+c.h-22,turn:3})}
+ if(c.w>c.h)crossingSigns.push({x:c.x+c.w+28,y:c.y+c.h/2,turn:3});
+ else crossingSigns.push({x:c.x+c.w/2,y:c.y+c.h+28,turn:2});
 }
 const schreber=offsetWorldPoint({x:90,y:1210,w:560,h:570});
 const policeGarden=offsetWorldPoint({x:2850,y:3250,w:1500,h:650});
@@ -1023,7 +1023,7 @@ function poly(points,fill,stroke){
 }
 function groundRect(r,fill,stroke){poly([[r.x,r.y],[r.x+r.w,r.y],[r.x+r.w,r.y+r.h],[r.x,r.y+r.h]],fill,stroke)}
 function drawPoliceDiagonalPath(){const dx=policePath.x2-policePath.x1,dy=policePath.y2-policePath.y1,len=Math.hypot(dx,dy)||1,nx=-dy/len*policePath.width*.5,ny=dx/len*policePath.width*.5;poly([[policePath.x1+nx,policePath.y1+ny],[policePath.x2+nx,policePath.y2+ny],[policePath.x2-nx,policePath.y2-ny],[policePath.x1-nx,policePath.y1-ny]],"#a9a59b","#858177")}
-function drawCrossing(c){const wide=c.w>c.h,count=8;groundRect(c,"#4f4e4a");for(let i=0;i<count;i+=2){const f=i/count;if(wide)groundRect({x:c.x+c.w*f,y:c.y,w:c.w/count*.72,h:c.h},"#e5e0d3");else groundRect({x:c.x,y:c.y+c.h*f,w:c.w,h:c.h/count*.72},"#e5e0d3")}}
+function drawCrossing(c){const wide=c.w>c.h,count=8,stripe=.72/count;groundRect(c,"#4f4e4a");for(let i=0;i<count;i+=2){const f=(i+1)/count;if(wide)groundRect({x:c.x+c.w*(f-stripe/2),y:c.y,w:c.w*stripe,h:c.h},"#e5e0d3");else groundRect({x:c.x,y:c.y+c.h*(f-stripe/2),w:c.w,h:c.h*stripe},"#e5e0d3")}}
 function drawFireBoundaryGround(){
  groundRect({x:0,y:BORDER_Y-18,w:WORLD.w,h:36},"rgba(55,48,43,.72)","rgba(42,38,34,.8)");
  groundRect({x:0,y:BORDER_Y-4,w:WORLD.w,h:8},"rgba(164,83,50,.5)");

@@ -37,18 +37,11 @@ html,body,#app{margin:0;width:100%;height:100%;overflow:hidden;background:#77756
 <script>
 (()=>{"use strict";
 const CITY={w:9840,h:4240},RAIL_GUTTER=560,WORLD={w:CITY.w+RAIL_GUTTER*2,h:CITY.h+RAIL_GUTTER*2},offsetWorldPoint=item=>({...item,x:item.x+RAIL_GUTTER,y:item.y+RAIL_GUTTER}),player={x:5960+RAIL_GUTTER,y:3900+RAIL_GUTTER,facing:0},keys={},police=[];
-const roads=[
-{x:RAIL_GUTTER,y:820+RAIL_GUTTER,w:CITY.w,h:260},{x:1050+RAIL_GUTTER,y:RAIL_GUTTER,w:260,h:CITY.h},{x:RAIL_GUTTER,y:2000+RAIL_GUTTER,w:CITY.w,h:240},
-{x:RAIL_GUTTER,y:3000+RAIL_GUTTER,w:CITY.w,h:220},{x:2400+RAIL_GUTTER,y:RAIL_GUTTER,w:220,h:CITY.h},{x:4400+RAIL_GUTTER,y:RAIL_GUTTER,w:180,h:CITY.h},
-{x:5850+RAIL_GUTTER,y:RAIL_GUTTER,w:220,h:CITY.h},{x:7350+RAIL_GUTTER,y:RAIL_GUTTER,w:220,h:CITY.h},{x:9000+RAIL_GUTTER,y:RAIL_GUTTER,w:180,h:CITY.h}
-];
-const crossings=[
-{x:1010,y:890,w:340,h:80},{x:1135,y:760,w:90,h:380},{x:2360,y:890,w:300,h:80},{x:2465,y:760,w:90,h:380},
-{x:4360,y:890,w:260,h:80},{x:4445,y:760,w:90,h:380},{x:1010,y:2070,w:340,h:80},{x:1135,y:1940,w:90,h:360},
-{x:2360,y:2070,w:300,h:80},{x:2465,y:1940,w:90,h:360},{x:4360,y:2070,w:260,h:80},{x:4445,y:1940,w:90,h:360},
-{x:1010,y:3060,w:340,h:80},{x:1135,y:2940,w:90,h:340},{x:2360,y:3060,w:300,h:80},{x:2465,y:2940,w:90,h:340},
-{x:4360,y:3060,w:260,h:80},{x:4445,y:2940,w:90,h:340},{x:3590,y:2985,w:120,h:270}
-].map(offsetWorldPoint);
+const horizontalRoads=[{x:RAIL_GUTTER,y:820+RAIL_GUTTER,w:CITY.w,h:260},{x:RAIL_GUTTER,y:2000+RAIL_GUTTER,w:CITY.w,h:240},{x:RAIL_GUTTER,y:3000+RAIL_GUTTER,w:CITY.w,h:220}];
+const verticalRoads=[{x:1050+RAIL_GUTTER,y:RAIL_GUTTER,w:260,h:CITY.h},{x:2400+RAIL_GUTTER,y:RAIL_GUTTER,w:220,h:CITY.h},{x:4400+RAIL_GUTTER,y:RAIL_GUTTER,w:180,h:CITY.h},{x:5850+RAIL_GUTTER,y:RAIL_GUTTER,w:220,h:CITY.h},{x:7350+RAIL_GUTTER,y:RAIL_GUTTER,w:220,h:CITY.h},{x:9000+RAIL_GUTTER,y:RAIL_GUTTER,w:180,h:CITY.h}];
+const roads=[...horizontalRoads,...verticalRoads],crossings=[];
+for(const h of horizontalRoads)for(const v of verticalRoads){crossings.push({x:v.x,y:h.y-80,w:v.w,h:80});crossings.push({x:v.x-90,y:h.y,w:90,h:h.h})}
+crossings.push(...[{x:3590,y:2985,w:120,h:270},{x:6550,y:2985,w:120,h:270},{x:8200,y:2985,w:120,h:270}].map(offsetWorldPoint));
 const buildings=[
 {id:"buergeramt",name:"BÜRGERAMT",x:150,y:220,w:350,h:250,hgt:115,doorX:325,doorY:500,sign:"TERMIN NUR MIT TERMIN"},
 {id:"hausverwaltung",name:"HAUSVERWALTUNG",x:590,y:210,w:330,h:255,hgt:95,doorX:755,doorY:495,sign:"WOHNUNGSGEBERBESTÄTIGUNG"},
@@ -109,5 +102,5 @@ let last=performance.now();function loop(t){const dt=Math.min(.05,(t-last)/1000)
 })();
 </script>
 <script type="importmap">{"imports":{"three":"https://cdn.jsdelivr.net/npm/three@0.186.0/build/three.module.js"}}</script>
-<script type="module" src="./world3d.js?v=20260920-13"></script>
+<script type="module" src="./world3d.js?v=20260921-01"></script>
 </body></html>
