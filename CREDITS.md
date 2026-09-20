@@ -21,8 +21,11 @@ perimeter loops; the Canvas renderer keeps a procedural red-and-white fallback.
 
 No Deutsche Bahn or Märklin logo, branded texture, voice recording, or cloned
 announcer voice is bundled. Nearby trains instead use the browser's installed
-German speech voice to read an original fictional announcement whose exact text
-is displayed simultaneously. No extra recording or voice model is needed. The
+German speech voice with a deliberately slow, flat delivery to read an original
+fictional announcement whose exact text is displayed simultaneously. Delay text
+is selected from the nearest train's live pause, queue, or player-obstruction
+state, and obstruction delay grows with the number of queued trains. No extra
+recording or voice model is needed. The
 operational phrase pool was checked against public explanations of common rail
 announcements; the game recombines those short generic terms with invented
 destinations, platforms, and delay lengths.
@@ -31,6 +34,7 @@ destinations, platforms, and delay lengths.
 - Travelbook explanation with Deutsche Bahn spokesperson context: https://www.travelbook.de/reisen/zugreisen/verspaetungsdurchsagen-deutsche-bahn
 - T-Online overview of common disruption wording: https://www.t-online.de/leben/reisen/reisetipps/id_92315944/bahnansagen-was-bedeuten-verzoegerungen-im-betriebsablauf-und-co-.html
 - Deutsche Bahn explanation of connection-wait decisions: https://www.bahn.de/service/fahrplaene/anschlusszug-wartet-nicht
+- Deutsche Bahn explanation of how disruption reports reach announcements, displays, and DB Navigator: https://www.bahn.de/service/fahrplaene/stoerungsinformationen
 
 The deliberately excessive excuse library is made of newly written satirical
 lines inspired by passenger reports in the following community threads. These
@@ -42,6 +46,7 @@ the posts verbatim.
 - Reddit r/bahn, older collection including reported children, donkeys, horses, and a pony at railway facilities: https://www.reddit.com/r/bahn/comments/1c4toi4/kurioselustige_gr%C3%BCnde_warum_euer_zug_ausgefallen/
 - Reddit r/deutschebahn, reported delay announcements: https://www.reddit.com/r/deutschebahn/comments/1rla2lw/was_sind_eure_besten_versp%C3%A4tungsaussagen/
 - Reddit r/deutschebahn, newer collection including chicks, implausible snow, split-consist timing, and a broken driver's seat: https://www.reddit.com/r/deutschebahn/comments/1vqolmd/lustigste_bahn_versp%C3%A4tungs_erkl%C3%A4rungen/
+- Reddit r/deutschebahn, collection including playing children, a double-redirected diversion, cattle, and a relief driver in the wrong train: https://www.reddit.com/r/deutschebahn/comments/1mswi3t/was_war_der_kurioseste_grund_f%C3%BCr_eine_versp%C3%A4tung/
 - Reddit r/drehscheibe, discussion of an automatic delay forecast with no remaining reason: https://www.reddit.com/r/drehscheibe/comments/1u5wdr9/schreib_das_system_das_automatisch_wenn_eine/
 - LEO forum, collected unusual rail announcements: https://dict.leo.org/forum/viewGeneraldiscussion.php?idForum=9&idThread=1226524&lang=de&lp=ende
 - Vielfliegertreff forum, reported zero-minute delay and wrong-track announcements: https://www.vielfliegertreff.de/forum/threads/deutsche-bahn-frust-aber-auf-amuesante-art-und-weise.5668/
