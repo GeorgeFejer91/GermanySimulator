@@ -7,7 +7,7 @@
   <meta name="description" content="Germany Simulator — a 2.5D bureaucratic open-world parody.">
   <link rel="icon" href="./assets/faxgeraet.svg" type="image/svg+xml">
   <title>Germany Simulator · EC Games</title>
-  <link rel="stylesheet" href="./styles.css?v=20260920-11">
+  <link rel="stylesheet" href="./styles.css?v=20260920-12">
 </head>
 <body>
 <main id="app">
@@ -36,7 +36,7 @@
   <section id="form-modal" class="modal" hidden><form id="bureaucracy-form" class="paper"><div class="paper-head"><span>BUNDESREPUBLIK · SPIELFORMULAR</span><span id="form-code">A38</span></div><h2 id="form-title">Antrag auf Antragstellung</h2><p id="form-subtitle"></p><div id="form-fields" class="form-fields"></div><div class="paper-actions"><span id="form-error"></span><button type="submit">EINREICHEN</button></div></form></section>
   <section id="end-modal" class="modal" hidden><div class="end-card"><small id="end-kicker">VERWALTUNGSVORGANG</small><h1 id="end-title"></h1><p id="end-copy"></p><button id="restart" type="button">NOCH EIN VORGANG</button></div></section>
   <section id="intro" class="intro"><div class="intro-noise"></div><div class="intro-card">
-      <p class="eyebrow">EC GAMES PRESENTS</p><h1><span>GERMANY</span><b>SIMULATOR</b></h1><p class="strap">GRAND THEFT AMT</p>
+      <p class="eyebrow">EC GAMES PRESENTS</p><h1><span>GERMANY</span><b><span id="simulator-s">S</span>IMULATOR</b></h1><p class="strap">GRAND THEFT AMT</p>
       <p class="lede">A 2.5D open-world administration simulator. The streets are gray. The forms are beige. The lawn is forbidden.</p>
       <div class="language-choice" role="group" aria-label="Choose language"><span>SPRACHE / LANGUAGE</span><div id="language-options" class="language-options"><button class="lang active" data-lang="de" type="button">Deutsch</button><button class="lang" data-lang="en" type="button">English</button></div><output id="language-praise" hidden>Gute Wahl!</output></div>
       <figure class="intro-satire"><img class="fax-wurst-art" src="./assets/fax-wurst.svg" alt="A bratwurst jammed into a fax machine"><figcaption>„Hast du schon Kehrwoche gemacht?“</figcaption></figure>
@@ -56,7 +56,7 @@
   <footer><span>WASD / ARROWS · MOVE</span><span>SHIFT · SUSPICIOUSLY FAST</span><span>E · INTERACT</span><span>§ / Q · GESETZ ZITIEREN</span><button id="mute" type="button">MUSIC ON</button><button id="voice-toggle" type="button">VOICE ON</button><a href="https://ec-games.space/">EC GAMES</a><span>SATIRE · GAME RULES · NOT LEGAL OR IMMIGRATION ADVICE</span></footer>
 </main>
 <script type="importmap">{"imports":{"three":"https://cdn.jsdelivr.net/npm/three@0.186.0/build/three.module.js"}}</script>
-<script src="./game.js?v=20260920-29"></script>
+<script src="./game.js?v=20260920-30"></script>
 <script type="module" src="./world3d.js?v=20260920-13"></script>
 </body>
 </html>

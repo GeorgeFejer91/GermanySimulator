@@ -18,7 +18,7 @@ Mission order:
 ## Controls
 
 - Desktop: WASD or arrow keys move; Shift runs; E interacts; `§` or `Q` activates the law power after unlock.
-- On the untouched title screen, `S` is an intentionally undisclosed shortcut that starts the game after the HUM-01/DE questionnaire.
+- On the untouched title screen, pressing `S` or clicking/tapping the unchanged `S` in `SIMULATOR` is an intentionally undisclosed shortcut that starts the game after the HUM-01/DE questionnaire.
 - Phone: the on-screen directional dock moves and the E action interacts.
 - The game does not request motion permission and has no device-tilt or recalibration controls.
 
