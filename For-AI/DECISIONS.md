@@ -75,3 +75,7 @@ Wrong answers trigger a three-beat `Nein! Nein! Nein!` through the existing brow
 ## 2026-09-20 — Political-character quote ownership
 
 The satirical figure trying to extinguish the Brandmauer is Friedrich Merz; the energy-district figure is Angela Merkel. Each NPC declares its political identity and all ambient and interaction dialogue resolves through that identity's dedicated quote pool. Merz and Merkel lines must never be pooled, shared, or selected for the other figure, and speaker labels, textboxes, and synthesized or recorded voices must retain the same owner.
+
+## 2026-09-20 — Pre-play humor certification
+
+The Start button leads into a three-page fictional `HUM-01/DE` humor-competence declaration before the simulation begins. The form condenses the user-supplied conceptual material into definitions of humor, satire and related non-literal devices, followed by contextual interpretation and a final declaration. The exact visible page remains on screen for its full browser-generated reading; the next page stays locked until the reading and all page-specific signatures, acknowledgments, and stamp-button steps are complete. This is an intentionally impractical satirical gate, explicitly not a real contract, legal test, or legal advice, and it must not create a separate runtime or gameplay authority.
