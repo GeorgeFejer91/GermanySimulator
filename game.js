@@ -521,7 +521,7 @@ function startCitizenshipQuiz(n){
 }
 function answerCitizenshipQuiz(index){
  const q=state.quizQuestion;if(!q)return;state.quizVoiceToken=(state.quizVoiceToken||0)+1;document.getElementById("quiz-modal").hidden=true;state.modal=false;state.quizQuestion=null;state.quizNpc=null;
- if(index===q.answer){uiTone(980,.1,"square",.04);addGermanness(1,"RICHTIG · AUFGABE "+q.source)}else{uiTone(170,.16,"sawtooth",.045);addGermanness(-1,"FALSCH · RICHTIG: "+q.choices[q.answer]);showWorldBark("ENTTÄUSCHTER PRÜFUNGSBEAUFTRAGTER","Nein! Nein! Nein!",true,"./assets/voices/quicksounds-nein-nein-nein.mp3")}
+ if(index===q.answer){uiTone(980,.1,"square",.04);addGermanness(1,"RICHTIG · AUFGABE "+q.source)}else{uiTone(170,.16,"sawtooth",.045);addGermanness(-1,"FALSCH · RICHTIG: "+q.choices[q.answer]);showWorldBark("ENTTÄUSCHTER PRÜFUNGSBEAUFTRAGTER","Nein! Nein! Nein!",true,"./assets/voices/quiz-wrong-answer.mp3")}
 }
 document.getElementById("quiz-choices").addEventListener("click",event=>{const button=event.target.closest("button[data-answer]");if(button&&!button.disabled)answerCitizenshipQuiz(Number(button.dataset.answer))});
 function updateQuizEncounters(dt){
