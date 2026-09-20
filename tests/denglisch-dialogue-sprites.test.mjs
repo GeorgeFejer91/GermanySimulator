@@ -2,7 +2,7 @@ import assert from "node:assert/strict";
 import {readFileSync} from "node:fs";
 
 const game=readFileSync("game.js","utf8"),world3d=readFileSync("world3d.js","utf8");
-const sourceIds=[...game.matchAll(/\{source:(\d+),question:/g)].map(([,id])=>id);
+const sourceIds=[...game.matchAll(/\{source:(?:"([^"]+)"|(\d+)),(?:type:"[^"]+",)?question:/g)].map(([,named,numeric])=>named||numeric);
 const berlinMatch=game.match(/const berlinCitizenshipQuestions=(\{[\s\S]*?\});\s*const quizApproaches/);
 assert.ok(berlinMatch,"Berlin quiz copy must remain a literal object");
 const berlin=JSON.parse(berlinMatch[1]);

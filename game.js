@@ -269,12 +269,24 @@ function nextLawPowerLine(){
  if(!lawPowerBag.length){lawPowerBag=lawPowerLines.map((_,i)=>i);for(let i=lawPowerBag.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[lawPowerBag[i],lawPowerBag[j]]=[lawPowerBag[j],lawPowerBag[i]]}if(lawPowerBag.at(-1)===lastLawPowerLine&&lawPowerBag.length>1)[lawPowerBag[0],lawPowerBag[lawPowerBag.length-1]]=[lawPowerBag[lawPowerBag.length-1],lawPowerBag[0]]}
  lastLawPowerLine=lawPowerBag.pop();return lawPowerLines[lastLawPowerLine]
 }
-// Curated and lightly condensed from BAMF's 07.05.2025 Gesamtfragenkatalog; answer is a zero-based choice index.
+// Civic entries are lightly condensed from BAMF's 07.05.2025 Gesamtfragenkatalog; FS entries are original fictional game questions. Answers are zero-based choice indices.
 const citizenshipQuestions=[
+ {source:24,question:"Wie viele Bundesländer hat die Bundesrepublik Deutschland?",choices:["14","15","16","17"],answer:2},
+ {source:25,question:"Was ist kein Bundesland der Bundesrepublik Deutschland?",choices:["Elsass-Lothringen","Nordrhein-Westfalen","Mecklenburg-Vorpommern","Sachsen-Anhalt"],answer:0},
+ {source:29,question:"Welches Tier ist das Wappentier der Bundesrepublik Deutschland?",choices:["Löwe","Adler","Bär","Pferd"],answer:1},
+ {source:40,question:"Mit welchen Worten beginnt die deutsche Nationalhymne?",choices:["Völker, hört die Signale …","Einigkeit und Recht und Freiheit …","Freude schöner Götterfunken …","Deutschland einig Vaterland …"],answer:1},
  {source:57,question:"Wer wird meistens zur Präsidentin/zum Präsidenten des Deutschen Bundestages gewählt?",choices:["die/der älteste Abgeordnete im Parlament","die Ministerpräsidentin/der Ministerpräsident des größten Bundeslandes","eine ehemalige Bundeskanzlerin/ein ehemaliger Bundeskanzler","eine Abgeordnete/ein Abgeordneter der stärksten Fraktion"],answer:3},
+ {source:58,question:"Wer ernennt in Deutschland die Ministerinnen/die Minister der Bundesregierung?",choices:["die Präsidentin/der Präsident des Bundesverfassungsgerichtes","die Bundespräsidentin/der Bundespräsident","die Bundesratspräsidentin/der Bundesratspräsident","die Bundestagspräsidentin/der Bundestagspräsident"],answer:1},
  {source:69,question:"Die Bundesrepublik Deutschland hat einen dreistufigen Verwaltungsaufbau. Wie heißt die unterste politische Stufe?",choices:["Stadträte","Landräte","Gemeinden","Bezirksämter"],answer:2},
+ {source:74,question:"Wie heißt das Parlament für ganz Deutschland?",choices:["Bundesversammlung","Volkskammer","Bundestag","Bundesgerichtshof"],answer:2},
+ {source:80,question:"Welches Gericht in Deutschland ist zuständig für die Auslegung des Grundgesetzes?",choices:["Oberlandesgericht","Amtsgericht","Bundesverfassungsgericht","Verwaltungsgericht"],answer:2},
+ {source:86,question:"Wer wählt in Deutschland die Bundespräsidentin/den Bundespräsidenten?",choices:["die Bundesversammlung","der Bundesrat","das Bundesparlament","das Bundesverfassungsgericht"],answer:0},
+ {source:90,question:"Die deutschen Bundesländer wirken an der Gesetzgebung des Bundes mit durch …",choices:["den Bundesrat","die Bundesversammlung","den Bundestag","die Bundesregierung"],answer:0},
  {source:102,question:"Womit kann man in der Bundesrepublik Deutschland geehrt werden, wenn man auf politischem, wirtschaftlichem, kulturellem, geistigem oder sozialem Gebiet eine besondere Leistung erbracht hat?",choices:["Bundesverdienstkreuz","Bundesadler","Vaterländischer Verdienstorden","Ehrentitel ‚Held der DDR‘"],answer:0},
  {source:103,question:"Was wird in Deutschland als ‚Ampelkoalition‘ bezeichnet?",choices:["CDU und CSU","SPD, FDP und Bündnis 90/Die Grünen","CSU, Die Linke und Bündnis 90/Die Grünen","CDU und SPD"],answer:1},
+ {source:105,question:"Was ist eine Aufgabe von Wahlhelferinnen/Wahlhelfern in Deutschland?",choices:["Sie helfen alten Menschen bei der Stimmabgabe in der Wahlkabine","Sie schreiben die Wahlbenachrichtigungen vor der Wahl","Sie geben Zwischenergebnisse an die Medien weiter","Sie zählen die Stimmen nach dem Ende der Wahl"],answer:3},
+ {source:126,question:"Was bekommen wahlberechtigte Bürgerinnen und Bürger in Deutschland vor einer Wahl?",choices:["eine Wahlbenachrichtigung von der Gemeinde","eine Wahlerlaubnis von der Bundespräsidentin/vom Bundespräsidenten","eine Benachrichtigung von der Bundesversammlung","eine Benachrichtigung vom Pfarramt"],answer:0},
+ {source:132,question:"Viele Menschen in Deutschland arbeiten in ihrer Freizeit ehrenamtlich. Was bedeutet das?",choices:["Sie arbeiten als Soldatinnen/Soldaten","Sie arbeiten freiwillig und unbezahlt in Vereinen und Verbänden","Sie arbeiten in der Bundesregierung","Sie arbeiten in einem Krankenhaus und verdienen dabei Geld"],answer:1},
  {source:140,question:"Was macht eine Schöffin/ein Schöffe in Deutschland?",choices:["entscheidet mit Richterinnen/Richtern über Schuld und Strafe","gibt Bürgerinnen/Bürgern rechtlichen Rat","stellt Urkunden aus","verteidigt die Angeklagte/den Angeklagten"],answer:0},
  {source:150,question:"Eine Gerichtsschöffin/ein Gerichtsschöffe in Deutschland ist …",choices:["die Stellvertretung des Stadtoberhaupts","eine ehrenamtliche Richterin/ein ehrenamtlicher Richter","ein Mitglied eines Gemeinderats","eine Person, die Jura studiert hat"],answer:1},
  {source:183,question:"Wann war in der Bundesrepublik Deutschland das ‚Wirtschaftswunder‘?",choices:["40er Jahre","50er Jahre","70er Jahre","80er Jahre"],answer:1},
@@ -284,17 +296,44 @@ const citizenshipQuestions=[
  {source:234,question:"Wo ist ein Sitz des Europäischen Parlaments?",choices:["London","Paris","Berlin","Straßburg"],answer:3},
  {source:237,question:"2007 wurde das 50-jährige Jubiläum der ‚Römischen Verträge‘ gefeiert. Was war ihr Inhalt?",choices:["Beitritt Deutschlands zur NATO","Gründung der Europäischen Wirtschaftsgemeinschaft (EWG)","Verpflichtung Deutschlands zu Reparationsleistungen","Festlegung der Oder-Neiße-Linie"],answer:1},
  {source:238,question:"An welchen Orten arbeitet das Europäische Parlament?",choices:["Paris, London und Den Haag","Straßburg, Luxemburg und Brüssel","Rom, Bern und Wien","Bonn, Zürich und Mailand"],answer:1},
+ {source:264,question:"Zu welchem Fest tragen Menschen in Deutschland bunte Kostüme und Masken?",choices:["am Rosenmontag","am Maifeiertag","beim Oktoberfest","an Pfingsten"],answer:0},
  {source:266,question:"Wann beginnt die gesetzliche Nachtruhe in Deutschland?",choices:["wenn die Sonne untergeht","wenn die Nachbarn schlafen gehen","um 0 Uhr, Mitternacht","um 22 Uhr"],answer:3},
+ {source:271,question:"Was ist in Deutschland ein Brauch zu Weihnachten?",choices:["bunte Eier verstecken","einen Tannenbaum schmücken","sich mit Masken und Kostümen verkleiden","Kürbisse vor die Tür stellen"],answer:1},
  {source:282,question:"Welches Ehrenamt müssen deutsche Staatsbürgerinnen und Staatsbürger übernehmen, wenn sie dazu aufgefordert werden?",choices:["Vereinstrainerin/Vereinstrainer","Wahlhelferin/Wahlhelfer","Bibliotheksaufsicht","Lehrerin/Lehrer"],answer:1},
  {source:285,question:"Frau Frost arbeitet fest angestellt in einem Büro. Was muss sie nicht von ihrem Gehalt bezahlen?",choices:["Lohnsteuer","Beiträge zur Arbeitslosenversicherung","Beiträge zur Renten- und Krankenversicherung","Umsatzsteuer"],answer:3},
  {source:291,question:"Warum muss man bei der Steuererklärung angeben, ob man zu einer Kirche gehört?",choices:["weil es eine an Einkommen- und Lohnsteuer geknüpfte Kirchensteuer gibt","weil das nur für die Statistik wichtig ist","weil Nichtmitglieder mehr Steuern zahlen","weil die Kirche die Steuererklärung bearbeitet"],answer:0},
- {source:300,question:"Aus welchem Land kamen die ersten Gastarbeiterinnen und Gastarbeiter in die Bundesrepublik Deutschland?",choices:["Italien","Spanien","Portugal","Türkei"],answer:0}
+ {source:293,question:"Was ist in Deutschland ein Brauch zu Ostern?",choices:["Kürbisse vor die Tür stellen","einen Tannenbaum schmücken","Eier bemalen","Raketen in die Luft schießen"],answer:2},
+ {source:294,question:"Pfingsten ist ein …",choices:["christlicher Feiertag","deutscher Gedenktag","internationaler Trauertag","bayerischer Brauch"],answer:0},
+ {source:296,question:"In Deutschland nennt man die letzten vier Wochen vor Weihnachten …",choices:["den Buß- und Bettag","das Erntedankfest","die Adventszeit","Allerheiligen"],answer:2},
+ {source:300,question:"Aus welchem Land kamen die ersten Gastarbeiterinnen und Gastarbeiter in die Bundesrepublik Deutschland?",choices:["Italien","Spanien","Portugal","Türkei"],answer:0},
+ {source:"FS-01",type:"fahrschule",question:"Vor Ihnen fährt ein Fahrschulwagen seit zwölf Minuten exakt 29 km/h in einer Tempo-30-Zone. Was tun Sie?",choices:["drängeln, damit der fehlende Kilometer pro Stunde nachgeholt wird","in Morsezeichen ‚DREISSIG‘ hupen","Abstand halten und die amtliche Geduldprüfung bestehen","rechts über den Gehweg überholen"],answer:2},
+ {source:"FS-02",type:"fahrschule",question:"Sie kommen um 14:37 Uhr an einem Parkplatz mit Parkscheibenpflicht an. Auf welche Zeit stellen Sie die Parkscheibe?",choices:["14:37 Uhr","14:30 Uhr","15:00 Uhr","auf ‚BIN GLEICH ZURÜCK‘"],answer:2},
+ {source:"FS-03",type:"fahrschule",question:"An einer Kreuzung steht eine Person mit Warnweste und einem laminierten Schild ‚ICH REGLE DAS‘. Was verleiht ihr das Schild?",choices:["automatisch polizeiliche Weisungsbefugnis","Vorfahrt für alle Fahrzeuge gleichzeitig","keine amtliche Befugnis allein durch Laminierung","das Recht, den Kreisverkehr eckig zu erklären"],answer:2},
+ {source:"FS-04",type:"fahrschule",question:"Ein Traktor überholt einen zweiten Traktor mit ungefähr einem Kilometer pro Stunde Geschwindigkeitsüberschuss. Wie reagieren Sie?",choices:["Abstand halten und die Landschaft vollständig kennenlernen","auf dem Standstreifen eine Gegenspur eröffnen","dauerhaft hupen, damit beide Traktoren schneller reifen","zwischen beiden Fahrzeugen einparken"],answer:0},
+ {source:"FS-05",type:"fahrschule",question:"Im Haltverbot steht ein Auto mit einem handgeschriebenen Zettel ‚NUR GANZ KURZ‘. Welche rechtliche Wirkung hat der Zettel?",choices:["Er ersetzt die Warnblinkanlage","Er verlängert die zulässige Parkdauer auf eine gefühlte Stunde","Er hebt jedes Verkehrszeichen im Umkreis von 20 Metern auf","keine"],answer:3},
+ {source:"FS-06",type:"fahrschule",question:"Die Ampel ist seit 0,8 Sekunden rot. Hinter Ihnen hupt jemand bereits sehr deutsch. Was müssen Sie tun?",choices:["bei Rot warten","vorsichtig rückwärts an der Hupe vorbeifahren","aussteigen und die Ampel schriftlich abmahnen","fahren, sobald das Hupen amtlich klingt"],answer:0},
+ {source:"FS-07",type:"fahrschule",question:"Auf einer Landstraße schaut eine Kuh von rechts auf die Fahrbahn. Gilt für die Kuh ‚rechts vor links‘?",choices:["ja, aber nur mit Ohrmarke","nein; trotzdem Geschwindigkeit verringern und bremsbereit sein","nur sonntags zwischen zwei Melkzeiten","erst nach schriftlicher Bestätigung des Bauern"],answer:1},
+ {source:"FS-08",type:"fahrschule",question:"Beim Einparken sagt Ihre Begleitperson: ‚Das passt noch.‘ Wer bleibt für den Abstand verantwortlich?",choices:["die Begleitperson wegen mündlicher Raumfreigabe","das geparkte Fahrzeug","die fahrende Person","die nächstgelegene Hausverwaltung"],answer:2},
+ {source:"FS-09",type:"fahrschule",question:"Vor einem Bahnübergang bleibt die Schranke ungewöhnlich lange geschlossen. Ein Hintermann empfiehlt einen Rückwärts-Slalom. Was tun Sie?",choices:["warten und den Bahnübergang nicht umfahren","dem Slalom folgen, wenn er sauber protokolliert wird","die Schranke kurz anheben und danach wieder abheften","auf den Schienen wenden"],answer:0},
+ {source:"FS-10",type:"fahrschule",question:"Ein Igel in Warnweste überquert langsam die Straße. Welche Reaktion ist angemessen?",choices:["Geschwindigkeit verringern und nötigenfalls anhalten","hupen, weil Warnwesten zur Mitarbeit verpflichten","den Igel wegen fehlender Fahrzeugklasse anzeigen","rechts über den Grünstreifen ausweichen"],answer:0}
 ];
 const berlinCitizenshipQuestions={
+ "24":{"question":"What number of Bundesländer hat die Bundesrepublik Deutschland?","choices":["fourteen","fifteen","sixteen","seventeen"]},
+ "25":{"question":"What ist kein Bundesland der Bundesrepublik Deutschland?","choices":["Elsass-Lothringen","Nordrhein-Westfalen","Mecklenburg-Vorpommern","Sachsen-Anhalt"]},
+ "29":{"question":"Which Tier ist das Wappentier der Bundesrepublik Deutschland?","choices":["the Löwe","the Adler","the Bär","the Pferd"]},
+ "40":{"question":"With which Worten starts die deutsche Nationalhymne?","choices":["Völker, hört die Signale …","Einigkeit und Recht und Freiheit …","Freude schöner Götterfunken …","Deutschland einig Vaterland …"]},
  "57":{"question":"Who wird meistens as Präsidentin oder Präsident des Deutschen Bundestages elected?","choices":["the oldest Abgeordnete im Parlament","the Ministerpräsidentin or Ministerpräsident des largest Bundeslandes","a former Bundeskanzlerin or Bundeskanzler","an Abgeordnete or Abgeordneter der strongest Fraktion"]},
+ "58":{"question":"Who ernennt in Deutschland die Ministerinnen oder Minister der Bundesregierung?","choices":["the Präsidentin or Präsident des Bundesverfassungsgerichtes","the Bundespräsidentin or Bundespräsident","the Bundesratspräsidentin or Bundesratspräsident","the Bundestagspräsidentin or Bundestagspräsident"]},
  "69":{"question":"Die Bundesrepublik has einen three-level Verwaltungsaufbau. Wie heißt die lowest politische Stufe?","choices":["Stadträte, the city councillors","Landräte, the district chiefs","Gemeinden, the municipalities","Bezirksämter, the district offices"]},
+ "74":{"question":"What heißt das Parlament für ganz Deutschland?","choices":["Bundesversammlung","Volkskammer","Bundestag","Bundesgerichtshof"]},
+ "80":{"question":"Which Gericht in Deutschland is zuständig für die Auslegung des Grundgesetzes?","choices":["Oberlandesgericht","Amtsgericht","Bundesverfassungsgericht","Verwaltungsgericht"]},
+ "86":{"question":"Who wählt in Deutschland die Bundespräsidentin or den Bundespräsidenten?","choices":["die Bundesversammlung","der Bundesrat","das Bundesparlament","das Bundesverfassungsgericht"]},
+ "90":{"question":"Through what body participate die deutschen Bundesländer an der Gesetzgebung des Bundes?","choices":["den Bundesrat","die Bundesversammlung","den Bundestag","die Bundesregierung"]},
  "102":{"question":"Womit can one in der Bundesrepublik geehrt werden, wenn man auf politischem, economic, cultural, geistigem oder socialem Gebiet eine besondere Leistung erbracht hat?","choices":["with dem Bundesverdienstkreuz","with dem Bundesadler","with dem Vaterländischen Verdienstorden","with dem Ehrentitel ‘Held der DDR’"]},
  "103":{"question":"What wird in Deutschland as ‘Ampelkoalition’ bezeichnet?","choices":["CDU and CSU","SPD, FDP and Bündnis 90/Die Grünen","CSU, Die Linke and Bündnis 90/Die Grünen","CDU and SPD"]},
+ "105":{"question":"What ist eine Aufgabe von Wahlhelferinnen oder Wahlhelfern in Deutschland?","choices":["They help alte Menschen bei der Stimmabgabe in der Wahlkabine","They write die Wahlbenachrichtigungen before der Wahl","They give Zwischenergebnisse an die Medien","They count die Stimmen nach dem Ende der Wahl"]},
+ "126":{"question":"What bekommen wahlberechtigte Bürgerinnen und Bürger in Deutschland before einer Wahl?","choices":["eine Wahlbenachrichtigung von der Gemeinde","eine Wahlerlaubnis von der Bundespräsidentin or vom Bundespräsidenten","eine Benachrichtigung von der Bundesversammlung","eine Benachrichtigung vom Pfarramt"]},
+ "132":{"question":"Viele Menschen in Deutschland work in ihrer Freizeit ehrenamtlich. What bedeutet das?","choices":["They work as Soldatinnen or Soldaten","They work freiwillig and unbezahlt in Vereinen und Verbänden","They work in der Bundesregierung","They work in einem Krankenhaus and earn Geld"]},
  "140":{"question":"What macht eine Schöffin oder ein Schöffe in Deutschland exactly?","choices":["decides mit Richterinnen und Richtern über Schuld und Strafe","gives Bürgerinnen und Bürgern rechtlichen Rat","issues Urkunden","defends die Angeklagte oder den Angeklagten"]},
  "150":{"question":"Eine Gerichtsschöffin oder ein Gerichtsschöffe in Deutschland is …","choices":["the Stellvertretung des Stadtoberhaupts","an ehrenamtliche Richterin or ehrenamtlicher Richter","a Mitglied eines Gemeinderats","a Person, die Jura studied hat"]},
  "183":{"question":"When war in der Bundesrepublik das so-called ‘Wirtschaftswunder’?","choices":["in den forties","in den fifties","in den seventies","in den eighties"]},
@@ -304,15 +343,96 @@ const berlinCitizenshipQuestions={
  "234":{"question":"Where ist ein Sitz des Europäischen Parlaments?","choices":["in London","in Paris","in Berlin","in Straßburg"]},
  "237":{"question":"In 2007 wurde das 50-jährige anniversary der ‘Römischen Verträge’ celebrated. What war ihr Inhalt?","choices":["Deutschlands Beitritt zur NATO","the Gründung der Europäischen Wirtschaftsgemeinschaft, EWG","Deutschlands Verpflichtung zu Reparationsleistungen","the Festlegung der Oder-Neiße-Linie"]},
  "238":{"question":"At welchen Orten arbeitet das Europäische Parlament?","choices":["Paris, London and Den Haag","Straßburg, Luxemburg and Brüssel","Rom, Bern and Wien","Bonn, Zürich and Mailand"]},
+ "264":{"question":"At welchem Fest tragen Menschen in Deutschland colourful Kostüme und Masken?","choices":["am Rosenmontag","am Maifeiertag","beim Oktoberfest","an Pfingsten"]},
  "266":{"question":"When beginnt die gesetzliche Nachtruhe in Deutschland?","choices":["when die Sonne untergeht","when die Nachbarn schlafen gehen","at 0 Uhr, Mitternacht","at 22 Uhr"]},
+ "271":{"question":"What ist in Deutschland ein Brauch zu Weihnachten?","choices":["bunte Eier verstecken","einen Tannenbaum schmücken","sich mit Masken and Kostümen verkleiden","Kürbisse vor die Tür stellen"]},
  "282":{"question":"Which Ehrenamt müssen deutsche Staatsbürgerinnen und Staatsbürger übernehmen, wenn sie officially asked werden?","choices":["Vereinstrainerin or Vereinstrainer","Wahlhelferin or Wahlhelfer","Bibliotheksaufsicht","Lehrerin or Lehrer"]},
  "285":{"question":"Frau Frost works fest angestellt in einem Büro. What muss sie not von ihrem Gehalt bezahlen?","choices":["Lohnsteuer","Beiträge zur Arbeitslosenversicherung","Beiträge zur Renten- and Krankenversicherung","Umsatzsteuer"]},
  "291":{"question":"Why muss man bei der Steuererklärung angeben, ob man zu einer Kirche gehört?","choices":["because es eine an Einkommen- and Lohnsteuer geknüpfte Kirchensteuer gibt","because das only für die Statistik wichtig ist","because Nichtmitglieder more Steuern zahlen","because die Kirche die Steuererklärung bearbeitet"]},
- "300":{"question":"From welchem Land kamen die first Gastarbeiterinnen und Gastarbeiter in die Bundesrepublik?","choices":["from Italien","from Spanien","from Portugal","from der Türkei"]}
+ "293":{"question":"What ist in Deutschland ein Brauch zu Ostern?","choices":["Kürbisse vor die Tür stellen","einen Tannenbaum schmücken","Eier bemalen","Raketen in die Luft schießen"]},
+ "294":{"question":"Pfingsten is ein …","choices":["christlicher Feiertag","deutscher Gedenktag","internationaler Trauertag","bayerischer Brauch"]},
+ "296":{"question":"What nennt man in Deutschland die last four Wochen vor Weihnachten?","choices":["den Buß- und Bettag","das Erntedankfest","die Adventszeit","Allerheiligen"]},
+ "300":{"question":"From welchem Land kamen die first Gastarbeiterinnen und Gastarbeiter in die Bundesrepublik?","choices":["from Italien","from Spanien","from Portugal","from der Türkei"]},
+ "FS-01":{"question":"Vor Ihnen drives ein Fahrschulwagen seit twelve Minuten exakt 29 km/h in einer Tempo-30-Zone. What tun Sie?","choices":["drängeln, damit der missing Kilometer pro Stunde nachgeholt wird","in Morsezeichen ‘DREISSIG’ hupen","Abstand halten and die amtliche Geduldprüfung bestehen","rechts over den Gehweg überholen"]},
+ "FS-02":{"question":"Sie arrive at 14:37 Uhr an einem Parkplatz mit Parkscheibenpflicht. Auf welche Zeit stellen Sie die Parkscheibe?","choices":["14:37 Uhr","14:30 Uhr","15:00 Uhr","auf ‘BIN GLEICH ZURÜCK’"]},
+ "FS-03":{"question":"An einer Kreuzung steht eine Person mit Warnweste and einem laminierten Schild ‘ICH REGLE DAS’. What verleiht ihr das Schild?","choices":["automatically polizeiliche Weisungsbefugnis","Vorfahrt für alle Fahrzeuge simultaneously","keine amtliche Befugnis allein durch Laminierung","das Recht, den Kreisverkehr eckig zu erklären"]},
+ "FS-04":{"question":"Ein Traktor overtakes einen zweiten Traktor mit ungefähr one Kilometer pro Stunde Geschwindigkeitsüberschuss. How reagieren Sie?","choices":["Abstand halten and die Landschaft vollständig kennenlernen","auf dem Standstreifen eine Gegenspur eröffnen","permanently hupen, damit beide Traktoren schneller reifen","zwischen beiden Fahrzeugen einparken"]},
+ "FS-05":{"question":"Im Haltverbot steht ein Auto mit einem handwritten Zettel ‘NUR GANZ KURZ’. Which rechtliche Wirkung hat der Zettel?","choices":["Er replaces die Warnblinkanlage","Er verlängert die zulässige Parkdauer auf eine gefühlte Stunde","Er hebt jedes Verkehrszeichen im Umkreis von 20 Metern auf","keine"]},
+ "FS-06":{"question":"Die Ampel ist seit 0,8 Sekunden rot. Hinter Ihnen hupt jemand already sehr deutsch. What müssen Sie tun?","choices":["bei Rot warten","vorsichtig rückwärts an der Hupe vorbeifahren","aussteigen and die Ampel schriftlich abmahnen","fahren, sobald das Hupen amtlich klingt"]},
+ "FS-07":{"question":"Which rule gilt, wenn auf einer Landstraße eine Kuh von rechts auf die Fahrbahn schaut: ‘rechts vor links’?","choices":["yes, aber only mit Ohrmarke","no; trotzdem Geschwindigkeit verringern and bremsbereit sein","only sonntags zwischen zwei Melkzeiten","erst nach schriftlicher Bestätigung des Bauern"]},
+ "FS-08":{"question":"Beim Einparken says Ihre Begleitperson: ‘Das passt noch.’ Who bleibt für den Abstand verantwortlich?","choices":["die Begleitperson wegen mündlicher Raumfreigabe","das geparkte Fahrzeug","die fahrende Person","die nächstgelegene Hausverwaltung"]},
+ "FS-09":{"question":"Vor einem Bahnübergang bleibt die Schranke unusually lange geschlossen. Ein Hintermann empfiehlt einen Rückwärts-Slalom. What tun Sie?","choices":["warten and den Bahnübergang nicht umfahren","dem Slalom folgen, wenn er sauber protokolliert wird","die Schranke kurz anheben and danach wieder abheften","auf den Schienen wenden"]},
+ "FS-10":{"question":"Ein Igel in Warnweste crosses langsam die Straße. Which Reaktion ist angemessen?","choices":["Geschwindigkeit verringern and nötigenfalls anhalten","hupen, weil Warnwesten zur Mitarbeit verpflichten","den Igel wegen fehlender Fahrzeugklasse anzeigen","rechts over den Grünstreifen ausweichen"]}
 };
 const quizApproaches={
- berlin:["Ah, Sie sind not from hier, oder? Dann one completely normale Prüfungsfrage.","Nein, aber wo kommen Sie ursprünglich originally her? Egal. Einbürgerungstest!","Your Gehweise ist auffällig international. Eine random Prüfungsfrage, bitte.","Oh, what a lovely Name! How do you pronounce it? Really like this? Mache ich das richtig, oder ist der Name kaputt? Anyway.","Ihre Aussprache sounds very pleasant. Almost amtlich. One kleine Frage.","Ihr Deutsch klingt already quite convincing. Let us verify that completely beiläufig.","Was für ein beautiful Name. Ist die pronunciation korrekt, oder braucht sie eine DIN-Norm? Egal.","You look exceptionally eingebürgert today. Just one random Kontrolle.","Ihre Jacke ist very ordentlich. Sogar die Knöpfe look zuständig. Apropos.","Sie leben schon so long hier and still don't know: der, die oder das Flanschdichtungsprüfprotokoll? Really?","So viele Jahre in Deutschland and beim Artikel von Zwischenfeststellungsverfügung noch unsicher? Interessant.","You have such a trustworthy Formular-Gesicht. Da kann one kleine Prüfungsfrage nicht schaden."],
- germany:["Ach, Sie sind nicht von hier, oder? Dann eine ganz gewöhnliche Prüfungsfrage.","Nein, aber wo kommen Sie ursprünglich wirklich her? Egal. Einbürgerungstest!","Ihre Gehweise ist auffällig international. Eine zufällige Prüfungsfrage, bitte.","Oh, was für ein schöner Name! Wie spricht man ihn aus? Wirklich so? Mache ich das richtig, oder ist der Name kaputt? Wie auch immer.","Sie haben eine sehr angenehme Aussprache. Fast amtlich. Eine kleine Frage.","Ihr Deutsch klingt schon recht überzeugend. Prüfen wir das ganz beiläufig.","Was für ein schöner Name. Ist die Aussprache korrekt, oder braucht sie eine DIN-Norm? Egal.","Sie sehen heute außerordentlich eingebürgert aus. Nur eine zufällige Kontrolle.","Ihre Jacke ist sehr ordentlich. Sogar die Knöpfe wirken zuständig. Apropos.","Sie leben schon so lange hier und wissen immer noch nicht: der, die oder das Flanschdichtungsprüfprotokoll? Also wirklich.","So viele Jahre in Deutschland und beim Artikel von Zwischenfeststellungsverfügung noch unsicher? Interessant.","Sie haben so ein vertrauenswürdiges Formulargesicht. Da kann eine kleine Prüfungsfrage nicht schaden."]
+ berlin:[
+  "Ah, Sie sind not from hier, oder? Dann one completely normale Prüfungsfrage.",
+  "Nein, aber wo kommen Sie ursprünglich originally her? Egal. Einbürgerungstest!",
+  "Your Gehweise ist auffällig international. Eine random Prüfungsfrage, bitte.",
+  "Oh, what a lovely Name! How do you pronounce it? Really like this? Mache ich das richtig, oder ist der Name kaputt? Anyway.",
+  "Ihre Aussprache sounds very pleasant. Almost amtlich. One kleine Frage.",
+  "Ihr Deutsch klingt already quite convincing. Let us verify that completely beiläufig.",
+  "Was für ein beautiful Name. Ist die pronunciation korrekt, oder braucht sie eine DIN-Norm? Egal.",
+  "You look exceptionally eingebürgert today. Just one random Kontrolle.",
+  "Ihre Jacke ist very ordentlich. Sogar die Knöpfe look zuständig. Apropos.",
+  "Sie leben schon so long hier and still don't know: der, die oder das Flanschdichtungsprüfprotokoll? Really?",
+  "So viele Jahre in Deutschland and beim Artikel von Zwischenfeststellungsverfügung noch unsicher? Interessant.",
+  "You have such a trustworthy Formular-Gesicht. Da kann one kleine Prüfungsfrage nicht schaden.",
+  "How lovely, dass Sie es auf Deutsch try. Mit enough Übung klingt es irgendwann vielleicht intentional.",
+  "Your Deutsch is really mutig. Die Grammar has clearly not discouraged you.",
+  "Man versteht mostly, was Sie meinen. That ist doch already something.",
+  "Sie have such einen charming internationalen Sprachrhythmus. Für proper German fehlen nur noch a few decades.",
+  "Sie use der, die and das so wonderfully creative. Sprache lebt schließlich von Überraschungen.",
+  "Very sweet, wie Sie Nebensätze attempt. Das Verb findet surely irgendwann home.",
+  "Your pronunciation is wirklich adorable. Man hört sofort, how much Mühe occurred.",
+  "Sie speak remarkably gut for someone who learned it später. Noch nicht amtlich, but touching.",
+  "Bei short Sätzen klingen Sie almost wie von hier. Kompliment.",
+  "Ihr Wortschatz is impressive; sometimes passen sogar die Wörter.",
+  "It is schön, wie hard Sie sich bemühen. Proper German kommt vielleicht mit der next Anmeldung.",
+  "Your accent gives jedem Formular personality. Für die Genehmigung brauchen wir trotzdem Deutsch.",
+  "Sie sagen ‘Eichhörnchen’ with so much confidence. Accuracy würde es only weniger charming machen.",
+  "Ihre Fälle are wonderfully flexible. Dativ, Akkusativ—why decide so früh?",
+  "Your German has sich very verbessert. Man kann now ungefähr identify, was Sie wollen.",
+  "How international! Sie setzen English genau dort ein, where normally Deutschkenntnisse wären.",
+  "Sie have eine beautiful Beziehung zur deutschen Sprache: very distant, aber respectful.",
+  "Do not worry wegen der Fehler; everybody notices them für Sie.",
+  "Your Integration ist in jedem carefully guessed Artikel sichtbar.",
+  "Sie sprechen genug Deutsch to know, dass Sie noch mehr learn sollten. Das ist practically B2."
+ ],
+ germany:[
+  "Ach, Sie sind nicht von hier, oder? Dann eine ganz gewöhnliche Prüfungsfrage.",
+  "Nein, aber wo kommen Sie ursprünglich wirklich her? Egal. Einbürgerungstest!",
+  "Ihre Gehweise ist auffällig international. Eine zufällige Prüfungsfrage, bitte.",
+  "Oh, was für ein schöner Name! Wie spricht man ihn aus? Wirklich so? Mache ich das richtig, oder ist der Name kaputt? Wie auch immer.",
+  "Sie haben eine sehr angenehme Aussprache. Fast amtlich. Eine kleine Frage.",
+  "Ihr Deutsch klingt schon recht überzeugend. Prüfen wir das ganz beiläufig.",
+  "Was für ein schöner Name. Ist die Aussprache korrekt, oder braucht sie eine DIN-Norm? Egal.",
+  "Sie sehen heute außerordentlich eingebürgert aus. Nur eine zufällige Kontrolle.",
+  "Ihre Jacke ist sehr ordentlich. Sogar die Knöpfe wirken zuständig. Apropos.",
+  "Sie leben schon so lange hier und wissen immer noch nicht: der, die oder das Flanschdichtungsprüfprotokoll? Also wirklich.",
+  "So viele Jahre in Deutschland und beim Artikel von Zwischenfeststellungsverfügung noch unsicher? Interessant.",
+  "Sie haben so ein vertrauenswürdiges Formulargesicht. Da kann eine kleine Prüfungsfrage nicht schaden.",
+  "Wie schön, dass Sie es auf Deutsch versuchen. Mit genug Übung klingt es irgendwann vielleicht absichtlich.",
+  "Ihr Deutsch ist wirklich mutig. Die Grammatik hat Sie offenbar noch nicht entmutigt.",
+  "Man versteht meistens, was Sie meinen. Das ist doch schon etwas.",
+  "Sie haben einen bezaubernd internationalen Sprachrhythmus. Für richtiges Deutsch fehlen nur noch ein paar Jahrzehnte.",
+  "Sie verwenden der, die und das herrlich kreativ. Sprache lebt schließlich von Überraschungen.",
+  "Sehr nett, wie Sie Nebensätze versuchen. Das Verb findet bestimmt irgendwann nach Hause.",
+  "Ihre Aussprache ist wirklich niedlich. Man hört sofort, wie viel Mühe dahintersteckt.",
+  "Sie sprechen bemerkenswert gut für jemanden, der es später gelernt hat. Noch nicht amtlich, aber rührend.",
+  "Bei kurzen Sätzen klingen Sie fast wie von hier. Kompliment.",
+  "Ihr Wortschatz ist beeindruckend; manchmal passen sogar die Wörter.",
+  "Es ist schön, wie sehr Sie sich bemühen. Richtiges Deutsch kommt vielleicht mit der nächsten Anmeldung.",
+  "Ihr Akzent gibt jedem Formular Persönlichkeit. Für die Genehmigung brauchen wir trotzdem Deutsch.",
+  "Sie sagen ‘Eichhörnchen’ mit so viel Selbstvertrauen. Genauigkeit würde es nur weniger charmant machen.",
+  "Ihre Fälle sind wunderbar flexibel. Dativ, Akkusativ—warum sich so früh entscheiden?",
+  "Ihr Deutsch hat sich sehr verbessert. Man kann jetzt ungefähr erkennen, was Sie wollen.",
+  "Wie international! Sie setzen Fremdwörter genau dort ein, wo sonst Deutschkenntnisse wären.",
+  "Sie haben eine schöne Beziehung zur deutschen Sprache: sehr distanziert, aber respektvoll.",
+  "Machen Sie sich wegen der Fehler keine Sorgen; die anderen bemerken sie ja für Sie.",
+  "Ihre Integration ist in jedem vorsichtig geratenen Artikel sichtbar.",
+  "Sie sprechen schon genug Deutsch, um zu wissen, dass Sie noch mehr lernen sollten. Das ist praktisch B2."
+ ]
 };
 const violationPools={
  jaywalk:["FAHRBAHNÜBERQUERUNG AUSSERHALB MARKIERTER GEOMETRIE","MISSACHTUNG AMTLICH WEISSER QUERUNGSSTREIFEN","DIAGONALE QUERUNG OHNE WINKELBESCHEINIGUNG"],
@@ -694,14 +814,14 @@ function nextCitizenshipQuestion(){
 }
 function setQuizChoicesEnabled(enabled){document.querySelectorAll("#quiz-choices button").forEach(button=>button.disabled=!enabled)}
 function startCitizenshipQuiz(n){
- stopSpeech();state.modal=true;state.quizNpc=n;state.quizQuestion=nextCitizenshipQuestion();const q=state.quizQuestion,copy=state.region==="berlin"?berlinCitizenshipQuestions[q.source]:q;state.quizCopy=copy;const remark=pick(quizApproaches[state.region]||quizApproaches.germany),prompt=remark+" "+copy.question,modal=document.getElementById("quiz-modal"),choices=document.getElementById("quiz-choices");
- document.getElementById("quiz-speaker").textContent=n.name+" · SPONTANE EINBÜRGERUNGSPRÜFUNG";document.getElementById("quiz-source").textContent="BAMF-GESAMTKATALOG 07.05.2025 · AUFGABE "+q.source;document.getElementById("quiz-prompt").textContent=prompt;choices.innerHTML="";
+ stopSpeech();state.modal=true;state.quizNpc=n;state.quizQuestion=nextCitizenshipQuestion();const q=state.quizQuestion,copy=state.region==="berlin"?berlinCitizenshipQuestions[q.source]:q,isDriving=q.type==="fahrschule";state.quizCopy=copy;const remark=pick(quizApproaches[state.region]||quizApproaches.germany),prompt=remark+" "+copy.question,modal=document.getElementById("quiz-modal"),choices=document.getElementById("quiz-choices");
+ document.getElementById("quiz-speaker").textContent=n.name+" · "+(isDriving?"SPONTANE FAHRSCHUL-QUERPRÜFUNG":"SPONTANE EINBÜRGERUNGSPRÜFUNG");document.getElementById("quiz-source").textContent=isDriving?"FIKTIVE SPIELFRAGE · "+q.source:"BAMF-GESAMTKATALOG 07.05.2025 · AUFGABE "+q.source;document.getElementById("quiz-prompt").textContent=prompt;choices.innerHTML="";
  copy.choices.forEach((choice,index)=>{const button=document.createElement("button");button.type="button";button.dataset.answer=index;button.textContent=(state.region==="berlin"?"Choice ":"")+String.fromCharCode(65+index)+" · "+choice;button.disabled=true;choices.appendChild(button)});
  const token=state.quizVoiceToken=(state.quizVoiceToken||0)+1,reveal=()=>{if(token===state.quizVoiceToken)modal.hidden=false},done=()=>{if(token===state.quizVoiceToken)setQuizChoicesEnabled(true)};speak(prompt,{voiceKey:n.name,start:reveal,done});
 }
 function answerCitizenshipQuiz(index){
  const q=state.quizQuestion,copy=state.quizCopy||q;if(!q)return;state.quizVoiceToken=(state.quizVoiceToken||0)+1;document.getElementById("quiz-modal").hidden=true;state.modal=false;state.quizQuestion=null;state.quizCopy=null;state.quizNpc=null;
- if(index===q.answer){uiTone(980,.1,"square",.04);addGermanness(1,"RICHTIG · AUFGABE "+q.source)}else{uiTone(170,.16,"sawtooth",.045);addGermanness(-1,"FALSCH · RICHTIG: "+copy.choices[q.answer]);showWorldBark("ENTTÄUSCHTER PRÜFUNGSBEAUFTRAGTER","Nein! Nein! Nein!",true,"./assets/voices/quiz-wrong-answer.mp3")}
+ if(index===q.answer){uiTone(980,.1,"square",.04);addGermanness(1,"RICHTIG · "+(q.type==="fahrschule"?q.source:"AUFGABE "+q.source))}else{uiTone(170,.16,"sawtooth",.045);addGermanness(-1,"FALSCH · RICHTIG: "+copy.choices[q.answer]);showWorldBark("ENTTÄUSCHTER PRÜFUNGSBEAUFTRAGTER","Nein! Nein! Nein!",true,"./assets/voices/quiz-wrong-answer.mp3")}
 }
 document.getElementById("quiz-choices").addEventListener("click",event=>{const button=event.target.closest("button[data-answer]");if(button&&!button.disabled)answerCitizenshipQuiz(Number(button.dataset.answer))});
 function updateQuizEncounters(dt){
