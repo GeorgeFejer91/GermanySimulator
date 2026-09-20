@@ -426,7 +426,9 @@ function renderWurstBadges(){
 function announceWurst(def){const box=document.getElementById("wurst-alert"),image=document.getElementById("wurst-alert-image");image.src=def.image;image.alt=def.label;document.getElementById("wurst-alert-title").textContent=def.label;document.getElementById("wurst-alert-history").textContent=def.history;document.getElementById("wurst-alert-credit").textContent="PHOTO: "+def.photo;box.hidden=false;box.classList.remove("show");void box.offsetWidth;box.classList.add("show");clearTimeout(announceWurst.t);announceWurst.t=setTimeout(()=>{box.hidden=true;box.classList.remove("show")},6200)}
 function ensureAudio(){if(!audio)audio=new (window.AudioContext||window.webkitAudioContext)();audio.resume();return audio}
 function uiTone(freq=440,dur=.08,type="square",gain=.04){const a=ensureAudio(),o=a.createOscillator(),g=a.createGain(),t=a.currentTime;o.type=type;o.frequency.value=freq;g.gain.setValueAtTime(gain,t);g.gain.exponentialRampToValueAtTime(.0001,t+dur);o.connect(g).connect(a.destination);o.start(t);o.stop(t+dur+.02)}
-function playFaxFeed(){const a=ensureAudio(),t=a.currentTime,out=a.createGain();out.gain.setValueAtTime(.0001,t);out.gain.linearRampToValueAtTime(.22,t+.025);out.gain.setValueAtTime(.22,t+.88);out.gain.exponentialRampToValueAtTime(.0001,t+1.08);out.connect(a.destination);const motor=a.createOscillator(),motorGain=a.createGain();motor.type="sawtooth";motor.frequency.setValueAtTime(82,t);motor.frequency.linearRampToValueAtTime(57,t+1.02);motorGain.gain.setValueAtTime(.05,t);motorGain.gain.exponentialRampToValueAtTime(.0001,t+1.05);motor.connect(motorGain).connect(out);motor.start(t);motor.stop(t+1.08);for(let i=0;i<9;i++){const when=t+.06+i*.105,o=a.createOscillator(),g=a.createGain();o.type=i%3?"square":"sine";o.frequency.setValueAtTime(1180+(i%4)*170,when);o.frequency.linearRampToValueAtTime(820+(i%3)*120,when+.055);g.gain.setValueAtTime(.055,when);g.gain.exponentialRampToValueAtTime(.0001,when+.07);o.connect(g).connect(out);o.start(when);o.stop(when+.075)}const buffer=a.createBuffer(1,Math.floor(a.sampleRate*1.06),a.sampleRate),data=buffer.getChannelData(0);for(let i=0;i<data.length;i++)data[i]=(Math.random()*2-1)*(i%173<9?1:.24);const paper=a.createBufferSource(),filter=a.createBiquadFilter(),paperGain=a.createGain();paper.buffer=buffer;filter.type="bandpass";filter.frequency.value=720;filter.Q.value=.75;paperGain.gain.setValueAtTime(.055,t);paperGain.gain.exponentialRampToValueAtTime(.0001,t+1.06);paper.connect(filter).connect(paperGain).connect(out);paper.start(t);paper.stop(t+1.07)}
+const FAX_FEED_AUDIO="./assets/fax-machine-paper-feed.mp3";let faxFeedSource=null;
+function playSynthFaxFeed(){const a=ensureAudio(),t=a.currentTime,out=a.createGain();out.gain.setValueAtTime(.0001,t);out.gain.linearRampToValueAtTime(.22,t+.025);out.gain.setValueAtTime(.22,t+.88);out.gain.exponentialRampToValueAtTime(.0001,t+1.08);out.connect(a.destination);const motor=a.createOscillator(),motorGain=a.createGain();motor.type="sawtooth";motor.frequency.setValueAtTime(82,t);motor.frequency.linearRampToValueAtTime(57,t+1.02);motorGain.gain.setValueAtTime(.05,t);motorGain.gain.exponentialRampToValueAtTime(.0001,t+1.05);motor.connect(motorGain).connect(out);motor.start(t);motor.stop(t+1.08);for(let i=0;i<9;i++){const when=t+.06+i*.105,o=a.createOscillator(),g=a.createGain();o.type=i%3?"square":"sine";o.frequency.setValueAtTime(1180+(i%4)*170,when);o.frequency.linearRampToValueAtTime(820+(i%3)*120,when+.055);g.gain.setValueAtTime(.055,when);g.gain.exponentialRampToValueAtTime(.0001,when+.07);o.connect(g).connect(out);o.start(when);o.stop(when+.075)}const buffer=a.createBuffer(1,Math.floor(a.sampleRate*1.06),a.sampleRate),data=buffer.getChannelData(0);for(let i=0;i<data.length;i++)data[i]=(Math.random()*2-1)*(i%173<9?1:.24);const paper=a.createBufferSource(),filter=a.createBiquadFilter(),paperGain=a.createGain();paper.buffer=buffer;filter.type="bandpass";filter.frequency.value=720;filter.Q.value=.75;paperGain.gain.setValueAtTime(.055,t);paperGain.gain.exponentialRampToValueAtTime(.0001,t+1.06);paper.connect(filter).connect(paperGain).connect(out);paper.start(t);paper.stop(t+1.07)}
+function playFaxFeed(){prepareRecording(FAX_FEED_AUDIO).then(buffer=>{if(faxFeedSource)try{faxFeedSource.stop()}catch{}const a=ensureAudio(),source=a.createBufferSource(),gain=a.createGain();faxFeedSource=source;source.buffer=buffer;gain.gain.value=.55;source.connect(gain).connect(a.destination);source.onended=()=>{if(faxFeedSource===source)faxFeedSource=null};source.start()}).catch(playSynthFaxFeed)}
 function playSiren(){const a=ensureAudio(),t=a.currentTime;for(let i=0;i<6;i++){const o=a.createOscillator(),g=a.createGain(),st=t+i*.18;o.type="sawtooth";o.frequency.setValueAtTime(i%2?920:620,st);o.frequency.linearRampToValueAtTime(i%2?620:920,st+.17);g.gain.setValueAtTime(.0001,st);g.gain.linearRampToValueAtTime(.065,st+.015);g.gain.exponentialRampToValueAtTime(.0001,st+.18);o.connect(g).connect(a.destination);o.start(st);o.stop(st+.19)}}
 const SPEECH_GAP_MS=250,speechQueue=[],recordingPromises=new Map();let speechActive=false,speechPauseTimer=null,speechGeneration=0,recordedSpeechSource=null;
 function finishSpeechItem(done,generation){if(generation!==speechGeneration)return;if(done)done();speechPauseTimer=setTimeout(()=>{speechActive=false;playQueuedSpeech()},SPEECH_GAP_MS)}
@@ -440,7 +442,7 @@ function prepareMerkelRecording(){return prepareRecording("./assets/merkel-wir-s
 function stopRecordedSpeech(){if(!recordedSpeechSource)return;try{recordedSpeechSource.stop()}catch{}recordedSpeechSource=null}
 function speakMerkelLine(text,{urgent=false,start,done}={}){if(text!==MERKEL_AUDIO_LINE){speak(text,{urgent,voiceKey:"ANGELA MERKEL",start,done});return}speakRecorded(text,"./assets/merkel-wir-schaffen-das.mp3",{urgent,voiceKey:"ANGELA MERKEL",start,done})}
 function hideWorldBark(){clearTimeout(showWorldBark.t);const box=document.getElementById("police-bark");box.hidden=true;box.classList.remove("law-quote")}
-function stopSpeech(){speechGeneration++;speechQueue.length=0;speechActive=false;clearTimeout(speechPauseTimer);if("speechSynthesis" in window)speechSynthesis.cancel();stopRecordedSpeech();hideWorldBark()}
+function stopSpeech(completeHumorScold=false){speechGeneration++;speechQueue.length=0;speechActive=false;clearTimeout(speechPauseTimer);if("speechSynthesis" in window)speechSynthesis.cancel();stopRecordedSpeech();hideWorldBark();cancelHumorScold(completeHumorScold)}
 function violationAlert(msg,level){const alert=document.getElementById("violation-alert"),app=document.getElementById("app");document.getElementById("violation-law").textContent=lawFor(msg);document.getElementById("violation-title").textContent=state.lang==="en"?"RULE VIOLATION":"ORDNUNGSWIDRIGKEIT";document.getElementById("violation-text").textContent=state.lang==="en"?localize(msg):msg;document.getElementById("violation-stars").textContent="★".repeat(level)+"☆".repeat(Math.max(0,5-level));alert.hidden=false;app.classList.remove("enforcement");void app.offsetWidth;app.classList.add("enforcement");clearTimeout(violationAlert.t);violationAlert.t=setTimeout(()=>{alert.hidden=true;app.classList.remove("enforcement")},2200);playSiren()}
 function showWorldBark(speaker,msg,urgent=true,recording="",placement=""){const box=document.getElementById("police-bark"),speakerEl=document.getElementById("bark-speaker"),textEl=document.getElementById("police-bark-text"),start=()=>{speakerEl.textContent=speaker;textEl.textContent=msg;box.classList.toggle("law-quote",placement==="law");box.hidden=false;uiTone(urgent?1280:880,.06,"square",.035)},done=()=>{if(speakerEl.textContent===speaker&&textEl.textContent===msg){box.hidden=true;box.classList.remove("law-quote")}};if(!state.voiceOn){start();clearTimeout(showWorldBark.t);showWorldBark.t=setTimeout(done,placement==="law"?8500:3200);return}const options={urgent,voiceKey:speaker,start,done};if(recording)speakRecorded(msg,recording,options);else if(speaker.startsWith("ANGELA MERKEL"))speakMerkelLine(msg,options);else speak(msg,{...options,masculine:speaker.startsWith("FRIEDRICH MERZ")})}
 function policeBark(force=false){const now=performance.now();if(!force&&now-(policeBark.last||0)<2300)return;policeBark.last=now;showWorldBark("POLIZEI",pick(policeBarks[state.region]||policeBarks.germany),true)}
@@ -487,6 +489,7 @@ function addGermanness(amount,reason){
  const before=state.germanness;state.germanness=clamp(state.germanness+amount,0,GERMANNESS_MAX);const sign=amount>0?"+":"";
  if(state.germanness===before){toast(reason+" · GERMANNESS "+state.germanness+"/"+GERMANNESS_MAX);return}
  particles.push({x:player.x,y:player.y,t:1.25,text:sign+amount+" GERMANNESS"});
+ if(amount>0)flashGermannessGain();
  const reaction=amount>0?germannessVoice.gain:germannessVoice.loss;showWorldBark("SIE · INNERER KOMMENTAR",reaction.text,amount<0,reaction.recording);
  if(before<LAW_POWER_THRESHOLD&&state.germanness>=LAW_POWER_THRESHOLD){
   state.lawUnlocked=true;queueNationalAnthem();uiTone(740,.12,"square",.04);setTimeout(()=>uiTone(988,.18,"square",.035),120);
@@ -495,6 +498,7 @@ function addGermanness(amount,reason){
  }else toast(reason+" · GERMANNESS "+sign+amount);
  updateHud();
 }
+function flashGermannessGain(){const app=document.getElementById("app");app.classList.remove("germanness-gain");void app.offsetWidth;app.classList.add("germanness-gain");clearTimeout(flashGermannessGain.t);flashGermannessGain.t=setTimeout(()=>app.classList.remove("germanness-gain"),760)}
 function updateGermannessEvents(dt,mag){
  state.ampelClock+=dt;state.lawCooldown=Math.max(0,state.lawCooldown-dt);
  for(const light of trafficLights)light.green=Math.floor((state.ampelClock+light.phaseOffset)/6)%2===1;
@@ -955,8 +959,8 @@ const erikaB=[
  [74,1.5],[72,.5],[71,1],[null,3]
 ];
 const MUSIC=[
- {title:"Erika",bpm:120,root:55,notes:[...erikaA,...erikaA,...erikaB,...erikaA]},
- {title:"Deutschlandlied · Nationalhymne",bpm:100,root:53,notes:[
+ {title:"Erika",weight:6,bpm:120,root:55,notes:[...erikaA,...erikaA,...erikaB,...erikaA]},
+ {title:"Deutschlandlied · Nationalhymne",weight:8,bpm:100,root:53,notes:[
   [65,1.5],[67,.5],[69,1],[67,1],[70,1],[69,1],[67,.5],[64,.5],
   [65,1],[74,1],[72,1],[70,1],[69,1],[67,1],[69,.5],[65,.5],
   [72,2],[65,1.5],[67,.5],[69,1],[67,1],[70,1],[69,1],[67,.5],
@@ -970,7 +974,7 @@ const MUSIC=[
   [72,.5],[70,.5],[69,1],[67,1.5],[69,.25],[70,.25],[72,.5],[74,.5],
   [70,.5],[67,.5],[65,1],[69,.5],[67,.5],[65,2]
  ]},
- {title:"Badnerlied · Baden-Württemberg",state:"Baden-Württemberg",bpm:112,root:55,notes:[
+ {title:"Badnerlied · Baden-Württemberg",state:"Baden-Württemberg",weight:5,bpm:112,root:55,notes:[
   [62,1],[67,1],[67,1],[62,1],[62,1],[59,1],[62,.5],[59,.5],
   [55,1],[67,1],[69,1.5],[69,.5],[69,1],[69,1],[71,2],[null,1],
   [71,1],[64,1.5],[64,.5],[69,1.5],[67,.5],[66,1],[67,1],[69,1],
@@ -982,7 +986,7 @@ const MUSIC=[
   [69,.75],[71,.25],[74,1],[71,.5],[67,.5],[69,1],[71,.5],[69,.5],
   [67,2],[null,1],[62,1],[67,1],[67,.75],[67,.25],[67,1],[null,1]
  ]},
- {title:"Württembergerlied · Württemberg",region:"Württemberg",bpm:114,root:55,notes:[
+ {title:"Württembergerlied · Württemberg",region:"Württemberg",weight:5,bpm:114,root:55,notes:[
   [62,.5],[62,.5],[67,1],[67,1],[66,1],[66,1],[59,1],[62,.5],
   [59,.5],[55,1],[67,.5],[67,.5],[69,1],[71,1],[69,1],[71,1],
   [69,.5],[74,.5],[73,.5],[71,.5],[69,1],[67,.5],[67,.5],[66,1.5],
@@ -1050,7 +1054,7 @@ const MUSIC=[
   [72,1],[70,2],[69,1],[69,1],[69,1],[69,1],[70,1],[69,1],
   [67,1],[67,1],[65,1]
  ]},
- {title:"Glück auf, der Steiger kommt · Saarland",state:"Saarland",bpm:120,root:53,notes:[
+ {title:"Glück auf, der Steiger kommt · Saarland",state:"Saarland",weight:3,bpm:120,root:53,notes:[
   [65,2],[64,1],[67,1],[65,2.75],[null,1.25],[69,2],[67,1],[70,1],
   [69,2],[null,1],[65,.5],[67,.5],[69,1],[69,1],[69,1],[67,.5],
   [69,.5],[70,1],[67,.75],[67,.25],[67,1],[67,.5],[69,.5],[70,1],
@@ -1058,7 +1062,7 @@ const MUSIC=[
   [60,1],[65,2],[67,2],[69,1],[74,1],[72,1],[70,1],[72,2],
   [70,1],[72,1],[69,2]
  ]},
- {title:"Bayernhymne · Bayern",state:"Bayern",bpm:94,root:54,notes:[
+ {title:"Bayernhymne · Bayern",state:"Bayern",weight:4,bpm:94,root:54,notes:[
   [66,.75],[70,.75],[73,1.83],[71,.75],[70,.75],[68,.75],[66,.75],[70,1],
   [66,1],[61,1.83],[63,.75],[61,.5],[59,.5],[58,1.75],[null,.25],[61,.75],
   [66,2.08],[65,.5],[68,1],[71,1.75],[70,.75],[68,.75],[66,.75],[65,1.83],
@@ -1106,7 +1110,7 @@ const MUSIC=[
   [71,.5],[67,.75],[66,.25],[67,.5],[72,.5],[71,.75],[69,.25],[71,.5],
   [63,.25],[75,.25],[71,.25],[75,.25],[71,1],[null,.5],[71,.5]
  ]},
- {title:"Stadt Hamburg an der Elbe Auen · Hamburg",state:"Hamburg",bpm:100,root:48,notes:[
+ {title:"Stadt Hamburg an der Elbe Auen · Hamburg",state:"Hamburg",weight:3,bpm:100,root:48,notes:[
   [48,1],[53,5],[55,.5],[57,1],[55,.5],[53,.5],[52,.5],[53,2],[48,1],[53,.5],
   [57,.5],[60,1.5],[58,.5],[57,1],[55,1],[57,2],[53,1],[57,1],[60,2],[55,2],
   [57,2],[null,.67],[57,.5],[55,.5],[53,.5],[52,.5],[55,1],[60,.5],[64,1],
@@ -1114,7 +1118,7 @@ const MUSIC=[
   [67,.25],[72,1],[70,1],[69,1.5],[65,2.5],[74,1.5],[70,3.5],[69,.75],
   [67,.25],[72,1],[65,.5],[67,.5],[69,2],[67,2],[65,2.75]
  ]},
- {title:"Hessenlied · Hessen",state:"Hessen",bpm:96,root:53,notes:[
+ {title:"Hessenlied · Hessen",state:"Hessen",weight:3,bpm:96,root:53,notes:[
   [60,.5],[65,1.5],[69,.25],[72,1.83],[74,.75],[69,.75],[74,.25],[72,.75],[null,.67],
   [77,.5],[76,.75],[74,1],[72,.75],[70,.5],[74,.5],[72,1.75],[null,.25],[69,.75],
   [null,.67],[60,.5],[65,1.5],[69,.25],[72,1.75],[74,.75],[69,.75],[74,.25],
@@ -1140,7 +1144,7 @@ const MUSIC=[
   [67,1],[72,1],[74,1],[67,1],[76,2.5],[74,.5],[72,.5],[69,.5],[67,1],
   [72,.5],[76,.5],[77,1],[71,1],[72,1]
  ]},
- {title:"Westfalenlied · Nordrhein-Westfalen",state:"Nordrhein-Westfalen",bpm:104,root:53,notes:[
+ {title:"Westfalenlied · Nordrhein-Westfalen",state:"Nordrhein-Westfalen",weight:3,bpm:104,root:53,notes:[
   [62,.5],[63,.5],[64,.5],[65,1.5],[67,.5],[69,.5],[70,.5],[67,1.5],[69,.5],
   [70,.5],[72,.5],[74,.5],[70,.5],[65,1],[63,.5],[57,.5],[58,1],[null,.5],
   [62,.5],[63,.75],[64,.25],[65,1.5],[67,.5],[69,.75],[70,.25],[69,1],[67,1],
@@ -1177,7 +1181,7 @@ const MUSIC=[
   [67,.5],[64,2],[66,1],[69,1.5],[71,.5],[69,.5],[67,.5],[64,2],[66,1],
   [69,1],[71,.5],[67,.5],[66,.5],[69,.5],[66,1],[64,1],[62,1]
  ]},
- {title:"Schleswig-Holstein meerumschlungen",state:"Schleswig-Holstein",bpm:96,root:51,notes:[
+ {title:"Schleswig-Holstein meerumschlungen",state:"Schleswig-Holstein",weight:4,bpm:96,root:51,notes:[
   [63,.75],[67,.25],[68,2],[72,.5],[70,.5],[68,.5],[70,.5],[72,1.5],[70,.5],
   [68,1],[70,.5],[72,.5],[73,1],[72,.5],[70,.5],[68,1],[70,1],[72,2],
   [70,1.5],[68,1],[67,1.5],[72,1.5],[70,1],[68,1.5],[72,2],[70,1],
@@ -1186,7 +1190,7 @@ const MUSIC=[
   [70,2],[72,2],[68,1],[63,1],[70,1],[63,1],[72,1],[73,.5],[72,.5],
   [70,2],[72,2],[77,3],[73,.5],[70,.5],[75,2],[67,2],[68,2]
  ]},
- {title:"Thüringen, holdes Land",state:"Thüringen",bpm:104,root:52,notes:[
+ {title:"Thüringen, holdes Land",state:"Thüringen",weight:3,bpm:104,root:52,notes:[
   [71,1],[64,1],[66,1],[68,1.5],[69,.5],[66,1],[73,1],[71,1],[66,1],
   [69,1.5],[68,1.5],[66,1],[68,1],[70,1],[71,1.5],[66,1.5],[75,.5],
   [73,.5],[71,1],[70,1],[71,2],[null,1],[69,1],[68,.5],[66,.5],[64,.5],
@@ -1206,23 +1210,18 @@ const MUSIC=[
   [69,.5],[67,.5],[66,.5],[64,.5],[62,1.5]
  ]}
 ];
-let audio=null,musicTimer=null,musicBus=null,musicOn=true,musicDucked=false,musicBag=[],currentTune=-1,forcedTune=-1;
-const MUSIC_LEVEL=.72,MUSIC_READOUT_LEVEL=.28;
+let audio=null,musicTimer=null,musicBus=null,musicOn=true,musicDucked=false,currentTune=-1,forcedTune=-1;
+const MUSIC_LEVEL=.46,MUSIC_READOUT_LEVEL=.14;
 function setMusicDucked(ducked){musicDucked=ducked;if(!audio||!musicBus)return;const t=audio.currentTime,target=ducked?MUSIC_READOUT_LEVEL:MUSIC_LEVEL;musicBus.gain.cancelScheduledValues(t);musicBus.gain.setTargetAtTime(target,t,.045)}
-function createMusicBus(){const bus=audio.createGain();bus.gain.value=musicDucked?MUSIC_READOUT_LEVEL:MUSIC_LEVEL;bus.connect(audio.destination);return bus}
+function createMusicBus(){const bus=audio.createGain(),filter=audio.createBiquadFilter();bus.gain.value=musicDucked?MUSIC_READOUT_LEVEL:MUSIC_LEVEL;filter.type="lowpass";filter.frequency.value=1600;filter.Q.value=.45;bus.connect(filter).connect(audio.destination);return bus}
 const midiFreq=note=>440*2**((note-69)/12);
 function nextTune(){
  if(forcedTune>=0){currentTune=forcedTune;forcedTune=-1;return MUSIC[currentTune]}
- if(!musicBag.length){
-   musicBag=MUSIC.map((_,i)=>i);
-   for(let i=musicBag.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[musicBag[i],musicBag[j]]=[musicBag[j],musicBag[i]]}
-   if(musicBag.at(-1)===currentTune&&musicBag.length>1)[musicBag[0],musicBag[musicBag.length-1]]=[musicBag[musicBag.length-1],musicBag[0]];
- }
- currentTune=musicBag.pop();return MUSIC[currentTune]
+ const choices=[];MUSIC.forEach((tune,index)=>{if(index!==currentTune)for(let i=0;i<(tune.weight||1);i++)choices.push(index)});currentTune=choices[Math.floor(Math.random()*choices.length)];return MUSIC[currentTune]
 }
 function queueNationalAnthem(){forcedTune=1;if(!musicOn||!audio)return;clearTimeout(musicTimer);musicBus?.disconnect();musicBus=createMusicBus();scheduleTheme()}
-function chip(a,freq,when,dur,type="square",gain=.045){const o=a.createOscillator(),g=a.createGain();o.type=type;o.frequency.value=freq;g.gain.setValueAtTime(.0001,when);g.gain.linearRampToValueAtTime(gain,when+.01);g.gain.setValueAtTime(gain,when+dur*.75);g.gain.exponentialRampToValueAtTime(.0001,when+dur);o.connect(g).connect(musicBus);o.start(when);o.stop(when+dur+.02)}
-function stamp(a,when,gain=.025){const o=a.createOscillator(),g=a.createGain();o.type="square";o.frequency.setValueAtTime(95,when);o.frequency.exponentialRampToValueAtTime(55,when+.055);g.gain.setValueAtTime(gain,when);g.gain.exponentialRampToValueAtTime(.0001,when+.07);o.connect(g).connect(musicBus);o.start(when);o.stop(when+.08)}
+function chip(a,freq,when,dur,type="triangle",gain=.028){const o=a.createOscillator(),g=a.createGain();o.type=type;o.frequency.value=freq;g.gain.setValueAtTime(.0001,when);g.gain.linearRampToValueAtTime(gain,when+.018);g.gain.setValueAtTime(gain,when+dur*.68);g.gain.exponentialRampToValueAtTime(.0001,when+dur);o.connect(g).connect(musicBus);o.start(when);o.stop(when+dur+.02)}
+function stamp(a,when,gain=.014){const o=a.createOscillator(),g=a.createGain();o.type="triangle";o.frequency.setValueAtTime(78,when);o.frequency.exponentialRampToValueAtTime(48,when+.065);g.gain.setValueAtTime(gain,when);g.gain.exponentialRampToValueAtTime(.0001,when+.08);o.connect(g).connect(musicBus);o.start(when);o.stop(when+.09)}
 function scheduleTheme(){
  if(!audio||!musicOn)return;
  const tune=nextTune(),quarter=60/tune.bpm,start=audio.currentTime+.05,bassCycle=[tune.root,tune.root+7,tune.root+12,tune.root+7];let t=start,beatIndex=0;
@@ -1230,13 +1229,13 @@ function scheduleTheme(){
  for(const [note,quarters] of tune.notes){
    const dur=quarters*quarter;
    if(note!==null){
-     chip(audio,midiFreq(note),t,Math.max(.07,dur*.88),"square",.031);
+     chip(audio,midiFreq(note-12),t,Math.max(.07,dur*.9),"triangle",.028);
      const bass=bassCycle[Math.floor(beatIndex/2)%bassCycle.length];
-     chip(audio,midiFreq(bass),t,Math.max(.06,dur*.92),"triangle",.017);
+     chip(audio,midiFreq(bass-12),t,Math.max(.06,dur*.94),"sine",.016);
    }else{
-     for(let beat=0;beat<quarters;beat++)stamp(audio,t+beat*quarter,beat%2?.018:.021);
+     for(let beat=0;beat<quarters;beat++)stamp(audio,t+beat*quarter,beat%2?.009:.011);
    }
-   if(note!==null&&Math.floor(beatIndex)%2===0)stamp(audio,t,.006);
+   if(note!==null&&Math.floor(beatIndex)%2===0)stamp(audio,t,.0035);
    t+=dur;beatIndex+=quarters;
  }
  clearTimeout(musicTimer);
@@ -1256,7 +1255,7 @@ const humorModal=document.getElementById("humor-modal"),humorForm=document.getEl
 let humorPageIndex=0,humorReadComplete=false,humorActionStep=0,humorFormLanguage="de",humorSubmitting=false;
 function activeHumorPage(){return(humorFormLanguage==="en"?humorPagesEnglish:humorPages)[humorPageIndex]}
 function humorFieldsValid(){return humorForm.checkValidity()&&[...humorForm.querySelectorAll(".humor-signature-canvas")].every(canvas=>canvas.dataset.signed==="true")}
-function updateHumorContinue(){const english=humorFormLanguage==="en",page=activeHumorPage(),readingComplete=humorPageIndex>0||humorReadComplete,actionsComplete=humorActionStep>=page.buttons.length,fieldsComplete=humorFieldsValid(),ready=readingComplete&&actionsComplete&&fieldsComplete;humorNext.disabled=!ready;humorNext.textContent=!readingComplete?(english?"WAIT FOR THE READING":"VORLESUNG ABWARTEN"):!fieldsComplete?(english?"COMPLETE ALL FIELDS":"ALLE FELDER AUSFÜLLEN"):!actionsComplete?(english?"PRESS ALL OFFICIAL BUTTONS":"ALLE AMTSKNÖPFE DRÜCKEN"):humorPageIndex===humorPages.length-1?(english?"CERTIFY HUMOR AWARENESS":"HUMORKENNTNIS BESCHEINIGEN"):(english?"NEXT SHEET":"NÄCHSTES BLATT");document.getElementById("humor-error").textContent=ready?"":english?"CONTINUATION ONLY AFTER THE REQUIRED PROCESSING":"FORTSETZUNG ERST NACH DER ERFORDERLICHEN BEARBEITUNG"}
+function updateHumorContinue(){const english=humorFormLanguage==="en",page=activeHumorPage(),actionsComplete=humorActionStep>=page.buttons.length,fieldsComplete=humorFieldsValid(),ready=actionsComplete&&fieldsComplete;humorNext.disabled=!ready;humorNext.textContent=!fieldsComplete?(english?"COMPLETE ALL FIELDS":"ALLE FELDER AUSFÜLLEN"):!actionsComplete?(english?"PRESS ALL OFFICIAL BUTTONS":"ALLE AMTSKNÖPFE DRÜCKEN"):humorPageIndex===humorPages.length-1?(english?"CERTIFY HUMOR AWARENESS":"HUMORKENNTNIS BESCHEINIGEN"):(english?"NEXT SHEET":"NÄCHSTES BLATT");document.getElementById("humor-error").textContent=ready?"":english?"CONTINUATION ONLY AFTER THE REQUIRED PROCESSING":"FORTSETZUNG ERST NACH DER ERFORDERLICHEN BEARBEITUNG"}
 function createHumorSignature(labelText,english){
  const label=document.createElement("div"),heading=document.createElement("span"),pad=document.createElement("span"),canvas=document.createElement("canvas"),clear=document.createElement("button"),context=canvas.getContext("2d");
  label.className="humor-signature";heading.textContent=labelText;pad.className="humor-signature-pad";canvas.className="humor-signature-canvas";canvas.width=900;canvas.height=140;canvas.dataset.signed="false";canvas.setAttribute("aria-label",labelText);canvas.setAttribute("aria-invalid","true");clear.className="humor-signature-clear";clear.type="button";clear.textContent=english?"CLEAR SIGNATURE":"UNTERSCHRIFT LÖSCHEN";
@@ -1275,8 +1274,9 @@ function readHumorPage(){stopSpeech();setMusicDucked(true);const english=humorFo
 function renderHumorPage(){stopSpeech();const english=humorFormLanguage==="en",page=activeHumorPage();humorActionStep=0;document.getElementById("humor-authority-name").textContent=english?"CENTRAL OFFICE FOR HUMOR MATTERS":"ZENTRALE PRÜFSTELLE FÜR HUMORANGELEGENHEITEN";document.getElementById("humor-authority-office").textContent=english?"Division H · Forms and Non-Laughter":"Referat H · Formblattwesen und Nichtlachen";document.getElementById("humor-file-label").textContent=english?"FILE REFERENCE":"AKTENZEICHEN";document.getElementById("humor-status-label").textContent=english?"PROCESSING STATUS":"BEARBEITUNGSSTAND";document.getElementById("humor-file-status").textContent=english?"PROVISIONAL":"VORLÄUFIG";document.querySelector("#humor-modal .paper-head span:first-child").textContent=english?"FORM HUM-01/DE · GENERAL HUMOR COMPETENCE":"FORMULAR HUM-01/DE · ALLGEMEINE HUMORKOMPETENZ";document.getElementById("humor-page-label").textContent=(english?"SHEET ":"BLATT ")+(humorPageIndex+1)+(english?" OF ":" VON ")+humorPages.length;document.getElementById("humor-title").textContent=page.title;document.getElementById("humor-readout").textContent=page.text;renderHumorRequirements(page);humorForm.scrollTop=0;updateHumorContinue();readHumorPage()}
 function finishHumorCertification(){stopSpeech();humorModal.hidden=true;state.started=true;state.modal=false;const lines=state.region==="berlin"?["Welcome in Berlin. Hier reden wir erstmal practical Denglisch.","Your mission ist simple: become German citizen in drei Behördentagen.","Aber careful: more than three seconds auf grass or street gibt einen Polizeistern. Use the Zebrastreifen.","Berlin liegt hinter der Brandmauer. You can cross sie freely."]:["Willkommen in Deutschland.","Ihr Ziel: Werden Sie innerhalb von drei völlig fiktiven Behördentagen deutscher Staatsbürger.","Dazu benötigen Sie vor allem Formulare. Sehr viele Formulare.","Wer länger als drei Sekunden auf Rasen oder Straße bleibt, erhält einen Polizeistern. Benutzen Sie den Zebrastreifen.","Berlin liegt hinter der Brandmauer. Sie ist frei überquerbar."];openDialogue(state.region==="berlin"?"WELCOME TO BERLIN":"WILLKOMMEN IN DEUTSCHLAND",lines,"DE",()=>toast("ERSTER VORGANG · BÜRGERAMT"));updateHud()}
 function startGame(){ensureAudio();startMusic();prepareMerkelRecording().catch(()=>{});state.region=regionOf(player.y);state.modal=true;document.getElementById("intro").classList.add("hidden");humorModal.hidden=false;humorPageIndex=0;renderHumorPage()}
-function submitHumorPage(){if(humorSubmitting)return;humorSubmitting=true;stopSpeech();setMusicDucked(false);humorNext.disabled=true;humorAudio.className="humor-audio processing";document.getElementById("humor-audio-status").textContent=humorFormLanguage==="en"?"SHEET IS BEING TRANSMITTED BY FAX":"BLATT WIRD PER FAX EINGEZOGEN";humorModal.classList.add("fax-processing");humorForm.classList.add("fax-feeding");playFaxFeed();setTimeout(()=>{humorForm.classList.remove("fax-feeding");humorModal.classList.remove("fax-processing");humorSubmitting=false;if(++humorPageIndex<humorPages.length)renderHumorPage();else finishHumorCertification()},1120)}
-humorForm.addEventListener("input",updateHumorContinue);humorForm.onsubmit=event=>{event.preventDefault();if(humorSubmitting)return;if((humorPageIndex===0&&!humorReadComplete)||humorActionStep<activeHumorPage().buttons.length||!humorFieldsValid()){humorForm.reportValidity();updateHumorContinue();return}submitHumorPage()};
+function beginHumorFax(){humorAudio.className="humor-audio processing";document.getElementById("humor-audio-status").textContent=humorFormLanguage==="en"?"SHEET IS BEING TRANSMITTED BY FAX":"BLATT WIRD PER FAX EINGEZOGEN";humorModal.classList.add("fax-processing");humorForm.classList.add("fax-feeding");playFaxFeed();setTimeout(()=>{humorForm.classList.remove("fax-feeding");humorModal.classList.remove("fax-processing");humorSubmitting=false;if(++humorPageIndex<humorPages.length)renderHumorPage();else finishHumorCertification()},1120)}
+function submitHumorPage(){if(humorSubmitting)return;const premature=!humorReadComplete,english=humorFormLanguage==="en";humorSubmitting=true;stopSpeech();setMusicDucked(false);humorNext.disabled=true;if(!premature){beginHumorFax();return}const scold=english?"Ey, did you even read the fine print, Dummkopf?":"Ey, haben Sie überhaupt das Kleingedruckte gelesen, Dummkopf?";humorAudio.className="humor-audio scolding";speak(scold,{urgent:true,voiceKey:"HUM-01/DE FINE PRINT OFFICE",lang:english?"en-US":"de-DE",start:()=>document.getElementById("humor-audio-status").textContent=scold,done:beginHumorFax})}
+humorForm.addEventListener("input",updateHumorContinue);humorForm.onsubmit=event=>{event.preventDefault();if(humorSubmitting)return;if(humorActionStep<activeHumorPage().buttons.length||!humorFieldsValid()){humorForm.reportValidity();updateHumorContinue();return}submitHumorPage()};
 const languageOptions=document.getElementById("language-options");
 function sizeLanguageOptions(){const count=languageOptions.children.length;languageOptions.style.setProperty("--lang-font-size",32/count+"px");languageOptions.style.setProperty("--lang-padding",24/count+"px")}
 function addLanguageOption(){const oldRects=new Map([...languageOptions.children].map(btn=>[btn,btn.getBoundingClientRect()])),btn=document.createElement("button");btn.className="lang";btn.dataset.lang="de";btn.type="button";btn.textContent="Deutsch";btn.setAttribute("aria-label","Deutsch "+(languageOptions.children.length+1));btn.setAttribute("aria-pressed","false");languageOptions.append(btn);sizeLanguageOptions();if(matchMedia("(prefers-reduced-motion: reduce)").matches)return;for(const old of languageOptions.children){if(old===btn)continue;const before=oldRects.get(old),after=old.getBoundingClientRect();old.animate([{transform:`translateX(${before.left-after.left}px) scaleX(${before.width/after.width})`,transformOrigin:"left center"},{transform:"none",transformOrigin:"left center"}],{duration:260,easing:"cubic-bezier(.2,.8,.2,1)"})}btn.animate([{opacity:0,transform:"scale(.55)"},{opacity:1,transform:"scale(1)"}],{duration:260,easing:"cubic-bezier(.2,.8,.2,1)"})}

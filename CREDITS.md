@@ -18,9 +18,9 @@ The adjacent closed nuclear plant and operating coal plant use a bounded local C
 
 ## Music
 
-The continuously rotating background catalog is synthesized at runtime with the Web Audio API. It begins behind the opening forms, ducks beneath their spoken readout, and continues without an intentional gap while music is enabled. Every track is an original 8-bit arrangement using square-wave lead, triangle-wave bass, and synthetic percussion. No lyrics, MIDI files, sheet-music files, or third-party recordings are bundled.
+The continuously rotating background catalog is synthesized at runtime with the Web Audio API. It begins behind the opening forms, ducks beneath their spoken readout, and continues without an intentional gap while music is enabled. Every next track is a weighted random choice with no immediate repeat. The national anthem, Erika, Badnerlied, Württembergerlied, and other ceremonial or hymn-like selections receive most of the weight while all 26 arrangements remain available. The softened synthesis uses a lower-octave triangle-wave lead, sine-wave bass, restrained synthetic percussion, and a low-pass filter. No lyrics, MIDI files, sheet-music files, or third-party recordings are bundled.
 
-The 26-track shuffled catalog gives every Bundesland a melody:
+The 26-track catalog gives every Bundesland a melody:
 
 - **Baden-Württemberg:** Badnerlied (including the “Frisch auf” refrain) and Württembergerlied. The catalog also keeps the distinct Swabian standards **Muss i denn** and **Auf de schwäbsche Eisebahne**.
 - **Bayern:** Bayernhymne.
