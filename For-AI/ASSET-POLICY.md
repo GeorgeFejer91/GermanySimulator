@@ -20,6 +20,7 @@ Use one asset authority at root `assets/`, with fidelity selected by the client.
 - Keep emotional pedestrian recordings to a small local MP3 subset with exact-text bark mappings, durable source and checksum records in `assets/voices/LICENSES.md`, and browser-speech fallback. Do not fetch the full dataset or depend on a remote audio host at runtime.
 - Keep the 13 generated §-power readings and 11 rotating-rule readings under `assets/voices/laws/`, indexed directly to their fixed decks. §-power audio must use the exact displayed quotation; rotating-rule audio must read the complete displayed body while its shorthand identifier remains visual. Both retain German browser-speech fallback and record their CC0 references, local XTTS-v2 generation method, durations, and checksums in `assets/voices/LICENSES.md`. The cloning model is an offline production tool, never a runtime dependency or shipped model.
 - Keep the user-supplied Bayern recording as short, coherent mono MP3 excerpts under `assets/voices/bayern/`, with exact-text runtime mappings and checksums in `assets/voices/LICENSES.md`. Merkel, Merz, and Bayern each retain one source PNG atlas. At load time the runtime normalizes every source cell into an equal 256×256 cell with a transparent inset, then shares that normalized canvas between Canvas and Three.js so fractional source dimensions, edge-touching poses, and texture filtering cannot clip a frame or sample its neighbor.
+- Perimeter trains use only the three Kenney Train Kit GLBs and one shared color map under `assets/models/kenney-trains/` (about 0.38 MB total). Preserve the adjacent `LICENSES.md` checksum record. The assets remain fictional `AMT-BAHN` rolling stock: do not add Deutsche Bahn or Märklin logos, trademarked textures, captured station recordings, or a cloned real announcer voice. Missing GLBs keep the procedural train fallback.
 
 ## YAGNI rules
 
@@ -47,3 +48,10 @@ An asset change is complete only when the correct variant loads on desktop and m
 - GLB loading is an enhancement. A missing model keeps its procedural building, and failure of the WebGL renderer returns to the canvas world without changing gameplay state.
 - Keep the selected model set bounded and measure total transfer size before adding another pack.
 - The power-plant landmark uses five local CC0 GLBs under `assets/models/power-plants/` (about 0.5 MB total): three selected Kenney Industrial meshes plus a nuclear transformer and warning sign from 3DAssets.dev. Preserve `LICENSES.md`, its AI-generation disclosure, source URLs, and checksums when replacing these files.
+
+## Local 3D perimeter trains
+
+- `game.js` owns the eight train transforms and their chaotic movement timing. `world3d.js` only renders those transforms and must not run a second train simulation in the canonical game.
+- The WebGL renderer loads the Kenney models once and clones them into the eight consists. Keep their embedded geometry and shared texture local; there is no runtime asset host.
+- Canvas and missing-model paths use the procedural red-and-white train. Both representations must preserve two tracks on every world edge and remain outside normal progression and collision space.
+- German station announcements are synthesized locally by the browser from the exact visible string. They use the existing serialized speech and voice-toggle behavior; no recorded announcement asset is required.

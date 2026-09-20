@@ -47,6 +47,19 @@ for(let cursor=0,i=0;i<=borderGates.length;i++){
  if(end-cursor>24)borderSegments.push({x:cursor,w:end-cursor});
  if(gate)cursor=gate.x+gate.w;
 }
+const railTracks=[
+ {id:"nord-a",axis:"x",fixed:68,min:300,max:WORLD.w-300},{id:"nord-b",axis:"x",fixed:136,min:300,max:WORLD.w-300},
+ {id:"sued-a",axis:"x",fixed:WORLD.h-68,min:300,max:WORLD.w-300},{id:"sued-b",axis:"x",fixed:WORLD.h-136,min:300,max:WORLD.w-300},
+ {id:"west-a",axis:"y",fixed:68,min:300,max:WORLD.h-300},{id:"west-b",axis:"y",fixed:136,min:300,max:WORLD.h-300},
+ {id:"ost-a",axis:"y",fixed:WORLD.w-68,min:300,max:WORLD.h-300},{id:"ost-b",axis:"y",fixed:WORLD.w-136,min:300,max:WORLD.h-300}
+];
+const trainSeeds=[
+ [.12,1,214],[.63,-1,168],[.29,-1,198],[.82,1,236],[.18,1,154],[.71,-1,222],[.38,-1,184],[.86,1,248]
+];
+const trains=railTracks.map((track,i)=>{
+ const seed=trainSeeds[i],position=track.min+(track.max-track.min)*seed[0],train={id:"amt-bahn-"+(i+1),trackId:track.id,axis:track.axis,fixed:track.fixed,min:track.min,max:track.max,position,dir:seed[1],baseSpeed:seed[2],speed:seed[2],pause:0,chaos:2.2+i*.71,x:0,y:0};
+ if(train.axis==="x"){train.x=position;train.y=train.fixed}else{train.x=train.fixed;train.y=position}return train
+});
 const fireSources=[];
 for(let x=36,i=0;x<WORLD.w;x+=72,i++)fireSources.push({x,y:BORDER_Y,active:true,intensity:.82+(i%5)*.035,seed:(i*47%101)/101});
 const policePath={x1:4250,y1:3850,x2:3650,y2:3250,width:130};
@@ -150,6 +163,21 @@ const policeBarks={
  berlin:["HALT! Stop mal immediately!","Nicht auf ze grass, bitte!","Ausweis, ID, irgendwas Officiales!","Please leave den Grünbereich sofort!","Das ist so wirklich not vorgesehen!","Bleiben Sie hinter ze line!"],
  germany:["HALT! STEHENBLEIBEN!","NICHT ÜBER DEN RASEN!","AUSWEIS BITTE!","SIE VERLASSEN SOFORT DEN GRÜNBEREICH!","DAS IST SO NICHT VORGESEHEN!","BLEIBEN SIE HINTER DER LINIE!"]
 };
+const trainAnnouncements=[
+ "Grund dafür sind Verzögerungen im Betriebsablauf.",
+ "Grund dafür ist die verspätete Bereitstellung des Zuges.",
+ "Grund dafür ist eine technische Störung am Zug.",
+ "Grund dafür ist eine Reparatur an einem Signal.",
+ "Grund dafür ist eine Reparatur an einer Weiche.",
+ "Grund dafür ist eine Störung an der Oberleitung.",
+ "Grund dafür ist die Verspätung aus vorheriger Fahrt.",
+ "Grund dafür ist das Warten auf einen vorausfahrenden Zug.",
+ "Grund dafür sind Bauarbeiten auf der Strecke.",
+ "Grund dafür ist ein kurzfristiger Personalausfall.",
+ "Grund dafür ist eine kurzfristige Änderung im Betriebsablauf.",
+ "Der Zug verkehrt heute in umgekehrter Wagenreihung. Das hilft Ihnen zeitlich nicht, ist aber immerhin eine Information."
+];
+const trainDestinations=["Amtshausen","Formulararchiv","Zuständigkeitsprüfung","Berlin Hauptsache","Endstation Geduld","Bad Anschluss"],trainDelays=[5,8,12,17,23,35,47,63,90];
 const npcDenglisch=["Also this ist jetzt aber auch nicht so gedacht.","Kann man machen. Muss man aber really nicht.","Ich möchte mich nicht complainen, aber ich complain jetzt.","Dafür gibt es bestimmt ein Formular, probably online but not really.","Früher war hier weniger process.","Sie stehen minimal im way.","Das ist bestimmt wegen der Baustelle. Die ist since 2009 da.","Dafür bin ich not responsible.","Ordnung muss schon sein, you know.","Haben Sie dafür einen appointment?"];
 const jaywalkerBarks={
  berlin:["Think of the rules! Der Zebrastreifen ist literally right there!","Think of the Kinder! So überquert man keine Straße!","Schande! You ignored die amtlich weißen stripes!","Hast du Tomaten auf den Augen?! Use the official crossing!","Unfassbar! Erst schauen, then formgerecht queren!","Verkehrsrowdy! This crossing was not approved by anybody!"],
@@ -450,7 +478,7 @@ const pickups=[
  ...wurstPickups
 ];
 const normObjects=[{x:2210,y:1190,type:"bin",fixed:false,label:"MÜLLTONNE 4,6° SCHIEF"},{x:1650,y:650,type:"chairs",fixed:false,label:"STÜHLE NICHT FLUCHTGERECHT"},{x:570,y:1140,type:"hedge",fixed:false,label:"HECKE 3 CM ZU INDIVIDUELL"}];
-window.Germany3DBridge={WORLD,player,roads,crossings,crossingSigns,trafficLights,buildings,grassAreas,walkways,SIDEWALK_WIDTH,schreber,policeGarden,policePath,BORDER_Y,BORDER_BAND,borderGates,borderSegments,fireSources,props,pickups,getNPCs:()=>npcs,getPolice:()=>police,getNpcSpriteCanvas:key=>npcSpriteAtlases[key]?.canvas||null,npcSpriteGrids:Object.fromEntries(Object.entries(npcSpriteAtlases).map(([key,{cols,rows}])=>[key,{cols,rows}]))};
+window.Germany3DBridge={WORLD,player,roads,crossings,crossingSigns,trafficLights,buildings,grassAreas,walkways,SIDEWALK_WIDTH,schreber,policeGarden,policePath,BORDER_Y,BORDER_BAND,borderGates,borderSegments,railTracks,trains,fireSources,props,pickups,getNPCs:()=>npcs,getPolice:()=>police,getNpcSpriteCanvas:key=>npcSpriteAtlases[key]?.canvas||null,npcSpriteGrids:Object.fromEntries(Object.entries(npcSpriteAtlases).map(([key,{cols,rows}])=>[key,{cols,rows}]))};
 const forms={
 a38:{code:"A38/1",title:"Passierschein A38 zur Beantragung eines weiteren Antrags",subtitle:"Bitte vollständig ausfüllen. Unvollständige Vollständigkeit gilt als unvollständig.",fields:[["text","VOLLSTÄNDIGER NAME"],["text","GEBURTSORT IN HEUTIGEN GEMEINDEGRENZEN"],["select","MELDESTATUS",["gemeldet","noch nicht gemeldet","gefühltermaßen gemeldet"]],["text","AKTENZEICHEN, FALLS BEREITS VORHANDEN"],["check","Ich bestätige, dass ich dieses Formular freiwillig unfreiwillig ausfülle."]]},
 wohnung:{code:"WGB-88",title:"Wohnungsgeberbestätigung zur Bestätigung einer Wohnung",subtitle:"Bestätigen Sie, dass Ihre Wohnung tatsächlich eine Wohnung ist.",fields:[["text","ANSCHRIFT"],["text","WOHNUNGSGEBENDER WOHNUNGSGEBER"],["select","ART DER ÜBERLASSUNG",["vermietet","untervermietet","mysteriös überlassen"]],["text","TATSÄCHLICHES DATUM DER TATSACHE DES EINZUGS"],["check","Ich bestätige das Vorhandensein von Wänden und mindestens einer Tür."]]},
@@ -492,6 +520,18 @@ function hideWorldBark(){clearTimeout(showWorldBark.t);const box=document.getEle
 function stopSpeech(completeHumorScold=false){speechGeneration++;speechQueue.length=0;speechActive=false;clearTimeout(speechPauseTimer);if("speechSynthesis" in window)speechSynthesis.cancel();stopRecordedSpeech();hideWorldBark();cancelHumorScold(completeHumorScold)}
 function violationAlert(msg,level){const alert=document.getElementById("violation-alert"),app=document.getElementById("app");document.getElementById("violation-law").textContent=lawFor(msg);document.getElementById("violation-title").textContent=state.lang==="en"?"RULE VIOLATION":"ORDNUNGSWIDRIGKEIT";document.getElementById("violation-text").textContent=state.lang==="en"?localize(msg):msg;document.getElementById("violation-stars").textContent="★".repeat(level)+"☆".repeat(Math.max(0,5-level));alert.hidden=false;app.classList.remove("enforcement");void app.offsetWidth;app.classList.add("enforcement");clearTimeout(violationAlert.t);violationAlert.t=setTimeout(()=>{alert.hidden=true;app.classList.remove("enforcement")},2200);playSiren()}
 function showWorldBark(speaker,msg,urgent=true,recording="",placement=""){const box=document.getElementById("police-bark"),speakerEl=document.getElementById("bark-speaker"),textEl=document.getElementById("police-bark-text"),start=()=>{speakerEl.textContent=speaker;textEl.textContent=msg;box.classList.toggle("law-quote",placement==="law");box.hidden=false;uiTone(urgent?1280:880,.06,"square",.035)},done=()=>{if(speakerEl.textContent===speaker&&textEl.textContent===msg){box.hidden=true;box.classList.remove("law-quote")}};if(!state.voiceOn){start();clearTimeout(showWorldBark.t);showWorldBark.t=setTimeout(done,placement==="law"?8500:3200);return}const options={urgent,voiceKey:speaker,start,done};if(recording)speakRecorded(msg,recording,options);else if(speaker.startsWith("ANGELA MERKEL"))speakMerkelLine(msg,options);else speak(msg,{...options,masculine:speaker.startsWith("FRIEDRICH MERZ")})}
+let trainAnnouncementIndex=Math.floor(Math.random()*trainAnnouncements.length),trainAnnouncementNearby=false,trainAnnouncementNextAt=0;
+function nextTrainAnnouncement(){const reason=trainAnnouncements[trainAnnouncementIndex++%trainAnnouncements.length],service=pick(["Regionalexpress","Intercity","Regionalbahn"]),destination=pick(trainDestinations),delay=pick(trainDelays),platform=pick(["Null","eins","dreizehn","einunddreißig"]);return `Achtung an Gleis ${platform}. Der ${service} nach ${destination} verspätet sich um voraussichtlich ${delay} Minuten. ${reason} Wir bitten um Entschuldigung.`}
+function updateTrainAnnouncement(){let nearest=Infinity;for(const train of trains)nearest=Math.min(nearest,dist(player.x,player.y,train.x,train.y));if(nearest>650){trainAnnouncementNearby=false;return}const now=performance.now(),box=document.getElementById("police-bark");if(nearest>=500||trainAnnouncementNearby||now<trainAnnouncementNextAt||speechActive||speechQueue.length||!box.hidden)return;trainAnnouncementNearby=true;trainAnnouncementNextAt=now+22000;showWorldBark("BAHNSTEIGDURCHSAGE · FIKTIONALE SATIRE",nextTrainAnnouncement(),false)}
+function updateBorderTrains(dt){
+ for(const train of trains){
+  if(train.pause>0)train.pause=Math.max(0,train.pause-dt);else train.position+=train.dir*train.speed*dt;
+  if(train.position<=train.min||train.position>=train.max){train.position=clamp(train.position,train.min,train.max);train.dir*=-1;train.pause=.12+Math.random()*.55;train.chaos=2.5+Math.random()*5}
+  train.chaos-=dt;if(train.chaos<=0){const event=Math.random();if(event<.28)train.dir*=-1;else if(event<.5)train.pause=.35+Math.random()*1.4;train.speed=train.baseSpeed*(.62+Math.random()*.82);train.chaos=2.8+Math.random()*6.4}
+  if(train.axis==="x"){train.x=train.position;train.y=train.fixed}else{train.x=train.fixed;train.y=train.position}
+ }
+ updateTrainAnnouncement()
+}
 function announceCurrentRule(){const index=state.rule%rules.length,text=rules[index][1],recording=`./assets/voices/laws/thorsten-negative-rule-${String(index+1).padStart(2,"0")}.mp3`;speakRecorded(text,recording,{voiceKey:"REGEL DES AUGENBLICKS"})}
 function policeBark(force=false){const now=performance.now();if(!force&&now-(policeBark.last||0)<2300)return;policeBark.last=now;showWorldBark("POLIZEI",pick(policeBarks[state.region]||policeBarks.germany),true)}
 function jaywalkerBark(){const speaker=state.region==="berlin"?"EMPÖRTE PASSANTEN · BERLIN":"EMPÖRTE PASSANTEN · DEUTSCHLAND";showWorldBark(speaker,pick(jaywalkerBarks[state.region]||jaywalkerBarks.germany),true)}
@@ -668,6 +708,7 @@ function update(dt){
  const bumped=hitX||hitY;if(bumped){bumped.pause=Math.max(bumped.pause||0,.48);pedestrianBark(bumped,playerSurface())}
  if(player.x!==px||player.y!==py)player.facing=Math.atan2(player.x-px,player.y-py);
  updateRegion();
+ updateBorderTrains(dt);
  updateGermannessEvents(dt,mag);
  updateQuizEncounters(dt);
 
@@ -804,10 +845,20 @@ function drawGround(){
  walkways.forEach(r=>groundRect(r,"#aaa69d","#858177"));
  roads.forEach(r=>groundRect(r,"#5c5b57","#4b4a47"));
  crossings.forEach(drawCrossing);
+ drawRailTracks();
  groundRect(schreber,"#68705e","#4d5149");
  groundRect(policeGarden,"#68705e","#4d5149");
  drawPoliceDiagonalPath();
  drawFireBoundaryGround();
+}
+function drawRailTracks(){
+ ctx.save();ctx.strokeStyle="#343532";ctx.lineCap="square";
+ for(const track of railTracks){
+  const horizontal=track.axis==="x",a=project(horizontal?track.min:track.fixed,horizontal?track.fixed:track.min);
+  ctx.lineWidth=Math.max(2,4*a.s);for(const side of [-1,1]){const p1=project(horizontal?track.min:track.fixed+side*11,horizontal?track.fixed+side*11:track.min),p2=project(horizontal?track.max:track.fixed+side*11,horizontal?track.fixed+side*11:track.max);ctx.beginPath();ctx.moveTo(p1.x,p1.y);ctx.lineTo(p2.x,p2.y);ctx.stroke()}
+  ctx.strokeStyle="#5b5145";ctx.lineWidth=Math.max(2,7*a.s);for(let n=track.min;n<=track.max;n+=150){const p1=project(horizontal?n:track.fixed-21,horizontal?track.fixed-21:n),p2=project(horizontal?n:track.fixed+21,horizontal?track.fixed+21:n);ctx.beginPath();ctx.moveTo(p1.x,p1.y);ctx.lineTo(p2.x,p2.y);ctx.stroke()}ctx.strokeStyle="#343532";
+ }
+ ctx.restore()
 }
 function buildingObscuresPlayer(b){return b.y<player.y+700&&b.y+b.h>player.y&&player.x>b.x-35&&player.x<b.x+b.w+35}
 function drawBuildingLayer(b){ctx.save();if(buildingObscuresPlayer(b))ctx.globalAlpha=.3;drawBuilding(b);ctx.restore()}
@@ -991,11 +1042,18 @@ function drawDistrictLabels(){
 }
 
 function drawPoster(){const p=project(1570,530,90);if(p.x<-160||p.x>width+160||p.y<-180||p.y>height+180)return;const s=p.s;ctx.save();ctx.translate(p.x,p.y);ctx.scale(s,s);ctx.fillStyle="#ded8cb";ctx.fillRect(-58,-72,116,84);ctx.strokeStyle="#222";ctx.strokeRect(-58,-72,116,84);ctx.fillStyle="#777";ctx.beginPath();ctx.ellipse(0,-43,20,25,0,0,Math.PI*2);ctx.fill();ctx.fillStyle="#494949";ctx.beginPath();ctx.moveTo(-22,-50);ctx.quadraticCurveTo(0,-72,24,-50);ctx.lineTo(17,-59);ctx.lineTo(-16,-59);ctx.closePath();ctx.fill();ctx.fillStyle="#222";ctx.font="900 8px Arial";ctx.textAlign="center";ctx.fillText("FRIEDRICH MERZ",0,-8);ctx.font="7px Arial";ctx.fillText("SATIRISCHER AUSHANG",0,3);ctx.restore()}
+function drawTrain(train){
+ const p=project(train.x,train.y,0),ahead=project(train.x+(train.axis==="x"?100:0),train.y+(train.axis==="y"?100:0),0),scale=Math.hypot(ahead.x-p.x,ahead.y-p.y)/100;if(p.x<-520||p.x>width+520||p.y<-420||p.y>height+420)return;
+ let angle=Math.atan2(ahead.y-p.y,ahead.x-p.x);if(train.dir<0)angle+=Math.PI;ctx.save();ctx.translate(p.x,p.y);ctx.rotate(angle);ctx.scale(scale,scale);ctx.fillStyle="rgba(24,24,23,.28)";ctx.fillRect(-202,13,404,58);
+ for(let i=-1;i<=1;i++){const x=i*132,lead=i===1;ctx.fillStyle="#eee9df";ctx.strokeStyle="#343434";ctx.lineWidth=4;ctx.beginPath();ctx.roundRect(x-58,-54,116,66,lead?18:9);ctx.fill();ctx.stroke();ctx.fillStyle="#c43d36";ctx.fillRect(x-56,-16,112,23);ctx.fillStyle="#39454b";for(let w=-38;w<=38;w+=25)ctx.fillRect(x+w,-45,17,18);ctx.fillStyle="#2d2d2c";for(const wheel of [-36,36]){ctx.beginPath();ctx.arc(x+wheel,15,10,0,Math.PI*2);ctx.fill()}if(i<1){ctx.strokeStyle="#252525";ctx.lineWidth=7;ctx.beginPath();ctx.moveTo(x+60,-1);ctx.lineTo(x+72,-1);ctx.stroke()}}
+ ctx.fillStyle="#f0eadf";ctx.font="900 10px Arial";ctx.textAlign="center";ctx.fillText("AMT-BAHN",0,1);ctx.restore()
+}
 function drawWorld(){
  drawGround();drawGarden();drawDistrictLabels();
  const drawables=[{d:0,fn:drawPlayer},{d:player.y-530,fn:drawPoster}];
  for(const b of buildings)drawables.push({d:player.y-(b.y+b.h),fn:()=>drawBuildingLayer(b)});
  for(const f of fireSources)drawables.push({d:player.y-f.y,fn:()=>drawFireSource(f)});
+ for(const train of trains)drawables.push({d:player.y-train.y,fn:()=>drawTrain(train)});
  for(const n of npcs)drawables.push({d:player.y-n.y,fn:()=>n.special==="merkel"?drawMerkelNpc(n):n.special==="borderPourer"?drawBorderPourer(n):n.special==="bayern"?drawBayernNpc(n):sprite(n.x,n.y,n.name,"person","#4f4d48")});
  for(const p of police)drawables.push({d:player.y-p.y,fn:()=>sprite(p.x,p.y,"POLIZEI","police")});
  for(const p of pickups)if(!p.taken)drawables.push({d:player.y-p.y,fn:()=>p.wurstType?drawWurstPickup(p):sprite(p.x,p.y,p.label,p.type==="pfand"?"pfand":p.type)});

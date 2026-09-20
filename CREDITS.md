@@ -8,6 +8,29 @@ Six building meshes are selected from Kenney's **City Kit Commercial 2.1** and r
 - Creator: Kenney, https://kenney.nl/
 - Local license copy: `assets/models/kenney-commercial/LICENSE.txt`
 
+## Perimeter trains and station announcements
+
+Eight fictional `AMT-BAHN` consists use three compact models from Kenney's
+**Train Kit 1.1**. The models and their shared color map are released under
+CC0 1.0. The game repeats this bounded subset across two tracks on each world
+edge; the Canvas renderer keeps a procedural red-and-white fallback.
+
+- Source: https://kenney.nl/assets/train-kit
+- Creator: Kenney, https://kenney.nl/
+- Local file and checksum record: `assets/models/kenney-trains/LICENSES.md`
+
+No Deutsche Bahn or Märklin logo, branded texture, voice recording, or cloned
+announcer voice is bundled. Nearby trains instead use the browser's installed
+German speech voice to read an original fictional announcement whose exact text
+is displayed simultaneously. The operational phrase pool was checked against
+public explanations of common rail announcements; the game recombines those
+short generic terms with invented destinations, platforms, and delay lengths.
+
+- VCD explanation of announcement categories: https://www.vcd.org/artikel/was-bedeuten-die-durchsagen-und-stoermeldungen-der-bahn/
+- Travelbook explanation with Deutsche Bahn spokesperson context: https://www.travelbook.de/reisen/zugreisen/verspaetungsdurchsagen-deutsche-bahn
+- T-Online overview of common disruption wording: https://www.t-online.de/leben/reisen/reisetipps/id_92315944/bahnansagen-was-bedeuten-verzoegerungen-im-betriebsablauf-und-co-.html
+- Deutsche Bahn explanation of connection-wait decisions: https://www.bahn.de/service/fahrplaene/anschlusszug-wartet-nicht
+
 ## Power-plant scene
 
 The adjacent closed nuclear plant and operating coal plant use a bounded local CC0 model subset. Kenney's **City Kit (Industrial) 2.0** supplies the industrial building and chimney meshes. The nuclear transformer and warning sign come from 3DAssets.dev's **Nuclear Power Station and Control Room** pack; the source identifies those two models as AI-generated with Claude Opus 5.

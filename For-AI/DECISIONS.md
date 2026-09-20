@@ -89,3 +89,9 @@ The Start button leads into a two-page satirical `HUM-01/DE` humor-competence de
 ## 2026-09-20 — One-time recorded intro before synthesized music
 
 The soundtrack preloads and attempts to start the user-supplied `assets/intro-song.mp3` immediately on page entry, with the first 24 seconds removed in the shipped file. If browser autoplay policy blocks it, native audio retries from the beginning on the first click or key press. That recording plays once only, mirrors the music duck and mute state, and then hands off to the weighted Web Audio German-song catalog. A missing or undecodable intro skips directly to that catalog. The local source and shipped checksums remain recorded in `CREDITS.md`, without an unsupported redistribution-license claim.
+
+## 2026-09-20 — Fictional perimeter rail traffic and browser announcements
+
+Every world edge carries two rail lines and two independently moving trains. `game.js` is the sole authority for their transforms, end-of-line bounce, random speed changes, early reversals, brief pauses, proximity hysteresis, and announcement cooldown; Canvas and Three.js only render that shared semantic state. The canonical WebGL path clones a three-model CC0 Kenney Train Kit subset, while the Canvas and missing-model paths retain procedural red-and-white consists. `3d.html` mirrors a simple moving sample only to exercise the renderer and remains non-canonical.
+
+The rolling stock is branded only as the fictional `AMT-BAHN`. No Deutsche Bahn or Märklin logo, protected livery detail, station recording, or cloned real announcer voice is shipped. A nearby pass instead composes an original German satirical announcement from researched generic operational categories plus invented destinations and delay values, then sends that exact visible string through the existing browser-speech queue and voice toggle. This keeps audio and text in lockstep and avoids a new audio-asset family or runtime service.
