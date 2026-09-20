@@ -81,7 +81,7 @@ The arrangements use old or traditional underlying compositions, not modern perf
 
 The requested 2012 song **Thüringer Klöße** by Fritz is not transcribed or bundled. Its official upload identifies Frank Kadanik as composer, Ilona Klein and Hans-Jürgen Gröschner as lyricists, Warner Music Germany production, and explicitly prohibits unauthorized use: https://www.youtube.com/watch?v=qJe3cdM7f1c. The similarly named in-game Kloß-Kantinenjingle is a new, independent composition and does not copy that protected melody.
 
-## Thorsten-Voice character reactions
+## Thorsten-Voice character reactions and law readings
 
 German browser speech remains the default for character dialogue, with the
 available installed German voices assigned across speakers. Six short clips
@@ -94,6 +94,11 @@ emotions) and is released under CC0 1.0 Universal. The game treats angry and
 disgusted delivery as negative-valence material and sleepy delivery as
 low-arousal material; this is an editorial mapping of the dataset's categorical
 styles, not a claim that it contains numeric valence or arousal annotations.
+The same credited angry and disgusted references were used locally with
+XTTS-v2 to synthesize exact-text readings for all 13 excerpts in the §-power
+deck. The game ships only the compact generated MP3 files, not the model or a
+runtime cloning service, and falls back to browser speech if a reading is
+unavailable.
 
 - Dataset DOI: https://doi.org/10.5281/zenodo.5525023
 - Project repository: https://github.com/thorstenMueller/Thorsten-Voice

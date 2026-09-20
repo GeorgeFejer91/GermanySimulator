@@ -547,10 +547,10 @@ function useLawPower(){
  let target=null,best=Infinity;for(const n of npcs){if(n.special||n.arrested||!n.crowd||n===state.quizApproach)continue;const d=dist(player.x,player.y,n.x,n.y);if(d<best){best=d;target=n}}
  if(!target){toast("KEINE ANDERE ZUSTÄNDIGE PERSON AUFFINDBAR");return}
  document.getElementById("law-unlock-prompt").hidden=true;
- const quote=nextLawPowerLine();state.lawCooldown=14;state.wanted=0;state.wantedCooldown=0;state.offence="ZUSTÄNDIGKEIT ERFOLGREICH UMGELENKT";
+ const quote=nextLawPowerLine(),recording=`./assets/voices/laws/thorsten-negative-law-${String(lastLawPowerLine+1).padStart(2,"0")}.mp3`;state.lawCooldown=14;state.wanted=0;state.wantedCooldown=0;state.offence="ZUSTÄNDIGKEIT ERFOLGREICH UMGELENKT";
  if(!police.length){const a=Math.random()*Math.PI*2;police.push({x:clamp(target.x+Math.cos(a)*230,40,WORLD.w-40),y:clamp(target.y+Math.sin(a)*230,40,WORLD.h-40),speed:150,barkAt:0,divertedTarget:target})}
  for(const p of police)p.divertedTarget=target;
- showWorldBark("SIE · GESETZZITAT",quote,true,"","law");toast("§-MACHT AKTIV · "+target.name+" WIRD ÜBERPRÜFT");updateHud();
+ showWorldBark("SIE · GESETZZITAT",quote,true,recording,"law");toast("§-MACHT AKTIV · "+target.name+" WIRD ÜBERPRÜFT");updateHud();
 }
 function nextCitizenshipQuestion(){
  if(!state.quizBag.length){state.quizBag=citizenshipQuestions.map((_,i)=>i);for(let i=state.quizBag.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[state.quizBag[i],state.quizBag[j]]=[state.quizBag[j],state.quizBag[i]]}}

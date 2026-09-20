@@ -33,6 +33,46 @@ remark; the disgusted take is the player's Germanness-loss reaction.
 Attribution is not required by CC0, but the source and recording IDs are kept
 here for durable provenance and reproducible replacement.
 
+## Generated §-power law readings
+
+The 13 files under `laws/` are AI-generated readings created locally on
+2026-09-20 with Coqui TTS 0.25.3 and the `XTTS-v2` model. The model was
+conditioned only on these negative-delivery CC0 references listed above:
+`thorsten-angry-nicht-weg.mp3`, `thorsten-angry-duemmer.mp3`,
+`thorsten-angry-klappt-nicht.mp3`, and
+`thorsten-disgusted-nichts-geschafft.mp3`. The amused and sleepy takes were not
+used. The synthesis model is an offline production tool and is not shipped.
+
+- Model source: https://huggingface.co/coqui/XTTS-v2
+- Model license: Coqui Public Model License 1.0
+- Output: mono MP3 at 64 kbit/s and 22.05 kHz
+- Validation: every clip was decoded with FFmpeg and transcribed locally with
+  Whisper `small` in German. A timestamp review removed post-sentence model
+  leakage; the final pass contained every intended sentence ending and no
+  trailing invented speech.
+
+These are synthesized derivatives, not original Thorsten-Voice dataset
+recordings. Each numbered file maps directly to the same one-based entry in
+`game.js`'s fixed `lawPowerLines` deck and uses that complete displayed string
+as synthesis input. The exact displayed string is also the browser-speech
+fallback.
+
+| Shipped file | Duration | SHA-256 |
+| --- | ---: | --- |
+| `laws/thorsten-negative-law-01.mp3` | 26.645 s | `BDADB8349E15CAB81F413AA997FA9F6B49CC85A212E1857459B3B0B1F9ADE544` |
+| `laws/thorsten-negative-law-02.mp3` | 15.935 s | `C82FEAF6F4EA397BE5DF4DD426990060296BBD5AB41275F9483DFA78AA7EA752` |
+| `laws/thorsten-negative-law-03.mp3` | 31.713 s | `37FE5ADCE8816247DB148B77B42ED9D233BC866DB887B160D2A9743313DC64AF` |
+| `laws/thorsten-negative-law-04.mp3` | 29.074 s | `FAF9ABA99FD86279AE44D455E894EFE0B9EAC1937B4152515FC7B6B7398942E2` |
+| `laws/thorsten-negative-law-05.mp3` | 6.922 s | `22919939AD9589179571E7101C7FB44301F290C5ED27D7C1750376EE68EE7A9D` |
+| `laws/thorsten-negative-law-06.mp3` | 14.550 s | `FFBBBD6DB54904FECD46BB302F8997E2543E4902EB62D71BC53876E92898FD9E` |
+| `laws/thorsten-negative-law-07.mp3` | 15.569 s | `5774691C5575D4434517612C32679C39BE0FFA6B1BEAAAAF686F778C4E95F05C` |
+| `laws/thorsten-negative-law-08.mp3` | 16.771 s | `4F9BA8B9E4CF94EA8F725A442A138D7253D2B4620D2F8881A2821E1B15653D20` |
+| `laws/thorsten-negative-law-09.mp3` | 15.099 s | `13DBD600206ED87C16EFB991F1B3CDCA100116DBDB1F6671B8C645B1B01492DF` |
+| `laws/thorsten-negative-law-10.mp3` | 29.623 s | `83F425B324894404F4CB939B36383BD73A5822A63C9A3CC59AC9795A55572AA6` |
+| `laws/thorsten-negative-law-11.mp3` | 23.667 s | `CCB4D1D64CA7EFE6C6806A4D7F4048861C2A1D057C7C0DA72437B5315CC30827` |
+| `laws/thorsten-negative-law-12.mp3` | 24.268 s | `9C45825C4F9D8C0D3F75A51FFFF37B6B1DDB1AC684661D8CFE4777769940E030` |
+| `laws/thorsten-negative-law-13.mp3` | 23.327 s | `458D9941D53485E7532B26EF6C8EA5261B4D72783CA568B6A4827F3CD37CB235` |
+
 ## Einbürgerungstest wrong-answer sting
 
 `quiz-wrong-answer.mp3` was supplied by the user from their local
