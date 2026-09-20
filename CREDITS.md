@@ -124,6 +124,27 @@ The desktop fax-ad pool uses the simplified **Die neue Faxkraft** and **Fortschr
 
 The transparent title-screen illustration was generated for this project with OpenAI's built-in image-generation tool, then color-traced with VTracer 0.6.15 into `assets/fax-wurst.svg`. No external photograph, logo, or third-party artwork is incorporated, and the generated raster is not part of the runtime.
 
+## Wurst badge photography and history
+
+The nine Wurstsammlerpass badges and collection-card photographs are optimized
+local derivatives of Creative Commons images from Wikimedia Commons. The exact
+file pages, creators, licenses, conversion notes, and checksums are recorded in
+`assets/wurst/LICENSES.md`; the photographers do not endorse this game.
+
+The two-sentence collection histories were checked against the following
+sources. Origin stories that the sources describe as legend or tradition are
+identified that way in the game:
+
+- Nürnberger Rostbratwurst regulation and geographical protection: https://nuernberger-bratwuerste.de/de/erfahren/nurnberger-bratwurst
+- Frankfurter Würstchen history and protected name: https://de.wikipedia.org/wiki/Frankfurter_W%C3%BCrstchen
+- First documented Thüringer Rostbratwurst reference: https://www.thueringer-geopark.de/geniessen/geo-und-genussweg
+- Munich's qualified account of the Weißwurst legend: https://stadt.muenchen.de/infos/stadtgeschichte.html
+- Bockwurst history and Berlin tradition: https://de.wikipedia.org/wiki/Bockwurst
+- Knackwurst etymology and regional forms: https://de.wikipedia.org/wiki/Knackwurst
+- Mettwurst name and regional forms: https://de.wikipedia.org/wiki/Mettwurst
+- Teewurst roots, name, and 1874 production date: https://www.edeka.de/wissen/kuechenwissen/lebensmittellexikon/teewurst/
+- Currywurst origin claims and Herta Heuwer: https://www.dpma.de/dpma/veroeffentlichungen/hintergrund/essentrinken/currywurst/index.html
+
 ## Einbürgerungstest question source
 
 The roaming quiz encounters lightly adapt a small selection from the Bundesamt für Migration und Flüchtlinge's official **Gesamtfragenkatalog zum Test „Leben in Deutschland“ und zum „Einbürgerungstest“**, dated 7 May 2025. The source task number remains visible on every in-game question card.
