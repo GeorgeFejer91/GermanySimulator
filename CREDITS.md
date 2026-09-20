@@ -12,8 +12,8 @@ Six building meshes are selected from Kenney's **City Kit Commercial 2.1** and r
 
 Eight fictional `AMT-BAHN` consists use three compact models from Kenney's
 **Train Kit 1.1**. The models and their shared color map are released under
-CC0 1.0. The game repeats this bounded subset across two tracks on each world
-edge; the Canvas renderer keeps a procedural red-and-white fallback.
+CC0 1.0. The game repeats this bounded subset across two continuous rounded
+perimeter loops; the Canvas renderer keeps a procedural red-and-white fallback.
 
 - Source: https://kenney.nl/assets/train-kit
 - Creator: Kenney, https://kenney.nl/
@@ -22,14 +22,34 @@ edge; the Canvas renderer keeps a procedural red-and-white fallback.
 No Deutsche Bahn or Märklin logo, branded texture, voice recording, or cloned
 announcer voice is bundled. Nearby trains instead use the browser's installed
 German speech voice to read an original fictional announcement whose exact text
-is displayed simultaneously. The operational phrase pool was checked against
-public explanations of common rail announcements; the game recombines those
-short generic terms with invented destinations, platforms, and delay lengths.
+is displayed simultaneously. No extra recording or voice model is needed. The
+operational phrase pool was checked against public explanations of common rail
+announcements; the game recombines those short generic terms with invented
+destinations, platforms, and delay lengths.
 
 - VCD explanation of announcement categories: https://www.vcd.org/artikel/was-bedeuten-die-durchsagen-und-stoermeldungen-der-bahn/
 - Travelbook explanation with Deutsche Bahn spokesperson context: https://www.travelbook.de/reisen/zugreisen/verspaetungsdurchsagen-deutsche-bahn
 - T-Online overview of common disruption wording: https://www.t-online.de/leben/reisen/reisetipps/id_92315944/bahnansagen-was-bedeuten-verzoegerungen-im-betriebsablauf-und-co-.html
 - Deutsche Bahn explanation of connection-wait decisions: https://www.bahn.de/service/fahrplaene/anschlusszug-wartet-nicht
+
+The deliberately excessive excuse library is made of newly written satirical
+lines inspired by passenger reports in the following community threads. These
+posts are anecdotes, not verified Deutsche Bahn records. The game therefore
+labels every such line `COMMUNITY-ANEKDOTE · FIKTIONALISIERT` and does not quote
+the posts verbatim.
+
+- Reddit r/bahn, absurd or funny reported delay reasons: https://www.reddit.com/r/bahn/comments/1v5cavy/was_war_der_absurdeste_lustigste_grund_f%C3%BCr_eine/
+- Reddit r/deutschebahn, reported delay announcements: https://www.reddit.com/r/deutschebahn/comments/1rla2lw/was_sind_eure_besten_versp%C3%A4tungsaussagen/
+- Reddit r/drehscheibe, discussion of an automatic delay forecast with no remaining reason: https://www.reddit.com/r/drehscheibe/comments/1u5wdr9/schreib_das_system_das_automatisch_wenn_eine/
+- LEO forum, collected unusual rail announcements: https://dict.leo.org/forum/viewGeneraldiscussion.php?idForum=9&idThread=1226524&lang=de&lp=ende
+- Vielfliegertreff forum, reported zero-minute delay and wrong-track announcements: https://www.vielfliegertreff.de/forum/threads/deutsche-bahn-frust-aber-auf-amuesante-art-und-weise.5668/
+
+When the player blocks a train, the game rotates short excerpts from the current
+Eisenbahn-Bau- und Betriebsordnung. The excerpts are gameplay hints, not legal
+advice or a claim that every fictional obstruction satisfies a real offence.
+
+- Official EBO §§ 62–64 and § 64b, Federal Ministry of Justice / Federal Office of Justice: https://www.gesetze-im-internet.de/ebo/BJNR215630967.html
+- Official StGB § 315, checked to avoid omitting its additional concrete-danger element: https://www.gesetze-im-internet.de/stgb/__315.html
 
 ## Power-plant scene
 

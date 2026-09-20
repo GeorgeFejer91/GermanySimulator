@@ -51,7 +51,7 @@ An asset change is complete only when the correct variant loads on desktop and m
 
 ## Local 3D perimeter trains
 
-- `game.js` owns the eight train transforms and their chaotic movement timing. `world3d.js` only renders those transforms and must not run a second train simulation in the canonical game.
-- The WebGL renderer loads the Kenney models once and clones them into the eight consists. Keep their embedded geometry and shared texture local; there is no runtime asset host.
-- Canvas and missing-model paths use the procedural red-and-white train. Both representations must preserve two tracks on every world edge and remain outside normal progression and collision space.
-- German station announcements are synthesized locally by the browser from the exact visible string. They use the existing serialized speech and voice-toggle behavior; no recorded announcement asset is required.
+- `game.js` owns the two rounded-loop paths, eight train centers, 24 articulated car transforms, speed/pause chaos, same-lane spacing, player obstruction, and announcement timing. `world3d.js` only renders that state and must not run a second train simulation in the canonical game.
+- The WebGL renderer loads the three Kenney car models once and clones them into the eight articulated consists. Each car follows its shared semantic transform independently through curves. Keep their embedded geometry and shared texture local; there is no runtime asset host.
+- Canvas and missing-model paths use the procedural red-and-white cars. Both representations must preserve two continuous tracks around the full perimeter, rounded corners, coupled cars, and the hard no-overlap/no-overtaking spacing rule.
+- German station announcements and EBO obstruction hints are synthesized locally by the browser from the exact visible string. They use the existing serialized speech and voice-toggle behavior; no recorded announcement asset or clone of a real DB employee is required. Community anecdotes must stay visibly labeled unverified and fictionalized.

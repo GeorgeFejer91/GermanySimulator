@@ -23,10 +23,9 @@ const GLTF_LOADER_URL="https://cdn.jsdelivr.net/npm/three@0.186.0/examples/jsm/l
   bridge.roads.forEach(r=>{rect(r,M.road,.015);const h=r.w>r.h,total=(h?r.w:r.h)*S;for(let p=-total/2+1;p<total/2-1;p+=2.2)box(h?1.1:.07,.018,h?.07:1.1,M.cross,X(r.x+r.w/2)+(h?p:0),.03,Z(r.y+r.h/2)+(h?0:p))});
   bridge.crossings.forEach(c=>{for(let i=0;i<8;i++){const h=c.w>c.h,f=(i+.5)/8;box(h?c.w*S/8*.48:c.w*S,.025,h?c.h*S:c.h*S/8*.48,M.cross,X(c.x+c.w*(h?f:.5)),.04,Z(c.y+c.h*(h?.5:f)))}});rect(bridge.schreber,M.grass,.02);rect(bridge.policeGarden,M.grass,.021);
   const railMaterial=mat(0x343532,.58),sleeperMaterial=mat(0x594f43,.94);
-  for(const track of bridge.railTracks||[]){
-    const horizontal=track.axis==="x",length=(track.max-track.min)*S,center=(track.min+track.max)*.5,gauge=.46;
-    if(horizontal){for(const side of [-1,1])box(length,.055,.07,railMaterial,X(center),.075,Z(track.fixed)+side*gauge/2);for(let p=track.min;p<=track.max;p+=150)box(.13,.035,.88,sleeperMaterial,X(p),.045,Z(track.fixed))}
-    else{for(const side of [-1,1])box(.07,.055,length,railMaterial,X(track.fixed)+side*gauge/2,.075,Z(center));for(let p=track.min;p<=track.max;p+=150)box(.88,.035,.13,sleeperMaterial,X(track.fixed),.045,Z(p))}
+  for(const loop of bridge.railLoops||[]){
+    for(const side of [-1,1]){const points=loop.samples.map(p=>new T.Vector3(X(p.x-Math.sin(p.angle)*11*side),.075,Z(p.y+Math.cos(p.angle)*11*side))),curve=new T.CatmullRomCurve3(points,true,"centripetal");world.add(new T.Mesh(new T.TubeGeometry(curve,points.length,.035,4,true),railMaterial))}
+    for(let i=0;i<loop.samples.length;i+=3){const p=loop.samples[i],sleeper=box(.88,.035,.13,sleeperMaterial,X(p.x),.045,Z(p.y));sleeper.rotation.y=Math.PI/2-p.angle}
   }
   const fireGround=new T.MeshBasicMaterial({color:0x5d3f31,transparent:true,opacity:.58,depthWrite:false});rect({x:0,y:bridge.BORDER_Y-18,w:bridge.WORLD.w,h:36},fireGround,.026);
   function makeFlameTexture(){
@@ -98,20 +97,20 @@ const GLTF_LOADER_URL="https://cdn.jsdelivr.net/npm/three@0.186.0/examples/jsm/l
     "./assets/models/kenney-trains/train-electric-city-b.glb",
     "./assets/models/kenney-trains/train-electric-city-c.glb"
   ],trainModelPromise=modelLoader?Promise.all(trainModelUrls.map(url=>modelLoader.loadAsync(url))):null;
-  function makeTrainFallback(){
+  function makeTrainCarFallback(){
     const g=new T.Group(),red=mat(0xc43d36,.72),white=mat(0xeee9df,.82),glass=mat(0x39454b,.42),wheel=mat(0x292a29,.55);
-    for(let i=-1;i<=1;i++){const z=i*2.75,car=new T.Group();box(1.02,.82,2.5,white,0,.57,0,car);box(1.04,.3,2.46,red,0,.42,0,car);for(const side of [-1,1])for(let q=-.7;q<=.7;q+=.47)box(.055,.23,.3,glass,side*.54,.76,q,car);for(const side of [-1,1])for(const q of [-.72,.72]){const w=new T.Mesh(new T.CylinderGeometry(.14,.14,.08,10),wheel);w.rotation.z=Math.PI/2;w.position.set(side*.54,.17,q);car.add(w)}car.position.z=z;g.add(car)}
+    box(1.02,.82,2.5,white,0,.57,0,g);box(1.04,.3,2.46,red,0,.42,0,g);for(const side of [-1,1])for(let q=-.7;q<=.7;q+=.47)box(.055,.23,.3,glass,side*.54,.76,q,g);for(const side of [-1,1])for(const q of [-.72,.72]){const w=new T.Mesh(new T.CylinderGeometry(.14,.14,.08,10),wheel);w.rotation.z=Math.PI/2;w.position.set(side*.54,.17,q);g.add(w)}
     return g
   }
-  function fitTrainPart(model,z){
-    model.updateMatrixWorld(true);let bounds=new T.Box3().setFromObject(model),size=bounds.getSize(new T.Vector3());if(size.x>size.z){model.rotation.y=Math.PI/2;model.updateMatrixWorld(true);bounds=new T.Box3().setFromObject(model);size=bounds.getSize(new T.Vector3())}const center=bounds.getCenter(new T.Vector3()),s=Math.min(1.1/size.x,1.45/size.y,2.9/size.z);model.scale.setScalar(s);model.position.set(-center.x*s,-bounds.min.y*s,z-center.z*s)
+  function fitTrainPart(model){
+    model.updateMatrixWorld(true);let bounds=new T.Box3().setFromObject(model),size=bounds.getSize(new T.Vector3());if(size.x>size.z){model.rotation.y=Math.PI/2;model.updateMatrixWorld(true);bounds=new T.Box3().setFromObject(model);size=bounds.getSize(new T.Vector3())}const center=bounds.getCenter(new T.Vector3()),s=Math.min(1.1/size.x,1.45/size.y,2.9/size.z);model.scale.setScalar(s);model.position.set(-center.x*s,-bounds.min.y*s,-center.z*s)
   }
   async function installTrainModel(slot){
     if(!trainModelPromise)return;
-    try{const sources=await trainModelPromise,modelGroup=new T.Group(),positions=[2.95,0,-2.95];for(let i=0;i<sources.length;i++){const model=sources[i].scene.clone(true);fitTrainPart(model,positions[i]);modelGroup.add(model)}slot.group.add(modelGroup);slot.fallback.visible=false;slot.model=modelGroup}
+    try{const sources=await trainModelPromise;for(let i=0;i<slot.cars.length;i++){const model=sources[i%sources.length].scene.clone(true);fitTrainPart(model);slot.cars[i].group.add(model);slot.cars[i].fallback.visible=false;slot.cars[i].model=model}}
     catch(e){console.warn("Keeping procedural AMT-Bahn train",e)}
   }
-  for(const train of bridge.trains||[]){const group=new T.Group(),fallback=makeTrainFallback(),slot={train,group,fallback,model:null};group.add(fallback);world.add(group);trainSlots.push(slot);installTrainModel(slot)}
+  for(const train of bridge.trains||[]){const slot={train,cars:train.cars.map(()=>{const group=new T.Group(),fallback=makeTrainCarFallback();group.add(fallback);world.add(group);return{group,fallback,model:null}})};trainSlots.push(slot);installTrainModel(slot)}
   async function installBuildingModel(slot,url,w,h,d){
     if(!modelLoader)return;
     try{
@@ -235,7 +234,7 @@ const GLTF_LOADER_URL="https://cdn.jsdelivr.net/npm/three@0.186.0/examples/jsm/l
   window.Germany3D={ready:true,sync(){
     syncChar(playerMesh,bridge.player,0);
     playerMesh.rotation.y=bridge.player.facing;
-    for(const slot of trainSlots){const train=slot.train;slot.group.position.set(X(train.x),.07,Z(train.y));slot.group.rotation.y=(train.axis==="x"?Math.PI/2:0)+(train.dir<0?Math.PI:0)}
+    for(const slot of trainSlots)for(let i=0;i<slot.cars.length;i++){const car=slot.train.cars[i],group=slot.cars[i].group;group.position.set(X(car.x),.07,Z(car.y));group.rotation.y=Math.PI/2-car.angle}
     const ns=bridge.getNPCs();ns.forEach(n=>{let q=npcMeshes.get(n);if(n.special&&!q?.userData[n.special+"Sprite"]){const sprite=specialSprite(n);if(sprite){if(q)scene.remove(q);q=sprite;scene.add(q);npcMeshes.set(n,q)}}if(!q){q=specialSprite(n)||character("npc");scene.add(q);npcMeshes.set(n,q)}if(q.userData.borderPourerSprite)syncBorderPourer(q,n);else if(q.userData.merkelSprite)syncMerkel(q,n);else if(q.userData.bayernSprite)syncBayern(q,n);else syncChar(q,n)});for(const [n,q] of npcMeshes)if(!ns.includes(n)){scene.remove(q);npcMeshes.delete(n)}
     const ps=bridge.getPolice();ps.forEach(p=>{let q=policeMeshes.get(p);if(!q){q=character("police");scene.add(q);policeMeshes.set(p,q)}syncChar(q,p,.04)});for(const [p,q] of policeMeshes)if(!ps.includes(p)){scene.remove(q);policeMeshes.delete(p)}
     bridge.pickups.forEach(p=>{const q=pickupMeshes.get(p);q.visible=!p.taken;if(q.visible){q.position.set(X(p.x),.2,Z(p.y));q.rotation.y+=.012}});

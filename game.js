@@ -47,18 +47,36 @@ for(let cursor=0,i=0;i<=borderGates.length;i++){
  if(end-cursor>24)borderSegments.push({x:cursor,w:end-cursor});
  if(gate)cursor=gate.x+gate.w;
 }
-const railTracks=[
- {id:"nord-a",axis:"x",fixed:68,min:300,max:WORLD.w-300},{id:"nord-b",axis:"x",fixed:136,min:300,max:WORLD.w-300},
- {id:"sued-a",axis:"x",fixed:WORLD.h-68,min:300,max:WORLD.w-300},{id:"sued-b",axis:"x",fixed:WORLD.h-136,min:300,max:WORLD.w-300},
- {id:"west-a",axis:"y",fixed:68,min:300,max:WORLD.h-300},{id:"west-b",axis:"y",fixed:136,min:300,max:WORLD.h-300},
- {id:"ost-a",axis:"y",fixed:WORLD.w-68,min:300,max:WORLD.h-300},{id:"ost-b",axis:"y",fixed:WORLD.w-136,min:300,max:WORLD.h-300}
-];
+function wrapRailProgress(value,length){return((value%length)+length)%length}
+function pointOnRailLoop(loop,progress){
+ const s=wrapRailProgress(progress,loop.length),arc=loop.radius*Math.PI/2,w=loop.straightW,h=loop.straightH,r=loop.radius,x0=loop.minX,y0=loop.minY,x1=loop.maxX,y1=loop.maxY,cx0=x0+r,cx1=x1-r,cy0=y0+r,cy1=y1-r;
+ let d=s,a;
+ if(d<w)return{x:cx0+d,y:y0,angle:0,progress:s};d-=w;
+ if(d<arc){a=-Math.PI/2+d/r;return{x:cx1+Math.cos(a)*r,y:cy0+Math.sin(a)*r,angle:a+Math.PI/2,progress:s}}d-=arc;
+ if(d<h)return{x:x1,y:cy0+d,angle:Math.PI/2,progress:s};d-=h;
+ if(d<arc){a=d/r;return{x:cx1+Math.cos(a)*r,y:cy1+Math.sin(a)*r,angle:a+Math.PI/2,progress:s}}d-=arc;
+ if(d<w)return{x:cx1-d,y:y1,angle:Math.PI,progress:s};d-=w;
+ if(d<arc){a=Math.PI/2+d/r;return{x:cx0+Math.cos(a)*r,y:cy1+Math.sin(a)*r,angle:a+Math.PI/2,progress:s}}d-=arc;
+ if(d<h)return{x:x0,y:cy1-d,angle:-Math.PI/2,progress:s};d-=h;
+ a=Math.PI+d/r;return{x:cx0+Math.cos(a)*r,y:cy0+Math.sin(a)*r,angle:a+Math.PI/2,progress:s}
+}
+function makeRailLoop(id,inset,radius,dir){
+ const loop={id,minX:inset,minY:inset,maxX:WORLD.w-inset,maxY:WORLD.h-inset,radius,dir};
+ loop.straightW=loop.maxX-loop.minX-radius*2;loop.straightH=loop.maxY-loop.minY-radius*2;loop.length=2*(loop.straightW+loop.straightH)+2*Math.PI*radius;
+ const count=Math.ceil(loop.length/55);loop.samples=Array.from({length:count},(_,i)=>pointOnRailLoop(loop,loop.length*i/count));return loop
+}
+const railLoops=[makeRailLoop("aussenring",68,300,1),makeRailLoop("innenring",136,232,-1)],railTracks=railLoops;
+const TRAIN_CAR_OFFSETS=[132,0,-132],TRAIN_MIN_GAP=455,TRAIN_PLAYER_STOP_GAP=250,TRAIN_PLAYER_LOOKAHEAD=720;
 const trainSeeds=[
- [.12,1,214],[.63,-1,168],[.29,-1,198],[.82,1,236],[.18,1,154],[.71,-1,222],[.38,-1,184],[.86,1,248]
+ [0,.035,184],[0,.061,244],[0,.087,166],[0,.113,218],
+ [1,.465,232],[1,.491,172],[1,.517,252],[1,.543,194]
 ];
-const trains=railTracks.map((track,i)=>{
- const seed=trainSeeds[i],position=track.min+(track.max-track.min)*seed[0],train={id:"amt-bahn-"+(i+1),trackId:track.id,axis:track.axis,fixed:track.fixed,min:track.min,max:track.max,position,dir:seed[1],baseSpeed:seed[2],speed:seed[2],pause:0,chaos:2.2+i*.71,x:0,y:0};
- if(train.axis==="x"){train.x=position;train.y=train.fixed}else{train.x=train.fixed;train.y=position}return train
+function syncTrainTransform(train){
+ const loop=railLoops[train.loopIndex],center=pointOnRailLoop(loop,train.progress);train.x=center.x;train.y=center.y;train.angle=center.angle+(train.dir<0?Math.PI:0);
+ for(let i=0;i<TRAIN_CAR_OFFSETS.length;i++){const p=pointOnRailLoop(loop,train.progress+train.dir*TRAIN_CAR_OFFSETS[i]),car=train.cars[i];car.x=p.x;car.y=p.y;car.angle=p.angle+(train.dir<0?Math.PI:0)}
+}
+const trains=trainSeeds.map((seed,i)=>{
+ const loop=railLoops[seed[0]],train={id:"amt-bahn-"+(i+1),loopId:loop.id,loopIndex:seed[0],progress:loop.length*seed[1],dir:loop.dir,baseSpeed:seed[2],cruiseSpeed:seed[2],speed:seed[2],pause:0,chaos:2.2+i*.71,queued:false,blockedByPlayer:false,x:0,y:0,angle:0,cars:TRAIN_CAR_OFFSETS.map(()=>({x:0,y:0,angle:0}))};syncTrainTransform(train);return train
 });
 const fireSources=[];
 for(let x=36,i=0;x<WORLD.w;x+=72,i++)fireSources.push({x,y:BORDER_Y,active:true,intensity:.82+(i%5)*.035,seed:(i*47%101)/101});
@@ -176,6 +194,29 @@ const trainAnnouncements=[
  "Grund dafür ist ein kurzfristiger Personalausfall.",
  "Grund dafür ist eine kurzfristige Änderung im Betriebsablauf.",
  "Der Zug verkehrt heute in umgekehrter Wagenreihung. Das hilft Ihnen zeitlich nicht, ist aber immerhin eine Information."
+];
+const communityTrainExcuses=[
+ "Die Weiterfahrt verzögert sich, weil eine Kuh links neben dem Zug den vorgesehenen Fahrweg derzeit persönlich begutachtet.",
+ "Die Weiterfahrt verzögert sich, weil sich der Lokführer nach einer Toilettenpause ausgesperrt hat. Der Schlüssel reist im Gegenzug an.",
+ "Die Fahrt endet vorzeitig, weil das Tanken vergessen wurde. Am jetzigen Bahnhof kann selbstverständlich nicht getankt werden.",
+ "Die Abfahrt verschiebt sich, weil eine Wimper im Auge des Lokführers die sichere Weiterfahrt verwaltungsseitig nicht freigibt.",
+ "Der neue Lokführer reist mit der Bahn an. Sein Zug hat Verspätung. Damit ist die Ursache nun vollständig kreisförmig dokumentiert.",
+ "Ein Koffer war im Gleis. Der Koffer sitzt inzwischen wieder im Zug; die Verspätung bleibt aus Gründen der Vorgangskontinuität bestehen.",
+ "Grund sind sonstige qualitative Mängel. Welche Qualität gemeint ist, unterliegt dem Betriebsgeheimnis.",
+ "Alle Beteiligten wussten vom Halt in Fulda, mit Ausnahme der für den Halt zuständigen Person.",
+ "Die Klimaanlage im vorderen Führerstand ist ausgefallen. Der Zug wird deshalb gewendet und rückwärts vorwärts weiterbetrieben.",
+ "Im Tunnel werden Graffiti gesprüht. Die Polizei räumt den Tunnel; das Ergebnis bleibt wegen Dunkelheit leider unsichtbar.",
+ "Wir warten auf ein verspätetes Schiff. Weitere Rückfragen zur Spurweite richten Sie bitte schriftlich an die Anschlusskoordination.",
+ "Infolge von Störungen im Betriebsablauf beträgt die Verspätung derzeit null Minuten. Wir bitten auch hierfür vorsorglich um Entschuldigung.",
+ "Auf dem Nebengleis sehen Sie den Grund für unsere Verspätung. Der dortige Zug sieht vermutlich wiederum uns.",
+ "Die Leitstelle war vom täglichen Erscheinen dieses Zuges überrascht und musste zunächst einige Wagen zusammensuchen.",
+ "Wir haben eine Weiche überfahren, die wir nicht überfahren wollten, und befinden uns zu zwei Dritteln im falschen Vorgang.",
+ "Die Prognose hat eine Verspätung berechnet, die ein Mensch auf null setzte. Nun fehlt nur noch der Grund für den nicht vorhandenen Grund."
+];
+const railLawQuotes=[
+ "EBO § 62 Absatz 2: „Der Aufenthalt innerhalb der Gleise ist nicht gestattet.“ Spielhinweis: Bitte räumen Sie den Fahrweg.",
+ "EBO § 63 Absatz 2: „Von den Gleisen ist ein genügender Abstand zu halten.“ Spielhinweis: Ihr persönlicher Abstand beträgt derzeit Zugstau.",
+ "EBO § 64 untersagt, „Fahrthindernisse zu bereiten oder andere betriebsstörende oder betriebsgefährdende Handlungen vorzunehmen.“ Dies ist ein Spielhinweis, keine Rechtsberatung."
 ];
 const trainDestinations=["Amtshausen","Formulararchiv","Zuständigkeitsprüfung","Berlin Hauptsache","Endstation Geduld","Bad Anschluss"],trainDelays=[5,8,12,17,23,35,47,63,90];
 const npcDenglisch=["Also this ist jetzt aber auch nicht so gedacht.","Kann man machen. Muss man aber really nicht.","Ich möchte mich nicht complainen, aber ich complain jetzt.","Dafür gibt es bestimmt ein Formular, probably online but not really.","Früher war hier weniger process.","Sie stehen minimal im way.","Das ist bestimmt wegen der Baustelle. Die ist since 2009 da.","Dafür bin ich not responsible.","Ordnung muss schon sein, you know.","Haben Sie dafür einen appointment?"];
@@ -478,7 +519,7 @@ const pickups=[
  ...wurstPickups
 ];
 const normObjects=[{x:2210,y:1190,type:"bin",fixed:false,label:"MÜLLTONNE 4,6° SCHIEF"},{x:1650,y:650,type:"chairs",fixed:false,label:"STÜHLE NICHT FLUCHTGERECHT"},{x:570,y:1140,type:"hedge",fixed:false,label:"HECKE 3 CM ZU INDIVIDUELL"}];
-window.Germany3DBridge={WORLD,player,roads,crossings,crossingSigns,trafficLights,buildings,grassAreas,walkways,SIDEWALK_WIDTH,schreber,policeGarden,policePath,BORDER_Y,BORDER_BAND,borderGates,borderSegments,railTracks,trains,fireSources,props,pickups,getNPCs:()=>npcs,getPolice:()=>police,getNpcSpriteCanvas:key=>npcSpriteAtlases[key]?.canvas||null,npcSpriteGrids:Object.fromEntries(Object.entries(npcSpriteAtlases).map(([key,{cols,rows}])=>[key,{cols,rows}]))};
+window.Germany3DBridge={WORLD,player,roads,crossings,crossingSigns,trafficLights,buildings,grassAreas,walkways,SIDEWALK_WIDTH,schreber,policeGarden,policePath,BORDER_Y,BORDER_BAND,borderGates,borderSegments,railLoops,railTracks,trains,fireSources,props,pickups,getNPCs:()=>npcs,getPolice:()=>police,getNpcSpriteCanvas:key=>npcSpriteAtlases[key]?.canvas||null,npcSpriteGrids:Object.fromEntries(Object.entries(npcSpriteAtlases).map(([key,{cols,rows}])=>[key,{cols,rows}]))};
 const forms={
 a38:{code:"A38/1",title:"Passierschein A38 zur Beantragung eines weiteren Antrags",subtitle:"Bitte vollständig ausfüllen. Unvollständige Vollständigkeit gilt als unvollständig.",fields:[["text","VOLLSTÄNDIGER NAME"],["text","GEBURTSORT IN HEUTIGEN GEMEINDEGRENZEN"],["select","MELDESTATUS",["gemeldet","noch nicht gemeldet","gefühltermaßen gemeldet"]],["text","AKTENZEICHEN, FALLS BEREITS VORHANDEN"],["check","Ich bestätige, dass ich dieses Formular freiwillig unfreiwillig ausfülle."]]},
 wohnung:{code:"WGB-88",title:"Wohnungsgeberbestätigung zur Bestätigung einer Wohnung",subtitle:"Bestätigen Sie, dass Ihre Wohnung tatsächlich eine Wohnung ist.",fields:[["text","ANSCHRIFT"],["text","WOHNUNGSGEBENDER WOHNUNGSGEBER"],["select","ART DER ÜBERLASSUNG",["vermietet","untervermietet","mysteriös überlassen"]],["text","TATSÄCHLICHES DATUM DER TATSACHE DES EINZUGS"],["check","Ich bestätige das Vorhandensein von Wänden und mindestens einer Tür."]]},
@@ -520,16 +561,28 @@ function hideWorldBark(){clearTimeout(showWorldBark.t);const box=document.getEle
 function stopSpeech(completeHumorScold=false){speechGeneration++;speechQueue.length=0;speechActive=false;clearTimeout(speechPauseTimer);if("speechSynthesis" in window)speechSynthesis.cancel();stopRecordedSpeech();hideWorldBark();cancelHumorScold(completeHumorScold)}
 function violationAlert(msg,level){const alert=document.getElementById("violation-alert"),app=document.getElementById("app");document.getElementById("violation-law").textContent=lawFor(msg);document.getElementById("violation-title").textContent=state.lang==="en"?"RULE VIOLATION":"ORDNUNGSWIDRIGKEIT";document.getElementById("violation-text").textContent=state.lang==="en"?localize(msg):msg;document.getElementById("violation-stars").textContent="★".repeat(level)+"☆".repeat(Math.max(0,5-level));alert.hidden=false;app.classList.remove("enforcement");void app.offsetWidth;app.classList.add("enforcement");clearTimeout(violationAlert.t);violationAlert.t=setTimeout(()=>{alert.hidden=true;app.classList.remove("enforcement")},2200);playSiren()}
 function showWorldBark(speaker,msg,urgent=true,recording="",placement=""){const box=document.getElementById("police-bark"),speakerEl=document.getElementById("bark-speaker"),textEl=document.getElementById("police-bark-text"),start=()=>{speakerEl.textContent=speaker;textEl.textContent=msg;box.classList.toggle("law-quote",placement==="law");box.hidden=false;uiTone(urgent?1280:880,.06,"square",.035)},done=()=>{if(speakerEl.textContent===speaker&&textEl.textContent===msg){box.hidden=true;box.classList.remove("law-quote")}};if(!state.voiceOn){start();clearTimeout(showWorldBark.t);showWorldBark.t=setTimeout(done,placement==="law"?8500:3200);return}const options={urgent,voiceKey:speaker,start,done};if(recording)speakRecorded(msg,recording,options);else if(speaker.startsWith("ANGELA MERKEL"))speakMerkelLine(msg,options);else speak(msg,{...options,masculine:speaker.startsWith("FRIEDRICH MERZ")})}
-let trainAnnouncementIndex=Math.floor(Math.random()*trainAnnouncements.length),trainAnnouncementNearby=false,trainAnnouncementNextAt=0;
-function nextTrainAnnouncement(){const reason=trainAnnouncements[trainAnnouncementIndex++%trainAnnouncements.length],service=pick(["Regionalexpress","Intercity","Regionalbahn"]),destination=pick(trainDestinations),delay=pick(trainDelays),platform=pick(["Null","eins","dreizehn","einunddreißig"]);return `Achtung an Gleis ${platform}. Der ${service} nach ${destination} verspätet sich um voraussichtlich ${delay} Minuten. ${reason} Wir bitten um Entschuldigung.`}
-function updateTrainAnnouncement(){let nearest=Infinity;for(const train of trains)nearest=Math.min(nearest,dist(player.x,player.y,train.x,train.y));if(nearest>650){trainAnnouncementNearby=false;return}const now=performance.now(),box=document.getElementById("police-bark");if(nearest>=500||trainAnnouncementNearby||now<trainAnnouncementNextAt||speechActive||speechQueue.length||!box.hidden)return;trainAnnouncementNearby=true;trainAnnouncementNextAt=now+22000;showWorldBark("BAHNSTEIGDURCHSAGE · FIKTIONALE SATIRE",nextTrainAnnouncement(),false)}
+let trainAnnouncementIndex=Math.floor(Math.random()*trainAnnouncements.length),communityExcuseIndex=Math.floor(Math.random()*communityTrainExcuses.length),trainAnnouncementNearby=false,trainAnnouncementNextAt=0,railLawIndex=0,railHoldTimer=0,railLawNextAt=0;
+function nextTrainAnnouncement(){
+ const community=Math.random()<.68,reason=community?communityTrainExcuses[communityExcuseIndex++%communityTrainExcuses.length]:trainAnnouncements[trainAnnouncementIndex++%trainAnnouncements.length],service=pick(["Regionalexpress","Intercity","Regionalbahn"]),destination=pick(trainDestinations),delay=pick(trainDelays),platform=pick(["Null","eins","dreizehn","einunddreißig"]);
+ return{speaker:community?"BAHNDURCHSAGE · COMMUNITY-ANEKDOTE · FIKTIONALISIERT":"BAHNSTEIGDURCHSAGE · FIKTIONALE SATIRE",text:`Achtung an Gleis ${platform}. Der ${service} nach ${destination} verspätet sich um voraussichtlich ${delay} Minuten. ${reason} Wir entschuldigen uns in aller gebotenen Gründlichkeit.`}
+}
+function updateTrainAnnouncement(){let nearest=Infinity;for(const train of trains)for(const car of train.cars)nearest=Math.min(nearest,dist(player.x,player.y,car.x,car.y));if(nearest>650){trainAnnouncementNearby=false;return}const now=performance.now(),box=document.getElementById("police-bark");if(nearest>=500||trainAnnouncementNearby||now<trainAnnouncementNextAt||speechActive||speechQueue.length||!box.hidden)return;trainAnnouncementNearby=true;trainAnnouncementNextAt=now+22000;const announcement=nextTrainAnnouncement();showWorldBark(announcement.speaker,announcement.text,false)}
+function nearestRailLocation(loop,x,y){let nearest=null,best=Infinity;for(const sample of loop.samples){const d=(sample.x-x)**2+(sample.y-y)**2;if(d<best){best=d;nearest=sample}}return{progress:nearest.progress,distance:Math.sqrt(best)}}
 function updateBorderTrains(dt){
+ const nearEdge=player.x<520||player.y<520||player.x>WORLD.w-520||player.y>WORLD.h-520,playerRail=nearEdge?railLoops.map(loop=>nearestRailLocation(loop,player.x,player.y)):railLoops.map(()=>({progress:0,distance:Infinity}));let playerHolding=false;
  for(const train of trains){
-  if(train.pause>0)train.pause=Math.max(0,train.pause-dt);else train.position+=train.dir*train.speed*dt;
-  if(train.position<=train.min||train.position>=train.max){train.position=clamp(train.position,train.min,train.max);train.dir*=-1;train.pause=.12+Math.random()*.55;train.chaos=2.5+Math.random()*5}
-  train.chaos-=dt;if(train.chaos<=0){const event=Math.random();if(event<.28)train.dir*=-1;else if(event<.5)train.pause=.35+Math.random()*1.4;train.speed=train.baseSpeed*(.62+Math.random()*.82);train.chaos=2.8+Math.random()*6.4}
-  if(train.axis==="x"){train.x=train.position;train.y=train.fixed}else{train.x=train.fixed;train.y=train.position}
+  const loop=railLoops[train.loopIndex],sameLoop=trains.filter(other=>other!==train&&other.loopIndex===train.loopIndex);let gap=loop.length;
+  for(const other of sameLoop){const forward=train.dir>0?wrapRailProgress(other.progress-train.progress,loop.length):wrapRailProgress(train.progress-other.progress,loop.length);if(forward<gap)gap=forward}
+  train.chaos-=dt;if(train.chaos<=0){const event=Math.random();if(event<.34)train.pause=.45+Math.random()*1.7;train.cruiseSpeed=train.baseSpeed*(.55+Math.random()*1.05);train.chaos=2.8+Math.random()*6.4}
+  if(train.pause>0)train.pause=Math.max(0,train.pause-dt);
+  const rail=playerRail[train.loopIndex],playerGap=train.dir>0?wrapRailProgress(rail.progress-train.progress,loop.length):wrapRailProgress(train.progress-rail.progress,loop.length),blockedByPlayer=rail.distance<58&&playerGap<TRAIN_PLAYER_LOOKAHEAD;
+  train.blockedByPlayer=blockedByPlayer;if(blockedByPlayer)playerHolding=true;
+  let target=train.pause>0?0:train.cruiseSpeed;if(gap<900)target=Math.min(target,train.cruiseSpeed*clamp((gap-TRAIN_MIN_GAP)/(900-TRAIN_MIN_GAP),0,1));if(blockedByPlayer)target=0;
+  train.speed+=clamp(target-train.speed,-390*dt,135*dt);
+  let allowed=Math.max(0,gap-TRAIN_MIN_GAP);if(blockedByPlayer)allowed=Math.min(allowed,Math.max(0,playerGap-TRAIN_PLAYER_STOP_GAP));const intended=Math.max(0,train.speed*dt),advance=Math.min(intended,allowed);train.queued=advance+0.01<intended||(!blockedByPlayer&&gap<TRAIN_MIN_GAP+18);train.progress=wrapRailProgress(train.progress+train.dir*advance,loop.length);syncTrainTransform(train)
  }
+ const now=performance.now(),box=document.getElementById("police-bark");railHoldTimer=playerHolding?railHoldTimer+dt:Math.max(0,railHoldTimer-dt*2.5);
+ if(railHoldTimer>1.15&&now>=railLawNextAt&&!speechActive&&!speechQueue.length&&box.hidden){railHoldTimer=0;railLawNextAt=now+13500;showWorldBark("BAHNAUFSICHT · AMTLICHER SPIELHINWEIS",railLawQuotes[railLawIndex++%railLawQuotes.length],true,"","law")}
  updateTrainAnnouncement()
 }
 function announceCurrentRule(){const index=state.rule%rules.length,text=rules[index][1],recording=`./assets/voices/laws/thorsten-negative-rule-${String(index+1).padStart(2,"0")}.mp3`;speakRecorded(text,recording,{voiceKey:"REGEL DES AUGENBLICKS"})}
@@ -852,11 +905,11 @@ function drawGround(){
  drawFireBoundaryGround();
 }
 function drawRailTracks(){
- ctx.save();ctx.strokeStyle="#343532";ctx.lineCap="square";
- for(const track of railTracks){
-  const horizontal=track.axis==="x",a=project(horizontal?track.min:track.fixed,horizontal?track.fixed:track.min);
-  ctx.lineWidth=Math.max(2,4*a.s);for(const side of [-1,1]){const p1=project(horizontal?track.min:track.fixed+side*11,horizontal?track.fixed+side*11:track.min),p2=project(horizontal?track.max:track.fixed+side*11,horizontal?track.fixed+side*11:track.max);ctx.beginPath();ctx.moveTo(p1.x,p1.y);ctx.lineTo(p2.x,p2.y);ctx.stroke()}
-  ctx.strokeStyle="#5b5145";ctx.lineWidth=Math.max(2,7*a.s);for(let n=track.min;n<=track.max;n+=150){const p1=project(horizontal?n:track.fixed-21,horizontal?track.fixed-21:n),p2=project(horizontal?n:track.fixed+21,horizontal?track.fixed+21:n);ctx.beginPath();ctx.moveTo(p1.x,p1.y);ctx.lineTo(p2.x,p2.y);ctx.stroke()}ctx.strokeStyle="#343532";
+ ctx.save();ctx.lineCap="round";ctx.lineJoin="round";
+ for(const loop of railLoops){
+  const scalePoint=project(loop.samples[0].x,loop.samples[0].y);ctx.strokeStyle="#343532";ctx.lineWidth=Math.max(2,4*scalePoint.s);
+  for(const side of [-1,1]){ctx.beginPath();for(let i=0;i<loop.samples.length;i++){const sample=loop.samples[i],nx=-Math.sin(sample.angle)*11*side,ny=Math.cos(sample.angle)*11*side,p=project(sample.x+nx,sample.y+ny);if(i)ctx.lineTo(p.x,p.y);else ctx.moveTo(p.x,p.y)}ctx.closePath();ctx.stroke()}
+  ctx.strokeStyle="#5b5145";ctx.lineWidth=Math.max(2,7*scalePoint.s);for(let i=0;i<loop.samples.length;i+=3){const sample=loop.samples[i],nx=-Math.sin(sample.angle)*21,ny=Math.cos(sample.angle)*21,p1=project(sample.x-nx,sample.y-ny),p2=project(sample.x+nx,sample.y+ny);ctx.beginPath();ctx.moveTo(p1.x,p1.y);ctx.lineTo(p2.x,p2.y);ctx.stroke()}
  }
  ctx.restore()
 }
@@ -1043,10 +1096,9 @@ function drawDistrictLabels(){
 
 function drawPoster(){const p=project(1570,530,90);if(p.x<-160||p.x>width+160||p.y<-180||p.y>height+180)return;const s=p.s;ctx.save();ctx.translate(p.x,p.y);ctx.scale(s,s);ctx.fillStyle="#ded8cb";ctx.fillRect(-58,-72,116,84);ctx.strokeStyle="#222";ctx.strokeRect(-58,-72,116,84);ctx.fillStyle="#777";ctx.beginPath();ctx.ellipse(0,-43,20,25,0,0,Math.PI*2);ctx.fill();ctx.fillStyle="#494949";ctx.beginPath();ctx.moveTo(-22,-50);ctx.quadraticCurveTo(0,-72,24,-50);ctx.lineTo(17,-59);ctx.lineTo(-16,-59);ctx.closePath();ctx.fill();ctx.fillStyle="#222";ctx.font="900 8px Arial";ctx.textAlign="center";ctx.fillText("FRIEDRICH MERZ",0,-8);ctx.font="7px Arial";ctx.fillText("SATIRISCHER AUSHANG",0,3);ctx.restore()}
 function drawTrain(train){
- const p=project(train.x,train.y,0),ahead=project(train.x+(train.axis==="x"?100:0),train.y+(train.axis==="y"?100:0),0),scale=Math.hypot(ahead.x-p.x,ahead.y-p.y)/100;if(p.x<-520||p.x>width+520||p.y<-420||p.y>height+420)return;
- let angle=Math.atan2(ahead.y-p.y,ahead.x-p.x);if(train.dir<0)angle+=Math.PI;ctx.save();ctx.translate(p.x,p.y);ctx.rotate(angle);ctx.scale(scale,scale);ctx.fillStyle="rgba(24,24,23,.28)";ctx.fillRect(-202,13,404,58);
- for(let i=-1;i<=1;i++){const x=i*132,lead=i===1;ctx.fillStyle="#eee9df";ctx.strokeStyle="#343434";ctx.lineWidth=4;ctx.beginPath();ctx.roundRect(x-58,-54,116,66,lead?18:9);ctx.fill();ctx.stroke();ctx.fillStyle="#c43d36";ctx.fillRect(x-56,-16,112,23);ctx.fillStyle="#39454b";for(let w=-38;w<=38;w+=25)ctx.fillRect(x+w,-45,17,18);ctx.fillStyle="#2d2d2c";for(const wheel of [-36,36]){ctx.beginPath();ctx.arc(x+wheel,15,10,0,Math.PI*2);ctx.fill()}if(i<1){ctx.strokeStyle="#252525";ctx.lineWidth=7;ctx.beginPath();ctx.moveTo(x+60,-1);ctx.lineTo(x+72,-1);ctx.stroke()}}
- ctx.fillStyle="#f0eadf";ctx.font="900 10px Arial";ctx.textAlign="center";ctx.fillText("AMT-BAHN",0,1);ctx.restore()
+ const centers=train.cars.map(car=>project(car.x,car.y,0));if(centers.every(p=>p.x<-220||p.x>width+220||p.y<-180||p.y>height+180))return;
+ ctx.save();ctx.strokeStyle="#252525";ctx.lineWidth=7;for(let i=0;i<centers.length-1;i++){ctx.beginPath();ctx.moveTo(centers[i].x,centers[i].y);ctx.lineTo(centers[i+1].x,centers[i+1].y);ctx.stroke()}ctx.restore();
+ for(let i=train.cars.length-1;i>=0;i--){const car=train.cars[i],p=centers[i],ahead=project(car.x+Math.cos(car.angle)*100,car.y+Math.sin(car.angle)*100,0),scale=Math.hypot(ahead.x-p.x,ahead.y-p.y)/100,angle=Math.atan2(ahead.y-p.y,ahead.x-p.x);ctx.save();ctx.translate(p.x,p.y);ctx.rotate(angle);ctx.scale(scale,scale);ctx.fillStyle="rgba(24,24,23,.28)";ctx.fillRect(-62,13,124,58);ctx.fillStyle="#eee9df";ctx.strokeStyle=train.queued?"#7b2d29":"#343434";ctx.lineWidth=4;ctx.beginPath();ctx.roundRect(-58,-54,116,66,i===0?18:9);ctx.fill();ctx.stroke();ctx.fillStyle="#c43d36";ctx.fillRect(-56,-16,112,23);ctx.fillStyle="#39454b";for(let w=-38;w<=38;w+=25)ctx.fillRect(w,-45,17,18);ctx.fillStyle="#2d2d2c";for(const wheel of [-36,36]){ctx.beginPath();ctx.arc(wheel,15,10,0,Math.PI*2);ctx.fill()}if(i===1){ctx.fillStyle="#f0eadf";ctx.font="900 10px Arial";ctx.textAlign="center";ctx.fillText("AMT-BAHN",0,1)}ctx.restore()}
 }
 function drawWorld(){
  drawGround();drawGarden();drawDistrictLabels();
