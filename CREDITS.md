@@ -18,7 +18,7 @@ The adjacent closed nuclear plant and operating coal plant use a bounded local C
 
 ## Music
 
-The background catalog is synthesized at runtime with the Web Audio API. Every track is an original 8-bit arrangement using square-wave lead, triangle-wave bass, and synthetic percussion. No lyrics, MIDI files, sheet-music files, or third-party recordings are bundled.
+The continuously rotating background catalog is synthesized at runtime with the Web Audio API. It begins behind the opening forms, ducks beneath their spoken readout, and continues without an intentional gap while music is enabled. Every track is an original 8-bit arrangement using square-wave lead, triangle-wave bass, and synthetic percussion. No lyrics, MIDI files, sheet-music files, or third-party recordings are bundled.
 
 The 26-track shuffled catalog gives every Bundesland a melody:
 
@@ -79,18 +79,30 @@ The arrangements use old or traditional underlying compositions, not modern perf
 
 The requested 2012 song **Thüringer Klöße** by Fritz is not transcribed or bundled. Its official upload identifies Frank Kadanik as composer, Ilona Klein and Hans-Jürgen Gröschner as lyricists, Warner Music Germany production, and explicitly prohibits unauthorized use: https://www.youtube.com/watch?v=qJe3cdM7f1c. The similarly named in-game Kloß-Kantinenjingle is a new, independent composition and does not copy that protected melody.
 
-## Pedestrian voices
+## Thorsten-Voice character reactions
 
 German browser speech remains the default for character dialogue, with the
-available installed German voices assigned across speakers. Three short angry
-pedestrian barks additionally use recordings from **Thorsten-Voice Dataset
-2021.06 emotional**, version 2.0, by Thorsten Müller and Dominik Kreutz. The
-dataset contains 2,400 German recordings (300 sentences across eight performed
-emotions) and is released under CC0 1.0 Universal.
+available installed German voices assigned across speakers. Six short clips
+from **Thorsten-Voice Dataset 2021.06 emotional**, version 2.0, by Thorsten
+Müller and Dominik Kreutz supplement it: angry and sleepy delivery appears in
+German-side pedestrian remarks, while amused and disgusted delivery represents
+the player's first-person reaction to gaining or losing Germanness. The dataset
+contains 2,400 German recordings (300 sentences across eight performed
+emotions) and is released under CC0 1.0 Universal. The game treats angry and
+disgusted delivery as negative-valence material and sleepy delivery as
+low-arousal material; this is an editorial mapping of the dataset's categorical
+styles, not a claim that it contains numeric valence or arousal annotations.
 
 - Dataset DOI: https://doi.org/10.5281/zenodo.5525023
 - Project repository: https://github.com/thorstenMueller/Thorsten-Voice
 - Local clip IDs, conversion details, license, and checksums: `assets/voices/LICENSES.md`
+
+## Opening-form typeface
+
+The two `HUM-01/DE` opening sheets use **Grenze** by Renata Polastri and the
+Omnibus-Type team, a Roman/blackletter hybrid selected for its more readable
+classical forms. It is loaded through Google Fonts and released under the SIL
+Open Font License 1.1: https://github.com/Omnibus-Type/Grenze
 
 ## Phone tilt
 

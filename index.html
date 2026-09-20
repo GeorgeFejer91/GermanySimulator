@@ -7,7 +7,7 @@
   <meta name="description" content="Germany Simulator — a 2.5D bureaucratic open-world parody.">
   <link rel="icon" href="./assets/faxgeraet.svg" type="image/svg+xml">
   <title>Germany Simulator · EC Games</title>
-  <link rel="stylesheet" href="./styles.css?v=20260920-6">
+  <link rel="stylesheet" href="./styles.css?v=20260920-7">
 </head>
 <body>
 <main id="app">
@@ -20,11 +20,10 @@
   <aside class="hud mission"><small>AKTUELLER VORGANG</small><b id="mission-title">ANMELDUNG</b><p id="mission-text"></p><div class="progress"><i id="mission-progress"></i></div></aside>
   <aside class="hud stats"><span>ENERGIE <b id="energy">100</b></span><span>FORMULARE <b id="forms">0</b></span><span>PFAND <b id="pfand">0</b></span><span>TAG <b id="day">1/3</b></span></aside>
   <aside class="hud germanness"><small>GERMANNESS</small><div class="germanness-meter" role="progressbar" aria-label="Germanness" aria-valuemin="0" aria-valuemax="15" aria-valuenow="0"><i id="germanness-fill"></i><span class="germanness-threshold" aria-hidden="true"></span></div><output id="germanness-value">0/15</output><span id="law-power">§-MACHT AB 9/15</span><div class="wurst-pass"><b>EXTRA WURST <output id="wurst-count">0/9</output></b><div id="wurst-badges" class="wurst-badges" role="list" aria-label="Collected sausage badges"></div></div></aside>
-  <aside id="region-badge" class="region-badge"><small>REGION</small><b id="region-name">BERLIN</b><span id="region-language">Denglisch-Zone</span></aside>
   <aside class="hud rule"><small>REGEL DES AUGENBLICKS</small><b id="rule-id">§17.3b</b><p id="rule-text"></p></aside>
   <div id="toast" class="toast" role="status" aria-live="polite"></div>
   <section id="wurst-alert" class="wurst-alert" hidden role="status" aria-live="polite"><small>WURSTSAMMLERPASS · NEUFUND</small><div class="wurst-alert-body"><img id="wurst-alert-image" alt=""><div><b>EXTRA WURST!</b><strong id="wurst-alert-title"></strong><p id="wurst-alert-history"></p><span id="wurst-alert-credit"></span></div></div><em>UNLOCKED · +1 GERMANNESS</em></section>
-  <div id="police-bark" class="police-bark" hidden><b id="bark-speaker">POLIZEI</b><span id="police-bark-text"></span></div>
+  <div id="police-bark" class="police-bark" hidden role="status" aria-live="polite"><b id="bark-speaker">POLIZEI</b><span id="police-bark-text"></span></div>
   <section id="violation-alert" class="violation-alert" hidden aria-live="assertive"><small id="violation-law">§</small><b id="violation-title">ORDNUNGSWIDRIGKEIT</b><p id="violation-text"></p><div id="violation-stars"></div></section>
   <section id="quiz-modal" class="modal" hidden><div class="quiz-card" role="dialog" aria-modal="true" aria-labelledby="quiz-speaker"><div class="quiz-head"><b id="quiz-speaker">SPONTANE EINBÜRGERUNGSPRÜFUNG</b><span id="quiz-source">BAMF-GESAMTKATALOG</span></div><p id="quiz-prompt"></p><div id="quiz-choices" class="quiz-choices"></div><em>SPIELBEWERTUNG: RICHTIG +1 · FALSCH −1 GERMANNESS</em></div></section>
   <section id="border-alert" class="border-alert" hidden aria-live="polite"><small>BRANDMAUER</small><b id="border-title">DEUTSCHLAND</b><p id="border-copy">BERLIN LIEGT HINTER DER BRANDMAUER. AB HIER NUR NOCH DEUTSCH.</p></section>
@@ -52,7 +51,7 @@
   <footer><span>WASD / ARROWS · MOVE</span><span>SHIFT · SUSPICIOUSLY FAST</span><span>E · INTERACT</span><span>§ / Q · GESETZ ZITIEREN</span><button id="mute" type="button">MUSIC 8-BIT ON</button><button id="voice-toggle" type="button">VOICE ON</button><a href="https://ec-games.space/">EC GAMES</a><span>SATIRE · GAME RULES · NOT LEGAL OR IMMIGRATION ADVICE</span></footer>
 </main>
 <script type="importmap">{"imports":{"three":"https://cdn.jsdelivr.net/npm/three@0.186.0/build/three.module.js"}}</script>
-<script src="./game.js?v=20260920-6"></script>
+<script src="./game.js?v=20260920-7"></script>
 <script type="module" src="./world3d.js?v=20260920-4"></script>
 </body>
 </html>
