@@ -12,6 +12,9 @@ assert.match(game,/new Audio\(INTRO_MUSIC_AUDIO\)/,"intro audio must preload at 
 assert.match(game,/startMusic\(\);/,"intro playback must be attempted at page entry");
 assert.match(game,/if\(event\)\{if\(!audio\)audio=new .*audio\.resume\(\)\}/,"first interaction must unlock the synthesized handoff");
 assert.match(game,/if\(!introMusicFinished\)\{introMusicAudio\.play\(\)/,"finished intro must not replay");
+assert.match(game,/MUSIC_UNLOCK_EVENTS=\["pointerdown","click","keydown"\]/,"music must retry across trusted user gestures");
+assert.match(game,/introMusicAudio\.addEventListener\("playing",removeMusicUnlockListeners/,"music unlock retries must stop only after playback starts");
+assert.doesNotMatch(game,/addEventListener\("(?:pointerdown|click|keydown)",startMusic,\{once:true/,"a rejected autoplay attempt must not consume the only retry");
 assert.match(game,/introMusicAudio\.onplay=.*NOW PLAYING · INTRO SONG/,"UI must confirm actual intro playback");
 assert.match(game,/introMusicAudio\.onerror=.*introMusicFinished=true/,"missing intro audio must not block the regular soundtrack");
 assert.match(game,/introMusicAudio\.onended=.*startMusic\(\)/,"synthesized playlist must follow the intro");
