@@ -27,6 +27,7 @@ Backend, infrastructure, and asset-pipeline choices are deliberately conservativ
 6. Avoid duplicate runtime trees and duplicate source artwork. One source placement, one loader decision, one fallback.
 7. Measure network size, decode cost, memory, and frame impact before building optimization infrastructure.
 8. Prefer a small manifest or direct mapping over a generalized asset registry until at least two independent asset families need the same abstraction.
+9. Root HTML entry points append one release token to CSS and JavaScript URLs. Bump that token whenever a user-visible Pages release changes those files so GitHub Pages' ten-minute asset cache cannot mix old runtime code with new HTML.
 
 ## Acceptance
 
