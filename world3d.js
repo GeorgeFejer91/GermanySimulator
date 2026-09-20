@@ -122,15 +122,18 @@ const GLTF_LOADER_URL="https://cdn.jsdelivr.net/npm/three@0.186.0/examples/jsm/l
       installPlantModel(slot,powerModels.nuclearTransformer,{x:3.2,y:2.55,z:2.4},[{x:2.4,y:0,z:-2.35}],true,transformerFallback);
       installPlantModel(slot,powerModels.nuclearSign,{x:.62,y:1.7,z:.5},[{x:-6.4,y:0,z:d/2+.12}],true,signFallback);
     }else{
-      const hallFallback=new T.Group(),stackFallback=new T.Group();g.add(hallFallback,stackFallback);box(w*.68,3.7,d*.58,mat(0x615f5a,.98),-1.15,1.85,-.25,hallFallback);box(w*.7,.15,d*.6,mat(0x8e8b83),-1.15,3.78,-.25,hallFallback);
-      const stack=new T.Mesh(new T.CylinderGeometry(.45,.62,6.2,18),mat(0x5d5953,.94));stack.position.set(w*.32,3.1,.6);stackFallback.add(stack);box(5.5,.38,.55,M.metal,2.05,2.05,1.75,g).rotation.z=-.34;
-      const lit=new T.MeshStandardMaterial({color:0xffbf57,emissive:0x9d5313,emissiveIntensity:1.8,roughness:.5});for(let x=-6;x<2.2;x+=1.35){box(.62,.38,.08,lit,x,1.25,2.2,g);box(.62,.38,.08,lit,x,2.25,2.2,g)}
-      for(let j=0;j<7;j++){const q=box(.28,.22,.28,M.dark,0,0,0,g);coalBelt.push({mesh:q,index:j,from:new T.Vector3(-.55,1.15,1.75),to:new T.Vector3(4.65,2.95,1.75)})}
-      const gateL=box(3.1,.16,.1,mat(0x31553a),-w/2+.45,.78,d/2+.13,g),gateR=box(3.1,.16,.1,mat(0x31553a),w/2-.45,.78,d/2+.13,g);gateL.rotation.y=.82;gateR.rotation.y=-.82;
-      const l=label("KOHLEKRAFTWERK · IN BETRIEB","WEIT OFFEN · 24/7 · RAUCHFANG AKTIV","#31553a","#f4eee2");l.position.set(0,3.55,d/2+.18);g.add(l);registerMaterials(g,slot);
-      installPlantModel(slot,powerModels.coalBuilding,{x:w*.72,y:4.65,z:d*.62},[{x:-1.15,y:0,z:-.25}],false,hallFallback);
-      installPlantModel(slot,powerModels.coalStack,{x:1.45,y:6.2,z:1.45},[{x:w*.32,y:0,z:.6}],false,stackFallback);
-      for(let j=0;j<10;j++){const m=new T.MeshBasicMaterial({color:0x1d1c1a,transparent:true,depthWrite:false}),q=new T.Mesh(new T.SphereGeometry(.62,10,7),m);g.add(q);coalSmoke.push({mesh:q,x:w*.32,y:5.95,z:.6,index:j})}
+      const hall=new T.Group(),stackFallback=new T.Group();g.add(hall,stackFallback);
+      box(w*.57,3.7,d*.55,mat(0x615f5a,.98),-.3,1.85,-.55,hall);box(w*.59,.15,d*.57,mat(0x8e8b83),-.3,3.78,-.55,hall);
+      const stackX=5.6,stackZ=-.6,stack=new T.Mesh(new T.CylinderGeometry(.38,.52,5.15,18),mat(0x5d5953,.94));stack.position.set(stackX,2.575,stackZ);stackFallback.add(stack);
+      const conveyor=box(4.4,.3,.48,M.metal,2.6,1.9,1.42,g);conveyor.rotation.z=.36;
+      const lit=new T.MeshStandardMaterial({color:0xffbf57,emissive:0x9d5313,emissiveIntensity:1.8,roughness:.5});for(let x=-4.35;x<2.1;x+=1.3){box(.62,.38,.08,lit,x,1.15,1.8,g);box(.62,.38,.08,lit,x,2.05,1.8,g)}
+      box(1.65,2.05,.09,M.dark,3.1,1.025,1.81,g);box(2.15,.05,1.1,M.walk,3.1,.035,2.25,g);
+      for(let j=0;j<7;j++){const q=box(.25,.2,.25,M.dark,0,0,0,g);coalBelt.push({mesh:q,index:j,from:new T.Vector3(.55,1.2,1.42),to:new T.Vector3(4.65,2.65,1.42)})}
+      const gateL=box(2.35,.16,.1,mat(0x31553a),-w/2+.45,.78,d/2+.13,g),gateR=box(2.35,.16,.1,mat(0x31553a),w/2-.45,.78,d/2+.13,g);gateL.rotation.y=.82;gateR.rotation.y=-.82;
+      const l=label("KOHLEKRAFTWERK · OFFEN","IN BETRIEB · 24/7 · RAUCHFANG AKTIV","#31553a","#f4eee2");l.scale.set(3.45,.68,1);l.position.set(-.3,4.3,1.9);g.add(l);registerMaterials(g,slot);
+      installPlantModel(slot,powerModels.coalBuilding,{x:3.2,y:3.3,z:3.1},[{x:-5.95,y:0,z:-.75}]);
+      installPlantModel(slot,powerModels.coalStack,{x:1.1,y:5.15,z:1.1},[{x:stackX,y:0,z:stackZ}],false,stackFallback);
+      for(let j=0;j<10;j++){const m=new T.MeshBasicMaterial({color:0x1d1c1a,transparent:true,depthWrite:false}),q=new T.Mesh(new T.SphereGeometry(.38,10,7),m);g.add(q);coalSmoke.push({mesh:q,x:stackX,y:4.95,z:stackZ,index:j})}
     }
   }
   function building(b,i){
