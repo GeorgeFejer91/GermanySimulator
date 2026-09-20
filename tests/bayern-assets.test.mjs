@@ -9,9 +9,15 @@ assert.equal(clips.length,8,"expected eight Bayern transcript/audio pairs");
 assert.equal(new Set(clips.map(([,text])=>text)).size,8,"Bayern transcripts must be unique");
 for(const [,text,path] of clips){assert.ok(text.trim(),`empty transcript for ${path}`);assert.ok(existsSync(join(root,path.slice(2))),`missing ${path}`)}
 
-const png=readFileSync(join(root,"assets/bayern-walker-sprite.png"));
-assert.equal(png.readUInt32BE(16),1280,"sprite atlas width must remain five 256 px cells");
-assert.equal(png.readUInt32BE(20),1024,"sprite atlas height must remain four 256 px cells");
+for(const [file,width,height] of [
+ ["bayern-walker-sprite.png",2048,1024],
+ ["border-pourer-sprite.png",2048,1536],
+ ["merkel-sprite.png",1536,1280],
+]){
+ const png=readFileSync(join(root,"assets",file));
+ assert.equal(png.readUInt32BE(16),width,`${file} has the expected expanded column count`);
+ assert.equal(png.readUInt32BE(20),height,`${file} has the expected direction/action rows`);
+}
 assert.match(game,/special:"bayern"/);
 assert.match(game,/updateBayern\(n,dt\)/);
 console.log("Bayern NPC asset contract OK");

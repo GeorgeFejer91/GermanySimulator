@@ -12,11 +12,15 @@ for(const [source,copy] of Object.entries(berlin)){
  assert.match(copy.question,/\b(?:who|what|when|where|which|why|from|has|can|one|is|at|on|not|first|elected|celebrated|works|regular|remembered|economic|cultural|social)\b/i,`task ${source} question is not visibly Denglisch`);
 }
 assert.match(game,/state\.region==="berlin"\?"Choice ":""/,"every Berlin answer button needs a visible Denglisch marker");
-assert.match(game,/SPRITE_DIALOGUE_DISTANCE=150,SPRITE_DIALOGUE_RELEASE_DISTANCE=190/);
-assert.match(game,/function proximityDialogueReady\(n\)/);
+assert.match(game,/SPRITE_AUDIO_RADIUS=240,SPRITE_AUDIO_RELEASE_RADIUS=310/);
+assert.match(game,/function proximityAudioReady\(n\)/);
+assert.match(game,/if\(near>release\)\{if\(n\.dialogueNearby\)n\.barkAt=0;n\.dialogueNearby=false;return false\}/,"leaving the release radius must rearm the proximity loop");
+assert.doesNotMatch(game,/near>=radius\|\|n\.dialogueNearby/,"remaining inside the radius must not suppress the next loop cycle");
 assert.match(game,/function insetSpriteSheet\(source,atlas\)/);
-assert.match(game,/merkel:\{canvas:null,cols:3,rows:5,pad:8,yBounds:\[0,330,648,962,1263,1619\]\}/);
+assert.match(game,/merkel:\{canvas:null,cols:6,rows:5,pad:0\}/);
+assert.match(game,/bayern:\{canvas:null,cols:8,rows:4,pad:0,smoothing:false\}/);
+assert.match(game,/borderPourer:\{canvas:null,cols:8,rows:6,pad:0\}/);
 assert.match(game,/getNpcSpriteCanvas:key=>npcSpriteAtlases\[key\]/);
 assert.match(world3d,/new T\.CanvasTexture\(source\)/,"Three.js must use the normalized runtime atlas");
 assert.doesNotMatch(world3d,/TextureLoader\(\)\.load\("\.\/assets\/(?:merkel-sprite|bayern-walker-sprite)\.png"/);
-console.log("Berlin quiz, proximity dialogue, and sprite atlas contracts OK");
+console.log("Berlin quiz, looping proximity audio, and expanded sprite atlas contracts OK");

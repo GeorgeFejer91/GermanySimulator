@@ -20,7 +20,7 @@ let police=[],particles=[],width=innerWidth,height=innerHeight,dpr=1,last=perfor
 const horizontalRoads=[{x:0,y:820,w:WORLD.w,h:260},{x:0,y:2000,w:WORLD.w,h:240},{x:0,y:3000,w:WORLD.w,h:220}];
 const verticalRoads=[{x:1050,y:0,w:260,h:WORLD.h},{x:2400,y:0,w:220,h:WORLD.h},{x:4400,y:0,w:180,h:WORLD.h},{x:5850,y:0,w:220,h:WORLD.h},{x:7350,y:0,w:220,h:WORLD.h},{x:9000,y:0,w:180,h:WORLD.h}];
 const roads=[...horizontalRoads,...verticalRoads];
-const SIDEWALK_WIDTH=72,WALKWAY_WIDTH=84,NPC_BLOCK_DISTANCE=38,NPC_COMPLAINT_DISTANCE=82,SPRITE_DIALOGUE_DISTANCE=150,SPRITE_DIALOGUE_RELEASE_DISTANCE=190;
+const SIDEWALK_WIDTH=72,WALKWAY_WIDTH=84,NPC_BLOCK_DISTANCE=38,NPC_COMPLAINT_DISTANCE=82,SPRITE_AUDIO_RADIUS=240,SPRITE_AUDIO_RELEASE_RADIUS=310;
 const crossings=[];
 for(const h of horizontalRoads)for(const v of verticalRoads){
  crossings.push({x:v.x-40,y:h.y+Math.round((h.h-80)/2),w:v.w+80,h:80});
@@ -143,14 +143,14 @@ const assetSources={
  wartemarke:"./assets/wartemarke.svg",rasen:"./assets/rasen-verboten.svg",muell:"./assets/muelltrennung.svg",
  db:"./assets/db-verspaetung.svg",baustelle:"./assets/baustelle.svg",fahrrad:"./assets/fahrrad.svg",kaffee:"./assets/kaffeeautomat.svg",pfandautomat:"./assets/pfandautomat.svg",
  faxbillboard:"./assets/fax-billboard.svg",faxgeraet:"./assets/faxgeraet.svg",faxkiosk:"./assets/telefon-fax-kiosk.svg",
- merkel:"./assets/merkel-cartoon.svg",merkelSprite:"./assets/merkel-sprite.png",bayernSprite:"./assets/bayern-walker-sprite.png",polizeigarten:"./assets/polizei-garten-schild.svg",borderPourer:"./assets/border-pourer-sprite.png"
+ merkel:"./assets/merkel-cartoon.svg",merkelSprite:"./assets/merkel-sprite.png?v=20260920-2",bayernSprite:"./assets/bayern-walker-sprite.png?v=20260920-2",polizeigarten:"./assets/polizei-garten-schild.svg",borderPourer:"./assets/border-pourer-sprite.png?v=20260920-2"
 };
 if(desktopBillboards.matches)for(const motif of faxBillboardPool)assetSources[motif.asset]=motif.src;
 const assets={};for(const key in assetSources){const img=new Image();img.src=assetSources[key];assets[key]=img}
 const npcSpriteAtlases={
- merkel:{canvas:null,cols:3,rows:5,pad:8,yBounds:[0,330,648,962,1263,1619]},
- bayern:{canvas:null,cols:5,rows:4,pad:10,smoothing:false},
- borderPourer:{canvas:null,cols:5,rows:6,pad:8}
+ merkel:{canvas:null,cols:6,rows:5,pad:0},
+ bayern:{canvas:null,cols:8,rows:4,pad:0,smoothing:false},
+ borderPourer:{canvas:null,cols:8,rows:6,pad:0}
 },borderPourerSprite=npcSpriteAtlases.borderPourer;
 function insetSpriteSheet(source,atlas){
  const cell=256,c=document.createElement("canvas"),g=c.getContext("2d"),sw=source.width/atlas.cols,sh=source.height/atlas.rows,pad=atlas.pad||0;c.width=atlas.cols*cell;c.height=atlas.rows*cell;g.imageSmoothingEnabled=atlas.smoothing!==false;
@@ -162,7 +162,7 @@ function prepareBorderPourerSprite(){
  const img=assets.borderPourer;if(!img||!img.naturalWidth||borderPourerSprite.canvas)return;
  const fw=img.naturalWidth/borderPourerSprite.cols,fh=img.naturalHeight/borderPourerSprite.rows,c=document.createElement("canvas"),g=c.getContext("2d",{willReadFrequently:true});c.width=img.naturalWidth;c.height=img.naturalHeight;g.drawImage(img,0,0);
  const pixels=g.getImageData(0,0,c.width,c.height),data=pixels.data,count=c.width*c.height;let mask=new Uint8Array(count),next;
- for(let i=0,p=0;i<count;i++,p+=4)if(Math.max(data[p],data[p+1],data[p+2])>9)mask[i]=1;
+ for(let i=0,p=0;i<count;i++,p+=4)if(data[p+3]>8&&Math.max(data[p],data[p+1],data[p+2])>9)mask[i]=1;
  for(let pass=0;pass<2;pass++){
   next=mask.slice();
   for(let y=1;y<c.height-1;y++)for(let x=1;x<c.width-1;x++){const i=y*c.width+x;if(!mask[i]&&(mask[i-1]||mask[i+1]||mask[i-c.width]||mask[i+c.width]))next[i]=1}
@@ -170,7 +170,6 @@ function prepareBorderPourerSprite(){
  }
  for(let i=0,p=3;i<count;i++,p+=4)data[p]=mask[i]?255:0;
  g.putImageData(pixels,0,0);
- g.clearRect(fw*3,fh*2,28,fh);g.clearRect(fw*4,fh*2,20,fh);
  for(let col=1;col<borderPourerSprite.cols;col++)g.clearRect(col*fw-2,0,4,c.height);
  for(let row=1;row<borderPourerSprite.rows;row++)g.clearRect(0,row*fh-2,c.width,4);
  insetSpriteSheet(c,borderPourerSprite);
@@ -726,44 +725,45 @@ function playerSurface(){return onGardenGrass(player.x,player.y)?"grass":onRoad(
 function politicianDialogue(n){return politicianLines[n.politician]||[]}
 function nextPoliticianLine(n){const lines=politicianDialogue(n);return lines.length?lines[n.lineIndex++%lines.length]:""}
 function merkelBehind(n){return (player.x-n.x)*(n.facingX||1)+(player.y-n.y)*(n.facingY||0)<-24}
-function proximityDialogueReady(n){
- const near=dist(player.x,player.y,n.x,n.y);if(near>SPRITE_DIALOGUE_RELEASE_DISTANCE){n.dialogueNearby=false;return false}
- if(near>=SPRITE_DIALOGUE_DISTANCE||n.dialogueNearby||performance.now()<(n.barkAt||0)||speechActive||speechQueue.length||!document.getElementById("police-bark").hidden)return false;
+function proximityAudioReady(n){
+ const near=dist(player.x,player.y,n.x,n.y),radius=n.audioRadius||SPRITE_AUDIO_RADIUS,release=n.audioReleaseRadius||SPRITE_AUDIO_RELEASE_RADIUS;
+ if(near>release){if(n.dialogueNearby)n.barkAt=0;n.dialogueNearby=false;return false}
+ if(near>=radius||performance.now()<(n.barkAt||0)||speechActive||speechQueue.length||!document.getElementById("police-bark").hidden)return false;
  n.dialogueNearby=true;return true
 }
 function updateMerkel(n,dt){
  const target=n.route[n.target],dx=target[0]-n.x,dy=target[1]-n.y,d=Math.hypot(dx,dy)||1,speed=38;n.facingX=dx/d;n.facingY=dy/d;n.x+=n.facingX*speed*dt;n.y+=n.facingY*speed*dt;n.animTime+=dt;
- if(Math.abs(dx)>Math.abs(dy))n.spriteRow=dx<0?1:2;else n.spriteRow=dy<0?3:4;n.spriteFrame=1+Math.floor(n.animTime*5)%2;
+ if(Math.abs(dx)>Math.abs(dy))n.spriteRow=dx<0?1:2;else n.spriteRow=dy<0?3:4;n.spriteFrame=Math.floor(n.animTime*8)%npcSpriteAtlases.merkel.cols;
  if(d<10){n.x=target[0];n.y=target[1];n.target=(n.target+1)%n.route.length}
- if(proximityDialogueReady(n)){const line=merkelBehind(n)?MERKEL_BEHIND_LINE:nextPoliticianLine(n);n.barkAt=performance.now()+(line===MERKEL_BEHIND_LINE?6500:8500);if(line)showWorldBark(n.name,line,false)}
+ if(proximityAudioReady(n)){const line=merkelBehind(n)?MERKEL_BEHIND_LINE:nextPoliticianLine(n);n.barkAt=performance.now()+(line===MERKEL_BEHIND_LINE?6500:8500);if(line)showWorldBark(n.name,line,false)}
 }
 function nextBayernClip(n){let index=Math.floor(Math.random()*bayernClips.length);if(index===n.lastClip)index=(index+1+Math.floor(Math.random()*(bayernClips.length-1)))%bayernClips.length;n.lastClip=index;return bayernClips[index]}
 function bayernBark(n,force=false){const now=performance.now();if((!force&&now<(n.barkAt||0))||state.region!=="germany")return false;const item=nextBayernClip(n);n.barkAt=now+9000+Math.random()*7000;showWorldBark(n.name,item.text,false,item.recording);return true}
 function chooseBayernTarget(n){n.targetSpot=pick(bayernWaypoints[n.spot].links)}
 function updateBayern(n,dt){
- if(state.region==="germany"&&proximityDialogueReady(n))bayernBark(n);
- if(n.hangTimer>0){n.hangTimer-=dt;n.spriteFrame=2;return}
+ if(state.region==="germany"&&proximityAudioReady(n))bayernBark(n);
+ if(n.hangTimer>0){n.hangTimer-=dt;n.spriteFrame=0;return}
  const target=bayernWaypoints[n.targetSpot],dx=target.x-n.x,dy=target.y-n.y,d=Math.hypot(dx,dy)||1,speed=52;n.animTime+=dt;
  if(d<7){n.x=target.x;n.y=target.y;n.spot=n.targetSpot;n.hangTimer=2+Math.random()*4;chooseBayernTarget(n);n.spriteFrame=2;return}
- n.x+=dx/d*speed*dt;n.y+=dy/d*speed*dt;n.spriteRow=Math.abs(dx)>Math.abs(dy)?(dx>0?1:3):(dy>0?0:2);n.spriteFrame=Math.floor(n.animTime*7)%5
+ n.x+=dx/d*speed*dt;n.y+=dy/d*speed*dt;n.spriteRow=Math.abs(dx)>Math.abs(dy)?(dx>0?1:3):(dy>0?0:2);n.spriteFrame=Math.floor(n.animTime*10)%npcSpriteAtlases.bayern.cols
 }
 function updateBorderPourer(n,dt){
- const pourFrames=[1,2,3,2];n.animTime+=dt;n.stateTimer-=dt;
+ n.animTime+=dt;n.stateTimer-=dt;
  if(n.state==="sideWalk"){
-  n.x+=n.dir*68*dt;n.y+=(BORDER_Y+n.lane*32-n.y)*Math.min(1,dt*7);n.spriteRow=n.dir>0?1:3;n.spriteFrame=Math.floor(n.animTime*7)%5;n.spriteFlip=false;
+  n.x+=n.dir*68*dt;n.y+=(BORDER_Y+n.lane*32-n.y)*Math.min(1,dt*7);n.spriteRow=n.dir>0?1:3;n.spriteFrame=Math.floor(n.animTime*10)%borderPourerSprite.cols;n.spriteFlip=false;
   if(n.stateTimer<=0){n.state="sidePour";n.stateTimer=1.05;n.animTime=0}
  }else if(n.state==="sidePour"){
-  n.x+=n.dir*44*dt;n.y+=(BORDER_Y+n.lane*24-n.y)*Math.min(1,dt*8);n.spriteRow=2;n.spriteFrame=pourFrames[Math.floor(n.animTime*8)%pourFrames.length];n.spriteFlip=n.dir<0;
+  n.x+=n.dir*44*dt;n.y+=(BORDER_Y+n.lane*24-n.y)*Math.min(1,dt*8);n.spriteRow=2;n.spriteFrame=Math.floor(n.animTime*9)%borderPourerSprite.cols;n.spriteFlip=n.dir<0;
   if(n.stateTimer<=0){n.lane*=-1;n.state="cross";n.stateTimer=.72;n.animTime=0}
  }else if(n.state==="cross"){
-  n.x+=n.dir*26*dt;n.y+=(BORDER_Y+n.lane*34-n.y)*Math.min(1,dt*6.5);n.spriteRow=n.lane>0?0:4;n.spriteFrame=Math.floor(n.animTime*7)%5;n.spriteFlip=false;
+  n.x+=n.dir*26*dt;n.y+=(BORDER_Y+n.lane*34-n.y)*Math.min(1,dt*6.5);n.spriteRow=n.lane>0?0:4;n.spriteFrame=Math.floor(n.animTime*10)%borderPourerSprite.cols;n.spriteFlip=false;
   if(n.stateTimer<=0){n.state=n.lane<0?"frontPour":"sideWalk";n.stateTimer=n.lane<0?.95:1.25;n.animTime=0}
  }else if(n.state==="frontPour"){
-  n.x+=n.dir*18*dt;n.y+=(BORDER_Y-30-n.y)*Math.min(1,dt*8);n.spriteRow=5;n.spriteFrame=pourFrames[Math.floor(n.animTime*8)%pourFrames.length];n.spriteFlip=false;
+  n.x+=n.dir*18*dt;n.y+=(BORDER_Y-30-n.y)*Math.min(1,dt*8);n.spriteRow=5;n.spriteFrame=Math.floor(n.animTime*9)%borderPourerSprite.cols;n.spriteFlip=false;
   if(n.stateTimer<=0){n.state="sideWalk";n.stateTimer=1.25;n.animTime=0}
  }
  if(n.x<=n.minX||n.x>=n.maxX){n.x=clamp(n.x,n.minX,n.maxX);n.dir*=-1;n.state="sidePour";n.stateTimer=.9;n.animTime=0}
- if(state.wanted<2&&proximityDialogueReady(n)){
+ if(state.wanted<2&&proximityAudioReady(n)){
   const line=nextPoliticianLine(n);n.barkAt=performance.now()+8500+Math.random()*4500;if(line)showWorldBark(n.name,line,false);
  }
 }
@@ -863,7 +863,7 @@ function microInteract(p){
 }
 
 function interact(){if(state.dialogue){nextDialogue();return}if(state.modal)return;const m=missions[Math.min(state.mission,missions.length-1)];for(const b of buildings){if(dist(player.x,player.y,b.doorX,b.doorY)<112){if(b.id===m.target){if(state.mission===5){if(state.stadtbild>=3)openDialogue("AMT FÜR STADTBILD",["Ausgezeichnet. Die Mülltonne steht wieder parallel zur gefühlten Bordsteinkante.","Die Stadt ist nun statistisch 14 Prozent weniger individuell.","Stempel B: optische Unbedenklichkeit."],"✓",()=>{state.mission++;updateHud()});else openDialogue("AMT FÜR STADTBILD",["Gemäß der rein fiktiven Gestaltungsvorschrift ist das Stadtbild zu normieren.","Richten Sie die Mülltonne, die Stühle und die Hecke aus.","Der politische Aushang ist eine satirische Requisite und keine Tatsachenbehauptung."],"FM",()=>toast("3 STADTBILD-ABWEICHUNGEN MARKIERT"))}else bureaucrat(b,m)}else if(b.id==="imbiss")openDialogue("WURST-INSEL",["Bratwurst +35 Energie. Currywurst +50 Verwaltungsmut.","Senf ist kein gültiges Aktenzeichen."],"🌭");else openDialogue(b.name,state.region==="berlin"?["Sie sind hier basically richtig, aber für einen anderen process.","Try Zuständigkeit. Oder Tuesday. Tuesday ist beliebt."]:["Sie sind hier grundsätzlich richtig, aber für einen anderen Vorgang.","Versuchen Sie es mit Zuständigkeit. Oder Dienstag."],"§");return}}for(const n of npcs)if(dist(player.x,player.y,n.x,n.y)<92){
- if(n.special)n.dialogueNearby=true;
+ if(n.special){n.dialogueNearby=true;n.barkAt=performance.now()+8000}
  if(n.special==="borderPourer"){
    openDialogue(n.name,politicianDialogue(n),"FM");
  }else if(n.special==="merkel"){
