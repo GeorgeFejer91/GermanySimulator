@@ -24,6 +24,9 @@ assert.equal(timing.policeContactCooldown,5.8,"clustered foot contacts must be r
 assert.deepEqual(JSON.parse(`[${game.match(/const POLICE_RESPONSE_CARS=\[([^\]]+)\]/)[1]}]`),[0,0,1,2,3,4]);
 assert.deepEqual(JSON.parse(`[${game.match(/POLICE_RESPONSE_HELICOPTERS=\[([^\]]+)\]/)[1]}]`),[0,0,0,0,1,2]);
 assert.match(game,/if\(instant\|\|gained>0\)spawnPolice/,"the first gained star must call a foot response");
+assert.match(game,/function spawnPointVisible\(x,y,padding,kind="officer"\)/,"response spawns need one renderer-aware visibility gate");
+assert.match(game,/if\(spawnPointVisible\(x,y,padding,kind\)\|\|responderBlocked\(x,y,radius,null\)\)continue/,"response candidates must be both offscreen and collision-free");
+assert.match(game,/if\(!police\.length\)\{const point=groundResponsePoint/,"law-power reinforcements must use the same offscreen spawn path");
 assert.match(game,/getPoliceVehicles:\(\)=>policeVehicles/);
 assert.match(game,/getPoliceHelicopters:\(\)=>policeHelicopters/);
 assert.match(game,/helicopter\.spotlight&&grass/,"helicopter pressure must remain tied to forbidden grass");
@@ -32,5 +35,6 @@ assert.match(world3d,/police-response\/police-car\.glb/);
 assert.match(world3d,/police-response\/black-helicopter\.glb/);
 assert.match(world3d,/function makePoliceCarSlot\(car\)/,"WebGL needs a procedural car fallback");
 assert.match(world3d,/function makePoliceHelicopterSlot\(helicopter\)/,"WebGL needs a procedural helicopter fallback");
+assert.match(world3d,/window\.Germany3D=\{ready:true,isWorldPointVisible,sync\(\)/,"the active Three.js camera must report its padded frustum to the simulation");
 assert.doesNotMatch(world3d,/box\(\.045,\.2,1\.9,blue/,"the old floating full-length blue stripe must stay removed");
 console.log("Faster offenses and progressive police response contract OK");

@@ -804,7 +804,7 @@ function useLawPower(){
  if(!target){toast("KEINE ANDERE ZUSTÄNDIGE PERSON AUFFINDBAR");return}
  document.getElementById("law-unlock-prompt").hidden=true;
  const quote=nextLawPowerLine(),recording=`./assets/voices/laws/thorsten-negative-law-${String(lastLawPowerLine+1).padStart(2,"0")}.mp3`;state.lawCooldown=14;state.wanted=0;state.wantedCooldown=0;state.offence="ZUSTÄNDIGKEIT ERFOLGREICH UMGELENKT";syncPoliceResponse();
- if(!police.length){const a=Math.random()*Math.PI*2;police.push({x:clamp(target.x+Math.cos(a)*230,40,WORLD.w-40),y:clamp(target.y+Math.sin(a)*230,40,WORLD.h-40),speed:150,barkAt:0,divertedTarget:target})}
+ if(!police.length){const point=groundResponsePoint(180,120,14);if(point)police.push({...point,speed:150,barkAt:0,divertedTarget:target})}
  for(const p of police)p.divertedTarget=target;
  showWorldBark("SIE · GESETZZITAT",quote,true,recording,"law");toast("§-MACHT AKTIV · "+target.name+" WIRD ÜBERPRÜFT");updateHud();
 }
@@ -830,16 +830,17 @@ function updateQuizEncounters(dt){
  if(candidates.length){candidates.sort((a,b)=>dist(player.x,player.y,a.x,a.y)-dist(player.x,player.y,b.x,b.y));state.quizApproach=pick(candidates.slice(0,Math.min(6,candidates.length)))}
  state.quizTimer=22+Math.random()*18;
 }
-function groundResponsePoint(minDistance,range,radius){let fallback=null;for(let attempt=0;attempt<12;attempt++){const a=Math.random()*Math.PI*2,d=minDistance+Math.random()*range,x=clamp(player.x+Math.cos(a)*d,radius+12,WORLD.w-radius-12),rawY=player.y+Math.sin(a)*d,y=state.region==="berlin"?clamp(rawY,BORDER_Y+radius+8,WORLD.h-radius-12):clamp(rawY,radius+12,BORDER_Y-radius-8);fallback={x,y,a};if(!responderBlocked(x,y,radius,null))return fallback}return fallback}
+function spawnPointVisible(x,y,padding,kind="officer"){if(window.Germany3D?.ready&&window.Germany3D.isWorldPointVisible)return window.Germany3D.isWorldPointVisible(x,y,padding,kind);const p=project(x,y);return p.x>=-padding&&p.x<=width+padding&&p.y>=-padding&&p.y<=height+padding}
+function groundResponsePoint(minDistance,range,radius,padding=110,kind="officer"){for(let attempt=0;attempt<24;attempt++){const a=Math.random()*Math.PI*2,start=minDistance+Math.random()*range;for(let step=0;step<48;step++){const d=start+step*180,x=clamp(player.x+Math.cos(a)*d,radius+12,WORLD.w-radius-12),rawY=player.y+Math.sin(a)*d,y=state.region==="berlin"?clamp(rawY,BORDER_Y+radius+8,WORLD.h-radius-12):clamp(rawY,radius+12,BORDER_Y-radius-8);if(spawnPointVisible(x,y,padding,kind)||responderBlocked(x,y,radius,null))continue;return{x,y,a}}}return null}
 function responseSpawn(kind,index){
- const point=kind==="car"?groundResponsePoint(470,170,38):groundResponsePoint(620,240,10),{x,y,a}=point;
+ const point=kind==="car"?groundResponsePoint(470,170,38,170,"car"):groundResponsePoint(620,240,10,220,"helicopter");if(!point)return null;const{x,y,a}=point;
  return{x,y,angle:a+Math.PI,speed:kind==="car"?205+state.wanted*16:285,hitCooldown:1+index*.2,reinforcement:5+index*2,phase:Math.random()*Math.PI*2,orbit:Math.random()*Math.PI*2,index,rotor:0,spotlight:false,braking:false,passbyReady:true,avoid:index%2?1:-1}
 }
 function syncPoliceResponse(){
  const carCount=POLICE_RESPONSE_CARS[state.wanted]||0,helicopterCount=POLICE_RESPONSE_HELICOPTERS[state.wanted]||0;
- while(policeVehicles.length<carCount)policeVehicles.push(responseSpawn("car",policeVehicles.length));
+ while(policeVehicles.length<carCount){const car=responseSpawn("car",policeVehicles.length);if(!car)break;policeVehicles.push(car)}
  if(policeVehicles.length>carCount)policeVehicles.length=carCount;
- while(policeHelicopters.length<helicopterCount)policeHelicopters.push(responseSpawn("helicopter",policeHelicopters.length));
+ while(policeHelicopters.length<helicopterCount){const helicopter=responseSpawn("helicopter",policeHelicopters.length);if(!helicopter)break;policeHelicopters.push(helicopter)}
  if(policeHelicopters.length>helicopterCount)policeHelicopters.length=helicopterCount
 }
 function announcePoliceResponse(oldLevel,newLevel){
@@ -848,7 +849,7 @@ function announcePoliceResponse(oldLevel,newLevel){
 }
 function wanted(level,msg,instant){const old=state.wanted;state.wanted=clamp(Math.max(state.wanted,level),0,5);state.offence=msg;state.wantedCooldown=14;const gained=state.wanted-old;if(instant||gained>0)spawnPolice(instant?Math.max(3,state.wanted):Math.min(4,gained+(state.wanted>=3?1:0)));syncPoliceResponse();announcePoliceResponse(old,state.wanted);violationAlert(msg,state.wanted);toast(msg+" · "+state.wanted+" STERN"+(state.wanted===1?"":"E"));updateHud()}
 function escalate(msg,amount=1,instant=false){wanted(Math.min(5,Math.max(1,state.wanted+amount)),msg,instant)}
-function spawnPolice(n,announce=true){const count=Math.min(n,Math.max(0,14-police.length));for(let i=0;i<count;i++){const {x,y}=groundResponsePoint(180,120,14);police.push({x,y,speed:105+state.wanted*12,barkAt:0,avoid:Math.random()<.5?-1:1})}if(announce&&count)policeBark(true)}
+function spawnPolice(n,announce=true){const count=Math.min(n,Math.max(0,14-police.length)),before=police.length;for(let i=0;i<count;i++){const point=groundResponsePoint(180,120,14);if(!point)break;police.push({...point,speed:105+state.wanted*12,barkAt:0,avoid:Math.random()<.5?-1:1})}if(announce&&police.length>before)policeBark(true)}
 function updatePoliceResponse(dt){
  syncPoliceResponse();
  for(const car of policeVehicles){
