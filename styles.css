@@ -148,3 +148,9 @@ html,body,body *,#app,#app *{
   -webkit-user-drag:none !important;
 }
 button,.control-dock,.control-dock *{touch-action:none}
+
+/* HUM-01 submission is treated like a badly aligned mechanical fax feed. */
+.humor-audio{justify-content:flex-start;min-height:42px}.humor-audio.processing b::before{content:"⇣ "}.humor-modal.fax-processing{overflow:hidden}.humor-modal.fax-processing::after{content:"";position:fixed;z-index:2;left:50%;bottom:10px;width:min(780px,92vw);height:26px;transform:translateX(-50%);border:4px solid #24231f;background:repeating-linear-gradient(90deg,#161614 0 16px,#3d3b34 16px 23px);box-shadow:0 -8px 0 #8c887d,0 -13px 0 #25241f}.humor-paper.fax-feeding{pointer-events:none;transform-origin:50% 100%;will-change:transform,opacity;animation:humor-fax-feed 1.12s linear forwards}
+@keyframes humor-fax-feed{0%{transform:translate3d(0,0,0) rotate(0);opacity:1}8%{transform:translate3d(-7px,2vh,0) rotate(-.25deg)}16%{transform:translate3d(9px,5vh,0) rotate(.4deg)}27%{transform:translate3d(-5px,13vh,0) rotate(-.18deg) scaleY(.99)}41%{transform:translate3d(8px,27vh,0) rotate(.3deg) scaleY(.96)}58%{transform:translate3d(-8px,49vh,0) rotate(-.24deg) scaleY(.91)}76%{transform:translate3d(6px,76vh,0) rotate(.2deg) scaleY(.82);opacity:.94}100%{transform:translate3d(-3px,122vh,0) rotate(-.1deg) scaleY(.68);opacity:0}}
+@media(max-width:760px){.humor-modal.fax-processing::after{bottom:4px;width:94vw;height:22px}}
+@media(prefers-reduced-motion:reduce){.humor-paper.fax-feeding{animation:humor-fax-feed-reduced 1.12s linear forwards}@keyframes humor-fax-feed-reduced{0%,68%{transform:none;opacity:1}100%{transform:translateY(18vh);opacity:0}}}
