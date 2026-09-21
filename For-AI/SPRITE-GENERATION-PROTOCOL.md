@@ -20,7 +20,7 @@ Current authorities:
 | Friedrich Merz | `assets/sprite-sources/border-pourer-sprite-keys.png` | 8 × 6 at 256 px | 32 × 6 at 128 px | front carry, right walk, side pour, left walk, back carry, front pour |
 | Bayern walker | `assets/sprite-sources/bayern-walker-sprite-keys.png` | 8 × 4 at 256 px | 32 × 4 at 128 px | front, right, back, left |
 | Alice Weidel satire | `assets/sprite-sources/alice-weidel-sprite-keys.png` | 8 × 2 at 256 px | 32 × 2 at 128 px | front/down, back/up |
-| Ordinary crowd (8 types) | `assets/sprite-sources/crowd-*-keys.png` | 8 × 3 at 256 px | 32 × 3 at 128 px | side, front/down, back/up |
+| Ordinary towel crowd (2 types) | `assets/sprite-sources/crowd-towel-*-keys.png` | 8 × 3 at 256 px | 32 × 3 at 128 px | side, front/down, back/up |
 
 The 256 px source cells retain facial and costume detail. The 128 px runtime cells stay near one source pixel per displayed pixel while keeping all derived sheets within a 4096 px texture width for mobile/WebGL compatibility. Runtime PNGs retain full RGBA; premultiplied-alpha downscaling and zeroed fully transparent RGB prevent dark or colored fringes. The staging canvas and Three.js texture both use smooth linear sampling.
 
@@ -79,8 +79,6 @@ Store pivots in normalized cell coordinates so a direction-specific rig can be r
 
 For a 32-sample loop, use `phase = 2π × frame / 32`. The two thighs are half a cycle apart; arms oppose the legs; pelvis vertical motion has two shallow peaks per loop. These curves are guides, not a substitute for contacts. During stance, solve the pelvis/root translation from the planted foot so the foot remains stationary in world space. The minimum keyed sequence remains contact → down → passing/crossing → up for the left side and then the right side.
 
-`tools/mirror-lower-limbs.py` is the first repository implementation of this isolation strategy. It repaired the DIN inspector's back walk by retaining the exact head, torso, arms and hand-bound measuring prop while constructing the opposite gait half only from the registered lower-limb region. It is a narrow repair tool, not permission to mirror a complete character and accidentally swap a prop between hands.
-
 This hierarchy follows the same production logic documented by [Godot's cutout-animation guide](https://docs.godotengine.org/en/stable/tutorials/animation/cutout_animation.html)—hip root, parent-relative rotations, explicit pivots, depth ordering and selective cel animation—and [Adobe's Bone tool guide](https://helpx.adobe.com/animate/desktop/animation/bone-tool-animation.html)—parent/child armatures, fixed bone length, constrained joints and interpolated poses. The hybrid is intentional: use a rig for coherent joints, and redraw/selectively replace hands, feet, faces or props when a flat rotation would look mechanical.
 
 ## Image-generation prompt contract
@@ -104,7 +102,7 @@ python tools/build-sprite-transitions.py assets/sprite-sources/merkel-sprite-key
 python tools/build-sprite-transitions.py assets/sprite-sources/border-pourer-sprite-keys.png assets/border-pourer-sprite.png --cols 8 --rows 6 --inbetweens 3 --audit-dir .sprite-audit/merz
 python tools/build-sprite-transitions.py assets/sprite-sources/bayern-walker-sprite-keys.png assets/bayern-walker-sprite.png --cols 8 --rows 4 --inbetweens 3 --audit-dir .sprite-audit/bayern
 python tools/build-sprite-transitions.py assets/sprite-sources/alice-weidel-sprite-keys.png assets/alice-weidel-sprite.png --cols 8 --rows 2 --inbetweens 3 --audit-dir .sprite-audit/alice
-$names = 'bio-vegan','towel-man','towel-woman','waste-marshal','quiet-hours','cargo-parent','din-inspector','potato'
+$names = 'towel-man','towel-woman'
 foreach ($name in $names) { python tools/build-sprite-transitions.py "assets/sprite-sources/crowd-$name-keys.png" "assets/crowd-$name.png" --cols 8 --rows 3 --inbetweens 3 --audit-dir ".sprite-audit/$name" }
 ```
 

@@ -25,10 +25,12 @@ assert.equal(moveGroundResponder((x,y)=>y<-.5)(nearVertical,.01,-1,12),true,"a t
 assert.ok(nearVertical.x>.7,"a primarily vertical walker must sidestep when vertical travel is blocked");
 assert.match(game,/moveGroundResponder\(car,dx\/d\*step,dy\/d\*step,38\)/,"pursuit cars must use collision-aware movement");
 assert.match(game,/moveGroundResponder\(p,rdx\/d\*step,rdy\/d\*step,14\)/,"foot police must use collision-aware movement");
-assert.match(game,/else if\(d>=78\)moveGroundResponder\(n,dx\/d\*88\*dt,dy\/d\*88\*dt,12\)/,"approaching quiz pedestrians must route around barriers while following the player");
+assert.match(game,/n\.quizFollowTime>QUIZ_FOLLOW_MAX_SECONDS\|\|d>QUIZ_FOLLOW_BREAK_DISTANCE/,"approaching quiz pedestrians must stop following after bounded time or distance");
+assert.match(game,/else if\(d>=78\)moveGroundResponder\(n,dx\/d\*88\*dt,dy\/d\*88\*dt,12\)/,"interested quiz pedestrians must route around barriers while briefly following the player");
 assert.match(game,/n\.blockedTimer=progress>\.01\?0:\(n\.blockedTimer\|\|0\)\+dt;if\(n\.blockedTimer>\.45\)\{n\.blockedTimer=0;chooseBayernTarget\(n,n\.targetSpot\)\}/,"a blocked Bayern route walker must change direction instead of pressing into the obstacle");
 assert.match(game,/alternatives=links\.filter\(spot=>spot!==blockedSpot\).*blockedSpot<0\?links:\[n\.spot\]/,"Bayern must choose another connected direction or reverse at a dead end after an obstruction");
-assert.match(game,/playerHit\|\|!moveGroundResponder\(n,dx,dy,12\)/,"ordinary pedestrians must route around barriers");
+assert.match(game,/playerHit=!n\.crowd&&dist\(/,"ordinary crowd sprites must not collide with the player");
+assert.match(game,/playerHit\|\|!moveGroundResponder\(n,dx,dy,12\)/,"non-crowd pedestrians must route around barriers");
 assert.match(game,/dynamicBlocker\(nx,player\.y,px,player\.y\)/,"the player must not walk deeper into response vehicles");
 assert.match(game,/groundObstacles=.*\.\.\.policeVehicles.*\.\.\.police.*\.\.\.npcs/,"trains must detect people and ground police responses");
 assert.match(game,/groundAllowed=blockedByGround\?Math\.max\(0,groundGap-TRAIN_PLAYER_STOP_GAP\):Infinity/,"trains must hard-limit advance before a ground obstacle");

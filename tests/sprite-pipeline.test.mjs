@@ -13,7 +13,7 @@ const sheets=[
  ["assets/sprite-sources/border-pourer-sprite-keys.png",[2048,1536],"assets/border-pourer-sprite.png",[4096,768]],
  ["assets/sprite-sources/bayern-walker-sprite-keys.png",[2048,1024],"assets/bayern-walker-sprite.png",[4096,512]],
  ["assets/sprite-sources/alice-weidel-sprite-keys.png",[2048,512],"assets/alice-weidel-sprite.png",[4096,256]],
- ...["bio-vegan","towel-man","towel-woman","waste-marshal","quiet-hours","cargo-parent","din-inspector","potato"].map(name=>[`assets/sprite-sources/crowd-${name}-keys.png`,[2048,768],`assets/crowd-${name}.png`,[4096,384]])
+ ...["towel-man","towel-woman"].map(name=>[`assets/sprite-sources/crowd-${name}-keys.png`,[2048,768],`assets/crowd-${name}.png`,[4096,384]])
 ];
 for(const [source,sourceSize,runtime,runtimeSize] of sheets){
  assert.deepEqual(pngSize(source),sourceSize,`${source} must retain its registered 256 px key grid`);
@@ -26,7 +26,7 @@ for(const [runtime,cols,rows] of [
  ["assets/border-pourer-sprite.png",32,6],
  ["assets/bayern-walker-sprite.png",32,4],
  ["assets/alice-weidel-sprite.png",32,2],
- ...["bio-vegan","towel-man","towel-woman","waste-marshal","quiet-hours","cargo-parent","din-inspector","potato"].map(name=>[`assets/crowd-${name}.png`,32,3])
+ ...["towel-man","towel-woman"].map(name=>[`assets/crowd-${name}.png`,32,3])
 ]){
  const check=spawnSync("python",["tools/verify-sprite-atlas.py",runtime,"--cols",String(cols),"--rows",String(rows)],{encoding:"utf8"});
  assert.equal(check.status,0,check.stderr||check.stdout);
@@ -47,14 +47,11 @@ assert.match(register,/--normalize-scale/,"registration must bound generated bod
 const hardGate=spawnSync("python",["tools/verify-sprite-animation.py"],{encoding:"utf8"});
 assert.equal(hardGate.status,0,hardGate.stderr||hardGate.stdout);
 assert.match(hardGate.stdout,/PASS merz: signed visual review \+ anatomy\/loop gate/);
-assert.match(hardGate.stdout,/PASS din-inspector: signed visual review \+ anatomy\/loop gate/);
+assert.match(hardGate.stdout,/PASS towel-woman: signed visual review \+ anatomy\/loop gate/);
 
 const gate=readFileSync("tools/verify-sprite-animation.py","utf8");
 assert.match(gate,/runtime_cols < 21/,"walking rows must be blocked below the 21-frame minimum");
 assert.match(gate,/maxLowerLimbChange/,"the gate must verify readable lower-limb articulation");
 assert.match(gate,/changed after visual review/,"pixel changes must invalidate the signed visual review");
-
-const limbRig=readFileSync("tools/mirror-lower-limbs.py","utf8");
-assert.match(limbRig,/opposite half uses isolated lower-limb mirroring/,"the repair path must preserve the upper-body anchor while alternating legs");
 
 console.log("Registered key sheets and full-RGBA four-times expanded runtime sprite atlases OK");

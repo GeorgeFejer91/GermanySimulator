@@ -21,7 +21,7 @@ let police=[],policeVehicles=[],policeHelicopters=[],particles=[],width=innerWid
 const horizontalRoads=[{x:RAIL_GUTTER,y:820+RAIL_GUTTER,w:CITY.w,h:260},{x:RAIL_GUTTER,y:2000+RAIL_GUTTER,w:CITY.w,h:240},{x:RAIL_GUTTER,y:3000+RAIL_GUTTER,w:CITY.w,h:220}];
 const verticalRoads=[{x:1050+RAIL_GUTTER,y:RAIL_GUTTER,w:260,h:CITY.h},{x:2400+RAIL_GUTTER,y:RAIL_GUTTER,w:220,h:CITY.h},{x:4400+RAIL_GUTTER,y:RAIL_GUTTER,w:180,h:CITY.h},{x:5850+RAIL_GUTTER,y:RAIL_GUTTER,w:220,h:CITY.h},{x:7350+RAIL_GUTTER,y:RAIL_GUTTER,w:220,h:CITY.h},{x:9000+RAIL_GUTTER,y:RAIL_GUTTER,w:180,h:CITY.h}];
 const roads=[...horizontalRoads,...verticalRoads];
-const SIDEWALK_WIDTH=72,WALKWAY_WIDTH=84,NPC_BLOCK_DISTANCE=38,NPC_COMPLAINT_DISTANCE=82,SPRITE_AUDIO_RADIUS=240,SPRITE_AUDIO_RELEASE_RADIUS=310;
+const SIDEWALK_WIDTH=72,WALKWAY_WIDTH=84,NPC_BLOCK_DISTANCE=38,NPC_COMPLAINT_DISTANCE=82,SPRITE_AUDIO_RADIUS=240,SPRITE_AUDIO_RELEASE_RADIUS=310,QUIZ_FOLLOW_MAX_SECONDS=8,QUIZ_FOLLOW_BREAK_DISTANCE=650;
 const OFFENSE_TIMING=Object.freeze({warn:.3,sprint:5,road:2.6,grass:2.6,stationGrass:2,roadCooldown:5.4,grassCooldown:6.5,stationGrassCooldown:5.5,evasion:3.8,auditMin:18,auditRange:12,policeContactCooldown:5.8});
 const POLICE_RESPONSE_CARS=[0,0,1,2,3,4],POLICE_RESPONSE_HELICOPTERS=[0,0,0,0,1,2];
 const crossings=[];
@@ -147,21 +147,15 @@ const props=[
  {x:8750,y:1880,asset:"pfandautomat",w:54,h:70,id:"pfandautomat-ost",label:"PFANDAUTOMAT"},
  {x:7600,y:3500,asset:"gartenzwerg",w:44,h:66},{x:8750,y:3420,asset:"gartenzwerg",w:44,h:66},{x:9400,y:3650,asset:"gartenzwerg",w:44,h:66}
 ].map(offsetWorldPoint);
-const assetSources={merkelSprite:"./assets/merkel-sprite.png?v=20260921-3",bayernSprite:"./assets/bayern-walker-sprite.png?v=20260921-3",aliceSprite:"./assets/alice-weidel-sprite.png?v=20260921-1",borderPourerSprite:"./assets/border-pourer-sprite.png?v=20260921-3",bioVeganSprite:"./assets/crowd-bio-vegan.png?v=20260921-1",towelManSprite:"./assets/crowd-towel-man.png?v=20260921-1",towelWomanSprite:"./assets/crowd-towel-woman.png?v=20260921-1",wasteMarshalSprite:"./assets/crowd-waste-marshal.png?v=20260921-1",quietHoursSprite:"./assets/crowd-quiet-hours.png?v=20260921-1",cargoParentSprite:"./assets/crowd-cargo-parent.png?v=20260921-1",dinInspectorSprite:"./assets/crowd-din-inspector.png?v=20260921-1",potatoSprite:"./assets/crowd-potato.png?v=20260921-1"};
+const assetSources={merkelSprite:"./assets/merkel-sprite.png?v=20260921-3",bayernSprite:"./assets/bayern-walker-sprite.png?v=20260921-3",aliceSprite:"./assets/alice-weidel-sprite.png?v=20260921-1",borderPourerSprite:"./assets/border-pourer-sprite.png?v=20260921-3",towelManSprite:"./assets/crowd-towel-man.png?v=20260921-1",towelWomanSprite:"./assets/crowd-towel-woman.png?v=20260921-1"};
 const assets={};for(const key in assetSources){const img=new Image();img.src=assetSources[key];assets[key]=img}
 const npcSpriteAtlases={
  merkel:{canvas:null,cols:24,rows:5,pad:0,drawSize:126},
  bayern:{canvas:null,cols:32,rows:4,pad:0,drawSize:150},
  borderPourer:{canvas:null,cols:32,rows:6,pad:0,drawSize:136},
  alice:{canvas:null,cols:32,rows:2,pad:0,drawSize:126},
- bioVegan:{canvas:null,cols:32,rows:3,pad:0,drawSize:126},
  towelMan:{canvas:null,cols:32,rows:3,pad:0,drawSize:126},
- towelWoman:{canvas:null,cols:32,rows:3,pad:0,drawSize:126},
- wasteMarshal:{canvas:null,cols:32,rows:3,pad:0,drawSize:126},
- quietHours:{canvas:null,cols:32,rows:3,pad:0,drawSize:126},
- cargoParent:{canvas:null,cols:32,rows:3,pad:0,drawSize:126},
- dinInspector:{canvas:null,cols:32,rows:3,pad:0,drawSize:126},
- potato:{canvas:null,cols:32,rows:3,pad:0,drawSize:118}
+ towelWoman:{canvas:null,cols:32,rows:3,pad:0,drawSize:126}
 },borderPourerSprite=npcSpriteAtlases.borderPourer;
 function insetSpriteSheet(source,atlas){
  const cell=Math.round(source.width/atlas.cols),c=document.createElement("canvas"),g=c.getContext("2d"),sw=source.width/atlas.cols,sh=source.height/atlas.rows,pad=atlas.pad||0;c.width=atlas.cols*cell;c.height=atlas.rows*cell;g.imageSmoothingEnabled=true;g.imageSmoothingQuality="high";
@@ -204,20 +198,11 @@ const pedestrianBarks={
  }
 };
 const crowdArchetypes=Object.freeze([
- {id:"bio-vegan",sprite:"bioVegan",label:"BIO-BIRKENSTOCK-BÜRGER*IN",barks:{berlin:["Excuse me, Ihr Einkauf hat kein visible Mehrwegkonzept.","Diese Möhre travelled kürzer als Ihre Entschuldigung."],germany:["Entschuldigung, Ihr Einkauf weist kein erkennbares Mehrwegkonzept auf.","Diese Möhre hat weniger Kilometer zurückgelegt als Ihre Entschuldigung."]}},
  {id:"towel-man",sprite:"towelMan",label:"LIEGENRESERVIERER",barks:{berlin:["Dieser Platz ist seit 07:04 durch textile Willenserklärung reserved.","Please Abstand halten: Das Handtuch befindet sich im Vorverfahren."],germany:["Dieser Platz ist seit 07:04 Uhr durch textile Willenserklärung reserviert.","Bitte Abstand halten: Das Handtuch befindet sich im Vorverfahren."]}},
- {id:"towel-woman",sprite:"towelWoman",label:"HANDTUCHHOHEIT",barks:{berlin:["Die Liege ist not frei; die Reservierung trocknet nur kurz.","Your Schatten fällt in meinen amtlich vorgemerkten Sonnenkorridor."],germany:["Die Liege ist nicht frei; die Reservierung trocknet nur kurz.","Ihr Schatten fällt in meinen amtlich vorgemerkten Sonnenkorridor."]}},
- {id:"waste-marshal",sprite:"wasteMarshal",label:"MÜLLTRENNMEISTER*IN",barks:{berlin:["Your Becher ist emotional Gelb, administratively Restmüll.","Stop! Diese Verpackung braucht erst ein Trennungsberatungsgespräch."],germany:["Ihr Becher ist emotional gelb, verwaltungstechnisch aber Restmüll.","Stopp! Diese Verpackung braucht zuerst ein Trennungsberatungsgespräch."]}},
- {id:"quiet-hours",sprite:"quietHours",label:"NACHTRUHEBEAUFTRAGTE",barks:{berlin:["Es ist 21:59 and ich übe already Nachtruhe.","Ihre Schritte überschreiten das freiwillige Vorruhekontingent."],germany:["Es ist 21:59 Uhr und ich übe bereits Nachtruhe.","Ihre Schritte überschreiten das freiwillige Vorruhekontingent."]}},
- {id:"cargo-parent",sprite:"cargoParent",label:"LASTENRAD-LOGISTIK",barks:{berlin:["Your Standplatz blockiert meinen optimized Familienkorridor.","Dieser Weg ist für three errands und eine Klingelminute getaktet."],germany:["Ihr Standplatz blockiert meinen optimierten Familienkorridor.","Dieser Weg ist für drei Besorgungen und eine Klingelminute getaktet."]}},
- {id:"din-inspector",sprite:"dinInspector",label:"DIN-FREIZEITPRÜFER",barks:{berlin:["Ihre Gehgeschwindigkeit deviates vier Millimeter von der Freizeitnorm.","Moment, this Abstand ist weder locker noch DIN-kompatibel."],germany:["Ihre Gehgeschwindigkeit weicht vier Millimeter von der Freizeitnorm ab.","Moment, dieser Abstand ist weder locker noch DIN-kompatibel."]}},
- {id:"potato",sprite:"potato",label:"KARTOFFELBEAUFTRAGTER",barks:{berlin:["Ich bin keine Beilage. I am der zuständige Knollenbeauftragte.","Dieser Gehweg needs more Stärke und weniger Spontaneität."],germany:["Ich bin keine Beilage. Ich bin der zuständige Knollenbeauftragte.","Dieser Gehweg braucht mehr Stärke und weniger Spontaneität."]}}
+ {id:"towel-woman",sprite:"towelWoman",label:"HANDTUCHHOHEIT",barks:{berlin:["Die Liege ist not frei; die Reservierung trocknet nur kurz.","Your Schatten fällt in meinen amtlich vorgemerkten Sonnenkorridor."],germany:["Die Liege ist nicht frei; die Reservierung trocknet nur kurz.","Ihr Schatten fällt in meinen amtlich vorgemerkten Sonnenkorridor."]}}
 ]);
 const crowdArchetypeById=Object.fromEntries(crowdArchetypes.map(archetype=>[archetype.id,archetype]));
-const crowdArchetypeOrder=Object.freeze([
- "quiet-hours","din-inspector","towel-man","waste-marshal","towel-woman","quiet-hours","potato","din-inspector",
- "towel-man","waste-marshal","quiet-hours","towel-woman","din-inspector","potato","cargo-parent","bio-vegan"
-].map(id=>crowdArchetypeById[id]));
+const crowdArchetypeOrder=Object.freeze(["towel-man","towel-woman"].map(id=>crowdArchetypeById[id]));
 const germannessVoice={
  gain:{text:"Endlich wieder Nachschub!",recording:"./assets/voices/thorsten-amused-nachschub.mp3"},
  loss:{text:"Mist, wieder nichts geschafft.",recording:"./assets/voices/thorsten-disgusted-nichts-geschafft.mp3"}
@@ -672,10 +657,10 @@ function staticBlocked(x,y,r=player.r){if(x<r+9||y<r+9||x>WORLD.w-r-9||y>WORLD.h
 function trainCarDistance(x,y,car){const dx=x-car.x,dy=y-car.y,c=Math.cos(car.angle),s=Math.sin(car.angle),along=dx*c+dy*s,across=-dx*s+dy*c;return Math.hypot(Math.max(0,Math.abs(along)-TRAIN_CAR_HALF_LENGTH),Math.max(0,Math.abs(across)-TRAIN_CAR_HALF_WIDTH))}
 function trainAt(x,y,r){for(const train of trains)for(const car of train.cars)if(trainCarDistance(x,y,car)<r)return car;return null}
 function dynamicBlocker(x,y,fromX,fromY){for(const train of trains)for(const item of train.cars){const next=trainCarDistance(x,y,item),previous=trainCarDistance(fromX,fromY,item);if(next<player.r&&next<previous)return item}const candidates=[...trafficCars.map(item=>({item,r:TRAFFIC_CAR_RADIUS})),...policeVehicles.map(item=>({item,r:43})),...police.map(item=>({item,r:18}))];for(const {item,r} of candidates){if(item.vortexPhase==="swallowed")continue;const next=dist(x,y,item.x,item.y),previous=dist(fromX,fromY,item.x,item.y);if(next<player.r+r&&next<previous)return item}return null}
-function responderBlocked(x,y,r,self){if(staticBlocked(x,y,r)||trainAt(x,y,r))return true;for(const car of trafficCars)if(car!==self&&car.vortexPhase!=="swallowed"&&dist(x,y,car.x,car.y)<r+TRAFFIC_CAR_RADIUS)return true;for(const car of policeVehicles)if(car!==self&&dist(x,y,car.x,car.y)<r+38)return true;for(const officer of police)if(officer!==self&&dist(x,y,officer.x,officer.y)<r+14)return true;for(const n of npcs)if(n!==self&&!n.arrested&&n!==self?.divertedTarget&&n!==self?.escort&&dist(x,y,n.x,n.y)<r+13)return true;if(self&&!trafficCars.includes(self)&&!policeVehicles.includes(self)&&!police.includes(self)&&dist(x,y,player.x,player.y)<r+player.r)return true;return false}
+function responderBlocked(x,y,r,self){if(staticBlocked(x,y,r)||trainAt(x,y,r))return true;for(const car of trafficCars)if(car!==self&&car.vortexPhase!=="swallowed"&&dist(x,y,car.x,car.y)<r+TRAFFIC_CAR_RADIUS)return true;for(const car of policeVehicles)if(car!==self&&dist(x,y,car.x,car.y)<r+38)return true;for(const officer of police)if(officer!==self&&dist(x,y,officer.x,officer.y)<r+14)return true;for(const n of npcs)if(n!==self&&!n.arrested&&n!==self?.divertedTarget&&n!==self?.escort&&!(self?.crowd&&n.crowd)&&dist(x,y,n.x,n.y)<r+13)return true;if(self&&!self.crowd&&!trafficCars.includes(self)&&!policeVehicles.includes(self)&&!police.includes(self)&&dist(x,y,player.x,player.y)<r+player.r)return true;return false}
 function moveGroundResponder(entity,dx,dy,r){if(!dx&&!dy)return false;const blockedHere=responderBlocked(entity.x,entity.y,r,entity);let movedX=false,movedY=false;if(dx&&!responderBlocked(entity.x+dx,entity.y,r,entity)){entity.x+=dx;movedX=true}if(dy&&!responderBlocked(entity.x,entity.y+dy,r,entity)){entity.y+=dy;movedY=true}const mainBlocked=Math.abs(dx)>=Math.abs(dy)?!!dx&&!movedX:!!dy&&!movedY;if((movedX||movedY)&&!mainBlocked)return true;if(!entity.avoid)entity.avoid=Math.random()<.5?-1:1;let sideX=-dy*.72*entity.avoid,sideY=dx*.72*entity.avoid;if(!responderBlocked(entity.x+sideX,entity.y+sideY,r,entity)){entity.x+=sideX;entity.y+=sideY;return true}entity.avoid*=-1;sideX*=-1;sideY*=-1;if(!responderBlocked(entity.x+sideX,entity.y+sideY,r,entity)){entity.x+=sideX;entity.y+=sideY;return true}const backX=-dx*.55,backY=-dy*.55;if(blockedHere||!responderBlocked(entity.x+backX,entity.y+backY,r,entity)){entity.x+=backX;entity.y+=backY;return true}return false}
 function blocked(x,y){return staticBlocked(x,y,player.r)}
-function blockingPedestrian(x,y){let nearest=null,best=NPC_BLOCK_DISTANCE;for(const n of npcs){if(n.arrested)continue;const d=dist(x,y,n.x,n.y);if(d<best){nearest=n;best=d}}return nearest}
+function blockingPedestrian(x,y){let nearest=null,best=NPC_BLOCK_DISTANCE;for(const n of npcs){if(n.arrested||n.crowd)continue;const d=dist(x,y,n.x,n.y);if(d<best){nearest=n;best=d}}return nearest}
 function toast(msg){const e=document.getElementById("toast");e.textContent=msg;e.classList.add("show");clearTimeout(toast.t);toast.t=setTimeout(()=>e.classList.remove("show"),2300)}
 function renderWurstBadges(){
  const list=document.getElementById("wurst-badges");if(renderWurstBadges.count===state.wurstBadges.size&&list.childElementCount)return;renderWurstBadges.count=state.wurstBadges.size;list.innerHTML="";
@@ -919,7 +904,7 @@ document.getElementById("quiz-choices").addEventListener("click",event=>{const b
 function updateQuizEncounters(dt){
  if(state.quizApproach)return;state.quizTimer-=dt;if(state.quizTimer>0)return;
  let candidates=npcs.filter(n=>n.quizzer&&!n.quizAsked&&dist(player.x,player.y,n.x,n.y)<1800);if(!candidates.length)candidates=npcs.filter(n=>n.quizzer&&!n.quizAsked);if(!candidates.length){for(const n of npcs)if(n.quizzer)n.quizAsked=false;candidates=npcs.filter(n=>n.quizzer)}
- if(candidates.length){candidates.sort((a,b)=>dist(player.x,player.y,a.x,a.y)-dist(player.x,player.y,b.x,b.y));state.quizApproach=pick(candidates.slice(0,Math.min(6,candidates.length)))}
+ if(candidates.length){candidates.sort((a,b)=>dist(player.x,player.y,a.x,a.y)-dist(player.x,player.y,b.x,b.y));state.quizApproach=pick(candidates.slice(0,Math.min(6,candidates.length)));state.quizApproach.quizFollowTime=0}
  state.quizTimer=22+Math.random()*18;
 }
 function spawnPointVisible(x,y,padding,kind="officer"){if(window.Germany3D?.ready&&window.Germany3D.isWorldPointVisible)return window.Germany3D.isWorldPointVisible(x,y,padding,kind);const p=project(x,y);return p.x>=-padding&&p.x<=width+padding&&p.y>=-padding&&p.y<=height+padding}
@@ -1088,10 +1073,10 @@ function update(dt){
    if(n.special==="merkel"){updateMerkel(n,dt);continue}
    if(n.special==="bayern"){updateBayern(n,dt);continue}
    if(n.special==="alice"){updateAlice(n,dt);continue}
-   if(n===state.quizApproach){const dx=player.x-n.x,dy=player.y-n.y,d=Math.hypot(dx,dy)||1;if(d<78&&!stimulusBusy()){state.quizApproach=null;n.quizAsked=true;startCitizenshipQuiz(n)}else if(d>=78)moveGroundResponder(n,dx/d*88*dt,dy/d*88*dt,12);if(d>=78&&n.spriteKind){n.animTime=(n.animTime||0)+dt;orientCrowdSprite(n,dx,dy);n.spriteFrame=Math.floor(n.animTime*28)%npcSpriteAtlases[n.spriteKind].cols}continue}
+   if(n===state.quizApproach){const dx=player.x-n.x,dy=player.y-n.y,d=Math.hypot(dx,dy)||1;n.quizFollowTime=(n.quizFollowTime||0)+dt;if(n.quizFollowTime>QUIZ_FOLLOW_MAX_SECONDS||d>QUIZ_FOLLOW_BREAK_DISTANCE){state.quizApproach=null;n.quizAsked=true;n.quizFollowTime=0;state.quizTimer=14+Math.random()*10;continue}if(d<78&&!stimulusBusy()){state.quizApproach=null;n.quizAsked=true;n.quizFollowTime=0;startCitizenshipQuiz(n)}else if(d>=78)moveGroundResponder(n,dx/d*88*dt,dy/d*88*dt,12);if(d>=78&&n.spriteKind){n.animTime=(n.animTime||0)+dt;orientCrowdSprite(n,dx,dy);n.spriteFrame=Math.floor(n.animTime*28)%npcSpriteAtlases[n.spriteKind].cols}continue}
    if(dist(player.x,player.y,n.x,n.y)<(n.audioRadius||NPC_COMPLAINT_DISTANCE))pedestrianBark(n,playerSurface());
    if((n.pause||0)>0){n.pause-=dt;continue}
-   const dx=(n.vx||0)*dt,dy=(n.vy||0)*dt,nextX=n.x+dx,nextY=n.y+dy,playerHit=dist(player.x,player.y,nextX,nextY)<NPC_BLOCK_DISTANCE;
+   const dx=(n.vx||0)*dt,dy=(n.vy||0)*dt,nextX=n.x+dx,nextY=n.y+dy,playerHit=!n.crowd&&dist(player.x,player.y,nextX,nextY)<NPC_BLOCK_DISTANCE;
    if(playerHit||!moveGroundResponder(n,dx,dy,12)){n.pause=.48;if(n.vx)n.vx*=-1;else n.vy*=-1;if(n.spriteKind)orientCrowdSprite(n);if(playerHit)pedestrianBark(n,playerSurface());continue}
    if(n.spriteKind){n.animTime=(n.animTime||0)+dt;orientCrowdSprite(n);n.spriteFrame=Math.floor(n.animTime*Math.max(18,Math.abs(n.vx||n.vy||0)*1.45))%npcSpriteAtlases[n.spriteKind].cols}
    if(n.vx){if(n.x<n.min||n.x>n.max){n.vx*=-1;if(n.spriteKind)orientCrowdSprite(n)}}else if(n.y<n.min||n.y>n.max){n.vy*=-1;if(n.spriteKind)orientCrowdSprite(n)}
