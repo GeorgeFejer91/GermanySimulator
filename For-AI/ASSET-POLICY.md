@@ -66,6 +66,12 @@ An asset change is complete only when the correct variant loads on desktop and m
 - `game.js` owns lane population, region identity, movement, obstruction, queueing, collision, and horn timing. `world3d.js` loads the Type 1 source once and clones it for Berlin cars; Trabants remain lightweight code-native geometry.
 - Missing-model paths retain procedural 3D car silhouettes. Keep all traffic assets local, avoid manufacturer logos and textures, and do not add a vehicle-physics package or remote runtime asset host for this bounded system.
 
+## Procedural Wirtschaftswunder vortex
+
+- The construction-site vortex beside the western Schrebergarten is code-native Three.js geometry and shader work. It uses no bitmap, model, post-processing, or remote runtime asset: layered polar spiral materials, a dark funnel, construction barriers, and deterministic canvas-text signs provide the complete presentation.
+- `game.js` owns the site coordinates, collision radius, traffic diversion, spiral/sink progress, disappearance, and far-lane respawn. `world3d.js` projects that state, applies bounded car pitch/roll/scale, and uses small view-relative offsets between spiral layers for the depth/parallax illusion.
+- Keep the bold sign text exactly `WIRTSCHAFTSWUNDER!`. Preserve the short, cyclical traffic behavior rather than adding a physics engine, particle package, duplicate car pool, or authored vortex asset.
+
 ## Audio normalization and focus
 
 - `tools/normalize-audio.ps1` is the only audio-level maintenance command. It checks by default and rewrites only with `-Apply`, using local FFmpeg. Preserve channel layout, sample rate, approximate bitrate, and duration.
