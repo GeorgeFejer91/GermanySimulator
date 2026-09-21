@@ -12,6 +12,7 @@ assert.match(game,/car\.vortexImpact=\+\+wirtschaftswunderImpact;playWirtschafts
 assert.match(game,/function playWirtschaftswunderCrush\(car\).*createBuffer.*createOscillator/s,"the thunder-crush must be synthesized with deterministic noise and low oscillators");
 assert.match(game,/function playWirtschaftswunderCrush\(car\).*soundEffectOutput/s,"the thunder-crush must use the shared sound-effect bus");
 assert.match(renderer,/fillText\("WIRTSCHAFTSWUNDER!"/,"the physical signs must preserve the exact bold German phrase");
+assert.match(renderer,/signRadius=mouth\+\.65,signAngles=\[70,160,250,340\].*group\.rotation\.y=Math\.atan2\(dx,dz\).*signAngles\.forEach\(siteSign\)/s,"all four signs must sit on a tangent ring outside the vortex mouth");
 assert.match(renderer,/uTime.*uLayer.*uOpacity.*uImpact/s,"the vortex must use independently animated, impact-reactive depth layers");
 assert.match(renderer,/PlaneGeometry\(mouth\*2,mouth\*2,48,48\)/,"the vortex surface must have enough geometry for visible radial ripples");
 assert.match(renderer,/viewX.*viewZ.*layer\.index/s,"the renderer must preserve view-relative parallax");
