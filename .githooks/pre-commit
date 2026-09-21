@@ -1,0 +1,15 @@
+#!/bin/sh
+set -eu
+
+changed="$(git diff --cached --name-only --diff-filter=ACMR)"
+if ! printf '%s\n' "$changed" | grep -Eq '^(assets/.*sprite|assets/crowd-|tools/(build-sprite|register-sprite|assemble-directional-sprite|mirror-lower-limbs|verify-sprite)|tests/sprite-pipeline|For-AI/SPRITE-GENERATION-PROTOCOL)'; then
+  exit 0
+fi
+
+echo "Running critical sprite animation gate..."
+if command -v py >/dev/null 2>&1; then
+  py tools/verify-sprite-animation.py
+else
+  python tools/verify-sprite-animation.py
+fi
+node --test tests/sprite-pipeline.test.mjs tests/stereotype-pedestrians.test.mjs

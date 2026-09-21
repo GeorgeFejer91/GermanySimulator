@@ -1,5 +1,13 @@
 # Durable decisions
 
+## 2026-09-21 — Multicultural German pedestrian typology
+
+Ordinary pedestrians use the behavior-first taxonomy in `SATIRE-DICTIONARY.md`. The dominant target is the grumpy middle-class German proceduralist: towel reservation, waste sorting, quiet hours, measurement and literal potato officialdom outweigh the bio-vegan and cargo-lifestyle accents fourteen to two in the 16-entry production order. This weighting describes behavior and props, never ethnicity or migration background; personal names rotate independently, the complete set deliberately shows varied contemporary Germans, and “potato” remains a literal anthropomorphic vegetable. Every type uses the same registered eight-key side/down/up contract with 32 runtime frames per direction and a radius-triggered regional speech pool, preserving Berlin Denglisch and German-only dialogue outside the Brandmauer.
+
+## Decision: sprite commits require signed visual anatomy approval
+
+`tools/verify-sprite-animation.py` is the release and pre-commit authority for moving bitmap characters. It combines deterministic grid, alpha, centering, scale, pose, limb-change and seam thresholds with `assets/sprite-sources/verification.json`, whose source/runtime hashes bind a full-resolution visual review to exact pixels. A checksum mismatch is a rejection, not an automatic re-sign. The reviewer must inspect keys, frame sheets, rapid loops and onion overlays, repair the defect, rebuild, and only then record new hashes. Layered or isolated-limb rotation is preferred for new work; motion-compensated morphing is limited to transitions between anatomically approved keys.
+
 ## 2026-09-19 — Canonical game identity
 
 The canonical game is the pseudo-3D “Grand Theft Amt” version originally deployed at `https://ec-games.space/games/germany-simulator/`. The later flat 2D prototype is not the product direction.
@@ -116,7 +124,7 @@ Merkel, Merz, and the Bayern-Beauftragter replay only their own line or recordin
 
 Sprite stability is authored into the three final atlases rather than corrected with renderer-specific offsets. Every pose owns one hard 256×256 cell, places the detected head center on x=128 and the body midpoint on y=128, uses a row-consistent scale derived from supplied key poses, and retains transparent edge clearance. Color-coded silhouette overlays and rapid row cycles are the visual acceptance check: the torso must remain registered while legs and arms cross through planted, passing, and opposite-stride phases. Merz's corrupted front-pouring source row was regenerated under an identity-preserving prompt because its missing scalp pixels and detached lower heads could not be recovered by translation; every other walking row keeps the established alternating pose sequence. Canvas and Three.js continue to share the same atlas and frame clock.
 
-The registered 256 px sheets are now explicit production sources under `assets/sprite-sources/`. A single Pillow/FFmpeg tool inserts three motion-compensated frames across every key interval and loop seam, producing 24-frame Merkel rows and 32-frame Merz/Bayern rows. Derived runtime cells are 128 px so the widest atlas remains 4096 px and mobile/WebGL memory stays bounded; animation clocks are multiplied by the same four-times expansion factor, preserving stride duration. `For-AI/SPRITE-GENERATION-PROTOCOL.md` is the required contract for new moving characters.
+The registered 256 px sheets are now explicit production sources under `assets/sprite-sources/`. A single Pillow/FFmpeg tool inserts three motion-compensated frames across every key interval and loop seam, producing 24-frame Merkel rows and 32-frame rows for every eight-key character, including all three directional crowd rows. Derived runtime cells are 128 px so the widest atlas remains 4096 px and mobile/WebGL memory stays bounded; animation clocks are multiplied by the same four-times expansion factor, preserving stride duration. `For-AI/SPRITE-GENERATION-PROTOCOL.md` and its checksum-bound critical gate are the required contract for new moving characters.
 
 ## 2026-09-21 — Bundestag landmark on the vacant southeast parcel
 
