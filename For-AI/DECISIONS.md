@@ -1,5 +1,61 @@
 # Durable decisions
 
+## 2026-09-22 — Runtime smoothness and shared sprite textures
+
+The simulation still updates on every animation frame, but routine HUD projection
+is capped at 10 Hz; explicit gameplay events continue to refresh the HUD
+immediately. This removes repeated DOM reconstruction from the hot path without
+making rounded energy, time, wanted, or cooldown values feel delayed.
+
+Three.js uploads each identity-locked character atlas once per character kind.
+The individual camera-facing planes share that texture and material, while their
+small geometry UVs select the current row and frame. Procedural player and police
+limbs advance from actual distance travelled and settle to neutral while idle,
+instead of cycling from wall-clock time. Losing browser focus or hiding the page
+clears held keyboard state so returning to the tab cannot continue an abandoned
+movement input. No animation, physics, UI, or input dependency is added.
+
+## 2026-09-22 — Original-pose identity lock supersedes cutout rigs
+
+The original complete image-generated key atlases are again the production
+identity authority for Merkel, Merz, the Bayern-Beauftragter, Alice, and both
+towel pedestrians. This decision supersedes the 2026-09-21 direct cutout-rig,
+motion-compensated transition, and direction-signed IK authorities below. Those
+records remain as history and their assets remain recoverable, but neither the
+part sheets nor `build-rigged-sprite-atlas.py` may produce shipping sprites.
+
+`tools/build-identity-locked-sprite-atlas.py` exposes each original key on a
+32-cell runtime clock using balanced whole-pose holds and premultiplied-alpha
+downscaling. It does not cross-fade, optical-flow, reconstruct, individually
+translate, or recenter characters. `identity-audit.json` maps and hashes every
+final cell to one source key; the signed verification ledger binds the source,
+runtime, mapping, direction contract, and contact-sheet review. The gate also
+checks head/top, ground, horizontal-root, scale, and lower-limb/opposite-phase
+thresholds. Merkel retains her original six columns; the other characters
+retain eight. Merz's full authored head is present in every cell. The rejected
+cutout-rig atlases are archived under
+`assets/sprite-archive/pre-identity-lock-20260922/` and never loaded at runtime.
+
+The implementation follows the established Einhornsammler runtime discipline:
+fixed cells, a fixed ground offset, immutable visual endpoints, directionally
+meaningful rows or whole-cell mirroring, and full contact-sheet inspection of
+the exact delivered atlas. Germany Simulator adds per-cell cryptographic
+identity proof. This favors stable eight-pose walking over synthetic high-frame
+counts that change faces, clothes, props, or anatomy.
+
+## 2026-09-22 — Continuous close-radius featured speech
+
+Merkel, Merz, the Bayern-Beauftragter, and Alice use a 176-unit audible radius
+and the existing featured broker priority. Once admitted, each completed line
+queues the next item from that same owner's shuffled no-repeat pool after the
+broker's 250 ms required gap for as long as the player remains inside the
+audible radius. The former cooldowns, 42-percent follow-up chance, and two-line
+burst limit no longer apply. The 224-unit release ring only resets entry state;
+it is not audible eligibility. Critical modal/direct speech still ranks above
+featured speech and active audio is never interrupted. The post-form Berlin
+welcome/mission briefing remains a critical spoken dialogue and is also used by
+the secret Start skip path.
+
 ## 2026-09-21 — Direction-signed gait and final-atlas visual gate
 
 Every directional rig row uses screen-space travel semantics: right is positive
@@ -23,13 +79,23 @@ separate left arc. The signed ledger binds the parts, keys, runtime atlases, and
 pose audit by hash. No runtime rigging dependency or second asset path is
 introduced.
 
+## 2026-09-21 — Category-bound quiz dossiers and original language drills
+
+Roaming quiz encounters use one static data authority, `For-AI/QUIZ-CHARACTER-DICTIONARY.js`, to bind nine fictional names and satirical roles to nine local 512 × 512 WebP dossier portraits and eligible question categories. The ninth identity is Hartmut Keller, a para-polizeilicher Nachbar whose alleged authority is explicitly private and invented. Portrait identity never randomizes independently from its name. The cast shares one raw psychological-expressionist RPG treatment with broken paint planes, mature asymmetrical faces, restrained eyes, straighter noses, and emotionally contained bureaucratic expressions. A shared clear gray-beige dossier field replaces scenic city backgrounds; every complete head keeps generous top clearance, and glossy 3D-animation rendering remains excluded. The modal keeps the dossier in a fixed left column on desktop and stacks it above the question on mobile; a missing portrait falls back to a § placeholder without blocking the encounter. The generated portrait set totals about 0.23 MB and is shared across viewport sizes, so no loader service, separate mobile variant, or generalized asset registry is introduced.
+
+The mixed deck retains 35 sourced BAMF civic tasks and 10 conspicuously fictional driving tasks, then adds 28 original multiple-choice grammar drills: 10 at B1, 10 at B2, and 8 at C1. These are certificate-style game exercises rather than copied Goethe, telc, TestDaF, or other real exam items. Each grammar card is labeled accordingly. Category context is visible and spoken through the existing serialized audio-text path, follows the Berlin-Denglisch/Germany-only rule, and has an authored English subtitle. Real information is deliberately narrow: StAG § 10(4) generally points to B1 for naturalization; B2 requirements are context-specific; TestDaF TDN 4 in all sections generally establishes unrestricted university admission; CEFR has A1, A2, B1, B2, C1, and C2, not B3. The game remains satire and not legal, immigration, education, or admissions advice.
+
+## 2026-09-21 — Broker-owned optional English subtitles
+
+English subtitles remain off by default and are controlled by one unobtrusive persistent toggle. The existing stimulus broker owns their lifecycle: a recorded cue starts with its `AudioBufferSourceNode`, long cues continuously select against the Web Audio clock, a synthesized cue starts only from `SpeechSynthesisUtterance.onstart`, and broker completion or cancellation clears it. `For-AI/AUDIO-TEXT-LIBRARY.js` is both the runtime and durable transcript/translation authority. Its train entries retain Whisper-derived segment timings; shorter recorded and synthesized lines use the exact audio-text event duration. Background music and non-verbal effects are excluded. The bottom strip uses the established legible `Grenze` face with a black, red, and gold treatment, and moves above the touch dock on phones so input remains unobstructed.
+
 ## 2026-09-21 — Two towel pedestrians and bounded attention
 
 Ordinary pedestrians use only the two accepted towel-reservation figures in `SATIRE-DICTIONARY.md`; the other six experimental archetypes and their assets are removed. Personal names rotate independently, so the gag targets textile territorialism rather than identity. Both towel figures retain the registered eight-key side/down/up contract with 32 runtime frames per direction and radius-triggered regional speech, preserving Berlin Denglisch and German-only dialogue outside the Brandmauer. They are pass-through relative to the player and one another, keeping crowded sidewalks conversational without forming hard navigation traps. A quiz pedestrian follows for at most eight seconds or until the player is more than 650 world units away, then loses interest and resumes its route.
 
 ## Decision: sprite commits require signed visual anatomy approval
 
-`tools/verify-sprite-animation.py` is the release and pre-commit authority for moving bitmap characters. It combines deterministic grid, alpha, centering, scale, pose, limb-change and seam thresholds with `assets/sprite-sources/verification.json`, whose source/runtime hashes bind a full-resolution visual review to exact pixels. A checksum mismatch is a rejection, not an automatic re-sign. The reviewer must inspect keys, frame sheets, rapid loops and onion overlays, repair the defect, rebuild, and only then record new hashes. Layered or isolated-limb rotation is preferred for new work; motion-compensated morphing is limited to transitions between anatomically approved keys.
+`tools/verify-sprite-animation.py` is the release and pre-commit authority for moving bitmap characters. It combines deterministic grid, alpha, top/head, ground, horizontal-root, scale, lower-limb, opposite-phase, direction, and exact source-frame identity checks with `assets/sprite-sources/verification.json`, whose source/runtime/audit hashes bind a full-resolution visual review to exact pixels. A checksum mismatch is a rejection, not an automatic re-sign. The reviewer must inspect the authored keys and every final contact sheet, repair the source rather than the renderer, rebuild, and only then record new hashes. Production animation schedules complete approved poses; layered experiments and generated or motion-compensated in-betweens do not ship.
 
 ## 2026-09-19 — Canonical game identity
 
@@ -200,6 +266,12 @@ Merkel's owner-locked ambient pool additionally maps “Das Internet ist für un
 Every moving bitmap character now follows the same registered-source pipeline. The transition builder clears hidden RGB, downsamples in premultiplied-alpha space, preserves full RGBA, and emits the established three motion-compensated in-betweens per key interval. Canvas and Three.js use smooth sampling and one bottom-center cell anchor, with small per-atlas whole-character scales chosen from visible body height. The previous Merz-only alpha-mask dilation was removed because it promoted interpolation residue into opaque black geometry, producing the observed face/arm blob and apparent vibration. No renderer owns per-frame correction offsets.
 
 Alice Weidel is a visibly fictional satirical Germany-side character with a registered 8×2 key sheet and 32×2 runtime atlas. Eight front and eight back keys carry two German flags through alternating contact, passing/crossing, and opposite-step phases. She remains on one exact vertical route, moves and cycles at 1.5× the standard 52-unit/40-frame character rates, and flips between front/down and back/up rows at each bound. Her four user-supplied local recordings form an owner-locked shuffled proximity loop through the existing broker; exact local Whisper transcripts accompany playback, and the material is not asserted to be authentic quotation or fact.
+
+## 2026-09-21 — Featured sprite dialogue and contextual inner monologues
+
+The existing stimulus broker remains the only audio-text authority. It now has one featured-character tier between critical direct/modal speech and reactive barks. Automatic proximity dialogue for Merkel, Merz, the Bayern-Beauftragter, and Alice uses this tier, bypasses the ordinary ambient-family gap, and may enqueue exactly one immediate follow-up from the same owner with a 42-percent chance while eligibility remains true. Active audio is still never interrupted, direct interaction remains critical, and all owner, textbox, regional-language, and voice bindings remain unchanged.
+
+Player self-talk reuses the same bark and broker path rather than introducing a second dialogue system. Context-specific shuffled pools cover train delay, wrong-office, bicycle, fax, empty-machine, wrong-task, low-energy, deadline, and no-authority interactions. They use Berlin Denglisch or Germany-only German, run below the featured tier, coalesce behind one cooldown, and cause a nearby named sprite to become immediately eligible before the self-line is queued.
 
 ## 2026-09-21 — Wirtschaftswunder construction-site vortex
 
