@@ -11,10 +11,10 @@ The runtime files in this directory are local derivatives or previews of the cre
 - Author: Work With Sounds / Konrad Gutkowski
 - Sound recordists credited by the source: Konrad Gutkowski, Jonathan Nicolai, and Anna Pietzuch
 - License: Creative Commons Attribution 4.0 International, https://creativecommons.org/licenses/by/4.0/
-- Modification: transcoded from the source Ogg Vorbis file to MP3 at 112 kbps; metadata removed. The recording itself was not remixed.
+- Modification: transcoded from the source Ogg Vorbis file to MP3 at 112 kbps, metadata removed, then two-pass normalized to the project's `−20 LUFS` effect role with a `−2 dBTP` ceiling.
 - Duration: 15.804082 seconds
 - Size: 221,666 bytes
-- SHA-256: `8fa3edca8c70b0510da9c94b58e1140ba290c4999a9343ee32cc8522908652b8`
+- SHA-256: `B71ADBE0AECF863C9C43AC3B00C9FF265891D72F4A7EDAA221CDF4B5691D7F31`
 
 ## `german-police-passby.mp3`
 
@@ -24,7 +24,7 @@ The runtime files in this directory are local derivatives or previews of the cre
 - Imported preview: https://cdn.freesound.org/previews/581/581381_9159316-hq.mp3
 - Author: Breviceps
 - License: Creative Commons CC0 1.0 Universal, https://creativecommons.org/publicdomain/zero/1.0/
-- Modification: the Freesound-generated high-quality MP3 preview was imported unchanged from the source page's original 44.1 kHz stereo WAV recording.
+- Modification: the Freesound-generated high-quality MP3 preview was imported from the source page's original 44.1 kHz stereo WAV recording, then two-pass normalized at 192 kbps to the project's `−20 LUFS` effect role with a `−2 dBTP` ceiling.
 - Duration: 6.217143 seconds
-- Size: 143,485 bytes
-- SHA-256: `2bfbff0eb01f2cedcbe38e5520a9d9c8c352dc4cf9bb2a9ae8f4885b28c23a56`
+- Size: 149,881 bytes
+- SHA-256: `948B9B08B5957740815C0C7AA0E22969979A59582FB2108AD1B258237657077E`

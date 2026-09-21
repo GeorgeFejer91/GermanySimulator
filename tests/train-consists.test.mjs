@@ -24,13 +24,13 @@ assert.match(game,/function dynamicBlocker\(x,y,fromX,fromY\).*trainCarDistance\
 assert.match(game,/groundObstacles=\[\{item:player.*policeVehicles.*police.*npcs.*props.*normObjects/s,"trains must brake for the player, other people, response vehicles, and solid ground objects");
 assert.match(game,/event<\.55.*train\.pause=1\.4\+Math\.random\(\)\*4\.8/,"trains must stop unpredictably often enough to disrupt both loops");
 assert.match(game,/TRAIN_PLAYER_OBSTRUCTION_AUDIO=TRAIN_ANNOUNCEMENT_AUDIO\[0\]/,"the player-obstruction cue must always map to the supplied Buxtehude recording");
-assert.match(game,/playerHolding&&!playerHoldingLast\)requestTrainAnnouncement\(0,TRAIN_PLAYER_OBSTRUCTION_AUDIO,AUDIO_TEXT_PRIORITY\.TRAIN_OBSTRUCTION\)/,"every new player-caused train stop must reserve the high-priority Buxtehude cue");
+assert.match(game,/playerHolding&&!playerHoldingLast\)requestTrainAnnouncement\(0,TRAIN_PLAYER_OBSTRUCTION_AUDIO,STIMULUS_PRIORITY\.CRITICAL\)/,"every new player-caused train stop must reserve the critical Buxtehude cue");
 assert.match(game,/TRAIN_ANNOUNCEMENT_AUDIO=\[/,"the supplied recordings must replace generated train speech");
 assert.match(game,/function updateTrainAnnouncement\(\).*requestTrainAnnouncement\(nearest\)/s,"nearby trains must trigger the local recordings");
 assert.match(game,/AUDIO_CLASS=Object\.freeze\(\{TEXT:"audio-text",BACKGROUND:"background-music",EFFECT:"sound-effect"\}\)/,"runtime audio must declare text, background-music, and sound-effect classes");
-assert.match(game,/function playQueuedSpeech\(\)\{if\(speechActive\|\|trainAnnouncementSource\|\|trainAnnouncementLoading\|\|trainAnnouncementPending/,"dialogue audio must wait while a train announcement is active, loading, or reserved");
-assert.match(game,/function stopSpeech\(completeHumorScold=false,preserveTrain=false\).*trainAnnouncementPending&&!trainAnnouncementSource&&!trainAnnouncementLoading\)playTrainAnnouncement\(\)/s,"opening a modal must start rather than strand a reserved train cue");
-assert.match(game,/SOUND_EFFECT_READOUT_LEVEL=\.24/,"sound effects must duck while audio text is active");
+assert.match(game,/function queueStimulus\(item\)/,"dialogue and train audio must share the stimulus broker");
+assert.match(game,/function stopSpeech\(completeHumorScold=false,preserveTrain=false\)\{const keepActive=preserveTrain&&activeStimulus\?\.family==="train";stimulusQueue\.length=0/s,"modal takeover must preserve only an already active no-text train cue");
+assert.match(game,/BACKGROUND:\.28/,"sound effects and music must share the normalized background multiplier");
 assert.match(game,/function applyAudioDucking\(\).*musicDucked\|\|audioTextActive\(\).*soundEffectBus/s,"audio text must duck both background music and the sound-effect bus");
 assert.doesNotMatch(game,/nextTrainAnnouncement/,"recorded train announcements must not create or display generated announcement text");
 assert.match(diagnostic,/carOffsets=\[780,520,260,0,-260,-520,-780\]/,"the direct 3D diagnostic must mirror the full-length seven-car articulation contract");

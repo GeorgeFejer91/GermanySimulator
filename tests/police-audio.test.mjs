@@ -5,8 +5,8 @@ import {join} from "node:path";
 
 const game=readFileSync("game.js","utf8"),assetRoot=join("assets","audio","police");
 const assets=[
- ["martinshorn-essen-loop.mp3",221_666,"8fa3edca8c70b0510da9c94b58e1140ba290c4999a9343ee32cc8522908652b8"],
- ["german-police-passby.mp3",143_485,"2bfbff0eb01f2cedcbe38e5520a9d9c8c352dc4cf9bb2a9ae8f4885b28c23a56"]
+ ["martinshorn-essen-loop.mp3",221_666,"b71adbe0aecf863c9c43ac3b00c9ff265891d72f4a7edaa221cdf4b5691d7f31"],
+ ["german-police-passby.mp3",149_881,"948b9b08b5957740815c0c7aa0e22969979a59582fb2108ad1b258237657077e"]
 ];
 for(const [name,size,hash] of assets){
  const path=join(assetRoot,name),data=readFileSync(path);

@@ -8,5 +8,6 @@ Required starting point: [`AGENT-START.md`](./AGENT-START.md)
 - [`ASSET-POLICY.md`](./ASSET-POLICY.md): desktop/mobile asset strategy and YAGNI rules.
 - [`SKILLS.md`](./SKILLS.md): required skill routing for different kinds of work.
 - [`DECISIONS.md`](./DECISIONS.md): durable project decisions and their rationale.
+- [`VOICE-SYNTH-PROTOCOL.md`](./VOICE-SYNTH-PROTOCOL.md): local XTTS-v2 voice-clone workflow, reference bank, batch-driving, and validation.
 
 Keep these files concise and factual. They are project memory, not a backlog or a substitute for source code.

@@ -8,11 +8,12 @@ separate permission.
 
 | Local file | Supplied source | Duration | Bytes | SHA-256 |
 | --- | --- | ---: | ---: | --- |
-| `ice-0815-buxtehude-bahnhofshalle-subtle.mp3` | `D:\Downloads\ICE_0815_Buxtehude_Bahnhofshalle_subtle.mp3` | 50.678 s | 1,622,560 | `9056e0bfedd111cfadb15632fe1261dcb06e9f1cb429d7e4311f945a35302305` |
-| `ice-0815-marktversagen-bahnhofshalle-subtle.mp3` | `D:\Downloads\ICE_0815_Marktversagen_Bahnhofshalle_subtle.mp3` | 89.940 s | 2,878,946 | `31cc2c106fb28dea0590817c1ed0f3b3b9eb1010ea368ea735a95d80a7ffaa95` |
-| `ice-0815-stalingrad-bahnhofshalle-subtle.mp3` | `D:\Downloads\ICE_0815_Stalingrad_Bahnhofshalle_subtle.mp3` | 40.124 s | 1,284,849 | `5ac7e8853b89436e55899e8288884de12bda397fcbe9890239bb9c9d69b05629` |
-| `ice-ardorf-hilter-bahnhofshalle-subtle.mp3` | `D:\Downloads\ICE_Ardorf_Hilter_Bahnhofshalle_subtle.mp3` | 46.942 s | 1,503,024 | `8c00bb3c5b80dc7d9e8c33b3ca32064bcbf73f1d3bc3e7946fec4fe337ae7bf2` |
-| `ice-96-oberkaka-bahnhofshalle-subtle.mp3` | `D:\Downloads\ICE_96_Oberkaka_Bahnhofshalle_subtle.mp3` | 46.811 s | 1,498,844 | `7d2bdcb4f77efb5a5c6cc0431bc26dbd0014682f2d33074cc4b90d25725dd0b5` |
+| `ice-0815-buxtehude-bahnhofshalle-subtle.mp3` | `D:\Downloads\ICE_0815_Buxtehude_Bahnhofshalle_subtle.mp3` | 50.678 s | 1,622,560 | `AB6F0EA855E18BB9D2508B9F6492B20563A0B9713C7B02DAC3C80DD5C54F7909` |
+| `ice-0815-marktversagen-bahnhofshalle-subtle.mp3` | `D:\Downloads\ICE_0815_Marktversagen_Bahnhofshalle_subtle.mp3` | 89.940 s | 2,878,946 | `6EB402461B18AC14BD4314D5AA69804AEE21D4787CDE2300DEC5E70DDE8FFD33` |
+| `ice-0815-stalingrad-bahnhofshalle-subtle.mp3` | `D:\Downloads\ICE_0815_Stalingrad_Bahnhofshalle_subtle.mp3` | 40.124 s | 1,284,849 | `F837E688737AB96B63936B4BB1D89FDB760923F07F506B73C016C778B49106FA` |
+| `ice-ardorf-hilter-bahnhofshalle-subtle.mp3` | `D:\Downloads\ICE_Ardorf_Hilter_Bahnhofshalle_subtle.mp3` | 46.942 s | 1,503,024 | `0CA7E3374A509DD756DF90DA2408FD85A9746E654C2C7533C37C2D7AEF2980A1` |
+| `ice-96-oberkaka-bahnhofshalle-subtle.mp3` | `D:\Downloads\ICE_96_Oberkaka_Bahnhofshalle_subtle.mp3` | 46.811 s | 1,498,844 | `416483E3967C19BF9AA4F1B911E35721AE8E17B9F5D617439DB3476E5CDF369F` |
 
-The runtime plays these as proximity-triggered ambient audio without a dialogue
-textbox. The game's voice toggle remains the user-facing mute control.
+The runtime plays these as normalized `−18 LUFS` foreground recordings without
+a dialogue textbox. Distance decides eligibility but does not change the gain
+after admission. The game's voice toggle remains the user-facing mute control.

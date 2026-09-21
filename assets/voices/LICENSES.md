@@ -15,10 +15,10 @@ Kreutz.
 
 | Shipped file | Dataset recording ID | Spoken text | SHA-256 |
 | --- | --- | --- | --- |
-| `thorsten-angry-nicht-weg.mp3` | `070560e5-3046-2e53-8963-68e9cf0be001---bb9f85586a2700cad15c61ac262035a8` | Nein, ich gehe hier nicht weg! | `04D6A11D4ED2774860D7AA7F8385B7A9E5114F1461AECF4BF728A9148182DA63` |
-| `thorsten-angry-duemmer.mp3` | `070560e5-3046-2e53-8963-68e9cf0be001---1910c7ff4e2def4080401802af5b6575` | Dümmer geht's nicht mehr. | `59938ACEAC1C292C84D37BDF7103A58DF6BF576C01B67C1C2626AF59D7F05D2C` |
-| `thorsten-angry-klappt-nicht.mp3` | `070560e5-3046-2e53-8963-68e9cf0be001---b85796d30b6476b19dd0e5240593c366` | Das klappt einfach nicht! | `ADB4C996A33907E32D715AFED1A786DBA2E5CA228BCA01A6FB4BE53AC2082EAC` |
-| `thorsten-amused-nachschub.mp3` | `680eb50a-d8a5-4fc7-b127-e8ec640a58e7---31952592964b2a3e715f1bea81bdc3cf` | Endlich wieder Nachschub! | `C6C9C1E926BEA49698458CF804ED64AF8D79991B08C081B3D010E6E89563691F` |
+| `thorsten-angry-nicht-weg.mp3` | `070560e5-3046-2e53-8963-68e9cf0be001---bb9f85586a2700cad15c61ac262035a8` | Nein, ich gehe hier nicht weg! | `61A7D884AEF5D3029384F0BFF3D0B78AE75464CDBDD9E848AC9020D48E94EBBF` |
+| `thorsten-angry-duemmer.mp3` | `070560e5-3046-2e53-8963-68e9cf0be001---1910c7ff4e2def4080401802af5b6575` | Dümmer geht's nicht mehr. | `66D2613EE3F5E9F6DE1C6B41E16DC27B9776B26520A772235977074DB1E88141` |
+| `thorsten-angry-klappt-nicht.mp3` | `070560e5-3046-2e53-8963-68e9cf0be001---b85796d30b6476b19dd0e5240593c366` | Das klappt einfach nicht! | `853E5BD8F21336589461AB264EB3508BE4A38C8DC75C7185AAA41C77BC3042F7` |
+| `thorsten-amused-nachschub.mp3` | `680eb50a-d8a5-4fc7-b127-e8ec640a58e7---31952592964b2a3e715f1bea81bdc3cf` | Endlich wieder Nachschub! | `AE493487DA4390E2F0D850F4BCAA30CB9887E5052EEBCE0BFFCF24BF5C225452` |
 
 The two additional recordings are the repository's official emotional sample
 files. Both speak “Mist, wieder nichts geschafft.” and were encoded with the
@@ -27,8 +27,8 @@ remark; the disgusted take is the player's Germanness-loss reaction.
 
 | Shipped file | Dataset style | Upstream sample and Git blob | SHA-256 |
 | --- | --- | --- | --- |
-| `thorsten-disgusted-nichts-geschafft.mp3` | `disgusted \| angewidert` | [`samples/thorsten-21.06-emotional/disgusted.wav`](https://github.com/thorstenMueller/Thorsten-Voice/blob/master/samples/thorsten-21.06-emotional/disgusted.wav), `37ea523dc505d8cc85c01c0d94305de123a1d4ac` | `737BF3FB0A77014A817677190A6DA16A1B222B50A4B63F506840B08029C36FED` |
-| `thorsten-sleepy-nichts-geschafft.mp3` | `sleepy \| schläfrig` | [`samples/thorsten-21.06-emotional/sleepy.wav`](https://github.com/thorstenMueller/Thorsten-Voice/blob/master/samples/thorsten-21.06-emotional/sleepy.wav), `d9c7dabe89f6472a9b980fae6c3b3e4c85076eb6` | `ACD0FCE97229A40D14C617F6F7EB2172BABCD00980FAA3026CE1F1B75A3EC6A2` |
+| `thorsten-disgusted-nichts-geschafft.mp3` | `disgusted \| angewidert` | [`samples/thorsten-21.06-emotional/disgusted.wav`](https://github.com/thorstenMueller/Thorsten-Voice/blob/master/samples/thorsten-21.06-emotional/disgusted.wav), `37ea523dc505d8cc85c01c0d94305de123a1d4ac` | `152920F2AC48BDC208D221D19822CEE7AB2599A639F40819147A79B11704F81E` |
+| `thorsten-sleepy-nichts-geschafft.mp3` | `sleepy \| schläfrig` | [`samples/thorsten-21.06-emotional/sleepy.wav`](https://github.com/thorstenMueller/Thorsten-Voice/blob/master/samples/thorsten-21.06-emotional/sleepy.wav), `d9c7dabe89f6472a9b980fae6c3b3e4c85076eb6` | `739C3E7A73188783F33DA4DBD0849C7E539BD5C1AC76EEA4D2F33ADBC80D60E5` |
 
 Attribution is not required by CC0, but the source and recording IDs are kept
 here for durable provenance and reproducible replacement.
@@ -59,19 +59,19 @@ fallback.
 
 | Shipped file | Duration | SHA-256 |
 | --- | ---: | --- |
-| `laws/thorsten-negative-law-01.mp3` | 26.645 s | `BDADB8349E15CAB81F413AA997FA9F6B49CC85A212E1857459B3B0B1F9ADE544` |
-| `laws/thorsten-negative-law-02.mp3` | 15.935 s | `C82FEAF6F4EA397BE5DF4DD426990060296BBD5AB41275F9483DFA78AA7EA752` |
-| `laws/thorsten-negative-law-03.mp3` | 31.713 s | `37FE5ADCE8816247DB148B77B42ED9D233BC866DB887B160D2A9743313DC64AF` |
-| `laws/thorsten-negative-law-04.mp3` | 29.074 s | `FAF9ABA99FD86279AE44D455E894EFE0B9EAC1937B4152515FC7B6B7398942E2` |
-| `laws/thorsten-negative-law-05.mp3` | 6.922 s | `22919939AD9589179571E7101C7FB44301F290C5ED27D7C1750376EE68EE7A9D` |
-| `laws/thorsten-negative-law-06.mp3` | 14.550 s | `FFBBBD6DB54904FECD46BB302F8997E2543E4902EB62D71BC53876E92898FD9E` |
-| `laws/thorsten-negative-law-07.mp3` | 15.569 s | `5774691C5575D4434517612C32679C39BE0FFA6B1BEAAAAF686F778C4E95F05C` |
-| `laws/thorsten-negative-law-08.mp3` | 16.771 s | `4F9BA8B9E4CF94EA8F725A442A138D7253D2B4620D2F8881A2821E1B15653D20` |
-| `laws/thorsten-negative-law-09.mp3` | 15.099 s | `13DBD600206ED87C16EFB991F1B3CDCA100116DBDB1F6671B8C645B1B01492DF` |
-| `laws/thorsten-negative-law-10.mp3` | 29.623 s | `83F425B324894404F4CB939B36383BD73A5822A63C9A3CC59AC9795A55572AA6` |
-| `laws/thorsten-negative-law-11.mp3` | 23.667 s | `CCB4D1D64CA7EFE6C6806A4D7F4048861C2A1D057C7C0DA72437B5315CC30827` |
-| `laws/thorsten-negative-law-12.mp3` | 24.268 s | `9C45825C4F9D8C0D3F75A51FFFF37B6B1DDB1AC684661D8CFE4777769940E030` |
-| `laws/thorsten-negative-law-13.mp3` | 23.327 s | `458D9941D53485E7532B26EF6C8EA5261B4D72783CA568B6A4827F3CD37CB235` |
+| `laws/thorsten-negative-law-01.mp3` | 26.645 s | `08AFF8383CADD581EE443B050D6FFA820EBBD4CDC46D6201070E76CCF09A7A4E` |
+| `laws/thorsten-negative-law-02.mp3` | 15.935 s | `9E7D12D72A67B8FFEA87334BE48CE3EC81CD44355AE1E9BB849A25C61DC69A66` |
+| `laws/thorsten-negative-law-03.mp3` | 31.713 s | `4E4C90FF0890F61AA8877FF2184B8588F4B5CA681741A7BDDB8CBF272F338A56` |
+| `laws/thorsten-negative-law-04.mp3` | 29.074 s | `301D0F116856D69F598DA57EFF5423553393CDC2CE3CDE9A30B70AB0621A7F87` |
+| `laws/thorsten-negative-law-05.mp3` | 6.922 s | `D50BFC268FE9FCC86B142331879F0C75362BB3525A871B73302128C88E02A52E` |
+| `laws/thorsten-negative-law-06.mp3` | 14.550 s | `742ECD54D0AC89867B3EB577F7EF09D183B869E5141A4418AAE00ADDF75D5413` |
+| `laws/thorsten-negative-law-07.mp3` | 15.569 s | `4312977418E56913320BC7FB8AC353587DFB0DCD1D1313AB2BA4014A7C49D6E0` |
+| `laws/thorsten-negative-law-08.mp3` | 16.771 s | `FE7B08B303470852FC19CBBCF09FF67E7F188E45D7B467A9261332810A2170BE` |
+| `laws/thorsten-negative-law-09.mp3` | 15.099 s | `96FAC706C5E29A60F775985E4B51224709D144A39B79F22E7FE94FB3B0DAB27A` |
+| `laws/thorsten-negative-law-10.mp3` | 29.623 s | `B05F72B097E02A86AE7AC8EFE31CF7950E89CD150E8A2A184DBD8E893219CBF2` |
+| `laws/thorsten-negative-law-11.mp3` | 23.667 s | `E463BFE83DA6972341B49404087C3AAEB5BD690D71302D62F3A92CE008AF7B50` |
+| `laws/thorsten-negative-law-12.mp3` | 24.268 s | `06FDD1B46A266CBEAEE5EAB0261E19FE3CEEC712BE1F48923FC8E8F63BF07A1B` |
+| `laws/thorsten-negative-law-13.mp3` | 23.327 s | `1529047B596C19F946F565755B9707C3032937B5BA11F71CD2997D162B2AE9E5` |
 
 ### Rotating `REGEL DES AUGENBLICKS` readings
 
@@ -84,17 +84,17 @@ the identical displayed body to the browser's German voice.
 
 | Shipped file | Duration | SHA-256 |
 | --- | ---: | --- |
-| `laws/thorsten-negative-rule-01.mp3` | 11.546 s | `BCA5FABCB8C17D1163A5A8A093758B2CF3898B02755C5D524CEAB96441DC9733` |
-| `laws/thorsten-negative-rule-02.mp3` | 6.243 s | `F322125773077F459227CE28399F10BD8069C5E836B48FB5BA9F1C7665A37AA5` |
-| `laws/thorsten-negative-rule-03.mp3` | 7.053 s | `96BADFBB61188A45BF606E34E85961F670DF4DF3E58B45DC727F8FF9D06166B6` |
-| `laws/thorsten-negative-rule-04.mp3` | 5.042 s | `5EA8B772E5131E317CF34E69B7663CD407E5DB56E8FC325FCE990EE1C1B0003E` |
-| `laws/thorsten-negative-rule-05.mp3` | 5.799 s | `FBA541D968F3E1335F20180F9C484D657E07C455357129C5A64A966F78898503` |
-| `laws/thorsten-negative-rule-06.mp3` | 5.564 s | `25A7D026FE66016F16838B44246BB4769EC30B66AAE4B17093C14E943FD45CB4` |
-| `laws/thorsten-negative-rule-07.mp3` | 7.523 s | `DDFD06A2663BBF270CD0BF8568111489DD631CEC048B6F25D02CAA5DA197DBE8` |
-| `laws/thorsten-negative-rule-08.mp3` | 7.027 s | `2FE394A08D37BA24218D135BFA342FC330C19E7731B39C92210705A4D625E1C0` |
-| `laws/thorsten-negative-rule-09.mp3` | 7.732 s | `1E96E78521DB085A0F6F5BD8517A487EBE9ACCA3A63DBE550AE2FDBCB4939E20` |
-| `laws/thorsten-negative-rule-10.mp3` | 6.034 s | `ED6251BAB5ADF2E0AC8066164094E3A26C5242B656F10035E5EB41F771BAA904` |
-| `laws/thorsten-negative-rule-11.mp3` | 11.572 s | `DFC51B035105D60B7AED58B75059FB29538D23E084F54B4970DCD145FDE18FD5` |
+| `laws/thorsten-negative-rule-01.mp3` | 11.546 s | `5731990DD2B3471B6049E6B09272E8E9A586865BFF85B4151FFD11BB13D946F1` |
+| `laws/thorsten-negative-rule-02.mp3` | 6.243 s | `0F044075B719823E54C4F49F8EDCD67249CB25781ABD3010372C64DC02B5FBF4` |
+| `laws/thorsten-negative-rule-03.mp3` | 7.053 s | `E13F33FE10FD51C67279D7B0A14D69237BF5572292AF61F2C5E3BFD80C006AFC` |
+| `laws/thorsten-negative-rule-04.mp3` | 5.042 s | `5405A4831CD5F8B58519BF220EC91A9D9DB307F198009A8AC7F870C3EF8BDE34` |
+| `laws/thorsten-negative-rule-05.mp3` | 5.799 s | `9475DCC6D3A55EB77831591E6702D948DB71592DA5354AD2C79B5F90F67DD86F` |
+| `laws/thorsten-negative-rule-06.mp3` | 5.564 s | `CF8AF79BD2C1048394565D792FAE71A9AA4211D0C15197CA49F5A7504FEA3EC4` |
+| `laws/thorsten-negative-rule-07.mp3` | 7.523 s | `EC795370D21BE7D01492C0ABAB78020E0F6DA5E58CE6E3FCB0E574DCB4624D16` |
+| `laws/thorsten-negative-rule-08.mp3` | 7.027 s | `3D4B14EA1BD3AA74D5302FDECD86DFB4E40DA8ADCC51118B6E2FD51E2B0062DC` |
+| `laws/thorsten-negative-rule-09.mp3` | 7.732 s | `650E4D4FBEA63CB639CEA4953A2D6CCB76FDC6EFD607B4E0F2F4EAC5A4C6EA01` |
+| `laws/thorsten-negative-rule-10.mp3` | 6.034 s | `E756A6D111EA4D5FA5CB90E38926BDA99D935B5806DC1EBA27E5B466C6848D68` |
+| `laws/thorsten-negative-rule-11.mp3` | 11.572 s | `942945849804D61B5B535BE095EB4908AA220661A9C3068E51B8CB79533FE4D8` |
 
 ## Einbürgerungstest wrong-answer sting
 
@@ -103,7 +103,7 @@ the identical displayed body to the browser's German voice.
 citizenship-quiz wrong-answer reaction.
 
 - Duration: 4.415 seconds
-- SHA-256: `103EF0A41C1C3E3EAC4CFADAAB471616EC625E54E2B7EC3AA2573EBB7BF742D0`
+- SHA-256: `376E13DCD4BA9C270618A5ED5CD1CFDB9D5ECDC84C9C3DB2061C7CDF4BF02005`
 
 Its external redistribution provenance and license should be confirmed before
 publishing it outside the user's project. It is not relicensed under the
@@ -121,17 +121,32 @@ at 64 kbit/s with short boundary fades.
 
 | Shipped file | Exact displayed/spoken text | Source interval | SHA-256 |
 | --- | --- | --- | --- |
-| `bayern/baden-wuerttemberg-not-bayern.mp3` | Und als letzten Punkt: Baden-Württemberg. Ah, nicht Bayern. | 35.46–40.92 s | `2D1F5EF4D9697CE478EBBC6F2049989B0EBABC2F08B99529E4F14E932A552645` |
-| `bayern/wie-schoen-bayern-ist.mp3` | Wie schön Bayern ist. Geh nach Bayern. In Bayern gibt's Bayern. Nur in Bayern gibt's Bayern. | 45.86–51.42 s | `5EE93E5BF97CE133BFD450192C6B67854EA305927C1960C388DAE86DAC992521` |
-| `bayern/stichwort-bayern.mp3` | Für Bayern ist das wichtig. Stichwort Bayern. | 52.78–55.38 s | `1E768D99F9B0B4A0AFB25A7559C9313E6C610CA11251415AC309FD76985F7C06` |
-| `bayern/bayern-leben.mp3` | Oh ja, man muss Bayern nicht mögen, man muss Bayern leben. | 61.80–65.70 s | `D2CA421BED776A8876006E332352227EB2AE2843AB4A7EF59ABDE89FB7A8D913` |
-| `bayern/warum-weil-bayern.mp3` | Warum? Weil Bayern. | 65.84–67.54 s | `C2FF0D54FCBC21311FCB727ABDDAA7919CB829CD6581E5AA5618CB526200D598` |
-| `bayern/ich-will-nur-eins-sagen.mp3` | Ich will nur eins sagen: Bayern, Bayern, Bayern, Bayern. | 73.10–75.74 s | `6726EB32BA913E2CFC6B093A6A97566437C0F3BB60EA0A447B9BF80A497A3969` |
-| `bayern/rettung-bayerns.mp3` | Ein Bayern kam aus Bayern. Das war die Rettung Bayerns. | 84.16–87.16 s | `FCC82B8EDEA932E64BC034ACEB5C637A4E2051720732A68C268773421552A7F3` |
-| `bayern/gott-schuetze-bayern.mp3` | Gott schütze Bayern. | 101.74–102.92 s | `7298BEA5CBA5C3338C5876DEFA2B2864DDF5CEB9FC7690BC31F87F4CA0EBD204` |
+| `bayern/baden-wuerttemberg-not-bayern.mp3` | Und als letzten Punkt: Baden-Württemberg. Ah, nicht Bayern. | 35.46–40.92 s | `D1801A3382B02506EFD0474168B6920259DFABF60352DC445CE934EF81E31305` |
+| `bayern/wie-schoen-bayern-ist.mp3` | Wie schön Bayern ist. Geh nach Bayern. In Bayern gibt's Bayern. Nur in Bayern gibt's Bayern. | 45.86–51.42 s | `85A8784BA0425D1262C4A1FDDD5DC6357528C0DB5557C44641C8EE4838EDA427` |
+| `bayern/stichwort-bayern.mp3` | Für Bayern ist das wichtig. Stichwort Bayern. | 52.78–55.38 s | `AD36DB45FC80A16A099BD18AC8701E3C9FED7E1C6B9794499BB47359F0D1DCDF` |
+| `bayern/bayern-leben.mp3` | Oh ja, man muss Bayern nicht mögen, man muss Bayern leben. | 61.80–65.70 s | `361BACDFAEEC323AC9DE966A25439A8BB8FBBEB50DD32CF680FA6AF126600FF9` |
+| `bayern/warum-weil-bayern.mp3` | Warum? Weil Bayern. | 65.84–67.54 s | `D7C5063ED395D9BC43F064B0B63F1A54D6C3D4DEAFEADBDFBC79CF728D748A23` |
+| `bayern/ich-will-nur-eins-sagen.mp3` | Ich will nur eins sagen: Bayern, Bayern, Bayern, Bayern. | 73.10–75.74 s | `DB9DD8630E638D4A40072307F73914BDDAA38F952BA38C0029790DA58DF16D59` |
+| `bayern/rettung-bayerns.mp3` | Ein Bayern kam aus Bayern. Das war die Rettung Bayerns. | 84.16–87.16 s | `12C1E103C49A7CD5C150F68EF170407BA3591CFDFC8278554BA619EF020E5A36` |
+| `bayern/gott-schuetze-bayern.mp3` | Gott schütze Bayern. | 101.74–102.92 s | `D7E7A802C937D7D7F25ECFB0028D90B01E24C1C75F7CCD981EC8B281BB8156B5` |
 
 These clips are used only for the fictional Bayern-Beauftragter. Their exact
 text is shown for the entire playback and is also the missing-file browser
 speech fallback. The source recording's external redistribution provenance and
 license should be confirmed before publishing outside the user's project; it is
 not relicensed under the repository's other asset licenses.
+
+All shipped voice files in this record are two-pass normalized to the
+foreground role (`−18 LUFS`, maximum `−1.5 dBTP`) while preserving their sample
+rate, channel layout, approximate bitrate, and duration. The hashes above refer
+to those normalized shipping copies.
+
+## Merkel quotation excerpt
+
+`merkel/neuland-0-3s.mp3` is the user-supplied local file
+`D:\Downloads\neuland-0-3s.mp3`, mapped only to the displayed/spoken line “Das
+Internet ist für uns alle Neuland.” It is 3.030 seconds, 73,394 bytes, mono
+44.1 kHz at approximately 192 kbps, and has normalized shipping SHA-256
+`6E6DF76D99DB89E462335AE6A8FB6D7909C0611015B58A98FD9C8A3E0A8CB336`.
+No external source URL or redistribution license was supplied; it is not
+relicensed under the repository's other asset licenses.

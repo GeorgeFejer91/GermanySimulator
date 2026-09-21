@@ -34,10 +34,11 @@ procedural red-and-white fallback with the same long-car dimensions.
 
 No Deutsche Bahn or Märklin logo, branded texture, or cloned real announcer
 voice is bundled. The former generated announcement-text library has been
-replaced by five user-supplied station-hall MP3s. They rotate as proximity-bound,
-distance-scaled ambient audio around either track and intentionally display no
-transcript or announcement textbox. The voice toggle mutes them, and leaving the
-rail vicinity or entering a modal stops the active recording.
+replaced by five user-supplied station-hall MP3s. They enter the foreground
+broker only while the player is near either track, play at the fixed normalized
+foreground level once admitted, and intentionally display no transcript or
+announcement textbox. The voice toggle mutes them. An active recording finishes
+before modal speech; leaving the rail vicinity only invalidates a pending cue.
 
 The recordings were supplied directly for in-game use. No external source URL,
 Deutsche-Bahn-authenticity claim, or redistribution license was provided. Their
@@ -62,9 +63,16 @@ The adjacent closed nuclear plant and operating coal plant use a bounded local C
 
 ## Music
 
-The soundtrack opens with the user-supplied in-game recording at `assets/intro-song.mp3`. The shipped copy removes exactly the first 24.000 seconds, preloads and attempts playback immediately on page entry, plays once, and then hands off to the synthesized catalog. When a browser blocks audible autoplay, the preloaded intro retries from its beginning on the first click or key press. Its source SHA-256 is `a7e09bb04fbf6e53d6801573adf4c872276a8504e4ddb9831b2aaf15d6f4a1c1`; the trimmed 192 kbps shipped file SHA-256 is `3299445bd44efb0035e678cb9ae8d7d47480cf0af10c3cfac9631f40962d7f73`. External redistribution rights for the user-supplied recording should be confirmed before publishing outside this project.
+The soundtrack opens with the user-supplied in-game recording at `assets/intro-song.mp3`. The shipped copy removes exactly the first 24.000 seconds, preloads and attempts playback immediately on page entry, plays once, and then hands off to the background playlist. When a browser blocks audible autoplay, the preloaded intro retries from its beginning on the first click or key press. Its source SHA-256 is `a7e09bb04fbf6e53d6801573adf4c872276a8504e4ddb9831b2aaf15d6f4a1c1`; the normalized 192 kbps shipped file SHA-256 is `6D7DC5847E2CFC3A307C1AD6AF11AC3F5EF11049A796ABE07987FE75C54BF527`. External redistribution rights for the user-supplied recording should be confirmed before publishing outside this project.
 
-After the intro, the continuously rotating background catalog is synthesized at runtime with the Web Audio API. It ducks beneath spoken form readout and continues without an intentional gap while music is enabled. Every next track is a weighted random choice with no immediate repeat. The national anthem, Erika, Badnerlied, Württembergerlied, and other ceremonial or hymn-like selections receive most of the weight while all 26 arrangements remain available. The softened synthesis uses a lower-octave triangle-wave lead, sine-wave bass, restrained synthetic percussion, and a low-pass filter. No lyrics, MIDI files, or sheet-music files are bundled for the synthesized catalog.
+After the intro, one background scheduler alternates both music types without overlap: three shuffled no-repeat Web Audio 8-bit arrangements, then one shuffled no-repeat sung recording. Every synthesized variant is exhausted before reshuffling, and all three sung files are exhausted before their pool reshuffles. A queued national-anthem cue takes the next 8-bit slot without interrupting the current track. The entire playlist ducks beneath foreground speech and retains a short handoff gap between tracks. The softened synthesis uses a lower-octave triangle-wave lead, sine-wave bass, restrained synthetic percussion, and a low-pass filter. No MIDI or sheet-music files are bundled.
+
+The sung pool contains the user-supplied `Badnerlied.mp3`, `Erika.mp3`, and
+`Saargebiet.mp3`, normalized as local background music. No source URL or
+external redistribution license was supplied. Their source paths, durations,
+byte sizes, and shipped checksums are recorded in
+`assets/audio/music/PROVENANCE.md`; separate permission is required before
+reuse outside this project.
 
 The 26-track catalog gives every Bundesland a melody:
 
@@ -167,7 +175,7 @@ remains the missing-file fallback.
 - Source: https://www.youtube.com/watch?v=vGy1NnHm-u8
 - Uploader shown by YouTube: `#1 Sound FX!`
 - Local file: `assets/fax-machine-paper-feed.mp3`
-- SHA-256: `c5f2ffd2b9349960fc77dfd2db9f53ab2ed5ad59bcb82cca2fe3dfc45ca238b7`
+- SHA-256: `A92A303695CAA70545A5D3ADC3E80C9B6709A21A7450B75CF227461895F46098`
 
 ## Phone tilt
 
@@ -193,7 +201,15 @@ Merkel's energy-district dialogue uses short historical quotations attributed to
 
 Her recurring line, "Wir schaffen das", is a documented historical quote from August 2015. Reference: https://www.bundesregierung.de/breg-de/aktuelles/-vor-allem-ein-satz-des-anpackens--353854
 
-The game uses an approximately one-second excerpt of Merkel saying "Wir schaffen das" from phoenix's recording of the 31 August 2015 press conference. Source recording: https://www.youtube.com/watch?v=kDQki0MMFh4. The excerpt is included as a short attributed quotation for the game's satirical interaction; phoenix/rightsholder rights remain unaffected, and redistribution outside this project should be reviewed separately.
+The game uses an approximately one-second excerpt of Merkel saying "Wir schaffen das" from phoenix's recording of the 31 August 2015 press conference. Source recording: https://www.youtube.com/watch?v=kDQki0MMFh4. The normalized shipped excerpt has SHA-256 `7C0C26F1C55D1ECF78FDB5A9D48E6C50A658972F36D42A7994511996A0B083C7`. It is included as a short attributed quotation for the game's satirical interaction; phoenix/rightsholder rights remain unaffected, and redistribution outside this project should be reviewed separately.
+
+Merkel's spontaneous proximity pool also uses the user-supplied 3.030-second
+`D:\Downloads\neuland-0-3s.mp3` clip for the displayed line “Das Internet ist
+für uns alle Neuland.” No external source URL or redistribution license was
+provided. The normalized mono shipping copy at
+`assets/voices/merkel/neuland-0-3s.mp3` has SHA-256
+`6E6DF76D99DB89E462335AE6A8FB6D7909C0611015B58A98FD9C8A3E0A8CB336`;
+separate permission is required before reuse outside this project.
 
 The FAX 3000 PRO advertising claim ("2.75× faster") is entirely fictional game copy.
 
