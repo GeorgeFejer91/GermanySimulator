@@ -10,6 +10,22 @@ Six building meshes are selected from Kenney's **City Kit Commercial 2.1** and r
 
 The compact Reichstagsgebäude/Bundestag landmark is an original, texture-free project model built from geometric primitives. No third-party mesh or texture is included. Its proportions and identifying west portal, four corner towers, and modern glass dome were checked against the German Bundestag's public architecture material; build provenance and checksum are recorded in `assets/models/bundestag/LICENSES.md`.
 
+## Civilian traffic
+
+Berlin's WebGL traffic uses the compact local `classic-vw-beetle.glb`, derived
+from the historic Sutherland Volkswagen STL hosted by Wikimedia Commons. The
+source is licensed CC BY-SA 4.0 by Ivan Edward Sutherland and contributors. It
+was converted from STL to GLB, changed from Z-up to Y-up, normalized to a
+2.35-metre length, centered and grounded, and assigned a neutral material that
+the game recolors per car. Game-authored wheels, hubs, glazing, bumpers, and
+lamps complete the historic body scan at runtime. The Canvas and missing-model paths retain a
+procedural silhouette; Deutschland-side Trabants remain code-native. No
+manufacturer logo or texture is included.
+
+- Source: https://commons.wikimedia.org/wiki/File:Utah_VW_Bug.stl
+- License: https://creativecommons.org/licenses/by-sa/4.0/
+- Local modifications and checksums: `assets/models/traffic/LICENSES.md`
+
 ## Perimeter trains and station announcements
 
 Twelve fictional `AMT-BAHN` consists use compact end cars from Kenney's

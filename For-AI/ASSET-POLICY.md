@@ -58,6 +58,12 @@ An asset change is complete only when the correct variant loads on desktop and m
 - Canvas and missing-model paths use full-length procedural red-and-white cars. Both representations must preserve two continuous tracks around the full perimeter, broad rounded corners, coupled cars, oriented solid coach bodies, and the hard no-overlap/no-passing rule. A collision clamps both consists at the minimum gap, exposes a brief visual bump, stops both, and reverses their motion after a fixed pause without flipping or splitting their physical car order.
 - The five local train-announcement recordings rotate only while the player is near either loop. They are ambient broker requests until admitted, then fixed-level foreground `audio-text` events: one recording plays to completion, later dialogue waits, and background music plus the shared sound-effect bus duck for intelligibility. Distance controls eligibility only. A new player-caused train stop always reserves the Buxtehude file as a critical request. Train recordings never open the dialogue textbox and still follow the voice toggle. Do not synthesize, infer, or display transcripts for these recordings. EBO obstruction hints remain exact visible-and-spoken gameplay warnings through the same serialized audio-text path.
 
+## Local 3D civilian traffic
+
+- Berlin traffic clones the 44 KB local `assets/models/traffic/classic-vw-beetle.glb`, derived from the CC BY-SA 4.0 Sutherland Volkswagen STL on Wikimedia Commons, and surrounds that historic body scan with small game-authored wheels, hubs, glazing, bumpers, and lamps. Preserve the adjacent `LICENSES.md` attribution, modification notes, source hash, and runtime hash; the converted GLB remains CC BY-SA 4.0.
+- `game.js` owns lane population, region identity, movement, obstruction, queueing, collision, and horn timing. `world3d.js` loads the Type 1 source once and clones it for Berlin cars; Trabants remain lightweight code-native geometry.
+- Canvas and missing-model paths retain procedural car silhouettes. Keep all traffic assets local, avoid manufacturer logos and textures, and do not add a vehicle-physics package or remote runtime asset host for this bounded system.
+
 ## Audio normalization and focus
 
 - `tools/normalize-audio.ps1` is the only audio-level maintenance command. It checks by default and rewrites only with `-Apply`, using local FFmpeg. Preserve channel layout, sample rate, approximate bitrate, and duration.
