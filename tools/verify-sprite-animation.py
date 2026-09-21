@@ -141,14 +141,21 @@ def row_metrics(frames: list[Image.Image], key_stride: int) -> dict[str, float]:
 
 
 def check_entry(entry: dict) -> dict:
+    rig_path = ROOT / entry["rig"]
     source_path = ROOT / entry["source"]
     runtime_path = ROOT / entry["runtime"]
-    for path in (source_path, runtime_path):
+    for path in (rig_path, source_path, runtime_path):
         if not path.is_file():
             raise ValueError(f"missing {path.relative_to(ROOT)}")
     if entry.get("visualStatus") != "pass" or not entry.get("reviewedOn") or not entry.get("reviewer"):
         raise ValueError(f"{entry['id']}: visual anatomy review is not signed off")
-    for field, path in (("sourceSha256", source_path), ("runtimeSha256", runtime_path)):
+    if entry.get("renderMode") != "direct-cutout-rig-v1":
+        raise ValueError(f"{entry['id']}: expected the direct cutout-rig renderer")
+    for field, path in (
+        ("rigSha256", rig_path),
+        ("sourceSha256", source_path),
+        ("runtimeSha256", runtime_path),
+    ):
         actual = sha256(path)
         if actual != entry.get(field):
             raise ValueError(
@@ -233,6 +240,10 @@ def main() -> None:
         "footContact",
         "loopSeam",
         "clearTransparency",
+        "rigSourceIntegrity",
+        "jointContinuity",
+        "stanceFootPinning",
+        "silhouetteScale",
     }
     if set(manifest.get("visualChecklist", [])) != required_checks:
         raise ValueError("visual verification manifest does not declare the complete anatomy checklist")

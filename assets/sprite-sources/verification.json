@@ -1,6 +1,6 @@
 {
-  "version": 1,
-  "reviewPolicy": "A pass binds full-resolution human/Codex visual inspection to exact source and runtime SHA-256 hashes. Any pixel change requires a new review and hashes.",
+  "version": 2,
+  "reviewPolicy": "A pass binds the high-resolution 3-view cutout parts, 8-frame key atlas, and 32-frame direct-rig runtime atlas to exact SHA-256 hashes. Any pixel or rig-source change invalidates visual approval.",
   "visualChecklist": [
     "completeBody",
     "identityConsistency",
@@ -9,92 +9,114 @@
     "passingPoseOverlap",
     "footContact",
     "loopSeam",
-    "clearTransparency"
+    "clearTransparency",
+    "rigSourceIntegrity",
+    "jointContinuity",
+    "stanceFootPinning",
+    "silhouetteScale"
   ],
   "sprites": [
     {
       "id": "merkel",
+      "rig": "assets/sprite-sources/rigs/merkel/parts.png",
       "source": "assets/sprite-sources/merkel-sprite-keys.png",
       "runtime": "assets/merkel-sprite.png",
-      "sourceSha256": "7d5cde706ea62a8e4a8be4086ad0d595272db76b4cc61277d95e081a861b69df",
-      "runtimeSha256": "99a6a88bb6265ae86d7201e64e234f64e095d2410a4439dfe09027d5ad34ac6f",
-      "keyCols": 6,
+      "rigSha256": "7b5800546c78629e0739eea515efc63565728778e75868f21fc6f86635077c85",
+      "sourceSha256": "ecde7acbc3c1e46bed1ffd2a1c866cfc8f178cc2ab763dece1d38fd057829c8c",
+      "runtimeSha256": "91e79396432e1ed0dbf872b75f3afe732b41f1eecec5ec74ab8f8569819c509f",
+      "renderMode": "direct-cutout-rig-v1",
+      "keyCols": 8,
       "rows": 5,
       "inbetweens": 3,
       "walkRows": [1, 2, 3, 4],
       "visualStatus": "pass",
       "reviewedOn": "2026-09-21",
-      "reviewer": "Codex full-resolution sprite QA"
+      "reviewer": "Codex full-resolution rig and sprite QA"
     },
     {
       "id": "merz",
+      "rig": "assets/sprite-sources/rigs/merz/parts.png",
       "source": "assets/sprite-sources/border-pourer-sprite-keys.png",
       "runtime": "assets/border-pourer-sprite.png",
-      "sourceSha256": "29c2e0257ed82f56848ff1035e9d3a95e720695418e118220e493138caf3c333",
-      "runtimeSha256": "393757071baea6372c151616dd269433138d4e61bc8f317fb2050d56da06ec0a",
+      "rigSha256": "b5fe014b8a4842416fa98050b3cb474279b5a0c50df58a50e877845e4dc9eaed",
+      "sourceSha256": "3f7e9b17e6f672c6fbf15419f52953ade649076dddb8cdd9acbe9f394bf768a6",
+      "runtimeSha256": "80f8178af29540f9550678e580d560a955d938508f3351a9d2099cbc689d2769",
+      "renderMode": "direct-cutout-rig-v1",
       "keyCols": 8,
       "rows": 6,
       "inbetweens": 3,
       "walkRows": [0, 1, 3, 4],
       "visualStatus": "pass",
       "reviewedOn": "2026-09-21",
-      "reviewer": "Codex full-resolution sprite QA"
+      "reviewer": "Codex full-resolution rig and sprite QA"
     },
     {
       "id": "bayern",
+      "rig": "assets/sprite-sources/rigs/bayern/parts.png",
       "source": "assets/sprite-sources/bayern-walker-sprite-keys.png",
       "runtime": "assets/bayern-walker-sprite.png",
-      "sourceSha256": "45f7b831e8553aa9f5087166b8a62f852e6867936341836a531053cf60b1944a",
-      "runtimeSha256": "1e0d8aed591bc1867d556ddd3b867369a6fa7ffdf719a6ad45dc8a927abeceda",
+      "rigSha256": "55b789343b486db019091112246857b352cabb1d1568d4a71b4c46b354306f28",
+      "sourceSha256": "ad46b5d1b53714df1b7b06953a1cf185bfd320f8f09a7c69648771de9c6cdfa0",
+      "runtimeSha256": "9302edfc18b6b335787765a8e389ac732347922c4b69c39c39db9057c793de32",
+      "renderMode": "direct-cutout-rig-v1",
       "keyCols": 8,
       "rows": 4,
       "inbetweens": 3,
       "walkRows": [0, 1, 2, 3],
       "visualStatus": "pass",
       "reviewedOn": "2026-09-21",
-      "reviewer": "Codex full-resolution sprite QA"
+      "reviewer": "Codex full-resolution rig and sprite QA"
     },
     {
       "id": "alice",
+      "rig": "assets/sprite-sources/rigs/alice/parts.png",
       "source": "assets/sprite-sources/alice-weidel-sprite-keys.png",
       "runtime": "assets/alice-weidel-sprite.png",
-      "sourceSha256": "4c7e4e0e2fe6ebf2f2b4bd50ef156fce29ce63195a65f9e317314791249a376d",
-      "runtimeSha256": "17e66a21c2643404de05f653ca6ded649413eb6c940f5d88eabff46ed3e2b9d7",
+      "rigSha256": "0ac7254ea7ca9929c89a3245724e238755af294ada584ffbe7272b99b5746d7a",
+      "sourceSha256": "9d2b4e5224568c24baa337c7b4ba3ea7f9df22340d6a2b8f6057234b1a9fcd71",
+      "runtimeSha256": "c8495b23490de8d42f6b0ae41e63154ee5f2fe841cf451da911bcdba2803863e",
+      "renderMode": "direct-cutout-rig-v1",
       "keyCols": 8,
       "rows": 2,
       "inbetweens": 3,
       "walkRows": [0, 1],
       "visualStatus": "pass",
       "reviewedOn": "2026-09-21",
-      "reviewer": "Codex full-resolution sprite QA"
+      "reviewer": "Codex full-resolution rig and sprite QA"
     },
     {
       "id": "towel-man",
+      "rig": "assets/sprite-sources/rigs/towel-man/parts.png",
       "source": "assets/sprite-sources/crowd-towel-man-keys.png",
       "runtime": "assets/crowd-towel-man.png",
-      "sourceSha256": "4f5784eadabba9adf572ce2e27559fb5db3bfd8b6545624c94376fb9b8ca1cbe",
-      "runtimeSha256": "72fb7760c0ded863950989f9b961da4199dffdcf8ff389c3e2940899e5ea2496",
+      "rigSha256": "8777f2589e9cdd86344e8b3c79dfab2abd13b70124d108fc84be2eeea9458e58",
+      "sourceSha256": "dcb6cde75aa1d027bab7e10eac080faadaf97ec4b7acc3e082c42c5c4d37edf9",
+      "runtimeSha256": "4edf7f34012810d6abe0caab2930f033eaed6d8a052f465bc56f0f8e265dd1bd",
+      "renderMode": "direct-cutout-rig-v1",
       "keyCols": 8,
       "rows": 3,
       "inbetweens": 3,
       "walkRows": [0, 1, 2],
       "visualStatus": "pass",
       "reviewedOn": "2026-09-21",
-      "reviewer": "Codex full-resolution sprite QA"
+      "reviewer": "Codex full-resolution rig and sprite QA"
     },
     {
       "id": "towel-woman",
+      "rig": "assets/sprite-sources/rigs/towel-woman/parts.png",
       "source": "assets/sprite-sources/crowd-towel-woman-keys.png",
       "runtime": "assets/crowd-towel-woman.png",
-      "sourceSha256": "bb407dcff74386fa3d5874a8ae331d997b981f01db499fb00b6358a9dd5b09f3",
-      "runtimeSha256": "43c41316a445e27e596a6772846879199e7f80be463b5ae48fe6ddf98377be6e",
+      "rigSha256": "265d5e92bf1ca0fd185d3bd8f64d6760316c969b239ed5ede613f7c88d9013cb",
+      "sourceSha256": "e67b8d2af62642cd47acab660b764d6e152544166c3199a78963c83ad5a572ea",
+      "runtimeSha256": "506b99ee2ce9a4b9ceed4c9f5f6a1031fa3b523f67a27b37908e1f6dc813c9cb",
+      "renderMode": "direct-cutout-rig-v1",
       "keyCols": 8,
       "rows": 3,
       "inbetweens": 3,
       "walkRows": [0, 1, 2],
       "visualStatus": "pass",
       "reviewedOn": "2026-09-21",
-      "reviewer": "Codex full-resolution sprite QA"
+      "reviewer": "Codex full-resolution rig and sprite QA"
     }
   ]
 }

@@ -1,0 +1,65 @@
+{
+  "version": 1,
+  "frameContract": {
+    "workingCell": 512,
+    "keyCell": 256,
+    "runtimeCell": 128,
+    "keyFrames": 8,
+    "runtimeFrames": 32,
+    "contactPhases": [0, 16],
+    "downPhases": [4, 20],
+    "passingPhases": [8, 24],
+    "upPhases": [12, 28]
+  },
+  "sprites": [
+    {
+      "id": "merkel",
+      "parts": "assets/sprite-sources/rigs/merkel/parts.png",
+      "source": "assets/sprite-sources/merkel-sprite-keys.png",
+      "runtime": "assets/merkel-sprite.png",
+      "propMode": "merkel-diamond",
+      "rows": ["front-idle", "left-walk", "right-walk", "back-walk", "front-walk"]
+    },
+    {
+      "id": "merz",
+      "parts": "assets/sprite-sources/rigs/merz/parts.png",
+      "source": "assets/sprite-sources/border-pourer-sprite-keys.png",
+      "runtime": "assets/border-pourer-sprite.png",
+      "propMode": "bucket",
+      "rows": ["front-carry", "right-walk", "right-pour", "left-walk", "back-carry", "front-pour"]
+    },
+    {
+      "id": "bayern",
+      "parts": "assets/sprite-sources/rigs/bayern/parts.png",
+      "source": "assets/sprite-sources/bayern-walker-sprite-keys.png",
+      "runtime": "assets/bayern-walker-sprite.png",
+      "propMode": "held-center",
+      "rows": ["front-walk", "right-walk", "back-walk", "left-walk"]
+    },
+    {
+      "id": "alice",
+      "parts": "assets/sprite-sources/rigs/alice/parts.png",
+      "source": "assets/sprite-sources/alice-weidel-sprite-keys.png",
+      "runtime": "assets/alice-weidel-sprite.png",
+      "propMode": "flags",
+      "dropPartIndexes": [12],
+      "rows": ["front-walk", "back-walk"]
+    },
+    {
+      "id": "towel-man",
+      "parts": "assets/sprite-sources/rigs/towel-man/parts.png",
+      "source": "assets/sprite-sources/crowd-towel-man-keys.png",
+      "runtime": "assets/crowd-towel-man.png",
+      "propMode": "towel",
+      "rows": ["right-walk", "front-walk", "back-walk"]
+    },
+    {
+      "id": "towel-woman",
+      "parts": "assets/sprite-sources/rigs/towel-woman/parts.png",
+      "source": "assets/sprite-sources/crowd-towel-woman-keys.png",
+      "runtime": "assets/crowd-towel-woman.png",
+      "propMode": "towel",
+      "rows": ["right-walk", "front-walk", "back-walk"]
+    }
+  ]
+}

@@ -291,6 +291,18 @@ The law-power pool quotes current German federal provisions from the Federal Min
 - Bürgerliches Gesetzbuch §§ 911, 919, and 961–964: https://www.gesetze-im-internet.de/bgb/__911.html, https://www.gesetze-im-internet.de/bgb/__919.html, and https://www.gesetze-im-internet.de/bgb/__961.html through https://www.gesetze-im-internet.de/bgb/__964.html
 - Lebensmittelbestrahlungsverordnung § 3: https://www.gesetze-im-internet.de/lmbestrv_2000/__3.html
 
+## Cutout-rig character artwork
+
+The high-resolution side/front/back parts sheets under
+`assets/sprite-sources/rigs/` were created for this project with OpenAI's
+built-in image-generation tool using the game's prior registered character
+sheets only as identity and rendering-style references. No external photograph,
+logo, agency emblem, or third-party sprite pack was requested or incorporated.
+The accepted prompt contract, character-specific prop clauses, rejection notes,
+and source locations are recorded in
+`assets/sprite-sources/rigs/PROVENANCE.md`. The runtime atlases are deterministic
+joint-driven renders made locally by `tools/build-rigged-sprite-atlas.py`.
+
 ## Legal framing
 
 All game rules, wanted levels, immigration deadlines, forms, and enforcement mechanics are fictional parody and do not represent German law, police practice, citizenship requirements, or immigration procedure.

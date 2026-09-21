@@ -18,7 +18,7 @@ assert.match(game,/if\(near>release\)\{if\(n\.dialogueNearby\)n\.barkAt=0;n\.dia
 assert.doesNotMatch(game,/near>=radius\|\|n\.dialogueNearby/,"remaining inside the radius must not suppress the next loop cycle");
 assert.match(game,/function insetSpriteSheet\(source,atlas\)/);
 assert.match(game,/const cell=Math\.round\(source\.width\/atlas\.cols\)/,"runtime preparation must preserve the built 128 px cell grid");
-assert.match(game,/merkel:\{canvas:null,cols:24,rows:5,pad:0,drawSize:126\}/);
+assert.match(game,/merkel:\{canvas:null,cols:32,rows:5,pad:0,drawSize:126\}/);
 assert.match(game,/bayern:\{canvas:null,cols:32,rows:4,pad:0,drawSize:150\}/);
 assert.match(game,/borderPourer:\{canvas:null,cols:32,rows:6,pad:0,drawSize:136\}/);
 assert.match(game,/alice:\{canvas:null,cols:32,rows:2,pad:0,drawSize:126\}/);

@@ -147,10 +147,10 @@ const props=[
  {x:8750,y:1880,asset:"pfandautomat",w:54,h:70,id:"pfandautomat-ost",label:"PFANDAUTOMAT"},
  {x:7600,y:3500,asset:"gartenzwerg",w:44,h:66},{x:8750,y:3420,asset:"gartenzwerg",w:44,h:66},{x:9400,y:3650,asset:"gartenzwerg",w:44,h:66}
 ].map(offsetWorldPoint);
-const assetSources={merkelSprite:"./assets/merkel-sprite.png?v=20260921-3",bayernSprite:"./assets/bayern-walker-sprite.png?v=20260921-3",aliceSprite:"./assets/alice-weidel-sprite.png?v=20260921-1",borderPourerSprite:"./assets/border-pourer-sprite.png?v=20260921-3",towelManSprite:"./assets/crowd-towel-man.png?v=20260921-1",towelWomanSprite:"./assets/crowd-towel-woman.png?v=20260921-1"};
+const assetSources={merkelSprite:"./assets/merkel-sprite.png?v=20260921-rig1",bayernSprite:"./assets/bayern-walker-sprite.png?v=20260921-rig1",aliceSprite:"./assets/alice-weidel-sprite.png?v=20260921-rig1",borderPourerSprite:"./assets/border-pourer-sprite.png?v=20260921-rig1",towelManSprite:"./assets/crowd-towel-man.png?v=20260921-rig1",towelWomanSprite:"./assets/crowd-towel-woman.png?v=20260921-rig1"};
 const assets={};for(const key in assetSources){const img=new Image();img.src=assetSources[key];assets[key]=img}
 const npcSpriteAtlases={
- merkel:{canvas:null,cols:24,rows:5,pad:0,drawSize:126},
+ merkel:{canvas:null,cols:32,rows:5,pad:0,drawSize:126},
  bayern:{canvas:null,cols:32,rows:4,pad:0,drawSize:150},
  borderPourer:{canvas:null,cols:32,rows:6,pad:0,drawSize:136},
  alice:{canvas:null,cols:32,rows:2,pad:0,drawSize:126},

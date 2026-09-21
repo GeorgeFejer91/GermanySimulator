@@ -12,7 +12,7 @@ for(const [,text,path] of clips){assert.ok(text.trim(),`empty transcript for ${p
 for(const [file,width,height] of [
  ["bayern-walker-sprite.png",4096,512],
  ["border-pourer-sprite.png",4096,768],
- ["merkel-sprite.png",3072,640],
+ ["merkel-sprite.png",4096,640],
 ]){
  const png=readFileSync(join(root,"assets",file));
  assert.equal(png.readUInt32BE(16),width,`${file} has the expected expanded column count`);
