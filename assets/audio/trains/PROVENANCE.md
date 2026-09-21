@@ -17,3 +17,6 @@ separate permission.
 The runtime plays these as normalized `−18 LUFS` foreground recordings without
 a dialogue textbox. Distance decides eligibility but does not change the gain
 after admission. The game's voice toggle remains the user-facing mute control.
+When optional English subtitles are enabled, timestamped Whisper-derived and
+manually corrected cues come from `For-AI/AUDIO-TEXT-LIBRARY.js`; provenance,
+source transcript, translation, and cue timing stay together there.

@@ -1,6 +1,9 @@
 .chatgpt/
+.codex/
 .codex-remote-attachments/
 .playwright-cli/
 output/
+__pycache__/
+assets/sprite-sources/rigs/previews/
 .DS_Store
 Thumbs.db

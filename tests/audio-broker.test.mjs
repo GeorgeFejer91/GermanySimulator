@@ -20,7 +20,7 @@ vm.runInContext(`
  const stimulusBags=new Map();
  const stimulusQueue=[];
  const state={voiceOn:true};
- const STIMULUS_PRIORITY={CRITICAL:3};
+ const STIMULUS_PRIORITY={CRITICAL:4};
  const AUDIO_MIX={AMBIENT_TTL_MS:4000};
  let nextAmbientAt=0;
  function pumpStimuli(){}
@@ -32,11 +32,14 @@ vm.runInContext(`
 `,context);
 
 const {nextVariant,chooseStimulusIndex,queueStimulus,pending,setAmbientAt}=context.api;
-const priorities={ambient:1,reactive:2,critical:3};
+const priorities={ambient:1,reactive:2,featured:3,critical:4};
 const request=(family,priority,queuedAt,extra={})=>({family,priority,queuedAt,ambient:false,...extra});
 
 let queue=[request("ambient",priorities.ambient,1),request("critical",priorities.critical,4),request("reactive",priorities.reactive,2)];
 assert.equal(chooseStimulusIndex(queue,new Map(),1000),1,"highest priority must win without interrupting active audio");
+
+queue=[request("self-talk",priorities.reactive,1),request("named-sprite",priorities.featured,2),request("rule",priorities.ambient,3)];
+assert.equal(chooseStimulusIndex(queue,new Map(),1000),1,"nearby named sprites must outrank self-talk and ordinary ambient audio");
 
 queue=[request("recent",priorities.ambient,1),request("neglected",priorities.ambient,5)];
 assert.equal(chooseStimulusIndex(queue,new Map([["recent",8],["neglected",2]]),1000),1,"least-recently-served family must rotate first");
@@ -60,6 +63,7 @@ assert.equal(new Set(firstCycle).size,variants.length,"a shuffled bag must exhau
 assert.notEqual(boundary,firstCycle.at(-1),"a shuffled bag must prevent repeats across bag boundaries");
 
 assert.match(game,/AUDIO_MIX=Object\.freeze\(\{FOREGROUND:1,BACKGROUND:\.28,ATTACK_SECONDS:\.12,RELEASE_SECONDS:\.4,REQUIRED_GAP_MS:250,AMBIENT_GAP_MS:2500,AMBIENT_TTL_MS:4000\}\)/);
+assert.match(game,/STIMULUS_PRIORITY=Object\.freeze\(\{AMBIENT:1,REACTIVE:2,FEATURED:3,CRITICAL:4\}\)/);
 assert.match(game,/source\.connect\(gain\)\.connect\(foregroundOutput\(\)\)/,"recorded foreground audio must use the shared bus");
 assert.doesNotMatch(sourceOf("playRecordedStimulus"),/audio\.destination/,"recorded foreground sources must never connect directly to the destination");
 assert.doesNotMatch(sourceOf("requestTrainAnnouncement"),/gain|volume/,"train distance must affect eligibility, not accepted playback gain");

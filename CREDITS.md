@@ -81,6 +81,8 @@ The adjacent closed nuclear plant and operating coal plant use a bounded local C
 
 The soundtrack opens with the user-supplied in-game recording at `assets/intro-song.mp3`. The shipped copy removes exactly the first 24.000 seconds, preloads and attempts playback immediately on page entry, plays once, and then hands off to the background playlist. When a browser blocks audible autoplay, the preloaded intro retries from its beginning on the first click or key press. Its source SHA-256 is `a7e09bb04fbf6e53d6801573adf4c872276a8504e4ddb9831b2aaf15d6f4a1c1`; the normalized 192 kbps shipped file SHA-256 is `6D7DC5847E2CFC3A307C1AD6AF11AC3F5EF11049A796ABE07987FE75C54BF527`. External redistribution rights for the user-supplied recording should be confirmed before publishing outside this project.
 
+The sausage-collection milestone uses the user-supplied in-game recording at `assets/audio/music/wurst.mp3`. Collecting the fifth of nine unique sausages plays the 172.069-second, 4,130,315-byte MP3 once in place of the current background cue, after which the normal playlist resumes. No external source URL or redistribution license was provided. The supplied source SHA-256 is `6FBA3EDB2FDE75D6EF57BC4ED2C5A973109CC3A22CB90778FFEC188552D5359F`; the normalized shipping copy is `34078BD5B197B460E88245B1DE7D952B49FE99909A1A8A74959B9A88258D7132`. Separate permission is required before reuse outside this project.
+
 After the intro, one background scheduler alternates both music types without overlap: three shuffled no-repeat Web Audio 8-bit arrangements, then one shuffled no-repeat sung recording. Every synthesized variant is exhausted before reshuffling, and all three sung files are exhausted before their pool reshuffles. A queued national-anthem cue takes the next 8-bit slot without interrupting the current track. The entire playlist ducks beneath foreground speech and retains a short handoff gap between tracks. The softened synthesis uses a lower-octave triangle-wave lead, sine-wave bass, restrained synthetic percussion, and a low-pass filter. No MIDI or sheet-music files are bundled.
 
 The sung pool contains the user-supplied `Badnerlied.mp3`, `Erika.mp3`, and
@@ -278,6 +280,17 @@ The roaming quiz encounters lightly adapt a small selection from the Bundesamt f
 - BAMF online test center: https://oet.bamf.de/ords/oetut/f?p=514:1
 
 The pedestrians' remarks, Germanness points, police diversion, and all surrounding presentation are fictional satire; they are not part of the official test or BAMF guidance.
+
+The additional 28 B1, B2, and C1 grammar questions are original game writing. They use familiar certificate-style task types but do not reproduce a Goethe, telc, TestDaF, or other real exam item. The contextual level notes were checked against these official sources on 21 September 2026:
+
+- StAG § 10(4), general B1 naturalization language rule and exceptions: https://www.gesetze-im-internet.de/stag/__10.html
+- Council of Europe CEFR overview, six levels A1 through C2 and plus levels but no B3: https://www.coe.int/en/web/common-european-framework-reference-languages/introduction-and-context
+- Goethe-Zertifikat B1 model speaking module, communicative task and assessment structure: https://bfu.goethe.de/b1_mod/sprechen.php
+- TestDaF university-admission guidance, TDN 4 in all sections and institution-specific differentiation: https://www.testdaf.de/de/hochschulen/der-testdaf-und-hochschulen/nachweis-der-deutschkenntnisse-fuer-das-studium/
+
+## Quiz character portraits
+
+OpenAI's built-in image-generation tool created nine original fictional dossier portraits for the roaming quiz: Gisela Becker, Rüdiger Schmidt, Sabine Krüger, Uwe Möller, Brigitte Neumann, Klaus-Dieter Wagner, Heike Hoffmann, Dr. Dietmar Schulz, and Hartmut Keller, the para-polizeiliche Nachbar. On 21 September 2026 the cast was restyled into a raw psychological-expressionist RPG treatment with broken paint planes, mature asymmetrical faces, restrained eyes, straighter noses, emotionally contained bureaucratic expressions, and one clear scenery-free dossier background. Every complete head retains deliberate top clearance. No real person, agency emblem, logo, official uniform, weapon, badge, or readable document was requested or incorporated. The generated PNGs were resized without cropping and encoded as a single 512 × 512 WebP per identity; prompt summaries, file sizes, and SHA-256 checksums are recorded in `assets/quiz-characters/PROVENANCE.md`.
 
 The wrong-answer `Nein! Nein! Nein!` sting was supplied by the user for this integration. Its provenance notice and checksum are recorded in `assets/voices/LICENSES.md`. If the recording cannot load, the game falls back to the browser's installed German speech voice.
 

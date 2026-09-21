@@ -21,6 +21,7 @@ Do not substitute the later flat 2D prototype or rebuild the game from a differe
 - Any art, image, billboard, model, performance, hosting, or asset-loader change: read [`ASSET-POLICY.md`](./ASSET-POLICY.md).
 - Any moving bitmap character, sprite atlas, gait, or animation-frame change: also read [`SPRITE-GENERATION-PROTOCOL.md`](./SPRITE-GENERATION-PROTOCOL.md).
 - Any code or documentation change: read [`SKILLS.md`](./SKILLS.md).
+- Any spoken-audio or subtitle change: read [`AUDIO-TEXT-LIBRARY.md`](./AUDIO-TEXT-LIBRARY.md) and keep its runtime library synchronized.
 - Any architectural or directional change: read [`DECISIONS.md`](./DECISIONS.md) and update it if the decision is durable.
 
 ## Working rules

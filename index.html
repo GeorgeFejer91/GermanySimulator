@@ -23,7 +23,7 @@
   <meta name="twitter:image:alt" content="Germany Simulator opening menu featuring a fax machine jammed with a bratwurst.">
   <link rel="icon" href="./assets/faxgeraet.svg" type="image/svg+xml">
   <title>Germany Simulator · EC Games</title>
-  <link rel="stylesheet" href="./styles.css?v=20260921-5">
+  <link rel="stylesheet" href="./styles.css?v=20260921-7">
 </head>
 <body>
 <main id="app">
@@ -45,7 +45,10 @@
   <section id="wurst-alert" class="wurst-alert" hidden role="status" aria-live="polite"><small>WURSTSAMMLERPASS · NEUFUND</small><div class="wurst-alert-body"><img id="wurst-alert-image" alt=""><div><b>EXTRA WURST!</b><strong id="wurst-alert-title"></strong><p id="wurst-alert-history"></p><span id="wurst-alert-credit"></span></div></div><em>UNLOCKED · +1 GERMANNESS</em></section>
   <div id="police-bark" class="police-bark" hidden role="status" aria-live="polite"><b id="bark-speaker">POLIZEI</b><span id="police-bark-text"></span></div>
   <section id="violation-alert" class="violation-alert" hidden aria-live="assertive"><small id="violation-law">§</small><b id="violation-title">ORDNUNGSWIDRIGKEIT</b><p id="violation-text"></p><div id="violation-stars"></div></section>
-  <section id="quiz-modal" class="modal" hidden><div class="quiz-card" role="dialog" aria-modal="true" aria-labelledby="quiz-speaker"><div class="quiz-head"><b id="quiz-speaker">SPONTANE EINBÜRGERUNGSPRÜFUNG</b><span id="quiz-source">BAMF-GESAMTKATALOG</span></div><p id="quiz-prompt"></p><div id="quiz-choices" class="quiz-choices"></div><em>SPIELBEWERTUNG: RICHTIG +1 · FALSCH −1 GERMANNESS</em></div></section>
+  <section id="quiz-modal" class="modal" hidden><div class="quiz-card" role="dialog" aria-modal="true" aria-labelledby="quiz-person-name quiz-speaker">
+    <aside class="quiz-person"><small>PERSONENDATEI · FIKTIONALE SATIRE</small><div class="quiz-portrait-frame"><span aria-hidden="true">§</span><img id="quiz-portrait" alt=""></div><b id="quiz-person-name">Herr Becker</b><strong id="quiz-person-title">BESORGTER BÜRGER</strong><dl><div><dt>DIENSTSTELLE</dt><dd id="quiz-person-office">Allgemeine Einmischung</dd></div><div><dt>BEFUGNIS</dt><dd id="quiz-person-authority">spontan erklärt</dd></div><div><dt>SPEZIALGEBIET</dt><dd id="quiz-person-specialty">alles</dd></div></dl></aside>
+    <div class="quiz-sheet"><div class="quiz-head"><b id="quiz-speaker">SPONTANE EINBÜRGERUNGSPRÜFUNG</b><span id="quiz-source">BAMF-GESAMTKATALOG</span></div><p id="quiz-context" class="quiz-context"></p><p id="quiz-prompt"></p><div id="quiz-choices" class="quiz-choices"></div><em>SPIELBEWERTUNG: RICHTIG +1 · FALSCH −1 GERMANNESS</em></div>
+  </div></section>
   <section id="border-alert" class="border-alert" hidden aria-live="polite"><small>BRANDMAUER</small><b id="border-title">DEUTSCHLAND</b><p id="border-copy">BERLIN LIEGT HINTER DER BRANDMAUER. AB HIER NUR NOCH DEUTSCH.</p></section>
   <div id="interact-hint" class="interact-hint" hidden>INTERAGIEREN · E</div>
   <section id="dialogue" class="dialogue" hidden><div id="portrait" class="portrait">§</div><div class="dialogue-copy"><small id="speaker">SACHBEARBEITUNG</small><p id="dialogue-text"></p><span id="voice-state" class="voice-state">SPRECHENDE BEHÖRDE</span></div><div class="dialogue-actions"><button id="dialogue-speak" type="button" aria-label="Repeat spoken dialogue">🔊</button><button id="dialogue-next" type="button">WEITER</button></div></section>
@@ -68,11 +71,15 @@
     <div class="paper-actions"><span id="humor-error" role="alert"></span><button id="humor-next" type="submit" disabled>ALLE FELDER AUSFÜLLEN</button></div>
   </form></section>
   <div id="humor-scold" class="humor-scold" hidden role="alert" aria-live="assertive"></div>
+  <div id="english-subtitle" class="english-subtitle" lang="en" hidden aria-live="polite" aria-atomic="true"></div>
+  <button id="subtitle-toggle" class="subtitle-toggle" type="button" aria-label="Toggle English subtitles" aria-pressed="false">EN SUBTITLES OFF</button>
   <nav class="control-dock" aria-label="Touch controls"><div class="dpad"><button data-key="ArrowLeft" aria-label="Left">◀<span class="fraktur">Links</span></button><button data-key="ArrowUp" aria-label="Forward">▲<span class="fraktur">Vor</span></button><button data-key="ArrowDown" aria-label="Back">▼<span class="fraktur">Zurück</span></button><button data-key="ArrowRight" aria-label="Right">▶<span class="fraktur">Rechts</span></button></div><button id="law-action" class="law-action" data-key="KeyQ" type="button" aria-label="Quote a German law" disabled><span class="dock-icon">§</span><span class="fraktur">Gesetz</span></button><button class="action" data-key="KeyE" type="button"><span class="dock-icon">E</span><span class="fraktur">Reden</span></button></nav>
   <footer><span>WASD / ARROWS · MOVE</span><span>SHIFT · SUSPICIOUSLY FAST</span><span>E · INTERACT</span><span>§ / Q · GESETZ ZITIEREN</span><button id="mute" type="button">MUSIC ON</button><button id="voice-toggle" type="button">VOICE ON</button><a href="https://ec-games.space/">EC GAMES</a><span>SATIRE · GAME RULES · NOT LEGAL OR IMMIGRATION ADVICE</span></footer>
 </main>
 <script type="importmap">{"imports":{"three":"https://cdn.jsdelivr.net/npm/three@0.186.0/build/three.module.js"}}</script>
-<script src="./game.js?v=20260921-18"></script>
+<script src="./For-AI/QUIZ-CHARACTER-DICTIONARY.js?v=20260921-2"></script>
+<script src="./For-AI/AUDIO-TEXT-LIBRARY.js?v=20260921-3"></script>
+<script src="./game.js?v=20260922-22"></script>
 <script type="module" src="./world3d.js?v=20260921-12"></script>
 </body>
 </html>

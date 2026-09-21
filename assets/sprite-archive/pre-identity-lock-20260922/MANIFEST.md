@@ -1,0 +1,22 @@
+# Pre-identity-lock sprite archive — 2026-09-22
+
+Recovery copy of the cutout-rig key/runtime atlases and their signed ledgers
+immediately before the original image-generated identities became authoritative again.
+
+```text
+479e3f03f3145dd52fb01c630317067cd094a38f34bd884097a885624da01fb7  assets/alice-weidel-sprite.png
+5521e22540b27835dc0ed3a508a8eb4c9016f578b8fc50f848e4ece6570006dd  assets/bayern-walker-sprite.png
+40b441097706a4ffc9280d9d74edaafd823951398089852ea845044a4071455c  assets/border-pourer-sprite.png
+fe530d7f4c11592e8edad873deedad7d07bb3cd600d9d0c8cdd2979a38ac35b9  assets/crowd-towel-man.png
+a2350c5b1fca991cae6bf7b71d61b8da84d74c0968f217c00383ad2107b933e8  assets/crowd-towel-woman.png
+3c134644181f7a87f6d4987a5107cc09b993a8e03075938bf8c5a3f50690b725  assets/merkel-sprite.png
+f01eccc5d9d07cb0da021081c8cc507159693411891c06885559d1e38b918bb8  assets/sprite-sources/alice-weidel-sprite-keys.png
+d63519f90b46c0aacd46fda04377e9383fe18d9ac2eba40f39e7003e7bbc753d  assets/sprite-sources/bayern-walker-sprite-keys.png
+54b003cc3967aadc50cfe66734bdedc636d638077d8191715560cf5a9bcba6ae  assets/sprite-sources/border-pourer-sprite-keys.png
+11233983910f4542cf6315c5ffdcc81efad7a9485759abb266697cfca43c6130  assets/sprite-sources/crowd-towel-man-keys.png
+f326208109528c19b0b3790b2c9476966273e17612e965d0be35be39677d9012  assets/sprite-sources/crowd-towel-woman-keys.png
+605540d6fba28d52ae4bb230b0f4c33db14d7fe870682a9e9161407230ed8fb2  assets/sprite-sources/merkel-sprite-keys.png
+0e4b27b45d1596f6671312984876a4084abc443f15ff54434a831bef9f77dd86  assets/sprite-sources/rigs/pose-audit.json
+4bd478ce5d6b1c073263c969aa8f56da9c473c1ae0b1f90012a94a9927d10fa0  assets/sprite-sources/rigs/registry.json
+547cbe645670eea5c36107e8eb251ba075b32d433f588780a37778803e243f9f  assets/sprite-sources/verification.json
+```

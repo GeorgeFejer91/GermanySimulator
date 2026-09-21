@@ -19,7 +19,7 @@ for(const [text,file,size,hash] of expected){
 assert.match(game,/special:"alice"[\s\S]*routeX:8964,minY:440,maxY:784/,"Alice must own a bounded vertical route");
 assert.match(game,/ALICE_WALK_SPEED=STANDARD_SPRITE_WALK_SPEED\*1\.5/,"Alice must move at exactly 1.5× the standard sprite walk speed");
 assert.match(game,/n\.spriteRow=n\.dir>0\?0:1/,"Alice must switch between front and back gait rows when reversing");
-assert.match(game,/function aliceBark\(n,force=false\)[\s\S]*audioReleaseRadius/,"Alice recordings must remain radius-gated");
+assert.match(game,/function featuredSpriteEligible\(n\)[\s\S]*audioRadius\|\|SPRITE_AUDIO_RADIUS[\s\S]*showFeaturedSpriteBark\(n,"alice"/,"Alice recordings must remain small-radius gated");
 
 const sprite=readFileSync(new URL("../assets/alice-weidel-sprite.png",import.meta.url));
 assert.equal(sprite.readUInt32BE(16),4096);
