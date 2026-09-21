@@ -151,39 +151,23 @@ const assetSources={
  wartemarke:"./assets/wartemarke.svg",rasen:"./assets/rasen-verboten.svg",muell:"./assets/muelltrennung.svg",
  db:"./assets/db-verspaetung.svg",baustelle:"./assets/baustelle.svg",fahrrad:"./assets/fahrrad.svg",kaffee:"./assets/kaffeeautomat.svg",pfandautomat:"./assets/pfandautomat.svg",
  faxbillboard:"./assets/fax-billboard.svg",faxgeraet:"./assets/faxgeraet.svg",faxkiosk:"./assets/telefon-fax-kiosk.svg",
- merkel:"./assets/merkel-cartoon.svg",merkelSprite:"./assets/merkel-sprite.png?v=20260921-2",bayernSprite:"./assets/bayern-walker-sprite.png?v=20260921-2",polizeigarten:"./assets/polizei-garten-schild.svg",borderPourer:"./assets/border-pourer-sprite.png?v=20260921-2"
+ merkel:"./assets/merkel-cartoon.svg",merkelSprite:"./assets/merkel-sprite.png?v=20260921-3",bayernSprite:"./assets/bayern-walker-sprite.png?v=20260921-3",aliceSprite:"./assets/alice-weidel-sprite.png?v=20260921-1",polizeigarten:"./assets/polizei-garten-schild.svg",borderPourerSprite:"./assets/border-pourer-sprite.png?v=20260921-3"
 };
 if(desktopBillboards.matches)for(const motif of faxBillboardPool)assetSources[motif.asset]=motif.src;
 const assets={};for(const key in assetSources){const img=new Image();img.src=assetSources[key];assets[key]=img}
 const npcSpriteAtlases={
- merkel:{canvas:null,cols:24,rows:5,pad:0},
- bayern:{canvas:null,cols:32,rows:4,pad:0,smoothing:false},
- borderPourer:{canvas:null,cols:32,rows:6,pad:0}
+ merkel:{canvas:null,cols:24,rows:5,pad:0,drawSize:126},
+ bayern:{canvas:null,cols:32,rows:4,pad:0,drawSize:150},
+ borderPourer:{canvas:null,cols:32,rows:6,pad:0,drawSize:136},
+ alice:{canvas:null,cols:32,rows:2,pad:0,drawSize:126}
 },borderPourerSprite=npcSpriteAtlases.borderPourer;
 function insetSpriteSheet(source,atlas){
- const cell=Math.round(source.width/atlas.cols),c=document.createElement("canvas"),g=c.getContext("2d"),sw=source.width/atlas.cols,sh=source.height/atlas.rows,pad=atlas.pad||0;c.width=atlas.cols*cell;c.height=atlas.rows*cell;g.imageSmoothingEnabled=atlas.smoothing!==false;
+ const cell=Math.round(source.width/atlas.cols),c=document.createElement("canvas"),g=c.getContext("2d"),sw=source.width/atlas.cols,sh=source.height/atlas.rows,pad=atlas.pad||0;c.width=atlas.cols*cell;c.height=atlas.rows*cell;g.imageSmoothingEnabled=true;g.imageSmoothingQuality="high";
  for(let row=0;row<atlas.rows;row++)for(let col=0;col<atlas.cols;col++){const sy=atlas.yBounds?.[row]??row*sh,sourceHeight=atlas.yBounds?atlas.yBounds[row+1]-sy:sh;g.drawImage(source,col*sw,sy,sw,sourceHeight,col*cell+pad,row*cell+pad,cell-pad*2,cell-pad*2)}
  atlas.canvas=c
 }
 function prepareTransparentSprite(key){const atlas=npcSpriteAtlases[key],img=assets[key+"Sprite"];if(!img||!img.naturalWidth||atlas.canvas)return;insetSpriteSheet(img,atlas)}
-function prepareBorderPourerSprite(){
- const img=assets.borderPourer;if(!img||!img.naturalWidth||borderPourerSprite.canvas)return;
- const fw=img.naturalWidth/borderPourerSprite.cols,fh=img.naturalHeight/borderPourerSprite.rows,c=document.createElement("canvas"),g=c.getContext("2d",{willReadFrequently:true});c.width=img.naturalWidth;c.height=img.naturalHeight;g.drawImage(img,0,0);
- const pixels=g.getImageData(0,0,c.width,c.height),data=pixels.data,count=c.width*c.height;let mask=new Uint8Array(count),next;
- for(let i=0,p=0;i<count;i++,p+=4)if(data[p+3]>8&&Math.max(data[p],data[p+1],data[p+2])>9)mask[i]=1;
- for(let pass=0;pass<2;pass++){
-  next=mask.slice();
-  for(let y=1;y<c.height-1;y++)for(let x=1;x<c.width-1;x++){const i=y*c.width+x;if(!mask[i]&&(mask[i-1]||mask[i+1]||mask[i-c.width]||mask[i+c.width]))next[i]=1}
-  mask=next;
- }
- for(let i=0,p=3;i<count;i++,p+=4)data[p]=mask[i]?255:0;
- g.putImageData(pixels,0,0);
- for(let col=1;col<borderPourerSprite.cols;col++)g.clearRect(col*fw-2,0,4,c.height);
- for(let row=1;row<borderPourerSprite.rows;row++)g.clearRect(0,row*fh-2,c.width,4);
- insetSpriteSheet(c,borderPourerSprite);
-}
-assets.borderPourer.addEventListener("load",prepareBorderPourerSprite,{once:true});if(assets.borderPourer.complete)prepareBorderPourerSprite();
-for(const key of ["merkel","bayern"]){assets[key+"Sprite"].addEventListener("load",()=>prepareTransparentSprite(key),{once:true});if(assets[key+"Sprite"].complete)prepareTransparentSprite(key)}
+for(const key of ["merkel","bayern","borderPourer","alice"]){assets[key+"Sprite"].addEventListener("load",()=>prepareTransparentSprite(key),{once:true});if(assets[key+"Sprite"].complete)prepareTransparentSprite(key)}
 const policeBarks={
  berlin:["HALT! Stop mal immediately!","Nicht auf ze grass, bitte!","Ausweis, ID, irgendwas Officiales!","Please leave den Grünbereich sofort!","Das ist so wirklich not vorgesehen!","Bleiben Sie hinter ze line!"],
  germany:["HALT! STEHENBLEIBEN!","NICHT ÜBER DEN RASEN!","AUSWEIS BITTE!","SIE VERLASSEN SOFORT DEN GRÜNBEREICH!","DAS IST SO NICHT VORGESEHEN!","BLEIBEN SIE HINTER DER LINIE!"]
@@ -554,6 +538,13 @@ const bayernClips=Object.freeze([
  {text:"Ein Bayern kam aus Bayern. Das war die Rettung Bayerns.",recording:"./assets/voices/bayern/rettung-bayerns.mp3"},
  {text:"Gott schütze Bayern.",recording:"./assets/voices/bayern/gott-schuetze-bayern.mp3"}
 ]);
+const aliceClips=Object.freeze([
+ {text:"Ich liebe Deutschland. Besonders aus der Schweiz.",recording:"./assets/voices/alice-weidel/deutschland-schweiz.mp3",duration:3.109},
+ {text:"Adolf Hitler war ein Linker. Die DDR hieß schließlich auch Demokratische Republik. Und Deutsche Leberkäse besteht selbstverständlich aus Leber und Käse.",recording:"./assets/voices/alice-weidel/hitler-ddr-leberkaese.mp3",duration:12.304},
+ {text:"Die Nationalsozialisten waren Sozialisten, sonst hätte man sie ja Nationalirgendwas genannt.",recording:"./assets/voices/alice-weidel/nationalsozialisten-sozialisten.mp3",duration:5.982},
+ {text:"Wir müssen zurück zur traditionellen Familie. Wie genau die aussieht, klären wir dann außerhalb meines Privatlebens.",recording:"./assets/voices/alice-weidel/traditionelle-familie.mp3",duration:6.374}
+]);
+const STANDARD_SPRITE_WALK_SPEED=52,ALICE_WALK_SPEED=STANDARD_SPRITE_WALK_SPEED*1.5;
 const bayernWaypoints=Object.freeze([
  {x:1014,y:784,links:[1,6]},{x:2364,y:784,links:[0,2,7]},{x:4364,y:784,links:[1,3,8]},
  {x:5814,y:784,links:[2,4,9]},{x:7314,y:784,links:[3,5,10]},{x:8964,y:784,links:[4,11]},
@@ -574,6 +565,7 @@ const npcs=[
  {x:borderGates[1].x+borderGates[1].w/2,y:BORDER_Y+34,name:"FRIEDRICH MERZ · FIKTIONALE SATIRE",special:"borderPourer",politician:"merz",dir:1,lane:1,state:"sideWalk",stateTimer:1.35,animTime:0,spriteRow:1,spriteFrame:0,spriteFlip:false,barkAt:0,lineIndex:0,minX:80,maxX:WORLD.w-80},
  {x:4620,y:3270,name:"ANGELA MERKEL · SATIRE",special:"merkel",politician:"merkel",route:[[4620,3270],[5750,3270],[6150,3270],[7200,3270],[7200,3880],[6120,3880],[5750,3880],[4620,3880]],target:1,facingX:1,facingY:0,animTime:0,spriteRow:2,spriteFrame:1,barkAt:0,lineIndex:0},
  {x:1014,y:784,name:"BAYERN-BEAUFTRAGTER · SATIRE",special:"bayern",spot:0,targetSpot:1,hangTimer:0,animTime:0,spriteRow:1,spriteFrame:0,barkAt:0,lastClip:-1},
+ {x:8964,y:440,name:"ALICE WEIDEL · FIKTIONALE SATIRE",special:"alice",dir:1,routeX:8964,minY:440,maxY:784,animTime:0,spriteRow:0,spriteFrame:0,barkAt:0,audioRadius:265,audioReleaseRadius:340},
  {x:4200,y:3450,name:"HERR RASENAUFSICHT",line:8,vx:0,vy:10,min:3330,max:3820},
  {x:5100,y:720,name:"FRAU ORDNUNG",line:8,vx:13,vy:0,min:4750,max:5600},
  {x:6650,y:720,name:"HERR ARCHIV",line:3,vx:-11,vy:0,min:6250,max:7100},
@@ -584,7 +576,7 @@ const npcs=[
  {x:5200,y:2860,name:"FRAU RUHE",line:5,vx:12,vy:0,min:4750,max:5600},
  {x:6750,y:2860,name:"HERR FAXROLLE",line:4,vx:-13,vy:0,min:6250,max:7100},
  {x:8300,y:2860,name:"FRAU TRENNUNG",line:6,vx:12,vy:0,min:7800,max:8700}
- ].map(n=>n.special==="borderPourer"?n:{...offsetWorldPoint(n),min:n.min==null?n.min:n.min+RAIL_GUTTER,max:n.max==null?n.max:n.max+RAIL_GUTTER,route:n.route?.map(([x,y])=>[x+RAIL_GUTTER,y+RAIL_GUTTER])});
+ ].map(n=>n.special==="borderPourer"?n:{...offsetWorldPoint(n),min:n.min==null?n.min:n.min+RAIL_GUTTER,max:n.max==null?n.max:n.max+RAIL_GUTTER,minY:n.minY==null?n.minY:n.minY+RAIL_GUTTER,maxY:n.maxY==null?n.maxY:n.maxY+RAIL_GUTTER,routeX:n.routeX==null?n.routeX:n.routeX+RAIL_GUTTER,route:n.route?.map(([x,y])=>[x+RAIL_GUTTER,y+RAIL_GUTTER])});
 const crowdNames=["FRAU KRÜGER","HERR WEBER","FRAU WAGNER","HERR BECKER","FRAU HOFFMANN","HERR SCHÄFER","FRAU KOCH","HERR BAUER","FRAU RICHTER","HERR KLEINERT","FRAU WOLF","HERR SCHRÖDER"];
 const sidewalkSegments=[];
 for(let start=40,i=0;i<=verticalRoads.length;i++){
@@ -774,6 +766,16 @@ function updateBayern(n,dt){
  if(d<7){n.spot=n.targetSpot;n.hangTimer=2+Math.random()*4;chooseBayernTarget(n);n.spriteFrame=2;return}
  moveGroundResponder(n,dx/d*speed*dt,dy/d*speed*dt,13);n.spriteRow=Math.abs(dx)>Math.abs(dy)?(dx>0?1:3):(dy>0?0:2);n.spriteFrame=Math.floor(n.animTime*40)%npcSpriteAtlases.bayern.cols
 }
+function nextAliceClip(){return nextVariant("alice",aliceClips)}
+function aliceBark(n,force=false){
+ const now=performance.now();if((!force&&(now<(n.barkAt||0)||hasStimulusFamily("alice")))||state.region!=="germany")return false;const item=nextAliceClip();n.barkAt=now+item.duration*1000+2500;
+ showWorldBark(n.name,item.text,false,item.recording,"",{family:"alice",priority:force?STIMULUS_PRIORITY.CRITICAL:STIMULUS_PRIORITY.AMBIENT,ambient:!force,isEligible:force?undefined:()=>state.region==="germany"&&dist(player.x,player.y,n.x,n.y)<(n.audioReleaseRadius||SPRITE_AUDIO_RELEASE_RADIUS)});return true
+}
+function updateAlice(n,dt){
+ if(state.region==="germany"&&proximityAudioReady(n))aliceBark(n);
+ const nextY=n.y+n.dir*ALICE_WALK_SPEED*dt;if(nextY<n.minY||nextY>n.maxY)n.dir*=-1;
+ moveGroundResponder(n,0,n.dir*ALICE_WALK_SPEED*dt,13);n.x=n.routeX;n.y=clamp(n.y,n.minY,n.maxY);n.spriteRow=n.dir>0?0:1;n.animTime+=dt;n.spriteFrame=Math.floor(n.animTime*60)%npcSpriteAtlases.alice.cols
+}
 function updateBorderPourer(n,dt){
  n.animTime+=dt;n.stateTimer-=dt;
  if(n.state==="sideWalk"){
@@ -928,6 +930,8 @@ function interact(){if(state.dialogue){nextDialogue();return}if(state.modal)retu
    openDialogue(n.name,[merkelBehind(n)?MERKEL_BEHIND_LINE:nextPoliticianLine(n)],"AM");
  }else if(n.special==="bayern"){
    bayernBark(n,true);
+ }else if(n.special==="alice"){
+   aliceBark(n,true);
  }else openDialogue(n.name,[worldNpcLine(n.line),worldNpcLine((n.line+3)%npcLines.length)],"!");
  return
 }for(const p of props)if(p.id&&dist(player.x,player.y,p.x,p.y)<96){microInteract(p);return}for(const o of normObjects)if(!o.fixed&&dist(player.x,player.y,o.x,o.y)<92){if(state.mission===5){o.fixed=true;state.stadtbild++;toast("STADTBILD NORMIERT · "+o.label);updateHud()}else toast("DAS IST NOCH NICHT IHR VORGANG");return}toast("HIER IST NIEMAND ZUSTÄNDIG")}
@@ -1020,6 +1024,7 @@ function update(dt){
    if(n.special==="borderPourer"){updateBorderPourer(n,dt);continue}
    if(n.special==="merkel"){updateMerkel(n,dt);continue}
    if(n.special==="bayern"){updateBayern(n,dt);continue}
+   if(n.special==="alice"){updateAlice(n,dt);continue}
    if(n===state.quizApproach){const dx=player.x-n.x,dy=player.y-n.y,d=Math.hypot(dx,dy)||1;if(d<78){state.quizApproach=null;n.quizAsked=true;startCitizenshipQuiz(n)}else moveGroundResponder(n,dx/d*88*dt,dy/d*88*dt,12);continue}
    if(dist(player.x,player.y,n.x,n.y)<NPC_COMPLAINT_DISTANCE)pedestrianBark(n,playerSurface());
    if((n.pause||0)>0){n.pause-=dt;continue}
@@ -1252,28 +1257,16 @@ function sprite(x,y,label,type,accent){
  if(type==="person"||type==="police"){const body=type==="police"?"#303943":(accent||"#45443f");ctx.strokeStyle=body;ctx.lineWidth=5;ctx.lineCap="round";ctx.beginPath();ctx.moveTo(-4,-8);ctx.lineTo(-8+swing*.22,13);ctx.moveTo(4,-8);ctx.lineTo(8-swing*.22,13);ctx.moveTo(-7,-23);ctx.lineTo(-13-swing*.35,-5);ctx.moveTo(7,-23);ctx.lineTo(13+swing*.35,-5);ctx.stroke();ctx.fillStyle=body;ctx.fillRect(-9,-30,18,25);ctx.fillStyle="#d0c8b8";ctx.beginPath();ctx.arc(0,-39,8,0,Math.PI*2);ctx.fill();if(type==="police"){ctx.fillStyle="#222b34";ctx.fillRect(-10,-48,20,5);ctx.fillStyle="#eee";ctx.font="900 7px Arial";ctx.fillText("POL",-7,-13)}}
  if(type==="bin"){ctx.fillStyle="#555b54";ctx.fillRect(-15,-34,30,34)}if(type==="chairs"){ctx.strokeStyle="#4f4e49";ctx.lineWidth=3;ctx.strokeRect(-26,-22,20,22);ctx.strokeRect(7,-22,20,22)}if(type==="hedge"){ctx.fillStyle="#4e594a";ctx.fillRect(-36,-28,72,28)}
  if(label&&s>.28){ctx.fillStyle="#171717";ctx.font="800 8px Arial";ctx.textAlign="center";ctx.fillText(label,0,18);ctx.textAlign="left"}ctx.restore()}
-function drawMerkelNpc(n){
- const p=project(n.x,n.y,0),atlas=npcSpriteAtlases.merkel,img=atlas.canvas;
- if(img){const fw=img.width/atlas.cols,fh=img.height/atlas.rows,s=clamp(p.s,.42,1.12),size=104;ctx.save();ctx.translate(p.x,p.y);ctx.scale(s,s);ctx.drawImage(img,(n.spriteFrame||0)*fw,(n.spriteRow||0)*fh,fw,fh,-size/2,-size+8,size,size);ctx.restore()}else drawAsset("merkel",n.x,n.y,46,74);
- if(p.x>-120&&p.x<width+120&&p.y>-140&&p.y<height+140){
-   ctx.fillStyle="#171717";ctx.font="800 "+Math.max(7,8*p.s)+"px Arial";ctx.textAlign="center";
-   ctx.fillText("ANGELA MERKEL · SATIRE",p.x,p.y+16*p.s);ctx.textAlign="left";
- }
+function drawRegisteredNpc(n,key,label=n.name){
+ const p=project(n.x,n.y,0),atlas=npcSpriteAtlases[key],img=atlas.canvas;if(!img){if(key==="merkel")drawAsset("merkel",n.x,n.y,46,74);else sprite(n.x,n.y,label,"person","#263b59");return}
+ if(p.x<-180||p.x>width+180||p.y<-210||p.y>height+210)return;const fw=img.width/atlas.cols,fh=img.height/atlas.rows,s=clamp(p.s,.42,1.12),size=atlas.drawSize;
+ ctx.save();ctx.translate(p.x,p.y);ctx.scale((n.spriteFlip?-1:1)*s,s);ctx.imageSmoothingEnabled=true;ctx.imageSmoothingQuality="high";ctx.drawImage(img,(n.spriteFrame||0)*fw,(n.spriteRow||0)*fh,fw,fh,-size/2,-size+8,size,size);ctx.restore();
+ ctx.fillStyle="#171717";ctx.font="800 "+Math.max(7,8*p.s)+"px Arial";ctx.textAlign="center";ctx.fillText(label,p.x,p.y+18*p.s);ctx.textAlign="left"
 }
-function drawBorderPourer(n){
- const sheet=borderPourerSprite.canvas;if(!sheet){sprite(n.x,n.y,n.name,"person","#263b59");return}
- const p=project(n.x,n.y,0);if(p.x<-180||p.x>width+180||p.y<-210||p.y>height+210)return;
- const fw=sheet.width/borderPourerSprite.cols,fh=sheet.height/borderPourerSprite.rows,s=clamp(p.s,.42,1.12),size=132;
- ctx.save();ctx.translate(p.x,p.y);ctx.scale((n.spriteFlip?-1:1)*s,s);
- ctx.drawImage(sheet,n.spriteFrame*fw,n.spriteRow*fh,fw,fh,-size/2,-size+8,size,size);ctx.restore();
- ctx.fillStyle="#171717";ctx.font="800 "+Math.max(7,8*p.s)+"px Arial";ctx.textAlign="center";ctx.fillText("FRIEDRICH MERZ · FIKTIONALE SATIRE",p.x,p.y+18*p.s);ctx.textAlign="left";
-}
-function drawBayernNpc(n){
- const p=project(n.x,n.y,0),atlas=npcSpriteAtlases.bayern,img=atlas.canvas;if(!img){sprite(n.x,n.y,n.name,"person","#263b59");return}
- if(p.x<-160||p.x>width+160||p.y<-190||p.y>height+190)return;const fw=img.width/atlas.cols,fh=img.height/atlas.rows,s=clamp(p.s,.42,1.12),size=124;
- ctx.save();ctx.translate(p.x,p.y);ctx.scale(s,s);ctx.imageSmoothingEnabled=false;ctx.drawImage(img,(n.spriteFrame||0)*fw,(n.spriteRow||0)*fh,fw,fh,-size/2,-size+8,size,size);ctx.restore();
- ctx.fillStyle="#171717";ctx.font="800 "+Math.max(7,8*p.s)+"px Arial";ctx.textAlign="center";ctx.fillText(n.name,p.x,p.y+18*p.s);ctx.textAlign="left"
-}
+function drawMerkelNpc(n){drawRegisteredNpc(n,"merkel","ANGELA MERKEL · SATIRE")}
+function drawBorderPourer(n){drawRegisteredNpc(n,"borderPourer","FRIEDRICH MERZ · FIKTIONALE SATIRE")}
+function drawBayernNpc(n){drawRegisteredNpc(n,"bayern")}
+function drawAliceNpc(n){drawRegisteredNpc(n,"alice")}
 function drawDistrictLabels(){
  for(const d of districtLabels){
    const p=project(d.x,d.y,4);
@@ -1310,7 +1303,7 @@ function drawWorld(){
  for(const f of fireSources)drawables.push({d:player.y-f.y,fn:()=>drawFireSource(f)});
  for(const train of trains)drawables.push({d:player.y-train.y,fn:()=>drawTrain(train)});
  for(const car of trafficCars)drawables.push({d:player.y-car.y,fn:()=>drawTrafficCar(car)});
- for(const n of npcs)drawables.push({d:player.y-n.y,fn:()=>n.special==="merkel"?drawMerkelNpc(n):n.special==="borderPourer"?drawBorderPourer(n):n.special==="bayern"?drawBayernNpc(n):sprite(n.x,n.y,n.name,"person","#4f4d48")});
+ for(const n of npcs)drawables.push({d:player.y-n.y,fn:()=>n.special==="merkel"?drawMerkelNpc(n):n.special==="borderPourer"?drawBorderPourer(n):n.special==="bayern"?drawBayernNpc(n):n.special==="alice"?drawAliceNpc(n):sprite(n.x,n.y,n.name,"person","#4f4d48")});
  for(const p of police)drawables.push({d:player.y-p.y,fn:()=>sprite(p.x,p.y,"POLIZEI","police")});
  for(const car of policeVehicles)drawables.push({d:player.y-car.y,fn:()=>drawPoliceCar(car)});
  for(const p of pickups)if(!p.taken)drawables.push({d:player.y-p.y,fn:()=>p.wurstType?drawWurstPickup(p):sprite(p.x,p.y,p.label,p.type==="pfand"?"pfand":p.type)});
@@ -1332,7 +1325,7 @@ function drawPlayer(){
  ctx.fillStyle="#d3cbbb";ctx.beginPath();ctx.arc(0,-39,8,0,Math.PI*2);ctx.fill();
  ctx.fillStyle="#eee9dd";ctx.font="900 8px Arial";ctx.textAlign="center";ctx.fillText(state.lang==="en"?"YOU":"SIE",0,18);ctx.restore();
 }
-function nearestInteract(){let label="",best=122;for(const b of buildings){const d=dist(player.x,player.y,b.doorX,b.doorY);if(d<best){best=d;label=b.name}}for(const n of npcs){const d=dist(player.x,player.y,n.x,n.y);if(d<best){best=d;label=n.special==="borderPourer"?(state.region==="berlin"?"SATIRE STATEMENT LISTENING":"SATIRISCHE ERKLÄRUNG ANHÖREN"):(state.region==="berlin"?"COMPLAINT LISTENING":"BESCHWERDE ANHÖREN")}}for(const p of props){if(!p.id)continue;const d=dist(player.x,player.y,p.x,p.y);if(d<best){best=d;label=p.label}}for(const o of normObjects){if(o.fixed)continue;const d=dist(player.x,player.y,o.x,o.y);if(d<best){best=d;label="AUSRICHTEN"}}const e=document.getElementById("interact-hint");e.hidden=!label;e.textContent=label?"E · "+label:""}
+function nearestInteract(){let label="",best=122;for(const b of buildings){const d=dist(player.x,player.y,b.doorX,b.doorY);if(d<best){best=d;label=b.name}}for(const n of npcs){const d=dist(player.x,player.y,n.x,n.y);if(d<best){best=d;label=n.special==="borderPourer"||n.special==="alice"?(state.region==="berlin"?"SATIRE STATEMENT LISTENING":"SATIRISCHE ERKLÄRUNG ANHÖREN"):(state.region==="berlin"?"COMPLAINT LISTENING":"BESCHWERDE ANHÖREN")}}for(const p of props){if(!p.id)continue;const d=dist(player.x,player.y,p.x,p.y);if(d<best){best=d;label=p.label}}for(const o of normObjects){if(o.fixed)continue;const d=dist(player.x,player.y,o.x,o.y);if(d<best){best=d;label="AUSRICHTEN"}}const e=document.getElementById("interact-hint");e.hidden=!label;e.textContent=label?"E · "+label:""}
 function draw(){ctx.clearRect(0,0,width,height);if(!window.Germany3D?.ready)drawWorld();nearestInteract()}
 // Public-domain and traditional melodies arranged as local WebAudio chiptunes.
 // Notes are MIDI numbers, durations are quarter-note units, and null is a rest.

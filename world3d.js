@@ -230,18 +230,18 @@ const GLTF_LOADER_URL="https://cdn.jsdelivr.net/npm/three@0.186.0/examples/jsm/l
   function atlasSprite(kind,scale){
     const source=bridge.getNpcSpriteCanvas?.(kind),grid=bridge.npcSpriteGrids?.[kind];if(!source||!grid)return null;
     const tx=new T.CanvasTexture(source);tx.colorSpace=T.SRGBColorSpace;tx.wrapS=tx.wrapT=T.RepeatWrapping;tx.repeat.set(1/grid.cols,1/grid.rows);
-    tx.generateMipmaps=false;tx.minFilter=T.LinearFilter;
-    if(kind==="bayern")tx.magFilter=tx.minFilter=T.NearestFilter;
-    const q=new T.Sprite(new T.SpriteMaterial({map:tx,transparent:true,alphaTest:.02,depthWrite:false}));q.scale.set(scale,scale,1);q.userData={[kind+"Sprite"]:true,grid};return q
+    tx.generateMipmaps=false;tx.minFilter=tx.magFilter=T.LinearFilter;tx.premultiplyAlpha=true;
+    const q=new T.Sprite(new T.SpriteMaterial({map:tx,transparent:true,alphaTest:.02,depthWrite:false,premultipliedAlpha:true}));q.scale.set(scale,scale,1);q.userData={[kind+"Sprite"]:true,grid};return q
   }
-  function specialSprite(n){return n.special==="borderPourer"?atlasSprite("borderPourer",2.5):n.special==="merkel"?atlasSprite("merkel",2.05):n.special==="bayern"?atlasSprite("bayern",2.35):null}
+  function specialSprite(n){return n.special==="borderPourer"?atlasSprite("borderPourer",2.62):n.special==="merkel"?atlasSprite("merkel",2.42):n.special==="bayern"?atlasSprite("bayern",2.91):n.special==="alice"?atlasSprite("alice",2.42):null}
   function syncAtlasSprite(q,o,height){const tx=q.material.map,grid=q.userData.grid;tx.offset.x=(o.spriteFrame||0)/grid.cols;tx.offset.y=1-((o.spriteRow||0)+1)/grid.rows;q.position.set(X(o.x),height,Z(o.y))}
-  function syncMerkel(q,o){syncAtlasSprite(q,o,1.02)}
-  function syncBayern(q,o){syncAtlasSprite(q,o,1.17)}
+  function syncMerkel(q,o){syncAtlasSprite(q,o,1.21)}
+  function syncBayern(q,o){syncAtlasSprite(q,o,1.455)}
+  function syncAlice(q,o){syncAtlasSprite(q,o,1.21)}
   function syncBorderPourer(q,o){
     const tx=q.material.map,grid=q.userData.grid,frame=o.spriteFrame||0,row=o.spriteRow||0,flip=!!o.spriteFlip;
     tx.repeat.x=(flip?-1:1)/grid.cols;tx.repeat.y=1/grid.rows;tx.offset.x=(frame+(flip?1:0))/grid.cols;tx.offset.y=1-(row+1)/grid.rows;
-    q.position.set(X(o.x),1.25,Z(o.y));
+    q.position.set(X(o.x),1.31,Z(o.y));
   }
   function pickup(item){const type=item.type,g=new T.Group();if(type==="pfand"){const m=new T.Mesh(new T.CylinderGeometry(.07,.09,.5,9),mat(0x566153));m.position.y=.25;g.add(m)}else if(item.wurstType){const m=mat(item.color),pieces=item.pieces||1;for(let i=0;i<pieces;i++){const q=new T.Mesh(new T.CapsuleGeometry(.065,.32,4,8),m);q.rotation.z=Math.PI/2;q.position.set(pieces===4?(i-1.5)*.18:0,.2+(i-(pieces-1)/2)*.13,0);g.add(q)}const seal=new T.Mesh(new T.TorusGeometry(.15,.035,8,18),mat(0xe4ddce));seal.rotation.x=Math.PI/2;seal.position.y=.6;g.add(seal)}else{const col=type==="currywurst"?0x805143:type==="bratwurst"?0x9a7653:0x8a694b,m=mat(col),q=new T.Mesh(type==="brezel"?new T.TorusGeometry(.18,.055,8,18):new T.CapsuleGeometry(.08,.4,4,8),m);q.rotation.z=type==="brezel"?0:Math.PI/2;q.position.y=.2;g.add(q)}return g}
 
@@ -269,7 +269,7 @@ const GLTF_LOADER_URL="https://cdn.jsdelivr.net/npm/three@0.186.0/examples/jsm/l
     syncChar(playerMesh,bridge.player,0);
     playerMesh.rotation.y=bridge.player.facing;
     for(const slot of trainSlots){for(let i=0;i<slot.cars.length;i++){const car=slot.train.cars[i],group=slot.cars[i].group,jolt=Math.sin(performance.now()*.04+i)*slot.train.bump*.1;group.position.set(X(car.x),.07+jolt,Z(car.y));group.rotation.y=Math.PI/2-car.angle}for(let i=0;i<slot.gangways.length;i++){const a=slot.train.cars[i],b=slot.train.cars[i+1],ax=X(a.x),az=Z(a.y),bx=X(b.x),bz=Z(b.y),mesh=slot.gangways[i],length=Math.hypot(bx-ax,bz-az);mesh.position.set((ax+bx)/2,.54,(az+bz)/2);mesh.rotation.y=Math.atan2(bx-ax,bz-az);mesh.scale.z=Math.max(.18,length-4.64)}}
-    const ns=bridge.getNPCs();ns.forEach(n=>{let q=npcMeshes.get(n);if(n.special&&!q?.userData[n.special+"Sprite"]){const sprite=specialSprite(n);if(sprite){if(q)scene.remove(q);q=sprite;scene.add(q);npcMeshes.set(n,q)}}if(!q){q=specialSprite(n)||character("npc");scene.add(q);npcMeshes.set(n,q)}if(q.userData.borderPourerSprite)syncBorderPourer(q,n);else if(q.userData.merkelSprite)syncMerkel(q,n);else if(q.userData.bayernSprite)syncBayern(q,n);else syncChar(q,n)});for(const [n,q] of npcMeshes)if(!ns.includes(n)){scene.remove(q);npcMeshes.delete(n)}
+    const ns=bridge.getNPCs();ns.forEach(n=>{let q=npcMeshes.get(n);if(n.special&&!q?.userData[n.special+"Sprite"]){const sprite=specialSprite(n);if(sprite){if(q)scene.remove(q);q=sprite;scene.add(q);npcMeshes.set(n,q)}}if(!q){q=specialSprite(n)||character("npc");scene.add(q);npcMeshes.set(n,q)}if(q.userData.borderPourerSprite)syncBorderPourer(q,n);else if(q.userData.merkelSprite)syncMerkel(q,n);else if(q.userData.bayernSprite)syncBayern(q,n);else if(q.userData.aliceSprite)syncAlice(q,n);else syncChar(q,n)});for(const [n,q] of npcMeshes)if(!ns.includes(n)){scene.remove(q);npcMeshes.delete(n)}
     const ps=bridge.getPolice();ps.forEach(p=>{let q=policeMeshes.get(p);if(!q){q=character("police");scene.add(q);policeMeshes.set(p,q)}syncChar(q,p,.04)});for(const [p,q] of policeMeshes)if(!ps.includes(p)){scene.remove(q);policeMeshes.delete(p)}
     const traffic=bridge.getTrafficCars?.()||[];traffic.forEach(car=>{let slot=trafficCarMeshes.get(car);if(!slot){slot=makeTrafficCarSlot(car);trafficCarMeshes.set(car,slot)}slot.group.position.set(X(car.x),.07,Z(car.y));slot.group.rotation.y=Math.PI/2-car.angle;slot.tail.color.setHex(car.queued?0xff3026:0x762720)});for(const [car,slot] of trafficCarMeshes)if(!traffic.includes(car)){world.remove(slot.group);trafficCarMeshes.delete(car)}
     const vehicles=bridge.getPoliceVehicles?.()||[];vehicles.forEach(car=>{let slot=policeVehicleMeshes.get(car);if(!slot){slot=makePoliceCarSlot(car);policeVehicleMeshes.set(car,slot)}slot.group.position.set(X(car.x),.07,Z(car.y));slot.group.rotation.y=Math.PI/2-car.angle;const flash=Math.floor(performance.now()/125)%2;slot.lightA.material.color.setHex(flash?0x2f7cff:0x123f99);slot.lightB.material.color.setHex(flash?0x123f99:0x2f7cff)});for(const [car,slot] of policeVehicleMeshes)if(!vehicles.includes(car)){world.remove(slot.group);policeVehicleMeshes.delete(car)}

@@ -136,6 +136,28 @@ speech fallback. The source recording's external redistribution provenance and
 license should be confirmed before publishing outside the user's project; it is
 not relicensed under the repository's other asset licenses.
 
+## Alice Weidel satire recordings
+
+The four files under `alice-weidel/` are normalized copies of the user-supplied
+local files `D:\Downloads\alice\1.mp3` through `4.mp3`. They were transcribed
+locally with Whisper `small` in German, and each exact transcript is the visible
+in-game fallback for its matching recording. The character and playback are
+labeled **FIKTIONALE SATIRE**. These user-supplied recordings are not presented
+as verified Alice Weidel quotations or factual statements.
+
+| Local source | Source SHA-256 | Shipped file | Exact displayed/spoken text | Shipped duration / bytes | Shipped SHA-256 |
+| --- | --- | --- | --- | ---: | --- |
+| `1.mp3` | `5D138CBB56A136E6185F9D0D3ECEA40B97640C164477C715873021B7935EB2CB` | `alice-weidel/deutschland-schweiz.mp3` | Ich liebe Deutschland. Besonders aus der Schweiz. | 3.109 s / 50,198 | `5D32BC26A4FDD9419690A1A496AC2263CBEA1CF34FB8429C33D8B3B8334800EF` |
+| `2.mp3` | `11F559735A9B6C03B529DD15CF1D7998B4C410B95B70CFE6EA13691473335DA4` | `alice-weidel/hitler-ddr-leberkaese.mp3` | Adolf Hitler war ein Linker. Die DDR hieß schließlich auch Demokratische Republik. Und Deutsche Leberkäse besteht selbstverständlich aus Leber und Käse. | 12.304 s / 197,319 | `630C34D0F2F94871AD47BB404F479435055B012A9245F2E5848F9F33883AFB7E` |
+| `3.mp3` | `1E4BF6A2EE0D452B4E8ECA72B52A29FE78539DBAB39AE6A87DC7F7C169B63A16` | `alice-weidel/nationalsozialisten-sozialisten.mp3` | Die Nationalsozialisten waren Sozialisten, sonst hätte man sie ja Nationalirgendwas genannt. | 5.982 s / 96,173 | `ABFF66A12A995645B25FE8FE48CB61F644BB2006DDD0702FC56113FF3C690345` |
+| `4.mp3` | `B54C40B1E58C466FD3434CBF237C7327B8E4E8427EFF4D8B17D62843C0785EE7` | `alice-weidel/traditionelle-familie.mp3` | Wir müssen zurück zur traditionellen Familie. Wie genau die aussieht, klären wir dann außerhalb meines Privatlebens. | 6.374 s / 102,443 | `F9891EABA1CC5BAD71DBCA8ACD79A10769BC721FD9C711CE00EE2196715F8F22` |
+
+The shipping copies remain mono 44.1 kHz, approximately 128 kbit/s MP3 and
+pass the foreground target (`−18 LUFS`, maximum `−1.5 dBTP`). No external
+source URL or redistribution license was provided. They are not relicensed
+under the repository's other asset licenses; separate permission is required
+before reuse outside this project.
+
 All shipped voice files in this record are two-pass normalized to the
 foreground role (`−18 LUFS`, maximum `−1.5 dBTP`) while preserving their sample
 rate, channel layout, approximate bitrate, and duration. The hashes above refer

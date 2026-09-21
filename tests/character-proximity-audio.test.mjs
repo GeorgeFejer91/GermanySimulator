@@ -12,7 +12,9 @@ assert.match(game,/\[MERKEL_NEULAND_LINE\]:"\.\/assets\/voices\/merkel\/neuland-
 assert.match(game,/function updateMerkel\(n,dt\)[\s\S]*if\(proximityAudioReady\(n\)\)[\s\S]*showWorldBark\(n\.name,line,false/,"Merkel must bark automatically on proximity");
 assert.match(game,/function updateBorderPourer\(n,dt\)[\s\S]*proximityAudioReady\(n\)[\s\S]*family:"politician:merz"/,"Merz must bark automatically on proximity");
 assert.match(game,/function updateBayern\(n,dt\)\{\s*if\(state\.region==="germany"&&proximityAudioReady\(n\)\)bayernBark\(n\)/,"Bayern must bark automatically on proximity");
+assert.match(game,/function updateAlice\(n,dt\)\{\s*if\(state\.region==="germany"&&proximityAudioReady\(n\)\)aliceBark\(n\)/,"Alice must loop her own recordings automatically on proximity");
 assert.match(game,/nextVariant\("politician:"\+n\.politician,lines\)/,"politician pools must remain owner-locked and no-repeat");
 assert.match(game,/nextVariant\("bayern",bayernClips\)/,"Bayern recordings must use their no-repeat bag");
+assert.match(game,/nextVariant\("alice",aliceClips\)/,"Alice recordings must use their own no-repeat bag");
 
-console.log("Automatic Merkel, Merz, and Bayern proximity audio contracts OK");
+console.log("Automatic Merkel, Merz, Bayern, and Alice proximity audio contracts OK");

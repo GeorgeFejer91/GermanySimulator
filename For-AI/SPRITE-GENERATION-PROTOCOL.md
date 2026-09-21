@@ -7,6 +7,7 @@ This is the required production path for every moving bitmap character. It exist
 - Authored key-pose sheets live once under `assets/sprite-sources/`. They are production sources, not runtime alternatives.
 - The corresponding derived atlases at root `assets/` are the only files loaded by the game.
 - `tools/build-sprite-transitions.py` is the single transition builder. It requires Python with Pillow plus local FFmpeg; neither is a runtime dependency.
+- `tools/register-sprite-grid.py` is the generic contact-sheet registration step for new generated characters. It crops each proposed pose, applies one shared scale per row, centers the row on the cell axis, and fixes every foot baseline before the transition build.
 - Canvas and Three.js must read the same derived atlas and the same semantic frame index. Do not add renderer-specific frame offsets.
 
 Current authorities:
@@ -16,8 +17,9 @@ Current authorities:
 | Angela Merkel | `assets/sprite-sources/merkel-sprite-keys.png` | 6 × 5 at 256 px | 24 × 5 at 128 px | front, left, right, back, front walk |
 | Friedrich Merz | `assets/sprite-sources/border-pourer-sprite-keys.png` | 8 × 6 at 256 px | 32 × 6 at 128 px | front carry, right walk, side pour, left walk, back carry, front pour |
 | Bayern walker | `assets/sprite-sources/bayern-walker-sprite-keys.png` | 8 × 4 at 256 px | 32 × 4 at 128 px | front, right, back, left |
+| Alice Weidel satire | `assets/sprite-sources/alice-weidel-sprite-keys.png` | 8 × 2 at 256 px | 32 × 2 at 128 px | front/down, back/up |
 
-The 256 px source cells retain facial and costume detail. The 128 px runtime cells still exceed the largest in-game draw size while keeping all derived sheets within a 4096 px texture width for mobile/WebGL compatibility.
+The 256 px source cells retain facial and costume detail. The 128 px runtime cells stay near one source pixel per displayed pixel while keeping all derived sheets within a 4096 px texture width for mobile/WebGL compatibility. Runtime PNGs retain full RGBA; premultiplied-alpha downscaling and zeroed fully transparent RGB prevent dark or colored fringes. Canvas and Three.js both use smooth linear sampling.
 
 ## Fixed anatomical grid
 
@@ -67,6 +69,7 @@ The builder inserts three bidirectional motion-compensated in-betweens between e
 python tools/build-sprite-transitions.py assets/sprite-sources/merkel-sprite-keys.png assets/merkel-sprite.png --cols 6 --rows 5 --inbetweens 3 --audit-dir .sprite-audit/merkel
 python tools/build-sprite-transitions.py assets/sprite-sources/border-pourer-sprite-keys.png assets/border-pourer-sprite.png --cols 8 --rows 6 --inbetweens 3 --audit-dir .sprite-audit/merz
 python tools/build-sprite-transitions.py assets/sprite-sources/bayern-walker-sprite-keys.png assets/bayern-walker-sprite.png --cols 8 --rows 4 --inbetweens 3 --audit-dir .sprite-audit/bayern
+python tools/build-sprite-transitions.py assets/sprite-sources/alice-weidel-sprite-keys.png assets/alice-weidel-sprite.png --cols 8 --rows 2 --inbetweens 3 --audit-dir .sprite-audit/alice
 ```
 
 When the column count grows by the transition factor, multiply the runtime frame clock by the same factor. This keeps physical walking speed and stride duration unchanged instead of playing the expanded atlas four times slower.
@@ -75,11 +78,15 @@ When the column count grows by the transition factor, multiply the runtime frame
 
 The build's audit directory contains a full contact sheet, rapid GIF cycle, and color-coded onion overlay for every row. Review all three, then verify the game in desktop and mobile browser sizes.
 
+Run `python tools/verify-sprite-atlas.py <runtime.png> --cols <runtime-cols> --rows <rows>` for each built atlas. The verifier rejects a non-RGBA delivery, dirty RGB behind zero alpha, missing antialiased edges, empty or edge-touching cells, and excessive row center drift. `tests/sprite-pipeline.test.mjs` runs this check for every current character.
+
 - A rapid cycle must read as contact → compression → leg crossing → extension → opposite contact, with no held or reversed transition.
 - In the onion overlay, head and torso contours form one narrow registered band while legs and arms fan through their intended motion.
 - The loop seam must be as smooth as every internal transition.
 - Hair, faces, and costume edges must not pulse in scale or jump sideways.
 - Merz must retain complete scalp clearance and must never show a detached head below the character.
+- Fully transparent pixels must have zero RGB, partially transparent edges must remain antialiased, and runtime rendering must not dilate or replace authored alpha.
+- Compare display scale by visible body height rather than raw cell size. Every registered character uses the same foot anchor and a per-atlas draw scale that keeps body height consistent without per-frame offsets.
 - The browser console and asset network log must be clean; Canvas and Three.js must both show the derived sheet.
 
 Run `node --test tests/sprite-pipeline.test.mjs tests/denglisch-dialogue-sprites.test.mjs` after any source, atlas, grid, frame-rate, or loader change.
@@ -88,7 +95,7 @@ Run `node --test tests/sprite-pipeline.test.mjs tests/denglisch-dialogue-sprites
 
 1. Define row semantics and the runtime movement state before generating art.
 2. Generate or draw the required contact/down/passing/up key poses.
-3. Register every key on the 256 px anatomical grid and save one source sheet under `assets/sprite-sources/`.
+3. Run `tools/register-sprite-grid.py` when the proposal is a regular contact sheet, then inspect and save one registered 256 px key sheet under `assets/sprite-sources/`.
 4. Run the transition builder with three in-betweens and inspect all audit artifacts.
 5. Add one runtime atlas entry, row mapping, and frame clock; do not add per-frame offsets.
 6. Extend `tests/sprite-pipeline.test.mjs` with the source/runtime dimensions.

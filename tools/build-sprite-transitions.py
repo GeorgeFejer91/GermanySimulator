@@ -35,6 +35,22 @@ def alpha_bbox(frame: Image.Image) -> tuple[int, int, int, int] | None:
     return frame.getchannel("A").getbbox()
 
 
+def clean_transparent_pixels(frame: Image.Image, threshold: int = 3) -> Image.Image:
+    """Keep antialiased edges while making fully transparent RGB deterministic."""
+    cleaned = frame.convert("RGBA")
+    alpha = cleaned.getchannel("A").point(lambda value: 0 if value <= threshold else value)
+    cleaned.putalpha(alpha)
+    empty = alpha.point(lambda value: 255 if value == 0 else 0)
+    cleaned.paste((0, 0, 0, 0), mask=empty)
+    return cleaned
+
+
+def resize_premultiplied(frame: Image.Image, size: tuple[int, int]) -> Image.Image:
+    # Resize premultiplied color so transparent neighboring pixels cannot bleed
+    # dark or colored halos into the visible sprite edge.
+    return clean_transparent_pixels(frame.convert("RGBa").resize(size, Image.Resampling.LANCZOS).convert("RGBA"))
+
+
 def validate_key_frames(frames: list[list[Image.Image]], cell: int) -> None:
     for row_index, row in enumerate(frames):
         centers: list[float] = []
@@ -61,7 +77,12 @@ def load_frames(sheet: Image.Image, cols: int, rows: int, cell: int) -> list[lis
     if sheet.size != expected:
         raise ValueError(f"expected {expected[0]}x{expected[1]}, got {sheet.width}x{sheet.height}")
     return [
-        [sheet.crop((col * cell, row * cell, (col + 1) * cell, (row + 1) * cell)) for col in range(cols)]
+        [
+            clean_transparent_pixels(
+                sheet.crop((col * cell, row * cell, (col + 1) * cell, (row + 1) * cell))
+            )
+            for col in range(cols)
+        ]
         for row in range(rows)
     ]
 
@@ -95,7 +116,7 @@ def run_ffmpeg(sequence_dir: Path, output_dir: Path, cols: int, factor: int) -> 
     paths = sorted(output_dir.glob("*.png"))
     if len(paths) != target_count:
         raise RuntimeError(f"ffmpeg created {len(paths)} frames; expected {target_count}")
-    return [Image.open(path).convert("RGBA") for path in paths]
+    return [clean_transparent_pixels(Image.open(path).convert("RGBA")) for path in paths]
 
 
 def build_row(key_frames: list[Image.Image], inbetweens: int, temp_root: Path, row_index: int) -> list[Image.Image]:
@@ -176,15 +197,14 @@ def main() -> None:
         runtime_rows = [build_row(row, args.inbetweens, root, index) for index, row in enumerate(key_rows)]
     if args.runtime_cell != args.cell:
         runtime_rows = [
-            [frame.resize((args.runtime_cell, args.runtime_cell), Image.Resampling.LANCZOS) for frame in row]
+            [resize_premultiplied(frame, (args.runtime_cell, args.runtime_cell)) for frame in row]
             for row in runtime_rows
         ]
     atlas = assemble(runtime_rows, args.runtime_cell)
     args.output.parent.mkdir(parents=True, exist_ok=True)
-    # A shared 255-color RGBA palette keeps the expanded atlases economical
-    # without changing their dimensions or runtime sampling contract.
-    runtime_atlas = atlas.quantize(colors=255, method=Image.Quantize.FASTOCTREE, dither=Image.Dither.NONE)
-    runtime_atlas.save(args.output, optimize=True)
+    # Preserve full RGBA edges. Palette quantization collapses the antialiased
+    # alpha ramp and creates visible dark fringes once a cell is enlarged.
+    atlas.save(args.output, optimize=True)
     if args.audit_dir:
         write_audits(runtime_rows, args.audit_dir, args.output.stem, args.runtime_cell)
     print(
