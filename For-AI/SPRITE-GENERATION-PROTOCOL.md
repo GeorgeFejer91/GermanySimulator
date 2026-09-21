@@ -55,6 +55,61 @@ This is the same practical choice used by many conventional eight-frame walk
 cycles: stability and clear contact/passing phases take priority over a larger
 number of synthetic but anatomically unreliable pictures.
 
+## Matrix-interpolated limb authoring lane
+
+The Affect Tracker pattern is approved for future limb-rig authoring, with one
+important distinction: interpolate a compact anatomical parameter vector, not
+finished sprite pixels. Its transition matrix and its face interpolation are
+separate ideas. The matrix selects an ordered route through known states; the
+renderer evaluates coefficients between those states.
+
+For a walking character, use one cyclic phase lane per view direction. A
+preferred eight-anchor lane is:
+
+```text
+left contact -> left down -> left passing -> left up ->
+right contact -> right down -> right passing -> right up -> repeat
+```
+
+Each anchor stores the same named coefficient vector: root and pelvis position,
+pelvis/torso/head rotation, both shoulder/elbow/wrist chains, both
+hip/knee/ankle chains, hand/prop anchors, planted-foot identity, and limb depth
+order. Generate the 32 delivered cells by sampling between adjacent anchors
+with eased shortest-angle interpolation. An authored anchor must be reproduced
+exactly at its phase; interpolation may never average two whole RGBA figures.
+
+The following constraints are mandatory:
+
+1. A planted foot is a positional constraint. Solve root/pelvis compensation so
+   that foot remains fixed until toe-off; do not merely interpolate its screen
+   coordinates and create foot sliding.
+2. Joint angles may interpolate continuously, but planted-foot identity and
+   front/back limb ordering are discrete events. Swap depth only at the declared
+   crossing phase so a leg cannot dissolve through the other leg.
+3. Front, back, left, and right remain separate directional lanes. Never blend
+   a front bitmap into a back bitmap. Diagonal support, if added later, must be
+   a reviewed rig-space projection with its own anchors.
+4. The cell midpoint, ground line, head box, render scale, and transparent
+   background remain constant for all samples.
+5. Every generated sample must retain identity-matched layered artwork from the
+   same character. A rig assembled from another generation or a reconstructed
+   face is not an in-between.
+6. At every anchor phase, the rendered rig must pass a one-to-one overlay
+   comparison against its approved authored pose. Between anchors, the gate
+   must check joint limits, bone lengths, planted-foot drift, silhouette scale,
+   alpha cleanliness, and forward travel direction.
+
+This is analogous to the Affect Tracker's 21 x 21 coefficient cache: states may
+be pre-sampled for deterministic runtime playback, while the compact rig
+parameters remain the authoring authority. It is not analogous to crossfading
+four photographs. Whole-image blending creates double legs and ghosted faces
+and is forbidden for production walking cycles.
+
+Existing shipped characters remain on the whole-pose identity-locked lane
+until an identity-matched layered rig and its anchor overlay evidence exist.
+The rejected cutout-rig archive is not automatically eligible merely because
+this authoring lane exists.
+
 ## Direction contract
 
 Row names are semantic runtime authority:

@@ -43,6 +43,22 @@ the exact delivered atlas. Germany Simulator adds per-cell cryptographic
 identity proof. This favors stable eight-pose walking over synthetic high-frame
 counts that change faces, clothes, props, or anatomy.
 
+## 2026-09-22 — Limb interpolation uses anatomical coefficients
+
+The Affect Tracker's matrix pattern may be reused for future walking rigs, but
+only in parameter space. Direction-specific gait lanes select an ordered route
+through contact, down, passing, and up anchors; interpolation operates on a
+named vector of root, pelvis, joint, hand/prop, planted-foot, and depth-order
+values. It never crossfades complete character bitmaps. Planted feet are solved
+as positional constraints, joint rotations use eased shortest-angle paths, and
+limb depth swaps remain discrete events at declared crossing phases.
+
+The current identity-locked sprite set stays on complete authored poses until
+each character has an identity-matched layered rig whose key-phase renders
+match the approved source poses one-to-one. A future 32-cell coefficient cache
+must pass the same grid, alpha, scale, head, ground, direction, anatomy, and
+visual-contact-sheet gates before replacing any current atlas.
+
 ## 2026-09-22 — Continuous close-radius featured speech
 
 Merkel, Merz, the Bayern-Beauftragter, and Alice use a 176-unit audible radius
