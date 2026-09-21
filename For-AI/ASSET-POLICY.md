@@ -68,8 +68,8 @@ An asset change is complete only when the correct variant loads on desktop and m
 
 ## Procedural Wirtschaftswunder vortex
 
-- The construction-site vortex beside the western Schrebergarten is code-native Three.js geometry and shader work. It uses no bitmap, model, post-processing, or remote runtime asset: layered polar spiral materials, a dark funnel, construction barriers, and deterministic canvas-text signs provide the complete presentation.
-- `game.js` owns the site coordinates, collision radius, traffic diversion, spiral/sink progress, disappearance, and far-lane respawn. `world3d.js` projects that state, applies bounded car pitch/roll/scale, and uses small view-relative offsets between spiral layers for the depth/parallax illusion.
+- The construction-site vortex beside the western Schrebergarten is code-native Three.js geometry and shader work. It uses no bitmap, model, post-processing, or remote runtime asset: subdivided polar spiral surfaces provide continuous displacement ripples, while a dark funnel, pooled procedural lightning lines, construction barriers, and deterministic canvas-text signs complete the presentation.
+- `game.js` owns the site coordinates, collision radius, traffic diversion, spiral/sink/crush progress, one serial impact event per swallowed car, disappearance, far-lane respawn, and the deterministic Web Audio thunder-crunch routed through the shared sound-effect bus. `world3d.js` projects that state, applies bounded car pitch/roll/nonuniform crush scale, shifts spiral layers for the depth/parallax illusion, and turns each serial impact into a short shader shockwave, point flash, and lightning burst.
 - Keep the bold sign text exactly `WIRTSCHAFTSWUNDER!`. Preserve the short, cyclical traffic behavior rather than adding a physics engine, particle package, duplicate car pool, or authored vortex asset.
 
 ## Audio normalization and focus

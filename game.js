@@ -44,10 +44,11 @@ const BORDER_Y=1120+RAIL_GUTTER;
 const BORDER_BAND=72;
 const TRAFFIC_MIN_X=RAIL_GUTTER+150,TRAFFIC_MAX_X=RAIL_GUTTER+CITY.w-150,TRAFFIC_LANE_LENGTH=TRAFFIC_MAX_X-TRAFFIC_MIN_X,TRAFFIC_CAR_RADIUS=42,TRAFFIC_STOP_GAP=36,TRAFFIC_BRAKE_DISTANCE=190;
 const wirtschaftswunderSite=Object.freeze({...offsetWorldPoint({x:820,y:1500}),radius:155,collisionRadius:142,siteW:350,siteH:430,roadIndex:1,entryX:1180+RAIL_GUTTER});
+let wirtschaftswunderImpact=0;
 const trafficCars=[],trafficPalettes={beetle:["#b7a06b","#8e463b","#466d72","#d3c6a2","#6e7651"],trabant:["#d7cfaa","#9db5aa","#c8a4a0","#b8b7ad","#8fa4b8"]};
 for(let roadIndex=0;roadIndex<horizontalRoads.length;roadIndex++)for(const dir of [-1,1]){
  const road=horizontalRoads[roadIndex],laneY=road.y+road.h*(dir>0?.68:.32),kind=laneY>BORDER_Y?"beetle":"trabant",count=4;
- for(let i=0;i<count;i++){const color=trafficPalettes[kind][(i+roadIndex*2+(dir>0?1:0))%trafficPalettes[kind].length],offset=(i+(dir>0?.18:.62)+Math.random()*.34)/count;trafficCars.push({id:`verkehr-${roadIndex}-${dir}-${i}`,lane:`${roadIndex}:${dir}`,roadIndex,kind,color,x:TRAFFIC_MIN_X+offset*TRAFFIC_LANE_LENGTH,y:laneY,laneY,dir,angle:dir>0?0:Math.PI,cruiseSpeed:105+Math.random()*55,speed:80+Math.random()*32,acceleration:54+Math.random()*28,blockedByPlayer:false,queued:false,hold:0,honkCooldown:Math.random()*1.4,honkFlash:0,vortexPhase:"road",vortexT:0,vortexSink:0})}
+ for(let i=0;i<count;i++){const color=trafficPalettes[kind][(i+roadIndex*2+(dir>0?1:0))%trafficPalettes[kind].length],offset=(i+(dir>0?.18:.62)+Math.random()*.34)/count;trafficCars.push({id:`verkehr-${roadIndex}-${dir}-${i}`,lane:`${roadIndex}:${dir}`,roadIndex,kind,color,x:TRAFFIC_MIN_X+offset*TRAFFIC_LANE_LENGTH,y:laneY,laneY,dir,angle:dir>0?0:Math.PI,cruiseSpeed:105+Math.random()*55,speed:80+Math.random()*32,acceleration:54+Math.random()*28,blockedByPlayer:false,queued:false,hold:0,honkCooldown:Math.random()*1.4,honkFlash:0,vortexPhase:"road",vortexT:0,vortexSink:0,vortexCrush:0,vortexImpact:0})}
 }
 const borderGates=verticalRoads.map(r=>({x:r.x-55,w:r.w+110}));
 const borderSegments=[];
@@ -692,8 +693,14 @@ function nearestTrainDistance(){let nearest=Infinity;for(const train of trains)f
 function requestTrainAnnouncement(distance,recording="",priority=STIMULUS_PRIORITY.AMBIENT){if(!state.voiceOn||!state.started||state.gameOver)return;const selected=recording||nextVariant("train",TRAIN_ANNOUNCEMENT_AUDIO);if(recording)rememberVariant("train",TRAIN_ANNOUNCEMENT_AUDIO,recording);if(activeStimulus?.recording===selected)return;const queuedIndex=stimulusQueue.findIndex(item=>item.recording===selected);if(queuedIndex>=0){if(stimulusQueue[queuedIndex].priority>=priority)return;stimulusQueue.splice(queuedIndex,1)}queueStimulus({family:"train",priority,ambient:priority!==STIMULUS_PRIORITY.CRITICAL,isEligible:priority===STIMULUS_PRIORITY.CRITICAL?undefined:()=>state.started&&!state.modal&&!state.gameOver&&nearestTrainDistance()<820,recording:selected,done:()=>{trainAnnouncementNextAt=performance.now()+3500}})}
 function updateTrainAnnouncement(){const nearest=nearestTrainDistance();if(nearest<820&&state.started&&!state.modal&&!state.gameOver&&state.voiceOn&&performance.now()>=trainAnnouncementNextAt&&!hasStimulusFamily("train"))requestTrainAnnouncement(nearest)}
 function trafficForwardGap(car,targetX){const delta=car.dir>0?targetX-car.x:car.x-targetX;return delta>=0?delta:delta+TRAFFIC_LANE_LENGTH}
+function playWirtschaftswunderCrush(car){
+ const a=ensureAudio(),t=a.currentTime,out=a.createGain(),panner=a.createStereoPanner?.(),proximity=1-clamp((dist(player.x,player.y,wirtschaftswunderSite.x,wirtschaftswunderSite.y)-180)/1500,0,1),duration=1.25;
+ out.gain.setValueAtTime(.0001,t);out.gain.linearRampToValueAtTime(.27+proximity*.22,t+.018);out.gain.exponentialRampToValueAtTime(.0001,t+duration);if(panner){panner.pan.value=clamp((wirtschaftswunderSite.x-player.x)/700,-.7,.7);out.connect(panner).connect(soundEffectOutput())}else out.connect(soundEffectOutput());
+ const buffer=a.createBuffer(1,Math.floor(a.sampleRate*duration),a.sampleRate),data=buffer.getChannelData(0);let seed=(car.vortexImpact*2654435761)>>>0;for(let i=0;i<data.length;i++){seed=(Math.imul(seed,1664525)+1013904223)>>>0;data[i]=(seed/2147483648-1)*(1-i/data.length)}const noise=a.createBufferSource(),low=a.createBiquadFilter(),lowGain=a.createGain(),crack=a.createBiquadFilter(),crackGain=a.createGain();noise.buffer=buffer;low.type="lowpass";low.frequency.setValueAtTime(260,t);low.frequency.exponentialRampToValueAtTime(52,t+duration);low.Q.value=1.25;lowGain.gain.value=.9;crack.type="highpass";crack.frequency.value=1150;crackGain.gain.setValueAtTime(.72,t);crackGain.gain.exponentialRampToValueAtTime(.0001,t+.22);noise.connect(low).connect(lowGain).connect(out);noise.connect(crack).connect(crackGain).connect(out);noise.start(t);noise.stop(t+duration);
+ for(const [frequency,delay,length,type] of [[72,0,.76,"sawtooth"],[48,.04,1.08,"sine"],[132,.015,.19,"square"]]){const oscillator=a.createOscillator(),gain=a.createGain(),start=t+delay;oscillator.type=type;oscillator.frequency.setValueAtTime(frequency,start);oscillator.frequency.exponentialRampToValueAtTime(Math.max(24,frequency*.42),start+length);gain.gain.setValueAtTime(.0001,start);gain.gain.linearRampToValueAtTime(type==="square"?.2:.42,start+.012);gain.gain.exponentialRampToValueAtTime(.0001,start+length);oscillator.connect(gain).connect(out);oscillator.start(start);oscillator.stop(start+length+.02)}
+}
 function cubicPoint(a,b,c,d,t){const u=1-t;return u*u*u*a+3*u*u*t*b+3*u*t*t*c+t*t*t*d}
-function enterWirtschaftswunder(car){car.vortexPhase="approach";car.vortexT=0;car.vortexStartX=car.x;car.vortexStartY=car.y;car.blockedByPlayer=false;car.queued=false;car.hold=0}
+function enterWirtschaftswunder(car){car.vortexPhase="approach";car.vortexT=0;car.vortexStartX=car.x;car.vortexStartY=car.y;car.vortexCrush=0;car.blockedByPlayer=false;car.queued=false;car.hold=0}
 function updateWirtschaftswunderCar(car,dt){
  const site=wirtschaftswunderSite;
  if(car.vortexPhase==="approach"){
@@ -703,11 +710,11 @@ function updateWirtschaftswunderCar(car,dt){
  }
  if(car.vortexPhase==="spiral"){
   const t=car.vortexT=Math.min(1,car.vortexT+dt/4.2),ease=t*t*(3-2*t),angle=car.vortexAngle+t*Math.PI*12+t*t*Math.PI*8,radius=site.radius*(.94*(1-ease)+.018),previousX=car.x,previousY=car.y;
-  car.x=site.x+Math.cos(angle)*radius;car.y=site.y+Math.sin(angle)*radius;car.angle=Math.atan2(car.y-previousY,car.x-previousX);car.vortexSpin=angle;car.vortexSink=clamp((t-.52)/.48,0,1);
-  if(t===1){car.vortexPhase="swallowed";car.vortexRespawn=1.15+Math.random()*.9;car.vortexSink=1}return
+  car.x=site.x+Math.cos(angle)*radius;car.y=site.y+Math.sin(angle)*radius;car.angle=Math.atan2(car.y-previousY,car.x-previousX);car.vortexSpin=angle;car.vortexSink=clamp((t-.52)/.48,0,1);car.vortexCrush=clamp((t-.72)/.28,0,1);
+  if(t===1){car.vortexPhase="swallowed";car.vortexRespawn=1.15+Math.random()*.9;car.vortexSink=1;car.vortexImpact=++wirtschaftswunderImpact;playWirtschaftswunderCrush(car)}return
  }
  car.vortexRespawn-=dt;if(car.vortexRespawn>0)return;const spawnX=car.dir>0?TRAFFIC_MIN_X:TRAFFIC_MAX_X,clear=trafficCars.every(other=>other===car||other.lane!==car.lane||other.vortexPhase!=="road"||Math.abs(other.x-spawnX)>TRAFFIC_BRAKE_DISTANCE);if(!clear)return;
- car.x=spawnX;car.y=car.laneY;car.angle=car.dir>0?0:Math.PI;car.speed=70+Math.random()*25;car.vortexPhase="road";car.vortexT=0;car.vortexSink=0;car.vortexSpin=0
+ car.x=spawnX;car.y=car.laneY;car.angle=car.dir>0?0:Math.PI;car.speed=70+Math.random()*25;car.vortexPhase="road";car.vortexT=0;car.vortexSink=0;car.vortexSpin=0;car.vortexCrush=0
 }
 function updateTraffic(dt){
  for(const car of trafficCars){
