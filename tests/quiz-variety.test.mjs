@@ -19,4 +19,5 @@ assert.equal(approaches.berlin.length,32);
 assert.equal(approaches.germany.length,32);
 assert.match(game,/isDriving\?"FIKTIVE SPIELFRAGE · "/);
 assert.match(game,/isDriving\?"SPONTANE FAHRSCHUL-QUERPRÜFUNG"/);
+assert.match(game,/if\(n===state\.quizApproach\).*?if\(d<78&&!stimulusBusy\(\)\).*?else if\(d>=78\)moveGroundResponder/s,"a quiz NPC must follow the moving player and wait for queued dialogue to clear before opening its modal");
 console.log("Mixed civic/driving quiz and intrusive remark pools OK");
