@@ -106,6 +106,10 @@ The three atlas-backed roaming characters retain one final PNG atlas each and sh
 
 Merkel, Merz, and the Bayern-Beauftragter now replay only their own line or recording pools while the player remains inside a circular audio radius. Per-character cooldowns prevent chatter, a wider release radius prevents boundary jitter and rearms the next entry, and a busy serialized speech queue delays selection without storing a stale line. The spoken-audio/textbox lockstep and strict Merkel/Merz ownership rules remain authoritative.
 
+## 2026-09-21 — Bundestag landmark on the vacant southeast parcel
+
+The southeast Berlin block at city coordinates `x=7800, y=3370` now holds the Deutscher Bundestag landmark. The original texture-free GLB is a bounded 140,764-byte model with a ground-centered pivot and four reusable materials; it is loaded through the existing building-model map, recolored into the municipal palette, and keeps transparency only for its identifying glass dome. `game.js` remains the placement and collision authority, while `world3d.js` remains a renderer. Canvas, a missing GLB, or a failed WebGL loader still exposes the same labeled solid procedural-building footprint, so no gameplay rule depends on the enhancement.
+
 ## 2026-09-20 — Faster offenses and vehicle/air escalation
 
 Ordinary grass and off-crossing road violations now warn after 0.3 seconds and add a star after 2.6 continuous seconds; the police garden responds after two seconds. Running, repeated-surface cooldowns, petty audits, and active evasion are modestly faster so wanted stars accumulate more readily without becoming instantaneous.

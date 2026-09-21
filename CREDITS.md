@@ -8,6 +8,8 @@ Six building meshes are selected from Kenney's **City Kit Commercial 2.1** and r
 - Creator: Kenney, https://kenney.nl/
 - Local license copy: `assets/models/kenney-commercial/LICENSE.txt`
 
+The compact Reichstagsgebäude/Bundestag landmark is an original, texture-free project model built from geometric primitives. No third-party mesh or texture is included. Its proportions and identifying west portal, four corner towers, and modern glass dome were checked against the German Bundestag's public architecture material; build provenance and checksum are recorded in `assets/models/bundestag/LICENSES.md`.
+
 ## Perimeter trains and station announcements
 
 Twelve fictional `AMT-BAHN` consists use compact end cars from Kenney's

@@ -62,7 +62,8 @@ const buildings=[
 {id:"rathaus",name:"RATHAUS",x:2750,y:2320,w:700,h:430,hgt:205,doorX:3100,doorY:2780,sign:"BÜRGERNÄHE NACH TERMINVEREINBARUNG"},
 {id:"baumarkt",name:"DIN-BAUMARKT",x:3700,y:2320,w:650,h:430,hgt:160,doorX:4025,doorY:2780,sign:"NORMGERECHTE SCHRAUBEN"},
 {id:"akw",kind:"nuclear",name:"AKW · GESCHLOSSEN",x:4750,y:3370,w:850,h:420,hgt:155,doorX:5175,doorY:3820,sign:"STILLGELEGT · ZUGANG VERSIEGELT"},
-{id:"kohlewerk",kind:"coal",name:"KOHLEKRAFTWERK · IN BETRIEB",x:6250,y:3370,w:850,h:420,hgt:170,doorX:6675,doorY:3820,sign:"OFFEN · 24/7 · RAUCHFANG AKTIV"}
+{id:"kohlewerk",kind:"coal",name:"KOHLEKRAFTWERK · IN BETRIEB",x:6250,y:3370,w:850,h:420,hgt:170,doorX:6675,doorY:3820,sign:"OFFEN · 24/7 · RAUCHFANG AKTIV"},
+{id:"bundestag",name:"DEUTSCHER BUNDESTAG",x:7800,y:3370,w:920,h:420,hgt:205,doorX:8260,doorY:3820,sign:"REICHSTAGSGEBÄUDE · PLENARBEREICH"}
 ].map(building=>({...offsetWorldPoint(building),doorX:building.doorX+RAIL_GUTTER,doorY:building.doorY+RAIL_GUTTER}));
 const schreber=offsetWorldPoint({x:90,y:1210,w:560,h:570}),policeGarden=offsetWorldPoint({x:2850,y:3250,w:1500,h:650}),policePath={x1:4250+RAIL_GUTTER,y1:3850+RAIL_GUTTER,x2:3650+RAIL_GUTTER,y2:3250+RAIL_GUTTER,width:130};
 const BORDER_Y=1120+RAIL_GUTTER,BORDER_BAND=72,crossingSigns=[],borderGates=roads.filter(r=>r.h===CITY.h).map(r=>({x:r.x-55,w:r.w+110})),borderSegments=[];
@@ -105,5 +106,5 @@ let last=performance.now();function loop(t){const dt=Math.min(.05,(t-last)/1000)
 })();
 </script>
 <script type="importmap">{"imports":{"three":"https://cdn.jsdelivr.net/npm/three@0.186.0/build/three.module.js"}}</script>
-<script type="module" src="./world3d.js?v=20260921-03"></script>
+<script type="module" src="./world3d.js?v=20260921-04"></script>
 </body></html>

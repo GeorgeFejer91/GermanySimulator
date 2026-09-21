@@ -44,6 +44,7 @@ An asset change is complete only when the correct variant loads on desktop and m
 
 - Root `assets/models/` is the only authority for shipped model files.
 - The selected Kenney City Kit Commercial meshes are local CC0 GLB files; retain their local license and source record.
+- The southeast Berlin parcel uses the original texture-free `assets/models/bundestag/bundestag.glb` landmark. Keep its ground-centered pivot, restrained stone/glass materials, local provenance and checksum record, and the procedural-building fallback.
 - `world3d.js` may recolor model materials at runtime to the restrained concrete-gray bureaucracy palette. Do not restore the pack's bright commercial colors by default.
 - GLB loading is an enhancement. A missing model keeps its procedural building, and failure of the WebGL renderer returns to the canvas world without changing gameplay state.
 - Keep the selected model set bounded and measure total transfer size before adding another pack.

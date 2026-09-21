@@ -67,7 +67,8 @@ const GLTF_LOADER_URL="https://cdn.jsdelivr.net/npm/three@0.186.0/examples/jsm/l
     finanzamt:"./assets/models/kenney-commercial/building-c.glb",
     faxamt:"./assets/models/kenney-commercial/building-h.glb",
     post:"./assets/models/kenney-commercial/building-n.glb",
-    rathaus:"./assets/models/kenney-commercial/building-m.glb"
+    rathaus:"./assets/models/kenney-commercial/building-m.glb",
+    bundestag:"./assets/models/bundestag/bundestag.glb"
   };
   const powerModels={
     coalBuilding:"./assets/models/power-plants/coal-building.glb",
@@ -87,6 +88,7 @@ const GLTF_LOADER_URL="https://cdn.jsdelivr.net/npm/three@0.186.0/examples/jsm/l
   }
   function grayMaterial(source,nodeName){
     const c=source&&source.color,lum=c?(c.r*.2126+c.g*.7152+c.b*.0722):.5,name=((source&&source.name)||"")+" "+(nodeName||"");
+    if(/dome.?glass/i.test(name))return new T.MeshStandardMaterial({color:0x789095,roughness:.2,metalness:.08,transparent:true,opacity:.5,depthWrite:false,side:T.DoubleSide});
     let color=lum<.24?0x343634:lum<.48?0x5d5d58:lum<.72?0x77766f:0x9a9890;
     if(c&&c.b>c.r*1.12&&c.b>c.g*1.04)color=0x3d4445;
     if(/window|glass/i.test(name))color=0x394041;

@@ -489,7 +489,8 @@ const buildings=[
 {id:"faxlager",name:"BEZIRKSFAXLAGER",x:6250,y:2320,w:850,h:430,hgt:175,doorX:6675,doorY:2780,sign:"PAPIERWEG BESCHLEUNIGT"},
 {id:"reinigung",name:"STADTREINIGUNG",x:7800,y:2320,w:920,h:430,hgt:170,doorX:8260,doorY:2780,sign:"TRENNUNG VOR REINIGUNG"},
 {id:"akw",kind:"nuclear",name:"AKW · GESCHLOSSEN",x:4750,y:3370,w:850,h:420,hgt:155,doorX:5175,doorY:3820,sign:"STILLGELEGT · ZUGANG VERSIEGELT"},
-{id:"kohlewerk",kind:"coal",name:"KOHLEKRAFTWERK · IN BETRIEB",x:6250,y:3370,w:850,h:420,hgt:170,doorX:6675,doorY:3820,sign:"OFFEN · 24/7 · RAUCHFANG AKTIV"}
+{id:"kohlewerk",kind:"coal",name:"KOHLEKRAFTWERK · IN BETRIEB",x:6250,y:3370,w:850,h:420,hgt:170,doorX:6675,doorY:3820,sign:"OFFEN · 24/7 · RAUCHFANG AKTIV"},
+{id:"bundestag",name:"DEUTSCHER BUNDESTAG",x:7800,y:3370,w:920,h:420,hgt:205,doorX:8260,doorY:3820,sign:"REICHSTAGSGEBÄUDE · PLENARBEREICH"}
 ].map(building=>({...offsetWorldPoint(building),doorX:building.doorX+RAIL_GUTTER,doorY:building.doorY+RAIL_GUTTER}));
 const grassAreas=[],walkways=[];
 for(const b of buildings){
