@@ -10,9 +10,9 @@ assert.equal(new Set(clips.map(([,text])=>text)).size,8,"Bayern transcripts must
 for(const [,text,path] of clips){assert.ok(text.trim(),`empty transcript for ${path}`);assert.ok(existsSync(join(root,path.slice(2))),`missing ${path}`)}
 
 for(const [file,width,height] of [
- ["bayern-walker-sprite.png",2048,1024],
- ["border-pourer-sprite.png",2048,1536],
- ["merkel-sprite.png",1536,1280],
+ ["bayern-walker-sprite.png",4096,512],
+ ["border-pourer-sprite.png",4096,768],
+ ["merkel-sprite.png",3072,640],
 ]){
  const png=readFileSync(join(root,"assets",file));
  assert.equal(png.readUInt32BE(16),width,`${file} has the expected expanded column count`);

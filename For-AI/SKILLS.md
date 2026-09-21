@@ -34,6 +34,7 @@ Installed source snapshots (2026-09-19):
 | --- | --- | --- |
 | Any code change, plus backend efficiency, infrastructure, hosting architecture, asset pipelines, and economic asset usage | `$ponytail` | Required. Apply its smallest-working-change ladder and keep the static GitHub Pages deployment simple. |
 | New raster billboards, textures, period artwork, or bitmap variants | `$imagegen` | Use for generated raster art; keep final project-bound files inside this repository. Do not use it for simple SVG or code-native geometry. |
+| Moving bitmap characters, sprite atlases, gait keys, or transition frames | `$imagegen`, `$game-engine`, and `$game-playtest` | Follow `SPRITE-GENERATION-PROTOCOL.md`: generated frames are proposals, the registered key sheet is source authority, the derived atlas is runtime authority, and desktop/mobile rapid-cycle QA is mandatory. |
 | HTML, CSS, HUD, menus, responsive behavior, or other frontend UI work | `$uncodixfy` | Preserve the existing game-specific identity and avoid generic generated UI patterns. |
 | Architecture, authority boundaries, durable project memory, manifests, and handoff surfaces | `$system-engineering` | Use for lasting structural decisions and update `DECISIONS.md`. |
 | Current public facts, external references, historical research, or documentation lookup | `$multi-source-web-search` | Prefer primary sources, open sources before citing, and run a blind-spot pass for nontrivial research. |

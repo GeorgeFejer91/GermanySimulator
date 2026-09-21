@@ -145,17 +145,17 @@ const assetSources={
  wartemarke:"./assets/wartemarke.svg",rasen:"./assets/rasen-verboten.svg",muell:"./assets/muelltrennung.svg",
  db:"./assets/db-verspaetung.svg",baustelle:"./assets/baustelle.svg",fahrrad:"./assets/fahrrad.svg",kaffee:"./assets/kaffeeautomat.svg",pfandautomat:"./assets/pfandautomat.svg",
  faxbillboard:"./assets/fax-billboard.svg",faxgeraet:"./assets/faxgeraet.svg",faxkiosk:"./assets/telefon-fax-kiosk.svg",
- merkel:"./assets/merkel-cartoon.svg",merkelSprite:"./assets/merkel-sprite.png?v=20260920-2",bayernSprite:"./assets/bayern-walker-sprite.png?v=20260920-2",polizeigarten:"./assets/polizei-garten-schild.svg",borderPourer:"./assets/border-pourer-sprite.png?v=20260920-2"
+ merkel:"./assets/merkel-cartoon.svg",merkelSprite:"./assets/merkel-sprite.png?v=20260921-2",bayernSprite:"./assets/bayern-walker-sprite.png?v=20260921-2",polizeigarten:"./assets/polizei-garten-schild.svg",borderPourer:"./assets/border-pourer-sprite.png?v=20260921-2"
 };
 if(desktopBillboards.matches)for(const motif of faxBillboardPool)assetSources[motif.asset]=motif.src;
 const assets={};for(const key in assetSources){const img=new Image();img.src=assetSources[key];assets[key]=img}
 const npcSpriteAtlases={
- merkel:{canvas:null,cols:6,rows:5,pad:0},
- bayern:{canvas:null,cols:8,rows:4,pad:0,smoothing:false},
- borderPourer:{canvas:null,cols:8,rows:6,pad:0}
+ merkel:{canvas:null,cols:24,rows:5,pad:0},
+ bayern:{canvas:null,cols:32,rows:4,pad:0,smoothing:false},
+ borderPourer:{canvas:null,cols:32,rows:6,pad:0}
 },borderPourerSprite=npcSpriteAtlases.borderPourer;
 function insetSpriteSheet(source,atlas){
- const cell=256,c=document.createElement("canvas"),g=c.getContext("2d"),sw=source.width/atlas.cols,sh=source.height/atlas.rows,pad=atlas.pad||0;c.width=atlas.cols*cell;c.height=atlas.rows*cell;g.imageSmoothingEnabled=atlas.smoothing!==false;
+ const cell=Math.round(source.width/atlas.cols),c=document.createElement("canvas"),g=c.getContext("2d"),sw=source.width/atlas.cols,sh=source.height/atlas.rows,pad=atlas.pad||0;c.width=atlas.cols*cell;c.height=atlas.rows*cell;g.imageSmoothingEnabled=atlas.smoothing!==false;
  for(let row=0;row<atlas.rows;row++)for(let col=0;col<atlas.cols;col++){const sy=atlas.yBounds?.[row]??row*sh,sourceHeight=atlas.yBounds?atlas.yBounds[row+1]-sy:sh;g.drawImage(source,col*sw,sy,sw,sourceHeight,col*cell+pad,row*cell+pad,cell-pad*2,cell-pad*2)}
  atlas.canvas=c
 }
@@ -742,7 +742,7 @@ function proximityAudioReady(n){
 }
 function updateMerkel(n,dt){
  const target=n.route[n.target],dx=target[0]-n.x,dy=target[1]-n.y,d=Math.hypot(dx,dy)||1,speed=38;n.facingX=dx/d;n.facingY=dy/d;moveGroundResponder(n,n.facingX*speed*dt,n.facingY*speed*dt,13);n.animTime+=dt;
- if(Math.abs(dx)>Math.abs(dy))n.spriteRow=dx<0?1:2;else n.spriteRow=dy<0?3:4;n.spriteFrame=Math.floor(n.animTime*8)%npcSpriteAtlases.merkel.cols;
+ if(Math.abs(dx)>Math.abs(dy))n.spriteRow=dx<0?1:2;else n.spriteRow=dy<0?3:4;n.spriteFrame=Math.floor(n.animTime*32)%npcSpriteAtlases.merkel.cols;
  if(d<10)n.target=(n.target+1)%n.route.length;
  if(proximityAudioReady(n)){const line=merkelBehind(n)?MERKEL_BEHIND_LINE:nextPoliticianLine(n);n.barkAt=performance.now()+(line===MERKEL_BEHIND_LINE?6500:8500);if(line)showWorldBark(n.name,line,false,"","",{family:"politician:merkel",priority:STIMULUS_PRIORITY.AMBIENT,ambient:true,isEligible:()=>dist(player.x,player.y,n.x,n.y)<(n.audioReleaseRadius||SPRITE_AUDIO_RELEASE_RADIUS)})}
 }
@@ -754,21 +754,21 @@ function updateBayern(n,dt){
  if(n.hangTimer>0){n.hangTimer-=dt;n.spriteFrame=0;return}
  const target=bayernWaypoints[n.targetSpot],dx=target.x-n.x,dy=target.y-n.y,d=Math.hypot(dx,dy)||1,speed=52;n.animTime+=dt;
  if(d<7){n.spot=n.targetSpot;n.hangTimer=2+Math.random()*4;chooseBayernTarget(n);n.spriteFrame=2;return}
- moveGroundResponder(n,dx/d*speed*dt,dy/d*speed*dt,13);n.spriteRow=Math.abs(dx)>Math.abs(dy)?(dx>0?1:3):(dy>0?0:2);n.spriteFrame=Math.floor(n.animTime*10)%npcSpriteAtlases.bayern.cols
+ moveGroundResponder(n,dx/d*speed*dt,dy/d*speed*dt,13);n.spriteRow=Math.abs(dx)>Math.abs(dy)?(dx>0?1:3):(dy>0?0:2);n.spriteFrame=Math.floor(n.animTime*40)%npcSpriteAtlases.bayern.cols
 }
 function updateBorderPourer(n,dt){
  n.animTime+=dt;n.stateTimer-=dt;
  if(n.state==="sideWalk"){
-  moveGroundResponder(n,n.dir*68*dt,(BORDER_Y+n.lane*32-n.y)*Math.min(1,dt*7),13);n.spriteRow=n.dir>0?1:3;n.spriteFrame=Math.floor(n.animTime*10)%borderPourerSprite.cols;n.spriteFlip=false;
+  moveGroundResponder(n,n.dir*68*dt,(BORDER_Y+n.lane*32-n.y)*Math.min(1,dt*7),13);n.spriteRow=n.dir>0?1:3;n.spriteFrame=Math.floor(n.animTime*40)%borderPourerSprite.cols;n.spriteFlip=false;
   if(n.stateTimer<=0){n.state="sidePour";n.stateTimer=1.05;n.animTime=0}
  }else if(n.state==="sidePour"){
-  moveGroundResponder(n,n.dir*44*dt,(BORDER_Y+n.lane*24-n.y)*Math.min(1,dt*8),13);n.spriteRow=2;n.spriteFrame=Math.floor(n.animTime*9)%borderPourerSprite.cols;n.spriteFlip=n.dir<0;
+  moveGroundResponder(n,n.dir*44*dt,(BORDER_Y+n.lane*24-n.y)*Math.min(1,dt*8),13);n.spriteRow=2;n.spriteFrame=Math.floor(n.animTime*36)%borderPourerSprite.cols;n.spriteFlip=n.dir<0;
   if(n.stateTimer<=0){n.lane*=-1;n.state="cross";n.stateTimer=.72;n.animTime=0}
  }else if(n.state==="cross"){
-  moveGroundResponder(n,n.dir*26*dt,(BORDER_Y+n.lane*34-n.y)*Math.min(1,dt*6.5),13);n.spriteRow=n.lane>0?0:4;n.spriteFrame=Math.floor(n.animTime*10)%borderPourerSprite.cols;n.spriteFlip=false;
+  moveGroundResponder(n,n.dir*26*dt,(BORDER_Y+n.lane*34-n.y)*Math.min(1,dt*6.5),13);n.spriteRow=n.lane>0?0:4;n.spriteFrame=Math.floor(n.animTime*40)%borderPourerSprite.cols;n.spriteFlip=false;
   if(n.stateTimer<=0){n.state=n.lane<0?"frontPour":"sideWalk";n.stateTimer=n.lane<0?.95:1.25;n.animTime=0}
  }else if(n.state==="frontPour"){
-  moveGroundResponder(n,n.dir*18*dt,(BORDER_Y-30-n.y)*Math.min(1,dt*8),13);n.spriteRow=5;n.spriteFrame=Math.floor(n.animTime*9)%borderPourerSprite.cols;n.spriteFlip=false;
+  moveGroundResponder(n,n.dir*18*dt,(BORDER_Y-30-n.y)*Math.min(1,dt*8),13);n.spriteRow=5;n.spriteFrame=Math.floor(n.animTime*36)%borderPourerSprite.cols;n.spriteFlip=false;
   if(n.stateTimer<=0){n.state="sideWalk";n.stateTimer=1.25;n.animTime=0}
  }
  if(n.x<=n.minX||n.x>=n.maxX){n.x=clamp(n.x,n.minX,n.maxX);n.dir*=-1;n.state="sidePour";n.stateTimer=.9;n.animTime=0}

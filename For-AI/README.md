@@ -6,6 +6,7 @@ Required starting point: [`AGENT-START.md`](./AGENT-START.md)
 
 - [`GAMEPLAY.md`](./GAMEPLAY.md): authoritative gameplay rules, mission flow, controls, and satire boundaries.
 - [`ASSET-POLICY.md`](./ASSET-POLICY.md): desktop/mobile asset strategy and YAGNI rules.
+- [`SPRITE-GENERATION-PROTOCOL.md`](./SPRITE-GENERATION-PROTOCOL.md): fixed anatomical grid, gait keys, transition build, and visual QA for moving bitmap characters.
 - [`SKILLS.md`](./SKILLS.md): required skill routing for different kinds of work.
 - [`DECISIONS.md`](./DECISIONS.md): durable project decisions and their rationale.
 - [`VOICE-SYNTH-PROTOCOL.md`](./VOICE-SYNTH-PROTOCOL.md): local XTTS-v2 voice-clone workflow, reference bank, batch-driving, and validation.
