@@ -20,9 +20,15 @@ Desktop may use high-resolution Weimar-era-inspired billboard art. Mobile uses m
 
 The game’s satire is rooted in love for German culture and German self-irony. Its comic target is the friction of everyday bureaucracy and social interaction, exaggerated into a world where characters cite rules instead of naming their real concern, insist that their interpretation is the only valid one, and reconsider only when confronted by a lawyer, supervisor, office, or other accepted authority. Fax machines, printed documents, stamps, signatures, appointments, circular procedures, and strange German sayings are core motifs. The marked in-game region controls delivery: Berlin uses deliberately awkward Denglisch versions of the sayings, while the Germany side uses fully German dialogue. This voice applies to all dialogue while remaining fictional and avoiding the claim that all German people or real institutions behave this way.
 
-## 2026-09-19 — Progressive WebGL world with 2.5D fallback
+## 2026-09-19 — Progressive WebGL world with 2.5D fallback (superseded 2026-09-21)
 
 `game.js` remains the sole owner of gameplay state, movement, collisions, missions, and interactions. It exposes a small read-only rendering bridge consumed by `world3d.js`. When Three.js is available, the root game projects that state into the WebGL world and loads a bounded set of local CC0 building meshes; if Three.js or the model loader fails, the existing canvas renderer and procedural buildings remain playable. The renderer fades only a building lying between the camera and player, keeping the character legible without flattening the whole city. The standalone `3d.html` route remains a renderer-focused diagnostic surface, not a second gameplay authority.
+
+## 2026-09-21 — Required 3D renderer and road-safe tree authority
+
+The canonical root game now has one presentation path: `game.js` owns simulation state and `world3d.js` renders it through required Three.js/WebGL. The former Canvas world is retired, is never called as a loader or WebGL fallback, and its SVG world-art pool is no longer preloaded. A renderer failure produces a blocking retry notice. Local GLBs remain first choice; failure of one individual model may use a code-native 3D stand-in without changing gameplay. Registered PNG character atlases remain the deliberate bitmap exception and are mapped onto Three.js sprites from one staging canvas.
+
+Tree placement moved out of renderer-local coordinates into canonical world data. Every tree receives the same 560-unit rail-gutter offset as the city, maintains a 48-unit minimum road clearance, is exposed to both the root renderer and `3d.html`, and participates in ground collision. The layout test evaluates every tree against every expanded road rectangle so a future road or placement edit cannot silently put foliage back into traffic.
 
 ## 2026-09-19 — Crossable regional Brandmauer
 

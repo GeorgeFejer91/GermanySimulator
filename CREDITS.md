@@ -18,8 +18,8 @@ source is licensed CC BY-SA 4.0 by Ivan Edward Sutherland and contributors. It
 was converted from STL to GLB, changed from Z-up to Y-up, normalized to a
 2.35-metre length, centered and grounded, and assigned a neutral material that
 the game recolors per car. Game-authored wheels, hubs, glazing, bumpers, and
-lamps complete the historic body scan at runtime. The Canvas and missing-model paths retain a
-procedural silhouette; Deutschland-side Trabants remain code-native. No
+lamps complete the historic body scan at runtime. A missing model retains a
+procedural 3D silhouette; Deutschland-side Trabants remain code-native. No
 manufacturer logo or texture is included.
 
 - Source: https://commons.wikimedia.org/wiki/File:Utah_VW_Bug.stl
@@ -36,8 +36,8 @@ limited to this noncommercial game; modifications and complete LDraw creator
 attribution are recorded beside the GLB. The game clones these local assets
 across two continuous rounded perimeter loops around the 10,960 × 5,360 world.
 A 560-unit playable gutter separates the original city footprint from every
-side of both tracks. The Canvas renderer keeps a
-procedural red-and-white fallback with the same long-car dimensions.
+side of both tracks. Missing individual train models keep a procedural 3D
+red-and-white stand-in with the same long-car dimensions.
 
 - Source: https://kenney.nl/assets/train-kit
 - Creator: Kenney, https://kenney.nl/

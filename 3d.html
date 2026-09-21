@@ -39,7 +39,11 @@ html,body,#app{margin:0;width:100%;height:100%;overflow:hidden;background:#77756
 const CITY={w:9840,h:4240},RAIL_GUTTER=560,WORLD={w:CITY.w+RAIL_GUTTER*2,h:CITY.h+RAIL_GUTTER*2},offsetWorldPoint=item=>({...item,x:item.x+RAIL_GUTTER,y:item.y+RAIL_GUTTER}),player={x:5960+RAIL_GUTTER,y:3900+RAIL_GUTTER,facing:0},keys={},police=[];
 const horizontalRoads=[{x:RAIL_GUTTER,y:820+RAIL_GUTTER,w:CITY.w,h:260},{x:RAIL_GUTTER,y:2000+RAIL_GUTTER,w:CITY.w,h:240},{x:RAIL_GUTTER,y:3000+RAIL_GUTTER,w:CITY.w,h:220}];
 const verticalRoads=[{x:1050+RAIL_GUTTER,y:RAIL_GUTTER,w:260,h:CITY.h},{x:2400+RAIL_GUTTER,y:RAIL_GUTTER,w:220,h:CITY.h},{x:4400+RAIL_GUTTER,y:RAIL_GUTTER,w:180,h:CITY.h},{x:5850+RAIL_GUTTER,y:RAIL_GUTTER,w:220,h:CITY.h},{x:7350+RAIL_GUTTER,y:RAIL_GUTTER,w:220,h:CITY.h},{x:9000+RAIL_GUTTER,y:RAIL_GUTTER,w:180,h:CITY.h}];
-const roads=[...horizontalRoads,...verticalRoads],crossings=[];
+const roads=[...horizontalRoads,...verticalRoads],crossings=[],trees=[
+[260,1750],[800,1760],[2700,650],[3400,680],[4300,650],[5000,680],[6500,650],[8100,680],
+[2700,1800],[4200,1800],[5200,1800],[6800,1800],[8400,1800],[2800,2860],[4200,2860],[5200,2860],
+[6800,2860],[8400,2860],[700,3500],[1800,3500],[4650,3500],[6180,3500],[7700,3500],[9300,3500]
+].map(([x,y])=>offsetWorldPoint({x,y}));
 for(const h of horizontalRoads)for(const v of verticalRoads){crossings.push({x:v.x,y:h.y-80,w:v.w,h:80});crossings.push({x:v.x-90,y:h.y,w:90,h:h.h})}
 crossings.push(...[{x:3590,y:2985,w:120,h:270},{x:6550,y:2985,w:120,h:270},{x:8200,y:2985,w:120,h:270}].map(offsetWorldPoint));
 const trafficLights=[];
@@ -89,7 +93,7 @@ const npcs=[
 {x:4620,y:3270,special:"merkel",route:[[4620,3270],[5750,3270],[6150,3270],[7200,3270],[7200,3880],[6120,3880],[5750,3880],[4620,3880]],target:1,facingX:1,facingY:0,animTime:0,spriteRow:2,spriteFrame:1,line:0}
 ].map(n=>({...offsetWorldPoint(n),min:n.min==null?n.min:n.min+RAIL_GUTTER,max:n.max==null?n.max:n.max+RAIL_GUTTER,route:n.route?.map(([x,y])=>[x+RAIL_GUTTER,y+RAIL_GUTTER])}));
 const pickups=[{x:1980,y:870,type:"bratwurst",taken:false},{x:2110,y:880,type:"currywurst",taken:false},{x:4100,y:900,type:"brezel",taken:false},{x:3000,y:1910,type:"pfand",taken:false}].map(offsetWorldPoint);
-window.Germany3DBridge={WORLD,player,roads,crossings,crossingSigns,trafficLights,buildings,schreber,policeGarden,policePath,BORDER_Y,BORDER_BAND,borderGates,borderSegments,railLoops,railTracks,trains,fireSources,props,pickups,getNPCs:()=>npcs,getPolice:()=>police};
+window.Germany3DBridge={WORLD,player,roads,crossings,crossingSigns,trafficLights,buildings,trees,schreber,policeGarden,policePath,BORDER_Y,BORDER_BAND,borderGates,borderSegments,railLoops,railTracks,trains,fireSources,props,pickups,getNPCs:()=>npcs,getPolice:()=>police};
 const dist=(a,b,c,d)=>Math.hypot(a-c,b-d);
 const MERKEL_AUDIO_LINE="Wir schaffen das.",merkelRecording=new Audio("./assets/merkel-wir-schaffen-das.mp3");merkelRecording.preload="auto";
 const merkelLines=[MERKEL_AUDIO_LINE,"Wir brauchen kein Abschaltgesetz, sondern einen Ausstieg mit Augenmaß.","Ich habe eine neue Bewertung vorgenommen.","Die Risiken der Kernenergie sind nicht beherrschbar.","Wer das erkennt, muss eine neue Bewertung vornehmen.","Wir müssen uns darauf einstellen, dass wir schneller aussteigen.","Wir wollen das schaffen."];
@@ -106,5 +110,5 @@ let last=performance.now();function loop(t){const dt=Math.min(.05,(t-last)/1000)
 })();
 </script>
 <script type="importmap">{"imports":{"three":"https://cdn.jsdelivr.net/npm/three@0.186.0/build/three.module.js"}}</script>
-<script type="module" src="./world3d.js?v=20260921-07"></script>
+<script type="module" src="./world3d.js?v=20260921-08"></script>
 </body></html>

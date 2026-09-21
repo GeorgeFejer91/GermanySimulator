@@ -4,9 +4,9 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover,user-scalable=no">
   <meta name="theme-color" content="#77756f">
-  <meta name="description" content="Germany Simulator — a 2.5D bureaucratic open-world parody.">
+  <meta name="description" content="Germany Simulator — a 3D bureaucratic open-world parody.">
   <meta property="og:title" content="Germany Simulator · Grand Theft Amt">
-  <meta property="og:description" content="A 2.5D bureaucratic open-world parody. The streets are gray. The forms are beige. The lawn is forbidden.">
+  <meta property="og:description" content="A 3D bureaucratic open-world parody. The streets are gray. The forms are beige. The lawn is forbidden.">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://germanysimulator.de/">
   <meta property="og:site_name" content="Germany Simulator">
@@ -18,16 +18,16 @@
   <meta property="og:image:alt" content="Germany Simulator opening menu featuring a fax machine jammed with a bratwurst.">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Germany Simulator · Grand Theft Amt">
-  <meta name="twitter:description" content="A 2.5D bureaucratic open-world parody. The streets are gray. The forms are beige. The lawn is forbidden.">
+  <meta name="twitter:description" content="A 3D bureaucratic open-world parody. The streets are gray. The forms are beige. The lawn is forbidden.">
   <meta name="twitter:image" content="https://germanysimulator.de/assets/social-preview.png">
   <meta name="twitter:image:alt" content="Germany Simulator opening menu featuring a fax machine jammed with a bratwurst.">
   <link rel="icon" href="./assets/faxgeraet.svg" type="image/svg+xml">
   <title>Germany Simulator · EC Games</title>
-  <link rel="stylesheet" href="./styles.css?v=20260921-2">
+  <link rel="stylesheet" href="./styles.css?v=20260921-3">
 </head>
 <body>
 <main id="app">
-  <canvas id="game" aria-label="Germany Simulator pseudo-3D game world"></canvas>
+  <canvas id="game" hidden aria-hidden="true"></canvas>
   <header class="hud top">
     <div class="logo"><b>GERMANY</b><span>SIMULATOR</span><small>GRAND THEFT AMT</small></div>
     <div class="wanted"><small>ORDNUNGSSTATUS</small><div id="stars"></div><em id="offence">AKTENLAGE: UNAUFFÄLLIG</em></div>
@@ -53,7 +53,7 @@
   <section id="end-modal" class="modal" hidden><div class="end-card"><small id="end-kicker">VERWALTUNGSVORGANG</small><h1 id="end-title"></h1><p id="end-copy"></p><button id="restart" type="button">NOCH EIN VORGANG</button></div></section>
   <section id="intro" class="intro"><div class="intro-noise"></div><div class="intro-card">
       <p class="eyebrow">EC GAMES PRESENTS</p><h1><span>GERMANY</span><b><span id="simulator-s">S</span>IMULATOR</b></h1><p class="strap">GRAND THEFT AMT</p>
-      <p class="lede">A 2.5D open-world administration simulator. The streets are gray. The forms are beige. The lawn is forbidden.</p>
+      <p class="lede">A 3D open-world administration simulator. The streets are gray. The forms are beige. The lawn is forbidden.</p>
       <div class="language-choice" role="group" aria-label="Choose language"><span>SPRACHE / LANGUAGE</span><div id="language-options" class="language-options"><button class="lang active" data-lang="de" type="button">Deutsch</button><button class="lang" data-lang="en" type="button">English</button></div><output id="language-praise" hidden>Gute Wahl!</output></div>
       <figure class="intro-satire"><img class="fax-wurst-art" src="./assets/fax-wurst.svg" alt="A bratwurst jammed into a fax machine"><figcaption>„Hast du schon Kehrwoche gemacht?“</figcaption></figure>
       <button id="start" class="german-start" type="button">SPIEL STARTEN</button>
@@ -72,7 +72,7 @@
   <footer><span>WASD / ARROWS · MOVE</span><span>SHIFT · SUSPICIOUSLY FAST</span><span>E · INTERACT</span><span>§ / Q · GESETZ ZITIEREN</span><button id="mute" type="button">MUSIC ON</button><button id="voice-toggle" type="button">VOICE ON</button><a href="https://ec-games.space/">EC GAMES</a><span>SATIRE · GAME RULES · NOT LEGAL OR IMMIGRATION ADVICE</span></footer>
 </main>
 <script type="importmap">{"imports":{"three":"https://cdn.jsdelivr.net/npm/three@0.186.0/build/three.module.js"}}</script>
-<script src="./game.js?v=20260921-12"></script>
-<script type="module" src="./world3d.js?v=20260921-07"></script>
+<script src="./game.js?v=20260921-13"></script>
+<script type="module" src="./world3d.js?v=20260921-08"></script>
 </body>
 </html>

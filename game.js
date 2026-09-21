@@ -145,15 +145,7 @@ const props=[
  {x:8750,y:1880,asset:"pfandautomat",w:54,h:70,id:"pfandautomat-ost",label:"PFANDAUTOMAT"},
  {x:7600,y:3500,asset:"gartenzwerg",w:44,h:66},{x:8750,y:3420,asset:"gartenzwerg",w:44,h:66},{x:9400,y:3650,asset:"gartenzwerg",w:44,h:66}
 ].map(offsetWorldPoint);
-const assetSources={
- currywurst:"./assets/currywurst.svg",bratwurst:"./assets/bratwurst.svg",brezel:"./assets/brezel.svg",
- pfand:"./assets/pfandflasche.svg",gartenzwerg:"./assets/gartenzwerg.svg",ordner:"./assets/ordner.svg",
- wartemarke:"./assets/wartemarke.svg",rasen:"./assets/rasen-verboten.svg",muell:"./assets/muelltrennung.svg",
- db:"./assets/db-verspaetung.svg",baustelle:"./assets/baustelle.svg",fahrrad:"./assets/fahrrad.svg",kaffee:"./assets/kaffeeautomat.svg",pfandautomat:"./assets/pfandautomat.svg",
- faxbillboard:"./assets/fax-billboard.svg",faxgeraet:"./assets/faxgeraet.svg",faxkiosk:"./assets/telefon-fax-kiosk.svg",
- merkel:"./assets/merkel-cartoon.svg",merkelSprite:"./assets/merkel-sprite.png?v=20260921-3",bayernSprite:"./assets/bayern-walker-sprite.png?v=20260921-3",aliceSprite:"./assets/alice-weidel-sprite.png?v=20260921-1",polizeigarten:"./assets/polizei-garten-schild.svg",borderPourerSprite:"./assets/border-pourer-sprite.png?v=20260921-3"
-};
-if(desktopBillboards.matches)for(const motif of faxBillboardPool)assetSources[motif.asset]=motif.src;
+const assetSources={merkelSprite:"./assets/merkel-sprite.png?v=20260921-3",bayernSprite:"./assets/bayern-walker-sprite.png?v=20260921-3",aliceSprite:"./assets/alice-weidel-sprite.png?v=20260921-1",borderPourerSprite:"./assets/border-pourer-sprite.png?v=20260921-3"};
 const assets={};for(const key in assetSources){const img=new Image();img.src=assetSources[key];assets[key]=img}
 const npcSpriteAtlases={
  merkel:{canvas:null,cols:24,rows:5,pad:0,drawSize:126},
@@ -491,6 +483,11 @@ for(const b of buildings){
  if(right<b.x+b.w-8)grassAreas.push({x:right,y:top,w:b.x+b.w-right,h});
  walkways.push({x:left,y:top,w:WALKWAY_WIDTH,h});
 }
+const TREE_RADIUS=38,TREE_ROAD_CLEARANCE=48,trees=Object.freeze([
+ [260,1750],[800,1760],[2700,650],[3400,680],[4300,650],[5000,680],[6500,650],[8100,680],
+ [2700,1800],[4200,1800],[5200,1800],[6800,1800],[8400,1800],[2800,2860],[4200,2860],[5200,2860],
+ [6800,2860],[8400,2860],[700,3500],[1800,3500],[4650,3500],[6180,3500],[7700,3500],[9300,3500]
+].map(([x,y])=>offsetWorldPoint({x,y})));
 const missions=[
 {title:"ANMELDUNG I",text:"Gehen Sie zum Bürgeramt. Beantragen Sie die Erlaubnis, einen Antrag zu stellen.",target:"buergeramt",form:"a38"},
 {title:"ANMELDUNG II",text:"Die Wohnungsgeberbestätigung fehlt natürlich. Holen Sie sie bei der Hausverwaltung.",target:"hausverwaltung",form:"wohnung"},
@@ -616,7 +613,7 @@ const pickups=[
  ...wurstPickups
 ].map(item=>item.type==="wurst"?item:offsetWorldPoint(item));
 const normObjects=[{x:2210,y:1190,type:"bin",fixed:false,label:"MÜLLTONNE 4,6° SCHIEF"},{x:1650,y:650,type:"chairs",fixed:false,label:"STÜHLE NICHT FLUCHTGERECHT"},{x:570,y:1140,type:"hedge",fixed:false,label:"HECKE 3 CM ZU INDIVIDUELL"}].map(offsetWorldPoint);
-window.Germany3DBridge={WORLD,player,roads,crossings,crossingSigns,trafficLights,buildings,grassAreas,walkways,SIDEWALK_WIDTH,schreber,policeGarden,policePath,BORDER_Y,BORDER_BAND,borderGates,borderSegments,railLoops,railTracks,trains,fireSources,props,pickups,getNPCs:()=>npcs,getPolice:()=>police,getTrafficCars:()=>trafficCars,getPoliceVehicles:()=>policeVehicles,getPoliceHelicopters:()=>policeHelicopters,getNpcSpriteCanvas:key=>npcSpriteAtlases[key]?.canvas||null,npcSpriteGrids:Object.fromEntries(Object.entries(npcSpriteAtlases).map(([key,{cols,rows}])=>[key,{cols,rows}]))};
+window.Germany3DBridge={WORLD,player,roads,crossings,crossingSigns,trafficLights,buildings,grassAreas,walkways,trees,TREE_RADIUS,TREE_ROAD_CLEARANCE,SIDEWALK_WIDTH,schreber,policeGarden,policePath,BORDER_Y,BORDER_BAND,borderGates,borderSegments,railLoops,railTracks,trains,fireSources,props,pickups,normObjects,getNPCs:()=>npcs,getPolice:()=>police,getTrafficCars:()=>trafficCars,getPoliceVehicles:()=>policeVehicles,getPoliceHelicopters:()=>policeHelicopters,getNpcSpriteCanvas:key=>npcSpriteAtlases[key]?.canvas||null,npcSpriteGrids:Object.fromEntries(Object.entries(npcSpriteAtlases).map(([key,{cols,rows}])=>[key,{cols,rows}]))};
 const forms={
 a38:{code:"A38/1",title:"Passierschein A38 zur Beantragung eines weiteren Antrags",subtitle:"Bitte vollständig ausfüllen. Unvollständige Vollständigkeit gilt als unvollständig.",fields:[["text","VOLLSTÄNDIGER NAME"],["text","GEBURTSORT IN HEUTIGEN GEMEINDEGRENZEN"],["select","MELDESTATUS",["gemeldet","noch nicht gemeldet","gefühltermaßen gemeldet"]],["text","AKTENZEICHEN, FALLS BEREITS VORHANDEN"],["check","Ich bestätige, dass ich dieses Formular freiwillig unfreiwillig ausfülle."]]},
 wohnung:{code:"WGB-88",title:"Wohnungsgeberbestätigung zur Bestätigung einer Wohnung",subtitle:"Bestätigen Sie, dass Ihre Wohnung tatsächlich eine Wohnung ist.",fields:[["text","ANSCHRIFT"],["text","WOHNUNGSGEBENDER WOHNUNGSGEBER"],["select","ART DER ÜBERLASSUNG",["vermietet","untervermietet","mysteriös überlassen"]],["text","TATSÄCHLICHES DATUM DER TATSACHE DES EINZUGS"],["check","Ich bestätige das Vorhandensein von Wänden und mindestens einer Tür."]]},
@@ -629,7 +626,7 @@ function resize(){dpr=Math.min(devicePixelRatio||1,2);width=innerWidth;height=in
 const clamp=(v,a,b)=>Math.max(a,Math.min(b,v)),dist=(ax,ay,bx,by)=>Math.hypot(ax-bx,ay-by),inRect=(x,y,r)=>x>=r.x&&x<=r.x+r.w&&y>=r.y&&y<=r.y+r.h,pick=list=>list[Math.floor(Math.random()*list.length)];
 const onRoad=(x,y)=>roads.some(r=>inRect(x,y,r)),onCrossing=(x,y)=>crossings.some(r=>inRect(x,y,r)),onGardenGrass=(x,y)=>grassAreas.some(r=>inRect(x,y,r))||(x>schreber.x+20&&x<schreber.x+schreber.w-20&&y>schreber.y+20&&y<schreber.y+schreber.h-20)||onPoliceGardenGrass(x,y);
 function propRadius(p){return clamp(Math.min(p.w||40,p.h||40)*.38,10,42)}
-function staticBlocked(x,y,r=player.r){if(x<r+9||y<r+9||x>WORLD.w-r-9||y>WORLD.h-r-9)return true;for(const b of buildings)if(x>b.x-r&&x<b.x+b.w+r&&y>b.y-r&&y<b.y+b.h+r)return true;for(const p of props)if(dist(x,y,p.x,p.y)<r+propRadius(p))return true;for(const o of normObjects)if(dist(x,y,o.x,o.y)<r+26)return true;return false}
+function staticBlocked(x,y,r=player.r){if(x<r+9||y<r+9||x>WORLD.w-r-9||y>WORLD.h-r-9)return true;for(const b of buildings)if(x>b.x-r&&x<b.x+b.w+r&&y>b.y-r&&y<b.y+b.h+r)return true;for(const p of props)if(dist(x,y,p.x,p.y)<r+propRadius(p))return true;for(const o of normObjects)if(dist(x,y,o.x,o.y)<r+26)return true;for(const tree of trees)if(dist(x,y,tree.x,tree.y)<r+TREE_RADIUS)return true;return false}
 function trainCarDistance(x,y,car){const dx=x-car.x,dy=y-car.y,c=Math.cos(car.angle),s=Math.sin(car.angle),along=dx*c+dy*s,across=-dx*s+dy*c;return Math.hypot(Math.max(0,Math.abs(along)-TRAIN_CAR_HALF_LENGTH),Math.max(0,Math.abs(across)-TRAIN_CAR_HALF_WIDTH))}
 function trainAt(x,y,r){for(const train of trains)for(const car of train.cars)if(trainCarDistance(x,y,car)<r)return car;return null}
 function dynamicBlocker(x,y,fromX,fromY){for(const train of trains)for(const item of train.cars){const next=trainCarDistance(x,y,item),previous=trainCarDistance(fromX,fromY,item);if(next<player.r&&next<previous)return item}const candidates=[...trafficCars.map(item=>({item,r:TRAFFIC_CAR_RADIUS})),...policeVehicles.map(item=>({item,r:43})),...police.map(item=>({item,r:18}))];for(const {item,r} of candidates){const next=dist(x,y,item.x,item.y),previous=dist(fromX,fromY,item.x,item.y);if(next<player.r+r&&next<previous)return item}return null}
@@ -711,7 +708,7 @@ function startTrainBounce(a,b){
  for(const train of [a,b]){train.speed=0;train.bouncePause=TRAIN_BOUNCE_PAUSE;train.reversePending=true;train.collisionCooldown=1.35;train.queued=true;train.bump=1;train.incidentReason="collision";train.incidentUntil=performance.now()+22000}trainAnnouncementNextAt=Math.min(trainAnnouncementNextAt,performance.now()+900)
 }
 function updateBorderTrains(dt){
- const groundObstacles=[{item:player,radius:player.r,player:true},...policeVehicles.map(item=>({item,radius:38})),...police.map(item=>({item,radius:14})),...npcs.filter(item=>!item.arrested).map(item=>({item,radius:13})),...props.map(item=>({item,radius:propRadius(item)})),...normObjects.map(item=>({item,radius:26}))].filter(({item})=>item.x<900||item.y<900||item.x>WORLD.w-900||item.y>WORLD.h-900);let playerHolding=false;
+ const groundObstacles=[{item:player,radius:player.r,player:true},...policeVehicles.map(item=>({item,radius:38})),...police.map(item=>({item,radius:14})),...npcs.filter(item=>!item.arrested).map(item=>({item,radius:13})),...props.map(item=>({item,radius:propRadius(item)})),...normObjects.map(item=>({item,radius:26})),...trees.map(item=>({item,radius:TREE_RADIUS}))].filter(({item})=>item.x<900||item.y<900||item.x>WORLD.w-900||item.y>WORLD.h-900);let playerHolding=false;
  for(const train of trains){
   const loop=railLoops[train.loopIndex];train.collisionCooldown=Math.max(0,train.collisionCooldown-dt);if(train.bouncePause>0){train.bouncePause=Math.max(0,train.bouncePause-dt);if(train.bouncePause===0&&train.reversePending){train.dir*=-1;train.reversePending=false;train.speed=0}}
   train.chaos-=dt;if(train.chaos<=0){const event=Math.random();if(event<.55){train.pause=1.4+Math.random()*4.8;train.incidentReason="pause";train.incidentUntil=performance.now()+18000;trainAnnouncementNextAt=Math.min(trainAnnouncementNextAt,performance.now()+900)}train.cruiseSpeed=train.baseSpeed*(.5+Math.random()*1.15);train.chaos=2.8+Math.random()*5.5}
@@ -1326,7 +1323,7 @@ function drawPlayer(){
  ctx.fillStyle="#eee9dd";ctx.font="900 8px Arial";ctx.textAlign="center";ctx.fillText(state.lang==="en"?"YOU":"SIE",0,18);ctx.restore();
 }
 function nearestInteract(){let label="",best=122;for(const b of buildings){const d=dist(player.x,player.y,b.doorX,b.doorY);if(d<best){best=d;label=b.name}}for(const n of npcs){const d=dist(player.x,player.y,n.x,n.y);if(d<best){best=d;label=n.special==="borderPourer"||n.special==="alice"?(state.region==="berlin"?"SATIRE STATEMENT LISTENING":"SATIRISCHE ERKLÄRUNG ANHÖREN"):(state.region==="berlin"?"COMPLAINT LISTENING":"BESCHWERDE ANHÖREN")}}for(const p of props){if(!p.id)continue;const d=dist(player.x,player.y,p.x,p.y);if(d<best){best=d;label=p.label}}for(const o of normObjects){if(o.fixed)continue;const d=dist(player.x,player.y,o.x,o.y);if(d<best){best=d;label="AUSRICHTEN"}}const e=document.getElementById("interact-hint");e.hidden=!label;e.textContent=label?"E · "+label:""}
-function draw(){ctx.clearRect(0,0,width,height);if(!window.Germany3D?.ready)drawWorld();nearestInteract()}
+function draw(){nearestInteract()}
 // Public-domain and traditional melodies arranged as local WebAudio chiptunes.
 // Notes are MIDI numbers, durations are quarter-note units, and null is a rest.
 const erikaA=[

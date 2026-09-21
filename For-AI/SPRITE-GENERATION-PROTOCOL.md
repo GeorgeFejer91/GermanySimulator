@@ -8,7 +8,7 @@ This is the required production path for every moving bitmap character. It exist
 - The corresponding derived atlases at root `assets/` are the only files loaded by the game.
 - `tools/build-sprite-transitions.py` is the single transition builder. It requires Python with Pillow plus local FFmpeg; neither is a runtime dependency.
 - `tools/register-sprite-grid.py` is the generic contact-sheet registration step for new generated characters. It crops each proposed pose, applies one shared scale per row, centers the row on the cell axis, and fixes every foot baseline before the transition build.
-- Canvas and Three.js must read the same derived atlas and the same semantic frame index. Do not add renderer-specific frame offsets.
+- `game.js` owns the semantic frame index and a staging canvas exposes the derived atlas to Three.js. Do not add renderer-specific frame offsets or a second runtime sheet.
 
 Current authorities:
 
@@ -19,7 +19,7 @@ Current authorities:
 | Bayern walker | `assets/sprite-sources/bayern-walker-sprite-keys.png` | 8 × 4 at 256 px | 32 × 4 at 128 px | front, right, back, left |
 | Alice Weidel satire | `assets/sprite-sources/alice-weidel-sprite-keys.png` | 8 × 2 at 256 px | 32 × 2 at 128 px | front/down, back/up |
 
-The 256 px source cells retain facial and costume detail. The 128 px runtime cells stay near one source pixel per displayed pixel while keeping all derived sheets within a 4096 px texture width for mobile/WebGL compatibility. Runtime PNGs retain full RGBA; premultiplied-alpha downscaling and zeroed fully transparent RGB prevent dark or colored fringes. Canvas and Three.js both use smooth linear sampling.
+The 256 px source cells retain facial and costume detail. The 128 px runtime cells stay near one source pixel per displayed pixel while keeping all derived sheets within a 4096 px texture width for mobile/WebGL compatibility. Runtime PNGs retain full RGBA; premultiplied-alpha downscaling and zeroed fully transparent RGB prevent dark or colored fringes. The staging canvas and Three.js texture both use smooth linear sampling.
 
 ## Fixed anatomical grid
 
@@ -87,7 +87,7 @@ Run `python tools/verify-sprite-atlas.py <runtime.png> --cols <runtime-cols> --r
 - Merz must retain complete scalp clearance and must never show a detached head below the character.
 - Fully transparent pixels must have zero RGB, partially transparent edges must remain antialiased, and runtime rendering must not dilate or replace authored alpha.
 - Compare display scale by visible body height rather than raw cell size. Every registered character uses the same foot anchor and a per-atlas draw scale that keeps body height consistent without per-frame offsets.
-- The browser console and asset network log must be clean; Canvas and Three.js must both show the derived sheet.
+- The browser console and asset network log must be clean; Three.js must show the derived sheet on desktop and mobile.
 
 Run `node --test tests/sprite-pipeline.test.mjs tests/denglisch-dialogue-sprites.test.mjs` after any source, atlas, grid, frame-rate, or loader change.
 
