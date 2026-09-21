@@ -1,5 +1,28 @@
 # Durable decisions
 
+## 2026-09-21 — Direction-signed gait and final-atlas visual gate
+
+Every directional rig row uses screen-space travel semantics: right is positive
+x, left is negative x, front/down is positive y, and back/up is negative y.
+During stance the planted ankle travels opposite that sign as the torso passes
+over it; during swing the lifted ankle advances with it. Front/back rows add a
+signed depth arc and cross only the airborne leg through the midpoint. The
+contact lead swaps at frame 16. The shared rig root and ground registration stay
+fixed for all 32 frames; silhouette-based per-frame centering or scaling is
+forbidden because moving limbs and props would shake the character.
+
+The builder emits `assets/sprite-sources/rigs/pose-audit.json` with one root,
+hip, knee, ankle, stance/swing, view, axis, and sign record for every final
+atlas cell. The release gate independently checks direction and phase rules,
+confirms every audited joint lands on opaque final-atlas pixels, preserves each
+authored key exactly, and can render all-frame skeleton overlays for visual
+review. Vertical arcs additionally reject inverted joint order, collapsed knees,
+excessive knee bow, and ankle-side inversion; lift is bounded by each rig's calf
+length. A right-facing row mirrored by the runtime is checked and rendered as a
+separate left arc. The signed ledger binds the parts, keys, runtime atlases, and
+pose audit by hash. No runtime rigging dependency or second asset path is
+introduced.
+
 ## 2026-09-21 — Two towel pedestrians and bounded attention
 
 Ordinary pedestrians use only the two accepted towel-reservation figures in `SATIRE-DICTIONARY.md`; the other six experimental archetypes and their assets are removed. Personal names rotate independently, so the gag targets textile territorialism rather than identity. Both towel figures retain the registered eight-key side/down/up contract with 32 runtime frames per direction and radius-triggered regional speech, preserving Berlin Denglisch and German-only dialogue outside the Brandmauer. They are pass-through relative to the player and one another, keeping crowded sidewalks conversational without forming hard navigation traps. A quiz pedestrian follows for at most eight seconds or until the player is more than 650 world units away, then loses interest and resumes its route.

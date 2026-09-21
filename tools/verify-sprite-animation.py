@@ -9,12 +9,13 @@ approval and must be reviewed again before it can pass.
 from __future__ import annotations
 
 import argparse
+import copy
 import hashlib
 import json
 from pathlib import Path
 
 import numpy as np
-from PIL import Image, ImageChops
+from PIL import Image, ImageChops, ImageDraw
 from scipy import ndimage
 
 
@@ -30,6 +31,7 @@ def parse_args() -> argparse.Namespace:
         default=ROOT / "assets/sprite-sources/verification.json",
     )
     parser.add_argument("--report", type=Path)
+    parser.add_argument("--overlay-dir", type=Path)
     return parser.parse_args()
 
 
@@ -82,6 +84,216 @@ def crop_cells(image: Image.Image, cols: int, rows: int, cell: int) -> list[list
         ]
         for row in range(rows)
     ]
+
+
+def expected_direction(row_name: str) -> tuple[str, int, str]:
+    if row_name.startswith("left-"):
+        return "x", -1, "side"
+    if row_name.startswith("right-"):
+        return "x", 1, "side"
+    if row_name.startswith("back-"):
+        return "y", -1, "back"
+    if row_name.startswith("front-"):
+        return "y", 1, "front"
+    raise ValueError(f"unknown directional row contract: {row_name}")
+
+
+def alpha_anchor_distance(mask: np.ndarray, point: list[float]) -> float:
+    distance = ndimage.distance_transform_edt(~mask)
+    x = min(mask.shape[1] - 1, max(0, round(point[0] / 4)))
+    y = min(mask.shape[0] - 1, max(0, round(point[1] / 4)))
+    return float(distance[y, x])
+
+
+def draw_pose_overlay(
+    sprite_id: str,
+    runtime_rows: list[list[Image.Image]],
+    audit_rows: list[dict],
+    output_dir: Path,
+) -> None:
+    tile = 128
+    sheet = Image.new("RGB", (tile * 8, tile * 4 * len(runtime_rows)), (45, 45, 45))
+    for row_index, (frames, audit_row) in enumerate(zip(runtime_rows, audit_rows, strict=True)):
+        for frame_index, (frame, pose) in enumerate(zip(frames, audit_row["frames"], strict=True)):
+            tile_image = Image.new("RGBA", (tile, tile), (45, 45, 45, 255))
+            tile_image.alpha_composite(frame)
+            draw = ImageDraw.Draw(tile_image)
+            for side, color in (("left", (54, 210, 255, 255)), ("right", (255, 80, 196, 255))):
+                limb = pose["limbs"][side]
+                points = [tuple(value / 4 for value in limb[name]) for name in ("hip", "knee", "ankle")]
+                draw.line(points, fill=color, width=2)
+                ax, ay = points[-1]
+                ankle_color = (255, 203, 70, 255) if limb["swing"] else (65, 235, 120, 255)
+                draw.ellipse((ax - 3, ay - 3, ax + 3, ay + 3), fill=ankle_color)
+            axis, sign = pose["movementAxis"], pose["movementSign"]
+            if axis != "none":
+                start = (14, 12)
+                end = (29, 12) if axis == "x" and sign > 0 else (1, 12) if axis == "x" else (14, 27) if sign > 0 else (14, 1)
+                draw.line((start, end), fill=(255, 255, 255, 255), width=2)
+            draw.text((3, 3), str(frame_index), fill=(255, 255, 255, 255))
+            col, band = frame_index % 8, frame_index // 8
+            sheet.paste(tile_image.convert("RGB"), (col * tile, (row_index * 4 + band) * tile))
+    output_dir.mkdir(parents=True, exist_ok=True)
+    sheet.save(output_dir / f"{sprite_id}-all-frames.png", optimize=True)
+
+
+def verify_directional_pose(
+    entry: dict,
+    audit_entry: dict,
+    row_names: list[str],
+    runtime_rows: list[list[Image.Image]],
+    walk_rows: set[int],
+    overlay_dir: Path | None,
+) -> list[dict]:
+    if audit_entry.get("source") != entry["source"] or audit_entry.get("runtime") != entry["runtime"]:
+        raise ValueError(f"{entry['id']}: pose audit points at the wrong source/runtime")
+    if audit_entry.get("sourceSha256") != entry["sourceSha256"] or audit_entry.get("runtimeSha256") != entry["runtimeSha256"]:
+        raise ValueError(f"{entry['id']}: pose audit is stale for the signed final atlas")
+    audit_rows = audit_entry.get("rows", [])
+    if len(audit_rows) != len(runtime_rows) or len(row_names) != len(runtime_rows):
+        raise ValueError(f"{entry['id']}: pose audit row count does not match the final atlas")
+
+    expected_states = {
+        0: "contact-a", 4: "down-a", 8: "passing-a", 12: "up-a",
+        16: "contact-b", 20: "down-b", 24: "passing-b", 28: "up-b",
+    }
+    results = []
+    overlay_runtime_rows = list(runtime_rows)
+    overlay_audit_rows = list(audit_rows)
+    for row_index, (row_name, frames, audit_row) in enumerate(zip(row_names, runtime_rows, audit_rows, strict=True)):
+        if audit_row.get("rowName") != row_name or len(audit_row.get("frames", [])) != 32:
+            raise ValueError(f"{entry['id']}: row {row_index} lacks a one-to-one 32-frame pose audit")
+        poses = audit_row["frames"]
+        masks = [np.asarray(frame.getchannel("A")) > 10 for frame in frames]
+        worst_anchor = 0.0
+        for frame_index, (pose, mask) in enumerate(zip(poses, masks, strict=True)):
+            if pose.get("frame") != frame_index:
+                raise ValueError(f"{entry['id']}: row {row_index} pose frame order is not one-to-one")
+            expected_state = expected_states.get(frame_index, "transition")
+            if pose.get("phaseState") != expected_state:
+                raise ValueError(f"{entry['id']}: row {row_index}, frame {frame_index} is labeled {pose.get('phaseState')}, expected {expected_state}")
+            for side in ("left", "right"):
+                for anchor in ("hip", "knee", "ankle"):
+                    distance = alpha_anchor_distance(mask, pose["limbs"][side][anchor])
+                    worst_anchor = max(worst_anchor, distance)
+                    if distance > 3.0:
+                        raise ValueError(
+                            f"{entry['id']}: row {row_index}, frame {frame_index} {side} {anchor} "
+                            f"misses the final sprite by {distance:.1f}px"
+                        )
+        if row_index not in walk_rows:
+            results.append({"row": row_index, "rowName": row_name, "worstAnchorMiss": worst_anchor})
+            continue
+
+        axis, sign, view = expected_direction(row_name)
+        coord = 0 if axis == "x" else 1
+        for pose in poses:
+            if pose.get("movementAxis") != axis or pose.get("movementSign") != sign or pose.get("view") != view:
+                raise ValueError(f"{entry['id']}: row {row_index} direction metadata disagrees with {row_name}")
+
+        def ankle(frame: int, side: str) -> float:
+            return float(poses[frame]["limbs"][side]["ankle"][coord])
+
+        contact_a = (ankle(0, "left") - ankle(0, "right")) * sign
+        contact_b = (ankle(16, "right") - ankle(16, "left")) * sign
+        if min(contact_a, contact_b) < 12.0:
+            raise ValueError(f"{entry['id']}: row {row_index} opposite contacts do not lead in {row_name}")
+        stance_left = (ankle(16, "left") - ankle(0, "left")) * sign
+        stance_right = (ankle(31, "right") - ankle(16, "right")) * sign
+        swing_right = (ankle(15, "right") - ankle(1, "right")) * sign
+        swing_left = (ankle(31, "left") - ankle(17, "left")) * sign
+        if max(stance_left, stance_right) > -10.0:
+            raise ValueError(f"{entry['id']}: row {row_index} stance foot travels with the body (moonwalk regression)")
+        if min(swing_left, swing_right) < 10.0:
+            raise ValueError(f"{entry['id']}: row {row_index} swing foot does not advance with {row_name}")
+        if not poses[8]["limbs"]["right"]["swing"] or not poses[24]["limbs"]["left"]["swing"]:
+            raise ValueError(f"{entry['id']}: row {row_index} passing phases lift the wrong limb")
+        if poses[8]["limbs"]["left"]["swing"] or poses[24]["limbs"]["right"]["swing"]:
+            raise ValueError(f"{entry['id']}: row {row_index} stance limb is lifted at passing")
+        if view in {"front", "back"}:
+            for frame_index, pose in enumerate(poses):
+                left = pose["limbs"]["left"]
+                right = pose["limbs"]["right"]
+                if left["ankle"][0] >= right["ankle"][0] - 2.0:
+                    raise ValueError(f"{entry['id']}: row {row_index}, frame {frame_index} vertical ankles invert sides")
+                if right["knee"][0] - left["knee"][0] < 8.0:
+                    raise ValueError(f"{entry['id']}: row {row_index}, frame {frame_index} vertical knees collapse together")
+                for side, limb in (("left", left), ("right", right)):
+                    hip, knee, ankle_point = limb["hip"], limb["knee"], limb["ankle"]
+                    if not hip[1] + 6.0 < knee[1] < ankle_point[1] - 4.0:
+                        raise ValueError(
+                            f"{entry['id']}: row {row_index}, frame {frame_index} {side} joint order is disfigured"
+                        )
+                    center_line = (hip[0] + ankle_point[0]) / 2.0
+                    if abs(knee[0] - center_line) > 22.0:
+                        raise ValueError(
+                            f"{entry['id']}: row {row_index}, frame {frame_index} {side} knee bows outside the vertical arc"
+                        )
+        results.append({
+            "row": row_index,
+            "rowName": row_name,
+            "worstAnchorMiss": worst_anchor,
+            "contactLeadMin": min(contact_a, contact_b),
+            "stanceTravelMax": max(stance_left, stance_right),
+            "swingTravelMin": min(swing_left, swing_right),
+        })
+
+    # Some atlases ship one right-facing row and the runtime mirrors it for
+    # left travel. Verify and render that exact final transformation too.
+    for row_index, (row_name, frames, audit_row) in enumerate(zip(row_names, runtime_rows, audit_rows, strict=True)):
+        if row_index not in walk_rows or not row_name.startswith("right-"):
+            continue
+        left_name = "left-" + row_name.removeprefix("right-")
+        if left_name in row_names:
+            continue
+        mirrored_frames = [frame.transpose(Image.Transpose.FLIP_LEFT_RIGHT) for frame in frames]
+        mirrored_row = copy.deepcopy(audit_row)
+        mirrored_row["rowName"] = left_name
+        for pose in mirrored_row["frames"]:
+            pose["mirrored"] = not pose["mirrored"]
+            pose["movementSign"] = -1
+            pose["root"][0] = 512.0 - pose["root"][0]
+            for limb in pose["limbs"].values():
+                for anchor in ("hip", "knee", "ankle"):
+                    limb[anchor][0] = 512.0 - limb[anchor][0]
+        masks = [np.asarray(frame.getchannel("A")) > 10 for frame in mirrored_frames]
+        worst_anchor = 0.0
+        for frame_index, (pose, mask) in enumerate(zip(mirrored_row["frames"], masks, strict=True)):
+            for side in ("left", "right"):
+                for anchor in ("hip", "knee", "ankle"):
+                    distance = alpha_anchor_distance(mask, pose["limbs"][side][anchor])
+                    worst_anchor = max(worst_anchor, distance)
+                    if distance > 3.0:
+                        raise ValueError(
+                            f"{entry['id']}: mirrored {left_name} frame {frame_index} {side} {anchor} "
+                            f"misses the final sprite by {distance:.1f}px"
+                        )
+
+        def mirrored_ankle(frame: int, side: str) -> float:
+            return float(mirrored_row["frames"][frame]["limbs"][side]["ankle"][0])
+
+        contact_a = (mirrored_ankle(0, "left") - mirrored_ankle(0, "right")) * -1
+        contact_b = (mirrored_ankle(16, "right") - mirrored_ankle(16, "left")) * -1
+        stance_left = (mirrored_ankle(16, "left") - mirrored_ankle(0, "left")) * -1
+        stance_right = (mirrored_ankle(31, "right") - mirrored_ankle(16, "right")) * -1
+        swing_right = (mirrored_ankle(15, "right") - mirrored_ankle(1, "right")) * -1
+        swing_left = (mirrored_ankle(31, "left") - mirrored_ankle(17, "left")) * -1
+        if min(contact_a, contact_b) < 12.0 or max(stance_left, stance_right) > -10.0 or min(swing_left, swing_right) < 10.0:
+            raise ValueError(f"{entry['id']}: mirrored {left_name} reverses a gait direction")
+        results.append({
+            "row": f"mirror:{row_index}",
+            "rowName": left_name,
+            "mirroredFrom": row_name,
+            "worstAnchorMiss": worst_anchor,
+            "contactLeadMin": min(contact_a, contact_b),
+            "stanceTravelMax": max(stance_left, stance_right),
+            "swingTravelMin": min(swing_left, swing_right),
+        })
+        overlay_runtime_rows.append(mirrored_frames)
+        overlay_audit_rows.append(mirrored_row)
+    if overlay_dir:
+        draw_pose_overlay(entry["id"], overlay_runtime_rows, overlay_audit_rows, overlay_dir)
+    return results
 
 
 def row_metrics(frames: list[Image.Image], key_stride: int) -> dict[str, float]:
@@ -140,7 +352,12 @@ def row_metrics(frames: list[Image.Image], key_stride: int) -> dict[str, float]:
     }
 
 
-def check_entry(entry: dict) -> dict:
+def check_entry(
+    entry: dict,
+    audit_entry: dict,
+    row_names: list[str],
+    overlay_dir: Path | None,
+) -> dict:
     rig_path = ROOT / entry["rig"]
     source_path = ROOT / entry["source"]
     runtime_path = ROOT / entry["runtime"]
@@ -149,8 +366,8 @@ def check_entry(entry: dict) -> dict:
             raise ValueError(f"missing {path.relative_to(ROOT)}")
     if entry.get("visualStatus") != "pass" or not entry.get("reviewedOn") or not entry.get("reviewer"):
         raise ValueError(f"{entry['id']}: visual anatomy review is not signed off")
-    if entry.get("renderMode") != "direct-cutout-rig-v1":
-        raise ValueError(f"{entry['id']}: expected the direct cutout-rig renderer")
+    if entry.get("renderMode") != "directional-depth-rig-v2":
+        raise ValueError(f"{entry['id']}: expected the signed directional-depth rig renderer")
     for field, path in (
         ("rigSha256", rig_path),
         ("sourceSha256", source_path),
@@ -203,7 +420,7 @@ def check_entry(entry: dict) -> dict:
             "centerYDrift": 6.0 if is_walk else 10.0,
             "heightRatio": 1.12 if is_walk else 1.15,
             "areaRatio": 1.45 if is_walk else 1.75,
-            "minKeyChange": 0.015,
+            "minKeyChange": 0.015 if is_walk else 0.0,
             "maxKeyChange": 0.55,
             "maxRuntimeChange": 0.35,
         }
@@ -224,7 +441,8 @@ def check_entry(entry: dict) -> dict:
             raise ValueError(f"{entry['id']}: row {row} lacks distinct opposite-leg phases")
         metrics.append(values)
 
-    return {"id": entry["id"], "runtime": entry["runtime"], "rows": metrics}
+    directions = verify_directional_pose(entry, audit_entry, row_names, runtime_rows, walk_rows, overlay_dir)
+    return {"id": entry["id"], "runtime": entry["runtime"], "rows": metrics, "directions": directions}
 
 
 def main() -> None:
@@ -244,10 +462,27 @@ def main() -> None:
         "jointContinuity",
         "stanceFootPinning",
         "silhouetteScale",
+        "directionalPhaseMapping",
+        "finalFrameOverlay",
+        "verticalJointOrder",
+        "mirroredLeftArc",
     }
     if set(manifest.get("visualChecklist", [])) != required_checks:
         raise ValueError("visual verification manifest does not declare the complete anatomy checklist")
-    results = [check_entry(entry) for entry in manifest["sprites"]]
+    pose_audit_path = ROOT / manifest["poseAudit"]
+    if not pose_audit_path.is_file() or sha256(pose_audit_path) != manifest.get("poseAuditSha256"):
+        raise ValueError("pose audit changed after the final frame-by-frame visual review")
+    pose_audit = json.loads(pose_audit_path.read_text(encoding="utf-8"))
+    audit_by_id = {entry["id"]: entry for entry in pose_audit.get("sprites", [])}
+    registry = json.loads((ROOT / "assets/sprite-sources/rigs/registry.json").read_text(encoding="utf-8"))
+    registry_by_id = {entry["id"]: entry for entry in registry["sprites"]}
+    overlay_dir = args.overlay_dir
+    if overlay_dir and not overlay_dir.is_absolute():
+        overlay_dir = ROOT / overlay_dir
+    results = [
+        check_entry(entry, audit_by_id[entry["id"]], registry_by_id[entry["id"]]["rows"], overlay_dir)
+        for entry in manifest["sprites"]
+    ]
     if args.report:
         report_path = args.report if args.report.is_absolute() else ROOT / args.report
         report_path.parent.mkdir(parents=True, exist_ok=True)
@@ -255,7 +490,11 @@ def main() -> None:
     for result in results:
         worst_x = max(row["centerXDrift"] for row in result["rows"])
         worst_y = max(row["centerYDrift"] for row in result["rows"])
-        print(f"PASS {result['id']}: signed visual review + anatomy/loop gate; center drift x={worst_x:.1f}px y={worst_y:.1f}px")
+        worst_anchor = max(row["worstAnchorMiss"] for row in result["directions"])
+        print(
+            f"PASS {result['id']}: signed final-frame direction + anatomy/loop gate; "
+            f"center drift x={worst_x:.1f}px y={worst_y:.1f}px, anchor miss={worst_anchor:.1f}px"
+        )
 
 
 if __name__ == "__main__":

@@ -10,6 +10,7 @@ walk cycle. Heads and torsos never morph; feet use explicit stance/swing arcs.
 from __future__ import annotations
 
 import argparse
+import hashlib
 import json
 import math
 from dataclasses import dataclass
@@ -38,6 +39,16 @@ PART_NAMES = (
     "prop_b",
 )
 VIEW_INDEX = {"side": 0, "front": 1, "back": 2}
+KEY_PHASE_STATES = {
+    0: "contact-a",
+    4: "down-a",
+    8: "passing-a",
+    12: "up-a",
+    16: "contact-b",
+    20: "down-b",
+    24: "passing-b",
+    28: "up-b",
+}
 
 
 @dataclass(frozen=True)
@@ -58,7 +69,20 @@ def parse_args() -> argparse.Namespace:
     )
     parser.add_argument("--only", action="append", default=[])
     parser.add_argument("--preview-dir", type=Path)
+    parser.add_argument(
+        "--pose-audit",
+        type=Path,
+        default=ROOT / "assets/sprite-sources/rigs/pose-audit.json",
+    )
     return parser.parse_args()
+
+
+def sha256(path: Path) -> str:
+    digest = hashlib.sha256()
+    with path.open("rb") as stream:
+        for block in iter(lambda: stream.read(1024 * 1024), b""):
+            digest.update(block)
+    return digest.hexdigest()
 
 
 def clean_rgba(image: Image.Image) -> Image.Image:
@@ -249,11 +273,26 @@ def draw_leg(
     hip: tuple[float, float],
     ankle: tuple[float, float],
     bend_sign: float,
+    knee_lateral_scale: float = 1.0,
 ) -> LimbResult:
     thigh = parts[f"{side}_thigh"]
     calf = parts[f"{side}_calf"]
     foot = parts[f"{side}_foot"]
     result = solve_two_bone(hip, ankle, part_length(thigh), part_length(calf), bend_sign)
+    if knee_lateral_scale < 1.0:
+        along = part_length(thigh) / (part_length(thigh) + part_length(calf))
+        line_x = hip[0] + (result.ankle[0] - hip[0]) * along
+        vertical_clearance = min(20.0, max(10.0, part_length(calf) * 0.28))
+        knee = (
+            line_x + (result.knee[0] - line_x) * knee_lateral_scale,
+            max(hip[1] + 8.0, min(result.knee[1], result.ankle[1] - vertical_clearance)),
+        )
+        result = LimbResult(
+            knee,
+            result.ankle,
+            math.atan2(knee[0] - hip[0], knee[1] - hip[1]),
+            math.atan2(result.ankle[0] - knee[0], result.ankle[1] - knee[1]),
+        )
     joint_bridge(canvas, hip, result.knee, joint_color(thigh))
     joint_bridge(canvas, result.knee, result.ankle, joint_color(calf))
     joint_bridge(
@@ -300,23 +339,16 @@ def draw_arm(
     return hand
 
 
-def normalize_frame(image: Image.Image) -> Image.Image:
+def validate_registered_frame(image: Image.Image) -> Image.Image:
     bbox = image.getchannel("A").getbbox()
     if bbox is None:
         raise ValueError("rendered an empty rig frame")
-    width, height = bbox[2] - bbox[0], bbox[3] - bbox[1]
-    if width > 492 or height > 492:
-        scale = min(492 / width, 492 / height)
-        crop = image.crop(bbox)
-        crop = premultiplied_resize(crop, (round(width * scale), round(height * scale)))
-        image = Image.new("RGBA", image.size)
-        image.alpha_composite(crop, ((512 - crop.width) // 2, 500 - crop.height))
-        bbox = image.getchannel("A").getbbox()
-    shift_x = round(256 - (bbox[0] + bbox[2]) / 2)
-    shift_y = round(500 - bbox[3])
-    shifted = Image.new("RGBA", image.size)
-    shifted.alpha_composite(image, (shift_x, shift_y))
-    return clean_rgba(shifted)
+    margin = min(bbox[0], bbox[1], 512 - bbox[2], 512 - bbox[3])
+    if margin < 4:
+        raise ValueError(f"registered rig frame violates the 4px safety margin ({margin}px; bbox={bbox})")
+    # The rig already owns a fixed root and ground line. Recentring from the
+    # changing silhouette makes a lifted foot or wide prop shake the whole body.
+    return clean_rgba(image)
 
 
 def stitch_nearby_components(image: Image.Image, max_gap: float = 64.0) -> Image.Image:
@@ -375,21 +407,38 @@ def row_contract(row_name: str) -> tuple[str, bool, bool, bool]:
     return view, mirrored, pouring, idle
 
 
+def movement_contract(view: str, mirrored: bool, idle: bool) -> tuple[str, int]:
+    if idle:
+        return "none", 0
+    if view == "side":
+        return "x", -1 if mirrored else 1
+    return "y", 1 if view == "front" else -1
+
+
+def point_record(point: tuple[float, float], mirrored: bool) -> list[float]:
+    x, y = point
+    if mirrored:
+        x = 512.0 - x
+    return [round(x, 3), round(y, 3)]
+
+
 def render_frame(
     raw_parts: dict[str, Image.Image],
     row_name: str,
     prop_mode: str,
     frame_index: int,
-) -> Image.Image:
+) -> tuple[Image.Image, dict]:
     parts = scale_parts(raw_parts)
     view, mirrored, pouring, idle = row_contract(row_name)
     phase = frame_index / 32 * math.tau
     gait = 0.0 if idle else 1.0
-    bob = -5.5 * abs(math.sin(phase)) * gait
+    # Standard contact/down/passing/up body arc: lower on the loaded down pose,
+    # neutral at passing, and raised on the up pose.
+    bob = 4.5 * math.sin(phase * 2.0) * gait
     torso = parts["torso"]
     head = parts["head"]
     foot_height = max(parts["left_foot"].height, parts["right_foot"].height)
-    ankle_ground = 474 - foot_height * 0.70
+    ankle_ground = 448 - foot_height * 0.70
     average_reach = (
         part_length(parts["left_thigh"])
         + part_length(parts["left_calf"])
@@ -411,25 +460,54 @@ def render_frame(
         "right": (center_x + hip_spread, hip_y),
     }
     canvas = Image.new("RGBA", (512, 512))
-    stride = (32.0 if side_view else 12.0) * gait
-    lift = (22.0 if side_view else 18.0) * gait
+    stride = 32.0 * gait
+    depth_stride = 14.0 * gait
+    vertical_lift = min(
+        18.0,
+        min(part_length(parts["left_calf"]), part_length(parts["right_calf"])) * 0.48,
+    )
+    lift = (22.0 if side_view else vertical_lift) * gait
     ankles: dict[str, tuple[float, float]] = {}
+    limb_phases: dict[str, dict[str, float | bool]] = {}
     for side, offset in (("left", 0.0), ("right", math.pi)):
         leg_phase = phase + offset
+        swing = max(0.0, -math.sin(leg_phase)) * gait
         if side_view:
             target_x = hips[side][0] + stride * math.cos(leg_phase)
+            target_y = ankle_ground - lift * swing
         else:
-            base = -9.0 if side == "left" else 9.0
-            crossing = 11.0 * math.cos(leg_phase)
-            target_x = center_x + base + crossing
-        ankles[side] = (target_x, ankle_ground - lift * max(0.0, math.sin(leg_phase)))
+            side_sign = -1.0 if side == "left" else 1.0
+            # Contact feet begin on their anatomical side. The airborne foot
+            # crosses the midpoint at passing, matching the authored front/back
+            # end states instead of sliding both feet sideways together.
+            target_x = center_x + side_sign * (10.0 - 12.0 * swing)
+            direction_sign = 1.0 if view == "front" else -1.0
+            target_y = (
+                ankle_ground
+                + direction_sign * depth_stride * math.cos(leg_phase)
+                - lift * swing
+            )
+        ankles[side] = (target_x, target_y)
+        limb_phases[side] = {"swing": swing > 1e-6, "lift": round(lift * swing, 3)}
 
-    leg_order = ("left", "right") if math.sin(phase) >= 0 else ("right", "left")
+    # The visually nearer/lower foot is composited last. This makes front/back
+    # depth agree with the final pixels instead of switching on an unrelated
+    # sine sign.
+    leg_order = tuple(sorted(("left", "right"), key=lambda side: ankles[side][1]))
     joint_bridge(canvas, hips["left"], hips["right"], joint_color(torso), 22)
     joint_cap(canvas, (center_x, hip_y), joint_color(torso), 15)
     first = leg_order[0]
     first_bend = -1.0 if side_view else (1.0 if first == "left" else -1.0)
-    draw_leg(canvas, parts, first, hips[first], ankles[first], first_bend)
+    leg_results: dict[str, LimbResult] = {}
+    leg_results[first] = draw_leg(
+        canvas,
+        parts,
+        first,
+        hips[first],
+        ankles[first],
+        first_bend,
+        1.0 if side_view else 0.32,
+    )
 
     arm_swing = 0.34 * math.cos(phase) * gait
     holding = prop_mode in {"held-center", "flags", "towel"} or pouring
@@ -464,7 +542,15 @@ def render_frame(
 
     second = leg_order[1]
     second_bend = -1.0 if side_view else (1.0 if second == "left" else -1.0)
-    draw_leg(canvas, parts, second, hips[second], ankles[second], second_bend)
+    leg_results[second] = draw_leg(
+        canvas,
+        parts,
+        second,
+        hips[second],
+        ankles[second],
+        second_bend,
+        1.0 if side_view else 0.32,
+    )
     near_hand = draw_arm(
         canvas,
         parts,
@@ -502,15 +588,38 @@ def render_frame(
             joint_bridge(canvas, hands["right"], target, joint_color(prop), 12)
             composite_at(canvas, prop, target, (prop.width * 0.34, prop.height * 0.42), -0.62)
         else:
-            target = (hands["right"][0], min(454, hands["right"][1] + prop.height * 0.28))
+            target = (
+                hands["right"][0],
+                min(508 - prop.height * 0.88, hands["right"][1] + prop.height * 0.28),
+            )
             joint_bridge(canvas, hands["right"], target, joint_color(prop), 12)
             composite_at(canvas, prop, target, (prop.width / 2, prop.height * 0.12))
 
     canvas = stitch_nearby_components(canvas)
-    canvas = normalize_frame(canvas)
+    canvas = validate_registered_frame(canvas)
     if mirrored:
         canvas = canvas.transpose(Image.Transpose.FLIP_LEFT_RIGHT)
-    return canvas
+    movement_axis, movement_sign = movement_contract(view, mirrored, idle)
+    audit = {
+        "frame": frame_index,
+        "phaseState": KEY_PHASE_STATES.get(frame_index, "transition"),
+        "view": view,
+        "mirrored": mirrored,
+        "movementAxis": movement_axis,
+        "movementSign": movement_sign,
+        "root": point_record((center_x, hip_y), mirrored),
+        "limbs": {
+            side: {
+                "swing": limb_phases[side]["swing"],
+                "lift": limb_phases[side]["lift"],
+                "hip": point_record(hips[side], mirrored),
+                "knee": point_record(leg_results[side].knee, mirrored),
+                "ankle": point_record(leg_results[side].ankle, mirrored),
+            }
+            for side in ("left", "right")
+        },
+    }
+    return canvas, audit
 
 
 def make_preview(runtime_rows: list[list[Image.Image]], output: Path) -> None:
@@ -523,15 +632,23 @@ def make_preview(runtime_rows: list[list[Image.Image]], output: Path) -> None:
     preview.convert("RGB").save(output, quality=92)
 
 
-def build_entry(entry: dict, preview_dir: Path | None) -> None:
+def build_entry(entry: dict, preview_dir: Path | None) -> dict:
     part_path = ROOT / entry["parts"]
     views = extract_parts(part_path, {int(value) for value in entry.get("dropPartIndexes", [])})
     source_rows: list[list[Image.Image]] = []
     runtime_rows: list[list[Image.Image]] = []
+    audit_rows: list[dict] = []
     for row_name in entry["rows"]:
         view, _, _, _ = row_contract(row_name)
         parts = views[VIEW_INDEX[view]]
-        high_frames = [render_frame(parts, row_name, entry["propMode"], index) for index in range(32)]
+        rendered = []
+        for index in range(32):
+            try:
+                rendered.append(render_frame(parts, row_name, entry["propMode"], index))
+            except ValueError as error:
+                raise ValueError(f"{entry['id']} {row_name} frame {index}: {error}") from error
+        high_frames = [item[0] for item in rendered]
+        audit_rows.append({"rowName": row_name, "frames": [item[1] for item in rendered]})
         key_frames = [premultiplied_resize(high_frames[index], (256, 256)) for index in range(0, 32, 4)]
         runtime_frames = []
         for index, frame in enumerate(high_frames):
@@ -560,6 +677,14 @@ def build_entry(entry: dict, preview_dir: Path | None) -> None:
         f"BUILT {entry['id']}: {len(source_rows)} rows, 8 key frames, "
         f"32 direct rig frames -> {runtime_path.relative_to(ROOT)}"
     )
+    return {
+        "id": entry["id"],
+        "source": entry["source"],
+        "runtime": entry["runtime"],
+        "sourceSha256": sha256(source_path),
+        "runtimeSha256": sha256(runtime_path),
+        "rows": audit_rows,
+    }
 
 
 def main() -> None:
@@ -574,8 +699,28 @@ def main() -> None:
     preview_dir = args.preview_dir
     if preview_dir and not preview_dir.is_absolute():
         preview_dir = ROOT / preview_dir
+    audit_path = args.pose_audit if args.pose_audit.is_absolute() else ROOT / args.pose_audit
+    previous = {}
+    if selected and audit_path.is_file():
+        previous = {
+            entry["id"]: entry
+            for entry in json.loads(audit_path.read_text(encoding="utf-8")).get("sprites", [])
+        }
     for entry in entries:
-        build_entry(entry, preview_dir)
+        previous[entry["id"]] = build_entry(entry, preview_dir)
+    ordered = [previous[entry["id"]] for entry in registry["sprites"] if entry["id"] in previous]
+    if not selected and len(ordered) != len(registry["sprites"]):
+        raise ValueError("full pose audit is incomplete")
+    audit = {
+        "version": 1,
+        "workingCell": 512,
+        "runtimeCell": 128,
+        "keyPhaseStates": {str(key): value for key, value in KEY_PHASE_STATES.items()},
+        "sprites": ordered,
+    }
+    audit_path.parent.mkdir(parents=True, exist_ok=True)
+    audit_path.write_text(json.dumps(audit, separators=(",", ":")) + "\n", encoding="utf-8")
+    print(f"WROTE pose audit -> {audit_path.relative_to(ROOT)}")
 
 
 if __name__ == "__main__":

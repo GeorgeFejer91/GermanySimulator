@@ -16,6 +16,10 @@ offline and add no browser dependency.
 - `assets/sprite-sources/*-keys.png` are reviewable 256 px key atlases sampled at
   phases 0, 4, 8, 12, 16, 20, 24, and 28. They are derived, not hand-morphed.
 - `assets/*.png` is the only runtime asset authority: 32 columns at 128 px.
+- `assets/sprite-sources/rigs/pose-audit.json` records the exact root, hip,
+  knee, ankle, stance/swing, facing, and travel sign used for every final atlas
+  cell. Its source/runtime hashes make the record one-to-one rather than an
+  illustrative guide.
 - `tools/verify-sprite-animation.py` plus
   `assets/sprite-sources/verification.json` is the release gate. The ledger
   binds the parts sheet, key atlas, and runtime atlas to exact SHA-256 hashes.
@@ -80,13 +84,29 @@ midpoint; they never cross-fade or morph. Arms and legs rotate about actual
 piece pivots. Bone lengths are intentionally shorter than painted parts so
 rounded overlap remains hidden throughout the arc.
 
-Legs use an analytic two-bone IK solve. Stance feet remain on a fixed ground
-line; swing feet follow a bounded lift arc. The front/back rigs move the feet
-through the body midpoint so the legs visibly cross at passing poses. Side
-rows use a larger forward/back stride. Arms counter-swing against the legs
+Legs use an analytic two-bone IK solve. At contact, the leading foot is planted;
+during that half-cycle it travels opposite the character's screen-space motion
+as the torso passes over it. The other foot is airborne and advances in the
+same direction as the character. Reversing those signs is a moonwalk and must
+fail the gate. Right-facing side rows use positive x, mirrored left rows use
+negative x, front/down rows use positive y depth, and back/up rows use negative
+y depth. Front/back swing feet cross the body midpoint at passing while the
+stance foot remains on its anatomical side. Arms counter-swing against the legs
 unless a prop contract fixes them into a carry, flag, towel, diamond, or pour
-pose. The pelvis rises slightly during passing phases while the output baseline
-remains fixed.
+pose.
+
+The rig root, torso x position, and ground registration are fixed for the full
+row. Never center or rescale a frame from its changing silhouette: a lifted
+foot, wide flag, or bucket would move the whole character and create vibration.
+The loaded down pose lowers the pelvis, passing returns it to neutral, and the
+up pose raises it while the output registration remains unchanged.
+
+Vertical rows additionally keep each knee below its own hip and materially
+above its own ankle, keep left/right ankles on their anatomical sides, and
+bound knee bow from the hip-to-ankle centerline. Lift height is limited by the
+shorter calf source, so a compact rig cannot fold its ankle sideways into the
+knee. If a right-facing runtime row is mirrored for left travel, the gate must
+verify and render that exact mirrored final result as a separate movement arc.
 
 The 32-frame cycle is:
 
@@ -114,7 +134,7 @@ From the repository root:
 
 ```powershell
 python tools/build-rigged-sprite-atlas.py --preview-dir assets/sprite-sources/rigs/previews
-python tools/verify-sprite-animation.py --report .codex/sprite-rig-report.json
+python tools/verify-sprite-animation.py --report .codex/sprite-rig-report.json --overlay-dir .codex/sprite-direction-overlays
 node --test tests/sprite-pipeline.test.mjs
 ```
 
@@ -137,12 +157,22 @@ The gate rejects:
 - repeated key poses or excessive adjacent-frame jumps;
 - weak lower-limb change or indistinct opposite-leg phases;
 - a loop seam larger than ordinary internal transitions.
+- a stance foot that travels with the movement direction or a swing foot that
+  travels against it;
+- a side/front/back row whose signed movement axis disagrees with its row name;
+- any final-atlas hip, knee, or ankle that misses its audited rendered pixels;
+- an incomplete/stale pose audit or fewer than 32 one-to-one frame records.
+- a vertical knee/ankle order inversion, collapsed knee pair, excessive knee
+  bow, or left/right ankle inversion;
+- an unverified mirrored-left runtime arc when no separate left row exists.
 
 The reviewer must then inspect, at full resolution:
 
 1. the three-view parts sheet;
 2. all eight key phases for every row;
-3. an onion/overlay or rapid 32-frame loop;
+3. the generated final-atlas overlay containing all 32 frames, with cyan/pink
+   limb chains, green planted ankles, yellow swing ankles, and the white travel
+   arrow, plus a rapid 32-frame loop;
 4. head and torso registration with no vibration;
 5. alternating contact, down, passing/crossing, and up poses;
 6. planted stance feet and lifted swing feet;
