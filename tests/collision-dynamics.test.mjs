@@ -17,9 +17,17 @@ assert.deepEqual(sidestep,{x:0,y:1.44,avoid:1},"a zero-length axis must not mask
 const backoff={x:0,y:0,avoid:1};
 assert.equal(moveGroundResponder((x,y)=>x>=0||y!==0)(backoff,2,0,12),true,"an actor blocked ahead and on both sides must back away");
 assert.equal(backoff.x,-1.1,"the final escape attempt must move away from the barrier");
+const overlap={x:0,y:0,avoid:1};
+assert.equal(moveGroundResponder((x,y)=>Math.abs(x)<2&&Math.abs(y)<2)(overlap,1,0,12),true,"an actor already overlapping a moving blocker must be allowed to escape gradually");
+assert.equal(overlap.x,-.55,"overlap recovery must move away from the blocked travel direction");
+const nearVertical={x:0,y:0,avoid:1};
+assert.equal(moveGroundResponder((x,y)=>y<-.5)(nearVertical,.01,-1,12),true,"a tiny free axis must not hide a blocked primary direction");
+assert.ok(nearVertical.x>.7,"a primarily vertical walker must sidestep when vertical travel is blocked");
 assert.match(game,/moveGroundResponder\(car,dx\/d\*step,dy\/d\*step,38\)/,"pursuit cars must use collision-aware movement");
 assert.match(game,/moveGroundResponder\(p,rdx\/d\*step,rdy\/d\*step,14\)/,"foot police must use collision-aware movement");
-assert.match(game,/else moveGroundResponder\(n,dx\/d\*88\*dt,dy\/d\*88\*dt,12\)/,"approaching quiz pedestrians must route around barriers");
+assert.match(game,/else if\(d>=78\)moveGroundResponder\(n,dx\/d\*88\*dt,dy\/d\*88\*dt,12\)/,"approaching quiz pedestrians must route around barriers while following the player");
+assert.match(game,/n\.blockedTimer=progress>\.01\?0:\(n\.blockedTimer\|\|0\)\+dt;if\(n\.blockedTimer>\.45\)\{n\.blockedTimer=0;chooseBayernTarget\(n,n\.targetSpot\)\}/,"a blocked Bayern route walker must change direction instead of pressing into the obstacle");
+assert.match(game,/alternatives=links\.filter\(spot=>spot!==blockedSpot\).*blockedSpot<0\?links:\[n\.spot\]/,"Bayern must choose another connected direction or reverse at a dead end after an obstruction");
 assert.match(game,/playerHit\|\|!moveGroundResponder\(n,dx,dy,12\)/,"ordinary pedestrians must route around barriers");
 assert.match(game,/dynamicBlocker\(nx,player\.y,px,player\.y\)/,"the player must not walk deeper into response vehicles");
 assert.match(game,/groundObstacles=.*\.\.\.policeVehicles.*\.\.\.police.*\.\.\.npcs/,"trains must detect people and ground police responses");

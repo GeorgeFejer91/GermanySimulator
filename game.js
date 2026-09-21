@@ -634,7 +634,7 @@ function trainCarDistance(x,y,car){const dx=x-car.x,dy=y-car.y,c=Math.cos(car.an
 function trainAt(x,y,r){for(const train of trains)for(const car of train.cars)if(trainCarDistance(x,y,car)<r)return car;return null}
 function dynamicBlocker(x,y,fromX,fromY){for(const train of trains)for(const item of train.cars){const next=trainCarDistance(x,y,item),previous=trainCarDistance(fromX,fromY,item);if(next<player.r&&next<previous)return item}const candidates=[...trafficCars.map(item=>({item,r:TRAFFIC_CAR_RADIUS})),...policeVehicles.map(item=>({item,r:43})),...police.map(item=>({item,r:18}))];for(const {item,r} of candidates){const next=dist(x,y,item.x,item.y),previous=dist(fromX,fromY,item.x,item.y);if(next<player.r+r&&next<previous)return item}return null}
 function responderBlocked(x,y,r,self){if(staticBlocked(x,y,r)||trainAt(x,y,r))return true;for(const car of trafficCars)if(car!==self&&dist(x,y,car.x,car.y)<r+TRAFFIC_CAR_RADIUS)return true;for(const car of policeVehicles)if(car!==self&&dist(x,y,car.x,car.y)<r+38)return true;for(const officer of police)if(officer!==self&&dist(x,y,officer.x,officer.y)<r+14)return true;for(const n of npcs)if(n!==self&&!n.arrested&&n!==self?.divertedTarget&&n!==self?.escort&&dist(x,y,n.x,n.y)<r+13)return true;if(self&&!trafficCars.includes(self)&&!policeVehicles.includes(self)&&!police.includes(self)&&dist(x,y,player.x,player.y)<r+player.r)return true;return false}
-function moveGroundResponder(entity,dx,dy,r){if(!dx&&!dy)return false;let moved=false;if(dx&&!responderBlocked(entity.x+dx,entity.y,r,entity)){entity.x+=dx;moved=true}if(dy&&!responderBlocked(entity.x,entity.y+dy,r,entity)){entity.y+=dy;moved=true}if(moved)return true;if(!entity.avoid)entity.avoid=Math.random()<.5?-1:1;let sideX=-dy*.72*entity.avoid,sideY=dx*.72*entity.avoid;if(!responderBlocked(entity.x+sideX,entity.y+sideY,r,entity)){entity.x+=sideX;entity.y+=sideY;return true}entity.avoid*=-1;sideX*=-1;sideY*=-1;if(!responderBlocked(entity.x+sideX,entity.y+sideY,r,entity)){entity.x+=sideX;entity.y+=sideY;return true}if(!responderBlocked(entity.x-dx*.55,entity.y-dy*.55,r,entity)){entity.x-=dx*.55;entity.y-=dy*.55;return true}return false}
+function moveGroundResponder(entity,dx,dy,r){if(!dx&&!dy)return false;const blockedHere=responderBlocked(entity.x,entity.y,r,entity);let movedX=false,movedY=false;if(dx&&!responderBlocked(entity.x+dx,entity.y,r,entity)){entity.x+=dx;movedX=true}if(dy&&!responderBlocked(entity.x,entity.y+dy,r,entity)){entity.y+=dy;movedY=true}const mainBlocked=Math.abs(dx)>=Math.abs(dy)?!!dx&&!movedX:!!dy&&!movedY;if((movedX||movedY)&&!mainBlocked)return true;if(!entity.avoid)entity.avoid=Math.random()<.5?-1:1;let sideX=-dy*.72*entity.avoid,sideY=dx*.72*entity.avoid;if(!responderBlocked(entity.x+sideX,entity.y+sideY,r,entity)){entity.x+=sideX;entity.y+=sideY;return true}entity.avoid*=-1;sideX*=-1;sideY*=-1;if(!responderBlocked(entity.x+sideX,entity.y+sideY,r,entity)){entity.x+=sideX;entity.y+=sideY;return true}const backX=-dx*.55,backY=-dy*.55;if(blockedHere||!responderBlocked(entity.x+backX,entity.y+backY,r,entity)){entity.x+=backX;entity.y+=backY;return true}return false}
 function blocked(x,y){return staticBlocked(x,y,player.r)}
 function blockingPedestrian(x,y){let nearest=null,best=NPC_BLOCK_DISTANCE;for(const n of npcs){if(n.arrested)continue;const d=dist(x,y,n.x,n.y);if(d<best){nearest=n;best=d}}return nearest}
 function toast(msg){const e=document.getElementById("toast");e.textContent=msg;e.classList.add("show");clearTimeout(toast.t);toast.t=setTimeout(()=>e.classList.remove("show"),2300)}
@@ -758,13 +758,13 @@ function updateMerkel(n,dt){
 }
 function nextBayernClip(){return nextVariant("bayern",bayernClips)}
 function bayernBark(n,force=false){const now=performance.now();if((!force&&now<(n.barkAt||0))||state.region!=="germany")return false;const item=nextBayernClip();n.barkAt=now+9000+Math.random()*7000;showWorldBark(n.name,item.text,false,item.recording,"",{family:"bayern",priority:force?STIMULUS_PRIORITY.CRITICAL:STIMULUS_PRIORITY.AMBIENT,ambient:!force,isEligible:force?undefined:()=>state.region==="germany"&&dist(player.x,player.y,n.x,n.y)<(n.audioReleaseRadius||SPRITE_AUDIO_RELEASE_RADIUS)});return true}
-function chooseBayernTarget(n){n.targetSpot=pick(bayernWaypoints[n.spot].links)}
+function chooseBayernTarget(n,blockedSpot=-1){const links=bayernWaypoints[n.spot].links,alternatives=links.filter(spot=>spot!==blockedSpot);n.targetSpot=pick(alternatives.length?alternatives:blockedSpot<0?links:[n.spot])}
 function updateBayern(n,dt){
  if(state.region==="germany"&&proximityAudioReady(n))bayernBark(n);
  if(n.hangTimer>0){n.hangTimer-=dt;n.spriteFrame=0;return}
  const target=bayernWaypoints[n.targetSpot],dx=target.x-n.x,dy=target.y-n.y,d=Math.hypot(dx,dy)||1,speed=52;n.animTime+=dt;
  if(d<7){n.spot=n.targetSpot;n.hangTimer=2+Math.random()*4;chooseBayernTarget(n);n.spriteFrame=2;return}
- moveGroundResponder(n,dx/d*speed*dt,dy/d*speed*dt,13);n.spriteRow=Math.abs(dx)>Math.abs(dy)?(dx>0?1:3):(dy>0?0:2);n.spriteFrame=Math.floor(n.animTime*40)%npcSpriteAtlases.bayern.cols
+ moveGroundResponder(n,dx/d*speed*dt,dy/d*speed*dt,13);const progress=d-Math.hypot(target.x-n.x,target.y-n.y);n.blockedTimer=progress>.01?0:(n.blockedTimer||0)+dt;if(n.blockedTimer>.45){n.blockedTimer=0;chooseBayernTarget(n,n.targetSpot)}n.spriteRow=Math.abs(dx)>Math.abs(dy)?(dx>0?1:3):(dy>0?0:2);n.spriteFrame=Math.floor(n.animTime*40)%npcSpriteAtlases.bayern.cols
 }
 function nextAliceClip(){return nextVariant("alice",aliceClips)}
 function aliceBark(n,force=false){
@@ -1025,7 +1025,7 @@ function update(dt){
    if(n.special==="merkel"){updateMerkel(n,dt);continue}
    if(n.special==="bayern"){updateBayern(n,dt);continue}
    if(n.special==="alice"){updateAlice(n,dt);continue}
-   if(n===state.quizApproach){const dx=player.x-n.x,dy=player.y-n.y,d=Math.hypot(dx,dy)||1;if(d<78){state.quizApproach=null;n.quizAsked=true;startCitizenshipQuiz(n)}else moveGroundResponder(n,dx/d*88*dt,dy/d*88*dt,12);continue}
+   if(n===state.quizApproach){const dx=player.x-n.x,dy=player.y-n.y,d=Math.hypot(dx,dy)||1;if(d<78&&!stimulusBusy()){state.quizApproach=null;n.quizAsked=true;startCitizenshipQuiz(n)}else if(d>=78)moveGroundResponder(n,dx/d*88*dt,dy/d*88*dt,12);continue}
    if(dist(player.x,player.y,n.x,n.y)<NPC_COMPLAINT_DISTANCE)pedestrianBark(n,playerSurface());
    if((n.pause||0)>0){n.pause-=dt;continue}
    const dx=(n.vx||0)*dt,dy=(n.vy||0)*dt,nextX=n.x+dx,nextY=n.y+dy,playerHit=dist(player.x,player.y,nextX,nextY)<NPC_BLOCK_DISTANCE;
