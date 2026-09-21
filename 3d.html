@@ -42,6 +42,9 @@ const verticalRoads=[{x:1050+RAIL_GUTTER,y:RAIL_GUTTER,w:260,h:CITY.h},{x:2400+R
 const roads=[...horizontalRoads,...verticalRoads],crossings=[];
 for(const h of horizontalRoads)for(const v of verticalRoads){crossings.push({x:v.x,y:h.y-80,w:v.w,h:80});crossings.push({x:v.x-90,y:h.y,w:90,h:h.h})}
 crossings.push(...[{x:3590,y:2985,w:120,h:270},{x:6550,y:2985,w:120,h:270},{x:8200,y:2985,w:120,h:270}].map(offsetWorldPoint));
+const trafficLights=[];
+function addTrafficLight(crossingId,x,y,waitX,waitY,turn,phaseOffset,sign=false){trafficLights.push({id:trafficLights.length,crossingId,x,y,waitX,waitY,turn,phaseOffset,sign,green:false})}
+for(let crossingId=0;crossingId<crossings.length;crossingId++){const c=crossings[crossingId],phaseOffset=(crossingId%6)*1.15;if(c.w>c.h){const y=c.y+c.h/2;addTrafficLight(crossingId,c.x+c.w+24,y,c.x-24,y,3,phaseOffset,true);addTrafficLight(crossingId,c.x-24,y,c.x+c.w+24,y,1,phaseOffset)}else{const x=c.x+c.w/2;addTrafficLight(crossingId,x,c.y+c.h+24,x,c.y-24,2,phaseOffset,true);addTrafficLight(crossingId,x,c.y-24,x,c.y+c.h+24,0,phaseOffset)}}
 const buildings=[
 {id:"buergeramt",name:"BÜRGERAMT",x:150,y:220,w:350,h:250,hgt:115,doorX:325,doorY:500,sign:"TERMIN NUR MIT TERMIN"},
 {id:"hausverwaltung",name:"HAUSVERWALTUNG",x:590,y:210,w:330,h:255,hgt:95,doorX:755,doorY:495,sign:"WOHNUNGSGEBERBESTÄTIGUNG"},
@@ -85,7 +88,7 @@ const npcs=[
 {x:4620,y:3270,special:"merkel",route:[[4620,3270],[5750,3270],[6150,3270],[7200,3270],[7200,3880],[6120,3880],[5750,3880],[4620,3880]],target:1,facingX:1,facingY:0,animTime:0,spriteRow:2,spriteFrame:1,line:0}
 ].map(n=>({...offsetWorldPoint(n),min:n.min==null?n.min:n.min+RAIL_GUTTER,max:n.max==null?n.max:n.max+RAIL_GUTTER,route:n.route?.map(([x,y])=>[x+RAIL_GUTTER,y+RAIL_GUTTER])}));
 const pickups=[{x:1980,y:870,type:"bratwurst",taken:false},{x:2110,y:880,type:"currywurst",taken:false},{x:4100,y:900,type:"brezel",taken:false},{x:3000,y:1910,type:"pfand",taken:false}].map(offsetWorldPoint);
-window.Germany3DBridge={WORLD,player,roads,crossings,crossingSigns,buildings,schreber,policeGarden,policePath,BORDER_Y,BORDER_BAND,borderGates,borderSegments,railLoops,railTracks,trains,fireSources,props,pickups,getNPCs:()=>npcs,getPolice:()=>police};
+window.Germany3DBridge={WORLD,player,roads,crossings,crossingSigns,trafficLights,buildings,schreber,policeGarden,policePath,BORDER_Y,BORDER_BAND,borderGates,borderSegments,railLoops,railTracks,trains,fireSources,props,pickups,getNPCs:()=>npcs,getPolice:()=>police};
 const dist=(a,b,c,d)=>Math.hypot(a-c,b-d);
 const MERKEL_AUDIO_LINE="Wir schaffen das.",merkelRecording=new Audio("./assets/merkel-wir-schaffen-das.mp3");merkelRecording.preload="auto";
 const merkelLines=[MERKEL_AUDIO_LINE,"Wir brauchen kein Abschaltgesetz, sondern einen Ausstieg mit Augenmaß.","Ich habe eine neue Bewertung vorgenommen.","Die Risiken der Kernenergie sind nicht beherrschbar.","Wer das erkennt, muss eine neue Bewertung vornehmen.","Wir müssen uns darauf einstellen, dass wir schneller aussteigen.","Wir wollen das schaffen."];
@@ -94,7 +97,7 @@ function updateMerkel(n,dt){const t=n.route[n.target],dx=t[0]-n.x,dy=t[1]-n.y,d=
 function blocked(x,y){if(x<25||y<25||x>WORLD.w-25||y>WORLD.h-25)return true;return buildings.some(b=>x>b.x-16&&x<b.x+b.w+16&&y>b.y-16&&y<b.y+b.h+16)}
 function say(s,l){document.getElementById("speaker").textContent=s;document.getElementById("line").textContent=l;const d=document.getElementById("dialogue");d.classList.add("show");clearTimeout(say.t);say.t=setTimeout(()=>d.classList.remove("show"),4500);if(s.startsWith("ANGELA MERKEL")&&l===MERKEL_AUDIO_LINE){merkelRecording.currentTime=0;merkelRecording.play().catch(()=>{})}}
 function interact(){const m=npcs.find(n=>n.special==="merkel"&&dist(player.x,player.y,n.x,n.y)<150);if(m){say("ANGELA MERKEL · SATIRE",merkelBehind(m)?"Sie stehen hinter mir.":merkelLines[m.line++%merkelLines.length]);return}const f=props.find(p=>dist(player.x,player.y,p.x,p.y)<150);if(f)say("FAX 3000 PRO","2,75× schneller beim Versand ausgedruckter Dokumente. Die Zukunft der Digitalisierung ist Papier.")}
-function update(dt){let dx=(keys.ArrowRight?1:0)-(keys.ArrowLeft?1:0),dy=(keys.ArrowDown?1:0)-(keys.ArrowUp?1:0);const l=Math.hypot(dx,dy)||1;dx/=l;dy/=l;if(dx||dy)player.facing=Math.atan2(dx,dy);const nx=player.x+dx*190*dt,ny=player.y+dy*190*dt;if(!blocked(nx,player.y))player.x=nx;if(!blocked(player.x,ny))player.y=ny;updateDiagnosticTrains(dt);npcs.forEach(n=>{if(n.special==="merkel")updateMerkel(n,dt);else{if(n.vx){n.x+=n.vx*dt;if(n.x<n.min||n.x>n.max)n.vx*=-1}if(n.vy){n.y+=n.vy*dt;if(n.y<n.min||n.y>n.max)n.vy*=-1}}});document.getElementById("coords").textContent=Math.round(player.x)+" / "+Math.round(player.y);document.getElementById("district").textContent=player.x>2400?"DEUTSCHLAND OST":"BERLIN"}
+function update(dt){let dx=(keys.ArrowRight?1:0)-(keys.ArrowLeft?1:0),dy=(keys.ArrowDown?1:0)-(keys.ArrowUp?1:0);const l=Math.hypot(dx,dy)||1;dx/=l;dy/=l;if(dx||dy)player.facing=Math.atan2(dx,dy);const nx=player.x+dx*190*dt,ny=player.y+dy*190*dt;if(!blocked(nx,player.y))player.x=nx;if(!blocked(player.x,ny))player.y=ny;const signalClock=performance.now()/1000;for(const light of trafficLights)light.green=Math.floor((signalClock+light.phaseOffset)/6)%2===1;updateDiagnosticTrains(dt);npcs.forEach(n=>{if(n.special==="merkel")updateMerkel(n,dt);else{if(n.vx){n.x+=n.vx*dt;if(n.x<n.min||n.x>n.max)n.vx*=-1}if(n.vy){n.y+=n.vy*dt;if(n.y<n.min||n.y>n.max)n.vy*=-1}}});document.getElementById("coords").textContent=Math.round(player.x)+" / "+Math.round(player.y);document.getElementById("district").textContent=player.x>2400?"DEUTSCHLAND OST":"BERLIN"}
 addEventListener("keydown",e=>{if(["ArrowUp","ArrowDown","ArrowLeft","ArrowRight"].includes(e.code))e.preventDefault();keys[e.code]=true;if(e.code==="KeyE")interact()});addEventListener("keyup",e=>keys[e.code]=false);
 document.querySelectorAll("[data-key]").forEach(b=>{const k=b.dataset.key;b.addEventListener("pointerdown",e=>{e.preventDefault();keys[k]=true;if(k==="KeyE")interact()});["pointerup","pointercancel","pointerleave"].forEach(t=>b.addEventListener(t,e=>{e.preventDefault();keys[k]=false}))});
 document.getElementById("home").onclick=()=>{player.x=5960+RAIL_GUTTER;player.y=3900+RAIL_GUTTER};
@@ -102,5 +105,5 @@ let last=performance.now();function loop(t){const dt=Math.min(.05,(t-last)/1000)
 })();
 </script>
 <script type="importmap">{"imports":{"three":"https://cdn.jsdelivr.net/npm/three@0.186.0/build/three.module.js"}}</script>
-<script type="module" src="./world3d.js?v=20260921-01"></script>
+<script type="module" src="./world3d.js?v=20260921-03"></script>
 </body></html>

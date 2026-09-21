@@ -31,14 +31,13 @@ for(const h of horizontalRoads)for(const v of verticalRoads){
 }
 crossings.push(...[{x:3590,y:2985,w:120,h:270},{x:6550,y:2985,w:120,h:270},{x:8200,y:2985,w:120,h:270}].map(offsetWorldPoint));
 const trafficLights=[];
-for(let i=1;i<horizontalRoads.length*verticalRoads.length*2;i+=2){
- const c=crossings[i];trafficLights.push({id:trafficLights.length,x:c.x+c.w/2,y:c.y-24,phaseOffset:(trafficLights.length%6)*1.15,green:false,rewardCycle:-1});
+function addTrafficLight(crossingId,x,y,waitX,waitY,turn,phaseOffset,sign=false){trafficLights.push({id:trafficLights.length,crossingId,x,y,waitX,waitY,turn,phaseOffset,sign,green:false,rewardCycle:-1,waitedCycle:-9,waitTime:0})}
+for(let crossingId=0;crossingId<crossings.length;crossingId++){
+ const c=crossings[crossingId],phaseOffset=(crossingId%6)*1.15;
+ if(c.w>c.h){const y=c.y+c.h/2;addTrafficLight(crossingId,c.x+c.w+24,y,c.x-24,y,3,phaseOffset,true);addTrafficLight(crossingId,c.x-24,y,c.x+c.w+24,y,1,phaseOffset)}
+ else{const x=c.x+c.w/2;addTrafficLight(crossingId,x,c.y+c.h+24,x,c.y-24,2,phaseOffset,true);addTrafficLight(crossingId,x,c.y-24,x,c.y+c.h+24,0,phaseOffset)}
 }
 const crossingSigns=[];
-for(const c of crossings){
- if(c.w>c.h)crossingSigns.push({x:c.x+c.w+28,y:c.y+c.h/2,turn:3});
- else crossingSigns.push({x:c.x+c.w/2,y:c.y+c.h+28,turn:2});
-}
 const schreber=offsetWorldPoint({x:90,y:1210,w:560,h:570});
 const policeGarden=offsetWorldPoint({x:2850,y:3250,w:1500,h:650});
 const BORDER_Y=1120+RAIL_GUTTER;
@@ -787,16 +786,16 @@ function updateGermannessEvents(dt,mag){
  state.ampelClock+=dt;state.lawCooldown=Math.max(0,state.lawCooldown-dt);
  for(const light of trafficLights)light.green=Math.floor((state.ampelClock+light.phaseOffset)/6)%2===1;
  const roadNow=onRoad(player.x,player.y);
- if(!state.wasOnRoad&&roadNow){const crossingId=crossings.findIndex(c=>inRect(player.x,player.y,c));state.crossingRun={valid:crossingId>=0,crossingId}}
- if(roadNow&&state.crossingRun&&!onCrossing(player.x,player.y))state.crossingRun.valid=false;
- if(state.wasOnRoad&&!roadNow&&state.crossingRun?.valid&&state.ampelClock-state.crossRewardAt>4){state.crossRewardAt=state.ampelClock;addGermanness(1,"ZEBRASTREIFEN ORDNUNGSGEMÄSS BENUTZT")}
+ if(!state.wasOnRoad&&roadNow){
+  const crossingId=crossings.findIndex(c=>inRect(player.x,player.y,c));let approachLight=null,best=Infinity;
+  for(const light of trafficLights)if(light.crossingId===crossingId){const d=dist(player.x,player.y,light.waitX,light.waitY);if(d<best){best=d;approachLight=light}}
+  const cycle=approachLight?Math.floor((state.ampelClock+approachLight.phaseOffset)/6):-1,waitedAtRed=!!approachLight&&approachLight.green&&approachLight.waitedCycle===cycle-1&&approachLight.rewardCycle!==approachLight.waitedCycle;
+  state.crossingRun={valid:crossingId>=0,crossingId,signalGreen:!approachLight||approachLight.green,waitedAtRed,light:approachLight};if(approachLight&&!approachLight.green)toast("AMPEL ROT · WARTEN SIE AUF GRÜN")
+ }
+ if(roadNow&&state.crossingRun?.valid&&!inRect(player.x,player.y,crossings[state.crossingRun.crossingId]))state.crossingRun.valid=false;
+ if(state.wasOnRoad&&!roadNow&&state.crossingRun?.valid&&state.crossingRun.signalGreen&&state.ampelClock-state.crossRewardAt>4){const run=state.crossingRun,points=run.waitedAtRed?2:1;state.crossRewardAt=state.ampelClock;if(run.waitedAtRed)run.light.rewardCycle=run.light.waitedCycle;addGermanness(points,run.waitedAtRed?"ROTE AMPEL ABGEWARTET · BEI GRÜN GEQUERT":"ZEBRASTREIFEN BEI GRÜN BENUTZT")}
  if(!roadNow)state.crossingRun=null;state.wasOnRoad=roadNow;
- let waitingAt=null,best=135;for(const light of trafficLights){const d=dist(player.x,player.y,light.x,light.y);if(!light.green&&d<best){best=d;waitingAt=light}}
- if(waitingAt&&mag<.05&&(!roadNow||onCrossing(player.x,player.y))){
-  if(state.ampelWaitLight!==waitingAt){state.ampelWaitLight=waitingAt;state.ampelWait=0}
-  state.ampelWait+=dt;const cycle=Math.floor((state.ampelClock+waitingAt.phaseOffset)/6);
-  if(state.ampelWait>=1.5&&waitingAt.rewardCycle!==cycle){waitingAt.rewardCycle=cycle;state.ampelWait=0;addGermanness(1,"BEI ROT GEWARTET")}
- }else{state.ampelWaitLight=null;state.ampelWait=0}
+ for(const light of trafficLights){const waiting=!light.green&&!roadNow&&mag<.05&&dist(player.x,player.y,light.waitX,light.waitY)<85;light.waitTime=waiting?light.waitTime+dt:0;if(light.waitTime>=1.5)light.waitedCycle=Math.floor((state.ampelClock+light.phaseOffset)/6)}
 }
 function useLawPower(){
  if(!state.started||state.modal)return;if(!state.lawUnlocked){toast("§-MACHT AB "+LAW_POWER_THRESHOLD+"/"+GERMANNESS_MAX+" GERMANNESS");return}if(state.lawCooldown>0){toast("§-MACHT NOCH "+Math.ceil(state.lawCooldown)+" SEKUNDEN IN BEARBEITUNG");return}
@@ -1190,6 +1189,7 @@ function drawCrossingSign(sign){
 function drawTrafficLight(light){
  const ground=project(light.x,light.y,0),p=project(light.x,light.y,60);if(p.x<-80||p.x>width+80||p.y<-100||p.y>height+100)return;const s=p.s;
  ctx.strokeStyle="#363735";ctx.lineWidth=Math.max(2,4*s);ctx.beginPath();ctx.moveTo(ground.x,ground.y);ctx.lineTo(p.x,p.y);ctx.stroke();ctx.save();ctx.translate(p.x,p.y);ctx.scale(s,s);ctx.fillStyle="#2d2e2c";ctx.fillRect(-12,-24,24,48);ctx.fillStyle=light.green?"#4b2725":"#df332c";ctx.beginPath();ctx.arc(0,-12,7,0,Math.PI*2);ctx.fill();ctx.fillStyle=light.green?"#36c469":"#284b31";ctx.beginPath();ctx.arc(0,12,7,0,Math.PI*2);ctx.fill();ctx.restore()
+ if(light.sign){ctx.save();ctx.translate(p.x,p.y-43*s);ctx.scale(s,s);ctx.fillStyle="#1f4d79";ctx.strokeStyle="#e6e1d5";ctx.lineWidth=3;ctx.fillRect(-14,-14,28,28);ctx.strokeRect(-14,-14,28,28);ctx.fillStyle="#f1ede2";ctx.beginPath();ctx.moveTo(0,-10);ctx.lineTo(10,9);ctx.lineTo(-10,9);ctx.closePath();ctx.fill();ctx.restore()}
 }
 
 function drawAsset(name,x,y,w,h,angle=0){
