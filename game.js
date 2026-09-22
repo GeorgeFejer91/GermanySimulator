@@ -647,7 +647,8 @@ const aliceClips=Object.freeze([
  {text:"Ich liebe Deutschland. Besonders aus der Schweiz.",recording:"./assets/voices/alice-weidel/deutschland-schweiz.mp3",duration:3.109},
  {text:"Adolf Hitler war ein Linker. Die DDR hieß schließlich auch Demokratische Republik. Und Deutsche Leberkäse besteht selbstverständlich aus Leber und Käse.",recording:"./assets/voices/alice-weidel/hitler-ddr-leberkaese.mp3",duration:12.304},
  {text:"Die Nationalsozialisten waren Sozialisten, sonst hätte man sie ja Nationalirgendwas genannt.",recording:"./assets/voices/alice-weidel/nationalsozialisten-sozialisten.mp3",duration:5.982},
- {text:"Wir müssen zurück zur traditionellen Familie. Wie genau die aussieht, klären wir dann außerhalb meines Privatlebens.",recording:"./assets/voices/alice-weidel/traditionelle-familie.mp3",duration:6.374}
+ {text:"Wir müssen zurück zur traditionellen Familie. Wie genau die aussieht, klären wir dann außerhalb meines Privatlebens.",recording:"./assets/voices/alice-weidel/traditionelle-familie.mp3",duration:6.374},
+ {text:"Eliten sind das Problem. Aber zum Glück habe ich Wirtschaft studiert, bei Goldman Sachs gearbeitet und wohne in der Schweiz.",recording:"./assets/voices/alice-weidel/eliten-sind-das-problem.mp3",duration:7.471}
 ]);
 const STANDARD_SPRITE_WALK_SPEED=52,ALICE_WALK_SPEED=STANDARD_SPRITE_WALK_SPEED*1.5;
 const bayernWaypoints=Object.freeze([

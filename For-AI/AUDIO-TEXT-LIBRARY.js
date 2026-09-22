@@ -278,6 +278,7 @@ const lines=Object.freeze({
  "Adolf Hitler war ein Linker. Die DDR hieß schließlich auch Demokratische Republik. Und Deutsche Leberkäse besteht selbstverständlich aus Leber und Käse.":"Adolf Hitler was a leftist. After all, East Germany was also called a Democratic Republic. And German Leberkäse obviously consists of liver and cheese.",
  "Die Nationalsozialisten waren Sozialisten, sonst hätte man sie ja Nationalirgendwas genannt.":"The National Socialists were socialists; otherwise they would have been called national-something-or-other.",
  "Wir müssen zurück zur traditionellen Familie. Wie genau die aussieht, klären wir dann außerhalb meines Privatlebens.":"We must return to the traditional family. We can clarify exactly what that looks like outside my private life.",
+ "Eliten sind das Problem. Aber zum Glück habe ich Wirtschaft studiert, bei Goldman Sachs gearbeitet und wohne in der Schweiz.":"Elites are the problem. But luckily I studied economics, worked at Goldman Sachs, and live in Switzerland.",
  "§-MACHT unlocked. Press § oder Q to quote ein Gesetz!":"Section-sign power unlocked. Press § or Q to quote a law!",
  "§-MACHT freigeschaltet. Drücken Sie § oder Q, um ein Gesetz zu zitieren!":"Section-sign power unlocked. Press § or Q to quote a law!",
  "Black helicopter approved. Der Rasenfall is now airborne!":"Black helicopter approved. The lawn case is now airborne!",
@@ -373,6 +374,7 @@ const recordings=Object.freeze({
  "./assets/voices/alice-weidel/hitler-ddr-leberkaese.mp3":Object.freeze({source:"Adolf Hitler war ein Linker. Die DDR hieß schließlich auch Demokratische Republik. Und Deutsche Leberkäse besteht selbstverständlich aus Leber und Käse.",english:"Adolf Hitler was a leftist. After all, East Germany was also called a Democratic Republic. And German Leberkäse obviously consists of liver and cheese."}),
  "./assets/voices/alice-weidel/nationalsozialisten-sozialisten.mp3":Object.freeze({source:"Die Nationalsozialisten waren Sozialisten, sonst hätte man sie ja Nationalirgendwas genannt.",english:"The National Socialists were socialists; otherwise they would have been called national-something-or-other."}),
  "./assets/voices/alice-weidel/traditionelle-familie.mp3":Object.freeze({source:"Wir müssen zurück zur traditionellen Familie. Wie genau die aussieht, klären wir dann außerhalb meines Privatlebens.",english:"We must return to the traditional family. We can clarify exactly what that looks like outside my private life."}),
+ "./assets/voices/alice-weidel/eliten-sind-das-problem.mp3":Object.freeze({source:"Eliten sind das Problem. Aber zum Glück habe ich Wirtschaft studiert, bei Goldman Sachs gearbeitet und wohne in der Schweiz.",english:"Elites are the problem. But luckily I studied economics, worked at Goldman Sachs, and live in Switzerland."}),
  "./assets/audio/trains/ice-0815-buxtehude-bahnhofshalle-subtle.mp3":Object.freeze({
   source:"Information zu ICE 0815 nach Buxtehude. Abfahrt ursprünglich um 18.32 Uhr. Heute etwa 45 Minuten später. Grund dafür sind spielende Kinder an den Bahngleisen. Schon wieder spielende Kinder an den Bahngleisen. Oh Mann! Warum wollen Kinder eigentlich immer ausgerechnet an den Bahngleisen spielen? Es gibt doch Spielplätze, Wiesen, Parks, aber nein, Bahngleise, immer Bahngleise. ICE 0815 nach Buxtehude fährt heute voraussichtlich irgendwann, vielleicht weiter.",
   sourceCues:Object.freeze([[0,16,"Information zu ICE 0815 nach Buxtehude. Abfahrt ursprünglich um 18.32 Uhr. Heute etwa 45 Minuten später."],[16,25,"Grund dafür sind spielende Kinder an den Bahngleisen. Schon wieder spielende Kinder an den Bahngleisen. Oh Mann!"],[25,31,"Warum wollen Kinder eigentlich immer ausgerechnet an den Bahngleisen spielen?"],[31,39,"Es gibt doch Spielplätze, Wiesen, Parks, aber nein, Bahngleise, immer Bahngleise."],[39,48,"ICE 0815 nach Buxtehude fährt heute voraussichtlich irgendwann, vielleicht weiter."]]),
@@ -397,7 +399,7 @@ const recordings=Object.freeze({
 });
 
 window.GermanySimulatorAudioText=Object.freeze({
- version:2,
+ version:3,
  method:"Known clips use authored/source transcripts; the five station recordings were transcribed and English-segmented locally with OpenAI Whisper small on 2026-09-21, then manually corrected against filenames and audible context.",
  exclusions:Object.freeze(["background-music","sound-effect"]),
  pools,
