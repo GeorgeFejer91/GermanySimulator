@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <meta name="theme-color" content="#77756f">
-  <meta name="description" content="Production walking-sprite preview for Germany Simulator.">
+  <meta name="description" content="Walking-sprite atlas and focused animation preview for Germany Simulator.">
   <link rel="icon" href="./assets/faxgeraet.svg" type="image/svg+xml">
   <title>Walking Sprite Preview · Germany Simulator</title>
   <style>
@@ -27,12 +27,20 @@
     h1{margin:0;font-size:20px;line-height:1;letter-spacing:-.02em}
     h1 span{display:block;margin-top:4px;color:var(--muted);font-size:9px;letter-spacing:.15em}
     .controls{display:flex;align-items:center;justify-content:flex-end;gap:8px;flex-wrap:wrap}
+    .focus-control[hidden]{display:none}
     button,select{min-height:34px;padding:6px 10px;border:1px solid var(--ink);border-radius:4px;background:#f4efe4;color:var(--ink);font-weight:800}
     button:hover{background:#ded7c8}
+    button[aria-pressed="true"],button[aria-pressed="true"]:hover{background:var(--ink);color:var(--paper)}
     button:focus-visible,select:focus-visible,input:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
     .frame-control{display:grid;grid-template-columns:auto minmax(130px,220px);align-items:center;gap:8px;min-width:min(100%,260px)}
     output{font:800 11px/1.2 ui-monospace,"SFMono-Regular",monospace;white-space:nowrap}
     main{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;width:min(1180px,100%);margin:0 auto;padding:14px}
+    main[hidden]{display:none}
+    #focus-preview{width:min(760px,calc(100% - 28px));margin:14px auto;border:1px solid var(--line);background:var(--paper)}
+    #focus-preview[hidden]{display:none}
+    #focus-preview>header{position:static;padding:9px 12px;border:0;border-bottom:1px solid var(--line);background:#d8d2c5}
+    #focus-preview figure{min-height:560px;padding:38px 12px 22px}
+    #focus-preview canvas{width:min(500px,78vw)}
     article{min-width:0;align-self:start;border:1px solid var(--line);background:var(--paper)}
     article>header{position:static;padding:8px 10px;border:0;border-bottom:1px solid var(--line);background:#d8d2c5}
     h2{margin:0;font-size:15px}
@@ -56,6 +64,9 @@
       .frame-control{grid-template-columns:minmax(0,1fr) 92px;order:2;flex:1 0 100%;width:100%;min-width:0}
       .frame-control output{overflow:hidden;text-align:right}
       main{grid-template-columns:1fr;padding:8px}
+      #focus-preview{width:calc(100% - 16px);margin:8px auto}
+      #focus-preview figure{min-height:430px}
+      #focus-preview canvas{width:min(390px,88vw)}
       figure{min-height:176px}
       canvas{width:min(156px,43vw)}
     }
@@ -66,6 +77,13 @@
   <header>
     <h1>SPRITE PRÜFSTELLE <span>32-FRAME WALKING ATLAS PREVIEW</span></h1>
     <div class="controls" aria-label="Animation controls">
+      <button id="mode" type="button" aria-pressed="false">ANIMATION PREVIEW</button>
+      <label class="focus-control" hidden>CHARACTER
+        <select id="character" aria-label="Preview character"></select>
+      </label>
+      <label class="focus-control" hidden>DIRECTION
+        <select id="direction" aria-label="Preview direction"></select>
+      </label>
       <button id="toggle" type="button">PAUSE</button>
       <button id="previous" type="button" aria-label="Previous frame">−1 FRAME</button>
       <button id="next" type="button" aria-label="Next frame">+1 FRAME</button>
@@ -83,6 +101,16 @@
       </label>
     </div>
   </header>
+  <section id="focus-preview" hidden aria-live="polite">
+    <header>
+      <h2 id="focus-title">Animation preview</h2>
+      <span id="focus-meta"></span>
+    </header>
+    <figure>
+      <figcaption id="focus-caption"></figcaption>
+      <canvas id="focus-canvas" width="384" height="384" role="img"></canvas>
+    </figure>
+  </section>
   <main id="previews" aria-live="polite"></main>
   <script>
     const CACHE_TOKEN="20260922-biomech4";
@@ -105,7 +133,19 @@
     const status=document.querySelector("#status");
     const toggle=document.querySelector("#toggle");
     const speed=document.querySelector("#speed");
+    const mode=document.querySelector("#mode");
+    const focusPreview=document.querySelector("#focus-preview");
+    const focusControls=[...document.querySelectorAll(".focus-control")];
+    const character=document.querySelector("#character");
+    const direction=document.querySelector("#direction");
+    const focusTitle=document.querySelector("#focus-title");
+    const focusMeta=document.querySelector("#focus-meta");
+    const focusCaption=document.querySelector("#focus-caption");
+    const focusCanvas=document.querySelector("#focus-canvas");
     const views=[];
+    const sprites=new Map();
+    let focused=false;
+    let focusView=null;
     let playing=!matchMedia("(prefers-reduced-motion: reduce)").matches;
     let phase=0;
     let shownFrame=-1;
@@ -118,25 +158,56 @@
       lastTime=performance.now();
     }
 
+    function drawView(view,frame){
+        if(!view?.image.complete)return;
+        const size=view.canvas.width;
+        const context=view.canvas.getContext("2d");
+        context.clearRect(0,0,size,size);
+        context.imageSmoothingEnabled=true;
+        context.imageSmoothingQuality="high";
+        if(view.mirror){
+          context.save();
+          context.translate(size,0);
+          context.scale(-1,1);
+        }
+        context.drawImage(view.image,frame*128,view.row*128,128,128,0,0,size,size);
+        if(view.mirror)context.restore();
+    }
+
     function draw(frame){
       if(frame===shownFrame)return;
       shownFrame=frame;
       frameInput.value=String(frame);
       status.value=`FRAME ${String(frame).padStart(2,"0")} / 31`;
-      for(const view of views){
-        if(!view.image.complete)continue;
-        const context=view.canvas.getContext("2d");
-        context.clearRect(0,0,128,128);
-        context.imageSmoothingEnabled=true;
-        context.imageSmoothingQuality="high";
-        if(view.mirror){
-          context.save();
-          context.translate(128,0);
-          context.scale(-1,1);
-        }
-        context.drawImage(view.image,frame*128,view.row*128,128,128,0,0,128,128);
-        if(view.mirror)context.restore();
-      }
+      for(const view of views)drawView(view,frame);
+      drawView(focusView,frame);
+    }
+
+    function updateFocus(){
+      const sprite=sprites.get(character.value);
+      if(!sprite)return;
+      const previous=direction.value;
+      direction.replaceChildren(...DIRECTIONS.filter(([key])=>sprite.directions[key]).map(([key,label])=>new Option(label,key)));
+      if([...direction.options].some(option=>option.value===previous))direction.value=previous;
+      const reference=sprite.directions[direction.value];
+      const rowName=typeof reference==="string"?reference:reference.mirror;
+      focusView={canvas:focusCanvas,image:sprite.image,row:sprite.rows.indexOf(rowName),mirror:typeof reference==="object"};
+      focusTitle.textContent=NAMES[sprite.id]||sprite.id;
+      focusMeta.textContent=`${direction.selectedOptions[0].text} · 32 FRAMES`;
+      focusCaption.textContent=direction.selectedOptions[0].text;
+      focusCanvas.setAttribute("aria-label",`${focusTitle.textContent}, ${direction.selectedOptions[0].text.toLowerCase()} focused walking animation`);
+      shownFrame=-1;
+      draw(Math.floor(phase));
+    }
+
+    function setMode(next){
+      focused=next;
+      mode.textContent=focused?"ATLAS GRID":"ANIMATION PREVIEW";
+      mode.setAttribute("aria-pressed",String(focused));
+      root.hidden=focused;
+      focusPreview.hidden=!focused;
+      for(const control of focusControls)control.hidden=!focused;
+      if(focused)updateFocus();
     }
 
     function step(amount){
@@ -147,6 +218,9 @@
     }
 
     toggle.addEventListener("click",()=>setPlaying(!playing));
+    mode.addEventListener("click",()=>setMode(!focused));
+    character.addEventListener("change",updateFocus);
+    direction.addEventListener("change",updateFocus);
     document.querySelector("#previous").addEventListener("click",()=>step(-1));
     document.querySelector("#next").addEventListener("click",()=>step(1));
     frameInput.addEventListener("input",()=>{
@@ -156,6 +230,7 @@
       draw(phase);
     });
     addEventListener("keydown",event=>{
+      if(event.target instanceof Element&&event.target.matches("button,input,select"))return;
       if(event.code==="Space"){
         event.preventDefault();
         setPlaying(!playing);
@@ -184,6 +259,9 @@
         image.decoding="async";
         image.src=`./${sprite.runtime}?v=${CACHE_TOKEN}`;
         image.addEventListener("load",()=>{shownFrame=-1;draw(Math.floor(phase));},{once:true});
+        sprite.image=image;
+        sprites.set(sprite.id,sprite);
+        character.append(new Option(title.textContent,sprite.id));
         for(const [direction,label] of DIRECTIONS){
           const reference=sprite.directions[direction];
           if(!reference)continue;
@@ -201,6 +279,7 @@
           views.push({canvas,image,row:sprite.rows.indexOf(rowName),mirror:typeof reference==="object"});
         }
       }
+      updateFocus();
     }
 
     function animate(time){
@@ -213,6 +292,7 @@
     }
 
     setPlaying(playing);
+    setMode(false);
     load().catch(error=>{
       root.innerHTML=`<p class="error">SPRITE PREVIEW COULD NOT LOAD: ${error.message}</p>`;
       console.error(error);

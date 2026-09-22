@@ -198,6 +198,9 @@ experimental walking atlases. It reads this registry directly, shows every
 authored direction for all six characters on transparent checkerboards, and
 keeps every view on the same 32-frame clock. Pause, single-frame stepping,
 scrubbing, and speed selection support visual review on desktop and mobile.
+The atlas grid can switch to a focused animation mode that enlarges one chosen
+character and direction while retaining that exact shared clock and runtime
+atlas. It is an inspection view, not another renderer or derived asset.
 It does not load `game.js`, `world3d.js`, audio, or the game world, and it does
 not copy or redefine any sprite asset or direction mapping. The preview must
 remain on the experimental atlases even while the root game uses the rollback.
