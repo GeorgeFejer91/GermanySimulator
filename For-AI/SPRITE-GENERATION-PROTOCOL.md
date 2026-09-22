@@ -235,3 +235,41 @@ inspection view, not another renderer or derived asset.
 It does not load `game.js`, `world3d.js`, audio, or the game world, and it does
 not copy or redefine any sprite asset or direction mapping. The source selector
 must not change the root game's stable loader decision.
+
+## Merkel CMU left-walk pilot
+
+The next validation lane is deliberately smaller than the four-direction
+Merkel candidate: one character, one left-facing side view, one external gait
+capture. `assets/sprite-sources/reference/cmu-walk-69-01/69_01.bvh` is pinned to
+the documented SHA-256 and conversion commit. Subject 69, trial 01 is the CMU
+“walk forward” capture at 120 fps. Converter frame zero is an inserted T-pose
+and must be excluded. Fingers and toes are never hard-gate joints; CMU identifies
+those extremities as potentially noisy.
+
+Build and verify the reference plus pilot with:
+
+```powershell
+python tools/build-cmu-walk-reference.py
+python tools/build-merkel-cmu-left-pilot.py
+python tools/verify-merkel-cmu-left-pilot.py
+node --test tests/merkel-cmu-left-pilot.test.mjs tests/sprite-preview.test.mjs
+```
+
+The reference extractor performs BVH forward kinematics, derives the capture's
+actual horizontal travel axis, detects a same-left-foot gait interval, projects
+the required pelvis/neck/head, shoulder/elbow/wrist, and hip/knee/ankle joints
+into the travel/up side plane, and emits 20 samples plus an exact closure point.
+The pilot preserves Merkel's identity-matched side pieces and fixed authored
+bone lengths. Only the captured two-dimensional bone directions and captured
+lateral depth ordering drive limbs. The lowest ankle fixes the ground line,
+making pelvis bob a consequence of the captured leg pose rather than another
+hand-authored wave.
+
+The verifier must reject any source or artifact hash drift, direction expansion,
+missing closure, duplicate playback frame, unsafe margin, rendered joint without
+nearby opaque pixels, changing bone length, failure of both feet to own contact,
+missing ankle crossover, or a rendered bone more than 0.2 degrees from its CMU
+counterpart. A mechanical pass is not visual approval. The manifest remains
+`candidate-unapproved`; `game.js` and the stable archive remain untouched until
+the user explicitly accepts this one cycle. Only after that review may the same
+mapping strategy be extended to right, front/back, or another character.

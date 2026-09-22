@@ -8,13 +8,17 @@ assert.match(preview,/assets\/sprite-sources\/rigs\/registry\.json/);
 assert.match(preview,/requestAnimationFrame\(animate\)/);
 assert.match(preview,/id="source"[\s\S]*value="stable" selected>GAME · STABLE[\s\S]*value="experimental">EXPERIMENTAL/);
 assert.match(preview,/value="candidate">CANDIDATE · MERKEL 21/);
+assert.match(preview,/value="mocap">PILOT · MERKEL LEFT MOCAP/);
 assert.match(preview,/stable:\{label:"GAME · STABLE",root:"assets\/sprite-archive\/pre-rig-20260921\/assets\/"[\s\S]*frames:\{merkel:24\}/);
 assert.match(preview,/experimental:\{label:"EXPERIMENTAL",root:"assets\/"/);
-assert.match(preview,/candidate:\{label:"CANDIDATE · MERKEL 21",root:"assets\/sprite-sources\/candidates\/merkel-21\/"/);
+assert.match(preview,/candidate:\{[\s\S]*?label:"CANDIDATE · MERKEL 21",root:"assets\/sprite-sources\/candidates\/merkel-21\/"/);
+assert.match(preview,/mocap:\{[\s\S]*?root:"assets\/sprite-sources\/candidates\/merkel-cmu-left\/"[\s\S]*?directions:\["left"\]/);
 assert.match(preview,/assets\/sprite-sources\/candidates\/merkel-21\/manifest\.json/);
-for(const view of ["audit","skeleton","onion","difference"]){
- assert.match(preview,new RegExp(`${view}:"merkel-`),`candidate preview must expose ${view} evidence`);
+assert.match(preview,/assets\/sprite-sources\/candidates\/merkel-cmu-left\/manifest\.json/);
+for(const view of ["audit","bones","onion","difference"]){
+ assert.match(preview,new RegExp(`${view}:\\{file:"merkel-`),`candidate preview must expose ${view} evidence`);
 }
+assert.match(preview,/reference:\{file:"merkel-left-reference\.png"/);
 assert.match(preview,/id="mode"[\s\S]*ANIMATION PREVIEW/);
 assert.match(preview,/id="focus-canvas" width="384" height="384"/);
 assert.match(preview,/function setMode\(next\)[\s\S]*root\.hidden=focused[\s\S]*focusPreview\.hidden=!focused/);
@@ -28,4 +32,4 @@ assert.doesNotMatch(preview,/(?:game|world3d)\.js/,"the preview must not boot th
 assert.equal(registry.sprites.length,6,"the registry remains the complete preview authority");
 assert.ok(registry.sprites.every(sprite=>Object.keys(sprite.directions).length>=2));
 
-console.log("Stable, experimental, and Merkel 21-point sprites share the focused preview without changing the game loader");
+console.log("Stable, experimental, Merkel 21-point, and one-direction mocap pilot share the preview without changing the game loader");

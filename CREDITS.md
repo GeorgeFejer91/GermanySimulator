@@ -1,5 +1,16 @@
 # Germany Simulator credits
 
+## Walking-motion reference
+
+The preview-only Merkel left-walk pilot uses subject 69, trial 01 (“walk
+forward”) from the Carnegie Mellon University Graphics Lab Motion Capture
+Database as an offline bone-direction reference. The game runtime does not load
+the BVH or a skeleton. Source, conversion commit, caveats, and checksums are
+recorded in `assets/sprite-sources/reference/cmu-walk-69-01/PROVENANCE.md`.
+
+The data used in this project was obtained from mocap.cs.cmu.edu. The database
+was created with funding from NSF EIA-0196217.
+
 ## 3D buildings
 
 Six building meshes are selected from Kenney's **City Kit Commercial 2.1** and recolored at runtime into the game's gray municipal palette. The original models are released under CC0 1.0; attribution is appreciated but not required.

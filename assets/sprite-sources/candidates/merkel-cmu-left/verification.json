@@ -1,0 +1,40 @@
+{
+  "status": "pass-unapproved",
+  "scope": "merkel-left-only",
+  "reference": {
+    "subject": 69,
+    "trial": 1,
+    "sourceFrames": [
+      200,
+      348
+    ],
+    "bvhSha256": "064de16c17a154c88b73eadecd4614e59d04ef3f8460d58785e20ceb9f4b807b"
+  },
+  "checks": {
+    "playbackFrames": 20,
+    "inspectionPoints": 21,
+    "distinctPlaybackFrames": 20,
+    "exactPixelClosure": true,
+    "maxBoneDirectionErrorDegrees": 0.000812,
+    "maxBoneLengthDriftPixels": 0.00164,
+    "alternatingContactOwners": [
+      "left",
+      "right"
+    ],
+    "ankleCrossingRangePixels": [
+      -82.173,
+      93.846
+    ],
+    "jointPixelCoverage": "pass",
+    "runtimeIsolation": "pass"
+  },
+  "artifactHashes": {
+    "merkel-sprite.png": "04a853f33765a18a023d88f1e986148f8cf7d1dfb8d27252c8fef20e14a94e3f",
+    "merkel-left-bones.png": "34f940f1ce44bc7b5e160ccc208b416e64a64398fc3bbced17c9a996513484cf",
+    "merkel-left-reference.png": "6d809ef910fc5b8b2a0b573645f42a44eb381425d291a4da819314abcbefb75b",
+    "merkel-left-audit.png": "04a853f33765a18a023d88f1e986148f8cf7d1dfb8d27252c8fef20e14a94e3f",
+    "merkel-left-evidence.jpg": "23fd746345ce1f31cd4f00393a45aa8fb21c20d3a4348c6e0731c5150baa6c8d",
+    "pose-audit.json": "4f6bd8a67b246f4b428f925627ba72648bbbe8c761a977a01e266c6e6308d7fc"
+  },
+  "approval": "mechanically validated; visual approval still required"
+}

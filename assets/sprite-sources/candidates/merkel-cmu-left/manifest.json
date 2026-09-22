@@ -1,0 +1,20 @@
+{
+  "schemaVersion": 1,
+  "status": "candidate-unapproved",
+  "scope": "merkel-left-only",
+  "movementAuthority": "assets/sprite-sources/reference/cmu-walk-69-01/walk-cycle-21.json",
+  "playbackFrames": 20,
+  "inspectionPoints": 21,
+  "directions": [
+    "left"
+  ],
+  "runtimeIsolation": "preview-only; root game atlas unchanged",
+  "artifacts": {
+    "merkel-sprite.png": "04a853f33765a18a023d88f1e986148f8cf7d1dfb8d27252c8fef20e14a94e3f",
+    "merkel-left-bones.png": "34f940f1ce44bc7b5e160ccc208b416e64a64398fc3bbced17c9a996513484cf",
+    "merkel-left-reference.png": "6d809ef910fc5b8b2a0b573645f42a44eb381425d291a4da819314abcbefb75b",
+    "merkel-left-audit.png": "04a853f33765a18a023d88f1e986148f8cf7d1dfb8d27252c8fef20e14a94e3f",
+    "merkel-left-evidence.jpg": "23fd746345ce1f31cd4f00393a45aa8fb21c20d3a4348c6e0731c5150baa6c8d",
+    "pose-audit.json": "4f6bd8a67b246f4b428f925627ba72648bbbe8c761a977a01e266c6e6308d7fc"
+  }
+}

@@ -28,6 +28,7 @@
     h1 span{display:block;margin-top:4px;color:var(--muted);font-size:9px;letter-spacing:.15em}
     .controls{display:flex;align-items:center;justify-content:flex-end;gap:8px;flex-wrap:wrap}
     .focus-control[hidden]{display:none}
+    figure[hidden]{display:none}
     button,select{min-height:34px;padding:6px 10px;border:1px solid var(--ink);border-radius:4px;background:#f4efe4;color:var(--ink);font-weight:800}
     button:hover{background:#ded7c8}
     button[aria-pressed="true"],button[aria-pressed="true"]:hover{background:var(--ink);color:var(--paper)}
@@ -75,13 +76,14 @@
 </head>
 <body>
   <header>
-    <h1>SPRITE PRÜFSTELLE <span>STABLE + EXPERIMENTAL + 21-POINT CANDIDATE</span></h1>
+    <h1>SPRITE PRÜFSTELLE <span>STABLE + EXPERIMENTAL + 21-POINT CANDIDATE + MOCAP PILOT</span></h1>
     <div class="controls" aria-label="Animation controls">
       <label>SPRITES
         <select id="source" aria-label="Sprite version">
           <option value="stable" selected>GAME · STABLE</option>
           <option value="experimental">EXPERIMENTAL</option>
           <option value="candidate">CANDIDATE · MERKEL 21</option>
+          <option value="mocap">PILOT · MERKEL LEFT MOCAP</option>
         </select>
       </label>
       <button id="mode" type="button" aria-pressed="false">ANIMATION PREVIEW</button>
@@ -94,8 +96,9 @@
       <label class="focus-control" hidden>VIEW
         <select id="overlay" aria-label="Candidate inspection view" disabled>
           <option value="normal">NORMAL</option>
+          <option value="bones">BONE OVERLAY</option>
+          <option value="reference">REFERENCE MAP</option>
           <option value="audit">AUDIT · CLOSURE</option>
-          <option value="skeleton">SKELETON</option>
           <option value="onion">ONION SKIN</option>
           <option value="difference">DIFFERENCE</option>
         </select>
@@ -129,14 +132,30 @@
   </section>
   <main id="previews" aria-live="polite"></main>
   <script>
-    const CACHE_TOKEN="20260922-merkel21";
+    const CACHE_TOKEN="20260922-merkel-cmu-left1";
+    const QA_ROWS={left:0,right:1,up:2,down:3};
     const SOURCES={
       stable:{label:"GAME · STABLE",root:"assets/sprite-archive/pre-rig-20260921/assets/",token:"20260922-stable1",frames:{merkel:24}},
       experimental:{label:"EXPERIMENTAL",root:"assets/",token:"20260922-biomech4",frames:{}},
-      candidate:{label:"CANDIDATE · MERKEL 21",root:"assets/sprite-sources/candidates/merkel-21/",token:CACHE_TOKEN,frames:{merkel:20},ids:["merkel"]}
+      candidate:{
+        label:"CANDIDATE · MERKEL 21",root:"assets/sprite-sources/candidates/merkel-21/",token:"20260922-merkel21",frames:{merkel:20},ids:["merkel"],
+        qa:{
+          audit:{file:"merkel-audit-21.png",frames:21,playbackFrames:20,rows:QA_ROWS},
+          bones:{file:"merkel-skeleton.png",frames:20,playbackFrames:20,rows:QA_ROWS},
+          onion:{file:"merkel-onion.png",frames:20,playbackFrames:20,rows:QA_ROWS},
+          difference:{file:"merkel-difference.png",frames:20,playbackFrames:20,rows:QA_ROWS}
+        }
+      },
+      mocap:{
+        label:"PILOT · MERKEL LEFT MOCAP",root:"assets/sprite-sources/candidates/merkel-cmu-left/",token:CACHE_TOKEN,
+        frames:{merkel:21},playbackFrames:20,ids:["merkel"],directions:["left"],rows:{left:0},meta:"1 DIRECTION · 20 + CLOSURE",
+        qa:{
+          bones:{file:"merkel-left-bones.png",frames:21,playbackFrames:20,rows:{left:0}},
+          reference:{file:"merkel-left-reference.png",frames:21,playbackFrames:20,rows:{left:0}},
+          audit:{file:"merkel-left-audit.png",frames:21,playbackFrames:20,rows:{left:0}}
+        }
+      }
     };
-    const QA_FILES={audit:"merkel-audit-21.png",skeleton:"merkel-skeleton.png",onion:"merkel-onion.png",difference:"merkel-difference.png"};
-    const QA_ROWS={left:0,right:1,up:2,down:3};
     const DIRECTIONS=[
       ["down","FRONT · DOWN"],
       ["up","BACK · UP"],
@@ -186,12 +205,13 @@
 
     function frameCount(){
       if(focused&&focusView)return focusView.frames||focusView.sprite.frames;
-      return sourceSelect.value==="candidate"?SOURCES.candidate.frames.merkel:32;
+      return SOURCES[sourceSelect.value].frames.merkel||32;
     }
 
     function playbackFrameCount(){
       if(focused&&focusView)return focusView.playbackFrames||focusView.frames||focusView.sprite.frames;
-      return sourceSelect.value==="candidate"?SOURCES.candidate.frames.merkel:32;
+      const source=SOURCES[sourceSelect.value];
+      return source.playbackFrames||source.frames.merkel||32;
     }
 
     function drawView(view){
@@ -234,26 +254,29 @@
     function updateFocus(){
       const sprite=sprites.get(character.value);
       if(!sprite)return;
+      const source=SOURCES[sourceSelect.value];
       const previous=direction.value;
-      direction.replaceChildren(...DIRECTIONS.filter(([key])=>sprite.directions[key]).map(([key,label])=>new Option(label,key)));
+      direction.replaceChildren(...DIRECTIONS.filter(([key])=>sprite.directions[key]&&(!source.directions||source.directions.includes(key))).map(([key,label])=>new Option(label,key)));
       if([...direction.options].some(option=>option.value===previous))direction.value=previous;
       const reference=sprite.directions[direction.value];
       const rowName=typeof reference==="string"?reference:reference.mirror;
-      focusView={canvas:focusCanvas,sprite,row:sprite.rows.indexOf(rowName),mirror:typeof reference==="object"};
-      if(sourceSelect.value==="candidate"&&overlay.value!=="normal"){
-        let image=qaImages.get(overlay.value);
+      focusView={canvas:focusCanvas,sprite,row:source.rows?.[direction.value]??sprite.rows.indexOf(rowName),mirror:source.rows?false:typeof reference==="object",playbackFrames:source.playbackFrames};
+      const qa=source.qa?.[overlay.value];
+      if(qa&&overlay.value!=="normal"){
+        const qaKey=`${sourceSelect.value}:${overlay.value}`;
+        let image=qaImages.get(qaKey);
         if(!image){
           image=new Image();
           image.decoding="async";
           image.addEventListener("load",()=>{shownFrame=-1;draw();});
-          image.src=`./${SOURCES.candidate.root}${QA_FILES[overlay.value]}?v=${CACHE_TOKEN}`;
-          qaImages.set(overlay.value,image);
+          image.src=`./${source.root}${qa.file}?v=${source.token}`;
+          qaImages.set(qaKey,image);
         }
-        focusView={...focusView,image,sourceRow:QA_ROWS[direction.value],mirror:false,frames:overlay.value==="audit"?21:20,playbackFrames:20};
+        focusView={...focusView,image,sourceRow:qa.rows[direction.value],mirror:false,frames:qa.frames,playbackFrames:qa.playbackFrames};
       }
       focusTitle.textContent=NAMES[sprite.id]||sprite.id;
       const viewLabel=overlay.value==="normal"?"":` · ${overlay.selectedOptions[0].text}`;
-      focusMeta.textContent=`${SOURCES[sourceSelect.value].label} · ${direction.selectedOptions[0].text}${viewLabel} · ${frameCount()} FRAMES`;
+      focusMeta.textContent=`${source.label} · ${direction.selectedOptions[0].text}${viewLabel} · ${frameCount()} FRAMES`;
       focusCaption.textContent=direction.selectedOptions[0].text;
       focusCanvas.setAttribute("aria-label",`${focusTitle.textContent}, ${direction.selectedOptions[0].text.toLowerCase()} focused walking animation`);
       syncClock();
@@ -264,15 +287,28 @@
       const allowed=id=>!source.ids||source.ids.includes(id);
       for(const option of character.options)option.disabled=!allowed(option.value);
       if(!allowed(character.value))character.value=source.ids[0];
-      overlay.disabled=sourceSelect.value!=="candidate";
+      for(const option of overlay.options){
+        const available=option.value==="normal"||Boolean(source.qa?.[option.value]);
+        option.disabled=!available;
+        option.hidden=!available;
+      }
+      overlay.disabled=!source.qa;
       if(overlay.disabled)overlay.value="normal";
+      if(overlay.selectedOptions[0]?.disabled)overlay.value="normal";
       for(const sprite of sprites.values()){
         sprite.article.hidden=!allowed(sprite.id);
         if(!allowed(sprite.id))continue;
         sprite.frames=source.frames[sprite.id]||32;
-        sprite.meta.textContent=`${sprite.rows.length} ROWS · ${sprite.frames} FRAMES`;
+        sprite.meta.textContent=source.meta||`${sprite.rows.length} ROWS · ${sprite.frames} FRAMES`;
         const file=sprite.runtime.split("/").pop();
         sprite.image.src=`./${source.root}${file}?v=${source.token}`;
+      }
+      for(const view of views){
+        const available=!source.directions||source.directions.includes(view.direction);
+        view.figure.hidden=!available;
+        view.sourceRow=source.rows?.[view.direction];
+        view.mirror=source.rows?false:view.originalMirror;
+        view.playbackFrames=source.playbackFrames;
       }
       if(focused)updateFocus();
       else syncClock();
@@ -321,14 +357,18 @@
     });
 
     async function load(){
-      const [response,candidateResponse]=await Promise.all([
+      const [response,candidateResponse,mocapResponse]=await Promise.all([
         fetch(`./assets/sprite-sources/rigs/registry.json?v=${CACHE_TOKEN}`),
-        fetch(`./assets/sprite-sources/candidates/merkel-21/manifest.json?v=${CACHE_TOKEN}`)
+        fetch(`./assets/sprite-sources/candidates/merkel-21/manifest.json?v=${CACHE_TOKEN}`),
+        fetch(`./assets/sprite-sources/candidates/merkel-cmu-left/manifest.json?v=${CACHE_TOKEN}`)
       ]);
       if(!response.ok)throw new Error(`Registry request failed (${response.status})`);
       if(!candidateResponse.ok)throw new Error(`Candidate manifest request failed (${candidateResponse.status})`);
-      const [registry,candidateManifest]=await Promise.all([response.json(),candidateResponse.json()]);
+      if(!mocapResponse.ok)throw new Error(`Mocap pilot manifest request failed (${mocapResponse.status})`);
+      const [registry,candidateManifest,mocapManifest]=await Promise.all([response.json(),candidateResponse.json(),mocapResponse.json()]);
       SOURCES.candidate.frames.merkel=candidateManifest.playbackFrames;
+      SOURCES.mocap.frames.merkel=mocapManifest.inspectionPoints;
+      SOURCES.mocap.playbackFrames=mocapManifest.playbackFrames;
       for(const sprite of registry.sprites){
         const article=document.createElement("article");
         const heading=document.createElement("header");
@@ -363,7 +403,7 @@
           caption.textContent=label;
           figure.append(caption,canvas);
           directions.append(figure);
-          views.push({canvas,sprite,row:sprite.rows.indexOf(rowName),mirror:typeof reference==="object"});
+          views.push({canvas,sprite,row:sprite.rows.indexOf(rowName),mirror:typeof reference==="object",originalMirror:typeof reference==="object",direction,figure});
         }
       }
       setSource();

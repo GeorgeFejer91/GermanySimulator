@@ -1,5 +1,29 @@
 # Durable decisions
 
+## 2026-09-22 — One-direction Merkel mocap pilot precedes any atlas-wide gait work
+
+The next walking experiment is intentionally limited to Merkel's left-facing
+side view. Carnegie Mellon University subject 69, trial 01 (“walk forward”) is
+the external movement authority. The pinned BVH and its provenance live under
+`assets/sprite-sources/reference/cmu-walk-69-01/`; the converter-inserted
+T-pose at frame zero is excluded, and fingers/toes are excluded from the hard
+gate because CMU flags those extremities as noisy. A deterministic offline
+extractor detects one complete same-foot gait period, projects it into a
+travel/up side plane, samples 20 poses, and repeats pose zero as exact
+inspection point 21.
+
+`assets/sprite-sources/candidates/merkel-cmu-left/` retargets only the captured
+shoulder–elbow–wrist and hip–knee–ankle directions onto Merkel's existing
+identity-matched side parts and fixed caricature bone lengths. Her head,
+jacket, scale, and compact proportions remain rigid. A fail-closed verifier
+checks every rendered bone direction against the corresponding captured bone,
+constant lengths, joint-to-pixel coverage, alternating contact, ankle crossing,
+20 distinct frames, safe margins, and exact pixel closure. The lane remains
+`candidate-unapproved`, left-only, and preview-only. It adds normal, bone
+overlay, and reference-map modes to `sprite-preview.html` but does not alter
+`game.js` or any stable game atlas. Other directions and characters must not be
+derived until this single cycle receives explicit visual acceptance.
+
 ## 2026-09-22 — Merkel 21-point gait is an unapproved preview candidate
 
 Merkel has one isolated 21-point inspection lane under
