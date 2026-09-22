@@ -75,8 +75,14 @@
 </head>
 <body>
   <header>
-    <h1>SPRITE PRÜFSTELLE <span>32-FRAME WALKING ATLAS PREVIEW</span></h1>
+    <h1>SPRITE PRÜFSTELLE <span>STABLE + EXPERIMENTAL WALKING ATLAS PREVIEW</span></h1>
     <div class="controls" aria-label="Animation controls">
+      <label>SPRITES
+        <select id="source" aria-label="Sprite version">
+          <option value="stable" selected>GAME · STABLE</option>
+          <option value="experimental">EXPERIMENTAL</option>
+        </select>
+      </label>
       <button id="mode" type="button" aria-pressed="false">ANIMATION PREVIEW</button>
       <label class="focus-control" hidden>CHARACTER
         <select id="character" aria-label="Preview character"></select>
@@ -114,6 +120,10 @@
   <main id="previews" aria-live="polite"></main>
   <script>
     const CACHE_TOKEN="20260922-biomech4";
+    const SOURCES={
+      stable:{label:"GAME · STABLE",root:"assets/sprite-archive/pre-rig-20260921/assets/",token:"20260922-stable1",frames:{merkel:24}},
+      experimental:{label:"EXPERIMENTAL",root:"assets/",token:CACHE_TOKEN,frames:{}}
+    };
     const DIRECTIONS=[
       ["down","FRONT · DOWN"],
       ["up","BACK · UP"],
@@ -133,6 +143,7 @@
     const status=document.querySelector("#status");
     const toggle=document.querySelector("#toggle");
     const speed=document.querySelector("#speed");
+    const sourceSelect=document.querySelector("#source");
     const mode=document.querySelector("#mode");
     const focusPreview=document.querySelector("#focus-preview");
     const focusControls=[...document.querySelectorAll(".focus-control")];
@@ -147,7 +158,7 @@
     let focused=false;
     let focusView=null;
     let playing=!matchMedia("(prefers-reduced-motion: reduce)").matches;
-    let phase=0;
+    let cycle=0;
     let shownFrame=-1;
     let lastTime=performance.now();
 
@@ -158,29 +169,42 @@
       lastTime=performance.now();
     }
 
-    function drawView(view,frame){
-        if(!view?.image.complete)return;
-        const size=view.canvas.width;
-        const context=view.canvas.getContext("2d");
-        context.clearRect(0,0,size,size);
-        context.imageSmoothingEnabled=true;
-        context.imageSmoothingQuality="high";
-        if(view.mirror){
-          context.save();
-          context.translate(size,0);
-          context.scale(-1,1);
-        }
-        context.drawImage(view.image,frame*128,view.row*128,128,128,0,0,size,size);
-        if(view.mirror)context.restore();
+    function frameCount(){
+      return focused&&focusView?focusView.sprite.frames:32;
     }
 
-    function draw(frame){
+    function drawView(view){
+      if(!view?.sprite.image.complete||!view.sprite.image.naturalWidth)return;
+      const size=view.canvas.width;
+      const frame=Math.min(view.sprite.frames-1,Math.floor(cycle*view.sprite.frames));
+      const context=view.canvas.getContext("2d");
+      context.clearRect(0,0,size,size);
+      context.imageSmoothingEnabled=true;
+      context.imageSmoothingQuality="high";
+      if(view.mirror){
+        context.save();
+        context.translate(size,0);
+        context.scale(-1,1);
+      }
+      context.drawImage(view.sprite.image,frame*128,view.row*128,128,128,0,0,size,size);
+      if(view.mirror)context.restore();
+    }
+
+    function draw(){
+      const frames=frameCount();
+      const frame=Math.min(frames-1,Math.floor(cycle*frames));
       if(frame===shownFrame)return;
       shownFrame=frame;
       frameInput.value=String(frame);
-      status.value=`FRAME ${String(frame).padStart(2,"0")} / 31`;
-      for(const view of views)drawView(view,frame);
-      drawView(focusView,frame);
+      status.value=`FRAME ${String(frame).padStart(2,"0")} / ${frames-1}`;
+      for(const view of views)drawView(view);
+      drawView(focusView);
+    }
+
+    function syncClock(){
+      frameInput.max=String(frameCount()-1);
+      shownFrame=-1;
+      draw();
     }
 
     function updateFocus(){
@@ -191,13 +215,24 @@
       if([...direction.options].some(option=>option.value===previous))direction.value=previous;
       const reference=sprite.directions[direction.value];
       const rowName=typeof reference==="string"?reference:reference.mirror;
-      focusView={canvas:focusCanvas,image:sprite.image,row:sprite.rows.indexOf(rowName),mirror:typeof reference==="object"};
+      focusView={canvas:focusCanvas,sprite,row:sprite.rows.indexOf(rowName),mirror:typeof reference==="object"};
       focusTitle.textContent=NAMES[sprite.id]||sprite.id;
-      focusMeta.textContent=`${direction.selectedOptions[0].text} · 32 FRAMES`;
+      focusMeta.textContent=`${SOURCES[sourceSelect.value].label} · ${direction.selectedOptions[0].text} · ${sprite.frames} FRAMES`;
       focusCaption.textContent=direction.selectedOptions[0].text;
       focusCanvas.setAttribute("aria-label",`${focusTitle.textContent}, ${direction.selectedOptions[0].text.toLowerCase()} focused walking animation`);
-      shownFrame=-1;
-      draw(Math.floor(phase));
+      syncClock();
+    }
+
+    function setSource(){
+      const source=SOURCES[sourceSelect.value];
+      for(const sprite of sprites.values()){
+        sprite.frames=source.frames[sprite.id]||32;
+        sprite.meta.textContent=`${sprite.rows.length} ROWS · ${sprite.frames} FRAMES`;
+        const file=sprite.runtime.split("/").pop();
+        sprite.image.src=`./${source.root}${file}?v=${source.token}`;
+      }
+      if(focused)updateFocus();
+      else syncClock();
     }
 
     function setMode(next){
@@ -208,16 +243,19 @@
       focusPreview.hidden=!focused;
       for(const control of focusControls)control.hidden=!focused;
       if(focused)updateFocus();
+      else syncClock();
     }
 
     function step(amount){
       setPlaying(false);
-      phase=(Math.floor(phase)+amount+32)%32;
+      const frames=frameCount();
+      cycle=((Math.floor(cycle*frames)+amount+frames)%frames)/frames;
       shownFrame=-1;
-      draw(Math.floor(phase));
+      draw();
     }
 
     toggle.addEventListener("click",()=>setPlaying(!playing));
+    sourceSelect.addEventListener("change",setSource);
     mode.addEventListener("click",()=>setMode(!focused));
     character.addEventListener("change",updateFocus);
     direction.addEventListener("change",updateFocus);
@@ -225,9 +263,9 @@
     document.querySelector("#next").addEventListener("click",()=>step(1));
     frameInput.addEventListener("input",()=>{
       setPlaying(false);
-      phase=Number(frameInput.value);
+      cycle=Number(frameInput.value)/frameCount();
       shownFrame=-1;
-      draw(phase);
+      draw();
     });
     addEventListener("keydown",event=>{
       if(event.target instanceof Element&&event.target.matches("button,input,select"))return;
@@ -242,7 +280,6 @@
       const response=await fetch(`./assets/sprite-sources/rigs/registry.json?v=${CACHE_TOKEN}`);
       if(!response.ok)throw new Error(`Registry request failed (${response.status})`);
       const registry=await response.json();
-      frameInput.max=String(registry.frameContract.runtimeFrames-1);
       for(const sprite of registry.sprites){
         const article=document.createElement("article");
         const heading=document.createElement("header");
@@ -257,9 +294,9 @@
         root.append(article);
         const image=new Image();
         image.decoding="async";
-        image.src=`./${sprite.runtime}?v=${CACHE_TOKEN}`;
-        image.addEventListener("load",()=>{shownFrame=-1;draw(Math.floor(phase));},{once:true});
+        image.addEventListener("load",()=>{shownFrame=-1;draw();});
         sprite.image=image;
+        sprite.meta=meta;
         sprites.set(sprite.id,sprite);
         character.append(new Option(title.textContent,sprite.id));
         for(const [direction,label] of DIRECTIONS){
@@ -276,18 +313,18 @@
           caption.textContent=label;
           figure.append(caption,canvas);
           directions.append(figure);
-          views.push({canvas,image,row:sprite.rows.indexOf(rowName),mirror:typeof reference==="object"});
+          views.push({canvas,sprite,row:sprite.rows.indexOf(rowName),mirror:typeof reference==="object"});
         }
       }
-      updateFocus();
+      setSource();
     }
 
     function animate(time){
       if(playing){
-        phase=(phase+(time-lastTime)*Number(speed.value)/1000)%32;
+        cycle=(cycle+(time-lastTime)*Number(speed.value)/1000/frameCount())%1;
       }
       lastTime=time;
-      draw(Math.floor(phase));
+      draw();
       requestAnimationFrame(animate);
     }
 

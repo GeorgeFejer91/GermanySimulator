@@ -193,14 +193,16 @@ overlay inspection are production authority.
 
 ## Browser preview sandbox
 
-`sprite-preview.html` is the standalone browser inspection surface for the
-experimental walking atlases. It reads this registry directly, shows every
-authored direction for all six characters on transparent checkerboards, and
-keeps every view on the same 32-frame clock. Pause, single-frame stepping,
-scrubbing, and speed selection support visual review on desktop and mobile.
-The atlas grid can switch to a focused animation mode that enlarges one chosen
-character and direction while retaining that exact shared clock and runtime
-atlas. It is an inspection view, not another renderer or derived asset.
+`sprite-preview.html` is the standalone comparison surface for both the stable
+game atlases in `assets/sprite-archive/pre-rig-20260921/assets/` and the
+experimental walking atlases in `assets/`. It reads the experimental registry
+for character, row, and direction metadata, then loads only the selected asset
+set. Every authored direction appears on a transparent checkerboard. The grid
+synchronizes atlases by normalized walk cycle; focused animation mode exposes
+the selected atlas's native frame count, including stable Merkel's 24 frames
+and the 32-frame experimental version. Pause, single-frame stepping, scrubbing,
+and speed selection support visual review on desktop and mobile. It is an
+inspection view, not another renderer or derived asset.
 It does not load `game.js`, `world3d.js`, audio, or the game world, and it does
-not copy or redefine any sprite asset or direction mapping. The preview must
-remain on the experimental atlases even while the root game uses the rollback.
+not copy or redefine any sprite asset or direction mapping. The source selector
+must not change the root game's stable loader decision.

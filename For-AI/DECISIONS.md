@@ -10,9 +10,13 @@ the other five use 32 columns. No sprite generation was deleted or overwritten.
 
 The current biomechanical atlases, part sheets, audit, verification ledger, and
 builder remain the active experiment in `assets/`, `assets/sprite-sources/`,
-the For-AI protocol, and `sprite-preview.html`. They must not be restored to the
-root game until a new visual review explicitly accepts them. This supersedes
-the same-day biomechanical runtime decision below only for the shipping loader.
+and the For-AI protocol. `sprite-preview.html` offers an explicit selector
+between those experimental atlases and the exact stable game atlases so visual
+review can compare both versions without changing the shipping loader. It loads
+only the selected set and exposes each focused atlas at its native frame count.
+The experimental set must not be restored to the root game until a new visual
+review explicitly accepts it. This supersedes the same-day biomechanical
+runtime decision below only for the shipping loader.
 
 Close-range audio now has a dedicated `NEARBY` broker tier below critical
 modal/direct speech and above featured, reactive, and ambient speech. Merkel,
