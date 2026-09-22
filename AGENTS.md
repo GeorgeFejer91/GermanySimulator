@@ -1,5 +1,7 @@
 # Germany Simulator agent instructions
 
+> Mandatory first read: [For-AI/README.md](./For-AI/README.md). It is the YAGNI control-plane router; then follow the project-specific rules below.
+
 Before inspecting, planning, editing, or running this project, read [`For-AI/AGENT-START.md`](./For-AI/AGENT-START.md) completely. Then read every document it marks as required for the task.
 
 The root game is the canonical standalone Germany Simulator. Do not replace it with another prototype or import a different game direction. Preserve the established “Grand Theft Amt” world, visual identity, mission chain, controls, satire framing, and desktop/mobile behavior unless the user explicitly changes them.
