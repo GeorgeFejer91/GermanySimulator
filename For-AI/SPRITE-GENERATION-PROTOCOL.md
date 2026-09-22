@@ -33,7 +33,10 @@ identity references, not as a second runtime tree.
 Every character is authored on a 512 × 512 working cell, reviewed through
 eight 256 × 256 key cells, and shipped as 32 direct 128 × 128 RGBA cells per
 row. The cell midpoint, pelvis root, ground line, render scale, head plate, and
-torso plate are fixed. Never crop, normalize, or recenter individual frames.
+torso plate are fixed. Directional source parts are normalized once per
+character before frame evaluation so head, torso, and bone scale do not jump
+between front, back, and side rows. Never crop, normalize, or recenter
+individual frames.
 
 The eight anchors are:
 
@@ -100,15 +103,19 @@ less time without changing gait anatomy.
 
 1. Head and torso are rigid plates from the same accepted part sheet in every
    frame. They may follow the bounded pelvis bob but may not morph.
-2. Limbs rotate from stable shoulder/hip sockets. Both legs render behind the
+2. The chin/head-bottom anchor meets the shoulder line within eight working-grid
+   pixels in every frame. The shared fullness and compact-limb correction is
+   part of the established caricature silhouette; do not reintroduce a tall
+   neck or narrow, elongated body.
+3. Limbs rotate from stable shoulder/hip sockets. Both legs render behind the
    torso/pelvis so registration sockets cannot cover clothing.
-3. Rounded joint bridges and caps cover authoring sockets; exposed orange or
+4. Rounded joint bridges and caps cover authoring sockets; exposed orange or
    silver registration marks are a failure.
-4. Props use declared anchors. Flags, towels, food, bucket, watering can, and
+5. Props use declared anchors. Flags, towels, food, bucket, watering can, and
    Merkel's diamond pose must not pull the root or head registration.
-5. Every body part, hat, head, prop, foot, and antialiased edge stays inside
+6. Every body part, hat, head, prop, foot, and antialiased edge stays inside
    the transparent cell safety margin. Transparent pixels contain zero RGB.
-6. Source art from one character may never be reused to reconstruct another.
+7. Source art from one character may never be reused to reconstruct another.
 
 ## Automated release gate
 
@@ -126,6 +133,7 @@ The unsigned pass must succeed before review. It verifies:
 - exact 8-key to 32-cell correspondence at the named anchors;
 - 32 distinct final poses in every current walk row (hard minimum 28);
 - fixed cell/root/head registration and complete transparent margins;
+- chin-to-shoulder connection and direction-consistent compact proportions;
 - discrete alternating stance ownership and double-support contacts;
 - zero stance lift and positive passing toe clearance;
 - monotonic stance/swing travel, correct forward direction, and no moonwalk;

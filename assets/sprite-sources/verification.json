@@ -1,11 +1,11 @@
 {
-  "version": 5,
+  "version": 6,
   "renderMode": "biomechanical-rig-v3",
-  "reviewPolicy": "Every final runtime cell is a direct deterministic rig evaluation on one fixed root/ground grid. The signed pose audit and all part, key, runtime, and archived identity assets are SHA-256 bound. Approval requires the numerical biomechanics gate plus visual review of the 32-cell joint-overlay contact sheet for every row. Any pixel, joint, direction, gait, or registry change invalidates approval.",
+  "reviewPolicy": "Every final runtime cell is a direct deterministic rig evaluation on one fixed root/ground grid. The signed pose audit and all part, key, runtime, and archived identity assets are SHA-256 bound. Approval requires the numerical biomechanics gate plus visual review of compact directional proportions and the chin/shoulder guide on the 32-cell joint-overlay contact sheet for every row. Any pixel, joint, direction, gait, proportion, or registry change invalidates approval.",
   "registrySha256": "be974eb1ab318ace5ae9f1c25216bfa677fa4cebb50401447f48111e9de6630d",
-  "builderSha256": "8c35bfbfcccef35e6dcc70ba99a62b27ad682e19c66b731019ae1e299b23b0d1",
+  "builderSha256": "247e71d02c90ac18d336e3b28b7f4dd9bada336939bf5a1cce6535f932ff0122",
   "poseAudit": "assets/sprite-sources/rigs/pose-audit.json",
-  "poseAuditSha256": "aeffba65c70054ae4074556b2701b19a3362490b55188d4f63b4d1a4bd5047e8",
+  "poseAuditSha256": "25523e96959ba70de52a0cf53bb87191f3d377432d4a5fc2dba4701c79b2adf3",
   "visualChecklist": [
     "completeBody",
     "identityConsistency",
@@ -25,68 +25,70 @@
     "directionalRowContract",
     "thirtyTwoDirectFrames",
     "finalFrameContactSheet",
-    "mirroredLeftArc"
+    "mirroredLeftArc",
+    "headShoulderConnection",
+    "directionalProportionConsistency"
   ],
   "sprites": [
     {
       "id": "merkel",
       "partsSha256": "7b5800546c78629e0739eea515efc63565728778e75868f21fc6f86635077c85",
-      "sourceSha256": "30bf30548532eaa23cda7720d833ff11e6791a534d109f61def63e86c4247152",
-      "runtimeSha256": "eca864275c6a7a7f71c3c54061eb7711c037c6b1fc36d679c84cb1adf6e1a285",
+      "sourceSha256": "d3f5a0983941f452566542fe162b00ffcc37154d7c6510185061f083bcdfe3b0",
+      "runtimeSha256": "e375370e5ddba98563ecb7212409c0c25a70d5b75dc87e3d3d481863027c6c83",
       "identityReferenceSha256": "7d5cde706ea62a8e4a8be4086ad0d595272db76b4cc61277d95e081a861b69df",
       "visualStatus": "pass",
       "reviewedOn": "2026-09-22",
-      "reviewer": "Codex 32-cell biomechanical joint-overlay review"
+      "reviewer": "Codex 32-cell compact-proportion and joint-overlay review"
     },
     {
       "id": "merz",
       "partsSha256": "b5fe014b8a4842416fa98050b3cb474279b5a0c50df58a50e877845e4dc9eaed",
-      "sourceSha256": "cd5a08cbd18e146b5855cd5c483cda0989018d2f843b28c8a2f94b92e769f8ff",
-      "runtimeSha256": "cd26e9bfdb9d1c2e5e676673520c184d33b0fbf76a8eeb2ae2e3c9c4bfe06c5e",
+      "sourceSha256": "d924653ba768b5ebcc50005b48bf9bc2bffa8377f15ed15d217e5ef732d8a731",
+      "runtimeSha256": "4983eed18a9768a010bb2c14c6462f73de0c000d1e257836a3860e70090ca4c5",
       "identityReferenceSha256": "29c2e0257ed82f56848ff1035e9d3a95e720695418e118220e493138caf3c333",
       "visualStatus": "pass",
       "reviewedOn": "2026-09-22",
-      "reviewer": "Codex 32-cell biomechanical joint-overlay review"
+      "reviewer": "Codex 32-cell compact-proportion and joint-overlay review"
     },
     {
       "id": "bayern",
       "partsSha256": "55b789343b486db019091112246857b352cabb1d1568d4a71b4c46b354306f28",
-      "sourceSha256": "29b2ec88ea925ddbb7320ce08cc4a3eb82d347f40579beb5237f78cff9bef92b",
-      "runtimeSha256": "b7ce0b6de794b34c69f7defb0d93ec86d5d8f44ebb60b2debb88089f6be0f786",
+      "sourceSha256": "8b7ed5160317cae7f1f06f7eb1fad9849b6a31a109a2aa5917eb14b155ffd12b",
+      "runtimeSha256": "29b2e77d13159c53a3c500b37c020aeb52f307336fd1b33d8f02fa92951f4167",
       "identityReferenceSha256": "45f7b831e8553aa9f5087166b8a62f852e6867936341836a531053cf60b1944a",
       "visualStatus": "pass",
       "reviewedOn": "2026-09-22",
-      "reviewer": "Codex 32-cell biomechanical joint-overlay review"
+      "reviewer": "Codex 32-cell compact-proportion and joint-overlay review"
     },
     {
       "id": "alice",
       "partsSha256": "0ac7254ea7ca9929c89a3245724e238755af294ada584ffbe7272b99b5746d7a",
-      "sourceSha256": "821b95d310f3202dde6093a4d2f6cd230edf8ec29868c4e17c10e13979fe18f5",
-      "runtimeSha256": "8d7abeb094278e2409c9e70f6c056990eaa9ac33cef33f51afe45cd970693883",
+      "sourceSha256": "380f2f131cd813b298b2cfa866b59eef1ddf27a38745175c6e0e7aa00e81eeb7",
+      "runtimeSha256": "ba3188944d72c94d0f515b178d26d58c16667cd096221d0fe33553deafd2d250",
       "identityReferenceSha256": "4c7e4e0e2fe6ebf2f2b4bd50ef156fce29ce63195a65f9e317314791249a376d",
       "visualStatus": "pass",
       "reviewedOn": "2026-09-22",
-      "reviewer": "Codex 32-cell biomechanical joint-overlay review"
+      "reviewer": "Codex 32-cell compact-proportion and joint-overlay review"
     },
     {
       "id": "towel-man",
       "partsSha256": "8777f2589e9cdd86344e8b3c79dfab2abd13b70124d108fc84be2eeea9458e58",
-      "sourceSha256": "0684b89b464b0dbbc29baebd09fa84e7dfb084eefc978ad21c3b42ebf1d38e76",
-      "runtimeSha256": "363e925554b0bb2349894d985668f53abfc352bdb9f6acceb26918b450416cc3",
+      "sourceSha256": "0e3d35cb55fa6d8a4218d6b29c1c5236ab2c7ed5d8a667341f904254e6ebda88",
+      "runtimeSha256": "6a13fca3cabfff987a638cb9520d1edd6e0d0c68ff65f9ebd19b89bdee147790",
       "identityReferenceSha256": "4f5784eadabba9adf572ce2e27559fb5db3bfd8b6545624c94376fb9b8ca1cbe",
       "visualStatus": "pass",
       "reviewedOn": "2026-09-22",
-      "reviewer": "Codex 32-cell biomechanical joint-overlay review"
+      "reviewer": "Codex 32-cell compact-proportion and joint-overlay review"
     },
     {
       "id": "towel-woman",
       "partsSha256": "265d5e92bf1ca0fd185d3bd8f64d6760316c969b239ed5ede613f7c88d9013cb",
-      "sourceSha256": "a6996637b81c0267e2b0d3b0c84c2b26a12147654a0cdfbdceb5a43e9bbf5f9b",
-      "runtimeSha256": "99a78f2fc223a0a6e195b994f821600a818b6a6818dbf3a631ff06954ca69a39",
+      "sourceSha256": "21936cd7f5e1b7136734c9aca772075983731a979373083d463c105e93e8cd0d",
+      "runtimeSha256": "1f8edea46cdd2479b4edbd6ef987433a1f8b72e4d04779fe993b40a43377519a",
       "identityReferenceSha256": "bb407dcff74386fa3d5874a8ae331d997b981f01db499fb00b6358a9dd5b09f3",
       "visualStatus": "pass",
       "reviewedOn": "2026-09-22",
-      "reviewer": "Codex 32-cell biomechanical joint-overlay review"
+      "reviewer": "Codex 32-cell compact-proportion and joint-overlay review"
     }
   ]
 }

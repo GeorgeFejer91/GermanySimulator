@@ -55,6 +55,7 @@ for(const entry of registry.sprites){
  assert.deepEqual(audited.rows.map(row=>row.rowName),entry.rows);
  assert.ok(audited.rows.every(row=>row.frames.length===32),`${entry.id} needs one joint record per final frame`);
  assert.ok(audited.rows.every(row=>row.frames.every((frame,index)=>frame.frame===index)),`${entry.id} audit order must be one-to-one`);
+ assert.ok(audited.rows.every(row=>row.frames.every(frame=>Math.abs(frame.headBottom[1]-(frame.shoulders.left[1]+frame.shoulders.right[1])/2)<=8)),`${entry.id} heads must meet the shoulder line`);
 }
 
 const builder=readFileSync("tools/build-rigged-sprite-atlas.py","utf8");
@@ -70,7 +71,7 @@ assert.match(hardGate.stdout,/PASS merz: 192 final cells; minimum 32 distinct po
 assert.match(hardGate.stdout,/PASS towel-woman: 96 final cells; minimum 32 distinct poses/);
 
 const gate=readFileSync("tools/verify-sprite-animation.py","utf8");
-for(const token of ["at least 28","stance foot slides forward","passing foot lacks toe clearance","passing crossover","cyclic loop seam jumps","head/top anchor jitters","--overlay-dir","poseAuditSha256","mirrored left arc"]){
+for(const token of ["at least 28","stance foot slides forward","passing foot lacks toe clearance","passing crossover","cyclic loop seam jumps","head/top anchor jitters","head floats above the shoulder line","--overlay-dir","poseAuditSha256","mirrored left arc"]){
  assert.match(gate,new RegExp(token),`verification gate must check ${token}`);
 }
 

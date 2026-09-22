@@ -64,6 +64,14 @@ GAIT_ANCHORS = {
     "pelvis_y": (0.00, 4.00, 0.00, -2.50, 0.00, 4.00, 0.00, -2.50),
 }
 
+TORSO_WIDTH_SCALE = 1.12
+LIMB_WIDTH_SCALE = 1.08
+LIMB_LENGTH_SCALE = 0.92
+HEAD_TORSO_OVERLAP = 0.22
+DIRECTIONAL_SCALE_PARTS = (
+    "head", "torso", "left_thigh", "left_calf", "right_thigh", "right_calf"
+)
+
 
 @dataclass(frozen=True)
 class LimbResult:
@@ -221,13 +229,23 @@ def scale_parts(parts: dict[str, Image.Image]) -> dict[str, Image.Image]:
     )
     natural_height = head.height * 0.88 + torso.height * 0.82 + leg_height * 0.84
     scale = min(1.0, 444.0 / natural_height)
-    return {
-        name: premultiplied_resize(
-            image,
-            (max(1, round(image.width * scale)), max(1, round(image.height * scale))),
-        )
-        for name, image in parts.items()
+    limb_names = {
+        name
+        for name in PART_NAMES
+        if any(token in name for token in ("arm", "forearm", "thigh", "calf"))
     }
+    scaled = {}
+    for name, image in parts.items():
+        width_scale = TORSO_WIDTH_SCALE if name == "torso" else LIMB_WIDTH_SCALE if name in limb_names else 1.0
+        height_scale = LIMB_LENGTH_SCALE if name in limb_names else 1.0
+        scaled[name] = premultiplied_resize(
+            image,
+            (
+                max(1, round(image.width * scale * width_scale)),
+                max(1, round(image.height * scale * height_scale)),
+            ),
+        )
+    return scaled
 
 
 def paint_socket_core(image: Image.Image, top: bool, bottom: bool) -> Image.Image:
@@ -617,12 +635,11 @@ def point_record(point: tuple[float, float], mirrored: bool) -> list[float]:
 
 
 def render_frame(
-    raw_parts: dict[str, Image.Image],
+    parts: dict[str, Image.Image],
     row_name: str,
     prop_mode: str,
     frame_index: int,
 ) -> tuple[Image.Image, dict]:
-    parts = scale_parts(raw_parts)
     view, mirrored, pouring, idle = row_contract(row_name)
     gait = 0.0 if idle else 1.0
     coefficients = gait_coefficients(frame_index, idle)
@@ -763,7 +780,7 @@ def render_frame(
     )
 
     canvas.alpha_composite(torso, (round(center_x - torso.width / 2), round(torso_top)))
-    head_bottom = torso_top + torso.height * 0.09
+    head_bottom = torso_top + torso.height * HEAD_TORSO_OVERLAP
     joint_bridge(
         canvas,
         (center_x, head_bottom - 12),
@@ -832,6 +849,11 @@ def render_frame(
         "movementAxis": movement_axis,
         "movementSign": movement_sign,
         "root": point_record((center_x, hip_y), mirrored),
+        "headBottom": point_record((center_x, head_bottom), mirrored),
+        "shoulders": {
+            side: point_record(shoulders[side], mirrored)
+            for side in ("left", "right")
+        },
         "limbs": {
             side: {
                 "stance": limb_phases[side]["stance"],
@@ -860,11 +882,23 @@ def make_preview(runtime_rows: list[list[Image.Image]], output: Path) -> None:
 
 def build_entry(entry: dict, preview_dir: Path | None) -> dict:
     part_path = ROOT / entry["parts"]
-    views = extract_parts(
-        part_path,
-        {int(value) for value in entry.get("dropPartIndexes", [])},
-        [int(value) for value in entry["partIndexes"]] if "partIndexes" in entry else None,
-    )
+    views = [
+        scale_parts(parts)
+        for parts in extract_parts(
+            part_path,
+            {int(value) for value in entry.get("dropPartIndexes", [])},
+            [int(value) for value in entry["partIndexes"]] if "partIndexes" in entry else None,
+        )
+    ]
+    for name in DIRECTIONAL_SCALE_PARTS:
+        target_height = round(float(np.median([parts[name].height for parts in views])))
+        for parts in views:
+            image = parts[name]
+            ratio = target_height / image.height
+            parts[name] = premultiplied_resize(
+                image,
+                (max(1, round(image.width * ratio)), target_height),
+            )
     source_rows: list[list[Image.Image]] = []
     runtime_rows: list[list[Image.Image]] = []
     audit_rows: list[dict] = []

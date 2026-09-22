@@ -28,7 +28,8 @@ EXPECTED_CHECKLIST = {
     "stanceFootConstraint", "toeClearance", "passingPoseLegCrossing",
     "forwardDirectionNoMoonwalk", "boundedLoopSeam", "clearTransparency",
     "silhouetteScale", "directionalRowContract", "thirtyTwoDirectFrames",
-    "finalFrameContactSheet", "mirroredLeftArc",
+    "finalFrameContactSheet", "mirroredLeftArc", "headShoulderConnection",
+    "directionalProportionConsistency",
 }
 
 
@@ -184,11 +185,24 @@ def validate_biomechanics(sprite_id: str, row_name: str, frames: list[dict]) -> 
     for index, state in expected_states.items():
         if frames[index]["phaseState"] != state:
             raise ValueError(f"{sprite_id} {row_name}: frame {index} is not {state}")
+    head_shoulder_gaps = [
+        abs(
+            frame["headBottom"][1]
+            - sum(point[1] for point in frame["shoulders"].values()) / 2
+        )
+        for frame in frames
+    ]
+    if max(head_shoulder_gaps) > 8.0:
+        raise ValueError(f"{sprite_id} {row_name}: head floats above the shoulder line")
     idle = row_name.endswith("idle")
     if idle:
         if any(frame["movementAxis"] != "none" or frame["movementSign"] != 0 for frame in frames):
             raise ValueError(f"{sprite_id} {row_name}: idle row declares movement")
-        return {"seamRatio": 0.0, "maxBoneProjectionRatio": 1.0}
+        return {
+            "seamRatio": 0.0,
+            "maxBoneProjectionRatio": 1.0,
+            "maxHeadShoulderGap": max(head_shoulder_gaps),
+        }
 
     if any(frame["movementAxis"] == "none" or frame["movementSign"] not in (-1, 1) for frame in frames):
         raise ValueError(f"{sprite_id} {row_name}: walking direction is incomplete")
@@ -252,7 +266,11 @@ def validate_biomechanics(sprite_id: str, row_name: str, frames: list[dict]) -> 
     seam_ratio = loop_seam_ratio(frames)
     if seam_ratio > 1.65:
         raise ValueError(f"{sprite_id} {row_name}: cyclic loop seam jumps ({seam_ratio:.2f}x)")
-    return {"seamRatio": seam_ratio, "maxBoneProjectionRatio": max(projection_ratios)}
+    return {
+        "seamRatio": seam_ratio,
+        "maxBoneProjectionRatio": max(projection_ratios),
+        "maxHeadShoulderGap": max(head_shoulder_gaps),
+    }
 
 
 def draw_contact_sheet(
@@ -275,6 +293,13 @@ def draw_contact_sheet(
                     draw.ellipse((px - 1.5, py - 1.5, px + 1.5, py + 1.5), fill=color)
             rx, ry = x + pose["root"][0] / 8, y + pose["root"][1] / 8
             draw.ellipse((rx - 2, ry - 2, rx + 2, ry + 2), outline=(110, 255, 120, 255), width=1)
+            shoulder_points = [
+                (x + pose["shoulders"][side][0] / 8, y + pose["shoulders"][side][1] / 8)
+                for side in ("left", "right")
+            ]
+            draw.line(shoulder_points, fill=(255, 100, 220, 220), width=1)
+            hx, hy = x + pose["headBottom"][0] / 8, y + pose["headBottom"][1] / 8
+            draw.ellipse((hx - 1.5, hy - 1.5, hx + 1.5, hy + 1.5), fill=(255, 100, 220, 235))
             if col_index % 4 == 0:
                 draw.line((x, y, x, y + cell), fill=(235, 235, 235, 180), width=1)
                 draw.text((x + 2, y + 2), pose["phaseState"].split("-")[0][0].upper(), fill="white")
