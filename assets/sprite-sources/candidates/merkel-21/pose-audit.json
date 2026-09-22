@@ -1,0 +1,4418 @@
+{
+  "version": 1,
+  "renderMode": "masked-key-local-layer-v1",
+  "playbackFrames": 20,
+  "inspectionFrames": 21,
+  "keyIndices": [
+    0,
+    2,
+    5,
+    7,
+    10,
+    12,
+    15,
+    17
+  ],
+  "rows": [
+    {
+      "direction": "left",
+      "shoulderY": 160,
+      "hipY": 362,
+      "frames": [
+        {
+          "frame": 0,
+          "phase": 0.0,
+          "key": "contact-a",
+          "root": [
+            256,
+            332
+          ],
+          "ground": 474,
+          "pelvisBob": -2.0,
+          "legs": {
+            "left": {
+              "forward": -42.0,
+              "lift": 0.0,
+              "hip": [
+                256,
+                332
+              ],
+              "knee": [
+                260.473,
+                405.865
+              ],
+              "ankle": [
+                214.0,
+                466.0
+              ],
+              "stance": true
+            },
+            "right": {
+              "forward": 42.0,
+              "lift": 0.0,
+              "hip": [
+                256,
+                332
+              ],
+              "knee": [
+                301.834,
+                390.097
+              ],
+              "ankle": [
+                298.0,
+                466.0
+              ],
+              "stance": false
+            }
+          },
+          "depthOrder": [
+            "left",
+            "right"
+          ],
+          "crossing": false
+        },
+        {
+          "frame": 1,
+          "phase": 0.05,
+          "key": null,
+          "root": [
+            256,
+            332
+          ],
+          "ground": 474,
+          "pelvisBob": -1.618,
+          "legs": {
+            "left": {
+              "forward": -39.944,
+              "lift": 10.507,
+              "hip": [
+                256,
+                332
+              ],
+              "knee": [
+                272.15,
+                404.216
+              ],
+              "ankle": [
+                216.056,
+                455.493
+              ],
+              "stance": false
+            },
+            "right": {
+              "forward": 39.944,
+              "lift": 0.0,
+              "hip": [
+                256,
+                332
+              ],
+              "knee": [
+                301.681,
+                390.217
+              ],
+              "ankle": [
+                295.944,
+                466.0
+              ],
+              "stance": true
+            }
+          },
+          "depthOrder": [
+            "left",
+            "right"
+          ],
+          "crossing": false
+        },
+        {
+          "frame": 2,
+          "phase": 0.1,
+          "key": "loading-a",
+          "root": [
+            256,
+            332
+          ],
+          "ground": 474,
+          "pelvisBob": -0.618,
+          "legs": {
+            "left": {
+              "forward": -33.979,
+              "lift": 19.985,
+              "hip": [
+                256,
+                332
+              ],
+              "knee": [
+                283.14,
+                400.843
+              ],
+              "ankle": [
+                222.021,
+                446.015
+              ],
+              "stance": false
+            },
+            "right": {
+              "forward": 33.979,
+              "lift": 0.0,
+              "hip": [
+                256,
+                332
+              ],
+              "knee": [
+                300.936,
+                390.794
+              ],
+              "ankle": [
+                289.979,
+                466.0
+              ],
+              "stance": true
+            }
+          },
+          "depthOrder": [
+            "left",
+            "right"
+          ],
+          "crossing": false
+        },
+        {
+          "frame": 3,
+          "phase": 0.15,
+          "key": null,
+          "root": [
+            256,
+            332
+          ],
+          "ground": 474,
+          "pelvisBob": 0.618,
+          "legs": {
+            "left": {
+              "forward": -24.687,
+              "lift": 27.507,
+              "hip": [
+                256,
+                332
+              ],
+              "knee": [
+                293.987,
+                395.506
+              ],
+              "ankle": [
+                231.313,
+                438.493
+              ],
+              "stance": false
+            },
+            "right": {
+              "forward": 24.687,
+              "lift": 0.0,
+              "hip": [
+                256,
+                332
+              ],
+              "knee": [
+                298.985,
+                392.236
+              ],
+              "ankle": [
+                280.687,
+                466.0
+              ],
+              "stance": true
+            }
+          },
+          "depthOrder": [
+            "left",
+            "right"
+          ],
+          "crossing": false
+        },
+        {
+          "frame": 4,
+          "phase": 0.2,
+          "key": null,
+          "root": [
+            256,
+            332
+          ],
+          "ground": 474,
+          "pelvisBob": 1.618,
+          "legs": {
+            "left": {
+              "forward": -12.979,
+              "lift": 32.336,
+              "hip": [
+                256,
+                332
+              ],
+              "knee": [
+                304.008,
+                388.314
+              ],
+              "ankle": [
+                243.021,
+                433.664
+              ],
+              "stance": false
+            },
+            "right": {
+              "forward": 12.979,
+              "lift": 0.0,
+              "hip": [
+                256,
+                332
+              ],
+              "knee": [
+                295.298,
+                394.703
+              ],
+              "ankle": [
+                268.979,
+                466.0
+              ],
+              "stance": true
+            }
+          },
+          "depthOrder": [
+            "left",
+            "right"
+          ],
+          "crossing": false
+        },
+        {
+          "frame": 5,
+          "phase": 0.25,
+          "key": "passing-a",
+          "root": [
+            256,
+            332
+          ],
+          "ground": 474,
+          "pelvisBob": 2.0,
+          "legs": {
+            "left": {
+              "forward": -0.0,
+              "lift": 34.0,
+              "hip": [
+                256,
+                332
+              ],
+              "knee": [
+                311.891,
+                380.5
+              ],
+              "ankle": [
+                256.0,
+                432.0
+              ],
+              "stance": false
+            },
+            "right": {
+              "forward": 0.0,
+              "lift": 0.0,
+              "hip": [
+                256,
+                332
+              ],
+              "knee": [
+                289.701,
+                397.881
+              ],
+              "ankle": [
+                256.0,
+                466.0
+              ],
+              "stance": true
+            }
+          },
+          "depthOrder": [
+            "right",
+            "left"
+          ],
+          "crossing": true
+        },
+        {
+          "frame": 6,
+          "phase": 0.3,
+          "key": null,
+          "root": [
+            256,
+            332
+          ],
+          "ground": 474,
+          "pelvisBob": 1.618,
+          "legs": {
+            "left": {
+              "forward": 12.979,
+              "lift": 32.336,
+              "hip": [
+                256,
+                332
+              ],
+              "knee": [
+                316.616,
+                374.447
+              ],
+              "ankle": [
+                268.979,
+                433.664
+              ],
+              "stance": false
+            },
+            "right": {
+              "forward": -12.979,
+              "lift": 0.0,
+              "hip": [
+                256,
+                332
+              ],
+              "knee": [
+                282.534,
+                401.079
+              ],
+              "ankle": [
+                243.021,
+                466.0
+              ],
+              "stance": true
+            }
+          },
+          "depthOrder": [
+            "right",
+            "left"
+          ],
+          "crossing": false
+        },
+        {
+          "frame": 7,
+          "phase": 0.35,
+          "key": "push-off-a",
+          "root": [
+            256,
+            332
+          ],
+          "ground": 474,
+          "pelvisBob": 0.618,
+          "legs": {
+            "left": {
+              "forward": 24.687,
+              "lift": 27.507,
+              "hip": [
+                256,
+                332
+              ],
+              "knee": [
+                318.054,
+                372.314
+              ],
+              "ankle": [
+                280.687,
+                438.493
+              ],
+              "stance": false
+            },
+            "right": {
+              "forward": -24.687,
+              "lift": 0.0,
+              "hip": [
+                256,
+                332
+              ],
+              "knee": [
+                274.697,
+                403.599
+              ],
+              "ankle": [
+                231.313,
+                466.0
+              ],
+              "stance": true
+            }
+          },
+          "depthOrder": [
+            "right",
+            "left"
+          ],
+          "crossing": false
+        },
+        {
+          "frame": 8,
+          "phase": 0.4,
+          "key": null,
+          "root": [
+            256,
+            332
+          ],
+          "ground": 474,
+          "pelvisBob": -0.618,
+          "legs": {
+            "left": {
+              "forward": 33.979,
+              "lift": 19.985,
+              "hip": [
+                256,
+                332
+              ],
+              "knee": [
+                316.399,
+                374.755
+              ],
+              "ankle": [
+                289.979,
+                446.015
+              ],
+              "stance": false
+            },
+            "right": {
+              "forward": -33.979,
+              "lift": 0.0,
+              "hip": [
+                256,
+                332
+              ],
+              "knee": [
+                267.491,
+                405.102
+              ],
+              "ankle": [
+                222.021,
+                466.0
+              ],
+              "stance": true
+            }
+          },
+          "depthOrder": [
+            "right",
+            "left"
+          ],
+          "crossing": false
+        },
+        {
+          "frame": 9,
+          "phase": 0.45,
+          "key": null,
+          "root": [
+            256,
+            332
+          ],
+          "ground": 474,
+          "pelvisBob": -1.618,
+          "legs": {
+            "left": {
+              "forward": 39.944,
+              "lift": 10.507,
+              "hip": [
+                256,
+                332
+              ],
+              "knee": [
+                311.384,
+                381.078
+              ],
+              "ankle": [
+                295.944,
+                455.493
+              ],
+              "stance": false
+            },
+            "right": {
+              "forward": -39.944,
+              "lift": 0.0,
+              "hip": [
+                256,
+                332
+              ],
+              "knee": [
+                262.35,
+                405.727
+              ],
+              "ankle": [
+                216.056,
+                466.0
+              ],
+              "stance": true
+            }
+          },
+          "depthOrder": [
+            "right",
+            "left"
+          ],
+          "crossing": false
+        },
+        {
+          "frame": 10,
+          "phase": 0.5,
+          "key": "contact-b",
+          "root": [
+            256,
+            332
+          ],
+          "ground": 474,
+          "pelvisBob": -2.0,
+          "legs": {
+            "left": {
+              "forward": 42.0,
+              "lift": 0.0,
+              "hip": [
+                256,
+                332
+              ],
+              "knee": [
+                301.834,
+                390.097
+              ],
+              "ankle": [
+                298.0,
+                466.0
+              ],
+              "stance": false
+            },
+            "right": {
+              "forward": -42.0,
+              "lift": 0.0,
+              "hip": [
+                256,
+                332
+              ],
+              "knee": [
+                260.473,
+                405.865
+              ],
+              "ankle": [
+                214.0,
+                466.0
+              ],
+              "stance": true
+            }
+          },
+          "depthOrder": [
+            "right",
+            "left"
+          ],
+          "crossing": false
+        },
+        {
+          "frame": 11,
+          "phase": 0.55,
+          "key": null,
+          "root": [
+            256,
+            332
+          ],
+          "ground": 474,
+          "pelvisBob": -1.618,
+          "legs": {
+            "left": {
+              "forward": 39.944,
+              "lift": 0.0,
+              "hip": [
+                256,
+                332
+              ],
+              "knee": [
+                301.681,
+                390.217
+              ],
+              "ankle": [
+                295.944,
+                466.0
+              ],
+              "stance": true
+            },
+            "right": {
+              "forward": -39.944,
+              "lift": 10.507,
+              "hip": [
+                256,
+                332
+              ],
+              "knee": [
+                272.15,
+                404.216
+              ],
+              "ankle": [
+                216.056,
+                455.493
+              ],
+              "stance": false
+            }
+          },
+          "depthOrder": [
+            "right",
+            "left"
+          ],
+          "crossing": false
+        },
+        {
+          "frame": 12,
+          "phase": 0.6,
+          "key": "loading-b",
+          "root": [
+            256,
+            332
+          ],
+          "ground": 474,
+          "pelvisBob": -0.618,
+          "legs": {
+            "left": {
+              "forward": 33.979,
+              "lift": 0.0,
+              "hip": [
+                256,
+                332
+              ],
+              "knee": [
+                300.936,
+                390.794
+              ],
+              "ankle": [
+                289.979,
+                466.0
+              ],
+              "stance": true
+            },
+            "right": {
+              "forward": -33.979,
+              "lift": 19.985,
+              "hip": [
+                256,
+                332
+              ],
+              "knee": [
+                283.14,
+                400.843
+              ],
+              "ankle": [
+                222.021,
+                446.015
+              ],
+              "stance": false
+            }
+          },
+          "depthOrder": [
+            "right",
+            "left"
+          ],
+          "crossing": false
+        },
+        {
+          "frame": 13,
+          "phase": 0.65,
+          "key": null,
+          "root": [
+            256,
+            332
+          ],
+          "ground": 474,
+          "pelvisBob": 0.618,
+          "legs": {
+            "left": {
+              "forward": 24.687,
+              "lift": 0.0,
+              "hip": [
+                256,
+                332
+              ],
+              "knee": [
+                298.985,
+                392.236
+              ],
+              "ankle": [
+                280.687,
+                466.0
+              ],
+              "stance": true
+            },
+            "right": {
+              "forward": -24.687,
+              "lift": 27.507,
+              "hip": [
+                256,
+                332
+              ],
+              "knee": [
+                293.987,
+                395.506
+              ],
+              "ankle": [
+                231.313,
+                438.493
+              ],
+              "stance": false
+            }
+          },
+          "depthOrder": [
+            "right",
+            "left"
+          ],
+          "crossing": false
+        },
+        {
+          "frame": 14,
+          "phase": 0.7,
+          "key": null,
+          "root": [
+            256,
+            332
+          ],
+          "ground": 474,
+          "pelvisBob": 1.618,
+          "legs": {
+            "left": {
+              "forward": 12.979,
+              "lift": 0.0,
+              "hip": [
+                256,
+                332
+              ],
+              "knee": [
+                295.298,
+                394.703
+              ],
+              "ankle": [
+                268.979,
+                466.0
+              ],
+              "stance": true
+            },
+            "right": {
+              "forward": -12.979,
+              "lift": 32.336,
+              "hip": [
+                256,
+                332
+              ],
+              "knee": [
+                304.008,
+                388.314
+              ],
+              "ankle": [
+                243.021,
+                433.664
+              ],
+              "stance": false
+            }
+          },
+          "depthOrder": [
+            "right",
+            "left"
+          ],
+          "crossing": false
+        },
+        {
+          "frame": 15,
+          "phase": 0.75,
+          "key": "passing-b",
+          "root": [
+            256,
+            332
+          ],
+          "ground": 474,
+          "pelvisBob": 2.0,
+          "legs": {
+            "left": {
+              "forward": 0.0,
+              "lift": 0.0,
+              "hip": [
+                256,
+                332
+              ],
+              "knee": [
+                289.701,
+                397.881
+              ],
+              "ankle": [
+                256.0,
+                466.0
+              ],
+              "stance": true
+            },
+            "right": {
+              "forward": -0.0,
+              "lift": 34.0,
+              "hip": [
+                256,
+                332
+              ],
+              "knee": [
+                311.891,
+                380.5
+              ],
+              "ankle": [
+                256.0,
+                432.0
+              ],
+              "stance": false
+            }
+          },
+          "depthOrder": [
+            "left",
+            "right"
+          ],
+          "crossing": true
+        },
+        {
+          "frame": 16,
+          "phase": 0.8,
+          "key": null,
+          "root": [
+            256,
+            332
+          ],
+          "ground": 474,
+          "pelvisBob": 1.618,
+          "legs": {
+            "left": {
+              "forward": -12.979,
+              "lift": 0.0,
+              "hip": [
+                256,
+                332
+              ],
+              "knee": [
+                282.534,
+                401.079
+              ],
+              "ankle": [
+                243.021,
+                466.0
+              ],
+              "stance": true
+            },
+            "right": {
+              "forward": 12.979,
+              "lift": 32.336,
+              "hip": [
+                256,
+                332
+              ],
+              "knee": [
+                316.616,
+                374.447
+              ],
+              "ankle": [
+                268.979,
+                433.664
+              ],
+              "stance": false
+            }
+          },
+          "depthOrder": [
+            "left",
+            "right"
+          ],
+          "crossing": false
+        },
+        {
+          "frame": 17,
+          "phase": 0.85,
+          "key": "push-off-b",
+          "root": [
+            256,
+            332
+          ],
+          "ground": 474,
+          "pelvisBob": 0.618,
+          "legs": {
+            "left": {
+              "forward": -24.687,
+              "lift": 0.0,
+              "hip": [
+                256,
+                332
+              ],
+              "knee": [
+                274.697,
+                403.599
+              ],
+              "ankle": [
+                231.313,
+                466.0
+              ],
+              "stance": true
+            },
+            "right": {
+              "forward": 24.687,
+              "lift": 27.507,
+              "hip": [
+                256,
+                332
+              ],
+              "knee": [
+                318.054,
+                372.314
+              ],
+              "ankle": [
+                280.687,
+                438.493
+              ],
+              "stance": false
+            }
+          },
+          "depthOrder": [
+            "left",
+            "right"
+          ],
+          "crossing": false
+        },
+        {
+          "frame": 18,
+          "phase": 0.9,
+          "key": null,
+          "root": [
+            256,
+            332
+          ],
+          "ground": 474,
+          "pelvisBob": -0.618,
+          "legs": {
+            "left": {
+              "forward": -33.979,
+              "lift": 0.0,
+              "hip": [
+                256,
+                332
+              ],
+              "knee": [
+                267.491,
+                405.102
+              ],
+              "ankle": [
+                222.021,
+                466.0
+              ],
+              "stance": true
+            },
+            "right": {
+              "forward": 33.979,
+              "lift": 19.985,
+              "hip": [
+                256,
+                332
+              ],
+              "knee": [
+                316.399,
+                374.755
+              ],
+              "ankle": [
+                289.979,
+                446.015
+              ],
+              "stance": false
+            }
+          },
+          "depthOrder": [
+            "left",
+            "right"
+          ],
+          "crossing": false
+        },
+        {
+          "frame": 19,
+          "phase": 0.95,
+          "key": null,
+          "root": [
+            256,
+            332
+          ],
+          "ground": 474,
+          "pelvisBob": -1.618,
+          "legs": {
+            "left": {
+              "forward": -39.944,
+              "lift": 0.0,
+              "hip": [
+                256,
+                332
+              ],
+              "knee": [
+                262.35,
+                405.727
+              ],
+              "ankle": [
+                216.056,
+                466.0
+              ],
+              "stance": true
+            },
+            "right": {
+              "forward": 39.944,
+              "lift": 10.507,
+              "hip": [
+                256,
+                332
+              ],
+              "knee": [
+                311.384,
+                381.078
+              ],
+              "ankle": [
+                295.944,
+                455.493
+              ],
+              "stance": false
+            }
+          },
+          "depthOrder": [
+            "left",
+            "right"
+          ],
+          "crossing": false
+        },
+        {
+          "frame": 20,
+          "phase": 1.0,
+          "key": "contact-a",
+          "root": [
+            256,
+            332
+          ],
+          "ground": 474,
+          "pelvisBob": -2.0,
+          "legs": {
+            "left": {
+              "forward": -42.0,
+              "lift": 0.0,
+              "hip": [
+                256,
+                332
+              ],
+              "knee": [
+                260.473,
+                405.865
+              ],
+              "ankle": [
+                214.0,
+                466.0
+              ],
+              "stance": true
+            },
+            "right": {
+              "forward": 42.0,
+              "lift": 0.0,
+              "hip": [
+                256,
+                332
+              ],
+              "knee": [
+                301.834,
+                390.097
+              ],
+              "ankle": [
+                298.0,
+                466.0
+              ],
+              "stance": false
+            }
+          },
+          "depthOrder": [
+            "left",
+            "right"
+          ],
+          "crossing": false,
+          "closureOf": 0
+        }
+      ]
+    },
+    {
+      "direction": "right",
+      "shoulderY": 212,
+      "hipY": 364,
+      "frames": [
+        {
+          "frame": 0,
+          "phase": 0.0,
+          "key": "contact-a",
+          "root": [
+            256,
+            332
+          ],
+          "ground": 474,
+          "pelvisBob": -2.0,
+          "legs": {
+            "left": {
+              "forward": 42.0,
+              "lift": 0.0,
+              "hip": [
+                256,
+                332
+              ],
+              "knee": [
+                251.527,
+                405.865
+              ],
+              "ankle": [
+                298.0,
+                466.0
+              ],
+              "stance": true
+            },
+            "right": {
+              "forward": -42.0,
+              "lift": 0.0,
+              "hip": [
+                256,
+                332
+              ],
+              "knee": [
+                210.166,
+                390.097
+              ],
+              "ankle": [
+                214.0,
+                466.0
+              ],
+              "stance": false
+            }
+          },
+          "depthOrder": [
+            "left",
+            "right"
+          ],
+          "crossing": false
+        },
+        {
+          "frame": 1,
+          "phase": 0.05,
+          "key": null,
+          "root": [
+            256,
+            332
+          ],
+          "ground": 474,
+          "pelvisBob": -1.618,
+          "legs": {
+            "left": {
+              "forward": 39.944,
+              "lift": 10.507,
+              "hip": [
+                256,
+                332
+              ],
+              "knee": [
+                239.85,
+                404.216
+              ],
+              "ankle": [
+                295.944,
+                455.493
+              ],
+              "stance": false
+            },
+            "right": {
+              "forward": -39.944,
+              "lift": 0.0,
+              "hip": [
+                256,
+                332
+              ],
+              "knee": [
+                210.319,
+                390.217
+              ],
+              "ankle": [
+                216.056,
+                466.0
+              ],
+              "stance": true
+            }
+          },
+          "depthOrder": [
+            "left",
+            "right"
+          ],
+          "crossing": false
+        },
+        {
+          "frame": 2,
+          "phase": 0.1,
+          "key": "loading-a",
+          "root": [
+            256,
+            332
+          ],
+          "ground": 474,
+          "pelvisBob": -0.618,
+          "legs": {
+            "left": {
+              "forward": 33.979,
+              "lift": 19.985,
+              "hip": [
+                256,
+                332
+              ],
+              "knee": [
+                228.86,
+                400.843
+              ],
+              "ankle": [
+                289.979,
+                446.015
+              ],
+              "stance": false
+            },
+            "right": {
+              "forward": -33.979,
+              "lift": 0.0,
+              "hip": [
+                256,
+                332
+              ],
+              "knee": [
+                211.064,
+                390.794
+              ],
+              "ankle": [
+                222.021,
+                466.0
+              ],
+              "stance": true
+            }
+          },
+          "depthOrder": [
+            "left",
+            "right"
+          ],
+          "crossing": false
+        },
+        {
+          "frame": 3,
+          "phase": 0.15,
+          "key": null,
+          "root": [
+            256,
+            332
+          ],
+          "ground": 474,
+          "pelvisBob": 0.618,
+          "legs": {
+            "left": {
+              "forward": 24.687,
+              "lift": 27.507,
+              "hip": [
+                256,
+                332
+              ],
+              "knee": [
+                218.013,
+                395.506
+              ],
+              "ankle": [
+                280.687,
+                438.493
+              ],
+              "stance": false
+            },
+            "right": {
+              "forward": -24.687,
+              "lift": 0.0,
+              "hip": [
+                256,
+                332
+              ],
+              "knee": [
+                213.015,
+                392.236
+              ],
+              "ankle": [
+                231.313,
+                466.0
+              ],
+              "stance": true
+            }
+          },
+          "depthOrder": [
+            "left",
+            "right"
+          ],
+          "crossing": false
+        },
+        {
+          "frame": 4,
+          "phase": 0.2,
+          "key": null,
+          "root": [
+            256,
+            332
+          ],
+          "ground": 474,
+          "pelvisBob": 1.618,
+          "legs": {
+            "left": {
+              "forward": 12.979,
+              "lift": 32.336,
+              "hip": [
+                256,
+                332
+              ],
+              "knee": [
+                207.992,
+                388.314
+              ],
+              "ankle": [
+                268.979,
+                433.664
+              ],
+              "stance": false
+            },
+            "right": {
+              "forward": -12.979,
+              "lift": 0.0,
+              "hip": [
+                256,
+                332
+              ],
+              "knee": [
+                216.702,
+                394.703
+              ],
+              "ankle": [
+                243.021,
+                466.0
+              ],
+              "stance": true
+            }
+          },
+          "depthOrder": [
+            "left",
+            "right"
+          ],
+          "crossing": false
+        },
+        {
+          "frame": 5,
+          "phase": 0.25,
+          "key": "passing-a",
+          "root": [
+            256,
+            332
+          ],
+          "ground": 474,
+          "pelvisBob": 2.0,
+          "legs": {
+            "left": {
+              "forward": 0.0,
+              "lift": 34.0,
+              "hip": [
+                256,
+                332
+              ],
+              "knee": [
+                200.109,
+                380.5
+              ],
+              "ankle": [
+                256.0,
+                432.0
+              ],
+              "stance": false
+            },
+            "right": {
+              "forward": -0.0,
+              "lift": 0.0,
+              "hip": [
+                256,
+                332
+              ],
+              "knee": [
+                222.299,
+                397.881
+              ],
+              "ankle": [
+                256.0,
+                466.0
+              ],
+              "stance": true
+            }
+          },
+          "depthOrder": [
+            "right",
+            "left"
+          ],
+          "crossing": true
+        },
+        {
+          "frame": 6,
+          "phase": 0.3,
+          "key": null,
+          "root": [
+            256,
+            332
+          ],
+          "ground": 474,
+          "pelvisBob": 1.618,
+          "legs": {
+            "left": {
+              "forward": -12.979,
+              "lift": 32.336,
+              "hip": [
+                256,
+                332
+              ],
+              "knee": [
+                195.384,
+                374.447
+              ],
+              "ankle": [
+                243.021,
+                433.664
+              ],
+              "stance": false
+            },
+            "right": {
+              "forward": 12.979,
+              "lift": 0.0,
+              "hip": [
+                256,
+                332
+              ],
+              "knee": [
+                229.466,
+                401.079
+              ],
+              "ankle": [
+                268.979,
+                466.0
+              ],
+              "stance": true
+            }
+          },
+          "depthOrder": [
+            "right",
+            "left"
+          ],
+          "crossing": false
+        },
+        {
+          "frame": 7,
+          "phase": 0.35,
+          "key": "push-off-a",
+          "root": [
+            256,
+            332
+          ],
+          "ground": 474,
+          "pelvisBob": 0.618,
+          "legs": {
+            "left": {
+              "forward": -24.687,
+              "lift": 27.507,
+              "hip": [
+                256,
+                332
+              ],
+              "knee": [
+                193.946,
+                372.314
+              ],
+              "ankle": [
+                231.313,
+                438.493
+              ],
+              "stance": false
+            },
+            "right": {
+              "forward": 24.687,
+              "lift": 0.0,
+              "hip": [
+                256,
+                332
+              ],
+              "knee": [
+                237.303,
+                403.599
+              ],
+              "ankle": [
+                280.687,
+                466.0
+              ],
+              "stance": true
+            }
+          },
+          "depthOrder": [
+            "right",
+            "left"
+          ],
+          "crossing": false
+        },
+        {
+          "frame": 8,
+          "phase": 0.4,
+          "key": null,
+          "root": [
+            256,
+            332
+          ],
+          "ground": 474,
+          "pelvisBob": -0.618,
+          "legs": {
+            "left": {
+              "forward": -33.979,
+              "lift": 19.985,
+              "hip": [
+                256,
+                332
+              ],
+              "knee": [
+                195.601,
+                374.755
+              ],
+              "ankle": [
+                222.021,
+                446.015
+              ],
+              "stance": false
+            },
+            "right": {
+              "forward": 33.979,
+              "lift": 0.0,
+              "hip": [
+                256,
+                332
+              ],
+              "knee": [
+                244.509,
+                405.102
+              ],
+              "ankle": [
+                289.979,
+                466.0
+              ],
+              "stance": true
+            }
+          },
+          "depthOrder": [
+            "right",
+            "left"
+          ],
+          "crossing": false
+        },
+        {
+          "frame": 9,
+          "phase": 0.45,
+          "key": null,
+          "root": [
+            256,
+            332
+          ],
+          "ground": 474,
+          "pelvisBob": -1.618,
+          "legs": {
+            "left": {
+              "forward": -39.944,
+              "lift": 10.507,
+              "hip": [
+                256,
+                332
+              ],
+              "knee": [
+                200.616,
+                381.078
+              ],
+              "ankle": [
+                216.056,
+                455.493
+              ],
+              "stance": false
+            },
+            "right": {
+              "forward": 39.944,
+              "lift": 0.0,
+              "hip": [
+                256,
+                332
+              ],
+              "knee": [
+                249.65,
+                405.727
+              ],
+              "ankle": [
+                295.944,
+                466.0
+              ],
+              "stance": true
+            }
+          },
+          "depthOrder": [
+            "right",
+            "left"
+          ],
+          "crossing": false
+        },
+        {
+          "frame": 10,
+          "phase": 0.5,
+          "key": "contact-b",
+          "root": [
+            256,
+            332
+          ],
+          "ground": 474,
+          "pelvisBob": -2.0,
+          "legs": {
+            "left": {
+              "forward": -42.0,
+              "lift": 0.0,
+              "hip": [
+                256,
+                332
+              ],
+              "knee": [
+                210.166,
+                390.097
+              ],
+              "ankle": [
+                214.0,
+                466.0
+              ],
+              "stance": false
+            },
+            "right": {
+              "forward": 42.0,
+              "lift": 0.0,
+              "hip": [
+                256,
+                332
+              ],
+              "knee": [
+                251.527,
+                405.865
+              ],
+              "ankle": [
+                298.0,
+                466.0
+              ],
+              "stance": true
+            }
+          },
+          "depthOrder": [
+            "right",
+            "left"
+          ],
+          "crossing": false
+        },
+        {
+          "frame": 11,
+          "phase": 0.55,
+          "key": null,
+          "root": [
+            256,
+            332
+          ],
+          "ground": 474,
+          "pelvisBob": -1.618,
+          "legs": {
+            "left": {
+              "forward": -39.944,
+              "lift": 0.0,
+              "hip": [
+                256,
+                332
+              ],
+              "knee": [
+                210.319,
+                390.217
+              ],
+              "ankle": [
+                216.056,
+                466.0
+              ],
+              "stance": true
+            },
+            "right": {
+              "forward": 39.944,
+              "lift": 10.507,
+              "hip": [
+                256,
+                332
+              ],
+              "knee": [
+                239.85,
+                404.216
+              ],
+              "ankle": [
+                295.944,
+                455.493
+              ],
+              "stance": false
+            }
+          },
+          "depthOrder": [
+            "right",
+            "left"
+          ],
+          "crossing": false
+        },
+        {
+          "frame": 12,
+          "phase": 0.6,
+          "key": "loading-b",
+          "root": [
+            256,
+            332
+          ],
+          "ground": 474,
+          "pelvisBob": -0.618,
+          "legs": {
+            "left": {
+              "forward": -33.979,
+              "lift": 0.0,
+              "hip": [
+                256,
+                332
+              ],
+              "knee": [
+                211.064,
+                390.794
+              ],
+              "ankle": [
+                222.021,
+                466.0
+              ],
+              "stance": true
+            },
+            "right": {
+              "forward": 33.979,
+              "lift": 19.985,
+              "hip": [
+                256,
+                332
+              ],
+              "knee": [
+                228.86,
+                400.843
+              ],
+              "ankle": [
+                289.979,
+                446.015
+              ],
+              "stance": false
+            }
+          },
+          "depthOrder": [
+            "right",
+            "left"
+          ],
+          "crossing": false
+        },
+        {
+          "frame": 13,
+          "phase": 0.65,
+          "key": null,
+          "root": [
+            256,
+            332
+          ],
+          "ground": 474,
+          "pelvisBob": 0.618,
+          "legs": {
+            "left": {
+              "forward": -24.687,
+              "lift": 0.0,
+              "hip": [
+                256,
+                332
+              ],
+              "knee": [
+                213.015,
+                392.236
+              ],
+              "ankle": [
+                231.313,
+                466.0
+              ],
+              "stance": true
+            },
+            "right": {
+              "forward": 24.687,
+              "lift": 27.507,
+              "hip": [
+                256,
+                332
+              ],
+              "knee": [
+                218.013,
+                395.506
+              ],
+              "ankle": [
+                280.687,
+                438.493
+              ],
+              "stance": false
+            }
+          },
+          "depthOrder": [
+            "right",
+            "left"
+          ],
+          "crossing": false
+        },
+        {
+          "frame": 14,
+          "phase": 0.7,
+          "key": null,
+          "root": [
+            256,
+            332
+          ],
+          "ground": 474,
+          "pelvisBob": 1.618,
+          "legs": {
+            "left": {
+              "forward": -12.979,
+              "lift": 0.0,
+              "hip": [
+                256,
+                332
+              ],
+              "knee": [
+                216.702,
+                394.703
+              ],
+              "ankle": [
+                243.021,
+                466.0
+              ],
+              "stance": true
+            },
+            "right": {
+              "forward": 12.979,
+              "lift": 32.336,
+              "hip": [
+                256,
+                332
+              ],
+              "knee": [
+                207.992,
+                388.314
+              ],
+              "ankle": [
+                268.979,
+                433.664
+              ],
+              "stance": false
+            }
+          },
+          "depthOrder": [
+            "right",
+            "left"
+          ],
+          "crossing": false
+        },
+        {
+          "frame": 15,
+          "phase": 0.75,
+          "key": "passing-b",
+          "root": [
+            256,
+            332
+          ],
+          "ground": 474,
+          "pelvisBob": 2.0,
+          "legs": {
+            "left": {
+              "forward": -0.0,
+              "lift": 0.0,
+              "hip": [
+                256,
+                332
+              ],
+              "knee": [
+                222.299,
+                397.881
+              ],
+              "ankle": [
+                256.0,
+                466.0
+              ],
+              "stance": true
+            },
+            "right": {
+              "forward": 0.0,
+              "lift": 34.0,
+              "hip": [
+                256,
+                332
+              ],
+              "knee": [
+                200.109,
+                380.5
+              ],
+              "ankle": [
+                256.0,
+                432.0
+              ],
+              "stance": false
+            }
+          },
+          "depthOrder": [
+            "left",
+            "right"
+          ],
+          "crossing": true
+        },
+        {
+          "frame": 16,
+          "phase": 0.8,
+          "key": null,
+          "root": [
+            256,
+            332
+          ],
+          "ground": 474,
+          "pelvisBob": 1.618,
+          "legs": {
+            "left": {
+              "forward": 12.979,
+              "lift": 0.0,
+              "hip": [
+                256,
+                332
+              ],
+              "knee": [
+                229.466,
+                401.079
+              ],
+              "ankle": [
+                268.979,
+                466.0
+              ],
+              "stance": true
+            },
+            "right": {
+              "forward": -12.979,
+              "lift": 32.336,
+              "hip": [
+                256,
+                332
+              ],
+              "knee": [
+                195.384,
+                374.447
+              ],
+              "ankle": [
+                243.021,
+                433.664
+              ],
+              "stance": false
+            }
+          },
+          "depthOrder": [
+            "left",
+            "right"
+          ],
+          "crossing": false
+        },
+        {
+          "frame": 17,
+          "phase": 0.85,
+          "key": "push-off-b",
+          "root": [
+            256,
+            332
+          ],
+          "ground": 474,
+          "pelvisBob": 0.618,
+          "legs": {
+            "left": {
+              "forward": 24.687,
+              "lift": 0.0,
+              "hip": [
+                256,
+                332
+              ],
+              "knee": [
+                237.303,
+                403.599
+              ],
+              "ankle": [
+                280.687,
+                466.0
+              ],
+              "stance": true
+            },
+            "right": {
+              "forward": -24.687,
+              "lift": 27.507,
+              "hip": [
+                256,
+                332
+              ],
+              "knee": [
+                193.946,
+                372.314
+              ],
+              "ankle": [
+                231.313,
+                438.493
+              ],
+              "stance": false
+            }
+          },
+          "depthOrder": [
+            "left",
+            "right"
+          ],
+          "crossing": false
+        },
+        {
+          "frame": 18,
+          "phase": 0.9,
+          "key": null,
+          "root": [
+            256,
+            332
+          ],
+          "ground": 474,
+          "pelvisBob": -0.618,
+          "legs": {
+            "left": {
+              "forward": 33.979,
+              "lift": 0.0,
+              "hip": [
+                256,
+                332
+              ],
+              "knee": [
+                244.509,
+                405.102
+              ],
+              "ankle": [
+                289.979,
+                466.0
+              ],
+              "stance": true
+            },
+            "right": {
+              "forward": -33.979,
+              "lift": 19.985,
+              "hip": [
+                256,
+                332
+              ],
+              "knee": [
+                195.601,
+                374.755
+              ],
+              "ankle": [
+                222.021,
+                446.015
+              ],
+              "stance": false
+            }
+          },
+          "depthOrder": [
+            "left",
+            "right"
+          ],
+          "crossing": false
+        },
+        {
+          "frame": 19,
+          "phase": 0.95,
+          "key": null,
+          "root": [
+            256,
+            332
+          ],
+          "ground": 474,
+          "pelvisBob": -1.618,
+          "legs": {
+            "left": {
+              "forward": 39.944,
+              "lift": 0.0,
+              "hip": [
+                256,
+                332
+              ],
+              "knee": [
+                249.65,
+                405.727
+              ],
+              "ankle": [
+                295.944,
+                466.0
+              ],
+              "stance": true
+            },
+            "right": {
+              "forward": -39.944,
+              "lift": 10.507,
+              "hip": [
+                256,
+                332
+              ],
+              "knee": [
+                200.616,
+                381.078
+              ],
+              "ankle": [
+                216.056,
+                455.493
+              ],
+              "stance": false
+            }
+          },
+          "depthOrder": [
+            "left",
+            "right"
+          ],
+          "crossing": false
+        },
+        {
+          "frame": 20,
+          "phase": 1.0,
+          "key": "contact-a",
+          "root": [
+            256,
+            332
+          ],
+          "ground": 474,
+          "pelvisBob": -2.0,
+          "legs": {
+            "left": {
+              "forward": 42.0,
+              "lift": 0.0,
+              "hip": [
+                256,
+                332
+              ],
+              "knee": [
+                251.527,
+                405.865
+              ],
+              "ankle": [
+                298.0,
+                466.0
+              ],
+              "stance": true
+            },
+            "right": {
+              "forward": -42.0,
+              "lift": 0.0,
+              "hip": [
+                256,
+                332
+              ],
+              "knee": [
+                210.166,
+                390.097
+              ],
+              "ankle": [
+                214.0,
+                466.0
+              ],
+              "stance": false
+            }
+          },
+          "depthOrder": [
+            "left",
+            "right"
+          ],
+          "crossing": false,
+          "closureOf": 0
+        }
+      ]
+    },
+    {
+      "direction": "back",
+      "shoulderY": 219,
+      "hipY": 351,
+      "frames": [
+        {
+          "frame": 0,
+          "phase": 0.0,
+          "key": "contact-a",
+          "root": [
+            256,
+            332
+          ],
+          "ground": 474,
+          "pelvisBob": -2.0,
+          "legs": {
+            "left": {
+              "forward": -42.0,
+              "lift": 0.0,
+              "hip": [
+                238,
+                332
+              ],
+              "knee": [
+                263.729,
+                401.383
+              ],
+              "ankle": [
+                223.72,
+                466.0
+              ],
+              "stance": true
+            },
+            "right": {
+              "forward": 42.0,
+              "lift": 0.0,
+              "hip": [
+                274,
+                332
+              ],
+              "knee": [
+                248.271,
+                401.383
+              ],
+              "ankle": [
+                288.28,
+                466.0
+              ],
+              "stance": false
+            }
+          },
+          "depthOrder": [
+            "left",
+            "right"
+          ],
+          "crossing": false
+        },
+        {
+          "frame": 1,
+          "phase": 0.05,
+          "key": null,
+          "root": [
+            256,
+            332
+          ],
+          "ground": 474,
+          "pelvisBob": -1.618,
+          "legs": {
+            "left": {
+              "forward": -39.944,
+              "lift": 10.507,
+              "hip": [
+                238,
+                332
+              ],
+              "knee": [
+                273.111,
+                397.14
+              ],
+              "ankle": [
+                224.419,
+                455.493
+              ],
+              "stance": false
+            },
+            "right": {
+              "forward": 39.944,
+              "lift": 0.0,
+              "hip": [
+                274,
+                332
+              ],
+              "knee": [
+                247.837,
+                401.221
+              ],
+              "ankle": [
+                287.581,
+                466.0
+              ],
+              "stance": true
+            }
+          },
+          "depthOrder": [
+            "left",
+            "right"
+          ],
+          "crossing": false
+        },
+        {
+          "frame": 2,
+          "phase": 0.1,
+          "key": "loading-a",
+          "root": [
+            256,
+            332
+          ],
+          "ground": 474,
+          "pelvisBob": -0.618,
+          "legs": {
+            "left": {
+              "forward": -33.979,
+              "lift": 19.985,
+              "hip": [
+                238,
+                332
+              ],
+              "knee": [
+                280.493,
+                392.583
+              ],
+              "ankle": [
+                226.447,
+                446.015
+              ],
+              "stance": false
+            },
+            "right": {
+              "forward": 33.979,
+              "lift": 0.0,
+              "hip": [
+                274,
+                332
+              ],
+              "knee": [
+                246.601,
+                400.741
+              ],
+              "ankle": [
+                285.553,
+                466.0
+              ],
+              "stance": true
+            }
+          },
+          "depthOrder": [
+            "left",
+            "right"
+          ],
+          "crossing": false
+        },
+        {
+          "frame": 3,
+          "phase": 0.15,
+          "key": null,
+          "root": [
+            256,
+            332
+          ],
+          "ground": 474,
+          "pelvisBob": 0.618,
+          "legs": {
+            "left": {
+              "forward": -24.687,
+              "lift": 27.507,
+              "hip": [
+                238,
+                332
+              ],
+              "knee": [
+                286.393,
+                387.983
+              ],
+              "ankle": [
+                229.606,
+                438.493
+              ],
+              "stance": false
+            },
+            "right": {
+              "forward": 24.687,
+              "lift": 0.0,
+              "hip": [
+                274,
+                332
+              ],
+              "knee": [
+                244.754,
+                399.975
+              ],
+              "ankle": [
+                282.394,
+                466.0
+              ],
+              "stance": true
+            }
+          },
+          "depthOrder": [
+            "left",
+            "right"
+          ],
+          "crossing": false
+        },
+        {
+          "frame": 4,
+          "phase": 0.2,
+          "key": null,
+          "root": [
+            256,
+            332
+          ],
+          "ground": 474,
+          "pelvisBob": 1.618,
+          "legs": {
+            "left": {
+              "forward": -12.979,
+              "lift": 32.336,
+              "hip": [
+                238,
+                332
+              ],
+              "knee": [
+                290.897,
+                383.748
+              ],
+              "ankle": [
+                233.587,
+                433.664
+              ],
+              "stance": false
+            },
+            "right": {
+              "forward": 12.979,
+              "lift": 0.0,
+              "hip": [
+                274,
+                332
+              ],
+              "knee": [
+                242.559,
+                398.989
+              ],
+              "ankle": [
+                278.413,
+                466.0
+              ],
+              "stance": true
+            }
+          },
+          "depthOrder": [
+            "left",
+            "right"
+          ],
+          "crossing": false
+        },
+        {
+          "frame": 5,
+          "phase": 0.25,
+          "key": "passing-a",
+          "root": [
+            256,
+            332
+          ],
+          "ground": 474,
+          "pelvisBob": 2.0,
+          "legs": {
+            "left": {
+              "forward": -0.0,
+              "lift": 34.0,
+              "hip": [
+                238,
+                332
+              ],
+              "knee": [
+                293.891,
+                380.5
+              ],
+              "ankle": [
+                238.0,
+                432.0
+              ],
+              "stance": false
+            },
+            "right": {
+              "forward": 0.0,
+              "lift": 0.0,
+              "hip": [
+                274,
+                332
+              ],
+              "knee": [
+                240.299,
+                397.881
+              ],
+              "ankle": [
+                274.0,
+                466.0
+              ],
+              "stance": true
+            }
+          },
+          "depthOrder": [
+            "right",
+            "left"
+          ],
+          "crossing": true
+        },
+        {
+          "frame": 6,
+          "phase": 0.3,
+          "key": null,
+          "root": [
+            256,
+            332
+          ],
+          "ground": 474,
+          "pelvisBob": 1.618,
+          "legs": {
+            "left": {
+              "forward": 12.979,
+              "lift": 32.336,
+              "hip": [
+                238,
+                332
+              ],
+              "knee": [
+                295.182,
+                378.97
+              ],
+              "ankle": [
+                242.413,
+                433.664
+              ],
+              "stance": false
+            },
+            "right": {
+              "forward": -12.979,
+              "lift": 0.0,
+              "hip": [
+                274,
+                332
+              ],
+              "knee": [
+                238.22,
+                396.775
+              ],
+              "ankle": [
+                269.587,
+                466.0
+              ],
+              "stance": true
+            }
+          },
+          "depthOrder": [
+            "right",
+            "left"
+          ],
+          "crossing": false
+        },
+        {
+          "frame": 7,
+          "phase": 0.35,
+          "key": "push-off-a",
+          "root": [
+            256,
+            332
+          ],
+          "ground": 474,
+          "pelvisBob": 0.618,
+          "legs": {
+            "left": {
+              "forward": 24.687,
+              "lift": 27.507,
+              "hip": [
+                238,
+                332
+              ],
+              "knee": [
+                294.566,
+                379.711
+              ],
+              "ankle": [
+                246.394,
+                438.493
+              ],
+              "stance": false
+            },
+            "right": {
+              "forward": -24.687,
+              "lift": 0.0,
+              "hip": [
+                274,
+                332
+              ],
+              "knee": [
+                236.5,
+                395.795
+              ],
+              "ankle": [
+                265.606,
+                466.0
+              ],
+              "stance": true
+            }
+          },
+          "depthOrder": [
+            "right",
+            "left"
+          ],
+          "crossing": false
+        },
+        {
+          "frame": 8,
+          "phase": 0.4,
+          "key": null,
+          "root": [
+            256,
+            332
+          ],
+          "ground": 474,
+          "pelvisBob": -0.618,
+          "legs": {
+            "left": {
+              "forward": 33.979,
+              "lift": 19.985,
+              "hip": [
+                238,
+                332
+              ],
+              "knee": [
+                291.782,
+                382.828
+              ],
+              "ankle": [
+                249.553,
+                446.015
+              ],
+              "stance": false
+            },
+            "right": {
+              "forward": -33.979,
+              "lift": 0.0,
+              "hip": [
+                274,
+                332
+              ],
+              "knee": [
+                235.24,
+                395.037
+              ],
+              "ankle": [
+                262.447,
+                466.0
+              ],
+              "stance": true
+            }
+          },
+          "depthOrder": [
+            "right",
+            "left"
+          ],
+          "crossing": false
+        },
+        {
+          "frame": 9,
+          "phase": 0.45,
+          "key": null,
+          "root": [
+            256,
+            332
+          ],
+          "ground": 474,
+          "pelvisBob": -1.618,
+          "legs": {
+            "left": {
+              "forward": 39.944,
+              "lift": 10.507,
+              "hip": [
+                238,
+                332
+              ],
+              "knee": [
+                286.428,
+                387.953
+              ],
+              "ankle": [
+                251.581,
+                455.493
+              ],
+              "stance": false
+            },
+            "right": {
+              "forward": -39.944,
+              "lift": 0.0,
+              "hip": [
+                274,
+                332
+              ],
+              "knee": [
+                234.48,
+                394.563
+              ],
+              "ankle": [
+                260.419,
+                466.0
+              ],
+              "stance": true
+            }
+          },
+          "depthOrder": [
+            "right",
+            "left"
+          ],
+          "crossing": false
+        },
+        {
+          "frame": 10,
+          "phase": 0.5,
+          "key": "contact-b",
+          "root": [
+            256,
+            332
+          ],
+          "ground": 474,
+          "pelvisBob": -2.0,
+          "legs": {
+            "left": {
+              "forward": 42.0,
+              "lift": 0.0,
+              "hip": [
+                238,
+                332
+              ],
+              "knee": [
+                277.773,
+                394.403
+              ],
+              "ankle": [
+                252.28,
+                466.0
+              ],
+              "stance": false
+            },
+            "right": {
+              "forward": -42.0,
+              "lift": 0.0,
+              "hip": [
+                274,
+                332
+              ],
+              "knee": [
+                234.227,
+                394.403
+              ],
+              "ankle": [
+                259.72,
+                466.0
+              ],
+              "stance": true
+            }
+          },
+          "depthOrder": [
+            "right",
+            "left"
+          ],
+          "crossing": false
+        },
+        {
+          "frame": 11,
+          "phase": 0.55,
+          "key": null,
+          "root": [
+            256,
+            332
+          ],
+          "ground": 474,
+          "pelvisBob": -1.618,
+          "legs": {
+            "left": {
+              "forward": 39.944,
+              "lift": 0.0,
+              "hip": [
+                238,
+                332
+              ],
+              "knee": [
+                277.52,
+                394.563
+              ],
+              "ankle": [
+                251.581,
+                466.0
+              ],
+              "stance": true
+            },
+            "right": {
+              "forward": -39.944,
+              "lift": 10.507,
+              "hip": [
+                274,
+                332
+              ],
+              "knee": [
+                225.572,
+                387.953
+              ],
+              "ankle": [
+                260.419,
+                455.493
+              ],
+              "stance": false
+            }
+          },
+          "depthOrder": [
+            "right",
+            "left"
+          ],
+          "crossing": false
+        },
+        {
+          "frame": 12,
+          "phase": 0.6,
+          "key": "loading-b",
+          "root": [
+            256,
+            332
+          ],
+          "ground": 474,
+          "pelvisBob": -0.618,
+          "legs": {
+            "left": {
+              "forward": 33.979,
+              "lift": 0.0,
+              "hip": [
+                238,
+                332
+              ],
+              "knee": [
+                276.76,
+                395.037
+              ],
+              "ankle": [
+                249.553,
+                466.0
+              ],
+              "stance": true
+            },
+            "right": {
+              "forward": -33.979,
+              "lift": 19.985,
+              "hip": [
+                274,
+                332
+              ],
+              "knee": [
+                220.218,
+                382.828
+              ],
+              "ankle": [
+                262.447,
+                446.015
+              ],
+              "stance": false
+            }
+          },
+          "depthOrder": [
+            "right",
+            "left"
+          ],
+          "crossing": false
+        },
+        {
+          "frame": 13,
+          "phase": 0.65,
+          "key": null,
+          "root": [
+            256,
+            332
+          ],
+          "ground": 474,
+          "pelvisBob": 0.618,
+          "legs": {
+            "left": {
+              "forward": 24.687,
+              "lift": 0.0,
+              "hip": [
+                238,
+                332
+              ],
+              "knee": [
+                275.5,
+                395.795
+              ],
+              "ankle": [
+                246.394,
+                466.0
+              ],
+              "stance": true
+            },
+            "right": {
+              "forward": -24.687,
+              "lift": 27.507,
+              "hip": [
+                274,
+                332
+              ],
+              "knee": [
+                217.434,
+                379.711
+              ],
+              "ankle": [
+                265.606,
+                438.493
+              ],
+              "stance": false
+            }
+          },
+          "depthOrder": [
+            "right",
+            "left"
+          ],
+          "crossing": false
+        },
+        {
+          "frame": 14,
+          "phase": 0.7,
+          "key": null,
+          "root": [
+            256,
+            332
+          ],
+          "ground": 474,
+          "pelvisBob": 1.618,
+          "legs": {
+            "left": {
+              "forward": 12.979,
+              "lift": 0.0,
+              "hip": [
+                238,
+                332
+              ],
+              "knee": [
+                273.78,
+                396.775
+              ],
+              "ankle": [
+                242.413,
+                466.0
+              ],
+              "stance": true
+            },
+            "right": {
+              "forward": -12.979,
+              "lift": 32.336,
+              "hip": [
+                274,
+                332
+              ],
+              "knee": [
+                216.818,
+                378.97
+              ],
+              "ankle": [
+                269.587,
+                433.664
+              ],
+              "stance": false
+            }
+          },
+          "depthOrder": [
+            "right",
+            "left"
+          ],
+          "crossing": false
+        },
+        {
+          "frame": 15,
+          "phase": 0.75,
+          "key": "passing-b",
+          "root": [
+            256,
+            332
+          ],
+          "ground": 474,
+          "pelvisBob": 2.0,
+          "legs": {
+            "left": {
+              "forward": 0.0,
+              "lift": 0.0,
+              "hip": [
+                238,
+                332
+              ],
+              "knee": [
+                271.701,
+                397.881
+              ],
+              "ankle": [
+                238.0,
+                466.0
+              ],
+              "stance": true
+            },
+            "right": {
+              "forward": -0.0,
+              "lift": 34.0,
+              "hip": [
+                274,
+                332
+              ],
+              "knee": [
+                218.109,
+                380.5
+              ],
+              "ankle": [
+                274.0,
+                432.0
+              ],
+              "stance": false
+            }
+          },
+          "depthOrder": [
+            "left",
+            "right"
+          ],
+          "crossing": true
+        },
+        {
+          "frame": 16,
+          "phase": 0.8,
+          "key": null,
+          "root": [
+            256,
+            332
+          ],
+          "ground": 474,
+          "pelvisBob": 1.618,
+          "legs": {
+            "left": {
+              "forward": -12.979,
+              "lift": 0.0,
+              "hip": [
+                238,
+                332
+              ],
+              "knee": [
+                269.441,
+                398.989
+              ],
+              "ankle": [
+                233.587,
+                466.0
+              ],
+              "stance": true
+            },
+            "right": {
+              "forward": 12.979,
+              "lift": 32.336,
+              "hip": [
+                274,
+                332
+              ],
+              "knee": [
+                221.103,
+                383.748
+              ],
+              "ankle": [
+                278.413,
+                433.664
+              ],
+              "stance": false
+            }
+          },
+          "depthOrder": [
+            "left",
+            "right"
+          ],
+          "crossing": false
+        },
+        {
+          "frame": 17,
+          "phase": 0.85,
+          "key": "push-off-b",
+          "root": [
+            256,
+            332
+          ],
+          "ground": 474,
+          "pelvisBob": 0.618,
+          "legs": {
+            "left": {
+              "forward": -24.687,
+              "lift": 0.0,
+              "hip": [
+                238,
+                332
+              ],
+              "knee": [
+                267.246,
+                399.975
+              ],
+              "ankle": [
+                229.606,
+                466.0
+              ],
+              "stance": true
+            },
+            "right": {
+              "forward": 24.687,
+              "lift": 27.507,
+              "hip": [
+                274,
+                332
+              ],
+              "knee": [
+                225.607,
+                387.983
+              ],
+              "ankle": [
+                282.394,
+                438.493
+              ],
+              "stance": false
+            }
+          },
+          "depthOrder": [
+            "left",
+            "right"
+          ],
+          "crossing": false
+        },
+        {
+          "frame": 18,
+          "phase": 0.9,
+          "key": null,
+          "root": [
+            256,
+            332
+          ],
+          "ground": 474,
+          "pelvisBob": -0.618,
+          "legs": {
+            "left": {
+              "forward": -33.979,
+              "lift": 0.0,
+              "hip": [
+                238,
+                332
+              ],
+              "knee": [
+                265.399,
+                400.741
+              ],
+              "ankle": [
+                226.447,
+                466.0
+              ],
+              "stance": true
+            },
+            "right": {
+              "forward": 33.979,
+              "lift": 19.985,
+              "hip": [
+                274,
+                332
+              ],
+              "knee": [
+                231.507,
+                392.583
+              ],
+              "ankle": [
+                285.553,
+                446.015
+              ],
+              "stance": false
+            }
+          },
+          "depthOrder": [
+            "left",
+            "right"
+          ],
+          "crossing": false
+        },
+        {
+          "frame": 19,
+          "phase": 0.95,
+          "key": null,
+          "root": [
+            256,
+            332
+          ],
+          "ground": 474,
+          "pelvisBob": -1.618,
+          "legs": {
+            "left": {
+              "forward": -39.944,
+              "lift": 0.0,
+              "hip": [
+                238,
+                332
+              ],
+              "knee": [
+                264.163,
+                401.221
+              ],
+              "ankle": [
+                224.419,
+                466.0
+              ],
+              "stance": true
+            },
+            "right": {
+              "forward": 39.944,
+              "lift": 10.507,
+              "hip": [
+                274,
+                332
+              ],
+              "knee": [
+                238.889,
+                397.14
+              ],
+              "ankle": [
+                287.581,
+                455.493
+              ],
+              "stance": false
+            }
+          },
+          "depthOrder": [
+            "left",
+            "right"
+          ],
+          "crossing": false
+        },
+        {
+          "frame": 20,
+          "phase": 1.0,
+          "key": "contact-a",
+          "root": [
+            256,
+            332
+          ],
+          "ground": 474,
+          "pelvisBob": -2.0,
+          "legs": {
+            "left": {
+              "forward": -42.0,
+              "lift": 0.0,
+              "hip": [
+                238,
+                332
+              ],
+              "knee": [
+                263.729,
+                401.383
+              ],
+              "ankle": [
+                223.72,
+                466.0
+              ],
+              "stance": true
+            },
+            "right": {
+              "forward": 42.0,
+              "lift": 0.0,
+              "hip": [
+                274,
+                332
+              ],
+              "knee": [
+                248.271,
+                401.383
+              ],
+              "ankle": [
+                288.28,
+                466.0
+              ],
+              "stance": false
+            }
+          },
+          "depthOrder": [
+            "left",
+            "right"
+          ],
+          "crossing": false,
+          "closureOf": 0
+        }
+      ]
+    },
+    {
+      "direction": "front",
+      "shoulderY": 164,
+      "hipY": 348,
+      "frames": [
+        {
+          "frame": 0,
+          "phase": 0.0,
+          "key": "contact-a",
+          "root": [
+            256,
+            332
+          ],
+          "ground": 474,
+          "pelvisBob": -2.0,
+          "legs": {
+            "left": {
+              "forward": 42.0,
+              "lift": 0.0,
+              "hip": [
+                238,
+                332
+              ],
+              "knee": [
+                277.773,
+                394.403
+              ],
+              "ankle": [
+                252.28,
+                466.0
+              ],
+              "stance": true
+            },
+            "right": {
+              "forward": -42.0,
+              "lift": 0.0,
+              "hip": [
+                274,
+                332
+              ],
+              "knee": [
+                234.227,
+                394.403
+              ],
+              "ankle": [
+                259.72,
+                466.0
+              ],
+              "stance": false
+            }
+          },
+          "depthOrder": [
+            "left",
+            "right"
+          ],
+          "crossing": false
+        },
+        {
+          "frame": 1,
+          "phase": 0.05,
+          "key": null,
+          "root": [
+            256,
+            332
+          ],
+          "ground": 474,
+          "pelvisBob": -1.618,
+          "legs": {
+            "left": {
+              "forward": 39.944,
+              "lift": 10.507,
+              "hip": [
+                238,
+                332
+              ],
+              "knee": [
+                286.428,
+                387.953
+              ],
+              "ankle": [
+                251.581,
+                455.493
+              ],
+              "stance": false
+            },
+            "right": {
+              "forward": -39.944,
+              "lift": 0.0,
+              "hip": [
+                274,
+                332
+              ],
+              "knee": [
+                234.48,
+                394.563
+              ],
+              "ankle": [
+                260.419,
+                466.0
+              ],
+              "stance": true
+            }
+          },
+          "depthOrder": [
+            "left",
+            "right"
+          ],
+          "crossing": false
+        },
+        {
+          "frame": 2,
+          "phase": 0.1,
+          "key": "loading-a",
+          "root": [
+            256,
+            332
+          ],
+          "ground": 474,
+          "pelvisBob": -0.618,
+          "legs": {
+            "left": {
+              "forward": 33.979,
+              "lift": 19.985,
+              "hip": [
+                238,
+                332
+              ],
+              "knee": [
+                291.782,
+                382.828
+              ],
+              "ankle": [
+                249.553,
+                446.015
+              ],
+              "stance": false
+            },
+            "right": {
+              "forward": -33.979,
+              "lift": 0.0,
+              "hip": [
+                274,
+                332
+              ],
+              "knee": [
+                235.24,
+                395.037
+              ],
+              "ankle": [
+                262.447,
+                466.0
+              ],
+              "stance": true
+            }
+          },
+          "depthOrder": [
+            "left",
+            "right"
+          ],
+          "crossing": false
+        },
+        {
+          "frame": 3,
+          "phase": 0.15,
+          "key": null,
+          "root": [
+            256,
+            332
+          ],
+          "ground": 474,
+          "pelvisBob": 0.618,
+          "legs": {
+            "left": {
+              "forward": 24.687,
+              "lift": 27.507,
+              "hip": [
+                238,
+                332
+              ],
+              "knee": [
+                294.566,
+                379.711
+              ],
+              "ankle": [
+                246.394,
+                438.493
+              ],
+              "stance": false
+            },
+            "right": {
+              "forward": -24.687,
+              "lift": 0.0,
+              "hip": [
+                274,
+                332
+              ],
+              "knee": [
+                236.5,
+                395.795
+              ],
+              "ankle": [
+                265.606,
+                466.0
+              ],
+              "stance": true
+            }
+          },
+          "depthOrder": [
+            "left",
+            "right"
+          ],
+          "crossing": false
+        },
+        {
+          "frame": 4,
+          "phase": 0.2,
+          "key": null,
+          "root": [
+            256,
+            332
+          ],
+          "ground": 474,
+          "pelvisBob": 1.618,
+          "legs": {
+            "left": {
+              "forward": 12.979,
+              "lift": 32.336,
+              "hip": [
+                238,
+                332
+              ],
+              "knee": [
+                295.182,
+                378.97
+              ],
+              "ankle": [
+                242.413,
+                433.664
+              ],
+              "stance": false
+            },
+            "right": {
+              "forward": -12.979,
+              "lift": 0.0,
+              "hip": [
+                274,
+                332
+              ],
+              "knee": [
+                238.22,
+                396.775
+              ],
+              "ankle": [
+                269.587,
+                466.0
+              ],
+              "stance": true
+            }
+          },
+          "depthOrder": [
+            "left",
+            "right"
+          ],
+          "crossing": false
+        },
+        {
+          "frame": 5,
+          "phase": 0.25,
+          "key": "passing-a",
+          "root": [
+            256,
+            332
+          ],
+          "ground": 474,
+          "pelvisBob": 2.0,
+          "legs": {
+            "left": {
+              "forward": 0.0,
+              "lift": 34.0,
+              "hip": [
+                238,
+                332
+              ],
+              "knee": [
+                293.891,
+                380.5
+              ],
+              "ankle": [
+                238.0,
+                432.0
+              ],
+              "stance": false
+            },
+            "right": {
+              "forward": -0.0,
+              "lift": 0.0,
+              "hip": [
+                274,
+                332
+              ],
+              "knee": [
+                240.299,
+                397.881
+              ],
+              "ankle": [
+                274.0,
+                466.0
+              ],
+              "stance": true
+            }
+          },
+          "depthOrder": [
+            "right",
+            "left"
+          ],
+          "crossing": true
+        },
+        {
+          "frame": 6,
+          "phase": 0.3,
+          "key": null,
+          "root": [
+            256,
+            332
+          ],
+          "ground": 474,
+          "pelvisBob": 1.618,
+          "legs": {
+            "left": {
+              "forward": -12.979,
+              "lift": 32.336,
+              "hip": [
+                238,
+                332
+              ],
+              "knee": [
+                290.897,
+                383.748
+              ],
+              "ankle": [
+                233.587,
+                433.664
+              ],
+              "stance": false
+            },
+            "right": {
+              "forward": 12.979,
+              "lift": 0.0,
+              "hip": [
+                274,
+                332
+              ],
+              "knee": [
+                242.559,
+                398.989
+              ],
+              "ankle": [
+                278.413,
+                466.0
+              ],
+              "stance": true
+            }
+          },
+          "depthOrder": [
+            "right",
+            "left"
+          ],
+          "crossing": false
+        },
+        {
+          "frame": 7,
+          "phase": 0.35,
+          "key": "push-off-a",
+          "root": [
+            256,
+            332
+          ],
+          "ground": 474,
+          "pelvisBob": 0.618,
+          "legs": {
+            "left": {
+              "forward": -24.687,
+              "lift": 27.507,
+              "hip": [
+                238,
+                332
+              ],
+              "knee": [
+                286.393,
+                387.983
+              ],
+              "ankle": [
+                229.606,
+                438.493
+              ],
+              "stance": false
+            },
+            "right": {
+              "forward": 24.687,
+              "lift": 0.0,
+              "hip": [
+                274,
+                332
+              ],
+              "knee": [
+                244.754,
+                399.975
+              ],
+              "ankle": [
+                282.394,
+                466.0
+              ],
+              "stance": true
+            }
+          },
+          "depthOrder": [
+            "right",
+            "left"
+          ],
+          "crossing": false
+        },
+        {
+          "frame": 8,
+          "phase": 0.4,
+          "key": null,
+          "root": [
+            256,
+            332
+          ],
+          "ground": 474,
+          "pelvisBob": -0.618,
+          "legs": {
+            "left": {
+              "forward": -33.979,
+              "lift": 19.985,
+              "hip": [
+                238,
+                332
+              ],
+              "knee": [
+                280.493,
+                392.583
+              ],
+              "ankle": [
+                226.447,
+                446.015
+              ],
+              "stance": false
+            },
+            "right": {
+              "forward": 33.979,
+              "lift": 0.0,
+              "hip": [
+                274,
+                332
+              ],
+              "knee": [
+                246.601,
+                400.741
+              ],
+              "ankle": [
+                285.553,
+                466.0
+              ],
+              "stance": true
+            }
+          },
+          "depthOrder": [
+            "right",
+            "left"
+          ],
+          "crossing": false
+        },
+        {
+          "frame": 9,
+          "phase": 0.45,
+          "key": null,
+          "root": [
+            256,
+            332
+          ],
+          "ground": 474,
+          "pelvisBob": -1.618,
+          "legs": {
+            "left": {
+              "forward": -39.944,
+              "lift": 10.507,
+              "hip": [
+                238,
+                332
+              ],
+              "knee": [
+                273.111,
+                397.14
+              ],
+              "ankle": [
+                224.419,
+                455.493
+              ],
+              "stance": false
+            },
+            "right": {
+              "forward": 39.944,
+              "lift": 0.0,
+              "hip": [
+                274,
+                332
+              ],
+              "knee": [
+                247.837,
+                401.221
+              ],
+              "ankle": [
+                287.581,
+                466.0
+              ],
+              "stance": true
+            }
+          },
+          "depthOrder": [
+            "right",
+            "left"
+          ],
+          "crossing": false
+        },
+        {
+          "frame": 10,
+          "phase": 0.5,
+          "key": "contact-b",
+          "root": [
+            256,
+            332
+          ],
+          "ground": 474,
+          "pelvisBob": -2.0,
+          "legs": {
+            "left": {
+              "forward": -42.0,
+              "lift": 0.0,
+              "hip": [
+                238,
+                332
+              ],
+              "knee": [
+                263.729,
+                401.383
+              ],
+              "ankle": [
+                223.72,
+                466.0
+              ],
+              "stance": false
+            },
+            "right": {
+              "forward": 42.0,
+              "lift": 0.0,
+              "hip": [
+                274,
+                332
+              ],
+              "knee": [
+                248.271,
+                401.383
+              ],
+              "ankle": [
+                288.28,
+                466.0
+              ],
+              "stance": true
+            }
+          },
+          "depthOrder": [
+            "right",
+            "left"
+          ],
+          "crossing": false
+        },
+        {
+          "frame": 11,
+          "phase": 0.55,
+          "key": null,
+          "root": [
+            256,
+            332
+          ],
+          "ground": 474,
+          "pelvisBob": -1.618,
+          "legs": {
+            "left": {
+              "forward": -39.944,
+              "lift": 0.0,
+              "hip": [
+                238,
+                332
+              ],
+              "knee": [
+                264.163,
+                401.221
+              ],
+              "ankle": [
+                224.419,
+                466.0
+              ],
+              "stance": true
+            },
+            "right": {
+              "forward": 39.944,
+              "lift": 10.507,
+              "hip": [
+                274,
+                332
+              ],
+              "knee": [
+                238.889,
+                397.14
+              ],
+              "ankle": [
+                287.581,
+                455.493
+              ],
+              "stance": false
+            }
+          },
+          "depthOrder": [
+            "right",
+            "left"
+          ],
+          "crossing": false
+        },
+        {
+          "frame": 12,
+          "phase": 0.6,
+          "key": "loading-b",
+          "root": [
+            256,
+            332
+          ],
+          "ground": 474,
+          "pelvisBob": -0.618,
+          "legs": {
+            "left": {
+              "forward": -33.979,
+              "lift": 0.0,
+              "hip": [
+                238,
+                332
+              ],
+              "knee": [
+                265.399,
+                400.741
+              ],
+              "ankle": [
+                226.447,
+                466.0
+              ],
+              "stance": true
+            },
+            "right": {
+              "forward": 33.979,
+              "lift": 19.985,
+              "hip": [
+                274,
+                332
+              ],
+              "knee": [
+                231.507,
+                392.583
+              ],
+              "ankle": [
+                285.553,
+                446.015
+              ],
+              "stance": false
+            }
+          },
+          "depthOrder": [
+            "right",
+            "left"
+          ],
+          "crossing": false
+        },
+        {
+          "frame": 13,
+          "phase": 0.65,
+          "key": null,
+          "root": [
+            256,
+            332
+          ],
+          "ground": 474,
+          "pelvisBob": 0.618,
+          "legs": {
+            "left": {
+              "forward": -24.687,
+              "lift": 0.0,
+              "hip": [
+                238,
+                332
+              ],
+              "knee": [
+                267.246,
+                399.975
+              ],
+              "ankle": [
+                229.606,
+                466.0
+              ],
+              "stance": true
+            },
+            "right": {
+              "forward": 24.687,
+              "lift": 27.507,
+              "hip": [
+                274,
+                332
+              ],
+              "knee": [
+                225.607,
+                387.983
+              ],
+              "ankle": [
+                282.394,
+                438.493
+              ],
+              "stance": false
+            }
+          },
+          "depthOrder": [
+            "right",
+            "left"
+          ],
+          "crossing": false
+        },
+        {
+          "frame": 14,
+          "phase": 0.7,
+          "key": null,
+          "root": [
+            256,
+            332
+          ],
+          "ground": 474,
+          "pelvisBob": 1.618,
+          "legs": {
+            "left": {
+              "forward": -12.979,
+              "lift": 0.0,
+              "hip": [
+                238,
+                332
+              ],
+              "knee": [
+                269.441,
+                398.989
+              ],
+              "ankle": [
+                233.587,
+                466.0
+              ],
+              "stance": true
+            },
+            "right": {
+              "forward": 12.979,
+              "lift": 32.336,
+              "hip": [
+                274,
+                332
+              ],
+              "knee": [
+                221.103,
+                383.748
+              ],
+              "ankle": [
+                278.413,
+                433.664
+              ],
+              "stance": false
+            }
+          },
+          "depthOrder": [
+            "right",
+            "left"
+          ],
+          "crossing": false
+        },
+        {
+          "frame": 15,
+          "phase": 0.75,
+          "key": "passing-b",
+          "root": [
+            256,
+            332
+          ],
+          "ground": 474,
+          "pelvisBob": 2.0,
+          "legs": {
+            "left": {
+              "forward": -0.0,
+              "lift": 0.0,
+              "hip": [
+                238,
+                332
+              ],
+              "knee": [
+                271.701,
+                397.881
+              ],
+              "ankle": [
+                238.0,
+                466.0
+              ],
+              "stance": true
+            },
+            "right": {
+              "forward": 0.0,
+              "lift": 34.0,
+              "hip": [
+                274,
+                332
+              ],
+              "knee": [
+                218.109,
+                380.5
+              ],
+              "ankle": [
+                274.0,
+                432.0
+              ],
+              "stance": false
+            }
+          },
+          "depthOrder": [
+            "left",
+            "right"
+          ],
+          "crossing": true
+        },
+        {
+          "frame": 16,
+          "phase": 0.8,
+          "key": null,
+          "root": [
+            256,
+            332
+          ],
+          "ground": 474,
+          "pelvisBob": 1.618,
+          "legs": {
+            "left": {
+              "forward": 12.979,
+              "lift": 0.0,
+              "hip": [
+                238,
+                332
+              ],
+              "knee": [
+                273.78,
+                396.775
+              ],
+              "ankle": [
+                242.413,
+                466.0
+              ],
+              "stance": true
+            },
+            "right": {
+              "forward": -12.979,
+              "lift": 32.336,
+              "hip": [
+                274,
+                332
+              ],
+              "knee": [
+                216.818,
+                378.97
+              ],
+              "ankle": [
+                269.587,
+                433.664
+              ],
+              "stance": false
+            }
+          },
+          "depthOrder": [
+            "left",
+            "right"
+          ],
+          "crossing": false
+        },
+        {
+          "frame": 17,
+          "phase": 0.85,
+          "key": "push-off-b",
+          "root": [
+            256,
+            332
+          ],
+          "ground": 474,
+          "pelvisBob": 0.618,
+          "legs": {
+            "left": {
+              "forward": 24.687,
+              "lift": 0.0,
+              "hip": [
+                238,
+                332
+              ],
+              "knee": [
+                275.5,
+                395.795
+              ],
+              "ankle": [
+                246.394,
+                466.0
+              ],
+              "stance": true
+            },
+            "right": {
+              "forward": -24.687,
+              "lift": 27.507,
+              "hip": [
+                274,
+                332
+              ],
+              "knee": [
+                217.434,
+                379.711
+              ],
+              "ankle": [
+                265.606,
+                438.493
+              ],
+              "stance": false
+            }
+          },
+          "depthOrder": [
+            "left",
+            "right"
+          ],
+          "crossing": false
+        },
+        {
+          "frame": 18,
+          "phase": 0.9,
+          "key": null,
+          "root": [
+            256,
+            332
+          ],
+          "ground": 474,
+          "pelvisBob": -0.618,
+          "legs": {
+            "left": {
+              "forward": 33.979,
+              "lift": 0.0,
+              "hip": [
+                238,
+                332
+              ],
+              "knee": [
+                276.76,
+                395.037
+              ],
+              "ankle": [
+                249.553,
+                466.0
+              ],
+              "stance": true
+            },
+            "right": {
+              "forward": -33.979,
+              "lift": 19.985,
+              "hip": [
+                274,
+                332
+              ],
+              "knee": [
+                220.218,
+                382.828
+              ],
+              "ankle": [
+                262.447,
+                446.015
+              ],
+              "stance": false
+            }
+          },
+          "depthOrder": [
+            "left",
+            "right"
+          ],
+          "crossing": false
+        },
+        {
+          "frame": 19,
+          "phase": 0.95,
+          "key": null,
+          "root": [
+            256,
+            332
+          ],
+          "ground": 474,
+          "pelvisBob": -1.618,
+          "legs": {
+            "left": {
+              "forward": 39.944,
+              "lift": 0.0,
+              "hip": [
+                238,
+                332
+              ],
+              "knee": [
+                277.52,
+                394.563
+              ],
+              "ankle": [
+                251.581,
+                466.0
+              ],
+              "stance": true
+            },
+            "right": {
+              "forward": -39.944,
+              "lift": 10.507,
+              "hip": [
+                274,
+                332
+              ],
+              "knee": [
+                225.572,
+                387.953
+              ],
+              "ankle": [
+                260.419,
+                455.493
+              ],
+              "stance": false
+            }
+          },
+          "depthOrder": [
+            "left",
+            "right"
+          ],
+          "crossing": false
+        },
+        {
+          "frame": 20,
+          "phase": 1.0,
+          "key": "contact-a",
+          "root": [
+            256,
+            332
+          ],
+          "ground": 474,
+          "pelvisBob": -2.0,
+          "legs": {
+            "left": {
+              "forward": 42.0,
+              "lift": 0.0,
+              "hip": [
+                238,
+                332
+              ],
+              "knee": [
+                277.773,
+                394.403
+              ],
+              "ankle": [
+                252.28,
+                466.0
+              ],
+              "stance": true
+            },
+            "right": {
+              "forward": -42.0,
+              "lift": 0.0,
+              "hip": [
+                274,
+                332
+              ],
+              "knee": [
+                234.227,
+                394.403
+              ],
+              "ankle": [
+                259.72,
+                466.0
+              ],
+              "stance": false
+            }
+          },
+          "depthOrder": [
+            "left",
+            "right"
+          ],
+          "crossing": false,
+          "closureOf": 0
+        }
+      ]
+    }
+  ]
+}

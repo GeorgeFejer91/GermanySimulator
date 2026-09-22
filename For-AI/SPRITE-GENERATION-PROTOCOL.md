@@ -191,13 +191,42 @@ The retained ImageGen gait proposal at
 educational visual reference only. The coefficient model, rig audit, and final
 overlay inspection are production authority.
 
+## Merkel 21-point candidate lane
+
+`assets/sprite-sources/candidates/merkel-21/` is a deliberately isolated
+preview lane for testing a more targeted image-by-image walk. Its four raw
+ImageGen sheets each contain eight keys in the fixed order contact A, loading
+A, passing A, push-off A, contact B, loading B, passing B, push-off B. Left and
+right are separately authored sources. `tools/build-merkel-21-candidate.py`
+registers those keys, takes the head, hair, face, neck-to-shoulder join, and
+central jacket pixels from the archived Merkel sheet, strips those regions
+from the proposals, then smoothstep-interpolates centroid-aligned local motion
+quadrants. It emits 20 unique playback cells per direction and adds frame 0 as
+inspection point 21 only in the audit sheet.
+
+The candidate outputs include normal, exact-closure, skeleton, onion-skin,
+difference, invariant-mask, and JSON pose evidence. Rebuild and check them with:
+
+```powershell
+python tools/build-merkel-21-candidate.py
+python tools/verify-merkel-21-candidate.py
+node --test tests/merkel-21-candidate.test.mjs tests/sprite-preview.test.mjs
+```
+
+The verifier is fail-closed for source/artifact hashes, separate side sources,
+frame count and uniqueness, exact closure, immutable identity pixels, fixed
+ground, safe margins, connected silhouettes, opposite leg phase, passing
+crossovers, and constant two-bone lengths. Passing it does not approve the
+artwork. The manifest must remain `candidate-unapproved`, and neither the
+builder nor preview may write or redirect the root game's stable loader.
+
 ## Browser preview sandbox
 
-`sprite-preview.html` is the standalone comparison surface for both the stable
-game atlases in `assets/sprite-archive/pre-rig-20260921/assets/` and the
-experimental walking atlases in `assets/`. It reads the experimental registry
-for character, row, and direction metadata, then loads only the selected asset
-set. Every authored direction appears on a transparent checkerboard. The grid
+`sprite-preview.html` is the standalone comparison surface for the stable game
+atlases in `assets/sprite-archive/pre-rig-20260921/assets/`, the experimental
+walking atlases in `assets/`, and the isolated Merkel 21-point candidate. It
+reads manifest metadata and loads only the selected asset set. Every authored
+direction appears on a transparent checkerboard. The grid
 synchronizes atlases by normalized walk cycle; focused animation mode exposes
 the selected atlas's native frame count, including stable Merkel's 24 frames
 and the 32-frame experimental version. Pause, single-frame stepping, scrubbing,

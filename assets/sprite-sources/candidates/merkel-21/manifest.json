@@ -1,0 +1,182 @@
+{
+  "version": 1,
+  "id": "merkel-21",
+  "status": "candidate-unapproved",
+  "renderMode": "masked-key-local-layer-v1",
+  "workingCell": 512,
+  "reviewCell": 256,
+  "runtimeCell": 128,
+  "playbackFrames": 20,
+  "inspectionFrames": 21,
+  "keyIndices": [
+    0,
+    2,
+    5,
+    7,
+    10,
+    12,
+    15,
+    17
+  ],
+  "rows": [
+    "front-idle",
+    "left-walk",
+    "right-walk",
+    "back-walk",
+    "front-walk"
+  ],
+  "directions": {
+    "left": "left-walk",
+    "right": "right-walk",
+    "up": "back-walk",
+    "down": "front-walk"
+  },
+  "invariants": [
+    "head",
+    "hair",
+    "face",
+    "neck-to-shoulder",
+    "central-jacket",
+    "root",
+    "ground",
+    "scale"
+  ],
+  "identityAuthority": "assets/sprite-archive/pre-rig-20260921/assets/sprite-sources/merkel-sprite-keys.png",
+  "allowedChanges": [
+    "arms",
+    "hands",
+    "thighs",
+    "calves",
+    "shoes",
+    "bounded-joint-seams"
+  ],
+  "interpolation": "registered-local-motion-layer-premultiplied-smoothstep",
+  "closurePolicy": "frame-20-is-exact-frame-0-audit-only",
+  "identityHash": "7d5cde706ea62a8e4a8be4086ad0d595272db76b4cc61277d95e081a861b69df",
+  "directionsMeta": {
+    "left": {
+      "raw": "assets/sprite-sources/candidates/merkel-21/raw/left-keys-generated.png",
+      "identityReference": "assets/sprite-archive/pre-rig-20260921/assets/sprite-sources/merkel-sprite-keys.png",
+      "identityReferenceRow": 1,
+      "row": 1,
+      "keys": [
+        0,
+        2,
+        5,
+        7,
+        10,
+        12,
+        15,
+        17
+      ],
+      "keyNames": [
+        "contact-a",
+        "loading-a",
+        "passing-a",
+        "push-off-a",
+        "contact-b",
+        "loading-b",
+        "passing-b",
+        "push-off-b"
+      ],
+      "separateIdentityReference": true
+    },
+    "right": {
+      "raw": "assets/sprite-sources/candidates/merkel-21/raw/right-keys-generated.png",
+      "identityReference": "assets/sprite-archive/pre-rig-20260921/assets/sprite-sources/merkel-sprite-keys.png",
+      "identityReferenceRow": 2,
+      "row": 2,
+      "keys": [
+        0,
+        2,
+        5,
+        7,
+        10,
+        12,
+        15,
+        17
+      ],
+      "keyNames": [
+        "contact-a",
+        "loading-a",
+        "passing-a",
+        "push-off-a",
+        "contact-b",
+        "loading-b",
+        "passing-b",
+        "push-off-b"
+      ],
+      "separateIdentityReference": true
+    },
+    "back": {
+      "raw": "assets/sprite-sources/candidates/merkel-21/raw/back-keys-generated.png",
+      "identityReference": "assets/sprite-archive/pre-rig-20260921/assets/sprite-sources/merkel-sprite-keys.png",
+      "identityReferenceRow": 3,
+      "row": 3,
+      "keys": [
+        0,
+        2,
+        5,
+        7,
+        10,
+        12,
+        15,
+        17
+      ],
+      "keyNames": [
+        "contact-a",
+        "loading-a",
+        "passing-a",
+        "push-off-a",
+        "contact-b",
+        "loading-b",
+        "passing-b",
+        "push-off-b"
+      ],
+      "separateIdentityReference": true
+    },
+    "front": {
+      "raw": "assets/sprite-sources/candidates/merkel-21/raw/front-keys-generated.png",
+      "identityReference": "assets/sprite-archive/pre-rig-20260921/assets/sprite-sources/merkel-sprite-keys.png",
+      "identityReferenceRow": 4,
+      "row": 4,
+      "keys": [
+        0,
+        2,
+        5,
+        7,
+        10,
+        12,
+        15,
+        17
+      ],
+      "keyNames": [
+        "contact-a",
+        "loading-a",
+        "passing-a",
+        "push-off-a",
+        "contact-b",
+        "loading-b",
+        "passing-b",
+        "push-off-b"
+      ],
+      "separateIdentityReference": true
+    }
+  },
+  "artifacts": {
+    "merkel-keys.png": "7b0abd08c426555743b9f7c4166cb2a69aa493f664a4224913014d2439b76cee",
+    "merkel-sprite.png": "f904119ae6c8a650c301e131a2358be4640fe1bd0c72c2f086165c4f7b9dc9e3",
+    "merkel-audit-21.png": "a0cb04d33f7baf06f8b07f63556e7fd3d3e7bdc2744ee3c9ba08b933936b1a40",
+    "merkel-difference.png": "21caef594245f656a40871c5c781f7e55e64fa45e60ac5ab3e9211c31d921e51",
+    "merkel-onion.png": "48aadf46c49bfec33357dd65932916209e57712735a62b4779b2d9befca7c937",
+    "merkel-skeleton.png": "32f59242af52fd45bda99604e5781f16605485c9a877a89b613ac516637e5dbb",
+    "invariant-masks.png": "e6f8cdfa91a9cedc4849b0b841dc95c2a85cc68a0db6f4978f2e0613e1634d95",
+    "pose-audit.json": "6882b61f273bee790720ffa4e726a08ad377a947d99ea8576b3d221ed9d45786"
+  },
+  "rawHashes": {
+    "left-keys-generated.png": "5faf1e929f11a28d8664e3fe137ff1db3feac943f8274bb22974ba79825848d5",
+    "right-keys-generated.png": "9dd76762679677902d7c1feaa10777abb4cbee8ba4fa9c5558a11ac0b2e60233",
+    "back-keys-generated.png": "b4872e8a3f6a5ce78e2eeebb9aba6ce0e5009e87855e71ecb47e2da8bbc32ed3",
+    "front-keys-generated.png": "f5cfa960bb2f3684a3a0b1caf37e8ea284300c620dd108e78bb6e63dfa42278a"
+  }
+}

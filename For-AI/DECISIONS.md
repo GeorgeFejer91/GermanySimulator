@@ -1,5 +1,27 @@
 # Durable decisions
 
+## 2026-09-22 — Merkel 21-point gait is an unapproved preview candidate
+
+Merkel has one isolated 21-point inspection lane under
+`assets/sprite-sources/candidates/merkel-21/`: 20 unique playback frames plus
+an exact frame-0 duplicate at inspection point 21. Four independently
+generated eight-key sheets cover left, right, back/up, and front/down; neither
+side direction is mirrored. The offline builder registers those proposals,
+removes their identity-bearing center, restores the archived direction-specific
+head and central torso as an immutable pixel plate, and interpolates only
+aligned local arm, leg, hand, shoe, and bounded joint-seam motion. The root and
+ground line stay fixed.
+
+`sprite-preview.html` exposes the lane as `CANDIDATE · MERKEL 21`, alongside
+the stable and experimental versions, with normal, exact-closure, skeleton,
+onion-skin, and difference inspection modes. The manifest remains
+`candidate-unapproved`, and the fail-closed verifier binds raw and derived
+hashes, identity pixels, frame uniqueness, direction sources, fixed bone
+lengths, passing crossovers, transparency, margins, connectedness, ground,
+and the exact closure frame. This does not change the root game's loader: the
+stable archived sprites remain the only in-game sprites until explicit visual
+acceptance.
+
 ## 2026-09-22 — Stable whole-pose sprites in game; rigged sprites preview-only
 
 The canonical root game temporarily loads all six complete-character atlases

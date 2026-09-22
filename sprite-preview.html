@@ -75,12 +75,13 @@
 </head>
 <body>
   <header>
-    <h1>SPRITE PRÜFSTELLE <span>STABLE + EXPERIMENTAL WALKING ATLAS PREVIEW</span></h1>
+    <h1>SPRITE PRÜFSTELLE <span>STABLE + EXPERIMENTAL + 21-POINT CANDIDATE</span></h1>
     <div class="controls" aria-label="Animation controls">
       <label>SPRITES
         <select id="source" aria-label="Sprite version">
           <option value="stable" selected>GAME · STABLE</option>
           <option value="experimental">EXPERIMENTAL</option>
+          <option value="candidate">CANDIDATE · MERKEL 21</option>
         </select>
       </label>
       <button id="mode" type="button" aria-pressed="false">ANIMATION PREVIEW</button>
@@ -89,6 +90,15 @@
       </label>
       <label class="focus-control" hidden>DIRECTION
         <select id="direction" aria-label="Preview direction"></select>
+      </label>
+      <label class="focus-control" hidden>VIEW
+        <select id="overlay" aria-label="Candidate inspection view" disabled>
+          <option value="normal">NORMAL</option>
+          <option value="audit">AUDIT · CLOSURE</option>
+          <option value="skeleton">SKELETON</option>
+          <option value="onion">ONION SKIN</option>
+          <option value="difference">DIFFERENCE</option>
+        </select>
       </label>
       <button id="toggle" type="button">PAUSE</button>
       <button id="previous" type="button" aria-label="Previous frame">−1 FRAME</button>
@@ -119,11 +129,14 @@
   </section>
   <main id="previews" aria-live="polite"></main>
   <script>
-    const CACHE_TOKEN="20260922-biomech4";
+    const CACHE_TOKEN="20260922-merkel21";
     const SOURCES={
       stable:{label:"GAME · STABLE",root:"assets/sprite-archive/pre-rig-20260921/assets/",token:"20260922-stable1",frames:{merkel:24}},
-      experimental:{label:"EXPERIMENTAL",root:"assets/",token:CACHE_TOKEN,frames:{}}
+      experimental:{label:"EXPERIMENTAL",root:"assets/",token:"20260922-biomech4",frames:{}},
+      candidate:{label:"CANDIDATE · MERKEL 21",root:"assets/sprite-sources/candidates/merkel-21/",token:CACHE_TOKEN,frames:{merkel:20},ids:["merkel"]}
     };
+    const QA_FILES={audit:"merkel-audit-21.png",skeleton:"merkel-skeleton.png",onion:"merkel-onion.png",difference:"merkel-difference.png"};
+    const QA_ROWS={left:0,right:1,up:2,down:3};
     const DIRECTIONS=[
       ["down","FRONT · DOWN"],
       ["up","BACK · UP"],
@@ -149,12 +162,14 @@
     const focusControls=[...document.querySelectorAll(".focus-control")];
     const character=document.querySelector("#character");
     const direction=document.querySelector("#direction");
+    const overlay=document.querySelector("#overlay");
     const focusTitle=document.querySelector("#focus-title");
     const focusMeta=document.querySelector("#focus-meta");
     const focusCaption=document.querySelector("#focus-caption");
     const focusCanvas=document.querySelector("#focus-canvas");
     const views=[];
     const sprites=new Map();
+    const qaImages=new Map();
     let focused=false;
     let focusView=null;
     let playing=!matchMedia("(prefers-reduced-motion: reduce)").matches;
@@ -170,13 +185,22 @@
     }
 
     function frameCount(){
-      return focused&&focusView?focusView.sprite.frames:32;
+      if(focused&&focusView)return focusView.frames||focusView.sprite.frames;
+      return sourceSelect.value==="candidate"?SOURCES.candidate.frames.merkel:32;
+    }
+
+    function playbackFrameCount(){
+      if(focused&&focusView)return focusView.playbackFrames||focusView.frames||focusView.sprite.frames;
+      return sourceSelect.value==="candidate"?SOURCES.candidate.frames.merkel:32;
     }
 
     function drawView(view){
-      if(!view?.sprite.image.complete||!view.sprite.image.naturalWidth)return;
+      const image=view?.image||view?.sprite.image;
+      if(!image?.complete||!image.naturalWidth)return;
       const size=view.canvas.width;
-      const frame=Math.min(view.sprite.frames-1,Math.floor(cycle*view.sprite.frames));
+      const frames=!playing&&(view.frames||view.sprite.frames)>playbackFrameCount()?(view.frames||view.sprite.frames):(view.playbackFrames||view.frames||view.sprite.frames);
+      const frame=Math.min(frames-1,Math.floor(cycle*frames));
+      const row=view.sourceRow??view.row;
       const context=view.canvas.getContext("2d");
       context.clearRect(0,0,size,size);
       context.imageSmoothingEnabled=true;
@@ -186,12 +210,12 @@
         context.translate(size,0);
         context.scale(-1,1);
       }
-      context.drawImage(view.sprite.image,frame*128,view.row*128,128,128,0,0,size,size);
+      context.drawImage(image,frame*128,row*128,128,128,0,0,size,size);
       if(view.mirror)context.restore();
     }
 
     function draw(){
-      const frames=frameCount();
+      const frames=playing?playbackFrameCount():frameCount();
       const frame=Math.min(frames-1,Math.floor(cycle*frames));
       if(frame===shownFrame)return;
       shownFrame=frame;
@@ -216,8 +240,20 @@
       const reference=sprite.directions[direction.value];
       const rowName=typeof reference==="string"?reference:reference.mirror;
       focusView={canvas:focusCanvas,sprite,row:sprite.rows.indexOf(rowName),mirror:typeof reference==="object"};
+      if(sourceSelect.value==="candidate"&&overlay.value!=="normal"){
+        let image=qaImages.get(overlay.value);
+        if(!image){
+          image=new Image();
+          image.decoding="async";
+          image.addEventListener("load",()=>{shownFrame=-1;draw();});
+          image.src=`./${SOURCES.candidate.root}${QA_FILES[overlay.value]}?v=${CACHE_TOKEN}`;
+          qaImages.set(overlay.value,image);
+        }
+        focusView={...focusView,image,sourceRow:QA_ROWS[direction.value],mirror:false,frames:overlay.value==="audit"?21:20,playbackFrames:20};
+      }
       focusTitle.textContent=NAMES[sprite.id]||sprite.id;
-      focusMeta.textContent=`${SOURCES[sourceSelect.value].label} · ${direction.selectedOptions[0].text} · ${sprite.frames} FRAMES`;
+      const viewLabel=overlay.value==="normal"?"":` · ${overlay.selectedOptions[0].text}`;
+      focusMeta.textContent=`${SOURCES[sourceSelect.value].label} · ${direction.selectedOptions[0].text}${viewLabel} · ${frameCount()} FRAMES`;
       focusCaption.textContent=direction.selectedOptions[0].text;
       focusCanvas.setAttribute("aria-label",`${focusTitle.textContent}, ${direction.selectedOptions[0].text.toLowerCase()} focused walking animation`);
       syncClock();
@@ -225,7 +261,14 @@
 
     function setSource(){
       const source=SOURCES[sourceSelect.value];
+      const allowed=id=>!source.ids||source.ids.includes(id);
+      for(const option of character.options)option.disabled=!allowed(option.value);
+      if(!allowed(character.value))character.value=source.ids[0];
+      overlay.disabled=sourceSelect.value!=="candidate";
+      if(overlay.disabled)overlay.value="normal";
       for(const sprite of sprites.values()){
+        sprite.article.hidden=!allowed(sprite.id);
+        if(!allowed(sprite.id))continue;
         sprite.frames=source.frames[sprite.id]||32;
         sprite.meta.textContent=`${sprite.rows.length} ROWS · ${sprite.frames} FRAMES`;
         const file=sprite.runtime.split("/").pop();
@@ -259,6 +302,7 @@
     mode.addEventListener("click",()=>setMode(!focused));
     character.addEventListener("change",updateFocus);
     direction.addEventListener("change",updateFocus);
+    overlay.addEventListener("change",updateFocus);
     document.querySelector("#previous").addEventListener("click",()=>step(-1));
     document.querySelector("#next").addEventListener("click",()=>step(1));
     frameInput.addEventListener("input",()=>{
@@ -277,9 +321,14 @@
     });
 
     async function load(){
-      const response=await fetch(`./assets/sprite-sources/rigs/registry.json?v=${CACHE_TOKEN}`);
+      const [response,candidateResponse]=await Promise.all([
+        fetch(`./assets/sprite-sources/rigs/registry.json?v=${CACHE_TOKEN}`),
+        fetch(`./assets/sprite-sources/candidates/merkel-21/manifest.json?v=${CACHE_TOKEN}`)
+      ]);
       if(!response.ok)throw new Error(`Registry request failed (${response.status})`);
-      const registry=await response.json();
+      if(!candidateResponse.ok)throw new Error(`Candidate manifest request failed (${candidateResponse.status})`);
+      const [registry,candidateManifest]=await Promise.all([response.json(),candidateResponse.json()]);
+      SOURCES.candidate.frames.merkel=candidateManifest.playbackFrames;
       for(const sprite of registry.sprites){
         const article=document.createElement("article");
         const heading=document.createElement("header");
@@ -297,6 +346,7 @@
         image.addEventListener("load",()=>{shownFrame=-1;draw();});
         sprite.image=image;
         sprite.meta=meta;
+        sprite.article=article;
         sprites.set(sprite.id,sprite);
         character.append(new Option(title.textContent,sprite.id));
         for(const [direction,label] of DIRECTIONS){
@@ -321,7 +371,7 @@
 
     function animate(time){
       if(playing){
-        cycle=(cycle+(time-lastTime)*Number(speed.value)/1000/frameCount())%1;
+        cycle=(cycle+(time-lastTime)*Number(speed.value)/1000/playbackFrameCount())%1;
       }
       lastTime=time;
       draw();
