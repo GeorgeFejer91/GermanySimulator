@@ -1,5 +1,32 @@
 # Durable decisions
 
+## 2026-09-22 — Shared biomechanical rig supersedes pose holds
+
+All six atlas-backed characters now ship from `biomechanical-rig-v3`. This
+decision supersedes the same-day original-pose identity hold below while
+preserving that decision and both archives as recoverable history. Accepted
+identity-matched three-view part sheets are the layered source authority;
+archived original generated pose sheets remain signed identity references.
+There is still only one runtime tree under root `assets/`.
+
+One eight-phase coefficient lane defines contact, loading, passing, and
+push-off for alternating legs. Side rows use fixed-length two-bone IK;
+front/back rows solve the gait in depth and use a compressed, minimum-readable
+orthographic projection. Heads and torsos are rigid layers on a fixed
+512-pixel root/ground grid. Both legs render behind the pelvis plate, joint
+sockets are cleaned/capped, and props use independent anchors. The builder
+emits eight 256-pixel review phases and 32 distinct direct 128-pixel samples
+per walking row without whole-image morphing or per-frame recentering.
+
+Runtime phase is proportional to actual ground distance. Collisions and pauses
+therefore stop the feet; Alice's 1.5× speed completes the same stride faster
+rather than changing its anatomy. The signed release gate binds part, key,
+runtime, identity-reference, and pose-audit hashes. It rejects incorrect
+stance ownership, foot lift/sliding, backward stepping, missing passing
+crossovers, collapsed projections, unstable roots/heads, unsafe alpha margins,
+repeated walk cells, and discontinuous loop seams, then requires human review
+of joint overlays on every final cell.
+
 ## 2026-09-22 — Runtime smoothness and shared sprite textures
 
 The simulation still updates on every animation frame, but routine HUD projection
@@ -7,7 +34,7 @@ is capped at 10 Hz; explicit gameplay events continue to refresh the HUD
 immediately. This removes repeated DOM reconstruction from the hot path without
 making rounded energy, time, wanted, or cooldown values feel delayed.
 
-Three.js uploads each identity-locked character atlas once per character kind.
+Three.js uploads each biomechanically baked character atlas once per character kind.
 The individual camera-facing planes share that texture and material, while their
 small geometry UVs select the current row and frame. Procedural player and police
 limbs advance from actual distance travelled and settle to neutral while idle,

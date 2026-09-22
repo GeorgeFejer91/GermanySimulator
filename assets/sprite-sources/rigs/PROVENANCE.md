@@ -30,7 +30,34 @@ Identity/prop clauses used for each accepted source:
 - `towel-woman`: established grumpy tourist, coral top, beige shorts,
   socks-and-sandals, rolled red/white towel and visor/hair accessory. A targeted
   edit removed the rejected red/brown background wash without changing parts.
+  The accepted sheet omitted the second forearm and contained one accidental
+  duplicate shoe. Its registry `partIndexes` therefore reuses the woman's own
+  identity-matched painted forearm for the paired arm and omits only that
+  duplicate shoe; no part from another character is introduced.
 
 The first Merz-like pilot with inherited towel/hat props was rejected and is
 not in the repository. `tools/build-rigged-sprite-atlas.py` deterministically
 extracts and renders only the accepted sheets recorded here.
+
+## Biomechanical gait proposal
+
+On 2026-09-22, OpenAI's built-in ImageGen produced the educational reference
+at `assets/sprite-sources/reference/biomechanical-gait-proposal.png` (SHA-256
+`a6cc1b28257b34753e489ec07acb04e401ef33d64ce0c5cad6a00c5c68d40497`).
+It was generated from text only; none of its depicted people or pixels are used
+in a runtime character.
+
+Prompt/mode: create a high-resolution scientific educational sprite-animation
+reference on a transparent background, arranged as a clean eight-phase gait
+grid for side, front, and back views; show contact, loading, passing, and
+push-off for both alternating legs; make stance lock, swing toe clearance,
+pelvis bob, leg crossover, and opposite arm swing visually explicit; use a
+neutral generic adult mannequin, consistent proportions/scale/root/ground
+line, no character identity, no props, no text, no crop, and no duplicate or
+missing anatomy. Mode was new image generation with no referenced image.
+
+The proposal guided terminology and visual review only. Production motion is
+the deterministic `eight-phase-double-support-v1` coefficient model in
+`tools/build-rigged-sprite-atlas.py`, with one signed joint audit per final
+cell. The proposal is not an anatomical or pixel authority and cannot bypass
+the numerical and frame-overlay verification gate.

@@ -23,7 +23,7 @@ for(const removed of ["bioVegan","wasteMarshal","quietHours","cargoParent","dinI
 assert.match(game,/crowdNames\[\(j\*5\+3\)%crowdNames\.length\]/,"names must rotate independently from the visual stereotype");
 assert.match(game,/surface===\"sidewalk\"&&archetype\?archetype\.barks\[state\.region\]/,"nearby pedestrians must use archetype-specific regional speech");
 assert.match(game,/dist\(player\.x,player\.y,n\.x,n\.y\)<\(n\.audioRadius\|\|NPC_COMPLAINT_DISTANCE\)/,"personal speech must be radius-triggered");
-assert.match(game,/n\.spriteFrame=Math\.floor\(n\.animTime\*Math\.max\(18,Math\.abs\(n\.vx\|\|n\.vy\|\|0\)\*1\.45\)\)%npcSpriteAtlases\[n\.spriteKind\]\.cols/,"walking frames must advance in proportion to pedestrian speed");
+assert.match(game,/advanceSpriteGait\(n,Math\.hypot\(n\.x-beforeX,n\.y-beforeY\),npcSpriteAtlases\[n\.spriteKind\],CROWD_GAIT_CYCLE_DISTANCE\)/,"walking frames must advance from actual pedestrian distance");
 assert.match(game,/n\.spriteRow=horizontal\?0:\(dy>0\?1:2\)/,"ordinary pedestrians must select side, down and up atlas rows from their movement vector");
 assert.match(game,/verticalSidewalkSegments/,"ordinary pedestrians must walk vertically as well as horizontally");
 assert.match(world,/n\.spriteKind&&q\.userData\[n\.spriteKind\+\"Sprite\"\]/,"the WebGL renderer must keep ordinary crowd sprites synchronized");

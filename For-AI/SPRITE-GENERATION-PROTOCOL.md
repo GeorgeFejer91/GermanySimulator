@@ -1,202 +1,173 @@
-# Identity-Locked Sprite Animation Protocol
+# Biomechanical Sprite Animation Protocol
 
 This is the production contract for every atlas-backed moving character in
-Germany Simulator. The original image-generated pose cells are the visual
-authority. Runtime animation may schedule, mirror, and uniformly scale whole
-approved cells; it may not redraw the face, rebuild the body from alternate
-parts, morph between full figures, or recenter individual frames.
+Germany Simulator. All six characters use one deterministic articulated gait,
+one fixed registration grid, and one signed verification gate. The browser
+still receives ordinary PNG atlases; the rig, ImageGen sources, SciPy, and
+Pillow remain offline production tools.
 
-The system adopts the useful parts of the owner-authored Einhornsammler
-continuity method: fixed frame boxes, a fixed ground offset, immutable visual
-endpoints, readable whole-body phases, and contact-sheet review of the exact
-runtime output. Germany Simulator adds a per-cell source hash so one-to-one
-identity is mechanically provable.
+The previous whole-pose hold lane (`authored-key-hold-v1`) is superseded by
+`biomechanical-rig-v3`. Its assets remain recoverable under
+`assets/sprite-archive/pre-identity-lock-20260922/`. The original generated
+pose sheets remain under `assets/sprite-archive/pre-rig-20260921/` as immutable
+identity references, not as a second runtime tree.
 
 ## Authorities
 
-- `assets/sprite-sources/rigs/registry.json` defines source/runtime paths, row
-  meanings, direction exposure, key counts, and the fixed 256/128/32 grid.
-- `assets/sprite-sources/*-keys.png` are the original authored key atlases.
-  These are inputs, not derivative review images.
-- `tools/build-identity-locked-sprite-atlas.py` is the canonical builder.
-- `assets/sprite-sources/identity-audit.json` maps every final runtime cell to
-  one source key and records both source and runtime pixel hashes.
-- `assets/sprite-sources/verification.json` is the signed release ledger.
-- `tools/verify-sprite-animation.py` is the hard automated release gate.
-- `tools/build-rigged-sprite-atlas.py` and the part sheets under
-  `assets/sprite-sources/rigs/*/parts.png` are retained only as experimental,
-  recoverable material. They are not production authorities.
-- `assets/sprite-archive/pre-rig-20260921/` preserves the earlier generated
-  source/runtime set. `assets/sprite-archive/pre-identity-lock-20260922/`
-  preserves the replaced cutout-rig production assets and ledgers.
+- `assets/sprite-sources/rigs/registry.json` defines the 512/256/128 grid,
+  rows, directions, props, and shared gait contract.
+- `assets/sprite-sources/rigs/*/parts.png` are the accepted identity-matched
+  layered source sheets.
+- `tools/build-rigged-sprite-atlas.py` is the sole production builder.
+- `assets/sprite-sources/*-keys.png` contain the eight reviewed biomechanical
+  phases emitted by that builder.
+- `assets/sprite-sources/rigs/pose-audit.json` records every root, hip, knee,
+  ankle, stance/swing state, travel sign, and phase for every final cell.
+- `tools/verify-sprite-animation.py` is the hard release gate and contact-sheet
+  renderer.
+- `assets/sprite-sources/verification.json` is the signed hash ledger.
+- `assets/*.png` is the only runtime atlas authority.
 
-There is one runtime tree: `assets/*.png`. Archives are never loaded by the
-game and must not become a second deployable runtime.
+## Fixed grid and phase clock
 
-## Frame contract
+Every character is authored on a 512 × 512 working cell, reviewed through
+eight 256 × 256 key cells, and shipped as 32 direct 128 × 128 RGBA cells per
+row. The cell midpoint, pelvis root, ground line, render scale, head plate, and
+torso plate are fixed. Never crop, normalize, or recenter individual frames.
 
-Every runtime atlas uses:
-
-- 128 × 128 transparent RGBA cells;
-- 32 cells per row, exceeding the 21-cell runtime minimum;
-- a fixed cell midpoint and ground baseline;
-- no per-frame crop, normalization, registration, or silhouette recentering;
-- balanced holds of complete authored keys across the 32-cell clock;
-- premultiplied-alpha downscaling from the 256 × 256 source cell;
-- runtime row selection that follows the registered direction contract.
-
-Eight-key characters hold each authored pose for four runtime cells. Merkel's
-original six-key sequence is distributed across 32 cells in balanced five- or
-six-cell holds. These are deliberate animation exposures, not invented visual
-in-betweens. The game may advance the 32-cell clock at different rates, while
-the character pixels remain exactly those of an authored source pose.
-
-This is the same practical choice used by many conventional eight-frame walk
-cycles: stability and clear contact/passing phases take priority over a larger
-number of synthetic but anatomically unreliable pictures.
-
-## Matrix-interpolated limb authoring lane
-
-The Affect Tracker pattern is approved for future limb-rig authoring, with one
-important distinction: interpolate a compact anatomical parameter vector, not
-finished sprite pixels. Its transition matrix and its face interpolation are
-separate ideas. The matrix selects an ordered route through known states; the
-renderer evaluates coefficients between those states.
-
-For a walking character, use one cyclic phase lane per view direction. A
-preferred eight-anchor lane is:
+The eight anchors are:
 
 ```text
-left contact -> left down -> left passing -> left up ->
-right contact -> right down -> right passing -> right up -> repeat
+0  contact A      4  loading A      8  passing A      12 push-off A
+16 contact B      20 loading B      24 passing B      28 push-off B
 ```
 
-Each anchor stores the same named coefficient vector: root and pelvis position,
-pelvis/torso/head rotation, both shoulder/elbow/wrist chains, both
-hip/knee/ankle chains, hand/prop anchors, planted-foot identity, and limb depth
-order. Generate the 32 delivered cells by sampling between adjacent anchors
-with eased shortest-angle interpolation. An authored anchor must be reproduced
-exactly at its phase; interpolation may never average two whole RGBA figures.
+Each four-cell interval is evaluated by bounded cyclic Catmull-Rom sampling of
+anatomical coefficients. Whole character pixels are never blended. Frames
+0/4/8/12/16/20/24/28 reproduce the eight source keys one-to-one; the other 24
+cells are independent rig evaluations with the same identity layers.
 
-The following constraints are mandatory:
+## Shared biomechanical mechanism
 
-1. A planted foot is a positional constraint. Solve root/pelvis compensation so
-   that foot remains fixed until toe-off; do not merely interpolate its screen
-   coordinates and create foot sliding.
-2. Joint angles may interpolate continuously, but planted-foot identity and
-   front/back limb ordering are discrete events. Swap depth only at the declared
-   crossing phase so a leg cannot dissolve through the other leg.
-3. Front, back, left, and right remain separate directional lanes. Never blend
-   a front bitmap into a back bitmap. Diagonal support, if added later, must be
-   a reviewed rig-space projection with its own anchors.
-4. The cell midpoint, ground line, head box, render scale, and transparent
-   background remain constant for all samples.
-5. Every generated sample must retain identity-matched layered artwork from the
-   same character. A rig assembled from another generation or a reconstructed
-   face is not an in-between.
-6. At every anchor phase, the rendered rig must pass a one-to-one overlay
-   comparison against its approved authored pose. Between anchors, the gate
-   must check joint limits, bone lengths, planted-foot drift, silhouette scale,
-   alpha cleanliness, and forward travel direction.
+The gait vector stores pelvis height and, for each leg, forward displacement,
+toe lift, and discrete stance ownership.
 
-This is analogous to the Affect Tracker's 21 x 21 coefficient cache: states may
-be pre-sampled for deterministic runtime playback, while the compact rig
-parameters remain the authoring authority. It is not analogous to crossfading
-four photographs. Whole-image blending creates double legs and ghosted faces
-and is forbidden for production walking cycles.
+1. Contact begins in double support with the new stance foot ahead of the
+   pelvis and the previous foot behind it.
+2. Loading lowers the pelvis slightly while the stance foot stays on the
+   ground.
+3. Passing places the swing ankle at the body midpoint with maximum toe
+   clearance; this is the visible leg-crossing phase.
+4. Push-off places the stance foot behind the pelvis while the swing foot moves
+   ahead.
+5. At the opposite contact, stance ownership swaps and the cycle repeats.
+6. Arms counter-swing unless a prop contract fixes them to a carried object.
 
-Existing shipped characters remain on the whole-pose identity-locked lane
-until an identity-matched layered rig and its anchor overlay evidence exist.
-The rejected cutout-rig archive is not automatically eligible merely because
-this authoring lane exists.
+Side views use fixed-length two-bone IK. Front/back views solve the same gait
+in a vertical/depth plane and project it orthographically. Depth is compressed
+to keep limbs readable, and the projected knee must retain at least six
+runtime pixels above/below its neighboring joints. That screen-space safeguard
+does not stretch the spatial bone; it prevents a valid bone aimed at the camera
+from disappearing in a small sprite.
+
+The stance foot has zero lift and its forward coefficient moves monotonically
+backward relative to the pelvis. The swing foot moves monotonically forward
+and reaches positive toe clearance. Reversing the frame clock to change travel
+direction is forbidden because it creates moonwalking.
 
 ## Direction contract
 
-Row names are semantic runtime authority:
+- `front-*`: faces the viewer and moves down-screen.
+- `back-*`: faces away and moves up-screen.
+- `right-*`: faces and moves right.
+- `left-*`: faces and moves left.
+- `{ "mirror": "right-walk" }`: exposes the exact horizontal mirror for left
+  travel when a character has only one side rig.
 
-- `front-*` faces the viewer and is used while moving down-screen;
-- `back-*` faces away and is used while moving up-screen;
-- `right-*` moves right;
-- `left-*` moves left;
-- a registered `{ "mirror": "right-walk" }` exposes the exact mirrored
-  right-facing source for left travel when no authored left row exists.
+Front, back, and side use separately generated identity-matched parts. Never
+blend a front bitmap into a back bitmap. Mirroring is allowed only where the
+registry explicitly declares it.
 
-Do not reverse the cell order to change direction. Direction comes from the
-authored row or a whole-cell horizontal mirror. Reversing a gait phase makes a
-planted foot appear to slide backwards.
+## Runtime phase rule
 
-## Identity and registration invariants
+Runtime animation advances from actual ground distance, not elapsed time.
+`advanceSpriteGait` maps accumulated movement distance onto the 32-cell clock.
+A blocked or paused character therefore stops its feet. Faster characters,
+including Alice at 1.5× standard speed, complete the same physical stride in
+less time without changing gait anatomy.
 
-For every authored key and every delivered runtime frame:
+## Identity and composition rules
 
-1. The complete head, torso, hands, props, legs, and feet stay inside the cell.
-2. Transparent pixels contain no hidden RGB and visible edges remain
-   antialiased.
-3. The top/head line, ground contact, silhouette scale, and horizontal root
-   stay within the signed thresholds.
-4. Walking rows contain visibly different lower-limb and opposite-leg phases.
-5. Every final runtime frame names exactly one source key.
-6. Re-downscaling that source key must produce pixel-identical final output.
-7. The audit's source and runtime pixel hashes must match.
-8. Every source key must appear in the 32-frame runtime sequence.
+1. Head and torso are rigid plates from the same accepted part sheet in every
+   frame. They may follow the bounded pelvis bob but may not morph.
+2. Limbs rotate from stable shoulder/hip sockets. Both legs render behind the
+   torso/pelvis so registration sockets cannot cover clothing.
+3. Rounded joint bridges and caps cover authoring sockets; exposed orange or
+   silver registration marks are a failure.
+4. Props use declared anchors. Flags, towels, food, bucket, watering can, and
+   Merkel's diamond pose must not pull the root or head registration.
+5. Every body part, hat, head, prop, foot, and antialiased edge stays inside
+   the transparent cell safety margin. Transparent pixels contain zero RGB.
+6. Source art from one character may never be reused to reconstruct another.
 
-Because the complete approved pose is copied as a unit, a runtime frame cannot
-gain a second head, lose the top of Merz's head, detach a limb, or change a
-face without also changing a signed source/hash and failing the gate.
+## Automated release gate
 
-## Build and review
-
-From the repository root:
+Run from the repository root:
 
 ```powershell
-python tools/build-identity-locked-sprite-atlas.py --preview-dir output/sprite-identity-review
-python tools/verify-sprite-animation.py --report output/sprite-identity-report.json --overlay-dir output/sprite-final-contact-sheets
+python tools/build-rigged-sprite-atlas.py --preview-dir output/sprite-biomechanical-preview
+python tools/verify-sprite-animation.py --allow-unsigned `
+  --report output/sprite-biomechanical-report.json `
+  --overlay-dir output/sprite-biomechanical-overlays
+```
+
+The unsigned pass must succeed before review. It verifies:
+
+- exact 8-key to 32-cell correspondence at the named anchors;
+- 32 distinct final poses in every current walk row (hard minimum 28);
+- fixed cell/root/head registration and complete transparent margins;
+- discrete alternating stance ownership and double-support contacts;
+- zero stance lift and positive passing toe clearance;
+- monotonic stance/swing travel, correct forward direction, and no moonwalk;
+- side stride separation and front/back near/far depth ordering;
+- both passing-leg crossovers;
+- bounded bone projection, joint-to-pixel coverage, and loop seam;
+- every registered row/direction, including mirrored-left exposure.
+
+The overlay contact sheets draw cyan/orange hip-knee-ankle graphs and a green
+root directly over all final cells. A reviewer must inspect every row at full
+resolution and reject cropped heads, disconnected limbs, joint flashes,
+identity changes, backward steps, foot sliding, depth inversions, or uncanny
+front/back collapse. The reviewer then updates all hashes/date/status in
+`verification.json`; the ordinary signed command must pass afterward:
+
+```powershell
+python tools/verify-sprite-animation.py `
+  --report output/sprite-biomechanical-report-signed.json `
+  --overlay-dir output/sprite-biomechanical-overlays
 node --test tests/sprite-pipeline.test.mjs
 ```
 
-The builder does not sign its own output. After a build, a reviewer must inspect
-all generated contact sheets at full resolution and confirm, row by row:
-
-1. left/right/up/down facing matches the row name;
-2. the same person, clothing, carried objects, proportions, and rendering style
-   persist through the cycle;
-3. head and feet remain registered to their fixed grid references;
-4. the legs visibly alternate and pass/cross as intended;
-5. there is no cropped anatomy, duplicate anatomy, double exposure, or alpha
-   debris;
-6. the last exposure returns cleanly to the first;
-7. mirrored left exposure, where declared, is the exact whole-cell mirror.
-
-Only then update the hashes, date, reviewer, and `visualStatus: "pass"` in
-`assets/sprite-sources/verification.json`. Any subsequent pixel or mapping
-change invalidates that approval automatically.
-
-## One-time migration and recovery
-
-The 2026-09-22 migration was performed with:
-
-```powershell
-python tools/build-identity-locked-sprite-atlas.py `
-  --archive-current-to assets/sprite-archive/pre-identity-lock-20260922 `
-  --restore-originals-from assets/sprite-archive/pre-rig-20260921
-```
-
-Do not repeat the migration against a non-empty archive. For normal rebuilds,
-omit both migration flags.
+Any later part, key, runtime, identity reference, registry, or audit change
+invalidates the signed gate.
 
 ## Adding a character
 
-1. Produce one transparent authored key atlas on the 256 px fixed grid.
-2. Include at least six readable poses per row; eight is preferred.
-3. Supply front and back rows for vertical movement and authored side rows or a
-   declared whole-cell mirror for horizontal movement.
-4. Register the source/runtime paths, rows, walk rows, key count, and direction
-   contract once in `registry.json`.
-5. Build the atlas and identity audit.
-6. Run the hard gate and inspect every final contact sheet.
-7. Sign exact hashes only after visual approval.
-8. Update the runtime cache key and tests when dimensions or assets change.
+1. Create one identity reference sheet with front, back, and side views.
+2. Use built-in ImageGen to create a transparent three-row, fourteen-part
+   sheet in the exact order documented in `rigs/PROVENANCE.md`.
+3. Inspect alpha, identity, clothing, props, anatomy, and all pieces before
+   registration. Record prompt, date, tool, reference, and checksum.
+4. Register parts/source/runtime/identity paths, semantic rows, prop mode,
+   walk rows, and direction exposure once in `registry.json`.
+5. Build all 32 samples. Never author runtime-only exceptions by hand.
+6. Run the unsigned gate and inspect every overlay.
+7. Correct the rig or source sheet until every mechanical and visual check
+   passes; never lower a threshold merely to admit a visible defect.
+8. Sign exact hashes, run the signed gate and full tests, then bump the runtime
+   asset cache token.
 
-Do not use ImageGen to create unsupervised in-between frames. If genuinely new
-poses are required, author them as new source keys, review them as the same
-character, and then rebuild the identity-locked runtime.
+The retained ImageGen gait proposal at
+`assets/sprite-sources/reference/biomechanical-gait-proposal.png` is an
+educational visual reference only. The coefficient model, rig audit, and final
+overlay inspection are production authority.

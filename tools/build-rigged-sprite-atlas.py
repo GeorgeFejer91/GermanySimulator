@@ -1,10 +1,11 @@
 #!/usr/bin/env python3
-"""Bake registered 2D cutout rigs into stable key and runtime sprite atlases.
+"""Bake registered 2D cutout rigs into biomechanical sprite atlases.
 
-The runtime remains a plain PNG atlas consumer. This production-only builder
-extracts the fixed 3-view/14-part source layout, solves two-bone leg IK, rotates
-rigid limb cutouts around registered pivots, and renders a seamless 32-frame
-walk cycle. Heads and torsos never morph; feet use explicit stance/swing arcs.
+The runtime remains a plain PNG atlas consumer. The production-only builder
+extracts the fixed 3-view/14-part source layout and evaluates one shared gait
+coefficient lane for every character. Two-bone leg IK preserves bone lengths;
+stance and swing are discrete, feet follow bounded anatomical arcs, and heads
+and torsos remain rigid identity layers.
 """
 
 from __future__ import annotations
@@ -41,13 +42,26 @@ PART_NAMES = (
 VIEW_INDEX = {"side": 0, "front": 1, "back": 2}
 KEY_PHASE_STATES = {
     0: "contact-a",
-    4: "down-a",
+    4: "loading-a",
     8: "passing-a",
-    12: "up-a",
+    12: "push-off-a",
     16: "contact-b",
-    20: "down-b",
+    20: "loading-b",
     24: "passing-b",
-    28: "up-b",
+    28: "push-off-b",
+}
+
+# Eight normalized anatomical anchors sampled at the named phases above.
+# "forward" is positive in the actor's travel direction. During stance it
+# travels monotonically backward relative to the pelvis; during swing it moves
+# forward while lift provides toe clearance. The opposite leg is a half-cycle
+# shift of the same coefficients, so all six characters share one mechanism.
+GAIT_ANCHORS = {
+    "left_forward": (0.50, 0.27, 0.00, -0.31, -0.50, -0.30, 0.00, 0.37),
+    "left_lift": (0.00, 0.00, 0.00, 0.00, 0.00, 0.58, 1.00, 0.42),
+    "right_forward": (-0.50, -0.30, 0.00, 0.37, 0.50, 0.27, 0.00, -0.31),
+    "right_lift": (0.00, 0.58, 1.00, 0.42, 0.00, 0.00, 0.00, 0.00),
+    "pelvis_y": (0.00, 4.00, 0.00, -2.50, 0.00, 4.00, 0.00, -2.50),
 }
 
 
@@ -85,6 +99,50 @@ def sha256(path: Path) -> str:
     return digest.hexdigest()
 
 
+def bounded_cyclic_catmull(values: tuple[float, ...], frame_index: int) -> float:
+    """Sample the cyclic eight-anchor lane without between-anchor overshoot."""
+    position = (frame_index % 32) / 4.0
+    index = int(math.floor(position))
+    amount = position - index
+    count = len(values)
+    p0 = values[(index - 1) % count]
+    p1 = values[index % count]
+    p2 = values[(index + 1) % count]
+    p3 = values[(index + 2) % count]
+    amount2 = amount * amount
+    amount3 = amount2 * amount
+    result = 0.5 * (
+        2.0 * p1
+        + (-p0 + p2) * amount
+        + (2.0 * p0 - 5.0 * p1 + 4.0 * p2 - p3) * amount2
+        + (-p0 + 3.0 * p1 - 3.0 * p2 + p3) * amount3
+    )
+    return min(max(result, min(p1, p2)), max(p1, p2))
+
+
+def gait_coefficients(frame_index: int, idle: bool) -> dict[str, object]:
+    if idle:
+        return {
+            "pelvisY": 0.0,
+            "left": {"forward": 0.0, "lift": 0.0, "stance": True},
+            "right": {"forward": 0.0, "lift": 0.0, "stance": True},
+        }
+    half = frame_index % 32
+    return {
+        "pelvisY": bounded_cyclic_catmull(GAIT_ANCHORS["pelvis_y"], frame_index),
+        "left": {
+            "forward": bounded_cyclic_catmull(GAIT_ANCHORS["left_forward"], frame_index),
+            "lift": bounded_cyclic_catmull(GAIT_ANCHORS["left_lift"], frame_index),
+            "stance": half < 16,
+        },
+        "right": {
+            "forward": bounded_cyclic_catmull(GAIT_ANCHORS["right_forward"], frame_index),
+            "lift": bounded_cyclic_catmull(GAIT_ANCHORS["right_lift"], frame_index),
+            "stance": half >= 16,
+        },
+    }
+
+
 def clean_rgba(image: Image.Image) -> Image.Image:
     image = image.convert("RGBA")
     alpha = image.getchannel("A").point(lambda value: 0 if value <= 3 else value)
@@ -99,7 +157,11 @@ def premultiplied_resize(image: Image.Image, size: tuple[int, int]) -> Image.Ima
     return clean_rgba(resized)
 
 
-def extract_parts(path: Path, drop_indexes: set[int]) -> list[dict[str, Image.Image]]:
+def extract_parts(
+    path: Path,
+    drop_indexes: set[int],
+    part_indexes: list[int] | None = None,
+) -> list[dict[str, Image.Image]]:
     source = clean_rgba(Image.open(path))
     alpha = np.asarray(source.getchannel("A"))
     views: list[dict[str, Image.Image]] = []
@@ -121,7 +183,18 @@ def extract_parts(path: Path, drop_indexes: set[int]) -> list[dict[str, Image.Im
             else:
                 merged_runs.append(run)
         runs = merged_runs
-        runs = [run for index, run in enumerate(runs) if index not in drop_indexes]
+        if part_indexes is not None:
+            if len(part_indexes) != len(PART_NAMES) or max(part_indexes) >= len(runs):
+                raise ValueError(
+                    f"{path.relative_to(ROOT)} view {row}: explicit part index map "
+                    f"{part_indexes} cannot address {len(runs)} horizontal parts"
+                )
+            # Explicit maps may intentionally reuse an identity-matched source
+            # piece when ImageGen omitted its paired limb (the towel woman's
+            # second forearm) and may omit an accidental duplicate shoe.
+            runs = [runs[index] for index in part_indexes]
+        else:
+            runs = [run for index, run in enumerate(runs) if index not in drop_indexes]
         if len(runs) != len(PART_NAMES):
             raise ValueError(
                 f"{path.relative_to(ROOT)} view {row}: found {len(runs)} horizontal parts; "
@@ -140,13 +213,14 @@ def extract_parts(path: Path, drop_indexes: set[int]) -> list[dict[str, Image.Im
 
 
 def scale_parts(parts: dict[str, Image.Image]) -> dict[str, Image.Image]:
+    parts = clean_part_sockets(parts)
     head, torso = parts["head"], parts["torso"]
     leg_height = max(
         parts["left_thigh"].height + parts["left_calf"].height + parts["left_foot"].height * 0.72,
         parts["right_thigh"].height + parts["right_calf"].height + parts["right_foot"].height * 0.72,
     )
     natural_height = head.height * 0.88 + torso.height * 0.82 + leg_height * 0.84
-    scale = min(1.0, 438.0 / natural_height)
+    scale = min(1.0, 444.0 / natural_height)
     return {
         name: premultiplied_resize(
             image,
@@ -154,6 +228,49 @@ def scale_parts(parts: dict[str, Image.Image]) -> dict[str, Image.Image]:
         )
         for name, image in parts.items()
     }
+
+
+def paint_socket_core(image: Image.Image, top: bool, bottom: bool) -> Image.Image:
+    """Hide authoring sockets while retaining the painted silhouette edge."""
+    pixels = np.asarray(image.convert("RGBA")).copy()
+    height, width = pixels.shape[:2]
+    middle = pixels[round(height * 0.30) : max(round(height * 0.70), 1)]
+    opaque = middle[middle[:, :, 3] >= 128]
+    if not len(opaque):
+        return image
+    color = np.median(opaque[:, :3], axis=0)
+    y_grid, x_grid = np.ogrid[:height, :width]
+    central = (x_grid >= width * 0.18) & (x_grid <= width * 0.82)
+    band = np.zeros((height, width), dtype=bool)
+    if top:
+        band |= y_grid <= height * 0.22
+    if bottom:
+        band |= y_grid >= height * 0.78
+    difference = np.linalg.norm(pixels[:, :, :3].astype(np.float32) - color, axis=2)
+    replace = band & central & (pixels[:, :, 3] >= 96) & (difference >= 34.0)
+    pixels[replace, :3] = color.astype(np.uint8)
+    return clean_rgba(Image.fromarray(pixels, mode="RGBA"))
+
+
+def clean_part_sockets(parts: dict[str, Image.Image]) -> dict[str, Image.Image]:
+    cleaned = dict(parts)
+    for side in ("left", "right"):
+        cleaned[f"{side}_upper_arm"] = paint_socket_core(
+            cleaned[f"{side}_upper_arm"], top=True, bottom=True
+        )
+        cleaned[f"{side}_forearm"] = paint_socket_core(
+            cleaned[f"{side}_forearm"], top=True, bottom=False
+        )
+        cleaned[f"{side}_thigh"] = paint_socket_core(
+            cleaned[f"{side}_thigh"], top=True, bottom=True
+        )
+        cleaned[f"{side}_calf"] = paint_socket_core(
+            cleaned[f"{side}_calf"], top=True, bottom=True
+        )
+        cleaned[f"{side}_foot"] = paint_socket_core(
+            cleaned[f"{side}_foot"], top=True, bottom=False
+        )
+    return cleaned
 
 
 def rotate_about_pivot(
@@ -214,27 +331,94 @@ def solve_two_bone(
     return LimbResult(knee, ankle, upper_angle, lower_angle)
 
 
+def solve_projected_three_bone(
+    hip: tuple[float, float],
+    ankle_lateral: float,
+    ankle_vertical: float,
+    ankle_depth: float,
+    upper_length: float,
+    lower_length: float,
+    projection_sign: float,
+    bend_sign: float,
+) -> LimbResult:
+    """Solve front/back gait in depth, then project it into the sprite plane."""
+    dx = ankle_lateral - hip[0]
+    dy = ankle_vertical - hip[1]
+    dz = ankle_depth
+    distance = max(1e-6, math.sqrt(dx * dx + dy * dy + dz * dz))
+    maximum = upper_length + lower_length - 0.5
+    minimum = abs(upper_length - lower_length) + 0.5
+    clamped = min(maximum, max(minimum, distance))
+    ux, uy, uz = dx / distance, dy / distance, dz / distance
+    ankle3 = (hip[0] + ux * clamped, hip[1] + uy * clamped, uz * clamped)
+    along = (upper_length**2 - lower_length**2 + clamped**2) / (2 * clamped)
+    height = math.sqrt(max(0.0, upper_length**2 - along**2))
+    # A lateral-axis cross product keeps the knee bend in the travel/vertical
+    # plane. It prevents the extreme sideways bow seen in a flat 2D IK solve.
+    py, pz = uz, -uy
+    perpendicular_length = max(1e-6, math.hypot(py, pz))
+    py, pz = py / perpendicular_length, pz / perpendicular_length
+    knee3 = (
+        hip[0] + ux * along,
+        hip[1] + uy * along + py * height * bend_sign,
+        uz * along + pz * height * bend_sign,
+    )
+    # Orthographic depth is intentionally compressed. A literal 1:1 collapse
+    # can make a shin aimed toward the camera project to only one or two final
+    # pixels even though the 3D bone is valid; 0.30 keeps readable anatomy
+    # while preserving which contact foot is nearer in front/back views.
+    depth_projection = 0.30
+    ankle = (ankle3[0], ankle3[1] + projection_sign * ankle3[2] * depth_projection)
+    projected_knee_y = knee3[1] + projection_sign * knee3[2] * depth_projection
+    # A readable sprite knee must remain between hip and ankle even at maximum
+    # foreshortening. This is a screen-space visibility constraint, not a bone
+    # stretch: the spatial IK remains fixed-length and only its 2D projection
+    # is prevented from collapsing below six runtime pixels.
+    projected_knee_y = max(hip[1] + 24.0, min(projected_knee_y, ankle[1] - 24.0))
+    knee = (knee3[0], projected_knee_y)
+    return LimbResult(
+        knee,
+        ankle,
+        math.atan2(knee[0] - hip[0], knee[1] - hip[1]),
+        math.atan2(ankle[0] - knee[0], ankle[1] - knee[1]),
+    )
+
+
 def part_pivot(image: Image.Image) -> tuple[float, float]:
     return image.width / 2, max(3.0, image.height * 0.10)
 
 
-def opaque_top_anchor(image: Image.Image) -> tuple[float, float]:
+def opaque_top_anchor(image: Image.Image, target_ratio: float = 0.45) -> tuple[float, float]:
     mask = np.asarray(image.getchannel("A")) >= 64
     ys, xs = np.nonzero(mask)
     if not len(xs):
         return part_pivot(image)
     cutoff = ys.min() + max(3, round(image.height * 0.28))
     selected = np.flatnonzero(ys <= cutoff)
-    target_x = image.width * 0.45
+    target_x = image.width * target_ratio
     best = min(selected, key=lambda index: abs(float(xs[index]) - target_x) + (ys[index] - ys.min()) * 0.20)
     return float(xs[best]), float(ys[best])
+
+
+def foot_joint_anchor(image: Image.Image, target_ratio: float = 0.50) -> tuple[float, float]:
+    """Return the ankle socket, including tall boot/sock source pieces.
+
+    Several accepted part sheets paint the shoe together with a long sock or
+    boot shaft. Treating the top of that combined piece as the ankle doubles
+    the apparent shin length and leaves the shoe hanging below the body. Tall
+    pieces overlap upward around the ankle instead; compact shoes retain their
+    authored top-edge socket.
+    """
+    if image.height > image.width * 1.35:
+        return image.width * target_ratio, image.height * 0.70
+    return opaque_top_anchor(image, target_ratio)
 
 
 def part_length(image: Image.Image) -> float:
     # ImageGen parts include rounded overlap material at both ends. The bone is
     # deliberately shorter than the painted part so elbows, knees and ankles
     # remain covered throughout the rotation arc instead of opening alpha gaps.
-    return image.height * 0.58
+    return image.height * 0.84
 
 
 def joint_color(image: Image.Image) -> tuple[int, int, int, int]:
@@ -274,11 +458,13 @@ def draw_leg(
     ankle: tuple[float, float],
     bend_sign: float,
     knee_lateral_scale: float = 1.0,
+    foot_anchor_ratio: float = 0.45,
+    solved: LimbResult | None = None,
 ) -> LimbResult:
     thigh = parts[f"{side}_thigh"]
     calf = parts[f"{side}_calf"]
     foot = parts[f"{side}_foot"]
-    result = solve_two_bone(hip, ankle, part_length(thigh), part_length(calf), bend_sign)
+    result = solved or solve_two_bone(hip, ankle, part_length(thigh), part_length(calf), bend_sign)
     if knee_lateral_scale < 1.0:
         along = part_length(thigh) / (part_length(thigh) + part_length(calf))
         line_x = hip[0] + (result.ankle[0] - hip[0]) * along
@@ -307,7 +493,13 @@ def draw_leg(
     joint_cap(canvas, result.ankle, joint_color(foot), 12)
     composite_at(canvas, thigh, hip, part_pivot(thigh), result.upper_angle)
     composite_at(canvas, calf, result.knee, part_pivot(calf), result.lower_angle)
-    composite_at(canvas, foot, result.ankle, opaque_top_anchor(foot))
+    composite_at(canvas, foot, result.ankle, foot_joint_anchor(foot, foot_anchor_ratio))
+    # The generated source pieces include small exposed registration sockets.
+    # Cover only the joint core after compositing; the painted limb edges and
+    # outlines remain intact while cutout seams cannot flash between frames.
+    joint_cap(canvas, hip, joint_color(thigh), 12)
+    joint_cap(canvas, result.knee, joint_color(calf), 11)
+    joint_cap(canvas, result.ankle, joint_color(foot), 8)
     return result
 
 
@@ -336,6 +528,8 @@ def draw_arm(
     composite_at(canvas, upper, shoulder, part_pivot(upper), upper_angle)
     lower_angle = upper_angle + elbow_angle
     composite_at(canvas, forearm, elbow, part_pivot(forearm), lower_angle)
+    joint_cap(canvas, shoulder, joint_color(upper), 11)
+    joint_cap(canvas, elbow, joint_color(forearm), 10)
     return hand
 
 
@@ -430,11 +624,11 @@ def render_frame(
 ) -> tuple[Image.Image, dict]:
     parts = scale_parts(raw_parts)
     view, mirrored, pouring, idle = row_contract(row_name)
-    phase = frame_index / 32 * math.tau
     gait = 0.0 if idle else 1.0
-    # Standard contact/down/passing/up body arc: lower on the loaded down pose,
-    # neutral at passing, and raised on the up pose.
-    bob = 4.5 * math.sin(phase * 2.0) * gait
+    coefficients = gait_coefficients(frame_index, idle)
+    # Positive Y is down-screen: loading response lowers the pelvis and
+    # terminal stance raises it. The total runtime excursion stays below 2 px.
+    bob = float(coefficients["pelvisY"])
     torso = parts["torso"]
     head = parts["head"]
     foot_height = max(parts["left_foot"].height, parts["right_foot"].height)
@@ -460,35 +654,55 @@ def render_frame(
         "right": (center_x + hip_spread, hip_y),
     }
     canvas = Image.new("RGBA", (512, 512))
-    stride = 32.0 * gait
-    depth_stride = 14.0 * gait
+    stride = 96.0 * gait
+    # Pair a useful spatial step with a compressed orthographic projection.
+    # Near/far ordering remains clear, but a bone aimed toward the camera can
+    # never disappear into a one-pixel foreshortened segment.
+    depth_stride = 30.0 * gait
     vertical_lift = min(
         18.0,
         min(part_length(parts["left_calf"]), part_length(parts["right_calf"])) * 0.48,
     )
     lift = (22.0 if side_view else vertical_lift) * gait
     ankles: dict[str, tuple[float, float]] = {}
+    solved_legs: dict[str, LimbResult | None] = {}
     limb_phases: dict[str, dict[str, float | bool]] = {}
-    for side, offset in (("left", 0.0), ("right", math.pi)):
-        leg_phase = phase + offset
-        swing = max(0.0, -math.sin(leg_phase)) * gait
+    for side in ("left", "right"):
+        leg = coefficients[side]
+        forward = float(leg["forward"])
+        lift_amount = float(leg["lift"])
+        stance = bool(leg["stance"])
         if side_view:
-            target_x = hips[side][0] + stride * math.cos(leg_phase)
-            target_y = ankle_ground - lift * swing
+            target_x = hips[side][0] + stride * forward
+            target_y = ankle_ground - lift * lift_amount
+            solved_legs[side] = None
         else:
             side_sign = -1.0 if side == "left" else 1.0
             # Contact feet begin on their anatomical side. The airborne foot
             # crosses the midpoint at passing, matching the authored front/back
             # end states instead of sliding both feet sideways together.
-            target_x = center_x + side_sign * (10.0 - 12.0 * swing)
+            target_x = center_x + side_sign * (10.0 - 12.0 * lift_amount)
             direction_sign = 1.0 if view == "front" else -1.0
-            target_y = (
-                ankle_ground
-                + direction_sign * depth_stride * math.cos(leg_phase)
-                - lift * swing
+            ankle_vertical = ankle_ground - lift * lift_amount
+            ankle_depth = depth_stride * 2.0 * forward
+            solved_legs[side] = solve_projected_three_bone(
+                hips[side],
+                target_x,
+                ankle_vertical,
+                ankle_depth,
+                part_length(parts[f"{side}_thigh"]),
+                part_length(parts[f"{side}_calf"]),
+                direction_sign,
+                -1.0,
             )
+            target_y = solved_legs[side].ankle[1]
         ankles[side] = (target_x, target_y)
-        limb_phases[side] = {"swing": swing > 1e-6, "lift": round(lift * swing, 3)}
+        limb_phases[side] = {
+            "stance": stance,
+            "swing": not stance,
+            "forward": round(forward, 4),
+            "lift": round(lift * lift_amount, 3),
+        }
 
     # The visually nearer/lower foot is composited last. This makes front/back
     # depth agree with the final pixels instead of switching on an unrelated
@@ -506,10 +720,30 @@ def render_frame(
         hips[first],
         ankles[first],
         first_bend,
-        1.0 if side_view else 0.32,
+        1.0,
+        0.50 if side_view else 0.45,
+        solved_legs[first],
     )
 
-    arm_swing = 0.34 * math.cos(phase) * gait
+    # Both legs belong behind the pelvis/torso plate. Drawing the near thigh
+    # after the torso made its generated registration end look like a loose
+    # disc over shorts and jackets, especially on the towel walkers. Depth is
+    # still preserved by drawing the nearer/lower leg second.
+    second = leg_order[1]
+    second_bend = -1.0 if side_view else (1.0 if second == "left" else -1.0)
+    leg_results[second] = draw_leg(
+        canvas,
+        parts,
+        second,
+        hips[second],
+        ankles[second],
+        second_bend,
+        1.0,
+        0.50 if side_view else 0.45,
+        solved_legs[second],
+    )
+
+    arm_swing = 0.68 * float(coefficients["left"]["forward"]) * gait
     holding = prop_mode in {"held-center", "flags", "towel"} or pouring
     if holding:
         arm_angles = {"left": 0.20, "right": -0.20}
@@ -540,17 +774,6 @@ def render_frame(
     joint_cap(canvas, (center_x, head_bottom), joint_color(head), 14)
     canvas.alpha_composite(head, (round(center_x - head.width / 2), round(head_bottom - head.height)))
 
-    second = leg_order[1]
-    second_bend = -1.0 if side_view else (1.0 if second == "left" else -1.0)
-    leg_results[second] = draw_leg(
-        canvas,
-        parts,
-        second,
-        hips[second],
-        ankles[second],
-        second_bend,
-        1.0 if side_view else 0.32,
-    )
     near_hand = draw_arm(
         canvas,
         parts,
@@ -603,6 +826,7 @@ def render_frame(
     audit = {
         "frame": frame_index,
         "phaseState": KEY_PHASE_STATES.get(frame_index, "transition"),
+        "phase": round(frame_index / 32.0, 5),
         "view": view,
         "mirrored": mirrored,
         "movementAxis": movement_axis,
@@ -610,7 +834,9 @@ def render_frame(
         "root": point_record((center_x, hip_y), mirrored),
         "limbs": {
             side: {
+                "stance": limb_phases[side]["stance"],
                 "swing": limb_phases[side]["swing"],
+                "forward": limb_phases[side]["forward"],
                 "lift": limb_phases[side]["lift"],
                 "hip": point_record(hips[side], mirrored),
                 "knee": point_record(leg_results[side].knee, mirrored),
@@ -634,7 +860,11 @@ def make_preview(runtime_rows: list[list[Image.Image]], output: Path) -> None:
 
 def build_entry(entry: dict, preview_dir: Path | None) -> dict:
     part_path = ROOT / entry["parts"]
-    views = extract_parts(part_path, {int(value) for value in entry.get("dropPartIndexes", [])})
+    views = extract_parts(
+        part_path,
+        {int(value) for value in entry.get("dropPartIndexes", [])},
+        [int(value) for value in entry["partIndexes"]] if "partIndexes" in entry else None,
+    )
     source_rows: list[list[Image.Image]] = []
     runtime_rows: list[list[Image.Image]] = []
     audit_rows: list[dict] = []
@@ -679,8 +909,10 @@ def build_entry(entry: dict, preview_dir: Path | None) -> dict:
     )
     return {
         "id": entry["id"],
+        "parts": entry["parts"],
         "source": entry["source"],
         "runtime": entry["runtime"],
+        "partsSha256": sha256(part_path),
         "sourceSha256": sha256(source_path),
         "runtimeSha256": sha256(runtime_path),
         "rows": audit_rows,
@@ -711,10 +943,15 @@ def main() -> None:
     ordered = [previous[entry["id"]] for entry in registry["sprites"] if entry["id"] in previous]
     if not selected and len(ordered) != len(registry["sprites"]):
         raise ValueError("full pose audit is incomplete")
+    contract = registry["frameContract"]
     audit = {
-        "version": 1,
+        "version": 2,
+        "registryVersion": registry["version"],
         "workingCell": 512,
         "runtimeCell": 128,
+        "renderMode": contract["renderMode"],
+        "gaitModel": contract["gaitModel"],
+        "interpolation": contract["interpolation"],
         "keyPhaseStates": {str(key): value for key, value in KEY_PHASE_STATES.items()},
         "sprites": ordered,
     }

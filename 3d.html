@@ -98,7 +98,7 @@ const dist=(a,b,c,d)=>Math.hypot(a-c,b-d);
 const MERKEL_AUDIO_LINE="Wir schaffen das.",merkelRecording=new Audio("./assets/merkel-wir-schaffen-das.mp3");merkelRecording.preload="auto";
 const merkelLines=[MERKEL_AUDIO_LINE,"Wir brauchen kein Abschaltgesetz, sondern einen Ausstieg mit Augenmaß.","Ich habe eine neue Bewertung vorgenommen.","Die Risiken der Kernenergie sind nicht beherrschbar.","Wer das erkennt, muss eine neue Bewertung vornehmen.","Wir müssen uns darauf einstellen, dass wir schneller aussteigen.","Wir wollen das schaffen."];
 function merkelBehind(n){return(player.x-n.x)*(n.facingX||1)+(player.y-n.y)*(n.facingY||0)<-24}
-function updateMerkel(n,dt){const t=n.route[n.target],dx=t[0]-n.x,dy=t[1]-n.y,d=Math.hypot(dx,dy)||1;n.facingX=dx/d;n.facingY=dy/d;n.x+=n.facingX*38*dt;n.y+=n.facingY*38*dt;n.animTime+=dt;if(Math.abs(dx)>Math.abs(dy))n.spriteRow=dx<0?1:2;else n.spriteRow=dy<0?3:4;n.spriteFrame=1+Math.floor(n.animTime*5)%2;if(d<10)n.target=(n.target+1)%n.route.length}
+function updateMerkel(n,dt){const t=n.route[n.target],dx=t[0]-n.x,dy=t[1]-n.y,d=Math.hypot(dx,dy)||1,bx=n.x,by=n.y;n.facingX=dx/d;n.facingY=dy/d;n.x+=n.facingX*38*dt;n.y+=n.facingY*38*dt;if(Math.abs(dx)>Math.abs(dy))n.spriteRow=dx<0?1:2;else n.spriteRow=dy<0?3:4;const moved=Math.hypot(n.x-bx,n.y-by);if(moved>.001){n.gaitDistance=(n.gaitDistance||0)+moved;n.spriteFrame=Math.floor((n.gaitDistance%41.6)/41.6*32)}if(d<10)n.target=(n.target+1)%n.route.length}
 function blocked(x,y){if(x<25||y<25||x>WORLD.w-25||y>WORLD.h-25)return true;return buildings.some(b=>x>b.x-16&&x<b.x+b.w+16&&y>b.y-16&&y<b.y+b.h+16)}
 function say(s,l){document.getElementById("speaker").textContent=s;document.getElementById("line").textContent=l;const d=document.getElementById("dialogue");d.classList.add("show");clearTimeout(say.t);say.t=setTimeout(()=>d.classList.remove("show"),4500);if(s.startsWith("ANGELA MERKEL")&&l===MERKEL_AUDIO_LINE){merkelRecording.currentTime=0;merkelRecording.play().catch(()=>{})}}
 function interact(){const m=npcs.find(n=>n.special==="merkel"&&dist(player.x,player.y,n.x,n.y)<150);if(m){say("ANGELA MERKEL · SATIRE",merkelBehind(m)?"Sie stehen hinter mir.":merkelLines[m.line++%merkelLines.length]);return}const f=props.find(p=>dist(player.x,player.y,p.x,p.y)<150);if(f)say("FAX 3000 PRO","2,75× schneller beim Versand ausgedruckter Dokumente. Die Zukunft der Digitalisierung ist Papier.")}
@@ -110,5 +110,5 @@ let last=performance.now();function loop(t){const dt=Math.min(.05,(t-last)/1000)
 })();
 </script>
 <script type="importmap">{"imports":{"three":"https://cdn.jsdelivr.net/npm/three@0.186.0/build/three.module.js"}}</script>
-<script type="module" src="./world3d.js?v=20260921-09"></script>
+<script type="module" src="./world3d.js?v=20260922-biomech1"></script>
 </body></html>

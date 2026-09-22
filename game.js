@@ -148,7 +148,7 @@ const props=[
  {x:8750,y:1880,asset:"pfandautomat",w:54,h:70,id:"pfandautomat-ost",label:"PFANDAUTOMAT"},
  {x:7600,y:3500,asset:"gartenzwerg",w:44,h:66},{x:8750,y:3420,asset:"gartenzwerg",w:44,h:66},{x:9400,y:3650,asset:"gartenzwerg",w:44,h:66}
 ].map(offsetWorldPoint);
-const assetSources={merkelSprite:"./assets/merkel-sprite.png?v=20260922-identity1",bayernSprite:"./assets/bayern-walker-sprite.png?v=20260922-identity1",aliceSprite:"./assets/alice-weidel-sprite.png?v=20260922-identity1",borderPourerSprite:"./assets/border-pourer-sprite.png?v=20260922-identity1",towelManSprite:"./assets/crowd-towel-man.png?v=20260922-identity1",towelWomanSprite:"./assets/crowd-towel-woman.png?v=20260922-identity1"};
+const assetSources={merkelSprite:"./assets/merkel-sprite.png?v=20260922-biomech2",bayernSprite:"./assets/bayern-walker-sprite.png?v=20260922-biomech2",aliceSprite:"./assets/alice-weidel-sprite.png?v=20260922-biomech2",borderPourerSprite:"./assets/border-pourer-sprite.png?v=20260922-biomech2",towelManSprite:"./assets/crowd-towel-man.png?v=20260922-biomech2",towelWomanSprite:"./assets/crowd-towel-woman.png?v=20260922-biomech2"};
 const assets={};for(const key in assetSources){const img=new Image();img.src=assetSources[key];assets[key]=img}
 const npcSpriteAtlases={
  merkel:{canvas:null,cols:32,rows:5,pad:0,drawSize:126},
@@ -923,9 +923,13 @@ function nearbyFeaturedSprite(){return npcs.find(n=>n.special&&featuredSpriteEli
 function innerMonologue(context,chance=1){
  const now=performance.now(),lines=innerMonologues[state.region]?.[context];if(!lines?.length||Math.random()>chance||now<(innerMonologue.nextAt||0)||hasStimulusFamily("inner-monologue"))return false;innerMonologue.nextAt=now+5500;const line=nextVariant("inner-monologue:"+state.region+":"+context,lines),deliver=()=>showWorldBark("SIE · INNERER MONOLOG",line,false,"","",{family:"inner-monologue",priority:STIMULUS_PRIORITY.REACTIVE,ambient:false,isEligible:()=>state.started&&!state.modal&&!state.gameOver}),sprite=nearbyFeaturedSprite();if(sprite){if(!hasStimulusFamily(featuredSpriteFamily(sprite)))sprite.barkAt=0;setTimeout(deliver,320)}else deliver();return true
 }
+const FEATURED_GAIT_CYCLE_DISTANCE=41.6,CROWD_GAIT_CYCLE_DISTANCE=24;
+function advanceSpriteGait(n,distance,atlas,cycleDistance=FEATURED_GAIT_CYCLE_DISTANCE){
+ if(!(distance>.001))return false;n.gaitDistance=(n.gaitDistance||0)+distance;n.spriteFrame=Math.floor((n.gaitDistance%cycleDistance)/cycleDistance*atlas.cols)%atlas.cols;return true
+}
 function updateMerkel(n,dt){
- const target=n.route[n.target],dx=target[0]-n.x,dy=target[1]-n.y,d=Math.hypot(dx,dy)||1,speed=38;n.facingX=dx/d;n.facingY=dy/d;moveGroundResponder(n,n.facingX*speed*dt,n.facingY*speed*dt,13);n.animTime+=dt;
- if(Math.abs(dx)>Math.abs(dy))n.spriteRow=dx<0?1:2;else n.spriteRow=dy<0?3:4;n.spriteFrame=Math.floor(n.animTime*32)%npcSpriteAtlases.merkel.cols;
+ const target=n.route[n.target],dx=target[0]-n.x,dy=target[1]-n.y,d=Math.hypot(dx,dy)||1,speed=38,beforeX=n.x,beforeY=n.y;n.facingX=dx/d;n.facingY=dy/d;moveGroundResponder(n,n.facingX*speed*dt,n.facingY*speed*dt,13);
+ if(Math.abs(dx)>Math.abs(dy))n.spriteRow=dx<0?1:2;else n.spriteRow=dy<0?3:4;advanceSpriteGait(n,Math.hypot(n.x-beforeX,n.y-beforeY),npcSpriteAtlases.merkel);
  if(d<10)n.target=(n.target+1)%n.route.length;
  if(proximityAudioReady(n)&&!hasStimulusFamily("politician:merkel")){const line=merkelBehind(n)?MERKEL_BEHIND_LINE:nextPoliticianLine(n);showFeaturedSpriteBark(n,"politician:merkel",line,()=>nextPoliticianLine(n))}
 }
@@ -935,9 +939,9 @@ function chooseBayernTarget(n,blockedSpot=-1){const links=bayernWaypoints[n.spot
 function updateBayern(n,dt){
  if(state.region==="germany"&&proximityAudioReady(n))bayernBark(n);
  if(n.hangTimer>0){n.hangTimer-=dt;n.spriteFrame=0;return}
- const target=bayernWaypoints[n.targetSpot],dx=target.x-n.x,dy=target.y-n.y,d=Math.hypot(dx,dy)||1,speed=STANDARD_SPRITE_WALK_SPEED;n.animTime+=dt;
+ const target=bayernWaypoints[n.targetSpot],dx=target.x-n.x,dy=target.y-n.y,d=Math.hypot(dx,dy)||1,speed=STANDARD_SPRITE_WALK_SPEED,beforeX=n.x,beforeY=n.y;
  if(d<7){n.spot=n.targetSpot;n.hangTimer=2+Math.random()*4;chooseBayernTarget(n);n.spriteFrame=2;return}
- moveGroundResponder(n,dx/d*speed*dt,dy/d*speed*dt,13);const progress=d-Math.hypot(target.x-n.x,target.y-n.y);n.blockedTimer=progress>.01?0:(n.blockedTimer||0)+dt;if(n.blockedTimer>.45){n.blockedTimer=0;chooseBayernTarget(n,n.targetSpot)}n.spriteRow=Math.abs(dx)>Math.abs(dy)?(dx>0?1:3):(dy>0?0:2);n.spriteFrame=Math.floor(n.animTime*40)%npcSpriteAtlases.bayern.cols
+ moveGroundResponder(n,dx/d*speed*dt,dy/d*speed*dt,13);const progress=d-Math.hypot(target.x-n.x,target.y-n.y);n.blockedTimer=progress>.01?0:(n.blockedTimer||0)+dt;if(n.blockedTimer>.45){n.blockedTimer=0;chooseBayernTarget(n,n.targetSpot)}n.spriteRow=Math.abs(dx)>Math.abs(dy)?(dx>0?1:3):(dy>0?0:2);advanceSpriteGait(n,Math.hypot(n.x-beforeX,n.y-beforeY),npcSpriteAtlases.bayern)
 }
 function nextAliceClip(){return nextVariant("alice",aliceClips)}
 function aliceBark(n,force=false){
@@ -946,27 +950,28 @@ function aliceBark(n,force=false){
 }
 function updateAlice(n,dt){
  if(state.region==="germany"&&proximityAudioReady(n))aliceBark(n);
- const nextY=n.y+n.dir*ALICE_WALK_SPEED*dt;
+ const beforeX=n.x,beforeY=n.y,nextY=n.y+n.dir*ALICE_WALK_SPEED*dt;
  if(nextY<n.minY||nextY>n.maxY)n.dir*=-1;
  else if(!responderBlocked(n.routeX,nextY,13,n))n.y=nextY;
  else n.dir*=-1;
- n.x=n.routeX;n.animTime+=dt;n.spriteRow=n.dir>0?0:1;n.spriteFrame=Math.floor(n.animTime*60)%npcSpriteAtlases.alice.cols
+ n.x=n.routeX;n.spriteRow=n.dir>0?0:1;advanceSpriteGait(n,Math.hypot(n.x-beforeX,n.y-beforeY),npcSpriteAtlases.alice)
 }
 function updateBorderPourer(n,dt){
- n.animTime+=dt;n.stateTimer-=dt;
+ const beforeX=n.x,beforeY=n.y;n.stateTimer-=dt;
  if(n.state==="sideWalk"){
-  moveGroundResponder(n,n.dir*68*dt,(BORDER_Y+n.lane*32-n.y)*Math.min(1,dt*7),13);n.spriteRow=n.dir>0?1:3;n.spriteFrame=Math.floor(n.animTime*40)%borderPourerSprite.cols;n.spriteFlip=false;
+  moveGroundResponder(n,n.dir*68*dt,(BORDER_Y+n.lane*32-n.y)*Math.min(1,dt*7),13);n.spriteRow=n.dir>0?1:3;n.spriteFlip=false;
   if(n.stateTimer<=0){n.state="sidePour";n.stateTimer=1.05;n.animTime=0}
  }else if(n.state==="sidePour"){
-  moveGroundResponder(n,n.dir*44*dt,(BORDER_Y+n.lane*24-n.y)*Math.min(1,dt*8),13);n.spriteRow=2;n.spriteFrame=Math.floor(n.animTime*36)%borderPourerSprite.cols;n.spriteFlip=n.dir<0;
+  moveGroundResponder(n,n.dir*44*dt,(BORDER_Y+n.lane*24-n.y)*Math.min(1,dt*8),13);n.spriteRow=2;n.spriteFlip=n.dir<0;
   if(n.stateTimer<=0){n.lane*=-1;n.state="cross";n.stateTimer=.72;n.animTime=0}
  }else if(n.state==="cross"){
-  moveGroundResponder(n,n.dir*26*dt,(BORDER_Y+n.lane*34-n.y)*Math.min(1,dt*6.5),13);n.spriteRow=n.lane>0?0:4;n.spriteFrame=Math.floor(n.animTime*40)%borderPourerSprite.cols;n.spriteFlip=false;
+  moveGroundResponder(n,n.dir*26*dt,(BORDER_Y+n.lane*34-n.y)*Math.min(1,dt*6.5),13);n.spriteRow=n.lane>0?0:4;n.spriteFlip=false;
   if(n.stateTimer<=0){n.state=n.lane<0?"frontPour":"sideWalk";n.stateTimer=n.lane<0?.95:1.25;n.animTime=0}
  }else if(n.state==="frontPour"){
-  moveGroundResponder(n,n.dir*18*dt,(BORDER_Y-30-n.y)*Math.min(1,dt*8),13);n.spriteRow=5;n.spriteFrame=Math.floor(n.animTime*36)%borderPourerSprite.cols;n.spriteFlip=false;
+  moveGroundResponder(n,n.dir*18*dt,(BORDER_Y-30-n.y)*Math.min(1,dt*8),13);n.spriteRow=5;n.spriteFlip=false;
   if(n.stateTimer<=0){n.state="sideWalk";n.stateTimer=1.25;n.animTime=0}
  }
+ advanceSpriteGait(n,Math.hypot(n.x-beforeX,n.y-beforeY),borderPourerSprite);
  if(n.x<=n.minX||n.x>=n.maxX){n.x=clamp(n.x,n.minX,n.maxX);n.dir*=-1;n.state="sidePour";n.stateTimer=.9;n.animTime=0}
  if(state.wanted<2&&proximityAudioReady(n)&&!hasStimulusFamily("politician:merz")){
   const next=()=>nextPoliticianLine(n);showFeaturedSpriteBark(n,"politician:merz",next(),next);
@@ -1206,12 +1211,12 @@ function update(dt){
    if(n.special==="merkel"){updateMerkel(n,dt);continue}
    if(n.special==="bayern"){updateBayern(n,dt);continue}
    if(n.special==="alice"){updateAlice(n,dt);continue}
-   if(n===state.quizApproach){const dx=player.x-n.x,dy=player.y-n.y,d=Math.hypot(dx,dy)||1;n.quizFollowTime=(n.quizFollowTime||0)+dt;if(n.quizFollowTime>QUIZ_FOLLOW_MAX_SECONDS||d>QUIZ_FOLLOW_BREAK_DISTANCE){state.quizApproach=null;n.quizAsked=true;n.quizFollowTime=0;state.quizTimer=14+Math.random()*10;continue}if(d<78&&!stimulusBusy()){state.quizApproach=null;n.quizAsked=true;n.quizFollowTime=0;startCitizenshipQuiz(n)}else if(d>=78)moveGroundResponder(n,dx/d*88*dt,dy/d*88*dt,12);if(d>=78&&n.spriteKind){n.animTime=(n.animTime||0)+dt;orientCrowdSprite(n,dx,dy);n.spriteFrame=Math.floor(n.animTime*28)%npcSpriteAtlases[n.spriteKind].cols}continue}
+   if(n===state.quizApproach){const dx=player.x-n.x,dy=player.y-n.y,d=Math.hypot(dx,dy)||1,beforeX=n.x,beforeY=n.y;n.quizFollowTime=(n.quizFollowTime||0)+dt;if(n.quizFollowTime>QUIZ_FOLLOW_MAX_SECONDS||d>QUIZ_FOLLOW_BREAK_DISTANCE){state.quizApproach=null;n.quizAsked=true;n.quizFollowTime=0;state.quizTimer=14+Math.random()*10;continue}if(d<78&&!stimulusBusy()){state.quizApproach=null;n.quizAsked=true;n.quizFollowTime=0;startCitizenshipQuiz(n)}else if(d>=78)moveGroundResponder(n,dx/d*88*dt,dy/d*88*dt,12);if(d>=78&&n.spriteKind){orientCrowdSprite(n,dx,dy);advanceSpriteGait(n,Math.hypot(n.x-beforeX,n.y-beforeY),npcSpriteAtlases[n.spriteKind],CROWD_GAIT_CYCLE_DISTANCE)}continue}
    if(dist(player.x,player.y,n.x,n.y)<(n.audioRadius||NPC_COMPLAINT_DISTANCE))pedestrianBark(n,playerSurface());
    if((n.pause||0)>0){n.pause-=dt;continue}
-   const dx=(n.vx||0)*dt,dy=(n.vy||0)*dt,nextX=n.x+dx,nextY=n.y+dy,playerHit=!n.crowd&&dist(player.x,player.y,nextX,nextY)<NPC_BLOCK_DISTANCE;
+   const dx=(n.vx||0)*dt,dy=(n.vy||0)*dt,nextX=n.x+dx,nextY=n.y+dy,playerHit=!n.crowd&&dist(player.x,player.y,nextX,nextY)<NPC_BLOCK_DISTANCE,beforeX=n.x,beforeY=n.y;
    if(playerHit||!moveGroundResponder(n,dx,dy,12)){n.pause=.48;if(n.vx)n.vx*=-1;else n.vy*=-1;if(n.spriteKind)orientCrowdSprite(n);if(playerHit)pedestrianBark(n,playerSurface());continue}
-   if(n.spriteKind){n.animTime=(n.animTime||0)+dt;orientCrowdSprite(n);n.spriteFrame=Math.floor(n.animTime*Math.max(18,Math.abs(n.vx||n.vy||0)*1.45))%npcSpriteAtlases[n.spriteKind].cols}
+   if(n.spriteKind){orientCrowdSprite(n);advanceSpriteGait(n,Math.hypot(n.x-beforeX,n.y-beforeY),npcSpriteAtlases[n.spriteKind],CROWD_GAIT_CYCLE_DISTANCE)}
    if(n.vx){if(n.x<n.min||n.x>n.max){n.vx*=-1;if(n.spriteKind)orientCrowdSprite(n)}}else if(n.y<n.min||n.y>n.max){n.vy*=-1;if(n.spriteKind)orientCrowdSprite(n)}
  }
  state.ruleTimer+=dt;if(state.ruleTimer>RULE_ROTATION_SECONDS){state.ruleTimer=0;state.rule=(state.rule+1)%rules.length;updateHud();announceCurrentRule()}
