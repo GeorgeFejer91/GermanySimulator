@@ -15,26 +15,35 @@
     "inspectionPoints": 21,
     "distinctPlaybackFrames": 20,
     "exactPixelClosure": true,
-    "maxBoneDirectionErrorDegrees": 0.000812,
-    "maxBoneLengthDriftPixels": 0.00164,
+    "maxBoneDirectionErrorDegrees": 0.001726,
+    "maxBoneLengthDriftPixels": 0.001703,
     "alternatingContactOwners": [
       "left",
       "right"
     ],
     "ankleCrossingRangePixels": [
-      -82.173,
-      93.846
+      -71.053,
+      99.133
     ],
+    "gaitSequence": "left-forward -> right-forward -> left-forward",
+    "fixedBodyRoot": [
+      256.0,
+      320
+    ],
+    "maxCyclicLimbAccelerationPixels": 14.447236,
+    "maxPerJointAccelerationPixels": 9.134762,
+    "maxLoopSeamAccelerationPixels": 6.200605,
+    "footBones": "heel-ankle-toe included",
     "jointPixelCoverage": "pass",
     "runtimeIsolation": "pass"
   },
   "artifactHashes": {
-    "merkel-sprite.png": "04a853f33765a18a023d88f1e986148f8cf7d1dfb8d27252c8fef20e14a94e3f",
-    "merkel-left-bones.png": "34f940f1ce44bc7b5e160ccc208b416e64a64398fc3bbced17c9a996513484cf",
-    "merkel-left-reference.png": "6d809ef910fc5b8b2a0b573645f42a44eb381425d291a4da819314abcbefb75b",
-    "merkel-left-audit.png": "04a853f33765a18a023d88f1e986148f8cf7d1dfb8d27252c8fef20e14a94e3f",
-    "merkel-left-evidence.jpg": "23fd746345ce1f31cd4f00393a45aa8fb21c20d3a4348c6e0731c5150baa6c8d",
-    "pose-audit.json": "4f6bd8a67b246f4b428f925627ba72648bbbe8c761a977a01e266c6e6308d7fc"
+    "merkel-sprite.png": "4222fdeb47b13eb00d255cd6964ce625d109a81718b1cf56b5719c0ab8cefda4",
+    "merkel-left-bones.png": "daf72303c36a4b312618f2605867cd7ac456167b01ae2334ac930852d4af2489",
+    "merkel-left-reference.png": "73f8709e77ad796ce825ab7697c5cb0048d93f6dd9ab73be3edaf102557a872a",
+    "merkel-left-audit.png": "4222fdeb47b13eb00d255cd6964ce625d109a81718b1cf56b5719c0ab8cefda4",
+    "merkel-left-evidence.jpg": "1943eecf5dcbed41d7873552329df3222634900406a3973cc7e2c59e5cf80e97",
+    "pose-audit.json": "3d5e60b1ebe570b9d388a4341352accb001d6f101f2acf4d9b8c4df01df7f2ab"
   },
   "approval": "mechanically validated; visual approval still required"
 }

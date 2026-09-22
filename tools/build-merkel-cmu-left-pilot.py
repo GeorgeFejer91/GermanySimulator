@@ -1,9 +1,9 @@
 #!/usr/bin/env python3
 """Build one preview-only Merkel left walk retargeted from CMU mocap.
 
-Only the side view is rendered.  Head and torso remain rigid identity layers;
-the captured shoulder/elbow/wrist and hip/knee/ankle bone directions drive the
-four limbs.  The root game atlas is never read as an output or overwritten.
+Only the side view is rendered. Head, torso, and their root stay pixel-stable;
+periodically smoothed captured shoulder/elbow/wrist, hip/knee/ankle, and
+ankle/toe directions drive the limbs. The root game atlas is never written.
 """
 
 from __future__ import annotations
@@ -28,7 +28,9 @@ PLAYBACK_FRAMES = 20
 INSPECTION_POINTS = 21
 WORKING_CELL = 512
 RUNTIME_CELL = 128
-ANKLE_GROUND = 448.0
+ANKLE_GROUND = 428.0
+FOOT_PITCH_SCALE = 0.30
+FOOT_PITCH_LIMIT = math.radians(22.0)
 
 
 def load_rig_module():
@@ -59,6 +61,15 @@ def direction_angle(vector: tuple[float, float]) -> float:
     return math.atan2(vector[0], vector[1])
 
 
+def retarget_foot_axis(source: tuple[float, float]) -> tuple[tuple[float, float], float]:
+    # A literal mocap foot pitch can turn the caricature's large painted shoe
+    # almost vertical. Preserve the captured pitch phase, but compress it into
+    # the readable range of this authored cutout part.
+    source_angle = math.atan2(-source[1], source[0])
+    angle = max(-FOOT_PITCH_LIMIT, min(FOOT_PITCH_LIMIT, source_angle * FOOT_PITCH_SCALE))
+    return (math.cos(angle), -math.sin(angle)), angle
+
+
 def retarget_limb(
     rig,
     joints: dict,
@@ -72,6 +83,46 @@ def retarget_limb(
     knee = (root[0] + upper[0] * upper_length, root[1] + upper[1] * upper_length)
     ankle = (knee[0] + lower[0] * lower_length, knee[1] + lower[1] * lower_length)
     return rig.LimbResult(knee, ankle, direction_angle(upper), direction_angle(lower))
+
+
+def draw_pilot_leg(
+    rig,
+    canvas: Image.Image,
+    parts: dict[str, Image.Image],
+    side: str,
+    hip: tuple[float, float],
+    result,
+    foot_angle: float,
+):
+    """Draw a pilot-only rotated foot without changing the signed shared builder."""
+    thigh = parts[f"{side}_thigh"]
+    calf = parts[f"{side}_calf"]
+    foot = parts[f"{side}_foot"]
+    rig.joint_bridge(canvas, hip, result.knee, rig.joint_color(thigh))
+    rig.joint_bridge(canvas, result.knee, result.ankle, rig.joint_color(calf))
+    rig.joint_bridge(
+        canvas,
+        result.ankle,
+        (result.ankle[0], result.ankle[1] + max(10.0, foot.height * 0.24)),
+        rig.joint_color(foot),
+        14,
+    )
+    rig.joint_cap(canvas, hip, rig.joint_color(thigh), 17)
+    rig.joint_cap(canvas, result.knee, rig.joint_color(calf), 14)
+    rig.joint_cap(canvas, result.ankle, rig.joint_color(foot), 12)
+    rig.composite_at(canvas, thigh, hip, rig.part_pivot(thigh), result.upper_angle)
+    rig.composite_at(canvas, calf, result.knee, rig.part_pivot(calf), result.lower_angle)
+    rig.composite_at(
+        canvas,
+        foot,
+        result.ankle,
+        rig.foot_joint_anchor(foot, 0.50),
+        foot_angle,
+    )
+    rig.joint_cap(canvas, hip, rig.joint_color(thigh), 12)
+    rig.joint_cap(canvas, result.knee, rig.joint_color(calf), 11)
+    rig.joint_cap(canvas, result.ankle, rig.joint_color(foot), 8)
+    return result
 
 
 def translate_result(rig, result, dy: float):
@@ -115,22 +166,30 @@ def render_frame(rig, parts: dict[str, Image.Image], sample: dict) -> tuple[Imag
         "right": (center_x + hip_spread, 0.0),
     }
     source_leg_names = {
-        "left": ("LeftUpLeg", "LeftLeg", "LeftFoot"),
-        "right": ("RightUpLeg", "RightLeg", "RightFoot"),
+        "left": ("LeftUpLeg", "LeftLeg", "LeftFoot", "LeftToeBase"),
+        "right": ("RightUpLeg", "RightLeg", "RightFoot", "RightToeBase"),
     }
     leg_results = {}
     for side in ("left", "right"):
         leg_results[side] = retarget_limb(
             rig,
             joints,
-            source_leg_names[side],
+            source_leg_names[side][:3],
             provisional_hips[side],
             rig.part_length(parts[f"{side}_thigh"]),
             rig.part_length(parts[f"{side}_calf"]),
         )
-    # Lock the lower captured ankle to one ground line. The resulting pelvis
-    # translation is the actual mocap bob, not an independent sine wave.
-    root_y = ANKLE_GROUND - max(result.ankle[1] for result in leg_results.values())
+    # The body root is deliberately fixed. At 128 px, even a physiologically
+    # valid pelvis bob reads as whole-character vibration; limb motion already
+    # communicates the walk and the game moves the complete sprite in world
+    # space. This value is derived once from the authored leg reach, never from
+    # a changing silhouette or whichever foot happens to be lower.
+    average_reach = sum(
+        rig.part_length(parts[f"{side}_{segment}"])
+        for side in ("left", "right")
+        for segment in ("thigh", "calf")
+    ) / 2.0
+    root_y = round(ANKLE_GROUND - average_reach * 0.83)
     hips = {side: (point[0], root_y) for side, point in provisional_hips.items()}
     leg_results = {side: translate_result(rig, result, root_y) for side, result in leg_results.items()}
 
@@ -159,18 +218,35 @@ def render_frame(rig, parts: dict[str, Image.Image], sample: dict) -> tuple[Imag
         key=lambda side: float(joints[f"{side.title()}Foot"]["depth"]),
     )
     drawn_legs = {}
+    feet = {}
     for side in leg_order:
-        drawn_legs[side] = rig.draw_leg(
+        source_foot_axis = source_vector(
+            joints, source_leg_names[side][2], source_leg_names[side][3]
+        )
+        foot_axis, foot_angle = retarget_foot_axis(source_foot_axis)
+        drawn_legs[side] = draw_pilot_leg(
+            rig,
             canvas,
             parts,
             side,
             hips[side],
-            leg_results[side].ankle,
-            -1.0,
-            1.0,
-            0.50,
             leg_results[side],
+            foot_angle,
         )
+        ankle = drawn_legs[side].ankle
+        foot_length = parts[f"{side}_foot"].width
+        feet[side] = {
+            "heel": (
+                ankle[0] - foot_axis[0] * foot_length * 0.12,
+                ankle[1] - foot_axis[1] * foot_length * 0.12,
+            ),
+            "toe": (
+                ankle[0] + foot_axis[0] * foot_length * 0.42,
+                ankle[1] + foot_axis[1] * foot_length * 0.42,
+            ),
+            "angle": foot_angle,
+            "sourceAngle": math.atan2(-source_foot_axis[1], source_foot_axis[0]),
+        }
 
     arm_order = sorted(
         ("left", "right"),
@@ -217,6 +293,10 @@ def render_frame(rig, parts: dict[str, Image.Image], sample: dict) -> tuple[Imag
                 "hip": mirror_point(hips[side]),
                 "knee": mirror_point(drawn_legs[side].knee),
                 "ankle": mirror_point(drawn_legs[side].ankle),
+                "heel": mirror_point(feet[side]["heel"]),
+                "toe": mirror_point(feet[side]["toe"]),
+                "footAngle": round(feet[side]["angle"], 6),
+                "sourceFootAngle": round(feet[side]["sourceAngle"], 6),
                 "source": {
                     name: joints[name] for name in source_leg_names[side]
                 },
@@ -257,9 +337,10 @@ def draw_bones(image: Image.Image, audit: dict, reference_only: bool = False) ->
         arm = audit["arms"][side]
         color = colors[side]
         draw.line((*limb["hip"], *limb["knee"], *limb["ankle"]), fill=color, width=7)
+        draw.line((*limb["heel"], *limb["ankle"], *limb["toe"]), fill=color, width=7)
         draw.line((*arm["shoulder"], *arm["elbow"], *arm["wrist"]), fill=color, width=7)
         for point in (
-            limb["hip"], limb["knee"], limb["ankle"],
+            limb["hip"], limb["knee"], limb["ankle"], limb["heel"], limb["toe"],
             arm["shoulder"], arm["elbow"], arm["wrist"],
         ):
             x, y = point
@@ -339,9 +420,9 @@ def main() -> None:
     pose_path.write_text(
         json.dumps(
             {
-                "schemaVersion": 1,
+                "schemaVersion": 2,
                 "reference": str(REFERENCE.relative_to(ROOT)).replace("\\", "/"),
-                "retargeting": "captured-2d-bone-directions-to-fixed-identity-bone-lengths",
+                "retargeting": "periodic-captured-bone-directions-to-fixed-root-and-fixed-bone-lengths",
                 "direction": "left",
                 "points": audits,
             },
@@ -353,7 +434,7 @@ def main() -> None:
     contact_sheet(frames, audits, evidence_path)
     artifacts = [normal_path, bones_path, reference_path, audit_path, evidence_path, pose_path]
     manifest = {
-        "schemaVersion": 1,
+        "schemaVersion": 2,
         "status": "candidate-unapproved",
         "scope": "merkel-left-only",
         "movementAuthority": str(REFERENCE.relative_to(ROOT)).replace("\\", "/"),

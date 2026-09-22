@@ -6,19 +6,23 @@ The next walking experiment is intentionally limited to Merkel's left-facing
 side view. Carnegie Mellon University subject 69, trial 01 (“walk forward”) is
 the external movement authority. The pinned BVH and its provenance live under
 `assets/sprite-sources/reference/cmu-walk-69-01/`; the converter-inserted
-T-pose at frame zero is excluded, and fingers/toes are excluded from the hard
-gate because CMU flags those extremities as noisy. A deterministic offline
+T-pose at frame zero is excluded. Fingers are excluded because CMU flags the
+extremities as noisy; toe-base data is admitted only after periodic low-pass
+fitting and only for the ankle-to-toe foot axis. A deterministic offline
 extractor detects one complete same-foot gait period, projects it into a
-travel/up side plane, samples 20 poses, and repeats pose zero as exact
-inspection point 21.
+travel/up side plane, fits a three-harmonic periodic curve, normalizes paired
+limbs at a half-cycle offset, samples 20 poses, and repeats pose zero as exact
+inspection point 21. The resulting clock is explicitly left-foot-forward →
+right-foot-forward → left-foot-forward, with continuous cyclic velocity.
 
 `assets/sprite-sources/candidates/merkel-cmu-left/` retargets only the captured
-shoulder–elbow–wrist and hip–knee–ankle directions onto Merkel's existing
-identity-matched side parts and fixed caricature bone lengths. Her head,
-jacket, scale, and compact proportions remain rigid. A fail-closed verifier
+shoulder–elbow–wrist, hip–knee–ankle, and bounded ankle–toe directions onto
+Merkel's existing identity-matched side parts and fixed caricature bone lengths.
+Her head, jacket, scale, body root, and compact proportions remain rigid. A fail-closed verifier
 checks every rendered bone direction against the corresponding captured bone,
 constant lengths, joint-to-pixel coverage, alternating contact, ankle crossing,
-20 distinct frames, safe margins, and exact pixel closure. The lane remains
+per-joint cyclic acceleration, loop-seam acceleration, 20 distinct frames, safe
+margins, and exact pixel closure. The lane remains
 `candidate-unapproved`, left-only, and preview-only. It adds normal, bone
 overlay, and reference-map modes to `sprite-preview.html` but does not alter
 `game.js` or any stable game atlas. Other directions and characters must not be

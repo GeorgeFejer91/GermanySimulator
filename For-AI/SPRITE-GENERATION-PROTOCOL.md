@@ -243,8 +243,9 @@ Merkel candidate: one character, one left-facing side view, one external gait
 capture. `assets/sprite-sources/reference/cmu-walk-69-01/69_01.bvh` is pinned to
 the documented SHA-256 and conversion commit. Subject 69, trial 01 is the CMU
 “walk forward” capture at 120 fps. Converter frame zero is an inserted T-pose
-and must be excluded. Fingers and toes are never hard-gate joints; CMU identifies
-those extremities as potentially noisy.
+and must be excluded. Fingers are never hard-gate joints. Toe-base positions,
+which CMU identifies as potentially noisy, may drive only the foot axis after
+periodic low-pass fitting; raw toe samples never drive a rendered frame.
 
 Build and verify the reference plus pilot with:
 
@@ -257,19 +258,26 @@ node --test tests/merkel-cmu-left-pilot.test.mjs tests/sprite-preview.test.mjs
 
 The reference extractor performs BVH forward kinematics, derives the capture's
 actual horizontal travel axis, detects a same-left-foot gait interval, projects
-the required pelvis/neck/head, shoulder/elbow/wrist, and hip/knee/ankle joints
-into the travel/up side plane, and emits 20 samples plus an exact closure point.
+the required pelvis/neck/head, shoulder/elbow/wrist, hip/knee/ankle, and
+ankle/toe joints into the travel/up side plane, and fits three-harmonic periodic
+curves before sampling. Equivalent left/right paths are averaged at a half-cycle
+offset so the 20-frame clock is one complete left-forward → right-forward →
+left-forward sequence with matched cyclic velocity. Point 21 remains an exact
+closure copy for inspection.
+
 The pilot preserves Merkel's identity-matched side pieces and fixed authored
-bone lengths. Only the captured two-dimensional bone directions and captured
-lateral depth ordering drive limbs. The lowest ankle fixes the ground line,
-making pelvis bob a consequence of the captured leg pose rather than another
-hand-authored wave.
+bone lengths. Only the smoothed two-dimensional bone directions and captured
+lateral depth ordering drive limbs. The body root, head, and torso are fixed
+across the complete loop, eliminating whole-sprite recentering. Each foot has a
+heel–ankle–toe chain. Its mocap pitch phase is compressed and capped at ±22° to
+fit the caricature's oversized painted shoe without an implausible vertical flip.
 
 The verifier must reject any source or artifact hash drift, direction expansion,
 missing closure, duplicate playback frame, unsafe margin, rendered joint without
 nearby opaque pixels, changing bone length, failure of both feet to own contact,
-missing ankle crossover, or a rendered bone more than 0.2 degrees from its CMU
-counterpart. A mechanical pass is not visual approval. The manifest remains
+missing ankle crossover, body-root/head movement, excessive per-joint cyclic or
+seam acceleration, or a rendered bone more than 0.2 degrees from its smoothed
+movement authority. A mechanical pass is not visual approval. The manifest remains
 `candidate-unapproved`; `game.js` and the stable archive remain untouched until
 the user explicitly accepts this one cycle. Only after that review may the same
 mapping strategy be extended to right, front/back, or another character.

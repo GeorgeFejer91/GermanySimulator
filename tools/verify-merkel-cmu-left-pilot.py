@@ -20,6 +20,8 @@ PLAYBACK_FRAMES = 20
 INSPECTION_POINTS = 21
 CELL = 128
 WORKING_CELL = 512
+FOOT_PITCH_SCALE = 0.30
+FOOT_PITCH_LIMIT = math.radians(22.0)
 
 
 def parse_args() -> argparse.Namespace:
@@ -70,6 +72,12 @@ def angular_error(first: np.ndarray, second: np.ndarray) -> float:
     return math.degrees(math.acos(cosine))
 
 
+def retargeted_foot_vector(source: np.ndarray) -> np.ndarray:
+    source_angle = math.atan2(-float(source[1]), float(source[0]))
+    angle = max(-FOOT_PITCH_LIMIT, min(FOOT_PITCH_LIMIT, source_angle * FOOT_PITCH_SCALE))
+    return np.array((math.cos(angle), -math.sin(angle)), dtype=np.float64)
+
+
 def alpha_near(alpha: np.ndarray, point: list[float], radius: int = 4) -> bool:
     x = round(point[0] / WORKING_CELL * CELL)
     y = round(point[1] / WORKING_CELL * CELL)
@@ -109,8 +117,8 @@ def main() -> None:
     contact_owner: list[str] = []
     separation: list[float] = []
     mapping = {
-        "left": ("LeftUpLeg", "LeftLeg", "LeftFoot", "LeftArm", "LeftForeArm", "LeftHand"),
-        "right": ("RightUpLeg", "RightLeg", "RightFoot", "RightArm", "RightForeArm", "RightHand"),
+        "left": ("LeftUpLeg", "LeftLeg", "LeftFoot", "LeftToeBase", "LeftArm", "LeftForeArm", "LeftHand"),
+        "right": ("RightUpLeg", "RightLeg", "RightFoot", "RightToeBase", "RightArm", "RightForeArm", "RightHand"),
     }
     for frame_index, point in enumerate(audit["points"][:PLAYBACK_FRAMES]):
         frame_alpha = frames[frame_index][:, :, 3]
@@ -132,13 +140,16 @@ def main() -> None:
             rendered_bones = (
                 ("thigh", limb["hip"], limb["knee"], names[0], names[1]),
                 ("calf", limb["knee"], limb["ankle"], names[1], names[2]),
-                ("upperArm", arm["shoulder"], arm["elbow"], names[3], names[4]),
-                ("forearm", arm["elbow"], arm["wrist"], names[4], names[5]),
+                ("foot", limb["ankle"], limb["toe"], names[2], names[3]),
+                ("upperArm", arm["shoulder"], arm["elbow"], names[4], names[5]),
+                ("forearm", arm["elbow"], arm["wrist"], names[5], names[6]),
             )
             source_joints = point["limbs"][side]["source"] | point["arms"][side]["source"]
             for label, first, second, source_first, source_second in rendered_bones:
                 actual = vector(first, second, unmirror=True)
                 expected = source_vector(source_joints, source_first, source_second)
+                if label == "foot":
+                    expected = retargeted_foot_vector(expected)
                 error = angular_error(actual, expected)
                 angle_errors.append(error)
                 bone_lengths.setdefault(f"{side}.{label}", []).append(
@@ -149,6 +160,8 @@ def main() -> None:
                 ("hip", limb["hip"]),
                 ("knee", limb["knee"]),
                 ("ankle", limb["ankle"]),
+                ("heel", limb["heel"]),
+                ("toe", limb["toe"]),
                 ("shoulder", arm["shoulder"]),
                 ("elbow", arm["elbow"]),
                 ("wrist", arm["wrist"]),
@@ -157,6 +170,51 @@ def main() -> None:
 
     require(set(contact_owner) == {"left", "right"}, "both feet do not take a ground contact turn")
     require(min(separation) < -5 and max(separation) > 5, "ankles never cross in screen space")
+    require(separation[0] < -20, "cycle does not begin with the left foot forward")
+    require(separation[PLAYBACK_FRAMES // 2] > 20, "half-cycle does not put the right foot forward")
+    roots = [point["root"] for point in audit["points"][:PLAYBACK_FRAMES]]
+    heads = [point["headBottom"] for point in audit["points"][:PLAYBACK_FRAMES]]
+    require(len({tuple(point) for point in roots}) == 1, "body root moves between frames")
+    require(len({tuple(point) for point in heads}) == 1, "head/torso plate moves between frames")
+
+    tracked_joint_names = [
+        (side, region, joint)
+        for side in ("left", "right")
+        for region, joints in (
+            ("limbs", ("knee", "ankle", "toe")),
+            ("arms", ("elbow", "wrist")),
+        )
+        for joint in joints
+    ]
+    tracked_paths = [
+        np.array(
+            [
+                coordinate
+                for side, region, joint in tracked_joint_names
+                for coordinate in point[region][side][joint]
+            ],
+            dtype=np.float64,
+        )
+        for point in audit["points"][:PLAYBACK_FRAMES]
+    ]
+    steps = [tracked_paths[(index + 1) % PLAYBACK_FRAMES] - tracked_paths[index] for index in range(PLAYBACK_FRAMES)]
+    accelerations = [
+        float(np.linalg.norm(steps[(index + 1) % PLAYBACK_FRAMES] - steps[index]))
+        for index in range(PLAYBACK_FRAMES)
+    ]
+    require(max(accelerations) <= 24.0, f"cyclic limb acceleration spikes at {max(accelerations):.3f}px")
+    joint_accelerations: list[float] = []
+    seam_accelerations: list[float] = []
+    for joint_index, _name in enumerate(tracked_joint_names):
+        path = np.array(
+            [point[joint_index * 2 : joint_index * 2 + 2] for point in tracked_paths]
+        )
+        joint_steps = np.roll(path, -1, axis=0) - path
+        joint_acceleration = np.roll(joint_steps, -1, axis=0) - joint_steps
+        joint_accelerations.extend(np.linalg.norm(joint_acceleration, axis=1).tolist())
+        seam_accelerations.append(float(np.linalg.norm(joint_acceleration[-1])))
+    require(max(joint_accelerations) <= 12.0, "a tracked joint changes velocity too abruptly")
+    require(max(seam_accelerations) <= 8.0, "a tracked joint snaps at the loop seam")
     length_drift = {
         name: max(values) - min(values) for name, values in bone_lengths.items()
     }
@@ -180,6 +238,12 @@ def main() -> None:
             "maxBoneLengthDriftPixels": round(max(length_drift.values()), 6),
             "alternatingContactOwners": sorted(set(contact_owner)),
             "ankleCrossingRangePixels": [round(min(separation), 3), round(max(separation), 3)],
+            "gaitSequence": "left-forward -> right-forward -> left-forward",
+            "fixedBodyRoot": roots[0],
+            "maxCyclicLimbAccelerationPixels": round(max(accelerations), 6),
+            "maxPerJointAccelerationPixels": round(max(joint_accelerations), 6),
+            "maxLoopSeamAccelerationPixels": round(max(seam_accelerations), 6),
+            "footBones": "heel-ankle-toe included",
             "jointPixelCoverage": "pass",
             "runtimeIsolation": "pass",
         },

@@ -2,8 +2,9 @@
 """Extract one loopable 21-point side-walk skeleton from a pinned CMU BVH.
 
 The first BVH frame is a converter-inserted T-pose, so it is never sampled.
-Twenty motion samples are followed by an exact copy of point zero for loop
-inspection.  This tool is reference-only and never writes a game asset.
+The captured cycle is fitted as a periodic low-harmonic curve before twenty
+motion samples and an exact closing copy are emitted.  This tool is
+reference-only and never writes a game asset.
 """
 
 from __future__ import annotations
@@ -26,6 +27,7 @@ OUTPUT = SOURCE_DIR / "walk-cycle-21.json"
 EVIDENCE = SOURCE_DIR / "walk-cycle-21.png"
 EXPECTED_SHA256 = "064de16c17a154c88b73eadecD4614e59d04ef3f8460d58785e20ceb9f4b807b".lower()
 PLAYBACK_FRAMES = 20
+FOURIER_HARMONICS = 3
 
 JOINTS = (
     "Hips",
@@ -40,9 +42,11 @@ JOINTS = (
     "LeftUpLeg",
     "LeftLeg",
     "LeftFoot",
+    "LeftToeBase",
     "RightUpLeg",
     "RightLeg",
     "RightFoot",
+    "RightToeBase",
 )
 
 BONES = (
@@ -57,9 +61,21 @@ BONES = (
     ("Hips", "LeftUpLeg", "left"),
     ("LeftUpLeg", "LeftLeg", "left"),
     ("LeftLeg", "LeftFoot", "left"),
+    ("LeftFoot", "LeftToeBase", "left"),
     ("Hips", "RightUpLeg", "right"),
     ("RightUpLeg", "RightLeg", "right"),
     ("RightLeg", "RightFoot", "right"),
+    ("RightFoot", "RightToeBase", "right"),
+)
+
+BILATERAL_PAIRS = (
+    ("LeftArm", "RightArm"),
+    ("LeftForeArm", "RightForeArm"),
+    ("LeftHand", "RightHand"),
+    ("LeftUpLeg", "RightUpLeg"),
+    ("LeftLeg", "RightLeg"),
+    ("LeftFoot", "RightFoot"),
+    ("LeftToeBase", "RightToeBase"),
 )
 
 
@@ -210,49 +226,91 @@ def choose_cycle(positions: dict[str, np.ndarray]) -> tuple[int, int, np.ndarray
     return start_local + first_motion, end_local + first_motion, forward, lateral
 
 
-def interpolate(values: np.ndarray, at: float) -> np.ndarray:
-    low = int(math.floor(at))
-    high = min(low + 1, len(values) - 1)
-    amount = at - low
-    return values[low] * (1.0 - amount) + values[high] * amount
+def periodic_fit(values: np.ndarray, output_count: int, harmonics: int) -> np.ndarray:
+    """Fit/evaluate a cyclic Fourier curve, guaranteeing a smooth loop seam."""
+    phases = np.arange(len(values), dtype=np.float64) / len(values)
+    output_phases = np.arange(output_count, dtype=np.float64) / output_count
+
+    def design(at: np.ndarray) -> np.ndarray:
+        columns = [np.ones(len(at), dtype=np.float64)]
+        for harmonic in range(1, harmonics + 1):
+            angle = math.tau * harmonic * at
+            columns.extend((np.cos(angle), np.sin(angle)))
+        return np.column_stack(columns)
+
+    coefficients, *_ = np.linalg.lstsq(design(phases), values, rcond=None)
+    return design(output_phases) @ coefficients
 
 
 def sample_cycle(
     positions: dict[str, np.ndarray], start: int, end: int, forward: np.ndarray, lateral: np.ndarray
 ) -> list[dict]:
+    # Exclude the second same-foot contact from the fit; phase zero already
+    # represents it. Periodic basis functions make both position and velocity
+    # meet at the seam instead of snapping between two naturally unequal steps.
+    cycle_slice = slice(start, end)
     all_ankle_heights = np.minimum(
-        positions["LeftFoot"][start : end + 1, 1], positions["RightFoot"][start : end + 1, 1]
+        positions["LeftFoot"][cycle_slice, 1], positions["RightFoot"][cycle_slice, 1]
     )
     ground = float(np.percentile(all_ankle_heights, 5))
     stature = float(
         np.median(
-            positions["Head"][start : end + 1, 1]
+            positions["Head"][cycle_slice, 1]
             - np.minimum(
-                positions["LeftFoot"][start : end + 1, 1],
-                positions["RightFoot"][start : end + 1, 1],
+                positions["LeftFoot"][cycle_slice, 1],
+                positions["RightFoot"][cycle_slice, 1],
             )
         )
     )
     if stature <= 0:
         raise ValueError("invalid captured stature")
+    roots = positions["Hips"][cycle_slice]
+    projected: dict[str, dict[str, np.ndarray]] = {}
+    for name in JOINTS:
+        relative = positions[name][cycle_slice] - roots
+        projected[name] = {
+            "x": periodic_fit(relative @ forward / stature, PLAYBACK_FRAMES, FOURIER_HARMONICS),
+            "y": periodic_fit(relative[:, 1] / stature, PLAYBACK_FRAMES, FOURIER_HARMONICS),
+            "depth": periodic_fit(relative @ lateral / stature, PLAYBACK_FRAMES, FOURIER_HARMONICS),
+        }
+
+    # One captured side can differ subtly from the other. Average equivalent
+    # limb paths half a cycle apart, then derive the opposite limb by a clean
+    # half-cycle shift. This retains the captured gait while removing the
+    # left/right mismatch that reads as wobble in a 128 px sprite.
+    half = PLAYBACK_FRAMES // 2
+    for left_name, right_name in BILATERAL_PAIRS:
+        for coordinate in ("x", "y"):
+            left = projected[left_name][coordinate]
+            right_as_left = np.roll(projected[right_name][coordinate], -half)
+            canonical = (left + right_as_left) / 2.0
+            projected[left_name][coordinate] = canonical
+            projected[right_name][coordinate] = np.roll(canonical, half)
+
+    pelvis_height = periodic_fit((roots[:, 1] - ground) / stature, PLAYBACK_FRAMES, 2)
     samples: list[dict] = []
     for point in range(PLAYBACK_FRAMES):
         source_frame = start + (end - start) * point / PLAYBACK_FRAMES
-        root = interpolate(positions["Hips"], source_frame)
-        joints = {}
-        for name in JOINTS:
-            relative = interpolate(positions[name], source_frame) - root
-            joints[name] = {
-                "x": round(float(relative @ forward / stature), 7),
-                "y": round(float(relative[1] / stature), 7),
-                "depth": round(float(relative @ lateral / stature), 7),
+        joints = {
+            name: {
+                coordinate: round(float(projected[name][coordinate][point]), 7)
+                for coordinate in ("x", "y", "depth")
             }
+            for name in JOINTS
+        }
+        gait_state = {
+            0: "left-forward-contact",
+            5: "right-passing-left",
+            10: "right-forward-contact",
+            15: "left-passing-right",
+        }.get(point, "transition")
         samples.append(
             {
                 "point": point,
                 "phase": round(point / PLAYBACK_FRAMES, 5),
                 "sourceFrame": round(source_frame, 4),
-                "pelvisHeight": round(float((root[1] - ground) / stature), 7),
+                "gaitState": gait_state,
+                "pelvisHeight": round(float(pelvis_height[point]), 7),
                 "joints": joints,
             }
         )
@@ -301,7 +359,7 @@ def main() -> None:
     start, end, forward, lateral = choose_cycle(positions)
     samples = sample_cycle(positions, start, end, forward, lateral)
     payload = {
-        "schemaVersion": 1,
+        "schemaVersion": 2,
         "kind": "minimal-side-walk-pose-map",
         "status": "external-reference",
         "source": {
@@ -327,6 +385,9 @@ def main() -> None:
             "playbackFrames": PLAYBACK_FRAMES,
             "inspectionPoints": PLAYBACK_FRAMES + 1,
             "closure": "point-20-is-exact-copy-of-point-0",
+            "sequence": "left-forward -> right-forward -> left-forward",
+            "smoothing": f"periodic Fourier fit, {FOURIER_HARMONICS} harmonics",
+            "bilateralNormalization": "paired limbs averaged at half-cycle offset",
         },
         "projection": {
             "x": "captured root travel direction",
@@ -336,7 +397,8 @@ def main() -> None:
             "scale": "median captured head-to-lowest-ankle stature",
         },
         "hardGateJoints": list(JOINTS),
-        "excludedFromHardGate": ["fingers", "toes"],
+        "excludedFromHardGate": ["fingers"],
+        "footGatePolicy": "ankle-to-toe axes are low-pass fitted before validation",
         "bones": [list(item) for item in BONES],
         "points": samples,
     }
