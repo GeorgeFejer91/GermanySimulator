@@ -29,7 +29,7 @@ EXPECTED_CHECKLIST = {
     "forwardDirectionNoMoonwalk", "boundedLoopSeam", "clearTransparency",
     "silhouetteScale", "directionalRowContract", "thirtyTwoDirectFrames",
     "finalFrameContactSheet", "mirroredLeftArc", "headShoulderConnection",
-    "directionalProportionConsistency",
+    "directionalProportionConsistency", "identityReferenceSilhouette",
 }
 
 

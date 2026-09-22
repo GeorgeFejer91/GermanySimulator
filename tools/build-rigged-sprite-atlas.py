@@ -72,6 +72,22 @@ DIRECTIONAL_SCALE_PARTS = (
     "head", "torso", "left_thigh", "left_calf", "right_thigh", "right_calf"
 )
 
+# Merkel's accepted pre-rig sheet uses a deliberately broad, compact caricature.
+# Preserve that identity after the shared biomechanical normalization instead of
+# letting the generic human proportions turn her into a narrow, long-legged
+# cutout. These scales were measured against the archived 256 px key cells.
+MERKEL_VIEW_SCALES = {
+    "side": {"head": (1.55, 1.45), "torso": (1.12, 1.15)},
+    "front": {"head": (1.97, 1.21), "torso": (1.70, 1.15)},
+    "back": {"head": (1.45, 1.45), "torso": (1.25, 1.15)},
+}
+MERKEL_ARM_SCALE = (1.16, 1.05)
+MERKEL_LEG_SCALE = (1.35, 0.80)
+MERKEL_FOOT_SCALE = (1.12, 0.94)
+MERKEL_VIEW_HEAD_TORSO_OVERLAP = {"side": 0.23, "front": 0.23, "back": 0.23}
+MERKEL_VIEW_GROUND_OFFSET = {"side": 22.0, "front": 2.0, "back": 14.0}
+MERKEL_ARM_SWING_SCALE = 0.84
+
 
 @dataclass(frozen=True)
 class LimbResult:
@@ -246,6 +262,33 @@ def scale_parts(parts: dict[str, Image.Image]) -> dict[str, Image.Image]:
             ),
         )
     return scaled
+
+
+def calibrate_identity_parts(
+    parts: dict[str, Image.Image], sprite_id: str, view: str
+) -> dict[str, Image.Image]:
+    if sprite_id != "merkel":
+        return parts
+    calibrated = dict(parts)
+    view_scales = MERKEL_VIEW_SCALES[view]
+    for name, scale in view_scales.items():
+        image = calibrated[name]
+        calibrated[name] = premultiplied_resize(
+            image,
+            (max(1, round(image.width * scale[0])), max(1, round(image.height * scale[1]))),
+        )
+    for names, scale in (
+        ((name for name in PART_NAMES if "arm" in name or "forearm" in name), MERKEL_ARM_SCALE),
+        ((name for name in PART_NAMES if "thigh" in name or "calf" in name), MERKEL_LEG_SCALE),
+        ((name for name in PART_NAMES if "foot" in name), MERKEL_FOOT_SCALE),
+    ):
+        for name in names:
+            image = calibrated[name]
+            calibrated[name] = premultiplied_resize(
+                image,
+                (max(1, round(image.width * scale[0])), max(1, round(image.height * scale[1]))),
+            )
+    return calibrated
 
 
 def paint_socket_core(image: Image.Image, top: bool, bottom: bool) -> Image.Image:
@@ -636,6 +679,7 @@ def point_record(point: tuple[float, float], mirrored: bool) -> list[float]:
 
 def render_frame(
     parts: dict[str, Image.Image],
+    sprite_id: str,
     row_name: str,
     prop_mode: str,
     frame_index: int,
@@ -649,7 +693,10 @@ def render_frame(
     torso = parts["torso"]
     head = parts["head"]
     foot_height = max(parts["left_foot"].height, parts["right_foot"].height)
-    ankle_ground = 448 - foot_height * 0.70
+    identity_ground_offset = (
+        MERKEL_VIEW_GROUND_OFFSET[view] if sprite_id == "merkel" else 0.0
+    )
+    ankle_ground = 448 + identity_ground_offset - foot_height * 0.70
     average_reach = (
         part_length(parts["left_thigh"])
         + part_length(parts["left_calf"])
@@ -760,7 +807,13 @@ def render_frame(
         solved_legs[second],
     )
 
-    arm_swing = 0.68 * float(coefficients["left"]["forward"]) * gait
+    identity_arm_swing_scale = MERKEL_ARM_SWING_SCALE if sprite_id == "merkel" else 1.0
+    arm_swing = (
+        0.68
+        * identity_arm_swing_scale
+        * float(coefficients["left"]["forward"])
+        * gait
+    )
     holding = prop_mode in {"held-center", "flags", "towel"} or pouring
     if holding:
         arm_angles = {"left": 0.20, "right": -0.20}
@@ -780,7 +833,12 @@ def render_frame(
     )
 
     canvas.alpha_composite(torso, (round(center_x - torso.width / 2), round(torso_top)))
-    head_bottom = torso_top + torso.height * HEAD_TORSO_OVERLAP
+    head_torso_overlap = (
+        MERKEL_VIEW_HEAD_TORSO_OVERLAP[view]
+        if sprite_id == "merkel"
+        else HEAD_TORSO_OVERLAP
+    )
+    head_bottom = torso_top + torso.height * head_torso_overlap
     joint_bridge(
         canvas,
         (center_x, head_bottom - 12),
@@ -899,6 +957,8 @@ def build_entry(entry: dict, preview_dir: Path | None) -> dict:
                 image,
                 (max(1, round(image.width * ratio)), target_height),
             )
+    for view, index in VIEW_INDEX.items():
+        views[index] = calibrate_identity_parts(views[index], entry["id"], view)
     source_rows: list[list[Image.Image]] = []
     runtime_rows: list[list[Image.Image]] = []
     audit_rows: list[dict] = []
@@ -908,7 +968,9 @@ def build_entry(entry: dict, preview_dir: Path | None) -> dict:
         rendered = []
         for index in range(32):
             try:
-                rendered.append(render_frame(parts, row_name, entry["propMode"], index))
+                rendered.append(
+                    render_frame(parts, entry["id"], row_name, entry["propMode"], index)
+                )
             except ValueError as error:
                 raise ValueError(f"{entry['id']} {row_name} frame {index}: {error}") from error
         high_frames = [item[0] for item in rendered]

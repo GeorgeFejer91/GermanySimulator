@@ -116,6 +116,13 @@ less time without changing gait anatomy.
 6. Every body part, hat, head, prop, foot, and antialiased edge stays inside
    the transparent cell safety margin. Transparent pixels contain zero RGB.
 7. Source art from one character may never be reused to reconstruct another.
+8. A shared gait normalization may use a deterministic character-wide identity
+   calibration when the archived reference has deliberately non-generic
+   caricature proportions. Measure it against corresponding directional cells,
+   apply it to every frame in that view, and verify crown, shoulder, jacket,
+   hip, and shoe bounds in the desktop and mobile preview. Per-frame fixes are
+   still forbidden. Merkel's accepted front/side/back outer silhouettes match
+   the archived reference within two pixels per axis at the reviewed anchors.
 
 ## Automated release gate
 

@@ -1,11 +1,11 @@
 {
-  "version": 6,
+  "version": 7,
   "renderMode": "biomechanical-rig-v3",
-  "reviewPolicy": "Every final runtime cell is a direct deterministic rig evaluation on one fixed root/ground grid. The signed pose audit and all part, key, runtime, and archived identity assets are SHA-256 bound. Approval requires the numerical biomechanics gate plus visual review of compact directional proportions and the chin/shoulder guide on the 32-cell joint-overlay contact sheet for every row. Any pixel, joint, direction, gait, proportion, or registry change invalidates approval.",
+  "reviewPolicy": "Every final runtime cell is a direct deterministic rig evaluation on one fixed root/ground grid. The signed pose audit and all part, key, runtime, and archived identity assets are SHA-256 bound. Approval requires the numerical biomechanics gate plus visual review of compact directional proportions, archived identity silhouette, and the chin/shoulder guide on the 32-cell joint-overlay contact sheet for every row, followed by desktop and mobile browser preview. Any pixel, joint, direction, gait, proportion, or registry change invalidates approval.",
   "registrySha256": "be974eb1ab318ace5ae9f1c25216bfa677fa4cebb50401447f48111e9de6630d",
-  "builderSha256": "247e71d02c90ac18d336e3b28b7f4dd9bada336939bf5a1cce6535f932ff0122",
+  "builderSha256": "ba8bc0c9b90572913818e22a1c4ce623d7b4ae87db3be6904273cd1690195699",
   "poseAudit": "assets/sprite-sources/rigs/pose-audit.json",
-  "poseAuditSha256": "25523e96959ba70de52a0cf53bb87191f3d377432d4a5fc2dba4701c79b2adf3",
+  "poseAuditSha256": "18d2ffcb2cf5a5d5cab8fa088b97dc4029f9401005fe58f5e0c321f22bbd50fe",
   "visualChecklist": [
     "completeBody",
     "identityConsistency",
@@ -27,18 +27,19 @@
     "finalFrameContactSheet",
     "mirroredLeftArc",
     "headShoulderConnection",
-    "directionalProportionConsistency"
+    "directionalProportionConsistency",
+    "identityReferenceSilhouette"
   ],
   "sprites": [
     {
       "id": "merkel",
       "partsSha256": "7b5800546c78629e0739eea515efc63565728778e75868f21fc6f86635077c85",
-      "sourceSha256": "d3f5a0983941f452566542fe162b00ffcc37154d7c6510185061f083bcdfe3b0",
-      "runtimeSha256": "e375370e5ddba98563ecb7212409c0c25a70d5b75dc87e3d3d481863027c6c83",
+      "sourceSha256": "6f34e556b5f913f254a032f01b2e5f12cf778557cb327df874a7b2c1ef97a02c",
+      "runtimeSha256": "91fcf118f29f36607b8a5ccd91393a40b0e4619f64c36d12645f5d2675ce2d71",
       "identityReferenceSha256": "7d5cde706ea62a8e4a8be4086ad0d595272db76b4cc61277d95e081a861b69df",
       "visualStatus": "pass",
       "reviewedOn": "2026-09-22",
-      "reviewer": "Codex 32-cell compact-proportion and joint-overlay review"
+      "reviewer": "Codex archived-silhouette, 32-cell joint-overlay, desktop, and mobile review"
     },
     {
       "id": "merz",
