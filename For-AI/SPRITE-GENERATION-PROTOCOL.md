@@ -1,16 +1,18 @@
 # Biomechanical Sprite Animation Protocol
 
-This is the production contract for every atlas-backed moving character in
-Germany Simulator. All six characters use one deterministic articulated gait,
+This is the authoring and preview contract for the experimental articulated
+atlases in Germany Simulator. All six characters use one deterministic gait,
 one fixed registration grid, and one signed verification gate. The browser
-still receives ordinary PNG atlases; the rig, ImageGen sources, SciPy, and
-Pillow remain offline production tools.
+preview receives ordinary PNG atlases; the rig, ImageGen sources, SciPy, and
+Pillow remain offline production tools. The canonical game currently uses the
+accepted complete-character rollback described below.
 
 The previous whole-pose hold lane (`authored-key-hold-v1`) is superseded by
 `biomechanical-rig-v3`. Its assets remain recoverable under
 `assets/sprite-archive/pre-identity-lock-20260922/`. The original generated
 pose sheets remain under `assets/sprite-archive/pre-rig-20260921/` as immutable
-identity references, not as a second runtime tree.
+identity references. The root game temporarily reads their built atlases as
+its stability fallback; this does not create or maintain a second game tree.
 
 ## Authorities
 
@@ -26,7 +28,9 @@ identity references, not as a second runtime tree.
 - `tools/verify-sprite-animation.py` is the hard release gate and contact-sheet
   renderer.
 - `assets/sprite-sources/verification.json` is the signed hash ledger.
-- `assets/*.png` is the only runtime atlas authority.
+- `assets/*.png` is the experimental preview output authority.
+- `assets/sprite-archive/pre-rig-20260921/assets/*.png` is the temporary root-game
+  runtime authority until the articulated set receives a new explicit visual acceptance.
 
 ## Fixed grid and phase clock
 
@@ -190,9 +194,10 @@ overlay inspection are production authority.
 ## Browser preview sandbox
 
 `sprite-preview.html` is the standalone browser inspection surface for the
-production walking atlases. It reads this registry directly, shows every
+experimental walking atlases. It reads this registry directly, shows every
 authored direction for all six characters on transparent checkerboards, and
 keeps every view on the same 32-frame clock. Pause, single-frame stepping,
 scrubbing, and speed selection support visual review on desktop and mobile.
 It does not load `game.js`, `world3d.js`, audio, or the game world, and it does
-not copy or redefine any sprite asset or direction mapping.
+not copy or redefine any sprite asset or direction mapping. The preview must
+remain on the experimental atlases even while the root game uses the rollback.

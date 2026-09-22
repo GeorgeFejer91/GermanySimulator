@@ -16,7 +16,7 @@ assert.match(game,/function updateAlice\(n,dt\)\{\s*if\(state\.region==="germany
 assert.match(game,/nextVariant\("politician:"\+n\.politician,lines\)/,"politician pools must remain owner-locked and no-repeat");
 assert.match(game,/nextVariant\("bayern",bayernClips\)/,"Bayern recordings must use their no-repeat bag");
 assert.match(game,/nextVariant\("alice",aliceClips\)/,"Alice recordings must use their own no-repeat bag");
-assert.match(game,/function showFeaturedSpriteBark\([\s\S]*priority:STIMULUS_PRIORITY\.FEATURED[\s\S]*done:\(\)=>\{[^}]*if\(eligible\(\)\)showFeaturedSpriteBark/,"nearby named sprites must continuously queue their next owner-locked line");
+assert.match(game,/function showFeaturedSpriteBark\([\s\S]*priority:STIMULUS_PRIORITY\.NEARBY[\s\S]*done:\(\)=>\{[^}]*if\(eligible\(\)\)showFeaturedSpriteBark/,"nearby named sprites must continuously queue their next owner-locked high-priority line");
 assert.match(game,/if\(n\.featuredAudioActive\|\|!line\?\.text\|\|!featuredSpriteEligible\(n\)\)return false/,"each named sprite must hold one complete line before another frame can queue the next one");
 assert.match(game,/function stopSpeech\([\s\S]*for\(const n of npcs\)if\(n\.special\)n\.featuredAudioActive=false/,"voice cancellation must release every named sprite's line lock");
 assert.doesNotMatch(game,/allowFollowUp&&Math\.random\(\)<\.42/,"featured proximity dialogue must not stop at a random two-line burst");

@@ -29,6 +29,8 @@ assert.match(game,/n\.quizFollowTime>QUIZ_FOLLOW_MAX_SECONDS\|\|d>QUIZ_FOLLOW_BR
 assert.match(game,/else if\(d>=78\)moveGroundResponder\(n,dx\/d\*88\*dt,dy\/d\*88\*dt,12\)/,"interested quiz pedestrians must route around barriers while briefly following the player");
 assert.match(game,/n\.blockedTimer=progress>\.01\?0:\(n\.blockedTimer\|\|0\)\+dt;if\(n\.blockedTimer>\.45\)\{n\.blockedTimer=0;chooseBayernTarget\(n,n\.targetSpot\)\}/,"a blocked Bayern route walker must change direction instead of pressing into the obstacle");
 assert.match(game,/alternatives=links\.filter\(spot=>spot!==blockedSpot\).*blockedSpot<0\?links:\[n\.spot\]/,"Bayern must choose another connected direction or reverse at a dead end after an obstruction");
+assert.match(game,/function updateMerkel\([\s\S]*n\.routeDirection=-\(n\.routeDirection\|\|1\);n\.target=\(n\.target\+n\.routeDirection\+n\.route\.length\)%n\.route\.length/,"Merkel must reverse her patrol route after sustained obstruction");
+assert.match(game,/function updateBorderPourer\([\s\S]*n\.blockedTimer=moved>\.01\?0:\(n\.blockedTimer\|\|0\)\+dt;if\(n\.blockedTimer>\.55\)\{n\.blockedTimer=0;n\.dir\*=-1;n\.lane\*=-1;n\.state="sideWalk"/,"Merz must turn and switch lanes after sustained obstruction");
 assert.match(game,/playerHit=!n\.crowd&&dist\(/,"ordinary crowd sprites must not collide with the player");
 assert.match(game,/playerHit\|\|!moveGroundResponder\(n,dx,dy,12\)/,"non-crowd pedestrians must route around barriers");
 assert.match(game,/dynamicBlocker\(nx,player\.y,px,player\.y\)/,"the player must not walk deeper into response vehicles");

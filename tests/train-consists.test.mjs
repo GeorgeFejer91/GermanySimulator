@@ -25,8 +25,11 @@ assert.match(game,/groundObstacles=\[\{item:player.*policeVehicles.*police.*npcs
 assert.match(game,/event<\.55.*train\.pause=1\.4\+Math\.random\(\)\*4\.8/,"trains must stop unpredictably often enough to disrupt both loops");
 assert.match(game,/TRAIN_PLAYER_OBSTRUCTION_AUDIO=TRAIN_ANNOUNCEMENT_AUDIO\[0\]/,"the player-obstruction cue must always map to the supplied Buxtehude recording");
 assert.match(game,/playerHolding&&!playerHoldingLast\)requestTrainAnnouncement\(0,TRAIN_PLAYER_OBSTRUCTION_AUDIO,STIMULUS_PRIORITY\.CRITICAL\)/,"every new player-caused train stop must reserve the critical Buxtehude cue");
+assert.match(game,/direct=priority===STIMULUS_PRIORITY\.CRITICAL[\s\S]*activeStimulus\?\.family==="train"&&!nearby&&!direct/,"a critical obstruction cue must remain queueable behind an active train announcement");
 assert.match(game,/TRAIN_ANNOUNCEMENT_AUDIO=\[/,"the supplied recordings must replace generated train speech");
-assert.match(game,/function updateTrainAnnouncement\(\).*requestTrainAnnouncement\(nearest\)/s,"nearby trains must trigger the local recordings");
+assert.match(game,/TRAIN_AUDIO_RADIUS=820,TRAIN_NEARBY_AUDIO_RADIUS=360/,"train announcements need separate broad and close-range vicinities");
+assert.match(game,/function updateTrainAnnouncement\(\).*nearby\?STIMULUS_PRIORITY\.NEARBY:STIMULUS_PRIORITY\.AMBIENT.*requestTrainAnnouncement\(nearest,"",priority\)/s,"close-range trains must promote the local recordings above ordinary speech");
+assert.match(game,/function requestTrainAnnouncement\([\s\S]*if\(stillNearby\)requestTrainAnnouncement\(nearestTrainDistance\(\),"",STIMULUS_PRIORITY\.NEARBY\)/,"a nearby DB announcement must queue its next recording continuously");
 assert.match(game,/AUDIO_CLASS=Object\.freeze\(\{TEXT:"audio-text",BACKGROUND:"background-music",EFFECT:"sound-effect"\}\)/,"runtime audio must declare text, background-music, and sound-effect classes");
 assert.match(game,/function queueStimulus\(item\)/,"dialogue and train audio must share the stimulus broker");
 assert.match(game,/function stopSpeech\(completeHumorScold=false,preserveTrain=false\)\{const keepActive=preserveTrain&&activeStimulus\?\.family==="train";stimulusQueue\.length=0/s,"modal takeover must preserve only an already active no-text train cue");

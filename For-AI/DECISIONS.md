@@ -1,5 +1,28 @@
 # Durable decisions
 
+## 2026-09-22 — Stable whole-pose sprites in game; rigged sprites preview-only
+
+The canonical root game temporarily loads all six complete-character atlases
+from `assets/sprite-archive/pre-rig-20260921/assets/`. These are the last signed,
+accepted pre-rig sprites and are preferred over the uncanny articulated set for
+shipping reliability. Merkel's archived sheet uses its native 24-column clock;
+the other five use 32 columns. No sprite generation was deleted or overwritten.
+
+The current biomechanical atlases, part sheets, audit, verification ledger, and
+builder remain the active experiment in `assets/`, `assets/sprite-sources/`,
+the For-AI protocol, and `sprite-preview.html`. They must not be restored to the
+root game until a new visual review explicitly accepts them. This supersedes
+the same-day biomechanical runtime decision below only for the shipping loader.
+
+Close-range audio now has a dedicated `NEARBY` broker tier below critical
+modal/direct speech and above featured, reactive, and ambient speech. Merkel,
+Merz, the Bayern-Beauftragter, and Alice continuously queue owner-locked lines
+inside 176 units. DB recordings use the same tier and continuous queue inside
+360 units; between 360 and 820 units they remain cooldown-governed ambient
+audio. Active speech is never interrupted. Merkel reverses her route after
+sustained obstruction, while Merz reverses and swaps lane; this complements
+the existing shared sidestep/backoff and Bayern/Alice recovery behavior.
+
 ## 2026-09-22 — Shared biomechanical rig supersedes pose holds
 
 All six atlas-backed characters now ship from `biomechanical-rig-v3`. This
@@ -86,16 +109,17 @@ match the approved source poses one-to-one. A future 32-cell coefficient cache
 must pass the same grid, alpha, scale, head, ground, direction, anatomy, and
 visual-contact-sheet gates before replacing any current atlas.
 
-## 2026-09-22 — Continuous close-radius featured speech
+## 2026-09-22 — Continuous close-radius featured speech (superseded priority)
 
 Merkel, Merz, the Bayern-Beauftragter, and Alice use a 176-unit audible radius
-and the existing featured broker priority. Once admitted, each completed line
+and originally used the featured broker priority. The current `NEARBY` tier is
+defined by the later rollback decision above. Once admitted, each completed line
 queues the next item from that same owner's shuffled no-repeat pool after the
 broker's 250 ms required gap for as long as the player remains inside the
 audible radius. The former cooldowns, 42-percent follow-up chance, and two-line
 burst limit no longer apply. The 224-unit release ring only resets entry state;
 it is not audible eligibility. Critical modal/direct speech still ranks above
-featured speech and active audio is never interrupted. The post-form Berlin
+nearby speech and active audio is never interrupted. The post-form Berlin
 welcome/mission briefing remains a critical spoken dialogue and is also used by
 the secret Start skip path.
 

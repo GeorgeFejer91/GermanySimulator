@@ -19,7 +19,8 @@ assert.doesNotMatch(game,/near>=radius\|\|n\.dialogueNearby/,"remaining inside t
 assert.doesNotMatch(game,/near>=radius\|\|performance\.now\(\)<\(n\.barkAt\|\|0\)/,"a previous cooldown must not delay a re-entered featured-character loop");
 assert.match(game,/function insetSpriteSheet\(source,atlas\)/);
 assert.match(game,/const cell=Math\.round\(source\.width\/atlas\.cols\)/,"runtime preparation must preserve the built 128 px cell grid");
-assert.match(game,/merkel:\{canvas:null,cols:32,rows:5,pad:0,drawSize:126\}/);
+assert.match(game,/merkel:\{canvas:null,cols:24,rows:5,pad:0,drawSize:126\}/);
+assert.match(game,/stableSpriteRoot="\.\/assets\/sprite-archive\/pre-rig-20260921\/assets\/"/,"the root game must use the accepted pre-rig sprite generation while experiments remain preview-only");
 assert.match(game,/bayern:\{canvas:null,cols:32,rows:4,pad:0,drawSize:150\}/);
 assert.match(game,/borderPourer:\{canvas:null,cols:32,rows:6,pad:0,drawSize:136\}/);
 assert.match(game,/alice:\{canvas:null,cols:32,rows:2,pad:0,drawSize:126\}/);

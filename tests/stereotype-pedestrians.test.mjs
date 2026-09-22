@@ -8,7 +8,7 @@ const kinds=["towelMan","towelWoman"];
 const ids=["towel-man","towel-woman"];
 
 for(const kind of kinds){
- assert.match(game,new RegExp(`${kind}Sprite:\"\\./assets/crowd-`),`${kind} must load a runtime atlas`);
+ assert.match(game,new RegExp(`${kind}Sprite:stableSpriteRoot\\+\"crowd-`),`${kind} must load the stable archived runtime atlas`);
  assert.match(game,new RegExp(`${kind}:\\{canvas:null,cols:32,rows:3`),`${kind} must expose 32-frame side, down and up rows`);
  assert.match(world,new RegExp(`n\\.spriteKind.*atlasSprite\\(n\\.spriteKind`),"ordinary pedestrians must opt into registered atlases");
 }
