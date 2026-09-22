@@ -171,3 +171,13 @@ The retained ImageGen gait proposal at
 `assets/sprite-sources/reference/biomechanical-gait-proposal.png` is an
 educational visual reference only. The coefficient model, rig audit, and final
 overlay inspection are production authority.
+
+## Browser preview sandbox
+
+`sprite-preview.html` is the standalone browser inspection surface for the
+production walking atlases. It reads this registry directly, shows every
+authored direction for all six characters on transparent checkerboards, and
+keeps every view on the same 32-frame clock. Pause, single-frame stepping,
+scrubbing, and speed selection support visual review on desktop and mobile.
+It does not load `game.js`, `world3d.js`, audio, or the game world, and it does
+not copy or redefine any sprite asset or direction mapping.
