@@ -23,7 +23,7 @@ assert.equal(overlap.x,-.55,"overlap recovery must move away from the blocked tr
 const nearVertical={x:0,y:0,avoid:1};
 assert.equal(moveGroundResponder((x,y)=>y<-.5)(nearVertical,.01,-1,12),true,"a tiny free axis must not hide a blocked primary direction");
 assert.ok(nearVertical.x>.7,"a primarily vertical walker must sidestep when vertical travel is blocked");
-assert.match(game,/moveGroundResponder\(car,dx\/d\*step,dy\/d\*step,38\)/,"pursuit cars must use collision-aware movement");
+assert.match(game,/moveGroundResponder\(car,Math\.cos\(car\.angle\)\*step,Math\.sin\(car\.angle\)\*step,38\)/,"pursuit cars must move along their bounded heading through collision checks");
 assert.match(game,/moveGroundResponder\(p,rdx\/d\*step,rdy\/d\*step,14\)/,"foot police must use collision-aware movement");
 assert.match(game,/n\.quizFollowTime>QUIZ_FOLLOW_MAX_SECONDS\|\|d>QUIZ_FOLLOW_BREAK_DISTANCE/,"approaching quiz pedestrians must stop following after bounded time or distance");
 assert.match(game,/else if\(d>=78\)moveGroundResponder\(n,dx\/d\*88\*dt,dy\/d\*88\*dt,12\)/,"interested quiz pedestrians must route around barriers while briefly following the player");
@@ -41,5 +41,13 @@ assert.match(game,/headingX=velocity>10\?player\.vx\/velocity/,"cars must predic
 assert.match(game,/slot=\(car\.index-\(policeVehicles\.length-1\)\/2\)\*82/,"cars must fan into blocking formation slots");
 assert.match(game,/if\(velocity<10\).*radius=175\+car\.index\*24/,"cars must orbit the player when no trajectory is available");
 assert.match(game,/desiredSpeed=d<30\?0/,"cars must brake at their blocking position");
+assert.match(game,/car\.angle\+=clamp\(turn,-maxTurn,maxTurn\)/,"pursuit cars must turn at a bounded rate");
+assert.match(game,/pushPlayer\(contactDx\/contactDistance\*105,contactDy\/contactDistance\*105\)/,"car impacts must use stepped player displacement");
+const pushSource=game.match(/function pushPlayer\(dx,dy\)\{[^\n]+\}/)?.[0];
+assert.ok(pushSource,"stepped player knockback must exist");
+const pushed={x:16,y:100,r:8},pushPlayer=new Function("player","WORLD","clamp","blocked","dynamicBlocker","blockingPedestrian",`return (${pushSource})`)(pushed,{w:1000,h:1000},(v,a,b)=>Math.max(a,Math.min(b,v)),x=>x>=40&&x<=50,()=>false,()=>false);
+pushPlayer(105,0);
+assert.ok(pushed.x>16&&pushed.x<40,"knockback must stop at a narrow wall between its start and destination");
+assert.match(game,/rail\.distance<TRAIN_CAR_HALF_WIDTH\+obstacle\.radius\+6/,"train obstruction checks must include full obstacle width");
 
 console.log("Predictive interception, ground collision, and train-spacing contracts OK");

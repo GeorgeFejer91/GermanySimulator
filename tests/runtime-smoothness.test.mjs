@@ -8,6 +8,15 @@ assert.match(game,/const HUD_REFRESH_SECONDS=\.1/,"HUD DOM refreshes must be rat
 assert.match(game,/hudRefreshTimer-=dt;if\(hudRefreshTimer<=0\)\{hudRefreshTimer=HUD_REFRESH_SECONDS;updateHud\(\)\}/);
 assert.match(game,/addEventListener\("blur",clearInput\)/,"focus loss must release held movement");
 assert.match(game,/visibilitychange.*document\.hidden.*clearInput/,"backgrounding the page must release held movement");
+const loopSource=game.match(/function loop\(now\)\{[^\n]+\}/)?.[0];
+assert.ok(loopSource,"the simulation loop must exist");
+const steps=[];
+const loop=new Function("update","updatePoliceChaseAudio","draw","window","requestAnimationFrame",`let last=0;${loopSource};return loop`)(dt=>steps.push(dt),()=>{},()=>{},{Germany3D:{sync:()=>{}}},()=>{});
+loop(100);
+assert.equal(steps.length,4,"a 100 ms rendered frame should update simulation in bounded substeps");
+assert.ok(Math.abs(steps.reduce((sum,dt)=>sum+dt,0)-.1)<1e-9,"slow frames must retain their elapsed gameplay time");
+steps.length=0;loop(1000);
+assert.ok(steps.length<=5&&steps.reduce((sum,dt)=>sum+dt,0)<=.1200001,"long stalls must stay bounded");
 
 const syncChar=world.match(/function syncChar\(q,o,l=0\)\{[\s\S]*?\n  \}/)?.[0]||"";
 assert.match(syncChar,/travel=Math\.hypot/,"procedural gait must follow actual movement");
