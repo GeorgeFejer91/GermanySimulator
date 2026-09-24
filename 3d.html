@@ -93,7 +93,7 @@ const npcs=[
 {x:4620,y:3270,special:"merkel",route:[[4620,3270],[5750,3270],[6150,3270],[7200,3270],[7200,3880],[6120,3880],[5750,3880],[4620,3880]],target:1,facingX:1,facingY:0,animTime:0,spriteRow:2,spriteFrame:1,line:0}
 ].map(n=>({...offsetWorldPoint(n),min:n.min==null?n.min:n.min+RAIL_GUTTER,max:n.max==null?n.max:n.max+RAIL_GUTTER,route:n.route?.map(([x,y])=>[x+RAIL_GUTTER,y+RAIL_GUTTER])}));
 const pickups=[{x:1980,y:870,type:"bratwurst",taken:false},{x:2110,y:880,type:"currywurst",taken:false},{x:4100,y:900,type:"brezel",taken:false},{x:3000,y:1910,type:"pfand",taken:false}].map(offsetWorldPoint);
-window.Germany3DBridge={WORLD,player,roads,crossings,crossingSigns,trafficLights,buildings,trees,schreber,policeGarden,policePath,BORDER_Y,BORDER_BAND,borderGates,borderSegments,railLoops,railTracks,trains,fireSources,props,pickups,getNPCs:()=>npcs,getPolice:()=>police};
+window.Germany3DBridge={WORLD,player,roads,crossings,crossingSigns,trafficLights,buildings,trees,schreber,policeGarden,policePath,kiesingerMemorial:offsetWorldPoint({x:8540,y:4000}),BORDER_Y,BORDER_BAND,borderGates,borderSegments,railLoops,railTracks,trains,fireSources,props,pickups,getNPCs:()=>npcs,getPolice:()=>police};
 const dist=(a,b,c,d)=>Math.hypot(a-c,b-d);
 const MERKEL_AUDIO_LINE="Wir schaffen das.",merkelRecording=new Audio("./assets/merkel-wir-schaffen-das.mp3");merkelRecording.preload="auto";
 const merkelLines=[MERKEL_AUDIO_LINE,"Wir brauchen kein Abschaltgesetz, sondern einen Ausstieg mit Augenmaß.","Ich habe eine neue Bewertung vorgenommen.","Die Risiken der Kernenergie sind nicht beherrschbar.","Wer das erkennt, muss eine neue Bewertung vornehmen.","Wir müssen uns darauf einstellen, dass wir schneller aussteigen.","Wir wollen das schaffen."];
@@ -110,5 +110,5 @@ let last=performance.now();function loop(t){const dt=Math.min(.05,(t-last)/1000)
 })();
 </script>
 <script type="importmap">{"imports":{"three":"https://cdn.jsdelivr.net/npm/three@0.186.0/build/three.module.js"}}</script>
-<script type="module" src="./world3d.js?v=20260922-biomech1"></script>
+<script type="module" src="./world3d.js?v=20260925-6"></script>
 </body></html>

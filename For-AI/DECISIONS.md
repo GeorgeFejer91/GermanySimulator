@@ -1,5 +1,9 @@
 # Durable decisions
 
+## 2026-09-25 — Kiesinger historical monument
+
+The southeast Bundestag plaza holds a large code-native Three.js statue of Kurt Georg Kiesinger. The grandiose scale is satirical; the physical plaque and interactive text state his NSDAP membership, work in the Nazi Foreign Office's radio-policy department, 1948 CDU entry, Bundestag and Baden-Württemberg offices, and 1966–1969 chancellorship. A player-triggered German browser-voice summary uses the existing exact-text dialogue broker and English subtitle library. No likeness asset, model loader, new audio file, or separate interaction system is needed. Historical wording is grounded in [Deutsche Biographie](https://www.deutsche-biographie.de/dbo080414.html), [Haus der Geschichte](https://www.hdg.de/lemo/biografie/kurt-georg-kiesinger.html), and [the Bundestag's election record](https://www.bundestag.de/dokumente/textarchiv/1966-12-01-kiesinger-481690). The linked person is Kiesinger; Kurt Eisner is a different historical figure.
+
 ## 2026-09-22 — One-direction Merkel mocap pilot precedes any atlas-wide gait work
 
 The next walking experiment is intentionally limited to Merkel's left-facing

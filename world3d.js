@@ -242,6 +242,76 @@ function showRendererFailure(error){
   }
   bridge.buildings.forEach(building);
 
+  function makeKiesingerMemorial(site){
+    if(!site)return;
+    const g=new T.Group(),granite=mat(0x77736b,.96),stone=mat(0xb5ada0,.93),shadow=mat(0x4b4a45,.98),bronze=new T.MeshStandardMaterial({color:0x4b5852,metalness:.32,roughness:.68}),face=new T.MeshStandardMaterial({color:0x81745f,metalness:.28,roughness:.7}),hair=mat(0x3d4845,.79),gold=new T.MeshStandardMaterial({color:0xb3965b,metalness:.45,roughness:.59});
+    // The entire apron fits inside the reserved 350 × 300 world-unit parcel.
+    box(6.9,.16,5.85,shadow,0,.08,0,g);
+    box(6.48,.28,5.4,granite,0,.3,0,g);
+    box(5.95,.32,4.92,stone,0,.6,0,g);
+    box(4.25,.22,3.2,shadow,0,.87,-.13,g);
+    box(3.88,2.55,2.83,granite,0,2.25,-.13,g);
+    box(4.3,.24,3.24,stone,0,3.65,-.13,g);
+    box(3.66,.42,2.72,shadow,0,3.98,-.13,g);
+    box(3.48,.12,2.6,gold,0,4.24,-.13,g);
+    for(const x of [-1.84,1.84]){
+      box(.11,2.22,.1,stone,x,2.25,1.34,g);
+      box(.2,.18,.21,gold,x,3.4,1.36,g);
+    }
+    for(const x of [-2.76,2.76]){
+      box(.68,.22,.68,granite,x,.82,-1.94,g);
+      const shaft=new T.Mesh(new T.CylinderGeometry(.23,.29,5.58,10),stone);shaft.position.set(x,3.72,-1.94);g.add(shaft);
+      box(.78,.3,.78,stone,x,6.61,-1.94,g);
+      box(.9,.1,.9,gold,x,6.83,-1.94,g);
+    }
+    box(6.3,.36,.55,stone,0,7.15,-1.94,g);
+    box(6.42,.09,.64,gold,0,7.39,-1.94,g);
+
+    const figure=new T.Group();figure.position.set(0,4.3,-.22);g.add(figure);
+    const shape=(points,material,z)=>{const outline=new T.Shape();outline.moveTo(...points[0]);for(const point of points.slice(1))outline.lineTo(...point);outline.closePath();const mesh=new T.Mesh(new T.ShapeGeometry(outline),material);mesh.position.z=z;figure.add(mesh);return mesh};
+    for(const x of [-.43,.43]){
+      box(.63,.27,.96,bronze,x,.14,.24,figure);
+      const leg=new T.Mesh(new T.CylinderGeometry(.31,.26,1.85,8),bronze);leg.position.set(x,1.17,0);figure.add(leg);
+      box(.73,.18,.68,bronze,x,2.08,0,figure);
+    }
+    box(1.5,.46,.72,bronze,0,2.27,-.02,figure);
+    const coat=new T.Shape();coat.moveTo(-.68,0);coat.lineTo(.68,0);coat.lineTo(.82,.3);coat.lineTo(.98,1.72);coat.lineTo(.68,2.13);coat.lineTo(-.68,2.13);coat.lineTo(-.98,1.72);coat.lineTo(-.82,.3);coat.closePath();
+    const jacket=new T.Mesh(new T.ExtrudeGeometry(coat,{depth:.7,bevelEnabled:true,bevelThickness:.055,bevelSize:.07,bevelSegments:1}),bronze);jacket.position.set(0,2.27,-.36);figure.add(jacket);
+    shape([[-.38,4.4],[.38,4.4],[.23,3.61],[0,3.24],[-.23,3.61]],face,.43);
+    shape([[-.55,4.36],[-.14,4.23],[0,3.21],[-.4,3.67]],hair,.47);
+    shape([[.55,4.36],[.14,4.23],[0,3.21],[.4,3.67]],hair,.47);
+    shape([[-.1,4.12],[.1,4.12],[.07,3.55],[0,3.41],[-.07,3.55]],gold,.49);
+    for(const x of [-1.03,1.03]){
+      const arm=new T.Mesh(new T.CylinderGeometry(.23,.28,1.85,8),bronze);arm.position.set(x,3.36,-.02);arm.rotation.z=x>0?-.12:.12;figure.add(arm);
+      const hand=new T.Mesh(new T.SphereGeometry(.24,9,7),face);hand.scale.set(.78,1.13,.75);hand.position.set(x*1.11,2.42,.01);figure.add(hand);
+    }
+    for(const y of [2.69,2.98,3.27]){const button=new T.Mesh(new T.SphereGeometry(.045,7,5),gold);button.position.set(0,y,.51);figure.add(button)}
+    const neck=new T.Mesh(new T.CylinderGeometry(.23,.25,.35,9),face);neck.position.set(0,4.48,0);figure.add(neck);
+    const head=new T.Mesh(new T.SphereGeometry(.57,14,10),face);head.scale.set(.97,1.15,.83);head.position.set(0,5.06,.03);figure.add(head);
+    for(const x of [-.54,.54]){const ear=new T.Mesh(new T.SphereGeometry(.13,8,6),face);ear.scale.set(.68,1.2,.65);ear.position.set(x,5.02,.02);figure.add(ear)}
+    const nose=new T.Mesh(new T.ConeGeometry(.105,.29,5),face);nose.rotation.x=Math.PI/2;nose.position.set(0,4.99,.55);figure.add(nose);
+    for(const x of [-.22,.22]){
+      box(.19,.055,.055,hair,x,5.23,.46,figure);
+      const eye=new T.Mesh(new T.SphereGeometry(.035,7,5),hair);eye.position.set(x,5.15,.48);figure.add(eye);
+    }
+    box(.22,.025,.025,hair,0,4.78,.49,figure);
+    const hairCap=new T.Mesh(new T.SphereGeometry(.595,14,9,0,Math.PI*2,0,Math.PI*.49),hair);hairCap.position.set(-.025,5.4,-.025);figure.add(hairCap);
+    for(let i=0;i<3;i++){const sweep=box(.32,.09,.16,hair,-.32+i*.25,5.52+i*.045,.36,figure);sweep.rotation.z=-.2}
+
+    const plaque=document.createElement("canvas");plaque.width=1024;plaque.height=512;const p=plaque.getContext("2d");
+    p.fillStyle="#181c1b";p.fillRect(0,0,1024,512);p.strokeStyle="#b3965b";p.lineWidth=22;p.strokeRect(16,16,992,480);p.lineWidth=5;p.strokeRect(37,37,950,438);
+    p.fillStyle="#e8dcc1";p.textAlign="center";p.font="bold 65px Georgia, serif";p.fillText("KURT GEORG KIESINGER",512,121,920);
+    p.fillStyle="#c5ad7d";p.font="bold 41px Georgia, serif";p.fillText("NSDAP-EINTRITT 1933 · NS-PROPAGANDA",512,211,920);
+    p.fillText("CDU · BUNDESKANZLER 1966–1969",512,277,920);
+    p.fillStyle="#e8dcc1";p.font="bold 33px Arial, sans-serif";p.fillText("VERGANGENHEITSBEWÄLTIGUNG",512,376,920);
+    p.font="28px Arial, sans-serif";p.fillText("E · GESCHICHTE LESEN UND HÖREN",512,430,920);
+    const texture=new T.CanvasTexture(plaque);texture.colorSpace=T.SRGBColorSpace;texture.anisotropy=Math.min(4,renderer.capabilities.getMaxAnisotropy());
+    box(3.22,1.55,.08,shadow,0,2.33,1.34,g);
+    const plate=new T.Mesh(new T.PlaneGeometry(3.1,1.43),new T.MeshBasicMaterial({map:texture}));plate.position.set(0,2.33,1.395);g.add(plate);
+    g.position.set(X(site.x),0,Z(site.y));world.add(g);
+  }
+  makeKiesingerMemorial(bridge.kiesingerMemorial);
+
   function fence(r){const x0=X(r.x),x1=X(r.x+r.w),z0=Z(r.y),z1=Z(r.y+r.h),post=(x,z)=>box(.08,.75,.08,M.metal,x,.375,z);for(let x=x0;x<=x1;x+=2.2){post(x,z0);post(x,z1)}for(let z=z0;z<=z1;z+=2.2){post(x0,z);post(x1,z)}}
   function sheds(r,n){for(let i=0;i<n;i++){const cols=Math.ceil(n/2),x=X(r.x+80+(i%cols)*170),z=Z(r.y+110+Math.floor(i/cols)*220);box(1.5,1.1,1.15,mat(0x898379),x,.55,z);const roof=new T.Mesh(new T.ConeGeometry(1.15,.6,4),M.dark);roof.position.set(x,1.4,z);roof.rotation.y=Math.PI/4;world.add(roof)}}
   fence(bridge.policeGarden);sheds(bridge.schreber,4);sheds(bridge.policeGarden,6);
@@ -328,7 +398,12 @@ function showRendererFailure(error){
     for(const slot of normObjectSlots){slot.material.color.setHex(slot.state.fixed?0x3f5b43:0x6c3d37);const target=slot.state.fixed?0:.08;slot.group.rotation.y+=(target-slot.group.rotation.y)*.18}
     for(const slot of trafficLightSlots){slot.red.color.setHex(slot.light.green?0x4b2725:0xdf332c);slot.green.color.setHex(slot.light.green?0x36c469:0x284b31)}
     updateFire(performance.now());updateBuildingOcclusion();updatePowerPlants();
-    const px=X(bridge.player.x),pz=Z(bridge.player.y),now=performance.now();camera.position.set(px,11.5,pz+14);camera.lookAt(px,1,pz-2.7);updateWirtschaftswunder(now);renderer.render(scene,camera);
+    const px=X(bridge.player.x),pz=Z(bridge.player.y),now=performance.now(),memorial=bridge.kiesingerMemorial;
+    const plaqueDistance=memorial?Math.hypot(bridge.player.x-memorial.x,bridge.player.y-memorial.y-195):Infinity;
+    const frame=memorial&&bridge.player.y>memorial.y+100?Math.max(0,Math.min(1,(370-plaqueDistance)/190)):0;
+    camera.position.set(px,11.5+3.5*frame,pz+14+2*frame);
+    camera.lookAt(px+(memorial?(X(memorial.x)-px)*frame:0),1+3.6*frame,pz-2.7+(memorial?(Z(memorial.y)-(pz-2.7))*frame:0));
+    updateWirtschaftswunder(now);renderer.render(scene,camera);
   }};
   app.classList.add("three-ready");
 })().catch(showRendererFailure);

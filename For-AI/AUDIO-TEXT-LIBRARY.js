@@ -247,6 +247,10 @@ const questions=Object.freeze({
 });
 
 const lines=Object.freeze({
+ "Kurt Georg Kiesinger (1904–1988) trat 1933 in die NSDAP ein. Im Krieg wirkte er an der NS-Auslandspropaganda mit. Nach seinem Aufstieg in der CDU wählte ihn der Bundestag 1966 zum Bundeskanzler.":"Kurt Georg Kiesinger (1904–1988) joined the Nazi Party in 1933. During the war he contributed to Nazi propaganda abroad. After his rise in the CDU, the Bundestag elected him chancellor in 1966.",
+ "Im Auswärtigen Amt stieg er zum stellvertretenden Leiter der Rundfunkpolitischen Abteilung auf. Seine Arbeit trug zur Verbreitung der Propaganda des NS-Regimes im Ausland bei.":"In the Foreign Office, he rose to deputy head of the radio policy department. His work helped spread Nazi regime propaganda abroad.",
+ "1948 trat er der CDU bei. Von 1949 bis 1958 war er Bundestagsabgeordneter, von 1958 bis 1966 Ministerpräsident von Baden-Württemberg.":"He joined the CDU in 1948. He was a Bundestag member from 1949 to 1958, then minister-president of Baden-Württemberg from 1958 to 1966.",
+ "Am 1. Dezember 1966 wählte ihn der Bundestag zum Kanzler der Großen Koalition aus CDU/CSU und SPD. Er amtierte bis 1969. Das Denkmal fragt nach dem Umgang mit personellen Kontinuitäten aus der NS-Zeit.":"On 1 December 1966, the Bundestag elected him chancellor of the CDU/CSU–SPD grand coalition. He served until 1969. This monument asks how postwar Germany dealt with the continuation of careers from the Nazi era.",
  "Berlin liegt hinter der Brandmauer. Ab hier nur noch Deutsch.":"Berlin is behind the Brandmauer. From here onward, German only.",
  "Berlin liegt hinter der Brandmauer. Welcome back. Denglisch ist wieder erlaubt.":"Berlin is behind the Brandmauer. Welcome back. Denglisch is allowed again.",
  "Nein, ich gehe hier nicht weg!":"No, I am not leaving!",
