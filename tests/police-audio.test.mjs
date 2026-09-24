@@ -2,6 +2,7 @@ import assert from "node:assert/strict";
 import {createHash} from "node:crypto";
 import {readFileSync,statSync} from "node:fs";
 import {join} from "node:path";
+import vm from "node:vm";
 
 const game=readFileSync("game.js","utf8"),assetRoot=join("assets","audio","police");
 const assets=[
@@ -20,7 +21,25 @@ assert.match(game,/source\.loop=true/,"the longer authentic Martinshorn must sus
 assert.match(game,/state\.wanted>=2&&policeVehicles\.length/,"continuous chase audio must begin with the first police car");
 assert.match(game,/Math\.min\(\.05,\(state\.wanted-2\)\*\.016\)/,"higher response tiers should add slight pass-by urgency");
 assert.match(game,/if\(contactDistance<190&&car\.passbyReady\)/,"a nearby police car must trigger the sourced pass-by accent only once per approach");
-assert.match(game,/\.catch\(playSiren\)/,"a missing pass-by recording must retain the synthesized alert fallback");
-assert.match(game,/function loop\(now\).*updatePoliceChaseAudio\(\);update\(dt\)/,"chase audio must fade out while world simulation is modal or stopped");
+assert.match(game,/\.catch\(\(\)=>\{if\(eligible\(\)\)playSiren\(\)\}\)/,"a missing pass-by recording must retain the synthesized alert fallback only while the approach is active");
+assert.match(game,/function loop\(now\).*updatePoliceChaseAudio\(\);draw\(\)/,"chase audio must follow the latest simulated state, including modal transitions");
+
+const passbySource=game.match(/function playPolicePassby\([^\n]+/)?.[0];
+assert.ok(passbySource,"the pass-by cue must exist");
+let rejectRecording,synthFallbacks=0;
+const recording=new Promise((_,reject)=>rejectRecording=reject);
+const context=vm.createContext({performance:{now:()=>1000},recording,playSiren:()=>synthFallbacks++});
+vm.runInContext(`
+ let policePassbyNextAt=0;
+ const state={started:true,modal:false,gameOver:false,wanted:2},player={x:0,y:0},car={x:100,y:0},policeVehicles=[car],POLICE_PASSBY_AUDIO="passby.mp3";
+ const dist=(ax,ay,bx,by)=>Math.hypot(ax-bx,ay-by),prepareRecording=()=>globalThis.recording;
+ ${passbySource}
+ playPolicePassby(car);
+ state.modal=true;
+`,context);
+rejectRecording(new Error("asset unavailable"));
+await recording.catch(()=>{});
+await Promise.resolve();
+assert.equal(synthFallbacks,0,"a late failed pass-by must not sound over a modal");
 
 console.log("Local German police chase audio contract OK");

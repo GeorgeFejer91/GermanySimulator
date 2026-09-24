@@ -13,7 +13,7 @@ const context=vm.createContext({window:{}});
 vm.runInContext(librarySource,context,{filename:"AUDIO-TEXT-LIBRARY.js"});
 const library=context.window.GermanySimulatorAudioText;
 
-assert.equal(library.version,2);
+assert.equal(library.version,3);
 assert.deepEqual([...library.exclusions],["background-music","sound-effect"]);
 assert.equal(Object.keys(library.questions).length,73,"every spoken quiz question needs English text");
 assert.deepEqual(Object.keys(library.quizContexts).sort(),["civic","grammar-b1","grammar-b2","grammar-c1","traffic"],"each quiz family needs an English factual context");

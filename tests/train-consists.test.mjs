@@ -11,7 +11,7 @@ const announcementFiles=["ice-0815-buxtehude-bahnhofshalle-subtle.mp3","ice-0815
 assert.match(game,/TRAIN_CAR_OFFSETS=\[780,520,260,0,-260,-520,-780\]/,"perimeter trains must remain single full-length seven-car consists");
 assert.match(game,/CITY=\{w:9840,h:4240\},RAIL_GUTTER=560,WORLD=\{w:CITY\.w\+RAIL_GUTTER\*2,h:CITY\.h\+RAIL_GUTTER\*2\}/,"the playable world must add a full rail-clearance gutter around the city");
 assert.match(game,/makeRailLoop\("aussenring",72,720,1\),makeRailLoop\("innenring",232,560,-1\)/,"full-length coaches need broad concentric corner radii");
-assert.match(game,/TRAIN_CAR_HALF_LENGTH=112,TRAIN_CAR_HALF_WIDTH=46,TRAIN_MIN_GAP=1820,TRAIN_PLAYER_STOP_GAP=910/,"long consists need matching solid bodies, a hard no-passing center gap, and a player-stop envelope");
+assert.match(game,/TRAIN_CAR_HALF_LENGTH=112,TRAIN_CAR_HALF_WIDTH=46,TRAIN_MIN_GAP=1820,TRAIN_PLAYER_STOP_GAP=970/,"long consists need matching solid bodies, a hard no-passing center gap, and a sampled-rail clearance margin");
 assert.match(game,/\[0,\.03,1,188,94\].*\[0,\.19,-1,252,132\].*\[1,\.87,1,214,112\]/s,"both tracks must start with six alternating, independently tuned trains");
 assert.match(game,/orientation:seed\[2\].*acceleration:seed\[4\]/s,"physical consist orientation must be decoupled from reversible movement and every train must own its acceleration");
 assert.match(game,/function signedRailSeparation\(/,"same-track collision must use circular signed separation");
@@ -33,7 +33,7 @@ assert.match(game,/function requestTrainAnnouncement\([\s\S]*if\(stillNearby\)re
 assert.match(game,/AUDIO_CLASS=Object\.freeze\(\{TEXT:"audio-text",BACKGROUND:"background-music",EFFECT:"sound-effect"\}\)/,"runtime audio must declare text, background-music, and sound-effect classes");
 assert.match(game,/function queueStimulus\(item\)/,"dialogue and train audio must share the stimulus broker");
 assert.match(game,/function stopSpeech\(completeHumorScold=false,preserveTrain=false\)\{const keepActive=preserveTrain&&activeStimulus\?\.family==="train";stimulusQueue\.length=0/s,"modal takeover must preserve only an already active no-text train cue");
-assert.match(game,/BACKGROUND:\.28/,"sound effects and music must share the normalized background multiplier");
+assert.match(game,/BACKGROUND:\.22/,"sound effects and music must share the normalized background multiplier");
 assert.match(game,/function applyAudioDucking\(\).*musicDucked\|\|audioTextActive\(\).*soundEffectBus/s,"audio text must duck both background music and the sound-effect bus");
 assert.doesNotMatch(game,/nextTrainAnnouncement/,"recorded train announcements must not create or display generated announcement text");
 assert.match(diagnostic,/carOffsets=\[780,520,260,0,-260,-520,-780\]/,"the direct 3D diagnostic must mirror the full-length seven-car articulation contract");

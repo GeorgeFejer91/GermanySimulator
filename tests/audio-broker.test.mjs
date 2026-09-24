@@ -65,10 +65,30 @@ const variants=["a","b","c","d"],firstCycle=Array.from({length:variants.length},
 assert.equal(new Set(firstCycle).size,variants.length,"a shuffled bag must exhaust every variant before reshuffling");
 assert.notEqual(boundary,firstCycle.at(-1),"a shuffled bag must prevent repeats across bag boundaries");
 
-assert.match(game,/AUDIO_MIX=Object\.freeze\(\{FOREGROUND:1,BACKGROUND:\.28,ATTACK_SECONDS:\.12,RELEASE_SECONDS:\.4,REQUIRED_GAP_MS:250,AMBIENT_GAP_MS:2500,AMBIENT_TTL_MS:4000\}\)/);
+assert.match(game,/AUDIO_MIX=Object\.freeze\(\{FOREGROUND:1,BACKGROUND:\.22,ATTACK_SECONDS:\.12,RELEASE_SECONDS:\.4,REQUIRED_GAP_MS:250,AMBIENT_GAP_MS:2500,AMBIENT_TTL_MS:4000\}\)/);
 assert.match(game,/STIMULUS_PRIORITY=Object\.freeze\(\{AMBIENT:1,REACTIVE:2,FEATURED:3,NEARBY:4,CRITICAL:5\}\)/);
 assert.match(game,/source\.connect\(gain\)\.connect\(foregroundOutput\(\)\)/,"recorded foreground audio must use the shared bus");
+assert.match(game,/masterBus\.connect\(limiter\)\.connect\(a\.destination\)/,"Web Audio buses must pass through the shared output limiter");
 assert.doesNotMatch(sourceOf("playRecordedStimulus"),/audio\.destination/,"recorded foreground sources must never connect directly to the destination");
 assert.doesNotMatch(sourceOf("requestTrainAnnouncement"),/gain|volume/,"train distance must affect eligibility, not accepted playback gain");
+
+let scheduled=0;
+const completion=vm.createContext({performance:{now:()=>1000},clearTimeout:()=>{},setTimeout:()=>{scheduled++;return 1},clearSubtitle:()=>{},AUDIO_MIX:{AMBIENT_GAP_MS:2500,REQUIRED_GAP_MS:250}});
+vm.runInContext(`
+ let activeStimulus=null,stimulusGeneration=0,recordedSpeechSource=null,recordedSpeechGain=null,stimulusTimer=null,nextAmbientAt=0;
+ const stimulusQueue=[];
+ ${sourceOf("finishStimulus")}
+ globalThis.finishWithReplacement=()=>{
+  const replacement={family:"next"},old={done:()=>{stimulusGeneration++;activeStimulus=replacement}};
+  activeStimulus=old;finishStimulus(old,0);return activeStimulus===replacement;
+ };
+`,completion);
+assert.equal(completion.finishWithReplacement(),true,"a completion callback must not clear the replacement speech cue");
+assert.equal(scheduled,0,"a superseded completion must not schedule a second broker pump");
+
+const answerOrder=[];
+const quiz=vm.createContext({document:{getElementById:()=>({hidden:false})},uiTone:()=>{},addGermanness:()=>answerOrder.push("score"),showWorldBark:()=>answerOrder.push("sting"),STIMULUS_PRIORITY:{CRITICAL:5}});
+vm.runInContext(`const state={quizQuestion:{answer:1,source:"1"},quizCopy:{choices:["wrong","right"]},quizCharacter:{name:"Examiner",title:"Official"},quizVoiceToken:0};${sourceOf("answerCitizenshipQuiz")};answerCitizenshipQuiz(0)`,quiz);
+assert.deepEqual(answerOrder,["sting","score"],"the wrong-answer sting must precede score commentary");
 
 console.log("Normalized mixer and stimulus broker contracts OK");
