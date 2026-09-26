@@ -37,10 +37,10 @@ def material(name, color, metallic=.7, roughness=.47):
     return m
 
 
-BRONZE = material("Warm weathered bronze", (.20, .174, .118), .55, .63)
-COAT = material("Bronze with green patina", (.156, .17, .126), .55, .65)
-HAIR = material("Combed bronze hair", (.188, .167, .113), .62, .60)
-RECESS = material("Oxidized bronze recesses", (.071, .084, .066), .56, .61)
+BRONZE = material("Warm weathered bronze", (.115, .076, .039), .78, .49)
+COAT = material("Bronze with green patina", (.076, .091, .068), .72, .60)
+HAIR = material("Combed bronze hair", (.095, .066, .036), .76, .54)
+RECESS = material("Oxidized bronze recesses", (.025, .020, .013), .58, .76)
 
 
 def collect(o, name, mat):
@@ -196,9 +196,16 @@ body=tailored_loft("Tailored torso and sloping trapezius",BODY_ROWS,COAT)
 sub=body.modifiers.new("Cloth continuity", "SUBSURF");sub.levels=1
 bpy.context.view_layer.objects.active=body;bpy.ops.object.modifier_apply(modifier=sub.name)
 neck=loft("Human neck tapering beneath rear jaw",[(4.82,0,.06,.220,.207),(4.95,0,.04,.197,.195),
-    (5.06,0,.035,.177,.190),(5.17,0,.027,.156,.172),(5.27,0,.065,.137,.151)],BRONZE)
+    (5.06,0,.035,.177,.190),(5.17,0,.043,.156,.172),(5.27,0,.075,.148,.164),
+    (5.38,0,.095,.133,.146),(5.44,0,.09,.118,.130)],BRONZE)
 sub=neck.modifiers.new("Soft anatomical neck transition","SUBSURF");sub.levels=1
 bpy.context.view_layer.objects.active=neck;bpy.ops.object.modifier_apply(modifier=sub.name)
+for v in neck.data.vertices:
+    x,y,z=v.co
+    # Broad sternomastoid planes merge into the nape and disappear in the shirt.
+    line=.055+.24*(z-5.0)
+    front_weight=max(0,min(1,(-y+.01)/.12))
+    v.co.y-=.007*math.exp(-((abs(x)-line)/.029)**2)*front_weight
 # Open front, low nape band: the shirt follows the neck below the chin, rather
 # than forming a solid cylindrical tower or a cap across the skin.
 collar_verts=[];collar_faces=[];collar_segments=44
@@ -404,6 +411,9 @@ def crease(points,amount,width,roll=0):
     depth[:]+=fade*(amount*np.exp(-(distance/width)**2)-roll*np.exp(-((signed-width*2)/(width*1.6))**2))
 for side in [-1,1]:
     mound(side*.137,5.663,.070,.025,-.0045)
+    mound(side*.132,5.632,.070,.030,.007)
+    mound(side*.132,5.691,.075,.027,-.004)
+    mound(side*.231,5.731,.049,.055,.004)
     mound(side*.140,5.589,.065,.021,-.0035)
     mound(side*.208,5.516,.055,.055,-.003)
     mound(side*.219,5.388,.054,.069,-.004)
@@ -419,6 +429,10 @@ for j,height in enumerate([5.743,5.771,5.801]):
 crease([(-.086,5.282),(-.032,5.272),(.033,5.273),(.079,5.284)],.0024,.003,.0008)
 # Fine, irregular cast surface rather than the optically smooth plastic finish.
 grain=(np.sin(x*937+np.sin(z*87))*np.sin(z*883+y*337)+.4*np.sin(x*1673-z*1381))*.00010
+# Shallow modelling-tool facets break the smooth cheek and temple surfaces;
+# the central nose, lips and eyelid rims retain their fitted anatomical shape.
+tooling=(np.sin(x*117+np.sin(z*41))*np.sin(z*139+y*63)+.3*np.sin(x*223-z*181))*.00055
+tooling*=1-np.exp(-(x/.14)**4)
 
 # Sample the licensed neutral portrait onto the fitted face. Local contrast
 # supplies very shallow relief and restrained bronze patina. Broad lighting is
@@ -445,11 +459,13 @@ def sample(field):
 lum=sample(gray);local=sample(blur(gray,5));illumination=sample(blur(gray,32))
 relief=np.clip(lum-local,-.16,.16)*.002
 photo_mask=front*np.clip((z-5.18)/.04,0,1)*np.clip((5.845-z)/.025,0,1)
-coords[:,1]+=(depth+grain)*front-relief*photo_mask
+coords[:,1]+=(depth+grain+tooling)*front-relief*photo_mask
 coords[:,0]+=np.sign(x)*.002*np.exp(-((np.abs(x)-.232)/.046)**2-((z-5.364)/.078)**2)*front
 head.data.vertices.foreach_set("co",coords.ravel());head.data.update()
 tone=np.clip(1+.13*(lum/np.maximum(illumination,.04)-1)+.12*(lum-local),.82,1.08)
 tone=1+(tone-1)*photo_mask
+socket=np.exp(-((np.abs(x)-.132)/.074)**4-((z-5.637)/.034)**2)*front
+tone*=1-.26*socket
 colors=np.ones((len(coords),4));colors[:,:3]=tone[:,None]*np.array(BRONZE.diffuse_color[:3])
 patina=head.data.color_attributes.new(name="Cast patina",type="FLOAT_COLOR",domain="POINT")
 patina.data.foreach_set("color",colors.ravel())
@@ -473,7 +489,7 @@ while remaining:
 bm.free()
 assert len(eye_boundaries)==2,"Both eyelid openings must be sealed by the cast eyes"
 for points in eye_boundaries:
-    center=sum(points,Vector())/len(points);center.y-=.011
+    center=sum(points,Vector())/len(points);center.y-=.007
     # Keep a quiet, slightly upward gaze, with a life-sized iris partly under
     # the upper lid. The pupil is a shallow cast indentation, not a dark bead.
     iris_x=center.x;iris_z=center.z+.0025
@@ -484,14 +500,14 @@ for points in eye_boundaries:
             x=center.x+(p.x-center.x)*r;z=center.z+(p.z-center.z)*r
             y=center.y+(p.y-center.y)*r*r
             radius=math.hypot(x-iris_x,z-iris_z)
-            carve=.0013*math.exp(-((radius-.025)/.0015)**2)+.0022*math.exp(-(radius/.008)**4)
+            carve=.0010*math.exp(-((radius-.022)/.0018)**2)+.0028*math.exp(-(radius/.007)**4)
             y+=carve*min(1,(1-r)*10)
             verts.append((x,y,z))
     for j in range(rings-1):
         for i in range(n):
             a=j*n+i;b=j*n+(i+1)%n;faces.append((a,b,b+n,a+n))
     faces.append(tuple(reversed(range(n))))
-    eye=mesh("Eyelid fitted continuous cast eye",verts,faces,BRONZE)
+    eye=mesh("Eyelid fitted continuous cast eye",verts,faces,RECESS)
     bm=bmesh.new();bm.from_mesh(eye.data);bmesh.ops.recalc_face_normals(bm,faces=bm.faces);bm.to_mesh(eye.data);bm.free()
 
 # CC0 anatomical ear patch from MakeHuman's artist-authored base mesh. Only
@@ -548,8 +564,8 @@ boundary=[(-math.pi,Vector((-.307,.015,5.58)))]
 for i in forehead:
     p=pv[i].copy();p.z-=.008+.010*math.exp(-((p.x+.18)/.05)**2)
     boundary.append((math.atan2((p.y-.02)/.33,p.x/.31),p))
-boundary.extend([(0,Vector((.309,.015,5.58))),(math.pi*.25,Vector((.25,.235,5.51))),
-                 (math.pi*.5,Vector((0,.345,5.505))),(math.pi*.75,Vector((-.25,.235,5.51))),
+boundary.extend([(0,Vector((.309,.015,5.58))),(math.pi*.25,Vector((.245,.225,5.48))),
+                 (math.pi*.5,Vector((0,.310,5.345))),(math.pi*.75,Vector((-.245,.225,5.48))),
                  (math.pi,Vector((-.307,.015,5.58)))])
 boundary.sort(key=lambda x:x[0])
 
@@ -577,15 +593,20 @@ for j in range(hl):
             part_x=-.175+.21*(y+.26)
             big_side=x>part_x
             flow=x-(.27 if big_side else -.16)*(y+.27)-(.073 if big_side else -.045)*math.sin((y+.27)*6)
-            phase=flow*245+.35*math.sin(flow*52)+.20*math.sin(y*14)
-            lock=.0035*(.5+.5*math.cos(phase))**1.8
-            strand=.00065*math.cos(phase*2.07+.25*math.sin(flow*71))
+            phase=flow*151+.9*math.sin(flow*23)+.65*math.sin(y*9+x*12)
+            lock=.0048*(.5+.5*math.cos(phase))**2.1
+            lock+=.0020*(.5+.5*math.cos(flow*63+.7*math.sin(y*8)))
+            strand=.00055*math.cos(phase*3.13+.4*math.sin(flow*67))
+            rear=max(0,min(1,(y-.04)/.18))
+            rear_phase=math.atan2(x,max(.01,y-.02))*45+1.8*math.sin(z*7+x*3)
+            lock=lock*(1-rear)+rear*.0030*(.5+.5*math.cos(rear_phase))**2
+            strand=strand*(1-rear)+rear*.0005*math.cos(rear_phase*3.1)
             wave=.071*math.exp(-((x+.015)/.21)**2-((y+.17)/.24)**2)
             wave+=.023*math.exp(-((x+.25)/.063)**2-((y+.12)/.19)**2)
             part=.008*math.exp(-((x-part_x)/.007)**2)
             feather=min(1,max(0,(1-r)/.12));feather=feather*feather*(3-2*feather)
             volume=(1-r*r)**1.15
-            lift=-.0004+wave*volume*1.4+feather*(.003+lock+strand-part)
+            lift=-.0004+wave*volume*1.4+feather*(.003+lock+strand-part+rear*.0035)
             x,y,z=hit+normal*lift
         verts.append((x,y,z))
 for j in range(hl-1):
@@ -685,6 +706,7 @@ def shot(name, position, target, scale, width=1000,height=1200):
 shot("portrait-three-quarter",(7,-12,5.60),(0,0,5.57),1.36,1100,1100)
 shot("portrait-front",(0,-12,5.57),(0,0,5.57),1.30,1100,1100)
 shot("portrait-profile",(12,0,5.58),(0,0,5.57),1.42,1100,1100)
+shot("portrait-rear-three-quarter",(8,12,5.60),(0,0,5.57),1.42,1100,1100)
 shot("full-three-quarter",(8,-17,8),(0,0,3.03),7.2)
 cam.location=(8,-17,8);cam.rotation_euler=(Vector((0,0,3.03))-cam.location).to_track_quat("-Z","Y").to_euler();data.ortho_scale=7.2
 scene.render.resolution_x=1000;scene.render.resolution_y=1200

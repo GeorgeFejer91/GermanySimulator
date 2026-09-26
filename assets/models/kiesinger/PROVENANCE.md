@@ -1,7 +1,7 @@
 # Kurt Georg Kiesinger — Blender statue and portrait fit
 
 Authored in Blender 5.2.1 LTS through `tools/sculpt-kiesinger.py`,
-2026-09-26. The body, civilian suit, standing pose, bent arm, folded dossier,
+2026-09-27. The body, civilian suit, standing pose, bent arm, folded dossier,
 hair, and rear cranium are project-authored geometry. The ears adapt the
 CC0 MakeHuman anatomical mesh described below. The face uses
 estimated landmarks from the credited archival photographs and reused
@@ -18,7 +18,7 @@ or animation are included in the figure.
   The studio plinth and lighting are excluded from the GLB.
 - `kiesinger-statue.glb`: glTF 2.0, four shared bronze materials/four draw
   calls, no textures, no skeleton or animation, no decoder extension or
-  external file requirement. 83,296 triangles, 1,885,624 bytes.
+  external file requirement. 83,645 triangles, 1,865,840 bytes.
 - `portrait-landmarks.json`: offline authoring data containing the 468 fitted
   face vertices, neutral-photo projection coordinates, reused polygon indices, source-photo hashes,
   MediaPipe version, and canonical source hash. The browser never loads it.
@@ -59,6 +59,13 @@ with a rolled helix, branching antihelix, concha, tragus and soft lobule.
 The anterior attachment enters the head; the inner folds and lobe are not
 separate cylinders or spheres.
 
+The artistic finish uses warm metallic bronze, restrained green patina on
+the suit, and darker rough bronze for the visible eyes. Slightly recessed
+orbital planes, the brow mass and a soft vertex-patina gradient deepen the
+eye shadows while preserving the fitted lid openings. Shallow modelling-tool
+facets on the cheeks and temples give the cast surface visible workmanship.
+The neck continues inside the jaw and nape with broad sternomastoid planes.
+
 ### Ear anatomy
 
 The ear control topology and starting shape come from the MakeHuman team's
@@ -88,7 +95,9 @@ Original OBJ SHA-256:
 ### Hair and body
 
 Hair has a side part, asymmetric crown volume, curved locks, and tapered roots
-that meet the scalp. Its winding faces outward; the source retains the dense
+that meet the scalp. Broader irregular locks sweep back from the forehead;
+the rear hair extends toward the nape with descending strands. Its winding
+faces outward; the source retains the dense
 surface and the GLB retains the visible sculpt detail within the existing
 geometry budget. The rest of the head/body is constructed and simplified for
 export. These are estimated proportions rather than measured anatomy.
@@ -215,10 +224,10 @@ node tests/kiesinger-model.test.mjs
 The Blender script creates studio renders under ignored
 `output/kiesinger-sculpt/`. Update these hashes after an intentional rebuild;
 the asset test checks actual vertex bounds, indices, runtime budgets, and the
-GLB hash. Review the front, three-quarter, and profile portraits, the complete
+GLB hash. Review the front, three-quarter, profile and rear portraits, the complete
 body render, and the real desktop/mobile game views.
 
 SHA-256:
 
-- GLB: `a9d2811f8998227ce74125764f8e04c2db00f81176091377347441335a2727d7`
-- Blender: `7d7eae0f74d8d4212a5ff46794ac5665b8b5419bcfc8be48b7cddd2a436de53e`
+- GLB: `4ed52078f109c609a514d94c7bfa23d66f8cef5f9cd7015b80ae71c54f94d207`
+- Blender: `c628d59eaba48f7e9e8dee497de4e29ef2beaf37e01f9a18cfb9aa5ef0f4c9c9`
