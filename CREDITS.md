@@ -23,11 +23,16 @@ The compact Reichstagsgebäude/Bundestag landmark is an original, texture-free p
 
 ## Kiesinger monument
 
-The monumental bronze figure of Kurt Georg Kiesinger is an original,
-stylized Blender sculpture. Archival portraits from KAS/ACDP, Anefo/Nationaal
-Archief, and the Bundesarchiv guided its face, hair, and civilian suit. No
-photograph pixels or third-party mesh are included. The editable Blender
-source, GLB contract, reference attributions, and checksums are recorded in
+The monumental bronze figure of Kurt Georg Kiesinger was authored in Blender
+with an original civilian body and pose. Its face fits offline landmarks from
+CDU / KAS-ACDP's 1967 portrait (CC BY-SA 3.0 DE), Anefo / Nationaal Archief
+919-8404 (CC0), and the ThePhotoEnhancer crop of Anefo 919-8423 (CC BY-SA 4.0).
+MediaPipe's canonical face connectivity and alignment reference are reused
+under Apache 2.0; the adjacent `LICENSE-MEDIAPIPE.txt` retains that license.
+The authored model adaptation is [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/).
+No photograph pixels, textures, or ML runtime are bundled. HDG and Bundesarchiv
+portraits were visual inspection references only. Full source links,
+attributions, modifications, rebuild instructions, and checksums are in
 `assets/models/kiesinger/PROVENANCE.md`.
 
 ## Civilian traffic

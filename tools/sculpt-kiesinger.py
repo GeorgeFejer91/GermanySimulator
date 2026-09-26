@@ -1,4 +1,4 @@
-"""Original Kiesinger bronze sculpture, authored in Blender; no imported mesh.
+"""Photo-referenced Kiesinger bronze sculpture, authored in Blender.
 
 Run: blender --background --python tools/sculpt-kiesinger.py
 The editable sculpt stays in the .blend; a decimated, material-joined GLB is
@@ -6,8 +6,11 @@ exported with shoe-level origin, six-unit height, Y up, and front toward +Z.
 """
 from pathlib import Path
 import math
+import json
+import bmesh
 import bpy
 from mathutils import Vector
+from mathutils.bvhtree import BVHTree
 
 ROOT = Path(__file__).resolve().parents[1]
 DEST = ROOT / "assets/models/kiesinger"
@@ -152,193 +155,320 @@ def patch(name, points, mat, thickness=.012):
 
 # A quiet contrapposto: right foot forward, left hand carrying a folded dossier,
 # right hand bent at the jacket button. The pose is original, not photo-traced.
-for side, x, y in [("L", -.29, .025), ("R", .29, -.10)]:
-    shoe = ell(side+" polished Oxford shoe", (x,y-.13,.145), (.24,.43,.145), COAT)
-    tube(side+" welt", [(x-.18,y-.34,.075),(x,y-.51,.075),(x+.18,y-.34,.075)],.017,RECESS)
-    leg = loft(side+" tailored trouser", [(.22,x,y,.185,.23),(.50,x,y,.20,.225),
-        (1.12,x-.025,y+.045,.23,.215),(1.6,x-.01,y+.015,.22,.235),
-        (2.14,x*.9,.02,.27,.29),(2.66,x*.75,.02,.285,.31),(2.85,x*.7,.02,.25,.27)],COAT)
-    mod=leg.modifiers.new("Tailoring", "SUBSURF");mod.levels=2
-    bpy.context.view_layer.objects.active=leg;bpy.ops.object.modifier_apply(modifier=mod.name)
-    tube(side+" pressed front crease",[(x,y-.21,.35),(x-.012,y-.213,1.15),(x*.87,-.257,2.33)],.009,BRONZE)
-
-body = loft("Single breasted suit sculpt",[(2.57,0,.03,.49,.29),(2.70,0,.03,.54,.32),
-    (3.07,-.015,.025,.51,.31),(3.42,-.025,.035,.47,.28),
-    (3.82,-.035,.035,.53,.325),(4.18,-.04,.05,.64,.335),
-    (4.42,-.025,.065,.66,.31),(4.58,0,.07,.52,.255),
-    (4.68,0,.065,.23,.21)],COAT)
-sub=body.modifiers.new("Sculpted suit silhouette", "SUBSURF");sub.levels=2
-bpy.context.view_layer.objects.active=body;bpy.ops.object.modifier_apply(modifier=sub.name)
-neck=ell("Neck",(0,.065,4.78),(.212,.21,.235))
-
-patch("Shirt front",[(-.23,-.186,4.66),(.23,-.186,4.66),(.26,-.29,4.32),(.04,-.326,3.7),(-.27,-.27,4.28)],HAIR)
-patch("Left notched lapel",[(-.21,-.225,4.65),(-.56,-.22,4.46),(-.43,-.29,4.26),(-.49,-.298,4.22),(-.04,-.344,3.55),(-.16,-.32,4.16)],COAT)
-patch("Right notched lapel",[(.19,-.22,4.65),(.51,-.23,4.46),(.39,-.306,4.27),(.46,-.305,4.23),(-.04,-.344,3.55),(.13,-.322,4.16)],COAT)
-patch("Left shirt collar",[(-.19,-.228,4.7),(-.02,-.253,4.58),(-.15,-.309,4.36),(-.26,-.238,4.58)],HAIR)
-patch("Right shirt collar",[(.19,-.228,4.7),(.02,-.253,4.58),(.14,-.309,4.36),(.25,-.238,4.58)],HAIR)
-ell("Tie knot",(0,-.295,4.51),(.065,.04,.085),RECESS)
-patch("Narrow 1960s necktie",[(-.04,-.316,4.45),(.047,-.316,4.45),(.071,-.35,3.96),(0,-.36,3.87),(-.055,-.35,3.97)],RECESS)
-for z in [3.53,3.25]:
-    ell("Suit button",(-.04,-.307,z),(.038,.021,.038),BRONZE,20,12)
-tube("Jacket opening",[(-.04,-.307,3.56),(-.07,-.303,3.16),(-.17,-.287,2.63)],.01,RECESS)
-for x in [-.365,.35]:
-    tube("Slanted welt pocket",[(x-.105,-.266,3.10),(x+.115,-.266,3.13)],.019,BRONZE)
-tube("Breast pocket welt",[(.25,-.306,4.16),(.45,-.266,4.19)],.015,BRONZE)
-patch("Folded pocket square",[(.29,-.302,4.18),(.315,-.307,4.27),(.355,-.295,4.23),(.39,-.288,4.28),(.43,-.277,4.19)],HAIR)
-
-# Sleeves join the torso as one cast, smoothly draped garment.
-suit_parts=[body]
-for side, points in [("L",[(-.59,.025,4.37),(-.76,-.01,3.88),(-.82,-.09,3.36),(-.80,-.16,2.96)]),
-                     ("R",[(.60,.04,4.36),(.83,-.01,3.86),(.75,-.30,3.48),(.34,-.53,3.71)])]:
-    data=bpy.data.curves.new(side+" draped sleeve", "CURVE")
-    data.dimensions="3D";data.resolution_u=20;data.bevel_depth=.235;data.bevel_resolution=6;data.use_fill_caps=True
-    spline=data.splines.new("BEZIER");spline.bezier_points.add(len(points)-1)
-    for bp,pt,r in zip(spline.bezier_points,points,[1.08,.95,.84,.74]):
-        bp.co=pt;bp.radius=r;bp.handle_left_type=bp.handle_right_type="AUTO"
-    sleeve=bpy.data.objects.new(side+" uninterrupted sleeve",data);sculpt.objects.link(sleeve);data.materials.append(COAT)
-    bpy.ops.object.select_all(action="DESELECT");sleeve.select_set(True);bpy.context.view_layer.objects.active=sleeve;bpy.ops.object.convert(target="MESH");smooth(sleeve)
-    suit_parts.extend([sleeve,ell(side+" shoulder cap",points[0],(.252,.239,.245),COAT)])
-    end=Vector(points[-1])
-    direction=(end-Vector(points[-2])).normalized()
-    cuff=ell(side+" shirt cuff",end+direction*.02,(.168,.171,.045),HAIR)
-    cuff.rotation_euler=direction.to_track_quat("Z","Y").to_euler()
-fuse(suit_parts,"Continuous cast suit and sleeves",.018,COAT)
-
-# Relaxed articulated hands with visible fingers, sized to the figure.
-left=[ell("Left palm",(-.79,-.17,2.79),(.145,.105,.21))]
-for i in range(4):
-    x=-.90+i*.065
-    left.append(tube("Left finger",[(x,-.18,2.75),(x,-.235,2.57),(x+.018,-.30,2.56)],.041,BRONZE))
-left.append(tube("Left thumb",[(-.66,-.18,2.85),(-.63,-.27,2.73),(-.69,-.31,2.66)],.052,BRONZE))
-fuse(left,"Left hand sculpt",.013,BRONZE)
-right=[ell("Right palm",(.22,-.56,3.75),(.19,.09,.115))]
-for i in range(4):
-    z=3.81-i*.053
-    right.append(tube("Right finger",[(.19,-.566,z),(.03,-.57,z+.017),(-.015,-.51,z+.03)],.029,BRONZE))
-right.append(tube("Right thumb",[(.25,-.56,3.66),(.11,-.62,3.64),(.04,-.60,3.70)],.042,BRONZE))
-fuse(right,"Right hand at jacket sculpt",.010,BRONZE)
-patch("Folded statesman's dossier",[(-.73,-.235,2.78),(-.39,-.235,2.63),(-.50,-.235,2.09),(-.86,-.235,2.20)],COAT,.08)
-for d in [0,.027,.054]:
-    tube("Document leaf edge",[(-.85,-.282+d,2.21),(-.50,-.282+d,2.1),(-.397,-.282+d,2.62)],.007,HAIR,1)
-
-# Portrait head: a single continuous surface, shaped with broad anatomical
-# displacements. The face is sculpted into the skin, not assembled as beads.
-head_start=set(sculpt.objects)
-rows=[(4.96,.085,.024,.095),(5.005,.19,.012,.184),(5.08,.261,.012,.224),
-      (5.20,.310,.031,.251),(5.33,.347,.04,.262),(5.46,.349,.032,.271),
-      (5.59,.350,.035,.265),(5.72,.352,.046,.274),(5.84,.322,.062,.257),
-      (5.94,.231,.071,.19),(5.985,.10,.07,.085),(6.00,.002,.07,.004)]
-
-
-def profile(z):
+# Six-unit figure: crotch 2.85, sloping shoulders 4.90, collar 5.18. With the
+# portrait's 0.86-unit head this is a seven-head adult, rather than a toy body.
+def tailored_loft(name, rows, mat, crease=False):
+    sides=40;verts=[];faces=[];power=.78
+    for z,x,y,rx,ry in rows:
+        for i in range(sides):
+            a=i*2*math.pi/sides;c=math.cos(a);s=math.sin(a)
+            yy=y+ry*math.copysign(abs(s)**power,s)
+            if crease and s<0:yy-=.009*math.exp(-((a-1.5*math.pi)/.09)**2)
+            verts.append((x+rx*math.copysign(abs(c)**power,c),yy,z))
     for j in range(len(rows)-1):
-        if rows[j][0]<=z<=rows[j+1][0]:
-            t=(z-rows[j][0])/(rows[j+1][0]-rows[j][0])
-            vals=[]
-            for k in range(1,4):
-                p0=rows[max(0,j-1)][k];p1=rows[j][k];p2=rows[j+1][k];p3=rows[min(len(rows)-1,j+2)][k]
-                vals.append(.5*((2*p1)+(-p0+p2)*t+(2*p0-5*p1+4*p2-p3)*t*t+(-p0+3*p1-3*p2+p3)*t*t*t))
-            return vals
-    return rows[-1][1:]
+        for i in range(sides):
+            a=j*sides+i;b=j*sides+(i+1)%sides;faces.append((a,b,b+sides,a+sides))
+    faces.extend([tuple(reversed(range(sides))),tuple((len(rows)-1)*sides+i for i in range(sides))])
+    return mesh(name,verts,faces,mat)
 
 
-def gauss(x,z,cx,cz,wx,wz):
-    return math.exp(-((x-cx)/wx)**2-((z-cz)/wz)**2)
+for side,x,y in [("L",-.29,.035),("R",.29,-.10)]:
+    tailored_loft(side+" flat Oxford sole",[(0,x,y-.105,.205,.405),(.045,x,y-.105,.205,.405),(.063,x,y-.105,.198,.402)],RECESS)
+    tailored_loft(side+" shaped Oxford upper",[(.06,x,y-.105,.195,.397),(.115,x,y-.11,.194,.386),
+        (.18,x,y-.07,.181,.345),(.24,x,y+.01,.162,.252),(.30,x,y+.05,.144,.177)],COAT)
+    for z,yy in [(.23,-.145),(.25,-.108),(.27,-.074)]:
+        tube(side+" Oxford lace",[(x-.06,y+yy,z),(x,y+yy-.01,z+.005),(x+.06,y+yy,z)],.004,COAT,1)
+    leg=tailored_loft(side+" draped straight trouser",[(.30,x,y+.025,.187,.218),(.35,x,y+.025,.188,.22),
+        (.58,x,y+.035,.194,.225),(1.0,x-.01,y+.045,.211,.229),(1.46,x-.022,y+.043,.205,.222),
+        (1.60,x-.025,y+.025,.214,.225),(1.89,x-.026,y+.012,.241,.266),
+        (2.25,x*.92,.04,.249,.27),(2.53,x*.86,.063,.243,.252),(2.68,x*.80,.070,.229,.233),
+        (2.84,x*.75,.070,.222,.217),(3.10,x*.72,.070,.231,.212)],COAT,True)
+    mod=leg.modifiers.new("Cloth continuity", "SUBSURF");mod.levels=1
+    bpy.context.view_layer.objects.active=leg;bpy.ops.object.modifier_apply(modifier=mod.name)
+
+BODY_ROWS=[(2.64,0,.045,.502,.302),(2.70,0,.045,.519,.316),(2.90,0,.05,.534,.329),
+    (3.20,-.014,.055,.524,.327),(3.58,-.018,.055,.506,.318),(3.93,-.022,.055,.549,.342),
+    (4.27,-.025,.055,.606,.351),(4.52,-.025,.065,.639,.337),(4.70,-.022,.075,.623,.305),
+    (4.82,-.012,.077,.505,.265),(4.93,0,.073,.326,.233),(5.025,0,.065,.243,.219)]
+body=tailored_loft("Tailored torso and sloping trapezius",BODY_ROWS,COAT)
+sub=body.modifiers.new("Cloth continuity", "SUBSURF");sub.levels=1
+bpy.context.view_layer.objects.active=body;bpy.ops.object.modifier_apply(modifier=sub.name)
+neck=loft("Human neck tapering beneath rear jaw",[(4.82,0,.06,.220,.207),(4.95,0,.04,.197,.195),
+    (5.06,0,.035,.177,.190),(5.17,0,.027,.156,.172),(5.27,0,.065,.137,.151)],BRONZE)
+sub=neck.modifiers.new("Soft anatomical neck transition","SUBSURF");sub.levels=1
+bpy.context.view_layer.objects.active=neck;bpy.ops.object.modifier_apply(modifier=sub.name)
+# Open front, low nape band: the shirt follows the neck below the chin, rather
+# than forming a solid cylindrical tower or a cap across the skin.
+collar_verts=[];collar_faces=[];collar_segments=44
+for z,rx,ry in [(4.985,.226,.203),(5.035,.223,.201),(5.11,.213,.191)]:
+    for i in range(collar_segments):
+        a=-math.pi/2+.56+(2*math.pi-1.12)*i/(collar_segments-1)
+        collar_verts.append((rx*math.cos(a),.050+ry*math.sin(a),z-.043*max(0,-math.sin(a))))
+for j in range(2):
+    for i in range(collar_segments-1):
+        a=j*collar_segments+i;collar_faces.append((a,a+1,a+1+collar_segments,a+collar_segments))
+collar=mesh("Low open fitted shirt collar",collar_verts,collar_faces,HAIR)
+solid=collar.modifiers.new("Thin folded collar fabric","SOLIDIFY");solid.thickness=.008;solid.offset=0
+bpy.context.view_layer.objects.active=collar;bpy.ops.object.modifier_apply(modifier=solid.name)
+collar["preserve_edges"]=True
 
 
-def face_y(x,z):
-    rx,cy,ry=profile(z)
-    rim=max(0,1-(x/max(.001,rx))**2)
-    y=cy-ry*rim**.39
-    # Recessed heavy-lidded eyes, sloping brows, broad cheek planes, and chin.
-    y+=.036*gauss(abs(x),z,.158,5.574,.095,.047)
-    y-=.024*gauss(abs(x),z,.168,5.632+(abs(x)-.12)*.20,.135,.024)
-    y-=.013*gauss(abs(x),z,.23,5.417,.145,.115)
-    y+=.010*gauss(abs(x),z,.264,5.279,.08,.077)
-    y-=.036*gauss(x,z,0,5.10,.205,.094)
-    y-=.021*gauss(x,z,0,5.264,.18,.078)
-    # Long straight bridge, rounded projecting tip, and shallow alar wings.
-    y-=.093*gauss(x,z,0,5.508,.049,.133)
-    y-=.195*gauss(x,z,0,5.382,.075,.051)
-    y-=.047*gauss(abs(x),z,.074,5.378,.029,.024)
-    # Lips and nasolabial furrows are embedded relief on the continuous face.
-    y-=.012*gauss(x,z,0,5.258,.117,.010)
-    y-=.012*gauss(x,z,0,5.226,.109,.012)
-    y+=.007*gauss(x,z,0,5.243,.132,.005)
-    curve=.105+(5.37-z)*.34
-    y+=.006*gauss(abs(x),z,curve,5.287,.008,.084)
-    for zz in [5.741,5.787]:
-        y+=.0028*gauss(x,z,0,zz+.014*(1-(x/.3)**2),.246,.0035)
-    return y
+def suit_front(x,z,lift=.012):
+    row=BODY_ROWS[-1]
+    for a,b in zip(BODY_ROWS,BODY_ROWS[1:]):
+        if a[0]<=z<=b[0]:
+            t=(z-a[0])/(b[0]-a[0]);row=[z]+[a[k]*(1-t)+b[k]*t for k in range(1,5)];break
+    _,cx,cy,rx,ry=row
+    return cy-ry*max(0,1-abs((x-cx)/rx)**(2/.78))**(.78/2)-lift
 
 
-verts=[];faces=[];sides=144;levels=132
-for j in range(levels):
-    z=rows[0][0]+(rows[-1][0]-rows[0][0])*j/(levels-1)
-    rx,cy,ry=profile(z)
-    for i in range(sides):
-        a=i*2*math.pi/sides;x=rx*math.cos(a)
-        y=face_y(x,z) if math.sin(a)<0 else cy+ry*math.sin(a)
-        verts.append((x,y,z))
-for j in range(levels-1):
-    for i in range(sides):
-        a=j*sides+i;b=j*sides+(i+1)%sides
-        faces.append((a,b,b+sides,a+sides))
-faces.extend([tuple(reversed(range(sides))),tuple((levels-1)*sides+i for i in range(sides))])
-head=mesh("Kiesinger continuous portrait sculpt",verts,faces,BRONZE)
-# Ears retain a hollow helix; the small eyes sit in the sculpted orbital recess.
+tailoring_items=[]
+
+
+def tailoring(name,outline,mat=COAT,lift=.008):
+    # Subdivide before contouring: lapels follow the chest instead of becoming
+    # flat triangular plaques, while retaining the notched tailored boundary.
+    o=mesh(name,[(x,suit_front(x,z,lift),z) for x,z in outline],[tuple(range(len(outline)))],mat)
+    sub=o.modifiers.new("Contoured tailoring grid","SUBSURF");sub.subdivision_type="SIMPLE";sub.levels=2
+    bpy.context.view_layer.objects.active=o;bpy.ops.object.modifier_apply(modifier=sub.name)
+    for v in o.data.vertices:v.co.y=suit_front(v.co.x,v.co.z,lift)
+    o["tailoring_surface"]=True;o["tailoring_lift"]=lift;o["preserve_edges"]=True
+    tailoring_items.append((o,lift))
+    return smooth(o)
+
+
+tailoring("Shirt visible within jacket V",[(-.21,5.025),(.21,5.025),(.14,4.45),(0,4.055),(-.13,4.45)],HAIR,.008)
+tailoring("Left narrow notched lapel",[(-.23,5.02),(-.414,4.90),(-.53,4.72),(-.415,4.676),
+    (-.448,4.608),(-.092,4.043),(-.053,4.107),(-.178,4.76)],COAT,.009)
+tailoring("Right narrow notched lapel",[(.23,5.02),(.404,4.90),(.513,4.72),(.398,4.674),
+    (.431,4.606),(-.062,4.043),(.005,4.145),(.172,4.76)],COAT,.009)
 for side in [-1,1]:
-    eyeX=side*.152
-    center_y=face_y(eyeX,5.573)
-    ell("Inset bronze eye",(eyeX,center_y+.020,5.573),(.084,.032,.025),BRONZE,32,16)
-    for name,sign in [("Upper lid",1),("Lower lid",-1)]:
-        pts=[]
-        for i in range(9):
-            t=i/8;xx=eyeX+(t-.5)*.178;zz=5.57+sign*.018*math.sin(math.pi*t)
-            yy=face_y(xx,zz)-.005
-            pts.append((xx,yy,zz))
-        tube(name,pts,.003,BRONZE,2)
-    ell("Shallow iris engraving",(eyeX,center_y-.0125,5.574),(.013,.0015,.013),RECESS,20,12)
-    # Brow direction follows the archival front portrait: inner ends low.
-    pts=[(side*x,face_y(side*x,z)-.006,z) for x,z in [(.065,5.621),(.14,5.641),(.235,5.673)]]
-    tube("Slanting brow relief",pts,.0035,BRONZE,2)
-    tube("Lower orbital fold",[(side*x,face_y(side*x,z)-.002,z) for x,z in [(.078,5.527),(.157,5.509),(.25,5.529)]],.002,BRONZE,2)
-    ear=ell("Ear shell",(side*.355,.029,5.44),(.065,.070,.134),BRONZE)
-    tube("Ear helix",[(side*.359,-.029,5.322),(side*.399,-.026,5.401),(side*.393,.008,5.545),(side*.351,.019,5.551)],.012,BRONZE,2)
-    ell("Ear concha",(side*.393,-.036,5.445),(.012,.006,.057),RECESS,20,12)
-    xx=side*.065;zz=5.366
-    ell("Nostril recess",(xx,face_y(xx,zz)-.002,zz),(.015,.005,.007),RECESS,20,12)
-# A narrow lip division supports the closed, unsmiling reference expression.
-pts=[(x,face_y(x,5.242)-.001,5.242) for x in [-.12,-.06,0,.06,.12]]
-tube("Quiet mouth line",pts,.0025,RECESS,1)
+    leaf=patch("Small soft turned shirt collar",[(side*.176,-.075,5.077),(side*.018,-.169,5.045),
+        (side*.048,-.187,4.999),(side*.098,-.196,4.919),(side*.124,-.184,4.913),
+        (side*.194,-.118,4.971),(side*.21,-.062,5.038)],HAIR,.005)
+    leaf["preserve_edges"]=True
+loft("Small tapered four-in-hand knot",[(4.939,0,-.195,.030,.021),(4.987,0,-.185,.052,.031),
+    (5.04,0,-.169,.044,.026)],RECESS,32)
+tailoring("Narrow hanging silk tie",[(-.039,4.96),(.041,4.96),(.063,4.27),(0,4.18),(-.061,4.27)],RECESS,.023)
+for z in [4.037,3.73]:ell("Suit button",(-.055,suit_front(-.055,z,.019),z),(.024,.013,.024),BRONZE,20,12)
+tube("Subtle jacket closure",[(-.055,suit_front(-.055,4.04,.007),4.04),(-.068,suit_front(-.068,3.42,.007),3.42),
+    (-.126,suit_front(-.126,2.68,.007),2.68)],.0035,RECESS,1)
+for x in [-.365,.34]:tailoring("Contoured lower pocket welt",[(x-.12,3.535),(x+.12,3.554),(x+.12,3.529),(x-.12,3.51)],COAT,.006)
+tailoring("Quiet breast pocket welt",[(.24,4.44),(.43,4.453),(.43,4.434),(.24,4.421)],COAT,.006)
+tailoring("Small folded pocket square",[(.269,4.443),(.287,4.492),(.324,4.471),(.359,4.498),(.4,4.452)],HAIR,.008)
 
-# Continuous hair shell with hundreds of carved directional flutes. Ridges
-# follow a swept-back flow around the side part; no image texture is shipped.
-verts=[];faces=[];hs=160;hl=64
+
+def sleeve_sections(name,points,sections,mat):
+    points=[Vector(p) for p in points];sections=list(sections);verts=[];faces=[];sides=28
+    if len(points)>2:
+        # Preserve the cuff endpoint when subdivision rounds the terminal cap.
+        direction=(points[-1]-points[-2]).normalized()
+        points.insert(-1,points[-1]-direction*.018);sections.insert(-1,sections[-1])
+    for j,(point,(width,depth)) in enumerate(zip(points,sections)):
+        tangent=(points[min(j+1,len(points)-1)]-points[max(0,j-1)]).normalized()
+        front=Vector((0,-1,0));front=(front-tangent*front.dot(tangent)).normalized();side=tangent.cross(front).normalized()
+        for i in range(sides):
+            a=i*2*math.pi/sides;verts.append(tuple(point+front*depth*math.cos(a)+side*width*math.sin(a)))
+    for j in range(len(points)-1):
+        for i in range(sides):
+            a=j*sides+i;b=j*sides+(i+1)%sides;faces.append((a,b,b+sides,a+sides))
+    faces.extend([tuple(reversed(range(sides))),tuple((len(points)-1)*sides+i for i in range(sides))])
+    o=mesh(name,verts,faces,mat)
+    if len(points)>2:
+        sub=o.modifiers.new("Draped sleeve continuity","SUBSURF");sub.levels=1
+        bpy.context.view_layer.objects.active=o;bpy.ops.object.modifier_apply(modifier=sub.name)
+    return o
+
+
+suit_parts=[body]
+for side,points in [("L",[(-.45,.05,4.69),(-.63,.045,4.48),(-.755,.022,4.18),(-.80,.012,3.96),
+                          (-.82,-.028,3.83),(-.85,-.09,3.49),(-.84,-.17,3.15)]),
+                    ("R",[(.45,.05,4.70),(.64,.045,4.47),(.785,.035,4.14),(.82,.012,3.985),
+                          (.78,-.12,3.99),(.64,-.29,4.06),(.43,-.46,4.18)])]:
+    radii=[(.223,.232),(.214,.227),(.202,.218),(.196,.206),(.189,.201),(.176,.186),(.145,.158)]
+    suit_parts.append(sleeve_sections(side+" shoulder elbow and forearm",points,radii,COAT))
+    end=Vector(points[-1]);direction=(end-Vector(points[-2])).normalized()
+    sleeve_sections(side+" thin continuous shirt cuff",[end-direction*.04,end+direction*.063],[(.132,.143),(.13,.14)],HAIR)
+suit_cast=fuse(suit_parts,"Continuous tailored suit and anatomical sleeves",.018,COAT)
+for piece,lift in tailoring_items:
+    for v in piece.data.vertices:
+        hit,location,normal,_=suit_cast.closest_point_on_mesh(v.co)
+        if hit:v.co=location+normal*lift
+    piece.data.update()
+    solid=piece.modifiers.new("Thin cast cloth edge","SOLIDIFY");solid.thickness=.006;solid.offset=0
+    bpy.context.view_layer.objects.active=piece;bpy.ops.object.modifier_apply(modifier=solid.name)
+
+# Palms, four separately articulated fingers, and one opposable thumb per hand.
+# Fingertips reach mid-thigh / the jacket, with a full adult hand-to-head ratio.
+def palm_volume(name,rows,along_x=False):
+    verts=[];faces=[];sides=32;power=.62
+    for axis,c1,c2,r1,r2 in rows:
+        for i in range(sides):
+            a=i*2*math.pi/sides;c=math.cos(a);s=math.sin(a)
+            u=c1+r1*math.copysign(abs(c)**power,c);v=c2+r2*math.copysign(abs(s)**power,s)
+            verts.append((axis,u,v) if along_x else (u,v,axis))
+    for j in range(len(rows)-1):
+        for i in range(sides):
+            a=j*sides+i;b=j*sides+(i+1)%sides;faces.append((a,b,b+sides,a+sides))
+    faces.extend([tuple(reversed(range(sides))),tuple((len(rows)-1)*sides+i for i in range(sides))])
+    o=mesh(name,verts,faces,BRONZE)
+    sub=o.modifiers.new("Continuous broad palm and wrist","SUBSURF");sub.levels=1
+    bpy.context.view_layer.objects.active=o;bpy.ops.object.modifier_apply(modifier=sub.name)
+    return o
+
+
+palm_volume("Left broad flat palm flowing into wrist",[(2.812,-.846,-.194,.130,.058),(2.84,-.846,-.194,.130,.058),
+    (2.94,-.845,-.192,.123,.063),(3.02,-.843,-.188,.107,.072),(3.09,-.84,-.18,.095,.080),
+    (3.145,-.84,-.176,.09,.082)])
+# Keep the closed digit volumes separate at their roots: whole-hand voxel
+# remeshing bridges the inter-finger spaces and turns the cast into a mitten.
+for i,length in enumerate([.23,.278,.292,.255]):
+    x=-.95+i*.071;start=2.855
+    sleeve_sections("Left relaxed anatomical finger",[(x,-.228,start),(x,-.257,start-length*.58),
+        (x+.012,-.265,start-length)],[(.030,.027),(.028,.026),(.024,.022)],BRONZE)
+sleeve_sections("Left opposable anatomical thumb",[(-.740,-.219,3.015),(-.696,-.272,2.907),(-.758,-.314,2.847)],
+    [(.038,.035),(.034,.031),(.026,.024)],BRONZE)
+palm_volume("Right broad flat palm flowing into wrist",[(.062,-.513,4.225,.043,.120),(.090,-.513,4.225,.047,.127),
+    (.21,-.509,4.233,.049,.126),(.30,-.512,4.222,.060,.112),(.385,-.499,4.20,.073,.092),
+    (.45,-.448,4.175,.080,.086)],True)
+for i,length in enumerate([.213,.239,.223,.177]):
+    z=4.318-i*.062;start=.107
+    sleeve_sections("Right relaxed anatomical finger",[(start,-.532,z),(start-length*.60,-.445,z-.012),
+        (start-length,suit_front(start-length,z-.035,.014),z-.035)],[(.027,.025),(.026,.024),(.021,.019)],BRONZE)
+sleeve_sections("Right opposable anatomical thumb",[(.269,-.542,4.115),(.15,-.577,4.075),(.077,-.474,4.133)],
+    [(.035,.031),(.032,.029),(.026,.023)],BRONZE)
+patch("Thin folded statesman's dossier",[(-.755,-.293,2.821),(-.404,-.293,2.691),
+    (-.479,-.293,2.171),(-.824,-.293,2.276)],COAT,.025)
+for d in [0,.011,.022]:tube("Subtle dossier paper edge",[(-.814,-.313+d,2.285),(-.485,-.313+d,2.183),(-.413,-.313+d,2.686)],.003,HAIR,1)
+
+# Portrait surface from source-photo landmarks. Anatomical connectivity is
+# MediaPipe's Apache-2.0 canonical topology; positions come from Kiesinger.
+portrait=json.loads((DEST/"portrait-landmarks.json").read_text(encoding="utf-8"))
+pv=[Vector(p) for p in portrait["vertices"]]
+left_eye=[33,7,163,144,145,153,154,155,133,173,157,158,159,160,161,246]
+right_eye=[263,249,390,373,374,380,381,382,362,398,384,385,386,387,388,466]
+holes=[set(left_eye),set(right_eye)]
+faces=[f for f in portrait["faces"] if not any(set(f)<=h for h in holes)]
+# The measured facial oval extends into a rounded cranium and underside of jaw.
+# This closes the head as a volume while preserving the reference silhouette.
+oval=[132,93,234,127,162,21,54,103,67,109,10,338,297,332,284,251,389,356,454,323,361,288,397,365,379,378,400,377,152,148,176,149,150,136,172,58]
+verts=[tuple(p) for p in pv]
+previous=oval
+for stage in range(1,5):
+    ring=[]
+    for i in oval:
+        p=pv[i];upper=max(0,(p.z-5.54)/.30)
+        if stage==1:
+            q=(p.x*1.025,p.y*.36+.085,p.z+.105*upper+.01)
+        elif stage==2:
+            q=(p.x*.90,.245,5.59+(p.z-5.53)*.89)
+        elif stage==3:
+            q=(p.x*.52,.328,5.61+(p.z-5.53)*.55)
+        else:q=(p.x*.08,.350,5.63+(p.z-5.53)*.09)
+        ring.append(len(verts));verts.append(q)
+    for j in range(len(oval)):
+        k=(j+1)%len(oval);faces.append((previous[j],previous[k],ring[k],ring[j]))
+    previous=ring
+faces.append(tuple(reversed(previous)))
+head=mesh("Kiesinger photo fitted portrait",verts,faces,BRONZE)
+bm=bmesh.new();bm.from_mesh(head.data);bmesh.ops.recalc_face_normals(bm,faces=bm.faces);bm.to_mesh(head.data);bm.free()
+sub=head.modifiers.new("Sculpt facial planes and lip topology", "SUBSURF");sub.levels=3
+bpy.context.view_layer.objects.active=head;bpy.ops.object.modifier_apply(modifier=sub.name)
+
+# Shallow age lines are sculpted into the surface, following the forehead and
+# nasolabial folds visible in the neutral 1967 portrait.
+for v in head.data.vertices:
+    x,y,z=v.co
+    if y<-.17 and abs(x)<.245:
+        fold=0
+        for height in [5.765,5.79,5.813]:
+            line=height-.16*x*x
+            fold+=.0016*math.exp(-((z-line)/.0028)**2)*math.exp(-(x/.205)**8)
+        if 5.35<z<5.49:
+            xx=.078+.46*(5.49-z)
+            fold+=.0023*math.exp(-((abs(x)-xx)/.005)**2)*math.sin((z-5.35)/.14*math.pi)
+        v.co.y+=fold
+bm=bmesh.new();bm.from_mesh(head.data);face_surface=BVHTree.FromBMesh(bm);bm.free()
+for brow in [[46,53,52,65,55],[285,295,282,283,276]]:
+    points=[];faces=[]
+    for j in range(41):
+        t=j/40*(len(brow)-1);k=min(int(t),len(brow)-2)
+        p=pv[brow[k]].lerp(pv[brow[k+1]],t-k)
+        width=.0048*math.sin(math.pi*j/40)**.6+.0002
+        for dz in [-width,width]:
+            hit,_,_,_=face_surface.ray_cast(Vector((p.x,-1,p.z+dz)),Vector((0,1,0)))
+            points.append((hit.x,hit.y-.001,hit.z))
+        if j:faces.append((j*2-2,j*2-1,j*2+1,j*2))
+    mesh("Measured tapering eyebrow",points,faces,HAIR)
+
+# Eyeballs are seated behind real eyelid openings, with same-metal irises.
+for loop in [left_eye,right_eye]:
+    points=[pv[i] for i in loop]
+    center=sum(points,Vector())/len(points)
+    radius=(max(p.x for p in points)-min(p.x for p in points))*.54
+    eye=ell("Inset anatomical eyeball",(center.x,center.y+radius*.94,center.z),(radius,radius,radius*.91),BRONZE,40,24)
+    front=center.y-radius*.06
+    ell("Iris cast relief",(center.x,front+.002,center.z),(.017,.004,.017),BRONZE,32,16)
+    ell("Pupil recess",(center.x,front-.002,center.z),(.005,.001,.005),RECESS,20,12)
+# Adult ear anatomy: continuous bowl, rolled helix, branching antihelix and
+# separate tragus/lobe. The helix spans eyebrow to the bottom of the nose.
+for side in [-1,1]:
+    root=ell("Ear attachment",(side*.285,.019,5.539),(.038,.041,.097),BRONZE,32,20)
+    bowl=ell("Rounded auricle",(side*.304,.017,5.560),(.036,.049,.109),BRONZE,40,28)
+    lobe=ell("Ear lobe",(side*.300,.003,5.458),(.029,.031,.038),BRONZE,32,20)
+    ear=fuse([root,bowl,lobe],"Attached anatomical auricle",.003,BRONZE)
+    cut=ell("Concha carving tool",(side*.339,.011,5.560),(.023,.032,.079),BRONZE,40,28)
+    bpy.context.view_layer.objects.active=ear
+    carving=ear.modifiers.new("Carved concha and rolled helix","BOOLEAN");carving.operation="DIFFERENCE";carving.object=cut
+    bpy.ops.object.modifier_apply(modifier=carving.name);bpy.data.objects.remove(cut,do_unlink=True)
+    tube("Seated ear antihelix",[(side*.324,.009,5.492),(side*.324,.026,5.548),(side*.327,.024,5.602)],.005,BRONZE,2)
+    ell("Ear tragus",(side*.322,-.021,5.539),(.011,.013,.018),BRONZE,24,16)
+
+# Hairline follows the photographed frontal-temporal boundary instead of a
+# generic cap. Crown and nape volume are checked against the profile photo.
+forehead=[21,54,103,67,109,10,338,297,332,284,251]
+boundary=[(-math.pi,Vector((-.307,.015,5.58)))]
+for i in forehead:
+    p=pv[i].copy();p.x*=1.01;p.y-=.004;p.z-=.001
+    boundary.append((math.atan2((p.y-.02)/.33,p.x/.31),p))
+boundary.extend([(0,Vector((.309,.015,5.58))),(math.pi*.25,Vector((.25,.235,5.51))),
+                 (math.pi*.5,Vector((0,.345,5.505))),(math.pi*.75,Vector((-.25,.235,5.51))),
+                 (math.pi,Vector((-.307,.015,5.58)))])
+boundary.sort(key=lambda x:x[0])
+
+def hair_edge(a):
+    for j in range(len(boundary)-1):
+        aa,pa=boundary[j];bb,pb=boundary[j+1]
+        if aa<=a<=bb:return pa.lerp(pb,(a-aa)/(bb-aa))
+    return boundary[0][1]
+
+bm=bmesh.new();bm.from_mesh(head.data);skull=BVHTree.FromBMesh(bm);bm.free()
+skull_center=Vector((0,.03,5.58))
+verts=[];faces=[];hs=144;hl=48
 for j in range(hl):
+    r=.003+.997*j/(hl-1)
     for i in range(hs):
-        theta=2*math.pi*i/hs
-        limit=1.15-.14*abs(math.cos(theta))**2+.80*abs(math.cos(theta))**10+.80*max(0,math.sin(theta))+.09*math.cos(theta)*max(0,-math.sin(theta))
-        phi=.006+(limit-.006)*j/(hl-1)
-        x=.366*math.sin(phi)*math.cos(theta)-.045*math.cos(phi)
-        y=.067+.306*math.sin(phi)*math.sin(theta)
-        z=5.642+.393*math.cos(phi)+.045*gauss(x,y,-.14,-.05,.17,.25)
-        flow=x+.12*math.sin((y+.23)*4.9)+.030*(z-5.7)
-        relief=.0024*math.cos(flow*180)+.0006*math.cos(flow*360)
-        # A narrow offset part, swept continuously back from the right temple.
-        relief-=.007*math.exp(-((flow-.205)/.006)**2)
-        n=Vector((x/.366,(y-.067)/.306,(z-5.642)/.393)).normalized()
+        a=-math.pi+i*2*math.pi/hs;b=hair_edge(a)
+        x=b.x*r-.043*(1-r)**2;y=.025+(b.y-.025)*r
+        z=b.z+(6.007-b.z)*math.sqrt(max(0,1-r*r))
+        ray=(Vector((x,y,z))-skull_center).normalized()
+        hit,normal,_,_=skull.ray_cast(skull_center,ray)
+        if hit is not None:
+            wave=.047*math.exp(-((hit.x+.075)/.18)**2-((hit.y+.12)/.25)**2)
+            part=.004*math.exp(-((hit.x-(.12+.10*hit.y))/.006)**2)*math.sin(math.pi*r)
+            lift=.001+.010*math.sin(math.pi*r)+wave*(1-r*r)-part
+            x,y,z=hit+normal*lift
+        # Fine engraved locks curve diagonally away from the offset part.
+        flow=x+.115*math.sin((y+.27)*4.5)
+        relief=(.0016*math.cos(flow*240)+.0005*math.cos(flow*480))*math.sin(math.pi*r)**.4
+        n=Vector((x/.31,(y-.02)/.34,(z-5.65)/.35)).normalized()
         verts.append((x+n.x*relief,y+n.y*relief,z+n.z*relief))
 for j in range(hl-1):
     for i in range(hs):
-        a=j*hs+i;b=j*hs+(i+1)%hs
-        faces.append((a,b,b+hs,a+hs))
-hair=mesh("Swept back carved hair",verts,faces,HAIR)
-# The boundary is tucked into the skull, providing a natural cast hairline.
-solid=hair.modifiers.new("Hair cast edge", "SOLIDIFY");solid.thickness=.014
-bpy.context.view_layer.objects.active=hair;bpy.ops.object.modifier_apply(modifier=solid.name)
-for o in set(sculpt.objects)-head_start:
-    o.location.z-=.14
+        a=j*hs+i;b=j*hs+(i+1)%hs;faces.append((a,b,b+hs,a+hs))
+hair=mesh("Photo matched swept hair",verts,faces,HAIR)
+thick=hair.modifiers.new("Hairline cast thickness", "SOLIDIFY");thick.thickness=.003;thick.offset=-1
+bpy.context.view_layer.objects.active=hair;bpy.ops.object.modifier_apply(modifier=thick.name)
 
 # Normalize sculpt once in authoring space. No model fitting is needed in game.
 bpy.context.view_layer.update()
@@ -351,7 +481,7 @@ for o in parts:
         world=o.matrix_world@v.co
         v.co=Vector((world.x*factor,world.y*factor,(world.z-minz)*factor))
     o.matrix_world.identity()
-    o["authorship"]="Original Blender sculpture for Germany Simulator; no imported mesh"
+    o["authorship"]="Photo-referenced Blender sculpture; MediaPipe canonical facial connectivity, Apache-2.0; see PROVENANCE.md"
 
 # Game copy: consolidate by bronze material and decimate the dense sculpt.
 game=bpy.data.collections.new("GAME EXPORT — optimized bronze statue")
@@ -360,12 +490,21 @@ gameparts=[]
 for source in parts:
     copy=source.copy();copy.data=source.data.copy();game.objects.link(copy)
     copy.name=source.name+" game"
-    if len(copy.data.polygons)>200:
+    if len(copy.data.polygons)>200 and not source.get("preserve_edges"):
         bpy.context.view_layer.objects.active=copy
         d=copy.modifiers.new("Game sculpt reduction", "DECIMATE")
-        d.ratio=.64 if "continuous portrait" in source.name else (.58 if "carved hair" in source.name else (.13 if len(copy.data.polygons)>1500 else .55))
+        d.ratio=.30 if "photo fitted portrait" in source.name else (.50 if "Photo matched swept hair" in source.name else (.18 if "Continuous tailored suit" in source.name else (.12 if len(copy.data.polygons)>1500 else .55)))
         bpy.ops.object.modifier_apply(modifier=d.name)
     gameparts.append(copy)
+export_suit=next(o for o in gameparts if "Continuous tailored suit" in o.name)
+for piece in gameparts:
+    if not piece.get("tailoring_surface"):continue
+    for v in piece.data.vertices:
+        hit,base,normal,_=suit_cast.closest_point_on_mesh(v.co)
+        offset=max(.003,(v.co-base).dot(normal)) if hit else .008
+        hit,target,normal,_=export_suit.closest_point_on_mesh(v.co)
+        if hit:v.co=target+normal*offset
+    piece.data.update()
 for m in [BRONZE,COAT,HAIR,RECESS]:
     members=[o for o in game.objects if o.data.materials[0]==m]
     o=join(members,m.name+" — game mesh")
@@ -414,8 +553,9 @@ def shot(name, position, target, scale, width=1000,height=1200):
 
 
 shot("full-three-quarter",(8,-17,8),(0,0,3.03),7.2)
-shot("portrait-front",(0,-12,6.15),(0,0,5.44),1.68,1100,1100)
-shot("portrait-three-quarter",(7,-12,6.3),(0,0,5.40),1.82,1100,1100)
+shot("portrait-front",(0,-12,5.57),(0,0,5.57),1.30,1100,1100)
+shot("portrait-three-quarter",(7,-12,5.60),(0,0,5.57),1.36,1100,1100)
+shot("portrait-profile",(12,0,5.58),(0,0,5.57),1.42,1100,1100)
 cam.location=(8,-17,8);cam.rotation_euler=(Vector((0,0,3.03))-cam.location).to_track_quat("-Z","Y").to_euler();data.ortho_scale=7.2
 scene.render.resolution_x=1000;scene.render.resolution_y=1200
 scene["sculpt_notes"]="Original portrait sculpture based on archival Kiesinger photographs, with swept side-parted hair, long nose, aging cheeks, tailored suit and an invented monumental pose. Unhide editable sculpture collection and hide GAME EXPORT to edit full-resolution volumes."
