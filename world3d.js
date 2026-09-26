@@ -140,6 +140,7 @@ function showRendererFailure(error){
     nuclearSign:"./assets/models/power-plants/nuclear-warning-sign.glb"
   };
   const buildingSlots=[],trainSlots=[],cityAssetSlots=[],localModels=new Map(),modelLoader=GLTFLoader?new GLTFLoader():null;
+  let kiesingerMonument;
   function loadLocalModel(url){
     if(!localModels.has(url))localModels.set(url,modelLoader.loadAsync(url).catch(error=>{console.warn("Keeping procedural stand-ins for "+url,error);return null}));
     return localModels.get(url);
@@ -224,6 +225,7 @@ function showRendererFailure(error){
       model.scale.set(sx,sy,sz);model.position.set(-center.x*sx,-bounds.min.y*sy,-center.z*sz);
       if(landmark){box(w,.07,d,M.walk,0,.035,0,slot.group);slot.label.position.set(-w*.34,.62,d/2+.1);slot.label.scale.set(3.2,.63,1)}
       slot.group.add(model);slot.model=model;slot.fallback.visible=false;registerMaterials(model,slot);
+      if(landmark)matchKiesingerHeight();
     }catch(e){console.warn("Keeping procedural building for "+slot.building.id,e)}
   }
   const coalSmoke=[],coalBelt=[];
@@ -282,11 +284,18 @@ function showRendererFailure(error){
   }
   bridge.buildings.forEach(building);
 
+  function matchKiesingerHeight(){
+    const landmark=buildingSlots.find(s=>s.building.id==="bundestag");if(!kiesingerMonument||!landmark)return;
+    const target=new T.Box3().setFromObject(landmark.model||landmark.fallback);
+    kiesingerMonument.scale.setScalar(1);
+    const bounds=new T.Box3().setFromObject(kiesingerMonument);
+    kiesingerMonument.scale.setScalar((target.max.y-target.min.y)/bounds.max.y);
+  }
   function makeKiesingerMemorial(site){
     if(!site)return;
     const g=new T.Group(),granite=mat(0x77736b,.96),stone=mat(0xb5ada0,.93),shadow=mat(0x4b4a45,.98),bronze=new T.MeshStandardMaterial({color:0x4b5852,metalness:.32,roughness:.68}),face=new T.MeshStandardMaterial({color:0x81745f,metalness:.28,roughness:.7}),hair=mat(0x3d4845,.79),gold=new T.MeshStandardMaterial({color:0xb3965b,metalness:.45,roughness:.59});
     // The entire apron fits inside the reserved 350 × 300 world-unit parcel.
-    box(6.9,.16,5.85,shadow,0,.08,0,g);
+    box(6.9,.16,5.85,shadow,X(site.x),.08,Z(site.y));
     box(6.48,.28,5.4,granite,0,.3,0,g);
     box(5.95,.32,4.92,stone,0,.6,0,g);
     box(4.25,.22,3.2,shadow,0,.87,-.13,g);
@@ -340,7 +349,7 @@ function showRendererFailure(error){
     if(modelLoader)modelLoader.loadAsync("./assets/models/kiesinger/kiesinger-statue.glb?v=20260926-photo2").then(({scene:model})=>{
       const bounds=new T.Box3().setFromObject(model),size=bounds.getSize(new T.Vector3());
       if(![size.x,size.y,size.z].every(v=>Number.isFinite(v)&&v>0)||Math.abs(size.y-6)>.05||Math.abs(bounds.min.y)>.05)throw new Error("Kiesinger figure must be 6 units tall with shoes at y=0");
-      model.name="KiesingerSculpture";model.position.copy(figure.position);g.add(model);figure.visible=false;
+      model.name="KiesingerSculpture";model.position.copy(figure.position);g.add(model);figure.visible=false;matchKiesingerHeight();
     }).catch(error=>console.warn("Keeping procedural Kiesinger figure",error));
 
     const plaque=document.createElement("canvas");plaque.width=1024;plaque.height=512;const p=plaque.getContext("2d");
@@ -353,7 +362,7 @@ function showRendererFailure(error){
     const texture=new T.CanvasTexture(plaque);texture.colorSpace=T.SRGBColorSpace;texture.anisotropy=Math.min(4,renderer.capabilities.getMaxAnisotropy());
     box(3.22,1.55,.08,shadow,0,2.33,1.34,g);
     const plate=new T.Mesh(new T.PlaneGeometry(3.1,1.43),new T.MeshBasicMaterial({map:texture}));plate.position.set(0,2.33,1.395);g.add(plate);
-    g.position.set(X(site.x),0,Z(site.y));world.add(g);
+    g.position.set(X(site.x),0,Z(site.y));world.add(g);kiesingerMonument=g;matchKiesingerHeight();
   }
   makeKiesingerMemorial(bridge.kiesingerMemorial);
 
@@ -512,7 +521,7 @@ function showRendererFailure(error){
   function isWorldPointVisible(x,y,padding=0,kind="officer"){const height=kind==="helicopter"?6.8:kind==="car"?.7:1;spawnProbe.set(X(x),height,Z(y)).project(camera);const padX=padding/Math.max(1,innerWidth)*2,padY=padding/Math.max(1,innerHeight)*2;return spawnProbe.z>=-1&&spawnProbe.z<=1&&spawnProbe.x>=-1-padX&&spawnProbe.x<=1+padX&&spawnProbe.y>=-1-padY&&spawnProbe.y<=1+padY}
   function inspectAssets(){
     const bounds=model=>{if(!model)return null;const b=new T.Box3().setFromObject(model),s=b.getSize(new T.Vector3());return{width:s.x,height:s.y,depth:s.z,ground:b.min.y}};
-    return{buildings:buildingSlots.filter(s=>!s.building.kind).map(s=>({id:s.building.id,loaded:!!s.model,fallback:s.fallback.visible,bounds:bounds(s.model),glass:[...s.materials].filter(m=>/glass/i.test(m.name)).map(m=>({name:m.name,opacity:m.opacity,baseOpacity:m.userData.baseOpacity}))})),city:cityAssetSlots.map(s=>({file:s.file,loaded:!!s.model,fallback:s.fallback.visible,bounds:bounds(s.model)})),sources:[...localModels.keys()],render:{...renderer.info.render},memory:{...renderer.info.memory}};
+    return{buildings:buildingSlots.filter(s=>!s.building.kind).map(s=>({id:s.building.id,loaded:!!s.model,fallback:s.fallback.visible,bounds:bounds(s.model),glass:[...s.materials].filter(m=>/glass/i.test(m.name)).map(m=>({name:m.name,opacity:m.opacity,baseOpacity:m.userData.baseOpacity}))})),city:cityAssetSlots.map(s=>({file:s.file,loaded:!!s.model,fallback:s.fallback.visible,bounds:bounds(s.model)})),monument:kiesingerMonument?{bounds:bounds(kiesingerMonument),scale:kiesingerMonument.scale.y,loaded:!!kiesingerMonument.getObjectByName("KiesingerSculpture")}:null,sources:[...localModels.keys()],render:{...renderer.info.render},memory:{...renderer.info.memory}};
   }
   window.Germany3D={ready:true,isWorldPointVisible,sync(){
     syncChar(playerMesh,bridge.player,0);
@@ -529,7 +538,7 @@ function showRendererFailure(error){
     updateFire(performance.now());updateBuildingOcclusion();updatePowerPlants();
     const px=X(bridge.player.x),pz=Z(bridge.player.y),now=performance.now(),memorial=bridge.kiesingerMemorial;
     const plaqueDistance=memorial?Math.hypot(bridge.player.x-memorial.x,bridge.player.y-memorial.y-195):Infinity;
-    const frame=memorial&&bridge.player.y>memorial.y+100?Math.max(0,Math.min(1,(370-plaqueDistance)/190)):0;
+    const frame=memorial&&bridge.player.y>memorial.y+100?Math.max(0,Math.min(1,(370-plaqueDistance)/190))*Math.min(1,kiesingerMonument?.scale.y||1):0;
     camera.position.set(px,11.5+3.5*frame,pz+14+2*frame);
     camera.lookAt(px+(memorial?(X(memorial.x)-px)*frame:0),1+3.6*frame,pz-2.7+(memorial?(Z(memorial.y)-(pz-2.7))*frame:0));
     const park=bridge.goerlitzerPark,parkDistance=park?Math.hypot(bridge.player.x-park.plaqueX,bridge.player.y-park.plaqueY):Infinity;
