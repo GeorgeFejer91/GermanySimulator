@@ -1,5 +1,9 @@
 # Durable decisions
 
+## 2026-09-26 — Landmark flags and visible fence construction cost
+
+At the user’s request, two CDU banners flank a dated 1933–1945 Reich flag on the Kiesinger monument. His NSDAP membership chronology remains explicit on the plaque. The historical flag was co-official from 1933 and sole national flag from 1935; reference and production context live in `CREDITS.md`. The monument retains its Reichstag-matched height. Sixteen CDU banners surround Görlitzer Park, and a large price flag over the gate highlights the reported approximately €1.8 million fence-and-gate construction cost. It identifies public funds and the report date without substituting a budget or adding security totals. Existing source-grounded dialogue, routes and collision footprints remain authoritative. These flags are code-drawn folded planes using four shared textures; no external image dependency is introduced.
+
 ## 2026-09-26 — In-world copy never explains away the satire
 
 Signs, placards and other player-facing copy must retain straight-faced institutional delivery. Do not label locations as miniatures or replicas, call the scene fictional, append satire/not-real/not-advice disclaimers, or move the same explanation into dialogue. The explicit user instruction supersedes earlier guidance for visible fiction labels. `GAMEPLAY.md` owns this copy rule; `AGENT-START.md` enforces it at entry. Görlitzer Park now uses its place name, a security-zone warning, and in-character closure instructions. Documentary cost figures retain sources and precise accounting labels. Production context remains in agent documentation and credits.

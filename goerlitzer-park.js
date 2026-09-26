@@ -4,6 +4,7 @@
 window.GoerlitzerPark=Object.freeze({
  x:1450+560,y:2380+560,w:800,h:480,plaqueX:2026+560,plaqueY:2902+560,
  trees:Object.freeze([[1555,2490],[1660,2680],[2040,2480],[2130,2670]].map(([x,y])=>Object.freeze({x:x+560,y:y+560}))),
+ priceFlag:Object.freeze({title:"ZAUN + TORE",amount:"RUND 1,8 MIO. €",detail:"BAUKOSTEN · ÖFFENTLICHE MITTEL",source:"LAUT SENAT / DPA · 25.02.2026"}),
  signLines:Object.freeze([
   "CDU-geführter Berliner Senat · CDU/SPD",
   "ZAUN + TORE: rund 1,8 Mio. €",

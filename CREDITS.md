@@ -25,6 +25,8 @@ The Reichstagsgebäude/Bundestag landmark is an original, texture-free Blender m
 
 ## Kiesinger monument
 
+The monument’s dated historical Reich flag and the CDU banners on this monument and the Görlitzer Park fence are original canvas drawings in `world3d.js`, requested for the game’s historical/political setting; no official campaign artwork is imported. The [Deutscher Bundestag biography](https://www.bundestag.de/dokumente/textarchiv/1966-12-01-kiesinger-481690) dates Kiesinger’s NSDAP membership to 1933–1945. The [Deutsches Historisches Museum flag history](https://www.dhm.de/lemo/kapitel/ns-regime/innenpolitik/das-hakenkreuz) records the Nazi flag’s co-official status alongside black-white-red from March 1933 and sole national-flag status from 1935 to 1945. The CDU entry date remains 1948, as documented in the existing historical plaque sources. These display choices concern Kiesinger’s documented biography, not a claim that the contemporary CDU used the historical flag.
+
 The monumental bronze figure of Kurt Georg Kiesinger was authored in Blender
 with an original civilian body and pose. Its face fits offline landmarks from
 CDU / KAS-ACDP's 1967 portrait (CC BY-SA 3.0 DE), Anefo / Nationaal Archief
@@ -345,7 +347,7 @@ joint-driven renders made locally by `tools/build-rigged-sprite-atlas.py`.
 
 ## Görlitzer Park placard sources
 
-The miniature park's cost placard refers to public spending by the CDU-led Berlin Senate (CDU/SPD), not CDU party funds. Sources checked on 26 September 2026:
+The miniature park's cost placard refers to public spending by the CDU-led Berlin Senate (CDU/SPD), not CDU party funds. The large gate price flag repeats only the reported construction figure: `RUND 1,8 MIO. €`, `ZAUN + TORE`, `BAUKOSTEN · ÖFFENTLICHE MITTEL`, dated 25 February 2026. The [same dpa report on WELT](https://www.welt.de/regionales/berlin/article699e746276d16623d4e8bbde/warum-berlin-sich-um-einen-zaun-streitet.html) was re-opened for this banner, and [dpa on n-tv](https://www.n-tv.de/regionales/berlin-und-brandenburg/Goerlitzer-Park-nachts-vorerst-offen-Wie-geht-es-weiter-id30883471.html) still reports just under €1.8 million for the new fence sections and gates. The flag does not claim an audited exact final invoice. Sources checked on 26 September 2026:
 
 - **Fence and gates: approximately €1.8 million reported construction cost.** [dpa, 25 February 2026](https://www.zeit.de/news/2026-02/25/warum-berlin-sich-um-einen-zaun-streitet). The earlier [Senate answer 19/22762, p. 2](https://pardok.parlament-berlin.de/starweb/adis/citat/VT/19/SchrAnfr/S19-22762.pdf) put the project estimate at **€1.74 million gross**, including planning, construction, incidental costs and construction security. [Answer 19/24498, p. 3](https://pardok.parlament-berlin.de/starweb/adis/citat/VT/19/SchrAnfr/S19-24498.pdf), dated 14 December 2025, stated that the original estimate was being met; these documents are not an audited final expenditure account.
 - **Private security costs reported for 2025 through January 2026: €251,444 net.** This comprises **€192,227 net in 2025** and **€59,217 net in January 2026**. It includes fence/construction protection before the night closures began, so it is not solely patrol spending. [Senate answer 19/25369, p. 3, dated 18 March 2026](https://pardok.parlament-berlin.de/starweb/adis/citat/VT/19/SchrAnfr/S19-25369.pdf).

@@ -6,7 +6,7 @@ Use one asset authority at root `assets/`, with fidelity selected by the client.
 
 ## Desktop and mobile
 
-- Desktop billboard direction: high-resolution, Weimar-era-inspired commercial artwork with deterministic game-rendered copy. Avoid real propaganda, extremist symbols, political insignia, and text baked unreliably into generated images.
+- Desktop billboard direction: high-resolution, Weimar-era-inspired commercial artwork with deterministic game-rendered copy. For commercial fax artwork, avoid real propaganda, extremist symbols, political insignia, and text baked unreliably into generated images. The user-requested dated historical flag on the Kiesinger monument and CDU landmark banners are separate, code-drawn environment details under the contracts below.
 - Mobile billboard direction: the existing minimalist fax-machine vector style or an equally small deterministic alternative.
 - The shipped desktop fax-ad pool is the two user-supplied, game-readable motifs under `assets/billboards/fax/`; the eagle-insignia variants from the source pack are intentionally not shipped. Three.js maps them onto 3D billboard meshes, while viewports below 700 px keep a generated lightweight fax texture and do not request the WebPs.
 - Share gameplay data, placement, copy, and interaction logic. Only the visual representation should vary by capability or viewport.
@@ -59,6 +59,8 @@ An asset change is complete only when the correct variant loads on desktop and m
 - Keep the selected model set bounded and measure total transfer size before adding another pack.
 - The power-plant landmark uses five local CC0 GLBs under `assets/models/power-plants/` (about 0.5 MB total): three selected Kenney Industrial meshes plus a nuclear transformer and warning sign from 3DAssets.dev. Preserve `LICENSES.md`, its AI-generation disclosure, source URLs, and checksums when replacing these files.
 
+The Kiesinger monument carries two `CDU / AB 1948` banners flanking one dated 1933–1945 historical Reich flag. The flag accompanies the existing factual NSDAP history plaque; the period flag was co-official from March 1933 and sole national flag from September 1935. Keep this user-requested historical display confined to the monument. All three banners fit below the sculpture so the complete monument still matches the Reichstag height. Shared canvas textures and small folded planes require no downloaded logo art or new model assets.
+
 ## Local 3D perimeter trains
 
 - `game.js` owns the two rounded-loop paths around the 10,960 × 5,360 world, the 560-unit city-to-rail gutter, twelve train centers, 84 articulated car transforms, per-train speed and acceleration, unexplained pauses, contact stops and reversals, same-lane spacing, player obstruction, and announcement timing. Each seven-car array belongs to one logical train. `world3d.js` only renders that state and must not run a second train simulation in the canonical game.
@@ -82,6 +84,8 @@ An asset change is complete only when the correct variant loads on desktop and m
 
 - `goerlitzer-park.js` supplies one fixed, already-offset landmark footprint, placard position, source-grounded copy, and four trees to both root entry points. The existing `game.js` static collision path blocks the complete compound for every ground actor. `world3d.js` renders the miniature park and exaggerated military perimeter from code-native geometry, with batched fence details and deterministic canvas-text signs; no new model, raster artwork, or runtime service is required. Keep the exterior path and cost placard accessible and use the existing dialogue for full-size text on phones.
 - Park signs and dialogue stay in-world: use `GÖRLITZER PARK` and straight-faced security language, with no miniature, fiction, satire, or reality-check disclaimers. Follow `GAMEPLAY.md`'s mandatory in-world copy rule. Preserve the costs' stated periods and net/gross/budget distinctions, with sources in `CREDITS.md` and exact matching English subtitles in `AUDIO-TEXT-LIBRARY.js`.
+
+- Sixteen CDU banners attach to the outer park fence: four south, six north and three on each side. Their poles stay within the existing sealed compound. A 13-unit-wide price flag over the south gate reads `RUND 1,8 MIO. €` for reported fence-and-gate construction costs, with public funding and source date explicit. `goerlitzer-park.js` owns this copy. Do not substitute the annual operation/security budget, add overlapping costs, or imply payment from party funds.
 
 ## Audio normalization and focus
 

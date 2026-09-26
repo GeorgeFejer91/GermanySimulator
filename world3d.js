@@ -284,6 +284,33 @@ function showRendererFailure(error){
   }
   bridge.buildings.forEach(building);
 
+  const bannerMaterials=new Map(),landmarkBanners=[];
+  function landmarkBanner(kind,parent,w,h,x,y,z,turn=0){
+    if(!bannerMaterials.has(kind)){
+      const c=document.createElement("canvas"),wide=kind==="price",cdu=kind.startsWith("cdu");c.width=wide?1536:cdu?512:768;c.height=wide?320:cdu?768:512;
+      const ctx=c.getContext("2d"),cw=c.width,ch=c.height;
+      ctx.fillStyle=wide?"#ecd272":cdu?"#eee9dc":"#ae2528";ctx.fillRect(0,0,cw,ch);ctx.textAlign="center";ctx.textBaseline="middle";
+      if(cdu){
+        ctx.fillStyle="#20231f";ctx.font="900 178px Arial, sans-serif";ctx.fillText("CDU",cw/2,ch*.43,cw-56);
+        ["#20231f","#b72429","#e4b63c"].forEach((color,i)=>{ctx.fillStyle=color;ctx.fillRect(52,ch*.66+i*21,cw-104,21)});
+        if(kind==="cdu-history"){ctx.fillStyle="#20231f";ctx.font="700 47px Arial, sans-serif";ctx.fillText("AB 1948",cw/2,ch*.86)}
+      }else if(kind==="reich-1933-1945"){
+        // Historical flag: co-official from March 1933; sole national flag from September 1935.
+        ctx.fillStyle="#f5efe4";ctx.beginPath();ctx.arc(cw/2,230,162,0,Math.PI*2);ctx.fill();
+        ctx.save();ctx.translate(cw/2,230);ctx.rotate(Math.PI/4);ctx.fillStyle="#171817";
+        for(let i=0;i<4;i++){ctx.fillRect(-18,-110,36,128);ctx.fillRect(-18,-110,96,36);ctx.rotate(Math.PI/2)}ctx.restore();
+        ctx.fillStyle="#eee9dc";ctx.fillRect(0,458,cw,54);ctx.fillStyle="#20231f";ctx.font="700 40px Arial, sans-serif";ctx.fillText("1933–1945",cw/2,486);
+      }else{
+        const copy=bridge.goerlitzerPark.priceFlag;ctx.fillStyle="#24261f";ctx.strokeStyle="#24261f";ctx.lineWidth=8;ctx.strokeRect(10,10,cw-20,ch-20);
+        for(const [text,size,y] of [[copy.title,37,47],[copy.amount,142,150],[copy.detail,35,246],[copy.source,24,288]]){ctx.font=`900 ${size}px Arial, sans-serif`;ctx.fillText(text,cw/2,y,cw-80)}
+      }
+      const texture=new T.CanvasTexture(c);texture.colorSpace=T.SRGBColorSpace;texture.anisotropy=Math.min(4,renderer.capabilities.getMaxAnisotropy());
+      bannerMaterials.set(kind,new T.MeshBasicMaterial({map:texture,side:T.DoubleSide}));
+    }
+    const geometry=new T.PlaneGeometry(w,h,12,6),positions=geometry.attributes.position,uv=geometry.attributes.uv;
+    for(let i=0;i<positions.count;i++)positions.setZ(i,Math.sin(uv.getX(i)*Math.PI*3)*Math.sin(uv.getY(i)*Math.PI)*Math.min(.12,w*.045));geometry.computeVertexNormals();
+    const mesh=new T.Mesh(geometry,bannerMaterials.get(kind));mesh.name=kind+" banner";mesh.position.set(x,y,z);mesh.rotation.y=turn;parent.add(mesh);landmarkBanners.push({kind,mesh});return mesh;
+  }
   function matchKiesingerHeight(){
     const landmark=buildingSlots.find(s=>s.building.id==="bundestag");if(!kiesingerMonument||!landmark)return;
     const target=new T.Box3().setFromObject(landmark.model||landmark.fallback);
@@ -355,13 +382,18 @@ function showRendererFailure(error){
     const plaque=document.createElement("canvas");plaque.width=1024;plaque.height=512;const p=plaque.getContext("2d");
     p.fillStyle="#181c1b";p.fillRect(0,0,1024,512);p.strokeStyle="#b3965b";p.lineWidth=22;p.strokeRect(16,16,992,480);p.lineWidth=5;p.strokeRect(37,37,950,438);
     p.fillStyle="#e8dcc1";p.textAlign="center";p.font="bold 65px Georgia, serif";p.fillText("KURT GEORG KIESINGER",512,121,920);
-    p.fillStyle="#c5ad7d";p.font="bold 41px Georgia, serif";p.fillText("NSDAP-EINTRITT 1933 · NS-PROPAGANDA",512,211,920);
+    p.fillStyle="#c5ad7d";p.font="bold 41px Georgia, serif";p.fillText("NSDAP 1933–1945 · NS-PROPAGANDA",512,211,920);
     p.fillText("CDU · BUNDESKANZLER 1966–1969",512,277,920);
     p.fillStyle="#e8dcc1";p.font="bold 33px Arial, sans-serif";p.fillText("VERGANGENHEITSBEWÄLTIGUNG",512,376,920);
     p.font="28px Arial, sans-serif";p.fillText("E · GESCHICHTE LESEN UND HÖREN",512,430,920);
     const texture=new T.CanvasTexture(plaque);texture.colorSpace=T.SRGBColorSpace;texture.anisotropy=Math.min(4,renderer.capabilities.getMaxAnisotropy());
     box(3.22,1.55,.08,shadow,0,2.33,1.34,g);
     const plate=new T.Mesh(new T.PlaneGeometry(3.1,1.43),new T.MeshBasicMaterial({map:texture}));plate.position.set(0,2.33,1.395);g.add(plate);
+    for(const x of [-2.85,2.85]){
+      box(.045,3.95,.045,gold,x,.9+3.95/2,1.55,g);box(1.52,.055,.055,gold,x,4.62,1.55,g);
+      landmarkBanner("cdu-history",g,1.42,2.5,x,3.34,1.61);
+    }
+    box(2.58,.055,.055,gold,0,4.88,1.68,g);landmarkBanner("reich-1933-1945",g,2.5,1.67,0,4.01,1.74);
     g.position.set(X(site.x),0,Z(site.y));world.add(g);kiesingerMonument=g;matchKiesingerHeight();
   }
   makeKiesingerMemorial(bridge.kiesingerMemorial);
@@ -427,6 +459,13 @@ function showRendererFailure(error){
     for(let i=0;i<9;i++){dummy.position.set((i-4)*.17,1.58+Math.abs(i-4)*.055,front+.2);dummy.scale.set(.8,1.3,1);dummy.rotation.set(0,i%2?Math.PI/2:0,Math.PI/2);dummy.updateMatrix();chain.setMatrixAt(i,dummy.matrix)}g.add(chain);block(yellow,0,1.43,front+.23,.24,.3,.13);
     sign(["GÖRLITZER PARK","SICHERHEITSZONE · ZUTRITT VERBOTEN"],7.2,.95,0,4.37,front+.04);
     for(const x of [-4.3,4.3])sign(["ZUTRITT VERBOTEN","PARK BENUTZEN: UNTERSAGT"],2.7,.81,x,1.93,front+.1,"#d0b85d");
+    // Banners sit inside the existing compound, leaving the gate and cost-placard approach clear.
+    function partyFlag(x,z,turn=0){block(steel,x,3.6,z,.045,2.7,.045);block(steel,x,4.88,z,1.45,.045,.045,turn);landmarkBanner("cdu",g,1.3,2,x+Math.sin(turn)*.18,3.84,z+Math.cos(turn)*.18,turn)}
+    for(const x of [-6.3,-4.55,4.55,6.3])partyFlag(x,front);
+    for(const x of [-6,-3.6,-1.2,1.2,3.6,6])partyFlag(x,-front,Math.PI);
+    for(const side of [-1,1])for(const z of [-2.65,0,2.65])partyFlag(side*(w/2-.43),z,side*Math.PI/2);
+    for(const x of [-6.55,6.55])block(steel,x,3.8,front-.08,.12,7.6,.12);
+    block(steel,0,7.52,front+.2,13.2,.1,.1);landmarkBanner("price",g,13,2.55,0,6.2,front+.26);
     const plaqueX=(site.plaqueX-site.x-site.w/2)*S,plaqueZ=(site.plaqueY-site.y-site.h/2)*S;
     for(const x of [plaqueX-2,plaqueX+2])block(steel,x,1.18,plaqueZ-.15,.1,2.36,.1);
     sign(["GÖRLITZER PARK · KOSTENTAFEL",...(site.signLines||[]),"E · DETAILS UND QUELLEN"],4.8,2.42,plaqueX,2.35,plaqueZ);
@@ -521,7 +560,7 @@ function showRendererFailure(error){
   function isWorldPointVisible(x,y,padding=0,kind="officer"){const height=kind==="helicopter"?6.8:kind==="car"?.7:1;spawnProbe.set(X(x),height,Z(y)).project(camera);const padX=padding/Math.max(1,innerWidth)*2,padY=padding/Math.max(1,innerHeight)*2;return spawnProbe.z>=-1&&spawnProbe.z<=1&&spawnProbe.x>=-1-padX&&spawnProbe.x<=1+padX&&spawnProbe.y>=-1-padY&&spawnProbe.y<=1+padY}
   function inspectAssets(){
     const bounds=model=>{if(!model)return null;const b=new T.Box3().setFromObject(model),s=b.getSize(new T.Vector3());return{width:s.x,height:s.y,depth:s.z,ground:b.min.y}};
-    return{buildings:buildingSlots.filter(s=>!s.building.kind).map(s=>({id:s.building.id,loaded:!!s.model,fallback:s.fallback.visible,bounds:bounds(s.model),glass:[...s.materials].filter(m=>/glass/i.test(m.name)).map(m=>({name:m.name,opacity:m.opacity,baseOpacity:m.userData.baseOpacity}))})),city:cityAssetSlots.map(s=>({file:s.file,loaded:!!s.model,fallback:s.fallback.visible,bounds:bounds(s.model)})),monument:kiesingerMonument?{bounds:bounds(kiesingerMonument),scale:kiesingerMonument.scale.y,loaded:!!kiesingerMonument.getObjectByName("KiesingerSculpture")}:null,sources:[...localModels.keys()],render:{...renderer.info.render},memory:{...renderer.info.memory}};
+    return{buildings:buildingSlots.filter(s=>!s.building.kind).map(s=>({id:s.building.id,loaded:!!s.model,fallback:s.fallback.visible,bounds:bounds(s.model),glass:[...s.materials].filter(m=>/glass/i.test(m.name)).map(m=>({name:m.name,opacity:m.opacity,baseOpacity:m.userData.baseOpacity}))})),city:cityAssetSlots.map(s=>({file:s.file,loaded:!!s.model,fallback:s.fallback.visible,bounds:bounds(s.model)})),monument:kiesingerMonument?{bounds:bounds(kiesingerMonument),scale:kiesingerMonument.scale.y,loaded:!!kiesingerMonument.getObjectByName("KiesingerSculpture")}:null,banners:landmarkBanners.map(({kind,mesh})=>({kind,bounds:bounds(mesh)})),sources:[...localModels.keys()],render:{...renderer.info.render},memory:{...renderer.info.memory}};
   }
   window.Germany3D={ready:true,isWorldPointVisible,sync(){
     syncChar(playerMesh,bridge.player,0);
