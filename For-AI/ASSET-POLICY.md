@@ -76,6 +76,11 @@ An asset change is complete only when the correct variant loads on desktop and m
 - `game.js` owns the site coordinates, collision radius, traffic diversion, spiral/sink/crush progress, one serial impact event per swallowed car, disappearance, far-lane respawn, and the deterministic Web Audio thunder-crunch routed through the shared sound-effect bus. `world3d.js` projects that state, applies bounded car pitch/roll/nonuniform crush scale, shifts spiral layers for the depth/parallax illusion, and turns each serial impact into a short shader shockwave, point flash, and lightning burst.
 - Keep the bold sign text exactly `WIRTSCHAFTSWUNDER!`. Preserve the short, cyclical traffic behavior rather than adding a physics engine, particle package, duplicate car pool, or authored vortex asset.
 
+## Procedural Görlitzer Park miniature
+
+- `goerlitzer-park.js` supplies one fixed, already-offset landmark footprint, placard position, source-grounded copy, and four trees to both root entry points. The existing `game.js` static collision path blocks the complete compound for every ground actor. `world3d.js` renders the miniature park and exaggerated military perimeter from code-native geometry, with batched fence details and deterministic canvas-text signs; no new model, raster artwork, or runtime service is required. Keep the exterior path and cost placard accessible and use the existing dialogue for full-size text on phones.
+- Keep the fictional barbed-wire/double-fence/watchtower closure visibly distinguished from the real-world spending figures. Preserve the costs' stated periods and net/gross/budget distinctions, with sources in `CREDITS.md` and exact matching English subtitles in `AUDIO-TEXT-LIBRARY.js`.
+
 ## Audio normalization and focus
 
 - `tools/normalize-audio.ps1` is the only audio-level maintenance command. It checks by default and rewrites only with `-Apply`, using local FFmpeg. Preserve channel layout, sample rate, approximate bitrate, and duration.

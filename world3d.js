@@ -317,6 +317,75 @@ function showRendererFailure(error){
   }
   makeKiesingerMemorial(bridge.kiesingerMemorial);
 
+  function makeGoerlitzerPark(site){
+    if(!site)return;
+    const g=new T.Group();g.name="Görlitzer Park · satirical security miniature";g.position.set(X(site.x+site.w/2),0,Z(site.y+site.h/2));world.add(g);
+    const w=site.w*S,d=site.h*S,steel=mat(0x414b46,.58),concrete=mat(0x8e8e83),olive=mat(0x60664d),sand=mat(0xb4a887),grass=mat(0x657353),water=mat(0x536d68,.38),yellow=mat(0xcdb55b),lamp=new T.MeshBasicMaterial({color:0xffefbc});
+    // The repeated security structure is one instance batch per material; wire is one line batch.
+    const batches=new Map(),dummy=new T.Object3D(),segments=[],barbs=[],up=new T.Vector3(0,1,0);
+    function save(material){dummy.updateMatrix();if(!batches.has(material))batches.set(material,[]);batches.get(material).push(dummy.matrix.clone())}
+    function block(material,x,y,z,bw,bh,bd,turn=0){dummy.position.set(x,y,z);dummy.scale.set(bw,bh,bd);dummy.rotation.set(0,turn,0);save(material)}
+    function brace(ax,ay,az,bx,by,bz,thickness=.075){const direction=new T.Vector3(bx-ax,by-ay,bz-az);dummy.position.set((ax+bx)/2,(ay+by)/2,(az+bz)/2);dummy.scale.set(thickness,direction.length(),thickness);dummy.quaternion.setFromUnitVectors(up,direction.normalize());save(steel)}
+    function line(target,a,b){target.push(...a,...b)}
+    function sign(lines,bw,bh,x,y,z,background="#d9d2b9",foreground="#252a25"){
+      const canvas=document.createElement("canvas");canvas.width=1024;canvas.height=Math.round(1024*bh/bw);const ctx=canvas.getContext("2d"),ch=canvas.height;
+      ctx.fillStyle=background;ctx.fillRect(0,0,1024,ch);ctx.strokeStyle=foreground;ctx.lineWidth=14;ctx.strokeRect(10,10,1004,ch-20);ctx.fillStyle=foreground;ctx.textAlign="center";
+      const step=(ch-38)/lines.length;lines.forEach((text,i)=>{ctx.font=`${i===0?900:700} ${Math.min(i===0?53:43,step*.61)}px Arial, sans-serif`;ctx.fillText(text,512,26+step*(i+.65),950)});
+      const texture=new T.CanvasTexture(canvas);texture.colorSpace=T.SRGBColorSpace;texture.anisotropy=Math.min(4,renderer.capabilities.getMaxAnisotropy());
+      const mesh=new T.Mesh(new T.PlaneGeometry(bw,bh),new T.MeshBasicMaterial({map:texture}));mesh.position.set(x,y,z);g.add(mesh);block(steel,x,y,z-.06,bw+.12,bh+.12,.1);return mesh;
+    }
+    block(grass,0,.035,0,w-.5,.06,d-.5);
+    block(sand,0,.073,1.6,w-3.3,.035,.63);block(sand,-2.55,.074,-.15,.63,.038,d-3.7);block(sand,2.7,.073,-2.05,5.5,.035,.55,-.15);
+    // The shallow Görli Loch, pond, and empty benches remain visibly a miniature public park.
+    const hollow=new T.Mesh(new T.LatheGeometry([new T.Vector2(1.9,.08),new T.Vector2(1.65,.4),new T.Vector2(1.35,.36),new T.Vector2(.8,.1),new T.Vector2(0,.09)],40),grass);hollow.position.set(.75,0,-.65);g.add(hollow);
+    const bowl=new T.Mesh(new T.LatheGeometry([new T.Vector2(1.31,.36),new T.Vector2(.72,.105),new T.Vector2(0,.095)],36),sand);bowl.position.copy(hollow.position);g.add(bowl);
+    const pond=new T.Mesh(new T.CircleGeometry(.95,32),water);pond.rotation.x=-Math.PI/2;pond.scale.set(1.35,.65,1);pond.position.set(-4.6,.085,-.75);g.add(pond);
+    for(const [x,z] of [[-3.9,2.12],[3.7,1.95]]){block(olive,x,.47,z,1.3,.12,.44);block(olive,x,.79,z-.21,1.3,.52,.1);for(const offset of [-.46,.46])block(steel,x+offset,.25,z,.07,.46,.35)}
+    const sides=[[-w/2+.43,-d/2+.43,w/2-.43,-d/2+.43],[w/2-.43,-d/2+.43,w/2-.43,d/2-.43],[w/2-.43,d/2-.43,-w/2+.43,d/2-.43],[-w/2+.43,d/2-.43,-w/2+.43,-d/2+.43]];
+    for(const inset of [0,.72])for(let side=0;side<4;side++){
+      const source=sides[side],a=new T.Vector3(source[0]-Math.sign(source[0])*inset,0,source[1]-Math.sign(source[1])*inset),b=new T.Vector3(source[2]-Math.sign(source[2])*inset,0,source[3]-Math.sign(source[3])*inset),delta=b.clone().sub(a),length=delta.length(),tangent=delta.clone().normalize(),normal=new T.Vector3(-tangent.z,0,tangent.x),height=inset?2.96:3.54;
+      const point=(t,y)=>[a.x+tangent.x*t,y,a.z+tangent.z*t];
+      block(concrete,(a.x+b.x)/2,.23,(a.z+b.z)/2,side%2?.3:length,.42,side%2?length:.3);
+      const count=Math.ceil(length/1.65);
+      for(let i=0;i<=count;i++){const t=i/count*length,[x,,z]=point(t,0);block(steel,x,height/2,z,.12,height,.12);brace(x,height-.12,z,x+normal.x*.26,height+.31,z+normal.z*.26,.07);if(i<count&&i%2===0)brace(x,.48,z,...point(Math.min(length,t+length/count),height-.25),.055)}
+      for(const y of [.52,1.65,height-.16])brace(...point(0,y),...point(length,y),.06);
+      // Clipped diagonal strands form a real open diamond mesh, not an opaque wall.
+      const bottom=.45,top=height-.12,span=top-bottom;
+      for(const slope of [-1,1])for(let origin=-span;origin<length+span;origin+=.29){const lo=Math.max(0,slope>0?-origin:origin-length),hi=Math.min(span,slope>0?length-origin:origin);if(hi>lo)line(segments,point(origin+slope*lo,bottom+lo),point(origin+slope*hi,bottom+hi))}
+      const turns=Math.round(length/.48),curve=new T.Curve();curve.getPoint=t=>{const angle=t*turns*Math.PI*2,r=.27;return new T.Vector3(a.x+delta.x*t+normal.x*Math.cos(angle)*r,height+.21+Math.sin(angle)*r,a.z+delta.z*t+normal.z*Math.cos(angle)*r)};
+      const coil=new T.Mesh(new T.TubeGeometry(curve,turns*12,.027,4,false),steel);coil.name="Coiled razor wire";g.add(coil);
+      for(let i=0;i<=turns*3;i++){const t=i/(turns*3),p=curve.getPoint(t),offset=.11;line(barbs,[p.x-tangent.x*offset,p.y-offset,p.z-tangent.z*offset],[p.x+tangent.x*offset,p.y+offset,p.z+tangent.z*offset]);line(barbs,[p.x-normal.x*offset,p.y+offset,p.z-normal.z*offset],[p.x+normal.x*offset,p.y-offset,p.z+normal.z*offset])}
+    }
+    // Four absurdly tall watchtowers dwarf the tiny lawn. All feet stay inside the sealed footprint.
+    for(const [x,z] of [[-w/2+1.2,-d/2+1.2],[w/2-1.2,-d/2+1.2],[-w/2+1.2,d/2-1.2],[w/2-1.2,d/2-1.2]]){
+      block(concrete,x,.22,z,1.6,.44,1.6);
+      for(const dx of [-.51,.51])for(const dz of [-.51,.51])block(steel,x+dx,2.05,z+dz,.13,3.9,.13);
+      for(const dz of [-.51,.51]){brace(x-.51,.44,z+dz,x+.51,3.85,z+dz,.09);brace(x+.51,.44,z+dz,x-.51,3.85,z+dz,.09)}
+      block(steel,x,3.92,z,1.65,.2,1.65);block(olive,x,4.45,z,1.46,.9,1.46);block(M.win,x,5.08,z,1.38,.44,1.38);block(olive,x,5.46,z,1.65,.24,1.65);block(steel,x,5.66,z,1.86,.16,1.86);
+      for(const dx of [-.67,.67])for(const dz of [-.67,.67])block(steel,x+dx,5.1,z+dz,.075,.61,.075);
+      block(steel,x,6.08,z,.045,.74,.045);block(yellow,x,6.38,z,.16,.14,.16);
+      // Floodlamp bars and CCTV housings use unlit lenses, without adding per-tower shadow lights.
+      block(steel,x,5.69,z+.9,1.1,.075,.1);
+      for(const dx of [-.35,.35]){block(steel,x+dx,5.59,z+.94,.46,.28,.25);block(lamp,x+dx,5.59,z+1.072,.37,.17,.025)}
+      block(steel,x+.77,4.74,z+.64,.34,.065,.07);block(M.cross,x+.84,4.78,z+.77,.18,.16,.36);block(M.dark,x+.84,4.78,z+.958,.12,.11,.024);
+      for(let rung=0;rung<11;rung++)line(segments,[x-.22,.47+rung*.31,z+.59],[x+.22,.47+rung*.31,z+.59]);brace(x-.23,.43,z+.59,x-.23,3.8,z+.59,.05);brace(x+.23,.43,z+.59,x+.23,3.8,z+.59,.05);
+    }
+    const front=d/2-.4;
+    for(const x of [-1.33,1.33]){block(concrete,x,1.85,front,.3,3.7,.45);block(yellow,x,1.16,front+.24,.31,.64,.045);block(M.dark,x,1.18,front+.266,.32,.15,.014)}
+    for(const y of [.48,1.85,3.28])block(steel,0,y,front,2.52,.13,.16);for(const x of [-1.2,0,1.2])block(steel,x,1.88,front,.1,2.8,.16);
+    brace(-1.17,.55,front+.07,1.17,3.23,front+.07,.1);brace(1.17,.55,front+.075,-1.17,3.23,front+.075,.1);
+    const chain=new T.InstancedMesh(new T.TorusGeometry(.11,.032,5,10),steel,9);chain.name="Chained shut gate";
+    for(let i=0;i<9;i++){dummy.position.set((i-4)*.17,1.58+Math.abs(i-4)*.055,front+.2);dummy.scale.set(.8,1.3,1);dummy.rotation.set(0,i%2?Math.PI/2:0,Math.PI/2);dummy.updateMatrix();chain.setMatrixAt(i,dummy.matrix)}g.add(chain);block(yellow,0,1.43,front+.23,.24,.3,.13);
+    sign(["GÖRLITZER PARK · MINIATUR","SATIRISCH ÜBERHÖHTE SICHERHEITSZONE"],7.2,.95,0,4.37,front+.04);
+    for(const x of [-4.3,4.3])sign(["ZUTRITT VERBOTEN","PARK BENUTZEN: UNTERSAGT"],2.7,.81,x,1.93,front+.1,"#d0b85d");
+    const plaqueX=(site.plaqueX-site.x-site.w/2)*S,plaqueZ=(site.plaqueY-site.y-site.h/2)*S;
+    for(const x of [plaqueX-2,plaqueX+2])block(steel,x,1.18,plaqueZ-.15,.1,2.36,.1);
+    sign(["GÖRLITZER PARK · KOSTENTAFEL",...(site.signLines||[]),"E · DETAILS UND QUELLEN"],4.8,2.42,plaqueX,2.35,plaqueZ);
+    for(const [material,matrices] of batches){const mesh=new T.InstancedMesh(new T.BoxGeometry(1,1,1),material,matrices.length);mesh.name="Park security structure";matrices.forEach((matrix,i)=>mesh.setMatrixAt(i,matrix));mesh.computeBoundingSphere();g.add(mesh)}
+    for(const [positions,color,name] of [[segments,0x77837a,"Double chain mesh fence"],[barbs,0xafb7a6,"Razor wire barbs"]]){const geometry=new T.BufferGeometry();geometry.setAttribute("position",new T.Float32BufferAttribute(positions,3));const mesh=new T.LineSegments(geometry,new T.LineBasicMaterial({color}));mesh.name=name;g.add(mesh)}
+  }
+  makeGoerlitzerPark(bridge.goerlitzerPark);
+
   function fence(r){const x0=X(r.x),x1=X(r.x+r.w),z0=Z(r.y),z1=Z(r.y+r.h),post=(x,z)=>box(.08,.75,.08,M.metal,x,.375,z);for(let x=x0;x<=x1;x+=2.2){post(x,z0);post(x,z1)}for(let z=z0;z<=z1;z+=2.2){post(x0,z);post(x1,z)}}
   function sheds(r,n){for(let i=0;i<n;i++){const cols=Math.ceil(n/2),x=X(r.x+80+(i%cols)*170),z=Z(r.y+110+Math.floor(i/cols)*220);box(1.5,1.1,1.15,mat(0x898379),x,.55,z);const roof=new T.Mesh(new T.ConeGeometry(1.15,.6,4),M.dark);roof.position.set(x,1.4,z);roof.rotation.y=Math.PI/4;world.add(roof)}}
   fence(bridge.policeGarden);sheds(bridge.schreber,4);sheds(bridge.policeGarden,6);
@@ -408,6 +477,9 @@ function showRendererFailure(error){
     const frame=memorial&&bridge.player.y>memorial.y+100?Math.max(0,Math.min(1,(370-plaqueDistance)/190)):0;
     camera.position.set(px,11.5+3.5*frame,pz+14+2*frame);
     camera.lookAt(px+(memorial?(X(memorial.x)-px)*frame:0),1+3.6*frame,pz-2.7+(memorial?(Z(memorial.y)-(pz-2.7))*frame:0));
+    const park=bridge.goerlitzerPark,parkDistance=park?Math.hypot(bridge.player.x-park.plaqueX,bridge.player.y-park.plaqueY):Infinity;
+    const parkFrame=park&&bridge.player.y>park.y+park.h-30?Math.max(0,Math.min(1,(440-parkDistance)/250)):0;
+    if(parkFrame){const narrow=Math.max(0,.95/camera.aspect-1),cx=X(park.x+park.w/2),cz=Z(park.y+park.h/2);camera.position.set(px+(cx-px)*parkFrame,11.5+(4+16*narrow)*parkFrame,pz+14+16*narrow*parkFrame);camera.lookAt(px+(cx-px)*parkFrame,1+parkFrame,pz-2.7+(cz-(pz-2.7))*parkFrame)}
     updateWirtschaftswunder(now);renderer.render(scene,camera);
   }};
   app.classList.add("three-ready");

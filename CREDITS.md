@@ -336,6 +336,16 @@ and source locations are recorded in
 `assets/sprite-sources/rigs/PROVENANCE.md`. The runtime atlases are deterministic
 joint-driven renders made locally by `tools/build-rigged-sprite-atlas.py`.
 
+## Görlitzer Park placard sources
+
+The miniature park's cost placard refers to public spending by the CDU-led Berlin Senate (CDU/SPD), not CDU party funds. Sources checked on 26 September 2026:
+
+- **Fence and gates: approximately €1.8 million reported construction cost.** [dpa, 25 February 2026](https://www.zeit.de/news/2026-02/25/warum-berlin-sich-um-einen-zaun-streitet). The earlier [Senate answer 19/22762, p. 2](https://pardok.parlament-berlin.de/starweb/adis/citat/VT/19/SchrAnfr/S19-22762.pdf) put the project estimate at **€1.74 million gross**, including planning, construction, incidental costs and construction security. [Answer 19/24498, p. 3](https://pardok.parlament-berlin.de/starweb/adis/citat/VT/19/SchrAnfr/S19-24498.pdf), dated 14 December 2025, stated that the original estimate was being met; these documents are not an audited final expenditure account.
+- **Private security costs reported for 2025 through January 2026: €251,444 net.** This comprises **€192,227 net in 2025** and **€59,217 net in January 2026**. It includes fence/construction protection before the night closures began, so it is not solely patrol spending. [Senate answer 19/25369, p. 3, dated 18 March 2026](https://pardok.parlament-berlin.de/starweb/adis/citat/VT/19/SchrAnfr/S19-25369.pdf).
+- **Fence operation and security: €775,000 budgeted in each of 2026 and 2027.** The allocation includes fence operation, service-building rent and guards; it is a budget, not proof of expenditure or a patrol-only total. [Official budget table, p. 3](https://www.parlament-berlin.de/adosservice/19/Haupt/vorgang/h19-2646-v.pdf) and [CDU/SPD amendment explanation, PDF p. 85](https://www.parlament-berlin.de/adosservice/19/Haupt/vorgang/h19-2655.F-1-v.pdf).
+
+These figures must not be added together: their periods, net/gross treatment and scopes differ, with possible overlap in construction security. The miniature's permanently sealed military-style compound and barbed wire are fictional exaggerations. The real policy concerned night closures; on 1 June 2026 the Administrative Court provisionally suspended the closure order because of a jurisdictional procedural defect. [Court press release 26/2026](https://www.berlin.de/gerichte/verwaltungsgericht/presse/pressemitteilungen/2026/pressemitteilung.1676274.php).
+
 ## Legal framing
 
 All game rules, wanted levels, immigration deadlines, forms, and enforcement mechanics are fictional parody and do not represent German law, police practice, citizenship requirements, or immigration procedure.
