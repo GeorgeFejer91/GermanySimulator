@@ -4,9 +4,10 @@ Authored in Blender 5.2.1 LTS through `tools/sculpt-kiesinger.py`,
 2026-09-26. The body, civilian suit, standing pose, bent arm, folded dossier,
 ears, hair, and rear cranium are project-authored geometry. The face uses
 estimated landmarks from the credited archival photographs and reused
-MediaPipe canonical face connectivity. This is a stylized portrait
-interpretation, not a scan or an exact reconstruction. No photograph pixels,
-texture maps, insignia, or animation are included.
+MediaPipe canonical face connectivity. Shallow facial relief and restrained
+bronze vertex colors also sample the licensed KAS portrait. This is an
+artistic reconstruction with estimated geometry. No image textures, insignia,
+or animation are included in the figure.
 
 ## Files and runtime contract
 
@@ -16,9 +17,9 @@ texture maps, insignia, or animation are included.
   The studio plinth and lighting are excluded from the GLB.
 - `kiesinger-statue.glb`: glTF 2.0, four shared bronze materials/four draw
   calls, no textures, no skeleton or animation, no decoder extension or
-  external file requirement. 83,645 triangles, 1,518,052 bytes.
+  external file requirement. 82,701 triangles, 1,861,992 bytes.
 - `portrait-landmarks.json`: offline authoring data containing the 468 fitted
-  face vertices, reused canonical polygon indices, source-photo hashes,
+  face vertices, neutral-photo projection coordinates, reused polygon indices, source-photo hashes,
   MediaPipe version, and canonical source hash. The browser never loads it.
 - `LICENSE-MEDIAPIPE.txt`: full upstream MediaPipe license and bundled notice,
   retained alongside the derived geometry.
@@ -37,8 +38,18 @@ The base fit blends the KAS portrait at 75% with the Anefo cabinet view at
 25%. Below Blender z=5.54 it instead uses 95% KAS and 5% cabinet to retain a
 neutral lower-face expression. Depth blends 80% of that result with 20% of
 the Anefo 919-8423 crop; the crop has zero weight in the base position blend.
-Blender closes and subdivides the fitted facial surface, adds sculpted age
-lines and eyes, constructs the rest of the head/body, and simplifies the
+Blender closes and subdivides the fitted facial surface and adds hooded lids,
+orbital folds, cheek volume, soft age lines, and engraved irises/pupils. The
+neutral KAS portrait is projected through its landmark coordinates: broad
+illumination is normalized, local contrast contributes shallow surface relief,
+and bounded brightness variation becomes bronze vertex color (`COLOR_0`).
+No photograph texture is shipped. The original photo's SHA-256 is checked
+before sampling. The brows follow the photo and underlying skin geometry.
+
+Hair has a side part, asymmetric crown volume, curved locks, and tapered roots
+that meet the scalp. Its winding faces outward; the source retains the dense
+surface and the GLB retains the visible sculpt detail within the existing
+geometry budget. The rest of the head/body is constructed and simplified for
 export. These are estimated proportions rather than measured anatomy.
 
 ### Photographs used in the landmark fit
@@ -47,8 +58,8 @@ export. These are estimated proportions rather than measured anatomy.
   author listed as CDU; Konrad-Adenauer-Stiftung, Archiv für
   Christlich-Demokratische Politik, ACDP 10-004 : 302;
   [CC BY-SA 3.0 DE](https://creativecommons.org/licenses/by-sa/3.0/de/).
-  Local input `kiesinger-1967-kas.jpg`. Used for face landmarks; printed
-  poster text is excluded.
+  Local input `kiesinger-1967-kas.jpg`. Used for face landmarks, shallow relief,
+  and bronze vertex patina; printed poster text is excluded.
 - [Kiesinger, Höcherl, Wehner and Brandt, 1 December 1966](https://commons.wikimedia.org/wiki/File:V.l.n.r._Kurt_Georg_Kiesinger,_Hochler_(CSU)_Wehner_en_Willy_Brandt,_Bestanddeelnr_919-8404.jpg):
   unknown photographer / Anefo; Nationaal Archief, item 919-8404, Bonn;
   [CC0](https://creativecommons.org/publicdomain/zero/1.0/).
@@ -168,5 +179,5 @@ body render, and the real desktop/mobile game views.
 
 SHA-256:
 
-- GLB: `0c5f989f75dc62c0d8a5673eb93359059588d52fffd6407b2a51ab3dfa8c2036`
-- Blender: `1a6d618c7e0f8f492b4363c1a6ecd5938235b4ba3a4adecb821fbe9f57c61158`
+- GLB: `2f0f933dd751cae45d0fadbbef622ab034fff88c6c1321737b989c00eda7d9c3`
+- Blender: `7ffedcba54c1927a162850f87467113072ac0a1a2ec9ede3defd2dc5e1932844`

@@ -34,7 +34,8 @@ CDU / KAS-ACDP's 1967 portrait (CC BY-SA 3.0 DE), Anefo / Nationaal Archief
 MediaPipe's canonical face connectivity and alignment reference are reused
 under Apache 2.0; the adjacent `LICENSE-MEDIAPIPE.txt` retains that license.
 The authored model adaptation is [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/).
-No photograph pixels, textures, or ML runtime are bundled. HDG and Bundesarchiv
+The licensed KAS portrait also supplies shallow relief and restrained bronze
+vertex patina. No image textures or ML runtime are bundled. HDG and Bundesarchiv
 portraits were visual inspection references only. Full source links,
 attributions, modifications, rebuild instructions, and checksums are in
 `assets/models/kiesinger/PROVENANCE.md`.

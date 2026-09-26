@@ -52,7 +52,7 @@ function transform(node){
   assert.ok(m.every(Number.isFinite),"node transforms must be finite");return m;
 }
 const min=[Infinity,Infinity,Infinity],max=[-Infinity,-Infinity,-Infinity],active=new Set(),usedMeshes=new Set();
-let triangles=0,vertices=0,primitives=0;
+let triangles=0,vertices=0,primitives=0,coloredPrimitives=0;
 function visit(index,parent){
   assert.ok(!active.has(index),"the scene hierarchy must not contain cycles");
   const node=gltf.nodes[index];assert.ok(node,"scene nodes must exist");active.add(index);
@@ -61,6 +61,14 @@ function visit(index,parent){
     assert.equal(primitive.mode??4,4,"the statue must use triangle meshes");
     const position=accessor(primitive.attributes.POSITION);
     assert.equal(position.a.componentType,5126,"positions must be ordinary float32 vectors");assert.equal(position.a.type,"VEC3");
+    if(primitive.attributes.COLOR_0!==undefined){
+      const color=accessor(primitive.attributes.COLOR_0);coloredPrimitives++;
+      assert.equal(color.a.count,position.a.count,"bronze patina must have one color per vertex");
+      assert.ok(["VEC3","VEC4"].includes(color.a.type),"patina must export RGB or RGBA");
+      const divisor=color.a.componentType===5121?255:color.a.componentType===5123?65535:1;
+      if(divisor!==1)assert.equal(color.a.normalized,true,"integer vertex colors must be normalized");
+      for(let i=0;i<color.a.count;i++)assert.ok(color.read(i).every(v=>Number.isFinite(v)&&v>=0&&v<=divisor),"vertex patina must be finite and bounded");
+    }
     assert.ok(Number.isInteger(primitive.material)&&gltf.materials[primitive.material],"every primitive must use a shared bronze material");
     let count=position.a.count;
     if(primitive.indices!==undefined){const indices=accessor(primitive.indices);assert.equal(indices.a.type,"SCALAR");assert.ok([5121,5123,5125].includes(indices.a.componentType));count=indices.a.count;for(let i=0;i<count;i++)assert.ok(indices.read(i)[0]<position.a.count,"indices must refer to existing vertices")}
@@ -80,6 +88,7 @@ for(const node of scene.nodes)visit(node,identity);
 assert.equal(usedMeshes.size,gltf.meshes.length,"the sculpture scene must account for every shipped mesh");
 assert.ok(vertices>0&&triangles>1_000&&triangles<85_000,"the sculpt must stay under 85,000 triangles");
 assert.ok(primitives<=4,"the four joined materials must require at most four draw calls");
+assert.ok(coloredPrimitives>0,"the photo-derived bronze patina must survive GLB export");
 const size=max.map((v,i)=>v-min[i]);
 assert.ok(Math.abs(min[1])<.05,"the shoes must be grounded at y=0");
 assert.ok(Math.abs(size[1]-6)<.05&&Math.abs(max[1]-6)<.05,"the Y-up statue must be six units tall");

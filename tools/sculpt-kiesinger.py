@@ -7,6 +7,8 @@ exported with shoe-level origin, six-unit height, Y up, and front toward +Z.
 from pathlib import Path
 import math
 import json
+import hashlib
+import numpy as np
 import bmesh
 import bpy
 from mathutils import Vector
@@ -37,7 +39,7 @@ def material(name, color, metallic=.7, roughness=.47):
 
 BRONZE = material("Warm weathered bronze", (.20, .174, .118), .55, .63)
 COAT = material("Bronze with green patina", (.156, .17, .126), .55, .65)
-HAIR = material("Combed bronze hair", (.217, .205, .150), .56, .64)
+HAIR = material("Combed bronze hair", (.188, .167, .113), .62, .60)
 RECESS = material("Oxidized bronze recesses", (.071, .084, .066), .56, .61)
 
 
@@ -372,44 +374,102 @@ for stage in range(1,5):
 faces.append(tuple(reversed(previous)))
 head=mesh("Kiesinger photo fitted portrait",verts,faces,BRONZE)
 bm=bmesh.new();bm.from_mesh(head.data);bmesh.ops.recalc_face_normals(bm,faces=bm.faces);bm.to_mesh(head.data);bm.free()
-sub=head.modifiers.new("Sculpt facial planes and lip topology", "SUBSURF");sub.levels=3
+uv=head.data.uv_layers.new(name="Archival reference projection")
+for loop in head.data.loops:
+    if loop.vertex_index<468:uv.data[loop.index].uv=portrait["neutral_photo_uv"][loop.vertex_index]
+sub=head.modifiers.new("Sculpt facial planes and lip topology", "SUBSURF");sub.levels=4
 bpy.context.view_layer.objects.active=head;bpy.ops.object.modifier_apply(modifier=sub.name)
 
-# Shallow age lines are sculpted into the surface, following the forehead and
-# nasolabial folds visible in the neutral 1967 portrait.
-for v in head.data.vertices:
-    x,y,z=v.co
-    if y<-.17 and abs(x)<.245:
-        fold=0
-        for height in [5.765,5.79,5.813]:
-            line=height-.16*x*x
-            fold+=.0016*math.exp(-((z-line)/.0028)**2)*math.exp(-(x/.205)**8)
-        if 5.35<z<5.49:
-            xx=.078+.46*(5.49-z)
-            fold+=.0023*math.exp(-((abs(x)-xx)/.005)**2)*math.sin((z-5.35)/.14*math.pi)
-        v.co.y+=fold
-bm=bmesh.new();bm.from_mesh(head.data);face_surface=BVHTree.FromBMesh(bm);bm.free()
-for brow in [[46,53,52,65,55],[285,295,282,283,276]]:
-    points=[];faces=[]
-    for j in range(41):
-        t=j/40*(len(brow)-1);k=min(int(t),len(brow)-2)
-        p=pv[brow[k]].lerp(pv[brow[k+1]],t-k)
-        width=.0048*math.sin(math.pi*j/40)**.6+.0002
-        for dz in [-width,width]:
-            hit,_,_,_=face_surface.ray_cast(Vector((p.x,-1,p.z+dz)),Vector((0,1,0)))
-            points.append((hit.x,hit.y-.001,hit.z))
-        if j:faces.append((j*2-2,j*2-1,j*2+1,j*2))
-    mesh("Measured tapering eyebrow",points,faces,HAIR)
+# The landmark cage supplies primary proportions. The elderly portrait also
+# needs secondary volumes: hooded lids, orbital fat, creases and soft jowls.
+coords=np.empty(len(head.data.vertices)*3,dtype=np.float64)
+head.data.vertices.foreach_get("co",coords);coords=coords.reshape((-1,3))
+x,y,z=coords.T
+depth=np.zeros(len(coords))
+front=np.clip((-y-.10)/.08,0,1)
+def mound(cx,cz,wx,wz,amount):
+    depth[:]+=amount*np.exp(-((x-cx)/wx)**2-((z-cz)/wz)**2)
+def crease(points,amount,width,roll=0):
+    amount*=.35;roll*=.4;width*=1.4
+    path=np.asarray(points);distance=np.full(len(coords),10.);fraction=np.zeros(len(coords))
+    signed=np.zeros(len(coords))
+    for j,(a,b) in enumerate(zip(path,path[1:])):
+        dx,dz=b-a;length2=dx*dx+dz*dz
+        t=np.clip(((x-a[0])*dx+(z-a[1])*dz)/length2,0,1)
+        ex=x-a[0]-t*dx;ez=z-a[1]-t*dz;d=np.sqrt(ex*ex+ez*ez)
+        selected=d<distance;distance[selected]=d[selected]
+        fraction[selected]=(j+t[selected])/(len(path)-1)
+        signed[selected]=(ex[selected]*dz-ez[selected]*dx)/math.sqrt(length2)
+    fade=np.sin(np.pi*fraction)**.6
+    depth[:]+=fade*(amount*np.exp(-(distance/width)**2)-roll*np.exp(-((signed-width*2)/(width*1.6))**2))
+for side in [-1,1]:
+    mound(side*.137,5.663,.070,.025,-.011)
+    mound(side*.140,5.589,.065,.021,-.009)
+    mound(side*.208,5.516,.055,.055,-.008)
+    mound(side*.219,5.388,.054,.069,-.009)
+    crease([(side*.056,5.610),(side*.097,5.585),(side*.156,5.578),(side*.212,5.603)],.0045,.0035,.002)
+    crease([(side*.060,5.648),(side*.117,5.670),(side*.171,5.664),(side*.206,5.634)],.0035,.0028,.0015)
+    crease([(side*.074,5.471),(side*.088,5.420),(side*.117,5.378),(side*.129,5.337)],.0045,.0045,.003)
+    crease([(side*.117,5.359),(side*.138,5.335),(side*.140,5.311)],.0025,.003,.001)
+    for j in range(3):
+        crease([(side*.203,5.617-j*.007),(side*.227,5.620-j*.012),(side*.251,5.624-j*.019)],.0022,.002,0)
+    crease([(side*.023,5.680),(side*.028,5.713),(side*.040,5.739)],.0025,.003,.001)
+for j,height in enumerate([5.743,5.771,5.801]):
+    crease([(-.206,height-.009),(-.126,height+.002),(-.03,height),(.072,height+.003),(.158,height-.004),(.219,height-.016)],.0016,.0022,.0007)
+crease([(-.086,5.282),(-.032,5.272),(.033,5.273),(.079,5.284)],.0024,.003,.0008)
+# Fine, irregular cast surface rather than the optically smooth plastic finish.
+grain=(np.sin(x*937+np.sin(z*87))*np.sin(z*883+y*337)+.4*np.sin(x*1673-z*1381))*.00010
+
+# Sample the licensed neutral portrait onto the fitted face. Local contrast
+# supplies very shallow relief and restrained bronze patina. Broad lighting is
+# normalized before sampling; no image texture is needed by the game model.
+reference_path=ROOT/"output/kiesinger-references/kiesinger-1967-kas.jpg"
+assert hashlib.sha256(reference_path.read_bytes()).hexdigest()==portrait["reference_photos"][0]["sha256"]
+reference=bpy.data.images.load(str(reference_path),check_existing=True)
+width,height=reference.size
+pixels=np.empty(width*height*4,dtype=np.float32);reference.pixels.foreach_get(pixels)
+gray=pixels.reshape((height,width,4))[:,:,:3]@np.array([.2126,.7152,.0722])
+def blur(field,sigma):
+    axis=np.arange(-int(sigma*3),int(sigma*3)+1);kernel=np.exp(-.5*(axis/sigma)**2);kernel/=kernel.sum()
+    return np.apply_along_axis(lambda a:np.convolve(a,kernel,mode="same"),0,
+        np.apply_along_axis(lambda a:np.convolve(a,kernel,mode="same"),1,field))
+uvs=np.zeros((len(coords),2));counts=np.zeros(len(coords))
+for loop in head.data.loops:
+    uvs[loop.vertex_index]+=head.data.uv_layers.active.data[loop.index].uv;counts[loop.vertex_index]+=1
+uvs/=np.maximum(counts[:,None],1)
+sx=np.clip(uvs[:,0]*(width-1),0,width-1);sy=np.clip(uvs[:,1]*(height-1),0,height-1)
+ix=sx.astype(int);iy=sy.astype(int);fx=sx-ix;fy=sy-iy
+def sample(field):
+    jx=np.minimum(ix+1,width-1);jy=np.minimum(iy+1,height-1)
+    return (field[iy,ix]*(1-fx)+field[iy,jx]*fx)*(1-fy)+(field[jy,ix]*(1-fx)+field[jy,jx]*fx)*fy
+lum=sample(gray);local=sample(blur(gray,5));illumination=sample(blur(gray,32))
+relief=np.clip(lum-local,-.16,.16)*.006
+photo_mask=front*np.clip((z-5.18)/.04,0,1)*np.clip((5.845-z)/.025,0,1)
+coords[:,1]+=(depth+grain)*front-relief*photo_mask
+coords[:,0]+=np.sign(x)*.006*np.exp(-((np.abs(x)-.232)/.046)**2-((z-5.364)/.078)**2)*front
+head.data.vertices.foreach_set("co",coords.ravel());head.data.update()
+tone=np.clip(1+.34*(lum/np.maximum(illumination,.04)-1)+.35*(lum-local),.62,1.18)
+tone=1+(tone-1)*photo_mask
+colors=np.ones((len(coords),4));colors[:,:3]=tone[:,None]*np.array(BRONZE.diffuse_color[:3])
+patina=head.data.color_attributes.new(name="Cast patina",type="FLOAT_COLOR",domain="POINT")
+patina.data.foreach_set("color",colors.ravel())
+bpy.data.images.remove(reference)
+# Eyebrow shape is carried by the photographed patina and the underlying brow
+# ridge, avoiding a separate strip sitting above the skin.
 
 # Eyeballs are seated behind real eyelid openings, with same-metal irises.
 for loop in [left_eye,right_eye]:
     points=[pv[i] for i in loop]
     center=sum(points,Vector())/len(points)
     radius=(max(p.x for p in points)-min(p.x for p in points))*.54
-    eye=ell("Inset anatomical eyeball",(center.x,center.y+radius*.94,center.z),(radius,radius,radius*.91),BRONZE,40,24)
+    eye=ell("Inset anatomical eyeball",(center.x,center.y+radius*.94,center.z),(radius,radius,radius*.91),BRONZE,96,64)
     front=center.y-radius*.06
-    ell("Iris cast relief",(center.x,front+.002,center.z),(.017,.004,.017),BRONZE,32,16)
-    ell("Pupil recess",(center.x,front-.002,center.z),(.005,.001,.005),RECESS,20,12)
+    # Engrave the iris into the cast eye instead of attaching a flat pupil disc.
+    for v in eye.data.vertices:
+        dx=v.co.x;dz=v.co.z;rr=math.sqrt(dx*dx+dz*dz)
+        if v.co.y<0:
+            v.co.y+=.0026*math.exp(-((rr-.020)/.0020)**2)+.0055*math.exp(-(rr/.007)**4)
+    ell("Oxidation inside carved pupil",(center.x,front+.0045,center.z),(.004,.001,.004),RECESS,24,16)
 # Adult ear anatomy: continuous bowl, rolled helix, branching antihelix and
 # separate tragus/lobe. The helix spans eyebrow to the bottom of the nose.
 for side in [-1,1]:
@@ -424,12 +484,12 @@ for side in [-1,1]:
     tube("Seated ear antihelix",[(side*.324,.009,5.492),(side*.324,.026,5.548),(side*.327,.024,5.602)],.005,BRONZE,2)
     ell("Ear tragus",(side*.322,-.021,5.539),(.011,.013,.018),BRONZE,24,16)
 
-# Hairline follows the photographed frontal-temporal boundary instead of a
-# generic cap. Crown and nape volume are checked against the profile photo.
+# Asymmetric swept-back hair, with an offset part and a feathered hairline.
+# Low-frequency locks shape the silhouette; fine grooves follow those locks.
 forehead=[21,54,103,67,109,10,338,297,332,284,251]
 boundary=[(-math.pi,Vector((-.307,.015,5.58)))]
 for i in forehead:
-    p=pv[i].copy();p.x*=1.01;p.y-=.004;p.z-=.001
+    p=pv[i].copy();p.z-=.008+.010*math.exp(-((p.x+.18)/.05)**2)
     boundary.append((math.atan2((p.y-.02)/.33,p.x/.31),p))
 boundary.extend([(0,Vector((.309,.015,5.58))),(math.pi*.25,Vector((.25,.235,5.51))),
                  (math.pi*.5,Vector((0,.345,5.505))),(math.pi*.75,Vector((-.25,.235,5.51))),
@@ -444,35 +504,48 @@ def hair_edge(a):
 
 bm=bmesh.new();bm.from_mesh(head.data);skull=BVHTree.FromBMesh(bm);bm.free()
 skull_center=Vector((0,.03,5.58))
-verts=[];faces=[];hs=144;hl=48
+verts=[];faces=[];hs=288;hl=80
 for j in range(hl):
     r=.003+.997*j/(hl-1)
     for i in range(hs):
         a=-math.pi+i*2*math.pi/hs;b=hair_edge(a)
-        x=b.x*r-.043*(1-r)**2;y=.025+(b.y-.025)*r
+        edge=.005*math.sin(a*31)+.003*math.sin(a*67+1.3)
+        rr=min(1.012,r+edge*r**8)
+        x=b.x*rr-.027*(1-r)**2;y=.025+(b.y-.025)*rr
         z=b.z+(6.007-b.z)*math.sqrt(max(0,1-r*r))
         ray=(Vector((x,y,z))-skull_center).normalized()
         hit,normal,_,_=skull.ray_cast(skull_center,ray)
         if hit is not None:
-            wave=.047*math.exp(-((hit.x+.075)/.18)**2-((hit.y+.12)/.25)**2)
-            part=.004*math.exp(-((hit.x-(.12+.10*hit.y))/.006)**2)*math.sin(math.pi*r)
-            lift=.001+.010*math.sin(math.pi*r)+wave*(1-r*r)-part
+            x,y,z=hit
+            part_x=-.175+.21*(y+.26)
+            big_side=x>part_x
+            flow=x-(.27 if big_side else -.16)*(y+.27)-(.073 if big_side else -.045)*math.sin((y+.27)*6)
+            phase=flow*245+.35*math.sin(flow*52)+.20*math.sin(y*14)
+            lock=.0035*(.5+.5*math.cos(phase))**1.8
+            strand=.00065*math.cos(phase*2.07+.25*math.sin(flow*71))
+            wave=.071*math.exp(-((x+.015)/.21)**2-((y+.17)/.24)**2)
+            wave+=.023*math.exp(-((x+.25)/.063)**2-((y+.12)/.19)**2)
+            part=.008*math.exp(-((x-part_x)/.007)**2)
+            feather=min(1,max(0,(1-r)/.12));feather=feather*feather*(3-2*feather)
+            volume=(1-r*r)**1.15
+            lift=-.0004+wave*volume*1.4+feather*(.003+lock+strand-part)
             x,y,z=hit+normal*lift
-        # Fine engraved locks curve diagonally away from the offset part.
-        flow=x+.115*math.sin((y+.27)*4.5)
-        relief=(.0016*math.cos(flow*240)+.0005*math.cos(flow*480))*math.sin(math.pi*r)**.4
-        n=Vector((x/.31,(y-.02)/.34,(z-5.65)/.35)).normalized()
-        verts.append((x+n.x*relief,y+n.y*relief,z+n.z*relief))
+        verts.append((x,y,z))
 for j in range(hl-1):
     for i in range(hs):
         a=j*hs+i;b=j*hs+(i+1)%hs;faces.append((a,b,b+hs,a+hs))
-hair=mesh("Photo matched swept hair",verts,faces,HAIR)
-thick=hair.modifiers.new("Hairline cast thickness", "SOLIDIFY");thick.thickness=.003;thick.offset=-1
-bpy.context.view_layer.objects.active=hair;bpy.ops.object.modifier_apply(modifier=thick.name)
+faces.append(tuple(reversed(range(hs))))
+hair=mesh("Photo matched swept hair",verts,[tuple(reversed(f)) for f in faces],BRONZE)
 
 # Normalize sculpt once in authoring space. No model fitting is needed in game.
 bpy.context.view_layer.update()
 parts=list(sculpt.objects)
+for o in parts:
+    if o.data.materials[0]==BRONZE and not o.data.color_attributes.get("Cast patina"):
+        attr=o.data.color_attributes.new(name="Cast patina",type="FLOAT_COLOR",domain="POINT")
+        rgba=np.tile(np.array(BRONZE.diffuse_color),(len(o.data.vertices),1));attr.data.foreach_set("color",rgba.ravel())
+color_node=BRONZE.node_tree.nodes.new("ShaderNodeVertexColor");color_node.layer_name="Cast patina"
+BRONZE.node_tree.links.new(color_node.outputs["Color"],BRONZE.node_tree.nodes.get("Principled BSDF").inputs["Base Color"])
 coords=[o.matrix_world@v.co for o in parts for v in o.data.vertices]
 minz=min(v.z for v in coords);maxz=max(v.z for v in coords)
 factor=6/(maxz-minz)
@@ -493,7 +566,7 @@ for source in parts:
     if len(copy.data.polygons)>200 and not source.get("preserve_edges"):
         bpy.context.view_layer.objects.active=copy
         d=copy.modifiers.new("Game sculpt reduction", "DECIMATE")
-        d.ratio=.30 if "photo fitted portrait" in source.name else (.50 if "Photo matched swept hair" in source.name else (.18 if "Continuous tailored suit" in source.name else (.12 if len(copy.data.polygons)>1500 else .55)))
+        d.ratio=.073 if "photo fitted portrait" in source.name else (.30 if "Photo matched swept hair" in source.name else (.18 if "Continuous tailored suit" in source.name else (.12 if len(copy.data.polygons)>1500 else .55)))
         bpy.ops.object.modifier_apply(modifier=d.name)
     gameparts.append(copy)
 export_suit=next(o for o in gameparts if "Continuous tailored suit" in o.name)

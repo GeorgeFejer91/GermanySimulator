@@ -42,6 +42,7 @@ options = mp.tasks.vision.FaceLandmarkerOptions(
 )
 aligned = []
 records = []
+neutral_uv = None
 with mp.tasks.vision.FaceLandmarker.create_from_options(options) as detector:
     for filename,crop,weight in sources:
         photo = Image.open(REF/filename).convert("RGB")
@@ -50,6 +51,7 @@ with mp.tasks.vision.FaceLandmarker.create_from_options(options) as detector:
         result=detector.detect(mp.Image(image_format=mp.ImageFormat.SRGB,data=np.array(photo)))
         assert len(result.face_landmarks)==1,filename
         lm=np.array([[p.x,p.y,p.z] for p in result.face_landmarks[0]])[:468]
+        if neutral_uv is None:neutral_uv=[[round(float(p[0]),7),round(float(1-p[1]),7)] for p in lm]
         width,height=photo.size
         raw=np.column_stack((lm[:,0]*width,lm[:,2]*width,-lm[:,1]*height))
         # A rigid Procrustes alignment removes camera yaw/pitch/roll while
@@ -95,6 +97,7 @@ OUT.write_text(json.dumps({
     "mediapipe_version":mp.__version__,
     "canonical_sha256":hashlib.sha256((REF/"canonical_face_model.obj").read_bytes()).hexdigest(),
     "reference_photos":records,
+    "neutral_photo_uv":neutral_uv,
     "vertices":[[round(float(v),7) for v in p] for p in vertices],
     "faces":faces,
 },separators=(",",":"))+"\n",encoding="utf-8")
