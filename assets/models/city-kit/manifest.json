@@ -1,0 +1,223 @@
+{
+  "author": "Original project geometry authored with Blender Python; no imported models or textures",
+  "source": "city-kit.blend",
+  "script": "../../../tools/build-city-assets.py",
+  "axis": "Y-up / +Z-front in GLB; ground-centered pivot",
+  "models": {
+    "municipal-office": {
+      "file": "municipal-office.glb",
+      "dimensions_xyz": [
+        12.65,
+        8.16,
+        9.375
+      ],
+      "triangles": 6072,
+      "materials": 8,
+      "bytes": 328620,
+      "sha256": "3ede41645ac13f508ca818cb57421688d125be33f509f9036ac51d719e348a51",
+      "primitives": 8
+    },
+    "berlin-block": {
+      "file": "berlin-block.glb",
+      "dimensions_xyz": [
+        12.735,
+        10.29,
+        8.88
+      ],
+      "triangles": 6250,
+      "materials": 8,
+      "bytes": 321436,
+      "sha256": "5b803f84c8dd6239406128919331f102ff80a91c34d40dcf008e869708348526",
+      "primitives": 8
+    },
+    "brick-utility": {
+      "file": "brick-utility.glb",
+      "dimensions_xyz": [
+        10.665,
+        6.18,
+        8.32
+      ],
+      "triangles": 1446,
+      "materials": 10,
+      "bytes": 80368,
+      "sha256": "a22fceb7f5416761bd62e051e4971e0e13e39caeea909eb5cc134c376c80b716",
+      "primitives": 10
+    },
+    "neighborhood-shop": {
+      "file": "neighborhood-shop.glb",
+      "dimensions_xyz": [
+        8.28,
+        3.54,
+        5.995
+      ],
+      "triangles": 572,
+      "materials": 8,
+      "bytes": 34100,
+      "sha256": "3db8f0c49994b1055795fbd1bbd943ebea8ae463d4916c20380377679c30060f",
+      "primitives": 8
+    },
+    "pfand-machine": {
+      "file": "pfand-machine.glb",
+      "dimensions_xyz": [
+        1.15,
+        2.19,
+        1.105
+      ],
+      "triangles": 1236,
+      "materials": 6,
+      "bytes": 34396,
+      "sha256": "cabe4863692fcdfe6a513ecbd9a190512d09a5f59979d0ee0ac2477cb3f9f475",
+      "primitives": 6
+    },
+    "coffee-machine": {
+      "file": "coffee-machine.glb",
+      "dimensions_xyz": [
+        1.15,
+        2.19,
+        1.18
+      ],
+      "triangles": 336,
+      "materials": 5,
+      "bytes": 14592,
+      "sha256": "c4d453a67fd6e0b129be48bd504419d9a8b7d9df0ae21264c9e7309c204048fa",
+      "primitives": 5
+    },
+    "fax-kiosk": {
+      "file": "fax-kiosk.glb",
+      "dimensions_xyz": [
+        1.42,
+        2.595,
+        1.08
+      ],
+      "triangles": 228,
+      "materials": 7,
+      "bytes": 15576,
+      "sha256": "3d74f8142c763cd1d3c4573b4b949333fd5129242fbd50fac93a23a88740a5d2",
+      "primitives": 7
+    },
+    "garden-gnome": {
+      "file": "garden-gnome.glb",
+      "dimensions_xyz": [
+        0.6,
+        0.991,
+        0.4133
+      ],
+      "triangles": 3560,
+      "materials": 6,
+      "bytes": 74540,
+      "sha256": "7c007aa30725cfb1e3db2f54725e00672a12942e050ef2e734720b451a79cac0",
+      "primitives": 6
+    },
+    "deciduous-tree": {
+      "file": "deciduous-tree.glb",
+      "dimensions_xyz": [
+        5.3578,
+        6.5334,
+        5.3258
+      ],
+      "triangles": 5188,
+      "materials": 4,
+      "bytes": 332812,
+      "sha256": "450ba3b5f9d5296ca267543ec37bde624397d638519413af812fcbc93d6e4f16",
+      "primitives": 4
+    },
+    "garden-shed": {
+      "file": "garden-shed.glb",
+      "dimensions_xyz": [
+        3.26,
+        2.85,
+        2.94
+      ],
+      "triangles": 730,
+      "materials": 8,
+      "bytes": 43140,
+      "sha256": "709a4b60b81a16a5d0ab17ec58fde44622428463222d2743e3fc13bee6dd0968",
+      "primitives": 8
+    },
+    "bench": {
+      "file": "bench.glb",
+      "dimensions_xyz": [
+        2,
+        1.0328,
+        0.6077
+      ],
+      "triangles": 420,
+      "materials": 2,
+      "bytes": 12972,
+      "sha256": "40fae933776b9649bf06e014070cd9bea9ac13626d1de59ba1c1fd21fa0b95e1",
+      "primitives": 2
+    },
+    "streetlamp": {
+      "file": "streetlamp.glb",
+      "dimensions_xyz": [
+        0.34,
+        4.825,
+        1.1
+      ],
+      "triangles": 176,
+      "materials": 4,
+      "bytes": 7432,
+      "sha256": "d80d61d557b13a3aa724d2731bd53ad475745de0cb5ff8c833517ea2a7a8718e",
+      "primitives": 4
+    },
+    "litter-bin": {
+      "file": "litter-bin.glb",
+      "dimensions_xyz": [
+        0.51,
+        0.83,
+        0.51
+      ],
+      "triangles": 668,
+      "materials": 3,
+      "bytes": 15840,
+      "sha256": "be451ffc60fe506459d928bcff06e86ecb3d8ee4d7f8b222ea1d73f008797bbf",
+      "primitives": 3
+    },
+    "bollard": {
+      "file": "bollard.glb",
+      "dimensions_xyz": [
+        0.23,
+        0.895,
+        0.23
+      ],
+      "triangles": 276,
+      "materials": 3,
+      "bytes": 7280,
+      "sha256": "220dc45a390709fd14252b43a08112c7aa7d2b2ec0be280941b549dbf7f73709",
+      "primitives": 3
+    },
+    "bicycle-rack": {
+      "file": "bicycle-rack.glb",
+      "dimensions_xyz": [
+        1.72,
+        0.8157,
+        0.6714
+      ],
+      "triangles": 612,
+      "materials": 2,
+      "bytes": 13696,
+      "sha256": "1372c0f6da4b50d13b81cfdb0a100b5e461fba7851607129733bee874113167e",
+      "primitives": 2
+    },
+    "pfand-bottle": {
+      "file": "pfand-bottle.glb",
+      "dimensions_xyz": [
+        0.138,
+        0.509,
+        0.138
+      ],
+      "triangles": 660,
+      "materials": 4,
+      "bytes": 13940,
+      "sha256": "3d583822879709d0603187221a492427678bc450573ee6307282226bcc06b11a",
+      "primitives": 4
+    }
+  },
+  "optimization": "glTF Transform 4.5.0 dedup + prune; no compression decoder or texture dependency",
+  "total_glb_bytes": 1350740,
+  "validation": {
+    "validator": "Khronos glTF Validator",
+    "errors": 0,
+    "warnings": 0
+  }
+}

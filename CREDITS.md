@@ -13,13 +13,15 @@ was created with funding from NSF EIA-0196217.
 
 ## 3D buildings
 
-Six building meshes are selected from Kenney's **City Kit Commercial 2.1** and recolored at runtime into the game's gray municipal palette. The original models are released under CC0 1.0; attribution is appreciated but not required.
+The active city building and street-prop kit is original geometry authored in Blender for this project. Four building families, Pfand machines and bottles, coffee/fax kiosks, gnomes, branching trees, timber sheds, lamps, benches, bins, bollards, and bicycle racks use texture-free materials. Editable source, generation instructions, geometry budgets, and checksums are in `assets/models/city-kit/`. The inventory and replacement priorities are in `assets/models/CITY-ASSET-INVENTORY.md`. Road surfaces and paving textures are deterministic project-authored code.
+
+Six earlier building meshes from Kenney's **City Kit Commercial 2.1** remain archived locally with their CC0 1.0 source record; they are no longer loaded by the city renderer.
 
 - Source: https://kenney.nl/assets/city-kit-commercial
 - Creator: Kenney, https://kenney.nl/
 - Local license copy: `assets/models/kenney-commercial/LICENSE.txt`
 
-The compact Reichstagsgebäude/Bundestag landmark is an original, texture-free project model built from geometric primitives. No third-party mesh or texture is included. Its proportions and identifying west portal, four corner towers, and modern glass dome were checked against the German Bundestag's public architecture material; build provenance and checksum are recorded in `assets/models/bundestag/LICENSES.md`.
+The Reichstagsgebäude/Bundestag landmark is an original, texture-free Blender model with a six-column west portico, layered masonry, four corner towers, and a ribbed transparent dome with its interior cone and ramps. No third-party mesh or photograph pixels are included. Public architecture material and photographs guided its recognizable proportions and features; it is a game-scale interpretation, not a measured architectural replica. Editable source, references, build provenance, and checksum are recorded in `assets/models/bundestag/LICENSES.md`.
 
 ## Kiesinger monument
 
