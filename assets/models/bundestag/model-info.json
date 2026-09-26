@@ -1,0 +1,26 @@
+{
+  "generator": "Blender 5.2.1 LTS",
+  "source": "tools/build-bundestag-model.py",
+  "original": true,
+  "axis": "Y-up / +Z entrance",
+  "pivot": "ground-centered bounds",
+  "bounds": {
+    "min": [
+      -69.5,
+      0.0,
+      -50.73749923706055
+    ],
+    "max": [
+      69.5,
+      47.630001068115234,
+      50.73749923706055
+    ]
+  },
+  "triangles": 63692,
+  "meshes": 7,
+  "materials": 7,
+  "textures": 0,
+  "bytes": 1842480,
+  "sha256": "4a3e9c23aa3ce67b380252e2c1ffa35150b561b264167f47fc2ebb3a0bbddfef",
+  "optimization": "glTF Transform 4.2.1: dedup, weld, prune, quantize; no simplification or decoder"
+}
