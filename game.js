@@ -154,7 +154,15 @@ const props=[
  {x:5600,y:1885,asset:"fahrrad",w:88,h:56,id:"fahrrad-ost",label:"FAHRRAD"},
  {x:7180,y:2890,asset:"baustelle",w:105,h:62,id:"baustelle-ost",label:"DAUERBAUSTELLE"},
  {x:8750,y:1880,asset:"pfandautomat",w:54,h:70,id:"pfandautomat-ost",label:"PFANDAUTOMAT"},
- {x:7600,y:3500,asset:"gartenzwerg",w:44,h:66},{x:8750,y:3420,asset:"gartenzwerg",w:44,h:66},{x:9400,y:3650,asset:"gartenzwerg",w:44,h:66}
+ {x:7600,y:3500,asset:"gartenzwerg",w:44,h:66},{x:8750,y:3420,asset:"gartenzwerg",w:44,h:66},{x:9400,y:3650,asset:"gartenzwerg",w:44,h:66},
+ // Furniture stays in the wide paved gaps beside civic buildings, clear of entrance walks and sidewalks.
+ {x:3500,y:540,asset:"bench",w:90,h:55},{x:3490,y:1500,asset:"bench",w:90,h:55},
+ {x:3575,y:2550,asset:"bench",w:90,h:55},{x:8855,y:3650,asset:"bench",w:90,h:55},
+ {x:3600,y:540,asset:"litterbin",w:30,h:48},{x:3600,y:1500,asset:"litterbin",w:30,h:48},
+ {x:3575,y:2440,asset:"litterbin",w:30,h:48},{x:8875,y:3530,asset:"litterbin",w:30,h:48},
+ {x:3395,y:540,asset:"bollard",w:18,h:44},{x:3395,y:1500,asset:"bollard",w:18,h:44},
+ {x:3575,y:2680,asset:"bollard",w:18,h:44},{x:8810,y:3770,asset:"bollard",w:18,h:44},
+ {x:3500,y:360,asset:"bicyclerack",w:85,h:45},{x:3500,y:1330,asset:"bicyclerack",w:85,h:45}
 ].map(offsetWorldPoint);
 const stableSpriteRoot="./assets/sprite-archive/pre-rig-20260921/assets/";
 const assetSources={merkelSprite:stableSpriteRoot+"merkel-sprite.png?v=20260922-stable1",bayernSprite:stableSpriteRoot+"bayern-walker-sprite.png?v=20260922-stable1",aliceSprite:stableSpriteRoot+"alice-weidel-sprite.png?v=20260922-stable1",borderPourerSprite:stableSpriteRoot+"border-pourer-sprite.png?v=20260922-stable1",towelManSprite:stableSpriteRoot+"crowd-towel-man.png?v=20260922-stable1",towelWomanSprite:stableSpriteRoot+"crowd-towel-woman.png?v=20260922-stable1"};

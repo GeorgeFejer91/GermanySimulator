@@ -34,7 +34,7 @@ html,body,#app{margin:0;width:100%;height:100%;overflow:hidden;background:#77756
     <button class="act" data-key="KeyE">E</button>
   </nav>
 </main>
-<script src="./goerlitzer-park.js?v=20260926-kiesinger-photo2"></script>
+<script src="./goerlitzer-park.js?v=20260926-city1"></script>
 <script>
 (()=>{"use strict";
 const goerlitzerPark=window.GoerlitzerPark;
@@ -42,7 +42,7 @@ const CITY={w:9840,h:4240},RAIL_GUTTER=560,WORLD={w:CITY.w+RAIL_GUTTER*2,h:CITY.
 const horizontalRoads=[{x:RAIL_GUTTER,y:820+RAIL_GUTTER,w:CITY.w,h:260},{x:RAIL_GUTTER,y:2000+RAIL_GUTTER,w:CITY.w,h:240},{x:RAIL_GUTTER,y:3000+RAIL_GUTTER,w:CITY.w,h:220}];
 const verticalRoads=[{x:1050+RAIL_GUTTER,y:RAIL_GUTTER,w:260,h:CITY.h},{x:2400+RAIL_GUTTER,y:RAIL_GUTTER,w:220,h:CITY.h},{x:4400+RAIL_GUTTER,y:RAIL_GUTTER,w:180,h:CITY.h},{x:5850+RAIL_GUTTER,y:RAIL_GUTTER,w:220,h:CITY.h},{x:7350+RAIL_GUTTER,y:RAIL_GUTTER,w:220,h:CITY.h},{x:9000+RAIL_GUTTER,y:RAIL_GUTTER,w:180,h:CITY.h}];
 const roads=[...horizontalRoads,...verticalRoads],crossings=[],trees=[
-[260,1750],[800,1760],[2700,650],[3400,680],[4300,650],[5000,680],[6500,650],[8100,680],
+[260,1750],[680,1840],[2700,650],[3400,680],[4300,650],[5000,680],[6500,650],[8100,680],
 [2700,1800],[4200,1800],[5200,1800],[6800,1800],[8400,1800],[2800,2860],[4200,2860],[5200,2860],
 [6800,2860],[8400,2860],[700,3500],[1800,3500],[4650,3500],[6180,3500],[7700,3500],[9300,3500]
 ].map(([x,y])=>offsetWorldPoint({x,y})).concat(goerlitzerPark.trees);
@@ -112,5 +112,5 @@ let last=performance.now();function loop(t){const dt=Math.min(.05,(t-last)/1000)
 })();
 </script>
 <script type="importmap">{"imports":{"three":"https://cdn.jsdelivr.net/npm/three@0.186.0/build/three.module.js"}}</script>
-<script type="module" src="./world3d.js?v=20260926-kiesinger-photo2"></script>
+<script type="module" src="./world3d.js?v=20260926-city1"></script>
 </body></html>
