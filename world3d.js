@@ -267,7 +267,7 @@ function showRendererFailure(error){
     box(6.3,.36,.55,stone,0,7.15,-1.94,g);
     box(6.42,.09,.64,gold,0,7.39,-1.94,g);
 
-    const figure=new T.Group();figure.position.set(0,4.3,-.22);g.add(figure);
+    const figure=new T.Group();figure.name="KiesingerFigureFallback";figure.position.set(0,4.3,-.22);g.add(figure);
     const shape=(points,material,z)=>{const outline=new T.Shape();outline.moveTo(...points[0]);for(const point of points.slice(1))outline.lineTo(...point);outline.closePath();const mesh=new T.Mesh(new T.ShapeGeometry(outline),material);mesh.position.z=z;figure.add(mesh);return mesh};
     for(const x of [-.43,.43]){
       box(.63,.27,.96,bronze,x,.14,.24,figure);
@@ -297,6 +297,11 @@ function showRendererFailure(error){
     box(.22,.025,.025,hair,0,4.78,.49,figure);
     const hairCap=new T.Mesh(new T.SphereGeometry(.595,14,9,0,Math.PI*2,0,Math.PI*.49),hair);hairCap.position.set(-.025,5.4,-.025);figure.add(hairCap);
     for(let i=0;i<3;i++){const sweep=box(.32,.09,.16,hair,-.32+i*.25,5.52+i*.045,.36,figure);sweep.rotation.z=-.2}
+    if(modelLoader)modelLoader.loadAsync("./assets/models/kiesinger/kiesinger-statue.glb?v=20260926-1").then(({scene:model})=>{
+      const bounds=new T.Box3().setFromObject(model),size=bounds.getSize(new T.Vector3());
+      if(![size.x,size.y,size.z].every(v=>Number.isFinite(v)&&v>0)||Math.abs(size.y-6)>.05||Math.abs(bounds.min.y)>.05)throw new Error("Kiesinger figure must be 6 units tall with shoes at y=0");
+      model.name="KiesingerSculpture";model.position.copy(figure.position);g.add(model);figure.visible=false;
+    }).catch(error=>console.warn("Keeping procedural Kiesinger figure",error));
 
     const plaque=document.createElement("canvas");plaque.width=1024;plaque.height=512;const p=plaque.getContext("2d");
     p.fillStyle="#181c1b";p.fillRect(0,0,1024,512);p.strokeStyle="#b3965b";p.lineWidth=22;p.strokeRect(16,16,992,480);p.lineWidth=5;p.strokeRect(37,37,950,438);

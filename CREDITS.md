@@ -21,6 +21,15 @@ Six building meshes are selected from Kenney's **City Kit Commercial 2.1** and r
 
 The compact Reichstagsgebäude/Bundestag landmark is an original, texture-free project model built from geometric primitives. No third-party mesh or texture is included. Its proportions and identifying west portal, four corner towers, and modern glass dome were checked against the German Bundestag's public architecture material; build provenance and checksum are recorded in `assets/models/bundestag/LICENSES.md`.
 
+## Kiesinger monument
+
+The monumental bronze figure of Kurt Georg Kiesinger is an original,
+stylized Blender sculpture. Archival portraits from KAS/ACDP, Anefo/Nationaal
+Archief, and the Bundesarchiv guided its face, hair, and civilian suit. No
+photograph pixels or third-party mesh are included. The editable Blender
+source, GLB contract, reference attributions, and checksums are recorded in
+`assets/models/kiesinger/PROVENANCE.md`.
+
 ## Civilian traffic
 
 Berlin's WebGL traffic uses the compact local `classic-vw-beetle.glb`, derived
