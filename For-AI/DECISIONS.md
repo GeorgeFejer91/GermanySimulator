@@ -1,5 +1,9 @@
 # Durable decisions
 
+## 2026-09-26 — In-world copy never explains away the satire
+
+Signs, placards and other player-facing copy must retain straight-faced institutional delivery. Do not label locations as miniatures or replicas, call the scene fictional, append satire/not-real/not-advice disclaimers, or move the same explanation into dialogue. The explicit user instruction supersedes earlier guidance for visible fiction labels. `GAMEPLAY.md` owns this copy rule; `AGENT-START.md` enforces it at entry. Görlitzer Park now uses its place name, a security-zone warning, and in-character closure instructions. Documentary cost figures retain sources and precise accounting labels. Production context remains in agent documentation and credits.
+
 ## 2026-09-26 — Original Blender city assets
 
 The static city now uses one original Blender kit for all ordinary buildings and its common machines, garden objects, vegetation, lamps, and street furniture. Four restrained building families replace both generic boxes and the former commercial meshes. `assets/models/CITY-ASSET-INVENTORY.md` owns the requested inventory; each model family keeps its editable source, reproducible authoring script, and measured GLB manifest beside the runtime assets. Existing signs, plant/rail/vehicle assets, characters, and mission geography remain authoritative.

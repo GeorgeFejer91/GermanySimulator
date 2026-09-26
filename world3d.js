@@ -416,7 +416,7 @@ function showRendererFailure(error){
     brace(-1.17,.55,front+.07,1.17,3.23,front+.07,.1);brace(1.17,.55,front+.075,-1.17,3.23,front+.075,.1);
     const chain=new T.InstancedMesh(new T.TorusGeometry(.11,.032,5,10),steel,9);chain.name="Chained shut gate";
     for(let i=0;i<9;i++){dummy.position.set((i-4)*.17,1.58+Math.abs(i-4)*.055,front+.2);dummy.scale.set(.8,1.3,1);dummy.rotation.set(0,i%2?Math.PI/2:0,Math.PI/2);dummy.updateMatrix();chain.setMatrixAt(i,dummy.matrix)}g.add(chain);block(yellow,0,1.43,front+.23,.24,.3,.13);
-    sign(["GÖRLITZER PARK · MINIATUR","SATIRISCH ÜBERHÖHTE SICHERHEITSZONE"],7.2,.95,0,4.37,front+.04);
+    sign(["GÖRLITZER PARK","SICHERHEITSZONE · ZUTRITT VERBOTEN"],7.2,.95,0,4.37,front+.04);
     for(const x of [-4.3,4.3])sign(["ZUTRITT VERBOTEN","PARK BENUTZEN: UNTERSAGT"],2.7,.81,x,1.93,front+.1,"#d0b85d");
     const plaqueX=(site.plaqueX-site.x-site.w/2)*S,plaqueZ=(site.plaqueY-site.y-site.h/2)*S;
     for(const x of [plaqueX-2,plaqueX+2])block(steel,x,1.18,plaqueZ-.15,.1,2.36,.1);

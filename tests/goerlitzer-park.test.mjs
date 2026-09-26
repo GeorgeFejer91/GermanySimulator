@@ -89,10 +89,14 @@ assert.equal(debugSandbox.blocked(park.x+park.w/2,park.y+park.h/2),true,"diagnos
 assert.equal(debugSandbox.blocked(park.plaqueX,park.plaqueY),false,"diagnostic must retain the outside placard approach");
 
 vm.runInNewContext(subtitles,sandbox);
-assert.equal(park.lines.length,6,"the fact and satire explanation must remain complete");
+assert.equal(park.lines.length,6,"the cost information and closure instructions must remain complete");
 for(const text of park.lines)assert.ok(sandbox.window.GermanySimulatorAudioText.lines[text]?.trim(),`missing exact English subtitle for ${text}`);
 const sign=park.signLines.join("\n"),explanation=park.lines.join("\n");
 for(const fact of ["CDU/SPD","1,8","251.444","netto","775.000","2026","2027"])assert.ok(sign.includes(fact),`placard is missing ${fact}`);
-for(const qualifier of ["19/22762","19/25369","2655 F-1","1,74","brutto","192.227","59.217","Haushaltsansatz","keine belegte Jahresausgabe","fiktiv"])assert.ok(explanation.includes(qualifier),`documentary explanation is missing ${qualifier}`);
+for(const qualifier of ["19/22762","19/25369","2655 F-1","1,74","brutto","192.227","59.217","Haushaltsansatz","keine belegte Jahresausgabe"])assert.ok(explanation.includes(qualifier),`documentary explanation is missing ${qualifier}`);
+
+const parkRenderer=between(read("world3d.js"),"function makeGoerlitzerPark(site)","makeGoerlitzerPark(bridge.goerlitzerPark)");
+const printedSigns=[...parkRenderer.matchAll(/sign\(\[([^\]]+)\]/g)].map(match=>match[1]).join("\n");
+assert.doesNotMatch(sign+"\n"+explanation+"\n"+printedSigns,/miniatur|miniature|satirisch|spielsatire|fiktiv|fictional|reality check|not real/i,"park signs and dialogue must never explain away the satire or scale");
 
 console.log("Görlitzer Park shared geometry, sealed collision, reachable placard and sourced subtitles OK");

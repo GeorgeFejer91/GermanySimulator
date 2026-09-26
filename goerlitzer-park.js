@@ -15,12 +15,12 @@ window.GoerlitzerPark=Object.freeze({
   "Öffentliche Mittel · Details / Quellen: E"
  ]),
  lines:Object.freeze([
-  "GÖRLITZER PARK · MINIATUR. Please enjoy die Grünanlage from outside. Doppelzaun, Stacheldraht, Wachtürme und die permanente Sperre sind übertriebene Spielsatire.",
-  "REAL COSTS · CDU-geführter Berliner Senat (CDU/SPD). Zaun und Tore kosteten laut dpa vom 25. Februar 2026 knapp 1,8 Millionen Euro. Öffentliche Berliner Mittel, keine Ausgaben der CDU-Parteikasse.",
+  "GÖRLITZER PARK. Please enjoy die Grünanlage from outside. Parkbenutzung ist nur durch amtlich genehmigtes Anschauen zulässig.",
+  "BAUKOSTEN · CDU-geführter Berliner Senat (CDU/SPD). Zaun und Tore kosteten laut dpa vom 25. Februar 2026 knapp 1,8 Millionen Euro. Öffentliche Berliner Mittel, keine Ausgaben der CDU-Parteikasse.",
   "WACHSCHUTZ · Laut Senatsantwort vom 18. März 2026: 192.227 Euro netto für 2025 und 59.217 Euro netto für Januar 2026. Together: 251.444 Euro netto, einschließlich Bau- und Zaunbewachung. Kein reiner Nachtpatrouillen-Betrag.",
   "ANNUAL BUDGET · Je 775.000 Euro für 2026 und 2027 sind für Zaunbetrieb, Dienstgebäudemiete und private Wachkräfte eingeplant. Das ist ein Haushaltsansatz, keine belegte Jahresausgabe. Please do not add: Kostenarten und Zeiträume überschneiden sich.",
   "QUELLEN · Berliner Abgeordnetenhaus: Drucksachen 19/22762 und 19/25369; Haushalt Hauptausschuss 2655 F-1, Seite 85. Der frühere Baukostenrahmen von 1,74 Millionen Euro brutto enthielt bereits Baubewachung. Bau und Wachen daher nicht doppelt zählen.",
-  "REALITY CHECK · In Wirklichkeit ging es um nächtliche Schließungen. Das Verwaltungsgericht setzte die Schließungsanordnung am 1. Juni 2026 vorläufig außer Vollzug. Unsere militärische Dauersperre ist ausdrücklich fiktiv. Park enjoyment: administrativ outsourced."
+  "ZUTRITT · Park enjoyment is administrativ outsourced. Die Grünanlage ist gegen Grünanlagennutzung gesichert. Bitte reichen Sie Ihren Spaziergang schriftlich ein und warten Sie außerhalb des Zauns."
  ])
 });
 })();

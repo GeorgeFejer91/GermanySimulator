@@ -81,7 +81,7 @@ An asset change is complete only when the correct variant loads on desktop and m
 ## Procedural Görlitzer Park miniature
 
 - `goerlitzer-park.js` supplies one fixed, already-offset landmark footprint, placard position, source-grounded copy, and four trees to both root entry points. The existing `game.js` static collision path blocks the complete compound for every ground actor. `world3d.js` renders the miniature park and exaggerated military perimeter from code-native geometry, with batched fence details and deterministic canvas-text signs; no new model, raster artwork, or runtime service is required. Keep the exterior path and cost placard accessible and use the existing dialogue for full-size text on phones.
-- Keep the fictional barbed-wire/double-fence/watchtower closure visibly distinguished from the real-world spending figures. Preserve the costs' stated periods and net/gross/budget distinctions, with sources in `CREDITS.md` and exact matching English subtitles in `AUDIO-TEXT-LIBRARY.js`.
+- Park signs and dialogue stay in-world: use `GÖRLITZER PARK` and straight-faced security language, with no miniature, fiction, satire, or reality-check disclaimers. Follow `GAMEPLAY.md`'s mandatory in-world copy rule. Preserve the costs' stated periods and net/gross/budget distinctions, with sources in `CREDITS.md` and exact matching English subtitles in `AUDIO-TEXT-LIBRARY.js`.
 
 ## Audio normalization and focus
 
