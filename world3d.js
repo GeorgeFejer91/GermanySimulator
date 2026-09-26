@@ -301,10 +301,17 @@ function showRendererFailure(error){
         for(let i=0;i<4;i++){ctx.fillRect(-18,-110,36,128);ctx.fillRect(-18,-110,96,36);ctx.rotate(Math.PI/2)}ctx.restore();
         ctx.fillStyle="#eee9dc";ctx.fillRect(0,458,cw,54);ctx.fillStyle="#20231f";ctx.font="700 40px Arial, sans-serif";ctx.fillText("1933–1945",cw/2,486);
       }else{
-        const copy=bridge.goerlitzerPark.priceFlag;ctx.fillStyle="#24261f";ctx.strokeStyle="#24261f";ctx.lineWidth=8;ctx.strokeRect(10,10,cw-20,ch-20);
-        for(const [text,size,y] of [[copy.title,37,47],[copy.amount,142,150],[copy.detail,35,246],[copy.source,24,288]]){ctx.font=`900 ${size}px Arial, sans-serif`;ctx.fillText(text,cw/2,y,cw-80)}
+        const copy=bridge.goerlitzerPark.priceFlag;
+        ctx.fillStyle="#fff000";ctx.fillRect(0,0,cw,ch);
+        ctx.strokeStyle="#ec1424";ctx.lineWidth=18;ctx.strokeRect(13,13,cw-26,ch-26);
+        // Cheap sale-sticker stripes, oversized price, and a crooked party-logo badge.
+        ctx.save();ctx.beginPath();ctx.rect(24,24,cw-48,ch-48);ctx.clip();ctx.strokeStyle="#ec1424";ctx.lineWidth=14;
+        for(let x=-ch;x<cw+ch;x+=50){ctx.beginPath();ctx.moveTo(x,24);ctx.lineTo(x+36,60);ctx.moveTo(x,ch-60);ctx.lineTo(x+36,ch-24);ctx.stroke()}ctx.restore();
+        ctx.font="italic 900 178px Arial, sans-serif";ctx.lineJoin="round";ctx.lineWidth=14;ctx.strokeStyle="#fff";ctx.strokeText(copy.amount,565,172,1060);ctx.lineWidth=5;ctx.strokeStyle="#211c17";ctx.strokeText(copy.amount,565,172,1060);ctx.fillStyle="#ec1424";ctx.fillText(copy.amount,565,172,1060);
+        ctx.save();ctx.translate(1318,160);ctx.rotate(-.07);ctx.fillStyle="#fff";ctx.fillRect(-176,-92,352,184);ctx.strokeStyle="#211c17";ctx.lineWidth=5;ctx.strokeRect(-176,-92,352,184);ctx.fillStyle="#151518";ctx.font="italic 900 102px Arial, sans-serif";ctx.fillText("CDU",0,0,290);ctx.restore();
       }
       const texture=new T.CanvasTexture(c);texture.colorSpace=T.SRGBColorSpace;texture.anisotropy=Math.min(4,renderer.capabilities.getMaxAnisotropy());
+      if(wide){const logo=new Image();logo.onload=()=>{ctx.save();ctx.translate(1318,160);ctx.rotate(-.07);ctx.fillStyle="#fff";ctx.fillRect(-170,-86,340,172);ctx.drawImage(logo,-166,-48,332,96);ctx.restore();texture.needsUpdate=true};logo.onerror=()=>{};logo.src=bridge.goerlitzerPark.priceFlag.logo}
       bannerMaterials.set(kind,new T.MeshBasicMaterial({map:texture,side:T.DoubleSide}));
     }
     const geometry=new T.PlaneGeometry(w,h,12,6),positions=geometry.attributes.position,uv=geometry.attributes.uv;
