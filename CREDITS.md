@@ -40,6 +40,11 @@ portraits were visual inspection references only. Full source links,
 attributions, modifications, rebuild instructions, and checksums are in
 `assets/models/kiesinger/PROVENANCE.md`.
 
+The fitted ears adapt the ear section of the MakeHuman team's
+[CC0 anatomical base mesh](https://github.com/makehumancommunity/makehuman/blob/a8bc2d54ff0ac92e78ff71431b1023eda42bf482/makehuman/data/3dobjs/base.obj).
+Its cropped authoring data and upstream asset license accompany the statue;
+the MakeHuman application is not a game dependency.
+
 ## Civilian traffic
 
 Berlin's WebGL traffic uses the compact local `classic-vw-beetle.glb`, derived

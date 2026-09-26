@@ -403,10 +403,10 @@ def crease(points,amount,width,roll=0):
     fade=np.sin(np.pi*fraction)**.6
     depth[:]+=fade*(amount*np.exp(-(distance/width)**2)-roll*np.exp(-((signed-width*2)/(width*1.6))**2))
 for side in [-1,1]:
-    mound(side*.137,5.663,.070,.025,-.011)
-    mound(side*.140,5.589,.065,.021,-.009)
-    mound(side*.208,5.516,.055,.055,-.008)
-    mound(side*.219,5.388,.054,.069,-.009)
+    mound(side*.137,5.663,.070,.025,-.0045)
+    mound(side*.140,5.589,.065,.021,-.0035)
+    mound(side*.208,5.516,.055,.055,-.003)
+    mound(side*.219,5.388,.054,.069,-.004)
     crease([(side*.056,5.610),(side*.097,5.585),(side*.156,5.578),(side*.212,5.603)],.0045,.0035,.002)
     crease([(side*.060,5.648),(side*.117,5.670),(side*.171,5.664),(side*.206,5.634)],.0035,.0028,.0015)
     crease([(side*.074,5.471),(side*.088,5.420),(side*.117,5.378),(side*.129,5.337)],.0045,.0045,.003)
@@ -443,12 +443,12 @@ def sample(field):
     jx=np.minimum(ix+1,width-1);jy=np.minimum(iy+1,height-1)
     return (field[iy,ix]*(1-fx)+field[iy,jx]*fx)*(1-fy)+(field[jy,ix]*(1-fx)+field[jy,jx]*fx)*fy
 lum=sample(gray);local=sample(blur(gray,5));illumination=sample(blur(gray,32))
-relief=np.clip(lum-local,-.16,.16)*.006
+relief=np.clip(lum-local,-.16,.16)*.002
 photo_mask=front*np.clip((z-5.18)/.04,0,1)*np.clip((5.845-z)/.025,0,1)
 coords[:,1]+=(depth+grain)*front-relief*photo_mask
-coords[:,0]+=np.sign(x)*.006*np.exp(-((np.abs(x)-.232)/.046)**2-((z-5.364)/.078)**2)*front
+coords[:,0]+=np.sign(x)*.002*np.exp(-((np.abs(x)-.232)/.046)**2-((z-5.364)/.078)**2)*front
 head.data.vertices.foreach_set("co",coords.ravel());head.data.update()
-tone=np.clip(1+.34*(lum/np.maximum(illumination,.04)-1)+.35*(lum-local),.62,1.18)
+tone=np.clip(1+.13*(lum/np.maximum(illumination,.04)-1)+.12*(lum-local),.82,1.08)
 tone=1+(tone-1)*photo_mask
 colors=np.ones((len(coords),4));colors[:,:3]=tone[:,None]*np.array(BRONZE.diffuse_color[:3])
 patina=head.data.color_attributes.new(name="Cast patina",type="FLOAT_COLOR",domain="POINT")
@@ -457,32 +457,89 @@ bpy.data.images.remove(reference)
 # Eyebrow shape is carried by the photographed patina and the underlying brow
 # ridge, avoiding a separate strip sitting above the skin.
 
-# Eyeballs are seated behind real eyelid openings, with same-metal irises.
-for loop in [left_eye,right_eye]:
-    points=[pv[i] for i in loop]
+# Fit the visible cast eye directly to the subdivided eyelid boundary. An
+# undersized sphere left open black wedges at the canthi in the earlier model.
+bm=bmesh.new();bm.from_mesh(head.data)
+remaining={e for e in bm.edges if e.is_boundary};eye_boundaries=[]
+while remaining:
+    edge=min(remaining,key=lambda e:e.index);remaining.remove(edge);loop=[edge.verts[0],edge.verts[1]]
+    while loop[-1]!=loop[0]:
+        next_edge=next((e for e in loop[-1].link_edges if e in remaining),None)
+        if next_edge is None:break
+        remaining.remove(next_edge);loop.append(next_edge.other_vert(loop[-1]))
+    points=[v.co.copy() for v in loop[:-1]]
     center=sum(points,Vector())/len(points)
-    radius=(max(p.x for p in points)-min(p.x for p in points))*.54
-    eye=ell("Inset anatomical eyeball",(center.x,center.y+radius*.94,center.z),(radius,radius,radius*.91),BRONZE,96,64)
-    front=center.y-radius*.06
-    # Engrave the iris into the cast eye instead of attaching a flat pupil disc.
-    for v in eye.data.vertices:
-        dx=v.co.x;dz=v.co.z;rr=math.sqrt(dx*dx+dz*dz)
-        if v.co.y<0:
-            v.co.y+=.0026*math.exp(-((rr-.020)/.0020)**2)+.0055*math.exp(-(rr/.007)**4)
-    ell("Oxidation inside carved pupil",(center.x,front+.0045,center.z),(.004,.001,.004),RECESS,24,16)
-# Adult ear anatomy: continuous bowl, rolled helix, branching antihelix and
-# separate tragus/lobe. The helix spans eyebrow to the bottom of the nose.
+    if 5.55<center.z<5.70 and .04<abs(center.x)<.23:eye_boundaries.append(points)
+bm.free()
+assert len(eye_boundaries)==2,"Both eyelid openings must be sealed by the cast eyes"
+for points in eye_boundaries:
+    center=sum(points,Vector())/len(points);center.y-=.011
+    # Keep a quiet, slightly upward gaze, with a life-sized iris partly under
+    # the upper lid. The pupil is a shallow cast indentation, not a dark bead.
+    iris_x=center.x;iris_z=center.z+.0025
+    n=len(points);rings=28;verts=[];faces=[]
+    for j in range(rings):
+        r=.001+.999*j/(rings-1)
+        for p in points:
+            x=center.x+(p.x-center.x)*r;z=center.z+(p.z-center.z)*r
+            y=center.y+(p.y-center.y)*r*r
+            radius=math.hypot(x-iris_x,z-iris_z)
+            carve=.0013*math.exp(-((radius-.025)/.0015)**2)+.0022*math.exp(-(radius/.008)**4)
+            y+=carve*min(1,(1-r)*10)
+            verts.append((x,y,z))
+    for j in range(rings-1):
+        for i in range(n):
+            a=j*n+i;b=j*n+(i+1)%n;faces.append((a,b,b+n,a+n))
+    faces.append(tuple(reversed(range(n))))
+    eye=mesh("Eyelid fitted continuous cast eye",verts,faces,BRONZE)
+    bm=bmesh.new();bm.from_mesh(eye.data);bmesh.ops.recalc_face_normals(bm,faces=bm.faces);bm.to_mesh(eye.data);bm.free()
+
+# CC0 anatomical ear patch from MakeHuman's artist-authored base mesh. Only
+# its ear topology is reused; dimensions and seating are fitted to the portrait.
+ear_source=json.loads((DEST/"ear-anatomy.json").read_text(encoding="utf-8"))
+bm=bmesh.new();bm.from_mesh(head.data);ear_scalp=BVHTree.FromBMesh(bm);bm.free()
 for side in [-1,1]:
-    root=ell("Ear attachment",(side*.285,.019,5.539),(.038,.041,.097),BRONZE,32,20)
-    bowl=ell("Rounded auricle",(side*.304,.017,5.560),(.036,.049,.109),BRONZE,40,28)
-    lobe=ell("Ear lobe",(side*.300,.003,5.458),(.029,.031,.038),BRONZE,32,20)
-    ear=fuse([root,bowl,lobe],"Attached anatomical auricle",.003,BRONZE)
-    cut=ell("Concha carving tool",(side*.339,.011,5.560),(.023,.032,.079),BRONZE,40,28)
-    bpy.context.view_layer.objects.active=ear
-    carving=ear.modifiers.new("Carved concha and rolled helix","BOOLEAN");carving.operation="DIFFERENCE";carving.object=cut
-    bpy.ops.object.modifier_apply(modifier=carving.name);bpy.data.objects.remove(cut,do_unlink=True)
-    tube("Seated ear antihelix",[(side*.324,.009,5.492),(side*.324,.026,5.548),(side*.327,.024,5.602)],.005,BRONZE,2)
-    ell("Ear tragus",(side*.322,-.021,5.539),(.011,.013,.018),BRONZE,24,16)
+    verts=[]
+    for x,y,z in ear_source["vertices"]:
+        outward=.284+(x-.69)*.50
+        height=5.548+(y-7.115)*.50
+        depth=.012-(z-.46)*.46+(height-5.548)*.10
+        verts.append((side*outward,depth,height))
+    faces=ear_source["faces"]
+    if side<0:faces=[list(reversed(f)) for f in faces]
+    ear=mesh("Anatomical auricle fitted to portrait",verts,faces,BRONZE)
+    # Seat the cropped attachment just inside the scalp and relax one support
+    # ring, preserving the cartilage and the free lobe.
+    bm=bmesh.new();bm.from_mesh(ear.data)
+    boundary={v for e in bm.edges if e.is_boundary for v in e.verts};loops=[]
+    while boundary:
+        pending=[boundary.pop()];connected=set(pending)
+        while pending:
+            v=pending.pop()
+            for e in v.link_edges:
+                other=e.other_vert(v)
+                if e.is_boundary and other not in connected:
+                    connected.add(other);boundary.discard(other);pending.append(other)
+        loops.append(connected)
+    assert len(loops)==2,"Ear crop must contain the attachment and concha boundaries"
+    loops.sort(key=len,reverse=True)
+    ring=loops[0];seen=set()
+    for weight in [1,.15]:
+        for v in ring:
+            hit,_,_,_=ear_scalp.ray_cast(Vector((side,v.co.y,v.co.z)),Vector((-side,0,0)))
+            if hit is not None:v.co.x+=(hit.x-side*.012-v.co.x)*weight
+        seen.update(ring);ring={e.other_vert(v) for v in ring for e in v.link_edges}-seen
+    # Cropping the source opens the deep concha as well as the attachment.
+    # Recess that rim above the scalp and cap it, never leave a through-hole.
+    for v in loops[1]:
+        hit,_,_,_=ear_scalp.ray_cast(Vector((side,v.co.y,v.co.z)),Vector((-side,0,0)))
+        if hit is not None:v.co.x=side*max(side*v.co.x,side*hit.x+.016)
+    bmesh.ops.holes_fill(bm,edges=[e for e in bm.edges if e.is_boundary],sides=0)
+    assert all(e.is_manifold for e in bm.edges),"Cast ears must be closed surfaces"
+    bm.to_mesh(ear.data);bm.free()
+    sub=ear.modifiers.new("Smooth continuous ear cartilage","SUBSURF");sub.levels=3
+    bpy.context.view_layer.objects.active=ear;bpy.ops.object.modifier_apply(modifier=sub.name)
+    bm=bmesh.new();bm.from_mesh(ear.data);bmesh.ops.recalc_face_normals(bm,faces=bm.faces);bm.to_mesh(ear.data);bm.free()
 
 # Asymmetric swept-back hair, with an offset part and a feathered hairline.
 # Low-frequency locks shape the silhouette; fine grooves follow those locks.
@@ -566,7 +623,7 @@ for source in parts:
     if len(copy.data.polygons)>200 and not source.get("preserve_edges"):
         bpy.context.view_layer.objects.active=copy
         d=copy.modifiers.new("Game sculpt reduction", "DECIMATE")
-        d.ratio=.073 if "photo fitted portrait" in source.name else (.30 if "Photo matched swept hair" in source.name else (.18 if "Continuous tailored suit" in source.name else (.12 if len(copy.data.polygons)>1500 else .55)))
+        d.ratio=.073 if "photo fitted portrait" in source.name else (.075 if "Anatomical auricle" in source.name else (.16 if "continuous cast eye" in source.name else (.30 if "Photo matched swept hair" in source.name else (.18 if "Continuous tailored suit" in source.name else (.12 if len(copy.data.polygons)>1500 else .55)))))
         bpy.ops.object.modifier_apply(modifier=d.name)
     gameparts.append(copy)
 export_suit=next(o for o in gameparts if "Continuous tailored suit" in o.name)
@@ -625,10 +682,10 @@ def shot(name, position, target, scale, width=1000,height=1200):
     bpy.ops.render.render(write_still=True)
 
 
-shot("full-three-quarter",(8,-17,8),(0,0,3.03),7.2)
-shot("portrait-front",(0,-12,5.57),(0,0,5.57),1.30,1100,1100)
 shot("portrait-three-quarter",(7,-12,5.60),(0,0,5.57),1.36,1100,1100)
+shot("portrait-front",(0,-12,5.57),(0,0,5.57),1.30,1100,1100)
 shot("portrait-profile",(12,0,5.58),(0,0,5.57),1.42,1100,1100)
+shot("full-three-quarter",(8,-17,8),(0,0,3.03),7.2)
 cam.location=(8,-17,8);cam.rotation_euler=(Vector((0,0,3.03))-cam.location).to_track_quat("-Z","Y").to_euler();data.ortho_scale=7.2
 scene.render.resolution_x=1000;scene.render.resolution_y=1200
 scene["sculpt_notes"]="Original portrait sculpture based on archival Kiesinger photographs, with swept side-parted hair, long nose, aging cheeks, tailored suit and an invented monumental pose. Unhide editable sculpture collection and hide GAME EXPORT to edit full-resolution volumes."

@@ -2,7 +2,8 @@
 
 Authored in Blender 5.2.1 LTS through `tools/sculpt-kiesinger.py`,
 2026-09-26. The body, civilian suit, standing pose, bent arm, folded dossier,
-ears, hair, and rear cranium are project-authored geometry. The face uses
+hair, and rear cranium are project-authored geometry. The ears adapt the
+CC0 MakeHuman anatomical mesh described below. The face uses
 estimated landmarks from the credited archival photographs and reused
 MediaPipe canonical face connectivity. Shallow facial relief and restrained
 bronze vertex colors also sample the licensed KAS portrait. This is an
@@ -17,12 +18,15 @@ or animation are included in the figure.
   The studio plinth and lighting are excluded from the GLB.
 - `kiesinger-statue.glb`: glTF 2.0, four shared bronze materials/four draw
   calls, no textures, no skeleton or animation, no decoder extension or
-  external file requirement. 82,701 triangles, 1,861,992 bytes.
+  external file requirement. 83,296 triangles, 1,885,624 bytes.
 - `portrait-landmarks.json`: offline authoring data containing the 468 fitted
   face vertices, neutral-photo projection coordinates, reused polygon indices, source-photo hashes,
   MediaPipe version, and canonical source hash. The browser never loads it.
 - `LICENSE-MEDIAPIPE.txt`: full upstream MediaPipe license and bundled notice,
   retained alongside the derived geometry.
+- `ear-anatomy.json`: the cropped CC0 MakeHuman ear control mesh, upstream
+  vertex indices and source hash; offline authoring data only.
+- `LICENSE-MAKEHUMAN-CC0.txt`: upstream asset-license text.
 - The exported figure is six units high, Y-up, facing +Z, with the origin at
   shoe level. The existing pedestal owns placement and collision. Both game
   entry points use this one asset, with the procedural figure as fallback.
@@ -45,6 +49,43 @@ illumination is normalized, local contrast contributes shallow surface relief,
 and bounded brightness variation becomes bronze vertex color (`COLOR_0`).
 No photograph texture is shipped. The original photo's SHA-256 is checked
 before sampling. The brows follow the photo and underlying skin geometry.
+
+The cast-eye surfaces meet the actual subdivided eyelid boundaries, closing
+the former gaps at the eye corners. Their shallow iris and pupil engravings
+share the bronze material. Orbital and cheek additions are restrained to
+preserve the photographed proportions; photo relief and patina contrast are
+reduced to avoid mottled skin. Each ear is one continuous closed anatomical surface
+with a rolled helix, branching antihelix, concha, tragus and soft lobule.
+The anterior attachment enters the head; the inner folds and lobe are not
+separate cylinders or spheres.
+
+### Ear anatomy
+
+The ear control topology and starting shape come from the MakeHuman team's
+[base.obj](https://github.com/makehumancommunity/makehuman/blob/a8bc2d54ff0ac92e78ff71431b1023eda42bf482/makehuman/data/3dobjs/base.obj),
+commit `a8bc2d54ff0ac92e78ff71431b1023eda42bf482`. The source file explicitly
+dedicates the mesh to CC0 and lists Data Collection AB, Joel Palmius and
+Jonas Hauquier as the copyright holders at the 2020 dedication. The
+[upstream license](https://github.com/makehumancommunity/makehuman/blob/a8bc2d54ff0ac92e78ff71431b1023eda42bf482/LICENSE.md)
+separately identifies base meshes as CC0 assets.
+
+Only 280 quads / 307 control vertices from the positive-X ear are retained.
+Extraction selects `body` faces whose vertices all satisfy `x > .69`,
+`6.86 < y < 7.39`, and `.26 < z < .65` in the original OBJ coordinates.
+The Blender script rescales, reorients, seats, mirrors and subdivides that
+patch to fit the portrait, then reduces it for export. This is reused
+anatomical geometry, not an ear scan of Kiesinger. The face still uses the
+credited Kiesinger photographs. No MakeHuman application code is reused.
+The cropped attachment boundary is projected just below the actual cranium,
+with one adjoining support ring blended toward it before subdivision.
+The crop's separate inner-concha boundary is seated above the scalp and
+capped to form a recessed bowl. The build checks both boundaries and requires
+the resulting ear surfaces to be manifold before subdivision.
+
+Original OBJ SHA-256:
+`8e761e6624b8f54536409135d1636da63b32486a90d4897f84e121d144f6fb4c`.
+
+### Hair and body
 
 Hair has a side part, asymmetric crown volume, curved locks, and tapered roots
 that meet the scalp. Its winding faces outward; the source retains the dense
@@ -179,5 +220,5 @@ body render, and the real desktop/mobile game views.
 
 SHA-256:
 
-- GLB: `2f0f933dd751cae45d0fadbbef622ab034fff88c6c1321737b989c00eda7d9c3`
-- Blender: `7ffedcba54c1927a162850f87467113072ac0a1a2ec9ede3defd2dc5e1932844`
+- GLB: `a9d2811f8998227ce74125764f8e04c2db00f81176091377347441335a2727d7`
+- Blender: `7d7eae0f74d8d4212a5ff46794ac5665b8b5419bcfc8be48b7cddd2a436de53e`
