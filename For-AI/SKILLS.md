@@ -19,6 +19,8 @@ Project-scoped game-development skills are installed in `.agents/skills/`. Their
 
 For work that spans domains, invoke every matching skill, normally in this order: architecture, runtime/gameplay, UI or assets, playtest, then browser automation. Do not invoke unrelated skills merely because they are installed.
 
+All browser-testing skill workflows must follow the [silent background browser-test policy](./AGENT-START.md#silent-background-browser-tests): isolated background sessions, muted before navigation and interaction, with no focus stealing or audible output.
+
 The project stack is already chosen: custom JavaScript simulation plus required vanilla Three.js rendering, static files, and GitHub Pages. Registered PNG character sprites remain supported through Three.js sprites. Do not reintroduce a Canvas world, or add Phaser, React Three Fiber, Vite, TypeScript, Rapier, a backend, or a second runtime tree solely because an installed skill recommends that stack for new projects.
 
 Installed source snapshots (2026-09-19):

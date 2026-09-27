@@ -39,6 +39,14 @@ Do not substitute the later flat 2D prototype or rebuild the game from a differe
 
 ## Minimum validation
 
+### Silent background browser tests
+
+Run all agent-driven browser tests silently in the background so they do not interrupt the user's other PC activities. Prefer a headless browser or a hidden browser surface; never bring test windows or tabs to the foreground, steal focus, or send input to the user's active desktop session. Use isolated test sessions.
+
+Mute the test browser/session before loading the game or triggering any interaction, and keep it muted throughout the run. Cover all audio paths, including media elements, Web Audio, and browser speech synthesis; disabling autoplay alone is insufficient. Prefer a browser launch-level mute (for example Chromium's `--mute-audio`) or an equivalent session-level output mute. Do not mute the whole PC or change the user's browser/audio preferences. If a tool cannot guarantee both background operation and silent output, use another test method and report any unrun checks. Audible playback or foreground testing requires an explicit user request.
+
+Keep audio logic enabled when testing its scheduling or state, while suppressing audible output at the test-session boundary. Silent checks cannot establish perceived sound quality; report that limitation when relevant. This policy applies to desktop/mobile game tests, preview pages, diagnostics, and automated QA.
+
 After relevant changes:
 
 1. Run JavaScript syntax checks for `game.js` and `world3d.js`.
