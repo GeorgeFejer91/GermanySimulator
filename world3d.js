@@ -218,7 +218,7 @@ function showRendererFailure(error){
   async function installVehicleModel(slot){
     if(!modelLoader)return;
     try{
-      const spec=vehicleModels[slot.kind],gltf=await loadLocalModel("./assets/models/vehicles/"+spec.file+".glb?v=20260927-cars1");if(!gltf)return;
+      const spec=vehicleModels[slot.kind],gltf=await loadLocalModel("./assets/models/vehicles/"+spec.file+".glb?v=20260927-cars2");if(!gltf)return;
       const model=gltf.scene.clone(true);fitResponseModel(model,{x:1.3,y:1.15,z:spec.length});
       // Every visible detail belongs to the GLB. Hide the complete fallback, including its lights and wheels.
       bindVehicleParts(slot,model);slot.group.add(model);slot.model=model;slot.fallback.visible=false;

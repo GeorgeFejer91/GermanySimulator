@@ -6,37 +6,37 @@
   "models": {
     "beetle": {
       "file": "beetle.glb",
-      "triangles": 26579,
+      "triangles": 25184,
       "dimensions_xyz": [
         1.72,
         1.5152,
         4.064
       ],
-      "bytes": 383960,
-      "sha256": "d50b7e91aacb367b4031c7852c624d0e75167b56b24471e6927e2ab1564b115c"
+      "bytes": 380812,
+      "sha256": "3f9d7a9c6e638c1e4ef2e2fa4481b7d354f0415345315ebf6ba81c409b0cc0c3"
     },
     "trabant": {
       "file": "trabant.glb",
-      "triangles": 21148,
+      "triangles": 20570,
       "dimensions_xyz": [
         1.772,
         1.4623,
         3.634
       ],
-      "bytes": 311220,
-      "sha256": "7f1ed739be3e250027774d46f619baebeb68bded316290053f3b06823ad6c000"
+      "bytes": 316120,
+      "sha256": "6f940f308f4e4150bd4bdfbb647f5fbd3ba923ac8027fff2a62f86819fa058c1"
     },
     "police-estate": {
       "file": "police-estate.glb",
-      "triangles": 27922,
+      "triangles": 30059,
       "dimensions_xyz": [
         2.17,
         1.721,
-        4.571
+        4.586
       ],
-      "bytes": 411076,
-      "sha256": "f47718208b3d2470f9013a5438763f8d1b7677efb2e19105ae28227fbe055860"
+      "bytes": 512572,
+      "sha256": "5a8b01995a86252da8af0a4a8064d94778478aa6870e0b449e4a8526b4847a79"
     }
   },
-  "optimization": "glTF Transform 4.5.0: weld, bounded simplify, dedup, prune, 14-bit position/10-bit normal quantization; no runtime decoder"
+  "optimization": "glTF Transform 4.5.0: weld, bounded simplify with locked lettering borders, dedup, prune, 14-bit position/10-bit normal quantization; no runtime decoder"
 }

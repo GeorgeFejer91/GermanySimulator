@@ -18,6 +18,8 @@ for(const [kind,item] of Object.entries(manifest.models)){
   assert.ok(item.dimensions_xyz[0]<2.2&&item.dimensions_xyz[0]/item.dimensions_xyz[2]<.5,'No detached parts outside the body envelope');
   const materials=gltf.materials.map(m=>m.name);
   assert.ok(materials.includes('Glass')&&materials.includes('BrakeLens'));
+  assert.ok(gltf.nodes.some(n=>n.extras?.license_plates===2),'Every car retains front and rear registrations');
+  for(const name of ['PlateWhite','PlateInk','EuroBlue'])assert.ok(materials.includes(name),'Missing number-plate detail: '+name);
   if(kind==='police-estate')assert.ok(materials.includes('BeaconLeft')&&materials.includes('BeaconRight'));
 }
 const renderer=readFileSync(new URL('../world3d.js',import.meta.url),'utf8');

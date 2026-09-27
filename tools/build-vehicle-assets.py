@@ -10,13 +10,14 @@ import json
 import hashlib
 import sys
 from pathlib import Path
-from mathutils import Vector
+from mathutils import Vector, Matrix, Euler
 
 ROOT = Path(__file__).resolve().parents[1]
 OUT = ROOT / 'assets/models/vehicles'
 REVIEW = ROOT / 'output/vehicle-review'
 OUT.mkdir(parents=True, exist_ok=True)
 REVIEW.mkdir(parents=True, exist_ok=True)
+LETTER_FONT=bpy.data.fonts.load(str(ROOT/'assets/fonts/roboto-condensed/RobotoCondensed.ttf'))
 bpy.ops.object.select_all(action='SELECT')
 bpy.ops.object.delete(use_global=False)
 MATS = {}
@@ -31,6 +32,9 @@ for name, color, rough, metal in [
     ('Chrome', (.63,.67,.70,1), .24,.72),
     ('DarkTrim', (.07,.08,.085,1), .6,.2),
     ('WhiteLettering', (.93,.94,.9,1), .5,.05),
+    ('PlateWhite', (.93,.94,.90,1), .38,0),
+    ('PlateInk', (.009,.012,.014,1), .55,0),
+    ('EuroBlue', (.008,.035,.29,1), .45,0),
     ('Headlamp', (.83,.88,.83,1), .2,.3),
     ('Indicator', (.89,.30,.025,1), .25,.05),
     ('BrakeLens', (.48,.018,.015,1), .25,.08),
@@ -138,8 +142,7 @@ def lower_body(name, rows, police=False, power=.45):
         return (w*math.copysign(abs(c)**power,c),y,(bottom+top)/2+(top-bottom)/2*math.copysign(abs(s)**power,s))
     def paint(points):
         x,y,z=[sum(p[k] for p in points)/len(points) for k in range(3)]
-        if police and z>.85 and abs(x)<.39 and -1.80<y<-1.05:return 'PoliceBlue'
-        if police and abs(x)>.76:
+        if police and abs(x)>.58:
             if .49<z<.57 or .91<z<.965:return 'ReflectiveYellow'
             if .57<=z<=.91:return 'PoliceBlue'
         return 'PoliceSilver' if police else 'BodyPaint'
@@ -148,7 +151,7 @@ def lower_body(name, rows, police=False, power=.45):
     vertices=[tuple(v.co) for v in obj.data.vertices]
     faces=[tuple(p.vertices) for p in obj.data.polygons]
     mats=[obj.data.materials[p.material_index].name for p in obj.data.polygons]
-    faces.extend([tuple(range(49)),tuple(60*49+j for j in reversed(range(49)))]);mats.extend(['PoliceSilver' if police else 'BodyPaint']*2)
+    faces.extend([tuple(range(49)),tuple(60*49+j for j in reversed(range(49)))]);mats.extend(['PoliceSilver' if police else 'BodyPaint','PoliceBlue' if police else 'BodyPaint'])
     bpy.data.objects.remove(obj,do_unlink=True)
     return mesh(name,vertices,faces,mats)
 
@@ -230,10 +233,52 @@ def wipers(points):
         tube('Wiper blade',[b,c],.012,'Rubber')
 
 
-def label(text,pos,rotation,size=.17):
-    curve=bpy.data.curves.new(text,'FONT');curve.body=text;curve.align_x='CENTER';curve.align_y='CENTER';curve.size=size;curve.extrude=.0006;curve.resolution_u=2
-    obj=bpy.data.objects.new(text,curve);bpy.context.collection.objects.link(obj);obj.location=pos;obj.rotation_euler=rotation;curve.materials.append(MATS['WhiteLettering'])
+def label(text,pos,rotation,size=.17,material='WhiteLettering',width=None):
+    curve=bpy.data.curves.new(text,'FONT');curve.body=text;curve.font=LETTER_FONT;curve.align_x='CENTER';curve.align_y='CENTER';curve.size=size;curve.extrude=0;curve.resolution_u=2
+    obj=bpy.data.objects.new(text,curve);bpy.context.collection.objects.link(obj);obj.location=pos;obj.rotation_euler=rotation;curve.materials.append(MATS[material])
     bpy.context.view_layer.objects.active=obj;obj.select_set(True);bpy.ops.object.convert(target='MESH');obj.select_set(False)
+    if width:
+        span=max(v.co.x for v in obj.data.vertices)-min(v.co.x for v in obj.data.vertices)
+        for v in obj.data.vertices:v.co.x*=width/span
+    return obj
+
+
+def fitted(obj,target,offset=.004):
+    bpy.context.view_layer.objects.active=obj
+    modifier=obj.modifiers.new('Flush applied vinyl','SHRINKWRAP');modifier.target=target;modifier.wrap_method='NEAREST_SURFACEPOINT';modifier.offset=offset
+    bpy.ops.object.modifier_apply(modifier=modifier.name)
+    return obj
+
+
+def plate(text,pos,rear=False):
+    # Standard long German-format plate: black holder, white face, EU band, D and seals.
+    before=set(bpy.data.objects)
+    cube('Number plate holder',(0,0,0),(.536,.122,.016),'PlateInk',.009)
+    cube('Registration plate',(0,0,.009),(.520,.110,.004),'PlateWhite',.006)
+    cube('EU blue band',(-.239,0,.012),(.034,.103,.001),'EuroBlue',.001)
+    label('D',(-.239,-.024,.014),(0,0,0),.033,'PlateWhite')
+    for i in range(12):
+        a=i*math.tau/12;cx=-.239+math.cos(a)*.010;cy=.022+math.sin(a)*.010
+        verts=[(cx+math.cos(j*math.tau/10)*(.0025 if j%2==0 else .0011),cy+math.sin(j*math.tau/10)*(.0025 if j%2==0 else .0011),.014) for j in range(10)]
+        mesh('EU star',verts,[tuple(range(10))],'ReflectiveYellow',False)
+    label(text,(.017,-.002,.014),(0,0,0),.098,'PlateInk',.428)
+    for x in [-.202,.224]:ellipsoid('Plate fixing screw',(x,.044,.014),(.003,.003,.001),'Chrome',8,4)
+    # Plain registration seals preserve the familiar layout without copying an official seal.
+    for y in [-.017,.016]:ellipsoid('Registration seal',(-.100,y,.014),(.010,.010,.001),'Chrome',12,4)
+    transform=Matrix.Translation(Vector(pos))@Euler((math.pi/2,0,math.pi if rear else 0)).to_matrix().to_4x4()
+    for obj in set(bpy.data.objects)-before:obj.matrix_world=transform@obj.matrix_world
+
+
+def service_badge(sign,body):
+    # Original department-08 star, integrated into the rear-door vinyl.
+    points=[]
+    for i in range(32):
+        a=i*math.tau/32;r=.13 if i%4==0 else .10 if i%2==0 else .077
+        points.append((sign*.932,.64+math.cos(a)*r,.78+math.sin(a)*r))
+    fitted(mesh('Department star',points,[tuple(range(32))],'WhiteLettering',False),body)
+    points=[(sign*.94,.64+math.cos(i*math.tau/32)*.060,.78+math.sin(i*math.tau/32)*.066) for i in range(32)]
+    fitted(mesh('Department medallion',points,[tuple(range(32))],'PoliceBlue',False),body,.006)
+    fitted(label('08',(sign*.95,.64,.78),(math.pi/2,0,sign*math.pi/2),.074),body,.008)
 
 
 def new_car(name):
@@ -245,6 +290,7 @@ def new_car(name):
 
 def make_beetle():
     root,col=new_car('beetle')
+    root['license_plates']=2;root['registration']='B  AM 1967'
     rows=[(-1.95,.19,.50),(-1.76,.43,.69),(-1.25,.54,.86),(-.82,.60,1.06),(-.38,.62,1.42),(.10,.61,1.51),(.57,.58,1.40),(1.05,.53,1.10),(1.51,.45,.76),(1.91,.19,.46)]
     def shell(y,t,offset=0):
         w,h=sample(rows,y)
@@ -283,12 +329,15 @@ def make_beetle():
     tube('Bonnet centre seam',[shell(y,0,.007) for y in [-1.8,-1.6,-1.3,-1.02,-.88]],.005,'Chrome')
     for y in [-1.98,1.98]:bumper(y,.74,.33)
     for x in [-.22,.22]:tube('Twin exhaust',[(x,1.72,.19),(x,2.02,.19)],.026,'Chrome',10)
+    plate('B  AM 1967',(0,-1.965,.453))
+    plate('B  AM 1967',(0,1.944,.457),True)
     wheels(root,[-1.19,1.18],.685,.305)
     return root,col
 
 
 def make_trabant():
     root,col=new_car('trabant')
+    root['license_plates']=2;root['registration']='L  AM 601'
     body=lower_body('Duroplast body',[(-1.72,.59,.30,.70),(-1.60,.72,.28,.91),(-1.08,.75,.26,.99),(-.64,.75,.25,1.01),(.80,.74,.25,1.0),(1.46,.69,.28,.93),(1.72,.59,.32,.75)])
     arches(body,[-1.025,1.025],.30,.30)
     roof,side=cabin('Trabant cabin',[(-.78,.70,1.0),(-.55,.69,1.20),(-.20,.68,1.435),(.50,.68,1.435),(.78,.67,1.32),(1.02,.66,1.0)],.97,'RoofPaint')
@@ -309,6 +358,8 @@ def make_trabant():
     for z in [.59,.63,.67,.71,.75]:tube('Fine horizontal grille',[(x,-1.745+abs(x)*.014,z) for x in [-.41,-.2,0,.2,.41]],.008,'Chrome',6)
     for x in [-.32,-.16,0,.16,.32]:tube('Grille rib',[(x,-1.748,.595),(x,-1.748,.746)],.004,'Chrome',4)
     for y in [-1.765,1.765]:bumper(y,.69,.377)
+    plate('L  AM 601',(0,-1.765,.469))
+    plate('L  AM 601',(0,1.787,.525),True)
     wipers([((-.40,-.75,1.01),(-.30,-.54,1.23),(-.07,-.47,1.27)),((.20,-.75,1.01),(.30,-.54,1.23),(.51,-.47,1.25))])
     wheels(root,[-1.025,1.025],.696,.30)
     return root,col
@@ -316,9 +367,28 @@ def make_trabant():
 
 def make_police():
     root,col=new_car('police-estate')
-    body=lower_body('Silver blue estate body',[(-2.24,.67,.24,.69),(-2.14,.83,.24,.83),(-1.62,.895,.23,.945),(-1.02,.90,.22,1.005),(.82,.91,.22,1.015),(1.64,.895,.24,.987),(2.15,.815,.30,.905),(2.24,.70,.32,.82)],True)
+    root['license_plates']=2;root['registration']='B   7408'
+    root['livery']='Silver-blue-yellow wrap; hood, both doors, rear and roof markings; segmented reflective strips; department-08 stars'
+    rows=[(-2.24,.67,.24,.69),(-2.14,.83,.24,.83),(-1.62,.895,.23,.945),(-1.02,.90,.22,1.005),(.82,.91,.22,1.015),(1.64,.895,.24,.987),(2.15,.815,.30,.93),(2.24,.70,.32,.90)]
+    body=lower_body('Silver blue estate body',rows,True)
     arches(body,[-1.37,1.36],.335,.335)
-    roof,side=cabin('Touring cabin',[(-1.06,.83,1.02),(-.82,.83,1.22),(-.39,.81,1.455),(.35,.82,1.49),(1.23,.80,1.46),(1.64,.79,1.36),(1.95,.77,1.02)],.99,'PoliceSilver')
+    cabin_rows=[(-1.06,.83,1.02),(-.82,.83,1.22),(-.39,.81,1.455),(.35,.82,1.49),(1.23,.80,1.46),(1.64,.79,1.36),(1.95,.77,1.02)]
+    roof,side=cabin('Touring cabin',cabin_rows,.99,'PoliceSilver')
+    def side_vinyl(y,z,sign,offset=.004):
+        w,bottom,top=sample(rows,y);q=max(-.998,min(.998,(z-(bottom+top)/2)/((top-bottom)/2)))
+        return (sign*(w*(1-abs(q)**(2/.45))**(.45/2)+offset),y,z)
+    def bonnet(x,y,offset=.004):
+        w,bottom,top=sample(rows,y)
+        return (x,y,(bottom+top)/2+(top-bottom)/2*(1-min(.999,abs(x/w))**(2/.45))**(.45/2)+offset)
+    grid('Full bonnet police-blue vinyl',lambda u,v:bonnet((u*2-1)*(.62+.09*v),-2.015+v*.955),22,20,'PoliceBlue')
+    for sign in [-1,1]:
+        grid('Bonnet fluorescent edge',lambda u,v:bonnet(sign*(.62+.09*v+u*.075),-2.015+v*.955,.006),3,20,'ReflectiveYellow')
+    fitted(label('POLIZEI',(0,-1.475,1.04),(0,0,0),.26,width=.98),body,.008)
+    # Roof identification sits behind the lightbar and follows the curved roof.
+    roof_id=label('B 08-110',(0,.77,1.55),(0,0,0),.26,'PoliceBlue',.91)
+    for v in roof_id.data.vertices:
+        x,y=v.co.x+roof_id.location.x,v.co.y+roof_id.location.y
+        v.co.z=roof(y,x/(sample(cabin_rows,y)[0]*.84))[2]+.005-roof_id.location.z
     for sign in [-1,1]:
         pane('Front door glass',lambda u,v:side(-.255+u*.44,.51+v*.39,sign,.005))
         pane('Rear door glass',lambda u,v:side(.655+u*.39,.51+v*.39,sign,.005))
@@ -330,10 +400,19 @@ def make_police():
         ellipsoid('Mirror fairing',(sign*1.0,-.75,1.09),(.085,.15,.07),'PoliceSilver',20,10)
         cube('Swept headlight',(sign*.615,-2.235,.752),(.365,.062,.105),'Glass',.04)
         for x in [.50,.68]:ellipsoid('Projector lens',(sign*x,-2.268,.753),(.036,.009,.034),'Headlamp',16,8)
-        cube('Tail lamp',(sign*.63,2.224,.789),(.32,.033,.123),'BrakeLens',.035)
-        for x in [.23,.50,.69]:cube('Rear yellow reflector',(sign*x,2.245,.62),(.17,.006,.065),'ReflectiveYellow',.013)
-        # Lettering is part of the authored livery, with no floating sign panels.
-        label('POLIZEI',(sign*.923,-.32,.77),(math.pi/2,0,sign*math.pi/2),.19)
+        cube('Tail lamp',(sign*.63,2.256,.802),(.32,.033,.123),'BrakeLens',.035)
+        for i in range(22):
+            y=-2.04+i*.192;z=min(.881,sample(rows,y)[2]-.052)
+            grid('Segmented shoulder reflector',lambda u,v:side_vinyl(y+(u-.5)*.137,z+(v-.5)*.033,sign,.006),2,2,'WhiteLettering')
+        for i in range(10):
+            y=-.86+i*.192
+            grid('Lower door reflector',lambda u,v:side_vinyl(y+(u-.5)*.137,.602+(v-.5)*.027,sign,.006),2,2,'WhiteLettering')
+        # The door lettering, unit star and emergency number are applied to the actual shell.
+        fitted(label('POLIZEI',(sign*.94,-.37,.782),(math.pi/2,0,sign*math.pi/2),.24,width=1.02),body,.007)
+        fitted(label('ABSCHNITT 08',(sign*.94,-.35,.668),(math.pi/2,0,sign*math.pi/2),.061,width=.65),body,.007)
+        service_badge(sign,body)
+        fitted(label('NOTRUF',(sign*.94,1.78,.831),(math.pi/2,0,sign*math.pi/2),.074,width=.34),body,.018)
+        fitted(label('110',(sign*.94,1.78,.753),(math.pi/2,0,sign*math.pi/2),.098,width=.26),body,.012)
     pane('Estate front windscreen',lambda u,v:(roof(-.795+v*.21,u*.91)[0],-.795+v*.21,roof(-.795+v*.21,u*.91)[2]+.005))
     pane('Estate rear glass',lambda u,v:(roof(1.755+v*.16,u*.90)[0],1.755+v*.16,roof(1.755+v*.16,u*.90)[2]+.005))
     cube('Rear spoiler',(0,1.685,1.39),(1.36,.19,.047),'PoliceSilver',.026)
@@ -342,10 +421,18 @@ def make_police():
         cube('Paired grille inlet',(x,-2.281,.735),(.262,.02,.127),'DarkTrim',.045)
         for dx in [-.08,-.04,0,.04,.08]:tube('Grille slat',[(x+dx,-2.298,.69),(x+dx,-2.298,.78)],.004,'Chrome',4)
     cube('Lower air intake',(0,-2.255,.435),(1.35,.03,.15),'DarkTrim',.065)
-    cube('Front plate',(0,-2.294,.562),(.52,.014,.096),'WhiteLettering',.006)
-    cube('Rear plate',(0,2.262,.63),(.52,.014,.096),'WhiteLettering',.006)
-    label('POLIZEI',(0,2.263,.83),(math.pi/2,0,math.pi),.16)
-    label('POLIZEI',(0,-1.44,.972),(0,0,math.pi),.155)
+    rear_panel=[(-.68,2.246,.432),(-.68,2.246,.61),(-.48,2.246,.738),(.48,2.246,.738),(.68,2.246,.61),(.68,2.246,.432)]
+    fitted(mesh('Rear fluorescent visibility field',rear_panel,[tuple(range(6))],'ReflectiveYellow',False),body,.004)
+    for sign in [-1,1]:
+        fitted(mesh('Rear diagonal blue foil',[(sign*x,2.251,z) for x,z in [(.31,.44),(.46,.44),(.66,.68),(.51,.73)]],[(0,1,2,3)],'PoliceBlue',False),body,.007)
+        for i in range(4):
+            x=sign*(.14+i*.145)
+            cube('Rear upper fluorescent segment',(x,2.250,.887),(.116,.005,.024),'ReflectiveYellow',.004)
+    plate('B   7408',(0,-2.294,.562))
+    plate('B   7408',(0,2.262,.622),True)
+    fitted(label('POLIZEI',(0,2.266,.814),(math.pi/2,0,math.pi),.177,width=.75),body,.009)
+    for sign in [-1,1]:
+        cube('Front bumper yellow reflector',(sign*.63,-2.272,.555),(.19,.008,.047),'ReflectiveYellow',.01)
     # One correctly proportioned transverse lightbar with two integrated LED banks.
     for x in [-.43,.43]:cube('Lightbar mounting foot',(x,-.06,1.525),(.09,.14,.085),'DarkTrim',.02)
     cube('Lightbar base',(0,-.06,1.57),(1.16,.26,.07),'DarkTrim',.032)

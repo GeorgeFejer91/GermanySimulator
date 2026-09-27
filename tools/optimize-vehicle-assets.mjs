@@ -7,7 +7,7 @@ import {createHash} from 'node:crypto';
 import assert from 'node:assert/strict';
 const require=createRequire(resolve(process.argv[2]||'.','package.json'));
 const {NodeIO}=require('@gltf-transform/core'),{ALL_EXTENSIONS}=require('@gltf-transform/extensions');
-const {dedup,prune,weld,simplify,quantize}=require('@gltf-transform/functions');
+const {dedup,prune,weld,simplifyPrimitive,quantize}=require('@gltf-transform/functions');
 const {MeshoptSimplifier}=require('meshoptimizer'),validator=require('gltf-validator');
 await MeshoptSimplifier.ready;
 const root=resolve(import.meta.dirname,'../assets/models/vehicles');
@@ -15,7 +15,13 @@ const manifest=JSON.parse(await readFile(join(root,'manifest.json'),'utf8'));
 const io=new NodeIO().registerExtensions(ALL_EXTENSIONS);
 for(const item of Object.values(manifest.models)){
   const path=join(root,item.file),doc=await io.read(path);
-  await doc.transform(weld(),simplify({simplifier:MeshoptSimplifier,ratio:.55,error:.002}),dedup({keepUniqueNames:true}),prune(),quantize({quantizePosition:14,quantizeNormal:10}));
+  await doc.transform(weld());
+  for(const mesh of doc.getRoot().listMeshes())for(const prim of mesh.listPrimitives()){
+    const name=prim.getMaterial()?.getName()||'',lettering=/^(WhiteLettering|PlateWhite|PlateInk|EuroBlue)$/.test(name),vinyl=/^(PoliceSilver|PoliceBlue|ReflectiveYellow)$/.test(name);
+    // Keep the painted body close to its source surface so it cannot bury the fitted decals.
+    simplifyPrimitive(prim,{simplifier:MeshoptSimplifier,ratio:.46,error:lettering?.0001:vinyl?.0002:.002,lockBorder:lettering});
+  }
+  await doc.transform(dedup({keepUniqueNames:true}),prune(),quantize({quantizePosition:14,quantizeNormal:10}));
   const bytes=await io.writeBinary(doc),report=await validator.validateBytes(bytes,{uri:item.file});
   assert.equal(report.issues.numErrors,0,JSON.stringify(report.issues.messages));
   const wheels=doc.getRoot().listNodes().filter(n=>n.getExtras().wheel);
@@ -27,5 +33,5 @@ for(const item of Object.values(manifest.models)){
   await writeFile(path,bytes);
   console.log(item.file,JSON.stringify({triangles:item.triangles,bytes:item.bytes,errors:report.issues.numErrors,warnings:report.issues.numWarnings}));
 }
-manifest.optimization='glTF Transform 4.5.0: weld, bounded simplify, dedup, prune, 14-bit position/10-bit normal quantization; no runtime decoder';
+manifest.optimization='glTF Transform 4.5.0: weld, bounded simplify with locked lettering borders, dedup, prune, 14-bit position/10-bit normal quantization; no runtime decoder';
 await writeFile(join(root,'manifest.json'),JSON.stringify(manifest,null,2)+'\n');

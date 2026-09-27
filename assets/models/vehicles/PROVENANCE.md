@@ -2,7 +2,7 @@
 
 These three models are original Germany Simulator artwork, authored in Blender
 5.2.1 with `tools/build-vehicle-assets.py`. No downloaded mesh, image texture,
-manufacturer logo, police crest or scanned geometry is included. The complete
+manufacturer logo, official police crest or scanned geometry is included. The complete
 body, glazing, running gear, trim, lamps and livery belong to each GLB.
 
 - `beetle.glb`: late-1960s Volkswagen Type 1 silhouette, rounded wings and bonnet,
@@ -13,7 +13,16 @@ body, glazing, running gear, trim, lamps and livery belong to each GLB.
 - `police-estate.glb`: a German police estate based on the 2016 BMW 318d Touring's
   proportions and silver/blue/yellow treatment. It has shaped glazing, alloy
   wheels, roof rails, one transverse low-profile blue lightbar, and independent
-  left/right LED materials. `POLIZEI` lettering is authored mesh geometry.
+  left/right LED materials. The blue/yellow vinyl wraps the bonnet, both flanks
+  and rear, with segmented reflective strips, large `POLIZEI` lettering,
+  `NOTRUF 110` markings, original department-08 stars and a roof identifier.
+  All lettering and vinyl are fitted mesh geometry, including the rear
+  diagonal visibility pattern.
+
+All three cars have front and rear German-format plates, with a black holder,
+white face, black registration, EU band, twelve stars, `D` and plain seals.
+Registrations are game-authored. Letters use the existing SIL OFL Roboto
+Condensed font in `assets/fonts/roboto-condensed/`, converted to geometry.
 
 The models are game interpretations of these vehicles, not measured replicas.
 The photographs below were viewed as shape/detail references only; their pixels
@@ -32,7 +41,7 @@ References checked 27 September 2026:
 ## Runtime contract
 
 `manifest.json` owns final byte sizes, rendered triangle counts and SHA-256 hashes.
-Each GLB is under 600 KB / 32,000 triangles; the complete fleet is about 1.1 MB.
+Each GLB is under 600 KB / 32,000 triangles; the complete fleet is about 1.2 MB.
 All use Y-up, +Z-front, ground-level roots and uniform runtime fitting. Four
 named empty wheel pivots carry `wheel` and `radius` extras; the front two also
 have steering parents with `steer` extras. Rolling rotates local X, steering
@@ -54,7 +63,8 @@ vortex behavior and sound remain authoritative.
 2. Run `node tools/optimize-vehicle-assets.mjs <offline-tools-node_modules>` with
    glTF Transform core/extensions/functions 4.5.0, meshoptimizer 0.24.0 and
    gltf-validator available in that directory. This welds, simplifies within a
-   bounded error, preserves distinct material names, prunes and quantizes.
+   bounded error, locks lettering/plate borders so small glyphs survive,
+   preserves distinct material names, prunes and quantizes.
    `KHR_mesh_quantization` requires no downloaded decoder. The script validates
    every GLB and updates the manifest. These packages are authoring tools only.
 3. Run `node --test tests/vehicle-models.test.mjs tests/ambient-traffic.test.mjs tests/police-escalation.test.mjs`,
