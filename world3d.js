@@ -469,7 +469,7 @@ function showRendererFailure(error){
     for(const x of [-4.3,4.3])sign(["ZUTRITT VERBOTEN","PARK BENUTZEN: UNTERSAGT"],2.7,.81,x,1.93,front+.1,"#d0b85d");
     // Keep the advertising below the razor wire so the camera can see the park.
     for(const x of [-6.15,-1.25])landmarkBanner("cdu",g,.65,1,x,2.6,front+.29);
-    const priceTag=landmarkBanner("price",g,3.8,.79,-3.7,2.6,front+.29);priceTag.rotation.z=-.08;
+    const priceTag=landmarkBanner("price",g,3.8,.79,-3.7,2.6,front+.29);priceTag.rotation.z=-.18;
     const plaqueX=(site.plaqueX-site.x-site.w/2)*S,plaqueZ=(site.plaqueY-site.y-site.h/2)*S;
     for(const x of [plaqueX-2,plaqueX+2])block(steel,x,1.18,plaqueZ-.15,.1,2.36,.1);
     sign(["GÖRLITZER PARK · KOSTENTAFEL",...(site.signLines||[]),"E · DETAILS UND QUELLEN"],4.8,2.42,plaqueX,2.35,plaqueZ);
@@ -586,7 +586,7 @@ function showRendererFailure(error){
     camera.lookAt(px+(memorial?(X(memorial.x)-px)*frame:0),1+3.6*frame,pz-2.7+(memorial?(Z(memorial.y)-(pz-2.7))*frame:0));
     const park=bridge.goerlitzerPark,parkDistance=park?Math.hypot(bridge.player.x-park.plaqueX,bridge.player.y-park.plaqueY):Infinity;
     const parkFrame=park&&bridge.player.y>park.y+park.h-30?Math.max(0,Math.min(1,(440-parkDistance)/250)):0;
-    if(parkFrame){const narrow=Math.max(0,.95/camera.aspect-1),cx=X(park.x+park.w/2),cz=Z(park.y+park.h/2);camera.position.set(px+(cx-px)*parkFrame,11.5+(4+16*narrow)*parkFrame,pz+14+16*narrow*parkFrame);camera.lookAt(px+(cx-px)*parkFrame,1+parkFrame,pz-2.7+(cz-(pz-2.7))*parkFrame)}
+    if(parkFrame){const narrow=Math.max(0,.95/camera.aspect-1),cx=X(park.x+park.w/2),cz=Z(park.y+park.h/2);camera.position.set(px+(cx-px)*parkFrame,11.5+(11+14*narrow)*parkFrame,pz+14+8*narrow*parkFrame);camera.lookAt(px+(cx-px)*parkFrame,1+parkFrame,pz-2.7+(cz-(pz-2.7))*parkFrame)}
     updateWirtschaftswunder(now);renderer.render(scene,camera);
   },inspectAssets};
   app.classList.add("three-ready");
