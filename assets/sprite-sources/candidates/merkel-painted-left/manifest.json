@@ -1,0 +1,42 @@
+{
+  "schemaVersion": 1,
+  "status": "candidate-unapproved",
+  "scope": "merkel-painted-left-3d-bound-pilot",
+  "appearance": "ImageGen paint-over projected once onto the 3D rig; not an identical or approved likeness",
+  "movementAuthority": "unchanged merkel-3d weighted mesh and 32 bone poses; no per-frame generation or recentering",
+  "playbackFrames": 32,
+  "inspectionPoints": 33,
+  "cellSize": 128,
+  "durationSeconds": 1.2333284,
+  "recommendedFps": 26,
+  "directions": [
+    "left"
+  ],
+  "rows": {
+    "left": 0
+  },
+  "runtimeIsolation": "preview-only; stable game sprites unchanged",
+  "limitations": [
+    "one left camera only",
+    "hidden surfaces use material base colors",
+    "silhouette remains that of the 3D study",
+    "likeness and hand/clothing detail still need human review"
+  ],
+  "sourceHashes": {
+    "assets\\sprite-sources\\candidates\\merkel-3d\\merkel-walk.blend": "cba5b933b0fdd9fd14b26cea3ed298907c84f6ed233ee5b77877e4ed0e406cab",
+    "assets\\sprite-sources\\candidates\\merkel-3d\\pose-audit.json": "9469bd29abb7e373f6ce0ae7401d9d758d062000df35384fcd2b7166ac3f652c",
+    "assets\\sprite-sources\\candidates\\merkel-3d\\merkel-sprite.png": "dd8835fd199d175cb6c515dceb199ee501c5448a8839b4faa06e5fdf86485ebb",
+    "assets/sprite-archive/pre-rig-20260921/assets/sprite-sources/merkel-sprite-keys.png": "7d5cde706ea62a8e4a8be4086ad0d595272db76b4cc61277d95e081a861b69df"
+  },
+  "artifacts": {
+    "merkel-sprite.png": "c1f4534ce3a691f27139fcfc81d0668497526ae4122a599a456101dc125269f4",
+    "merkel-bones.png": "5d8fdda49bbd891f892a6a52eeccb8ca21afd0a8aa53c709c1e35c98fff7e043",
+    "merkel-audit.png": "5e99d4a08cfc1eeaba84abf3ae436423a036d5350abd2c7e9cd8f85c695749ed",
+    "paint-over.png": "f3a205fabfb62dcafe66aa3bab09c805dc27f0141d6078471d09c79db46b423e",
+    "pose-guide.png": "916eca9af84a1804c28915ebc498a38387e2606dd28d684c5e3cfc90f1168468",
+    "PROMPT.md": "7f4a54436bab39bc634f5aa085625138c27d888b66bbe28dd7798b9f3cfee0f7",
+    "binding-audit.json": "f58779cee405ea284288a69140bd4f6e31ce370598f1fa872433556c26885362",
+    "merkel-painted.blend": "d5d8db9e5f91b97fb0772fe6d15a78586061cc2afe253238df336ebaf4c35acd",
+    "contact-sheet.png": "7c54f7f172268b61051174137a0ea1b79301cdf0790c34604a06dbb75e5a4d04"
+  }
+}

@@ -50,6 +50,15 @@ evidence and artifact hashes together. The preview's `source=3d` option fetches
 ordinary PNG atlases (32 playback poses, four views); it never downloads the
 authoring mesh, rig, `.blend` or BVH. The root game's stable archive is unchanged.
 See `SPRITE-GENERATION-PROTOCOL.md` for the separate 3D lane's motion/visual gates.
+
+The adjacent `merkel-painted-left/` candidate binds one built-in ImageGen
+paint-over to that unchanged 3D rig and bakes a 32-frame left-only PNG loop.
+Keep the raw painting, exact prompt, guide and editable packed blend. Fixed UVs
+and native depth own consistency; do not independently regenerate frames. This
+view-specific, unapproved appearance pilot is selectable at `?source=painted`
+and must not enter the game without visual acceptance. Its verifier requires
+the same bone coordinates and alpha silhouettes as the grey source cycle.
+
 Preview-only text fitting uses locally vendored Pretext 0.0.9 (MIT) and Roboto
 Condensed (OFL), with adjacent provenance; these are not game dependencies.
 

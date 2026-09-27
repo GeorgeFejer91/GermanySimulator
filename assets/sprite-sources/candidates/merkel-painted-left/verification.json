@@ -1,0 +1,12 @@
+{
+  "status": "mechanical-checks-pass; not visual approval",
+  "frames": 32,
+  "views": [
+    "left"
+  ],
+  "maximumBoneDifferenceFrom3D": 0.0,
+  "maximumAlphaDifferenceFrom3D": 0,
+  "closurePixelMaxDifference": 0,
+  "staticTextureBindings": 9,
+  "appearance": "single ImageGen painting; fixed UVs; 3D depth resolves occlusion"
+}

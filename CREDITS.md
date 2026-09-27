@@ -365,6 +365,14 @@ The price-banner badge uses the [current CDU logo](https://commons.wikimedia.org
 
 ## Preview-only 3D walking study and typography
 
+The left-facing painted Merkel study uses OpenAI's built-in ImageGen tool to
+paint one captured 3D pose from the original sprite appearance reference. The
+unchanged raw output is bound once to the same 3D model and rendered as a
+32-frame 2D cycle, not generated independently per frame. The prompt, source
+hashes, limitations and editable packed model are in
+`assets/sprite-sources/candidates/merkel-painted-left/PROVENANCE.md`. It remains
+preview-only and unapproved; the inherited model/motion credits below apply.
+
 The grey Merkel motion study uses MakeHuman community's **CC0** anatomical mesh,
 joint definitions and skin weights, with original clothing and proportion edits.
 Pinned versions, authors, modifications and licenses are in

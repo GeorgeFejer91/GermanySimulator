@@ -1,5 +1,18 @@
 # Durable decisions
 
+## 2026-09-27 — ImageGen appearance bound to the 3D walk
+
+The user clarified that the 3D model is a pose authority for painted 2D sprites,
+not the final grey artwork. The first painted test remains one left-facing
+Merkel cycle. Built-in ImageGen uses the captured 3D pose and original Merkel
+sprite sheet; one fixed projection binds the resulting painting to the existing
+weighted mesh. The 32 final frames are rendered from that model rather than
+independently regenerated, preserving exact bone motion, silhouettes and loop
+closure. The source painting, prompt and editable model stay with the candidate.
+View-specific texture coverage, likeness, hands and clothing fit remain review
+limits. `?source=painted` adds a preview option; the game's stable atlases and
+all older experiments are unchanged. No runtime authoring dependency is added.
+
 ## 2026-09-26 — Landmark flags and visible fence construction cost
 
 At the user’s request, two CDU banners flank a dated 1933–1945 Reich flag on the Kiesinger monument. His NSDAP membership chronology remains explicit on the plaque. The historical flag was co-official from 1933 and sole national flag from 1935; reference and production context live in `CREDITS.md`. The monument retains its Reichstag-matched height. Görlitzer Park retains only two small CDU banners beside a compact price tag mounted below the south fence’s razor wire, highlighting the reported approximately €1.8 million construction cost. The place-name sign stands above the rear fence so the park interior remains visible from the normal camera. The price flag now uses an amount-only bargain-tag treatment (`≈ 1.800.000 €`) with a current CDU logo badge; public funding and report-date context stay in the existing placard and credits, without substituting a budget or adding security totals. Existing source-grounded dialogue, routes and collision footprints remain authoritative. These flags are code-drawn folded planes using four shared textures; the price texture incorporates one locally shipped CDU logo SVG with a drawn-letter fallback.

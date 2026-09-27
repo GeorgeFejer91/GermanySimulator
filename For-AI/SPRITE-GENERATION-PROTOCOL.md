@@ -318,3 +318,27 @@ this fixed surface; independent frame generation must not reintroduce wobble.
 The preview alone uses locally pinned Pretext 0.0.9 and Roboto Condensed to check
 bounded text after fonts load; native controls and text-spacing overrides also
 require rendered 320px/desktop/mobile/200% checks. This does not migrate game UI.
+
+### 3D-bound ImageGen paint pilot
+
+The user's next step is the painted output, not the grey model itself.
+`assets/sprite-sources/candidates/merkel-painted-left/` tests that step for one
+left-facing cycle only. Built-in ImageGen paints a captured 3D pose using the
+archived Merkel sheet as the appearance reference. Its original output, exact
+prompt, guide, provenance and hashes remain alongside the derived assets.
+
+`tools/build-merkel-painted-pilot.py` binds that painting once to the existing
+weighted mesh with fixed UVs, then renders the same 32 poses and closure. This
+is not separate AI generation of every frame. Fixed source-pose registration
+and homologous far-limb texture reuse are permitted; frame-dependent UV fitting,
+recentring, mesh changes and optical crossfades are not. Hidden texels use part
+base colors. Only the left camera is qualified for this view-specific texture.
+
+`python tools/verify-merkel-painted-pilot.py` checks source/output hashes, actual
+bone equality to the 3D audit, identical alpha silhouettes, 32 unique frames,
+ankle coverage and pixel-exact closure. Inspect every contact-sheet frame and
+the browser loop as well: the visible hand geometry, clothing intersections,
+and likeness remain review limitations. Keep `candidate-unapproved` and keep
+the stable in-game sprites. `sprite-preview.html?source=painted` exposes normal,
+bone/heel/toe and closure views beside all earlier versions. Rebuild and source
+details are in the candidate's `PROVENANCE.md`.

@@ -97,6 +97,7 @@
           <option value="candidate">CANDIDATE · 21</option>
           <option value="mocap">2D · CMU PILOT</option>
           <option value="3d">3D · MERKEL</option>
+          <option value="painted">PAINTED · MERKEL</option>
         </select>
       </label>
       <button id="mode" type="button" aria-pressed="false">FOCUS VIEW</button>
@@ -147,7 +148,7 @@
   </section>
   <main id="previews" aria-live="polite"></main>
   <script>
-    const CACHE_TOKEN="20260927-merkel-3d2";
+    const CACHE_TOKEN="20260927-merkel-painted1";
     const QA_ROWS={left:0,right:1,up:2,down:3};
     const SOURCES={
       stable:{label:"GAME · STABLE",root:"assets/sprite-archive/pre-rig-20260921/assets/",token:"20260922-stable1",frames:{merkel:24},note:"These are the reliable sprites currently used in the game. The walking studies below are preview-only."},
@@ -177,6 +178,15 @@
         qa:{
           bones:{file:"merkel-bones.png",frames:32,playbackFrames:32,rows:QA_ROWS},
           audit:{file:"merkel-audit.png",frames:33,playbackFrames:32,rows:QA_ROWS}
+        }
+      },
+      painted:{
+        label:"PAINTED · MERKEL LEFT",root:"assets/sprite-sources/candidates/merkel-painted-left/",token:CACHE_TOKEN,
+        frames:{merkel:32},playbackFrames:32,fps:26,ids:["merkel"],directions:["left"],rows:{left:0},meta:"3D-BOUND PAINT · 32 FRAMES",
+        note:"ImageGen paint-over on the 3D walking rig: one fixed painting, 32 rendered poses, left view only. This tests stable painted motion; likeness, hands and clothing fit still need review. It is not an identical or approved replacement. The game keeps its stable sprites. Focus view offers Bone overlay and Loop closure.",
+        qa:{
+          bones:{file:"merkel-bones.png",frames:32,playbackFrames:32,rows:{left:0}},
+          audit:{file:"merkel-audit.png",frames:33,playbackFrames:32,rows:{left:0}}
         }
       }
     };
@@ -355,6 +365,7 @@
         sprite.article.hidden=!allowed(sprite.id);
         if(!allowed(sprite.id))continue;
         sprite.frames=source.frames[sprite.id]||32;
+        sprite.article.querySelector(".directions").style.gridTemplateColumns=source.directions?.length===1?"1fr":"";
         sprite.meta.textContent=source.meta||`${sprite.rows.length} ROWS · ${sprite.frames} FRAMES`;
         const file=sprite.runtime.split("/").pop();
         sprite.image.src=`./${source.root}${file}?v=${source.token}`;
@@ -413,23 +424,28 @@
     });
 
     async function load(){
-      const [response,candidateResponse,mocapResponse,threeResponse]=await Promise.all([
+      const [response,candidateResponse,mocapResponse,threeResponse,paintedResponse]=await Promise.all([
         fetch(`./assets/sprite-sources/rigs/registry.json?v=${CACHE_TOKEN}`),
         fetch(`./assets/sprite-sources/candidates/merkel-21/manifest.json?v=${CACHE_TOKEN}`),
         fetch(`./assets/sprite-sources/candidates/merkel-cmu-left/manifest.json?v=${CACHE_TOKEN}`),
-        fetch(`./assets/sprite-sources/candidates/merkel-3d/manifest.json?v=${CACHE_TOKEN}`)
+        fetch(`./assets/sprite-sources/candidates/merkel-3d/manifest.json?v=${CACHE_TOKEN}`),
+        fetch(`./assets/sprite-sources/candidates/merkel-painted-left/manifest.json?v=${CACHE_TOKEN}`)
       ]);
       if(!response.ok)throw new Error(`Registry request failed (${response.status})`);
       if(!candidateResponse.ok)throw new Error(`Candidate manifest request failed (${candidateResponse.status})`);
       if(!mocapResponse.ok)throw new Error(`Mocap pilot manifest request failed (${mocapResponse.status})`);
       if(!threeResponse.ok)throw new Error(`3D pilot manifest request failed (${threeResponse.status})`);
-      const [registry,candidateManifest,mocapManifest,threeManifest]=await Promise.all([response.json(),candidateResponse.json(),mocapResponse.json(),threeResponse.json()]);
+      if(!paintedResponse.ok)throw new Error(`Painted pilot manifest request failed (${paintedResponse.status})`);
+      const [registry,candidateManifest,mocapManifest,threeManifest,paintedManifest]=await Promise.all([response.json(),candidateResponse.json(),mocapResponse.json(),threeResponse.json(),paintedResponse.json()]);
       SOURCES.candidate.frames.merkel=candidateManifest.playbackFrames;
       SOURCES.mocap.frames.merkel=mocapManifest.inspectionPoints;
       SOURCES.mocap.playbackFrames=mocapManifest.playbackFrames;
       SOURCES["3d"].frames.merkel=threeManifest.playbackFrames;
       SOURCES["3d"].playbackFrames=threeManifest.playbackFrames;
       SOURCES["3d"].fps=threeManifest.recommendedFps;
+      SOURCES.painted.frames.merkel=paintedManifest.playbackFrames;
+      SOURCES.painted.playbackFrames=paintedManifest.playbackFrames;
+      SOURCES.painted.fps=paintedManifest.recommendedFps;
       for(const sprite of registry.sprites){
         const article=document.createElement("article");
         const heading=document.createElement("header");
