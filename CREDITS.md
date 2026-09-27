@@ -27,15 +27,15 @@ The Reichstagsgebäude/Bundestag landmark is an original, texture-free Blender m
 
 The monument’s dated historical Reich flag and the CDU banners on this monument and the Görlitzer Park fence are original canvas drawings in `world3d.js`, requested for the game’s historical/political setting; no official campaign artwork is imported. The [Deutscher Bundestag biography](https://www.bundestag.de/dokumente/textarchiv/1966-12-01-kiesinger-481690) dates Kiesinger’s NSDAP membership to 1933–1945. The [Deutsches Historisches Museum flag history](https://www.dhm.de/lemo/kapitel/ns-regime/innenpolitik/das-hakenkreuz) records the Nazi flag’s co-official status alongside black-white-red from March 1933 and sole national-flag status from 1935 to 1945. The CDU entry date remains 1948, as documented in the existing historical plaque sources. These display choices concern Kiesinger’s documented biography, not a claim that the contemporary CDU used the historical flag.
 
-The monumental bronze figure of Kurt Georg Kiesinger was authored in Blender
+The monumental marble figure of Kurt Georg Kiesinger was authored in Blender
 with an original civilian body and pose. Its face fits offline landmarks from
 CDU / KAS-ACDP's 1967 portrait (CC BY-SA 3.0 DE), Anefo / Nationaal Archief
 919-8404 (CC0), and the ThePhotoEnhancer crop of Anefo 919-8423 (CC BY-SA 4.0).
 MediaPipe's canonical face connectivity and alignment reference are reused
 under Apache 2.0; the adjacent `LICENSE-MEDIAPIPE.txt` retains that license.
 The authored model adaptation is [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/).
-The licensed KAS portrait also supplies shallow relief and restrained bronze
-vertex patina. No image textures or ML runtime are bundled. HDG and Bundesarchiv
+The licensed KAS portrait also supplies shallow relief and restrained stone
+vertex shading. No image textures or ML runtime are bundled. HDG and Bundesarchiv
 portraits were visual inspection references only. Full source links,
 attributions, modifications, rebuild instructions, and checksums are in
 `assets/models/kiesinger/PROVENANCE.md`.

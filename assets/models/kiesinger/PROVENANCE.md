@@ -6,7 +6,7 @@ hair, and rear cranium are project-authored geometry. The ears adapt the
 CC0 MakeHuman anatomical mesh described below. The face uses
 estimated landmarks from the credited archival photographs and reused
 MediaPipe canonical face connectivity. Shallow facial relief and restrained
-bronze vertex colors also sample the licensed KAS portrait. This is an
+stone vertex colors also sample the licensed KAS portrait. This is an
 artistic reconstruction with estimated geometry. No image textures, insignia,
 or animation are included in the figure.
 
@@ -16,9 +16,9 @@ or animation are included in the figure.
   collection, and studio inspection camera/lights. To edit the full sculpt,
   unhide **Kiesinger — editable original sculpture** and hide **GAME EXPORT**.
   The studio plinth and lighting are excluded from the GLB.
-- `kiesinger-statue.glb`: glTF 2.0, four shared bronze materials/four draw
+- `kiesinger-statue.glb`: glTF 2.0, four shared marble materials/four draw
   calls, no textures, no skeleton or animation, no decoder extension or
-  external file requirement. 83,645 triangles, 1,865,840 bytes.
+  external file requirement. 83,646 triangles, 2,029,056 bytes.
 - `portrait-landmarks.json`: offline authoring data containing the 468 fitted
   face vertices, neutral-photo projection coordinates, reused polygon indices, source-photo hashes,
   MediaPipe version, and canonical source hash. The browser never loads it.
@@ -46,25 +46,30 @@ Blender closes and subdivides the fitted facial surface and adds hooded lids,
 orbital folds, cheek volume, soft age lines, and engraved irises/pupils. The
 neutral KAS portrait is projected through its landmark coordinates: broad
 illumination is normalized, local contrast contributes shallow surface relief,
-and bounded brightness variation becomes bronze vertex color (`COLOR_0`).
+and bounded brightness variation becomes stone vertex color (`COLOR_0`).
 No photograph texture is shipped. The original photo's SHA-256 is checked
 before sampling. The brows follow the photo and underlying skin geometry.
 
 The cast-eye surfaces meet the actual subdivided eyelid boundaries, closing
 the former gaps at the eye corners. Their shallow iris and pupil engravings
-share the bronze material. Orbital and cheek additions are restrained to
+use shaded marble. Orbital and cheek additions are restrained to
 preserve the photographed proportions; photo relief and patina contrast are
 reduced to avoid mottled skin. Each ear is one continuous closed anatomical surface
 with a rolled helix, branching antihelix, concha, tragus and soft lobule.
 The anterior attachment enters the head; the inner folds and lobe are not
 separate cylinders or spheres.
 
-The artistic finish uses warm metallic bronze, restrained green patina on
-the suit, and darker rough bronze for the visible eyes. Slightly recessed
-orbital planes, the brow mass and a soft vertex-patina gradient deepen the
+The artistic finish uses warm ivory marble with zero metalness, rough stone
+surfaces and darker marble in the visible eye recesses. Subtle continuous
+veining and clouding are baked into vertex colors on every part; no image
+texture or runtime procedural shader is needed. Slightly recessed
+orbital planes, the brow mass and a soft vertex-shading gradient deepen the
 eye shadows while preserving the fitted lid openings. Shallow modelling-tool
-facets on the cheeks and temples give the cast surface visible workmanship.
+facets on the cheeks and temples give the carved surface visible workmanship.
 The neck continues inside the jaw and nape with broad sternomastoid planes.
+The requested subtle age refinement adds fuller lower orbital folds, modest
+cheek hollowing and jowl descent, and slightly stronger forehead, outer-eye
+and mouth creases while retaining the reference-based expression.
 
 ### Ear anatomy
 
@@ -109,7 +114,7 @@ export. These are estimated proportions rather than measured anatomy.
   Christlich-Demokratische Politik, ACDP 10-004 : 302;
   [CC BY-SA 3.0 DE](https://creativecommons.org/licenses/by-sa/3.0/de/).
   Local input `kiesinger-1967-kas.jpg`. Used for face landmarks, shallow relief,
-  and bronze vertex patina; printed poster text is excluded.
+  and stone vertex shading; printed poster text is excluded.
 - [Kiesinger, Höcherl, Wehner and Brandt, 1 December 1966](https://commons.wikimedia.org/wiki/File:V.l.n.r._Kurt_Georg_Kiesinger,_Hochler_(CSU)_Wehner_en_Willy_Brandt,_Bestanddeelnr_919-8404.jpg):
   unknown photographer / Anefo; Nationaal Archief, item 919-8404, Bonn;
   [CC0](https://creativecommons.org/publicdomain/zero/1.0/).
@@ -229,5 +234,5 @@ body render, and the real desktop/mobile game views.
 
 SHA-256:
 
-- GLB: `4ed52078f109c609a514d94c7bfa23d66f8cef5f9cd7015b80ae71c54f94d207`
-- Blender: `c628d59eaba48f7e9e8dee497de4e29ef2beaf37e01f9a18cfb9aa5ef0f4c9c9`
+- GLB: `b368ac2d3ad00b6c76bcb80bbbe117b8111797040aba57860b86c51c832509ba`
+- Blender: `18b6783a0af770cf2d42e68c2f896c32348e134555149e9f190dd543af6ab0c6`

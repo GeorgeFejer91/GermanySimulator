@@ -23,11 +23,11 @@ assert.equal(gltf.asset.version,"2.0");
 assert.equal(gltf.buffers.length,1,"geometry must share one embedded buffer");
 assert.ok(!gltf.buffers[0].uri,"the statue must not request an external buffer");
 assert.ok(gltf.buffers[0].byteLength<=binary.length&&binary.length-gltf.buffers[0].byteLength<=3,"the embedded buffer length must match its chunk");
-assert.equal((gltf.images||[]).length,0,"the bronze statue must be texture-free");
-assert.equal((gltf.textures||[]).length,0,"the bronze statue must not request textures");
+assert.equal((gltf.images||[]).length,0,"the marble statue must be texture-free");
+assert.equal((gltf.textures||[]).length,0,"the marble statue must not request textures");
 assert.equal((gltf.animations||[]).length,0,"the statue must remain static");
 assert.equal((gltf.skins||[]).length,0,"the statue must not ship a skeleton");
-assert.equal((gltf.materials||[]).length,4,"the sculpt must reuse its four bronze materials");
+assert.equal((gltf.materials||[]).length,4,"the sculpt must reuse its four marble materials");
 assert.ok(!(gltf.extensionsRequired||[]).length,"the statue must load with the existing uncompressed GLTFLoader");
 
 const dimensions={SCALAR:1,VEC2:2,VEC3:3,VEC4:4,MAT4:16};
@@ -63,13 +63,13 @@ function visit(index,parent){
     assert.equal(position.a.componentType,5126,"positions must be ordinary float32 vectors");assert.equal(position.a.type,"VEC3");
     if(primitive.attributes.COLOR_0!==undefined){
       const color=accessor(primitive.attributes.COLOR_0);coloredPrimitives++;
-      assert.equal(color.a.count,position.a.count,"bronze patina must have one color per vertex");
-      assert.ok(["VEC3","VEC4"].includes(color.a.type),"patina must export RGB or RGBA");
+      assert.equal(color.a.count,position.a.count,"marble shading must have one color per vertex");
+      assert.ok(["VEC3","VEC4"].includes(color.a.type),"shading must export RGB or RGBA");
       const divisor=color.a.componentType===5121?255:color.a.componentType===5123?65535:1;
       if(divisor!==1)assert.equal(color.a.normalized,true,"integer vertex colors must be normalized");
-      for(let i=0;i<color.a.count;i++)assert.ok(color.read(i).every(v=>Number.isFinite(v)&&v>=0&&v<=divisor),"vertex patina must be finite and bounded");
+      for(let i=0;i<color.a.count;i++)assert.ok(color.read(i).every(v=>Number.isFinite(v)&&v>=0&&v<=divisor),"vertex shading must be finite and bounded");
     }
-    assert.ok(Number.isInteger(primitive.material)&&gltf.materials[primitive.material],"every primitive must use a shared bronze material");
+    assert.ok(Number.isInteger(primitive.material)&&gltf.materials[primitive.material],"every primitive must use a shared marble material");
     let count=position.a.count;
     if(primitive.indices!==undefined){const indices=accessor(primitive.indices);assert.equal(indices.a.type,"SCALAR");assert.ok([5121,5123,5125].includes(indices.a.componentType));count=indices.a.count;for(let i=0;i<count;i++)assert.ok(indices.read(i)[0]<position.a.count,"indices must refer to existing vertices")}
     assert.equal(count%3,0,"triangle data must contain whole triangles");triangles+=count/3;primitives++;vertices+=position.a.count;
@@ -88,7 +88,7 @@ for(const node of scene.nodes)visit(node,identity);
 assert.equal(usedMeshes.size,gltf.meshes.length,"the sculpture scene must account for every shipped mesh");
 assert.ok(vertices>0&&triangles>1_000&&triangles<85_000,"the sculpt must stay under 85,000 triangles");
 assert.ok(primitives<=4,"the four joined materials must require at most four draw calls");
-assert.ok(coloredPrimitives>0,"the photo-derived bronze patina must survive GLB export");
+assert.ok(coloredPrimitives>0,"the photo-derived marble shading must survive GLB export");
 const size=max.map((v,i)=>v-min[i]);
 assert.ok(Math.abs(min[1])<.05,"the shoes must be grounded at y=0");
 assert.ok(Math.abs(size[1]-6)<.05&&Math.abs(max[1]-6)<.05,"the Y-up statue must be six units tall");

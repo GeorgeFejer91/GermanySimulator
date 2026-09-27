@@ -327,7 +327,7 @@ function showRendererFailure(error){
   }
   function makeKiesingerMemorial(site){
     if(!site)return;
-    const g=new T.Group(),granite=mat(0x77736b,.96),stone=mat(0xb5ada0,.93),shadow=mat(0x4b4a45,.98),bronze=new T.MeshStandardMaterial({color:0x4b5852,metalness:.32,roughness:.68}),face=new T.MeshStandardMaterial({color:0x81745f,metalness:.28,roughness:.7}),hair=mat(0x3d4845,.79),gold=new T.MeshStandardMaterial({color:0xb3965b,metalness:.45,roughness:.59});
+    const g=new T.Group(),granite=mat(0x77736b,.96),stone=mat(0xb5ada0,.93),shadow=mat(0x4b4a45,.98),marble=new T.MeshStandardMaterial({color:0xc9c5bb,metalness:0,roughness:.69}),face=new T.MeshStandardMaterial({color:0xd0cdc5,metalness:0,roughness:.62}),hair=mat(0xbdbab1,.72),gold=new T.MeshStandardMaterial({color:0xb3965b,metalness:.45,roughness:.59});
     // The entire apron fits inside the reserved 350 × 300 world-unit parcel.
     box(6.9,.16,5.85,shadow,X(site.x),.08,Z(site.y));
     box(6.48,.28,5.4,granite,0,.3,0,g);
@@ -353,22 +353,22 @@ function showRendererFailure(error){
     const figure=new T.Group();figure.name="KiesingerFigureFallback";figure.position.set(0,4.3,-.22);g.add(figure);
     const shape=(points,material,z)=>{const outline=new T.Shape();outline.moveTo(...points[0]);for(const point of points.slice(1))outline.lineTo(...point);outline.closePath();const mesh=new T.Mesh(new T.ShapeGeometry(outline),material);mesh.position.z=z;figure.add(mesh);return mesh};
     for(const x of [-.43,.43]){
-      box(.63,.27,.96,bronze,x,.14,.24,figure);
-      const leg=new T.Mesh(new T.CylinderGeometry(.31,.26,1.85,8),bronze);leg.position.set(x,1.17,0);figure.add(leg);
-      box(.73,.18,.68,bronze,x,2.08,0,figure);
+      box(.63,.27,.96,marble,x,.14,.24,figure);
+      const leg=new T.Mesh(new T.CylinderGeometry(.31,.26,1.85,8),marble);leg.position.set(x,1.17,0);figure.add(leg);
+      box(.73,.18,.68,marble,x,2.08,0,figure);
     }
-    box(1.5,.46,.72,bronze,0,2.27,-.02,figure);
+    box(1.5,.46,.72,marble,0,2.27,-.02,figure);
     const coat=new T.Shape();coat.moveTo(-.68,0);coat.lineTo(.68,0);coat.lineTo(.82,.3);coat.lineTo(.98,1.72);coat.lineTo(.68,2.13);coat.lineTo(-.68,2.13);coat.lineTo(-.98,1.72);coat.lineTo(-.82,.3);coat.closePath();
-    const jacket=new T.Mesh(new T.ExtrudeGeometry(coat,{depth:.7,bevelEnabled:true,bevelThickness:.055,bevelSize:.07,bevelSegments:1}),bronze);jacket.position.set(0,2.27,-.36);figure.add(jacket);
+    const jacket=new T.Mesh(new T.ExtrudeGeometry(coat,{depth:.7,bevelEnabled:true,bevelThickness:.055,bevelSize:.07,bevelSegments:1}),marble);jacket.position.set(0,2.27,-.36);figure.add(jacket);
     shape([[-.38,4.4],[.38,4.4],[.23,3.61],[0,3.24],[-.23,3.61]],face,.43);
     shape([[-.55,4.36],[-.14,4.23],[0,3.21],[-.4,3.67]],hair,.47);
     shape([[.55,4.36],[.14,4.23],[0,3.21],[.4,3.67]],hair,.47);
-    shape([[-.1,4.12],[.1,4.12],[.07,3.55],[0,3.41],[-.07,3.55]],gold,.49);
+    shape([[-.1,4.12],[.1,4.12],[.07,3.55],[0,3.41],[-.07,3.55]],face,.49);
     for(const x of [-1.03,1.03]){
-      const arm=new T.Mesh(new T.CylinderGeometry(.23,.28,1.85,8),bronze);arm.position.set(x,3.36,-.02);arm.rotation.z=x>0?-.12:.12;figure.add(arm);
+      const arm=new T.Mesh(new T.CylinderGeometry(.23,.28,1.85,8),marble);arm.position.set(x,3.36,-.02);arm.rotation.z=x>0?-.12:.12;figure.add(arm);
       const hand=new T.Mesh(new T.SphereGeometry(.24,9,7),face);hand.scale.set(.78,1.13,.75);hand.position.set(x*1.11,2.42,.01);figure.add(hand);
     }
-    for(const y of [2.69,2.98,3.27]){const button=new T.Mesh(new T.SphereGeometry(.045,7,5),gold);button.position.set(0,y,.51);figure.add(button)}
+    for(const y of [2.69,2.98,3.27]){const button=new T.Mesh(new T.SphereGeometry(.045,7,5),face);button.position.set(0,y,.51);figure.add(button)}
     const neck=new T.Mesh(new T.CylinderGeometry(.23,.25,.35,9),face);neck.position.set(0,4.48,0);figure.add(neck);
     const head=new T.Mesh(new T.SphereGeometry(.57,14,10),face);head.scale.set(.97,1.15,.83);head.position.set(0,5.06,.03);figure.add(head);
     for(const x of [-.54,.54]){const ear=new T.Mesh(new T.SphereGeometry(.13,8,6),face);ear.scale.set(.68,1.2,.65);ear.position.set(x,5.02,.02);figure.add(ear)}
@@ -380,7 +380,7 @@ function showRendererFailure(error){
     box(.22,.025,.025,hair,0,4.78,.49,figure);
     const hairCap=new T.Mesh(new T.SphereGeometry(.595,14,9,0,Math.PI*2,0,Math.PI*.49),hair);hairCap.position.set(-.025,5.4,-.025);figure.add(hairCap);
     for(let i=0;i<3;i++){const sweep=box(.32,.09,.16,hair,-.32+i*.25,5.52+i*.045,.36,figure);sweep.rotation.z=-.2}
-    if(modelLoader)modelLoader.loadAsync("./assets/models/kiesinger/kiesinger-statue.glb?v=20260927-sculpt5").then(({scene:model})=>{
+    if(modelLoader)modelLoader.loadAsync("./assets/models/kiesinger/kiesinger-statue.glb?v=20260927-marble6").then(({scene:model})=>{
       const bounds=new T.Box3().setFromObject(model),size=bounds.getSize(new T.Vector3());
       if(![size.x,size.y,size.z].every(v=>Number.isFinite(v)&&v>0)||Math.abs(size.y-6)>.05||Math.abs(bounds.min.y)>.05)throw new Error("Kiesinger figure must be 6 units tall with shoes at y=0");
       model.name="KiesingerSculpture";model.position.copy(figure.position);g.add(model);figure.visible=false;matchKiesingerHeight();

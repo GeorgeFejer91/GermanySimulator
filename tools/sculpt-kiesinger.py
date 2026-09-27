@@ -1,4 +1,4 @@
-"""Photo-referenced Kiesinger bronze sculpture, authored in Blender.
+"""Photo-referenced Kiesinger marble sculpture, authored in Blender.
 
 Run: blender --background --python tools/sculpt-kiesinger.py
 The editable sculpt stays in the .blend; a decimated, material-joined GLB is
@@ -37,10 +37,10 @@ def material(name, color, metallic=.7, roughness=.47):
     return m
 
 
-BRONZE = material("Warm weathered bronze", (.115, .076, .039), .78, .49)
-COAT = material("Bronze with green patina", (.076, .091, .068), .72, .60)
-HAIR = material("Combed bronze hair", (.095, .066, .036), .76, .54)
-RECESS = material("Oxidized bronze recesses", (.025, .020, .013), .58, .76)
+MARBLE = material("Warm ivory marble", (.61, .58, .53), 0, .62)
+COAT = material("Carved marble suit", (.58, .55, .50), 0, .69)
+HAIR = material("Pale marble details", (.64, .61, .56), 0, .64)
+RECESS = material("Shadowed marble recesses", (.11, .105, .095), 0, .82)
 
 
 def collect(o, name, mat):
@@ -59,7 +59,7 @@ def smooth(o):
     return o
 
 
-def ell(name, pos, scale, mat=BRONZE, segments=32, rings=20):
+def ell(name, pos, scale, mat=MARBLE, segments=32, rings=20):
     bpy.ops.mesh.primitive_uv_sphere_add(segments=segments, ring_count=rings, location=pos)
     o = collect(bpy.context.object, name, mat)
     o.scale = scale
@@ -197,7 +197,7 @@ sub=body.modifiers.new("Cloth continuity", "SUBSURF");sub.levels=1
 bpy.context.view_layer.objects.active=body;bpy.ops.object.modifier_apply(modifier=sub.name)
 neck=loft("Human neck tapering beneath rear jaw",[(4.82,0,.06,.220,.207),(4.95,0,.04,.197,.195),
     (5.06,0,.035,.177,.190),(5.17,0,.043,.156,.172),(5.27,0,.075,.148,.164),
-    (5.38,0,.095,.133,.146),(5.44,0,.09,.118,.130)],BRONZE)
+    (5.38,0,.095,.133,.146),(5.44,0,.09,.118,.130)],MARBLE)
 sub=neck.modifiers.new("Soft anatomical neck transition","SUBSURF");sub.levels=1
 bpy.context.view_layer.objects.active=neck;bpy.ops.object.modifier_apply(modifier=sub.name)
 for v in neck.data.vertices:
@@ -259,7 +259,7 @@ for side in [-1,1]:
 loft("Small tapered four-in-hand knot",[(4.939,0,-.195,.030,.021),(4.987,0,-.185,.052,.031),
     (5.04,0,-.169,.044,.026)],RECESS,32)
 tailoring("Narrow hanging silk tie",[(-.039,4.96),(.041,4.96),(.063,4.27),(0,4.18),(-.061,4.27)],RECESS,.023)
-for z in [4.037,3.73]:ell("Suit button",(-.055,suit_front(-.055,z,.019),z),(.024,.013,.024),BRONZE,20,12)
+for z in [4.037,3.73]:ell("Suit button",(-.055,suit_front(-.055,z,.019),z),(.024,.013,.024),MARBLE,20,12)
 tube("Subtle jacket closure",[(-.055,suit_front(-.055,4.04,.007),4.04),(-.068,suit_front(-.068,3.42,.007),3.42),
     (-.126,suit_front(-.126,2.68,.007),2.68)],.0035,RECESS,1)
 for x in [-.365,.34]:tailoring("Contoured lower pocket welt",[(x-.12,3.535),(x+.12,3.554),(x+.12,3.529),(x-.12,3.51)],COAT,.006)
@@ -320,7 +320,7 @@ def palm_volume(name,rows,along_x=False):
         for i in range(sides):
             a=j*sides+i;b=j*sides+(i+1)%sides;faces.append((a,b,b+sides,a+sides))
     faces.extend([tuple(reversed(range(sides))),tuple((len(rows)-1)*sides+i for i in range(sides))])
-    o=mesh(name,verts,faces,BRONZE)
+    o=mesh(name,verts,faces,MARBLE)
     sub=o.modifiers.new("Continuous broad palm and wrist","SUBSURF");sub.levels=1
     bpy.context.view_layer.objects.active=o;bpy.ops.object.modifier_apply(modifier=sub.name)
     return o
@@ -334,18 +334,18 @@ palm_volume("Left broad flat palm flowing into wrist",[(2.812,-.846,-.194,.130,.
 for i,length in enumerate([.23,.278,.292,.255]):
     x=-.95+i*.071;start=2.855
     sleeve_sections("Left relaxed anatomical finger",[(x,-.228,start),(x,-.257,start-length*.58),
-        (x+.012,-.265,start-length)],[(.030,.027),(.028,.026),(.024,.022)],BRONZE)
+        (x+.012,-.265,start-length)],[(.030,.027),(.028,.026),(.024,.022)],MARBLE)
 sleeve_sections("Left opposable anatomical thumb",[(-.740,-.219,3.015),(-.696,-.272,2.907),(-.758,-.314,2.847)],
-    [(.038,.035),(.034,.031),(.026,.024)],BRONZE)
+    [(.038,.035),(.034,.031),(.026,.024)],MARBLE)
 palm_volume("Right broad flat palm flowing into wrist",[(.062,-.513,4.225,.043,.120),(.090,-.513,4.225,.047,.127),
     (.21,-.509,4.233,.049,.126),(.30,-.512,4.222,.060,.112),(.385,-.499,4.20,.073,.092),
     (.45,-.448,4.175,.080,.086)],True)
 for i,length in enumerate([.213,.239,.223,.177]):
     z=4.318-i*.062;start=.107
     sleeve_sections("Right relaxed anatomical finger",[(start,-.532,z),(start-length*.60,-.445,z-.012),
-        (start-length,suit_front(start-length,z-.035,.014),z-.035)],[(.027,.025),(.026,.024),(.021,.019)],BRONZE)
+        (start-length,suit_front(start-length,z-.035,.014),z-.035)],[(.027,.025),(.026,.024),(.021,.019)],MARBLE)
 sleeve_sections("Right opposable anatomical thumb",[(.269,-.542,4.115),(.15,-.577,4.075),(.077,-.474,4.133)],
-    [(.035,.031),(.032,.029),(.026,.023)],BRONZE)
+    [(.035,.031),(.032,.029),(.026,.023)],MARBLE)
 patch("Thin folded statesman's dossier",[(-.755,-.293,2.821),(-.404,-.293,2.691),
     (-.479,-.293,2.171),(-.824,-.293,2.276)],COAT,.025)
 for d in [0,.011,.022]:tube("Subtle dossier paper edge",[(-.814,-.313+d,2.285),(-.485,-.313+d,2.183),(-.413,-.313+d,2.686)],.003,HAIR,1)
@@ -379,7 +379,7 @@ for stage in range(1,5):
         k=(j+1)%len(oval);faces.append((previous[j],previous[k],ring[k],ring[j]))
     previous=ring
 faces.append(tuple(reversed(previous)))
-head=mesh("Kiesinger photo fitted portrait",verts,faces,BRONZE)
+head=mesh("Kiesinger photo fitted portrait",verts,faces,MARBLE)
 bm=bmesh.new();bm.from_mesh(head.data);bmesh.ops.recalc_face_normals(bm,faces=bm.faces);bm.to_mesh(head.data);bm.free()
 uv=head.data.uv_layers.new(name="Archival reference projection")
 for loop in head.data.loops:
@@ -410,22 +410,23 @@ def crease(points,amount,width,roll=0):
     fade=np.sin(np.pi*fraction)**.6
     depth[:]+=fade*(amount*np.exp(-(distance/width)**2)-roll*np.exp(-((signed-width*2)/(width*1.6))**2))
 for side in [-1,1]:
-    mound(side*.137,5.663,.070,.025,-.0045)
+    mound(side*.137,5.663,.070,.025,-.006)
     mound(side*.132,5.632,.070,.030,.007)
     mound(side*.132,5.691,.075,.027,-.004)
     mound(side*.231,5.731,.049,.055,.004)
-    mound(side*.140,5.589,.065,.021,-.0035)
+    mound(side*.140,5.587,.065,.024,-.0065)
     mound(side*.208,5.516,.055,.055,-.003)
-    mound(side*.219,5.388,.054,.069,-.004)
-    crease([(side*.056,5.610),(side*.097,5.585),(side*.156,5.578),(side*.212,5.603)],.0045,.0035,.002)
+    mound(side*.205,5.465,.051,.054,.0035)
+    mound(side*.219,5.371,.058,.074,-.007)
+    crease([(side*.056,5.610),(side*.097,5.585),(side*.156,5.578),(side*.212,5.603)],.0065,.004,.003)
     crease([(side*.060,5.648),(side*.117,5.670),(side*.171,5.664),(side*.206,5.634)],.0035,.0028,.0015)
-    crease([(side*.074,5.471),(side*.088,5.420),(side*.117,5.378),(side*.129,5.337)],.0045,.0045,.003)
-    crease([(side*.117,5.359),(side*.138,5.335),(side*.140,5.311)],.0025,.003,.001)
+    crease([(side*.074,5.471),(side*.088,5.420),(side*.117,5.378),(side*.129,5.337)],.0060,.005,.0035)
+    crease([(side*.117,5.359),(side*.138,5.335),(side*.140,5.311)],.0036,.0035,.0015)
     for j in range(3):
-        crease([(side*.203,5.617-j*.007),(side*.227,5.620-j*.012),(side*.251,5.624-j*.019)],.0022,.002,0)
-    crease([(side*.023,5.680),(side*.028,5.713),(side*.040,5.739)],.0025,.003,.001)
+        crease([(side*.203,5.617-j*.007),(side*.227,5.620-j*.012),(side*.251,5.624-j*.019)],.0032,.0025,0)
+    crease([(side*.023,5.680),(side*.028,5.713),(side*.040,5.739)],.0035,.0035,.0015)
 for j,height in enumerate([5.743,5.771,5.801]):
-    crease([(-.206,height-.009),(-.126,height+.002),(-.03,height),(.072,height+.003),(.158,height-.004),(.219,height-.016)],.0016,.0022,.0007)
+    crease([(-.206,height-.009),(-.126,height+.002),(-.03,height),(.072,height+.003),(.158,height-.004),(.219,height-.016)],.0032,.003,.0012)
 crease([(-.086,5.282),(-.032,5.272),(.033,5.273),(.079,5.284)],.0024,.003,.0008)
 # Fine, irregular cast surface rather than the optically smooth plastic finish.
 grain=(np.sin(x*937+np.sin(z*87))*np.sin(z*883+y*337)+.4*np.sin(x*1673-z*1381))*.00010
@@ -435,7 +436,7 @@ tooling=(np.sin(x*117+np.sin(z*41))*np.sin(z*139+y*63)+.3*np.sin(x*223-z*181))*.
 tooling*=1-np.exp(-(x/.14)**4)
 
 # Sample the licensed neutral portrait onto the fitted face. Local contrast
-# supplies very shallow relief and restrained bronze patina. Broad lighting is
+# supplies very shallow relief and restrained stone shading. Broad lighting is
 # normalized before sampling; no image texture is needed by the game model.
 reference_path=ROOT/"output/kiesinger-references/kiesinger-1967-kas.jpg"
 assert hashlib.sha256(reference_path.read_bytes()).hexdigest()==portrait["reference_photos"][0]["sha256"]
@@ -460,17 +461,21 @@ lum=sample(gray);local=sample(blur(gray,5));illumination=sample(blur(gray,32))
 relief=np.clip(lum-local,-.16,.16)*.002
 photo_mask=front*np.clip((z-5.18)/.04,0,1)*np.clip((5.845-z)/.025,0,1)
 coords[:,1]+=(depth+grain+tooling)*front-relief*photo_mask
-coords[:,0]+=np.sign(x)*.002*np.exp(-((np.abs(x)-.232)/.046)**2-((z-5.364)/.078)**2)*front
+# A little lower-face fullness and descent age the portrait without changing
+# its base landmark cage, expression, or the fitted eye openings.
+jowl=np.exp(-((np.abs(x)-.225)/.057)**2-((z-5.350)/.083)**2)*front
+coords[:,0]+=np.sign(x)*.005*jowl
+coords[:,2]-=.006*jowl
 head.data.vertices.foreach_set("co",coords.ravel());head.data.update()
 tone=np.clip(1+.13*(lum/np.maximum(illumination,.04)-1)+.12*(lum-local),.82,1.08)
 tone=1+(tone-1)*photo_mask
 socket=np.exp(-((np.abs(x)-.132)/.074)**4-((z-5.637)/.034)**2)*front
-tone*=1-.26*socket
-colors=np.ones((len(coords),4));colors[:,:3]=tone[:,None]*np.array(BRONZE.diffuse_color[:3])
-patina=head.data.color_attributes.new(name="Cast patina",type="FLOAT_COLOR",domain="POINT")
+tone*=1-.36*socket
+colors=np.ones((len(coords),4));colors[:,:3]=tone[:,None]*np.array(MARBLE.diffuse_color[:3])
+patina=head.data.color_attributes.new(name="Stone shading",type="FLOAT_COLOR",domain="POINT")
 patina.data.foreach_set("color",colors.ravel())
 bpy.data.images.remove(reference)
-# Eyebrow shape is carried by the photographed patina and the underlying brow
+# Eyebrow shape is carried by the photographed shading and the underlying brow
 # ridge, avoiding a separate strip sitting above the skin.
 
 # Fit the visible cast eye directly to the subdivided eyelid boundary. An
@@ -523,7 +528,7 @@ for side in [-1,1]:
         verts.append((side*outward,depth,height))
     faces=ear_source["faces"]
     if side<0:faces=[list(reversed(f)) for f in faces]
-    ear=mesh("Anatomical auricle fitted to portrait",verts,faces,BRONZE)
+    ear=mesh("Anatomical auricle fitted to portrait",verts,faces,MARBLE)
     # Seat the cropped attachment just inside the scalp and relax one support
     # ring, preserving the cartilage and the free lobe.
     bm=bmesh.new();bm.from_mesh(ear.data)
@@ -613,17 +618,31 @@ for j in range(hl-1):
     for i in range(hs):
         a=j*hs+i;b=j*hs+(i+1)%hs;faces.append((a,b,b+hs,a+hs))
 faces.append(tuple(reversed(range(hs))))
-hair=mesh("Photo matched swept hair",verts,[tuple(reversed(f)) for f in faces],BRONZE)
+hair=mesh("Photo matched swept hair",verts,[tuple(reversed(f)) for f in faces],MARBLE)
 
 # Normalize sculpt once in authoring space. No model fitting is needed in game.
 bpy.context.view_layer.update()
 parts=list(sculpt.objects)
+# Bake restrained continuous stone veining into vertex colors for every part.
+# The face keeps its photo-derived relief shading and recessed-eye gradient.
 for o in parts:
-    if o.data.materials[0]==BRONZE and not o.data.color_attributes.get("Cast patina"):
-        attr=o.data.color_attributes.new(name="Cast patina",type="FLOAT_COLOR",domain="POINT")
-        rgba=np.tile(np.array(BRONZE.diffuse_color),(len(o.data.vertices),1));attr.data.foreach_set("color",rgba.ravel())
-color_node=BRONZE.node_tree.nodes.new("ShaderNodeVertexColor");color_node.layer_name="Cast patina"
-BRONZE.node_tree.links.new(color_node.outputs["Color"],BRONZE.node_tree.nodes.get("Principled BSDF").inputs["Base Color"])
+    mat=o.data.materials[0]
+    attr=o.data.color_attributes.get("Stone shading")
+    if attr:
+        rgba=np.empty((len(o.data.vertices),4));attr.data.foreach_get("color",rgba.ravel())
+    else:
+        attr=o.data.color_attributes.new(name="Stone shading",type="FLOAT_COLOR",domain="POINT")
+        rgba=np.tile(np.array(mat.diffuse_color),(len(o.data.vertices),1))
+    positions=np.array([tuple(o.matrix_world@v.co) for v in o.data.vertices])
+    px,py,pz=positions.T
+    flow=px*4.2+py*2.8+pz*2.0+.38*np.sin(px*7-pz*3)+.16*np.sin(py*13+pz*9)
+    vein=np.exp(-(np.sin(flow)/.11)**2)
+    cloud=.5+.5*np.sin(px*5+py*3+pz*4)
+    rgba[:,:3]*=(1-.12*vein-.025*cloud)[:,None]
+    attr.data.foreach_set("color",rgba.ravel())
+for mat in [MARBLE,COAT,HAIR,RECESS]:
+    color_node=mat.node_tree.nodes.new("ShaderNodeVertexColor");color_node.layer_name="Stone shading"
+    mat.node_tree.links.new(color_node.outputs["Color"],mat.node_tree.nodes.get("Principled BSDF").inputs["Base Color"])
 coords=[o.matrix_world@v.co for o in parts for v in o.data.vertices]
 minz=min(v.z for v in coords);maxz=max(v.z for v in coords)
 factor=6/(maxz-minz)
@@ -634,8 +653,8 @@ for o in parts:
     o.matrix_world.identity()
     o["authorship"]="Photo-referenced Blender sculpture; MediaPipe canonical facial connectivity, Apache-2.0; see PROVENANCE.md"
 
-# Game copy: consolidate by bronze material and decimate the dense sculpt.
-game=bpy.data.collections.new("GAME EXPORT — optimized bronze statue")
+# Game copy: consolidate by marble material and decimate the dense sculpt.
+game=bpy.data.collections.new("GAME EXPORT — optimized marble statue")
 bpy.context.scene.collection.children.link(game)
 gameparts=[]
 for source in parts:
@@ -656,7 +675,7 @@ for piece in gameparts:
         hit,target,normal,_=export_suit.closest_point_on_mesh(v.co)
         if hit:v.co=target+normal*offset
     piece.data.update()
-for m in [BRONZE,COAT,HAIR,RECESS]:
+for m in [MARBLE,COAT,HAIR,RECESS]:
     members=[o for o in game.objects if o.data.materials[0]==m]
     o=join(members,m.name+" — game mesh")
     o.data.validate(clean_customdata=True)
@@ -686,9 +705,9 @@ bpy.ops.mesh.primitive_cylinder_add(vertices=96,radius=1.25,depth=.15,location=(
 base=bpy.context.object;base.name="Preview plinth — not exported";base.data.materials.append(stage)
 bevel=base.modifiers.new("Stone edge", "BEVEL");bevel.width=.04;bevel.segments=3
 for name,pos,energy,size,color in [
-    ("Broad warm key",(-4,-6,9),1150,5,(1,.88,.72)),
-    ("Cool fill",(4,-2,6),850,4,(.74,.85,1)),
-    ("Bronze rim",(1,4,8),1550,3,(1,.93,.79))]:
+    ("Broad warm key",(-4,-6,9),800,5,(1,.94,.86)),
+    ("Cool fill",(4,-2,6),220,4,(.88,.93,1)),
+    ("Sculpture rim",(1,4,8),850,3,(1,.97,.90))]:
     data=bpy.data.lights.new(name,"AREA");data.energy=energy;data.shape="DISK";data.size=size;data.color=color
     o=bpy.data.objects.new(name,data);scene.collection.objects.link(o);o.location=pos
     o.rotation_euler=(Vector((0,0,3.3))-o.location).to_track_quat("-Z","Y").to_euler()
