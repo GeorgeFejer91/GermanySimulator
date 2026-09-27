@@ -281,3 +281,40 @@ movement authority. A mechanical pass is not visual approval. The manifest remai
 `candidate-unapproved`; `game.js` and the stable archive remain untouched until
 the user explicitly accepts this one cycle. Only after that review may the same
 mapping strategy be extended to right, front/back, or another character.
+
+## Preview-only skinned 3D motion study
+
+The user-approved next experiment is a separate **grey 3D motion study**, not
+promotion of the rejected 2D pilot. `assets/sprite-sources/candidates/merkel-3d/`
+holds one weighted MakeHuman-derived figure and four fixed orthographic renders.
+`tools/build-merkel-3d-pilot.py` is its offline authoring authority; the adjacent
+provenance and source hashes bind the CC0 mesh/weights, CMU input and outputs.
+Legs use contact-constrained, fixed-length 3D IK. CMU supplies filtered 3D arm
+directions and cycle timing, not full-body retargeting. Preserve that distinction.
+
+The bake has 32 unique playback poses plus an independently rendered closure
+inspection point 33. This lane uses more temporal samples than the earlier
+21-point pilot; it does not interpolate independently generated images. Heel,
+ankle and toe coordinates, evaluated shoe soles and projected bones accompany
+the rendered pixels. Cameras, topology, proportions and lighting stay fixed;
+actual mesh depth resolves limb occlusion. Do not recenter individual frames.
+
+Build with `python tools/build-merkel-3d-pilot.py`, verify with
+`python tools/verify-merkel-3d-pilot.py`, and run
+`node --test tests/merkel-3d-pilot.test.mjs tests/sprite-preview.test.mjs`.
+The verifier checks actual evaluated mesh contacts/joints, bone lengths, knee
+direction, lateral foot lanes, world-space stance slip, cyclic motion bounds,
+alpha/margins and exact native pixel closure. A mechanical pass is **not** visual
+approval. Keep `candidate-unapproved`; the face/hair are a plain proportion study,
+not an identity-matched paint pass. Shoes roll rigidly, without toe flex.
+
+`sprite-preview.html?source=3d` opens the four-view study; Focus view exposes the
+bone/heel/toe overlay and closure sheet. Stable sprites, both older 2D candidates
+and experimental atlases remain selectable. The runtime still loads the stable
+archive. Never change that decision until the user accepts a finished visual loop.
+Only after motion/proportions review should the painted identity be fitted to
+this fixed surface; independent frame generation must not reintroduce wobble.
+
+The preview alone uses locally pinned Pretext 0.0.9 and Roboto Condensed to check
+bounded text after fonts load; native controls and text-spacing overrides also
+require rendered 320px/desktop/mobile/200% checks. This does not migrate game UI.

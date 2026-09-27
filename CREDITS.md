@@ -363,6 +363,23 @@ These figures must not be added together: their periods, net/gross treatment and
 
 The price-banner badge uses the [current CDU logo](https://commons.wikimedia.org/wiki/File:CDU_Logo_2023.svg), checked against the [official CDU design portal](https://ci.cdu.de/) on 26 September 2026. The unchanged 2,115-byte SVG is shipped as `assets/logos/cdu-2023.svg`; Commons identifies it as a public-domain simple text/geometric logo (PD-textlogo) and records its trademark status. SHA-256: `91571409a6b3d6013c79b2ff1307309878c30d9c279f434446139eaee76d9c55`.
 
+## Preview-only 3D walking study and typography
+
+The grey Merkel motion study uses MakeHuman community's **CC0** anatomical mesh,
+joint definitions and skin weights, with original clothing and proportion edits.
+Pinned versions, authors, modifications and licenses are in
+`assets/sprite-sources/reference/makehuman-walk/PROVENANCE.md`. CMU subject 69/01
+provides arm-motion/timing reference, not the study's contact-constrained legs.
+The data used in this project was obtained from mocap.cs.cmu.edu. The database
+was created with funding from NSF EIA-0196217. Its source terms and acknowledgment
+remain in `assets/sprite-sources/reference/cmu-walk-69-01/PROVENANCE.md`.
+The study is preview-only, not an approved likeness or a game sprite replacement.
+
+The preview also bundles Cheng Lou's `@chenglou/pretext` 0.0.9 under MIT and
+Google Fonts' Roboto Condensed under SIL OFL 1.1. Their full licenses, exact
+version/hash records and upstream links accompany the files under
+`assets/vendor/pretext/` and `assets/fonts/roboto-condensed/`.
+
 ## Legal framing
 
 All game rules, wanted levels, immigration deadlines, forms, and enforcement mechanics are fictional parody and do not represent German law, police practice, citizenship requirements, or immigration procedure.

@@ -1,0 +1,38 @@
+{
+  "schemaVersion": 1,
+  "status": "candidate-unapproved",
+  "scope": "merkel-four-view-3d-motion-study",
+  "movementAuthority": "one weighted 3D rig; analytic contact-constrained leg IK; periodic CMU left-arm swing mirrored at half-cycle",
+  "appearance": "grey proportion study, not a finished or approved Merkel likeness",
+  "playbackFrames": 32,
+  "inspectionPoints": 33,
+  "cellSize": 128,
+  "durationSeconds": 1.2333284,
+  "recommendedFps": 26,
+  "directions": [
+    "left",
+    "right",
+    "up",
+    "down"
+  ],
+  "rows": {
+    "left": 0,
+    "right": 1,
+    "up": 2,
+    "down": 3
+  },
+  "runtimeIsolation": "preview-only; game continues using archived stable sprites",
+  "sourceHashes": {
+    "base.obj": "8e761e6624b8f54536409135d1636da63b32486a90d4897f84e121d144f6fb4c",
+    "default.mhskel": "99f179bce0aa850b45d4191a1d0d234c5851f881c057439470ded3bddf729a24",
+    "default_weights.mhw": "0f3641d651ae3d00ad6b4ccee43142edb109d3bd909d27d9e4139ef1beed8625"
+  },
+  "bvhSha256": "064de16c17a154c88b73eadecd4614e59d04ef3f8460d58785e20ceb9f4b807b",
+  "artifacts": {
+    "merkel-sprite.png": "dd8835fd199d175cb6c515dceb199ee501c5448a8839b4faa06e5fdf86485ebb",
+    "merkel-bones.png": "2562e727c810e1d17d3f2c02f30824366f6765c284d33a1a089b193a908f114e",
+    "merkel-audit.png": "7c056b2a458c66315a56ca07d4dd16fff752bb5059d05283c9624caf59fa240a",
+    "pose-audit.json": "9469bd29abb7e373f6ce0ae7401d9d758d062000df35384fcd2b7166ac3f652c",
+    "merkel-walk.blend": "cba5b933b0fdd9fd14b26cea3ed298907c84f6ed233ee5b77877e4ed0e406cab"
+  }
+}

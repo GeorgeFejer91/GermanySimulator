@@ -1,0 +1,27 @@
+{
+  "status": "mechanical-checks-pass; visual approval still required",
+  "frames": 32,
+  "views": [
+    "left",
+    "right",
+    "up",
+    "down"
+  ],
+  "maximumBoneLengthError": 1.8519889100065967e-07,
+  "maximumJointGap": 5.280984981855556e-07,
+  "maximumFloorPenetration": 8.568167686462402e-08,
+  "maximumStanceContactError": 1.9371509552001953e-07,
+  "maximumWorldFootSlipPerFrame": 2.1504737439122624e-07,
+  "maximumKneeFlexDegrees": 70.70684903038273,
+  "maximumJointStep": 0.07814570612709848,
+  "seamJointStep": 0.04264864559465346,
+  "seamJointAcceleration": 0.021722295626761985,
+  "maximumHeadExcursion": 0.035999998450279236,
+  "closurePixelMaxDifference": {
+    "left": 0,
+    "right": 0,
+    "up": 0,
+    "down": 0
+  },
+  "modelUnitsPerLeg": 1.1068169248343271
+}

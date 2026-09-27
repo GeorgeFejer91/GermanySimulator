@@ -435,3 +435,22 @@ Keep the static, single-runtime architecture. The stimulus broker now guards com
 Web Audio foreground, synthesized music, and effects share one native compressor and master gain; native intro and sung playback retains the established browser autoplay behavior at lower source gain. The speech duck multiplier is `0.22`. The one-time Wurst song fades the current music over 160 ms, preserves the mute preference, and counts as played only after playback starts. Source-file loudness normalization remains a separate offline gate; no audio library or server is added.
 
 The main loop subdivides active frame time into at most 25 ms steps, caps a long stall at 120 ms, and resets its clock on tab visibility changes. Police-car steering and drive speed are bounded without introducing a physics engine. Car-impact knockback checks intermediate positions so a clear endpoint cannot skip a narrow wall. Train stopping reserves a 970-unit center gap and uses the full obstacle radius plus clearance against sampled rail points. These remain arcade dynamics tuned for the existing world rather than a new simulation model.
+
+## 2026-09-27 — Preview-only 3D walking pilot
+
+After rejecting the cutout/crossfade walks, the user approved a plain 3D Merkel
+motion pilot before another painted likeness attempt. One CC0 MakeHuman-derived
+weighted mesh is fitted once and rendered offline from four fixed cameras.
+Fixed-length leg IK constrains actual shoe contacts; the existing pinned CMU
+capture supplies filtered arm swing and timing, not full-body retargeting.
+Thirty-two unique poses plus a separate rendered closure replace neither the
+stable game atlas nor any previous candidate. A mechanical pass does not approve
+naturalness or likeness; `candidate-unapproved` remains mandatory.
+
+The smallest browser integration remains static PNGs and the existing preview
+selector, with a `?source=3d` deep link and bone/heel/toe inspection. No browser
+3D renderer or authoring dependency is added. Preview text alone uses pinned
+local Pretext and a local OFL font; the game UI is not migrated. Future painted
+identity work must preserve the approved mesh/poses rather than generating each
+frame independently. Source/license and rebuild details live beside the assets
+and in `SPRITE-GENERATION-PROTOCOL.md`.

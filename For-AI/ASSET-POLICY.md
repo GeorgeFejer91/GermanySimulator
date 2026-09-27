@@ -42,6 +42,17 @@ Backend, infrastructure, and asset-pipeline choices are deliberately conservativ
 
 ## Acceptance
 
+The isolated `assets/sprite-sources/candidates/merkel-3d/` lane is an offline
+Blender/skinned-mesh motion study, not an accepted game sprite. It is explicitly
+grey/proportion-only and `candidate-unapproved`. Keep its pinned CC0 MakeHuman
+inputs, existing CMU acknowledgment, editable `.blend`, evaluated bone/shoe
+evidence and artifact hashes together. The preview's `source=3d` option fetches
+ordinary PNG atlases (32 playback poses, four views); it never downloads the
+authoring mesh, rig, `.blend` or BVH. The root game's stable archive is unchanged.
+See `SPRITE-GENERATION-PROTOCOL.md` for the separate 3D lane's motion/visual gates.
+Preview-only text fitting uses locally vendored Pretext 0.0.9 (MIT) and Roboto
+Condensed (OFL), with adjacent provenance; these are not game dependencies.
+
 An asset change is complete only when the correct variant loads on desktop and mobile, missing files fail gracefully, the browser console stays clean, and gameplay/interactions remain unchanged unless the task explicitly changes them.
 
 ## Local 3D buildings
