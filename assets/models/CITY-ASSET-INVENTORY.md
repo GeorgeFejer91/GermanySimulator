@@ -73,7 +73,7 @@ The first three groups occupy the gaps between Bundesfaxamt/TÜV, Sparkasse/Post
 
 - The two power plants already combine five local model sources with procedural halls, gates, smoke and conveyor animation. Preserve those established landmark behaviors.
 - The twelve perimeter trains contain 84 rendered cars and already use local rolling-stock GLBs. They are outside this static city-prop replacement.
-- Civilian traffic and police response keep their existing vehicle assets and procedural fallbacks. The canonical civilian population contains 24 cars; police response counts depend on wanted state.
+- Civilian traffic and police cars now use the original Blender fleet in `vehicles/`: Beetle, Trabant 601 and German police estate, each with rolling wheels, front steering and a complete procedural fallback. The canonical civilian population contains 24 cars; police response counts depend on wanted state. See `vehicles/PROVENANCE.md` for references, budgets and rebuild steps. The helicopter is unchanged.
 - The four fax billboards keep their established desktop/mobile art policy.
 - The Kiesinger sculpture and its pedestal retain their separate authoring, provenance and gameplay contracts. Concurrent sculpture edits are not part of this inventory's city-kit scope.
 - Character sprites, food art, audio and UI artwork are outside this static environment replacement.

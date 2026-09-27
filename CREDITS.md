@@ -45,21 +45,25 @@ The fitted ears adapt the ear section of the MakeHuman team's
 Its cropped authoring data and upstream asset license accompany the statue;
 the MakeHuman application is not a game dependency.
 
-## Civilian traffic
+## Civilian and police cars
 
-Berlin's WebGL traffic uses the compact local `classic-vw-beetle.glb`, derived
-from the historic Sutherland Volkswagen STL hosted by Wikimedia Commons. The
-source is licensed CC BY-SA 4.0 by Ivan Edward Sutherland and contributors. It
-was converted from STL to GLB, changed from Z-up to Y-up, normalized to a
-2.35-metre length, centered and grounded, and assigned a neutral material that
-the game recolors per car. Game-authored wheels, hubs, glazing, bumpers, and
-lamps complete the historic body scan at runtime. A missing model retains a
-procedural 3D silhouette; Deutschland-side Trabants remain code-native. No
-manufacturer logo or texture is included.
+The active Beetle, Trabant 601 and German police estate are original Blender
+models under `assets/models/vehicles/`. They use authored geometry and materials
+for the complete body, fitted glazing, rotating wheels, trim and lamps. The
+police estate follows the proportions and silver/blue/yellow treatment of a
+2016 BMW 318d Touring police vehicle, with one integrated blue lightbar and
+original `POLIZEI` lettering. No manufacturer logo, police crest, downloaded
+mesh or photographic texture is included. Reference links, editable source,
+rebuild steps, budgets and hashes are in `assets/models/vehicles/PROVENANCE.md`
+and `manifest.json`.
 
-- Source: https://commons.wikimedia.org/wiki/File:Utah_VW_Bug.stl
-- License: https://creativecommons.org/licenses/by-sa/4.0/
-- Local modifications and checksums: `assets/models/traffic/LICENSES.md`
+The retired Sutherland Volkswagen body scan remains under its original
+CC BY-SA 4.0 license, attributed to Ivan Edward Sutherland and contributors;
+its source is [Wikimedia Commons](https://commons.wikimedia.org/wiki/File:Utah_VW_Bug.stl),
+and conversion/hash details remain in `assets/models/traffic/LICENSES.md`.
+The old Quaternius police car and edited livery retain their provenance under
+`assets/models/police-response/LICENSES.md`. Neither old car is loaded by the
+renderer. The separately licensed helicopter is unchanged.
 
 ## Perimeter trains and station announcements
 

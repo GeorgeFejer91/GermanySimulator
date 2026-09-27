@@ -1,0 +1,42 @@
+{
+  "author": "Original project-authored Blender geometry; no imported meshes or textures",
+  "source": "vehicles.blend",
+  "script": "../../../tools/build-vehicle-assets.py",
+  "axes": "Y-up, +Z-front, ground-centred; wheel pivots rotate about local X; front steering about Y",
+  "models": {
+    "beetle": {
+      "file": "beetle.glb",
+      "triangles": 26579,
+      "dimensions_xyz": [
+        1.72,
+        1.5152,
+        4.064
+      ],
+      "bytes": 383960,
+      "sha256": "d50b7e91aacb367b4031c7852c624d0e75167b56b24471e6927e2ab1564b115c"
+    },
+    "trabant": {
+      "file": "trabant.glb",
+      "triangles": 21148,
+      "dimensions_xyz": [
+        1.772,
+        1.4623,
+        3.634
+      ],
+      "bytes": 311220,
+      "sha256": "7f1ed739be3e250027774d46f619baebeb68bded316290053f3b06823ad6c000"
+    },
+    "police-estate": {
+      "file": "police-estate.glb",
+      "triangles": 27922,
+      "dimensions_xyz": [
+        2.17,
+        1.721,
+        4.571
+      ],
+      "bytes": 411076,
+      "sha256": "f47718208b3d2470f9013a5438763f8d1b7677efb2e19105ae28227fbe055860"
+    }
+  },
+  "optimization": "glTF Transform 4.5.0: weld, bounded simplify, dedup, prune, 14-bit position/10-bit normal quantization; no runtime decoder"
+}

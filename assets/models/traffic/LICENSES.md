@@ -1,5 +1,7 @@
 # Civilian traffic model licenses
 
+Retired from the renderer on 2026-09-27 in favor of the original Blender fleet in `../vehicles/`. The distributed legacy model retains the license below; runtime treatment describes the earlier implementation.
+
 ## Classic Volkswagen Type 1 / Sutherland Volkswagen
 
 - Runtime file: `classic-vw-beetle.glb`

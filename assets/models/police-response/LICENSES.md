@@ -4,6 +4,8 @@ Downloaded 2026-09-20. Both source pages identify their models as Public Domain 
 
 ## `police-car.glb`
 
+Retired from the renderer on 2026-09-27 in favor of the original Blender police estate in `../vehicles/`. The model and livery source retain the provenance below. The helicopter remains active.
+
 - Work: **Police Car**
 - Creator: Quaternius
 - Source: https://poly.pizza/m/BwwnUrWGmV
@@ -22,4 +24,4 @@ Downloaded 2026-09-20. Both source pages identify their models as Public Domain 
 - Runtime treatment: optimized losslessly with glTF Transform 4.2.1 (`dedup`, then `prune`), recolored black, and supplemented with procedural rotor/searchlight geometry.
 - SHA-256: `FC2285DE51397B639C3C974318FDD4ECF8EC295275BB216FEBC6BBC4788E0832`
 
-Total shipped model-binary size: 248,684 bytes; including the 40,820-byte editable livery source, the response asset family is 289,504 bytes. Canvas and model-load failures keep procedural police-car and helicopter fallbacks.
+Total legacy model-binary size: 248,684 bytes; including the 40,820-byte editable livery source, this directory is 289,504 bytes. Model-load failures keep complete procedural vehicle and helicopter fallbacks; the Canvas world renderer is retired.

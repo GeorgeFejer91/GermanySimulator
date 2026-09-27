@@ -1,0 +1,38 @@
+import assert from 'node:assert/strict';
+import {readFileSync} from 'node:fs';
+import {createHash} from 'node:crypto';
+import vm from 'node:vm';
+const root=new URL('../assets/models/vehicles/',import.meta.url);
+const manifest=JSON.parse(readFileSync(new URL('manifest.json',root),'utf8'));
+for(const [kind,item] of Object.entries(manifest.models)){
+  const data=readFileSync(new URL(item.file,root));
+  assert.equal(data.subarray(0,4).toString(),'glTF');
+  assert.equal(createHash('sha256').update(data).digest('hex'),item.sha256);
+  assert.equal(data.length,item.bytes);assert.ok(data.length<600000&&item.triangles<32000);
+  const gltf=JSON.parse(data.subarray(20,20+data.readUInt32LE(12)).toString());
+  assert.equal(gltf.images?.length||0,0,'The fleet must not introduce texture downloads');
+  const wheels=gltf.nodes.filter(n=>n.extras?.wheel),steer=gltf.nodes.filter(n=>n.extras?.steer);
+  assert.deepEqual(wheels.map(n=>n.extras.wheel).sort(),['FL','FR','RL','RR']);
+  assert.deepEqual(steer.map(n=>n.extras.steer).sort(),['FL','FR']);
+  for(const wheel of wheels){assert.ok(wheel.children?.length);assert.ok(wheel.extras.radius>.29&&wheel.extras.radius<.34);assert.ok(!wheel.rotation,'Wheel axle starts at identity');}
+  assert.ok(item.dimensions_xyz[0]<2.2&&item.dimensions_xyz[0]/item.dimensions_xyz[2]<.5,'No detached parts outside the body envelope');
+  const materials=gltf.materials.map(m=>m.name);
+  assert.ok(materials.includes('Glass')&&materials.includes('BrakeLens'));
+  if(kind==='police-estate')assert.ok(materials.includes('BeaconLeft')&&materials.includes('BeaconRight'));
+}
+const renderer=readFileSync(new URL('../world3d.js',import.meta.url),'utf8');
+const helper=renderer.slice(renderer.indexOf('  function syncVehicleWheels('),renderer.indexOf('  function removeVehicleSlot('));
+const node={rotation:{x:0}},steering={rotation:{y:0}},brake={emissiveIntensity:0};
+const slot={state:{x:0,y:0,angle:0,speed:200,queued:false},lastX:0,lastY:0,lastAngle:0,travel:0,wheels:[{node,radius:.2}],steering:[steering],brakes:[brake],beacons:[]};
+const context={S:.02,slot,performance:{now:()=>0}};vm.createContext(context);vm.runInContext(helper,context);
+const update=()=>vm.runInContext('syncVehicleWheels(slot)',context);
+update();assert.equal(node.rotation.x,0,'Stationary wheels must not use requested speed');
+slot.state.x=20;update();assert.equal(node.rotation.x,2,'Rotation follows actual distance / tyre radius');
+slot.state.queued=true;update();assert.equal(node.rotation.x,2);assert.equal(brake.emissiveIntensity,.8);
+slot.state.x=0;update();assert.equal(node.rotation.x,0,'Reversing reverses the wheels');
+slot.state.x=9000;update();assert.equal(node.rotation.x,0,'Wrap/respawn teleports must not spin the wheels');
+slot.state.x+=1;slot.state.angle=.1;update();assert.ok(steering.rotation.y<0&&steering.rotation.y>=-.42);
+slot.state.queued=false;update();assert.equal(brake.emissiveIntensity,0);
+slot.state.braking=true;update();assert.equal(brake.emissiveIntensity,.8,'Police braking uses the existing pursuit brake flag');
+slot.state.braking=false;update();assert.equal(brake.emissiveIntensity,0);
+console.log('Vehicle GLBs, wheel pivots, actual-distance rolling, steering and brake lamps OK');
