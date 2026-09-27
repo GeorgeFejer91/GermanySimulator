@@ -1,0 +1,18 @@
+{
+  "schemaVersion": 1,
+  "status": "appearance-key-unapproved",
+  "generatedWith": "built-in ImageGen",
+  "frames": 1,
+  "direction": "left",
+  "appearanceAuthority": "original sprite artwork, not the neutral guide silhouette",
+  "motionGuide": "assets/sprite-sources/reference/neutral-walk/pose-left.png",
+  "motionGuideSha256": "79d4e84f5051fb478a3bc4e0d53505d291e9dff88e3b45418a40381bb004d5d4",
+  "originalSheet": "assets/sprite-archive/pre-rig-20260921/assets/sprite-sources/merkel-sprite-keys.png",
+  "originalSheetSha256": "7d5cde706ea62a8e4a8be4086ad0d595272db76b4cc61277d95e081a861b69df",
+  "originalCrop": [256, 256, 512, 512],
+  "artifacts": {
+    "appearance-key.png": "9a6bedf3d3d10a3c61bce8aa230839378cc361d7a91bc7031e1970d15db10e0e",
+    "original-left.png": "2826d6c6ce00fff47667b6f9207cbd1d427d683b589a2dc4ce2e584d0371f7d0",
+    "PROMPT.md": "b5b8ae574bbec1db87a44d5459a2c52cdf2a4e32cf036e6afe12b16f49c57cf5"
+  }
+}

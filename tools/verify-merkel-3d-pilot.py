@@ -6,12 +6,12 @@ These are mechanical gates, not a claim that the motion or likeness is approved.
 import hashlib
 import json
 from pathlib import Path
+import sys
 
 import numpy as np
 from PIL import Image
 
 ROOT = Path(__file__).resolve().parents[1]
-PILOT = ROOT / "assets/sprite-sources/candidates/merkel-3d"
 
 
 def require(condition, message):
@@ -20,9 +20,28 @@ def require(condition, message):
 
 
 def main():
+    neutral = "--neutral" in sys.argv
+    PILOT = ROOT / ("assets/sprite-sources/reference/neutral-walk" if neutral else "assets/sprite-sources/candidates/merkel-3d")
+    atlas_name, closure_name, bones_name = ("guide.png", "guide-closure.png", "guide-bones.png") if neutral else ("merkel-sprite.png", "merkel-audit.png", "merkel-bones.png")
     manifest = json.loads((PILOT / "manifest.json").read_text())
     audit = json.loads((PILOT / "pose-audit.json").read_text())
-    require(manifest["status"] == "candidate-unapproved", "pilot cannot self-approve")
+    require(manifest["status"] == ("motion-guide-not-avatar-art" if neutral else "candidate-unapproved"), "pilot cannot self-approve")
+    if neutral:
+        require(manifest["avatarIndependent"] is True, "guide must not own character appearance")
+        # Independently reconstruct anatomical landmarks from the pinned input,
+        # without importing either builder or its character-specific rest fitting.
+        reference = ROOT / "assets/sprite-sources/reference/makehuman-walk"
+        vertices = np.array([[float(v) for v in line.split()[1:4]] for line in (reference/"base.obj").read_text().splitlines() if line.startswith("v ")])
+        skeleton = json.loads((reference/"default.mhskel").read_text())
+        def landmark(name, end="head"):
+            joint = skeleton["bones"][name][end]
+            x,y,z = vertices[skeleton["joints"][joint]].mean(axis=0)
+            return np.array([x*.11,-z*.11,(y+8.1676)*.11])
+        for side in "LR":
+            for bone,a,b,end in (("thigh","upperleg01","lowerleg01","head"),("shin","lowerleg01","foot","head"),("foot","foot","toe3-1","head"),("toe","toe3-1","toe3-3","tail"),("arm","upperarm01","lowerarm01","head"),("forearm","lowerarm01","wrist","head"),("hand","wrist","wrist","tail")):
+                expected = np.array([landmark(a+"."+side),landmark(b+"."+side,end)])
+                require(np.max(np.abs(np.array(audit["bones"][bone+"."+side])-expected))<1e-6,"character proportions leaked into neutral "+bone)
+        require(np.max(np.abs(np.array(audit["bones"]["head"])-[landmark("head"),landmark("head","tail")]))<1e-6,"neutral head was caricatured")
     count, size = manifest["playbackFrames"], manifest["cellSize"]
     require(count == 32 and manifest["inspectionPoints"] == 33, "wrong cycle contract")
     for name, expected in manifest["artifacts"].items():
@@ -89,7 +108,7 @@ def main():
 
     pixel_seams = {}
     for row,view in enumerate(manifest["directions"]):
-        with Image.open(PILOT/"merkel-sprite.png") as image:
+        with Image.open(PILOT/atlas_name) as image:
             require(image.mode=="RGBA" and image.size==(count*size,4*size), "wrong atlas geometry")
             tiles = [np.array(image.crop((i*size,row*size,(i+1)*size,(row+1)*size))) for i in range(count)]
         require(len({tile.tobytes() for tile in tiles})==count, f"duplicate hold in {view}")
@@ -103,18 +122,19 @@ def main():
                 x,y=audit["views"][view][i]["bones"]["foot."+side][0]
                 x,y=round(x),round(y)
                 require(np.any(alpha[max(0,y-4):y+5,max(0,x-4):x+5]>32), "rendered foot misses rig")
-        with Image.open(PILOT/"merkel-audit.png") as image:
+        with Image.open(PILOT/closure_name) as image:
             require(image.size==((count+1)*size,4*size), "wrong closure sheet")
             first=np.array(image.crop((0,row*size,size,(row+1)*size)))
             last=np.array(image.crop((count*size,row*size,(count+1)*size,(row+1)*size)))
             pixel_seams[view]=int(np.max(np.abs(first.astype(int)-last.astype(int))))
             require(pixel_seams[view]==0, f"independently rendered closure differs: {view}")
-        with Image.open(PILOT/"merkel-bones.png") as image:
+        with Image.open(PILOT/bones_name) as image:
             require(image.size==(count*size,4*size), "wrong bone overlay geometry")
     # A preview must never redirect the actual game's sprite authority.
     for name in ("game.js","world3d.js"):
         text=(ROOT/name).read_text(encoding="utf-8")
-        require("candidates/merkel-3d" not in text, f"pilot leaked into {name}")
+        for path in ("candidates/merkel-3d", "reference/neutral-walk", "candidates/merkel-neutral-appearance"):
+            require(path not in text, f"pilot leaked into {name}")
     report={"status":"mechanical-checks-pass; visual approval still required",
             "frames":count,"views":manifest["directions"],"maximumBoneLengthError":float(length_error),
             "maximumJointGap":float(connection_error),"maximumFloorPenetration":float(floor_penetration),
@@ -122,6 +142,8 @@ def main():
             "maximumKneeFlexDegrees":max_knee,"maximumJointStep":max_speed,"seamJointStep":seam_speed,
             "seamJointAcceleration":float(accelerations[0].max()),"maximumHeadExcursion":float(np.ptp(head_points,axis=0).max()),
             "closurePixelMaxDifference":pixel_seams,"modelUnitsPerLeg":audit["legLength"]}
+    if neutral:
+        report["uniformSourceLandmarksVerified"] = True
     (PILOT/"verification.json").write_text(json.dumps(report,indent=2)+"\n",encoding="utf-8",newline="\n")
     print(json.dumps(report,indent=2))
 

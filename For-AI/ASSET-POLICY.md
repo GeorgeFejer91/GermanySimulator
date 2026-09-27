@@ -58,6 +58,21 @@ and native depth own consistency; do not independently regenerate frames. This
 view-specific, unapproved appearance pilot is selectable at `?source=painted`
 and must not enter the game without visual acceptance. Its verifier requires
 the same bone coordinates and alpha silhouettes as the grey source cycle.
+That silhouette rule is historical to this rejected-head pilot, not a constraint
+on the new neutral-guide approach below.
+
+`assets/sprite-sources/reference/neutral-walk/` is the shared character-independent
+motion authority. It keeps uncaricatured source joint landmarks, grey mannequin
+geometry and no avatar art. Reuse its gait across characters, but retarget to
+each character's fixed proportions and contacts; never force their heads or
+clothing into the guide's outline. Preserve the editable blend, source/license
+pointers, projected joint/sole evidence and artifact hashes. Its verifier also
+checks native landmark proportions. The only new character art is one unapproved
+Merkel key in `merkel-neutral-appearance/`, with raw ImageGen output, prompt,
+unmodified original crop and provenance. `?source=neutral` labels that comparison
+as stills beside the animated neutral guide. It must not suggest a finished
+Merkel animation or redirect either game loader. Other characters are not yet
+retargeted; running and prop actions require their own checks.
 
 Preview-only text fitting uses locally vendored Pretext 0.0.9 (MIT) and Roboto
 Condensed (OFL), with adjacent provenance; these are not game dependencies.

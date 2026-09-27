@@ -1,5 +1,26 @@
 # Durable decisions
 
+## 2026-09-27 — Shared neutral motion, character-owned appearance
+
+The user rejected the painted pilot's alien-shaped head and requires the 3D
+figure to be reusable across the cast. The new authority is the shared neutral
+guide under `assets/sprite-sources/reference/neutral-walk/`: standard MakeHuman
+anatomical landmarks, plain grey geometry, the existing contact-constrained
+walk and four fixed cameras. It does not use Merkel's fitting, face or clothes.
+Its 32-pose clock, joint directions, depth and foot-contact pattern are reusable;
+each character must retain its own fixed proportions, art, costume and props.
+This supersedes using the old clay mesh's silhouette as the final paint mask.
+Retarget contacts to target limb lengths rather than stretching avatar artwork.
+
+`merkel-neutral-appearance/` contains one built-in ImageGen appearance key with
+the original sprite as the dominant reference and the neutral pose as gesture
+guidance only. It is unapproved and not a new walking cycle. `?source=neutral`
+shows the original/new stills separately from the animated shared guide; all
+older experiments remain available. Verify source landmarks, real bone/shoe
+coordinates and pixel closure independently, then obtain visual acceptance of
+Merkel before extending painted animation to other characters. The stable game
+sprites remain unchanged. No new runtime dependency or parallel asset authority.
+
 ## 2026-09-27 — ImageGen appearance bound to the 3D walk
 
 The user clarified that the 3D model is a pose authority for painted 2D sprites,

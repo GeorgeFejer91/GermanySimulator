@@ -1,0 +1,41 @@
+{
+  "schemaVersion": 1,
+  "status": "motion-guide-not-avatar-art",
+  "avatarIndependent": true,
+  "appearanceAuthority": "original character artwork; never the neutral mannequin silhouette",
+  "skeleton": "uniformly scaled uncaricatured MakeHuman joints",
+  "playbackFrames": 32,
+  "inspectionPoints": 33,
+  "cellSize": 128,
+  "recommendedFps": 26,
+  "durationSeconds": 1.2333284,
+  "directions": [
+    "left",
+    "right",
+    "up",
+    "down"
+  ],
+  "rows": {
+    "left": 0,
+    "right": 1,
+    "up": 2,
+    "down": 3
+  },
+  "sourceHashes": {
+    "base.obj": "8e761e6624b8f54536409135d1636da63b32486a90d4897f84e121d144f6fb4c",
+    "default.mhskel": "99f179bce0aa850b45d4191a1d0d234c5851f881c057439470ded3bddf729a24",
+    "default_weights.mhw": "0f3641d651ae3d00ad6b4ccee43142edb109d3bd909d27d9e4139ef1beed8625"
+  },
+  "bvhSha256": "064de16c17a154c88b73eadecd4614e59d04ef3f8460d58785e20ceb9f4b807b",
+  "movementAuthority": "shared analytic contact-constrained leg IK plus filtered CMU arm swing; not full-body mocap",
+  "runtimeIsolation": "offline shared reference, preview PNG only; no game integration",
+  "artifacts": {
+    "guide.png": "4f141e6d5502488219a63f387a2f4666413bd561eb90bfa258b510f193822934",
+    "guide-bones.png": "e9caedb9962f1e8d03cd2bf76aba6c7071000e8b61254d593abbc4d9d360035c",
+    "guide-closure.png": "c754b115512e96f542e61156d54889c5d48970a55705087e26e5a29bd68fd308",
+    "pose-left.png": "79d4e84f5051fb478a3bc4e0d53505d291e9dff88e3b45418a40381bb004d5d4",
+    "neutral-walk.blend": "bad837b24ad64c2097d39f3d1283daa13f11f95c683d72143c1caae3f4cc99dd",
+    "pose-audit.json": "677c11dc394ee8f5719b2c39dbe4576774daa4e1ce7351dc582a4e653e794564",
+    "contact-sheet.png": "bd1f186e15e37f2db4f67b7b9e51364755fafa6ea8ca367564f43fdf1fa9dfd0"
+  }
+}

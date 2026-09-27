@@ -312,8 +312,9 @@ not an identity-matched paint pass. Shoes roll rigidly, without toe flex.
 bone/heel/toe overlay and closure sheet. Stable sprites, both older 2D candidates
 and experimental atlases remain selectable. The runtime still loads the stable
 archive. Never change that decision until the user accepts a finished visual loop.
-Only after motion/proportions review should the painted identity be fitted to
-this fixed surface; independent frame generation must not reintroduce wobble.
+The first paint experiment fitted identity to this fixed surface; the neutral
+guide lane below supersedes that surface constraint after the user's head-shape
+rejection. Independent frame generation must still not reintroduce wobble.
 
 The preview alone uses locally pinned Pretext 0.0.9 and Roboto Condensed to check
 bounded text after fonts load; native controls and text-spacing overrides also
@@ -342,3 +343,37 @@ and likeness remain review limitations. Keep `candidate-unapproved` and keep
 the stable in-game sprites. `sprite-preview.html?source=painted` exposes normal,
 bone/heel/toe and closure views beside all earlier versions. Rebuild and source
 details are in the candidate's `PROVENANCE.md`.
+
+### Shared neutral guide and independent appearance key
+
+The latest user direction separates reusable motion from character design.
+`tools/build-neutral-walk-guide.py` creates one plain mannequin under
+`assets/sprite-sources/reference/neutral-walk/`. It uses uniformly scaled source
+anatomical landmarks, not the Merkel rest-fitting function, hair, clothes or
+paint. The 18-bone meanings, contact schedule, filtered arm swing and cycle
+phase are shared across the cast. The source mesh silhouette is never an avatar
+mask. Character-specific retargeting must preserve each avatar's own fixed rest
+lengths and art, solve grounded contacts again, and handle props separately.
+
+The guide keeps 32 unique frames in four views and an independently rendered
+closure frame. `python tools/verify-merkel-3d-pilot.py --neutral` runs the same
+real joint/shoe, stance slip, knee direction, cyclic continuity and pixel gates,
+plus independent reconstruction of standard limb/head landmarks from the pinned
+MakeHuman source. `node --test tests/neutral-walk-guide.test.mjs` also checks
+source/output hashes and separation from the character-art lane. This proves
+mechanical properties, not naturalness or finished retargeting to every avatar.
+
+One ImageGen still under `candidates/merkel-neutral-appearance/` tests appearance
+first: original sprite as dominant reference, neutral contact pose as gesture
+only. Original head silhouette, short neck connection, compact/full build and
+style outrank neutral proportions. Do not project the new face onto the neutral
+head or clip the painting to its body. Keep the exact prompt, raw result and
+source crop. The key is `appearance-key-unapproved`, not pixel-identical and
+not a walking sheet; final all-frame consistency has not been established.
+
+`sprite-preview.html?source=neutral` shows the two appearance stills separately
+from the animated shared guide. Controls animate only the guide, and its title
+must not call it Merkel. Focus mode provides the actual bone/heel/toe overlay
+and closure inspection. Older sources remain selectable; no game sprite changes.
+Only after this appearance direction is accepted should a character-specific,
+fixed-appearance binding be built and evaluated through a whole walking cycle.
