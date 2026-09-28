@@ -488,3 +488,23 @@ local Pretext and a local OFL font; the game UI is not migrated. Future painted
 identity work must preserve the approved mesh/poses rather than generating each
 frame independently. Source/license and rebuild details live beside the assets
 and in `SPRITE-GENERATION-PROTOCOL.md`.
+
+## 2026-09-28 — Stable speech IDs and reusable local voice profiles
+
+`AUDIO-TEXT-LIBRARY.js` now owns one catalog for all 51 shipped foreground
+speech clips. Each clip has a stable ID, actual recording voice ID, exact German source,
+English subtitle or timed cues, path, and trigger family. The law and rule
+decks moved into that catalog so their recorded text and subtitles cannot drift
+from the game's indexed playback. `game.js` resolves recorded assets by clip ID
+and retains the existing stimulus broker; no new runtime voice service exists.
+
+Six distinct CC0 volunteer references are saved in Voice Cloner under project
+profiles for the player's inner monologue, narrator, two passersby, police, and
+quiz officer. Their local profile IDs and source hashes live in the voice
+registry for repeatable offline generation. A successful short German render
+establishes technical readiness, not approval of the voice fit or permission to
+ship a full line batch. Browser speech remains in place until each line passes
+listening, transcription, loudness, subtitle, and trigger checks. Existing
+public-figure recordings remain recorded-only; future synthesized character
+lines use separately sourced voices. Legacy recordings have `targetVoiceId`
+assignments where the intended new character differs from the current voice.

@@ -3,6 +3,8 @@
 const canvas=document.getElementById("game"),ctx=canvas.getContext("2d"),keys=Object.create(null),CITY={w:9840,h:4240},RAIL_GUTTER=560,WORLD={w:CITY.w+RAIL_GUTTER*2,h:CITY.h+RAIL_GUTTER*2};
 const offsetWorldPoint=item=>({...item,x:item.x+RAIL_GUTTER,y:item.y+RAIL_GUTTER});
 const player={x:1800+RAIL_GUTTER,y:1760+RAIL_GUTTER,r:16,energy:100,facing:0,vx:0,vy:0};
+const speechCatalog=window.GermanySimulatorAudioText;
+function speechClip(id){const clip=speechCatalog.clips[id];if(!clip)throw new Error(`Unknown speech clip: ${id}`);return clip}
 const GERMANNESS_MAX=15,LAW_POWER_THRESHOLD=9;
 const WURST_TYPES=Object.freeze({
  nuernberger:{label:"NÜRNBERGER ROSTBRATWURST",short:"NÜRNBERGER",color:"#b9845f",pieces:3,image:"./assets/wurst/nuernberger.webp",photo:"SCHLURCHER · CC BY 4.0",history:"Nuremberg's city council recorded quality rules for its bratwurst around 1313. Since 2003, the genuine Nürnberger Rostbratwurst has held EU protected geographical status and must be produced within the city."},
@@ -187,11 +189,11 @@ const policeBarks={
  germany:["HALT! STEHENBLEIBEN!","NICHT ÜBER DEN RASEN!","AUSWEIS BITTE!","SIE VERLASSEN SOFORT DEN GRÜNBEREICH!","DAS IST SO NICHT VORGESEHEN!","BLEIBEN SIE HINTER DER LINIE!"]
 };
 const TRAIN_ANNOUNCEMENT_AUDIO=[
- "./assets/audio/trains/ice-0815-buxtehude-bahnhofshalle-subtle.mp3",
- "./assets/audio/trains/ice-0815-marktversagen-bahnhofshalle-subtle.mp3",
- "./assets/audio/trains/ice-0815-stalingrad-bahnhofshalle-subtle.mp3",
- "./assets/audio/trains/ice-ardorf-hilter-bahnhofshalle-subtle.mp3",
- "./assets/audio/trains/ice-96-oberkaka-bahnhofshalle-subtle.mp3"
+ speechClip("train-ice-0815-buxtehude-bahnhofshalle-subtle").recording,
+ speechClip("train-ice-0815-marktversagen-bahnhofshalle-subtle").recording,
+ speechClip("train-ice-0815-stalingrad-bahnhofshalle-subtle").recording,
+ speechClip("train-ice-ardorf-hilter-bahnhofshalle-subtle").recording,
+ speechClip("train-ice-96-oberkaka-bahnhofshalle-subtle").recording
 ];
 const railLawQuotes=[
  "EBO § 62 Absatz 2: „Der Aufenthalt innerhalb der Gleise ist nicht gestattet.“ Spielhinweis: Bitte räumen Sie den Fahrweg.",
@@ -210,7 +212,7 @@ const pedestrianBarks={
   road:["HALT! Off the street! Runter von der Fahrbahn!","STOP! The Zebrastreifen is literally right there!","Verkehrsrowdy! Your Querungswinkel is completely unapproved!","Hast du tomatoes on den Augen? Weg von der Straße!"]
  },
  germany:{
-  sidewalk:["HALT! Sie stehen im normierten Gehwegprofil!","STOPP! Sie blockieren den Durchgang nach meiner Auslegung!","Sie sind im Weg. Ich war verwaltungsrechtlich zuerst hier!","Hast du schon Kehrwoche gemacht? Dann kennen Sie doch die Gehwegordnung!","Das Leben ist kein Ponyhof. Verlassen Sie meine Lauflinie!","Haben Sie Tomaten auf den Augen? Das ist eindeutig mein Gehweg!",{text:"Nein, ich gehe hier nicht weg!",recording:"./assets/voices/thorsten-angry-nicht-weg.mp3"},{text:"Dümmer geht's nicht mehr.",recording:"./assets/voices/thorsten-angry-duemmer.mp3"},{text:"Das klappt einfach nicht!",recording:"./assets/voices/thorsten-angry-klappt-nicht.mp3"},{text:"Mist, wieder nichts geschafft.",recording:"./assets/voices/thorsten-sleepy-nichts-geschafft.mp3",urgent:false}],
+  sidewalk:["HALT! Sie stehen im normierten Gehwegprofil!","STOPP! Sie blockieren den Durchgang nach meiner Auslegung!","Sie sind im Weg. Ich war verwaltungsrechtlich zuerst hier!","Hast du schon Kehrwoche gemacht? Dann kennen Sie doch die Gehwegordnung!","Das Leben ist kein Ponyhof. Verlassen Sie meine Lauflinie!","Haben Sie Tomaten auf den Augen? Das ist eindeutig mein Gehweg!",speechClip("thorsten-angry-nicht-weg"),speechClip("thorsten-angry-duemmer"),speechClip("thorsten-angry-klappt-nicht"),{...speechClip("thorsten-sleepy-nichts-geschafft"),urgent:false}],
   grass:["HALT! Runter vom Rasen!","STOPP! Der Rasen ist anzusehen, nicht zu betreten!","Haben Sie eine Halmbetretungserlaubnis? Natürlich nicht!","Jetzt haben wir den Salat, und Sie stehen mitten in der Grünfläche!"],
   road:["HALT! Runter von der Fahrbahn!","STOPP! Der Zebrastreifen ist gleich dort!","Verkehrsrowdy! Ihr Querungswinkel ist vollständig ungenehmigt!","Haben Sie Tomaten auf den Augen? Weg von der Straße!"]
  }
@@ -222,8 +224,8 @@ const crowdArchetypes=Object.freeze([
 const crowdArchetypeById=Object.fromEntries(crowdArchetypes.map(archetype=>[archetype.id,archetype]));
 const crowdArchetypeOrder=Object.freeze(["towel-man","towel-woman"].map(id=>crowdArchetypeById[id]));
 const germannessVoice={
- gain:{text:"Endlich wieder Nachschub!",recording:"./assets/voices/thorsten-amused-nachschub.mp3"},
- loss:{text:"Mist, wieder nichts geschafft.",recording:"./assets/voices/thorsten-disgusted-nichts-geschafft.mp3"}
+ gain:speechClip("thorsten-amused-nachschub"),
+ loss:speechClip("thorsten-disgusted-nichts-geschafft")
 };
 const innerMonologues=Object.freeze({
  berlin:Object.freeze({
@@ -252,21 +254,7 @@ const innerMonologues=Object.freeze({
  })
 });
 // Current federal text checked against gesetze-im-internet.de on 2026-09-20.
-const lawPowerLines=[
- "§ 183a StGB · Erregung öffentlichen Ärgernisses: Wer öffentlich sexuelle Handlungen vornimmt und dadurch absichtlich oder wissentlich ein Ärgernis erregt, wird mit Freiheitsstrafe bis zu einem Jahr oder mit Geldstrafe bestraft, wenn die Tat nicht in § 183 mit Strafe bedroht ist.",
- "§ 118 Absatz 1 OWiG · Belästigung der Allgemeinheit: Ordnungswidrig handelt, wer eine grob ungehörige Handlung vornimmt, die geeignet ist, die Allgemeinheit zu belästigen oder zu gefährden und die öffentliche Ordnung zu beeinträchtigen.",
- "§ 127 Absatz 1 OWiG · Herstellen oder Verwenden von Sachen, die zur Geld- oder Urkundenfälschung benutzt werden können: Ordnungswidrig handelt, wer ohne schriftliche Erlaubnis der zuständigen Stelle oder des sonst dazu Befugten Vordrucke für öffentliche Urkunden oder Beglaubigungszeichen herstellt, sich oder einem anderen verschafft, feilhält, verwahrt, einem anderen überläßt, einführt oder ausführt.",
- "§ 27 Absatz 4 StVO · Verbände: Die seitliche Begrenzung geschlossen reitender oder zu Fuß marschierender Verbände muss, wenn nötig (§ 17 Absatz 1), mindestens nach vorn durch nicht blendende Leuchten mit weißem Licht, nach hinten durch Leuchten mit rotem Licht oder gelbem Blinklicht kenntlich gemacht werden.",
- "§ 27 Absatz 6 StVO · Verbände: Auf Brücken darf nicht im Gleichschritt marschiert werden.",
- "§ 30 Absatz 1 StVO · Umweltschutz, Sonn- und Feiertagsfahrverbot: Unnützes Hin- und Herfahren ist innerhalb geschlossener Ortschaften verboten, wenn Andere dadurch belästigt werden.",
- "§ 911 BGB · Überfall: Früchte, die von einem Baume oder einem Strauche auf ein Nachbargrundstück hinüberfallen, gelten als Früchte dieses Grundstücks.",
- "§ 919 Absatz 3 BGB · Grenzabmarkung: Die Kosten der Abmarkung sind von den Beteiligten zu gleichen Teilen zu tragen, sofern nicht aus einem zwischen ihnen bestehenden Rechtsverhältnis sich ein anderes ergibt.",
- "§ 961 BGB · Eigentumsverlust bei Bienenschwärmen: Zieht ein Bienenschwarm aus, so wird er herrenlos, wenn nicht der Eigentümer ihn unverzüglich verfolgt oder wenn der Eigentümer die Verfolgung aufgibt.",
- "§ 962 BGB · Verfolgungsrecht des Eigentümers: Der Eigentümer des Bienenschwarms darf bei der Verfolgung fremde Grundstücke betreten. Ist der Schwarm in eine fremde nicht besetzte Bienenwohnung eingezogen, so darf der Eigentümer des Schwarmes zum Zwecke des Einfangens die Wohnung öffnen und die Waben herausnehmen oder herausbrechen. Er hat den entstehenden Schaden zu ersetzen.",
- "§ 963 BGB · Vereinigung von Bienenschwärmen: Vereinigen sich ausgezogene Bienenschwärme mehrerer Eigentümer, so werden die Eigentümer, welche ihre Schwärme verfolgt haben, Miteigentümer des eingefangenen Gesamtschwarms; die Anteile bestimmen sich nach der Zahl der verfolgten Schwärme.",
- "§ 964 BGB · Vermischung von Bienenschwärmen: Ist ein Bienenschwarm in eine fremde besetzte Bienenwohnung eingezogen, so erstrecken sich das Eigentum und die sonstigen Rechte an den Bienen, mit denen die Wohnung besetzt war, auf den eingezogenen Schwarm. Das Eigentum und die sonstigen Rechte an dem eingezogenen Schwarme erlöschen.",
- "§ 3 Absatz 2 Lebensmittelbestrahlungsverordnung · Verordnung über die Behandlung von Lebensmitteln mit Elektronen-, Gamma- und Röntgenstrahlen, Neutronen oder ultravioletten Strahlen: Die Angaben nach Absatz 1 sind gut sichtbar, in leicht lesbarer Schrift und unverwischbar anzugeben."
-];
+const lawPowerLines=speechCatalog.lawPowerLines;
 let lawPowerBag=[],lastLawPowerLine=-1;
 function nextLawPowerLine(){
  if(!lawPowerBag.length){lawPowerBag=lawPowerLines.map((_,i)=>i);for(let i=lawPowerBag.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[lawPowerBag[i],lawPowerBag[j]]=[lawPowerBag[j],lawPowerBag[i]]}if(lawPowerBag.at(-1)===lastLawPowerLine&&lawPowerBag.length>1)[lawPowerBag[0],lawPowerBag[lawPowerBag.length-1]]=[lawPowerBag[lawPowerBag.length-1],lawPowerBag[0]]}
@@ -534,17 +522,7 @@ const englishText=new Map([
  ["Dafür bin ich nicht zuständig.","I am not responsible for that."],
  ["Ordnung muss schon sein.","There does have to be order."],
  ["Haben Sie dafür einen Termin?","Do you have an appointment for that?"],
- ["Schrebergarten-Rasen ist anzuschauen, nicht zu betreten. Zuwiderhandlung löst sofortige Gefahrenabwehr aus.","Allotment-garden lawn is for viewing, not walking. Violations trigger immediate intervention."],
- ["Überdurchschnittlich zügiges Gehen kann als unnötige Dynamik gewertet werden.","Above-average walking speed may be treated as unnecessary dynamism."],
- ["Fahrbahnen sind ausschließlich an geometrisch vorgesehenen Stellen zu überqueren.","Roads may only be crossed at geometrically designated locations."],
- ["Mülltonnen müssen parallel zur gefühlten Bordsteinkante stehen.","Bins must remain parallel to the perceived kerb."],
- ["Spontaneität bedarf grundsätzlich der vorherigen Terminvereinbarung.","Spontaneity generally requires a prior appointment."],
- ["Leergut ist kein Müll, sondern temporär illiquides Vermögen.","Empty returnable bottles are not rubbish but temporarily illiquid assets."],
- ["Nach 22:00 Uhr ist sogar enthusiastisches Denken nur in Zimmerlautstärke zulässig.","After 22:00 even enthusiastic thinking is permitted only at room volume."],
- ["Wer wartet, hat durch sichtbares Warten seine Wartebereitschaft nachzuweisen.","Anyone waiting must demonstrate willingness to wait by visibly waiting."],
- ["Zebrastreifen sind sichtbar, amtlich und mit angemessener Dankbarkeit zu benutzen.","Zebra crossings are visible, official, and must be used with appropriate gratitude."],
- ["Unangekündigte Ortsveränderungen können als spontane Absicht gewertet werden.","Unannounced changes of location may be treated as spontaneous intent."],
- ["Berlin liegt hinter der Brandmauer und dort wird gedenglischt. Auf der Deutschlandseite wird ausschließlich Deutsch gesprochen.","Berlin is behind the Brandmauer and speaks Denglisch. On the Germany side, characters speak German only."]
+ ...speechCatalog.rules.map((rule,index)=>[rule[1],speechCatalog.ruleEnglish[index]])
 ]);
 const formEnglish={a38:["Application Permit A38","Incomplete completeness is considered incomplete."],wohnung:["Landlord confirmation confirming a dwelling","Confirm that the dwelling in which you dwell is, in fact, a dwelling."],ergaenzung:["Supplementary sheet for the supplemented application","This form only became necessary because of the previous form."],steuer:["Tax registration questionnaire","The following numbers exist primarily to generate further numbers."],versicherung:["Application for evidence of evidence","Health is private. This form is not."],aufenthalt:["Application for continuation of presence","For your appointment you require evidence that your appointment occurred."],citizenship:["Application for German citizenship","Purely a game procedure. Not real law or a real requirement."]};
 function localize(text){return state.lang==="en"?(englishText.get(text)||text):text}
@@ -622,23 +600,12 @@ const missions=[
 {title:"DAS STADTBILD",text:"Das Stadtbildamt verlangt drei dringende optische Normierungen.",target:"stadtbild",form:null},
 {title:"AUFENTHALT",text:"Beweisen Sie der Ausländerbehörde, dass Sie bereits alles bewiesen haben.",target:"auslaender",form:"aufenthalt"},
 {title:"EINBÜRGERUNG",text:"Letzter fiktiver Antrag: deutsche Staatsangehörigkeit durch administratives Durchhaltevermögen.",target:"auslaender",form:"citizenship"}];
-const rules=[
-["§17.3b","Schrebergarten-Rasen ist anzuschauen, nicht zu betreten. Zuwiderhandlung löst sofortige Gefahrenabwehr aus."],
-["§4 Abs.2","Überdurchschnittlich zügiges Gehen kann als unnötige Dynamik gewertet werden."],
-["§8a","Fahrbahnen sind ausschließlich an geometrisch vorgesehenen Stellen zu überqueren."],
-["DIN 0815","Mülltonnen müssen parallel zur gefühlten Bordsteinkante stehen."],
-["§23f","Spontaneität bedarf grundsätzlich der vorherigen Terminvereinbarung."],
-["PfandO §1","Leergut ist kein Müll, sondern temporär illiquides Vermögen."],
-["RuheV §2","Nach 22:00 Uhr ist sogar enthusiastisches Denken nur in Zimmerlautstärke zulässig."],
-["§5.1","Wer wartet, hat durch sichtbares Warten seine Wartebereitschaft nachzuweisen."],
-["QuerO §9","Zebrastreifen sind sichtbar, amtlich und mit angemessener Dankbarkeit zu benutzen."],
-["SpontV §3","Unangekündigte Ortsveränderungen können als spontane Absicht gewertet werden."],
-["Bln/DE §1","Berlin liegt hinter der Brandmauer und dort wird gedenglischt. Auf der Deutschlandseite wird ausschließlich Deutsch gesprochen."]];
+const rules=speechCatalog.rules;
 const RULE_ROTATION_SECONDS=14;
 const npcLines=["Also das ist jetzt aber auch nicht so gedacht.","Kann man machen. Muss man aber wirklich nicht.","Ich möchte mich nicht beschweren, aber ich beschwere mich.","Dafür gibt es bestimmt ein Formular.","Früher war hier weniger Vorgang.","Sie stehen minimal im Weg.","Das ist bestimmt wegen der Baustelle. Die ist seit 2009 da.","Dafür bin ich nicht zuständig.","Ordnung muss schon sein.","Haben Sie dafür einen Termin?"];
 const merzLines=Object.freeze(["Das Rote Rathaus zu stürmen? Das muss ein Ende haben.","Mein Großvater war kein Nationalsozialist, sondern eine beeindruckende Persönlichkeit und ein erfolgreicher Bürgermeister."]);
-const MERKEL_AUDIO_LINE="Wir schaffen das.";
-const MERKEL_NEULAND_LINE="Das Internet ist für uns alle Neuland.";
+const MERKEL_AUDIO_LINE=speechClip("merkel-wir-schaffen-das").text;
+const MERKEL_NEULAND_LINE=speechClip("merkel-neuland").text;
 const MERKEL_BEHIND_LINE="Sie stehen hinter mir.";
 const merkelLines=Object.freeze([
  MERKEL_AUDIO_LINE,
@@ -649,23 +616,23 @@ const merkelLines=Object.freeze([
  "Wer das erkennt, muss eine neue Bewertung vornehmen.",
  "Wir müssen uns darauf einstellen, dass wir schneller aussteigen.",
  "Wir wollen das schaffen."
-]),MERKEL_RECORDINGS=Object.freeze({[MERKEL_AUDIO_LINE]:"./assets/merkel-wir-schaffen-das.mp3",[MERKEL_NEULAND_LINE]:"./assets/voices/merkel/neuland-0-3s.mp3"});
+]),MERKEL_RECORDINGS=Object.freeze({[MERKEL_AUDIO_LINE]:speechClip("merkel-wir-schaffen-das").recording,[MERKEL_NEULAND_LINE]:speechClip("merkel-neuland").recording});
 const bayernClips=Object.freeze([
- {text:"Und als letzten Punkt: Baden-Württemberg. Ah, nicht Bayern.",recording:"./assets/voices/bayern/baden-wuerttemberg-not-bayern.mp3"},
- {text:"Wie schön Bayern ist. Geh nach Bayern. In Bayern gibt's Bayern. Nur in Bayern gibt's Bayern.",recording:"./assets/voices/bayern/wie-schoen-bayern-ist.mp3"},
- {text:"Für Bayern ist das wichtig. Stichwort Bayern.",recording:"./assets/voices/bayern/stichwort-bayern.mp3"},
- {text:"Oh ja, man muss Bayern nicht mögen, man muss Bayern leben.",recording:"./assets/voices/bayern/bayern-leben.mp3"},
- {text:"Warum? Weil Bayern.",recording:"./assets/voices/bayern/warum-weil-bayern.mp3"},
- {text:"Ich will nur eins sagen: Bayern, Bayern, Bayern, Bayern.",recording:"./assets/voices/bayern/ich-will-nur-eins-sagen.mp3"},
- {text:"Ein Bayern kam aus Bayern. Das war die Rettung Bayerns.",recording:"./assets/voices/bayern/rettung-bayerns.mp3"},
- {text:"Gott schütze Bayern.",recording:"./assets/voices/bayern/gott-schuetze-bayern.mp3"}
+ speechClip("bayern-baden-wuerttemberg-not-bayern"),
+ speechClip("bayern-wie-schoen-bayern-ist"),
+ speechClip("bayern-stichwort-bayern"),
+ speechClip("bayern-bayern-leben"),
+ speechClip("bayern-warum-weil-bayern"),
+ speechClip("bayern-ich-will-nur-eins-sagen"),
+ speechClip("bayern-rettung-bayerns"),
+ speechClip("bayern-gott-schuetze-bayern")
 ]);
 const aliceClips=Object.freeze([
- {text:"Ich liebe Deutschland. Besonders aus der Schweiz.",recording:"./assets/voices/alice-weidel/deutschland-schweiz.mp3",duration:3.109},
- {text:"Adolf Hitler war ein Linker. Die DDR hieß schließlich auch Demokratische Republik. Und Deutsche Leberkäse besteht selbstverständlich aus Leber und Käse.",recording:"./assets/voices/alice-weidel/hitler-ddr-leberkaese.mp3",duration:12.304},
- {text:"Die Nationalsozialisten waren Sozialisten, sonst hätte man sie ja Nationalirgendwas genannt.",recording:"./assets/voices/alice-weidel/nationalsozialisten-sozialisten.mp3",duration:5.982},
- {text:"Wir müssen zurück zur traditionellen Familie. Wie genau die aussieht, klären wir dann außerhalb meines Privatlebens.",recording:"./assets/voices/alice-weidel/traditionelle-familie.mp3",duration:6.374},
- {text:"Eliten sind das Problem. Aber zum Glück habe ich Wirtschaft studiert, bei Goldman Sachs gearbeitet und wohne in der Schweiz.",recording:"./assets/voices/alice-weidel/eliten-sind-das-problem.mp3",duration:7.471}
+ speechClip("alice-deutschland-schweiz"),
+ speechClip("alice-hitler-ddr-leberkaese"),
+ speechClip("alice-nationalsozialisten-sozialisten"),
+ speechClip("alice-traditionelle-familie"),
+ speechClip("alice-eliten-sind-das-problem")
 ]);
 const STANDARD_SPRITE_WALK_SPEED=52,ALICE_WALK_SPEED=STANDARD_SPRITE_WALK_SPEED*1.5;
 const bayernWaypoints=Object.freeze([
@@ -787,7 +754,7 @@ function renderWurstBadges(){
 function announceWurst(def){const box=document.getElementById("wurst-alert"),image=document.getElementById("wurst-alert-image");image.src=def.image;image.alt=def.label;document.getElementById("wurst-alert-title").textContent=def.label;document.getElementById("wurst-alert-history").textContent=def.history;document.getElementById("wurst-alert-credit").textContent="PHOTO: "+def.photo;box.hidden=false;box.classList.remove("show");void box.offsetWidth;box.classList.add("show");clearTimeout(announceWurst.t);announceWurst.t=setTimeout(()=>{box.hidden=true;box.classList.remove("show")},6200)}
 const AUDIO_CLASS=Object.freeze({TEXT:"audio-text",BACKGROUND:"background-music",EFFECT:"sound-effect"}),STIMULUS_PRIORITY=Object.freeze({AMBIENT:1,REACTIVE:2,FEATURED:3,NEARBY:4,CRITICAL:5}),AUDIO_MIX=Object.freeze({FOREGROUND:1,BACKGROUND:.22,ATTACK_SECONDS:.12,RELEASE_SECONDS:.4,REQUIRED_GAP_MS:250,AMBIENT_GAP_MS:2500,AMBIENT_TTL_MS:4000});
 const stimulusQueue=[],stimulusLastServed=new Map(),stimulusBags=new Map(),recordingPromises=new Map();
-const audioTextLibrary=window.GermanySimulatorAudioText||{lines:{},recordings:{},pools:{},questions:{}},subtitleEnglish=new Map([...englishText,...Object.entries(audioTextLibrary.lines||{})]);
+const audioTextLibrary=speechCatalog,subtitleEnglish=new Map([...englishText,...Object.entries(audioTextLibrary.lines||{})]);
 function addSubtitlePool(source,english){if(!source||!english)return;source.forEach((item,index)=>{const text=typeof item==="string"?item:item?.text;if(text&&english[index])subtitleEnglish.set(text,english[index])})}
 for(const source of [policeBarks.berlin,policeBarks.germany])addSubtitlePool(source,audioTextLibrary.pools.police);
 for(const source of [jaywalkerBarks.berlin,jaywalkerBarks.germany])addSubtitlePool(source,audioTextLibrary.pools.jaywalker);
@@ -920,7 +887,7 @@ function updateBorderTrains(dt){
  if(railHoldTimer>1.15&&now>=railLawNextAt&&!stimulusBusy()&&box.hidden){railHoldTimer=0;railLawNextAt=now+13500;showWorldBark("BAHNAUFSICHT · AMTLICHER SPIELHINWEIS",railLawQuotes[railLawIndex++%railLawQuotes.length],true,"","law",{family:"train-obstruction",priority:STIMULUS_PRIORITY.CRITICAL,ambient:false})}
  updateTrainAnnouncement()
 }
-function announceCurrentRule(){const index=state.rule%rules.length,text=rules[index][1],recording=`./assets/voices/laws/thorsten-negative-rule-${String(index+1).padStart(2,"0")}.mp3`;speakRecorded(text,recording,{voiceKey:"REGEL DES AUGENBLICKS",family:"rule",priority:STIMULUS_PRIORITY.AMBIENT,ambient:true})}
+function announceCurrentRule(){const index=state.rule%rules.length,clip=speechClip(`rule-${String(index+1).padStart(2,"0")}`),text=clip.text,recording=clip.recording;speakRecorded(text,recording,{voiceKey:"REGEL DES AUGENBLICKS",family:"rule",priority:STIMULUS_PRIORITY.AMBIENT,ambient:true})}
 function policeBark(force=false){const now=performance.now(),lines=policeBarks[state.region]||policeBarks.germany;if(!force&&(now-(policeBark.last||0)<2300||hasStimulusFamily("police")))return;showWorldBark("POLIZEI",nextVariant("police:"+state.region,lines),true,"","",{family:"police",priority:STIMULUS_PRIORITY.REACTIVE,ambient:true,isEligible:()=>state.started&&!state.modal&&!state.gameOver&&state.wanted>0&&(force||police.some(p=>dist(player.x,player.y,p.x,p.y)<400)),start:()=>policeBark.last=performance.now()})}
 function jaywalkerBark(){if(hasStimulusFamily("jaywalker"))return;const speaker=state.region==="berlin"?"EMPÖRTE PASSANTEN · BERLIN":"EMPÖRTE PASSANTEN · DEUTSCHLAND",lines=jaywalkerBarks[state.region]||jaywalkerBarks.germany;showWorldBark(speaker,nextVariant("jaywalker:"+state.region,lines),true,"","",{family:"jaywalker",priority:STIMULUS_PRIORITY.REACTIVE,ambient:true,isEligible:()=>state.started&&!state.modal&&!state.gameOver&&playerSurface()==="road"})}
 function pedestrianBark(n,surface="sidewalk"){
@@ -1039,7 +1006,7 @@ function useLawPower(){
  let target=null,best=Infinity;for(const n of npcs){if(n.special||n.arrested||!n.crowd||n===state.quizApproach)continue;const d=dist(player.x,player.y,n.x,n.y);if(d<best){best=d;target=n}}
  if(!target){toast("KEINE ANDERE ZUSTÄNDIGE PERSON AUFFINDBAR");return}
  document.getElementById("law-unlock-prompt").hidden=true;
- const quote=nextLawPowerLine(),recording=`./assets/voices/laws/thorsten-negative-law-${String(lastLawPowerLine+1).padStart(2,"0")}.mp3`;state.lawCooldown=14;state.wanted=0;state.wantedCooldown=0;state.offence="ZUSTÄNDIGKEIT ERFOLGREICH UMGELENKT";syncPoliceResponse();
+ const quote=nextLawPowerLine(),recording=speechClip(`law-${String(lastLawPowerLine+1).padStart(2,"0")}`).recording;state.lawCooldown=14;state.wanted=0;state.wantedCooldown=0;state.offence="ZUSTÄNDIGKEIT ERFOLGREICH UMGELENKT";syncPoliceResponse();
  if(!police.length){const point=groundResponsePoint(180,120,14);if(point)police.push({...point,speed:150,barkAt:0,divertedTarget:target})}
  for(const p of police)p.divertedTarget=target;
  showWorldBark("SIE · GESETZZITAT",quote,true,recording,"law",{family:"law",priority:STIMULUS_PRIORITY.CRITICAL,ambient:false});toast("§-MACHT AKTIV · "+target.name+" WIRD ÜBERPRÜFT");updateHud();
@@ -1061,7 +1028,7 @@ function startCitizenshipQuiz(n){
 }
 function answerCitizenshipQuiz(index){
  const q=state.quizQuestion,copy=state.quizCopy||q,character=state.quizCharacter;if(!q)return;state.quizVoiceToken=(state.quizVoiceToken||0)+1;document.getElementById("quiz-modal").hidden=true;state.modal=false;state.quizQuestion=null;state.quizCopy=null;state.quizNpc=null;state.quizCharacter=null;
-  if(index===q.answer){uiTone(980,.1,"square",.04);addGermanness(1,"RICHTIG · "+(q.type==="fahrschule"?q.source:"AUFGABE "+q.source))}else{uiTone(170,.16,"sawtooth",.045);showWorldBark(character?character.name+" · "+character.title:"ENTTÄUSCHTER PRÜFUNGSBEAUFTRAGTER","Nein! Nein! Nein!",true,"./assets/voices/quiz-wrong-answer.mp3","",{family:"quiz-result",priority:STIMULUS_PRIORITY.CRITICAL,ambient:false});addGermanness(-1,"FALSCH · RICHTIG: "+copy.choices[q.answer])}
+  if(index===q.answer){uiTone(980,.1,"square",.04);addGermanness(1,"RICHTIG · "+(q.type==="fahrschule"?q.source:"AUFGABE "+q.source))}else{uiTone(170,.16,"sawtooth",.045);showWorldBark(character?character.name+" · "+character.title:"ENTTÄUSCHTER PRÜFUNGSBEAUFTRAGTER",speechClip("quiz-wrong-answer").text,true,speechClip("quiz-wrong-answer").recording,"",{family:"quiz-result",priority:STIMULUS_PRIORITY.CRITICAL,ambient:false});addGermanness(-1,"FALSCH · RICHTIG: "+copy.choices[q.answer])}
 }
 document.getElementById("quiz-choices").addEventListener("click",event=>{const button=event.target.closest("button[data-answer]");if(button&&!button.disabled)answerCitizenshipQuiz(Number(button.dataset.answer))});
 function updateQuizEncounters(dt){

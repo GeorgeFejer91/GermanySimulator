@@ -1,31 +1,30 @@
 import assert from "node:assert/strict";
-import { existsSync, readFileSync, statSync } from "node:fs";
+import {existsSync,readFileSync,statSync} from "node:fs";
+import vm from "node:vm";
 
 const game=readFileSync("game.js","utf8");
-const match=game.match(/const lawPowerLines=(\[[\s\S]*?\]);\s*let lawPowerBag/);
-assert.ok(match,"lawPowerLines must remain a literal deck");
+const context=vm.createContext({window:{}});
+vm.runInContext(readFileSync("For-AI/AUDIO-TEXT-LIBRARY.js","utf8"),context);
+const catalog=context.window.GermanySimulatorAudioText;
 
-const laws=JSON.parse(match[1]);
-assert.equal(laws.length,13,"every law-deck entry needs one recording");
-assert.match(game,/assets\/voices\/laws\/thorsten-negative-law-/);
+assert.equal(catalog.lawPowerLines.length,13,"every law quotation needs one recording");
+assert.equal(catalog.rules.length,11,"every rotating rule needs one recording");
+assert.equal(catalog.ruleEnglish.length,11,"every rule needs an English subtitle");
+assert.match(game,/const lawPowerLines=speechCatalog\.lawPowerLines/);
+assert.match(game,/const rules=speechCatalog\.rules/);
+assert.match(game,/speechClip\(`law-\$\{/);
+assert.match(game,/speechClip\(`rule-\$\{/);
 
-laws.forEach((_,index)=>{
- const file=`assets/voices/laws/thorsten-negative-law-${String(index+1).padStart(2,"0")}.mp3`;
- assert.ok(existsSync(file),`missing ${file}`);
- assert.ok(statSync(file).size>1_000,`empty ${file}`);
-});
+for(const [family,lines] of [["law",catalog.lawPowerLines],["rule",catalog.rules.map(row=>row[1])]]){
+ lines.forEach((text,index)=>{
+  const id=`${family}-${String(index+1).padStart(2,"0")}`,clip=catalog.clips[id];
+  assert.ok(clip,`missing catalog entry ${id}`);
+  assert.equal(clip.text,text,`${id} must speak its displayed source`);
+  assert.ok(clip.english?.trim(),`${id} needs an English subtitle`);
+  const path=clip.path.slice(2);
+  assert.ok(existsSync(path),`missing ${path}`);
+  assert.ok(statSync(path).size>1_000,`empty ${path}`);
+ });
+}
 
-const ruleMatch=game.match(/const rules=(\[[\s\S]*?\]);\s*const RULE_ROTATION_SECONDS/);
-assert.ok(ruleMatch,"rules must remain a literal deck");
-const rules=JSON.parse(ruleMatch[1]);
-assert.equal(rules.length,11,"every rotating rule needs one recording");
-assert.match(game,/assets\/voices\/laws\/thorsten-negative-rule-/);
-assert.match(game,/announceCurrentRule\(\)/);
-
-rules.forEach((_,index)=>{
- const file=`assets/voices/laws/thorsten-negative-rule-${String(index+1).padStart(2,"0")}.mp3`;
- assert.ok(existsSync(file),`missing ${file}`);
- assert.ok(statSync(file).size>1_000,`empty ${file}`);
-});
-
-console.log("law and rotating-rule voice asset mapping: ok");
+console.log("Law and rotating-rule catalog IDs, source text, subtitles, and assets OK");

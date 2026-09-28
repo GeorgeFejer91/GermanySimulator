@@ -1,21 +1,9 @@
-# Audio-text and English subtitle authority
+# Speech catalog and subtitle authority
 
-[`AUDIO-TEXT-LIBRARY.js`](./AUDIO-TEXT-LIBRARY.js) is the single runtime and durable source for English subtitles. It contains:
+[`AUDIO-TEXT-LIBRARY.js`](./AUDIO-TEXT-LIBRARY.js) loads before `game.js`. Its `voices` registry assigns stable speaker IDs and stores local Voice Cloner bindings. `speechFamilies` maps browser-speech and recorded trigger families to these IDs. `clips` indexes every shipped foreground speech asset by stable clip ID. Each clip keeps its German spoken source, English subtitle, current recording voice ID, trigger, and file path together. `targetVoiceId` marks the separate saved profile intended to replace a legacy recording; it does not claim that the current file was generated with that profile. The five long station clips also have timed subtitle cues. The path-keyed `recordings` view still serves the subtitle broker.
 
-- exact English renderings for every authored browser-speech pool;
-- English renderings for every recorded character clip;
-- English question text for all 73 civic, fictional-driving, and original grammar prompts, plus the factual context attached to each quiz category;
-- exact source transcripts and time-segmented English cues for the five long station-hall recordings;
-- explicit exclusions for background music and non-verbal sound effects.
+As of 2026-09-28 the catalog covers **51 shipped speech clips**: six Thorsten source clips, one quiz sting, two Merkel excerpts, eight Bayern excerpts, five Alice excerpts, five train announcements, 13 law readings, and 11 rule readings. The law and rule entries are generated from ordered German/English decks in this file; `game.js` uses `speechClip(id)` for exact text and paths. Original recordings and derivatives retain provenance in `assets/voices/LICENSES.md`, and train provenance remains in `assets/audio/trains/PROVENANCE.md`.
 
-The root page loads the library before `game.js`. `game.js` combines its English pools with the existing source-language arrays and starts or clears subtitles only from the shared stimulus broker. Recorded subtitles begin in the same task as `AudioBufferSourceNode.start()`, long cues continuously select against the Web Audio clock instead of accumulating timer drift, synthetic subtitles begin from `SpeechSynthesisUtterance.onstart`, and both clear when that broker item ends or is cancelled. The toggle is independent of music and voice, defaults off, and persists locally in the browser.
+Browser-generated dialogue remains in `game.js`: source-language pools, regional variants, dynamic lines, and trigger logic. This catalog's `pools`, `lines`, `quizContexts`, and `questions` provide English subtitles; `speechFamilies` identifies intended speaker profiles for future rendered assets. The subtitle toggle stays off by default. The broker starts subtitles with actual audio playback, advances long cues against the Web Audio clock, and clears subtitles on completion or cancellation. Textboxes remain locked to the exact spoken string.
 
-Enabling subtitles queues the authored German subtitle-approval notice through that same broker when voice is enabled. Its low, measured browser-voice treatment is intentionally robotic and bureaucratic; its English rendering is stored in `lines` with every other synthesized source line.
-
-## Train transcription record
-
-The five files under `assets/audio/trains/` were transcribed locally on 2026-09-21 with OpenAI Whisper `small`, German language mode, and CPU inference. A second Whisper translation pass supplied draft English segmentation. Source text and English were then manually corrected against the supplied filenames and audible context. The checked cue timings live beside each train entry in the JavaScript library.
-
-## Maintenance rule
-
-When a spoken line or recording changes, update the source text and English text in the library in the same change. Long recordings need short timestamped cues; short lines may use one exact event-length subtitle. Do not add entries for songs, soundtrack cues, sirens, horns, thunder/crush sounds, UI tones, or fax-machine effects.
+For a new character, follow [`VOICE-SYNTH-PROTOCOL.md`](./VOICE-SYNTH-PROTOCOL.md): create one reusable Voice Cloner profile, add its voice ID, then add a clip ID per approved line. Reference that clip ID from the owning game trigger. Background music and nonverbal effects are excluded.

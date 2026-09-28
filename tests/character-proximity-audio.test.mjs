@@ -1,14 +1,20 @@
 import assert from "node:assert/strict";
 import {createHash} from "node:crypto";
 import {readFileSync,statSync} from "node:fs";
+import vm from "node:vm";
 
 const game=readFileSync(new URL("../game.js",import.meta.url),"utf8");
+const context=vm.createContext({window:{}});
+vm.runInContext(readFileSync(new URL("../For-AI/AUDIO-TEXT-LIBRARY.js",import.meta.url),"utf8"),context);
+const neulandClip=context.window.GermanySimulatorAudioText.clips["merkel-neuland"];
 const neuland=new URL("../assets/voices/merkel/neuland-0-3s.mp3",import.meta.url),data=readFileSync(neuland);
 
 assert.equal(statSync(neuland).size,73_394,"normalized Neuland clip size drifted");
 assert.equal(createHash("sha256").update(data).digest("hex"),"6e6df76d99db89e462335ae6a8fb6d7909c0611015b58a98fd9c8a3e0a8cb336","normalized Neuland clip checksum drifted");
-assert.match(game,/const MERKEL_NEULAND_LINE="Das Internet ist für uns alle Neuland\."/);
-assert.match(game,/\[MERKEL_NEULAND_LINE\]:"\.\/assets\/voices\/merkel\/neuland-0-3s\.mp3"/);
+assert.equal(neulandClip.text,"Das Internet ist für uns alle Neuland.");
+assert.equal(neulandClip.recording,"./assets/voices/merkel/neuland-0-3s.mp3");
+assert.match(game,/const MERKEL_NEULAND_LINE=speechClip\("merkel-neuland"\)\.text/);
+assert.match(game,/\[MERKEL_NEULAND_LINE\]:speechClip\("merkel-neuland"\)\.recording/);
 assert.match(game,/function updateMerkel\(n,dt\)[\s\S]*if\(proximityAudioReady\(n\)[\s\S]*showFeaturedSpriteBark\(n,"politician:merkel"/,"Merkel must bark automatically on proximity");
 assert.match(game,/function updateBorderPourer\(n,dt\)[\s\S]*proximityAudioReady\(n\)[\s\S]*showFeaturedSpriteBark\(n,"politician:merz"/,"Merz must bark automatically on proximity");
 assert.match(game,/function updateBayern\(n,dt\)\{\s*if\(state\.region==="germany"&&proximityAudioReady\(n\)\)bayernBark\(n\)/,"Bayern must bark automatically on proximity");

@@ -35,6 +35,7 @@ Installed source snapshots (2026-09-19):
 | Work | Skill | Requirement |
 | --- | --- | --- |
 | Any code change, plus backend efficiency, infrastructure, hosting architecture, asset pipelines, and economic asset usage | `$ponytail` | Required. Apply its smallest-working-change ladder and keep the static GitHub Pages deployment simple. |
+| New character voice profiles, reference recordings, synthesized speech clips, or voice-asset validation | `$voice-cloning` | Use with `VOICE-SYNTH-PROTOCOL.md` and the local Voice Cloner `AI-GUIDE.md`; keep game voice IDs, profile bindings, source transcripts, subtitles, and trigger ownership in the existing audio-text catalog. |
 | New raster billboards, textures, period artwork, or bitmap variants | `$imagegen` | Use for generated raster art; keep final project-bound files inside this repository. Do not use it for simple SVG or code-native geometry. |
 | Moving bitmap characters, sprite atlases, gait keys, or transition frames | `$imagegen`, `$game-engine`, and `$game-playtest` | Follow `SPRITE-GENERATION-PROTOCOL.md`: generated frames are proposals, the registered key sheet is source authority, the derived atlas is runtime authority, and desktop/mobile rapid-cycle QA is mandatory. |
 | HTML, CSS, HUD, menus, responsive behavior, or other frontend UI work | `$uncodixfy-pretext` | Preserve the existing game-specific identity and avoid generic generated UI patterns. |

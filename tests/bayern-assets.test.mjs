@@ -2,12 +2,15 @@ import assert from "node:assert/strict";
 import {existsSync,readFileSync} from "node:fs";
 import {dirname,join} from "node:path";
 import {fileURLToPath} from "node:url";
+import vm from "node:vm";
 
 const root=dirname(dirname(fileURLToPath(import.meta.url))),game=readFileSync(join(root,"game.js"),"utf8");
-const clips=[...game.matchAll(/\{text:"([^"]+)",recording:"(\.\/assets\/voices\/bayern\/[a-z-]+\.mp3)"\}/g)];
+const context=vm.createContext({window:{}});
+vm.runInContext(readFileSync(join(root,"For-AI/AUDIO-TEXT-LIBRARY.js"),"utf8"),context);
+const clips=Object.values(context.window.GermanySimulatorAudioText.clips).filter(clip=>clip.voiceId==="bayern");
 assert.equal(clips.length,8,"expected eight Bayern transcript/audio pairs");
-assert.equal(new Set(clips.map(([,text])=>text)).size,8,"Bayern transcripts must be unique");
-for(const [,text,path] of clips){assert.ok(text.trim(),`empty transcript for ${path}`);assert.ok(existsSync(join(root,path.slice(2))),`missing ${path}`)}
+assert.equal(new Set(clips.map(clip=>clip.text)).size,8,"Bayern transcripts must be unique");
+for(const clip of clips){assert.ok(clip.text.trim(),`empty transcript for ${clip.path}`);assert.ok(existsSync(join(root,clip.path.slice(2))),`missing ${clip.path}`);assert.ok(game.includes(`speechClip("${clip.id}")`),`${clip.id} must be selected by stable ID`)}
 
 for(const [file,width,height] of [
  ["bayern-walker-sprite.png",4096,512],

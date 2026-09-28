@@ -1,8 +1,12 @@
 import assert from "node:assert/strict";
 import {createHash} from "node:crypto";
 import {existsSync,readFileSync,statSync} from "node:fs";
+import vm from "node:vm";
 
 const game=readFileSync(new URL("../game.js",import.meta.url),"utf8");
+const context=vm.createContext({window:{}});
+vm.runInContext(readFileSync(new URL("../For-AI/AUDIO-TEXT-LIBRARY.js",import.meta.url),"utf8"),context);
+const clips=context.window.GermanySimulatorAudioText.clips;
 const expected=[
  ["Ich liebe Deutschland. Besonders aus der Schweiz.","deutschland-schweiz.mp3",50_198,"5d32bc26a4fdd9419690a1a496ac2263cbea1cf34fb8429c33d8b3b8334800ef"],
  ["Adolf Hitler war ein Linker. Die DDR hieß schließlich auch Demokratische Republik. Und Deutsche Leberkäse besteht selbstverständlich aus Leber und Käse.","hitler-ddr-leberkaese.mp3",197_319,"630c34d0f2f94871ad47bb404f479435055b012a9245f2e5848f9f33883afb7e"],
@@ -11,7 +15,10 @@ const expected=[
 ];
 for(const [text,file,size,hash] of expected){
  const url=new URL(`../assets/voices/alice-weidel/${file}`,import.meta.url);
- assert.ok(game.includes(`text:"${text}"`),`${file} must display its exact local transcript`);
+ const id=`alice-${file.slice(0,-4)}`;
+ assert.equal(clips[id]?.text,text,`${file} must display its exact local transcript`);
+ assert.equal(clips[id]?.recording,`./assets/voices/alice-weidel/${file}`);
+ assert.ok(game.includes(`speechClip("${id}")`),`${file} must be selected by stable clip ID`);
  assert.ok(existsSync(url),`missing ${file}`);
  assert.equal(statSync(url).size,size,`${file} normalized size drifted`);
  assert.equal(createHash("sha256").update(readFileSync(url)).digest("hex"),hash,`${file} normalized checksum drifted`);

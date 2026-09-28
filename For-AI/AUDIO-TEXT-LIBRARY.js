@@ -259,16 +259,8 @@ const lines=Object.freeze({
  "Am 1. Dezember 1966 wählte ihn der Bundestag zum Kanzler der Großen Koalition aus CDU/CSU und SPD. Er amtierte bis 1969. Das Denkmal fragt nach dem Umgang mit personellen Kontinuitäten aus der NS-Zeit.":"On 1 December 1966, the Bundestag elected him chancellor of the CDU/CSU–SPD grand coalition. He served until 1969. This monument asks how postwar Germany dealt with the continuation of careers from the Nazi era.",
  "Berlin liegt hinter der Brandmauer. Ab hier nur noch Deutsch.":"Berlin is behind the Brandmauer. From here onward, German only.",
  "Berlin liegt hinter der Brandmauer. Welcome back. Denglisch ist wieder erlaubt.":"Berlin is behind the Brandmauer. Welcome back. Denglisch is allowed again.",
- "Nein, ich gehe hier nicht weg!":"No, I am not leaving!",
- "Dümmer geht's nicht mehr.":"It cannot get any stupider than this.",
- "Das klappt einfach nicht!":"This simply does not work!",
- "Mist, wieder nichts geschafft.":"Damn, failed to achieve anything again.",
- "Endlich wieder Nachschub!":"Finally, more supplies!",
- "Nein! Nein! Nein!":"No! No! No!",
  "Das Rote Rathaus zu stürmen? Das muss ein Ende haben.":"Storming the Red City Hall? This must come to an end.",
  "Mein Großvater war kein Nationalsozialist, sondern eine beeindruckende Persönlichkeit und ein erfolgreicher Bürgermeister.":"My grandfather was not a National Socialist, but an impressive personality and a successful mayor.",
- "Wir schaffen das.":"We can do this.",
- "Das Internet ist für uns alle Neuland.":"The internet is uncharted territory for all of us.",
  "Sie stehen hinter mir.":"You are standing behind me.",
  "Wir brauchen kein Abschaltgesetz, sondern einen Ausstieg mit Augenmaß.":"We do not need a shutdown law, but a measured phase-out.",
  "Ich habe eine neue Bewertung vorgenommen.":"I have made a new assessment.",
@@ -276,19 +268,6 @@ const lines=Object.freeze({
  "Wer das erkennt, muss eine neue Bewertung vornehmen.":"Anyone who recognizes that must make a new assessment.",
  "Wir müssen uns darauf einstellen, dass wir schneller aussteigen.":"We must prepare ourselves to phase out faster.",
  "Wir wollen das schaffen.":"We intend to achieve that.",
- "Und als letzten Punkt: Baden-Württemberg. Ah, nicht Bayern.":"And as the final point: Baden-Württemberg. Ah, not Bavaria.",
- "Wie schön Bayern ist. Geh nach Bayern. In Bayern gibt's Bayern. Nur in Bayern gibt's Bayern.":"How beautiful Bavaria is. Go to Bavaria. Bavaria has Bavaria. Only Bavaria has Bavaria.",
- "Für Bayern ist das wichtig. Stichwort Bayern.":"That is important for Bavaria. Keyword: Bavaria.",
- "Oh ja, man muss Bayern nicht mögen, man muss Bayern leben.":"Oh yes, you do not have to like Bavaria; you have to live Bavaria.",
- "Warum? Weil Bayern.":"Why? Because Bavaria.",
- "Ich will nur eins sagen: Bayern, Bayern, Bayern, Bayern.":"I only want to say one thing: Bavaria, Bavaria, Bavaria, Bavaria.",
- "Ein Bayern kam aus Bayern. Das war die Rettung Bayerns.":"A Bavarian came from Bavaria. That was Bavaria's salvation.",
- "Gott schütze Bayern.":"God protect Bavaria.",
- "Ich liebe Deutschland. Besonders aus der Schweiz.":"I love Germany. Especially from Switzerland.",
- "Adolf Hitler war ein Linker. Die DDR hieß schließlich auch Demokratische Republik. Und Deutsche Leberkäse besteht selbstverständlich aus Leber und Käse.":"Adolf Hitler was a leftist. After all, East Germany was also called a Democratic Republic. And German Leberkäse obviously consists of liver and cheese.",
- "Die Nationalsozialisten waren Sozialisten, sonst hätte man sie ja Nationalirgendwas genannt.":"The National Socialists were socialists; otherwise they would have been called national-something-or-other.",
- "Wir müssen zurück zur traditionellen Familie. Wie genau die aussieht, klären wir dann außerhalb meines Privatlebens.":"We must return to the traditional family. We can clarify exactly what that looks like outside my private life.",
- "Eliten sind das Problem. Aber zum Glück habe ich Wirtschaft studiert, bei Goldman Sachs gearbeitet und wohne in der Schweiz.":"Elites are the problem. But luckily I studied economics, worked at Goldman Sachs, and live in Switzerland.",
  "§-MACHT unlocked. Press § oder Q to quote ein Gesetz!":"Section-sign power unlocked. Press § or Q to quote a law!",
  "§-MACHT freigeschaltet. Drücken Sie § oder Q, um ein Gesetz zu zitieren!":"Section-sign power unlocked. Press § or Q to quote a law!",
  "Black helicopter approved. Der Rasenfall is now airborne!":"Black helicopter approved. The lawn case is now airborne!",
@@ -362,54 +341,135 @@ const lines=Object.freeze({
  "Wir gratulieren Ihnen zu dieser verwaltungstechnisch ausgezeichneten Entscheidung.":"We congratulate you on this administratively excellent decision."
 });
 
+const lawPowerLines=Object.freeze([
+ "§ 183a StGB · Erregung öffentlichen Ärgernisses: Wer öffentlich sexuelle Handlungen vornimmt und dadurch absichtlich oder wissentlich ein Ärgernis erregt, wird mit Freiheitsstrafe bis zu einem Jahr oder mit Geldstrafe bestraft, wenn die Tat nicht in § 183 mit Strafe bedroht ist.",
+ "§ 118 Absatz 1 OWiG · Belästigung der Allgemeinheit: Ordnungswidrig handelt, wer eine grob ungehörige Handlung vornimmt, die geeignet ist, die Allgemeinheit zu belästigen oder zu gefährden und die öffentliche Ordnung zu beeinträchtigen.",
+ "§ 127 Absatz 1 OWiG · Herstellen oder Verwenden von Sachen, die zur Geld- oder Urkundenfälschung benutzt werden können: Ordnungswidrig handelt, wer ohne schriftliche Erlaubnis der zuständigen Stelle oder des sonst dazu Befugten Vordrucke für öffentliche Urkunden oder Beglaubigungszeichen herstellt, sich oder einem anderen verschafft, feilhält, verwahrt, einem anderen überläßt, einführt oder ausführt.",
+ "§ 27 Absatz 4 StVO · Verbände: Die seitliche Begrenzung geschlossen reitender oder zu Fuß marschierender Verbände muss, wenn nötig (§ 17 Absatz 1), mindestens nach vorn durch nicht blendende Leuchten mit weißem Licht, nach hinten durch Leuchten mit rotem Licht oder gelbem Blinklicht kenntlich gemacht werden.",
+ "§ 27 Absatz 6 StVO · Verbände: Auf Brücken darf nicht im Gleichschritt marschiert werden.",
+ "§ 30 Absatz 1 StVO · Umweltschutz, Sonn- und Feiertagsfahrverbot: Unnützes Hin- und Herfahren ist innerhalb geschlossener Ortschaften verboten, wenn Andere dadurch belästigt werden.",
+ "§ 911 BGB · Überfall: Früchte, die von einem Baume oder einem Strauche auf ein Nachbargrundstück hinüberfallen, gelten als Früchte dieses Grundstücks.",
+ "§ 919 Absatz 3 BGB · Grenzabmarkung: Die Kosten der Abmarkung sind von den Beteiligten zu gleichen Teilen zu tragen, sofern nicht aus einem zwischen ihnen bestehenden Rechtsverhältnis sich ein anderes ergibt.",
+ "§ 961 BGB · Eigentumsverlust bei Bienenschwärmen: Zieht ein Bienenschwarm aus, so wird er herrenlos, wenn nicht der Eigentümer ihn unverzüglich verfolgt oder wenn der Eigentümer die Verfolgung aufgibt.",
+ "§ 962 BGB · Verfolgungsrecht des Eigentümers: Der Eigentümer des Bienenschwarms darf bei der Verfolgung fremde Grundstücke betreten. Ist der Schwarm in eine fremde nicht besetzte Bienenwohnung eingezogen, so darf der Eigentümer des Schwarmes zum Zwecke des Einfangens die Wohnung öffnen und die Waben herausnehmen oder herausbrechen. Er hat den entstehenden Schaden zu ersetzen.",
+ "§ 963 BGB · Vereinigung von Bienenschwärmen: Vereinigen sich ausgezogene Bienenschwärme mehrerer Eigentümer, so werden die Eigentümer, welche ihre Schwärme verfolgt haben, Miteigentümer des eingefangenen Gesamtschwarms; die Anteile bestimmen sich nach der Zahl der verfolgten Schwärme.",
+ "§ 964 BGB · Vermischung von Bienenschwärmen: Ist ein Bienenschwarm in eine fremde besetzte Bienenwohnung eingezogen, so erstrecken sich das Eigentum und die sonstigen Rechte an den Bienen, mit denen die Wohnung besetzt war, auf den eingezogenen Schwarm. Das Eigentum und die sonstigen Rechte an dem eingezogenen Schwarme erlöschen.",
+ "§ 3 Absatz 2 Lebensmittelbestrahlungsverordnung · Verordnung über die Behandlung von Lebensmitteln mit Elektronen-, Gamma- und Röntgenstrahlen, Neutronen oder ultravioletten Strahlen: Die Angaben nach Absatz 1 sind gut sichtbar, in leicht lesbarer Schrift und unverwischbar anzugeben."
+]);
+const rules=Object.freeze([
+["§17.3b","Schrebergarten-Rasen ist anzuschauen, nicht zu betreten. Zuwiderhandlung löst sofortige Gefahrenabwehr aus."],
+["§4 Abs.2","Überdurchschnittlich zügiges Gehen kann als unnötige Dynamik gewertet werden."],
+["§8a","Fahrbahnen sind ausschließlich an geometrisch vorgesehenen Stellen zu überqueren."],
+["DIN 0815","Mülltonnen müssen parallel zur gefühlten Bordsteinkante stehen."],
+["§23f","Spontaneität bedarf grundsätzlich der vorherigen Terminvereinbarung."],
+["PfandO §1","Leergut ist kein Müll, sondern temporär illiquides Vermögen."],
+["RuheV §2","Nach 22:00 Uhr ist sogar enthusiastisches Denken nur in Zimmerlautstärke zulässig."],
+["§5.1","Wer wartet, hat durch sichtbares Warten seine Wartebereitschaft nachzuweisen."],
+["QuerO §9","Zebrastreifen sind sichtbar, amtlich und mit angemessener Dankbarkeit zu benutzen."],
+["SpontV §3","Unangekündigte Ortsveränderungen können als spontane Absicht gewertet werden."],
+["Bln/DE §1","Berlin liegt hinter der Brandmauer und dort wird gedenglischt. Auf der Deutschlandseite wird ausschließlich Deutsch gesprochen."]
+]);
+const ruleEnglish=Object.freeze([
+ "Allotment-garden lawn is for viewing, not walking. Violations trigger immediate intervention.",
+ "Above-average walking speed may be treated as unnecessary dynamism.",
+ "Roads may only be crossed at geometrically designated locations.",
+ "Bins must remain parallel to the perceived kerb.",
+ "Spontaneity generally requires a prior appointment.",
+ "Empty returnable bottles are not rubbish but temporarily illiquid assets.",
+ "After 22:00 even enthusiastic thinking is permitted only at room volume.",
+ "Anyone waiting must demonstrate willingness to wait by visibly waiting.",
+ "Zebra crossings are visible, official, and must be used with appropriate gratitude.",
+ "Unannounced changes of location may be treated as spontaneous intent.",
+ "Berlin is behind the Brandmauer and speaks Denglisch. On the Germany side, characters speak German only."
+]);
+
 const recordings=Object.freeze({
- "./assets/voices/thorsten-angry-nicht-weg.mp3":Object.freeze({source:"Nein, ich gehe hier nicht weg!",english:"No, I am not leaving!"}),
- "./assets/voices/thorsten-angry-duemmer.mp3":Object.freeze({source:"Dümmer geht's nicht mehr.",english:"It cannot get any stupider than this."}),
- "./assets/voices/thorsten-angry-klappt-nicht.mp3":Object.freeze({source:"Das klappt einfach nicht!",english:"This simply does not work!"}),
- "./assets/voices/thorsten-amused-nachschub.mp3":Object.freeze({source:"Endlich wieder Nachschub!",english:"Finally, more supplies!"}),
- "./assets/voices/thorsten-disgusted-nichts-geschafft.mp3":Object.freeze({source:"Mist, wieder nichts geschafft.",english:"Damn, failed to achieve anything again."}),
- "./assets/voices/thorsten-sleepy-nichts-geschafft.mp3":Object.freeze({source:"Mist, wieder nichts geschafft.",english:"Damn, failed to achieve anything again."}),
- "./assets/voices/quiz-wrong-answer.mp3":Object.freeze({source:"Nein! Nein! Nein!",english:"No! No! No!"}),
- "./assets/merkel-wir-schaffen-das.mp3":Object.freeze({source:"Wir schaffen das.",english:"We can do this."}),
- "./assets/voices/merkel/neuland-0-3s.mp3":Object.freeze({source:"Das Internet ist für uns alle Neuland.",english:"The internet is uncharted territory for all of us."}),
- "./assets/voices/bayern/baden-wuerttemberg-not-bayern.mp3":Object.freeze({source:"Und als letzten Punkt: Baden-Württemberg. Ah, nicht Bayern.",english:"And as the final point: Baden-Württemberg. Ah, not Bavaria."}),
- "./assets/voices/bayern/wie-schoen-bayern-ist.mp3":Object.freeze({source:"Wie schön Bayern ist. Geh nach Bayern. In Bayern gibt's Bayern. Nur in Bayern gibt's Bayern.",english:"How beautiful Bavaria is. Go to Bavaria. Bavaria has Bavaria. Only Bavaria has Bavaria."}),
- "./assets/voices/bayern/stichwort-bayern.mp3":Object.freeze({source:"Für Bayern ist das wichtig. Stichwort Bayern.",english:"That is important for Bavaria. Keyword: Bavaria."}),
- "./assets/voices/bayern/bayern-leben.mp3":Object.freeze({source:"Oh ja, man muss Bayern nicht mögen, man muss Bayern leben.",english:"Oh yes, you do not have to like Bavaria; you have to live Bavaria."}),
- "./assets/voices/bayern/warum-weil-bayern.mp3":Object.freeze({source:"Warum? Weil Bayern.",english:"Why? Because Bavaria."}),
- "./assets/voices/bayern/ich-will-nur-eins-sagen.mp3":Object.freeze({source:"Ich will nur eins sagen: Bayern, Bayern, Bayern, Bayern.",english:"I only want to say one thing: Bavaria, Bavaria, Bavaria, Bavaria."}),
- "./assets/voices/bayern/rettung-bayerns.mp3":Object.freeze({source:"Ein Bayern kam aus Bayern. Das war die Rettung Bayerns.",english:"A Bavarian came from Bavaria. That was Bavaria's salvation."}),
- "./assets/voices/bayern/gott-schuetze-bayern.mp3":Object.freeze({source:"Gott schütze Bayern.",english:"God protect Bavaria."}),
- "./assets/voices/alice-weidel/deutschland-schweiz.mp3":Object.freeze({source:"Ich liebe Deutschland. Besonders aus der Schweiz.",english:"I love Germany. Especially from Switzerland."}),
- "./assets/voices/alice-weidel/hitler-ddr-leberkaese.mp3":Object.freeze({source:"Adolf Hitler war ein Linker. Die DDR hieß schließlich auch Demokratische Republik. Und Deutsche Leberkäse besteht selbstverständlich aus Leber und Käse.",english:"Adolf Hitler was a leftist. After all, East Germany was also called a Democratic Republic. And German Leberkäse obviously consists of liver and cheese."}),
- "./assets/voices/alice-weidel/nationalsozialisten-sozialisten.mp3":Object.freeze({source:"Die Nationalsozialisten waren Sozialisten, sonst hätte man sie ja Nationalirgendwas genannt.",english:"The National Socialists were socialists; otherwise they would have been called national-something-or-other."}),
- "./assets/voices/alice-weidel/traditionelle-familie.mp3":Object.freeze({source:"Wir müssen zurück zur traditionellen Familie. Wie genau die aussieht, klären wir dann außerhalb meines Privatlebens.",english:"We must return to the traditional family. We can clarify exactly what that looks like outside my private life."}),
- "./assets/voices/alice-weidel/eliten-sind-das-problem.mp3":Object.freeze({source:"Eliten sind das Problem. Aber zum Glück habe ich Wirtschaft studiert, bei Goldman Sachs gearbeitet und wohne in der Schweiz.",english:"Elites are the problem. But luckily I studied economics, worked at Goldman Sachs, and live in Switzerland."}),
- "./assets/audio/trains/ice-0815-buxtehude-bahnhofshalle-subtle.mp3":Object.freeze({
+ "./assets/voices/thorsten-angry-nicht-weg.mp3":Object.freeze({id:"thorsten-angry-nicht-weg",voiceId:"thorsten",targetVoiceId:"passerby-a",trigger:"pedestrian.sidewalk.germany",source:"Nein, ich gehe hier nicht weg!",english:"No, I am not leaving!"}),
+ "./assets/voices/thorsten-angry-duemmer.mp3":Object.freeze({id:"thorsten-angry-duemmer",voiceId:"thorsten",targetVoiceId:"passerby-b",trigger:"pedestrian.sidewalk.germany",source:"Dümmer geht's nicht mehr.",english:"It cannot get any stupider than this."}),
+ "./assets/voices/thorsten-angry-klappt-nicht.mp3":Object.freeze({id:"thorsten-angry-klappt-nicht",voiceId:"thorsten",targetVoiceId:"passerby-a",trigger:"pedestrian.sidewalk.germany",source:"Das klappt einfach nicht!",english:"This simply does not work!"}),
+ "./assets/voices/thorsten-amused-nachschub.mp3":Object.freeze({id:"thorsten-amused-nachschub",voiceId:"thorsten",targetVoiceId:"player-inner",trigger:"player.germanness.gain",source:"Endlich wieder Nachschub!",english:"Finally, more supplies!"}),
+ "./assets/voices/thorsten-disgusted-nichts-geschafft.mp3":Object.freeze({id:"thorsten-disgusted-nichts-geschafft",voiceId:"thorsten",targetVoiceId:"player-inner",trigger:"player.germanness.loss",source:"Mist, wieder nichts geschafft.",english:"Damn, failed to achieve anything again."}),
+ "./assets/voices/thorsten-sleepy-nichts-geschafft.mp3":Object.freeze({id:"thorsten-sleepy-nichts-geschafft",voiceId:"thorsten",targetVoiceId:"passerby-b",trigger:"pedestrian.sidewalk.germany",source:"Mist, wieder nichts geschafft.",english:"Damn, failed to achieve anything again."}),
+ "./assets/voices/quiz-wrong-answer.mp3":Object.freeze({id:"quiz-wrong-answer",voiceId:"quiz-sting",targetVoiceId:"quiz-officer",trigger:"quiz.answer.wrong",source:"Nein! Nein! Nein!",english:"No! No! No!"}),
+ "./assets/merkel-wir-schaffen-das.mp3":Object.freeze({id:"merkel-wir-schaffen-das",voiceId:"merkel",trigger:"character.merkel.proximity-or-interact",source:"Wir schaffen das.",english:"We can do this."}),
+ "./assets/voices/merkel/neuland-0-3s.mp3":Object.freeze({id:"merkel-neuland",voiceId:"merkel",trigger:"character.merkel.proximity-or-interact",source:"Das Internet ist für uns alle Neuland.",english:"The internet is uncharted territory for all of us."}),
+ "./assets/voices/bayern/baden-wuerttemberg-not-bayern.mp3":Object.freeze({id:"bayern-baden-wuerttemberg-not-bayern",voiceId:"bayern",trigger:"character.bayern.proximity-or-interact",source:"Und als letzten Punkt: Baden-Württemberg. Ah, nicht Bayern.",english:"And as the final point: Baden-Württemberg. Ah, not Bavaria."}),
+ "./assets/voices/bayern/wie-schoen-bayern-ist.mp3":Object.freeze({id:"bayern-wie-schoen-bayern-ist",voiceId:"bayern",trigger:"character.bayern.proximity-or-interact",source:"Wie schön Bayern ist. Geh nach Bayern. In Bayern gibt's Bayern. Nur in Bayern gibt's Bayern.",english:"How beautiful Bavaria is. Go to Bavaria. Bavaria has Bavaria. Only Bavaria has Bavaria."}),
+ "./assets/voices/bayern/stichwort-bayern.mp3":Object.freeze({id:"bayern-stichwort-bayern",voiceId:"bayern",trigger:"character.bayern.proximity-or-interact",source:"Für Bayern ist das wichtig. Stichwort Bayern.",english:"That is important for Bavaria. Keyword: Bavaria."}),
+ "./assets/voices/bayern/bayern-leben.mp3":Object.freeze({id:"bayern-bayern-leben",voiceId:"bayern",trigger:"character.bayern.proximity-or-interact",source:"Oh ja, man muss Bayern nicht mögen, man muss Bayern leben.",english:"Oh yes, you do not have to like Bavaria; you have to live Bavaria."}),
+ "./assets/voices/bayern/warum-weil-bayern.mp3":Object.freeze({id:"bayern-warum-weil-bayern",voiceId:"bayern",trigger:"character.bayern.proximity-or-interact",source:"Warum? Weil Bayern.",english:"Why? Because Bavaria."}),
+ "./assets/voices/bayern/ich-will-nur-eins-sagen.mp3":Object.freeze({id:"bayern-ich-will-nur-eins-sagen",voiceId:"bayern",trigger:"character.bayern.proximity-or-interact",source:"Ich will nur eins sagen: Bayern, Bayern, Bayern, Bayern.",english:"I only want to say one thing: Bavaria, Bavaria, Bavaria, Bavaria."}),
+ "./assets/voices/bayern/rettung-bayerns.mp3":Object.freeze({id:"bayern-rettung-bayerns",voiceId:"bayern",trigger:"character.bayern.proximity-or-interact",source:"Ein Bayern kam aus Bayern. Das war die Rettung Bayerns.",english:"A Bavarian came from Bavaria. That was Bavaria's salvation."}),
+ "./assets/voices/bayern/gott-schuetze-bayern.mp3":Object.freeze({id:"bayern-gott-schuetze-bayern",voiceId:"bayern",trigger:"character.bayern.proximity-or-interact",source:"Gott schütze Bayern.",english:"God protect Bavaria."}),
+ "./assets/voices/alice-weidel/deutschland-schweiz.mp3":Object.freeze({id:"alice-deutschland-schweiz",voiceId:"alice",trigger:"character.alice.proximity-or-interact",duration:3.109,source:"Ich liebe Deutschland. Besonders aus der Schweiz.",english:"I love Germany. Especially from Switzerland."}),
+ "./assets/voices/alice-weidel/hitler-ddr-leberkaese.mp3":Object.freeze({id:"alice-hitler-ddr-leberkaese",voiceId:"alice",trigger:"character.alice.proximity-or-interact",duration:12.304,source:"Adolf Hitler war ein Linker. Die DDR hieß schließlich auch Demokratische Republik. Und Deutsche Leberkäse besteht selbstverständlich aus Leber und Käse.",english:"Adolf Hitler was a leftist. After all, East Germany was also called a Democratic Republic. And German Leberkäse obviously consists of liver and cheese."}),
+ "./assets/voices/alice-weidel/nationalsozialisten-sozialisten.mp3":Object.freeze({id:"alice-nationalsozialisten-sozialisten",voiceId:"alice",trigger:"character.alice.proximity-or-interact",duration:5.982,source:"Die Nationalsozialisten waren Sozialisten, sonst hätte man sie ja Nationalirgendwas genannt.",english:"The National Socialists were socialists; otherwise they would have been called national-something-or-other."}),
+ "./assets/voices/alice-weidel/traditionelle-familie.mp3":Object.freeze({id:"alice-traditionelle-familie",voiceId:"alice",trigger:"character.alice.proximity-or-interact",duration:6.374,source:"Wir müssen zurück zur traditionellen Familie. Wie genau die aussieht, klären wir dann außerhalb meines Privatlebens.",english:"We must return to the traditional family. We can clarify exactly what that looks like outside my private life."}),
+ "./assets/voices/alice-weidel/eliten-sind-das-problem.mp3":Object.freeze({id:"alice-eliten-sind-das-problem",voiceId:"alice",trigger:"character.alice.proximity-or-interact",duration:7.471,source:"Eliten sind das Problem. Aber zum Glück habe ich Wirtschaft studiert, bei Goldman Sachs gearbeitet und wohne in der Schweiz.",english:"Elites are the problem. But luckily I studied economics, worked at Goldman Sachs, and live in Switzerland."}),
+ "./assets/audio/trains/ice-0815-buxtehude-bahnhofshalle-subtle.mp3":Object.freeze({id:"train-ice-0815-buxtehude-bahnhofshalle-subtle",voiceId:"station",trigger:"train.proximity-or-obstruction",
   source:"Information zu ICE 0815 nach Buxtehude. Abfahrt ursprünglich um 18.32 Uhr. Heute etwa 45 Minuten später. Grund dafür sind spielende Kinder an den Bahngleisen. Schon wieder spielende Kinder an den Bahngleisen. Oh Mann! Warum wollen Kinder eigentlich immer ausgerechnet an den Bahngleisen spielen? Es gibt doch Spielplätze, Wiesen, Parks, aber nein, Bahngleise, immer Bahngleise. ICE 0815 nach Buxtehude fährt heute voraussichtlich irgendwann, vielleicht weiter.",
   sourceCues:Object.freeze([[0,16,"Information zu ICE 0815 nach Buxtehude. Abfahrt ursprünglich um 18.32 Uhr. Heute etwa 45 Minuten später."],[16,25,"Grund dafür sind spielende Kinder an den Bahngleisen. Schon wieder spielende Kinder an den Bahngleisen. Oh Mann!"],[25,31,"Warum wollen Kinder eigentlich immer ausgerechnet an den Bahngleisen spielen?"],[31,39,"Es gibt doch Spielplätze, Wiesen, Parks, aber nein, Bahngleise, immer Bahngleise."],[39,48,"ICE 0815 nach Buxtehude fährt heute voraussichtlich irgendwann, vielleicht weiter."]]),
   cues:Object.freeze([[0,7.6,"Information about ICE 0815 to Buxtehude."],[7.6,16,"Originally scheduled to depart at 6:32 p.m. Today, about 45 minutes later."],[16,20.4,"The reason is children playing by the railway tracks."],[20.4,25,"Children playing by the tracks again. Oh man!"],[25,31,"Why do children always want to play right by the railway tracks?"],[31,39,"There are playgrounds, meadows, and parks, but no: railway tracks, always railway tracks."],[39,48,"ICE 0815 to Buxtehude is expected to depart at some point today. Perhaps it will continue onward."]])
  }),
- "./assets/audio/trains/ice-0815-marktversagen-bahnhofshalle-subtle.mp3":Object.freeze({
+ "./assets/audio/trains/ice-0815-marktversagen-bahnhofshalle-subtle.mp3":Object.freeze({id:"train-ice-0815-marktversagen-bahnhofshalle-subtle",voiceId:"station",trigger:"train.proximity-or-obstruction",
   source:"Information zu ICE 0815 nach Marktversagen Hauptbahnhof, Abfahrt ursprünglich um 18.32 Uhr, heute etwa 64 Minuten später. Grund dafür ist das besondere Geschäftsmodell der Deutschen Bahn. Die Deutsche Bahn ist ein staatseigener Konzern. Das bedeutet, Sie erhalten die legendäre Zuverlässigkeit eines Staatsbetriebs, bei der man sich zuverlässig darauf verlassen kann, dass irgendetwas nicht funktioniert. Und dazu die Preise eines privaten Unternehmens. Das Beste aus zwei Welten. Der Zug ist nicht zuverlässig, aber dafür auch nicht günstig. Ist das nicht wunderbar? Zugausfälle sind Eigenverantwortung. Preiserhöhungen freier Markt. Und für Erneuerungen ist leider niemand zuständig. Aber was wollen Sie machen? Mit dem Auto fahren, fliegen? Das wäre moralisch fragwürdig. Oder vielleicht zu FlixTrain wechseln? Ha, machen Sie das doch. Viel Glück dabei. ICE 0815 nach Marktversagen Hauptbahnhof fährt weiter, sobald geklärt ist, wer für Sie zuständig ist. Nach aktuellem Stand niemand.",
   cues:Object.freeze([[0,16,"Information about ICE 0815 to Marktversagen Central Station. Originally scheduled for 6:32 p.m.; today it is about 64 minutes late."],[16,21,"The reason is Deutsche Bahn's special business model."],[21,25,"Deutsche Bahn is a state-owned corporation."],[25,38,"That means you receive the legendary reliability of a state enterprise, where you can reliably count on something not working."],[38,42,"Along with the prices of a private company."],[42,44,"The best of both worlds."],[44,49,"The train is not reliable, but it is not cheap either."],[49,51,"Is that not wonderful?"],[51,54,"Train cancellations are your own responsibility."],[54,57,"Price increases are the free market."],[57,61,"And unfortunately nobody is responsible for renewals."],[61,63,"But what are you going to do?"],[63,68,"Drive or fly? That would be morally questionable."],[68,71,"Or perhaps switch to FlixTrain?"],[71,74,"Go on, do that. Good luck with it."],[74,84,"ICE 0815 to Marktversagen Central Station will continue once it has been clarified who is responsible for you."],[84,87,"At present: nobody."]])
  }),
- "./assets/audio/trains/ice-0815-stalingrad-bahnhofshalle-subtle.mp3":Object.freeze({
+ "./assets/audio/trains/ice-0815-stalingrad-bahnhofshalle-subtle.mp3":Object.freeze({id:"train-ice-0815-stalingrad-bahnhofshalle-subtle",voiceId:"station",trigger:"train.proximity-or-obstruction",
   source:"Information zu ICE 0815 nach Stalingrad. Abfahrt ursprünglich um 18.32 Uhr. Heute etwa 83 Jahre später. Grund dafür ist eine kurzfristige Änderung des Fahrplans. Bitte beachten Sie, der Zielbahnhof heißt inzwischen anders. Die Fahrgastinformation wurde noch nicht aktualisiert. Wir arbeiten daran. Seit geraumer Zeit.",
   cues:Object.freeze([[0,13,"Information about ICE 0815 to Stalingrad. Originally scheduled to depart at 6:32 p.m."],[13,28,"Today, about 83 years later. The reason is a short-notice timetable change. Please note: the destination station now has a different name."],[28,37,"The passenger information has not yet been updated. We are working on it. We have been for some time."]])
  }),
- "./assets/audio/trains/ice-96-oberkaka-bahnhofshalle-subtle.mp3":Object.freeze({
+ "./assets/audio/trains/ice-96-oberkaka-bahnhofshalle-subtle.mp3":Object.freeze({id:"train-ice-96-oberkaka-bahnhofshalle-subtle",voiceId:"station",trigger:"train.proximity-or-obstruction",
   source:"Die Information zu ICE 96 nach Oberkaka. Dieser Zug fällt heute ab Köln aus. Grund dafür ist die Verbesserung unserer Pünktlichkeitsstatistik. Der Zug hat inzwischen so viel Verspätung, dass es statistisch günstiger ist, ihn einfach nicht mehr fahren zu lassen. Ein ausgefallener Zug kann schließlich nicht zu spät ankommen. Aber Sie schon, bitte verlassen Sie daher den Zug. Der Zug selbst fährt anschließend ohne Sie weiter. Das ist betrieblich sinnvoller für uns. Wir wünschen Ihnen aber noch eine angenehme Weiterreise, wie auch immer Sie das jetzt machen.",
   cues:Object.freeze([[0,7,"Information about ICE 96 to Oberkaka."],[7,10,"This train will terminate at Cologne today."],[10,15,"The reason is an improvement to our punctuality statistics."],[15,23,"The train is now so delayed that, statistically, it is more favorable simply not to run it anymore."],[23,28,"After all, a cancelled train cannot arrive late."],[28,32,"But you can. Please leave the train."],[32,36,"The train itself will then continue without you."],[36,39,"That makes more operational sense for us."],[39,45,"We nevertheless wish you a pleasant onward journey, however you are going to manage that now."]])
  }),
- "./assets/audio/trains/ice-ardorf-hilter-bahnhofshalle-subtle.mp3":Object.freeze({
+ "./assets/audio/trains/ice-ardorf-hilter-bahnhofshalle-subtle.mp3":Object.freeze({id:"train-ice-ardorf-hilter-bahnhofshalle-subtle",voiceId:"station",trigger:"train.proximity-or-obstruction",
   source:"Information zum ICE von Ardorf nach Hilter. Abfahrt ursprünglich um 19.45 Uhr. Heute etwa 88 Minuten später. Grund dafür ist eine verspätete Bereitstellung des Zuges. Der Zug beginnt in Ardorf. Er fährt nach Hilter um 19.45 Uhr. Niemand hier hat weitere Fragen gestellt. Das ist vermutlich besser so. Der ICE von Ardorf nach Hilter wird bereitgestellt, sobald jemand herausgefunden hat, wo Ardorf eigentlich ist.",
   cues:Object.freeze([[0,14.5,"Information about the ICE from Ardorf to Hilter. Originally scheduled for 7:45 p.m.; today it is about 88 minutes late."],[14.5,26.8,"The reason is the delayed provision of the train. The train begins in Ardorf. It travels to Hilter at 7:45 p.m."],[26.8,43.8,"Nobody here has asked any further questions. That is probably for the best. The ICE from Ardorf to Hilter will be provided as soon as somebody discovers where Ardorf actually is."]])
- })
+ }),
+ ...Object.fromEntries(lawPowerLines.map((source,index)=>{
+  const number=String(index+1).padStart(2,"0"),path=`./assets/voices/laws/thorsten-negative-law-${number}.mp3`;
+  return [path,Object.freeze({id:`law-${number}`,voiceId:"thorsten",targetVoiceId:"player-inner",trigger:"player.law-power",source,english:pools.lawPower[index]})]
+ })),
+ ...Object.fromEntries(rules.map((rule,index)=>{
+  const number=String(index+1).padStart(2,"0"),path=`./assets/voices/laws/thorsten-negative-rule-${number}.mp3`;
+  return [path,Object.freeze({id:`rule-${number}`,voiceId:"thorsten",targetVoiceId:"narrator",trigger:"rule.first-display-or-rotation",source:rule[1],english:ruleEnglish[index]})]
+ }))
 });
 
+const voices=Object.freeze({
+ thorsten:Object.freeze({name:"Thorsten",source:"CC0 Thorsten-Voice; local XTTS derivatives"}),
+ "quiz-sting":Object.freeze({name:"Existing quiz sting",source:"User-supplied recording; separate from the new quiz-officer profile"}),
+ "player-inner":Object.freeze({name:"Player inner monologue",profileName:"GS player-inner",profileId:"ae509d92d1344233ac1483b525b0d1bf",reference:"https://huggingface.co/kyutai/tts-voices/resolve/main/voice-donations/0a67_enhanced.wav",referenceSha256:"f3d11f89eb6ee77ca0ab1ceed734755d0fff3d2791050cb4fe20428e0f6a76b3",license:"CC0",engine:"qwen",status:"profile-ready"}),
+ narrator:Object.freeze({name:"Narrator",profileName:"GS narrator",profileId:"d2aa2822d8ca4461a1a8419e19c5fca2",reference:"https://huggingface.co/kyutai/tts-voices/resolve/main/voice-donations/1410_enhanced.wav",referenceSha256:"e566765a7053fbdcb113bd9ba104bfe186c4321a2e243c598380cdc7af01213d",license:"CC0",engine:"qwen",status:"profile-ready"}),
+ "passerby-a":Object.freeze({name:"Passerby A",profileName:"GS passerby-a",profileId:"2a77926e2e144a2986d5a1c72e3ec962",reference:"https://huggingface.co/kyutai/tts-voices/resolve/main/voice-donations/1dd0_enhanced.wav",referenceSha256:"cbbedbb763e89feb5d231ca7e34fee61f0bc44277bfd866c9485deb1a39e42f6",license:"CC0",engine:"qwen",status:"profile-ready"}),
+ "passerby-b":Object.freeze({name:"Passerby B",profileName:"GS passerby-b",profileId:"478c82e448d047459986503dafd2897a",reference:"https://huggingface.co/kyutai/tts-voices/resolve/main/voice-donations/2181_enhanced.wav",referenceSha256:"d97bf4947a527b4210f7c32dc69975416189bd74dd6706d2b04b515b2295c121",license:"CC0",engine:"qwen",status:"profile-ready"}),
+ "police-officer":Object.freeze({name:"Police officer",profileName:"GS police-officer",profileId:"11aab44caec64b3d85bc63120644ade6",reference:"https://huggingface.co/kyutai/tts-voices/resolve/main/voice-donations/245e_enhanced.wav",referenceSha256:"5f77c5e4d01eae7ec7b5881e77ec198c43d169a803dd81a2c297676de32a72a3",license:"CC0",engine:"qwen",status:"profile-ready"}),
+ "quiz-officer":Object.freeze({name:"Quiz officer",profileName:"GS quiz-officer",profileId:"0f940b8225e1412a949046d84c9d4e23",reference:"https://huggingface.co/kyutai/tts-voices/resolve/main/voice-donations/29da_enhanced.wav",referenceSha256:"7fbab2a51ad85bb3146cfa4531178c5a27a9cc3b02fd6dc75cb868784b43f5cd",license:"CC0",engine:"qwen",status:"profile-ready"}),
+ merz:Object.freeze({name:"Merz satire character",source:"Browser speech; no approved clone profile"}),
+ merkel:Object.freeze({name:"Merkel recordings",source:"Existing recorded excerpts"}),
+ bayern:Object.freeze({name:"Bayern-Beauftragter",source:"User-supplied recorded excerpts"}),
+ alice:Object.freeze({name:"Alice",source:"Existing recorded excerpts"}),
+ station:Object.freeze({name:"Station announcer",source:"User-supplied train recordings"})
+});
+const speechFamilies=Object.freeze({
+ "player-inner":Object.freeze({voiceId:"player-inner",trigger:"game.js innerMonologues on player events",delivery:"browser speech until approved clips are rendered"}),
+ narrator:Object.freeze({voiceId:"narrator",trigger:"opening guidance and future narration",delivery:"profile ready; no shipped clip"}),
+ pedestrians:Object.freeze({voiceIds:Object.freeze(["passerby-a","passerby-b"]),trigger:"game.js pedestrianBarks, crowdArchetypes and npcLines by region",delivery:"browser speech until approved clips are rendered"}),
+ police:Object.freeze({voiceId:"police-officer",trigger:"game.js policeBarks and wanted-level enforcement",delivery:"browser speech until approved clips are rendered"}),
+ quiz:Object.freeze({voiceId:"quiz-officer",trigger:"game.js quizApproaches, question and wrong answer",delivery:"browser speech plus one user-supplied clip"}),
+ rail:Object.freeze({voiceId:"station",trigger:"game.js TRAIN_ANNOUNCEMENT_AUDIO near trains or rail obstruction",delivery:"five recorded clips"}),
+ rules:Object.freeze({voiceId:"thorsten",trigger:"game.js announceCurrentRule on first display and rotation",delivery:"eleven recorded clips"}),
+ laws:Object.freeze({voiceId:"thorsten",trigger:"game.js activateLawPower on § or Q",delivery:"thirteen recorded clips"}),
+ merz:Object.freeze({voiceId:"merz",trigger:"game.js politician:merz proximity or direct interaction",delivery:"browser speech"}),
+ merkel:Object.freeze({voiceId:"merkel",trigger:"game.js politician:merkel proximity or direct interaction",delivery:"two recorded clips plus browser speech"}),
+ bayern:Object.freeze({voiceId:"bayern",trigger:"game.js bayern proximity or direct interaction",delivery:"eight recorded clips"}),
+ alice:Object.freeze({voiceId:"alice",trigger:"game.js alice proximity or direct interaction",delivery:"five recorded clips"})
+});
+const clips=Object.freeze(Object.fromEntries(Object.entries(recordings).map(([path,item])=>[item.id,Object.freeze({...item,path,text:item.source,recording:path})])));
+
 window.GermanySimulatorAudioText=Object.freeze({
- version:3,
+ version:4,
  method:"Known clips use authored/source transcripts; the five station recordings were transcribed and English-segmented locally with OpenAI Whisper small on 2026-09-21, then manually corrected against filenames and audible context.",
  exclusions:Object.freeze(["background-music","sound-effect"]),
  pools,
@@ -417,9 +477,11 @@ window.GermanySimulatorAudioText=Object.freeze({
  questions,
  lines,
  recordings,
- series:Object.freeze({
-  lawPower:"./assets/voices/laws/thorsten-negative-law-{01..13}.mp3 follows pools.lawPower and game.js lawPowerLines by index.",
-  currentRules:"./assets/voices/laws/thorsten-negative-rule-{01..11}.mp3 follows game.js rules and englishText by index."
- })
+ voices,
+ speechFamilies,
+ clips,
+ lawPowerLines,
+ rules,
+ ruleEnglish
 });
 })();
