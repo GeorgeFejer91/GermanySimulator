@@ -446,10 +446,14 @@ const voices=Object.freeze({
  "passerby-b":Object.freeze({name:"Passerby B",profileName:"GS passerby-b",profileId:"478c82e448d047459986503dafd2897a",reference:"https://huggingface.co/kyutai/tts-voices/resolve/main/voice-donations/2181_enhanced.wav",referenceSha256:"d97bf4947a527b4210f7c32dc69975416189bd74dd6706d2b04b515b2295c121",license:"CC0",engine:"qwen",status:"profile-ready"}),
  "police-officer":Object.freeze({name:"Police officer",profileName:"GS police-officer",profileId:"11aab44caec64b3d85bc63120644ade6",reference:"https://huggingface.co/kyutai/tts-voices/resolve/main/voice-donations/245e_enhanced.wav",referenceSha256:"5f77c5e4d01eae7ec7b5881e77ec198c43d169a803dd81a2c297676de32a72a3",license:"CC0",engine:"qwen",status:"profile-ready"}),
  "quiz-officer":Object.freeze({name:"Quiz officer",profileName:"GS quiz-officer",profileId:"0f940b8225e1412a949046d84c9d4e23",reference:"https://huggingface.co/kyutai/tts-voices/resolve/main/voice-donations/29da_enhanced.wav",referenceSha256:"7fbab2a51ad85bb3146cfa4531178c5a27a9cc3b02fd6dc75cb868784b43f5cd",license:"CC0",engine:"qwen",status:"profile-ready"}),
- merz:Object.freeze({name:"Merz satire character",source:"Browser speech; no approved clone profile"}),
+ "merz-character":Object.freeze({name:"Friedrich Merz character",profileName:"GS Merz character",profileId:"8841d0bfde3649648ff00af56d7a3c1e",reference:"https://huggingface.co/kyutai/tts-voices/resolve/main/vctk/p226_023_enhanced.wav",referenceSha256:"24d12e5ffae86407fd8190448bb630c2ce60dc955ad6254dd7262d4aaf1b1f72",license:"CC BY 4.0",attribution:"VCTK speaker p226 via Kyutai",engine:"qwen",status:"profile-ready; independent character voice"}),
+ "merkel-character":Object.freeze({name:"Angela Merkel character",profileName:"GS Merkel character",profileId:"ecbdd68cb0ef4a83989c513ffe85a177",reference:"https://huggingface.co/kyutai/tts-voices/resolve/main/vctk/p225_023_enhanced.wav",referenceSha256:"10d947a5f12cc0f3b009a91d8b22c2f9e4ecd3c42d9f63ecfbe5b8facb74004c",license:"CC BY 4.0",attribution:"VCTK speaker p225 via Kyutai",engine:"qwen",status:"profile-ready; independent character voice"}),
+ "soeder-character":Object.freeze({name:"Markus Söder character (Bayern-Beauftragter)",profileName:"GS Soeder character",profileId:"6eeff1898950492089681602ebfdd35d",reference:"https://huggingface.co/kyutai/tts-voices/resolve/main/vctk/p227_023_enhanced.wav",referenceSha256:"d1731d079f91210b30600554b38b2a8d122ab3692362ea750d71a6333157c500",license:"CC BY 4.0",attribution:"VCTK speaker p227 via Kyutai",engine:"qwen",status:"profile-ready; independent character voice"}),
+ "weidel-character":Object.freeze({name:"Alice Weidel character",profileName:"GS Weidel character",profileId:"ed418feda84e4e1796ffad665f8aecca",reference:"https://huggingface.co/kyutai/tts-voices/resolve/main/vctk/p228_023_enhanced.wav",referenceSha256:"0a6de25cf12bf1540beb85979f306a92be81fecc051c547c5395e7e5237a3856",license:"CC BY 4.0",attribution:"VCTK speaker p228 via Kyutai",engine:"qwen",status:"profile-ready; independent character voice"}),
+ merz:Object.freeze({name:"Merz browser speech",source:"Current browser speech"}),
  merkel:Object.freeze({name:"Merkel recordings",source:"Existing recorded excerpts"}),
- bayern:Object.freeze({name:"Bayern-Beauftragter",source:"User-supplied recorded excerpts"}),
- alice:Object.freeze({name:"Alice",source:"Existing recorded excerpts"}),
+ bayern:Object.freeze({name:"Markus Söder / Bayern-Beauftragter recordings",source:"User-supplied recorded excerpts; speaker provenance unverified"}),
+ alice:Object.freeze({name:"Alice Weidel satire recordings",source:"Existing recorded excerpts; speaker provenance unverified"}),
  station:Object.freeze({name:"Station announcer",source:"User-supplied train recordings"})
 });
 const speechFamilies=Object.freeze({
@@ -461,10 +465,10 @@ const speechFamilies=Object.freeze({
  rail:Object.freeze({voiceId:"station",trigger:"game.js TRAIN_ANNOUNCEMENT_AUDIO near trains or rail obstruction",delivery:"five recorded clips"}),
  rules:Object.freeze({voiceId:"thorsten",trigger:"game.js announceCurrentRule on first display and rotation",delivery:"eleven recorded clips"}),
  laws:Object.freeze({voiceId:"thorsten",trigger:"game.js activateLawPower on § or Q",delivery:"thirteen recorded clips"}),
- merz:Object.freeze({voiceId:"merz",trigger:"game.js politician:merz proximity or direct interaction",delivery:"browser speech"}),
- merkel:Object.freeze({voiceId:"merkel",trigger:"game.js politician:merkel proximity or direct interaction",delivery:"two recorded clips plus browser speech"}),
- bayern:Object.freeze({voiceId:"bayern",trigger:"game.js bayern proximity or direct interaction",delivery:"eight recorded clips"}),
- alice:Object.freeze({voiceId:"alice",trigger:"game.js alice proximity or direct interaction",delivery:"five recorded clips"})
+ merz:Object.freeze({voiceId:"merz",profileVoiceId:"merz-character",trigger:"game.js politician:merz proximity or direct interaction",delivery:"browser speech"}),
+ merkel:Object.freeze({voiceId:"merkel",profileVoiceId:"merkel-character",trigger:"game.js politician:merkel proximity or direct interaction",delivery:"two recorded clips plus browser speech"}),
+ bayern:Object.freeze({voiceId:"bayern",profileVoiceId:"soeder-character",character:"Markus Söder (Bayern-Beauftragter)",trigger:"game.js bayern proximity or direct interaction",delivery:"eight recorded clips"}),
+ alice:Object.freeze({voiceId:"alice",profileVoiceId:"weidel-character",trigger:"game.js alice proximity or direct interaction",delivery:"five recorded clips"})
 });
 const clips=Object.freeze(Object.fromEntries(Object.entries(recordings).map(([path,item])=>[item.id,Object.freeze({...item,path,text:item.source,recording:path})])));
 

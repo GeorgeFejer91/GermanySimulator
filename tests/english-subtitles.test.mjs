@@ -24,9 +24,13 @@ for(const clip of Object.values(library.clips)){
  assert.ok(clip.trigger?.trim(),`${clip.id} needs a trigger family`);
  assert.ok(existsSync(join(root,clip.path.slice(2))),`${clip.id} points to a missing recording`);
 }
-const profileRoles=["player-inner","narrator","passerby-a","passerby-b","police-officer","quiz-officer"];
-assert.equal(new Set(profileRoles.map(id=>library.voices[id].profileId)).size,6,"character roles need distinct saved profiles");
-assert.equal(new Set(profileRoles.map(id=>library.voices[id].referenceSha256)).size,6,"character roles need distinct source references");
+const profileRoles=["player-inner","narrator","passerby-a","passerby-b","police-officer","quiz-officer","merz-character","merkel-character","soeder-character","weidel-character"];
+assert.equal(new Set(profileRoles.map(id=>library.voices[id].profileId)).size,10,"character roles need distinct saved profiles");
+assert.equal(new Set(profileRoles.map(id=>library.voices[id].referenceSha256)).size,10,"character roles need distinct source references");
+for(const [family,id] of [["merz","merz-character"],["merkel","merkel-character"],["bayern","soeder-character"],["alice","weidel-character"]]){
+ assert.equal(library.speechFamilies[family].profileVoiceId,id,`${family} needs its own generation profile`);
+ assert.equal(library.voices[id].license,"CC BY 4.0");
+}
 assert.equal(library.clips["quiz-wrong-answer"].voiceId,"quiz-sting","existing quiz audio must not be labeled as a new clone");
 assert.equal(library.clips["quiz-wrong-answer"].targetVoiceId,"quiz-officer");
 assert.deepEqual([...library.exclusions],["background-music","sound-effect"]);
