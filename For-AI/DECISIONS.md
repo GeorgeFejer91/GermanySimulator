@@ -519,3 +519,16 @@ each character trigger family to its future generation profile without
 mislabeling existing recordings or changing the current game audio. Short
 German smoke renders establish technical readiness; voice fit remains subject
 to listening review. The preexisting Merz-likeness profile is not selected.
+
+## 2026-09-29 — Expiring proximity audio
+
+The shared broker keeps critical direct and modal speech durable. Every other
+pending audio-text request expires after four seconds, coalesces by family, and
+shares a four-request transient cap; admission still checks current proximity,
+region, and world state. Border-crossing speech is reactive, replaceable, and
+valid only near the Brandmauer on the entered side. Featured character speech
+outranks nearby train audio, but each owner waits 3.5 seconds after a completed
+line even if the player briefly leaves and re-enters its radius; nearby trains
+wait 6.5 seconds after a clip and no longer reserve a clip
+from the completion callback. These gaps leave turns for other eligible families.
+The existing shuffled exhaustion bags and owner-locked voices remain authoritative.

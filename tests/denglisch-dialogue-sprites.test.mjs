@@ -14,9 +14,9 @@ for(const [source,copy] of Object.entries(berlin)){
 assert.match(game,/state\.region==="berlin"\?"Choice ":""/,"every Berlin answer button needs a visible Denglisch marker");
 assert.match(game,/SPRITE_AUDIO_RADIUS=176,SPRITE_AUDIO_RELEASE_RADIUS=224/);
 assert.match(game,/function proximityAudioReady\(n\)/);
-assert.match(game,/if\(near>release\)\{if\(n\.dialogueNearby\)n\.barkAt=0;n\.dialogueNearby=false;(?:n\.featuredAudioActive=false;)?return false\}/,"leaving the release radius must rearm the proximity loop");
+assert.match(game,/if\(near>release\)\{n\.dialogueNearby=false;return false\}/,"leaving the release radius must rearm entry without bypassing the repeat gap");
 assert.doesNotMatch(game,/near>=radius\|\|n\.dialogueNearby/,"remaining inside the radius must not suppress the next loop cycle");
-assert.doesNotMatch(game,/near>=radius\|\|performance\.now\(\)<\(n\.barkAt\|\|0\)/,"a previous cooldown must not delay a re-entered featured-character loop");
+assert.match(game,/performance\.now\(\)>?=\(n\.barkAt\|\|0\)/,"re-entered featured characters must still respect their repeat gap");
 assert.match(game,/function insetSpriteSheet\(source,atlas\)/);
 assert.match(game,/const cell=Math\.round\(source\.width\/atlas\.cols\)/,"runtime preparation must preserve the built 128 px cell grid");
 assert.match(game,/merkel:\{canvas:null,cols:24,rows:5,pad:0,drawSize:126\}/);
