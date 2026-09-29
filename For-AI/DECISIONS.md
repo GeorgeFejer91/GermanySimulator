@@ -1,5 +1,9 @@
 # Durable decisions
 
+## 2026-09-29 — Reserved HUD and caption slots
+
+The bottom caption strip keeps a two-line measured footprint even when empty or disabled. The mobile control dock and Germanness rail, desktop footer, subtitle toggle, dialogue box, and reading modals occupy stable slots above it. Their positions no longer depend on whether a subtitle is visible. The dialogue box has a fixed outer size, with long source text scrolling inside while its actions remain in place. A viewport resize can recompute the common caption height; individual speech and textbox events cannot move neighboring controls.
+
 ## 2026-09-29 — Illustrated building placards
 
 Every signed building in the canonical game inventory has a distinct ImageGen illustration with props tied to its function or bureaucratic joke. The renderer composites the established title and subtitle at runtime in locally bundled Grenze lettering, so generated-image text errors cannot alter names or overflow the sign. One compact WebP set serves desktop and mobile, and missing art keeps a legible drawn placard. The static asset and font provenance lives in `assets/building-placards/PROVENANCE.md`.

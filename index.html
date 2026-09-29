@@ -23,7 +23,7 @@
   <meta name="twitter:image:alt" content="Germany Simulator opening menu featuring a fax machine jammed with a bratwurst.">
   <link rel="icon" href="./assets/faxgeraet.svg" type="image/svg+xml">
   <title>Germany Simulator · EC Games</title>
-  <link rel="stylesheet" href="./styles.css?v=20260929-subtitle-cues">
+  <link rel="stylesheet" href="./styles.css?v=20260929-fixed-slots">
 </head>
 <body>
 <main id="app">
@@ -51,7 +51,7 @@
   </div></section>
   <section id="border-alert" class="border-alert" hidden aria-live="polite"><small>BRANDMAUER</small><b id="border-title">DEUTSCHLAND</b><p id="border-copy">BERLIN LIEGT HINTER DER BRANDMAUER. AB HIER NUR NOCH DEUTSCH.</p></section>
   <div id="interact-hint" class="interact-hint" hidden>INTERAGIEREN · E</div>
-  <section id="dialogue" class="dialogue" hidden><div id="portrait" class="portrait">§</div><div class="dialogue-copy"><small id="speaker">SACHBEARBEITUNG</small><p id="dialogue-text"></p><span id="voice-state" class="voice-state">SPRECHENDE BEHÖRDE</span></div><div class="dialogue-actions"><button id="dialogue-speak" type="button" aria-label="Repeat spoken dialogue">🔊</button><button id="dialogue-next" type="button">WEITER</button></div></section>
+  <section id="dialogue" class="dialogue" hidden><div id="portrait" class="portrait">§</div><div class="dialogue-copy" tabindex="0"><small id="speaker">SACHBEARBEITUNG</small><p id="dialogue-text"></p><span id="voice-state" class="voice-state">SPRECHENDE BEHÖRDE</span></div><div class="dialogue-actions"><button id="dialogue-speak" type="button" aria-label="Repeat spoken dialogue">🔊</button><button id="dialogue-next" type="button">WEITER</button></div></section>
   <section id="form-modal" class="modal" hidden><form id="bureaucracy-form" class="paper"><div class="paper-head"><span>BUNDESREPUBLIK · SPIELFORMULAR</span><span id="form-code">A38</span></div><h2 id="form-title">Antrag auf Antragstellung</h2><p id="form-subtitle"></p><div id="form-fields" class="form-fields"></div><div class="paper-actions"><span id="form-error"></span><button type="submit">EINREICHEN</button></div></form></section>
   <section id="end-modal" class="modal" hidden><div class="end-card"><small id="end-kicker">VERWALTUNGSVORGANG</small><h1 id="end-title"></h1><p id="end-copy"></p><button id="restart" type="button">NOCH EIN VORGANG</button></div></section>
   <section id="intro" class="intro"><div class="intro-noise"></div><div class="intro-card">
@@ -81,7 +81,7 @@
 <script src="./For-AI/AUDIO-TEXT-LIBRARY.js?v=20260928-voices"></script>
 <script src="./goerlitzer-park.js?v=20260927-cars2"></script>
 <script src="./game.js?v=20260929-subtitle-cues"></script>
-<script type="module" src="./subtitle-layout.js?v=20260929-subtitle-cues"></script>
+<script type="module" src="./subtitle-layout.js?v=20260929-fixed-slots"></script>
 <script type="module" src="./world3d.js?v=20260929-placards"></script>
 </body>
 </html>

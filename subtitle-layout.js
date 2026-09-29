@@ -39,7 +39,7 @@ window.GermanySubtitleLayout={paginate,timedCaptions:cues=>timedCaptions(cues,pa
 function update(){
   scheduled=false;
   const visible=!box.hidden&&!!box.textContent;
-  const height=visible?box.getBoundingClientRect().height:0;
+  const height=box.getBoundingClientRect().height;
   app.style.setProperty("--subtitle-height",`${height}px`);
   if(!visible){box.dataset.fit="hidden";return}
 
