@@ -1,5 +1,9 @@
 # Durable decisions
 
+## 2026-09-29 — Human template replaces towel-preview primitive figures
+
+The user rejected the jointed, cartoon-like towel pedestrian miniatures. The candidate preview now uses the pinned CC0 MakeHuman continuous body mesh with separate older male and older female shape targets, matching skin textures, and one weighted 18-bone rig per figure. Costume colors, hats, eyewear, socks, sandals, and towels retain the two accepted sprite identities. The neutral guide still supplies the closed 32-pose contact walk. The updated GLBs, editable Blender sources, and animated WebP remain **preview-only and unapproved**; the canonical root game continues to load accepted sprite atlases. `assets/models/towel-pedestrians/PROVENANCE.md` records the source, build, and verification details.
+
 ## 2026-09-29 — Reserved HUD and caption slots
 
 The bottom caption strip keeps a two-line measured footprint even when empty or disabled. The mobile control dock and Germanness rail, desktop footer, subtitle toggle, dialogue box, and reading modals occupy stable slots above it. Their positions no longer depend on whether a subtitle is visible. The dialogue box has a fixed outer size, with long source text scrolling inside while its actions remain in place. A viewport resize can recompute the common caption height; individual speech and textbox events cannot move neighboring controls.
