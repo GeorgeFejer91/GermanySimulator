@@ -562,3 +562,14 @@ line even if the player briefly leaves and re-enters its radius; nearby trains
 wait 6.5 seconds after a clip and no longer reserve a clip
 from the completion callback. These gaps leave turns for other eligible families.
 The existing shuffled exhaustion bags and owner-locked voices remain authoritative.
+
+## 2026-09-29 — Character interaction review links
+
+`character-review.html?person=<id>` is an unlinked, static review surface for the
+playable character, featured NPCs, named pedestrians, crowd name/archetype
+pairings, quiz dossier identities, police, and counter/rail voices. It uses the
+shipped sprite atlases and the existing audio-text catalog for recorded clips;
+browser-only dialogue is labeled and previewed with browser speech. Movement
+previews show each actor's body type, gait, route style, and current speed
+without changing the canonical game runtime. The review page has `noindex`,
+but GitHub Pages provides no access control: an unlisted URL is not private.

@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="en" data-text-measurement="unavailable">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="robots" content="noindex,nofollow,noarchive">
+  <meta name="theme-color" content="#77756f">
+  <title>Personenakte · Germany Simulator</title>
+  <link rel="icon" href="./assets/faxgeraet.svg" type="image/svg+xml">
+  <style>
+    @font-face{font-family:"Preview Sans";src:url("./assets/fonts/roboto-condensed/RobotoCondensed.ttf") format("truetype");font-weight:100 900;font-display:swap}
+    :root{font-family:"Preview Sans",sans-serif;color:#23211d;background:#77756f;--paper:#e9e3d5;--line:#777167;--dark:#2b2925;--accent:#762f29}
+    *{box-sizing:border-box}body{margin:0}button,input,select{font:inherit}button,a,input,select{outline-offset:2px}button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible{outline:3px solid var(--accent)}
+    button{min-height:44px;border:1px solid var(--dark);border-radius:4px;background:#f5efe2;color:var(--dark);padding:8px 12px;font-weight:700;cursor:pointer}button:hover{background:#ddd5c7}button:disabled{opacity:.5;cursor:default}
+    .top{padding:14px 20px;background:var(--paper);border-bottom:3px double var(--dark);display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}
+    h1{font-size:1.5rem;line-height:1.2;margin:0;min-width:0;overflow-wrap:anywhere}h1 span{display:block;font-size:.82rem;color:#625d54;font-weight:500}
+    .top a{color:var(--dark);font-weight:700}main{display:grid;grid-template-columns:250px minmax(0,1fr);min-height:calc(100vh - 80px)}
+    aside{background:#d9d2c4;border-right:1px solid var(--dark);padding:16px;min-width:0;max-height:calc(100vh - 74px);overflow:auto;position:sticky;top:0;align-self:start}aside label{display:grid;gap:5px;font-weight:700}input[type="search"],select{width:100%;min-height:44px;border:1px solid var(--line);border-radius:4px;background:#f6f0e5;padding:8px;color:var(--dark)}
+    #directory{margin-top:12px}#directory h2{margin:16px 0 5px;font-size:.9rem;border-bottom:1px solid var(--line)}#directory a{display:block;padding:8px 6px;color:var(--dark);text-decoration:none;border-radius:3px;overflow-wrap:break-word}#directory a:hover,#directory a[aria-current="page"]{background:#eee8dc}#directory a[aria-current="page"]{font-weight:800;border-left:3px solid var(--accent);padding-left:7px}
+    .content{padding:20px;min-width:0;max-width:1150px;width:100%;margin:0 auto;align-self:start}#status{margin:0 0 12px;color:#eee8dc}#profile-title{font-size:1.55rem;margin:0 0 3px;color:#f4eee2}#profile-kind{margin:0 0 16px;color:#eee8dc}
+    .profile-head{display:flex;align-items:flex-start;justify-content:space-between;gap:10px;flex-wrap:wrap}.profile-head>div{min-width:0}.profile-head button{flex:none}
+    .layout{display:grid;grid-template-columns:minmax(0,410px) minmax(0,1fr);gap:18px}.sheet{background:var(--paper);border:1px solid var(--line);min-width:0}.sheet h3{font-size:1rem;margin:0;padding:9px 12px;border-bottom:1px solid var(--line);background:#d9d2c4}
+    .stage{padding:12px}.stage canvas{display:block;width:100%;height:auto;background:#a7a39a;border:1px solid var(--line)}.portrait{width:86px;height:86px;object-fit:cover;float:right;border:1px solid var(--line);margin:0 0 8px 10px}.stage p{margin:10px 0 0;line-height:1.4}
+    .motion-controls{display:flex;gap:8px;align-items:end;flex-wrap:wrap;margin-top:12px}.motion-controls label{display:grid;gap:4px;flex:1 1 130px}.motion-controls button{flex:0 0 auto}
+    dl{margin:0;padding:12px;display:grid;grid-template-columns:105px minmax(0,1fr);gap:7px 10px}dt{font-weight:700}dd{margin:0;min-width:0;overflow-wrap:break-word}
+    #audio-list{list-style:none;margin:0;padding:0}.audio-row{border-top:1px solid #bbb2a3;padding:10px 12px}.audio-row:first-child{border-top:0}.audio-row header{display:flex;gap:8px;align-items:flex-start;justify-content:space-between}.audio-row header div{min-width:0}.audio-row strong{display:block}.audio-row span{display:block;color:#615a50;font-size:.87rem}.audio-row p{margin:6px 0 0;line-height:1.4;overflow-wrap:break-word}.audio-row button{flex:none}.audio-row[data-active="true"]{background:#f6f0e5;border-left:3px solid var(--accent);padding-left:9px}
+    #audio-now{margin:0;padding:10px 12px;min-height:48px;background:#f6f0e5;border-bottom:1px solid var(--line);line-height:1.4}#audio-now:empty:before{content:"Select a line to hear its trigger.";color:#615a50}
+    .audio-actions{padding:8px 12px;border-bottom:1px solid var(--line)}.note{color:#5b554c;line-height:1.4;margin:14px 0 0}
+    @media(max-width:800px){main{display:block}aside{position:static;max-height:none;overflow:visible;border-right:0;border-bottom:1px solid var(--dark)}#directory{max-height:210px;overflow:auto}.content{padding:14px}.layout{grid-template-columns:1fr}}
+    @media(max-width:400px){.top{padding:10px 12px}.content{padding:8px}.profile-head button{width:100%}dl{grid-template-columns:90px minmax(0,1fr)}}
+  </style>
+</head>
+<body>
+  <header class="top"><h1>PERSONENAKTE<span>Character interaction review · Germany Simulator</span></h1><a href="./index.html">Open game</a></header>
+  <main>
+    <aside><label for="filter">Find a person<input id="filter" type="search" autocomplete="off" placeholder="Name or role"></label><nav id="directory" aria-label="Character links"></nav></aside>
+    <section class="content" aria-live="polite">
+      <p id="status"></p>
+      <div class="profile-head"><div><h2 id="profile-title"></h2><p id="profile-kind"></p></div><button id="copy-link" type="button">Copy this link</button></div>
+      <div class="layout">
+        <div><section class="sheet"><h3>Movement</h3><div class="stage"><img id="quiz-portrait" class="portrait" alt="" hidden><canvas id="stage" width="400" height="290" role="img" aria-label="Character movement preview"></canvas><div class="motion-controls"><label>Facing<select id="facing"><option value="right">Right</option><option value="left">Left</option><option value="down">Front</option><option value="up">Back</option></select></label><label>Action<select id="action"><option value="walk">Walk</option><option value="idle">Idle</option></select></label><button id="pause" type="button">Pause</button></div><p id="movement-note"></p></div></section><section class="sheet" style="margin-top:12px"><h3>Trigger profile</h3><dl id="facts"></dl></section></div>
+        <section class="sheet"><h3>Spoken interactions</h3><p id="audio-now" role="status" aria-live="polite"></p><div class="audio-actions"><label>Region <select id="region"><option value="berlin">Berlin · Denglisch</option><option value="germany">Deutschland · German</option></select></label><button id="stop-audio" type="button">Stop audio</button></div><ol id="audio-list"></ol></section>
+      </div>
+      <p class="note">Links to this review page are unlisted and excluded from search indexing, but GitHub Pages does not restrict access. Browser speech depends on the reviewer's installed voices. Recorded rows play the shipped game files.</p>
+    </section>
+  </main>
+  <audio id="clip-player" preload="none"></audio>
+  <script src="./For-AI/AUDIO-TEXT-LIBRARY.js?v=20260928-voices"></script>
+  <script src="./For-AI/QUIZ-CHARACTER-DICTIONARY.js?v=20260927-cars2"></script>
+  <script src="./character-review.js?v=20260929-review1"></script>
+  <script type="module">
+    import {prepareWithSegments,measureLineStats,measureNaturalWidth} from "./assets/vendor/pretext/dist/layout.js";
+    await document.fonts.load('16px "Preview Sans"');
+    const selectors="h1,h1 span,h2,h3,button,select,aside label,#directory a,dt,dd,.audio-row strong,.audio-row span";
+    let pending=false;
+    function measure(){pending=false;const ready=document.fonts.check('16px "Preview Sans"')&&typeof Intl.Segmenter==="function";for(const el of document.querySelectorAll(selectors)){if(!el.getClientRects().length)continue;if(!ready){el.dataset.fit="unavailable";continue}const css=getComputedStyle(el),box=el.getBoundingClientRect(),content=el instanceof HTMLSelectElement?el.selectedOptions[0]?.textContent||"":el.textContent,font=`${css.fontStyle} ${css.fontWeight} ${css.fontSize} ${css.fontFamily}`,prepared=prepareWithSegments(content,font,{letterSpacing:parseFloat(css.letterSpacing)||0}),width=box.width-parseFloat(css.paddingLeft)-parseFloat(css.paddingRight)-parseFloat(css.borderLeftWidth)-parseFloat(css.borderRightWidth)-(el instanceof HTMLSelectElement?20:0),height=box.height-parseFloat(css.paddingTop)-parseFloat(css.paddingBottom)-parseFloat(css.borderTopWidth)-parseFloat(css.borderBottomWidth),stats=measureLineStats(prepared,Math.max(1,width)),lineHeight=parseFloat(css.lineHeight)||parseFloat(css.fontSize)*1.4;el.dataset.fit=stats.maxLineWidth<=width+.5&&stats.lineCount*lineHeight<=height+1&&(!(el instanceof HTMLSelectElement)||stats.lineCount===1&&measureNaturalWidth(prepared)<=width)?"fit":"reflow"}document.documentElement.dataset.textMeasurement=ready?"pretext-0.0.9":"unavailable"}
+    function schedule(){if(!pending){pending=true;requestAnimationFrame(measure)}}new ResizeObserver(schedule).observe(document.body);new MutationObserver(schedule).observe(document.body,{subtree:true,childList:true,characterData:true});addEventListener("change",schedule);schedule();
+  </script>
+</body>
+</html>
