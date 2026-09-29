@@ -18,15 +18,19 @@ function inspect(kind){
   return {gltf,values};
 }
 
-for(const kind of ['man','woman'])test(`${kind} has one complete, closed walk with its defining clothes and props`,()=>{
+for(const kind of ['man','woman'])test(`${kind} has a textured human rig and one closed walk`,()=>{
   const {gltf,values}=inspect(kind);
-  assert.ok(gltf.meshes.length>60);
+  assert.ok(gltf.meshes.length>25);
+  assert.equal(gltf.skins.length,1);
+  assert.equal(gltf.skins[0].joints.length,18);
+  assert.equal(gltf.images.length,1);
+  assert.ok(gltf.materials.some(mat=>mat.name==='aged human skin texture'&&mat.pbrMetallicRoughness.baseColorTexture));
   assert.equal(gltf.animations.length,1);
   const animation=gltf.animations[0];
   assert.equal(animation.name,'Walk');
   assert.ok(animation.channels.length>=50);
   const names=gltf.nodes.map(node=>node.name);
-  for(const part of ['Foot.L','Foot.R','Rolled reservation towel','Polo torso','Calf sock L','Calf sock R','Sandal sole L','Sandal sole R'])assert.ok(names.includes(part),part);
+  for(const part of ['Continuous human body, face and hands','Rolled reservation towel','Sandal sole L','Sandal sole R','Sandal upper strap L0','Sandal upper strap R0','Polo collar'])assert.ok(names.includes(part),part);
   assert.ok(names.includes(kind==='man'?'Straw brim':'Sun cap crown'));
   for(const sampler of animation.samplers){
     const times=values(sampler.input),frames=values(sampler.output);

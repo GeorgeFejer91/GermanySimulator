@@ -1,9 +1,5 @@
-"""Build preview-only towel pedestrians from the shared neutral walk poses.
-
-Run with Blender 4.1+: blender -b --factory-startup --python tools/build-towel-3d-preview.py
-The pose source is the verified character-independent guide, never a game loader.
-"""
-
+"""Preview-only human towel pedestrians built from the pinned MakeHuman body."""
+import importlib.util
 import json
 import math
 import struct
@@ -11,316 +7,289 @@ import sys
 from pathlib import Path
 
 import bpy
-from mathutils import Vector
-
+import numpy as np
+from mathutils import Matrix, Vector
 
 ROOT = Path(__file__).resolve().parents[1]
-POSES = json.loads((ROOT / "assets/sprite-sources/reference/neutral-walk/pose-audit.json").read_text())['frames']
-OUT = ROOT / "assets/models/towel-pedestrians"
+SOURCE = ROOT / 'assets/sprite-sources/reference/makehuman-walk'
+POSES = json.loads((ROOT / 'assets/sprite-sources/reference/neutral-walk/pose-audit.json').read_text())['frames']
+OUT = ROOT / 'assets/models/towel-pedestrians'
 OUT.mkdir(parents=True, exist_ok=True)
-FPS = 26
+spec = importlib.util.spec_from_file_location('walk_math', ROOT / 'tools/build-merkel-3d-pilot.py')
+motion = importlib.util.module_from_spec(spec)
+spec.loader.exec_module(motion)
 
 
-def material(name, color, roughness=0.85, metal=0):
+def fit(points, scale):
+    points = np.asarray(points)
+    return np.stack((points[..., 0]*.11*scale, -points[..., 2]*.11*scale,
+                     (points[..., 1]+8.1676)*.11*scale), axis=-1)
+
+
+def material(name, color, roughness=.82, metallic=0):
     mat = bpy.data.materials.new(name)
     mat.diffuse_color = (*color, 1)
     mat.use_nodes = True
-    bsdf = mat.node_tree.nodes.get('Principled BSDF')
-    bsdf.inputs['Base Color'].default_value = (*color, 1)
-    bsdf.inputs['Roughness'].default_value = roughness
-    bsdf.inputs['Metallic'].default_value = metal
+    shader = mat.node_tree.nodes.get('Principled BSDF')
+    shader.inputs['Base Color'].default_value = (*color, 1)
+    shader.inputs['Roughness'].default_value = roughness
+    shader.inputs['Metallic'].default_value = metallic
     return mat
 
 
-def sphere(name, at, size, mat, parent=None, segments=16, rings=10):
-    bpy.ops.mesh.primitive_uv_sphere_add(segments=segments, ring_count=rings, location=at)
-    obj = bpy.context.object
-    obj.name = name
-    obj.scale = size
-    obj.data.materials.append(mat)
-    if parent:
-        obj.parent = parent
-        obj.location = at
-    for poly in obj.data.polygons:
-        poly.use_smooth = True
-    return obj
-
-
-def cylinder(name, at, radius, depth, mat, parent=None, vertices=24, rotation=None):
-    bpy.ops.mesh.primitive_cylinder_add(vertices=vertices, radius=radius, depth=depth, location=at)
-    obj = bpy.context.object
-    obj.name = name
-    obj.data.materials.append(mat)
-    if parent:
-        obj.parent = parent
-        obj.location = at
-    if rotation:
-        obj.rotation_euler = rotation
-    return obj
-
-
-def ring(name, at, radius, mat, parent=None):
-    bpy.ops.mesh.primitive_torus_add(major_segments=24, minor_segments=6,
-                                    location=at, major_radius=radius, minor_radius=.006)
-    obj = bpy.context.object
-    obj.name = name
-    obj.rotation_euler.x = math.pi / 2
-    obj.data.materials.append(mat)
-    if parent:
-        obj.parent = parent
-        obj.location = at
-    return obj
-
-
-def box(name, at, size, mat, parent=None, rotation=None):
-    bpy.ops.mesh.primitive_cube_add(size=1, location=at)
-    obj = bpy.context.object
-    obj.name = name
-    obj.dimensions = size
-    bpy.ops.object.transform_apply(location=False, rotation=False, scale=True)
-    obj.data.materials.append(mat)
-    if parent:
-        obj.parent = parent
-        obj.location = at
-    if rotation:
-        obj.rotation_euler = rotation
-    return obj
-
-
-def empty(name):
-    obj = bpy.data.objects.new(name, None)
-    bpy.context.collection.objects.link(obj)
-    return obj
-
-
-def bone(name, mat, width, depth=None):
-    obj = sphere(name, (0, 0, 0), (width, depth or width, 1), mat)
-    obj.rotation_mode = 'QUATERNION'
-    return obj
-
-
-def pose_bone(obj, a, b, frame, overlap=0.018):
-    direction = b - a
-    obj.location = (a + b) / 2
-    obj.rotation_quaternion = Vector((0, 0, 1)).rotation_difference(direction)
-    obj.scale.z = direction.length / 2 + overlap
-    for path in ('location', 'rotation_quaternion', 'scale'):
-        obj.keyframe_insert(data_path=path, frame=frame, group='Walk')
-
-
-def place(obj, xyz, frame, rotation=None):
-    obj.location = xyz
-    obj.keyframe_insert(data_path='location', frame=frame, group='Walk')
-    if rotation is not None:
-        obj.rotation_quaternion = rotation
-        obj.keyframe_insert(data_path='rotation_quaternion', frame=frame, group='Walk')
-
-
 def merge_walk(path):
-    """Blender 4.1 exports each animated object as one clip; combine their channels."""
+    """Blender 4.1 exports object actions separately; combine and zero times."""
     data = path.read_bytes()
-    json_size, json_type = struct.unpack_from('<II', data, 12)
-    assert json_type == 0x4E4F534A
-    doc = json.loads(data[20:20 + json_size])
-    assert doc['animations'] and all(a['name'].startswith('Walk') for a in doc['animations'])
+    size, chunk_type = struct.unpack_from('<II', data, 12)
+    assert chunk_type == 0x4E4F534A
+    doc = json.loads(data[20:20+size])
     clips = doc.pop('animations')
-    walk = {'name': 'Walk', 'channels': [], 'samplers': []}
+    assert clips and all(c['name'].startswith('Walk') for c in clips)
+    walk = {'name':'Walk', 'channels':[], 'samplers':[]}
     for clip in clips:
         offset = len(walk['samplers'])
         walk['samplers'].extend(clip['samplers'])
-        walk['channels'].extend({**channel, 'sampler': channel['sampler'] + offset}
-                                for channel in clip['channels'])
+        walk['channels'].extend({**ch, 'sampler':ch['sampler']+offset} for ch in clip['channels'])
     doc['animations'] = [walk]
-    encoded = json.dumps(doc, separators=(',', ':')).encode('utf-8')
-    encoded += b' ' * ((-len(encoded)) % 4)
-    binary = bytearray(data[20 + json_size:])
-    seen = set()
-    for sampler in walk['samplers']:
-        index = sampler['input']
-        if index in seen:
-            continue
-        seen.add(index)
-        accessor = doc['accessors'][index]
+    for mat in doc['materials']:
+        if mat['name'] == 'aged human skin texture':
+            pbr = mat['pbrMetallicRoughness']
+            assert 'baseColorTexture' in pbr
+            pbr['baseColorFactor'] = [.66,.66,.66,1]
+    encoded = json.dumps(doc,separators=(',',':')).encode()
+    encoded += b' '*(-len(encoded)%4)
+    binary = bytearray(data[20+size:])
+    for accessor_id in {s['input'] for s in walk['samplers']}:
+        accessor = doc['accessors'][accessor_id]
         view = doc['bufferViews'][accessor['bufferView']]
-        base = 8 + view.get('byteOffset', 0) + accessor.get('byteOffset', 0)
-        start = struct.unpack_from('<f', binary, base)[0]
+        base = 8+view.get('byteOffset',0)+accessor.get('byteOffset',0)
+        first = struct.unpack_from('<f',binary,base)[0]
         for i in range(accessor['count']):
-            at = base + i * 4
-            value = struct.unpack_from('<f', binary, at)[0]
-            struct.pack_into('<f', binary, at, value - start)
-    header = struct.pack('<III', 0x46546C67, 2, 20 + len(encoded) + len(binary))
-    path.write_bytes(header + struct.pack('<II', len(encoded), json_type) + encoded + binary)
+            at = base+i*4
+            struct.pack_into('<f',binary,at,struct.unpack_from('<f',binary,at)[0]-first)
+    path.write_bytes(struct.pack('<III',0x46546C67,2,20+len(encoded)+len(binary))+
+                     struct.pack('<II',len(encoded),chunk_type)+encoded+binary)
 
 
 def make_actor(kind):
     bpy.ops.object.select_all(action='SELECT')
     bpy.ops.object.delete(use_global=False)
-    for block in bpy.data.materials:
-        bpy.data.materials.remove(block)
     man = kind == 'man'
-    prefix = 'Liegenreservierer' if man else 'Handtuchhoheit'
-    skin = material('warm skin', (0.70, 0.43, 0.29) if man else (0.78, 0.51, 0.38))
-    shadow = material('face shadow', (0.47, 0.27, 0.20))
-    hair = material('brown hair', (0.24, 0.16, 0.11)) if man else material('silver hair', (0.63, 0.62, 0.61))
-    shirt = material('blue polo' if man else 'coral polo', (0.035, 0.28, 0.50) if man else (0.67, 0.20, 0.17))
-    shirt_dark = material('polo trim', (0.02, 0.14, 0.27) if man else (0.47, 0.10, 0.10))
-    shorts = material('sand cotton shorts', (0.54, 0.39, 0.24) if man else (0.58, 0.43, 0.32))
-    socks = material('thick white socks', (0.84, 0.82, 0.75))
-    sole = material('sandal rubber', (0.13, 0.095, 0.077) if man else (0.045, 0.072, 0.13))
-    straps = material('sandal leather', (0.34, 0.21, 0.14) if man else (0.08, 0.14, 0.26))
-    metal = material('buckle brass', (0.70, 0.53, 0.24), 0.34, 0.55)
-    ink = material('dark ink', (0.055, 0.052, 0.048))
-    towel_a = material('towel blue' if man else 'towel red', (0.035, 0.32, 0.68) if man else (0.74, 0.055, 0.10))
-    towel_b = material('towel yellow' if man else 'towel white', (0.86, 0.67, 0.10) if man else (0.91, 0.87, 0.80))
+    scale = .98 if man else .93
+    vertices, faces, skeleton, joints = motion.load_mesh()
+    # MakeHuman's own CC0 older male/female target reshapes the visible body.
+    # Keep the neutral joint locations so the verified contact walk remains
+    # grounded; the original vertex weights deform each character's new shape.
+    target = SOURCE/'targets'/('caucasian-male-old.target' if man else 'caucasian-female-old.target')
+    for line in target.read_text().splitlines():
+        if line and not line.startswith('#'):
+            parts = line.split()
+            vertices[int(parts[0])] += [float(value) for value in parts[1:4]]
+    motion.fit = lambda value: fit(value, scale)
+    definition = motion.rig_definition(joints, skeleton)
+    fitted = fit(vertices,scale)
+    used = sorted({i for face in faces for i in face})
+    index = {old:new for new,old in enumerate(used)}
+    rest = {name:(Vector(a),Vector(b)) for name,(a,b,_) in definition.items()}
 
-    pieces = {}
-    pieces['pelvis'] = bone('Pelvis', shorts, .20 if man else .18, .135)
-    pieces['torso'] = bone('Polo torso', shirt, .245 if man else .21, .145)
-    pieces['belly'] = sphere('Round belly' if man else 'Waist', (0, 0, 0), (.27, .18, .17) if man else (.19, .15, .15), shirt)
-    pieces['neck'] = bone('Neck', skin, .066)
-    for side in ('L', 'R'):
-        pieces[f'thigh.{side}'] = bone(f'Shorts and thigh {side}', skin, .095 if man else .082)
-        pieces[f'short.{side}'] = bone(f'Shorts cuff {side}', shorts, .108 if man else .093)
-        pieces[f'shin.{side}'] = bone(f'Lower leg {side}', skin, .068 if man else .059)
-        pieces[f'sock.{side}'] = bone(f'Calf sock {side}', socks, .072 if man else .063)
-        pieces[f'knee.{side}'] = sphere(f'Knee {side}', (0, 0, 0), (.082, .075, .082), skin)
-        pieces[f'arm.{side}'] = bone(f'Upper arm {side}', shirt, .085 if man else .072)
-        pieces[f'forearm.{side}'] = bone(f'Forearm {side}', skin, .060 if man else .052)
-        pieces[f'elbow.{side}'] = sphere(f'Elbow {side}', (0, 0, 0), (.064, .063, .064), skin)
-        pieces[f'hand.{side}'] = sphere(f'Hand {side}', (0, 0, 0), (.072, .042, .092), skin)
-        foot = empty(f'Foot.{side}')
-        foot.rotation_mode = 'QUATERNION'
-        pieces[f'foot.{side}'] = foot
-        sphere(f'White sock toe {side}', (0, -.125, -.014), (.082, .142, .055), socks, foot)
-        sphere(f'Sandal sole {side}', (0, -.137, -.070), (.093, .161, .027), sole, foot)
-        for y in (-.075, -.19):
-            box(f'Sandal strap {side} {y}', (0, y, .027), (.18, .044, .032), straps, foot)
-        box(f'Heel strap {side}', (0, .006, -.006), (.17, .027, .045), straps, foot)
-        box(f'Buckle {side}', (.091, -.08, .04), (.018, .038, .018), metal, foot)
+    skin = material('aged human skin texture',(1,1,1))
+    image_name = ('old_lightskinned_male_diffuse.png' if man else
+                  'old_lightskinned_female_diffuse.png')
+    image = bpy.data.images.load(str(SOURCE/'skins'/image_name))
+    image.pack()
+    texture = skin.node_tree.nodes.new('ShaderNodeTexImage')
+    texture.image = image
+    skin.node_tree.links.new(texture.outputs['Color'],
+                             skin.node_tree.nodes.get('Principled BSDF').inputs['Base Color'])
+    shirt = material('blue cotton polo' if man else 'coral cotton polo',
+                     (.045,.23,.42) if man else (.64,.20,.16))
+    trim = material('polo collar',(.025,.13,.25) if man else (.42,.105,.10))
+    shorts = material('sand walking shorts',(.47,.35,.24) if man else (.52,.39,.28))
+    socks = material('white walking socks',(.81,.79,.72))
+    sole = material('sandal rubber sole',(.11,.09,.075) if man else (.055,.075,.12))
+    strap = material('sandal leather',(.30,.19,.11) if man else (.075,.13,.22))
+    brass = material('small brass buckle',(.61,.48,.28),.38,.45)
+    dark = material('eyewear',(.045,.045,.043))
+    hair = material('brown hair' if man else 'silver grey hair',
+                    (.23,.16,.105) if man else (.51,.51,.49))
+    towel_a = material('blue beach towel' if man else 'red beach towel',
+                       (.035,.29,.60) if man else (.68,.05,.09))
+    towel_b = material('yellow towel stripe' if man else 'white towel stripe',
+                       (.80,.62,.10) if man else (.90,.86,.78))
 
-    head = empty('Head and headwear')
-    pieces['head'] = head
-    sphere('Face', (0, -.004, .105), (.17 if man else .151, .149, .205), skin, head)
-    sphere('Back hair', (0, .068, .13), (.163 if man else .155, .125, .18), hair, head)
-    for sign in (-1, 1):
-        sphere('Ear', (sign*.166, -.005, .065), (.037, .034, .065), skin, head)
-        sphere('Brow', (sign*.071, -.145, .173), (.065, .022, .023), hair, head)
-        sphere('Eye', (sign*.07, -.151, .128), (.035, .017, .023), ink, head)
-    sphere('Nose', (0, -.178, .070), (.043, .056, .065), skin, head)
+    armature = bpy.data.armatures.new('Human anatomical skeleton')
+    rig = bpy.data.objects.new('Human walk rig',armature)
+    bpy.context.collection.objects.link(rig)
+    bpy.context.view_layer.objects.active = rig
+    rig.select_set(True)
+    bpy.ops.object.mode_set(mode='EDIT')
+    for name,(a,b,parent) in definition.items():
+        bone = armature.edit_bones.new(name)
+        bone.head,bone.tail = a,b
+        if parent: bone.parent = armature.edit_bones[parent]
+    bpy.ops.object.mode_set(mode='OBJECT')
+
+    mesh = bpy.data.meshes.new('Continuous MakeHuman basemesh topology')
+    mesh.from_pydata(fitted[used].tolist(),[],[[index[i] for i in face] for face in faces])
+    mesh.update()
+    uv_coords, face_uv, reading_body = [], [], False
+    for line in (SOURCE/'base.obj').read_text().splitlines():
+        if line.startswith('vt '):
+            uv_coords.append([float(value) for value in line.split()[1:3]])
+        elif line.startswith('g '):
+            reading_body = line.strip() == 'g body'
+        elif reading_body and line.startswith('f '):
+            face_uv.append([int(value.split('/')[1])-1 for value in line.split()[1:]])
+    assert len(face_uv) == len(mesh.polygons)
+    uv_layer = mesh.uv_layers.new(name='MakeHuman anatomical UV')
+    for poly, ids in zip(mesh.polygons,face_uv):
+        for loop, uv_id in zip(poly.loop_indices,ids):
+            uv_layer.data[loop].uv = uv_coords[uv_id]
+    body = bpy.data.objects.new('Continuous human body, face and hands',mesh)
+    bpy.context.collection.objects.link(body)
+    for mat in (skin,shirt,shorts,socks): mesh.materials.append(mat)
+    weights = json.loads((SOURCE/'default_weights.mhw').read_text())['weights']
+    combined = {name:{} for name in definition}
+    for source_name,rows in weights.items():
+        dest = combined[motion.remap_weight(source_name)]
+        for old,weight in rows:
+            if old in index:
+                vertex=index[old]
+                dest[vertex]=dest.get(vertex,0)+weight
+    for name,values in combined.items():
+        group=body.vertex_groups.new(name=name)
+        for vertex,weight in values.items(): group.add([vertex],weight,'REPLACE')
+    for poly in mesh.polygons:
+        ids=list(poly.vertices)
+        z=sum(mesh.vertices[i].co.z for i in ids)/len(ids)/scale
+        dominant=max(definition,key=lambda name:sum(combined[name].get(i,0) for i in ids))
+        mat=0
+        if dominant in ('chest','pelvis') and .99<z<1.59: mat=1
+        elif dominant.startswith('arm.') and z>1.29: mat=1
+        elif dominant=='pelvis' and z<=.99: mat=2
+        elif dominant.startswith('thigh.') and z>.65: mat=2
+        elif dominant.startswith(('shin.','foot.','toe.')) and z<.31: mat=3
+        poly.material_index=mat
+        poly.use_smooth=True
+    deform=body.modifiers.new('Continuous weighted human skin','ARMATURE')
+    deform.object=rig
+    deform.use_deform_preserve_volume=True
+
+    def bind(obj,name,mat,bone):
+        obj.name=name
+        bpy.context.view_layer.objects.active=obj
+        bpy.ops.object.transform_apply(location=True,rotation=True,scale=True)
+        obj.data.materials.append(mat)
+        for poly in obj.data.polygons: poly.use_smooth=True
+        group=obj.vertex_groups.new(name=bone)
+        group.add(list(range(len(obj.data.vertices))),1,'REPLACE')
+        mod=obj.modifiers.new('Follow anatomical bone','ARMATURE')
+        mod.object=rig
+        return obj
+
+    def ellipsoid(name,at,radii,mat,bone):
+        bpy.ops.mesh.primitive_uv_sphere_add(segments=24,ring_count=16,location=Vector(at)*scale)
+        obj=bpy.context.object
+        obj.scale=Vector(radii)*scale
+        return bind(obj,name,mat,bone)
+
+    def cyl(name,at,radius,depth,mat,bone,rotation=None):
+        bpy.ops.mesh.primitive_cylinder_add(vertices=32,radius=radius*scale,depth=depth*scale,
+                                            location=Vector(at)*scale)
+        obj=bpy.context.object
+        if rotation: obj.rotation_euler=rotation
+        return bind(obj,name,mat,bone)
+
+    def cube(name,at,dimensions,mat,bone,rotation=None):
+        bpy.ops.mesh.primitive_cube_add(size=1,location=Vector(at)*scale)
+        obj=bpy.context.object
+        obj.dimensions=Vector(dimensions)*scale
+        if rotation: obj.rotation_euler=rotation
+        return bind(obj,name,mat,bone)
+
+    cube('Polo placket',(0,-.112,1.46),(.017,.014,.09),socks,'chest')
+    for sign in (-1,1):
+        cube('Polo collar',(sign*.055,-.092,1.535),(.09,.023,.042),trim,'chest',
+             (0,0,sign*.26))
+        hip=rest['thigh.L' if sign>0 else 'thigh.R'][0]/scale
+        ellipsoid('Shorts pocket seam',(hip.x*1.42,-.04,.88),(.012,.035,.065),shorts,'pelvis')
+
+    for side in 'LR':
+        ankle=rest['foot.'+side][0]/scale
+        x,y=ankle.x,ankle.y
+        ellipsoid('Sandal sole '+side,(x,y-.075,.032),(.092,.167,.022),sole,'foot.'+side)
+        for j,forward in enumerate((-.105,-.185)):
+            cube('Sandal upper strap '+side+str(j),(x,y+forward,.074),(.17,.034,.018),strap,'foot.'+side)
+        cube('Sandal heel strap '+side,(x,y+.02,.105),(.15,.023,.018),strap,'foot.'+side)
+        cube('Sandal buckle '+side,(x+.087,y-.105,.082),(.014,.028,.014),brass,'foot.'+side)
+
     if man:
-        for sign in (-1, 1):
-            sphere('Moustache', (sign*.046, -.173, .018), (.060, .025, .026), hair, head)
-            sphere('Sunglass lens', (sign*.076, -.163, .135), (.075, .018, .048), ink, head)
-        box('Sunglass bridge', (0, -.173, .15), (.055, .018, .014), metal, head)
-        straw = material('straw hat', (0.67, 0.51, 0.27))
-        hatband = material('black hatband', (0.13, 0.11, 0.09))
-        cylinder('Straw brim', (0, 0, .293), .275, .024, straw, head)
-        cylinder('Straw crown', (0, .016, .369), .184, .15, straw, head)
-        cylinder('Dark hat band', (0, .016, .321), .187, .032, hatband, head)
+        straw=material('straw sun hat',(.60,.47,.27))
+        band=material('dark hat band',(.13,.10,.075))
+        cyl('Straw brim',(0,-.008,1.825),.192,.013,straw,'head')
+        cyl('Straw crown',(0,.002,1.871),.115,.096,straw,'head')
+        cyl('Hat band',(0,.002,1.843),.117,.021,band,'head')
+        for sign in (-1,1):
+            ellipsoid('Moustache half',(sign*.026,-.170,1.672),(.038,.016,.010),hair,'head')
+            ellipsoid('Sunglasses lens',(sign*.052,-.178,1.744),(.048,.011,.029),dark,'head')
+        cube('Sunglasses bridge',(0,-.184,1.748),(.026,.012,.009),brass,'head')
     else:
-        for sign in (-1, 1):
-            ring('Glasses rim', (sign*.074, -.169, .137), .062, ink, head)
-            sphere('Silver side curl', (sign*.119, .04, .215), (.058, .076, .073), hair, head)
-        box('Glasses bridge', (0, -.173, .144), (.038, .014, .013), ink, head)
-        sphere('Lips', (0, -.152, -.018), (.049, .018, .015), shirt_dark, head)
-        cap = material('patterned sun cap', (0.33, 0.32, 0.31))
-        sphere('Sun cap crown', (0, .014, .306), (.181, .152, .100), cap, head)
-        sphere('Sun cap visor', (0, -.137, .272), (.17, .105, .019), cap, head)
-        for i in range(11):
-            a = i * 2.39996
-            sphere('Cap fabric fleck', (.12*math.cos(a), -.01+.09*math.sin(a), .341), (.014, .009, .006), socks, head, segments=8, rings=6)
+        cap=material('patterned travel cap',(.32,.32,.31))
+        ellipsoid('Silver hair behind ears',(0,.024,1.785),(.094,.058,.059),hair,'head')
+        ellipsoid('Sun cap crown',(0,0,1.831),(.107,.092,.049),cap,'head')
+        ellipsoid('Sun cap visor',(0,-.121,1.808),(.105,.078,.009),cap,'head')
+        for sign in (-1,1):
+            bpy.ops.mesh.primitive_torus_add(major_segments=24,minor_segments=6,
+                major_radius=.040*scale,minor_radius=.004*scale,
+                location=Vector((sign*.052,-.185,1.738))*scale)
+            obj=bpy.context.object
+            obj.rotation_euler.x=math.pi/2
+            bind(obj,'Glasses rim',dark,'head')
+            ellipsoid('Silver temple hair',(sign*.088,-.004,1.762),(.020,.041,.034),hair,'head')
+        cube('Glasses bridge',(0,-.188,1.741),(.027,.010,.008),dark,'head')
+        for i in range(9):
+            angle=i*2.39996
+            ellipsoid('Cap woven fleck',(.075*math.cos(angle),-.006+.06*math.sin(angle),1.861),
+                      (.007,.004,.003),socks,'head')
 
-    # Shirt placket and collar keep the polo recognizable from the original pixels.
-    chest_detail = empty('Polo details')
-    pieces['detail'] = chest_detail
-    for sign in (-1, 1):
-        box('Open polo collar', (sign*.074, -.158, .287), (.10, .025, .08), shirt_dark, chest_detail, rotation=(0, 0, sign*.25))
-    box('Polo placket', (0, -.159, .24), (.023, .012, .105), socks, chest_detail)
-    box('Shorts belt', (0, -.125, .006), (.36 if man else .32, .03, .029), straps, chest_detail)
-    if man:
-        box('Shorts pocket flap', (-.22, -.08, -.11), (.12, .035, .10), shorts, chest_detail)
-    else:
-        # Small tan side pouch echoes the source sprite without hiding the towel.
-        sphere('Hip pouch', (-.225, -.015, -.105), (.10, .075, .115), shorts, chest_detail)
+    hand=rest['hand.R'][1]/scale
+    tx,ty,tz=hand.x,hand.y-.05,hand.z+.025
+    for i in range(5):
+        cyl('Rolled reservation towel',(tx,ty+i*.038,tz),.066,.039,
+            towel_a if i%2 else towel_b,'hand.R',(math.pi/2,0,0))
+    for radius,mat,offset in ((.065,towel_a,-.032),(.048,towel_b,-.038),(.027,towel_a,-.044)):
+        cyl('Rolled towel end',(tx,ty+offset,tz),radius,.008,mat,'hand.R',(math.pi/2,0,0))
+    cube('Towel retaining band',(tx,ty+.045,tz+.066),(.11,.028,.010),strap,'hand.R')
 
-    towel = empty('Rolled reservation towel')
-    pieces['towel'] = towel
-    # Its cylinder points forward, exposing a visible rolled end from the front.
-    for i in range(6):
-        y = -.15 + i*.066
-        cylinder('Towel stripe', (0, y, 0), .109, .068, towel_a if i%3 else towel_b, towel, rotation=(math.pi/2, 0, 0))
-    for radius, mat, y in ((.107, towel_a, -.189), (.077, towel_b, -.195), (.048, towel_a, -.201), (.022, towel_b, -.207)):
-        cylinder('Rolled towel spiral', (0, y, 0), radius, .011, mat, towel, rotation=(math.pi/2, 0, 0))
-    box('Towel securing band', (0, -.035, .112), (.18, .065, .015), straps, towel)
-
-    # Similarity retarget: one fixed character scale preserves the guide's IK
-    # segment lengths and grounded contact trajectory at every pose.
-    scale = .93 if man else .88
-
-    def point(v):
-        return Vector(v) * scale
-
-    for fi, frame_data in enumerate(POSES):
-        frame = fi + 1
-        bpy.context.scene.frame_set(frame)
-        raw = frame_data['bones']
-        b = {name: (point(pair[0]), point(pair[1])) for name, pair in raw.items()}
-        root = point(frame_data['root'])
-        # The torso and head use the guide's root movement; clothing proportions remain character-owned.
-        pose_bone(pieces['pelvis'], *b['pelvis'], frame, .025)
-        pose_bone(pieces['torso'], b['pelvis'][1], b['chest'][1], frame, .04)
-        place(pieces['belly'], root + Vector((0, -.037, .255*scale)), frame)
-        pose_bone(pieces['neck'], *b['neck'], frame, .012)
-        place(head, (b['head'][0] + b['head'][1])/2 - Vector((0, 0, .067*scale)), frame)
-        place(chest_detail, root + Vector((0, 0, .18*scale)), frame)
-        place(towel, root + Vector((.23 if man else .205, -.28, .22*scale)), frame)
-        for side in ('L', 'R'):
-            thigh_a, thigh_b = b[f'thigh.{side}']
-            shin_a, shin_b = b[f'shin.{side}']
-            pose_bone(pieces[f'thigh.{side}'], thigh_a, thigh_b, frame)
-            pose_bone(pieces[f'short.{side}'], thigh_a, thigh_a.lerp(thigh_b, .37), frame)
-            pose_bone(pieces[f'shin.{side}'], shin_a, shin_b, frame)
-            pose_bone(pieces[f'sock.{side}'], shin_a.lerp(shin_b, .52), shin_b, frame)
-            place(pieces[f'knee.{side}'], shin_a, frame)
-            arm_a, arm_b = b[f'arm.{side}']
-            forearm_a, forearm_b = b[f'forearm.{side}']
-            if side == 'R':
-                # Towel hand is carried close to the trunk while the free arm swings.
-                arm_b = arm_a + Vector((-.20*scale, -.07, -.20*scale))
-                forearm_a = arm_b
-                forearm_b = root + Vector((.10, -.49, .17*scale))
-            pose_bone(pieces[f'arm.{side}'], arm_a, arm_b, frame)
-            pose_bone(pieces[f'forearm.{side}'], forearm_a, forearm_b, frame)
-            place(pieces[f'elbow.{side}'], forearm_a, frame)
-            place(pieces[f'hand.{side}'], forearm_b, frame)
-            foot = pieces[f'foot.{side}']
-            ankle = b[f'foot.{side}'][0]
-            toe = b[f'toe.{side}'][1]
-            direction = toe - ankle
-            place(foot, ankle, frame, Vector((0, -1, 0)).rotation_difference(direction))
-
-    scene = bpy.context.scene
-    scene.frame_start = 1
-    scene.frame_end = len(POSES)
-    scene.render.fps = FPS
-    for obj in bpy.data.objects:
-        if obj.animation_data and obj.animation_data.action:
-            obj.animation_data.action.name = 'Walk'
-    bpy.ops.export_scene.gltf(
-        filepath=str(OUT / f'{kind}.glb'), export_format='GLB',
-        export_yup=True, export_animations=True, export_frame_range=True,
-        export_force_sampling=False, export_nla_strips=False,
-        export_image_format='NONE',
-    )
-    merge_walk(OUT / f'{kind}.glb')
-    bpy.context.preferences.filepaths.save_version = 0
-    bpy.ops.wm.save_as_mainfile(filepath=str(OUT / f'{kind}.blend'))
-    print(f'{prefix}: {len(bpy.data.objects)} objects, {len(POSES)} poses')
+    for bone in rig.pose.bones: bone.rotation_mode='QUATERNION'
+    for fi,pose in enumerate(POSES):
+        bpy.context.scene.frame_set(fi+1)
+        for name in definition:
+            head=Vector(pose['bones'][name][0])*scale
+            tail=Vector(pose['bones'][name][1])*scale
+            rot=(rest[name][1]-rest[name][0]).rotation_difference(tail-head).to_matrix()
+            rig.pose.bones[name].matrix=(Matrix.Translation(head)@rot.to_4x4()@
+                                         armature.bones[name].matrix_local.to_3x3().to_4x4())
+            bpy.context.view_layer.update()
+        for bone in rig.pose.bones:
+            bone.keyframe_insert('location',frame=fi+1)
+            bone.keyframe_insert('rotation_quaternion',frame=fi+1)
+            bone.keyframe_insert('scale',frame=fi+1)
+    rig.animation_data.action.name='Walk'
+    scene=bpy.context.scene
+    scene.frame_start,scene.frame_end,scene.render.fps=1,33,26
+    bpy.ops.export_scene.gltf(filepath=str(OUT/f'{kind}.glb'),export_format='GLB',
+                              export_yup=True,export_animations=True,export_frame_range=True,
+                              export_force_sampling=False,export_nla_strips=False,
+                              export_image_format='AUTO')
+    merge_walk(OUT/f'{kind}.glb')
+    bpy.context.preferences.filepaths.save_version=0
+    bpy.ops.wm.save_as_mainfile(filepath=str(OUT/f'{kind}.blend'),compress=True)
+    print(f'{kind}: {len(used)} body vertices, {len(faces)} body faces, {len(POSES)} poses')
 
 
-if __name__ == '__main__':
-    assert len(POSES) == 33 and all(len(f['bones']) == 18 for f in POSES)
-    # Blender 4.1's glTF exporter caches datablocks across exports; use one process per actor.
-    kind = sys.argv[sys.argv.index('--') + 1] if '--' in sys.argv else 'man'
-    assert kind in ('man', 'woman')
+if __name__=='__main__':
+    assert len(POSES)==33 and all(len(f['bones'])==18 for f in POSES)
+    kind=sys.argv[sys.argv.index('--')+1] if '--' in sys.argv else 'man'
+    assert kind in ('man','woman')
     make_actor(kind)

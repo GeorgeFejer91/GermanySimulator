@@ -49,7 +49,7 @@ let playing=true;
 let speed=1;
 const loader=new GLTFLoader();
 try{
-  const models=await Promise.all(['man','woman'].map(name=>loader.loadAsync(`./assets/models/towel-pedestrians/${name}.glb`)));
+  const models=await Promise.all(['man','woman'].map(name=>loader.loadAsync(`./assets/models/towel-pedestrians/${name}.glb?v=2`)));
   models.forEach((asset,i)=>{
     const actor=asset.scene;
     actor.position.x=i===0?-1.13:1.13;
@@ -61,7 +61,7 @@ try{
     mixer.clipAction(asset.animations[0]).play();
     mixers.push(mixer);
   });
-  status.textContent='32 poses · grounded step cycle · two character builds';
+  status.textContent='Human body mesh · 32 poses · grounded step cycle';
   document.documentElement.dataset.models='ready';
 }catch(error){
   status.textContent=`Could not load the 3D models: ${error.message}`;

@@ -1,12 +1,12 @@
-# Towel pedestrian 3D walk candidates
+# Towel pedestrian human walk candidates
 
-Status: **candidate-unapproved, preview only**. `towel-3d-preview.html` loads the two GLBs and offers front, side, and back inspection. `walk-preview.webp` is a compact animated look at the same models. Neither file is referenced by the root game or `world3d.js`.
+Status: **candidate-unapproved, preview only**. [`towel-3d-preview.html`](../../../towel-3d-preview.html) loads two GLBs with front, side, and back inspection. `walk-preview.webp` shows the same walk. The root game and `world3d.js` still use the accepted sprites.
 
-The appearance is original Blender primitive modeling based on the two accepted pre-rig key sheets. The man keeps a straw hat, sunglasses, moustache, blue polo, tan shorts, white calf socks, brown strapped sandals, and a blue/yellow rolled towel. The woman keeps a patterned cap, glasses, coral polo, tan shorts, white socks, navy strapped sandals, and a red/white rolled towel. Faces and clothing are deliberately simplified miniature interpretations; they are not scans or texture projections of the sprite pixels.
+The human body is MakeHuman's CC0 basemesh with its older male and female shape targets, corresponding older skin textures, skeleton, and vertex weights. Exact source files, hashes, and licenses are recorded in [`../../sprite-sources/reference/makehuman-walk/PROVENANCE.md`](../../sprite-sources/reference/makehuman-walk/PROVENANCE.md). The body is one continuous weighted mesh with a sculpted human face, hands, and limbs. The fabric and accessories are original Blender modeling based on the accepted pre-rig sprite sheets. The man keeps a straw hat, sunglasses, moustache, blue polo, tan shorts, white calf socks, brown strapped sandals, and blue/yellow towel. The woman keeps a travel cap, glasses, grey hair, coral polo, tan shorts, white calf socks, navy strapped sandals, and red/white towel.
 
-`tools/build-towel-3d-preview.py` builds one editable `.blend` and one uncompressed, texture-free GLB per character with Blender 4.1.1. It maps the verified 18-bone neutral guide's 32 walk poses plus closure through one fixed uniform scale per figure. Similarity scaling preserves the guide's fixed segment lengths and planted foot trajectory; each model's geometry and held towel are character-specific. The towel arm is separately posed to stay near the prop. Blender 4.1 emits separate object actions, which the builder joins into one `Walk` clip and shifts to time zero. Feet roll as rigid sandal units, without articulated toes. This walk study does not establish running or in-game collision behavior.
+`tools/build-towel-3d-preview.py` creates editable `.blend` files and self-contained GLBs in Blender 4.1.1. It uses the verified neutral guide's 32 walk poses plus the closure pose, with one uniform scale per character. A single 18-bone skin deforms the body and holds the accessories. The GLB has one `Walk` clip; its first and last frames match. The feet use rigid sandal soles with the guide's grounded step cycle. This is a walking preview, not a runtime replacement or a running/collision study.
 
-The shared guide incorporates filtered CMU 69/01 arm motion and timing, with its acknowledgment and **non-resale** condition recorded in `assets/sprite-sources/reference/neutral-walk/PROVENANCE.md` and `assets/sprite-sources/reference/cmu-walk-69-01/PROVENANCE.md`:
+The shared guide includes filtered CMU 69/01 arm motion and timing. Its acknowledgment and **non-resale** condition are recorded in the neutral guide and CMU reference provenance:
 
 > The data used in this project was obtained from mocap.cs.cmu.edu. The database was created with funding from NSF EIA-0196217.
 
@@ -18,13 +18,13 @@ The shared guide incorporates filtered CMU 69/01 arm motion and timing, with its
 node --test tests/towel-3d-preview.test.mjs
 ```
 
-The preview was visually checked in a muted, headless Chromium session at desktop, 390 px phone, 320 px reflow, and 200% zoom. All referenced assets loaded, no console errors appeared, and the page had no horizontal overflow. The test verifies both GLBs have one complete 33-key closed animation and the expected costume/prop nodes. Mechanical and browser checks do **not** signify visual acceptance of these character interpretations.
+The browser preview was visually checked in muted, headless Chromium from the front and side at desktop and 390 px phone width. Both GLBs loaded; the phone had no horizontal overflow or console errors. The test checks for an embedded skin texture, one 18-joint skin, the recognizable props, and a closed 33-key walk. These checks do **not** establish visual acceptance.
 
 | Asset | SHA-256 |
 | --- | --- |
 | Accepted male source key sheet | `4f5784eadabba9adf572ce2e27559fb5db3bfd8b6545624c94376fb9b8ca1cbe` |
 | Accepted female source key sheet | `bb407dcff74386fa3d5874a8ae331d997b981f01db499fb00b6358a9dd5b09f3` |
 | Neutral `pose-audit.json` | `677c11dc394ee8f5719b2c39dbe4576774daa4e1ce7351dc582a4e653e794564` |
-| `man.glb` | `6e61e192de06137211fa6291dfc5bde45b57001a9b2a7bf6451fb2a282d4e091` |
-| `woman.glb` | `acd135d79c6db576a9446f92e35c6d3d0968ddb49df5c3d494ca93811c1b5935` |
-| `walk-preview.webp` | `ea84b7bb55fdfd1c4b883ef24ce89f41c25e5fc7c807bd177aa21081e65dcc6a` |
+| `man.glb` | `5326bbb4bd82acb4533a4abb8206a551448c81f1eac0ecc7d7d446054bf39689` |
+| `woman.glb` | `61d14c87a41721bf6219d263ac37ec203b423071bcc581b5a96f810b3933a12c` |
+| `walk-preview.webp` | `7d7dd86e48978040d5b06bf1a5bdd86ea501363b3d38fe9a2e6f10bb8b568170` |
