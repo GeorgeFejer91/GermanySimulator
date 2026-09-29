@@ -16,34 +16,65 @@ function sourceOf(name){
 }
 
 const timers=[],item={text:"Welcome to Berlin",family:"dialogue"};
-let cancelled=0,finished=0,shown=0;
+let cancelled=0,finished=0,shown=0,utterance,caption="";
 const context=vm.createContext({
  Math,
- window:{speechSynthesis:{}},
+ performance:{now:()=>100},state:{subtitlesOn:true},
+ window:{speechSynthesis:{},GermanySubtitleLayout:{captionAtProgress:(parts,progress)=>parts[Math.min(parts.length-1,Math.floor(progress*parts.length))]}},
  item,
  finished:()=>finished++,
+ setSubtitle:value=>caption=value,
  SpeechSynthesisUtterance:class{constructor(text){this.text=text}},
- speechSynthesis:{getVoices:()=>[],speak:()=>{},cancel:()=>cancelled++},
+ speechSynthesis:{getVoices:()=>[],speak:value=>{utterance=value},cancel:()=>cancelled++},
  setTimeout:(callback,delay)=>{timers.push({callback,delay});return timers.length},
- clearTimeout:()=>{}
+ clearTimeout:()=>{},setInterval:()=>1,clearInterval:()=>{}
 });
 vm.runInContext(`
- const AUDIO_MIX={ATTACK_SECONDS:.12};
  let stimulusTimer,stimulusGeneration=1,activeStimulus=item;
  const voiceHash=()=>0;
+ const startSubtitle=item=>{item.subtitleParts=["Welcome","to","Berlin"]};
  const finishStimulus=()=>finished();
  ${sourceOf("playSyntheticStimulus")}
  playSyntheticStimulus(item,1);
 `,context,{filename:"game.js"});
 
 item.start=()=>shown++;
-timers.shift().callback();
-assert.equal(shown,1,"the exact dialogue text must be shown before synthesized speech is attempted");
-const startupWatchdog=timers.find(timer=>timer.delay===1800);
+assert.ok(utterance,"speech must be requested immediately from the start interaction");
+assert.equal(shown,0,"the dialogue box must wait for the actual speech start");
+utterance.onstart();
+assert.equal(shown,1,"the exact dialogue text must appear when synthesized speech starts");
+utterance.onboundary({charIndex:12});
+assert.equal(caption,"Berlin","word boundaries must advance the measured subtitle parts");
+utterance.onend();
+assert.equal(finished,1,"speech completion must release the dialogue queue");
+
+const stalled={text:"Another line",family:"dialogue",start:()=>shown++};
+context.item=stalled;
+vm.runInContext("activeStimulus=item;playSyntheticStimulus(item,1)",context);
+const startupWatchdog=timers.filter(timer=>timer.delay===4000).at(-1);
 assert.ok(startupWatchdog,"synthetic speech must have a bounded startup watchdog");
 startupWatchdog.callback();
 assert.equal(cancelled,1,"a stalled browser voice must be cancelled");
-assert.equal(finished,1,"a stalled browser voice must release the modal dialogue queue");
+assert.equal(shown,2,"a failed voice must still reveal its readable text once");
+assert.equal(finished,2,"a stalled browser voice must release the modal dialogue queue");
+
+const order=[],recorded={text:"Recorded line",recording:"line.mp3",start:()=>order.push("text")};
+let resumeAudio;
+const recordingContext=vm.createContext({
+ item:recorded,prepareRecording:()=>Promise.resolve({duration:2}),
+ ensureAudio:()=>({state:"suspended",resume:()=>new Promise(resolve=>resumeAudio=resolve),currentTime:0,
+  createBufferSource:()=>({connect:target=>target,start:()=>order.push("audio")}),
+  createGain:()=>({gain:{setValueAtTime(){},linearRampToValueAtTime(){}},connect:target=>target})}),
+ foregroundOutput:()=>({}),startSubtitle:()=>order.push("subtitle"),
+ playSyntheticStimulus:()=>{throw new Error("unexpected fallback")},finishStimulus:()=>{}
+});
+vm.runInContext(`const AUDIO_CLASS={TEXT:"audio-text"},AUDIO_MIX={ATTACK_SECONDS:.12,FOREGROUND:1};let stimulusGeneration=1,activeStimulus=item,recordedSpeechSource,recordedSpeechGain;${sourceOf("playRecordedStimulus")};playRecordedStimulus(item,1)`,recordingContext);
+await Promise.resolve();
+assert.deepEqual(order,[],"recorded text must wait for the audio context to resume");
+resumeAudio();
+await new Promise(resolve=>setImmediate(resolve));
+assert.deepEqual(order,["audio","text","subtitle"],"recorded dialogue must reveal in its source-start task");
+
 assert.match(sourceOf("nextDialogue"),/if\(state\.dialogueVoiceBusy\).*stopSpeech\(\).*setDialogueVoiceBusy\(false\)/,"advancing must cancel an unfinished voice before replacing its text");
 assert.doesNotMatch(sourceOf("nextDialogue"),/state\.dialogueVoiceBusy\)return/,"an unfinished voice must not block WEITER or E");
 

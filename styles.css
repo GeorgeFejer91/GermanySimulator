@@ -184,14 +184,16 @@ button,.control-dock,.control-dock *{touch-action:none}
 @media(prefers-reduced-motion:reduce){.law-keycap{animation:none}}
 
 /* Optional English translation stays visually subordinate to the game and follows the audio broker. */
-.english-subtitle{position:fixed;z-index:120;left:0;right:0;bottom:0;min-height:38px;max-height:28vh;overflow:auto;overflow-wrap:break-word;padding:7px 14px;border-top:1px solid #d4a900;background:#050505;color:#ffcc00;font:700 clamp(15px,1.65vw,21px)/1.28 "Grenze",Georgia,serif;text-align:center;text-shadow:1.5px 1.5px 0 #b00018;pointer-events:none}
+.english-subtitle{position:fixed;z-index:120;left:0;right:0;bottom:0;height:calc(2.56em + 15px);display:flex;align-items:flex-end;justify-content:center;overflow:auto;overflow-wrap:break-word;padding:7px 14px;border-top:1px solid #d4a900;background:#050505;color:#ffcc00;font:700 clamp(15px,1.65vw,21px)/1.28 "Grenze",Georgia,serif;text-align:center;text-shadow:1.5px 1.5px 0 #b00018;pointer-events:none}
 .english-subtitle[hidden]{display:none}
-.english-subtitle[data-fit="scroll"]{pointer-events:auto;touch-action:pan-y;overscroll-behavior:contain}
+.english-subtitle[data-fit="scroll"]{display:block;pointer-events:auto;touch-action:pan-y;overscroll-behavior:contain}
 .subtitle-toggle{position:fixed;z-index:121;right:12px;bottom:13px;min-height:24px;padding:3px 7px;border:1px solid #d4a900;background:#080808;color:#ffcc00;font:700 10px/1.1 "Grenze",Georgia,serif;text-shadow:1px 1px 0 #b00018}
 .subtitle-toggle:focus-visible{outline:2px solid #f0eadc;outline-offset:2px}
 #app.subtitles-visible .subtitle-toggle{bottom:calc(var(--subtitle-height, 38px) + 6px)}
+#app.subtitles-visible .modal:not([hidden]){bottom:var(--subtitle-height, 38px)}
+#app.subtitles-visible .modal .paper,#app.subtitles-visible .quiz-card{max-height:calc(92vh - var(--subtitle-height, 38px))}
 @media(max-width:760px){
-  .english-subtitle{min-height:35px;max-height:30vh;padding:6px 9px calc(6px + env(safe-area-inset-bottom));font-size:15px;line-height:1.24}
+  .english-subtitle{height:calc(2.48em + 13px + env(safe-area-inset-bottom));padding:6px 9px calc(6px + env(safe-area-inset-bottom));font-size:15px;line-height:1.24}
   .subtitle-toggle{right:6px;bottom:calc(120px + env(safe-area-inset-bottom));min-height:23px;font-size:9px}
   #quiz-modal:not([hidden])~.subtitle-toggle{top:6px;right:6px;bottom:auto}
   #app.subtitles-visible .germanness{bottom:var(--subtitle-height, 35px);min-height:30px;padding-bottom:3px}
@@ -201,5 +203,7 @@ button,.control-dock,.control-dock *{touch-action:none}
   #app.subtitles-visible .dialogue{bottom:calc(121px + var(--subtitle-height, 35px));max-height:36vh}
   #app.subtitles-visible .dialogue.memorial{bottom:calc(122px + var(--subtitle-height, 35px));max-height:30vh}
   #app.subtitles-visible .subtitle-toggle{top:6px;bottom:auto}
+  #app.subtitles-visible .humor-paper{max-height:calc(100dvh - var(--subtitle-height, 35px) - 14px)}
+  #app.subtitles-visible .quiz-card{max-height:calc(94vh - var(--subtitle-height, 35px))}
 }
 #quiz-prompt,.quiz-choices button,.quiz-person b,.quiz-person strong{overflow-wrap:break-word}

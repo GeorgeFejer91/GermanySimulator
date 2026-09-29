@@ -1,7 +1,40 @@
 import {prepareWithSegments,measureLineStats} from "./assets/vendor/pretext/dist/layout.js";
+import {splitCaption,timedCaptions,captionAt,captionAtProgress} from "./subtitle-protocol.js";
 
 const app=document.getElementById("app"),box=document.getElementById("english-subtitle");
-let prepared,preparedKey,scheduled=false;
+const preparedCache=new Map();
+let scheduled=false;
+
+function measure(text,font,spacing,width){
+  const key=JSON.stringify([text,font,spacing]);
+  let prepared=preparedCache.get(key);
+  if(!prepared){
+    prepared=prepareWithSegments(text,font,{letterSpacing:spacing});
+    if(preparedCache.size>=128)preparedCache.delete(preparedCache.keys().next().value);
+    preparedCache.set(key,prepared);
+  }
+  return measureLineStats(prepared,Math.max(1,width));
+}
+
+function paginate(text){
+  if(!text?.trim())return [];
+  const css=getComputedStyle(box),font=`${css.fontStyle} ${css.fontWeight} ${css.fontSize} ${css.fontFamily}`;
+  const width=box.clientWidth-parseFloat(css.paddingLeft)-parseFloat(css.paddingRight)-6;
+  const height=box.clientHeight-parseFloat(css.paddingTop)-parseFloat(css.paddingBottom);
+  const lineHeight=parseFloat(css.lineHeight),spacing=parseFloat(css.letterSpacing)||0,wordSpacing=parseFloat(css.wordSpacing)||0;
+  if(typeof Intl.Segmenter!=="function"||!document.fonts.check(font)){
+    box.dataset.measurement="unavailable";
+    return splitCaption(text,part=>part.length<=Math.max(12,Math.floor(width/11)));
+  }
+  box.dataset.measurement="pretext-0.0.9";
+  return splitCaption(text,part=>{
+    const usable=width-wordSpacing*(part.match(/ /g)||[]).length;
+    const lines=measure(part,font,spacing,usable);
+    return lines.lineCount<=2&&lines.maxLineWidth<=usable+1&&lines.lineCount*lineHeight<=height+1;
+  });
+}
+
+window.GermanySubtitleLayout={paginate,timedCaptions:cues=>timedCaptions(cues,paginate),captionAt,captionAtProgress};
 
 function update(){
   scheduled=false;
@@ -18,12 +51,8 @@ function update(){
   const measurable=typeof Intl.Segmenter==="function"&&document.fonts.check(font);
   box.dataset.measurement=measurable?"pretext-0.0.9":"unavailable";
   if(measurable){
-    const key=JSON.stringify([box.textContent,font,spacing]);
-    if(key!==preparedKey){prepared=prepareWithSegments(box.textContent,font,{letterSpacing:spacing});preparedKey=key}
-    const lines=measureLineStats(prepared,Math.max(1,width));
+    const lines=measure(box.textContent,font,spacing,width);
     fits=lines.maxLineWidth<=width+1&&lines.lineCount*parseFloat(css.lineHeight)<=contentHeight+1;
-  }else{
-    preparedKey="";
   }
   box.dataset.fit=!fits||box.scrollHeight>box.clientHeight+1?"scroll":"fit";
 }
