@@ -1,0 +1,7 @@
+# Building placards
+
+Twenty-nine individualized, text-free illustrations were generated with the built-in ImageGen tool on 2026-09-29 for the buildings in `game.js`. Each prompt requested a wide aged enamel and paper sign with subject-specific satirical props in the margins and a quiet central field. The 2172 × 724 PNG outputs were downsampled to 768 × 256 WebP at quality 76. The shipped set totals 812,874 bytes. The game draws the exact building name and existing subtitle over each image, using the locally bundled Grenze font and measured wrapping; generated lettering is not used.
+
+The visual themes include a queue clock for Bürgeramt, keys and a rent ledger for Hausverwaltung, inspected flowers for Stadtbild, stamp and passport for Ausländerbehörde, a tax abacus for Finanzamt, bandaged paperwork for Krankenkasse, guarded grass for Polizei, sausage island for Wurst-Insel, circular fax paper for Bundesfaxamt, measured screws for DIN-Baumarkt, and blocked calendars for Terminvergabestelle. The remaining files likewise use their building's own office, shop, energy, or parliamentary props. No real agency seal, party insignia, national symbol, or baked sign text is intentionally included.
+
+`assets/fonts/grenze/Grenze.ttf` and its `OFL.txt` are from the [Google Fonts Grenze source](https://github.com/google/fonts/tree/main/ofl/grenze), licensed under the SIL Open Font License 1.1. The font file is a variable TTF used only for the runtime placard lettering.

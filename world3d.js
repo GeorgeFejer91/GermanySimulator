@@ -92,6 +92,50 @@ function showRendererFailure(error){
   }
   const pp=bridge.policePath,ax=X(pp.x1),az=Z(pp.y1),bx=X(pp.x2),bz=Z(pp.y2),len=Math.hypot(bx-ax,bz-az),path=box(pp.width*S,.03,len,M.path,(ax+bx)/2,.04,(az+bz)/2);path.rotation.y=Math.atan2(bx-ax,bz-az);
   function label(a,b,bg="#ded9cc",fg="#222"){const c=document.createElement("canvas");c.width=768;c.height=150;const g=c.getContext("2d");g.fillStyle=bg;g.fillRect(0,0,768,150);g.fillStyle=fg;g.textAlign="center";g.font="900 42px Arial";g.fillText(a,384,65);g.font="700 20px Arial";g.fillText(b||"",384,112);const tx=new T.CanvasTexture(c);tx.colorSpace=T.SRGBColorSpace;const s=new T.Sprite(new T.SpriteMaterial({map:tx}));s.scale.set(4.6,.9,1);return s}
+  const placardLayouts=[],placardFontReady=typeof FontFace==="undefined"?Promise.resolve(false):new FontFace("PlacardGrenze","url(./assets/fonts/grenze/Grenze.ttf)",{weight:"100 900"}).load().then(font=>{document.fonts.add(font);return true}).catch(()=>false);
+  function buildingPlacard(b,w){
+    const canvas=document.createElement("canvas"),mobile=innerWidth<700;canvas.width=mobile?512:768;canvas.height=mobile?171:256;
+    const ctx=canvas.getContext("2d");ctx.setTransform(canvas.width/768,0,0,canvas.height/256,0,0);
+    const texture=new T.CanvasTexture(canvas);texture.colorSpace=T.SRGBColorSpace;
+    const sign=new T.Sprite(new T.SpriteMaterial({map:texture}));sign.scale.set(Math.min(6.8,w*.84),Math.min(6.8,w*.84)/3,1);
+    const image=new Image(),layout={id:b.id,textureWidth:canvas.width,artReady:false,fontReady:false,titleWidth:0,subtitleWidth:0};placardLayouts.push(layout);let artReady=false,fontReady=false;
+    const titleParts={auslaender:["AUSLÄNDER","BEHÖRDE"],formulararchiv:["BUNDES","FORMULARARCHIV"],terminamt:["TERMIN","VERGABESTELLE"],querungsamt:["STRASSEN","QUERUNGSAMT"],sockenladen:["SOCKENFACH","GESCHÄFT"],laermamt:["AMT FÜR ZIMMER","LAUTSTÄRKE"]};
+    function linesFor(text,weight,oneSize,twoSize,smallest,forced){
+      const family=fontReady?'"PlacardGrenze"':'"Grenze",Georgia,serif',words=text.split(/\s+/);
+      if(!forced)for(let px=oneSize;px>=Math.max(smallest,oneSize-22);px--){ctx.font=`${weight} ${px}px ${family}`;if(ctx.measureText(text).width<=390)return {parts:[text],px}}
+      const candidates=forced?[forced]:words.slice(1).map((_,i)=>[words.slice(0,i+1).join(" "),words.slice(i+1).join(" ")]);
+      for(let px=twoSize;px>=smallest;px--){
+        ctx.font=`${weight} ${px}px ${family}`;
+        const fitting=candidates.filter(parts=>parts.every(part=>ctx.measureText(part).width<=390));
+        if(fitting.length){fitting.sort((a,b)=>Math.max(...a.map(x=>ctx.measureText(x).width))-Math.max(...b.map(x=>ctx.measureText(x).width)));return {parts:fitting[0],px}}
+      }
+      for(let px=smallest;px>=14;px--){ctx.font=`${weight} ${px}px ${family}`;if(ctx.measureText(text).width<=390)return {parts:[text],px}}
+      return {parts:[text],px:14};
+    }
+    function draw(){
+      ctx.clearRect(0,0,768,256);
+      if(artReady)ctx.drawImage(image,0,0,768,256);else{ctx.fillStyle="#e8dec8";ctx.fillRect(0,0,768,256);ctx.strokeStyle="#4b3325";ctx.lineWidth=10;ctx.strokeRect(6,6,756,244)}
+      ctx.fillStyle="rgba(248,239,218,.9)";ctx.fillRect(170,36,428,200);
+      ctx.strokeStyle="rgba(83,56,38,.52)";ctx.lineWidth=2;ctx.strokeRect(172,38,424,196);
+      ctx.fillStyle="#231b16";ctx.textAlign="center";ctx.textBaseline="middle";
+      const family=fontReady?'"PlacardGrenze"':'"Grenze",Georgia,serif';
+      const title=linesFor(b.name,900,70,56,28,titleParts[b.id]);
+      ctx.font=`900 ${title.px}px ${family}`;
+      layout.titleWidth=Math.max(...title.parts.map(part=>ctx.measureText(part).width));
+      const titleYs=title.parts.length===1?[100]:[76,128];
+      title.parts.forEach((part,i)=>ctx.fillText(part,384,titleYs[i],390));
+      ctx.fillStyle="#8c3d2e";ctx.fillRect(343,158,82,3);
+      ctx.fillStyle="#322820";
+      const subtitle=linesFor(b.sign||"",700,30,25,16);ctx.font=`700 ${subtitle.px}px ${family}`;
+      layout.subtitleWidth=Math.max(...subtitle.parts.map(part=>ctx.measureText(part).width));
+      const subtitleYs=subtitle.parts.length===1?[198]:[184,219];
+      subtitle.parts.forEach((part,i)=>ctx.fillText(part,384,subtitleYs[i],390));
+      texture.needsUpdate=true;
+    }
+    draw();image.onload=()=>{artReady=layout.artReady=true;draw()};image.src=`./assets/building-placards/${b.id}.webp`;
+    placardFontReady.then(ready=>{fontReady=layout.fontReady=ready;draw()});
+    return sign;
+  }
   function makeWirtschaftswunderSite(site){
     if(!site)return null;
     const centerX=X(site.x),centerZ=Z(site.y),mouth=site.radius*S,gravel=mat(0x494846,.98),yellow=mat(0xd4a72c,.82),black=mat(0x171817,.68),red=mat(0xa6382f,.8),white=mat(0xe2ddd1,.88);
@@ -304,7 +348,7 @@ function showRendererFailure(error){
       box(2.5,1.5,1.8,M.metal,2.4,.75,-2.35,transformerFallback);box(.62,.82,.5,mat(0xd1b73f),-6.4,.95,d/2+.12,signFallback);
       for(let x=-w/2+.55;x<w/2-.45;x+=1.15){box(.82,.24,.1,x%2<1?mat(0x762f29):M.cross,x,.72,d/2+.12,g);box(.1,1.25,.1,M.metal,x-.42,.62,d/2+.08,g)}
       const red=mat(0x762f29),slashA=box(5.8,.28,.14,red,3.2,1.45,2.23,g),slashB=box(5.8,.28,.14,red,3.2,1.45,2.24,g);slashA.rotation.z=.42;slashB.rotation.z=-.42;
-      const l=label("AKW · GESCHLOSSEN","STILLGELEGT · KEIN ZUTRITT","#762f29","#f4eee2");l.position.set(0,3.35,d/2+.18);g.add(l);registerMaterials(g,slot);
+      const l=buildingPlacard(b,w);l.position.set(0,3.35,d/2+.18);g.add(l);registerMaterials(g,slot);
       installPlantModel(slot,powerModels.coolingTower,{x:2.8,y:4.8,z:2.8},[{x:-5.1,y:0,z:-1.35},{x:-2.05,y:0,z:-.55}],false,coolingFallback);
       installPlantModel(slot,powerModels.nuclearTransformer,{x:3.2,y:2.55,z:2.4},[{x:2.4,y:0,z:-2.35}],true,transformerFallback);
       installPlantModel(slot,powerModels.nuclearSign,{x:.62,y:1.7,z:.5},[{x:-6.4,y:0,z:d/2+.12}],true,signFallback);
@@ -317,7 +361,7 @@ function showRendererFailure(error){
       box(1.65,2.05,.09,M.dark,3.1,1.025,1.81,g);box(2.15,.05,1.1,M.walk,3.1,.035,2.25,g);
       for(let j=0;j<7;j++){const q=box(.25,.2,.25,M.dark,0,0,0,g);coalBelt.push({mesh:q,index:j,from:new T.Vector3(.55,1.2,1.42),to:new T.Vector3(4.65,2.65,1.42)})}
       const gateL=box(2.35,.16,.1,mat(0x31553a),-w/2+.45,.78,d/2+.13,g),gateR=box(2.35,.16,.1,mat(0x31553a),w/2-.45,.78,d/2+.13,g);gateL.rotation.y=.82;gateR.rotation.y=-.82;
-      const l=label("KOHLEKRAFTWERK · OFFEN","IN BETRIEB · 24/7 · RAUCHFANG AKTIV","#31553a","#f4eee2");l.scale.set(3.45,.68,1);l.position.set(-.3,4.3,1.9);g.add(l);registerMaterials(g,slot);
+      const l=buildingPlacard(b,w);l.position.set(-.3,4.3,1.9);g.add(l);registerMaterials(g,slot);
       installPlantModel(slot,powerModels.coalBuilding,{x:3.2,y:3.3,z:3.1},[{x:-5.95,y:0,z:-.75}]);
       installPlantModel(slot,powerModels.coalStack,{x:1.1,y:5.15,z:1.1},[{x:stackX,y:0,z:stackZ}],false,stackFallback);
       for(let j=0;j<10;j++){const m=new T.MeshBasicMaterial({color:0x1d1c1a,transparent:true,depthWrite:false}),q=new T.Mesh(new T.SphereGeometry(.38,10,7),m);g.add(q);coalSmoke.push({mesh:q,x:stackX,y:4.95,z:stackZ,index:j})}
@@ -330,7 +374,7 @@ function showRendererFailure(error){
     const dx=(b.doorX-(b.x+b.w/2))*S;box(Math.min(1.3,w*.18),1.55,.1,M.dark,dx,.78,d/2+.06,fallback);box(Math.min(2,w*.32),.1,.62,mat(0xaaa69b),dx,1.72,d/2+.28,fallback);
     const cn=Math.max(2,Math.min(7,Math.floor(w/1.25))),rn=Math.max(2,Math.min(5,Math.floor(h/1.05)));
     for(let r=0;r<rn;r++)for(let c=0;c<cn;c++)box(.48,.31,.04,M.win,-w*.41+c*(w*.82/Math.max(1,cn-1)),.9+r*Math.max(.64,(h-1.6)/Math.max(1,rn-1)),d/2+.025,fallback);
-    const l=label(b.name,b.sign);l.position.set(0,Math.max(1.8,h*.58),d/2+.11);g.add(l);g.position.set(X(b.x+b.w/2),0,Z(b.y+b.h/2));world.add(g);
+    const l=buildingPlacard(b,w);l.position.set(0,Math.max(1.8,h*.58),d/2+.11);g.add(l);g.position.set(X(b.x+b.w/2),0,Z(b.y+b.h/2));world.add(g);
     const slot={building:b,group:g,fallback,label:l,model:null,materials:new Set(),opacity:1};buildingSlots.push(slot);registerMaterials(g,slot);
     const url=buildingModels[b.id]||cityModelUrl("municipal-office");installBuildingModel(slot,b.id==="bundestag"?url+"?v=20260926-city1":url,w,h,d);
   }
@@ -628,7 +672,7 @@ function showRendererFailure(error){
   function isWorldPointVisible(x,y,padding=0,kind="officer"){const height=kind==="helicopter"?6.8:kind==="car"?.7:1;spawnProbe.set(X(x),height,Z(y)).project(camera);const padX=padding/Math.max(1,innerWidth)*2,padY=padding/Math.max(1,innerHeight)*2;return spawnProbe.z>=-1&&spawnProbe.z<=1&&spawnProbe.x>=-1-padX&&spawnProbe.x<=1+padX&&spawnProbe.y>=-1-padY&&spawnProbe.y<=1+padY}
   function inspectAssets(){
     const bounds=model=>{if(!model)return null;const b=new T.Box3().setFromObject(model),s=b.getSize(new T.Vector3());return{width:s.x,height:s.y,depth:s.z,ground:b.min.y}};
-    return{buildings:buildingSlots.filter(s=>!s.building.kind).map(s=>({id:s.building.id,loaded:!!s.model,fallback:s.fallback.visible,bounds:bounds(s.model),glass:[...s.materials].filter(m=>/glass/i.test(m.name)).map(m=>({name:m.name,opacity:m.opacity,baseOpacity:m.userData.baseOpacity}))})),city:cityAssetSlots.map(s=>({file:s.file,loaded:!!s.model,fallback:s.fallback.visible,bounds:bounds(s.model)})),monument:kiesingerMonument?{bounds:bounds(kiesingerMonument),scale:kiesingerMonument.scale.y,loaded:!!kiesingerMonument.getObjectByName("KiesingerSculpture")}:null,banners:landmarkBanners.map(({kind,mesh})=>({kind,bounds:bounds(mesh)})),vehicles:[...trafficCarMeshes.values(),...policeVehicleMeshes.values()].map(s=>({id:s.state.id,kind:s.kind,loaded:!!s.model,fallback:s.fallback.visible,bounds:bounds(s.model),wheels:s.wheels.map(w=>({name:w.node.name,angle:w.node.rotation.x,radius:w.radius})),steering:s.steering.map(o=>o.rotation.y),brakes:s.brakes.map(m=>m.emissiveIntensity),beacons:s.beacons.map(b=>b.material.emissiveIntensity)})),sources:[...localModels.keys()],render:{...renderer.info.render},memory:{...renderer.info.memory}};
+    return{placards:placardLayouts.map(item=>({...item})),buildings:buildingSlots.filter(s=>!s.building.kind).map(s=>({id:s.building.id,loaded:!!s.model,fallback:s.fallback.visible,bounds:bounds(s.model),glass:[...s.materials].filter(m=>/glass/i.test(m.name)).map(m=>({name:m.name,opacity:m.opacity,baseOpacity:m.userData.baseOpacity}))})),city:cityAssetSlots.map(s=>({file:s.file,loaded:!!s.model,fallback:s.fallback.visible,bounds:bounds(s.model)})),monument:kiesingerMonument?{bounds:bounds(kiesingerMonument),scale:kiesingerMonument.scale.y,loaded:!!kiesingerMonument.getObjectByName("KiesingerSculpture")}:null,banners:landmarkBanners.map(({kind,mesh})=>({kind,bounds:bounds(mesh)})),vehicles:[...trafficCarMeshes.values(),...policeVehicleMeshes.values()].map(s=>({id:s.state.id,kind:s.kind,loaded:!!s.model,fallback:s.fallback.visible,bounds:bounds(s.model),wheels:s.wheels.map(w=>({name:w.node.name,angle:w.node.rotation.x,radius:w.radius})),steering:s.steering.map(o=>o.rotation.y),brakes:s.brakes.map(m=>m.emissiveIntensity),beacons:s.beacons.map(b=>b.material.emissiveIntensity)})),sources:[...localModels.keys()],render:{...renderer.info.render},memory:{...renderer.info.memory}};
   }
   window.Germany3D={ready:true,isWorldPointVisible,sync(){
     syncChar(playerMesh,bridge.player,0);
