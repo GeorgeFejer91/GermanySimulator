@@ -165,6 +165,15 @@ const props=[
  {x:3395,y:540,asset:"bollard",w:18,h:44},{x:3395,y:1500,asset:"bollard",w:18,h:44},
  {x:3575,y:2680,asset:"bollard",w:18,h:44},{x:8810,y:3770,asset:"bollard",w:18,h:44},
  {x:3500,y:360,asset:"bicyclerack",w:85,h:45},{x:3500,y:1330,asset:"bicyclerack",w:85,h:45}
+ ,{x:205,y:1530,asset:"liege-blau",w:115,h:72,turn:.5},{x:475,y:1545,asset:"liege-rot",w:115,h:72,turn:-.5}
+ ,{x:3680,y:3750,asset:"liege-blau",w:115,h:72,turn:.5},{x:4000,y:3380,asset:"liege-rot",w:115,h:72,turn:-.5}
+ ,{x:420,y:2735,asset:"liege-blau",w:115,h:72,turn:.5},{x:780,y:2735,asset:"liege-rot",w:115,h:72,turn:-.5}
+ ,{x:180,y:1360,asset:"zwerg-giesskanne",w:47,h:65},{x:560,y:1680,asset:"zwerg-schild",w:47,h:65}
+ ,{x:3640,y:3410,asset:"zwerg-schild",w:47,h:65},{x:4010,y:3510,asset:"zwerg-giesskanne",w:47,h:65}
+ ,{x:7770,y:3590,asset:"zwerg-giesskanne",w:47,h:65},{x:8780,y:3530,asset:"zwerg-schild",w:47,h:65}
+ ,{x:425,y:725,asset:"bierkasten",w:42,h:35},{x:95,y:2760,asset:"bierkasten",w:42,h:35}
+ ,{x:520,y:1480,asset:"schubkarre",w:85,h:42},{x:265,y:1700,asset:"picknicktisch",w:115,h:55}
+ ,{x:8560,y:2800,asset:"wertstoffcontainer",w:112,h:64},{x:910,y:2820,asset:"wertstoffcontainer",w:112,h:64}
 ].map(offsetWorldPoint);
 const stableSpriteRoot="./assets/sprite-archive/pre-rig-20260921/assets/";
 const assetSources={merkelSprite:stableSpriteRoot+"merkel-sprite.png?v=20260922-stable1",bayernSprite:stableSpriteRoot+"bayern-walker-sprite.png?v=20260922-stable1",aliceSprite:stableSpriteRoot+"alice-weidel-sprite.png?v=20260922-stable1",borderPourerSprite:stableSpriteRoot+"border-pourer-sprite.png?v=20260922-stable1",towelManSprite:stableSpriteRoot+"crowd-towel-man.png?v=20260922-stable1",towelWomanSprite:stableSpriteRoot+"crowd-towel-woman.png?v=20260922-stable1"};
@@ -574,6 +583,8 @@ const buildings=[
 {id:"laermamt",name:"AMT FÜR ZIMMERLAUTSTÄRKE",x:4750,y:2320,w:850,h:430,hgt:165,doorX:5175,doorY:2780,sign:"FLÜSTERN NUR NACH ANTRAG"},
 {id:"faxlager",name:"BEZIRKSFAXLAGER",x:6250,y:2320,w:850,h:430,hgt:175,doorX:6675,doorY:2780,sign:"PAPIERWEG BESCHLEUNIGT"},
 {id:"reinigung",name:"STADTREINIGUNG",x:7800,y:2320,w:920,h:430,hgt:170,doorX:8260,doorY:2780,sign:"TRENNUNG VOR REINIGUNG"},
+{id:"sandalenladen",name:"SANDALENHAUS",x:150,y:2380,w:320,h:220,hgt:73,doorX:310,doorY:2630,sign:"SANDALEN · AUCH MIT SOCKEN"},
+{id:"sockenladen",name:"SOCKENFACHGESCHÄFT",x:510,y:2380,w:320,h:220,hgt:73,doorX:670,doorY:2630,sign:"SOCKEN · PASSEND ZUR SANDALE"},
 {id:"akw",kind:"nuclear",name:"AKW · GESCHLOSSEN",x:4750,y:3370,w:850,h:420,hgt:155,doorX:5175,doorY:3820,sign:"STILLGELEGT · ZUGANG VERSIEGELT"},
 {id:"kohlewerk",kind:"coal",name:"KOHLEKRAFTWERK · IN BETRIEB",x:6250,y:3370,w:850,h:420,hgt:170,doorX:6675,doorY:3820,sign:"OFFEN · 24/7 · RAUCHFANG AKTIV"},
 {id:"bundestag",name:"DEUTSCHER BUNDESTAG",x:7800,y:3370,w:920,h:420,hgt:205,doorX:8260,doorY:3820,sign:"REICHSTAGSGEBÄUDE · PLENARBEREICH"}

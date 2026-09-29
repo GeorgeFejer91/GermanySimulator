@@ -2,6 +2,35 @@
 
 This inventory describes the canonical root game in `game.js`, with visual construction in `world3d.js`. Counts are placed instances, not unique model files. The replacement column records the city-art integration map; it is not a claim that browser or performance checks have passed. Gameplay coordinates, building entrances, collision footprints, pickups and interactions remain owned by the existing simulation.
 
+## Current 3D file inventory (2026-09-29)
+
+The committed asset set contains **49 GLBs in 11 groups, 10,789,068 bytes**.
+The root renderer references **40 distinct GLBs, 9,272,204 bytes** in total;
+its loader caches each URL across repeated placements. These are file totals,
+not simultaneous GPU memory. `.blend` files, previews, and texture files are
+production or package sources and are not included in these GLB totals.
+
+| Group | GLBs | Root use | Status |
+| --- | ---: | ---: | --- |
+| `city-kit/` | 16 | 16 | Ordinary buildings, trees, machines, sheds and civic props |
+| `german-props/` | 10 | 10 | New retail, allotment, towel-reservation and recycling details |
+| `power-plants/` | 5 | 5 | Two landmark sites |
+| `vehicles/` | 3 | 3 | Civilian and police fleet |
+| `kenney-trains/` | 3 | 2 | Selected locomotive/end cars; one retained spare |
+| `open-l-gauge-nwagen/` | 1 | 1 | Coach subject to its adjacent noncommercial license |
+| `police-response/` | 2 | 1 | Helicopter; earlier car retained beside it |
+| `bundestag/` | 1 | 1 | Southeast Reichstag landmark |
+| `kiesinger/` | 1 | 1 | Monument figure |
+| `kenney-commercial/` | 6 | 0 | Retained CC0 predecessors |
+| `traffic/` | 1 | 0 | Retained legacy model |
+
+The new set contributes **10 unique models and 18 placed small props**: six
+towel-reserved loungers, six additional gnomes, two bottle crates, two recycling
+clusters, a wheelbarrow, and a picnic table. Two adjacent storefronts bring the
+canonical world to **29 buildings and 64 `props` entries**. The original nine
+gnomes and all mission objects remain. `german-props/PROVENANCE.md` records the
+asset-source comparison and rebuild method; its manifest records every new hash.
+
 The original Blender kit lives in [`city-kit/`](./city-kit/). The Reichstag landmark has its own source and provenance under [`bundestag/`](./bundestag/). Editable Blender files and authoring scripts are production sources; the browser loads only the local GLBs. These are original architectural interpretations, not scans or exact surveyed replicas.
 
 ## Easiest useful assets
@@ -24,7 +53,7 @@ Repeated discrete objects give the best return: one authored bottle, tree or gno
 
 ## Building map
 
-The canonical game contains **27 buildings: 24 ordinary institutions and shops, one Reichstag landmark, and two power-plant sites**. Before this replacement, seven non-plant buildings loaded GLBs: six Kenney commercial models plus the original Bundestag. The other eighteen used procedural boxes.
+Before the 2026-09-29 retail addition, the canonical game contained **27 buildings: 24 ordinary institutions and shops, one Reichstag landmark, and two power-plant sites**. Before the original city-kit replacement, seven non-plant buildings loaded GLBs: six Kenney commercial models plus the original Bundestag. The other eighteen used procedural boxes.
 
 | Model | Instances | Building IDs |
 | --- | ---: | --- |

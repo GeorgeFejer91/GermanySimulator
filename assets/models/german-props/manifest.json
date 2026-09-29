@@ -1,0 +1,109 @@
+{
+  "author": "Original Blender geometry; no external mesh or texture",
+  "source": "german-props.blend",
+  "script": "../../../tools/build-german-props.py",
+  "axis": "Y-up / +Z-front in GLB; ground pivot",
+  "models": {
+    "reserved-lounger-blue": {
+      "file": "reserved-lounger-blue.glb",
+      "dimensions_xyz": [
+        1.19,
+        1.1155,
+        2.5112
+      ],
+      "bytes": 23396,
+      "sha256": "b73225e6607b3c42b0a18c2a0a154de58611084b3e4aa14e1b0ec6dd4f3630ca"
+    },
+    "reserved-lounger-red": {
+      "file": "reserved-lounger-red.glb",
+      "dimensions_xyz": [
+        1.19,
+        1.1155,
+        2.5112
+      ],
+      "bytes": 23428,
+      "sha256": "78af30b59abe59d43a59b91243c3dbf958ffe1718c5407f3c1e174d3525c429a"
+    },
+    "garden-gnome-watering": {
+      "file": "garden-gnome-watering.glb",
+      "dimensions_xyz": [
+        1.0346,
+        1.26,
+        0.5632
+      ],
+      "bytes": 102980,
+      "sha256": "584b70cab8321f2627615e6727aff31ad2305f32e644b0dd1be67f450a703a80"
+    },
+    "garden-gnome-placard": {
+      "file": "garden-gnome-placard.glb",
+      "dimensions_xyz": [
+        0.9497,
+        1.26,
+        0.505
+      ],
+      "bytes": 101380,
+      "sha256": "3f778f902664582ec88ef0739eee0c121f11c1d2837bd839f0f7accc22ec1ad5"
+    },
+    "sandal-shop": {
+      "file": "sandal-shop.glb",
+      "dimensions_xyz": [
+        8.1,
+        3.53,
+        5.815
+      ],
+      "bytes": 108772,
+      "sha256": "f4bf6ff250898d90bde7a019d568a1d494e7ef47862396f63117f1d9c64e8dd2"
+    },
+    "sock-shop": {
+      "file": "sock-shop.glb",
+      "dimensions_xyz": [
+        8.1,
+        3.53,
+        5.815
+      ],
+      "bytes": 39264,
+      "sha256": "142573cc220dae776047e4d88c1fcd201e499812519fcba6c9d92fa2136eda9d"
+    },
+    "beer-crate": {
+      "file": "beer-crate.glb",
+      "dimensions_xyz": [
+        0.75,
+        0.58,
+        0.54
+      ],
+      "bytes": 24516,
+      "sha256": "8970c302dbf1454c7eb9bfccdef0e722a3b55ce439617a808f8094e886a7704c"
+    },
+    "allotment-wheelbarrow": {
+      "file": "allotment-wheelbarrow.glb",
+      "dimensions_xyz": [
+        1.5565,
+        0.75,
+        0.65
+      ],
+      "bytes": 18324,
+      "sha256": "521ec842a3b8f67bf567d1d4b546eac1886a1fec461ce3a5d080816f54f255ce"
+    },
+    "recycling-containers": {
+      "file": "recycling-containers.glb",
+      "dimensions_xyz": [
+        1.87,
+        1.21,
+        0.68
+      ],
+      "bytes": 12112,
+      "sha256": "f6a28e93c473c82660e0b3acab2c8b0f1912d71f01c968a03a84d9fcf11bf4c7"
+    },
+    "allotment-picnic-table": {
+      "file": "allotment-picnic-table.glb",
+      "dimensions_xyz": [
+        2.3,
+        0.8224,
+        1.98
+      ],
+      "bytes": 15784,
+      "sha256": "c09989e2b2621e995e45e9f845e9da026e03722409ce29818328db4fa50efccf"
+    }
+  },
+  "total_glb_bytes": 469956
+}

@@ -124,13 +124,15 @@ function showRendererFailure(error){
   function pedestrianLight(light){const g=new T.Group(),post=new T.Mesh(new T.CylinderGeometry(.035,.045,1.45,8),M.metal),red=new T.MeshBasicMaterial({color:0xdf332c}),green=new T.MeshBasicMaterial({color:0x284b31});post.position.y=.725;g.add(post);box(.42,.82,.22,M.dark,0,1.62,0,g);const redLamp=new T.Mesh(new T.SphereGeometry(.115,10,7),red),greenLamp=new T.Mesh(new T.SphereGeometry(.115,10,7),green);redLamp.position.set(0,1.82,.13);greenLamp.position.set(0,1.44,.13);g.add(redLamp,greenLamp);if(light.sign){box(.46,.46,.06,M.cross,0,2.26,0,g);box(.37,.37,.07,M.blue,0,2.26,.04,g);const tri=new T.Mesh(new T.ConeGeometry(.145,.29,3),M.cross);tri.rotation.z=Math.PI;tri.position.set(0,2.26,.09);g.add(tri)}g.position.set(X(light.x),0,Z(light.y));g.rotation.y=(light.turn||0)*Math.PI/2;world.add(g);trafficLightSlots.push({light,red,green})}
   (bridge.trafficLights||[]).forEach(pedestrianLight);
   const cityModelRoot="./assets/models/city-kit/",cityModelUrl=file=>cityModelRoot+file+".glb?v=20260926-city1";
+  const germanPropUrl=file=>"./assets/models/german-props/"+file+".glb?v=20260929-props1";
   const buildingModels={
     hausverwaltung:cityModelUrl("berlin-block"),mietpruefung:cityModelUrl("berlin-block"),
     rathaus:cityModelUrl("berlin-block"),stadtbild:cityModelUrl("berlin-block"),
     post:cityModelUrl("brick-utility"),tuev:cityModelUrl("brick-utility"),
     baumarkt:cityModelUrl("brick-utility"),faxlager:cityModelUrl("brick-utility"),
     reinigung:cityModelUrl("brick-utility"),spaeti:cityModelUrl("neighborhood-shop"),imbiss:cityModelUrl("neighborhood-shop"),
-    bundestag:"./assets/models/bundestag/bundestag.glb"
+    bundestag:"./assets/models/bundestag/bundestag.glb",
+    sandalenladen:germanPropUrl("sandal-shop"),sockenladen:germanPropUrl("sock-shop")
   };
   const powerModels={
     coalBuilding:"./assets/models/power-plants/coal-building.glb",
@@ -147,7 +149,7 @@ function showRendererFailure(error){
   }
   async function installCityModel(group,fallback,file,fit){
     const slot={file,group,fallback,model:null};cityAssetSlots.push(slot);if(!modelLoader)return;
-    try{const gltf=await loadLocalModel(cityModelUrl(file));if(!gltf)return;const model=gltf.scene.clone(true);fitResponseModel(model,fit);model.name=file;group.add(model);slot.model=model;fallback.visible=false}
+    try{const gltf=await loadLocalModel(file.startsWith("./")?file:cityModelUrl(file));if(!gltf)return;const model=gltf.scene.clone(true);fitResponseModel(model,fit);model.name=file;group.add(model);slot.model=model;fallback.visible=false}
     catch(error){console.warn("Keeping procedural city asset "+file,error)}
   }
   function registerMaterials(root,slot){
@@ -544,7 +546,11 @@ function showRendererFailure(error){
   const billboardLoader=new T.TextureLoader(),desktopBillboards=matchMedia("(min-width: 700px)");
   function faxFallbackTexture(){const c=document.createElement("canvas");c.width=768;c.height=250;const x=c.getContext("2d");x.fillStyle="#ded9cc";x.fillRect(0,0,768,250);x.strokeStyle="#222";x.lineWidth=12;x.strokeRect(6,6,756,238);x.fillStyle="#222";x.textAlign="center";x.font="900 50px Arial";x.fillText("FAX 3000 PRO",384,70);x.font="900 32px Arial";x.fillText("2,75× SCHNELLER",384,124);x.font="700 18px Arial";x.fillText("DIE ZUKUNFT DER DIGITALISIERUNG IST PAPIER",384,195);const tx=new T.CanvasTexture(c);tx.colorSpace=T.SRGBColorSpace;return tx}
   function propLabel(g,text,y=1.25,w=1.7){if(!text)return;const l=label(text,"");l.scale.set(w,.32,1);l.position.set(0,y,.08);g.add(l)}
-  const propModels={gartenzwerg:["garden-gnome",.65,1.25,.65],pfandautomat:["pfand-machine",1.05,1.65,.74],kaffee:["coffee-machine",.95,1.5,.72],faxkiosk:["fax-kiosk",1.08,1.75,.75],faxgeraet:["fax-kiosk",1.08,1.5,.75],bench:["bench",1.7,1,.75],litterbin:["litter-bin",.52,.9,.52],bollard:["bollard",.22,.86,.22],bicyclerack:["bicycle-rack",1.7,.8,.65]};
+  const propModels={gartenzwerg:["garden-gnome",.65,1.25,.65],pfandautomat:["pfand-machine",1.05,1.65,.74],kaffee:["coffee-machine",.95,1.5,.72],faxkiosk:["fax-kiosk",1.08,1.75,.75],faxgeraet:["fax-kiosk",1.08,1.5,.75],bench:["bench",1.7,1,.75],litterbin:["litter-bin",.52,.9,.52],bollard:["bollard",.22,.86,.22],bicyclerack:["bicycle-rack",1.7,.8,.65],
+    "liege-blau":[germanPropUrl("reserved-lounger-blue"),1.19,1.12,2.55],"liege-rot":[germanPropUrl("reserved-lounger-red"),1.19,1.12,2.55],
+    "zwerg-giesskanne":[germanPropUrl("garden-gnome-watering"),1.04,1.26,.57],"zwerg-schild":[germanPropUrl("garden-gnome-placard"),.95,1.26,.51],
+    bierkasten:[germanPropUrl("beer-crate"),.75,.58,.54],schubkarre:[germanPropUrl("allotment-wheelbarrow"),1.56,.75,.65],
+    wertstoffcontainer:[germanPropUrl("recycling-containers"),1.87,1.21,.68],picknicktisch:[germanPropUrl("allotment-picnic-table"),2.3,.83,1.98]};
   function prop(p){
     const g=new T.Group();
     if(p.asset==="faxbillboard"){
@@ -558,10 +564,10 @@ function showRendererFailure(error){
     }else if(["rasen","muell","db","baustelle","polizeigarten"].includes(p.asset)){
       box(.08,1.25,.08,M.metal,0,.625,0,g);box(1.35,.72,.09,p.asset==="baustelle"?mat(0xa9823e):mat(0xd8d1c1),0,1.35,0,g);propLabel(g,p.label||p.asset.toUpperCase(),1.35,1.18);
     }else{
-      const h=Math.max(.8,(p.h||54)*S),w=Math.max(.52,(p.w||48)*S);box(w,h,Math.max(.42,w*.55),p.asset.includes("fax")?mat(0xb7b2a7):mat(0x666760),0,h/2,0,g);if(!["bench","litterbin","bollard","bicyclerack"].includes(p.asset))propLabel(g,p.label||p.asset.toUpperCase(),h*.62,Math.max(.9,w*.92));
+      const h=Math.max(.8,(p.h||54)*S),w=Math.max(.52,(p.w||48)*S);box(w,h,Math.max(.42,w*.55),p.asset.includes("fax")?mat(0xb7b2a7):mat(0x666760),0,h/2,0,g);if(!["bench","litterbin","bollard","bicyclerack","liege-blau","liege-rot","zwerg-giesskanne","zwerg-schild","bierkasten","schubkarre","wertstoffcontainer","picknicktisch"].includes(p.asset))propLabel(g,p.label||p.asset.toUpperCase(),h*.62,Math.max(.9,w*.92));
     }
     const asset=propModels[p.asset];if(asset){const fallback=new T.Group();for(const child of [...g.children])if(!child.isSprite)fallback.add(child);g.add(fallback);installCityModel(g,fallback,asset[0],{x:asset[1],y:asset[2],z:asset[3]});for(const child of g.children)if(child.isSprite)child.position.y=asset[2]+.22}
-    g.position.set(X(p.x),0,Z(p.y));world.add(g);
+    g.position.set(X(p.x),0,Z(p.y));g.rotation.y=(p.turn||0)*Math.PI/2;world.add(g);
   }
   bridge.props.forEach(prop);
   function normObject(o){const g=new T.Group(),material=mat(0x6c3d37);if(o.type==="hedge")box(1.35,.72,.55,material,0,.36,0,g);else if(o.type==="chairs"){for(const x of [-.32,.32]){box(.48,.08,.48,material,x,.48,0,g);box(.48,.68,.08,material,x,.78,-.2,g);box(.06,.48,.06,material,x-.16,.24,0,g);box(.06,.48,.06,material,x+.16,.24,0,g)}}else{box(.58,.8,.58,material,0,.4,0,g);box(.66,.09,.66,M.dark,0,.85,0,g)}propLabel(g,o.label,1.18,1.65);g.position.set(X(o.x),0,Z(o.y));g.rotation.y=.08;world.add(g);return{state:o,group:g,material}}
