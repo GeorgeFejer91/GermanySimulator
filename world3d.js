@@ -97,7 +97,7 @@ function showRendererFailure(error){
     const canvas=document.createElement("canvas"),mobile=innerWidth<700;canvas.width=mobile?512:768;canvas.height=mobile?171:256;
     const ctx=canvas.getContext("2d");ctx.setTransform(canvas.width/768,0,0,canvas.height/256,0,0);
     const texture=new T.CanvasTexture(canvas);texture.colorSpace=T.SRGBColorSpace;
-    const sign=new T.Sprite(new T.SpriteMaterial({map:texture}));sign.scale.set(Math.min(6.8,w*.84),Math.min(6.8,w*.84)/3,1);
+    const sign=new T.Sprite(new T.SpriteMaterial({map:texture})),width=mobile?Math.min(4.4,w*.54):Math.min(6.8,w*.84);sign.scale.set(width,width/3,1);
     const image=new Image(),layout={id:b.id,textureWidth:canvas.width,artReady:false,fontReady:false,titleWidth:0,subtitleWidth:0};placardLayouts.push(layout);let artReady=false,fontReady=false;
     const titleParts={auslaender:["AUSLÄNDER","BEHÖRDE"],formulararchiv:["BUNDES","FORMULARARCHIV"],terminamt:["TERMIN","VERGABESTELLE"],querungsamt:["STRASSEN","QUERUNGSAMT"],sockenladen:["SOCKENFACH","GESCHÄFT"],laermamt:["AMT FÜR ZIMMER","LAUTSTÄRKE"]};
     function linesFor(text,weight,oneSize,twoSize,smallest,forced){
