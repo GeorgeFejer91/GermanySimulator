@@ -1,5 +1,9 @@
 # Durable decisions
 
+## 2026-09-29 — Preview-only 3D towel pedestrian pair
+
+The two accepted towel-reservation sprite identities now have separate minimalist 3D walk studies under `assets/models/towel-pedestrians/`. The models retain the male straw-hat/blue-polo and female patterned-cap/red-polo identities, with shorts, calf socks, strapped sandals, and held colored towel rolls. One uniformly scaled, contact-constrained neutral guide supplies each 32-pose walk; character geometry and the towel arm remain distinct. `towel-3d-preview.html` provides live orbit, view, pause, and speed controls plus the accepted sprite references, and a short animated WebP gives a portable look. This is a candidate for visual review, not a game replacement: the root renderer still uses the accepted sprite atlases. The builder, source/asset hashes, CMU condition, and checks are in the model folder's `PROVENANCE.md`.
+
 ## 2026-09-27 — Shared neutral motion, character-owned appearance
 
 The user rejected the painted pilot's alien-shaped head and requires the 3D
