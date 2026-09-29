@@ -94,7 +94,7 @@ const stone=material(),glass=material(.42,true,false),sources=[{material:[stone,
 const vector=()=>({set(x,y,z){Object.assign(this,{x,y,z})}});
 const source={traverse(fn){sources.forEach(fn)},clone(deep){assert.equal(deep,true);clones++;const nodes=sources.map(node=>({material:Array.isArray(node.material)?[...node.material]:node.material}));return {nodes,scale:vector(),position:vector(),traverse(fn){nodes.forEach(fn)}}}};
 const warnings=[],buildingSlots=[],context={
-  S:.02,bridge:{player:{x:9999,y:9999}},buildingSlots,localModels:new Map(),console:{warn:(...args)=>warnings.push(args)},
+  S:.02,X:x=>x*.02,Z:y=>y*.02,camera:{position:{x:9999*.02,z:9999*.02+14}},bridge:{player:{x:9999,y:9999}},buildingSlots,localModels:new Map(),console:{warn:(...args)=>warnings.push(args)},
   modelLoader:{loadAsync(url){requests++;return url==="missing.glb"?Promise.reject(new Error("missing")):Promise.resolve({scene:source})}},
   T:{Vector3:class{},Box3:class{min={y:0};setFromObject(){return this}getSize(){return{x:12,y:6,z:8}}getCenter(){return{x:0,y:3,z:0}}}}
 };
@@ -108,9 +108,11 @@ const [aStone,aGlass]=a.model.nodes[0].material,[bStone,bGlass]=b.model.nodes[0]
 assert.equal(a.materials.size,2);assert.equal(a.model.nodes[1].material,aStone,"one instance shares its repeated material");
 assert.notEqual(aStone,bStone);assert.notEqual(aGlass,bGlass);assert.notEqual(aGlass,glass);assert.equal(glass.userData.baseOpacity,undefined,"source material must remain untouched");
 context.updateBuildingOcclusion();assert.equal(aGlass.opacity,.42);assert.equal(aGlass.transparent,true);assert.equal(aGlass.depthWrite,false);
-Object.assign(context.bridge.player,{x:50,y:50});for(let i=0;i<30;i++)context.updateBuildingOcclusion();
-assert.ok(a.opacity<.3);assert.equal(aGlass.opacity,a.opacity*.42);assert.equal(aStone.opacity,a.opacity);assert.equal(aStone.transparent,true);assert.equal(aStone.depthWrite,false);assert.equal(bGlass.opacity,.42,"fading one building must not fade its sibling");
-Object.assign(context.bridge.player,{x:9999,y:9999});for(let i=0;i<180;i++)context.updateBuildingOcclusion();
+Object.assign(context.bridge.player,{x:50,y:50});Object.assign(context.camera.position,{x:1,z:15});context.updateBuildingOcclusion();
+assert.equal(a.opacity,.03,"a detailed facade must clear the player on the first obscured frame");assert.equal(aGlass.opacity,a.opacity*.42);assert.equal(aStone.opacity,a.opacity);assert.equal(aStone.transparent,true);assert.equal(aStone.depthWrite,false);assert.equal(bGlass.opacity,.42,"fading one building must not fade its sibling");
+const angled=slot("angled",130);angled.building.y=180;buildingSlots.push(angled);context.camera.position.x=10;context.updateBuildingOcclusion();
+assert.equal(angled.opacity,.03,"the actual angled camera sightline must clear a building beside the player");
+Object.assign(context.bridge.player,{x:9999,y:9999});Object.assign(context.camera.position,{x:9999*.02,z:9999*.02+14});for(let i=0;i<180;i++)context.updateBuildingOcclusion();
 assert.ok(Math.abs(aGlass.opacity-.42)<1e-10);assert.equal(aGlass.transparent,true);assert.equal(aGlass.depthWrite,false);assert.equal(aStone.transparent,false);assert.equal(aStone.depthWrite,true);assert.equal(glass.opacity,.42);
 const missing=slot("missing",0);await context.installBuildingModel(missing,"missing.glb",12,6,8);await context.installBuildingModel(missing,"missing.glb",12,6,8);
 assert.equal(missing.model,null);assert.equal(missing.fallback.visible,true);assert.equal(requests,2,"failed source requests must also be bounded");assert.equal(warnings.length,1);

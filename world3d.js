@@ -596,10 +596,18 @@ function showRendererFailure(error){
   bridge.getNPCs().forEach(n=>{const q=npcSprite(n)||character("npc");scene.add(q);npcMeshes.set(n,q)});
   bridge.pickups.forEach(p=>{const q=pickup(p);scene.add(q);pickupMeshes.set(p,q)});
   function updateBuildingOcclusion(){
-    const cameraReach=15/S,px=bridge.player.x,py=bridge.player.y;
+    const px=X(bridge.player.x),pz=Z(bridge.player.y),dx=camera.position.x-px,dz=camera.position.z-pz;
     for(const slot of buildingSlots){
-      const b=slot.building,between=b.y<py+cameraReach&&b.y+b.h>py,underSightline=px>b.x-35&&px<b.x+b.w+35,target=between&&underSightline?.24:1;
-      slot.opacity+=(target-slot.opacity)*.16;
+      // Detailed facades have many overlapping surfaces; each blends separately over the player.
+      const b=slot.building;
+      let near=0,far=1;
+      for(let axis=0;axis<2;axis++){
+        const origin=axis?pz:px,delta=axis?dz:dx,min=axis?Z(b.y-35):X(b.x-35),max=axis?Z(b.y+b.h+35):X(b.x+b.w+35);
+        if(Math.abs(delta)<1e-6){if(origin<min||origin>max){near=2;break}continue}
+        const a=(min-origin)/delta,c=(max-origin)/delta;near=Math.max(near,Math.min(a,c));far=Math.min(far,Math.max(a,c));
+      }
+      const target=near<far&&far>0&&near<1 ? .03 : 1;
+      slot.opacity=target<1?target:slot.opacity+(1-slot.opacity)*.16;
       const faded=slot.opacity<.985;
       for(const m of slot.materials){
         const transparent=faded||m.userData.baseTransparent;
@@ -628,7 +636,7 @@ function showRendererFailure(error){
     bridge.pickups.forEach(p=>{const q=pickupMeshes.get(p);q.visible=!p.taken;if(q.visible){q.position.set(X(p.x),.2,Z(p.y));q.rotation.y+=.012}});
     for(const slot of normObjectSlots){slot.material.color.setHex(slot.state.fixed?0x3f5b43:0x6c3d37);const target=slot.state.fixed?0:.08;slot.group.rotation.y+=(target-slot.group.rotation.y)*.18}
     for(const slot of trafficLightSlots){slot.red.color.setHex(slot.light.green?0x4b2725:0xdf332c);slot.green.color.setHex(slot.light.green?0x36c469:0x284b31)}
-    updateFire(performance.now());updateBuildingOcclusion();updatePowerPlants();
+    updateFire(performance.now());updatePowerPlants();
     const px=X(bridge.player.x),pz=Z(bridge.player.y),now=performance.now(),memorial=bridge.kiesingerMemorial;
     const plaqueDistance=memorial?Math.hypot(bridge.player.x-memorial.x,bridge.player.y-memorial.y-195):Infinity;
     const frame=memorial&&bridge.player.y>memorial.y+100?Math.max(0,Math.min(1,(370-plaqueDistance)/190))*Math.min(1,kiesingerMonument?.scale.y||1):0;
@@ -637,7 +645,7 @@ function showRendererFailure(error){
     const park=bridge.goerlitzerPark,parkDistance=park?Math.hypot(bridge.player.x-park.plaqueX,bridge.player.y-park.plaqueY):Infinity;
     const parkFrame=park&&bridge.player.y>park.y+park.h-30?Math.max(0,Math.min(1,(440-parkDistance)/250)):0;
     if(parkFrame){const narrow=Math.max(0,.95/camera.aspect-1),cx=X(park.x+park.w/2),cz=Z(park.y+park.h/2);camera.position.set(px+(cx-px)*parkFrame,11.5+(11+14*narrow)*parkFrame,pz+14+8*narrow*parkFrame);camera.lookAt(px+(cx-px)*parkFrame,1+parkFrame,pz-2.7+(cz-(pz-2.7))*parkFrame)}
-    updateWirtschaftswunder(now);renderer.render(scene,camera);
+    updateBuildingOcclusion();updateWirtschaftswunder(now);renderer.render(scene,camera);
   },inspectAssets};
   app.classList.add("three-ready");
 })().catch(showRendererFailure);
