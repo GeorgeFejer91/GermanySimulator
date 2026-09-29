@@ -184,14 +184,22 @@ button,.control-dock,.control-dock *{touch-action:none}
 @media(prefers-reduced-motion:reduce){.law-keycap{animation:none}}
 
 /* Optional English translation stays visually subordinate to the game and follows the audio broker. */
-.english-subtitle{position:fixed;z-index:120;left:0;right:0;bottom:0;min-height:38px;max-height:28vh;overflow:auto;padding:7px 112px 7px 14px;border-top:1px solid #d4a900;background:#050505;color:#ffcc00;font:700 clamp(15px,1.65vw,21px)/1.28 "Grenze",Georgia,serif;text-align:center;text-shadow:1.5px 1.5px 0 #b00018;pointer-events:none}
+.english-subtitle{position:fixed;z-index:120;left:0;right:0;bottom:0;min-height:38px;max-height:28vh;overflow:auto;overflow-wrap:break-word;padding:7px 14px;border-top:1px solid #d4a900;background:#050505;color:#ffcc00;font:700 clamp(15px,1.65vw,21px)/1.28 "Grenze",Georgia,serif;text-align:center;text-shadow:1.5px 1.5px 0 #b00018;pointer-events:none}
 .english-subtitle[hidden]{display:none}
+.english-subtitle[data-fit="scroll"]{pointer-events:auto;touch-action:pan-y;overscroll-behavior:contain}
 .subtitle-toggle{position:fixed;z-index:121;right:12px;bottom:13px;min-height:24px;padding:3px 7px;border:1px solid #d4a900;background:#080808;color:#ffcc00;font:700 10px/1.1 "Grenze",Georgia,serif;text-shadow:1px 1px 0 #b00018}
 .subtitle-toggle:focus-visible{outline:2px solid #f0eadc;outline-offset:2px}
+#app.subtitles-visible .subtitle-toggle{bottom:calc(var(--subtitle-height, 38px) + 6px)}
 @media(max-width:760px){
-  .english-subtitle{bottom:calc(114px + env(safe-area-inset-bottom));min-height:35px;max-height:30vh;padding:6px 100px 6px 9px;font-size:15px;line-height:1.24}
+  .english-subtitle{min-height:35px;max-height:30vh;padding:6px 9px calc(6px + env(safe-area-inset-bottom));font-size:15px;line-height:1.24}
   .subtitle-toggle{right:6px;bottom:calc(120px + env(safe-area-inset-bottom));min-height:23px;font-size:9px}
   #quiz-modal:not([hidden])~.subtitle-toggle{top:6px;right:6px;bottom:auto}
-  #app.subtitles-visible .dialogue{bottom:calc(184px + env(safe-area-inset-bottom));max-height:36vh}
-  #app.subtitles-visible .dialogue.memorial{bottom:calc(122px + 30vh + env(safe-area-inset-bottom));max-height:30vh}
+  #app.subtitles-visible .germanness{bottom:var(--subtitle-height, 35px);min-height:30px;padding-bottom:3px}
+  #app.subtitles-visible .control-dock{bottom:calc(30px + var(--subtitle-height, 35px));padding-bottom:5px}
+  #app.subtitles-visible .interact-hint{bottom:calc(121px + var(--subtitle-height, 35px))}
+  #app.subtitles-visible .police-bark:not(.law-quote):not(.rail-announcement){bottom:calc(190px + var(--subtitle-height, 35px))}
+  #app.subtitles-visible .dialogue{bottom:calc(121px + var(--subtitle-height, 35px));max-height:36vh}
+  #app.subtitles-visible .dialogue.memorial{bottom:calc(122px + var(--subtitle-height, 35px));max-height:30vh}
+  #app.subtitles-visible .subtitle-toggle{top:6px;bottom:auto}
 }
+#quiz-prompt,.quiz-choices button,.quiz-person b,.quiz-person strong{overflow-wrap:break-word}
