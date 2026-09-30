@@ -93,8 +93,8 @@ vm.runInNewContext(subtitles,sandbox);
 assert.equal(park.lines.length,6,"the cost information and closure instructions must remain complete");
 for(const text of park.lines)assert.ok(sandbox.window.GermanySimulatorAudioText.lines[text]?.trim(),`missing exact English subtitle for ${text}`);
 const sign=park.signLines.join("\n"),explanation=park.lines.join("\n");
-for(const fact of ["CDU/SPD","1,8","251.444","netto","775.000","2026","2027"])assert.ok(sign.includes(fact),`placard is missing ${fact}`);
-for(const qualifier of ["19/22762","19/25369","2655 F-1","1,74","brutto","192.227","59.217","Haushaltsansatz","keine belegte Jahresausgabe"])assert.ok(explanation.includes(qualifier),`documentary explanation is missing ${qualifier}`);
+for(const fact of ["ZAUN + TORE","1,8","WACHEN","251.444","NETTO","ETAT","2026/27","775.000"])assert.ok(sign.includes(fact),`placard is missing ${fact}`);
+for(const qualifier of ["CDU/SPD","19/22762","19/25369","2655 F-1","1,74","brutto","192.227","59.217","Haushaltsansatz","keine belegte Jahresausgabe"])assert.ok(explanation.includes(qualifier),`documentary explanation is missing ${qualifier}`);
 
 const parkRenderer=between(read("world3d.js"),"function makeGoerlitzerPark(site)","makeGoerlitzerPark(bridge.goerlitzerPark)");
 const printedSigns=[...parkRenderer.matchAll(/sign\(\[([^\]]+)\]/g)].map(match=>match[1]).join("\n");
