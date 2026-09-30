@@ -93,49 +93,67 @@ function showRendererFailure(error){
   const pp=bridge.policePath,ax=X(pp.x1),az=Z(pp.y1),bx=X(pp.x2),bz=Z(pp.y2),len=Math.hypot(bx-ax,bz-az),path=box(pp.width*S,.03,len,M.path,(ax+bx)/2,.04,(az+bz)/2);path.rotation.y=Math.atan2(bx-ax,bz-az);
   function label(a,b,bg="#ded9cc",fg="#222"){const c=document.createElement("canvas");c.width=768;c.height=150;const g=c.getContext("2d");g.fillStyle=bg;g.fillRect(0,0,768,150);g.fillStyle=fg;g.textAlign="center";g.font="900 42px Arial";g.fillText(a,384,65);g.font="700 20px Arial";g.fillText(b||"",384,112);const tx=new T.CanvasTexture(c);tx.colorSpace=T.SRGBColorSpace;const s=new T.Sprite(new T.SpriteMaterial({map:tx}));s.scale.set(4.6,.9,1);return s}
   const placardLayouts=[],placardFontReady=typeof FontFace==="undefined"?Promise.resolve(false):new FontFace("PlacardGrenze","url(./assets/fonts/grenze/Grenze.ttf)",{weight:"100 900"}).load().then(font=>{document.fonts.add(font);return true}).catch(()=>false);
-  function buildingPlacard(b,w){
-    const canvas=document.createElement("canvas"),mobile=innerWidth<700;canvas.width=mobile?512:768;canvas.height=mobile?171:256;
-    const ctx=canvas.getContext("2d");ctx.setTransform(canvas.width/768,0,0,canvas.height/256,0,0);
+  function buildingPlacard(b,w,x,y,z){
+    const canvas=document.createElement("canvas"),mobile=innerWidth<700;canvas.width=mobile?512:768;canvas.height=mobile?128:192;
+    const ctx=canvas.getContext("2d");ctx.setTransform(canvas.width/768,0,0,canvas.height/192,0,0);
     const texture=new T.CanvasTexture(canvas);texture.colorSpace=T.SRGBColorSpace;
-    const sign=new T.Sprite(new T.SpriteMaterial({map:texture}));sign.scale.set(Math.min(6.8,w*.84),Math.min(6.8,w*.84)/3,1);
-    const image=new Image(),layout={id:b.id,textureWidth:canvas.width,artReady:false,fontReady:false,titleWidth:0,subtitleWidth:0};placardLayouts.push(layout);let artReady=false,fontReady=false;
+    const width=Math.min(2.65,w*.52,Math.max(1.8,1.65+b.name.length*.045));
+    const sign=new T.Mesh(new T.PlaneGeometry(1,1),new T.MeshBasicMaterial({map:texture,side:T.DoubleSide}));
+    sign.scale.set(width,width/4,1);sign.position.set(x,y,z);
+    const image=new Image(),layout={id:b.id,textureWidth:canvas.width,artReady:false,fontReady:false,titleWidth:0,titleMaxWidth:530,titleLines:0,worldWidth:width,worldHeight:width/4,x,y,z,facadeWidth:w};placardLayouts.push(layout);let artReady=false,fontReady=false;
     const titleParts={auslaender:["AUSLÄNDER","BEHÖRDE"],formulararchiv:["BUNDES","FORMULARARCHIV"],terminamt:["TERMIN","VERGABESTELLE"],querungsamt:["STRASSEN","QUERUNGSAMT"],sockenladen:["SOCKENFACH","GESCHÄFT"],laermamt:["AMT FÜR ZIMMER","LAUTSTÄRKE"]};
     function linesFor(text,weight,oneSize,twoSize,smallest,forced){
       const family=fontReady?'"PlacardGrenze"':'"Grenze",Georgia,serif',words=text.split(/\s+/);
-      if(!forced)for(let px=oneSize;px>=Math.max(smallest,oneSize-22);px--){ctx.font=`${weight} ${px}px ${family}`;if(ctx.measureText(text).width<=390)return {parts:[text],px}}
+      if(!forced)for(let px=oneSize;px>=Math.max(smallest,oneSize-22);px--){ctx.font=`${weight} ${px}px ${family}`;if(ctx.measureText(text).width<=530)return {parts:[text],px}}
       const candidates=forced?[forced]:words.slice(1).map((_,i)=>[words.slice(0,i+1).join(" "),words.slice(i+1).join(" ")]);
       for(let px=twoSize;px>=smallest;px--){
         ctx.font=`${weight} ${px}px ${family}`;
-        const fitting=candidates.filter(parts=>parts.every(part=>ctx.measureText(part).width<=390));
+        const fitting=candidates.filter(parts=>parts.every(part=>ctx.measureText(part).width<=530));
         if(fitting.length){fitting.sort((a,b)=>Math.max(...a.map(x=>ctx.measureText(x).width))-Math.max(...b.map(x=>ctx.measureText(x).width)));return {parts:fitting[0],px}}
       }
-      for(let px=smallest;px>=14;px--){ctx.font=`${weight} ${px}px ${family}`;if(ctx.measureText(text).width<=390)return {parts:[text],px}}
+      for(let px=smallest;px>=14;px--){ctx.font=`${weight} ${px}px ${family}`;if(ctx.measureText(text).width<=530)return {parts:[text],px}}
       return {parts:[text],px:14};
     }
     function draw(){
-      ctx.clearRect(0,0,768,256);
-      if(artReady)ctx.drawImage(image,0,0,768,256);else{ctx.fillStyle="#e8dec8";ctx.fillRect(0,0,768,256);ctx.strokeStyle="#4b3325";ctx.lineWidth=10;ctx.strokeRect(6,6,756,244)}
-      ctx.fillStyle="rgba(248,239,218,.9)";ctx.fillRect(170,36,428,200);
-      ctx.strokeStyle="rgba(83,56,38,.52)";ctx.lineWidth=2;ctx.strokeRect(172,38,424,196);
+      ctx.clearRect(0,0,768,192);
+      ctx.fillStyle="#e8dfcb";ctx.fillRect(0,0,768,192);
+      if(artReady){ctx.save();ctx.beginPath();ctx.rect(18,18,154,156);ctx.clip();ctx.drawImage(image,8,16,224,224,18,18,154,156);ctx.restore()}
+      ctx.strokeStyle="#2f2923";ctx.lineWidth=8;ctx.strokeRect(5,5,758,182);
+      ctx.strokeStyle="#8b392d";ctx.lineWidth=3;ctx.strokeRect(12,12,744,168);
+      ctx.fillStyle="#4c4439";for(const bolt of [23,745]){ctx.beginPath();ctx.arc(bolt,96,4,0,Math.PI*2);ctx.fill()}
+      ctx.fillStyle="#8b392d";ctx.fillRect(184,24,3,144);
       ctx.fillStyle="#231b16";ctx.textAlign="center";ctx.textBaseline="middle";
       const family=fontReady?'"PlacardGrenze"':'"Grenze",Georgia,serif';
-      const title=linesFor(b.name,900,70,56,28,titleParts[b.id]);
+      const title=linesFor(b.name,900,70,59,29,titleParts[b.id]);
       ctx.font=`900 ${title.px}px ${family}`;
       layout.titleWidth=Math.max(...title.parts.map(part=>ctx.measureText(part).width));
-      const titleYs=title.parts.length===1?[100]:[76,128];
-      title.parts.forEach((part,i)=>ctx.fillText(part,384,titleYs[i],390));
-      ctx.fillStyle="#8c3d2e";ctx.fillRect(343,158,82,3);
-      ctx.fillStyle="#322820";
-      const subtitle=linesFor(b.sign||"",700,30,25,16);ctx.font=`700 ${subtitle.px}px ${family}`;
-      layout.subtitleWidth=Math.max(...subtitle.parts.map(part=>ctx.measureText(part).width));
-      const subtitleYs=subtitle.parts.length===1?[198]:[184,219];
-      subtitle.parts.forEach((part,i)=>ctx.fillText(part,384,subtitleYs[i],390));
+      layout.titleLines=title.parts.length;
+      const titleYs=title.parts.length===1?[97]:[68,124];
+      title.parts.forEach((part,i)=>ctx.fillText(part,465,titleYs[i],530));
       texture.needsUpdate=true;
     }
     draw();image.onload=()=>{artReady=layout.artReady=true;draw()};image.src=`./assets/building-placards/${b.id}.webp`;
     placardFontReady.then(ready=>{fontReady=layout.fontReady=ready;draw()});
     return sign;
   }
+  function stationPlatform(s){
+    const cx=X(s.x+s.w/2),cz=Z(s.y+s.h/2),south=s.id.startsWith("sued"),edge=Z(south?s.y+s.h:s.y),back=cz+(south?-.75:.75),stone=mat(0xb9b7ae),yellow=mat(0xc8ad63),glass=new T.MeshStandardMaterial({color:0xabc1c6,roughness:.18,transparent:true,opacity:.38,depthWrite:false,side:T.DoubleSide});
+    box(s.w*S,.14,s.h*S,stone,cx,.07,cz);box(s.w*S,.16,.16,M.cross,cx,.15,edge);box(s.w*S,.025,.29,yellow,cx,.17,edge+(south?-.3:.3));
+    for(let i=-4;i<=4;i++)box(.04,.027,.29,M.dark,cx+i*2.3,.19,edge+(south?-.3:.3));
+    box(9.4,.16,1.55,glass,cx,3.32,back);for(const px of [-4.3,0,4.3])for(const pz of [-.59,.59])box(.09,3.18,.09,M.metal,cx+px,1.61,back+pz);
+    for(const side of [-1,1]){const x=cx+side*4.3;box(.07,1.85,1.15,glass,x,1.47,back);box(.08,.09,1.15,M.metal,x,2.34,back)}
+    for(const dx of [-3.05,3.05]){box(1.34,.09,.42,M.metal,cx+dx,.47,back);box(1.34,.55,.08,M.metal,cx+dx,.76,back+(south?.2:-.2));for(const leg of [-.53,.53])box(.07,.46,.07,M.metal,cx+dx+leg,.24,back)}
+    const board=label("ZUGVERSPÄTUNG",`BAHNHOF ${s.name} · GLEIS 1`,"#16558b","#f6f6f3");board.scale.set(4.6,.9,1);board.position.set(cx,4.05,back);world.add(board);
+    for(const side of [-1,1]){const x=cx+side*8.4;box(.08,2.25,.08,M.metal,x,1.13,back);const sign=label("ZUGVERSPÄTUNG",side<0?"GLEIS 1 · +35 MIN":"ABFAHRT UNBESTIMMT","#16558b","#f6f6f3");sign.scale.set(3.35,.72,1);sign.position.set(x,2.55,back);world.add(sign)}
+    const clockFace=new T.Mesh(new T.CircleGeometry(.32,24),M.cross);clockFace.position.set(cx-4.8,2.71,back+(south?-.82:.82));clockFace.rotation.y=south?Math.PI:0;world.add(clockFace);const clockRim=new T.Mesh(new T.TorusGeometry(.33,.035,6,24),M.dark);clockRim.position.copy(clockFace.position);clockRim.rotation.y=clockFace.rotation.y;world.add(clockRim);box(.025,.22,.025,M.dark,clockFace.position.x,2.76,clockFace.position.z+(south?-.02:.02));
+    box(.58,1.55,.48,M.metal,cx+5.1,.78,back);box(.4,.54,.025,M.dark,cx+5.1,1.1,back+(south?-.25:.25));
+  }
+  const stationSlots=(bridge.stations||[]).map(state=>{
+    const before=new Set(world.children);stationPlatform(state);
+    const fallback=new T.Group();fallback.name="Original station / "+state.id;
+    for(const child of [...world.children])if(!before.has(child))fallback.add(child);
+    world.add(fallback);return{state,fallback,model:null,fixtures:bridge.props.filter(p=>p.stationFixture&&p.stationId===state.id)};
+  });
   function makeWirtschaftswunderSite(site){
     if(!site)return null;
     const centerX=X(site.x),centerZ=Z(site.y),mouth=site.radius*S,gravel=mat(0x494846,.98),yellow=mat(0xd4a72c,.82),black=mat(0x171817,.68),red=mat(0xa6382f,.8),white=mat(0xe2ddd1,.88);
@@ -187,8 +205,20 @@ function showRendererFailure(error){
   };
   const buildingSlots=[],trainSlots=[],cityAssetSlots=[],localModels=new Map(),modelLoader=GLTFLoader?new GLTFLoader():null;
   let kiesingerMonument;
+  const satireKitEnabled=new URLSearchParams(location.search).get("satireKit")==="1";
+  const detailPropLoader=satireKitEnabled
+    ?import("./assets/models/satire-kit/loader.js?v=20260930-satire-placements2").catch(error=>{console.warn("Satire kit unavailable; using originals",error);return null})
+    :new URLSearchParams(location.search).get("propDetails")==="1"
+      ?import("./assets/models/prop-details/loader.js?v=20260930-prop-details1").catch(error=>{console.warn("Prop detail study unavailable; using originals",error);return null})
+      :null;
+  if(satireKitEnabled&&modelLoader)detailPropLoader.then(module=>module?.installStationKit(T,world,stationSlots,modelLoader,{S,X,Z})).catch(error=>console.warn("Original stations retained",error));
   function loadLocalModel(url){
-    if(!localModels.has(url))localModels.set(url,modelLoader.loadAsync(url).catch(error=>{console.warn("Keeping procedural stand-ins for "+url,error);return null}));
+    if(!localModels.has(url)){
+      const load=typeof detailPropLoader!=='undefined'&&detailPropLoader
+        ?detailPropLoader.then(module=>module?module.loadWithDetailFallback(url,modelLoader):modelLoader.loadAsync(url))
+        :modelLoader.loadAsync(url);
+      localModels.set(url,load.catch(error=>{localModels.delete(url);console.warn("Keeping procedural stand-ins for "+url,error);return null}));
+    }
     return localModels.get(url);
   }
   async function installCityModel(group,fallback,file,fit){
@@ -319,7 +349,7 @@ function showRendererFailure(error){
       if(!size.x||!size.y||!size.z)throw new Error("empty building bounds");
       const landmark=slot.building.id==="bundestag",s=Math.min(w/size.x,h/size.y,d/size.z),sx=landmark?s:w/size.x,sy=landmark?s:h/size.y,sz=landmark?s:d/size.z;
       model.scale.set(sx,sy,sz);model.position.set(-center.x*sx,-bounds.min.y*sy,-center.z*sz);
-      if(landmark){box(w,.07,d,M.walk,0,.035,0,slot.group);slot.label.position.set(-w*.34,.62,d/2+.1);slot.label.scale.set(3.2,.63,1)}
+      if(landmark)box(w,.07,d,M.walk,0,.035,0,slot.group);
       slot.group.add(model);slot.model=model;slot.fallback.visible=false;registerMaterials(model,slot);
       if(landmark)matchKiesingerHeight();
     }catch(e){console.warn("Keeping procedural building for "+slot.building.id,e)}
@@ -348,7 +378,7 @@ function showRendererFailure(error){
       box(2.5,1.5,1.8,M.metal,2.4,.75,-2.35,transformerFallback);box(.62,.82,.5,mat(0xd1b73f),-6.4,.95,d/2+.12,signFallback);
       for(let x=-w/2+.55;x<w/2-.45;x+=1.15){box(.82,.24,.1,x%2<1?mat(0x762f29):M.cross,x,.72,d/2+.12,g);box(.1,1.25,.1,M.metal,x-.42,.62,d/2+.08,g)}
       const red=mat(0x762f29),slashA=box(5.8,.28,.14,red,3.2,1.45,2.23,g),slashB=box(5.8,.28,.14,red,3.2,1.45,2.24,g);slashA.rotation.z=.42;slashB.rotation.z=-.42;
-      const l=buildingPlacard(b,w);l.position.set(0,3.35,d/2+.18);g.add(l);registerMaterials(g,slot);
+      const l=buildingPlacard(b,w,3.2,2.42,2.28);g.add(l);registerMaterials(g,slot);
       installPlantModel(slot,powerModels.coolingTower,{x:2.8,y:4.8,z:2.8},[{x:-5.1,y:0,z:-1.35},{x:-2.05,y:0,z:-.55}],false,coolingFallback);
       installPlantModel(slot,powerModels.nuclearTransformer,{x:3.2,y:2.55,z:2.4},[{x:2.4,y:0,z:-2.35}],true,transformerFallback);
       installPlantModel(slot,powerModels.nuclearSign,{x:.62,y:1.7,z:.5},[{x:-6.4,y:0,z:d/2+.12}],true,signFallback);
@@ -361,7 +391,7 @@ function showRendererFailure(error){
       box(1.65,2.05,.09,M.dark,3.1,1.025,1.81,g);box(2.15,.05,1.1,M.walk,3.1,.035,2.25,g);
       for(let j=0;j<7;j++){const q=box(.25,.2,.25,M.dark,0,0,0,g);coalBelt.push({mesh:q,index:j,from:new T.Vector3(.55,1.2,1.42),to:new T.Vector3(4.65,2.65,1.42)})}
       const gateL=box(2.35,.16,.1,mat(0x31553a),-w/2+.45,.78,d/2+.13,g),gateR=box(2.35,.16,.1,mat(0x31553a),w/2-.45,.78,d/2+.13,g);gateL.rotation.y=.82;gateR.rotation.y=-.82;
-      const l=buildingPlacard(b,w);l.position.set(-.3,4.3,1.9);g.add(l);registerMaterials(g,slot);
+      const l=buildingPlacard(b,w,3.1,2.46,1.96);g.add(l);registerMaterials(g,slot);
       installPlantModel(slot,powerModels.coalBuilding,{x:3.2,y:3.3,z:3.1},[{x:-5.95,y:0,z:-.75}]);
       installPlantModel(slot,powerModels.coalStack,{x:1.1,y:5.15,z:1.1},[{x:stackX,y:0,z:stackZ}],false,stackFallback);
       for(let j=0;j<10;j++){const m=new T.MeshBasicMaterial({color:0x1d1c1a,transparent:true,depthWrite:false}),q=new T.Mesh(new T.SphereGeometry(.38,10,7),m);g.add(q);coalSmoke.push({mesh:q,x:stackX,y:4.95,z:stackZ,index:j})}
@@ -374,7 +404,7 @@ function showRendererFailure(error){
     const dx=(b.doorX-(b.x+b.w/2))*S;box(Math.min(1.3,w*.18),1.55,.1,M.dark,dx,.78,d/2+.06,fallback);box(Math.min(2,w*.32),.1,.62,mat(0xaaa69b),dx,1.72,d/2+.28,fallback);
     const cn=Math.max(2,Math.min(7,Math.floor(w/1.25))),rn=Math.max(2,Math.min(5,Math.floor(h/1.05)));
     for(let r=0;r<rn;r++)for(let c=0;c<cn;c++)box(.48,.31,.04,M.win,-w*.41+c*(w*.82/Math.max(1,cn-1)),.9+r*Math.max(.64,(h-1.6)/Math.max(1,rn-1)),d/2+.025,fallback);
-    const l=buildingPlacard(b,w);l.position.set(0,Math.max(1.8,h*.58),d/2+.11);g.add(l);g.position.set(X(b.x+b.w/2),0,Z(b.y+b.h/2));world.add(g);
+    const l=buildingPlacard(b,w,dx,2.23,d/2+.22);g.add(l);g.position.set(X(b.x+b.w/2),0,Z(b.y+b.h/2));world.add(g);
     const slot={building:b,group:g,fallback,label:l,model:null,materials:new Set(),opacity:1};buildingSlots.push(slot);registerMaterials(g,slot);
     const url=buildingModels[b.id]||cityModelUrl("municipal-office");installBuildingModel(slot,b.id==="bundestag"?url+"?v=20260926-city1":url,w,h,d);
   }
@@ -595,9 +625,16 @@ function showRendererFailure(error){
     "zwerg-giesskanne":[germanPropUrl("garden-gnome-watering"),1.04,1.26,.57],"zwerg-schild":[germanPropUrl("garden-gnome-placard"),.95,1.26,.51],
     bierkasten:[germanPropUrl("beer-crate"),.75,.58,.54],schubkarre:[germanPropUrl("allotment-wheelbarrow"),1.56,.75,.65],
     wertstoffcontainer:[germanPropUrl("recycling-containers"),1.87,1.21,.68],picknicktisch:[germanPropUrl("allotment-picnic-table"),2.3,.83,1.98]};
+  const warnedScenery=new Set();
   function prop(p){
     const g=new T.Group();
-    if(p.asset==="faxbillboard"){
+    if(p.satireId){
+      const fallback=new T.Group();g.add(fallback);
+      box(Math.max(.25,p.w*S),Math.max(.25,p.h*S),Math.max(.25,p.w*S*.6),M.metal,0,Math.max(.25,p.h*S)/2,0,fallback);
+      if(modelLoader&&detailPropLoader)detailPropLoader.then(module=>module?.loadSatireModel(p.satireId,modelLoader)).then(asset=>{
+        if(!asset)return;const model=asset.scene.clone(true);fitResponseModel(model,{x:p.w*S,y:p.h*S,z:Math.max(.35,p.w*S)});g.add(model);fallback.visible=false;
+      }).catch(error=>{if(!warnedScenery.has(p.satireId)){warnedScenery.add(p.satireId);console.warn('Keeping procedural scenery for '+p.satireId,error)}});
+    }else if(p.asset==="faxbillboard"){
       const art=desktopBillboards.matches&&p.billboard,bw=art?4.4:4.8,bh=art?3.3:1.65,tx=faxFallbackTexture(),material=new T.MeshStandardMaterial({map:tx,roughness:.9}),board=new T.Mesh(new T.BoxGeometry(bw,bh,.12),material);
       board.position.y=art?3.5:2.8;g.add(board);[-bw*.35,bw*.35].forEach(v=>box(.1,art?2.3:2.2,.1,M.metal,v,art?1.15:1.1,0,g));
       if(art)billboardLoader.load(art.src,loaded=>{loaded.colorSpace=T.SRGBColorSpace;loaded.anisotropy=Math.min(4,renderer.capabilities.getMaxAnisotropy());material.map.dispose();material.map=loaded;material.needsUpdate=true},undefined,()=>{});
@@ -611,9 +648,9 @@ function showRendererFailure(error){
       const h=Math.max(.8,(p.h||54)*S),w=Math.max(.52,(p.w||48)*S);box(w,h,Math.max(.42,w*.55),p.asset.includes("fax")?mat(0xb7b2a7):mat(0x666760),0,h/2,0,g);if(!["bench","litterbin","bollard","bicyclerack","liege-blau","liege-rot","zwerg-giesskanne","zwerg-schild","bierkasten","schubkarre","wertstoffcontainer","picknicktisch"].includes(p.asset))propLabel(g,p.label||p.asset.toUpperCase(),h*.62,Math.max(.9,w*.92));
     }
     const asset=propModels[p.asset];if(asset){const fallback=new T.Group();for(const child of [...g.children])if(!child.isSprite)fallback.add(child);g.add(fallback);installCityModel(g,fallback,asset[0],{x:asset[1],y:asset[2],z:asset[3]});for(const child of g.children)if(child.isSprite)child.position.y=asset[2]+.22}
-    g.position.set(X(p.x),0,Z(p.y));g.rotation.y=(p.turn||0)*Math.PI/2;world.add(g);
+    g.position.set(X(p.x),p.heightOffset||0,Z(p.y));g.rotation.y=(p.turn||0)*Math.PI/2;world.add(g);
   }
-  bridge.props.forEach(prop);
+  bridge.props.filter(p=>!p.stationFixture).forEach(prop);
   function normObject(o){const g=new T.Group(),material=mat(0x6c3d37);if(o.type==="hedge")box(1.35,.72,.55,material,0,.36,0,g);else if(o.type==="chairs"){for(const x of [-.32,.32]){box(.48,.08,.48,material,x,.48,0,g);box(.48,.68,.08,material,x,.78,-.2,g);box(.06,.48,.06,material,x-.16,.24,0,g);box(.06,.48,.06,material,x+.16,.24,0,g)}}else{box(.58,.8,.58,material,0,.4,0,g);box(.66,.09,.66,M.dark,0,.85,0,g)}propLabel(g,o.label,1.18,1.65);g.position.set(X(o.x),0,Z(o.y));g.rotation.y=.08;world.add(g);return{state:o,group:g,material}}
   const normObjectSlots=(bridge.normObjects||[]).map(normObject);
   function character(kind){const g=new T.Group(),m=kind==="player"?M.player:kind==="police"?M.police:kind==="merkel"?M.merkel:M.npc;box(.42,.72,.3,m,0,.72,0,g);const head=new T.Mesh(new T.SphereGeometry(.2,10,7),M.skin);head.position.y=1.3;g.add(head);const lg=new T.CylinderGeometry(.06,.07,.5,8),ag=new T.CylinderGeometry(.05,.06,.48,8),ll=new T.Mesh(lg,m),rl=ll.clone(),la=new T.Mesh(ag,m),ra=la.clone();ll.position.set(-.1,.27,0);rl.position.set(.1,.27,0);la.position.set(-.27,.76,0);ra.position.set(.27,.76,0);g.add(ll,rl,la,ra);g.userData={ll,rl,la,ra};if(kind==="merkel"){const hair=new T.Mesh(new T.SphereGeometry(.22,10,7,0,Math.PI*2,0,Math.PI*.58),mat(0x5d5953));hair.position.y=1.39;g.add(hair)}if(kind==="police"){const cap=new T.Mesh(new T.CylinderGeometry(.21,.21,.08,10),M.dark);cap.position.y=1.52;g.add(cap)}return g}

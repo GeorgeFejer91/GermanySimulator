@@ -1,0 +1,688 @@
+{
+  "version": "satire-kit-1",
+  "status": "candidate-unapproved",
+  "units": "metres",
+  "axis": "Y-up; +Z-front; ground-centred",
+  "models": {
+    "departure-board": {
+      "id": "departure-board",
+      "family": "station",
+      "title": "Abfahrt nach Aktenlage",
+      "file": "departure-board.glb",
+      "dimensions": [
+        2.95,
+        3.637,
+        0.6080000000000001
+      ],
+      "triangles": 2992,
+      "primitives": 5,
+      "bytes": 218972,
+      "sha256": "d901ef58313719f04116c5ac7720c421fde11992df94e7beb17eee57189b8dcc"
+    },
+    "station-clock": {
+      "id": "station-clock",
+      "family": "station",
+      "title": "Bahnhofsuhr",
+      "file": "station-clock.glb",
+      "dimensions": [
+        1.1,
+        3.05,
+        0.48500000000000004
+      ],
+      "triangles": 584,
+      "primitives": 4,
+      "bytes": 44948,
+      "sha256": "9786adbda07288e4c9aaac4de22fd2c0eeaa2901abaf7f7a88c2ba62c07aeba6"
+    },
+    "platform-sign": {
+      "id": "platform-sign",
+      "family": "station",
+      "title": "Gleis-Schilderbaum",
+      "file": "platform-sign.glb",
+      "dimensions": [
+        2.1,
+        3.0875000000000004,
+        0.5700000000000001
+      ],
+      "triangles": 1468,
+      "primitives": 6,
+      "bytes": 109864,
+      "sha256": "b4abfc05a49b84000660969122be95e5ccdebda093bf649975517bac257c9152"
+    },
+    "platform-shelter": {
+      "id": "platform-shelter",
+      "family": "station",
+      "title": "Wartehalle",
+      "file": "platform-shelter.glb",
+      "dimensions": [
+        3.65,
+        2.6550000000000002,
+        2.3
+      ],
+      "triangles": 1920,
+      "primitives": 5,
+      "bytes": 141748,
+      "sha256": "01eab1be7802b5e881c57aa528cd56c7f555f5e6237495350ce9a78437d6e9ca"
+    },
+    "ticket-machine": {
+      "id": "ticket-machine",
+      "family": "station",
+      "title": "Fahrkartenautomat",
+      "file": "ticket-machine.glb",
+      "dimensions": [
+        1.02,
+        2.17,
+        0.8295
+      ],
+      "triangles": 1872,
+      "primitives": 6,
+      "bytes": 138968,
+      "sha256": "44cc753fd2bf87b3e5b086cc0577d9ab2c5dd2b2a2ffa82ef1a19a9ba26a900c"
+    },
+    "ticket-validator": {
+      "id": "ticket-validator",
+      "family": "station",
+      "title": "Entwerter",
+      "file": "ticket-validator.glb",
+      "dimensions": [
+        0.4,
+        1.73,
+        0.615
+      ],
+      "triangles": 432,
+      "primitives": 4,
+      "bytes": 34012,
+      "sha256": "d839ec05d5ce5eeface0ae0678da059a3b67dee36c8ebc0e34696e3a10a85ca7"
+    },
+    "station-bench": {
+      "id": "station-bench",
+      "family": "station",
+      "title": "Wartebank",
+      "file": "station-bench.glb",
+      "dimensions": [
+        2.13,
+        1.5221999999999998,
+        0.8576000000000001
+      ],
+      "triangles": 1276,
+      "primitives": 5,
+      "bytes": 95400,
+      "sha256": "4aae25df8c4eb2fbb5ab436230556b92417786c1472d1e40b7ed116ecab31f9b"
+    },
+    "station-bin": {
+      "id": "station-bin",
+      "family": "station",
+      "title": "Bahnhofsmuell",
+      "file": "station-bin.glb",
+      "dimensions": [
+        0.65,
+        1.275,
+        0.718
+      ],
+      "triangles": 1064,
+      "primitives": 4,
+      "bytes": 79536,
+      "sha256": "08a2917485947f8f90aae01b9a1e37d60b5889d3572581e37de66cbc53b6671a"
+    },
+    "luggage-lockers": {
+      "id": "luggage-lockers",
+      "family": "station",
+      "title": "Schliessfaecher",
+      "file": "luggage-lockers.glb",
+      "dimensions": [
+        2.6,
+        2.15,
+        0.8525
+      ],
+      "triangles": 2004,
+      "primitives": 6,
+      "bytes": 148480,
+      "sha256": "fde99579f79d8fcee3ce7a4f80c21fbf88ccfa415d708b79ba149162246f09ee"
+    },
+    "underpass-entrance": {
+      "id": "underpass-entrance",
+      "family": "station",
+      "title": "Unterfuehrung",
+      "file": "underpass-entrance.glb",
+      "dimensions": [
+        1.93,
+        2.71,
+        2.75
+      ],
+      "triangles": 1220,
+      "primitives": 5,
+      "bytes": 91348,
+      "sha256": "2ba2f665422fcda6f7e3ff098539e784e8d2438468f3e3cb1724c889a4005d61"
+    },
+    "regional-station": {
+      "id": "regional-station",
+      "family": "station",
+      "title": "Regionalbahnhof",
+      "file": "regional-station.glb",
+      "dimensions": [
+        6.3,
+        3.7199999999999998,
+        2.985
+      ],
+      "triangles": 2570,
+      "primitives": 8,
+      "bytes": 190464,
+      "sha256": "6d4cd1231961b718375d65e9307c8da73d8085e305008183820e083bd46d24d8"
+    },
+    "catenary-mast": {
+      "id": "catenary-mast",
+      "family": "station",
+      "title": "Oberleitungsmast",
+      "file": "catenary-mast.glb",
+      "dimensions": [
+        2.395,
+        4.32,
+        0.63
+      ],
+      "triangles": 784,
+      "primitives": 6,
+      "bytes": 60624,
+      "sha256": "42e0eb4c60639dcd9898c15bc9bacc95bec06bad334a2e0787ea805f640a5b5b"
+    },
+    "platform-barrier": {
+      "id": "platform-barrier",
+      "family": "station",
+      "title": "Bahnsteigabsperrung",
+      "file": "platform-barrier.glb",
+      "dimensions": [
+        2.36,
+        1.55,
+        0.65
+      ],
+      "triangles": 640,
+      "primitives": 5,
+      "bytes": 49616,
+      "sha256": "7eb359b1defd201ab6182938959a1336165032373217ae35cc248726dbd64eff"
+    },
+    "pretzel-kiosk": {
+      "id": "pretzel-kiosk",
+      "family": "station",
+      "title": "Brezelbude",
+      "file": "pretzel-kiosk.glb",
+      "dimensions": [
+        2.7,
+        3.794201397838407,
+        2.135
+      ],
+      "triangles": 4028,
+      "primitives": 7,
+      "bytes": 294772,
+      "sha256": "0b35f8798fe243ca51040444673355b319e527dc25ba55200496af35f541c1f7"
+    },
+    "info-column": {
+      "id": "info-column",
+      "family": "station",
+      "title": "Informationssaeule",
+      "file": "info-column.glb",
+      "dimensions": [
+        0.44,
+        2.215,
+        0.37950000000000006
+      ],
+      "triangles": 648,
+      "primitives": 4,
+      "bytes": 49576,
+      "sha256": "b9453cc65be36879ed2082f37e78f405833640be9a674007f827f4493cbea03e"
+    },
+    "platform-edge": {
+      "id": "platform-edge",
+      "family": "station",
+      "title": "Tastkante",
+      "file": "platform-edge.glb",
+      "dimensions": [
+        4,
+        0.2295,
+        0.9
+      ],
+      "triangles": 600,
+      "primitives": 3,
+      "bytes": 45392,
+      "sha256": "876b920a816d75a659c246694f701e9e846b28310df6ceb4571f451dfbb81027"
+    },
+    "platform-lamp": {
+      "id": "platform-lamp",
+      "family": "station",
+      "title": "Bahnsteiglampe",
+      "file": "platform-lamp.glb",
+      "dimensions": [
+        1.5999999999999999,
+        3.25,
+        0.38
+      ],
+      "triangles": 364,
+      "primitives": 4,
+      "bytes": 29080,
+      "sha256": "60b776b07c4a161e27339d925322e89be336c3e0db7cb51653bcfc34af4ecc8c"
+    },
+    "judgmental-fax": {
+      "id": "judgmental-fax",
+      "family": "civic",
+      "title": "Misstrauischer Faxkiosk",
+      "file": "judgmental-fax.glb",
+      "dimensions": [
+        1.4199999570846558,
+        2.5950000286102295,
+        1.0800000429153442
+      ],
+      "triangles": 2992,
+      "primitives": 7,
+      "bytes": 220240,
+      "sha256": "8d1f886dca287f2f7759d7a8b4d2331bb5f1791a6fb8c903c170b14644f82ec4"
+    },
+    "pfand-machine": {
+      "id": "pfand-machine",
+      "family": "civic",
+      "title": "Pfandpruefstelle",
+      "file": "pfand-machine.glb",
+      "dimensions": [
+        0.97,
+        1.97,
+        0.913
+      ],
+      "triangles": 1396,
+      "primitives": 6,
+      "bytes": 104708,
+      "sha256": "cda52557db12958d9ed445e572307ea151ca8b648bc76f6af2ab80708dbc740f"
+    },
+    "beer-crate": {
+      "id": "beer-crate",
+      "family": "civic",
+      "title": "Pfandreserve",
+      "file": "beer-crate.glb",
+      "dimensions": [
+        0.6744379753218356,
+        0.494587859289249,
+        0.54
+      ],
+      "triangles": 4104,
+      "primitives": 5,
+      "bytes": 299060,
+      "sha256": "552bfb5bf97ef70ff7f31d8b6a543562e75bc9915649ff07fb6d402ddeea8978"
+    },
+    "kehrwoche-set": {
+      "id": "kehrwoche-set",
+      "family": "civic",
+      "title": "Kehrwoche",
+      "file": "kehrwoche-set.glb",
+      "dimensions": [
+        1.8137122548535511,
+        1.9541251934411459,
+        0.53
+      ],
+      "triangles": 2320,
+      "primitives": 7,
+      "bytes": 171880,
+      "sha256": "7db590fa047e08d2bba76730c0e5a1b8beb2590eaf7bda38d3b57e10a7ab4380"
+    },
+    "recycling-judges": {
+      "id": "recycling-judges",
+      "family": "civic",
+      "title": "Muelltrennungsgericht",
+      "file": "recycling-judges.glb",
+      "dimensions": [
+        1.8700000047683716,
+        1.1576908826828003,
+        0.7232768807411194
+      ],
+      "triangles": 2832,
+      "primitives": 7,
+      "bytes": 208756,
+      "sha256": "966ecc1c10e668bdef14226a19f4a024bbb667f53e889d21b2327cb54d7bb663"
+    },
+    "garden-wheelbarrow": {
+      "id": "garden-wheelbarrow",
+      "family": "civic",
+      "title": "Kleingarten-Schubkarre",
+      "file": "garden-wheelbarrow.glb",
+      "dimensions": [
+        1.55649995803833,
+        1.05,
+        0.6191474199295044
+      ],
+      "triangles": 1260,
+      "primitives": 7,
+      "bytes": 95544,
+      "sha256": "9d7fd849e097b9ee92ca770bdad8c165d7de687de9aa4cb7bc14ec7f8e173ecf"
+    },
+    "garden-gnome": {
+      "id": "garden-gnome",
+      "family": "civic",
+      "title": "Gartenaufsicht",
+      "file": "garden-gnome.glb",
+      "dimensions": [
+        0.8197218684219822,
+        1.63,
+        0.6458398038850881
+      ],
+      "triangles": 1536,
+      "primitives": 7,
+      "bytes": 115420,
+      "sha256": "d6a55131b94eeb6a50ca879eb327da1a48a8c01e2b0aa89d5d8b1b15ed0a35b1"
+    },
+    "watering-gnome": {
+      "id": "watering-gnome",
+      "family": "civic",
+      "title": "Giessbeauftragter",
+      "file": "watering-gnome.glb",
+      "dimensions": [
+        1.1818546724033596,
+        1.63,
+        0.6676584774442731
+      ],
+      "triangles": 1832,
+      "primitives": 8,
+      "bytes": 137368,
+      "sha256": "e5da0df10bd512e8ba441b9cb5b8368aa340b9643adf262d101eaf0fcfda7761"
+    },
+    "ordnung-gnome": {
+      "id": "ordnung-gnome",
+      "family": "civic",
+      "title": "Ruhebeauftragter",
+      "file": "ordnung-gnome.glb",
+      "dimensions": [
+        1.124616216792467,
+        1.63,
+        0.6458398038850881
+      ],
+      "triangles": 1968,
+      "primitives": 7,
+      "bytes": 146524,
+      "sha256": "25a74cec7c90dc3978d2091dadd2b335c3400fe81e27359993d402b49f74fc26"
+    },
+    "garden-shed": {
+      "id": "garden-shed",
+      "family": "civic",
+      "title": "Gartenlaube",
+      "file": "garden-shed.glb",
+      "dimensions": [
+        2.8,
+        2.82,
+        2.3
+      ],
+      "triangles": 1126,
+      "primitives": 7,
+      "bytes": 85768,
+      "sha256": "44c831f045d6dfd68d9bffe03efcbe24399bd20056274a3d9586e000168c56ec"
+    },
+    "forms-pedestal": {
+      "id": "forms-pedestal",
+      "family": "civic",
+      "title": "Antragsannahme",
+      "file": "forms-pedestal.glb",
+      "dimensions": [
+        1.03,
+        2.3,
+        0.85
+      ],
+      "triangles": 2324,
+      "primitives": 5,
+      "bytes": 170884,
+      "sha256": "24b95985520b09a05425f1e42f9c87ae2600629410c3378e2420f72f9c0fa9e3"
+    },
+    "socks-sandals": {
+      "id": "socks-sandals",
+      "family": "civic",
+      "title": "Sockensandalen-Denkmal",
+      "file": "socks-sandals.glb",
+      "dimensions": [
+        1.47,
+        1.56,
+        1.0895000000000001
+      ],
+      "triangles": 2276,
+      "primitives": 8,
+      "bytes": 169324,
+      "sha256": "af1c7f61d1d9a4fa1b7e53b5f446aa4ed2a83281f57b8e01def13e7e43b337d4"
+    },
+    "city-bench": {
+      "id": "city-bench",
+      "family": "civic",
+      "title": "Sitzordnung",
+      "file": "city-bench.glb",
+      "dimensions": [
+        2.13,
+        1.448,
+        1.045234133070507
+      ],
+      "triangles": 2304,
+      "primitives": 7,
+      "bytes": 170668,
+      "sha256": "2400a54f7effa0ba4a9ee7d1f38843d1cbb211ef8baf962093771c0b7f619ff9"
+    },
+    "reserved-lounger": {
+      "id": "reserved-lounger",
+      "family": "civic",
+      "title": "Handtuchterritorium",
+      "file": "reserved-lounger.glb",
+      "dimensions": [
+        1.07,
+        1.4547500809171068,
+        1.563738548024804
+      ],
+      "triangles": 1454,
+      "primitives": 7,
+      "bytes": 109504,
+      "sha256": "2607c21297c0040529017afebf9f60055b10a66935ad98c80ff9d3267a2440e3"
+    },
+    "currywurst-kiosk": {
+      "id": "currywurst-kiosk",
+      "family": "civic",
+      "title": "Wurstversorgung",
+      "file": "currywurst-kiosk.glb",
+      "dimensions": [
+        2.7,
+        3.47,
+        2.135
+      ],
+      "triangles": 3220,
+      "primitives": 7,
+      "bytes": 236624,
+      "sha256": "d2602c09b68d3d8ad8fc1182f41980ba457af09207beba82c7c2c16f002049c6"
+    },
+    "passive-bin": {
+      "id": "passive-bin",
+      "family": "civic",
+      "title": "Muellaufsicht",
+      "file": "passive-bin.glb",
+      "dimensions": [
+        1.26,
+        1.8,
+        0.718
+      ],
+      "triangles": 1488,
+      "primitives": 5,
+      "bytes": 110684,
+      "sha256": "e4c6c16ede055eff9963dcb5a46a74a54f0aab8e012857e6b0909336c09d4b37"
+    },
+    "notice-board": {
+      "id": "notice-board",
+      "family": "clutter",
+      "title": "Aushang",
+      "file": "notice-board.glb",
+      "dimensions": [
+        1.62,
+        2.115,
+        0.36
+      ],
+      "triangles": 1260,
+      "primitives": 7,
+      "bytes": 95496,
+      "sha256": "407b0461e5d6c018637eab08b9e8eebc7a4f09f5bc1d3de62fdf7b5090012faf"
+    },
+    "utility-box": {
+      "id": "utility-box",
+      "family": "clutter",
+      "title": "Digitalisierungskasten",
+      "file": "utility-box.glb",
+      "dimensions": [
+        0.88,
+        1.6700000000000002,
+        0.65
+      ],
+      "triangles": 792,
+      "primitives": 4,
+      "bytes": 59956,
+      "sha256": "9463904dc4e490c1ccf5c5bcf0ff902ef294f65db50aaa11ad5966fa8b8f2f51"
+    },
+    "queue-barrier": {
+      "id": "queue-barrier",
+      "family": "clutter",
+      "title": "Wartepflicht",
+      "file": "queue-barrier.glb",
+      "dimensions": [
+        1.8199999999999998,
+        1.325,
+        0.38
+      ],
+      "triangles": 796,
+      "primitives": 4,
+      "bytes": 60220,
+      "sha256": "217022b2f00049e049ed4a3cb740e86cfa8c8b591aff17ffb05476a755586e53"
+    },
+    "suitcase": {
+      "id": "suitcase",
+      "family": "clutter",
+      "title": "Reisegepaeck",
+      "file": "suitcase.glb",
+      "dimensions": [
+        0.66,
+        1.1709655040102993,
+        0.4545
+      ],
+      "triangles": 540,
+      "primitives": 5,
+      "bytes": 42428,
+      "sha256": "0bc8d5995328754c5e121231075264450db63fbb43b1f00a6121c89289471e9b"
+    },
+    "bottle-cluster": {
+      "id": "bottle-cluster",
+      "family": "clutter",
+      "title": "Leergutgruppe",
+      "file": "bottle-cluster.glb",
+      "dimensions": [
+        0.47116,
+        0.575,
+        0.44520874598331817
+      ],
+      "triangles": 564,
+      "primitives": 3,
+      "bytes": 42908,
+      "sha256": "c38b06c0ddfad25576b6cc7ea1d6f96fb375f6b0a9beee73c92681d36b6e7113"
+    },
+    "snack-litter": {
+      "id": "snack-litter",
+      "family": "clutter",
+      "title": "Imbissreste",
+      "file": "snack-litter.glb",
+      "dimensions": [
+        0.8500000000000001,
+        0.275,
+        0.315
+      ],
+      "triangles": 252,
+      "primitives": 3,
+      "bytes": 20428,
+      "sha256": "f9857c3766e0efaa4129e4adcd222f3bff0c1de978cd2b64c5601a5bd24b043a"
+    },
+    "planter": {
+      "id": "planter",
+      "family": "clutter",
+      "title": "Normgruener Kuebel",
+      "file": "planter.glb",
+      "dimensions": [
+        0.78,
+        1.31,
+        0.76
+      ],
+      "triangles": 520,
+      "primitives": 3,
+      "bytes": 39716,
+      "sha256": "3a367d41da3dfa7df26b7ca50569a24e1be2c8bb3458e095b35c88058dfe1f22"
+    },
+    "traffic-cone": {
+      "id": "traffic-cone",
+      "family": "clutter",
+      "title": "Leitkegel",
+      "file": "traffic-cone.glb",
+      "dimensions": [
+        0.48,
+        0.64,
+        0.48
+      ],
+      "triangles": 172,
+      "primitives": 3,
+      "bytes": 14672,
+      "sha256": "dd9d038602738a5158a7a5e56dbd7a9a4074afd8cba27c164f69a51ea8f9acf9"
+    },
+    "bollard": {
+      "id": "bollard",
+      "family": "clutter",
+      "title": "Zustaendigkeitspoller",
+      "file": "bollard.glb",
+      "dimensions": [
+        0.26,
+        0.86,
+        0.26
+      ],
+      "triangles": 184,
+      "primitives": 2,
+      "bytes": 14904,
+      "sha256": "e71837ad5c908fa9d945d396ad3c66d15ef0c1fa194545852e28b17c6de71d97"
+    },
+    "garden-fence": {
+      "id": "garden-fence",
+      "family": "clutter",
+      "title": "Parzellengrenze",
+      "file": "garden-fence.glb",
+      "dimensions": [
+        2.02,
+        1.12,
+        0.191
+      ],
+      "triangles": 888,
+      "primitives": 2,
+      "bytes": 65592,
+      "sha256": "7523f004e277edf2a1620567e615d834b5355c3e29515d2ae26ff5c12ba29030"
+    },
+    "rubber-stamp": {
+      "id": "rubber-stamp",
+      "family": "clutter",
+      "title": "Dienststempel",
+      "file": "rubber-stamp.glb",
+      "dimensions": [
+        0.57,
+        0.57,
+        0.36
+      ],
+      "triangles": 236,
+      "primitives": 3,
+      "bytes": 19272,
+      "sha256": "365d5796e9218b49b353157911c915600021d054f4f319146e428976f500480d"
+    },
+    "form-stack": {
+      "id": "form-stack",
+      "family": "clutter",
+      "title": "Formularstapel",
+      "file": "form-stack.glb",
+      "dimensions": [
+        0.44799999999999995,
+        0.5962000000000001,
+        0.64
+      ],
+      "triangles": 1088,
+      "primitives": 5,
+      "bytes": 81888,
+      "sha256": "cc8703a419e997da29b854eeac192ab6f25650bc914aebf63e3fc95ff1c8eb3e"
+    }
+  },
+  "totals": {
+    "models": 45,
+    "triangles": 66190,
+    "bytes": 4933236
+  }
+}

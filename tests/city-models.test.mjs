@@ -115,5 +115,5 @@ assert.equal(angled.opacity,.03,"the actual angled camera sightline must clear a
 Object.assign(context.bridge.player,{x:9999,y:9999});Object.assign(context.camera.position,{x:9999*.02,z:9999*.02+14});for(let i=0;i<180;i++)context.updateBuildingOcclusion();
 assert.ok(Math.abs(aGlass.opacity-.42)<1e-10);assert.equal(aGlass.transparent,true);assert.equal(aGlass.depthWrite,false);assert.equal(aStone.transparent,false);assert.equal(aStone.depthWrite,true);assert.equal(glass.opacity,.42);
 const missing=slot("missing",0);await context.installBuildingModel(missing,"missing.glb",12,6,8);await context.installBuildingModel(missing,"missing.glb",12,6,8);
-assert.equal(missing.model,null);assert.equal(missing.fallback.visible,true);assert.equal(requests,2,"failed source requests must also be bounded");assert.equal(warnings.length,1);
+assert.equal(missing.model,null);assert.equal(missing.fallback.visible,true);assert.equal(requests,3,"a failed source must retry on a later installation");assert.equal(warnings.length,2);
 console.log(`City kit: ${expected.length} valid local models, ${totalTriangles.toLocaleString()} triangles, ${totalBytes.toLocaleString()} bytes; cached instance loading, fallback and glass fading pass`);

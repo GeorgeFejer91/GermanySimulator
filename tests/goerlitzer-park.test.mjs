@@ -31,6 +31,7 @@ ${line(game,"const goerlitzerPark=")}
 ${line(game,"const kiesingerMemorial=")}
 ${line(game,"const wirtschaftswunderSite=")}
 ${line(game,"const BORDER_Y=")}
+${between(game,"const stations=Object.freeze(","const TRAIN_CAR_OFFSETS=")}
 ${between(game,"const horizontalRoads=","const OFFENSE_TIMING=")}
 ${line(game,"const borderGates=")}
 ${between(game,"const desktopBillboards=","const stableSpriteRoot=")}

@@ -1,12 +1,16 @@
 # Durable decisions
 
+## 2026-09-29 — Human template replaces towel-preview primitive figures
+
+The user rejected the jointed, cartoon-like towel pedestrian miniatures. The candidate preview now uses the pinned CC0 MakeHuman continuous body mesh with separate older male and older female shape targets, matching skin textures, and one weighted 18-bone rig per figure. Costume colors, hats, eyewear, socks, sandals, and towels retain the two accepted sprite identities. The neutral guide still supplies the closed 32-pose contact walk. The updated GLBs, editable Blender sources, and animated WebP remain **preview-only and unapproved**; the canonical root game continues to load accepted sprite atlases. `assets/models/towel-pedestrians/PROVENANCE.md` records the source, build, and verification details.
+
 ## 2026-09-29 — Reserved HUD and caption slots
 
 The bottom caption strip keeps a two-line measured footprint even when empty or disabled. The mobile control dock and Germanness rail, desktop footer, subtitle toggle, dialogue box, and reading modals occupy stable slots above it. Their positions no longer depend on whether a subtitle is visible. The dialogue box has a fixed outer size, with long source text scrolling inside while its actions remain in place. A viewport resize can recompute the common caption height; individual speech and textbox events cannot move neighboring controls.
 
 ## 2026-09-29 — Illustrated building placards
 
-Every signed building in the canonical game inventory has a distinct ImageGen illustration with props tied to its function or bureaucratic joke. The renderer composites the established title and subtitle at runtime in locally bundled Grenze lettering, so generated-image text errors cannot alter names or overflow the sign. One compact WebP set serves desktop and mobile, and missing art keeps a legible drawn placard. The static asset and font provenance lives in `assets/building-placards/PROVENANCE.md`.
+Every signed building in the canonical game inventory has a distinct ImageGen illustration with props tied to its function or bureaucratic joke. The renderer now crops one recognizable prop into a compact, wall-mounted enamel government-office caricature above the entrance; its width is capped by the facade and at 2.65 world units so it does not cover windows. Only the exact title appears on the physical plaque, fitted at runtime in locally bundled Grenze lettering. The existing satirical subtitle remains in game data. One WebP set serves desktop and mobile, and missing art keeps a legible drawn plaque. The static asset and font provenance lives in `assets/building-placards/PROVENANCE.md`.
 
 ## 2026-09-29 — Original German street-detail kit
 
@@ -21,6 +25,10 @@ license research, and byte/checksum inventory.
 ## 2026-09-29 — Preview-only 3D towel pedestrian pair
 
 The two accepted towel-reservation sprite identities now have separate minimalist 3D walk studies under `assets/models/towel-pedestrians/`. The models retain the male straw-hat/blue-polo and female patterned-cap/red-polo identities, with shorts, calf socks, strapped sandals, and held colored towel rolls. One uniformly scaled, contact-constrained neutral guide supplies each 32-pose walk; character geometry and the towel arm remain distinct. `towel-3d-preview.html` provides live orbit, view, pause, and speed controls plus the accepted sprite references, and a short animated WebP gives a portable look. This is a candidate for visual review, not a game replacement: the root renderer still uses the accepted sprite atlases. The builder, source/asset hashes, CMU condition, and checks are in the model folder's `PROVENANCE.md`.
+
+## 2026-09-29 — Four perimeter stations and localized rail audio
+
+Four compact station platforms occupy the road ends nearest the map's northwest, northeast, southwest, and southeast corners. `game.js` owns their coordinates, pedestrian access, crowd routes, and announcement zones; `world3d.js` renders shared code-native platform pieces, shelter glass, benches, clock, tactile strip, and blue `ZUGVERSPÄTUNG` signs. This keeps the existing twelve trains and two rail loops intact. The four general recordings are platform cues; Buxtehude is a rail-track or player-obstruction cue. Existing foreground audio serialization, voice toggle, and in-game-only recording provenance remain unchanged. Official DB InfraGO station photographs are visual references only, linked from `ASSET-POLICY.md`; no station image or DB logo is shipped.
 
 ## 2026-09-27 — Shared neutral motion, character-owned appearance
 
@@ -554,3 +562,32 @@ line even if the player briefly leaves and re-enters its radius; nearby trains
 wait 6.5 seconds after a clip and no longer reserve a clip
 from the completion callback. These gaps leave turns for other eligible families.
 The existing shuffled exhaustion bags and owner-locked voices remain authoritative.
+
+## 2026-09-29 — Dialogue and audio start together
+
+Keep the existing stimulus broker as the single owner of spoken-text timing. Request browser speech immediately from the input gesture when possible; reveal its textbox on the utterance `onstart` event. A stalled or failed voice reveals readable text once and releases navigation. Recorded lines reveal their textbox in the source-start task after the audio context resumes. The quiz card shows the entire spoken passerby remark, conversational context, and question as its main paragraph; compact portrait identity and a small source label remain. Rule and subtitle-approval readings use the bark box, and HUM-01 reading status follows the spoken chunk. The existing local Pretext package measures the quiz text; the scrollable card remains the overflow path.
+
+## 2026-09-30 — Full prop-pack implementation through v5
+
+The user requested actual in-repository assets, not another concept or plan.
+Created the complete 45-model station/civic/clutter catalogue under
+`assets/models/satire-kit/`, with a deterministic GLB exporter, 52 new CPU tests
+(66 with the prior tests), silent inspection page and optional existing-prop /
+station replacement integration. Shared geometry comes from the existing
+prop-details builder; earlier four-model exports remain byte-identical.
+
+Keep `?satireKit=1` optional until actual WebGL and gameplay clearance/performance
+checks pass. The replacement mode is not permission to scatter collision-bearing
+objects in renderer code: future new map placements must remain simulation-owned.
+The current pass creates all model candidates but only integrates the bounded
+existing-prop/station subset. No default promotion, commit, push or publication
+was performed. Full delivered scope, verification and blocked browser gates are
+recorded in `assets/models/satire-kit/PROVENANCE.md`.
+
+The follow-up integration exported and browser-rendered all 45 candidates and
+gave 43 IDs opt-in world uses. New positions are simulation-owned props; station
+fixture collision activates with successful assembly replacement. Underpass and
+catenary mast placement remains deferred for route and train clearance. The
+existing fax-study preservation hash failed at baseline (65/66 focused tests),
+and full live clearance/failure checks remain open, so the pack stays opt-in and
+is not published as accepted. See the adjacent provenance for per-asset status.

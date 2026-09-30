@@ -1,6 +1,7 @@
 import * as THREE from 'three';
 import {GLTFLoader} from 'three/addons/loaders/GLTFLoader.js';
 import {OrbitControls} from 'three/addons/controls/OrbitControls.js';
+import {installTowelCaricature} from './towel-caricature.js?v=20260929-towel-caricature1';
 import {prepareWithSegments,measureLineStats,measureNaturalWidth} from './assets/vendor/pretext/dist/layout.js';
 
 const canvas=document.querySelector('#scene');
@@ -22,7 +23,8 @@ orbit.minDistance=3.2;
 orbit.maxDistance=10;
 orbit.maxPolarAngle=Math.PI*.58;
 orbit.update();
-scene.add(new THREE.HemisphereLight(0xfff6e7,0x685e53,2.1));
+const hemisphere=new THREE.HemisphereLight(0xfff6e7,0x685e53,2.1);
+scene.add(hemisphere);
 const sun=new THREE.DirectionalLight(0xfff3df,3.2);
 sun.position.set(-3,6,4);
 sun.castShadow=true;
@@ -45,6 +47,8 @@ for(const x of [-1.13,1.13]){
 
 const mixers=[];
 const actors=[];
+const characterStyles=[];
+let caricature=new URLSearchParams(location.search).get('style')!=='original';
 let playing=true;
 let speed=1;
 const loader=new GLTFLoader();
@@ -59,15 +63,37 @@ try{
     if(asset.animations.length!==1)throw Error(`Expected one complete walk for ${i===0?'man':'woman'}`);
     const mixer=new THREE.AnimationMixer(actor);
     mixer.clipAction(asset.animations[0]).play();
+    mixer.update(0);
     mixers.push(mixer);
+    const style=installTowelCaricature(THREE,actor,i===0?'man':'woman');
+    style.setEnabled(caricature);
+    characterStyles.push(style);
   });
-  status.textContent='Human body mesh · 32 poses · grounded step cycle';
   document.documentElement.dataset.models='ready';
+  for(const button of document.querySelectorAll('[data-style]'))button.disabled=false;
+  setCharacterStyle(caricature);
 }catch(error){
+  for(const style of characterStyles)style.dispose();
+  for(const mixer of mixers)mixer.stopAllAction();
+  for(const actor of actors)scene.remove(actor);
+  characterStyles.length=mixers.length=actors.length=0;
   status.textContent=`Could not load the 3D models: ${error.message}`;
   status.dataset.error='true';
   console.error(error);
 }
+
+function setCharacterStyle(enabled){
+  caricature=Boolean(enabled);
+  for(const style of characterStyles)style.setEnabled(caricature);
+  hemisphere.intensity=caricature?1.3:2.1;
+  sun.intensity=caricature?2:3.2;
+  renderer.toneMapping=caricature?THREE.ACESFilmicToneMapping:THREE.NoToneMapping;
+  renderer.toneMappingExposure=1;
+  document.documentElement.dataset.characterStyle=caricature?'caricature':'original';
+  status.textContent=caricature?'Caricature · original 32-pose walk':'Original 3D · 32-pose walk';
+  for(const button of document.querySelectorAll('[data-style]'))button.setAttribute('aria-pressed',String((button.dataset.style==='caricature')===caricature));
+}
+for(const button of document.querySelectorAll('[data-style]'))button.addEventListener('click',()=>setCharacterStyle(button.dataset.style==='caricature'));
 
 document.querySelector('#play').addEventListener('click',event=>{
   playing=!playing;
@@ -96,7 +122,9 @@ function frame(){
     camera.updateProjectionMatrix();
   }
   const dt=Math.min(clock.getDelta(),.05);
+  for(const style of characterStyles)style.beforePose();
   if(playing)for(const mixer of mixers)mixer.update(dt*speed);
+  for(const style of characterStyles)style.afterPose();
   orbit.update();
   renderer.render(scene,camera);
 }
@@ -128,4 +156,5 @@ function measure(){
 function schedule(){if(!pending){pending=true;requestAnimationFrame(measure);}}
 new ResizeObserver(schedule).observe(document.body);
 document.querySelector('#play').addEventListener('click',schedule);
+for(const button of document.querySelectorAll('[data-style]'))button.addEventListener('click',schedule);
 schedule();

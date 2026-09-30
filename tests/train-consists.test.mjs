@@ -1,5 +1,6 @@
 import assert from "node:assert/strict";
 import {readFileSync,statSync} from "node:fs";
+import vm from "node:vm";
 
 const game=readFileSync(new URL("../game.js",import.meta.url),"utf8");
 const diagnostic=readFileSync(new URL("../3d.html",import.meta.url),"utf8");
@@ -24,12 +25,25 @@ assert.match(game,/function dynamicBlocker\(x,y,fromX,fromY\).*trainCarDistance\
 assert.match(game,/groundObstacles=\[\{item:player.*policeVehicles.*police.*npcs.*props.*normObjects/s,"trains must brake for the player, other people, response vehicles, and solid ground objects");
 assert.match(game,/event<\.55.*train\.pause=1\.4\+Math\.random\(\)\*4\.8/,"trains must stop unpredictably often enough to disrupt both loops");
 assert.match(game,/TRAIN_PLAYER_OBSTRUCTION_AUDIO=TRAIN_ANNOUNCEMENT_AUDIO\[0\]/,"the player-obstruction cue must always map to the supplied Buxtehude recording");
-assert.match(game,/playerHolding&&!playerHoldingLast\)requestTrainAnnouncement\(0,TRAIN_PLAYER_OBSTRUCTION_AUDIO,STIMULUS_PRIORITY\.CRITICAL\)/,"every new player-caused train stop must reserve the critical Buxtehude cue");
+assert.match(game,/playerHolding&&!playerHoldingLast\)requestTrainAnnouncement\(0,TRAIN_PLAYER_OBSTRUCTION_AUDIO,STIMULUS_PRIORITY\.CRITICAL,"track"\)/,"every new player-caused train stop must reserve the critical Buxtehude cue");
 assert.match(game,/direct=priority===STIMULUS_PRIORITY\.CRITICAL[\s\S]*activeStimulus\?\.family==="train"&&!direct/,"a critical obstruction cue must remain queueable behind an active train announcement");
 assert.match(game,/TRAIN_ANNOUNCEMENT_AUDIO=\[/,"the supplied recordings must replace generated train speech");
-assert.match(game,/TRAIN_AUDIO_RADIUS=820,TRAIN_NEARBY_AUDIO_RADIUS=360/,"train announcements need separate broad and close-range vicinities");
-assert.match(game,/function updateTrainAnnouncement\(\).*nearby\?STIMULUS_PRIORITY\.NEARBY:STIMULUS_PRIORITY\.AMBIENT.*requestTrainAnnouncement\(nearest,"",priority\)/s,"close-range trains must promote the local recordings above ordinary speech");
-assert.match(game,/function requestTrainAnnouncement\([\s\S]*done:\(\)=>\{trainAnnouncementNextAt=performance\.now\(\)\+AUDIO_MIX\.TRAIN_GAP_MS\}/,"train announcements must wait before another nearby recording");
+const stationDeclaration=game.match(/const stations=Object\.freeze\((\[[\s\S]*?\])\);/);
+assert.ok(stationDeclaration,"station positions must have one simulation authority");
+const stations=vm.runInNewContext(stationDeclaration[1]);
+assert.equal(stations.length,4,"all four perimeter road ends need stations");
+assert.deepEqual(Array.from(stations,s=>s.id).sort(),["nordost","nordwest","suedost","suedwest"]);
+assert.deepEqual(Array.from(new Set(stations.map(s=>s.accessX+70))).sort((a,b)=>a-b),[1740,9650],"station entrances must meet the western and eastern corner roads");
+for(const s of stations){assert.equal(s.w,1200);assert.ok(s.accessX>=s.x&&s.accessX+140<=s.x+s.w,"station access must join its platform");assert.ok(s.y===310?s.accessY+s.accessH===560:s.y===4905&&s.accessY===4800,"station access must meet the city road end");assert.ok(s.y===310?s.y-232>46:s.y===4905&&5128-s.y-s.h>46,"platform must clear the inner track's full coach body")}
+assert.match(game,/TRAIN_PLATFORM_AUDIO=TRAIN_ANNOUNCEMENT_AUDIO\.slice\(1\)/,"general station clips must exclude the track-only children recording");
+assert.match(game,/function updateTrainAnnouncement\(\).*playerOnRailTrack\(\).*"track".*platformDistance\(\).*"platform"/s,"track and platform triggers must use their own zones");
+assert.match(renderer,/\(bridge\.stations\|\|\[\]\)\.forEach\(stationPlatform\)/,"the WebGL scene must render every station from simulation data");
+const requested=[],player={x:stations[0].x+600,y:stations[0].y+70};
+const audioZones=vm.createContext({stations,player,railLoops:[{y:232},{y:5128}],nearestRailLocation:(loop,x,y)=>({distance:Math.abs(y-loop.y)}),state:{started:true,modal:false,gameOver:false,voiceOn:true},performance:{now:()=>10000},trainAnnouncementNextAt:0,STIMULUS_PRIORITY:{NEARBY:3,AMBIENT:1},requestTrainAnnouncement:(...args)=>requested.push(args)});
+for(const name of ["platformDistance","playerOnRailTrack","updateTrainAnnouncement"]){const line=game.match(new RegExp(`function ${name}\\([^\\n]*`))?.[0];assert.ok(line,`${name} must exist`);vm.runInContext(line,audioZones)}
+vm.runInContext("updateTrainAnnouncement()",audioZones);assert.equal(requested.pop()?.[3],"platform","standing on a platform should request the general announcement pool");
+player.y=232;vm.runInContext("updateTrainAnnouncement()",audioZones);assert.equal(requested.pop()?.[3],"track","standing on the track should request Buxtehude instead");
+player.x=5500;player.y=2500;vm.runInContext("updateTrainAnnouncement()",audioZones);assert.equal(requested.length,0,"the city interior should not hear platform announcements");
 assert.match(game,/AUDIO_CLASS=Object\.freeze\(\{TEXT:"audio-text",BACKGROUND:"background-music",EFFECT:"sound-effect"\}\)/,"runtime audio must declare text, background-music, and sound-effect classes");
 assert.match(game,/function queueStimulus\(item\)/,"dialogue and train audio must share the stimulus broker");
 assert.match(game,/function stopSpeech\(completeHumorScold=false,preserveTrain=false\)\{const keepActive=preserveTrain&&activeStimulus\?\.family==="train";stimulusQueue\.length=0/s,"modal takeover must preserve only an already active no-text train cue");

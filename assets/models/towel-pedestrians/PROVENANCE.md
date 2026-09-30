@@ -28,3 +28,13 @@ The browser preview was visually checked in muted, headless Chromium from the fr
 | `man.glb` | `5326bbb4bd82acb4533a4abb8206a551448c81f1eac0ecc7d7d446054bf39689` |
 | `woman.glb` | `61d14c87a41721bf6219d263ac37ec203b423071bcc581b5a96f810b3933a12c` |
 | `walk-preview.webp` | `7d7dd86e48978040d5b06bf1a5bdd86ea501363b3d38fe9a2e6f10bb8b568170` |
+
+## Reversible caricature presentation
+
+`towel-caricature.js` now supplies the default appearance in the same preview. It is a **candidate-unapproved presentation study**, not a rebuilt or newly accepted GLB. The existing male/female identities, hats, clothes, towel colors, rig, clips and all source-file hashes above remain unchanged. The `Original 3D` control, or `?style=original`, restores the baseline geometry/materials/lighting without restarting the walk; `Caricature` switches back.
+
+The treatment widens and vertically compresses each figure, scales its head by 1.30 and its hands by 1.10, broadens the chest, and enlarges the existing moustache, eyewear and towel geometry about each prop's own center. Sandal sole geometry and foot-joint transforms are not individually altered. The common body transform still changes the preview's overall proportions; this is not a new numerical contact or physical-gait certification.
+
+The presentation uses four-step toon lighting, muted garment colors, a six-tone 512-pixel skin derivative generated in memory from each embedded source texture, and thin back-facing contour shells sharing the existing skeleton. These textures are not new externally generated artwork and add no downloads. The original materials and geometries are retained for comparison; only owned derived resources are disposed. No source mesh, Blender file, gait clip, accepted bitmap or game-loader decision is replaced.
+
+`node --test tests/towel-caricature.test.mjs` covers fixed profiles, paused-frame scale stability, sampled-scale restoration, prop emphasis, skin-palette bounds and resource ownership using CPU fixtures. Those tests were run on a byte-identical local copy during this edit. They do not render Three.js or establish visual acceptance. Desktop/mobile WebGL screenshots, shader/asset loading, all-view silhouette and clipping review, contact quality, and performance checks remain required before promotion into the game. The earlier browser verification recorded above applies to the original GLBs, not this new presentation.

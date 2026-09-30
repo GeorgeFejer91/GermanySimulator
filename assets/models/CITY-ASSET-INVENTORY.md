@@ -115,3 +115,46 @@ The first three groups occupy the gaps between Bundesfaxamt/TÜV, Sparkasse/Post
 - Building materials participate in camera occlusion fading. Preserve authored glass opacity while applying that fade; a transparent dome must not become opaque when the building is unfaded.
 - `3d.html` is a diagnostic subset, not the inventory authority: at audit it contained 18 buildings, three billboard props and a slightly different tree entry. Both pages use the same renderer and root assets. The canonical `game.js` counts above should guide asset coverage.
 - Check local GLB requests, desktop and mobile screenshots, missing-model fallback, entrance access and console output before claiming acceptance. Run the existing building, tree and crossing checks together with JavaScript syntax checks. This inventory records scope and counts, not test results.
+
+## Scoped prop-detail study
+
+This bounded follow-up inspected the complete `city-kit` and `german-props`
+manifests, their authoring scripts and the current renderer mappings: **26 unique
+model types, 1,820,696 bytes of existing GLBs**. That scope is not a claim to have
+visually audited every game asset, sound or character. The dated committed-file
+inventory above remains a historical snapshot; preview-only towel models and
+newly exported studies must not be silently counted as accepted game assets.
+
+| Audited family | Unique model types | Treatment in this pass |
+| --- | ---: | --- |
+| Municipal office, Berlin block, utility building, neighbourhood shop | 4 | Retained. Existing facade detail and building fit are outside this prop pass. |
+| Sandal shop and sock shop | 2 | Retained. No new storefront variants. |
+| Pfand machine, coffee machine and Pfand bottle | 3 | Retained. Existing shaped bottle and functional device silhouettes are already present. |
+| Fax kiosk | 1 | New opt-in study with bevelled casing, handset, keypad and folded paper. |
+| Gnome, watering gnome and placard gnome | 3 | Retained. Character/sculptural identity needs separate acceptance. |
+| Tree and garden shed | 2 | Retained. No foliage, road clearance or garden layout changes. |
+| Bench, streetlamp, litter bin, bollard and bicycle rack | 5 | Retained. Street-furniture placement is unchanged. |
+| Blue and red reserved loungers | 2 | Retained. Existing towel colour identities preserved. |
+| Bottle crate | 1 | New opt-in study replaces straight bottle cylinders with shoulders/necks/caps and opens the crate handles. |
+| Allotment wheelbarrow | 1 | New opt-in study replaces the solid-box tray with a hollow taper, rim and framed supports. |
+| Recycling containers | 1 | New opt-in study adds tapered bodies, wheels, grab handles and raised sorting pictograms. |
+| Picnic table | 1 | Retained. No change to its fit or shared material treatment. |
+
+The four studies live at `prop-details/` and are selected only by
+`?propDetails=1`; normal play retains all existing model paths. The study loader
+matches those four exact source paths, uses the existing URL cache and uniform
+fit, and falls back to the original GLBs on a candidate error. No gameplay data,
+interaction or collision footprint is edited. Its source, export command,
+measured geometry/size budgets and unverified browser acceptance are documented
+in [`prop-details/PROVENANCE.md`](./prop-details/PROVENANCE.md). These are model
+candidates, not a declaration of finished in-game visual or performance QA.
+
+## Opt-in satire-kit expansion
+
+The 45 code-authored station, civic and clutter GLBs, their exact manifest,
+four-view browser review, and per-asset world/collision status are recorded in
+[`satire-kit/PROVENANCE.md`](./satire-kit/PROVENANCE.md). The opt-in game uses 43
+IDs through simulation-owned placements, station fixtures, and exact existing
+model-path replacements. The underpass entrance and catenary mast remain
+unplaced for route and train-clearance reasons. The red reserved lounger remains
+the original model. This pack has not passed full gameplay acceptance.

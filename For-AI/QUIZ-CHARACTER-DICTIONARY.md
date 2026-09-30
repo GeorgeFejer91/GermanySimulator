@@ -24,12 +24,12 @@ The JavaScript authority includes a broad `archetypeLexicon` for affectionate Gu
 
 ## Question categories
 
-- `civic`: lightly adapted BAMF catalog tasks. Keep the official task number and source date visible.
-- `traffic`: original fictional driving-school jokes. Always label them `FIKTIVE SPIELFRAGE`.
-- `grammar-b1`, `grammar-b2`, `grammar-c1`: original certificate-style drills, not copied exam items. Always label them `ZERTIFIKATSNAHE SPIELÜBUNG · KEIN ECHTER PRÜFUNGSSATZ`.
+- `civic`: lightly adapted BAMF catalog tasks. Keep `BAMF · AUFGABE` and the task number in the small source label.
+- `traffic`: original driving-school jokes. Show `FAHRSCHULE` and the source ID.
+- `grammar-b1`, `grammar-b2`, `grammar-c1`: original certificate-style drills, not copied exam items. Show the grammar level and source ID.
 
-The card’s factual context must remain concise and current: § 10(4) StAG generally names B1 for naturalization; B2 requirements depend on the specific course, training provider, or employer; university admission depends on the accepted certificate and program, with TestDaF TDN 4 in every section generally establishing unrestricted admission; the CEFR has A1, A2, B1, B2, C1, and C2, not B3. Keep the general game disclaimer that this is satire, not legal, immigration, education, or admissions advice.
+The passerby speaks the remark, factual context, and question as one conversational line, and the card's main paragraph shows that exact line. Keep the context concise and current: § 10(4) StAG generally names B1 for naturalization; B2 requirements depend on the specific course, training provider, or employer; university admission depends on the accepted certificate and program, with TestDaF TDN 4 in every section generally establishing unrestricted admission; the CEFR has A1, A2, B1, B2, C1, and C2, not B3.
 
 ## Visual contract
 
-The nine 512 × 512 WebP dossier portraits live under `assets/quiz-characters/` and are shared by desktop and mobile. They use one raw psychological-expressionist RPG language: broken oil-and-gouache planes, mature asymmetrical faces, restrained eyes, straighter noses, and emotionally contained bureaucratic expressions. Each character sits against the same quiet gray-beige dossier field with no scenery, and every portrait retains a wide top margin that keeps the complete head and hairstyle inside the frame. Desktop keeps the portrait/dossier column on the left of the question sheet. Mobile stacks the compact dossier above the choices so the modal remains usable. A missing image falls back to the visible § placeholder without blocking the quiz.
+The nine 512 × 512 WebP dossier portraits live under `assets/quiz-characters/` and are shared by desktop and mobile. They use one raw psychological-expressionist RPG language: broken oil-and-gouache planes, mature asymmetrical faces, restrained eyes, straighter noses, and emotionally contained bureaucratic expressions. Each character sits against the same quiet gray-beige dossier field with no scenery, and every portrait retains a wide top margin that keeps the complete head and hairstyle inside the frame. Desktop keeps a narrow portrait, name, and role column beside the spoken line. Mobile stacks that compact identity above the prompt and choices. The dictionary's office, authority, and specialty remain authoring context rather than card overhead. A missing image falls back to the visible § placeholder without blocking the quiz.
