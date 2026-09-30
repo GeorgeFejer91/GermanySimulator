@@ -174,3 +174,24 @@ Internet ist für uns alle Neuland.” It is 3.030 seconds, 73,394 bytes, mono
 `6E6DF76D99DB89E462335AE6A8FB6D7909C0611015B58A98FD9C8A3E0A8CB336`.
 No external source URL or redistribution license was supplied; it is not
 relicensed under the repository's other asset licenses.
+
+## Civilian traffic-driver shouts
+
+Four German-language MP3s under `traffic/` were generated on 2026-09-30 with
+the local Voice Cloner, Qwen3-TTS 1.7B Base (Apache 2.0), using its German
+mode on CPU. The saved `GS traffic driver` profile ID is
+`0f4a57f7b5ad4447b11111b8f5e42631`. Its 5.120-second reference
+(SHA-256 `EAC473D6BC2580AA39A9369A7EA1A0FB03A937630CEED68F4BC06EDB515CF6B5`)
+joins the three CC0 Thorsten angry source clips listed at the top of this
+file. The approved files are mono, 24 kHz, 64 kbit/s MP3, normalized to the
+foreground target of −18 LUFS and at most −1.5 dBTP. Whole-clip German
+Whisper `small` transcription retained all spoken words; punctuation and
+colloquial spelling were checked against the catalog source strings. The
+synthetic horn is code-generated and has no speech recording.
+
+| Shipped file | Duration | SHA-256 |
+| --- | ---: | --- |
+| `traffic/driver-berlin-01.mp3` | 2.880 s | `B0CB1E459C8446EA1089A462EDC58EDF89D9490827081110E0E48BC133708F14` |
+| `traffic/driver-berlin-02.mp3` | 2.960 s | `41F48026CC99CC859E333157F79FD58B8DF71B0C0735D36B9DF2A7DCAFF6A782` |
+| `traffic/driver-germany-01.mp3` | 2.080 s | `88070DBDE09CAF488FAA5E8AA3E81FE4A6ABFAAAA45DD0AFC3E4F78AE9E02298` |
+| `traffic/driver-germany-02.mp3` | 2.320 s | `48F810565B49EC6ED207D3EA038CDB2D89B811575F30CC218B5DD1A5B7102914` |

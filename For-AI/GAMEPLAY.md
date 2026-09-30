@@ -25,6 +25,8 @@ Mission order:
 
 ## Systems
 
+- A civilian car honks as soon as it brakes because the player steps into its lane. Its driver shouts one short angry line through the shared speech/text broker; only that directly obstructed car reacts, while a prolonged stop brings longer, repeated horn blasts. Berlin drivers use Denglisch and Deutschland drivers use German only. The horn remains audible beside the shout, and the driver interrupts lower-priority ambient speech while leaving train and critical dialogue intact.
+
 - Running for too long, jaywalking, lingering on roads, evading an active police approach, random petty audits, and entering protected lawn can raise the wanted level. A continuous 2.6-second stay on ordinary forbidden grass or a road outside a marked zebra crossing adds a wanted star; the protected police garden responds after two seconds and remains deliberately harsher. Repeat violations escalate the wanted stars up to five and call progressively larger police responses.
 - From two wanted stars onward, the first police car brings in a locally bundled recording of an authentic Polizei Essen Martinshorn. Its volume follows the nearest response car and rises modestly with the wanted tier; a separate CC0 German police-car pass-by recording punctuates close approaches without stacking on every frame. Pausing in a modal, clearing the response, or dropping below the car tier fades the loop. Missing recordings retain the existing synthesized violation siren.
 - Schrebergarten and police-garden grass trigger deliberately disproportionate enforcement. The marked police-garden path is safe.

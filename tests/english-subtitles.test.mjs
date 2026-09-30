@@ -15,8 +15,8 @@ vm.runInContext(librarySource,context,{filename:"AUDIO-TEXT-LIBRARY.js"});
 const library=context.window.GermanySimulatorAudioText;
 
 assert.equal(library.version,4);
-assert.equal(Object.keys(library.clips).length,51,"all shipped foreground clips need stable IDs");
-assert.equal(new Set(Object.values(library.clips).map(clip=>clip.path)).size,51,"clip paths must be unique");
+assert.equal(Object.keys(library.clips).length,55,"all shipped foreground clips need stable IDs");
+assert.equal(new Set(Object.values(library.clips).map(clip=>clip.path)).size,55,"clip paths must be unique");
 for(const clip of Object.values(library.clips)){
  assert.ok(library.voices[clip.voiceId],`${clip.id} needs a registered voice ID`);
  if(clip.targetVoiceId)assert.ok(library.voices[clip.targetVoiceId]?.profileId,`${clip.id} needs a saved replacement profile`);
@@ -25,9 +25,9 @@ for(const clip of Object.values(library.clips)){
  assert.ok(clip.trigger?.trim(),`${clip.id} needs a trigger family`);
  assert.ok(existsSync(join(root,clip.path.slice(2))),`${clip.id} points to a missing recording`);
 }
-const profileRoles=["player-inner","passerby-a","passerby-b","police-officer","quiz-officer","merz-character","merkel-character","soeder-character","weidel-character"];
-assert.equal(new Set(profileRoles.map(id=>library.voices[id].profileId)).size,9,"character roles need distinct saved profiles");
-assert.equal(new Set(profileRoles.map(id=>library.voices[id].referenceSha256)).size,9,"character roles need distinct source references");
+const profileRoles=["player-inner","passerby-a","passerby-b","police-officer","quiz-officer","traffic-driver","merz-character","merkel-character","soeder-character","weidel-character"];
+assert.equal(new Set(profileRoles.map(id=>library.voices[id].profileId)).size,10,"character roles need distinct saved profiles");
+assert.equal(new Set(profileRoles.map(id=>library.voices[id].referenceSha256)).size,10,"character roles need distinct source references");
 assert.equal(library.voices.narrator.profileId,undefined,"the official computer voice uses browser speech");
 assert.equal(library.clips["rule-01"].targetVoiceId,undefined,"recorded rules must not target a retired narrator clone");
 for(const [family,id] of [["merz","merz-character"],["merkel","merkel-character"],["bayern","soeder-character"],["alice","weidel-character"]]){

@@ -539,7 +539,7 @@ and in `SPRITE-GENERATION-PROTOCOL.md`.
 
 ## 2026-09-28 — Stable speech IDs and reusable local voice profiles
 
-`AUDIO-TEXT-LIBRARY.js` now owns one catalog for all 51 shipped foreground
+`AUDIO-TEXT-LIBRARY.js` now owns one catalog for all shipped foreground
 speech clips. Each clip has a stable ID, actual recording voice ID, exact German source,
 English subtitle or timed cues, path, and trigger family. The law and rule
 decks moved into that catalog so their recorded text and subtitles cannot drift
