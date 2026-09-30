@@ -1,5 +1,23 @@
 # Durable decisions
 
+## 2026-09-29 — Official computer voice
+
+Official documents, HUM-01 readings, and opening mission guidance retain the
+existing browser-generated German voice. The separately saved narrator clone
+is retired from the game catalog and must not be used to render these lines;
+the other character voice profiles are unaffected.
+
+## 2026-09-29 — Character interaction review links
+
+`character-review.html?person=<id>` is an unlinked, static review surface for
+the playable character, featured NPCs, named pedestrians, crowd name/archetype
+pairings, quiz dossier identities, police, and counter/rail voices. It uses the
+shipped sprite atlases and the existing audio-text catalog for recorded clips;
+browser-only dialogue is labeled and previewed with browser speech. Movement
+previews show each actor's body type, gait, route style, and current speed
+without changing the canonical game runtime. The review page has `noindex`,
+but GitHub Pages provides no access control: an unlisted URL is not private.
+
 ## 2026-09-29 — Human template replaces towel-preview primitive figures
 
 The user rejected the jointed, cartoon-like towel pedestrian miniatures. The candidate preview now uses the pinned CC0 MakeHuman continuous body mesh with separate older male and older female shape targets, matching skin textures, and one weighted 18-bone rig per figure. Costume colors, hats, eyewear, socks, sandals, and towels retain the two accepted sprite identities. The neutral guide still supplies the closed 32-pose contact walk. The updated GLBs, editable Blender sources, and animated WebP remain **preview-only and unapproved**; the canonical root game continues to load accepted sprite atlases. `assets/models/towel-pedestrians/PROVENANCE.md` records the source, build, and verification details.

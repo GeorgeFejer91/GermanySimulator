@@ -433,7 +433,7 @@ const recordings=Object.freeze({
  })),
  ...Object.fromEntries(rules.map((rule,index)=>{
   const number=String(index+1).padStart(2,"0"),path=`./assets/voices/laws/thorsten-negative-rule-${number}.mp3`;
-  return [path,Object.freeze({id:`rule-${number}`,voiceId:"thorsten",targetVoiceId:"narrator",trigger:"rule.first-display-or-rotation",source:rule[1],english:ruleEnglish[index]})]
+  return [path,Object.freeze({id:`rule-${number}`,voiceId:"thorsten",trigger:"rule.first-display-or-rotation",source:rule[1],english:ruleEnglish[index]})]
  }))
 });
 
@@ -441,7 +441,7 @@ const voices=Object.freeze({
  thorsten:Object.freeze({name:"Thorsten",source:"CC0 Thorsten-Voice; local XTTS derivatives"}),
  "quiz-sting":Object.freeze({name:"Existing quiz sting",source:"User-supplied recording; separate from the new quiz-officer profile"}),
  "player-inner":Object.freeze({name:"Player inner monologue",profileName:"GS player-inner",profileId:"ae509d92d1344233ac1483b525b0d1bf",reference:"https://huggingface.co/kyutai/tts-voices/resolve/main/voice-donations/0a67_enhanced.wav",referenceSha256:"f3d11f89eb6ee77ca0ab1ceed734755d0fff3d2791050cb4fe20428e0f6a76b3",license:"CC0",engine:"qwen",status:"profile-ready"}),
- narrator:Object.freeze({name:"Narrator",profileName:"GS narrator",profileId:"d2aa2822d8ca4461a1a8419e19c5fca2",reference:"https://huggingface.co/kyutai/tts-voices/resolve/main/voice-donations/1410_enhanced.wav",referenceSha256:"e566765a7053fbdcb113bd9ba104bfe186c4321a2e243c598380cdc7af01213d",license:"CC0",engine:"qwen",status:"profile-ready"}),
+ narrator:Object.freeze({name:"Official computer voice",source:"German browser speech; no cloned profile"}),
  "passerby-a":Object.freeze({name:"Passerby A",profileName:"GS passerby-a",profileId:"2a77926e2e144a2986d5a1c72e3ec962",reference:"https://huggingface.co/kyutai/tts-voices/resolve/main/voice-donations/1dd0_enhanced.wav",referenceSha256:"cbbedbb763e89feb5d231ca7e34fee61f0bc44277bfd866c9485deb1a39e42f6",license:"CC0",engine:"qwen",status:"profile-ready"}),
  "passerby-b":Object.freeze({name:"Passerby B",profileName:"GS passerby-b",profileId:"478c82e448d047459986503dafd2897a",reference:"https://huggingface.co/kyutai/tts-voices/resolve/main/voice-donations/2181_enhanced.wav",referenceSha256:"d97bf4947a527b4210f7c32dc69975416189bd74dd6706d2b04b515b2295c121",license:"CC0",engine:"qwen",status:"profile-ready"}),
  "police-officer":Object.freeze({name:"Police officer",profileName:"GS police-officer",profileId:"11aab44caec64b3d85bc63120644ade6",reference:"https://huggingface.co/kyutai/tts-voices/resolve/main/voice-donations/245e_enhanced.wav",referenceSha256:"5f77c5e4d01eae7ec7b5881e77ec198c43d169a803dd81a2c297676de32a72a3",license:"CC0",engine:"qwen",status:"profile-ready"}),
@@ -458,7 +458,7 @@ const voices=Object.freeze({
 });
 const speechFamilies=Object.freeze({
  "player-inner":Object.freeze({voiceId:"player-inner",trigger:"game.js innerMonologues on player events",delivery:"browser speech until approved clips are rendered"}),
- narrator:Object.freeze({voiceId:"narrator",trigger:"opening guidance and future narration",delivery:"profile ready; no shipped clip"}),
+ narrator:Object.freeze({voiceId:"narrator",trigger:"HUM-01 documents and opening mission guidance",delivery:"browser speech"}),
  pedestrians:Object.freeze({voiceIds:Object.freeze(["passerby-a","passerby-b"]),trigger:"game.js pedestrianBarks, crowdArchetypes and npcLines by region",delivery:"browser speech until approved clips are rendered"}),
  police:Object.freeze({voiceId:"police-officer",trigger:"game.js policeBarks and wanted-level enforcement",delivery:"browser speech until approved clips are rendered"}),
  quiz:Object.freeze({voiceId:"quiz-officer",trigger:"game.js quizApproaches, question and wrong answer",delivery:"browser speech plus one user-supplied clip"}),

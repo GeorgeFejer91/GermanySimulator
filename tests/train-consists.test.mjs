@@ -37,7 +37,7 @@ assert.deepEqual(Array.from(new Set(stations.map(s=>s.accessX+70))).sort((a,b)=>
 for(const s of stations){assert.equal(s.w,1200);assert.ok(s.accessX>=s.x&&s.accessX+140<=s.x+s.w,"station access must join its platform");assert.ok(s.y===310?s.accessY+s.accessH===560:s.y===4905&&s.accessY===4800,"station access must meet the city road end");assert.ok(s.y===310?s.y-232>46:s.y===4905&&5128-s.y-s.h>46,"platform must clear the inner track's full coach body")}
 assert.match(game,/TRAIN_PLATFORM_AUDIO=TRAIN_ANNOUNCEMENT_AUDIO\.slice\(1\)/,"general station clips must exclude the track-only children recording");
 assert.match(game,/function updateTrainAnnouncement\(\).*playerOnRailTrack\(\).*"track".*platformDistance\(\).*"platform"/s,"track and platform triggers must use their own zones");
-assert.match(renderer,/\(bridge\.stations\|\|\[\]\)\.forEach\(stationPlatform\)/,"the WebGL scene must render every station from simulation data");
+assert.match(renderer,/\(bridge\.stations\|\|\[\]\)\.map\(state=>\{[\s\S]*?stationPlatform\(state\)/,"the WebGL scene must render every station from simulation data");
 const requested=[],player={x:stations[0].x+600,y:stations[0].y+70};
 const audioZones=vm.createContext({stations,player,railLoops:[{y:232},{y:5128}],nearestRailLocation:(loop,x,y)=>({distance:Math.abs(y-loop.y)}),state:{started:true,modal:false,gameOver:false,voiceOn:true},performance:{now:()=>10000},trainAnnouncementNextAt:0,STIMULUS_PRIORITY:{NEARBY:3,AMBIENT:1},requestTrainAnnouncement:(...args)=>requested.push(args)});
 for(const name of ["platformDistance","playerOnRailTrack","updateTrainAnnouncement"]){const line=game.match(new RegExp(`function ${name}\\([^\\n]*`))?.[0];assert.ok(line,`${name} must exist`);vm.runInContext(line,audioZones)}

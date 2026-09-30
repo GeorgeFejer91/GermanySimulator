@@ -8,7 +8,7 @@
 - **Workflow:** Define one bounded outcome and its checks, reuse what exists, and make the smallest coherent diff.
 - **Verification:** A task is ready only after focused checks, applicable full checks, diff review, and instruction synchronization. Report unrun checks and never overclaim evidence.
 - **Self-update:** Update durable goals, constraints, decisions, routes, and gates in the same change that alters them. Do not keep chat logs, daily diaries, duplicate ledgers, generated evidence, or speculative backlogs.
-- **Git:** Inspect status before and after work; stage only intended paths; use coherent, itemized commits; push validated completed work when branch policy permits. Never force-push, bypass protection, publish secrets, or absorb unrelated changes.
+- **Git:** Inspect status before and after work; stage only intended paths; use coherent, itemized commits; push each validated major change to `origin/main` immediately, and publish smaller completed changes too. Never force-push, bypass protection, publish secrets, or absorb unrelated changes.
 - **YAGNI:** Add a file here only when it has a distinct current owner and consumer. Prefer one section or link over a new document, script, dependency, or abstraction.
 
 

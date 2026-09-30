@@ -3,3 +3,9 @@
 *.jpg binary
 *.jpeg binary
 *.webp binary
+# Generated audit signatures and the pinned upstream BVH depend on their exact
+# mixed/CRLF line endings; Git's normal text conversion invalidates hashes.
+assets/sprite-sources/rigs/pose-audit.json -text
+assets/sprite-sources/candidates/merkel-21/pose-audit.json -text
+assets/sprite-sources/candidates/merkel-cmu-left/pose-audit.json -text
+assets/sprite-sources/reference/cmu-walk-69-01/69_01.bvh -text

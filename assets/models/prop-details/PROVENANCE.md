@@ -78,5 +78,17 @@ interaction preservation and performance must still be reviewed before default
 promotion. The tunnel execution companion returned HTTP 502, so live repository
 commands, Git status, commit and publication were not verified by this edit.
 
+## 2026-09-30 consolidation check
+
+The current recipes export deterministic GLBs, but none of their four hashes
+match the values embedded in the later satire-kit byte-identity test. The fax
+recipe, for example, exports a 133,836-byte GLB with SHA-256
+`471ed731764adc95f3e893e0a5afa1a8f1d86014b5ad51d0005f254d88052d2c`,
+while the test expects `96840b52bc06b5cc2ca5e7e25036cf3b2c3dc5d8e303d445f2174daa41434dc1`.
+No earlier recipe or exported GLB with those expected digests exists in this
+checkout. The byte-identity assertion remains failing and its expected hashes
+have not been replaced. This is an unresolved provenance regression, not
+evidence of a runtime parsing failure.
+
 No external artwork, textures, fonts, trademark graphics or new dependencies are
 included. Existing asset attributions remain with their original files.

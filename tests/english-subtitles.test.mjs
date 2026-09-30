@@ -25,9 +25,11 @@ for(const clip of Object.values(library.clips)){
  assert.ok(clip.trigger?.trim(),`${clip.id} needs a trigger family`);
  assert.ok(existsSync(join(root,clip.path.slice(2))),`${clip.id} points to a missing recording`);
 }
-const profileRoles=["player-inner","narrator","passerby-a","passerby-b","police-officer","quiz-officer","merz-character","merkel-character","soeder-character","weidel-character"];
-assert.equal(new Set(profileRoles.map(id=>library.voices[id].profileId)).size,10,"character roles need distinct saved profiles");
-assert.equal(new Set(profileRoles.map(id=>library.voices[id].referenceSha256)).size,10,"character roles need distinct source references");
+const profileRoles=["player-inner","passerby-a","passerby-b","police-officer","quiz-officer","merz-character","merkel-character","soeder-character","weidel-character"];
+assert.equal(new Set(profileRoles.map(id=>library.voices[id].profileId)).size,9,"character roles need distinct saved profiles");
+assert.equal(new Set(profileRoles.map(id=>library.voices[id].referenceSha256)).size,9,"character roles need distinct source references");
+assert.equal(library.voices.narrator.profileId,undefined,"the official computer voice uses browser speech");
+assert.equal(library.clips["rule-01"].targetVoiceId,undefined,"recorded rules must not target a retired narrator clone");
 for(const [family,id] of [["merz","merz-character"],["merkel","merkel-character"],["bayern","soeder-character"],["alice","weidel-character"]]){
  assert.equal(library.speechFamilies[family].profileVoiceId,id,`${family} needs its own generation profile`);
  assert.equal(library.voices[id].license,"CC BY 4.0");
@@ -43,7 +45,9 @@ assert.equal(library.pools.railLaw.length,3,"every synthesized rail warning need
 assert.ok(Object.keys(library.lines).length>90,"fixed dialogue translation catalog is unexpectedly small");
 
 const walk=directory=>readdirSync(directory,{withFileTypes:true}).flatMap(entry=>entry.isDirectory()?walk(join(directory,entry.name)):[join(directory,entry.name)]);
-const voiceFiles=walk(join(root,"assets/voices")).filter(path=>path.endsWith(".mp3")&&!path.includes(`${sep}laws${sep}`));
+// Only the short Neuland excerpt is shipped by the runtime; other Merkel and
+// Merz files are source references awaiting transcript, rights and gameplay review.
+const voiceFiles=walk(join(root,"assets/voices")).filter(path=>path.endsWith(".mp3")&&!path.includes(`${sep}laws${sep}`)&&!path.includes(`${sep}merz${sep}`)&&(!path.includes(`${sep}merkel${sep}`)||path.endsWith(`${sep}neuland-0-3s.mp3`)));
 voiceFiles.push(join(root,"assets/merkel-wir-schaffen-das.mp3"));
 for(const path of voiceFiles){
  const url="./"+relative(root,path).split(sep).join("/");
