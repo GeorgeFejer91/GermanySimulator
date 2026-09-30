@@ -544,7 +544,7 @@ function showRendererFailure(error){
     function sign(lines,bw,bh,x,y,z,background="#d9d2b9",foreground="#252a25"){
       const canvas=document.createElement("canvas");canvas.width=1024;canvas.height=Math.round(1024*bh/bw);const ctx=canvas.getContext("2d"),ch=canvas.height;
       ctx.fillStyle=background;ctx.fillRect(0,0,1024,ch);ctx.strokeStyle=foreground;ctx.lineWidth=14;ctx.strokeRect(10,10,1004,ch-20);ctx.fillStyle=foreground;ctx.textAlign="center";
-      const step=(ch-38)/lines.length;lines.forEach((text,i)=>{ctx.font=`${i===0?900:700} ${Math.min(i===0?53:43,step*.61)}px Arial, sans-serif`;ctx.fillText(text,512,26+step*(i+.65),950)});
+      const step=(ch-38)/lines.length;lines.forEach((text,i)=>{ctx.font=`${i===0?900:800} ${Math.min(i===0?70:63,step*.74)}px Arial, sans-serif`;ctx.fillText(text,512,26+step*(i+.65),950)});
       const texture=new T.CanvasTexture(canvas);texture.colorSpace=T.SRGBColorSpace;texture.anisotropy=Math.min(4,renderer.capabilities.getMaxAnisotropy());
       const mesh=new T.Mesh(new T.PlaneGeometry(bw,bh),new T.MeshBasicMaterial({map:texture}));mesh.position.set(x,y,z);g.add(mesh);block(steel,x,y,z-.06,bw+.12,bh+.12,.1);return mesh;
     }
@@ -597,8 +597,8 @@ function showRendererFailure(error){
     for(const x of [-6.15,-1.25])landmarkBanner("cdu",g,.65,1,x,2.6,front+.29);
     const priceTag=landmarkBanner("price",g,3.8,.79,-3.7,2.6,front+.29);priceTag.rotation.z=-.18;
     const plaqueX=(site.plaqueX-site.x-site.w/2)*S,plaqueZ=(site.plaqueY-site.y-site.h/2)*S;
-    for(const x of [plaqueX-2,plaqueX+2])block(steel,x,1.18,plaqueZ-.15,.1,2.36,.1);
-    sign(["GÖRLITZER PARK · KOSTENTAFEL",...(site.signLines||[]),"E · DETAILS UND QUELLEN"],4.8,2.42,plaqueX,2.35,plaqueZ);
+    for(const x of [plaqueX-2.35,plaqueX+2.35])block(steel,x,1.18,plaqueZ-.15,.1,2.36,.1);
+    sign(["GÖRLITZER PARK",...(site.signLines||[]),"KOSTEN & KLÜNGEL? · E: AKTEN"],5.6,2.42,plaqueX,2.35,plaqueZ,"#f1ecdc","#171b18");
     for(const [material,matrices] of batches){const mesh=new T.InstancedMesh(new T.BoxGeometry(1,1,1),material,matrices.length);mesh.name="Park security structure";matrices.forEach((matrix,i)=>mesh.setMatrixAt(i,matrix));mesh.computeBoundingSphere();g.add(mesh)}
     for(const [positions,color,name] of [[segments,0x77837a,"Double chain mesh fence"],[barbs,0xafb7a6,"Razor wire barbs"]]){const geometry=new T.BufferGeometry();geometry.setAttribute("position",new T.Float32BufferAttribute(positions,3));const mesh=new T.LineSegments(geometry,new T.LineBasicMaterial({color}));mesh.name=name;g.add(mesh)}
   }
@@ -711,6 +711,7 @@ function showRendererFailure(error){
     const bounds=model=>{if(!model)return null;const b=new T.Box3().setFromObject(model),s=b.getSize(new T.Vector3());return{width:s.x,height:s.y,depth:s.z,ground:b.min.y}};
     return{placards:placardLayouts.map(item=>({...item})),buildings:buildingSlots.filter(s=>!s.building.kind).map(s=>({id:s.building.id,loaded:!!s.model,fallback:s.fallback.visible,bounds:bounds(s.model),glass:[...s.materials].filter(m=>/glass/i.test(m.name)).map(m=>({name:m.name,opacity:m.opacity,baseOpacity:m.userData.baseOpacity}))})),city:cityAssetSlots.map(s=>({file:s.file,loaded:!!s.model,fallback:s.fallback.visible,bounds:bounds(s.model)})),monument:kiesingerMonument?{bounds:bounds(kiesingerMonument),scale:kiesingerMonument.scale.y,loaded:!!kiesingerMonument.getObjectByName("KiesingerSculpture")}:null,banners:landmarkBanners.map(({kind,mesh})=>({kind,bounds:bounds(mesh)})),vehicles:[...trafficCarMeshes.values(),...policeVehicleMeshes.values()].map(s=>({id:s.state.id,kind:s.kind,loaded:!!s.model,fallback:s.fallback.visible,bounds:bounds(s.model),wheels:s.wheels.map(w=>({name:w.node.name,angle:w.node.rotation.x,radius:w.radius})),steering:s.steering.map(o=>o.rotation.y),brakes:s.brakes.map(m=>m.emissiveIntensity),beacons:s.beacons.map(b=>b.material.emissiveIntensity)})),sources:[...localModels.keys()],render:{...renderer.info.render},memory:{...renderer.info.memory}};
   }
+  let parkCameraFrame=0,previousCameraTime=performance.now();
   window.Germany3D={ready:true,isWorldPointVisible,sync(){
     syncChar(playerMesh,bridge.player,0);
     playerMesh.rotation.y=bridge.player.facing;
@@ -730,8 +731,9 @@ function showRendererFailure(error){
     camera.position.set(px,11.5+3.5*frame,pz+14+2*frame);
     camera.lookAt(px+(memorial?(X(memorial.x)-px)*frame:0),1+3.6*frame,pz-2.7+(memorial?(Z(memorial.y)-(pz-2.7))*frame:0));
     const park=bridge.goerlitzerPark,parkDistance=park?Math.hypot(bridge.player.x-park.plaqueX,bridge.player.y-park.plaqueY):Infinity;
-    const parkFrame=park&&bridge.player.y>park.y+park.h-30?Math.max(0,Math.min(1,(440-parkDistance)/250)):0;
-    if(parkFrame){const narrow=Math.max(0,.95/camera.aspect-1),cx=X(park.x+park.w/2),cz=Z(park.y+park.h/2);camera.position.set(px+(cx-px)*parkFrame,11.5+(11+14*narrow)*parkFrame,pz+14+8*narrow*parkFrame);camera.lookAt(px+(cx-px)*parkFrame,1+parkFrame,pz-2.7+(cz-(pz-2.7))*parkFrame)}
+    const parkTarget=park&&bridge.player.y>park.y+park.h-30?Math.max(0,Math.min(1,(440-parkDistance)/250)):0;
+    parkCameraFrame+=(parkTarget-parkCameraFrame)*(1-Math.exp(-6*Math.min(.05,Math.max(0,(now-previousCameraTime)/1000))));previousCameraTime=now;
+    if(parkCameraFrame>.001){const narrow=Math.max(0,Math.min(1,.95/camera.aspect-1)),cx=X(park.x+park.w/2),cz=Z(park.y+park.h/2),focus=parkCameraFrame*(1-.65*narrow);camera.position.set(px+(cx-px)*focus,11.5+(5+2*narrow)*parkCameraFrame,pz+14+2*narrow*parkCameraFrame);camera.lookAt(px+(cx-px)*focus,1+parkCameraFrame,pz-2.7+(cz-(pz-2.7))*parkCameraFrame)}
     updateBuildingOcclusion();updateWirtschaftswunder(now);renderer.render(scene,camera);
   },inspectAssets};
   app.classList.add("three-ready");

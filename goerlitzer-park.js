@@ -6,14 +6,9 @@ window.GoerlitzerPark=Object.freeze({
  trees:Object.freeze([[1555,2490],[1660,2680],[2040,2480],[2130,2670]].map(([x,y])=>Object.freeze({x:x+560,y:y+560}))),
  priceFlag:Object.freeze({amount:"≈ 1.800.000 €",logo:"assets/logos/cdu-2023.svg"}),
  signLines:Object.freeze([
-  "CDU-geführter Berliner Senat · CDU/SPD",
-  "ZAUN + TORE: rund 1,8 Mio. €",
-  "Berichtete Baukosten · Februar 2026",
-  "WACHSCHUTZ: 251.444 € netto",
-  "Gemeldet: 2025 + Januar 2026",
-  "BETRIEB + WACHEN: 775.000 €/Jahr",
-  "Haushalt 2026 / 2027 · je Jahr",
-  "Öffentliche Mittel · Details / Quellen: E"
+  "ZAUN + TORE · ≈ 1,8 MIO. €",
+  "WACHEN 2025 + JAN 2026 · 251.444 € NETTO",
+  "ETAT 2026/27 · 775.000 €/JAHR"
  ]),
  lines:Object.freeze([
   "GÖRLITZER PARK. Please enjoy die Grünanlage from outside. Parkbenutzung ist nur durch amtlich genehmigtes Anschauen zulässig.",
