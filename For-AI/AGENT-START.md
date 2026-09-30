@@ -59,4 +59,4 @@ After relevant changes:
 
 ## Immediate publication
 
-After completing and validating repository changes, commit the intended project files and push `main` to `origin` immediately so the existing GitHub Pages workflow publishes them. Do not leave finished work only in the local worktree. Never force-push or publish secrets, tool caches, or a knowingly broken build; if publication fails, report the exact blocker and keep the validated local commit intact. An explicit user request to hold or keep work local overrides this rule.
+After every major completed and validated change, commit the intended project files and push to `origin/main` immediately so the existing GitHub Pages workflow publishes them. Publish smaller completed changes the same way; do not batch finished changes for a later task or leave them only in a local worktree. Never force-push or publish secrets, tool caches, or a knowingly broken build; if publication fails, report the exact blocker and keep the validated local commit intact. An explicit user request to hold or keep work local overrides this rule.

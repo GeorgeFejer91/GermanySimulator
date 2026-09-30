@@ -352,7 +352,7 @@ Level design makes forbidden surfaces more abundant than legal pedestrian space:
 
 ## 2026-09-20 — Immediate GitHub Pages publication
 
-Completed repository changes are validated, committed, and pushed to `origin/main` immediately unless the user explicitly asks to hold them locally. The existing `.github/workflows/pages.yml` push trigger is the sole deployment path and publishes the repository root to GitHub Pages. Publication must remain a normal fast-forward push: never force-push, expose secrets or tool caches, or knowingly deploy a failing build.
+Completed repository changes are validated, committed, and pushed to `origin/main` immediately unless the user explicitly asks to hold them locally. The user reaffirmed on 2026-09-30 that every major change must be committed online to GitHub as soon as it is complete; do not defer publication or leave a finished isolated-worktree commit unpushed. Smaller completed changes follow the same default. The existing `.github/workflows/pages.yml` push trigger is the sole deployment path and publishes the repository root to GitHub Pages. Publication must remain a normal fast-forward push: never force-push, expose secrets or tool caches, or knowingly deploy a failing build.
 
 ## 2026-09-20 — Spoken audio and textbox lockstep
 
