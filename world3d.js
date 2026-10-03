@@ -153,16 +153,19 @@ function showRendererFailure(error){
     sign.scale.set(Math.min(5.3,w*.91),.64,1);sign.position.set(0,1.76,d/2+.35);return sign;
   }
   function stationPlatform(s){
-    const cx=X(s.x+s.w/2),cz=Z(s.y+s.h/2),south=s.id.startsWith("sued"),edge=Z(south?s.y+s.h:s.y),back=cz+(south?-.75:.75),stone=mat(0xb9b7ae),yellow=mat(0xc8ad63),glass=new T.MeshStandardMaterial({color:0xabc1c6,roughness:.18,transparent:true,opacity:.38,depthWrite:false,side:T.DoubleSide});
-    box(s.w*S,.14,s.h*S,stone,cx,.07,cz);box(s.w*S,.16,.16,M.cross,cx,.15,edge);box(s.w*S,.025,.29,yellow,cx,.17,edge+(south?-.3:.3));
-    for(let i=-4;i<=4;i++)box(.04,.027,.29,M.dark,cx+i*2.3,.19,edge+(south?-.3:.3));
-    box(9.4,.16,1.55,glass,cx,3.32,back);for(const px of [-4.3,0,4.3])for(const pz of [-.59,.59])box(.09,3.18,.09,M.metal,cx+px,1.61,back+pz);
-    for(const side of [-1,1]){const x=cx+side*4.3;box(.07,1.85,1.15,glass,x,1.47,back);box(.08,.09,1.15,M.metal,x,2.34,back)}
-    for(const dx of [-3.05,3.05]){box(1.34,.09,.42,M.metal,cx+dx,.47,back);box(1.34,.55,.08,M.metal,cx+dx,.76,back+(south?.2:-.2));for(const leg of [-.53,.53])box(.07,.46,.07,M.metal,cx+dx+leg,.24,back)}
-    const board=label("ZUGVERSPÄTUNG",`BAHNHOF ${s.name} · GLEIS 1`,"#16558b","#f6f6f3");board.scale.set(4.6,.9,1);board.position.set(cx,4.05,back);world.add(board);
-    for(const side of [-1,1]){const x=cx+side*8.4;box(.08,2.25,.08,M.metal,x,1.13,back);const sign=label("ZUGVERSPÄTUNG",side<0?"GLEIS 1 · +35 MIN":"ABFAHRT UNBESTIMMT","#16558b","#f6f6f3");sign.scale.set(3.35,.72,1);sign.position.set(x,2.55,back);world.add(sign)}
-    const clockFace=new T.Mesh(new T.CircleGeometry(.32,24),M.cross);clockFace.position.set(cx-4.8,2.71,back+(south?-.82:.82));clockFace.rotation.y=south?Math.PI:0;world.add(clockFace);const clockRim=new T.Mesh(new T.TorusGeometry(.33,.035,6,24),M.dark);clockRim.position.copy(clockFace.position);clockRim.rotation.y=clockFace.rotation.y;world.add(clockRim);box(.025,.22,.025,M.dark,clockFace.position.x,2.76,clockFace.position.z+(south?-.02:.02));
-    box(.58,1.55,.48,M.metal,cx+5.1,.78,back);box(.4,.54,.025,M.dark,cx+5.1,1.1,back+(south?-.25:.25));
+    const g=new T.Group(),length=Math.max(s.w,s.h)*S,depth=Math.min(s.w,s.h)*S,edge=-depth/2,back=depth/2-.52,stone=mat(0xb9b7ae),yellow=mat(0xc8ad63),glass=new T.MeshStandardMaterial({color:0xabc1c6,roughness:.18,transparent:true,opacity:.38,depthWrite:false,side:T.DoubleSide});
+    g.position.set(X(s.x+s.w/2),0,Z(s.y+s.h/2));g.rotation.y=s.side==="west"?Math.PI/2:s.side==="east"?-Math.PI/2:s.side==="south"?Math.PI:0;world.add(g);
+    box(length,.3,depth,stone,0,.15,0,g);box(length,.08,.12,M.cross,0,.34,edge,g);box(length,.025,.25,yellow,0,.39,edge+.29,g);
+    for(let i=-Math.floor(length/2);i<=Math.floor(length/2);i++)box(.035,.027,.25,M.dark,i,.41,edge+.29,g);
+    for(let step=0;step<3;step++){const top=.3-step*.1;box(2.8,top,.4,stone,0,top/2,depth/2+.2+step*.4,g);box(2.8,.025,.06,M.cross,0,top+.013,depth/2+.39+step*.4,g)}
+    const canopy=Math.min(7,length*.43);box(canopy,.14,1.45,glass,0,2.65,back,g);
+    for(const px of [-canopy/2+.18,canopy/2-.18])for(const pz of [-.54,.54])box(.08,2.35,.08,M.metal,px,1.48,back+pz,g);
+    for(const side of [-1,1]){const x=side*(canopy/2-.18);box(.06,1.36,1.08,glass,x,1.55,back,g);box(.07,.07,1.08,M.metal,x,2.23,back,g)}
+    for(const dx of [-canopy*.28,canopy*.28]){box(1.13,.08,.38,M.metal,dx,.66,back,g);box(1.13,.45,.07,M.metal,dx,.92,back+.2,g);for(const leg of [-.42,.42])box(.06,.36,.06,M.metal,dx+leg,.44,back,g)}
+    const board=label("ZUGVERSPÄTUNG",`BAHNHOF ${s.name} · GLEIS 1`,"#16558b","#f6f6f3");board.scale.set(Math.min(4,length*.3),.72,1);board.position.set(0,3.14,back);g.add(board);
+    for(const side of [-1,1]){const x=side*(length/2-1);box(.07,1.9,.07,M.metal,x,1.25,back,g);const sign=label("AMT-BAHN",side<0?"GLEIS 1 · +35 MIN":"ABFAHRT UNBESTIMMT","#16558b","#f6f6f3");sign.scale.set(2.45,.54,1);sign.position.set(x,2.45,back);g.add(sign)}
+    const clockFace=new T.Mesh(new T.CircleGeometry(.26,24),M.cross);clockFace.position.set(-canopy*.58,2.47,back+.58);g.add(clockFace);const clockRim=new T.Mesh(new T.TorusGeometry(.27,.03,6,24),M.dark);clockRim.position.copy(clockFace.position);g.add(clockRim);box(.02,.17,.02,M.dark,clockFace.position.x,2.51,clockFace.position.z+.02,g);
+    box(.48,1.18,.4,M.metal,canopy*.61,.9,back,g);box(.32,.43,.025,M.dark,canopy*.61,1.16,back+.22,g);
   }
   const stationSlots=(bridge.stations||[]).map(state=>{
     const before=new Set(world.children);stationPlatform(state);
@@ -224,7 +227,7 @@ function showRendererFailure(error){
   let kiesingerMonument;
   const satireKitEnabled=new URLSearchParams(location.search).get("satireKit")==="1";
   const detailPropLoader=satireKitEnabled
-    ?import("./assets/models/satire-kit/loader.js?v=20260930-satire-placements2").catch(error=>{console.warn("Satire kit unavailable; using originals",error);return null})
+    ?import("./assets/models/satire-kit/loader.js?v=20261003-road-end-stations").catch(error=>{console.warn("Satire kit unavailable; using originals",error);return null})
     :new URLSearchParams(location.search).get("propDetails")==="1"
       ?import("./assets/models/prop-details/loader.js?v=20260930-prop-details1").catch(error=>{console.warn("Prop detail study unavailable; using originals",error);return null})
       :null;
@@ -674,7 +677,7 @@ function showRendererFailure(error){
   const normObjectSlots=(bridge.normObjects||[]).map(normObject);
   function character(kind){const g=new T.Group(),m=kind==="player"?M.player:kind==="police"?M.police:kind==="merkel"?M.merkel:M.npc;box(.42,.72,.3,m,0,.72,0,g);const head=new T.Mesh(new T.SphereGeometry(.2,10,7),M.skin);head.position.y=1.3;g.add(head);const lg=new T.CylinderGeometry(.06,.07,.5,8),ag=new T.CylinderGeometry(.05,.06,.48,8),ll=new T.Mesh(lg,m),rl=ll.clone(),la=new T.Mesh(ag,m),ra=la.clone();ll.position.set(-.1,.27,0);rl.position.set(.1,.27,0);la.position.set(-.27,.76,0);ra.position.set(.27,.76,0);g.add(ll,rl,la,ra);g.userData={ll,rl,la,ra};if(kind==="merkel"){const hair=new T.Mesh(new T.SphereGeometry(.22,10,7,0,Math.PI*2,0,Math.PI*.58),mat(0x5d5953));hair.position.y=1.39;g.add(hair)}if(kind==="police"){const cap=new T.Mesh(new T.CylinderGeometry(.21,.21,.08,10),M.dark);cap.position.y=1.52;g.add(cap)}return g}
   function syncChar(q,o,l=0){
-    const previousX=q.userData.worldX??o.x,previousY=q.userData.worldY??o.y,travel=Math.hypot(o.x-previousX,o.y-previousY);q.userData.worldX=o.x;q.userData.worldY=o.y;q.userData.walkPhase=(q.userData.walkPhase||0)+travel*.13;q.position.set(X(o.x),l,Z(o.y));
+    const previousX=q.userData.worldX??o.x,previousY=q.userData.worldY??o.y,travel=Math.hypot(o.x-previousX,o.y-previousY);q.userData.worldX=o.x;q.userData.worldY=o.y;q.userData.walkPhase=(q.userData.walkPhase||0)+travel*.13;q.position.set(X(o.x),l+bridge.stationElevation(o.x,o.y),Z(o.y));
     const target=travel>.01?Math.sin(q.userData.walkPhase)*.38:0,s=q.userData.walkSwing=(q.userData.walkSwing||0)+(target-(q.userData.walkSwing||0))*(travel>.01?1:.28);q.userData.ll.rotation.x=s;q.userData.rl.rotation.x=-s;q.userData.la.rotation.x=-s*.7;q.userData.ra.rotation.x=s*.7
   }
   const atlasTextureCache=new Map(),atlasMaterialCache=new Map();
@@ -689,7 +692,7 @@ function showRendererFailure(error){
   function syncAtlasSprite(q,o,height){
     const grid=q.userData.grid,frame=o.spriteFrame||0,row=o.spriteRow||0,flip=!!o.spriteFlip;
     if(frame!==q.userData.spriteFrame||row!==q.userData.spriteRow||flip!==q.userData.spriteFlip){const uv=q.geometry.attributes.uv,base=q.userData.baseUv,u0=frame/grid.cols,v0=1-(row+1)/grid.rows;for(let i=0;i<uv.count;i++){const bx=base[i*2],by=base[i*2+1];uv.setXY(i,u0+(flip?1-bx:bx)/grid.cols,v0+by/grid.rows)}uv.needsUpdate=true;q.userData.spriteFrame=frame;q.userData.spriteRow=row;q.userData.spriteFlip=flip}
-    q.position.set(X(o.x),height,Z(o.y));q.quaternion.copy(camera.quaternion)
+    q.position.set(X(o.x),height+bridge.stationElevation(o.x,o.y),Z(o.y));q.quaternion.copy(camera.quaternion)
   }
   function syncMerkel(q,o){syncAtlasSprite(q,o,1.21)}
   function syncBayern(q,o){syncAtlasSprite(q,o,1.455)}
@@ -747,8 +750,9 @@ function showRendererFailure(error){
     const px=X(bridge.player.x),pz=Z(bridge.player.y),now=performance.now(),memorial=bridge.kiesingerMemorial;
     const plaqueDistance=memorial?Math.hypot(bridge.player.x-memorial.x,bridge.player.y-memorial.y-195):Infinity;
     const frame=memorial&&bridge.player.y>memorial.y+100?Math.max(0,Math.min(1,(370-plaqueDistance)/190))*Math.min(1,kiesingerMonument?.scale.y||1):0;
-    camera.position.set(px,11.5+3.5*frame,pz+14+2*frame);
-    camera.lookAt(px+(memorial?(X(memorial.x)-px)*frame:0),1+3.6*frame,pz-2.7+(memorial?(Z(memorial.y)-(pz-2.7))*frame:0));
+    const playerElevation=bridge.stationElevation(bridge.player.x,bridge.player.y);
+    camera.position.set(px,11.5+playerElevation+3.5*frame,pz+14+2*frame);
+    camera.lookAt(px+(memorial?(X(memorial.x)-px)*frame:0),1+playerElevation+3.6*frame,pz-2.7+(memorial?(Z(memorial.y)-(pz-2.7))*frame:0));
     const park=bridge.goerlitzerPark,parkDistance=park?Math.hypot(bridge.player.x-park.plaqueX,bridge.player.y-park.plaqueY):Infinity;
     const parkTarget=park&&bridge.player.y>park.y+park.h-30?Math.max(0,Math.min(1,(440-parkDistance)/250)):0;
     parkCameraFrame+=(parkTarget-parkCameraFrame)*(1-Math.exp(-6*Math.min(.05,Math.max(0,(now-previousCameraTime)/1000))));previousCameraTime=now;

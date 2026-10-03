@@ -466,6 +466,10 @@ Each loop now begins with six seven-car trains in alternating directions. Distin
 
 Five user-supplied station-hall MP3s replace the generated train-announcement text and browser voice. Proximity makes one shuffled no-repeat train-family request eligible through the shared broker; once admitted, it plays at fixed foreground gain through the common bus and never opens a textbox. Leaving the rail vicinity invalidates a pending cue, while an active cue finishes before modal speech. Voice-off still cancels it. The files are in-game-only pending separate redistribution permission; `assets/audio/trains/PROVENANCE.md` is their checksum and source-path authority. EBO obstruction hints remain separate exact visible-and-spoken gameplay warnings.
 
+## 2026-10-03 — Stations at every road end
+
+Derive the 18 compact AMT-BAHN stations from the six north-south and three east-west road rectangles, with one station at each end. The original four corner station identities remain. Each platform rises 0.3 metres beside the inner rail loop, with three shallow entrance steps and matching walking heights on the approach. The simulation owns station placement and elevation; Three.js renders the platforms, steps, fixtures, and raised characters from that shared data. Keep the existing train audio zones and static deployment.
+
 ## 2026-09-21 — Exclusive audio-text priority and obstruction cue
 
 Recorded and synthesized speech now shares one exclusive `audio-text` authority. A current event completes before the next begins; train announcements reserve the next slot ahead of ordinary dialogue, while a newly player-blocked train reserves the supplied Buxtehude recording ahead of ordinary train proximity cues. Active train audio is not abandoned merely because the player leaves its radius or opens a dialogue. Background music and every Web Audio sound effect route through separately classified, smoothly ducked outputs while audio text is active. The existing oriented coach collision remains the player barrier, and trains additionally scan the player, pedestrians, police, response vehicles, props, and normable objects as solid rail obstructions.

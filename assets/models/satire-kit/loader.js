@@ -50,11 +50,12 @@ export async function installStationKit(T,world,slots,loader,coordinates){
   try{
    const sources=await Promise.all(placements.map(p=>loadSatireModel(p.id,loader)));
    const south=s.id.startsWith('sued'),width=s.w*S,depth=s.h*S,edge=(south?1:-1)*depth/2;
-   block(width,.14,depth,0xb9b7ae,0,.07,0);
-   block(width,.16,.16,0xd2cdc0,0,.15,edge);
-   block(width,.025,.29,0xc8ad63,0,.17,edge+(south?-.3:.3));
-   for(let i=-4;i<=4;i++)block(.04,.027,.29,0x333432,i*width*.1,.19,edge+(south?-.3:.3));
-   for(let i=0;i<sources.length;i++){const p=placements[i],model=sources[i].scene.clone(true);model.scale.setScalar(p.scale);model.position.set(p.x,.14,p.z);model.rotation.y=south?Math.PI:0;replacement.add(model);}
+   block(width,.3,depth,0xb9b7ae,0,.15,0);
+   block(width,.08,.12,0xd2cdc0,0,.34,edge);
+   block(width,.025,.25,0xc8ad63,0,.39,edge+(south?-.29:.29));
+   for(let i=-4;i<=4;i++)block(.035,.027,.25,0x333432,i*width*.1,.41,edge+(south?-.29:.29));
+   for(let step=0;step<3;step++){const top=.3-step*.1,z=(south?-1:1)*(depth/2+.2+step*.4);block(2.8,top,.4,0xb9b7ae,0,top/2,z);block(2.8,.025,.06,0xd2cdc0,0,top+.013,z+(south?-.19:.19));}
+   for(let i=0;i<sources.length;i++){const p=placements[i],model=sources[i].scene.clone(true);model.scale.setScalar(p.scale);model.position.set(p.x,.3,p.z);model.rotation.y=south?Math.PI:0;replacement.add(model);}
    replacement.name='Satire kit / '+s.id;replacement.position.set(X(s.x+s.w/2),0,Z(s.y+s.h/2));
    world.add(replacement);slot.fallback.visible=false;slot.model=replacement;for(const fixture of fixtures)fixture.active=true;
   }catch(error){for(const resource of [...ownedGeometry,...ownedMaterials])resource.dispose();console.warn('Original station retained: '+s.id,error);}

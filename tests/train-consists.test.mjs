@@ -28,13 +28,25 @@ assert.match(game,/TRAIN_PLAYER_OBSTRUCTION_AUDIO=TRAIN_ANNOUNCEMENT_AUDIO\[0\]/
 assert.match(game,/playerHolding&&!playerHoldingLast\)requestTrainAnnouncement\(0,TRAIN_PLAYER_OBSTRUCTION_AUDIO,STIMULUS_PRIORITY\.CRITICAL,"track"\)/,"every new player-caused train stop must reserve the critical Buxtehude cue");
 assert.match(game,/direct=priority===STIMULUS_PRIORITY\.CRITICAL[\s\S]*activeStimulus\?\.family==="train"&&!direct/,"a critical obstruction cue must remain queueable behind an active train announcement");
 assert.match(game,/TRAIN_ANNOUNCEMENT_AUDIO=\[/,"the supplied recordings must replace generated train speech");
-const stationDeclaration=game.match(/const stations=Object\.freeze\((\[[\s\S]*?\])\);/);
-assert.ok(stationDeclaration,"station positions must have one simulation authority");
-const stations=vm.runInNewContext(stationDeclaration[1]);
-assert.equal(stations.length,4,"all four perimeter road ends need stations");
-assert.deepEqual(Array.from(stations,s=>s.id).sort(),["nordost","nordwest","suedost","suedwest"]);
-assert.deepEqual(Array.from(new Set(stations.map(s=>s.accessX+70))).sort((a,b)=>a-b),[1740,9650],"station entrances must meet the western and eastern corner roads");
-for(const s of stations){assert.equal(s.w,1200);assert.ok(s.accessX>=s.x&&s.accessX+140<=s.x+s.w,"station access must join its platform");assert.ok(s.y===310?s.accessY+s.accessH===560:s.y===4905&&s.accessY===4800,"station access must meet the city road end");assert.ok(s.y===310?s.y-232>46:s.y===4905&&5128-s.y-s.h>46,"platform must clear the inner track's full coach body")}
+const roadsDeclaration=game.match(/const horizontalRoads=[^\n]+\nconst verticalRoads=[^\n]+/);
+const stationDeclaration=game.slice(game.indexOf("const STATION_RISE="),game.indexOf("const TRAIN_CAR_OFFSETS="));
+assert.ok(roadsDeclaration&&stationDeclaration.includes("const stations=Object.freeze("),"roads and stations must have one simulation authority");
+const stationWorld=vm.createContext({RAIL_GUTTER:560,CITY:{w:9840,h:4240}});
+vm.runInContext(`${roadsDeclaration[0]}\n${stationDeclaration}\nglobalThis.layout={horizontalRoads,verticalRoads,stations,stationElevation,STATION_RISE}`,stationWorld);
+const {horizontalRoads,verticalRoads,stations,stationElevation,STATION_RISE}=stationWorld.layout;
+assert.equal(stations.length,2*(horizontalRoads.length+verticalRoads.length),"every road end needs its own station");
+assert.deepEqual(Array.from(stations.filter(s=>s.side==="north"||s.side==="south"),s=>s.id).filter(id=>["nordwest","nordost","suedwest","suedost"].includes(id)).sort(),["nordost","nordwest","suedost","suedwest"]);
+for(const road of verticalRoads)for(const side of ["north","south"]){const center=road.x+road.w/2,matches=stations.filter(s=>s.side===side&&s.accessX+s.accessW/2===center);assert.equal(matches.length,1,`${side} end of vertical road ${center} needs one station`);const s=matches[0];assert.ok(s.accessX>=s.x&&s.accessX+s.accessW<=s.x+s.w);assert.ok(side==="north"?s.accessY+s.accessH===560&&s.y-232>46:s.accessY===4800&&5128-s.y-s.h>46)}
+for(const road of horizontalRoads)for(const side of ["west","east"]){const center=road.y+road.h/2,matches=stations.filter(s=>s.side===side&&s.accessY+s.accessH/2===center);assert.equal(matches.length,1,`${side} end of horizontal road ${center} needs one station`);const s=matches[0];assert.ok(s.accessY>=s.y&&s.accessY+s.accessH<=s.y+s.h);assert.ok(side==="west"?s.accessX+s.accessW===560&&s.x-232>46:s.accessX===10400&&10728-s.x-s.w>46)}
+for(const s of stations){
+ const px=s.x+s.w/2,py=s.y+s.h/2,cx=s.accessX+s.accessW/2,cy=s.accessY+s.accessH/2;
+ assert.equal(stationElevation(px,py),STATION_RISE);
+ for(const [approach,height] of [[0,0],[55,.1],[75,.2],[95,.3]]){
+  const x=s.side==="west"?s.accessX+s.accessW-approach:s.side==="east"?s.accessX+approach:cx,y=s.side==="north"?s.accessY+s.accessH-approach:s.side==="south"?s.accessY+approach:cy;
+  assert.ok(Math.abs(stationElevation(x,y)-height)<1e-8,`${s.id} must climb all three steps`);
+ }
+}
+assert.match(game,/Math\.abs\(stationElevation\(x,y\)-stationElevation\(player\.x,player\.y\)\)>\.11/,"platform sides must route walking through the stairs");
 assert.match(game,/TRAIN_PLATFORM_AUDIO=TRAIN_ANNOUNCEMENT_AUDIO\.slice\(1\)/,"general station clips must exclude the track-only children recording");
 assert.match(game,/function updateTrainAnnouncement\(\).*playerOnRailTrack\(\).*"track".*platformDistance\(\).*"platform"/s,"track and platform triggers must use their own zones");
 assert.match(renderer,/\(bridge\.stations\|\|\[\]\)\.map\(state=>\{[\s\S]*?stationPlatform\(state\)/,"the WebGL scene must render every station from simulation data");
