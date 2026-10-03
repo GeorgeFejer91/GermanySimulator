@@ -64,6 +64,12 @@
       "bytes": 39264,
       "sha256": "142573cc220dae776047e4d88c1fcd201e499812519fcba6c9d92fa2136eda9d"
     },
+    "krugers-kugellager": {
+      "file": "krugers-kugellager.glb",
+      "dimensions_xyz": [8.12, 4.79, 5.82],
+      "bytes": 749656,
+      "sha256": "52d475b29fc6faf77db6f4412a35f2111a5f1fc7aa72e18ec646a592fef102bf"
+    },
     "beer-crate": {
       "file": "beer-crate.glb",
       "dimensions_xyz": [
@@ -105,5 +111,5 @@
       "sha256": "c09989e2b2621e995e45e9f845e9da026e03722409ce29818328db4fa50efccf"
     }
   },
-  "total_glb_bytes": 469956
+  "total_glb_bytes": 1219612
 }

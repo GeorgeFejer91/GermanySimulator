@@ -136,6 +136,22 @@ function showRendererFailure(error){
     placardFontReady.then(ready=>{fontReady=layout.fontReady=ready;draw()});
     return sign;
   }
+  function bearingShopSign(w,d){
+    const canvas=document.createElement("canvas");canvas.width=1024;canvas.height=176;
+    const ctx=canvas.getContext("2d");
+    ctx.fillStyle="#fff0d4";ctx.fillRect(0,0,1024,176);
+    ctx.fillStyle="#f36b17";ctx.fillRect(0,0,1024,13);ctx.fillRect(0,163,1024,13);
+    ctx.fillStyle="#db2865";ctx.fillRect(0,13,177,150);
+    ctx.strokeStyle="#fff0d4";ctx.lineWidth=10;
+    for(const radius of [58,29]){ctx.beginPath();ctx.arc(88,88,radius,0,Math.PI*2);ctx.stroke()}
+    for(let i=0;i<8;i++){const angle=i*Math.PI/4;ctx.beginPath();ctx.arc(88+43*Math.cos(angle),88+43*Math.sin(angle),8,0,Math.PI*2);ctx.fillStyle="#fff0d4";ctx.fill()}
+    ctx.textAlign="center";ctx.textBaseline="middle";
+    ctx.fillStyle="#dc2865";ctx.font="900 55px Arial,sans-serif";ctx.fillText("KRÜGERS",590,58,770);
+    ctx.fillStyle="#3f2626";ctx.font="900 73px Arial,sans-serif";ctx.fillText("KUGELLAGER",590,124,770);
+    const texture=new T.CanvasTexture(canvas);texture.colorSpace=T.SRGBColorSpace;
+    const sign=new T.Mesh(new T.PlaneGeometry(1,1),new T.MeshBasicMaterial({map:texture,side:T.DoubleSide}));
+    sign.scale.set(Math.min(5.3,w*.91),.64,1);sign.position.set(0,1.76,d/2+.35);return sign;
+  }
   function stationPlatform(s){
     const cx=X(s.x+s.w/2),cz=Z(s.y+s.h/2),south=s.id.startsWith("sued"),edge=Z(south?s.y+s.h:s.y),back=cz+(south?-.75:.75),stone=mat(0xb9b7ae),yellow=mat(0xc8ad63),glass=new T.MeshStandardMaterial({color:0xabc1c6,roughness:.18,transparent:true,opacity:.38,depthWrite:false,side:T.DoubleSide});
     box(s.w*S,.14,s.h*S,stone,cx,.07,cz);box(s.w*S,.16,.16,M.cross,cx,.15,edge);box(s.w*S,.025,.29,yellow,cx,.17,edge+(south?-.3:.3));
@@ -194,7 +210,8 @@ function showRendererFailure(error){
     baumarkt:cityModelUrl("brick-utility"),faxlager:cityModelUrl("brick-utility"),
     reinigung:cityModelUrl("brick-utility"),spaeti:cityModelUrl("neighborhood-shop"),imbiss:cityModelUrl("neighborhood-shop"),
     bundestag:"./assets/models/bundestag/bundestag.glb",
-    sandalenladen:germanPropUrl("sandal-shop"),sockenladen:germanPropUrl("sock-shop")
+    sandalenladen:germanPropUrl("sandal-shop"),sockenladen:germanPropUrl("sock-shop"),
+    "krugers-kugellager":"./assets/models/german-props/krugers-kugellager.glb?v=20261003-shop"
   };
   const powerModels={
     coalBuilding:"./assets/models/power-plants/coal-building.glb",
@@ -399,12 +416,14 @@ function showRendererFailure(error){
   }
   function building(b,i){
     if(b.kind){powerPlant(b,i);return}
-    const g=new T.Group(),fallback=new T.Group(),w=b.w*S,d=b.h*S,h=Math.max(2.8,b.hgt*H),cols=[0x65645f,0x706f69,0x5c5d59,0x7a7871],bm=mat(cols[i%cols.length],.98);
-    g.add(fallback);box(w,h,d,bm,0,h/2,0,fallback);box(w*1.03,.16,d*1.03,mat(0x89877f),0,h+.08,0,fallback);
-    const dx=(b.doorX-(b.x+b.w/2))*S;box(Math.min(1.3,w*.18),1.55,.1,M.dark,dx,.78,d/2+.06,fallback);box(Math.min(2,w*.32),.1,.62,mat(0xaaa69b),dx,1.72,d/2+.28,fallback);
+    const g=new T.Group(),fallback=new T.Group(),w=b.w*S,d=b.h*S,h=Math.max(2.8,b.hgt*H),shop=b.id==="krugers-kugellager",cols=[0x65645f,0x706f69,0x5c5d59,0x7a7871],bm=mat(shop?0xe8dac3:cols[i%cols.length],.98);
+    g.add(fallback);box(w,h,d,bm,0,h/2,0,fallback);box(w*1.03,.16,d*1.03,mat(shop?0xf36b17:0x89877f),0,h+.08,0,fallback);
+    const dx=(b.doorX-(b.x+b.w/2))*S;box(Math.min(1.3,w*.18),1.55,.1,M.dark,dx,.78,d/2+.06,fallback);
+    if(shop){box(w*.98,.6,.12,mat(0xd72b67),0,1.95,d/2+.08,fallback);box(w*.98,.11,.64,mat(0xffe2b5),0,1.48,d/2+.30,fallback)}
+    else box(Math.min(2,w*.32),.1,.62,mat(0xaaa69b),dx,1.72,d/2+.28,fallback);
     const cn=Math.max(2,Math.min(7,Math.floor(w/1.25))),rn=Math.max(2,Math.min(5,Math.floor(h/1.05)));
-    for(let r=0;r<rn;r++)for(let c=0;c<cn;c++)box(.48,.31,.04,M.win,-w*.41+c*(w*.82/Math.max(1,cn-1)),.9+r*Math.max(.64,(h-1.6)/Math.max(1,rn-1)),d/2+.025,fallback);
-    const l=buildingPlacard(b,w,dx,2.23,d/2+.22);g.add(l);g.position.set(X(b.x+b.w/2),0,Z(b.y+b.h/2));world.add(g);
+    for(let r=0;r<rn;r++)for(let c=0;c<cn;c++)box(.48,.31,.04,shop?M.dark:M.win,-w*.41+c*(w*.82/Math.max(1,cn-1)),.9+r*Math.max(.64,(h-1.6)/Math.max(1,rn-1)),d/2+.025,fallback);
+    const l=shop?bearingShopSign(w,d):buildingPlacard(b,w,dx,2.23,d/2+.22);g.add(l);g.position.set(X(b.x+b.w/2),0,Z(b.y+b.h/2));world.add(g);
     const slot={building:b,group:g,fallback,label:l,model:null,materials:new Set(),opacity:1};buildingSlots.push(slot);registerMaterials(g,slot);
     const url=buildingModels[b.id]||cityModelUrl("municipal-office");installBuildingModel(slot,b.id==="bundestag"?url+"?v=20260926-city1":url,w,h,d);
   }

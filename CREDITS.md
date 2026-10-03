@@ -13,7 +13,7 @@ was created with funding from NSF EIA-0196217.
 
 ## 3D buildings
 
-The active city building and street-prop kit is original geometry authored in Blender for this project. Four building families, Pfand machines and bottles, coffee/fax kiosks, gnomes, branching trees, timber sheds, lamps, benches, bins, bollards, and bicycle racks use texture-free materials. Editable source, generation instructions, geometry budgets, and checksums are in `assets/models/city-kit/`. The inventory and replacement priorities are in `assets/models/CITY-ASSET-INVENTORY.md`. Road surfaces and paving textures are deterministic project-authored code.
+The active city building and street-prop kit is original geometry authored in Blender for this project. Four building families, Pfand machines and bottles, coffee/fax kiosks, gnomes, branching trees, timber sheds, lamps, benches, bins, bollards, and bicycle racks use texture-free materials. The separate Krügers Kugellager takeaway storefront and its bearing emblem are also original geometry in `assets/models/german-props/`. Editable source, generation instructions, geometry budgets, and checksums are in `assets/models/city-kit/` and the adjacent `german-props/` provenance and manifest. The inventory and replacement priorities are in `assets/models/CITY-ASSET-INVENTORY.md`. Road surfaces and paving textures are deterministic project-authored code.
 
 Six earlier building meshes from Kenney's **City Kit Commercial 2.1** remain archived locally with their CC0 1.0 source record; they are no longer loaded by the city renderer.
 

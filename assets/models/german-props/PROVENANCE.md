@@ -1,9 +1,9 @@
 # German street details
 
-Ten original, texture-free Blender models made for Germany Simulator. The editable
+Eleven original, texture-free Blender models made for Germany Simulator. The editable
 source is `german-props.blend`; `tools/build-german-props.py` builds that source and
 the grounded, Y-up/+Z-front GLBs. `manifest.json` records exact sizes and SHA-256
-hashes. The 10 shipped GLBs total 469,956 bytes (0.45 MiB). No external geometry,
+hashes. The 11 shipped GLBs total 1,219,612 bytes (1.16 MiB). No external geometry,
 textures, logos, or photo scans were imported.
 
 The source review considered [Kenney's CC0 City Kit (Commercial)](https://kenney.nl/assets/city-kit-commercial)
@@ -12,11 +12,14 @@ generic storefronts would need rebuilt display merchandise and facades to carry
 the sandal/sock pairing, so the shipped models are original instead. Kenney files
 already retained elsewhere in this repository are governed by their own licenses.
 
-The paired storefronts occupy one new small retail block. Blue and red loungers
+The paired sandal and sock storefronts occupy one small retail block. Krügers Kugellager
+is a separate Germany-side fast-shop with an original pink-and-orange awning, counter,
+display bearings, and raised bearing emblem. It uses no real doughnut-chain name,
+wordmark, logo, or architectural model. Blue and red loungers
 have broad towels across their backs; two additional gnomes carry a watering can
 or blank placard. The crate, wheelbarrow, containers, and picnic table reuse the
-city kit's restrained stone, wood, and painted-metal palette. Brand markings and
-readable retail text remain runtime scene labels, not baked textures.
+city kit's restrained stone, wood, and painted-metal palette. Readable retail
+text is a runtime scene label; the shop's bearing symbol is original geometry.
 
 Rebuild from the repository root with Blender 4.1 or newer:
 

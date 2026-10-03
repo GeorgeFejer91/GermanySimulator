@@ -28,6 +28,8 @@ COLORS = {
     "skin": (.65, .43, .30, 1), "white": (.90, .88, .80, 1),
     "soil": (.24, .20, .15, 1),
     "towel-blue": (.25, .43, .55, 1), "towel-red": (.65, .23, .16, 1),
+    "shop-orange": (.96, .40, .08, 1), "shop-pink": (.88, .10, .37, 1),
+    "bearing": (.66, .70, .72, 1), "shop-cream": (.98, .92, .77, 1),
 }
 MATS = {}
 for name, color in COLORS.items():
@@ -162,6 +164,45 @@ def storefront(name, kind):
         box("sock sign leg", (-.04,-2.68,3.04), (.18,.06,.23), "cream")
         box("sock sign foot", (.07,-2.68,2.94), (.37,.06,.11), "cream")
 
+def bearing_icon(name, x, y, z, radius, material="bearing"):
+    for ring_radius in [radius, radius * .48]:
+        bpy.ops.mesh.primitive_torus_add(major_segments=32, minor_segments=8,
+                                         location=(x,y,z), rotation=(math.pi/2,0,0),
+                                         major_radius=ring_radius, minor_radius=radius*.095)
+        keep(bpy.context.object, name + " race", material)
+    for i in range(8):
+        angle=i*math.tau/8
+        sphere(name + " ball", (x+math.cos(angle)*radius*.74,y-.025,
+                                 z+math.sin(angle)*radius*.74),
+               (radius*.095,radius*.095,radius*.095), material, 10, 6)
+
+def bearing_storefront():
+    begin("krugers-kugellager")
+    box("warm masonry shell", (0,0,1.57), (7.8,4.8,3.14), "shop-cream")
+    box("dark plinth", (0,0,.18), (8,5,.36), "dark")
+    box("orange roof edge", (0,0,3.25), (8.12,5.05,.24), "shop-orange")
+    box("pink fascia", (0,-2.50,2.88), (7.95,.20,.55), "shop-pink")
+    box("takeaway awning", (0,-2.88,2.47), (7.96,.80,.14), "shop-cream")
+    for x in [-3.5,-2.5,-1.5,-.5,.5,1.5,2.5,3.5]:
+        box("awning stripe", (x,-2.89,2.385), (.43,.81,.025),
+            "shop-orange" if x<0 else "shop-pink")
+    for x in [-2.35,2.35]:
+        box("wide serving window", (x,-2.49,1.50), (2.58,.13,1.69), "dark")
+        box("serving glass", (x,-2.57,1.55), (2.38,.05,1.50), "glass")
+        box("counter ledge", (x,-2.72,.88), (2.65,.33,.15), "shop-orange")
+        for dx in [-.70,0,.70]:
+            bearing_icon("display bearing",x+dx,-2.66,1.23,.17)
+    box("center entrance", (0,-2.52,1.17), (1.48,.14,2.28), "dark")
+    box("entrance glass", (0,-2.62,1.25), (1.25,.05,2.02), "glass")
+    sphere("door handle",(.49,-2.69,1.04),(.05,.025,.05),"bearing")
+    box("roof sign legs", (-.52,-2.33,3.50), (.09,.10,.66), "bearing")
+    box("roof sign legs", (.52,-2.33,3.50), (.09,.10,.66), "bearing")
+    box("upright logo panel", (0,-2.37,4.05), (1.55,.18,1.48), "shop-pink")
+    bearing_icon("roof bearing logo",0,-2.49,4.06,.52,"shop-cream")
+    box("takeaway menu body", (3.34,-2.53,1.38), (.60,.10,1.15), "shop-orange")
+    for z in [1.62,1.40,1.18]:
+        box("menu line", (3.34,-2.60,z), (.40,.025,.045), "shop-cream")
+
 def beer_crate():
     begin("beer-crate")
     box("crate bottom", (0,0,.055), (.74,.53,.11), "red")
@@ -213,6 +254,7 @@ gnome("garden-gnome-watering", True)
 gnome("garden-gnome-placard")
 storefront("sandal-shop", "sandal")
 storefront("sock-shop", "sock")
+bearing_storefront()
 beer_crate()
 wheelbarrow()
 recycling()

@@ -31,6 +31,11 @@ canonical world to **29 buildings and 64 `props` entries**. The original nine
 gnomes and all mission objects remain. `german-props/PROVENANCE.md` records the
 asset-source comparison and rebuild method; its manifest records every new hash.
 
+On 2026-10-03, `german-props/` gained one original, 749,656-byte Krügers
+Kugellager storefront GLB, bringing that folder to 11 shipped models and the
+world to 30 buildings. The dated full-file inventory above remains a historical
+snapshot; other model groups have also changed since that snapshot.
+
 The original Blender kit lives in [`city-kit/`](./city-kit/). The Reichstag landmark has its own source and provenance under [`bundestag/`](./bundestag/). Editable Blender files and authoring scripts are production sources; the browser loads only the local GLBs. These are original architectural interpretations, not scans or exact surveyed replicas.
 
 ## Easiest useful assets

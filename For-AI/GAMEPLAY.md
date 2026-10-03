@@ -25,6 +25,7 @@ Mission order:
 
 ## Systems
 
+- Krügers Kugellager is a Germany-side takeaway storefront on the street near the Späti. Its bearing-marked 3D facade and counter dialogue advertise Kugellager to go; interacting opens a German-only two-line menu exchange without adding a purchase currency or altering the mission chain.
 - A civilian car honks as soon as it brakes because the player steps into its lane. Its driver shouts one short angry line through the shared speech/text broker; only that directly obstructed car reacts, while a prolonged stop brings longer, repeated horn blasts. Berlin drivers use Denglisch and Deutschland drivers use German only. The horn remains audible beside the shout, and the driver interrupts lower-priority ambient speech while leaving train and critical dialogue intact.
 
 - Running for too long, jaywalking, lingering on roads, evading an active police approach, random petty audits, and entering protected lawn can raise the wanted level. A continuous 2.6-second stay on ordinary forbidden grass or a road outside a marked zebra crossing adds a wanted star; the protected police garden responds after two seconds and remains deliberately harsher. Repeat violations escalate the wanted stars up to five and call progressively larger police responses.
