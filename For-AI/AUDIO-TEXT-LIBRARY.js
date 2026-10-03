@@ -164,6 +164,7 @@ const pools=Object.freeze({
 
 const quizContexts=Object.freeze({
  civic:"For naturalization, Section 10(4) StAG generally names B1. But I have a different question for you:",
+ technik:"Schweinfurt and Sweden both appear in the ball-bearing record. Please assign the inventions correctly:",
  traffic:"You want a driving licence? Then tell me how you would handle this situation:",
  "grammar-b1":"For naturalization, Section 10(4) StAG generally names B1. Can you help me with this sentence?",
  "grammar-b2":"For some training programs or jobs, the provider asks for B2. Naturally, I will test you on the spot: How does this sentence go?",
@@ -206,6 +207,10 @@ const questions=Object.freeze({
  "294":"Pentecost is a …",
  "296":"What are the last four weeks before Christmas called in Germany?",
  "300":"From which country did the first guest workers come to the Federal Republic of Germany?",
+ "KL-01":"What did Friedrich Fischer invent in Schweinfurt in 1883 for ball-bearing production?",
+ "KL-02":"Why was Fischer's invention in Schweinfurt so important for ball bearings?",
+ "KL-03":"What did Sven Wingquist invent in Sweden in 1907, after Schweinfurt was already producing balls for bearings?",
+ "KL-04":"Which statement correctly distinguishes the ball-bearing innovations of Schweinfurt and Sweden?",
  "FS-01":"A driving-school car ahead of you has driven at exactly 29 km/h in a 30 zone for twelve minutes. What do you do?",
  "FS-02":"You arrive at 2:37 p.m. in a parking space that requires a parking disc. What time do you set on the disc?",
  "FS-03":"At an intersection, a person in a high-visibility vest holds a laminated sign reading ‘I AM IN CHARGE.’ What authority does the sign give them?",

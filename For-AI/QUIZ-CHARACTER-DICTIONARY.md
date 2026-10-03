@@ -9,12 +9,12 @@
 | Gisela Becker | Besorgte Bürgerin | civic, B1 grammar |
 | Rüdiger Schmidt | Grammatikpolizei | B1, B2, C1 grammar |
 | Sabine Krüger | Selbsternannte Sprachlehrerin | B1, B2 grammar |
-| Uwe Möller | Vertreter der Bürgerempörung | civic, fictional traffic |
-| Brigitte Neumann | Sprecherin der Stadtbildwacht | civic, fictional traffic |
-| Klaus-Dieter Wagner | Freiwilliges Ordnungsamt | civic, fictional traffic |
+| Uwe Möller | Vertreter der Bürgerempörung | civic, fictional traffic, technology trivia |
+| Brigitte Neumann | Sprecherin der Stadtbildwacht | civic, fictional traffic, technology trivia |
+| Klaus-Dieter Wagner | Freiwilliges Ordnungsamt | civic, fictional traffic, technology trivia |
 | Heike Hoffmann | Nachbarschaftliche Hinweisperson | civic, fictional traffic |
 | Dr. Dietmar Schulz | Inoffizieller Zertifikatsprüfer | B1, B2, C1 grammar |
-| Hartmut Keller | Para-polizeilicher Nachbar | civic, fictional traffic |
+| Hartmut Keller | Para-polizeilicher Nachbar | civic, fictional traffic, technology trivia |
 
 Every organization, office, title, authority claim, and portrait is fictional. The joke targets self-appointed procedural authority, not a real person, agency, nationality, age, gender, or profession.
 
@@ -26,6 +26,7 @@ The JavaScript authority includes a broad `archetypeLexicon` for affectionate Gu
 
 - `civic`: lightly adapted BAMF catalog tasks. Keep `BAMF · AUFGABE` and the task number in the small source label.
 - `traffic`: original driving-school jokes. Show `FAHRSCHULE` and the source ID.
+- `technik`: original Kugellager history questions. Show `KUGELLAGER` and the `KL` source ID; distinguish Fischer's 1883 precision-ball production in Schweinfurt from Wingquist's 1907 Swedish self-aligning bearing, without claiming either invented every ball bearing.
 - `grammar-b1`, `grammar-b2`, `grammar-c1`: original certificate-style drills, not copied exam items. Show the grammar level and source ID.
 
 The passerby speaks the remark, factual context, and question as one conversational line, and the card's main paragraph shows that exact line. Keep the context concise and current: § 10(4) StAG generally names B1 for naturalization; B2 requirements depend on the specific course, training provider, or employer; university admission depends on the accepted certificate and program, with TestDaF TDN 4 in every section generally establishing unrestricted admission; the CEFR has A1, A2, B1, B2, C1, and C2, not B3.
