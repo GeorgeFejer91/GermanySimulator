@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="320" height="64" viewBox="0 0 320 64">
+  <title>Made with German Unity</title>
+  <g fill-rule="evenodd" stroke="#171717" stroke-linejoin="round" stroke-width="1.5">
+    <path fill="#171717" d="M32 2 60 17 32 32 4 17ZM32 11 46 18 32 25 18 18Z"/>
+    <path fill="#a4222b" d="M4 17 32 32v29L4 46Zm8 13v12l13 7V37Z"/>
+    <path fill="#d8ad36" d="M60 17 32 32v29l28-15Zm-8 13v12l-13 7V37Z"/>
+  </g>
+  <g fill="#171717" font-family="Arial Narrow,Arial,sans-serif">
+    <text x="76" y="20" font-size="13" font-weight="800" letter-spacing="2.5">MADE WITH</text>
+    <text x="75" y="48" font-size="26" font-weight="900" textLength="236" lengthAdjust="spacingAndGlyphs">GERMAN UNITY</text>
+  </g>
+</svg>
