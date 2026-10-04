@@ -1083,9 +1083,9 @@ function addGermanness(amount,reason){
  particles.push({x:player.x,y:player.y,t:1.25,text:sign+amount+" GERMANNESS"});
  if(amount>0)flashGermannessGain();
  const reaction=amount>0?germannessVoice.gain:germannessVoice.loss;showWorldBark("SIE · INNERER KOMMENTAR",reaction.text,amount<0,reaction.recording,"",{family:"quiz-result",priority:STIMULUS_PRIORITY.CRITICAL,ambient:false});
- if(before<LAW_POWER_THRESHOLD&&state.germanness>=LAW_POWER_THRESHOLD){
+ if(!state.lawUnlocked&&before<LAW_POWER_THRESHOLD&&state.germanness>=LAW_POWER_THRESHOLD){
   state.lawUnlocked=true;queueNationalAnthem();uiTone(740,.12,"square",.04);setTimeout(()=>uiTone(988,.18,"square",.035),120);
-  document.getElementById("law-unlock-prompt").hidden=false;
+  const prompt=document.getElementById("law-unlock-prompt");prompt.hidden=false;setTimeout(()=>prompt.hidden=true,6500);
   const instruction=state.region==="berlin"?"§-MACHT unlocked. Press § oder Q to quote ein Gesetz!":"§-MACHT freigeschaltet. Drücken Sie § oder Q, um ein Gesetz zu zitieren!";
   toast("GERMANNESS "+state.germanness+"/"+GERMANNESS_MAX+" · §-MACHT FREIGESCHALTET · § ODER Q DRÜCKEN");showWorldBark("§-AMT",instruction,true,"","",{family:"law",priority:STIMULUS_PRIORITY.CRITICAL,ambient:false});
  }else toast(reason+" · GERMANNESS "+sign+amount);
@@ -1108,10 +1108,9 @@ function updateGermannessEvents(dt,mag){
  for(const light of trafficLights){const waiting=!light.green&&!roadNow&&mag<.05&&dist(player.x,player.y,light.waitX,light.waitY)<85;light.waitTime=waiting?light.waitTime+dt:0;if(light.waitTime>=1.5)light.waitedCycle=Math.floor((state.ampelClock+light.phaseOffset)/6)}
 }
 function useLawPower(){
- if(!state.started||state.modal)return;if(!state.lawUnlocked){toast("§-MACHT AB "+LAW_POWER_THRESHOLD+"/"+GERMANNESS_MAX+" GERMANNESS");return}if(state.lawCooldown>0){toast("§-MACHT NOCH "+Math.ceil(state.lawCooldown)+" SEKUNDEN IN BEARBEITUNG");return}
+ if(!state.started||state.modal)return;if(!state.lawUnlocked){toast("§-MACHT AB "+LAW_POWER_THRESHOLD+"/"+GERMANNESS_MAX+" GERMANNESS");return}document.getElementById("law-unlock-prompt").hidden=true;if(state.lawCooldown>0){toast("§-MACHT NOCH "+Math.ceil(state.lawCooldown)+" SEKUNDEN IN BEARBEITUNG");return}
  let target=null,best=Infinity;for(const n of npcs){if(n.special||n.arrested||!n.crowd||n===state.quizApproach)continue;const d=dist(player.x,player.y,n.x,n.y);if(d<best){best=d;target=n}}
  if(!target){toast("KEINE ANDERE ZUSTÄNDIGE PERSON AUFFINDBAR");return}
- document.getElementById("law-unlock-prompt").hidden=true;
  const quote=nextLawPowerLine(),recording=speechClip(`law-${String(lastLawPowerLine+1).padStart(2,"0")}`).recording;state.lawCooldown=14;state.wanted=0;state.wantedCooldown=0;state.offence="ZUSTÄNDIGKEIT ERFOLGREICH UMGELENKT";syncPoliceResponse();
  if(!police.length){const point=groundResponsePoint(180,120,14);if(point)police.push({...point,speed:150,barkAt:0,divertedTarget:target})}
  for(const p of police)p.divertedTarget=target;
