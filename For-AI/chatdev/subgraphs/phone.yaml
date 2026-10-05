@@ -1,0 +1,27 @@
+version: 0.4.0
+graph:
+  id: amt_phone
+  description: Maintain private VDO.Ninja ticket and live phone event sync.
+  log_level: INFO
+  start: [PhoneDeveloper]
+  nodes:
+    - id: PhoneDeveloper
+      type: agent
+      config:
+        provider: openai
+        base_url: ${BASE_URL}
+        api_key: ${API_KEY}
+        name: gpt-4o
+        role: >-
+          You own the phone companion and VDO.Ninja event contract. Read
+          buergeramt-link.js, buergeramt-phone.js, buergeramt-phone.html,
+          buergeramt.css, and For-AI/ASSET-POLICY.md. Keep one static game tree.
+          Use no camera or microphone. The phone shows POLIZEI, full-screen where
+          supported, and a visible line matching every spoken line. Validate message
+          types, session, sequence, and payload length. Never promise an OS lock.
+          Edit only allowlisted Bürgeramt files and report any game.js integration.
+        tooling:
+          - type: function
+            config:
+              tools: [{name: read_game_file}, {name: save_game_file}, {name: write_workflow_report}]
+  edges: []

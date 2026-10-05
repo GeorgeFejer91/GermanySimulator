@@ -1,0 +1,33 @@
+version: 0.4.0
+vars: {}
+graph:
+  id: germany_simulator_buergeramt
+  description: Bounded production pipeline for the canonical Germany Simulator Bürgeramt episode.
+  log_level: INFO
+  is_majority_voting: false
+  start: [Story]
+  nodes:
+    - id: Story
+      type: subgraph
+      config: {type: file, config: {path: subgraphs/story.yaml}}
+    - id: Gameplay
+      type: subgraph
+      config: {type: file, config: {path: subgraphs/gameplay.yaml}}
+    - id: Phone
+      type: subgraph
+      config: {type: file, config: {path: subgraphs/phone.yaml}}
+    - id: Voice
+      type: subgraph
+      config: {type: file, config: {path: subgraphs/voice.yaml}}
+    - id: Review
+      type: subgraph
+      config: {type: file, config: {path: subgraphs/review.yaml}}
+    - id: QA
+      type: subgraph
+      config: {type: file, config: {path: subgraphs/qa.yaml}}
+  edges:
+    - {from: Story, to: Gameplay}
+    - {from: Gameplay, to: Phone}
+    - {from: Phone, to: Voice}
+    - {from: Voice, to: Review}
+    - {from: Review, to: QA}

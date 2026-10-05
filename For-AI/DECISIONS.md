@@ -1,5 +1,15 @@
 # Durable decisions
 
+## 2026-10-05 — ChatDev and the first-person Bürgeramt
+
+The pre-integration base is preserved by the annotated `pre-chatdev-2026-10-05` tag and an external snapshot. OpenBMB ChatDev v2.2.0 is pinned in the sibling `ChatDev` checkout; its prompts, scoped file tools, and graph live in `For-AI/chatdev/` and `tools/chatdev.ps1`. Session reports, references, and temporary voice renders remain in ChatDev's external `WareHouse`, separate from the game's single `assets/` tree. ChatDev stages story, gameplay, phone, voice, review, and QA work, while the existing root game and human-reviewed tests remain authority. The local ChatDev Python runtime and API key are prerequisites for actually running the graph, not game dependencies.
+
+The first Bürgeramt mission opens a close first-person Three.js scene on the existing WebGL renderer. Its isolated interior simulation tracks movement, an illogical single-code call board, early Schalter 3 reprimand, late appointment expiry, and the counter exchange. A static phone page and pinned VDO.Ninja SDK carry room-scoped data events only; no camera, microphone, or extra app server is needed. The phone can request fullscreen and a screen wake lock after the ticket tap, but the browser and operating system can always end fullscreen or deny the lock. Platform detection only selects approximate iOS/Android visual styling. The first office episode uses German dialogue even in Berlin because the user explicitly chose that episode-wide language. Answering the police call cancels the mission attempt; declining reaches the existing A38 branch.
+
+The unlisted `?geheim=buergeramt` link enters the same scene directly for fast repeat testing and shows an in-level restart link. It is an entry shortcut, not an access control, duplicate game, or separate deployable tree.
+
+Recorded Frau Knick and police speech is a separate Voice Cloner production stage. Until licensed references, a working local runtime, smoke renders, listening review, normalization, and exact-text catalog entries exist, browser German speech remains the live delivery. The existing private `GS police-officer` profile can be reused; an unverified YouTube upload is not a usable cloning source.
+
 ## 2026-09-29 — Official computer voice
 
 Official documents, HUM-01 readings, and opening mission guidance retain the

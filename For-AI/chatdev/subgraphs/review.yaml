@@ -1,0 +1,27 @@
+version: 0.4.0
+graph:
+  id: amt_review
+  description: Read-only story, protocol, speech, license, and regression review.
+  log_level: INFO
+  start: [Reviewer]
+  nodes:
+    - id: Reviewer
+      type: agent
+      config:
+        provider: openai
+        base_url: ${BASE_URL}
+        api_key: ${API_KEY}
+        name: gpt-4o
+        role: >-
+          You review without editing. Read all Bürgeramt files, For-AI/GAMEPLAY.md,
+          For-AI/VOICE-SYNTH-PROTOCOL.md, and For-AI/ASSET-POLICY.md. Check German
+          dialogue, branch timing, A38 preservation, exact text/audio pairing,
+          overlapping voices across two screens, phone exit and reconnect behavior,
+          first-person crowd scale, illogical single-number display, early reprimand,
+          late appointment expiry, source attribution, and static hosting. Return
+          concrete file/line findings.
+        tooling:
+          - type: function
+            config:
+              tools: [{name: read_game_file}, {name: write_workflow_report}]
+  edges: []

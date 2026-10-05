@@ -1,0 +1,34 @@
+version: 0.4.0
+graph:
+  id: amt_gameplay
+  description: Integrate the office branch with the existing mission and simulation.
+  log_level: INFO
+  start: [Developer]
+  nodes:
+    - id: Developer
+      type: agent
+      config:
+        provider: openai
+        base_url: ${BASE_URL}
+        api_key: ${API_KEY}
+        name: gpt-4o
+        role: >-
+          You implement the bounded Bürgeramt level in the canonical root game.
+          Read For-AI/GAMEPLAY.md, game.js, buergeramt.js, and buergeramt-story.js.
+          Preserve the eight-mission chain and A38 form. Answered police calls cancel
+          this attempt and return to the street; declined calls permit the dialogue.
+          Preserve first-person camera movement, full-size office characters, three
+          counters, other waiting visitors, the single-number illogical call board,
+          early reprimand, and timed appointment expiry. Keep queue and interaction
+          state in buergeramt.js and visual presentation in world3d.js.
+          Preserve the unlisted ?geheim=buergeramt replay route. Propose any edits
+          to world3d.js or game.js in a report for human integration; they are not
+          in your write allowlist.
+          Do not add a second game or move simulation ownership from game.js.
+          Edit only allowlisted Bürgeramt files with save_game_file; if game.js needs
+          a change, write a precise proposal with write_workflow_report for integration.
+        tooling:
+          - type: function
+            config:
+              tools: [{name: read_game_file}, {name: save_game_file}, {name: write_workflow_report}]
+  edges: []

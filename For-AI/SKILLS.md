@@ -23,6 +23,8 @@ All browser-testing skill workflows must follow the [silent background browser-t
 
 The project stack is already chosen: custom JavaScript simulation plus required vanilla Three.js rendering, static files, and GitHub Pages. Registered PNG character sprites remain supported through Three.js sprites. Do not reintroduce a Canvas world, or add Phaser, React Three Fiber, Vite, TypeScript, Rapier, a backend, or a second runtime tree solely because an installed skill recommends that stack for new projects.
 
+For the first Bürgeramt episode, run `tools/chatdev.ps1 -ValidateOnly` before proposing a ChatDev graph change. The external pinned ChatDev checkout executes six scoped stages for story, first-person gameplay, phone sync, voice, review, and QA; `For-AI/chatdev/` owns the graph and file permissions. The voice stage also uses `$voice-cloning`, and gameplay changes still use the applicable game skills and silent browser playtests. ChatDev output is a proposal to validate in this root game, not another deployable game tree.
+
 Installed source snapshots (2026-09-19):
 
 - `$game-playtest`, `$game-ui-frontend`, `$three-webgl-game`, `$web-3d-asset-pipeline`, and `$web-game-foundations`: `openai/plugins` at `1dc195897af4161d039b80d8471ec0a10c9bbc89`.
