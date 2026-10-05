@@ -82,6 +82,39 @@ backward relative to the pelvis. The swing foot moves monotonically forward
 and reaches positive toe clearance. Reversing the frame clock to change travel
 direction is forbidden because it creates moonwalking.
 
+## Walk review borrowed from Pets
+
+The Pets sprite-sheet guidance contributes visual-production checks, not a
+human gait model or its 8-column atlas format. Apply these checks to each
+character's existing 32-frame walk rows alongside the joint/contact gate above:
+
+1. Review a side walk early, before building every direction. Contact,
+   loading, passing, and push-off must read as one alternating left/right
+   cycle at the sprite's actual game size, with no reversed step or stationary
+   shuffle. The joint audit, sole contacts, fixed bone lengths, and stance slip
+   checks establish the anatomical evidence; attractive frames alone do not.
+2. Keep one character-wide scale, pelvis registration, and ground reference
+   across the full cycle. Never crop, stretch, or recenter individual frames
+   to make a generated strip fit. If extraction creates popping while the
+   source is stable, correct the shared extraction transform first.
+3. Mirror individual approved side frames in place only when the registry
+   permits it and clothing, markings, light, and carried props remain valid.
+   Preserve temporal order. A mirrored whole strip that reverses the frame
+   clock fails even if its stills look plausible.
+4. Inspect the contact sheet and a continuously looping preview, including
+   the final-to-first seam, at desktop and mobile sprite sizes. Check identity,
+   limb attachment, foot planting, toe clearance, silhouette, alpha edges,
+   prop anchors, and visible size or baseline jumps. A mechanical pass does
+   not establish natural-looking motion.
+5. Repair the smallest failing source row or rig parameter, then rebuild and
+   recheck the whole affected cycle. Do not paste a one-off corrected runtime
+   cell into an otherwise coherent row. Validate the exact atlas bytes that
+   the preview or game will load after each revision.
+
+These rules adapt the local Work Pets `create-pet` animation-row and
+sprite-sheet review guidance. Pet-only states, look-direction rows, upload
+tools, and timing values do not apply to Germany Simulator.
+
 ## Direction contract
 
 - `front-*`: faces the viewer and moves down-screen.
