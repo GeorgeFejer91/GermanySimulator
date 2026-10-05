@@ -1,5 +1,11 @@
 # Germany Simulator credits
 
+## Bürgeramt episode
+
+The office, queue, Frau Knick, grass accusation, and phone argument are original game writing. Public personal anecdotes about Bürgeramt appointments and Anmeldung informed the bureaucratic tone: [Berlin appointment thread](https://www.reddit.com/r/berlin/comments/pz7d2r/b%C3%BCrgeramt_experience/), [Bürgeramt experience discussion](https://www.reddit.com/r/berlin/comments/15zzrv0), [registration experience](https://www.reddit.com/r/berlin/comments/nh75il), and [bureaucracy stories](https://www.reddit.com/r/berlinsocialclub/comments/1ta9soe/tell_me_your_bureaucracy_horror_stories/). No submitted story or dialogue is quoted.
+
+The QR code renderer is [Kazuhiko Arase's qrcode-generator](https://github.com/kazuhikoarase/qrcode-generator), MIT licensed under `assets/vendor/qrcode/LICENSE`. The phone data channel uses [VDO.Ninja SDK v1.5.5](https://github.com/steveseguin/ninjasdk), MPL 2.0, with the vendored license and provenance in `assets/vendor/vdoninja/1.5.5/`.
+
 ## Walking-motion reference
 
 The preview-only Merkel left-walk pilot uses subject 69, trial 01 (“walk

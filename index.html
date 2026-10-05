@@ -24,6 +24,7 @@
   <link rel="icon" href="./assets/faxgeraet.svg" type="image/svg+xml">
   <title>Germany Simulator · EC Games</title>
   <link rel="stylesheet" href="./styles.css?v=20261004-german-unity">
+  <link rel="stylesheet" href="./buergeramt.css?v=20261006-amt">
 </head>
 <body>
 <main id="app">
@@ -53,6 +54,10 @@
   <div id="interact-hint" class="interact-hint" hidden>INTERAGIEREN · E</div>
   <section id="dialogue" class="dialogue" hidden><div id="portrait" class="portrait">§</div><div class="dialogue-copy" tabindex="0"><small id="speaker">SACHBEARBEITUNG</small><p id="dialogue-text"></p><span id="voice-state" class="voice-state">SPRECHENDE BEHÖRDE</span></div><div class="dialogue-actions"><button id="dialogue-speak" type="button" aria-label="Repeat spoken dialogue">🔊</button><button id="dialogue-next" type="button">WEITER</button></div></section>
   <section id="form-modal" class="modal" hidden><form id="bureaucracy-form" class="paper"><div class="paper-head"><span>BUNDESREPUBLIK · SPIELFORMULAR</span><span id="form-code">A38</span></div><h2 id="form-title">Antrag auf Antragstellung</h2><p id="form-subtitle"></p><div id="form-fields" class="form-fields"></div><div class="paper-actions"><span id="form-error"></span><button type="submit">EINREICHEN</button></div></form></section>
+  <section id="amt-level" class="amt-level" hidden role="dialog" aria-modal="true" aria-labelledby="amt-title"><div class="amt-room" aria-hidden="true"><div class="amt-back-wall"><div class="amt-clock">12:00</div><div class="amt-sign">BÜRGERAMT <span>SCHALTER 3</span></div><div class="amt-window"><div class="amt-clerk">§</div></div><div class="amt-machine">B-038<small>NUMMERNAUTOMAT</small></div></div><div class="amt-floor"></div></div><div class="amt-sheet"><header><span>ANMELDUNG · VORGANG 1/8</span><button id="amt-exit" type="button">AMT VERLASSEN</button></header><small id="amt-status" role="status"></small><h2 id="amt-title"><span id="amt-speaker"></span></h2><p id="amt-line"></p><div id="amt-actions" class="amt-actions"></div><aside id="amt-ticket" class="amt-ticket" hidden><b>TELEFONISCHER WARTEAUSWEIS</b><div id="amt-qr" aria-label="QR-Code für das Telefon"></div><p>Scannen Sie den Code. Ihre Nummer und der Anruf erscheinen auf dem Telefon.</p><a id="amt-phone-link" target="_blank" rel="noopener">LINK AUF DIESEM GERÄT ÖFFNEN</a></aside></div></section>
+  <div id="amt-walk-hud" class="amt-walk-hud" hidden><div class="amt-walk-top"><b id="amt-objective">NUMMERNAUTOMAT SUCHEN</b><div class="amt-board-hud"><small>AKTUELLER AUFRUF</small><strong id="amt-number-board">—</strong><small>SCHALTER 3</small></div><button id="amt-leave" type="button">AMT VERLASSEN</button></div><div class="amt-reticle" aria-hidden="true">+</div><div class="amt-walk-bottom"><span>WASD · GEHEN &nbsp; MAUS / PFEILE · BLICK &nbsp; E · INTERAGIEREN</span><strong id="amt-nearby">GEHEN SIE ZUM NUMMERNAUTOMATEN</strong></div><div class="amt-touch-controls"><div><button type="button" data-amt-key="KeyW">▲</button><div><button type="button" data-amt-key="KeyA">◀</button><button type="button" data-amt-key="KeyS">▼</button><button type="button" data-amt-key="KeyD">▶</button></div></div><button id="amt-touch-e" type="button">E<br>REDEN</button></div></div>
+  <a id="amt-direct-reset" href="?geheim=buergeramt">BÜRGERAMT NEU STARTEN</a>
+  <section id="amt-direct-result" class="amt-direct-result" hidden role="status"><small>VORGANGSENDE · BÜRGERAMT</small><h2 id="amt-direct-result-title"></h2><p id="amt-direct-result-copy"></p><a href="?geheim=buergeramt">NEUE NUMMER ZIEHEN</a></section>
   <section id="end-modal" class="modal" hidden><div class="end-card"><small id="end-kicker">VERWALTUNGSVORGANG</small><h1 id="end-title"></h1><p id="end-copy"></p><button id="restart" type="button">NOCH EIN VORGANG</button></div></section>
   <section id="intro" class="intro"><div class="intro-noise"></div><div class="intro-card">
       <p class="eyebrow">EC GAMES PRESENTS</p><h1><span>GERMANY</span><b><span id="simulator-s">S</span>IMULATOR</b></h1><p class="strap">GRAND THEFT AMT</p>
@@ -80,9 +85,15 @@
 <script src="./For-AI/QUIZ-CHARACTER-DICTIONARY.js?v=20261003-kugellager"></script>
 <script src="./For-AI/AUDIO-TEXT-LIBRARY.js?v=20261003-kugellager"></script>
 <script src="./goerlitzer-park.js?v=20260930-park-sign"></script>
-<script src="./game.js?v=20261004-law-prompt"></script>
+<script src="./assets/vendor/qrcode/qrcode.js"></script>
+<script src="./assets/vendor/vdoninja/1.5.5/vdoninja-sdk.min.js"></script>
+<script src="./buergeramt-link.js?v=20261006-amt"></script>
+<script src="./buergeramt-story.js?v=20261006-amt"></script>
+<script src="./buergeramt.js?v=20261006-amt"></script>
+<script type="module" src="./buergeramt-fit.js?v=20261006-amt"></script>
+<script src="./game.js?v=20261006-amt"></script>
 <script type="module" src="./subtitle-layout.js?v=20260929-fixed-slots"></script>
 <script type="module" src="./quiz-layout.js?v=20260929-dialogue"></script>
-<script type="module" src="./world3d.js?v=20261003-road-end-stations"></script>
+<script type="module" src="./world3d.js?v=20261006-amt-world"></script>
 </body>
 </html>

@@ -4,6 +4,8 @@
 
 Use one asset authority at root `assets/`, with fidelity selected by the client. Desktop may use high-resolution period artwork where it is visibly valuable; mobile must prefer minimal vector or otherwise lightweight variants.
 
+The Bürgeramt interior uses code-native geometry, signs, visitors, and counters through the existing Three.js renderer. Its phone companion shares the root static site and adds no game media. The locally pinned QR generator under `assets/vendor/qrcode/` and VDO.Ninja SDK under `assets/vendor/vdoninja/1.5.5/` are runtime code with licenses beside them. ChatDev's clone, session reports, source recordings, Voice Cloner profiles, and trial renders stay outside `assets/` and the deployable game; only reviewed, licensed, normalized exact-text speech clips may enter the existing voice catalog and `assets/voices/`.
+
 ## Desktop and mobile
 
 - Desktop billboard direction: high-resolution, Weimar-era-inspired commercial artwork with deterministic game-rendered copy. For commercial fax artwork, avoid real propaganda, extremist symbols, political insignia, and text baked unreliably into generated images. The user-requested dated historical flag on the Kiesinger monument and CDU landmark banners are separate, code-drawn environment details under the contracts below.

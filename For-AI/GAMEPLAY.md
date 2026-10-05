@@ -15,6 +15,14 @@ Mission order:
 7. Ausländerbehörde — residence evidence.
 8. Ausländerbehörde — fictional citizenship application.
 
+### First Bürgeramt visit
+
+Entering the first Bürgeramt opens a hidden first-person waiting room in the canonical Three.js game. WASD or touch controls move the player through a life-size office with several visitors and three counters. The ticket machine gives the player a private `B-###` number on a QR-linked phone companion. The wall board and HUD show exactly one active call, with an intentionally illogical mixture of letters and numbers and no estimated wait. Schalter 3 looks idle. Approaching Frau Knick before the player's number earns a reprimand and returns the player to waiting. When the player's number appears, the player has a short window to reach her; being late forfeits the appointment without advancing mission 1.
+
+The unlisted `?geheim=buergeramt` URL opens directly at the office entrance for repeated level testing. Its fixed restart link reloads only this episode; the normal city entry remains the canonical story route. The shortcut is a convenience link, not authentication or a separate game deployment.
+
+At the correct counter, the linked phone receives an incoming `POLIZEI` call about walking on the grass. Declining allows German dialogue choices and then the existing A38 form. Answering starts an automatic, choice-free argument between the officer on the phone and Frau Knick at the counter, with their lines and speech interleaved; she cancels the appointment and the player returns to the street without A38. The mission chain is otherwise unchanged. Every line, choice, and phone event in this office episode is German, an explicit local exception to Berlin's Denglisch rule. Spoken text must exactly match the currently visible line on its own screen.
+
 ## Controls
 
 - Desktop: WASD or arrow keys move; Shift runs; E interacts; `§` or `Q` activates the law power after unlock.

@@ -726,7 +726,53 @@ function showRendererFailure(error){
     }
   }
   function updatePowerPlants(){const now=performance.now()*.00016;for(const p of coalSmoke){const t=(now+p.index/coalSmoke.length)%1;p.mesh.position.set(p.x+Math.sin(now*25+p.index)*.52*t,p.y+t*4.5,p.z+Math.cos(now*19+p.index)*.4*t);p.mesh.scale.setScalar(.9+t*1.8);p.mesh.material.opacity=.88*(1-t)}for(const p of coalBelt){const t=(now*4+p.index/coalBelt.length)%1;p.mesh.position.lerpVectors(p.from,p.to,t);p.mesh.rotation.x+=.05;p.mesh.rotation.z+=.04}}
-  function resize(){renderer.setSize(innerWidth,innerHeight,false);camera.aspect=innerWidth/innerHeight;camera.updateProjectionMatrix()}resize();addEventListener("resize",resize,{passive:true});
+  // The Amt uses the same renderer and canvas as the city, with its own close camera.
+  const amtScene=new T.Scene();amtScene.background=new T.Color(0xb8b4a5);
+  const amtCamera=new T.PerspectiveCamera(69,innerWidth/innerHeight,.06,35);
+  amtScene.add(new T.HemisphereLight(0xffffff,0x716b5c,2.2));
+  const amtLight=new T.DirectionalLight(0xffeac7,1.5);amtLight.position.set(-3,5,2);amtScene.add(amtLight);
+  const am=(color)=>new T.MeshStandardMaterial({color,roughness:.93});
+  const paper=am(0xd8cfb7),floor=am(0x777467),wall=am(0xc0b9a7),trim=am(0x554e44),desk=am(0x615e51),screen=am(0x192f32),seat=am(0x536565),skin=am(0xc7a58b),hair=am(0xaaa9a1),coat=am(0x454b4b),otherCoat=am(0x76756d),amber=am(0xeec66d),eye=am(0x27231e),lamp= new T.MeshBasicMaterial({color:0xf7edcf});
+  function ab(w,h,d,material,x,y,z){const mesh=new T.Mesh(new T.BoxGeometry(w,h,d),material);mesh.position.set(x,y,z);amtScene.add(mesh);return mesh}
+  function ac(rTop,rBottom,h,material,x,y,z){const mesh=new T.Mesh(new T.CylinderGeometry(rTop,rBottom,h,12),material);mesh.position.set(x,y,z);amtScene.add(mesh);return mesh}
+  function amtLabel(words,width=512,height=160,background="#263539",foreground="#e9dfbf"){
+    const c=document.createElement("canvas");c.width=width;c.height=height;const ctx=c.getContext("2d");ctx.fillStyle=background;ctx.fillRect(0,0,width,height);ctx.fillStyle=foreground;ctx.font=`bold ${Math.floor(height*.38)}px Arial`;ctx.textAlign="center";ctx.textBaseline="middle";ctx.fillText(words,width/2,height/2,width-22);const texture=new T.CanvasTexture(c);texture.colorSpace=T.SRGBColorSpace;return{canvas:c,ctx,texture};
+  }
+  function amtPlate(words,x,y,z,w,h){const label=amtLabel(words);const mesh=new T.Mesh(new T.PlaneGeometry(w,h),new T.MeshBasicMaterial({map:label.texture}));mesh.position.set(x,y,z);amtScene.add(mesh);return mesh}
+  // Beige room, ticket kiosk, three occupied desks, and waiting-room visitors.
+  ab(8,.12,10,floor,0,-.06,-1.5);ab(8,4,.16,wall,0,2,-6.35);ab(.16,4,10,wall,-4,2,-1.5);ab(.16,4,10,wall,4,2,-1.5);ab(8,.12,10,paper,0,4.05,-1.5);
+  for(const z of [-4,-1.2,1.7]){ab(2.3,.025,.48,lamp,0,3.97,z);ab(2.5,.04,.6,trim,0,4,z)}
+  for(const x of [-3.88,3.88])ab(.035,.1,10,trim,x,2,-1.5);
+  for(let z=-5.7;z<3.1;z+=.7)ab(8,.015,.018,trim,0,.01,z);
+  ab(.7,1.35,.6,screen,-2.35,.68,-2.45);ab(.56,.35,.02,amber,-2.35,1.05,-2.12);amtPlate("NUMMER",-2.35,1.05,-2.108,.44,.17);
+  ab(5.9,1,.75,desk,0, .48,-5.35);ab(5.9,.09,.9,trim,0,1.04,-5.26);
+  for(const [i,x] of [-2.1,0,2.1].entries()){
+    ab(.08,2,.65,screen,x+.95,1.72,-5.73);
+    amtPlate(`SCHALTER ${i+1}`,x,2.1,-6.25,1.5,.38);
+    ab(.55,.38,.07,screen,x,1.24,-5.73);
+  }
+  // Schalter 3 is offset to the player's right and reads as idle.
+  function amtPerson(x,z,material,older=false,seated=false){
+    const base=seated?.32:0;
+    ac(.33,.39,.83,material,x,.83+base,z);ac(.245,.23,.38,skin,x,1.45+base,z);
+    const head=new T.Mesh(new T.SphereGeometry(.235,16,12),skin);head.position.set(x,1.67+base,z);amtScene.add(head);
+    const cap=new T.Mesh(new T.SphereGeometry(.245,16,12,0,Math.PI*2,0,Math.PI*.45),older?hair:coat);cap.position.set(x,1.72+base,z);amtScene.add(cap);
+    for(const offset of [-.085,.085]){const pupil=new T.Mesh(new T.SphereGeometry(.015,8,6),eye);pupil.position.set(x+offset,1.68+base,z+.222);amtScene.add(pupil)}
+    ab(.11,.012,.012,eye,x,1.53+base,z+.226);
+    ac(.095,.095,.55,material,x-.42,.92+base,z);ac(.095,.095,.55,material,x+.42,.92+base,z);
+    if(older){ab(.54,.035,.06,trim,x,1.68+base,z+.218);ac(.04,.04,.32,hair,x-.26,1.53+base,z);ac(.04,.04,.32,hair,x+.26,1.53+base,z)}
+    else{ac(.12,.1,.53,material,x-.17,.25,z);ac(.12,.1,.53,material,x+.17,.25,z)}
+  }
+  amtPerson(-2.1,-5.87,otherCoat,false,true);amtPerson(0,-5.87,coat,false,true);amtPerson(2.1,-5.87,coat,true,true);
+  for(const [x,z] of [[-2.7,.4],[2.7,.4],[-2.7,-1.8],[2.7,-1.8]]){
+    ab(.7,.09,.63,seat,x,.48,z);ab(.66,.72,.08,seat,x,.85,z+.31);amtPerson(x,z,otherCoat,false,true);
+  }
+  const callCanvas=document.createElement("canvas");callCanvas.width=512;callCanvas.height=256;const callCtx=callCanvas.getContext("2d");const callTexture=new T.CanvasTexture(callCanvas);callTexture.colorSpace=T.SRGBColorSpace;
+  ab(2.6,.9,.11,screen,0,2.92,-6.22);
+  const callMesh=new T.Mesh(new T.PlaneGeometry(2.3,.62),new T.MeshBasicMaterial({map:callTexture}));callMesh.position.set(0,2.94,-6.151);amtScene.add(callMesh);
+  let lastCall="";
+  function renderAmt(){const level=window.BuergeramtLevel;if(!level||!level.active&&!document.body.classList.contains("amt-direct-mode"))return false;const view=level.view;amtCamera.position.set(view.x,1.68,view.z);amtCamera.rotation.set(0,-view.yaw,0);const call=level.queueDisplay;if(call!==lastCall){lastCall=call;callCtx.fillStyle="#152527";callCtx.fillRect(0,0,512,256);callCtx.textAlign="center";callCtx.textBaseline="middle";callCtx.fillStyle="#eaa65c";callCtx.font="bold 112px monospace";callCtx.fillText(call,256,135,460);callTexture.needsUpdate=true}renderer.render(amtScene,amtCamera);return true}
+  function resize(){renderer.setSize(innerWidth,innerHeight,false);camera.aspect=innerWidth/innerHeight;camera.updateProjectionMatrix();amtCamera.aspect=innerWidth/innerHeight;amtCamera.updateProjectionMatrix()}resize();addEventListener("resize",resize,{passive:true});
   const spawnProbe=new T.Vector3();
   function isWorldPointVisible(x,y,padding=0,kind="officer"){const height=kind==="helicopter"?6.8:kind==="car"?.7:1;spawnProbe.set(X(x),height,Z(y)).project(camera);const padX=padding/Math.max(1,innerWidth)*2,padY=padding/Math.max(1,innerHeight)*2;return spawnProbe.z>=-1&&spawnProbe.z<=1&&spawnProbe.x>=-1-padX&&spawnProbe.x<=1+padX&&spawnProbe.y>=-1-padY&&spawnProbe.y<=1+padY}
   function inspectAssets(){
@@ -735,6 +781,7 @@ function showRendererFailure(error){
   }
   let parkCameraFrame=0,previousCameraTime=performance.now();
   window.Germany3D={ready:true,isWorldPointVisible,sync(){
+    if(renderAmt())return;
     syncChar(playerMesh,bridge.player,0);
     playerMesh.rotation.y=bridge.player.facing;
     for(const slot of trainSlots){for(let i=0;i<slot.cars.length;i++){const car=slot.train.cars[i],group=slot.cars[i].group,jolt=Math.sin(performance.now()*.04+i)*slot.train.bump*.1;group.position.set(X(car.x),.07+jolt,Z(car.y));group.rotation.y=Math.PI/2-car.angle}for(let i=0;i<slot.gangways.length;i++){const a=slot.train.cars[i],b=slot.train.cars[i+1],ax=X(a.x),az=Z(a.y),bx=X(b.x),bz=Z(b.y),mesh=slot.gangways[i],length=Math.hypot(bx-ax,bz-az);mesh.position.set((ax+bx)/2,.54,(az+bz)/2);mesh.rotation.y=Math.atan2(bx-ax,bz-az);mesh.scale.z=Math.max(.18,length-4.64)}}
