@@ -47,10 +47,14 @@ graph:
           to world3d.js or game.js in a report for human integration; they are not
           in your write allowlist.
           Do not add a second game or move simulation ownership from game.js.
-          Edit only allowlisted Bürgeramt files with save_game_file; if game.js needs
-          a change, write a precise proposal with write_workflow_report for integration.
+          Treat backend game mechanics as the static buergeramt.js
+          controller: actor routes, proximity, collision, ticket state,
+          timed deadlines and interaction events live there. The renderer
+          reads state and never advances it. Edit only buergeramt.js with
+          save_mechanics_file; report world3d.js, game.js and asset edits
+          for integration.
         tooling:
           - type: function
             config:
-              tools: [{name: read_game_file}, {name: save_game_file}, {name: write_workflow_report}]
+              tools: [{name: read_game_file}, {name: save_mechanics_file}, {name: write_workflow_report}]
   edges: []

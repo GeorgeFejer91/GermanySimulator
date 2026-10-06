@@ -43,6 +43,13 @@ html[data-phone-os="android"] .phone-call{background:radial-gradient(circle at 4
 .amt-phone .phone-shell footer{border-top-color:#b9c6ca;color:#52616b}
 .amt-ambient{position:absolute;bottom:76px;left:50%;transform:translateX(-50%);width:min(620px,calc(100% - 40px));min-height:1.4em;text-align:center;font:14px/1.4 Georgia,serif;color:#f6f1e7;text-shadow:0 2px 4px #000;pointer-events:none}
 .amt-ambient:empty{display:none}
+.amt-mix-panel{display:grid;gap:10px;width:190px;padding:12px;background:#e7dcc4;border:1px solid #9a8b6d;box-shadow:0 8px 24px #1119;color:#262c2b;text-shadow:none}
+#amt-mix{position:fixed;top:70px;left:20px;z-index:230;color:#eee8d7;font:700 11px/1.3 monospace;letter-spacing:.06em}
+#amt-mix[hidden]{display:none}#amt-mix summary{width:max-content;padding:8px 11px;border:1px solid #c5b878;background:#253034ed;cursor:pointer;list-style:none}#amt-mix summary::-webkit-details-marker{display:none}#amt-mix summary:focus-visible,#amt-mix input:focus-visible{outline:2px solid #f7e9bd;outline-offset:2px}
+.amt-mix-panel label{display:grid;gap:4px;min-width:0}.amt-mix-panel input{width:100%;accent-color:#994a3e}
+#amt-compact-reset{display:none}
+.amt-compact #amt-mix{top:118px}.amt-compact #amt-direct-reset{display:none!important}.amt-compact .amt-mix-panel{width:min(135px,calc(50vw - 24px))}.amt-compact.amt-direct-mode #amt-compact-reset{display:block;padding:9px 7px;border:1px solid #9a8b6d;color:#262c2b;text-decoration:none;overflow-wrap:break-word}
+@media(max-width:700px){#amt-mix{top:125px;left:12px}.amt-mix-panel{width:min(190px,calc(100vw - 36px))}}
 .amt-board-hud strong{color:#ff3025;text-shadow:0 0 10px #f92620}
 @media(max-width:700px){.amt-ambient{bottom:215px;font-size:12px}}
 
@@ -52,6 +59,7 @@ html[data-phone-os="android"] .phone-call{background:radial-gradient(circle at 4
 .phone-call>*{flex-shrink:0;min-width:0;max-width:100%;box-sizing:border-box;overflow-wrap:break-word}
 .phone-choices{flex-wrap:wrap;justify-content:space-evenly;row-gap:18px}
 .phone-choices button{flex-shrink:0}
+#phone-volume{display:grid;gap:8px;width:min(100%,280px);margin:24px auto 0;text-align:left;color:#e9ecea;font:700 11px/1.3 Arial,sans-serif;letter-spacing:.06em}#phone-volume input{width:100%;accent-color:#bfd2d4;touch-action:auto}#phone-volume input:focus-visible{outline:2px solid white;outline-offset:3px}
 
 /* The phone follows Berlin's sparse service-page rhythm without using official marks. */
 .amt-phone{background:#fff;color:#151515}
@@ -120,3 +128,35 @@ html[data-phone-os="android"] #phone-answer .call-label{position:absolute;width:
  html[data-phone-os="android"] #phone-swipe-label{display:none}
  html[data-phone-os="android"] #phone-answer .call-label{position:static;width:auto;height:auto;margin:0;overflow:visible;clip-path:none;white-space:normal}
 }
+/* Office dialogue stays in the scene as a subtitle rail, including outcomes. */
+.amt-level:not(.walking)::before{content:"";position:absolute;z-index:1;left:0;right:0;bottom:0;height:min(56dvh,430px);background:linear-gradient(transparent,#10191be8 88%);pointer-events:none}
+.amt-level .amt-sheet,.amt-level.first-person .amt-sheet{position:absolute;z-index:2;left:20px;right:auto;bottom:18px;transform:none;box-sizing:border-box;width:min(780px,calc(100% - 40px));max-height:min(50dvh,420px);overflow-y:auto;margin:0;padding:0 2px 4px;background:transparent;border:0;box-shadow:none;color:#f5f0e5;text-shadow:0 2px 5px #000;pointer-events:auto}
+.amt-sheet header{align-items:flex-start;border-bottom:1px solid #e8dcc37a;padding:0 0 7px;color:#d8cbb4;font:700 10px/1.35 monospace;letter-spacing:.1em}
+.amt-sheet header button{padding:0;color:#e8dcc3;font:700 10px/1.35 monospace;text-shadow:0 2px 5px #000}
+#amt-status{margin-top:8px;min-height:0;color:#d9c9a8;font:10px/1.35 monospace;text-transform:uppercase}
+.amt-sheet h2{margin:8px 0 3px;color:#f3dfb7;font:700 clamp(15px,1.8vw,19px)/1.2 Georgia,serif}
+.amt-sheet p{max-width:720px;margin:0 0 12px;color:#fff9ee;font:clamp(15px,1.7vw,20px)/1.38 Georgia,serif}
+.amt-actions{display:flex;flex-wrap:wrap;gap:7px}
+.amt-actions button{width:auto;max-width:100%;min-height:42px;padding:9px 12px;border:1px solid #c7b99999;background:#172428db;color:#f5f0e5;text-align:left;font:700 12px/1.3 Arial,sans-serif;text-shadow:none}
+.amt-actions button:hover,.amt-actions button:focus-visible{background:#34494bcf;color:#fff;outline:2px solid #e8dcc3;outline-offset:2px}
+.amt-direct-result{left:0;right:0;bottom:0;transform:none;width:auto;max-height:65dvh;padding:34px 20px 20px;background:linear-gradient(transparent,#10191be9 29%);border:0;box-shadow:none;color:#f5f0e5;text-shadow:0 2px 5px #000}
+.amt-direct-result h2{margin:8px 0;font-size:clamp(18px,2.5vw,26px)}
+.amt-direct-result p{max-width:720px;margin:0 0 12px;font-size:clamp(15px,1.8vw,18px)}
+.amt-direct-result a{display:inline-block;padding:10px 12px;border:1px solid #c7b99999;background:#172428db;color:#f5f0e5;text-shadow:none}
+#amt-compact-reset{display:none;grid-area:reset;align-self:start;min-width:0;padding:7px 4px;border:1px solid #c5b878;background:#253034ed;color:#f7e9bd;text-align:center;text-decoration:none;font:700 9px/1.2 monospace;overflow-wrap:break-word;pointer-events:auto}
+.amt-compact .amt-walk-top{grid-template-columns:minmax(0,1fr) 66px;grid-template-areas:"objective reset" "board board"}
+.amt-compact.amt-direct-mode #amt-compact-reset{display:block;padding:7px 4px;border:1px solid #c5b878;color:#f7e9bd;text-decoration:none}
+.amt-compact #amt-mix{top:142px}
+.amt-compact .amt-mix-panel{width:min(135px,calc(50vw - 24px))}
+#amt-mix .amt-mix-panel{padding:9px 2px;background:transparent;border:0;box-shadow:none;color:#f5f0e5;text-shadow:0 2px 5px #000}
+#amt-mix .amt-mix-panel label{padding:3px 4px;background:#172428bd}
+@media(max-width:700px){.amt-level .amt-sheet,.amt-level.first-person .amt-sheet{left:12px;right:12px;bottom:10px;width:calc(100% - 24px);max-height:55dvh}.amt-sheet header{gap:8px}.amt-sheet header button{flex-shrink:0}.amt-sheet p{font-size:16px}.amt-actions button{font-size:11px}.amt-direct-result{padding:30px 12px 12px}}
+.amt-compact .amt-level .amt-sheet{display:flex;flex-direction:column;max-height:min(160px,calc(45dvh / 2));overflow:hidden}
+.amt-compact .amt-sheet header{flex-shrink:0;justify-content:flex-end;padding-bottom:3px}
+.amt-compact .amt-sheet header span{display:none}
+.amt-compact .amt-sheet header button{font-size:9px}
+.amt-compact #amt-status{position:absolute;width:1px;height:1px;margin:-1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap}
+.amt-compact .amt-sheet h2{flex-shrink:0;margin:5px 0 3px;font:700 11px/1.15 Arial,sans-serif;overflow-wrap:anywhere}
+.amt-compact .amt-sheet p{flex:1 1 auto;min-height:0!important;margin-bottom:6px;overflow-y:auto;overflow-wrap:anywhere;font:15px/1.25 Georgia,serif}
+.amt-compact .amt-actions{flex-shrink:0}
+.amt-compact .amt-actions button{min-height:32px;padding:5px;font-size:9px}

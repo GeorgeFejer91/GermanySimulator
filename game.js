@@ -2006,7 +2006,7 @@ function loop(now){const dt=Math.min(.12,Math.max(0,(now-last)/1000));last=now;i
 if(new URLSearchParams(location.search).get("geheim")==="buergeramt"){
  const directConfig={voiceOn:()=>state.voiceOn,subtitlesOn:()=>state.subtitlesOn,music:setAmtMusicMuted,onClose:()=>showAmtDirectResult("VORGANG UNTERBROCHEN","Sie haben das Amt verlassen. Eine neue Nummer beginnt einen neuen Versuch."),onCancel:()=>showAmtDirectResult("TERMIN ANNULLIERT","Ihre Nummer ist ungültig. Ziehen Sie für einen neuen Versuch eine neue Nummer."),onForm:()=>showForm("a38")};
  function restartAmt(){state.started=true;state.modal=true;state.mission=0;state.forms=0;document.getElementById("intro").classList.add("hidden");document.getElementById("form-modal").hidden=true;document.getElementById("amt-direct-result").hidden=true;document.getElementById("amt-direct-reset").hidden=false;document.body.classList.add("amt-direct-mode");window.BuergeramtLevel.replay(directConfig);updateHud()}
- for(const link of document.querySelectorAll("#amt-direct-reset,#amt-direct-result a"))link.addEventListener("click",e=>{e.preventDefault();restartAmt()});
+ for(const link of document.querySelectorAll("#amt-direct-reset,#amt-compact-reset,#amt-direct-result a"))link.addEventListener("click",e=>{e.preventDefault();restartAmt()});
  restartAmt();
 }
 requestAnimationFrame(loop);

@@ -24,7 +24,7 @@
   <link rel="icon" href="./assets/faxgeraet.svg" type="image/svg+xml">
   <title>Germany Simulator · EC Games</title>
   <link rel="stylesheet" href="./styles.css?v=20261004-german-unity">
-  <link rel="stylesheet" href="./buergeramt.css?v=20261006-call-ui">
+  <link rel="stylesheet" href="./buergeramt.css?v=20261007-amt-hud">
 </head>
 <body>
 <main id="app">
@@ -54,8 +54,9 @@
   <div id="interact-hint" class="interact-hint" hidden>INTERAGIEREN · E</div>
   <section id="dialogue" class="dialogue" hidden><div id="portrait" class="portrait">§</div><div class="dialogue-copy" tabindex="0"><small id="speaker">SACHBEARBEITUNG</small><p id="dialogue-text"></p><span id="voice-state" class="voice-state">SPRECHENDE BEHÖRDE</span></div><div class="dialogue-actions"><button id="dialogue-speak" type="button" aria-label="Repeat spoken dialogue">🔊</button><button id="dialogue-next" type="button">WEITER</button></div></section>
   <section id="form-modal" class="modal" hidden><form id="bureaucracy-form" class="paper"><div class="paper-head"><span>BUNDESREPUBLIK · SPIELFORMULAR</span><span id="form-code">A38</span></div><h2 id="form-title">Antrag auf Antragstellung</h2><p id="form-subtitle"></p><div id="form-fields" class="form-fields"></div><div class="paper-actions"><span id="form-error"></span><button type="submit">EINREICHEN</button></div></form></section>
-  <section id="amt-level" class="amt-level" hidden role="dialog" aria-modal="true" aria-labelledby="amt-title"><div class="amt-room" aria-hidden="true"><div class="amt-back-wall"><div class="amt-clock">12:00</div><div class="amt-sign">BÜRGERAMT <span>SCHALTER 3</span></div><div class="amt-window"><div class="amt-clerk">§</div></div><div class="amt-floor"></div></div></div><div class="amt-sheet"><header><span>ANMELDUNG · VORGANG 1/8</span><button id="amt-exit" type="button">AMT VERLASSEN</button></header><small id="amt-status" role="status"></small><h2 id="amt-title"><span id="amt-speaker"></span></h2><p id="amt-line"></p><div id="amt-actions" class="amt-actions"></div></div></section>
-  <div id="amt-walk-hud" class="amt-walk-hud" hidden><div class="amt-walk-top"><b id="amt-objective">BÜRGERAMT · EINGANG</b><div class="amt-board-hud"><small>AKTUELLER AUFRUF</small><strong id="amt-number-board">—</strong><small>SCHALTER 3</small></div><button id="amt-leave" type="button">AMT VERLASSEN</button></div><div class="amt-reticle" aria-hidden="true">+</div><div class="amt-walk-bottom"><span>WASD · GEHEN &nbsp; MAUS / PFEILE · BLICK &nbsp; E · INTERAGIEREN</span><strong id="amt-nearby">ZUR EINGANGSTÜR</strong></div><div id="amt-ambient" class="amt-ambient" aria-live="polite"></div><div class="amt-touch-controls"><div><button type="button" data-amt-key="KeyW">▲</button><div><button type="button" data-amt-key="KeyA">◀</button><button type="button" data-amt-key="KeyS">▼</button><button type="button" data-amt-key="KeyD">▶</button></div></div><button id="amt-touch-e" type="button">E<br>REDEN</button></div></div>
+  <section id="amt-level" class="amt-level" hidden role="region" aria-labelledby="amt-title"><div class="amt-room" aria-hidden="true"><div class="amt-back-wall"><div class="amt-clock">12:00</div><div class="amt-sign">BÜRGERAMT <span>SCHALTER 3</span></div><div class="amt-window"><div class="amt-clerk">§</div></div><div class="amt-floor"></div></div></div><div class="amt-sheet"><header><span>ANMELDUNG · VORGANG 1/8</span><button id="amt-exit" type="button">AMT VERLASSEN</button></header><small id="amt-status" role="status"></small><h2 id="amt-title"><span id="amt-speaker"></span></h2><p id="amt-line"></p><div id="amt-actions" class="amt-actions"></div></div></section>
+  <div id="amt-walk-hud" class="amt-walk-hud" hidden><div class="amt-walk-top"><b id="amt-objective">BÜRGERAMT · EINGANG</b><div class="amt-board-hud"><small>AKTUELLER AUFRUF</small><strong id="amt-number-board">—</strong><small>SCHALTER 3</small></div><button id="amt-leave" type="button">AMT VERLASSEN</button><a id="amt-compact-reset" href="?geheim=buergeramt">NEU STARTEN</a></div><div class="amt-reticle" aria-hidden="true">+</div><div class="amt-walk-bottom"><span>WASD · GEHEN &nbsp; MAUS / PFEILE · BLICK &nbsp; E · INTERAGIEREN</span><strong id="amt-nearby">ZUR EINGANGSTÜR</strong></div><div id="amt-ambient" class="amt-ambient" aria-live="polite"></div><div class="amt-touch-controls"><div><button type="button" data-amt-key="KeyW">▲</button><div><button type="button" data-amt-key="KeyA">◀</button><button type="button" data-amt-key="KeyS">▼</button><button type="button" data-amt-key="KeyD">▶</button></div></div><button id="amt-touch-e" type="button">E<br>REDEN</button></div></div>
+  <details id="amt-mix" hidden><summary>TON</summary><div class="amt-mix-panel"><label>RAUM <input type="range" data-amt-volume="ambience" min="0" max="100" value="35"></label><label>STIMMEN <input type="range" data-amt-volume="voice" min="0" max="100" value="80"></label><label>EFFEKTE <input type="range" data-amt-volume="fx" min="0" max="100" value="60"></label></div></details>
   <a id="amt-direct-reset" href="?geheim=buergeramt">BÜRGERAMT NEU STARTEN</a>
   <section id="amt-direct-result" class="amt-direct-result" hidden role="status"><small>VORGANGSENDE · BÜRGERAMT</small><h2 id="amt-direct-result-title"></h2><p id="amt-direct-result-copy"></p><a href="?geheim=buergeramt">NEUE NUMMER ZIEHEN</a></section>
   <section id="end-modal" class="modal" hidden><div class="end-card"><small id="end-kicker">VERWALTUNGSVORGANG</small><h1 id="end-title"></h1><p id="end-copy"></p><button id="restart" type="button">NOCH EIN VORGANG</button></div></section>
@@ -83,17 +84,17 @@
 </main>
 <script type="importmap">{"imports":{"three":"https://cdn.jsdelivr.net/npm/three@0.186.0/build/three.module.js"}}</script>
 <script src="./For-AI/QUIZ-CHARACTER-DICTIONARY.js?v=20261003-kugellager"></script>
-<script src="./For-AI/AUDIO-TEXT-LIBRARY.js?v=20261003-kugellager"></script>
+<script src="./For-AI/AUDIO-TEXT-LIBRARY.js?v=20261006-amt-actors"></script>
 <script src="./goerlitzer-park.js?v=20260930-park-sign"></script>
 <script src="./assets/vendor/qrcode/qrcode.js"></script>
 <script src="./assets/vendor/vdoninja/1.5.5/vdoninja-sdk.min.js"></script>
 <script src="./buergeramt-link.js?v=20261006-call-ui-sync3"></script>
-<script src="./buergeramt-story.js?v=20261006-registration"></script>
-<script src="./buergeramt.js?v=20261006-call-ui-sync3"></script>
-<script type="module" src="./buergeramt-fit.js?v=20261006-call-ui-sync3"></script>
-<script src="./game.js?v=20261006-call-ui-sync3"></script>
+<script src="./buergeramt-story.js?v=20261006-amt-actors"></script>
+<script src="./buergeramt.js?v=20261007-amt-hud"></script>
+<script type="module" src="./buergeramt-fit.js?v=20261007-amt-hud"></script>
+<script src="./game.js?v=20261007-amt-hud"></script>
 <script type="module" src="./subtitle-layout.js?v=20260929-fixed-slots"></script>
 <script type="module" src="./quiz-layout.js?v=20260929-dialogue"></script>
-<script type="module" src="./world3d.js?v=20261006-registration"></script>
+<script type="module" src="./world3d.js?v=20261006-amt-actors"></script>
 </body>
 </html>

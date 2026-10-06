@@ -1,5 +1,19 @@
 (function(){"use strict";
 window.BuergeramtStory=Object.freeze({
+ characters:{
+  aktenkurier:{speaker:"DER AKTENKURIER",lines:[
+   {line:"Stopp. Sie haben den Aktenlauf ohne Laufzettel gekreuzt. Das gilt als Abkürzung und muss gestempelt werden.",tone:"warning",valence:-.55},
+   {line:"Ihr Formular ist jetzt im Umlauf. Bitte bleiben Sie stehen, bis es Sie eingeholt hat.",tone:"procedural",valence:-.18}
+  ]},
+  archivbotin:{speaker:"DIE ARCHIVBOTIN",lines:[
+   {line:"Sie stehen vor der Ablage, ohne abgelegt zu sein. Ich setze Ihren Vorgang vorsorglich auf Wiedervorlage.",tone:"dread",valence:-.48},
+   {line:"Der Schlüssel passt. Das Schloss stellt noch einen Antrag auf Zuständigkeit.",tone:"procedural",valence:-.16}
+  ]},
+  formularsammler:{speaker:"DER FORMULARSAMMLER",lines:[
+   {line:"Meine Seitenfolge ist nicht genehmigt. Wenn Blatt siebzehn wieder vorn steht, beginnt mein Termin von gestern noch einmal.",tone:"dread",valence:-.72},
+   {line:"Die letzte Seite war leer. Frau Knick nennt das ein freies Zeitfenster. Ich nenne es Aussicht.",tone:"relief",valence:.32}
+  ]}
+ },
  entrance:{speaker:"PFÖRTNERIN",line:"Halt. Sie haben das Bürgeramt betreten, ohne nachzuweisen, dass Sie vorher draußen waren. Ziehen Sie bitte eine Nummer für den Übergang."},
  call:{id:"grass",line:"Polizei, Ordnungskontrolle. Sie sind heute über eine Grünfläche gelaufen. Antworten Sie: linker Schuh, rechter Schuh, oder beide?",declined:"Sehr gut. In diesem Schalterbereich sind private Anrufe nicht zuständig."},
  police:[

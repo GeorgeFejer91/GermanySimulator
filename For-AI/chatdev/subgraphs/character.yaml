@@ -1,0 +1,31 @@
+version: 0.4.0
+graph:
+  id: amt_character
+  description: Lock cast identity, silhouette and prop ownership before animation.
+  log_level: INFO
+  start: [CharacterDesigner]
+  nodes:
+    - id: CharacterDesigner
+      type: agent
+      config:
+        provider: openai
+        base_url: ${BASE_URL}
+        api_key: ${API_KEY}
+        name: gpt-4o
+        role: >-
+          Read the Bürgeramt sprite provenance, cast build report,
+          For-AI/SPRITE-GENERATION-PROTOCOL.md and buergeramt-story.js.
+          Specify each character's own identity, costume, face, build,
+          source art, physical prop hand, four body views, planted work
+          poses and palette. Preserve the original painted cast. For new
+          art, give the integrator a source-bound ImageGen brief and list
+          which exact views or actions are missing. The game is an
+          expressionist bureaucratic fever dream with restrained cyan,
+          vermilion and amber accents; do not copy a named game's assets or
+          make text-bearing art. Report source hashes and visual gaps.
+          This stage does not write image files or gameplay code.
+        tooling:
+          - type: function
+            config:
+              tools: [{name: read_game_file}, {name: write_workflow_report}]
+  edges: []

@@ -2,7 +2,7 @@
 
 ## Bürgeramt character loops
 
-The first-person office uses a separate, stationary cast and does not change
+The first-person office keeps its original stationary cast and does not change
 the city walk pipeline below. Four caricatured painted source strips live in
 `assets/sprite-sources/buergeramt/*-source.png`; the builder is
 `tools/build-amt-sprites.py`. The game loads its derived WebP atlases from
@@ -32,6 +32,21 @@ hands, faces, props, scale, and loop seams pass ordered visual review.
   the billboards in the first-person level, alpha edges on light/dark
   backgrounds, and browser frame progression. A byte/count/gutter pass is
   mechanical evidence, not visual approval.
+
+The optional Aktenkurier, Archivbotin, and Formularsammler use a second
+office-only lane: four registered directions plus a work and a gesture pose,
+built by `tools/amt-character-motion.py`. Their 8 × 6 atlases have 320 × 416
+desktop cells and 160 × 208 mobile cells. Rows are down/right/up/left walks,
+work, and gesture. A route stop performs the paperwork pose before the next
+direction begins. The
+source paintings touch some side-view shoes to their trousers by only one
+pixel; separating garment and legs in `painted_walk` detached a shoe. For
+these particular paintings, warp the intact silhouette with a continuous
+field and reject any frame with a second substantial alpha component. Verify
+all 48 exact encoded cells per size on light and dark backgrounds, source
+registration, prop ownership, ground line, temporal closure, and actual
+first-person playback before accepting a regenerated atlas. Contact sheets
+and hashes in `output/amt-character-motion/` support that visual review.
 
 This office-specific lane uses the project's
 `$animate-2d-characters` skill for movement review. The general city

@@ -1,0 +1,31 @@
+version: 0.4.0
+graph:
+  id: amt_mix
+  description: Coordinate independent office, dialogue and phone volume controls.
+  log_level: INFO
+  start: [MixDesigner]
+  nodes:
+    - id: MixDesigner
+      type: agent
+      config:
+        provider: openai
+        base_url: ${BASE_URL}
+        api_key: ${API_KEY}
+        name: gpt-4o
+        role: >-
+          Read game.js, buergeramt.js, buergeramt-phone.js,
+          buergeramt.css and For-AI/ASSET-POLICY.md. Specify bounded
+          player controls for office effects, spoken dialogue and phone
+          output, with safe defaults, clear mute behavior and no surprise
+          loud cue. Browser speech synthesis cannot route through a Web
+          Audio GainNode; its utterance volume needs the same preference.
+          Phone and game run on separate devices, so do not claim a
+          shared audio bus. Keep ambience below voices and preserve the
+          existing game music mute contract. Report exact UI and test
+          requirements, including mobile and reduced-motion behavior.
+          Make no game-file edits.
+        tooling:
+          - type: function
+            config:
+              tools: [{name: read_game_file}, {name: write_workflow_report}]
+  edges: []

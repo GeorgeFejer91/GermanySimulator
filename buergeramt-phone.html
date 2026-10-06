@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="de"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="theme-color" content="#ffffff"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"><meta name="mobile-web-app-capable" content="yes"><link rel="icon" href="data:,"><title>Bürgeramt · Anmeldung</title><link rel="stylesheet" href="./buergeramt.css?v=20261006-call-ui"></head>
+<html lang="de"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="theme-color" content="#ffffff"><meta name="apple-mobile-web-app-capable" content="yes"><link rel="icon" href="data:,"><meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"><meta name="mobile-web-app-capable" content="yes"><title>Bürgeramt · Anmeldung</title><link rel="stylesheet" href="./buergeramt.css?v=20261007-amt-hud"></head>
 <body class="amt-phone"><main class="phone-shell">
 <header><div class="phone-brand"><b>AMT <span>38</span></b><strong>ServicePortal Bürgeramt</strong></div><small>LANDESAMT FÜR ANWESENHEIT · ONLINE-DIENST</small></header>
 <div class="phone-breadcrumb">Bürgeramt / Anmeldung zur Vorsprache</div>
@@ -12,6 +12,7 @@
   <small id="phone-call-state">EINGEHENDER ANRUF</small>
   <div class="call-symbol" aria-hidden="true">?</div>
   <b id="phone-caller">UNBEKANNT</b>
+  <label id="phone-volume"><span id="phone-volume-label">ANRUFLAUTSTÄRKE</span><input type="range" min="0" max="100" value="75" aria-labelledby="phone-volume-label"></label>
   <p id="phone-call-line" lang="de" hidden></p>
   <div id="phone-choices" class="phone-choices">
     <button id="phone-decline" type="button"><svg class="call-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M2 12c5-5 15-5 20 0l-2 5-4-1 .5-3c-3-1.5-6-1.5-9 0L8 16l-4 1z"/></svg><span id="phone-decline-label" class="call-label">ABLEHNEN</span></button>
@@ -21,4 +22,4 @@
     </div>
   </div>
 </section>
-<footer>Vorgänge werden nur bei bestehender Verbindung aufgerufen.</footer></main><script src="./assets/vendor/vdoninja/1.5.5/vdoninja-sdk.min.js"></script><script src="./buergeramt-link.js?v=20261006-call-ui-sync3"></script><script src="./buergeramt-phone.js?v=20261006-call-ui-sync3"></script><script type="module" src="./buergeramt-fit.js?v=20261006-call-ui-sync3"></script></body></html>
+<footer>Vorgänge werden nur bei bestehender Verbindung aufgerufen.</footer></main><script src="./assets/vendor/vdoninja/1.5.5/vdoninja-sdk.min.js"></script><script src="./buergeramt-link.js?v=20261006-call-ui-sync3"></script><script src="./buergeramt-phone.js?v=20261007-amt-hud"></script><script type="module" src="./buergeramt-fit.js?v=20261007-amt-hud"></script></body></html>

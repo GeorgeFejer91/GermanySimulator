@@ -23,7 +23,7 @@ All browser-testing skill workflows must follow the [silent background browser-t
 
 The project stack is already chosen: custom JavaScript simulation plus required vanilla Three.js rendering, static files, and GitHub Pages. Registered PNG character sprites remain supported through Three.js sprites. Do not reintroduce a Canvas world, or add Phaser, React Three Fiber, Vite, TypeScript, Rapier, a backend, or a second runtime tree solely because an installed skill recommends that stack for new projects.
 
-For the first Bürgeramt episode, run `tools/chatdev.ps1 -ValidateOnly` before proposing a ChatDev graph change. The external pinned ChatDev checkout executes six scoped stages for story, first-person gameplay, phone sync, voice, review, and QA; `For-AI/chatdev/` owns the graph and file permissions. The voice stage also uses `$voice-cloning`, and gameplay changes still use the applicable game skills and silent browser playtests. ChatDev output is a proposal to validate in this root game, not another deployable game tree.
+For the first Bürgeramt episode, run `tools/chatdev.ps1 -ValidateOnly` before proposing a ChatDev graph change. The external pinned ChatDev checkout has twelve scoped stages for story, storyboard, character, color mood, animation, gameplay, soundscape, mix, phone sync, voice, review, and QA; `For-AI/chatdev/` owns the graph and file permissions. The voice stage also uses `$voice-cloning`, and gameplay changes still use the applicable game skills and silent browser playtests. ChatDev output is a proposal to validate in this root game, not another deployable game tree.
 
 Installed source snapshots (2026-09-19):
 
@@ -39,6 +39,11 @@ ownership before parallel edits and accept only verified material into a
 ChatDev stage.
 
 ## Other project skills
+
+For cross-domain Bürgeramt work or changes to its ChatDev production process, use
+[`chatdev-game-workflows`](../.agents/skills/chatdev-game-workflows/SKILL.md).
+It routes the scoped domain stages; it does not replace the art, game, audio,
+UI or browser skills required by the actual change.
 
 | Work | Skill | Requirement |
 | --- | --- | --- |

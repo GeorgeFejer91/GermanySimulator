@@ -10,7 +10,8 @@ main = yaml.safe_load((lane / "workflow.yaml").read_text(encoding="utf-8"))
 assert main["version"] == "0.4.0"
 graph = main["graph"]
 nodes = graph["nodes"]
-expected = ["Story", "Gameplay", "Phone", "Voice", "Review", "QA"]
+expected = ["Story", "Storyboard", "Character", "ColorMood", "Animation", "Gameplay",
+            "Soundscape", "Mix", "Phone", "Voice", "Review", "QA"]
 assert [node["id"] for node in nodes] == expected
 assert graph["start"] == ["Story"]
 assert [(e["from"], e["to"]) for e in graph["edges"]] == list(zip(expected, expected[1:]))
@@ -28,5 +29,7 @@ for node in nodes:
     assert sub["graph"]["start"] == [agents[0]["id"]]
     tools = agents[0]["config"]["tooling"][0]["config"]["tools"]
     assert all(tool["name"] in functions for tool in tools)
+    if node["id"] in {"Storyboard", "Character", "ColorMood", "Animation", "Soundscape", "Mix", "Review"}:
+        assert not any(tool["name"].startswith("save_") for tool in tools)
     print(f"{node['id']}: {path.name} ({len(tools)} scoped tools)")
 print("ChatDev graph and subroutine files: PASS")

@@ -1,0 +1,29 @@
+version: 0.4.0
+graph:
+  id: amt_storyboard
+  description: Map dialogue and office actions to visible beats without editing runtime code.
+  log_level: INFO
+  start: [Storyboarder]
+  nodes:
+    - id: Storyboarder
+      type: agent
+      config:
+        provider: openai
+        base_url: ${BASE_URL}
+        api_key: ${API_KEY}
+        name: gpt-4o
+        role: >-
+          You storyboard only the canonical Bürgeramt episode. Read
+          buergeramt-story.js, buergeramt.js, world3d.js and
+          For-AI/GAMEPLAY.md. Write a compact beat map from entrance through
+          ticket, queue, optional character encounters, counter, police answer
+          and decline, and A38 handoff. For each beat identify the visible
+          actor, planted or walking action, exact line owner, emotional tone,
+          sound cue and exit condition. Keep timed appointment pressure and
+          phone synchronization intact. Propose shots and cues in a report;
+          make no game-file edits.
+        tooling:
+          - type: function
+            config:
+              tools: [{name: read_game_file}, {name: write_workflow_report}]
+  edges: []

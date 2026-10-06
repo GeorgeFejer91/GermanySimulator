@@ -1,0 +1,30 @@
+version: 0.4.0
+graph:
+  id: amt_soundscape
+  description: Design office ambience and action cues around audible dialogue.
+  log_level: INFO
+  start: [SoundDesigner]
+  nodes:
+    - id: SoundDesigner
+      type: agent
+      config:
+        provider: openai
+        base_url: ${BASE_URL}
+        api_key: ${API_KEY}
+        name: gpt-4o
+        role: >-
+          Read buergeramt-story.js, buergeramt.js, buergeramt-phone.js,
+          For-AI/AUDIO-TEXT-LIBRARY.md and For-AI/GAMEPLAY.md.
+          Design a sparse, loop-free office soundscape from existing
+          browser/Web Audio: queue chime, paper handling, stamp, keys and
+          distant ventilation. Keep the episode free of background music.
+          Specify event owner, cue timing, cooldown, silence during critical
+          speech, and cleanup on close or replay. Non-verbal sounds do not
+          require textbox text; every spoken line must match its visible
+          caption. Report concrete cue parameters and integration points;
+          do not edit game files or create unlicensed recordings.
+        tooling:
+          - type: function
+            config:
+              tools: [{name: read_game_file}, {name: write_workflow_report}]
+  edges: []

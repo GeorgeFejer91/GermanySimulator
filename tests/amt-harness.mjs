@@ -16,6 +16,7 @@ export function harness(kind='host',{voice=false,synthesis=true,phoneLanguage='d
  class Element extends EventTarget{
   constructor(id=''){super();this.id=id;this.textContent='';this.children=[];this.hidden=false;this.disabled=false;this.value='';this.href='';this.dataset={};this.style={setProperty(){},removeProperty(){}};const classes=new Set();this.classList={add:x=>classes.add(x),remove:x=>classes.delete(x),contains:x=>classes.has(x),toggle(x,on){if(on===undefined)on=!classes.has(x);on?classes.add(x):classes.delete(x);return on}}}
   querySelector(selector){return node(selector.slice(1))}
+  querySelectorAll(){return []}
   replaceChildren(...children){this.children=children}
   append(child){this.children.push(child)}
   closest(selector){return selector==='button'&&this.tagName==='BUTTON'?this:null}
@@ -23,7 +24,7 @@ export function harness(kind='host',{voice=false,synthesis=true,phoneLanguage='d
   click(){if(this.disabled)return;this.onclick?.();this.dispatchEvent(new Event('click'))}
  }
  function node(id){if(!nodes.has(id))nodes.set(id,new Element(id));return nodes.get(id)}
- document.getElementById=node;document.querySelectorAll=()=>[];document.createElement=tag=>Object.assign(new Element(),{tagName:tag.toUpperCase()});document.hidden=false;
+ document.getElementById=node;document.querySelector=selector=>selector==='#phone-volume input'?node('phone-volume-input'):node(selector.slice(1));document.querySelectorAll=()=>[];document.createElement=tag=>Object.assign(new Element(),{tagName:tag.toUpperCase()});document.hidden=false;
  const fullscreenRequests=[];document.body=new Element('body');document.documentElement=new Element('html');document.documentElement.requestFullscreen=()=>{fullscreenRequests.push(true);return Promise.resolve()};
  for(const id of ['amt-level','amt-ticket','amt-walk-hud','phone-ticket','phone-call','phone-call-line'])node(id).hidden=true;
  node('phone-submit').disabled=true;
@@ -47,7 +48,8 @@ export function harness(kind='host',{voice=false,synthesis=true,phoneLanguage='d
   end(){const utterance=this.current;this.current=null;this.speaking=false;utterance?.onend?.()}
  };
  const vibrations=[];
- const globals={console,Event,EventTarget,CustomEvent,TextEncoder,URL,URLSearchParams,Intl,Date,Math,Number,Set,Promise,performance:{now:()=>now},
+ const saved=new Map(),localStorage={getItem:key=>saved.has(key)?saved.get(key):null,setItem:(key,value)=>saved.set(key,String(value))};
+ const globals={console,Event,EventTarget,CustomEvent,TextEncoder,URL,URLSearchParams,Intl,Date,Math,Number,Set,Promise,performance:{now:()=>now},localStorage,
   window,document,navigator:{userAgent:phoneAgent,userAgentData:phonePlatform?{platform:phonePlatform,mobile:phoneMobile??true}:undefined,language:phoneLanguage,languages:[phoneLanguage],userActivation:{hasBeenActive:false},vibrate(pattern){vibrations.push(pattern)}},
   crypto:{getRandomValues(a){a.fill(123);return a}},BuergeramtLink:Link,
   qrcode:()=>({addData(){},make(){},createSvgTag:()=>'<svg></svg>'}),

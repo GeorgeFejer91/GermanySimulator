@@ -10,9 +10,27 @@ graph:
     - id: Story
       type: subgraph
       config: {type: file, config: {path: subgraphs/story.yaml}}
+    - id: Storyboard
+      type: subgraph
+      config: {type: file, config: {path: subgraphs/storyboard.yaml}}
+    - id: Character
+      type: subgraph
+      config: {type: file, config: {path: subgraphs/character.yaml}}
+    - id: ColorMood
+      type: subgraph
+      config: {type: file, config: {path: subgraphs/color-mood.yaml}}
+    - id: Animation
+      type: subgraph
+      config: {type: file, config: {path: subgraphs/animation.yaml}}
     - id: Gameplay
       type: subgraph
       config: {type: file, config: {path: subgraphs/gameplay.yaml}}
+    - id: Soundscape
+      type: subgraph
+      config: {type: file, config: {path: subgraphs/soundscape.yaml}}
+    - id: Mix
+      type: subgraph
+      config: {type: file, config: {path: subgraphs/mix.yaml}}
     - id: Phone
       type: subgraph
       config: {type: file, config: {path: subgraphs/phone.yaml}}
@@ -26,8 +44,14 @@ graph:
       type: subgraph
       config: {type: file, config: {path: subgraphs/qa.yaml}}
   edges:
-    - {from: Story, to: Gameplay}
-    - {from: Gameplay, to: Phone}
+    - {from: Story, to: Storyboard}
+    - {from: Storyboard, to: Character}
+    - {from: Character, to: ColorMood}
+    - {from: ColorMood, to: Animation}
+    - {from: Animation, to: Gameplay}
+    - {from: Gameplay, to: Soundscape}
+    - {from: Soundscape, to: Mix}
+    - {from: Mix, to: Phone}
     - {from: Phone, to: Voice}
     - {from: Voice, to: Review}
     - {from: Review, to: QA}

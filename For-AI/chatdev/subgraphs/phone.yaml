@@ -44,9 +44,10 @@ graph:
           measured clock offset, with its uncertainty.
           Validate message
           types, session, sequence, and payload length. Never promise an OS lock.
-          Edit only allowlisted Bürgeramt files and report any game.js integration.
+          Edit only the phone companion, link transport and their CSS through
+          save_phone_file. Report controller, renderer or game.js integration.
         tooling:
           - type: function
             config:
-              tools: [{name: read_game_file}, {name: save_game_file}, {name: write_workflow_report}]
+              tools: [{name: read_game_file}, {name: save_phone_file}, {name: write_workflow_report}]
   edges: []

@@ -29,6 +29,10 @@ but [reduced user agents](https://developer.mozilla.org/en-US/docs/Web/HTTP/Guid
 and unavailable native dialer settings prevent reliable exact-model or
 exact-call-screen selection. No high-entropy model probe is needed.
 
+## 2026-10-06 — Optional moving cast and bounded mood mix in the office
+
+The first Bürgeramt now adds three optional painted walkers with original four-view sources and paperwork poses. Their route and dialogue state stay in `buergeramt.js`; `world3d.js` reads it without owning progression and eases a subtle actor-only texture tint from the active line's tone/valence. Short synthesized room, prop, and call effects have separate local controls from office speech; the linked phone has its own call level. Office dialogue, choices, and the direct exit result use a small in-scene subtitle rail over the visible room; the episode must not show popup screens. The existing QR/queue/counter/phone outcomes remain the mission authority. A twelve-stage scoped ChatDev graph records the story, storyboard, character, color mood, animation, gameplay, soundscape, mix, phone, voice, review, and QA handoffs. The graph validates locally; a live ChatDev run still needs its external API key. See [`BUERGERAMT.md`](./BUERGERAMT.md) for the concrete beat and owner map.
+
 ## 2026-10-06 — Dense office dressing with bounded collision
 
 The accepted ENV-01 office contribution is a lazily loaded Three.js child

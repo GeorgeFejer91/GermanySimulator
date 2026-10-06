@@ -15,6 +15,20 @@ test('the clerk encounter remains on the public side of the desk',()=>{
 test('an invalid frame delta cannot corrupt first-person movement',()=>{
  const h=harness();h.key('KeyW');const before=h.level.view;h.level.update(Number.NaN);h.key('KeyW','keyup');assert.deepEqual(h.level.view,before);
 });
+test('office regulars patrol and handle paperwork without changing the ticket',()=>{
+ const h=harness(),start=h.level.characters;h.advanceGame(2.5);const later=h.level.characters;
+ assert.equal(later.length,3);assert.ok(later.some((actor,i)=>actor.mode==='walk'&&Math.hypot(actor.x-start[i].x,actor.z-start[i].z)>.2));
+ assert.equal(h.level.activated,false);assert.equal(h.links[0].sent.filter(m=>m.type==='ticket').length,0);
+});
+test('a nearby regular owns the visible dialogue mood and releases the queue on return',()=>{
+ const h=harness();h.enter();h.moveTo(3.4,2.4);const actor=h.level.characters.find(a=>a.id==='formularsammler');
+ assert.ok(Math.hypot(h.level.view.x-actor.x,h.level.view.z-actor.z)<1.65);
+ const board=h.level.queueDisplay;h.level.interact();assert.equal(h.level.stage,'character');
+ assert.equal(h.level.characterMood.id,'formularsammler');assert.equal(h.level.characterMood.tone,'dread');
+ assert.equal(h.node('amt-line').textContent,h.window.BuergeramtStory.characters.formularsammler.lines[0].line);
+ h.advanceGame(4);assert.equal(h.level.queueDisplay,board);h.action();
+ assert.equal(h.level.stage,'walk-sign');assert.equal(h.level.characterMood,null);
+});
 
 test('the board calls continuously and each scan issues a fresh active ticket without a popup',()=>{
  const h=harness();assert.equal(h.level.queueDisplay,'B-041');h.enter();h.advanceGame(4);const firstCall=h.level.queueDisplay;assert.match(firstCall,/^[A-Z]-\d+/);h.advanceGame(4);assert.notEqual(h.level.queueDisplay,firstCall);assert.equal(h.level.stage,'walk-sign');
@@ -130,10 +144,16 @@ test('phone retries the same scan until a ticket arrives',()=>{
  const h=harness('phone'),link=h.links[0];link.emit('connected',{});const first=link.sent.at(-1);h.tick(3001);const scans=link.sent.filter(message=>message.type==='scan');assert.equal(scans.length,3);assert.ok(scans.every(message=>message.id===first.id));link.message({type:'ticket',number:'B-223'});h.tick(3001);assert.equal(link.sent.filter(message=>message.type==='scan').length,3);
 });
 test('name submission silently unlocks audio after the ticket',()=>{
- const h=harness('phone');let resumes=0;h.window.AudioContext=class{resume(){resumes++;return Promise.resolve()}};h.phoneReady();h.node('phone-name').value='Erika Mustermann';h.node('phone-form').dispatchEvent(new Event('submit',{cancelable:true}));assert.equal(resumes,1);assert.ok(h.vibrations.every(pattern=>pattern===0));assert.equal(h.fullscreenRequests.length,1);h.links[0].message({type:'ticket',number:'B-224'});assert.equal(h.node('phone-number').textContent,'B-224');assert.equal(h.node('phone-ticket').hidden,false);
+ const h=harness('phone');let resumes=0;h.window.AudioContext=class{createGain(){return{gain:{value:0},connect(){}}}resume(){resumes++;return Promise.resolve()}};h.phoneReady();h.node('phone-name').value='Erika Mustermann';h.node('phone-form').dispatchEvent(new Event('submit',{cancelable:true}));assert.equal(resumes,1);assert.ok(h.vibrations.every(pattern=>pattern===0));assert.equal(h.fullscreenRequests.length,1);h.links[0].message({type:'ticket',number:'B-224'});assert.equal(h.node('phone-number').textContent,'B-224');assert.equal(h.node('phone-ticket').hidden,false);
 });
 test('incoming call repeats vibration and stops it after decline',()=>{
  const h=harness('phone');h.incoming();const first=h.vibrations.length;assert.ok(first>=1);h.tick(3000);assert.ok(h.vibrations.length>first);h.node('phone-decline').click();assert.equal(h.vibrations.at(-1),0);
+});
+test('phone call level applies to the next exact police utterance',()=>{
+ const h=harness('phone');const slider=h.node('phone-volume-input');slider.value='20';slider.dispatchEvent(new Event('input'));
+ h.incoming();h.node('phone-answer').click();h.tick(20);
+ assert.equal(h.synth.spoken[0].text,h.node('phone-call-line').textContent);
+ assert.ok(Math.abs(h.synth.spoken[0].volume-.18)<1e-9);
 });
 test('phone answer/decline are one-shot and sent with the current call id',()=>{
  for(const decision of ['answer','decline']){const h=harness('phone');h.incoming();h.node('phone-'+decision).click();h.node('phone-'+decision).click();const decisions=h.links[0].sent.filter(m=>m.type===decision);assert.equal(decisions.length,1);assert.equal(decisions[0].id,'grass')}

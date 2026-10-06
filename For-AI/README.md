@@ -17,6 +17,7 @@ This directory is the durable context and instruction surface for Germany Simula
 Required starting point: [`AGENT-START.md`](./AGENT-START.md)
 
 - [`GAMEPLAY.md`](./GAMEPLAY.md): authoritative gameplay rules, mission flow, controls, and satire boundaries.
+- [`BUERGERAMT.md`](./BUERGERAMT.md): optional moving-cast storyboard, mood and sound contract, and ChatDev domain handoff for the secret office.
 - [`ASSET-POLICY.md`](./ASSET-POLICY.md): desktop/mobile asset strategy and YAGNI rules.
 - [`SPRITE-GENERATION-PROTOCOL.md`](./SPRITE-GENERATION-PROTOCOL.md): fixed anatomical grid, gait keys, transition build, and visual QA for moving bitmap characters.
 - [`SKILLS.md`](./SKILLS.md): required skill routing for different kinds of work.

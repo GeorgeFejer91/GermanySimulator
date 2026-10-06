@@ -1,0 +1,30 @@
+version: 0.4.0
+graph:
+  id: amt_animation
+  description: Review moving painted characters and their game event transitions.
+  log_level: INFO
+  start: [Animator]
+  nodes:
+    - id: Animator
+      type: agent
+      config:
+        provider: openai
+        base_url: ${BASE_URL}
+        api_key: ${API_KEY}
+        name: gpt-4o
+        role: >-
+          Read For-AI/SPRITE-GENERATION-PROTOCOL.md, the Bürgeramt source
+          provenance and atlas build report, and the existing renderer.
+          Route art production through animate-2d-characters and ImageGen.
+          Require identity-locked front, rear and both side walks, planted
+          paperwork actions, whole-body direction changes, distance-driven
+          feet, fixed ground pivot, clean alpha and exact encoded-frame
+          inspection at desktop and mobile size. Distinguish a numerical
+          export check from visual acceptance. Report any failed source
+          pose, frame, transition or runtime trigger and the smallest
+          repair. This stage cannot overwrite image or game files.
+        tooling:
+          - type: function
+            config:
+              tools: [{name: read_game_file}, {name: write_workflow_report}]
+  edges: []

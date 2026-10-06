@@ -35,3 +35,29 @@ Pillow, NumPy, and OpenCV are authoring dependencies only; the static game
 loads only the resulting WebPs. The source images and script are sufficient
 to rebuild the exact cast without the external ChatDev checkout. See
 `For-AI/SPRITE-GENERATION-PROTOCOL.md` for visual acceptance rules.
+
+## Moving office regulars
+
+OpenAI ImageGen generated six additional original 1536 × 1024 sheets on
+2026-10-06. The accepted clerk and renter sources were supplied as brushwork,
+proportion, and palette references. No external game sprite, photograph, or
+named artist painting was used. Each `*-source.png` carries one identity in
+front, right, back, and left views against temporary magenta; each
+`*-action.png` carries two full-body paperwork poses with generated alpha.
+
+| Source pair | Identity and action |
+| --- | --- |
+| `aktenkurier-*` | Gaunt file courier in a long charcoal coat, carrying a document stack and red stamp. |
+| `archivbotin-*` | Compact older archive keeper with dark bob, red glasses, ledger, and keys. |
+| `formularsammler-*` | Stooped applicant in a worn teal suit, russet scarf, and accordion form. |
+
+`tools/amt-character-motion.py` removes only exterior magenta, retains the
+source alpha, registers the six poses per identity at one scale, and creates
+connected, subtle walk frames by warping the whole painted silhouette. The
+segmented-leg attempt detached a side-view shoe and was discarded. Registered
+transparent poses remain in the three named subdirectories. Derived 8 × 6
+desktop/mobile WebPs are the only new runtime media. Exact source, atlas, and
+encoded-cell hashes are in the local
+`output/amt-character-motion/interaction-build-report.json`; contact sheets
+there are review aids. The source sheets and builder, without the ChatDev
+checkout, are sufficient to regenerate the shipped assets.

@@ -9,7 +9,9 @@ root = Path(__file__).resolve().parents[1]
 chatdev = root.parent / "ChatDev"
 parser = argparse.ArgumentParser()
 parser.add_argument("prompt")
-parser.add_argument("--stage", choices=("Story", "Gameplay", "Phone", "Voice", "Review", "QA"))
+parser.add_argument("--stage", choices=("Story", "Storyboard", "Character", "ColorMood", "Animation",
+                                        "Gameplay", "Soundscape", "Mix", "Phone", "Voice",
+                                        "Review", "QA"))
 args = parser.parse_args()
 if not chatdev.is_dir():
     raise SystemExit(f"ChatDev checkout missing: {chatdev}")

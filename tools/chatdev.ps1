@@ -16,7 +16,7 @@ if (-not $env:API_KEY) { throw 'Set API_KEY or OPENAI_API_KEY in your local envi
 if (-not $env:BASE_URL) { $env:BASE_URL = 'https://api.openai.com/v1' }
 $python = Join-Path $chatdevRoot '.venv/Scripts/python.exe'
 if (-not (Test-Path -LiteralPath $python)) { throw "ChatDev Python runtime missing: $python. Install ChatDev v2.2.0 in that external checkout." }
-if ($Stage -and $Stage -notin @('Story','Gameplay','Phone','Voice','Review','QA')) { throw "Unknown ChatDev stage: $Stage" }
+if ($Stage -and $Stage -notin @('Story','Storyboard','Character','ColorMood','Animation','Gameplay','Soundscape','Mix','Phone','Voice','Review','QA')) { throw "Unknown ChatDev stage: $Stage" }
 $stageArgs = if ($Stage) { @('--stage', $Stage) } else { @() }
 & $python (Join-Path $PSScriptRoot 'run-chatdev.py') $Prompt @stageArgs
 exit $LASTEXITCODE

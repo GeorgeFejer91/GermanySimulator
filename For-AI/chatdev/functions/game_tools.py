@@ -17,9 +17,13 @@ READABLE = {
     "game.js", "world3d.js", "index.html", "styles.css", "buergeramt.js",
     "buergeramt-story.js", "buergeramt-phone.js", "buergeramt-phone.html",
     "buergeramt-link.js", "buergeramt.css", "CREDITS.md",
-    "For-AI/README.md", "For-AI/GAMEPLAY.md", "For-AI/ASSET-POLICY.md",
+    "For-AI/README.md", "For-AI/GAMEPLAY.md", "For-AI/BUERGERAMT.md", "For-AI/ASSET-POLICY.md",
     "For-AI/VOICE-SYNTH-PROTOCOL.md", "For-AI/AUDIO-TEXT-LIBRARY.md",
     "For-AI/AUDIO-TEXT-LIBRARY.js", "assets/voices/LICENSES.md",
+    "For-AI/SPRITE-GENERATION-PROTOCOL.md",
+    "assets/sprite-sources/buergeramt/PROVENANCE.md",
+    "assets/buergeramt/characters/build-report.json",
+    "output/amt-character-motion/interaction-build-report.json",
     "For-AI/chatdev/WEBGPT-COORDINATION.md",
     "For-AI/chatdev/WEBGPT-HANDOFF.md",
 }
@@ -56,6 +60,24 @@ def save_game_file(path: str, content: str) -> str:
         raise ValueError("Source file exceeds the bounded tool limit")
     target.write_text(content, encoding="utf-8")
     return f"Saved {path} ({len(content)} characters) on {branch}"
+
+
+def save_story_file(content: str) -> str:
+    """Story stage may change only the authored Bürgeramt dialogue catalog."""
+    return save_game_file("buergeramt-story.js", content)
+
+
+def save_mechanics_file(content: str) -> str:
+    """Gameplay stage may change only the Bürgeramt state controller."""
+    return save_game_file("buergeramt.js", content)
+
+
+def save_phone_file(path: str, content: str) -> str:
+    """Phone stage may change only the companion and its own styling."""
+    if path not in {"buergeramt-link.js", "buergeramt-phone.js",
+                    "buergeramt-phone.html", "buergeramt.css"}:
+        raise ValueError(f"Phone stage cannot write {path}")
+    return save_game_file(path, content)
 
 
 def write_workflow_report(name: str, content: str, _context: dict | None = None) -> str:

@@ -24,10 +24,14 @@ graph:
           Knick looks idle yet scolds an early approach, then demands speed when
           the correct number arrives; a late player loses the appointment.
           Write original affectionate Dadaist satire without copying source anecdotes.
-          Change only buergeramt-story.js through save_game_file. Report exact line
-          ownership, branch outcomes, and all changed text to the next stage.
+          For each new interactable line, assign an explicit character ID,
+          tone, and restrained emotional valence that can drive the
+          character texture while that exact line is visible. Record the
+          visual/action beat without adding explanatory player-facing copy.
+          Change only buergeramt-story.js through save_story_file. Report exact
+          line ownership, branch outcomes, and changed text to the next stage.
         tooling:
           - type: function
             config:
-              tools: [{name: read_game_file}, {name: save_game_file}, {name: write_workflow_report}]
+              tools: [{name: read_game_file}, {name: save_story_file}, {name: write_workflow_report}]
   edges: []

@@ -1,0 +1,29 @@
+version: 0.4.0
+graph:
+  id: amt_color_mood
+  description: Coordinate emotional valence with restrained character color treatment.
+  log_level: INFO
+  start: [ColorMoodCoordinator]
+  nodes:
+    - id: ColorMoodCoordinator
+      type: agent
+      config:
+        provider: openai
+        base_url: ${BASE_URL}
+        api_key: ${API_KEY}
+        name: gpt-4o
+        role: >-
+          Read buergeramt-story.js, world3d.js, For-AI/BUERGERAMT.md,
+          For-AI/ASSET-POLICY.md, and the moving cast provenance. Map
+          each authored line tone and signed valence to a restrained tint
+          of that speaker's original painted texture. Specify a bounded
+          strength, a smooth rise and return, and one active owner tied to
+          the exact visible dialogue cue. Preserve the source colors,
+          readable silhouettes, alpha, room signage and reduced-motion
+          legibility. Report palette, transition, and browser review
+          requirements. Make no game-file edits.
+        tooling:
+          - type: function
+            config:
+              tools: [{name: read_game_file}, {name: write_workflow_report}]
+  edges: []
