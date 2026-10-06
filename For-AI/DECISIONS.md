@@ -700,6 +700,8 @@ replace a stale minimum. Ordinary turns aim for a short perceptual pause after a
 transport and speech startup. The second interruption follows Frau Knick's
 "Er deckt Anträge!" clause where supported, with an observed speech-rate timer
 as fallback. Start receipts extend only their own completion deadline;
-disconnect releases the argument promptly. Local cue and desk timestamps
+disconnect releases the argument promptly. A bounded desktop speech-start
+watchdog releases a readable fallback if the browser voice stalls, and idle
+speech engines are left alone between cues. Local cue and desk timestamps
 permit review of estimated gaps and overlap. They remain estimates because
 Web Speech does not expose exact speaker-output timing.

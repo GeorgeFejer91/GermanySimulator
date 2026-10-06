@@ -27,7 +27,9 @@ graph:
           interruption after Frau Knick's "Er deckt Anträge!" clause when the
           browser supplies it, with a measured speech-rate fallback. Extend
           a cue timeout only after its valid start receipt; a disconnect must
-          release the argument promptly. Keep local timing and beat diagnostics
+          release the argument promptly. Bound desktop browser-voice startup
+          silence with a readable fallback and avoid cancelling an idle speech
+          engine before a new line. Keep local timing and beat diagnostics
           without personal or pairing data. Do not infer exact acoustic output
           time from browser speech events.
           Preserve first-person camera movement, the outdoor entrance, larger

@@ -72,6 +72,9 @@ test('identical speech from a previous attempt cannot start after replay',()=>{
 test('returning to walking cancels speech whose modal is now hidden',()=>{
  const h=harness('host',{voice:true});h.wait();h.moveTo(4,-8.15);h.level.interact();h.tick(20);assert.equal(h.synth.speaking,true);h.action();assert.equal(h.synth.speaking,false);
 });
+test('starting a clerk cue does not cancel an already idle speech engine',()=>{
+ const h=harness('host',{voice:true});h.counter();h.tick(20);h.synth.end();const before=h.synth.cancelCount;h.links[0].message({type:'answer',id:'grass'});assert.equal(h.synth.cancelCount,before);
+});
 test('the host remains playable without a browser speech implementation',()=>{
  const h=harness('host',{synthesis:false});h.enter();assert.equal(h.level.stage,'walk-sign');h.level.replay(h.config);assert.equal(h.level.stage,'outside');
 });
@@ -167,6 +170,9 @@ test('page exit cancels the clock and all pending phone callbacks',()=>{
 });
 test('a failed clerk voice retains a readable automatic-argument line',()=>{
  const h=harness('host',{voice:true});h.counter();h.links[0].message({type:'answer',id:'grass'});h.tick(20);const first=h.node('amt-line').textContent;h.synth.current.onerror();h.tick(2000);assert.equal(h.node('amt-line').textContent,first);assert.equal(h.counts.cancel,0);
+});
+test('a stalled clerk voice starts a readable fallback within 1.8 seconds and rejects late speech',()=>{
+ const h=harness('host',{voice:true});let late;h.synth.speak=utterance=>{late=utterance};h.counter();h.links[0].message({type:'answer',id:'grass'});h.tick(1799);assert.equal(h.level.timing.desk[0].startAt,null);h.tick(1);assert.equal(h.level.timing.desk[0].startMode,'fallback');assert.equal(h.level.timing.desk[0].startAt,h.now());late.onstart();late.onend();assert.equal(h.level.timing.desk[0].endAt,null);h.tick(100);assert.equal(h.counts.cancel,0);
 });
 test('a failed police voice displays its line instead of silently skipping it',()=>{
  const h=harness('phone');h.incoming();h.node('phone-answer').click();h.tick(20);h.node('phone-call-line').hidden=true;h.synth.current.onerror();assert.equal(h.node('phone-call-line').hidden,false);assert.equal(h.node('phone-call-line').textContent,h.window.BuergeramtStory.call.line);

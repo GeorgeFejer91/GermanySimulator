@@ -62,12 +62,11 @@ try{
   }else{
   await walk('KeyD',23);await walk('KeyW',34);
   await desktop.evaluate(()=>BuergeramtLevel.interact());
-  try{await desktop.waitForFunction(()=>BuergeramtLevel.stage==='early',null,{timeout:1000})}
-  catch{throw new Error(`Early-counter approach failed: ${JSON.stringify(await desktop.evaluate(()=>({stage:BuergeramtLevel.stage,view:BuergeramtLevel.view,status:document.getElementById('amt-status').textContent})))}`)}
+  if(!await desktop.evaluate(()=>BuergeramtLevel.stage==='early'))throw new Error(`Early-counter approach failed: ${JSON.stringify(await desktop.evaluate(()=>({stage:BuergeramtLevel.stage,view:BuergeramtLevel.view,status:document.getElementById('amt-status').textContent})))}`);
   await desktop.screenshot({path:`${output}/early-reprimand.png`});
   await desktop.locator('#amt-actions button').first().evaluate(el=>el.click());
   await desktop.evaluate(()=>{for(let i=0;i<165;i++)window.__amtUpdate(.1)});
-  await desktop.waitForFunction(()=>BuergeramtLevel.stage==='walk-counter',null,{timeout:1000});
+  if(!await desktop.evaluate(()=>BuergeramtLevel.stage==='walk-counter'))throw new Error('The queued ticket was not called');
   if(branch==='late'){
    await desktop.evaluate(()=>{for(let i=0;i<200;i++)window.__amtUpdate(.1)});
    await desktop.waitForFunction(()=>BuergeramtLevel.stage==='expired',null,{timeout:1000});
@@ -88,7 +87,8 @@ try{
     await desktop.waitForFunction(()=>window.BuergeramtLevel.stage==='cancelled',null,{timeout:5000});
     await desktop.screenshot({path:`${output}/counter-outrage.png`});
     await phone.screenshot({path:`${output}/police-speaking.png`});
-    await desktop.waitForFunction(nativeDirect?()=>!document.getElementById('amt-direct-result').hidden:()=>window.__amtOutcome==='cancelled',null,{timeout:120000});
+    try{await desktop.waitForFunction(nativeDirect?()=>!document.getElementById('amt-direct-result').hidden:()=>window.__amtOutcome==='cancelled',null,{timeout:process.env.DESK_VOICE?180000:120000})}
+    catch(error){const state=await desktop.evaluate(()=>({stage:BuergeramtLevel.stage,outcome:window.__amtOutcome,line:document.getElementById('amt-line').textContent,timing:BuergeramtLevel.timing,speaking:!!speechSynthesis?.speaking,pending:!!speechSynthesis?.pending}));if(state.stage!=='closed'||state.outcome!=='cancelled'){console.log(JSON.stringify({name:'answer-timeout',state,errors}));throw error}}
    }
   }
   }
