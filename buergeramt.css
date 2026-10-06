@@ -52,3 +52,39 @@ html[data-phone-os="android"] .phone-call{background:radial-gradient(circle at 4
 .phone-call>*{flex-shrink:0;min-width:0;max-width:100%;box-sizing:border-box;overflow-wrap:break-word}
 .phone-choices{flex-wrap:wrap;justify-content:space-evenly;row-gap:18px}
 .phone-choices button{flex-shrink:0}
+
+/* The phone follows Berlin's sparse service-page rhythm without using official marks. */
+.amt-phone{background:#fff;color:#151515}
+.amt-phone .phone-shell{max-width:720px;padding:0 12px 24px;border:0;background:#fff}
+.amt-phone .phone-shell header{display:block;padding:0;border:0}
+.phone-brand{display:flex;flex-wrap:wrap;align-items:center;gap:8px 14px;min-height:70px;padding:8px 0;border-bottom:1px solid #ddd}
+.phone-brand b{padding:7px;border:1px solid #171717;color:#d31727;font:700 16px Arial,sans-serif;white-space:nowrap}
+.phone-brand b span{margin-left:4px;padding-left:7px;border-left:1px solid #171717;color:#171717}
+.amt-phone .phone-shell header .phone-brand strong{min-width:0;font:700 16px Arial,sans-serif;overflow-wrap:break-word}
+.amt-phone .phone-shell header small{display:block;margin:0 -12px;padding:10px 12px;background:#f2f2f2;color:#333;font:12px Arial,sans-serif;letter-spacing:0}
+.phone-breadcrumb{margin-top:14px;color:#555;font:12px Arial,sans-serif}
+.phone-title{margin:30px 0 24px;font:700 clamp(25px,7vw,34px)/1.2 Arial,sans-serif;hyphens:auto}
+.phone-setup{padding:17px;margin-bottom:24px;border-left:6px solid #e32636;background:#f3f3f3}
+.phone-setup[hidden]{display:none!important}
+.phone-setup h2,.phone-form h2{margin:0 0 12px;font:700 21px/1.25 Arial,sans-serif}
+.phone-setup p,.phone-form p{font:16px/1.5 Arial,sans-serif}
+.phone-setup small{display:block;margin-top:12px;font:12px/1.4 Arial,sans-serif;color:#4c4c4c}
+.amt-phone .phone-shell button{background:#171717;color:#fff;border:0;text-align:center}
+.amt-phone .phone-choices #phone-decline{background:#ba3d40}
+.amt-phone .phone-choices #phone-answer{background:#348b57}
+.amt-phone .phone-shell button:disabled{background:#777}
+.phone-ticket{padding:12px 0 20px;text-align:left;border-top:4px solid #e32636}
+.amt-phone .phone-ticket small{color:#333;font:700 13px Arial,sans-serif;letter-spacing:0}
+.amt-phone .phone-ticket b{margin:10px 0;color:#171717;font:700 clamp(50px,16vw,78px)/1.1 Arial,sans-serif}
+.phone-ticket p{font:16px/1.45 Arial,sans-serif}
+.phone-form{padding:20px 0;border-top:1px solid #bbb}
+.phone-form label{margin:18px 0 8px}
+.phone-form button{margin-top:14px}
+.phone-ticket .phone-keep{border-left-color:#e32636;background:#f3f3f3}
+.amt-phone .phone-shell footer{margin-top:auto;color:#555}
+@keyframes amt-call-arrive{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
+@keyframes amt-call-pulse{50%{transform:scale(1.07);box-shadow:0 0 0 18px #ffffff12}}
+.phone-call:not(.answered){animation:amt-call-arrive .3s ease-out}
+.phone-call:not(.answered) .call-symbol{animation:amt-call-pulse 1.4s ease-in-out infinite}
+.phone-call:not(.answered) #phone-answer{animation:amt-call-pulse 1.4s ease-in-out infinite}
+@media(prefers-reduced-motion:reduce){.phone-call,.phone-call .call-symbol,.phone-call #phone-answer{animation:none!important}}

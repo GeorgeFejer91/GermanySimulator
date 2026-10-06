@@ -9,7 +9,7 @@ const browser=await chromium.launch({headless:true,executablePath:process.env.CH
 const errors=[],modelRequests=[];let passed=false;
 try{
  const cases=[['desktop',{width:1280,height:800}],['mobile',{width:390,height:844}],['narrow',{width:320,height:700}]];
- for(const [name,viewport] of (process.env.PLAYTEST_DESKTOP_ONLY?cases.slice(0,1):cases)){
+ for(const [name,viewport] of (process.env.PLAYTEST_VIEWPORT?cases.filter(([id])=>id===process.env.PLAYTEST_VIEWPORT):process.env.PLAYTEST_DESKTOP_ONLY?cases.slice(0,1):cases)){
   const page=await browser.newPage({viewport,isMobile:name!=='desktop',hasTouch:name!=='desktop'});
   page.on('pageerror',e=>errors.push(`${name}: ${e.message}`));
   page.on('console',e=>{if(e.type()==='error'||e.type()==='warning')errors.push(`${name} console: ${e.text()}`)});
@@ -27,14 +27,21 @@ try{
   if(name==='desktop'){const before=await page.evaluate(()=>Germany3D.amtCharacters.map(x=>x.frame));await page.waitForTimeout(160);await page.evaluate(()=>Germany3D.sync());const after=await page.evaluate(()=>Germany3D.amtCharacters.map(x=>x.frame));if(before.every((frame,i)=>frame===after[i]))errors.push('Bürgeramt sprite frame did not advance');console.log(JSON.stringify({name:'sprite-atlases',before,after,requests:modelRequests.length}))}
   await page.evaluate(()=>window.Germany3D.sync());
   await page.screenshot({path:`${output}/world-${name}.png`,timeout:60000});
-  await page.evaluate(()=>{dispatchEvent(new KeyboardEvent('keydown',{code:'KeyW'}));for(let i=0;i<10;i++)BuergeramtLevel.update(.05);dispatchEvent(new KeyboardEvent('keyup',{code:'KeyW'}));BuergeramtLevel.interact()});
+  await page.evaluate(()=>{dispatchEvent(new KeyboardEvent('keydown',{code:'KeyD'}));for(let i=0;i<10;i++)BuergeramtLevel.update(.05);dispatchEvent(new KeyboardEvent('keyup',{code:'KeyD'}));dispatchEvent(new KeyboardEvent('keydown',{code:'KeyW'}));for(let i=0;i<19;i++)BuergeramtLevel.update(.05);dispatchEvent(new KeyboardEvent('keyup',{code:'KeyW'}))});
+  const wing=await page.evaluate(()=>({stage:BuergeramtLevel.stage,z:BuergeramtLevel.view.z}));
+  if(wing.stage!=='outside'||wing.z<5.55)throw new Error(`Facade wing allowed entry: ${JSON.stringify(wing)}`);
+  await page.evaluate(()=>{dispatchEvent(new KeyboardEvent('keydown',{code:'KeyA'}));for(let i=0;i<10;i++)BuergeramtLevel.update(.05);dispatchEvent(new KeyboardEvent('keyup',{code:'KeyA'}));dispatchEvent(new KeyboardEvent('keydown',{code:'KeyW'}));for(let i=0;i<19;i++)BuergeramtLevel.update(.05);dispatchEvent(new KeyboardEvent('keyup',{code:'KeyW'}))});
+  const entrance=await page.evaluate(()=>({stage:BuergeramtLevel.stage,z:BuergeramtLevel.view.z}));
+  if(entrance.stage!=='walk-sign'||entrance.z>=5.55)throw new Error(`Open doorway blocked walking: ${JSON.stringify(entrance)}`);
   await page.evaluate(()=>window.Germany3D.sync());
   await page.waitForFunction(()=>document.getElementById('amt-objective').dataset.pretextFit,null,{timeout:10000});
   await page.screenshot({path:`${output}/world-walk-${name}.png`});
   if(name==='desktop'){
    await page.evaluate(()=>{dispatchEvent(new KeyboardEvent('keydown',{code:'KeyW'}));for(let i=0;i<37;i++)BuergeramtLevel.update(.05);dispatchEvent(new KeyboardEvent('keyup',{code:'KeyW'}));Germany3D.sync()});
    await page.screenshot({path:`${output}/world-qr-closeup.png`});
-   await page.evaluate(()=>{BuergeramtLevel.interact();document.querySelector('#amt-actions button')?.click();for(const [code,frames] of [['KeyD',23],['KeyW',34]]){dispatchEvent(new KeyboardEvent('keydown',{code}));for(let i=0;i<frames;i++)BuergeramtLevel.update(.05);dispatchEvent(new KeyboardEvent('keyup',{code}))}Germany3D.sync()});
+   await page.evaluate(()=>BuergeramtLevel.interact());
+   if(await page.evaluate(()=>BuergeramtLevel.stage!=='walk-sign'||!!document.querySelector('#amt-ticket')))throw new Error('QR interaction opened an unwanted popup');
+   await page.evaluate(()=>{for(const [code,frames] of [['KeyD',23],['KeyW',34]]){dispatchEvent(new KeyboardEvent('keydown',{code}));for(let i=0;i<frames;i++)BuergeramtLevel.update(.05);dispatchEvent(new KeyboardEvent('keyup',{code}))}Germany3D.sync()});
    await page.screenshot({path:`${output}/world-clerk-closeup.png`});
   }
   const result=await page.evaluate(()=>({stage:BuergeramtLevel.stage,direct:document.body.classList.contains('amt-direct-mode'),restartVisible:getComputedStyle(document.getElementById('amt-direct-reset')).display!=='none',renderer:Germany3D.ready,pretext:document.getElementById('amt-objective').dataset.pretextFit,horizontalOverflow:document.documentElement.scrollWidth>innerWidth+1}));

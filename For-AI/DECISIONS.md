@@ -27,9 +27,25 @@ then hand accepted briefs to the pinned ChatDev stages through
 and publication; the external ChatDev checkout and reports stay separate from
 game assets.
 
-## 2026-10-06 — Expanded Bürgeramt registration
+## 2026-10-06 — Continuous Bürgeramt queue and physical QR scan
 
-The Bürgeramt iteration begins outside the building door, moves through registration and two waiting bays, and uses a physical QR sign plus a red digital ceiling display. The phone's government-style Anmeldung form sends a name; the host assigns a private number but does not start the queue until the player activates it at the Anmeldeschalter. A hidden or disconnected phone forfeits an active slot. The office suspends all game music while keeping counter conversation and phone-ring effects. The earlier office-specific MakeHuman derivatives were superseded by the painted caricature cast above. The direct test shortcut skips unrelated city GLB downloads; normal city entry keeps its full asset path. No backend or second deployable tree was added.
+The visible doorway is passable by ordinary forward movement. The QR stays in
+the 3D office, with no large DOM popup. The static phone page sends a bounded
+`scan` message over the existing VDO.Ninja data channel as soon as it connects;
+the game host assigns a new ticket and owns that session's live waiting list.
+Background codes cycle throughout the visit, and a scanned ticket becomes
+callable after several background calls without a separate desk activation.
+Each new scan replaces the player's previous ticket and resets its wait. The
+optional phone name field is no longer a ticket gate. This is per-game-session
+queue authority, not a shared cloud waiting list or a new server. The phone's
+first screen offers an audio-unlock tap, test tone, vibration request, and
+fullscreen request; volume and Do Not Disturb remain manual device settings.
+The page follows Berlin service-page layout cues while keeping fictional Amt
+branding and the existing police-call overlay.
+
+## 2026-10-06 — Previous expanded Bürgeramt registration
+
+The earlier registration iteration required a name and a separate Anmeldeschalter activation; the continuous queue decision above supersedes those gates. A hidden or disconnected phone still forfeits an active slot. The office suspends all game music while keeping counter conversation and phone-ring effects. The earlier office-specific MakeHuman derivatives were superseded by the painted caricature cast above. The direct test shortcut skips unrelated city GLB downloads; normal city entry keeps its full asset path. No second deployable tree was added.
 
 ## 2026-10-05 — ChatDev and the first-person Bürgeramt
 

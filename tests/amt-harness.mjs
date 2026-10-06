@@ -45,8 +45,9 @@ export function harness(kind='host',{voice=false,synthesis=true}={}){
   speak(utterance){this.current=utterance;this.spoken.push(utterance);this.speaking=true;utterance.onstart?.()},
   end(){const utterance=this.current;this.current=null;this.speaking=false;utterance?.onend?.()}
  };
+ const vibrations=[];
  const globals={console,Event,EventTarget,CustomEvent,TextEncoder,URL,URLSearchParams,Intl,Date,Math,Number,Set,Promise,
-  window,document,navigator:{userAgent:'test',userActivation:{hasBeenActive:false},vibrate(){}},
+  window,document,navigator:{userAgent:'test',userActivation:{hasBeenActive:false},vibrate(pattern){vibrations.push(pattern)}},
   crypto:{getRandomValues(a){a.fill(123);return a}},BuergeramtLink:Link,
   qrcode:()=>({addData(){},make(){},createSvgTag:()=>'<svg></svg>'}),
   setTimeout:(fn,ms)=>later(fn,ms),clearTimeout:clear,setInterval:(fn,ms)=>later(fn,ms,true),clearInterval:clear,
@@ -65,13 +66,13 @@ export function harness(kind='host',{voice=false,synthesis=true}={}){
  function moveTo(x,z){for(const [axis,target,pos,neg] of [['x',x,'KeyD','KeyA'],['z',z,'KeyS','KeyW']]){let steps=0;while(Math.abs(level.view[axis]-target)>.07){if(++steps>300)throw new Error(`Cannot reach ${axis}=${target} from ${JSON.stringify(level.view)}`);const code=level.view[axis]<target?pos:neg;key(code);level.update(Math.min(.05,Math.abs(level.view[axis]-target)/3.6));key(code,'keyup')}}}
  function action(index=0){const button=node('amt-actions').children[index];if(!button)throw new Error(`No action ${index} at ${level.stage}`);button.click();return button}
  function advanceGame(seconds){for(let t=0;t<seconds;t+=.05)level.update(Math.min(.05,seconds-t))}
- function enter(){moveTo(0,6.4);level.interact();moveTo(0,-2.6);level.interact()}
+ function enter(){moveTo(0,-2.6)}
  function approachRegistration(){moveTo(-3.3,-2.6);moveTo(-3.3,2.5);moveTo(-4.65,2.5)}
- function register(){enter();Link.instances.at(-1).message({type:'register',name:'Erika Mustermann'});action();approachRegistration();level.interact()}
- function wait(){register();action()}
+ function register(){enter();Link.instances.at(-1).message({type:'scan'})}
+ function wait(){register()}
  function counter(){wait();moveTo(4,-8.15);advanceGame(16);if(level.stage!=='walk-counter')throw new Error(`Expected active call, got ${level.stage}`);level.interact()}
- function phoneReady(){const link=Link.instances.at(-1);link.emit('connected',{});node('phone-name').value='Erika Mustermann';node('phone-form').dispatchEvent(new Event('submit',{cancelable:true}));link.message({type:'ticket',number:'B-223'});link.message({type:'activated'});return link}
+ function phoneReady(){const link=Link.instances.at(-1);link.emit('connected',{});link.message({type:'ticket',number:'B-223'});return link}
  function incoming(){const link=phoneReady();link.message({type:'call',id:'grass',line:window.BuergeramtStory.call.line});return link}
  function hide(){document.hidden=true;document.dispatchEvent(new Event('visibilitychange'))}
- return{window,document,node,tick,timers,key,moveTo,action,advanceGame,enter,approachRegistration,register,wait,counter,phoneReady,incoming,hide,synth,counts,music,config,level,links:Link.instances,context};
+ return{window,document,node,tick,timers,key,moveTo,action,advanceGame,enter,approachRegistration,register,wait,counter,phoneReady,incoming,hide,synth,vibrations,counts,music,config,level,links:Link.instances,context};
 }

@@ -1,7 +1,7 @@
 import {measureLineStats,measureNaturalWidth,prepareWithSegments} from './assets/vendor/pretext/dist/layout.js';
 
 // Keep the bounded Amt labels readable as the phone, browser zoom, or German copy changes.
-const selectors=['#amt-objective','#amt-nearby','#amt-number-board','#amt-line','#amt-status','#amt-ambient','#amt-actions button','#amt-ticket p','#amt-phone-link','#amt-leave','#amt-exit','#amt-direct-reset','#amt-direct-result-title','#amt-direct-result-copy','.amt-direct-result a','#phone-status','#phone-connect-status','#phone-form h1','#phone-form p','#phone-form label','#phone-submit','#phone-answer','#phone-decline','.phone-keep','#phone-call-line','.phone-call .call-type'];
+const selectors=['#amt-objective','#amt-nearby','#amt-number-board','#amt-line','#amt-status','#amt-ambient','#amt-actions button','#amt-leave','#amt-exit','#amt-direct-reset','#amt-direct-result-title','#amt-direct-result-copy','.amt-direct-result a','#phone-status','#phone-connect-status','.phone-brand strong','.phone-breadcrumb','.phone-title','#phone-setup h2','#phone-setup p','#phone-setup small','#phone-enable','#phone-form h2','#phone-form p','#phone-form label','#phone-submit','#phone-answer','#phone-decline','.phone-keep','#phone-call-line','.phone-call .call-type'];
 let queued=false;
 function schedule(){if(queued)return;queued=true;requestAnimationFrame(async()=>{queued=false;await document.fonts.ready;measure()})}
 function measure(){

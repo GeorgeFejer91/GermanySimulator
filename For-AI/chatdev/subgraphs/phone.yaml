@@ -18,12 +18,17 @@ graph:
           buergeramt.css, and For-AI/ASSET-POLICY.md. Keep one static game tree.
           Read For-AI/chatdev/WEBGPT-HANDOFF.md for accepted PHONE findings
           and cite their task IDs in your report.
-          Use no camera or microphone. The phone starts on a government-style
-          Anmeldung form requiring a name. Show the private number only after the
-          form is submitted, then require counter activation before queue calls.
-          Keep the page visible and connected; signal forfeiture on backgrounding.
-          The phone shows POLIZEI, full-screen where supported, and a visible line
-          matching every spoken line. Validate message
+          Use no camera or microphone. A physical game QR opens the fictional
+          Berlin-style service page, which sends a scan event on connection and
+          displays the newly assigned ticket without waiting for name entry.
+          Optional name entry follows the ticket; another scan creates a fresh
+          ticket. Keep the page visible and connected; signal forfeiture on
+          backgrounding. Ask the user to raise volume and disable Do Not Disturb,
+          since browser APIs cannot detect either setting. A first-screen tap
+          unlocks Web Audio and tests vibration where supported. The phone shows
+          an animated POLIZEI call, full-screen where supported, with ringing,
+          repeated vibration, and a visible line matching every spoken line.
+          Validate message
           types, session, sequence, and payload length. Never promise an OS lock.
           Edit only allowlisted Bürgeramt files and report any game.js integration.
         tooling:

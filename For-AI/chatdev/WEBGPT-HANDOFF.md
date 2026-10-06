@@ -13,7 +13,7 @@ review**. Its proposal is
 `webgpt-inbox/amt-layout-audit-webgpt-retry-20261006.md`. The integrator
 aligned the visible doorway with the simulation threshold, built four
 counters with Schalter 3 inside the desk span, and added furniture collision.
-The entrance now requires its door interaction, and the clerk encounter
+The entrance now allows walking through its visible opening, and the clerk encounter
 stays on the public side of the desk. The silent first-person desktop,
 mobile, and narrow viewport playtest reported no browser errors or layout
 overflow; the focused boundary tests pass. The WebGPT chat did not own
@@ -78,7 +78,7 @@ assign a separate worktree if two chats need the same path.
 | ART-01 | High / Gameplay + Review | Design connected stamp, scold, and paper-shuffle action keys for Frau Knick. Propose art under `assets/sprite-sources/buergeramt/`; leave current idle atlas intact until reviewed. | Stable identity and baseline, enough distinct inbetweens at 24 fps, cell gutters, no hand/face snap, ordered desktop/mobile motion. |
 | ENV-01 | Closed / Gameplay + QA | Accepted scoped office dressing and collision integration. | Future area edits require their own visual and performance review. |
 | STORY-01 | Medium / Story + Review | Polish the German-only Frau Knick/police exchange, especially the counter-phone overlap and cancelled appointment, in a proposed dialogue diff. | Answer has no player choices; decline retains choices and A38; visible words equal spoken words on each screen. |
-| PHONE-01 | High / Phone + QA | Exercise real phone-to-desktop VDO.Ninja pairing, registration, foreground requirement, call answer/decline, reconnect and late/early branches; submit a compact issue report or focused fix. | Two real browsers sync without camera/microphone; no choice on answer branch; pairing failures and privacy behavior are documented. |
+| PHONE-01 | High / Phone + QA | Exercise real phone-to-desktop VDO.Ninja pairing, immediate and repeated QR ticket scans, foreground requirement, call answer/decline, reconnect and late/early branches; submit a compact issue report or focused fix. | Two real browsers sync without camera/microphone; no choice on answer branch; pairing failures and privacy behavior are documented. |
 | VOICE-01 | Medium / Voice + Review | Review the external CC0 Frau Knick and police smoke previews; propose precise voice or telephone-effect changes before line batches. | Source license, segment, hashes, whole-line wording, and listening notes; no unverified YouTube voice is cloned. |
 | QA-01 | High / QA | Run silent desktop/mobile/320px/200% playthroughs of the direct Bürgeramt route and main-city entry; report reproducible issues with screenshots. | No focus stealing or audible test output; record console, asset loads, frame progression, ticket/queue/counter outcomes, and restart. |
 | VIS-01 | Medium / Gameplay + Review | Survey the existing city and office place assets for their fit with the new grimy, painted caricature cast. Propose an area-by-area style pass for facades, signs, clutter, light, and props; implement one bounded accepted area at a time. | Keep every place recognizable and every interaction legible, preserve existing source/asset authority, give before/after screenshots and mobile performance evidence. |

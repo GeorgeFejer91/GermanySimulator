@@ -8,7 +8,7 @@ const branch=process.env.TEST_BRANCH||'answer';
 if(!['answer','decline','hidden','late'].includes(branch))throw new Error(`Unsupported TEST_BRANCH: ${branch}`);
 const nativeDirect=!!process.env.GAME_FULL&&new URL(base).searchParams.get('geheim')==='buergeramt';
 fs.mkdirSync(output,{recursive:true});
-const browser=await chromium.launch({headless:true,executablePath:process.env.CHROMIUM_PATH,args:['--mute-audio']});
+const browser=await chromium.launch({headless:true,executablePath:process.env.CHROMIUM_PATH,args:['--mute-audio','--use-gl=angle','--use-angle=swiftshader']});
 const errors=[];let passed=false,desktop=null,phone=null;
 try{
  desktop=await browser.newPage({viewport:{width:1280,height:800}});
@@ -18,25 +18,26 @@ try{
  desktop.on('response',r=>{if(r.status()>=400)errors.push(`desktop HTTP ${r.status()}: ${r.url()}`)});
  await desktop.goto(base,{waitUntil:process.env.GAME_FULL?'commit':'domcontentloaded',timeout:45000});
  if(process.env.GAME_FULL)await desktop.waitForFunction(()=>window.BuergeramtLevel,null,{timeout:30000});
- if(process.env.GAME_FULL)await desktop.waitForFunction(()=>window.Germany3D?.ready,null,{timeout:30000});
+ if(process.env.GAME_FULL)await desktop.waitForFunction(()=>window.Germany3D?.ready,null,{timeout:60000});
  if(process.env.PAUSE_RENDER&&process.env.GAME_FULL)await desktop.evaluate(()=>{window.Germany3D.sync=()=>{}});
  await desktop.screenshot({path:`${output}/title-desktop.png`});
- await desktop.evaluate(()=>{document.getElementById('intro').classList.add('hidden');window.BuergeramtLevel.open({voiceOn:()=>false,onClose:()=>{},onCancel:()=>window.__amtOutcome='cancelled',onForm:()=>window.__amtOutcome='form'})});
- async function walk(key,frames){await desktop.evaluate(({key,frames})=>{window.dispatchEvent(new KeyboardEvent('keydown',{code:key,bubbles:true}));for(let i=0;i<frames;i++)BuergeramtLevel.update(.05);window.dispatchEvent(new KeyboardEvent('keyup',{code:key,bubbles:true}));window.Germany3D?.sync()},{key,frames})}
- await walk('KeyW',10);await desktop.evaluate(()=>BuergeramtLevel.interact());
+ await desktop.evaluate(()=>{document.getElementById('intro').classList.add('hidden');window.BuergeramtLevel.open({voiceOn:()=>false,onClose:()=>{},onCancel:()=>window.__amtOutcome='cancelled',onForm:()=>window.__amtOutcome='form'});window.__amtUpdate=BuergeramtLevel.update;BuergeramtLevel.update=()=>{}});
+ async function walk(key,frames){await desktop.evaluate(({key,frames})=>{window.dispatchEvent(new KeyboardEvent('keydown',{code:key,bubbles:true}));for(let i=0;i<frames;i++)window.__amtUpdate(.05);window.dispatchEvent(new KeyboardEvent('keyup',{code:key,bubbles:true}));window.Germany3D?.sync()},{key,frames})}
+ await walk('KeyW',19);if(await desktop.evaluate(()=>BuergeramtLevel.stage!=='walk-sign'))throw new Error('Walking through the entrance failed');
  await walk('KeyW',37);
- await desktop.evaluate(()=>BuergeramtLevel.interact());
- await desktop.locator('#amt-qr svg').waitFor();
+ if(await desktop.evaluate(()=>!!document.querySelector('#amt-ticket')||!BuergeramtLevel.qrSvg))throw new Error('Expected physical QR without popup');
  await desktop.screenshot({path:`${output}/ticket-desktop.png`});
- const link=await desktop.locator('#amt-phone-link').getAttribute('href');
+ const link=await desktop.evaluate(()=>BuergeramtLevel.phoneUrl);
  phone=await browser.newPage({viewport:{width:390,height:844},isMobile:true,hasTouch:true});
  phone.on('pageerror',e=>errors.push(`phone: ${e.message}`));
  phone.on('console',e=>{if(e.type()==='error')errors.push(`phone console: ${e.text()}`)});
  phone.on('response',r=>{if(r.status()>=400)errors.push(`phone HTTP ${r.status()}: ${r.url()}`)});
  await phone.goto(link,{waitUntil:'commit',timeout:45000});
  let linked=false;
- try{await phone.locator('#phone-submit:not([disabled])').waitFor({timeout:30000});linked=true}catch{errors.push('Phone pairing did not complete')}
+ try{await phone.locator('#phone-ticket:not([hidden])').waitFor({timeout:45000});linked=true}catch{errors.push('Phone pairing did not complete');console.log(JSON.stringify({name:'pairing-timeout',phone:await phone.evaluate(()=>({ready:document.readyState,setupHidden:document.getElementById('phone-setup')?.hidden,connection:document.getElementById('phone-connect-status')?.textContent,sdk:typeof VDONinjaSDK,link:typeof BuergeramtLink})),desktop:await desktop.evaluate(()=>({stage:BuergeramtLevel.stage,status:document.getElementById('amt-status').textContent,phoneUrlValid:!!BuergeramtLevel.phoneUrl})),errors}))}
  if(linked){
+  if(process.env.TEST_RESCAN){const previous=await phone.locator('#phone-number').textContent();await phone.reload({waitUntil:'commit',timeout:45000});await phone.waitForFunction(old=>{const ticket=document.getElementById('phone-ticket'),number=document.getElementById('phone-number');return ticket&&!ticket.hidden&&number?.textContent!==old},previous,{timeout:45000});console.log(JSON.stringify({name:'repeat-scan',previous,next:await phone.locator('#phone-number').textContent()}))}
+  await phone.screenshot({path:`${output}/phone-setup.png`});
   if(branch==='answer'){
    await phone.screenshot({path:`${output}/phone-form.png`});
    await phone.setViewportSize({width:320,height:700});
@@ -46,18 +47,13 @@ try{
    await phone.evaluate(()=>{document.documentElement.style.zoom=''}) ;
    await phone.setViewportSize({width:390,height:844});
   }
+  await phone.locator('#phone-enable').click();
+  if(!/^B-\d{3}$/.test(await phone.locator('#phone-number').textContent()))throw new Error('Scan did not allocate a lettered number');
+  await phone.screenshot({path:`${output}/phone-ticket.png`});
+  if(!await desktop.evaluate(()=>BuergeramtLevel.activated&&BuergeramtLevel.stage==='waiting'))throw new Error('Scan did not activate the game ticket');
   await phone.locator('#phone-name').fill('Alex Beispiel');
   await phone.locator('#phone-submit').click();
-  await phone.locator('#phone-ticket:not([hidden])').waitFor({timeout:15000});
-  await phone.screenshot({path:`${output}/phone-ticket.png`});
-  if(await desktop.evaluate(()=>BuergeramtLevel.activated))throw new Error('Queue activated before registration counter');
-  console.log(JSON.stringify({beforeRegistration:await desktop.evaluate(()=>({stage:BuergeramtLevel.stage,active:BuergeramtLevel.active,buttons:[...document.querySelectorAll('#amt-actions button')].map(x=>x.textContent),rootClass:document.getElementById('amt-level').className,buttonDisplay:getComputedStyle(document.querySelector('#amt-actions button')).display}))}));
-  await desktop.locator('#amt-actions button').first().evaluate(el=>el.click());
-  await walk('KeyA',26);await walk('KeyS',15);
-  await desktop.evaluate(()=>BuergeramtLevel.interact());
-  await desktop.waitForFunction(()=>BuergeramtLevel.stage==='registration-done',null,{timeout:5000});
-  await desktop.locator('#amt-actions button').first().evaluate(el=>el.click());
-  await desktop.waitForFunction(()=>BuergeramtLevel.stage==='waiting',null,{timeout:10000});
+  await desktop.waitForFunction(()=>BuergeramtLevel.registeredName==='Alex Beispiel',null,{timeout:5000});
   await desktop.evaluate(()=>window.Germany3D?.sync());
   await desktop.screenshot({path:`${output}/waiting-room.png`});
   if(branch==='hidden'){
@@ -65,15 +61,15 @@ try{
    await desktop.waitForFunction(()=>BuergeramtLevel.stage==='expired',null,{timeout:15000});
    await desktop.screenshot({path:`${output}/phone-hidden-forfeit.png`});
   }else{
-  await walk('KeyD',48);await walk('KeyW',50);
+  await walk('KeyD',23);await walk('KeyW',34);
   await desktop.evaluate(()=>BuergeramtLevel.interact());
   await desktop.waitForFunction(()=>BuergeramtLevel.stage==='early',null,{timeout:1000});
   await desktop.screenshot({path:`${output}/early-reprimand.png`});
   await desktop.locator('#amt-actions button').first().evaluate(el=>el.click());
-  await desktop.evaluate(()=>{for(let i=0;i<165;i++)BuergeramtLevel.update(.1)});
+  await desktop.evaluate(()=>{for(let i=0;i<165;i++)window.__amtUpdate(.1)});
   await desktop.waitForFunction(()=>BuergeramtLevel.stage==='walk-counter',null,{timeout:1000});
   if(branch==='late'){
-   await desktop.evaluate(()=>{for(let i=0;i<200;i++)BuergeramtLevel.update(.1)});
+   await desktop.evaluate(()=>{for(let i=0;i<200;i++)window.__amtUpdate(.1)});
    await desktop.waitForFunction(()=>BuergeramtLevel.stage==='expired',null,{timeout:1000});
    await desktop.screenshot({path:`${output}/late-appointment.png`});
   }else{
@@ -100,7 +96,7 @@ try{
  const state=await desktop.evaluate(()=>({stage:window.BuergeramtLevel.stage,outcome:window.__amtOutcome||(!document.getElementById('form-modal').hidden&&document.getElementById('form-code').textContent.startsWith('A38')?'form':null)||(!document.getElementById('amt-direct-result').hidden?'cancelled':null)}));
  console.log(JSON.stringify({branch,linked,desktopStage:state.stage,outcome:state.outcome,desktopStatus:await desktop.locator('#amt-status').textContent(),phoneStatus:await phone.locator('#phone-status').textContent(),phoneConnectStatus:await phone.locator('#phone-connect-status').textContent(),phoneOs:await phone.evaluate(()=>document.documentElement.dataset.phoneOs),errors,output},null,2));
  passed=linked&&(branch==='answer'?state.outcome==='cancelled':branch==='decline'?state.outcome==='form':state.stage==='expired');
-}catch(error){console.error(error);errors.push(String(error))}finally{
+}catch(error){console.error(error);console.error(JSON.stringify({errors}));errors.push(String(error))}finally{
  await Promise.race([Promise.allSettled([phone?.close(),desktop?.close()].filter(Boolean)),new Promise(resolve=>setTimeout(resolve,5000))]);
  await Promise.race([browser.close(),new Promise(resolve=>setTimeout(resolve,5000))]);
  process.exit(passed&&errors.length===0?0:1)

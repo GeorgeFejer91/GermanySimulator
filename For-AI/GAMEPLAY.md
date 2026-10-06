@@ -17,14 +17,16 @@ Mission order:
 
 ### First Bürgeramt visit
 
-Entering the first Bürgeramt opens a hidden first-person episode outside the building's door. WASD or touch controls lead through the door into a larger office with registration, two waiting bays, several visitors, and four service counters. A physical QR sign opens the phone's Anmeldung form. The player enters a name on the phone, receives a private `B-###` number there, then activates the registration at the separate Anmeldeschalter. The queue cannot call the player before activation. The phone page must remain visible and connected until the call; hiding it or losing the connection forfeits the slot. A red digital ceiling display and HUD show exactly one active call, with an intentionally illogical mixture of letters and numbers and no estimated wait. Schalter 3 looks idle. Approaching Frau Knick before the player's number earns a reprimand and returns the player to waiting. When the player's number appears, the player has a short window to reach her; being late forfeits the appointment without advancing mission 1. This episode has no background music; occasional counter conversations and telephone rings make the waiting room busy.
+Entering the first Bürgeramt opens a hidden first-person episode outside the building's door. WASD or touch controls lead through the open doorway without an extra interaction into a larger office with a waiting area, several visitors, and four service counters. The QR code lives on a physical sign under the number display; it never opens a game popup. Each phone scan connects to the game session and immediately issues a fresh private `B-###` ticket, which appears on that phone and activates a place in the host-controlled waiting list. The phone can optionally add a name after receiving the ticket; there is no separate Anmeldeschalter activation. Background lettered codes cycle continuously even before the player scans. After several calls while the ticket is active, the player's number is called on the red ceiling display and HUD. The phone page must remain visible and connected until the call; hiding it or losing the connection forfeits that ticket. Scanning again or leaving and rescanning issues a new ticket and a new counter opportunity. Schalter 3 looks idle. Approaching Frau Knick before the player's number earns a reprimand and returns the player to waiting. When the player's number appears, the player has a short window to reach her; being late forfeits the appointment without advancing mission 1. This episode has no background music; occasional counter conversations and telephone rings make the waiting room busy.
 
 The unlisted `?geheim=buergeramt` URL opens directly at the office entrance for repeated level testing. Its fixed restart link reloads only this episode; the normal city entry remains the canonical story route. The shortcut is a convenience link, not authentication or a separate game deployment.
 
 The QR sign sits directly beneath the red ceiling number display and asks
-visitors to scan it to receive a number. That phone session persists through
-name entry, Anmeldeschalter activation, illogical calls, and the later
-counter interruption. The four counters, entrance threshold, QR stand,
+visitors to scan it to receive a number. The phone's initial screen asks the
+player to enable sound and vibration, raise volume, and turn off Do Not Disturb;
+the browser can unlock its own audio after a tap but cannot read the device's
+volume or Do Not Disturb state. The phone session persists through optional
+name entry, illogical calls, and the later counter interruption. The four counters, entrance threshold, QR stand,
 seats, registration kiosk, and desk have matching visible positions and
 movement boundaries. The office's worn, painterly caricature style should
 make the administrative fever dream vivid while preserving clear paths and

@@ -20,12 +20,14 @@ graph:
           Preserve the eight-mission chain and A38 form. Answered police calls cancel
           this attempt and return to the street; declined calls permit the dialogue.
           Preserve first-person camera movement, the outdoor entrance, larger
-          office and two waiting bays, four service counters, registration desk,
-          QR sign, ceiling red single-number display, waiting visitors, early
-          reprimand, and timed appointment expiry. The player gets a private
-          number after entering a name on the phone, but cannot be called until
-          activating at the registration counter. A hidden or disconnected phone
-          forfeits an active slot. This episode has ambient speech and rings but
+          office and two waiting bays, four service counters, physical QR sign,
+          ceiling red single-number display, waiting visitors, early reprimand,
+          and timed appointment expiry. Walking through the visible entrance
+          needs no extra key. Background codes are called continuously. Each
+          phone QR scan immediately issues a fresh private ticket and resets
+          its wait; the name form is optional and no desk activation is needed.
+          The QR never opens a large game popup. A hidden or disconnected phone
+          forfeits an active ticket. This episode has ambient speech and rings but
           no background music. Keep queue and interaction
           state in buergeramt.js and visual presentation in world3d.js.
           Preserve the unlisted ?geheim=buergeramt replay route. Propose any edits

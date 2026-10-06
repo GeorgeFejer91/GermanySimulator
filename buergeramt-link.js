@@ -6,8 +6,8 @@ function event(target,type,detail){target.dispatchEvent(new CustomEvent(type,{de
 function sourceOf(value){return typeof value==="string"?value:value?.streamID||value?.streamId||value?.id||""}
 // The sender role owns both the message type and its bounded payload.
 function validPayload(type,data,sender){
- const shapes=sender==="phone"?{register:["name"],"phone-hidden":[],answer:["id"],decline:["id"]}:
-  sender==="host"?{ticket:["number"],activated:[],forfeit:[],call:["id","line"],"police-line":["index","line"],done:[]}:{};
+ const shapes=sender==="phone"?{scan:[],register:["name"],"phone-hidden":[],answer:["id"],decline:["id"]}:
+  sender==="host"?{ticket:["number"],forfeit:[],call:["id","line"],"police-line":["index","line"],done:[]}:{};
  if(!Object.hasOwn(shapes,type)||!data||typeof data!=="object"||Array.isArray(data))return false;
  const fields=shapes[type],keys=Object.keys(data);
  if(keys.length!==fields.length||keys.some(key=>!fields.includes(key)))return false;
