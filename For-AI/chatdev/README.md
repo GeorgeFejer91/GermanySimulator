@@ -27,6 +27,11 @@ local review and the relevant tests before its output is accepted.
 
 `For-AI/chatdev/functions/game_tools.py` restricts agent reads and writes to named game files. It puts reports in ChatDev's external session directory. Its voice functions require a working local Voice Cloner installation; the game runs with German browser speech in the meantime. Never save an API key, private voice reference, or ChatDev session output under `assets/`.
 
+The voice functions use local Voice Cloner port `18765` because `8765` is
+already occupied on this PC. `VOICE_CLONER_PORT` overrides it for another
+machine or an existing worker. The port selects only the local Voice Cloner
+worker; no phone or game traffic uses it.
+
 Voice source status: the saved `GS police-officer` profile uses a cataloged CC0 reference. `GS Frau Knick` was created from a 22-second section of [Legamus's German Ramona Deininger-Schnabel CC0 recording](https://legamus.eu/blog/archives/670), with both profile ID and source hash in the audio catalog. Exact-story smoke lines for both speakers and a telephone-filtered police preview live only in ChatDev's external `WareHouse/germany-voice-reference/`. A whole-file automated German transcript is recorded there, but listening and line-by-line approval remain before any recorded game clip ships. A reusable, single-speaker YouTube upload with confirmed source rights was not verified, so the licensed local reference remains the source.
 
 To play the episode without crossing the city, open `index.html?geheim=buergeramt` through the project's HTTP site. The page includes a restart link for another attempt.

@@ -9,6 +9,10 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[3]
 VOICE = ROOT.parent / "voice-cloner" / "Voice.cmd"
+VOICE_PORT = os.environ.get("VOICE_CLONER_PORT", "18765")
+if not VOICE_PORT.isdecimal() or not 1 <= int(VOICE_PORT) <= 65535:
+    raise ValueError("VOICE_CLONER_PORT must be a TCP port number")
+VOICE_CLI = [str(VOICE), "--port", VOICE_PORT]
 READABLE = {
     "game.js", "world3d.js", "index.html", "styles.css", "buergeramt.js",
     "buergeramt-story.js", "buergeramt-phone.js", "buergeramt-phone.html",
@@ -91,7 +95,7 @@ def voice_cloner_status() -> str:
     alternate = VOICE.parent / "runtime.path"
     if not runtime.exists() and not alternate.exists():
         return "Voice Cloner CLI exists, but its runtime is missing. Run Setup.ps1 after space is available."
-    run = subprocess.run([str(VOICE), "doctor"], cwd=VOICE.parent, text=True, capture_output=True, timeout=120)
+    run = subprocess.run([*VOICE_CLI, "doctor"], cwd=VOICE.parent, text=True, capture_output=True, timeout=120)
     return f"exit={run.returncode} {run.stdout[:4000]} {run.stderr[:1000]}"
 
 
@@ -107,7 +111,7 @@ def voice_cloner_create_profile(name: str, youtube_url: str, start_seconds: int,
         raise ValueError("Record speaker, source, license, and intended use")
     if "runtime is missing" in voice_cloner_status():
         raise RuntimeError("Voice Cloner runtime is missing")
-    run = subprocess.run([str(VOICE), "voices", "create", "--name", name, "--youtube", youtube_url,
+    run = subprocess.run([*VOICE_CLI, "voices", "create", "--name", name, "--youtube", youtube_url,
                           "--start", str(start_seconds), "--duration", str(duration_seconds),
                           "--source-note", source_note, "--engine", "qwen", "--defer"],
                          cwd=VOICE.parent, text=True, capture_output=True, timeout=900)
@@ -129,7 +133,7 @@ def voice_cloner_create_profile_file(name: str, reference_path: str, source_note
         raise ValueError("Record speaker, source, license, and intended use")
     if "runtime is missing" in voice_cloner_status():
         raise RuntimeError("Voice Cloner runtime is missing")
-    run = subprocess.run([str(VOICE), "voices", "create", "--name", name,
+    run = subprocess.run([*VOICE_CLI, "voices", "create", "--name", name,
                           "--file", str(reference), "--source-note", source_note,
                           "--engine", "qwen", "--defer"],
                          cwd=VOICE.parent, text=True, capture_output=True, timeout=900)
@@ -151,7 +155,7 @@ def voice_cloner_render_line(profile_id: str, clip_id: str, text: str, _context:
         raise ValueError("Voice scratch must stay outside the game checkout")
     directory.mkdir(parents=True, exist_ok=True)
     output = directory / f"{clip_id}.mp3"
-    run = subprocess.run([str(VOICE), "generate", "--voice", profile_id, "--text", text,
+    run = subprocess.run([*VOICE_CLI, "generate", "--voice", profile_id, "--text", text,
                           "--language", "de", "--engine", "qwen", "--output", str(output)],
                          cwd=VOICE.parent, text=True, capture_output=True, timeout=900)
     if run.returncode:
