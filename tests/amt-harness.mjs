@@ -74,5 +74,5 @@ export function harness(kind='host',{voice=false,synthesis=true}={}){
  function phoneReady(){const link=Link.instances.at(-1);link.emit('connected',{});link.message({type:'ticket',number:'B-223'});return link}
  function incoming(){const link=phoneReady();link.message({type:'call',id:'grass',line:window.BuergeramtStory.call.line});return link}
  function hide(){document.hidden=true;document.dispatchEvent(new Event('visibilitychange'))}
- return{window,document,node,tick,timers,key,moveTo,action,advanceGame,enter,approachRegistration,register,wait,counter,phoneReady,incoming,hide,synth,vibrations,fullscreenRequests,counts,music,config,level,links:Link.instances,context};
+ return{window,document,node,tick,now:()=>now,timers,key,moveTo,action,advanceGame,enter,approachRegistration,register,wait,counter,phoneReady,incoming,hide,synth,vibrations,fullscreenRequests,counts,music,config,level,links:Link.instances,context};
 }

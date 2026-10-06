@@ -21,7 +21,7 @@ try{
  if(process.env.GAME_FULL)await desktop.waitForFunction(()=>window.Germany3D?.ready,null,{timeout:60000});
  if(process.env.PAUSE_RENDER&&process.env.GAME_FULL)await desktop.evaluate(()=>{window.Germany3D.sync=()=>{}});
  await desktop.screenshot({path:`${output}/title-desktop.png`});
- await desktop.evaluate(()=>{document.getElementById('intro').classList.add('hidden');window.BuergeramtLevel.open({voiceOn:()=>false,onClose:()=>{},onCancel:()=>window.__amtOutcome='cancelled',onForm:()=>window.__amtOutcome='form'});window.__amtUpdate=BuergeramtLevel.update;BuergeramtLevel.update=()=>{}});
+ await desktop.evaluate(voiceEnabled=>{document.getElementById('intro').classList.add('hidden');window.BuergeramtLevel.open({voiceOn:()=>voiceEnabled,onClose:()=>{},onCancel:()=>window.__amtOutcome='cancelled',onForm:()=>window.__amtOutcome='form'});window.__amtUpdate=BuergeramtLevel.update;BuergeramtLevel.update=()=>{}},!!process.env.DESK_VOICE);
  async function walk(key,frames){await desktop.evaluate(({key,frames})=>{window.dispatchEvent(new KeyboardEvent('keydown',{code:key,bubbles:true}));for(let i=0;i<frames;i++)window.__amtUpdate(.05);window.dispatchEvent(new KeyboardEvent('keyup',{code:key,bubbles:true}));window.Germany3D?.sync()},{key,frames})}
  await walk('KeyW',19);if(await desktop.evaluate(()=>BuergeramtLevel.stage!=='walk-sign'))throw new Error('Walking through the entrance failed');
  await walk('KeyW',37);
@@ -62,7 +62,8 @@ try{
   }else{
   await walk('KeyD',23);await walk('KeyW',34);
   await desktop.evaluate(()=>BuergeramtLevel.interact());
-  await desktop.waitForFunction(()=>BuergeramtLevel.stage==='early',null,{timeout:1000});
+  try{await desktop.waitForFunction(()=>BuergeramtLevel.stage==='early',null,{timeout:1000})}
+  catch{throw new Error(`Early-counter approach failed: ${JSON.stringify(await desktop.evaluate(()=>({stage:BuergeramtLevel.stage,view:BuergeramtLevel.view,status:document.getElementById('amt-status').textContent})))}`)}
   await desktop.screenshot({path:`${output}/early-reprimand.png`});
   await desktop.locator('#amt-actions button').first().evaluate(el=>el.click());
   await desktop.evaluate(()=>{for(let i=0;i<165;i++)window.__amtUpdate(.1)});
@@ -94,7 +95,11 @@ try{
  }
  const state=await desktop.evaluate(()=>({stage:window.BuergeramtLevel.stage,outcome:window.__amtOutcome||(!document.getElementById('form-modal').hidden&&document.getElementById('form-code').textContent.startsWith('A38')?'form':null)||(!document.getElementById('amt-direct-result').hidden?'cancelled':null),timing:window.BuergeramtLevel.timing}));
  const receipts=[-1,0,1,2].map(index=>state.timing.cues[index]?.status||'missing');
- console.log(JSON.stringify({branch,linked,desktopStage:state.stage,outcome:state.outcome,timing:{rttMs:state.timing.rttMs,oneWayMs:state.timing.oneWayMs,jitterMs:state.timing.jitterMs,startLagMs:state.timing.startLagMs,receipts},desktopStatus:await desktop.locator('#amt-status').textContent(),phoneStatus:await phone.locator('#phone-status').textContent(),phoneConnectStatus:await phone.locator('#phone-connect-status').textContent(),phoneOs:await phone.evaluate(()=>document.documentElement.dataset.phoneOs),errors,output},null,2));
+ const cue=state.timing.cues,desk=state.timing.desk;
+ const gap=(start,end)=>Number.isFinite(start)&&Number.isFinite(end)?Math.round(start-end):null;
+ const beats=branch==='answer'?{firstResponseMs:gap(cue[0]?.estimatedStartAt,Math.max(desk[0]?.endAt??0,cue[-1]?.estimatedEndAt??0)),officerToClerkMs:gap(desk[1]?.startAt,cue[0]?.estimatedEndAt),clerkToOfficerMs:gap(cue[1]?.estimatedStartAt,desk[1]?.endAt),officerToClerkAgainMs:gap(desk[2]?.startAt,cue[1]?.estimatedEndAt),interruptionAtMs:gap(cue[2]?.estimatedStartAt,desk[2]?.startAt),overlapMs:Math.max(0,Math.round(Math.min(cue[2]?.estimatedEndAt??0,desk[2]?.endAt??0)-Math.max(cue[2]?.estimatedStartAt??0,desk[2]?.startAt??0)))}:null;
+ const cues=branch==='answer'?[-1,0,1,2].map(index=>({index,status:cue[index]?.status,readyDelayMs:cue[index]?.readyDelayMs,durationMs:cue[index]?.durationMs,transportSkewMs:cue[index]?.errorMs,receiptJitter:cue[index]?.receiptJitter})):null;
+ console.log(JSON.stringify({branch,linked,desktopStage:state.stage,outcome:state.outcome,timing:{rttMs:state.timing.rttMs,oneWayMs:state.timing.oneWayMs,jitterMs:state.timing.jitterMs,clockOffsetMs:state.timing.clockOffsetMs,clockUncertaintyMs:state.timing.clockUncertaintyMs,phoneReadyMs:state.timing.phoneReadyMs,deskStartLagMs:state.timing.deskStartLagMs,deskModes:branch==='answer'?Object.values(desk).map(item=>item.mode):null,receipts,cues,beats},desktopStatus:await desktop.locator('#amt-status').textContent(),phoneStatus:await phone.locator('#phone-status').textContent(),phoneConnectStatus:await phone.locator('#phone-connect-status').textContent(),phoneOs:await phone.evaluate(()=>document.documentElement.dataset.phoneOs),errors,output},null,2));
  passed=linked&&(branch==='answer'?state.outcome==='cancelled'&&state.timing.rttMs!==null&&receipts.every(value=>value==='verified'):branch==='decline'?state.outcome==='form'&&receipts[0]==='declined':state.stage==='expired');
 }catch(error){console.error(error);console.error(JSON.stringify({errors}));errors.push(String(error))}finally{
  await Promise.race([Promise.allSettled([phone?.close(),desktop?.close()].filter(Boolean)),new Promise(resolve=>setTimeout(resolve,5000))]);

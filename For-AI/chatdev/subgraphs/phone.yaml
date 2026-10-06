@@ -31,11 +31,17 @@ graph:
           The phone shows
           an animated POLIZEI call, full-screen where supported, with ringing,
           repeated vibration, and a visible line matching every spoken line.
-          Reply to host sync-ping with the same bounded sync-pong ID. Report
-          police-start from the actual speech start or visible fallback, then
-          police-done with the phone's local line duration and delivery mode.
+          Reply to host sync-ping with the same bounded sync-pong ID and local
+          receive/send timestamps for four-timestamp clock-offset estimation.
+          Report police-start from the actual speech start or visible fallback,
+          including its local timestamp and receipt-to-start delay; send
+          police-done with local end timestamp, line duration, and delivery mode.
+          Limit speech startup silence with a readable fallback. Do not add a
+          fixed queue pause after one line. Keep the exact visible text up while
+          its audio plays.
           Frau Knick uses these receipts to take her turn; retain the opening
-          and one later overlap. Do not compare raw device timestamps.
+          and one later overlap. Translate device timestamps only through the
+          measured clock offset, with its uncertainty.
           Validate message
           types, session, sequence, and payload length. Never promise an OS lock.
           Edit only allowlisted Bürgeramt files and report any game.js integration.

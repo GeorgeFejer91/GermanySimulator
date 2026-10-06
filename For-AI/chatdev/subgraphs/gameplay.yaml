@@ -20,11 +20,16 @@ graph:
           Preserve the eight-mission chain and A38 form. Answered police calls cancel
           this attempt and return to the street; declined calls permit the dialogue.
           Coordinate the answered call with phone speech start/done receipts:
-          probe round-trip delay on the host clock, verify each reported phone
-          duration against the host receipt span, adapt the turn pause and later
-          overlap, and keep a bounded missing-receipt timeout. Keep local timing
-          diagnostics without personal or pairing data. Do not infer exact
-          acoustic output time from browser speech events.
+          probe network round-trip delay and clock offset with four timestamps,
+          verify phone-local start/end duration independently of transport
+          jitter, and combine fresh link delay with measured phone
+          and desk speech startup to pace ordinary turns. Place the later
+          interruption after Frau Knick's "Er deckt Anträge!" clause when the
+          browser supplies it, with a measured speech-rate fallback. Extend
+          a cue timeout only after its valid start receipt; a disconnect must
+          release the argument promptly. Keep local timing and beat diagnostics
+          without personal or pairing data. Do not infer exact acoustic output
+          time from browser speech events.
           Preserve first-person camera movement, the outdoor entrance, larger
           office and two waiting bays, four service counters, physical QR sign,
           ceiling red single-number display, waiting visitors, early reprimand,

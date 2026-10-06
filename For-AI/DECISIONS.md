@@ -689,3 +689,17 @@ pause and second interruption. Diagnostics stay local under
 `BuergeramtLevel.timing` and contain no name or pairing secret. Missing receipts
 time out so the cancellation branch remains reachable. Browser speech events
 provide practical turn timing, not sample-accurate acoustic synchronization.
+
+## 2026-10-06 — Adaptive Bürgeramt conversation pacing
+
+The phone returns its local ping receive/send timestamps and
+receipt-to-speech-start delay. The four-timestamp handshake estimates clock
+offset and network delay; phone speech timestamps are translated into the host
+clock with an explicit uncertainty estimate. Fresh median round-trip samples
+replace a stale minimum. Ordinary turns aim for a short perceptual pause after accounting for
+transport and speech startup. The second interruption follows Frau Knick's
+"Er deckt Anträge!" clause where supported, with an observed speech-rate timer
+as fallback. Start receipts extend only their own completion deadline;
+disconnect releases the argument promptly. Local cue and desk timestamps
+permit review of estimated gaps and overlap. They remain estimates because
+Web Speech does not expose exact speaker-output timing.

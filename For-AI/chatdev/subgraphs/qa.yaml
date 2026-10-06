@@ -19,8 +19,10 @@ graph:
           phone branches, no A38 after cancellation, A38 after decline, mobile
           call display, silent name-submit audio unlock, incoming-call vibration,
           ordered police/desk turns with two intentional overlaps and fallback,
-          bounded ping/pong timing, verified start/done receipts, latency-aware
-          overlap pacing, duplicate/stale cue rejection, and lost-cue timeout,
+          bounded four-timestamp ping/pong clock mapping, verified
+          start/done receipts and local speech startup, measured ordinary turn
+          gaps, clause-level interruption with boundary/timer fallback,
+          duplicate/stale cue rejection, disconnect release, and lost-cue timeout,
           immediate and repeated QR tickets,
           continuous background calls, no QR popup, phone-hidden and disconnect
           forfeiture, walkable exterior door, physical QR sign,
