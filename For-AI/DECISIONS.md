@@ -10,14 +10,18 @@ that explicit preference selects English call chrome. Otherwise the phone
 browser's first preferred language selects English when it starts with `en`,
 and German in every other case. Spoken police dialogue and the office story
 stay German. iPhone and unknown browsers use accessible tap actions; Android
-phone browsers add a rightward answer drag and retain tap as a fallback.
+phone browsers add a rightward answer drag and retain tap as a fallback. The
+Android row places the green drag handle left of the red decline action, as
+shown in Samsung's incoming-call screenshot; all controls remain reachable
+when the browser reflows them into stacked buttons.
 
 These are browser adaptations, not claims of native dialer emulation. Apple's
 [call guide](https://support.apple.com/guide/iphone/answer-or-decline-incoming-calls-iph3c9947bf/ios)
 limits its answer slider to a locked iPhone; the
 [Google Phone guide](https://support.google.com/phoneapp/answer/2811745)
 describes right/left swipes while locked and tap actions, while
-[Samsung](https://www.samsung.com/us/support/answer/ANS10002366/) and
+[Samsung's call guide and screenshot](https://www.samsung.com/us/support/answer/ANS10007262/),
+its [call-display settings](https://www.samsung.com/us/support/answer/ANS10002366/), and
 [Huawei](https://consumer.huawei.com/en/support/content/en-us15870480/)
 document additional drag, tap, full-screen, and pop-up variants. Browser
 language is exposed through [`navigator.languages`](https://developer.mozilla.org/en-US/docs/Web/API/Navigator/languages),
