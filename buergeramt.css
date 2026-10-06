@@ -85,3 +85,34 @@ html[data-phone-os="android"] .phone-call{background:radial-gradient(circle at 4
 .phone-call:not(.answered) .call-symbol{animation:amt-call-pulse 1.4s ease-in-out infinite}
 .phone-call:not(.answered) #phone-answer{animation:amt-call-pulse 1.4s ease-in-out infinite}
 @media(prefers-reduced-motion:reduce){.phone-call,.phone-call .call-symbol,.phone-call #phone-answer{animation:none!important}}
+
+/* Browser-visible calls use unlocked-screen buttons; Android also offers a swipe-right handle. */
+.phone-call{background:#202733}
+.phone-call:before{display:none}
+.call-status{justify-content:flex-start;margin-bottom:clamp(32px,10dvh,100px)}
+.phone-call .call-symbol{width:96px;height:96px;border-radius:50%;background:#586572;box-shadow:none;font:500 55px Arial,sans-serif}
+.phone-call b{max-width:100%;text-align:center;overflow-wrap:anywhere}
+.phone-choices{flex-wrap:nowrap;align-items:center;justify-content:space-evenly;margin-bottom:max(24px,6dvh)}
+.phone-answer-track{display:contents}
+#phone-swipe-label{display:none}
+.phone-choices button,.amt-phone .phone-choices button{width:88px;height:88px;border-radius:50%;box-shadow:none}
+.phone-choices .call-label{font:700 11px/1.2 Arial,sans-serif}
+.phone-call.answered .phone-choices{display:none}
+html[data-phone-os="ios"] .phone-call{background:#242a36}
+html[data-phone-os="android"] .phone-call{background:#1d2832}
+html[data-phone-os="android"] .phone-call .call-symbol{border-radius:50%;background:#546773}
+html[data-phone-os="android"] .phone-choices{flex-direction:column;gap:18px;margin-bottom:max(18px,4dvh)}
+html[data-phone-os="android"] .phone-choices #phone-decline{width:74px;height:74px;border-radius:50%}
+html[data-phone-os="android"] .phone-answer-track{display:block;position:relative;box-sizing:border-box;width:100%;height:78px;border:1px solid #89979b;border-radius:999px;background:#35434b}
+html[data-phone-os="android"] #phone-swipe-label{display:block;box-sizing:border-box;margin-left:72px;padding:29px 9px 0;color:#ecf0ee;text-align:center;font:700 11px/1.25 Arial,sans-serif}
+html[data-phone-os="android"] .phone-choices #phone-answer{position:absolute;top:6px;left:6px;width:64px;height:64px;border-radius:50%;transform:translateX(var(--amt-swipe-x,0px));touch-action:none;user-select:none;transition:transform .18s ease-out}
+html[data-phone-os="android"] .phone-call:not(.answered) #phone-answer{animation:none}
+html[data-phone-os="android"] .phone-choices #phone-answer.dragging{transition:none}
+html[data-phone-os="android"] #phone-answer .call-label{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap}
+@media(max-width:360px){
+ .phone-choices,html[data-phone-os="android"] .phone-choices{width:100%;flex-direction:column;gap:10px}
+ .phone-choices button,.amt-phone .phone-choices button,html[data-phone-os="android"] .phone-choices #phone-decline,html[data-phone-os="android"] .phone-choices #phone-answer{position:static;width:100%;height:auto;min-height:48px;border-radius:8px;transform:none;flex-direction:row;gap:8px}
+ html[data-phone-os="android"] .phone-answer-track{display:contents}
+ html[data-phone-os="android"] #phone-swipe-label{display:none}
+ html[data-phone-os="android"] #phone-answer .call-label{position:static;width:auto;height:auto;margin:0;overflow:visible;clip-path:none;white-space:normal}
+}

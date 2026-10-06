@@ -104,7 +104,7 @@ function interact(){if(!walking()||distanceTo(nearbyTarget())>=1.9||stage==="out
  if(stage==="waiting"){setStage("early");content("FRAU KNICK · SCHALTER 3","Steht Ihre Nummer auf der Tafel? Nein? Dann treten Sie zurück! Dass ich hier gerade nichts tue, ist eine dienstliche Tätigkeit.",[{label:"ZURÜCK IN DEN WARTERAUM",run:()=>setStage("waiting")}]);setStatus("FALSCHER AUFRUF · "+queueDisplay);return}showClerk()}
 function beginLink(){
  const invitation=BuergeramtLink.invitation();
- const code=qrcode(0,"M");code.addData(BuergeramtLink.phoneUrl(invitation));code.make();qrSvg=code.createSvgTag({cellSize:5,margin:4,scalable:true});window.Germany3D?.setAmtQr?.(qrSvg);
+ const code=qrcode(0,"M");code.addData(BuergeramtLink.phoneUrl(invitation,options.subtitlesOn?.()));code.make();qrSvg=code.createSvgTag({cellSize:5,margin:4,scalable:true});window.Germany3D?.setAmtQr?.(qrSvg);
  const owner=attempt,currentLink=new BuergeramtLink("host",invitation);link=currentLink;
  const current=()=>active&&owner===attempt&&link===currentLink;
  const terminal=()=>["cancelled","closed"].includes(stage);
@@ -184,5 +184,5 @@ document.addEventListener("visibilitychange",()=>{if(document.hidden)held.clear(
 document.addEventListener("pointermove",event=>{if(active&&walking()&&event.buttons===1&&!event.target.closest("button"))view.yaw+=event.movementX*.004});
 document.querySelectorAll("[data-amt-key]").forEach(button=>{const key=button.dataset.amtKey;button.addEventListener("pointerdown",e=>{if(!active||!walking())return;e.preventDefault();button.setPointerCapture(e.pointerId);held.add(key)});for(const type of ["pointerup","pointercancel","lostpointercapture"])button.addEventListener(type,()=>held.delete(key))});
 document.getElementById("amt-touch-e").addEventListener("click",interact);document.getElementById("amt-leave").addEventListener("click",()=>close());exit.addEventListener("click",()=>close());
-window.BuergeramtLevel={open,replay(config){close(false);open(config)},update,interact,setOfficeObstacles(items){officeObstacles=Array.isArray(items)?items.filter(o=>[o.x,o.z,o.w,o.d].every(Number.isFinite)&&o.w>0&&o.d>0):[]},get active(){return active},get stage(){return stage},get queueDisplay(){return queueDisplay},get qrSvg(){return qrSvg},get phoneUrl(){return link?BuergeramtLink.phoneUrl(link.invitation):""},get timing(){return JSON.parse(JSON.stringify(timing))},get view(){return{x:view.x,z:view.z,yaw:view.yaw}},get registeredName(){return registeredName},get activated(){return activated}};
+window.BuergeramtLevel={open,replay(config){close(false);open(config)},update,interact,setOfficeObstacles(items){officeObstacles=Array.isArray(items)?items.filter(o=>[o.x,o.z,o.w,o.d].every(Number.isFinite)&&o.w>0&&o.d>0):[]},get active(){return active},get stage(){return stage},get queueDisplay(){return queueDisplay},get qrSvg(){return qrSvg},get phoneUrl(){return link?BuergeramtLink.phoneUrl(link.invitation,options.subtitlesOn?.()):""},get timing(){return JSON.parse(JSON.stringify(timing))},get view(){return{x:view.x,z:view.z,yaw:view.yaw}},get registeredName(){return registeredName},get activated(){return activated}};
 })();

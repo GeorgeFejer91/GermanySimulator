@@ -1,5 +1,30 @@
 # Durable decisions
 
+## 2026-10-06 — Unknown caller and browser-scoped call controls
+
+The Bürgeramt phone hides the officer's identity until the player answers:
+the incoming caller is `UNBEKANNT` or `UNKNOWN`, with no police initials,
+department caption, or police-specific accessible label. The QR link carries
+only the host's English-subtitle preference alongside its existing invitation;
+that explicit preference selects English call chrome. Otherwise the phone
+browser's first preferred language selects English when it starts with `en`,
+and German in every other case. Spoken police dialogue and the office story
+stay German. iPhone and unknown browsers use accessible tap actions; Android
+phone browsers add a rightward answer drag and retain tap as a fallback.
+
+These are browser adaptations, not claims of native dialer emulation. Apple's
+[call guide](https://support.apple.com/guide/iphone/answer-or-decline-incoming-calls-iph3c9947bf/ios)
+limits its answer slider to a locked iPhone; the
+[Google Phone guide](https://support.google.com/phoneapp/answer/2811745)
+describes right/left swipes while locked and tap actions, while
+[Samsung](https://www.samsung.com/us/support/answer/ANS10002366/) and
+[Huawei](https://consumer.huawei.com/en/support/content/en-us15870480/)
+document additional drag, tap, full-screen, and pop-up variants. Browser
+language is exposed through [`navigator.languages`](https://developer.mozilla.org/en-US/docs/Web/API/Navigator/languages),
+but [reduced user agents](https://developer.mozilla.org/en-US/docs/Web/HTTP/Guides/User-agent_reduction)
+and unavailable native dialer settings prevent reliable exact-model or
+exact-call-screen selection. No high-entropy model probe is needed.
+
 ## 2026-10-06 — Dense office dressing with bounded collision
 
 The accepted ENV-01 office contribution is a lazily loaded Three.js child

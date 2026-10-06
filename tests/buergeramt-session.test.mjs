@@ -138,6 +138,18 @@ test('incoming call repeats vibration and stops it after decline',()=>{
 test('phone answer/decline are one-shot and sent with the current call id',()=>{
  for(const decision of ['answer','decline']){const h=harness('phone');h.incoming();h.node('phone-'+decision).click();h.node('phone-'+decision).click();const decisions=h.links[0].sent.filter(m=>m.type===decision);assert.equal(decisions.length,1);assert.equal(decisions[0].id,'grass')}
 });
+test('the incoming caller stays unknown, with host subtitles ahead of the phone browser language',()=>{
+ for(const [options,expected] of [[{phoneLanguage:'de-DE'},'UNBEKANNT'],[{phoneLanguage:'en-GB'},'UNKNOWN'],[{phoneLanguage:'de-DE',phoneCaptions:true},'UNKNOWN'],[{phoneLanguage:'fr-FR'},'UNBEKANNT']]){
+  const h=harness('phone',options);h.incoming();assert.equal(h.node('phone-caller').textContent,expected);assert.equal(h.node('phone-call').lang,expected==='UNKNOWN'?'en':'de');assert.equal(h.node('phone-call-state').textContent,expected==='UNKNOWN'?'INCOMING CALL':'EINGEHENDER ANRUF');h.node('phone-answer').click();assert.equal(h.node('phone-call-state').textContent,expected==='UNKNOWN'?'CONNECTED':'VERBUNDEN');
+ }
+});
+test('Android right drag answers, while a short drag resets and a tap still works',()=>{
+ const options={phoneAgent:'Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 Chrome/140 Mobile Safari/537.36',phonePlatform:'Android'};
+ const gesture=(el,type,x)=>{const e=new Event(type);Object.assign(e,{pointerId:1,clientX:x,isPrimary:true});el.dispatchEvent(e)};
+ const h=harness('phone',options);h.incoming();assert.equal(h.document.documentElement.dataset.phoneOs,'android');const button=h.node('phone-answer');gesture(button,'pointerdown',0);gesture(button,'pointermove',20);gesture(button,'pointerup',20);button.click();assert.equal(h.links[0].sent.filter(m=>m.type==='answer').length,0);
+ gesture(button,'pointerdown',0);gesture(button,'pointermove',160);gesture(button,'pointerup',160);button.click();assert.equal(h.links[0].sent.filter(m=>m.type==='answer').length,1);
+ const tap=harness('phone',options);tap.incoming();tap.node('phone-answer').click();assert.equal(tap.links[0].sent.filter(m=>m.type==='answer').length,1);
+});
 test('a failed phone answer is not presented as an accepted call',()=>{
  const h=harness('phone');h.incoming();h.links[0].fail=true;h.node('phone-answer').click();assert.equal(h.node('phone-call').hidden,true);assert.match(h.node('phone-status').textContent,/verfallen/);assert.equal(h.links[0].closed,true);
 });
