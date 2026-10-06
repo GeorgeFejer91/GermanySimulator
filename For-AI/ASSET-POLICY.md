@@ -11,6 +11,15 @@ distorted clock, and noticeboard. Its source and provenance are with the cast;
 the game loads its compressed atlas only when the office is entered, alongside
 the four character textures, so city startup does not fetch office art.
 
+The same office entry lazily loads one code-authored detail group for archive
+cabinets, lever-arch files, counter supplies, fax/copier corner, trolley,
+fluorescent louvres, radiators, and secondary paperwork signs. Its static
+geometry is batched by shape/material. The group uses the existing room's
+patina and leaves the large QR and red call display unobstructed. Eight added
+floor footprints enter player collision only after successful attachment;
+the original simpler desk supplies remain the load-failure fallback. This
+module adds no GLB, external texture, voice, network endpoint, or second scene.
+
 New office and later place assets should harmonize with the painted cast:
 exaggerated civic proportions, stale green-gray walls, stained linoleum,
 crooked paper stacks, amber fluorescent light, expressive silhouettes, and

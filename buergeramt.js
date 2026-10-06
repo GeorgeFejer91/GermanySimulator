@@ -40,11 +40,13 @@ function setStatus(text){status.textContent=text}
 function distanceTo(target){return Math.hypot(view.x-target.x,view.z-target.z)}
 function nearbyTarget(){if(stage==="outside")return door;if(stage==="walk-sign")return sign;if(stage==="walk-register")return registration;return counter}
 const officeSeats=[[-5.9,1.7],[-2.1,1.7],[1.7,1.7],[5.5,1.7],[-5.9,-1.1],[-2.1,-1.1],[1.7,-1.1],[5.5,-1.1]];
+let officeObstacles=[];
 function officeBlocked(x,z){
  if(z < -8.32 || Math.abs(x)<1.62&&Math.abs(z+4.22)<.34)return true;
  if(Math.abs(x+4.65)<1.05&&Math.abs(z-.8)<.58)return true;
  if(Math.abs(x)>6.35&&Math.abs(z+4.65)<.46)return true;
  if((Math.abs(x+4.2)<.65||Math.abs(x-4.3)<.65)&&Math.abs(z-3.6)<.24)return true;
+ if(officeObstacles.some(o=>Math.abs(x-o.x)<o.w/2+.22&&Math.abs(z-o.z)<o.d/2+.22))return true;
  return officeSeats.some(([sx,sz])=>Math.abs(x-sx)<.62&&Math.abs(z-sz)<.58);
 }
 function forfeit(reason){if(!active||!activated||["cancelled","expired","closed"].includes(stage))return;activated=false;callPending=false;callOutcome="forfeit";link?.send("forfeit");ticket.hidden=true;exit.hidden=false;setStage("expired");displayNumber("—");setStatus("PLATZ VERFALLEN · "+reason);content("ANMELDESCHALTER","Das Telefon war nicht durchgehend erreichbar. Ihre Nummer ist gestrichen. Bitte beginnen Sie die Anmeldung erneut.",[{label:"AMT VERLASSEN",run:()=>{close(false);options.onCancel()}}])}
@@ -137,5 +139,5 @@ document.addEventListener("visibilitychange",()=>{if(document.hidden)held.clear(
 document.addEventListener("pointermove",event=>{if(active&&walking()&&event.buttons===1&&!event.target.closest("button"))view.yaw+=event.movementX*.004});
 document.querySelectorAll("[data-amt-key]").forEach(button=>{const key=button.dataset.amtKey;button.addEventListener("pointerdown",e=>{if(!active||!walking())return;e.preventDefault();button.setPointerCapture(e.pointerId);held.add(key)});for(const type of ["pointerup","pointercancel","lostpointercapture"])button.addEventListener(type,()=>held.delete(key))});
 document.getElementById("amt-touch-e").addEventListener("click",interact);document.getElementById("amt-leave").addEventListener("click",()=>close());exit.addEventListener("click",()=>close());
-window.BuergeramtLevel={open,replay(config){close(false);open(config)},update,interact,get active(){return active},get stage(){return stage},get queueDisplay(){return queueDisplay},get qrSvg(){return qrSvg},get view(){return{x:view.x,z:view.z,yaw:view.yaw}},get registeredName(){return registeredName},get activated(){return activated}};
+window.BuergeramtLevel={open,replay(config){close(false);open(config)},update,interact,setOfficeObstacles(items){officeObstacles=Array.isArray(items)?items.filter(o=>[o.x,o.z,o.w,o.d].every(Number.isFinite)&&o.w>0&&o.d>0):[]},get active(){return active},get stage(){return stage},get queueDisplay(){return queueDisplay},get qrSvg(){return qrSvg},get view(){return{x:view.x,z:view.z,yaw:view.yaw}},get registeredName(){return registeredName},get activated(){return activated}};
 })();

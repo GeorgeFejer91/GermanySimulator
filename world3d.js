@@ -775,13 +775,14 @@ function showRendererFailure(error){
   ab(1.5,1.57,.58,screen,-4.65,.78,.8);ab(1.14,.72,.025,amber,-4.65,1.18,1.11);
   amtPlate("ANMELDUNG",-4.65,1.68,1.13,1.56,.34);
   ab(14.5,.94,1.12,desk,0, .49,-9.1);ab(14.7,.1,1.21,trim,0,1,-9.03);
+  const plainDeskSupplies=[];
   for(const [i,x] of [-5.8,-1.6,3.9,6.2].entries()){
     ab(.055,1.65,.85,steel,x+1.15,1.83,-9.74);
     amtPlate(`SCHALTER ${i+1}`,x,2.65,-10.31,1.82,.39);
-    ab(.6,.37,.09,screen,x-.38,1.24,-9.48);
-    ab(.5,.035,.35,paperGrey,x+.36,1.08,-8.78);
-    ab(.08,.055,.11,red,x+.39,1.14,-8.79);
-    for(let f=0;f<3;f++)ab(.36,.01,.24,paper,x-.35+f*.16,1.055+f*.005,-8.72-f*.1);
+    plainDeskSupplies.push(ab(.6,.37,.09,screen,x-.38,1.24,-9.48));
+    plainDeskSupplies.push(ab(.5,.035,.35,paperGrey,x+.36,1.08,-8.78));
+    plainDeskSupplies.push(ab(.08,.055,.11,red,x+.39,1.14,-8.79));
+    for(let f=0;f<3;f++)plainDeskSupplies.push(ab(.36,.01,.24,paper,x-.35+f*.16,1.055+f*.005,-8.72-f*.1));
   }
   for(const [x,z] of [[-5.9,1.7],[-2.1,1.7],[1.7,1.7],[5.5,1.7],[-5.9,-1.1],[-2.1,-1.1],[1.7,-1.1],[5.5,-1.1]]){
     ab(.74,.07,.68,seat,x,.52,z);ab(.7,.76,.07,seat,x,.92,z-.31);
@@ -831,9 +832,16 @@ function showRendererFailure(error){
   amtPaintedProp(1,1.05,2.75,6.8,1.4,-5.55);
   amtPaintedProp(2,.65,1.45,-6.65,2.58,-10.27);
   amtPaintedProp(3,1.15,2.85,7.55,1.55,.2,-Math.PI/2);
-  let amtImagesRequested=false;
+  let amtImagesRequested=false,officeDetail=null;
   function loadAmtImages(){
     if(amtImagesRequested)return;amtImagesRequested=true;
+    import("./assets/buergeramt/office-detail.js?v=20261006-dense-office").then(()=>{
+      const detail=window.GermanyAmtOfficeDetail.create(T,{compact:amtMobile,anisotropy:renderer.capabilities.getMaxAnisotropy()});
+      detail.attach(amtScene);
+      officeDetail=detail;
+      for(const mesh of plainDeskSupplies)mesh.visible=false;
+      window.BuergeramtLevel?.setOfficeObstacles(detail.obstacles);
+    }).catch(error=>console.warn("Bürgeramt office detail unavailable",error));
     const textures=new Map();
     for(const actor of amtCharacters){
       let texture=textures.get(actor.url);
@@ -895,6 +903,6 @@ function showRendererFailure(error){
     parkCameraFrame+=(parkTarget-parkCameraFrame)*(1-Math.exp(-6*Math.min(.05,Math.max(0,(now-previousCameraTime)/1000))));previousCameraTime=now;
     if(parkCameraFrame>.001){const narrow=Math.max(0,Math.min(1,.95/camera.aspect-1)),cx=X(park.x+park.w/2),cz=Z(park.y+park.h/2),focus=parkCameraFrame*(1-.65*narrow);camera.position.set(px+(cx-px)*focus,11.5+(5+2*narrow)*parkCameraFrame,pz+14+2*narrow*parkCameraFrame);camera.lookAt(px+(cx-px)*focus,1+parkCameraFrame,pz-2.7+(cz-(pz-2.7))*parkCameraFrame)}
     updateBuildingOcclusion();updateWirtschaftswunder(now);renderer.render(scene,camera);
-  },inspectAssets,setAmtQr,get amtCharacters(){return amtCharacters.map(actor=>({name:actor.name,frame:actor.frame,loaded:!!actor.mesh.material.map.image}))}};
+  },inspectAssets,setAmtQr,get amtOffice(){return officeDetail?.inspect()||null},get amtCharacters(){return amtCharacters.map(actor=>({name:actor.name,frame:actor.frame,loaded:!!actor.mesh.material.map.image}))}};
   app.classList.add("three-ready");
 })().catch(showRendererFailure);

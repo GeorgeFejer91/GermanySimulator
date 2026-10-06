@@ -28,7 +28,9 @@ counter interruption. The four counters, entrance threshold, QR stand,
 seats, registration kiosk, and desk have matching visible positions and
 movement boundaries. The office's worn, painterly caricature style should
 make the administrative fever dream vivid while preserving clear paths and
-readable interaction cues.
+readable interaction cues. Archive cupboards, a copier/fax corner, and a file
+trolley are solid furniture; counter tools and dense paperwork add visual
+clutter without changing the registration, queue, or call rules.
 
 At the correct counter, the linked phone receives an incoming `POLIZEI` call about walking on the grass. Declining allows German dialogue choices and then the existing A38 form. Answering starts an automatic, choice-free argument between the officer on the phone and Frau Knick at the counter, with their lines and speech interleaved; she cancels the appointment and the player returns to the street without A38. The mission chain is otherwise unchanged. Every line, choice, and phone event in this office episode is German, an explicit local exception to Berlin's Denglisch rule. Spoken text must exactly match the currently visible line on its own screen.
 

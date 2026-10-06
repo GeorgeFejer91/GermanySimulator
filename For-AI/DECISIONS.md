@@ -1,5 +1,15 @@
 # Durable decisions
 
+## 2026-10-06 — Dense office dressing with bounded collision
+
+The accepted ENV-01 office contribution is a lazily loaded Three.js child
+group in the existing Bürgeramt hall. It batches archive shelving and files,
+four equipped desks, fax/copier, trolley, and secondary signs while retaining
+the existing patina, QR/number display, painterly cast, and simplified desk
+fallback. The eight new floor footprints become solid only after the detail
+module attaches. Queue state and phone signaling remain in the existing
+controller; the module owns no scene, camera, music, or mission state.
+
 ## 2026-10-06 — Fluent caricature sprites and WebGPT intake
 
 The office cast now uses six placements of four original, grimy painted

@@ -22,6 +22,8 @@ try{
   await page.waitForFunction(()=>window.Germany3D?.ready,null,{timeout:60000});
   try{await page.waitForFunction(()=>Germany3D.amtCharacters.length===6&&Germany3D.amtCharacters.every(x=>x.loaded),null,{timeout:75000})}
   catch(error){await page.screenshot({path:`${output}/world-sprite-timeout-${name}.png`,timeout:15000}).catch(()=>{});console.log(JSON.stringify({name:'sprite-load-timeout',actors:await page.evaluate(()=>Germany3D.amtCharacters),requests:modelRequests,resources:await page.evaluate(()=>performance.getEntriesByType('resource').filter(x=>x.name.includes('/buergeramt/')).map(x=>({name:x.name,duration:x.duration,bytes:x.transferSize}))),errors}));throw error}
+  await page.waitForFunction(()=>Germany3D.amtOffice?.attached,null,{timeout:30000});
+  if(name==='desktop')console.log(JSON.stringify({name:'office-detail',...await page.evaluate(()=>{const {attached,compact,instances,triangles,staticDrawCalls,textures,texturePixels,props,obstacles}=Germany3D.amtOffice;return{attached,compact,instances,triangles,staticDrawCalls,textures,texturePixels,props,obstacleCount:obstacles.length}})}));
   if(name==='desktop'){const before=await page.evaluate(()=>Germany3D.amtCharacters.map(x=>x.frame));await page.waitForTimeout(160);await page.evaluate(()=>Germany3D.sync());const after=await page.evaluate(()=>Germany3D.amtCharacters.map(x=>x.frame));if(before.every((frame,i)=>frame===after[i]))errors.push('Bürgeramt sprite frame did not advance');console.log(JSON.stringify({name:'sprite-atlases',before,after,requests:modelRequests.length}))}
   await page.evaluate(()=>window.Germany3D.sync());
   await page.screenshot({path:`${output}/world-${name}.png`,timeout:60000});

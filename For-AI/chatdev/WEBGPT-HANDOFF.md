@@ -30,10 +30,15 @@ were reconciled against newer source. Its older full-file candidate was not
 applied. `QA-01-webgpt-20261006-7c92` is **accepted in part**: the browser
 runners now fail on missing pairings, HTTP errors, invalid room checkpoints,
 and incomplete outcomes, and they check narrow/200% zoom. Its older
-whole-file patch was not applied. `ENV-01-webgpt-office-20261006`
-submitted a larger hall dressing candidate; it has no source ownership in
-this worktree and awaits visual/performance acceptance. Do not copy the
-sibling checkout's older office renderer here.
+whole-file patch was not applied. `ENV-01-webgpt-office-20261006` is
+**accepted in part**: the coordinator copied only its code-authored detail
+group, shifted Schalter 3's CRT clear of Frau Knick's face, preserved the
+existing room patina, and connected its eight furniture footprints to
+collision after successful attachment. The older office renderer and
+candidate test double were not copied. The real browser desktop/mobile/narrow
+playtest verified QR visibility, moving sprites, and clear room navigation;
+2,135 primitives are grouped into 24 static draws. Keep the proposal file as
+an intake record, not runtime authority.
 
 ## Task record
 
@@ -64,7 +69,7 @@ assign a separate worktree if two chats need the same path.
 | ID | Priority / ChatDev stage | Concrete deliverable | Check for acceptance |
 | --- | --- | --- | --- |
 | ART-01 | High / Gameplay + Review | Design connected stamp, scold, and paper-shuffle action keys for Frau Knick. Propose art under `assets/sprite-sources/buergeramt/`; leave current idle atlas intact until reviewed. | Stable identity and baseline, enough distinct inbetweens at 24 fps, cell gutters, no hand/face snap, ordered desktop/mobile motion. |
-| ENV-01 | Medium / Gameplay + QA | Audit the first-person office against current German civic-office interior references and propose specific sign, furniture, desk, waiting-room, and light changes. | Office geometry stays inside movement bounds; QR, red single-number board, exit, Anmeldeschalter and Schalter 3 remain clear. Include source links and screenshots. |
+| ENV-01 | Closed / Gameplay + QA | Accepted scoped office dressing and collision integration. | Future area edits require their own visual and performance review. |
 | STORY-01 | Medium / Story + Review | Polish the German-only Frau Knick/police exchange, especially the counter-phone overlap and cancelled appointment, in a proposed dialogue diff. | Answer has no player choices; decline retains choices and A38; visible words equal spoken words on each screen. |
 | PHONE-01 | High / Phone + QA | Exercise real phone-to-desktop VDO.Ninja pairing, registration, foreground requirement, call answer/decline, reconnect and late/early branches; submit a compact issue report or focused fix. | Two real browsers sync without camera/microphone; no choice on answer branch; pairing failures and privacy behavior are documented. |
 | VOICE-01 | Medium / Voice + Review | Find reusable German reference audio with verifiable rights for Frau Knick and officer, audition source segments, and prepare Voice Cloner profile briefs outside game assets. | License, speaker, source, exact segment, hash, listening notes, and clean static/telephone effect proposal; no unverified YouTube voice is cloned. |
