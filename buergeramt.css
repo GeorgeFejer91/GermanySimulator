@@ -160,3 +160,15 @@ html[data-phone-os="android"] #phone-answer .call-label{position:absolute;width:
 .amt-compact .amt-sheet p{flex:1 1 auto;min-height:0!important;margin-bottom:6px;overflow-y:auto;overflow-wrap:anywhere;font:15px/1.25 Georgia,serif}
 .amt-compact .amt-actions{flex-shrink:0}
 .amt-compact .amt-actions button{min-height:32px;padding:5px;font-size:9px}
+.amt-compact .phone-call{padding:8px 12px}
+.amt-compact .call-status{margin-bottom:8px;padding:2px 0;font-size:11px}
+.amt-compact .phone-call .call-symbol{width:48px;height:48px;margin:8px auto;font-size:30px}
+.amt-compact .phone-call b{margin-top:6px;font-size:20px}
+.amt-compact #phone-volume{margin:10px auto 0;gap:4px}
+.amt-compact .phone-choices{gap:6px;margin-bottom:0}
+.amt-compact .phone-choices button,.amt-compact .amt-phone .phone-choices button{min-height:36px}
+.amt-compact .amt-direct-result{display:flex;flex-direction:column;max-height:min(160px,calc(45dvh / 2));overflow:hidden;padding:10px 12px}
+.amt-compact .amt-direct-result small{flex-shrink:0;font-size:9px}
+.amt-compact .amt-direct-result h2{flex-shrink:0;margin:4px 0;font:700 11px/1.15 Arial,sans-serif;overflow-wrap:anywhere}
+.amt-compact .amt-direct-result p{flex:1 1 auto;min-height:0;margin:0 0 6px;overflow-y:auto;font:14px/1.3 Georgia,serif}
+.amt-compact .amt-direct-result a{flex-shrink:0;padding:7px;font-size:9px}

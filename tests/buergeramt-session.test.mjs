@@ -21,7 +21,7 @@ test('office regulars patrol and handle paperwork without changing the ticket',(
  assert.equal(h.level.activated,false);assert.equal(h.links[0].sent.filter(m=>m.type==='ticket').length,0);
 });
 test('a nearby regular owns the visible dialogue mood and releases the queue on return',()=>{
- const h=harness();h.enter();h.moveTo(3.4,2.4);const actor=h.level.characters.find(a=>a.id==='formularsammler');
+ const h=harness();h.enter();h.moveTo(3.4,1.2);const actor=h.level.characters.find(a=>a.id==='formularsammler');
  assert.ok(Math.hypot(h.level.view.x-actor.x,h.level.view.z-actor.z)<1.65);
  const board=h.level.queueDisplay;h.level.interact();assert.equal(h.level.stage,'character');
  assert.equal(h.level.characterMood.id,'formularsammler');assert.equal(h.level.characterMood.tone,'dread');

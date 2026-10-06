@@ -58,7 +58,9 @@ function updateCharacters(dt){
   if(actor.pause>0){actor.pause=Math.max(0,actor.pause-dt);actor.mode="work";continue}
   const [tx,tz]=actor.route.points[actor.target],dx=tx-actor.x,dz=tz-actor.z,distance=Math.hypot(dx,dz);
   if(distance<.025){actor.x=tx;actor.z=tz;actor.target=(actor.target+1)%actor.route.points.length;actor.pause=2.1;actor.mode="work";officeCue(actor.id,actor.x,actor.z);continue}
-  const step=Math.min(distance,actor.route.speed*dt);actor.x+=dx/distance*step;actor.z+=dz/distance*step;actor.stride+=step*4.8;
+  const step=Math.min(distance,actor.route.speed*dt),nextX=actor.x+dx/distance*step,nextZ=actor.z+dz/distance*step;
+  if(Math.hypot(nextX-view.x,nextZ-view.z)<1.15&&Math.hypot(nextX-view.x,nextZ-view.z)<Math.hypot(actor.x-view.x,actor.z-view.z)){actor.pause=.3;actor.mode="work";continue}
+  actor.x=nextX;actor.z=nextZ;actor.stride+=step*4.8;
   actor.direction=Math.abs(dx)>Math.abs(dz)?dx>0?"right":"left":dz>0?"down":"up";actor.mode="walk";
  }
 }
@@ -103,6 +105,7 @@ function officeBlocked(x,z){
  if(Math.abs(x)>6.35&&Math.abs(z+4.65)<.46)return true;
  if((Math.abs(x+4.2)<.65||Math.abs(x-4.3)<.65)&&Math.abs(z-3.6)<.24)return true;
  if(officeObstacles.some(o=>Math.abs(x-o.x)<o.w/2+.22&&Math.abs(z-o.z)<o.d/2+.22))return true;
+ if(characters.some(actor=>Math.hypot(x-actor.x,z-actor.z)<1.15))return true;
  return officeSeats.some(([sx,sz])=>Math.abs(x-sx)<.62&&Math.abs(z-sz)<.58);
 }
 function forfeit(reason){if(!active||!activated||["cancelled","expired","closed"].includes(stage))return;activated=false;callPending=false;callOutcome="forfeit";link?.send("forfeit");exit.hidden=false;setStage("expired");setStatus("PLATZ VERFALLEN · "+reason);content("ANMELDESCHALTER","Das Telefon war nicht durchgehend erreichbar. Ihre Nummer ist gestrichen. Scannen Sie das Schild erneut.",[{label:"ZURÜCK ZUM QR-SCHILD",run:()=>setStage("walk-sign")},{label:"AMT VERLASSEN",run:()=>{close(false);options.onCancel()}}])}
@@ -126,7 +129,11 @@ function update(dt){
  if(window.Germany3D?.ready&&!root.classList.contains("first-person"))root.classList.add("first-person");
  const elapsed=Number.isFinite(dt)?Math.min(.1,Math.max(0,dt)):0;ambientStep(elapsed);
  updateCharacters(elapsed);
- if(stage==="character")return;
+ if(stage==="character"){
+  const actor=characters.find(item=>item.id===characterMood?.id);
+  if(actor){const target=Math.atan2(actor.x-view.x,view.z-actor.z),turn=Math.atan2(Math.sin(target-view.yaw),Math.cos(target-view.yaw));view.yaw+=turn*(1-Math.exp(-4*elapsed))}
+  return;
+ }
  queueClock+=elapsed;
  if(queueClock>=3.2){queueClock-=3.2;const calls=["B-041","F-91","A-004","Z-7","C-201","D-008","H-73","K-002"];queueIndex++;if(activated&&stage==="waiting"&&--ticketWaitCalls<=0){displayNumber(number);deadline=19;setStage("walk-counter");setStatus("NUMMER "+number+" · SCHALTER 3 · SOFORT")}else displayNumber(calls[(queueIndex-1)%calls.length]);ring()}
  if(!walking())return;
