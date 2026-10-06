@@ -40,6 +40,13 @@ playtest verified QR visibility, moving sprites, and clear room navigation;
 2,135 primitives are grouped into 24 static draws. Keep the proposal file as
 an intake record, not runtime authority.
 
+`VOICE-01` now has a coordinator-prepared starting point: the external ChatDev
+`WareHouse/germany-voice-reference/manifest.md` records a CC0 German Frau
+Knick reference, her saved Qwen profile, the existing separate police profile,
+and exact-story smoke previews. No clip has entered game assets. An incoming
+voice contributor should review those files and propose precise fixes or
+alternatives; a human listening decision is still pending before line batches.
+
 ## Task record
 
 ```text
@@ -72,7 +79,7 @@ assign a separate worktree if two chats need the same path.
 | ENV-01 | Closed / Gameplay + QA | Accepted scoped office dressing and collision integration. | Future area edits require their own visual and performance review. |
 | STORY-01 | Medium / Story + Review | Polish the German-only Frau Knick/police exchange, especially the counter-phone overlap and cancelled appointment, in a proposed dialogue diff. | Answer has no player choices; decline retains choices and A38; visible words equal spoken words on each screen. |
 | PHONE-01 | High / Phone + QA | Exercise real phone-to-desktop VDO.Ninja pairing, registration, foreground requirement, call answer/decline, reconnect and late/early branches; submit a compact issue report or focused fix. | Two real browsers sync without camera/microphone; no choice on answer branch; pairing failures and privacy behavior are documented. |
-| VOICE-01 | Medium / Voice + Review | Find reusable German reference audio with verifiable rights for Frau Knick and officer, audition source segments, and prepare Voice Cloner profile briefs outside game assets. | License, speaker, source, exact segment, hash, listening notes, and clean static/telephone effect proposal; no unverified YouTube voice is cloned. |
+| VOICE-01 | Medium / Voice + Review | Review the external CC0 Frau Knick and police smoke previews; propose precise voice or telephone-effect changes before line batches. | Source license, segment, hashes, whole-line wording, and listening notes; no unverified YouTube voice is cloned. |
 | QA-01 | High / QA | Run silent desktop/mobile/320px/200% playthroughs of the direct Bürgeramt route and main-city entry; report reproducible issues with screenshots. | No focus stealing or audible test output; record console, asset loads, frame progression, ticket/queue/counter outcomes, and restart. |
 | VIS-01 | Medium / Gameplay + Review | Survey the existing city and office place assets for their fit with the new grimy, painted caricature cast. Propose an area-by-area style pass for facades, signs, clutter, light, and props; implement one bounded accepted area at a time. | Keep every place recognizable and every interaction legible, preserve existing source/asset authority, give before/after screenshots and mobile performance evidence. |
 

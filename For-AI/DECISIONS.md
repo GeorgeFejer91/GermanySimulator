@@ -39,7 +39,7 @@ The first Bürgeramt mission opens a close first-person Three.js scene on the ex
 
 The unlisted `?geheim=buergeramt` link enters the same scene directly for fast repeat testing and shows an in-level restart link. It is an entry shortcut, not an access control, duplicate game, or separate deployable tree.
 
-Recorded Frau Knick and police speech is a separate Voice Cloner production stage. Until licensed references, a working local runtime, smoke renders, listening review, normalization, and exact-text catalog entries exist, browser German speech remains the live delivery. The existing private `GS police-officer` profile can be reused; an unverified YouTube upload is not a usable cloning source.
+Recorded Frau Knick and police speech is a separate Voice Cloner production stage. The installed app now passes `doctor`; a new Frau Knick profile uses a CC0 Legamus recording, and both her profile and the existing CC0 police profile produced exact-story smoke renders outside game assets. Automated German transcription covered each full preview. Human listening, approved line renders, normalization, and exact-text clip entries remain before recorded audio may ship; browser German speech stays live in the meantime. An unverified YouTube upload is not a usable cloning source.
 
 ## 2026-09-29 — Official computer voice
 
