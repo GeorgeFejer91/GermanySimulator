@@ -7,8 +7,9 @@ const approachBlock=game.match(/const quizApproaches=(\{[\s\S]*?\n\});\s*const v
 assert.ok(questionBlock&&approachBlock,"quiz pools must remain literal data");
 
 const questions=Function(`return ${questionBlock[1]}`)(),approaches=Function(`return ${approachBlock[1]}`)();
-assert.equal(questions.length,73);
+assert.equal(questions.length,77);
 assert.equal(questions.filter(question=>!question.type).length,35);
+assert.equal(questions.filter(question=>question.type==="technik").length,4);
 assert.equal(questions.filter(question=>question.type==="fahrschule").length,10);
 assert.equal(questions.filter(question=>question.type==="grammar"&&question.level==="B1").length,10);
 assert.equal(questions.filter(question=>question.type==="grammar"&&question.level==="B2").length,10);

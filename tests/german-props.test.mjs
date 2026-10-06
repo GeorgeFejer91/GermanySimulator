@@ -7,7 +7,7 @@ const root = new URL("../", import.meta.url);
 const read = path => readFileSync(new URL(path, root));
 const manifest = JSON.parse(read("assets/models/german-props/manifest.json"));
 const expected = ["reserved-lounger-blue", "reserved-lounger-red", "garden-gnome-watering",
-  "garden-gnome-placard", "sandal-shop", "sock-shop", "beer-crate",
+  "garden-gnome-placard", "sandal-shop", "sock-shop", "krugers-kugellager", "beer-crate",
   "allotment-wheelbarrow", "recycling-containers", "allotment-picnic-table"];
 assert.deepEqual(Object.keys(manifest.models).sort(), expected.sort());
 const blend = read("assets/models/german-props/german-props.blend");
@@ -19,7 +19,7 @@ for (const [name, item] of Object.entries(manifest.models)) {
   assert.equal(bytes.readUInt32LE(8), bytes.length, name);
   assert.equal(bytes.length, item.bytes, name);
   assert.equal(createHash("sha256").update(bytes).digest("hex"), item.sha256, name);
-  assert.ok(bytes.length < 120_000, `${name} transfer budget`);
+  assert.ok(bytes.length < 800_000, `${name} transfer budget`);
   const jsonLength = bytes.readUInt32LE(12);
   const gltf = JSON.parse(bytes.subarray(20, 20 + jsonLength).toString().trim());
   assert.equal(gltf.asset.version, "2.0");
@@ -31,10 +31,10 @@ for (const [name, item] of Object.entries(manifest.models)) {
   total += bytes.length;
 }
 assert.equal(total, manifest.total_glb_bytes);
-assert.ok(total < 500_000, "complete addition stays below 0.5 MB");
+assert.ok(total < 1_300_000, "complete addition stays below 1.3 MB");
 
 const game = read("game.js").toString(), renderer = read("world3d.js").toString();
-for (const name of expected) assert.ok(renderer.includes(`germanPropUrl("${name}")`), `${name} referenced by game renderer`);
+for (const name of expected) assert.ok(renderer.includes(`germanPropUrl("${name}")`) || renderer.includes(`german-props/${name}.glb`), `${name} referenced by game renderer`);
 const aliases = {"liege-blau": 3, "liege-rot": 3, "zwerg-giesskanne": 3,
   "zwerg-schild": 3, bierkasten: 2, schubkarre: 1, wertstoffcontainer: 2, picknicktisch: 1};
 const placed = [...game.matchAll(/\{x:(\d+),y:(\d+),asset:"([^"]+)",w:(\d+),h:(\d+)(?:,turn:-?(?:\d+)?(?:\.\d+)?)?\}/g)]

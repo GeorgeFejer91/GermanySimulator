@@ -37,8 +37,8 @@ for(const [family,id] of [["merz","merz-character"],["merkel","merkel-character"
 assert.equal(library.clips["quiz-wrong-answer"].voiceId,"quiz-sting","existing quiz audio must not be labeled as a new clone");
 assert.equal(library.clips["quiz-wrong-answer"].targetVoiceId,"quiz-officer");
 assert.deepEqual([...library.exclusions],["background-music","sound-effect"]);
-assert.equal(Object.keys(library.questions).length,73,"every spoken quiz question needs English text");
-assert.deepEqual(Object.keys(library.quizContexts).sort(),["civic","grammar-b1","grammar-b2","grammar-c1","traffic"],"each quiz family needs an English factual context");
+assert.equal(Object.keys(library.questions).length,77,"every spoken quiz question needs English text");
+assert.deepEqual(Object.keys(library.quizContexts).sort(),["civic","grammar-b1","grammar-b2","grammar-c1","technik","traffic"],"each quiz family needs an English factual context");
 assert.equal(library.pools.quizApproaches.length,32,"every regional quiz approach needs one shared English rendering");
 assert.equal(library.pools.lawPower.length,13,"every recorded law quotation needs English text");
 assert.equal(library.pools.railLaw.length,3,"every synthesized rail warning needs English text");
