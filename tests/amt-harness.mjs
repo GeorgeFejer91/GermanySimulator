@@ -46,7 +46,7 @@ export function harness(kind='host',{voice=false,synthesis=true}={}){
   end(){const utterance=this.current;this.current=null;this.speaking=false;utterance?.onend?.()}
  };
  const vibrations=[];
- const globals={console,Event,EventTarget,CustomEvent,TextEncoder,URL,URLSearchParams,Intl,Date,Math,Number,Set,Promise,
+ const globals={console,Event,EventTarget,CustomEvent,TextEncoder,URL,URLSearchParams,Intl,Date,Math,Number,Set,Promise,performance:{now:()=>now},
   window,document,navigator:{userAgent:'test',userActivation:{hasBeenActive:false},vibrate(pattern){vibrations.push(pattern)}},
   crypto:{getRandomValues(a){a.fill(123);return a}},BuergeramtLink:Link,
   qrcode:()=>({addData(){},make(){},createSvgTag:()=>'<svg></svg>'}),

@@ -677,3 +677,15 @@ catenary mast placement remains deferred for route and train clearance. The
 existing fax-study preservation hash failed at baseline (65/66 focused tests),
 and full live clearance/failure checks remain open, so the pack stays opt-in and
 is not published as accepted. See the adjacent provenance for per-asset status.
+
+## 2026-10-06 — Bürgeramt audio handshake
+
+The root game browser is the authority for the paired phone story. Its existing
+ordered VDO.Ninja data channel carries bounded ping/pong probes and per-line
+start/done receipts; no additional backend service or microphone is needed.
+The game estimates latency from round-trip probes on its own monotonic clock,
+verifies phone line duration against the receipt span, and adjusts the argument
+pause and second interruption. Diagnostics stay local under
+`BuergeramtLevel.timing` and contain no name or pairing secret. Missing receipts
+time out so the cancellation branch remains reachable. Browser speech events
+provide practical turn timing, not sample-accurate acoustic synchronization.

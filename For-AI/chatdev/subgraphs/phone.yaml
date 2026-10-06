@@ -31,8 +31,11 @@ graph:
           The phone shows
           an animated POLIZEI call, full-screen where supported, with ringing,
           repeated vibration, and a visible line matching every spoken line.
-          Return a bounded police-done cue after each exact visible utterance so
-          Frau Knick can take her turn; retain the opening and one later overlap.
+          Reply to host sync-ping with the same bounded sync-pong ID. Report
+          police-start from the actual speech start or visible fallback, then
+          police-done with the phone's local line duration and delivery mode.
+          Frau Knick uses these receipts to take her turn; retain the opening
+          and one later overlap. Do not compare raw device timestamps.
           Validate message
           types, session, sequence, and payload length. Never promise an OS lock.
           Edit only allowlisted Bürgeramt files and report any game.js integration.

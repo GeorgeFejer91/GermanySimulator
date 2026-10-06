@@ -31,14 +31,16 @@ function playNextPolice(){
  if(voiceBusy||!voiceQueue.length||resolved!=="answer"||finished||closed||document.hidden||call.hidden)return;
  voiceBusy=true;const {text,index}=voiceQueue.shift(),generation=++voiceGeneration;
  const current=()=>generation===voiceGeneration&&!finished&&!closed&&resolved==="answer"&&!call.hidden;
+ let startedAt=null,mode="fallback";
+ const started=kind=>{if(!current()||startedAt!==null)return;startedAt=performance.now();mode=kind;link.send("police-start",{index,mode})};
  const show=()=>{if(current()){line.textContent=text;line.hidden=false}};
- const finish=()=>{if(!current())return;voiceGeneration++;clearTimeout(voiceTimer);stopStatic();voiceBusy=false;link.send("police-done",{index});voiceTimer=setTimeout(playNextPolice,250)};
- const fallback=()=>{if(!current())return;clearTimeout(voiceTimer);show();voiceTimer=setTimeout(finish,Math.max(3500,text.length*55))};
+ const finish=()=>{if(!current())return;voiceGeneration++;clearTimeout(voiceTimer);stopStatic();voiceBusy=false;link.send("police-done",{index,mode,durationMs:Math.min(60000,Math.max(0,Math.round(performance.now()-(startedAt??performance.now()))))});voiceTimer=setTimeout(playNextPolice,250)};
+ const fallback=()=>{if(!current())return;clearTimeout(voiceTimer);mode="fallback";show();started("fallback");voiceTimer=setTimeout(finish,Math.max(3500,text.length*55))};
  if(!window.speechSynthesis||typeof window.SpeechSynthesisUtterance!=="function"){fallback();return}
  const utterance=new SpeechSynthesisUtterance(text);utterance.lang="de-DE";utterance.rate=.87;utterance.pitch=.66;utterance.volume=.9;
  const voices=speechSynthesis.getVoices();utterance.voice=voices.find(v=>/^de/i.test(v.lang)&&/male|daniel|stefan|markus|martin|thomas|tim/i.test(v.name))||voices.find(v=>/^de/i.test(v.lang))||null;
- utterance.onstart=()=>{if(!current())return;clearTimeout(voiceTimer);show();startStatic();voiceTimer=setTimeout(()=>{if(current()){speechSynthesis.cancel();finish()}},Math.max(20000,text.length*140))};
- utterance.onend=finish;utterance.onerror=()=>{if(current()){stopStatic();fallback()}};
+ utterance.onstart=()=>{if(!current())return;clearTimeout(voiceTimer);show();started("voice");startStatic();voiceTimer=setTimeout(()=>{if(current()){speechSynthesis.cancel();finish()}},Math.max(20000,text.length*140))};
+ utterance.onend=()=>{if(mode==="voice")finish()};utterance.onerror=()=>{if(current()){stopStatic();fallback()}};
  voiceTimer=setTimeout(()=>{if(current()){speechSynthesis.cancel();fallback()}},5000);
  requestAnimationFrame(()=>{if(current()){try{speechSynthesis.speak(utterance)}catch{clearTimeout(voiceTimer);fallback()}}});
 }
@@ -53,6 +55,7 @@ link.addEventListener("status",e=>{if(closed)return;connection.textContent=e.det
 link.addEventListener("connected",()=>{if(closed||finished)return;submit.disabled=!!submittedName;connection.textContent="Mit dem Amt verbunden. Wartenummer wird zugeteilt.";requestTicket();clearInterval(scanTimer);scanTimer=setInterval(requestTicket,1500)});
 link.addEventListener("message",e=>{
  if(closed)return;const m=e.detail;
+ if(m.type==="sync-ping"){link.send("sync-pong",{id:m.id});return}
  if(m.type==="done"){if(!finished)endSlot("Dieser Termin wurde am Schalter bearbeitet.");else stopCall();return}
  if(finished)return;
  if(m.type==="ticket"&&/^B-\d{3}$/.test(m.number||"")){if(slotActive&&number.textContent===m.number)return;clearInterval(scanTimer);scanTimer=null;stopCall();currentCall="";resolved="";number.textContent=m.number;ticket.hidden=false;form.hidden=!!submittedName;slotActive=!document.hidden;status.textContent="Wartenummer zugeteilt. Achten Sie auf die rote Aufruftafel im Amt.";connection.textContent="Mit der Warteschlange verbunden.";if(slotActive)keepAwake();else{link.send("phone-hidden");endSlot("Seite verlassen. Ihr Platz ist verfallen.");link.close()}}

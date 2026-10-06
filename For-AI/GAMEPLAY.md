@@ -107,6 +107,12 @@ Merkel, Merz, the Bayern-Beauftragter, and Alice each own a 176-unit circular au
 
 ## Satirical voice and dialogue
 
+In the Bürgeramt answered-call branch, the phone reports when each police line
+starts and ends. Frau Knick waits for the completion receipt for ordinary turns;
+the opening and later interruption intentionally overlap. The host measures
+phone link delay and uses it to pace the later interruption. A lost receipt
+falls back to a timed continuation so the attempted Anmeldung can still end.
+
 The game is an affectionate satire of life in Germany, made with love for German culture and its capacity for self-irony. It exaggerates recognizable everyday interactions with people and institutions; the joke targets bureaucratic habits, social friction, and inflexible systems rather than expressing contempt for Germans.
 
 The creative shorthand “cultural autism” means an intentionally extreme caricature of rigid, indirect communication. It is not a diagnosis or a claim about autistic people. Apply it to all character dialogue through these rules:

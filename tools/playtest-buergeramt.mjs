@@ -92,9 +92,10 @@ try{
   }
   }
  }
- const state=await desktop.evaluate(()=>({stage:window.BuergeramtLevel.stage,outcome:window.__amtOutcome||(!document.getElementById('form-modal').hidden&&document.getElementById('form-code').textContent.startsWith('A38')?'form':null)||(!document.getElementById('amt-direct-result').hidden?'cancelled':null)}));
- console.log(JSON.stringify({branch,linked,desktopStage:state.stage,outcome:state.outcome,desktopStatus:await desktop.locator('#amt-status').textContent(),phoneStatus:await phone.locator('#phone-status').textContent(),phoneConnectStatus:await phone.locator('#phone-connect-status').textContent(),phoneOs:await phone.evaluate(()=>document.documentElement.dataset.phoneOs),errors,output},null,2));
- passed=linked&&(branch==='answer'?state.outcome==='cancelled':branch==='decline'?state.outcome==='form':state.stage==='expired');
+ const state=await desktop.evaluate(()=>({stage:window.BuergeramtLevel.stage,outcome:window.__amtOutcome||(!document.getElementById('form-modal').hidden&&document.getElementById('form-code').textContent.startsWith('A38')?'form':null)||(!document.getElementById('amt-direct-result').hidden?'cancelled':null),timing:window.BuergeramtLevel.timing}));
+ const receipts=[-1,0,1,2].map(index=>state.timing.cues[index]?.status||'missing');
+ console.log(JSON.stringify({branch,linked,desktopStage:state.stage,outcome:state.outcome,timing:{rttMs:state.timing.rttMs,oneWayMs:state.timing.oneWayMs,jitterMs:state.timing.jitterMs,startLagMs:state.timing.startLagMs,receipts},desktopStatus:await desktop.locator('#amt-status').textContent(),phoneStatus:await phone.locator('#phone-status').textContent(),phoneConnectStatus:await phone.locator('#phone-connect-status').textContent(),phoneOs:await phone.evaluate(()=>document.documentElement.dataset.phoneOs),errors,output},null,2));
+ passed=linked&&(branch==='answer'?state.outcome==='cancelled'&&state.timing.rttMs!==null&&receipts.every(value=>value==='verified'):branch==='decline'?state.outcome==='form'&&receipts[0]==='declined':state.stage==='expired');
 }catch(error){console.error(error);console.error(JSON.stringify({errors}));errors.push(String(error))}finally{
  await Promise.race([Promise.allSettled([phone?.close(),desktop?.close()].filter(Boolean)),new Promise(resolve=>setTimeout(resolve,5000))]);
  await Promise.race([browser.close(),new Promise(resolve=>setTimeout(resolve,5000))]);

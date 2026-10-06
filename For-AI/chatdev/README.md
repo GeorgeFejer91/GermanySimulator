@@ -20,10 +20,10 @@ local review and the relevant tests before its output is accepted.
 | --- | --- | --- |
 | Story | Original German waiting-room, counter, police, and Frau Knick lines | Early, late, answer, and decline branches; visible text equals speech |
 | Gameplay | First-person movement, one-code board, desk interactions, A38 handoff | Mission 1 and original eight-step chain still work |
-| Phone | QR ticket, VDO.Ninja data events, fullscreen call look | Real paired-browser answer and decline sync; no camera or microphone |
+| Phone | QR ticket, VDO.Ninja data events, fullscreen call look | Real paired-browser answer and decline sync; bounded ping/pong and speech receipts; no camera or microphone |
 | Voice | Licensed distinct references, profiles, exact-line renders | Source/license/hash, listening review, normalized and cataloged clips |
 | Review | Read-only continuity, protocol, asset, and language audit | Concrete file/line findings |
-| QA | Syntax, game tests, silent desktop/mobile playtest | Browser errors and both outcome branches reported |
+| QA | Syntax, game tests, silent desktop/mobile playtest | Browser errors, both outcome branches, timing diagnostics and lost-cue fallback reported |
 
 `For-AI/chatdev/functions/game_tools.py` restricts agent reads and writes to named game files. It puts reports in ChatDev's external session directory. Its voice functions require a working local Voice Cloner installation; the game runs with German browser speech in the meantime. Never save an API key, private voice reference, or ChatDev session output under `assets/`.
 
