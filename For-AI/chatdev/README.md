@@ -2,6 +2,20 @@
 
 The canonical game remains at repository root. OpenBMB ChatDev v2.2.0 is pinned at commit `3c72d860d2553f05129b7dff0fd4efdde5b01d2f` in the sibling `ChatDev` directory. Its sessions, research notes, reference audio, and trial renders stay outside this game checkout. Run `tools/chatdev.ps1 -ValidateOnly` before a session; run `tools/chatdev.ps1 -Prompt '...'` from a `codex/` work branch when the external ChatDev Python environment and local `API_KEY` are ready. Review and test its output in the game before committing. The `pre-chatdev-2026-10-05` tag and external snapshot preserve the pre-integration version.
 
+For fast iterations, give ChatDev one outcome, relevant paths, current game
+state, and acceptance checks. Reuse the Story → Gameplay → Phone → Voice →
+Review → QA graph when those domains change together; route a sprite-only
+change through its builder and focused playtest. Read stage reports from the
+external session directory, accept verified diffs, and keep one integrator
+responsible for the root game. Incoming WebGPT chats using Secret Tunnel 5
+follow [WEBGPT-COORDINATION.md](./WEBGPT-COORDINATION.md); their accepted
+brief is summarized in [WEBGPT-HANDOFF.md](./WEBGPT-HANDOFF.md).
+
+For a single changed domain, pass `-Stage Story`, `Gameplay`, `Phone`,
+`Voice`, `Review`, or `QA` to `tools/chatdev.ps1` along with a short
+`-Prompt`; omit `-Stage` for the full graph. A focused stage still needs
+local review and the relevant tests before its output is accepted.
+
 | Stage | Owns | Check before handoff |
 | --- | --- | --- |
 | Story | Original German waiting-room, counter, police, and Frau Knick lines | Early, late, answer, and decline branches; visible text equals speech |

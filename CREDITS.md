@@ -6,6 +6,8 @@ The office, queue, Frau Knick, grass accusation, and phone argument are original
 
 The QR code renderer is [Kazuhiko Arase's qrcode-generator](https://github.com/kazuhikoarase/qrcode-generator), MIT licensed under `assets/vendor/qrcode/LICENSE`. The phone data channel uses [VDO.Ninja SDK v1.5.5](https://github.com/steveseguin/ninjasdk), MPL 2.0, with the vendored license and provenance in `assets/vendor/vdoninja/1.5.5/`.
 
+Frau Knick and one waiting-room visitor use static office derivatives of the pinned CC0 MakeHuman older female and male body/skin sources. `assets/models/buergeramt/PROVENANCE.md` records their source chain, deterministic builder, and hashes. The rejected towel-tourist preview GLBs are not loaded by the game. Other office visitors use original procedural Three.js geometry.
+
 ## Walking-motion reference
 
 The preview-only Merkel left-walk pilot uses subject 69, trial 01 (“walk
@@ -401,5 +403,10 @@ version/hash records and upstream links accompany the files under
 `assets/vendor/pretext/` and `assets/fonts/roboto-condensed/`.
 
 ## Legal framing
+
+The Bürgeramt clerk, tenant, parent, pensioner, and office-prop paintings were generated
+for this game with OpenAI ImageGen. The original transparent source strips,
+build method, and output hashes are recorded in
+`assets/sprite-sources/buergeramt/PROVENANCE.md`.
 
 All game rules, wanted levels, immigration deadlines, forms, and enforcement mechanics are fictional parody and do not represent German law, police practice, citizenship requirements, or immigration procedure.

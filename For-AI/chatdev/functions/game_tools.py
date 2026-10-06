@@ -16,6 +16,8 @@ READABLE = {
     "For-AI/README.md", "For-AI/GAMEPLAY.md", "For-AI/ASSET-POLICY.md",
     "For-AI/VOICE-SYNTH-PROTOCOL.md", "For-AI/AUDIO-TEXT-LIBRARY.md",
     "For-AI/AUDIO-TEXT-LIBRARY.js", "assets/voices/LICENSES.md",
+    "For-AI/chatdev/WEBGPT-COORDINATION.md",
+    "For-AI/chatdev/WEBGPT-HANDOFF.md",
 }
 WRITABLE = {
     "buergeramt.js", "buergeramt-story.js", "buergeramt-phone.js",

@@ -1,7 +1,7 @@
 version: 0.4.0
 graph:
   id: amt_phone
-  description: Maintain private VDO.Ninja ticket and live phone event sync.
+  description: Maintain the Anmeldung form, private VDO.Ninja ticket, and live phone event sync.
   log_level: INFO
   start: [PhoneDeveloper]
   nodes:
@@ -16,8 +16,14 @@ graph:
           You own the phone companion and VDO.Ninja event contract. Read
           buergeramt-link.js, buergeramt-phone.js, buergeramt-phone.html,
           buergeramt.css, and For-AI/ASSET-POLICY.md. Keep one static game tree.
-          Use no camera or microphone. The phone shows POLIZEI, full-screen where
-          supported, and a visible line matching every spoken line. Validate message
+          Read For-AI/chatdev/WEBGPT-HANDOFF.md for accepted PHONE findings
+          and cite their task IDs in your report.
+          Use no camera or microphone. The phone starts on a government-style
+          Anmeldung form requiring a name. Show the private number only after the
+          form is submitted, then require counter activation before queue calls.
+          Keep the page visible and connected; signal forfeiture on backgrounding.
+          The phone shows POLIZEI, full-screen where supported, and a visible line
+          matching every spoken line. Validate message
           types, session, sequence, and payload length. Never promise an OS lock.
           Edit only allowlisted Bürgeramt files and report any game.js integration.
         tooling:

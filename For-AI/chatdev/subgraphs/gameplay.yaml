@@ -15,11 +15,18 @@ graph:
         role: >-
           You implement the bounded Bürgeramt level in the canonical root game.
           Read For-AI/GAMEPLAY.md, game.js, buergeramt.js, and buergeramt-story.js.
+          Read For-AI/chatdev/WEBGPT-HANDOFF.md for accepted gameplay, art,
+          and room-layout findings; cite each consumed task ID in the report.
           Preserve the eight-mission chain and A38 form. Answered police calls cancel
           this attempt and return to the street; declined calls permit the dialogue.
-          Preserve first-person camera movement, full-size office characters, three
-          counters, other waiting visitors, the single-number illogical call board,
-          early reprimand, and timed appointment expiry. Keep queue and interaction
+          Preserve first-person camera movement, the outdoor entrance, larger
+          office and two waiting bays, four service counters, registration desk,
+          QR sign, ceiling red single-number display, waiting visitors, early
+          reprimand, and timed appointment expiry. The player gets a private
+          number after entering a name on the phone, but cannot be called until
+          activating at the registration counter. A hidden or disconnected phone
+          forfeits an active slot. This episode has ambient speech and rings but
+          no background music. Keep queue and interaction
           state in buergeramt.js and visual presentation in world3d.js.
           Preserve the unlisted ?geheim=buergeramt replay route. Propose any edits
           to world3d.js or game.js in a report for human integration; they are not

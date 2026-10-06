@@ -4,7 +4,20 @@
 
 Use one asset authority at root `assets/`, with fidelity selected by the client. Desktop may use high-resolution period artwork where it is visibly valuable; mobile must prefer minimal vector or otherwise lightweight variants.
 
-The Bürgeramt interior uses code-native geometry, signs, visitors, and counters through the existing Three.js renderer. Its phone companion shares the root static site and adds no game media. The locally pinned QR generator under `assets/vendor/qrcode/` and VDO.Ninja SDK under `assets/vendor/vdoninja/1.5.5/` are runtime code with licenses beside them. ChatDev's clone, session reports, source recordings, Voice Cloner profiles, and trial renders stay outside `assets/` and the deployable game; only reviewed, licensed, normalized exact-text speech clips may enter the existing voice catalog and `assets/voices/`.
+The Bürgeramt interior uses code-native geometry and signs through the existing Three.js renderer. Its near characters use original caricatured painted source strips under `assets/sprite-sources/buergeramt/`; `tools/build-amt-sprites.py` produces separate 64-frame, 24-fps desktop/mobile WebP atlases under `assets/buergeramt/characters/`. No Bürgeramt GLB is a runtime input. Generated source provenance and atlas hashes live beside the sources. The rejected towel-tourist preview GLBs remain preview-only and are not runtime inputs. The phone companion shares the root static site and adds no game media. The locally pinned QR generator under `assets/vendor/qrcode/` and VDO.Ninja SDK under `assets/vendor/vdoninja/1.5.5/` are runtime code with licenses beside them. ChatDev's clone, session reports, source recordings, Voice Cloner profiles, and trial renders stay outside `assets/` and the deployable game; only reviewed, licensed, normalized exact-text speech clips may enter the existing voice catalog and `assets/voices/`.
+
+The office's original painted prop strip adds a file cabinet, paper tower,
+distorted clock, and noticeboard. Its source and provenance are with the cast;
+the game loads its compressed atlas only when the office is entered, alongside
+the four character textures, so city startup does not fetch office art.
+
+New office and later place assets should harmonize with the painted cast:
+exaggerated civic proportions, stale green-gray walls, stained linoleum,
+crooked paper stacks, amber fluorescent light, expressive silhouettes, and
+visible wear. Create original artwork and preserve readable signs, paths,
+interaction targets, and the root game's existing place identities. Iterate
+one area at a time with before/after desktop and mobile screenshots plus
+runtime cost; do not reskin the entire city from an unreviewed style sheet.
 
 ## Desktop and mobile
 

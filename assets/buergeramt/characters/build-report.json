@@ -1,0 +1,110 @@
+{
+  "renter": {
+    "source_sha256": "3db97d3e7d65a85429d9997359c4626e5637a8a058a8e5596cde09758c05b8d5",
+    "desktop_sha256": "e3689120765d03bc06fb0661120e77abde67ef5214688fa5f07b9550fbe31423",
+    "mobile_sha256": "fe35a11a3f118c1dbe26bf8ae70ff1e0114ab07b87a7066dc5341b5135c26656",
+    "frame_count": 64,
+    "fps": 24,
+    "cell": [
+      192,
+      416
+    ],
+    "minimum_alpha_margin": [
+      24,
+      19
+    ],
+    "encoded_desktop_margin_and_distinct": [
+      24,
+      19,
+      64
+    ],
+    "encoded_mobile_margin_and_distinct": [
+      16,
+      13,
+      64
+    ],
+    "desktop_bytes": 1382946,
+    "mobile_bytes": 745568
+  },
+  "clerk": {
+    "source_sha256": "9c944c08b96735be45e56180904c0f702d343ea579349ae07bfef4b7244ed83d",
+    "desktop_sha256": "430ae656e160763207d87e5b577b0c64795455bdc2442bae303903ef0fac2906",
+    "mobile_sha256": "baaf6474c6bcf04a44609a7aac525b216c1fae14ea404e0b95c11ffe3c22ed9a",
+    "frame_count": 64,
+    "fps": 24,
+    "cell": [
+      192,
+      416
+    ],
+    "minimum_alpha_margin": [
+      22,
+      16
+    ],
+    "encoded_desktop_margin_and_distinct": [
+      22,
+      16,
+      64
+    ],
+    "encoded_mobile_margin_and_distinct": [
+      15,
+      11,
+      64
+    ],
+    "desktop_bytes": 1379652,
+    "mobile_bytes": 741954
+  },
+  "parent": {
+    "source_sha256": "dfd53ba6b09d5da5f2647da1470a712a15d1c1368b51cf4360d8d69b6eb68691",
+    "desktop_sha256": "7143adcab495f648407b33940c74e138d94ef8c1998737451ff82c183bade856",
+    "mobile_sha256": "eb2dd22fc91e445364826d537db00bf4721a02b88ad1658339e405ef465b9472",
+    "frame_count": 64,
+    "fps": 24,
+    "cell": [
+      192,
+      416
+    ],
+    "minimum_alpha_margin": [
+      22,
+      20
+    ],
+    "encoded_desktop_margin_and_distinct": [
+      22,
+      20,
+      64
+    ],
+    "encoded_mobile_margin_and_distinct": [
+      14,
+      14,
+      64
+    ],
+    "desktop_bytes": 1224028,
+    "mobile_bytes": 666432
+  },
+  "pensioner": {
+    "source_sha256": "f6c08923bbdfae45496dea970e8330e0776b6dda6b378e14ea795424e4deb7dd",
+    "desktop_sha256": "555c6f45c78d50e62a72dd23eb6b8ada457c8fe5de7f6237af9f6e492feaccd4",
+    "mobile_sha256": "2b4eff929ee78eb433f4a48cea45ea1561a66f9a5465d37447ea3e42175346f0",
+    "frame_count": 64,
+    "fps": 24,
+    "cell": [
+      192,
+      416
+    ],
+    "minimum_alpha_margin": [
+      26,
+      31
+    ],
+    "encoded_desktop_margin_and_distinct": [
+      26,
+      31,
+      64
+    ],
+    "encoded_mobile_margin_and_distinct": [
+      18,
+      21,
+      64
+    ],
+    "desktop_bytes": 1245852,
+    "mobile_bytes": 681248
+  }
+}

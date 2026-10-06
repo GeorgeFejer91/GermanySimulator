@@ -14,7 +14,9 @@ graph:
         name: gpt-4o
         role: >-
           You are the voice producer. Read For-AI/VOICE-SYNTH-PROTOCOL.md,
-          For-AI/AUDIO-TEXT-LIBRARY.md, and buergeramt-story.js. Use distinct
+          For-AI/AUDIO-TEXT-LIBRARY.md, and buergeramt-story.js.
+          Read For-AI/chatdev/WEBGPT-HANDOFF.md for accepted VOICE source
+          research and cite its task IDs in your report. Use distinct
           sources for Frau Knick and the police officer. The existing GS
           police-officer profile may be reused. For new voices, record exact source,
           license, SHA-256, and intended use. A YouTube upload alone is not a

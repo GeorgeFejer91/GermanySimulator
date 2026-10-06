@@ -1,5 +1,42 @@
 # Biomechanical Sprite Animation Protocol
 
+## Bürgeramt character loops
+
+The first-person office uses a separate, stationary cast and does not change
+the city walk pipeline below. Four caricatured painted source strips live in
+`assets/sprite-sources/buergeramt/*-source.png`; the builder is
+`tools/build-amt-sprites.py`. The game loads its derived WebP atlases from
+`assets/buergeramt/characters/`, with the mobile suffix selected on narrow
+screens. The other painted poses in each strip are **candidate action keys**,
+not approved connected transitions. Keep them out of the idle clock until their
+hands, faces, props, scale, and loop seams pass ordered visual review.
+
+- Bake 64 individually evaluated idle frames at 24 fps into an 8 × 8 grid,
+  one 192 × 416 cell per desktop frame (128 × 288 mobile). This is a 2.67 s
+  cycle, not a four-key loop held by a fast renderer. Keep one pose identity,
+  shared scale, baseline, and continuous periodic motion through frame 63 → 0.
+- The painted figure occupies at most 144 × 384 within its desktop cell.
+  Keep at least 12 fully transparent pixels horizontally and 8 vertically
+  **after warping and final encoding**; the builder currently provides at
+  least 21 and 16 respectively before export. Remove disconnected fragments
+  from neighboring generated-strip columns before scaling. Clear RGB where
+  alpha is zero and filter premultiplied color to avoid edge halos.
+- For more expressive movement, first approve action keys at the same
+  registration, then create enough connected inbetweens for a fluent loop.
+  Do not treat a crossfade, a held pose, or an optical-flow midpoint snap as a
+  finished transition. A larger frame count is useful only if adjacent
+  rendered frames are actually continuous and the anatomy stays connected.
+- Run `python tools/build-amt-sprites.py`; inspect every character's ordered
+  `output/buergeramt-sprite-qa/*-motion.gif`, contact frames, and exact WebP
+  atlas at desktop and mobile sizes. Review the loop at 24 fps, its seam,
+  the billboards in the first-person level, alpha edges on light/dark
+  backgrounds, and browser frame progression. A byte/count/gutter pass is
+  mechanical evidence, not visual approval.
+
+This office-specific lane uses the project's
+`$animate-2d-characters` skill for movement review. The general city
+biomechanical candidate and acceptance gates continue below.
+
 This is the authoring and preview contract for the experimental articulated
 atlases in Germany Simulator. All six characters use one deterministic gait,
 one fixed registration grid, and one signed verification gate. The browser

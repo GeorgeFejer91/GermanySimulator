@@ -4,6 +4,26 @@ const alphabet="abcdefghijklmnopqrstuvwxyz0123456789";
 function randomId(length=24){const bytes=crypto.getRandomValues(new Uint8Array(length));return Array.from(bytes,n=>alphabet[n%alphabet.length]).join("")}
 function event(target,type,detail){target.dispatchEvent(new CustomEvent(type,{detail}))}
 function sourceOf(value){return typeof value==="string"?value:value?.streamID||value?.streamId||value?.id||""}
+// The sender role owns both the message type and its bounded payload.
+function validPayload(type,data,sender){
+ const shapes=sender==="phone"?{register:["name"],"phone-hidden":[],answer:["id"],decline:["id"]}:
+  sender==="host"?{ticket:["number"],activated:[],forfeit:[],call:["id","line"],"police-line":["index","line"],done:[]}:{};
+ if(!Object.hasOwn(shapes,type)||!data||typeof data!=="object"||Array.isArray(data))return false;
+ const fields=shapes[type],keys=Object.keys(data);
+ if(keys.length!==fields.length||keys.some(key=>!fields.includes(key)))return false;
+ if(type==="register")return typeof data.name==="string"&&data.name.trim().length>=2&&data.name.length<=80&&!/[\u0000-\u001f\u007f]/.test(data.name);
+ if(type==="ticket")return typeof data.number==="string"&&/^B-\d{3}$/.test(data.number);
+ if(type==="answer"||type==="decline")return data.id==="grass";
+ if(type==="call"||type==="police-line")return typeof data.line==="string"&&data.line.trim().length>0&&data.line.length<350&&
+  (type==="call"?data.id==="grass":Number.isInteger(data.index)&&data.index>=0&&data.index<3);
+ return true;
+}
+function validMessage(msg,session,lastSeq,sender){
+ if(!msg||typeof msg!=="object"||Array.isArray(msg)||msg.v!==1||msg.session!==session||
+  !Number.isSafeInteger(msg.seq)||msg.seq<=0||msg.seq<=lastSeq||typeof msg.type!=="string")return false;
+ const {v,session:ignoredSession,seq,type,...payload}=msg;
+ return validPayload(type,payload,sender);
+}
 class AmtLink extends EventTarget{
  constructor(role,invitation){super();this.role=role;this.invitation=invitation;this.sdk=null;this.channel=null;this.peer="";this.seq=0;this.lastSeq=0;this.closed=false;this.viewing=false}
  static invitation(){return{room:`amt-${randomId(16)}`,secret:randomId(32),stream:`amt-ticket-${randomId(16)}`}}
@@ -29,9 +49,32 @@ class AmtLink extends EventTarget{
  }
  async viewHost(){if(this.viewing||this.closed)return;this.viewing=true;try{await this.sdk.view(this.invitation.stream,{dataOnly:true,allowresources:false,label:"Bürgeramt Telefon"})}catch(e){this.viewing=false;event(this,"status",e.message||"Verbindung fehlgeschlagen")}}
  async openHostChannel(uuid){try{const channel=await this.sdk.openChannel(uuid,"amt-events",{ordered:true});if(!this.closed)this.attach(uuid,channel);else channel.close()}catch(e){event(this,"status",e.message||"Telefonkanal fehlgeschlagen")}}
- attach(uuid,channel){if(this.channel&&this.channel.readyState==="open")return;this.peer=uuid;this.channel=channel;channel.addEventListener("message",e=>{if(typeof e.data!=="string"||e.data.length>1024)return;let msg;try{msg=JSON.parse(e.data)}catch{return}if(msg?.v!==1||msg.session!==this.invitation.stream||!Number.isSafeInteger(msg.seq)||msg.seq<=this.lastSeq||typeof msg.type!=="string")return;this.lastSeq=msg.seq;event(this,"message",msg)});channel.addEventListener("close",()=>{if(this.channel===channel){this.channel=null;this.peer="";event(this,"status","Telefon getrennt")}});const ready=()=>{if(this.channel===channel&&!this.closed){event(this,"connected",{});event(this,"status","Telefon verbunden")}};if(channel.readyState==="open")ready();else channel.addEventListener("open",ready,{once:true})}
- send(type,data={}){if(this.channel?.readyState!=="open")return false;const msg={v:1,session:this.invitation.stream,seq:++this.seq,type,...data};const encoded=JSON.stringify(msg);if(encoded.length>1024||this.channel.bufferedAmount>65536)return false;this.channel.send(encoded);return true}
- close(){this.closed=true;try{this.channel?.close()}catch{}try{this.sdk?.disconnect?.()}catch{}this.channel=null;this.sdk=null}
+ attach(uuid,channel){
+  if(this.closed||!channel||this.channel?.readyState==="open")return;
+  this.peer=uuid;this.channel=channel;this.lastSeq=0;
+  const current=()=>!this.closed&&this.channel===channel;
+  channel.addEventListener("message",e=>{
+   if(!current()||channel.readyState!=="open"||typeof e.data!=="string"||e.data.length>1024)return;
+   if(new TextEncoder().encode(e.data).byteLength>1024)return;
+   let msg;try{msg=JSON.parse(e.data)}catch{return}
+   if(!validMessage(msg,this.invitation.stream,this.lastSeq,this.role==="host"?"phone":"host"))return;
+   this.lastSeq=msg.seq;event(this,"message",msg);
+  });
+  channel.addEventListener("close",()=>{if(current()){this.channel=null;this.peer="";this.viewing=false;event(this,"status","Telefon getrennt")}});
+  let announced=false;
+  const ready=()=>{if(current()&&!announced&&channel.readyState==="open"){announced=true;event(this,"connected",{});event(this,"status","Telefon verbunden")}};
+  if(channel.readyState==="open")ready();else channel.addEventListener("open",ready,{once:true});
+ }
+ send(type,data={}){
+  if(this.closed||this.channel?.readyState!=="open"||this.channel.bufferedAmount>65536)return false;
+  try{
+   if(!validPayload(type,data,this.role)||!Number.isSafeInteger(this.seq+1))return false;
+   const msg={...data,v:1,session:this.invitation.stream,seq:this.seq+1,type},encoded=JSON.stringify(msg);
+   if(new TextEncoder().encode(encoded).byteLength>1024)return false;
+   this.seq=msg.seq;this.channel.send(encoded);return true;
+  }catch{return false}
+ }
+ close(){this.closed=true;const channel=this.channel,sdk=this.sdk;this.channel=null;this.sdk=null;this.peer="";try{channel?.close()}catch{}try{sdk?.disconnect?.()?.catch?.(()=>{})}catch{}}
 }
 window.BuergeramtLink=AmtLink;
 })();

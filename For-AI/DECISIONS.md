@@ -1,5 +1,26 @@
 # Durable decisions
 
+## 2026-10-06 — Fluent caricature sprites and WebGPT intake
+
+The office cast now uses six placements of four original, grimy painted
+caricatures. The runtime loads 64-frame, 24-fps idle atlases with transparent
+gutters and a continuous frame clock, with smaller mobile atlases. Large
+independent source poses remain candidates for future action animations until
+their limb/face transitions pass visual review. The earlier close-up MakeHuman
+GLB experiment is not a runtime dependency. The office and later place assets
+should share the cast's worn, painterly, exaggerated Berlin satire direction
+while keeping spatial interaction cues readable; each broader area needs
+its own visual and performance review. Secret Tunnel 5 contributors use
+coordinator-assigned, nonoverlapping tasks and guarded repository writes,
+then hand accepted briefs to the pinned ChatDev stages through
+`For-AI/chatdev/WEBGPT-HANDOFF.md`. One local integrator owns final game QA
+and publication; the external ChatDev checkout and reports stay separate from
+game assets.
+
+## 2026-10-06 — Expanded Bürgeramt registration
+
+The Bürgeramt iteration begins outside the building door, moves through registration and two waiting bays, and uses a physical QR sign plus a red digital ceiling display. The phone's government-style Anmeldung form sends a name; the host assigns a private number but does not start the queue until the player activates it at the Anmeldeschalter. A hidden or disconnected phone forfeits an active slot. The office suspends all game music while keeping counter conversation and phone-ring effects. The earlier office-specific MakeHuman derivatives were superseded by the painted caricature cast above. The direct test shortcut skips unrelated city GLB downloads; normal city entry keeps its full asset path. No backend or second deployable tree was added.
+
 ## 2026-10-05 — ChatDev and the first-person Bürgeramt
 
 The pre-integration base is preserved by the annotated `pre-chatdev-2026-10-05` tag and an external snapshot. OpenBMB ChatDev v2.2.0 is pinned in the sibling `ChatDev` checkout; its prompts, scoped file tools, and graph live in `For-AI/chatdev/` and `tools/chatdev.ps1`. Session reports, references, and temporary voice renders remain in ChatDev's external `WareHouse`, separate from the game's single `assets/` tree. ChatDev stages story, gameplay, phone, voice, review, and QA work, while the existing root game and human-reviewed tests remain authority. The local ChatDev Python runtime and API key are prerequisites for actually running the graph, not game dependencies.

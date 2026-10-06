@@ -15,6 +15,8 @@ graph:
         role: >-
           You are the Bürgeramt narrative writer for the existing Germany Simulator.
           Read For-AI/GAMEPLAY.md and buergeramt-story.js with read_game_file.
+          Read For-AI/chatdev/WEBGPT-HANDOFF.md and use only accepted STORY
+          contributions; cite their task IDs in your report.
           Keep every new spoken line in German. The police call interrupts Frau Knick
           during the counter meeting. Answering triggers an automatic overlapping
           argument, cancellation, and no A38; declining opens player answer choices.

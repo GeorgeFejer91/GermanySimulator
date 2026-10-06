@@ -7,9 +7,10 @@ function showRendererFailure(error){
 }
 (async()=>{
   const app=document.getElementById("app");if(!app)return;
+  const amtDirectRoute=new URLSearchParams(location.search).get("geheim")==="buergeramt";
   const canvas=document.createElement("canvas");canvas.id="world3d";Object.assign(canvas.style,{position:"fixed",inset:"0",width:"100%",height:"100%",zIndex:"3",pointerEvents:"none",background:"#77756f"});app.prepend(canvas);
   let T;try{T=await import(THREE_URL)}catch(e){showRendererFailure(e);return}
-  let GLTFLoader=null;try{({GLTFLoader}=await import(GLTF_LOADER_URL))}catch(e){console.warn("GLB models unavailable; procedural 3D stand-ins remain active",e)}
+  let GLTFLoader=null;if(!amtDirectRoute)try{({GLTFLoader}=await import(GLTF_LOADER_URL))}catch(e){console.warn("GLB models unavailable; procedural 3D stand-ins remain active",e)}
   const bridge=await new Promise(resolve=>{let n=0;const f=()=>window.Germany3DBridge?resolve(window.Germany3DBridge):(++n>120?resolve(null):setTimeout(f,50));f()});if(!bridge){showRendererFailure(new Error("3D simulation bridge unavailable"));return}
   const S=.02,H=.038,ox=bridge.WORLD.w*S/2,oz=bridge.WORLD.h*S/2,X=x=>x*S-ox,Z=y=>y*S-oz;
   const renderer=new T.WebGLRenderer({canvas,antialias:true,powerPreference:"high-performance"});renderer.setPixelRatio(Math.min(devicePixelRatio||1,1.5));renderer.outputColorSpace=T.SRGBColorSpace;
@@ -430,7 +431,7 @@ function showRendererFailure(error){
     const slot={building:b,group:g,fallback,label:l,model:null,materials:new Set(),opacity:1};buildingSlots.push(slot);registerMaterials(g,slot);
     const url=buildingModels[b.id]||cityModelUrl("municipal-office");installBuildingModel(slot,b.id==="bundestag"?url+"?v=20260926-city1":url,w,h,d);
   }
-  bridge.buildings.forEach(building);
+  if(!amtDirectRoute)bridge.buildings.forEach(building);
 
   const bannerMaterials=new Map(),landmarkBanners=[];
   function landmarkBanner(kind,parent,w,h,x,y,z,turn=0){
@@ -639,7 +640,7 @@ function showRendererFailure(error){
     const g=new T.Group(),fallback=new T.Group(),p=new T.Mesh(new T.CylinderGeometry(.04,.05,2.5,8),M.metal);p.position.y=1.25;fallback.add(p);box(.45,.05,.05,M.metal,.12,2.4,0,fallback);g.add(fallback);g.position.set(X(r.x+x),0,Z(r.y-sidewalk*.72));world.add(g);installCityModel(g,fallback,"streetlamp",{x:.75,y:3.35,z:.75});
   }));
   (bridge.trees||[]).forEach(({x,y},i)=>{const g=new T.Group(),fallback=new T.Group(),tr=new T.Mesh(new T.CylinderGeometry(.12,.16,1.3,7),mat(0x65594a));tr.position.y=.65;fallback.add(tr);const crown=new T.Mesh(new T.IcosahedronGeometry(.75,1),mat(0x4e5949));crown.position.y=1.7;fallback.add(crown);g.add(fallback);g.position.set(X(x),0,Z(y));g.rotation.y=i*2.39996;world.add(g);installCityModel(g,fallback,"deciduous-tree",{x:1.5,y:3.3,z:1.5})});
-  const billboardLoader=new T.TextureLoader(),desktopBillboards=matchMedia("(min-width: 700px)");
+  const billboardLoader=new T.TextureLoader(),desktopBillboards={matches:!amtDirectRoute&&matchMedia("(min-width: 700px)").matches};
   function faxFallbackTexture(){const c=document.createElement("canvas");c.width=768;c.height=250;const x=c.getContext("2d");x.fillStyle="#ded9cc";x.fillRect(0,0,768,250);x.strokeStyle="#222";x.lineWidth=12;x.strokeRect(6,6,756,238);x.fillStyle="#222";x.textAlign="center";x.font="900 50px Arial";x.fillText("FAX 3000 PRO",384,70);x.font="900 32px Arial";x.fillText("2,75× SCHNELLER",384,124);x.font="700 18px Arial";x.fillText("DIE ZUKUNFT DER DIGITALISIERUNG IST PAPIER",384,195);const tx=new T.CanvasTexture(c);tx.colorSpace=T.SRGBColorSpace;return tx}
   function propLabel(g,text,y=1.25,w=1.7){if(!text)return;const l=label(text,"");l.scale.set(w,.32,1);l.position.set(0,y,.08);g.add(l)}
   const propModels={gartenzwerg:["garden-gnome",.65,1.25,.65],pfandautomat:["pfand-machine",1.05,1.65,.74],kaffee:["coffee-machine",.95,1.5,.72],faxkiosk:["fax-kiosk",1.08,1.75,.75],faxgeraet:["fax-kiosk",1.08,1.5,.75],bench:["bench",1.7,1,.75],litterbin:["litter-bin",.52,.9,.52],bollard:["bollard",.22,.86,.22],bicyclerack:["bicycle-rack",1.7,.8,.65],
@@ -733,45 +734,134 @@ function showRendererFailure(error){
   const amtLight=new T.DirectionalLight(0xffeac7,1.5);amtLight.position.set(-3,5,2);amtScene.add(amtLight);
   const am=(color)=>new T.MeshStandardMaterial({color,roughness:.93});
   const paper=am(0xd8cfb7),floor=am(0x777467),wall=am(0xc0b9a7),trim=am(0x554e44),desk=am(0x615e51),screen=am(0x192f32),seat=am(0x536565),skin=am(0xc7a58b),hair=am(0xaaa9a1),coat=am(0x454b4b),otherCoat=am(0x76756d),amber=am(0xeec66d),eye=am(0x27231e),lamp= new T.MeshBasicMaterial({color:0xf7edcf});
+  function amtPatina(material,base,seed,repeats){
+    const canvas=document.createElement("canvas");canvas.width=canvas.height=256;
+    const ctx=canvas.getContext("2d");ctx.fillStyle=base;ctx.fillRect(0,0,256,256);
+    let state=seed;const random=()=>((state=(Math.imul(state,1664525)+1013904223)>>>0)/4294967296);
+    for(let i=0;i<1700;i++){const x=random()*256,y=random()*256,r=.3+random()*3.2;
+      ctx.fillStyle=random()>.48?"rgba(30,25,18,.075)":"rgba(255,246,214,.065)";
+      ctx.fillRect(x,y,r*2,r)}
+    for(let i=0;i<55;i++){const x=random()*256,y=random()*256;
+      ctx.strokeStyle="rgba(31,25,22,.10)";ctx.lineWidth=.35+random()*.75;
+      ctx.beginPath();ctx.moveTo(x,y);ctx.lineTo(x+(random()-.5)*24,y+(random()-.5)*8);ctx.stroke()}
+    const texture=new T.CanvasTexture(canvas);texture.colorSpace=T.SRGBColorSpace;
+    texture.wrapS=texture.wrapT=T.RepeatWrapping;texture.repeat.set(repeats[0],repeats[1]);
+    texture.anisotropy=Math.min(4,renderer.capabilities.getMaxAnisotropy());
+    material.map=texture;material.color.set(0xffffff);material.needsUpdate=true;
+  }
+  amtPatina(floor,"#77796e",91,[5,6]);amtPatina(wall,"#b7b3a4",53,[3,2]);
+  amtPatina(desk,"#666154",27,[2,1]);amtPatina(seat,"#586b68",77,[1,1]);
   function ab(w,h,d,material,x,y,z){const mesh=new T.Mesh(new T.BoxGeometry(w,h,d),material);mesh.position.set(x,y,z);amtScene.add(mesh);return mesh}
   function ac(rTop,rBottom,h,material,x,y,z){const mesh=new T.Mesh(new T.CylinderGeometry(rTop,rBottom,h,12),material);mesh.position.set(x,y,z);amtScene.add(mesh);return mesh}
   function amtLabel(words,width=512,height=160,background="#263539",foreground="#e9dfbf"){
     const c=document.createElement("canvas");c.width=width;c.height=height;const ctx=c.getContext("2d");ctx.fillStyle=background;ctx.fillRect(0,0,width,height);ctx.fillStyle=foreground;ctx.font=`bold ${Math.floor(height*.38)}px Arial`;ctx.textAlign="center";ctx.textBaseline="middle";ctx.fillText(words,width/2,height/2,width-22);const texture=new T.CanvasTexture(c);texture.colorSpace=T.SRGBColorSpace;return{canvas:c,ctx,texture};
   }
   function amtPlate(words,x,y,z,w,h){const label=amtLabel(words);const mesh=new T.Mesh(new T.PlaneGeometry(w,h),new T.MeshBasicMaterial({map:label.texture}));mesh.position.set(x,y,z);amtScene.add(mesh);return mesh}
-  // Beige room, ticket kiosk, three occupied desks, and waiting-room visitors.
-  ab(8,.12,10,floor,0,-.06,-1.5);ab(8,4,.16,wall,0,2,-6.35);ab(.16,4,10,wall,-4,2,-1.5);ab(.16,4,10,wall,4,2,-1.5);ab(8,.12,10,paper,0,4.05,-1.5);
-  for(const z of [-4,-1.2,1.7]){ab(2.3,.025,.48,lamp,0,3.97,z);ab(2.5,.04,.6,trim,0,4,z)}
-  for(const x of [-3.88,3.88])ab(.035,.1,10,trim,x,2,-1.5);
-  for(let z=-5.7;z<3.1;z+=.7)ab(8,.015,.018,trim,0,.01,z);
-  ab(.7,1.35,.6,screen,-2.35,.68,-2.45);ab(.56,.35,.02,amber,-2.35,1.05,-2.12);amtPlate("NUMMER",-2.35,1.05,-2.108,.44,.17);
-  ab(5.9,1,.75,desk,0, .48,-5.35);ab(5.9,.09,.9,trim,0,1.04,-5.26);
-  for(const [i,x] of [-2.1,0,2.1].entries()){
-    ab(.08,2,.65,screen,x+.95,1.72,-5.73);
-    amtPlate(`SCHALTER ${i+1}`,x,2.1,-6.25,1.5,.38);
-    ab(.55,.38,.07,screen,x,1.24,-5.73);
+  // Wide, worn waiting hall. Registration is at the left wall; Schalter 3 is to the right.
+  const grout=am(0x5e5b53),tile=am(0x898b80),steel=am(0x777e78),paperGrey=am(0xb6b3a5),red=am(0x8b3431),rubber=am(0x343937);
+  ab(15.4,.12,19.2,floor,0,-.06,-.85);ab(15.4,4,.16,wall,0,2,-10.45);
+  for(const x of [-7.7,7.7])ab(.16,4,19.2,wall,x,2,-.85);
+  ab(15.4,.12,19.2,paper,0,4.05,-.85);
+  for(let z=-10;z<8.7;z+=.82)ab(15.2,.012,.018,grout,0,.005,z);
+  for(let x=-7.4;x<7.5;x+=.82)ab(.018,.012,19,grout,x,.005,-.85);
+  for(const z of [-7.4,-3.8,0,3.8,7.4]){ab(2.8,.025,.54,lamp,0,3.97,z);ab(2.95,.04,.62,trim,0,4,z)}
+  for(const z of [-7.3,-2.9,2,6.7]){ab(.035,.05,15.1,trim,0,3.84,z);ab(15.1,.05,.035,trim,0,3.84,z)}
+  for(const x of [-7.57,7.57]){ab(.035,.11,19,trim,x,.26,-.85);ab(.035,.11,19,trim,x,2.15,-.85)}
+  // The actual doorway matches the simulation threshold at z=5.55.
+  for(const x of [-4.525,4.525])ab(6.35,4,.16,wall,x,2,5.55);
+  ab(2.7,.82,.16,wall,0,3.59,5.55);
+  for(const x of [-1.35,1.35])ab(.08,3.2,.18,trim,x,1.6,5.55);
+  amtPlate("EINGANG / AUSGANG",0,3.35,5.66,2.7,.35);
+  ab(1.5,1.57,.58,screen,-4.65,.78,.8);ab(1.14,.72,.025,amber,-4.65,1.18,1.11);
+  amtPlate("ANMELDUNG",-4.65,1.68,1.13,1.56,.34);
+  ab(14.5,.94,1.12,desk,0, .49,-9.1);ab(14.7,.1,1.21,trim,0,1,-9.03);
+  for(const [i,x] of [-5.8,-1.6,3.9,6.2].entries()){
+    ab(.055,1.65,.85,steel,x+1.15,1.83,-9.74);
+    amtPlate(`SCHALTER ${i+1}`,x,2.65,-10.31,1.82,.39);
+    ab(.6,.37,.09,screen,x-.38,1.24,-9.48);
+    ab(.5,.035,.35,paperGrey,x+.36,1.08,-8.78);
+    ab(.08,.055,.11,red,x+.39,1.14,-8.79);
+    for(let f=0;f<3;f++)ab(.36,.01,.24,paper,x-.35+f*.16,1.055+f*.005,-8.72-f*.1);
   }
-  // Schalter 3 is offset to the player's right and reads as idle.
-  function amtPerson(x,z,material,older=false,seated=false){
-    const base=seated?.32:0;
-    ac(.33,.39,.83,material,x,.83+base,z);ac(.245,.23,.38,skin,x,1.45+base,z);
-    const head=new T.Mesh(new T.SphereGeometry(.235,16,12),skin);head.position.set(x,1.67+base,z);amtScene.add(head);
-    const cap=new T.Mesh(new T.SphereGeometry(.245,16,12,0,Math.PI*2,0,Math.PI*.45),older?hair:coat);cap.position.set(x,1.72+base,z);amtScene.add(cap);
-    for(const offset of [-.085,.085]){const pupil=new T.Mesh(new T.SphereGeometry(.015,8,6),eye);pupil.position.set(x+offset,1.68+base,z+.222);amtScene.add(pupil)}
-    ab(.11,.012,.012,eye,x,1.53+base,z+.226);
-    ac(.095,.095,.55,material,x-.42,.92+base,z);ac(.095,.095,.55,material,x+.42,.92+base,z);
-    if(older){ab(.54,.035,.06,trim,x,1.68+base,z+.218);ac(.04,.04,.32,hair,x-.26,1.53+base,z);ac(.04,.04,.32,hair,x+.26,1.53+base,z)}
-    else{ac(.12,.1,.53,material,x-.17,.25,z);ac(.12,.1,.53,material,x+.17,.25,z)}
+  for(const [x,z] of [[-5.9,1.7],[-2.1,1.7],[1.7,1.7],[5.5,1.7],[-5.9,-1.1],[-2.1,-1.1],[1.7,-1.1],[5.5,-1.1]]){
+    ab(.74,.07,.68,seat,x,.52,z);ab(.7,.76,.07,seat,x,.92,z-.31);
+    for(const leg of [-.28,.28])ab(.045,.45,.045,steel,x+leg,.25,z);
+    ab(.9,.05,.045,steel,x,.6,z+.32);
   }
-  amtPerson(-2.1,-5.87,otherCoat,false,true);amtPerson(0,-5.87,coat,false,true);amtPerson(2.1,-5.87,coat,true,true);
-  for(const [x,z] of [[-2.7,.4],[2.7,.4],[-2.7,-1.8],[2.7,-1.8]]){
-    ab(.7,.09,.63,seat,x,.48,z);ab(.66,.72,.08,seat,x,.85,z+.31);amtPerson(x,z,otherCoat,false,true);
+  for(const [words,x,z] of [["IHR BESUCH",-6.3,-10.35],["MELDEWESEN",-4.4,-10.35],["HAUSORDNUNG",5.8,-10.35],["FORMULARE",6.4,-10.35]]){
+    amtPlate(words,x,2.15,z,.95,.5);
+  }
+  for(const x of [-6.8,6.8]){ab(.48,1.3,.4,paperGrey,x,.67,-4.65);amtPlate("FORMULAR",x,1.45,-4.43,.45,.22)}
+  for(const [x,z] of [[-4.2,3.6],[4.3,3.6]]){ac(.12,.12,.62,steel,x,.31,z);ab(.86,.045,.045,red,x,.63,z)}
+  // The QR is painted onto the sign after the phone invitation is generated.
+  const qrCanvas=document.createElement("canvas");qrCanvas.width=256;qrCanvas.height=256;
+  const qrCtx=qrCanvas.getContext("2d");qrCtx.fillStyle="#f6f3e9";qrCtx.fillRect(0,0,256,256);
+  const qrTexture=new T.CanvasTexture(qrCanvas);qrTexture.colorSpace=T.SRGBColorSpace;
+  ab(2.8,2.65,.12,trim,0,1.54,-4.22);
+  ab(2.63,2.48,.025,paper,0,1.54,-4.145);
+  amtPlate("BITTE SCANNEN · NUMMER ERHALTEN",0,2.46,-4.11,2.48,.4);
+  const qrMesh=new T.Mesh(new T.PlaneGeometry(1.76,1.76),new T.MeshBasicMaterial({map:qrTexture}));
+  qrMesh.position.set(0,1.39,-4.103);amtScene.add(qrMesh);
+  let amtQrSource="";
+  function setAmtQr(svg){if(!svg||svg===amtQrSource)return;amtQrSource=svg;const picture=new Image();picture.onload=()=>{qrCtx.fillStyle="#f6f3e9";qrCtx.fillRect(0,0,256,256);qrCtx.drawImage(picture,0,0,256,256);qrTexture.needsUpdate=true};picture.src="data:image/svg+xml;charset=utf-8,"+encodeURIComponent(svg)}
+  const amtCharacters=[],amtTextureLoader=new T.TextureLoader(),amtMobile=matchMedia("(max-width: 700px)").matches;
+  function amtCharacter(name,x,z,phase=0,height=1.9){
+    const url=`./assets/buergeramt/characters/${name}${amtMobile?"-mobile":""}.webp?v=20261006-amt64`;
+    const geometry=new T.PlaneGeometry(height*192/416,height),uv=geometry.attributes.uv,base=Float32Array.from(uv.array);
+    const mesh=new T.Mesh(geometry,new T.MeshBasicMaterial({transparent:true,alphaTest:.035,depthWrite:false,side:T.DoubleSide}));
+    mesh.position.set(x,height/2,z);amtScene.add(mesh);
+    amtCharacters.push({name,url,mesh,uv,base,phase,frame:-1});
+  }
+  amtCharacter("clerk",3.9,-9.77,.25,1.82);
+  amtCharacter("clerk",-5.8,-9.77,1.4,1.76);
+  amtCharacter("clerk",-1.6,-9.77,2.2,1.76);
+  amtCharacter("renter",-5.9,1.39,0,1.83);
+  amtCharacter("parent",5.5,1.39,1.1,1.9);
+  amtCharacter("pensioner",1.7,-1.39,2.0,1.82);
+  const amtPaintedProps=[];
+  function amtPaintedProp(column,width,height,x,y,z,turn=0){
+    const geometry=new T.PlaneGeometry(width,height),uv=geometry.attributes.uv;
+    for(let i=0;i<uv.count;i++)uv.setX(i,(column*384+4+uv.getX(i)*376)/1536);
+    uv.needsUpdate=true;
+    const mesh=new T.Mesh(geometry,new T.MeshBasicMaterial({transparent:true,depthWrite:false,side:T.DoubleSide}));
+    mesh.position.set(x,y,z);mesh.rotation.y=turn;mesh.visible=false;
+    amtScene.add(mesh);amtPaintedProps.push(mesh);
+  }
+  amtPaintedProp(0,.95,2.5,-6.8,1.28,-6.45);
+  amtPaintedProp(1,1.05,2.75,6.8,1.4,-5.55);
+  amtPaintedProp(2,.65,1.45,-6.65,2.58,-10.27);
+  amtPaintedProp(3,1.15,2.85,7.55,1.55,.2,-Math.PI/2);
+  let amtImagesRequested=false;
+  function loadAmtImages(){
+    if(amtImagesRequested)return;amtImagesRequested=true;
+    const textures=new Map();
+    for(const actor of amtCharacters){
+      let texture=textures.get(actor.url);
+      if(!texture){texture=amtTextureLoader.load(actor.url);texture.colorSpace=T.SRGBColorSpace;
+        texture.generateMipmaps=false;texture.minFilter=texture.magFilter=T.LinearFilter;
+        textures.set(actor.url,texture)}
+      actor.mesh.material.map=texture;actor.mesh.material.needsUpdate=true;
+    }
+    const texture=amtTextureLoader.load("./assets/buergeramt/office-props.webp?v=20261006-amt-props",
+      ()=>{for(const mesh of amtPaintedProps)mesh.visible=true});
+    texture.colorSpace=T.SRGBColorSpace;texture.generateMipmaps=false;
+    texture.minFilter=texture.magFilter=T.LinearFilter;
+    for(const mesh of amtPaintedProps){mesh.material.map=texture;mesh.material.needsUpdate=true}
+  }
+  function animateAmtCharacters(now){
+    for(const actor of amtCharacters){
+      const frame=Math.floor(now/1000*24+actor.phase*24)%64;
+      if(frame===actor.frame)continue;actor.frame=frame;
+      const u0=frame%8/8,v0=1-(Math.floor(frame/8)+1)/8;
+      for(let i=0;i<actor.uv.count;i++)actor.uv.setXY(i,u0+actor.base[i*2]/8,v0+actor.base[i*2+1]/8);
+      actor.uv.needsUpdate=true;
+    }
   }
   const callCanvas=document.createElement("canvas");callCanvas.width=512;callCanvas.height=256;const callCtx=callCanvas.getContext("2d");const callTexture=new T.CanvasTexture(callCanvas);callTexture.colorSpace=T.SRGBColorSpace;
-  ab(2.6,.9,.11,screen,0,2.92,-6.22);
-  const callMesh=new T.Mesh(new T.PlaneGeometry(2.3,.62),new T.MeshBasicMaterial({map:callTexture}));callMesh.position.set(0,2.94,-6.151);amtScene.add(callMesh);
+  ab(2.6,.9,.11,screen,0,3.33,-4.22);
+  const callMesh=new T.Mesh(new T.PlaneGeometry(2.3,.62),new T.MeshBasicMaterial({map:callTexture}));callMesh.position.set(0,3.35,-4.151);amtScene.add(callMesh);
   let lastCall="";
-  function renderAmt(){const level=window.BuergeramtLevel;if(!level||!level.active&&!document.body.classList.contains("amt-direct-mode"))return false;const view=level.view;amtCamera.position.set(view.x,1.68,view.z);amtCamera.rotation.set(0,-view.yaw,0);const call=level.queueDisplay;if(call!==lastCall){lastCall=call;callCtx.fillStyle="#152527";callCtx.fillRect(0,0,512,256);callCtx.textAlign="center";callCtx.textBaseline="middle";callCtx.fillStyle="#eaa65c";callCtx.font="bold 112px monospace";callCtx.fillText(call,256,135,460);callTexture.needsUpdate=true}renderer.render(amtScene,amtCamera);return true}
+  function renderAmt(){const level=window.BuergeramtLevel;if(!level||!level.active&&!document.body.classList.contains("amt-direct-mode"))return false;loadAmtImages();const view=level.view;amtCamera.position.set(view.x,1.68,view.z);amtCamera.rotation.set(0,-view.yaw,0);if(level.qrSvg)setAmtQr(level.qrSvg);animateAmtCharacters(performance.now());const call=level.queueDisplay;if(call!==lastCall){lastCall=call;callCtx.fillStyle="#152527";callCtx.fillRect(0,0,512,256);callCtx.textAlign="center";callCtx.textBaseline="middle";callCtx.fillStyle="#c94839";callCtx.font="bold 112px monospace";callCtx.fillText(call,256,135,460);callTexture.needsUpdate=true}renderer.render(amtScene,amtCamera);return true}
   function resize(){renderer.setSize(innerWidth,innerHeight,false);camera.aspect=innerWidth/innerHeight;camera.updateProjectionMatrix();amtCamera.aspect=innerWidth/innerHeight;amtCamera.updateProjectionMatrix()}resize();addEventListener("resize",resize,{passive:true});
   const spawnProbe=new T.Vector3();
   function isWorldPointVisible(x,y,padding=0,kind="officer"){const height=kind==="helicopter"?6.8:kind==="car"?.7:1;spawnProbe.set(X(x),height,Z(y)).project(camera);const padX=padding/Math.max(1,innerWidth)*2,padY=padding/Math.max(1,innerHeight)*2;return spawnProbe.z>=-1&&spawnProbe.z<=1&&spawnProbe.x>=-1-padX&&spawnProbe.x<=1+padX&&spawnProbe.y>=-1-padY&&spawnProbe.y<=1+padY}
@@ -805,6 +895,6 @@ function showRendererFailure(error){
     parkCameraFrame+=(parkTarget-parkCameraFrame)*(1-Math.exp(-6*Math.min(.05,Math.max(0,(now-previousCameraTime)/1000))));previousCameraTime=now;
     if(parkCameraFrame>.001){const narrow=Math.max(0,Math.min(1,.95/camera.aspect-1)),cx=X(park.x+park.w/2),cz=Z(park.y+park.h/2),focus=parkCameraFrame*(1-.65*narrow);camera.position.set(px+(cx-px)*focus,11.5+(5+2*narrow)*parkCameraFrame,pz+14+2*narrow*parkCameraFrame);camera.lookAt(px+(cx-px)*focus,1+parkCameraFrame,pz-2.7+(cz-(pz-2.7))*parkCameraFrame)}
     updateBuildingOcclusion();updateWirtschaftswunder(now);renderer.render(scene,camera);
-  },inspectAssets};
+  },inspectAssets,setAmtQr,get amtCharacters(){return amtCharacters.map(actor=>({name:actor.name,frame:actor.frame,loaded:!!actor.mesh.material.map.image}))}};
   app.classList.add("three-ready");
 })().catch(showRendererFailure);

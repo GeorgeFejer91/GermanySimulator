@@ -32,6 +32,12 @@ Installed source snapshots (2026-09-19):
 - `$game-engine`: `github/awesome-copilot` at `4f4796f0bf30e105700f97ed8408c12b6aa95e06`.
 - `$threejs-gameplay-systems`: `majidmanzarpour/threejs-game-skills` at `e5f301d548bb18c530afbece78cd25082f4cda9c`.
 
+Incoming WebGPT Secret Tunnel 5 contributors use
+[`chatdev/WEBGPT-COORDINATION.md`](./chatdev/WEBGPT-COORDINATION.md) and the
+[coordinator-owned handoff](./chatdev/WEBGPT-HANDOFF.md). Assign distinct path
+ownership before parallel edits and accept only verified material into a
+ChatDev stage.
+
 ## Other project skills
 
 | Work | Skill | Requirement |
@@ -39,7 +45,7 @@ Installed source snapshots (2026-09-19):
 | Any code change, plus backend efficiency, infrastructure, hosting architecture, asset pipelines, and economic asset usage | `$ponytail` | Required. Apply its smallest-working-change ladder and keep the static GitHub Pages deployment simple. |
 | New character voice profiles, reference recordings, synthesized speech clips, or voice-asset validation | `$voice-cloning` | Use with `VOICE-SYNTH-PROTOCOL.md` and the local Voice Cloner `AI-GUIDE.md`; keep game voice IDs, profile bindings, source transcripts, subtitles, and trigger ownership in the existing audio-text catalog. |
 | New raster billboards, textures, period artwork, or bitmap variants | `$imagegen` | Use for generated raster art; keep final project-bound files inside this repository. Do not use it for simple SVG or code-native geometry. |
-| Moving bitmap characters, sprite atlases, gait keys, or transition frames | `$imagegen`, `$game-engine`, and `$game-playtest` | Follow `SPRITE-GENERATION-PROTOCOL.md`: generated frames are proposals, the registered key sheet is source authority, the derived atlas is runtime authority, and desktop/mobile rapid-cycle QA is mandatory. Its Pets-derived walk review is included there; the Work Pets creation skill and pet-specific atlas tooling are not dependencies of this game. |
+| Moving bitmap characters, sprite atlases, gait keys, or transition frames | `$animate-2d-characters`, `$imagegen`, `$game-engine`, and `$game-playtest` | Follow `SPRITE-GENERATION-PROTOCOL.md`: generated frames are proposals, the registered key sheet is source authority, the derived atlas is runtime authority, and desktop/mobile rapid-cycle QA is mandatory. Count distinct visual frames and verify transparent cell gutters after encoding; a fast renderer cannot cure held-pose movement. Its Pets-derived walk review is included there; the Work Pets creation skill and pet-specific atlas tooling are not dependencies of this game. |
 | HTML, CSS, HUD, menus, responsive behavior, or other frontend UI work | `$uncodixfy-pretext` | Preserve the existing game-specific identity and avoid generic generated UI patterns. |
 | Architecture, authority boundaries, durable project memory, manifests, and handoff surfaces | `$system-engineering` | Use for lasting structural decisions and update `DECISIONS.md`. |
 | Current public facts, external references, historical research, or documentation lookup | `$multi-source-web-search` | Prefer primary sources, open sources before citing, and run a blind-spot pass for nontrivial research. |

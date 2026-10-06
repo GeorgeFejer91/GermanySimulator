@@ -17,9 +17,18 @@ Mission order:
 
 ### First Bürgeramt visit
 
-Entering the first Bürgeramt opens a hidden first-person waiting room in the canonical Three.js game. WASD or touch controls move the player through a life-size office with several visitors and three counters. The ticket machine gives the player a private `B-###` number on a QR-linked phone companion. The wall board and HUD show exactly one active call, with an intentionally illogical mixture of letters and numbers and no estimated wait. Schalter 3 looks idle. Approaching Frau Knick before the player's number earns a reprimand and returns the player to waiting. When the player's number appears, the player has a short window to reach her; being late forfeits the appointment without advancing mission 1.
+Entering the first Bürgeramt opens a hidden first-person episode outside the building's door. WASD or touch controls lead through the door into a larger office with registration, two waiting bays, several visitors, and four service counters. A physical QR sign opens the phone's Anmeldung form. The player enters a name on the phone, receives a private `B-###` number there, then activates the registration at the separate Anmeldeschalter. The queue cannot call the player before activation. The phone page must remain visible and connected until the call; hiding it or losing the connection forfeits the slot. A red digital ceiling display and HUD show exactly one active call, with an intentionally illogical mixture of letters and numbers and no estimated wait. Schalter 3 looks idle. Approaching Frau Knick before the player's number earns a reprimand and returns the player to waiting. When the player's number appears, the player has a short window to reach her; being late forfeits the appointment without advancing mission 1. This episode has no background music; occasional counter conversations and telephone rings make the waiting room busy.
 
 The unlisted `?geheim=buergeramt` URL opens directly at the office entrance for repeated level testing. Its fixed restart link reloads only this episode; the normal city entry remains the canonical story route. The shortcut is a convenience link, not authentication or a separate game deployment.
+
+The QR sign sits directly beneath the red ceiling number display and asks
+visitors to scan it to receive a number. That phone session persists through
+name entry, Anmeldeschalter activation, illogical calls, and the later
+counter interruption. The four counters, entrance threshold, QR stand,
+seats, registration kiosk, and desk have matching visible positions and
+movement boundaries. The office's worn, painterly caricature style should
+make the administrative fever dream vivid while preserving clear paths and
+readable interaction cues.
 
 At the correct counter, the linked phone receives an incoming `POLIZEI` call about walking on the grass. Declining allows German dialogue choices and then the existing A38 form. Answering starts an automatic, choice-free argument between the officer on the phone and Frau Knick at the counter, with their lines and speech interleaved; she cancels the appointment and the player returns to the street without A38. The mission chain is otherwise unchanged. Every line, choice, and phone event in this office episode is German, an explicit local exception to Berlin's Denglisch rule. Spoken text must exactly match the currently visible line on its own screen.
 
