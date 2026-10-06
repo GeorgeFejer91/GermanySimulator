@@ -22,12 +22,17 @@ graph:
           Berlin-style service page, which sends a scan event on connection and
           displays the newly assigned ticket without waiting for name entry.
           Optional name entry follows the ticket; another scan creates a fresh
-          ticket. Keep the page visible and connected; signal forfeiture on
-          backgrounding. Ask the user to raise volume and disable Do Not Disturb,
-          since browser APIs cannot detect either setting. A first-screen tap
-          unlocks Web Audio and tests vibration where supported. The phone shows
+          ticket, while retries of one scan ID return its original ticket.
+          Keep the page visible and connected; signal forfeiture on
+          backgrounding. Submitting the ordinary name form silently unlocks Web
+          Audio and requests fullscreen and wake lock where supported. Do not
+          reveal the audio preparation through setup copy, a test tone, or early
+          vibration. Browser APIs cannot detect volume or Do Not Disturb settings.
+          The phone shows
           an animated POLIZEI call, full-screen where supported, with ringing,
           repeated vibration, and a visible line matching every spoken line.
+          Return a bounded police-done cue after each exact visible utterance so
+          Frau Knick can take her turn; retain the opening and one later overlap.
           Validate message
           types, session, sequence, and payload length. Never promise an OS lock.
           Edit only allowlisted Bürgeramt files and report any game.js integration.

@@ -6,11 +6,13 @@ function event(target,type,detail){target.dispatchEvent(new CustomEvent(type,{de
 function sourceOf(value){return typeof value==="string"?value:value?.streamID||value?.streamId||value?.id||""}
 // The sender role owns both the message type and its bounded payload.
 function validPayload(type,data,sender){
- const shapes=sender==="phone"?{scan:[],register:["name"],"phone-hidden":[],answer:["id"],decline:["id"]}:
+ const shapes=sender==="phone"?{scan:["id"],register:["name"],"phone-hidden":[],answer:["id"],decline:["id"],"police-done":["index"]}:
   sender==="host"?{ticket:["number"],forfeit:[],call:["id","line"],"police-line":["index","line"],done:[]}:{};
  if(!Object.hasOwn(shapes,type)||!data||typeof data!=="object"||Array.isArray(data))return false;
  const fields=shapes[type],keys=Object.keys(data);
  if(keys.length!==fields.length||keys.some(key=>!fields.includes(key)))return false;
+ if(type==="scan")return typeof data.id==="string"&&/^[a-f0-9]{24}$/.test(data.id);
+ if(type==="police-done")return Number.isInteger(data.index)&&data.index>=-1&&data.index<3;
  if(type==="register")return typeof data.name==="string"&&data.name.trim().length>=2&&data.name.length<=80&&!/[\u0000-\u001f\u007f]/.test(data.name);
  if(type==="ticket")return typeof data.number==="string"&&/^B-\d{3}$/.test(data.number);
  if(type==="answer"||type==="decline")return data.id==="grass";

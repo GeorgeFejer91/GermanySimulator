@@ -36,12 +36,19 @@ the game host assigns a new ticket and owns that session's live waiting list.
 Background codes cycle throughout the visit, and a scanned ticket becomes
 callable after several background calls without a separate desk activation.
 Each new scan replaces the player's previous ticket and resets its wait. The
-optional phone name field is no longer a ticket gate. This is per-game-session
+phone retries an unanswered scan with the same bounded ID so delayed data
+channels can recover without allocating another ticket. The optional phone
+name field is no longer a ticket gate. This is per-game-session
 queue authority, not a shared cloud waiting list or a new server. The phone's
-first screen offers an audio-unlock tap, test tone, vibration request, and
-fullscreen request; volume and Do Not Disturb remain manual device settings.
+name submission silently unlocks Web Audio and requests fullscreen and wake
+lock without a separate setup button, test tone, or early vibration. The
+incoming call alone starts the ringtone and vibration. Volume and Do Not
+Disturb remain manual device settings that the browser cannot inspect.
 The page follows Berlin service-page layout cues while keeping fictional Amt
 branding and the existing police-call overlay.
+Answered calls advance through phone speech-completion cues and desktop speech
+completion, with a short opening overlap and one later interruption. Bounded
+timeouts allow the automatic cancellation to finish if an audio cue is lost.
 
 ## 2026-10-06 — Previous expanded Bürgeramt registration
 

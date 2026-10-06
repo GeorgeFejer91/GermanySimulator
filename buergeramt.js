@@ -12,7 +12,7 @@ let attempt=0,cue=0,callOutcome="";
 function defer(callback,delay){const owner=attempt;const id=setTimeout(()=>{pendingTimers.delete(id);if(active&&owner===attempt)callback()},delay);pendingTimers.add(id);return id}
 function clearTimer(id){clearTimeout(id);pendingTimers.delete(id)}
 function cancelSpeech(){cue++;try{window.speechSynthesis?.cancel()}catch{}}
-let active=false,stage="closed",link=null,number="",registeredName="",activated=false,qrSvg="",queueDisplay="—",queueIndex=0,queueClock=0,ticketWaitCalls=0,ticketSerial=100,deadline=0,clerkIndex=0,callPending=false,callTriggered=false,options=null,ambientClock=0,ambientIndex=0,ambientAudio=null;
+let active=false,stage="closed",link=null,number="",registeredName="",activated=false,qrSvg="",queueDisplay="—",queueIndex=0,queueClock=0,ticketWaitCalls=0,ticketSerial=100,lastScanId="",deadline=0,clerkIndex=0,callPending=false,callTriggered=false,policeDoneHandler=null,options=null,ambientClock=0,ambientIndex=0,ambientAudio=null;
 const ambientLines=[["WARTERAUM","Mein Termin war gestern. Ich war heute pünktlich."],["SCHALTER 1","Für die Kopie des Originals benötigen Sie das Original der Kopie."],["TELEFON AM SCHALTER 2","Nein, die Warteschleife ist persönlich zu nehmen."],["WARTERAUM","Mein Buchstabe wurde aufgerufen, aber die Zahl gehört jemand anderem."],["SCHALTER 4","Einen Moment. Ich verbinde Sie mit Ihrem Moment."]];
 function walking(){return ["outside","walk-sign","waiting","walk-counter"].includes(stage)}
 function setStage(next,preserveMovement=false){if(next!==stage&&!preserveMovement)held.clear();stage=next;const moving=walking();if(moving){cancelSpeech();ambient.textContent="";}root.classList.toggle("walking",moving);walkHud.hidden=!moving;root.classList.toggle("first-person",!!window.Germany3D?.ready);if(moving){objective.textContent=next==="outside"?"BÜRGERAMT · EINGANG":next==="walk-sign"?"QR-SCHILD SCANNEN":next==="waiting"?"AUFRUF ABWARTEN · SCHALTER 3":"IHRE NUMMER · SCHALTER 3 · BEEILEN!";update(0)}}
@@ -96,10 +96,14 @@ function beginLink(){
  currentLink.addEventListener("status",e=>{if(!current()||terminal())return;if(activated&&/getrennt|unterbrochen/i.test(e.detail))forfeit("TELEFON GETRENNT");else if(!activated)setStatus(e.detail)});
  currentLink.addEventListener("connected",()=>{if(!current()||terminal())return;setStatus("TELEFON VERBUNDEN · SCAN WIRD ERWARTET")});
  currentLink.addEventListener("message",e=>{
-  if(!current()||terminal())return;const m=e.detail;
+  if(!current())return;const m=e.detail;
+  if(m.type==="police-done"){if(stage==="cancelled")policeDoneHandler?.(m.index);return}
+  if(terminal())return;
   if(m.type==="scan"){
-   const next="B-"+String(ticketSerial);ticketSerial=ticketSerial===899?100:ticketSerial+1;
+   if(m.id===lastScanId){if(number)currentLink.send("ticket",{number});return}
+   const next="B-"+String(ticketSerial);
    if(!currentLink.send("ticket",{number:next}))return;
+   ticketSerial=ticketSerial===899?100:ticketSerial+1;lastScanId=m.id;
    number=next;registeredName="";activated=true;ticketWaitCalls=5;deadline=0;callPending=false;callTriggered=false;callOutcome="";clerkIndex=0;
    if(stage!=="outside")setStage("waiting");
    setStatus("WARTENUMMER "+number+" · AUFRUF ABWARTEN");
@@ -116,23 +120,34 @@ function beginLink(){
 function showClerk(){if(!active||!activated||callPending||["cancelled","expired","closed"].includes(stage))return;view.x=4;view.z=-8.15;view.yaw=0;setStage("counter");const node=story.clerk[clerkIndex];if(clerkIndex===0&&!callTriggered){callTriggered=true;callPending=true;content(node.speaker,"Nummer "+number+"? Beeilen Sie sich! Ich bin sehr beschäftigt. Was? Ihr Telefon klingelt während meiner Vorsprache.");if(!link.send("call",{id:story.call.id,line:story.call.line})){forfeit("TELEFON GETRENNT");return}if(!activated)return;setStatus("POLIZEI RUFT AUF DEM TELEFON AN");return}if(callOutcome!=="decline"||!node)return;const choices=node.choices.map(choice=>({label:choice.label,run:()=>{setStage("reply");content(node.speaker,choice.reply,[{label:clerkIndex===story.clerk.length-1?"FORMULAR A38 ENTGEGENNEHMEN":"WEITER",run:()=>{clerkIndex++;if(clerkIndex<story.clerk.length)showClerk();else finish()}}])}}));content(node.speaker,node.line,choices)}
 function showOutburst(){
  const upset=story.outburst;exit.hidden=true;
- defer(()=>{if(stage==="cancelled")link?.send("police-line",{index:0,line:story.police[0]})},2800);
- function step(index){
-  if(!active||stage!=="cancelled")return;
-  if(index===upset.lines.length){const callback=options.onCancel;close(false);callback();return}
-  if(index===2||index===3)link?.send("police-line",{index:index-1,line:story.police[index-1]});
-  content(upset.speaker,upset.lines[index],[],()=>defer(()=>step(index+1),250));
+ const heard=new Set();let waiting=null,phoneTimeout=null,deskFirst=false,phoneFirst=false,started=false;
+ function releasePhone(index){
+  heard.add(index);if(waiting?.index!==index)return;
+  const next=waiting.next;waiting=null;if(phoneTimeout!==null)clearTimer(phoneTimeout);phoneTimeout=null;defer(next,320);
  }
- step(0);
+ policeDoneHandler=releasePhone;
+ function waitPhone(index,next){waiting={index,next};if(heard.has(index)){releasePhone(index);return}phoneTimeout=defer(()=>releasePhone(index),14000)}
+ function desk(index,next){content(upset.speaker,upset.lines[index],[],()=>defer(next,320))}
+ function police(index,next){waitPhone(index,next);if(!link?.send("police-line",{index,line:story.police[index]}))releasePhone(index)}
+ function finishArgument(){const callback=options.onCancel;close(false);callback()}
+ function overlap(){
+  let deskDone=false,phoneDone=false,continued=false;
+  const continueWhenBoth=()=>{if(deskDone&&phoneDone&&!continued){continued=true;defer(()=>desk(3,()=>desk(4,finishArgument)),320)}};
+  desk(2,()=>{deskDone=true;continueWhenBoth()});
+  defer(()=>police(2,()=>{phoneDone=true;continueWhenBoth()}),900);
+ }
+ function beginExchange(){if(!deskFirst||!phoneFirst||started)return;started=true;defer(()=>police(0,()=>desk(1,()=>police(1,overlap))),320)}
+ waitPhone(-1,()=>{phoneFirst=true;beginExchange()});
+ desk(0,()=>{deskFirst=true;beginExchange()});
 }
 function finish(){if(!active||!activated||callPending||callOutcome!=="decline"||clerkIndex!==story.clerk.length)return;const callback=options.onForm;close(false);callback()}
 function close(notify=true){
- if(!active)return;const config=options;active=false;attempt++;callPending=false;activated=false;callOutcome="";
+ if(!active)return;const config=options;active=false;attempt++;callPending=false;activated=false;callOutcome="";policeDoneHandler=null;
  for(const id of pendingTimers)clearTimeout(id);pendingTimers.clear();cancelSpeech();setStage("closed");
  try{ambientAudio?.close()?.catch(()=>{})}catch{}ambientAudio=null;held.clear();root.hidden=true;walkHud.hidden=true;ambient.textContent="";
  document.body.classList.remove("amt-inside");const previous=link;link=null;previous?.send("done");previous?.close();config.music?.(false);if(notify)config.onClose();
 }
-function open(config){if(active)return;attempt++;callOutcome="";options=config;active=true;clerkIndex=0;callPending=false;callTriggered=false;registeredName="";number="";activated=false;queueClock=0;queueIndex=1;ticketWaitCalls=0;deadline=0;ambientClock=0;displayNumber("B-041");view.x=0;view.z=8;view.yaw=0;held.clear();exit.hidden=false;root.hidden=false;document.body.classList.add("amt-inside");options.music?.(true);beginLink();setStage("outside");setStatus("EINGANG · BÜRGERAMT")}
+function open(config){if(active)return;attempt++;callOutcome="";options=config;active=true;clerkIndex=0;callPending=false;callTriggered=false;registeredName="";number="";activated=false;lastScanId="";queueClock=0;queueIndex=1;ticketWaitCalls=0;deadline=0;ambientClock=0;displayNumber("B-041");view.x=0;view.z=8;view.yaw=0;held.clear();exit.hidden=false;root.hidden=false;document.body.classList.add("amt-inside");options.music?.(true);beginLink();setStage("outside");setStatus("EINGANG · BÜRGERAMT")}
 function captureKey(event){if(event.type==="keyup")held.delete(event.code);if(!active)return;if(event.type==="keydown"&&event.code==="KeyE"&&walking()){event.preventDefault();event.stopImmediatePropagation();if(!event.repeat)interact();return}if(!walking())return;if(["KeyW","KeyA","KeyS","KeyD","ArrowUp","ArrowDown","ArrowLeft","ArrowRight","ShiftLeft"].includes(event.code)){event.preventDefault();event.stopImmediatePropagation();if(event.type==="keydown")held.add(event.code);else held.delete(event.code)}}
 window.addEventListener("keydown",captureKey,true);window.addEventListener("keyup",captureKey,true);window.addEventListener("blur",()=>held.clear());
 document.addEventListener("visibilitychange",()=>{if(document.hidden)held.clear()});

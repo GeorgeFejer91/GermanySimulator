@@ -17,7 +17,8 @@ function transport(role='host'){
  return{link,channel,Channel,messages};
 }
 test('only valid phone registration reaches the host',()=>{const h=transport();h.channel.receive({type:'register',name:'Erika Mustermann'});assert.equal(h.messages.length,1);assert.equal(h.messages[0].name,'Erika Mustermann')});
-test('a scan reaches the host without form data',()=>{const h=transport();h.channel.receive({type:'scan'});assert.equal(h.messages.length,1);assert.equal(h.messages[0].type,'scan')});
+test('a bounded scan id reaches the host without form data',()=>{const h=transport();h.channel.receive({type:'scan',id:'a'.repeat(24)});assert.equal(h.messages.length,1);assert.equal(h.messages[0].id,'a'.repeat(24))});
+test('only bounded police speech completion cues reach the host',()=>{const h=transport();h.channel.receive({type:'police-done',index:-2});h.channel.receive({type:'police-done',index:-1,seq:2});assert.equal(h.messages.length,1);assert.equal(h.messages[0].index,-1)});
 test('unrecognized types cannot consume the valid sequence',()=>{const h=transport();h.channel.receive({seq:100,type:'unknown'});h.channel.receive({seq:2,type:'register',name:'Erika Mustermann'});assert.equal(h.messages.length,1);assert.equal(h.messages[0].seq,2)});
 test('wrong-direction messages cannot consume the sequence',()=>{const h=transport();h.channel.receive({seq:100,type:'done'});h.channel.receive({seq:2,type:'phone-hidden'});assert.equal(h.messages.length,1);assert.equal(h.messages[0].type,'phone-hidden')});
 test('session, version and sequence checks reject replay or invalid envelopes',()=>{

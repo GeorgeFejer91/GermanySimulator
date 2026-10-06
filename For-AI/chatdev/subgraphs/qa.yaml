@@ -17,7 +17,9 @@ graph:
           Read For-AI/chatdev/WEBGPT-HANDOFF.md and cite accepted QA task IDs
           and remaining unchecked claims. Check both answered and declined
           phone branches, no A38 after cancellation, A38 after decline, mobile
-          call display, optional name form, immediate and repeated QR tickets,
+          call display, silent name-submit audio unlock, incoming-call vibration,
+          ordered police/desk turns with two intentional overlaps and fallback,
+          immediate and repeated QR tickets,
           continuous background calls, no QR popup, phone-hidden and disconnect
           forfeiture, walkable exterior door, physical QR sign,
           red ceiling board, two waiting bays, painted office characters, music silence,

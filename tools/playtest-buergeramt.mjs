@@ -34,10 +34,10 @@ try{
  phone.on('response',r=>{if(r.status()>=400)errors.push(`phone HTTP ${r.status()}: ${r.url()}`)});
  await phone.goto(link,{waitUntil:'commit',timeout:45000});
  let linked=false;
- try{await phone.locator('#phone-ticket:not([hidden])').waitFor({timeout:45000});linked=true}catch{errors.push('Phone pairing did not complete');console.log(JSON.stringify({name:'pairing-timeout',phone:await phone.evaluate(()=>({ready:document.readyState,setupHidden:document.getElementById('phone-setup')?.hidden,connection:document.getElementById('phone-connect-status')?.textContent,sdk:typeof VDONinjaSDK,link:typeof BuergeramtLink})),desktop:await desktop.evaluate(()=>({stage:BuergeramtLevel.stage,status:document.getElementById('amt-status').textContent,phoneUrlValid:!!BuergeramtLevel.phoneUrl})),errors}))}
+ try{await phone.locator('#phone-ticket:not([hidden])').waitFor({timeout:45000});linked=true}catch{errors.push('Phone pairing did not complete');console.log(JSON.stringify({name:'pairing-timeout',phone:await phone.evaluate(()=>({ready:document.readyState,formHidden:document.getElementById('phone-form')?.hidden,connection:document.getElementById('phone-connect-status')?.textContent,sdk:typeof VDONinjaSDK,link:typeof BuergeramtLink})),desktop:await desktop.evaluate(()=>({stage:BuergeramtLevel.stage,status:document.getElementById('amt-status').textContent,phoneUrlValid:!!BuergeramtLevel.phoneUrl})),errors}))}
  if(linked){
   if(process.env.TEST_RESCAN){const previous=await phone.locator('#phone-number').textContent();await phone.reload({waitUntil:'commit',timeout:45000});await phone.waitForFunction(old=>{const ticket=document.getElementById('phone-ticket'),number=document.getElementById('phone-number');return ticket&&!ticket.hidden&&number?.textContent!==old},previous,{timeout:45000});console.log(JSON.stringify({name:'repeat-scan',previous,next:await phone.locator('#phone-number').textContent()}))}
-  await phone.screenshot({path:`${output}/phone-setup.png`});
+  await phone.screenshot({path:`${output}/phone-before-name.png`});
   if(branch==='answer'){
    await phone.screenshot({path:`${output}/phone-form.png`});
    await phone.setViewportSize({width:320,height:700});
@@ -47,7 +47,6 @@ try{
    await phone.evaluate(()=>{document.documentElement.style.zoom=''}) ;
    await phone.setViewportSize({width:390,height:844});
   }
-  await phone.locator('#phone-enable').click();
   if(!/^B-\d{3}$/.test(await phone.locator('#phone-number').textContent()))throw new Error('Scan did not allocate a lettered number');
   await phone.screenshot({path:`${output}/phone-ticket.png`});
   if(!await desktop.evaluate(()=>BuergeramtLevel.activated&&BuergeramtLevel.stage==='waiting'))throw new Error('Scan did not activate the game ticket');

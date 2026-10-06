@@ -24,7 +24,7 @@ export function harness(kind='host',{voice=false,synthesis=true}={}){
  }
  function node(id){if(!nodes.has(id))nodes.set(id,new Element(id));return nodes.get(id)}
  document.getElementById=node;document.querySelectorAll=()=>[];document.createElement=tag=>Object.assign(new Element(),{tagName:tag.toUpperCase()});document.hidden=false;
- document.body=new Element('body');document.documentElement=new Element('html');document.documentElement.requestFullscreen=()=>Promise.resolve();
+ const fullscreenRequests=[];document.body=new Element('body');document.documentElement=new Element('html');document.documentElement.requestFullscreen=()=>{fullscreenRequests.push(true);return Promise.resolve()};
  for(const id of ['amt-level','amt-ticket','amt-walk-hud','phone-ticket','phone-call','phone-call-line'])node(id).hidden=true;
  node('phone-submit').disabled=true;
  class Link extends EventTarget{
@@ -68,11 +68,11 @@ export function harness(kind='host',{voice=false,synthesis=true}={}){
  function advanceGame(seconds){for(let t=0;t<seconds;t+=.05)level.update(Math.min(.05,seconds-t))}
  function enter(){moveTo(0,-2.6)}
  function approachRegistration(){moveTo(-3.3,-2.6);moveTo(-3.3,2.5);moveTo(-4.65,2.5)}
- function register(){enter();Link.instances.at(-1).message({type:'scan'})}
+ function register(){enter();Link.instances.at(-1).message({type:'scan',id:'a'.repeat(24)})}
  function wait(){register()}
  function counter(){wait();moveTo(4,-8.15);advanceGame(16);if(level.stage!=='walk-counter')throw new Error(`Expected active call, got ${level.stage}`);level.interact()}
  function phoneReady(){const link=Link.instances.at(-1);link.emit('connected',{});link.message({type:'ticket',number:'B-223'});return link}
  function incoming(){const link=phoneReady();link.message({type:'call',id:'grass',line:window.BuergeramtStory.call.line});return link}
  function hide(){document.hidden=true;document.dispatchEvent(new Event('visibilitychange'))}
- return{window,document,node,tick,timers,key,moveTo,action,advanceGame,enter,approachRegistration,register,wait,counter,phoneReady,incoming,hide,synth,vibrations,counts,music,config,level,links:Link.instances,context};
+ return{window,document,node,tick,timers,key,moveTo,action,advanceGame,enter,approachRegistration,register,wait,counter,phoneReady,incoming,hide,synth,vibrations,fullscreenRequests,counts,music,config,level,links:Link.instances,context};
 }

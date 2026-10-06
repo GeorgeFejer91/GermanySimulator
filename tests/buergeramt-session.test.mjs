@@ -18,12 +18,13 @@ test('an invalid frame delta cannot corrupt first-person movement',()=>{
 
 test('the board calls continuously and each scan issues a fresh active ticket without a popup',()=>{
  const h=harness();assert.equal(h.level.queueDisplay,'B-041');h.enter();h.advanceGame(4);const firstCall=h.level.queueDisplay;assert.match(firstCall,/^[A-Z]-\d+/);h.advanceGame(4);assert.notEqual(h.level.queueDisplay,firstCall);assert.equal(h.level.stage,'walk-sign');
- h.links[0].message({type:'scan'});const first=h.links[0].sent.at(-1);assert.equal(first.type,'ticket');assert.equal(h.level.activated,true);assert.equal(h.level.stage,'waiting');assert.equal(h.node('amt-level').classList.contains('walking'),true);
- h.links[0].message({type:'scan'});const second=h.links[0].sent.at(-1);assert.equal(second.type,'ticket');assert.notEqual(second.number,first.number);
+ h.links[0].message({type:'scan',id:'a'.repeat(24)});const first=h.links[0].sent.at(-1);assert.equal(first.type,'ticket');assert.equal(h.level.activated,true);assert.equal(h.level.stage,'waiting');assert.equal(h.node('amt-level').classList.contains('walking'),true);
+ h.links[0].message({type:'scan',id:'a'.repeat(24)});assert.equal(h.links[0].sent.at(-1).number,first.number);
+ h.links[0].message({type:'scan',id:'b'.repeat(24)});const second=h.links[0].sent.at(-1);assert.equal(second.type,'ticket');assert.notEqual(second.number,first.number);
  h.links[0].message({type:'register',name:'  Erika   Mustermann '});assert.equal(h.level.registeredName,'Erika Mustermann');
 });
 test('a new scan after a missed appointment starts another counter opportunity',()=>{
- const h=harness();h.wait();const first=h.links[0].sent.at(-1).number;h.advanceGame(17);assert.equal(h.level.stage,'walk-counter');h.advanceGame(20);assert.equal(h.level.stage,'expired');h.links[0].message({type:'scan'});assert.equal(h.level.stage,'waiting');assert.equal(h.level.activated,true);assert.notEqual(h.links[0].sent.at(-1).number,first);
+ const h=harness();h.wait();const first=h.links[0].sent.at(-1).number;h.advanceGame(17);assert.equal(h.level.stage,'walk-counter');h.advanceGame(20);assert.equal(h.level.stage,'expired');h.links[0].message({type:'scan',id:'b'.repeat(24)});assert.equal(h.level.stage,'waiting');assert.equal(h.level.activated,true);assert.notEqual(h.links[0].sent.at(-1).number,first);
 });
 test('decline completes all clerk questions and grants A38 exactly once',()=>{
  const h=harness();h.counter();assert.equal(h.node('amt-actions').children.length,0);h.links[0].message({type:'decline',id:'grass'});h.action();
@@ -33,7 +34,7 @@ test('decline completes all clerk questions and grants A38 exactly once',()=>{
 });
 test('answer automatically cancels without ever issuing A38',()=>{
  const h=harness();h.counter();h.links[0].message({type:'answer',id:'grass'});assert.equal(h.level.stage,'cancelled');assert.equal(h.node('amt-actions').children.length,0);
- h.tick(90000);assert.deepEqual(h.counts,{form:0,cancel:1,close:0});assert.equal(h.level.active,false);
+ h.tick(150000);assert.deepEqual(h.counts,{form:0,cancel:1,close:0});assert.equal(h.level.active,false);
  assert.equal(h.links[0].sent.filter(m=>m.type==='police-line').length,3);
 });
 test('early approach reprimands; late arrival expires without A38',()=>{
@@ -47,7 +48,7 @@ test('a delayed answer cannot resurrect a forfeited appointment',()=>{
  const h=harness();h.counter();h.links[0].emit('status','Telefon getrennt');h.links[0].message({type:'answer',id:'grass'});assert.equal(h.level.stage,'expired');h.tick(90000);assert.equal(h.counts.form,0);assert.equal(h.counts.cancel,0);
 });
 test('a failed ticket delivery does not start a queue slot',()=>{
- const h=harness();h.enter();h.links[0].fail=true;h.links[0].message({type:'scan'});assert.equal(h.level.stage,'walk-sign');assert.equal(h.level.activated,false);
+ const h=harness();h.enter();h.links[0].fail=true;h.links[0].message({type:'scan',id:'a'.repeat(24)});assert.equal(h.level.stage,'walk-sign');assert.equal(h.level.activated,false);
 });
 test('failed police-call delivery cannot trap the player at the counter',()=>{
  const h=harness();h.wait();h.moveTo(4,-8.15);h.advanceGame(16);h.links[0].fail=true;h.level.interact();assert.equal(h.level.stage,'expired');assert.equal(h.node('amt-actions').children.length,2);
@@ -57,7 +58,7 @@ test('replay ignores old link messages and status events',()=>{
 });
 test('replay cancels the previous argument timers',()=>{
  const h=harness();h.counter();h.links[0].message({type:'answer',id:'grass'});h.tick(4000);h.level.replay(h.config);h.counter();h.links[1].message({type:'answer',id:'grass'});
- h.tick(27501);assert.equal(h.counts.cancel,0);assert.equal(h.level.stage,'cancelled');h.tick(90000);assert.equal(h.counts.cancel,1);assert.equal(h.counts.form,0);
+ h.tick(27501);assert.equal(h.counts.cancel,0);assert.equal(h.level.stage,'cancelled');h.tick(150000);assert.equal(h.counts.cancel,1);assert.equal(h.counts.form,0);
 });
 test('key release during a modal does not leave movement stuck',()=>{
  const h=harness();h.wait();h.moveTo(4,-8.15);h.key('KeyW');h.level.interact();assert.equal(h.level.stage,'early');h.key('KeyW','keyup');h.action();const before=h.level.view;h.level.update(.1);assert.deepEqual(h.level.view,before);
@@ -74,14 +75,20 @@ test('returning to walking cancels speech whose modal is now hidden',()=>{
 test('the host remains playable without a browser speech implementation',()=>{
  const h=harness('host',{synthesis:false});h.enter();assert.equal(h.level.stage,'walk-sign');h.level.replay(h.config);assert.equal(h.level.stage,'outside');
 });
-test('automatic argument waits for the visible clerk utterance to end',()=>{
- const h=harness('host',{voice:true});h.counter();h.links[0].message({type:'answer',id:'grass'});h.tick(20);const first=h.node('amt-line').textContent;h.tick(6000);assert.equal(h.node('amt-line').textContent,first);h.synth.end();h.tick(300);assert.notEqual(h.node('amt-line').textContent,first);
+test('answered call waits for each screen, then overlaps one deliberate interruption',()=>{
+ const h=harness('host',{voice:true});h.counter();h.links[0].message({type:'answer',id:'grass'});h.tick(20);const first=h.node('amt-line').textContent;h.tick(6000);assert.equal(h.node('amt-line').textContent,first);h.synth.end();h.tick(500);assert.equal(h.links[0].sent.filter(m=>m.type==='police-line').length,0);
+ h.links[0].message({type:'police-done',index:-1});h.tick(700);assert.equal(h.links[0].sent.filter(m=>m.type==='police-line').length,1);assert.equal(h.node('amt-line').textContent,first);
+ h.links[0].message({type:'police-done',index:0});h.tick(350);assert.match(h.node('amt-line').textContent,/Herr Wachtmeister/);h.synth.end();h.tick(350);assert.equal(h.links[0].sent.filter(m=>m.type==='police-line').length,2);
+ h.links[0].message({type:'police-done',index:1});h.tick(350);assert.match(h.node('amt-line').textContent,/vierundsiebzig/);h.tick(950);assert.equal(h.links[0].sent.filter(m=>m.type==='police-line').length,3);assert.match(h.node('amt-line').textContent,/vierundsiebzig/);
 });
 test('phone scan asks for a ticket immediately; the name can be added afterwards',()=>{
  const h=harness('phone');assert.equal(h.node('phone-ticket').hidden,true);h.phoneReady();assert.equal(h.links[0].sent[0].type,'scan');assert.equal(h.node('phone-form').hidden,false);assert.equal(h.node('phone-number').textContent,'B-223');h.node('phone-name').value='Erika Mustermann';h.node('phone-form').dispatchEvent(new Event('submit',{cancelable:true}));assert.equal(h.links[0].sent.at(-1).type,'register');assert.equal(h.node('phone-form').hidden,true);
 });
-test('phone offers sound setup before the ticket and accepts a replacement ticket',()=>{
- const h=harness('phone');assert.equal(h.node('phone-setup').hidden,false);h.node('phone-enable').click();assert.equal(h.node('phone-setup').hidden,true);h.phoneReady();h.links[0].message({type:'ticket',number:'B-224'});assert.equal(h.node('phone-number').textContent,'B-224');assert.equal(h.node('phone-ticket').hidden,false);
+test('phone retries the same scan until a ticket arrives',()=>{
+ const h=harness('phone'),link=h.links[0];link.emit('connected',{});const first=link.sent.at(-1);h.tick(3001);const scans=link.sent.filter(message=>message.type==='scan');assert.equal(scans.length,3);assert.ok(scans.every(message=>message.id===first.id));link.message({type:'ticket',number:'B-223'});h.tick(3001);assert.equal(link.sent.filter(message=>message.type==='scan').length,3);
+});
+test('name submission silently unlocks audio after the ticket',()=>{
+ const h=harness('phone');let resumes=0;h.window.AudioContext=class{resume(){resumes++;return Promise.resolve()}};h.phoneReady();h.node('phone-name').value='Erika Mustermann';h.node('phone-form').dispatchEvent(new Event('submit',{cancelable:true}));assert.equal(resumes,1);assert.ok(h.vibrations.every(pattern=>pattern===0));assert.equal(h.fullscreenRequests.length,1);h.links[0].message({type:'ticket',number:'B-224'});assert.equal(h.node('phone-number').textContent,'B-224');assert.equal(h.node('phone-ticket').hidden,false);
 });
 test('incoming call repeats vibration and stops it after decline',()=>{
  const h=harness('phone');h.incoming();const first=h.vibrations.length;assert.ok(first>=1);h.tick(3000);assert.ok(h.vibrations.length>first);h.node('phone-decline').click();assert.equal(h.vibrations.at(-1),0);
@@ -108,7 +115,7 @@ test('ticket delivered to an already hidden phone is forfeited',()=>{
  const h=harness('phone');h.document.hidden=true;h.phoneReady();assert.equal(h.links[0].sent.at(-1).type,'phone-hidden');assert.match(h.node('phone-status').textContent,/verfallen/);
 });
 test('police lines queue without replacing the text of speech still playing',()=>{
- const h=harness('phone');h.incoming();h.node('phone-answer').click();h.tick(20);const first=h.node('phone-call-line').textContent;h.links[0].message({type:'police-line',index:0,line:'Die nächste polizeiliche Zeile.'});h.tick(20);assert.equal(h.synth.spoken.length,1);assert.equal(h.node('phone-call-line').textContent,first);h.synth.end();h.tick(300);assert.equal(h.synth.spoken.length,2);assert.equal(h.node('phone-call-line').textContent,'Die nächste polizeiliche Zeile.');
+ const h=harness('phone');h.incoming();h.node('phone-answer').click();h.tick(20);const first=h.node('phone-call-line').textContent;h.links[0].message({type:'police-line',index:0,line:'Die nächste polizeiliche Zeile.'});h.tick(20);assert.equal(h.synth.spoken.length,1);assert.equal(h.node('phone-call-line').textContent,first);h.synth.end();assert.equal(h.links[0].sent.at(-1).index,-1);h.tick(300);assert.equal(h.synth.spoken.length,2);assert.equal(h.node('phone-call-line').textContent,'Die nächste polizeiliche Zeile.');h.synth.end();assert.equal(h.links[0].sent.at(-1).index,0);
 });
 test('declining prevents subsequent police speech or a duplicate call',()=>{
  const h=harness('phone');h.incoming();h.node('phone-decline').click();h.links[0].message({type:'police-line',index:0,line:'Darf nicht sprechen.'});h.links[0].message({type:'call',id:'grass',line:'Doppelter Anruf'});h.tick(30);assert.equal(h.node('phone-call').hidden,true);assert.equal(h.synth.spoken.length,0);
@@ -127,5 +134,5 @@ test('a failed police voice displays its line instead of silently skipping it',(
 });
 
 test('a synchronous speech failure retains the automatic clerk line for reading',()=>{
- const h=harness('host',{voice:true});h.synth.speak=()=>{throw new Error('Speech service unavailable')};h.counter();h.links[0].message({type:'answer',id:'grass'});const first=h.node('amt-line').textContent;h.tick(2000);assert.equal(h.node('amt-line').textContent,first);assert.equal(h.counts.cancel,0);h.tick(90000);assert.equal(h.counts.cancel,1);assert.equal(h.counts.form,0);
+ const h=harness('host',{voice:true});h.synth.speak=()=>{throw new Error('Speech service unavailable')};h.counter();h.links[0].message({type:'answer',id:'grass'});const first=h.node('amt-line').textContent;h.tick(2000);assert.equal(h.node('amt-line').textContent,first);assert.equal(h.counts.cancel,0);h.tick(150000);assert.equal(h.counts.cancel,1);assert.equal(h.counts.form,0);
 });
