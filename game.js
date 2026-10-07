@@ -195,6 +195,8 @@ const props=[
  ,{x:520,y:1480,asset:"schubkarre",w:85,h:42},{x:265,y:1700,asset:"picknicktisch",w:115,h:55}
  ,{x:8560,y:2800,asset:"wertstoffcontainer",w:112,h:64},{x:910,y:2820,asset:"wertstoffcontainer",w:112,h:64}
 ].map(offsetWorldPoint);
+const aliceDumpster=Object.freeze({...offsetWorldPoint({x:8860,y:680}),orbitRadius:120});
+props.push({x:aliceDumpster.x,y:aliceDumpster.y,asset:"dumpster-fire",w:160,h:100});
 // Optional static scenery shares the simulation's coordinates and collision contract.
 // These positions are city coordinates; apply the rail-gutter offset once here.
 if(typeof location==='object'&&/(?:^|[?&])satireKit=1(?:&|$)/.test(location.search)){
@@ -730,7 +732,7 @@ const npcs=[
  {x:borderGates[1].x+borderGates[1].w/2,y:BORDER_Y+34,name:"FRIEDRICH MERZ · FIKTIONALE SATIRE",special:"borderPourer",politician:"merz",dir:1,lane:1,state:"sideWalk",stateTimer:1.35,blockedTimer:0,animTime:0,spriteRow:1,spriteFrame:0,spriteFlip:false,barkAt:0,lineIndex:0,minX:80,maxX:WORLD.w-80},
  {x:4620,y:3270,name:"ANGELA MERKEL · SATIRE",special:"merkel",politician:"merkel",route:[[4620,3270],[5750,3270],[6150,3270],[7200,3270],[7200,3880],[6120,3880],[5750,3880],[4620,3880]],target:1,routeDirection:1,blockedTimer:0,facingX:1,facingY:0,animTime:0,spriteRow:2,spriteFrame:1,barkAt:0,lineIndex:0},
  {x:1014,y:784,name:"BAYERN-BEAUFTRAGTER · SATIRE",special:"bayern",spot:0,targetSpot:1,hangTimer:0,animTime:0,spriteRow:1,spriteFrame:0,barkAt:0,lastClip:-1},
- {x:8964,y:440,name:"ALICE WEIDEL · FIKTIONALE SATIRE",special:"alice",dir:1,routeX:8964,minY:440,maxY:784,animTime:0,spriteRow:0,spriteFrame:0,barkAt:0},
+ {x:aliceDumpster.x+aliceDumpster.orbitRadius,y:aliceDumpster.y,name:"ALICE WEIDEL · FIKTIONALE SATIRE",special:"alice",orbitAngle:0,animTime:0,spriteRow:0,spriteFrame:0,barkAt:0},
  {x:4200,y:3450,name:"HERR RASENAUFSICHT",line:8,vx:0,vy:10,min:3330,max:3820},
  {x:5100,y:720,name:"FRAU ORDNUNG",line:8,vx:13,vy:0,min:4750,max:5600},
  {x:6650,y:720,name:"HERR ARCHIV",line:3,vx:-11,vy:0,min:6250,max:7100},
@@ -818,7 +820,7 @@ citizenship:{code:"DE-1A",title:"Fiktiver Antrag auf deutsche Staatsangehörigke
 function resize(){dpr=Math.min(devicePixelRatio||1,2);width=innerWidth;height=innerHeight;canvas.width=Math.round(width*dpr);canvas.height=Math.round(height*dpr);ctx.setTransform(dpr,0,0,dpr,0,0)}addEventListener("resize",resize);resize();
 const clamp=(v,a,b)=>Math.max(a,Math.min(b,v)),dist=(ax,ay,bx,by)=>Math.hypot(ax-bx,ay-by),inRect=(x,y,r)=>x>=r.x&&x<=r.x+r.w&&y>=r.y&&y<=r.y+r.h,pick=list=>list[Math.floor(Math.random()*list.length)];
 const onRoad=(x,y)=>roads.some(r=>inRect(x,y,r)),onCrossing=(x,y)=>crossings.some(r=>inRect(x,y,r)),onGardenGrass=(x,y)=>grassAreas.some(r=>inRect(x,y,r))||(x>schreber.x+20&&x<schreber.x+schreber.w-20&&y>schreber.y+20&&y<schreber.y+schreber.h-20)||onPoliceGardenGrass(x,y);
-function propRadius(p){return clamp(Math.min(p.w||40,p.h||40)*.38,10,42)}
+function propRadius(p){return p.asset==="dumpster-fire"?95:clamp(Math.min(p.w||40,p.h||40)*.38,10,42)}
 function staticBlocked(x,y,r=player.r){if(x<r+9||y<r+9||x>WORLD.w-r-9||y>WORLD.h-r-9)return true;if(x>goerlitzerPark.x-r&&x<goerlitzerPark.x+goerlitzerPark.w+r&&y>goerlitzerPark.y-r&&y<goerlitzerPark.y+goerlitzerPark.h+r)return true;if(dist(x,y,wirtschaftswunderSite.x,wirtschaftswunderSite.y)<r+wirtschaftswunderSite.collisionRadius)return true;if(Math.abs(x-kiesingerMemorial.x)<r+173&&Math.abs(y-kiesingerMemorial.y)<r+147)return true;for(const b of buildings)if(x>b.x-r&&x<b.x+b.w+r&&y>b.y-r&&y<b.y+b.h+r)return true;for(const p of props)if(!p.decorative&&(!p.stationFixture||p.active)&&dist(x,y,p.x,p.y)<r+propRadius(p))return true;for(const o of normObjects)if(dist(x,y,o.x,o.y)<r+26)return true;for(const tree of trees)if(dist(x,y,tree.x,tree.y)<r+TREE_RADIUS)return true;return false}
 function trainCarDistance(x,y,car){const dx=x-car.x,dy=y-car.y,c=Math.cos(car.angle),s=Math.sin(car.angle),along=dx*c+dy*s,across=-dx*s+dy*c;return Math.hypot(Math.max(0,Math.abs(along)-TRAIN_CAR_HALF_LENGTH),Math.max(0,Math.abs(across)-TRAIN_CAR_HALF_WIDTH))}
 function trainAt(x,y,r){for(const train of trains)for(const car of train.cars)if(trainCarDistance(x,y,car)<r)return car;return null}
@@ -1067,12 +1069,12 @@ function aliceBark(n,force=false){
 }
 function updateAlice(n,dt){
  if(state.region==="germany"&&proximityAudioReady(n))aliceBark(n);
- if(holdFeaturedTurn(n,0,n.dir,npcSpriteAtlases.alice,dt))return;
- const beforeX=n.x,beforeY=n.y,nextY=n.y+n.dir*ALICE_WALK_SPEED*dt;
- if(nextY<n.minY||nextY>n.maxY)n.dir*=-1;
- else if(!responderBlocked(n.routeX,nextY,13,n))n.y=nextY;
- else n.dir*=-1;
- n.x=n.routeX;if(!npcSpriteAtlases.alice.tourist)n.spriteRow=n.dir>0?0:1;
+ if(npcSpriteAtlases.alice.tourist&&TouristAnimations.isTurning(n)){advanceSpriteGait(n,0,npcSpriteAtlases.alice,FEATURED_GAIT_CYCLE_DISTANCE,dt);return}
+ n.spriteStepStart=[n.x,n.y];
+ const beforeX=n.x,beforeY=n.y,angle=(n.orbitAngle+ALICE_WALK_SPEED*dt/aliceDumpster.orbitRadius)%(Math.PI*2);
+ const nextX=aliceDumpster.x+Math.cos(angle)*aliceDumpster.orbitRadius,nextY=aliceDumpster.y+Math.sin(angle)*aliceDumpster.orbitRadius;
+ if(!responderBlocked(nextX,nextY,13,n)){n.x=nextX;n.y=nextY;n.orbitAngle=angle}
+ n.spriteRow=Math.cos(n.orbitAngle)>=0?0:1;
  advanceSpriteGait(n,Math.hypot(n.x-beforeX,n.y-beforeY),npcSpriteAtlases.alice,FEATURED_GAIT_CYCLE_DISTANCE,dt)
 }
 function updateBorderPourer(n,dt){

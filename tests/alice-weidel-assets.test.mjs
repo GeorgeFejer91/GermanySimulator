@@ -23,14 +23,35 @@ for(const [text,file,size,hash] of expected){
  assert.equal(statSync(url).size,size,`${file} normalized size drifted`);
  assert.equal(createHash("sha256").update(readFileSync(url)).digest("hex"),hash,`${file} normalized checksum drifted`);
 }
-assert.match(game,/special:"alice"[\s\S]*routeX:8964,minY:440,maxY:784/,"Alice must own a bounded vertical route");
+assert.match(game,/aliceDumpster=Object\.freeze\([\s\S]*orbitRadius:120/,"Alice's dumpster and orbit must share one placement");
+assert.match(game,/x:aliceDumpster\.x\+aliceDumpster\.orbitRadius,y:aliceDumpster\.y,name:"ALICE WEIDEL/,"Alice must spawn on that same orbit");
+assert.match(game,/asset:"dumpster-fire"/,"the fire must be part of the game world");
 assert.match(game,/ALICE_WALK_SPEED=STANDARD_SPRITE_WALK_SPEED\*1\.5/,"Alice must move at exactly 1.5× the standard sprite walk speed");
-assert.match(game,/n\.spriteRow=n\.dir>0\?0:1/,"Alice must switch between front and back gait rows when reversing");
 assert.match(game,/function featuredSpriteEligible\(n\)[\s\S]*audioRadius\|\|SPRITE_AUDIO_RADIUS[\s\S]*showFeaturedSpriteBark\(n,"alice"/,"Alice recordings must remain small-radius gated");
+
+const updateAlice=game.match(/function updateAlice\(n,dt\)\{[\s\S]*?\n\}/)?.[0];
+assert.ok(updateAlice,"Alice orbit update must exist");
+let blocked=false,distance=0;
+const motion=vm.createContext({
+ state:{region:"germany"},proximityAudioReady:()=>false,aliceBark:()=>{},
+ ALICE_WALK_SPEED:78,FEATURED_GAIT_CYCLE_DISTANCE:96,aliceDumpster:{x:8860,y:680,orbitRadius:120},
+ responderBlocked:()=>blocked,npcSpriteAtlases:{alice:{}},
+ advanceSpriteGait:(_n,moved)=>{distance+=moved}
+});
+vm.runInContext(`${updateAlice}; this.stepAlice=updateAlice`,motion);
+const alice={x:8980,y:680,orbitAngle:0,spriteRow:0},rows=new Set();
+for(let i=0;i<500;i++){motion.stepAlice(alice,.02);rows.add(alice.spriteRow)}
+assert.ok(Math.abs(Math.hypot(alice.x-8860,alice.y-680)-120)<.01,"Alice stays on the orbit");
+assert.ok(distance>2*Math.PI*120,"Alice completes a full circuit");
+assert.deepEqual([...rows].sort(),[0,1],"both authored front/back rows are used");
+const previous={x:alice.x,y:alice.y,angle:alice.orbitAngle},previousDistance=distance;
+blocked=true;motion.stepAlice(alice,.02);
+assert.deepEqual({x:alice.x,y:alice.y,angle:alice.orbitAngle},previous,"a blocker pauses the orbit");
+assert.equal(distance,previousDistance,"a blocker pauses the gait clock");
 
 const sprite=readFileSync(new URL("../assets/alice-weidel-sprite.png",import.meta.url));
 assert.equal(sprite.readUInt32BE(16),4096);
 assert.equal(sprite.readUInt32BE(20),256);
 assert.equal(sprite[25],6,"Alice sprite must retain full RGBA edges");
 
-console.log("Alice vertical run, full-RGBA sprite, and exact proximity recordings OK");
+console.log("Alice dumpster orbit, full-RGBA sprite, and exact proximity recordings OK");

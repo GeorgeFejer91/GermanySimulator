@@ -23,6 +23,9 @@
   <meta name="twitter:image:alt" content="Germany Simulator opening menu featuring a fax machine jammed with a bratwurst.">
   <link rel="icon" href="./assets/faxgeraet.svg" type="image/svg+xml">
   <title>Germany Simulator · EC Games</title>
+  <link rel="preload" as="image" href="./assets/fire/kenney-flame-01.png" crossorigin="anonymous">
+  <link rel="preload" as="image" href="./assets/fire/kenney-flame-05.png" crossorigin="anonymous">
+  <link rel="preload" as="image" href="./assets/fire/kenney-smoke-05.png" crossorigin="anonymous">
   <link rel="stylesheet" href="./styles.css?v=20261004-german-unity">
   <link rel="stylesheet" href="./buergeramt.css?v=20261007-call-families">
 </head>
@@ -80,7 +83,7 @@
   <div id="english-subtitle" class="english-subtitle" lang="en" hidden aria-live="polite" aria-atomic="true"></div>
   <button id="subtitle-toggle" class="subtitle-toggle" type="button" aria-label="Toggle English subtitles" aria-pressed="false">EN SUBTITLES OFF</button>
   <nav class="control-dock" aria-label="Touch controls"><div class="dpad"><button data-key="ArrowLeft" aria-label="Left">◀<span class="fraktur">Links</span></button><button data-key="ArrowUp" aria-label="Forward">▲<span class="fraktur">Vor</span></button><button data-key="ArrowDown" aria-label="Back">▼<span class="fraktur">Zurück</span></button><button data-key="ArrowRight" aria-label="Right">▶<span class="fraktur">Rechts</span></button></div><button id="law-action" class="law-action" data-key="KeyQ" type="button" aria-label="Quote a German law" disabled><span class="dock-icon">§</span><span class="fraktur">Gesetz</span></button><button class="action" data-key="KeyE" type="button"><span class="dock-icon">E</span><span class="fraktur">Reden</span></button></nav>
-  <footer><span>WASD / ARROWS · MOVE</span><span>SHIFT · SUSPICIOUSLY FAST</span><span>E · INTERACT</span><span>§ / Q · GESETZ ZITIEREN</span><button id="mute" type="button">MUSIC ON</button><button id="voice-toggle" type="button">VOICE ON</button><a href="https://ec-games.space/">EC GAMES</a><span>SATIRE · GAME RULES · NOT LEGAL OR IMMIGRATION ADVICE</span></footer>
+  <footer><span>WASD / ARROWS · MOVE</span><span>SHIFT · SUSPICIOUSLY FAST</span><span>E · INTERACT</span><span>§ / Q · GESETZ ZITIEREN</span><button id="mute" type="button">MUSIC ON</button><button id="voice-toggle" type="button">VOICE ON</button><a href="https://ec-games.space/">EC GAMES</a></footer>
 </main>
 <script type="importmap">{"imports":{"three":"https://cdn.jsdelivr.net/npm/three@0.186.0/build/three.module.js"}}</script>
 <script src="./For-AI/QUIZ-CHARACTER-DICTIONARY.js?v=20261003-kugellager"></script>
@@ -95,9 +98,9 @@
 <script type="module" src="./buergeramt-fit.js?v=20261007-amt-hud"></script>
 <script src="./character-interactions.js?v=20261007-walks"></script>
 <script src="./tourist-animation.js?v=20261007-foot-gait"></script>
-<script src="./game.js?v=20261007-foot-gait"></script>
+<script src="./game.js?v=20261007-audit-fire"></script>
 <script type="module" src="./subtitle-layout.js?v=20260929-fixed-slots"></script>
 <script type="module" src="./quiz-layout.js?v=20260929-dialogue"></script>
-<script type="module" src="./world3d.js?v=20261007-walks"></script>
+<script type="module" src="./world3d.js?v=20261007-audit-fire"></script>
 </body>
 </html>
