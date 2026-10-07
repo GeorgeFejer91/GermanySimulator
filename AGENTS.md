@@ -1,13 +1,9 @@
 # Germany Simulator agent instructions
 
-> Mandatory first read: [For-AI/README.md](./For-AI/README.md). It is the YAGNI control-plane router; then follow the project-specific rules below.
+Read [`For-AI/README.md`](./For-AI/README.md), then the applicable sections named by [`For-AI/AGENT-START.md`](./For-AI/AGENT-START.md). Read only the task-relevant sections; historical decision records are searchable background, not mandatory full reads.
 
-Before inspecting, planning, editing, or running this project, read [`For-AI/AGENT-START.md`](./For-AI/AGENT-START.md) completely. Then read every document it marks as required for the task.
+The root game is the canonical standalone Germany Simulator. Preserve its “Grand Theft Amt” identity, mission chain, satire, controls, and desktop/mobile behavior unless the user changes them. Keep one runtime tree at the repository root and `assets/` as the single shipped asset authority.
 
-The root game is the canonical standalone Germany Simulator. Do not replace it with another prototype or import a different game direction. Preserve the established “Grand Theft Amt” world, visual identity, mission chain, controls, satire framing, and desktop/mobile behavior unless the user explicitly changes them.
+Codex is the workflow lead. Use [`For-AI/SKILLS.md`](./For-AI/SKILLS.md) to choose applicable skills, domain owners, model tiers, and scoped delegation. A single integrator owns acceptance and any commit or publication; workers stay within assigned paths and do not commit, push, or absorb unrelated worktree changes.
 
-Keep durable project context in `For-AI/`. Update those documents whenever a change alters gameplay rules, asset policy, architecture, validation, or a lasting product decision.
-
-Use the project skill routing in [`For-AI/SKILLS.md`](./For-AI/SKILLS.md). In particular, backend, infrastructure, and asset-pipeline decisions must use `$ponytail` when that skill is available. If it is unavailable, state that fact and apply the repository’s YAGNI fallback in [`For-AI/ASSET-POLICY.md`](./For-AI/ASSET-POLICY.md); never invent the missing skill’s instructions.
-
-Do not maintain a second deployable copy under `public/` or another nested directory. One runtime tree and one asset authority are intentional constraints.
+Keep durable product and technical decisions in `For-AI/`, in their existing owning documents. Do not add a second game, framework, service, or asset pipeline without a demonstrated need. For infrastructure, backend efficiency, and asset-pipeline decisions, use `$ponytail` when available; otherwise follow the YAGNI rules in [`For-AI/ASSET-POLICY.md`](./For-AI/ASSET-POLICY.md).

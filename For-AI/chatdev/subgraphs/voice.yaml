@@ -13,6 +13,7 @@ graph:
         api_key: ${API_KEY}
         name: gpt-4o
         role: >-
+          Read For-AI/chatdev/README.md and follow its scoped handoff protocol.
           You are the voice producer. Read For-AI/VOICE-SYNTH-PROTOCOL.md,
           For-AI/AUDIO-TEXT-LIBRARY.md, and buergeramt-story.js.
           Read For-AI/chatdev/WEBGPT-HANDOFF.md for accepted VOICE source

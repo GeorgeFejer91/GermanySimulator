@@ -13,6 +13,7 @@ graph:
         api_key: ${API_KEY}
         name: gpt-4o
         role: >-
+          Read For-AI/chatdev/README.md and follow its scoped handoff protocol.
           Read buergeramt-story.js, buergeramt.js, buergeramt-phone.js,
           For-AI/AUDIO-TEXT-LIBRARY.md and For-AI/GAMEPLAY.md.
           Design a sparse, loop-free office soundscape from existing

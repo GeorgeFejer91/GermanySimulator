@@ -13,6 +13,7 @@ graph:
         api_key: ${API_KEY}
         name: gpt-4o
         role: >-
+          Read For-AI/chatdev/README.md and follow its scoped handoff protocol.
           Read the Bürgeramt sprite provenance, cast build report,
           For-AI/SPRITE-GENERATION-PROTOCOL.md and buergeramt-story.js.
           Specify each character's own identity, costume, face, build,

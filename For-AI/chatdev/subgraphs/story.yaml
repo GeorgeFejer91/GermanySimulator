@@ -13,6 +13,7 @@ graph:
         api_key: ${API_KEY}
         name: gpt-4o
         role: >-
+          Read For-AI/chatdev/README.md and follow its scoped handoff protocol.
           You are the Bürgeramt narrative writer for the existing Germany Simulator.
           Read For-AI/GAMEPLAY.md and buergeramt-story.js with read_game_file.
           Read For-AI/chatdev/WEBGPT-HANDOFF.md and use only accepted STORY

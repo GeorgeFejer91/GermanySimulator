@@ -1,63 +1,36 @@
 # Agent start
 
-Read this file before doing anything else in the repository.
+Read this routing page before repository work. Read only the sections and subject documents relevant to the request; do not read whole historical logs by default. The user’s current request has priority.
 
-## Authority
+## Authority and product
 
-1. The user’s current request is the task authority.
-2. Root [`AGENTS.md`](../AGENTS.md) defines repository-wide operating rules.
-3. This directory holds durable product context.
-4. Root game files are runtime authority: `index.html`, `game.js`, `styles.css`, `3d.html`, `world3d.js`, and `assets/`.
+Root [`AGENTS.md`](../AGENTS.md) defines repository-wide rules. This directory owns durable project context. Runtime authority is the canonical root game: `index.html`, `game.js`, `styles.css`, `3d.html`, `world3d.js`, and `assets/`.
 
-## Canonical product
+This is the standalone 3D “Grand Theft Amt” game, with keyboard and touch controls, a fictional three-day administration deadline, regional Berlin Denglisch, forms, wanted levels, and police. Extend it in place. Do not replace it with the retired flat Canvas prototype or a different game direction. `world3d.js` is the renderer; registered character sprites remain intentional 3D assets. Device-tilt control was removed.
 
-This repository contains the canonical standalone version of the Germany Simulator game originally available at `https://ec-games.space/games/germany-simulator/`. It is the 3D “Grand Theft Amt” build with keyboard and touch controls; a three-day fictional administration deadline; bilingual framing; regional Denglisch behavior; forms; wanted levels; and police. The former Canvas world is retired; `world3d.js` is the required renderer, while registered bitmap character sprites remain intentional 3D scene assets. Device-tilt control has been intentionally removed.
+## Task reading routes
 
-Do not substitute the later flat 2D prototype or rebuild the game from a different design. Extend this game in place.
+- Gameplay, mission, or player-facing copy: read the applicable section of [`GAMEPLAY.md`](./GAMEPLAY.md), using its existing headings such as `Core loop`, `First Bürgeramt visit`, `Systems`, `World identity`, `Satirical voice and dialogue`, or `In-world copy: no explanatory disclaimers`.
+- Bürgeramt episode: also read the relevant beat or audio section in [`BUERGERAMT.md`](./BUERGERAMT.md).
+- Art, models, asset loading, performance, or hosting: read the applicable rules in [`ASSET-POLICY.md`](./ASSET-POLICY.md). For 2D character motion or atlases, also read [`SPRITE-GENERATION-PROTOCOL.md`](./SPRITE-GENERATION-PROTOCOL.md) and the relevant animation skill route in [`SKILLS.md`](./SKILLS.md).
+- Spoken text, subtitles, or voice: read the relevant sections of [`AUDIO-TEXT-LIBRARY.md`](./AUDIO-TEXT-LIBRARY.md); for a new voice or recorded asset, also read [`VOICE-SYNTH-PROTOCOL.md`](./VOICE-SYNTH-PROTOCOL.md).
+- Any code or instruction change: use the relevant routes in [`SKILLS.md`](./SKILLS.md).
+- Durable architecture or product-direction change: search [`DECISIONS.md`](./DECISIONS.md) for directly relevant history. Read only matching entries; update the owning current document and add a concise decision only when rationale needs to persist.
 
-## Required reading by task
+## Invariants
 
-- Any gameplay or copy change: read [`GAMEPLAY.md`](./GAMEPLAY.md).
-- Any secret Bürgeramt episode change: also read [`BUERGERAMT.md`](./BUERGERAMT.md).
-- Any art, image, billboard, model, performance, hosting, or asset-loader change: read [`ASSET-POLICY.md`](./ASSET-POLICY.md).
-- Any new or repaired 2D character, moving bitmap, sprite atlas, gait, reaction, or transition-frame change: read [`animate-2d-characters`](../.agents/skills/animate-2d-characters/SKILL.md), the [skill route](./SKILLS.md#2d-character-animation-skill), and [`SPRITE-GENERATION-PROTOCOL.md`](./SPRITE-GENERATION-PROTOCOL.md).
-- Any code or documentation change: read [`SKILLS.md`](./SKILLS.md).
-- Any spoken-audio or subtitle change: read [`AUDIO-TEXT-LIBRARY.md`](./AUDIO-TEXT-LIBRARY.md) and keep its runtime library synchronized.
-- Any new character voice, Voice Cloner profile, or recorded speech asset: also read [`VOICE-SYNTH-PROTOCOL.md`](./VOICE-SYNTH-PROTOCOL.md).
-- Any architectural or directional change: read [`DECISIONS.md`](./DECISIONS.md) and update it if the decision is durable.
+- Preserve unrelated user changes. Keep one deployable runtime tree at repository root and one asset authority under `assets/`.
+- Keep the accepted static JavaScript and vanilla Three.js architecture. Add infrastructure only for a demonstrated need.
+- Follow [`GAMEPLAY.md`](./GAMEPLAY.md#satirical-voice-and-dialogue) for regional dialogue, character voice, and satire. Berlin is behind the Brandmauer and speaks Denglisch; characters outside it speak German, even when the UI is English. Preserve browser-generated dialogue unless the user changes that feature.
+- Keep speech paired with its exact visible text. Preserve speaker, quote, textbox, and voice ownership. The current rules are in [`GAMEPLAY.md`](./GAMEPLAY.md#systems) and [`BUERGERAMT.md`](./BUERGERAMT.md); do not copy their detailed timing values into this router.
+- Follow [`GAMEPLAY.md`](./GAMEPLAY.md#in-world-copy-no-explanatory-disclaimers) for player-facing copy. Keep production provenance and source notes in project documentation and `CREDITS.md`.
 
-## Working rules
+## Validation and publication
 
-- Preserve unrelated user changes and the established game identity.
-- Prefer the smallest coherent change that can be tested in the real browser game.
-- Keep one deployable runtime tree at repository root; do not copy the game into a second folder.
-- Treat `assets/` as the single asset authority shared by the canonical 3D game and the `3d.html` renderer diagnostic.
-- Do not add servers, databases, frameworks, build systems, or asset services unless a demonstrated requirement cannot be met by the static game.
-- Route all character writing through the affectionate bureaucratic-satire and dialogue rules in [`GAMEPLAY.md`](./GAMEPLAY.md#satirical-voice-and-dialogue). NPCs should lead with alleged rule violations and procedural authority instead of plainly stating their underlying complaint, and their strange German sayings must follow the player’s current Berlin-Denglisch or German-only region.
-- Enforce that regional speech rule in both authored text and generated speech: Berlin lies behind the animated **Brandmauer** and its characters speak Denglisch; after crossing out into Deutschland, characters speak German only even when the interface is English. The in-world boundary is always called the Brandmauer, never the Flammengrenze. Preserve the browser-generated dialogue voice unless the user explicitly removes it.
-- Treat spoken character audio and its textbox as one strict, inseparable event. Recorded and synthesized speech must use the exact string visible in the active textbox; ensure that matching textbox is visible when its audio starts and throughout playback, never let queued speech play beneath a different line, and cancel pending or active speech when another modal replaces it. Music and non-verbal sound effects are excluded from this rule.
-- Treat political-character identity and quote ownership as a strict invariant. The figure trying to extinguish the Brandmauer is the satirical Friedrich Merz character and may trigger only Merz-attributed lines; the energy-district Angela Merkel character may trigger only Merkel-attributed lines, including her directional “Sie stehen hinter mir.” reaction. Never merge, share, or randomly cross-select their quote pools, and keep the displayed speaker name, textbox, and voice assignment bound to the same owner.
-- **No explanatory disclaimers in the game.** Signs, placards, posters, billboards, HUD labels, dialogue and other player-facing copy must speak from inside the world. Never append or insert “not real,” “fictional,” “just satire,” “miniature,” “replica,” “not legal advice,” or equivalent German wording to explain away the joke or scale. Do not add a reality-check paragraph or alternate disclaimer elsewhere after removing one. Use the actual place/institution name and straight-faced bureaucratic language. Only an explicit user request for that specific wording can override this rule. Keep factual amounts, dates, attribution and budget-versus-expenditure distinctions accurate; store production framing and provenance in `For-AI/` and `CREDITS.md`.
-
-## Minimum validation
+Prefer standard deterministic checks first. For browser-visible changes, the expected browser scope is Chromium desktop and Android mobile, in isolated, silent sessions. Use a physical Android device when available; if only emulation is available, label that evidence and report device coverage as outstanding. If browser tooling or a device is unavailable, report the uncovered scope.
 
 ### Silent background browser tests
 
-Run all agent-driven browser tests silently in the background so they do not interrupt the user's other PC activities. Prefer a headless browser or a hidden browser surface; never bring test windows or tabs to the foreground, steal focus, or send input to the user's active desktop session. Use isolated test sessions.
+Keep the game’s audio logic enabled when checking scheduling. Before navigation or interaction, mute the isolated test session across media elements, Web Audio, and browser speech synthesis, and keep it muted throughout. Never mute the user’s PC, steal focus, or bring a test tab/window to the foreground. No audible playback or foreground testing without the user’s explicit request. Report whether audio was state-checked silently or perceptually listened to; silent checks cannot establish perceived sound quality. Do not claim device or listening evidence that was not collected.
 
-Mute the test browser/session before loading the game or triggering any interaction, and keep it muted throughout the run. Cover all audio paths, including media elements, Web Audio, and browser speech synthesis; disabling autoplay alone is insufficient. Prefer a browser launch-level mute (for example Chromium's `--mute-audio`) or an equivalent session-level output mute. Do not mute the whole PC or change the user's browser/audio preferences. If a tool cannot guarantee both background operation and silent output, use another test method and report any unrun checks. Audible playback or foreground testing requires an explicit user request.
-
-Keep audio logic enabled when testing its scheduling or state, while suppressing audible output at the test-session boundary. Silent checks cannot establish perceived sound quality; report that limitation when relevant. This policy applies to desktop/mobile game tests, preview pages, diagnostics, and automated QA.
-
-After relevant changes:
-
-1. Run JavaScript syntax checks for `game.js` and `world3d.js`.
-2. Serve the repository root over HTTP.
-3. Verify the title screen and core game in a desktop viewport.
-4. Verify touch controls and layout at a mobile viewport.
-5. Check the browser console for errors and confirm every referenced asset loads.
-6. If deployment changed, verify the short root URL and `3d.html` on GitHub Pages.
-
-## Immediate publication
-
-After every major completed and validated change, commit the intended project files and push to `origin/main` immediately so the existing GitHub Pages workflow publishes them. Publish smaller completed changes the same way; do not batch finished changes for a later task or leave them only in a local worktree. Never force-push or publish secrets, tool caches, or a knowingly broken build; if publication fails, report the exact blocker and keep the validated local commit intact. An explicit user request to hold or keep work local overrides this rule.
+The integrator chooses applicable checks, reviews the complete diff, commits only the intended files, and immediately pushes each completed, validated change to `origin/main`. If publication is blocked, preserve the local commit and report the exact blocker. Never force-push, bypass branch protection, publish secrets, or publish an unvalidated or knowingly broken game. After a deployment change, verify both the short root URL and `3d.html` on GitHub Pages. Workers return evidence and do not commit, push, publish, or bring unrelated worktree changes into the result. An explicit user request to keep work local overrides publication.

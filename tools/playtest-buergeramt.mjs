@@ -60,7 +60,8 @@ try{
    await desktop.waitForFunction(()=>BuergeramtLevel.stage==='expired',null,{timeout:15000});
    await desktop.screenshot({path:`${output}/phone-hidden-forfeit.png`});
   }else{
-  await walk('KeyD',23);await walk('KeyW',34);
+  // Use the central aisle; the right lane is occupied by the Kopiependler's route.
+  await walk('KeyD',10);await walk('KeyW',34);await walk('KeyD',13);
   await desktop.evaluate(()=>BuergeramtLevel.interact());
   if(!await desktop.evaluate(()=>BuergeramtLevel.stage==='early'))throw new Error(`Early-counter approach failed: ${JSON.stringify(await desktop.evaluate(()=>({stage:BuergeramtLevel.stage,view:BuergeramtLevel.view,status:document.getElementById('amt-status').textContent})))}`);
   await desktop.screenshot({path:`${output}/early-reprimand.png`});

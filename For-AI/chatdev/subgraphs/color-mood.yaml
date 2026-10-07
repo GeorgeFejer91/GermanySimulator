@@ -13,6 +13,7 @@ graph:
         api_key: ${API_KEY}
         name: gpt-4o
         role: >-
+          Read For-AI/chatdev/README.md and follow its scoped handoff protocol.
           Read buergeramt-story.js, world3d.js, For-AI/BUERGERAMT.md,
           For-AI/ASSET-POLICY.md, and the moving cast provenance. Map
           each authored line tone and signed valence to a restrained tint

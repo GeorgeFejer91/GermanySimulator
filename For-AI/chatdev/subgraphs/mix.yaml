@@ -13,6 +13,7 @@ graph:
         api_key: ${API_KEY}
         name: gpt-4o
         role: >-
+          Read For-AI/chatdev/README.md and follow its scoped handoff protocol.
           Read game.js, buergeramt.js, buergeramt-phone.js,
           buergeramt.css and For-AI/ASSET-POLICY.md. Specify bounded
           player controls for office effects, spoken dialogue and phone

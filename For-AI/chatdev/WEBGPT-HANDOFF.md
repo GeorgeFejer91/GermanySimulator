@@ -1,12 +1,12 @@
-# WebGPT handoff register
+# WebGPT handoff register — historical intake snapshot
 
-Coordinator-owned intake for Secret Tunnel 5 contributors. The current
-integrator updates this file after assigning or accepting work. Incoming chats
-read it; each writes only its own uniquely named proposal in
-`webgpt-inbox/` unless granted an exclusive source path. See
-[WEBGPT-COORDINATION.md](./WEBGPT-COORDINATION.md).
+This file preserves Secret Tunnel 5 findings and task candidates recorded on
+2026-10-06. They are historical records, not live assignments or current runtime
+authority; verify status and source before reuse. Codex owns current task routing
+and integration under [`SKILLS.md`](../SKILLS.md). The WebGPT-specific tool
+protocol is in [`WEBGPT-COORDINATION.md`](./WEBGPT-COORDINATION.md).
 
-## Active intake
+## Accepted and partial historical findings
 
 `AMT-LAYOUT-AUDIT` from the WebGPT retry chat is **closed as a scoped
 review**. Its proposal is
@@ -51,27 +51,31 @@ alternatives; a human listening decision is still pending before line batches.
 
 ```text
 ID:
-Owner / originating chat:
-Outcome:
 Base commit:
+Working directory / worktree:
+Owner / originating agent:
+Model / reasoning effort (or integrator-owned):
+Goal and expected result:
 Dependencies:
-Read paths:
-Exclusive write paths (or proposal only):
+Relevant skills:
+Exact read paths:
+Exclusive write paths:
 Acceptance checks:
-Proposal path:
+Required return evidence:
+Handoff path:
 Status: assigned | submitted | accepted | needs revision | closed
 Integrator decision / evidence:
 ```
 
-## Work available to incoming chats
+For Codex model tiers, active subagent limits, and review ownership, follow
+[`../SKILLS.md`](../SKILLS.md); do not copy those changing rules into individual
+task records.
 
-Agents can choose an unassigned ID below and create only
-`webgpt-inbox/<id>-<agent>-claim.md` with their chat label, intended
-deliverable, and the current base commit. Use `expected_missing` for that
-unique file. The integrator checks scope and records the owner above before
-any shared source edit. Until assigned, the agent may research and prepare a
-proposal but may not rewrite game files. The integrator can split a task or
-assign a separate worktree if two chats need the same path.
+## Historical task candidates
+
+The following candidates were listed in the 2026-10-06 snapshot. Their status
+is not live. Before reactivating one, the integrator must confirm the current
+source, base commit, owner, exact paths, and checks in a fresh task record.
 
 | ID | Priority / ChatDev stage | Concrete deliverable | Check for acceptance |
 | --- | --- | --- | --- |
@@ -83,7 +87,7 @@ assign a separate worktree if two chats need the same path.
 | QA-01 | High / QA | Run silent desktop/mobile/320px/200% playthroughs of the direct Bürgeramt route and main-city entry; report reproducible issues with screenshots. | No focus stealing or audible test output; record console, asset loads, frame progression, ticket/queue/counter outcomes, and restart. |
 | VIS-01 | Medium / Gameplay + Review | Survey the existing city and office place assets for their fit with the new grimy, painted caricature cast. Propose an area-by-area style pass for facades, signs, clutter, light, and props; implement one bounded accepted area at a time. | Keep every place recognizable and every interaction legible, preserve existing source/asset authority, give before/after screenshots and mobile performance evidence. |
 
-The listed tasks are currently **unassigned**. The integrator owns final decisions,
-the root game, and publication. Accepted reports are distilled here for the
-corresponding ChatDev stage; rejected or superseded proposals do not enter
-the stage prompt.
+The candidates were marked **unassigned in the 2026-10-06 snapshot**; that is
+not a current assignment state. The integrator owns final decisions, the root
+game, and publication. Accepted reports may be distilled for a corresponding
+ChatDev stage; rejected or superseded proposals do not enter a stage prompt.

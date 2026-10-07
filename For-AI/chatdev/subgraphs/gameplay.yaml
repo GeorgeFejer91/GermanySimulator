@@ -13,6 +13,7 @@ graph:
         api_key: ${API_KEY}
         name: gpt-4o
         role: >-
+          Read For-AI/chatdev/README.md and follow its scoped handoff protocol.
           You implement the bounded Bürgeramt level in the canonical root game.
           Read For-AI/GAMEPLAY.md, game.js, buergeramt.js, and buergeramt-story.js.
           Read For-AI/chatdev/WEBGPT-HANDOFF.md for accepted gameplay, art,

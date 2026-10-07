@@ -1,14 +1,12 @@
 ---
 name: chatdev-game-workflows
-description: Route a Germany Simulator episode through the project's scoped ChatDev story, character, color mood, animation, gameplay, sound, phone, voice and QA stages. Use when creating or refining a cross-domain Bürgeramt feature or the ChatDev production workflow itself.
+description: Route Germany Simulator Bürgeramt work through Codex-led story, gameplay, timing, visual, phone, audio, runtime, and QA domains; optionally use the pinned legacy ChatDev runner when its limits and dependencies fit.
 ---
 
-# ChatDev game workflows
+# ChatDev-inspired game workflows
 
-Use the canonical root game and [the project ChatDev protocol](../../../For-AI/chatdev/README.md). Choose only the domains the request changes. For a cross-domain episode pass, use the graph order and keep one integrator responsible for accepting stage output.
+Codex leads and integrates this project’s work. Read the current workflow and model/delegation rules in [`For-AI/SKILLS.md`](../../../For-AI/SKILLS.md), and the project’s episode rules in [`For-AI/chatdev/README.md`](../../../For-AI/chatdev/README.md). Choose only the domains the request affects. Keep one integrator accountable for contracts, acceptance, review, and any publication.
 
-Each stage owns a concrete handoff. Story owns German spoken text and line tone. Storyboard maps beats and exits. Character locks identity, source art and physical prop hand. ColorMood coordinates valence, a restrained tint palette, and smooth return on the active speaker. Animation checks exact painted frames and movement triggers. Gameplay owns static JavaScript simulation and mission state. Soundscape owns cue design; Mix owns independent levels and speech priority. Phone owns the separate companion/transport. Voice owns licensed recordings. Review and QA examine the integrated game.
+Use the external OpenBMB ChatDev runner only when its pinned sibling checkout, local runtime, and API configuration are available and it adds value. Validation is not execution; its stages currently name `gpt-4o`, have limited read/write tools, and its QA tool cannot run browser playtests. Do not promise external model execution or tool capabilities without checking them in the live environment. If it cannot run, use available Codex skills and tools for the same bounded domain handoffs and state the limitation.
 
-Run `tools/chatdev.ps1 -ValidateOnly` before using the external runner. Use `-Stage <name>` for one affected domain. The pinned ChatDev runner needs a local API key and writes only on a `codex/` branch; if it cannot run, report that limit and carry out the same bounded handoff locally. A validated graph is not an executed stage.
-
-Keep binary art generation, playable integration and silent desktop/mobile browser review with the integrator. Never treat a ChatDev report, CPU test, or attractive source image as approval of the exact game frames, heard audio or paired-device phone transport.
+For delegated work, follow the task brief, file-ownership, active-agent, and model-tier contract in `For-AI/SKILLS.md`. The legacy twelve-stage graph may inform handoff boundaries, but does not require running every stage. The integrator and relevant independent reviewers own actual integration, browser/device evidence, exact animation review, paired-phone verification, and listening review. Never accept a report, source image, CPU check, or emulated browser result as evidence for a different check.

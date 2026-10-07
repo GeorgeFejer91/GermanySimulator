@@ -256,7 +256,7 @@ def main() -> None:
     print(f"  20 distinct frames + exact point-21 closure")
     print(f"  max bone-direction error: {max(angle_errors):.6f} degrees")
     print(f"  ankle crossing: {min(separation):.2f}..{max(separation):.2f} px")
-    print(f"  report: {args.report.relative_to(ROOT)}")
+    print(f"  report: {args.report}")
 
 
 if __name__ == "__main__":

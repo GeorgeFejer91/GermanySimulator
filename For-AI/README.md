@@ -1,29 +1,23 @@
 # For AI
 
-## Common control-plane contract
+This directory owns concise, durable project rules and routes. Product source, shipped assets, user documentation, and final deliverables stay outside it. The user’s current request and nearest `AGENTS.md` define authority; subject documents below own their named details. Link to those authorities instead of duplicating their rules.
 
-- **Boundary:** Product source, shipped assets, user documentation, and final deliverables stay outside this folder. This folder owns agent routing, durable context, verification policy, and decision pointers.
-- **Authority:** Direct instructions and the nearest `AGENTS.md` win. Existing project documents remain authoritative for their named subjects; link instead of copying.
-- **Skills:** Use `$ponytail` for every implementation, fix, refactor, code review, and technical design when available. Load other skills only for matching tasks; do not create speculative skill infrastructure.
-- **Workflow:** Define one bounded outcome and its checks, reuse what exists, and make the smallest coherent diff.
-- **Verification:** A task is ready only after focused checks, applicable full checks, diff review, and instruction synchronization. Report unrun checks and never overclaim evidence.
-- **Self-update:** Update durable goals, constraints, decisions, routes, and gates in the same change that alters them. Do not keep chat logs, daily diaries, duplicate ledgers, generated evidence, or speculative backlogs.
-- **Git:** Inspect status before and after work; stage only intended paths; use coherent, itemized commits; push each validated major change to `origin/main` immediately, and publish smaller completed changes too. Never force-push, bypass protection, publish secrets, or absorb unrelated changes.
-- **YAGNI:** Add a file here only when it has a distinct current owner and consumer. Prefer one section or link over a new document, script, dependency, or abstraction.
+Codex leads work in this repository. It selects only affected domains, assigns bounded work where parallelism helps, integrates proposals, and remains accountable for review and publication. ChatDev is an optional inspiration and pinned legacy runner for the Bürgeramt episode; it is not the default coordinator. See [`SKILLS.md`](./SKILLS.md) and [`chatdev/README.md`](./chatdev/README.md).
 
+Use the smallest coherent change. Prefer existing code, tools, and skills. Update an owning durable document when a lasting rule or decision changes. Do not keep chat logs, duplicate ledgers, generated evidence, or speculative backlogs here. Report checks and evidence precisely; distinguish browser emulation from device results and silent audio-state checks from listening review.
 
-This directory is the durable context and instruction surface for Germany Simulator. It contains product facts and engineering decisions that should survive across agents and sessions.
+## Read by task
 
-Required starting point: [`AGENT-START.md`](./AGENT-START.md)
+- [`AGENT-START.md`](./AGENT-START.md): task-scoped reading routes, canonical-game invariants, and validation policy.
+- [`GAMEPLAY.md`](./GAMEPLAY.md): current gameplay, mission, dialogue, and in-world copy rules. Read only the sections relevant to the change.
+- [`BUERGERAMT.md`](./BUERGERAMT.md): current episode beats, cast ownership, audio, and domain handoff.
+- [`ASSET-POLICY.md`](./ASSET-POLICY.md): current asset, performance, hosting, and YAGNI policy.
+- [`SPRITE-GENERATION-PROTOCOL.md`](./SPRITE-GENERATION-PROTOCOL.md): accepted character-source and atlas workflow.
+- [`SKILLS.md`](./SKILLS.md): skill routes, Codex model tiers, delegation and review contract.
+- [`DECISIONS.md`](./DECISIONS.md): dated rationale and history. Search for a relevant entry when needed; do not read the whole log or treat an older entry as current authority.
+- [`VOICE-SYNTH-PROTOCOL.md`](./VOICE-SYNTH-PROTOCOL.md): voice profile and recorded-speech production.
+- [`AUDIO-TEXT-LIBRARY.md`](./AUDIO-TEXT-LIBRARY.md) and [`AUDIO-TEXT-LIBRARY.js`](./AUDIO-TEXT-LIBRARY.js): shipped speech IDs, source text, subtitles, triggers, and exclusions.
+- [`QUIZ-CHARACTER-DICTIONARY.md`](./QUIZ-CHARACTER-DICTIONARY.md) and [`QUIZ-CHARACTER-DICTIONARY.js`](./QUIZ-CHARACTER-DICTIONARY.js): quiz identities, portraits, vocabulary, names, and category routing.
+- [`chatdev/`](./chatdev/): shared production and review protocol, optional pinned Bürgeramt runner, and legacy Secret Tunnel handoff records.
 
-- [`GAMEPLAY.md`](./GAMEPLAY.md): authoritative gameplay rules, mission flow, controls, and satire boundaries.
-- [`BUERGERAMT.md`](./BUERGERAMT.md): optional moving-cast storyboard, mood and sound contract, and ChatDev domain handoff for the secret office.
-- [`ASSET-POLICY.md`](./ASSET-POLICY.md): desktop/mobile asset strategy and YAGNI rules.
-- [`SPRITE-GENERATION-PROTOCOL.md`](./SPRITE-GENERATION-PROTOCOL.md): fixed anatomical grid, gait keys, transition build, and visual QA for moving bitmap characters.
-- [`SKILLS.md`](./SKILLS.md): required skill routing for different kinds of work.
-- [`DECISIONS.md`](./DECISIONS.md): durable project decisions and their rationale.
-- [`VOICE-SYNTH-PROTOCOL.md`](./VOICE-SYNTH-PROTOCOL.md): reusable Voice Cloner profiles, new-character workflow, clip production, and validation.
-- [`AUDIO-TEXT-LIBRARY.md`](./AUDIO-TEXT-LIBRARY.md) and [`AUDIO-TEXT-LIBRARY.js`](./AUDIO-TEXT-LIBRARY.js): voice and clip IDs, spoken source, English subtitles, trigger families, timed train cues, and exclusions.
-- [`QUIZ-CHARACTER-DICTIONARY.md`](./QUIZ-CHARACTER-DICTIONARY.md) and [`QUIZ-CHARACTER-DICTIONARY.js`](./QUIZ-CHARACTER-DICTIONARY.js): fictional quiz-person identities, portrait bindings, archetype vocabulary, name bank, and question-category routing.
-
-Keep these files concise and factual. They are project memory, not a backlog or a substitute for source code.
+Keep this index short. Add a document only when it has a distinct current owner and consumer.

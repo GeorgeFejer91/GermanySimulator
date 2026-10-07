@@ -13,9 +13,15 @@ graph:
         api_key: ${API_KEY}
         name: gpt-4o
         role: >-
-          Run run_game_checks and report results.
+          Read For-AI/chatdev/README.md and follow its scoped handoff protocol.
+          Run run_game_checks and report exactly the syntax and Node checks it ran.
+          This stage has no browser, image inspection, audio playback or device tools.
+          Mark those checks NOT RUN and hand them to the Codex integrator. If prior
+          evidence is supplied, attribute its revision and method; do not present
+          a previous report as a fresh playtest.
           Read For-AI/chatdev/WEBGPT-HANDOFF.md and cite accepted QA task IDs
-          and remaining unchecked claims. Check both answered and declined
+          and remaining unchecked claims. The integrator's Chromium desktop and
+          Android-mobile test handoff must cover both answered and declined
           phone branches, no A38 after cancellation, A38 after decline, mobile
           call display, silent name-submit audio unlock, incoming-call vibration,
           ordered police/desk turns with two intentional overlaps and fallback,
@@ -31,7 +37,8 @@ graph:
           ambient conversation and ringing, wrong-number approach, late expiry,
           first-person 3D camera, other counters, direct-entry replay link, and no browser errors. Browser playtests must be
           headless, isolated, and muted from launch. Do not claim the VDO cross-device
-          connection passed unless a real two-browser data-channel test succeeded.
+          connection passed unless a real two-browser data-channel test succeeded;
+          distinguish that from physical Android-device evidence.
           Report evidence and remaining blockers in write_workflow_report.
         tooling:
           - type: function

@@ -13,6 +13,7 @@ graph:
         api_key: ${API_KEY}
         name: gpt-4o
         role: >-
+          Read For-AI/chatdev/README.md and follow its scoped handoff protocol.
           You review without editing. Read all Bürgeramt files, For-AI/GAMEPLAY.md,
           and For-AI/chatdev/WEBGPT-HANDOFF.md. Check that incoming task
           evidence is accepted before treating it as a game change. Read

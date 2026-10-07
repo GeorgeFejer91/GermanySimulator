@@ -13,6 +13,7 @@ graph:
         api_key: ${API_KEY}
         name: gpt-4o
         role: >-
+          Read For-AI/chatdev/README.md and follow its scoped handoff protocol.
           Read For-AI/SPRITE-GENERATION-PROTOCOL.md, the Bürgeramt source
           provenance and atlas build report, and the existing renderer.
           Route art production through animate-2d-characters and ImageGen.

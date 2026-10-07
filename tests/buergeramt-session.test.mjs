@@ -47,6 +47,64 @@ test('a nearby regular owns the visible dialogue mood and releases the queue on 
  assert.equal(h.level.stage,'walk-sign');assert.equal(h.level.characterMood,null);
 });
 
+test('city audio gates optional actor speech and a replaced cue never starts later',()=>{
+ let cityBusy=true;const h=harness('host',{voice:true,cinematics:false,cityAudioBusy:()=>cityBusy});
+ h.enter();h.moveTo(3.4,1.2);const before=h.synth.spoken.length;h.level.interact();
+ assert.equal(h.level.stage,'character');h.tick(2500);assert.equal(h.synth.spoken.length,before);
+ h.action();cityBusy=false;h.tick(500);assert.equal(h.synth.spoken.length,before);
+ h.level.interact();assert.equal(h.level.stage,'character');h.tick(20);
+ assert.equal(h.synth.spoken.length,before+1);
+});
+
+test('city audio gates waiting-room speech and releases it when the city clears',()=>{
+ let cityBusy=true;const h=harness('host',{voice:true,cinematics:false,cityAudioBusy:()=>cityBusy});
+ h.enter();h.advanceGame(9);const before=h.synth.spoken.length;
+ assert.equal(before,0);assert.equal(h.node('amt-ambient').textContent,'');
+ cityBusy=false;h.level.update(.1);assert.equal(h.synth.spoken.length,1);
+ assert.match(h.node('amt-ambient').textContent,/WARTERAUM/);
+});
+
+test('city audio defers the optional omen and its tone until the city clears',()=>{
+ let cityBusy=true;const h=harness('host',{voice:true,cinematics:true,cityAudioBusy:()=>cityBusy});
+ h.enter();h.advanceGame(9);
+ assert.equal(h.level.stage,'walk-sign');assert.equal(h.level.omen.phase,'');
+ cityBusy=false;h.advanceGame(9);
+ assert.equal(h.level.stage,'omen');assert.equal(h.level.omen.phase,'blackout');
+});
+
+test('the clerk speech watchdog starts after city audio clears, not while waiting',()=>{
+ let cityBusy=false;const h=harness('host',{voice:true,cinematics:false,cityAudioBusy:()=>cityBusy});
+ h.wait();const link=h.links[0];link.message({type:'register',name:'Erika Mustermann'});
+ h.moveTo(4,-8.15);h.advanceGame(16);assert.equal(h.level.stage,'walk-counter');
+ cityBusy=true;h.synth.speak=()=>{};h.level.interact();h.tick(3000);
+ assert.equal(h.level.clerkPerformance.speaking,false);
+ assert.equal(link.sent.filter(message=>message.type==='call-arm').length,0);
+ cityBusy=false;h.tick(40);h.tick(1799);
+ assert.equal(link.sent.filter(message=>message.type==='call-arm').length,0);
+ h.tick(1);assert.equal(link.sent.filter(message=>message.type==='call-arm').length,1);
+});
+
+test('a failed clerk voice releases the handoff after city audio clears',()=>{
+ let cityBusy=false;const h=harness('host',{voice:true,cinematics:false,cityAudioBusy:()=>cityBusy});
+ h.wait();const link=h.links[0];link.message({type:'register',name:'Erika Mustermann'});
+ h.moveTo(4,-8.15);h.advanceGame(16);cityBusy=true;
+ h.synth.speak=utterance=>utterance.onerror?.();h.level.interact();h.tick(3000);
+ assert.equal(link.sent.filter(message=>message.type==='call-arm').length,0);
+ cityBusy=false;h.tick(40);h.tick(16);
+ assert.equal(link.sent.filter(message=>message.type==='call-arm').length,1);
+ assert.equal(h.level.clerkPerformance.speaking,true);
+});
+
+test('replay and voice-off release deferred city-to-office speech safely',()=>{
+ let cityBusy=true;const h=harness('host',{voice:true,cinematics:false,cityAudioBusy:()=>cityBusy});
+ h.enter();h.moveTo(3.4,1.2);h.level.interact();const before=h.synth.spoken.length;
+ h.level.replay(h.config);cityBusy=false;h.tick(1000);
+ assert.equal(h.level.stage,'outside');assert.equal(h.synth.spoken.length,before);
+ cityBusy=true;h.enter();h.moveTo(3.4,1.2);h.level.interact();h.config.voiceOn=()=>false;
+ cityBusy=false;h.tick(40);assert.equal(h.synth.spoken.length,before);
+ assert.equal(h.node('amt-line').textContent,h.window.BuergeramtStory.characters.formularsammler.lines[0].line);
+});
+
 test('the board calls continuously and each scan issues a fresh active ticket without a popup',()=>{
  const h=harness();assert.equal(h.level.queueDisplay,'B-041');h.enter();h.advanceGame(4);const firstCall=h.level.queueDisplay;assert.match(firstCall,/^[A-Z]-\d+/);h.advanceGame(4);assert.notEqual(h.level.queueDisplay,firstCall);assert.equal(h.level.stage,'walk-sign');
  h.links[0].message({type:'scan',id:'a'.repeat(24)});const first=h.links[0].sent.at(-1);assert.equal(first.type,'ticket');assert.equal(h.level.activated,true);assert.equal(h.level.stage,'waiting');assert.equal(h.node('amt-level').classList.contains('walking'),true);

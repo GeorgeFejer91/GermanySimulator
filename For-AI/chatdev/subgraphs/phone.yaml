@@ -13,6 +13,7 @@ graph:
         api_key: ${API_KEY}
         name: gpt-4o
         role: >-
+          Read For-AI/chatdev/README.md and follow its scoped handoff protocol.
           You own the phone companion and VDO.Ninja event contract. Read
           buergeramt-link.js, buergeramt-phone.js, buergeramt-phone.html,
           buergeramt.css, and For-AI/ASSET-POLICY.md. Keep one static game tree.

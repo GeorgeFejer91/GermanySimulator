@@ -1,6 +1,8 @@
 import assert from "node:assert/strict";
 import {spawnSync} from "node:child_process";
-import {readFileSync} from "node:fs";
+import {readFileSync,mkdtempSync,rmSync} from "node:fs";
+import {tmpdir} from "node:os";
+import {join} from "node:path";
 
 function pngSize(path){
  const png=readFileSync(path);
@@ -47,9 +49,12 @@ assert.match(verification.checks.footBones,/heel-ankle-toe/);
 assert.ok(verification.checks.maxPerJointAccelerationPixels<=12);
 assert.ok(verification.checks.maxLoopSeamAccelerationPixels<=8);
 
-const check=spawnSync("python",["tools/verify-merkel-cmu-left-pilot.py"],{encoding:"utf8"});
-assert.equal(check.status,0,check.stderr||check.stdout);
-assert.match(check.stdout,/max bone-direction error/);
+const reportDirectory=mkdtempSync(join(tmpdir(),"germany-sprite-check-"));
+try{
+ const check=spawnSync("python",["tools/verify-merkel-cmu-left-pilot.py","--report",join(reportDirectory,"verification.json")],{encoding:"utf8"});
+ assert.equal(check.status,0,check.stderr||check.stdout);
+ assert.match(check.stdout,/max bone-direction error/);
+}finally{rmSync(reportDirectory,{recursive:true,force:true})}
 
 const runtime=readFileSync("game.js","utf8");
 assert.doesNotMatch(runtime,/candidates\/merkel-cmu-left/);

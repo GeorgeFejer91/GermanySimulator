@@ -1,5 +1,7 @@
 # Durable decisions
 
+Search only entries relevant to the task. Current behavior is owned by the linked gameplay, episode, asset and audio contracts; explicitly superseded entries explain history.
+
 ## 2026-10-07 — Source-resolution office closeups and restrained color breath
 
 The Bürgeramt retains compact motion atlases for distance. Nearby walkers use source-derived, direction-specific high-resolution walk rows and action poses; Frau Knick's speech retains eight high-resolution lip frames. Moving detail is requested on approach, released after departure, and falls back to the animated atlas if missing. A per-character shader gently varies saturation and lightness, layered over the existing dialogue-valence tint. Only the office raises renderer density to a 2× device-pixel-ratio cap; the city keeps its 1.5× cap. See `BUERGERAMT.md` and `SPRITE-GENERATION-PROTOCOL.md` for ownership and review rules.
@@ -110,7 +112,7 @@ timeouts allow the automatic cancellation to finish if an audio cue is lost.
 
 ## 2026-10-06 — Previous expanded Bürgeramt registration
 
-The earlier registration iteration required a name and a separate Anmeldeschalter activation; the continuous queue decision above supersedes those gates. A hidden or disconnected phone still forfeits an active slot. The office suspends all game music while keeping counter conversation and phone-ring effects. The earlier office-specific MakeHuman derivatives were superseded by the painted caricature cast above. The direct test shortcut skips unrelated city GLB downloads; normal city entry keeps its full asset path. No second deployable tree was added.
+Superseded by the continuous queue: scan allocates the ticket and name submission enables the call; a separate registration-counter activation is retired. Current admission, hidden/disconnected-phone forfeiture, music suspension and direct-entry behavior are owned by [BUERGERAMT.md](./BUERGERAMT.md). Painted cast and source acceptance are owned by [ASSET-POLICY.md](./ASSET-POLICY.md).
 
 ## 2026-10-05 — ChatDev and the first-person Bürgeramt
 
@@ -306,30 +308,7 @@ the existing shared sidestep/backoff and Bayern/Alice recovery behavior.
 
 ## 2026-09-22 — Shared biomechanical rig supersedes pose holds
 
-All six atlas-backed characters now ship from `biomechanical-rig-v3`. This
-decision supersedes the same-day original-pose identity hold below while
-preserving that decision and both archives as recoverable history. Accepted
-identity-matched three-view part sheets are the layered source authority;
-archived original generated pose sheets remain signed identity references.
-There is still only one runtime tree under root `assets/`.
-
-One eight-phase coefficient lane defines contact, loading, passing, and
-push-off for alternating legs. Side rows use fixed-length two-bone IK;
-front/back rows solve the gait in depth and use a compressed, minimum-readable
-orthographic projection. Heads and torsos are rigid layers on a fixed
-512-pixel root/ground grid. Both legs render behind the pelvis plate, joint
-sockets are cleaned/capped, and props use independent anchors. The builder
-emits eight 256-pixel review phases and 32 distinct direct 128-pixel samples
-per walking row without whole-image morphing or per-frame recentering.
-
-Runtime phase is proportional to actual ground distance. Collisions and pauses
-therefore stop the feet; Alice's 1.5× speed completes the same stride faster
-rather than changing its anatomy. The signed release gate binds part, key,
-runtime, identity-reference, and pose-audit hashes. It rejects incorrect
-stance ownership, foot lift/sliding, backward stepping, missing passing
-crossovers, collapsed projections, unstable roots/heads, unsafe alpha margins,
-repeated walk cells, and discontinuous loop seams, then requires human review
-of joint overlays on every final cell.
+Historical experiment, superseded as shipping authority by the accepted city manifests and current [sprite protocol](./SPRITE-GENERATION-PROTOCOL.md). The biomechanical builder and recoverable source sheets remain authoring candidates; their coefficient/IK recipes do not authorize changing the game loader. Preserve signed identity, ground registration, prop ownership, exact encoded-frame review and explicit visual acceptance. Detailed experimental specifications remain in Git history and adjacent source provenance.
 
 ## 2026-09-22 — Runtime smoothness and shared sprite textures
 
@@ -348,31 +327,7 @@ movement input. No animation, physics, UI, or input dependency is added.
 
 ## 2026-09-22 — Original-pose identity lock supersedes cutout rigs
 
-The original complete image-generated key atlases are again the production
-identity authority for Merkel, Merz, the Bayern-Beauftragter, Alice, and both
-towel pedestrians. This decision supersedes the 2026-09-21 direct cutout-rig,
-motion-compensated transition, and direction-signed IK authorities below. Those
-records remain as history and their assets remain recoverable, but neither the
-part sheets nor `build-rigged-sprite-atlas.py` may produce shipping sprites.
-
-`tools/build-identity-locked-sprite-atlas.py` exposes each original key on a
-32-cell runtime clock using balanced whole-pose holds and premultiplied-alpha
-downscaling. It does not cross-fade, optical-flow, reconstruct, individually
-translate, or recenter characters. `identity-audit.json` maps and hashes every
-final cell to one source key; the signed verification ledger binds the source,
-runtime, mapping, direction contract, and contact-sheet review. The gate also
-checks head/top, ground, horizontal-root, scale, and lower-limb/opposite-phase
-thresholds. Merkel retains her original six columns; the other characters
-retain eight. Merz's full authored head is present in every cell. The rejected
-cutout-rig atlases are archived under
-`assets/sprite-archive/pre-identity-lock-20260922/` and never loaded at runtime.
-
-The implementation follows the established Einhornsammler runtime discipline:
-fixed cells, a fixed ground offset, immutable visual endpoints, directionally
-meaningful rows or whole-cell mirroring, and full contact-sheet inspection of
-the exact delivered atlas. Germany Simulator adds per-cell cryptographic
-identity proof. This favors stable eight-pose walking over synthetic high-frame
-counts that change faces, clothes, props, or anatomy.
+Historical identity-preservation decision: whole-pose endpoints were preferred when synthetic frame counts changed faces, clothing, props or anatomy. Current accepted loaders, fixed-grid rules, candidate status and visual gates are owned by [SPRITE-GENERATION-PROTOCOL.md](./SPRITE-GENERATION-PROTOCOL.md) and [ASSET-POLICY.md](./ASSET-POLICY.md). Preserve the original source keys and recoverable `assets/sprite-archive/pre-identity-lock-20260922/` archive. The old recipe is available in Git history, not a competing current shipping instruction.
 
 ## 2026-09-22 — Limb interpolation uses anatomical coefficients
 
@@ -467,7 +422,7 @@ The game’s satire is rooted in love for German culture and German self-irony. 
 
 ## 2026-09-19 — Progressive WebGL world with 2.5D fallback (superseded 2026-09-21)
 
-`game.js` remains the sole owner of gameplay state, movement, collisions, missions, and interactions. It exposes a small read-only rendering bridge consumed by `world3d.js`. When Three.js is available, the root game projects that state into the WebGL world and loads a bounded set of local CC0 building meshes; if Three.js or the model loader fails, the existing canvas renderer and procedural buildings remain playable. The renderer fades only a building lying between the camera and player, keeping the character legible without flattening the whole city. The standalone `3d.html` route remains a renderer-focused diagnostic surface, not a second gameplay authority.
+Superseded by the required-3D decision below. The city remains simulation authority and `3d.html` remains a renderer diagnostic. Current [asset policy](./ASSET-POLICY.md#local-3d-buildings) requires a blocking retry notice on renderer failure and procedural 3D stand-ins for individual missing models; the retired Canvas fallback is not restored.
 
 ## 2026-09-21 — Required 3D renderer and road-safe tree authority
 
@@ -788,3 +743,9 @@ light. The project animation skill now records a reusable event-to-motion beat
 card and multi-domain handoff rather than encoding this scene as a universal
 animation rule. The ChatDev graph validates locally; execution still needs
 the external runner and its API key.
+
+## 2026-10-07 — Codex-led domain work and audio handoff
+
+Codex is the integrator and publisher; scoped workers own disjoint files and return revision-bound evidence. [SKILLS.md](./SKILLS.md) owns model/skill routing and the [production protocol](./chatdev/README.md) owns shared beat and review handoffs. The pinned external ChatDev runner remains optional; its API configuration is independent of native Codex tiers. This reuses the existing tools and episode boundary without adding an orchestrator or service.
+
+The city-to-office handoff preserves the accepted train-completion policy: office speech waits for city foreground audio and its existing gap, with attempt/cue cancellation and speech watchdogs starting after the wait. [BUERGERAMT.md](./BUERGERAMT.md#episode-boundary-and-clock-ownership) owns the current interface. Chromium desktop and Android mobile are the target; emulation, physical-device and listening evidence are reported separately.

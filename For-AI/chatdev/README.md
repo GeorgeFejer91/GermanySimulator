@@ -1,53 +1,34 @@
-# Bürgeramt production workflow
+# Bürgeramt domain workflow and legacy ChatDev runner
 
-The canonical game remains at repository root. OpenBMB ChatDev v2.2.0 is pinned at commit `3c72d860d2553f05129b7dff0fd4efdde5b01d2f` in the sibling `ChatDev` directory. Its sessions, research notes, reference audio, and trial renders stay outside this game checkout. Run `tools/chatdev.ps1 -ValidateOnly` before a session; run `tools/chatdev.ps1 -Prompt '...'` from a `codex/` work branch when the external ChatDev Python environment and local `API_KEY` are ready. Review and test its output in the game before committing. The `pre-chatdev-2026-10-05` tag and external snapshot preserve the pre-integration version.
+Codex leads the work and owns integration. Use the domain and delegation routes in [`../SKILLS.md`](../SKILLS.md); select only affected areas, establish interfaces before parallel work, and keep one writer per file. The local ChatDev integration is an optional legacy runner for the Bürgeramt episode. Its stage graph can inspire domain handoffs, but it does not replace Codex routing, agent tools, review, or acceptance.
 
-For fast iterations, give ChatDev one outcome, relevant paths, current game
-state, and acceptance checks. The complete graph runs Story → Storyboard →
-Character → ColorMood → Animation → Gameplay → Soundscape → Mix → Phone → Voice →
-Review → QA. Run only changed stages for a focused request, then integrate
-their accepted handoffs before Review and QA. A sprite-only change still
-needs its actual atlas builder, image-frame gate and browser playtest. Read stage reports from the
-external session directory, accept verified diffs, and keep one integrator
-responsible for the root game. Incoming WebGPT chats using Secret Tunnel 5
-follow [WEBGPT-COORDINATION.md](./WEBGPT-COORDINATION.md); their accepted
-brief is summarized in [WEBGPT-HANDOFF.md](./WEBGPT-HANDOFF.md).
+## Domain map
 
-For a single changed domain, pass `-Stage <name>` to `tools/chatdev.ps1`
-with a short `-Prompt`; omit `-Stage` for the full graph. Validation
-checks YAML and tool scopes; it does not execute any stage. A focused stage
-still needs local integration review and relevant tests.
+The pinned graph currently has twelve serial stages: Story → Storyboard → Character → ColorMood → Animation → Gameplay → Soundscape → Mix → Phone → Voice → Review → QA. Their individual contracts live in `subgraphs/`. A focused external run uses `-Stage <name>`; a full graph is unnecessary for a narrow change. The active domains for Codex-led work are summarized in [`SKILLS.md`](../SKILLS.md).
 
-| Stage | Owns | Check before handoff |
-| --- | --- | --- |
-| Story | German dialogue, speaker identity, tone and emotional valence | Early, late, answer, decline and optional encounters; visible text equals speech |
-| Storyboard | Visible office beats, actor actions, camera and exit conditions | Every dialogue cue has an owner and a stage transition |
-| Character | Painted identity, four views, prop hand and source provenance | Source views and planted work poses match one body |
-| ColorMood | Dialogue valence, tone palette, tint strength and easing | Only the visible speaker changes; paint and legibility survive |
-| Animation | Distance-driven walks, planted actions, turns and encoded-frame review | Native desktop/mobile motion, pivots and triggers pass |
-| Gameplay | First-person movement, NPC routes, proximity, queue and A38 state | Mission 1 and original eight-step chain still work |
-| Soundscape | Sparse office cues and ambience without music | Effects stay below dialogue and stop on close/replay |
-| Mix | Separate room, effects, office voice and phone call levels | Controls work on desktop and phone; speech remains intelligible |
-| Phone | QR ticket, VDO.Ninja data events, incoming call controls | Real paired-browser answer and decline sync, bounded ping/pong and speech receipts; no camera or microphone |
-| Voice | Licensed distinct references, profiles, exact-line renders | Source/license/hash, listening review, normalized and cataloged clips |
-| Review | Read-only continuity, protocol, asset, language and mix audit | Concrete file/line findings |
-| QA | Syntax, game tests, silent desktop/mobile playtest | Browser errors, optional actor routes, both phone outcomes, timing diagnostics and lost-cue fallback reported |
+## Shared contracts and convergence
 
-Only Story, Gameplay and Phone have write tools in the external graph, each
-restricted to its own file set. Visual assets, renderer changes, sound engine
-and volume UI remain integrator changes after their stage reports. Browser
-speech cannot pass through a Web Audio gain node; mix controls must set each
-utterance's volume. The game and phone are separate devices and keep separate
-audio settings. If the local API key is absent, perform the same bounded
-domain review manually and report that ChatDev itself did not execute.
+1. The integrator defines the bounded player/developer outcome, affected domains, base revision and checks. For cross-domain scenes, agree a beat card: trigger/guard, owner, exact text/cue ID, clock, start/done signals, pause/overlap, fallback and cleanup. Reuse the episode and audio catalogs. Resolve content/runtime constraints here, including phone line bounds, clause-triggered interruptions and visible-asset/collision attachment.
+2. Dispatch independent workers with the [delegation brief](../SKILLS.md#delegation-and-review). One writer owns each file; the integrator serializes shared renderer, CSS and runtime edits. Workers can recommend another tier or subtask, but the integrator controls dispatch and the total concurrency limit.
+3. Join accepted contributions into one candidate. Run affected independent reviews in parallel against that same revision: story/continuity, technical/browser evidence, and Ponytail scope/dependency review. Small changes use only applicable checks. A report does not replace actual browser, image or listening evidence.
+4. Reconcile findings, rerun affected checks after repairs, and publish through the integrator. Keep task records and generated evidence in the chat/session output; only current contracts and durable rationale belong in `For-AI/`.
 
-`For-AI/chatdev/functions/game_tools.py` restricts agent reads and writes to named game files. It puts reports in ChatDev's external session directory. Its voice functions require a working local Voice Cloner installation; the game runs with German browser speech in the meantime. Never save an API key, private voice reference, or ChatDev session output under `assets/`.
+Each review returns **task and candidate revision** (commit or base plus changed-file hashes), **verdict** (`PASS`, `FAIL`, or `NOT RUN`), **checks actually run with results/evidence paths**, **limits**, and **actionable findings with owner**. Attribute supplied evidence separately from fresh checks. Calibrate model routing from first-pass correctness, repair effort and elapsed time; do not invent per-task cost figures or build a benchmark service.
 
-The voice functions use local Voice Cloner port `18765` because `8765` is
-already occupied on this PC. `VOICE_CLONER_PORT` overrides it for another
-machine or an existing worker. The port selects only the local Voice Cloner
-worker; no phone or game traffic uses it.
+## External runner limits
 
-Voice source status: the saved `GS police-officer` profile uses a cataloged CC0 reference. `GS Frau Knick` was created from a 22-second section of [Legamus's German Ramona Deininger-Schnabel CC0 recording](https://legamus.eu/blog/archives/670), with both profile ID and source hash in the audio catalog. Exact-story smoke lines for both speakers and a telephone-filtered police preview live only in ChatDev's external `WareHouse/germany-voice-reference/`. A whole-file automated German transcript is recorded there, but listening and line-by-line approval remain before any recorded game clip ships. A reusable, single-speaker YouTube upload with confirmed source rights was not verified, so the licensed local reference remains the source.
+The runner targets OpenBMB ChatDev v2.2.0 at commit `3c72d860d2553f05129b7dff0fd4efdde5b01d2f` in the sibling `ChatDev` directory. `tools/chatdev.ps1 -ValidateOnly` checks local graph/tool structure and needs Python plus PyYAML only; it does not require that external checkout or credentials and does not execute a stage. Execution additionally needs the pinned external checkout, its Python environment, and local `API_KEY` or `OPENAI_API_KEY` configuration. The graph currently names `gpt-4o`; native Codex routing owns Luna/Sol/Astra task tiers and does not imply an API or ChatDev model migration. Do not claim external model execution or other tools are available unless confirmed in the current environment.
 
-To play the episode without crossing the city, open `index.html?geheim=buergeramt` through the project's HTTP site. The page includes a restart link for another attempt.
+## Tool contract and prompts
+
+The shared launcher, report output, and Voice Cloner sibling path use `CHATDEV_HOME`; it defaults to the pinned sibling checkout. Set it to that checkout when using a worktree. The bounded reader returns a JSON-encoded string with `path`, full-file `sha256`, character `offset`, `total_chars`, `next_offset`, and `content`. `read_game_file(path, offset=0, limit=20000)` accepts a character limit up to 50000; continue at `next_offset` until it is null. If the hash changes between reads, restart from the new version. Every source `save_*` call requires the full-file `expected_sha256` returned by the reader; a mismatch means reread and reconcile, never retry a stale write.
+
+Only Story, Gameplay, and Phone have source write tools; other stages report proposals. Readers can access the project protocols in their allowlist, but a personal/global skill outside that allowlist cannot be fetched by the runner. The coordinator must include the concise relevant skill requirements in the task prompt. For a timing-sensitive beat, specify trigger, owner, exact displayed/spoken text, clock domain, start/done signals, required pauses and overlaps, fallback/timeout, and cancellation/cleanup. Use existing cue and audio-text catalogs; do not invent a separate timing engine.
+
+The advertised `run_game_checks` tool is a fixed source-level check; it cannot perform Chromium or Android browser playtests or paired-device checks. Review every write in the integrated game. Binary art, playable integration, device/browser validation, listening review, and final acceptance remain with Codex and relevant independent reviewers.
+
+If using the runner, do so from an integrator-owned `codex/` work branch, provide one bounded outcome and acceptance checks, inspect the full diff, run applicable project checks, then accept or reject the result. Do not let its direct-write stage overlap another writer. Keep ChatDev sessions, reports, voice references, and trial renders in the sibling checkout, never under shipped assets. Never copy API keys, private voice references, or session output into this repository. If the runner cannot be used, complete the same bounded domain work through available Codex skills and tools, and report the limitation.
+
+## Historical Secret Tunnel handoffs
+
+WebGPT Secret Tunnel 5 uses its separate repository-tool protocol in [`WEBGPT-COORDINATION.md`](./WEBGPT-COORDINATION.md) and the dated intake records in [`WEBGPT-HANDOFF.md`](./WEBGPT-HANDOFF.md). Preserve those findings as evidence, not as current task assignments or an alternate Codex workflow.

@@ -13,6 +13,7 @@ graph:
         api_key: ${API_KEY}
         name: gpt-4o
         role: >-
+          Read For-AI/chatdev/README.md and follow its scoped handoff protocol.
           You storyboard only the canonical Bürgeramt episode. Read
           buergeramt-story.js, buergeramt.js, world3d.js and
           For-AI/GAMEPLAY.md. Write a compact beat map from entrance through

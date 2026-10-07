@@ -1,70 +1,55 @@
-# Skill routing
+# Codex workflow and skill routing
 
-Use only the skills relevant to the current task. Read each selected skill completely before acting.
+Codex is the task lead and integrator. Treat the domains below as a routing map, not a mandatory multi-agent pipeline: select only affected domains, read only matching skills and project sections, and do the work directly when it is small or sequential. The existing game and documented project decisions remain authoritative over generic skill suggestions.
 
-Project-scoped game-development skills are installed in `.agents/skills/`. Their shared OpenAI Game Studio references are in `.agents/references/`. Codex should discover these skills automatically when working in this repository; if a newly installed skill is not visible, start a new Codex turn or restart Codex.
+## Domain routing
 
-## Germany Simulator game-development skills
+| Domain | Route |
+| --- | --- |
+| Story and continuity | Read the relevant `GAMEPLAY.md` dialogue rules, `BUERGERAMT.md` beats when applicable, and the owning text/character catalog. Use `chatdev-game-workflows` for cross-domain Bürgeramt work. |
+| Gameplay and episode | `$game-engine` for the custom simulation; `$web-game-foundations` before substantial architecture changes; `$threejs-gameplay-systems` for 3D mechanics. Preserve the existing runtime and mission authority. |
+| Timing and audio | Read `AUDIO-TEXT-LIBRARY.md`; use `$voice-cloning` with `VOICE-SYNTH-PROTOCOL.md` for new voice profiles or speech assets. Preserve exact visible-text/audio and speaker ownership rules. |
+| Visuals and animation | `$three-webgl-game` for the existing Three.js renderer; `$web-3d-asset-pipeline` for model shipping; `$animate-2d-characters` and `SPRITE-GENERATION-PROTOCOL.md` for moving bitmap characters. Use `$imagegen` only when new raster art is needed. |
+| UI and phone | `$game-ui-frontend` for game HUD/layout; `$uncodixfy-pretext` for bounded text fitting; `$playwright` and `$game-playtest` when browser interaction or visual QA is needed. A paired phone is a separate browser/device context. |
+| Runtime, assets, libraries, and delivery | `$ponytail` for code, infrastructure, hosting, and asset-pipeline decisions. Use the existing static JavaScript, Three.js, and GitHub Pages architecture unless evidence supports a change. |
+| Independent QA | Choose deterministic project checks first; use `$game-playtest` and `$playwright` for relevant browser coverage. Use `$ponytail` for an independent minimality/YAGNI review when scope or dependencies warrant it. |
 
-| Work | Skill | Requirement |
-| --- | --- | --- |
-| Custom gameplay simulation, the main loop, movement, collisions, NPCs, missions, wanted rules, keyboard/touch input, Web Audio, or runtime performance | `$game-engine` | Primary implementation skill for `game.js` and the custom browser-game runtime. Preserve the existing engine and game identity; do not replace it with a starter template or another framework. |
-| Simulation/render/UI/input boundaries, state ownership, module shape, save/debug strategy, or a substantial refactor | `$web-game-foundations` | Use before implementation when the task changes architecture or crosses several runtime domains. Keep the accepted static-first architecture unless the user explicitly authorizes a migration. |
-| HUD, menus, forms, dialogue overlays, responsive layout, touch controls, or other game-facing HTML/CSS | `$game-ui-frontend` and `$uncodixfy-pretext` | Use both. Protect the playfield, preserve the bureaucratic visual identity, and verify desktop and mobile layouts. |
-| `world3d.js`, `3d.html`, Three.js scenes, cameras, lights, materials, loaders, rendering, WebGL diagnostics, or 3D runtime performance | `$three-webgl-game` | Use for the existing imperative vanilla-JavaScript Three.js path. Its TypeScript, Vite, Rapier, and module-layout recommendations are optional guidance, not permission to migrate this project. |
-| Three.js movement, camera feel, encounters, objectives, collision/physics decisions, deterministic update order, difficulty, or game feel | `$threejs-gameplay-systems` | Use for playable 3D mechanics. Do not run its new-project scaffold or any `--force` operation inside this existing repository unless the user explicitly asks for a migration or new isolated prototype. |
-| GLB/glTF cleanup, loading contracts, pivots, scale, materials, compression, LODs, collision proxies, or model performance | `$web-3d-asset-pipeline` | Use for files under `assets/models/` and their runtime asset contract. Also use `$ponytail` if the task expands into hosting, infrastructure, or economic asset-pipeline decisions and that skill is available. |
-| Gameplay smoke testing, visual QA, HUD obstruction checks, responsive checks, WebGL regressions, or structured bug finding | `$game-playtest` | Use after user-visible game changes and for dedicated QA tasks. Exercise real controls and inspect screenshots; DOM assertions alone are insufficient for WebGL. |
-| Real-browser navigation, keyboard/pointer/touch automation, screenshots, traces, console inspection, or reproducible browser flows | `$playwright` | Use as the browser-automation companion to `$game-playtest`. Resolve its project-local wrapper from `.agents/skills/playwright/scripts/playwright_cli.sh`; on Windows, use the equivalent `npx --package @playwright/cli playwright-cli` command when the shell wrapper is unsuitable. |
+Use only installed, task-relevant skills and read the selected skill before acting. Available project skills live in `.agents/skills/`; personal `$ponytail`, `$uncodixfy-pretext`, `$voice-cloning`, `$imagegen`, and `$multi-source-web-search` routes may be loaded from the configured personal skill root. Do not route work to unavailable `$system-engineering` or `$rust-work-graph`; use `$web-game-foundations` for architecture and `$ponytail` for YAGNI and minimality.
 
-For work that spans domains, invoke every matching skill, normally in this order: architecture, runtime/gameplay, UI or assets, playtest, then browser automation. Do not invoke unrelated skills merely because they are installed.
+## Delegation and review
 
-All browser-testing skill workflows must follow the [silent background browser-test policy](./AGENT-START.md#silent-background-browser-tests): isolated background sessions, muted before navigation and interaction, with no focus stealing or audible output.
+Delegate only separable work that benefits from parallel effort. Keep one integrator accountable for the whole outcome, acceptance, and publication. Use no more than three active subagents and never exceed the live host/tool slot limit. Assign one writer per file; establish file ownership and interface contracts before parallel edits. Do not give workers overlapping writable paths or ask them to absorb unrelated worktree changes.
 
-The project stack is already chosen: custom JavaScript simulation plus required vanilla Three.js rendering, static files, and GitHub Pages. Registered PNG character sprites remain supported through Three.js sprites. Do not reintroduce a Canvas world, or add Phaser, React Three Fiber, Vite, TypeScript, Rapier, a backend, or a second runtime tree solely because an installed skill recommends that stack for new projects.
+Every delegated brief states: **base commit; working directory/worktree; one goal and expected result; exact read paths; exclusive write paths; dependencies/contracts; relevant skills; acceptance checks; and required return evidence**. Ask workers to return changed paths, concise decisions, checks actually run and results, screenshots/log references where applicable, unresolved issues, and any deviation from the brief. Workers do not commit, push, or publish.
 
-For the first Bürgeramt episode, run `tools/chatdev.ps1 -ValidateOnly` before proposing a ChatDev graph change. The external pinned ChatDev checkout has twelve scoped stages for story, storyboard, character, color mood, animation, gameplay, soundscape, mix, phone sync, voice, review, and QA; `For-AI/chatdev/` owns the graph and file permissions. The voice stage also uses `$voice-cloning`, and gameplay changes still use the applicable game skills and silent browser playtests. ChatDev output is a proposal to validate in this root game, not another deployable game tree.
+For a timing-sensitive dialogue or sound beat, define its contract before parallel work: trigger; owning speaker/system; exact visible and spoken text; clock domain; start and done receipts; intended pauses and overlaps; timeout/fallback; and cancellation/cleanup. Reuse the existing audio-text and cue catalogs; do not introduce another timing engine.
 
-Installed source snapshots (2026-09-19):
+After integration, request independent review only where useful: continuity for authored story/copy, technical review for runtime or architecture, browser/device QA for user-visible flows, and a Ponytail review for scope/dependencies. The author is not the sole approver of a substantial cross-domain change. Fix findings or report why they remain open before acceptance.
 
-- `$game-playtest`, `$game-ui-frontend`, `$three-webgl-game`, `$web-3d-asset-pipeline`, and `$web-game-foundations`: `openai/plugins` at `1dc195897af4161d039b80d8471ec0a10c9bbc89`.
-- `$playwright`: `openai/skills` at `49f948faa9258a0c61caceaf225e179651397431`.
-- `$game-engine`: `github/awesome-copilot` at `4f4796f0bf30e105700f97ed8408c12b6aa95e06`.
-- `$threejs-gameplay-systems`: `majidmanzarpour/threejs-game-skills` at `e5f301d548bb18c530afbece78cd25082f4cda9c`.
+Reviewers use the single evidence format in [`chatdev/README.md`](./chatdev/README.md#shared-contracts-and-convergence), including explicit PASS, FAIL, and NOT RUN results.
 
-Incoming WebGPT Secret Tunnel 5 contributors use
-[`chatdev/WEBGPT-COORDINATION.md`](./chatdev/WEBGPT-COORDINATION.md) and the
-[coordinator-owned handoff](./chatdev/WEBGPT-HANDOFF.md). Assign distinct path
-ownership before parallel edits and accept only verified material into a
-ChatDev stage.
+## Model tiers
 
-## Other project skills
+Check the live available model/tool options before dispatch; these are task-fit tiers, not guarantees that a model or subagent tool is currently available:
 
-For cross-domain Bürgeramt work or changes to its ChatDev production process, use
-[`chatdev-game-workflows`](../.agents/skills/chatdev-game-workflows/SKILL.md).
-It routes the scoped domain stages; it does not replace the art, game, audio,
-UI or browser skills required by the actual change.
+- **`gpt-6-luna`, medium:** narrow housekeeping, bounded documentation, or a small isolated change.
+- **`gpt-6-sol`, high:** normal implementation, integration, and independent technical review.
+- **`gpt-6-astra`, high:** ambiguous or unusually complex work, especially 3D rendering, animation, or timing behavior.
 
-| Work | Skill | Requirement |
-| --- | --- | --- |
-| Any code change, plus backend efficiency, infrastructure, hosting architecture, asset pipelines, and economic asset usage | `$ponytail` | Required. Apply its smallest-working-change ladder and keep the static GitHub Pages deployment simple. |
-| New character voice profiles, reference recordings, synthesized speech clips, or voice-asset validation | `$voice-cloning` | Use with `VOICE-SYNTH-PROTOCOL.md` and the local Voice Cloner `AI-GUIDE.md`; keep game voice IDs, profile bindings, source transcripts, subtitles, and trigger ownership in the existing audio-text catalog. |
-| New raster billboards, textures, period artwork, or bitmap variants | `$imagegen` | Use for generated raster art; keep final project-bound files inside this repository. Do not use it for simple SVG or code-native geometry. |
-| Moving bitmap characters, sprite atlases, gait keys, transition frames, or event-driven character actions | `$animate-2d-characters`, `$imagegen`, `$game-engine`, and `$game-playtest` | Follow `SPRITE-GENERATION-PROTOCOL.md`: generated frames are proposals, the registered key sheet is source authority, the derived atlas is runtime authority, and desktop/mobile rapid-cycle QA is mandatory. For narrative actions use the animation skill's `references/narrative-action-rigging.md` beat card before creating keys or paths. Count distinct visual frames and verify transparent cell gutters after encoding; a fast renderer cannot cure held-pose movement. Its Pets-derived walk review is included there; the Work Pets creation skill and pet-specific atlas tooling are not dependencies of this game. |
-| HTML, CSS, HUD, menus, responsive behavior, or other frontend UI work | `$uncodixfy-pretext` | Preserve the existing game-specific identity and avoid generic generated UI patterns. |
-| Architecture, authority boundaries, durable project memory, manifests, and handoff surfaces | `$system-engineering` | Use for lasting structural decisions and update `DECISIONS.md`. |
-| Current public facts, external references, historical research, or documentation lookup | `$multi-source-web-search` | Prefer primary sources, open sources before citing, and run a blind-spot pass for nontrivial research. |
-| Large repository mapping, dependency pressure, or diff-impact analysis | `$rust-work-graph` | Use only when the repository becomes complex enough to justify graph analysis. |
+Use the lowest tier that fits the task and the user’s model preference. Do not silently substitute when a requested tier or required tool is unavailable. If scope exceeds a brief or a repair fails, return the finding to the integrator for replanning rather than expanding delegated work. See the [official model selection guide](https://developers.openai.com/api/docs/guides/model-selection) and [subagent documentation](https://learn.chatgpt.com/docs/agent-configuration/subagents).
+
+Record the selected model and reasoning effort in each delegated task brief; use `integrator-owned` when work remains with Codex.
+
+## Checks and external ChatDev
+
+Prefer existing deterministic scripts and focused checks. For browser-visible changes, expected coverage is Chromium desktop and Android mobile. Label Android emulation and real-device results distinctly; if a physical device is unavailable, report that coverage as outstanding. Follow the [silent background browser-test policy](./AGENT-START.md#silent-background-browser-tests). Silent test sessions can verify audio state and timing, but not perceived sound quality; record listening evidence separately and do not claim it without an actual listening review. If a browser, device, API, or external model is unavailable, state what was not exercised.
 
 ## 2D character animation skill
 
-The project copy is [`.agents/skills/animate-2d-characters/SKILL.md`](../.agents/skills/animate-2d-characters/SKILL.md); its public upstream is [GeorgeFejer91/animate-2d-characters](https://github.com/GeorgeFejer91/animate-2d-characters). Use it when authoring or repairing a painted character's walk, turn, action, reaction, atlas, or movement export. For changes only to dialogue, audio, or character identity metadata, use the relevant catalogs instead.
+For a moving bitmap character, sprite atlas, gait, reaction, or transition, use `$animate-2d-characters` with `SPRITE-GENERATION-PROTOCOL.md`; review exact encoded frames at desktop and mobile scale. At each completed animation milestone, check for a reusable general method. If one emerged, validate and publish that general guidance to the public skill, then synchronize the project copy; keep project-specific assets and acceptance details here.
 
-1. Lock the character's approved source identity, prop ownership, canvas, baseline, and directions. Follow the skill's painted-walk or interaction-state reference as appropriate; keep Germany Simulator's accepted asset and runtime rules in [`SPRITE-GENERATION-PROTOCOL.md`](./SPRITE-GENERATION-PROTOCOL.md).
-2. Review the exact exported frames and transitions, then check the character in the game at desktop and mobile sizes. For walking changes, run the skill's planted-foot speed assessment at the actual billboard scale and compare visible shoe slide before accepting the manifest's cycle distance.
-3. At each completed 2D animation milestone, check whether a proven, reusable fix or useful method emerged. If so, put its generic steps, limits, and helper tests in the public skill; keep game-specific values, art, and acceptance records here. Validate the skill, commit and push its repository, then synchronize the project copy. Do not publish unreviewed experiments or project-only assets as general guidance.
-
-Do not use website generators or replace the existing static game architecture merely because a skill is available.
 ## HTML text-fitting contract
 
-For any new or changed bounded HTML/CSS text in the HUD, menus, forms, dialogue, or touch controls, load [`uncodixfy-pretext`](https://github.com/GeorgeFejer91/uncodixfy-pretext/blob/main/SKILL.md) and its Pretext reference. It incorporates original Uncodixfy aesthetics and Ponytail; keep the game-specific visual identity and existing static architecture. Use actual `@chenglou/pretext` measurement on the touched UI, then verify rendered desktop/mobile layout, 320 CSS px reflow, 200% text/zoom, and long German/English strings. Give unreadable or impossible fits an explicit layout/reveal outcome. This route does not claim the existing game has already been migrated.
+For new or changed bounded HTML/CSS text, use `$uncodixfy-pretext` and measure the touched UI with actual `@chenglou/pretext`. Verify 320 CSS px reflow, 200% text/zoom, and long German and English strings; define an explicit layout or reveal path when text cannot fit. This route does not imply the existing game UI has already been migrated.
+
+The pinned OpenBMB ChatDev workflow in `For-AI/chatdev/` is an optional legacy runner for its twelve Bürgeramt stages, not the default coordinator or a source of assumed Codex capabilities. Use it only when its external checkout/runtime is available and the task benefits from that runner. It requires its local API configuration, has limited stage-specific file tools, and its QA tool does not perform browser playtests. Static validation confirms graph/tool configuration only; it does not execute stages. Follow [`chatdev/README.md`](./chatdev/README.md) for its exact limits. Do not create Codex chats unless the user explicitly requests them.
