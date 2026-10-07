@@ -1,6 +1,22 @@
 # Durable decisions
 
-## 2026-10-06 — Unknown caller and browser-scoped call controls
+## 2026-10-07 — Arm and schedule the Bürgeramt call on peer time
+
+The phone's name submission is required before Frau Knick's counter call, so
+its button press can unlock Web Audio and provide browser user activation for
+supported vibration. The host sends `call-arm` and waits for `call-ready`, with
+a one-second fallback, before sending a call target 2.2 seconds ahead. Direct
+four-timestamp phone-link offset is the primary clock. A sampled, keyless
+[TimeAPI.io](https://timeapi.io/) UTC anchor is an optional fallback and clock
+cross-check; a receipt-relative lead remains available if either clock sample
+fails. No external time service becomes the mission authority. The host starts
+a restrained 217 Hz style cue 900 ms before its target and ducks office audio;
+the phone places its first ring on the Web Audio timeline and requests
+vibration at its target. The wire envelope is now v3. The exact script,
+evidence, and physical-device limits are in
+[`PHONE-CALL-TIMING-RESEARCH.md`](./PHONE-CALL-TIMING-RESEARCH.md).
+
+## 2026-10-07 — Evidence-based incoming-call families
 
 The Bürgeramt phone hides the officer's identity until the player answers:
 the incoming caller is `UNBEKANNT` or `UNKNOWN`, with no police initials,
@@ -9,25 +25,30 @@ only the host's English-subtitle preference alongside its existing invitation;
 that explicit preference selects English call chrome. Otherwise the phone
 browser's first preferred language selects English when it starts with `en`,
 and German in every other case. Spoken police dialogue and the office story
-stay German. iPhone and unknown browsers use accessible tap actions; Android
-phone browsers add a rightward answer drag and retain tap as a fallback. The
-Android row places the green drag handle left of the red decline action, as
-shown in Samsung's incoming-call screenshot; all controls remain reachable
-when the browser reflows them into stacked buttons.
+stay German. The visible call uses an iPhone full-screen tap layout, a Phone by
+Google centered handset that drags left to decline or right to answer, a
+Samsung Phone pair of green-left/red-right drag buttons, or a neutral tap
+fallback. Google and Samsung also accept taps and keyboard activation. At
+very narrow reflow widths, all actions become full-width tap buttons. The
+ring animation rotates only the handset glyph inside a fixed button, so its
+paint cannot expand the page or hide another control. The game-specific call
+volume control remains available.
 
-These are browser adaptations, not claims of native dialer emulation. Apple's
-[call guide](https://support.apple.com/guide/iphone/answer-or-decline-incoming-calls-iph3c9947bf/ios)
-limits its answer slider to a locked iPhone; the
-[Google Phone guide](https://support.google.com/phoneapp/answer/2811745)
-describes right/left swipes while locked and tap actions, while
-[Samsung's call guide and screenshot](https://www.samsung.com/us/support/answer/ANS10007262/),
-its [call-display settings](https://www.samsung.com/us/support/answer/ANS10002366/), and
-[Huawei](https://consumer.huawei.com/en/support/content/en-us15870480/)
-document additional drag, tap, full-screen, and pop-up variants. Browser
-language is exposed through [`navigator.languages`](https://developer.mozilla.org/en-US/docs/Web/API/Navigator/languages),
-but [reduced user agents](https://developer.mozilla.org/en-US/docs/Web/HTTP/Guides/User-agent_reduction)
-and unavailable native dialer settings prevent reliable exact-model or
-exact-call-screen selection. No high-entropy model probe is needed.
+This supersedes the earlier all-Android rightward slider. Apple's
+[call guide](https://support.apple.com/guide/iphone/answer-or-decline-incoming-calls-iph3c9947bf/26/ios/26)
+limits its answer slider to a locked iPhone, while the linked browser is in
+use. Google's [product update](https://blog.google/products-and-platforms/devices/pixel/calling-updates-pixel-10/)
+documents the choice of horizontal swipe or single tap, and Samsung's
+[call guide](https://www.samsung.com/ca/support/mobile-devices/flip-your-galaxy-phone-to-mute-alarms-and-calls/)
+documents its separate drag actions. The exact visual references, additional
+OEM variants, and limits are recorded in
+[`PHONE-CALL-UI-RESEARCH.md`](./PHONE-CALL-UI-RESEARCH.md). Browser language
+comes from [`navigator.languages`](https://developer.mozilla.org/en-US/docs/Web/API/Navigator/languages).
+The OS is inferred from low-entropy browser hints; a best-effort, optional
+[`model` client hint](https://developer.mozilla.org/en-US/docs/Web/API/NavigatorUAData/getHighEntropyValues)
+can select Samsung when the ordinary UA is reduced. Neither hint reveals the
+active dialer, its gesture preference, theme, or lock state. The static page
+therefore claims evidence-based family fidelity, not universal exact pixels.
 
 ## 2026-10-06 — Optional moving cast and bounded mood mix in the office
 

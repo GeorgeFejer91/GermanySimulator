@@ -6,8 +6,8 @@ function event(target,type,detail){target.dispatchEvent(new CustomEvent(type,{de
 function sourceOf(value){return typeof value==="string"?value:value?.streamID||value?.streamId||value?.id||""}
 // The sender role owns both the message type and its bounded payload.
 function validPayload(type,data,sender){
- const shapes=sender==="phone"?{scan:["id"],register:["name"],"phone-hidden":[],answer:["id"],decline:["id"],"sync-pong":["id","receivedAtMs","sentAtMs"],"police-start":["index","mode","readyDelayMs","atMs"],"police-done":["index","mode","durationMs","atMs"]}:
-  sender==="host"?{ticket:["number"],forfeit:[],call:["id","line"],"police-line":["index","line"],"sync-ping":["id"],done:[]}:{};
+ const shapes=sender==="phone"?{scan:["id"],register:["name"],"phone-hidden":[],answer:["id"],decline:["id"],"sync-pong":["id","receivedAtMs","sentAtMs"],"call-ready":["id","atMs"],"call-scheduled":["id","atMs","mode","lateMs"],"police-start":["index","mode","readyDelayMs","atMs"],"police-done":["index","mode","durationMs","atMs"]}:
+  sender==="host"?{ticket:["number"],forfeit:[],"call-arm":["id"],call:["id","line","ringAtPhoneMs","ringAtUtcMs","leadMs"],"police-line":["index","line"],"sync-ping":["id"],done:[]}:{};
  if(!Object.hasOwn(shapes,type)||!data||typeof data!=="object"||Array.isArray(data))return false;
  const fields=shapes[type],keys=Object.keys(data);
  if(keys.length!==fields.length||keys.some(key=>!fields.includes(key)))return false;
@@ -15,17 +15,20 @@ function validPayload(type,data,sender){
  const clock=value=>Number.isFinite(value)&&value>=0&&value<=1e12;
  if(type==="sync-ping"||type==="sync-pong")return Number.isSafeInteger(data.id)&&data.id>0&&data.id<=2147483647&&
   (type==="sync-ping"||clock(data.receivedAtMs)&&clock(data.sentAtMs)&&data.sentAtMs>=data.receivedAtMs&&data.sentAtMs-data.receivedAtMs<=12000);
+ if(type==="call-ready")return data.id==="grass"&&clock(data.atMs);
+ if(type==="call-scheduled")return data.id==="grass"&&clock(data.atMs)&&["peer","utc","receipt"].includes(data.mode)&&Number.isInteger(data.lateMs)&&data.lateMs>=0&&data.lateMs<=12000;
  if(type==="police-start"||type==="police-done")return Number.isInteger(data.index)&&data.index>=-1&&data.index<3&&["voice","fallback"].includes(data.mode)&&
   clock(data.atMs)&&(type==="police-start"?Number.isInteger(data.readyDelayMs)&&data.readyDelayMs>=0&&data.readyDelayMs<=60000:Number.isInteger(data.durationMs)&&data.durationMs>=0&&data.durationMs<=60000);
  if(type==="register")return typeof data.name==="string"&&data.name.trim().length>=2&&data.name.length<=80&&!/[\u0000-\u001f\u007f]/.test(data.name);
  if(type==="ticket")return typeof data.number==="string"&&/^B-\d{3}$/.test(data.number);
- if(type==="answer"||type==="decline")return data.id==="grass";
- if(type==="call"||type==="police-line")return typeof data.line==="string"&&data.line.trim().length>0&&data.line.length<350&&
-  (type==="call"?data.id==="grass":Number.isInteger(data.index)&&data.index>=0&&data.index<3);
+ if(type==="answer"||type==="decline"||type==="call-arm")return data.id==="grass";
+ if(type==="call")return data.id==="grass"&&typeof data.line==="string"&&data.line.trim().length>0&&data.line.length<350&&
+  (data.ringAtPhoneMs===null||clock(data.ringAtPhoneMs))&&(data.ringAtUtcMs===null||Number.isSafeInteger(data.ringAtUtcMs)&&data.ringAtUtcMs>=0)&&Number.isInteger(data.leadMs)&&data.leadMs>=600&&data.leadMs<=5000;
+ if(type==="police-line")return typeof data.line==="string"&&data.line.trim().length>0&&data.line.length<350&&Number.isInteger(data.index)&&data.index>=0&&data.index<3;
  return true;
 }
 function validMessage(msg,session,lastSeq,sender){
- if(!msg||typeof msg!=="object"||Array.isArray(msg)||msg.v!==2||msg.session!==session||
+ if(!msg||typeof msg!=="object"||Array.isArray(msg)||msg.v!==3||msg.session!==session||
   !Number.isSafeInteger(msg.seq)||msg.seq<=0||msg.seq<=lastSeq||typeof msg.type!=="string")return false;
  const {v,session:ignoredSession,seq,type,...payload}=msg;
  return validPayload(type,payload,sender);
@@ -33,7 +36,7 @@ function validMessage(msg,session,lastSeq,sender){
 class AmtLink extends EventTarget{
  constructor(role,invitation){super();this.role=role;this.invitation=invitation;this.sdk=null;this.channel=null;this.peer="";this.seq=0;this.lastSeq=0;this.closed=false;this.viewing=false}
  static invitation(){return{room:`amt-${randomId(16)}`,secret:randomId(32),stream:`amt-ticket-${randomId(16)}`}}
- static phoneUrl(invitation,englishSubtitles=false){const url=new URL("./buergeramt-phone.html",location.href),params=new URLSearchParams(invitation);url.searchParams.set("v","20261006-call-ui-sync3");if(englishSubtitles)params.set("captions","en");url.hash=params.toString();return url.href}
+ static phoneUrl(invitation,englishSubtitles=false){const url=new URL("./buergeramt-phone.html",location.href),params=new URLSearchParams(invitation);url.searchParams.set("v","20261007-call-sync4");if(englishSubtitles)params.set("captions","en");url.hash=params.toString();return url.href}
  static fromHash(){const p=new URLSearchParams(location.hash.slice(1)),room=p.get("room"),secret=p.get("secret"),stream=p.get("stream");if(!room?.startsWith("amt-")||!stream?.startsWith("amt-ticket-")||!/^[a-z0-9]{32}$/.test(secret||""))return null;return{room,secret,stream}}
  async start(){if(typeof VDONinjaSDK!=="function")throw new Error("VDO.Ninja Verbindung fehlt");
   const sdk=new VDONinjaSDK({password:this.invitation.secret,salt:"germany-simulator-amt-v1"});this.sdk=sdk;
@@ -75,7 +78,7 @@ class AmtLink extends EventTarget{
   if(this.closed||this.channel?.readyState!=="open"||this.channel.bufferedAmount>65536)return false;
   try{
    if(!validPayload(type,data,this.role)||!Number.isSafeInteger(this.seq+1))return false;
-   const msg={...data,v:2,session:this.invitation.stream,seq:this.seq+1,type},encoded=JSON.stringify(msg);
+   const msg={...data,v:3,session:this.invitation.stream,seq:this.seq+1,type},encoded=JSON.stringify(msg);
    if(new TextEncoder().encode(encoded).byteLength>1024)return false;
    this.seq=msg.seq;this.channel.send(encoded);return true;
   }catch{return false}

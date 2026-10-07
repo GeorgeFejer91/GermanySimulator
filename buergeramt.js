@@ -12,10 +12,10 @@ let attempt=0,cue=0,callOutcome="";
 function defer(callback,delay){const owner=attempt;const id=setTimeout(()=>{pendingTimers.delete(id);if(active&&owner===attempt)callback()},delay);pendingTimers.add(id);return id}
 function clearTimer(id){clearTimeout(id);pendingTimers.delete(id)}
 function cancelSpeech(){cue++;try{const engine=window.speechSynthesis;if(engine?.speaking||engine?.pending)engine.cancel()}catch{}}
-let active=false,stage="closed",link=null,number="",registeredName="",activated=false,qrSvg="",queueDisplay="—",queueIndex=0,queueClock=0,ticketWaitCalls=0,ticketSerial=100,lastScanId="",deadline=0,clerkIndex=0,callPending=false,callTriggered=false,policeDoneHandler=null,policeStartHandler=null,policeDisconnectHandler=null,options=null,ambientClock=0,ambientIndex=0,officeAudio=null;
-let timing={rttMs:null,oneWayMs:0,jitterMs:0,lastPongAt:null,clockOffsetMs:null,clockUncertaintyMs:null,startLagMs:null,phoneReadyMs:null,phoneFastReadyMs:null,deskStartLagMs:0,deskMsPerChar:55,cues:{},desk:{}};
+let active=false,stage="closed",link=null,number="",registeredName="",activated=false,qrSvg="",queueDisplay="—",queueIndex=0,queueClock=0,ticketWaitCalls=0,ticketSerial=100,lastScanId="",deadline=0,clerkIndex=0,callPending=false,callTriggered=false,callCommitted=false,callArmTimer=null,clockAnchor=null,policeDoneHandler=null,policeStartHandler=null,policeDisconnectHandler=null,options=null,ambientClock=0,ambientIndex=0,officeAudio=null;
+let timing={rttMs:null,oneWayMs:0,jitterMs:0,lastPongAt:null,clockOffsetMs:null,clockUncertaintyMs:null,startLagMs:null,phoneReadyMs:null,phoneFastReadyMs:null,deskStartLagMs:0,deskMsPerChar:55,call:null,cues:{},desk:{}};
 let pingSerial=0,pingTimer=null,hostVoiceStartupMs=null,hostVoiceAttempts=0;const outstandingPings=new Map(),rttSamples=[];
-function resetTiming(){if(pingTimer!==null)clearInterval(pingTimer);pingTimer=null;outstandingPings.clear();rttSamples.length=0;pingSerial=0;timing={rttMs:null,oneWayMs:0,jitterMs:0,lastPongAt:null,clockOffsetMs:null,clockUncertaintyMs:null,startLagMs:null,phoneReadyMs:null,phoneFastReadyMs:null,deskStartLagMs:0,deskMsPerChar:55,cues:{},desk:{}}}
+function resetTiming(){if(pingTimer!==null)clearInterval(pingTimer);pingTimer=null;outstandingPings.clear();rttSamples.length=0;pingSerial=0;timing={rttMs:null,oneWayMs:0,jitterMs:0,lastPongAt:null,clockOffsetMs:null,clockUncertaintyMs:null,startLagMs:null,phoneReadyMs:null,phoneFastReadyMs:null,deskStartLagMs:0,deskMsPerChar:55,call:null,cues:{},desk:{}}}
 function probeLink(){if(!active||!link)return;const now=performance.now();for(const [id,sent] of outstandingPings)if(now-sent>12000)outstandingPings.delete(id);if(outstandingPings.size>=2)return;pingSerial=pingSerial>=2147483647?1:pingSerial+1;if(link.send("sync-ping",{id:pingSerial}))outstandingPings.set(pingSerial,now)}
 function receivePong(id,receivedAtMs,sentAtMs){const sent=outstandingPings.get(id);if(sent===undefined)return;outstandingPings.delete(id);const now=performance.now(),rtt=now-sent-(sentAtMs-receivedAtMs);if(!Number.isFinite(rtt)||rtt<0||rtt>12000)return;const offset=((receivedAtMs-sent)+(sentAtMs-now))/2;rttSamples.push({rtt,offset});if(rttSamples.length>7)rttSamples.shift();const sorted=[...rttSamples].sort((a,b)=>a.rtt-b.rtt),best=sorted.slice(0,Math.min(3,sorted.length)),bestOffsets=best.map(sample=>sample.offset).sort((a,b)=>a-b);timing.rttMs=Math.round(sorted[Math.floor(sorted.length/2)].rtt);timing.oneWayMs=Math.round(timing.rttMs/2);timing.jitterMs=Math.round(sorted.at(-1).rtt-sorted[0].rtt);timing.clockOffsetMs=bestOffsets[Math.floor(bestOffsets.length/2)];timing.clockUncertaintyMs=Math.ceil(best.at(-1).rtt/2);timing.lastPongAt=now}
 function oneWay(){return timing.lastPongAt!==null&&performance.now()-timing.lastPongAt<6000?Math.min(400,timing.oneWayMs):0}
@@ -28,11 +28,11 @@ function receivePoliceDone(index,mode,durationMs,atMs){const record=timing.cues[
 const ambientLines=[["WARTERAUM","Mein Termin war gestern. Ich war heute pünktlich."],["SCHALTER 1","Für die Kopie des Originals benötigen Sie das Original der Kopie."],["TELEFON AM SCHALTER 2","Nein, die Warteschleife ist persönlich zu nehmen."],["WARTERAUM","Mein Buchstabe wurde aufgerufen, aber die Zahl gehört jemand anderem."],["SCHALTER 4","Einen Moment. Ich verbinde Sie mit Ihrem Moment."]];
 const mix={ambience:.35,voice:.8,fx:.6},mixPanel=document.getElementById("amt-mix");
 try{const saved=JSON.parse(localStorage.getItem("amt-mix-v1")||"null");for(const key of Object.keys(mix))if(Number.isFinite(saved?.[key]))mix[key]=Math.max(0,Math.min(1,saved[key]))}catch{}
-function applyMix(){if(officeAudio){officeAudio.ambience.gain.value=.006*mix.ambience;officeAudio.fx.gain.value=mix.fx}}
+function applyMix(){if(officeAudio){officeAudio.ambience.gain.value=.006*mix.ambience;officeAudio.fx.gain.value=mix.fx;officeAudio.signal.gain.value=mix.fx}}
 for(const slider of mixPanel.querySelectorAll("[data-amt-volume]")){const key=slider.dataset.amtVolume;slider.value=String(Math.round(mix[key]*100));slider.addEventListener("input",()=>{mix[key]=Number(slider.value)/100;applyMix();try{localStorage.setItem("amt-mix-v1",JSON.stringify(mix))}catch{}})}
 function initOfficeAudio(){
  try{const Audio=window.AudioContext||window.webkitAudioContext;if(!Audio||navigator.userActivation&&!navigator.userActivation.hasBeenActive)return null;
-  if(!officeAudio){const ctx=new Audio(),ambience=ctx.createGain(),fx=ctx.createGain(),hum=ctx.createOscillator();hum.type="sine";hum.frequency.value=53;hum.connect(ambience).connect(ctx.destination);fx.connect(ctx.destination);hum.start();officeAudio={ctx,ambience,fx,hum};applyMix()}
+  if(!officeAudio){const ctx=new Audio(),ambience=ctx.createGain(),fx=ctx.createGain(),bus=ctx.createGain(),signal=ctx.createGain(),hum=ctx.createOscillator();hum.type="sine";hum.frequency.value=53;ambience.connect(bus);fx.connect(bus);bus.connect(ctx.destination);signal.connect(ctx.destination);hum.connect(ambience);hum.start();officeAudio={ctx,ambience,fx,bus,signal,hum};applyMix()}
   if(officeAudio.ctx.state==="suspended")officeAudio.ctx.resume().catch(()=>{});return officeAudio;
  }catch{return null}
 }
@@ -79,10 +79,10 @@ function say(text,onComplete,onStart,onBoundary){
  const complete=()=>{if(settled||!current())return;start("fallback");settled=true;if(fallback!==null)clearTimer(fallback);onComplete?.(mode)};
  const voiced=options?.voiceOn?.()&&window.speechSynthesis&&typeof window.SpeechSynthesisUtterance==="function";
  const beginFallback=()=>{if(settled||failed||!current())return;failed=true;mode="fallback";if(fallback!==null)clearTimer(fallback);try{if(speechSynthesis.speaking||speechSynthesis.pending)speechSynthesis.cancel()}catch{}start("fallback");if(onComplete)fallback=defer(complete,readableMs)};
- if(onComplete){if(voiced){const limit=hostVoiceStartupMs===null?(hostVoiceAttempts===0?1800:1200):Math.max(900,Math.min(1800,Math.round(hostVoiceStartupMs*2+250)));hostVoiceAttempts++;fallback=defer(beginFallback,limit)}else fallback=defer(complete,readableMs)}
+ if(onComplete||onStart){if(voiced){const limit=hostVoiceStartupMs===null?(hostVoiceAttempts===0?1800:1200):Math.max(900,Math.min(1800,Math.round(hostVoiceStartupMs*2+250)));hostVoiceAttempts++;fallback=defer(beginFallback,limit)}else if(onComplete)fallback=defer(complete,readableMs)}
  if(!voiced){start("fallback");return}
  const utterance=new SpeechSynthesisUtterance(text);utterance.lang="de-DE";utterance.rate=.96;utterance.volume=mix.voice;
- utterance.onstart=()=>{if(!current()||settled||failed)return;start("voice");if(onComplete){const lag=Math.max(0,performance.now()-requestedAt);hostVoiceStartupMs=hostVoiceStartupMs===null?lag:Math.round(hostVoiceStartupMs*.6+lag*.4)}if(fallback!==null)clearTimer(fallback);if(onComplete)fallback=defer(complete,Math.max(20000,text.length*120))};
+ utterance.onstart=()=>{if(!current()||settled||failed)return;start("voice");if(onComplete||onStart){const lag=Math.max(0,performance.now()-requestedAt);hostVoiceStartupMs=hostVoiceStartupMs===null?lag:Math.round(hostVoiceStartupMs*.6+lag*.4)}if(fallback!==null)clearTimer(fallback);if(onComplete)fallback=defer(complete,Math.max(20000,text.length*120))};
  utterance.onboundary=event=>{if(current()&&!settled&&!failed&&Number.isInteger(event.charIndex))onBoundary?.(event.charIndex)};
  utterance.onend=()=>{if(!failed)complete()};utterance.onerror=beginFallback;
  requestAnimationFrame(()=>{if(current()&&!settled){try{speechSynthesis.speak(utterance)}catch{utterance.onerror()}}});
@@ -108,8 +108,39 @@ function officeBlocked(x,z){
  if(characters.some(actor=>Math.hypot(x-actor.x,z-actor.z)<1.15))return true;
  return officeSeats.some(([sx,sz])=>Math.abs(x-sx)<.62&&Math.abs(z-sz)<.58);
 }
-function forfeit(reason){if(!active||!activated||["cancelled","expired","closed"].includes(stage))return;activated=false;callPending=false;callOutcome="forfeit";link?.send("forfeit");exit.hidden=false;setStage("expired");setStatus("PLATZ VERFALLEN · "+reason);content("ANMELDESCHALTER","Das Telefon war nicht durchgehend erreichbar. Ihre Nummer ist gestrichen. Scannen Sie das Schild erneut.",[{label:"ZURÜCK ZUM QR-SCHILD",run:()=>setStage("walk-sign")},{label:"AMT VERLASSEN",run:()=>{close(false);options.onCancel()}}])}
+function forfeit(reason){if(!active||!activated||["cancelled","expired","closed"].includes(stage))return;activated=false;callPending=false;callOutcome="forfeit";stopCallSignal();link?.send("forfeit");exit.hidden=false;setStage("expired");setStatus("PLATZ VERFALLEN · "+reason);content("ANMELDESCHALTER","Das Telefon war nicht durchgehend erreichbar. Ihre Nummer ist gestrichen. Scannen Sie das Schild erneut.",[{label:"ZURÜCK ZUM QR-SCHILD",run:()=>setStage("walk-sign")},{label:"AMT VERLASSEN",run:()=>{close(false);options.onCancel()}}])}
 function ring(){try{const audio=initOfficeAudio();if(!audio)return;const {ctx,fx}=audio,now=ctx.currentTime;for(const offset of [0,.2,.52,.72]){const osc=ctx.createOscillator(),gain=ctx.createGain();osc.type="sine";osc.frequency.value=425;gain.gain.setValueAtTime(.0001,now+offset);gain.gain.linearRampToValueAtTime(.014,now+offset+.015);gain.gain.setValueAtTime(.014,now+offset+.1);gain.gain.exponentialRampToValueAtTime(.0001,now+offset+.15);osc.connect(gain).connect(fx);osc.onended=()=>{osc.disconnect();gain.disconnect()};osc.start(now+offset);osc.stop(now+offset+.16)}}catch{}}
+const callSignalSources=new Set();let signalPauseTimer=null,signalEndTimer=null,signalPaused=false;
+function stopCallSignal(){
+ if(signalPauseTimer!==null)clearTimer(signalPauseTimer);if(signalEndTimer!==null)clearTimer(signalEndTimer);signalPauseTimer=signalEndTimer=null;
+ for(const source of callSignalSources){try{source.stop()}catch{}}callSignalSources.clear();
+ if(officeAudio){const {ctx,bus}=officeAudio;bus.gain.cancelScheduledValues(ctx.currentTime);bus.gain.setValueAtTime(1,ctx.currentTime)}
+ if(signalPaused){signalPaused=false;try{window.speechSynthesis?.resume?.()}catch{}}
+}
+function playCallSignal(signalAtMs,ringAtMs){
+ if(mix.fx<=0)return;
+ const audio=initOfficeAudio();if(!audio)return;
+ const {ctx,bus,signal}=audio,now=performance.now(),start=ctx.currentTime+Math.max(0,(signalAtMs-now)/1000),end=ctx.currentTime+Math.max(.08,(ringAtMs-now)/1000);
+ if(end-start<.25)return;
+ bus.gain.cancelScheduledValues(ctx.currentTime);bus.gain.setValueAtTime(bus.gain.value,ctx.currentTime);bus.gain.linearRampToValueAtTime(.16,start+.035);bus.gain.setValueAtTime(.16,end-.12);bus.gain.linearRampToValueAtTime(1,end);
+ const tone=ctx.createOscillator(),low=ctx.createBiquadFilter(),envelope=ctx.createGain();tone.type="sawtooth";tone.frequency.value=217;low.type="lowpass";low.frequency.value=1700;envelope.gain.setValueAtTime(0,start);
+ for(const offset of [0,.12,.24,.5,.62,.74]){const at=start+offset;if(at+.075>=end)break;envelope.gain.setValueAtTime(0,at);envelope.gain.linearRampToValueAtTime(.052,at+.006);envelope.gain.setValueAtTime(.052,at+.055);envelope.gain.linearRampToValueAtTime(0,at+.075)}
+ tone.connect(low).connect(envelope).connect(signal);tone.onended=()=>{callSignalSources.delete(tone);tone.disconnect();low.disconnect();envelope.disconnect()};callSignalSources.add(tone);tone.start(start);tone.stop(end);
+ signalPauseTimer=defer(()=>{signalPauseTimer=null;if(mix.fx>0&&stage==="counter"&&callPending&&window.speechSynthesis?.speaking&&!window.speechSynthesis.paused){try{window.speechSynthesis.pause();signalPaused=true}catch{}}},Math.max(0,signalAtMs-performance.now()));
+ signalEndTimer=defer(()=>{signalEndTimer=null;stopCallSignal()},Math.max(0,ringAtMs-performance.now()));
+}
+function commitCall(reason){
+ if(!active||!activated||!callPending||callCommitted||stage!=="counter")return;
+ callCommitted=true;if(callArmTimer!==null)clearTimer(callArmTimer);callArmTimer=null;
+ const now=performance.now(),leadMs=2200,ringAtMs=now+leadMs;
+ const peerFresh=timing.lastPongAt!==null&&now-timing.lastPongAt<6000&&timing.clockUncertaintyMs<=250;
+ const ringAtPhoneMs=peerFresh?ringAtMs+timing.clockOffsetMs:null;
+ const ringAtUtcMs=window.BuergeramtClock?.usable?.(clockAnchor,now)?Math.round(window.BuergeramtClock.utcAt(clockAnchor,ringAtMs)):null;
+ if(!link.send("call",{id:story.call.id,line:story.call.line,ringAtPhoneMs,ringAtUtcMs,leadMs})){forfeit("TELEFON GETRENNT");return}
+ timing.call={reason,armedAtMs:now,ringAtMs,signalAtMs:ringAtMs-900,ringAtPhoneMs,ringAtUtcMs,peerUncertaintyMs:peerFresh?timing.clockUncertaintyMs:null,utcUncertaintyMs:ringAtUtcMs!==null?clockAnchor.uncertaintyMs:null,phoneScheduledAtMs:null,phoneMode:null,lateMs:null};
+ sentPolice(-1);playCallSignal(ringAtMs-900,ringAtMs);setStatus("POLIZEI RUFT AUF DEM TELEFON AN");
+}
+function armCall(){if(!active||!callPending||callCommitted||callArmTimer!==null)return;if(!link.send("call-arm",{id:story.call.id})){forfeit("TELEFON GETRENNT");return}callArmTimer=defer(()=>commitCall("ready-timeout"),1000)}
 function ambientStep(dt){
  if(!walking()||stage==="outside")return;ambientClock+=dt;
  if(ambientClock<8.5||window.speechSynthesis?.speaking||window.speechSynthesis?.pending)return;
@@ -163,6 +194,8 @@ function beginLink(){
  currentLink.addEventListener("message",e=>{
   if(!current())return;const m=e.detail;
   if(m.type==="sync-pong"){receivePong(m.id,m.receivedAtMs,m.sentAtMs);return}
+  if(m.type==="call-ready"){if(stage==="counter"&&callPending&&m.id===story.call.id)commitCall("phone-ready");return}
+  if(m.type==="call-scheduled"){if(timing.call&&m.id===story.call.id&&timing.call.phoneScheduledAtMs===null){timing.call.phoneScheduledAtMs=m.atMs;timing.call.phoneMode=m.mode;timing.call.lateMs=m.lateMs}return}
   if(m.type==="police-start"){if(stage==="cancelled"&&receivePoliceStart(m.index,m.mode,m.readyDelayMs,m.atMs))policeStartHandler?.(m.index);return}
   if(m.type==="police-done"){if(stage==="cancelled"&&receivePoliceDone(m.index,m.mode,m.durationMs,m.atMs))policeDoneHandler?.(m.index);return}
   if(terminal())return;
@@ -171,20 +204,20 @@ function beginLink(){
    const next="B-"+String(ticketSerial);
    if(!currentLink.send("ticket",{number:next}))return;
    ticketSerial=ticketSerial===899?100:ticketSerial+1;lastScanId=m.id;
-   number=next;registeredName="";activated=true;ticketWaitCalls=5;deadline=0;callPending=false;callTriggered=false;callOutcome="";clerkIndex=0;
+   number=next;registeredName="";activated=true;ticketWaitCalls=5;deadline=0;callPending=false;callTriggered=false;callCommitted=false;callOutcome="";clerkIndex=0;
    if(stage!=="outside")setStage("waiting");
    setStatus("WARTENUMMER "+number+" · AUFRUF ABWARTEN");
-  }else if(m.type==="register"&&activated&&typeof m.name==="string"&&m.name.trim().length>=2&&m.name.length<=80){registeredName=m.name.trim().replace(/\s+/g," ")}
+  }else if(m.type==="register"&&activated&&typeof m.name==="string"&&m.name.trim().length>=2&&m.name.length<=80){registeredName=m.name.trim().replace(/\s+/g," ");if(stage==="walk-counter")setStatus("NAME EINGETRAGEN · FRAU KNICK ANSPRECHEN")}
   else if(m.type==="phone-hidden")forfeit("TELEFON NICHT SICHTBAR");
-  else if(activated&&callPending&&stage==="counter"&&m.id===story.call.id&&m.type==="answer"){
-   callPending=false;callOutcome="answer";setStage("cancelled");setStatus("TERMIN ANNULLIERT · "+number);probeLink();showOutburst();
-  }else if(activated&&callPending&&stage==="counter"&&m.id===story.call.id&&m.type==="decline"){
-   callPending=false;callOutcome="decline";if(timing.cues[-1]?.status==="waiting")timing.cues[-1].status="declined";setStatus("ANRUF ABGELEHNT · SCHALTER 3");content("FRAU KNICK · SCHALTER 3",story.call.declined,[{label:"GESPRÄCH FORTSETZEN",run:showClerk}]);
+  else if(activated&&callPending&&callCommitted&&stage==="counter"&&m.id===story.call.id&&m.type==="answer"){
+   callPending=false;callOutcome="answer";stopCallSignal();setStage("cancelled");setStatus("TERMIN ANNULLIERT · "+number);probeLink();showOutburst();
+  }else if(activated&&callPending&&callCommitted&&stage==="counter"&&m.id===story.call.id&&m.type==="decline"){
+   callPending=false;callOutcome="decline";stopCallSignal();if(timing.cues[-1]?.status==="waiting")timing.cues[-1].status="declined";setStatus("ANRUF ABGELEHNT · SCHALTER 3");content("FRAU KNICK · SCHALTER 3",story.call.declined,[{label:"GESPRÄCH FORTSETZEN",run:showClerk}]);
   }
  });
  currentLink.start().catch(e=>{if(current()&&!terminal())setStatus("Verbindung fehlgeschlagen: "+e.message)});
 }
-function showClerk(){if(!active||!activated||callPending||["cancelled","expired","closed"].includes(stage))return;view.x=4;view.z=-8.15;view.yaw=0;setStage("counter");const node=story.clerk[clerkIndex];if(clerkIndex===0&&!callTriggered){callTriggered=true;callPending=true;content(node.speaker,"Nummer "+number+"? Beeilen Sie sich! Ich bin sehr beschäftigt. Was? Ihr Telefon klingelt während meiner Vorsprache.");if(!link.send("call",{id:story.call.id,line:story.call.line})){forfeit("TELEFON GETRENNT");return}sentPolice(-1);if(!activated)return;setStatus("POLIZEI RUFT AUF DEM TELEFON AN");return}if(callOutcome!=="decline"||!node)return;const choices=node.choices.map(choice=>({label:choice.label,run:()=>{setStage("reply");content(node.speaker,choice.reply,[{label:clerkIndex===story.clerk.length-1?"FORMULAR A38 ENTGEGENNEHMEN":"WEITER",run:()=>{clerkIndex++;if(clerkIndex<story.clerk.length)showClerk();else finish()}}])}}));content(node.speaker,node.line,choices)}
+function showClerk(){if(!active||!activated||callPending||["cancelled","expired","closed"].includes(stage))return;if(!registeredName){setStatus("VOR- UND NACHNAME AM TELEFON EINTRAGEN");return}view.x=4;view.z=-8.15;view.yaw=0;setStage("counter");const node=story.clerk[clerkIndex];if(clerkIndex===0&&!callTriggered){callTriggered=true;callPending=true;content(node.speaker,"Nummer "+number+"? Beeilen Sie sich! Ich bin sehr beschäftigt. Was? Ihr Telefon klingelt während meiner Vorsprache.",[],null,armCall);return}if(callOutcome!=="decline"||!node)return;const choices=node.choices.map(choice=>({label:choice.label,run:()=>{setStage("reply");content(node.speaker,choice.reply,[{label:clerkIndex===story.clerk.length-1?"FORMULAR A38 ENTGEGENNEHMEN":"WEITER",run:()=>{clerkIndex++;if(clerkIndex<story.clerk.length)showClerk();else finish()}}])}}));content(node.speaker,node.line,choices)}
 function showOutburst(){
  const upset=story.outburst;exit.hidden=true;
  const heard=new Set();let waiting=null,phoneTimeout=null,deskFirst=false,phoneFirst=false,started=false,disconnected=false;
@@ -221,13 +254,13 @@ function showOutburst(){
 }
 function finish(){if(!active||!activated||callPending||callOutcome!=="decline"||clerkIndex!==story.clerk.length)return;const callback=options.onForm;close(false);callback()}
 function close(notify=true){
- if(!active)return;const config=options;active=false;attempt++;callPending=false;activated=false;callOutcome="";policeDoneHandler=null;policeStartHandler=null;policeDisconnectHandler=null;characterMood=null;
+ if(!active)return;const config=options;stopCallSignal();active=false;attempt++;callPending=false;activated=false;callOutcome="";policeDoneHandler=null;policeStartHandler=null;policeDisconnectHandler=null;characterMood=null;
  if(pingTimer!==null)clearInterval(pingTimer);pingTimer=null;outstandingPings.clear();
  for(const id of pendingTimers)clearTimeout(id);pendingTimers.clear();cancelSpeech();setStage("closed");
  try{officeAudio?.ctx.close()?.catch(()=>{})}catch{}officeAudio=null;held.clear();root.hidden=true;walkHud.hidden=true;mixPanel.open=false;mixPanel.hidden=true;ambient.textContent="";
  document.body.classList.remove("amt-inside");const previous=link;link=null;previous?.send("done");previous?.close();config.music?.(false);if(notify)config.onClose();
 }
-function open(config){if(active)return;resetTiming();hostVoiceStartupMs=null;hostVoiceAttempts=0;attempt++;callOutcome="";options=config;active=true;clerkIndex=0;callPending=false;callTriggered=false;registeredName="";number="";activated=false;lastScanId="";queueClock=0;queueIndex=1;ticketWaitCalls=0;deadline=0;ambientClock=0;displayNumber("B-041");view.x=0;view.z=8;view.yaw=0;held.clear();resetCharacters();exit.hidden=false;root.hidden=false;mixPanel.hidden=false;document.body.classList.add("amt-inside");options.music?.(true);beginLink();setStage("outside");setStatus("EINGANG · BÜRGERAMT")}
+function open(config){if(active)return;resetTiming();hostVoiceStartupMs=null;hostVoiceAttempts=0;attempt++;callOutcome="";options=config;active=true;clerkIndex=0;callPending=false;callTriggered=false;callCommitted=false;callArmTimer=null;clockAnchor=null;registeredName="";number="";activated=false;lastScanId="";queueClock=0;queueIndex=1;ticketWaitCalls=0;deadline=0;ambientClock=0;displayNumber("B-041");view.x=0;view.z=8;view.yaw=0;held.clear();resetCharacters();exit.hidden=false;root.hidden=false;mixPanel.hidden=false;document.body.classList.add("amt-inside");options.music?.(true);beginLink();setStage("outside");setStatus("EINGANG · BÜRGERAMT");const owner=attempt;window.BuergeramtClock?.sample?.().then(anchor=>{if(active&&attempt===owner)clockAnchor=anchor}).catch(()=>{})}
 function captureKey(event){if(event.type==="keyup")held.delete(event.code);if(!active)return;if(event.type==="keydown"&&event.code==="KeyE"&&walking()){event.preventDefault();event.stopImmediatePropagation();if(!event.repeat)interact();return}if(!walking())return;if(["KeyW","KeyA","KeyS","KeyD","ArrowUp","ArrowDown","ArrowLeft","ArrowRight","ShiftLeft"].includes(event.code)){event.preventDefault();event.stopImmediatePropagation();if(event.type==="keydown")held.add(event.code);else held.delete(event.code)}}
 window.addEventListener("keydown",captureKey,true);window.addEventListener("keyup",captureKey,true);window.addEventListener("blur",()=>held.clear());
 document.addEventListener("visibilitychange",()=>{if(document.hidden)held.clear()});

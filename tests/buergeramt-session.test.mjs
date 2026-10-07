@@ -65,7 +65,23 @@ test('a failed ticket delivery does not start a queue slot',()=>{
  const h=harness();h.enter();h.links[0].fail=true;h.links[0].message({type:'scan',id:'a'.repeat(24)});assert.equal(h.level.stage,'walk-sign');assert.equal(h.level.activated,false);
 });
 test('failed police-call delivery cannot trap the player at the counter',()=>{
- const h=harness();h.wait();h.moveTo(4,-8.15);h.advanceGame(16);h.links[0].fail=true;h.level.interact();assert.equal(h.level.stage,'expired');assert.equal(h.node('amt-actions').children.length,2);
+ const h=harness();h.wait();h.links[0].message({type:'register',name:'Erika Mustermann'});h.moveTo(4,-8.15);h.advanceGame(16);h.links[0].fail=true;h.level.interact();assert.equal(h.level.stage,'expired');assert.equal(h.node('amt-actions').children.length,2);
+});
+test('the name button is required before the host arms a call, then readiness schedules its lead-in',()=>{
+ const h=harness();h.wait();h.moveTo(4,-8.15);h.advanceGame(16);h.level.interact();assert.equal(h.level.stage,'walk-counter');assert.equal(h.links[0].sent.filter(m=>m.type==='call-arm').length,0);
+ h.links[0].message({type:'register',name:'Erika Mustermann'});h.level.interact();assert.equal(h.links[0].sent.at(-1).type,'call-arm');assert.equal(h.links[0].sent.filter(m=>m.type==='call').length,0);
+ h.links[0].message({type:'answer',id:'grass'});assert.equal(h.level.stage,'counter');
+ h.links[0].message({type:'call-ready',id:'grass',atMs:h.now()});const plan=h.links[0].sent.at(-1);assert.equal(plan.type,'call');assert.equal(plan.leadMs,2200);assert.equal(plan.ringAtPhoneMs,null);assert.equal(plan.ringAtUtcMs,null);assert.equal(h.level.timing.call.ringAtMs-h.level.timing.call.signalAtMs,900);
+});
+test('the phone keeps the call hidden until its scheduled ring and cancels later vibration on decline',()=>{
+ const h=harness('phone'),link=h.phoneReady();h.node('phone-name').value='Erika Mustermann';h.node('phone-form').dispatchEvent(new Event('submit',{cancelable:true}));link.message({type:'call-arm',id:'grass'});assert.equal(link.sent.at(-1).type,'call-ready');
+ const baseline=h.vibrations.length;link.message({type:'call',id:'grass',line:'Anruf.',ringAtPhoneMs:1500,ringAtUtcMs:null,leadMs:2200});assert.equal(h.node('phone-call').hidden,true);assert.equal(link.sent.at(-1).type,'call-scheduled');assert.equal(link.sent.at(-1).mode,'peer');h.tick(1499);assert.equal(h.vibrations.length,baseline);h.tick(1);assert.equal(h.node('phone-call').hidden,false);assert.ok(h.vibrations.length>baseline);h.node('phone-decline').click();const count=h.vibrations.length;h.tick(6000);assert.equal(h.vibrations.length,count);assert.equal(h.vibrations.at(-1),0);
+});
+test('a qualified UTC anchor schedules the phone when the direct peer offset is unavailable',async()=>{
+ const anchor={utcOffsetMs:100000,sampledAtMs:0,uncertaintyMs:20};
+ const phoneClock={sample:async()=>anchor,usable:a=>!!a,utcAt:(a,mono)=>a.utcOffsetMs+mono,monoAt:(a,utc)=>utc-a.utcOffsetMs};
+ const h=harness('phone',{phoneClock});await Promise.resolve();const link=h.phoneReady();h.node('phone-name').value='Erika Mustermann';h.node('phone-form').dispatchEvent(new Event('submit',{cancelable:true}));link.message({type:'call-arm',id:'grass'});
+ link.message({type:'call',id:'grass',line:'Anruf.',ringAtPhoneMs:null,ringAtUtcMs:101000,leadMs:2200});assert.equal(link.sent.at(-1).mode,'utc');assert.equal(link.sent.at(-1).atMs,1000);h.tick(999);assert.equal(h.node('phone-call').hidden,true);h.tick(1);assert.equal(h.node('phone-call').hidden,false);
 });
 test('replay ignores old link messages and status events',()=>{
  const h=harness();const old=h.links[0];h.level.replay(h.config);old.message({type:'register',name:'OLD ATTEMPT'});old.emit('status','old status');assert.equal(h.level.registeredName,'');assert.notEqual(h.node('amt-status').textContent,'old status');
@@ -163,12 +179,20 @@ test('the incoming caller stays unknown, with host subtitles ahead of the phone 
   const h=harness('phone',options);h.incoming();assert.equal(h.node('phone-caller').textContent,expected);assert.equal(h.node('phone-call').lang,expected==='UNKNOWN'?'en':'de');assert.equal(h.node('phone-call-state').textContent,expected==='UNKNOWN'?'INCOMING CALL':'EINGEHENDER ANRUF');h.node('phone-answer').click();assert.equal(h.node('phone-call-state').textContent,expected==='UNKNOWN'?'CONNECTED':'VERBUNDEN');
  }
 });
-test('Android right drag answers, while a short drag resets and a tap still works',()=>{
+test('Google Phone drags right to answer or left to decline, with tap fallback',()=>{
  const options={phoneAgent:'Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 Chrome/140 Mobile Safari/537.36',phonePlatform:'Android'};
- const gesture=(el,type,x)=>{const e=new Event(type);Object.assign(e,{pointerId:1,clientX:x,isPrimary:true});el.dispatchEvent(e)};
- const h=harness('phone',options);h.incoming();assert.equal(h.document.documentElement.dataset.phoneOs,'android');const button=h.node('phone-answer');gesture(button,'pointerdown',0);gesture(button,'pointermove',20);gesture(button,'pointerup',20);button.click();assert.equal(h.links[0].sent.filter(m=>m.type==='answer').length,0);
+ const gesture=(el,type,x,y=0)=>{const e=new Event(type);Object.assign(e,{pointerId:1,clientX:x,clientY:y,isPrimary:true});el.dispatchEvent(e)};
+ const h=harness('phone',options);h.incoming();assert.equal(h.document.documentElement.dataset.callUi,'google');const button=h.node('phone-answer');gesture(button,'pointerdown',0);gesture(button,'pointermove',20);gesture(button,'pointerup',20);button.click();assert.equal(h.links[0].sent.filter(m=>m.type==='answer').length,0);
  gesture(button,'pointerdown',0);gesture(button,'pointermove',160);gesture(button,'pointerup',160);button.click();assert.equal(h.links[0].sent.filter(m=>m.type==='answer').length,1);
- const tap=harness('phone',options);tap.incoming();tap.node('phone-answer').click();assert.equal(tap.links[0].sent.filter(m=>m.type==='answer').length,1);
+ const decline=harness('phone',options);decline.incoming();const handle=decline.node('phone-answer');gesture(handle,'pointerdown',0);gesture(handle,'pointermove',-160);gesture(handle,'pointerup',-160);handle.click();assert.equal(decline.links[0].sent.filter(m=>m.type==='decline').length,1);
+ const tap=harness('phone',options);tap.incoming();tap.node('phone-swipe-label').click();assert.equal(tap.links[0].sent.filter(m=>m.type==='answer').length,1);
+});
+test('Samsung Phone drags either handset away from its starting point',()=>{
+ const options={phoneAgent:'Mozilla/5.0 (Linux; Android 15; SM-S928B) SamsungBrowser/28.0 Mobile',phonePlatform:'Android'};
+ const gesture=(el,type,x)=>{const e=new Event(type);Object.assign(e,{pointerId:1,clientX:x,clientY:0,isPrimary:true});el.dispatchEvent(e)};
+ for(const [id,dx,expected] of [['phone-answer',40,'answer'],['phone-decline',-40,'decline']]){
+  const h=harness('phone',options);h.incoming();assert.equal(h.document.documentElement.dataset.callUi,'samsung');const button=h.node(id);gesture(button,'pointerdown',0);gesture(button,'pointermove',dx);gesture(button,'pointerup',dx);button.click();assert.equal(h.links[0].sent.filter(m=>m.type===expected).length,1);
+ }
 });
 test('a failed phone answer is not presented as an accepted call',()=>{
  const h=harness('phone');h.incoming();h.links[0].fail=true;h.node('phone-answer').click();assert.equal(h.node('phone-call').hidden,true);assert.match(h.node('phone-status').textContent,/verfallen/);assert.equal(h.links[0].closed,true);
@@ -203,8 +227,8 @@ test('page exit cancels the clock and all pending phone callbacks',()=>{
 test('a failed clerk voice retains a readable automatic-argument line',()=>{
  const h=harness('host',{voice:true});h.counter();h.links[0].message({type:'answer',id:'grass'});h.tick(20);const first=h.node('amt-line').textContent;h.synth.current.onerror();h.tick(2000);assert.equal(h.node('amt-line').textContent,first);assert.equal(h.counts.cancel,0);
 });
-test('a stalled clerk voice starts a readable fallback within 1.8 seconds and rejects late speech',()=>{
- const h=harness('host',{voice:true});let late;h.synth.speak=utterance=>{late=utterance};h.counter();h.links[0].message({type:'answer',id:'grass'});h.tick(1799);assert.equal(h.level.timing.desk[0].startAt,null);h.tick(1);assert.equal(h.level.timing.desk[0].startMode,'fallback');assert.equal(h.level.timing.desk[0].startAt,h.now());late.onstart();late.onend();assert.equal(h.level.timing.desk[0].endAt,null);h.tick(100);assert.equal(h.counts.cancel,0);
+test('a stalled clerk voice starts a readable fallback within the learned startup limit and rejects late speech',()=>{
+ const h=harness('host',{voice:true});let late;h.synth.speak=utterance=>{late=utterance};h.counter();h.links[0].message({type:'answer',id:'grass'});h.tick(1199);assert.equal(h.level.timing.desk[0].startAt,null);h.tick(1);assert.equal(h.level.timing.desk[0].startMode,'fallback');assert.equal(h.level.timing.desk[0].startAt,h.now());late.onstart();late.onend();assert.equal(h.level.timing.desk[0].endAt,null);h.tick(100);assert.equal(h.counts.cancel,0);
 });
 test('a failed police voice displays its line instead of silently skipping it',()=>{
  const h=harness('phone');h.incoming();h.node('phone-answer').click();h.tick(20);h.node('phone-call-line').hidden=true;h.synth.current.onerror();assert.equal(h.node('phone-call-line').hidden,false);assert.equal(h.node('phone-call-line').textContent,h.window.BuergeramtStory.call.line);
