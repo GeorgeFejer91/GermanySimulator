@@ -73,11 +73,13 @@ biomechanical candidate and acceptance gates continue below.
 
 ## Accepted city walking atlases
 
+For exact asset locations and examples using the existing game controllers, see [City character animation assets](../assets/characters/README.md). Reuse these manifests and approved PNG files for the six city actors.
+
 The root game loads six reviewed painted character manifests: Merkel, Bayern,
-Alice, and Merz under `assets/characters/`, plus the two towel tourists under
+Alice, and Merz under `assets/characters/`, plus the two Germans on vacation, carrying towels, under
 `assets/tourists/`. Each has separate down/right/up/left eight-phase walks,
 stop/whole-body-turn/start paths, an explicit grid and ground pivot, and a
-SHA-256-bound static PNG file. The tourists also
+SHA-256-bound static PNG file. The vacation pair also
 have approved reaction/look rows. `tourist-animation.js` advances gait from
 actual travel, queues the latest requested facing at the stride boundary, holds
 position through the timed turn core, and resumes at phase zero. Merz's pouring
