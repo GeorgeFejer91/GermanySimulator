@@ -56,6 +56,14 @@ UI or browser skills required by the actual change.
 | Current public facts, external references, historical research, or documentation lookup | `$multi-source-web-search` | Prefer primary sources, open sources before citing, and run a blind-spot pass for nontrivial research. |
 | Large repository mapping, dependency pressure, or diff-impact analysis | `$rust-work-graph` | Use only when the repository becomes complex enough to justify graph analysis. |
 
+## 2D character animation skill
+
+The project copy is [`.agents/skills/animate-2d-characters/SKILL.md`](../.agents/skills/animate-2d-characters/SKILL.md); its public upstream is [GeorgeFejer91/animate-2d-characters](https://github.com/GeorgeFejer91/animate-2d-characters). Use it when authoring or repairing a painted character's walk, turn, action, reaction, atlas, or movement export. For changes only to dialogue, audio, or character identity metadata, use the relevant catalogs instead.
+
+1. Lock the character's approved source identity, prop ownership, canvas, baseline, and directions. Follow the skill's painted-walk or interaction-state reference as appropriate; keep Germany Simulator's accepted asset and runtime rules in [`SPRITE-GENERATION-PROTOCOL.md`](./SPRITE-GENERATION-PROTOCOL.md).
+2. Review the exact exported frames and transitions, then check the character in the game at desktop and mobile sizes. For walking changes, run the skill's planted-foot speed assessment at the actual billboard scale and compare visible shoe slide before accepting the manifest's cycle distance.
+3. At each completed 2D animation milestone, check whether a proven, reusable fix or useful method emerged. If so, put its generic steps, limits, and helper tests in the public skill; keep game-specific values, art, and acceptance records here. Validate the skill, commit and push its repository, then synchronize the project copy. Do not publish unreviewed experiments or project-only assets as general guidance.
+
 Do not use website generators or replace the existing static game architecture merely because a skill is available.
 ## HTML text-fitting contract
 

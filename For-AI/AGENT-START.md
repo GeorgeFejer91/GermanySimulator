@@ -20,7 +20,7 @@ Do not substitute the later flat 2D prototype or rebuild the game from a differe
 - Any gameplay or copy change: read [`GAMEPLAY.md`](./GAMEPLAY.md).
 - Any secret Bürgeramt episode change: also read [`BUERGERAMT.md`](./BUERGERAMT.md).
 - Any art, image, billboard, model, performance, hosting, or asset-loader change: read [`ASSET-POLICY.md`](./ASSET-POLICY.md).
-- Any moving bitmap character, sprite atlas, gait, or animation-frame change: also read [`SPRITE-GENERATION-PROTOCOL.md`](./SPRITE-GENERATION-PROTOCOL.md).
+- Any new or repaired 2D character, moving bitmap, sprite atlas, gait, reaction, or transition-frame change: read [`animate-2d-characters`](../.agents/skills/animate-2d-characters/SKILL.md), the [skill route](./SKILLS.md#2d-character-animation-skill), and [`SPRITE-GENERATION-PROTOCOL.md`](./SPRITE-GENERATION-PROTOCOL.md).
 - Any code or documentation change: read [`SKILLS.md`](./SKILLS.md).
 - Any spoken-audio or subtitle change: read [`AUDIO-TEXT-LIBRARY.md`](./AUDIO-TEXT-LIBRARY.md) and keep its runtime library synchronized.
 - Any new character voice, Voice Cloner profile, or recorded speech asset: also read [`VOICE-SYNTH-PROTOCOL.md`](./VOICE-SYNTH-PROTOCOL.md).
