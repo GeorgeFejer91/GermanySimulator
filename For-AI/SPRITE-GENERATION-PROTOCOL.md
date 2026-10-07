@@ -52,19 +52,39 @@ This office-specific lane uses the project's
 `$animate-2d-characters` skill for movement review. The general city
 biomechanical candidate and acceptance gates continue below.
 
+## Accepted city walking atlases
+
+The root game loads six reviewed painted character manifests: Merkel, Bayern,
+Alice, and Merz under `assets/characters/`, plus the two towel tourists under
+`assets/tourists/`. Each has separate down/right/up/left eight-phase walks,
+stop/whole-body-turn/start paths, an explicit grid and ground pivot, and a
+SHA-256-bound static PNG file. The tourists also
+have approved reaction/look rows. `tourist-animation.js` advances gait from
+actual travel, queues the latest requested facing at the stride boundary, holds
+position through the timed turn core, and resumes at phase zero. Merz's pouring
+keys use action time while his feet use ground distance. `character-interactions.js`
+plays only the towel pair's planted reactions. The original pre-rig atlases
+remain missing-file fallbacks; articulated candidates are preview-only.
+
+All six manifests and their exact-frame review records live with the assets.
+Keep their approved pixels, character identity, props, actions, routes, voices,
+and shared camera-facing pivot when changing the runtime. Verify the loaded PNG
+hash and dimensions, all directed turns, desktop/mobile gameplay, and both
+GitHub Pages views before publishing changes to this contract.
+
 This is the authoring and preview contract for the experimental articulated
 atlases in Germany Simulator. All six characters use one deterministic gait,
 one fixed registration grid, and one signed verification gate. The browser
 preview receives ordinary PNG atlases; the rig, ImageGen sources, SciPy, and
-Pillow remain offline production tools. The canonical game currently uses the
-accepted complete-character rollback described below.
+Pillow remain offline production tools. The canonical game uses the accepted city manifests above; the experimental
+rig and ImageGen sources remain offline preview material.
 
 The previous whole-pose hold lane (`authored-key-hold-v1`) is superseded by
 `biomechanical-rig-v3`. Its assets remain recoverable under
 `assets/sprite-archive/pre-identity-lock-20260922/`. The original generated
 pose sheets remain under `assets/sprite-archive/pre-rig-20260921/` as immutable
-identity references. The root game temporarily reads their built atlases as
-its stability fallback; this does not create or maintain a second game tree.
+identity references. The root game reads their built atlases only if an accepted manifest fails to
+load; this does not create or maintain a second game tree.
 
 ## Authorities
 

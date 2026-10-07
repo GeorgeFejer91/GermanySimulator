@@ -19,17 +19,15 @@ assert.doesNotMatch(game,/near>=radius\|\|n\.dialogueNearby/,"remaining inside t
 assert.match(game,/performance\.now\(\)>?=\(n\.barkAt\|\|0\)/,"re-entered featured characters must still respect their repeat gap");
 assert.match(game,/function insetSpriteSheet\(source,atlas\)/);
 assert.match(game,/const cell=Math\.round\(source\.width\/atlas\.cols\)/,"runtime preparation must preserve the built 128 px cell grid");
-assert.match(game,/merkel:\{canvas:null,cols:24,rows:5,pad:0,drawSize:126\}/);
-assert.match(game,/stableSpriteRoot="\.\/assets\/sprite-archive\/pre-rig-20260921\/assets\/"/,"the root game must use the accepted pre-rig sprite generation while experiments remain preview-only");
-assert.match(game,/bayern:\{canvas:null,cols:32,rows:4,pad:0,drawSize:150\}/);
-assert.match(game,/borderPourer:\{canvas:null,cols:32,rows:6,pad:0,drawSize:136\}/);
-assert.match(game,/alice:\{canvas:null,cols:32,rows:2,pad:0,drawSize:126\}/);
-assert.match(game,/imageSmoothingQuality="high"/);
-assert.doesNotMatch(game,/prepareBorderPourerSprite/,"Merz must use the same clean source-alpha path as every other registered sprite");
-assert.match(game,/function advanceSpriteGait\(n,distance,atlas,cycleDistance=FEATURED_GAIT_CYCLE_DISTANCE\)/);
-assert.match(game,/advanceSpriteGait\(n,Math\.hypot\(n\.x-beforeX,n\.y-beforeY\),npcSpriteAtlases\.merkel\)/);
-assert.match(game,/advanceSpriteGait\(n,Math\.hypot\(n\.x-beforeX,n\.y-beforeY\),npcSpriteAtlases\.bayern\)/);
-assert.match(game,/advanceSpriteGait\(n,Math\.hypot\(n\.x-beforeX,n\.y-beforeY\),npcSpriteAtlases\.alice\)/);
+for(const [kind,family] of [["merkel","characters"],["bayern","characters"],["alice","characters"],["borderPourer","characters"],["towelMan","tourists"],["towelWoman","tourists"]]){
+ assert.match(game,new RegExp(`${kind}Sprite:"\\./assets/${family}/${kind}/manifest\\.json`),`${kind} must load its accepted painted atlas`);
+ assert.match(game,new RegExp(`${kind}:\\{canvas:null,cols:(?:8|16),rows:`),`${kind} must expose the accepted grid`);
+}
+assert.match(game,/const stableSpriteRoot="\.\/assets\/sprite-archive\/pre-rig-20260921\/assets\/"/,"the archived originals remain missing-file fallbacks");
+assert.match(game,/TouristAnimations\.advance\(n,distance,dt,atlas\.tourist,cycleDistance\)/);
+assert.match(game,/function holdFeaturedTurn\(n,dx,dy,atlas,dt\)/);
+assert.match(game,/getNpcSpriteCanvas:key=>npcSpriteAtlases\[key\]/);
+assert.match(world3d,/new T\.CanvasTexture\(source\)/,"Three.js must upload each accepted atlas once");
 assert.doesNotMatch(game,/spriteFrame=Math\.floor\(n\.animTime\*(?:32|40|60)/,"registered gait must advance from actual distance, not wall-clock time");
 assert.match(game,/getNpcSpriteCanvas:key=>npcSpriteAtlases\[key\]/);
 assert.match(world3d,/new T\.CanvasTexture\(source\)/,"Three.js must use the normalized runtime atlas");

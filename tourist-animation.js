@@ -7,12 +7,9 @@ globalThis.TouristAnimations = (() => {
     if (!loading.has(url)) loading.set(url, (async () => {
       const response=await fetch(url); if(!response.ok) throw Error('Tourist manifest '+response.status);
       const manifest=await response.json();
-      const encoded=(await Promise.all(manifest.png_parts.map(async part => {
-        const r=await fetch(new URL(part,new URL(url,location.href)));
-        if(!r.ok) throw Error('Tourist artwork '+r.status);
-        return (await r.json()).base64;
-      }))).join('');
-      const bytes=Uint8Array.from(atob(encoded), ch=>ch.charCodeAt(0));
+      const art=await fetch(new URL(manifest.image,new URL(url,location.href)));
+      if(!art.ok) throw Error('Character artwork '+art.status);
+      const bytes=new Uint8Array(await art.arrayBuffer());
       if(globalThis.crypto?.subtle) {
         const actual=Array.from(new Uint8Array(await crypto.subtle.digest('SHA-256',bytes)),b=>b.toString(16).padStart(2,'0')).join('');
         if(actual!==manifest.sha256) throw Error('Tourist artwork hash mismatch');

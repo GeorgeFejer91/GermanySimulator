@@ -121,7 +121,7 @@ assert.equal(completion.finishWithReplacement(),true,"a completion callback must
 assert.equal(scheduled,0,"a superseded completion must not schedule a second broker pump");
 
 const answerOrder=[];
-const quiz=vm.createContext({document:{getElementById:()=>({hidden:false})},uiTone:()=>{},addGermanness:()=>answerOrder.push("score"),showWorldBark:()=>answerOrder.push("sting"),speechClip:()=>({text:"Nein! Nein! Nein!",recording:"quiz.mp3"}),STIMULUS_PRIORITY:{CRITICAL:5}});
+const quiz=vm.createContext({document:{getElementById:()=>({hidden:false})},uiTone:()=>{},addGermanness:()=>answerOrder.push("score"),showWorldBark:()=>answerOrder.push("sting"),requestCharacterReaction:()=>{},speechClip:()=>({text:"Nein! Nein! Nein!",recording:"quiz.mp3"}),STIMULUS_PRIORITY:{CRITICAL:5}});
 vm.runInContext(`const state={quizQuestion:{answer:1,source:"1"},quizCopy:{choices:["wrong","right"]},quizCharacter:{name:"Examiner",title:"Official"},quizVoiceToken:0};${sourceOf("answerCitizenshipQuiz")};answerCitizenshipQuiz(0)`,quiz);
 assert.deepEqual(answerOrder,["sting","score"],"the wrong-answer sting must precede score commentary");
 

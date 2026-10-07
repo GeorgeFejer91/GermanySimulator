@@ -23,6 +23,6 @@ assert.match(syncChar,/travel=Math\.hypot/,"procedural gait must follow actual m
 assert.doesNotMatch(syncChar,/performance\.now/,"idle characters must not walk in place from wall-clock animation");
 assert.match(world,/const atlasTextureCache=new Map\(\),atlasMaterialCache=new Map\(\)/);
 assert.match(world,/new T\.Mesh\(geometry,material\)/,"atlas actors must share one material and texture per character kind");
-assert.match(world,/q\.quaternion\.copy\(camera\.quaternion\)/,"atlas planes must remain camera-facing");
+assert.match(world,/r=camera\.quaternion;q\.quaternion\.copy\(r\)/,"atlas planes must remain camera-facing");
 
 console.log("Runtime frame pacing, focus input, and shared sprite texture contracts OK");

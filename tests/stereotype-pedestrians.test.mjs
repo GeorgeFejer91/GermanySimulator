@@ -8,8 +8,8 @@ const kinds=["towelMan","towelWoman"];
 const ids=["towel-man","towel-woman"];
 
 for(const kind of kinds){
- assert.match(game,new RegExp(`${kind}Sprite:stableSpriteRoot\\+\"crowd-`),`${kind} must load the stable archived runtime atlas`);
- assert.match(game,new RegExp(`${kind}:\\{canvas:null,cols:32,rows:3`),`${kind} must expose 32-frame side, down and up rows`);
+ assert.match(game,new RegExp(`${kind}Sprite:"\\./assets/tourists/${kind}/manifest\\.json`),`${kind} must load its accepted painted atlas`);
+ assert.match(game,new RegExp(`${kind}:\\{canvas:null,cols:8,rows:10`),`${kind} must expose four painted eight-phase walks`);
  assert.match(world,new RegExp(`n\\.spriteKind.*atlasSprite\\(n\\.spriteKind`),"ordinary pedestrians must opt into registered atlases");
 }
 for(const id of ids){
@@ -23,8 +23,8 @@ for(const removed of ["bioVegan","wasteMarshal","quietHours","cargoParent","dinI
 assert.match(game,/crowdNames\[\(j\*5\+3\)%crowdNames\.length\]/,"names must rotate independently from the visual stereotype");
 assert.match(game,/region=state\.region,archetype=[^;]*surface===\"sidewalk\"&&archetype\?archetype\.barks\[region\]/,"nearby pedestrians must use archetype-specific speech captured in the trigger region");
 assert.match(game,/dist\(player\.x,player\.y,n\.x,n\.y\)<\(n\.audioRadius\|\|NPC_COMPLAINT_DISTANCE\)/,"personal speech must be radius-triggered");
-assert.match(game,/advanceSpriteGait\(n,Math\.hypot\(n\.x-beforeX,n\.y-beforeY\),npcSpriteAtlases\[n\.spriteKind\],CROWD_GAIT_CYCLE_DISTANCE\)/,"walking frames must advance from actual pedestrian distance");
-assert.match(game,/n\.spriteRow=horizontal\?0:\(dy>0\?1:2\)/,"ordinary pedestrians must select side, down and up atlas rows from their movement vector");
+assert.match(game,/advanceSpriteGait\(n,Math\.hypot\(n\.x-beforeX,n\.y-beforeY\),npcSpriteAtlases\[n\.spriteKind\],CROWD_GAIT_CYCLE_DISTANCE,dt\)/,"walking frames must advance from actual pedestrian distance");
+assert.match(game,/TouristAnimations\.request\(n,dx,dy,atlas\.tourist\)/,"ordinary pedestrians must request all four painted directions from movement");
 assert.match(game,/verticalSidewalkSegments/,"ordinary pedestrians must walk vertically as well as horizontally");
 assert.match(world,/n\.spriteKind&&q\.userData\[n\.spriteKind\+\"Sprite\"\]/,"the WebGL renderer must keep ordinary crowd sprites synchronized");
 assert.match(dictionary,/appearance is not the archetype/i,"the durable policy must separate identity from the satirical behavior");
