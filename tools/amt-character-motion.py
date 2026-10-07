@@ -50,8 +50,10 @@ digest = walk.digest
 CELL = (320, 416)
 BASELINE = 400
 WORKING_BASELINE = 480
-ROWS = ("down", "right", "up", "left", "work", "gesture")
-NAMES = ("aktenkurier", "archivbotin", "formularsammler")
+ROWS = ("down", "right", "up", "left", "work", "gesture", "look", "flinch")
+ORIGINAL_NAMES = ("aktenkurier", "archivbotin", "formularsammler")
+NAMES = ORIGINAL_NAMES + ("nummernfluesterer", "nachtschichtmelderin",
+                          "pfandarchitektin", "kopiependler", "warteschlangenpoetin")
 def chroma_figure(panel: Image.Image) -> Image.Image:
     """Remove only exterior connected magenta from a source view."""
     rgb = np.array(panel.convert("RGB"))
@@ -98,12 +100,25 @@ def source_poses(name: str) -> dict[str, Image.Image]:
     action = Image.open(SOURCE / f"{name}-action.png")
     if sheet.size != (1536, 1024) or action.size != (1536, 1024):
         raise ValueError(f"{name}: expected 1536x1024 source sheets")
+    def extract(panel: Image.Image) -> Image.Image:
+        if panel.mode == "RGBA" and panel.getpixel((0, 0))[3] < 12:
+            return alpha_figure(panel)
+        return chroma_figure(panel)
     poses = {}
     for col, direction in enumerate(("down", "right", "up", "left")):
         print(f"{name}: extracting {direction}", flush=True)
-        poses[direction] = chroma_figure(sheet.crop((col * 384, 0, (col + 1) * 384, 1024)))
-    poses.update({direction: alpha_figure(action.crop((col * 768, 0, (col + 1) * 768, 1024)))
-                  for col, direction in enumerate(("work", "gesture"))})
+        poses[direction] = extract(sheet.crop((col * 384, 0, (col + 1) * 384, 1024)))
+    if name in ORIGINAL_NAMES:
+        poses.update({direction: alpha_figure(action.crop((col * 768, 0, (col + 1) * 768, 1024)))
+                      for col, direction in enumerate(("work", "gesture"))})
+        reaction = Image.open(SOURCE / f"{name}-reaction.png")
+        if reaction.size != (1536, 1024):
+            raise ValueError(f"{name}: expected 1536x1024 reaction sheet")
+        poses.update({direction: extract(reaction.crop((col * 768, 0, (col + 1) * 768, 1024)))
+                      for col, direction in enumerate(("look", "flinch"))})
+    else:
+        poses.update({direction: extract(action.crop((col * 384, 0, (col + 1) * 384, 1024)))
+                      for col, direction in enumerate(("work", "look", "flinch", "gesture"))})
     return poses
 
 
@@ -180,8 +195,8 @@ def continuous_walk(source: Image.Image, phase: float, travel: tuple[int, int],
     paint = _premul(source)
     for amount in (strength, strength * .7, strength * .4, strength * .2, 0):
         sway = 1.5 * stride * torso * amount
-        dx = sway + leg * side * (16 if travel[0] else 10) * stride * amount
-        dy = -1.6 * math.cos(2 * phase) * torso * amount + leg * (side * 6 * stride - 3.5 * lift) * amount
+        dx = sway + leg * side * (25 if travel[0] else 18) * stride * amount
+        dy = -1.6 * math.cos(2 * phase) * torso * amount + leg * (side * 8 * stride - 5 * lift) * amount
         rendered = walk.unpack(_sample(paint, x - dx, y - dy))
         if connected(rendered):
             return rendered
@@ -204,7 +219,7 @@ def build(name: str) -> dict:
         pose = registered[direction]
         steps = [continuous_walk(pose, i * math.tau / 8, vector) for i in range(8)]
         row_images[direction] = [frame(im) for im in steps]
-    for state in ("work", "gesture"):
+    for state in ("work", "gesture", "look", "flinch"):
         row_images[state] = [frame(idle(registered[state], i)) for i in range(8)]
     for row, state in enumerate(ROWS):
         for col, image in enumerate(row_images[state]):
@@ -245,6 +260,7 @@ def build(name: str) -> dict:
     return {
         "source_sha256": digest(SOURCE / f"{name}-source.png"),
         "action_sha256": digest(SOURCE / f"{name}-action.png"),
+        "reaction_sha256": digest(SOURCE / f"{name}-reaction.png") if name in ORIGINAL_NAMES else None,
         "atlas_sha256": digest(output),
         "cell": list(CELL), "rows": list(ROWS), "frames_per_row": 8,
         "desktop_bytes": output.stat().st_size,

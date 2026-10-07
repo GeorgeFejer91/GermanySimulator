@@ -914,11 +914,12 @@ function showRendererFailure(error){
   function setAmtQr(svg){if(!svg||svg===amtQrSource)return;amtQrSource=svg;const picture=new Image();picture.onload=()=>{qrCtx.fillStyle="#f6f3e9";qrCtx.fillRect(0,0,256,256);qrCtx.drawImage(picture,0,0,256,256);qrTexture.needsUpdate=true};picture.src="data:image/svg+xml;charset=utf-8,"+encodeURIComponent(svg)}
   const amtCharacters=[],amtTextureLoader=new T.TextureLoader(),amtMobile=matchMedia("(max-width: 700px)").matches;
   function amtCharacter(name,x,z,phase=0,height=1.9){
-    const url=`./assets/buergeramt/characters/${name}${amtMobile?"-mobile":""}.webp?v=20261006-amt64`;
+    const performance=name==="clerk";
+    const url=`./assets/buergeramt/characters/${performance?"clerk-performance":name}${amtMobile?"-mobile":""}.webp?v=20261007-amt-performance`;
     const geometry=new T.PlaneGeometry(height*192/416,height),uv=geometry.attributes.uv,base=Float32Array.from(uv.array);
     const mesh=new T.Mesh(geometry,new T.MeshBasicMaterial({transparent:true,alphaTest:.035,depthWrite:false,side:T.DoubleSide}));
     mesh.position.set(x,height/2,z);amtScene.add(mesh);
-    amtCharacters.push({name,url,mesh,uv,base,phase,frame:-1});
+    amtCharacters.push({name,url,mesh,uv,base,phase,frame:-1,performance,lead:performance&&x===3.9,mood:0});
   }
   amtCharacter("clerk",3.9,-9.77,.25,1.82);
   amtCharacter("clerk",-5.8,-9.77,1.4,1.76);
@@ -927,7 +928,9 @@ function showRendererFailure(error){
   amtCharacter("parent",5.5,1.39,1.1,1.9);
   amtCharacter("pensioner",1.7,-1.39,2.0,1.82);
   const amtMoving=[];
-  for(const [id,height] of [["aktenkurier",1.96],["archivbotin",1.77],["formularsammler",1.85]]){
+  for(const [id,height] of [["aktenkurier",1.96],["archivbotin",1.77],["formularsammler",1.85],
+                            ["nummernfluesterer",1.84],["nachtschichtmelderin",1.8],["pfandarchitektin",1.72],
+                            ["kopiependler",1.84],["warteschlangenpoetin",1.83]]){
     const geometry=new T.PlaneGeometry(height*320/416,height),uv=geometry.attributes.uv,base=Float32Array.from(uv.array);
     const mesh=new T.Mesh(geometry,new T.MeshBasicMaterial({transparent:true,alphaTest:.035,depthWrite:false,side:T.DoubleSide}));
     mesh.visible=false;amtScene.add(mesh);
@@ -965,7 +968,7 @@ function showRendererFailure(error){
       actor.mesh.material.map=texture;actor.mesh.material.needsUpdate=true;
     }
     for(const actor of amtMoving){
-      const url=`./assets/buergeramt/characters/${actor.id}-motion${amtMobile?"-mobile":""}.webp?v=20261006-actors`;
+      const url=`./assets/buergeramt/characters/${actor.id}-motion${amtMobile?"-mobile":""}.webp?v=20261007-crowd`;
       const texture=amtTextureLoader.load(url,()=>{actor.mesh.visible=true},undefined,error=>console.warn("Bürgeramt character unavailable",actor.id,error));
       texture.colorSpace=T.SRGBColorSpace;texture.generateMipmaps=false;
       texture.minFilter=texture.magFilter=T.LinearFilter;
@@ -977,12 +980,12 @@ function showRendererFailure(error){
     texture.minFilter=texture.magFilter=T.LinearFilter;
     for(const mesh of amtPaintedProps){mesh.material.map=texture;mesh.material.needsUpdate=true}
   }
-  function animateAmtCharacters(now){
+  function animateAmtCharacters(now,level){
     for(const actor of amtCharacters){
-      const frame=Math.floor(now/1000*24+actor.phase*24)%64;
+      const frame=actor.performance?actor.lead?level.clerkPerformance.row*8+level.clerkPerformance.frame:Math.floor(now/250+actor.phase*8)%8:Math.floor(now/1000*24+actor.phase*24)%64;
       if(frame===actor.frame)continue;actor.frame=frame;
-      const u0=frame%8/8,v0=1-(Math.floor(frame/8)+1)/8;
-      for(let i=0;i<actor.uv.count;i++)actor.uv.setXY(i,u0+actor.base[i*2]/8,v0+actor.base[i*2+1]/8);
+      const rows=actor.performance?6:8,u0=frame%8/8,v0=1-(Math.floor(frame/8)+1)/rows;
+      for(let i=0;i<actor.uv.count;i++)actor.uv.setXY(i,u0+actor.base[i*2]/8,v0+actor.base[i*2+1]/rows);
       actor.uv.needsUpdate=true;
     }
   }
@@ -996,10 +999,10 @@ function showRendererFailure(error){
       if(!state)continue;
       actor.mesh.position.set(state.x,actor.height/2,state.z);
       actor.mesh.rotation.y=Math.atan2(amtCamera.position.x-state.x,amtCamera.position.z-state.z);
-      const row=state.mode==="walk"?({down:0,right:1,up:2,left:3}[state.direction]??0):state.mode==="gesture"?5:4;
+      const row=state.mode==="walk"?({down:0,right:1,up:2,left:3}[state.direction]??0):({work:4,gesture:5,look:6,flinch:7}[state.mode]??4);
       const cell=row*8+state.frame;
-      if(cell!==actor.cell){actor.cell=cell;const u0=state.frame/8,v0=1-(row+1)/6;
-        for(let i=0;i<actor.uv.count;i++)actor.uv.setXY(i,u0+actor.base[i*2]/8,v0+actor.base[i*2+1]/6);
+      if(cell!==actor.cell){actor.cell=cell;const u0=state.frame/8,v0=1-(row+1)/8;
+        for(let i=0;i<actor.uv.count;i++)actor.uv.setXY(i,u0+actor.base[i*2]/8,v0+actor.base[i*2+1]/8);
         actor.uv.needsUpdate=true;
       }
       if(mood?.id===actor.id)actor.tone=mood.tone;
@@ -1007,12 +1010,25 @@ function showRendererFailure(error){
       actor.mood+=(target-actor.mood)*(1-Math.exp(-dt/1.05));
       actor.mesh.material.color.copy(amtNeutral).lerp(amtTone[actor.tone]||amtTone.procedural,actor.mood);
     }
+    const knick=amtCharacters[0];
+    if(knick){const target=mood?.id==="clerk"?Math.min(.22,.08+Math.abs(mood.valence)*.16):0;
+      knick.mood+=(target-knick.mood)*(1-Math.exp(-dt/1.05));
+      knick.mesh.material.color.copy(amtNeutral).lerp(amtTone[mood?.tone]||amtTone.procedural,knick.mood)}
   }
   const callCanvas=document.createElement("canvas");callCanvas.width=512;callCanvas.height=256;const callCtx=callCanvas.getContext("2d");const callTexture=new T.CanvasTexture(callCanvas);callTexture.colorSpace=T.SRGBColorSpace;
   ab(2.6,.9,.11,screen,0,3.33,-4.22);
   const callMesh=new T.Mesh(new T.PlaneGeometry(2.3,.62),new T.MeshBasicMaterial({map:callTexture}));callMesh.position.set(0,3.35,-4.151);amtScene.add(callMesh);
+  const omenScene=new T.Scene(),omenCamera=new T.OrthographicCamera(-1,1,1,-1,0,1),omenFocus=new T.Vector3();
+  const omenMaterial=new T.ShaderMaterial({transparent:true,depthTest:false,depthWrite:false,
+    uniforms:{focus:{value:new T.Vector2(.5,.5)},radius:{value:new T.Vector2(.25,.45)},strength:{value:0},clock:{value:0}},
+    vertexShader:"varying vec2 spotUv;void main(){spotUv=uv;gl_Position=vec4(position.xy,0.0,1.0);}",
+    fragmentShader:"varying vec2 spotUv;uniform vec2 focus;uniform vec2 radius;uniform float strength;uniform float clock;void main(){float d=length((spotUv-focus)/radius);float dark=smoothstep(.66,1.04,d);float halo=exp(-pow((d-.86)/.13,2.0));vec3 shimmer=.5+.5*cos(6.28318*(clock*.11+vec3(0.0,.32,.65)+d*.22));vec3 color=mix(vec3(.005,.006,.012),shimmer*.22,halo);gl_FragColor=vec4(color,strength*min(.995,dark*.99+halo*.27));}"
+  });
+  omenScene.add(new T.Mesh(new T.PlaneGeometry(2,2),omenMaterial));
   let lastCall="";
-  function renderAmt(){const level=window.BuergeramtLevel;if(!level||!level.active&&!document.body.classList.contains("amt-direct-mode"))return false;loadAmtImages();const view=level.view;amtCamera.position.set(view.x,1.68,view.z);amtCamera.rotation.set(0,-view.yaw,0);if(level.qrSvg)setAmtQr(level.qrSvg);const now=performance.now();animateAmtCharacters(now);animateAmtMoving(now,level);const call=level.queueDisplay;if(call!==lastCall){lastCall=call;callCtx.fillStyle="#152527";callCtx.fillRect(0,0,512,256);callCtx.textAlign="center";callCtx.textBaseline="middle";callCtx.fillStyle="#c94839";callCtx.font="bold 112px monospace";callCtx.fillText(call,256,135,460);callTexture.needsUpdate=true}renderer.render(amtScene,amtCamera);return true}
+  function renderAmt(){const level=window.BuergeramtLevel;if(!level||!level.active&&!document.body.classList.contains("amt-direct-mode"))return false;loadAmtImages();const view=level.view;amtCamera.position.set(view.x,1.68,view.z);amtCamera.rotation.set(0,-view.yaw,0);if(level.qrSvg)setAmtQr(level.qrSvg);const now=performance.now();animateAmtCharacters(now,level);animateAmtMoving(now,level);const call=level.queueDisplay;if(call!==lastCall){lastCall=call;callCtx.fillStyle="#152527";callCtx.fillRect(0,0,512,256);callCtx.textAlign="center";callCtx.textBaseline="middle";callCtx.fillStyle="#c94839";callCtx.font="bold 112px monospace";callCtx.fillText(call,256,135,460);callTexture.needsUpdate=true}renderer.render(amtScene,amtCamera);
+    const omen=level.omen;if(omen.strength>0){omenFocus.set(omen.x,1.04,omen.z).project(amtCamera);omenMaterial.uniforms.focus.value.set((omenFocus.x+1)/2,(omenFocus.y+1)/2);omenMaterial.uniforms.radius.value.set(Math.min(.43,.31/Math.max(.75,innerWidth/innerHeight)),.47);omenMaterial.uniforms.strength.value=omen.strength;omenMaterial.uniforms.clock.value=now/1000;renderer.autoClear=false;renderer.render(omenScene,omenCamera);renderer.autoClear=true}
+    return true}
   function resize(){renderer.setSize(innerWidth,innerHeight,false);camera.aspect=innerWidth/innerHeight;camera.updateProjectionMatrix();amtCamera.aspect=innerWidth/innerHeight;amtCamera.updateProjectionMatrix()}resize();addEventListener("resize",resize,{passive:true});
   const spawnProbe=new T.Vector3();
   function isWorldPointVisible(x,y,padding=0,kind="officer"){const height=kind==="helicopter"?6.8:kind==="car"?.7:1;spawnProbe.set(X(x),height,Z(y)).project(camera);const padX=padding/Math.max(1,innerWidth)*2,padY=padding/Math.max(1,innerHeight)*2;return spawnProbe.z>=-1&&spawnProbe.z<=1&&spawnProbe.x>=-1-padX&&spawnProbe.x<=1+padX&&spawnProbe.y>=-1-padY&&spawnProbe.y<=1+padY}

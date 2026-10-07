@@ -12,8 +12,29 @@ window.BuergeramtStory=Object.freeze({
   formularsammler:{speaker:"DER FORMULARSAMMLER",lines:[
    {line:"Meine Seitenfolge ist nicht genehmigt. Wenn Blatt siebzehn wieder vorn steht, beginnt mein Termin von gestern noch einmal.",tone:"dread",valence:-.72},
    {line:"Die letzte Seite war leer. Frau Knick nennt das ein freies Zeitfenster. Ich nenne es Aussicht.",tone:"relief",valence:.32}
+  ]},
+  nummernfluesterer:{speaker:"DER NUMMERNFLÜSTERER",lines:[
+   {line:"Die Anzeige hat meine Nummer geflüstert, bevor ich sie gezogen habe. Jetzt verlangt sie einen Nachweis, dass ich noch nicht dran bin.",tone:"dread",valence:-.78},
+   {line:"Wenn die Zahl wieder rückwärts läuft, bleibe ich hier. Für Fluchtwege ist Schalter zwei zuständig.",tone:"warning",valence:-.51}
+  ]},
+  nachtschichtmelderin:{speaker:"DIE NACHTSCHICHT-MELDERIN",lines:[
+   {line:"Mein Telefon ist tot. Die App bestätigt trotzdem, dass ich persönlich anwesend bin. Ich halte das Gerät hoch, damit es mich nicht vergisst.",tone:"dread",valence:-.62},
+   {line:"Meine Akte ist lesbar. Das ist offenbar der Formfehler. Ich soll sie noch einmal ausdrucken, bis sie müde aussieht.",tone:"procedural",valence:-.3}
+  ]},
+  pfandarchitektin:{speaker:"DIE PFANDARCHITEKTIN",lines:[
+   {line:"Dieser Bon ist länger als der Flur. Die Quittung für die Quittung fehlt noch; ohne sie darf ich den Anfang nicht abreißen.",tone:"procedural",valence:-.45},
+   {line:"Vorhin war mein Ordner leichter. Vielleicht hat die Ablage eine Seite behalten. Vielleicht war es meine Hand.",tone:"dread",valence:-.64}
+  ]},
+  kopiependler:{speaker:"DER KOPIEPENDLER",lines:[
+   {line:"Ich habe das Original kopiert, wie verlangt. Jetzt gilt die Kopie als Original und mein Original als verdächtige Zweitschrift.",tone:"warning",valence:-.54},
+   {line:"Der Fahrradhelm ist keine Kopfbedeckung. Das hat Schalter vier schriftlich bestätigt; das Schreiben liegt unter dem Helm.",tone:"relief",valence:.15}
+  ]},
+  warteschlangenpoetin:{speaker:"DIE WARTESCHLANGENPOETIN",lines:[
+   {line:"Die Nummer auf meinem Zettel hat sich verdoppelt. Ich soll beweisen, welche Hälfte zuerst gewartet hat.",tone:"dread",valence:-.7},
+   {line:"Auf der Rückseite steht endlich ein Satz. Leider ist er nicht unterschrieben, also bleibt er vorläufig ein Geräusch.",tone:"relief",valence:.24}
   ]}
  },
+ omen:{speaker:"DER AKTENKURIER",line:"Wer die Finsternis sieht, hat sie selbst gewählt!"},
  entrance:{speaker:"PFÖRTNERIN",line:"Halt. Sie haben das Bürgeramt betreten, ohne nachzuweisen, dass Sie vorher draußen waren. Ziehen Sie bitte eine Nummer für den Übergang."},
  call:{id:"grass",line:"Polizei, Ordnungskontrolle. Sie sind heute über eine Grünfläche gelaufen. Antworten Sie: linker Schuh, rechter Schuh, oder beide?",declined:"Sehr gut. In diesem Schalterbereich sind private Anrufe nicht zuständig."},
  police:[

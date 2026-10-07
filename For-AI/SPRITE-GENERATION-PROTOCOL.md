@@ -33,20 +33,39 @@ hands, faces, props, scale, and loop seams pass ordered visual review.
   backgrounds, and browser frame progression. A byte/count/gutter pass is
   mechanical evidence, not visual approval.
 
-The optional Aktenkurier, Archivbotin, and Formularsammler use a second
-office-only lane: four registered directions plus a work and a gesture pose,
-built by `tools/amt-character-motion.py`. Their 8 × 6 atlases have 320 × 416
-desktop cells and 160 × 208 mobile cells. Rows are down/right/up/left walks,
-work, and gesture. A route stop performs the paperwork pose before the next
-direction begins. The
+The Aktenkurier, Archivbotin, Formularsammler, Nummernflüsterer,
+Nachtschicht-Melderin, Pfandarchitektin, Kopiependler, and
+Warteschlangenpoetin use a second office-only lane: four registered directions
+plus work, gesture, look, and flinch poses built by
+`tools/amt-character-motion.py`. Their 8 × 8 atlases have 320 × 416 desktop
+cells and 160 × 208 mobile cells. Rows are down/right/up/left walks, work,
+gesture, look, and flinch. A route stop performs paperwork and gaze actions
+before the next direction begins; queue calls may request a look/flinch
+sequence. Gait phase advances with traveled distance and its side stride is
+wider than the earlier office loop. The
 source paintings touch some side-view shoes to their trousers by only one
 pixel; separating garment and legs in `painted_walk` detached a shoe. For
 these particular paintings, warp the intact silhouette with a continuous
 field and reject any frame with a second substantial alpha component. Verify
-all 48 exact encoded cells per size on light and dark backgrounds, source
+all 64 exact encoded cells per size on light and dark backgrounds, source
 registration, prop ownership, ground line, temporal closure, and actual
 first-person playback before accepting a regenerated atlas. Contact sheets
 and hashes in `output/amt-character-motion/` support that visual review.
+
+Frau Knick has a separate 8 × 6 desk-performance atlas derived from her
+existing painted action strip: idle, review, raise, stamp, deny, and talk.
+The talk row articulates the lower lip subtly while her line is active; the
+desk state controls its start/end and falls back to a readable timed cycle
+when browser speech is unavailable. Build with
+`python tools/build-amt-sprites.py --clerk-performance` and review both encoded
+sizes, including a magnified mouth crop and the full counter-distance view.
+
+For a narrated movement, apply the skill's
+`references/narrative-action-rigging.md` beat card before commissioning keys.
+It binds route, ordered verbs, speech, light, sound, color valence, event
+priority, and recovery. A scene must release its actor and resume the route;
+replay and level close clear scene-owned resources. This keeps action-specific
+asset generation scoped to the motions the story actually needs.
 
 This office-specific lane uses the project's
 `$animate-2d-characters` skill for movement review. The general city

@@ -61,3 +61,35 @@ encoded-cell hashes are in the local
 `output/amt-character-motion/interaction-build-report.json`; contact sheets
 there are review aids. The source sheets and builder, without the ChatDev
 checkout, are sufficient to regenerate the shipped assets.
+
+## Crowded office and event poses (2026-10-07)
+
+OpenAI's built-in ImageGen generated five further original front/right/back/
+left source strips and matching four-pose action strips. The existing three
+walkers received two-pose reaction strips for looking up and recoiling. These
+sources use the earlier office cast as a palette/proportion reference. No
+photograph, named artist's painting, or existing game sprite was supplied.
+They remain editable sources in this directory; the derived atlases in
+`assets/buergeramt/characters/` are the only runtime media.
+
+| Source family | Character and held prop |
+| --- | --- |
+| `nummernfluesterer-*` | Bleached-haired Berlin night regular with ticket and clear folder. |
+| `nachtschichtmelderin-*` | Teal-haired shift worker with dead phone and documents. |
+| `pfandarchitektin-*` | Mustard-coated applicant with binders and receipt tail. |
+| `kopiependler-*` | Bicycle courier in a burgundy vest with helmet and copies. |
+| `warteschlangenpoetin-*` | Copper-braided applicant in a blue blazer with numbered paper. |
+
+`*-source.png` is a four-view turnaround, `*-action.png` supplies work,
+gesture, look, and flinch for the five new people; `*-reaction.png` supplies
+look and flinch for the prior three. The eight registered transparent poses
+for each actor live in its named subdirectory. The builder emits 8 × 8
+atlases at 320 × 416 desktop and 160 × 208 mobile per cell, with encoded
+gutter and frame signatures in its local report. The existing `clerk-source.png`
+also supplies Frau Knick's six-row desk-performance atlas. Its mouth motion
+is derived from source pixels and speech timing, not a separate generated face.
+
+These assets follow the event-to-motion beat contract in
+`.agents/skills/animate-2d-characters/references/narrative-action-rigging.md`.
+It describes movement, action ownership, dialogue, lighting, sound, and
+return-to-route; the assets themselves carry no gameplay state.

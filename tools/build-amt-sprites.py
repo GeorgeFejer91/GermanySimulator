@@ -25,12 +25,12 @@ GRID, COUNT, FPS = 8, 64, 24
 CELL, FIGURE = (192, 416), (144, 384)
 
 
-def source_pose(image: Image.Image) -> np.ndarray:
+def source_pose(image: Image.Image, column: int = 0) -> np.ndarray:
     if image.size != (1536, 1024):
         raise ValueError(f"Expected 1536x1024, found {image.size}")
     # Generated pose strips sometimes leave a sliver of the next character in
     # this column. Keep the connected painted figure before scaling the cell.
-    raw = np.array(image.crop((0, 0, 384, 1024)))
+    raw = np.array(image.crop((column * 384, 0, (column + 1) * 384, 1024)))
     count, regions, statistics, _ = cv2.connectedComponentsWithStats(
         (raw[:, :, 3] >= 12).astype(np.uint8), connectivity=8)
     figure = 1 + int(np.argmax(statistics[1:, cv2.CC_STAT_AREA]))
@@ -113,12 +113,78 @@ def inspect_encoded(path: Path, cell: tuple[int, int]) -> tuple[int, int, int]:
     return min_x, min_y, len(signatures)
 
 
+def clerk_mouth(pose: np.ndarray, opening: float) -> np.ndarray:
+    """Articulate only Frau Knick's painted lower lip while her voice owns the line."""
+    if opening <= 0:
+        return pose
+    result = pose.copy()
+    # Coordinates are in the registered 192x416 first clerk pose; the stamp,
+    # face silhouette and source paint outside this mouth patch stay intact.
+    x0, x1, y0, y1 = 106, 139, 72, 94
+    yy, xx = np.mgrid[y0:y1, x0:x1].astype(np.float32)
+    influence = np.exp(-((xx - 121) / 13) ** 2) * np.exp(-((yy - 82) / 6) ** 2)
+    shift = np.maximum(0, yy - 79) / 12 * 2.8 * opening * influence
+    patch = pose[y0:y1, x0:x1].astype(np.float32) / 255
+    patch[:, :, :3] *= patch[:, :, 3:4]
+    sampled = cv2.remap(patch, xx - x0, yy - y0 - shift, cv2.INTER_LINEAR,
+                        borderMode=cv2.BORDER_CONSTANT)
+    alpha = sampled[:, :, 3:4]
+    rgb = np.divide(sampled[:, :, :3], alpha,
+                    out=np.zeros_like(sampled[:, :, :3]), where=alpha > .002)
+    result[y0:y1, x0:x1] = np.uint8(np.clip(np.concatenate((rgb, alpha), axis=2) * 255, 0, 255))
+    # Reveal the existing dark lip pigment as an opening, with a soft, tapered
+    # edge so the change reads at the first-person counter distance.
+    aperture = np.clip(1 - ((xx - 121) / 10) ** 2 - ((yy - (81.5 + opening)) / (1.1 + 1.25 * opening)) ** 2, 0, 1)
+    weight = aperture[:, :, None] * (.9 * opening)
+    result[y0:y1, x0:x1, :3] = np.uint8(result[y0:y1, x0:x1, :3] * (1 - weight) +
+                                            np.array([72, 29, 26]) * weight)
+    result[result[:, :, 3] < 8] = 0
+    return result
+
+
+def build_clerk_performance() -> None:
+    source = SOURCE / "clerk-source.png"
+    image = Image.open(source).convert("RGBA")
+    poses = [source_pose(image, column) for column in range(4)]
+    row_names = ("idle", "review", "raise", "stamp", "deny", "talk")
+    source_columns = (0, 3, 1, 2, 3, 0)
+    report = {"source_sha256": hashlib.sha256(source.read_bytes()).hexdigest(),
+              "rows": row_names, "frames_per_row": 8}
+    for cell, suffix in ((CELL, ""), ((128, 288), "-mobile")):
+        sheet = Image.new("RGBA", (cell[0] * 8, cell[1] * len(row_names)))
+        for row, column in enumerate(source_columns):
+            breath = idle_frames(poses[column], "clerk")
+            for col in range(8):
+                frame = breath[col * 8]
+                if row == 5:
+                    frame = clerk_mouth(frame, (0, .35, .9, .55, .12, 1, .5, .15)[col])
+                part = Image.fromarray(frame, "RGBA")
+                if cell != CELL:
+                    part = part.resize(cell, Image.Resampling.LANCZOS)
+                sheet.alpha_composite(part, (col * cell[0], row * cell[1]))
+        path = OUTPUT / f"clerk-performance{suffix}.webp"
+        sheet.save(path, "WEBP", quality=88 if not suffix else 82, method=4)
+        report[suffix or "desktop"] = {"sha256": hashlib.sha256(path.read_bytes()).hexdigest(),
+                                         "bytes": path.stat().st_size}
+        review = Image.new("RGB", sheet.size, "#b8b3a4")
+        encoded = Image.open(path).convert("RGBA")
+        review.paste(encoded, mask=encoded.getchannel("A"))
+        review.resize((sheet.width // 2, sheet.height // 2), Image.Resampling.LANCZOS).save(
+            QA / f"clerk-performance{suffix}-contact.png")
+    (QA / "clerk-performance-report.json").write_text(json.dumps(report, indent=2) + "\n", encoding="utf-8")
+    print(json.dumps(report, indent=2))
+
+
 def main() -> None:
     parser = argparse.ArgumentParser()
     parser.add_argument("--name", choices=NAMES)
+    parser.add_argument("--clerk-performance", action="store_true")
     args = parser.parse_args()
     OUTPUT.mkdir(parents=True, exist_ok=True)
     QA.mkdir(parents=True, exist_ok=True)
+    if args.clerk_performance:
+        build_clerk_performance()
+        return
     report_path = OUTPUT / "build-report.json"
     report = json.loads(report_path.read_text(encoding="utf-8")) if report_path.exists() else {}
     for name in (args.name,) if args.name else NAMES:

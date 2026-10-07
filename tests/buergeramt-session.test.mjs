@@ -17,8 +17,20 @@ test('an invalid frame delta cannot corrupt first-person movement',()=>{
 });
 test('office regulars patrol and handle paperwork without changing the ticket',()=>{
  const h=harness(),start=h.level.characters;h.advanceGame(2.5);const later=h.level.characters;
- assert.equal(later.length,3);assert.ok(later.some((actor,i)=>actor.mode==='walk'&&Math.hypot(actor.x-start[i].x,actor.z-start[i].z)>.2));
+ assert.equal(later.length,8);assert.ok(later.some((actor,i)=>actor.mode==='walk'&&Math.hypot(actor.x-start[i].x,actor.z-start[i].z)>.2));
  assert.equal(h.level.activated,false);assert.equal(h.links[0].sent.filter(m=>m.type==='ticket').length,0);
+});
+test('the Aktenkurier approaches, delivers the dark verse in a spotlight, and resumes his route',()=>{
+ const h=harness('host',{cinematics:true});h.enter();h.advanceGame(9);
+ assert.equal(h.level.stage,'omen');assert.equal(h.level.omen.phase,'blackout');
+ assert.ok(h.level.omen.strength>.95);assert.ok(Math.hypot(h.level.omen.x-h.level.view.x,h.level.omen.z-h.level.view.z)<1.8);
+ assert.equal(h.node('amt-line').textContent,'Wer die Finsternis sieht, hat sie selbst gewählt!');
+ const board=h.level.queueDisplay;h.advanceGame(2);assert.equal(h.level.queueDisplay,board);
+ h.tick(6000);h.advanceGame(1.5);
+ assert.equal(h.level.stage,'walk-sign');assert.equal(h.level.omen.phase,'');assert.equal(h.level.omen.strength,0);
+ assert.equal(h.level.characterMood,null);h.advanceGame(4);
+ assert.notEqual(h.level.queueDisplay,board);
+ assert.notEqual(h.level.characters[0].mode,'gesture');
 });
 test('a nearby regular owns the visible dialogue mood and releases the queue on return',()=>{
  const h=harness();h.enter();h.moveTo(3.4,1.2);const actor=h.level.characters.find(a=>a.id==='formularsammler');

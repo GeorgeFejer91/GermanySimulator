@@ -764,3 +764,23 @@ watchdog releases a readable fallback if the browser voice stalls, and idle
 speech engines are left alone between cues. Local cue and desk timestamps
 permit review of estimated gaps and overlap. They remain estimates because
 Web Speech does not expose exact speaker-output timing.
+
+## 2026-10-07 — Bürgeramt event-bound character performance
+
+The office crowd grows from three optional walkers to eight, all using one
+four-direction, work, gesture, look, and flinch atlas contract. Five new
+original painted source families are retained under `assets/sprite-sources/`;
+offline builders bake desktop/mobile atlases. Frau Knick receives a separate
+six-row desk performance and modest lip movement tied to line ownership.
+Route distance owns gait phase. Routine work and queue-call reactions have
+lower priority than direct interaction or the one-shot Aktenkurier omen.
+
+The Aktenkurier approaches before the first ticket, delivers “Wer die
+Finsternis sieht, hat sie selbst gewählt!” under a near-black in-world
+spotlight and dissonant effects-bus tone, holds briefly, then restores room,
+queue, and route. The existing subtitle rail carries the text; no new popup
+or backend service is introduced. Replay/close release scene-owned audio and
+light. The project animation skill now records a reusable event-to-motion beat
+card and multi-domain handoff rather than encoding this scene as a universal
+animation rule. The ChatDev graph validates locally; execution still needs
+the external runner and its API key.

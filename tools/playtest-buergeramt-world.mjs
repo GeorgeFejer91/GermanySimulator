@@ -20,11 +20,11 @@ try{
   try{await page.waitForFunction(()=>window.BuergeramtLevel?.active,null,{timeout:20000})}
   catch(error){console.log(JSON.stringify({name:'level-start-timeout',state:await page.evaluate(()=>({readyState:document.readyState,level:!!window.BuergeramtLevel,active:window.BuergeramtLevel?.active,renderer:window.Germany3D?.ready,body:document.body.className})),errors}));throw error}
   await page.waitForFunction(()=>window.Germany3D?.ready,null,{timeout:60000});
-  try{await page.waitForFunction(()=>Germany3D.amtCharacters.length===9&&Germany3D.amtCharacters.every(x=>x.loaded),null,{timeout:75000})}
+  try{await page.waitForFunction(()=>Germany3D.amtCharacters.length===14&&Germany3D.amtCharacters.every(x=>x.loaded),null,{timeout:75000})}
   catch(error){await page.screenshot({path:`${output}/world-sprite-timeout-${name}.png`,timeout:15000}).catch(()=>{});console.log(JSON.stringify({name:'sprite-load-timeout',actors:await page.evaluate(()=>Germany3D.amtCharacters),requests:modelRequests,resources:await page.evaluate(()=>performance.getEntriesByType('resource').filter(x=>x.name.includes('/buergeramt/')).map(x=>({name:x.name,duration:x.duration,bytes:x.transferSize}))),errors}));throw error}
   await page.waitForFunction(()=>Germany3D.amtOffice?.attached,null,{timeout:30000});
   if(name==='desktop')console.log(JSON.stringify({name:'office-detail',...await page.evaluate(()=>{const {attached,compact,instances,triangles,staticDrawCalls,textures,texturePixels,props,obstacles}=Germany3D.amtOffice;return{attached,compact,instances,triangles,staticDrawCalls,textures,texturePixels,props,obstacleCount:obstacles.length}})}));
-  if(name==='desktop'){const before=await page.evaluate(()=>Germany3D.amtCharacters.map(x=>x.frame));await page.waitForTimeout(160);await page.evaluate(()=>Germany3D.sync());const after=await page.evaluate(()=>Germany3D.amtCharacters.map(x=>x.frame));if(before.every((frame,i)=>frame===after[i]))errors.push('Bürgeramt sprite frame did not advance');const moving=await page.evaluate(()=>Germany3D.amtCharacters.filter(x=>x.position));if(moving.length!==3||moving.some(x=>!x.loaded))errors.push('Moving Bürgeramt cast did not load');console.log(JSON.stringify({name:'sprite-atlases',before,after,moving,requests:modelRequests.length}))}
+  if(name==='desktop'){const before=await page.evaluate(()=>Germany3D.amtCharacters.map(x=>x.frame));await page.waitForTimeout(160);await page.evaluate(()=>Germany3D.sync());const after=await page.evaluate(()=>Germany3D.amtCharacters.map(x=>x.frame));if(before.every((frame,i)=>frame===after[i]))errors.push('Bürgeramt sprite frame did not advance');const moving=await page.evaluate(()=>Germany3D.amtCharacters.filter(x=>x.position));if(moving.length!==8||moving.some(x=>!x.loaded))errors.push('Moving Bürgeramt cast did not load');console.log(JSON.stringify({name:'sprite-atlases',before,after,moving,requests:modelRequests.length}))}
   await page.evaluate(()=>window.Germany3D.sync());
   await page.screenshot({path:`${output}/world-${name}.png`,timeout:60000});
   await page.evaluate(()=>{dispatchEvent(new KeyboardEvent('keydown',{code:'KeyD'}));for(let i=0;i<10;i++)BuergeramtLevel.update(.05);dispatchEvent(new KeyboardEvent('keyup',{code:'KeyD'}));dispatchEvent(new KeyboardEvent('keydown',{code:'KeyW'}));for(let i=0;i<19;i++)BuergeramtLevel.update(.05);dispatchEvent(new KeyboardEvent('keyup',{code:'KeyW'}))});
@@ -38,6 +38,13 @@ try{
   await page.screenshot({path:`${output}/world-walk-${name}.png`});
   if(name==='desktop'){
    await page.evaluate(()=>{dispatchEvent(new KeyboardEvent('keydown',{code:'KeyW'}));for(let i=0;i<37;i++)BuergeramtLevel.update(.05);dispatchEvent(new KeyboardEvent('keyup',{code:'KeyW'}));Germany3D.sync()});
+   await page.evaluate(()=>{for(let i=0;i<180;i++)BuergeramtLevel.update(.05);Germany3D.sync()});
+   const omen=await page.evaluate(()=>({stage:BuergeramtLevel.stage,phase:BuergeramtLevel.omen.phase,strength:BuergeramtLevel.omen.strength,line:document.getElementById('amt-line').textContent}));
+   if(omen.stage!=='omen'||omen.strength<.95||omen.line!=='Wer die Finsternis sieht, hat sie selbst gewählt!')throw new Error(`Aktenkurier beat failed: ${JSON.stringify(omen)}`);
+   await page.screenshot({path:`${output}/world-aktenkurier-omen.png`});
+   await page.waitForTimeout(6500);
+   await page.evaluate(()=>{for(let i=0;i<40;i++)BuergeramtLevel.update(.05);Germany3D.sync()});
+   if(await page.evaluate(()=>BuergeramtLevel.stage!=='walk-sign'||BuergeramtLevel.omen.strength!==0))throw new Error('Aktenkurier beat did not release the office');
    await page.screenshot({path:`${output}/world-qr-closeup.png`});
    await page.evaluate(()=>BuergeramtLevel.interact());
    if(await page.evaluate(()=>BuergeramtLevel.stage!=='walk-sign'||!!document.querySelector('#amt-ticket')))throw new Error('QR interaction opened an unwanted popup');
