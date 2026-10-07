@@ -61,7 +61,6 @@ html[data-phone-os="android"] .phone-call{background:radial-gradient(circle at 4
 .phone-call>*{flex-shrink:0;min-width:0;max-width:100%;box-sizing:border-box;overflow-wrap:break-word}
 .phone-choices{flex-wrap:wrap;justify-content:space-evenly;row-gap:18px}
 .phone-choices button{flex-shrink:0}
-#phone-volume{display:grid;gap:8px;width:min(100%,280px);margin:24px auto 0;text-align:left;color:#e9ecea;font:700 11px/1.3 Arial,sans-serif;letter-spacing:.06em}#phone-volume input{width:100%;accent-color:#bfd2d4;touch-action:auto}#phone-volume input:focus-visible{outline:2px solid white;outline-offset:3px}
 
 /* The phone follows Berlin's sparse service-page rhythm without using official marks. */
 .amt-phone{background:#fff;color:#151515}
@@ -100,9 +99,6 @@ html[data-phone-os="android"] .phone-call{background:radial-gradient(circle at 4
 .phone-call:before{display:none}
 .call-status{justify-content:flex-start;margin-bottom:clamp(32px,10dvh,100px)}
 #phone-call-state{font:400 14px/1.3 Arial,sans-serif;letter-spacing:.02em}
-#phone-volume{position:absolute;top:max(12px,env(safe-area-inset-top));right:max(24px,env(safe-area-inset-right));width:120px;margin:0;gap:2px;font-size:9px;opacity:.8}
-#phone-volume:focus-within{opacity:1}
-#phone-volume input{height:14px}
 .phone-call .call-symbol{width:96px;height:96px;border-radius:50%;background:#586572;box-shadow:none;overflow:hidden}
 .call-symbol svg{width:60%;height:60%;fill:#e7e9ea}
 .phone-call b{max-width:100%;text-align:center;overflow-wrap:anywhere}
@@ -179,7 +175,6 @@ html[data-call-ui="samsung"] .phone-choices #phone-answer.dragging,html[data-cal
 .amt-compact .call-status{margin-bottom:8px;padding:2px 0;font-size:11px}
 .amt-compact .phone-call .call-symbol{width:48px;height:48px;margin:8px auto;font-size:30px}
 .amt-compact .phone-call b{margin-top:6px;font-size:20px}
-.amt-compact #phone-volume{position:relative;top:auto;right:auto;width:min(100%,120px);margin:10px auto 0;gap:4px}
 .amt-compact .phone-choices{gap:6px;margin-bottom:0}
 .amt-compact .phone-choices button,.amt-compact .amt-phone .phone-choices button{min-height:36px}
 .amt-compact .phone-choices,html[data-call-ui="google"] .amt-compact .phone-choices,html[data-call-ui="samsung"] .amt-compact .phone-choices{display:flex;width:100%;height:auto;flex-direction:column}

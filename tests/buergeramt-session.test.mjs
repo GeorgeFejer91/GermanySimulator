@@ -240,11 +240,11 @@ test('name submission silently unlocks audio after the ticket',()=>{
 test('incoming call repeats vibration and stops it after decline',()=>{
  const h=harness('phone');h.incoming();const first=h.vibrations.length;assert.ok(first>=1);h.tick(3000);assert.ok(h.vibrations.length>first);h.node('phone-decline').click();assert.equal(h.vibrations.at(-1),0);
 });
-test('phone call level applies to the next exact police utterance',()=>{
- const h=harness('phone');const slider=h.node('phone-volume-input');slider.value='20';slider.dispatchEvent(new Event('input'));
+test('phone police speech automatically uses maximum browser volume',()=>{
+ const h=harness('phone');
  h.incoming();h.node('phone-answer').click();h.tick(20);
  assert.equal(h.synth.spoken[0].text,h.node('phone-call-line').textContent);
- assert.ok(Math.abs(h.synth.spoken[0].volume-.18)<1e-9);
+ assert.equal(h.synth.spoken[0].volume,1);
 });
 test('phone answer/decline are one-shot and sent with the current call id',()=>{
  for(const decision of ['answer','decline']){const h=harness('phone');h.incoming();h.node('phone-'+decision).click();h.node('phone-'+decision).click();const decisions=h.links[0].sent.filter(m=>m.type===decision);assert.equal(decisions.length,1);assert.equal(decisions[0].id,'grass')}

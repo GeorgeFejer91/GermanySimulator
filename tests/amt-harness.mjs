@@ -24,7 +24,7 @@ export function harness(kind='host',{voice=false,synthesis=true,phoneLanguage='d
   click(){if(this.disabled)return;this.onclick?.();this.dispatchEvent(new Event('click'))}
  }
  function node(id){if(!nodes.has(id))nodes.set(id,new Element(id));return nodes.get(id)}
- document.getElementById=node;document.querySelector=selector=>selector==='#phone-volume input'?node('phone-volume-input'):node(selector.slice(1));document.querySelectorAll=()=>[];document.createElement=tag=>Object.assign(new Element(),{tagName:tag.toUpperCase()});document.hidden=false;
+ document.getElementById=node;document.querySelector=selector=>node(selector.slice(1));document.querySelectorAll=()=>[];document.createElement=tag=>Object.assign(new Element(),{tagName:tag.toUpperCase()});document.hidden=false;
  const fullscreenRequests=[];document.body=new Element('body');document.documentElement=new Element('html');document.documentElement.requestFullscreen=()=>{fullscreenRequests.push(true);return Promise.resolve()};
  for(const id of ['amt-level','amt-ticket','amt-walk-hud','phone-ticket','phone-call','phone-call-line'])node(id).hidden=true;
  node('phone-submit').disabled=true;
