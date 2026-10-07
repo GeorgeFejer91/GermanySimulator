@@ -14,6 +14,7 @@ This is the standalone 3D “Grand Theft Amt” game, with keyboard and touch co
 - Bürgeramt episode: also read the relevant beat or audio section in [`BUERGERAMT.md`](./BUERGERAMT.md).
 - Art, models, asset loading, performance, or hosting: read the applicable rules in [`ASSET-POLICY.md`](./ASSET-POLICY.md). For 2D character motion or atlases, also read [`SPRITE-GENERATION-PROTOCOL.md`](./SPRITE-GENERATION-PROTOCOL.md) and the relevant animation skill route in [`SKILLS.md`](./SKILLS.md).
 - Spoken text, subtitles, or voice: read the relevant sections of [`AUDIO-TEXT-LIBRARY.md`](./AUDIO-TEXT-LIBRARY.md); for a new voice or recorded asset, also read [`VOICE-SYNTH-PROTOCOL.md`](./VOICE-SYNTH-PROTOCOL.md).
+- Music, sound effects, soundscape, mix, or a timing-sensitive sound beat: read [`MUSIC-SOUND-DESIGN.md`](./MUSIC-SOUND-DESIGN.md), then the affected `GAMEPLAY.md` or `BUERGERAMT.md` section. For spoken text, also use the audio-text route above.
 - Any code or instruction change: use the relevant routes in [`SKILLS.md`](./SKILLS.md).
 - Durable architecture or product-direction change: search [`DECISIONS.md`](./DECISIONS.md) for directly relevant history. Read only matching entries; update the owning current document and add a concise decision only when rationale needs to persist.
 

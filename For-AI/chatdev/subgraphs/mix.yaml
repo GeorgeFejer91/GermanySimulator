@@ -14,6 +14,9 @@ graph:
         name: gpt-4o
         role: >-
           Read For-AI/chatdev/README.md and follow its scoped handoff protocol.
+          Read For-AI/MUSIC-SOUND-DESIGN.md and For-AI/BUERGERAMT.md.
+          Require the actual beat ID, candidate revision and compact contract
+          for a changed cue in this invocation; report a missing handoff.
           Read game.js, buergeramt.js, buergeramt-phone.js,
           buergeramt.css and For-AI/ASSET-POLICY.md. Specify bounded
           player controls for office effects, spoken dialogue and phone
@@ -22,7 +25,13 @@ graph:
           Audio GainNode; its utterance volume needs the same preference.
           Phone and game run on separate devices, so do not claim a
           shared audio bus. Keep ambience below voices and preserve the
-          existing game music mute contract. Report exact UI and test
+          existing game music mute contract and ordinary office silence.
+          The `omen` buildup is a bounded scene-only exception on the
+          existing effects bus; keep its peak beneath the spoken line and
+          cut it with the restored light and ordinary sound.
+          For each changed cue ID and candidate revision, specify its bus,
+          priority, ducking, finite level and overlap with voice, as well as
+          mute, fallback and cancellation. Report exact UI and test
           requirements, including mobile and reduced-motion behavior.
           Make no game-file edits.
         tooling:

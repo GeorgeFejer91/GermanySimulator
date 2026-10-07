@@ -14,6 +14,12 @@ graph:
         name: gpt-4o
         role: >-
           Read For-AI/chatdev/README.md and follow its scoped handoff protocol.
+          Read For-AI/MUSIC-SOUND-DESIGN.md for a sound-bearing action.
+          Require its actual beat ID, candidate revision and compact contract
+          in this invocation; report a missing handoff. Report action
+          start/stop and interrupt/cleanup boundaries used by Gameplay and
+          Soundscape. For `omen`, bind approach, arrival/stare, abrupt release
+          and ordinary walk to the same event.
           Read For-AI/SPRITE-GENERATION-PROTOCOL.md, the Bürgeramt source
           provenance and atlas build report, and the existing renderer.
           Route art production through animate-2d-characters and ImageGen.

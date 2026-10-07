@@ -14,14 +14,24 @@ graph:
         name: gpt-4o
         role: >-
           Read For-AI/chatdev/README.md and follow its scoped handoff protocol.
+          Read For-AI/MUSIC-SOUND-DESIGN.md and For-AI/BUERGERAMT.md.
+          Require the actual beat ID, candidate revision and compact contract
+          for a changed cue in this invocation; report a missing handoff.
           Read buergeramt-story.js, buergeramt.js, buergeramt-phone.js,
           For-AI/AUDIO-TEXT-LIBRARY.md and For-AI/GAMEPLAY.md.
-          Design a sparse, loop-free office soundscape from existing
-          browser/Web Audio: queue chime, paper handling, stamp, keys and
-          distant ventilation. Keep the episode free of background music.
-          Specify event owner, cue timing, cooldown, silence during critical
-          speech, and cleanup on close or replay. Non-verbal sounds do not
-          require textbox text; every spoken line must match its visible
+          Design sparse office sound using existing browser/Web Audio.
+          Preserve the existing hum, work cues and committed pre-ring
+          interference. Ordinary office waiting has no continuous music.
+          For `omen`, design a restrained menacing electronic ambient musical
+          buildup that rises with approach/darkness, peaks beneath the exact
+          line at near-black arrival, then cuts with the abrupt light return.
+          Start with story purpose and emotional arc. Separate source
+          or sketch, reviewed render, and runtime playback. For each changed
+          cue, report beat/cue ID, candidate revision, guarded controller
+          event, bounded level/timbre/duration/retrigger, priority, silence,
+          fallback and close/replay cleanup. Use one existing scheduler;
+          Strudel or SuperCollider may aid offline authoring only. Non-verbal
+          sounds do not require textbox text; every spoken line must match its visible
           caption. Report concrete cue parameters and integration points;
           do not edit game files or create unlicensed recordings.
         tooling:

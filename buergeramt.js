@@ -29,11 +29,11 @@ function receivePoliceDone(index,mode,durationMs,atMs){const record=timing.cues[
 const ambientLines=[["WARTERAUM","Mein Termin war gestern. Ich war heute pünktlich."],["SCHALTER 1","Für die Kopie des Originals benötigen Sie das Original der Kopie."],["TELEFON AM SCHALTER 2","Nein, die Warteschleife ist persönlich zu nehmen."],["WARTERAUM","Mein Buchstabe wurde aufgerufen, aber die Zahl gehört jemand anderem."],["SCHALTER 4","Einen Moment. Ich verbinde Sie mit Ihrem Moment."]];
 const mix={ambience:.35,voice:.8,fx:.6},mixPanel=document.getElementById("amt-mix");
 try{const saved=JSON.parse(localStorage.getItem("amt-mix-v1")||"null");for(const key of Object.keys(mix))if(Number.isFinite(saved?.[key]))mix[key]=Math.max(0,Math.min(1,saved[key]))}catch{}
-function applyMix(){if(officeAudio){officeAudio.ambience.gain.value=.006*mix.ambience;officeAudio.fx.gain.value=mix.fx;officeAudio.signal.gain.value=mix.fx}}
+function applyMix(){if(officeAudio){officeAudio.ambience.gain.value=.006*mix.ambience*(1-.92*omen.strength);officeAudio.fx.gain.value=mix.fx;officeAudio.signal.gain.value=mix.fx}}
 for(const slider of mixPanel.querySelectorAll("[data-amt-volume]")){const key=slider.dataset.amtVolume;slider.value=String(Math.round(mix[key]*100));slider.addEventListener("input",()=>{mix[key]=Number(slider.value)/100;applyMix();try{localStorage.setItem("amt-mix-v1",JSON.stringify(mix))}catch{}})}
 function initOfficeAudio(){
  try{if(options?.cityAudioBusy?.())return null;const Audio=window.AudioContext||window.webkitAudioContext;if(!Audio||navigator.userActivation&&!navigator.userActivation.hasBeenActive)return null;
-  if(!officeAudio){const ctx=new Audio(),ambience=ctx.createGain(),fx=ctx.createGain(),bus=ctx.createGain(),signal=ctx.createGain(),hum=ctx.createOscillator();hum.type="sine";hum.frequency.value=53;ambience.connect(bus);fx.connect(bus);bus.connect(ctx.destination);signal.connect(ctx.destination);hum.connect(ambience);hum.start();officeAudio={ctx,ambience,fx,bus,signal,hum};applyMix()}
+  if(!officeAudio){const ctx=new Audio(),ambience=ctx.createGain(),fx=ctx.createGain(),bus=ctx.createGain(),signal=ctx.createGain(),hum=ctx.createOscillator();hum.type="sine";hum.frequency.value=53;ambience.connect(bus);fx.connect(bus);bus.connect(ctx.destination);signal.connect(ctx.destination);hum.connect(ambience);hum.start();officeAudio={ctx,ambience,fx,bus,signal,hum};applyMix();officeAudio.omenBuffers=Promise.all(["bed","tension"].map(async name=>{const response=await fetch("assets/audio/buergeramt-omen/"+name+".ogg");if(!response.ok)throw new Error("Omen audio unavailable");return ctx.decodeAudioData(await response.arrayBuffer())})).catch(()=>null)}
   if(officeAudio.ctx.state==="suspended")officeAudio.ctx.resume().catch(()=>{});return officeAudio;
  }catch{return null}
 }
@@ -46,17 +46,36 @@ function officeCue(id,x,z){const audio=initOfficeAudio();if(!audio)return;const 
 }
 let omenTone=null;
 function startOmenTone(){
- const audio=initOfficeAudio();if(!audio)return;
+ const audio=initOfficeAudio();if(!audio||omenTone)return;
  const {ctx,fx}=audio,now=ctx.currentTime,output=ctx.createGain(),filter=ctx.createBiquadFilter();
- output.gain.setValueAtTime(.0001,now);output.gain.exponentialRampToValueAtTime(.045,now+.32);
- filter.type="lowpass";filter.frequency.value=1150;output.connect(filter).connect(fx);
- const voices=[127.4,128.8,190.7,382.2].map((frequency,index)=>{const osc=ctx.createOscillator(),gain=ctx.createGain();osc.type=index===3?"triangle":"sine";osc.frequency.value=frequency;gain.gain.value=index===3?.1:.23;osc.connect(gain).connect(output);osc.start(now);return{osc,gain}});
- omenTone={ctx,output,filter,voices};
+ output.gain.setValueAtTime(0,now);filter.type="lowpass";filter.frequency.value=280;output.connect(filter).connect(fx);
+ const tone={ctx,output,filter,voices:[],stems:[],endAt:now+24,rendered:false},owner=attempt;
+ const attach=(source,gain)=>{const voice={source,gain,ended:false};tone.voices.push(voice);source.onended=()=>{if(voice.ended)return;voice.ended=true;source.disconnect();gain.disconnect();if(tone.voices.every(item=>item.ended)){output.disconnect();filter.disconnect()}}};
+ // The small oscillator bed is also the no-network/no-codec fallback.
+ for(const [index,frequency] of [63.7,64.4,95.35,191.1].entries()){
+  const osc=ctx.createOscillator(),gain=ctx.createGain();osc.type=index===3?"triangle":"sine";osc.frequency.value=frequency;gain.gain.value=index===3?.025:.045;osc.connect(gain).connect(output);attach(osc,gain);osc.start(now);osc.stop(tone.endAt);
+ }
+ omenTone=tone;updateOmenTone();
+ audio.omenBuffers.then(buffers=>{
+  // A decoded preparation must never replay after its payoff, exit or replay.
+  if(!buffers||!active||attempt!==owner||omenTone!==tone||omen.phase!=="approach"||omen.strength>=.75||ctx.currentTime>=tone.endAt)return;
+  for(const buffer of buffers){
+   const source=ctx.createBufferSource(),gain=ctx.createGain();source.buffer=buffer;source.loop=true;gain.gain.value=0;source.connect(gain).connect(output);attach(source,gain);tone.stems.push(gain);source.start();source.stop(tone.endAt);
+  }
+  tone.rendered=true;updateOmenTone();
+ });
+}
+function updateOmenTone(){
+ const tone=omenTone;if(!tone)return;const now=tone.ctx.currentTime,p=omen.strength,duck=omen.phase==="blackout"?.6:1;
+ tone.output.gain.setTargetAtTime(document.hidden?0:(.08+.57*p*p)*duck,now,.06);
+ tone.filter.frequency.setTargetAtTime(280+3300*p*p,now,.09);
+ tone.stems.forEach((gain,index)=>gain.gain.setTargetAtTime(index===0?.65:.8*p*p,now,.12));
+ if(officeAudio)officeAudio.ambience.gain.setTargetAtTime(.006*mix.ambience*(1-.92*p),now,.04);
 }
 function stopOmenTone(){
  const tone=omenTone;if(!tone)return;omenTone=null;
- const now=tone.ctx.currentTime;tone.output.gain.cancelScheduledValues(now);tone.output.gain.setValueAtTime(Math.max(.0001,tone.output.gain.value),now);tone.output.gain.exponentialRampToValueAtTime(.0001,now+.42);
- for(const {osc,gain} of tone.voices){osc.stop(now+.5);osc.onended=()=>{osc.disconnect();gain.disconnect()}}
+ const now=tone.ctx.currentTime;tone.output.gain.cancelScheduledValues(now);tone.output.gain.setValueAtTime(tone.output.gain.value,now);tone.output.gain.linearRampToValueAtTime(0,now+.025);
+ for(const voice of tone.voices)if(!voice.ended){try{voice.source.stop(now+.03)}catch{voice.source.onended()}}
 }
 const characterRoutes=[
  {id:"aktenkurier",speed:.75,points:[[-4.8,-7.6],[-4.8,-5.2],[-2.8,-5.2],[-2.8,-7.6]]},
@@ -70,35 +89,43 @@ const characterRoutes=[
 ];
 const characters=characterRoutes.map(route=>({id:route.id,route,x:route.points[0][0],z:route.points[0][1],target:1,direction:"up",mode:"work",pause:1.1,stride:0,workClock:0,encounters:0,sequence:[{mode:"work",duration:1.1}],pending:false,priority:0,attention:0}));
 let characterMood=null;
-const omen={used:false,phase:"",strength:0,hold:0,roomTime:0,resume:"walk-sign",resumeYaw:0,recoverFromYaw:0};
-function resetOmen(){stopOmenTone();omen.used=false;omen.phase="";omen.strength=0;omen.hold=0;omen.roomTime=0;omen.resumeYaw=view.yaw;omen.recoverFromYaw=view.yaw}
+const omen={used:false,phase:"",strength:0,hold:0,roomTime:0,startDistance:0,resume:"walk-sign",resumeYaw:0,recoverFromYaw:0};
+function resetOmen(){stopOmenTone();omen.used=false;omen.phase="";omen.strength=0;omen.hold=0;omen.roomTime=0;omen.resumeYaw=view.yaw;omen.recoverFromYaw=view.yaw;applyMix()}
 function beginOmen(actor){
- omen.phase="blackout";omen.resume=stage;omen.strength=0;actor.pending=false;actor.sequence=[];actor.priority=4;actor.mode="gesture";
- setStage("omen");setStatus("AKTENLAUF · UNTERBRECHUNG");startOmenTone();
+ omen.phase="blackout";omen.strength=1;actor.pending=false;actor.sequence=[];actor.priority=4;actor.mode="gesture";updateOmenTone();
  const verse=story.omen;
  content(verse.speaker,verse.line,[],()=>{if(omen.phase==="blackout"){omen.phase="glare";omen.hold=.7}},null,null,{id:actor.id,tone:"dread",valence:-.9});
 }
 function updateOmen(dt){
  if(["walk-sign","waiting"].includes(stage))omen.roomTime+=dt;
  const actor=characters[0];
- if(options?.cinematics!==false&&!options?.cityAudioBusy?.()&&!omen.used&&!activated&&omen.roomTime>1.2&&stage==="walk-sign"&&Math.hypot(actor.x-view.x,actor.z-view.z)<6.2){omen.used=true;omen.phase="approach";omen.resumeYaw=view.yaw;actor.sequence=[];actor.pending=false;actor.priority=4}
+ if(options?.cinematics!==false&&!options?.cityAudioBusy?.()&&!omen.used&&!activated&&omen.roomTime>1.2&&stage==="walk-sign"&&Math.hypot(actor.x-view.x,actor.z-view.z)<6.2){
+  omen.used=true;omen.phase="approach";omen.resume=stage;omen.resumeYaw=view.yaw;omen.startDistance=Math.hypot(actor.x-view.x,actor.z-view.z);actor.sequence=[];actor.pending=false;actor.priority=4;
+  cancelSpeech();ambient.textContent="";characterMood=null;speaker.textContent="";line.textContent="";actions.replaceChildren();setStage("omen");setStatus("AKTENLAUF · UNTERBRECHUNG");startOmenTone();
+ }
  if(["approach","blackout","glare"].includes(omen.phase)){
   const target=Math.atan2(actor.x-view.x,view.z-actor.z),turn=Math.atan2(Math.sin(target-view.yaw),Math.cos(target-view.yaw));
   view.yaw+=turn*(1-Math.exp(-4*dt));
  }
- if(omen.phase==="blackout")omen.strength=Math.min(1,omen.strength+dt/.28);
- else if(omen.phase==="glare"){omen.hold-=dt;if(omen.hold<=0){omen.phase="recover";omen.recoverFromYaw=view.yaw;stopOmenTone()}}
+ if(omen.phase==="approach"){
+  const progress=Math.max(0,Math.min(1,(omen.startDistance-Math.hypot(actor.x-view.x,actor.z-view.z))/Math.max(.1,omen.startDistance-1.72)));
+  omen.strength=progress*progress*(3-2*progress);
+ }else if(omen.phase==="glare"){omen.hold-=dt;if(omen.hold<=0){
+  omen.phase="recover";omen.strength=0;omen.hold=.25;omen.recoverFromYaw=view.yaw;stopOmenTone();applyMix();
+  actor.priority=0;actor.mode="walk";actor.attention=2;actor.target=actor.route.points.reduce((best,point,index)=>Math.hypot(actor.x-point[0],actor.z-point[1])<Math.hypot(actor.x-actor.route.points[best][0],actor.z-actor.route.points[best][1])?index:best,0);
+  speaker.textContent="";line.textContent="";setStage(omen.resume);setStatus("VORGANG FORTSETZEN · "+queueDisplay);
+ }}
  else if(omen.phase==="recover"){
-  omen.strength=Math.max(0,omen.strength-dt/.38);
-  const turn=Math.atan2(Math.sin(omen.resumeYaw-omen.recoverFromYaw),Math.cos(omen.resumeYaw-omen.recoverFromYaw));view.yaw=omen.recoverFromYaw+turn*(1-omen.strength);
-  if(omen.strength===0){omen.phase="";actor.priority=0;actor.mode="work";actor.target=actor.route.points.reduce((best,point,index)=>Math.hypot(actor.x-point[0],actor.z-point[1])<Math.hypot(actor.x-actor.route.points[best][0],actor.z-actor.route.points[best][1])?index:best,0);action(actor,[["look",.35],["work",.65]],1);setStage(omen.resume);setStatus("VORGANG FORTSETZEN · "+queueDisplay)}
+  omen.hold=Math.max(0,omen.hold-dt);
+  const turn=Math.atan2(Math.sin(omen.resumeYaw-omen.recoverFromYaw),Math.cos(omen.resumeYaw-omen.recoverFromYaw));view.yaw=omen.recoverFromYaw+turn*(1-omen.hold/.25);
+  if(omen.hold===0)omen.phase="";
  }
+ updateOmenTone();
 }
 function approachOmen(actor,dt){
- if(!walking())return;
  const dx=view.x-actor.x,dz=view.z-actor.z,distance=Math.hypot(dx,dz);
  if(distance<1.72){beginOmen(actor);return}
- const step=Math.min(distance-1.62,1.1*dt);
+ const step=Math.min(distance-1.62,.78*dt);
  actor.x+=dx/distance*step;actor.z+=dz/distance*step;actor.stride+=step*8.5;
  actor.direction=Math.abs(dx)>Math.abs(dz)?dx>0?"right":"left":dz>0?"down":"up";actor.mode="walk";
 }
@@ -192,7 +219,7 @@ function officeBlocked(x,z){
  if(characters.some(actor=>Math.hypot(x-actor.x,z-actor.z)<.72))return true;
  return officeSeats.some(([sx,sz])=>Math.abs(x-sx)<.62&&Math.abs(z-sz)<.58);
 }
-function forfeit(reason){if(!active||!activated||["cancelled","expired","closed"].includes(stage))return;activated=false;callPending=false;callOutcome="forfeit";stopCallSignal();link?.send("forfeit");exit.hidden=false;setStage("expired");setStatus("PLATZ VERFALLEN · "+reason);content("ANMELDESCHALTER","Das Telefon war nicht durchgehend erreichbar. Ihre Nummer ist gestrichen. Scannen Sie das Schild erneut.",[{label:"ZURÜCK ZUM QR-SCHILD",run:()=>setStage("walk-sign")},{label:"AMT VERLASSEN",run:()=>{close(false);options.onCancel()}}])}
+function forfeit(reason){if(!active||!activated||["cancelled","expired","closed"].includes(stage))return;activated=false;callPending=false;callOutcome="forfeit";stopCallSignal();if(omen.phase){stopOmenTone();omen.phase="";omen.strength=0;const actor=characters[0];actor.priority=0;actor.mode="walk";actor.sequence=[];applyMix()}link?.send("forfeit");exit.hidden=false;setStage("expired");setStatus("PLATZ VERFALLEN · "+reason);content("ANMELDESCHALTER","Das Telefon war nicht durchgehend erreichbar. Ihre Nummer ist gestrichen. Scannen Sie das Schild erneut.",[{label:"ZURÜCK ZUM QR-SCHILD",run:()=>setStage("walk-sign")},{label:"AMT VERLASSEN",run:()=>{close(false);options.onCancel()}}])}
 function ring(){try{const audio=initOfficeAudio();if(!audio)return;const {ctx,fx}=audio,now=ctx.currentTime;for(const offset of [0,.2,.52,.72]){const osc=ctx.createOscillator(),gain=ctx.createGain();osc.type="sine";osc.frequency.value=425;gain.gain.setValueAtTime(.0001,now+offset);gain.gain.linearRampToValueAtTime(.014,now+offset+.015);gain.gain.setValueAtTime(.014,now+offset+.1);gain.gain.exponentialRampToValueAtTime(.0001,now+offset+.15);osc.connect(gain).connect(fx);osc.onended=()=>{osc.disconnect();gain.disconnect()};osc.start(now+offset);osc.stop(now+offset+.16)}}catch{}}
 const callSignalSources=new Set();let signalPauseTimer=null,signalEndTimer=null,signalPaused=false;
 function stopCallSignal(){
@@ -246,7 +273,7 @@ function update(dt){
  clerkClock+=elapsed;clerkAccent=Math.max(0,clerkAccent-elapsed);
  updateOmen(elapsed);
  updateCharacters(elapsed);
- if(["blackout","glare","recover"].includes(omen.phase))return;
+ if(omen.phase)return;
  if(stage==="character"){
   const actor=characters.find(item=>item.id===characterMood?.id);
   if(actor){const target=Math.atan2(actor.x-view.x,view.z-actor.z),turn=Math.atan2(Math.sin(target-view.yaw),Math.cos(target-view.yaw));view.yaw+=turn*(1-Math.exp(-4*elapsed))}
@@ -266,7 +293,7 @@ function update(dt){
  const near=distanceTo(nearbyTarget())<1.9&&(stage!=="outside"||Math.abs(view.x)<1.3),actor=stage==="waiting"&&near?null:nearestCharacter();
  nearby.textContent=actor?"E · "+story.characters[actor.id].speaker+" ANSPRECHEN":near?(stage==="outside"?"DURCH DEN EINGANG GEHEN":stage==="walk-sign"?"QR-CODE MIT DEM TELEFON SCANNEN":stage==="waiting"?"E · VORZEITIG AN SCHALTER 3":"E · FRAU KNICK ANSPRECHEN"):(stage==="outside"?"ZUR EINGANGSTÜR":stage==="walk-sign"?"QR-SCHILD UNTER DER ANZEIGE":"AUFRUFTAFEL BEOBACHTEN");
 }
-function interact(){if(!walking())return;const near=distanceTo(nearbyTarget())<1.9,actor=stage==="waiting"&&near?null:nearestCharacter();if(actor){showCharacter(actor);return}if(!near||stage==="outside"&&Math.abs(view.x)>=1.3)return;
+function interact(){if(!walking()||omen.phase)return;const near=distanceTo(nearbyTarget())<1.9,actor=stage==="waiting"&&near?null:nearestCharacter();if(actor){showCharacter(actor);return}if(!near||stage==="outside"&&Math.abs(view.x)>=1.3)return;
  if(stage==="outside"){view.z=4.8;setStage(activated?"waiting":"walk-sign");setStatus(activated?"WARTENUMMER "+number+" · AUFRUF ABWARTEN":"QR-CODE MIT DEM TELEFON SCANNEN");return}
  if(stage==="walk-sign")return;
  if(stage==="waiting"){setStage("early");content("FRAU KNICK · SCHALTER 3","Steht Ihre Nummer auf der Tafel? Nein? Dann treten Sie zurück! Dass ich hier gerade nichts tue, ist eine dienstliche Tätigkeit.",[{label:"ZURÜCK IN DEN WARTERAUM",run:()=>setStage("waiting")}]);setStatus("FALSCHER AUFRUF · "+queueDisplay);return}showClerk()}
@@ -292,7 +319,8 @@ function beginLink(){
    if(!currentLink.send("ticket",{number:next}))return;
    ticketSerial=ticketSerial===899?100:ticketSerial+1;lastScanId=m.id;
    number=next;registeredName="";activated=true;ticketWaitCalls=5;deadline=0;callPending=false;callTriggered=false;callCommitted=false;callOutcome="";clerkIndex=0;
-   if(stage!=="outside")setStage("waiting");
+   if(omen.phase){omen.resume="waiting";if(omen.phase==="recover")setStage("waiting")}
+   else if(stage!=="outside")setStage("waiting");
    setStatus("WARTENUMMER "+number+" · AUFRUF ABWARTEN");
   }else if(m.type==="register"&&activated&&typeof m.name==="string"&&m.name.trim().length>=2&&m.name.length<=80){registeredName=m.name.trim().replace(/\s+/g," ");if(stage==="walk-counter")setStatus("NAME EINGETRAGEN · FRAU KNICK ANSPRECHEN")}
   else if(m.type==="phone-hidden")forfeit("TELEFON NICHT SICHTBAR");
@@ -358,11 +386,11 @@ function clerkPerformance(){
  else{const beat=clerkClock%9.2;mode=beat<2.6?"idle":beat<4.1?"review":beat<4.6?"raise":beat<4.95?"stamp":beat<6.1?"deny":"idle"}
  return{row:names[mode],frame:Math.floor(clerkClock*(mode==="talk"?10:4)+clerkPulse)%8,speaking:clerkSpeaking};
 }
-function captureKey(event){if(event.type==="keyup")held.delete(event.code);if(!active)return;if(event.type==="keydown"&&event.code==="KeyE"&&walking()){event.preventDefault();event.stopImmediatePropagation();if(!event.repeat)interact();return}if(!walking())return;if(["KeyW","KeyA","KeyS","KeyD","ArrowUp","ArrowDown","ArrowLeft","ArrowRight","ShiftLeft"].includes(event.code)){event.preventDefault();event.stopImmediatePropagation();if(event.type==="keydown")held.add(event.code);else held.delete(event.code)}}
+function captureKey(event){if(event.type==="keyup")held.delete(event.code);if(!active)return;if(event.type==="keydown"&&event.code==="KeyE"&&walking()){event.preventDefault();event.stopImmediatePropagation();if(!event.repeat)interact();return}if(!walking()||omen.phase)return;if(["KeyW","KeyA","KeyS","KeyD","ArrowUp","ArrowDown","ArrowLeft","ArrowRight","ShiftLeft"].includes(event.code)){event.preventDefault();event.stopImmediatePropagation();if(event.type==="keydown")held.add(event.code);else held.delete(event.code)}}
 window.addEventListener("keydown",captureKey,true);window.addEventListener("keyup",captureKey,true);window.addEventListener("blur",()=>held.clear());
-document.addEventListener("visibilitychange",()=>{if(document.hidden)held.clear()});
-document.addEventListener("pointermove",event=>{if(active&&walking()&&event.buttons===1&&!event.target.closest("button"))view.yaw+=event.movementX*.004});
-document.querySelectorAll("[data-amt-key]").forEach(button=>{const key=button.dataset.amtKey;button.addEventListener("pointerdown",e=>{if(!active||!walking())return;e.preventDefault();button.setPointerCapture(e.pointerId);held.add(key)});for(const type of ["pointerup","pointercancel","lostpointercapture"])button.addEventListener(type,()=>held.delete(key))});
+document.addEventListener("visibilitychange",()=>{if(document.hidden)held.clear();updateOmenTone()});
+document.addEventListener("pointermove",event=>{if(active&&walking()&&!omen.phase&&event.buttons===1&&!event.target.closest("button"))view.yaw+=event.movementX*.004});
+document.querySelectorAll("[data-amt-key]").forEach(button=>{const key=button.dataset.amtKey;button.addEventListener("pointerdown",e=>{if(!active||!walking()||omen.phase)return;e.preventDefault();button.setPointerCapture(e.pointerId);held.add(key)});for(const type of ["pointerup","pointercancel","lostpointercapture"])button.addEventListener(type,()=>held.delete(key))});
 document.getElementById("amt-touch-e").addEventListener("click",interact);document.getElementById("amt-leave").addEventListener("click",()=>close());exit.addEventListener("click",()=>close());
 window.BuergeramtLevel={open,replay(config){close(false);open(config)},update,interact,setOfficeObstacles(items){officeObstacles=Array.isArray(items)?items.filter(o=>[o.x,o.z,o.w,o.d].every(Number.isFinite)&&o.w>0&&o.d>0):[]},get active(){return active},get stage(){return stage},get queueDisplay(){return queueDisplay},get qrSvg(){return qrSvg},get phoneUrl(){return link?BuergeramtLink.phoneUrl(link.invitation,options.subtitlesOn?.()):""},get timing(){return JSON.parse(JSON.stringify(timing))},get view(){return{x:view.x,z:view.z,yaw:view.yaw}},get characters(){return characters.map(actor=>({id:actor.id,x:actor.x,z:actor.z,direction:actor.direction,mode:actor.mode,frame:actor.mode==="walk"?Math.floor(actor.stride)%8:Math.floor(actor.workClock*3)%8}))},get characterMood(){return characterMood},get clerkPerformance(){return clerkPerformance()},get omen(){return{phase:omen.phase,strength:omen.strength,x:characters[0].x,z:characters[0].z}},get registeredName(){return registeredName},get activated(){return activated}};
 })();

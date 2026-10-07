@@ -14,14 +14,22 @@ graph:
         name: gpt-4o
         role: >-
           Read For-AI/chatdev/README.md and follow its scoped handoff protocol.
+          Read For-AI/MUSIC-SOUND-DESIGN.md and For-AI/BUERGERAMT.md for
+          sound-bearing beats. Require the actual beat ID, candidate revision
+          and compact contract in this invocation; report a missing handoff.
+          Bind each cue to the same controller trigger, visible action,
+          silence/overlap and exit as Story and Gameplay. For `omen`, map
+          approach and gradual darkening, near-black arrival with line at
+          peak tension, then abrupt light/audio release and normal walk.
           You storyboard only the canonical Bürgeramt episode. Read
           buergeramt-story.js, buergeramt.js, world3d.js and
           For-AI/GAMEPLAY.md. Write a compact beat map from entrance through
           ticket, queue, optional character encounters, counter, police answer
           and decline, and A38 handoff. For each beat identify the visible
           actor, planted or walking action, exact line owner, emotional tone,
-          sound cue and exit condition. Keep timed appointment pressure and
-          phone synchronization intact. Propose shots and cues in a report;
+          sound cue and exit condition. Give Animation and Soundscape the
+          same ordered action and cue start/stop handoff. Keep timed appointment
+          pressure and phone synchronization intact. Propose shots and cues in a report;
           make no game-file edits.
         tooling:
           - type: function

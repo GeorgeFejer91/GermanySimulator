@@ -21,7 +21,7 @@ READABLE = {
     "buergeramt-story.js", "buergeramt-phone.js", "buergeramt-phone.html",
     "buergeramt-link.js", "buergeramt.css", "CREDITS.md",
     "For-AI/README.md", "For-AI/GAMEPLAY.md", "For-AI/BUERGERAMT.md", "For-AI/ASSET-POLICY.md",
-    "For-AI/VOICE-SYNTH-PROTOCOL.md", "For-AI/AUDIO-TEXT-LIBRARY.md",
+    "For-AI/VOICE-SYNTH-PROTOCOL.md", "For-AI/MUSIC-SOUND-DESIGN.md", "For-AI/AUDIO-TEXT-LIBRARY.md",
     "For-AI/AUDIO-TEXT-LIBRARY.js", "assets/voices/LICENSES.md",
     "For-AI/SPRITE-GENERATION-PROTOCOL.md",
     "assets/sprite-sources/buergeramt/PROVENANCE.md",

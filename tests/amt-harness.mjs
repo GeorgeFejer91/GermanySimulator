@@ -7,7 +7,7 @@ import path from 'node:path';
 const root=path.resolve(path.dirname(fileURLToPath(import.meta.url)),'..');
 export const source=name=>readFileSync(path.join(root,name),'utf8');
 
-export function harness(kind='host',{voice=false,synthesis=true,phoneLanguage='de-DE',phoneCaptions=false,phoneAgent='test',phonePlatform='',phoneMobile,phoneClock,cinematics=false,cityAudioBusy}={}){
+export function harness(kind='host',{voice=false,synthesis=true,phoneLanguage='de-DE',phoneCaptions=false,phoneAgent='test',phonePlatform='',phoneMobile,phoneClock,cinematics=false,cityAudioBusy,fakeAudio=false,officeFx=null}={}){
  const nodes=new Map(),window=new EventTarget(),document=new EventTarget();
  let now=0,nextTimer=0;const timers=new Map();
  const later=(fn,delay=0,repeat=false)=>{const id=++nextTimer;timers.set(id,{fn,due:now+Math.max(0,delay),repeat,delay});return id};
@@ -49,14 +49,47 @@ export function harness(kind='host',{voice=false,synthesis=true,phoneLanguage='d
  };
  const vibrations=[];
  const saved=new Map(),localStorage={getItem:key=>saved.has(key)?saved.get(key):null,setItem:(key,value)=>saved.set(key,String(value))};
+ if(officeFx!==null)saved.set('amt-mix-v1',JSON.stringify({ambience:.35,voice:.8,fx:officeFx}));
  const globals={console,Event,EventTarget,CustomEvent,TextEncoder,URL,URLSearchParams,Intl,Date,Math,Number,Set,Promise,performance:{now:()=>now},localStorage,
-  window,document,navigator:{userAgent:phoneAgent,userAgentData:phonePlatform?{platform:phonePlatform,mobile:phoneMobile??true}:undefined,language:phoneLanguage,languages:[phoneLanguage],userActivation:{hasBeenActive:false},vibrate(pattern){vibrations.push(pattern)}},
+  window,document,navigator:{userAgent:phoneAgent,userAgentData:phonePlatform?{platform:phonePlatform,mobile:phoneMobile??true}:undefined,language:phoneLanguage,languages:[phoneLanguage],userActivation:{hasBeenActive:fakeAudio},vibrate(pattern){vibrations.push(pattern)}},
   crypto:{getRandomValues(a){a.fill(123);return a}},BuergeramtLink:Link,
   qrcode:()=>({addData(){},make(){},createSvgTag:()=>'<svg></svg>'}),
   setTimeout:(fn,ms)=>later(fn,ms),clearTimeout:clear,setInterval:(fn,ms)=>later(fn,ms,true),clearInterval:clear,
   requestAnimationFrame:fn=>later(fn,16)
  };
  if(synthesis){globals.speechSynthesis=synth;globals.SpeechSynthesisUtterance=class{constructor(text){this.text=text}}}
+ const audio={contexts:[],nodes:[],fetches:[],pendingDecodes:[],resolveDecodes(){for(const item of this.pendingDecodes.splice(0))item.resolve({duration:2,numberOfChannels:1})},flushEnded(){for(const node of this.nodes)if(!node.ended&&node.stopped.some(time=>time<=now/1000)){node.ended=true;node.onended?.()}}};
+ if(fakeAudio){
+  class Param{
+   constructor(value=0){this.value=value;this.events=[]}
+   setValueAtTime(value,time){this.value=value;this.events.push(['set',value,time]);return this}
+   linearRampToValueAtTime(value,time){this.value=value;this.events.push(['linear',value,time]);return this}
+   exponentialRampToValueAtTime(value,time){this.value=value;this.events.push(['exponential',value,time]);return this}
+   setTargetAtTime(value,time,constant){this.value=value;this.events.push(['target',value,time,constant]);return this}
+   cancelScheduledValues(time){this.events.push(['cancel',time]);return this}
+  }
+  class Node{
+   constructor(type){this.kind=type;this.type=type;this.started=[];this.stopped=[];this.connections=[];this.gain=new Param(1);this.frequency=new Param(0);this.Q=new Param(1);audio.nodes.push(this)}
+   connect(other){this.connections.push(other);return other}
+   disconnect(){this.disconnected=true}
+   start(time){this.started.push(time)}
+   stop(time){this.stopped.push(time??now/1000)}
+  }
+  class AudioContext{
+   constructor(){this.sampleRate=48000;this.state='running';this.destination=new Node('destination');this.gains=[];audio.contexts.push(this)}
+   get currentTime(){return now/1000}
+   createGain(){const gain=new Node('gain');this.gains.push(gain);return gain}
+   createOscillator(){return new Node('oscillator')}
+   createBiquadFilter(){return new Node('filter')}
+   createBufferSource(){return new Node('buffer-source')}
+   createBuffer(channels,frames,rate){return{numberOfChannels:channels,length:frames,sampleRate:rate,getChannelData:()=>new Float32Array(frames)}}
+   decodeAudioData(){return new Promise((resolve,reject)=>audio.pendingDecodes.push({resolve,reject}))}
+   resume(){this.state='running';return Promise.resolve()}
+   close(){this.state='closed';return Promise.resolve()}
+  }
+  globals.AudioContext=AudioContext;
+  globals.fetch=async url=>{audio.fetches.push(String(url));return{ok:true,arrayBuffer:async()=>new ArrayBuffer(16)}};
+ }
  Object.assign(window,globals);window.location={hash:phoneCaptions?'#captions=en':''};window.Germany3D={ready:true,setAmtQr(){}};
  if(phoneClock)window.BuergeramtClock=phoneClock;
  const context=vm.createContext(globals);
@@ -71,6 +104,7 @@ export function harness(kind='host',{voice=false,synthesis=true,phoneLanguage='d
  function action(index=0){const button=node('amt-actions').children[index];if(!button)throw new Error(`No action ${index} at ${level.stage}`);button.click();return button}
  function advanceGame(seconds){for(let t=0;t<seconds;t+=.05)level.update(Math.min(.05,seconds-t))}
  function enter(){moveTo(0,-2.6)}
+ function enterUntilOmen(){key('KeyW');try{for(let i=0;i<300;i++){if(level.stage==='omen')return;level.update(.05)}throw new Error(`Omen did not begin during entry; stage=${level.stage}, view=${JSON.stringify(level.view)}`)}finally{key('KeyW','keyup')}}
  function approachRegistration(){moveTo(-3.3,-2.6);moveTo(-3.3,2.5);moveTo(-4.65,2.5)}
  function register(){enter();Link.instances.at(-1).message({type:'scan',id:'a'.repeat(24)})}
  function wait(){register()}
@@ -78,5 +112,5 @@ export function harness(kind='host',{voice=false,synthesis=true,phoneLanguage='d
  function phoneReady(){const link=Link.instances.at(-1);link.emit('connected',{});link.message({type:'ticket',number:'B-223'});return link}
  function incoming(){const link=phoneReady();node('phone-name').value='Erika Mustermann';node('phone-form').dispatchEvent(new Event('submit',{cancelable:true}));link.message({type:'call-arm',id:'grass'});link.message({type:'call',id:'grass',line:window.BuergeramtStory.call.line,ringAtPhoneMs:now,ringAtUtcMs:null,leadMs:2200});return link}
  function hide(){document.hidden=true;document.dispatchEvent(new Event('visibilitychange'))}
- return{window,document,node,tick,now:()=>now,timers,key,moveTo,action,advanceGame,enter,approachRegistration,register,wait,counter,phoneReady,incoming,hide,synth,vibrations,fullscreenRequests,counts,music,config,level,links:Link.instances,context};
+ return{window,document,node,tick,now:()=>now,timers,key,moveTo,action,advanceGame,enter,enterUntilOmen,approachRegistration,register,wait,counter,phoneReady,incoming,hide,synth,audio,vibrations,fullscreenRequests,counts,music,config,level,links:Link.instances,context};
 }

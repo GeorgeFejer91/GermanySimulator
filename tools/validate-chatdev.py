@@ -2,6 +2,8 @@
 
 from pathlib import Path
 import ast
+import hashlib
+import json
 import runpy
 import yaml
 
@@ -22,9 +24,24 @@ stages = runpy.run_path(str(root / "tools" / "run-chatdev.py"))["stage_paths"](r
 assert list(stages) == expected
 game_tools = runpy.run_path(str(lane / "functions" / "game_tools.py"))
 for required in ("AGENTS.md", "For-AI/AGENT-START.md", "For-AI/SKILLS.md", "For-AI/DECISIONS.md",
+                 "For-AI/MUSIC-SOUND-DESIGN.md",
                  "For-AI/chatdev/README.md", "buergeramt-time.js", "tests/amt-harness.mjs",
                  ".agents/skills/chatdev-game-workflows/SKILL.md"):
     assert required in game_tools["READABLE"] and (root / required).is_file(), required
+audio_protocol = "For-AI/MUSIC-SOUND-DESIGN.md"
+audio_read = json.loads(game_tools["read_game_file"](audio_protocol, limit=50_000))
+audio_bytes = (root / audio_protocol).read_bytes()
+assert audio_read["path"] == audio_protocol
+assert audio_read["content"] == audio_bytes.decode("utf-8")
+assert audio_read["sha256"] == hashlib.sha256(audio_bytes).hexdigest()
+assert audio_read["next_offset"] is None
+assert audio_protocol not in game_tools["WRITABLE"]
+try:
+    game_tools["_path"](audio_protocol, game_tools["WRITABLE"])
+except ValueError:
+    pass
+else:
+    raise AssertionError("Audio protocol unexpectedly writable by ChatDev")
 for function in (node for node in module.body if isinstance(node, ast.FunctionDef) and node.name.startswith("save_")):
     assert "expected_sha256" in [arg.arg for arg in function.args.args], function.name
 for node in nodes:

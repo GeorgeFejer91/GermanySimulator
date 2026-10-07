@@ -14,6 +14,16 @@ graph:
         name: gpt-4o
         role: >-
           Read For-AI/chatdev/README.md and follow its scoped handoff protocol.
+          Read For-AI/MUSIC-SOUND-DESIGN.md and bind every changed cue check
+          to the actual beat ID, candidate revision and compact contract
+          supplied in this invocation; report a missing handoff. Verify deterministic
+          event/receipt, duplicate/stale, timeout, fallback and cancellation
+          behavior where available. Distinguish audio measures, silent
+          browser timing, paired/physical device checks and actual listening.
+          For `omen`, hand off silent timing/visual checks for gradual
+          darkening and rising cue, near-black line peak, abrupt restoration,
+          normal walk, queue resume and exit/replay cancellation; listening
+          remains a separate evidence result.
           Run run_game_checks and report exactly the syntax and Node checks it ran.
           This stage has no browser, image inspection, audio playback or device tools.
           Mark those checks NOT RUN and hand them to the Codex integrator. If prior

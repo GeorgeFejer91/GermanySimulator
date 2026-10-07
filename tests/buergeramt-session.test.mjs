@@ -25,7 +25,7 @@ test('office regulars patrol and handle paperwork without changing the ticket',(
  assert.equal(h.level.activated,false);assert.equal(h.links[0].sent.filter(m=>m.type==='ticket').length,0);
 });
 test('the Aktenkurier approaches, delivers the dark verse in a spotlight, and resumes his route',()=>{
- const h=harness('host',{cinematics:true});h.enter();h.advanceGame(9);
+ const h=harness('host',{cinematics:true});h.enterUntilOmen();assert.equal(h.level.omen.phase,'approach');h.advanceGame(9);
  assert.equal(h.level.stage,'omen');assert.equal(h.level.omen.phase,'blackout');
  assert.ok(h.level.omen.strength>.95);assert.ok(Math.hypot(h.level.omen.x-h.level.view.x,h.level.omen.z-h.level.view.z)<1.8);
  assert.ok(Math.abs(h.level.view.yaw)>.1);assert.equal(h.document.body.classList.contains('amt-omen'),true);

@@ -16,6 +16,7 @@ Use the smallest coherent change. Prefer existing code, tools, and skills. Updat
 - [`SKILLS.md`](./SKILLS.md): skill routes, Codex model tiers, delegation and review contract.
 - [`DECISIONS.md`](./DECISIONS.md): dated rationale and history. Search for a relevant entry when needed; do not read the whole log or treat an older entry as current authority.
 - [`VOICE-SYNTH-PROTOCOL.md`](./VOICE-SYNTH-PROTOCOL.md): voice profile and recorded-speech production.
+- [`MUSIC-SOUND-DESIGN.md`](./MUSIC-SOUND-DESIGN.md): music and nonverbal sound briefs, cue-to-state contracts, mix ownership, and audio evidence.
 - [`AUDIO-TEXT-LIBRARY.md`](./AUDIO-TEXT-LIBRARY.md) and [`AUDIO-TEXT-LIBRARY.js`](./AUDIO-TEXT-LIBRARY.js): shipped speech IDs, source text, subtitles, triggers, and exclusions.
 - [`QUIZ-CHARACTER-DICTIONARY.md`](./QUIZ-CHARACTER-DICTIONARY.md) and [`QUIZ-CHARACTER-DICTIONARY.js`](./QUIZ-CHARACTER-DICTIONARY.js): quiz identities, portraits, vocabulary, names, and category routing.
 - [`chatdev/`](./chatdev/): shared production and review protocol, optional pinned Bürgeramt runner, and legacy Secret Tunnel handoff records.
