@@ -25,7 +25,8 @@ GRID, COUNT, FPS = 8, 64, 24
 CELL, FIGURE = (192, 416), (144, 384)
 
 
-def source_pose(image: Image.Image, column: int = 0) -> np.ndarray:
+def source_pose(image: Image.Image, column: int = 0,
+                cell: tuple[int, int] = CELL, figure: tuple[int, int] = FIGURE) -> np.ndarray:
     if image.size != (1536, 1024):
         raise ValueError(f"Expected 1536x1024, found {image.size}")
     # Generated pose strips sometimes leave a sliver of the next character in
@@ -33,12 +34,12 @@ def source_pose(image: Image.Image, column: int = 0) -> np.ndarray:
     raw = np.array(image.crop((column * 384, 0, (column + 1) * 384, 1024)))
     count, regions, statistics, _ = cv2.connectedComponentsWithStats(
         (raw[:, :, 3] >= 12).astype(np.uint8), connectivity=8)
-    figure = 1 + int(np.argmax(statistics[1:, cv2.CC_STAT_AREA]))
-    raw[regions != figure] = 0
-    crop = Image.fromarray(raw, "RGBA").resize(FIGURE, Image.Resampling.LANCZOS)
-    cell = Image.new("RGBA", CELL, (0, 0, 0, 0))
-    cell.paste(crop, (24, 16))
-    pixels = np.array(cell)
+    component = 1 + int(np.argmax(statistics[1:, cv2.CC_STAT_AREA]))
+    raw[regions != component] = 0
+    crop = Image.fromarray(raw, "RGBA").resize(figure, Image.Resampling.LANCZOS)
+    sheet = Image.new("RGBA", cell, (0, 0, 0, 0))
+    sheet.paste(crop, ((cell[0] - figure[0]) // 2, (cell[1] - figure[1]) // 2))
+    pixels = np.array(sheet)
     pixels[pixels[:, :, 3] < 12] = 0
     return pixels
 
@@ -113,17 +114,18 @@ def inspect_encoded(path: Path, cell: tuple[int, int]) -> tuple[int, int, int]:
     return min_x, min_y, len(signatures)
 
 
-def clerk_mouth(pose: np.ndarray, opening: float) -> np.ndarray:
+def clerk_mouth(pose: np.ndarray, opening: float, resolution: int = 1) -> np.ndarray:
     """Articulate only Frau Knick's painted lower lip while her voice owns the line."""
     if opening <= 0:
         return pose
     result = pose.copy()
     # Coordinates are in the registered 192x416 first clerk pose; the stamp,
     # face silhouette and source paint outside this mouth patch stay intact.
-    x0, x1, y0, y1 = 106, 139, 72, 94
+    x0, x1, y0, y1 = [value * resolution for value in (106, 139, 72, 94)]
     yy, xx = np.mgrid[y0:y1, x0:x1].astype(np.float32)
-    influence = np.exp(-((xx - 121) / 13) ** 2) * np.exp(-((yy - 82) / 6) ** 2)
-    shift = np.maximum(0, yy - 79) / 12 * 2.8 * opening * influence
+    px, py = xx / resolution, yy / resolution
+    influence = np.exp(-((px - 121) / 13) ** 2) * np.exp(-((py - 82) / 6) ** 2)
+    shift = np.maximum(0, py - 79) / 12 * 2.8 * opening * influence * resolution
     patch = pose[y0:y1, x0:x1].astype(np.float32) / 255
     patch[:, :, :3] *= patch[:, :, 3:4]
     sampled = cv2.remap(patch, xx - x0, yy - y0 - shift, cv2.INTER_LINEAR,
@@ -134,7 +136,7 @@ def clerk_mouth(pose: np.ndarray, opening: float) -> np.ndarray:
     result[y0:y1, x0:x1] = np.uint8(np.clip(np.concatenate((rgb, alpha), axis=2) * 255, 0, 255))
     # Reveal the existing dark lip pigment as an opening, with a soft, tapered
     # edge so the change reads at the first-person counter distance.
-    aperture = np.clip(1 - ((xx - 121) / 10) ** 2 - ((yy - (81.5 + opening)) / (1.1 + 1.25 * opening)) ** 2, 0, 1)
+    aperture = np.clip(1 - ((px - 121) / 10) ** 2 - ((py - (81.5 + opening)) / (1.1 + 1.25 * opening)) ** 2, 0, 1)
     weight = aperture[:, :, None] * (.9 * opening)
     result[y0:y1, x0:x1, :3] = np.uint8(result[y0:y1, x0:x1, :3] * (1 - weight) +
                                             np.array([72, 29, 26]) * weight)
@@ -171,6 +173,23 @@ def build_clerk_performance() -> None:
         review.paste(encoded, mask=encoded.getchannel("A"))
         review.resize((sheet.width // 2, sheet.height // 2), Image.Resampling.LANCZOS).save(
             QA / f"clerk-performance{suffix}-contact.png")
+    detail_poses = [source_pose(image, column, (384, 832), (288, 768)) for column in range(4)]
+    detail = Image.new("RGBA", (384 * 8, 832 * 2))
+    for row, column in enumerate(source_columns):
+        detail.alpha_composite(Image.fromarray(detail_poses[column], "RGBA"), (row * 384, 0))
+    for col, opening in enumerate((0, .35, .9, .55, .12, 1, .5, .15)):
+        part = clerk_mouth(detail_poses[0], opening, 2)
+        detail.alpha_composite(Image.fromarray(part, "RGBA"), (col * 384, 832))
+    detail_path = OUTPUT / "clerk-performance-detail.webp"
+    detail.save(detail_path, "WEBP", quality=94, method=5)
+    encoded_detail = Image.open(detail_path).convert("RGBA")
+    for index in range(14):
+        row, col = (0, index) if index < 6 else (1, index - 6)
+        box = encoded_detail.crop((col * 384, row * 832, (col + 1) * 384, (row + 1) * 832)).getbbox()
+        if not box or min(box[0], box[1], 384 - box[2], 832 - box[3]) < 8:
+            raise ValueError(f"Clerk detail pose {index} lost its alpha gutter: {box}")
+    report["detail"] = {"sha256": hashlib.sha256(detail_path.read_bytes()).hexdigest(),
+                        "bytes": detail_path.stat().st_size}
     (QA / "clerk-performance-report.json").write_text(json.dumps(report, indent=2) + "\n", encoding="utf-8")
     print(json.dumps(report, indent=2))
 
@@ -189,7 +208,15 @@ def main() -> None:
     report = json.loads(report_path.read_text(encoding="utf-8")) if report_path.exists() else {}
     for name in (args.name,) if args.name else NAMES:
         source = SOURCE / f"{name}-source.png"
-        frames = idle_frames(source_pose(Image.open(source).convert("RGBA")), name)
+        source_image = Image.open(source).convert("RGBA")
+        frames = idle_frames(source_pose(source_image), name)
+        detail_path = OUTPUT / f"{name}-detail.webp" if name != "clerk" else None
+        if detail_path:
+            Image.fromarray(source_pose(source_image, cell=(384, 832), figure=(288, 768)), "RGBA").save(
+                detail_path, "WEBP", quality=94, method=5)
+            box = Image.open(detail_path).convert("RGBA").getbbox()
+            if not box or min(box[0], box[1], 384 - box[2], 832 - box[3]) < 8:
+                raise ValueError(f"{name}: detail pose lost its alpha gutter: {box}")
         margin_x, margin_y = inspect_margins(frames)
         encoded = {}
         for size, suffix in ((CELL, ""), ((128, 288), "-mobile")):
@@ -210,6 +237,8 @@ def main() -> None:
             "source_sha256": hashlib.sha256(source.read_bytes()).hexdigest(),
             "desktop_sha256": hashlib.sha256((OUTPUT / f"{name}.webp").read_bytes()).hexdigest(),
             "mobile_sha256": hashlib.sha256((OUTPUT / f"{name}-mobile.webp").read_bytes()).hexdigest(),
+            **({"detail_sha256": hashlib.sha256(detail_path.read_bytes()).hexdigest(),
+                "detail_bytes": detail_path.stat().st_size} if detail_path else {}),
             "frame_count": len(frames), "fps": FPS, "cell": CELL,
             "minimum_alpha_margin": [margin_x, margin_y],
             "encoded_desktop_margin_and_distinct": encoded["desktop"],

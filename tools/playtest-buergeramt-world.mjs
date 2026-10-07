@@ -10,7 +10,7 @@ const errors=[],modelRequests=[];let passed=false;
 try{
  const cases=[['desktop',{width:1280,height:800}],['mobile',{width:390,height:844}],['narrow',{width:320,height:700}]];
  for(const [name,viewport] of (process.env.PLAYTEST_VIEWPORT?cases.filter(([id])=>id===process.env.PLAYTEST_VIEWPORT):process.env.PLAYTEST_DESKTOP_ONLY?cases.slice(0,1):cases)){
-  const page=await browser.newPage({viewport,isMobile:name!=='desktop',hasTouch:name!=='desktop'});
+  const page=await browser.newPage({viewport,isMobile:name!=='desktop',hasTouch:name!=='desktop',deviceScaleFactor:name==='mobile'?2:1});
   page.on('pageerror',e=>errors.push(`${name}: ${e.message}`));
   page.on('console',e=>{if(e.type()==='error'||e.type()==='warning')errors.push(`${name} console: ${e.text()}`)});
   page.on('requestfailed',r=>{if(!r.url().includes('/assets/intro-song.mp3')||r.failure()?.errorText!=='net::ERR_ABORTED')errors.push(`${name} request: ${r.url()} ${r.failure()?.errorText}`)});
@@ -20,11 +20,27 @@ try{
   try{await page.waitForFunction(()=>window.BuergeramtLevel?.active,null,{timeout:20000})}
   catch(error){console.log(JSON.stringify({name:'level-start-timeout',state:await page.evaluate(()=>({readyState:document.readyState,level:!!window.BuergeramtLevel,active:window.BuergeramtLevel?.active,renderer:window.Germany3D?.ready,body:document.body.className})),errors}));throw error}
   await page.waitForFunction(()=>window.Germany3D?.ready,null,{timeout:60000});
+  if(name==='mobile')await page.waitForFunction(()=>document.getElementById('world3d').height/innerHeight===2,null,{timeout:10000});
   try{await page.waitForFunction(()=>Germany3D.amtCharacters.length===14&&Germany3D.amtCharacters.every(x=>x.loaded),null,{timeout:75000})}
   catch(error){await page.screenshot({path:`${output}/world-sprite-timeout-${name}.png`,timeout:15000}).catch(()=>{});console.log(JSON.stringify({name:'sprite-load-timeout',actors:await page.evaluate(()=>Germany3D.amtCharacters),requests:modelRequests,resources:await page.evaluate(()=>performance.getEntriesByType('resource').filter(x=>x.name.includes('/buergeramt/')).map(x=>({name:x.name,duration:x.duration,bytes:x.transferSize}))),errors}));throw error}
   await page.waitForFunction(()=>Germany3D.amtOffice?.attached,null,{timeout:30000});
   if(name==='desktop')console.log(JSON.stringify({name:'office-detail',...await page.evaluate(()=>{const {attached,compact,instances,triangles,staticDrawCalls,textures,texturePixels,props,obstacles}=Germany3D.amtOffice;return{attached,compact,instances,triangles,staticDrawCalls,textures,texturePixels,props,obstacleCount:obstacles.length}})}));
-  if(name==='desktop'){const before=await page.evaluate(()=>Germany3D.amtCharacters.map(x=>x.frame));await page.waitForTimeout(160);await page.evaluate(()=>Germany3D.sync());const after=await page.evaluate(()=>Germany3D.amtCharacters.map(x=>x.frame));if(before.every((frame,i)=>frame===after[i]))errors.push('Bürgeramt sprite frame did not advance');const moving=await page.evaluate(()=>Germany3D.amtCharacters.filter(x=>x.position));if(moving.length!==8||moving.some(x=>!x.loaded))errors.push('Moving Bürgeramt cast did not load');console.log(JSON.stringify({name:'sprite-atlases',before,after,moving,requests:modelRequests.length}))}
+  if(name==='desktop'){
+   const before=await page.evaluate(()=>Germany3D.amtCharacters.map(x=>({frame:x.frame,breath:x.breath})));
+   await page.waitForTimeout(160);await page.evaluate(()=>Germany3D.sync());
+   const after=await page.evaluate(()=>Germany3D.amtCharacters.map(x=>({frame:x.frame,breath:x.breath})));
+   if(before.every((item,i)=>item.frame===after[i].frame))errors.push('Bürgeramt sprite frame did not advance');
+   if(before.every((item,i)=>Math.abs(item.breath-after[i].breath)<.001))errors.push('Bürgeramt paint breath did not advance');
+   const moving=await page.evaluate(()=>Germany3D.amtCharacters.filter(x=>x.position));
+   if(moving.length!==8||moving.some(x=>!x.loaded))errors.push('Moving Bürgeramt cast did not load');
+   console.log(JSON.stringify({name:'sprite-atlases',before,after,moving,requests:modelRequests.length}));
+  }
+  if(name==='desktop'){
+   await page.evaluate(()=>{window._amtCharactersDescriptor=Object.getOwnPropertyDescriptor(BuergeramtLevel,'characters');const view=BuergeramtLevel.view;Object.defineProperty(BuergeramtLevel,'characters',{configurable:true,get(){return window._amtCharactersDescriptor.get.call(this).map(actor=>actor.id==='aktenkurier'?{...actor,x:view.x+1,z:view.z-2,mode:'walk',direction:'right',frame:2}:actor)}});Germany3D.sync()});
+   await page.waitForFunction(()=>{Germany3D.sync();const actor=Germany3D.amtCharacters.find(item=>item.name==='aktenkurier');return actor?.detail&&actor.frame===10&&actor.texelHeight===1664},null,{timeout:10000});
+   await page.screenshot({path:`${output}/world-detail-walk.png`});
+   await page.evaluate(()=>{Object.defineProperty(BuergeramtLevel,'characters',window._amtCharactersDescriptor);delete window._amtCharactersDescriptor;Germany3D.sync()});
+  }
   await page.evaluate(()=>window.Germany3D.sync());
   await page.screenshot({path:`${output}/world-${name}.png`,timeout:60000});
   await page.evaluate(()=>{dispatchEvent(new KeyboardEvent('keydown',{code:'KeyD'}));for(let i=0;i<10;i++)BuergeramtLevel.update(.05);dispatchEvent(new KeyboardEvent('keyup',{code:'KeyD'}));dispatchEvent(new KeyboardEvent('keydown',{code:'KeyW'}));for(let i=0;i<19;i++)BuergeramtLevel.update(.05);dispatchEvent(new KeyboardEvent('keyup',{code:'KeyW'}))});
@@ -36,6 +52,15 @@ try{
   await page.evaluate(()=>window.Germany3D.sync());
   await page.waitForFunction(()=>document.getElementById('amt-objective').dataset.pretextFit,null,{timeout:10000});
   await page.screenshot({path:`${output}/world-walk-${name}.png`});
+  if(name==='mobile'){
+   await page.evaluate(()=>{dispatchEvent(new KeyboardEvent('keydown',{code:'KeyW'}));for(let i=0;i<37;i++)BuergeramtLevel.update(.05);dispatchEvent(new KeyboardEvent('keyup',{code:'KeyW'}));for(let i=0;i<180;i++)BuergeramtLevel.update(.05);Germany3D.sync()});
+   const scene=await page.evaluate(()=>({stage:BuergeramtLevel.stage,strength:BuergeramtLevel.omen.strength}));
+   if(scene.stage!=='omen'||scene.strength<.95)throw new Error(`Mobile Aktenkurier beat failed: ${JSON.stringify(scene)}`);
+   await page.waitForFunction(()=>Germany3D.amtCharacters.find(actor=>actor.name==='aktenkurier')?.detail,null,{timeout:10000});
+   const courier=await page.evaluate(()=>Germany3D.amtCharacters.find(actor=>actor.name==='aktenkurier'));
+   if(!courier.detail||courier.texelHeight!==832)throw new Error(`Aktenkurier close art did not load: ${JSON.stringify(courier)}`);
+   await page.screenshot({path:`${output}/world-aktenkurier-omen-mobile.png`});
+  }
   if(name==='desktop'){
    await page.evaluate(()=>{dispatchEvent(new KeyboardEvent('keydown',{code:'KeyW'}));for(let i=0;i<37;i++)BuergeramtLevel.update(.05);dispatchEvent(new KeyboardEvent('keyup',{code:'KeyW'}));Germany3D.sync()});
    await page.evaluate(()=>{for(let i=0;i<180;i++)BuergeramtLevel.update(.05);Germany3D.sync()});
@@ -50,6 +75,10 @@ try{
    if(await page.evaluate(()=>BuergeramtLevel.stage!=='walk-sign'||!!document.querySelector('#amt-ticket')))throw new Error('QR interaction opened an unwanted popup');
    await page.evaluate(()=>{for(const [code,frames] of [['KeyD',23],['KeyW',34]]){dispatchEvent(new KeyboardEvent('keydown',{code}));for(let i=0;i<frames;i++)BuergeramtLevel.update(.05);dispatchEvent(new KeyboardEvent('keyup',{code}))}Germany3D.sync()});
    await page.screenshot({path:`${output}/world-clerk-closeup.png`});
+   await page.evaluate(()=>{const view=BuergeramtLevel.view,target=Math.atan2(3.9-view.x,view.z+9.77),turn=Math.atan2(Math.sin(target-view.yaw),Math.cos(target-view.yaw)),code=turn>=0?'ArrowRight':'ArrowLeft';dispatchEvent(new KeyboardEvent('keydown',{code}));let remaining=Math.abs(turn)/1.8;while(remaining>0){const dt=Math.min(.05,remaining);BuergeramtLevel.update(dt);remaining-=dt}dispatchEvent(new KeyboardEvent('keyup',{code}));Germany3D.sync()});
+   const clerk=await page.evaluate(()=>Germany3D.amtCharacters[0]);
+   if(!clerk.detail||clerk.texelHeight!==1664)throw new Error(`Clerk close art did not load: ${JSON.stringify(clerk)}`);
+   await page.screenshot({path:`${output}/world-clerk-detail.png`});
   }
   const result=await page.evaluate(()=>({stage:BuergeramtLevel.stage,direct:document.body.classList.contains('amt-direct-mode'),restartVisible:getComputedStyle(document.getElementById('amt-direct-reset')).display!=='none',renderer:Germany3D.ready,pretext:document.getElementById('amt-objective').dataset.pretextFit,horizontalOverflow:document.documentElement.scrollWidth>innerWidth+1}));
   console.log(JSON.stringify({name,...result}));
@@ -63,12 +92,6 @@ try{
    console.log(JSON.stringify({name:'restart',active:await page.evaluate(()=>BuergeramtLevel.active)}));
   }
   if(name!=='desktop'){await page.evaluate(()=>{document.documentElement.style.zoom='2'});await page.screenshot({path:`${output}/world-walk-${name}-zoom200.png`});const overflow=await page.evaluate(()=>document.documentElement.scrollWidth>innerWidth+1);console.log(JSON.stringify({name:`${name}-zoom200`,horizontalOverflow:overflow}));if(overflow)throw new Error(`World overflow at ${viewport.width}px / 200% zoom`)}
-  if(name==='mobile'){
-   await page.evaluate(()=>{document.documentElement.style.zoom='';dispatchEvent(new KeyboardEvent('keydown',{code:'KeyW'}));for(let i=0;i<37;i++)BuergeramtLevel.update(.05);dispatchEvent(new KeyboardEvent('keyup',{code:'KeyW'}));for(let i=0;i<180;i++)BuergeramtLevel.update(.05);Germany3D.sync()});
-   const scene=await page.evaluate(()=>({stage:BuergeramtLevel.stage,strength:BuergeramtLevel.omen.strength}));
-   if(scene.stage!=='omen'||scene.strength<.95)throw new Error(`Mobile Aktenkurier beat failed: ${JSON.stringify(scene)}`);
-   await page.screenshot({path:`${output}/world-aktenkurier-omen-mobile.png`});
-  }
   await page.close();
  }
  console.log(JSON.stringify({errors}));passed=true;

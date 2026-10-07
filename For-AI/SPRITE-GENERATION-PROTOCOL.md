@@ -60,6 +60,8 @@ when browser speech is unavailable. Build with
 `python tools/build-amt-sprites.py --clerk-performance` and review both encoded
 sizes, including a magnified mouth crop and the full counter-distance view.
 
+For close first-person encounters, derive detail poses directly from the original source sheets, not by enlarging encoded atlas cells. Keep the shared ground pivot, figure scale, and prop ownership. `tools/amt-character-motion.py` emits four 640 × 832 action cells and four directional 4 × 2 walk sheets per moving character; `tools/build-amt-sprites.py` emits 384 × 832 waiting poses and a six-pose/eight-mouth-frame clerk sheet. The renderer requests moving detail only near the player, holds at most one close walk direction per actor, and releases detail after departure. Compact atlases remain the fallback. Inspect encoded alpha gutters, source/detail identity, frame continuity, and near/far registration in desktop and mobile gameplay before accepting a bake.
+
 For a narrated movement, apply the skill's
 `references/narrative-action-rigging.md` beat card before commissioning keys.
 It binds route, ordered verbs, speech, light, sound, color valence, event

@@ -1,5 +1,9 @@
 # Durable decisions
 
+## 2026-10-07 — Source-resolution office closeups and restrained color breath
+
+The Bürgeramt retains compact motion atlases for distance. Nearby walkers use source-derived, direction-specific high-resolution walk rows and action poses; Frau Knick's speech retains eight high-resolution lip frames. Moving detail is requested on approach, released after departure, and falls back to the animated atlas if missing. A per-character shader gently varies saturation and lightness, layered over the existing dialogue-valence tint. Only the office raises renderer density to a 2× device-pixel-ratio cap; the city keeps its 1.5× cap. See `BUERGERAMT.md` and `SPRITE-GENERATION-PROTOCOL.md` for ownership and review rules.
+
 ## 2026-10-07 — Arm and schedule the Bürgeramt call on peer time
 
 The phone's name submission is required before Frau Knick's counter call, so

@@ -122,36 +122,36 @@ def source_poses(name: str) -> dict[str, Image.Image]:
     return poses
 
 
-def register_family(poses: dict[str, Image.Image]) -> dict[str, Image.Image]:
+def register_family(poses: dict[str, Image.Image], resolution: int = 1) -> dict[str, Image.Image]:
     bounds = {key: pose.getbbox() for key, pose in poses.items()}
     if any(box is None for box in bounds.values()):
         raise ValueError("Empty pose")
     height = max(box[3] - box[1] for box in bounds.values())
-    factor = 432 / height
+    factor = 432 * resolution / height
     registered = {}
     for key, pose in poses.items():
         box = bounds[key]
         scaled = pose.resize((round(pose.width * factor), round(pose.height * factor)),
                              Image.Resampling.LANCZOS)
-        x = round(256 - (box[0] + box[2]) * factor / 2)
-        y = round(WORKING_BASELINE - box[3] * factor)
-        canvas = Image.new("RGBA", (512, 512))
+        x = round(256 * resolution - (box[0] + box[2]) * factor / 2)
+        y = round(WORKING_BASELINE * resolution - box[3] * factor)
+        canvas = Image.new("RGBA", (512 * resolution, 512 * resolution))
         canvas.alpha_composite(scaled, (x, y))
-        if canvas.getbbox() is None or canvas.getbbox()[0] <= 0 or canvas.getbbox()[2] >= 512:
+        if canvas.getbbox() is None or canvas.getbbox()[0] <= 0 or canvas.getbbox()[2] >= 512 * resolution:
             raise ValueError(f"{key}: registered figure clipped")
         registered[key] = canvas
     return registered
 
 
-def frame(working: Image.Image) -> Image.Image:
+def frame(working: Image.Image, resolution: int = 1) -> Image.Image:
     scale = 384 / 432
-    im = working.resize((round(512 * scale), round(512 * scale)),
+    im = working.resize((round(512 * resolution * scale), round(512 * resolution * scale)),
                         Image.Resampling.LANCZOS)
-    cell = Image.new("RGBA", CELL)
-    cell.alpha_composite(im, (round(CELL[0] / 2 - 256 * scale),
-                              round(BASELINE - WORKING_BASELINE * scale)))
+    cell = Image.new("RGBA", (CELL[0] * resolution, CELL[1] * resolution))
+    cell.alpha_composite(im, (round(CELL[0] * resolution / 2 - 256 * resolution * scale),
+                              round((BASELINE - WORKING_BASELINE * scale) * resolution)))
     box = cell.getbbox()
-    if not box or box[0] < 4 or box[1] < 4 or box[2] > CELL[0] - 4 or box[3] > CELL[1] - 4:
+    if not box or box[0] < 4 * resolution or box[1] < 4 * resolution or box[2] > CELL[0] * resolution - 4 * resolution or box[3] > CELL[1] * resolution - 4 * resolution:
         raise ValueError(f"Frame edge clipped: {box}")
     return cell
 
@@ -176,42 +176,74 @@ def connected(image: Image.Image) -> bool:
     return sum(int(row[cv2.CC_STAT_AREA]) >= 100 for row in stats[1:]) == 1
 
 
+def close_paint_pinholes(image: Image.Image) -> Image.Image:
+    """Repair tiny enclosed gaps exposed by high-resolution trouser warps."""
+    rgba = np.array(image)
+    count, regions, stats, _ = cv2.connectedComponentsWithStats(
+        (rgba[:, :, 3] < 128).astype(np.uint8), connectivity=8)
+    mask = np.zeros(rgba.shape[:2], np.uint8)
+    for index in range(1, count):
+        x, y, width, height, area = stats[index]
+        if (10 < area < 400 and y > rgba.shape[0] * .55 and
+                x > 0 and y > 0 and x + width < rgba.shape[1] and y + height < rgba.shape[0]):
+            mask[:] = (regions == index).astype(np.uint8) * 255
+            patch = rgba[max(0, y - 24):y + height + 24,
+                         max(0, x - 24):x + width + 24]
+            neighbors = patch[patch[:, :, 3] > 192][:, :3]
+            if not len(neighbors):
+                continue
+            light = neighbors @ np.array([.2126, .7152, .0722])
+            dark = np.median(neighbors[light <= np.median(light)], axis=0)
+            repair = cv2.dilate(mask, np.ones((15, 15), np.uint8))
+            feather = cv2.GaussianBlur(cv2.dilate(repair, np.ones((9, 9), np.uint8)),
+                                      (0, 0), 5).astype(np.float32) / 255
+            rgba[:, :, :3] = np.uint8(np.clip(rgba[:, :, :3] * (1 - feather[:, :, None]) +
+                                              dark * feather[:, :, None], 0, 255))
+            rgba[repair > 0, :3] = dark
+            rgba[mask > 0, 3] = 255
+    rgba[rgba[:, :, 3] == 0, :3] = 0
+    return Image.fromarray(rgba, "RGBA")
+
+
 def continuous_walk(source: Image.Image, phase: float, travel: tuple[int, int],
-                    strength: float = 1) -> Image.Image:
+                    strength: float = 1, resolution: int = 1) -> Image.Image:
     """Warp the whole painted silhouette with a continuous leg field.
 
     A side-view shoe in these paintings touches its trouser by a 1px edge.
     Separating garment/legs in painted_walk disconnects it. A smooth field
     keeps the original paint and topology while the feet alternate subtly.
     """
-    y, x = np.mgrid[:512, :512].astype(np.float32)
+    y, x = np.mgrid[:512 * resolution, :512 * resolution].astype(np.float32)
     middle = sum(source.getbbox()[::2]) / 2
-    side = np.tanh((x - middle) / 16)
-    leg = np.clip((y - 260) / 185, 0, 1)
+    side = np.tanh((x - middle) / (16 * resolution))
+    leg = np.clip((y - 260 * resolution) / (185 * resolution), 0, 1)
     leg = leg * leg * (3 - 2 * leg)
-    torso = np.clip((390 - y) / 350, 0, 1)
+    torso = np.clip((390 * resolution - y) / (350 * resolution), 0, 1)
     stride = math.sin(phase)
     lift = math.cos(phase)
     paint = _premul(source)
     for amount in (strength, strength * .7, strength * .4, strength * .2, 0):
-        sway = 1.5 * stride * torso * amount
-        dx = sway + leg * side * (25 if travel[0] else 18) * stride * amount
-        dy = -1.6 * math.cos(2 * phase) * torso * amount + leg * (side * 8 * stride - 5 * lift) * amount
+        sway = 1.5 * resolution * stride * torso * amount
+        dx = sway + leg * side * (25 if travel[0] else 18) * resolution * stride * amount
+        dy = (-1.6 * math.cos(2 * phase) * torso + leg * (side * 8 * stride - 5 * lift)) * resolution * amount
         rendered = walk.unpack(_sample(paint, x - dx, y - dy))
         if connected(rendered):
-            return rendered
+            return close_paint_pinholes(rendered) if resolution == 2 else rendered
     raise ValueError("Source silhouette remains detached without motion")
 
 
 def build(name: str) -> dict:
     print(f"{name}: registering", flush=True)
-    registered = register_family(source_poses(name))
+    poses = source_poses(name)
+    registered = register_family(poses)
+    detail_poses = register_family(poses, 2)
     source_dir = SOURCE / name
     source_dir.mkdir(exist_ok=True)
     for kind, image in registered.items():
         image.save(source_dir / f"{kind}.png")
     atlas = Image.new("RGBA", (CELL[0] * 8, CELL[1] * len(ROWS)))
     row_images: dict[str, list[Image.Image]] = {}
+    detail_walks = {}
     directions = ("down", "right", "up", "left")
     travel = ((0, 1), (1, 0), (0, -1), (-1, 0))
     for direction, vector in zip(directions, travel):
@@ -219,6 +251,22 @@ def build(name: str) -> dict:
         pose = registered[direction]
         steps = [continuous_walk(pose, i * math.tau / 8, vector) for i in range(8)]
         row_images[direction] = [frame(im) for im in steps]
+        detail_row = Image.new("RGBA", (CELL[0] * 8, CELL[1] * 4))
+        for index in range(8):
+            high = continuous_walk(detail_poses[direction], index * math.tau / 8,
+                                   vector, resolution=2)
+            detail_row.alpha_composite(frame(high, 2),
+                                       ((index % 4) * CELL[0] * 2, (index // 4) * CELL[1] * 2))
+        path = OUTPUT / f"{name}-walk-{direction}-detail.webp"
+        path.parent.mkdir(parents=True, exist_ok=True)
+        detail_row.save(path, "WEBP", quality=94, method=5)
+        encoded_walk = Image.open(path).convert("RGBA")
+        for index in range(8):
+            col, row = index % 4, index // 4
+            box = encoded_walk.crop((col * 640, row * 832, (col + 1) * 640, (row + 1) * 832)).getbbox()
+            if not box or min(box[0], box[1], 640 - box[2], 832 - box[3]) < 8:
+                raise ValueError(f"{name}: {direction} detail walk {index} lost its alpha gutter: {box}")
+        detail_walks[direction] = {"sha256": digest(path), "bytes": path.stat().st_size}
     for state in ("work", "gesture", "look", "flinch"):
         row_images[state] = [frame(idle(registered[state], i)) for i in range(8)]
     for row, state in enumerate(ROWS):
@@ -231,6 +279,17 @@ def build(name: str) -> dict:
     mobile = OUTPUT / f"{name}-motion-mobile.webp"
     atlas.resize((CELL[0] * 4, CELL[1] * len(ROWS) // 2),
                  Image.Resampling.LANCZOS).save(mobile, "WEBP", quality=85, method=4)
+    # Near-field action art retains source detail without a 2x 64-frame walk atlas.
+    detail = Image.new("RGBA", (CELL[0] * 8, CELL[1] * 2))
+    for col, state in enumerate(("work", "gesture", "look", "flinch")):
+        detail.alpha_composite(frame(detail_poses[state], 2), (col * CELL[0] * 2, 0))
+    detail_path = OUTPUT / f"{name}-detail.webp"
+    detail.save(detail_path, "WEBP", quality=94, method=5)
+    encoded_detail = Image.open(detail_path).convert("RGBA")
+    for col in range(4):
+        box = encoded_detail.crop((col * 640, 0, (col + 1) * 640, 832)).getbbox()
+        if not box or min(box[0], box[1], 640 - box[2], 832 - box[3]) < 8:
+            raise ValueError(f"{name}: detail pose {col} lost its alpha gutter: {box}")
     # The exact encoded cells are the review authority, including mobile.
     encoded = Image.open(output).convert("RGBA")
     digest_pixels = []
@@ -265,6 +324,8 @@ def build(name: str) -> dict:
         "cell": list(CELL), "rows": list(ROWS), "frames_per_row": 8,
         "desktop_bytes": output.stat().st_size,
         "mobile_sha256": digest(mobile), "mobile_bytes": mobile.stat().st_size,
+        "detail_sha256": digest(detail_path), "detail_bytes": detail_path.stat().st_size,
+        "detail_walks": detail_walks,
         "encoded_pixel_sha256": digest_pixels,
         "mobile_encoded_pixel_sha256": mobile_hashes,
         "review": "pending exact-image visual analysis",
