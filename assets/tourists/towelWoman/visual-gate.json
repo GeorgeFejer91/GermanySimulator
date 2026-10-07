@@ -1,0 +1,17 @@
+{
+  "ok": true,
+  "errors": [],
+  "export_sha256": "72a2560752fb2275d3ff2d2fa223bcb14cd8a12318cbfd43a76c9f7a1e62687a",
+  "frames_analyzed": 68,
+  "categories": [
+    "identity",
+    "proportions",
+    "rendering_style",
+    "lighting_color",
+    "contour",
+    "texture",
+    "anatomy_occlusion",
+    "motion"
+  ],
+  "limitation": "Provenance and completeness gate; visual quality depends on actual image analysis."
+}

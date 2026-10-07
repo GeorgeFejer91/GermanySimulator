@@ -1,0 +1,2683 @@
+{
+  "image": "character-atlas.png",
+  "sha256": "7d8613902f1dc4c15479a2acd83247247918f30dc60946b6d1b898746e769c50",
+  "frame_size": [
+    192,
+    208
+  ],
+  "pivot": [
+    96,
+    203
+  ],
+  "walks": {
+    "down": {
+      "row": 0,
+      "frames": 8,
+      "frame_ms": 120,
+      "loop": true
+    },
+    "right": {
+      "row": 1,
+      "frames": 8,
+      "frame_ms": 120,
+      "loop": true
+    },
+    "up": {
+      "row": 2,
+      "frames": 8,
+      "frame_ms": 120,
+      "loop": true
+    },
+    "left": {
+      "row": 3,
+      "frames": 8,
+      "frame_ms": 120,
+      "loop": true
+    }
+  },
+  "turns": {
+    "rows": [
+      4,
+      5
+    ],
+    "pose_count": 16,
+    "frame_ms": 85,
+    "anchors": {
+      "down": 0,
+      "right": 2,
+      "up": 8,
+      "left": 14
+    },
+    "clockwise": true
+  },
+  "bridges": {
+    "down": {
+      "row": 6,
+      "stop_cols": [
+        0,
+        1,
+        2
+      ],
+      "start_cols": [
+        3,
+        4
+      ],
+      "frame_ms": 70
+    },
+    "right": {
+      "row": 7,
+      "stop_cols": [
+        0,
+        1,
+        2
+      ],
+      "start_cols": [
+        3,
+        4
+      ],
+      "frame_ms": 70
+    },
+    "up": {
+      "row": 8,
+      "stop_cols": [
+        0,
+        1,
+        2
+      ],
+      "start_cols": [
+        3,
+        4
+      ],
+      "frame_ms": 70
+    },
+    "left": {
+      "row": 9,
+      "stop_cols": [
+        0,
+        1,
+        2
+      ],
+      "start_cols": [
+        3,
+        4
+      ],
+      "frame_ms": 70
+    }
+  },
+  "foreground_foot": "viewer-right",
+  "visual_acceptance": {
+    "status": "pass",
+    "export_sha256": "7d8613902f1dc4c15479a2acd83247247918f30dc60946b6d1b898746e769c50",
+    "new_frames_reviewed": 57,
+    "retained_walk_frames": 68,
+    "retained_walk_pixels_unchanged": true,
+    "report": "visual-report.json"
+  },
+  "transitions": {
+    "down-to-right": {
+      "from": "down",
+      "to": "right",
+      "turn_indices": [
+        1,
+        2
+      ],
+      "frames": [
+        {
+          "row": 6,
+          "col": 0,
+          "ms": 70
+        },
+        {
+          "row": 6,
+          "col": 1,
+          "ms": 70
+        },
+        {
+          "row": 6,
+          "col": 2,
+          "ms": 70
+        },
+        {
+          "row": 4,
+          "col": 1,
+          "ms": 85
+        },
+        {
+          "row": 4,
+          "col": 2,
+          "ms": 85
+        },
+        {
+          "row": 7,
+          "col": 3,
+          "ms": 70
+        },
+        {
+          "row": 7,
+          "col": 4,
+          "ms": 70
+        }
+      ],
+      "gif": "transitions/down-to-right.gif",
+      "demo_frames": [
+        {
+          "row": 0,
+          "col": 0,
+          "ms": 120
+        },
+        {
+          "row": 0,
+          "col": 1,
+          "ms": 120
+        },
+        {
+          "row": 0,
+          "col": 2,
+          "ms": 120
+        },
+        {
+          "row": 0,
+          "col": 3,
+          "ms": 120
+        },
+        {
+          "row": 0,
+          "col": 4,
+          "ms": 120
+        },
+        {
+          "row": 0,
+          "col": 5,
+          "ms": 120
+        },
+        {
+          "row": 0,
+          "col": 6,
+          "ms": 120
+        },
+        {
+          "row": 0,
+          "col": 7,
+          "ms": 120
+        },
+        {
+          "row": 6,
+          "col": 0,
+          "ms": 70
+        },
+        {
+          "row": 6,
+          "col": 1,
+          "ms": 70
+        },
+        {
+          "row": 6,
+          "col": 2,
+          "ms": 70
+        },
+        {
+          "row": 4,
+          "col": 1,
+          "ms": 85
+        },
+        {
+          "row": 4,
+          "col": 2,
+          "ms": 85
+        },
+        {
+          "row": 7,
+          "col": 3,
+          "ms": 70
+        },
+        {
+          "row": 7,
+          "col": 4,
+          "ms": 70
+        },
+        {
+          "row": 1,
+          "col": 0,
+          "ms": 120
+        },
+        {
+          "row": 1,
+          "col": 1,
+          "ms": 120
+        },
+        {
+          "row": 1,
+          "col": 2,
+          "ms": 120
+        },
+        {
+          "row": 1,
+          "col": 3,
+          "ms": 120
+        },
+        {
+          "row": 1,
+          "col": 4,
+          "ms": 120
+        },
+        {
+          "row": 1,
+          "col": 5,
+          "ms": 120
+        },
+        {
+          "row": 1,
+          "col": 6,
+          "ms": 120
+        },
+        {
+          "row": 1,
+          "col": 7,
+          "ms": 120
+        }
+      ],
+      "begin_after_source_phase": 7,
+      "resume_target_phase": 0
+    },
+    "down-to-up": {
+      "from": "down",
+      "to": "up",
+      "turn_indices": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8
+      ],
+      "frames": [
+        {
+          "row": 6,
+          "col": 0,
+          "ms": 70
+        },
+        {
+          "row": 6,
+          "col": 1,
+          "ms": 70
+        },
+        {
+          "row": 6,
+          "col": 2,
+          "ms": 70
+        },
+        {
+          "row": 4,
+          "col": 1,
+          "ms": 85
+        },
+        {
+          "row": 4,
+          "col": 2,
+          "ms": 85
+        },
+        {
+          "row": 4,
+          "col": 3,
+          "ms": 85
+        },
+        {
+          "row": 4,
+          "col": 4,
+          "ms": 85
+        },
+        {
+          "row": 4,
+          "col": 5,
+          "ms": 85
+        },
+        {
+          "row": 4,
+          "col": 6,
+          "ms": 85
+        },
+        {
+          "row": 4,
+          "col": 7,
+          "ms": 85
+        },
+        {
+          "row": 5,
+          "col": 0,
+          "ms": 85
+        },
+        {
+          "row": 8,
+          "col": 3,
+          "ms": 70
+        },
+        {
+          "row": 8,
+          "col": 4,
+          "ms": 70
+        }
+      ],
+      "gif": "transitions/down-to-up.gif",
+      "demo_frames": [
+        {
+          "row": 0,
+          "col": 0,
+          "ms": 120
+        },
+        {
+          "row": 0,
+          "col": 1,
+          "ms": 120
+        },
+        {
+          "row": 0,
+          "col": 2,
+          "ms": 120
+        },
+        {
+          "row": 0,
+          "col": 3,
+          "ms": 120
+        },
+        {
+          "row": 0,
+          "col": 4,
+          "ms": 120
+        },
+        {
+          "row": 0,
+          "col": 5,
+          "ms": 120
+        },
+        {
+          "row": 0,
+          "col": 6,
+          "ms": 120
+        },
+        {
+          "row": 0,
+          "col": 7,
+          "ms": 120
+        },
+        {
+          "row": 6,
+          "col": 0,
+          "ms": 70
+        },
+        {
+          "row": 6,
+          "col": 1,
+          "ms": 70
+        },
+        {
+          "row": 6,
+          "col": 2,
+          "ms": 70
+        },
+        {
+          "row": 4,
+          "col": 1,
+          "ms": 85
+        },
+        {
+          "row": 4,
+          "col": 2,
+          "ms": 85
+        },
+        {
+          "row": 4,
+          "col": 3,
+          "ms": 85
+        },
+        {
+          "row": 4,
+          "col": 4,
+          "ms": 85
+        },
+        {
+          "row": 4,
+          "col": 5,
+          "ms": 85
+        },
+        {
+          "row": 4,
+          "col": 6,
+          "ms": 85
+        },
+        {
+          "row": 4,
+          "col": 7,
+          "ms": 85
+        },
+        {
+          "row": 5,
+          "col": 0,
+          "ms": 85
+        },
+        {
+          "row": 8,
+          "col": 3,
+          "ms": 70
+        },
+        {
+          "row": 8,
+          "col": 4,
+          "ms": 70
+        },
+        {
+          "row": 2,
+          "col": 0,
+          "ms": 120
+        },
+        {
+          "row": 2,
+          "col": 1,
+          "ms": 120
+        },
+        {
+          "row": 2,
+          "col": 2,
+          "ms": 120
+        },
+        {
+          "row": 2,
+          "col": 3,
+          "ms": 120
+        },
+        {
+          "row": 2,
+          "col": 4,
+          "ms": 120
+        },
+        {
+          "row": 2,
+          "col": 5,
+          "ms": 120
+        },
+        {
+          "row": 2,
+          "col": 6,
+          "ms": 120
+        },
+        {
+          "row": 2,
+          "col": 7,
+          "ms": 120
+        }
+      ],
+      "begin_after_source_phase": 7,
+      "resume_target_phase": 0
+    },
+    "down-to-left": {
+      "from": "down",
+      "to": "left",
+      "turn_indices": [
+        15,
+        14
+      ],
+      "frames": [
+        {
+          "row": 6,
+          "col": 0,
+          "ms": 70
+        },
+        {
+          "row": 6,
+          "col": 1,
+          "ms": 70
+        },
+        {
+          "row": 6,
+          "col": 2,
+          "ms": 70
+        },
+        {
+          "row": 5,
+          "col": 7,
+          "ms": 85
+        },
+        {
+          "row": 5,
+          "col": 6,
+          "ms": 85
+        },
+        {
+          "row": 9,
+          "col": 3,
+          "ms": 70
+        },
+        {
+          "row": 9,
+          "col": 4,
+          "ms": 70
+        }
+      ],
+      "gif": "transitions/down-to-left.gif",
+      "demo_frames": [
+        {
+          "row": 0,
+          "col": 0,
+          "ms": 120
+        },
+        {
+          "row": 0,
+          "col": 1,
+          "ms": 120
+        },
+        {
+          "row": 0,
+          "col": 2,
+          "ms": 120
+        },
+        {
+          "row": 0,
+          "col": 3,
+          "ms": 120
+        },
+        {
+          "row": 0,
+          "col": 4,
+          "ms": 120
+        },
+        {
+          "row": 0,
+          "col": 5,
+          "ms": 120
+        },
+        {
+          "row": 0,
+          "col": 6,
+          "ms": 120
+        },
+        {
+          "row": 0,
+          "col": 7,
+          "ms": 120
+        },
+        {
+          "row": 6,
+          "col": 0,
+          "ms": 70
+        },
+        {
+          "row": 6,
+          "col": 1,
+          "ms": 70
+        },
+        {
+          "row": 6,
+          "col": 2,
+          "ms": 70
+        },
+        {
+          "row": 5,
+          "col": 7,
+          "ms": 85
+        },
+        {
+          "row": 5,
+          "col": 6,
+          "ms": 85
+        },
+        {
+          "row": 9,
+          "col": 3,
+          "ms": 70
+        },
+        {
+          "row": 9,
+          "col": 4,
+          "ms": 70
+        },
+        {
+          "row": 3,
+          "col": 0,
+          "ms": 120
+        },
+        {
+          "row": 3,
+          "col": 1,
+          "ms": 120
+        },
+        {
+          "row": 3,
+          "col": 2,
+          "ms": 120
+        },
+        {
+          "row": 3,
+          "col": 3,
+          "ms": 120
+        },
+        {
+          "row": 3,
+          "col": 4,
+          "ms": 120
+        },
+        {
+          "row": 3,
+          "col": 5,
+          "ms": 120
+        },
+        {
+          "row": 3,
+          "col": 6,
+          "ms": 120
+        },
+        {
+          "row": 3,
+          "col": 7,
+          "ms": 120
+        }
+      ],
+      "begin_after_source_phase": 7,
+      "resume_target_phase": 0
+    },
+    "right-to-down": {
+      "from": "right",
+      "to": "down",
+      "turn_indices": [
+        1,
+        0
+      ],
+      "frames": [
+        {
+          "row": 7,
+          "col": 0,
+          "ms": 70
+        },
+        {
+          "row": 7,
+          "col": 1,
+          "ms": 70
+        },
+        {
+          "row": 7,
+          "col": 2,
+          "ms": 70
+        },
+        {
+          "row": 4,
+          "col": 1,
+          "ms": 85
+        },
+        {
+          "row": 4,
+          "col": 0,
+          "ms": 85
+        },
+        {
+          "row": 6,
+          "col": 3,
+          "ms": 70
+        },
+        {
+          "row": 6,
+          "col": 4,
+          "ms": 70
+        }
+      ],
+      "gif": "transitions/right-to-down.gif",
+      "demo_frames": [
+        {
+          "row": 1,
+          "col": 0,
+          "ms": 120
+        },
+        {
+          "row": 1,
+          "col": 1,
+          "ms": 120
+        },
+        {
+          "row": 1,
+          "col": 2,
+          "ms": 120
+        },
+        {
+          "row": 1,
+          "col": 3,
+          "ms": 120
+        },
+        {
+          "row": 1,
+          "col": 4,
+          "ms": 120
+        },
+        {
+          "row": 1,
+          "col": 5,
+          "ms": 120
+        },
+        {
+          "row": 1,
+          "col": 6,
+          "ms": 120
+        },
+        {
+          "row": 1,
+          "col": 7,
+          "ms": 120
+        },
+        {
+          "row": 7,
+          "col": 0,
+          "ms": 70
+        },
+        {
+          "row": 7,
+          "col": 1,
+          "ms": 70
+        },
+        {
+          "row": 7,
+          "col": 2,
+          "ms": 70
+        },
+        {
+          "row": 4,
+          "col": 1,
+          "ms": 85
+        },
+        {
+          "row": 4,
+          "col": 0,
+          "ms": 85
+        },
+        {
+          "row": 6,
+          "col": 3,
+          "ms": 70
+        },
+        {
+          "row": 6,
+          "col": 4,
+          "ms": 70
+        },
+        {
+          "row": 0,
+          "col": 0,
+          "ms": 120
+        },
+        {
+          "row": 0,
+          "col": 1,
+          "ms": 120
+        },
+        {
+          "row": 0,
+          "col": 2,
+          "ms": 120
+        },
+        {
+          "row": 0,
+          "col": 3,
+          "ms": 120
+        },
+        {
+          "row": 0,
+          "col": 4,
+          "ms": 120
+        },
+        {
+          "row": 0,
+          "col": 5,
+          "ms": 120
+        },
+        {
+          "row": 0,
+          "col": 6,
+          "ms": 120
+        },
+        {
+          "row": 0,
+          "col": 7,
+          "ms": 120
+        }
+      ],
+      "begin_after_source_phase": 7,
+      "resume_target_phase": 0
+    },
+    "right-to-up": {
+      "from": "right",
+      "to": "up",
+      "turn_indices": [
+        3,
+        4,
+        5,
+        6,
+        7,
+        8
+      ],
+      "frames": [
+        {
+          "row": 7,
+          "col": 0,
+          "ms": 70
+        },
+        {
+          "row": 7,
+          "col": 1,
+          "ms": 70
+        },
+        {
+          "row": 7,
+          "col": 2,
+          "ms": 70
+        },
+        {
+          "row": 4,
+          "col": 3,
+          "ms": 85
+        },
+        {
+          "row": 4,
+          "col": 4,
+          "ms": 85
+        },
+        {
+          "row": 4,
+          "col": 5,
+          "ms": 85
+        },
+        {
+          "row": 4,
+          "col": 6,
+          "ms": 85
+        },
+        {
+          "row": 4,
+          "col": 7,
+          "ms": 85
+        },
+        {
+          "row": 5,
+          "col": 0,
+          "ms": 85
+        },
+        {
+          "row": 8,
+          "col": 3,
+          "ms": 70
+        },
+        {
+          "row": 8,
+          "col": 4,
+          "ms": 70
+        }
+      ],
+      "gif": "transitions/right-to-up.gif",
+      "demo_frames": [
+        {
+          "row": 1,
+          "col": 0,
+          "ms": 120
+        },
+        {
+          "row": 1,
+          "col": 1,
+          "ms": 120
+        },
+        {
+          "row": 1,
+          "col": 2,
+          "ms": 120
+        },
+        {
+          "row": 1,
+          "col": 3,
+          "ms": 120
+        },
+        {
+          "row": 1,
+          "col": 4,
+          "ms": 120
+        },
+        {
+          "row": 1,
+          "col": 5,
+          "ms": 120
+        },
+        {
+          "row": 1,
+          "col": 6,
+          "ms": 120
+        },
+        {
+          "row": 1,
+          "col": 7,
+          "ms": 120
+        },
+        {
+          "row": 7,
+          "col": 0,
+          "ms": 70
+        },
+        {
+          "row": 7,
+          "col": 1,
+          "ms": 70
+        },
+        {
+          "row": 7,
+          "col": 2,
+          "ms": 70
+        },
+        {
+          "row": 4,
+          "col": 3,
+          "ms": 85
+        },
+        {
+          "row": 4,
+          "col": 4,
+          "ms": 85
+        },
+        {
+          "row": 4,
+          "col": 5,
+          "ms": 85
+        },
+        {
+          "row": 4,
+          "col": 6,
+          "ms": 85
+        },
+        {
+          "row": 4,
+          "col": 7,
+          "ms": 85
+        },
+        {
+          "row": 5,
+          "col": 0,
+          "ms": 85
+        },
+        {
+          "row": 8,
+          "col": 3,
+          "ms": 70
+        },
+        {
+          "row": 8,
+          "col": 4,
+          "ms": 70
+        },
+        {
+          "row": 2,
+          "col": 0,
+          "ms": 120
+        },
+        {
+          "row": 2,
+          "col": 1,
+          "ms": 120
+        },
+        {
+          "row": 2,
+          "col": 2,
+          "ms": 120
+        },
+        {
+          "row": 2,
+          "col": 3,
+          "ms": 120
+        },
+        {
+          "row": 2,
+          "col": 4,
+          "ms": 120
+        },
+        {
+          "row": 2,
+          "col": 5,
+          "ms": 120
+        },
+        {
+          "row": 2,
+          "col": 6,
+          "ms": 120
+        },
+        {
+          "row": 2,
+          "col": 7,
+          "ms": 120
+        }
+      ],
+      "begin_after_source_phase": 7,
+      "resume_target_phase": 0
+    },
+    "right-to-left": {
+      "from": "right",
+      "to": "left",
+      "turn_indices": [
+        1,
+        0,
+        15,
+        14
+      ],
+      "frames": [
+        {
+          "row": 7,
+          "col": 0,
+          "ms": 70
+        },
+        {
+          "row": 7,
+          "col": 1,
+          "ms": 70
+        },
+        {
+          "row": 7,
+          "col": 2,
+          "ms": 70
+        },
+        {
+          "row": 4,
+          "col": 1,
+          "ms": 85
+        },
+        {
+          "row": 4,
+          "col": 0,
+          "ms": 85
+        },
+        {
+          "row": 5,
+          "col": 7,
+          "ms": 85
+        },
+        {
+          "row": 5,
+          "col": 6,
+          "ms": 85
+        },
+        {
+          "row": 9,
+          "col": 3,
+          "ms": 70
+        },
+        {
+          "row": 9,
+          "col": 4,
+          "ms": 70
+        }
+      ],
+      "gif": "transitions/right-to-left.gif",
+      "demo_frames": [
+        {
+          "row": 1,
+          "col": 0,
+          "ms": 120
+        },
+        {
+          "row": 1,
+          "col": 1,
+          "ms": 120
+        },
+        {
+          "row": 1,
+          "col": 2,
+          "ms": 120
+        },
+        {
+          "row": 1,
+          "col": 3,
+          "ms": 120
+        },
+        {
+          "row": 1,
+          "col": 4,
+          "ms": 120
+        },
+        {
+          "row": 1,
+          "col": 5,
+          "ms": 120
+        },
+        {
+          "row": 1,
+          "col": 6,
+          "ms": 120
+        },
+        {
+          "row": 1,
+          "col": 7,
+          "ms": 120
+        },
+        {
+          "row": 7,
+          "col": 0,
+          "ms": 70
+        },
+        {
+          "row": 7,
+          "col": 1,
+          "ms": 70
+        },
+        {
+          "row": 7,
+          "col": 2,
+          "ms": 70
+        },
+        {
+          "row": 4,
+          "col": 1,
+          "ms": 85
+        },
+        {
+          "row": 4,
+          "col": 0,
+          "ms": 85
+        },
+        {
+          "row": 5,
+          "col": 7,
+          "ms": 85
+        },
+        {
+          "row": 5,
+          "col": 6,
+          "ms": 85
+        },
+        {
+          "row": 9,
+          "col": 3,
+          "ms": 70
+        },
+        {
+          "row": 9,
+          "col": 4,
+          "ms": 70
+        },
+        {
+          "row": 3,
+          "col": 0,
+          "ms": 120
+        },
+        {
+          "row": 3,
+          "col": 1,
+          "ms": 120
+        },
+        {
+          "row": 3,
+          "col": 2,
+          "ms": 120
+        },
+        {
+          "row": 3,
+          "col": 3,
+          "ms": 120
+        },
+        {
+          "row": 3,
+          "col": 4,
+          "ms": 120
+        },
+        {
+          "row": 3,
+          "col": 5,
+          "ms": 120
+        },
+        {
+          "row": 3,
+          "col": 6,
+          "ms": 120
+        },
+        {
+          "row": 3,
+          "col": 7,
+          "ms": 120
+        }
+      ],
+      "begin_after_source_phase": 7,
+      "resume_target_phase": 0
+    },
+    "up-to-down": {
+      "from": "up",
+      "to": "down",
+      "turn_indices": [
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        0
+      ],
+      "frames": [
+        {
+          "row": 8,
+          "col": 0,
+          "ms": 70
+        },
+        {
+          "row": 8,
+          "col": 1,
+          "ms": 70
+        },
+        {
+          "row": 8,
+          "col": 2,
+          "ms": 70
+        },
+        {
+          "row": 5,
+          "col": 1,
+          "ms": 85
+        },
+        {
+          "row": 5,
+          "col": 2,
+          "ms": 85
+        },
+        {
+          "row": 5,
+          "col": 3,
+          "ms": 85
+        },
+        {
+          "row": 5,
+          "col": 4,
+          "ms": 85
+        },
+        {
+          "row": 5,
+          "col": 5,
+          "ms": 85
+        },
+        {
+          "row": 5,
+          "col": 6,
+          "ms": 85
+        },
+        {
+          "row": 5,
+          "col": 7,
+          "ms": 85
+        },
+        {
+          "row": 4,
+          "col": 0,
+          "ms": 85
+        },
+        {
+          "row": 6,
+          "col": 3,
+          "ms": 70
+        },
+        {
+          "row": 6,
+          "col": 4,
+          "ms": 70
+        }
+      ],
+      "gif": "transitions/up-to-down.gif",
+      "demo_frames": [
+        {
+          "row": 2,
+          "col": 0,
+          "ms": 120
+        },
+        {
+          "row": 2,
+          "col": 1,
+          "ms": 120
+        },
+        {
+          "row": 2,
+          "col": 2,
+          "ms": 120
+        },
+        {
+          "row": 2,
+          "col": 3,
+          "ms": 120
+        },
+        {
+          "row": 2,
+          "col": 4,
+          "ms": 120
+        },
+        {
+          "row": 2,
+          "col": 5,
+          "ms": 120
+        },
+        {
+          "row": 2,
+          "col": 6,
+          "ms": 120
+        },
+        {
+          "row": 2,
+          "col": 7,
+          "ms": 120
+        },
+        {
+          "row": 8,
+          "col": 0,
+          "ms": 70
+        },
+        {
+          "row": 8,
+          "col": 1,
+          "ms": 70
+        },
+        {
+          "row": 8,
+          "col": 2,
+          "ms": 70
+        },
+        {
+          "row": 5,
+          "col": 1,
+          "ms": 85
+        },
+        {
+          "row": 5,
+          "col": 2,
+          "ms": 85
+        },
+        {
+          "row": 5,
+          "col": 3,
+          "ms": 85
+        },
+        {
+          "row": 5,
+          "col": 4,
+          "ms": 85
+        },
+        {
+          "row": 5,
+          "col": 5,
+          "ms": 85
+        },
+        {
+          "row": 5,
+          "col": 6,
+          "ms": 85
+        },
+        {
+          "row": 5,
+          "col": 7,
+          "ms": 85
+        },
+        {
+          "row": 4,
+          "col": 0,
+          "ms": 85
+        },
+        {
+          "row": 6,
+          "col": 3,
+          "ms": 70
+        },
+        {
+          "row": 6,
+          "col": 4,
+          "ms": 70
+        },
+        {
+          "row": 0,
+          "col": 0,
+          "ms": 120
+        },
+        {
+          "row": 0,
+          "col": 1,
+          "ms": 120
+        },
+        {
+          "row": 0,
+          "col": 2,
+          "ms": 120
+        },
+        {
+          "row": 0,
+          "col": 3,
+          "ms": 120
+        },
+        {
+          "row": 0,
+          "col": 4,
+          "ms": 120
+        },
+        {
+          "row": 0,
+          "col": 5,
+          "ms": 120
+        },
+        {
+          "row": 0,
+          "col": 6,
+          "ms": 120
+        },
+        {
+          "row": 0,
+          "col": 7,
+          "ms": 120
+        }
+      ],
+      "begin_after_source_phase": 7,
+      "resume_target_phase": 0
+    },
+    "up-to-right": {
+      "from": "up",
+      "to": "right",
+      "turn_indices": [
+        7,
+        6,
+        5,
+        4,
+        3,
+        2
+      ],
+      "frames": [
+        {
+          "row": 8,
+          "col": 0,
+          "ms": 70
+        },
+        {
+          "row": 8,
+          "col": 1,
+          "ms": 70
+        },
+        {
+          "row": 8,
+          "col": 2,
+          "ms": 70
+        },
+        {
+          "row": 4,
+          "col": 7,
+          "ms": 85
+        },
+        {
+          "row": 4,
+          "col": 6,
+          "ms": 85
+        },
+        {
+          "row": 4,
+          "col": 5,
+          "ms": 85
+        },
+        {
+          "row": 4,
+          "col": 4,
+          "ms": 85
+        },
+        {
+          "row": 4,
+          "col": 3,
+          "ms": 85
+        },
+        {
+          "row": 4,
+          "col": 2,
+          "ms": 85
+        },
+        {
+          "row": 7,
+          "col": 3,
+          "ms": 70
+        },
+        {
+          "row": 7,
+          "col": 4,
+          "ms": 70
+        }
+      ],
+      "gif": "transitions/up-to-right.gif",
+      "demo_frames": [
+        {
+          "row": 2,
+          "col": 0,
+          "ms": 120
+        },
+        {
+          "row": 2,
+          "col": 1,
+          "ms": 120
+        },
+        {
+          "row": 2,
+          "col": 2,
+          "ms": 120
+        },
+        {
+          "row": 2,
+          "col": 3,
+          "ms": 120
+        },
+        {
+          "row": 2,
+          "col": 4,
+          "ms": 120
+        },
+        {
+          "row": 2,
+          "col": 5,
+          "ms": 120
+        },
+        {
+          "row": 2,
+          "col": 6,
+          "ms": 120
+        },
+        {
+          "row": 2,
+          "col": 7,
+          "ms": 120
+        },
+        {
+          "row": 8,
+          "col": 0,
+          "ms": 70
+        },
+        {
+          "row": 8,
+          "col": 1,
+          "ms": 70
+        },
+        {
+          "row": 8,
+          "col": 2,
+          "ms": 70
+        },
+        {
+          "row": 4,
+          "col": 7,
+          "ms": 85
+        },
+        {
+          "row": 4,
+          "col": 6,
+          "ms": 85
+        },
+        {
+          "row": 4,
+          "col": 5,
+          "ms": 85
+        },
+        {
+          "row": 4,
+          "col": 4,
+          "ms": 85
+        },
+        {
+          "row": 4,
+          "col": 3,
+          "ms": 85
+        },
+        {
+          "row": 4,
+          "col": 2,
+          "ms": 85
+        },
+        {
+          "row": 7,
+          "col": 3,
+          "ms": 70
+        },
+        {
+          "row": 7,
+          "col": 4,
+          "ms": 70
+        },
+        {
+          "row": 1,
+          "col": 0,
+          "ms": 120
+        },
+        {
+          "row": 1,
+          "col": 1,
+          "ms": 120
+        },
+        {
+          "row": 1,
+          "col": 2,
+          "ms": 120
+        },
+        {
+          "row": 1,
+          "col": 3,
+          "ms": 120
+        },
+        {
+          "row": 1,
+          "col": 4,
+          "ms": 120
+        },
+        {
+          "row": 1,
+          "col": 5,
+          "ms": 120
+        },
+        {
+          "row": 1,
+          "col": 6,
+          "ms": 120
+        },
+        {
+          "row": 1,
+          "col": 7,
+          "ms": 120
+        }
+      ],
+      "begin_after_source_phase": 7,
+      "resume_target_phase": 0
+    },
+    "up-to-left": {
+      "from": "up",
+      "to": "left",
+      "turn_indices": [
+        9,
+        10,
+        11,
+        12,
+        13,
+        14
+      ],
+      "frames": [
+        {
+          "row": 8,
+          "col": 0,
+          "ms": 70
+        },
+        {
+          "row": 8,
+          "col": 1,
+          "ms": 70
+        },
+        {
+          "row": 8,
+          "col": 2,
+          "ms": 70
+        },
+        {
+          "row": 5,
+          "col": 1,
+          "ms": 85
+        },
+        {
+          "row": 5,
+          "col": 2,
+          "ms": 85
+        },
+        {
+          "row": 5,
+          "col": 3,
+          "ms": 85
+        },
+        {
+          "row": 5,
+          "col": 4,
+          "ms": 85
+        },
+        {
+          "row": 5,
+          "col": 5,
+          "ms": 85
+        },
+        {
+          "row": 5,
+          "col": 6,
+          "ms": 85
+        },
+        {
+          "row": 9,
+          "col": 3,
+          "ms": 70
+        },
+        {
+          "row": 9,
+          "col": 4,
+          "ms": 70
+        }
+      ],
+      "gif": "transitions/up-to-left.gif",
+      "demo_frames": [
+        {
+          "row": 2,
+          "col": 0,
+          "ms": 120
+        },
+        {
+          "row": 2,
+          "col": 1,
+          "ms": 120
+        },
+        {
+          "row": 2,
+          "col": 2,
+          "ms": 120
+        },
+        {
+          "row": 2,
+          "col": 3,
+          "ms": 120
+        },
+        {
+          "row": 2,
+          "col": 4,
+          "ms": 120
+        },
+        {
+          "row": 2,
+          "col": 5,
+          "ms": 120
+        },
+        {
+          "row": 2,
+          "col": 6,
+          "ms": 120
+        },
+        {
+          "row": 2,
+          "col": 7,
+          "ms": 120
+        },
+        {
+          "row": 8,
+          "col": 0,
+          "ms": 70
+        },
+        {
+          "row": 8,
+          "col": 1,
+          "ms": 70
+        },
+        {
+          "row": 8,
+          "col": 2,
+          "ms": 70
+        },
+        {
+          "row": 5,
+          "col": 1,
+          "ms": 85
+        },
+        {
+          "row": 5,
+          "col": 2,
+          "ms": 85
+        },
+        {
+          "row": 5,
+          "col": 3,
+          "ms": 85
+        },
+        {
+          "row": 5,
+          "col": 4,
+          "ms": 85
+        },
+        {
+          "row": 5,
+          "col": 5,
+          "ms": 85
+        },
+        {
+          "row": 5,
+          "col": 6,
+          "ms": 85
+        },
+        {
+          "row": 9,
+          "col": 3,
+          "ms": 70
+        },
+        {
+          "row": 9,
+          "col": 4,
+          "ms": 70
+        },
+        {
+          "row": 3,
+          "col": 0,
+          "ms": 120
+        },
+        {
+          "row": 3,
+          "col": 1,
+          "ms": 120
+        },
+        {
+          "row": 3,
+          "col": 2,
+          "ms": 120
+        },
+        {
+          "row": 3,
+          "col": 3,
+          "ms": 120
+        },
+        {
+          "row": 3,
+          "col": 4,
+          "ms": 120
+        },
+        {
+          "row": 3,
+          "col": 5,
+          "ms": 120
+        },
+        {
+          "row": 3,
+          "col": 6,
+          "ms": 120
+        },
+        {
+          "row": 3,
+          "col": 7,
+          "ms": 120
+        }
+      ],
+      "begin_after_source_phase": 7,
+      "resume_target_phase": 0
+    },
+    "left-to-down": {
+      "from": "left",
+      "to": "down",
+      "turn_indices": [
+        15,
+        0
+      ],
+      "frames": [
+        {
+          "row": 9,
+          "col": 0,
+          "ms": 70
+        },
+        {
+          "row": 9,
+          "col": 1,
+          "ms": 70
+        },
+        {
+          "row": 9,
+          "col": 2,
+          "ms": 70
+        },
+        {
+          "row": 5,
+          "col": 7,
+          "ms": 85
+        },
+        {
+          "row": 4,
+          "col": 0,
+          "ms": 85
+        },
+        {
+          "row": 6,
+          "col": 3,
+          "ms": 70
+        },
+        {
+          "row": 6,
+          "col": 4,
+          "ms": 70
+        }
+      ],
+      "gif": "transitions/left-to-down.gif",
+      "demo_frames": [
+        {
+          "row": 3,
+          "col": 0,
+          "ms": 120
+        },
+        {
+          "row": 3,
+          "col": 1,
+          "ms": 120
+        },
+        {
+          "row": 3,
+          "col": 2,
+          "ms": 120
+        },
+        {
+          "row": 3,
+          "col": 3,
+          "ms": 120
+        },
+        {
+          "row": 3,
+          "col": 4,
+          "ms": 120
+        },
+        {
+          "row": 3,
+          "col": 5,
+          "ms": 120
+        },
+        {
+          "row": 3,
+          "col": 6,
+          "ms": 120
+        },
+        {
+          "row": 3,
+          "col": 7,
+          "ms": 120
+        },
+        {
+          "row": 9,
+          "col": 0,
+          "ms": 70
+        },
+        {
+          "row": 9,
+          "col": 1,
+          "ms": 70
+        },
+        {
+          "row": 9,
+          "col": 2,
+          "ms": 70
+        },
+        {
+          "row": 5,
+          "col": 7,
+          "ms": 85
+        },
+        {
+          "row": 4,
+          "col": 0,
+          "ms": 85
+        },
+        {
+          "row": 6,
+          "col": 3,
+          "ms": 70
+        },
+        {
+          "row": 6,
+          "col": 4,
+          "ms": 70
+        },
+        {
+          "row": 0,
+          "col": 0,
+          "ms": 120
+        },
+        {
+          "row": 0,
+          "col": 1,
+          "ms": 120
+        },
+        {
+          "row": 0,
+          "col": 2,
+          "ms": 120
+        },
+        {
+          "row": 0,
+          "col": 3,
+          "ms": 120
+        },
+        {
+          "row": 0,
+          "col": 4,
+          "ms": 120
+        },
+        {
+          "row": 0,
+          "col": 5,
+          "ms": 120
+        },
+        {
+          "row": 0,
+          "col": 6,
+          "ms": 120
+        },
+        {
+          "row": 0,
+          "col": 7,
+          "ms": 120
+        }
+      ],
+      "begin_after_source_phase": 7,
+      "resume_target_phase": 0
+    },
+    "left-to-right": {
+      "from": "left",
+      "to": "right",
+      "turn_indices": [
+        15,
+        0,
+        1,
+        2
+      ],
+      "frames": [
+        {
+          "row": 9,
+          "col": 0,
+          "ms": 70
+        },
+        {
+          "row": 9,
+          "col": 1,
+          "ms": 70
+        },
+        {
+          "row": 9,
+          "col": 2,
+          "ms": 70
+        },
+        {
+          "row": 5,
+          "col": 7,
+          "ms": 85
+        },
+        {
+          "row": 4,
+          "col": 0,
+          "ms": 85
+        },
+        {
+          "row": 4,
+          "col": 1,
+          "ms": 85
+        },
+        {
+          "row": 4,
+          "col": 2,
+          "ms": 85
+        },
+        {
+          "row": 7,
+          "col": 3,
+          "ms": 70
+        },
+        {
+          "row": 7,
+          "col": 4,
+          "ms": 70
+        }
+      ],
+      "gif": "transitions/left-to-right.gif",
+      "demo_frames": [
+        {
+          "row": 3,
+          "col": 0,
+          "ms": 120
+        },
+        {
+          "row": 3,
+          "col": 1,
+          "ms": 120
+        },
+        {
+          "row": 3,
+          "col": 2,
+          "ms": 120
+        },
+        {
+          "row": 3,
+          "col": 3,
+          "ms": 120
+        },
+        {
+          "row": 3,
+          "col": 4,
+          "ms": 120
+        },
+        {
+          "row": 3,
+          "col": 5,
+          "ms": 120
+        },
+        {
+          "row": 3,
+          "col": 6,
+          "ms": 120
+        },
+        {
+          "row": 3,
+          "col": 7,
+          "ms": 120
+        },
+        {
+          "row": 9,
+          "col": 0,
+          "ms": 70
+        },
+        {
+          "row": 9,
+          "col": 1,
+          "ms": 70
+        },
+        {
+          "row": 9,
+          "col": 2,
+          "ms": 70
+        },
+        {
+          "row": 5,
+          "col": 7,
+          "ms": 85
+        },
+        {
+          "row": 4,
+          "col": 0,
+          "ms": 85
+        },
+        {
+          "row": 4,
+          "col": 1,
+          "ms": 85
+        },
+        {
+          "row": 4,
+          "col": 2,
+          "ms": 85
+        },
+        {
+          "row": 7,
+          "col": 3,
+          "ms": 70
+        },
+        {
+          "row": 7,
+          "col": 4,
+          "ms": 70
+        },
+        {
+          "row": 1,
+          "col": 0,
+          "ms": 120
+        },
+        {
+          "row": 1,
+          "col": 1,
+          "ms": 120
+        },
+        {
+          "row": 1,
+          "col": 2,
+          "ms": 120
+        },
+        {
+          "row": 1,
+          "col": 3,
+          "ms": 120
+        },
+        {
+          "row": 1,
+          "col": 4,
+          "ms": 120
+        },
+        {
+          "row": 1,
+          "col": 5,
+          "ms": 120
+        },
+        {
+          "row": 1,
+          "col": 6,
+          "ms": 120
+        },
+        {
+          "row": 1,
+          "col": 7,
+          "ms": 120
+        }
+      ],
+      "begin_after_source_phase": 7,
+      "resume_target_phase": 0
+    },
+    "left-to-up": {
+      "from": "left",
+      "to": "up",
+      "turn_indices": [
+        13,
+        12,
+        11,
+        10,
+        9,
+        8
+      ],
+      "frames": [
+        {
+          "row": 9,
+          "col": 0,
+          "ms": 70
+        },
+        {
+          "row": 9,
+          "col": 1,
+          "ms": 70
+        },
+        {
+          "row": 9,
+          "col": 2,
+          "ms": 70
+        },
+        {
+          "row": 5,
+          "col": 5,
+          "ms": 85
+        },
+        {
+          "row": 5,
+          "col": 4,
+          "ms": 85
+        },
+        {
+          "row": 5,
+          "col": 3,
+          "ms": 85
+        },
+        {
+          "row": 5,
+          "col": 2,
+          "ms": 85
+        },
+        {
+          "row": 5,
+          "col": 1,
+          "ms": 85
+        },
+        {
+          "row": 5,
+          "col": 0,
+          "ms": 85
+        },
+        {
+          "row": 8,
+          "col": 3,
+          "ms": 70
+        },
+        {
+          "row": 8,
+          "col": 4,
+          "ms": 70
+        }
+      ],
+      "gif": "transitions/left-to-up.gif",
+      "demo_frames": [
+        {
+          "row": 3,
+          "col": 0,
+          "ms": 120
+        },
+        {
+          "row": 3,
+          "col": 1,
+          "ms": 120
+        },
+        {
+          "row": 3,
+          "col": 2,
+          "ms": 120
+        },
+        {
+          "row": 3,
+          "col": 3,
+          "ms": 120
+        },
+        {
+          "row": 3,
+          "col": 4,
+          "ms": 120
+        },
+        {
+          "row": 3,
+          "col": 5,
+          "ms": 120
+        },
+        {
+          "row": 3,
+          "col": 6,
+          "ms": 120
+        },
+        {
+          "row": 3,
+          "col": 7,
+          "ms": 120
+        },
+        {
+          "row": 9,
+          "col": 0,
+          "ms": 70
+        },
+        {
+          "row": 9,
+          "col": 1,
+          "ms": 70
+        },
+        {
+          "row": 9,
+          "col": 2,
+          "ms": 70
+        },
+        {
+          "row": 5,
+          "col": 5,
+          "ms": 85
+        },
+        {
+          "row": 5,
+          "col": 4,
+          "ms": 85
+        },
+        {
+          "row": 5,
+          "col": 3,
+          "ms": 85
+        },
+        {
+          "row": 5,
+          "col": 2,
+          "ms": 85
+        },
+        {
+          "row": 5,
+          "col": 1,
+          "ms": 85
+        },
+        {
+          "row": 5,
+          "col": 0,
+          "ms": 85
+        },
+        {
+          "row": 8,
+          "col": 3,
+          "ms": 70
+        },
+        {
+          "row": 8,
+          "col": 4,
+          "ms": 70
+        },
+        {
+          "row": 2,
+          "col": 0,
+          "ms": 120
+        },
+        {
+          "row": 2,
+          "col": 1,
+          "ms": 120
+        },
+        {
+          "row": 2,
+          "col": 2,
+          "ms": 120
+        },
+        {
+          "row": 2,
+          "col": 3,
+          "ms": 120
+        },
+        {
+          "row": 2,
+          "col": 4,
+          "ms": 120
+        },
+        {
+          "row": 2,
+          "col": 5,
+          "ms": 120
+        },
+        {
+          "row": 2,
+          "col": 6,
+          "ms": 120
+        },
+        {
+          "row": 2,
+          "col": 7,
+          "ms": 120
+        }
+      ],
+      "begin_after_source_phase": 7,
+      "resume_target_phase": 0
+    }
+  },
+  "transition_policy": "Coalesce requests; finish the current stride, play core at a planted pivot, then resume target phase0. Demo context is not a runtime restart.",
+  "png_parts": [
+    "interaction-part-00.json",
+    "interaction-part-01.json",
+    "interaction-part-02.json",
+    "interaction-part-03.json",
+    "interaction-part-04.json",
+    "interaction-part-05.json",
+    "interaction-part-06.json",
+    "interaction-part-07.json",
+    "interaction-part-08.json",
+    "interaction-part-09.json",
+    "interaction-part-10.json",
+    "interaction-part-11.json",
+    "interaction-part-12.json",
+    "interaction-part-13.json",
+    "interaction-part-14.json",
+    "interaction-part-15.json",
+    "interaction-part-16.json",
+    "interaction-part-17.json",
+    "interaction-part-18.json",
+    "interaction-part-19.json",
+    "interaction-part-20.json",
+    "interaction-part-21.json",
+    "interaction-part-22.json",
+    "interaction-part-23.json",
+    "interaction-part-24.json",
+    "interaction-part-25.json",
+    "interaction-part-26.json",
+    "interaction-part-27.json",
+    "interaction-part-28.json",
+    "interaction-part-29.json",
+    "interaction-part-30.json",
+    "interaction-part-31.json",
+    "interaction-part-32.json",
+    "interaction-part-33.json",
+    "interaction-part-34.json",
+    "interaction-part-35.json",
+    "interaction-part-36.json",
+    "interaction-part-37.json",
+    "interaction-part-38.json",
+    "interaction-part-39.json",
+    "interaction-part-40.json",
+    "interaction-part-41.json"
+  ],
+  "image_encoding": "base64-png-parts",
+  "cols": 8,
+  "rows": 19,
+  "image_size": [
+    1536,
+    3952
+  ],
+  "interactions": {
+    "states": {
+      "idle": {
+        "row": 10,
+        "durations_ms": [
+          280,
+          110,
+          110,
+          140,
+          140,
+          320
+        ],
+        "body_facing": "down"
+      },
+      "waving": {
+        "row": 11,
+        "durations_ms": [
+          140,
+          140,
+          140,
+          280
+        ],
+        "body_facing": "down"
+      },
+      "jumping": {
+        "row": 12,
+        "durations_ms": [
+          140,
+          140,
+          140,
+          140,
+          280
+        ],
+        "body_facing": "down"
+      },
+      "failed": {
+        "row": 13,
+        "durations_ms": [
+          140,
+          140,
+          140,
+          140,
+          140,
+          140,
+          140,
+          240
+        ],
+        "body_facing": "down"
+      },
+      "waiting": {
+        "row": 14,
+        "durations_ms": [
+          150,
+          150,
+          150,
+          150,
+          150,
+          260
+        ],
+        "body_facing": "down"
+      },
+      "working": {
+        "row": 15,
+        "durations_ms": [
+          120,
+          120,
+          120,
+          120,
+          120,
+          220
+        ],
+        "body_facing": "down"
+      },
+      "review": {
+        "row": 16,
+        "durations_ms": [
+          150,
+          150,
+          150,
+          150,
+          150,
+          280
+        ],
+        "body_facing": "down"
+      }
+    },
+    "look": {
+      "frames": [
+        {
+          "row": 17,
+          "col": 0,
+          "degrees": 0.0
+        },
+        {
+          "row": 17,
+          "col": 1,
+          "degrees": 22.5
+        },
+        {
+          "row": 17,
+          "col": 2,
+          "degrees": 45.0
+        },
+        {
+          "row": 17,
+          "col": 3,
+          "degrees": 67.5
+        },
+        {
+          "row": 17,
+          "col": 4,
+          "degrees": 90.0
+        },
+        {
+          "row": 17,
+          "col": 5,
+          "degrees": 112.5
+        },
+        {
+          "row": 17,
+          "col": 6,
+          "degrees": 135.0
+        },
+        {
+          "row": 17,
+          "col": 7,
+          "degrees": 157.5
+        },
+        {
+          "row": 18,
+          "col": 0,
+          "degrees": 180.0
+        },
+        {
+          "row": 18,
+          "col": 1,
+          "degrees": 202.5
+        },
+        {
+          "row": 18,
+          "col": 2,
+          "degrees": 225.0
+        },
+        {
+          "row": 18,
+          "col": 3,
+          "degrees": 247.5
+        },
+        {
+          "row": 18,
+          "col": 4,
+          "degrees": 270.0
+        },
+        {
+          "row": 18,
+          "col": 5,
+          "degrees": 292.5
+        },
+        {
+          "row": 18,
+          "col": 6,
+          "degrees": 315.0
+        },
+        {
+          "row": 18,
+          "col": 7,
+          "degrees": 337.5
+        }
+      ]
+    },
+    "source_pet_sha256": "405462be42eaa2185f41415391ea4635cd85813de29cbd2283ad424e0ccc06d4",
+    "shared_registration": {
+      "scale": 1.0774193548387097,
+      "pivot": [
+        96,
+        203
+      ],
+      "jump_lift_gain": 0.8
+    },
+    "retained_walk_sha256": "72a2560752fb2275d3ff2d2fa223bcb14cd8a12318cbfd43a76c9f7a1e62687a"
+  }
+}
