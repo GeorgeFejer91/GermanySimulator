@@ -63,6 +63,12 @@ try{
    console.log(JSON.stringify({name:'restart',active:await page.evaluate(()=>BuergeramtLevel.active)}));
   }
   if(name!=='desktop'){await page.evaluate(()=>{document.documentElement.style.zoom='2'});await page.screenshot({path:`${output}/world-walk-${name}-zoom200.png`});const overflow=await page.evaluate(()=>document.documentElement.scrollWidth>innerWidth+1);console.log(JSON.stringify({name:`${name}-zoom200`,horizontalOverflow:overflow}));if(overflow)throw new Error(`World overflow at ${viewport.width}px / 200% zoom`)}
+  if(name==='mobile'){
+   await page.evaluate(()=>{document.documentElement.style.zoom='';dispatchEvent(new KeyboardEvent('keydown',{code:'KeyW'}));for(let i=0;i<37;i++)BuergeramtLevel.update(.05);dispatchEvent(new KeyboardEvent('keyup',{code:'KeyW'}));for(let i=0;i<180;i++)BuergeramtLevel.update(.05);Germany3D.sync()});
+   const scene=await page.evaluate(()=>({stage:BuergeramtLevel.stage,strength:BuergeramtLevel.omen.strength}));
+   if(scene.stage!=='omen'||scene.strength<.95)throw new Error(`Mobile Aktenkurier beat failed: ${JSON.stringify(scene)}`);
+   await page.screenshot({path:`${output}/world-aktenkurier-omen-mobile.png`});
+  }
   await page.close();
  }
  console.log(JSON.stringify({errors}));passed=true;

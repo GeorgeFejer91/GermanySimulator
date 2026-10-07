@@ -46,6 +46,8 @@ html[data-phone-os="android"] .phone-call{background:radial-gradient(circle at 4
 .amt-mix-panel{display:grid;gap:10px;width:190px;padding:12px;background:#e7dcc4;border:1px solid #9a8b6d;box-shadow:0 8px 24px #1119;color:#262c2b;text-shadow:none}
 #amt-mix{position:fixed;top:70px;left:20px;z-index:230;color:#eee8d7;font:700 11px/1.3 monospace;letter-spacing:.06em}
 #amt-mix[hidden]{display:none}#amt-mix summary{width:max-content;padding:8px 11px;border:1px solid #c5b878;background:#253034ed;cursor:pointer;list-style:none}#amt-mix summary::-webkit-details-marker{display:none}#amt-mix summary:focus-visible,#amt-mix input:focus-visible{outline:2px solid #f7e9bd;outline-offset:2px}
+.amt-omen #amt-mix,.amt-omen #amt-direct-reset{visibility:hidden}
+.amt-omen .amt-sheet header,.amt-omen #amt-status{display:none}
 .amt-mix-panel label{display:grid;gap:4px;min-width:0}.amt-mix-panel input{width:100%;accent-color:#994a3e}
 #amt-compact-reset{display:none}
 .amt-compact #amt-mix{top:118px}.amt-compact #amt-direct-reset{display:none!important}.amt-compact .amt-mix-panel{width:min(135px,calc(50vw - 24px))}.amt-compact.amt-direct-mode #amt-compact-reset{display:block;padding:9px 7px;border:1px solid #9a8b6d;color:#262c2b;text-decoration:none;overflow-wrap:break-word}

@@ -12,6 +12,10 @@ test('the entrance action cannot pass through the facade wing',()=>{
 test('the clerk encounter remains on the public side of the desk',()=>{
  const h=harness();h.counter();assert.ok(h.level.view.z>=-8.32);
 });
+test('Frau Knick uses her talk row only while her visible counter line is active',()=>{
+ const h=harness();h.counter();assert.equal(h.level.clerkPerformance.row,5);assert.equal(h.level.clerkPerformance.speaking,true);
+ h.tick(10000);assert.equal(h.level.clerkPerformance.speaking,false);assert.notEqual(h.level.clerkPerformance.row,5);
+});
 test('an invalid frame delta cannot corrupt first-person movement',()=>{
  const h=harness();h.key('KeyW');const before=h.level.view;h.level.update(Number.NaN);h.key('KeyW','keyup');assert.deepEqual(h.level.view,before);
 });
@@ -24,11 +28,12 @@ test('the Aktenkurier approaches, delivers the dark verse in a spotlight, and re
  const h=harness('host',{cinematics:true});h.enter();h.advanceGame(9);
  assert.equal(h.level.stage,'omen');assert.equal(h.level.omen.phase,'blackout');
  assert.ok(h.level.omen.strength>.95);assert.ok(Math.hypot(h.level.omen.x-h.level.view.x,h.level.omen.z-h.level.view.z)<1.8);
+ assert.ok(Math.abs(h.level.view.yaw)>.1);assert.equal(h.document.body.classList.contains('amt-omen'),true);
  assert.equal(h.node('amt-line').textContent,'Wer die Finsternis sieht, hat sie selbst gewählt!');
  const board=h.level.queueDisplay;h.advanceGame(2);assert.equal(h.level.queueDisplay,board);
  h.tick(6000);h.advanceGame(1.5);
  assert.equal(h.level.stage,'walk-sign');assert.equal(h.level.omen.phase,'');assert.equal(h.level.omen.strength,0);
- assert.equal(h.level.characterMood,null);h.advanceGame(4);
+ assert.equal(h.level.characterMood,null);assert.ok(Math.abs(h.level.view.yaw)<.01);assert.equal(h.document.body.classList.contains('amt-omen'),false);h.advanceGame(4);
  assert.notEqual(h.level.queueDisplay,board);
  assert.notEqual(h.level.characters[0].mode,'gesture');
 });
