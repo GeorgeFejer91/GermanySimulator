@@ -114,6 +114,11 @@ browser-only dialogue is labeled and previewed with browser speech. Movement
 previews show each actor's body type, gait, route style, and current speed
 without changing the canonical game runtime. The review page has `noindex`,
 but GitHub Pages provides no access control: an unlisted URL is not private.
+As of 2026-10-07, its featured and Sandale previews load the current
+`assets/characters/` and `assets/tourists/` manifests through the same static
+atlas loader as the game. Their walk, directed stop–turn–start, Merz pour and
+Sandale reaction controls display those exact reviewed cells. Missing current
+artwork must be reported in the preview, never silently replaced by an old atlas.
 
 ## 2026-09-29 — Human template replaces towel-preview primitive figures
 
