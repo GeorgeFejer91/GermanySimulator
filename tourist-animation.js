@@ -26,11 +26,12 @@ globalThis.TouristAnimations = (() => {
     n.touristRequested=facing(dx,dy);
     if(!n.touristFacing) {
       n.touristFacing=n.touristRequested;
-      n.gaitDistance=((n.spriteFrame||0)%8)*24/8;
+      n.gaitDistance=((n.spriteFrame||0)%8)*(m.cycle_distance??24)/8;
     }
     if(!n.touristTurn) cell(n,{row:m.walks[n.touristFacing].row,col:(n.spriteFrame||0)%8});
   }
   function advance(n,distance,dt,m,cycle=24) {
+    cycle=m.cycle_distance??cycle;
     if(!n.touristFacing) request(n,n.vx||0,n.vy||0,m);
     const active=n.touristTurn;
     if(active) {
@@ -55,6 +56,7 @@ globalThis.TouristAnimations = (() => {
     cell(n,{row:m.walks[n.touristFacing].row,col:Math.floor((next%cycle)/cycle*8)%8}); return true;
   }
   function action(n,name,elapsed,duration,m,cycle=24){
+    cycle=m.cycle_distance??cycle;
     const a=m.actions?.[name];if(!a||n.touristTurn)return false;
     const key=Math.min(a.keys.length-1,Math.floor(Math.max(0,elapsed)/Math.max(.001,duration)*a.keys.length));
     const phase=Math.floor(((n.gaitDistance||0)%cycle)/cycle*a.frames_per_key)%a.frames_per_key;

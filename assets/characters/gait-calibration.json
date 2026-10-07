@@ -1,0 +1,641 @@
+{
+  "method": "Sole edge in the exact alpha-masked side-view export. The first and second planted intervals are frames 0-2 and 4-6; verify fixed foot identity and the native-size playback before accepting a clock change. The measurements are a contact proxy, not an anatomical joint trace.",
+  "assessments": [
+    {
+      "character": "merkel",
+      "view": "right",
+      "atlas_file": "merkel/character-atlas.png",
+      "atlas_sha256": "68991b33f050511e6f82037041399e97bc4b3d47ed86e7d62ce7bff2ae6fab1e",
+      "frames_per_cycle": 8,
+      "game_units_per_pixel": 0.5817307692307692,
+      "current_cycle_distance": 24,
+      "shoe_length_pixels": 23,
+      "sole_alpha_y_range": [
+        190,
+        202
+      ],
+      "contacts": [
+        {
+          "foot": "planted-1",
+          "edge": "min",
+          "samples": [
+            {
+              "frame": 0,
+              "along_pixels": 76
+            },
+            {
+              "frame": 1,
+              "along_pixels": 68
+            },
+            {
+              "frame": 2,
+              "along_pixels": 65
+            }
+          ]
+        },
+        {
+          "foot": "planted-2",
+          "edge": "min",
+          "samples": [
+            {
+              "frame": 4,
+              "along_pixels": 77
+            },
+            {
+              "frame": 5,
+              "along_pixels": 72
+            },
+            {
+              "frame": 6,
+              "along_pixels": 68
+            }
+          ]
+        }
+      ],
+      "previous_cycle_distance": 41.6
+    },
+    {
+      "character": "merkel",
+      "view": "left",
+      "atlas_file": "merkel/character-atlas.png",
+      "atlas_sha256": "68991b33f050511e6f82037041399e97bc4b3d47ed86e7d62ce7bff2ae6fab1e",
+      "frames_per_cycle": 8,
+      "game_units_per_pixel": 0.5817307692307692,
+      "current_cycle_distance": 24,
+      "shoe_length_pixels": 23,
+      "sole_alpha_y_range": [
+        190,
+        202
+      ],
+      "contacts": [
+        {
+          "foot": "planted-1",
+          "edge": "max",
+          "samples": [
+            {
+              "frame": 0,
+              "along_pixels": -114
+            },
+            {
+              "frame": 1,
+              "along_pixels": -120
+            },
+            {
+              "frame": 2,
+              "along_pixels": -123
+            }
+          ]
+        },
+        {
+          "foot": "planted-2",
+          "edge": "max",
+          "samples": [
+            {
+              "frame": 4,
+              "along_pixels": -115
+            },
+            {
+              "frame": 5,
+              "along_pixels": -123
+            },
+            {
+              "frame": 6,
+              "along_pixels": -127
+            }
+          ]
+        }
+      ],
+      "previous_cycle_distance": 41.6
+    },
+    {
+      "character": "alice",
+      "view": "right",
+      "atlas_file": "alice/character-atlas.png",
+      "atlas_sha256": "41370d47f189f9502b0c6d177e3feb0752327b7f3329a70d665a06eaad956f10",
+      "frames_per_cycle": 8,
+      "game_units_per_pixel": 0.5817307692307692,
+      "current_cycle_distance": 27,
+      "shoe_length_pixels": 21,
+      "sole_alpha_y_range": [
+        190,
+        202
+      ],
+      "contacts": [
+        {
+          "foot": "planted-1",
+          "edge": "min",
+          "samples": [
+            {
+              "frame": 0,
+              "along_pixels": 81
+            },
+            {
+              "frame": 1,
+              "along_pixels": 73
+            },
+            {
+              "frame": 2,
+              "along_pixels": 70
+            }
+          ]
+        },
+        {
+          "foot": "planted-2",
+          "edge": "min",
+          "samples": [
+            {
+              "frame": 4,
+              "along_pixels": 81
+            },
+            {
+              "frame": 5,
+              "along_pixels": 73
+            },
+            {
+              "frame": 6,
+              "along_pixels": 70
+            }
+          ]
+        }
+      ],
+      "previous_cycle_distance": 41.6
+    },
+    {
+      "character": "alice",
+      "view": "left",
+      "atlas_file": "alice/character-atlas.png",
+      "atlas_sha256": "41370d47f189f9502b0c6d177e3feb0752327b7f3329a70d665a06eaad956f10",
+      "frames_per_cycle": 8,
+      "game_units_per_pixel": 0.5817307692307692,
+      "current_cycle_distance": 27,
+      "shoe_length_pixels": 21,
+      "sole_alpha_y_range": [
+        190,
+        202
+      ],
+      "contacts": [
+        {
+          "foot": "planted-1",
+          "edge": "max",
+          "samples": [
+            {
+              "frame": 0,
+              "along_pixels": -110
+            },
+            {
+              "frame": 1,
+              "along_pixels": -118
+            },
+            {
+              "frame": 2,
+              "along_pixels": -122
+            }
+          ]
+        },
+        {
+          "foot": "planted-2",
+          "edge": "max",
+          "samples": [
+            {
+              "frame": 4,
+              "along_pixels": -110
+            },
+            {
+              "frame": 5,
+              "along_pixels": -119
+            },
+            {
+              "frame": 6,
+              "along_pixels": -122
+            }
+          ]
+        }
+      ],
+      "previous_cycle_distance": 41.6
+    },
+    {
+      "character": "bayern",
+      "view": "right",
+      "atlas_file": "bayern/character-atlas.png",
+      "atlas_sha256": "36d2f68f9fe23539bf1f71be77880e7387ec346441b56b0d2262813d01c42e55",
+      "frames_per_cycle": 8,
+      "game_units_per_pixel": 0.6995192307692308,
+      "current_cycle_distance": 32,
+      "shoe_length_pixels": 23,
+      "sole_alpha_y_range": [
+        190,
+        202
+      ],
+      "contacts": [
+        {
+          "foot": "planted-1",
+          "edge": "min",
+          "samples": [
+            {
+              "frame": 0,
+              "along_pixels": 77
+            },
+            {
+              "frame": 1,
+              "along_pixels": 69
+            },
+            {
+              "frame": 2,
+              "along_pixels": 65
+            }
+          ]
+        },
+        {
+          "foot": "planted-2",
+          "edge": "min",
+          "samples": [
+            {
+              "frame": 4,
+              "along_pixels": 77
+            },
+            {
+              "frame": 5,
+              "along_pixels": 69
+            },
+            {
+              "frame": 6,
+              "along_pixels": 66
+            }
+          ]
+        }
+      ],
+      "previous_cycle_distance": 41.6
+    },
+    {
+      "character": "bayern",
+      "view": "left",
+      "atlas_file": "bayern/character-atlas.png",
+      "atlas_sha256": "36d2f68f9fe23539bf1f71be77880e7387ec346441b56b0d2262813d01c42e55",
+      "frames_per_cycle": 8,
+      "game_units_per_pixel": 0.6995192307692308,
+      "current_cycle_distance": 32,
+      "shoe_length_pixels": 23,
+      "sole_alpha_y_range": [
+        190,
+        202
+      ],
+      "contacts": [
+        {
+          "foot": "planted-1",
+          "edge": "max",
+          "samples": [
+            {
+              "frame": 0,
+              "along_pixels": -115
+            },
+            {
+              "frame": 1,
+              "along_pixels": -123
+            },
+            {
+              "frame": 2,
+              "along_pixels": -126
+            }
+          ]
+        },
+        {
+          "foot": "planted-2",
+          "edge": "max",
+          "samples": [
+            {
+              "frame": 4,
+              "along_pixels": -115
+            },
+            {
+              "frame": 5,
+              "along_pixels": -123
+            },
+            {
+              "frame": 6,
+              "along_pixels": -127
+            }
+          ]
+        }
+      ],
+      "previous_cycle_distance": 41.6
+    },
+    {
+      "character": "borderPourer",
+      "view": "right",
+      "atlas_file": "borderPourer/character-atlas.png",
+      "atlas_sha256": "9179b39b9b33e56e82b2ffcf324c38811f0a15c76b29d015be45019199942cb7",
+      "frames_per_cycle": 8,
+      "game_units_per_pixel": 0.6298076923076923,
+      "current_cycle_distance": 25,
+      "shoe_length_pixels": 24,
+      "sole_alpha_y_range": [
+        185,
+        202
+      ],
+      "contacts": [
+        {
+          "foot": "planted-1",
+          "edge": "min",
+          "samples": [
+            {
+              "frame": 0,
+              "along_pixels": 89
+            },
+            {
+              "frame": 1,
+              "along_pixels": 81
+            },
+            {
+              "frame": 2,
+              "along_pixels": 78
+            }
+          ]
+        },
+        {
+          "foot": "planted-2",
+          "edge": "min",
+          "samples": [
+            {
+              "frame": 4,
+              "along_pixels": 89
+            },
+            {
+              "frame": 5,
+              "along_pixels": 84
+            },
+            {
+              "frame": 6,
+              "along_pixels": 81
+            }
+          ]
+        }
+      ],
+      "previous_cycle_distance": 41.6
+    },
+    {
+      "character": "borderPourer",
+      "view": "left",
+      "atlas_file": "borderPourer/character-atlas.png",
+      "atlas_sha256": "9179b39b9b33e56e82b2ffcf324c38811f0a15c76b29d015be45019199942cb7",
+      "frames_per_cycle": 8,
+      "game_units_per_pixel": 0.6298076923076923,
+      "current_cycle_distance": 25,
+      "shoe_length_pixels": 24,
+      "sole_alpha_y_range": [
+        185,
+        202
+      ],
+      "contacts": [
+        {
+          "foot": "planted-1",
+          "edge": "max",
+          "samples": [
+            {
+              "frame": 0,
+              "along_pixels": -134
+            },
+            {
+              "frame": 1,
+              "along_pixels": -139
+            },
+            {
+              "frame": 2,
+              "along_pixels": -143
+            }
+          ]
+        },
+        {
+          "foot": "planted-2",
+          "edge": "max",
+          "samples": [
+            {
+              "frame": 4,
+              "along_pixels": -134
+            },
+            {
+              "frame": 5,
+              "along_pixels": -142
+            },
+            {
+              "frame": 6,
+              "along_pixels": -146
+            }
+          ]
+        }
+      ],
+      "previous_cycle_distance": 41.6
+    },
+    {
+      "character": "towelMan",
+      "view": "right",
+      "atlas_file": "../tourists/towelMan/character-atlas.png",
+      "atlas_sha256": "e63653a5ecca3b683114e440b2632586a6396af1d41dbcaffbbc58570d94e4a3",
+      "frames_per_cycle": 8,
+      "game_units_per_pixel": 0.5817307692307692,
+      "current_cycle_distance": 13.5,
+      "shoe_length_pixels": 23,
+      "sole_alpha_y_range": [
+        190,
+        202
+      ],
+      "contacts": [
+        {
+          "foot": "planted-1",
+          "edge": "max",
+          "samples": [
+            {
+              "frame": 0,
+              "along_pixels": 132
+            },
+            {
+              "frame": 1,
+              "along_pixels": 128
+            },
+            {
+              "frame": 2,
+              "along_pixels": 127
+            }
+          ]
+        },
+        {
+          "foot": "planted-2",
+          "edge": "min",
+          "samples": [
+            {
+              "frame": 4,
+              "along_pixels": 74
+            },
+            {
+              "frame": 5,
+              "along_pixels": 70
+            },
+            {
+              "frame": 6,
+              "along_pixels": 68
+            }
+          ]
+        }
+      ],
+      "previous_cycle_distance": 24
+    },
+    {
+      "character": "towelMan",
+      "view": "left",
+      "atlas_file": "../tourists/towelMan/character-atlas.png",
+      "atlas_sha256": "e63653a5ecca3b683114e440b2632586a6396af1d41dbcaffbbc58570d94e4a3",
+      "frames_per_cycle": 8,
+      "game_units_per_pixel": 0.5817307692307692,
+      "current_cycle_distance": 13.5,
+      "shoe_length_pixels": 23,
+      "sole_alpha_y_range": [
+        190,
+        202
+      ],
+      "contacts": [
+        {
+          "foot": "planted-1",
+          "edge": "max",
+          "samples": [
+            {
+              "frame": 0,
+              "along_pixels": -122
+            },
+            {
+              "frame": 1,
+              "along_pixels": -126
+            },
+            {
+              "frame": 2,
+              "along_pixels": -128
+            }
+          ]
+        },
+        {
+          "foot": "planted-2",
+          "edge": "min",
+          "samples": [
+            {
+              "frame": 4,
+              "along_pixels": -60
+            },
+            {
+              "frame": 5,
+              "along_pixels": -64
+            },
+            {
+              "frame": 6,
+              "along_pixels": -66
+            }
+          ]
+        }
+      ],
+      "previous_cycle_distance": 24
+    },
+    {
+      "character": "towelWoman",
+      "view": "right",
+      "atlas_file": "../tourists/towelWoman/character-atlas.png",
+      "atlas_sha256": "7d8613902f1dc4c15479a2acd83247247918f30dc60946b6d1b898746e769c50",
+      "frames_per_cycle": 8,
+      "game_units_per_pixel": 0.5817307692307692,
+      "current_cycle_distance": 14,
+      "shoe_length_pixels": 23,
+      "sole_alpha_y_range": [
+        190,
+        202
+      ],
+      "contacts": [
+        {
+          "foot": "planted-1",
+          "edge": "max",
+          "samples": [
+            {
+              "frame": 0,
+              "along_pixels": 131
+            },
+            {
+              "frame": 1,
+              "along_pixels": 126
+            },
+            {
+              "frame": 2,
+              "along_pixels": 125
+            }
+          ]
+        },
+        {
+          "foot": "planted-2",
+          "edge": "min",
+          "samples": [
+            {
+              "frame": 4,
+              "along_pixels": 71
+            },
+            {
+              "frame": 5,
+              "along_pixels": 67
+            },
+            {
+              "frame": 6,
+              "along_pixels": 65
+            }
+          ]
+        }
+      ],
+      "previous_cycle_distance": 24
+    },
+    {
+      "character": "towelWoman",
+      "view": "left",
+      "atlas_file": "../tourists/towelWoman/character-atlas.png",
+      "atlas_sha256": "7d8613902f1dc4c15479a2acd83247247918f30dc60946b6d1b898746e769c50",
+      "frames_per_cycle": 8,
+      "game_units_per_pixel": 0.5817307692307692,
+      "current_cycle_distance": 14,
+      "shoe_length_pixels": 23,
+      "sole_alpha_y_range": [
+        190,
+        202
+      ],
+      "contacts": [
+        {
+          "foot": "planted-1",
+          "edge": "max",
+          "samples": [
+            {
+              "frame": 0,
+              "along_pixels": -123
+            },
+            {
+              "frame": 1,
+              "along_pixels": -127
+            },
+            {
+              "frame": 2,
+              "along_pixels": -129
+            }
+          ]
+        },
+        {
+          "foot": "planted-2",
+          "edge": "min",
+          "samples": [
+            {
+              "frame": 4,
+              "along_pixels": -63
+            },
+            {
+              "frame": 5,
+              "along_pixels": -68
+            },
+            {
+              "frame": 6,
+              "along_pixels": -69
+            }
+          ]
+        }
+      ],
+      "previous_cycle_distance": 24
+    }
+  ]
+}

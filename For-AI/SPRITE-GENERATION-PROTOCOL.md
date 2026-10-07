@@ -72,6 +72,10 @@ and shared camera-facing pivot when changing the runtime. Verify the loaded PNG
 hash and dimensions, all directed turns, desktop/mobile gameplay, and both
 GitHub Pages views before publishing changes to this contract.
 
+For speed calibration, follow the skill's [planted-foot assessment](../.agents/skills/animate-2d-characters/references/painted-walking.md#calibrate-ground-speed-to-planted-feet): mark exact-export sole contacts, fit ground distance per cycle at the character's actual billboard scale, compare residual slide in shoe lengths, and inspect the live gait. The current distance-driven controller prevents stepping while blocked, but that alone does not verify that a planted shoe stays fixed on the ground.
+
+The accepted side-view cycle distances, in game units, are Merkel 24, Alice 27, Bayern 32, Merz 25, Herr Sandale 13.5, and Frau Sandale 14. `assets/characters/gait-calibration.json` records twelve SHA-256-bound right/left contact traces, prior settings, billboard scales, fitted distances and sole-edge measurement regions. The project skill's `scripts/assess_walk_speed.py` reproduces the fit and slip comparison. These are sole-edge contact proxies from the exact accepted pixels; inspect actual foot identity and normal-speed game playback when revising the atlas. The manifests own the runtime values and the character review sandbox reads them, so it shows the same cadence as the game. No approved art pixels or route speeds changed.
+
 This is the authoring and preview contract for the experimental articulated
 atlases in Germany Simulator. All six characters use one deterministic gait,
 one fixed registration grid, and one signed verification gate. The browser

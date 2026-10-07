@@ -1,5 +1,6 @@
 {
   "character": "borderPourer",
+  "cycle_distance": 25,
   "image": "character-atlas.png",
   "sha256": "9179b39b9b33e56e82b2ffcf324c38811f0a15c76b29d015be45019199942cb7",
   "image_size": [

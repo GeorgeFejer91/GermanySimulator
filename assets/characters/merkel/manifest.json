@@ -1,5 +1,6 @@
 {
   "character": "merkel",
+  "cycle_distance": 24,
   "image": "character-atlas.png",
   "sha256": "68991b33f050511e6f82037041399e97bc4b3d47ed86e7d62ce7bff2ae6fab1e",
   "image_size": [

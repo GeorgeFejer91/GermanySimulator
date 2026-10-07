@@ -1,5 +1,6 @@
 {
   "image": "character-atlas.png",
+  "cycle_distance": 13.5,
   "sha256": "e63653a5ecca3b683114e440b2632586a6396af1d41dbcaffbbc58570d94e4a3",
   "frame_size": [
     192,

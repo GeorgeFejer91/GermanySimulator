@@ -3,12 +3,12 @@
   const catalog=window.GermanySimulatorAudioText;
   const quizPeople=window.GermanySimulatorQuizCharacters.characters;
   const atlases={
-    merz:{manifest:"./assets/characters/borderPourer/manifest.json",cycle:41.6},
-    merkel:{manifest:"./assets/characters/merkel/manifest.json",cycle:41.6},
-    bayern:{manifest:"./assets/characters/bayern/manifest.json",cycle:41.6},
-    alice:{manifest:"./assets/characters/alice/manifest.json",cycle:41.6},
-    "towel-man":{manifest:"./assets/tourists/towelMan/manifest.json",cycle:24},
-    "towel-woman":{manifest:"./assets/tourists/towelWoman/manifest.json",cycle:24}
+    merz:{manifest:"./assets/characters/borderPourer/manifest.json"},
+    merkel:{manifest:"./assets/characters/merkel/manifest.json"},
+    bayern:{manifest:"./assets/characters/bayern/manifest.json"},
+    alice:{manifest:"./assets/characters/alice/manifest.json"},
+    "towel-man":{manifest:"./assets/tourists/towelMan/manifest.json"},
+    "towel-woman":{manifest:"./assets/tourists/towelWoman/manifest.json"}
   };
   const images=new Map();
   function imageFor(kind){const a=atlases[kind];if(!a)return null;if(!images.has(kind)){
@@ -16,11 +16,12 @@
     TouristAnimations.load(a.manifest).then(({manifest,objectURL})=>{entry.manifest=manifest;entry.img.onload=()=>URL.revokeObjectURL(objectURL);entry.img.onerror=()=>{entry.error="Artwork could not be displayed.";URL.revokeObjectURL(objectURL)};entry.img.src=objectURL}).catch(error=>{entry.error="Current artwork unavailable: "+error.message});
   }return images.get(kind)}
   function timedCell(frames,ms){for(const frame of frames){if(ms<frame.ms)return frame;ms-=frame.ms}return frames.at(-1)}
-  function previewCell(m,a,mode,from,to,time,speed){
-    const walk=(direction,t)=>({row:m.walks[direction].row,col:Math.floor((t*speed/a.cycle%1)*m.walks[direction].frames),moving:true,direction});
+  function previewCell(m,mode,from,to,time,speed){
+    const cycle=m.cycle_distance??24;
+    const walk=(direction,t)=>({row:m.walks[direction].row,col:Math.floor((t*speed/cycle%1)*m.walks[direction].frames),moving:true,direction});
     if(mode==="walk")return walk(from,time);
-    if(mode==="turn"&&to!==from){const forward=m.transitions[from+"-to-"+to]?.frames,back=m.transitions[to+"-to-"+from]?.frames;if(forward&&back){const walkMs=a.cycle/speed*1000,forwardMs=forward.reduce((n,f)=>n+f.ms,0),backMs=back.reduce((n,f)=>n+f.ms,0);let ms=time*1000%(walkMs*2+forwardMs+backMs);if(ms<walkMs)return walk(from,ms/1000);ms-=walkMs;if(ms<forwardMs)return {...timedCell(forward,ms),moving:false,direction:from};ms-=forwardMs;if(ms<walkMs)return walk(to,ms/1000);ms-=walkMs;return {...timedCell(back,ms),moving:false,direction:to}}}
-    if(mode==="pour"&&m.actions?.sidePour){const pour=m.actions[from==="down"||from==="up"?"frontPour":"sidePour"],index=Math.floor(time*1000/pour.key_ms)%pour.keys.length,key=pour.keys[index];return {row:key.row,col:key.col_start+Math.floor((time*speed/a.cycle%1)*pour.frames_per_key),moving:false,direction:from}}
+    if(mode==="turn"&&to!==from){const forward=m.transitions[from+"-to-"+to]?.frames,back=m.transitions[to+"-to-"+from]?.frames;if(forward&&back){const walkMs=cycle/speed*1000,forwardMs=forward.reduce((n,f)=>n+f.ms,0),backMs=back.reduce((n,f)=>n+f.ms,0);let ms=time*1000%(walkMs*2+forwardMs+backMs);if(ms<walkMs)return walk(from,ms/1000);ms-=walkMs;if(ms<forwardMs)return {...timedCell(forward,ms),moving:false,direction:from};ms-=forwardMs;if(ms<walkMs)return walk(to,ms/1000);ms-=walkMs;return {...timedCell(back,ms),moving:false,direction:to}}}
+    if(mode==="pour"&&m.actions?.sidePour){const pour=m.actions[from==="down"||from==="up"?"frontPour":"sidePour"],index=Math.floor(time*1000/pour.key_ms)%pour.keys.length,key=pour.keys[index];return {row:key.row,col:key.col_start+Math.floor((time*speed/cycle%1)*pour.frames_per_key),moving:false,direction:from}}
     const state=m.interactions?.states?.[mode];if(state){const durations=state.durations_ms,total=durations.reduce((n,v)=>n+v,0);let ms=time*1000%total,col=0;while(ms>=durations[col])ms-=durations[col++];return {row:state.row,col,moving:false,direction:state.body_facing||from}}
     return {row:m.walks[from].row,col:0,moving:false,direction:from};
   }
@@ -92,7 +93,8 @@
     const dt=Math.min(.05,(now-lastFrame)/1000);lastFrame=now;if(playing)elapsed+=dt;
     ctx.clearRect(0,0,400,290);ctx.fillStyle="#a7a39a";ctx.fillRect(0,0,400,290);
     ctx.strokeStyle="#dfd9cc";ctx.lineWidth=2;ctx.beginPath();ctx.moveTo(42,202);ctx.lineTo(358,202);ctx.stroke();
-    const speed=current.speed||0,visualBody=current.body==="quiz"?"towel-man":current.body,a=atlases[visualBody],entry=imageFor(visualBody),ready=!!(entry?.manifest&&entry.img.complete&&entry.img.naturalWidth),cell=ready?previewCell(entry.manifest,a,action.value,facing.value,turnTo.value,elapsed,speed):null,moving=cell?.moving??(action.value==="walk"&&speed>0),direction=cell?.direction||facing.value,phase=moving?(elapsed*speed/(a?.cycle||41.6))%1:0,travel=moving?phase*210:105,x=direction==="left"?306-travel:direction==="right"?94+travel:200,y=direction==="up"?230-travel*.55:direction==="down"?115+travel*.55:194;
+    const speed=current.speed||0,visualBody=current.body==="quiz"?"towel-man":current.body,a=atlases[visualBody],entry=imageFor(visualBody),ready=!!(entry?.manifest&&entry.img.complete&&entry.img.naturalWidth),cell=ready?previewCell(entry.manifest,action.value,facing.value,turnTo.value,elapsed,speed):null,moving=cell?.moving??(action.value==="walk"&&speed>0),direction=cell?.direction||facing.value,cycle=entry?.manifest?.cycle_distance??24,phase=moving?(elapsed*speed/cycle)%1:0,travel=moving?phase*210:105,x=direction==="left"?306-travel:direction==="right"?94+travel:200,y=direction==="up"?230-travel*.55:direction==="down"?115+travel*.55:194;
+    if(a&&entry?.manifest){const note=`${current.movement} One walk cycle covers ${cycle} game units.`;if($("movement-note").textContent!==note)$("movement-note").textContent=note}
     ctx.strokeStyle="#756e63";ctx.setLineDash([5,6]);ctx.beginPath();if(direction==="left"||direction==="right"){ctx.moveTo(70,194);ctx.lineTo(330,194)}else{ctx.moveTo(200,100);ctx.lineTo(200,235)}ctx.stroke();ctx.setLineDash([]);
     if(cell){const m=entry.manifest,sw=m.frame_size[0],sh=m.frame_size[1],drawH=148,drawW=drawH*sw/sh;ctx.drawImage(entry.img,cell.col*sw,cell.row*sh,sw,sh,x-drawW/2,y-drawH+8,drawW,drawH);stage.dataset.asset="current";stage.dataset.frame=`${cell.row}:${cell.col}`}
     else if(a){stage.dataset.asset=entry?.error?"error":"loading";stage.dataset.frame="";ctx.fillStyle="#2b2925";ctx.font='700 16px "Preview Sans"';ctx.textAlign="center";ctx.fillText(entry?.error||"Loading current artwork…",200,150,350)}

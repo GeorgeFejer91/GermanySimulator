@@ -15,12 +15,16 @@ for(const [family,kind] of [['tourists','towelMan'],['tourists','towelWoman'],['
  const bytes=Buffer.from(await (await fetch(payload.objectURL)).arrayBuffer());
  assert.equal(crypto.createHash('sha256').update(bytes).digest('hex'),m.sha256);
  URL.revokeObjectURL(payload.objectURL);
+ const cycle=m.cycle_distance??24;
+ const starting={spriteFrame:6};api.request(starting,...vectors.right,m);
+ assert.equal(starting.gaitDistance,cycle*6/8);
+ if(m.actions?.sidePour){const actor={touristFacing:'right',gaitDistance:cycle*3.5/8};assert.ok(api.action(actor,'sidePour',.5,1,m,41.6));assert.equal(actor.spriteFrame,m.actions.sidePour.keys[4].col_start+3)}
  for(const source of Object.keys(vectors)) for(const target of Object.keys(vectors)) {
   if(source===target)continue;
-  const n={touristFacing:source,touristRequested:source,gaitDistance:20,spriteFrame:6,spriteRow:m.walks[source].row};
+  const n={touristFacing:source,touristRequested:source,gaitDistance:cycle-4,spriteFrame:6,spriteRow:m.walks[source].row};
   api.request(n,...vectors[target],m);
-  api.advance(n,1,.02,m);assert.equal(n.gaitDistance,21);assert.equal(n.spriteRow,m.walks[source].row);
-  api.request(n,...vectors[target],m);assert.equal(n.gaitDistance,21);
+  api.advance(n,1,.02,m);assert.equal(n.gaitDistance,cycle-3);assert.equal(n.spriteRow,m.walks[source].row);
+  api.request(n,...vectors[target],m);assert.equal(n.gaitDistance,cycle-3);
   const held=n.spriteFrame;api.advance(n,0,.5,m);assert.equal(n.spriteFrame,held);assert.ok(!api.isTurning(n));
   api.advance(n,3,.02,m);assert.ok(api.isTurning(n));
   const wanted=m.transitions[source+'-to-'+target].frames;
@@ -37,7 +41,7 @@ for(const [family,kind] of [['tourists','towelMan'],['tourists','towelWoman'],['
   assert.equal(n.touristFacing,target);assert.equal(n.spriteFrame,0);assert.equal(n.gaitDistance,0);
   assert.equal(n.touristRequested,source); // reconsider only at the next completed stride
   api.request(n,...vectors[target],m);api.advance(n,3,.02,m);
-  assert.equal(n.gaitDistance,3);assert.equal(n.spriteFrame,1);assert.equal(n.spriteFlip,false);
+  assert.equal(n.gaitDistance,3);assert.equal(n.spriteFrame,Math.floor(3/cycle*8));assert.equal(n.spriteFlip,false);
   paths++;
  }
 }

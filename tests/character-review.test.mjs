@@ -32,17 +32,18 @@ for(const [kind,atlas] of Object.entries(atlases)){
   const png=Buffer.from(m.png_parts.map(part=>JSON.parse(readFileSync(resolve(dirname(path),part),"utf8")).base64).join(""),"base64");
   assert.equal(createHash("sha256").update(png).digest("hex"),m.sha256,`${kind} current artwork hash`);
   assert.equal(png.readUInt32BE(16),m.image_size[0]);assert.equal(png.readUInt32BE(20),m.image_size[1]);
+  assert.ok(m.cycle_distance>0,`${kind} needs a measured cycle distance`);
   for(const from of ["right","left","down","up"]){
-    const walk=previewCell(m,atlas,"walk",from,"up",.2,40);
+    const walk=previewCell(m,"walk",from,"up",.2,40);
     assert.equal(walk.row,m.walks[from].row,`${kind} ${from} walk`);
     for(const to of ["right","left","down","up"]){if(from===to)continue;
       assert.ok(m.transitions[from+"-to-"+to],`${kind} ${from}→${to} arc`);
-      const turn=previewCell(m,atlas,"turn",from,to,atlas.cycle/40+.01,40);
+      const turn=previewCell(m,"turn",from,to,m.cycle_distance/40+.01,40);
       assert.ok(m.transitions[from+"-to-"+to].frames.some(frame=>frame.row===turn.row&&frame.col===turn.col),`${kind} ${from}→${to} uses reviewed turn pixels`);
     }
   }
-  if(Object.keys(m.actions||{}).length)assert.ok(previewCell(m,atlas,"pour","right","up",.3,40).row>=m.walks.up.row,`${kind} pouring cells`);
-  if(m.interactions)assert.equal(previewCell(m,atlas,"waving","right","up",.2,40).row,m.interactions.states.waving.row,`${kind} reaction cells`);
+  if(Object.keys(m.actions||{}).length)assert.ok(previewCell(m,"pour","right","up",.3,40).row>=m.walks.up.row,`${kind} pouring cells`);
+  if(m.interactions)assert.equal(previewCell(m,"waving","right","up",.2,40).row,m.interactions.states.waving.row,`${kind} reaction cells`);
 }
 for(const id of ["herr-sandale","frau-sandale"])assert.ok(profiles.some(person=>person.id===id),`${id} needs a direct link`);
 const owner={merz:"merz",merkel:"merkel",bayern:"bayern",alice:"alice"};

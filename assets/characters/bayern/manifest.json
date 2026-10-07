@@ -1,5 +1,6 @@
 {
   "character": "bayern",
+  "cycle_distance": 32,
   "image": "character-atlas.png",
   "sha256": "36d2f68f9fe23539bf1f71be77880e7387ec346441b56b0d2262813d01c42e55",
   "image_size": [
