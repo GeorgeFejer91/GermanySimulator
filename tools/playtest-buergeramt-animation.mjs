@@ -41,17 +41,8 @@ function observe(page,report){
 }
 async function record(page,dir,label,images){
  await page.evaluate(()=>Germany3D.sync());
- const file=path.join(dir,`${label}.png`),data=await page.screenshot({path:file,timeout:60000});
- images.push({label,data});return file;
-}
-async function strip(browser,viewport,images,dir){
- const width=Math.min(360,viewport.width),height=Math.round(viewport.height*width/viewport.width),rows=Math.ceil(images.length/4);
- const page=await browser.newPage({viewport:{width:width*4,height:(height+28)*rows},deviceScaleFactor:1});
- const cards=images.map(({label,data})=>`<div><img src="data:image/png;base64,${data.toString('base64')}"><span>${label}</span></div>`).join('');
- await page.setContent(`<style>*{box-sizing:border-box}body{margin:0;background:#202126;color:#fff;font:13px Arial;display:grid;grid-template-columns:repeat(4,${width}px)}div{height:${height+28}px;border:1px solid #555}img{display:block;width:${width}px;height:${height}px}span{padding:5px}</style>${cards}`);
- await page.locator('img').first().evaluate(img=>img.decode());
- await page.screenshot({path:path.join(dir,'reaction-strip.png'),fullPage:true});
- await page.close();
+ const file=path.join(dir,`${label}.png`);await page.screenshot({path:file,timeout:60000});
+ images.push({label});return file;
 }
 
 async function officeCase(name,viewport,mobile,dpr){
@@ -130,7 +121,6 @@ async function officeCase(name,viewport,mobile,dpr){
   await page.waitForFunction(()=>window.BuergeramtLevel?.active&&BuergeramtLevel.stage==='outside'&&window.Germany3D?.ready,null,{timeout:60000});
   assert((await page.evaluate(()=>BuergeramtLevel.characters)).every(a=>a.mode==='work'),'replay must clear old action');
   await record(page,dir,'replay',images);
-  await strip(browser,viewport,images,dir);
   report.result=report.errors.length?'FAIL':'PASS';
  }catch(error){report.result='FAIL';report.errors.push(String(error));report.failureState=await page.evaluate(()=>({stage:window.BuergeramtLevel?.stage,actors:window.Germany3D?.amtCharacters,office:window.Germany3D?.amtOffice?.attached})).catch(()=>null);await page.screenshot({path:path.join(dir,'failure.png'),timeout:10000}).catch(()=>{})}
  finally{report.screenshots=images.map(x=>x.label);fs.writeFileSync(path.join(dir,'result.json'),JSON.stringify(report,null,2));await context.close()}
