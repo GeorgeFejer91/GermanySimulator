@@ -690,7 +690,7 @@ function showRendererFailure(error){
     const hairCap=new T.Mesh(new T.SphereGeometry(.595,14,9,0,Math.PI*2,0,Math.PI*.49),hair);hairCap.position.set(-.025,5.4,-.025);figure.add(hairCap);
     for(let i=0;i<3;i++){const sweep=box(.32,.09,.16,hair,-.32+i*.25,5.52+i*.045,.36,figure);sweep.rotation.z=-.2}
     queueCityModel(()=>({x:g.position.x,z:g.position.z}),3.8,async()=>{try{
-      const gltf=await loadLocalModel("./assets/models/kiesinger/kiesinger-statue.glb?v=20260927-marble6");if(!gltf)return false;const model=gltf.scene.clone(true);
+      const gltf=await loadLocalModel("./assets/models/kiesinger/kiesinger-statue.glb?v=20261008-portrait-fit");if(!gltf)return false;const model=gltf.scene.clone(true);
       const bounds=new T.Box3().setFromObject(model),size=bounds.getSize(new T.Vector3());
       if(![size.x,size.y,size.z].every(v=>Number.isFinite(v)&&v>0)||Math.abs(size.y-6)>.05||Math.abs(bounds.min.y)>.05)throw new Error("Kiesinger figure must be 6 units tall with shoes at y=0");
       model.name="KiesingerSculpture";model.position.copy(figure.position);g.add(model);figure.visible=false;matchKiesingerHeight();return true;

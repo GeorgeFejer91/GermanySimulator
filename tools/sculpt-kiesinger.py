@@ -8,6 +8,7 @@ from pathlib import Path
 import math
 import json
 import hashlib
+import sys
 import numpy as np
 import bmesh
 import bpy
@@ -368,11 +369,11 @@ for stage in range(1,5):
     for i in oval:
         p=pv[i];upper=max(0,(p.z-5.54)/.30)
         if stage==1:
-            q=(p.x*1.025,p.y*.36+.085,p.z+.105*upper+.01)
+            q=(p.x*1.025,p.y*.55+.045,p.z+.180*upper+.01)
         elif stage==2:
-            q=(p.x*.90,.245,5.59+(p.z-5.53)*.89)
+            q=(p.x*.90,.245,5.59+(p.z-5.53)*.89+.065*upper)
         elif stage==3:
-            q=(p.x*.52,.328,5.61+(p.z-5.53)*.55)
+            q=(p.x*.52,.328,5.61+(p.z-5.53)*.55+.045*upper)
         else:q=(p.x*.08,.350,5.63+(p.z-5.53)*.09)
         ring.append(len(verts));verts.append(q)
     for j in range(len(oval)):
@@ -410,14 +411,14 @@ def crease(points,amount,width,roll=0):
     fade=np.sin(np.pi*fraction)**.6
     depth[:]+=fade*(amount*np.exp(-(distance/width)**2)-roll*np.exp(-((signed-width*2)/(width*1.6))**2))
 for side in [-1,1]:
-    mound(side*.137,5.663,.070,.025,-.006)
-    mound(side*.132,5.632,.070,.030,.007)
+    mound(side*.137,5.663,.070,.025,-.0035)
+    mound(side*.132,5.632,.070,.030,.0035)
     mound(side*.132,5.691,.075,.027,-.004)
     mound(side*.231,5.731,.049,.055,.004)
     mound(side*.140,5.587,.065,.024,-.0065)
-    mound(side*.208,5.516,.055,.055,-.003)
-    mound(side*.205,5.465,.051,.054,.0035)
-    mound(side*.219,5.371,.058,.074,-.007)
+    mound(side*.208,5.516,.055,.055,.002)
+    mound(side*.205,5.465,.051,.054,.005)
+    mound(side*.219,5.371,.058,.074,-.004)
     crease([(side*.056,5.610),(side*.097,5.585),(side*.156,5.578),(side*.212,5.603)],.0065,.004,.003)
     crease([(side*.060,5.648),(side*.117,5.670),(side*.171,5.664),(side*.206,5.634)],.0035,.0028,.0015)
     crease([(side*.074,5.471),(side*.088,5.420),(side*.117,5.378),(side*.129,5.337)],.0060,.005,.0035)
@@ -464,13 +465,13 @@ coords[:,1]+=(depth+grain+tooling)*front-relief*photo_mask
 # A little lower-face fullness and descent age the portrait without changing
 # its base landmark cage, expression, or the fitted eye openings.
 jowl=np.exp(-((np.abs(x)-.225)/.057)**2-((z-5.350)/.083)**2)*front
-coords[:,0]+=np.sign(x)*.005*jowl
+coords[:,0]+=np.sign(x)*.002*jowl
 coords[:,2]-=.006*jowl
 head.data.vertices.foreach_set("co",coords.ravel());head.data.update()
 tone=np.clip(1+.13*(lum/np.maximum(illumination,.04)-1)+.12*(lum-local),.82,1.08)
 tone=1+(tone-1)*photo_mask
 socket=np.exp(-((np.abs(x)-.132)/.074)**4-((z-5.637)/.034)**2)*front
-tone*=1-.36*socket
+tone*=1-.14*socket
 colors=np.ones((len(coords),4));colors[:,:3]=tone[:,None]*np.array(MARBLE.diffuse_color[:3])
 patina=head.data.color_attributes.new(name="Stone shading",type="FLOAT_COLOR",domain="POINT")
 patina.data.foreach_set("color",colors.ravel())
@@ -512,8 +513,17 @@ for points in eye_boundaries:
         for i in range(n):
             a=j*n+i;b=j*n+(i+1)%n;faces.append((a,b,b+n,a+n))
     faces.append(tuple(reversed(range(n))))
-    eye=mesh("Eyelid fitted continuous cast eye",verts,faces,RECESS)
+    eye=mesh("Eyelid fitted continuous cast eye",verts,faces,MARBLE)
     bm=bmesh.new();bm.from_mesh(eye.data);bmesh.ops.recalc_face_normals(bm,faces=bm.faces);bm.to_mesh(eye.data);bm.free()
+    # Keep iris/pupil contrast local to their engravings: darkening the whole
+    # eye made the original lids look like empty slits, while unshaded marble
+    # loses the gaze. Vertex tone survives the existing texture-free export.
+    eye_positions=np.array(verts)
+    iris_distance=np.hypot(eye_positions[:,0]-iris_x,eye_positions[:,2]-iris_z)
+    eye_tone=1-.30*np.exp(-(iris_distance/.021)**6)-.52*np.exp(-(iris_distance/.007)**4)
+    eye_colors=np.ones((len(verts),4));eye_colors[:,:3]=eye_tone[:,None]*np.array(MARBLE.diffuse_color[:3])
+    eye_shading=eye.data.color_attributes.new(name="Stone shading",type="FLOAT_COLOR",domain="POINT")
+    eye_shading.data.foreach_set("color",eye_colors.ravel())
 
 # CC0 anatomical ear patch from MakeHuman's artist-authored base mesh. Only
 # its ear topology is reused; dimensions and seating are fitted to the portrait.
@@ -522,8 +532,8 @@ bm=bmesh.new();bm.from_mesh(head.data);ear_scalp=BVHTree.FromBMesh(bm);bm.free()
 for side in [-1,1]:
     verts=[]
     for x,y,z in ear_source["vertices"]:
-        outward=.284+(x-.69)*.50
-        height=5.548+(y-7.115)*.50
+        outward=.281+(x-.69)*.40
+        height=5.548+(y-7.115)*.47
         depth=.012-(z-.46)*.46+(height-5.548)*.10
         verts.append((side*outward,depth,height))
     faces=ear_source["faces"]
@@ -567,7 +577,9 @@ for side in [-1,1]:
 forehead=[21,54,103,67,109,10,338,297,332,284,251]
 boundary=[(-math.pi,Vector((-.307,.015,5.58)))]
 for i in forehead:
-    p=pv[i].copy();p.z-=.008+.010*math.exp(-((p.x+.18)/.05)**2)
+    # Face landmark 10 lies below the photographed hairline. Raising the
+    # central scalp boundary restores the tall forehead seen in the KAS view.
+    p=pv[i].copy();p.z+=.105*math.exp(-(p.x/.215)**4)-.008
     boundary.append((math.atan2((p.y-.02)/.33,p.x/.31),p))
 boundary.extend([(0,Vector((.309,.015,5.58))),(math.pi*.25,Vector((.245,.225,5.48))),
                  (math.pi*.5,Vector((0,.310,5.345))),(math.pi*.75,Vector((-.245,.225,5.48))),
@@ -590,25 +602,25 @@ for j in range(hl):
         edge=.005*math.sin(a*31)+.003*math.sin(a*67+1.3)
         rr=min(1.012,r+edge*r**8)
         x=b.x*rr-.027*(1-r)**2;y=.025+(b.y-.025)*rr
-        z=b.z+(6.007-b.z)*math.sqrt(max(0,1-r*r))
+        z=b.z+(6.11-b.z)*math.sqrt(max(0,1-r*r))
         ray=(Vector((x,y,z))-skull_center).normalized()
         hit,normal,_,_=skull.ray_cast(skull_center,ray)
         if hit is not None:
             x,y,z=hit
             part_x=-.175+.21*(y+.26)
             big_side=x>part_x
-            flow=x-(.27 if big_side else -.16)*(y+.27)-(.073 if big_side else -.045)*math.sin((y+.27)*6)
-            phase=flow*151+.9*math.sin(flow*23)+.65*math.sin(y*9+x*12)
-            lock=.0048*(.5+.5*math.cos(phase))**2.1
-            lock+=.0020*(.5+.5*math.cos(flow*63+.7*math.sin(y*8)))
+            flow=x-(.29 if big_side else -.15)*(y+.27)-(.067 if big_side else -.037)*math.sin((y+.27)*6)
+            phase=flow*210+1.3*math.sin(flow*23)+.85*math.sin(y*9+x*12)
+            lock=.0032*(.5+.5*math.cos(phase))**2.1
+            lock+=.0012*(.5+.5*math.cos(flow*63+.7*math.sin(y*8)))
             strand=.00055*math.cos(phase*3.13+.4*math.sin(flow*67))
             rear=max(0,min(1,(y-.04)/.18))
             rear_phase=math.atan2(x,max(.01,y-.02))*45+1.8*math.sin(z*7+x*3)
             lock=lock*(1-rear)+rear*.0030*(.5+.5*math.cos(rear_phase))**2
             strand=strand*(1-rear)+rear*.0005*math.cos(rear_phase*3.1)
-            wave=.071*math.exp(-((x+.015)/.21)**2-((y+.17)/.24)**2)
-            wave+=.023*math.exp(-((x+.25)/.063)**2-((y+.12)/.19)**2)
-            part=.008*math.exp(-((x-part_x)/.007)**2)
+            wave=.040*math.exp(-((x-.025)/.23)**2-((y+.12)/.26)**2)
+            wave+=.014*math.exp(-((x+.25)/.063)**2-((y+.12)/.19)**2)
+            part=.003*math.exp(-((x-part_x)/.010)**2)
             feather=min(1,max(0,(1-r)/.12));feather=feather*feather*(3-2*feather)
             volume=(1-r*r)**1.15
             lift=-.0004+wave*volume*1.4+feather*(.003+lock+strand-part+rear*.0035)
@@ -663,7 +675,7 @@ for source in parts:
     if len(copy.data.polygons)>200 and not source.get("preserve_edges"):
         bpy.context.view_layer.objects.active=copy
         d=copy.modifiers.new("Game sculpt reduction", "DECIMATE")
-        d.ratio=.073 if "photo fitted portrait" in source.name else (.075 if "Anatomical auricle" in source.name else (.16 if "continuous cast eye" in source.name else (.30 if "Photo matched swept hair" in source.name else (.18 if "Continuous tailored suit" in source.name else (.12 if len(copy.data.polygons)>1500 else .55)))))
+        d.ratio=.073 if "photo fitted portrait" in source.name else (.075 if "Anatomical auricle" in source.name else (.16 if "continuous cast eye" in source.name else (.27 if "Photo matched swept hair" in source.name else (.18 if "Continuous tailored suit" in source.name else (.12 if len(copy.data.polygons)>1500 else .55)))))
         bpy.ops.object.modifier_apply(modifier=d.name)
     gameparts.append(copy)
 export_suit=next(o for o in gameparts if "Continuous tailored suit" in o.name)
@@ -716,6 +728,7 @@ data.type="ORTHO"
 
 
 def shot(name, position, target, scale, width=1000,height=1200):
+    if "--skip-renders" in sys.argv:return
     cam.location=position;cam.rotation_euler=(Vector(target)-cam.location).to_track_quat("-Z","Y").to_euler();data.ortho_scale=scale
     scene.render.resolution_x=width;scene.render.resolution_y=height
     scene.render.filepath=str(PREVIEW/(name+".png"))
@@ -742,3 +755,4 @@ for screen in bpy.data.screens:
             space.region_3d.view_rotation=cam.rotation_euler.to_quaternion()
 bpy.ops.wm.save_as_mainfile(filepath=str(DEST/"kiesinger-statue.blend"),compress=True)
 print(f"KIESINGER_SCULPT triangles={triangles} bytes={(DEST/'kiesinger-statue.glb').stat().st_size}")
+(PREVIEW/"export.json").write_text(json.dumps({"scale":factor,"triangles":triangles,"bytes":(DEST/"kiesinger-statue.glb").stat().st_size,"blender":bpy.app.version_string},indent=2)+"\n")

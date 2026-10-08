@@ -42,13 +42,15 @@ The monument’s dated historical Reich flag and the CDU banners on this monumen
 The monumental marble figure of Kurt Georg Kiesinger was authored in Blender
 with an original civilian body and pose. Its face fits offline landmarks from
 CDU / KAS-ACDP's 1967 portrait (CC BY-SA 3.0 DE), Anefo / Nationaal Archief
-919-8404 (CC0), and the ThePhotoEnhancer crop of Anefo 919-8423 (CC BY-SA 4.0).
+919-8404 (CC0), the ThePhotoEnhancer crop of Anefo 919-8423 (CC BY-SA 4.0),
+and Bundesarchiv B 145 Bild-F028914-0011 / Detlef Gräfingholt (CC BY-SA 3.0 DE).
 MediaPipe's canonical face connectivity and alignment reference are reused
 under Apache 2.0; the adjacent `LICENSE-MEDIAPIPE.txt` retains that license.
 The authored model adaptation is [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/).
 The licensed KAS portrait also supplies shallow relief and restrained stone
-vertex shading. No image textures or ML runtime are bundled. HDG and Bundesarchiv
-portraits were visual inspection references only. Full source links,
+vertex shading. No image textures or ML runtime are bundled. The Oberhausen
+Bundesarchiv photograph / Jens Gathmann (CC BY-SA 3.0 DE) is withheld from
+shape fitting for a correspondence check; the HDG portrait is visual-only. Full source links,
 attributions, modifications, rebuild instructions, and checksums are in
 `assets/models/kiesinger/PROVENANCE.md`.
 

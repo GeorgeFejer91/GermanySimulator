@@ -4,6 +4,18 @@ import {existsSync,readFileSync} from "node:fs";
 
 const modelUrl=new URL("../assets/models/kiesinger/kiesinger-statue.glb",import.meta.url);
 const model=readFileSync(modelUrl);
+// The offline face must keep its body attachment and orientation contract.
+// A solver axis/scale error can leave a valid GLB with an invalid portrait.
+const portrait=JSON.parse(readFileSync(new URL("../assets/models/kiesinger/portrait-landmarks.json",import.meta.url),"utf8"));
+assert.equal(portrait.vertices.length,468);
+assert.ok(portrait.vertices.every(p=>p.length===3&&p.every(Number.isFinite)));
+assert.ok(portrait.faces.every(f=>f.length>=3&&f.every(i=>Number.isInteger(i)&&i>=0&&i<468)));
+assert.ok(Math.abs(portrait.vertices[152][2]-5.16)<1e-5,"the chin must meet the authored neck");
+assert.ok(Math.abs(portrait.vertices[10][2]-5.84)<1e-5,"the forehead must retain the head scale");
+assert.ok(portrait.vertices[234][0]<0&&portrait.vertices[454][0]>0,"the face must retain left/right orientation");
+assert.ok(portrait.vertices[1][1]<Math.min(portrait.vertices[234][1],portrait.vertices[454][1])-.15,"the nose must project in front of the cheeks");
+assert.equal(portrait.neutral_photo_uv.length,468);
+assert.ok(portrait.neutral_photo_uv.every(p=>p.length===2&&p.every(v=>Number.isFinite(v)&&v>=0&&v<=1)),"reference projection must remain within the credited portrait");
 assert.equal(model.readUInt32LE(0),0x46546c67,"the statue must be a binary glTF");
 assert.equal(model.readUInt32LE(4),2,"the statue must use glTF 2.0");
 assert.equal(model.readUInt32LE(8),model.length,"the GLB header must declare its exact size");
