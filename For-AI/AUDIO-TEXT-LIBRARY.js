@@ -764,7 +764,19 @@ const candidateDialogue=Object.freeze(Object.fromEntries([
  ["spieler-hans-peter-mustermann","Great. Selbst die Maschine hat mehr Pause verdient als ich.","assets/voices/candidate-dialogue/spieler-hans-peter-mustermann-berlin-coffee-02.mp3"],
  ["spieler-hans-peter-mustermann","Natürlich verpasse ich den Zug. Even mein Scheitern hat Verspätung.","assets/voices/candidate-dialogue/spieler-hans-peter-mustermann-berlin-train-01.mp3"],
  ["spieler-hans-peter-mustermann","Nicht einmal der Kaffeeautomat wants responsibility für mich.","assets/voices/candidate-dialogue/spieler-hans-peter-mustermann-berlin-coffee-01.mp3"],
- ["spieler-hans-peter-mustermann","Schon wieder ein Tag weg. I am late sogar für mein eigenes Scheitern.","assets/voices/candidate-dialogue/spieler-hans-peter-mustermann-berlin-deadline-01.mp3"]
+ ["spieler-hans-peter-mustermann","Schon wieder ein Tag weg. I am late sogar für mein eigenes Scheitern.","assets/voices/candidate-dialogue/spieler-hans-peter-mustermann-berlin-deadline-01.mp3"],
+ ["crowd-dietmar-din-norm","Dieser Platz ist seit 07:04 Uhr durch textile Willenserklärung reserviert.","assets/voices/candidate-dialogue/crowd-dietmar-din-norm-01.mp3"],
+ ["crowd-dietmar-din-norm","Dieser Platz ist seit 07:04 durch textile Willenserklärung reserved.","assets/voices/candidate-dialogue/crowd-dietmar-din-norm-03.mp3"],
+ ["crowd-horst-hausordnung","Dieser Platz ist seit 07:04 durch textile Willenserklärung reserved.","assets/voices/candidate-dialogue/crowd-horst-hausordnung-03.mp3"],
+ ["crowd-manfred-mittagsruhe","Dieser Platz ist seit 07:04 durch textile Willenserklärung reserved.","assets/voices/candidate-dialogue/crowd-manfred-mittagsruhe-03.mp3"],
+ ["crowd-elfriede-eingabe","Your Schatten fällt in meinen amtlich vorgemerkten Sonnenkorridor.","assets/voices/candidate-dialogue/crowd-elfriede-eingabe-04.mp3"],
+ ["crowd-irmgard-aktenordner","Your Schatten fällt in meinen amtlich vorgemerkten Sonnenkorridor.","assets/voices/candidate-dialogue/crowd-irmgard-aktenordner-04.mp3"],
+ ["crowd-brigitte-bueroklammer","Your Schatten fällt in meinen amtlich vorgemerkten Sonnenkorridor.","assets/voices/candidate-dialogue/crowd-brigitte-bueroklammer-04.mp3"],
+ ["crowd-waltraud-wartemarke","Your Schatten fällt in meinen amtlich vorgemerkten Sonnenkorridor.","assets/voices/candidate-dialogue/crowd-waltraud-wartemarke-04.mp3"],
+ ["crowd-baerbel-brezel","Your Schatten fällt in meinen amtlich vorgemerkten Sonnenkorridor.","assets/voices/candidate-dialogue/crowd-baerbel-brezel-04.mp3"],
+ ["crowd-guenther-gartenzaun","Dieser Platz ist seit 07:04 durch textile Willenserklärung reserved.","assets/voices/candidate-dialogue/crowd-guenther-gartenzaun-03.mp3"],
+ ["crowd-klaus-dieter-knoedel","Dieser Platz ist seit 07:04 durch textile Willenserklärung reserved.","assets/voices/candidate-dialogue/crowd-klaus-dieter-knoedel-03.mp3"],
+ ["crowd-ruediger-rasenkante","Dieser Platz ist seit 07:04 durch textile Willenserklärung reserved.","assets/voices/candidate-dialogue/crowd-ruediger-rasenkante-03.mp3"]
 ].map(([voiceId,text,path])=>[voiceId+"\u0000"+text,path])));
 function candidateClip(voiceId,text){return candidatePreviewEnabled?candidateDialogue[voiceId+"\u0000"+text]||null:null}
 

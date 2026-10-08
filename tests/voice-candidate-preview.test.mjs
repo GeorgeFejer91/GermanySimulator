@@ -30,19 +30,36 @@ const load=search=>{
 };
 const off=load("");
 const on=load("?voicePreview=1");
-assert.equal(manifest.lineCount,206);
+assert.equal(manifest.lineCount,218);
 assert.equal(manifest.clips.filter(clip=>clip.asrWordExact).length,153);
 assert.equal(manifest.clips.filter(clip=>clip.voiceId==="polizei-heinrich-wachtmeister"&&!clip.clipId.includes("-phone-")).length,12);
 assert.equal(manifest.clips.filter(clip=>clip.clipId.startsWith("polizei-heinrich-wachtmeister-phone-")).length,4);
 assert.equal(manifest.clips.filter(clip=>clip.voiceId==="spieler-hans-peter-mustermann").length,40);
 const bilingual=manifest.clips.filter(clip=>clip.asrSegmentWordExact);
-assert.equal(bilingual.length,3);
+assert.equal(bilingual.length,8);
 for(const clip of bilingual){
  assert.equal(clip.renderSegments.length,clip.asrSegments.length);
  assert.ok(clip.asrSegments.every((segment,index)=>segment.asrWordExact&&segment.language===clip.renderSegments[index].language&&segment.text===clip.renderSegments[index].text));
 }
+const clockEquivalent=text=>text.normalize("NFKC").toLowerCase().replaceAll("textilewillenserklärung","textile willenserklärung").replace(/\b(?:sieben|07|7)\s*(?:uhr|[.:,])\s*(?:vier|04|4)(?:\s*uhr)?\b/g,"07:04").match(/[\p{L}\p{N}]+/gu)?.join(" ")||"";
+const clockClips=manifest.clips.filter(clip=>clip.asrClockEquivalent);
+assert.equal(clockClips.length,4);
+for(const clip of clockClips){
+ assert.equal(clip.asrWordExact,false);
+ assert.equal(clockEquivalent(clip.asr),clockEquivalent(clip.text));
+ assert.equal(clip.asrSegments.length,clip.renderSegments.length);
+ assert.ok(clip.asrSegments.every((part,index)=>clockEquivalent(part.asr)===clockEquivalent(clip.renderSegments[index].text)));
+}
+const clockBilingual=manifest.clips.filter(clip=>clip.asrBilingualPartsClockEquivalent);
+assert.equal(clockBilingual.length,3);
+for(const clip of clockBilingual){
+ assert.equal(clip.asrWordExact,false);
+ assert.equal(clip.asrSegments.length,2);
+ assert.equal(clockEquivalent(clip.asrSegments[0].asr),clockEquivalent(clip.renderSegments[0].text));
+ assert.equal(clip.asrSegments[1].asr.toLowerCase(),"reserved");
+}
 const crowdClips=manifest.clips.filter(clip=>clip.voiceId.startsWith("crowd-"));
-assert.equal(crowdClips.length,36);
+assert.equal(crowdClips.length,48);
 assert.equal(new Set(crowdClips.map(clip=>clip.voiceId)).size,12);
 assert.equal(on.candidatePreviewEnabled,true);
 assert.equal(off.candidatePreviewEnabled,false);

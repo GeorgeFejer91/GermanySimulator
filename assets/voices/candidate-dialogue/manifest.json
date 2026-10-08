@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "status": "unreviewed opt-in preview; not release-cleared",
-  "lineCount": 206,
+  "lineCount": 218,
   "clips": [
     {
       "clipId": "amt-horst-stempelmann-01",
@@ -3296,6 +3296,620 @@
       "sha256": "fa1f9f90011ba0e77afd547af162dbde55f55afbbc57a2b99034c8f4896b7d7f",
       "takeId": "spieler-hans-peter-mustermann-berlin-deadline-01--segmented",
       "status": "opt-in listening-review candidate; not release-cleared"
+    },
+    {
+      "clipId": "crowd-dietmar-din-norm-01",
+      "voiceId": "crowd-dietmar-din-norm",
+      "profileId": "44123656a3404719abf0a2d6a05047ee",
+      "text": "Dieser Platz ist seit 07:04 Uhr durch textile Willenserklärung reserviert.",
+      "referenceSha256": "36dc3144368143e0894dc1f400bdffe82e6842b2ae3d54a7fb03a3b7c94c55bf",
+      "renderer": "ResembleAI/Chatterbox Multilingual V2 0.1.7",
+      "modelRevision": "5bb1f6ee58e50c3b8d408bc82a6d3740c2db6e18",
+      "modelLicense": "MIT",
+      "durationSeconds": 4.176,
+      "asr": "Dieser Platz ist seit 7.04 Uhr durch textile Willenserklärung reserviert.",
+      "asrWordExact": false,
+      "asrClockEquivalent": true,
+      "asrSegments": [
+        {
+          "language": "de",
+          "text": "Dieser Platz ist seit sieben Uhr vier durch textile Willenserklärung reserviert.",
+          "asr": "Dieser Platz ist seit 7.04 Uhr durch textile Willenserklärung reserviert.",
+          "asrWordExact": false
+        }
+      ],
+      "renderSegments": [
+        {
+          "language": "de",
+          "text": "Dieser Platz ist seit sieben Uhr vier durch textile Willenserklärung reserviert."
+        }
+      ],
+      "path": "assets/voices/candidate-dialogue/crowd-dietmar-din-norm-01.mp3",
+      "sha256": "c68845ee898000c8d7278f0f82a619bc4d070f42f267c3e1b2c88c152769b656",
+      "takeId": "crowd-dietmar-din-norm-01--segmented",
+      "status": "opt-in listening-review candidate; clock/spacing-equivalent ASR, not literal word-exact"
+    },
+    {
+      "clipId": "crowd-dietmar-din-norm-03",
+      "voiceId": "crowd-dietmar-din-norm",
+      "profileId": "44123656a3404719abf0a2d6a05047ee",
+      "text": "Dieser Platz ist seit 07:04 durch textile Willenserklärung reserved.",
+      "referenceSha256": "36dc3144368143e0894dc1f400bdffe82e6842b2ae3d54a7fb03a3b7c94c55bf",
+      "renderer": "ResembleAI/Chatterbox Multilingual V2 0.1.7",
+      "modelRevision": "5bb1f6ee58e50c3b8d408bc82a6d3740c2db6e18",
+      "modelLicense": "MIT",
+      "durationSeconds": 5.618,
+      "asr": "Dieser Platz ist seit 7.04 Uhr durch Textilewillenserklärung. Reserved.",
+      "asrWordExact": false,
+      "asrClockEquivalent": true,
+      "asrSegments": [
+        {
+          "language": "de",
+          "text": "Dieser Platz ist seit sieben Uhr vier durch textile Willenserklärung",
+          "asr": "Dieser Platz ist seit 7.04 Uhr durch Textilewillenserklärung.",
+          "asrWordExact": false
+        },
+        {
+          "language": "en",
+          "text": "reserved.",
+          "asr": "Reserved.",
+          "asrWordExact": true
+        }
+      ],
+      "renderSegments": [
+        {
+          "language": "de",
+          "text": "Dieser Platz ist seit sieben Uhr vier durch textile Willenserklärung"
+        },
+        {
+          "language": "en",
+          "text": "reserved."
+        }
+      ],
+      "path": "assets/voices/candidate-dialogue/crowd-dietmar-din-norm-03.mp3",
+      "sha256": "7c03560d40516ed378dd37b550aa118c4044745860d42cce9e72231d3fb1e3b9",
+      "takeId": "crowd-dietmar-din-norm-03--segmented",
+      "status": "opt-in listening-review candidate; clock/spacing-equivalent ASR, not literal word-exact"
+    },
+    {
+      "clipId": "crowd-horst-hausordnung-03",
+      "voiceId": "crowd-horst-hausordnung",
+      "profileId": "159d0e6984c14c66b8e452f82495ba6c",
+      "text": "Dieser Platz ist seit 07:04 durch textile Willenserklärung reserved.",
+      "referenceSha256": "f0e22a08d36beb2001646eac2b9a88d4e3d6f89e59d9209efa268f456639f495",
+      "renderer": "ResembleAI/Chatterbox Multilingual V2 0.1.7",
+      "modelRevision": "5bb1f6ee58e50c3b8d408bc82a6d3740c2db6e18",
+      "modelLicense": "MIT",
+      "durationSeconds": 7.389,
+      "asr": "Dieser Platz ist seit 7.04 Uhr durch textile Willenserklärung. Reserved!",
+      "asrWordExact": false,
+      "asrClockEquivalent": true,
+      "asrSegments": [
+        {
+          "language": "de",
+          "text": "Dieser Platz ist seit sieben Uhr vier durch textile Willenserklärung",
+          "asr": "Dieser Platz ist seit 7.04 Uhr durch textile Willenserklärung.",
+          "asrWordExact": false
+        },
+        {
+          "language": "en",
+          "text": "reserved.",
+          "asr": "RESERVED!",
+          "asrWordExact": true
+        }
+      ],
+      "renderSegments": [
+        {
+          "language": "de",
+          "text": "Dieser Platz ist seit sieben Uhr vier durch textile Willenserklärung"
+        },
+        {
+          "language": "en",
+          "text": "reserved."
+        }
+      ],
+      "path": "assets/voices/candidate-dialogue/crowd-horst-hausordnung-03.mp3",
+      "sha256": "79afef199b35a6cce12c93a0543967212088f3e49d15049b39773e1fc981b7e5",
+      "takeId": "crowd-horst-hausordnung-03--segmented",
+      "status": "opt-in listening-review candidate; clock/spacing-equivalent ASR, not literal word-exact"
+    },
+    {
+      "clipId": "crowd-manfred-mittagsruhe-03",
+      "voiceId": "crowd-manfred-mittagsruhe",
+      "profileId": "cf03b787beac49efb23cb9206f012ecd",
+      "text": "Dieser Platz ist seit 07:04 durch textile Willenserklärung reserved.",
+      "referenceSha256": "151ae01fd25433a25d40452ba4be9fbebd14336053332b9a0333ce4b7ac1cac5",
+      "renderer": "ResembleAI/Chatterbox Multilingual V2 0.1.7",
+      "modelRevision": "5bb1f6ee58e50c3b8d408bc82a6d3740c2db6e18",
+      "modelLicense": "MIT",
+      "durationSeconds": 5.215,
+      "asr": "Dieser Platz ist seit 7.04 Uhr durch textile Willenserklärung. Reserved.",
+      "asrWordExact": false,
+      "asrClockEquivalent": true,
+      "asrSegments": [
+        {
+          "language": "de",
+          "text": "Dieser Platz ist seit sieben Uhr vier durch textile Willenserklärung",
+          "asr": "Dieser Platz ist seit 7 Uhr vier durch textile Willenserklärung.",
+          "asrWordExact": false
+        },
+        {
+          "language": "en",
+          "text": "reserved.",
+          "asr": "Reserved.",
+          "asrWordExact": true
+        }
+      ],
+      "renderSegments": [
+        {
+          "language": "de",
+          "text": "Dieser Platz ist seit sieben Uhr vier durch textile Willenserklärung"
+        },
+        {
+          "language": "en",
+          "text": "reserved."
+        }
+      ],
+      "path": "assets/voices/candidate-dialogue/crowd-manfred-mittagsruhe-03.mp3",
+      "sha256": "ae86d7db1880bb8bae5b721a39123961896afb7ce0f8b0245642d814c708975f",
+      "takeId": "crowd-manfred-mittagsruhe-03--segmented",
+      "status": "opt-in listening-review candidate; clock/spacing-equivalent ASR, not literal word-exact"
+    },
+    {
+      "clipId": "crowd-elfriede-eingabe-04",
+      "voiceId": "crowd-elfriede-eingabe",
+      "profileId": "fe71f4c14887460fab20d07f25ad003d",
+      "text": "Your Schatten fällt in meinen amtlich vorgemerkten Sonnenkorridor.",
+      "referenceSha256": "caa317b927b7d986a52aec26a204cafe1ec65606cec4cee57ac1653effdf1952",
+      "renderer": "ResembleAI/Chatterbox Multilingual V2 0.1.7",
+      "modelRevision": "5bb1f6ee58e50c3b8d408bc82a6d3740c2db6e18",
+      "modelLicense": "MIT",
+      "durationSeconds": 4.065,
+      "asr": "Josch Schatten fällt in meinen amtlich vorgemerkten Sonnenkorridor.",
+      "asrWordExact": false,
+      "asrSegmentWordExact": true,
+      "renderSegments": [
+        {
+          "language": "en",
+          "text": "Your",
+          "sourcePrompt": "Your shadow.",
+          "cutSeconds": 0.18
+        },
+        {
+          "language": "de",
+          "text": "Schatten fällt in meinen amtlich vorgemerkten Sonnenkorridor."
+        }
+      ],
+      "asrSegments": [
+        {
+          "language": "en",
+          "text": "Your",
+          "asr": "your",
+          "asrWordExact": true,
+          "sourcePhraseAsr": "your shadow.",
+          "sourcePhraseWords": [
+            {
+              "word": "your",
+              "start": 0.0,
+              "end": 0.18
+            },
+            {
+              "word": "shadow.",
+              "start": 0.18,
+              "end": 0.46
+            }
+          ]
+        },
+        {
+          "language": "de",
+          "text": "Schatten fällt in meinen amtlich vorgemerkten Sonnenkorridor.",
+          "asr": "Schatten fällt in meinen amtlich vorgemerkten Sonnenkorridor.",
+          "asrWordExact": true
+        }
+      ],
+      "path": "assets/voices/candidate-dialogue/crowd-elfriede-eingabe-04.mp3",
+      "sha256": "71012ab59cb35b392fcab6f924e82f03fa2d4a879c0d09880c3517259774c731",
+      "takeId": "crowd-elfriede-eingabe-04--word-cut-and-joined",
+      "status": "opt-in listening-review candidate; bilingual word cut and join need listening"
+    },
+    {
+      "clipId": "crowd-irmgard-aktenordner-04",
+      "voiceId": "crowd-irmgard-aktenordner",
+      "profileId": "e8b985f91e0343e8a4526623ec1bee51",
+      "text": "Your Schatten fällt in meinen amtlich vorgemerkten Sonnenkorridor.",
+      "referenceSha256": "03e67d1d6614504d1954e447ed6064f4e8df0cc6f07caa158e9215ef4f48cad4",
+      "renderer": "ResembleAI/Chatterbox Multilingual V2 0.1.7",
+      "modelRevision": "5bb1f6ee58e50c3b8d408bc82a6d3740c2db6e18",
+      "modelLicense": "MIT",
+      "durationSeconds": 4.216,
+      "asr": "Joschatten fällt in meinen amtlich vorgemerkten Sonnenkorridor.",
+      "asrWordExact": false,
+      "asrSegmentWordExact": true,
+      "renderSegments": [
+        {
+          "language": "en",
+          "text": "Your",
+          "sourcePrompt": "Your shadow.",
+          "cutSeconds": 0.22
+        },
+        {
+          "language": "de",
+          "text": "Schatten fällt in meinen amtlich vorgemerkten Sonnenkorridor."
+        }
+      ],
+      "asrSegments": [
+        {
+          "language": "en",
+          "text": "Your",
+          "asr": "your",
+          "asrWordExact": true,
+          "sourcePhraseAsr": "your shadow.",
+          "sourcePhraseWords": [
+            {
+              "word": "your",
+              "start": 0.0,
+              "end": 0.22
+            },
+            {
+              "word": "shadow.",
+              "start": 0.22,
+              "end": 0.52
+            }
+          ]
+        },
+        {
+          "language": "de",
+          "text": "Schatten fällt in meinen amtlich vorgemerkten Sonnenkorridor.",
+          "asr": "Schatten fällt in meinen amtlich vorgemerkten Sonnenkorridor.",
+          "asrWordExact": true
+        }
+      ],
+      "path": "assets/voices/candidate-dialogue/crowd-irmgard-aktenordner-04.mp3",
+      "sha256": "0d32407cbb589b75a074a18ba2b92bb18a043b10dca241e709516f86ef239675",
+      "takeId": "crowd-irmgard-aktenordner-04--word-cut-and-joined",
+      "status": "opt-in listening-review candidate; bilingual word cut and join need listening"
+    },
+    {
+      "clipId": "crowd-brigitte-bueroklammer-04",
+      "voiceId": "crowd-brigitte-bueroklammer",
+      "profileId": "735315eb7b9845dca5919c108814c1a9",
+      "text": "Your Schatten fällt in meinen amtlich vorgemerkten Sonnenkorridor.",
+      "referenceSha256": "6c961945eb1b63cdcc477bd8ba2e5dd840682a6335c9632ff6d14b44fca22ab8",
+      "renderer": "ResembleAI/Chatterbox Multilingual V2 0.1.7",
+      "modelRevision": "5bb1f6ee58e50c3b8d408bc82a6d3740c2db6e18",
+      "modelLicense": "MIT",
+      "durationSeconds": 4.282,
+      "asr": "Ihr Schatten fällt in meinen amtlich vorgemerkten Sonnenkorridor.",
+      "asrWordExact": false,
+      "asrSegmentWordExact": true,
+      "renderSegments": [
+        {
+          "language": "en",
+          "text": "Your",
+          "sourcePrompt": "Your shadow.",
+          "cutSeconds": 0.2
+        },
+        {
+          "language": "de",
+          "text": "Schatten fällt in meinen amtlich vorgemerkten Sonnenkorridor."
+        }
+      ],
+      "asrSegments": [
+        {
+          "language": "en",
+          "text": "Your",
+          "asr": "your",
+          "asrWordExact": true,
+          "sourcePhraseAsr": "your shadow, your shadow",
+          "sourcePhraseWords": [
+            {
+              "word": "your",
+              "start": 0.0,
+              "end": 0.2
+            },
+            {
+              "word": "shadow,",
+              "start": 0.2,
+              "end": 0.56
+            }
+          ]
+        },
+        {
+          "language": "de",
+          "text": "Schatten fällt in meinen amtlich vorgemerkten Sonnenkorridor.",
+          "asr": "Schatten fällt in meinen amtlich vorgemerkten Sonnenkorridor.",
+          "asrWordExact": true
+        }
+      ],
+      "path": "assets/voices/candidate-dialogue/crowd-brigitte-bueroklammer-04.mp3",
+      "sha256": "5352a2e1f6c607a4427c4fe74cca9391951da9c4298757b2c5ea5e1da79bae47",
+      "takeId": "crowd-brigitte-bueroklammer-04--word-cut-and-joined",
+      "status": "opt-in listening-review candidate; bilingual word cut and join need listening"
+    },
+    {
+      "clipId": "crowd-waltraud-wartemarke-04",
+      "voiceId": "crowd-waltraud-wartemarke",
+      "profileId": "deeeac80eca14f49ae6a8141594d73d2",
+      "text": "Your Schatten fällt in meinen amtlich vorgemerkten Sonnenkorridor.",
+      "referenceSha256": "738caada9bedbce8b48a277940d6a2065bbfb1a8d14ab0557b6854bfc9825701",
+      "renderer": "ResembleAI/Chatterbox Multilingual V2 0.1.7",
+      "modelRevision": "5bb1f6ee58e50c3b8d408bc82a6d3740c2db6e18",
+      "modelLicense": "MIT",
+      "durationSeconds": 3.551,
+      "asr": "Ja, Schatten fällt in meinen amtlich vorgemerkten Sonnenkorridor.",
+      "asrWordExact": false,
+      "asrSegmentWordExact": true,
+      "renderSegments": [
+        {
+          "language": "en",
+          "text": "Your",
+          "sourcePrompt": "Your shadow.",
+          "cutSeconds": 0.28
+        },
+        {
+          "language": "de",
+          "text": "Schatten fällt in meinen amtlich vorgemerkten Sonnenkorridor."
+        }
+      ],
+      "asrSegments": [
+        {
+          "language": "en",
+          "text": "Your",
+          "asr": "Your",
+          "asrWordExact": true,
+          "sourcePhraseAsr": "Your shadow, your sha-",
+          "sourcePhraseWords": [
+            {
+              "word": "Your",
+              "start": 0.0,
+              "end": 0.28
+            },
+            {
+              "word": "shadow,",
+              "start": 0.28,
+              "end": 0.76
+            }
+          ]
+        },
+        {
+          "language": "de",
+          "text": "Schatten fällt in meinen amtlich vorgemerkten Sonnenkorridor.",
+          "asr": "Schatten fällt in meinen amtlich vorgemerkten Sonnenkorridor.",
+          "asrWordExact": true
+        }
+      ],
+      "path": "assets/voices/candidate-dialogue/crowd-waltraud-wartemarke-04.mp3",
+      "sha256": "c5eb8e55588444f9e7709425a7ed8766721e3d258962bbe1cbedbeb2c66e8de0",
+      "takeId": "crowd-waltraud-wartemarke-04--word-cut-and-joined",
+      "status": "opt-in listening-review candidate; bilingual word cut and join need listening"
+    },
+    {
+      "clipId": "crowd-baerbel-brezel-04",
+      "voiceId": "crowd-baerbel-brezel",
+      "profileId": "94f8291ad5664b5485cf38bea8d4a2ec",
+      "text": "Your Schatten fällt in meinen amtlich vorgemerkten Sonnenkorridor.",
+      "referenceSha256": "23e4afaf59ef15cb0988feea0439793450268aa5dd9e916c69834b48df647747",
+      "renderer": "ResembleAI/Chatterbox Multilingual V2 0.1.7",
+      "modelRevision": "5bb1f6ee58e50c3b8d408bc82a6d3740c2db6e18",
+      "modelLicense": "MIT",
+      "durationSeconds": 4.117,
+      "asr": "Schatten fällt in meinen amtlich vorgemerkten Sonnenkorridor.",
+      "asrWordExact": false,
+      "asrSegmentWordExact": true,
+      "renderSegments": [
+        {
+          "language": "en",
+          "text": "Your",
+          "sourcePrompt": "Your shadow.",
+          "cutSeconds": 0.22
+        },
+        {
+          "language": "de",
+          "text": "Schatten fällt in meinen amtlich vorgemerkten Sonnenkorridor."
+        }
+      ],
+      "asrSegments": [
+        {
+          "language": "en",
+          "text": "Your",
+          "asr": "Your",
+          "asrWordExact": true,
+          "sourcePhraseAsr": "Your shadow.",
+          "sourcePhraseWords": [
+            {
+              "word": "Your",
+              "start": 0.0,
+              "end": 0.22
+            },
+            {
+              "word": "shadow.",
+              "start": 0.22,
+              "end": 0.52
+            }
+          ]
+        },
+        {
+          "language": "de",
+          "text": "Schatten fällt in meinen amtlich vorgemerkten Sonnenkorridor.",
+          "asr": "Schatten fällt in meinen amtlich vorgemerkten Sonnenkorridor.",
+          "asrWordExact": true
+        }
+      ],
+      "path": "assets/voices/candidate-dialogue/crowd-baerbel-brezel-04.mp3",
+      "sha256": "807f2cf0a9da32da7faec26d208fa3ef4b2b51ca189163c92341d1d465f50afb",
+      "takeId": "crowd-baerbel-brezel-04--word-cut-and-joined",
+      "status": "opt-in listening-review candidate; bilingual word cut and join need listening"
+    },
+    {
+      "clipId": "crowd-guenther-gartenzaun-03",
+      "voiceId": "crowd-guenther-gartenzaun",
+      "profileId": "919104cf497a4368a57052f75dc0d82f",
+      "text": "Dieser Platz ist seit 07:04 durch textile Willenserklärung reserved.",
+      "referenceSha256": "b8fd86e3751434f24f93dab162f8ea81ea8df0e8134ddab6bc032253de6d2d85",
+      "renderer": "ResembleAI/Chatterbox Multilingual V2 0.1.7",
+      "modelRevision": "5bb1f6ee58e50c3b8d408bc82a6d3740c2db6e18",
+      "modelLicense": "MIT",
+      "durationSeconds": 5.361,
+      "asr": "Dieser Platz ist seit 7 Uhr vier durch textile Willenserklärung reserved.",
+      "asrWordExact": false,
+      "asrBilingualPartsClockEquivalent": true,
+      "renderSegments": [
+        {
+          "language": "de",
+          "text": "Dieser Platz ist seit sieben Uhr vier durch textile Willenserklärung"
+        },
+        {
+          "language": "en",
+          "text": "reserved",
+          "sourcePrompt": "reserved for me. How I you, how I you, was",
+          "cutSeconds": 0.54
+        }
+      ],
+      "asrSegments": [
+        {
+          "language": "de",
+          "text": "Dieser Platz ist seit sieben Uhr vier durch textile Willenserklärung",
+          "asr": "Dieser Platz ist seit 7 Uhr vier durch textile Willenserklärung.",
+          "asrClockEquivalent": true
+        },
+        {
+          "language": "en",
+          "text": "reserved",
+          "asr": "reserved",
+          "asrWordExact": true,
+          "sourcePhraseAsr": "reserved for me. How I you, how I you, was",
+          "sourcePhraseWords": [
+            {
+              "word": "reserved",
+              "start": 0.0,
+              "end": 0.54
+            },
+            {
+              "word": "for",
+              "start": 0.54,
+              "end": 0.76
+            }
+          ]
+        }
+      ],
+      "path": "assets/voices/candidate-dialogue/crowd-guenther-gartenzaun-03.mp3",
+      "sha256": "85a9271cf2cfa12e5cb9660cd995786dc99a88830aa77ba52a610a7073de19ea",
+      "takeId": "crowd-guenther-gartenzaun-03--word-cut-and-joined",
+      "status": "opt-in listening-review candidate; clock-equivalent bilingual word cut and join need listening"
+    },
+    {
+      "clipId": "crowd-klaus-dieter-knoedel-03",
+      "voiceId": "crowd-klaus-dieter-knoedel",
+      "profileId": "d785d0c650e44bba95477261f890747b",
+      "text": "Dieser Platz ist seit 07:04 durch textile Willenserklärung reserved.",
+      "referenceSha256": "718d21fd8dc250521a21882f86795cf8652845df7c128e655c0e2e771ac3207e",
+      "renderer": "ResembleAI/Chatterbox Multilingual V2 0.1.7",
+      "modelRevision": "5bb1f6ee58e50c3b8d408bc82a6d3740c2db6e18",
+      "modelLicense": "MIT",
+      "durationSeconds": 4.724,
+      "asr": "Dieser Platz ist seit 7.04 Uhr durch textile Willenserklärung.",
+      "asrWordExact": false,
+      "asrBilingualPartsClockEquivalent": true,
+      "renderSegments": [
+        {
+          "language": "de",
+          "text": "Dieser Platz ist seit sieben Uhr vier durch textile Willenserklärung"
+        },
+        {
+          "language": "en",
+          "text": "reserved",
+          "sourcePrompt": "reserved for me.",
+          "cutSeconds": 0.42
+        }
+      ],
+      "asrSegments": [
+        {
+          "language": "de",
+          "text": "Dieser Platz ist seit sieben Uhr vier durch textile Willenserklärung",
+          "asr": "Dieser Platz ist seit 7.04 Uhr durch textile Willenserklärung.",
+          "asrClockEquivalent": true
+        },
+        {
+          "language": "en",
+          "text": "reserved",
+          "asr": "reserved",
+          "asrWordExact": true,
+          "sourcePhraseAsr": "reserved for me.",
+          "sourcePhraseWords": [
+            {
+              "word": "reserved",
+              "start": 0.0,
+              "end": 0.42
+            },
+            {
+              "word": "for",
+              "start": 0.42,
+              "end": 0.62
+            }
+          ]
+        }
+      ],
+      "path": "assets/voices/candidate-dialogue/crowd-klaus-dieter-knoedel-03.mp3",
+      "sha256": "50c70a31c53a60de4dd9e0b8937d5b53a658116e7b52ef935f8ba8fa9d1ae9af",
+      "takeId": "crowd-klaus-dieter-knoedel-03--word-cut-and-joined",
+      "status": "opt-in listening-review candidate; clock-equivalent bilingual word cut and join need listening"
+    },
+    {
+      "clipId": "crowd-ruediger-rasenkante-03",
+      "voiceId": "crowd-ruediger-rasenkante",
+      "profileId": "3cc9340471d3480ba090545b5a9024c9",
+      "text": "Dieser Platz ist seit 07:04 durch textile Willenserklärung reserved.",
+      "referenceSha256": "5f3d748de3d95a8090b3d506cf2cf47358d2e7b079e661a1ac186959a2513636",
+      "renderer": "ResembleAI/Chatterbox Multilingual V2 0.1.7",
+      "modelRevision": "5bb1f6ee58e50c3b8d408bc82a6d3740c2db6e18",
+      "modelLicense": "MIT",
+      "durationSeconds": 4.545,
+      "asr": "Dieser Platz ist seit 7.04 Uhr durch textile Willenserklärung. Reserve",
+      "asrWordExact": false,
+      "asrBilingualPartsClockEquivalent": true,
+      "renderSegments": [
+        {
+          "language": "de",
+          "text": "Dieser Platz ist seit sieben Uhr vier durch textile Willenserklärung"
+        },
+        {
+          "language": "en",
+          "text": "reserved",
+          "sourcePrompt": "Reserved for this place.",
+          "cutSeconds": 0.46
+        }
+      ],
+      "asrSegments": [
+        {
+          "language": "de",
+          "text": "Dieser Platz ist seit sieben Uhr vier durch textile Willenserklärung",
+          "asr": "Dieser Platz ist seit 7.04 Uhr durch textile Willenserklärung.",
+          "asrClockEquivalent": true
+        },
+        {
+          "language": "en",
+          "text": "reserved",
+          "asr": "Reserved",
+          "asrWordExact": true,
+          "sourcePhraseAsr": "Reserved for this place.",
+          "sourcePhraseWords": [
+            {
+              "word": "Reserved",
+              "start": 0.0,
+              "end": 0.46
+            },
+            {
+              "word": "for",
+              "start": 0.46,
+              "end": 0.58
+            }
+          ]
+        }
+      ],
+      "path": "assets/voices/candidate-dialogue/crowd-ruediger-rasenkante-03.mp3",
+      "sha256": "3e13feda7359c49d19b364d91d6520375f05fd0d5ec2d3e6cd37437e9a3be9c7",
+      "takeId": "crowd-ruediger-rasenkante-03--word-cut-and-joined",
+      "status": "opt-in listening-review candidate; clock-equivalent bilingual word cut and join need listening"
     }
   ]
 }
