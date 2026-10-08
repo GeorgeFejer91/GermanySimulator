@@ -1,7 +1,15 @@
 /* A small file tab during play; the paperwork opens only when it is useful. */
 .fax-paper{color:#28261f;background:repeating-linear-gradient(0deg,transparent 0 3px,#71685008 3px 4px),#eee8d8;border:1px solid #746d5e;border-left:10px dotted #c0b7a3;box-shadow:3px 4px 0 #24211c45;font:1rem/1.4 "Courier New",monospace}
-.city-status{position:fixed;z-index:20;top:12px;left:12px;display:flex;align-items:flex-start;flex-wrap:wrap;gap:6px;max-width:calc(100vw - 24px)}
+.city-status{position:fixed;z-index:20;top:12px;left:12px;display:flex;align-items:flex-start;flex-wrap:wrap;gap:6px;width:min(300px,calc(100vw - 24px));max-width:calc(100vw - 24px)}
 .city-status[hidden],.mission-fax[hidden]{display:none}
+.mission-announcement{position:absolute;width:1px;height:1px;padding:0;margin:0;overflow:hidden;clip-path:inset(50%);white-space:nowrap}
+#germanness-hud{position:static;inset:auto;flex:1 0 100%;display:grid;grid-template-columns:minmax(0,1fr) auto;grid-template-areas:"label value" "meter meter" "law law";gap:5px 8px;width:100%;min-width:0;height:auto;min-height:0;margin:0;padding:9px 12px;border:1px solid #494439;background:#eee8d8;box-shadow:3px 4px 0 #24211c45;backdrop-filter:none;text-align:left;overflow:visible;color:#28261f}
+#germanness-hud small{grid-area:label;font:700 .875rem/1.4 "Courier New",monospace;letter-spacing:.03em;overflow-wrap:anywhere}
+#germanness-hud output{grid-area:value;font:700 1rem/1.3 "Courier New",monospace}
+#germanness-hud .germanness-meter{grid-area:meter;width:100%;height:14px;margin:0;border:1px solid #665f50;background:#d7d0bf}
+#germanness-hud .germanness-meter i{top:0;right:auto;bottom:0;width:var(--germanness,0);height:100%!important;background:linear-gradient(to right,#000 0 33.333%,#dd0000 33.333% 66.666%,#ffcc00 66.666%);transition:width .28s ease,filter .28s ease}
+#germanness-hud #law-power{grid-area:law;display:block;margin:0;font:.75rem/1.4 "Courier New",monospace;white-space:normal;overflow:visible;text-overflow:clip;overflow-wrap:anywhere}
+.city-status.city-busy>:not(#germanness-hud){display:none}
 .city-status button{min-height:44px;padding:9px 12px;border:1px solid #494439;border-bottom:3px double #494439;background:#eee8d8;color:#28261f;font:700 .875rem/1.3 "Courier New",monospace}
 .city-status kbd{padding:1px 4px;border:1px solid #797263;font:inherit}
 .file-day{margin-left:12px;font-weight:400}.file-day b{font-weight:700}
@@ -13,14 +21,15 @@
 .fax-paper button:focus-visible,.city-status button:focus-visible{outline:3px solid #833a31;outline-offset:2px}
 .fax-paper button:hover{background:#ddd4bf}.fax-paper button:disabled{opacity:.65;cursor:default}
 .fax-paper [data-pretext-fit="reflow"],.fax-paper [data-pretext-fit="unavailable"],.city-status [data-pretext-fit="reflow"],.city-status [data-pretext-fit="unavailable"]{min-width:0;max-width:100%;white-space:normal;overflow-wrap:anywhere;height:auto}
-.mission-fax{position:fixed;z-index:19;top:68px;left:12px;width:min(370px,calc(100vw - 24px));max-height:calc(100dvh - var(--city-control-clearance,var(--subtitle-height)) - 80px);overflow:auto;overscroll-behavior:contain;touch-action:pan-y;padding:8px 14px 14px;animation:fax-arrive .45s ease-out both}
+.mission-fax{position:fixed;z-index:19;top:68px;left:12px;width:min(370px,calc(100vw - 24px));max-height:calc(100dvh - var(--city-control-clearance,var(--subtitle-height)) - 80px);overflow:auto;overscroll-behavior:contain;touch-action:pan-y;padding:8px 14px 14px;mask-size:100% 100%;mask-repeat:no-repeat}
 .fax-heading{display:flex;align-items:center;justify-content:space-between;gap:8px;border-bottom:1px dashed #a69b85;font:700 .75rem/1.4 "Courier New",monospace}
 .fax-heading button{flex:0 0 44px;font-size:1.3rem}.mission-fax h2{margin:12px 0 6px;font:700 1.125rem/1.3 "Courier New",monospace;overflow-wrap:anywhere}.mission-fax p{margin:0 0 12px;font:1rem/1.45 "Courier New",monospace;overflow-wrap:anywhere}
-.mission-fax.fax-leaving{animation:fax-depart .35s ease-in both;pointer-events:none}
-@keyframes fax-arrive{from{opacity:0;filter:blur(5px);transform:translateY(-8px)}to{opacity:1;filter:none;transform:none}}
-@keyframes fax-depart{to{opacity:0;filter:blur(5px);transform:translateY(-5px)}}
+.mission-fax.fax-leaving{pointer-events:none}
 .case-file{position:fixed;inset:0;width:min(620px,calc(100vw - 24px));max-width:none;height:min(620px,calc(100dvh - 24px));max-height:none;margin:auto;padding:18px;overflow:hidden}
 .case-file[open]{display:grid;grid-template-rows:auto auto minmax(0,1fr) auto;gap:14px}
+.case-file[open][data-layout="scroll"]{display:block;overflow:auto;overscroll-behavior:contain;touch-action:pan-y}
+.case-file[data-layout="scroll"] .file-tabs{margin:14px 0}
+.case-file[data-layout="scroll"] .file-page{overflow:visible}
 .case-file::backdrop{background:#16151065}
 .file-header{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:12px;border-bottom:3px double #746d5e;padding-bottom:10px}
 .file-header h2{flex:1 1 12ch;min-width:0;margin:0;font:700 1.125rem/1.3 "Courier New",monospace;overflow-wrap:anywhere}.file-header button{flex-shrink:0;margin-left:auto}
@@ -59,7 +68,9 @@
 #city-notices .violation-alert p{margin:5px 0;font:.875rem/1.4 "Courier New",monospace;text-transform:none}
 #city-notices #violation-stars{font-size:1rem;letter-spacing:2px}
 .dialogue{border-color:#746d5e;background:#eee8d8;box-shadow:3px 4px 0 #24211c45}
-.amt-inside #city-status,.amt-inside #mission-fax,.amt-inside #city-notices{display:none!important}
+.amt-inside #mission-fax,.amt-inside #city-notices{display:none!important}
+.amt-inside #city-status{z-index:211}
+.amt-inside #germanness-hud{display:grid!important}
 @media(max-width:760px){
  .city-status{top:8px;left:8px;max-width:calc(100vw - 16px)}
  .mission-fax{left:8px;top:64px;width:min(370px,calc(100vw - 16px))}
@@ -68,4 +79,4 @@
  .case-file[open]{gap:10px}.file-header{gap:8px}.file-tabs button{padding:7px}
  .control-dock{bottom:var(--subtitle-height)}
 }
-@media(prefers-reduced-motion:reduce){.mission-fax,.mission-fax.fax-leaving{animation:none}}
+@media(prefers-reduced-motion:reduce){#germanness-hud .germanness-meter i{transition:none}}
