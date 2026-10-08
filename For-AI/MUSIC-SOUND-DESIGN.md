@@ -30,4 +30,20 @@ The existing city soundtrack remains governed by its music toggle, foreground au
 
 ## Review evidence
 
+### Mission fax beat (`mission-fax-feed`, 2026-10-08)
+
+`game-hud.js` commits one arrival or departure for the current visible mission
+sheet. Quiet city state guards arrivals; objective changes invalidate the old
+sheet, and warnings, dialogue, office entry, file opening or page hiding cancel
+its active effect. This nonverbal cue reuses `game.js`'s synthesized fax-feed
+motor, roller clicks and paper noise on the existing ducked sound-effect bus.
+No new recording, download, speech or mission state is introduced. Each motion
+has one 1.08-second cue; the Gaussian alpha-mask renderer samples its Web Audio
+elapsed clock with a bounded monotonic fallback when audio cannot advance.
+Completion starts 12 readable seconds or the following 150-second reminder gap.
+Cancellation stops every scheduled source and detaches its output. Reduced
+motion shows/hides immediately while retaining the bounded sound cue. Silent
+state/timing checks and rendered screenshots establish synchronization behavior;
+listening and physical Android evidence remain separate.
+
 At one candidate revision, report separate results for (1) source/license and render inspection, (2) deterministic cue/state and clock/receipt checks, (3) muted isolated Chromium desktop and Android mobile browser timing checks, (4) physical device and paired-phone behavior when actually tested, and (5) perceptual listening on the intended output. Mark unrun checks `NOT RUN`; silent browser checks establish scheduling, not perceived loudness, balance, or timbre. Review cancellation, duplicate/stale events, mute/ducking, missing asset or speech fallback, and the whole story-to-gameplay beat. Use the shared [`chatdev/README.md`](./chatdev/README.md#shared-contracts-and-convergence) verdict and candidate-revision format.

@@ -115,6 +115,17 @@ browser profiles. Do not add a new pipeline, service or benchmark dependency.
 
 ### Frame, background work and lifetime contract
 
+The mission-fax HUD transition uses native Canvas 2D Gaussian alpha kernels as a
+CSS mask over the actual DOM paper. One reusable 192 × 256 mask and 32 × 32 kernel
+occupy about 0.192 MiB of raw RGBA surfaces; 432 splats are composited at no more
+than 30 Hz for each 1.08-second feed. Only the current encoded mask is retained.
+No additional asset transfer, WebGL context, Spark module or idle effect loop is
+allowed. HUD lifecycle cancellation owns the RAF, short fallback timer and fax
+sound sources; pagehide releases the two canvases. Keep Pretext measurement out
+of these animation frames. This screen-space HUD work changes no world geometry,
+collision, movement, camera or sprite scale, so its scope omits the two world
+object reviewers; rendered HUD and independent timing/lifecycle review apply.
+
 - The default world drawing buffer is at most one pixel per CSS pixel and
   1.6 million total pixels, in both city and office. Default multisampling is
   off. HUD/text geometry and camera aspect remain at CSS dimensions. Verify

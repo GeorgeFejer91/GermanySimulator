@@ -49,3 +49,45 @@ Baseline is `23af451`, using the same current world assets and styles as the can
 All 12 benchmark runs passed the existing resource/input gates: startup transfer below 18 MB, title render at 4 Hz, drawing buffer at most 1.6 MP, accepted movement and no page errors. Candidate startup transfer ranged 14.80–16.36 MB on desktop and 15.29–16.04 MB in Android emulation. Detailed requests, long tasks, draw calls, triangles, textures/geometries and source hashes remain in `before-integrated/report.json` and `after-benchmark/report.json`.
 
 Remaining scope: physical Android, assistive-technology user testing, perceived audio quality, and natural full-mission-chain play were not tested. At extreme text sizes or a forced three-notice coincidence in short landscape, the document/notice column must be scrolled; copy stays available and the touch controls stay unobstructed. Source/render checks do not establish newcomer understanding of the whole game.
+
+## Germanness and periodic fax correction
+
+The subsequent user request supersedes this audit's status-only Germanness and
+90-second/12–30-second fax policy. Germanness is now the primary persistent HUD
+gauge, with the score and law threshold, including inside the office. The same
+node moves into the file header. A fax has 12 readable seconds between two
+1.08-second transitions, followed by a 150-second gap. Pointer hover does not pin
+it. New objectives can arrive sooner; warnings cancel a displayed reminder and
+start its gap. A persistent visually hidden status announces changed objectives.
+
+The whole DOM paper uses 432 screen-space Gaussian alpha splats, not a 3D model
+or Spark download. Its existing synthesized fax noise provides the animation
+clock and cancellation handle. Reduced motion has no mask frames. A single
+192×256 mask and 32×32 kernel are reused only during transitions; sampled PNG
+encoding p95 was 8 ms desktop and 7 ms Android emulation, with a maximum current
+data URL of about 58 kB. These short lab samples do not establish device cost.
+
+Evidence is in ignored `output/mission-fax/`: the production-source deterministic
+suite passes 7/7; the existing Pages regression selection passed 34/34 before the
+two added cases, and those updated cases pass separately. All six atlas delivery
+checks pass. Muted Chromium desktop, Android portrait (390 and 320 CSS px),
+landscape, 200% text and reduced-motion browser checks pass; arrival images,
+expiry/repeat behavior, shared file gauge and direct-office presence were checked.
+At 200% text, the entire file scrolls when its header/tabs would leave no readable
+page. Screenshots of the actual enlarged mission reading path were inspected.
+Virtual time checks reminders; debug state sets score/copy; direct office entry
+does not prove the natural mission chain. The independent read-only reviewer
+passed the clock, lifecycle, persistent announcement and final layout repairs,
+and inspected supplied Android screenshots, without claiming a fresh browser run.
+
+Hardware ANGLE/Intel Iris Xe benchmarks ran three cold contexts per desktop and
+Android-emulation profile for both `9cd50cd` and the shared candidate checkout.
+All 12 existing resource/input gates passed, with startup below 18 MB, a 1.6 MP
+or smaller drawing buffer, accepted input and no page errors. Host timing was
+highly variable: desktop warm-frame p95 median/range was 62.1/49.6–541.9 ms before
+and 32.4/29.2–35.2 ms after; Android emulation was 28.3/26.4–332.9 ms before and
+88.3/25.7–426.9 ms after. These are diagnostic snapshots with concurrent office
+work present in the candidate, not evidence of a speedup or physical-device
+performance. Exact source hashes, timings, requests and mutation counts remain
+in both benchmark reports. Physical Android, actual screen-reader use and
+perceptual listening remain NOT RUN; all browser audio was checked silently.
