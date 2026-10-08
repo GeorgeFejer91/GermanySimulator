@@ -34,7 +34,11 @@ window.BuergeramtStory=Object.freeze({
    {line:"Auf der Rückseite steht endlich ein Satz. Leider ist er nicht unterschrieben, also bleibt er vorläufig ein Geräusch.",tone:"relief",valence:.24}
   ]}
  },
- omen:{speaker:"DER AKTENKURIER",line:"Wer die Finsternis sieht, hat sie selbst gewählt!"},
+ omen:{speaker:"DER AKTENKURIER",line:"Wer die Finsternis sieht, hat sie selbst gewählt!",delivery:{rate:.82,pitch:.72,contour:[
+  {word:"Wer",tension:.12,semitones:1},{word:"Finsternis",tension:.55,semitones:.5},
+  {word:"sieht",tension:.4,semitones:-.3},{word:"hat",tension:.58,semitones:-1},
+  {word:"selbst",tension:.85,semitones:-2},{word:"gewählt",tension:1,semitones:-3.2}
+ ]}},
  entrance:{speaker:"PFÖRTNERIN",line:"Halt. Sie haben das Bürgeramt betreten, ohne nachzuweisen, dass Sie vorher draußen waren. Ziehen Sie bitte eine Nummer für den Übergang."},
  call:{id:"grass",line:"Polizei, Ordnungskontrolle. Sie sind heute über eine Grünfläche gelaufen. Antworten Sie: linker Schuh, rechter Schuh, oder beide?",declined:"Sehr gut. In diesem Schalterbereich sind private Anrufe nicht zuständig."},
  police:[
