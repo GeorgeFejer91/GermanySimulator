@@ -1270,18 +1270,23 @@ function addGermanness(amount,reason){
  updateHud();
 }
 function flashGermannessGain(){const app=document.getElementById("app");app.classList.remove("germanness-gain");void app.offsetWidth;app.classList.add("germanness-gain");clearTimeout(flashGermannessGain.t);flashGermannessGain.t=setTimeout(()=>app.classList.remove("germanness-gain"),760)}
-function updateGermannessEvents(dt,mag){
+function crossingBank(x,y,c){
+ if(!c||onRoad(x,y))return 0;
+ if(c.w>c.h)return y>=c.y&&y<=c.y+c.h?(x<c.x+c.w/2?-1:1):0;
+ return x>=c.x&&x<=c.x+c.w?(y<c.y+c.h/2?-1:1):0;
+}
+function updateGermannessEvents(dt,mag,px,py){
  state.ampelClock+=dt;state.lawCooldown=Math.max(0,state.lawCooldown-dt);
  for(const light of trafficLights)light.green=Math.floor((state.ampelClock+light.phaseOffset)/6)%2===1;
  const roadNow=onRoad(player.x,player.y);
  if(!state.wasOnRoad&&roadNow){
-  const crossingId=crossings.findIndex(c=>inRect(player.x,player.y,c));let approachLight=null,best=Infinity;
+  const crossingId=crossings.findIndex(c=>inRect(player.x,player.y,c)),entryBank=crossingBank(px,py,crossings[crossingId]);let approachLight=null,best=Infinity;
   for(const light of trafficLights)if(light.crossingId===crossingId){const d=dist(player.x,player.y,light.waitX,light.waitY);if(d<best){best=d;approachLight=light}}
   const cycle=approachLight?Math.floor((state.ampelClock+approachLight.phaseOffset)/6):-1,waitedAtRed=!!approachLight&&approachLight.green&&approachLight.waitedCycle===cycle-1&&approachLight.rewardCycle!==approachLight.waitedCycle;
-  state.crossingRun={valid:crossingId>=0,crossingId,signalGreen:!approachLight||approachLight.green,waitedAtRed,light:approachLight};if(approachLight&&!approachLight.green)toast("AMPEL ROT · WARTEN SIE AUF GRÜN")
+  state.crossingRun={valid:entryBank!==0,crossingId,entryBank,signalGreen:!approachLight||approachLight.green,waitedAtRed,light:approachLight};if(approachLight&&!approachLight.green)toast("AMPEL ROT · WARTEN SIE AUF GRÜN")
  }
  if(roadNow&&state.crossingRun?.valid&&!inRect(player.x,player.y,crossings[state.crossingRun.crossingId]))state.crossingRun.valid=false;
- if(state.wasOnRoad&&!roadNow&&state.crossingRun?.valid&&state.crossingRun.signalGreen&&state.ampelClock-state.crossRewardAt>4){const run=state.crossingRun,points=run.waitedAtRed?2:1;state.crossRewardAt=state.ampelClock;if(run.waitedAtRed)run.light.rewardCycle=run.light.waitedCycle;addGermanness(points,run.waitedAtRed?"ROTE AMPEL ABGEWARTET · BEI GRÜN GEQUERT":"ZEBRASTREIFEN BEI GRÜN BENUTZT")}
+ if(state.wasOnRoad&&!roadNow&&state.crossingRun?.valid&&state.crossingRun.signalGreen&&crossingBank(player.x,player.y,crossings[state.crossingRun.crossingId])===-state.crossingRun.entryBank&&state.ampelClock-state.crossRewardAt>4){const run=state.crossingRun,points=run.waitedAtRed?2:1;state.crossRewardAt=state.ampelClock;if(run.waitedAtRed)run.light.rewardCycle=run.light.waitedCycle;addGermanness(points,run.waitedAtRed?"ROTE AMPEL ABGEWARTET · BEI GRÜN GEQUERT":"ZEBRASTREIFEN BEI GRÜN BENUTZT")}
  if(!roadNow)state.crossingRun=null;state.wasOnRoad=roadNow;
  for(const light of trafficLights){const waiting=!light.green&&!roadNow&&mag<.05&&dist(player.x,player.y,light.waitX,light.waitY)<85;light.waitTime=waiting?light.waitTime+dt:0;if(light.waitTime>=1.5)light.waitedCycle=Math.floor((state.ampelClock+light.phaseOffset)/6)}
 }
@@ -1466,7 +1471,7 @@ function update(dt){
  updateRegion();
  updateTraffic(dt);
  updateBorderTrains(dt);
- updateGermannessEvents(dt,mag);
+ updateGermannessEvents(dt,mag,px,py);
  updateQuizEncounters(dt);
 
  if(mag>.05){

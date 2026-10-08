@@ -13,7 +13,7 @@ const cut = (start, end) => {
 const constants = source.match(/const GERMANNESS_MAX=\d+,LAW_POWER_THRESHOLD=\d+;/)?.[0];
 assert(constants, 'Missing production reward constants');
 const functions = cut('function addGermanness(', 'function flashGermannessGain(')
-  + cut('function updateGermannessEvents(', 'function useLawPower(');
+  + cut(source.includes('function crossingBank(')?'function crossingBank(':'function updateGermannessEvents(', 'function useLawPower(');
 
 function model(phaseOffset) {
   const state = {ampelClock:0, lawCooldown:0, wasOnRoad:false, crossingRun:null,
@@ -35,7 +35,8 @@ function model(phaseOffset) {
   vm.runInNewContext(constants + functions + `
     const award=addGermanness;
     addGermanness=(amount,reason)=>{const before=state.germanness;award(amount,reason);events.push({at:state.ampelClock,x:player.x,requestedAmount:amount,appliedAmount:state.germanness-before,score:state.germanness})};
-    globalThis.step=updateGermannessEvents;
+    let px=player.x,py=player.y;
+    globalThis.step=(dt,mag)=>{updateGermannessEvents(dt,mag,px,py);px=player.x;py=player.y};
   `, sandbox);
   return sandbox;
 }

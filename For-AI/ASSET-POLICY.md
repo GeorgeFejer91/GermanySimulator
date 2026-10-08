@@ -210,6 +210,12 @@ emulation. Keep logs/screenshots under ignored `output/`. These ceilings describ
 this game and are regression guards, not desired long-term minimums: reduce them
 with proven improvements, and never raise them merely to pass a check.
 
+Title cadence uses the browser's measured sample duration, not the requested
+host wait. Allow only a phase-boundary call and the existing 0.5 ms deadline
+tolerance at 250 ms intervals. Preserve elapsed time in the report so delayed
+receipts cannot masquerade as excess rendering; a genuine 17-call three-second
+sample still fails. `tests/browser-benchmark.test.mjs` covers this distinction.
+
 Record source revision, scenario, browser/GPU, viewport/DPR, cache/network/CPU,
 ready/settled time, bytes/requests, largest resources, long tasks, frame-time
 p50/p95, draw calls/triangles and texture/geometry counts. Report median/range of

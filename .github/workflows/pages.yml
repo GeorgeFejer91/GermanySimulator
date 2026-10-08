@@ -25,8 +25,8 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: '24'
-      - name: Check browser resource and idle-work budgets
-        run: node --test tests/browser-performance.test.mjs tests/runtime-smoothness.test.mjs tests/browser-responsiveness.test.mjs tests/asset-streaming.test.mjs tests/tourist-animation.test.mjs tests/intro-music.test.mjs tests/splat-preview.test.mjs
+      - name: Check game and browser regressions
+        run: node --test tests/browser-performance.test.mjs tests/runtime-smoothness.test.mjs tests/browser-responsiveness.test.mjs tests/asset-streaming.test.mjs tests/tourist-animation.test.mjs tests/intro-music.test.mjs tests/splat-preview.test.mjs tests/crossing-layout.test.mjs tests/browser-benchmark.test.mjs tests/touch-controls.test.mjs tests/english-subtitles.test.mjs
       - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v3
         with:

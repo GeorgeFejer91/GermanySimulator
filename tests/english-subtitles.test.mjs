@@ -81,7 +81,7 @@ assert.ok(html.indexOf("AUDIO-TEXT-LIBRARY.js")<html.indexOf("game.js"),"subtitl
 assert.match(html,/id="english-subtitle"[\s\S]*id="subtitle-toggle"/);
 assert.match(css,/\.english-subtitle\{[^}]*background:#050505[^}]*color:#ffcc00[^}]*"Grenze"[^}]*text-shadow:[^}]*#b00018/);
 assert.match(css,/\.english-subtitle\{[^}]*bottom:0/,'subtitles must meet the bottom edge');
-assert.match(css,/\.control-dock\{bottom:calc\(30px \+ var\(--subtitle-height\)\);height:84px/,"touch controls need a stable slot above subtitles");
+assert.match(css,/\.control-dock\{bottom:calc\(30px \+ var\(--subtitle-height\)\);height:auto;min-height:84px/,"touch controls reserve their slot above subtitles and can grow for enlarged labels");
 assert.match(css,/\.dialogue,\.dialogue\.memorial\{bottom:calc\(121px \+ var\(--subtitle-height\)\);height:/,"dialogue needs a stable slot above controls");
 assert.match(css,/\.english-subtitle\[hidden\]\{[^}]*visibility:hidden/,"the empty subtitle field must retain its layout size");
 assert.match(subtitleLayout,/const height=box\.getBoundingClientRect\(\)\.height/,"subtitle layout must reserve its height when empty");

@@ -13,7 +13,7 @@ assert.match(game,/for\(const item of \[\.\.\.trafficCars,\.\.\.policeVehicles\]
 assert.match(game,/getTrafficCars:\(\)=>trafficCars/,"the WebGL renderer must consume the canonical traffic simulation");
 assert.match(world3d,/function makeTrafficCarSlot\(car\).*car\.kind==="beetle"/s,"WebGL must distinguish rounded Beetles from boxy Trabants");
 assert.match(world3d,/assets\/models\/vehicles\/.*spec\.file/s,"traffic must use the complete local fleet models");
-assert.match(world3d,/async function installVehicleModel.*slot\.fallback\.visible=false.*Keeping procedural/s,"every vehicle keeps a complete missing-file fallback");
+assert.match(world3d,/function installVehicleModel.*slot\.fallback\.visible=false.*Keeping procedural/s,"every vehicle keeps a complete missing-file fallback");
 assert.doesNotMatch(world3d,/installTrafficBeetleModel|slot\.tail\.color/,"obsolete body-scan overlays must not surround the complete GLBs");
 
 const helper=game.match(/function trafficForwardGap\(car,targetX\)\{[^}]+\}/)?.[0];

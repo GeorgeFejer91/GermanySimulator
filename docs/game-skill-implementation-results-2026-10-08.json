@@ -1,0 +1,2288 @@
+{
+  "date": "2026-10-08",
+  "candidate": {
+    "base": "2b438eea5a7513d0650432953deb7c818d2b45b6",
+    "files": {
+      "game.js": "e96bb17abc9ffb092080f4accd2eda7afc3cbc8e2e52ba175f0aaedac27320b6",
+      "world3d.js": "b68c863e06d17af01cea113f5c507c7f1a636b3c7cb5e63b1600f8f89fa1c9bb",
+      "3d.html": "dcc2cec605b186c496b0b25ca2de8b7c4808fbfc27a65614de09527cdbe0b456",
+      "index.html": "2ddf353b83d5daeb28bf371a2ed296e46e8cffe3d9dd644485d7895a2705f257",
+      "styles.css": "505d1c82ad5ec65d6d2858397a35670eaabc0973e6d4aaef92af14f60911b040",
+      "buergeramt-fit.js": "af2ba0ed506a2706093005f40af7cf1d0a861698a1a4d2171fa84afdccab6df6",
+      "tests/crossing-layout.test.mjs": "b17822355289553170854d0d28abfd533a22c3fe216d77ed4820927a7030d559",
+      "tests/browser-benchmark.test.mjs": "fee9d98ae3c8883552bf3d1a6ea878540e26020bb66c7d585ebb29ad73cf7ea9",
+      "tests/touch-controls.test.mjs": "43b2af51bb93785b6ddc63656ec3b1b53d3ae5da12bbb999d76fd76e6aeef21b",
+      "tests/english-subtitles.test.mjs": "ad9aa486b936a1dbdfd54cafc41bdad3501a1a282afeaa5740e9d95def82cd29",
+      "tools/benchmark-browser.mjs": "77c10700b3b989d2f3f1780993a4b5e61a9218c747ac1aa8b032b766bdf1f56f",
+      "tools/evaluate-crossing-rewards.mjs": "ece37af0e8056e3ec4940597447e0dbc6168867baaa356a8a658fc589e76a7c5",
+      "tests/ambient-traffic.test.mjs": "19f634789751b8e505343aa17eba523e3ed8bb20fedc1e32aa3578059e7b4fbb"
+    },
+    "pilotBase": "c92af7e2fc591b2d7b65c932f799bd0701385de0",
+    "integratedUpstreamCommits": [
+      "2b438eea5a7513d0650432953deb7c818d2b45b6",
+      "b6e9c07fd3952c298b6d64e38b0118478ae16baa",
+      "d2df2b65330d30ebcb864f6bc764ddad7075138e",
+      "14233a9c02319c2723f31e0f6ec416089ad3c9c7",
+      "32e99b7291e24880cb77aae571a2eb9b91e07a61",
+      "7d4f5bedce8c1ddbfd19178da5711b73f4cc6870",
+      "7d30dfc281db1ec78097ec6e654dd499e80507f5"
+    ]
+  },
+  "additionalConfigHashes": {
+    ".github/workflows/pages.yml": "b98d19a15f46b4fb9adcefefddff6e1fe6699ded8cfba073ca449c99b3e1f864"
+  },
+  "checks": {
+    "nodeTests": {
+      "pass": 303,
+      "fail": 0
+    },
+    "pagesNodeChecks": {
+      "pass": 27,
+      "fail": 0
+    },
+    "exactCharacterDelivery": "PASS",
+    "skillIntegrity": {
+      "bundles": 11,
+      "fileHashes": 64,
+      "localReferences": 47
+    }
+  },
+  "evaluation": {
+    "baselineSource": "0f0952c8556b5253bb781e222fc19b45c93fe34890506e925881ab26ee47077a",
+    "finalSource": "e96bb17abc9ffb092080f4accd2eda7afc3cbc8e2e52ba175f0aaedac27320b6",
+    "conditions": {
+      "durationSeconds": 60,
+      "dtSeconds": 0.025,
+      "seeds": "1..64",
+      "geometry": "existing test crossing fixture",
+      "speed": 110
+    },
+    "before": [
+      {
+        "policy": "full-crossing",
+        "n": 64,
+        "unlockCount": 64,
+        "unlockSeconds": {
+          "p10": 31.64999999999927,
+          "p50": 34.074999999999136,
+          "p90": 37.32499999999895
+        },
+        "scoreRange": [
+          14,
+          15
+        ],
+        "scriptedTraversalsRange": [
+          24,
+          25
+        ]
+      },
+      {
+        "policy": "wait-red-then-cross",
+        "n": 64,
+        "unlockCount": 58,
+        "unlockSeconds": {
+          "p10": 50.14999999999822,
+          "p50": 54.57499999999797,
+          "p90": 58.899999999997725
+        },
+        "scoreRange": [
+          8,
+          10
+        ],
+        "scriptedTraversalsRange": [
+          4,
+          5
+        ]
+      },
+      {
+        "policy": "same-side-retreat",
+        "n": 64,
+        "unlockCount": 64,
+        "unlockSeconds": {
+          "p10": 30.74999999999932,
+          "p50": 33.17499999999919,
+          "p90": 36.424999999999
+        },
+        "scoreRange": [
+          14,
+          15
+        ],
+        "scriptedTraversalsRange": [
+          0,
+          0
+        ]
+      }
+    ],
+    "after": [
+      {
+        "policy": "full-crossing",
+        "n": 64,
+        "unlockCount": 64,
+        "unlockSeconds": {
+          "p10": 31.64999999999927,
+          "p50": 34.074999999999136,
+          "p90": 37.32499999999895
+        },
+        "scoreRange": [
+          14,
+          15
+        ],
+        "scriptedTraversalsRange": [
+          24,
+          25
+        ]
+      },
+      {
+        "policy": "wait-red-then-cross",
+        "n": 64,
+        "unlockCount": 58,
+        "unlockSeconds": {
+          "p10": 50.14999999999822,
+          "p50": 54.57499999999797,
+          "p90": 58.899999999997725
+        },
+        "scoreRange": [
+          8,
+          10
+        ],
+        "scriptedTraversalsRange": [
+          4,
+          5
+        ]
+      },
+      {
+        "policy": "same-side-retreat",
+        "n": 64,
+        "unlockCount": 0,
+        "unlockSeconds": {
+          "p10": null,
+          "p50": null,
+          "p90": null
+        },
+        "scoreRange": [
+          0,
+          0
+        ],
+        "scriptedTraversalsRange": [
+          0,
+          0
+        ]
+      }
+    ],
+    "legitimateRowsUnchanged": 128,
+    "limits": [
+      "Production reward functions; synthetic movement and one test crossing",
+      "No collision/traffic, energy, quiz, mission, dialogue, real input or physical device simulation",
+      "Signal-phase trials are model scenarios, not sampled human players; no balance target or retuning"
+    ]
+  },
+  "crossingRegression": {
+    "generatedTraces": 270,
+    "steppedActualRoadTraversals": 180,
+    "geometries": 45,
+    "independentProbeCases": 618
+  },
+  "browserScenes": {
+    "mode": "scripted-scene with actual keyboard or CDP touch input",
+    "hook": "window.__crossingQA={state,updateHud,openDialogue};",
+    "shortcuts": [
+      "S skip, Next dismiss dialogue",
+      "Pavement fixture relocation, signal clock reset, optional quiz/audit disabled, moving traffic/crowd removed"
+    ],
+    "sourceHashes": {
+      "game.js": "e96bb17abc9ffb092080f4accd2eda7afc3cbc8e2e52ba175f0aaedac27320b6",
+      "styles.css": "505d1c82ad5ec65d6d2858397a35670eaabc0973e6d4aaef92af14f60911b040",
+      "buergeramt-fit.js": "af2ba0ed506a2706093005f40af7cf1d0a861698a1a4d2171fa84afdccab6df6",
+      "index.html": "2ddf353b83d5daeb28bf371a2ed296e46e8cffe3d9dd644485d7895a2705f257",
+      "world3d.js": "b68c863e06d17af01cea113f5c507c7f1a636b3c7cb5e63b1600f8f89fa1c9bb",
+      "3d.html": "dcc2cec605b186c496b0b25ca2de8b7c4808fbfc27a65614de09527cdbe0b456"
+    },
+    "cases": [
+      {
+        "name": "desktop",
+        "scenario": "same-side-retreat",
+        "input": "keyboard",
+        "c": {
+          "x": 1610,
+          "y": 1300,
+          "w": 260,
+          "h": 80
+        },
+        "axis": "x",
+        "near": 1586,
+        "enter": 1650,
+        "far": 1894,
+        "side": -1,
+        "score": 0,
+        "pose": {
+          "x": 1582.0434000000027,
+          "y": 1340
+        },
+        "verdict": "PASS"
+      },
+      {
+        "name": "desktop",
+        "scenario": "full-crossing",
+        "input": "keyboard",
+        "c": {
+          "x": 1610,
+          "y": 1300,
+          "w": 260,
+          "h": 80
+        },
+        "axis": "x",
+        "near": 1586,
+        "enter": 1650,
+        "far": 1894,
+        "side": -1,
+        "score": 1,
+        "pose": {
+          "x": 1898.2940000000044,
+          "y": 1340
+        },
+        "verdict": "PASS"
+      },
+      {
+        "name": "desktop",
+        "scenario": "same-side-retreat",
+        "input": "keyboard",
+        "c": {
+          "x": 1610,
+          "y": 1300,
+          "w": 260,
+          "h": 80
+        },
+        "axis": "x",
+        "near": 1894,
+        "enter": 1830,
+        "far": 1586,
+        "side": 1,
+        "score": 0,
+        "pose": {
+          "x": 1898.0733999999993,
+          "y": 1340
+        },
+        "verdict": "PASS"
+      },
+      {
+        "name": "desktop",
+        "scenario": "full-crossing",
+        "input": "keyboard",
+        "c": {
+          "x": 1610,
+          "y": 1300,
+          "w": 260,
+          "h": 80
+        },
+        "axis": "x",
+        "near": 1894,
+        "enter": 1830,
+        "far": 1586,
+        "side": 1,
+        "score": 1,
+        "pose": {
+          "x": 1582.7572000000002,
+          "y": 1340
+        },
+        "verdict": "PASS"
+      },
+      {
+        "name": "desktop",
+        "scenario": "same-side-retreat",
+        "input": "keyboard",
+        "c": {
+          "x": 1520,
+          "y": 1380,
+          "w": 90,
+          "h": 260
+        },
+        "axis": "y",
+        "near": 1356,
+        "enter": 1420,
+        "far": 1664,
+        "side": -1,
+        "score": 0,
+        "pose": {
+          "x": 1565,
+          "y": 1355.2992
+        },
+        "verdict": "PASS"
+      },
+      {
+        "name": "desktop",
+        "scenario": "full-crossing",
+        "input": "keyboard",
+        "c": {
+          "x": 1520,
+          "y": 1380,
+          "w": 90,
+          "h": 260
+        },
+        "axis": "y",
+        "near": 1356,
+        "enter": 1420,
+        "far": 1664,
+        "side": -1,
+        "score": 1,
+        "pose": {
+          "x": 1565,
+          "y": 1668.3086000000042
+        },
+        "verdict": "PASS"
+      },
+      {
+        "name": "desktop",
+        "scenario": "same-side-retreat",
+        "input": "keyboard",
+        "c": {
+          "x": 1520,
+          "y": 1380,
+          "w": 90,
+          "h": 260
+        },
+        "axis": "y",
+        "near": 1664,
+        "enter": 1600,
+        "far": 1356,
+        "side": 1,
+        "score": 0,
+        "pose": {
+          "x": 1565,
+          "y": 1666.0440000000008
+        },
+        "verdict": "PASS"
+      },
+      {
+        "name": "desktop",
+        "scenario": "full-crossing",
+        "input": "keyboard",
+        "c": {
+          "x": 1520,
+          "y": 1380,
+          "w": 90,
+          "h": 260
+        },
+        "axis": "y",
+        "near": 1664,
+        "enter": 1600,
+        "far": 1356,
+        "side": 1,
+        "score": 1,
+        "pose": {
+          "x": 1565,
+          "y": 1351.7497999999964
+        },
+        "verdict": "PASS"
+      },
+      {
+        "name": "desktop",
+        "scenario": "same-side-retreat",
+        "input": "keyboard",
+        "c": {
+          "x": 4150,
+          "y": 3545,
+          "w": 120,
+          "h": 270
+        },
+        "axis": "y",
+        "near": 3521,
+        "enter": 3585,
+        "far": 3839,
+        "side": -1,
+        "score": 0,
+        "pose": {
+          "x": 4210,
+          "y": 3516.2403999999956
+        },
+        "verdict": "PASS"
+      },
+      {
+        "name": "desktop",
+        "scenario": "full-crossing",
+        "input": "keyboard",
+        "c": {
+          "x": 4150,
+          "y": 3545,
+          "w": 120,
+          "h": 270
+        },
+        "axis": "y",
+        "near": 3521,
+        "enter": 3585,
+        "far": 3839,
+        "side": -1,
+        "score": 1,
+        "pose": {
+          "x": 4210,
+          "y": 3844.3900000000062
+        },
+        "verdict": "PASS"
+      },
+      {
+        "name": "desktop",
+        "scenario": "same-side-retreat",
+        "input": "keyboard",
+        "c": {
+          "x": 4150,
+          "y": 3545,
+          "w": 120,
+          "h": 270
+        },
+        "axis": "y",
+        "near": 3839,
+        "enter": 3775,
+        "far": 3521,
+        "side": 1,
+        "score": 0,
+        "pose": {
+          "x": 4210,
+          "y": 3845.117399999997
+        },
+        "verdict": "PASS"
+      },
+      {
+        "name": "desktop",
+        "scenario": "full-crossing",
+        "input": "keyboard",
+        "c": {
+          "x": 4150,
+          "y": 3545,
+          "w": 120,
+          "h": 270
+        },
+        "axis": "y",
+        "near": 3839,
+        "enter": 3775,
+        "far": 3521,
+        "side": 1,
+        "score": 1,
+        "pose": {
+          "x": 4210,
+          "y": 3516.6173999999914
+        },
+        "verdict": "PASS"
+      },
+      {
+        "name": "android-portrait",
+        "scenario": "same-side-retreat",
+        "input": "CDP touch on visible direction control",
+        "c": {
+          "x": 1610,
+          "y": 1300,
+          "w": 260,
+          "h": 80
+        },
+        "axis": "x",
+        "near": 1586,
+        "enter": 1650,
+        "far": 1894,
+        "side": -1,
+        "score": 0,
+        "pose": {
+          "x": 1582.9486000000018,
+          "y": 1340
+        },
+        "verdict": "PASS"
+      },
+      {
+        "name": "android-portrait",
+        "scenario": "full-crossing",
+        "input": "CDP touch on visible direction control",
+        "c": {
+          "x": 1610,
+          "y": 1300,
+          "w": 260,
+          "h": 80
+        },
+        "axis": "x",
+        "near": 1586,
+        "enter": 1650,
+        "far": 1894,
+        "side": -1,
+        "score": 1,
+        "pose": {
+          "x": 1897.2573999999968,
+          "y": 1340
+        },
+        "verdict": "PASS"
+      },
+      {
+        "name": "android-portrait",
+        "scenario": "same-side-retreat",
+        "input": "CDP touch on visible direction control",
+        "c": {
+          "x": 1610,
+          "y": 1300,
+          "w": 260,
+          "h": 80
+        },
+        "axis": "x",
+        "near": 1894,
+        "enter": 1830,
+        "far": 1586,
+        "side": 1,
+        "score": 0,
+        "pose": {
+          "x": 1894.0146,
+          "y": 1340
+        },
+        "verdict": "PASS"
+      },
+      {
+        "name": "android-portrait",
+        "scenario": "full-crossing",
+        "input": "CDP touch on visible direction control",
+        "c": {
+          "x": 1610,
+          "y": 1300,
+          "w": 260,
+          "h": 80
+        },
+        "axis": "x",
+        "near": 1894,
+        "enter": 1830,
+        "far": 1586,
+        "side": 1,
+        "score": 1,
+        "pose": {
+          "x": 1584.772000000003,
+          "y": 1340
+        },
+        "verdict": "PASS"
+      },
+      {
+        "name": "android-portrait",
+        "scenario": "same-side-retreat",
+        "input": "CDP touch on visible direction control",
+        "c": {
+          "x": 1520,
+          "y": 1380,
+          "w": 90,
+          "h": 260
+        },
+        "axis": "y",
+        "near": 1356,
+        "enter": 1420,
+        "far": 1664,
+        "side": -1,
+        "score": 0,
+        "pose": {
+          "x": 1565,
+          "y": 1351.9558000000018
+        },
+        "verdict": "PASS"
+      },
+      {
+        "name": "android-portrait",
+        "scenario": "full-crossing",
+        "input": "CDP touch on visible direction control",
+        "c": {
+          "x": 1520,
+          "y": 1380,
+          "w": 90,
+          "h": 260
+        },
+        "axis": "y",
+        "near": 1356,
+        "enter": 1420,
+        "far": 1664,
+        "side": -1,
+        "score": 1,
+        "pose": {
+          "x": 1565,
+          "y": 1667.2428000000011
+        },
+        "verdict": "PASS"
+      },
+      {
+        "name": "android-portrait",
+        "scenario": "same-side-retreat",
+        "input": "CDP touch on visible direction control",
+        "c": {
+          "x": 1520,
+          "y": 1380,
+          "w": 90,
+          "h": 260
+        },
+        "axis": "y",
+        "near": 1664,
+        "enter": 1600,
+        "far": 1356,
+        "side": 1,
+        "score": 0,
+        "pose": {
+          "x": 1565,
+          "y": 1664.0146000000009
+        },
+        "verdict": "PASS"
+      },
+      {
+        "name": "android-portrait",
+        "scenario": "full-crossing",
+        "input": "CDP touch on visible direction control",
+        "c": {
+          "x": 1520,
+          "y": 1380,
+          "w": 90,
+          "h": 260
+        },
+        "axis": "y",
+        "near": 1664,
+        "enter": 1600,
+        "far": 1356,
+        "side": 1,
+        "score": 1,
+        "pose": {
+          "x": 1565,
+          "y": 1354.7282000000018
+        },
+        "verdict": "PASS"
+      },
+      {
+        "name": "android-portrait",
+        "scenario": "same-side-retreat",
+        "input": "CDP touch on visible direction control",
+        "c": {
+          "x": 4150,
+          "y": 3545,
+          "w": 120,
+          "h": 270
+        },
+        "axis": "y",
+        "near": 3521,
+        "enter": 3585,
+        "far": 3839,
+        "side": -1,
+        "score": 0,
+        "pose": {
+          "x": 4210,
+          "y": 3518.9706
+        },
+        "verdict": "PASS"
+      },
+      {
+        "name": "android-portrait",
+        "scenario": "full-crossing",
+        "input": "CDP touch on visible direction control",
+        "c": {
+          "x": 4150,
+          "y": 3545,
+          "w": 120,
+          "h": 270
+        },
+        "axis": "y",
+        "near": 3521,
+        "enter": 3585,
+        "far": 3839,
+        "side": -1,
+        "score": 1,
+        "pose": {
+          "x": 4210,
+          "y": 3840.389600000027
+        },
+        "verdict": "PASS"
+      },
+      {
+        "name": "android-portrait",
+        "scenario": "same-side-retreat",
+        "input": "CDP touch on visible direction control",
+        "c": {
+          "x": 4150,
+          "y": 3545,
+          "w": 120,
+          "h": 270
+        },
+        "axis": "y",
+        "near": 3839,
+        "enter": 3775,
+        "far": 3521,
+        "side": 1,
+        "score": 0,
+        "pose": {
+          "x": 4210,
+          "y": 3839.0291999999968
+        },
+        "verdict": "PASS"
+      },
+      {
+        "name": "android-portrait",
+        "scenario": "full-crossing",
+        "input": "CDP touch on visible direction control",
+        "c": {
+          "x": 4150,
+          "y": 3545,
+          "w": 120,
+          "h": 270
+        },
+        "axis": "y",
+        "near": 3839,
+        "enter": 3775,
+        "far": 3521,
+        "side": 1,
+        "score": 1,
+        "pose": {
+          "x": 4210,
+          "y": 3517.6101999999737
+        },
+        "verdict": "PASS"
+      },
+      {
+        "name": "android-landscape",
+        "scenario": "same-side-retreat",
+        "input": "CDP touch on visible direction control",
+        "c": {
+          "x": 1610,
+          "y": 1300,
+          "w": 260,
+          "h": 80
+        },
+        "axis": "x",
+        "near": 1586,
+        "enter": 1650,
+        "far": 1894,
+        "side": -1,
+        "score": 0,
+        "pose": {
+          "x": 1583.9852000000005,
+          "y": 1340
+        },
+        "verdict": "PASS"
+      },
+      {
+        "name": "android-landscape",
+        "scenario": "full-crossing",
+        "input": "CDP touch on visible direction control",
+        "c": {
+          "x": 1610,
+          "y": 1300,
+          "w": 260,
+          "h": 80
+        },
+        "axis": "x",
+        "near": 1586,
+        "enter": 1650,
+        "far": 1894,
+        "side": -1,
+        "score": 1,
+        "pose": {
+          "x": 1898.2355999999966,
+          "y": 1340
+        },
+        "verdict": "PASS"
+      },
+      {
+        "name": "android-landscape",
+        "scenario": "same-side-retreat",
+        "input": "CDP touch on visible direction control",
+        "c": {
+          "x": 1610,
+          "y": 1300,
+          "w": 260,
+          "h": 80
+        },
+        "axis": "x",
+        "near": 1894,
+        "enter": 1830,
+        "far": 1586,
+        "side": 1,
+        "score": 0,
+        "pose": {
+          "x": 1899.0661999999988,
+          "y": 1340
+        },
+        "verdict": "PASS"
+      },
+      {
+        "name": "android-landscape",
+        "scenario": "full-crossing",
+        "input": "CDP touch on visible direction control",
+        "c": {
+          "x": 1610,
+          "y": 1300,
+          "w": 260,
+          "h": 80
+        },
+        "axis": "x",
+        "near": 1894,
+        "enter": 1830,
+        "far": 1586,
+        "side": 1,
+        "score": 1,
+        "pose": {
+          "x": 1582.7718000000048,
+          "y": 1340
+        },
+        "verdict": "PASS"
+      },
+      {
+        "name": "android-landscape",
+        "scenario": "same-side-retreat",
+        "input": "CDP touch on visible direction control",
+        "c": {
+          "x": 1520,
+          "y": 1380,
+          "w": 90,
+          "h": 260
+        },
+        "axis": "y",
+        "near": 1356,
+        "enter": 1420,
+        "far": 1664,
+        "side": -1,
+        "score": 0,
+        "pose": {
+          "x": 1565,
+          "y": 1354.9925999999998
+        },
+        "verdict": "PASS"
+      },
+      {
+        "name": "android-landscape",
+        "scenario": "full-crossing",
+        "input": "CDP touch on visible direction control",
+        "c": {
+          "x": 1520,
+          "y": 1380,
+          "w": 90,
+          "h": 260
+        },
+        "axis": "y",
+        "near": 1356,
+        "enter": 1420,
+        "far": 1664,
+        "side": -1,
+        "score": 1,
+        "pose": {
+          "x": 1565,
+          "y": 1667.271999999999
+        },
+        "verdict": "PASS"
+      },
+      {
+        "name": "android-landscape",
+        "scenario": "same-side-retreat",
+        "input": "CDP touch on visible direction control",
+        "c": {
+          "x": 1520,
+          "y": 1380,
+          "w": 90,
+          "h": 260
+        },
+        "axis": "y",
+        "near": 1664,
+        "enter": 1600,
+        "far": 1356,
+        "side": 1,
+        "score": 0,
+        "pose": {
+          "x": 1565,
+          "y": 1667.0368000000014
+        },
+        "verdict": "PASS"
+      },
+      {
+        "name": "android-landscape",
+        "scenario": "full-crossing",
+        "input": "CDP touch on visible direction control",
+        "c": {
+          "x": 1520,
+          "y": 1380,
+          "w": 90,
+          "h": 260
+        },
+        "axis": "y",
+        "near": 1664,
+        "enter": 1600,
+        "far": 1356,
+        "side": 1,
+        "score": 1,
+        "pose": {
+          "x": 1565,
+          "y": 1353.7499999999995
+        },
+        "verdict": "PASS"
+      },
+      {
+        "name": "android-landscape",
+        "scenario": "same-side-retreat",
+        "input": "CDP touch on visible direction control",
+        "c": {
+          "x": 4150,
+          "y": 3545,
+          "w": 120,
+          "h": 270
+        },
+        "axis": "y",
+        "near": 3521,
+        "enter": 3585,
+        "far": 3839,
+        "side": -1,
+        "score": 0,
+        "pose": {
+          "x": 4210,
+          "y": 3517.2186000000024
+        },
+        "verdict": "PASS"
+      },
+      {
+        "name": "android-landscape",
+        "scenario": "full-crossing",
+        "input": "CDP touch on visible direction control",
+        "c": {
+          "x": 4150,
+          "y": 3545,
+          "w": 120,
+          "h": 270
+        },
+        "axis": "y",
+        "near": 3521,
+        "enter": 3585,
+        "far": 3839,
+        "side": -1,
+        "score": 1,
+        "pose": {
+          "x": 4210,
+          "y": 3847.456000000028
+        },
+        "verdict": "PASS"
+      },
+      {
+        "name": "android-landscape",
+        "scenario": "same-side-retreat",
+        "input": "CDP touch on visible direction control",
+        "c": {
+          "x": 4150,
+          "y": 3545,
+          "w": 120,
+          "h": 270
+        },
+        "axis": "y",
+        "near": 3839,
+        "enter": 3775,
+        "far": 3521,
+        "side": 1,
+        "score": 0,
+        "pose": {
+          "x": 4210,
+          "y": 3840.021999999998
+        },
+        "verdict": "PASS"
+      },
+      {
+        "name": "android-landscape",
+        "scenario": "full-crossing",
+        "input": "CDP touch on visible direction control",
+        "c": {
+          "x": 4150,
+          "y": 3545,
+          "w": 120,
+          "h": 270
+        },
+        "axis": "y",
+        "near": 3839,
+        "enter": 3775,
+        "far": 3521,
+        "side": 1,
+        "score": 1,
+        "pose": {
+          "x": 4210,
+          "y": 3515.5661999999784
+        },
+        "verdict": "PASS"
+      }
+    ],
+    "screenshots": {
+      "android-landscape-3d.png": "66019779c29246faeb6dc65fcf59cd781d9fa0813856a761dd895cd6fdc62b3b",
+      "android-landscape-completed.png": "33e38d03dbb3ff231da366e741b8d87c2cd879b8b1e1a1b9118fdc8d7555698d",
+      "android-landscape-enlarged-labels.png": "8b5a206e352c2057a17fcc5101492f95c2d77039cfe531057e7be182ecfbeaae",
+      "android-landscape-x-in-crossing.png": "160c6ce209418e1d3e905481578a61729c010f18003c88cf70adbefa8ef7e5cb",
+      "android-landscape-y-in-crossing.png": "c7246e4f5f1b65c2f4996d279d4fdee570f045709db4cf0847fd6de453deda77",
+      "android-portrait-3d.png": "65b7237b881dbae9e037ebef73982b6fa0ed92527d086ef176fa8ff6d08d7013",
+      "android-portrait-completed.png": "2d9c9f721d9fe72730edd05c5b76b61d1b72493559169bd0e73dee1de6b5a9fa",
+      "android-portrait-x-in-crossing.png": "35cff078b20ebd9f3fedc443a85bacc388790ca666d8e6436b3aa19b606fa99c",
+      "android-portrait-y-in-crossing.png": "880b5fa3697a55ca9d5ede7f406eb2a30a3dcd867f0814a8d44a74dd05d1219e",
+      "desktop-3d.png": "ca2f5158c8e7dc35d9db8b2516d46bf2bc759701d5bde7e79c68f712034e0931",
+      "desktop-completed.png": "567fde963863533ab99f29500e07b8c3d00c8ed1e64e7526b11c25f7bac73987",
+      "desktop-x-in-crossing.png": "6a3ad6cc433b48ba56c5811922d438a1c42fd093714c16914b3526568b747a5a",
+      "desktop-y-in-crossing.png": "8493e303144a002770741275d8901b419d53f1b641766a2b49d0c6c6237f8148"
+    },
+    "limits": [
+      "Not a natural mission/unlock chain or physical Android test",
+      "No rendered geometry, camera, quality or collision source modification",
+      "Session media/WebAudio/speech muted; no listening review"
+    ]
+  },
+  "controlLayout": {
+    "mode": "separate scripted doorway/dialogue fixture; source hashes captured before run",
+    "sourceHashes": {
+      "game.js": "e96bb17abc9ffb092080f4accd2eda7afc3cbc8e2e52ba175f0aaedac27320b6",
+      "styles.css": "505d1c82ad5ec65d6d2858397a35670eaabc0973e6d4aaef92af14f60911b040",
+      "buergeramt-fit.js": "af2ba0ed506a2706093005f40af7cf1d0a861698a1a4d2171fa84afdccab6df6",
+      "index.html": "2ddf353b83d5daeb28bf371a2ed296e46e8cffe3d9dd644485d7895a2705f257",
+      "world3d.js": "b68c863e06d17af01cea113f5c507c7f1a636b3c7cb5e63b1600f8f89fa1c9bb",
+      "3d.html": "dcc2cec605b186c496b0b25ca2de8b7c4808fbfc27a65614de09527cdbe0b456"
+    },
+    "states": [
+      {
+        "name": "android-portrait",
+        "enlarged": false,
+        "width": 320,
+        "coarse": true,
+        "allButtonsFit": true,
+        "dialogueGap": 7.8125,
+        "nextFits": true,
+        "visibleHint": {
+          "text": "E · BÜRGERAMT",
+          "width": 113.640625,
+          "height": 27,
+          "bottom": 672,
+          "dockTop": 679.8125
+        }
+      },
+      {
+        "name": "android-portrait",
+        "enlarged": true,
+        "width": 320,
+        "coarse": true,
+        "allButtonsFit": true,
+        "dialogueGap": 7.8125,
+        "nextFits": true,
+        "visibleHint": {
+          "text": "E · BÜRGERAMT",
+          "width": 113.640625,
+          "height": 27,
+          "bottom": 640,
+          "dockTop": 647.8125
+        }
+      },
+      {
+        "name": "android-portrait",
+        "enlarged": false,
+        "width": 390,
+        "coarse": true,
+        "allButtonsFit": true,
+        "dialogueGap": 7.8125,
+        "nextFits": true,
+        "visibleHint": {
+          "text": "E · BÜRGERAMT",
+          "width": 113.640625,
+          "height": 27,
+          "bottom": 672,
+          "dockTop": 679.8125
+        }
+      },
+      {
+        "name": "android-portrait",
+        "enlarged": true,
+        "width": 390,
+        "coarse": true,
+        "allButtonsFit": true,
+        "dialogueGap": 7.8125,
+        "nextFits": true,
+        "visibleHint": {
+          "text": "E · BÜRGERAMT",
+          "width": 113.640625,
+          "height": 27,
+          "bottom": 640,
+          "dockTop": 647.8125
+        }
+      },
+      {
+        "name": "android-portrait",
+        "enlarged": false,
+        "width": 760,
+        "coarse": true,
+        "allButtonsFit": true,
+        "dialogueGap": 7.8125,
+        "nextFits": true,
+        "visibleHint": {
+          "text": "E · BÜRGERAMT",
+          "width": 113.640625,
+          "height": 27,
+          "bottom": 672,
+          "dockTop": 679.8125
+        }
+      },
+      {
+        "name": "android-portrait",
+        "enlarged": true,
+        "width": 760,
+        "coarse": true,
+        "allButtonsFit": true,
+        "dialogueGap": 7.8125,
+        "nextFits": true,
+        "visibleHint": {
+          "text": "E · BÜRGERAMT",
+          "width": 113.640625,
+          "height": 27,
+          "bottom": 640,
+          "dockTop": 647.8125
+        }
+      },
+      {
+        "name": "android-portrait",
+        "enlarged": false,
+        "width": 761,
+        "coarse": true,
+        "allButtonsFit": true,
+        "dialogueGap": 7.609375,
+        "nextFits": true,
+        "visibleHint": {
+          "text": "E · BÜRGERAMT",
+          "width": 119.640625,
+          "height": 31,
+          "bottom": 699,
+          "dockTop": 706.609375
+        }
+      },
+      {
+        "name": "android-portrait",
+        "enlarged": true,
+        "width": 761,
+        "coarse": true,
+        "allButtonsFit": true,
+        "dialogueGap": 7.609375,
+        "nextFits": true,
+        "visibleHint": {
+          "text": "E · BÜRGERAMT",
+          "width": 119.640625,
+          "height": 31,
+          "bottom": 685,
+          "dockTop": 692.609375
+        }
+      },
+      {
+        "name": "android-landscape",
+        "enlarged": false,
+        "width": 844,
+        "coarse": true,
+        "allButtonsFit": true,
+        "dialogueGap": 7.609375,
+        "nextFits": true,
+        "visibleHint": {
+          "text": "E · BÜRGERAMT",
+          "width": 119.640625,
+          "height": 31,
+          "bottom": 245,
+          "dockTop": 252.609375
+        }
+      },
+      {
+        "name": "android-landscape",
+        "enlarged": true,
+        "width": 844,
+        "coarse": true,
+        "allButtonsFit": true,
+        "dialogueGap": 7.609375,
+        "nextFits": true,
+        "visibleHint": {
+          "text": "E · BÜRGERAMT",
+          "width": 119.640625,
+          "height": 31,
+          "bottom": 231,
+          "dockTop": 238.609375
+        }
+      },
+      {
+        "name": "android-landscape",
+        "enlarged": false,
+        "width": 1280,
+        "coarse": true,
+        "allButtonsFit": true,
+        "dialogueGap": 7.25,
+        "nextFits": true,
+        "visibleHint": {
+          "text": "E · BÜRGERAMT",
+          "width": 119.640625,
+          "height": 31,
+          "bottom": 230,
+          "dockTop": 237.25
+        }
+      },
+      {
+        "name": "android-landscape",
+        "enlarged": true,
+        "width": 1280,
+        "coarse": true,
+        "allButtonsFit": true,
+        "dialogueGap": 7.25,
+        "nextFits": true,
+        "visibleHint": {
+          "text": "E · BÜRGERAMT",
+          "width": 119.640625,
+          "height": 31,
+          "bottom": 216,
+          "dockTop": 223.25
+        }
+      }
+    ],
+    "screenshots": {
+      "android-landscape-3d.png": "a175e41cc106f7984c8bba626504df829abb34ea06809e0682da33cdf8e7d41d",
+      "android-landscape-completed.png": "2df7c92bb41aeb96f7a9ead99fa2ac11bfa95da609198b5264750f1d65f8d11f",
+      "android-landscape-enlarged-labels.png": "a1d1aaa8e4ecce28a2e3b66d9cd71091c45f35b3e37fdf84999ec9f1faef4258",
+      "android-portrait-3d.png": "65b7237b881dbae9e037ebef73982b6fa0ed92527d086ef176fa8ff6d08d7013",
+      "android-portrait-completed.png": "3073b2b70a331325a60723c2abc191041dc0606e97a9ac3180645ec611084b27",
+      "desktop-3d.png": "2ff0b9ba381947b017b170f11676924ad42841a058ce4c32d97b28a6d0b07466",
+      "desktop-completed.png": "f710c112b0f3a4fb1666b32a2b930c40c66fc1c0a462b0d64c296eb5c90a174e"
+    },
+    "supersedes": "The historical pre-integration crossing report had a vacuous zero-area hint check; both newly regenerated integrated reports assert positive production hint rectangles"
+  },
+  "benchmarks": {
+    "baseline": {
+      "conditions": {
+        "sourceRef": "working tree",
+        "browser": "148.0.7778.96",
+        "network": "local uncompressed HTTP; cold browser context",
+        "cpu": "no CPU throttling",
+        "gpu": "ANGLE hardware renderer (queried per run)",
+        "dpr": 2,
+        "seedBase": 41
+      },
+      "revision": {
+        "game.js": "0f0952c8556b5253bb781e222fc19b45c93fe34890506e925881ab26ee47077a",
+        "world3d.js": "9065fe17b0b0878d21d25cf47979169a8e91f8283edd34663ca30fca44cc2fa1",
+        "tourist-animation.js": "1982cda544e01197fb12d396b3452470a5d893a376891dec9408e3dea814ba10"
+      },
+      "limits": [
+        "Lab evidence only; no field data or physical Android; hardware renderer queried, GPU timing unavailable",
+        "Start uses the existing S keyboard shortcut to skip the humor questionnaire",
+        "Opening-screen and gameplay samples are separate; screenshots are representative frames",
+        "Seeded initialization does not fix frame scheduling, movement endpoints or async asset completion"
+      ],
+      "runs": [
+        {
+          "name": "desktop",
+          "run": 0,
+          "gpu": "ANGLE (Intel, Intel(R) Iris(R) Xe Graphics (0x00009A49) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+          "readyMs": 4786.20000000298,
+          "loadedMs": 5661,
+          "startupBytes": 15388466,
+          "startupRequests": 106,
+          "startupAssets": {
+            "models": {
+              "pending": 0,
+              "active": 0,
+              "failed": 0
+            },
+            "characters": {
+              "required": [
+                "borderPourer",
+                "bayern",
+                "towelWoman",
+                "towelMan"
+              ],
+              "settled": [
+                "borderPourer",
+                "bayern",
+                "towelWoman",
+                "towelMan"
+              ],
+              "failed": []
+            },
+            "queue": {
+              "active": 0,
+              "pending": 0
+            },
+            "office": {
+              "pending": 0,
+              "failed": 0
+            }
+          },
+          "inputLatency": {
+            "accepted": 9,
+            "p50": 19.300000000745058,
+            "p95": 35.80000000074506
+          },
+          "intro": {
+            "elapsedMs": 3003.900000002235,
+            "syncCalls": 12,
+            "frameMs": {
+              "p50": 249.90000000223517,
+              "p95": 250.39999999850988
+            }
+          },
+          "gameplay": {
+            "elapsedMs": 3025.10000000149,
+            "syncCalls": 152,
+            "frameMs": {
+              "p50": 18.699999999254942,
+              "p95": 28.600000001490116
+            },
+            "drawingBuffer": [
+              1280,
+              800
+            ]
+          },
+          "moved": 67.93379999999979,
+          "longTaskCount": 8,
+          "errors": []
+        },
+        {
+          "name": "desktop",
+          "run": 1,
+          "gpu": "ANGLE (Intel, Intel(R) Iris(R) Xe Graphics (0x00009A49) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+          "readyMs": 2345.60000000149,
+          "loadedMs": 2723.800000000745,
+          "startupBytes": 16375555,
+          "startupRequests": 111,
+          "startupAssets": {
+            "models": {
+              "pending": 0,
+              "active": 0,
+              "failed": 0
+            },
+            "characters": {
+              "required": [
+                "borderPourer",
+                "bayern",
+                "towelWoman",
+                "towelMan"
+              ],
+              "settled": [
+                "borderPourer",
+                "bayern",
+                "towelWoman",
+                "towelMan"
+              ],
+              "failed": []
+            },
+            "queue": {
+              "active": 0,
+              "pending": 0
+            },
+            "office": {
+              "pending": 0,
+              "failed": 0
+            }
+          },
+          "inputLatency": {
+            "accepted": 9,
+            "p50": 17.400000002235174,
+            "p95": 35
+          },
+          "intro": {
+            "elapsedMs": 3003.199999999255,
+            "syncCalls": 12,
+            "frameMs": {
+              "p50": 250,
+              "p95": 250.10000000149012
+            }
+          },
+          "gameplay": {
+            "elapsedMs": 3031.10000000149,
+            "syncCalls": 164,
+            "frameMs": {
+              "p50": 18.600000001490116,
+              "p95": 23.400000002235174
+            },
+            "drawingBuffer": [
+              1280,
+              800
+            ]
+          },
+          "moved": 63.87500000000091,
+          "longTaskCount": 4,
+          "errors": []
+        },
+        {
+          "name": "desktop",
+          "run": 2,
+          "gpu": "ANGLE (Intel, Intel(R) Iris(R) Xe Graphics (0x00009A49) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+          "readyMs": 2616,
+          "loadedMs": 3141,
+          "startupBytes": 16375553,
+          "startupRequests": 111,
+          "startupAssets": {
+            "models": {
+              "pending": 0,
+              "active": 0,
+              "failed": 0
+            },
+            "characters": {
+              "required": [
+                "borderPourer",
+                "bayern",
+                "towelWoman",
+                "towelMan"
+              ],
+              "settled": [
+                "borderPourer",
+                "bayern",
+                "towelWoman",
+                "towelMan"
+              ],
+              "failed": []
+            },
+            "queue": {
+              "active": 0,
+              "pending": 0
+            },
+            "office": {
+              "pending": 0,
+              "failed": 0
+            }
+          },
+          "inputLatency": {
+            "accepted": 9,
+            "p50": 19,
+            "p95": 39.5
+          },
+          "intro": {
+            "elapsedMs": 3008.300000000745,
+            "syncCalls": 12,
+            "frameMs": {
+              "p50": 250.10000000149012,
+              "p95": 250.40000000223517
+            }
+          },
+          "gameplay": {
+            "elapsedMs": 3011,
+            "syncCalls": 162,
+            "frameMs": {
+              "p50": 18,
+              "p95": 26.399999998509884
+            },
+            "drawingBuffer": [
+              1280,
+              800
+            ]
+          },
+          "moved": 60.83819999999923,
+          "longTaskCount": 4,
+          "errors": []
+        },
+        {
+          "name": "android-emulated",
+          "run": 0,
+          "gpu": "ANGLE (Intel, Intel(R) Iris(R) Xe Graphics (0x00009A49) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+          "readyMs": 1867.1000000014901,
+          "loadedMs": 2203,
+          "startupBytes": 16027776,
+          "startupRequests": 100,
+          "startupAssets": {
+            "models": {
+              "pending": 0,
+              "active": 0,
+              "failed": 0
+            },
+            "characters": {
+              "required": [
+                "borderPourer",
+                "bayern",
+                "towelWoman",
+                "towelMan"
+              ],
+              "settled": [
+                "borderPourer",
+                "bayern",
+                "towelWoman",
+                "towelMan"
+              ],
+              "failed": []
+            },
+            "queue": {
+              "active": 0,
+              "pending": 0
+            },
+            "office": {
+              "pending": 0,
+              "failed": 0
+            }
+          },
+          "inputLatency": {
+            "accepted": 9,
+            "p50": 17.199999999254942,
+            "p95": 32.29999999701977
+          },
+          "intro": {
+            "elapsedMs": 3006.099999997765,
+            "syncCalls": 12,
+            "frameMs": {
+              "p50": 250.10000000149012,
+              "p95": 250.60000000149012
+            }
+          },
+          "gameplay": {
+            "elapsedMs": 3031.400000002235,
+            "syncCalls": 182,
+            "frameMs": {
+              "p50": 15.599999997764826,
+              "p95": 22.099999997764826
+            },
+            "drawingBuffer": [
+              390,
+              844
+            ]
+          },
+          "moved": 63.889600000004066,
+          "longTaskCount": 4,
+          "errors": []
+        },
+        {
+          "name": "android-emulated",
+          "run": 1,
+          "gpu": "ANGLE (Intel, Intel(R) Iris(R) Xe Graphics (0x00009A49) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+          "readyMs": 1712.6000000014901,
+          "loadedMs": 2101,
+          "startupBytes": 15706152,
+          "startupRequests": 99,
+          "startupAssets": {
+            "models": {
+              "pending": 0,
+              "active": 0,
+              "failed": 0
+            },
+            "characters": {
+              "required": [
+                "borderPourer",
+                "bayern",
+                "towelWoman",
+                "towelMan"
+              ],
+              "settled": [
+                "borderPourer",
+                "bayern",
+                "towelWoman",
+                "towelMan"
+              ],
+              "failed": []
+            },
+            "queue": {
+              "active": 0,
+              "pending": 0
+            },
+            "office": {
+              "pending": 0,
+              "failed": 0
+            }
+          },
+          "inputLatency": {
+            "accepted": 9,
+            "p50": 20.199999999254942,
+            "p95": 25.899999998509884
+          },
+          "intro": {
+            "elapsedMs": 3011.300000000745,
+            "syncCalls": 12,
+            "frameMs": {
+              "p50": 249.90000000223517,
+              "p95": 250.60000000149012
+            }
+          },
+          "gameplay": {
+            "elapsedMs": 3005.300000000745,
+            "syncCalls": 179,
+            "frameMs": {
+              "p50": 15.800000000745058,
+              "p95": 21.099999997764826
+            },
+            "drawingBuffer": [
+              390,
+              844
+            ]
+          },
+          "moved": 63.87500000000637,
+          "longTaskCount": 3,
+          "errors": []
+        },
+        {
+          "name": "android-emulated",
+          "run": 2,
+          "gpu": "ANGLE (Intel, Intel(R) Iris(R) Xe Graphics (0x00009A49) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+          "readyMs": 3277.800000000745,
+          "loadedMs": 3732.199999999255,
+          "startupBytes": 16027790,
+          "startupRequests": 100,
+          "startupAssets": {
+            "models": {
+              "pending": 0,
+              "active": 0,
+              "failed": 0
+            },
+            "characters": {
+              "required": [
+                "borderPourer",
+                "bayern",
+                "towelWoman",
+                "towelMan"
+              ],
+              "settled": [
+                "borderPourer",
+                "bayern",
+                "towelWoman",
+                "towelMan"
+              ],
+              "failed": []
+            },
+            "queue": {
+              "active": 0,
+              "pending": 0
+            },
+            "office": {
+              "pending": 0,
+              "failed": 0
+            }
+          },
+          "inputLatency": {
+            "accepted": 9,
+            "p50": 14.799999997019768,
+            "p95": 40.69999999925494
+          },
+          "intro": {
+            "elapsedMs": 3019.400000002235,
+            "syncCalls": 12,
+            "frameMs": {
+              "p50": 250.5,
+              "p95": 252.5
+            }
+          },
+          "gameplay": {
+            "elapsedMs": 3009.199999999255,
+            "syncCalls": 173,
+            "frameMs": {
+              "p50": 16.900000002235174,
+              "p95": 22.600000001490116
+            },
+            "drawingBuffer": [
+              390,
+              844
+            ]
+          },
+          "moved": 61.84560000000101,
+          "longTaskCount": 4,
+          "errors": []
+        }
+      ]
+    },
+    "final": {
+      "conditions": {
+        "sourceRef": "working tree",
+        "browser": "148.0.7778.96",
+        "network": "local uncompressed HTTP; cold browser context",
+        "cpu": "no CPU throttling",
+        "gpu": "ANGLE hardware renderer (queried per run)",
+        "dpr": 2,
+        "seedBase": 41
+      },
+      "revision": {
+        "game.js": "e96bb17abc9ffb092080f4accd2eda7afc3cbc8e2e52ba175f0aaedac27320b6",
+        "world3d.js": "b68c863e06d17af01cea113f5c507c7f1a636b3c7cb5e63b1600f8f89fa1c9bb",
+        "tourist-animation.js": "1982cda544e01197fb12d396b3452470a5d893a376891dec9408e3dea814ba10"
+      },
+      "limits": [
+        "Lab evidence only; no field data or physical Android; hardware renderer queried, GPU timing unavailable",
+        "Start uses the existing S keyboard shortcut to skip the humor questionnaire",
+        "Opening-screen and gameplay samples are separate; screenshots are representative frames",
+        "Seeded initialization does not fix frame scheduling, movement endpoints or async asset completion"
+      ],
+      "runs": [
+        {
+          "name": "desktop",
+          "run": 0,
+          "gpu": "ANGLE (Intel, Intel(R) Iris(R) Xe Graphics (0x00009A49) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+          "readyMs": 2955.199999999255,
+          "loadedMs": 3303.900000002235,
+          "startupBytes": 15730402,
+          "startupRequests": 109,
+          "startupAssets": {
+            "models": {
+              "pending": 0,
+              "active": 0,
+              "failed": 0
+            },
+            "characters": {
+              "required": [
+                "borderPourer",
+                "bayern",
+                "towelWoman",
+                "towelMan"
+              ],
+              "settled": [
+                "borderPourer",
+                "bayern",
+                "towelWoman",
+                "towelMan"
+              ],
+              "failed": []
+            },
+            "queue": {
+              "active": 0,
+              "pending": 0
+            },
+            "office": {
+              "pending": 0,
+              "failed": 0
+            }
+          },
+          "inputLatency": {
+            "accepted": 9,
+            "p50": 18,
+            "p95": 56.69999999925494
+          },
+          "intro": {
+            "elapsedMs": 3015.10000000149,
+            "syncCalls": 13,
+            "frameMs": {
+              "p50": 250.10000000149012,
+              "p95": 251.19999999925494
+            }
+          },
+          "gameplay": {
+            "elapsedMs": 3025.60000000149,
+            "syncCalls": 169,
+            "frameMs": {
+              "p50": 16.900000002235174,
+              "p95": 25.899999998509884
+            },
+            "drawingBuffer": [
+              1280,
+              800
+            ]
+          },
+          "moved": 67.88999999999714,
+          "longTaskCount": 8,
+          "errors": []
+        },
+        {
+          "name": "desktop",
+          "run": 1,
+          "gpu": "ANGLE (Intel, Intel(R) Iris(R) Xe Graphics (0x00009A49) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+          "readyMs": 2266.10000000149,
+          "loadedMs": 2726.900000002235,
+          "startupBytes": 15629889,
+          "startupRequests": 110,
+          "startupAssets": {
+            "models": {
+              "pending": 0,
+              "active": 0,
+              "failed": 0
+            },
+            "characters": {
+              "required": [
+                "borderPourer",
+                "bayern",
+                "towelWoman",
+                "towelMan"
+              ],
+              "settled": [
+                "borderPourer",
+                "bayern",
+                "towelWoman",
+                "towelMan"
+              ],
+              "failed": []
+            },
+            "queue": {
+              "active": 0,
+              "pending": 0
+            },
+            "office": {
+              "pending": 0,
+              "failed": 0
+            }
+          },
+          "inputLatency": {
+            "accepted": 9,
+            "p50": 26.599999997764826,
+            "p95": 36.5
+          },
+          "intro": {
+            "elapsedMs": 3020.199999999255,
+            "syncCalls": 13,
+            "frameMs": {
+              "p50": 250,
+              "p95": 251
+            }
+          },
+          "gameplay": {
+            "elapsedMs": 3026.89999999851,
+            "syncCalls": 152,
+            "frameMs": {
+              "p50": 19.900000002235174,
+              "p95": 28.600000001490116
+            },
+            "drawingBuffer": [
+              1280,
+              800
+            ]
+          },
+          "moved": 68.9411999999993,
+          "longTaskCount": 4,
+          "errors": []
+        },
+        {
+          "name": "desktop",
+          "run": 2,
+          "gpu": "ANGLE (Intel, Intel(R) Iris(R) Xe Graphics (0x00009A49) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+          "readyMs": 2055.199999999255,
+          "loadedMs": 2449.7999999970198,
+          "startupBytes": 16379758,
+          "startupRequests": 111,
+          "startupAssets": {
+            "models": {
+              "pending": 0,
+              "active": 0,
+              "failed": 0
+            },
+            "characters": {
+              "required": [
+                "borderPourer",
+                "bayern",
+                "towelWoman",
+                "towelMan"
+              ],
+              "settled": [
+                "borderPourer",
+                "bayern",
+                "towelWoman",
+                "towelMan"
+              ],
+              "failed": []
+            },
+            "queue": {
+              "active": 0,
+              "pending": 0
+            },
+            "office": {
+              "pending": 0,
+              "failed": 0
+            }
+          },
+          "inputLatency": {
+            "accepted": 9,
+            "p50": 18.300000000745058,
+            "p95": 42
+          },
+          "intro": {
+            "elapsedMs": 3002.10000000149,
+            "syncCalls": 12,
+            "frameMs": {
+              "p50": 250.09999999776483,
+              "p95": 250.30000000074506
+            }
+          },
+          "gameplay": {
+            "elapsedMs": 3014.300000000745,
+            "syncCalls": 153,
+            "frameMs": {
+              "p50": 19,
+              "p95": 28.799999997019768
+            },
+            "drawingBuffer": [
+              1280,
+              800
+            ]
+          },
+          "moved": 67.93379999999797,
+          "longTaskCount": 5,
+          "errors": []
+        },
+        {
+          "name": "android-emulated",
+          "run": 0,
+          "gpu": "ANGLE (Intel, Intel(R) Iris(R) Xe Graphics (0x00009A49) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+          "readyMs": 2258,
+          "loadedMs": 2743.60000000149,
+          "startupBytes": 14471182,
+          "startupRequests": 99,
+          "startupAssets": {
+            "models": {
+              "pending": 0,
+              "active": 0,
+              "failed": 0
+            },
+            "characters": {
+              "required": [
+                "borderPourer",
+                "bayern",
+                "towelWoman",
+                "towelMan"
+              ],
+              "settled": [
+                "borderPourer",
+                "bayern",
+                "towelWoman",
+                "towelMan"
+              ],
+              "failed": []
+            },
+            "queue": {
+              "active": 0,
+              "pending": 0
+            },
+            "office": {
+              "pending": 0,
+              "failed": 0
+            }
+          },
+          "inputLatency": {
+            "accepted": 9,
+            "p50": 20.599999997764826,
+            "p95": 37.19999999925494
+          },
+          "intro": {
+            "elapsedMs": 3011.39999999851,
+            "syncCalls": 12,
+            "frameMs": {
+              "p50": 250.19999999925494,
+              "p95": 252.19999999925494
+            }
+          },
+          "gameplay": {
+            "elapsedMs": 3015.699999999255,
+            "syncCalls": 172,
+            "frameMs": {
+              "p50": 16.900000002235174,
+              "p95": 22.400000002235174
+            },
+            "drawingBuffer": [
+              390,
+              844
+            ]
+          },
+          "moved": 66.89720000000807,
+          "longTaskCount": 6,
+          "errors": []
+        },
+        {
+          "name": "android-emulated",
+          "run": 1,
+          "gpu": "ANGLE (Intel, Intel(R) Iris(R) Xe Graphics (0x00009A49) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+          "readyMs": 1955.300000000745,
+          "loadedMs": 2310.89999999851,
+          "startupBytes": 16031976,
+          "startupRequests": 100,
+          "startupAssets": {
+            "models": {
+              "pending": 0,
+              "active": 0,
+              "failed": 0
+            },
+            "characters": {
+              "required": [
+                "borderPourer",
+                "bayern",
+                "towelWoman",
+                "towelMan"
+              ],
+              "settled": [
+                "borderPourer",
+                "bayern",
+                "towelWoman",
+                "towelMan"
+              ],
+              "failed": []
+            },
+            "queue": {
+              "active": 0,
+              "pending": 0
+            },
+            "office": {
+              "pending": 0,
+              "failed": 0
+            }
+          },
+          "inputLatency": {
+            "accepted": 9,
+            "p50": 12.300000000745058,
+            "p95": 35.899999998509884
+          },
+          "intro": {
+            "elapsedMs": 3010.60000000149,
+            "syncCalls": 12,
+            "frameMs": {
+              "p50": 250.09999999776483,
+              "p95": 250.80000000074506
+            }
+          },
+          "gameplay": {
+            "elapsedMs": 3015.5,
+            "syncCalls": 181,
+            "frameMs": {
+              "p50": 15.100000001490116,
+              "p95": 21.800000000745058
+            },
+            "drawingBuffer": [
+              390,
+              844
+            ]
+          },
+          "moved": 60.838200000005145,
+          "longTaskCount": 3,
+          "errors": []
+        },
+        {
+          "name": "android-emulated",
+          "run": 2,
+          "gpu": "ANGLE (Intel, Intel(R) Iris(R) Xe Graphics (0x00009A49) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+          "readyMs": 1687.2000000029802,
+          "loadedMs": 1961.300000000745,
+          "startupBytes": 16031975,
+          "startupRequests": 100,
+          "startupAssets": {
+            "models": {
+              "pending": 0,
+              "active": 0,
+              "failed": 0
+            },
+            "characters": {
+              "required": [
+                "borderPourer",
+                "bayern",
+                "towelWoman",
+                "towelMan"
+              ],
+              "settled": [
+                "borderPourer",
+                "bayern",
+                "towelWoman",
+                "towelMan"
+              ],
+              "failed": []
+            },
+            "queue": {
+              "active": 0,
+              "pending": 0
+            },
+            "office": {
+              "pending": 0,
+              "failed": 0
+            }
+          },
+          "inputLatency": {
+            "accepted": 9,
+            "p50": 16.300000000745058,
+            "p95": 38.70000000298023
+          },
+          "intro": {
+            "elapsedMs": 3004.5,
+            "syncCalls": 12,
+            "frameMs": {
+              "p50": 249.90000000223517,
+              "p95": 250.70000000298023
+            }
+          },
+          "gameplay": {
+            "elapsedMs": 3013.099999997765,
+            "syncCalls": 168,
+            "frameMs": {
+              "p50": 15.600000001490116,
+              "p95": 27
+            },
+            "drawingBuffer": [
+              390,
+              844
+            ]
+          },
+          "moved": 64.83860000000095,
+          "longTaskCount": 4,
+          "errors": []
+        }
+      ]
+    },
+    "delayedReceipt": {
+      "conditions": {
+        "sourceRef": "working tree",
+        "browser": "148.0.7778.96",
+        "network": "local uncompressed HTTP; cold browser context",
+        "cpu": "no CPU throttling",
+        "gpu": "ANGLE hardware renderer (queried per run)",
+        "dpr": 2,
+        "seedBase": 41
+      },
+      "revision": {
+        "game.js": "550b387fa9074e05277b84579c4e22f30604d96aca28133d0d120192670cdf97",
+        "world3d.js": "9065fe17b0b0878d21d25cf47979169a8e91f8283edd34663ca30fca44cc2fa1",
+        "tourist-animation.js": "1982cda544e01197fb12d396b3452470a5d893a376891dec9408e3dea814ba10"
+      },
+      "limits": [
+        "Lab evidence only; no field data or physical Android; hardware renderer queried, GPU timing unavailable",
+        "Start uses the existing S keyboard shortcut to skip the humor questionnaire",
+        "Opening-screen and gameplay samples are separate; screenshots are representative frames",
+        "Seeded initialization does not fix frame scheduling, movement endpoints or async asset completion"
+      ],
+      "runs": [
+        {
+          "name": "desktop",
+          "run": 0,
+          "gpu": "ANGLE (Intel, Intel(R) Iris(R) Xe Graphics (0x00009A49) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+          "readyMs": 3462.5,
+          "loadedMs": 3973.400000002235,
+          "startupBytes": 16028470,
+          "startupRequests": 109,
+          "startupAssets": {
+            "models": {
+              "pending": 0,
+              "active": 0,
+              "failed": 0
+            },
+            "characters": {
+              "required": [
+                "borderPourer",
+                "bayern",
+                "towelWoman",
+                "towelMan"
+              ],
+              "settled": [
+                "borderPourer",
+                "bayern",
+                "towelWoman",
+                "towelMan"
+              ],
+              "failed": []
+            },
+            "queue": {
+              "active": 0,
+              "pending": 0
+            },
+            "office": {
+              "pending": 0,
+              "failed": 0
+            }
+          },
+          "inputLatency": {
+            "accepted": 9,
+            "p50": 19.799999997019768,
+            "p95": 34.900000002235174
+          },
+          "intro": {
+            "elapsedMs": 4285.199999999255,
+            "syncCalls": 17,
+            "frameMs": {
+              "p50": 250.10000000149012,
+              "p95": 250.5
+            }
+          },
+          "gameplay": {
+            "elapsedMs": 4285.39999999851,
+            "syncCalls": 238,
+            "frameMs": {
+              "p50": 17.899999998509884,
+              "p95": 23.300000000745058
+            },
+            "drawingBuffer": [
+              1280,
+              800
+            ]
+          },
+          "moved": 63.87499999999545,
+          "longTaskCount": 6,
+          "errors": []
+        },
+        {
+          "name": "android-emulated",
+          "run": 0,
+          "gpu": "ANGLE (Intel, Intel(R) Iris(R) Xe Graphics (0x00009A49) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+          "readyMs": 1727.5999999977648,
+          "loadedMs": 2063.300000000745,
+          "startupBytes": 16027835,
+          "startupRequests": 100,
+          "startupAssets": {
+            "models": {
+              "pending": 0,
+              "active": 0,
+              "failed": 0
+            },
+            "characters": {
+              "required": [
+                "borderPourer",
+                "bayern",
+                "towelWoman",
+                "towelMan"
+              ],
+              "settled": [
+                "borderPourer",
+                "bayern",
+                "towelWoman",
+                "towelMan"
+              ],
+              "failed": []
+            },
+            "queue": {
+              "active": 0,
+              "pending": 0
+            },
+            "office": {
+              "pending": 0,
+              "failed": 0
+            }
+          },
+          "inputLatency": {
+            "accepted": 9,
+            "p50": 16.199999999254942,
+            "p95": 39.29999999701977
+          },
+          "intro": {
+            "elapsedMs": 4264.39999999851,
+            "syncCalls": 17,
+            "frameMs": {
+              "p50": 250.20000000298023,
+              "p95": 250.90000000223517
+            }
+          },
+          "gameplay": {
+            "elapsedMs": 4285.199999999255,
+            "syncCalls": 257,
+            "frameMs": {
+              "p50": 15.300000000745058,
+              "p95": 22.600000001490116
+            },
+            "drawingBuffer": [
+              390,
+              844
+            ]
+          },
+          "moved": 64.88240000000496,
+          "longTaskCount": 3,
+          "errors": []
+        }
+      ],
+      "hostExtraWaitMs": 1250,
+      "purpose": "cadence attribution on the pre-integration freeze; unchanged benchmark helper. Not a final-candidate performance comparison"
+    },
+    "interpretation": "Release budgets passed; short sequential sync-start samples across intervening commits do not establish optimization speedup. Historical17-call sample had no duration and remains uncertified."
+  },
+  "reviews": {
+    "physics": {
+      "verdict": "PASS affected scope",
+      "fresh": "source/hash verification, four CPU suites and618 actual-road production-rule probes",
+      "supplied": "36 scripted actual keyboard/CDP-touch cases, root/direct3d captures; runtime and screenshot hashes verified",
+      "excluded": "Full collision/citizen/gait/driving/lifecycle matrix unchanged"
+    },
+    "camera": {
+      "verdict": "PASS affected source and supplied X1 coverage",
+      "fresh": "replacement13 hashes, game/fitter syntax, touch/subtitle checks, source/Pretext/clearance review",
+      "supplied": "36 crossing-input cases, three direct3d smokes and12 control states; all20 screenshot digests verified. Positive production-hint DOM rectangles establish clearance; the enlarged landscape capture contains a transient notice over the hint region",
+      "excluded": "C1–C5/P7 renderer/camera/material/depth/scale/lifecycle unchanged"
+    },
+    "ponytail": {
+      "verdict": "PASS replacement13-file freeze",
+      "fresh": "integrated13 hashes, five Node suites, game/world syntax and diff checks; previous counterexample and partial-report probes carry through unchanged helper/test hashes",
+      "conclusion": "Existing code, Node VM, native CSS and pinned Pretext; no new dependency or speculative abstraction"
+    }
+  },
+  "notRun": [
+    "Physical Android",
+    "Natural mission/unlock chain",
+    "Listening/perceptual audio",
+    "All browser zoom/localization/text-spacing combinations",
+    "GPU timings",
+    "Controlled workflow productivity comparison"
+  ],
+  "localArtifacts": {
+    "candidate-freeze.json": "b4a250596f6e3948279ae991008fd4bee12699a9cc15408e2800f148a6f28831",
+    "candidate-freeze-pre-integration.json": "fa7560305e6fc0d211f745dba02b817af1df4d012233430fb8c4f488ed7b9c31",
+    "baseline/report.json": "4df81f22fc23d08eb2ceaa58de11466e4ed36eb0afd56ffbfeeca93dc0ea6965",
+    "baseline-eval/report.json": "18553081639aee2ef3befe1f3511cb50aa0963194c53e453573ec8db60ac3de8",
+    "crossing-evaluation.json": "f87b971e2a631e5399da02d2ec1a5d180ffe0b9dd5d18005b729a2e7d3d84750",
+    "crossing-browser/report.json": "73b18c89cb63203391da8795a910dae829173feb05497163b69a553a8d787c6d",
+    "control-browser/report.json": "7c654fd5c44066564c07a0227614a0f140b0efb15a0a79cf76f582790d54974b",
+    "final/report.json": "cd7c04dce699cdf2e18ef383df79a72f80b85790b56184c547867618b54ee4c0",
+    "delayed-receipt/report.json": "ed4d9b3e326083515f5f21b8abb29ea6f3cd5055841c85004a72f5366fff0cfe",
+    "node-tests.log": "27ab105ed3cc5e84b7124e36c1e4a67af6b42f6f6d60efd530e5b9fbf7fb70ba",
+    "deploy-gates.log": "0dd974f2aec991de12ea42c90bc205d3d88e81ba0e491e62385aff3c612f61e1",
+    "check-crossings.mjs": "6dc8d64de805e52457c3057bbc3492582f393456e7daf4a2dbab74ade60afca9",
+    "benchmark-delayed-receipt.mjs": "12a4cb95885fd510531d62d8295133bf2f8ae37a239b76e178ebb1fe3dcb996e",
+    "physics-review/actual-road-e96bb17abc9f.json": "c4add2382b6694d521713ac435acce7681850004d83d759cccf1f650b9c2479c"
+  }
+}
