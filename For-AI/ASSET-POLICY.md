@@ -189,11 +189,9 @@ worker pool or installation. A skill's availability is not performance evidence.
 
 ### Executable release checks
 
-Run `node --test tests/browser-performance.test.mjs
-tests/runtime-smoothness.test.mjs tests/browser-responsiveness.test.mjs
-tests/asset-streaming.test.mjs tests/tourist-animation.test.mjs
-tests/intro-music.test.mjs`, then the Pillow delivery check above. The Pages
-workflow runs these dependency-free Node gates before deployment. They protect
+Run the dependency-free Node command in the existing [Pages workflow](../.github/workflows/pages.yml),
+then the Pillow delivery check above. Keep that release step as the executable
+source of truth for the current regression selection. These gates protect
 the 10.1 MB aggregate city-atlas delivery budget, delivery hashes/dimensions,
 PNG fallback, no duplicate full atlas canvas, draw-buffer bound, audio eviction,
 hidden/title work and elapsed simulation time. They are not device performance
@@ -233,6 +231,65 @@ results and emulation are diagnostics, not a claim that low-end hardware passes.
 Do not add telemetry or collect player data merely to enforce this protocol.
 World-affecting changes still require the independent Physics and Camera gates
 in `OBJECT-CONSISTENCY.md`; silent audio state checks do not establish sound quality.
+
+### Maintaining browser playability
+
+Apply this procedure to the behavior a change can affect. Keep numeric budgets
+in the contracts above and dated results in `docs/` or ignored `output/`.
+Documentation-only changes need link and policy-consistency checks; runtime,
+asset and UI changes need their applicable executable and browser checks.
+
+1. **Define the affected path before editing.** Name the scene, user action,
+   readiness/fallback state and supported browser profile. Consider transfer,
+   decode/install work, resident resources, frame work, DOM/text fitting and
+   input together. Use the existing harness and the matching `SKILLS.md` route.
+   Profile a reproduced cost and fix its owner; preserve accepted appearance,
+   gameplay, accessibility and audio timing while reducing unnecessary work.
+2. **Keep comparisons controlled.** Bind the baseline and candidate to their
+   source, tests and relevant asset revisions. Use isolated checkouts when assets
+   or unoverridden dependencies differ; a source override alone is not a complete
+   historical build. Hold scene, viewport/DPR, GPU,
+   cache, throttling, seeds and instrumentation constant; run performance
+   samples sequentially so competing benchmarks do not consume the same GPU.
+   Use the repeated-run median/range above. Changed conditions, intervening
+   features or one favorable sample do not establish a causal speedup.
+3. **Check the measurement itself.** Use the browser clock for the actual
+   observation window. State whether a result measures sync-start intervals,
+   application response, displayed frames or GPU time. Preserve failed samples,
+   errors and incomplete reports. Fix a faulty probe separately from a runtime
+   optimization; missing timing or device evidence stays uncertified. Keep the
+   existing ceilings and phase tolerance unless a documented product decision
+   with comparable evidence justifies changing them.
+4. **Exercise real controls and changing layouts.** Exercise keyboard input and
+   visible pointer/touch controls on desktop and Android portrait/landscape. Include
+   both sides of affected width breakpoints, coarse-pointer layouts, enlarged
+   text and long localized labels. Check loading/disabled/failure states,
+   interaction hints, dialogue open/close, subtitle clearance and focus.
+   Follow the text-fitting contract in `SKILLS.md`; measurements run when copy,
+   fonts or bounds change, with readable reflow/fallback, rather than per frame.
+5. **Test lifetime and recovery where affected.** Cover rapid approach,
+   asset failure, repeated warmed scene entry/exit and background/resume. Confirm
+   bounded queues/caches, shared resources, late-completion cleanup, released
+   held input and no hidden-tab catch-up. Preserve the explicit committed
+   audio/phone exceptions above. Use the [silent session policy](./AGENT-START.md#silent-background-browser-tests).
+6. **Make regressions prove the intended behavior.** Use production rules and
+   actual authored geometry where applicable. Assert the fixture's preconditions:
+   a visible element must have positive area before its clearance can pass,
+   and a traversal must actually enter the tested surface. Include successful
+   and rejected/recovery paths. Inspect rendered captures for readability and
+   occlusion; fitting rectangles alone do not prove a cue can be seen.
+   Record scene relocation, removed actors, signal
+   resets or debug hooks; scripted coverage does not prove natural progression.
+   Leave the smallest useful deterministic regression in the existing tests and
+   add fast release-relevant checks to the existing Pages step.
+7. **Accept the final integrated candidate.** Freeze the affected source/test/
+   asset hashes and bind captures and reports to that freeze. Distinguish fresh
+   reviewer checks from supplied evidence, and emulation from physical devices.
+   Follow the world-review gates when applicable. If integration or concurrent
+   work changes the candidate, refresh the freeze and rerun affected checks;
+   retain old evidence under its original revision. Required failures and
+   uncovered checks remain outstanding. Follow `AGENT-START.md` for publication
+   and verify the deployed root and `3d.html` after a deployment change.
 
 ## YAGNI rules
 

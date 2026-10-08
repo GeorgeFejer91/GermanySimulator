@@ -11,7 +11,7 @@ Use the smallest coherent change. Prefer existing code, tools, and skills. Updat
 - [`AGENT-START.md`](./AGENT-START.md): task-scoped reading routes, canonical-game invariants, and validation policy.
 - [`GAMEPLAY.md`](./GAMEPLAY.md): current gameplay, mission, dialogue, and in-world copy rules. Read only the sections relevant to the change.
 - [`BUERGERAMT.md`](./BUERGERAMT.md): current episode beats, cast ownership, audio, and domain handoff.
-- [`ASSET-POLICY.md`](./ASSET-POLICY.md): current asset, performance, hosting, and YAGNI policy.
+- [`ASSET-POLICY.md`](./ASSET-POLICY.md): current asset, performance, hosting, and YAGNI policy, including [browser playability maintenance](./ASSET-POLICY.md#maintaining-browser-playability).
 - [`SPRITE-GENERATION-PROTOCOL.md`](./SPRITE-GENERATION-PROTOCOL.md): accepted character-source and atlas workflow.
 - [`SKILLS.md`](./SKILLS.md): skill routes, Codex model tiers, delegation and review contract.
 - [`OBJECT-CONSISTENCY.md`](./OBJECT-CONSISTENCY.md): required independent physics and camera/scale reviewers, pedestrian/solid separation, visibility/depth and executable regression matrix.
