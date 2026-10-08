@@ -14,6 +14,7 @@ Use the smallest coherent change. Prefer existing code, tools, and skills. Updat
 - [`ASSET-POLICY.md`](./ASSET-POLICY.md): current asset, performance, hosting, and YAGNI policy.
 - [`SPRITE-GENERATION-PROTOCOL.md`](./SPRITE-GENERATION-PROTOCOL.md): accepted character-source and atlas workflow.
 - [`SKILLS.md`](./SKILLS.md): skill routes, Codex model tiers, delegation and review contract.
+- [`OBJECT-CONSISTENCY.md`](./OBJECT-CONSISTENCY.md): required independent physics and camera/scale reviewers, pedestrian/solid separation, visibility/depth and executable regression matrix.
 - [`DECISIONS.md`](./DECISIONS.md): dated rationale and history. Search for a relevant entry when needed; do not read the whole log or treat an older entry as current authority.
 - [`VOICE-SYNTH-PROTOCOL.md`](./VOICE-SYNTH-PROTOCOL.md): voice profile and recorded-speech production.
 - [`VOICE-CAST.json`](./VOICE-CAST.json): named fictional cast, demeanor assessment, exact dialogue ownership, and verified Secret Tunnel profile bindings.

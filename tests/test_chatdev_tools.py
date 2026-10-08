@@ -2,6 +2,8 @@
 
 import hashlib
 import importlib.util
+from contextlib import redirect_stdout
+import io
 import json
 import os
 from pathlib import Path
@@ -10,6 +12,8 @@ import subprocess
 import tempfile
 import unittest
 from unittest.mock import patch
+import runpy
+import yaml
 
 ROOT = Path(__file__).resolve().parents[1]
 
@@ -82,13 +86,56 @@ class ScopedTools(unittest.TestCase):
 class RunnerValidation(unittest.TestCase):
     def test_all_declared_stages_resolve_including_color_mood(self):
         paths = runner.stage_paths()
-        self.assertEqual(len(paths), 12)
+        self.assertEqual(len(paths), 14)
         self.assertEqual(paths["ColorMood"].name, "color-mood.yaml")
         self.assertTrue(all(path.is_file() for path in paths.values()))
+
+    def test_consistency_reviewers_are_distinct_read_only_agents_before_acceptance(self):
+        paths = runner.stage_paths()
+        order = list(paths)
+        self.assertEqual(order[order.index("Voice"):], ["Voice", "Physics", "Camera", "Review", "QA"])
+        for stage in ("Physics", "Camera"):
+            graph = yaml.safe_load(paths[stage].read_text(encoding="utf-8"))["graph"]
+            self.assertEqual(graph["start"], [f"{stage}Reviewer"])
+            self.assertEqual(len(graph["nodes"]), 1)
+            agent = graph["nodes"][0]
+            self.assertEqual(agent["id"], f"{stage}Reviewer")
+            names = {tool["name"] for item in agent["config"]["tooling"]
+                     for tool in item["config"]["tools"]}
+            self.assertEqual(names, {"read_game_file", "write_workflow_report"})
+            for instruction in ("For-AI/OBJECT-CONSISTENCY.md", "candidate revision",
+                                "Never edit sources", "no browser", "NOT RUN"):
+                self.assertIn(instruction, agent["config"]["role"])
+
+    def test_consistency_protocol_and_root_world_sources_are_readable_but_not_writable(self):
+        for path in ("For-AI/OBJECT-CONSISTENCY.md", "game.js", "world3d.js", "3d.html",
+                     "tourist-animation.js", "character-interactions.js", "goerlitzer-park.js",
+                     "assets/models/bundestag/model-info.json", "assets/models/city-kit/manifest.json",
+                     "assets/models/vehicles/manifest.json", "assets/models/german-props/manifest.json"):
+            read = json.loads(game_tools.read_game_file(path))
+            self.assertEqual(read["path"], path)
+            self.assertEqual(read["sha256"], hashlib.sha256((ROOT / path).read_bytes()).hexdigest())
+            with self.assertRaises(ValueError):
+                game_tools._path(path, game_tools.WRITABLE)
+
+    def test_validator_rejects_extra_reviewer_source_write_tools(self):
+        parse = yaml.safe_load
+
+        def inject_write(source):
+            document = parse(source)
+            if document.get("graph", {}).get("id") == "amt_physics_consistency":
+                document["graph"]["nodes"][0]["config"]["tooling"].append({
+                    "type": "function", "config": {"tools": [{"name": "save_mechanics_file"}]}})
+            return document
+
+        with patch("yaml.safe_load", side_effect=inject_write), redirect_stdout(io.StringIO()):
+            with self.assertRaises(AssertionError):
+                runpy.run_path(str(ROOT / "tools/validate-chatdev.py"))
 
     def test_required_protocols_skills_and_timing_are_readable(self):
         for path in ("AGENTS.md", "For-AI/AGENT-START.md", "For-AI/SKILLS.md",
                      "For-AI/chatdev/README.md", "For-AI/DECISIONS.md", "buergeramt-time.js",
+                     "For-AI/OBJECT-CONSISTENCY.md",
                      "tests/amt-harness.mjs", ".agents/skills/chatdev-game-workflows/SKILL.md"):
             self.assertTrue(json.loads(game_tools.read_game_file(path))["content"], path)
 

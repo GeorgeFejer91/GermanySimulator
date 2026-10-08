@@ -17,13 +17,17 @@ if not VOICE_PORT.isdecimal() or not 1 <= int(VOICE_PORT) <= 65535:
     raise ValueError("VOICE_CLONER_PORT must be a TCP port number")
 VOICE_CLI = [str(VOICE), "--port", VOICE_PORT]
 READABLE = {
-    "game.js", "world3d.js", "index.html", "styles.css", "buergeramt.js",
+    "game.js", "world3d.js", "index.html", "3d.html", "styles.css", "buergeramt.js",
+    "tourist-animation.js", "character-interactions.js", "goerlitzer-park.js",
     "buergeramt-story.js", "buergeramt-phone.js", "buergeramt-phone.html",
     "buergeramt-link.js", "buergeramt.css", "CREDITS.md",
     "For-AI/README.md", "For-AI/GAMEPLAY.md", "For-AI/BUERGERAMT.md", "For-AI/ASSET-POLICY.md",
     "For-AI/VOICE-SYNTH-PROTOCOL.md", "For-AI/MUSIC-SOUND-DESIGN.md", "For-AI/AUDIO-TEXT-LIBRARY.md",
     "For-AI/AUDIO-TEXT-LIBRARY.js", "assets/voices/LICENSES.md",
     "For-AI/SPRITE-GENERATION-PROTOCOL.md",
+    "For-AI/OBJECT-CONSISTENCY.md",
+    "assets/models/bundestag/model-info.json", "assets/models/city-kit/manifest.json",
+    "assets/models/vehicles/manifest.json", "assets/models/german-props/manifest.json",
     "assets/sprite-sources/buergeramt/PROVENANCE.md",
     "assets/buergeramt/characters/build-report.json",
     "output/amt-character-motion/interaction-build-report.json",

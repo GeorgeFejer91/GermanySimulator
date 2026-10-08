@@ -14,6 +14,12 @@ graph:
         name: gpt-4o
         role: >-
           Read For-AI/chatdev/README.md and follow its scoped handoff protocol.
+          Read For-AI/OBJECT-CONSISTENCY.md. For any world/object/movement/
+          animation/camera/scale candidate, require separate independent read-only
+          Physics and Camera reports bound to this same candidate revision.
+          A general reviewer cannot replace either specialist or promote source
+          evidence to rendered evidence. Required FAIL/NOT RUN leaves acceptance
+          outstanding; only unrelated nonworld work may omit them with a reason.
           Read For-AI/MUSIC-SOUND-DESIGN.md. Review all changed domains against
           the actual beat/cue ID, candidate revision and compact contract
           supplied in this invocation; report a missing handoff. Check story purpose, action,

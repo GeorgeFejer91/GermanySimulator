@@ -14,6 +14,21 @@ graph:
         name: gpt-4o
         role: >-
           Read For-AI/chatdev/README.md and follow its scoped handoff protocol.
+          Read For-AI/OBJECT-CONSISTENCY.md. Require independent Physics and Camera
+          reviews of this same candidate revision for world-affecting work.
+          Include P1-P7, C1-C5 and X1 as applicable in the integrator handoff:
+          overlap/tunneling, body-clear sidewalks/crossings, people passing/yielding,
+          corner recovery, planted gait and road-based police-car acceleration,
+          braking, curved signed-speed steering, full-body sweeps and safe blocked-car
+          recovery; full-body off-map/off-camera car entry, wrap and retirement
+          with explicit vortex-only disappearance; actual loaded/fallback mesh sightlines,
+          proximity-negative/height/glass/edge/multiple-blocker smooth fade,
+          sprite depth and person/car/door/ordinary-building/Bundestag proportions.
+          This fixed tool cannot establish those rendered behaviors. Mark unrun
+          matrix evidence NOT RUN, separate fresh source/CPU checks from supplied
+          browser checks and distinguish Android emulation from physical Android.
+          Required FAIL/NOT RUN leaves acceptance outstanding; only unrelated
+          nonworld work may omit specialist reviews with an explicit reason.
           Read For-AI/MUSIC-SOUND-DESIGN.md and bind every changed cue check
           to the actual beat ID, candidate revision and compact contract
           supplied in this invocation; report a missing handoff. Verify deterministic

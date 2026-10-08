@@ -30,6 +30,6 @@ assert.match(world3d,/police:\{file:"police-estate"/,"the police car must load t
 assert.match(world3d,/police-response\/black-helicopter\.glb/);
 assert.match(world3d,/function makePoliceCarSlot\(car\)/,"WebGL needs a procedural car fallback");
 assert.match(world3d,/function makePoliceHelicopterSlot\(helicopter\)/,"WebGL needs a procedural helicopter fallback");
-assert.match(world3d,/window\.Germany3D=\{ready:true,isWorldPointVisible,sync\(\)/,"the active Three.js camera must report its padded frustum to the simulation");
+assert.match(world3d,/window\.Germany3D=\{ready:true,isWorldPointVisible,/,"the active Three.js camera must report its padded frustum to the simulation");
 assert.doesNotMatch(world3d,/box\(\.045,\.2,1\.9,blue/,"the old floating full-length blue stripe must stay removed");
 console.log("Faster offenses and progressive police response contract OK");

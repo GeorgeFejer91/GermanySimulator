@@ -16,7 +16,7 @@ const roadsStart=game.indexOf("const horizontalRoads=");
 const roadsEnd=game.indexOf("const OFFENSE_TIMING=",roadsStart);
 const roadSandbox={};
 vm.runInNewContext(`
-const CITY={w:9840,h:4240},RAIL_GUTTER=560;
+const CITY={w:9840,h:4240},RAIL_GUTTER=560,WORLD={w:CITY.w+1120,h:CITY.h+1120};
 ${game.slice(roadsStart,roadsEnd)}
 globalThis.roads=roads;
 `,roadSandbox);

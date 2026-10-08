@@ -23,7 +23,7 @@ for(const [kind,item] of Object.entries(manifest.models)){
   if(kind==='police-estate')assert.ok(materials.includes('BeaconLeft')&&materials.includes('BeaconRight'));
 }
 const renderer=readFileSync(new URL('../world3d.js',import.meta.url),'utf8');
-const helper=renderer.slice(renderer.indexOf('  function syncVehicleWheels('),renderer.indexOf('  function removeVehicleSlot('));
+const helper=renderer.slice(renderer.indexOf('  function syncVehicleScale('),renderer.indexOf('  function removeVehicleSlot('));
 const node={rotation:{x:0}},steering={rotation:{y:0}},brake={emissiveIntensity:0};
 const slot={state:{x:0,y:0,angle:0,speed:200,queued:false},lastX:0,lastY:0,lastAngle:0,travel:0,wheels:[{node,radius:.2}],steering:[steering],brakes:[brake],beacons:[]};
 const context={S:.02,slot,performance:{now:()=>0}};vm.createContext(context);vm.runInContext(helper,context);
@@ -37,4 +37,21 @@ slot.state.x+=1;slot.state.angle=.1;update();assert.ok(steering.rotation.y<0&&st
 slot.state.queued=false;update();assert.equal(brake.emissiveIntensity,0);
 slot.state.braking=true;update();assert.equal(brake.emissiveIntensity,.8,'Police braking uses the existing pursuit brake flag');
 slot.state.braking=false;update();assert.equal(brake.emissiveIntensity,0);
+const plantedRoll=node.rotation.x;slot.state.steeringAngle=.5;update();
+assert.equal(steering.rotation.y,-.5,'Police front wheels follow physical steering even at rest');
+assert.equal(node.rotation.x,plantedRoll,'Steering alone does not roll the tyres');
+slot.state.steeringAngle=-.4;update();assert.equal(steering.rotation.y,.4,'Countersteering uses the same driver sign convention');
+slot.renderScale=1.4;slot.travel=0;node.rotation.x=0;slot.state.angle=0;slot.lastAngle=0;slot.state.x+=20;
+const scaledRoll=node.rotation.x;update();
+assert.ok(Math.abs(node.rotation.x-scaledRoll-.4/(.2*1.4))<1e-10,'Upscaled car wheels use their displayed tyre radius');
+assert.match(renderer,/group\.scale\.setScalar\(renderScale\)/,'Loaded and fallback cars share the canonical vehicle scale');
+const displayedScale=[];slot.group={scale:{set:(...values)=>displayedScale.splice(0,3,...values)}};
+vm.runInContext('syncVehicleScale(slot)',context);assert.deepEqual(displayedScale,[1.4,1.4,1.4],'Live civilian sync preserves the car/person scale');
+vm.runInContext('syncVehicleScale(slot,.4,.6)',context);
+for(const [axis,factor] of [1+.6*.82,1-.6*.68,1-.6*.3].entries())assert.ok(Math.abs(displayedScale[axis]-1.4*.4*factor)<1e-12,'Vortex deformation multiplies the same base scale');
+vm.runInContext('syncVehicleScale(slot)',context);assert.deepEqual(displayedScale,[1.4,1.4,1.4],'Leaving vortex deformation restores all base axes');
+context.bridge={vehicleElevation:x=>x*.001};slot.state.angle=0;
+assert.ok(Math.abs(vm.runInContext('vehicleRoadPitch(slot.state)',context)+Math.atan(.05))<1e-12,'Car pitch follows the signed slope between its axles');
+slot.state.angle=Math.PI;assert.ok(vm.runInContext('vehicleRoadPitch(slot.state)',context)>0,'Reverse road heading reverses the ramp pitch');
+assert.match(renderer,/syncVehicleScale\(slot,scale,crush\)/,'The live traffic render loop must use the tested scale path');
 console.log('Vehicle GLBs, wheel pivots, actual-distance rolling, steering and brake lamps OK');
