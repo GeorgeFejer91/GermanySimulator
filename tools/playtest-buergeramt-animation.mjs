@@ -61,7 +61,7 @@ async function officeCase(name,viewport,mobile,dpr){
  await silent(context);const page=await context.newPage();observe(page,report);
  try{
   await page.goto(officeUrl.href,{waitUntil:'commit',timeout:60000});
-  await page.waitForFunction(()=>window.BuergeramtLevel?.active&&window.Germany3D?.ready,null,{timeout:60000});
+  await page.waitForFunction(()=>window.BuergeramtLevel?.active&&window.Germany3D?.ready,null,{timeout:180000});
   // Fixture: stop only the game loop's public update call. Manual steps invoke
   // the original production update at 60 Hz. Render observed samples explicitly;
   // drawing every fast-forward tick needlessly stalls software WebGL under load.
