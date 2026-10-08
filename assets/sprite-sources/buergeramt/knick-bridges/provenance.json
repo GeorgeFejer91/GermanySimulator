@@ -1,0 +1,65 @@
+{
+  "created": "2026-10-08",
+  "generator": "Built-in OpenAI image_gen.imagegen; no CLI/API generation",
+  "reference": "Contact sheet derived from unchanged preview anchor-0..3.webp, ready/raised/contact/refusal order",
+  "prompts": [
+    "prompts.json",
+    "reach-prompt.txt"
+  ],
+  "sources": [
+    {
+      "file": "fold.png",
+      "sha256": "d0e5000d35583c6f15ab5427a8d017686db58c5aeb526e7b3e670c72b9648181",
+      "bytes": 1145584,
+      "size": [
+        2098,
+        749
+      ],
+      "mode": "RGBA"
+    },
+    {
+      "file": "raise.png",
+      "sha256": "57a90ce2e7b8c65c0c0fe67066da2fad5589bfa4873e67f1bfda319155a6429b",
+      "bytes": 939781,
+      "size": [
+        1774,
+        887
+      ],
+      "mode": "RGBA"
+    },
+    {
+      "file": "reach.png",
+      "sha256": "92a7dd3db4c35d582f3d620725c1e77c54b5b851f20822b822d8b0f6975fcdbb",
+      "bytes": 1111659,
+      "size": [
+        1254,
+        1254
+      ],
+      "mode": "RGBA"
+    },
+    {
+      "file": "return.png",
+      "sha256": "2d2a4b3f84e1c14120e5835c5512725d657391a70790b5cc3b1840e63a7f4f09",
+      "bytes": 1958273,
+      "size": [
+        1536,
+        1024
+      ],
+      "mode": "RGBA"
+    },
+    {
+      "file": "stamp.png",
+      "sha256": "35255b421451d1095dd3fafbc57f510bb11add07427717a56bff013185b9e5f8",
+      "bytes": 2389486,
+      "size": [
+        1536,
+        1024
+      ],
+      "mode": "RGBA"
+    }
+  ],
+  "replacement": "stamp.png first cell is unused; reach.png supplies bridge-stamp-1",
+  "registration": "../../../previews/knick-splats/bridge-registration.json",
+  "preparation": "../../../../tools/prepare-knick-bridges.py",
+  "usage": "Opt-in spark-preview.html only. Not gameplay acceptance."
+}

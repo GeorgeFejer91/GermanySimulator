@@ -1,89 +1,109 @@
-# Frau Knick: complete Gaussian splat performance
+# Frau Knick: fourteen-key tactical splat study
 
-Open spark-preview.html?scene=knick&renderer=spark for a looping ten-second
-performance: ready, raise the stamp, take aim, stamp the document, hold contact,
-fold arms in refusal, and return to ready. It autoplays unless reduced motion
-is requested; &autoplay=0 opens it paused. Pause, loop, quarter/half/normal/fast
-speed, the scrubber and four anchor buttons expose every part of the sequence.
-The existing fax comparison remains available in the same preview.
+Open spark-preview.html?scene=knick&renderer=spark for the ten-second loop.
+Four original anchors now have ten authored bridge drawings: two for raising,
+three for approaching contact, three for releasing the paper and folding arms,
+and two for returning. The counter gives the document a pickup/putdown place.
+Reduced motion starts paused; &autoplay=0 also opens paused. Every key has a
+seek button; loop, speed and timeline controls are shared by both renderers.
 
-This is an animation experiment, not an accepted replacement for gameplay
-character motion. The complete cycle demonstrates both what transporting paint
-with Gaussian splats can do and where sparse 2D anchors remain insufficient.
+## Where splat interpolation is allowed
 
-## Source and correspondence
+The short same-side stamp approach (keys 6–7, 3.4–3.8 seconds) transports paint.
+All other intervals select intact drawings with a hard opacity handoff: no
+cross-body position warp, transparent double forearms, or stretching a stamp
+between incompatible proportions. The optional approach dissolve also respects
+these guards. It does not bypass protection for crossed arms or prop transfers.
 
-tools/build-knick-splat-preview.py crops four existing 384x832 cells, without
-changing their pixels, from the clerk detail atlas: columns 0, 2, 3 and 1.
-These are ready, raised stamp, stamp contact and refusal. All are lossless WebP.
-The source hash, crop bounds, 28 named anatomical landmarks, local head/stamp
-regions and format are recorded in manifest.json. No new artwork was used.
+spark-preview-cycle.mjs owns key order, action timing and paper ownership.
+The builder records a per-interval policy in manifest.json. Candidate motions
+are further rejected when the measured stamp-axis ratio falls outside
+0.85–1.15. This conservative check supplements authored topology decisions;
+it is not automatic anatomical validation. Only the allowed approach uses a
+landmark spline, local head/stamp similarity transforms and planted lower legs.
 
-At a three-pixel stride, the paintings supply 15,412 / 16,314 / 14,792 / 14,801
-visible samples. Each directed transition transports source paint forward and
-target paint backward. A landmark thin-plate spline guides the body; local
-similarity transforms protect head and stamp regions from global spline shear.
-Below-knee samples stay planted. A smooth opacity handoff changes the visible
-painting around the middle of each transition.
+This remains a preview, not accepted production animation. Protected changes
+are deliberately stepped. Face, shoe, stamp and body proportions still vary
+between independently painted keys, and the allowed splat approach softens
+detail. No depth, hidden limbs or skeleton is inferred.
 
-The browser uses one fixed allocation of 32,768 sample slots across four
-transition blocks. Both Spark and native Three.js particles fetch positions and
-sRGB/alpha from the same GPU textures and share the same phase function.
-spark-preview-cycle.mjs owns the action clock. Switching segments changes
-uniforms rather than rebuilding geometry or compiling another shader.
+## Source, registration and rebuild
 
-The 2,621,440-byte binary has four segment blocks. Each block has 16,384 source
-slots followed by 16,384 target slots. Every 20-byte record contains four
-little-endian Float32 positions (start XY, end XY), then four RGBA bytes.
-Unused slots have zero alpha. Endpoint positions and paint are byte-consistent
-between adjacent segments, including the loop seam.
+Original anchor-0 through anchor-3 are unchanged lossless 384x832 crops of
+the clerk detail atlas, columns 0, 2, 3 and 1. Four registered-anchor thumbnails
+only add transparent horizontal padding; original pixels are unchanged.
 
-## Limits and resource ownership
+The built-in OpenAI image generator authored the ten bridges. Transparent
+source paintings, exact prompts and hashes are in
+../../sprite-sources/buergeramt/knick-bridges/. The first stamping-strip cell
+was replaced by a separate reach painting so paper does not appear at the waist.
 
-This does not infer a skeleton, depth, occluded limbs or missing views.
-Paper exists only in the contact painting and must appear/disappear through
-the opacity handoff. Crossing arms and the stamp can soften or lose clear
-silhouette during a transition. The full cycle is a preview of the method;
-it is not evidence that four painted anchors produce production-ready anatomy.
-Source anchors remain visible below the result for comparison.
+Run python tools/prepare-knick-bridges.py from the repository, then
+python tools/build-knick-splat-preview.py. Dependencies are Pillow, NumPy and
+the existing Node runtime. No SciPy, training, paid API or runtime model is used.
+Registration records source crops, a uniform scale per strip, shared ground
+alignment and landmark coordinates in bridge-registration.json. Encoded bridge
+WebPs use premultiplied RGBA sampling, transparent gutters and zero hidden RGB.
+Run the preparation script with --verify to check the existing exports.
 
-Character data is fetched only by this opt-in preview. GPU mapping is
-256x512x16 = 2,097,152 bytes; paint is 256x512x4 = 524,288 bytes.
-The CPU texture backing arrays total the same 2,621,440 bytes, plus 393,216
-bytes of sample indices. Each source thumbnail decodes to 1,277,952 bytes.
-Spark's packed splats, worker, sorting and render targets add their own bounded
-allocations; these are not included in the texture totals.
+All fourteen registered canvases are 1024x832, centered at x512 for rendering.
+The wider transparent canvas preserves the extended arm and document without
+shrinking the character to fit a moving silhouette. Source/hash relationships,
+sample counts, named landmarks and transition policies are in manifest.json.
 
-Rendering uses at most one pixel per CSS pixel and 1.6 MP, capped at 60 requests
-per second while playing. Paused rendering settles on demand. Hidden pages
-stop rendering and advancing the clock, then resume without catching up.
-Teardown releases textures, geometries, Spark and the resize observer.
-There is no voice, gameplay event, route, collision or canonical atlas change.
+## Runtime ownership and costs
 
-The original painted art and provenance remain under
-assets/sprite-sources/buergeramt/.
+The preview alone fetches correspondence.bin. It has fourteen transition blocks,
+each with 19,968 source and 19,968 target slots. Each 20-byte record is four
+little-endian Float32 positions (start XY, end XY) followed by RGBA bytes.
+Guarded records have identical start/end coordinates. Adjacent segments and
+the loop seam retain identical paint and endpoint positions.
 
-## Validation for the full-cycle preview (2026-10-08)
+The fixed 39,936-slot GPU geometry is never rebuilt on a transition. Mapping
+and paint textures are 256x2184: 8,945,664 + 2,236,416 = 11,182,080 bytes.
+CPU texture backing arrays have the same total plus 479,232 bytes of indices;
+download/decode staging temporarily adds another binary buffer.
+A registered thumbnail decodes to 3,407,872 bytes. Fourteen lazy thumbnails
+are bounded at 47,710,208 bytes if all are decoded. Authoring PNGs never load
+in the preview. Spark's packed data, sorting worker and render targets add
+their own allocations beyond these texture figures.
 
-The focused correspondence/timing suite passed 5/5; the existing Pages test
-command passed all 20 tests. Four lossless crops match the source pixels.
-Twenty-four isolated Chrome runs covered both renderers, both scenes, desktop
-and Android emulation. The 26 UI/lifecycle checks included 320 CSS px, 200% text,
-text spacing, long labels, reduced motion, renderer failure and context loss.
-Character runs had frame p95 near 21 ms on the host's Intel Iris Xe; CPU render
-submission p95 was 0.3–0.4 ms for points and about 0.6 ms for Spark. This is not
-GPU duration or evidence from a physical Android device. Cold local delivery
-with Spark was about 7.44 MB including libraries and all four thumbnails;
-the local server did not compress its files.
+The earlier four-anchor binary was 2,621,440 bytes; fourteen complete keys
+increase opt-in data by 8,560,640 bytes. This is not a proposed gameplay asset
+budget. Both renderers share the same data and guarded clock. Rendering is
+bounded at one pixel per CSS pixel / 1.6 MP / 60 requests per second, settles
+when paused, and suspends while hidden without catch-up. Teardown releases
+the textures, geometry, counter props, Spark and observer. Canonical game
+loaders, atlases, collisions, routes and voice events do not change.
 
-An independent silent browser trace observed the whole sequence and loop
-wrap, exact single-cycle stop at 10 seconds, replay, quarter speed, settled
-paused rendering and hidden-page suspension without catch-up. Independent
-motion and image review retained the hand/face/prop blending limitations above.
-Production anatomy and canonical game integration remain unaccepted.
+## Verification of cycle3 (2026-10-08)
 
-A final cold-start refinement delays autoplay until the first rendered frame
-has completed. The targeted independent recheck observed a 340 ms preparation
-render, followed by 0.458 seconds of playback over roughly 0.463 seconds.
-Reduced motion remained paused. Full-cycle/performance evidence above predates
-only this initialization change; the final targeted check had no browser errors.
+The focused integrity/timing suite passes 8/8: source hashes, fourteen keys,
+exact endpoints/loop seam, protected position invariance, lower-leg planting,
+paper ownership and library isolation.
+
+Independent motion review freshly observed every key and beat, full wrap,
+one-shot stop at ten seconds, replay, quarter speed, paused/hidden suspension,
+constant resource counts, and no browser errors. Its rendered 0/10/0 loop
+screenshots are byte-identical. All 420,763 visible guarded samples have zero
+transport; the only interpolated pair retains 2,996 planted lower-leg samples.
+These checks establish preview behavior, not production anatomical quality.
+Desktop and Android emulation are separate from physical Android testing.
+
+The full Pages command passes 23/23. Twenty-four cold-context Chrome runs
+covered both scenes/renderers on desktop and Android emulation; all 26
+layout/lifecycle checks passed (320 px, 200% text, spacing, long labels,
+reduced motion, blocked Spark, context loss and idle/hidden rendering).
+Character frame p95 was 20.9–21.0 ms on Intel Iris Xe; CPU submission p95
+was 0.4–0.9 ms. Some independent review contexts ran concurrently; these
+figures are observed host timings, not isolated GPU benchmarks or phone results.
+Local uncompressed delivery including Spark and lazy-loaded thumbnails was
+19.18 MB desktop and 16.14 MB portrait, versus about 7.44 MB for the old cycle.
+
+Independent visual review passed all fourteen keys, the three approach
+intermediates, front framing, both renderers, phone emulation and enlarged text.
+Oblique views reveal the flat character's depth/foot-contact limits. The final
+visibility-only correction hides a foreground box that covered a shoe at −45°;
+the broad run above preceded that change. Both independent targeted rechecks
+passed the final visibility correction, the paper handoffs and exact loop seam.
+Physical Android and production character integration remain untested/unaccepted.

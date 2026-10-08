@@ -415,6 +415,9 @@ by World Labs Technologies, Inc., under MIT. The unmodified local module, licens
 and hash are under `assets/vendor/spark/2.3.1/`. The Frau Knick anchor images are
 lossless crops of this project's existing painted clerk detail atlas; their
 correspondence and source hashes are under `assets/previews/knick-splats/`.
+Ten additional bridge paintings were generated with the built-in OpenAI image
+generator. Exact prompts, source PNGs and hashes are recorded under
+`assets/sprite-sources/buergeramt/knick-bridges/`.
 
 The Bürgeramt clerk, tenant, parent, pensioner, and office-prop paintings were generated
 for this game with OpenAI ImageGen. The original transparent source strips,

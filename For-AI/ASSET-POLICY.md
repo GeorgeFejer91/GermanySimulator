@@ -355,14 +355,17 @@ The Kiesinger monument carries two `CDU / AB 1948` banners flanking one dated 19
 `spark-preview.html` is a silent, opt-in rendering experiment with separate fax
 and Frau Knick anchor scenes. It compares the same procedural samples/motion in
 native Three.js points and locally pinned Spark 2.3.1, loaded only on selection.
-The character data lives in `assets/previews/knick-splats/`; its four lossless
-anchors derive from the existing clerk detail atlas. The ten-second character
-cycle raises the stamp, stamps paperwork, folds arms and returns to ready.
-It loops automatically except under reduced motion; the fax starts paused.
-Its manually guided splat interpolation has known face/arm/prop artifacts and
-is not an accepted gameplay character animation. Fixed GPU allocations,
-bounded rendering and hidden-page suspension preserve ordinary game loaders,
-assets and event ownership. Format, resource sizes and limits live beside the data.
+The character data lives in `assets/previews/knick-splats/`: four unchanged
+original anchors plus ten generated bridge paintings with recorded prompts,
+source hashes and common-canvas registration. The ten-second loop includes
+paper pickup/putdown at a side counter, stamping, folding arms and returning.
+Only the compatible same-side stamp approach uses Gaussian interpolation.
+Crossings, grip/prop handoffs and incompatible proportions switch intact poses;
+no dissolve setting bypasses these guards. The fourteen-key binary is 11.18 MB
+and remains opt-in. This deliberately stepped study still has artwork proportion
+jumps and is not accepted gameplay animation. Reduced motion starts paused;
+fixed allocations and hidden-page suspension preserve game resource ownership.
+Format, resource sizes, validation and remaining limits live beside the data.
 This preview does not revise the code-native Wirtschaftswunder policy.
 
 Four candidate-unapproved static prop studies are owned by

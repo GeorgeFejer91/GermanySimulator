@@ -1,6 +1,6 @@
 import * as THREE from 'three';
 import {prepareWithSegments,measureLineStats,measureNaturalWidth} from './assets/vendor/pretext/dist/layout.js';
-import {CYCLE_DURATION,ANCHOR_TIMES,cycleAt,advanceClock} from './spark-preview-cycle.mjs?v=cycle2';
+import {CYCLE_DURATION,ANCHORS,ANCHOR_TIMES,cycleAt,transitionAt,advanceClock} from './spark-preview-cycle.mjs?v=cycle3';
 
 await document.fonts.load('16px Study');
 await document.fonts.load('700 16px Study');
@@ -12,21 +12,27 @@ renderer.outputColorSpace=THREE.SRGBColorSpace;view.append(renderer.domElement);
 const scene=new THREE.Scene();scene.background=new THREE.Color(0x66685f);
 const camera=new THREE.PerspectiveCamera(43,1,.1,50);
 const geometry=new THREE.BufferGeometry(),samples=[];
-let count,rows,segments,slots=0,mappingData,paintData;
+let count,rows,segments,slots=0,mappingData,paintData,policies=[];
 if(character){
  document.querySelector('h1').textContent='Frau Knick · the complete stamp cycle';
- byId('description').textContent='Ready → raise the stamp → stamp the document → fold arms → return. Four painted anchors become a continuous ten-second Gaussian splat performance.';
- byId('footnote').textContent='An animation experiment built from existing 2D paintings. The splats transport and blend their paint; changing hand overlaps and the appearing paperwork still reveal the limits of four anchors. Three.js r186 · Spark 2.3.1.';
+ byId('description').textContent='Fourteen painted poses: raise the stamp, take the paperwork, stamp it, put it aside, fold arms and return. Splat motion is reserved for the small stamp approach; crossings and changes in grip use intact drawings.';
+ byId('footnote').textContent='Ten new bridge drawings connect the four original anchors. Protected pose changes are deliberately stepped; differences in the drawings are still visible. This is a preview study. Three.js r186 · Spark 2.3.1.';
  document.querySelector('.anchors').hidden=false;
  for(const el of document.querySelectorAll('[data-character]'))el.hidden=false;
- for(let i=0;i<4;i++)byId('anchor-'+i).src='./assets/previews/knick-splats/anchor-'+i+'.webp';
  view.setAttribute('aria-label','Frau Knick raises her stamp, stamps a document, folds her arms and returns to ready');
- const manifestResponse=await fetch('./assets/previews/knick-splats/manifest.json?v=cycle2');
+ const manifestResponse=await fetch('./assets/previews/knick-splats/manifest.json?v=cycle3');
  if(!manifestResponse.ok)throw Error('Character manifest could not load');
  const manifest=await manifestResponse.json();
  count=manifest.sample_count;slots=manifest.slots_per_anchor;segments=manifest.segment_count;rows=count/256;
- if(!Number.isInteger(rows)||count!==slots*2||count>40000||segments!==4||manifest.record_bytes!==20)throw Error('Invalid character manifest');
- const response=await fetch('./assets/previews/knick-splats/correspondence.bin?v=cycle2');
+ if(!Number.isInteger(rows)||count!==slots*2||count>40000||segments!==ANCHORS.length||manifest.record_bytes!==20||manifest.transitions?.length!==segments)throw Error('Invalid character manifest');
+ policies=manifest.transitions;
+ manifest.anchors.forEach((anchor,i)=>{
+  const figure=document.createElement('figure'),img=document.createElement('img'),button=document.createElement('button');
+  img.src='./assets/previews/knick-splats/'+anchor.preview;img.alt='Frau Knick: '+anchor.name;img.loading='lazy';img.width=1024;img.height=832;
+  button.id='pose-'+i;button.textContent=(i+1)+' · '+anchor.name;button.onclick=()=>setTime(ANCHOR_TIMES[i]);
+  figure.append(img,button);document.querySelector('.anchors').append(figure);
+ });
+ const response=await fetch('./assets/previews/knick-splats/correspondence.bin?v=cycle3');
  if(!response.ok)throw Error('Character correspondence could not load');
  const buffer=await response.arrayBuffer();if(buffer.byteLength!==count*segments*20)throw Error('Invalid character correspondence');
  const data=new DataView(buffer);
@@ -73,24 +79,24 @@ vec3 scatter(vec3 p,float t,float d){
  vec2 q=mat2(cos(angle),-sin(angle),sin(angle),cos(angle))*p.xy;
  return vec3(mix(p.xy,q,d)+vec2(a*1.65,b*.9+sin(t*1.2+a)*.25)*d,c*d*1.5);
 }
-vec3 sampleMotion(vec3 p,vec3 target,float t,float phase,float dissolve){
- ${character?'vec3 base=mix(p,target,phase);return mix(base,scatter(base,t,cloudSpread(t,phase)),dissolve);':'return scatter(p,t,spread(t));'}
+vec3 sampleMotion(vec3 p,vec3 target,float t,float phase,float dissolve,float guarded){
+ ${character?'if(guarded>.5)return p;vec3 base=mix(p,target,phase);return mix(base,scatter(base,t,cloudSpread(t,phase)),dissolve);':'return scatter(p,t,spread(t));'}
 }
-float sampleFade(float group,float t,float phase){
- ${character?'float handoff=smoothstep(.32,.68,phase);return mix(1.-handoff,handoff,group);':'return 1.-spread(t)*.34;'}
+float sampleFade(float group,float t,float phase,float guarded){
+ ${character?'float handoff=guarded>.5?step(.5,phase):smoothstep(.32,.68,phase);return mix(1.-handoff,handoff,group);':'return 1.-spread(t)*.34;'}
 }`;
 const baseScale=character?3/208*.58:.0105;
-const uniforms={time:{value:0},phase:{value:0},pair:{value:0},pixelScale:{value:1},dissolve:{value:0},mapping:{value:correspondence},paint:{value:paint}};
+const uniforms={time:{value:0},phase:{value:0},pair:{value:0},guarded:{value:0},pixelScale:{value:1},dissolve:{value:0},mapping:{value:correspondence},paint:{value:paint}};
 const material=new THREE.ShaderMaterial({uniforms,transparent:true,depthWrite:false,
- vertexShader:`uniform float time,phase,pair,pixelScale,dissolve;uniform sampler2D mapping,paint;varying vec3 tint;varying float fade;${motion}
+ vertexShader:`uniform float time,phase,pair,pixelScale,dissolve,guarded;uniform sampler2D mapping,paint;varying vec3 tint;varying float fade;${motion}
  vec3 toLinear(vec3 c){return mix(c/12.92,pow((c+.055)/1.055,vec3(2.4)),step(vec3(.04045),c));}
  void main(){
   ivec2 index=ivec2(position.xy)+ivec2(0,int(pair)*${rows});
   vec4 mapped=texelFetch(mapping,index,0),rgba=texelFetch(paint,index,0);
-  tint=toLinear(rgba.rgb);fade=rgba.a*sampleFade(position.z,time,phase);
-  vec4 mv=modelViewMatrix*vec4(sampleMotion(vec3(mapped.xy,0.),vec3(mapped.zw,0.),time,phase,dissolve),1.);
+  tint=toLinear(rgba.rgb);fade=rgba.a*sampleFade(position.z,time,phase,guarded);
+  vec4 mv=modelViewMatrix*vec4(sampleMotion(vec3(mapped.xy,0.),vec3(mapped.zw,0.),time,phase,dissolve,guarded),1.);
   gl_Position=projectionMatrix*mv;
-  gl_PointSize=clamp(${baseScale*Math.sqrt(7)}*pixelScale*(1.+cloudSpread(time,phase)*${character?'dissolve*.5':'.5'})/(-mv.z),1.,64.);
+  gl_PointSize=clamp(${baseScale*Math.sqrt(7)}*pixelScale*(1.+cloudSpread(time,phase)*${character?'dissolve*(1.-guarded)*.5':'.5'})/(-mv.z),1.,64.);
  }`,
  fragmentShader:`varying vec3 tint;varying float fade;void main(){vec2 d=gl_PointCoord*2.-1.;float r=dot(d,d);if(r>1.)discard;gl_FragColor=vec4(tint,exp(-r*3.5)*fade);
  #include <colorspace_fragment>
@@ -98,7 +104,14 @@ const material=new THREE.ShaderMaterial({uniforms,transparent:true,depthWrite:fa
 });
 const points=new THREE.Points(geometry,material);points.position.y=character?1.86:2;points.frustumCulled=false;scene.add(points);
 const desk=new THREE.Mesh(new THREE.BoxGeometry(8,.18,4),new THREE.MeshBasicMaterial({color:0x99917c}));desk.position.set(0,-.05,0);scene.add(desk);
-const box=new THREE.Mesh(new THREE.BoxGeometry(.8,.8,.65),new THREE.MeshBasicMaterial({color:0x414b41}));box.position.set(-1.7,.42,1);scene.add(box);
+const box=new THREE.Mesh(new THREE.BoxGeometry(.8,.8,.65),new THREE.MeshBasicMaterial({color:0x414b41}));box.position.set(-1.7,.42,1);box.visible=!character;scene.add(box);
+const props=[];let paperStack=null;
+if(character){
+ function prop(w,h,d,x,y,z,color){const mesh=new THREE.Mesh(new THREE.BoxGeometry(w,h,d),new THREE.MeshBasicMaterial({color}));mesh.position.set(x,y,z);scene.add(mesh);props.push(mesh);return mesh}
+ prop(1.2,1.85,.72,1.79,.97,-.45,0x595b51);
+ prop(1.3,.09,.86,1.79,1.94,-.37,0xa29a84);
+ paperStack=prop(.72,.035,.47,1.79,2.003,-.19,0xe3dcc6);
+}
 let spark=null,splat=null,sparkValues=null,sparkPromise=null,mode='points',time=0,playing=false,pendingAutoplay=false,loop=character,speed=1,last=0,raf=0,dirty=true,disposed=false,lost=false,frames=0,lastSplatState='';
 const cpuTimes=[],frameTimes=[];let lastRendered=0,modeStartupMs=null,lastStatus='';
 function measureText(){
@@ -114,32 +127,32 @@ function measureText(){
  }
 }
 function setStatus(text){if(lastStatus===text)return;lastStatus=text;status.textContent=text;measureText()}
-function updateStatus(){setStatus(`${mode==='points'?'Three.js particles':'Spark splats'} · ${character?cycleAt(time).label:'Fax dissolve'} · ${playing?'Playing':'Paused'}${playing&&loop?' · Loop on':''}`)}
+function updateStatus(){setStatus(`${mode==='points'?'Three.js particles':'Spark splats'} · ${character?cycleAt(time).label:'Fax dissolve'}${character?' · '+(transitionAt(time,policies).guarded?'Intact pose':'Splat motion'):''} · ${playing?'Playing':'Paused'}${playing&&loop?' · Loop on':''}`)}
 function wake(){dirty=true;if(!raf&&!disposed&&!lost&&!document.hidden)raf=requestAnimationFrame(frame)}
 function resize(){
  const r=view.getBoundingClientRect(),scale=Math.min(1,Math.sqrt(1600000/(r.width*r.height)));
  renderer.setSize(Math.floor(r.width*scale),Math.floor(r.height*scale),false);camera.aspect=r.width/r.height;camera.updateProjectionMatrix();
  uniforms.pixelScale.value=renderer.domElement.height/Math.tan(THREE.MathUtils.degToRad(camera.fov/2));updateCamera();measureText();wake();
 }
-function updateCamera(){const angle=Number(byId('angle').value)*Math.PI/180,cloud=!character||uniforms.dissolve.value>0;const distance=(cloud?8.8:6.4)*Math.max(1,(cloud?1.4:.85)/camera.aspect);camera.position.set(Math.sin(angle)*distance,2.4,Math.cos(angle)*distance);camera.lookAt(0,1.86,0)}
+function updateCamera(){const angle=Number(byId('angle').value)*Math.PI/180,cloud=!character||uniforms.dissolve.value>0;const distance=(cloud?8.8:6.4)*Math.max(1,(cloud?1.4:1.1)/camera.aspect);camera.position.set(Math.sin(angle)*distance+(character?.5:0),2.4,Math.cos(angle)*distance);camera.lookAt(character?.5:0,1.86,0)}
 async function loadSpark(){
  const start=performance.now(),{SparkRenderer,SplatMesh,dyno}=await import('@sparkjsdev/spark');
  if(disposed)throw Error('Preview closed');
- sparkValues={t:dyno.dynoFloat(time),phase:dyno.dynoFloat(0),pair:dyno.dynoFloat(0),dissolve:dyno.dynoFloat(uniforms.dissolve.value)};
+ sparkValues={t:dyno.dynoFloat(time),phase:dyno.dynoFloat(0),pair:dyno.dynoFloat(0),guarded:dyno.dynoFloat(0),dissolve:dyno.dynoFloat(uniforms.dissolve.value)};
  splat=new SplatMesh({maxSplats:count,constructSplats:packed=>{
   const scale=new THREE.Vector3(baseScale,baseScale,baseScale*.43),q=new THREE.Quaternion(),white=new THREE.Color(1,1,1);
   for(let i=0;i<count;i++)packed.pushSplat(new THREE.Vector3(indices[i*3],indices[i*3+1],indices[i*3+2]),scale,q,1,white);
  }});
  await splat.initialized;if(disposed){splat.dispose();return}
  splat.objectModifier=dyno.dynoBlock({gsplat:dyno.Gsplat},{gsplat:dyno.Gsplat},({gsplat})=>({gsplat:new dyno.Dyno({
-  inTypes:{gsplat:dyno.Gsplat,t:'float',phase:'float',pair:'float',dissolve:'float',mapping:'sampler2D',paint:'sampler2D'},outTypes:{gsplat:dyno.Gsplat},globals:()=>[motion],
+  inTypes:{gsplat:dyno.Gsplat,t:'float',phase:'float',pair:'float',guarded:'float',dissolve:'float',mapping:'sampler2D',paint:'sampler2D'},outTypes:{gsplat:dyno.Gsplat},globals:()=>[motion],
   statements:({inputs:i,outputs:o})=>dyno.unindentLines(`${o.gsplat}=${i.gsplat};
    ivec2 index=ivec2(${i.gsplat}.center.xy+vec2(.1))+ivec2(0,int(${i.pair})*${rows});
    vec4 mapped=texelFetch(${i.mapping},index,0);
-   ${o.gsplat}.center=sampleMotion(vec3(mapped.xy,0.),vec3(mapped.zw,0.),${i.t},${i.phase},${i.dissolve});
-   ${o.gsplat}.scales*=1.+cloudSpread(${i.t},${i.phase})*${character?i.dissolve+'*.5':'.5'};
+   ${o.gsplat}.center=sampleMotion(vec3(mapped.xy,0.),vec3(mapped.zw,0.),${i.t},${i.phase},${i.dissolve},${i.guarded});
+   ${o.gsplat}.scales*=1.+cloudSpread(${i.t},${i.phase})*${character?i.dissolve+'*(1.-'+i.guarded+')*.5':'.5'};
    ${o.gsplat}.rgba=texelFetch(${i.paint},index,0);
-   ${o.gsplat}.rgba.w*=sampleFade(${i.gsplat}.center.z,${i.t},${i.phase});`)
+   ${o.gsplat}.rgba.w*=sampleFade(${i.gsplat}.center.z,${i.t},${i.phase},${i.guarded});`)
  }).apply({gsplat,...sparkValues,mapping:dyno.dynoSampler2D(correspondence),paint:dyno.dynoSampler2D(paint)}).gsplat}));
  splat.updateGenerator();splat.position.y=character?1.86:2;
  spark=new SparkRenderer({renderer,enableLod:false,maxStdDev:Math.sqrt(7),onDirty:()=>{if(mode==='spark')wake()}});
@@ -167,11 +180,12 @@ function setTime(value){setPlaying(false);time=Math.max(0,Math.min(duration,Numb
 function setLoop(value){loop=!!value;byId('loop').setAttribute('aria-pressed',String(loop));byId('loop').textContent=loop?'Loop on':'Loop off';updateStatus()}
 function setSpeed(value){if(![.25,.5,1,1.5].includes(value))return;speed=value;byId('speed').value=String(value);last=0;wake()}
 function syncMotion(){
- const state=character?cycleAt(time):{pair:0,phase:0};
- uniforms.time.value=time;uniforms.phase.value=state.phase;uniforms.pair.value=state.pair;
+ const state=character?transitionAt(time,policies):{pair:0,phase:0,guarded:false};
+ uniforms.time.value=time;uniforms.phase.value=state.phase;uniforms.pair.value=state.pair;uniforms.guarded.value=Number(state.guarded);
+ if(paperStack)paperStack.visible=!state.paperInHand;
  const key=[time,uniforms.dissolve.value,state.pair,state.phase].join(':');
  if(splat&&mode==='spark'&&lastSplatState!==key){
-  sparkValues.t.value=time;sparkValues.phase.value=state.phase;sparkValues.pair.value=state.pair;sparkValues.dissolve.value=uniforms.dissolve.value;
+  sparkValues.t.value=time;sparkValues.phase.value=state.phase;sparkValues.pair.value=state.pair;sparkValues.guarded.value=Number(state.guarded);sparkValues.dissolve.value=uniforms.dissolve.value;
   splat.needsUpdate=true;lastSplatState=key;
  }
  byId('time').setAttribute('aria-valuetext',`${time.toFixed(1)} of ${duration} seconds${character?', '+cycleAt(time).label:''}`);
@@ -201,14 +215,14 @@ byId('points').onclick=()=>setMode('points');byId('spark').onclick=()=>setMode('
 byId('time').max=duration;byId('time').oninput=()=>setTime(Number(byId('time').value));
 byId('angle').oninput=()=>{updateCamera();wake()};byId('reload').onclick=()=>location.reload();
 byId('guided').onclick=()=>setEffect(0);byId('dissolve').onclick=()=>setEffect(1);
-for(let i=0;i<4;i++)byId('pose-'+i).onclick=()=>setTime(ANCHOR_TIMES[i]);
+
 document.addEventListener('visibilitychange',()=>{if(document.hidden){cancelAnimationFrame(raf);raf=0;last=lastRendered=0}else wake()});
 reducedMotion.addEventListener('change',event=>{if(event.matches)setPlaying(false)});
 renderer.domElement.addEventListener('webglcontextlost',event=>{event.preventDefault();lost=true;playing=false;cancelAnimationFrame(raf);raf=0;byId('play').disabled=true;setStatus('Graphics paused. Reload the preview to restore the scene.');byId('reload').hidden=false});
 const observer=new ResizeObserver(resize);observer.observe(view);observer.observe(document.querySelector('main'));
-function dispose(){disposed=true;cancelAnimationFrame(raf);observer.disconnect();splat?.dispose();spark?.dispose();correspondence.dispose();paint.dispose();geometry.dispose();material.dispose();for(const mesh of [desk,box]){mesh.geometry.dispose();mesh.material.dispose()}renderer.dispose()}
+function dispose(){disposed=true;cancelAnimationFrame(raf);observer.disconnect();splat?.dispose();spark?.dispose();correspondence.dispose();paint.dispose();geometry.dispose();material.dispose();for(const mesh of [desk,box,...props]){mesh.geometry.dispose();mesh.material.dispose()}renderer.dispose()}
 addEventListener('pagehide',event=>{if(!event.persisted)dispose()});
-window.faxStudy={setMode,setTime,setEffect,setLoop,setSpeed,play,inspect:()=>({version:'cycle2',mode,scene:character?'knick':'fax',time,duration,cycle:character?cycleAt(time):null,playing,loop,speed,frames,count,modeStartupMs,buffer:[renderer.domElement.width,renderer.domElement.height],render:{...renderer.info.render},memory:{...renderer.info.memory},cpuTimes:[...cpuTimes],frameTimes:[...frameTimes],three:THREE.REVISION,measurement:document.documentElement.dataset.textMeasurement}),resetMetrics(){cpuTimes.length=frameTimes.length=0;lastRendered=0},async settle(){syncMotion();if(spark&&mode==='spark')await spark.update({scene,camera});wake()}};
+window.faxStudy={setMode,setTime,setEffect,setLoop,setSpeed,play,inspect:()=>({version:'cycle3',mode,scene:character?'knick':'fax',time,duration,cycle:character?transitionAt(time,policies):null,anchorCount:character?ANCHORS.length:0,paperOnCounter:paperStack?.visible??null,playing,loop,speed,frames,count,modeStartupMs,buffer:[renderer.domElement.width,renderer.domElement.height],render:{...renderer.info.render},memory:{...renderer.info.memory},cpuTimes:[...cpuTimes],frameTimes:[...frameTimes],three:THREE.REVISION,measurement:document.documentElement.dataset.textMeasurement}),resetMetrics(){cpuTimes.length=frameTimes.length=0;lastRendered=0},async settle(){syncMotion();if(spark&&mode==='spark')await spark.update({scene,camera});wake()}};
 resize();setLoop(loop);updateStatus();
 if(params.get('renderer')==='spark')await setMode('spark');byId('play').disabled=false;
 if(character&&!reducedMotion.matches&&params.get('autoplay')!=='0'){pendingAutoplay=true;wake()}

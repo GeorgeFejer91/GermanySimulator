@@ -1,0 +1,2065 @@
+{
+  "canvas_xy": [
+    1024,
+    832
+  ],
+  "anchor_canvas_xy": [
+    384,
+    832
+  ],
+  "anchor_x_shift": 320,
+  "registration": "One uniform scale per generated strip; per-painting horizontal body alignment; common y=798 shoe baseline.",
+  "landmark_note": "Approximate anatomical/prop centers manually read from native encoded light-background grids; source_xy is exact inverse of recorded affine registration. Anatomical right is screen-left. Do not infer flat morph permission from these points.",
+  "bridges": [
+    {
+      "id": "bridge-raise-1",
+      "file": "assets/previews/knick-splats/bridge-raise-1.webp",
+      "sha256": "fd136638f458d02e5508bd6fbceecb1156e59b5dfcae65c49d6c204a8cb4d73a",
+      "source_file": "assets/sprite-sources/buergeramt/knick-bridges/raise.png",
+      "source_sha256": "57a90ce2e7b8c65c0c0fe67066da2fad5589bfa4873e67f1bfda319155a6429b",
+      "source_crop_xyxy": [
+        380,
+        80,
+        775,
+        870
+      ],
+      "uniform_scale": 0.976,
+      "translation_xy": [
+        -53.888,
+        -32.576
+      ],
+      "source_body_ground_pivot_xy": [
+        588,
+        851
+      ],
+      "target_body_ground_pivot_xy": [
+        520.0,
+        798.0
+      ],
+      "encoded_alpha_bbox_xyxy": [
+        331,
+        60,
+        686,
+        798
+      ],
+      "transparent_gutter_ltrb": [
+        331,
+        60,
+        338,
+        34
+      ],
+      "landmarks": {
+        "eye_right": {
+          "source_xy": [
+            600.3,
+            185.02
+          ],
+          "target_xy": [
+            532,
+            148
+          ]
+        },
+        "eye_left": {
+          "source_xy": [
+            645.38,
+            185.02
+          ],
+          "target_xy": [
+            576,
+            148
+          ]
+        },
+        "nose": {
+          "source_xy": [
+            634.11,
+            202.43
+          ],
+          "target_xy": [
+            565,
+            165
+          ]
+        },
+        "chin": {
+          "source_xy": [
+            626.93,
+            246.49
+          ],
+          "target_xy": [
+            558,
+            208
+          ]
+        },
+        "shoulder_right": {
+          "source_xy": [
+            492.71,
+            302.84
+          ],
+          "target_xy": [
+            427,
+            263
+          ]
+        },
+        "elbow_right": {
+          "source_xy": [
+            434.31,
+            326.41
+          ],
+          "target_xy": [
+            370,
+            286
+          ]
+        },
+        "grip_right": {
+          "source_xy": [
+            499.89,
+            257.76
+          ],
+          "target_xy": [
+            434,
+            219
+          ]
+        },
+        "stamp_knob": {
+          "source_xy": [
+            516.28,
+            212.68
+          ],
+          "target_xy": [
+            450,
+            175
+          ]
+        },
+        "stamp_base": {
+          "source_xy": [
+            509.11,
+            305.92
+          ],
+          "target_xy": [
+            443,
+            266
+          ]
+        },
+        "shoulder_left": {
+          "source_xy": [
+            687.39,
+            308.99
+          ],
+          "target_xy": [
+            617,
+            269
+          ]
+        },
+        "elbow_left": {
+          "source_xy": [
+            744.76,
+            398.13
+          ],
+          "target_xy": [
+            673,
+            356
+          ]
+        },
+        "hand_left": {
+          "source_xy": [
+            700.7,
+            444.24
+          ],
+          "target_xy": [
+            630,
+            401
+          ]
+        },
+        "hip_center": {
+          "source_xy": [
+            588.0,
+            466.78
+          ],
+          "target_xy": [
+            520,
+            423
+          ]
+        },
+        "skirt_hem_center": {
+          "source_xy": [
+            585.95,
+            669.65
+          ],
+          "target_xy": [
+            518,
+            621
+          ]
+        },
+        "foot_screen_left": {
+          "source_xy": [
+            542.92,
+            829.48
+          ],
+          "target_xy": [
+            476,
+            777
+          ]
+        },
+        "foot_screen_right": {
+          "source_xy": [
+            665.87,
+            811.04
+          ],
+          "target_xy": [
+            596,
+            759
+          ]
+        }
+      }
+    },
+    {
+      "id": "bridge-raise-2",
+      "file": "assets/previews/knick-splats/bridge-raise-2.webp",
+      "sha256": "51c8525aa11069e5cb106ec2c04af269bfed7458d3f6426034a40a1c18eaeb17",
+      "source_file": "assets/sprite-sources/buergeramt/knick-bridges/raise.png",
+      "source_sha256": "57a90ce2e7b8c65c0c0fe67066da2fad5589bfa4873e67f1bfda319155a6429b",
+      "source_crop_xyxy": [
+        1030,
+        25,
+        1405,
+        870
+      ],
+      "uniform_scale": 0.976,
+      "translation_xy": [
+        -662.912,
+        -32.576
+      ],
+      "source_body_ground_pivot_xy": [
+        1212,
+        851
+      ],
+      "target_body_ground_pivot_xy": [
+        520.0,
+        798.0
+      ],
+      "encoded_alpha_bbox_xyxy": [
+        359,
+        5,
+        693,
+        798
+      ],
+      "transparent_gutter_ltrb": [
+        359,
+        5,
+        331,
+        34
+      ],
+      "landmarks": {
+        "eye_right": {
+          "source_xy": [
+            1243.76,
+            187.07
+          ],
+          "target_xy": [
+            551,
+            150
+          ]
+        },
+        "eye_left": {
+          "source_xy": [
+            1288.84,
+            185.02
+          ],
+          "target_xy": [
+            595,
+            148
+          ]
+        },
+        "nose": {
+          "source_xy": [
+            1273.48,
+            205.51
+          ],
+          "target_xy": [
+            580,
+            168
+          ]
+        },
+        "chin": {
+          "source_xy": [
+            1259.13,
+            252.64
+          ],
+          "target_xy": [
+            566,
+            214
+          ]
+        },
+        "shoulder_right": {
+          "source_xy": [
+            1127.98,
+            277.23
+          ],
+          "target_xy": [
+            438,
+            238
+          ]
+        },
+        "elbow_right": {
+          "source_xy": [
+            1077.78,
+            208.58
+          ],
+          "target_xy": [
+            389,
+            171
+          ]
+        },
+        "grip_right": {
+          "source_xy": [
+            1153.6,
+            96.9
+          ],
+          "target_xy": [
+            463,
+            62
+          ]
+        },
+        "stamp_knob": {
+          "source_xy": [
+            1201.75,
+            63.09
+          ],
+          "target_xy": [
+            510,
+            29
+          ]
+        },
+        "stamp_base": {
+          "source_xy": [
+            1122.86,
+            145.06
+          ],
+          "target_xy": [
+            433,
+            109
+          ]
+        },
+        "shoulder_left": {
+          "source_xy": [
+            1320.61,
+            302.84
+          ],
+          "target_xy": [
+            626,
+            263
+          ]
+        },
+        "elbow_left": {
+          "source_xy": [
+            1371.84,
+            394.03
+          ],
+          "target_xy": [
+            676,
+            352
+          ]
+        },
+        "hand_left": {
+          "source_xy": [
+            1320.61,
+            441.16
+          ],
+          "target_xy": [
+            626,
+            398
+          ]
+        },
+        "hip_center": {
+          "source_xy": [
+            1212.0,
+            466.78
+          ],
+          "target_xy": [
+            520,
+            423
+          ]
+        },
+        "skirt_hem_center": {
+          "source_xy": [
+            1209.95,
+            668.62
+          ],
+          "target_xy": [
+            518,
+            620
+          ]
+        },
+        "foot_screen_left": {
+          "source_xy": [
+            1168.97,
+            829.48
+          ],
+          "target_xy": [
+            478,
+            777
+          ]
+        },
+        "foot_screen_right": {
+          "source_xy": [
+            1288.84,
+            811.04
+          ],
+          "target_xy": [
+            595,
+            759
+          ]
+        }
+      }
+    },
+    {
+      "id": "bridge-stamp-1",
+      "file": "assets/previews/knick-splats/bridge-stamp-1.webp",
+      "sha256": "eac6cf9b89229a6ab4e14873ec63a48052ad2015c559fa9c704ad93aaf4f4be7",
+      "source_file": "assets/sprite-sources/buergeramt/knick-bridges/reach.png",
+      "source_sha256": "92a7dd3db4c35d582f3d620725c1e77c54b5b851f20822b822d8b0f6975fcdbb",
+      "source_crop_xyxy": [
+        240,
+        35,
+        1242,
+        1220
+      ],
+      "uniform_scale": 0.685,
+      "translation_xy": [
+        149.415,
+        -29.48
+      ],
+      "source_body_ground_pivot_xy": [
+        541,
+        1208
+      ],
+      "target_body_ground_pivot_xy": [
+        520.0,
+        798.0
+      ],
+      "encoded_alpha_bbox_xyxy": [
+        322,
+        4,
+        992,
+        798
+      ],
+      "transparent_gutter_ltrb": [
+        322,
+        4,
+        32,
+        34
+      ],
+      "landmarks": {
+        "eye_right": {
+          "source_xy": [
+            596.47,
+            243.04
+          ],
+          "target_xy": [
+            558,
+            137
+          ]
+        },
+        "eye_left": {
+          "source_xy": [
+            656.33,
+            262.01
+          ],
+          "target_xy": [
+            599,
+            150
+          ]
+        },
+        "nose": {
+          "source_xy": [
+            631.51,
+            280.99
+          ],
+          "target_xy": [
+            582,
+            163
+          ]
+        },
+        "chin": {
+          "source_xy": [
+            615.45,
+            346.69
+          ],
+          "target_xy": [
+            571,
+            208
+          ]
+        },
+        "shoulder_right": {
+          "source_xy": [
+            345.38,
+            365.66
+          ],
+          "target_xy": [
+            386,
+            221
+          ]
+        },
+        "elbow_right": {
+          "source_xy": [
+            292.82,
+            279.53
+          ],
+          "target_xy": [
+            350,
+            162
+          ]
+        },
+        "grip_right": {
+          "source_xy": [
+            362.9,
+            145.23
+          ],
+          "target_xy": [
+            398,
+            70
+          ]
+        },
+        "stamp_knob": {
+          "source_xy": [
+            432.97,
+            97.05
+          ],
+          "target_xy": [
+            446,
+            37
+          ]
+        },
+        "stamp_base": {
+          "source_xy": [
+            348.3,
+            228.44
+          ],
+          "target_xy": [
+            388,
+            127
+          ]
+        },
+        "shoulder_left": {
+          "source_xy": [
+            685.53,
+            402.16
+          ],
+          "target_xy": [
+            619,
+            246
+          ]
+        },
+        "elbow_left": {
+          "source_xy": [
+            866.55,
+            529.17
+          ],
+          "target_xy": [
+            743,
+            333
+          ]
+        },
+        "hand_left": {
+          "source_xy": [
+            1002.31,
+            552.53
+          ],
+          "target_xy": [
+            836,
+            349
+          ]
+        },
+        "hip_center": {
+          "source_xy": [
+            541.0,
+            628.44
+          ],
+          "target_xy": [
+            520,
+            401
+          ]
+        },
+        "skirt_hem_center": {
+          "source_xy": [
+            541.0,
+            920.41
+          ],
+          "target_xy": [
+            520,
+            601
+          ]
+        },
+        "foot_screen_left": {
+          "source_xy": [
+            470.93,
+            1186.1
+          ],
+          "target_xy": [
+            472,
+            783
+          ]
+        },
+        "foot_screen_right": {
+          "source_xy": [
+            685.53,
+            1156.91
+          ],
+          "target_xy": [
+            619,
+            763
+          ]
+        },
+        "paper_tip": {
+          "source_xy": [
+            1225.67,
+            562.74
+          ],
+          "target_xy": [
+            989,
+            356
+          ]
+        }
+      }
+    },
+    {
+      "id": "bridge-stamp-2",
+      "file": "assets/previews/knick-splats/bridge-stamp-2.webp",
+      "sha256": "ec2239b038f32e8294d23b1f4aa096c55fa908b875e9a4cb447d4d8345893ebd",
+      "source_file": "assets/sprite-sources/buergeramt/knick-bridges/stamp.png",
+      "source_sha256": "35255b421451d1095dd3fafbc57f510bb11add07427717a56bff013185b9e5f8",
+      "source_crop_xyxy": [
+        570,
+        98,
+        960,
+        982
+      ],
+      "uniform_scale": 0.89,
+      "translation_xy": [
+        -158.18,
+        -58.18
+      ],
+      "source_body_ground_pivot_xy": [
+        762,
+        962
+      ],
+      "target_body_ground_pivot_xy": [
+        520.0,
+        798.0
+      ],
+      "encoded_alpha_bbox_xyxy": [
+        360,
+        42,
+        682,
+        798
+      ],
+      "transparent_gutter_ltrb": [
+        360,
+        42,
+        342,
+        34
+      ],
+      "landmarks": {
+        "eye_right": {
+          "source_xy": [
+            787.84,
+            250.76
+          ],
+          "target_xy": [
+            543,
+            165
+          ]
+        },
+        "eye_left": {
+          "source_xy": [
+            838.4,
+            263.12
+          ],
+          "target_xy": [
+            588,
+            176
+          ]
+        },
+        "nose": {
+          "source_xy": [
+            813.69,
+            272.11
+          ],
+          "target_xy": [
+            566,
+            184
+          ]
+        },
+        "chin": {
+          "source_xy": [
+            793.46,
+            311.44
+          ],
+          "target_xy": [
+            548,
+            219
+          ]
+        },
+        "shoulder_right": {
+          "source_xy": [
+            674.36,
+            320.43
+          ],
+          "target_xy": [
+            442,
+            227
+          ]
+        },
+        "elbow_right": {
+          "source_xy": [
+            610.31,
+            404.7
+          ],
+          "target_xy": [
+            385,
+            302
+          ]
+        },
+        "grip_right": {
+          "source_xy": [
+            758.63,
+            395.71
+          ],
+          "target_xy": [
+            517,
+            294
+          ]
+        },
+        "stamp_knob": {
+          "source_xy": [
+            765.37,
+            337.28
+          ],
+          "target_xy": [
+            523,
+            242
+          ]
+        },
+        "stamp_base": {
+          "source_xy": [
+            758.63,
+            444.02
+          ],
+          "target_xy": [
+            517,
+            337
+          ]
+        },
+        "shoulder_left": {
+          "source_xy": [
+            883.35,
+            346.27
+          ],
+          "target_xy": [
+            628,
+            250
+          ]
+        },
+        "elbow_left": {
+          "source_xy": [
+            937.28,
+            465.37
+          ],
+          "target_xy": [
+            676,
+            356
+          ]
+        },
+        "hand_left": {
+          "source_xy": [
+            881.1,
+            499.08
+          ],
+          "target_xy": [
+            626,
+            386
+          ]
+        },
+        "hip_center": {
+          "source_xy": [
+            762.0,
+            513.69
+          ],
+          "target_xy": [
+            520,
+            399
+          ]
+        },
+        "skirt_hem_center": {
+          "source_xy": [
+            762.0,
+            736.16
+          ],
+          "target_xy": [
+            520,
+            597
+          ]
+        },
+        "foot_screen_left": {
+          "source_xy": [
+            713.69,
+            946.27
+          ],
+          "target_xy": [
+            477,
+            784
+          ]
+        },
+        "foot_screen_right": {
+          "source_xy": [
+            869.87,
+            923.8
+          ],
+          "target_xy": [
+            616,
+            764
+          ]
+        },
+        "paper_tip": {
+          "source_xy": [
+            896.83,
+            496.83
+          ],
+          "target_xy": [
+            640,
+            384
+          ]
+        }
+      }
+    },
+    {
+      "id": "bridge-stamp-3",
+      "file": "assets/previews/knick-splats/bridge-stamp-3.webp",
+      "sha256": "97af6cdf94d8062945d26c311da3ceea3901997e9b84f6803bbd6175f51b56f3",
+      "source_file": "assets/sprite-sources/buergeramt/knick-bridges/stamp.png",
+      "source_sha256": "35255b421451d1095dd3fafbc57f510bb11add07427717a56bff013185b9e5f8",
+      "source_crop_xyxy": [
+        1082,
+        102,
+        1455,
+        982
+      ],
+      "uniform_scale": 0.89,
+      "translation_xy": [
+        -600.51,
+        -58.18
+      ],
+      "source_body_ground_pivot_xy": [
+        1259,
+        962
+      ],
+      "target_body_ground_pivot_xy": [
+        520.0,
+        798.0
+      ],
+      "encoded_alpha_bbox_xyxy": [
+        374,
+        46,
+        677,
+        798
+      ],
+      "transparent_gutter_ltrb": [
+        374,
+        46,
+        347,
+        34
+      ],
+      "landmarks": {
+        "eye_right": {
+          "source_xy": [
+            1282.6,
+            256.38
+          ],
+          "target_xy": [
+            541,
+            170
+          ]
+        },
+        "eye_left": {
+          "source_xy": [
+            1330.91,
+            268.74
+          ],
+          "target_xy": [
+            584,
+            181
+          ]
+        },
+        "nose": {
+          "source_xy": [
+            1307.31,
+            281.1
+          ],
+          "target_xy": [
+            563,
+            192
+          ]
+        },
+        "chin": {
+          "source_xy": [
+            1290.46,
+            318.18
+          ],
+          "target_xy": [
+            548,
+            225
+          ]
+        },
+        "shoulder_right": {
+          "source_xy": [
+            1170.24,
+            326.04
+          ],
+          "target_xy": [
+            441,
+            232
+          ]
+        },
+        "elbow_right": {
+          "source_xy": [
+            1111.81,
+            421.55
+          ],
+          "target_xy": [
+            389,
+            317
+          ]
+        },
+        "grip_right": {
+          "source_xy": [
+            1259.0,
+            451.89
+          ],
+          "target_xy": [
+            520,
+            344
+          ]
+        },
+        "stamp_knob": {
+          "source_xy": [
+            1267.99,
+            402.45
+          ],
+          "target_xy": [
+            528,
+            300
+          ]
+        },
+        "stamp_base": {
+          "source_xy": [
+            1254.51,
+            500.2
+          ],
+          "target_xy": [
+            516,
+            387
+          ]
+        },
+        "shoulder_left": {
+          "source_xy": [
+            1376.98,
+            368.74
+          ],
+          "target_xy": [
+            625,
+            270
+          ]
+        },
+        "elbow_left": {
+          "source_xy": [
+            1424.17,
+            488.97
+          ],
+          "target_xy": [
+            667,
+            377
+          ]
+        },
+        "hand_left": {
+          "source_xy": [
+            1357.88,
+            512.56
+          ],
+          "target_xy": [
+            608,
+            398
+          ]
+        },
+        "hip_center": {
+          "source_xy": [
+            1259.0,
+            514.81
+          ],
+          "target_xy": [
+            520,
+            400
+          ]
+        },
+        "skirt_hem_center": {
+          "source_xy": [
+            1259.0,
+            739.53
+          ],
+          "target_xy": [
+            520,
+            600
+          ]
+        },
+        "foot_screen_left": {
+          "source_xy": [
+            1208.44,
+            946.27
+          ],
+          "target_xy": [
+            475,
+            784
+          ]
+        },
+        "foot_screen_right": {
+          "source_xy": [
+            1366.87,
+            923.8
+          ],
+          "target_xy": [
+            616,
+            764
+          ]
+        },
+        "paper_tip": {
+          "source_xy": [
+            1367.99,
+            527.17
+          ],
+          "target_xy": [
+            617,
+            411
+          ]
+        }
+      }
+    },
+    {
+      "id": "bridge-fold-1",
+      "file": "assets/previews/knick-splats/bridge-fold-1.webp",
+      "sha256": "236d797b0fd7146af127069513c54e89bf5ae6e244f3a3ec0c03345efd90782d",
+      "source_file": "assets/sprite-sources/buergeramt/knick-bridges/fold.png",
+      "source_sha256": "d0e5000d35583c6f15ab5427a8d017686db58c5aeb526e7b3e670c72b9648181",
+      "source_crop_xyxy": [
+        390,
+        5,
+        720,
+        742
+      ],
+      "uniform_scale": 1.07,
+      "translation_xy": [
+        -66.36,
+        16.9
+      ],
+      "source_body_ground_pivot_xy": [
+        548,
+        730
+      ],
+      "target_body_ground_pivot_xy": [
+        520.0,
+        798.0
+      ],
+      "encoded_alpha_bbox_xyxy": [
+        368,
+        38,
+        683,
+        798
+      ],
+      "transparent_gutter_ltrb": [
+        368,
+        38,
+        341,
+        34
+      ],
+      "landmarks": {
+        "eye_right": {
+          "source_xy": [
+            570.43,
+            95.42
+          ],
+          "target_xy": [
+            544,
+            119
+          ]
+        },
+        "eye_left": {
+          "source_xy": [
+            617.16,
+            103.83
+          ],
+          "target_xy": [
+            594,
+            128
+          ]
+        },
+        "nose": {
+          "source_xy": [
+            596.6,
+            121.59
+          ],
+          "target_xy": [
+            572,
+            147
+          ]
+        },
+        "chin": {
+          "source_xy": [
+            582.58,
+            158.04
+          ],
+          "target_xy": [
+            557,
+            186
+          ]
+        },
+        "shoulder_right": {
+          "source_xy": [
+            466.69,
+            218.79
+          ],
+          "target_xy": [
+            433,
+            251
+          ]
+        },
+        "elbow_right": {
+          "source_xy": [
+            430.24,
+            302.9
+          ],
+          "target_xy": [
+            394,
+            341
+          ]
+        },
+        "grip_right": {
+          "source_xy": [
+            533.98,
+            271.12
+          ],
+          "target_xy": [
+            505,
+            307
+          ]
+        },
+        "stamp_knob": {
+          "source_xy": [
+            544.26,
+            232.8
+          ],
+          "target_xy": [
+            516,
+            266
+          ]
+        },
+        "stamp_base": {
+          "source_xy": [
+            533.98,
+            315.98
+          ],
+          "target_xy": [
+            505,
+            355
+          ]
+        },
+        "shoulder_left": {
+          "source_xy": [
+            648.0,
+            223.46
+          ],
+          "target_xy": [
+            627,
+            256
+          ]
+        },
+        "elbow_left": {
+          "source_xy": [
+            692.86,
+            337.48
+          ],
+          "target_xy": [
+            675,
+            378
+          ]
+        },
+        "hand_left": {
+          "source_xy": [
+            648.93,
+            350.56
+          ],
+          "target_xy": [
+            628,
+            392
+          ]
+        },
+        "hip_center": {
+          "source_xy": [
+            548.0,
+            362.71
+          ],
+          "target_xy": [
+            520,
+            405
+          ]
+        },
+        "skirt_hem_center": {
+          "source_xy": [
+            548.0,
+            550.56
+          ],
+          "target_xy": [
+            520,
+            606
+          ]
+        },
+        "foot_screen_left": {
+          "source_xy": [
+            504.07,
+            714.11
+          ],
+          "target_xy": [
+            473,
+            781
+          ]
+        },
+        "foot_screen_right": {
+          "source_xy": [
+            634.92,
+            699.16
+          ],
+          "target_xy": [
+            613,
+            765
+          ]
+        },
+        "paper_tip": {
+          "source_xy": [
+            664.82,
+            360.84
+          ],
+          "target_xy": [
+            645,
+            403
+          ]
+        }
+      }
+    },
+    {
+      "id": "bridge-fold-2",
+      "file": "assets/previews/knick-splats/bridge-fold-2.webp",
+      "sha256": "e58f9483e63fabe1a11f278d7b03bde63afcfa035bd8a782e54ede3d897f4c3c",
+      "source_file": "assets/sprite-sources/buergeramt/knick-bridges/fold.png",
+      "source_sha256": "d0e5000d35583c6f15ab5427a8d017686db58c5aeb526e7b3e670c72b9648181",
+      "source_crop_xyxy": [
+        845,
+        5,
+        1382,
+        742
+      ],
+      "uniform_scale": 1.07,
+      "translation_xy": [
+        -553.21,
+        16.9
+      ],
+      "source_body_ground_pivot_xy": [
+        1003,
+        730
+      ],
+      "target_body_ground_pivot_xy": [
+        520.0,
+        798.0
+      ],
+      "encoded_alpha_bbox_xyxy": [
+        365,
+        37,
+        911,
+        798
+      ],
+      "transparent_gutter_ltrb": [
+        365,
+        37,
+        113,
+        34
+      ],
+      "landmarks": {
+        "eye_right": {
+          "source_xy": [
+            1024.5,
+            96.36
+          ],
+          "target_xy": [
+            543,
+            120
+          ]
+        },
+        "eye_left": {
+          "source_xy": [
+            1066.55,
+            100.09
+          ],
+          "target_xy": [
+            588,
+            124
+          ]
+        },
+        "nose": {
+          "source_xy": [
+            1050.66,
+            117.85
+          ],
+          "target_xy": [
+            571,
+            143
+          ]
+        },
+        "chin": {
+          "source_xy": [
+            1032.91,
+            157.1
+          ],
+          "target_xy": [
+            552,
+            185
+          ]
+        },
+        "shoulder_right": {
+          "source_xy": [
+            921.69,
+            220.65
+          ],
+          "target_xy": [
+            433,
+            253
+          ]
+        },
+        "elbow_right": {
+          "source_xy": [
+            884.31,
+            309.44
+          ],
+          "target_xy": [
+            393,
+            348
+          ]
+        },
+        "grip_right": {
+          "source_xy": [
+            988.98,
+            293.55
+          ],
+          "target_xy": [
+            505,
+            331
+          ]
+        },
+        "stamp_knob": {
+          "source_xy": [
+            998.33,
+            243.08
+          ],
+          "target_xy": [
+            515,
+            277
+          ]
+        },
+        "stamp_base": {
+          "source_xy": [
+            988.05,
+            332.8
+          ],
+          "target_xy": [
+            504,
+            373
+          ]
+        },
+        "shoulder_left": {
+          "source_xy": [
+            1099.26,
+            219.72
+          ],
+          "target_xy": [
+            623,
+            252
+          ]
+        },
+        "elbow_left": {
+          "source_xy": [
+            1183.37,
+            330.93
+          ],
+          "target_xy": [
+            713,
+            371
+          ]
+        },
+        "hand_left": {
+          "source_xy": [
+            1248.79,
+            342.15
+          ],
+          "target_xy": [
+            783,
+            383
+          ]
+        },
+        "hip_center": {
+          "source_xy": [
+            1003.0,
+            362.71
+          ],
+          "target_xy": [
+            520,
+            405
+          ]
+        },
+        "skirt_hem_center": {
+          "source_xy": [
+            1003.0,
+            551.5
+          ],
+          "target_xy": [
+            520,
+            607
+          ]
+        },
+        "foot_screen_left": {
+          "source_xy": [
+            958.14,
+            715.05
+          ],
+          "target_xy": [
+            472,
+            782
+          ]
+        },
+        "foot_screen_right": {
+          "source_xy": [
+            1090.85,
+            699.16
+          ],
+          "target_xy": [
+            614,
+            765
+          ]
+        },
+        "paper_tip": {
+          "source_xy": [
+            1365.62,
+            356.17
+          ],
+          "target_xy": [
+            908,
+            398
+          ]
+        }
+      }
+    },
+    {
+      "id": "bridge-fold-3",
+      "file": "assets/previews/knick-splats/bridge-fold-3.webp",
+      "sha256": "6ca2dfd5adda09b3715ab635ce762a96544897a84e803ab8a088a40f62b0e75b",
+      "source_file": "assets/sprite-sources/buergeramt/knick-bridges/fold.png",
+      "source_sha256": "d0e5000d35583c6f15ab5427a8d017686db58c5aeb526e7b3e670c72b9648181",
+      "source_crop_xyxy": [
+        1428,
+        5,
+        1712,
+        742
+      ],
+      "uniform_scale": 1.07,
+      "translation_xy": [
+        -1149.2,
+        16.9
+      ],
+      "source_body_ground_pivot_xy": [
+        1560,
+        730
+      ],
+      "target_body_ground_pivot_xy": [
+        520.0,
+        798.0
+      ],
+      "encoded_alpha_bbox_xyxy": [
+        395,
+        37,
+        666,
+        798
+      ],
+      "transparent_gutter_ltrb": [
+        395,
+        37,
+        358,
+        34
+      ],
+      "landmarks": {
+        "eye_right": {
+          "source_xy": [
+            1564.67,
+            92.62
+          ],
+          "target_xy": [
+            525,
+            116
+          ]
+        },
+        "eye_left": {
+          "source_xy": [
+            1612.34,
+            103.83
+          ],
+          "target_xy": [
+            576,
+            128
+          ]
+        },
+        "nose": {
+          "source_xy": [
+            1591.78,
+            118.79
+          ],
+          "target_xy": [
+            554,
+            144
+          ]
+        },
+        "chin": {
+          "source_xy": [
+            1580.56,
+            152.43
+          ],
+          "target_xy": [
+            542,
+            180
+          ]
+        },
+        "shoulder_right": {
+          "source_xy": [
+            1472.15,
+            218.79
+          ],
+          "target_xy": [
+            426,
+            251
+          ]
+        },
+        "elbow_right": {
+          "source_xy": [
+            1529.16,
+            315.98
+          ],
+          "target_xy": [
+            487,
+            355
+          ]
+        },
+        "grip_right": {
+          "source_xy": [
+            1639.44,
+            257.1
+          ],
+          "target_xy": [
+            605,
+            292
+          ]
+        },
+        "stamp_knob": {
+          "source_xy": [
+            1635.7,
+            206.64
+          ],
+          "target_xy": [
+            601,
+            238
+          ]
+        },
+        "stamp_base": {
+          "source_xy": [
+            1644.11,
+            300.09
+          ],
+          "target_xy": [
+            610,
+            338
+          ]
+        },
+        "shoulder_left": {
+          "source_xy": [
+            1659.07,
+            219.72
+          ],
+          "target_xy": [
+            626,
+            252
+          ]
+        },
+        "elbow_left": {
+          "source_xy": [
+            1652.52,
+            335.61
+          ],
+          "target_xy": [
+            619,
+            376
+          ]
+        },
+        "hand_left": {
+          "source_xy": [
+            1534.77,
+            372.99
+          ],
+          "target_xy": [
+            493,
+            416
+          ]
+        },
+        "hip_center": {
+          "source_xy": [
+            1560.0,
+            381.4
+          ],
+          "target_xy": [
+            520,
+            425
+          ]
+        },
+        "skirt_hem_center": {
+          "source_xy": [
+            1560.0,
+            550.56
+          ],
+          "target_xy": [
+            520,
+            606
+          ]
+        },
+        "foot_screen_left": {
+          "source_xy": [
+            1517.94,
+            714.11
+          ],
+          "target_xy": [
+            475,
+            781
+          ]
+        },
+        "foot_screen_right": {
+          "source_xy": [
+            1647.85,
+            699.16
+          ],
+          "target_xy": [
+            614,
+            765
+          ]
+        }
+      }
+    },
+    {
+      "id": "bridge-return-1",
+      "file": "assets/previews/knick-splats/bridge-return-1.webp",
+      "sha256": "f249f93ad828bb55db8242e04e8052d25e574eaa6e8ff8864f772412faba657a",
+      "source_file": "assets/sprite-sources/buergeramt/knick-bridges/return.png",
+      "source_sha256": "2d2a4b3f84e1c14120e5835c5512725d657391a70790b5cc3b1840e63a7f4f09",
+      "source_crop_xyxy": [
+        315,
+        5,
+        718,
+        1003
+      ],
+      "uniform_scale": 0.79,
+      "translation_xy": [
+        114.73,
+        18.27
+      ],
+      "source_body_ground_pivot_xy": [
+        513,
+        987
+      ],
+      "target_body_ground_pivot_xy": [
+        520.0,
+        798.0
+      ],
+      "encoded_alpha_bbox_xyxy": [
+        375,
+        32,
+        666,
+        798
+      ],
+      "transparent_gutter_ltrb": [
+        375,
+        32,
+        358,
+        34
+      ],
+      "landmarks": {
+        "eye_right": {
+          "source_xy": [
+            529.46,
+            128.77
+          ],
+          "target_xy": [
+            533,
+            120
+          ]
+        },
+        "eye_left": {
+          "source_xy": [
+            586.42,
+            133.84
+          ],
+          "target_xy": [
+            578,
+            124
+          ]
+        },
+        "nose": {
+          "source_xy": [
+            562.37,
+            152.82
+          ],
+          "target_xy": [
+            559,
+            139
+          ]
+        },
+        "chin": {
+          "source_xy": [
+            550.97,
+            204.72
+          ],
+          "target_xy": [
+            550,
+            180
+          ]
+        },
+        "shoulder_right": {
+          "source_xy": [
+            394.01,
+            294.59
+          ],
+          "target_xy": [
+            426,
+            251
+          ]
+        },
+        "elbow_right": {
+          "source_xy": [
+            356.04,
+            412.32
+          ],
+          "target_xy": [
+            396,
+            344
+          ]
+        },
+        "grip_right": {
+          "source_xy": [
+            516.8,
+            362.95
+          ],
+          "target_xy": [
+            523,
+            305
+          ]
+        },
+        "stamp_knob": {
+          "source_xy": [
+            523.13,
+            299.66
+          ],
+          "target_xy": [
+            528,
+            255
+          ]
+        },
+        "stamp_base": {
+          "source_xy": [
+            514.27,
+            417.38
+          ],
+          "target_xy": [
+            521,
+            348
+          ]
+        },
+        "shoulder_left": {
+          "source_xy": [
+            631.99,
+            298.39
+          ],
+          "target_xy": [
+            614,
+            254
+          ]
+        },
+        "elbow_left": {
+          "source_xy": [
+            664.9,
+            464.22
+          ],
+          "target_xy": [
+            640,
+            385
+          ]
+        },
+        "hand_left": {
+          "source_xy": [
+            515.53,
+            493.33
+          ],
+          "target_xy": [
+            522,
+            408
+          ]
+        },
+        "hip_center": {
+          "source_xy": [
+            513.0,
+            495.86
+          ],
+          "target_xy": [
+            520,
+            410
+          ]
+        },
+        "skirt_hem_center": {
+          "source_xy": [
+            513.0,
+            740.16
+          ],
+          "target_xy": [
+            520,
+            603
+          ]
+        },
+        "foot_screen_left": {
+          "source_xy": [
+            456.04,
+            965.48
+          ],
+          "target_xy": [
+            475,
+            781
+          ]
+        },
+        "foot_screen_right": {
+          "source_xy": [
+            631.99,
+            945.23
+          ],
+          "target_xy": [
+            614,
+            765
+          ]
+        }
+      }
+    },
+    {
+      "id": "bridge-return-2",
+      "file": "assets/previews/knick-splats/bridge-return-2.webp",
+      "sha256": "e42d361c1f7e5d4857e446ccdc807c1aa3ffe26ea967dcb770b9dbf691e6c3e3",
+      "source_file": "assets/sprite-sources/buergeramt/knick-bridges/return.png",
+      "source_sha256": "2d2a4b3f84e1c14120e5835c5512725d657391a70790b5cc3b1840e63a7f4f09",
+      "source_crop_xyxy": [
+        775,
+        5,
+        1180,
+        1003
+      ],
+      "uniform_scale": 0.79,
+      "translation_xy": [
+        -256.57,
+        18.27
+      ],
+      "source_body_ground_pivot_xy": [
+        983,
+        987
+      ],
+      "target_body_ground_pivot_xy": [
+        520.0,
+        798.0
+      ],
+      "encoded_alpha_bbox_xyxy": [
+        368,
+        32,
+        661,
+        798
+      ],
+      "transparent_gutter_ltrb": [
+        368,
+        32,
+        363,
+        34
+      ],
+      "landmarks": {
+        "eye_right": {
+          "source_xy": [
+            996.92,
+            126.24
+          ],
+          "target_xy": [
+            531,
+            118
+          ]
+        },
+        "eye_left": {
+          "source_xy": [
+            1057.68,
+            133.84
+          ],
+          "target_xy": [
+            579,
+            124
+          ]
+        },
+        "nose": {
+          "source_xy": [
+            1031.1,
+            154.09
+          ],
+          "target_xy": [
+            558,
+            140
+          ]
+        },
+        "chin": {
+          "source_xy": [
+            1018.44,
+            205.99
+          ],
+          "target_xy": [
+            548,
+            181
+          ]
+        },
+        "shoulder_right": {
+          "source_xy": [
+            856.42,
+            298.39
+          ],
+          "target_xy": [
+            420,
+            254
+          ]
+        },
+        "elbow_right": {
+          "source_xy": [
+            826.04,
+            418.65
+          ],
+          "target_xy": [
+            396,
+            349
+          ]
+        },
+        "grip_right": {
+          "source_xy": [
+            957.68,
+            403.46
+          ],
+          "target_xy": [
+            500,
+            337
+          ]
+        },
+        "stamp_knob": {
+          "source_xy": [
+            961.48,
+            340.16
+          ],
+          "target_xy": [
+            503,
+            287
+          ]
+        },
+        "stamp_base": {
+          "source_xy": [
+            956.42,
+            466.75
+          ],
+          "target_xy": [
+            499,
+            387
+          ]
+        },
+        "shoulder_left": {
+          "source_xy": [
+            1093.13,
+            293.33
+          ],
+          "target_xy": [
+            607,
+            250
+          ]
+        },
+        "elbow_left": {
+          "source_xy": [
+            1124.77,
+            488.27
+          ],
+          "target_xy": [
+            632,
+            404
+          ]
+        },
+        "hand_left": {
+          "source_xy": [
+            1129.84,
+            612.32
+          ],
+          "target_xy": [
+            636,
+            502
+          ]
+        },
+        "hip_center": {
+          "source_xy": [
+            983.0,
+            492.06
+          ],
+          "target_xy": [
+            520,
+            407
+          ]
+        },
+        "skirt_hem_center": {
+          "source_xy": [
+            983.0,
+            741.43
+          ],
+          "target_xy": [
+            520,
+            604
+          ]
+        },
+        "foot_screen_left": {
+          "source_xy": [
+            926.04,
+            965.48
+          ],
+          "target_xy": [
+            475,
+            781
+          ]
+        },
+        "foot_screen_right": {
+          "source_xy": [
+            1101.99,
+            945.23
+          ],
+          "target_xy": [
+            614,
+            765
+          ]
+        }
+      }
+    }
+  ]
+}

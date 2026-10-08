@@ -1,50 +1,247 @@
 {
-  "status": "preview-only; not accepted character animation",
+  "status": "preview-only; authored bridge study, not accepted production character animation",
   "character": "Frau Knick",
   "source": "assets/buergeramt/characters/clerk-performance-detail.webp",
   "source_sha256": "932a2d6e2a1172b118d80b088a31bef3c06b706ffb4c3c58ee985fdff6698515",
-  "anchor_cells_xywh": [
-    [
-      0,
-      0,
-      384,
-      832
-    ],
-    [
-      768,
-      0,
-      384,
-      832
-    ],
-    [
-      1152,
-      0,
-      384,
-      832
-    ],
-    [
-      384,
-      0,
-      384,
-      832
-    ]
+  "registration_sha256": "f0e1887e98a0a78adf4c0775c1343e662df998a859732e4d27c3dcbe01fd4451",
+  "canvas_xy": [
+    1024,
+    832
   ],
-  "anchor_names": [
-    "Ready",
-    "Stamp raised",
-    "Stamp contact",
-    "Refusal"
+  "anchors": [
+    {
+      "id": "ready",
+      "name": "Ready",
+      "file": "anchor-0.webp",
+      "preview": "registered-anchor-0.webp",
+      "sha256": "7799fd4a79182e7dc28a11fbc69f494ae4e54ca0b2922a6479e98fd498fdfd9c",
+      "preview_sha256": "02d42800d71538bab9cc9977e40b8b471f91488074ee738cd56c6e02f98bdf8f"
+    },
+    {
+      "id": "raise-1",
+      "name": "Lift to shoulder",
+      "file": "bridge-raise-1.webp",
+      "preview": "bridge-raise-1.webp",
+      "sha256": "fd136638f458d02e5508bd6fbceecb1156e59b5dfcae65c49d6c204a8cb4d73a",
+      "preview_sha256": "fd136638f458d02e5508bd6fbceecb1156e59b5dfcae65c49d6c204a8cb4d73a"
+    },
+    {
+      "id": "raise-2",
+      "name": "Lift above forehead",
+      "file": "bridge-raise-2.webp",
+      "preview": "bridge-raise-2.webp",
+      "sha256": "51c8525aa11069e5cb106ec2c04af269bfed7458d3f6426034a40a1c18eaeb17",
+      "preview_sha256": "51c8525aa11069e5cb106ec2c04af269bfed7458d3f6426034a40a1c18eaeb17"
+    },
+    {
+      "id": "raised",
+      "name": "Stamp raised",
+      "file": "anchor-1.webp",
+      "preview": "registered-anchor-1.webp",
+      "sha256": "1f961f8dc830cfbd6eb36d8af65087f47059fc2c4a27d3ebcec44b33966e37c9",
+      "preview_sha256": "e23f5852be9a064ce8360b2093ea14e2f82b2e872281d2386b67ecfced3224b4"
+    },
+    {
+      "id": "stamp-1",
+      "name": "Take the paperwork",
+      "file": "bridge-stamp-1.webp",
+      "preview": "bridge-stamp-1.webp",
+      "sha256": "eac6cf9b89229a6ab4e14873ec63a48052ad2015c559fa9c704ad93aaf4f4be7",
+      "preview_sha256": "eac6cf9b89229a6ab4e14873ec63a48052ad2015c559fa9c704ad93aaf4f4be7"
+    },
+    {
+      "id": "stamp-2",
+      "name": "Support the document",
+      "file": "bridge-stamp-2.webp",
+      "preview": "bridge-stamp-2.webp",
+      "sha256": "ec2239b038f32e8294d23b1f4aa096c55fa908b875e9a4cb447d4d8345893ebd",
+      "preview_sha256": "ec2239b038f32e8294d23b1f4aa096c55fa908b875e9a4cb447d4d8345893ebd"
+    },
+    {
+      "id": "stamp-3",
+      "name": "Approach contact",
+      "file": "bridge-stamp-3.webp",
+      "preview": "bridge-stamp-3.webp",
+      "sha256": "97af6cdf94d8062945d26c311da3ceea3901997e9b84f6803bbd6175f51b56f3",
+      "preview_sha256": "97af6cdf94d8062945d26c311da3ceea3901997e9b84f6803bbd6175f51b56f3"
+    },
+    {
+      "id": "contact",
+      "name": "Stamp contact",
+      "file": "anchor-2.webp",
+      "preview": "registered-anchor-2.webp",
+      "sha256": "825dcb1461938543a200e47310c1a637a344b456581001fd4d393bd2420aa633",
+      "preview_sha256": "51c085117d070130f0cd6748cfb16be74c2c092e2d7a141a3c1e3220e1538da8"
+    },
+    {
+      "id": "fold-1",
+      "name": "Lift off the paper",
+      "file": "bridge-fold-1.webp",
+      "preview": "bridge-fold-1.webp",
+      "sha256": "236d797b0fd7146af127069513c54e89bf5ae6e244f3a3ec0c03345efd90782d",
+      "preview_sha256": "236d797b0fd7146af127069513c54e89bf5ae6e244f3a3ec0c03345efd90782d"
+    },
+    {
+      "id": "fold-2",
+      "name": "Put the document aside",
+      "file": "bridge-fold-2.webp",
+      "preview": "bridge-fold-2.webp",
+      "sha256": "e58f9483e63fabe1a11f278d7b03bde63afcfa035bd8a782e54ede3d897f4c3c",
+      "preview_sha256": "e58f9483e63fabe1a11f278d7b03bde63afcfa035bd8a782e54ede3d897f4c3c"
+    },
+    {
+      "id": "fold-3",
+      "name": "Begin folding arms",
+      "file": "bridge-fold-3.webp",
+      "preview": "bridge-fold-3.webp",
+      "sha256": "6ca2dfd5adda09b3715ab635ce762a96544897a84e803ab8a088a40f62b0e75b",
+      "preview_sha256": "6ca2dfd5adda09b3715ab635ce762a96544897a84e803ab8a088a40f62b0e75b"
+    },
+    {
+      "id": "refusal",
+      "name": "Refusal",
+      "file": "anchor-3.webp",
+      "preview": "registered-anchor-3.webp",
+      "sha256": "ee40b47e8273b096efdf9f917828847a89c8325d07e1478a3432c91f6e0c0d8d",
+      "preview_sha256": "d4e410849624a6d2560f4c6e489d5a051dc6b4f265abcb8d16742f39907c6ceb"
+    },
+    {
+      "id": "return-1",
+      "name": "Unfold arms",
+      "file": "bridge-return-1.webp",
+      "preview": "bridge-return-1.webp",
+      "sha256": "f249f93ad828bb55db8242e04e8052d25e574eaa6e8ff8864f772412faba657a",
+      "preview_sha256": "f249f93ad828bb55db8242e04e8052d25e574eaa6e8ff8864f772412faba657a"
+    },
+    {
+      "id": "return-2",
+      "name": "Lower the free hand",
+      "file": "bridge-return-2.webp",
+      "preview": "bridge-return-2.webp",
+      "sha256": "e42d361c1f7e5d4857e446ccdc807c1aa3ffe26ea967dcb770b9dbf691e6c3e3",
+      "preview_sha256": "e42d361c1f7e5d4857e446ccdc807c1aa3ffe26ea967dcb770b9dbf691e6c3e3"
+    }
+  ],
+  "transitions": [
+    {
+      "from": "ready",
+      "to": "raise-1",
+      "mode": "pose",
+      "reason": "prop proportions differ",
+      "stamp_axis_ratio": 0.7665
+    },
+    {
+      "from": "raise-1",
+      "to": "raise-2",
+      "mode": "pose",
+      "reason": "prop proportions differ",
+      "stamp_axis_ratio": 1.2166
+    },
+    {
+      "from": "raise-2",
+      "to": "raised",
+      "mode": "pose",
+      "reason": "prop proportions differ",
+      "stamp_axis_ratio": 1.2929
+    },
+    {
+      "from": "raised",
+      "to": "stamp-1",
+      "mode": "pose",
+      "reason": "occlusion, grip or paper handoff",
+      "stamp_axis_ratio": 0.7458
+    },
+    {
+      "from": "stamp-1",
+      "to": "stamp-2",
+      "mode": "pose",
+      "reason": "occlusion, grip or paper handoff",
+      "stamp_axis_ratio": 0.889
+    },
+    {
+      "from": "stamp-2",
+      "to": "stamp-3",
+      "mode": "splat",
+      "reason": "same-side stamp approach",
+      "stamp_axis_ratio": 0.9226
+    },
+    {
+      "from": "stamp-3",
+      "to": "contact",
+      "mode": "pose",
+      "reason": "occlusion, grip or paper handoff",
+      "stamp_axis_ratio": 0.9681
+    },
+    {
+      "from": "contact",
+      "to": "fold-1",
+      "mode": "pose",
+      "reason": "occlusion, grip or paper handoff",
+      "stamp_axis_ratio": 1.0547
+    },
+    {
+      "from": "fold-1",
+      "to": "fold-2",
+      "mode": "pose",
+      "reason": "occlusion, grip or paper handoff",
+      "stamp_axis_ratio": 1.0775
+    },
+    {
+      "from": "fold-2",
+      "to": "fold-3",
+      "mode": "pose",
+      "reason": "occlusion, grip or paper handoff",
+      "stamp_axis_ratio": 1.0391
+    },
+    {
+      "from": "fold-3",
+      "to": "refusal",
+      "mode": "pose",
+      "reason": "occlusion, grip or paper handoff",
+      "stamp_axis_ratio": 0.9769
+    },
+    {
+      "from": "refusal",
+      "to": "return-1",
+      "mode": "pose",
+      "reason": "occlusion, grip or paper handoff",
+      "stamp_axis_ratio": 0.9509
+    },
+    {
+      "from": "return-1",
+      "to": "return-2",
+      "mode": "pose",
+      "reason": "occlusion, grip or paper handoff",
+      "stamp_axis_ratio": 1.0731
+    },
+    {
+      "from": "return-2",
+      "to": "ready",
+      "mode": "pose",
+      "reason": "prop proportions differ",
+      "stamp_axis_ratio": 1.1897
+    }
   ],
   "sample_stride_px": 3,
   "anchor_sample_counts": [
-    15412,
-    16314,
-    14792,
-    14801
+    15411,
+    16048,
+    17110,
+    16331,
+    19934,
+    16511,
+    16150,
+    14793,
+    16392,
+    17387,
+    15421,
+    14801,
+    15270,
+    15153
   ],
-  "slots_per_anchor": 16384,
-  "sample_count": 32768,
-  "segment_count": 4,
+  "slots_per_anchor": 19968,
+  "sample_count": 39936,
+  "segment_count": 14,
   "record_bytes": 20,
   "record_fields": [
     "startX:f32le",
@@ -56,1028 +253,956 @@
     "sRGB_B:u8",
     "alpha:u8"
   ],
-  "layout": "4 segment blocks; source slots then target slots; unused slots have zero alpha",
-  "correspondence_sha256": "5dff1fcb3ccd63e22fa86b208c765c62ce8dda25e5629306faf179bb08a37913",
+  "layout": "One block per transition; source slots then target slots; unused slots have zero alpha",
+  "correspondence_sha256": "4d0bca4b84136fd88f1ab4005cf210d46c24b1fc5d2491bcfe5e274f79033fc2",
+  "landmark_keys": [
+    "eye_right",
+    "eye_left",
+    "nose",
+    "chin",
+    "shoulder_right",
+    "elbow_right",
+    "grip_right",
+    "stamp_knob",
+    "stamp_base",
+    "shoulder_left",
+    "elbow_left",
+    "hand_left",
+    "hip_center",
+    "skirt_hem_center",
+    "foot_screen_left",
+    "foot_screen_right"
+  ],
   "landmarks": [
-    {
-      "name": "hair top",
-      "anchors": [
-        [
-          223,
-          42
-        ],
-        [
-          251,
-          76
-        ],
-        [
-          233,
-          74
-        ],
-        [
-          218,
-          40
-        ]
-      ]
-    },
-    {
-      "name": "hair left",
-      "anchors": [
-        [
-          135,
-          87
-        ],
-        [
-          176,
-          125
-        ],
-        [
-          141,
-          118
-        ],
-        [
-          128,
-          80
-        ]
-      ]
-    },
-    {
-      "name": "hair right",
-      "anchors": [
-        [
-          305,
-          90
-        ],
-        [
-          325,
-          111
-        ],
-        [
-          296,
-          114
-        ],
-        [
-          293,
-          81
-        ]
-      ]
-    },
-    {
-      "name": "left eye",
-      "anchors": [
-        [
-          226,
-          125
-        ],
-        [
-          254,
-          156
-        ],
-        [
-          209,
-          181
-        ],
-        [
-          220,
-          123
-        ]
-      ]
-    },
-    {
-      "name": "right eye",
-      "anchors": [
-        [
-          282,
-          130
-        ],
-        [
-          307,
-          167
-        ],
-        [
-          257,
-          197
-        ],
-        [
-          266,
-          124
-        ]
-      ]
-    },
-    {
-      "name": "nose",
-      "anchors": [
-        [
-          265,
-          158
-        ],
-        [
-          294,
-          193
-        ],
-        [
-          234,
-          211
-        ],
-        [
-          252,
-          151
-        ]
-      ]
-    },
-    {
-      "name": "chin",
-      "anchors": [
-        [
-          236,
-          210
-        ],
-        [
-          267,
-          247
-        ],
-        [
-          221,
-          263
-        ],
-        [
-          224,
-          209
-        ]
-      ]
-    },
-    {
-      "name": "left collar",
-      "anchors": [
-        [
-          183,
-          228
-        ],
-        [
-          205,
-          263
-        ],
-        [
-          174,
-          250
-        ],
-        [
-          173,
-          223
-        ]
-      ]
-    },
-    {
-      "name": "right collar",
-      "anchors": [
-        [
-          271,
-          236
-        ],
-        [
-          295,
-          278
-        ],
-        [
-          263,
-          275
-        ],
-        [
-          265,
-          246
-        ]
-      ]
-    },
-    {
-      "name": "left shoulder",
-      "anchors": [
-        [
-          131,
-          260
-        ],
-        [
-          156,
-          264
-        ],
-        [
-          123,
-          250
-        ],
-        [
-          112,
-          252
-        ]
-      ]
-    },
-    {
-      "name": "left elbow",
-      "anchors": [
-        [
-          90,
-          380
-        ],
-        [
-          77,
-          235
-        ],
-        [
-          99,
-          355
-        ],
-        [
-          144,
-          351
-        ]
-      ]
-    },
-    {
-      "name": "stamp knob",
-      "anchors": [
-        [
-          176,
-          286
-        ],
-        [
-          163,
-          31
-        ],
-        [
-          207,
-          353
-        ],
-        [
-          274,
-          242
-        ]
-      ]
-    },
-    {
-      "name": "stamp hand",
-      "anchors": [
-        [
-          151,
-          344
-        ],
-        [
-          114,
-          103
-        ],
-        [
-          194,
-          351
-        ],
-        [
-          287,
-          298
-        ]
-      ]
-    },
-    {
-      "name": "stamp base",
-      "anchors": [
-        [
-          172,
-          405
-        ],
-        [
-          98,
-          159
-        ],
-        [
-          205,
-          398
-        ],
-        [
-          302,
-          336
-        ]
-      ]
-    },
-    {
-      "name": "badge",
-      "anchors": [
-        [
-          266,
-          397
-        ],
-        [
-          270,
-          391
-        ],
-        [
-          239,
-          382
-        ],
-        [
-          260,
-          394
-        ]
-      ]
-    },
-    {
-      "name": "left waist",
-      "anchors": [
-        [
-          120,
-          481
-        ],
-        [
-          119,
-          483
-        ],
-        [
-          118,
-          483
-        ],
-        [
-          120,
-          481
-        ]
-      ]
-    },
-    {
-      "name": "right shoulder",
-      "anchors": [
-        [
-          311,
-          304
-        ],
-        [
-          329,
-          291
-        ],
-        [
-          298,
-          300
-        ],
-        [
-          313,
-          305
-        ]
-      ]
-    },
-    {
-      "name": "right elbow",
-      "anchors": [
-        [
-          318,
-          434
-        ],
-        [
-          333,
-          350
-        ],
-        [
-          317,
-          379
-        ],
-        [
-          305,
-          381
-        ]
-      ]
-    },
-    {
-      "name": "right hand",
-      "anchors": [
-        [
-          321,
-          515
-        ],
-        [
-          307,
-          417
-        ],
-        [
-          288,
-          421
-        ],
-        [
-          178,
-          319
-        ]
-      ]
-    },
-    {
-      "name": "skirt left",
-      "anchors": [
-        [
-          113,
-          611
-        ],
-        [
-          110,
-          611
-        ],
-        [
-          110,
-          611
-        ],
-        [
-          111,
-          611
-        ]
-      ]
-    },
-    {
-      "name": "skirt middle",
-      "anchors": [
-        [
-          212,
-          618
-        ],
-        [
-          213,
-          618
-        ],
-        [
-          212,
-          618
-        ],
-        [
-          212,
-          618
-        ]
-      ]
-    },
-    {
-      "name": "skirt right",
-      "anchors": [
-        [
-          294,
-          607
-        ],
-        [
-          297,
-          610
-        ],
-        [
-          298,
-          610
-        ],
-        [
-          297,
-          610
-        ]
-      ]
-    },
-    {
-      "name": "left knee",
-      "anchors": [
-        [
-          146,
-          664
-        ],
-        [
-          146,
-          663
-        ],
-        [
-          146,
-          664
-        ],
-        [
-          146,
-          664
-        ]
-      ]
-    },
-    {
-      "name": "right knee",
-      "anchors": [
-        [
-          236,
-          662
-        ],
-        [
-          236,
-          663
-        ],
-        [
-          236,
-          662
-        ],
-        [
-          236,
-          662
-        ]
-      ]
-    },
-    {
-      "name": "left ankle",
-      "anchors": [
-        [
-          145,
-          736
-        ],
-        [
-          145,
-          736
-        ],
-        [
-          145,
-          736
-        ],
-        [
-          145,
-          736
-        ]
-      ]
-    },
-    {
-      "name": "right ankle",
-      "anchors": [
-        [
-          230,
-          728
-        ],
-        [
-          230,
-          727
-        ],
-        [
-          230,
-          728
-        ],
-        [
-          230,
-          728
-        ]
-      ]
-    },
-    {
-      "name": "left toe",
-      "anchors": [
-        [
-          175,
-          787
-        ],
-        [
-          175,
-          787
-        ],
-        [
-          175,
-          787
-        ],
-        [
-          175,
-          787
-        ]
-      ]
-    },
-    {
-      "name": "right toe",
-      "anchors": [
-        [
-          306,
-          765
-        ],
-        [
-          306,
-          765
-        ],
-        [
-          306,
-          765
-        ],
-        [
-          306,
-          765
-        ]
-      ]
-    }
-  ],
-  "head_polygons": [
     [
       [
-        230,
-        36
+        546.0,
+        125.0
       ],
       [
-        279,
-        44
+        602.0,
+        130.0
       ],
       [
-        310,
-        77
+        585.0,
+        158.0
       ],
       [
-        319,
-        149
+        556.0,
+        210.0
       ],
       [
-        297,
-        199
+        451.0,
+        260.0
       ],
       [
-        278,
-        227
+        410.0,
+        380.0
       ],
       [
-        221,
-        229
+        471.0,
+        344.0
       ],
       [
-        169,
-        210
+        496.0,
+        286.0
       ],
       [
-        136,
-        191
+        492.0,
+        405.0
       ],
       [
-        113,
-        164
+        631.0,
+        304.0
       ],
       [
-        113,
-        128
+        638.0,
+        434.0
       ],
       [
-        129,
-        91
+        641.0,
+        515.0
       ],
       [
-        178,
-        58
+        520.0,
+        430.0
+      ],
+      [
+        532.0,
+        618.0
+      ],
+      [
+        495.0,
+        787.0
+      ],
+      [
+        626.0,
+        765.0
       ]
     ],
     [
       [
-        253,
-        68
+        532.0,
+        148.0
       ],
       [
-        310,
-        69
+        576.0,
+        148.0
       ],
       [
-        332,
-        102
+        565.0,
+        165.0
       ],
       [
-        338,
-        171
+        558.0,
+        208.0
       ],
       [
-        327,
-        211
+        427.0,
+        263.0
       ],
       [
-        304,
-        249
+        370.0,
+        286.0
       ],
       [
-        271,
-        270
+        434.0,
+        219.0
       ],
       [
-        225,
-        252
+        450.0,
+        175.0
       ],
       [
-        185,
-        234
+        443.0,
+        266.0
       ],
       [
-        166,
-        205
+        617.0,
+        269.0
       ],
       [
-        163,
-        161
+        673.0,
+        356.0
       ],
       [
-        182,
-        116
+        630.0,
+        401.0
       ],
       [
-        215,
-        90
+        520.0,
+        423.0
+      ],
+      [
+        518.0,
+        621.0
+      ],
+      [
+        476.0,
+        777.0
+      ],
+      [
+        596.0,
+        759.0
       ]
     ],
     [
       [
-        232,
-        70
+        551.0,
+        150.0
       ],
       [
-        285,
-        81
+        595.0,
+        148.0
       ],
       [
-        310,
-        111
+        580.0,
+        168.0
       ],
       [
-        314,
-        158
+        566.0,
+        214.0
       ],
       [
-        295,
-        212
+        438.0,
+        238.0
       ],
       [
-        263,
-        249
+        389.0,
+        171.0
       ],
       [
-        230,
-        269
+        463.0,
+        62.0
       ],
       [
-        184,
-        258
+        510.0,
+        29.0
       ],
       [
-        157,
-        227
+        433.0,
+        109.0
       ],
       [
-        131,
-        191
+        626.0,
+        263.0
       ],
       [
-        127,
-        151
+        676.0,
+        352.0
       ],
       [
-        144,
-        117
+        626.0,
+        398.0
       ],
       [
-        180,
-        89
+        520.0,
+        423.0
+      ],
+      [
+        518.0,
+        620.0
+      ],
+      [
+        478.0,
+        777.0
+      ],
+      [
+        595.0,
+        759.0
       ]
     ],
     [
       [
-        217,
-        36
+        574.0,
+        156.0
       ],
       [
-        267,
-        42
+        627.0,
+        167.0
       ],
       [
-        295,
-        72
+        614.0,
+        193.0
       ],
       [
-        304,
-        151
+        587.0,
+        247.0
       ],
       [
-        279,
-        204
+        476.0,
+        264.0
       ],
       [
-        258,
-        227
+        397.0,
+        235.0
       ],
       [
-        199,
-        224
+        434.0,
+        103.0
       ],
       [
-        148,
-        200
+        483.0,
+        31.0
       ],
       [
-        110,
-        174
+        418.0,
+        159.0
       ],
       [
-        94,
-        130
+        649.0,
+        291.0
       ],
       [
-        115,
-        83
+        653.0,
+        350.0
       ],
       [
-        170,
-        51
-      ]
-    ]
-  ],
-  "stamp_polygons": [
-    [
-      [
-        150,
-        264
+        627.0,
+        417.0
       ],
       [
-        196,
-        265
+        520.0,
+        430.0
       ],
       [
-        202,
-        318
+        533.0,
+        618.0
       ],
       [
-        204,
-        372
+        495.0,
+        787.0
       ],
       [
-        216,
-        382
-      ],
-      [
-        218,
-        418
-      ],
-      [
-        139,
-        436
-      ],
-      [
-        134,
-        390
-      ],
-      [
-        142,
-        369
-      ],
-      [
-        144,
-        318
+        626.0,
+        765.0
       ]
     ],
     [
       [
-        146,
-        0
+        558.0,
+        137.0
       ],
       [
-        192,
-        0
+        599.0,
+        150.0
       ],
       [
-        203,
-        58
+        582.0,
+        163.0
       ],
       [
-        169,
-        90
+        571.0,
+        208.0
       ],
       [
-        155,
-        122
+        386.0,
+        221.0
       ],
       [
-        158,
-        178
+        350.0,
+        162.0
       ],
       [
-        126,
-        205
+        398.0,
+        70.0
       ],
       [
-        39,
-        168
+        446.0,
+        37.0
       ],
       [
-        47,
-        127
+        388.0,
+        127.0
       ],
       [
-        91,
-        105
+        619.0,
+        246.0
       ],
       [
-        120,
-        69
+        743.0,
+        333.0
+      ],
+      [
+        836.0,
+        349.0
+      ],
+      [
+        520.0,
+        401.0
+      ],
+      [
+        520.0,
+        601.0
+      ],
+      [
+        472.0,
+        783.0
+      ],
+      [
+        619.0,
+        763.0
       ]
     ],
     [
       [
-        188,
-        364
+        543.0,
+        165.0
       ],
       [
-        216,
-        364
+        588.0,
+        176.0
       ],
       [
-        220,
-        379
+        566.0,
+        184.0
       ],
       [
-        238,
-        380
+        548.0,
+        219.0
       ],
       [
-        240,
-        405
+        442.0,
+        227.0
       ],
       [
-        173,
-        419
+        385.0,
+        302.0
       ],
       [
-        169,
-        388
+        517.0,
+        294.0
       ],
       [
-        187,
-        380
+        523.0,
+        242.0
+      ],
+      [
+        517.0,
+        337.0
+      ],
+      [
+        628.0,
+        250.0
+      ],
+      [
+        676.0,
+        356.0
+      ],
+      [
+        626.0,
+        386.0
+      ],
+      [
+        520.0,
+        399.0
+      ],
+      [
+        520.0,
+        597.0
+      ],
+      [
+        477.0,
+        784.0
+      ],
+      [
+        616.0,
+        764.0
       ]
     ],
     [
       [
-        256,
-        218
+        541.0,
+        170.0
       ],
       [
-        291,
-        218
+        584.0,
+        181.0
       ],
       [
-        299,
-        253
+        563.0,
+        192.0
       ],
       [
-        296,
-        282
+        548.0,
+        225.0
       ],
       [
-        310,
-        319
+        441.0,
+        232.0
       ],
       [
-        330,
-        321
+        389.0,
+        317.0
       ],
       [
-        332,
-        344
+        520.0,
+        344.0
       ],
       [
-        283,
-        360
+        528.0,
+        300.0
       ],
       [
-        265,
-        337
+        516.0,
+        387.0
       ],
       [
-        271,
-        309
+        625.0,
+        270.0
       ],
       [
-        267,
-        268
-      ]
-    ]
-  ],
-  "stamp_axes": [
-    [
-      [
-        176,
-        286
+        667.0,
+        377.0
       ],
       [
-        172,
-        405
-      ]
-    ],
-    [
-      [
-        163,
-        31
+        608.0,
+        398.0
       ],
       [
-        98,
-        159
+        520.0,
+        400.0
+      ],
+      [
+        520.0,
+        600.0
+      ],
+      [
+        475.0,
+        784.0
+      ],
+      [
+        616.0,
+        764.0
       ]
     ],
     [
       [
-        203,
-        313
+        529.0,
+        181.0
       ],
       [
-        205,
-        398
+        577.0,
+        197.0
+      ],
+      [
+        554.0,
+        211.0
+      ],
+      [
+        541.0,
+        263.0
+      ],
+      [
+        443.0,
+        250.0
+      ],
+      [
+        419.0,
+        355.0
+      ],
+      [
+        514.0,
+        351.0
+      ],
+      [
+        523.0,
+        313.0
+      ],
+      [
+        525.0,
+        398.0
+      ],
+      [
+        618.0,
+        300.0
+      ],
+      [
+        637.0,
+        379.0
+      ],
+      [
+        608.0,
+        421.0
+      ],
+      [
+        520.0,
+        430.0
+      ],
+      [
+        532.0,
+        618.0
+      ],
+      [
+        495.0,
+        787.0
+      ],
+      [
+        626.0,
+        765.0
       ]
     ],
     [
       [
-        274,
-        242
+        544.0,
+        119.0
       ],
       [
-        302,
-        336
+        594.0,
+        128.0
+      ],
+      [
+        572.0,
+        147.0
+      ],
+      [
+        557.0,
+        186.0
+      ],
+      [
+        433.0,
+        251.0
+      ],
+      [
+        394.0,
+        341.0
+      ],
+      [
+        505.0,
+        307.0
+      ],
+      [
+        516.0,
+        266.0
+      ],
+      [
+        505.0,
+        355.0
+      ],
+      [
+        627.0,
+        256.0
+      ],
+      [
+        675.0,
+        378.0
+      ],
+      [
+        628.0,
+        392.0
+      ],
+      [
+        520.0,
+        405.0
+      ],
+      [
+        520.0,
+        606.0
+      ],
+      [
+        473.0,
+        781.0
+      ],
+      [
+        613.0,
+        765.0
+      ]
+    ],
+    [
+      [
+        543.0,
+        120.0
+      ],
+      [
+        588.0,
+        124.0
+      ],
+      [
+        571.0,
+        143.0
+      ],
+      [
+        552.0,
+        185.0
+      ],
+      [
+        433.0,
+        253.0
+      ],
+      [
+        393.0,
+        348.0
+      ],
+      [
+        505.0,
+        331.0
+      ],
+      [
+        515.0,
+        277.0
+      ],
+      [
+        504.0,
+        373.0
+      ],
+      [
+        623.0,
+        252.0
+      ],
+      [
+        713.0,
+        371.0
+      ],
+      [
+        783.0,
+        383.0
+      ],
+      [
+        520.0,
+        405.0
+      ],
+      [
+        520.0,
+        607.0
+      ],
+      [
+        472.0,
+        782.0
+      ],
+      [
+        614.0,
+        765.0
+      ]
+    ],
+    [
+      [
+        525.0,
+        116.0
+      ],
+      [
+        576.0,
+        128.0
+      ],
+      [
+        554.0,
+        144.0
+      ],
+      [
+        542.0,
+        180.0
+      ],
+      [
+        426.0,
+        251.0
+      ],
+      [
+        487.0,
+        355.0
+      ],
+      [
+        605.0,
+        292.0
+      ],
+      [
+        601.0,
+        238.0
+      ],
+      [
+        610.0,
+        338.0
+      ],
+      [
+        626.0,
+        252.0
+      ],
+      [
+        619.0,
+        376.0
+      ],
+      [
+        493.0,
+        416.0
+      ],
+      [
+        520.0,
+        425.0
+      ],
+      [
+        520.0,
+        606.0
+      ],
+      [
+        475.0,
+        781.0
+      ],
+      [
+        614.0,
+        765.0
+      ]
+    ],
+    [
+      [
+        540.0,
+        123.0
+      ],
+      [
+        586.0,
+        124.0
+      ],
+      [
+        572.0,
+        151.0
+      ],
+      [
+        544.0,
+        209.0
+      ],
+      [
+        432.0,
+        252.0
+      ],
+      [
+        464.0,
+        351.0
+      ],
+      [
+        607.0,
+        298.0
+      ],
+      [
+        594.0,
+        242.0
+      ],
+      [
+        622.0,
+        336.0
+      ],
+      [
+        633.0,
+        305.0
+      ],
+      [
+        625.0,
+        381.0
+      ],
+      [
+        498.0,
+        319.0
+      ],
+      [
+        520.0,
+        430.0
+      ],
+      [
+        532.0,
+        618.0
+      ],
+      [
+        495.0,
+        787.0
+      ],
+      [
+        626.0,
+        765.0
+      ]
+    ],
+    [
+      [
+        533.0,
+        120.0
+      ],
+      [
+        578.0,
+        124.0
+      ],
+      [
+        559.0,
+        139.0
+      ],
+      [
+        550.0,
+        180.0
+      ],
+      [
+        426.0,
+        251.0
+      ],
+      [
+        396.0,
+        344.0
+      ],
+      [
+        523.0,
+        305.0
+      ],
+      [
+        528.0,
+        255.0
+      ],
+      [
+        521.0,
+        348.0
+      ],
+      [
+        614.0,
+        254.0
+      ],
+      [
+        640.0,
+        385.0
+      ],
+      [
+        522.0,
+        408.0
+      ],
+      [
+        520.0,
+        410.0
+      ],
+      [
+        520.0,
+        603.0
+      ],
+      [
+        475.0,
+        781.0
+      ],
+      [
+        614.0,
+        765.0
+      ]
+    ],
+    [
+      [
+        531.0,
+        118.0
+      ],
+      [
+        579.0,
+        124.0
+      ],
+      [
+        558.0,
+        140.0
+      ],
+      [
+        548.0,
+        181.0
+      ],
+      [
+        420.0,
+        254.0
+      ],
+      [
+        396.0,
+        349.0
+      ],
+      [
+        500.0,
+        337.0
+      ],
+      [
+        503.0,
+        287.0
+      ],
+      [
+        499.0,
+        387.0
+      ],
+      [
+        607.0,
+        250.0
+      ],
+      [
+        632.0,
+        404.0
+      ],
+      [
+        636.0,
+        502.0
+      ],
+      [
+        520.0,
+        407.0
+      ],
+      [
+        520.0,
+        604.0
+      ],
+      [
+        475.0,
+        781.0
+      ],
+      [
+        614.0,
+        765.0
       ]
     ]
   ],
   "limits": [
-    "No inferred depth, skeleton or hidden artwork",
-    "Paper exists only in the contact painting; visibility changes use an opacity handoff",
-    "Changing arm occlusion and face angle still soften intermediate poses",
-    "Head and stamp use local similarity; body uses landmark TPS; below-knee samples stay planted"
+    "Intact held drawings at occlusion, grip, paper and proportion changes; no cross-body morph",
+    "Only compatible same-side stamp approach uses transported splats",
+    "Painted pose changes remain stepped; drawings differ slightly in proportions",
+    "No inferred depth, skeleton or hidden artwork; original anchor pixels unchanged"
   ]
 }
