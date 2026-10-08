@@ -1,0 +1,5 @@
+# Standalone voice profile auditions
+
+These eleven MP3s are **review-only** voice samples: one authored German approach for each of the nine named fictional quiz speakers, plus one towel-archetype line each for Günther Liegestuhl and Walburga Handtuch. They were generated with Chatterbox Multilingual V2 0.1.7 from the hash-verified CC0 EmoDB references saved in their Secret Tunnel profiles. `manifest.json` records the source line, speaker name and `voiceId`, profile UUID, reference/output hashes, demeanor targets, source emotion label, renderer, and independent ASR result.
+
+Independent German ASR matched all eleven selected audition lines word-for-word after case and punctuation normalization. The quiz game currently speaks a full prompt assembled from an approach, context, and question. These short samples are **not** bound to that runtime prompt, and the two towel archetype profiles are **not** the twelve separately named moving crowd actors. Listen to each complete MP3 for words, voice identity, emotional fit, artifacts, and reference echo before producing new lines. Source emotion labels do not validate the emotions of generated audio.
