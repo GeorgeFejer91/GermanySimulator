@@ -39,11 +39,12 @@ const pools={
  quizApproaches:declaration("quizApproaches"),
  quizContexts:declaration("quizContexts"),
  quizQuestions:Object.fromEntries(questions.map(q=>[String(q.source),{germany:q.question,berlin:berlinQuestions[q.source]?.question??q.question,type:q.type??"civic",level:q.level??null}])),
+ buergeramtPolicePhone:{voiceId:"polizei-heinrich-wachtmeister",call:office.call.line,replies:office.police},
  buergeramtClerk:{identity:office.clerkIdentity,counter:office.clerk.map(({line,choices})=>({line,replies:choices.map(({reply})=>reply)})),outburst:office.outburst.lines},
 };
 const inventory={
  schemaVersion:1,
- explanation:"Exact currently authored source pools. Quiz speech concatenates one regional approach, one category context and one regional question; the combinations are generated at runtime. Fixed NPC lines and their owners are in VOICE-CAST.json. Bürgeramt clerk dialogue from buergeramt-story.js is inventoried separately; additional call-status sentences in buergeramt.js remain context-dependent.",
+ explanation:"Exact currently authored source pools. Quiz speech concatenates one regional approach, one category context and one regional question; the combinations are generated at runtime. Fixed NPC lines and their owners are in VOICE-CAST.json. Bürgeramt clerk and Heinrich Wachtmeister phone dialogue from buergeramt-story.js are inventoried separately; additional call-status sentences in buergeramt.js remain context-dependent.",
  source:["game.js","buergeramt-story.js"],
  fixedCharacterDialogueCount:cast.dialogueCount,
  dynamicIdentityVoiceIds:cast.roleProfiles.map(person=>({voiceId:person.voiceId,sourcePools:person.dialogueSources})),

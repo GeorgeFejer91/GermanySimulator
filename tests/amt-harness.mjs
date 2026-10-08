@@ -7,7 +7,7 @@ import path from 'node:path';
 const root=path.resolve(path.dirname(fileURLToPath(import.meta.url)),'..');
 export const source=name=>readFileSync(path.join(root,name),'utf8');
 
-export function harness(kind='host',{voice=false,synthesis=true,phoneLanguage='de-DE',phoneCaptions=false,phoneAgent='test',phonePlatform='',phoneMobile,phoneClock,cinematics=false,cityAudioBusy,fakeAudio=false,officeFx=null,speechAutoStart=true}={}){
+export function harness(kind='host',{voice=false,synthesis=true,phoneLanguage='de-DE',phoneCaptions=false,phoneAgent='test',phonePlatform='',phoneMobile,phoneClock,cinematics=false,cityAudioBusy,fakeAudio=false,candidatePhone=false,officeFx=null,speechAutoStart=true}={}){
  const nodes=new Map(),window=new EventTarget(),document=new EventTarget();
  let now=0,nextTimer=0;const timers=new Map();
  const later=(fn,delay=0,repeat=false)=>{const id=++nextTimer;timers.set(id,{fn,due:now+Math.max(0,delay),repeat,delay});return id};
@@ -62,7 +62,18 @@ export function harness(kind='host',{voice=false,synthesis=true,phoneLanguage='d
   requestAnimationFrame:fn=>later(fn,16)
  };
  if(synthesis){globals.speechSynthesis=synth;globals.SpeechSynthesisUtterance=class{constructor(text){this.text=text}}}
- const audio={contexts:[],nodes:[],fetches:[],pendingDecodes:[],resolveDecodes(){for(const item of this.pendingDecodes.splice(0))item.resolve({duration:2,numberOfChannels:1})},flushEnded(){for(const node of this.nodes)if(!node.ended&&node.stopped.some(time=>time<=now/1000)){node.ended=true;node.onended?.()}}};
+ const audio={contexts:[],nodes:[],fetches:[],recordings:[],pendingDecodes:[],resolveDecodes(){for(const item of this.pendingDecodes.splice(0))item.resolve({duration:2,numberOfChannels:1})},flushEnded(){for(const node of this.nodes)if(!node.ended&&node.stopped.some(time=>time<=now/1000)){node.ended=true;node.onended?.()}}};
+ if(candidatePhone){
+  class RecordedAudio{
+   constructor(src){this.src=src;this.paused=false;audio.recordings.push(this)}
+   play(){later(()=>this.onplaying?.(),16);return Promise.resolve()}
+   pause(){this.paused=true}
+   end(){this.onended?.()}
+   fail(){this.onerror?.()}
+  }
+  globals.Audio=RecordedAudio;
+  window.GermanySimulatorAudioText={candidateClip:(voiceId,text)=>voiceId==='polizei-heinrich-wachtmeister'&&text?`./assets/voices/candidate-dialogue/${voiceId}-phone-01.mp3`:null};
+ }
  if(fakeAudio){
   class Param{
    constructor(value=0){this.value=value;this.events=[]}

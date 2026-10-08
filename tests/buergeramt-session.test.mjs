@@ -243,6 +243,16 @@ test('the officer interrupts after Frau Knick says her counter handles applicati
 test('phone emits start and finish receipts around actual speech, and answers pings',()=>{
  const h=harness('phone');h.incoming();const link=h.links[0];link.message({type:'sync-ping',id:19});assert.deepEqual(link.sent.at(-1),{type:'sync-pong',id:19,receivedAtMs:0,sentAtMs:0});h.node('phone-answer').click();h.tick(20);assert.equal(link.sent.at(-1).type,'police-start');assert.equal(link.sent.at(-1).index,-1);assert.ok(link.sent.at(-1).readyDelayMs>=0);assert.equal(link.sent.at(-1).atMs,16);h.tick(240);h.synth.end();const done=link.sent.at(-1);assert.equal(done.type,'police-done');assert.equal(done.index,-1);assert.equal(done.mode,'voice');assert.ok(done.durationMs>=240&&done.durationMs<=260);assert.equal(done.atMs,h.now());
 });
+test('opt-in phone recording keeps Heinrichs voice ID and paired timing receipts',()=>{
+ const h=harness('phone',{candidatePhone:true});h.incoming();const link=h.links[0];h.node('phone-answer').click();h.tick(20);
+ assert.equal(h.audio.recordings.length,1);assert.match(h.audio.recordings[0].src,/polizei-heinrich-wachtmeister-phone-01\.mp3$/);
+ assert.equal(h.synth.spoken.length,0);assert.equal(link.sent.at(-1).type,'police-start');assert.equal(link.sent.at(-1).mode,'recording');assert.equal(h.node('phone-call-line').hidden,false);
+ h.tick(400);h.audio.recordings[0].end();const done=link.sent.at(-1);assert.equal(done.type,'police-done');assert.equal(done.mode,'recording');assert.equal(done.index,-1);assert.equal(done.durationMs,404);
+});
+test('a failed phone recording falls back to browser speech before its start receipt',()=>{
+ const h=harness('phone',{candidatePhone:true});h.incoming();h.node('phone-answer').click();h.audio.recordings[0].fail();h.tick(20);
+ assert.equal(h.audio.recordings[0].paused,true);assert.equal(h.synth.spoken.length,1);assert.equal(h.links[0].sent.at(-1).mode,'voice');
+});
 test('stalled phone speech becomes readable within 1.8 seconds and ignores a late start',()=>{
  const h=harness('phone');let late;h.synth.speak=utterance=>{late=utterance};h.incoming();const link=h.links[0];h.node('phone-answer').click();h.tick(1799);assert.equal(link.sent.filter(m=>m.type==='police-start').length,0);h.tick(1);const start=link.sent.at(-1);assert.equal(start.type,'police-start');assert.equal(start.mode,'fallback');assert.equal(h.node('phone-call-line').hidden,false);late.onstart();late.onerror();assert.equal(link.sent.filter(m=>m.type==='police-start').length,1);h.tick(10000);assert.equal(link.sent.filter(m=>m.type==='police-done').length,1);
 });

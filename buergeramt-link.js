@@ -17,7 +17,7 @@ function validPayload(type,data,sender){
   (type==="sync-ping"||clock(data.receivedAtMs)&&clock(data.sentAtMs)&&data.sentAtMs>=data.receivedAtMs&&data.sentAtMs-data.receivedAtMs<=12000);
  if(type==="call-ready")return data.id==="grass"&&clock(data.atMs);
  if(type==="call-scheduled")return data.id==="grass"&&clock(data.atMs)&&["peer","utc","receipt"].includes(data.mode)&&Number.isInteger(data.lateMs)&&data.lateMs>=0&&data.lateMs<=12000;
- if(type==="police-start"||type==="police-done")return Number.isInteger(data.index)&&data.index>=-1&&data.index<3&&["voice","fallback"].includes(data.mode)&&
+ if(type==="police-start"||type==="police-done")return Number.isInteger(data.index)&&data.index>=-1&&data.index<3&&["voice","recording","fallback"].includes(data.mode)&&
   clock(data.atMs)&&(type==="police-start"?Number.isInteger(data.readyDelayMs)&&data.readyDelayMs>=0&&data.readyDelayMs<=60000:Number.isInteger(data.durationMs)&&data.durationMs>=0&&data.durationMs<=60000);
  if(type==="register")return typeof data.name==="string"&&data.name.trim().length>=2&&data.name.length<=80&&!/[\u0000-\u001f\u007f]/.test(data.name);
  if(type==="ticket")return typeof data.number==="string"&&/^B-\d{3}$/.test(data.number);
@@ -36,7 +36,7 @@ function validMessage(msg,session,lastSeq,sender){
 class AmtLink extends EventTarget{
  constructor(role,invitation){super();this.role=role;this.invitation=invitation;this.sdk=null;this.channel=null;this.peer="";this.seq=0;this.lastSeq=0;this.closed=false;this.viewing=false}
  static invitation(){return{room:`amt-${randomId(16)}`,secret:randomId(32),stream:`amt-ticket-${randomId(16)}`}}
- static phoneUrl(invitation,englishSubtitles=false){const url=new URL("./buergeramt-phone.html",location.href),params=new URLSearchParams(invitation);url.searchParams.set("v","20261008-caller-number");if(englishSubtitles)params.set("captions","en");url.hash=params.toString();return url.href}
+ static phoneUrl(invitation,englishSubtitles=false){const url=new URL("./buergeramt-phone.html",location.href),params=new URLSearchParams(invitation);url.searchParams.set("v","20261008-voice-preview");if(new URL(location.href).searchParams.get("voicePreview")==="1")url.searchParams.set("voicePreview","1");if(englishSubtitles)params.set("captions","en");url.hash=params.toString();return url.href}
  static fromHash(){const p=new URLSearchParams(location.hash.slice(1)),room=p.get("room"),secret=p.get("secret"),stream=p.get("stream");if(!room?.startsWith("amt-")||!stream?.startsWith("amt-ticket-")||!/^[a-z0-9]{32}$/.test(secret||""))return null;return{room,secret,stream}}
  async start(){if(typeof VDONinjaSDK!=="function")throw new Error("VDO.Ninja Verbindung fehlt");
   const sdk=new VDONinjaSDK({password:this.invitation.secret,salt:"germany-simulator-amt-v1"});this.sdk=sdk;

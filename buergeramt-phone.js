@@ -17,11 +17,12 @@ const clockService=window.BuergeramtClock;let clockAnchor=null;
 const clock=document.getElementById("phone-time");function updateClock(){const utc=clockService?.usable?.(clockAnchor)?clockService.utcAt(clockAnchor,performance.now()):Date.now();clock.textContent=new Intl.DateTimeFormat(callLanguage,{hour:"2-digit",minute:"2-digit",hour12:false}).format(new Date(utc))}updateClock();const clockTimer=setInterval(updateClock,30000);window.addEventListener("pagehide",()=>clearInterval(clockTimer));
 if(!invitation){connection.textContent="Dieser Aufruf hat keine gültige Warteschlange.";form.hidden=true;return}
 clockService?.sample?.().then(anchor=>{clockAnchor=anchor;updateClock()}).catch(()=>{});
-const link=new BuergeramtLink("phone",invitation),scanId=Array.from(crypto.getRandomValues(new Uint8Array(12)),n=>n.toString(16).padStart(2,"0")).join("");let currentCall="",resolved="",policeIndex=-1,audioContext=null,phoneFxGain=null,staticSource=null,voiceGeneration=0,submittedName="",slotActive=false,finished=false,closed=false,voiceBusy=false,voiceTimer=null,ringTimer=null,callStartTimer=null,armedCall=false,scanTimer=null,voiceStartupMs=null,voiceAttempts=0,drag=null,ignoreClickTarget=null;
+const link=new BuergeramtLink("phone",invitation),scanId=Array.from(crypto.getRandomValues(new Uint8Array(12)),n=>n.toString(16).padStart(2,"0")).join("");let currentCall="",resolved="",policeIndex=-1,audioContext=null,phoneFxGain=null,staticSource=null,recordedSpeech=null,voiceGeneration=0,submittedName="",slotActive=false,finished=false,closed=false,voiceBusy=false,voiceTimer=null,ringTimer=null,callStartTimer=null,armedCall=false,scanTimer=null,voiceStartupMs=null,voiceAttempts=0,drag=null,ignoreClickTarget=null;
 const voiceQueue=[],ringSources=new Set();
 function stopRing(){clearTimeout(ringTimer);clearTimeout(callStartTimer);ringTimer=callStartTimer=null;for(const source of ringSources){try{source.stop()}catch{}}ringSources.clear();try{navigator.vibrate?.(0)}catch{}}
+function stopRecorded(){const clip=recordedSpeech;recordedSpeech=null;if(clip){clip.onplaying=clip.onended=clip.onerror=null;try{clip.pause()}catch{}}}
 function resetSwipe(){drag=null;for(const button of [answer,decline]){button.style?.removeProperty("--amt-swipe-x");button.style?.removeProperty("--amt-swipe-y");button.classList.remove("dragging")}}
-function stopCall(){voiceGeneration++;voiceQueue.length=0;voiceBusy=false;clearTimeout(voiceTimer);voiceTimer=null;stopStatic();stopRing();armedCall=false;resetSwipe();try{window.speechSynthesis?.cancel()}catch{}call.classList.remove("answered");callState.textContent=copy.ringing;call.hidden=true;answer.hidden=true;decline.hidden=true}
+function stopCall(){voiceGeneration++;voiceQueue.length=0;voiceBusy=false;clearTimeout(voiceTimer);voiceTimer=null;stopRecorded();stopStatic();stopRing();armedCall=false;resetSwipe();try{window.speechSynthesis?.cancel()}catch{}call.classList.remove("answered");callState.textContent=copy.ringing;call.hidden=true;answer.hidden=true;decline.hidden=true}
 function endSlot(text){slotActive=false;finished=true;submit.disabled=true;clearInterval(scanTimer);scanTimer=null;stopCall();status.textContent=text;try{wakeLock?.release()?.catch(()=>{})}catch{}wakeLock=null}
 function initAudio(){try{const Audio=window.AudioContext||window.webkitAudioContext;if(Audio&&!audioContext){audioContext=new Audio();phoneFxGain=audioContext.createGain();phoneFxGain.gain.value=1;phoneFxGain.connect(audioContext.destination)}audioContext?.resume()?.catch(()=>{})}catch{}}
 function requestTicket(){if(closed||finished||slotActive||link.channel?.readyState!=="open")return;if(!link.send("scan",{id:scanId}))connection.textContent="Wartenummer wird erneut angefordert."}
@@ -61,16 +62,26 @@ function playNextPolice(){
  let startedAt=null,mode="fallback";
  const started=kind=>{if(!current()||startedAt!==null)return;startedAt=performance.now();mode=kind;const readyDelayMs=Math.min(60000,Math.max(0,Math.round(startedAt-receivedAt)));if(kind==="voice")voiceStartupMs=voiceStartupMs===null?readyDelayMs:Math.round(voiceStartupMs*.6+readyDelayMs*.4);link.send("police-start",{index,mode,readyDelayMs,atMs:startedAt})};
  const show=()=>{if(current()){line.textContent=text;line.hidden=false}};
- const finish=()=>{if(!current())return;const endedAt=performance.now();voiceGeneration++;clearTimeout(voiceTimer);stopStatic();voiceBusy=false;link.send("police-done",{index,mode,durationMs:Math.min(60000,Math.max(0,Math.round(endedAt-(startedAt??endedAt)))),atMs:endedAt});voiceTimer=setTimeout(playNextPolice,0)};
+ const finish=()=>{if(!current())return;const endedAt=performance.now();voiceGeneration++;clearTimeout(voiceTimer);stopRecorded();stopStatic();voiceBusy=false;link.send("police-done",{index,mode,durationMs:Math.min(60000,Math.max(0,Math.round(endedAt-(startedAt??endedAt)))),atMs:endedAt});voiceTimer=setTimeout(playNextPolice,0)};
  const fallback=()=>{if(!current()||startedAt!==null&&mode==="fallback")return;clearTimeout(voiceTimer);mode="fallback";show();started("fallback");voiceTimer=setTimeout(finish,Math.max(3500,text.length*55))};
- if(!window.speechSynthesis||typeof window.SpeechSynthesisUtterance!=="function"){fallback();return}
- const utterance=new SpeechSynthesisUtterance(text);utterance.lang="de-DE";utterance.rate=.87;utterance.pitch=.66;utterance.volume=1;
- const voices=speechSynthesis.getVoices();utterance.voice=voices.find(v=>/^de/i.test(v.lang)&&/male|daniel|stefan|markus|martin|thomas|tim/i.test(v.name))||voices.find(v=>/^de/i.test(v.lang))||null;
- utterance.onstart=()=>{if(!current()||startedAt!==null)return;clearTimeout(voiceTimer);show();started("voice");startStatic();voiceTimer=setTimeout(()=>{if(current()){speechSynthesis.cancel();finish()}},Math.max(20000,text.length*140))};
- utterance.onend=()=>{if(mode==="voice")finish()};utterance.onerror=()=>{if(current()&&(startedAt===null||mode==="voice")){stopStatic();fallback()}};
- const startupLimit=voiceStartupMs===null?(voiceAttempts===0?1800:1200):Math.max(1200,Math.min(2500,Math.round(voiceStartupMs*3+500)));voiceAttempts++;
- voiceTimer=setTimeout(()=>{if(current()){speechSynthesis.cancel();fallback()}},startupLimit);
- requestAnimationFrame(()=>{if(current()){try{speechSynthesis.speak(utterance)}catch{clearTimeout(voiceTimer);fallback()}}});
+ const browserSpeech=()=>{
+  if(!window.speechSynthesis||typeof window.SpeechSynthesisUtterance!=="function"){fallback();return}
+  const utterance=new SpeechSynthesisUtterance(text);utterance.lang="de-DE";utterance.rate=.87;utterance.pitch=.66;utterance.volume=1;
+  const voices=speechSynthesis.getVoices();utterance.voice=voices.find(v=>/^de/i.test(v.lang)&&/male|daniel|stefan|markus|martin|thomas|tim/i.test(v.name))||voices.find(v=>/^de/i.test(v.lang))||null;
+  utterance.onstart=()=>{if(!current()||startedAt!==null)return;clearTimeout(voiceTimer);show();started("voice");startStatic();voiceTimer=setTimeout(()=>{if(current()){speechSynthesis.cancel();finish()}},Math.max(20000,text.length*140))};
+  utterance.onend=()=>{if(mode==="voice")finish()};utterance.onerror=()=>{if(current()&&(startedAt===null||mode==="voice")){stopStatic();fallback()}};
+  const startupLimit=voiceStartupMs===null?(voiceAttempts===0?1800:1200):Math.max(1200,Math.min(2500,Math.round(voiceStartupMs*3+500)));voiceAttempts++;
+  voiceTimer=setTimeout(()=>{if(current()){speechSynthesis.cancel();fallback()}},startupLimit);
+  requestAnimationFrame(()=>{if(current()){try{speechSynthesis.speak(utterance)}catch{clearTimeout(voiceTimer);fallback()}}});
+ };
+ const candidate=window.GermanySimulatorAudioText?.candidateClip?.("polizei-heinrich-wachtmeister",text);
+ if(!candidate||typeof window.Audio!=="function"){browserSpeech();return}
+ const clip=new window.Audio(candidate);recordedSpeech=clip;clip.preload="auto";
+ const recordingFailed=()=>{if(recordedSpeech!==clip||!current())return;stopRecorded();clearTimeout(voiceTimer);if(startedAt===null)browserSpeech();else finish()};
+ clip.onplaying=()=>{if(recordedSpeech!==clip||!current()||startedAt!==null)return;clearTimeout(voiceTimer);show();started("recording");startStatic();voiceTimer=setTimeout(finish,Math.max(20000,text.length*140))};
+ clip.onended=()=>{if(recordedSpeech===clip&&mode==="recording")finish()};clip.onerror=recordingFailed;
+ voiceTimer=setTimeout(recordingFailed,3000);
+ try{Promise.resolve(clip.play()).catch(recordingFailed)}catch{recordingFailed()}
 }
 function endCall(kind){
  if(resolved||!currentCall||!slotActive||finished||closed)return;
