@@ -20,9 +20,24 @@ async function fixture(){
   dispose(){this.disposals++}
  }
  const dyno={Gsplat:'Gsplat',dynoFloat:value=>({value}),dynoVec2:value=>({value}),dynoBlock:()=>({})};
- const owner=await createAmtSplatOwner({THREE:{},renderer:{},scene,signal:new AbortController().signal,sparkModule:{SparkRenderer,SplatMesh,dyno},nowMs:()=>time});
- return{owner,scene,members,jobs,SplatMesh,setTime:value=>time=value};
+ const renderer={setTransparentSort(value){this.sort=value}};
+ const owner=await createAmtSplatOwner({THREE:{},renderer,scene,signal:new AbortController().signal,sparkModule:{SparkRenderer,SplatMesh,dyno},nowMs:()=>time});
+ return{owner,renderer,scene,members,jobs,SplatMesh,setTime:value=>time=value};
 }
+
+test('a shared Gaussian batch sorts between two paint planes without owning their depth',async()=>{
+ for(const [farDepth,nearDepth,projectionScale,projectionOffset] of [[4.05,1.18,-1,-.2],[5,4,-.1,-.8]]){
+  const f=await fixture(),{owner}=f;
+  const paint=z=>({visible:true,userData:{anchorActive:true},updateMatrixWorld(){},getWorldPosition:()=>({applyMatrix4:()=>({x:0,y:0,z:-z})})});
+  const far=paint(farDepth),near=paint(nearDepth);owner.attachPaint(far);owner.attachPaint(near);
+  const elements=Array(16).fill(0);elements[10]=projectionScale;elements[14]=projectionOffset;
+  const camera={position:{clone:()=>({})},projectionMatrix:{elements},updateMatrixWorld(){}};owner.update(camera);
+  const z=depth=>-depth*projectionScale+projectionOffset,item=(object,z,id)=>({object,z,id,groupOrder:0,renderOrder:0});
+  const ordered=[item(near,z(nearDepth),3),item(owner.spark,z(-2),1),item(far,z(farDepth),2)].sort(f.renderer.sort);
+  assert.deepEqual(ordered.map(x=>x.object),[far,owner.spark,near]);assert.equal(owner.inspect().meshes,0);assert.equal(owner.inspect().paintedAnchors,2);
+  owner.retirePaint(far);assert(f.renderer.sort);owner.retirePaint(near);assert.equal(f.renderer.sort,null);await owner.dispose();
+ }
+});
 
 test('one pinned renderer updates at bounded cadence without overlapping sorts',async()=>{
  const f=await fixture(),{owner}=f,mesh=owner.attach(new f.SplatMesh()),camera={};

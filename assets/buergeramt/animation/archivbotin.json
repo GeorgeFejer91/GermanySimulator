@@ -509,5 +509,51 @@
     "owner": "anatomical_right_arm",
     "secondary": "keyring_in_anatomical_left_hand"
   },
-  "source_notes": "Open ledger closes and is hugged by anatomical right arm while keys stay in left hand. Book closure changes occlusion; inspect sampled intermediate paint. Matched Gaussian correspondence must be reviewed through ordered playback; no unconstrained whole-body TPS."
+  "source_notes": "Open ledger closes and is hugged by anatomical right arm while keys stay in left hand. Book closure changes occlusion; inspect sampled intermediate paint. Matched Gaussian correspondence must be reviewed through ordered playback; no unconstrained whole-body TPS.",
+  "anchors": {
+    "frames": {
+      "work": {
+        "file": "archivbotin-anchor-0.webp",
+        "sha256": "7a2f25c1dc5a1b8d6c2d801efd1b7bc7be3e8555766f5295898fec29e3ce766c",
+        "bytes": 321504,
+        "width": 640,
+        "height": 832,
+        "rgba_sha256": "f070acd5b20836b2307381388c49cbdbf1446853147260bcff1cd476c46ee2b5"
+      },
+      "bridge1": {
+        "file": "archivbotin-anchor-1.webp",
+        "sha256": "a3260303c6e1cae276ab56309ff7473860cd7cfdf41ca8626f21d8e6c8ccaf5f",
+        "bytes": 341140,
+        "width": 640,
+        "height": 832,
+        "rgba_sha256": "9d64216a48996f8aa65636198124e139831e7020b632c7eed5d9fe58f3a55ba3"
+      },
+      "bridge2": {
+        "file": "archivbotin-anchor-2.webp",
+        "sha256": "f280094c8f216ea86d423528af041a3f03c05746236b9c9aac62360bb378b1d8",
+        "bytes": 336070,
+        "width": 640,
+        "height": 832,
+        "rgba_sha256": "9675a8176511d76ebc1f7fb2a700554ab962313f9b92e50fa16824d0b4e35169"
+      },
+      "bridge3": {
+        "file": "archivbotin-anchor-3.webp",
+        "sha256": "534db374aa8168fd3cd2a822b5d751394c6888a68ca851d5dae3e38df2268139",
+        "bytes": 331108,
+        "width": 640,
+        "height": 832,
+        "rgba_sha256": "8a6d79b70a9073c305f6299e31a566df21d93e4d656ff4a035645a8bbb77f023"
+      },
+      "gesture": {
+        "file": "archivbotin-anchor-4.webp",
+        "sha256": "a5421919e9576c2d1b8c8884b859d238429fec48eced287f42239944862c5ef1",
+        "bytes": 334732,
+        "width": 640,
+        "height": 832,
+        "rgba_sha256": "a730b1c649fe80863eeb77b5ee70a05084abb217e985f184ba3d6686facbe1c7"
+      }
+    },
+    "maximum_resident": 3,
+    "fade_seconds": 0.09
+  }
 }

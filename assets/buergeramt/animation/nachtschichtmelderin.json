@@ -1429,5 +1429,51 @@
     "owner": "anatomical_right_hand",
     "secondary": "document_stack_in_anatomical_left_arm"
   },
-  "source_notes": "Phone descends from face through chest and waist to thigh in the same right hand; documents stay hugged in anatomical left arm. Matched Gaussian correspondence must be reviewed through ordered playback; no unconstrained whole-body TPS."
+  "source_notes": "Phone descends from face through chest and waist to thigh in the same right hand; documents stay hugged in anatomical left arm. Matched Gaussian correspondence must be reviewed through ordered playback; no unconstrained whole-body TPS.",
+  "anchors": {
+    "frames": {
+      "work": {
+        "file": "nachtschichtmelderin-anchor-0.webp",
+        "sha256": "88dbfedf21078cfe013eeebc57fa6ac9b22351015ebfef72c7333f7ecc3c2f6f",
+        "bytes": 241316,
+        "width": 640,
+        "height": 832,
+        "rgba_sha256": "5163381a91c1af98f59525461379989eeaa0c9a604a13ff02cee3b386354b7bc"
+      },
+      "bridge1": {
+        "file": "nachtschichtmelderin-anchor-1.webp",
+        "sha256": "016e0339cc3598c42bbc332c1d03e2322b7ba2e68fdc06b895daed34565d2a29",
+        "bytes": 237474,
+        "width": 640,
+        "height": 832,
+        "rgba_sha256": "d5edfe2ca6f0aae06deeb883cda9c0f64c53e3e9d450cd4a993c9d7493cd2716"
+      },
+      "bridge2": {
+        "file": "nachtschichtmelderin-anchor-2.webp",
+        "sha256": "ed12959ae750eed572b7ba45d4b5c1ce9f2806d53089f6c2d8a855fa091f36c6",
+        "bytes": 261354,
+        "width": 640,
+        "height": 832,
+        "rgba_sha256": "368a55ee3e39326ca98a4723fb7d057e60686c6c09653964698982452d68d065"
+      },
+      "bridge3": {
+        "file": "nachtschichtmelderin-anchor-3.webp",
+        "sha256": "08fee0736ea2c7175154ed728ad6d0591a8455a7f7cf2db713a503335bc371b6",
+        "bytes": 289498,
+        "width": 640,
+        "height": 832,
+        "rgba_sha256": "6e102f2d1b6f1619315df39358339e4c03d8b0671d70fb4b40da41242a0ccd73"
+      },
+      "gesture": {
+        "file": "nachtschichtmelderin-anchor-4.webp",
+        "sha256": "54f154d53dbc6f5a8192443a65cbac988237e14c097de3a5d4c0a686876bc0a6",
+        "bytes": 239700,
+        "width": 640,
+        "height": 832,
+        "rgba_sha256": "e43c267b9ff67293c759c080abd55c9307bd08436389aa024bd5605a27a494dc"
+      }
+    },
+    "maximum_resident": 3,
+    "fade_seconds": 0.09
+  }
 }

@@ -18,7 +18,7 @@ const heights={aktenkurier:1.96,archivbotin:1.77,formularsammler:1.85,nummernflu
   nachtschichtmelderin:1.8,pfandarchitektin:1.72,kopiependler:1.84,warteschlangenpoetin:1.83};
 fs.mkdirSync(output,{recursive:true});
 const browser=await chromium.launch({headless:true,executablePath:process.env.CHROMIUM_PATH||undefined,
-  args:['--mute-audio','--use-gl=angle','--use-angle=swiftshader']});
+  args:process.env.PLAYTEST_GPU==='hardware'?['--mute-audio']:['--mute-audio','--use-gl=angle','--use-angle=swiftshader']});
 
 async function installSilentAudio(context){
   await context.addInitScript(()=>{
@@ -40,6 +40,7 @@ async function fixture(page){
     const level=BuergeramtLevel;
     level.replay({cinematics:false,voiceOn:()=>false,subtitlesOn:()=>false,onClose:()=>{}});
     const update=level.update.bind(level),view=Object.getOwnPropertyDescriptor(level,'view');
+    window.__gaussianActualView=()=>view.get.call(level);
     level.update=()=>{};
     window.__gaussianTick=count=>{for(let n=0;n<count;n++)update(1/60)};
     window.__gaussianFocus={id:null,point:null,distance:2.7};
@@ -54,8 +55,15 @@ async function fixture(page){
   // mesh. It delegates unchanged to Object3D and does not change the game clock.
   await page.evaluate(async()=>{
     const {SplatMesh}=await import('./assets/vendor/spark/2.3.1/spark.module.js');
+    const {Mesh}=await import('three');
     const original=SplatMesh.prototype.updateMatrixWorld;
     window.__gaussianTransforms=new Map();
+    window.__paintedTransforms=new Map();
+    const originalPaint=Mesh.prototype.updateMatrixWorld;
+    Mesh.prototype.updateMatrixWorld=function(...args){
+      if(this.userData.anchorActive)window.__paintedTransforms.set(this.uuid,{x:this.position.x,y:this.position.y,z:this.position.z,scale:this.scale.y,visible:this.visible});
+      return originalPaint.apply(this,args);
+    };
     SplatMesh.prototype.updateMatrixWorld=function(...args){
       window.__gaussianTransforms.set(this.uuid,{x:this.position.x,y:this.position.y,z:this.position.z,
         scale:this.scale.y,visible:this.visible});
@@ -67,12 +75,12 @@ async function screenshot(page,dir,name){
   // Frozen simulation poses still need fresh generator/sort output. A pending
   // earlier update can otherwise leave a screenshot showing the previous key.
   const target=await page.evaluate(()=>{Germany3D.sync();const state=Germany3D.amtGaussian;
-    return state.actors.some(actor=>actor.visible)?state.owner.startedUpdates+2:null});
+    return state.actors.some(actor=>actor.visible&&(!actor.anchor?.visible||actor.anchor.opacity<.999))?state.owner.startedUpdates+2:null});
   if(target!==null){
-    await page.waitForFunction(target=>{Germany3D.sync();return Germany3D.amtGaussian.owner.completedUpdates>=target},target,{timeout:60000});
+    await page.waitForFunction(target=>{Germany3D.sync();const state=Germany3D.amtGaussian;return state.owner.completedUpdates>=target||!state.actors.some(actor=>actor.visible&&(!actor.anchor?.visible||actor.anchor.opacity<.999))},target,{timeout:60000});
     await page.waitForTimeout(90);
     const final=await page.evaluate(()=>{Germany3D.sync();return Germany3D.amtGaussian.owner.startedUpdates+1});
-    await page.waitForFunction(target=>{Germany3D.sync();return Germany3D.amtGaussian.owner.completedUpdates>=target},final,{timeout:60000});
+    await page.waitForFunction(target=>{Germany3D.sync();const state=Germany3D.amtGaussian;return state.owner.completedUpdates>=target||!state.actors.some(actor=>actor.visible&&(!actor.anchor?.visible||actor.anchor.opacity<.999))},final,{timeout:60000});
   }
   await page.evaluate(()=>Germany3D.sync());
   await page.screenshot({path:path.join(dir,`${name}.png`),timeout:60000});
@@ -105,17 +113,19 @@ async function observation(page,id){
     const painted=Germany3D.amtCharacters.find(actor=>actor.name===id);
     const transforms=[...__gaussianTransforms.values()].filter(item=>item.visible&&
       Math.hypot(item.x-state.x,item.z-state.z)<.02);
+    const anchorTransforms=[...__paintedTransforms.values()].filter(item=>item.visible&&Math.hypot(item.x-state.x,item.z-state.z)<.02);
     return{stage:BuergeramtLevel.stage,state,painted,gaussian:Germany3D.amtGaussian,
-      transform:transforms.at(-1)??null};
+      transform:transforms.at(-1)??null,anchorTransform:anchorTransforms.at(-1)??null};
   },id);
 }
 function assertPlanted(sample,id){
-  assert(sample.transform,`${id} needs a visible native Spark transform`);
-  assert(Math.abs(sample.transform.x-sample.state.x)<1e-4&&Math.abs(sample.transform.z-sample.state.z)<1e-4,
+  const transform=sample.anchorTransform??sample.transform;
+  assert(transform,`${id} needs a visible native paint or Spark transform`);
+  assert(Math.abs(transform.x-sample.state.x)<1e-4&&Math.abs(transform.z-sample.state.z)<1e-4,
     `${id} Gaussian and painted source have different world XZ`);
-  assert(Math.abs(sample.transform.y)<1e-4,`${id} Gaussian root must remain on the source floor`);
+  assert(Math.abs(transform.y-(sample.anchorTransform?transform.scale/2:0))<1e-4,`${id} root must remain on the source floor`);
   const expected=heights[id]*(sample.painted.detail?1+.0025*sample.painted.breath:1);
-  assert(Math.abs(sample.transform.scale-expected)<.005,`${id} Gaussian height must follow source plane scale`);
+  assert(Math.abs(transform.scale-expected)<.005,`${id} height must follow source plane scale`);
 }
 async function runCase(item){
   const dir=path.join(output,item.name);fs.mkdirSync(dir,{recursive:true});
@@ -193,7 +203,8 @@ async function runCase(item){
         report.arc.push({seconds:sampleIndex/4,phase:sample.state.animation.phase,
           segment:sample.gaussian.actors.find(actor=>actor.id===id).segment,
           blend:sample.gaussian.actors.find(actor=>actor.id===id).blend,
-          rootY:sample.transform.y,scale:sample.transform.scale});
+          rootY:sample.anchorTransform?sample.anchorTransform.y-sample.anchorTransform.scale/2:sample.transform.y,
+          scale:(sample.anchorTransform??sample.transform).scale});
         if(sampleIndex%2===0)await screenshot(page,dir,`conversation-${String(sampleIndex/4).replace('.','_')}s`);
       }
       await page.evaluate(()=>{__gaussianTick(1);Germany3D.sync()});
@@ -234,6 +245,25 @@ async function runCase(item){
       assert(after.state.mode!=='gesture','return must reach a work anchor within two seconds');
       report.return={startPhase:pre.state.animation.phase,direction,seconds:elapsed,modeAfter:after.state.mode};
       await screenshot(page,dir,'conversation-return-complete');
+      const resumeBefore=after.state;
+      // Let the ordinary look/work reaction finish while the real player moves
+      // clear of the existing route guard; the camera still follows the figure.
+      await page.keyboard.down('s');
+      await page.evaluate(()=>{__gaussianTick(120);Germany3D.sync()});
+      await page.keyboard.up('s');
+      const resumed=await observation(page,id);
+      assert.equal(resumed.state.mode,'walk','ordinary reaction must resume the original route');
+      assert(Math.hypot(resumed.state.x-resumeBefore.x,resumed.state.z-resumeBefore.z)>.01,
+        'resumed walking must displace the body');
+      await page.evaluate(()=>{__gaussianTick(6);Germany3D.sync()});
+      const gait=await observation(page,id),walkDistance=Math.hypot(gait.state.x-resumed.state.x,gait.state.z-resumed.state.z);
+      const phaseDelta=(gait.state.phase-resumed.state.phase+1)%1;
+      assert.equal(gait.state.mode,'walk');
+      assert(walkDistance>0&&Math.abs(phaseDelta-walkDistance*8.5/8)<1e-5,
+        'gait must follow resumed route displacement');
+      report.walkResume={mode:resumed.state.mode,displacement:Math.hypot(resumed.state.x-resumeBefore.x,resumed.state.z-resumeBefore.z),
+        walkDistance,phaseDelta,player:await page.evaluate(()=>__gaussianActualView())};
+      await screenshot(page,dir,'conversation-resume-walk');
     }
     await page.evaluate(()=>BuergeramtLevel.replay({cinematics:false,voiceOn:()=>false,subtitlesOn:()=>false,onClose:()=>{}}));
     const replay=await page.evaluate(()=>({stage:BuergeramtLevel.stage,gaussian:Germany3D.amtGaussian,
@@ -249,8 +279,8 @@ async function runCase(item){
       'closing the level must retire Gaussian consumers immediately');
     report.close={active:closed.active,actors:closed.gaussian.actors.length};
     await page.waitForTimeout(250); // let an in-flight Spark sort/retirement settle
-    assert(report.gaussianRequests.every(url=>!url.endsWith('.webp')),
-      'Gaussian runtime loads compact data, not authoring paintings');
+    assert(report.gaussianRequests.every(url=>!url.endsWith('.webp')||/-anchor-\d+\.webp$/.test(url)),
+      'Gaussian runtime loads compact records and registered runtime anchors');
     assert.equal(report.errors.length,0,`browser errors: ${report.errors.join('; ')}`);
     report.result='PASS';
   }catch(error){
@@ -267,6 +297,6 @@ async function runCase(item){
 
 const results=[];
 try{for(const item of cases)results.push(await runCase(item))}finally{await browser.close()}
-fs.writeFileSync(path.join(output,'results.json'),JSON.stringify({fixture:'Natural proximity interaction; original level.update(1/60) manually stepped; production Spark render pass; silent headless SwiftShader; Android browser emulation only',results},null,2));
+fs.writeFileSync(path.join(output,'results.json'),JSON.stringify({fixture:'Natural proximity interaction; original level.update(1/60) manually stepped; production Spark render pass; silent headless '+(process.env.PLAYTEST_GPU==='hardware'?'hardware ANGLE':'SwiftShader')+'; Android browser emulation only',results},null,2));
 console.log(JSON.stringify(results.map(({name,result,speaker,return:turn,errors})=>({name,result,speaker,return:turn,errors})),null,2));
 if(results.some(result=>result.result!=='PASS'||result.errors.length))process.exitCode=1;

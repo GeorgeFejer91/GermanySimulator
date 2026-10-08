@@ -509,5 +509,51 @@
     "owner": "anatomical_right_hand",
     "secondary": "document_bundle_in_anatomical_left_arm"
   },
-  "source_notes": "Stamp remains in anatomical right hand and paper bundle in left throughout. Head turns and torso leans gradually. Matched Gaussian correspondence must be reviewed through ordered playback; no unconstrained whole-body TPS."
+  "source_notes": "Stamp remains in anatomical right hand and paper bundle in left throughout. Head turns and torso leans gradually. Matched Gaussian correspondence must be reviewed through ordered playback; no unconstrained whole-body TPS.",
+  "anchors": {
+    "frames": {
+      "work": {
+        "file": "aktenkurier-anchor-0.webp",
+        "sha256": "65d487b16278e224afd530796a00b105c16e8a9a1e1bc843633e99aa3b560569",
+        "bytes": 255542,
+        "width": 640,
+        "height": 832,
+        "rgba_sha256": "1a38534a1da135cbaecb6f80f066e737817b470de6f986b04f66f53efa33c5ce"
+      },
+      "bridge1": {
+        "file": "aktenkurier-anchor-1.webp",
+        "sha256": "b44213639b9ea083e1da05c7aa9f6d7aadba9c01be3dbd88c6ee045eb81bb952",
+        "bytes": 254214,
+        "width": 640,
+        "height": 832,
+        "rgba_sha256": "c923ef378821ee04cfbd4922cfde530dae11c66ee8e9056f27d7de899e4e141f"
+      },
+      "bridge2": {
+        "file": "aktenkurier-anchor-2.webp",
+        "sha256": "1f161e247473d1f3875d59338dc60a82b91cc3c2c62fe2686ad8bb24d6eb0808",
+        "bytes": 255292,
+        "width": 640,
+        "height": 832,
+        "rgba_sha256": "b515583eec3f78726b9dfbed7edff5e75e8ec3d3926f6ef3a7b613ff259d6aa4"
+      },
+      "bridge3": {
+        "file": "aktenkurier-anchor-3.webp",
+        "sha256": "2ae433f7a83885357a69028f4c9ac87a033310604f4064438ee4604785f519bc",
+        "bytes": 281068,
+        "width": 640,
+        "height": 832,
+        "rgba_sha256": "9c773800f4007096dc655f3c6a18cd43f8f89a192ea73eea61c36dedbfdbce70"
+      },
+      "gesture": {
+        "file": "aktenkurier-anchor-4.webp",
+        "sha256": "c42f83ebe2e4d52d61f760dec94315d4a3da71a7af631bfc9ef595e057f94237",
+        "bytes": 286004,
+        "width": 640,
+        "height": 832,
+        "rgba_sha256": "d48465f13762313b68c8fc098717ceac24339c51414ff5ef7b9133f04e93180b"
+      }
+    },
+    "maximum_resident": 3,
+    "fade_seconds": 0.09
+  }
 }

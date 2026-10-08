@@ -28,7 +28,7 @@ jobs:
       - name: Check game and browser regressions
         run: node --test tests/browser-performance.test.mjs tests/runtime-smoothness.test.mjs tests/browser-responsiveness.test.mjs tests/asset-streaming.test.mjs tests/tourist-animation.test.mjs tests/intro-music.test.mjs tests/splat-preview.test.mjs tests/crossing-layout.test.mjs tests/browser-benchmark.test.mjs tests/touch-controls.test.mjs tests/english-subtitles.test.mjs tests/mission-fax.test.mjs
       - name: Check office Gaussian actions and lifetime
-        run: node --test tests/buergeramt-gaussian-animation.test.mjs tests/buergeramt-gaussian-renderer.test.mjs tests/buergeramt-gaussian-scene.test.mjs tests/buergeramt-gaussian-data.test.mjs tests/buergeramt-splat-owner.test.mjs tests/buergeramt-animation-timing.test.mjs tests/buergeramt-session.test.mjs
+        run: node --test tests/buergeramt-gaussian-animation.test.mjs tests/buergeramt-gaussian-renderer.test.mjs tests/buergeramt-gaussian-scene.test.mjs tests/buergeramt-gaussian-data.test.mjs tests/buergeramt-painted-anchor.test.mjs tests/buergeramt-splat-owner.test.mjs tests/buergeramt-animation-timing.test.mjs tests/buergeramt-session.test.mjs
       - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v3
         with:

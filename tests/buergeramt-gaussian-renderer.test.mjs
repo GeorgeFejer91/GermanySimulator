@@ -119,7 +119,7 @@ test('actor uses one cloud, source floor and scale, and waits for its own comple
  const owner={SplatMesh,dyno,started:0,completed:0,attached:[],retired:[],attach(mesh){this.attached.push(mesh)},retire(mesh,cleanup){this.retired.push(mesh);cleanup()},inspect(){return{ready:true,startedUpdates:this.started,completedUpdates:this.completed,activeSplats:10,pending:false,failure:''}}};
  const THREE={DataTexture,Vector2,Vector3,Quaternion:class{},Color:class{},FloatType:'float',UnsignedByteType:'byte',RGBAFormat:'rgba',NearestFilter:'nearest',ClampToEdgeWrapping:'clamp'};
  try{
-  const actor=await createGaussianActor({THREE,owner,manifestUrl:new URL('../assets/buergeramt/animation/aktenkurier.json',import.meta.url)});
+  const actor=await createGaussianActor({THREE,owner,manifestUrl:new URL('../assets/buergeramt/animation/aktenkurier.json',import.meta.url),anchorPaint:false});
   assert.equal(owner.attached.length,1);assert.equal(owner.attached[0].options.maxSplats,regular.variants.desktop.sample_count);
   assert.equal(textures.length,3);assert.equal(textures[0].width,256);
   assert.match(shader,/int slot=cell\.x\+cell\.y\*256;/,'slot must be captured before adding the segment texture row');

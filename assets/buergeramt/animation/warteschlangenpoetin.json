@@ -883,5 +883,51 @@
     "secondary": "small_ticket_in_anatomical_right_hand_and_notes_in_anatomical_left_arm",
     "occlusion": "bag passes behind torso at bridge1b; visible edge only"
   },
-  "source_notes": "Ticket remains in right hand while the left arm pulls loose papers to chest and the knees bend in recoil. Matched Gaussian correspondence must be reviewed through ordered playback; no unconstrained whole-body TPS. Bridge1b is a real painted behind-torso bag occlusion checkpoint; transport the visible bag through its occluded edge with body depth masking."
+  "source_notes": "Ticket remains in right hand while the left arm pulls loose papers to chest and the knees bend in recoil. Matched Gaussian correspondence must be reviewed through ordered playback; no unconstrained whole-body TPS. Bridge1b is a real painted behind-torso bag occlusion checkpoint; transport the visible bag through its occluded edge with body depth masking.",
+  "anchors": {
+    "frames": {
+      "work": {
+        "file": "warteschlangenpoetin-anchor-0.webp",
+        "sha256": "41af142324bb62fa3c4e872f0d2ad74dc2d136199b1d39ba07a42c80c04da2ad",
+        "bytes": 254688,
+        "width": 640,
+        "height": 832,
+        "rgba_sha256": "a8a486281218a1eafcc63698ddbfed9dd2afd5a67a9277ad5387319a56456fa7"
+      },
+      "bridge1": {
+        "file": "warteschlangenpoetin-anchor-1.webp",
+        "sha256": "45daccd9e6b2296e8ffbff9f57d0fe8085af1cfd62e0510ae0975cb234c1ac23",
+        "bytes": 266182,
+        "width": 640,
+        "height": 832,
+        "rgba_sha256": "d850e694ce4e0cea513314846cf517529e7f23d46fdba77060f12ad9032c71ed"
+      },
+      "bridge1b": {
+        "file": "warteschlangenpoetin-anchor-2.webp",
+        "sha256": "c48a15db452a4902fb5750d674a75490947f5093ab4870d40ce47afde45ce31b",
+        "bytes": 261644,
+        "width": 640,
+        "height": 832,
+        "rgba_sha256": "96a0a5586b26cdccbd0fd233f80ce7de91eac62072d103f583d3e99de56b5669"
+      },
+      "bridge2": {
+        "file": "warteschlangenpoetin-anchor-3.webp",
+        "sha256": "20f8a997310103d86fccd0717fd733de3b41c03281d18c7239cd68d5867dd73a",
+        "bytes": 286050,
+        "width": 640,
+        "height": 832,
+        "rgba_sha256": "afe6a83f8cfd27e29a199628fc210f839a6065058dd59dc1c686522fe8dfcfe8"
+      },
+      "gesture": {
+        "file": "warteschlangenpoetin-anchor-4.webp",
+        "sha256": "f05f13b4f34d301d7bd85433cac002f2b2d748028822c35fc001352b99210f13",
+        "bytes": 242806,
+        "width": 640,
+        "height": 832,
+        "rgba_sha256": "af36e9ca2b87299662474d465672dc7eec97ee881ac58e52d049900b83c39c54"
+      }
+    },
+    "maximum_resident": 3,
+    "fade_seconds": 0.09
+  }
 }

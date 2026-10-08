@@ -1,6 +1,6 @@
 import * as THREE from 'three';
-import {createAmtSplatOwner} from './buergeramt-splat.js?v=20261008-action-arcs';
-import {createGaussianActor,sampleArc} from './buergeramt-gaussian-animation.js?v=20261008-action-arcs';
+import {createAmtSplatOwner} from './buergeramt-splat.js?v=20261009-anchor2';
+import {createGaussianActor,sampleArc} from './buergeramt-gaussian-animation.js?v=20261009-anchor2';
 import {prepareWithSegments,measureLineStats,measureNaturalWidth} from './assets/vendor/pretext/dist/layout.js';
 const $=id=>document.getElementById(id),params=new URLSearchParams(location.search);
 const names={knick:'Frau Knick',aktenkurier:'Aktenkurier',archivbotin:'Archivbotin',formularsammler:'Formularsammler',nummernfluesterer:'Nummernflüsterer',nachtschichtmelderin:'Nachtschichtmelderin',pfandarchitektin:'Pfandarchitektin',kopiependler:'Kopiependler',warteschlangenpoetin:'Warteschlangenpoetin'};
@@ -16,7 +16,7 @@ const actor=await createGaussianActor({THREE,owner,manifestUrl:`./assets/buerger
 const source=new THREE.Mesh(new THREE.PlaneGeometry(3.4*manifest.canvas_xy[0]/832,3.4));source.position.y=1.7;
 const ground=new THREE.Mesh(new THREE.PlaneGeometry(20,20),new THREE.MeshBasicMaterial({color:0x99917c}));ground.rotation.x=-Math.PI/2;ground.position.y=-.01;scene.add(ground);
 document.querySelector('h1').textContent=names[character]+' · continuous painted action';
-$('description').textContent='Main poses define the action. Authored bridge paintings connect its movement; one Gaussian cloud gradually blends their positions and painted texture.';
+$('description').textContent='Original painted anchors retain their full detail, including the inbetween keys. Gaussian splats bridge the movement between those paintings.';
 $('footnote').textContent='The same action data and renderer are used in the Bürgeramt scene. Intermediate anchors have no scheduled pause. Three.js r186 · Spark 2.3.1.';
 $('points').hidden=true;$('spark').setAttribute('aria-pressed','true');$('spark').disabled=true;
 view.setAttribute('aria-label',names[character]+' performing a full painted action cycle');
@@ -66,5 +66,5 @@ function dispose(){if(disposed)return;disposed=true;cancelAnimationFrame(raf);ob
 addEventListener('pagehide',e=>{if(!e.persisted)dispose()});
 window.faxStudy={setTime,setLoop,setSpeed,play:()=>setPlaying(!playing),setMode:()=>{},setEffect:()=>{},
   inspect:()=>({version:'arcs1',scene:character,mode:'spark',time,duration,playing,loop,speed,frames,cycle:sampleArc(manifest,stateAt(time)),actor:actor.inspect(),owner:owner.inspect(),anchorCount:manifest.states.length,buffer:[renderer.domElement.width,renderer.domElement.height],cpuTimes,frameTimes,measurement:document.documentElement.dataset.textMeasurement}),
-  async settle(){sync();await new Promise(r=>requestAnimationFrame(r));await owner.update(camera);renderer.render(scene,camera)},resetMetrics(){frameTimes=[];cpuTimes=[];lastRendered=0}};
+  async settle(){sync();await actor.settle();sync();await new Promise(r=>requestAnimationFrame(r));await owner.update(camera);renderer.render(scene,camera)},resetMetrics(){frameTimes=[];cpuTimes=[];lastRendered=0}};
 setLoop(true);resize();await window.faxStudy.settle();if(!reduced.matches&&params.get('autoplay')!=='0')setPlaying(true);

@@ -510,5 +510,51 @@
     "handoff_state": "bridge2",
     "secondary": "folder_moves_to_right_arm"
   },
-  "source_notes": "Ticket passes from anatomical right hand to left at bridge2 where both hands meet. At bridge3 right hand supports the folder and left holds ticket. This transfer changes ownership; preview only until ordered motion verifies release and receipt. Matched Gaussian correspondence must be reviewed through ordered playback; no unconstrained whole-body TPS."
+  "source_notes": "Ticket passes from anatomical right hand to left at bridge2 where both hands meet. At bridge3 right hand supports the folder and left holds ticket. This transfer changes ownership; preview only until ordered motion verifies release and receipt. Matched Gaussian correspondence must be reviewed through ordered playback; no unconstrained whole-body TPS.",
+  "anchors": {
+    "frames": {
+      "work": {
+        "file": "nummernfluesterer-anchor-0.webp",
+        "sha256": "0d448ee3fdcd0bdefdcc2bc0d2888888630dc007e78f921f65349dbf9af96bfb",
+        "bytes": 248238,
+        "width": 640,
+        "height": 832,
+        "rgba_sha256": "72db38e0ba4dee40f8fe2b9cac28672595101ae828c06da418a552fcbc4ee7d4"
+      },
+      "bridge1": {
+        "file": "nummernfluesterer-anchor-1.webp",
+        "sha256": "23b646d4482a10335517c6828a0c255989dbab0e28764cc2a17f0a719b64c3c9",
+        "bytes": 263710,
+        "width": 640,
+        "height": 832,
+        "rgba_sha256": "10f5f83807f92abd8b59039d2f855d303b5d4f0e2d2ce0c1022ef75aa5c5f7cc"
+      },
+      "bridge2": {
+        "file": "nummernfluesterer-anchor-2.webp",
+        "sha256": "8a420b55faf449c8edee7ced9b40f3ba85df0cd89507679d0e519255250559af",
+        "bytes": 277972,
+        "width": 640,
+        "height": 832,
+        "rgba_sha256": "f88818bff85a5d9958b2bbe64fe2195bb38d4f14830a44af011e51bf8a38fdfd"
+      },
+      "bridge3": {
+        "file": "nummernfluesterer-anchor-3.webp",
+        "sha256": "376e43320af6af2fbec84f17463d09e7da51082a8dc4638da1099d841d99b6b4",
+        "bytes": 261830,
+        "width": 640,
+        "height": 832,
+        "rgba_sha256": "92b36dab690a40b697da33bb6fb0b8a0982f5252e9e739fb2cd2ca08b5724aaf"
+      },
+      "gesture": {
+        "file": "nummernfluesterer-anchor-4.webp",
+        "sha256": "8400a8c9ead724caf79eece5c1b1142fb984371b83d4919df1b4ead0889889ca",
+        "bytes": 229190,
+        "width": 640,
+        "height": 832,
+        "rgba_sha256": "d01c1df41c2803993399b0d8a58626463138fabd4103bcff18dec19df4b78fc6"
+      }
+    },
+    "maximum_resident": 3,
+    "fade_seconds": 0.09
+  }
 }

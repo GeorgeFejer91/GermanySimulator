@@ -2157,5 +2157,139 @@
     "A fixed source head paint is similarity-transformed by face landmarks when head_paint_source is set",
     "Main source paintings differ; Gaussian correspondence needs rendered anatomical review",
     "Existing route/gait and dialogue owners remain authoritative"
-  ]
+  ],
+  "anchors": {
+    "frames": {
+      "ready": {
+        "file": "clerk-anchor-0.webp",
+        "sha256": "5ed3dfb8e74944aaf2bb5d84b0b5068192df5f15268c565575e3ffc462e6967b",
+        "bytes": 270068,
+        "width": 1024,
+        "height": 832,
+        "rgba_sha256": "11cf2a47e252cf0c0ba5d75d13594fb305a0c89b609327c2219b4e1cc455b874"
+      },
+      "raise-1": {
+        "file": "clerk-anchor-1.webp",
+        "sha256": "fd136638f458d02e5508bd6fbceecb1156e59b5dfcae65c49d6c204a8cb4d73a",
+        "bytes": 301400,
+        "width": 1024,
+        "height": 832,
+        "rgba_sha256": "a6cac156be7527b216d620c98ecd8555ce08f241cd3da607a14cba6229a788d7"
+      },
+      "raise-2": {
+        "file": "clerk-anchor-2.webp",
+        "sha256": "51c8525aa11069e5cb106ec2c04af269bfed7458d3f6426034a40a1c18eaeb17",
+        "bytes": 324810,
+        "width": 1024,
+        "height": 832,
+        "rgba_sha256": "6e7974d6ed315c9faac37a3fbc6b31c99379b685d81079acab8d09761100ee27"
+      },
+      "raised": {
+        "file": "clerk-anchor-3.webp",
+        "sha256": "6b165e9762edafeb7c6606d0ca58d51676ef37decb33db8eea5e7b4857c3455f",
+        "bytes": 284908,
+        "width": 1024,
+        "height": 832,
+        "rgba_sha256": "9b634280309b52010cffb640ecbac0dad5e1f7b16c7b26afb94ad6b427b60393"
+      },
+      "stamp-1": {
+        "file": "clerk-anchor-4.webp",
+        "sha256": "eac6cf9b89229a6ab4e14873ec63a48052ad2015c559fa9c704ad93aaf4f4be7",
+        "bytes": 414250,
+        "width": 1024,
+        "height": 832,
+        "rgba_sha256": "d24deb290865aec1192011b8c5e013b9c70e3c51323e24d0bbbc26c90fb04a1b"
+      },
+      "knick-stamp-handoff1": {
+        "file": "clerk-anchor-5.webp",
+        "sha256": "edc8f4e6a66679e777ad10e171a85cd71187f70c0d1b790f4fa38120a945fc87",
+        "bytes": 373928,
+        "width": 1024,
+        "height": 832,
+        "rgba_sha256": "5a658e0d9ad8c4d2254f540073206828a8fef888445ad223cd3177c4e3f47bd6"
+      },
+      "knick-stamp-handoff2": {
+        "file": "clerk-anchor-6.webp",
+        "sha256": "1ffc86dee796a023e6ff3eb25009c44ab1434c5270aeef13c4addd59db34349a",
+        "bytes": 351214,
+        "width": 1024,
+        "height": 832,
+        "rgba_sha256": "fe25d03b645a797c09c0bb8ec5530b2a79de0fedead692c2700dbffa9033d3bc"
+      },
+      "stamp-2": {
+        "file": "clerk-anchor-7.webp",
+        "sha256": "ec2239b038f32e8294d23b1f4aa096c55fa908b875e9a4cb447d4d8345893ebd",
+        "bytes": 315134,
+        "width": 1024,
+        "height": 832,
+        "rgba_sha256": "813daf8b6c73fc82fae253106a5cd5f0d02e5576da15b4f159bc80cbed8203c1"
+      },
+      "stamp-3": {
+        "file": "clerk-anchor-8.webp",
+        "sha256": "97af6cdf94d8062945d26c311da3ceea3901997e9b84f6803bbd6175f51b56f3",
+        "bytes": 308852,
+        "width": 1024,
+        "height": 832,
+        "rgba_sha256": "7be99d5e49450aaa4b2108bd83abbbd013c4e53247e2febaf06559d23a77ee3e"
+      },
+      "contact": {
+        "file": "clerk-anchor-9.webp",
+        "sha256": "1e556cb5993cf6f1249c36da423277d8d753ec9da940baa39c8cd61d14a3243c",
+        "bytes": 254968,
+        "width": 1024,
+        "height": 832,
+        "rgba_sha256": "0efff8ca6815b2e40f75875c6469b42db9f8965c2abcafad351a3ce8a1727e83"
+      },
+      "fold-1": {
+        "file": "clerk-anchor-10.webp",
+        "sha256": "236d797b0fd7146af127069513c54e89bf5ae6e244f3a3ec0c03345efd90782d",
+        "bytes": 294836,
+        "width": 1024,
+        "height": 832,
+        "rgba_sha256": "97fe4ac2571ae45b475e294ac1023fa4341407e1b0884fef6a94a47796c81710"
+      },
+      "fold-2": {
+        "file": "clerk-anchor-11.webp",
+        "sha256": "e58f9483e63fabe1a11f278d7b03bde63afcfa035bd8a782e54ede3d897f4c3c",
+        "bytes": 315594,
+        "width": 1024,
+        "height": 832,
+        "rgba_sha256": "68c6b731aed4f6e9850b09056ac2dd5aae6c4a9f5706b3b279e1072ae7b72209"
+      },
+      "fold-3": {
+        "file": "clerk-anchor-12.webp",
+        "sha256": "6ca2dfd5adda09b3715ab635ce762a96544897a84e803ab8a088a40f62b0e75b",
+        "bytes": 280128,
+        "width": 1024,
+        "height": 832,
+        "rgba_sha256": "4af95c02d0ce70a2e5c088371abbb316ab3ffa3580ce0403c3a538efc961e277"
+      },
+      "refusal": {
+        "file": "clerk-anchor-13.webp",
+        "sha256": "91498eeffad3b66a578586896848e9c5c7d094a37378810fb14c2005c393da94",
+        "bytes": 259944,
+        "width": 1024,
+        "height": 832,
+        "rgba_sha256": "281663878d4e1d8d5c20605203c37c9c6cebe2068097ffd1d83ed3430ed611d9"
+      },
+      "return-1": {
+        "file": "clerk-anchor-14.webp",
+        "sha256": "f249f93ad828bb55db8242e04e8052d25e574eaa6e8ff8864f772412faba657a",
+        "bytes": 301192,
+        "width": 1024,
+        "height": 832,
+        "rgba_sha256": "dabf658411c76ad7bc6bdcbfc502df42c9035c18663c66c9a677e361327c4a6f"
+      },
+      "return-2": {
+        "file": "clerk-anchor-15.webp",
+        "sha256": "e42d361c1f7e5d4857e446ccdc807c1aa3ffe26ea967dcb770b9dbf691e6c3e3",
+        "bytes": 297176,
+        "width": 1024,
+        "height": 832,
+        "rgba_sha256": "e87110f308f4b67e6bc6b0131ff26f1bf7e119446a2edcbbf383e37ee23c0e3d"
+      }
+    },
+    "maximum_resident": 3,
+    "fade_seconds": 0.09
+  }
 }

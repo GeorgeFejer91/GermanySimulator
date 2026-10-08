@@ -36,6 +36,8 @@ for(const file of readdirSync(folder).filter(f=>f.endsWith('.json'))){
  const manifest=JSON.parse(readFileSync(new URL(file,folder)));
  test(`${manifest.id} sources, compressed data and exact endpoint seams remain bound`,()=>{
   for(const state of manifest.states)assert.equal(hash(read(state.file)),state.sha256,state.id);
+  assert.equal(manifest.anchors.maximum_resident,3);
+  for(const state of manifest.states){const frame=manifest.anchors.frames[state.id],bytes=readFileSync(new URL(frame.file,folder));assert.equal(hash(bytes),frame.sha256);assert.equal(bytes.length,frame.bytes);assert.deepEqual([frame.width,frame.height],manifest.canvas_xy)}
   assert(manifest.states.some(s=>s.role==='transition'),'action needs actual bridge paint');
   for(const variant of Object.values(manifest.variants)){
    const zipped=readFileSync(new URL(variant.file,folder)),data=gunzipSync(zipped);

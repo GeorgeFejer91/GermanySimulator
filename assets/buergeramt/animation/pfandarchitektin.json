@@ -418,5 +418,43 @@
     "rigid_transform": false,
     "secondary": "tied_binder_in_anatomical_left_arm"
   },
-  "source_notes": "Receipt stays in anatomical right hand and hangs as one continuous strip; tied binder remains hugged by left arm as torso turns. Matched Gaussian correspondence must be reviewed through ordered playback; no unconstrained whole-body TPS."
+  "source_notes": "Receipt stays in anatomical right hand and hangs as one continuous strip; tied binder remains hugged by left arm as torso turns. Matched Gaussian correspondence must be reviewed through ordered playback; no unconstrained whole-body TPS.",
+  "anchors": {
+    "frames": {
+      "work": {
+        "file": "pfandarchitektin-anchor-0.webp",
+        "sha256": "ae59eb963980f6f9b0e15b6ce3bd118ddfb9193384957da435a7210107794db7",
+        "bytes": 311730,
+        "width": 640,
+        "height": 832,
+        "rgba_sha256": "a495b2f376e6fe32649dda46fe3b13b85ac2279b8e6e2aa39caa7b0d75ce5613"
+      },
+      "bridge1": {
+        "file": "pfandarchitektin-anchor-1.webp",
+        "sha256": "b11b5cdd78e0adc1511584df3b6d72458d494a5f8d434588d91ed42877831bdd",
+        "bytes": 336630,
+        "width": 640,
+        "height": 832,
+        "rgba_sha256": "46b3dc6a404f568946c8c13f1afce3359a98341cb0996cd04919e4703cb046b7"
+      },
+      "bridge2": {
+        "file": "pfandarchitektin-anchor-2.webp",
+        "sha256": "d0b343fa87480184f2a2186d558cf371a5ab0daa3692492f831dd4655794cb46",
+        "bytes": 340262,
+        "width": 640,
+        "height": 832,
+        "rgba_sha256": "2869eeb74af02b6fa911ecc3e000d2f407394ff395c7436ab77888a65cfdb981"
+      },
+      "gesture": {
+        "file": "pfandarchitektin-anchor-3.webp",
+        "sha256": "77fbb4f59b7491c547f212d56b57b3821cd28f0ff203ff82d0a5e6f02eac38d3",
+        "bytes": 294360,
+        "width": 640,
+        "height": 832,
+        "rgba_sha256": "81eb0958b43fa78cd81ffff0ba3dfbb581f5b7914bd6f0dc42aa10d567fe792f"
+      }
+    },
+    "maximum_resident": 3,
+    "fade_seconds": 0.09
+  }
 }

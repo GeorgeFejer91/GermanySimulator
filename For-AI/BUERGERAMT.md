@@ -111,20 +111,56 @@ their own painted region, preventing detached fade trails while leaving visible
 anchor paint exact. Correspondence and texture smoothing
 cannot invent an occluded hand or replace a missing action painting.
 
+The 2026-10-09 anchor handoff restores each authored painting at native
+resolution, including every intermediate key. `buergeramt-painted-anchor.js`
+keeps up to three adjacent runtime WebPs per admitted actor; it does not request
+authoring files or load the entire cast's paintings. A 32×32 painted plane
+follows the same adjacent landmark poses through weighted local-similarity
+deformation, retaining source texture detail during ordinary motion. At the
+interval midpoint, a 90ms smooth overlap on each side (bounded to 45% of the
+interval) hands paint through the single Gaussian bridge and switches the
+source texture while its opacity is zero. Exact keys retain their original
+pixels and geometry. This changes rendering weights, never action time:
+there are no added holds or phase resets. The brief splat handoff is softer
+than the painting; correspondence cannot invent missing texture or occlusion.
+Speech retains its small local deformation and tint/breath. Keep two or three
+approved painted inbetweens between ordinary main poses; retain Knick's denser
+stamp and paper-fold keys. Splats smooth adjacent anchor changes rather than
+substituting for missing authored poses.
+
+For this anchor repair, three cold-context runs per viewport on Chrome 154 /
+Intel Iris Xe D3D11 measured median active-dialogue frame p95 of 20.9 ms both
+before and after on desktop 1280×800, and 21.0→20.9 ms at 390×844 browser
+emulation. All nine test inputs were accepted per run; median input p95 was
+15.0→20.7 ms desktop and 19.1→42.9 ms emulation, with individual runs spanning
+11.9–59.9 ms and 12.9–57.7 ms after the repair. This is local lab evidence,
+not a field performance result. Median cold office transfer was 28.05→28.82 MB
+desktop and 15.60→16.13 MB emulation; the sampled conversation's animation
+transfer rose from 1.24→4.56 MB and 0.26→2.56 MB respectively to retain native
+paint. The existing two/one actor and 1.6 MP drawing-buffer limits held, with
+zero page errors. Physical Android was not tested. Separate Physics and Camera
+reviews checked the frozen repair after upstream omen staging was integrated:
+continuous gesture phases, floor registration, return through the existing
+look/work beats to displacement-driven walking, replay/close, and native mixed
+paint/cloud ordering. All nine preview loops were sampled at their original
+keys and handoffs. Reciprocal overlapping paint/cloud and simultaneous partial
+fades were also checked in an isolated two-character production-renderer
+fixture; those forced samples are not natural mission playthroughs.
+
 `buergeramt-gaussian-scene.js` admits nearby actions through the existing
 two-job asset queue, with at most two desktop actors or one mobile actor. It
 prepares inside six world units, displays inside five, and retires outside
 seven. `buergeramt-gaussian-animation.js` takes its floor, height, orientation
 and tint from the existing sprite. Action clouds and the omen share one Spark
 owner and the ordinary office render pass. The source sprite stays visible
-until the new cloud completes its first visible sort. Walk/look/flinch,
+until the native painting is ready or the new cloud completes its first visible sort. Walk/look/flinch,
 reduced motion, unavailable assets and preparation failures retain sprites.
 Exit/replay detach actors immediately and settle pending sorts before freeing
 their resources. There is no extra scene animation loop.
 
 Registered sources, landmarks, polygons and provenance live under
 `assets/sprite-sources/buergeramt/gaussian-arcs/`; runtime manifests and selected
-desktop/mobile records live under `assets/buergeramt/animation/`. The three
+desktop/mobile records and lossless runtime anchor frames live under `assets/buergeramt/animation/`. The three
 stationary waiting patrons and decorative clerk copies keep their existing
 performances. The opt-in `spark-preview.html?scene=knick&workflow=arcs` preview
 uses the same actor implementation; other cast IDs select their action packs.

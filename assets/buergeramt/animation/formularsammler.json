@@ -988,5 +988,51 @@
     "type": "flexible_accordion_forms",
     "owner": "anatomical_right_top_sheet_and_left_arm_stack"
   },
-  "source_notes": "Anatomical right hand moves a top form toward the chest while the left arm keeps the long accordion stack; no detached/repeated paper segments. Matched Gaussian correspondence must be reviewed through ordered playback; no unconstrained whole-body TPS."
+  "source_notes": "Anatomical right hand moves a top form toward the chest while the left arm keeps the long accordion stack; no detached/repeated paper segments. Matched Gaussian correspondence must be reviewed through ordered playback; no unconstrained whole-body TPS.",
+  "anchors": {
+    "frames": {
+      "work": {
+        "file": "formularsammler-anchor-0.webp",
+        "sha256": "875a05813b8a36c073a1f6feb01647e059563cd6cb5f637406be1e98a1aa00be",
+        "bytes": 289734,
+        "width": 640,
+        "height": 832,
+        "rgba_sha256": "c8c43bb38ddb72d83542815dfa94c119f34188409f3c25f29f2680926ca674f1"
+      },
+      "bridge1": {
+        "file": "formularsammler-anchor-1.webp",
+        "sha256": "58e28759ecb4cede8cd7311039b3d1e165d73bc7fc89514edcb56a4c337ba056",
+        "bytes": 293142,
+        "width": 640,
+        "height": 832,
+        "rgba_sha256": "d4f380d7582c03a10cac8f42a237e8f55f044afbe9f810fcbb1e94f00fd44007"
+      },
+      "bridge2": {
+        "file": "formularsammler-anchor-2.webp",
+        "sha256": "42092a1b2a1f975a0ce3efbb4360c050d335b6abb0ab7baa107d757ab8f4c94b",
+        "bytes": 307102,
+        "width": 640,
+        "height": 832,
+        "rgba_sha256": "e6c97c1ce1ae8d26fc3c3be0a126f84bb91912232e62e8218f393987b853d0e1"
+      },
+      "bridge3": {
+        "file": "formularsammler-anchor-3.webp",
+        "sha256": "4d036bc67554a610048886d6479b5773fa7afa33a70f7c07f83cc76c5c4aadf6",
+        "bytes": 290296,
+        "width": 640,
+        "height": 832,
+        "rgba_sha256": "6b5267455660e6d61c321f58ad3a2408fb4ee0c06c927fa6b57a688f448fa7ed"
+      },
+      "gesture": {
+        "file": "formularsammler-anchor-4.webp",
+        "sha256": "33db18ae8372b4b5e19a5e6fba5517b8cd387891081377eb82d9770c257225a0",
+        "bytes": 312296,
+        "width": 640,
+        "height": 832,
+        "rgba_sha256": "8e39bb176db72bcfa301518a4c426cd947697efab75f0bc861bc3390f818651c"
+      }
+    },
+    "maximum_resident": 3,
+    "fade_seconds": 0.09
+  }
 }

@@ -11,6 +11,14 @@ ROOT=Path(__file__).resolve().parents[1]
 OUT=ROOT/'assets/buergeramt/animation'
 KEYS=('eye_right','eye_left','nose','chin','shoulder_right','elbow_right','grip_right','stamp_knob','stamp_base','shoulder_left','elbow_left','hand_left','hip_center','skirt_hem_center','foot_screen_left','foot_screen_right')
 def sha(path): return hashlib.sha256(path.read_bytes()).hexdigest()
+def write_anchor_paint(spec,images):
+ frames={}
+ for index,(state,image) in enumerate(zip(spec['states'],images)):
+  rgba=np.asarray(image).copy();rgba[rgba[:,:,3]==0,:3]=0
+  path=OUT/f"{spec['id']}-anchor-{index}.webp"
+  Image.fromarray(rgba).save(path,lossless=True,exact=True,method=6)
+  frames[state['id']]={'file':path.name,'sha256':sha(path),'bytes':path.stat().st_size,'width':image.width,'height':image.height,'rgba_sha256':hashlib.sha256(rgba.tobytes()).hexdigest()}
+ return {'frames':frames,'maximum_resident':3,'fade_seconds':.09}
 def similarity(s,t,q):
  x,y=s.T;m=np.zeros((len(s)*2,4));m[::2]=np.column_stack((x,-y,np.ones(len(x)),np.zeros(len(x))));m[1::2]=np.column_stack((y,x,np.zeros(len(x)),np.ones(len(x))))
  a,b,tx,ty=np.linalg.lstsq(m,t.ravel(),rcond=None)[0]
@@ -194,6 +202,7 @@ def build(spec):
  manifest={'version':1,'id':spec['id'],'representation':'paired-gaussian-paint','canvas_xy':spec['canvas_xy'],'head_paint_source':spec.get('head_paint_source'),'states':[{**s,'sha256':sha(ROOT/s['file'])} for s in states],'arcs':spec['arcs'],'segments':[{'from':states[a]['id'],'to':states[b]['id']} for a,b in segments],'variants':variants,'limits':['Main and terminal anchors are semantic checkpoints; transition anchors never create scheduled holds','One paired cloud blends position and linear-light paint; no whole-character scatter or midpoint paint swap','A fixed source head paint is similarity-transformed by face landmarks when head_paint_source is set','Main source paintings differ; Gaussian correspondence needs rendered anatomical review','Existing route/gait and dialogue owners remain authoritative']}
  if spec.get('prop_ownership'):manifest['prop_ownership']=spec['prop_ownership']
  if spec.get('compatibility'):manifest['source_notes']=spec['compatibility']
+ manifest['anchors']=write_anchor_paint(spec,images)
  (OUT/(spec['id']+'.json')).write_text(json.dumps(manifest,indent=2)+'\n',encoding='utf-8',newline='\n')
  print(json.dumps({'id':spec['id'],'variants':variants}))
 if __name__=='__main__':

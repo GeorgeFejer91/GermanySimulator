@@ -1257,5 +1257,51 @@
     "owner": "belt_hanger_until_bridge1_then_anatomical_right_hand",
     "secondary": "paper_stack_in_anatomical_left_arm"
   },
-  "source_notes": "One helmet moves from belt at screen-right through center into right-hand grip at screen-left, while left arm retains papers. Exact source endpoint depicts a larger foreground helmet than work; inspect gradual apparent-size growth. Matched Gaussian correspondence must be reviewed through ordered playback; no unconstrained whole-body TPS."
+  "source_notes": "One helmet moves from belt at screen-right through center into right-hand grip at screen-left, while left arm retains papers. Exact source endpoint depicts a larger foreground helmet than work; inspect gradual apparent-size growth. Matched Gaussian correspondence must be reviewed through ordered playback; no unconstrained whole-body TPS.",
+  "anchors": {
+    "frames": {
+      "work": {
+        "file": "kopiependler-anchor-0.webp",
+        "sha256": "72c8147504b4d36b2d3433e69f79ee7045858edf47e2c69aee188c705a1912f0",
+        "bytes": 237924,
+        "width": 640,
+        "height": 832,
+        "rgba_sha256": "f15f572aa48bec30665f69a9f851ed252f34d8ff5c72ada2ca7ee3eb88a033ff"
+      },
+      "bridge1": {
+        "file": "kopiependler-anchor-1.webp",
+        "sha256": "e617749f59072f91f7ffe531478342406e2cac34e9dce38d8f98a2c8e75bcad5",
+        "bytes": 250924,
+        "width": 640,
+        "height": 832,
+        "rgba_sha256": "424cad5c0802fe459b96c71a504a3b19fe722b801222223968cc72aace7f477f"
+      },
+      "bridge2": {
+        "file": "kopiependler-anchor-2.webp",
+        "sha256": "d0a95e1655504cb5197b01c626c5c08911d36faa5914245abda5deb41a0ff676",
+        "bytes": 283024,
+        "width": 640,
+        "height": 832,
+        "rgba_sha256": "52144f62d24e2cdc88df7cf5d104186891f15c9056df7cdfb96c6ca0ee0d400a"
+      },
+      "bridge3": {
+        "file": "kopiependler-anchor-3.webp",
+        "sha256": "d14447c6518aa1d5b477ff0ff3e299a7bf03dd199886320cc6cfa7b586421403",
+        "bytes": 295170,
+        "width": 640,
+        "height": 832,
+        "rgba_sha256": "86307d8dbc1c4f6d450ed77c85382f3738bd1889a4e2ba28376cba76b7a103ae"
+      },
+      "gesture": {
+        "file": "kopiependler-anchor-4.webp",
+        "sha256": "5fdfedc79762ad1e11f9d4b317ecf5aeb72960eebb95d05d4c87a9fda2f04476",
+        "bytes": 256428,
+        "width": 640,
+        "height": 832,
+        "rgba_sha256": "b11c33794192087fd698920b2570a98e9c76eaf93937a561062261804c6e8e73"
+      }
+    },
+    "maximum_resident": 3,
+    "fade_seconds": 0.09
+  }
 }
