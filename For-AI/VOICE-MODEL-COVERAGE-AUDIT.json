@@ -1,0 +1,220 @@
+{
+  "schemaVersion": 1,
+  "status": "explicit_runtime_speakers_verified; optional_visual_template_mapping_pending",
+  "sourceSha256": {
+    "For-AI/VOICE-CAST.json": "97f87cd9dd1b5b8391cb26e14578d3b2471b8332b3b166b7f4f70bfc724d2ed7",
+    "game.js": "be3939777ce2ca45cebb1da18cdd554740e8c6eb6457faf9f675782e08ec5d0a",
+    "world3d.js": "23517247db172f9408e13ab6fdea37335eee6b6bc05e3f826856e3830bc94ca9",
+    "buergeramt-story.js": "082ed8fbf16cb74f730eaa87268586f5d89b518fe33ef6ee2a12381d0e23f83c",
+    "assets/models/street-characters/models.js": "f221585150735d365e007f2eadfe58d1461f704824f8bd18f356f6bacfe5a4a8",
+    "assets/models/street-characters/runtime.js": "766f2ae9172ebf59ae16008def80871b603f6ad51322097d2b1ddbd9b74e65f5"
+  },
+  "counts": {
+    "newNonpoliticalProfiles": 56,
+    "existingPoliticalProfiles": 2,
+    "namedCityNpcBindings": 19,
+    "namedCrowdIdentities": 12,
+    "staticBuergeramtSpeakers": 4,
+    "decorativeClerkClones": 2,
+    "optionalStreetVisualTemplates": 8
+  },
+  "staticBuergeramt": [
+    {
+      "modelKind": "clerk",
+      "gameCharacterId": "amt-brunhilde-knick",
+      "fullName": "Brunhilde Knick",
+      "voiceId": "amt-brunhilde-knick",
+      "decorativeCloneOf": null
+    },
+    {
+      "modelKind": "clerk",
+      "gameCharacterId": null,
+      "fullName": null,
+      "voiceId": null,
+      "decorativeCloneOf": "amt-brunhilde-knick"
+    },
+    {
+      "modelKind": "clerk",
+      "gameCharacterId": null,
+      "fullName": null,
+      "voiceId": null,
+      "decorativeCloneOf": "amt-brunhilde-knick"
+    },
+    {
+      "modelKind": "renter",
+      "gameCharacterId": "amt-konrad-wohnungszettel",
+      "fullName": "Konrad Wohnungszettel",
+      "voiceId": "amt-konrad-wohnungszettel",
+      "decorativeCloneOf": null
+    },
+    {
+      "modelKind": "parent",
+      "gameCharacterId": "amt-mechthild-elternbogen",
+      "fullName": "Mechthild Elternbogen",
+      "voiceId": "amt-mechthild-elternbogen",
+      "decorativeCloneOf": null
+    },
+    {
+      "modelKind": "pensioner",
+      "gameCharacterId": "amt-wolfram-rentenbescheid",
+      "fullName": "Wolfram Rentenbescheid",
+      "voiceId": "amt-wolfram-rentenbescheid",
+      "decorativeCloneOf": null
+    }
+  ],
+  "city": [
+    {
+      "gameCharacterId": "city-klaus-dieter-klein",
+      "fullName": "Klaus-Dieter Klein",
+      "voiceId": "stadt-klaus-dieter-klein"
+    },
+    {
+      "gameCharacterId": "city-brigitte-mueller",
+      "fullName": "Brigitte Müller",
+      "voiceId": "stadt-brigitte-mueller"
+    },
+    {
+      "gameCharacterId": "city-wolfgang-schulz",
+      "fullName": "Wolfgang Schulz",
+      "voiceId": "stadt-wolfgang-schulz"
+    },
+    {
+      "gameCharacterId": "city-ursula-neumann",
+      "fullName": "Ursula Neumann",
+      "voiceId": "stadt-ursula-neumann"
+    },
+    {
+      "gameCharacterId": "city-manfred-din",
+      "fullName": "Manfred DIN",
+      "voiceId": "stadt-manfred-din"
+    },
+    {
+      "gameCharacterId": "city-irmgard-aktenstapel",
+      "fullName": "Irmgard Aktenstapel",
+      "voiceId": "stadt-irmgard-aktenstapel"
+    },
+    {
+      "gameCharacterId": "city-guenther-tuev",
+      "fullName": "Günther TÜV",
+      "voiceId": "stadt-guenther-tuev"
+    },
+    {
+      "gameCharacterId": "city-hannelore-sparkasse",
+      "fullName": "Hannelore Sparkasse",
+      "voiceId": "stadt-hannelore-sparkasse"
+    },
+    {
+      "gameCharacterId": "city-karl-heinz-post",
+      "fullName": "Karl-Heinz Post",
+      "voiceId": "stadt-karl-heinz-post"
+    },
+    {
+      "gameCharacterId": "city-herbert-rasenaufsicht",
+      "fullName": "Herbert Rasenaufsicht",
+      "voiceId": "stadt-herbert-rasenaufsicht"
+    },
+    {
+      "gameCharacterId": "city-waltraud-ordnung",
+      "fullName": "Waltraud Ordnung",
+      "voiceId": "stadt-waltraud-ordnung"
+    },
+    {
+      "gameCharacterId": "city-erwin-archiv",
+      "fullName": "Erwin Archiv",
+      "voiceId": "stadt-erwin-archiv"
+    },
+    {
+      "gameCharacterId": "city-renate-termin",
+      "fullName": "Renate Termin",
+      "voiceId": "stadt-renate-termin"
+    },
+    {
+      "gameCharacterId": "city-heinz-mietnachweis",
+      "fullName": "Heinz Mietnachweis",
+      "voiceId": "stadt-heinz-mietnachweis"
+    },
+    {
+      "gameCharacterId": "city-monika-zebra",
+      "fullName": "Monika Zebra",
+      "voiceId": "stadt-monika-zebra"
+    },
+    {
+      "gameCharacterId": "city-joachim-fundsache",
+      "fullName": "Joachim Fundsache",
+      "voiceId": "stadt-joachim-fundsache"
+    },
+    {
+      "gameCharacterId": "city-ute-ruhe",
+      "fullName": "Ute Ruhe",
+      "voiceId": "stadt-ute-ruhe"
+    },
+    {
+      "gameCharacterId": "city-norbert-faxrolle",
+      "fullName": "Norbert Faxrolle",
+      "voiceId": "stadt-norbert-faxrolle"
+    },
+    {
+      "gameCharacterId": "city-edeltraud-trennung",
+      "fullName": "Edeltraud Trennung",
+      "voiceId": "stadt-edeltraud-trennung"
+    }
+  ],
+  "crowdVoiceIds": [
+    "crowd-waltraud-wartemarke",
+    "crowd-klaus-dieter-knoedel",
+    "crowd-hildegard-brotzeit",
+    "crowd-guenther-gartenzaun",
+    "crowd-brigitte-bueroklammer",
+    "crowd-horst-hausordnung",
+    "crowd-irmgard-aktenordner",
+    "crowd-manfred-mittagsruhe",
+    "crowd-elfriede-eingabe",
+    "crowd-ruediger-rasenkante",
+    "crowd-baerbel-brezel",
+    "crowd-dietmar-din-norm"
+  ],
+  "optionalStreetVisualTemplates": [
+    {
+      "id": "kehrwoche",
+      "title": "Frau Besenrein",
+      "role": "Kehrwoche supervisor"
+    },
+    {
+      "id": "ordnungsamt",
+      "title": "Herr Dienstweg",
+      "role": "Clipboard inspector"
+    },
+    {
+      "id": "pfand",
+      "title": "Petra Mehrweg",
+      "role": "Pfand collector"
+    },
+    {
+      "id": "wanderer",
+      "title": "Uwe Allwetter",
+      "role": "Over-equipped urban hiker"
+    },
+    {
+      "id": "garten",
+      "title": "Gisela Paragraf",
+      "role": "Allotment guardian"
+    },
+    {
+      "id": "pendler",
+      "title": "Rolf Anschluss",
+      "role": "Permanently delayed commuter"
+    },
+    {
+      "id": "radweg",
+      "title": "Alex Klingel",
+      "role": "Bicycle-lane enforcer"
+    },
+    {
+      "id": "warteschlange",
+      "title": "Erika Reihenfolge",
+      "role": "Queue-order expert"
+    }
+  ],
+  "interpretation": "The optional street meshes are candidate appearance templates assigned to existing NPC state. Their asset titles are not displayed game speaker identities and they own no dialogue or voice profile. Before accepting this pack, review persona-to-mesh and gender/demeanor fit; create a new cast entry and Secret Tunnel profile if a mesh becomes a distinct speaking character.",
+  "limits": "This static audit verifies explicit source bindings and catalogue fields, not audible identity, normal-play model rendering, every dynamic line, or the optional street pack visual review."
+}
