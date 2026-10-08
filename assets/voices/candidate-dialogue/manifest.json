@@ -102,11 +102,43 @@
       "renderer": "ResembleAI/Chatterbox Multilingual V2 0.1.7",
       "modelRevision": "5bb1f6ee58e50c3b8d408bc82a6d3740c2db6e18",
       "modelLicense": "MIT",
-      "durationSeconds": 7.04,
-      "asr": "Die letzte Seite war leer. Frau Knick nennt es ein freies Zeitfenster. Ich nenne es Aussicht.",
-      "asrWordExact": false,
+      "durationSeconds": 5.68,
+      "asr": "Die letzte Seite war leer. Frau Knick nennt das ein freies Zeitfenster. Ich nenne es Aussicht.",
+      "asrWordExact": true,
       "path": "assets/voices/candidate-dialogue/amt-dieter-papiermann-02.mp3",
-      "sha256": "66b7070b45bc523f514d4155d015d0fb78107fc10f912e940bf1de4356666a6f"
+      "sha256": "ef3a420115a3dde905901228d99490da5c6ffb46baba722bc33b759b1d2eb34c",
+      "edit": "Original same-profile first/last sentences with a new exact middle sentence; 20 ms edge fades, middle gain 1.65, 150 ms tail silence, -4 dB MP3 encode. Independent ASR exact on encoded MP3; full human listening pending.",
+      "construction": {
+        "type": "same-profile-segment-splice",
+        "sourceWavSha256": [
+          "941894415531843ae93695750ae089a35ecf976d39e1715f5380cadd6c88b352",
+          "bb1d5614667ec6e284693e2c55456fcbfec50edb5c7fb64a98af106bb6784fb1"
+        ],
+        "sourceRangesSeconds": [
+          [
+            [
+              0,
+              1.55
+            ],
+            [
+              4.22,
+              5.85
+            ]
+          ],
+          [
+            [
+              0,
+              2.35
+            ]
+          ]
+        ],
+        "edit": {
+          "middleGain": 1.65,
+          "edgeFadeMs": 20,
+          "tailSilenceMs": 150
+        },
+        "workingWavSha256": "29720ce38cec77c3e3a9610378cad857ed7b0c02671459d4a41eda0745b93553"
+      }
     },
     {
       "clipId": "amt-ruediger-nummermann-01",
