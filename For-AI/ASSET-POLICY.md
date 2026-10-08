@@ -426,8 +426,8 @@ Seven compatible intervals transport Gaussian paint with a continuous clock;
 no intermediate key has a scheduled hold or repeated ease to zero. Weighted
 local similarity with head/collar guides replaces the global spline that tore
 neck and shoulder paint. A narrow stamp mask follows a rigid curved path.
-Crossings and grip/paper handoffs use 100 ms intact-pose intervals; no dissolve
-setting bypasses those guards. Opaque paint selection avoids translucent
+Crossings and grip/paper handoffs use 100 ms intact-pose intervals. The character
+has no whole-body scatter/dissolve mode; the fax retains its toner-cloud effect. Opaque paint selection avoids translucent
 second arms but painted-detail/proportion changes and short cuts remain visible.
 The fourteen-key binary is 11.18 MB plus a 0.56 MB ownership mask, all opt-in.
 This is not accepted gameplay animation. Reduced motion starts paused;

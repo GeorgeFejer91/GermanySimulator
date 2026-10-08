@@ -1,6 +1,6 @@
 import * as THREE from 'three';
 import {prepareWithSegments,measureLineStats,measureNaturalWidth} from './assets/vendor/pretext/dist/layout.js';
-import {CYCLE_DURATION,ANCHORS,ANCHOR_TIMES,cycleAt,transitionAt,advanceClock} from './spark-preview-cycle.mjs?v=cycle4';
+import {CYCLE_DURATION,ANCHORS,ANCHOR_TIMES,cycleAt,transitionAt,advanceClock} from './spark-preview-cycle.mjs?v=cycle5';
 
 await document.fonts.load('16px Study');
 await document.fonts.load('700 16px Study');
@@ -18,9 +18,8 @@ if(character){
  byId('description').textContent='A continuous clock carries fourteen painted anchors through the stamp cycle. Compatible poses keep moving; arm crossings and paperwork use brief protected handoffs.';
  byId('footnote').textContent='No scheduled holds at intermediate keys. The stamp follows a curved path; incompatible poses use short cuts. Painting differences remain visible. Three.js r186 · Spark 2.3.1.';
  document.querySelector('.anchors').hidden=false;
- for(const el of document.querySelectorAll('[data-character]'))el.hidden=false;
  view.setAttribute('aria-label','Frau Knick raises her stamp, stamps a document, folds her arms and returns to ready');
- const manifestResponse=await fetch('./assets/previews/knick-splats/manifest.json?v=cycle4');
+ const manifestResponse=await fetch('./assets/previews/knick-splats/manifest.json?v=cycle5');
  if(!manifestResponse.ok)throw Error('Character manifest could not load');
  const manifest=await manifestResponse.json();
  count=manifest.sample_count;slots=manifest.slots_per_anchor;segments=manifest.segment_count;rows=count/256;
@@ -32,11 +31,11 @@ if(character){
   button.id='pose-'+i;button.textContent=(i+1)+' · '+anchor.name;button.onclick=()=>setTime(ANCHOR_TIMES[i]);
   figure.append(img,button);document.querySelector('.anchors').append(figure);
  });
- const response=await fetch('./assets/previews/knick-splats/correspondence.bin?v=cycle4');
+ const response=await fetch('./assets/previews/knick-splats/correspondence.bin?v=cycle5');
  if(!response.ok)throw Error('Character correspondence could not load');
  const buffer=await response.arrayBuffer();if(buffer.byteLength!==count*segments*20)throw Error('Invalid character correspondence');
  const data=new DataView(buffer);
- const partsResponse=await fetch('./assets/previews/knick-splats/parts.bin?v=cycle4');
+ const partsResponse=await fetch('./assets/previews/knick-splats/parts.bin?v=cycle5');
  if(!partsResponse.ok)throw Error('Character part ownership could not load');
  partData=new Uint8Array(await partsResponse.arrayBuffer());if(partData.length!==count*segments)throw Error('Invalid character part ownership');
  mappingData=new Float32Array(count*segments*4);paintData=new Uint8Array(count*segments*4);
@@ -89,7 +88,7 @@ vec2 pathCenter(vec4 ends,vec4 tangents,float u){
  return (2.*u3-3.*u2+1.)*ends.xy+(u3-2.*u2+u)*tangents.xy+(-2.*u3+3.*u2)*ends.zw+(u3-u2)*tangents.zw;
 }
 vec3 sampleMotion(vec3 p,vec3 target,float t,float phase,float dissolve,float guarded,float part,vec4 headPath,vec4 headTangents,vec4 stampPath,vec4 stampTangents,vec2 angles){
- ${character?'if(guarded>.5)return p;vec3 base=mix(p,target,phase);if(part>1.5){vec4 ends=stampPath;vec4 tangents=stampTangents;float a=phase*angles.y;vec2 q=p.xy-ends.xy;float c=cos(a),s=sin(a);base.xy=pathCenter(ends,tangents,phase)+mat2(c,s,-s,c)*q;}return mix(base,scatter(base,t,cloudSpread(t,phase)),dissolve);':'return scatter(p,t,spread(t));'}
+ ${character?'if(guarded>.5)return p;vec3 base=mix(p,target,phase);if(part>1.5){vec4 ends=stampPath;vec4 tangents=stampTangents;float a=phase*angles.y;vec2 q=p.xy-ends.xy;float c=cos(a),s=sin(a);base.xy=pathCenter(ends,tangents,phase)+mat2(c,s,-s,c)*q;}return base;':'return scatter(p,t,spread(t));'}
 }
 float sampleFade(float group,float t,float phase,float guarded,float part){
  ${character?'float handoff=step(.5,phase);return mix(1.-handoff,handoff,group);':'return 1.-spread(t)*.34;'}
@@ -227,12 +226,11 @@ function frame(now){
  if(pendingAutoplay){pendingAutoplay=false;if(!reducedMotion.matches)setPlaying(true)}
  if(playing&&!raf)raf=requestAnimationFrame(frame);
 }
-function setEffect(dissolve){uniforms.dissolve.value=dissolve;lastSplatState='';byId('guided').setAttribute('aria-pressed',String(!dissolve));byId('dissolve').setAttribute('aria-pressed',String(!!dissolve));updateCamera();wake()}
+function setEffect(dissolve){if(character)return;uniforms.dissolve.value=Number(dissolve)||0;lastSplatState='';updateCamera();wake()}
 byId('play').onclick=play;byId('loop').onclick=()=>setLoop(!loop);byId('speed').onchange=()=>setSpeed(Number(byId('speed').value));
 byId('points').onclick=()=>setMode('points');byId('spark').onclick=()=>setMode('spark');
 byId('time').max=duration;byId('time').oninput=()=>setTime(Number(byId('time').value));
 byId('angle').oninput=()=>{updateCamera();wake()};byId('reload').onclick=()=>location.reload();
-byId('guided').onclick=()=>setEffect(0);byId('dissolve').onclick=()=>setEffect(1);
 
 document.addEventListener('visibilitychange',()=>{if(document.hidden){cancelAnimationFrame(raf);raf=0;last=lastRendered=0}else wake()});
 reducedMotion.addEventListener('change',event=>{if(event.matches)setPlaying(false)});
@@ -240,7 +238,7 @@ renderer.domElement.addEventListener('webglcontextlost',event=>{event.preventDef
 const observer=new ResizeObserver(resize);observer.observe(view);observer.observe(document.querySelector('main'));
 function dispose(){disposed=true;cancelAnimationFrame(raf);observer.disconnect();splat?.dispose();spark?.dispose();correspondence.dispose();paint.dispose();parts.dispose();geometry.dispose();material.dispose();for(const mesh of [desk,box,...props]){mesh.geometry.dispose();mesh.material.dispose()}renderer.dispose()}
 addEventListener('pagehide',event=>{if(!event.persisted)dispose()});
-window.faxStudy={setMode,setTime,setEffect,setLoop,setSpeed,play,inspect:()=>({version:'cycle4',mode,scene:character?'knick':'fax',time,duration,cycle:character?transitionAt(time,policies):null,anchorCount:character?ANCHORS.length:0,paperOnCounter:paperStack?.visible??null,playing,loop,speed,frames,count,modeStartupMs,buffer:[renderer.domElement.width,renderer.domElement.height],render:{...renderer.info.render},memory:{...renderer.info.memory},cpuTimes:[...cpuTimes],frameTimes:[...frameTimes],three:THREE.REVISION,measurement:document.documentElement.dataset.textMeasurement}),resetMetrics(){cpuTimes.length=frameTimes.length=0;lastRendered=0},async settle(){syncMotion();if(spark&&mode==='spark')await spark.update({scene,camera});wake()}};
+window.faxStudy={setMode,setTime,setEffect,setLoop,setSpeed,play,inspect:()=>({version:'cycle5',mode,scene:character?'knick':'fax',time,duration,cycle:character?transitionAt(time,policies):null,anchorCount:character?ANCHORS.length:0,paperOnCounter:paperStack?.visible??null,playing,loop,speed,frames,count,modeStartupMs,buffer:[renderer.domElement.width,renderer.domElement.height],render:{...renderer.info.render},memory:{...renderer.info.memory},cpuTimes:[...cpuTimes],frameTimes:[...frameTimes],three:THREE.REVISION,measurement:document.documentElement.dataset.textMeasurement}),resetMetrics(){cpuTimes.length=frameTimes.length=0;lastRendered=0},async settle(){syncMotion();if(spark&&mode==='spark')await spark.update({scene,camera});wake()}};
 resize();setLoop(loop);updateStatus();
 if(params.get('renderer')==='spark')await setMode('spark');byId('play').disabled=false;
 if(character&&!reducedMotion.matches&&params.get('autoplay')!=='0'){pendingAutoplay=true;wake()}
