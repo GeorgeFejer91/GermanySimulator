@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "clipCount": 11,
-  "status": "Standalone profile auditions; human listening required; no quiz runtime binding",
+  "status": "Review-only profile auditions; Brigitte Neumann's approach also supplies one opt-in quiz prompt; human listening required",
   "clips": [
     {
       "clipId": "quiz-brigitte-neumann-approach-review",
@@ -25,7 +25,7 @@
       "takeVariant": "first",
       "sha256": "0753bcda1df4c4be8977cb22dfdba8099f94e89479a6cf3212fd64b0c5cbf83b",
       "path": "assets/voices/profile-auditions/quiz-brigitte-neumann-approach-review.mp3",
-      "status": "review-only; not a gameplay line"
+      "status": "review-only; also first segment of one opt-in quiz preview"
     },
     {
       "clipId": "quiz-dietmar-schulz-approach-review",

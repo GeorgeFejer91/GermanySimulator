@@ -784,6 +784,12 @@ const candidateDialogue=Object.freeze(Object.fromEntries([
  ["spieler-hans-peter-mustermann","At this rate werde ich nie anything amounten—außer einem offenen Vorgang.","assets/voices/candidate-dialogue/spieler-hans-peter-mustermann-berlin-lost-02.mp3"]
 ].map(([voiceId,text,path])=>[voiceId+"\u0000"+text,path])));
 function candidateClip(voiceId,text){return candidatePreviewEnabled?candidateDialogue[voiceId+"\u0000"+text]||null:null}
+const quizSegmentDialogue=Object.freeze(Object.fromEntries([
+ ["quiz-brigitte-neumann","Ihre Jacke ist sehr ordentlich. Sogar die Knöpfe wirken zuständig. Apropos.","assets/voices/profile-auditions/quiz-brigitte-neumann-approach-review.mp3"],
+ ["quiz-brigitte-neumann","Sie wollen einen Führerschein? Dann sagen Sie mir, wie Sie mit diesem Fall umgehen:","assets/voices/quiz-segments/quiz-brigitte-neumann-context-traffic-germany.mp3"],
+ ["quiz-brigitte-neumann","Ein Igel in Warnweste überquert langsam die Straße. Welche Reaktion ist angemessen?","assets/voices/quiz-segments/quiz-brigitte-neumann-question-fs-10-germany.mp3"]
+].map(([voiceId,text,path])=>[voiceId+"\u0000"+text,path])));
+function candidateSequence(voiceId,segments){if(!candidatePreviewEnabled||!voiceId||!Array.isArray(segments)||!segments.length)return null;const paths=segments.map(text=>quizSegmentDialogue[voiceId+"\u0000"+text]||candidateDialogue[voiceId+"\u0000"+text]);return paths.every(Boolean)?paths:null}
 
 
 window.GermanySimulatorAudioText=Object.freeze({
@@ -802,6 +808,7 @@ window.GermanySimulatorAudioText=Object.freeze({
  clips,
  candidatePreviewEnabled,
  candidateClip,
+ candidateSequence,
  lawPowerLines,
  rules,
  ruleEnglish

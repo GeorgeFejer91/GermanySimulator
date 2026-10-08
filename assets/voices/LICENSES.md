@@ -195,3 +195,7 @@ synthetic horn is code-generated and has no speech recording.
 | `traffic/driver-berlin-02.mp3` | 2.960 s | `41F48026CC99CC859E333157F79FD58B8DF71B0C0735D36B9DF2A7DCAFF6A782` |
 | `traffic/driver-germany-01.mp3` | 2.080 s | `88070DBDE09CAF488FAA5E8AA3E81FE4A6ABFAAAA45DD0AFC3E4F78AE9E02298` |
 | `traffic/driver-germany-02.mp3` | 2.320 s | `48F810565B49EC6ED207D3EA038CDB2D89B811575F30CC218B5DD1A5B7102914` |
+
+## Opt-in fictional character voice candidates
+
+The 223 MP3s under `candidate-dialogue/`, eleven samples under `profile-auditions/`, and two additional MP3s under `quiz-segments/` are generated preview candidates. Brigitte Neumann's existing audition supplies the first of her three quiz segments. The source voice references are hash-verified clips from the Berlin Database of Emotional Speech (EmoDB) under CC0 1.0; exact source files, actor IDs, emotion labels, and hashes are in `For-AI/VOICE-CAST.json`. The alternate renderer is ResembleAI Chatterbox Multilingual V2 0.1.7 under MIT. The three adjacent manifests record each output's exact text, source reference hash, model revision, profile UUID, output hash, and independent ASR check. These assets are reachable only through `?voicePreview=1`; their words, character identity, emotional fit, and production quality require listening review before default playback.

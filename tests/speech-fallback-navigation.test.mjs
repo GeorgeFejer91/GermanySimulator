@@ -97,7 +97,7 @@ const recordingContext=vm.createContext({
  playSyntheticStimulus:()=>{throw new Error("unexpected fallback")},finishStimulus:()=>{}
 });
 vm.runInContext(`const AUDIO_CLASS={TEXT:"audio-text"},AUDIO_MIX={ATTACK_SECONDS:.12,FOREGROUND:1};let stimulusGeneration=1,activeStimulus=item,recordedSpeechSource,recordedSpeechGain;${sourceOf("playRecordedStimulus")};playRecordedStimulus(item,1)`,recordingContext);
-await Promise.resolve();
+await new Promise(resolve=>setImmediate(resolve));
 assert.deepEqual(order,[],"recorded text must wait for the audio context to resume");
 resumeAudio();
 await new Promise(resolve=>setImmediate(resolve));

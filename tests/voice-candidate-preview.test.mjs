@@ -87,7 +87,8 @@ for(const person of cast.roleProfiles.filter(person=>person.voiceId.startsWith("
 }
 assert.equal(on.candidateClip("amt-horst-stempelmann","a different line"),null);
 const game=source("game.js").toString(),amt=source("buergeramt.js").toString(),phone=source("buergeramt-phone.js").toString();
-assert.ok(game.includes("speechCatalog.candidateClip?.(candidateVoiceId||voiceKey,text)"));
+assert.ok(game.includes("id=candidateVoiceId||voiceKey,recording=speechCatalog.candidateClip?.(id,text)"));
+assert.ok(game.includes("speechCatalog.candidateSequence?.(id,candidateSegments)"));
 assert.ok(game.includes("n.voiceId"));
 assert.ok(game.includes("candidateVoiceId:n.voiceId"));
 assert.ok(game.includes('candidateVoiceId:"polizei-heinrich-wachtmeister"'));

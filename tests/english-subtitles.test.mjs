@@ -47,7 +47,7 @@ assert.ok(Object.keys(library.lines).length>90,"fixed dialogue translation catal
 const walk=directory=>readdirSync(directory,{withFileTypes:true}).flatMap(entry=>entry.isDirectory()?walk(join(directory,entry.name)):[join(directory,entry.name)]);
 // Only the short Neuland excerpt is shipped by the runtime; other Merkel and
 // Merz files are source references awaiting transcript, rights and gameplay review.
-const voiceFiles=walk(join(root,"assets/voices")).filter(path=>path.endsWith(".mp3")&&!path.includes(`${sep}candidate-dialogue${sep}`)&&!path.includes(`${sep}profile-auditions${sep}`)&&!path.includes(`${sep}laws${sep}`)&&!path.includes(`${sep}merz${sep}`)&&(!path.includes(`${sep}merkel${sep}`)||path.endsWith(`${sep}neuland-0-3s.mp3`)));
+const voiceFiles=walk(join(root,"assets/voices")).filter(path=>path.endsWith(".mp3")&&!path.includes(`${sep}candidate-dialogue${sep}`)&&!path.includes(`${sep}profile-auditions${sep}`)&&!path.includes(`${sep}quiz-segments${sep}`)&&!path.includes(`${sep}laws${sep}`)&&!path.includes(`${sep}merz${sep}`)&&(!path.includes(`${sep}merkel${sep}`)||path.endsWith(`${sep}neuland-0-3s.mp3`)));
 voiceFiles.push(join(root,"assets/merkel-wir-schaffen-das.mp3"));
 for(const path of voiceFiles){
  const url="./"+relative(root,path).split(sep).join("/");
@@ -87,7 +87,8 @@ assert.match(css,/\.english-subtitle\[hidden\]\{[^}]*visibility:hidden/,"the emp
 assert.match(subtitleLayout,/const height=box\.getBoundingClientRect\(\)\.height/,"subtitle layout must reserve its height when empty");
 assert.match(subtitleLayout,/prepareWithSegments[\s\S]*measureLineStats/,"subtitle layout must measure text with Pretext");
 assert.match(game,/u\.onstart=\(\)=>\{[^\n]*startSubtitle\(item\)/,"browser-speech subtitles must start on the utterance start event");
-assert.match(game,/item\.subtitleElapsed=\(\)=>a\.currentTime-t;source\.onended=[^;]+;source\.start\(\);item\.start\?\.\(\);startSubtitle\(item\)/,"recorded subtitles and audio must start in the same task");
+assert.match(game,/item\.subtitleElapsed=\(\)=>a\.currentTime-t;sources\.at\(-1\)\.onended=\(\)=>finishStimulus/,"recorded subtitles must use the audio clock and complete after the final segment");
+assert.match(game,/buffers\.forEach\(\(buffer,index\)=>\{sources\[index\]\.start\(t\+offset\);offset\+=buffer\.duration\+gap\}\);item\.start\?\.\(\);startSubtitle\(item\)/,"recorded dialogue and subtitles must reveal when the scheduled sources start");
 assert.match(game,/const time=item\.subtitleElapsed\?\.\(\)\?\?elapsed[\s\S]*requestAnimationFrame\(update\)/,"long cues must continuously follow the audio clock instead of accumulating timer drift");
 assert.match(game,/function finishStimulus\([^)]*\)\{[^}]*clearSubtitle\(\)/,"broker completion must clear subtitles");
 assert.match(game,/function stopSpeech\([^)]*\)[\s\S]*clearSubtitle\(\)/,"broker cancellation must clear subtitles");
