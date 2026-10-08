@@ -2,6 +2,7 @@ import {createHash} from 'node:crypto';
 import {readFileSync, writeFileSync, existsSync} from 'node:fs';
 import {resolve} from 'node:path';
 import {STREET_CATALOG} from '../assets/models/street-characters/models.js';
+import {STREET_PERSONA_MAP, STREET_TEMPLATE_GENDER} from '../assets/models/street-characters/persona-map.js';
 
 const root = resolve(import.meta.dirname, '..');
 const source = name => readFileSync(resolve(root, name), 'utf8');
@@ -80,23 +81,43 @@ requireMatch(STREET_CATALOG.length === 8 && STREET_CATALOG.every(model =>
   'Street visual templates now own speaker identities; audit them as characters');
 requireMatch(source('assets/models/street-characters/runtime.js').includes('characterIdFor(state)'),
   'Street visual templates no longer select from NPC state');
+const streetSpeakers = [...city.map(person => person.voiceId), ...crowd];
+requireMatch(Object.keys(STREET_TEMPLATE_GENDER).length === STREET_CATALOG.length &&
+  STREET_CATALOG.every(model => Object.hasOwn(STREET_TEMPLATE_GENDER, model.id)),
+  'Missing gender presentation for a street template');
+requireMatch(Object.keys(STREET_PERSONA_MAP).length === streetSpeakers.length &&
+  streetSpeakers.every(voiceId => Object.hasOwn(STREET_PERSONA_MAP, voiceId)),
+  'Optional street pack needs an explicit template for every city and crowd speaker');
+const streetPersonaMapping = streetSpeakers.map(voiceId => {
+  const person = byVoice.get(voiceId), choice = STREET_PERSONA_MAP[voiceId];
+  requireMatch(STREET_CATALOG.some(model => model.id === choice.templateId) &&
+    STREET_TEMPLATE_GENDER[choice.templateId] === person.gender && choice.fit,
+  `Street template/gender/demeanor review missing for ${voiceId}`);
+  return {voiceId, fullName: person.fullName, gender: person.gender,
+    targetValence: person.targetValence, targetArousal: person.targetArousal,
+    generalDemeanor: person.generalDemeanor, templateId: choice.templateId, fit: choice.fit};
+});
 
 const report = {
-  schemaVersion: 1,
-  status: 'explicit_runtime_speakers_verified; optional_visual_template_mapping_pending',
+  schemaVersion: 2,
+  status: 'explicit_runtime_speakers_verified; optional_visual_template_mapping_curated; rendered_review_pending',
   sourceSha256: Object.fromEntries(['For-AI/VOICE-CAST.json', ...runtimeFiles,
     'assets/models/street-characters/models.js',
-    'assets/models/street-characters/runtime.js'].map(file => [file, hash(file)])),
+    'assets/models/street-characters/runtime.js',
+    'assets/models/street-characters/persona-map.js'].map(file => [file, hash(file)])),
   counts: {newNonpoliticalProfiles: newProfiles.length, existingPoliticalProfiles: political.length,
     namedCityNpcBindings: city.length, namedCrowdIdentities: crowd.length,
     staticBuergeramtSpeakers: officeSpeakers.length, decorativeClerkClones: officeClones.length,
-    optionalStreetVisualTemplates: STREET_CATALOG.length},
+    optionalStreetVisualTemplates: STREET_CATALOG.length,
+    mappedStreetSpeakers: streetPersonaMapping.length},
   staticBuergeramt: office,
   city,
   crowdVoiceIds: crowd,
-  optionalStreetVisualTemplates: STREET_CATALOG.map(({id, title, role}) => ({id, title, role})),
-  interpretation: 'The optional street meshes are candidate appearance templates assigned to existing NPC state. Their asset titles are not displayed game speaker identities and they own no dialogue or voice profile. Before accepting this pack, review persona-to-mesh and gender/demeanor fit; create a new cast entry and Secret Tunnel profile if a mesh becomes a distinct speaking character.',
-  limits: 'This static audit verifies explicit source bindings and catalogue fields, not audible identity, normal-play model rendering, every dynamic line, or the optional street pack visual review.'
+  optionalStreetVisualTemplates: STREET_CATALOG.map(({id, title, role}) =>
+    ({id, title, role, genderPresentation: STREET_TEMPLATE_GENDER[id]})),
+  optionalStreetPersonaMapping: streetPersonaMapping,
+  interpretation: 'The optional street meshes are appearance templates for 31 existing named city/crowd speakers. The runtime chooses an explicitly curated gender- and demeanor-fitting mesh by voiceId; unknown named speakers keep their existing artwork. A forced visual-debug URL can override the mesh for inspection only. Template titles are not displayed game identities and own no dialogue or voice profile. If one becomes a distinct speaking character, create a named cast entry and Secret Tunnel profile.',
+  limits: 'This static audit verifies source bindings, declared gender presentation and curated persona choices, not perceptual voice identity, rendered mesh suitability, normal-play model rendering, or every dynamic dialogue line. The street pack remains opt-in pending visual review.'
 };
 const target = resolve(root, 'For-AI/VOICE-MODEL-COVERAGE-AUDIT.json');
 const rendered = JSON.stringify(report, null, 2) + '\n';

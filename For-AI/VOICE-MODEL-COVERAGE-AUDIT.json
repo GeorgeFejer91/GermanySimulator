@@ -1,13 +1,14 @@
 {
-  "schemaVersion": 1,
-  "status": "explicit_runtime_speakers_verified; optional_visual_template_mapping_pending",
+  "schemaVersion": 2,
+  "status": "explicit_runtime_speakers_verified; optional_visual_template_mapping_curated; rendered_review_pending",
   "sourceSha256": {
     "For-AI/VOICE-CAST.json": "97f87cd9dd1b5b8391cb26e14578d3b2471b8332b3b166b7f4f70bfc724d2ed7",
     "game.js": "be3939777ce2ca45cebb1da18cdd554740e8c6eb6457faf9f675782e08ec5d0a",
     "world3d.js": "23517247db172f9408e13ab6fdea37335eee6b6bc05e3f826856e3830bc94ca9",
     "buergeramt-story.js": "082ed8fbf16cb74f730eaa87268586f5d89b518fe33ef6ee2a12381d0e23f83c",
     "assets/models/street-characters/models.js": "f221585150735d365e007f2eadfe58d1461f704824f8bd18f356f6bacfe5a4a8",
-    "assets/models/street-characters/runtime.js": "766f2ae9172ebf59ae16008def80871b603f6ad51322097d2b1ddbd9b74e65f5"
+    "assets/models/street-characters/runtime.js": "d4c25e1d37762571a0aeedc4e15c456e137fa9be21abfccb20829a1f58d16f62",
+    "assets/models/street-characters/persona-map.js": "77fd249de275c7e12debd0af4f14f30826158e0207c6920c5b01633d2aaee652"
   },
   "counts": {
     "newNonpoliticalProfiles": 56,
@@ -16,7 +17,8 @@
     "namedCrowdIdentities": 12,
     "staticBuergeramtSpeakers": 4,
     "decorativeClerkClones": 2,
-    "optionalStreetVisualTemplates": 8
+    "optionalStreetVisualTemplates": 8,
+    "mappedStreetSpeakers": 31
   },
   "staticBuergeramt": [
     {
@@ -177,44 +179,364 @@
     {
       "id": "kehrwoche",
       "title": "Frau Besenrein",
-      "role": "Kehrwoche supervisor"
+      "role": "Kehrwoche supervisor",
+      "genderPresentation": "female"
     },
     {
       "id": "ordnungsamt",
       "title": "Herr Dienstweg",
-      "role": "Clipboard inspector"
+      "role": "Clipboard inspector",
+      "genderPresentation": "male"
     },
     {
       "id": "pfand",
       "title": "Petra Mehrweg",
-      "role": "Pfand collector"
+      "role": "Pfand collector",
+      "genderPresentation": "female"
     },
     {
       "id": "wanderer",
       "title": "Uwe Allwetter",
-      "role": "Over-equipped urban hiker"
+      "role": "Over-equipped urban hiker",
+      "genderPresentation": "male"
     },
     {
       "id": "garten",
       "title": "Gisela Paragraf",
-      "role": "Allotment guardian"
+      "role": "Allotment guardian",
+      "genderPresentation": "female"
     },
     {
       "id": "pendler",
       "title": "Rolf Anschluss",
-      "role": "Permanently delayed commuter"
+      "role": "Permanently delayed commuter",
+      "genderPresentation": "male"
     },
     {
       "id": "radweg",
       "title": "Alex Klingel",
-      "role": "Bicycle-lane enforcer"
+      "role": "Bicycle-lane enforcer",
+      "genderPresentation": "ambiguous"
     },
     {
       "id": "warteschlange",
       "title": "Erika Reihenfolge",
-      "role": "Queue-order expert"
+      "role": "Queue-order expert",
+      "genderPresentation": "female"
     }
   ],
-  "interpretation": "The optional street meshes are candidate appearance templates assigned to existing NPC state. Their asset titles are not displayed game speaker identities and they own no dialogue or voice profile. Before accepting this pack, review persona-to-mesh and gender/demeanor fit; create a new cast entry and Secret Tunnel profile if a mesh becomes a distinct speaking character.",
-  "limits": "This static audit verifies explicit source bindings and catalogue fields, not audible identity, normal-play model rendering, every dynamic line, or the optional street pack visual review."
+  "optionalStreetPersonaMapping": [
+    {
+      "voiceId": "stadt-klaus-dieter-klein",
+      "fullName": "Klaus-Dieter Klein",
+      "gender": "male",
+      "targetValence": "neutral",
+      "targetArousal": "medium",
+      "generalDemeanor": "Practical, matter-of-fact passerby who points toward forms.",
+      "templateId": "pendler",
+      "fit": "Practical, ordinary passerby"
+    },
+    {
+      "voiceId": "stadt-brigitte-mueller",
+      "fullName": "Brigitte Müller",
+      "gender": "female",
+      "targetValence": "neutral",
+      "targetArousal": "medium",
+      "generalDemeanor": "Patient and procedural, directing the player toward the construction paperwork.",
+      "templateId": "warteschlange",
+      "fit": "Patient, procedural citizen"
+    },
+    {
+      "voiceId": "stadt-wolfgang-schulz",
+      "fullName": "Wolfgang Schulz",
+      "gender": "male",
+      "targetValence": "neutral",
+      "targetArousal": "medium",
+      "generalDemeanor": "Routine appointment-minded citizen.",
+      "templateId": "pendler",
+      "fit": "Routine appointment citizen"
+    },
+    {
+      "voiceId": "stadt-ursula-neumann",
+      "fullName": "Ursula Neumann",
+      "gender": "female",
+      "targetValence": "negative",
+      "targetArousal": "medium",
+      "generalDemeanor": "Restrained but openly complaining about obstruction.",
+      "templateId": "warteschlange",
+      "fit": "Citizen protesting an obstruction"
+    },
+    {
+      "voiceId": "stadt-manfred-din",
+      "fullName": "Manfred DIN",
+      "gender": "male",
+      "targetValence": "neutral",
+      "targetArousal": "medium",
+      "generalDemeanor": "Pedantic believer in order who speaks without urgency.",
+      "templateId": "ordnungsamt",
+      "fit": "Clipboard and rule-minded pedantry"
+    },
+    {
+      "voiceId": "stadt-irmgard-aktenstapel",
+      "fullName": "Irmgard Aktenstapel",
+      "gender": "female",
+      "targetValence": "negative",
+      "targetArousal": "low",
+      "generalDemeanor": "Weary citizen familiar with old forms and construction delays.",
+      "templateId": "garten",
+      "fit": "Older, weary citizen with forms"
+    },
+    {
+      "voiceId": "stadt-guenther-tuev",
+      "fullName": "Günther TÜV",
+      "gender": "male",
+      "targetValence": "negative",
+      "targetArousal": "high",
+      "generalDemeanor": "Strict, energized enforcer of everyday order.",
+      "templateId": "ordnungsamt",
+      "fit": "Strict public-order enforcer"
+    },
+    {
+      "voiceId": "stadt-hannelore-sparkasse",
+      "fullName": "Hannelore Sparkasse",
+      "gender": "female",
+      "targetValence": "neutral",
+      "targetArousal": "medium",
+      "generalDemeanor": "Dryly asks the player to clear her path and obey order.",
+      "templateId": "warteschlange",
+      "fit": "Dry concern with orderly passage"
+    },
+    {
+      "voiceId": "stadt-karl-heinz-post",
+      "fullName": "Karl-Heinz Post",
+      "gender": "male",
+      "targetValence": "neutral",
+      "targetArousal": "medium",
+      "generalDemeanor": "Detached postal worker who disclaims responsibility.",
+      "templateId": "pendler",
+      "fit": "Detached, office-going worker"
+    },
+    {
+      "voiceId": "stadt-herbert-rasenaufsicht",
+      "fullName": "Herbert Rasenaufsicht",
+      "gender": "male",
+      "targetValence": "negative",
+      "targetArousal": "high",
+      "generalDemeanor": "Forceful guardian of rules about lawns and public space.",
+      "templateId": "ordnungsamt",
+      "fit": "Forceful guardian of public-space rules"
+    },
+    {
+      "voiceId": "stadt-waltraud-ordnung",
+      "fullName": "Waltraud Ordnung",
+      "gender": "female",
+      "targetValence": "negative",
+      "targetArousal": "high",
+      "generalDemeanor": "Firm, easily provoked believer in public order.",
+      "templateId": "kehrwoche",
+      "fit": "Firm, easily provoked order keeper"
+    },
+    {
+      "voiceId": "stadt-erwin-archiv",
+      "fullName": "Erwin Archiv",
+      "gender": "male",
+      "targetValence": "negative",
+      "targetArousal": "low",
+      "generalDemeanor": "World-weary archivist who points to more forms and a permanent construction site.",
+      "templateId": "pendler",
+      "fit": "World-weary paperwork commuter"
+    },
+    {
+      "voiceId": "stadt-renate-termin",
+      "fullName": "Renate Termin",
+      "gender": "female",
+      "targetValence": "negative",
+      "targetArousal": "high",
+      "generalDemeanor": "Impatient appointment clerk who complains and demands scheduling.",
+      "templateId": "kehrwoche",
+      "fit": "Impatient appointment enforcer"
+    },
+    {
+      "voiceId": "stadt-heinz-mietnachweis",
+      "fullName": "Heinz Mietnachweis",
+      "gender": "male",
+      "targetValence": "negative",
+      "targetArousal": "low",
+      "generalDemeanor": "Dismissive, low-energy commentator on old administrative burdens.",
+      "templateId": "pendler",
+      "fit": "Tired, low-energy citizen"
+    },
+    {
+      "voiceId": "stadt-monika-zebra",
+      "fullName": "Monika Zebra",
+      "gender": "female",
+      "targetValence": "neutral",
+      "targetArousal": "medium",
+      "generalDemeanor": "Unhurried citizen who values ordinary order.",
+      "templateId": "warteschlange",
+      "fit": "Unhurried believer in ordinary order"
+    },
+    {
+      "voiceId": "stadt-joachim-fundsache",
+      "fullName": "Joachim Fundsache",
+      "gender": "male",
+      "targetValence": "negative",
+      "targetArousal": "low",
+      "generalDemeanor": "Detached clerk who refuses ownership of a situation.",
+      "templateId": "pendler",
+      "fit": "Detached administrative worker"
+    },
+    {
+      "voiceId": "stadt-ute-ruhe",
+      "fullName": "Ute Ruhe",
+      "gender": "female",
+      "targetValence": "negative",
+      "targetArousal": "low",
+      "generalDemeanor": "Quietly irritable citizen who asks for space.",
+      "templateId": "garten",
+      "fit": "Quietly irritable older citizen"
+    },
+    {
+      "voiceId": "stadt-norbert-faxrolle",
+      "fullName": "Norbert Faxrolle",
+      "gender": "male",
+      "targetValence": "negative",
+      "targetArousal": "low",
+      "generalDemeanor": "Defeated by old procedures and disclaims responsibility.",
+      "templateId": "pendler",
+      "fit": "Defeated by old procedures"
+    },
+    {
+      "voiceId": "stadt-edeltraud-trennung",
+      "fullName": "Edeltraud Trennung",
+      "gender": "female",
+      "targetValence": "neutral",
+      "targetArousal": "medium",
+      "generalDemeanor": "Bluntly procedural guide to an appointment or construction problem.",
+      "templateId": "warteschlange",
+      "fit": "Blunt procedural citizen"
+    },
+    {
+      "voiceId": "crowd-waltraud-wartemarke",
+      "fullName": "Waltraud Wartemarke",
+      "gender": "female",
+      "targetValence": "negative",
+      "targetArousal": "high",
+      "generalDemeanor": "Procedural passerby with territorial sidewalk or towel-reservation complaints",
+      "templateId": "kehrwoche",
+      "fit": "High-energy queue-order enforcer"
+    },
+    {
+      "voiceId": "crowd-klaus-dieter-knoedel",
+      "fullName": "Klaus-Dieter Knödel",
+      "gender": "male",
+      "targetValence": "negative",
+      "targetArousal": "high",
+      "generalDemeanor": "Procedural passerby with territorial sidewalk or towel-reservation complaints",
+      "templateId": "ordnungsamt",
+      "fit": "High-energy sidewalk rule keeper"
+    },
+    {
+      "voiceId": "crowd-hildegard-brotzeit",
+      "fullName": "Hildegard Brotzeit",
+      "gender": "female",
+      "targetValence": "neutral",
+      "targetArousal": "medium",
+      "generalDemeanor": "Procedural passerby with territorial sidewalk or towel-reservation complaints",
+      "templateId": "pfand",
+      "fit": "Everyday sidewalk passerby"
+    },
+    {
+      "voiceId": "crowd-guenther-gartenzaun",
+      "fullName": "Günther Gartenzaun",
+      "gender": "male",
+      "targetValence": "negative",
+      "targetArousal": "high",
+      "generalDemeanor": "Procedural passerby with territorial sidewalk or towel-reservation complaints",
+      "templateId": "ordnungsamt",
+      "fit": "Forceful territorial rule keeper"
+    },
+    {
+      "voiceId": "crowd-brigitte-bueroklammer",
+      "fullName": "Brigitte Büroklammer",
+      "gender": "female",
+      "targetValence": "negative",
+      "targetArousal": "low",
+      "generalDemeanor": "Procedural passerby with territorial sidewalk or towel-reservation complaints",
+      "templateId": "garten",
+      "fit": "Low-key, territorial passerby"
+    },
+    {
+      "voiceId": "crowd-horst-hausordnung",
+      "fullName": "Horst Hausordnung",
+      "gender": "male",
+      "targetValence": "negative",
+      "targetArousal": "high",
+      "generalDemeanor": "Procedural passerby with territorial sidewalk or towel-reservation complaints",
+      "templateId": "ordnungsamt",
+      "fit": "High-energy house-order enforcer"
+    },
+    {
+      "voiceId": "crowd-irmgard-aktenordner",
+      "fullName": "Irmgard Aktenordner",
+      "gender": "female",
+      "targetValence": "neutral",
+      "targetArousal": "medium",
+      "generalDemeanor": "Procedural passerby with territorial sidewalk or towel-reservation complaints",
+      "templateId": "warteschlange",
+      "fit": "Procedure-minded passerby"
+    },
+    {
+      "voiceId": "crowd-manfred-mittagsruhe",
+      "fullName": "Manfred Mittagsruhe",
+      "gender": "male",
+      "targetValence": "negative",
+      "targetArousal": "low",
+      "generalDemeanor": "Procedural passerby with territorial sidewalk or towel-reservation complaints",
+      "templateId": "pendler",
+      "fit": "Low-energy passerby guarding quiet"
+    },
+    {
+      "voiceId": "crowd-elfriede-eingabe",
+      "fullName": "Elfriede Eingabe",
+      "gender": "female",
+      "targetValence": "neutral",
+      "targetArousal": "medium",
+      "generalDemeanor": "Procedural passerby with territorial sidewalk or towel-reservation complaints",
+      "templateId": "warteschlange",
+      "fit": "Procedural queue-minded passerby"
+    },
+    {
+      "voiceId": "crowd-ruediger-rasenkante",
+      "fullName": "Rüdiger Rasenkante",
+      "gender": "male",
+      "targetValence": "negative",
+      "targetArousal": "high",
+      "generalDemeanor": "Procedural passerby with territorial sidewalk or towel-reservation complaints",
+      "templateId": "ordnungsamt",
+      "fit": "High-energy lawn-rule enforcer"
+    },
+    {
+      "voiceId": "crowd-baerbel-brezel",
+      "fullName": "Bärbel Brezel",
+      "gender": "female",
+      "targetValence": "neutral",
+      "targetArousal": "medium",
+      "generalDemeanor": "Procedural passerby with territorial sidewalk or towel-reservation complaints",
+      "templateId": "pfand",
+      "fit": "Everyday sidewalk passerby"
+    },
+    {
+      "voiceId": "crowd-dietmar-din-norm",
+      "fullName": "Dietmar DIN-Norm",
+      "gender": "male",
+      "targetValence": "negative",
+      "targetArousal": "low",
+      "generalDemeanor": "Procedural passerby with territorial sidewalk or towel-reservation complaints",
+      "templateId": "pendler",
+      "fit": "Low-energy procedural passerby"
+    }
+  ],
+  "interpretation": "The optional street meshes are appearance templates for 31 existing named city/crowd speakers. The runtime chooses an explicitly curated gender- and demeanor-fitting mesh by voiceId; unknown named speakers keep their existing artwork. A forced visual-debug URL can override the mesh for inspection only. Template titles are not displayed game identities and own no dialogue or voice profile. If one becomes a distinct speaking character, create a named cast entry and Secret Tunnel profile.",
+  "limits": "This static audit verifies source bindings, declared gender presentation and curated persona choices, not perceptual voice identity, rendered mesh suitability, normal-play model rendering, or every dynamic dialogue line. The street pack remains opt-in pending visual review."
 }
