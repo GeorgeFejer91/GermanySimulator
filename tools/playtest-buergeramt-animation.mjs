@@ -40,6 +40,7 @@ function observe(page,report){
  page.on('response',r=>{if(r.status()>=400)report.errors.push(`HTTP ${r.status()}: ${r.url()}`)});
 }
 async function record(page,dir,label,images){
+ await page.evaluate(()=>Germany3D.sync());
  const file=path.join(dir,`${label}.png`),data=await page.screenshot({path:file,timeout:60000});
  images.push({label,data});return file;
 }
@@ -62,11 +63,12 @@ async function officeCase(name,viewport,mobile,dpr){
   await page.goto(officeUrl.href,{waitUntil:'commit',timeout:60000});
   await page.waitForFunction(()=>window.BuergeramtLevel?.active&&window.Germany3D?.ready,null,{timeout:60000});
   // Fixture: stop only the game loop's public update call. Manual steps invoke
-  // the original production update and real Three.js sync at 60 Hz.
+  // the original production update at 60 Hz. Render observed samples explicitly;
+  // drawing every fast-forward tick needlessly stalls software WebGL under load.
   await page.evaluate(()=>{
    BuergeramtLevel.replay({cinematics:false,voiceOn:()=>false,subtitlesOn:()=>false});
    const level=BuergeramtLevel,update=level.update.bind(level),view=Object.getOwnPropertyDescriptor(level,'view');
-   level.update=()=>{};window.__animationStep=()=>{update(1/60);Germany3D.sync()};
+   level.update=()=>{};window.__animationStep=()=>update(1/60);
    window.__animationFocus={id:null,distance:6.2};
    Object.defineProperty(level,'view',{configurable:true,get(){const actual=view.get.call(level),focus=window.__animationFocus;if(!focus.id)return actual;const actor=level.characters.find(a=>a.id===focus.id);return actor?{...actual,x:actor.x,z:actor.z-focus.distance,yaw:Math.PI}:actual}});
    window.__animationRestore=()=>Object.defineProperty(level,'view',view);
@@ -86,7 +88,7 @@ async function officeCase(name,viewport,mobile,dpr){
   report.startPosition=[first.x,first.z];
   const sprite=await page.evaluate(async id=>{const mobile=matchMedia('(max-width: 700px)').matches,img=new Image();img.src=`./assets/buergeramt/characters/${id}-motion${mobile?'-mobile':''}.webp`;await img.decode();const columns=img.naturalWidth/(mobile?160:320);return{mobile,atlas:[img.naturalWidth,img.naturalHeight],columns,walkFrames:columns===12?16:8}},selected);
   assert([8,12].includes(sprite.columns),`unexpected atlas grid ${JSON.stringify(sprite)}`);report.sprite=sprite;
-  const seen=new Set();let nearCaptured=false;
+  const seen=new Set();report.near=[];
   for(let tick=0;tick<90;tick++){
    const state=await page.evaluate(id=>BuergeramtLevel.characters.find(a=>a.id===id),selected);
    if(state.mode!=='flinch')break;
@@ -98,13 +100,12 @@ async function officeCase(name,viewport,mobile,dpr){
     assert.equal(far.frame,expected,`far renderer cell for flinch ${state.frame}`);assert.equal(far.detail,false,'far action uses encoded atlas');
     await record(page,dir,`flinch-${String(state.frame).padStart(2,'0')}-far`,images);
     report.frames.push({stateFrame:state.frame,phase:state.phase,renderCell:far.frame,farDetail:far.detail});
-    if(!nearCaptured){
+    if([0,4,7].includes(state.frame)){
      await page.evaluate(()=>{__animationFocus.distance=2.7;Germany3D.sync()});
      await page.waitForFunction(id=>{Germany3D.sync();return Germany3D.amtCharacters.find(a=>a.name===id)?.detail},selected,{timeout:12000});
      const near=await page.evaluate(id=>Germany3D.amtCharacters.find(a=>a.name===id),selected);
-     assert.equal(near.frame,expected);report.near={renderCell:near.frame,detail:near.detail,texelHeight:near.texelHeight};
-     await record(page,dir,'flinch-near-source-detail',images);
-     nearCaptured=true;
+     assert.equal(near.frame,expected);report.near.push({stateFrame:state.frame,renderCell:near.frame,detail:near.detail,texelHeight:near.texelHeight});
+     await record(page,dir,`flinch-${state.frame}-near-source-detail`,images);
     }
    }
    await page.evaluate(()=>__animationStep());
@@ -145,7 +146,7 @@ try{
   catch(error){report.result='FAIL';report.errors.push(String(error))}
   finally{results.push(report);await context.close()}
  }
- fs.writeFileSync(path.join(output,'browser-results.json'),JSON.stringify({silent:true,physicalAndroid:false,fixture:'game.update wrapper frozen; original update(1/60) plus real Germany3D.sync; renderer-only camera focus; near action detail is one static source pose',results},null,2));
+ fs.writeFileSync(path.join(output,'browser-results.json'),JSON.stringify({silent:true,physicalAndroid:false,fixture:'game.update wrapper frozen; original update(1/60), real Germany3D.sync at observed samples; renderer-only camera focus; near action detail is one static source pose',results},null,2));
  console.log(JSON.stringify(results.map(({name,result,actor,frames,errors,warnings})=>({name,result,actor,frames:frames?.length,errors,warnings}))));
  if(results.some(r=>r.result!=='PASS'||r.errors.length))process.exitCode=1;
 }finally{await browser.close()}
