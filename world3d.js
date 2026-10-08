@@ -960,6 +960,7 @@ function showRendererFailure(error){
   function updatePowerPlants(){const now=performance.now()*.00016;for(const p of coalSmoke){const t=(now+p.index/coalSmoke.length)%1;p.mesh.position.set(p.x+Math.sin(now*25+p.index)*.52*t,p.y+t*4.5,p.z+Math.cos(now*19+p.index)*.4*t);p.mesh.scale.setScalar(.9+t*1.8);p.mesh.material.opacity=.88*(1-t)}for(const p of coalBelt){const t=(now*4+p.index/coalBelt.length)%1;p.mesh.position.lerpVectors(p.from,p.to,t);p.mesh.rotation.x+=.05;p.mesh.rotation.z+=.04}}
   // The Amt uses the same renderer and canvas as the city, with its own close camera.
   const amtScene=new T.Scene();amtScene.background=new T.Color(0xb8b4a5);
+  const amtDayColor=amtScene.background.clone();amtScene.fog=new T.FogExp2(0x040308,0);
   const amtCamera=new T.PerspectiveCamera(69,innerWidth/innerHeight,.06,35);
   amtScene.add(new T.HemisphereLight(0xffffff,0x716b5c,2.2));
   const amtLight=new T.DirectionalLight(0xffeac7,1.5);amtLight.position.set(-3,5,2);amtScene.add(amtLight);
@@ -1172,12 +1173,16 @@ function showRendererFailure(error){
       const distance=Math.hypot(amtCamera.position.x-state.x,amtCamera.position.z-state.z),close=distance<5;
       if(close&&!actor.detail){const url=`./assets/buergeramt/characters/${actor.id}-detail.webp?v=20261007-paint-detail`;
         actor.detail=amtTexture(url,undefined,error=>console.warn("Bürgeramt detail unavailable",actor.id,error));}
-      const row=state.mode==="walk"?({down:0,right:1,up:2,left:3}[state.direction]??0):({work:4,gesture:5,look:6,flinch:7}[state.mode]??4);
-      if(close&&row<4&&actor.walkDirection!==state.direction){
+      const omen=level.omen,facePlayer=actor.id==="aktenkurier"&&["approach","blackout","glare"].includes(omen.phase);
+      if(actor.mesh.material.fog===facePlayer){actor.mesh.material.fog=!facePlayer;actor.mesh.material.needsUpdate=true}
+      const direction=facePlayer?"down":state.direction;
+      // Hold the registered frontal gesture as the paint becomes a relief.
+      const row=facePlayer&&omen.life.opacity>0?5:state.mode==="walk"?({down:0,right:1,up:2,left:3}[direction]??0):({work:4,gesture:5,look:6,flinch:7}[state.mode]??4);
+      if(close&&row<4&&actor.walkDirection!==direction){
         if(actor.walkDetail){if(actor.mesh.material.map===actor.walkDetail){actor.mesh.material.map=actor.atlas;actor.mesh.material.needsUpdate=true}actor.walkDetail.dispose()}
-        actor.walkDirection=state.direction;
+        actor.walkDirection=direction;
         const smallDetail=amtMobile&&(window.devicePixelRatio||1)<1.5&&actor.walkFrames===16;
-        const url=`./assets/buergeramt/characters/${actor.id}-walk-${state.direction}-detail${smallDetail?"-mobile":""}.webp?v=20261008-dense-walk`;
+        const url=`./assets/buergeramt/characters/${actor.id}-walk-${direction}-detail${smallDetail?"-mobile":""}.webp?v=20261008-dense-walk`;
         actor.walkDetail=amtTexture(url,undefined,error=>console.warn("Bürgeramt walk detail unavailable",actor.id,error));
       }
       // The simulation's distance clock keeps its cadence and action boundaries.
@@ -1186,7 +1191,7 @@ function showRendererFailure(error){
       const cell=row<4?row*actor.walkFrames+sample:4*actor.walkFrames+(row-4)*8+sample;
       actor.cell=cell;
       const actionDetail=close&&row>=4&&!!actor.detail?.image;
-      const walkDetail=close&&row<4&&actor.walkDirection===state.direction&&!!actor.walkDetail?.image;
+      const walkDetail=close&&row<4&&actor.walkDirection===direction&&!!actor.walkDetail?.image;
       const texture=actionDetail?actor.detail:walkDetail?actor.walkDetail:actor.atlas;
       if(texture&&actor.mesh.material.map!==texture){actor.mesh.material.map=texture;actor.mesh.material.needsUpdate=true}
       const key=actionDetail?`detail:${row}`:walkDetail?`walk:${row}:${sample}`:`atlas:${cell}`;
@@ -1221,8 +1226,8 @@ function showRendererFailure(error){
       void main(){
         vec2 p=(spotUv-focus)/radius;float d=length(p);
         float dark=smoothstep(.66,1.04,d),halo=exp(-pow((d-.86)/.13,2.0));
-        vec3 shimmer=.5+.5*cos(6.28318*(clock*.07+vec3(0.0,.32,.65)+d*.22));
-        vec3 color=mix(vec3(.005,.006,.012),shimmer*.22,halo);
+        vec3 ink=vec3(.035,.020,.055)*(.88+.12*sin(clock*.8+d*2.0));
+        vec3 color=mix(vec3(.003,.002,.007),ink,halo);
         // The moving tunnel is now a Gaussian volume. This only seals its edges.
         float window=exp(-pow((d-1.02)/.42,2.0));
         gl_FragColor=vec4(color,strength*clamp(dark*.99+halo*.27-reveal*window*.60,0.0,.995));
@@ -1245,13 +1250,13 @@ function showRendererFailure(error){
     }
     if(omen.phase==="recover"||!omen.enabled||!omen.phase&&!["outside","walk-sign"].includes(level.stage)){clearAmtOmenSplat();amtOmenSkipped=true;return}
     // A late optional asset never replaces the actor halfway through his line.
-    if((omen.phase==="blackout"||omen.phase==="glare")&&!amtOmenSplat){amtOmenSkipped=true;amtOmenRequest?.abort()}
+    if(omen.life.opacity>0&&!amtOmenSplat){amtOmenSkipped=true;amtOmenRequest?.abort()}
     if(!amtOmenRequest&&!amtOmenSplat&&!amtOmenSkipped&&!document.hidden&&
        ["outside","walk-sign","omen"].includes(level.stage)){
       const request=new AbortController(),visit=amtOmenVisit;amtOmenRequest=request;
       const prepare=async()=>{
         if(request.signal.aborted||document.hidden||!level.active)return null;
-        const module=await import("./buergeramt-splat.js?v=20261008-omen-depth");
+        const module=await import("./buergeramt-splat.js?v=20261008-omen-facing-score");
         request.signal.throwIfAborted();
         return module.createOmenSplat({THREE:T,renderer,scene:amtScene,signal:request.signal});
       };
@@ -1275,8 +1280,8 @@ function showRendererFailure(error){
       return false;
     }
     if(!amtHiDpi){amtHiDpi=true;resize()}
-    loadAmtImages();const view=level.view;amtCamera.position.set(view.x,1.68,view.z);amtCamera.rotation.set(0,-view.yaw,0);if(level.qrSvg)setAmtQr(level.qrSvg);const now=performance.now();animateAmtCharacters(now,level);animateAmtMoving(now,level);updateAmtOmenSplat(level);const call=level.queueDisplay;if(call!==lastCall){lastCall=call;callCtx.fillStyle="#152527";callCtx.fillRect(0,0,512,256);callCtx.textAlign="center";callCtx.textBaseline="middle";callCtx.fillStyle="#c94839";callCtx.font="bold 112px monospace";callCtx.fillText(call,256,135,460);callTexture.needsUpdate=true}renderer.render(amtScene,amtCamera);
-    const omen=level.omen;if(omen.strength>0){omenFocus.set(omen.x,1.04,omen.z).project(amtCamera);omenMaterial.uniforms.focus.value.set((omenFocus.x+1)/2,(omenFocus.y+1)/2);omenMaterial.uniforms.radius.value.set(Math.min(.43,.31/Math.max(.75,innerWidth/innerHeight)),.47);omenMaterial.uniforms.strength.value=omen.strength;omenMaterial.uniforms.clock.value=amtReducedMotion.matches?0:omen.revealTime||omen.strength*4;omenMaterial.uniforms.reveal.value=amtReducedMotion.matches?0:amtOmenSplat?.inspect().reveal||0;renderer.autoClear=false;renderer.render(omenScene,omenCamera);renderer.autoClear=true}
+    loadAmtImages();const darkness=level.omen.strength;amtScene.fog.density=.46*Math.pow(darkness,1.2);amtScene.background.copy(amtDayColor).lerp(amtScene.fog.color,darkness);const view=level.view;amtCamera.position.set(view.x,1.68,view.z);amtCamera.rotation.set(0,-view.yaw,0);if(level.qrSvg)setAmtQr(level.qrSvg);const now=performance.now();animateAmtCharacters(now,level);animateAmtMoving(now,level);updateAmtOmenSplat(level);const call=level.queueDisplay;if(call!==lastCall){lastCall=call;callCtx.fillStyle="#152527";callCtx.fillRect(0,0,512,256);callCtx.textAlign="center";callCtx.textBaseline="middle";callCtx.fillStyle="#c94839";callCtx.font="bold 112px monospace";callCtx.fillText(call,256,135,460);callTexture.needsUpdate=true}renderer.render(amtScene,amtCamera);
+    const omen=level.omen;if(omen.strength>0){omenFocus.set(omen.x,1.04,omen.z).project(amtCamera);omenMaterial.uniforms.focus.value.set((omenFocus.x+1)/2,(omenFocus.y+1)/2);omenMaterial.uniforms.radius.value.set(Math.min(.43,.31/Math.max(.75,innerWidth/innerHeight)),.47);omenMaterial.uniforms.strength.value=omen.strength;omenMaterial.uniforms.clock.value=amtReducedMotion.matches?0:omen.life.time;omenMaterial.uniforms.reveal.value=amtReducedMotion.matches?0:amtOmenSplat?.inspect().reveal||0;renderer.autoClear=false;renderer.render(omenScene,omenCamera);renderer.autoClear=true}
     return true}
   function resize(){renderer.setPixelRatio(Math.min(devicePixelRatio||1,1,Math.sqrt(1600000/Math.max(1,innerWidth*innerHeight))));renderer.setSize(innerWidth,innerHeight,false);camera.aspect=innerWidth/innerHeight;camera.updateProjectionMatrix();amtCamera.aspect=innerWidth/innerHeight;amtCamera.updateProjectionMatrix()}resize();addEventListener("resize",resize,{passive:true});
   const spawnProbe=new T.Vector3();

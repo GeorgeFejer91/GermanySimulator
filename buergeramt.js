@@ -33,7 +33,7 @@ function applyMix(){if(officeAudio){officeAudio.ambience.gain.value=.006*mix.amb
 for(const slider of mixPanel.querySelectorAll("[data-amt-volume]")){const key=slider.dataset.amtVolume;slider.value=String(Math.round(mix[key]*100));slider.addEventListener("input",()=>{mix[key]=Number(slider.value)/100;applyMix();try{localStorage.setItem("amt-mix-v1",JSON.stringify(mix))}catch{}})}
 function initOfficeAudio(){
  try{if(options?.cityAudioBusy?.())return null;const Audio=window.AudioContext||window.webkitAudioContext;if(!Audio||navigator.userActivation&&!navigator.userActivation.hasBeenActive)return null;
-  if(!officeAudio){const ctx=new Audio(),ambience=ctx.createGain(),fx=ctx.createGain(),bus=ctx.createGain(),signal=ctx.createGain(),hum=ctx.createOscillator();hum.type="sine";hum.frequency.value=53;ambience.connect(bus);fx.connect(bus);bus.connect(ctx.destination);signal.connect(ctx.destination);hum.connect(ambience);hum.start();officeAudio={ctx,ambience,fx,bus,signal,hum};applyMix();officeAudio.omenBuffers=Promise.all(["bed","tension"].map(async name=>{const response=await fetch("assets/audio/buergeramt-omen/"+name+".ogg");if(!response.ok)throw new Error("Omen audio unavailable");return ctx.decodeAudioData(await response.arrayBuffer())})).catch(()=>null)}
+  if(!officeAudio){const ctx=new Audio(),ambience=ctx.createGain(),fx=ctx.createGain(),bus=ctx.createGain(),signal=ctx.createGain(),hum=ctx.createOscillator();hum.type="sine";hum.frequency.value=53;ambience.connect(bus);fx.connect(bus);bus.connect(ctx.destination);signal.connect(ctx.destination);hum.connect(ambience);hum.start();officeAudio={ctx,ambience,fx,bus,signal,hum};applyMix();officeAudio.omenBuffers=Promise.all(["bed","tension"].map(async name=>{const response=await fetch("assets/audio/buergeramt-omen/"+name+".ogg?v=20261008-frontal-score");if(!response.ok)throw new Error("Omen audio unavailable");return ctx.decodeAudioData(await response.arrayBuffer())})).catch(()=>null)}
   if(officeAudio.ctx.state==="suspended")officeAudio.ctx.resume().catch(()=>{});return officeAudio;
  }catch{return null}
 }
@@ -53,7 +53,7 @@ function startOmenTone(){
  const attach=(source,gain)=>{const voice={source,gain,ended:false};tone.voices.push(voice);source.onended=()=>{if(voice.ended)return;voice.ended=true;source.disconnect();gain.disconnect();if(tone.voices.every(item=>item.ended)){output.disconnect();filter.disconnect()}}};
  // The small oscillator bed is also the no-network/no-codec fallback.
  for(const [index,frequency] of [63.7,64.4,95.35,191.1].entries()){
-  const osc=ctx.createOscillator(),gain=ctx.createGain();osc.type=index===3?"triangle":"sine";osc.frequency.value=frequency;gain.gain.value=index===3?.025:.045;osc.connect(gain).connect(output);attach(osc,gain);osc.start(now);osc.stop(tone.endAt);
+  const osc=ctx.createOscillator(),gain=ctx.createGain();osc.type=["sine","sine","sawtooth","square"][index];osc.frequency.value=frequency;gain.gain.value=index===3?.018:.045;osc.connect(gain).connect(output);attach(osc,gain);osc.start(now);osc.stop(tone.endAt);
  }
  omenTone=tone;updateOmenTone();
  audio.omenBuffers.then(buffers=>{
@@ -68,10 +68,13 @@ function startOmenTone(){
 function updateOmenTone(){
  updateOmenSpeech();
  const tone=omenTone;if(!tone)return;const now=tone.ctx.currentTime,p=omen.strength,speech=omen.speech,speaking=omen.phase==="blackout"&&speech?.startedAt!==null&&speech?.startedAt!==undefined;
- const tension=speech?.tension??0,duck=speaking?(speech.paused?.3:.42+.14*tension):1;
- tone.output.gain.setTargetAtTime(document.hidden?0:(.08+.57*p*p)*duck,now,.06);
- tone.filter.frequency.setTargetAtTime(280+(speaking?850+1750*tension:3300)*p*p,now,.09);
- tone.stems.forEach((gain,index)=>gain.gain.setTargetAtTime(index===0?.65:.8*p*p*(speaking?.3+.7*tension:1),now,.12));
+ const life=omenLife(),tension=speech?.tension??0,duck=speaking?(speech.paused?.22:.36+.12*tension):1;
+ // The same bounded pulse contracts the Gaussian volume: no independent beat timer.
+ const drive=(.055+.72*life.pressure)*(.62+.38*life.pulse);
+ tone.output.gain.setTargetAtTime(document.hidden?0:drive*duck,now,.018);
+ tone.filter.frequency.setTargetAtTime(240+(speaking?650+2200*tension:4600)*life.pressure+550*life.pulse*p,now,.035);
+ tone.filter.Q.setTargetAtTime(.65+1.35*life.pressure,now,.06);
+ tone.stems.forEach((gain,index)=>gain.gain.setTargetAtTime(index===0?.72:life.pressure*(.55+.45*life.pulse)*(speaking?.25+.65*tension:1),now,.025));
  // Pitch is an authored voice control, not measured Hz. Map it gently to score colour.
  const semitones=speech?Math.max(-6,Math.min(3,(speech.pitch-1)*4+speech.semitones)):0,ratio=Math.pow(2,semitones/12);
  tone.voices.forEach(({source},index)=>{if(index<4)source.frequency.setTargetAtTime([63.7,64.4,95.35,191.1][index]*ratio,now,.12);else source.playbackRate.setTargetAtTime(ratio,now,.12)});
@@ -94,7 +97,13 @@ const characterRoutes=[
 ];
 const characters=characterRoutes.map(route=>({id:route.id,route,x:route.points[0][0],z:route.points[0][1],target:1,direction:"up",mode:"work",pause:1.1,stride:0,workClock:0,encounters:0,sequence:[{mode:"work",duration:1.1}],pending:false,priority:0,attention:0}));
 let characterMood=null;
-const omen={used:false,phase:"",strength:0,hold:0,roomTime:0,startDistance:0,resume:"walk-sign",resumeYaw:0,recoverFromYaw:0,speech:null,visit:0,revealTime:0};
+const omen={used:false,phase:"",strength:0,hold:0,roomTime:0,startDistance:0,resume:"walk-sign",resumeYaw:0,recoverFromYaw:0,speech:null,visit:0,revealTime:0,lifeTime:0,lifeClock:0};
+function omenLife(){
+ const live=["approach","blackout","glare"].includes(omen.phase),p=live?omen.strength:0,tension=omen.speech?.tension||0;
+ const smooth=value=>{const t=Math.max(0,Math.min(1,value));return t*t*(3-2*t)};
+ return {time:omen.lifeTime,clock:omen.lifeClock,depth:smooth((p-.05)/.95),opacity:smooth((p-.08)/.24),
+  pressure:p*p*(.72+.28*tension),pulse:live?Math.pow(.5+.5*Math.cos(omen.lifeClock*Math.PI*2),8)*(omen.speech?.paused?.15:1):0};
+}
 const omenSpeechMarks=story.omen.delivery.contour.map(mark=>({...mark,index:story.omen.line.indexOf(mark.word)})).filter(mark=>mark.index>=0);
 function updateOmenSpeech(){
  const speech=omen.speech;if(!speech||speech.mode==="waiting")return;
@@ -108,7 +117,7 @@ function updateOmenSpeech(){
  const blend=left===right?0:Math.max(0,Math.min(1,(index-left.index)/(right.index-left.index)));
  speech.tension=left.tension+(right.tension-left.tension)*blend;speech.semitones=left.semitones+(right.semitones-left.semitones)*blend;
 }
-function resetOmen(){stopOmenTone();omen.used=false;omen.phase="";omen.strength=0;omen.hold=0;omen.roomTime=0;omen.speech=null;omen.visit++;omen.revealTime=0;omen.resumeYaw=view.yaw;omen.recoverFromYaw=view.yaw;applyMix()}
+function resetOmen(){stopOmenTone();omen.used=false;omen.phase="";omen.strength=0;omen.hold=0;omen.roomTime=0;omen.speech=null;omen.visit++;omen.revealTime=0;omen.lifeTime=0;omen.lifeClock=0;omen.resumeYaw=view.yaw;omen.recoverFromYaw=view.yaw;applyMix()}
 function beginOmen(actor){
  const verse=story.omen;
  omen.phase="blackout";omen.strength=1;omen.revealTime=0;actor.pending=false;actor.sequence=[];actor.priority=4;actor.mode="gesture";actor.workClock=0;
@@ -146,6 +155,9 @@ function updateOmen(dt){
   omen.hold=Math.max(0,omen.hold-dt);
   const turn=Math.atan2(Math.sin(omen.resumeYaw-omen.recoverFromYaw),Math.cos(omen.resumeYaw-omen.recoverFromYaw));view.yaw=omen.recoverFromYaw+turn*(1-omen.hold/.25);
   if(omen.hold===0)omen.phase="";
+ }
+ if(["approach","blackout","glare"].includes(omen.phase)&&!omen.speech?.paused){
+  omen.lifeTime+=dt;omen.lifeClock+=dt*(.65+2.1*omen.strength+.35*(omen.speech?.tension||0));
  }
  updateOmenTone();
 }
@@ -447,5 +459,5 @@ document.addEventListener("visibilitychange",()=>{if(document.hidden)held.clear(
 document.addEventListener("pointermove",event=>{if(active&&walking()&&!omen.phase&&event.buttons===1&&!event.target.closest("button"))view.yaw+=event.movementX*.004});
 document.querySelectorAll("[data-amt-key]").forEach(button=>{const key=button.dataset.amtKey;button.addEventListener("pointerdown",e=>{if(!active||!walking()||omen.phase)return;e.preventDefault();button.setPointerCapture(e.pointerId);held.add(key)});for(const type of ["pointerup","pointercancel","lostpointercapture"])button.addEventListener(type,()=>held.delete(key))});
 document.getElementById("amt-touch-e").addEventListener("click",interact);document.getElementById("amt-leave").addEventListener("click",()=>close());exit.addEventListener("click",()=>close());
-window.BuergeramtLevel={open,replay(config){close(false);open(config)},update,interact,setOfficeObstacles(items){officeObstacles=Array.isArray(items)?items.filter(o=>[o.x,o.z,o.w,o.d].every(Number.isFinite)&&o.w>0&&o.d>0):[]},get active(){return active},get stage(){return stage},get queueDisplay(){return queueDisplay},get qrSvg(){return qrSvg},get phoneUrl(){return link?BuergeramtLink.phoneUrl(link.invitation,options.subtitlesOn?.()):""},get timing(){return JSON.parse(JSON.stringify(timing))},get view(){return{x:view.x,z:view.z,yaw:view.yaw}},get characters(){return characters.map(actor=>({id:actor.id,x:actor.x,z:actor.z,direction:actor.direction,mode:actor.mode,phase:characterPhase(actor),frame:Math.min(7,Math.floor(characterPhase(actor)*8))}))},get characterMood(){return characterMood},get clerkPerformance(){return clerkPerformance()},get omen(){return{phase:omen.phase,strength:omen.strength,visit:omen.visit,revealTime:omen.revealTime,enabled:options?.cinematics!==false,x:characters[0].x,z:characters[0].z,speech:omen.speech?{...omen.speech}:null}},get registeredName(){return registeredName},get activated(){return activated}};
+window.BuergeramtLevel={open,replay(config){close(false);open(config)},update,interact,setOfficeObstacles(items){officeObstacles=Array.isArray(items)?items.filter(o=>[o.x,o.z,o.w,o.d].every(Number.isFinite)&&o.w>0&&o.d>0):[]},get active(){return active},get stage(){return stage},get queueDisplay(){return queueDisplay},get qrSvg(){return qrSvg},get phoneUrl(){return link?BuergeramtLink.phoneUrl(link.invitation,options.subtitlesOn?.()):""},get timing(){return JSON.parse(JSON.stringify(timing))},get view(){return{x:view.x,z:view.z,yaw:view.yaw}},get characters(){return characters.map(actor=>({id:actor.id,x:actor.x,z:actor.z,direction:actor.direction,mode:actor.mode,phase:characterPhase(actor),frame:Math.min(7,Math.floor(characterPhase(actor)*8))}))},get characterMood(){return characterMood},get clerkPerformance(){return clerkPerformance()},get omen(){return{phase:omen.phase,strength:omen.strength,visit:omen.visit,revealTime:omen.revealTime,life:omenLife(),enabled:options?.cinematics!==false,x:characters[0].x,z:characters[0].z,speech:omen.speech?{...omen.speech}:null}},get registeredName(){return registeredName},get activated(){return activated}};
 })();
