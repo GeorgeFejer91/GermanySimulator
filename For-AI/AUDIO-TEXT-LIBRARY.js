@@ -776,7 +776,12 @@ const candidateDialogue=Object.freeze(Object.fromEntries([
  ["crowd-baerbel-brezel","Your Schatten fällt in meinen amtlich vorgemerkten Sonnenkorridor.","assets/voices/candidate-dialogue/crowd-baerbel-brezel-04.mp3"],
  ["crowd-guenther-gartenzaun","Dieser Platz ist seit 07:04 durch textile Willenserklärung reserved.","assets/voices/candidate-dialogue/crowd-guenther-gartenzaun-03.mp3"],
  ["crowd-klaus-dieter-knoedel","Dieser Platz ist seit 07:04 durch textile Willenserklärung reserved.","assets/voices/candidate-dialogue/crowd-klaus-dieter-knoedel-03.mp3"],
- ["crowd-ruediger-rasenkante","Dieser Platz ist seit 07:04 durch textile Willenserklärung reserved.","assets/voices/candidate-dialogue/crowd-ruediger-rasenkante-03.mp3"]
+ ["crowd-ruediger-rasenkante","Dieser Platz ist seit 07:04 durch textile Willenserklärung reserved.","assets/voices/candidate-dialogue/crowd-ruediger-rasenkante-03.mp3"],
+ ["spieler-hans-peter-mustermann","Natürlich stehe ich im Radweg. Ich kann nicht einmal in der richtigen Spur scheitern.","assets/voices/candidate-dialogue/spieler-hans-peter-mustermann-germany-bicycle-01.mp3"],
+ ["spieler-hans-peter-mustermann","Sogar ein Fahrrad has more Richtung im Leben als ich.","assets/voices/candidate-dialogue/spieler-hans-peter-mustermann-berlin-bicycle-02.mp3"],
+ ["spieler-hans-peter-mustermann","Der Faxapparat has a clearer purpose als ich.","assets/voices/candidate-dialogue/spieler-hans-peter-mustermann-berlin-fax-02.mp3"],
+ ["spieler-hans-peter-mustermann","Nicht einmal Leergut. I bring literally nichts Verwertbares mit.","assets/voices/candidate-dialogue/spieler-hans-peter-mustermann-berlin-pfand-01.mp3"],
+ ["spieler-hans-peter-mustermann","At this rate werde ich nie anything amounten—außer einem offenen Vorgang.","assets/voices/candidate-dialogue/spieler-hans-peter-mustermann-berlin-lost-02.mp3"]
 ].map(([voiceId,text,path])=>[voiceId+"\u0000"+text,path])));
 function candidateClip(voiceId,text){return candidatePreviewEnabled?candidateDialogue[voiceId+"\u0000"+text]||null:null}
 

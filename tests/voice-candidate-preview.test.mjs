@@ -30,17 +30,20 @@ const load=search=>{
 };
 const off=load("");
 const on=load("?voicePreview=1");
-assert.equal(manifest.lineCount,218);
-assert.equal(manifest.clips.filter(clip=>clip.asrWordExact).length,153);
+assert.equal(manifest.lineCount,223);
+assert.equal(manifest.clips.filter(clip=>clip.asrWordExact).length,156);
 assert.equal(manifest.clips.filter(clip=>clip.voiceId==="polizei-heinrich-wachtmeister"&&!clip.clipId.includes("-phone-")).length,12);
 assert.equal(manifest.clips.filter(clip=>clip.clipId.startsWith("polizei-heinrich-wachtmeister-phone-")).length,4);
-assert.equal(manifest.clips.filter(clip=>clip.voiceId==="spieler-hans-peter-mustermann").length,40);
+assert.equal(manifest.clips.filter(clip=>clip.voiceId==="spieler-hans-peter-mustermann").length,45);
 const bilingual=manifest.clips.filter(clip=>clip.asrSegmentWordExact);
-assert.equal(bilingual.length,8);
+assert.equal(bilingual.length,11);
 for(const clip of bilingual){
  assert.equal(clip.renderSegments.length,clip.asrSegments.length);
  assert.ok(clip.asrSegments.every((segment,index)=>segment.asrWordExact&&segment.language===clip.renderSegments[index].language&&segment.text===clip.renderSegments[index].text));
 }
+const partsEquivalent=manifest.clips.filter(clip=>clip.asrBilingualPartsEquivalent);
+assert.equal(partsEquivalent.length,3);
+assert.ok(partsEquivalent.every(clip=>clip.asrSegments.every(part=>part.asrWordExact||part.asrCompoundEquivalent)));
 const clockEquivalent=text=>text.normalize("NFKC").toLowerCase().replaceAll("textilewillenserklärung","textile willenserklärung").replace(/\b(?:sieben|07|7)\s*(?:uhr|[.:,])\s*(?:vier|04|4)(?:\s*uhr)?\b/g,"07:04").match(/[\p{L}\p{N}]+/gu)?.join(" ")||"";
 const clockClips=manifest.clips.filter(clip=>clip.asrClockEquivalent);
 assert.equal(clockClips.length,4);
@@ -74,6 +77,13 @@ for(const clip of manifest.clips){
  assert.equal(on.candidateClip(clip.voiceId,clip.text),clip.path);
  assert.equal(off.candidateClip(clip.voiceId,clip.text),null);
  assert.equal(createHash("sha256").update(source(clip.path)).digest("hex"),clip.sha256);
+}
+const playerLines=new Set(Object.values(inventory.pools.innerMonologues).flatMap(contexts=>Object.values(contexts).flat()));
+assert.equal(playerLines.size,45);
+for(const line of playerLines)assert.ok(keys.has("spieler-hans-peter-mustermann\0"+line),`missing player audition ${line}`);
+for(const person of cast.roleProfiles.filter(person=>person.voiceId.startsWith("crowd-"))){
+ const archetype=crowdArchetypes.get(person.runtimeArchetype);
+ for(const line of new Set(Object.values(archetype.barks).flat()))assert.ok(keys.has(person.voiceId+"\0"+line),`missing crowd audition ${person.voiceId}: ${line}`);
 }
 assert.equal(on.candidateClip("amt-horst-stempelmann","a different line"),null);
 const game=source("game.js").toString(),amt=source("buergeramt.js").toString(),phone=source("buergeramt-phone.js").toString();

@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "status": "unreviewed opt-in preview; not release-cleared",
-  "lineCount": 218,
+  "lineCount": 223,
   "clips": [
     {
       "clipId": "amt-horst-stempelmann-01",
@@ -3910,6 +3910,270 @@
       "sha256": "3e13feda7359c49d19b364d91d6520375f05fd0d5ec2d3e6cd37437e9a3be9c7",
       "takeId": "crowd-ruediger-rasenkante-03--word-cut-and-joined",
       "status": "opt-in listening-review candidate; clock-equivalent bilingual word cut and join need listening"
+    },
+    {
+      "clipId": "spieler-hans-peter-mustermann-germany-bicycle-01",
+      "voiceId": "spieler-hans-peter-mustermann",
+      "profileId": "85b9afebb99f40eebad651bcd2e55a1d",
+      "text": "Natürlich stehe ich im Radweg. Ich kann nicht einmal in der richtigen Spur scheitern.",
+      "referenceSha256": "558259e7e4eaec780eeda7b547232ec8bb09075385c2ba9483bfef617339ff21",
+      "renderer": "ResembleAI/Chatterbox Multilingual V2 0.1.7",
+      "modelRevision": "5bb1f6ee58e50c3b8d408bc82a6d3740c2db6e18",
+      "modelLicense": "MIT",
+      "durationSeconds": 6.36,
+      "asr": "Natürlich stehe ich im Radweg. Ich kann nicht einmal in der richtigen Spur scheitern.",
+      "asrWordExact": true,
+      "path": "assets/voices/candidate-dialogue/spieler-hans-peter-mustermann-germany-bicycle-01.mp3",
+      "sha256": "1d1174ac195b589001c39a3389db0ce3f18d27cc0c4758fc4f633dbbccd2075a",
+      "takeId": "spieler-hans-peter-mustermann-germany-bicycle-01--60002",
+      "status": "opt-in listening-review candidate; not release-cleared"
+    },
+    {
+      "clipId": "spieler-hans-peter-mustermann-berlin-bicycle-02",
+      "voiceId": "spieler-hans-peter-mustermann",
+      "profileId": "85b9afebb99f40eebad651bcd2e55a1d",
+      "text": "Sogar ein Fahrrad has more Richtung im Leben als ich.",
+      "referenceSha256": "558259e7e4eaec780eeda7b547232ec8bb09075385c2ba9483bfef617339ff21",
+      "renderer": "ResembleAI/Chatterbox Multilingual V2 0.1.7",
+      "modelRevision": "5bb1f6ee58e50c3b8d408bc82a6d3740c2db6e18",
+      "modelLicense": "MIT",
+      "durationSeconds": 3.654,
+      "asr": "Sogar ein Fahrrad, als Modellichtung im Leben als ich.",
+      "asrWordExact": false,
+      "asrBilingualPartsEquivalent": true,
+      "asrSegments": [
+        {
+          "language": "de",
+          "text": "Sogar ein Fahrrad",
+          "asr": "Sogar ein Fahrrad.",
+          "asrWordExact": true,
+          "asrCompoundEquivalent": true
+        },
+        {
+          "language": "en",
+          "text": "has more",
+          "asr": "has more",
+          "asrWordExact": true,
+          "sourcePromptAsr": "has more direction in life.",
+          "cutSeconds": 0.38
+        },
+        {
+          "language": "de",
+          "text": "Richtung im Leben als ich.",
+          "asr": "Richtung im Leben als ich.",
+          "asrWordExact": true,
+          "asrCompoundEquivalent": true
+        }
+      ],
+      "renderSegments": [
+        {
+          "language": "de",
+          "text": "Sogar ein Fahrrad"
+        },
+        {
+          "language": "en",
+          "text": "has more",
+          "sourcePromptAsr": "has more direction in life.",
+          "cutSeconds": 0.38
+        },
+        {
+          "language": "de",
+          "text": "Richtung im Leben als ich."
+        }
+      ],
+      "path": "assets/voices/candidate-dialogue/spieler-hans-peter-mustermann-berlin-bicycle-02.mp3",
+      "sha256": "66b93449d60ad55f1792d38acbd352b633d61250eb075308d2be8ef5ceca52fc",
+      "takeId": "spieler-hans-peter-mustermann-berlin-bicycle-02--assembled",
+      "status": "opt-in listening-review candidate; bilingual joins need listening",
+      "asrSegmentWordExact": true
+    },
+    {
+      "clipId": "spieler-hans-peter-mustermann-berlin-fax-02",
+      "voiceId": "spieler-hans-peter-mustermann",
+      "profileId": "85b9afebb99f40eebad651bcd2e55a1d",
+      "text": "Der Faxapparat has a clearer purpose als ich.",
+      "referenceSha256": "558259e7e4eaec780eeda7b547232ec8bb09075385c2ba9483bfef617339ff21",
+      "renderer": "ResembleAI/Chatterbox Multilingual V2 0.1.7",
+      "modelRevision": "5bb1f6ee58e50c3b8d408bc82a6d3740c2db6e18",
+      "modelLicense": "MIT",
+      "durationSeconds": 3.413,
+      "asr": "Der Faxapparat. Also clearer purpose als ich.",
+      "asrWordExact": false,
+      "asrBilingualPartsEquivalent": true,
+      "asrSegments": [
+        {
+          "language": "de",
+          "text": "Der Faxapparat",
+          "asr": "Der Faxapparat.",
+          "asrWordExact": true,
+          "asrCompoundEquivalent": true
+        },
+        {
+          "language": "en",
+          "text": "has a clearer purpose",
+          "asr": "has a clearer purpose",
+          "asrWordExact": true,
+          "sourcePromptAsr": "has a clearer purpose in life.",
+          "cutSeconds": 0.94
+        },
+        {
+          "language": "de",
+          "text": "als ich.",
+          "asr": "als ich.",
+          "asrWordExact": true,
+          "asrCompoundEquivalent": true
+        }
+      ],
+      "renderSegments": [
+        {
+          "language": "de",
+          "text": "Der Faxapparat"
+        },
+        {
+          "language": "en",
+          "text": "has a clearer purpose",
+          "sourcePromptAsr": "has a clearer purpose in life.",
+          "cutSeconds": 0.94
+        },
+        {
+          "language": "de",
+          "text": "als ich."
+        }
+      ],
+      "path": "assets/voices/candidate-dialogue/spieler-hans-peter-mustermann-berlin-fax-02.mp3",
+      "sha256": "d4433fad3ad3e05cb05081444f85a633379108109e4d81ce6106755913dda8b9",
+      "takeId": "spieler-hans-peter-mustermann-berlin-fax-02--assembled",
+      "status": "opt-in listening-review candidate; bilingual joins need listening",
+      "asrSegmentWordExact": true
+    },
+    {
+      "clipId": "spieler-hans-peter-mustermann-berlin-pfand-01",
+      "voiceId": "spieler-hans-peter-mustermann",
+      "profileId": "85b9afebb99f40eebad651bcd2e55a1d",
+      "text": "Nicht einmal Leergut. I bring literally nichts Verwertbares mit.",
+      "referenceSha256": "558259e7e4eaec780eeda7b547232ec8bb09075385c2ba9483bfef617339ff21",
+      "renderer": "ResembleAI/Chatterbox Multilingual V2 0.1.7",
+      "modelRevision": "5bb1f6ee58e50c3b8d408bc82a6d3740c2db6e18",
+      "modelLicense": "MIT",
+      "durationSeconds": 3.856,
+      "asr": "Nicht einmal Leergut, I bring literally nichts Verwertbares mit.",
+      "asrWordExact": true,
+      "asrBilingualPartsEquivalent": true,
+      "asrSegments": [
+        {
+          "language": "de",
+          "text": "Nicht einmal Leergut.",
+          "asr": "Nicht einmal leer gut.",
+          "asrWordExact": false,
+          "asrCompoundEquivalent": true
+        },
+        {
+          "language": "en",
+          "text": "I bring literally",
+          "asr": "I bring literally",
+          "asrWordExact": true,
+          "sourcePromptAsr": "I bring literally nothing.",
+          "cutSeconds": 0.92
+        },
+        {
+          "language": "de",
+          "text": "nichts Verwertbares mit.",
+          "asr": "nichts Verwertbares mit.",
+          "asrWordExact": true,
+          "asrCompoundEquivalent": true
+        }
+      ],
+      "renderSegments": [
+        {
+          "language": "de",
+          "text": "Nicht einmal Leergut."
+        },
+        {
+          "language": "en",
+          "text": "I bring literally",
+          "sourcePromptAsr": "I bring literally nothing.",
+          "cutSeconds": 0.92
+        },
+        {
+          "language": "de",
+          "text": "nichts Verwertbares mit."
+        }
+      ],
+      "path": "assets/voices/candidate-dialogue/spieler-hans-peter-mustermann-berlin-pfand-01.mp3",
+      "sha256": "04f113327953faadaf1a24ced9cd092cb740ed6bafb3db2b9c0c6023feecb9f9",
+      "takeId": "spieler-hans-peter-mustermann-berlin-pfand-01--assembled",
+      "status": "opt-in listening-review candidate; bilingual joins need listening",
+      "asrSegmentCompoundEquivalent": true
+    },
+    {
+      "clipId": "spieler-hans-peter-mustermann-berlin-lost-02",
+      "voiceId": "spieler-hans-peter-mustermann",
+      "profileId": "85b9afebb99f40eebad651bcd2e55a1d",
+      "text": "At this rate werde ich nie anything amounten—außer einem offenen Vorgang.",
+      "referenceSha256": "558259e7e4eaec780eeda7b547232ec8bb09075385c2ba9483bfef617339ff21",
+      "renderer": "ResembleAI/Chatterbox Multilingual V2 0.1.7",
+      "modelRevision": "5bb1f6ee58e50c3b8d408bc82a6d3740c2db6e18",
+      "modelLicense": "MIT",
+      "durationSeconds": 4.995,
+      "asr": "At this rate werde ich nie anything amounten, außer einem offenen Vorgang.",
+      "asrWordExact": true,
+      "asrSegmentWordExact": true,
+      "asrSegments": [
+        {
+          "language": "en",
+          "text": "At this rate",
+          "asr": "At this rate",
+          "asrWordExact": true,
+          "sourcePromptAsr": "At this rate, I will never.",
+          "cutSeconds": 0.555
+        },
+        {
+          "language": "de",
+          "text": "werde ich nie",
+          "asr": "Werde ich nie",
+          "asrWordExact": true,
+          "sourcePromptAsr": "Werde ich nie etwas erreichen. Vor, seht's er, hatte Arbeit. Ich nie erinnere.",
+          "cutSeconds": 0.66
+        },
+        {
+          "language": "en",
+          "text": "anything",
+          "asr": "Anything.",
+          "asrWordExact": true
+        },
+        {
+          "language": "de",
+          "text": "amounten außer einem offenen Vorgang.",
+          "asr": "Amounten außer einem offenen Vorgang.",
+          "asrWordExact": true
+        }
+      ],
+      "renderSegments": [
+        {
+          "language": "en",
+          "text": "At this rate",
+          "sourcePromptAsr": "At this rate, I will never.",
+          "cutSeconds": 0.555
+        },
+        {
+          "language": "de",
+          "text": "werde ich nie",
+          "sourcePromptAsr": "Werde ich nie etwas erreichen. Vor, seht's er, hatte Arbeit. Ich nie erinnere.",
+          "cutSeconds": 0.66
+        },
+        {
+          "language": "en",
+          "text": "anything"
+        },
+        {
+          "language": "de",
+          "text": "amounten außer einem offenen Vorgang."
+        }
+      ],
+      "path": "assets/voices/candidate-dialogue/spieler-hans-peter-mustermann-berlin-lost-02.mp3",
+      "sha256": "1db905217cba828c0c418a5cbc8aa59d6adff081aeb50eb6ac6e9965e535dc26",
+      "takeId": "spieler-hans-peter-mustermann-berlin-lost-02--assembled",
+      "status": "opt-in listening-review candidate; bilingual joins need listening"
     }
   ]
 }
