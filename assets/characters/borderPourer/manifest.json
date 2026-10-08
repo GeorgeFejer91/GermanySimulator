@@ -2254,5 +2254,12 @@
     "png-part-41.json",
     "png-part-42.json",
     "png-part-43.json"
-  ]
+  ],
+  "delivery": {
+    "image": "character-atlas.webp",
+    "sha256": "8623e4e2c473e8bcc91b682a6ca40e4df512921cd108c66117d6ae326091d450",
+    "bytes": 2471868,
+    "rgba_sha256": "ce4dcbe58adcdab6f7b30d6adc456b64b9a4ff37a3ba437026552c00fed40c1f",
+    "source_sha256": "9179b39b9b33e56e82b2ffcf324c38811f0a15c76b29d015be45019199942cb7"
+  }
 }

@@ -36,7 +36,7 @@ try{
   try{await page.waitForFunction(()=>window.BuergeramtLevel?.active,null,{timeout:20000})}
   catch(error){console.log(JSON.stringify({name:'level-start-timeout',state:await page.evaluate(()=>({readyState:document.readyState,level:!!window.BuergeramtLevel,active:window.BuergeramtLevel?.active,renderer:window.Germany3D?.ready,body:document.body.className})),errors}));throw error}
   await page.waitForFunction(()=>window.Germany3D?.ready,null,{timeout:60000});
-  if(name==='mobile')await page.waitForFunction(()=>document.getElementById('world3d').height/innerHeight===2,null,{timeout:10000});
+  if(name==='mobile')await page.waitForFunction(()=>document.getElementById('world3d').height/innerHeight<=1,null,{timeout:10000});
   try{await page.waitForFunction(()=>Germany3D.amtCharacters.length===14&&Germany3D.amtCharacters.every(x=>x.loaded),null,{timeout:75000})}
   catch(error){await page.screenshot({path:`${output}/world-sprite-timeout-${name}.png`,timeout:15000}).catch(()=>{});console.log(JSON.stringify({name:'sprite-load-timeout',actors:await page.evaluate(()=>Germany3D.amtCharacters),requests:modelRequests,resources:await page.evaluate(()=>performance.getEntriesByType('resource').filter(x=>x.name.includes('/buergeramt/')).map(x=>({name:x.name,duration:x.duration,bytes:x.transferSize}))),errors}));throw error}
   await page.waitForFunction(()=>Germany3D.amtOffice?.attached,null,{timeout:30000});

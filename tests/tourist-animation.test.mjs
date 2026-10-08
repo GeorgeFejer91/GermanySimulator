@@ -13,7 +13,7 @@ for(const [family,kind] of [['tourists','towelMan'],['tourists','towelWoman'],['
  const m=JSON.parse(fs.readFileSync(root+'/assets/'+family+'/'+kind+'/manifest.json'));
  const payload=await api.load('http://localhost/assets/'+family+'/'+kind+'/manifest.json');
  const bytes=Buffer.from(await (await fetch(payload.objectURL)).arrayBuffer());
- assert.equal(crypto.createHash('sha256').update(bytes).digest('hex'),m.sha256);
+ assert.equal(crypto.createHash('sha256').update(bytes).digest('hex'),m.delivery?.sha256||m.sha256);
  URL.revokeObjectURL(payload.objectURL);
  const cycle=m.cycle_distance??24;
  const starting={spriteFrame:6};api.request(starting,...vectors.right,m);
@@ -46,4 +46,4 @@ for(const [family,kind] of [['tourists','towelMan'],['tourists','towelWoman'],['
  }
 }
 assert.equal(paths,72);
-console.log('PASS: 72 accepted manifest paths, stride queues/coalescing, frozen turns, blocked walks, same-direction gait and six exact PNG files');
+console.log('PASS: 72 accepted manifest paths, stride queues/coalescing, frozen turns, blocked walks, same-direction gait and six verified delivery files');

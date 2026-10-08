@@ -46,6 +46,16 @@ Record the selected model and reasoning effort in each delegated task brief; use
 
 ## Checks and external ChatDev
 
+Every asset/runtime/background-work brief includes the [browser playability
+gate](./ASSET-POLICY.md#browser-playability-gate): transferred and decoded bytes,
+load trigger, selected client variant, active/idle frequency, cache/teardown
+owner, before/after browser evidence and the applicable executable budgets.
+Asset, renderer and audio owners supply their costs; the integrator runs the
+budget checks before release. A skill/workflow change must not encourage
+eager full-library downloads, unbounded caches/polling, authoring files at
+runtime or unmeasured quality increases. Preserve the separate object, audio,
+input and physical-device acceptance gates.
+
 Prefer existing deterministic scripts and focused checks. For browser-visible changes, expected coverage is Chromium desktop and Android mobile. Label Android emulation and real-device results distinctly; if a physical device is unavailable, report that coverage as outstanding. Follow the [silent background browser-test policy](./AGENT-START.md#silent-background-browser-tests). Silent test sessions can verify audio state and timing, but not perceived sound quality; record listening evidence separately and do not claim it without an actual listening review. If a browser, device, API, or external model is unavailable, state what was not exercised.
 
 ## 2D character animation skill

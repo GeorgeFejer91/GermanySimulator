@@ -2680,5 +2680,12 @@
       "jump_lift_gain": 0.8
     },
     "retained_walk_sha256": "72a2560752fb2275d3ff2d2fa223bcb14cd8a12318cbfd43a76c9f7a1e62687a"
+  },
+  "delivery": {
+    "image": "character-atlas.webp",
+    "sha256": "1eb01a138b4e2824a2a44159b46e6598ca6d6470c2883366f0ff85f12c84219a",
+    "bytes": 2555780,
+    "rgba_sha256": "2c530e8429c05fabb3f6af8cb38ac143e1e92f96ae7f00160e20eaff2f27aa92",
+    "source_sha256": "7d8613902f1dc4c15479a2acd83247247918f30dc60946b6d1b898746e769c50"
   }
 }

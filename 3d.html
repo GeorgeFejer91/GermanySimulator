@@ -109,9 +109,10 @@ function update(dt){let dx=(keys.ArrowRight?1:0)-(keys.ArrowLeft?1:0),dy=(keys.A
 addEventListener("keydown",e=>{if(["ArrowUp","ArrowDown","ArrowLeft","ArrowRight"].includes(e.code))e.preventDefault();keys[e.code]=true;if(e.code==="KeyE")interact()});addEventListener("keyup",e=>keys[e.code]=false);
 document.querySelectorAll("[data-key]").forEach(b=>{const k=b.dataset.key;b.addEventListener("pointerdown",e=>{e.preventDefault();keys[k]=true;if(k==="KeyE")interact()});["pointerup","pointercancel","pointerleave"].forEach(t=>b.addEventListener(t,e=>{e.preventDefault();keys[k]=false}))});
 document.getElementById("home").onclick=()=>{player.x=5960+RAIL_GUTTER;player.y=3900+RAIL_GUTTER};
-let last=performance.now();function loop(t){const dt=Math.min(.05,(t-last)/1000);last=t;update(dt);window.Germany3D?.sync();requestAnimationFrame(loop)}requestAnimationFrame(loop);
+let last=performance.now();function loop(t){if(document.hidden){last=t;requestAnimationFrame(loop);return}if(t-last<1000/60-.5){requestAnimationFrame(loop);return}const dt=Math.min(.05,(t-last)/1000);last=t;update(dt);window.Germany3D?.sync();requestAnimationFrame(loop)}requestAnimationFrame(loop);
+function clearInput(){for(const code in keys)keys[code]=false}addEventListener("blur",clearInput);document.addEventListener("visibilitychange",()=>{last=performance.now();if(document.hidden)clearInput()});
 })();
 </script>
 <script type="importmap">{"imports":{"three":"https://cdn.jsdelivr.net/npm/three@0.186.0/build/three.module.js"}}</script>
-<script type="module" src="./world3d.js?v=20261008-object-consistency"></script>
+<script type="module" src="./world3d.js?v=20261008-browser-light"></script>
 </body></html>

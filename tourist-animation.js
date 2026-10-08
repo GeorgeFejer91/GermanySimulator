@@ -7,18 +7,29 @@ globalThis.TouristAnimations = (() => {
     if (!loading.has(url)) loading.set(url, (async () => {
       const response=await fetch(url); if(!response.ok) throw Error('Tourist manifest '+response.status);
       const manifest=await response.json();
-      const art=await fetch(new URL(manifest.image,new URL(url,location.href)));
+      async function artwork(spec) {
+      const art=await fetch(new URL(spec.image,new URL(url,location.href)));
       if(!art.ok) throw Error('Character artwork '+art.status);
       const bytes=new Uint8Array(await art.arrayBuffer());
       if(globalThis.crypto?.subtle) {
         const actual=Array.from(new Uint8Array(await crypto.subtle.digest('SHA-256',bytes)),b=>b.toString(16).padStart(2,'0')).join('');
-        if(actual!==manifest.sha256) throw Error('Tourist artwork hash mismatch');
+        if(actual!==spec.sha256) throw Error('Tourist artwork hash mismatch');
       }
       const header=new DataView(bytes.buffer);
       const cols=manifest.cols??8,rows=manifest.rows??10;
       const [w,h]=manifest.image_size||[cols*manifest.frame_size[0],rows*manifest.frame_size[1]];
-      if(w!==cols*manifest.frame_size[0] || h!==rows*manifest.frame_size[1] || header.getUint32(16)!==w || header.getUint32(20)!==h) throw Error('Character atlas dimensions');
-      return {manifest,objectURL:URL.createObjectURL(new Blob([bytes],{type:'image/png'}))};
+      const webp=spec!==manifest;
+      let width,height;
+      if(webp) {
+        if(bytes.length<25||header.getUint32(0)!==0x52494646||header.getUint32(8)!==0x57454250||header.getUint32(12)!==0x5650384c||bytes[20]!==0x2f)throw Error('Lossless character WebP header');
+        const bits=header.getUint32(21,true);width=(bits&0x3fff)+1;height=((bits>>>14)&0x3fff)+1;
+      } else {width=header.getUint32(16);height=header.getUint32(20)}
+      if(w!==cols*manifest.frame_size[0] || h!==rows*manifest.frame_size[1] || width!==w || height!==h) throw Error('Character atlas dimensions');
+      return {manifest,objectURL:URL.createObjectURL(new Blob([bytes],{type:webp?'image/webp':'image/png'}))};
+      }
+      // PNG masters retain the accepted artwork when delivery fails.
+      if(manifest.delivery)try{return await artwork(manifest.delivery)}catch(error){console.warn('Character delivery fallback',error)}
+      return artwork(manifest);
     })());
     return loading.get(url);
   }

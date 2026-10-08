@@ -27,9 +27,9 @@ assert.match(game,/const stableSpriteRoot="\.\/assets\/sprite-archive\/pre-rig-2
 assert.match(game,/TouristAnimations\.advance\(n,distance,dt,atlas\.tourist,cycleDistance\)/);
 assert.match(game,/function holdFeaturedTurn\(n,dx,dy,atlas,dt\)/);
 assert.match(game,/getNpcSpriteCanvas:key=>npcSpriteAtlases\[key\]/);
-assert.match(world3d,/new T\.CanvasTexture\(source\)/,"Three.js must upload each accepted atlas once");
+assert.match(world3d,/new T\.Texture\(source\);tx\.needsUpdate=true/,"Three.js must upload each accepted atlas once");
 assert.doesNotMatch(game,/spriteFrame=Math\.floor\(n\.animTime\*(?:32|40|60)/,"registered gait must advance from actual distance, not wall-clock time");
 assert.match(game,/getNpcSpriteCanvas:key=>npcSpriteAtlases\[key\]/);
-assert.match(world3d,/new T\.CanvasTexture\(source\)/,"Three.js must use the normalized runtime atlas");
+assert.match(world3d,/new T\.Texture\(source\);tx\.needsUpdate=true/,"Three.js must use the accepted decoded image without an extra canvas copy");
 assert.doesNotMatch(world3d,/TextureLoader\(\)\.load\("\.\/assets\/(?:merkel-sprite|bayern-walker-sprite)\.png"/);
 console.log("Berlin quiz, looping proximity audio, and expanded sprite atlas contracts OK");

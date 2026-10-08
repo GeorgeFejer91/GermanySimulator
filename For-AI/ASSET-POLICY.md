@@ -8,7 +8,7 @@ The Bürgeramt interior uses code-native geometry and signs through the existing
 
 The eight moving office regulars have original four-view painted source sheets and four action poses each: work, gesture, look, and flinch. `tools/amt-character-motion.py` registers these under the same source directory and emits one 8-column, 8-row desktop WebP per character plus a half-resolution mobile WebP. The runtime loads only the selected variant on office entry. Continuous whole-silhouette warping keeps side-view shoes attached to their trousers; the segmented leg method exposed a detached foot on this source and was rejected. A separate 8-column, 6-row desk-performance atlas reuses Frau Knick's approved source strip and adds a small lower-lip cycle. Exact encoded frame hashes and contact sheets are local review evidence under `output/amt-character-motion/` and `output/buergeramt-sprite-qa/`. Neither Python nor a new animation dependency ships to the browser.
 
-The same source sheets yield four-pose 640 × 832 action detail cells plus four directional eight-frame close walk sheets per moving regular, 384 × 832 detail poses for waiting patrons, and a compact shared detail sheet with six clerk poses and eight high-resolution lip frames. Moving detail is requested only on approach, one walk direction at a time, and released after the actor leaves; the compact desktop/mobile atlas remains the distance and load-failure fallback. Close walk sheets use a 4 × 2 grid so their maximum texture dimension is 2560 px. This preserves close brushwork without eight full high-resolution 64-frame atlases. The office-only shader gently varies per-character saturation and lightness without modifying the painted files; its renderer density rises to at most 2× device pixel ratio while the episode is active.
+The same source sheets yield four-pose 640 × 832 action detail cells plus four directional eight-frame close walk sheets per moving regular, 384 × 832 detail poses for waiting patrons, and a compact shared detail sheet with six clerk poses and eight high-resolution lip frames. Moving detail is requested only on approach, one walk direction at a time, and released after the actor leaves; the compact desktop/mobile atlas remains the distance and load-failure fallback. Close walk sheets use a 4 × 2 grid so their maximum texture dimension is 2560 px. This preserves close brushwork without eight full high-resolution 64-frame atlases. The office-only shader gently varies per-character saturation and lightness without modifying the painted files; its renderer follows the shared one-pixel-per-CSS-pixel and 1.6 MP drawing-buffer budget in the browser playability gate below.
 
 The office's original painted prop strip adds a file cabinet, paper tower,
 distorted clock, and noticeboard. Its source and provenance are with the cast;
@@ -58,6 +58,100 @@ runtime cost; do not reskin the entire city from an unreviewed style sheet.
 - Perimeter trains use two Kenney Train Kit end-car GLBs under `assets/models/kenney-trains/` plus the 1.56 MB Open L-Gauge n-Wagen coach under `assets/models/open-l-gauge-nwagen/`. The n-Wagen derivative is CC BY-NC-SA 4.0 and may remain only while the game is noncommercial; preserve its adjacent full attribution, modification, license, and checksum record. The assets remain fictional `AMT-BAHN` rolling stock: do not add Deutsche Bahn or Märklin logos, trademarked textures, or a cloned real announcer voice. The five user-supplied station-hall MP3s under `assets/audio/trains/` are approved only as in-game ambient audio; preserve `PROVENANCE.md`, make no Deutsche-Bahn-authenticity or redistribution claim, and do not display an invented transcript. Missing GLBs keep the procedural train fallback.
 
 - The Brandmauer and Alice dumpster share the three locally bundled CC0 Kenney masks in `assets/fire/`. Two flame masks drive small batched Three.js point layers at both sites; one smoke mask serves the dumpster. Missing masks keep the existing procedural flames. Mobile uses fewer points, and no runtime particle package or remote asset service is added. Source hashes and licenses are in `assets/fire/LICENSES.md`.
+
+## Browser playability gate
+
+Browser playability is a release requirement for every new asset, loader,
+render effect, background task and game-development skill/workflow change.
+The integrator owns the budget and evidence; asset/renderer/audio owners supply
+measurements before integration. Prefer smaller existing assets and native
+browser capabilities. A more detailed asset is accepted only when its visible
+benefit justifies its transfer, decoded memory and frame cost on the supported
+browser profiles. Do not add a new pipeline, service or benchmark dependency.
+
+### Asset and loader contract
+
+- Keep authoring PNGs, Blender/BVH files, base64 transfer parts, source sheets,
+  audit records and preview candidates out of runtime requests. Shipped runtime
+  variants stay under the single `assets/` authority.
+- Use compressed delivery and preserve licenses, source hashes, alpha, pivots,
+  frame layout and timing. The six accepted city atlases now have lossless WebP
+  `delivery` records in their existing manifests. Original PNGs remain the exact
+  fallback and authoring authority. `tools/build-character-delivery.py --check`
+  verifies every decoded RGBA byte, dimension, source/delivery hash and byte
+  budget; regeneration uses that same tool without `--check`. This is packaging,
+  not permission to regenerate character poses.
+- Share one decoded image and one texture/material per character kind. Avoid
+  copying an accepted full atlas into an additional canvas. Compressed file size
+  does not prove low resident memory: report width × height × four bytes, mipmaps,
+  decoded copies, draw-buffer size and cache ownership separately.
+- Load office art on entry, close detail on approach, music on trusted input and
+  speech/effects when requested. Never preload both desktop/mobile alternatives,
+  all songs/voices, or an opt-in candidate pack. Keep existing load-failure
+  fallbacks and readable interaction targets.
+- For newly introduced textures, aim for at most 2048 px per dimension and
+  16 MiB decoded RGBA per texture. The already accepted larger atlases are an
+  explicit legacy exception, not a template for new assets; split or reduce a
+  new export only after actual display-size and rendered review.
+
+### Frame, background work and lifetime contract
+
+- The default world drawing buffer is at most one pixel per CSS pixel and
+  1.6 million total pixels, in both city and office. Default multisampling is
+  off. HUD/text geometry and camera aspect remain at CSS dimensions. Verify
+  small signs, sprite edges, desktop/mobile resize and fallback rendering.
+- Limit active simulation/render dispatch to 60 Hz; retain elapsed-time,
+  bounded substeps and authored gait/dialogue clocks. Render the title-screen
+  world at at most 4 Hz without advancing gameplay. Hidden pages do no world
+  simulation/render work and release held input; resume without catch-up.
+- No timer, polling loop, animation, audio source or connection without a
+  concrete active consumer, bounded frequency and teardown owner. Pause or
+  stop work when hidden/inactive, with explicit exceptions for a live phone
+  session or an already committed dialogue/audio receipt. Do not silently
+  break their timing contract to meet a benchmark.
+- Keep decoded recorded-speech cache storage at most 16 MiB, evicting least
+  recently used completed buffers; pending loads are shared and active sources
+  retain their buffer until completion. Eviction must permit later replay.
+  New caches/queues need a measured bound and cleanup rule.
+
+### Executable release checks
+
+Run `node --test tests/browser-performance.test.mjs
+tests/runtime-smoothness.test.mjs tests/tourist-animation.test.mjs
+tests/intro-music.test.mjs`, then the Pillow delivery check above. The Pages
+workflow runs these dependency-free Node gates before deployment. They protect
+the 10.1 MB aggregate city-atlas delivery budget, delivery hashes/dimensions,
+PNG fallback, no duplicate full atlas canvas, draw-buffer bound, audio eviction,
+hidden/title work and elapsed simulation time. They are not device performance
+or visual evidence.
+
+For runtime/asset releases, run `tools/benchmark-browser.mjs` with existing
+`PLAYWRIGHT_MODULE` and `CHROMIUM_PATH`. `BENCH_CHECK=1` enables the 24 MB cold
+local-transfer ceiling, no deferred/authoring boot downloads, at most 4 Hz title
+rendering, 1.6 MP drawing buffer, console and input gates. Default runs three
+cold navigations each on Chromium desktop (1280 × 800) and Android portrait
+emulation (390 × 844), DPR 2; `BENCH_THROTTLE=1` adds 4× CPU and 1.6 Mb/s network
+emulation. Keep logs/screenshots under ignored `output/`. These ceilings describe
+this game and are regression guards, not desired long-term minimums: reduce them
+with proven improvements, and never raise them merely to pass a check.
+
+Record source revision, scenario, browser/GPU, viewport/DPR, cache/network/CPU,
+ready/settled time, bytes/requests, largest resources, long tasks, frame-time
+p50/p95, draw calls/triangles and texture/geometry counts. Report median/range of
+three comparable runs; separate startup, title idle, gameplay and office entry.
+Repeat near/distant actor approaches, load failure, background/resume and office
+entry/exit for touched loaders/caches. Rendering/input checks include desktop
+and Android portrait/landscape; physical Android remains a separate gate when
+available. An optimization cannot be accepted solely on transfer savings if
+it stalls input, breaks missions, loses an actor or raises warm frame/memory cost.
+
+On a named physical reference device, aim for p95 active frame time ≤ 33.3 ms
+(30 fps) and no continuing cache/resource growth after repeated warmed visits.
+Until physical measurements exist, mark that target NOT RUN. Software GPU
+results and emulation are diagnostics, not a claim that low-end hardware passes.
+Do not add telemetry or collect player data merely to enforce this protocol.
+World-affecting changes still require the independent Physics and Camera gates
+in `OBJECT-CONSISTENCY.md`; silent audio state checks do not establish sound quality.
 
 ## YAGNI rules
 
