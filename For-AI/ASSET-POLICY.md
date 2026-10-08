@@ -22,12 +22,25 @@ record data is 623,008 bytes. The procedural tunnel adds 3,072 records / 49,152
 packed bytes without another download, bringing the shared renderer to 42,010
 splats. Allocation padding, GPU accumulator buffers, sorting and renderer
 overhead are additional and must be measured in browser evidence.
-Only the omen consumes the effect; GPU generation/sorting runs at most 30 Hz
-from the existing render owner and stops on hidden/inactive play. Teardown waits
+The omen and bounded nearby painted action clouds share the effect owner.
+Omen-only generation/sorting runs at most 30 Hz; active action clouds use at
+most 60 Hz from the existing render pass and stop on hidden/inactive play. Teardown waits
 for any owned sort before disposing buffers and its worker. A missing, cancelled
 or late preparation preserves the sprite; ordinary city startup imports none of
-this code or asset. The asset has one shared desktop/mobile variant pending
+the Spark runtime or Gaussian data. The omen asset has one shared desktop/mobile variant pending
 evidence that another is needed. Runtime behavior belongs in `BUERGERAMT.md`.
+
+Paired action packs under `assets/buergeramt/animation/` select one desktop or
+mobile variant on approach; never fetch the full cast or both variants. Each
+24-byte record stores two XY centers and two RGBA paint samples. The decoder
+bounds records to 20,000 slots, 32 segment rows and the declared decoded size.
+Three lookup textures cost 24 bytes per slot/segment in addition to CPU
+records, Spark buffers, sorting and renderer overhead. Two desktop or one
+mobile actor may reside, with the dialogue owner prioritized. Authoring images
+and SciPy/Pillow tools stay outside runtime requests. Track compressed and
+decoded costs in generated manifests; compare actual frame and input latency
+against the same scene without the action renderer. Missing or late data keeps
+the original sprite. `BUERGERAMT.md` owns timing, residency and state handoff.
 
 The office's original painted prop strip adds a file cabinet, paper tower,
 distorted clock, and noticeboard. Its source and provenance are with the cast;
@@ -426,8 +439,9 @@ The Kiesinger monument carries two `CDU / AB 1948` banners flanking one dated 19
 
 ## Opt-in prop-detail studies
 
-`spark-preview.html` is a silent, opt-in rendering experiment with separate fax
-and Frau Knick anchor scenes. It compares the same procedural samples/motion in
+The `workflow=arcs` route uses the paired action packs described above. The
+original `spark-preview.html` routes remain silent, opt-in rendering experiments
+with separate fax and Frau Knick anchor scenes. It compares the same procedural samples/motion in
 native Three.js points and locally pinned Spark 2.3.1, loaded only on selection.
 The character data lives in `assets/previews/knick-splats/`: four unchanged
 original anchors plus ten generated bridge paintings with recorded prompts,

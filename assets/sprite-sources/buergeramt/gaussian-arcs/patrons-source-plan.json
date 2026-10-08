@@ -1,0 +1,217 @@
+{
+  "version": 1,
+  "id": "buergeramt-patron-source-inventory",
+  "scope": "source inspection only; these are not runtime arc specs",
+  "patrons": [
+    {
+      "id": "renter",
+      "source": "assets/sprite-sources/buergeramt/renter-source.png",
+      "source_sha256": "3db97d3e7d65a85429d9997359c4626e5637a8a058a8e5596cde09758c05b8d5",
+      "source_canvas_xy": [
+        1536,
+        1024
+      ],
+      "accepted_idle": {
+        "file": "assets/buergeramt/characters/renter-detail.webp",
+        "sha256": "79a0a7fe03c284358b73c0ce5011795c714cd49593851fe39d7c67c141fe6aac",
+        "canvas_xy": [
+          384,
+          832
+        ],
+        "source_column": 0
+      },
+      "event_owner": "unwired candidate source; current B\u00fcrgeramt patron draw is static idle",
+      "candidates": [
+        {
+          "column": 0,
+          "crop_xyxy": [
+            0,
+            0,
+            384,
+            1024
+          ],
+          "observation": "accepted idle, folders hugged",
+          "status": "accepted_idle",
+          "suggested_bridge_paintings_from_idle": null
+        },
+        {
+          "column": 1,
+          "crop_xyxy": [
+            384,
+            0,
+            768,
+            1024
+          ],
+          "observation": "walking stride, not planted",
+          "status": "unaccepted_source_candidate",
+          "suggested_bridge_paintings_from_idle": null
+        },
+        {
+          "column": 2,
+          "crop_xyxy": [
+            768,
+            0,
+            1152,
+            1024
+          ],
+          "observation": "selects a page and looks down",
+          "status": "unaccepted_source_candidate",
+          "suggested_bridge_paintings_from_idle": 2
+        },
+        {
+          "column": 3,
+          "crop_xyxy": [
+            1152,
+            0,
+            1536,
+            1024
+          ],
+          "observation": "reaches free hand toward viewer",
+          "status": "unaccepted_source_candidate",
+          "suggested_bridge_paintings_from_idle": 3
+        }
+      ],
+      "compatibility": "Walking candidate changes planted-foot contract. Paper/hand candidates need actual transition paintings before any Gaussian arc. Preserve document/bag ownership."
+    },
+    {
+      "id": "parent",
+      "source": "assets/sprite-sources/buergeramt/parent-source.png",
+      "source_sha256": "dfd53ba6b09d5da5f2647da1470a712a15d1c1368b51cf4360d8d69b6eb68691",
+      "source_canvas_xy": [
+        1536,
+        1024
+      ],
+      "accepted_idle": {
+        "file": "assets/buergeramt/characters/parent-detail.webp",
+        "sha256": "f6a3c2b389cb4381d27aaa7cfa5ddeaa9f794dee9a7346599a8d706d235eb24f",
+        "canvas_xy": [
+          384,
+          832
+        ],
+        "source_column": 0
+      },
+      "event_owner": "unwired candidate source; current B\u00fcrgeramt patron draw is static idle",
+      "candidates": [
+        {
+          "column": 0,
+          "crop_xyxy": [
+            0,
+            0,
+            384,
+            1024
+          ],
+          "observation": "accepted idle, bag and documents held",
+          "status": "accepted_idle",
+          "suggested_bridge_paintings_from_idle": null
+        },
+        {
+          "column": 1,
+          "crop_xyxy": [
+            384,
+            0,
+            768,
+            1024
+          ],
+          "observation": "walking stride, not planted",
+          "status": "unaccepted_source_candidate",
+          "suggested_bridge_paintings_from_idle": null
+        },
+        {
+          "column": 2,
+          "crop_xyxy": [
+            768,
+            0,
+            1152,
+            1024
+          ],
+          "observation": "pulls a sheet to read",
+          "status": "unaccepted_source_candidate",
+          "suggested_bridge_paintings_from_idle": 2
+        },
+        {
+          "column": 3,
+          "crop_xyxy": [
+            1152,
+            0,
+            1536,
+            1024
+          ],
+          "observation": "looks up while hugging documents",
+          "status": "unaccepted_source_candidate",
+          "suggested_bridge_paintings_from_idle": 2
+        }
+      ],
+      "compatibility": "Walking candidate changes planted-foot contract. Paper/hand candidates need actual transition paintings before any Gaussian arc. Preserve document/bag ownership."
+    },
+    {
+      "id": "pensioner",
+      "source": "assets/sprite-sources/buergeramt/pensioner-source.png",
+      "source_sha256": "f6c08923bbdfae45496dea970e8330e0776b6dda6b378e14ea795424e4deb7dd",
+      "source_canvas_xy": [
+        1536,
+        1024
+      ],
+      "accepted_idle": {
+        "file": "assets/buergeramt/characters/pensioner-detail.webp",
+        "sha256": "7235dce2b4b2c6823bf31ac22d829597998b1f2c31a0bfb244a1a28d9fa0d4c8",
+        "canvas_xy": [
+          384,
+          832
+        ],
+        "source_column": 0
+      },
+      "event_owner": "unwired candidate source; current B\u00fcrgeramt patron draw is static idle",
+      "candidates": [
+        {
+          "column": 0,
+          "crop_xyxy": [
+            0,
+            0,
+            384,
+            1024
+          ],
+          "observation": "accepted idle, cane grounded and slip held",
+          "status": "accepted_idle",
+          "suggested_bridge_paintings_from_idle": null
+        },
+        {
+          "column": 1,
+          "crop_xyxy": [
+            384,
+            0,
+            768,
+            1024
+          ],
+          "observation": "walking stride, not planted",
+          "status": "unaccepted_source_candidate",
+          "suggested_bridge_paintings_from_idle": null
+        },
+        {
+          "column": 2,
+          "crop_xyxy": [
+            768,
+            0,
+            1152,
+            1024
+          ],
+          "observation": "reads raised slip; glasses differ from idle",
+          "status": "unaccepted_source_candidate",
+          "suggested_bridge_paintings_from_idle": 3
+        },
+        {
+          "column": 3,
+          "crop_xyxy": [
+            1152,
+            0,
+            1536,
+            1024
+          ],
+          "observation": "lifts slip overhead with cane grounded",
+          "status": "unaccepted_source_candidate",
+          "suggested_bridge_paintings_from_idle": 3
+        }
+      ],
+      "compatibility": "Walking candidate changes planted-foot contract. Paper/hand candidates need actual transition paintings before any Gaussian arc. Glasses appear/shift between candidate poses and need discrete prop ownership review."
+    }
+  ]
+}

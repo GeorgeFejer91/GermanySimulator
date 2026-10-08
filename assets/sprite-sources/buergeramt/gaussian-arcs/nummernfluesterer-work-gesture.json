@@ -1,0 +1,441 @@
+{
+  "version": 1,
+  "id": "nummernfluesterer",
+  "canvas_xy": [
+    640,
+    832
+  ],
+  "source_authority": "assets/buergeramt/characters/nummernfluesterer-detail.webp",
+  "source_sha256": "92d8bad2c97d624c5a5f57ebac554b6141f779263d1741471620a128e5fa0d08",
+  "event_owner": "buergeramt.js dialogue gesture; work/look/flinch and walking remain existing controllers",
+  "prop_ownership": {
+    "type": "small_rigid_ticket",
+    "owner": "right_hand_until_bridge2_then_left_hand",
+    "handoff_state": "bridge2",
+    "secondary": "folder_moves_to_right_arm"
+  },
+  "landmark_note": "Native 640x832 visual reading; anatomical right is screen-left. stamp_knob/base mark the small ticket top and bottom, regardless of carrying hand. Common shoe baseline; source resolution classes are registered with fixed scales.",
+  "arcs": [
+    {
+      "id": "work-gesture",
+      "from": "work",
+      "to": "gesture",
+      "duration": 2.0,
+      "keys": [
+        {
+          "state": "work",
+          "time": 0
+        },
+        {
+          "state": "bridge1",
+          "time": 0.4
+        },
+        {
+          "state": "bridge2",
+          "time": 0.95
+        },
+        {
+          "state": "bridge3",
+          "time": 1.5
+        },
+        {
+          "state": "gesture",
+          "time": 2.0
+        }
+      ],
+      "reverse": "Traverse the same keys and matched Gaussian segments backwards over 2.0s, with no new paintings or holds."
+    }
+  ],
+  "states": [
+    {
+      "id": "work",
+      "role": "main",
+      "file": "assets/buergeramt/characters/nummernfluesterer-detail.webp",
+      "crop_xywh": [
+        0,
+        0,
+        640,
+        832
+      ],
+      "landmarks": {
+        "eye_right": [
+          298,
+          104
+        ],
+        "eye_left": [
+          324,
+          105
+        ],
+        "nose": [
+          310,
+          124
+        ],
+        "chin": [
+          311,
+          147
+        ],
+        "shoulder_right": [
+          244,
+          168
+        ],
+        "elbow_right": [
+          214,
+          280
+        ],
+        "grip_right": [
+          267,
+          197
+        ],
+        "stamp_knob": [
+          282,
+          180
+        ],
+        "stamp_base": [
+          283,
+          191
+        ],
+        "shoulder_left": [
+          389,
+          170
+        ],
+        "elbow_left": [
+          431,
+          319
+        ],
+        "hand_left": [
+          353,
+          357
+        ],
+        "hip_center": [
+          321,
+          430
+        ],
+        "skirt_hem_center": [
+          320,
+          400
+        ],
+        "foot_screen_left": [
+          244,
+          774
+        ],
+        "foot_screen_right": [
+          400,
+          774
+        ]
+      }
+    },
+    {
+      "id": "bridge1",
+      "role": "transition",
+      "file": "assets/sprite-sources/buergeramt/gaussian-arcs/nummernfluesterer-bridge1.webp",
+      "source_file": "assets/sprite-sources/buergeramt/gaussian-arcs/nummernfluesterer-bridge1-source.png",
+      "source_sha256": "e14727d3b79edf2c80215cb432c5352e570dba358aad5b433994113a4c7c3ec0",
+      "uniform_scale": 0.563,
+      "translation_xy": [
+        18,
+        -12
+      ],
+      "landmarks": {
+        "eye_right": [
+          294,
+          85
+        ],
+        "eye_left": [
+          322,
+          86
+        ],
+        "nose": [
+          309,
+          108
+        ],
+        "chin": [
+          318,
+          140
+        ],
+        "shoulder_right": [
+          241,
+          163
+        ],
+        "elbow_right": [
+          207,
+          263
+        ],
+        "grip_right": [
+          284,
+          197
+        ],
+        "stamp_knob": [
+          294,
+          161
+        ],
+        "stamp_base": [
+          294,
+          181
+        ],
+        "shoulder_left": [
+          392,
+          168
+        ],
+        "elbow_left": [
+          440,
+          320
+        ],
+        "hand_left": [
+          354,
+          355
+        ],
+        "hip_center": [
+          330,
+          430
+        ],
+        "skirt_hem_center": [
+          320,
+          400
+        ],
+        "foot_screen_left": [
+          244,
+          774
+        ],
+        "foot_screen_right": [
+          403,
+          775
+        ]
+      }
+    },
+    {
+      "id": "bridge2",
+      "role": "transition",
+      "file": "assets/sprite-sources/buergeramt/gaussian-arcs/nummernfluesterer-bridge2.webp",
+      "source_file": "assets/sprite-sources/buergeramt/gaussian-arcs/nummernfluesterer-bridge2-source.png",
+      "source_sha256": "d57941f0d2598075cf957cf8fa7841b3a07c5b1bfe31a94eb0bb25d9b9888aff",
+      "uniform_scale": 0.54,
+      "translation_xy": [
+        36,
+        10
+      ],
+      "landmarks": {
+        "eye_right": [
+          322,
+          70
+        ],
+        "eye_left": [
+          347,
+          72
+        ],
+        "nose": [
+          333,
+          93
+        ],
+        "chin": [
+          338,
+          117
+        ],
+        "shoulder_right": [
+          265,
+          150
+        ],
+        "elbow_right": [
+          200,
+          217
+        ],
+        "grip_right": [
+          302,
+          205
+        ],
+        "stamp_knob": [
+          328,
+          171
+        ],
+        "stamp_base": [
+          329,
+          196
+        ],
+        "shoulder_left": [
+          404,
+          164
+        ],
+        "elbow_left": [
+          428,
+          262
+        ],
+        "hand_left": [
+          350,
+          200
+        ],
+        "hip_center": [
+          336,
+          420
+        ],
+        "skirt_hem_center": [
+          329,
+          392
+        ],
+        "foot_screen_left": [
+          252,
+          773
+        ],
+        "foot_screen_right": [
+          405,
+          766
+        ]
+      }
+    },
+    {
+      "id": "bridge3",
+      "role": "transition",
+      "file": "assets/sprite-sources/buergeramt/gaussian-arcs/nummernfluesterer-bridge3.webp",
+      "source_file": "assets/sprite-sources/buergeramt/gaussian-arcs/nummernfluesterer-bridge3-source.png",
+      "source_sha256": "8f9660b4f24fe21dfd61c5e3ec79ca2954330c0dce4ad7788cc5d5c79178925c",
+      "uniform_scale": 0.54,
+      "translation_xy": [
+        18,
+        1
+      ],
+      "landmarks": {
+        "eye_right": [
+          318,
+          75
+        ],
+        "eye_left": [
+          347,
+          74
+        ],
+        "nose": [
+          331,
+          98
+        ],
+        "chin": [
+          337,
+          125
+        ],
+        "shoulder_right": [
+          260,
+          151
+        ],
+        "elbow_right": [
+          235,
+          283
+        ],
+        "grip_right": [
+          330,
+          338
+        ],
+        "stamp_knob": [
+          380,
+          148
+        ],
+        "stamp_base": [
+          380,
+          174
+        ],
+        "shoulder_left": [
+          396,
+          158
+        ],
+        "elbow_left": [
+          402,
+          260
+        ],
+        "hand_left": [
+          370,
+          176
+        ],
+        "hip_center": [
+          330,
+          420
+        ],
+        "skirt_hem_center": [
+          317,
+          392
+        ],
+        "foot_screen_left": [
+          247,
+          771
+        ],
+        "foot_screen_right": [
+          396,
+          765
+        ]
+      }
+    },
+    {
+      "id": "gesture",
+      "role": "terminal",
+      "file": "assets/buergeramt/characters/nummernfluesterer-detail.webp",
+      "crop_xywh": [
+        1920,
+        0,
+        640,
+        832
+      ],
+      "landmarks": {
+        "eye_right": [
+          310,
+          115
+        ],
+        "eye_left": [
+          337,
+          114
+        ],
+        "nose": [
+          323,
+          137
+        ],
+        "chin": [
+          326,
+          160
+        ],
+        "shoulder_right": [
+          255,
+          180
+        ],
+        "elbow_right": [
+          230,
+          327
+        ],
+        "grip_right": [
+          326,
+          365
+        ],
+        "stamp_knob": [
+          372,
+          206
+        ],
+        "stamp_base": [
+          370,
+          228
+        ],
+        "shoulder_left": [
+          384,
+          183
+        ],
+        "elbow_left": [
+          407,
+          277
+        ],
+        "hand_left": [
+          367,
+          235
+        ],
+        "hip_center": [
+          323,
+          429
+        ],
+        "skirt_hem_center": [
+          314,
+          400
+        ],
+        "foot_screen_left": [
+          253,
+          773
+        ],
+        "foot_screen_right": [
+          390,
+          763
+        ]
+      }
+    }
+  ],
+  "compatibility": "Ticket passes from anatomical right hand to left at bridge2 where both hands meet. At bridge3 right hand supports the folder and left holds ticket. This transfer changes ownership; preview only until ordered motion verifies release and receipt. Matched Gaussian correspondence must be reviewed through ordered playback; no unconstrained whole-body TPS.",
+  "promotion_requires": "encoded_ticket_handoff_motion_review"
+}

@@ -1,0 +1,887 @@
+{
+  "version": 1,
+  "id": "warteschlangenpoetin",
+  "representation": "paired-gaussian-paint",
+  "canvas_xy": [
+    640,
+    832
+  ],
+  "head_paint_source": null,
+  "states": [
+    {
+      "id": "work",
+      "role": "main",
+      "file": "assets/buergeramt/characters/warteschlangenpoetin-detail.webp",
+      "crop_xywh": [
+        0,
+        0,
+        640,
+        832
+      ],
+      "landmarks": {
+        "eye_right": [
+          305,
+          130
+        ],
+        "eye_left": [
+          332,
+          129
+        ],
+        "nose": [
+          319,
+          150
+        ],
+        "chin": [
+          320,
+          177
+        ],
+        "shoulder_right": [
+          250,
+          205
+        ],
+        "elbow_right": [
+          209,
+          296
+        ],
+        "grip_right": [
+          280,
+          252
+        ],
+        "stamp_knob": [
+          273,
+          214
+        ],
+        "stamp_base": [
+          284,
+          247
+        ],
+        "shoulder_left": [
+          390,
+          206
+        ],
+        "elbow_left": [
+          433,
+          306
+        ],
+        "hand_left": [
+          369,
+          271
+        ],
+        "hip_center": [
+          320,
+          395
+        ],
+        "skirt_hem_center": [
+          317,
+          511
+        ],
+        "foot_screen_left": [
+          245,
+          766
+        ],
+        "foot_screen_right": [
+          394,
+          767
+        ]
+      },
+      "prop_polygon_xy": [
+        [
+          210,
+          340
+        ],
+        [
+          237,
+          335
+        ],
+        [
+          266,
+          373
+        ],
+        [
+          257,
+          414
+        ],
+        [
+          224,
+          440
+        ],
+        [
+          192,
+          417
+        ],
+        [
+          190,
+          378
+        ]
+      ],
+      "prop_landmarks_xy": [
+        [
+          227,
+          350
+        ],
+        [
+          222,
+          348
+        ],
+        [
+          224,
+          393
+        ],
+        [
+          221,
+          433
+        ]
+      ],
+      "sha256": "476ed3a0714b2f8ee82579efa617a93c1bbcd8d494ca78a58d27cd201be87168"
+    },
+    {
+      "id": "bridge1",
+      "role": "transition",
+      "file": "assets/sprite-sources/buergeramt/gaussian-arcs/warteschlangenpoetin-bridge1.webp",
+      "source_file": "assets/sprite-sources/buergeramt/gaussian-arcs/warteschlangenpoetin-bridge1-source.png",
+      "source_sha256": "46bc1bc050541e5d6a2a7a337970371bd988265c5eeb8e3a999eb58e0f406ce6",
+      "uniform_scale": 0.54,
+      "translation_xy": [
+        44,
+        23
+      ],
+      "landmarks": {
+        "eye_right": [
+          309,
+          113
+        ],
+        "eye_left": [
+          339,
+          112
+        ],
+        "nose": [
+          325,
+          132
+        ],
+        "chin": [
+          327,
+          157
+        ],
+        "shoulder_right": [
+          246,
+          191
+        ],
+        "elbow_right": [
+          211,
+          278
+        ],
+        "grip_right": [
+          292,
+          242
+        ],
+        "stamp_knob": [
+          287,
+          197
+        ],
+        "stamp_base": [
+          298,
+          231
+        ],
+        "shoulder_left": [
+          391,
+          193
+        ],
+        "elbow_left": [
+          430,
+          303
+        ],
+        "hand_left": [
+          329,
+          265
+        ],
+        "hip_center": [
+          323,
+          397
+        ],
+        "skirt_hem_center": [
+          322,
+          510
+        ],
+        "foot_screen_left": [
+          250,
+          770
+        ],
+        "foot_screen_right": [
+          400,
+          768
+        ]
+      },
+      "prop_polygon_xy": [
+        [
+          210,
+          339
+        ],
+        [
+          245,
+          336
+        ],
+        [
+          269,
+          375
+        ],
+        [
+          260,
+          416
+        ],
+        [
+          226,
+          441
+        ],
+        [
+          191,
+          416
+        ],
+        [
+          190,
+          373
+        ]
+      ],
+      "prop_landmarks_xy": [
+        [
+          228,
+          348
+        ],
+        [
+          226,
+          345
+        ],
+        [
+          226,
+          395
+        ],
+        [
+          225,
+          437
+        ]
+      ],
+      "sha256": "45daccd9e6b2296e8ffbff9f57d0fe8085af1cfd62e0510ae0975cb234c1ac23"
+    },
+    {
+      "id": "bridge1b",
+      "role": "transition",
+      "file": "assets/sprite-sources/buergeramt/gaussian-arcs/warteschlangenpoetin-bridge1b.webp",
+      "source_file": "assets/sprite-sources/buergeramt/gaussian-arcs/warteschlangenpoetin-bridge-transition-source.png",
+      "source_sha256": "037eb25ea6f7654625d02ddfdae74f222a94b7d3848561197a58fe78d72723b3",
+      "source_crop_xyxy": [
+        352,
+        70,
+        802,
+        1373
+      ],
+      "uniform_scale": 0.585,
+      "translation_xy": [
+        -18,
+        -1
+      ],
+      "alpha_bbox_xyxy": [
+        188,
+        40,
+        451,
+        803
+      ],
+      "landmarks": {
+        "eye_right": [
+          291,
+          113
+        ],
+        "eye_left": [
+          318,
+          112
+        ],
+        "nose": [
+          304,
+          130
+        ],
+        "chin": [
+          304,
+          159
+        ],
+        "shoulder_right": [
+          242,
+          184
+        ],
+        "elbow_right": [
+          211,
+          282
+        ],
+        "grip_right": [
+          273,
+          234
+        ],
+        "stamp_knob": [
+          268,
+          196
+        ],
+        "stamp_base": [
+          280,
+          228
+        ],
+        "shoulder_left": [
+          374,
+          184
+        ],
+        "elbow_left": [
+          402,
+          291
+        ],
+        "hand_left": [
+          302,
+          265
+        ],
+        "hip_center": [
+          317,
+          397
+        ],
+        "skirt_hem_center": [
+          317,
+          513
+        ],
+        "foot_screen_left": [
+          244,
+          768
+        ],
+        "foot_screen_right": [
+          391,
+          768
+        ]
+      },
+      "prop_polygon_xy": [
+        [
+          384,
+          321
+        ],
+        [
+          410,
+          329
+        ],
+        [
+          429,
+          359
+        ],
+        [
+          433,
+          389
+        ],
+        [
+          421,
+          409
+        ],
+        [
+          397,
+          382
+        ]
+      ],
+      "prop_landmarks_xy": [
+        [
+          392,
+          332
+        ],
+        [
+          407,
+          333
+        ],
+        [
+          419,
+          365
+        ],
+        [
+          423,
+          399
+        ]
+      ],
+      "prop_occlusion": "The one brown bag is mostly behind the torso; only its screen-right edge is visible.",
+      "sha256": "c48a15db452a4902fb5750d674a75490947f5093ab4870d40ce47afde45ce31b"
+    },
+    {
+      "id": "bridge2",
+      "role": "transition",
+      "file": "assets/sprite-sources/buergeramt/gaussian-arcs/warteschlangenpoetin-bridge2.webp",
+      "source_file": "assets/sprite-sources/buergeramt/gaussian-arcs/warteschlangenpoetin-bridge2-source.png",
+      "source_sha256": "7b3e98a55b33eaf12efcaf4a213e5f57af13a7221dd10c65aad6f88d9e94aacf",
+      "uniform_scale": 0.54,
+      "translation_xy": [
+        12,
+        0
+      ],
+      "landmarks": {
+        "eye_right": [
+          292,
+          121
+        ],
+        "eye_left": [
+          322,
+          119
+        ],
+        "nose": [
+          306,
+          141
+        ],
+        "chin": [
+          310,
+          170
+        ],
+        "shoulder_right": [
+          242,
+          182
+        ],
+        "elbow_right": [
+          216,
+          294
+        ],
+        "grip_right": [
+          279,
+          230
+        ],
+        "stamp_knob": [
+          272,
+          182
+        ],
+        "stamp_base": [
+          284,
+          219
+        ],
+        "shoulder_left": [
+          362,
+          181
+        ],
+        "elbow_left": [
+          385,
+          315
+        ],
+        "hand_left": [
+          285,
+          262
+        ],
+        "hip_center": [
+          304,
+          406
+        ],
+        "skirt_hem_center": [
+          300,
+          515
+        ],
+        "foot_screen_left": [
+          253,
+          770
+        ],
+        "foot_screen_right": [
+          341,
+          766
+        ]
+      },
+      "prop_polygon_xy": [
+        [
+          394,
+          296
+        ],
+        [
+          431,
+          298
+        ],
+        [
+          460,
+          340
+        ],
+        [
+          460,
+          401
+        ],
+        [
+          443,
+          440
+        ],
+        [
+          402,
+          440
+        ],
+        [
+          377,
+          397
+        ],
+        [
+          378,
+          344
+        ]
+      ],
+      "prop_landmarks_xy": [
+        [
+          394,
+          327
+        ],
+        [
+          418,
+          303
+        ],
+        [
+          427,
+          378
+        ],
+        [
+          425,
+          438
+        ]
+      ],
+      "sha256": "20f8a997310103d86fccd0717fd733de3b41c03281d18c7239cd68d5867dd73a"
+    },
+    {
+      "id": "gesture",
+      "role": "terminal",
+      "file": "assets/buergeramt/characters/warteschlangenpoetin-detail.webp",
+      "crop_xywh": [
+        1920,
+        0,
+        640,
+        832
+      ],
+      "landmarks": {
+        "eye_right": [
+          285,
+          159
+        ],
+        "eye_left": [
+          313,
+          158
+        ],
+        "nose": [
+          300,
+          179
+        ],
+        "chin": [
+          300,
+          207
+        ],
+        "shoulder_right": [
+          244,
+          219
+        ],
+        "elbow_right": [
+          220,
+          300
+        ],
+        "grip_right": [
+          282,
+          258
+        ],
+        "stamp_knob": [
+          273,
+          214
+        ],
+        "stamp_base": [
+          286,
+          244
+        ],
+        "shoulder_left": [
+          353,
+          220
+        ],
+        "elbow_left": [
+          380,
+          306
+        ],
+        "hand_left": [
+          286,
+          297
+        ],
+        "hip_center": [
+          305,
+          422
+        ],
+        "skirt_hem_center": [
+          299,
+          537
+        ],
+        "foot_screen_left": [
+          260,
+          766
+        ],
+        "foot_screen_right": [
+          341,
+          767
+        ]
+      },
+      "prop_polygon_xy": [
+        [
+          393,
+          320
+        ],
+        [
+          436,
+          321
+        ],
+        [
+          472,
+          358
+        ],
+        [
+          476,
+          414
+        ],
+        [
+          451,
+          451
+        ],
+        [
+          409,
+          449
+        ],
+        [
+          382,
+          408
+        ],
+        [
+          381,
+          356
+        ]
+      ],
+      "prop_landmarks_xy": [
+        [
+          399,
+          344
+        ],
+        [
+          424,
+          327
+        ],
+        [
+          436,
+          386
+        ],
+        [
+          434,
+          446
+        ]
+      ],
+      "sha256": "476ed3a0714b2f8ee82579efa617a93c1bbcd8d494ca78a58d27cd201be87168"
+    }
+  ],
+  "arcs": [
+    {
+      "id": "work-gesture",
+      "from": "work",
+      "to": "gesture",
+      "duration": 2.0,
+      "keys": [
+        {
+          "state": "work",
+          "time": 0
+        },
+        {
+          "state": "bridge1",
+          "time": 0.65
+        },
+        {
+          "state": "bridge1b",
+          "time": 1.0
+        },
+        {
+          "state": "bridge2",
+          "time": 1.35
+        },
+        {
+          "state": "gesture",
+          "time": 2.0
+        }
+      ],
+      "reverse": "Traverse the same keys and matched Gaussian segments backwards over 2.0s, with no new paintings or holds.",
+      "segments": [
+        {
+          "segment": 0,
+          "start": 0,
+          "end": 0.65
+        },
+        {
+          "segment": 1,
+          "start": 0.65,
+          "end": 1.0
+        },
+        {
+          "segment": 2,
+          "start": 1.0,
+          "end": 1.35
+        },
+        {
+          "segment": 3,
+          "start": 1.35,
+          "end": 2.0
+        }
+      ]
+    }
+  ],
+  "segments": [
+    {
+      "from": "work",
+      "to": "bridge1"
+    },
+    {
+      "from": "bridge1",
+      "to": "bridge1b"
+    },
+    {
+      "from": "bridge1b",
+      "to": "bridge2"
+    },
+    {
+      "from": "bridge2",
+      "to": "gesture"
+    }
+  ],
+  "variants": {
+    "desktop": {
+      "file": "warteschlangenpoetin-desktop.bin.gz",
+      "sha256": "37fd0e2357415bfe5c81aaa673bff383175c4b3bc927b8cf2329413d7605d9f4",
+      "decoded_sha256": "7c30e09d1e6ae95adf454f8842a1379e67eb5f69c3d55232d3ed1a196d802fc0",
+      "bytes": 263614,
+      "decoded_bytes": 516096,
+      "sample_count": 5376,
+      "stride_px": 5,
+      "segment_count": 4,
+      "record_bytes": 24,
+      "trajectories": [
+        {
+          "segment": 0,
+          "start_slot": 1640,
+          "end_slot": 1871,
+          "pivot_start": [
+            -0.11177884615384616,
+            0.5793269230769231
+          ],
+          "pivot_end": [
+            -0.11057692307692307,
+            0.5817307692307693
+          ],
+          "angle_radians": 0.03480811987315248
+        },
+        {
+          "segment": 1,
+          "start_slot": 1610,
+          "end_slot": 1841,
+          "pivot_start": [
+            -0.11057692307692307,
+            0.5817307692307693
+          ],
+          "pivot_end": [
+            0.08653846153846154,
+            0.6009615384615384
+          ],
+          "angle_radians": 0.5254082862147567
+        },
+        {
+          "segment": 2,
+          "start_slot": 1587,
+          "end_slot": 1940,
+          "pivot_start": [
+            0.08653846153846154,
+            0.6009615384615384
+          ],
+          "pivot_end": [
+            0.0889423076923077,
+            0.6069711538461539
+          ],
+          "angle_radians": -0.11166653760134532
+        },
+        {
+          "segment": 3,
+          "start_slot": 1499,
+          "end_slot": 1852,
+          "pivot_start": [
+            0.0889423076923077,
+            0.6069711538461539
+          ],
+          "pivot_end": [
+            0.09495192307692307,
+            0.5865384615384616
+          ],
+          "angle_radians": 0.06143172407637672
+        }
+      ]
+    },
+    "mobile": {
+      "file": "warteschlangenpoetin-mobile.bin.gz",
+      "sha256": "4f6fcdf4adfb88cc7b9e9d53d6353956de24c362557e52032f4918715c4eb1a6",
+      "decoded_sha256": "8f9585752198dfb290c1f50520ea61c37aa04f03a2be0630d6c540f27f6e13b8",
+      "bytes": 103109,
+      "decoded_bytes": 196608,
+      "sample_count": 2048,
+      "stride_px": 8,
+      "segment_count": 4,
+      "record_bytes": 24,
+      "trajectories": [
+        {
+          "segment": 0,
+          "start_slot": 657,
+          "end_slot": 748,
+          "pivot_start": [
+            -0.11177884615384616,
+            0.5793269230769231
+          ],
+          "pivot_end": [
+            -0.11057692307692307,
+            0.5817307692307693
+          ],
+          "angle_radians": 0.03480811987315248
+        },
+        {
+          "segment": 1,
+          "start_slot": 622,
+          "end_slot": 713,
+          "pivot_start": [
+            -0.11057692307692307,
+            0.5817307692307693
+          ],
+          "pivot_end": [
+            0.08653846153846154,
+            0.6009615384615384
+          ],
+          "angle_radians": 0.5254082862147567
+        },
+        {
+          "segment": 2,
+          "start_slot": 616,
+          "end_slot": 753,
+          "pivot_start": [
+            0.08653846153846154,
+            0.6009615384615384
+          ],
+          "pivot_end": [
+            0.0889423076923077,
+            0.6069711538461539
+          ],
+          "angle_radians": -0.11166653760134532
+        },
+        {
+          "segment": 3,
+          "start_slot": 567,
+          "end_slot": 704,
+          "pivot_start": [
+            0.0889423076923077,
+            0.6069711538461539
+          ],
+          "pivot_end": [
+            0.09495192307692307,
+            0.5865384615384616
+          ],
+          "angle_radians": 0.06143172407637672
+        }
+      ]
+    }
+  },
+  "limits": [
+    "Main and terminal anchors are semantic checkpoints; transition anchors never create scheduled holds",
+    "One paired cloud blends position and linear-light paint; no whole-character scatter or midpoint paint swap",
+    "A fixed source head paint is similarity-transformed by face landmarks when head_paint_source is set",
+    "Main source paintings differ; Gaussian correspondence needs rendered anatomical review",
+    "Existing route/gait and dialogue owners remain authoritative"
+  ],
+  "prop_ownership": {
+    "type": "part2_brown_shoulder_bag",
+    "owner": "shoulder_strap_and_back",
+    "secondary": "small_ticket_in_anatomical_right_hand_and_notes_in_anatomical_left_arm",
+    "occlusion": "bag passes behind torso at bridge1b; visible edge only"
+  },
+  "source_notes": "Ticket remains in right hand while the left arm pulls loose papers to chest and the knees bend in recoil. Matched Gaussian correspondence must be reviewed through ordered playback; no unconstrained whole-body TPS. Bridge1b is a real painted behind-torso bag occlusion checkpoint; transport the visible bag through its occluded edge with body depth masking."
+}

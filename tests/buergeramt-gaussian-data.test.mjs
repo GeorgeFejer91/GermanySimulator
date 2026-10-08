@@ -1,0 +1,48 @@
+import test from 'node:test';
+import assert from 'node:assert/strict';
+import {readFileSync,readdirSync} from 'node:fs';
+import {createHash} from 'node:crypto';
+import {gunzipSync} from 'node:zlib';
+const root=new URL('../',import.meta.url),folder=new URL('../assets/buergeramt/animation/',import.meta.url),hash=b=>createHash('sha256').update(b).digest('hex');
+const read=file=>readFileSync(new URL(file,root));
+function paint(buffer,count,segment,end){
+ const points=[];
+ for(let n=0;n<count;n++){
+  const offset=(segment*count+n)*24,color=offset+(end?20:16);
+  if(!buffer[color+3])continue;
+  points.push(buffer.subarray(offset+(end?8:0),offset+(end?16:8)).toString('hex')+buffer.subarray(color,color+4).toString('hex'));
+ }
+ return points.sort();
+}
+
+for(const id of ['nachtschichtmelderin','kopiependler'])test(`${id} new leg paint begins on existing paint rather than in empty air`,()=>{
+ const manifest=JSON.parse(readFileSync(new URL(`${id}.json`,folder)));
+ for(const variant of Object.values(manifest.variants)){
+  const data=gunzipSync(readFileSync(new URL(variant.file,folder))),count=variant.sample_count,segment=1;
+  const support=[],births=[];
+  for(let slot=0;slot<count;slot++){
+   const offset=(segment*count+slot)*24;
+   if(data[offset+19]>0)support.push([data.readFloatLE(offset),data.readFloatLE(offset+4)]);
+   if(data[offset+19]===0&&data[offset+23]>0&&data.readFloatLE(offset+12)<.45)
+    births.push([data.readFloatLE(offset),data.readFloatLE(offset+4)]);
+  }
+  assert(births.length>0,'exercise the observed unmatched lower-body paint');
+  const radius=variant.stride_px/manifest.canvas_xy[1]+1e-6;
+  for(const point of births)assert(support.some(q=>Math.hypot(point[0]-q[0],point[1]-q[1])<=radius),
+    'an invisible starting point outside painted support creates a detached transition tail');
+ }
+});
+for(const file of readdirSync(folder).filter(f=>f.endsWith('.json'))){
+ const manifest=JSON.parse(readFileSync(new URL(file,folder)));
+ test(`${manifest.id} sources, compressed data and exact endpoint seams remain bound`,()=>{
+  for(const state of manifest.states)assert.equal(hash(read(state.file)),state.sha256,state.id);
+  assert(manifest.states.some(s=>s.role==='transition'),'action needs actual bridge paint');
+  for(const variant of Object.values(manifest.variants)){
+   const zipped=readFileSync(new URL(variant.file,folder)),data=gunzipSync(zipped);
+   assert.equal(hash(zipped),variant.sha256);assert.equal(hash(data),variant.decoded_sha256);assert.equal(data.length,variant.decoded_bytes);assert.equal(zipped.length,variant.bytes);
+   for(let a=0;a<manifest.segments.length;a++)for(let b=0;b<manifest.segments.length;b++)if(manifest.segments[a].to===manifest.segments[b].from){
+    assert.deepEqual(paint(data,variant.sample_count,a,true),paint(data,variant.sample_count,b,false),`seam ${a} → ${b}`);
+   }
+  }
+ });
+}

@@ -1,0 +1,238 @@
+// One registered Gaussian cloud per actor. The simulation supplies all action time.
+const clamp=value=>Math.max(0,Math.min(1,Number.isFinite(value)?value:0));
+const RECORD_BYTES=24,TEXTURE_WIDTH=256,MAX_SAMPLES=20000,MAX_SEGMENTS=32;
+
+// Reference geometry for a named part turning between two registered paintings.
+// The GPU uses the same expression below; the endpoints remain exact source XY.
+export function sampleOwnedTrajectory(trajectory,start,end,phase){
+  const u=clamp(phase),angle=trajectory.angle_radians,[ax,ay]=trajectory.pivot_start,[bx,by]=trajectory.pivot_end;
+  const rotated=(x,y,radians)=>[x*Math.cos(radians)-y*Math.sin(radians),x*Math.sin(radians)+y*Math.cos(radians)];
+  const localEnd=rotated(end[0]-bx,end[1]-by,-angle);
+  const local=[(start[0]-ax)*(1-u)+localEnd[0]*u,(start[1]-ay)*(1-u)+localEnd[1]*u];
+  const turned=rotated(...local,u*angle);
+  return[ax+(bx-ax)*u+turned[0],ay+(by-ay)*u+turned[1]];
+}
+
+export function sampleArc(manifest,state){
+  if(!manifest?.arcs?.length||!manifest?.segments?.length||!state)throw new Error('Gaussian animation state unavailable');
+  const arcName=state.arc;
+  if(arcName===null){
+    const pose=state.pose;
+    const incoming=manifest.arcs.find(arc=>arc.to===pose);
+    if(incoming){const key=incoming.segments.at(-1);return{segment:key.segment,u:1,arc:null,pose}}
+    const outgoing=manifest.arcs.find(arc=>arc.from===pose);
+    if(outgoing)return{segment:outgoing.segments[0].segment,u:0,arc:null,pose};
+    throw new Error('Unknown Gaussian main pose: '+pose);
+  }
+  let reverse=false,arcId=arcName,phase=clamp(state.phase);
+  if(arcName==='work-gesture-work'){
+    arcId='work-gesture';reverse=phase>.5;phase=reverse?2*phase-1:2*phase;
+  }else if(arcName.endsWith('-back')){
+    arcId=arcName.slice(0,-5);reverse=true;
+  }
+  const arc=manifest.arcs.find(candidate=>candidate.id===arcId);
+  if(!arc)throw new Error('Unknown Gaussian arc: '+arcName);
+  const time=(reverse?1-phase:phase)*arc.duration;
+  const keys=arc.segments;
+  const key=keys.find(segment=>time<segment.end-1e-9)??keys.at(-1);
+  return{segment:key.segment,u:clamp((time-key.start)/(key.end-key.start)),arc:arcName,pose:state.pose};
+}
+
+export function validateGaussianManifest(manifest,variant='desktop'){
+  const selected=manifest?.variants?.[variant],canvas=manifest?.canvas_xy;
+  if(manifest?.version!==1||manifest.representation!=='paired-gaussian-paint'||
+     !Array.isArray(canvas)||canvas.length!==2||canvas.some(n=>!Number.isInteger(n)||n<1||n>4096)||
+     !Array.isArray(manifest.states)||!manifest.states.length||
+     !Array.isArray(manifest.segments)||manifest.segments.length<1||manifest.segments.length>MAX_SEGMENTS||
+     !Array.isArray(manifest.arcs)||!selected||
+     !Number.isInteger(selected.sample_count)||selected.sample_count<1||selected.sample_count>MAX_SAMPLES||selected.sample_count%TEXTURE_WIDTH!==0||
+     selected.segment_count!==manifest.segments.length||selected.record_bytes!==RECORD_BYTES||
+     selected.decoded_bytes!==selected.sample_count*selected.segment_count*RECORD_BYTES||
+     !Number.isInteger(selected.bytes)||selected.bytes<1||selected.bytes>8_000_000||
+     !Number.isFinite(selected.stride_px)||selected.stride_px<=0||selected.stride_px>32||
+     typeof selected.file!=='string'||!/^[\w.-]+\.bin\.gz$/.test(selected.file))throw new Error('Invalid Gaussian animation manifest');
+  const states=new Set(manifest.states.map(item=>item.id));
+  if(states.size!==manifest.states.length||manifest.segments.some(segment=>!states.has(segment.from)||!states.has(segment.to)))throw new Error('Invalid Gaussian state graph');
+  for(const arc of manifest.arcs){
+    if(!(arc.duration>0)||!Array.isArray(arc.segments)||!arc.segments.length)throw new Error('Invalid Gaussian arc');
+    let previous=0;
+    for(const key of arc.segments){
+      if(!Number.isInteger(key.segment)||key.segment<0||key.segment>=selected.segment_count||
+         !Number.isFinite(key.start)||!Number.isFinite(key.end)||Math.abs(key.start-previous)>1e-5||key.end<=key.start||key.end>arc.duration+1e-5)throw new Error('Invalid Gaussian segment timing');
+      previous=key.end;
+    }
+    if(Math.abs(previous-arc.duration)>1e-5)throw new Error('Incomplete Gaussian arc');
+  }
+  const trajectories=selected.trajectories??[];
+  if(!Array.isArray(trajectories)||trajectories.length>selected.segment_count*8)throw new Error('Invalid Gaussian trajectories');
+  const ownedRanges=new Map();
+  for(const item of trajectories){
+    const pivot=value=>Array.isArray(value)&&value.length===2&&value.every(n=>Number.isFinite(n)&&Math.abs(n)<=4);
+    if(!item||!Number.isInteger(item.segment)||item.segment<0||item.segment>=selected.segment_count||
+       !Number.isInteger(item.start_slot)||item.start_slot<0||
+       !Number.isInteger(item.end_slot)||item.end_slot<=item.start_slot||item.end_slot>selected.sample_count||
+       !pivot(item.pivot_start)||!pivot(item.pivot_end)||
+       !Number.isFinite(item.angle_radians)||Math.abs(item.angle_radians)>Math.PI)
+      throw new Error('Invalid Gaussian trajectory');
+    const ranges=ownedRanges.get(item.segment)??[];
+    if(ranges.length>=8||ranges.some(range=>item.start_slot<range.end_slot&&range.start_slot<item.end_slot))throw new Error('Overlapping Gaussian trajectory');
+    ranges.push(item);ownedRanges.set(item.segment,ranges);
+  }
+  return selected;
+}
+
+export function unpackGaussianRecords(manifest,variant,buffer){
+  const selected=validateGaussianManifest(manifest,variant);
+  if(buffer.byteLength!==selected.decoded_bytes)throw new Error('Invalid Gaussian record length');
+  const count=selected.sample_count,total=count*selected.segment_count,view=new DataView(buffer);
+  const xy=new Float32Array(total*4),start=new Uint8Array(total*4),end=new Uint8Array(total*4);
+  for(let slot=0;slot<total;slot++){
+    const record=slot*RECORD_BYTES,base=slot*4;
+    for(let axis=0;axis<4;axis++){
+      const value=view.getFloat32(record+axis*4,true);
+      if(!Number.isFinite(value)||Math.abs(value)>4)throw new Error('Non-finite or unbounded Gaussian coordinate');
+      xy[base+axis]=value;
+      start[base+axis]=view.getUint8(record+16+axis);
+      end[base+axis]=view.getUint8(record+20+axis);
+    }
+  }
+  return{xy,start,end,count,rows:count/TEXTURE_WIDTH,segments:selected.segment_count,stride:selected.stride_px};
+}
+
+async function loadRecords(url,selected,signal){
+  if(typeof DecompressionStream!=='function')throw new Error('Native gzip decoding unavailable');
+  const response=await fetch(url,{signal});
+  if(!response.ok)throw new Error('Gaussian animation data unavailable');
+  const compressed=await response.arrayBuffer();
+  if(compressed.byteLength!==selected.bytes)throw new Error('Invalid compressed Gaussian length');
+  const reader=new Blob([compressed]).stream().pipeThrough(new DecompressionStream('gzip')).getReader();
+  const decoded=new Uint8Array(selected.decoded_bytes);let offset=0;
+  try{
+    while(true){
+      const {value,done}=await reader.read();if(done)break;
+      if(offset+value.length>decoded.length)throw new Error('Gaussian gzip exceeds declared size');
+      decoded.set(value,offset);offset+=value.length;
+    }
+  }catch(error){await reader.cancel().catch(()=>{});throw error}
+  signal?.throwIfAborted?.();
+  if(offset!==selected.decoded_bytes)throw new Error('Invalid decoded Gaussian length');
+  return decoded.buffer;
+}
+
+export async function createGaussianActor({THREE,owner,manifestUrl,variant='desktop',signal}){
+  if(!owner?.attach||!owner?.retire||!owner?.SplatMesh||!owner?.dyno)throw new Error('Gaussian owner unavailable');
+  const url=new URL(manifestUrl,import.meta.url);
+  const response=await fetch(url,{signal});
+  if(!response.ok)throw new Error('Gaussian animation manifest unavailable');
+  const manifest=await response.json(),selected=validateGaussianManifest(manifest,variant);
+  const data=unpackGaussianRecords(manifest,variant,await loadRecords(new URL(selected.file,url),selected,signal));
+  signal?.throwIfAborted?.();
+  const {dyno,SplatMesh}=owner,textures=[];
+  const glslNumber=value=>Number(value).toPrecision(9);
+  const trajectoryCode=segmentExpression=>(selected.trajectories??[]).map(item=>`
+    if(int(${segmentExpression})==${item.segment}&&slot>=${item.start_slot}&&slot<${item.end_slot}){
+      vec2 pivotA=vec2(${item.pivot_start.map(glslNumber).join(',')}),pivotB=vec2(${item.pivot_end.map(glslNumber).join(',')});
+      float angle=${glslNumber(item.angle_radians)},theta=u*angle;
+      vec2 localB=endpoints.zw-pivotB;
+      vec2 unturnedB=vec2(cos(angle)*localB.x+sin(angle)*localB.y,-sin(angle)*localB.x+cos(angle)*localB.y);
+      vec2 local=mix(endpoints.xy-pivotA,unturnedB,u);
+      p=mix(pivotA,pivotB,u)+vec2(cos(theta)*local.x-sin(theta)*local.y,sin(theta)*local.x+cos(theta)*local.y);
+    }
+  `).join('\n');
+  const stateById=new Map(manifest.states.map(item=>[item.id,item]));
+  let mesh=null,attached=false,disposed=false,failure='',readyAfterSort=null,lastKey='';
+  const releaseTextures=()=>{for(const texture of textures)texture.dispose()};
+  try{
+    for(const [array,type] of [[data.xy,THREE.FloatType],[data.start,THREE.UnsignedByteType],[data.end,THREE.UnsignedByteType]]){
+      const texture=new THREE.DataTexture(array,TEXTURE_WIDTH,data.rows*data.segments,THREE.RGBAFormat,type);
+      texture.minFilter=texture.magFilter=THREE.NearestFilter;
+      texture.wrapS=texture.wrapT=THREE.ClampToEdgeWrapping;
+      texture.generateMipmaps=false;texture.flipY=false;texture.needsUpdate=true;
+      textures.push(texture);
+    }
+    const segment=dyno.dynoFloat(0),blend=dyno.dynoFloat(0),mouth=dyno.dynoFloat(0),mouthCenter=dyno.dynoVec2(new THREE.Vector2()),tint=dyno.dynoVec3(new THREE.Vector3(1,1,1)),breath=dyno.dynoFloat(0);
+    const modifier=dyno.dynoBlock({gsplat:dyno.Gsplat},{gsplat:dyno.Gsplat},({gsplat})=>({gsplat:new dyno.Dyno({
+      inTypes:{gsplat:dyno.Gsplat,segment:'float',blend:'float',mouth:'float',mouthCenter:'vec2',tint:'vec3',breath:'float',xy:'sampler2D',start:'sampler2D',end:'sampler2D'},
+      outTypes:{gsplat:dyno.Gsplat},
+      statements:({inputs:i,outputs:o})=>dyno.unindentLines(`
+        ${o.gsplat}=${i.gsplat};
+        ivec2 cell=ivec2(${i.gsplat}.center.xy+vec2(.1));
+        int slot=cell.x+cell.y*${TEXTURE_WIDTH};
+        cell.y+=int(${i.segment})*${data.rows};
+        vec4 endpoints=texelFetch(${i.xy},cell,0);
+        vec4 paintA=texelFetch(${i.start},cell,0),paintB=texelFetch(${i.end},cell,0);
+        float u=clamp(${i.blend},0.,1.);
+        vec2 p=mix(endpoints.xy,endpoints.zw,u);
+        ${trajectoryCode(i.segment)}
+        vec2 face=(p-${i.mouthCenter})/vec2(.085,.055);
+        float lip=exp(-dot(face,face)*3.5)*${i.mouth};
+        p.y-=lip*.0025;
+        ${o.gsplat}.center=vec3(p,0.);
+        vec3 linearA=mix(paintA.rgb/12.92,pow((paintA.rgb+.055)/1.055,vec3(2.4)),step(vec3(.04045),paintA.rgb));
+        vec3 linearB=mix(paintB.rgb/12.92,pow((paintB.rgb+.055)/1.055,vec3(2.4)),step(vec3(.04045),paintB.rgb));
+        float alpha=mix(paintA.a,paintB.a,u);
+        vec3 premul=mix(linearA*paintA.a,linearB*paintB.a,u);
+        vec3 linear=alpha>1e-5?premul/alpha:vec3(0.);
+        linear*=${i.tint};
+        float lightness=dot(linear,vec3(.2126,.7152,.0722));
+        linear=mix(vec3(lightness),linear,1.085+.055*${i.breath})*(1.015+.035*${i.breath});
+        vec3 srgb=mix(linear*12.92,1.055*pow(max(linear,vec3(0.)),vec3(1./2.4))-.055,step(vec3(.0031308),linear));
+        // Spark decodes Gsplat RGB as sRGB during rendering.
+        ${o.gsplat}.rgba=vec4(srgb,alpha);
+      `),
+    }).apply({gsplat,segment,blend,mouth,mouthCenter,tint,breath,xy:dyno.dynoSampler2D(textures[0]),start:dyno.dynoSampler2D(textures[1]),end:dyno.dynoSampler2D(textures[2])}).gsplat}));
+    mesh=new SplatMesh({maxSplats:data.count,lod:false,enableLod:false,editable:false,raycastable:false,
+      objectModifier:modifier,constructSplats:splats=>{
+        const center=new THREE.Vector3(),scale=new THREE.Vector3(data.stride/manifest.canvas_xy[1]*.65,data.stride/manifest.canvas_xy[1]*.65,.0008),rotation=new THREE.Quaternion(),white=new THREE.Color(1,1,1);
+        for(let slot=0;slot<data.count;slot++){
+          center.set(slot%TEXTURE_WIDTH,Math.floor(slot/TEXTURE_WIDTH),0);
+          splats.pushSplat(center,scale,rotation,1,white);
+        }
+      }});
+    await mesh.initialized;signal?.throwIfAborted?.();
+    mesh.visible=false;owner.attach(mesh);attached=true;
+    mesh.updateGenerator?.();
+    const onAbort=()=>{api.dispose()};
+    const api={
+      update(state,sourceMesh,{visible=true,reducedMotion=false}={}){
+        if(disposed||failure||!owner.inspect().ready||!state||!sourceMesh){if(mesh)mesh.visible=false;return false}
+        try{
+          if(!visible){mesh.visible=false;readyAfterSort=null;return false}
+          const sample=sampleArc(manifest,state),height=sourceMesh.geometry?.parameters?.height;
+          if(!(height>0)||!(sourceMesh.scale?.y>0))throw new Error('Gaussian source height unavailable');
+          const color=sourceMesh.material?.color,paintBreath=sourceMesh.material?.userData?.breath?.value??0;
+          const key=[sample.segment,sample.u,state.speaking,state.mouthFrame,reducedMotion,sourceMesh.position.x,sourceMesh.position.y,sourceMesh.position.z,sourceMesh.scale.y,sourceMesh.rotation.x,sourceMesh.rotation.y,sourceMesh.rotation.z,color?.r,color?.g,color?.b,paintBreath].join(':');
+          if(key!==lastKey){
+            segment.value=sample.segment;blend.value=sample.u;
+            tint.value.set(color?.r??1,color?.g??1,color?.b??1);breath.value=paintBreath;
+            const pair=manifest.segments[sample.segment];
+            const point=(id,name)=>{const marks=stateById.get(id)?.landmarks;return Array.isArray(marks)?marks[name==='nose'?2:3]:marks?.[name]};
+            const noseA=point(pair.from,'nose'),noseB=point(pair.to,'nose'),chinA=point(pair.from,'chin'),chinB=point(pair.to,'chin');
+            if(noseA&&noseB&&chinA&&chinB){
+              const xA=noseA[0]*.45+chinA[0]*.55,xB=noseB[0]*.45+chinB[0]*.55;
+              const yA=noseA[1]*.45+chinA[1]*.55,yB=noseB[1]*.45+chinB[1]*.55;
+              mouthCenter.value.set(((xA+(xB-xA)*sample.u)-manifest.canvas_xy[0]/2)/manifest.canvas_xy[1],(manifest.canvas_xy[1]-(yA+(yB-yA)*sample.u))/manifest.canvas_xy[1]);
+            }
+            mouth.value=state.speaking&&!reducedMotion?([0,.45,.9,.3,.7,.25,1,.1][state.mouthFrame%8]??0):0;
+            mesh.position.copy(sourceMesh.position);mesh.position.y=sourceMesh.position.y-height*sourceMesh.scale.y/2;
+            mesh.quaternion.copy(sourceMesh.quaternion);
+            mesh.scale.setScalar(height*sourceMesh.scale.y);
+            mesh.needsUpdate=true;lastKey=key;
+          }
+          mesh.visible=true;
+          if(readyAfterSort===null)readyAfterSort=owner.inspect().startedUpdates+1;
+          return api.inspect().visible;
+        }catch(error){failure=error.message||String(error);mesh.visible=false;return false}
+      },
+      inspect(){const status=owner.inspect();return{ready:!disposed&&!failure&&status.ready,visible:!disposed&&!failure&&mesh.visible&&status.ready&&readyAfterSort!==null&&status.completedUpdates>=readyAfterSort&&status.activeSplats>0,pending:status.pending,failure:failure||status.failure,variant,id:manifest.id,count:data.count,segmentCount:data.segments,bytes:selected.decoded_bytes,segment:segment.value,blend:blend.value,trajectoryCount:selected.trajectories?.length??0,activeTrajectory:selected.trajectories?.find(item=>item.segment===segment.value)??null}},
+      dispose(){if(disposed)return;disposed=true;signal?.removeEventListener?.('abort',onAbort);owner.retire(mesh,releaseTextures)},
+    };
+    signal?.addEventListener?.('abort',onAbort,{once:true});
+    if(signal?.aborted)api.dispose();
+    return api;
+  }catch(error){
+    if(mesh){if(attached)owner.retire(mesh,releaseTextures);else{mesh.dispose?.();releaseTextures()}}
+    else releaseTextures();
+    throw error;
+  }
+}

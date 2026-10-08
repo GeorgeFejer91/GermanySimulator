@@ -1,0 +1,358 @@
+{
+  "version": 1,
+  "id": "pfandarchitektin",
+  "canvas_xy": [
+    640,
+    832
+  ],
+  "source_authority": "assets/buergeramt/characters/pfandarchitektin-detail.webp",
+  "source_sha256": "91e1708bf2305dad1bf045bd950bf32eaf4337660f09a209c8114751206ffee2",
+  "event_owner": "buergeramt.js dialogue gesture; work/look/flinch and walking remain existing controllers",
+  "prop_ownership": {
+    "type": "flexible_receipt_ribbon",
+    "owner": "anatomical_right_hand",
+    "rigid_transform": false,
+    "secondary": "tied_binder_in_anatomical_left_arm"
+  },
+  "landmark_note": "Native 640x832 visual reading; anatomical right is screen-left. stamp_knob/base mark the upper and lower ends of the flexible receipt ribbon, not a rigid stamp. Common shoe baseline; source resolution classes are registered with fixed scales.",
+  "arcs": [
+    {
+      "id": "work-gesture",
+      "from": "work",
+      "to": "gesture",
+      "duration": 2.0,
+      "keys": [
+        {
+          "state": "work",
+          "time": 0
+        },
+        {
+          "state": "bridge1",
+          "time": 0.65
+        },
+        {
+          "state": "bridge2",
+          "time": 1.35
+        },
+        {
+          "state": "gesture",
+          "time": 2.0
+        }
+      ],
+      "reverse": "Traverse the same keys and matched Gaussian segments backwards over 2.0s, with no new paintings or holds."
+    }
+  ],
+  "states": [
+    {
+      "id": "work",
+      "role": "main",
+      "file": "assets/buergeramt/characters/pfandarchitektin-detail.webp",
+      "crop_xywh": [
+        0,
+        0,
+        640,
+        832
+      ],
+      "landmarks": {
+        "eye_right": [
+          288,
+          111
+        ],
+        "eye_left": [
+          325,
+          111
+        ],
+        "nose": [
+          306,
+          128
+        ],
+        "chin": [
+          307,
+          153
+        ],
+        "shoulder_right": [
+          247,
+          168
+        ],
+        "elbow_right": [
+          190,
+          272
+        ],
+        "grip_right": [
+          257,
+          206
+        ],
+        "stamp_knob": [
+          279,
+          193
+        ],
+        "stamp_base": [
+          332,
+          453
+        ],
+        "shoulder_left": [
+          394,
+          172
+        ],
+        "elbow_left": [
+          448,
+          318
+        ],
+        "hand_left": [
+          398,
+          320
+        ],
+        "hip_center": [
+          320,
+          409
+        ],
+        "skirt_hem_center": [
+          320,
+          577
+        ],
+        "foot_screen_left": [
+          246,
+          772
+        ],
+        "foot_screen_right": [
+          397,
+          774
+        ]
+      }
+    },
+    {
+      "id": "bridge1",
+      "role": "transition",
+      "file": "assets/sprite-sources/buergeramt/gaussian-arcs/pfandarchitektin-bridge1.webp",
+      "source_file": "assets/sprite-sources/buergeramt/gaussian-arcs/pfandarchitektin-bridge1-source.png",
+      "source_sha256": "a78b369dcf089c80a9fd062b44e878db9820a192292f4742d1d4ceca32eaccff",
+      "uniform_scale": 0.54,
+      "translation_xy": [
+        28,
+        12
+      ],
+      "landmarks": {
+        "eye_right": [
+          279,
+          103
+        ],
+        "eye_left": [
+          315,
+          98
+        ],
+        "nose": [
+          299,
+          121
+        ],
+        "chin": [
+          302,
+          148
+        ],
+        "shoulder_right": [
+          236,
+          173
+        ],
+        "elbow_right": [
+          182,
+          290
+        ],
+        "grip_right": [
+          247,
+          235
+        ],
+        "stamp_knob": [
+          268,
+          223
+        ],
+        "stamp_base": [
+          310,
+          455
+        ],
+        "shoulder_left": [
+          401,
+          176
+        ],
+        "elbow_left": [
+          450,
+          314
+        ],
+        "hand_left": [
+          379,
+          321
+        ],
+        "hip_center": [
+          320,
+          417
+        ],
+        "skirt_hem_center": [
+          312,
+          580
+        ],
+        "foot_screen_left": [
+          242,
+          773
+        ],
+        "foot_screen_right": [
+          392,
+          773
+        ]
+      }
+    },
+    {
+      "id": "bridge2",
+      "role": "transition",
+      "file": "assets/sprite-sources/buergeramt/gaussian-arcs/pfandarchitektin-bridge2.webp",
+      "source_file": "assets/sprite-sources/buergeramt/gaussian-arcs/pfandarchitektin-bridge2-source.png",
+      "source_sha256": "483c8f7ee966b451021b9194129c3d7562364f7fd6336e689bf43779ca8a4726",
+      "uniform_scale": 0.54,
+      "translation_xy": [
+        5,
+        -4
+      ],
+      "landmarks": {
+        "eye_right": [
+          269,
+          103
+        ],
+        "eye_left": [
+          304,
+          94
+        ],
+        "nose": [
+          286,
+          117
+        ],
+        "chin": [
+          294,
+          147
+        ],
+        "shoulder_right": [
+          230,
+          189
+        ],
+        "elbow_right": [
+          183,
+          316
+        ],
+        "grip_right": [
+          229,
+          314
+        ],
+        "stamp_knob": [
+          265,
+          300
+        ],
+        "stamp_base": [
+          314,
+          465
+        ],
+        "shoulder_left": [
+          377,
+          166
+        ],
+        "elbow_left": [
+          389,
+          313
+        ],
+        "hand_left": [
+          275,
+          278
+        ],
+        "hip_center": [
+          311,
+          423
+        ],
+        "skirt_hem_center": [
+          323,
+          573
+        ],
+        "foot_screen_left": [
+          253,
+          760
+        ],
+        "foot_screen_right": [
+          401,
+          770
+        ]
+      }
+    },
+    {
+      "id": "gesture",
+      "role": "terminal",
+      "file": "assets/buergeramt/characters/pfandarchitektin-detail.webp",
+      "crop_xywh": [
+        1920,
+        0,
+        640,
+        832
+      ],
+      "landmarks": {
+        "eye_right": [
+          263,
+          144
+        ],
+        "eye_left": [
+          297,
+          140
+        ],
+        "nose": [
+          281,
+          161
+        ],
+        "chin": [
+          288,
+          190
+        ],
+        "shoulder_right": [
+          237,
+          218
+        ],
+        "elbow_right": [
+          188,
+          327
+        ],
+        "grip_right": [
+          261,
+          332
+        ],
+        "stamp_knob": [
+          277,
+          325
+        ],
+        "stamp_base": [
+          329,
+          459
+        ],
+        "shoulder_left": [
+          356,
+          210
+        ],
+        "elbow_left": [
+          380,
+          313
+        ],
+        "hand_left": [
+          237,
+          281
+        ],
+        "hip_center": [
+          321,
+          430
+        ],
+        "skirt_hem_center": [
+          323,
+          570
+        ],
+        "foot_screen_left": [
+          257,
+          763
+        ],
+        "foot_screen_right": [
+          388,
+          765
+        ]
+      }
+    }
+  ],
+  "compatibility": "Receipt stays in anatomical right hand and hangs as one continuous strip; tied binder remains hugged by left arm as torso turns. Matched Gaussian correspondence must be reviewed through ordered playback; no unconstrained whole-body TPS."
+}

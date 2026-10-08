@@ -109,6 +109,7 @@ export function harness(kind='host',{voice=false,synthesis=true,phoneLanguage='d
  if(phoneClock)window.BuergeramtClock=phoneClock;
  const context=vm.createContext(globals);
  vm.runInContext(source('buergeramt-story.js'),context,{filename:'buergeramt-story.js'});
+ if(kind==='host')vm.runInContext(source('buergeramt-animation-clock.js'),context,{filename:'buergeramt-animation-clock.js'});
  vm.runInContext(source(kind==='host'?'buergeramt.js':'buergeramt-phone.js'),context,{filename:kind});
  const counts={form:0,cancel:0,close:0},music=[];
  const config={voiceOn:()=>voice,subtitlesOn:()=>phoneCaptions,onForm:()=>counts.form++,onCancel:()=>counts.cancel++,onClose:()=>counts.close++,music:x=>music.push(x),cinematics,cityAudioBusy};

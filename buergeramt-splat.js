@@ -1,4 +1,4 @@
-// Omen-only Gaussian projection. The existing episode owns all timing and movement.
+// Gaussian rendering shares the existing scene clock and render pass.
 const clamp=value=>Math.max(0,Math.min(1,value));
 const TUNNEL_RINGS=32,TUNNEL_AROUND=96;
 
@@ -16,14 +16,80 @@ export function omenSplatPose(omen,reducedMotion=false){
   };
 }
 
-export async function createOmenSplat({THREE,renderer,scene,signal}){
-  const {SparkRenderer,SplatMesh,dyno}=await import('./assets/vendor/spark/2.3.1/spark.module.js');
-  signal.throwIfAborted();
-  const response=await fetch(new URL('./assets/buergeramt/omen/aktenkurier.splat',import.meta.url),{signal});
-  if(!response.ok)throw new Error('Omen splat unavailable');
-  const bytes=await response.arrayBuffer(),count=bytes.byteLength/32;
-  if(!Number.isInteger(count)||count<1||count>40000)throw new Error('Invalid omen splat size');
-  signal.throwIfAborted();
+export async function createAmtSplatOwner({THREE,renderer,scene,signal,sparkModule,nowMs=()=>performance.now()}){
+  const {SparkRenderer,SplatMesh,dyno}=sparkModule??await import('./assets/vendor/spark/2.3.1/spark.module.js');
+  signal?.throwIfAborted();
+  const spark=new SparkRenderer({renderer,autoUpdate:false,enableLod:false,enableDriveLod:false,enableLodFetching:false,
+    minSortIntervalMs:0,maxStdDev:Math.sqrt(5),maxPixelRadius:48,depthTest:true,depthWrite:false});
+  spark.visible=false;
+  scene.add(spark);
+  const meshes=new Set(),retired=new Map(),freed=new WeakSet();
+  let pending=null,lastUpdate=-Infinity,startedUpdates=0,completedUpdates=0,failure='',disposed=false,disposePromise=null;
+  function hide(){spark.visible=false;for(const mesh of meshes)mesh.visible=false}
+  function fail(error){failure=error?.message||String(error);hide()}
+  function flushRetired(){
+    if(pending)return;
+    for(const [mesh,cleanup] of retired){
+      retired.delete(mesh);
+      freed.add(mesh);
+      try{mesh.dispose?.()}catch(error){fail(error)}
+      try{cleanup?.()}catch(error){fail(error)}
+    }
+  }
+  const owner={
+    spark,SplatMesh,dyno,
+    attach(mesh){if(disposed||failure)throw new Error('Bürgeramt splat owner unavailable');if(retired.has(mesh)||freed.has(mesh))throw new Error('Retired splat cannot be attached');if(!meshes.has(mesh)){meshes.add(mesh);scene.add(mesh)}return mesh},
+    retire(mesh,cleanup){
+      if(!mesh||retired.has(mesh)||freed.has(mesh))return;
+      meshes.delete(mesh);mesh.visible=false;scene.remove(mesh);retired.set(mesh,cleanup);
+      flushRetired();
+    },
+    update(camera,rate=60){
+      if(disposed||failure||!camera)return null;
+      const visible=[...meshes].filter(mesh=>mesh.visible);
+      spark.visible=visible.length>0;
+      if(!visible.length||pending)return pending;
+      try{
+        const hz=Math.max(1,Math.min(60,Number.isFinite(rate)?rate:60)),now=nowMs();
+        if(now-lastUpdate<1000/hz)return null;
+        lastUpdate=now;
+        for(const mesh of visible)mesh.updateMatrixWorld?.(true);
+        spark.setDirty?.();
+        startedUpdates++;
+        // The catch makes fire-and-forget render-pass calls safe. Retired meshes
+        // and Spark readback targets live until this exact update settles.
+        pending=Promise.resolve().then(()=>spark.update({scene,camera})).then(()=>{completedUpdates++}).catch(fail).finally(()=>{pending=null;flushRetired()});
+        return pending;
+      }catch(error){fail(error);return null}
+    },
+    inspect(){return{ready:!disposed&&!failure,visible:!disposed&&spark.visible,pending:!!pending,meshes:meshes.size,retired:retired.size,activeSplats:spark.activeSplats||0,startedUpdates,completedUpdates,failure,disposed}},
+    dispose(){
+      if(disposePromise)return disposePromise;
+      disposed=true;hide();scene.remove(spark);
+      for(const mesh of [...meshes])owner.retire(mesh);
+      signal?.removeEventListener?.('abort',onAbort);
+      disposePromise=Promise.resolve(pending).then(()=>{flushRetired();spark.dispose()}).catch(fail);
+      return disposePromise;
+    },
+  };
+  const onAbort=()=>{void owner.dispose()};
+  signal?.addEventListener?.('abort',onAbort,{once:true});
+  if(signal?.aborted){await owner.dispose();signal.throwIfAborted()}
+  return owner;
+}
+
+export async function createOmenSplat({THREE,renderer,scene,signal,owner:sharedOwner}){
+  const owner=sharedOwner??await createAmtSplatOwner({THREE,renderer,scene,signal});
+  const {SplatMesh,dyno}=owner;
+  try{signal?.throwIfAborted()}catch(error){if(!sharedOwner)await owner.dispose();throw error}
+  let bytes,count;
+  try{
+    const response=await fetch(new URL('./assets/buergeramt/omen/aktenkurier.splat',import.meta.url),{signal});
+    if(!response.ok)throw new Error('Omen splat unavailable');
+    bytes=await response.arrayBuffer();count=bytes.byteLength/32;
+    if(!Number.isInteger(count)||count<1||count>40000)throw new Error('Invalid omen splat size');
+    signal?.throwIfAborted();
+  }catch(error){if(!sharedOwner)await owner.dispose();throw error}
   const depth=dyno.dynoFloat(0),clock=dyno.dynoFloat(0),ripple=dyno.dynoFloat(0),pulse=dyno.dynoFloat(0);
   const modifier=dyno.dynoBlock({gsplat:dyno.Gsplat},{gsplat:dyno.Gsplat},({gsplat})=>{
     const effect=new dyno.Dyno({
@@ -83,7 +149,7 @@ export async function createOmenSplat({THREE,renderer,scene,signal}){
     });
     return {gsplat:effect.outputs.gsplat};
   });
-  let mesh,tunnel,spark,disposed=false,pending=null,failure='',lastUpdate=-Infinity;
+  let mesh,tunnel,disposed=false;
   try{
     mesh=new SplatMesh({maxSplats:count,lod:false,enableLod:false,editable:false,raycastable:false,
       objectModifier:modifier,
@@ -101,7 +167,7 @@ export async function createOmenSplat({THREE,renderer,scene,signal}){
         }
       },
     });
-    await mesh.initialized;signal.throwIfAborted();
+    await mesh.initialized;signal?.throwIfAborted();
     // A camera-local, hollow volume: real depth-sorted Gaussians, no extra asset.
     tunnel=new SplatMesh({maxSplats:TUNNEL_RINGS*TUNNEL_AROUND,lod:false,enableLod:false,
       editable:false,raycastable:false,objectModifier:tunnelModifier,constructSplats:splats=>{
@@ -114,20 +180,24 @@ export async function createOmenSplat({THREE,renderer,scene,signal}){
           splats.pushSplat(point,scale,rotation,.80,color);
         }
       }});
-    await tunnel.initialized;signal.throwIfAborted();
-    spark=new SparkRenderer({renderer,autoUpdate:false,enableLod:false,enableDriveLod:false,enableLodFetching:false,
-      minSortIntervalMs:0,maxStdDev:Math.sqrt(5),maxPixelRadius:48,depthTest:true,depthWrite:false});
-    spark.visible=false;mesh.visible=false;tunnel.visible=false;
-    scene.add(spark,mesh,tunnel);
-  }catch(error){mesh?.dispose();tunnel?.dispose();spark?.dispose();throw error}
-  let pose=omenSplatPose({});
+    await tunnel.initialized;signal?.throwIfAborted();
+    mesh.visible=false;tunnel.visible=false;
+    owner.attach(mesh);owner.attach(tunnel);
+  }catch(error){
+    if(mesh)owner.retire(mesh);
+    if(tunnel)owner.retire(tunnel);
+    if(!sharedOwner)await owner.dispose();
+    throw error;
+  }
+  let pose=omenSplatPose({}),readyAfterSort=null;
   const target=new THREE.Vector3();
-  const release=()=>{mesh.dispose();tunnel.dispose();spark.dispose()};
   return {
     update(omen,actor,camera,reducedMotion=false){
-      if(disposed||failure)return 0;
+      if(disposed||!owner.inspect().ready)return 0;
       pose=omenSplatPose(omen,reducedMotion);
-      spark.visible=mesh.visible=tunnel.visible=pose.live;
+      mesh.visible=tunnel.visible=pose.live;
+      if(pose.live&&readyAfterSort===null)readyAfterSort=owner.inspect().startedUpdates+1;
+      if(!pose.live)readyAfterSort=null;
       if(pose.live){
         depth.value=pose.reveal;clock.value=pose.time;ripple.value=pose.ripple;pulse.value=pose.pulse*pose.pressure;
         mesh.opacity=pose.opacity;
@@ -144,24 +214,15 @@ export async function createOmenSplat({THREE,renderer,scene,signal}){
         tunnelClock.value=reducedMotion?0:pose.time;
         tunnel.opacity=clamp(omen.strength||0)*pose.reveal;
         tunnel.needsUpdate=true;
-        spark.setDirty();
-        // Own the asynchronous GPU readback/sort so teardown cannot free its target
-        // while an in-flight update still uses it. No independent animation loop.
-        if(!pending&&performance.now()-lastUpdate>=1000/30){
-          lastUpdate=performance.now();
-          mesh.updateMatrixWorld(true);
-          tunnel.updateMatrixWorld(true);
-          pending=spark.update({scene,camera}).catch(error=>{
-            failure=error.message;spark.visible=mesh.visible=tunnel.visible=false;
-          }).finally(()=>{pending=null;if(disposed)release()});
-        }
       }
-      return spark.activeSplats>0?pose.opacity:0;
+      if(!sharedOwner)owner.update(camera,30);
+      return readyAfterSort!==null&&owner.inspect().completedUpdates>=readyAfterSort&&owner.spark.activeSplats>0?pose.opacity:0;
     },
-    inspect(){return {ready:!disposed&&!failure,count,tunnelCount:TUNNEL_RINGS*TUNNEL_AROUND,tunnelVisible:!disposed&&tunnel.visible,tunnelTime:tunnelClock.value,facingY:mesh.rotation.y,bytes:bytes.byteLength,failure,activeSplats:spark.activeSplats,pending:!!pending,visible:!disposed&&spark.visible,...pose}},
+    inspect(){const status=owner.inspect();return {ready:!disposed&&status.ready,count,tunnelCount:TUNNEL_RINGS*TUNNEL_AROUND,tunnelVisible:!disposed&&tunnel.visible,tunnelTime:tunnelClock.value,facingY:mesh.rotation.y,bytes:bytes.byteLength,failure:status.failure,activeSplats:status.activeSplats,pending:status.pending,visible:!disposed&&mesh.visible&&status.visible,...pose}},
     dispose(){
       if(disposed)return;disposed=true;
-      scene.remove(spark,mesh,tunnel);if(!pending)release();
+      owner.retire(mesh);owner.retire(tunnel);
+      if(!sharedOwner)return owner.dispose();
     },
   };
 }

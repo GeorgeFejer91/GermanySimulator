@@ -87,9 +87,75 @@ Codex coordinates affected domains under [`SKILLS.md`](./SKILLS.md) and the [pro
 
 The offline character builder is `tools/amt-character-motion.py`; `tools/build-amt-sprites.py --clerk-performance` bakes the desk performance. Source sheets and registered poses stay under `assets/sprite-sources/buergeramt/`; only desktop/mobile WebP atlases are loaded from `assets/buergeramt/characters/` on office entry. Review the exact encoded desktop and mobile cells, connected silhouettes, alpha edges, props, and scale together before accepting a new art pass. `output/amt-character-motion/interaction-build-report.json` and the clerk performance report record source/atlas hashes and frame hashes; they are local review artifacts, not runtime inputs.
 
-Close characters use additional detail WebPs baked from the original paintings: four action poses and four directional walk sheets (16 frames for Aktenkurier/Archivbotin, eight for the other six walkers), a single pose for each waiting patron, and a compact performance sheet for Frau Knick with eight lip frames. The renderer requests only the nearby moving character's current walk direction and releases its detail textures after the character leaves the near field; compact atlases remain the distance and load-failure fallback. The two dense walkers also have half-resolution mobile close-up sheets; their normalized phase retains the existing gait cadence. See `SPRITE-GENERATION-PROTOCOL.md` for the reviewed field/matte repairs and exact export checks. Every figure has a staggered, slow saturation and lightness breath in linear color; the active speaker's dialogue tint still eases by emotional tone. The office alone renders at up to 2× device pixel ratio, returning to the city's cap on exit.
+Close characters use additional detail WebPs baked from the original paintings: four action poses and four directional walk sheets (16 frames for Aktenkurier/Archivbotin, eight for the other six walkers), a single pose for each waiting patron, and a compact performance sheet for Frau Knick with eight lip frames. The renderer requests only the nearby moving character's current walk direction and releases its detail textures after the character leaves the near field; compact atlases remain the distance and load-failure fallback. The two dense walkers also have half-resolution mobile close-up sheets; their normalized phase retains the existing gait cadence. See `SPRITE-GENERATION-PROTOCOL.md` for the reviewed field/matte repairs and exact export checks. Every figure has a staggered, slow saturation and lightness breath in linear color; the active speaker's dialogue tint still eases by emotional tone. The office shares the one-pixel-per-CSS-pixel and 1.6 MP drawing-buffer budget.
 
 The reusable event-to-motion authoring procedure lives in `.agents/skills/animate-2d-characters/references/narrative-action-rigging.md`. Its ordered action verbs and source poses join the shared audio beat card before new sprites or cues are made. For the `omen` beat: Story owns the exact line; Storyboard owns approach→darkening/build→arrival/line→abrupt release→normal walk; Character owns identity/prop hand; ColorMood owns restrained valence/return; Animation owns registered views and encoded QA; Gameplay owns path, state priority, committed event, and queue pause; Soundscape owns the bounded buildup and release; Mix owns the existing bus and speech clarity; Phone is unchanged; Voice uses browser speech plus the visible text fallback; Review and QA accept the same candidate revision. Static graph validation checks only the optional runner configuration; playable, visual, and listening evidence comes from the integrated game.
+
+## Painted Gaussian action arcs
+
+`buergeramt-animation-clock.js` owns Frau Knick's main poses (`ready`, `raised`,
+`contact`, `refusal`) and the authored routes between them. The preview cycle
+lasts 9.1 seconds: raise 3.1, stamp 2.25, refusal 2.2, return 1.55. Repeated
+intent does not restart a route. A changed target waits for a safe main pose;
+speech is a localized overlay. The eight moving regulars use a four-second
+work→gesture→work action for dialogue. On dismissal, a regular completes the
+shortest remaining route to work before its existing look/work pause and walk.
+Walking remains displacement-driven. Hidden play freezes simulation time.
+
+Main poses can hold for an interaction; transition keys have no scheduled
+pauses or repeated ease to zero. Registered painted bridge keys supply missing
+limb/grip/occlusion changes. `tools/build-amt-gaussian-animation.py` pairs paint
+within owned regions into one Gaussian cloud. Paint blends in premultiplied
+linear light; tracked prop polygons and stable object pivots can follow curved paths
+without flattening a rotating sheet. Alpha-zero border births/deaths stay near
+their own painted region, preventing detached fade trails while leaving visible
+anchor paint exact. Correspondence and texture smoothing
+cannot invent an occluded hand or replace a missing action painting.
+
+`buergeramt-gaussian-scene.js` admits nearby actions through the existing
+two-job asset queue, with at most two desktop actors or one mobile actor. It
+prepares inside six world units, displays inside five, and retires outside
+seven. `buergeramt-gaussian-animation.js` takes its floor, height, orientation
+and tint from the existing sprite. Action clouds and the omen share one Spark
+owner and the ordinary office render pass. The source sprite stays visible
+until the new cloud completes its first visible sort. Walk/look/flinch,
+reduced motion, unavailable assets and preparation failures retain sprites.
+Exit/replay detach actors immediately and settle pending sorts before freeing
+their resources. There is no extra scene animation loop.
+
+Registered sources, landmarks, polygons and provenance live under
+`assets/sprite-sources/buergeramt/gaussian-arcs/`; runtime manifests and selected
+desktop/mobile records live under `assets/buergeramt/animation/`. The three
+stationary waiting patrons and decorative clerk copies keep their existing
+performances. The opt-in `spark-preview.html?scene=knick&workflow=arcs` preview
+uses the same actor implementation; other cast IDs select their action packs.
+Native rendered anatomy/props/loop review, integrated depth/floor review and
+browser costs remain acceptance gates. Binary checks do not certify the art;
+Android emulation does not establish physical-device performance.
+
+The 2026-10-08 release review covers all nine exact encoded native loops,
+390px mobile emulation at ±45°, planted roots, shortest return before walking,
+replay/close, reduced-motion fallback, opaque counter/wall depth and a supported
+two-cloud camera sweep. Knick's counter hides the stamp contact itself; the
+standalone preview shows the whole action. Office blockers are opaque; city
+fading, car/door/landmark geometry and scale are unchanged. Physical Android
+and perceived audio quality were not tested.
+
+Three cold-context runs per viewport on Chrome 154 / Intel Iris Xe D3D11 gave
+median active-dialogue frame p95 of 21.0 ms before/after on desktop 1280×800,
+and 21.8→21.0 ms on 390×844 Android browser emulation. Desktop retained two
+visible clouds; mobile retained one. Nine keyboard inputs were accepted per
+run; median entry input p95 was 15.5→19.3 ms desktop and 22.3→13.5 ms emulation.
+These local scheduling measurements are not GPU timings or a causal speedup.
+Entry transfer varied 22.35–27.44→26.73–28.05 MB desktop and
+15.46→15.32–15.60 MB emulation; the approach/dialogue route downloaded 1.24 MB
+and 0.26 MB of Gaussian action data respectively, including retired preparations.
+Baseline overrides the same seven runtime entry files at `734e203`; existing
+painted atlases remain unchanged. The retained local evidence is under
+`output/amt-gaussian-arcs/` (`benchmark-active-*`, `camera-final*`, `physics-final`).
+The release suite passed 177 checks; the portable skill passed ten functional
+tests, four adversarial builder cases and a fresh native Spark smoke. The preview
+also passed 320px, 200% typography and German-label fitting with actual Pretext.
 
 ## Flow and companion failure coverage
 

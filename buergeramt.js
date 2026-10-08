@@ -10,9 +10,10 @@ const held=new Set(),pendingTimers=new Set();
 // Every callback belongs to one attempt and one visible speech/action cue.
 let attempt=0,cue=0,callOutcome="",speechGateTimer=null,recordedSpeech=null;
 let clerkClock=0,clerkSpeaking=false,clerkAccent=0,clerkBeat="idle",clerkPulse=0;
+const clerkAnimation=window.BuergeramtAnimationClock?.createClerk?.();
 function defer(callback,delay){const owner=attempt;const id=setTimeout(()=>{pendingTimers.delete(id);if(active&&owner===attempt)callback()},delay);pendingTimers.add(id);return id}
 function clearTimer(id){clearTimeout(id);pendingTimers.delete(id)}
-function cancelSpeech(){cue++;clerkSpeaking=false;if(speechGateTimer!==null)clearTimer(speechGateTimer);speechGateTimer=null;if(recordedSpeech){recordedSpeech.pause();recordedSpeech.removeAttribute("src");recordedSpeech.load();recordedSpeech=null}try{const engine=window.speechSynthesis;if(engine?.speaking||engine?.pending)engine.cancel()}catch{}}
+function cancelSpeech(){cue++;clerkSpeaking=false;clerkAnimation?.setSpeech(false);if(speechGateTimer!==null)clearTimer(speechGateTimer);speechGateTimer=null;if(recordedSpeech){recordedSpeech.pause();recordedSpeech.removeAttribute("src");recordedSpeech.load();recordedSpeech=null}try{const engine=window.speechSynthesis;if(engine?.speaking||engine?.pending)engine.cancel()}catch{}}
 let active=false,stage="closed",link=null,number="",registeredName="",activated=false,qrSvg="",queueDisplay="—",queueIndex=0,queueClock=0,ticketWaitCalls=0,ticketSerial=100,lastScanId="",deadline=0,clerkIndex=0,callPending=false,callTriggered=false,callCommitted=false,callArmTimer=null,clockAnchor=null,policeDoneHandler=null,policeStartHandler=null,policeDisconnectHandler=null,options=null,ambientClock=0,ambientIndex=0,officeAudio=null;
 let timing={rttMs:null,oneWayMs:0,jitterMs:0,lastPongAt:null,clockOffsetMs:null,clockUncertaintyMs:null,startLagMs:null,phoneReadyMs:null,phoneFastReadyMs:null,deskStartLagMs:0,deskMsPerChar:55,call:null,cues:{},desk:{}};
 let pingSerial=0,pingTimer=null,hostVoiceStartupMs=null,hostVoiceAttempts=0;const outstandingPings=new Map(),rttSamples=[];
@@ -95,7 +96,7 @@ const characterRoutes=[
  {id:"kopiependler",speed:.78,points:[[2.8,-3.25],[4.85,-3.25],[4.85,-2.35],[2.8,-2.35]]},
  {id:"warteschlangenpoetin",speed:.7,points:[[-4.55,-2.25],[-4.55,-3.55],[-5.55,-3.55],[-5.55,-2.25]]}
 ];
-const characters=characterRoutes.map(route=>({id:route.id,route,x:route.points[0][0],z:route.points[0][1],target:1,direction:"up",mode:"work",pause:1.1,stride:0,workClock:0,encounters:0,sequence:[{mode:"work",duration:1.1}],pending:false,priority:0,attention:0}));
+const characters=characterRoutes.map(route=>({id:route.id,route,x:route.points[0][0],z:route.points[0][1],target:1,direction:"up",mode:"work",pause:1.1,stride:0,workClock:0,animationClock:0,returning:null,encounters:0,sequence:[{mode:"work",duration:1.1}],pending:false,priority:0,attention:0}));
 let characterMood=null;
 const omen={used:false,phase:"",strength:0,hold:0,roomTime:0,startDistance:0,resume:"walk-sign",resumeYaw:0,recoverFromYaw:0,speech:null,visit:0,revealTime:0,lifeTime:0,lifeClock:0};
 function omenLife(){
@@ -168,7 +169,7 @@ function approachOmen(actor,dt){
  actor.x+=dx/distance*step;actor.z+=dz/distance*step;actor.stride+=step*8.5;
  actor.direction=Math.abs(dx)>Math.abs(dz)?dx>0?"right":"left":dz>0?"down":"up";actor.mode="walk";
 }
-function resetCharacters(){for(const actor of characters){actor.x=actor.route.points[0][0];actor.z=actor.route.points[0][1];actor.target=1;actor.direction="up";actor.mode="work";actor.pause=1.1;actor.stride=0;actor.workClock=0;actor.encounters=0;actor.sequence=[{mode:"work",duration:1.1}];actor.pending=false;actor.priority=0;actor.attention=0}characterMood=null}
+function resetCharacters(){for(const actor of characters){actor.x=actor.route.points[0][0];actor.z=actor.route.points[0][1];actor.target=1;actor.direction="up";actor.mode="work";actor.pause=1.1;actor.stride=0;actor.workClock=0;actor.animationClock=0;actor.returning=null;actor.encounters=0;actor.sequence=[{mode:"work",duration:1.1}];actor.pending=false;actor.priority=0;actor.attention=0}characterMood=null}
 function action(actor,steps,priority=1){
  if(priority<actor.priority||actor.mode==="gesture"&&actor.priority>=3&&priority<3)return;
  actor.sequence=steps.map(([mode,duration])=>({mode,duration}));actor.priority=priority;
@@ -183,7 +184,23 @@ function characterPhase(actor){
  if(!actor.pending&&step?.mode===actor.mode&&["look","flinch"].includes(actor.mode))return Math.max(0,Math.min(1,1-actor.pause/step.duration));
  return((actor.workClock*3)%8)/8;
 }
+function characterAnimation(actor){
+ if(!["work","gesture"].includes(actor.mode))return null;
+ if(actor.mode==="work")return{generation:attempt,actionId:Math.floor(actor.animationClock/4)+1,arc:null,phase:1,pose:"work"};
+ const phase=(actor.animationClock%4)/4;
+ return{generation:attempt,actionId:Math.floor(actor.animationClock/4)+1,arc:"work-gesture-work",phase,pose:phase>=.25&&phase<.75?"gesture":"work"};
+}
 function advanceAction(actor,dt){
+ if(actor.returning){
+  if(document.hidden)return true;
+  const turn=actor.returning,limit=turn.direction<0?0:1;
+  turn.phase=Math.max(0,Math.min(1,turn.phase+turn.direction*dt/4));
+  actor.animationClock=turn.phase*4;
+  if(Math.abs(turn.phase-limit)>1e-9)return true;
+  actor.returning=null;actor.animationClock=0;actor.priority=1;
+  if(actor.sequence.length)startAction(actor);
+  return true;
+ }
  if(!actor.sequence.length||actor.pending)return false;
  actor.pause-=dt;
  while(actor.pause<=0&&actor.sequence.length){actor.sequence.shift();if(actor.sequence.length){actor.mode=actor.sequence[0].mode;actor.workClock=-actor.pause;actor.pause+=actor.sequence[0].duration}}
@@ -199,10 +216,11 @@ function updateCharacters(dt){
  for(const actor of characters){
   actor.attention=Math.max(0,actor.attention-dt);
   if(actor.id==="aktenkurier"&&omen.phase==="approach"){approachOmen(actor,dt);continue}
-  if(!walking()){if(actor.mode==="gesture"&&actor.priority>=3)actor.workClock+=dt;continue}
+  if(!walking()){if(actor.mode==="gesture"&&actor.priority>=3){actor.workClock+=dt;if(!document.hidden)actor.animationClock+=dt}continue}
   actor.workClock+=dt;
-  if(actor.mode==="gesture")continue;
+  if(!document.hidden&&["work","gesture"].includes(actor.mode))actor.animationClock+=dt;
   if(advanceAction(actor,dt))continue;
+  if(actor.mode==="gesture")continue;
   const [tx,tz]=actor.route.points[actor.target],dx=tx-actor.x,dz=tz-actor.z,distance=Math.hypot(dx,dz);
   if(distance<.025){actor.x=tx;actor.z=tz;actor.target=(actor.target+1)%actor.route.points.length;action(actor,[["work",1.25],["look",.48]],1);officeCue(actor.id,actor.x,actor.z);continue}
   const step=Math.min(distance,actor.route.speed*dt),nextX=actor.x+dx/distance*step,nextZ=actor.z+dz/distance*step;
@@ -214,13 +232,16 @@ function updateCharacters(dt){
   if(actor.attention===0&&Math.hypot(actor.x-view.x,actor.z-view.z)<2.5){actor.attention=7.5;action(actor,[["look",.72],["work",.4]],1)}
  }
 }
-function nearestCharacter(){if(!["walk-sign","waiting"].includes(stage))return null;let found=null,distance=1.65;for(const actor of characters){const d=Math.hypot(view.x-actor.x,view.z-actor.z);if(d<distance){found=actor;distance=d}}return found}
+function nearestCharacter(){if(!["walk-sign","waiting"].includes(stage))return null;let found=null,distance=1.65;for(const actor of characters){if(actor.returning)continue;const d=Math.hypot(view.x-actor.x,view.z-actor.z);if(d<distance){found=actor;distance=d}}return found}
 function showCharacter(actor){
  const entry=story.characters[actor.id],spoken=entry.lines[actor.encounters++%entry.lines.length],resume=stage;
- actor.pending=false;actor.sequence=[];actor.priority=3;actor.mode="gesture";actor.workClock=0;setStage("character");content(entry.speaker,spoken.line,[{label:"ZURÜCK ZUM VORGANG",run:()=>{actor.priority=0;action(actor,[["look",.45],["work",.7]],1);setStage(resume)}}],null,null,null,{id:actor.id,tone:spoken.tone,valence:spoken.valence});
+ actor.pending=false;actor.sequence=[];actor.priority=3;actor.mode="gesture";actor.workClock=0;actor.animationClock=0;actor.returning=null;setStage("character");content(entry.speaker,spoken.line,[{label:"ZURÜCK ZUM VORGANG",run:()=>{
+  const phase=(actor.animationClock%4)/4;actor.returning={phase,direction:phase<.5?-1:1};actor.sequence=[{mode:"look",duration:.45},{mode:"work",duration:.7}];actor.pending=false;
+  setStage(resume);
+ }}],null,null,null,{id:actor.id,tone:spoken.tone,valence:spoken.valence});
 }
 function walking(){return ["outside","walk-sign","waiting","walk-counter"].includes(stage)}
-function setStage(next,preserveMovement=false){if(next!==stage&&!preserveMovement)held.clear();stage=next;document.body.classList.toggle("amt-omen",next==="omen");const moving=walking();if(moving){cancelSpeech();ambient.textContent="";characterMood=null;}root.classList.toggle("walking",moving);walkHud.hidden=!moving;root.classList.toggle("first-person",!!window.Germany3D?.ready);if(moving){objective.textContent=next==="outside"?"BÜRGERAMT · EINGANG":next==="walk-sign"?"QR-SCHILD SCANNEN":next==="waiting"?"AUFRUF ABWARTEN · SCHALTER 3":"IHRE NUMMER · SCHALTER 3 · BEEILEN!";update(0)}}
+function setStage(next,preserveMovement=false){if(next!==stage&&!preserveMovement)held.clear();stage=next;document.body.classList.toggle("amt-omen",next==="omen");const moving=walking();if(moving){cancelSpeech();clerkAnimation?.request(null);ambient.textContent="";characterMood=null;}root.classList.toggle("walking",moving);walkHud.hidden=!moving;root.classList.toggle("first-person",!!window.Germany3D?.ready);if(moving){objective.textContent=next==="outside"?"BÜRGERAMT · EINGANG":next==="walk-sign"?"QR-SCHILD SCANNEN":next==="waiting"?"AUFRUF ABWARTEN · SCHALTER 3":"IHRE NUMMER · SCHALTER 3 · BEEILEN!";update(0)}}
 function displayNumber(value){queueDisplay=value;board.textContent=value}
 function speechReadableMs(text,delivery){return Math.max(3500,Math.min(14000,text.length*55*.96/(delivery?.rate??.96)))}
 function say(text,onComplete,onStart,onBoundary,delivery=null,voiceId="",allowPreview=true){
@@ -263,12 +284,12 @@ function content(who,text,buttons=[],onComplete,onStart,onBoundary,mood=null,del
  cancelSpeech();ambient.textContent="";speaker.textContent=who;line.textContent=text;
  characterMood=isClerk?{id:"clerk",tone:stage==="cancelled"||stage==="early"||stage==="expired"?"warning":"procedural",valence:stage==="cancelled"?-.82:-.38}:mood;
  actions.replaceChildren();
- if(isClerk){clerkBeat=stage==="reply"?"stamp":stage==="cancelled"||stage==="early"||stage==="expired"?"deny":"raise";clerkAccent=.4;clerkPulse=0}
+ if(isClerk){clerkBeat=stage==="reply"?"stamp":stage==="cancelled"||stage==="early"||stage==="expired"?"deny":"raise";clerkAccent=.4;clerkPulse=0;clerkAnimation?.request(stage==="reply"?"contact":["cancelled","early","expired"].includes(stage)?"refusal":"raised")}
  const owner=attempt,visibleCue=cue;
  for(const item of buttons){const button=document.createElement("button");button.type="button";button.textContent=item.label;
   button.addEventListener("click",()=>{if(!active||owner!==attempt||visibleCue!==cue||button.disabled)return;button.disabled=true;item.run()});actions.append(button)}
  const voiceId=isClerk?story.clerkIdentity.voiceId:story.characters[mood?.id]?.voiceId||"";
- say(text,onComplete?mode=>{if(isClerk){clerkSpeaking=false;clerkBeat=stage==="reply"?"stamp":stage==="cancelled"?"deny":"review";clerkAccent=.65}onComplete(mode)}:null,mode=>{if(isClerk){clerkSpeaking=true;clerkPulse=0;if(!onComplete){const speakingCue=cue;defer(()=>{if(cue===speakingCue){clerkSpeaking=false;clerkBeat="review";clerkAccent=.65}},Math.max(1800,Math.min(10000,text.length*55)))}}onStart?.(mode)},(charIndex,event)=>{if(isClerk)clerkPulse++;onBoundary?.(charIndex,event)},delivery,voiceId);
+ say(text,onComplete?mode=>{if(isClerk){clerkSpeaking=false;clerkAnimation?.setSpeech(false);clerkBeat=stage==="reply"?"stamp":stage==="cancelled"?"deny":"review";clerkAccent=.65}onComplete(mode)}:null,mode=>{if(isClerk){clerkSpeaking=true;clerkPulse=0;clerkAnimation?.setSpeech(true,0);if(!onComplete){const speakingCue=cue;defer(()=>{if(cue===speakingCue){clerkSpeaking=false;clerkAnimation?.setSpeech(false);clerkBeat="review";clerkAccent=.65}},Math.max(1800,Math.min(10000,text.length*55)))}}onStart?.(mode)},(charIndex,event)=>{if(isClerk){clerkPulse++;clerkAnimation?.setSpeech(clerkSpeaking,clerkPulse)}onBoundary?.(charIndex,event)},delivery,voiceId);
 }
 function setStatus(text){status.textContent=text}
 function distanceTo(target){return Math.hypot(view.x-target.x,view.z-target.z)}
@@ -332,10 +353,10 @@ function ambientStep(dt){
  if(ambientIndex%2===0)ring();
 }
 function update(dt){
- if(!active)return;
+ if(!active||document.hidden)return;
  if(window.Germany3D?.ready&&!root.classList.contains("first-person"))root.classList.add("first-person");
  const elapsed=Number.isFinite(dt)?Math.min(.1,Math.max(0,dt)):0;ambientStep(elapsed);
- clerkClock+=elapsed;clerkAccent=Math.max(0,clerkAccent-elapsed);
+ clerkClock+=elapsed;clerkAccent=Math.max(0,clerkAccent-elapsed);if(!document.hidden)clerkAnimation?.advance(elapsed);
  updateOmen(elapsed);
  updateCharacters(elapsed);
  if(omen.phase)return;
@@ -437,13 +458,14 @@ function finish(){if(!active||!activated||callPending||callOutcome!=="decline"||
 function close(notify=true){
  if(!active)return;const config=options;stopCallSignal();active=false;attempt++;callPending=false;activated=false;callOutcome="";policeDoneHandler=null;policeStartHandler=null;policeDisconnectHandler=null;characterMood=null;
  window.Germany3D?.clearAmtOmenSplat?.();
- clerkSpeaking=false;clerkAccent=0;resetOmen();
+ window.Germany3D?.clearAmtGaussianAnimations?.();
+ clerkSpeaking=false;clerkAccent=0;clerkAnimation?.reset(attempt);resetOmen();
  if(pingTimer!==null)clearInterval(pingTimer);pingTimer=null;outstandingPings.clear();
  for(const id of pendingTimers)clearTimeout(id);pendingTimers.clear();cancelSpeech();setStage("closed");
  try{officeAudio?.ctx.close()?.catch(()=>{})}catch{}officeAudio=null;held.clear();root.hidden=true;walkHud.hidden=true;mixPanel.open=false;mixPanel.hidden=true;ambient.textContent="";
  document.body.classList.remove("amt-inside");const previous=link;link=null;previous?.send("done");previous?.close();config.music?.(false);if(notify)config.onClose();
 }
-function open(config){if(active)return;resetTiming();hostVoiceStartupMs=null;hostVoiceAttempts=0;attempt++;callOutcome="";options=config;active=true;clerkIndex=0;callPending=false;callTriggered=false;callCommitted=false;callArmTimer=null;clockAnchor=null;registeredName="";number="";activated=false;lastScanId="";queueClock=0;queueIndex=1;ticketWaitCalls=0;deadline=0;ambientClock=0;clerkClock=0;clerkSpeaking=false;clerkAccent=0;clerkBeat="idle";clerkPulse=0;displayNumber("B-041");view.x=0;view.z=8;view.yaw=0;held.clear();resetCharacters();resetOmen();exit.hidden=false;root.hidden=false;mixPanel.hidden=false;document.body.classList.add("amt-inside");options.music?.(true);beginLink();setStage("outside");setStatus("EINGANG · BÜRGERAMT");const owner=attempt;window.BuergeramtClock?.sample?.().then(anchor=>{if(active&&attempt===owner)clockAnchor=anchor}).catch(()=>{})}
+function open(config){if(active)return;resetTiming();hostVoiceStartupMs=null;hostVoiceAttempts=0;attempt++;callOutcome="";options=config;active=true;clerkIndex=0;callPending=false;callTriggered=false;callCommitted=false;callArmTimer=null;clockAnchor=null;registeredName="";number="";activated=false;lastScanId="";queueClock=0;queueIndex=1;ticketWaitCalls=0;deadline=0;ambientClock=0;clerkClock=0;clerkSpeaking=false;clerkAccent=0;clerkBeat="idle";clerkPulse=0;clerkAnimation?.reset(attempt);displayNumber("B-041");view.x=0;view.z=8;view.yaw=0;held.clear();resetCharacters();resetOmen();exit.hidden=false;root.hidden=false;mixPanel.hidden=false;document.body.classList.add("amt-inside");options.music?.(true);beginLink();setStage("outside");setStatus("EINGANG · BÜRGERAMT");const owner=attempt;window.BuergeramtClock?.sample?.().then(anchor=>{if(active&&attempt===owner)clockAnchor=anchor}).catch(()=>{})}
 function clerkPerformance(){
  const names={idle:0,review:1,raise:2,stamp:3,deny:4,talk:5};
  let mode="idle";
@@ -451,7 +473,7 @@ function clerkPerformance(){
  else if(clerkAccent>0)mode=clerkBeat;
  else if(["counter","reply","cancelled","early","expired"].includes(stage))mode=stage==="cancelled"||stage==="early"||stage==="expired"?"deny":"review";
  else{const beat=clerkClock%9.2;mode=beat<2.6?"idle":beat<4.1?"review":beat<4.6?"raise":beat<4.95?"stamp":beat<6.1?"deny":"idle"}
- return{row:names[mode],frame:Math.floor(clerkClock*(mode==="talk"?10:4)+clerkPulse)%8,speaking:clerkSpeaking};
+ return{row:names[mode],frame:Math.floor(clerkClock*(mode==="talk"?10:4)+clerkPulse)%8,speaking:clerkSpeaking,animation:clerkAnimation?.state??null};
 }
 function captureKey(event){if(event.type==="keyup")held.delete(event.code);if(!active)return;if(event.type==="keydown"&&event.code==="KeyE"&&walking()){event.preventDefault();event.stopImmediatePropagation();if(!event.repeat)interact();return}if(!walking()||omen.phase)return;if(["KeyW","KeyA","KeyS","KeyD","ArrowUp","ArrowDown","ArrowLeft","ArrowRight","ShiftLeft"].includes(event.code)){event.preventDefault();event.stopImmediatePropagation();if(event.type==="keydown")held.add(event.code);else held.delete(event.code)}}
 window.addEventListener("keydown",captureKey,true);window.addEventListener("keyup",captureKey,true);window.addEventListener("blur",()=>held.clear());
@@ -459,5 +481,5 @@ document.addEventListener("visibilitychange",()=>{if(document.hidden)held.clear(
 document.addEventListener("pointermove",event=>{if(active&&walking()&&!omen.phase&&event.buttons===1&&!event.target.closest("button"))view.yaw+=event.movementX*.004});
 document.querySelectorAll("[data-amt-key]").forEach(button=>{const key=button.dataset.amtKey;button.addEventListener("pointerdown",e=>{if(!active||!walking()||omen.phase)return;e.preventDefault();button.setPointerCapture(e.pointerId);held.add(key)});for(const type of ["pointerup","pointercancel","lostpointercapture"])button.addEventListener(type,()=>held.delete(key))});
 document.getElementById("amt-touch-e").addEventListener("click",interact);document.getElementById("amt-leave").addEventListener("click",()=>close());exit.addEventListener("click",()=>close());
-window.BuergeramtLevel={open,replay(config){close(false);open(config)},update,interact,setOfficeObstacles(items){officeObstacles=Array.isArray(items)?items.filter(o=>[o.x,o.z,o.w,o.d].every(Number.isFinite)&&o.w>0&&o.d>0):[]},get active(){return active},get stage(){return stage},get queueDisplay(){return queueDisplay},get qrSvg(){return qrSvg},get phoneUrl(){return link?BuergeramtLink.phoneUrl(link.invitation,options.subtitlesOn?.()):""},get timing(){return JSON.parse(JSON.stringify(timing))},get view(){return{x:view.x,z:view.z,yaw:view.yaw}},get characters(){return characters.map(actor=>({id:actor.id,x:actor.x,z:actor.z,direction:actor.direction,mode:actor.mode,phase:characterPhase(actor),frame:Math.min(7,Math.floor(characterPhase(actor)*8))}))},get characterMood(){return characterMood},get clerkPerformance(){return clerkPerformance()},get omen(){return{phase:omen.phase,strength:omen.strength,visit:omen.visit,revealTime:omen.revealTime,life:omenLife(),enabled:options?.cinematics!==false,x:characters[0].x,z:characters[0].z,speech:omen.speech?{...omen.speech}:null}},get registeredName(){return registeredName},get activated(){return activated}};
+window.BuergeramtLevel={open,replay(config){close(false);open(config)},update,interact,setOfficeObstacles(items){officeObstacles=Array.isArray(items)?items.filter(o=>[o.x,o.z,o.w,o.d].every(Number.isFinite)&&o.w>0&&o.d>0):[]},get active(){return active},get stage(){return stage},get queueDisplay(){return queueDisplay},get qrSvg(){return qrSvg},get phoneUrl(){return link?BuergeramtLink.phoneUrl(link.invitation,options.subtitlesOn?.()):""},get timing(){return JSON.parse(JSON.stringify(timing))},get view(){return{x:view.x,z:view.z,yaw:view.yaw}},get characters(){return characters.map(actor=>({id:actor.id,x:actor.x,z:actor.z,direction:actor.direction,mode:actor.mode,phase:characterPhase(actor),frame:Math.min(7,Math.floor(characterPhase(actor)*8)),animation:characterAnimation(actor)}))},get characterMood(){return characterMood},get clerkPerformance(){return clerkPerformance()},get omen(){return{phase:omen.phase,strength:omen.strength,visit:omen.visit,revealTime:omen.revealTime,life:omenLife(),enabled:options?.cinematics!==false,x:characters[0].x,z:characters[0].z,speech:omen.speech?{...omen.speech}:null}},get registeredName(){return registeredName},get activated(){return activated}};
 })();

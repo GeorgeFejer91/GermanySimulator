@@ -1,0 +1,2161 @@
+{
+  "version": 1,
+  "id": "clerk",
+  "representation": "paired-gaussian-paint",
+  "canvas_xy": [
+    1024,
+    832
+  ],
+  "head_paint_source": "ready",
+  "states": [
+    {
+      "id": "ready",
+      "file": "assets/previews/knick-splats/registered-anchor-0.webp",
+      "landmarks": [
+        [
+          546.0,
+          125.0
+        ],
+        [
+          602.0,
+          130.0
+        ],
+        [
+          585.0,
+          158.0
+        ],
+        [
+          556.0,
+          210.0
+        ],
+        [
+          451.0,
+          260.0
+        ],
+        [
+          410.0,
+          380.0
+        ],
+        [
+          471.0,
+          344.0
+        ],
+        [
+          496.0,
+          286.0
+        ],
+        [
+          492.0,
+          405.0
+        ],
+        [
+          631.0,
+          304.0
+        ],
+        [
+          638.0,
+          434.0
+        ],
+        [
+          641.0,
+          515.0
+        ],
+        [
+          520.0,
+          430.0
+        ],
+        [
+          532.0,
+          618.0
+        ],
+        [
+          495.0,
+          787.0
+        ],
+        [
+          626.0,
+          765.0
+        ]
+      ],
+      "role": "main",
+      "sha256": "02d42800d71538bab9cc9977e40b8b471f91488074ee738cd56c6e02f98bdf8f"
+    },
+    {
+      "id": "raise-1",
+      "file": "assets/previews/knick-splats/bridge-raise-1.webp",
+      "landmarks": [
+        [
+          532.0,
+          148.0
+        ],
+        [
+          576.0,
+          148.0
+        ],
+        [
+          565.0,
+          165.0
+        ],
+        [
+          558.0,
+          208.0
+        ],
+        [
+          427.0,
+          263.0
+        ],
+        [
+          370.0,
+          286.0
+        ],
+        [
+          434.0,
+          219.0
+        ],
+        [
+          450.0,
+          175.0
+        ],
+        [
+          443.0,
+          266.0
+        ],
+        [
+          617.0,
+          269.0
+        ],
+        [
+          673.0,
+          356.0
+        ],
+        [
+          630.0,
+          401.0
+        ],
+        [
+          520.0,
+          423.0
+        ],
+        [
+          518.0,
+          621.0
+        ],
+        [
+          476.0,
+          777.0
+        ],
+        [
+          596.0,
+          759.0
+        ]
+      ],
+      "role": "transition",
+      "sha256": "fd136638f458d02e5508bd6fbceecb1156e59b5dfcae65c49d6c204a8cb4d73a"
+    },
+    {
+      "id": "raise-2",
+      "file": "assets/previews/knick-splats/bridge-raise-2.webp",
+      "landmarks": [
+        [
+          551.0,
+          150.0
+        ],
+        [
+          595.0,
+          148.0
+        ],
+        [
+          580.0,
+          168.0
+        ],
+        [
+          566.0,
+          214.0
+        ],
+        [
+          438.0,
+          238.0
+        ],
+        [
+          389.0,
+          171.0
+        ],
+        [
+          463.0,
+          62.0
+        ],
+        [
+          510.0,
+          29.0
+        ],
+        [
+          433.0,
+          109.0
+        ],
+        [
+          626.0,
+          263.0
+        ],
+        [
+          676.0,
+          352.0
+        ],
+        [
+          626.0,
+          398.0
+        ],
+        [
+          520.0,
+          423.0
+        ],
+        [
+          518.0,
+          620.0
+        ],
+        [
+          478.0,
+          777.0
+        ],
+        [
+          595.0,
+          759.0
+        ]
+      ],
+      "role": "transition",
+      "sha256": "51c8525aa11069e5cb106ec2c04af269bfed7458d3f6426034a40a1c18eaeb17"
+    },
+    {
+      "id": "raised",
+      "file": "assets/previews/knick-splats/registered-anchor-1.webp",
+      "landmarks": [
+        [
+          574.0,
+          156.0
+        ],
+        [
+          627.0,
+          167.0
+        ],
+        [
+          614.0,
+          193.0
+        ],
+        [
+          587.0,
+          247.0
+        ],
+        [
+          476.0,
+          264.0
+        ],
+        [
+          397.0,
+          235.0
+        ],
+        [
+          434.0,
+          103.0
+        ],
+        [
+          483.0,
+          31.0
+        ],
+        [
+          418.0,
+          159.0
+        ],
+        [
+          649.0,
+          291.0
+        ],
+        [
+          653.0,
+          350.0
+        ],
+        [
+          627.0,
+          417.0
+        ],
+        [
+          520.0,
+          430.0
+        ],
+        [
+          533.0,
+          618.0
+        ],
+        [
+          495.0,
+          787.0
+        ],
+        [
+          626.0,
+          765.0
+        ]
+      ],
+      "role": "main",
+      "sha256": "e23f5852be9a064ce8360b2093ea14e2f82b2e872281d2386b67ecfced3224b4"
+    },
+    {
+      "id": "stamp-1",
+      "file": "assets/previews/knick-splats/bridge-stamp-1.webp",
+      "landmarks": [
+        [
+          558.0,
+          137.0
+        ],
+        [
+          599.0,
+          150.0
+        ],
+        [
+          582.0,
+          163.0
+        ],
+        [
+          571.0,
+          208.0
+        ],
+        [
+          386.0,
+          221.0
+        ],
+        [
+          350.0,
+          162.0
+        ],
+        [
+          398.0,
+          70.0
+        ],
+        [
+          446.0,
+          37.0
+        ],
+        [
+          388.0,
+          127.0
+        ],
+        [
+          619.0,
+          246.0
+        ],
+        [
+          743.0,
+          333.0
+        ],
+        [
+          836.0,
+          349.0
+        ],
+        [
+          520.0,
+          401.0
+        ],
+        [
+          520.0,
+          601.0
+        ],
+        [
+          472.0,
+          783.0
+        ],
+        [
+          619.0,
+          763.0
+        ]
+      ],
+      "role": "transition",
+      "paper_polygon_xy": [
+        [
+          823,
+          330
+        ],
+        [
+          990,
+          332
+        ],
+        [
+          998,
+          358
+        ],
+        [
+          930,
+          385
+        ],
+        [
+          823,
+          367
+        ]
+      ],
+      "paper_landmarks_xy": [
+        [
+          909,
+          357
+        ],
+        [
+          826,
+          338
+        ],
+        [
+          990,
+          336
+        ],
+        [
+          923,
+          381
+        ]
+      ],
+      "sha256": "eac6cf9b89229a6ab4e14873ec63a48052ad2015c559fa9c704ad93aaf4f4be7"
+    },
+    {
+      "id": "knick-stamp-handoff1",
+      "file": "assets/sprite-sources/buergeramt/gaussian-arcs/knick-stamp-handoff1.webp",
+      "sha256": "edc8f4e6a66679e777ad10e171a85cd71187f70c0d1b790f4fa38120a945fc87",
+      "source_file": "assets/sprite-sources/buergeramt/gaussian-arcs/knick-stamp-handoff-mid-source.png",
+      "source_sha256": "610b85f7436b3f69d70168e30fde6bbc98b043188827e303f9abfea372cca8f1",
+      "source_crop_xyxy": [
+        362,
+        34,
+        1152,
+        1099
+      ],
+      "canvas_xy": [
+        1024,
+        832
+      ],
+      "scale": 0.71,
+      "translation_xy": [
+        50,
+        18
+      ],
+      "alpha_bbox_xyxy": [
+        307,
+        42,
+        868,
+        799
+      ],
+      "landmarks": {
+        "eye_right": [
+          544,
+          147
+        ],
+        "eye_left": [
+          591,
+          160
+        ],
+        "nose": [
+          568,
+          172
+        ],
+        "chin": [
+          566,
+          212
+        ],
+        "shoulder_right": [
+          445,
+          229
+        ],
+        "elbow_right": [
+          344,
+          284
+        ],
+        "grip_right": [
+          394,
+          216
+        ],
+        "stamp_knob": [
+          430,
+          181
+        ],
+        "stamp_base": [
+          380,
+          274
+        ],
+        "shoulder_left": [
+          619,
+          251
+        ],
+        "elbow_left": [
+          675,
+          346
+        ],
+        "hand_left": [
+          751,
+          368
+        ],
+        "hip_center": [
+          519,
+          402
+        ],
+        "skirt_hem_center": [
+          520,
+          599
+        ],
+        "foot_screen_left": [
+          468,
+          781
+        ],
+        "foot_screen_right": [
+          620,
+          764
+        ]
+      },
+      "source_landmarks_xy": {
+        "eye_right": [
+          695.8,
+          181.7
+        ],
+        "eye_left": [
+          762.0,
+          200.0
+        ],
+        "nose": [
+          729.6,
+          216.9
+        ],
+        "chin": [
+          726.8,
+          273.2
+        ],
+        "shoulder_right": [
+          556.3,
+          297.2
+        ],
+        "elbow_right": [
+          414.1,
+          374.6
+        ],
+        "grip_right": [
+          484.5,
+          278.9
+        ],
+        "stamp_knob": [
+          535.2,
+          229.6
+        ],
+        "stamp_base": [
+          464.8,
+          360.6
+        ],
+        "shoulder_left": [
+          801.4,
+          328.2
+        ],
+        "elbow_left": [
+          880.3,
+          462.0
+        ],
+        "hand_left": [
+          987.3,
+          493.0
+        ],
+        "hip_center": [
+          660.6,
+          540.8
+        ],
+        "skirt_hem_center": [
+          662.0,
+          818.3
+        ],
+        "foot_screen_left": [
+          588.7,
+          1074.6
+        ],
+        "foot_screen_right": [
+          802.8,
+          1050.7
+        ]
+      },
+      "paper_polygon_xy": [
+        [
+          724,
+          351
+        ],
+        [
+          860,
+          350
+        ],
+        [
+          870,
+          380
+        ],
+        [
+          814,
+          403
+        ],
+        [
+          726,
+          386
+        ]
+      ],
+      "paper_landmarks_xy": [
+        [
+          798,
+          376
+        ],
+        [
+          728,
+          355
+        ],
+        [
+          859,
+          353
+        ],
+        [
+          809,
+          399
+        ]
+      ],
+      "role": "transition"
+    },
+    {
+      "id": "knick-stamp-handoff2",
+      "file": "assets/sprite-sources/buergeramt/gaussian-arcs/knick-stamp-handoff2.webp",
+      "sha256": "1ffc86dee796a023e6ff3eb25009c44ab1434c5270aeef13c4addd59db34349a",
+      "source_file": "assets/sprite-sources/buergeramt/gaussian-arcs/knick-stamp-handoff1-source.png",
+      "source_sha256": "d51dbdea498302c64f9c2e0cbd04655bd23804386d3be66a6afa50b9ec52073a",
+      "source_crop_xyxy": [
+        346,
+        31,
+        903,
+        1094
+      ],
+      "canvas_xy": [
+        1024,
+        832
+      ],
+      "scale": 0.71,
+      "translation_xy": [
+        65,
+        21
+      ],
+      "alpha_bbox_xyxy": [
+        311,
+        43,
+        706,
+        798
+      ],
+      "landmarks": {
+        "eye_right": [
+          544,
+          144
+        ],
+        "eye_left": [
+          588,
+          156
+        ],
+        "nose": [
+          565,
+          169
+        ],
+        "chin": [
+          557,
+          213
+        ],
+        "shoulder_right": [
+          438,
+          230
+        ],
+        "elbow_right": [
+          342,
+          270
+        ],
+        "grip_right": [
+          380,
+          200
+        ],
+        "stamp_knob": [
+          418,
+          160
+        ],
+        "stamp_base": [
+          378,
+          248
+        ],
+        "shoulder_left": [
+          624,
+          249
+        ],
+        "elbow_left": [
+          690,
+          345
+        ],
+        "hand_left": [
+          649,
+          386
+        ],
+        "hip_center": [
+          520,
+          400
+        ],
+        "skirt_hem_center": [
+          521,
+          597
+        ],
+        "foot_screen_left": [
+          472,
+          782
+        ],
+        "foot_screen_right": [
+          608,
+          763
+        ]
+      },
+      "source_landmarks_xy": {
+        "eye_right": [
+          674.6,
+          173.2
+        ],
+        "eye_left": [
+          736.6,
+          190.1
+        ],
+        "nose": [
+          704.2,
+          208.5
+        ],
+        "chin": [
+          693.0,
+          270.4
+        ],
+        "shoulder_right": [
+          525.4,
+          294.4
+        ],
+        "elbow_right": [
+          390.1,
+          350.7
+        ],
+        "grip_right": [
+          443.7,
+          252.1
+        ],
+        "stamp_knob": [
+          497.2,
+          195.8
+        ],
+        "stamp_base": [
+          440.8,
+          319.7
+        ],
+        "shoulder_left": [
+          787.3,
+          321.1
+        ],
+        "elbow_left": [
+          880.3,
+          456.3
+        ],
+        "hand_left": [
+          822.5,
+          514.1
+        ],
+        "hip_center": [
+          640.8,
+          533.8
+        ],
+        "skirt_hem_center": [
+          642.3,
+          811.3
+        ],
+        "foot_screen_left": [
+          573.2,
+          1071.8
+        ],
+        "foot_screen_right": [
+          764.8,
+          1045.1
+        ]
+      },
+      "paper_polygon_xy": [
+        [
+          533,
+          375
+        ],
+        [
+          666,
+          365
+        ],
+        [
+          676,
+          391
+        ],
+        [
+          562,
+          410
+        ],
+        [
+          534,
+          399
+        ]
+      ],
+      "paper_landmarks_xy": [
+        [
+          604,
+          389
+        ],
+        [
+          540,
+          377
+        ],
+        [
+          665,
+          370
+        ],
+        [
+          601,
+          407
+        ]
+      ],
+      "role": "transition"
+    },
+    {
+      "id": "stamp-2",
+      "file": "assets/previews/knick-splats/bridge-stamp-2.webp",
+      "landmarks": [
+        [
+          543.0,
+          165.0
+        ],
+        [
+          588.0,
+          176.0
+        ],
+        [
+          566.0,
+          184.0
+        ],
+        [
+          548.0,
+          219.0
+        ],
+        [
+          442.0,
+          227.0
+        ],
+        [
+          385.0,
+          302.0
+        ],
+        [
+          517.0,
+          294.0
+        ],
+        [
+          523.0,
+          242.0
+        ],
+        [
+          517.0,
+          337.0
+        ],
+        [
+          628.0,
+          250.0
+        ],
+        [
+          676.0,
+          356.0
+        ],
+        [
+          626.0,
+          386.0
+        ],
+        [
+          520.0,
+          399.0
+        ],
+        [
+          520.0,
+          597.0
+        ],
+        [
+          477.0,
+          784.0
+        ],
+        [
+          616.0,
+          764.0
+        ]
+      ],
+      "role": "transition",
+      "paper_polygon_xy": [
+        [
+          486,
+          374
+        ],
+        [
+          630,
+          370
+        ],
+        [
+          645,
+          387
+        ],
+        [
+          597,
+          405
+        ],
+        [
+          505,
+          405
+        ]
+      ],
+      "paper_landmarks_xy": [
+        [
+          565,
+          388
+        ],
+        [
+          489,
+          378
+        ],
+        [
+          629,
+          374
+        ],
+        [
+          570,
+          402
+        ]
+      ],
+      "sha256": "ec2239b038f32e8294d23b1f4aa096c55fa908b875e9a4cb447d4d8345893ebd"
+    },
+    {
+      "id": "stamp-3",
+      "file": "assets/previews/knick-splats/bridge-stamp-3.webp",
+      "landmarks": [
+        [
+          541.0,
+          170.0
+        ],
+        [
+          584.0,
+          181.0
+        ],
+        [
+          563.0,
+          192.0
+        ],
+        [
+          548.0,
+          225.0
+        ],
+        [
+          441.0,
+          232.0
+        ],
+        [
+          389.0,
+          317.0
+        ],
+        [
+          520.0,
+          344.0
+        ],
+        [
+          528.0,
+          300.0
+        ],
+        [
+          516.0,
+          387.0
+        ],
+        [
+          625.0,
+          270.0
+        ],
+        [
+          667.0,
+          377.0
+        ],
+        [
+          608.0,
+          398.0
+        ],
+        [
+          520.0,
+          400.0
+        ],
+        [
+          520.0,
+          600.0
+        ],
+        [
+          475.0,
+          784.0
+        ],
+        [
+          616.0,
+          764.0
+        ]
+      ],
+      "role": "transition",
+      "paper_polygon_xy": [
+        [
+          446,
+          390
+        ],
+        [
+          607,
+          385
+        ],
+        [
+          629,
+          407
+        ],
+        [
+          589,
+          427
+        ],
+        [
+          470,
+          425
+        ]
+      ],
+      "paper_landmarks_xy": [
+        [
+          535,
+          405
+        ],
+        [
+          451,
+          394
+        ],
+        [
+          608,
+          389
+        ],
+        [
+          535,
+          423
+        ]
+      ],
+      "sha256": "97af6cdf94d8062945d26c311da3ceea3901997e9b84f6803bbd6175f51b56f3"
+    },
+    {
+      "id": "contact",
+      "file": "assets/previews/knick-splats/registered-anchor-2.webp",
+      "landmarks": [
+        [
+          529.0,
+          181.0
+        ],
+        [
+          577.0,
+          197.0
+        ],
+        [
+          554.0,
+          211.0
+        ],
+        [
+          541.0,
+          263.0
+        ],
+        [
+          443.0,
+          250.0
+        ],
+        [
+          419.0,
+          355.0
+        ],
+        [
+          514.0,
+          351.0
+        ],
+        [
+          523.0,
+          313.0
+        ],
+        [
+          525.0,
+          398.0
+        ],
+        [
+          618.0,
+          300.0
+        ],
+        [
+          637.0,
+          379.0
+        ],
+        [
+          608.0,
+          421.0
+        ],
+        [
+          520.0,
+          430.0
+        ],
+        [
+          532.0,
+          618.0
+        ],
+        [
+          495.0,
+          787.0
+        ],
+        [
+          626.0,
+          765.0
+        ]
+      ],
+      "role": "main",
+      "paper_polygon_xy": [
+        [
+          456,
+          405
+        ],
+        [
+          606,
+          392
+        ],
+        [
+          626,
+          414
+        ],
+        [
+          593,
+          438
+        ],
+        [
+          471,
+          442
+        ]
+      ],
+      "paper_landmarks_xy": [
+        [
+          539,
+          417
+        ],
+        [
+          463,
+          410
+        ],
+        [
+          606,
+          397
+        ],
+        [
+          543,
+          439
+        ]
+      ],
+      "sha256": "51c085117d070130f0cd6748cfb16be74c2c092e2d7a141a3c1e3220e1538da8"
+    },
+    {
+      "id": "fold-1",
+      "file": "assets/previews/knick-splats/bridge-fold-1.webp",
+      "landmarks": [
+        [
+          544.0,
+          119.0
+        ],
+        [
+          594.0,
+          128.0
+        ],
+        [
+          572.0,
+          147.0
+        ],
+        [
+          557.0,
+          186.0
+        ],
+        [
+          433.0,
+          251.0
+        ],
+        [
+          394.0,
+          341.0
+        ],
+        [
+          505.0,
+          307.0
+        ],
+        [
+          516.0,
+          266.0
+        ],
+        [
+          505.0,
+          355.0
+        ],
+        [
+          627.0,
+          256.0
+        ],
+        [
+          675.0,
+          378.0
+        ],
+        [
+          628.0,
+          392.0
+        ],
+        [
+          520.0,
+          405.0
+        ],
+        [
+          520.0,
+          606.0
+        ],
+        [
+          473.0,
+          781.0
+        ],
+        [
+          613.0,
+          765.0
+        ]
+      ],
+      "role": "transition",
+      "paper_polygon_xy": [
+        [
+          469,
+          389
+        ],
+        [
+          632,
+          381
+        ],
+        [
+          650,
+          400
+        ],
+        [
+          605,
+          421
+        ],
+        [
+          486,
+          420
+        ]
+      ],
+      "paper_landmarks_xy": [
+        [
+          555,
+          402
+        ],
+        [
+          473,
+          393
+        ],
+        [
+          632,
+          385
+        ],
+        [
+          553,
+          418
+        ]
+      ],
+      "sha256": "236d797b0fd7146af127069513c54e89bf5ae6e244f3a3ec0c03345efd90782d"
+    },
+    {
+      "id": "fold-2",
+      "file": "assets/previews/knick-splats/bridge-fold-2.webp",
+      "landmarks": [
+        [
+          543.0,
+          120.0
+        ],
+        [
+          588.0,
+          124.0
+        ],
+        [
+          571.0,
+          143.0
+        ],
+        [
+          552.0,
+          185.0
+        ],
+        [
+          433.0,
+          253.0
+        ],
+        [
+          393.0,
+          348.0
+        ],
+        [
+          505.0,
+          331.0
+        ],
+        [
+          515.0,
+          277.0
+        ],
+        [
+          504.0,
+          373.0
+        ],
+        [
+          623.0,
+          252.0
+        ],
+        [
+          713.0,
+          371.0
+        ],
+        [
+          783.0,
+          383.0
+        ],
+        [
+          520.0,
+          405.0
+        ],
+        [
+          520.0,
+          607.0
+        ],
+        [
+          472.0,
+          782.0
+        ],
+        [
+          614.0,
+          765.0
+        ]
+      ],
+      "role": "transition",
+      "paper_polygon_xy": [
+        [
+          749,
+          378
+        ],
+        [
+          909,
+          379
+        ],
+        [
+          919,
+          397
+        ],
+        [
+          864,
+          417
+        ],
+        [
+          749,
+          411
+        ]
+      ],
+      "paper_landmarks_xy": [
+        [
+          835,
+          397
+        ],
+        [
+          752,
+          382
+        ],
+        [
+          909,
+          382
+        ],
+        [
+          834,
+          414
+        ]
+      ],
+      "sha256": "e58f9483e63fabe1a11f278d7b03bde63afcfa035bd8a782e54ede3d897f4c3c"
+    },
+    {
+      "id": "fold-3",
+      "file": "assets/previews/knick-splats/bridge-fold-3.webp",
+      "landmarks": [
+        [
+          525.0,
+          116.0
+        ],
+        [
+          576.0,
+          128.0
+        ],
+        [
+          554.0,
+          144.0
+        ],
+        [
+          542.0,
+          180.0
+        ],
+        [
+          426.0,
+          251.0
+        ],
+        [
+          487.0,
+          355.0
+        ],
+        [
+          605.0,
+          292.0
+        ],
+        [
+          601.0,
+          238.0
+        ],
+        [
+          610.0,
+          338.0
+        ],
+        [
+          626.0,
+          252.0
+        ],
+        [
+          619.0,
+          376.0
+        ],
+        [
+          493.0,
+          416.0
+        ],
+        [
+          520.0,
+          425.0
+        ],
+        [
+          520.0,
+          606.0
+        ],
+        [
+          475.0,
+          781.0
+        ],
+        [
+          614.0,
+          765.0
+        ]
+      ],
+      "role": "transition",
+      "sha256": "6ca2dfd5adda09b3715ab635ce762a96544897a84e803ab8a088a40f62b0e75b"
+    },
+    {
+      "id": "refusal",
+      "file": "assets/previews/knick-splats/registered-anchor-3.webp",
+      "landmarks": [
+        [
+          540.0,
+          123.0
+        ],
+        [
+          586.0,
+          124.0
+        ],
+        [
+          572.0,
+          151.0
+        ],
+        [
+          544.0,
+          209.0
+        ],
+        [
+          432.0,
+          252.0
+        ],
+        [
+          464.0,
+          351.0
+        ],
+        [
+          607.0,
+          298.0
+        ],
+        [
+          594.0,
+          242.0
+        ],
+        [
+          622.0,
+          336.0
+        ],
+        [
+          633.0,
+          305.0
+        ],
+        [
+          625.0,
+          381.0
+        ],
+        [
+          498.0,
+          319.0
+        ],
+        [
+          520.0,
+          430.0
+        ],
+        [
+          532.0,
+          618.0
+        ],
+        [
+          495.0,
+          787.0
+        ],
+        [
+          626.0,
+          765.0
+        ]
+      ],
+      "role": "main",
+      "sha256": "d4e410849624a6d2560f4c6e489d5a051dc6b4f265abcb8d16742f39907c6ceb"
+    },
+    {
+      "id": "return-1",
+      "file": "assets/previews/knick-splats/bridge-return-1.webp",
+      "landmarks": [
+        [
+          533.0,
+          120.0
+        ],
+        [
+          578.0,
+          124.0
+        ],
+        [
+          559.0,
+          139.0
+        ],
+        [
+          550.0,
+          180.0
+        ],
+        [
+          426.0,
+          251.0
+        ],
+        [
+          396.0,
+          344.0
+        ],
+        [
+          523.0,
+          305.0
+        ],
+        [
+          528.0,
+          255.0
+        ],
+        [
+          521.0,
+          348.0
+        ],
+        [
+          614.0,
+          254.0
+        ],
+        [
+          640.0,
+          385.0
+        ],
+        [
+          522.0,
+          408.0
+        ],
+        [
+          520.0,
+          410.0
+        ],
+        [
+          520.0,
+          603.0
+        ],
+        [
+          475.0,
+          781.0
+        ],
+        [
+          614.0,
+          765.0
+        ]
+      ],
+      "role": "transition",
+      "sha256": "f249f93ad828bb55db8242e04e8052d25e574eaa6e8ff8864f772412faba657a"
+    },
+    {
+      "id": "return-2",
+      "file": "assets/previews/knick-splats/bridge-return-2.webp",
+      "landmarks": [
+        [
+          531.0,
+          118.0
+        ],
+        [
+          579.0,
+          124.0
+        ],
+        [
+          558.0,
+          140.0
+        ],
+        [
+          548.0,
+          181.0
+        ],
+        [
+          420.0,
+          254.0
+        ],
+        [
+          396.0,
+          349.0
+        ],
+        [
+          500.0,
+          337.0
+        ],
+        [
+          503.0,
+          287.0
+        ],
+        [
+          499.0,
+          387.0
+        ],
+        [
+          607.0,
+          250.0
+        ],
+        [
+          632.0,
+          404.0
+        ],
+        [
+          636.0,
+          502.0
+        ],
+        [
+          520.0,
+          407.0
+        ],
+        [
+          520.0,
+          604.0
+        ],
+        [
+          475.0,
+          781.0
+        ],
+        [
+          614.0,
+          765.0
+        ]
+      ],
+      "role": "transition",
+      "sha256": "e42d361c1f7e5d4857e446ccdc807c1aa3ffe26ea967dcb770b9dbf691e6c3e3"
+    }
+  ],
+  "arcs": [
+    {
+      "id": "raise",
+      "from": "ready",
+      "to": "raised",
+      "duration": 3.1,
+      "keys": [
+        {
+          "state": "ready",
+          "time": 0
+        },
+        {
+          "state": "raise-1",
+          "time": 1.3
+        },
+        {
+          "state": "raise-2",
+          "time": 2.5
+        },
+        {
+          "state": "raised",
+          "time": 3.1
+        }
+      ],
+      "segments": [
+        {
+          "segment": 0,
+          "start": 0,
+          "end": 1.3
+        },
+        {
+          "segment": 1,
+          "start": 1.3,
+          "end": 2.5
+        },
+        {
+          "segment": 2,
+          "start": 2.5,
+          "end": 3.1
+        }
+      ]
+    },
+    {
+      "id": "stamp",
+      "from": "raised",
+      "to": "contact",
+      "duration": 2.2499999999999996,
+      "keys": [
+        {
+          "state": "raised",
+          "time": 0.0
+        },
+        {
+          "state": "stamp-1",
+          "time": 0.3500000000000001
+        },
+        {
+          "state": "knick-stamp-handoff1",
+          "time": 0.6499999999999999
+        },
+        {
+          "state": "knick-stamp-handoff2",
+          "time": 0.9700000000000002
+        },
+        {
+          "state": "stamp-2",
+          "time": 1.3000000000000003
+        },
+        {
+          "state": "stamp-3",
+          "time": 1.9999999999999996
+        },
+        {
+          "state": "contact",
+          "time": 2.2499999999999996
+        }
+      ],
+      "segments": [
+        {
+          "segment": 3,
+          "start": 0.0,
+          "end": 0.3500000000000001
+        },
+        {
+          "segment": 4,
+          "start": 0.3500000000000001,
+          "end": 0.6499999999999999
+        },
+        {
+          "segment": 5,
+          "start": 0.6499999999999999,
+          "end": 0.9700000000000002
+        },
+        {
+          "segment": 6,
+          "start": 0.9700000000000002,
+          "end": 1.3000000000000003
+        },
+        {
+          "segment": 7,
+          "start": 1.3000000000000003,
+          "end": 1.9999999999999996
+        },
+        {
+          "segment": 8,
+          "start": 1.9999999999999996,
+          "end": 2.2499999999999996
+        }
+      ]
+    },
+    {
+      "id": "refuse",
+      "from": "contact",
+      "to": "refusal",
+      "duration": 2.2,
+      "keys": [
+        {
+          "state": "contact",
+          "time": 0.0
+        },
+        {
+          "state": "fold-1",
+          "time": 0.8500000000000005
+        },
+        {
+          "state": "fold-2",
+          "time": 1.3000000000000007
+        },
+        {
+          "state": "fold-3",
+          "time": 1.75
+        },
+        {
+          "state": "refusal",
+          "time": 2.2
+        }
+      ],
+      "segments": [
+        {
+          "segment": 9,
+          "start": 0.0,
+          "end": 0.8500000000000005
+        },
+        {
+          "segment": 10,
+          "start": 0.8500000000000005,
+          "end": 1.3000000000000007
+        },
+        {
+          "segment": 11,
+          "start": 1.3000000000000007,
+          "end": 1.75
+        },
+        {
+          "segment": 12,
+          "start": 1.75,
+          "end": 2.2
+        }
+      ]
+    },
+    {
+      "id": "return",
+      "from": "refusal",
+      "to": "ready",
+      "duration": 1.5499999999999998,
+      "keys": [
+        {
+          "state": "refusal",
+          "time": 0.0
+        },
+        {
+          "state": "return-1",
+          "time": 0.4500000000000002
+        },
+        {
+          "state": "return-2",
+          "time": 0.8999999999999995
+        },
+        {
+          "state": "ready",
+          "time": 1.5499999999999998
+        }
+      ],
+      "segments": [
+        {
+          "segment": 13,
+          "start": 0.0,
+          "end": 0.4500000000000002
+        },
+        {
+          "segment": 14,
+          "start": 0.4500000000000002,
+          "end": 0.8999999999999995
+        },
+        {
+          "segment": 15,
+          "start": 0.8999999999999995,
+          "end": 1.5499999999999998
+        }
+      ]
+    }
+  ],
+  "segments": [
+    {
+      "from": "ready",
+      "to": "raise-1"
+    },
+    {
+      "from": "raise-1",
+      "to": "raise-2"
+    },
+    {
+      "from": "raise-2",
+      "to": "raised"
+    },
+    {
+      "from": "raised",
+      "to": "stamp-1"
+    },
+    {
+      "from": "stamp-1",
+      "to": "knick-stamp-handoff1"
+    },
+    {
+      "from": "knick-stamp-handoff1",
+      "to": "knick-stamp-handoff2"
+    },
+    {
+      "from": "knick-stamp-handoff2",
+      "to": "stamp-2"
+    },
+    {
+      "from": "stamp-2",
+      "to": "stamp-3"
+    },
+    {
+      "from": "stamp-3",
+      "to": "contact"
+    },
+    {
+      "from": "contact",
+      "to": "fold-1"
+    },
+    {
+      "from": "fold-1",
+      "to": "fold-2"
+    },
+    {
+      "from": "fold-2",
+      "to": "fold-3"
+    },
+    {
+      "from": "fold-3",
+      "to": "refusal"
+    },
+    {
+      "from": "refusal",
+      "to": "return-1"
+    },
+    {
+      "from": "return-1",
+      "to": "return-2"
+    },
+    {
+      "from": "return-2",
+      "to": "ready"
+    }
+  ],
+  "variants": {
+    "desktop": {
+      "file": "clerk-desktop.bin.gz",
+      "sha256": "e08ac06f3134d9bb78eedf3e80bfb8a399d380cd2d5ed4898f2a53f7bf3f341e",
+      "decoded_sha256": "158c10d3817b956f4296e4f65c2715756d05e627f1f3990e67b5d8a3df8671da",
+      "bytes": 1451440,
+      "decoded_bytes": 2850816,
+      "sample_count": 7424,
+      "stride_px": 5,
+      "segment_count": 16,
+      "record_bytes": 24,
+      "trajectories": [
+        {
+          "segment": 4,
+          "start_slot": 5094,
+          "end_slot": 5339,
+          "pivot_start": [
+            0.47716346153846156,
+            0.5709134615384616
+          ],
+          "pivot_end": [
+            0.34375,
+            0.5480769230769231
+          ],
+          "angle_radians": 0.00899562411033941
+        },
+        {
+          "segment": 5,
+          "start_slot": 4663,
+          "end_slot": 4881,
+          "pivot_start": [
+            0.34375,
+            0.5480769230769231
+          ],
+          "pivot_end": [
+            0.11057692307692307,
+            0.5324519230769231
+          ],
+          "angle_radians": -0.0007550424624949222
+        },
+        {
+          "segment": 6,
+          "start_slot": 4743,
+          "end_slot": 4921,
+          "pivot_start": [
+            0.11057692307692307,
+            0.5324519230769231
+          ],
+          "pivot_end": [
+            0.06370192307692307,
+            0.5336538461538461
+          ],
+          "angle_radians": 0.004472337341540999
+        },
+        {
+          "segment": 7,
+          "start_slot": 3976,
+          "end_slot": 4221,
+          "pivot_start": [
+            0.06370192307692307,
+            0.5336538461538461
+          ],
+          "pivot_end": [
+            0.027644230769230768,
+            0.5132211538461539
+          ],
+          "angle_radians": -0.007215129906215248
+        },
+        {
+          "segment": 8,
+          "start_slot": 3654,
+          "end_slot": 3905,
+          "pivot_start": [
+            0.027644230769230768,
+            0.5132211538461539
+          ],
+          "pivot_end": [
+            0.03245192307692308,
+            0.4987980769230769
+          ],
+          "angle_radians": 0.05860038028896382
+        },
+        {
+          "segment": 9,
+          "start_slot": 4021,
+          "end_slot": 4272,
+          "pivot_start": [
+            0.03245192307692308,
+            0.4987980769230769
+          ],
+          "pivot_end": [
+            0.051682692307692304,
+            0.5168269230769231
+          ],
+          "angle_radians": -0.05095272933431203
+        },
+        {
+          "segment": 10,
+          "start_slot": 4380,
+          "end_slot": 4596,
+          "pivot_start": [
+            0.051682692307692304,
+            0.5168269230769231
+          ],
+          "pivot_end": [
+            0.38822115384615385,
+            0.5228365384615384
+          ],
+          "angle_radians": -0.04310814974859463
+        }
+      ]
+    },
+    "mobile": {
+      "file": "clerk-mobile.bin.gz",
+      "sha256": "104a836685fb9e90435ec96d63eed64a58cf497a8426f7fee912e9a9c68a8538",
+      "decoded_sha256": "7ea5f8b2983c1568a0fd14b23ead7a8fb58de0a4a90db6b374ae6aff66874957",
+      "bytes": 572812,
+      "decoded_bytes": 1179648,
+      "sample_count": 3072,
+      "stride_px": 8,
+      "segment_count": 16,
+      "record_bytes": 24,
+      "trajectories": [
+        {
+          "segment": 4,
+          "start_slot": 1991,
+          "end_slot": 2085,
+          "pivot_start": [
+            0.47716346153846156,
+            0.5709134615384616
+          ],
+          "pivot_end": [
+            0.34375,
+            0.5480769230769231
+          ],
+          "angle_radians": 0.00899562411033941
+        },
+        {
+          "segment": 5,
+          "start_slot": 1821,
+          "end_slot": 1899,
+          "pivot_start": [
+            0.34375,
+            0.5480769230769231
+          ],
+          "pivot_end": [
+            0.11057692307692307,
+            0.5324519230769231
+          ],
+          "angle_radians": -0.0007550424624949222
+        },
+        {
+          "segment": 6,
+          "start_slot": 1845,
+          "end_slot": 1912,
+          "pivot_start": [
+            0.11057692307692307,
+            0.5324519230769231
+          ],
+          "pivot_end": [
+            0.06370192307692307,
+            0.5336538461538461
+          ],
+          "angle_radians": 0.004472337341540999
+        },
+        {
+          "segment": 7,
+          "start_slot": 1538,
+          "end_slot": 1636,
+          "pivot_start": [
+            0.06370192307692307,
+            0.5336538461538461
+          ],
+          "pivot_end": [
+            0.027644230769230768,
+            0.5132211538461539
+          ],
+          "angle_radians": -0.007215129906215248
+        },
+        {
+          "segment": 8,
+          "start_slot": 1419,
+          "end_slot": 1517,
+          "pivot_start": [
+            0.027644230769230768,
+            0.5132211538461539
+          ],
+          "pivot_end": [
+            0.03245192307692308,
+            0.4987980769230769
+          ],
+          "angle_radians": 0.05860038028896382
+        },
+        {
+          "segment": 9,
+          "start_slot": 1562,
+          "end_slot": 1656,
+          "pivot_start": [
+            0.03245192307692308,
+            0.4987980769230769
+          ],
+          "pivot_end": [
+            0.051682692307692304,
+            0.5168269230769231
+          ],
+          "angle_radians": -0.05095272933431203
+        },
+        {
+          "segment": 10,
+          "start_slot": 1716,
+          "end_slot": 1805,
+          "pivot_start": [
+            0.051682692307692304,
+            0.5168269230769231
+          ],
+          "pivot_end": [
+            0.38822115384615385,
+            0.5228365384615384
+          ],
+          "angle_radians": -0.04310814974859463
+        }
+      ]
+    }
+  },
+  "limits": [
+    "Main and terminal anchors are semantic checkpoints; transition anchors never create scheduled holds",
+    "One paired cloud blends position and linear-light paint; no whole-character scatter or midpoint paint swap",
+    "A fixed source head paint is similarity-transformed by face landmarks when head_paint_source is set",
+    "Main source paintings differ; Gaussian correspondence needs rendered anatomical review",
+    "Existing route/gait and dialogue owners remain authoritative"
+  ]
+}

@@ -1,0 +1,1433 @@
+{
+  "version": 1,
+  "id": "nachtschichtmelderin",
+  "representation": "paired-gaussian-paint",
+  "canvas_xy": [
+    640,
+    832
+  ],
+  "head_paint_source": null,
+  "states": [
+    {
+      "id": "work",
+      "role": "main",
+      "file": "assets/buergeramt/characters/nachtschichtmelderin-detail.webp",
+      "crop_xywh": [
+        0,
+        0,
+        640,
+        832
+      ],
+      "landmarks": {
+        "eye_right": [
+          306,
+          117
+        ],
+        "eye_left": [
+          329,
+          115
+        ],
+        "nose": [
+          318,
+          136
+        ],
+        "chin": [
+          317,
+          153
+        ],
+        "shoulder_right": [
+          246,
+          194
+        ],
+        "elbow_right": [
+          208,
+          300
+        ],
+        "grip_right": [
+          257,
+          231
+        ],
+        "stamp_knob": [
+          261,
+          209
+        ],
+        "stamp_base": [
+          263,
+          242
+        ],
+        "shoulder_left": [
+          393,
+          197
+        ],
+        "elbow_left": [
+          434,
+          326
+        ],
+        "hand_left": [
+          344,
+          309
+        ],
+        "hip_center": [
+          325,
+          457
+        ],
+        "skirt_hem_center": [
+          316,
+          439
+        ],
+        "foot_screen_left": [
+          236,
+          770
+        ],
+        "foot_screen_right": [
+          409,
+          772
+        ]
+      },
+      "paper_polygon_xy": [
+        [
+          262,
+          253
+        ],
+        [
+          322,
+          251
+        ],
+        [
+          322,
+          218
+        ],
+        [
+          425,
+          217
+        ],
+        [
+          440,
+          239
+        ],
+        [
+          425,
+          385
+        ],
+        [
+          322,
+          385
+        ],
+        [
+          319,
+          327
+        ],
+        [
+          263,
+          325
+        ]
+      ],
+      "paper_landmarks_xy": [
+        [
+          348,
+          300
+        ],
+        [
+          266,
+          257
+        ],
+        [
+          424,
+          220
+        ],
+        [
+          371,
+          384
+        ]
+      ],
+      "arm_polygon_xy": [
+        [
+          232,
+          168
+        ],
+        [
+          271,
+          181
+        ],
+        [
+          280,
+          207
+        ],
+        [
+          274,
+          261
+        ],
+        [
+          238,
+          284
+        ],
+        [
+          222,
+          333
+        ],
+        [
+          193,
+          330
+        ],
+        [
+          188,
+          282
+        ],
+        [
+          204,
+          231
+        ]
+      ],
+      "arm_landmarks_xy": [
+        [
+          246,
+          194
+        ],
+        [
+          208,
+          300
+        ],
+        [
+          257,
+          231
+        ]
+      ],
+      "prop_polygon_xy": [
+        [
+          247,
+          202
+        ],
+        [
+          278,
+          201
+        ],
+        [
+          286,
+          245
+        ],
+        [
+          254,
+          252
+        ]
+      ],
+      "prop_landmarks_xy": [
+        [
+          257,
+          231
+        ],
+        [
+          263,
+          204
+        ],
+        [
+          265,
+          225
+        ],
+        [
+          266,
+          246
+        ]
+      ],
+      "sha256": "b4cfe19bc7eafd0259896ca0fa91d27ce81a1de769b5c3071a6f205a7ed4ec2d"
+    },
+    {
+      "id": "bridge1",
+      "role": "transition",
+      "file": "assets/sprite-sources/buergeramt/gaussian-arcs/nachtschichtmelderin-bridge1.webp",
+      "source_file": "assets/sprite-sources/buergeramt/gaussian-arcs/nachtschichtmelderin-bridge1-source.png",
+      "source_sha256": "af44f219fc5ac608a771a2c7d724e2379949a9141b50c52b14b8e1710053fd91",
+      "uniform_scale": 0.8,
+      "translation_xy": [
+        -284,
+        16
+      ],
+      "landmarks": {
+        "eye_right": [
+          310,
+          130
+        ],
+        "eye_left": [
+          339,
+          129
+        ],
+        "nose": [
+          327,
+          151
+        ],
+        "chin": [
+          327,
+          176
+        ],
+        "shoulder_right": [
+          244,
+          204
+        ],
+        "elbow_right": [
+          201,
+          327
+        ],
+        "grip_right": [
+          250,
+          280
+        ],
+        "stamp_knob": [
+          253,
+          250
+        ],
+        "stamp_base": [
+          257,
+          286
+        ],
+        "shoulder_left": [
+          405,
+          215
+        ],
+        "elbow_left": [
+          439,
+          333
+        ],
+        "hand_left": [
+          360,
+          318
+        ],
+        "hip_center": [
+          325,
+          457
+        ],
+        "skirt_hem_center": [
+          316,
+          439
+        ],
+        "foot_screen_left": [
+          236,
+          770
+        ],
+        "foot_screen_right": [
+          409,
+          772
+        ]
+      },
+      "paper_polygon_xy": [
+        [
+          273,
+          278
+        ],
+        [
+          342,
+          277
+        ],
+        [
+          343,
+          235
+        ],
+        [
+          431,
+          232
+        ],
+        [
+          443,
+          253
+        ],
+        [
+          419,
+          399
+        ],
+        [
+          327,
+          397
+        ],
+        [
+          326,
+          346
+        ],
+        [
+          273,
+          346
+        ]
+      ],
+      "paper_landmarks_xy": [
+        [
+          358,
+          312
+        ],
+        [
+          275,
+          283
+        ],
+        [
+          433,
+          235
+        ],
+        [
+          374,
+          395
+        ]
+      ],
+      "arm_polygon_xy": [
+        [
+          226,
+          183
+        ],
+        [
+          262,
+          195
+        ],
+        [
+          269,
+          244
+        ],
+        [
+          279,
+          303
+        ],
+        [
+          270,
+          332
+        ],
+        [
+          230,
+          347
+        ],
+        [
+          187,
+          352
+        ],
+        [
+          182,
+          314
+        ],
+        [
+          197,
+          251
+        ]
+      ],
+      "arm_landmarks_xy": [
+        [
+          244,
+          204
+        ],
+        [
+          201,
+          327
+        ],
+        [
+          250,
+          280
+        ]
+      ],
+      "prop_polygon_xy": [
+        [
+          238,
+          244
+        ],
+        [
+          270,
+          245
+        ],
+        [
+          277,
+          284
+        ],
+        [
+          245,
+          292
+        ]
+      ],
+      "prop_landmarks_xy": [
+        [
+          250,
+          280
+        ],
+        [
+          253,
+          248
+        ],
+        [
+          257,
+          266
+        ],
+        [
+          261,
+          287
+        ]
+      ],
+      "sha256": "016e0339cc3598c42bbc332c1d03e2322b7ba2e68fdc06b895daed34565d2a29"
+    },
+    {
+      "id": "bridge2",
+      "role": "transition",
+      "file": "assets/sprite-sources/buergeramt/gaussian-arcs/nachtschichtmelderin-bridge2.webp",
+      "source_file": "assets/sprite-sources/buergeramt/gaussian-arcs/nachtschichtmelderin-bridge2-source.png",
+      "source_sha256": "3b8d4ba7ac59aa7cece34034b48c835cfab42433374f41d862ef1d75b174fe1b",
+      "uniform_scale": 0.535,
+      "translation_xy": [
+        23,
+        10
+      ],
+      "landmarks": {
+        "eye_right": [
+          295,
+          101
+        ],
+        "eye_left": [
+          322,
+          102
+        ],
+        "nose": [
+          311,
+          122
+        ],
+        "chin": [
+          317,
+          146
+        ],
+        "shoulder_right": [
+          253,
+          182
+        ],
+        "elbow_right": [
+          203,
+          310
+        ],
+        "grip_right": [
+          227,
+          342
+        ],
+        "stamp_knob": [
+          252,
+          334
+        ],
+        "stamp_base": [
+          263,
+          359
+        ],
+        "shoulder_left": [
+          388,
+          180
+        ],
+        "elbow_left": [
+          423,
+          312
+        ],
+        "hand_left": [
+          337,
+          277
+        ],
+        "hip_center": [
+          328,
+          443
+        ],
+        "skirt_hem_center": [
+          320,
+          425
+        ],
+        "foot_screen_left": [
+          248,
+          757
+        ],
+        "foot_screen_right": [
+          410,
+          772
+        ]
+      },
+      "paper_polygon_xy": [
+        [
+          311,
+          206
+        ],
+        [
+          398,
+          190
+        ],
+        [
+          416,
+          211
+        ],
+        [
+          413,
+          349
+        ],
+        [
+          323,
+          352
+        ],
+        [
+          315,
+          321
+        ]
+      ],
+      "paper_landmarks_xy": [
+        [
+          365,
+          273
+        ],
+        [
+          315,
+          208
+        ],
+        [
+          405,
+          195
+        ],
+        [
+          370,
+          349
+        ]
+      ],
+      "arm_polygon_xy": [
+        [
+          222,
+          189
+        ],
+        [
+          262,
+          211
+        ],
+        [
+          245,
+          271
+        ],
+        [
+          275,
+          332
+        ],
+        [
+          269,
+          368
+        ],
+        [
+          218,
+          376
+        ],
+        [
+          185,
+          352
+        ],
+        [
+          185,
+          310
+        ],
+        [
+          201,
+          257
+        ]
+      ],
+      "arm_landmarks_xy": [
+        [
+          253,
+          182
+        ],
+        [
+          203,
+          310
+        ],
+        [
+          227,
+          342
+        ]
+      ],
+      "prop_polygon_xy": [
+        [
+          234,
+          326
+        ],
+        [
+          270,
+          328
+        ],
+        [
+          280,
+          362
+        ],
+        [
+          243,
+          368
+        ]
+      ],
+      "prop_landmarks_xy": [
+        [
+          227,
+          342
+        ],
+        [
+          251,
+          332
+        ],
+        [
+          256,
+          348
+        ],
+        [
+          263,
+          363
+        ]
+      ],
+      "sha256": "ed12959ae750eed572b7ba45d4b5c1ce9f2806d53089f6c2d8a855fa091f36c6"
+    },
+    {
+      "id": "bridge3",
+      "role": "transition",
+      "file": "assets/sprite-sources/buergeramt/gaussian-arcs/nachtschichtmelderin-bridge3.webp",
+      "source_file": "assets/sprite-sources/buergeramt/gaussian-arcs/nachtschichtmelderin-bridge3-source.png",
+      "source_sha256": "e0cac6126b781e8d17316f7b7f976589ef9f660fbb7bfc6eb7dbcbd8df31bfcc",
+      "uniform_scale": 0.515,
+      "translation_xy": [
+        44,
+        29
+      ],
+      "landmarks": {
+        "eye_right": [
+          291,
+          99
+        ],
+        "eye_left": [
+          320,
+          99
+        ],
+        "nose": [
+          308,
+          120
+        ],
+        "chin": [
+          316,
+          145
+        ],
+        "shoulder_right": [
+          251,
+          201
+        ],
+        "elbow_right": [
+          210,
+          365
+        ],
+        "grip_right": [
+          202,
+          436
+        ],
+        "stamp_knob": [
+          205,
+          447
+        ],
+        "stamp_base": [
+          192,
+          494
+        ],
+        "shoulder_left": [
+          400,
+          174
+        ],
+        "elbow_left": [
+          445,
+          281
+        ],
+        "hand_left": [
+          345,
+          266
+        ],
+        "hip_center": [
+          320,
+          432
+        ],
+        "skirt_hem_center": [
+          325,
+          412
+        ],
+        "foot_screen_left": [
+          253,
+          755
+        ],
+        "foot_screen_right": [
+          408,
+          771
+        ]
+      },
+      "paper_polygon_xy": [
+        [
+          313,
+          207
+        ],
+        [
+          395,
+          180
+        ],
+        [
+          417,
+          199
+        ],
+        [
+          425,
+          338
+        ],
+        [
+          331,
+          344
+        ],
+        [
+          322,
+          306
+        ]
+      ],
+      "paper_landmarks_xy": [
+        [
+          369,
+          263
+        ],
+        [
+          317,
+          209
+        ],
+        [
+          403,
+          185
+        ],
+        [
+          375,
+          340
+        ]
+      ],
+      "arm_polygon_xy": [
+        [
+          235,
+          194
+        ],
+        [
+          272,
+          210
+        ],
+        [
+          260,
+          278
+        ],
+        [
+          232,
+          368
+        ],
+        [
+          228,
+          419
+        ],
+        [
+          181,
+          465
+        ],
+        [
+          171,
+          446
+        ],
+        [
+          192,
+          389
+        ],
+        [
+          201,
+          289
+        ],
+        [
+          203,
+          234
+        ]
+      ],
+      "arm_landmarks_xy": [
+        [
+          251,
+          201
+        ],
+        [
+          210,
+          365
+        ],
+        [
+          202,
+          436
+        ]
+      ],
+      "prop_polygon_xy": [
+        [
+          192,
+          437
+        ],
+        [
+          224,
+          446
+        ],
+        [
+          209,
+          498
+        ],
+        [
+          172,
+          492
+        ]
+      ],
+      "prop_landmarks_xy": [
+        [
+          202,
+          436
+        ],
+        [
+          211,
+          447
+        ],
+        [
+          199,
+          470
+        ],
+        [
+          185,
+          493
+        ]
+      ],
+      "sha256": "08fee0736ea2c7175154ed728ad6d0591a8455a7f7cf2db713a503335bc371b6"
+    },
+    {
+      "id": "gesture",
+      "role": "terminal",
+      "file": "assets/buergeramt/characters/nachtschichtmelderin-detail.webp",
+      "crop_xywh": [
+        1920,
+        0,
+        640,
+        832
+      ],
+      "landmarks": {
+        "eye_right": [
+          293,
+          148
+        ],
+        "eye_left": [
+          324,
+          148
+        ],
+        "nose": [
+          311,
+          166
+        ],
+        "chin": [
+          315,
+          190
+        ],
+        "shoulder_right": [
+          265,
+          230
+        ],
+        "elbow_right": [
+          227,
+          402
+        ],
+        "grip_right": [
+          210,
+          454
+        ],
+        "stamp_knob": [
+          216,
+          451
+        ],
+        "stamp_base": [
+          204,
+          509
+        ],
+        "shoulder_left": [
+          395,
+          223
+        ],
+        "elbow_left": [
+          442,
+          316
+        ],
+        "hand_left": [
+          342,
+          311
+        ],
+        "hip_center": [
+          327,
+          457
+        ],
+        "skirt_hem_center": [
+          329,
+          432
+        ],
+        "foot_screen_left": [
+          270,
+          756
+        ],
+        "foot_screen_right": [
+          404,
+          771
+        ]
+      },
+      "paper_polygon_xy": [
+        [
+          315,
+          241
+        ],
+        [
+          404,
+          219
+        ],
+        [
+          421,
+          236
+        ],
+        [
+          422,
+          374
+        ],
+        [
+          333,
+          378
+        ],
+        [
+          326,
+          334
+        ]
+      ],
+      "paper_landmarks_xy": [
+        [
+          370,
+          298
+        ],
+        [
+          318,
+          242
+        ],
+        [
+          407,
+          224
+        ],
+        [
+          376,
+          374
+        ]
+      ],
+      "arm_polygon_xy": [
+        [
+          239,
+          216
+        ],
+        [
+          274,
+          226
+        ],
+        [
+          269,
+          298
+        ],
+        [
+          243,
+          383
+        ],
+        [
+          239,
+          436
+        ],
+        [
+          189,
+          469
+        ],
+        [
+          181,
+          449
+        ],
+        [
+          203,
+          392
+        ],
+        [
+          205,
+          286
+        ],
+        [
+          212,
+          239
+        ]
+      ],
+      "arm_landmarks_xy": [
+        [
+          265,
+          230
+        ],
+        [
+          227,
+          402
+        ],
+        [
+          210,
+          454
+        ]
+      ],
+      "prop_polygon_xy": [
+        [
+          203,
+          444
+        ],
+        [
+          230,
+          453
+        ],
+        [
+          216,
+          511
+        ],
+        [
+          178,
+          500
+        ]
+      ],
+      "prop_landmarks_xy": [
+        [
+          210,
+          454
+        ],
+        [
+          218,
+          453
+        ],
+        [
+          207,
+          478
+        ],
+        [
+          192,
+          505
+        ]
+      ],
+      "sha256": "b4cfe19bc7eafd0259896ca0fa91d27ce81a1de769b5c3071a6f205a7ed4ec2d"
+    }
+  ],
+  "arcs": [
+    {
+      "id": "work-gesture",
+      "from": "work",
+      "to": "gesture",
+      "duration": 2.0,
+      "keys": [
+        {
+          "state": "work",
+          "time": 0
+        },
+        {
+          "state": "bridge1",
+          "time": 0.4
+        },
+        {
+          "state": "bridge2",
+          "time": 0.95
+        },
+        {
+          "state": "bridge3",
+          "time": 1.5
+        },
+        {
+          "state": "gesture",
+          "time": 2.0
+        }
+      ],
+      "reverse": "Traverse the same keys and matched Gaussian segments backwards over 2.0s, with no new paintings or holds.",
+      "segments": [
+        {
+          "segment": 0,
+          "start": 0,
+          "end": 0.4
+        },
+        {
+          "segment": 1,
+          "start": 0.4,
+          "end": 0.95
+        },
+        {
+          "segment": 2,
+          "start": 0.95,
+          "end": 1.5
+        },
+        {
+          "segment": 3,
+          "start": 1.5,
+          "end": 2.0
+        }
+      ]
+    }
+  ],
+  "segments": [
+    {
+      "from": "work",
+      "to": "bridge1"
+    },
+    {
+      "from": "bridge1",
+      "to": "bridge2"
+    },
+    {
+      "from": "bridge2",
+      "to": "bridge3"
+    },
+    {
+      "from": "bridge3",
+      "to": "gesture"
+    }
+  ],
+  "variants": {
+    "desktop": {
+      "file": "nachtschichtmelderin-desktop.bin.gz",
+      "sha256": "d238c82ce6e373616dcf6fcc890965b1b455eb9b43a51ef9e3a72e6c9ceab636",
+      "decoded_sha256": "483714ccf506fbf1d6cb7132562a5c713aa3a4c871e3dbe91635ed89fcd952e4",
+      "bytes": 272268,
+      "decoded_bytes": 516096,
+      "sample_count": 5376,
+      "stride_px": 5,
+      "segment_count": 4,
+      "record_bytes": 24,
+      "trajectories": [
+        {
+          "segment": 0,
+          "start_slot": 3139,
+          "end_slot": 4018,
+          "pivot_start": [
+            0.03365384615384615,
+            0.6394230769230769
+          ],
+          "pivot_end": [
+            0.04567307692307692,
+            0.625
+          ],
+          "angle_radians": 0.01753755526011502
+        },
+        {
+          "segment": 0,
+          "start_slot": 1785,
+          "end_slot": 1845,
+          "pivot_start": [
+            -0.07572115384615384,
+            0.7223557692307693
+          ],
+          "pivot_end": [
+            -0.08413461538461539,
+            0.6634615384615384
+          ],
+          "angle_radians": 0.22685841795909953
+        },
+        {
+          "segment": 1,
+          "start_slot": 3520,
+          "end_slot": 4324,
+          "pivot_start": [
+            0.04567307692307692,
+            0.625
+          ],
+          "pivot_end": [
+            0.054086538461538464,
+            0.671875
+          ],
+          "angle_radians": -0.09195145761363634
+        },
+        {
+          "segment": 1,
+          "start_slot": 1897,
+          "end_slot": 1957,
+          "pivot_start": [
+            -0.08413461538461539,
+            0.6634615384615384
+          ],
+          "pivot_end": [
+            -0.11177884615384616,
+            0.5889423076923077
+          ],
+          "angle_radians": -0.8353790355753
+        },
+        {
+          "segment": 2,
+          "start_slot": 3737,
+          "end_slot": 4350,
+          "pivot_start": [
+            0.054086538461538464,
+            0.671875
+          ],
+          "pivot_end": [
+            0.05889423076923077,
+            0.6838942307692307
+          ],
+          "angle_radians": 0.06263662257759588
+        },
+        {
+          "segment": 2,
+          "start_slot": 1940,
+          "end_slot": 2014,
+          "pivot_start": [
+            -0.11177884615384616,
+            0.5889423076923077
+          ],
+          "pivot_end": [
+            -0.14182692307692307,
+            0.47596153846153844
+          ],
+          "angle_radians": -1.3595035809356582
+        },
+        {
+          "segment": 3,
+          "start_slot": 3741,
+          "end_slot": 4351,
+          "pivot_start": [
+            0.05889423076923077,
+            0.6838942307692307
+          ],
+          "pivot_end": [
+            0.06009615384615385,
+            0.6418269230769231
+          ],
+          "angle_radians": -0.02509394839115575
+        },
+        {
+          "segment": 3,
+          "start_slot": 1940,
+          "end_slot": 2018,
+          "pivot_start": [
+            -0.14182692307692307,
+            0.47596153846153844
+          ],
+          "pivot_end": [
+            -0.13221153846153846,
+            0.4543269230769231
+          ],
+          "angle_radians": -0.02244073095024802
+        }
+      ]
+    },
+    "mobile": {
+      "file": "nachtschichtmelderin-mobile.bin.gz",
+      "sha256": "daaedb1273c39e9f6afe3cd8359edfdec5d0ca66743f2346364542505137a26c",
+      "decoded_sha256": "3570bac9dcb2eab442215885e87d0cc19a8b31d76910c86e7f3288009330436a",
+      "bytes": 106823,
+      "decoded_bytes": 221184,
+      "sample_count": 2304,
+      "stride_px": 8,
+      "segment_count": 4,
+      "record_bytes": 24,
+      "trajectories": [
+        {
+          "segment": 0,
+          "start_slot": 1227,
+          "end_slot": 1575,
+          "pivot_start": [
+            0.03365384615384615,
+            0.6394230769230769
+          ],
+          "pivot_end": [
+            0.04567307692307692,
+            0.625
+          ],
+          "angle_radians": 0.01753755526011502
+        },
+        {
+          "segment": 0,
+          "start_slot": 705,
+          "end_slot": 728,
+          "pivot_start": [
+            -0.07572115384615384,
+            0.7223557692307693
+          ],
+          "pivot_end": [
+            -0.08413461538461539,
+            0.6634615384615384
+          ],
+          "angle_radians": 0.22685841795909953
+        },
+        {
+          "segment": 1,
+          "start_slot": 1375,
+          "end_slot": 1693,
+          "pivot_start": [
+            0.04567307692307692,
+            0.625
+          ],
+          "pivot_end": [
+            0.054086538461538464,
+            0.671875
+          ],
+          "angle_radians": -0.09195145761363634
+        },
+        {
+          "segment": 1,
+          "start_slot": 746,
+          "end_slot": 769,
+          "pivot_start": [
+            -0.08413461538461539,
+            0.6634615384615384
+          ],
+          "pivot_end": [
+            -0.11177884615384616,
+            0.5889423076923077
+          ],
+          "angle_radians": -0.8353790355753
+        },
+        {
+          "segment": 2,
+          "start_slot": 1454,
+          "end_slot": 1693,
+          "pivot_start": [
+            0.054086538461538464,
+            0.671875
+          ],
+          "pivot_end": [
+            0.05889423076923077,
+            0.6838942307692307
+          ],
+          "angle_radians": 0.06263662257759588
+        },
+        {
+          "segment": 2,
+          "start_slot": 751,
+          "end_slot": 780,
+          "pivot_start": [
+            -0.11177884615384616,
+            0.5889423076923077
+          ],
+          "pivot_end": [
+            -0.14182692307692307,
+            0.47596153846153844
+          ],
+          "angle_radians": -1.3595035809356582
+        },
+        {
+          "segment": 3,
+          "start_slot": 1456,
+          "end_slot": 1695,
+          "pivot_start": [
+            0.05889423076923077,
+            0.6838942307692307
+          ],
+          "pivot_end": [
+            0.06009615384615385,
+            0.6418269230769231
+          ],
+          "angle_radians": -0.02509394839115575
+        },
+        {
+          "segment": 3,
+          "start_slot": 751,
+          "end_slot": 782,
+          "pivot_start": [
+            -0.14182692307692307,
+            0.47596153846153844
+          ],
+          "pivot_end": [
+            -0.13221153846153846,
+            0.4543269230769231
+          ],
+          "angle_radians": -0.02244073095024802
+        }
+      ]
+    }
+  },
+  "limits": [
+    "Main and terminal anchors are semantic checkpoints; transition anchors never create scheduled holds",
+    "One paired cloud blends position and linear-light paint; no whole-character scatter or midpoint paint swap",
+    "A fixed source head paint is similarity-transformed by face landmarks when head_paint_source is set",
+    "Main source paintings differ; Gaussian correspondence needs rendered anatomical review",
+    "Existing route/gait and dialogue owners remain authoritative"
+  ],
+  "prop_ownership": {
+    "type": "rigid_phone",
+    "owner": "anatomical_right_hand",
+    "secondary": "document_stack_in_anatomical_left_arm"
+  },
+  "source_notes": "Phone descends from face through chest and waist to thigh in the same right hand; documents stay hugged in anatomical left arm. Matched Gaussian correspondence must be reviewed through ordered playback; no unconstrained whole-body TPS."
+}
