@@ -3,8 +3,8 @@ import assert from 'node:assert/strict';
 import vm from 'node:vm';
 import {source} from './amt-harness.mjs';
 
-function transport(role='host'){
- const window={};vm.runInNewContext(source('buergeramt-link.js'),{window,Event,EventTarget,CustomEvent,TextEncoder,URL,URLSearchParams,console});
+function transport(role='host',linkSource=source('buergeramt-link.js')){
+ const window={};vm.runInNewContext(linkSource,{window,Event,EventTarget,CustomEvent,TextEncoder,URL,URLSearchParams,console});
  const invitation={stream:'amt-ticket-unit-test'},link=new window.BuergeramtLink(role,invitation),messages=[];
  class Channel extends EventTarget{
   readyState='open';bufferedAmount=0;sent=[];fail=false;
@@ -64,3 +64,69 @@ test('congested, closed and oversized sends fail without publishing',()=>{
 });
 test('the incoming payload limit is measured in UTF-8 bytes, not just JS characters',()=>{const h=transport('phone');h.channel.receive({type:'call',id:'grass',line:'界'.repeat(349),ringAtPhoneMs:500,ringAtUtcMs:null,leadMs:2200});assert.equal(h.messages.length,0)});
 test('ordinary failed payload validation does not advance outbound sequence numbers',()=>{const h=transport();assert.equal(h.link.send('nonsense'),false);assert.equal(h.link.send('ticket',{number:'B-223'}),true);assert.equal(h.channel.sent[0].seq,1)});
+
+function generatedProtocol(linkSource=source('buergeramt-link.js')){
+ let valid=0,rejected=0;
+ const coverage={types:new Set(),nameLengths:new Set(),pongClocks:new Set(),pongDurations:new Set(),policeClocks:new Set()};
+ for(let seed=1;seed<=32;seed++)for(const role of ['host','phone']){
+  let random=seed;
+  const integer=max=>{random=(Math.imul(random,1664525)+1013904223)>>>0;return Math.floor(random/2**32*max)};
+  const choose=items=>items[integer(items.length)];
+  const receiver=transport(role,linkSource),sender=transport(role==='host'?'phone':'host',linkSource);
+  for(let step=0;step<16;step++){
+   const at=choose([0,1,1e12-12000,integer(1000000)]),duration=choose([0,1,12000,integer(12001)]);
+   const receipt={index:choose([-1,0,1,2]),mode:choose(['voice','recording','fallback']),readyDelayMs:choose([0,60000,integer(60001)]),atMs:at};
+   const name=choose(['Erika','界界','Name '+integer(1000),'x'.repeat(80)]);
+   const line=choose(['Bitte antworten.','界'.repeat(90),'x'.repeat(349)]);
+   const [type,data]=choose(role==='host'?[
+    ['register',{name}],['sync-pong',{id:choose([1,2147483647,integer(2147483647)+1]),receivedAtMs:at,sentAtMs:at+duration}],
+    ['police-start',receipt],['phone-hidden',{}]
+   ]:[
+    ['ticket',{number:'B-'+String(integer(1000)).padStart(3,'0')}],['police-line',{index:integer(3),line}],
+    ['call',{id:'grass',line,ringAtPhoneMs:choose([null,at]),ringAtUtcMs:choose([null,at]),leadMs:choose([600,5000,integer(4401)+600])}],['done',{}]
+   ]);
+   coverage.types.add(type);
+   if(type==='register')coverage.nameLengths.add(data.name.length);
+   if(type==='sync-pong'){coverage.pongClocks.add(data.receivedAtMs);coverage.pongDurations.add(data.sentAtMs-data.receivedAtMs)}
+   if(type==='police-start')coverage.policeClocks.add(data.atMs);
+   assert.equal(sender.link.send(type,data),true,`valid generator rejected: seed ${seed}, ${role}, step ${step}`);
+   const message=sender.channel.sent.at(-1),count=receiver.messages.length;
+   const missing={...message};const key=Object.keys(data)[0];if(key)delete missing[key];else missing.extra=1;
+   const malformed=[{...message,session:'other'},{...message,v:2},{...message,seq:0},{...message,seq:step+.5},
+    {...message,type:'unknown'},{v:3,session:message.session,seq:message.seq,type:role==='host'?'done':'phone-hidden'},missing];
+   for(const invalid of malformed){
+    // High malformed sequences must not block the following valid message.
+    if(invalid.seq===message.seq)invalid.seq+=10000;
+    receiver.channel.raw(JSON.stringify(invalid));
+    assert.equal(receiver.messages.length,count,`malformed envelope reached a consumer: seed ${seed}, ${role}, step ${step}`);
+    rejected++;
+   }
+   receiver.channel.raw(JSON.stringify({...message,seq:message.seq+10000,unexpected:true}));
+   assert.equal(receiver.messages.length,count,'unexpected field consumed sequence');rejected++;
+   receiver.channel.raw(JSON.stringify(message));
+   assert.equal(receiver.messages.length,count+1,`valid sequence lost: seed ${seed}, ${role}, step ${step}`);
+   assert.deepEqual(JSON.parse(JSON.stringify(receiver.messages.at(-1))),message,'accepted payload changed');valid++;
+   receiver.channel.raw(JSON.stringify(message));
+   assert.equal(receiver.messages.length,count+1,'replay reached a consumer');rejected++;
+  }
+ }
+ return{valid,rejected,coverage};
+}
+
+test('seeded protocol sequences preserve payloads and reject malformed, foreign and replayed messages',()=>{
+ const {valid,rejected,coverage}=generatedProtocol();assert.deepEqual({valid,rejected},{valid:1024,rejected:9216});
+ assert.equal(coverage.types.size,8,'exercise every selected message family');
+ for(const length of [2,80])assert(coverage.nameLengths.has(length),'missing name boundary '+length);
+ for(const clock of [0,1,1e12-12000]){
+  assert(coverage.pongClocks.has(clock),'missing pong clock boundary '+clock);
+  assert(coverage.policeClocks.has(clock),'missing police clock boundary '+clock);
+ }
+ for(const duration of [0,1,12000])assert(coverage.pongDurations.has(duration),'missing pong duration boundary '+duration);
+});
+test('generated properties fail when replay or exact-payload guards are deliberately removed',()=>{
+ const original=source('buergeramt-link.js');
+ const replay=original.replace('||msg.seq<=lastSeq','');assert.notEqual(replay,original);
+ assert.throws(()=>generatedProtocol(replay),/replay reached a consumer/);
+ const fields=original.replace('if(keys.length!==fields.length||keys.some(key=>!fields.includes(key)))return false;','');assert.notEqual(fields,original);
+ assert.throws(()=>generatedProtocol(fields),/malformed envelope reached a consumer|unexpected field consumed sequence/);
+});

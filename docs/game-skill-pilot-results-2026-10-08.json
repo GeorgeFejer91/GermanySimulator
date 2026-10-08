@@ -1,0 +1,1542 @@
+{
+  "date": "2026-10-08",
+  "frozenCommit": "14000b8d96cca25faa281f514d5b860cb36a9470",
+  "controlledProductivity": "NOT RUN",
+  "evaluation": {
+    "sourceSha256": "0f0952c8556b5253bb781e222fc19b45c93fe34890506e925881ab26ee47077a",
+    "runnerSha256": "97e80522426c63adab049988a0596e4d1c42329bc56dab6630cb9e34ad229445",
+    "rawResultSha256": "1b0b4df991b1e3392b5aabd7e1c2f41f0bbd5c3ea0e3fbfafdfbee9474ba9cbf",
+    "conditions": {
+      "durationSeconds": 60,
+      "dtSeconds": 0.025,
+      "seeds": "1..64",
+      "geometry": "existing test crossing fixture",
+      "speed": 110
+    },
+    "minimal": {
+      "x": [
+        -1,
+        1,
+        -1
+      ],
+      "initialSignalClock": 6.1,
+      "events": [
+        {
+          "at": 6.175000000000001,
+          "x": -1,
+          "requestedAmount": 1,
+          "appliedAmount": 1,
+          "score": 1
+        }
+      ]
+    },
+    "summary": [
+      {
+        "policy": "full-crossing",
+        "n": 64,
+        "unlockCount": 64,
+        "unlockSeconds": {
+          "p10": 31.64999999999927,
+          "p50": 34.074999999999136,
+          "p90": 37.32499999999895
+        },
+        "scoreRange": [
+          14,
+          15
+        ],
+        "scriptedTraversalsRange": [
+          24,
+          25
+        ]
+      },
+      {
+        "policy": "wait-red-then-cross",
+        "n": 64,
+        "unlockCount": 58,
+        "unlockSeconds": {
+          "p10": 50.14999999999822,
+          "p50": 54.57499999999797,
+          "p90": 58.899999999997725
+        },
+        "scoreRange": [
+          8,
+          10
+        ],
+        "scriptedTraversalsRange": [
+          4,
+          5
+        ]
+      },
+      {
+        "policy": "same-side-retreat",
+        "n": 64,
+        "unlockCount": 64,
+        "unlockSeconds": {
+          "p10": 30.74999999999932,
+          "p50": 33.17499999999919,
+          "p90": 36.424999999999
+        },
+        "scoreRange": [
+          14,
+          15
+        ],
+        "scriptedTraversalsRange": [
+          0,
+          0
+        ]
+      }
+    ],
+    "limits": [
+      "Production reward functions; synthetic movement and one test crossing",
+      "No collision/traffic, energy, quiz, mission, dialogue, real input or physical device simulation",
+      "Signal-phase trials are model scenarios, not sampled human players; no balance target or retuning"
+    ]
+  },
+  "protocol": {
+    "sourceSha256": "86604195ab0f7fb76dc6491a7f38ad062a5d77417d172354530a9afff5dbcfe1",
+    "testsSha256": "e313b9b244c0088e9be9a55c72197abf58ae558b3974c499198c2c49e5d3c54c",
+    "existingTests": 22,
+    "finalTests": 24,
+    "generatedValid": 1024,
+    "generatedRejected": 9216,
+    "seeds": "1..32",
+    "messageFamilies": 8,
+    "knownGuardRemovalProbes": 2,
+    "newProductionDefects": 0,
+    "assertedBoundaries": {
+      "registerNameLengths": [
+        2,
+        80
+      ],
+      "pongAndPoliceClocks": [
+        0,
+        1,
+        999999988000
+      ],
+      "pongDurations": [
+        0,
+        1,
+        12000
+      ]
+    }
+  },
+  "profiling": {
+    "reproductionRunnerSha256": "8aa9112e7db922c4456e7df90a8b2e9e0999c4f862f496b4c0d09204e7e38695",
+    "seededRunRunnerSha256": "e9943694261dd3cc56d4b462599a7abdc6b06dcc35ce74ae04819bc51b5766eb",
+    "runnerNote": "Final reproduction helper includes cleanup/run-count repairs after measurements; seeded run helper hash is separate. Earlier unseeded helper hash was not recorded.",
+    "measurementSets": [
+      {
+        "name": "profile-normal",
+        "reportSha256": "d2f8b7c4dc6fa85414bc5461f757627232887a67c2ddf2edc76a8649b5c2c88e",
+        "conditions": {
+          "sourceRef": "working tree",
+          "browser": "148.0.7778.96",
+          "network": "local uncompressed HTTP; cold browser context",
+          "cpu": "no CPU throttling",
+          "gpu": "ANGLE hardware renderer (queried per run)",
+          "dpr": 2
+        },
+        "revision": {
+          "game.js": "0f0952c8556b5253bb781e222fc19b45c93fe34890506e925881ab26ee47077a",
+          "world3d.js": "1c2bbf4ebb8c6ea20fac4541bfa73eed356c8d21f6f03ef059b475f022997b54",
+          "tourist-animation.js": "1982cda544e01197fb12d396b3452470a5d893a376891dec9408e3dea814ba10"
+        },
+        "limits": [
+          "Lab evidence only; no field data or physical Android; hardware renderer queried, GPU timing unavailable",
+          "Start uses the existing S keyboard shortcut to skip the humor questionnaire",
+          "Opening-screen and gameplay samples are separate; screenshots are representative frames"
+        ],
+        "runs": [
+          {
+            "name": "desktop",
+            "run": 0,
+            "gpu": "ANGLE (Intel, Intel(R) Iris(R) Xe Graphics (0x00009A49) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+            "readyMs": 2808.4000000003725,
+            "loadedMs": 3282.0999999996275,
+            "startupBytes": 15612149,
+            "startupRequests": 110,
+            "inputLatency": {
+              "accepted": 9,
+              "p50": 21.09999999962747,
+              "p95": 38.90000000037253
+            },
+            "introSyncCalls": 12,
+            "frameMs": {
+              "p50": 32.59999999962747,
+              "p95": 41.29999999888241
+            },
+            "drawingBuffer": [
+              1280,
+              800
+            ],
+            "render": {
+              "frame": 254,
+              "calls": 697,
+              "triangles": 726087,
+              "points": 2374,
+              "lines": 1948
+            },
+            "memory": {
+              "geometries": 1038,
+              "textures": 40
+            },
+            "moved": 62.89680000000044,
+            "longTaskCount": 9,
+            "errors": [],
+            "cpuProfileSha256": "f2fee43ca1e6d44eecd4f3305494a65e1783463caf763843cc45fae40acca081",
+            "cpuSampleCount": 1802,
+            "cpuTopSampleCounts": [
+              [
+                "nearestRailLocation @ game.js:1129",
+                161
+              ],
+              [
+                "responderBlocked @ game.js:921",
+                160
+              ],
+              [
+                "updateMatrixWorld @ three.core.js:13067",
+                136
+              ],
+              [
+                "groundStaticMotionBlocked @ game.js:910",
+                115
+              ],
+              [
+                "projectObject @ three.module.js:17897",
+                101
+              ],
+              [
+                "vehicleMotionBlocked @ game.js:894",
+                73
+              ],
+              [
+                "intersectsFrustum @ three.core.js:24185",
+                62
+              ],
+              [
+                "trafficGroundGap @ game.js:1109",
+                62
+              ]
+            ]
+          },
+          {
+            "name": "desktop",
+            "run": 1,
+            "gpu": "ANGLE (Intel, Intel(R) Iris(R) Xe Graphics (0x00009A49) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+            "readyMs": 2153.300000000745,
+            "loadedMs": 2673,
+            "startupBytes": 16349682,
+            "startupRequests": 110,
+            "inputLatency": {
+              "accepted": 9,
+              "p50": 25,
+              "p95": 51.80000000074506
+            },
+            "introSyncCalls": 12,
+            "frameMs": {
+              "p50": 18.800000000745058,
+              "p95": 29.699999999254942
+            },
+            "drawingBuffer": [
+              1280,
+              800
+            ],
+            "render": {
+              "frame": 308,
+              "calls": 695,
+              "triangles": 684286,
+              "points": 2374,
+              "lines": 1948
+            },
+            "memory": {
+              "geometries": 1036,
+              "textures": 40
+            },
+            "moved": 63.86039999999957,
+            "longTaskCount": 10,
+            "errors": [],
+            "cpuProfileSha256": "e26038689ebff5f02e40a42c6cbd31d347e0a7cf76e4cf0729d82c0c728ec472",
+            "cpuSampleCount": 1768,
+            "cpuTopSampleCounts": [
+              [
+                "updateMatrixWorld @ three.core.js:13067",
+                153
+              ],
+              [
+                "projectObject @ three.module.js:17897",
+                130
+              ],
+              [
+                "nearestRailLocation @ game.js:1129",
+                113
+              ],
+              [
+                "responderBlocked @ game.js:921",
+                102
+              ],
+              [
+                "groundStaticMotionBlocked @ game.js:910",
+                90
+              ],
+              [
+                "intersectsFrustum @ three.core.js:24185",
+                71
+              ],
+              [
+                "getParameters @ three.module.js:7357",
+                56
+              ],
+              [
+                "WebGLRenderer.renderBufferDirect @ three.module.js:17233",
+                56
+              ]
+            ]
+          },
+          {
+            "name": "desktop",
+            "run": 2,
+            "gpu": "ANGLE (Intel, Intel(R) Iris(R) Xe Graphics (0x00009A49) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+            "readyMs": 2109.7000000011176,
+            "loadedMs": 2420.9000000003725,
+            "startupBytes": 16361989,
+            "startupRequests": 111,
+            "inputLatency": {
+              "accepted": 9,
+              "p50": 16.699999999254942,
+              "p95": 41.600000001490116
+            },
+            "introSyncCalls": 12,
+            "frameMs": {
+              "p50": 18.5,
+              "p95": 29.40000000037253
+            },
+            "drawingBuffer": [
+              1280,
+              800
+            ],
+            "render": {
+              "frame": 340,
+              "calls": 677,
+              "triangles": 660544,
+              "points": 2374,
+              "lines": 1948
+            },
+            "memory": {
+              "geometries": 1042,
+              "textures": 40
+            },
+            "moved": 66.92640000000256,
+            "longTaskCount": 3,
+            "errors": [],
+            "cpuProfileSha256": "8b0e4c1824b2635a11bafb99d2f2ee0c800724e4036d9e2b93ab37df408ea11c",
+            "cpuSampleCount": 1780,
+            "cpuTopSampleCounts": [
+              [
+                "updateMatrixWorld @ three.core.js:13067",
+                172
+              ],
+              [
+                "projectObject @ three.module.js:17897",
+                126
+              ],
+              [
+                "nearestRailLocation @ game.js:1129",
+                99
+              ],
+              [
+                "groundStaticMotionBlocked @ game.js:910",
+                94
+              ],
+              [
+                "responderBlocked @ game.js:921",
+                90
+              ],
+              [
+                "propRadius @ game.js:871",
+                59
+              ],
+              [
+                "getParameters @ three.module.js:7357",
+                58
+              ],
+              [
+                "WebGLRenderer.renderBufferDirect @ three.module.js:17233",
+                57
+              ]
+            ]
+          },
+          {
+            "name": "android-emulated",
+            "run": 0,
+            "gpu": "ANGLE (Intel, Intel(R) Iris(R) Xe Graphics (0x00009A49) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+            "readyMs": 1557.4000000003725,
+            "loadedMs": 1858,
+            "startupBytes": 16014211,
+            "startupRequests": 100,
+            "inputLatency": {
+              "accepted": 9,
+              "p50": 17.300000000745058,
+              "p95": 31.200000001117587
+            },
+            "introSyncCalls": 12,
+            "frameMs": {
+              "p50": 17.59999999962747,
+              "p95": 31.40000000037253
+            },
+            "drawingBuffer": [
+              390,
+              844
+            ],
+            "render": {
+              "frame": 341,
+              "calls": 257,
+              "triangles": 402041,
+              "points": 1736,
+              "lines": 1948
+            },
+            "memory": {
+              "geometries": 484,
+              "textures": 23
+            },
+            "moved": 65.8897999999972,
+            "longTaskCount": 5,
+            "errors": [],
+            "cpuProfileSha256": "2004e7edb7490f5896e4fc5ebdbb08229f86149b781231fab9f289edafb6f0ee",
+            "cpuSampleCount": 773,
+            "cpuTopSampleCounts": [
+              [
+                "updateMatrixWorld @ three.core.js:13067",
+                84
+              ],
+              [
+                "projectObject @ three.module.js:17897",
+                69
+              ],
+              [
+                "nearestRailLocation @ game.js:1129",
+                67
+              ],
+              [
+                "responderBlocked @ game.js:921",
+                61
+              ],
+              [
+                "groundStaticMotionBlocked @ game.js:910",
+                53
+              ],
+              [
+                "intersectsFrustum @ three.core.js:24185",
+                37
+              ],
+              [
+                "vehicleMotionBlocked @ game.js:894",
+                26
+              ],
+              [
+                "propRadius @ game.js:871",
+                19
+              ]
+            ]
+          },
+          {
+            "name": "android-emulated",
+            "run": 1,
+            "gpu": "ANGLE (Intel, Intel(R) Iris(R) Xe Graphics (0x00009A49) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+            "readyMs": 1575.7999999988824,
+            "loadedMs": 1854.4000000003725,
+            "startupBytes": 16014230,
+            "startupRequests": 100,
+            "inputLatency": {
+              "accepted": 9,
+              "p50": 16.299999998882413,
+              "p95": 28.200000001117587
+            },
+            "introSyncCalls": 12,
+            "frameMs": {
+              "p50": 14.800000000745058,
+              "p95": 22.09999999962747
+            },
+            "drawingBuffer": [
+              390,
+              844
+            ],
+            "render": {
+              "frame": 359,
+              "calls": 281,
+              "triangles": 411798,
+              "points": 1736,
+              "lines": 1948
+            },
+            "memory": {
+              "geometries": 481,
+              "textures": 22
+            },
+            "moved": 60.83820000000378,
+            "longTaskCount": 3,
+            "errors": [],
+            "cpuProfileSha256": "5905d285103e52bad32e40767bb3ccda792de230cbe38f6a1be992a8ce9d6d6b",
+            "cpuSampleCount": 1964,
+            "cpuTopSampleCounts": [
+              [
+                "updateMatrixWorld @ three.core.js:13067",
+                155
+              ],
+              [
+                "projectObject @ three.module.js:17897",
+                125
+              ],
+              [
+                "nearestRailLocation @ game.js:1129",
+                106
+              ],
+              [
+                "groundStaticMotionBlocked @ game.js:910",
+                92
+              ],
+              [
+                "responderBlocked @ game.js:921",
+                72
+              ],
+              [
+                "vehicleMotionBlocked @ game.js:894",
+                57
+              ],
+              [
+                "intersectsFrustum @ three.core.js:24185",
+                56
+              ],
+              [
+                "propRadius @ game.js:871",
+                48
+              ]
+            ]
+          },
+          {
+            "name": "android-emulated",
+            "run": 2,
+            "gpu": "ANGLE (Intel, Intel(R) Iris(R) Xe Graphics (0x00009A49) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+            "readyMs": 1402.3999999985099,
+            "loadedMs": 1683.3999999985099,
+            "startupBytes": 16014207,
+            "startupRequests": 100,
+            "inputLatency": {
+              "accepted": 9,
+              "p50": 14.099999999627471,
+              "p95": 28
+            },
+            "introSyncCalls": 12,
+            "frameMs": {
+              "p50": 14.400000000372529,
+              "p95": 21.700000001117587
+            },
+            "drawingBuffer": [
+              390,
+              844
+            ],
+            "render": {
+              "frame": 370,
+              "calls": 226,
+              "triangles": 370824,
+              "points": 1736,
+              "lines": 1948
+            },
+            "memory": {
+              "geometries": 484,
+              "textures": 23
+            },
+            "moved": 61.86020000000599,
+            "longTaskCount": 4,
+            "errors": [],
+            "cpuProfileSha256": "a9a73cee2f10f298170bcb014655de7ed85b27f9271c2f61aac394e27627e3a9",
+            "cpuSampleCount": 1976,
+            "cpuTopSampleCounts": [
+              [
+                "updateMatrixWorld @ three.core.js:13067",
+                132
+              ],
+              [
+                "projectObject @ three.module.js:17897",
+                104
+              ],
+              [
+                "nearestRailLocation @ game.js:1129",
+                83
+              ],
+              [
+                "responderBlocked @ game.js:921",
+                79
+              ],
+              [
+                "groundStaticMotionBlocked @ game.js:910",
+                65
+              ],
+              [
+                "intersectsFrustum @ three.core.js:24185",
+                62
+              ],
+              [
+                "propRadius @ game.js:871",
+                55
+              ],
+              [
+                "vehicleMotionBlocked @ game.js:894",
+                54
+              ]
+            ]
+          }
+        ]
+      },
+      {
+        "name": "profile-seeded-full",
+        "reportSha256": "18910f0f21fc06a73f1f4b515c7defaeb357280d992677df5912e7cf0cf14561",
+        "conditions": {
+          "sourceRef": "14000b8",
+          "browser": "148.0.7778.96",
+          "network": "local uncompressed HTTP; cold browser context",
+          "cpu": "no CPU throttling",
+          "gpu": "ANGLE hardware renderer (queried per run)",
+          "dpr": 2,
+          "seedBase": 41
+        },
+        "revision": {
+          "game.js": "0f0952c8556b5253bb781e222fc19b45c93fe34890506e925881ab26ee47077a",
+          "world3d.js": "1c2bbf4ebb8c6ea20fac4541bfa73eed356c8d21f6f03ef059b475f022997b54",
+          "tourist-animation.js": "1982cda544e01197fb12d396b3452470a5d893a376891dec9408e3dea814ba10"
+        },
+        "limits": [
+          "Lab evidence only; no field data or physical Android; hardware renderer queried, GPU timing unavailable",
+          "Start uses the existing S keyboard shortcut to skip the humor questionnaire",
+          "Opening-screen and gameplay samples are separate; screenshots are representative frames",
+          "Seeded initialization does not fix frame scheduling, movement endpoints or async asset completion"
+        ],
+        "runs": [
+          {
+            "name": "desktop",
+            "run": 0,
+            "gpu": "ANGLE (Intel, Intel(R) Iris(R) Xe Graphics (0x00009A49) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+            "readyMs": 3039.199999999255,
+            "loadedMs": 3617,
+            "startupBytes": 16362003,
+            "startupRequests": 111,
+            "inputLatency": {
+              "accepted": 9,
+              "p50": 26.5,
+              "p95": 45.20000000111759
+            },
+            "introSyncCalls": 12,
+            "frameMs": {
+              "p50": 26.700000001117587,
+              "p95": 31.5
+            },
+            "drawingBuffer": [
+              1280,
+              800
+            ],
+            "render": {
+              "frame": 309,
+              "calls": 711,
+              "triangles": 778998,
+              "points": 2374,
+              "lines": 1948
+            },
+            "memory": {
+              "geometries": 1038,
+              "textures": 40
+            },
+            "moved": 74.00740000000042,
+            "longTaskCount": 9,
+            "errors": [],
+            "cpuProfileSha256": "09462079b5303fb86fa3648b01fccf1d1c51b6a12ee6299e4b07f5281ccb2945",
+            "cpuSampleCount": 1975,
+            "cpuTopSampleCounts": [
+              [
+                "nearestRailLocation @ game.js:1129",
+                163
+              ],
+              [
+                "updateMatrixWorld @ three.core.js:13067",
+                149
+              ],
+              [
+                "responderBlocked @ game.js:921",
+                147
+              ],
+              [
+                "groundStaticMotionBlocked @ game.js:910",
+                133
+              ],
+              [
+                "projectObject @ three.module.js:17897",
+                110
+              ],
+              [
+                "vehicleMotionBlocked @ game.js:894",
+                84
+              ],
+              [
+                "intersectsFrustum @ three.core.js:24185",
+                70
+              ],
+              [
+                "propRadius @ game.js:871",
+                62
+              ]
+            ]
+          },
+          {
+            "name": "desktop",
+            "run": 1,
+            "gpu": "ANGLE (Intel, Intel(R) Iris(R) Xe Graphics (0x00009A49) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+            "readyMs": 2450.5,
+            "loadedMs": 2920.39999999851,
+            "startupBytes": 15647962,
+            "startupRequests": 109,
+            "inputLatency": {
+              "accepted": 9,
+              "p50": 25.199999999254942,
+              "p95": 32.69999999925494
+            },
+            "introSyncCalls": 12,
+            "frameMs": {
+              "p50": 20.59999999962747,
+              "p95": 30.700000001117587
+            },
+            "drawingBuffer": [
+              1280,
+              800
+            ],
+            "render": {
+              "frame": 306,
+              "calls": 705,
+              "triangles": 696117,
+              "points": 2374,
+              "lines": 1948
+            },
+            "memory": {
+              "geometries": 1029,
+              "textures": 40
+            },
+            "moved": 61.84559999999692,
+            "longTaskCount": 7,
+            "errors": [],
+            "cpuProfileSha256": "c3f5fad91ecbda5b1140ca939780eba11358eac14d4c0569e21f3e06a8dc2091",
+            "cpuSampleCount": 1961,
+            "cpuTopSampleCounts": [
+              [
+                "updateMatrixWorld @ three.core.js:13067",
+                163
+              ],
+              [
+                "nearestRailLocation @ game.js:1129",
+                143
+              ],
+              [
+                "projectObject @ three.module.js:17897",
+                138
+              ],
+              [
+                "responderBlocked @ game.js:921",
+                115
+              ],
+              [
+                "groundStaticMotionBlocked @ game.js:910",
+                115
+              ],
+              [
+                "WebGLRenderer.renderBufferDirect @ three.module.js:17233",
+                77
+              ],
+              [
+                "propRadius @ game.js:871",
+                64
+              ],
+              [
+                "getParameters @ three.module.js:7357",
+                60
+              ]
+            ]
+          },
+          {
+            "name": "desktop",
+            "run": 2,
+            "gpu": "ANGLE (Intel, Intel(R) Iris(R) Xe Graphics (0x00009A49) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+            "readyMs": 2354.5,
+            "loadedMs": 2873.5999999996275,
+            "startupBytes": 16331209,
+            "startupRequests": 109,
+            "inputLatency": {
+              "accepted": 9,
+              "p50": 18.59999999962747,
+              "p95": 40.90000000037253
+            },
+            "introSyncCalls": 12,
+            "frameMs": {
+              "p50": 27.600000001490116,
+              "p95": 35.40000000037253
+            },
+            "drawingBuffer": [
+              1280,
+              800
+            ],
+            "render": {
+              "frame": 292,
+              "calls": 695,
+              "triangles": 684562,
+              "points": 2374,
+              "lines": 1948
+            },
+            "memory": {
+              "geometries": 1036,
+              "textures": 40
+            },
+            "moved": 63.889599999995426,
+            "longTaskCount": 7,
+            "errors": [],
+            "cpuProfileSha256": "0a7a89534a28216739a8130cc3d21e5c0da78f82fad0eba28889e596d542f256",
+            "cpuSampleCount": 1230,
+            "cpuTopSampleCounts": [
+              [
+                "nearestRailLocation @ game.js:1129",
+                112
+              ],
+              [
+                "updateMatrixWorld @ three.core.js:13067",
+                107
+              ],
+              [
+                "responderBlocked @ game.js:921",
+                91
+              ],
+              [
+                "projectObject @ three.module.js:17897",
+                88
+              ],
+              [
+                "groundStaticMotionBlocked @ game.js:910",
+                83
+              ],
+              [
+                "intersectsFrustum @ three.core.js:24185",
+                46
+              ],
+              [
+                "propRadius @ game.js:871",
+                45
+              ],
+              [
+                "vehicleMotionBlocked @ game.js:894",
+                40
+              ]
+            ]
+          },
+          {
+            "name": "android-emulated",
+            "run": 0,
+            "gpu": "ANGLE (Intel, Intel(R) Iris(R) Xe Graphics (0x00009A49) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+            "readyMs": 1947.9000000003725,
+            "loadedMs": 2361.800000000745,
+            "startupBytes": 14434885,
+            "startupRequests": 98,
+            "inputLatency": {
+              "accepted": 9,
+              "p50": 14.400000000372529,
+              "p95": 32.29999999888241
+            },
+            "introSyncCalls": 12,
+            "frameMs": {
+              "p50": 14.699999999254942,
+              "p95": 21.700000001117587
+            },
+            "drawingBuffer": [
+              390,
+              844
+            ],
+            "render": {
+              "frame": 368,
+              "calls": 268,
+              "triangles": 410612,
+              "points": 1736,
+              "lines": 1948
+            },
+            "memory": {
+              "geometries": 482,
+              "textures": 21
+            },
+            "moved": 60.823600000006536,
+            "longTaskCount": 4,
+            "errors": [],
+            "cpuProfileSha256": "9a943e94d5b6e8a570a5eb4b2dee0ad5f921f7a409f62461bf595a2a23bc2de3",
+            "cpuSampleCount": 1983,
+            "cpuTopSampleCounts": [
+              [
+                "updateMatrixWorld @ three.core.js:13067",
+                148
+              ],
+              [
+                "projectObject @ three.module.js:17897",
+                125
+              ],
+              [
+                "nearestRailLocation @ game.js:1129",
+                95
+              ],
+              [
+                "groundStaticMotionBlocked @ game.js:910",
+                84
+              ],
+              [
+                "responderBlocked @ game.js:921",
+                83
+              ],
+              [
+                "intersectsFrustum @ three.core.js:24185",
+                68
+              ],
+              [
+                "propRadius @ game.js:871",
+                54
+              ],
+              [
+                "vehicleMotionBlocked @ game.js:894",
+                53
+              ]
+            ]
+          },
+          {
+            "name": "android-emulated",
+            "run": 1,
+            "gpu": "ANGLE (Intel, Intel(R) Iris(R) Xe Graphics (0x00009A49) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+            "readyMs": 1893.699999999255,
+            "loadedMs": 2201.699999999255,
+            "startupBytes": 14453409,
+            "startupRequests": 99,
+            "inputLatency": {
+              "accepted": 9,
+              "p50": 13.600000001490116,
+              "p95": 39
+            },
+            "introSyncCalls": 13,
+            "frameMs": {
+              "p50": 15.299999998882413,
+              "p95": 21.59999999962747
+            },
+            "drawingBuffer": [
+              390,
+              844
+            ],
+            "render": {
+              "frame": 369,
+              "calls": 243,
+              "triangles": 387220,
+              "points": 1736,
+              "lines": 1948
+            },
+            "memory": {
+              "geometries": 483,
+              "textures": 22
+            },
+            "moved": 60.838200000004235,
+            "longTaskCount": 5,
+            "errors": [],
+            "cpuProfileSha256": "2d25fe379cbb28c35de46a2ad61b0132ab3548e04bfa038cd6e52b51f066833e",
+            "cpuSampleCount": 1929,
+            "cpuTopSampleCounts": [
+              [
+                "updateMatrixWorld @ three.core.js:13067",
+                141
+              ],
+              [
+                "projectObject @ three.module.js:17897",
+                111
+              ],
+              [
+                "nearestRailLocation @ game.js:1129",
+                108
+              ],
+              [
+                "responderBlocked @ game.js:921",
+                91
+              ],
+              [
+                "intersectsFrustum @ three.core.js:24185",
+                81
+              ],
+              [
+                "groundStaticMotionBlocked @ game.js:910",
+                73
+              ],
+              [
+                "vehicleMotionBlocked @ game.js:894",
+                55
+              ],
+              [
+                "propRadius @ game.js:871",
+                51
+              ]
+            ]
+          },
+          {
+            "name": "android-emulated",
+            "run": 2,
+            "gpu": "ANGLE (Intel, Intel(R) Iris(R) Xe Graphics (0x00009A49) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+            "readyMs": 1411.5999999996275,
+            "loadedMs": 1682.199999999255,
+            "startupBytes": 16014217,
+            "startupRequests": 100,
+            "inputLatency": {
+              "accepted": 9,
+              "p50": 29.800000000745058,
+              "p95": 44.59999999962747
+            },
+            "introSyncCalls": 12,
+            "frameMs": {
+              "p50": 21.300000000745058,
+              "p95": 98.60000000149012
+            },
+            "drawingBuffer": [
+              390,
+              844
+            ],
+            "render": {
+              "frame": 281,
+              "calls": 242,
+              "triangles": 342991,
+              "points": 1736,
+              "lines": 1948
+            },
+            "memory": {
+              "geometries": 484,
+              "textures": 23
+            },
+            "moved": 63.87499999999818,
+            "longTaskCount": 24,
+            "errors": [],
+            "cpuProfileSha256": "17e0279e37f49d077a3fba93aab2c6d14e76c07598bafb4289c90d6660f43b96",
+            "cpuSampleCount": 1077,
+            "cpuTopSampleCounts": [
+              [
+                "nearestRailLocation @ game.js:1129",
+                112
+              ],
+              [
+                "updateMatrixWorld @ three.core.js:13067",
+                97
+              ],
+              [
+                "groundStaticMotionBlocked @ game.js:910",
+                91
+              ],
+              [
+                "responderBlocked @ game.js:921",
+                91
+              ],
+              [
+                "projectObject @ three.module.js:17897",
+                72
+              ],
+              [
+                "vehicleMotionBlocked @ game.js:894",
+                58
+              ],
+              [
+                "propRadius @ game.js:871",
+                47
+              ],
+              [
+                "intersectsFrustum @ three.core.js:24185",
+                32
+              ]
+            ]
+          }
+        ]
+      },
+      {
+        "name": "profile-seeded-half",
+        "reportSha256": "2462d3628947e74e959f4385a89f7d942da34fc741ea48c15e2b6946e5bd73f1",
+        "conditions": {
+          "sourceRef": "14000b8",
+          "browser": "148.0.7778.96",
+          "network": "local uncompressed HTTP; cold browser context",
+          "cpu": "no CPU throttling",
+          "gpu": "ANGLE hardware renderer (queried per run)",
+          "dpr": 0.5,
+          "seedBase": 41
+        },
+        "revision": {
+          "game.js": "0f0952c8556b5253bb781e222fc19b45c93fe34890506e925881ab26ee47077a",
+          "world3d.js": "1c2bbf4ebb8c6ea20fac4541bfa73eed356c8d21f6f03ef059b475f022997b54",
+          "tourist-animation.js": "1982cda544e01197fb12d396b3452470a5d893a376891dec9408e3dea814ba10"
+        },
+        "limits": [
+          "Lab evidence only; no field data or physical Android; hardware renderer queried, GPU timing unavailable",
+          "Start uses the existing S keyboard shortcut to skip the humor questionnaire",
+          "Opening-screen and gameplay samples are separate; screenshots are representative frames",
+          "Seeded initialization does not fix frame scheduling, movement endpoints or async asset completion"
+        ],
+        "runs": [
+          {
+            "name": "desktop",
+            "run": 0,
+            "gpu": "ANGLE (Intel, Intel(R) Iris(R) Xe Graphics (0x00009A49) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+            "readyMs": 2784.5,
+            "loadedMs": 3366.4000000003725,
+            "startupBytes": 16345948,
+            "startupRequests": 110,
+            "inputLatency": {
+              "accepted": 9,
+              "p50": 25.90000000037253,
+              "p95": 37.09999999962747
+            },
+            "introSyncCalls": 12,
+            "frameMs": {
+              "p50": 28.199999999254942,
+              "p95": 34.19999999925494
+            },
+            "drawingBuffer": [
+              640,
+              400
+            ],
+            "render": {
+              "frame": 287,
+              "calls": 703,
+              "triangles": 732031,
+              "points": 2374,
+              "lines": 1948
+            },
+            "memory": {
+              "geometries": 1035,
+              "textures": 40
+            },
+            "moved": 66.9117999999985,
+            "longTaskCount": 9,
+            "errors": [],
+            "cpuProfileSha256": "eb388ae169701853d5583e52fea2d95af255032226a69e383022a6a266bf6b71",
+            "cpuSampleCount": 1123,
+            "cpuTopSampleCounts": [
+              [
+                "nearestRailLocation @ game.js:1129",
+                105
+              ],
+              [
+                "updateMatrixWorld @ three.core.js:13067",
+                98
+              ],
+              [
+                "groundStaticMotionBlocked @ game.js:910",
+                90
+              ],
+              [
+                "responderBlocked @ game.js:921",
+                87
+              ],
+              [
+                "projectObject @ three.module.js:17897",
+                82
+              ],
+              [
+                "vehicleMotionBlocked @ game.js:894",
+                42
+              ],
+              [
+                "WebGLRenderer.renderBufferDirect @ three.module.js:17233",
+                37
+              ],
+              [
+                "intersectsFrustum @ three.core.js:24185",
+                32
+              ]
+            ]
+          },
+          {
+            "name": "desktop",
+            "run": 1,
+            "gpu": "ANGLE (Intel, Intel(R) Iris(R) Xe Graphics (0x00009A49) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+            "readyMs": 2794.2000000011176,
+            "loadedMs": 3149.60000000149,
+            "startupBytes": 16347823,
+            "startupRequests": 110,
+            "inputLatency": {
+              "accepted": 9,
+              "p50": 16.40000000037253,
+              "p95": 33.30000000074506
+            },
+            "introSyncCalls": 12,
+            "frameMs": {
+              "p50": 16.899999998509884,
+              "p95": 21.699999999254942
+            },
+            "drawingBuffer": [
+              640,
+              400
+            ],
+            "render": {
+              "frame": 359,
+              "calls": 702,
+              "triangles": 695805,
+              "points": 2374,
+              "lines": 1948
+            },
+            "memory": {
+              "geometries": 1029,
+              "textures": 40
+            },
+            "moved": 63.874999999999545,
+            "longTaskCount": 6,
+            "errors": [],
+            "cpuProfileSha256": "bdd1f583c995452e540ada3471d663cf5fab3f87be4b276dead1620eafc53070",
+            "cpuSampleCount": 1914,
+            "cpuTopSampleCounts": [
+              [
+                "updateMatrixWorld @ three.core.js:13067",
+                144
+              ],
+              [
+                "projectObject @ three.module.js:17897",
+                137
+              ],
+              [
+                "nearestRailLocation @ game.js:1129",
+                86
+              ],
+              [
+                "groundStaticMotionBlocked @ game.js:910",
+                85
+              ],
+              [
+                "responderBlocked @ game.js:921",
+                83
+              ],
+              [
+                "WebGLRenderer.renderBufferDirect @ three.module.js:17233",
+                71
+              ],
+              [
+                "intersectsFrustum @ three.core.js:24185",
+                63
+              ],
+              [
+                "getParameters @ three.module.js:7357",
+                53
+              ]
+            ]
+          },
+          {
+            "name": "desktop",
+            "run": 2,
+            "gpu": "ANGLE (Intel, Intel(R) Iris(R) Xe Graphics (0x00009A49) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+            "readyMs": 1930.5999999996275,
+            "loadedMs": 2399.5,
+            "startupBytes": 16360134,
+            "startupRequests": 111,
+            "inputLatency": {
+              "accepted": 9,
+              "p50": 18.40000000037253,
+              "p95": 33.19999999925494
+            },
+            "introSyncCalls": 12,
+            "frameMs": {
+              "p50": 17.90000000037253,
+              "p95": 28.40000000037253
+            },
+            "drawingBuffer": [
+              640,
+              400
+            ],
+            "render": {
+              "frame": 340,
+              "calls": 695,
+              "triangles": 684286,
+              "points": 2374,
+              "lines": 1948
+            },
+            "memory": {
+              "geometries": 1036,
+              "textures": 40
+            },
+            "moved": 60.83820000000742,
+            "longTaskCount": 4,
+            "errors": [],
+            "cpuProfileSha256": "2aca09cc30e8ebfe5f032f553ca036e1c2b36c4147acadc9b20ab8b5df2953dd",
+            "cpuSampleCount": 1822,
+            "cpuTopSampleCounts": [
+              [
+                "updateMatrixWorld @ three.core.js:13067",
+                151
+              ],
+              [
+                "projectObject @ three.module.js:17897",
+                133
+              ],
+              [
+                "nearestRailLocation @ game.js:1129",
+                130
+              ],
+              [
+                "groundStaticMotionBlocked @ game.js:910",
+                108
+              ],
+              [
+                "responderBlocked @ game.js:921",
+                99
+              ],
+              [
+                "getParameters @ three.module.js:7357",
+                63
+              ],
+              [
+                "intersectsFrustum @ three.core.js:24185",
+                60
+              ],
+              [
+                "propRadius @ game.js:871",
+                55
+              ]
+            ]
+          },
+          {
+            "name": "android-emulated",
+            "run": 0,
+            "gpu": "ANGLE (Intel, Intel(R) Iris(R) Xe Graphics (0x00009A49) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+            "readyMs": 1708.7999999988824,
+            "loadedMs": 2125.199999999255,
+            "startupBytes": 15264353,
+            "startupRequests": 99,
+            "inputLatency": {
+              "accepted": 9,
+              "p50": 15.199999999254942,
+              "p95": 25.699999999254942
+            },
+            "introSyncCalls": 12,
+            "frameMs": {
+              "p50": 16.300000000745058,
+              "p95": 20.300000000745058
+            },
+            "drawingBuffer": [
+              195,
+              422
+            ],
+            "render": {
+              "frame": 371,
+              "calls": 262,
+              "triangles": 407102,
+              "points": 1736,
+              "lines": 1948
+            },
+            "memory": {
+              "geometries": 484,
+              "textures": 23
+            },
+            "moved": 64.88240000000314,
+            "longTaskCount": 5,
+            "errors": [],
+            "cpuProfileSha256": "dbcddcc5cc171bcd2a357d81533d6235099dbc986fafbb74d7f18041676fe0f4",
+            "cpuSampleCount": 1254,
+            "cpuTopSampleCounts": [
+              [
+                "updateMatrixWorld @ three.core.js:13067",
+                140
+              ],
+              [
+                "nearestRailLocation @ game.js:1129",
+                120
+              ],
+              [
+                "projectObject @ three.module.js:17897",
+                107
+              ],
+              [
+                "groundStaticMotionBlocked @ game.js:910",
+                92
+              ],
+              [
+                "responderBlocked @ game.js:921",
+                87
+              ],
+              [
+                "intersectsFrustum @ three.core.js:24185",
+                51
+              ],
+              [
+                "vehicleMotionBlocked @ game.js:894",
+                42
+              ],
+              [
+                "propRadius @ game.js:871",
+                37
+              ]
+            ]
+          },
+          {
+            "name": "android-emulated",
+            "run": 1,
+            "gpu": "ANGLE (Intel, Intel(R) Iris(R) Xe Graphics (0x00009A49) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+            "readyMs": 2156.39999999851,
+            "loadedMs": 2408.39999999851,
+            "startupBytes": 15869023,
+            "startupRequests": 98,
+            "inputLatency": {
+              "accepted": 9,
+              "p50": 17.800000000745058,
+              "p95": 41.09999999962747
+            },
+            "introSyncCalls": 12,
+            "frameMs": {
+              "p50": 16.5,
+              "p95": 21.59999999962747
+            },
+            "drawingBuffer": [
+              195,
+              422
+            ],
+            "render": {
+              "frame": 413,
+              "calls": 252,
+              "triangles": 356090,
+              "points": 1736,
+              "lines": 1948
+            },
+            "memory": {
+              "geometries": 487,
+              "textures": 23
+            },
+            "moved": 74.02200000000175,
+            "longTaskCount": 6,
+            "errors": [],
+            "cpuProfileSha256": "a67a3cd81630e762db28bc910e86a35d0fd7d251fdfbe92f591a956d00870d13",
+            "cpuSampleCount": 1220,
+            "cpuTopSampleCounts": [
+              [
+                "updateMatrixWorld @ three.core.js:13067",
+                162
+              ],
+              [
+                "nearestRailLocation @ game.js:1129",
+                121
+              ],
+              [
+                "projectObject @ three.module.js:17897",
+                111
+              ],
+              [
+                "responderBlocked @ game.js:921",
+                91
+              ],
+              [
+                "groundStaticMotionBlocked @ game.js:910",
+                73
+              ],
+              [
+                "intersectsFrustum @ three.core.js:24185",
+                57
+              ],
+              [
+                "propRadius @ game.js:871",
+                36
+              ],
+              [
+                "vehicleMotionBlocked @ game.js:894",
+                35
+              ]
+            ]
+          },
+          {
+            "name": "android-emulated",
+            "run": 2,
+            "gpu": "ANGLE (Intel, Intel(R) Iris(R) Xe Graphics (0x00009A49) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+            "readyMs": 2173,
+            "loadedMs": 2686.2000000011176,
+            "startupBytes": 14931346,
+            "startupRequests": 98,
+            "inputLatency": {
+              "accepted": 9,
+              "p50": 16.299999998882413,
+              "p95": 35.69999999925494
+            },
+            "introSyncCalls": 12,
+            "frameMs": {
+              "p50": 16.299999998882413,
+              "p95": 21.799999998882413
+            },
+            "drawingBuffer": [
+              195,
+              422
+            ],
+            "render": {
+              "frame": 441,
+              "calls": 242,
+              "triangles": 298176,
+              "points": 1736,
+              "lines": 1948
+            },
+            "memory": {
+              "geometries": 488,
+              "textures": 23
+            },
+            "moved": 78.06619999999975,
+            "longTaskCount": 6,
+            "errors": [],
+            "cpuProfileSha256": "7a0b37b0301532479960a82fb2295f8db8b3c197ef8976e5aed9e55350b7a1d8",
+            "cpuSampleCount": 1379,
+            "cpuTopSampleCounts": [
+              [
+                "updateMatrixWorld @ three.core.js:13067",
+                170
+              ],
+              [
+                "nearestRailLocation @ game.js:1129",
+                125
+              ],
+              [
+                "projectObject @ three.module.js:17897",
+                112
+              ],
+              [
+                "responderBlocked @ game.js:921",
+                96
+              ],
+              [
+                "groundStaticMotionBlocked @ game.js:910",
+                85
+              ],
+              [
+                "intersectsFrustum @ three.core.js:24185",
+                60
+              ],
+              [
+                "propRadius @ game.js:871",
+                45
+              ],
+              [
+                "vehicleMotionBlocked @ game.js:894",
+                44
+              ]
+            ]
+          }
+        ]
+      }
+    ],
+    "finalCliChecks": {
+      "result": "PASS",
+      "cases": [
+        "zero-dpr",
+        "fractional-seed",
+        "zero-runs",
+        "fractional-runs",
+        "launch-failure",
+        "report-write-failure"
+      ],
+      "browserLaunched": false
+    },
+    "earlierGatedAttempt": {
+      "status": "FAIL",
+      "source": "supplied terminal output; original harness did not persist partial reports",
+      "sample": "android-emulated run 1",
+      "introSyncCalls": 17,
+      "allowedSyncCalls": 16,
+      "followup": "later diagnostics do not erase this failure; runtime cause not resolved"
+    },
+    "excludedAttempt": "An incorrectly copied helper was interrupted; its incomplete set is excluded",
+    "scope": "Silent headless lab; keyboard probes, debug questionnaire/dialogue shortcuts; no game acceptance"
+  }
+}

@@ -4,6 +4,8 @@ Research snapshot: 8 October 2026. Repository base: `70e2dec60feb8226cec67c1e1f3
 
 **Subsequent adoption:** the user then authorized installation and For-AI updates. Eleven selected skills are now project-local under `.agents/skills/`, pinned with licenses, complete supporting references and documented adaptations in [the manifest](../.agents/skill-sources.json). The For-AI routing/evidence/asset/flow owners now carry the scoped guidance. Packaging, all eleven Codex frontmatter checks and the readability checker self-test passed; workflow-effectiveness pilots remain **NOT RUN**. The original source-audit sections below describe the research phase and its limits.
 
+**Subsequent functional pilots:** [three focused pilots](game-skill-functional-pilots-2026-10-08.md) now demonstrate a production-rule counterexample, broader protocol properties and profiling interpretation limits. They do not constitute a controlled productivity comparison; causal time/token gains remain **NOT RUN**.
+
 ## Recommendation
 
 Keep the existing game, its skill router, its asset pipeline, and its domain reviewers. Add a few narrowly triggered capabilities for gameplay evaluation, performance investigation, property-based testing, and design validation. Supplement asset export and real-input playtests with selected procedures. Use primary accessibility guidance to close a gap that generic UI skills do not cover.

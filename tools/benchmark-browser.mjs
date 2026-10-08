@@ -8,6 +8,12 @@ import {createHash} from 'node:crypto';
 import {execFileSync} from 'node:child_process';
 const {chromium}=createRequire(import.meta.url)(process.env.PLAYWRIGHT_MODULE||'playwright');
 const root=resolve('.'),output=resolve(process.env.BENCH_OUTPUT||'output/browser-performance');
+const requestedDpr=Number(process.env.BENCH_DPR||2);
+if(!Number.isFinite(requestedDpr)||requestedDpr<=0)throw Error('BENCH_DPR must be finite and positive');
+const requestedSeed=process.env.BENCH_SEED===undefined?null:Number(process.env.BENCH_SEED);
+if(requestedSeed!==null&&(!Number.isInteger(requestedSeed)||requestedSeed<0||requestedSeed>0xffffffff))throw Error('BENCH_SEED must be an unsigned 32-bit integer');
+const requestedRuns=Number(process.env.BENCH_RUNS||3);
+if(!Number.isSafeInteger(requestedRuns)||requestedRuns<1)throw Error('BENCH_RUNS must be a positive integer');
 mkdirSync(output,{recursive:true});
 // Only these source files are overridden; asset comparisons require an isolated checkout.
 const baseline=process.env.BENCH_REF?new Map(['game.js','world3d.js','tourist-animation.js','index.html','3d.html','buergeramt.js','buergeramt-fit.js'].map(file=>[resolve(root,file),execFileSync('git',['show',process.env.BENCH_REF+':'+file])])):null;
@@ -15,12 +21,13 @@ const source=file=>baseline?.get(resolve(file))||readFileSync(file);
 const mime={'.html':'text/html','.js':'text/javascript','.css':'text/css','.webp':'image/webp','.png':'image/png','.svg':'image/svg+xml','.json':'application/json','.glb':'model/gltf-binary','.mp3':'audio/mpeg','.ttf':'font/ttf'};
 const server=createServer((req,res)=>{try{const path=new URL(req.url,'http://localhost').pathname,file=resolve(root,'.'+decodeURIComponent(path==='/'?'/index.html':path));if(!file.startsWith(root+sep))throw Error('path');res.writeHead(200,{'Content-Type':mime[extname(file)]||'application/octet-stream','Cache-Control':'no-store'});res.end(source(file))}catch{res.writeHead(404);res.end()}});
 await new Promise(done=>server.listen(0,'127.0.0.1',done));
-const report={revision:Object.fromEntries(['game.js','world3d.js','tourist-animation.js'].map(file=>[file,createHash('sha256').update(source(file)).digest('hex')])),conditions:{sourceRef:process.env.BENCH_REF||'working tree',browser:'',network:'local uncompressed HTTP; cold browser context',cpu:process.env.BENCH_THROTTLE?'4x emulated slowdown':'no CPU throttling',gpu:process.env.BENCH_GPU==='hardware'?'ANGLE hardware renderer (queried per run)':'ANGLE SwiftShader software rendering',dpr:2},runs:[],limits:['Lab evidence only; no field data or physical Android; hardware renderer queried, GPU timing unavailable','Start uses the existing S keyboard shortcut to skip the humor questionnaire','Opening-screen and gameplay samples are separate; screenshots are representative frames']};
+const report={complete:false,revision:Object.fromEntries(['game.js','world3d.js','tourist-animation.js'].map(file=>[file,createHash('sha256').update(source(file)).digest('hex')])),conditions:{sourceRef:process.env.BENCH_REF||'working tree',browser:'',network:'local uncompressed HTTP; cold browser context',cpu:process.env.BENCH_THROTTLE?'4x emulated slowdown':'no CPU throttling',gpu:process.env.BENCH_GPU==='hardware'?'ANGLE hardware renderer (queried per run)':'ANGLE SwiftShader software rendering',dpr:requestedDpr,seedBase:requestedSeed},runs:[],limits:['Lab evidence only; no field data or physical Android; hardware renderer queried, GPU timing unavailable','Start uses the existing S keyboard shortcut to skip the humor questionnaire','Opening-screen and gameplay samples are separate; screenshots are representative frames','Seeded initialization does not fix frame scheduling, movement endpoints or async asset completion']};
 let browser;
 try{
  browser=await chromium.launch({headless:true,executablePath:process.env.CHROMIUM_PATH,args:process.env.BENCH_GPU==='hardware'?['--mute-audio']:['--mute-audio','--use-gl=angle','--use-angle=swiftshader']});report.conditions.browser=browser.version();
- for(const [name,viewport] of (process.env.BENCH_OFFICE?[['office-desktop',{width:1280,height:800}],['office-android-emulated',{width:390,height:844}]]:[['desktop',{width:1280,height:800}],['android-emulated',{width:390,height:844}]]))for(let run=0;run<Number(process.env.BENCH_RUNS||3);run++){
-  const context=await browser.newContext({viewport,deviceScaleFactor:2,isMobile:name.includes('android'),hasTouch:name.includes('android')});
+ for(const [name,viewport] of (process.env.BENCH_OFFICE?[['office-desktop',{width:1280,height:800}],['office-android-emulated',{width:390,height:844}]]:[['desktop',{width:1280,height:800}],['android-emulated',{width:390,height:844}]]))for(let run=0;run<requestedRuns;run++){
+  const context=await browser.newContext({viewport,deviceScaleFactor:requestedDpr,isMobile:name.includes('android'),hasTouch:name.includes('android')});
+  if(requestedSeed!==null)await context.addInitScript(seed=>{let state=seed;Math.random=()=>((state=(Math.imul(state,1664525)+1013904223)>>>0)/2**32)},requestedSeed+run);
   await context.addInitScript(()=>{
    const play=HTMLMediaElement.prototype.play;HTMLMediaElement.prototype.play=function(...args){this.muted=true;this.volume=0;return play.apply(this,args)};
    const connect=AudioNode.prototype.connect;AudioNode.prototype.connect=function(target,...args){if(target===this.context.destination){const gain=this.context.createGain();gain.gain.value=0;connect.call(gain,target);return connect.call(this,gain,...args)}return connect.call(this,target,...args)};
@@ -68,6 +75,7 @@ try{
   if(process.env.BENCH_CHECK){if(errors.length||!(item.moved>0)||inputLatency.accepted<8)throw Error(`${name}: browser errors or movement failed`);if(!process.env.BENCH_OFFICE&&item.startupBytes>18000000)throw Error(`${name}: startup exceeds 18 MB local transfer budget`);if(!process.env.BENCH_OFFICE&&intro.syncCalls>16)throw Error(`${name}: opening-screen render exceeds 4 Hz budget`);if(gameplay.drawingBuffer[0]*gameplay.drawingBuffer[1]>1600000)throw Error(`${name}: drawing buffer exceeds 1.6 MP`);if(!process.env.BENCH_OFFICE&&startupResources.some(r=>/intro-song\.mp3|\/sprite-sources\/|\.blend/.test(r.url)))throw Error(`${name}: deferred/authoring resource fetched at boot`)}
   await context.close();
  }
- writeFileSync(resolve(output,'report.json'),JSON.stringify(report,null,2));
+ report.complete=true;
  console.log(JSON.stringify({output,runs:report.runs.length,verdict:process.env.BENCH_CHECK?'PASS':'MEASURED'}));
-}finally{await browser?.close();await new Promise(done=>server.close(done))}
+}catch(error){report.failure=error.message;throw error}
+finally{try{writeFileSync(resolve(output,'report.json'),JSON.stringify(report,null,2))}finally{try{await browser?.close()}finally{await new Promise(done=>server.close(done))}}}
