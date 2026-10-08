@@ -955,7 +955,8 @@ function showRendererFailure(error){
     const geometry=new T.PlaneGeometry(height*320/416,height),uv=geometry.attributes.uv,base=Float32Array.from(uv.array);
     const mesh=new T.Mesh(geometry,amtPaintMaterial());
     mesh.visible=false;amtScene.add(mesh);
-    amtMoving.push({id,height,mesh,uv,base,cell:-1,renderKey:"",mood:0});
+    const walkFrames=["aktenkurier","archivbotin"].includes(id)?16:8;
+    amtMoving.push({id,height,mesh,uv,base,walkFrames,cell:-1,renderKey:"",mood:0});
   }
   const amtPaintedProps=[];
   function amtPaintedProp(column,width,height,x,y,z,turn=0){
@@ -990,7 +991,7 @@ function showRendererFailure(error){
       actor.detail=textures.get(detailUrl);
     }
     for(const actor of amtMoving){
-      const url=`./assets/buergeramt/characters/${actor.id}-motion${amtMobile?"-mobile":""}.webp?v=20261007-crowd`;
+      const url=`./assets/buergeramt/characters/${actor.id}-motion${amtMobile?"-mobile":""}.webp?v=20261008-dense-walk`;
       const texture=amtTexture(url,()=>{actor.mesh.visible=true},error=>console.warn("Bürgeramt character unavailable",actor.id,error));
       actor.atlas=texture;
       actor.mesh.material.map=texture;actor.mesh.material.needsUpdate=true;
@@ -1039,20 +1040,24 @@ function showRendererFailure(error){
       if(close&&row<4&&actor.walkDirection!==state.direction){
         if(actor.walkDetail){if(actor.mesh.material.map===actor.walkDetail){actor.mesh.material.map=actor.atlas;actor.mesh.material.needsUpdate=true}actor.walkDetail.dispose()}
         actor.walkDirection=state.direction;
-        const url=`./assets/buergeramt/characters/${actor.id}-walk-${state.direction}-detail.webp?v=20261007-paint-detail`;
+        const smallDetail=amtMobile&&(window.devicePixelRatio||1)<1.5&&actor.walkFrames===16;
+        const url=`./assets/buergeramt/characters/${actor.id}-walk-${state.direction}-detail${smallDetail?"-mobile":""}.webp?v=20261008-dense-walk`;
         actor.walkDetail=amtTexture(url,undefined,error=>console.warn("Bürgeramt walk detail unavailable",actor.id,error));
       }
-      const cell=row*8+state.frame;
+      // The simulation's distance clock keeps its cadence and action boundaries.
+      // Denser art samples the same normalized phase; it never speeds up the walk.
+      const sample=row<4?Math.min(actor.walkFrames-1,Math.floor((state.phase??state.frame/8)*actor.walkFrames)):state.frame;
+      const cell=row<4?row*actor.walkFrames+sample:4*actor.walkFrames+(row-4)*8+sample;
       actor.cell=cell;
       const actionDetail=close&&row>=4&&!!actor.detail?.image;
       const walkDetail=close&&row<4&&actor.walkDirection===state.direction&&!!actor.walkDetail?.image;
       const texture=actionDetail?actor.detail:walkDetail?actor.walkDetail:actor.atlas;
       if(texture&&actor.mesh.material.map!==texture){actor.mesh.material.map=texture;actor.mesh.material.needsUpdate=true}
-      const key=actionDetail?`detail:${row}`:walkDetail?`walk:${row}:${state.frame}`:`atlas:${cell}`;
+      const key=actionDetail?`detail:${row}`:walkDetail?`walk:${row}:${sample}`:`atlas:${cell}`;
       if(key!==actor.renderKey){actor.renderKey=key;
         if(actionDetail)amtUv(actor,row-4,0,4,1);
-        else if(walkDetail)amtUv(actor,state.frame%4,Math.floor(state.frame/4),4,2);
-        else amtUv(actor,state.frame,row,8,8);
+        else if(walkDetail)amtUv(actor,sample%4,Math.floor(sample/4),4,actor.walkFrames/4);
+        else {const cols=actor.walkFrames===16?12:8;amtUv(actor,cell%cols,Math.floor(cell/cols),cols,8)}
       }
       if(distance>7){actor.walkDetail?.dispose();actor.walkDetail=null;actor.walkDirection="";actor.detail?.dispose();actor.detail=null}
       actor.mesh.material.userData.breath.value=Math.sin(now/1750+actor.height*7)*.75+Math.sin(now/2900+actor.height*11)*.25;
