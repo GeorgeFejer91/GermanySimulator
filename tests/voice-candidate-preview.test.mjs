@@ -30,11 +30,11 @@ const load=search=>{
 };
 const off=load("");
 const on=load("?voicePreview=1");
-assert.equal(manifest.lineCount,201);
-assert.equal(manifest.clips.filter(clip=>clip.asrWordExact).length,149);
+assert.equal(manifest.lineCount,203);
+assert.equal(manifest.clips.filter(clip=>clip.asrWordExact).length,151);
 assert.equal(manifest.clips.filter(clip=>clip.voiceId==="polizei-heinrich-wachtmeister"&&!clip.clipId.includes("-phone-")).length,12);
 assert.equal(manifest.clips.filter(clip=>clip.clipId.startsWith("polizei-heinrich-wachtmeister-phone-")).length,4);
-assert.equal(manifest.clips.filter(clip=>clip.voiceId==="spieler-hans-peter-mustermann").length,35);
+assert.equal(manifest.clips.filter(clip=>clip.voiceId==="spieler-hans-peter-mustermann").length,37);
 const crowdClips=manifest.clips.filter(clip=>clip.voiceId.startsWith("crowd-"));
 assert.equal(crowdClips.length,36);
 assert.equal(new Set(crowdClips.map(clip=>clip.voiceId)).size,12);

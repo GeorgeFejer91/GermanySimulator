@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "status": "unreviewed opt-in preview; not release-cleared",
-  "lineCount": 201,
+  "lineCount": 203,
   "clips": [
     {
       "clipId": "amt-horst-stempelmann-01",
@@ -3108,6 +3108,38 @@
       "path": "assets/voices/candidate-dialogue/polizei-heinrich-wachtmeister-phone-04.mp3",
       "sha256": "7d168ac047c014672afe8e38543e09451a977cae055671578d89541de62be4cc",
       "takeId": "polizei-heinrich-wachtmeister-phone-04"
+    },
+    {
+      "clipId": "spieler-hans-peter-mustermann-germany-fax-03",
+      "voiceId": "spieler-hans-peter-mustermann",
+      "profileId": "85b9afebb99f40eebad651bcd2e55a1d",
+      "text": "Papier hinein, Würde heraus. Wenigstens funktioniert der Vorgang.",
+      "referenceSha256": "558259e7e4eaec780eeda7b547232ec8bb09075385c2ba9483bfef617339ff21",
+      "renderer": "ResembleAI/Chatterbox Multilingual V2 0.1.7",
+      "modelRevision": "5bb1f6ee58e50c3b8d408bc82a6d3740c2db6e18",
+      "modelLicense": "MIT",
+      "durationSeconds": 4.88,
+      "asr": "Papier hinein würde heraus. Wenigstens funktioniert der Vorgang.",
+      "asrWordExact": true,
+      "path": "assets/voices/candidate-dialogue/spieler-hans-peter-mustermann-germany-fax-03.mp3",
+      "sha256": "2827dcd498456e4317008c36669cf6ceea99aaad8243091179d0fe6225680a7a",
+      "takeId": "spieler-hans-peter-mustermann-germany-fax-03--retry2"
+    },
+    {
+      "clipId": "spieler-hans-peter-mustermann-berlin-coffee-02",
+      "voiceId": "spieler-hans-peter-mustermann",
+      "profileId": "85b9afebb99f40eebad651bcd2e55a1d",
+      "text": "Great. Selbst die Maschine hat mehr Pause verdient als ich.",
+      "referenceSha256": "558259e7e4eaec780eeda7b547232ec8bb09075385c2ba9483bfef617339ff21",
+      "renderer": "ResembleAI/Chatterbox Multilingual V2 0.1.7",
+      "modelRevision": "5bb1f6ee58e50c3b8d408bc82a6d3740c2db6e18",
+      "modelLicense": "MIT",
+      "durationSeconds": 3.8,
+      "asr": "Great. Selbst die Maschine hat mehr Pause verdient als ich.",
+      "asrWordExact": true,
+      "path": "assets/voices/candidate-dialogue/spieler-hans-peter-mustermann-berlin-coffee-02.mp3",
+      "sha256": "84fd687b0690547ea7136517c020ebddd3288546ccacba122fe22070cbfaa849",
+      "takeId": "spieler-hans-peter-mustermann-berlin-coffee-02--retry2"
     }
   ]
 }

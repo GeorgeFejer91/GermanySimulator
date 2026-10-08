@@ -759,7 +759,9 @@ const candidateDialogue=Object.freeze(Object.fromEntries([
  ["polizei-heinrich-wachtmeister","Polizei, Ordnungskontrolle. Sie sind heute über eine Grünfläche gelaufen. Antworten Sie: linker Schuh, rechter Schuh, oder beide?","assets/voices/candidate-dialogue/polizei-heinrich-wachtmeister-phone-01.mp3"],
  ["polizei-heinrich-wachtmeister","Hallo? Sprechen Sie lauter! Wir können Sie nicht hören. Haben Sie etwa etwas Wichtigeres zu tun, oder was?!","assets/voices/candidate-dialogue/polizei-heinrich-wachtmeister-phone-02.mp3"],
  ["polizei-heinrich-wachtmeister","Wer redet da im Hintergrund? Die Frau am Schalter? Stellen Sie laut! Vielleicht deckt Ihr Schalter den Rasen!","assets/voices/candidate-dialogue/polizei-heinrich-wachtmeister-phone-03.mp3"],
- ["polizei-heinrich-wachtmeister","Frau Knick, behindern Sie nicht meine Befragung! Ein Grashalm fehlt, und hier schreit jemand über Stempel!","assets/voices/candidate-dialogue/polizei-heinrich-wachtmeister-phone-04.mp3"]
+ ["polizei-heinrich-wachtmeister","Frau Knick, behindern Sie nicht meine Befragung! Ein Grashalm fehlt, und hier schreit jemand über Stempel!","assets/voices/candidate-dialogue/polizei-heinrich-wachtmeister-phone-04.mp3"],
+ ["spieler-hans-peter-mustermann","Papier hinein, Würde heraus. Wenigstens funktioniert der Vorgang.","assets/voices/candidate-dialogue/spieler-hans-peter-mustermann-germany-fax-03.mp3"],
+ ["spieler-hans-peter-mustermann","Great. Selbst die Maschine hat mehr Pause verdient als ich.","assets/voices/candidate-dialogue/spieler-hans-peter-mustermann-berlin-coffee-02.mp3"]
 ].map(([voiceId,text,path])=>[voiceId+"\u0000"+text,path])));
 function candidateClip(voiceId,text){return candidatePreviewEnabled?candidateDialogue[voiceId+"\u0000"+text]||null:null}
 
