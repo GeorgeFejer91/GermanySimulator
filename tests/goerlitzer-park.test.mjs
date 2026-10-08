@@ -16,7 +16,7 @@ function line(source,prefix){
  return found;
 }
 
-const sandbox={window:{},matchMedia:()=>({matches:true})};
+const sandbox={window:{},matchMedia:()=>({matches:true}),crossings:[]};
 vm.runInNewContext(shared,sandbox);
 const park=sandbox.window.GoerlitzerPark;
 assert.deepEqual([park.x,park.y,park.w,park.h,park.plaqueX,park.plaqueY],[2010,2940,800,480,2586,3462],"the city offset must be applied exactly once");
@@ -40,8 +40,7 @@ ${between(game,"const WURST_TYPES=","const state=")}
 const crowdArchetypeOrder=[{id:"towel-man",label:"TOWEL",sprite:"crowdTowelMan"}],npcLines=[""];
 ${between(game,"const npcs=","window.Germany3DBridge=")}
 const dist=(ax,ay,bx,by)=>Math.hypot(ax-bx,ay-by),clamp=(value,min,max)=>Math.max(min,Math.min(max,value));
-${line(game,"function propRadius(")}
-${line(game,"function staticBlocked(")}
+${between(game,"function normObjectRadius(","function trainCarDistance(")}
 ${line(game,"function regionOf(")}
 globalThis.layout={goerlitzerPark,player,roads,buildings,props,normObjects,pickups,npcs,trees,walkways,TREE_RADIUS,staticBlocked,regionOf};
 `,sandbox);

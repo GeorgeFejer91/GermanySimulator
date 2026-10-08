@@ -24,6 +24,30 @@ test('office regulars patrol and handle paperwork without changing the ticket',(
  assert.equal(later.length,8);assert.ok(later.some((actor,i)=>actor.mode==='walk'&&Math.hypot(actor.x-start[i].x,actor.z-start[i].z)>.2));
  assert.equal(h.level.activated,false);assert.equal(h.links[0].sent.filter(m=>m.type==='ticket').length,0);
 });
+
+test('dense walk sampling preserves distance cadence and exposes intermediate phases',()=>{
+ const h=harness();h.advanceGame(2.5);
+ let previous=h.level.characters;
+ const fine=new Set();let checked=0;
+ for(let i=0;i<120;i++){
+  h.level.update(.01);const current=h.level.characters;
+  for(let j=0;j<current.length;j++){
+   const a=previous[j],b=current[j];
+   assert.ok(b.phase>=0&&b.phase<1);
+   assert.equal(b.frame,Math.floor(b.phase*8));
+   if(a.mode==='walk'&&b.mode==='walk'&&a.direction===b.direction){
+    const distance=Math.hypot(b.x-a.x,b.z-a.z);
+    const phaseStep=(b.phase-a.phase+1)%1;
+    // Existing route arrival may snap <.025 world units without taking a step.
+    if(phaseStep===0)assert.ok(distance<.025);
+    else assert.ok(Math.abs(phaseStep-distance*8.5/8)<1e-10);
+    fine.add(Math.floor(b.phase*16));checked++;
+   }
+  }
+  previous=current;
+ }
+ assert.ok(checked>100);assert.ok([...fine].some(frame=>frame%2===1));
+});
 test('the Aktenkurier approaches, delivers the dark verse in a spotlight, and resumes his route',()=>{
  const h=harness('host',{cinematics:true});h.enter();h.advanceGame(9);
  assert.equal(h.level.stage,'omen');assert.equal(h.level.omen.phase,'blackout');

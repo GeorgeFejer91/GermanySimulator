@@ -12,7 +12,7 @@ const announcementFiles=["ice-0815-buxtehude-bahnhofshalle-subtle.mp3","ice-0815
 assert.match(game,/TRAIN_CAR_OFFSETS=\[780,520,260,0,-260,-520,-780\]/,"perimeter trains must remain single full-length seven-car consists");
 assert.match(game,/CITY=\{w:9840,h:4240\},RAIL_GUTTER=560,WORLD=\{w:CITY\.w\+RAIL_GUTTER\*2,h:CITY\.h\+RAIL_GUTTER\*2\}/,"the playable world must add a full rail-clearance gutter around the city");
 assert.match(game,/makeRailLoop\("aussenring",72,720,1\),makeRailLoop\("innenring",232,560,-1\)/,"full-length coaches need broad concentric corner radii");
-assert.match(game,/TRAIN_CAR_HALF_LENGTH=112,TRAIN_CAR_HALF_WIDTH=46,TRAIN_MIN_GAP=1820,TRAIN_PLAYER_STOP_GAP=970/,"long consists need matching solid bodies, a hard no-passing center gap, and a sampled-rail clearance margin");
+assert.match(game,/TRAIN_CAR_HALF_LENGTH=122,TRAIN_CAR_HALF_WIDTH=46,TRAIN_MIN_GAP=1820,TRAIN_PLAYER_STOP_GAP=970/,"long consists need matching solid bodies, a hard no-passing center gap, and a sampled-rail clearance margin");
 assert.match(game,/\[0,\.03,1,188,94\].*\[0,\.19,-1,252,132\].*\[1,\.87,1,214,112\]/s,"both tracks must start with six alternating, independently tuned trains");
 assert.match(game,/orientation:seed\[2\].*acceleration:seed\[4\]/s,"physical consist orientation must be decoupled from reversible movement and every train must own its acceleration");
 assert.match(game,/function signedRailSeparation\(/,"same-track collision must use circular signed separation");
@@ -21,7 +21,7 @@ assert.match(game,/train\.bouncePause=TRAIN_BOUNCE_PAUSE;train\.reversePending=t
 assert.match(game,/train\.dir\*=-1;train\.reversePending=false;train\.speed=0/,"a stopped collision pair must restart in the opposite direction");
 assert.match(game,/rate=target<train\.speed\?train\.acceleration\*3\.2:train\.acceleration/,"each train must apply its own acceleration constant");
 assert.match(game,/function trainCarDistance\(/,"long coaches need oriented body collision instead of point-radius collision");
-assert.match(game,/function dynamicBlocker\(x,y,fromX,fromY\).*trainCarDistance\(x,y,item\).*next<player\.r&&next<previous/s,"the player must not be able to move through an oriented train body");
+assert.match(game,/function dynamicBlocker\(x,y,fromX,fromY\).*trainCarDistance\(x,y,item\).*groundContactBlocks\(next,previous,player\.r\)/s,"the player must not be able to move through an oriented train body");
 assert.match(game,/groundObstacles=\[\{item:player.*policeVehicles.*police.*npcs.*props.*normObjects/s,"trains must brake for the player, other people, response vehicles, and solid ground objects");
 assert.match(game,/event<\.55.*train\.pause=1\.4\+Math\.random\(\)\*4\.8/,"trains must stop unpredictably often enough to disrupt both loops");
 assert.match(game,/TRAIN_PLAYER_OBSTRUCTION_AUDIO=TRAIN_ANNOUNCEMENT_AUDIO\[0\]/,"the player-obstruction cue must always map to the supplied Buxtehude recording");
@@ -31,7 +31,7 @@ assert.match(game,/TRAIN_ANNOUNCEMENT_AUDIO=\[/,"the supplied recordings must re
 const roadsDeclaration=game.match(/const horizontalRoads=[^\n]+\nconst verticalRoads=[^\n]+/);
 const stationDeclaration=game.slice(game.indexOf("const STATION_RISE="),game.indexOf("const TRAIN_CAR_OFFSETS="));
 assert.ok(roadsDeclaration&&stationDeclaration.includes("const stations=Object.freeze("),"roads and stations must have one simulation authority");
-const stationWorld=vm.createContext({RAIL_GUTTER:560,CITY:{w:9840,h:4240}});
+const stationWorld=vm.createContext({RAIL_GUTTER:560,CITY:{w:9840,h:4240},crossings:[]});
 vm.runInContext(`${roadsDeclaration[0]}\n${stationDeclaration}\nglobalThis.layout={horizontalRoads,verticalRoads,stations,stationElevation,STATION_RISE}`,stationWorld);
 const {horizontalRoads,verticalRoads,stations,stationElevation,STATION_RISE}=stationWorld.layout;
 assert.equal(stations.length,2*(horizontalRoads.length+verticalRoads.length),"every road end needs its own station");
@@ -43,7 +43,12 @@ for(const s of stations){
  assert.equal(stationElevation(px,py),STATION_RISE);
  for(const [approach,height] of [[0,0],[55,.1],[75,.2],[95,.3]]){
   const x=s.side==="west"?s.accessX+s.accessW-approach:s.side==="east"?s.accessX+approach:cx,y=s.side==="north"?s.accessY+s.accessH-approach:s.side==="south"?s.accessY+approach:cy;
-  assert.ok(Math.abs(stationElevation(x,y)-height)<1e-8,`${s.id} must climb all three steps`);
+  const sideRamp=s.side==="west"||s.side==="east",expected=sideRamp?STATION_RISE*approach/105:height;
+  assert.ok(Math.abs(stationElevation(x,y)-expected)<1e-8,`${s.id} uses its shared side ramp or three north/south steps`);
+ }
+ if(s.side==="west"||s.side==="east")for(let x=s.x-105;x<=s.x+s.w+105;x+=2.5){
+  const ground=stationElevation(x,py),next=stationElevation(x+1,py);
+  assert.ok(Math.abs(ground-next)<=STATION_RISE/105+1e-8,'Walking feet must follow the continuous car approach surface');
  }
 }
 assert.match(game,/Math\.abs\(stationElevation\(x,y\)-stationElevation\(player\.x,player\.y\)\)>\.11/,"platform sides must route walking through the stairs");

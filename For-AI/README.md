@@ -14,8 +14,12 @@ Use the smallest coherent change. Prefer existing code, tools, and skills. Updat
 - [`ASSET-POLICY.md`](./ASSET-POLICY.md): current asset, performance, hosting, and YAGNI policy.
 - [`SPRITE-GENERATION-PROTOCOL.md`](./SPRITE-GENERATION-PROTOCOL.md): accepted character-source and atlas workflow.
 - [`SKILLS.md`](./SKILLS.md): skill routes, Codex model tiers, delegation and review contract.
+- [`OBJECT-CONSISTENCY.md`](./OBJECT-CONSISTENCY.md): required independent physics and camera/scale reviewers, pedestrian/solid separation, visibility/depth and executable regression matrix.
 - [`DECISIONS.md`](./DECISIONS.md): dated rationale and history. Search for a relevant entry when needed; do not read the whole log or treat an older entry as current authority.
 - [`VOICE-SYNTH-PROTOCOL.md`](./VOICE-SYNTH-PROTOCOL.md): voice profile and recorded-speech production.
+- [`VOICE-CAST.json`](./VOICE-CAST.json): named fictional cast, demeanor assessment, exact dialogue ownership, and verified Secret Tunnel profile bindings.
+- [`VOICE-DIALOGUE-INVENTORY.json`](./VOICE-DIALOGUE-INVENTORY.json): exact authored German/Denglisch line pools and compositional quiz dialogue for dynamic speakers.
+- [`MUSIC-SOUND-DESIGN.md`](./MUSIC-SOUND-DESIGN.md): music and nonverbal sound briefs, cue-to-state contracts, mix ownership, and audio evidence.
 - [`AUDIO-TEXT-LIBRARY.md`](./AUDIO-TEXT-LIBRARY.md) and [`AUDIO-TEXT-LIBRARY.js`](./AUDIO-TEXT-LIBRARY.js): shipped speech IDs, source text, subtitles, triggers, and exclusions.
 - [`QUIZ-CHARACTER-DICTIONARY.md`](./QUIZ-CHARACTER-DICTIONARY.md) and [`QUIZ-CHARACTER-DICTIONARY.js`](./QUIZ-CHARACTER-DICTIONARY.js): quiz identities, portraits, vocabulary, names, and category routing.
 - [`chatdev/`](./chatdev/): shared production and review protocol, optional pinned Bürgeramt runner, and legacy Secret Tunnel handoff records.

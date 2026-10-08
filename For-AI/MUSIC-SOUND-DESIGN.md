@@ -1,0 +1,27 @@
+# Music and sound design for the canonical game
+
+This protocol defines the shared beat interface and evidence for music and nonverbal sound in the static game. Use `$music-sound-effects` for reusable FOSS production methods when installed. [`GAMEPLAY.md`](./GAMEPLAY.md) and [`BUERGERAMT.md`](./BUERGERAMT.md) own the current cue, state, mix, and numeric policies; their controllers commit game events. Sound never creates a second mission state, backend service, or scheduler.
+
+## Start with the beat
+
+State the player action, story purpose, emotional turn, and desired silence before choosing a timbre or tool. Keep four decisions distinct: **brief** (intent and constraints), **source** (licensed recording, synthesis patch, or score sketch), **render** (reviewed asset or browser synthesis), and **playback** (the runtime event that starts and stops it). Prefer the game's existing Web Audio paths. Strudel can sketch a pattern and SuperCollider can render an offline source when useful; neither is a runtime dependency. No paid API, model, or DAW is required. Only accepted, licensed and attributed renders enter `assets/`; existing source/provenance rules remain in [`ASSET-POLICY.md`](./ASSET-POLICY.md).
+
+For each changed beat, the integrator records one compact beat card shared by content, storyboard/animation, gameplay, soundscape/mix, phone/voice and QA. It identifies:
+
+- Stable beat and cue IDs, candidate revision, purpose, trigger and guard; the controller event or state transition that commits it, with attempt/episode ID or revision owner so stale and duplicate events are rejected.
+- Exact spoken and visible text owner where applicable, and whether the cue is nonverbal; actor action, emotional arc, player control and mission outcome.
+- Simulation clock for movement/queue state, monotonic peer clock for phone targets and receipts, Web Audio clock for scheduled sound, and observed Web Speech events for voice. State which clock can pause and how timestamps cross domains; never infer sample-accurate speech from a browser event.
+- Priority, bus, ducking and overlap relative to dialogue, music and phone; bounded level, pitch/rate, distance, duration and cooldown/retrigger parameters. A pause or dramatic silence is an explicit outcome.
+- Start/done receipts where another actor waits, maximum wait and fallback, interruption/cancellation on exit, replay, lost connection or changed attempt, and the single existing scheduler or broker that owns playback.
+
+The card is an interface for the current change, not a second catalog or required new runtime schema. The integrator supplies its **actual beat ID, candidate revision, and compact contract** to every affected external ChatDev stage in that stage's invocation prompt or a tool-readable handoff. A reference to this protocol alone does not supply those values. Keep exact dialogue and recorded-speech bindings in [`AUDIO-TEXT-LIBRARY.md`](./AUDIO-TEXT-LIBRARY.md) and its JS authority; preserve visible-text lockstep. Integrate cue parameters into the owning code and document lasting behavior in its current subject document. Do not ship draft recordings, sketches, source models, or session reports.
+
+## Bürgeramt example and boundary
+
+The ordinary office has no continuous background music. The Aktenkurier's approach is a bounded, encounter-only exception: menacing electronic ambience builds with his approach and the progressive darkening, reaches its peak as he arrives for the exact existing German line, then cuts away as light returns and he resumes his route. Keep the queue pause and exit/replay cancellation. The office and phone retain separate audio contexts; the desk owns the committed pre-ring cue while the phone owns its ring and speech receipts. [`BUERGERAMT.md`](./BUERGERAMT.md) owns the cue sequence, buses, mix and numeric settings, and [`PHONE-CALL-TIMING-RESEARCH.md`](./PHONE-CALL-TIMING-RESEARCH.md) owns the measured phone timing limits.
+
+The existing city soundtrack remains governed by its music toggle, foreground audio broker, and `GAMEPLAY.md`; an office cue must not silently change city music policy or voice priority. The static controller owns state and committed events; renderer and audio projection follow that state. A new audio requirement does not justify a service, asset pipeline, or parallel scheduler.
+
+## Review evidence
+
+At one candidate revision, report separate results for (1) source/license and render inspection, (2) deterministic cue/state and clock/receipt checks, (3) muted isolated Chromium desktop and Android mobile browser timing checks, (4) physical device and paired-phone behavior when actually tested, and (5) perceptual listening on the intended output. Mark unrun checks `NOT RUN`; silent browser checks establish scheduling, not perceived loudness, balance, or timbre. Review cancellation, duplicate/stale events, mute/ducking, missing asset or speech fallback, and the whole story-to-gameplay beat. Use the shared [`chatdev/README.md`](./chatdev/README.md#shared-contracts-and-convergence) verdict and candidate-revision format.

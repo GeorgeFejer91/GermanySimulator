@@ -20,7 +20,7 @@ for(const id of ids){
 assert.match(game,/archetype=crowdArchetypeOrder\[j%crowdArchetypeOrder\.length\]/,"crowd distribution must use the deliberate weighted archetype order");
 assert.match(game,/Object\.freeze\(\["towel-man","towel-woman"\]/,"only the accepted towel characters must populate the ordinary crowd");
 for(const removed of ["bioVegan","wasteMarshal","quietHours","cargoParent","dinInspector","potato"])assert.doesNotMatch(game,new RegExp(removed),`${removed} must not remain in the runtime`);
-assert.match(game,/crowdNames\[\(j\*5\+3\)%crowdNames\.length\]/,"names must rotate independently from the visual stereotype");
+assert.match(game,/identityIndex=\(j\*5\+3\)%crowdNames\.length,fullName=crowdNames\[identityIndex\],voiceId=crowdVoiceIds\[identityIndex\]/,"names and voice IDs must rotate together independently from the visual stereotype");
 assert.match(game,/region=state\.region,archetype=[^;]*surface===\"sidewalk\"&&archetype\?archetype\.barks\[region\]/,"nearby pedestrians must use archetype-specific speech captured in the trigger region");
 assert.match(game,/dist\(player\.x,player\.y,n\.x,n\.y\)<\(n\.audioRadius\|\|NPC_COMPLAINT_DISTANCE\)/,"personal speech must be radius-triggered");
 assert.match(game,/advanceSpriteGait\(n,Math\.hypot\(n\.x-beforeX,n\.y-beforeY\),npcSpriteAtlases\[n\.spriteKind\],CROWD_GAIT_CYCLE_DISTANCE,dt\)/,"walking frames must advance from actual pedestrian distance");
@@ -28,10 +28,10 @@ assert.match(game,/TouristAnimations\.request\(n,dx,dy,atlas\.tourist\)/,"ordina
 assert.match(game,/verticalSidewalkSegments/,"ordinary pedestrians must walk vertically as well as horizontally");
 assert.match(world,/n\.spriteKind&&q\.userData\[n\.spriteKind\+\"Sprite\"\]/,"the WebGL renderer must keep ordinary crowd sprites synchronized");
 assert.match(dictionary,/appearance is not the archetype/i,"the durable policy must separate identity from the satirical behavior");
-assert.match(game,/if\(n\.arrested\|\|n\.crowd\)continue/,"ordinary towel walkers must not hard-block the player");
-assert.match(game,/!\(self\?\.crowd&&n\.crowd\)/,"ordinary towel walkers must pass through one another rather than forming jams");
-assert.match(game,/self&&!self\.crowd&&.*dist\(x,y,player\.x,player\.y\)/,"ordinary towel walkers must pass through the player while other responders remain solid");
+assert.match(game,/function blockingPedestrian\(x,y\)[^\n]*for\(const n of npcs\)[^\n]*dist\(x,y,n\.x,n\.y\)/,"all towel walkers must block player movement");
+assert.doesNotMatch(game,/!\(self\?\.crowd&&n\.crowd\)/,"ordinary towel walkers must not pass through each other");
+assert.match(game,/self!==player&&circle\(player,player\.r\)/,"ordinary towel walkers and responders must respect the player's physical body");
 assert.match(game,/QUIZ_FOLLOW_MAX_SECONDS=8,QUIZ_FOLLOW_BREAK_DISTANCE=650/,"quiz followers must have bounded time and distance interest");
 assert.match(game,/n\.quizFollowTime>QUIZ_FOLLOW_MAX_SECONDS\|\|d>QUIZ_FOLLOW_BREAK_DISTANCE/,"quiz followers must abandon pursuit when interest expires");
 
-console.log("Two personalized, pass-through towel pedestrians use bounded follow behavior and the registered sprite pipeline");
+console.log("Two personalized, solid towel pedestrians use bounded pavement routes, follow behavior and the registered sprite pipeline");

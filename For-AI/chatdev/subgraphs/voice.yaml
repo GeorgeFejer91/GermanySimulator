@@ -14,6 +14,12 @@ graph:
         name: gpt-4o
         role: >-
           Read For-AI/chatdev/README.md and follow its scoped handoff protocol.
+          Read For-AI/MUSIC-SOUND-DESIGN.md for any changed beat ID and
+          candidate revision. Require the actual beat ID, candidate revision
+          and compact contract in this invocation for a changed voice beat;
+          report a missing handoff. Report how exact visible text, speech
+          start/done receipts and cancellation fit the controller event.
+          Keep the `omen` verse unchanged and intelligible at its music peak.
           You are the voice producer. Read For-AI/VOICE-SYNTH-PROTOCOL.md,
           For-AI/AUDIO-TEXT-LIBRARY.md, and buergeramt-story.js.
           Read For-AI/chatdev/WEBGPT-HANDOFF.md for accepted VOICE source

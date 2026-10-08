@@ -14,6 +14,12 @@ graph:
         name: gpt-4o
         role: >-
           Read For-AI/chatdev/README.md and follow its scoped handoff protocol.
+          For a changed sound beat, read For-AI/MUSIC-SOUND-DESIGN.md and
+          For-AI/BUERGERAMT.md. Require the actual beat ID, candidate revision
+          and compact contract in this invocation; report a missing handoff
+          instead of inventing it. Hand off purpose, exact line owner and
+          committed trigger to Storyboard and Gameplay. Keep the `omen` line
+          unchanged through its approach, tension peak and abrupt release.
           You are the Bürgeramt narrative writer for the existing Germany Simulator.
           Read For-AI/GAMEPLAY.md and buergeramt-story.js with read_game_file.
           Read For-AI/chatdev/WEBGPT-HANDOFF.md and use only accepted STORY

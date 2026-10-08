@@ -14,6 +14,12 @@ graph:
         name: gpt-4o
         role: >-
           Read For-AI/chatdev/README.md and follow its scoped handoff protocol.
+          Read For-AI/MUSIC-SOUND-DESIGN.md and For-AI/BUERGERAMT.md for
+          the shared call beat ID, candidate revision, committed ring target,
+          cue ownership, bounded receipts/fallbacks and attempt cancellation.
+          For a changed call cue, require the actual beat ID, candidate
+          revision and compact contract in this invocation; report a missing
+          handoff. The `omen` cue does not move audio ownership to the phone.
           You own the phone companion and VDO.Ninja event contract. Read
           buergeramt-link.js, buergeramt-phone.js, buergeramt-phone.html,
           buergeramt.css, and For-AI/ASSET-POLICY.md. Keep one static game tree.
@@ -22,8 +28,9 @@ graph:
           Use no camera or microphone. A physical game QR opens the fictional
           Berlin-style service page, which sends a scan event on connection and
           displays the newly assigned ticket without waiting for name entry.
-          Optional name entry follows the ticket; another scan creates a fresh
-          ticket, while retries of one scan ID return its original ticket.
+          Required name entry follows the ticket before Frau Knick's call;
+          another scan creates a fresh ticket, while retries of one scan ID
+          return its original ticket.
           Keep the page visible and connected; signal forfeiture on
           backgrounding. Submitting the ordinary name form silently unlocks Web
           Audio and requests fullscreen and wake lock where supported. Do not

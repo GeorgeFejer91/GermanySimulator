@@ -1,0 +1,3139 @@
+{
+  "schemaVersion": 1,
+  "scope": "Eight optional Bürgeramt walkers and 19 named city NPCs with exact fixed dialogue; shared player/police/tourist roles and named quiz/crowd identities with compositional dialogue-source pointers. An additional traffic-driver profile is imported from shipped CC0 source clips.",
+  "source": [
+    "game.js",
+    "buergeramt-story.js",
+    "EmoDB_original/data/emodb"
+  ],
+  "characterCount": 27,
+  "dialogueCount": 93,
+  "roleProfileCount": 25,
+  "totalNewProfileCount": 52,
+  "distinctReferenceCount": 23,
+  "distinctSourceSpeakerCount": 10,
+  "characters": [
+    {
+      "gameCharacterId": "aktenkurier",
+      "voiceId": "amt-horst-stempelmann",
+      "fullName": "Horst Stempelmann",
+      "displayRole": "DER AKTENKURIER",
+      "gender": "male",
+      "genderEvidence": "buergeramt-story.js DER/DIE role label",
+      "generalDemeanor": "Strict, accusatory courier who treats crossing the Aktenlauf as a serious procedural offense.",
+      "demeanorEvidence": "Stopp. Sie haben den Aktenlauf ohne Laufzettel gekreuzt.",
+      "targetValence": "negative",
+      "targetArousal": "high",
+      "reference": {
+        "dataset": "Berlin Database of Emotional Speech (EmoDB), original 535-file release",
+        "releaseLicense": "CC0-1.0",
+        "speakerId": "3",
+        "speakerGender": "male",
+        "speakerAgeAtRecording": 31,
+        "emotionLabel": "anger",
+        "sourceFiles": [
+          {
+            "path": "EmoDB_original/data/emodb/wav/03a02Wb.wav",
+            "sha256": "a63350416f342a745f23b15db6a2f70ea90c62d22a787cccf68c0f3ff9e60fb4",
+            "emotion_confidence": "1.0"
+          },
+          {
+            "path": "EmoDB_original/data/emodb/wav/03a04Wc.wav",
+            "sha256": "aebd9130fcafb34972e2d949c7cfbff40f493d63b30b5842169ad4688421d055",
+            "emotion_confidence": "1.0"
+          },
+          {
+            "path": "EmoDB_original/data/emodb/wav/03a05Wa.wav",
+            "sha256": "f6ddddf2ad974a88fa841f47a9622191d4678725b9287246d43367afc0710089",
+            "emotion_confidence": "1.0"
+          },
+          {
+            "path": "EmoDB_original/data/emodb/wav/03b01Wa.wav",
+            "sha256": "be7effa7e5f777f41ee6f4106edfda690e1e8dfffdb4a03cc6caa7abb25fa731",
+            "emotion_confidence": "1.0"
+          }
+        ],
+        "workingReferenceSha256": "718d21fd8dc250521a21882f86795cf8652845df7c128e655c0e2e771ac3207e",
+        "referenceTranscript": "Das will sie am Mittwoch abgeben. Heute abend könnte ich es ihm sagen. Das schwarze Stück Papier befindet sich da oben neben dem Holzstück. Was sind denn das für Tüten, die da unter dem Tisch stehen.",
+        "referenceDurationSeconds": 9.788,
+        "ratingNote": "Emotion label has human recognition ratings. EmoDB has no per-file valence/arousal norm."
+      },
+      "dialogue": [
+        {
+          "locator": "buergeramt-story.js characters.aktenkurier.lines[0]",
+          "text": "Stopp. Sie haben den Aktenlauf ohne Laufzettel gekreuzt. Das gilt als Abkürzung und muss gestempelt werden.",
+          "tone": "warning",
+          "sceneValence": -0.55
+        },
+        {
+          "locator": "buergeramt-story.js characters.aktenkurier.lines[1]",
+          "text": "Ihr Formular ist jetzt im Umlauf. Bitte bleiben Sie stehen, bis es Sie eingeholt hat.",
+          "tone": "procedural",
+          "sceneValence": -0.18
+        },
+        {
+          "locator": "buergeramt-story.js omen.line",
+          "text": "Wer die Finsternis sieht, hat sie selbst gewählt!",
+          "tone": "dread",
+          "sceneValence": -0.9
+        }
+      ],
+      "secretTunnel": {
+        "profileName": "GS Horst Stempelmann (aktenkurier)",
+        "profileId": "c4c533edd860444e9e02ce0d22a78e8d",
+        "status": "profile-created; dialogue rendering and listening review pending",
+        "engine": "omnivoice-rs"
+      }
+    },
+    {
+      "gameCharacterId": "archivbotin",
+      "voiceId": "amt-gisela-aktenberg",
+      "fullName": "Gisela Aktenberg",
+      "displayRole": "DIE ARCHIVBOTIN",
+      "gender": "female",
+      "genderEvidence": "buergeramt-story.js DER/DIE role label",
+      "generalDemeanor": "Quietly ominous archivist who speaks of filing the player's existence as a threat.",
+      "demeanorEvidence": "Ich setze Ihren Vorgang vorsorglich auf Wiedervorlage.",
+      "targetValence": "negative",
+      "targetArousal": "medium",
+      "reference": {
+        "dataset": "Berlin Database of Emotional Speech (EmoDB), original 535-file release",
+        "releaseLicense": "CC0-1.0",
+        "speakerId": "13",
+        "speakerGender": "female",
+        "speakerAgeAtRecording": 32,
+        "emotionLabel": "fear",
+        "sourceFiles": [
+          {
+            "path": "EmoDB_original/data/emodb/wav/13a05Aa.wav",
+            "sha256": "360133300f896afd9ede1e5e310d2496f1fe19e178f1c0a4d1f3526b6043813a",
+            "emotion_confidence": "1.0"
+          },
+          {
+            "path": "EmoDB_original/data/emodb/wav/13b01Ab.wav",
+            "sha256": "2dd6aecef70ef47acd6faf2b493f8ca81b299fe6a7acd8c8c29f62cae49676e9",
+            "emotion_confidence": "1.0"
+          },
+          {
+            "path": "EmoDB_original/data/emodb/wav/13b09Ab.wav",
+            "sha256": "d9e229c637859f5a73a04c981126516c7b16f10f80fd76253d30d65c90369435",
+            "emotion_confidence": "1.0"
+          },
+          {
+            "path": "EmoDB_original/data/emodb/wav/13b03Ac.wav",
+            "sha256": "be24f3f9cd38dafcf8dc2bb49d9c7d548b6e3319fcecec514c76d8f43433dc77",
+            "emotion_confidence": "0.9523999999999999"
+          }
+        ],
+        "workingReferenceSha256": "aa5c45c11866075d29dce803d542521f21397070bb4ab97025046c5d87dd93fc",
+        "referenceTranscript": "Das schwarze Stück Papier befindet sich da oben neben dem Holzstück. Was sind denn das für Tüten, die da unter dem Tisch stehen. Ich will das eben wegbringen und dann mit Karl was trinken gehen. An den Wochenenden bin ich jetzt immer nach Hause gefahren und habe Agnes besucht.",
+        "referenceDurationSeconds": 11.035,
+        "ratingNote": "Emotion label has human recognition ratings. EmoDB has no per-file valence/arousal norm."
+      },
+      "dialogue": [
+        {
+          "locator": "buergeramt-story.js characters.archivbotin.lines[0]",
+          "text": "Sie stehen vor der Ablage, ohne abgelegt zu sein. Ich setze Ihren Vorgang vorsorglich auf Wiedervorlage.",
+          "tone": "dread",
+          "sceneValence": -0.48
+        },
+        {
+          "locator": "buergeramt-story.js characters.archivbotin.lines[1]",
+          "text": "Der Schlüssel passt. Das Schloss stellt noch einen Antrag auf Zuständigkeit.",
+          "tone": "procedural",
+          "sceneValence": -0.16
+        }
+      ],
+      "secretTunnel": {
+        "profileName": "GS Gisela Aktenberg (archivbotin)",
+        "profileId": "d5f6a634a33947798dc4c5087d1a71b7",
+        "status": "profile-created; dialogue rendering and listening review pending",
+        "engine": "omnivoice-rs"
+      }
+    },
+    {
+      "gameCharacterId": "formularsammler",
+      "voiceId": "amt-dieter-papiermann",
+      "fullName": "Dieter Papiermann",
+      "displayRole": "DER FORMULARSAMMLER",
+      "gender": "male",
+      "genderEvidence": "buergeramt-story.js DER/DIE role label",
+      "generalDemeanor": "Wearied and trapped in a loop of shuffled pages, with occasional fragile relief.",
+      "demeanorEvidence": "Wenn Blatt siebzehn wieder vorn steht, beginnt mein Termin von gestern noch einmal.",
+      "targetValence": "negative",
+      "targetArousal": "low",
+      "reference": {
+        "dataset": "Berlin Database of Emotional Speech (EmoDB), original 535-file release",
+        "releaseLicense": "CC0-1.0",
+        "speakerId": "11",
+        "speakerGender": "male",
+        "speakerAgeAtRecording": 26,
+        "emotionLabel": "sadness",
+        "sourceFiles": [
+          {
+            "path": "EmoDB_original/data/emodb/wav/11b10Td.wav",
+            "sha256": "a9da52d68e13a1730e218bb2dce87afcacee6b2736cb208f8821f3dd182da72c",
+            "emotion_confidence": "0.95"
+          },
+          {
+            "path": "EmoDB_original/data/emodb/wav/11b03Td.wav",
+            "sha256": "317aa38a919bf3cb5d63d2d2f35ed530e55e16cbda2fc5c870876854a10e6ce1",
+            "emotion_confidence": "0.9048"
+          }
+        ],
+        "workingReferenceSha256": "558259e7e4eaec780eeda7b547232ec8bb09075385c2ba9483bfef617339ff21",
+        "referenceTranscript": "Die wird auf dem Platz sein, wo wir sie immer hinlegen. An den Wochenenden bin ich jetzt immer nach Hause gefahren und habe Agnes besucht.",
+        "referenceDurationSeconds": 9.795,
+        "ratingNote": "Emotion label has human recognition ratings. EmoDB has no per-file valence/arousal norm."
+      },
+      "dialogue": [
+        {
+          "locator": "buergeramt-story.js characters.formularsammler.lines[0]",
+          "text": "Meine Seitenfolge ist nicht genehmigt. Wenn Blatt siebzehn wieder vorn steht, beginnt mein Termin von gestern noch einmal.",
+          "tone": "dread",
+          "sceneValence": -0.72
+        },
+        {
+          "locator": "buergeramt-story.js characters.formularsammler.lines[1]",
+          "text": "Die letzte Seite war leer. Frau Knick nennt das ein freies Zeitfenster. Ich nenne es Aussicht.",
+          "tone": "relief",
+          "sceneValence": 0.32
+        }
+      ],
+      "secretTunnel": {
+        "profileName": "GS Dieter Papiermann (formularsammler)",
+        "profileId": "058eff2142cb457f9bd3fb7471f5accd",
+        "status": "profile-created; dialogue rendering and listening review pending",
+        "engine": "omnivoice-rs"
+      }
+    },
+    {
+      "gameCharacterId": "nummernfluesterer",
+      "voiceId": "amt-ruediger-nummermann",
+      "fullName": "Rüdiger Nummermann",
+      "displayRole": "DER NUMMERNFLÜSTERER",
+      "gender": "male",
+      "genderEvidence": "buergeramt-story.js DER/DIE role label",
+      "generalDemeanor": "Anxious and wary of the supernatural queue display.",
+      "demeanorEvidence": "Die Anzeige hat meine Nummer geflüstert, bevor ich sie gezogen habe.",
+      "targetValence": "negative",
+      "targetArousal": "medium",
+      "reference": {
+        "dataset": "Berlin Database of Emotional Speech (EmoDB), original 535-file release",
+        "releaseLicense": "CC0-1.0",
+        "speakerId": "12",
+        "speakerGender": "male",
+        "speakerAgeAtRecording": 30,
+        "emotionLabel": "fear",
+        "sourceFiles": [
+          {
+            "path": "EmoDB_original/data/emodb/wav/12a07Ac.wav",
+            "sha256": "47b17aed93333f91fc5dfbb54c22f9ecb61190463a92d94383cb9dddb948c219",
+            "emotion_confidence": "1.0"
+          },
+          {
+            "path": "EmoDB_original/data/emodb/wav/12a05Ab.wav",
+            "sha256": "9123d16fcf780f6cdf6ecd3e833e8f74f3c61557b916227a2c455311c32b486a",
+            "emotion_confidence": "0.95"
+          },
+          {
+            "path": "EmoDB_original/data/emodb/wav/12b02Ad.wav",
+            "sha256": "45cccb485f32b875c7df3a44c60437f77c243369e7e2a7bbb4330c07a53e1cf4",
+            "emotion_confidence": "0.95"
+          },
+          {
+            "path": "EmoDB_original/data/emodb/wav/12a02Ac.wav",
+            "sha256": "8389c338c90b816874514d805a42201656d87aca74b40d96c0f5b84f5d6e1fdc",
+            "emotion_confidence": "0.9"
+          }
+        ],
+        "workingReferenceSha256": "66f055dd3a4e161537c62b12c28960fdc87ba75f044f4796cf26c89e03278402",
+        "referenceTranscript": "In sieben Stunden wird es soweit sein. Das schwarze Stück Papier befindet sich da oben neben dem Holzstück. Sie haben es gerade hochgetragen und jetzt gehen sie wieder runter. Das will sie am Mittwoch abgeben.",
+        "referenceDurationSeconds": 8.171,
+        "ratingNote": "Emotion label has human recognition ratings. EmoDB has no per-file valence/arousal norm."
+      },
+      "dialogue": [
+        {
+          "locator": "buergeramt-story.js characters.nummernfluesterer.lines[0]",
+          "text": "Die Anzeige hat meine Nummer geflüstert, bevor ich sie gezogen habe. Jetzt verlangt sie einen Nachweis, dass ich noch nicht dran bin.",
+          "tone": "dread",
+          "sceneValence": -0.78
+        },
+        {
+          "locator": "buergeramt-story.js characters.nummernfluesterer.lines[1]",
+          "text": "Wenn die Zahl wieder rückwärts läuft, bleibe ich hier. Für Fluchtwege ist Schalter zwei zuständig.",
+          "tone": "warning",
+          "sceneValence": -0.51
+        }
+      ],
+      "secretTunnel": {
+        "profileName": "GS Rüdiger Nummermann (nummernfluesterer)",
+        "profileId": "ddf57a3f27bf402ea8c446b88ff3bf26",
+        "status": "profile-created; dialogue rendering and listening review pending",
+        "engine": "omnivoice-rs"
+      }
+    },
+    {
+      "gameCharacterId": "nachtschichtmelderin",
+      "voiceId": "amt-ingrid-feierabend",
+      "fullName": "Ingrid Feierabend",
+      "displayRole": "DIE NACHTSCHICHT-MELDERIN",
+      "gender": "female",
+      "genderEvidence": "buergeramt-story.js DER/DIE role label",
+      "generalDemeanor": "Exhausted, detached, and quietly resigned to bureaucratic absurdity.",
+      "demeanorEvidence": "Ich soll sie noch einmal ausdrucken, bis sie müde aussieht.",
+      "targetValence": "negative",
+      "targetArousal": "low",
+      "reference": {
+        "dataset": "Berlin Database of Emotional Speech (EmoDB), original 535-file release",
+        "releaseLicense": "CC0-1.0",
+        "speakerId": "8",
+        "speakerGender": "female",
+        "speakerAgeAtRecording": 34,
+        "emotionLabel": "boredom",
+        "sourceFiles": [
+          {
+            "path": "EmoDB_original/data/emodb/wav/08b09Lc.wav",
+            "sha256": "aa52c6a86491138219f4ca940254b40ccce3dbe1676d2c15acbdb1a948df1963",
+            "emotion_confidence": "1.0"
+          },
+          {
+            "path": "EmoDB_original/data/emodb/wav/08b03Lc.wav",
+            "sha256": "99a6a52a05f97061d1f2c5e72a08f554b599171be68b05faf5d089dfb13b2fec",
+            "emotion_confidence": "0.9523999999999999"
+          }
+        ],
+        "workingReferenceSha256": "153b6e889f1217735fd500e13c6087db487f699735408121b2c21fc004b7813e",
+        "referenceTranscript": "Ich will das eben wegbringen und dann mit Karl was trinken gehen. An den Wochenenden bin ich jetzt immer nach Hause gefahren und habe Agnes besucht.",
+        "referenceDurationSeconds": 8.416,
+        "ratingNote": "Emotion label has human recognition ratings. EmoDB has no per-file valence/arousal norm."
+      },
+      "dialogue": [
+        {
+          "locator": "buergeramt-story.js characters.nachtschichtmelderin.lines[0]",
+          "text": "Mein Telefon ist tot. Die App bestätigt trotzdem, dass ich persönlich anwesend bin. Ich halte das Gerät hoch, damit es mich nicht vergisst.",
+          "tone": "dread",
+          "sceneValence": -0.62
+        },
+        {
+          "locator": "buergeramt-story.js characters.nachtschichtmelderin.lines[1]",
+          "text": "Meine Akte ist lesbar. Das ist offenbar der Formfehler. Ich soll sie noch einmal ausdrucken, bis sie müde aussieht.",
+          "tone": "procedural",
+          "sceneValence": -0.3
+        }
+      ],
+      "secretTunnel": {
+        "profileName": "GS Ingrid Feierabend (nachtschichtmelderin)",
+        "profileId": "a8c98109d59a4548bcd13f5ee1057062",
+        "status": "profile-created; dialogue rendering and listening review pending",
+        "engine": "omnivoice-rs"
+      }
+    },
+    {
+      "gameCharacterId": "pfandarchitektin",
+      "voiceId": "amt-baerbel-pfennig",
+      "fullName": "Bärbel Pfennig",
+      "displayRole": "DIE PFANDARCHITEKTIN",
+      "gender": "female",
+      "genderEvidence": "buergeramt-story.js DER/DIE role label",
+      "generalDemeanor": "Subdued and troubled by a receipt and filing system that seems to consume things.",
+      "demeanorEvidence": "Vielleicht hat die Ablage eine Seite behalten. Vielleicht war es meine Hand.",
+      "targetValence": "negative",
+      "targetArousal": "low",
+      "reference": {
+        "dataset": "Berlin Database of Emotional Speech (EmoDB), original 535-file release",
+        "releaseLicense": "CC0-1.0",
+        "speakerId": "14",
+        "speakerGender": "female",
+        "speakerAgeAtRecording": 35,
+        "emotionLabel": "sadness",
+        "sourceFiles": [
+          {
+            "path": "EmoDB_original/data/emodb/wav/14a04Tc.wav",
+            "sha256": "c83721be5126f9fbbdca71d4e81b475c1cd35700ae0997b8334a5423dc64f7ca",
+            "emotion_confidence": "1.0"
+          },
+          {
+            "path": "EmoDB_original/data/emodb/wav/14b02Tc.wav",
+            "sha256": "97c0cd7ec85ca670c0369a75e3a431f8be21375e852673eaa927aed3450c62b9",
+            "emotion_confidence": "0.95"
+          }
+        ],
+        "workingReferenceSha256": "4d22e565d396aaf9cea23b35a6421121fa0ce8bc2561681a67f0538c7995e880",
+        "referenceTranscript": "Heute abend könnte ich es ihm sagen. Sie haben es gerade hochgetragen und jetzt gehen sie wieder runter.",
+        "referenceDurationSeconds": 9.15,
+        "ratingNote": "Emotion label has human recognition ratings. EmoDB has no per-file valence/arousal norm."
+      },
+      "dialogue": [
+        {
+          "locator": "buergeramt-story.js characters.pfandarchitektin.lines[0]",
+          "text": "Dieser Bon ist länger als der Flur. Die Quittung für die Quittung fehlt noch; ohne sie darf ich den Anfang nicht abreißen.",
+          "tone": "procedural",
+          "sceneValence": -0.45
+        },
+        {
+          "locator": "buergeramt-story.js characters.pfandarchitektin.lines[1]",
+          "text": "Vorhin war mein Ordner leichter. Vielleicht hat die Ablage eine Seite behalten. Vielleicht war es meine Hand.",
+          "tone": "dread",
+          "sceneValence": -0.64
+        }
+      ],
+      "secretTunnel": {
+        "profileName": "GS Bärbel Pfennig (pfandarchitektin)",
+        "profileId": "76bf690f3117421b9ae8223953a661d8",
+        "status": "profile-created; dialogue rendering and listening review pending",
+        "engine": "omnivoice-rs"
+      }
+    },
+    {
+      "gameCharacterId": "kopiependler",
+      "voiceId": "amt-uwe-kopitz",
+      "fullName": "Uwe Kopitz",
+      "displayRole": "DER KOPIEPENDLER",
+      "gender": "male",
+      "genderEvidence": "buergeramt-story.js DER/DIE role label",
+      "generalDemeanor": "Dry, practical narrator of absurd document rules, with restrained frustration.",
+      "demeanorEvidence": "Jetzt gilt die Kopie als Original und mein Original als verdächtige Zweitschrift.",
+      "targetValence": "neutral",
+      "targetArousal": "medium",
+      "reference": {
+        "dataset": "Berlin Database of Emotional Speech (EmoDB), original 535-file release",
+        "releaseLicense": "CC0-1.0",
+        "speakerId": "10",
+        "speakerGender": "male",
+        "speakerAgeAtRecording": 32,
+        "emotionLabel": "neutral",
+        "sourceFiles": [
+          {
+            "path": "EmoDB_original/data/emodb/wav/10a01Nb.wav",
+            "sha256": "555ea754d454b962756745c52fce91531f25a35c9b153552fa50a7e9a685e17e",
+            "emotion_confidence": "0.9"
+          },
+          {
+            "path": "EmoDB_original/data/emodb/wav/10a02Na.wav",
+            "sha256": "83d8f943bc272d68bb96ce7086ecec1db029aab423c341e016398e3d60d63444",
+            "emotion_confidence": "0.9"
+          },
+          {
+            "path": "EmoDB_original/data/emodb/wav/10a04Nb.wav",
+            "sha256": "922b2d1747c86cb262e1fe1d501e2d358fa9e7554ac9a5857523701da6fb3359",
+            "emotion_confidence": "0.9"
+          },
+          {
+            "path": "EmoDB_original/data/emodb/wav/10b02Na.wav",
+            "sha256": "b56a347e757378199c5f09f6b0e5103705cd750173ac89251f9cb7a9d81c078b",
+            "emotion_confidence": "0.8"
+          }
+        ],
+        "workingReferenceSha256": "a0de93a250f749c1bcd7f7cda9b12c2810c97dbe9426b602b2973b8c76fb9b3b",
+        "referenceTranscript": "Der Lappen liegt auf dem Eisschrank. Das will sie am Mittwoch abgeben. Heute abend könnte ich es ihm sagen. Sie haben es gerade hochgetragen und jetzt gehen sie wieder runter.",
+        "referenceDurationSeconds": 8.238,
+        "ratingNote": "Emotion label has human recognition ratings. EmoDB has no per-file valence/arousal norm."
+      },
+      "dialogue": [
+        {
+          "locator": "buergeramt-story.js characters.kopiependler.lines[0]",
+          "text": "Ich habe das Original kopiert, wie verlangt. Jetzt gilt die Kopie als Original und mein Original als verdächtige Zweitschrift.",
+          "tone": "warning",
+          "sceneValence": -0.54
+        },
+        {
+          "locator": "buergeramt-story.js characters.kopiependler.lines[1]",
+          "text": "Der Fahrradhelm ist keine Kopfbedeckung. Das hat Schalter vier schriftlich bestätigt; das Schreiben liegt unter dem Helm.",
+          "tone": "relief",
+          "sceneValence": 0.15
+        }
+      ],
+      "secretTunnel": {
+        "profileName": "GS Uwe Kopitz (kopiependler)",
+        "profileId": "0e7b0460e547478b93d57d8d8932e3d4",
+        "status": "profile-created; dialogue rendering and listening review pending",
+        "engine": "omnivoice-rs"
+      }
+    },
+    {
+      "gameCharacterId": "warteschlangenpoetin",
+      "voiceId": "amt-hilde-wartenscheidt",
+      "fullName": "Hilde Wartenscheidt",
+      "displayRole": "DIE WARTESCHLANGENPOETIN",
+      "gender": "female",
+      "genderEvidence": "buergeramt-story.js DER/DIE role label",
+      "generalDemeanor": "Reflective and melancholy, speaking of waiting and unsigned words.",
+      "demeanorEvidence": "Also bleibt er vorläufig ein Geräusch.",
+      "targetValence": "negative",
+      "targetArousal": "low",
+      "reference": {
+        "dataset": "Berlin Database of Emotional Speech (EmoDB), original 535-file release",
+        "releaseLicense": "CC0-1.0",
+        "speakerId": "16",
+        "speakerGender": "female",
+        "speakerAgeAtRecording": 31,
+        "emotionLabel": "sadness",
+        "sourceFiles": [
+          {
+            "path": "EmoDB_original/data/emodb/wav/16a01Tb.wav",
+            "sha256": "349c7785fff5fb69960f9025bffc59689c1f424941990b45fa761717c77e376e",
+            "emotion_confidence": "1.0"
+          },
+          {
+            "path": "EmoDB_original/data/emodb/wav/16a05Tb.wav",
+            "sha256": "3310bf53527527a58f1501a9cd7fb6c5c866150033681bb187cdb641ad5091c9",
+            "emotion_confidence": "1.0"
+          }
+        ],
+        "workingReferenceSha256": "68e751a881225e09b11e8fd8a4b16244078b8198945f14e8b474e3456eb28d1e",
+        "referenceTranscript": "Der Lappen liegt auf dem Eisschrank. Das schwarze Stück Papier befindet sich da oben neben dem Holzstück.",
+        "referenceDurationSeconds": 9.396,
+        "ratingNote": "Emotion label has human recognition ratings. EmoDB has no per-file valence/arousal norm."
+      },
+      "dialogue": [
+        {
+          "locator": "buergeramt-story.js characters.warteschlangenpoetin.lines[0]",
+          "text": "Die Nummer auf meinem Zettel hat sich verdoppelt. Ich soll beweisen, welche Hälfte zuerst gewartet hat.",
+          "tone": "dread",
+          "sceneValence": -0.7
+        },
+        {
+          "locator": "buergeramt-story.js characters.warteschlangenpoetin.lines[1]",
+          "text": "Auf der Rückseite steht endlich ein Satz. Leider ist er nicht unterschrieben, also bleibt er vorläufig ein Geräusch.",
+          "tone": "relief",
+          "sceneValence": 0.24
+        }
+      ],
+      "secretTunnel": {
+        "profileName": "GS Hilde Wartenscheidt (warteschlangenpoetin)",
+        "profileId": "9c69e067d71c44449dba5806b780ce98",
+        "status": "profile-created; dialogue rendering and listening review pending",
+        "engine": "omnivoice-rs"
+      }
+    },
+    {
+      "gameCharacterId": "city-klaus-dieter-klein",
+      "voiceId": "stadt-klaus-dieter-klein",
+      "fullName": "Klaus-Dieter Klein",
+      "displayRole": "HERR KLEIN",
+      "gender": "male",
+      "genderEvidence": "game.js HERR/FRAU label",
+      "generalDemeanor": "Practical, matter-of-fact passerby who points toward forms.",
+      "demeanorEvidence": "Also das ist jetzt aber auch nicht so gedacht.",
+      "targetValence": "neutral",
+      "targetArousal": "medium",
+      "reference": {
+        "dataset": "Berlin Database of Emotional Speech (EmoDB), original 535-file release",
+        "releaseLicense": "CC0-1.0",
+        "speakerId": "10",
+        "speakerGender": "male",
+        "speakerAgeAtRecording": 32,
+        "emotionLabel": "neutral",
+        "sourceFiles": [
+          {
+            "path": "EmoDB_original/data/emodb/wav/10a01Nb.wav",
+            "sha256": "555ea754d454b962756745c52fce91531f25a35c9b153552fa50a7e9a685e17e",
+            "emotion_confidence": "0.9"
+          },
+          {
+            "path": "EmoDB_original/data/emodb/wav/10a02Na.wav",
+            "sha256": "83d8f943bc272d68bb96ce7086ecec1db029aab423c341e016398e3d60d63444",
+            "emotion_confidence": "0.9"
+          },
+          {
+            "path": "EmoDB_original/data/emodb/wav/10a04Nb.wav",
+            "sha256": "922b2d1747c86cb262e1fe1d501e2d358fa9e7554ac9a5857523701da6fb3359",
+            "emotion_confidence": "0.9"
+          },
+          {
+            "path": "EmoDB_original/data/emodb/wav/10b02Na.wav",
+            "sha256": "b56a347e757378199c5f09f6b0e5103705cd750173ac89251f9cb7a9d81c078b",
+            "emotion_confidence": "0.8"
+          }
+        ],
+        "workingReferenceSha256": "a0de93a250f749c1bcd7f7cda9b12c2810c97dbe9426b602b2973b8c76fb9b3b",
+        "referenceTranscript": "Der Lappen liegt auf dem Eisschrank. Das will sie am Mittwoch abgeben. Heute abend könnte ich es ihm sagen. Sie haben es gerade hochgetragen und jetzt gehen sie wieder runter.",
+        "referenceDurationSeconds": 8.238,
+        "ratingNote": "Emotion label has human recognition ratings. EmoDB has no per-file valence/arousal norm."
+      },
+      "dialogue": [
+        {
+          "region": "germany",
+          "text": "Also das ist jetzt aber auch nicht so gedacht.",
+          "locator": "game.js npcLines[0]"
+        },
+        {
+          "region": "germany",
+          "text": "Dafür gibt es bestimmt ein Formular.",
+          "locator": "game.js npcLines[3]"
+        },
+        {
+          "region": "berlin",
+          "text": "Also this ist jetzt aber auch nicht so gedacht.",
+          "locator": "game.js npcDenglisch[0]"
+        },
+        {
+          "region": "berlin",
+          "text": "Dafür gibt es bestimmt ein Formular, probably online but not really.",
+          "locator": "game.js npcDenglisch[3]"
+        }
+      ],
+      "secretTunnel": {
+        "profileName": "GS Klaus-Dieter Klein (HERR KLEIN)",
+        "profileId": "8182da73a54c429391924d62ee339037",
+        "status": "profile-created; dialogue rendering and listening review pending",
+        "engine": "omnivoice-rs"
+      }
+    },
+    {
+      "gameCharacterId": "city-brigitte-mueller",
+      "voiceId": "stadt-brigitte-mueller",
+      "fullName": "Brigitte Müller",
+      "displayRole": "FRAU MÜLLER",
+      "gender": "female",
+      "genderEvidence": "game.js HERR/FRAU label",
+      "generalDemeanor": "Patient and procedural, directing the player toward the construction paperwork.",
+      "demeanorEvidence": "Dafür gibt es bestimmt ein Formular.",
+      "targetValence": "neutral",
+      "targetArousal": "medium",
+      "reference": {
+        "dataset": "Berlin Database of Emotional Speech (EmoDB), original 535-file release",
+        "releaseLicense": "CC0-1.0",
+        "speakerId": "9",
+        "speakerGender": "female",
+        "speakerAgeAtRecording": 21,
+        "emotionLabel": "neutral",
+        "sourceFiles": [
+          {
+            "path": "EmoDB_original/data/emodb/wav/09a05Nb.wav",
+            "sha256": "62e2dcdd728b2c71618b32bbb643a0a099d06ed6362ddc0ecd1b54d271f38e25",
+            "emotion_confidence": "1.0"
+          },
+          {
+            "path": "EmoDB_original/data/emodb/wav/09b02Na.wav",
+            "sha256": "2d227932fe45ba80130890a290b5cb1810cbebae429049967b25a680d8eb7c4e",
+            "emotion_confidence": "1.0"
+          },
+          {
+            "path": "EmoDB_original/data/emodb/wav/09b03Nb.wav",
+            "sha256": "a3a983e176eab81794e726557c4e2812bf71b5d5bc6aa598cfae97b05d3d9dc7",
+            "emotion_confidence": "0.9523999999999999"
+          }
+        ],
+        "workingReferenceSha256": "6a1d75a9744802aeda79b9219dac09256c9eefc5c862af66bfee3d27d5b6778d",
+        "referenceTranscript": "Das schwarze Stück Papier befindet sich da oben neben dem Holzstück. Sie haben es gerade hochgetragen und jetzt gehen sie wieder runter. An den Wochenenden bin ich jetzt immer nach Hause gefahren und habe Agnes besucht.",
+        "referenceDurationSeconds": 9.597,
+        "ratingNote": "Emotion label has human recognition ratings. EmoDB has no per-file valence/arousal norm."
+      },
+      "dialogue": [
+        {
+          "region": "germany",
+          "text": "Dafür gibt es bestimmt ein Formular.",
+          "locator": "game.js npcLines[3]"
+        },
+        {
+          "region": "germany",
+          "text": "Das ist bestimmt wegen der Baustelle. Die ist seit 2009 da.",
+          "locator": "game.js npcLines[6]"
+        },
+        {
+          "region": "berlin",
+          "text": "Dafür gibt es bestimmt ein Formular, probably online but not really.",
+          "locator": "game.js npcDenglisch[3]"
+        },
+        {
+          "region": "berlin",
+          "text": "Das ist bestimmt wegen der Baustelle. Die ist since 2009 da.",
+          "locator": "game.js npcDenglisch[6]"
+        }
+      ],
+      "secretTunnel": {
+        "profileName": "GS Brigitte Müller (FRAU MÜLLER)",
+        "profileId": "8ddc4332b0814aff81e841e116c3b765",
+        "status": "profile-created; dialogue rendering and listening review pending",
+        "engine": "omnivoice-rs"
+      }
+    },
+    {
+      "gameCharacterId": "city-wolfgang-schulz",
+      "voiceId": "stadt-wolfgang-schulz",
+      "fullName": "Wolfgang Schulz",
+      "displayRole": "HERR SCHULZ",
+      "gender": "male",
+      "genderEvidence": "game.js HERR/FRAU label",
+      "generalDemeanor": "Routine appointment-minded citizen.",
+      "demeanorEvidence": "Das ist bestimmt wegen der Baustelle. Die ist seit 2009 da.",
+      "targetValence": "neutral",
+      "targetArousal": "medium",
+      "reference": {
+        "dataset": "Berlin Database of Emotional Speech (EmoDB), original 535-file release",
+        "releaseLicense": "CC0-1.0",
+        "speakerId": "11",
+        "speakerGender": "male",
+        "speakerAgeAtRecording": 26,
+        "emotionLabel": "neutral",
+        "sourceFiles": [
+          {
+            "path": "EmoDB_original/data/emodb/wav/11a01Nd.wav",
+            "sha256": "72a166e4ab361962c9f48440049288a7c0fcbf885a176f45b7576b08152cea59",
+            "emotion_confidence": "1.0"
+          },
+          {
+            "path": "EmoDB_original/data/emodb/wav/11a02Nc.wav",
+            "sha256": "8d8818704169f26f88877b9b765634f635381f108f89c51ea3e6f4d90934c6d9",
+            "emotion_confidence": "1.0"
+          },
+          {
+            "path": "EmoDB_original/data/emodb/wav/11b03Nb.wav",
+            "sha256": "b0137551a24589e848d4da15cd695c7d53b8d93ac1023c30fdf8e1925855c93a",
+            "emotion_confidence": "0.9523999999999999"
+          },
+          {
+            "path": "EmoDB_original/data/emodb/wav/11b01Nc.wav",
+            "sha256": "002a0d331883e7c7213d49f10b980c2f6e77b9a3be667eb58bc3393b28deb1ed",
+            "emotion_confidence": "0.95"
+          }
+        ],
+        "workingReferenceSha256": "fa0650538001ac77d41584c3742fcc0ceb262ba43e7206a66dbd2ab1e33d9161",
+        "referenceTranscript": "Der Lappen liegt auf dem Eisschrank. Das will sie am Mittwoch abgeben. An den Wochenenden bin ich jetzt immer nach Hause gefahren und habe Agnes besucht. Was sind denn das für Tüten, die da unter dem Tisch stehen.",
+        "referenceDurationSeconds": 9.012,
+        "ratingNote": "Emotion label has human recognition ratings. EmoDB has no per-file valence/arousal norm."
+      },
+      "dialogue": [
+        {
+          "region": "germany",
+          "text": "Das ist bestimmt wegen der Baustelle. Die ist seit 2009 da.",
+          "locator": "game.js npcLines[6]"
+        },
+        {
+          "region": "germany",
+          "text": "Haben Sie dafür einen Termin?",
+          "locator": "game.js npcLines[9]"
+        },
+        {
+          "region": "berlin",
+          "text": "Das ist bestimmt wegen der Baustelle. Die ist since 2009 da.",
+          "locator": "game.js npcDenglisch[6]"
+        },
+        {
+          "region": "berlin",
+          "text": "Haben Sie dafür einen appointment?",
+          "locator": "game.js npcDenglisch[9]"
+        }
+      ],
+      "secretTunnel": {
+        "profileName": "GS Wolfgang Schulz (HERR SCHULZ)",
+        "profileId": "06c942339c3144298f6ce8ed7f09bf48",
+        "status": "profile-created; dialogue rendering and listening review pending",
+        "engine": "omnivoice-rs"
+      }
+    },
+    {
+      "gameCharacterId": "city-ursula-neumann",
+      "voiceId": "stadt-ursula-neumann",
+      "fullName": "Ursula Neumann",
+      "displayRole": "FRAU NEUMANN",
+      "gender": "female",
+      "genderEvidence": "game.js HERR/FRAU label",
+      "generalDemeanor": "Restrained but openly complaining about obstruction.",
+      "demeanorEvidence": "Ich möchte mich nicht beschweren, aber ich beschwere mich.",
+      "targetValence": "negative",
+      "targetArousal": "medium",
+      "reference": {
+        "dataset": "Berlin Database of Emotional Speech (EmoDB), original 535-file release",
+        "releaseLicense": "CC0-1.0",
+        "speakerId": "13",
+        "speakerGender": "female",
+        "speakerAgeAtRecording": 32,
+        "emotionLabel": "neutral",
+        "sourceFiles": [
+          {
+            "path": "EmoDB_original/data/emodb/wav/13a05Nb.wav",
+            "sha256": "226eaca17c21af48750cb0810b17f57fab95b94136664d9b5cd22e4dc1577f58",
+            "emotion_confidence": "1.0"
+          },
+          {
+            "path": "EmoDB_original/data/emodb/wav/13b10Nc.wav",
+            "sha256": "9f5fd5da715c6d6e508c094e47e3056afe78c785c68733b94a6aaa5400d9805f",
+            "emotion_confidence": "1.0"
+          },
+          {
+            "path": "EmoDB_original/data/emodb/wav/13a01Nb.wav",
+            "sha256": "ee86d37de58e6792617bb4005264b9df2ab0193e9391816c8d4f50a1ae24f538",
+            "emotion_confidence": "0.95"
+          },
+          {
+            "path": "EmoDB_original/data/emodb/wav/13b02Nb.wav",
+            "sha256": "2d8dbd9f0352e258dc802247c1be2804cddda0467823f0489f07abd52c935962",
+            "emotion_confidence": "0.95"
+          }
+        ],
+        "workingReferenceSha256": "23e4afaf59ef15cb0988feea0439793450268aa5dd9e916c69834b48df647747",
+        "referenceTranscript": "Das schwarze Stück Papier befindet sich da oben neben dem Holzstück. Die wird auf dem Platz sein, wo wir sie immer hinlegen. Der Lappen liegt auf dem Eisschrank. Sie haben es gerade hochgetragen und jetzt gehen sie wieder runter.",
+        "referenceDurationSeconds": 9.857,
+        "ratingNote": "Emotion label has human recognition ratings. EmoDB has no per-file valence/arousal norm."
+      },
+      "dialogue": [
+        {
+          "region": "germany",
+          "text": "Ich möchte mich nicht beschweren, aber ich beschwere mich.",
+          "locator": "game.js npcLines[2]"
+        },
+        {
+          "region": "germany",
+          "text": "Sie stehen minimal im Weg.",
+          "locator": "game.js npcLines[5]"
+        },
+        {
+          "region": "berlin",
+          "text": "Ich möchte mich nicht complainen, aber ich complain jetzt.",
+          "locator": "game.js npcDenglisch[2]"
+        },
+        {
+          "region": "berlin",
+          "text": "Sie stehen minimal im way.",
+          "locator": "game.js npcDenglisch[5]"
+        }
+      ],
+      "secretTunnel": {
+        "profileName": "GS Ursula Neumann (FRAU NEUMANN)",
+        "profileId": "5bd2927872e147fc978f49fa8fd893d2",
+        "status": "profile-created; dialogue rendering and listening review pending",
+        "engine": "omnivoice-rs"
+      }
+    },
+    {
+      "gameCharacterId": "city-manfred-din",
+      "voiceId": "stadt-manfred-din",
+      "fullName": "Manfred DIN",
+      "displayRole": "HERR DIN",
+      "gender": "male",
+      "genderEvidence": "game.js HERR/FRAU label",
+      "generalDemeanor": "Pedantic believer in order who speaks without urgency.",
+      "demeanorEvidence": "Ordnung muss schon sein.",
+      "targetValence": "neutral",
+      "targetArousal": "medium",
+      "reference": {
+        "dataset": "Berlin Database of Emotional Speech (EmoDB), original 535-file release",
+        "releaseLicense": "CC0-1.0",
+        "speakerId": "15",
+        "speakerGender": "male",
+        "speakerAgeAtRecording": 25,
+        "emotionLabel": "neutral",
+        "sourceFiles": [
+          {
+            "path": "EmoDB_original/data/emodb/wav/15a02Na.wav",
+            "sha256": "fd48f13429d841a1f308c1f87783b6ba4fb8163cf20ba1dd86853da15ae38e64",
+            "emotion_confidence": "1.0"
+          },
+          {
+            "path": "EmoDB_original/data/emodb/wav/15a05Na.wav",
+            "sha256": "3d1a0afaa40c739126ab46b9887c546d114f221662c64d4b558f9797b2a21e2e",
+            "emotion_confidence": "1.0"
+          },
+          {
+            "path": "EmoDB_original/data/emodb/wav/15a07Nc.wav",
+            "sha256": "e8879681fa13eef2c9695fcc9d23cf64d205e4334acf64bb29c418209eb65879",
+            "emotion_confidence": "1.0"
+          },
+          {
+            "path": "EmoDB_original/data/emodb/wav/15b02Nd.wav",
+            "sha256": "ca62ce49d5f84916a6c9e1e0158e735b672837a10d94e46a5228fb0160c5abba",
+            "emotion_confidence": "1.0"
+          }
+        ],
+        "workingReferenceSha256": "d1e62cfd22ce22467c3ce9c3dcc9e19cbbae6e7232b89c1916454ba6ccf4450f",
+        "referenceTranscript": "Das will sie am Mittwoch abgeben. Das schwarze Stück Papier befindet sich da oben neben dem Holzstück. In sieben Stunden wird es soweit sein. Sie haben es gerade hochgetragen und jetzt gehen sie wieder runter.",
+        "referenceDurationSeconds": 9.406,
+        "ratingNote": "Emotion label has human recognition ratings. EmoDB has no per-file valence/arousal norm."
+      },
+      "dialogue": [
+        {
+          "region": "germany",
+          "text": "Ordnung muss schon sein.",
+          "locator": "game.js npcLines[8]"
+        },
+        {
+          "region": "germany",
+          "text": "Kann man machen. Muss man aber wirklich nicht.",
+          "locator": "game.js npcLines[1]"
+        },
+        {
+          "region": "berlin",
+          "text": "Ordnung muss schon sein, you know.",
+          "locator": "game.js npcDenglisch[8]"
+        },
+        {
+          "region": "berlin",
+          "text": "Kann man machen. Muss man aber really nicht.",
+          "locator": "game.js npcDenglisch[1]"
+        }
+      ],
+      "secretTunnel": {
+        "profileName": "GS Manfred DIN (HERR DIN)",
+        "profileId": "ce35631d413c42fe83a7637174c3e4a1",
+        "status": "profile-created; dialogue rendering and listening review pending",
+        "engine": "omnivoice-rs"
+      }
+    },
+    {
+      "gameCharacterId": "city-irmgard-aktenstapel",
+      "voiceId": "stadt-irmgard-aktenstapel",
+      "fullName": "Irmgard Aktenstapel",
+      "displayRole": "FRAU AKTENSTAPEL",
+      "gender": "female",
+      "genderEvidence": "game.js HERR/FRAU label",
+      "generalDemeanor": "Weary citizen familiar with old forms and construction delays.",
+      "demeanorEvidence": "Dafür gibt es bestimmt ein Formular.",
+      "targetValence": "negative",
+      "targetArousal": "low",
+      "reference": {
+        "dataset": "Berlin Database of Emotional Speech (EmoDB), original 535-file release",
+        "releaseLicense": "CC0-1.0",
+        "speakerId": "8",
+        "speakerGender": "female",
+        "speakerAgeAtRecording": 34,
+        "emotionLabel": "boredom",
+        "sourceFiles": [
+          {
+            "path": "EmoDB_original/data/emodb/wav/08b09Lc.wav",
+            "sha256": "aa52c6a86491138219f4ca940254b40ccce3dbe1676d2c15acbdb1a948df1963",
+            "emotion_confidence": "1.0"
+          },
+          {
+            "path": "EmoDB_original/data/emodb/wav/08b03Lc.wav",
+            "sha256": "99a6a52a05f97061d1f2c5e72a08f554b599171be68b05faf5d089dfb13b2fec",
+            "emotion_confidence": "0.9523999999999999"
+          }
+        ],
+        "workingReferenceSha256": "153b6e889f1217735fd500e13c6087db487f699735408121b2c21fc004b7813e",
+        "referenceTranscript": "Ich will das eben wegbringen und dann mit Karl was trinken gehen. An den Wochenenden bin ich jetzt immer nach Hause gefahren und habe Agnes besucht.",
+        "referenceDurationSeconds": 8.416,
+        "ratingNote": "Emotion label has human recognition ratings. EmoDB has no per-file valence/arousal norm."
+      },
+      "dialogue": [
+        {
+          "region": "germany",
+          "text": "Dafür gibt es bestimmt ein Formular.",
+          "locator": "game.js npcLines[3]"
+        },
+        {
+          "region": "germany",
+          "text": "Das ist bestimmt wegen der Baustelle. Die ist seit 2009 da.",
+          "locator": "game.js npcLines[6]"
+        },
+        {
+          "region": "berlin",
+          "text": "Dafür gibt es bestimmt ein Formular, probably online but not really.",
+          "locator": "game.js npcDenglisch[3]"
+        },
+        {
+          "region": "berlin",
+          "text": "Das ist bestimmt wegen der Baustelle. Die ist since 2009 da.",
+          "locator": "game.js npcDenglisch[6]"
+        }
+      ],
+      "secretTunnel": {
+        "profileName": "GS Irmgard Aktenstapel (FRAU AKTENSTAPEL)",
+        "profileId": "c166075128d247fabf12e786bfaa60a6",
+        "status": "profile-created; dialogue rendering and listening review pending",
+        "engine": "omnivoice-rs"
+      }
+    },
+    {
+      "gameCharacterId": "city-guenther-tuev",
+      "voiceId": "stadt-guenther-tuev",
+      "fullName": "Günther TÜV",
+      "displayRole": "HERR TÜV",
+      "gender": "male",
+      "genderEvidence": "game.js HERR/FRAU label",
+      "generalDemeanor": "Strict, energized enforcer of everyday order.",
+      "demeanorEvidence": "Ordnung muss schon sein.",
+      "targetValence": "negative",
+      "targetArousal": "high",
+      "reference": {
+        "dataset": "Berlin Database of Emotional Speech (EmoDB), original 535-file release",
+        "releaseLicense": "CC0-1.0",
+        "speakerId": "3",
+        "speakerGender": "male",
+        "speakerAgeAtRecording": 31,
+        "emotionLabel": "anger",
+        "sourceFiles": [
+          {
+            "path": "EmoDB_original/data/emodb/wav/03a02Wb.wav",
+            "sha256": "a63350416f342a745f23b15db6a2f70ea90c62d22a787cccf68c0f3ff9e60fb4",
+            "emotion_confidence": "1.0"
+          },
+          {
+            "path": "EmoDB_original/data/emodb/wav/03a04Wc.wav",
+            "sha256": "aebd9130fcafb34972e2d949c7cfbff40f493d63b30b5842169ad4688421d055",
+            "emotion_confidence": "1.0"
+          },
+          {
+            "path": "EmoDB_original/data/emodb/wav/03a05Wa.wav",
+            "sha256": "f6ddddf2ad974a88fa841f47a9622191d4678725b9287246d43367afc0710089",
+            "emotion_confidence": "1.0"
+          },
+          {
+            "path": "EmoDB_original/data/emodb/wav/03b01Wa.wav",
+            "sha256": "be7effa7e5f777f41ee6f4106edfda690e1e8dfffdb4a03cc6caa7abb25fa731",
+            "emotion_confidence": "1.0"
+          }
+        ],
+        "workingReferenceSha256": "718d21fd8dc250521a21882f86795cf8652845df7c128e655c0e2e771ac3207e",
+        "referenceTranscript": "Das will sie am Mittwoch abgeben. Heute abend könnte ich es ihm sagen. Das schwarze Stück Papier befindet sich da oben neben dem Holzstück. Was sind denn das für Tüten, die da unter dem Tisch stehen.",
+        "referenceDurationSeconds": 9.788,
+        "ratingNote": "Emotion label has human recognition ratings. EmoDB has no per-file valence/arousal norm."
+      },
+      "dialogue": [
+        {
+          "region": "germany",
+          "text": "Ordnung muss schon sein.",
+          "locator": "game.js npcLines[8]"
+        },
+        {
+          "region": "germany",
+          "text": "Kann man machen. Muss man aber wirklich nicht.",
+          "locator": "game.js npcLines[1]"
+        },
+        {
+          "region": "berlin",
+          "text": "Ordnung muss schon sein, you know.",
+          "locator": "game.js npcDenglisch[8]"
+        },
+        {
+          "region": "berlin",
+          "text": "Kann man machen. Muss man aber really nicht.",
+          "locator": "game.js npcDenglisch[1]"
+        }
+      ],
+      "secretTunnel": {
+        "profileName": "GS Günther TÜV (HERR TÜV)",
+        "profileId": "e3b5de97e2e34fdcbbe48962ba16667e",
+        "status": "profile-created; dialogue rendering and listening review pending",
+        "engine": "omnivoice-rs"
+      }
+    },
+    {
+      "gameCharacterId": "city-hannelore-sparkasse",
+      "voiceId": "stadt-hannelore-sparkasse",
+      "fullName": "Hannelore Sparkasse",
+      "displayRole": "FRAU SPARKASSE",
+      "gender": "female",
+      "genderEvidence": "game.js HERR/FRAU label",
+      "generalDemeanor": "Dryly asks the player to clear her path and obey order.",
+      "demeanorEvidence": "Sie stehen minimal im Weg.",
+      "targetValence": "neutral",
+      "targetArousal": "medium",
+      "reference": {
+        "dataset": "Berlin Database of Emotional Speech (EmoDB), original 535-file release",
+        "releaseLicense": "CC0-1.0",
+        "speakerId": "16",
+        "speakerGender": "female",
+        "speakerAgeAtRecording": 31,
+        "emotionLabel": "neutral",
+        "sourceFiles": [
+          {
+            "path": "EmoDB_original/data/emodb/wav/16b03Nb.wav",
+            "sha256": "5ed60e093a3dc74bc75ad1d51b2398ef8279e86fad7b38353833c7e908791481",
+            "emotion_confidence": "0.9523999999999999"
+          },
+          {
+            "path": "EmoDB_original/data/emodb/wav/16a04Nc.wav",
+            "sha256": "18e75f57db701531629427c79ed0a2a42458a639effcb2a88a2059d508cb4f1d",
+            "emotion_confidence": "0.95"
+          },
+          {
+            "path": "EmoDB_original/data/emodb/wav/16a01Nc.wav",
+            "sha256": "bf546f2ffb75d020b64d4f98c873ea4ad7d325d1edd8ce8150add6cbf9656cd8",
+            "emotion_confidence": "0.9"
+          },
+          {
+            "path": "EmoDB_original/data/emodb/wav/16a07Nb.wav",
+            "sha256": "472c14af5a6cf0ba0c7cf98a5432163b39671255865d47de984078f6c1e4d760",
+            "emotion_confidence": "0.9"
+          }
+        ],
+        "workingReferenceSha256": "caa317b927b7d986a52aec26a204cafe1ec65606cec4cee57ac1653effdf1952",
+        "referenceTranscript": "An den Wochenenden bin ich jetzt immer nach Hause gefahren und habe Agnes besucht. Heute abend könnte ich es ihm sagen. Der Lappen liegt auf dem Eisschrank. In sieben Stunden wird es soweit sein.",
+        "referenceDurationSeconds": 9.504,
+        "ratingNote": "Emotion label has human recognition ratings. EmoDB has no per-file valence/arousal norm."
+      },
+      "dialogue": [
+        {
+          "region": "germany",
+          "text": "Sie stehen minimal im Weg.",
+          "locator": "game.js npcLines[5]"
+        },
+        {
+          "region": "germany",
+          "text": "Ordnung muss schon sein.",
+          "locator": "game.js npcLines[8]"
+        },
+        {
+          "region": "berlin",
+          "text": "Sie stehen minimal im way.",
+          "locator": "game.js npcDenglisch[5]"
+        },
+        {
+          "region": "berlin",
+          "text": "Ordnung muss schon sein, you know.",
+          "locator": "game.js npcDenglisch[8]"
+        }
+      ],
+      "secretTunnel": {
+        "profileName": "GS Hannelore Sparkasse (FRAU SPARKASSE)",
+        "profileId": "112312dbaaab44bb90e639b531b69d27",
+        "status": "profile-created; dialogue rendering and listening review pending",
+        "engine": "omnivoice-rs"
+      }
+    },
+    {
+      "gameCharacterId": "city-karl-heinz-post",
+      "voiceId": "stadt-karl-heinz-post",
+      "fullName": "Karl-Heinz Post",
+      "displayRole": "HERR POST",
+      "gender": "male",
+      "genderEvidence": "game.js HERR/FRAU label",
+      "generalDemeanor": "Detached postal worker who disclaims responsibility.",
+      "demeanorEvidence": "Dafür bin ich nicht zuständig.",
+      "targetValence": "neutral",
+      "targetArousal": "medium",
+      "reference": {
+        "dataset": "Berlin Database of Emotional Speech (EmoDB), original 535-file release",
+        "releaseLicense": "CC0-1.0",
+        "speakerId": "12",
+        "speakerGender": "male",
+        "speakerAgeAtRecording": 30,
+        "emotionLabel": "neutral",
+        "sourceFiles": [
+          {
+            "path": "EmoDB_original/data/emodb/wav/12a01Nb.wav",
+            "sha256": "63f28c8cbde0a7971fc24d989bd2893c19d903b01038f74e3ab08cbf952926ca",
+            "emotion_confidence": "0.95"
+          },
+          {
+            "path": "EmoDB_original/data/emodb/wav/12a02Nb.wav",
+            "sha256": "69f087b80c326e611b55fe4e8e3a69ed1374779d2b647ae2f30482de005cc049",
+            "emotion_confidence": "0.9"
+          },
+          {
+            "path": "EmoDB_original/data/emodb/wav/12a05Nd.wav",
+            "sha256": "07e3c410a0ae7a882b4d5d150b8922805f283cc9f1e2855c956a7e19cc0de49e",
+            "emotion_confidence": "0.9"
+          },
+          {
+            "path": "EmoDB_original/data/emodb/wav/12b02Na.wav",
+            "sha256": "17881aad45d5813bc3efca03c448052c5c3b429577238d0161279e9adf5db9a0",
+            "emotion_confidence": "0.9"
+          }
+        ],
+        "workingReferenceSha256": "2eebd1592e154c1359829d4415d88bcdeaf98b560121b06ee47b62fe65f8fb08",
+        "referenceTranscript": "Der Lappen liegt auf dem Eisschrank. Das will sie am Mittwoch abgeben. Das schwarze Stück Papier befindet sich da oben neben dem Holzstück. Sie haben es gerade hochgetragen und jetzt gehen sie wieder runter.",
+        "referenceDurationSeconds": 9.622,
+        "ratingNote": "Emotion label has human recognition ratings. EmoDB has no per-file valence/arousal norm."
+      },
+      "dialogue": [
+        {
+          "region": "germany",
+          "text": "Dafür bin ich nicht zuständig.",
+          "locator": "game.js npcLines[7]"
+        },
+        {
+          "region": "germany",
+          "text": "Also das ist jetzt aber auch nicht so gedacht.",
+          "locator": "game.js npcLines[0]"
+        },
+        {
+          "region": "berlin",
+          "text": "Dafür bin ich not responsible.",
+          "locator": "game.js npcDenglisch[7]"
+        },
+        {
+          "region": "berlin",
+          "text": "Also this ist jetzt aber auch nicht so gedacht.",
+          "locator": "game.js npcDenglisch[0]"
+        }
+      ],
+      "secretTunnel": {
+        "profileName": "GS Karl-Heinz Post (HERR POST)",
+        "profileId": "45fd0a83c5c9448e85af11b4e7407c6e",
+        "status": "profile-created; dialogue rendering and listening review pending",
+        "engine": "omnivoice-rs"
+      }
+    },
+    {
+      "gameCharacterId": "city-herbert-rasenaufsicht",
+      "voiceId": "stadt-herbert-rasenaufsicht",
+      "fullName": "Herbert Rasenaufsicht",
+      "displayRole": "HERR RASENAUFSICHT",
+      "gender": "male",
+      "genderEvidence": "game.js HERR/FRAU label",
+      "generalDemeanor": "Forceful guardian of rules about lawns and public space.",
+      "demeanorEvidence": "Ordnung muss schon sein.",
+      "targetValence": "negative",
+      "targetArousal": "high",
+      "reference": {
+        "dataset": "Berlin Database of Emotional Speech (EmoDB), original 535-file release",
+        "releaseLicense": "CC0-1.0",
+        "speakerId": "10",
+        "speakerGender": "male",
+        "speakerAgeAtRecording": 32,
+        "emotionLabel": "anger",
+        "sourceFiles": [
+          {
+            "path": "EmoDB_original/data/emodb/wav/10a02Wa.wav",
+            "sha256": "114942c4af4ec02ac721d51bd082cee3e3d45b77d5ed54b2ece9e868b2772669",
+            "emotion_confidence": "1.0"
+          },
+          {
+            "path": "EmoDB_original/data/emodb/wav/10a04Wa.wav",
+            "sha256": "10ff3efe54cb03a43981c5ced747e791148a5e2431ea55000f2821e7bd563143",
+            "emotion_confidence": "1.0"
+          },
+          {
+            "path": "EmoDB_original/data/emodb/wav/10a05Wb.wav",
+            "sha256": "774fdc5b5d6564a2525c9fde788783cb3ffd7f6dea3d6a805d86160060de2bf8",
+            "emotion_confidence": "1.0"
+          }
+        ],
+        "workingReferenceSha256": "b8fd86e3751434f24f93dab162f8ea81ea8df0e8134ddab6bc032253de6d2d85",
+        "referenceTranscript": "Das will sie am Mittwoch abgeben. Heute abend könnte ich es ihm sagen. Das schwarze Stück Papier befindet sich da oben neben dem Holzstück.",
+        "referenceDurationSeconds": 8.708,
+        "ratingNote": "Emotion label has human recognition ratings. EmoDB has no per-file valence/arousal norm."
+      },
+      "dialogue": [
+        {
+          "region": "germany",
+          "text": "Ordnung muss schon sein.",
+          "locator": "game.js npcLines[8]"
+        },
+        {
+          "region": "germany",
+          "text": "Kann man machen. Muss man aber wirklich nicht.",
+          "locator": "game.js npcLines[1]"
+        },
+        {
+          "region": "berlin",
+          "text": "Ordnung muss schon sein, you know.",
+          "locator": "game.js npcDenglisch[8]"
+        },
+        {
+          "region": "berlin",
+          "text": "Kann man machen. Muss man aber really nicht.",
+          "locator": "game.js npcDenglisch[1]"
+        }
+      ],
+      "secretTunnel": {
+        "profileName": "GS Herbert Rasenaufsicht (HERR RASENAUFSICHT)",
+        "profileId": "8968878634994c25a5578fd9c2244110",
+        "status": "profile-created; dialogue rendering and listening review pending",
+        "engine": "omnivoice-rs"
+      }
+    },
+    {
+      "gameCharacterId": "city-waltraud-ordnung",
+      "voiceId": "stadt-waltraud-ordnung",
+      "fullName": "Waltraud Ordnung",
+      "displayRole": "FRAU ORDNUNG",
+      "gender": "female",
+      "genderEvidence": "game.js HERR/FRAU label",
+      "generalDemeanor": "Firm, easily provoked believer in public order.",
+      "demeanorEvidence": "Ordnung muss schon sein.",
+      "targetValence": "negative",
+      "targetArousal": "high",
+      "reference": {
+        "dataset": "Berlin Database of Emotional Speech (EmoDB), original 535-file release",
+        "releaseLicense": "CC0-1.0",
+        "speakerId": "14",
+        "speakerGender": "female",
+        "speakerAgeAtRecording": 35,
+        "emotionLabel": "anger",
+        "sourceFiles": [
+          {
+            "path": "EmoDB_original/data/emodb/wav/14a04Wb.wav",
+            "sha256": "f61e5982bba59b78bf0170dc5b2eeebc8d0897e121e60058b5ce73fc49835142",
+            "emotion_confidence": "1.0"
+          },
+          {
+            "path": "EmoDB_original/data/emodb/wav/14a05Wa.wav",
+            "sha256": "3b71dee197a845fc715071a5bcbfee1ef0445f85ff87d37aefc63a1c6900d828",
+            "emotion_confidence": "1.0"
+          },
+          {
+            "path": "EmoDB_original/data/emodb/wav/14b02Wd.wav",
+            "sha256": "6c2d6923286246f31b7603ccb39970130f74998646f4d23bce16cd5186bd3f5d",
+            "emotion_confidence": "1.0"
+          }
+        ],
+        "workingReferenceSha256": "2ef53e200a7a031eddb7bc70204ec23ecaef4936dd751cf046bbcde5f91d2b55",
+        "referenceTranscript": "Heute abend könnte ich es ihm sagen. Das schwarze Stück Papier befindet sich da oben neben dem Holzstück. Sie haben es gerade hochgetragen und jetzt gehen sie wieder runter.",
+        "referenceDurationSeconds": 8.036,
+        "ratingNote": "Emotion label has human recognition ratings. EmoDB has no per-file valence/arousal norm."
+      },
+      "dialogue": [
+        {
+          "region": "germany",
+          "text": "Ordnung muss schon sein.",
+          "locator": "game.js npcLines[8]"
+        },
+        {
+          "region": "germany",
+          "text": "Kann man machen. Muss man aber wirklich nicht.",
+          "locator": "game.js npcLines[1]"
+        },
+        {
+          "region": "berlin",
+          "text": "Ordnung muss schon sein, you know.",
+          "locator": "game.js npcDenglisch[8]"
+        },
+        {
+          "region": "berlin",
+          "text": "Kann man machen. Muss man aber really nicht.",
+          "locator": "game.js npcDenglisch[1]"
+        }
+      ],
+      "secretTunnel": {
+        "profileName": "GS Waltraud Ordnung (FRAU ORDNUNG)",
+        "profileId": "fef10195763e41fdbdf7a82382610513",
+        "status": "profile-created; dialogue rendering and listening review pending",
+        "engine": "omnivoice-rs"
+      }
+    },
+    {
+      "gameCharacterId": "city-erwin-archiv",
+      "voiceId": "stadt-erwin-archiv",
+      "fullName": "Erwin Archiv",
+      "displayRole": "HERR ARCHIV",
+      "gender": "male",
+      "genderEvidence": "game.js HERR/FRAU label",
+      "generalDemeanor": "World-weary archivist who points to more forms and a permanent construction site.",
+      "demeanorEvidence": "Dafür gibt es bestimmt ein Formular.",
+      "targetValence": "negative",
+      "targetArousal": "low",
+      "reference": {
+        "dataset": "Berlin Database of Emotional Speech (EmoDB), original 535-file release",
+        "releaseLicense": "CC0-1.0",
+        "speakerId": "11",
+        "speakerGender": "male",
+        "speakerAgeAtRecording": 26,
+        "emotionLabel": "boredom",
+        "sourceFiles": [
+          {
+            "path": "EmoDB_original/data/emodb/wav/11b09Ld.wav",
+            "sha256": "f3b851967728a2edabebabb4dd116b3837d5edb38198c8c769718c49f8595ef3",
+            "emotion_confidence": "1.0"
+          },
+          {
+            "path": "EmoDB_original/data/emodb/wav/11a01Ld.wav",
+            "sha256": "08e9ffd4e4e6b06cabbc7950f4313ab73601aedb1183e9f33389d03b09d0aa32",
+            "emotion_confidence": "0.95"
+          },
+          {
+            "path": "EmoDB_original/data/emodb/wav/11a07Ld.wav",
+            "sha256": "25615ed6de07f6e95a02fba78a0dee5a59f1cd1716a444c2de3e0e98e5b7c2ce",
+            "emotion_confidence": "0.9"
+          },
+          {
+            "path": "EmoDB_original/data/emodb/wav/11b03Lc.wav",
+            "sha256": "348f5b9ffd51173184b355a9dbe524b3a58e0193cfb12c6e1a96135b93436651",
+            "emotion_confidence": "0.8571"
+          }
+        ],
+        "workingReferenceSha256": "151ae01fd25433a25d40452ba4be9fbebd14336053332b9a0333ce4b7ac1cac5",
+        "referenceTranscript": "Ich will das eben wegbringen und dann mit Karl was trinken gehen. Der Lappen liegt auf dem Eisschrank. In sieben Stunden wird es soweit sein. An den Wochenenden bin ich jetzt immer nach Hause gefahren und habe Agnes besucht.",
+        "referenceDurationSeconds": 11.708,
+        "ratingNote": "Emotion label has human recognition ratings. EmoDB has no per-file valence/arousal norm."
+      },
+      "dialogue": [
+        {
+          "region": "germany",
+          "text": "Dafür gibt es bestimmt ein Formular.",
+          "locator": "game.js npcLines[3]"
+        },
+        {
+          "region": "germany",
+          "text": "Das ist bestimmt wegen der Baustelle. Die ist seit 2009 da.",
+          "locator": "game.js npcLines[6]"
+        },
+        {
+          "region": "berlin",
+          "text": "Dafür gibt es bestimmt ein Formular, probably online but not really.",
+          "locator": "game.js npcDenglisch[3]"
+        },
+        {
+          "region": "berlin",
+          "text": "Das ist bestimmt wegen der Baustelle. Die ist since 2009 da.",
+          "locator": "game.js npcDenglisch[6]"
+        }
+      ],
+      "secretTunnel": {
+        "profileName": "GS Erwin Archiv (HERR ARCHIV)",
+        "profileId": "dd2102af797e486fb66d67ac2cde26bc",
+        "status": "profile-created; dialogue rendering and listening review pending",
+        "engine": "omnivoice-rs"
+      }
+    },
+    {
+      "gameCharacterId": "city-renate-termin",
+      "voiceId": "stadt-renate-termin",
+      "fullName": "Renate Termin",
+      "displayRole": "FRAU TERMIN",
+      "gender": "female",
+      "genderEvidence": "game.js HERR/FRAU label",
+      "generalDemeanor": "Impatient appointment clerk who complains and demands scheduling.",
+      "demeanorEvidence": "Haben Sie dafür einen Termin?",
+      "targetValence": "negative",
+      "targetArousal": "high",
+      "reference": {
+        "dataset": "Berlin Database of Emotional Speech (EmoDB), original 535-file release",
+        "releaseLicense": "CC0-1.0",
+        "speakerId": "13",
+        "speakerGender": "female",
+        "speakerAgeAtRecording": 32,
+        "emotionLabel": "anger",
+        "sourceFiles": [
+          {
+            "path": "EmoDB_original/data/emodb/wav/13a01Wb.wav",
+            "sha256": "ec2fce2a5b68f694acb0307adb3e07c9cdbc26d44c483c339e3665f89954c27c",
+            "emotion_confidence": "1.0"
+          },
+          {
+            "path": "EmoDB_original/data/emodb/wav/13a04Wc.wav",
+            "sha256": "6294715a4332b9e5d3a1070f96ccc964f2be0c791282cfb99ec65ed295debe80",
+            "emotion_confidence": "1.0"
+          },
+          {
+            "path": "EmoDB_original/data/emodb/wav/13a07Wb.wav",
+            "sha256": "983c385b29e33160533fb0ffb53c6e27f33637ca7dbaa7fa0b2a9a0d909f8593",
+            "emotion_confidence": "1.0"
+          },
+          {
+            "path": "EmoDB_original/data/emodb/wav/13b01Wa.wav",
+            "sha256": "31ff8fecfb835f643ba1f7e9aa43bb15b6743ce0521ab835d94851145ffdcb4e",
+            "emotion_confidence": "1.0"
+          }
+        ],
+        "workingReferenceSha256": "738caada9bedbce8b48a277940d6a2065bbfb1a8d14ab0557b6854bfc9825701",
+        "referenceTranscript": "Der Lappen liegt auf dem Eisschrank. Heute abend könnte ich es ihm sagen. In sieben Stunden wird es soweit sein. Was sind denn das für Tüten, die da unter dem Tisch stehen.",
+        "referenceDurationSeconds": 8.867,
+        "ratingNote": "Emotion label has human recognition ratings. EmoDB has no per-file valence/arousal norm."
+      },
+      "dialogue": [
+        {
+          "region": "germany",
+          "text": "Haben Sie dafür einen Termin?",
+          "locator": "game.js npcLines[9]"
+        },
+        {
+          "region": "germany",
+          "text": "Ich möchte mich nicht beschweren, aber ich beschwere mich.",
+          "locator": "game.js npcLines[2]"
+        },
+        {
+          "region": "berlin",
+          "text": "Haben Sie dafür einen appointment?",
+          "locator": "game.js npcDenglisch[9]"
+        },
+        {
+          "region": "berlin",
+          "text": "Ich möchte mich nicht complainen, aber ich complain jetzt.",
+          "locator": "game.js npcDenglisch[2]"
+        }
+      ],
+      "secretTunnel": {
+        "profileName": "GS Renate Termin (FRAU TERMIN)",
+        "profileId": "21f2fc63a2f34d3b81462ca72933e51e",
+        "status": "profile-created; dialogue rendering and listening review pending",
+        "engine": "omnivoice-rs"
+      }
+    },
+    {
+      "gameCharacterId": "city-heinz-mietnachweis",
+      "voiceId": "stadt-heinz-mietnachweis",
+      "fullName": "Heinz Mietnachweis",
+      "displayRole": "HERR MIETNACHWEIS",
+      "gender": "male",
+      "genderEvidence": "game.js HERR/FRAU label",
+      "generalDemeanor": "Dismissive, low-energy commentator on old administrative burdens.",
+      "demeanorEvidence": "Kann man machen. Muss man aber wirklich nicht.",
+      "targetValence": "negative",
+      "targetArousal": "low",
+      "reference": {
+        "dataset": "Berlin Database of Emotional Speech (EmoDB), original 535-file release",
+        "releaseLicense": "CC0-1.0",
+        "speakerId": "15",
+        "speakerGender": "male",
+        "speakerAgeAtRecording": 25,
+        "emotionLabel": "boredom",
+        "sourceFiles": [
+          {
+            "path": "EmoDB_original/data/emodb/wav/15a01La.wav",
+            "sha256": "9163211ccdf1b8d56e36943502adfccfd397497200e25c8b96c54ff923814f68",
+            "emotion_confidence": "1.0"
+          },
+          {
+            "path": "EmoDB_original/data/emodb/wav/15a02La.wav",
+            "sha256": "bfa832f54ebf7976e7ce5860615f374f7b70339d7dc406b81cbba39cb901a64d",
+            "emotion_confidence": "0.95"
+          },
+          {
+            "path": "EmoDB_original/data/emodb/wav/15a05Lb.wav",
+            "sha256": "73d4370c6cce20dcf4aa11e2593c0cba75c71b94fb2128094f27d6322742163c",
+            "emotion_confidence": "0.95"
+          },
+          {
+            "path": "EmoDB_original/data/emodb/wav/15a07Ld.wav",
+            "sha256": "e5191cf1a1e1ffde68037d146f2aee2756342c3259a73c532e701b6ea204b6d1",
+            "emotion_confidence": "0.95"
+          }
+        ],
+        "workingReferenceSha256": "7fdd251dc6d7e8d870e85c736a09824550b8b578c3a39e067a75b7d948f5d1bb",
+        "referenceTranscript": "Der Lappen liegt auf dem Eisschrank. Das will sie am Mittwoch abgeben. Das schwarze Stück Papier befindet sich da oben neben dem Holzstück. In sieben Stunden wird es soweit sein.",
+        "referenceDurationSeconds": 8.381,
+        "ratingNote": "Emotion label has human recognition ratings. EmoDB has no per-file valence/arousal norm."
+      },
+      "dialogue": [
+        {
+          "region": "germany",
+          "text": "Kann man machen. Muss man aber wirklich nicht.",
+          "locator": "game.js npcLines[1]"
+        },
+        {
+          "region": "germany",
+          "text": "Früher war hier weniger Vorgang.",
+          "locator": "game.js npcLines[4]"
+        },
+        {
+          "region": "berlin",
+          "text": "Kann man machen. Muss man aber really nicht.",
+          "locator": "game.js npcDenglisch[1]"
+        },
+        {
+          "region": "berlin",
+          "text": "Früher war hier weniger process.",
+          "locator": "game.js npcDenglisch[4]"
+        }
+      ],
+      "secretTunnel": {
+        "profileName": "GS Heinz Mietnachweis (HERR MIETNACHWEIS)",
+        "profileId": "bd866bed39104f52a7c3c03c566c241d",
+        "status": "profile-created; dialogue rendering and listening review pending",
+        "engine": "omnivoice-rs"
+      }
+    },
+    {
+      "gameCharacterId": "city-monika-zebra",
+      "voiceId": "stadt-monika-zebra",
+      "fullName": "Monika Zebra",
+      "displayRole": "FRAU ZEBRA",
+      "gender": "female",
+      "genderEvidence": "game.js HERR/FRAU label",
+      "generalDemeanor": "Unhurried citizen who values ordinary order.",
+      "demeanorEvidence": "Ordnung muss schon sein.",
+      "targetValence": "neutral",
+      "targetArousal": "medium",
+      "reference": {
+        "dataset": "Berlin Database of Emotional Speech (EmoDB), original 535-file release",
+        "releaseLicense": "CC0-1.0",
+        "speakerId": "16",
+        "speakerGender": "female",
+        "speakerAgeAtRecording": 31,
+        "emotionLabel": "neutral",
+        "sourceFiles": [
+          {
+            "path": "EmoDB_original/data/emodb/wav/16b03Nb.wav",
+            "sha256": "5ed60e093a3dc74bc75ad1d51b2398ef8279e86fad7b38353833c7e908791481",
+            "emotion_confidence": "0.9523999999999999"
+          },
+          {
+            "path": "EmoDB_original/data/emodb/wav/16a04Nc.wav",
+            "sha256": "18e75f57db701531629427c79ed0a2a42458a639effcb2a88a2059d508cb4f1d",
+            "emotion_confidence": "0.95"
+          },
+          {
+            "path": "EmoDB_original/data/emodb/wav/16a01Nc.wav",
+            "sha256": "bf546f2ffb75d020b64d4f98c873ea4ad7d325d1edd8ce8150add6cbf9656cd8",
+            "emotion_confidence": "0.9"
+          },
+          {
+            "path": "EmoDB_original/data/emodb/wav/16a07Nb.wav",
+            "sha256": "472c14af5a6cf0ba0c7cf98a5432163b39671255865d47de984078f6c1e4d760",
+            "emotion_confidence": "0.9"
+          }
+        ],
+        "workingReferenceSha256": "caa317b927b7d986a52aec26a204cafe1ec65606cec4cee57ac1653effdf1952",
+        "referenceTranscript": "An den Wochenenden bin ich jetzt immer nach Hause gefahren und habe Agnes besucht. Heute abend könnte ich es ihm sagen. Der Lappen liegt auf dem Eisschrank. In sieben Stunden wird es soweit sein.",
+        "referenceDurationSeconds": 9.504,
+        "ratingNote": "Emotion label has human recognition ratings. EmoDB has no per-file valence/arousal norm."
+      },
+      "dialogue": [
+        {
+          "region": "germany",
+          "text": "Ordnung muss schon sein.",
+          "locator": "game.js npcLines[8]"
+        },
+        {
+          "region": "germany",
+          "text": "Kann man machen. Muss man aber wirklich nicht.",
+          "locator": "game.js npcLines[1]"
+        },
+        {
+          "region": "berlin",
+          "text": "Ordnung muss schon sein, you know.",
+          "locator": "game.js npcDenglisch[8]"
+        },
+        {
+          "region": "berlin",
+          "text": "Kann man machen. Muss man aber really nicht.",
+          "locator": "game.js npcDenglisch[1]"
+        }
+      ],
+      "secretTunnel": {
+        "profileName": "GS Monika Zebra (FRAU ZEBRA)",
+        "profileId": "3cb9ea9f6c3e40428ce73acfe639a1ee",
+        "status": "profile-created; dialogue rendering and listening review pending",
+        "engine": "omnivoice-rs"
+      }
+    },
+    {
+      "gameCharacterId": "city-joachim-fundsache",
+      "voiceId": "stadt-joachim-fundsache",
+      "fullName": "Joachim Fundsache",
+      "displayRole": "HERR FUNDSACHE",
+      "gender": "male",
+      "genderEvidence": "game.js HERR/FRAU label",
+      "generalDemeanor": "Detached clerk who refuses ownership of a situation.",
+      "demeanorEvidence": "Dafür bin ich nicht zuständig.",
+      "targetValence": "negative",
+      "targetArousal": "low",
+      "reference": {
+        "dataset": "Berlin Database of Emotional Speech (EmoDB), original 535-file release",
+        "releaseLicense": "CC0-1.0",
+        "speakerId": "10",
+        "speakerGender": "male",
+        "speakerAgeAtRecording": 32,
+        "emotionLabel": "boredom",
+        "sourceFiles": [
+          {
+            "path": "EmoDB_original/data/emodb/wav/10a05Ld.wav",
+            "sha256": "c5238582476e35f5adf3c8f0bf3f260660f30400ca6b1452787772fbdedf5326",
+            "emotion_confidence": "1.0"
+          },
+          {
+            "path": "EmoDB_original/data/emodb/wav/10b03La.wav",
+            "sha256": "6d580cf16392118708e9f59994112cc2ed84dec6b5ea8097ea0d0718b76ba0ce",
+            "emotion_confidence": "1.0"
+          },
+          {
+            "path": "EmoDB_original/data/emodb/wav/10b09Lb.wav",
+            "sha256": "4cac2acb30fdb41c3cffb2a89dc2b364b7201152f5ae70dc24da7d1bc48e8f71",
+            "emotion_confidence": "1.0"
+          }
+        ],
+        "workingReferenceSha256": "36dc3144368143e0894dc1f400bdffe82e6842b2ae3d54a7fb03a3b7c94c55bf",
+        "referenceTranscript": "Das schwarze Stück Papier befindet sich da oben neben dem Holzstück. An den Wochenenden bin ich jetzt immer nach Hause gefahren und habe Agnes besucht. Ich will das eben wegbringen und dann mit Karl was trinken gehen.",
+        "referenceDurationSeconds": 10.074,
+        "ratingNote": "Emotion label has human recognition ratings. EmoDB has no per-file valence/arousal norm."
+      },
+      "dialogue": [
+        {
+          "region": "germany",
+          "text": "Dafür bin ich nicht zuständig.",
+          "locator": "game.js npcLines[7]"
+        },
+        {
+          "region": "germany",
+          "text": "Also das ist jetzt aber auch nicht so gedacht.",
+          "locator": "game.js npcLines[0]"
+        },
+        {
+          "region": "berlin",
+          "text": "Dafür bin ich not responsible.",
+          "locator": "game.js npcDenglisch[7]"
+        },
+        {
+          "region": "berlin",
+          "text": "Also this ist jetzt aber auch nicht so gedacht.",
+          "locator": "game.js npcDenglisch[0]"
+        }
+      ],
+      "secretTunnel": {
+        "profileName": "GS Joachim Fundsache (HERR FUNDSACHE)",
+        "profileId": "d87b222e98574a8d8ec180f029e8a414",
+        "status": "profile-created; dialogue rendering and listening review pending",
+        "engine": "omnivoice-rs"
+      }
+    },
+    {
+      "gameCharacterId": "city-ute-ruhe",
+      "voiceId": "stadt-ute-ruhe",
+      "fullName": "Ute Ruhe",
+      "displayRole": "FRAU RUHE",
+      "gender": "female",
+      "genderEvidence": "game.js HERR/FRAU label",
+      "generalDemeanor": "Quietly irritable citizen who asks for space.",
+      "demeanorEvidence": "Sie stehen minimal im Weg.",
+      "targetValence": "negative",
+      "targetArousal": "low",
+      "reference": {
+        "dataset": "Berlin Database of Emotional Speech (EmoDB), original 535-file release",
+        "releaseLicense": "CC0-1.0",
+        "speakerId": "9",
+        "speakerGender": "female",
+        "speakerAgeAtRecording": 21,
+        "emotionLabel": "boredom",
+        "sourceFiles": [
+          {
+            "path": "EmoDB_original/data/emodb/wav/09a02La.wav",
+            "sha256": "aed163a499a043afd65a38d1498d7991c6cabce038bbb3164f8b09c4550a6e21",
+            "emotion_confidence": "1.0"
+          },
+          {
+            "path": "EmoDB_original/data/emodb/wav/09a04La.wav",
+            "sha256": "5d65c1f013f2e67b2667e24e8a689501020557a3f74fc2a6098158e73bf1f244",
+            "emotion_confidence": "1.0"
+          },
+          {
+            "path": "EmoDB_original/data/emodb/wav/09b03Lb.wav",
+            "sha256": "cceacd8d8cb1d7442fcd5a2dfb0ebe420d8383f7007c4f37d66964e49475c9fa",
+            "emotion_confidence": "0.9048"
+          },
+          {
+            "path": "EmoDB_original/data/emodb/wav/09a05Lc.wav",
+            "sha256": "0c78c20f540b8fdbad4a7384901a77bf0da349e2226cbbd4c102b135bb02b7ed",
+            "emotion_confidence": "0.85"
+          }
+        ],
+        "workingReferenceSha256": "6c961945eb1b63cdcc477bd8ba2e5dd840682a6335c9632ff6d14b44fca22ab8",
+        "referenceTranscript": "Das will sie am Mittwoch abgeben. Heute abend könnte ich es ihm sagen. An den Wochenenden bin ich jetzt immer nach Hause gefahren und habe Agnes besucht. Das schwarze Stück Papier befindet sich da oben neben dem Holzstück.",
+        "referenceDurationSeconds": 10.333,
+        "ratingNote": "Emotion label has human recognition ratings. EmoDB has no per-file valence/arousal norm."
+      },
+      "dialogue": [
+        {
+          "region": "germany",
+          "text": "Sie stehen minimal im Weg.",
+          "locator": "game.js npcLines[5]"
+        },
+        {
+          "region": "germany",
+          "text": "Ordnung muss schon sein.",
+          "locator": "game.js npcLines[8]"
+        },
+        {
+          "region": "berlin",
+          "text": "Sie stehen minimal im way.",
+          "locator": "game.js npcDenglisch[5]"
+        },
+        {
+          "region": "berlin",
+          "text": "Ordnung muss schon sein, you know.",
+          "locator": "game.js npcDenglisch[8]"
+        }
+      ],
+      "secretTunnel": {
+        "profileName": "GS Ute Ruhe (FRAU RUHE)",
+        "profileId": "cfdd8b4cda6646daa197e0291e146988",
+        "status": "profile-created; dialogue rendering and listening review pending",
+        "engine": "omnivoice-rs"
+      }
+    },
+    {
+      "gameCharacterId": "city-norbert-faxrolle",
+      "voiceId": "stadt-norbert-faxrolle",
+      "fullName": "Norbert Faxrolle",
+      "displayRole": "HERR FAXROLLE",
+      "gender": "male",
+      "genderEvidence": "game.js HERR/FRAU label",
+      "generalDemeanor": "Defeated by old procedures and disclaims responsibility.",
+      "demeanorEvidence": "Früher war hier weniger Vorgang.",
+      "targetValence": "negative",
+      "targetArousal": "low",
+      "reference": {
+        "dataset": "Berlin Database of Emotional Speech (EmoDB), original 535-file release",
+        "releaseLicense": "CC0-1.0",
+        "speakerId": "12",
+        "speakerGender": "male",
+        "speakerAgeAtRecording": 30,
+        "emotionLabel": "sadness",
+        "sourceFiles": [
+          {
+            "path": "EmoDB_original/data/emodb/wav/12b03Ta.wav",
+            "sha256": "21f93b3ed1299c7488710801b9a1829f315bd7d244716e1c9a5cdca068ae8b63",
+            "emotion_confidence": "0.9048"
+          },
+          {
+            "path": "EmoDB_original/data/emodb/wav/12a05Ta.wav",
+            "sha256": "201a4da6dd154c5601638ae7cfa9a3885e1b4fbfea03804aa96bbf86e1d36ac0",
+            "emotion_confidence": "0.9"
+          }
+        ],
+        "workingReferenceSha256": "74b5a6e705fd5e5d1a351a907bf97a3d5420de4803a52a24e1854e48aa70d8b4",
+        "referenceTranscript": "An den Wochenenden bin ich jetzt immer nach Hause gefahren und habe Agnes besucht. Das schwarze Stück Papier befindet sich da oben neben dem Holzstück.",
+        "referenceDurationSeconds": 11.357,
+        "ratingNote": "Emotion label has human recognition ratings. EmoDB has no per-file valence/arousal norm."
+      },
+      "dialogue": [
+        {
+          "region": "germany",
+          "text": "Früher war hier weniger Vorgang.",
+          "locator": "game.js npcLines[4]"
+        },
+        {
+          "region": "germany",
+          "text": "Dafür bin ich nicht zuständig.",
+          "locator": "game.js npcLines[7]"
+        },
+        {
+          "region": "berlin",
+          "text": "Früher war hier weniger process.",
+          "locator": "game.js npcDenglisch[4]"
+        },
+        {
+          "region": "berlin",
+          "text": "Dafür bin ich not responsible.",
+          "locator": "game.js npcDenglisch[7]"
+        }
+      ],
+      "secretTunnel": {
+        "profileName": "GS Norbert Faxrolle (HERR FAXROLLE)",
+        "profileId": "c00d72eba1514bcfa27d2b420db2d960",
+        "status": "profile-created; dialogue rendering and listening review pending",
+        "engine": "omnivoice-rs"
+      }
+    },
+    {
+      "gameCharacterId": "city-edeltraud-trennung",
+      "voiceId": "stadt-edeltraud-trennung",
+      "fullName": "Edeltraud Trennung",
+      "displayRole": "FRAU TRENNUNG",
+      "gender": "female",
+      "genderEvidence": "game.js HERR/FRAU label",
+      "generalDemeanor": "Bluntly procedural guide to an appointment or construction problem.",
+      "demeanorEvidence": "Das ist bestimmt wegen der Baustelle. Die ist seit 2009 da.",
+      "targetValence": "neutral",
+      "targetArousal": "medium",
+      "reference": {
+        "dataset": "Berlin Database of Emotional Speech (EmoDB), original 535-file release",
+        "releaseLicense": "CC0-1.0",
+        "speakerId": "8",
+        "speakerGender": "female",
+        "speakerAgeAtRecording": 34,
+        "emotionLabel": "neutral",
+        "sourceFiles": [
+          {
+            "path": "EmoDB_original/data/emodb/wav/08a02Na.wav",
+            "sha256": "93543f2e3e384253dd29c55ff8ba045bb58fac1ceb5c18932bc6262ec0bee9a6",
+            "emotion_confidence": "1.0"
+          },
+          {
+            "path": "EmoDB_original/data/emodb/wav/08a04Nc.wav",
+            "sha256": "2e54cea686abd7dc97718e020ef3477fcd0c57839e275e5f0f1dd599506fdf52",
+            "emotion_confidence": "1.0"
+          },
+          {
+            "path": "EmoDB_original/data/emodb/wav/08a05Nb.wav",
+            "sha256": "4a3332810772dcc46d1f93b052ec9db86446fd7352ea970a63c45f29f90c47ab",
+            "emotion_confidence": "1.0"
+          },
+          {
+            "path": "EmoDB_original/data/emodb/wav/08a07Na.wav",
+            "sha256": "81fb99969d3ee097acf9126ea4e58a8b0380b2b5248211643e78ea4cb819a12c",
+            "emotion_confidence": "1.0"
+          }
+        ],
+        "workingReferenceSha256": "03e67d1d6614504d1954e447ed6064f4e8df0cc6f07caa158e9215ef4f48cad4",
+        "referenceTranscript": "Das will sie am Mittwoch abgeben. Heute abend könnte ich es ihm sagen. Das schwarze Stück Papier befindet sich da oben neben dem Holzstück. In sieben Stunden wird es soweit sein.",
+        "referenceDurationSeconds": 9.161,
+        "ratingNote": "Emotion label has human recognition ratings. EmoDB has no per-file valence/arousal norm."
+      },
+      "dialogue": [
+        {
+          "region": "germany",
+          "text": "Das ist bestimmt wegen der Baustelle. Die ist seit 2009 da.",
+          "locator": "game.js npcLines[6]"
+        },
+        {
+          "region": "germany",
+          "text": "Haben Sie dafür einen Termin?",
+          "locator": "game.js npcLines[9]"
+        },
+        {
+          "region": "berlin",
+          "text": "Das ist bestimmt wegen der Baustelle. Die ist since 2009 da.",
+          "locator": "game.js npcDenglisch[6]"
+        },
+        {
+          "region": "berlin",
+          "text": "Haben Sie dafür einen appointment?",
+          "locator": "game.js npcDenglisch[9]"
+        }
+      ],
+      "secretTunnel": {
+        "profileName": "GS Edeltraud Trennung (FRAU TRENNUNG)",
+        "profileId": "5590c81828c04845822da28d02d84689",
+        "status": "profile-created; dialogue rendering and listening review pending",
+        "engine": "omnivoice-rs"
+      }
+    }
+  ],
+  "roleProfiles": [
+    {
+      "gameRole": "crowd-baerbel-brezel",
+      "fullName": "Bärbel Brezel",
+      "voiceId": "crowd-baerbel-brezel",
+      "secretTunnelProfileName": "GS Bärbel Brezel (crowd-baerbel-brezel)",
+      "secretTunnelProfileId": "94f8291ad5664b5485cf38bea8d4a2ec",
+      "gender": "female",
+      "genderEvidence": "game.js female towel archetype slot for this name",
+      "generalDemeanor": "Procedural passerby with territorial sidewalk or towel-reservation complaints",
+      "demeanorEvidence": "Game crowd sidewalk and towel bark pools",
+      "targetValence": "neutral",
+      "targetArousal": "medium",
+      "reference": {
+        "dataset": "EmoDB original",
+        "license": "CC0-1.0",
+        "speakerId": "13",
+        "emotionLabel": "neutral",
+        "sourceFiles": [
+          {
+            "path": "EmoDB_original/data/emodb/wav/13a05Nb.wav",
+            "sha256": "226eaca17c21af48750cb0810b17f57fab95b94136664d9b5cd22e4dc1577f58",
+            "emotion_confidence": "1.0"
+          },
+          {
+            "path": "EmoDB_original/data/emodb/wav/13b10Nc.wav",
+            "sha256": "9f5fd5da715c6d6e508c094e47e3056afe78c785c68733b94a6aaa5400d9805f",
+            "emotion_confidence": "1.0"
+          },
+          {
+            "path": "EmoDB_original/data/emodb/wav/13a01Nb.wav",
+            "sha256": "ee86d37de58e6792617bb4005264b9df2ab0193e9391816c8d4f50a1ae24f538",
+            "emotion_confidence": "0.95"
+          },
+          {
+            "path": "EmoDB_original/data/emodb/wav/13b02Nb.wav",
+            "sha256": "2d8dbd9f0352e258dc802247c1be2804cddda0467823f0489f07abd52c935962",
+            "emotion_confidence": "0.95"
+          }
+        ],
+        "workingReferenceSha256": "23e4afaf59ef15cb0988feea0439793450268aa5dd9e916c69834b48df647747",
+        "referenceTranscript": "Das schwarze Stück Papier befindet sich da oben neben dem Holzstück. Die wird auf dem Platz sein, wo wir sie immer hinlegen. Der Lappen liegt auf dem Eisschrank. Sie haben es gerade hochgetragen und jetzt gehen sie wieder runter.",
+        "referenceDurationSeconds": 9.857
+      },
+      "status": "profile-created; dialogue rendering and listening review pending",
+      "dialogueSources": [
+        "game.js npcLines / npcDenglisch by region",
+        "game.js pedestrianBarks[region] by surface",
+        "game.js crowdArchetypes[archetype].barks[region]",
+        "game.js quizApproaches when this instance is selected as a quizzer"
+      ]
+    },
+    {
+      "gameRole": "crowd-brigitte-bueroklammer",
+      "fullName": "Brigitte Büroklammer",
+      "voiceId": "crowd-brigitte-bueroklammer",
+      "secretTunnelProfileName": "GS Brigitte Büroklammer (crowd-brigitte-bueroklammer)",
+      "secretTunnelProfileId": "735315eb7b9845dca5919c108814c1a9",
+      "gender": "female",
+      "genderEvidence": "game.js female towel archetype slot for this name",
+      "generalDemeanor": "Procedural passerby with territorial sidewalk or towel-reservation complaints",
+      "demeanorEvidence": "Game crowd sidewalk and towel bark pools",
+      "targetValence": "negative",
+      "targetArousal": "low",
+      "reference": {
+        "dataset": "EmoDB original",
+        "license": "CC0-1.0",
+        "speakerId": "9",
+        "emotionLabel": "boredom",
+        "sourceFiles": [
+          {
+            "path": "EmoDB_original/data/emodb/wav/09a02La.wav",
+            "sha256": "aed163a499a043afd65a38d1498d7991c6cabce038bbb3164f8b09c4550a6e21",
+            "emotion_confidence": "1.0"
+          },
+          {
+            "path": "EmoDB_original/data/emodb/wav/09a04La.wav",
+            "sha256": "5d65c1f013f2e67b2667e24e8a689501020557a3f74fc2a6098158e73bf1f244",
+            "emotion_confidence": "1.0"
+          },
+          {
+            "path": "EmoDB_original/data/emodb/wav/09b03Lb.wav",
+            "sha256": "cceacd8d8cb1d7442fcd5a2dfb0ebe420d8383f7007c4f37d66964e49475c9fa",
+            "emotion_confidence": "0.9048"
+          },
+          {
+            "path": "EmoDB_original/data/emodb/wav/09a05Lc.wav",
+            "sha256": "0c78c20f540b8fdbad4a7384901a77bf0da349e2226cbbd4c102b135bb02b7ed",
+            "emotion_confidence": "0.85"
+          }
+        ],
+        "workingReferenceSha256": "6c961945eb1b63cdcc477bd8ba2e5dd840682a6335c9632ff6d14b44fca22ab8",
+        "referenceTranscript": "Das will sie am Mittwoch abgeben. Heute abend könnte ich es ihm sagen. An den Wochenenden bin ich jetzt immer nach Hause gefahren und habe Agnes besucht. Das schwarze Stück Papier befindet sich da oben neben dem Holzstück.",
+        "referenceDurationSeconds": 10.333
+      },
+      "status": "profile-created; dialogue rendering and listening review pending",
+      "dialogueSources": [
+        "game.js npcLines / npcDenglisch by region",
+        "game.js pedestrianBarks[region] by surface",
+        "game.js crowdArchetypes[archetype].barks[region]",
+        "game.js quizApproaches when this instance is selected as a quizzer"
+      ]
+    },
+    {
+      "gameRole": "crowd-dietmar-din-norm",
+      "fullName": "Dietmar DIN-Norm",
+      "voiceId": "crowd-dietmar-din-norm",
+      "secretTunnelProfileName": "GS Dietmar DIN-Norm (crowd-dietmar-din-norm)",
+      "secretTunnelProfileId": "44123656a3404719abf0a2d6a05047ee",
+      "gender": "male",
+      "genderEvidence": "game.js male towel archetype slot for this name",
+      "generalDemeanor": "Procedural passerby with territorial sidewalk or towel-reservation complaints",
+      "demeanorEvidence": "Game crowd sidewalk and towel bark pools",
+      "targetValence": "negative",
+      "targetArousal": "low",
+      "reference": {
+        "dataset": "EmoDB original",
+        "license": "CC0-1.0",
+        "speakerId": "10",
+        "emotionLabel": "boredom",
+        "sourceFiles": [
+          {
+            "path": "EmoDB_original/data/emodb/wav/10a05Ld.wav",
+            "sha256": "c5238582476e35f5adf3c8f0bf3f260660f30400ca6b1452787772fbdedf5326",
+            "emotion_confidence": "1.0"
+          },
+          {
+            "path": "EmoDB_original/data/emodb/wav/10b03La.wav",
+            "sha256": "6d580cf16392118708e9f59994112cc2ed84dec6b5ea8097ea0d0718b76ba0ce",
+            "emotion_confidence": "1.0"
+          },
+          {
+            "path": "EmoDB_original/data/emodb/wav/10b09Lb.wav",
+            "sha256": "4cac2acb30fdb41c3cffb2a89dc2b364b7201152f5ae70dc24da7d1bc48e8f71",
+            "emotion_confidence": "1.0"
+          }
+        ],
+        "workingReferenceSha256": "36dc3144368143e0894dc1f400bdffe82e6842b2ae3d54a7fb03a3b7c94c55bf",
+        "referenceTranscript": "Das schwarze Stück Papier befindet sich da oben neben dem Holzstück. An den Wochenenden bin ich jetzt immer nach Hause gefahren und habe Agnes besucht. Ich will das eben wegbringen und dann mit Karl was trinken gehen.",
+        "referenceDurationSeconds": 10.074
+      },
+      "status": "profile-created; dialogue rendering and listening review pending",
+      "dialogueSources": [
+        "game.js npcLines / npcDenglisch by region",
+        "game.js pedestrianBarks[region] by surface",
+        "game.js crowdArchetypes[archetype].barks[region]",
+        "game.js quizApproaches when this instance is selected as a quizzer"
+      ]
+    },
+    {
+      "gameRole": "crowd-elfriede-eingabe",
+      "fullName": "Elfriede Eingabe",
+      "voiceId": "crowd-elfriede-eingabe",
+      "secretTunnelProfileName": "GS Elfriede Eingabe (crowd-elfriede-eingabe)",
+      "secretTunnelProfileId": "fe71f4c14887460fab20d07f25ad003d",
+      "gender": "female",
+      "genderEvidence": "game.js female towel archetype slot for this name",
+      "generalDemeanor": "Procedural passerby with territorial sidewalk or towel-reservation complaints",
+      "demeanorEvidence": "Game crowd sidewalk and towel bark pools",
+      "targetValence": "neutral",
+      "targetArousal": "medium",
+      "reference": {
+        "dataset": "EmoDB original",
+        "license": "CC0-1.0",
+        "speakerId": "16",
+        "emotionLabel": "neutral",
+        "sourceFiles": [
+          {
+            "path": "EmoDB_original/data/emodb/wav/16b03Nb.wav",
+            "sha256": "5ed60e093a3dc74bc75ad1d51b2398ef8279e86fad7b38353833c7e908791481",
+            "emotion_confidence": "0.9523999999999999"
+          },
+          {
+            "path": "EmoDB_original/data/emodb/wav/16a04Nc.wav",
+            "sha256": "18e75f57db701531629427c79ed0a2a42458a639effcb2a88a2059d508cb4f1d",
+            "emotion_confidence": "0.95"
+          },
+          {
+            "path": "EmoDB_original/data/emodb/wav/16a01Nc.wav",
+            "sha256": "bf546f2ffb75d020b64d4f98c873ea4ad7d325d1edd8ce8150add6cbf9656cd8",
+            "emotion_confidence": "0.9"
+          },
+          {
+            "path": "EmoDB_original/data/emodb/wav/16a07Nb.wav",
+            "sha256": "472c14af5a6cf0ba0c7cf98a5432163b39671255865d47de984078f6c1e4d760",
+            "emotion_confidence": "0.9"
+          }
+        ],
+        "workingReferenceSha256": "caa317b927b7d986a52aec26a204cafe1ec65606cec4cee57ac1653effdf1952",
+        "referenceTranscript": "An den Wochenenden bin ich jetzt immer nach Hause gefahren und habe Agnes besucht. Heute abend könnte ich es ihm sagen. Der Lappen liegt auf dem Eisschrank. In sieben Stunden wird es soweit sein.",
+        "referenceDurationSeconds": 9.504
+      },
+      "status": "profile-created; dialogue rendering and listening review pending",
+      "dialogueSources": [
+        "game.js npcLines / npcDenglisch by region",
+        "game.js pedestrianBarks[region] by surface",
+        "game.js crowdArchetypes[archetype].barks[region]",
+        "game.js quizApproaches when this instance is selected as a quizzer"
+      ]
+    },
+    {
+      "gameRole": "crowd-guenther-gartenzaun",
+      "fullName": "Günther Gartenzaun",
+      "voiceId": "crowd-guenther-gartenzaun",
+      "secretTunnelProfileName": "GS Günther Gartenzaun (crowd-guenther-gartenzaun)",
+      "secretTunnelProfileId": "919104cf497a4368a57052f75dc0d82f",
+      "gender": "male",
+      "genderEvidence": "game.js male towel archetype slot for this name",
+      "generalDemeanor": "Procedural passerby with territorial sidewalk or towel-reservation complaints",
+      "demeanorEvidence": "Game crowd sidewalk and towel bark pools",
+      "targetValence": "negative",
+      "targetArousal": "high",
+      "reference": {
+        "dataset": "EmoDB original",
+        "license": "CC0-1.0",
+        "speakerId": "10",
+        "emotionLabel": "anger",
+        "sourceFiles": [
+          {
+            "path": "EmoDB_original/data/emodb/wav/10a02Wa.wav",
+            "sha256": "114942c4af4ec02ac721d51bd082cee3e3d45b77d5ed54b2ece9e868b2772669",
+            "emotion_confidence": "1.0"
+          },
+          {
+            "path": "EmoDB_original/data/emodb/wav/10a04Wa.wav",
+            "sha256": "10ff3efe54cb03a43981c5ced747e791148a5e2431ea55000f2821e7bd563143",
+            "emotion_confidence": "1.0"
+          },
+          {
+            "path": "EmoDB_original/data/emodb/wav/10a05Wb.wav",
+            "sha256": "774fdc5b5d6564a2525c9fde788783cb3ffd7f6dea3d6a805d86160060de2bf8",
+            "emotion_confidence": "1.0"
+          }
+        ],
+        "workingReferenceSha256": "b8fd86e3751434f24f93dab162f8ea81ea8df0e8134ddab6bc032253de6d2d85",
+        "referenceTranscript": "Das will sie am Mittwoch abgeben. Heute abend könnte ich es ihm sagen. Das schwarze Stück Papier befindet sich da oben neben dem Holzstück.",
+        "referenceDurationSeconds": 8.708
+      },
+      "status": "profile-created; dialogue rendering and listening review pending",
+      "dialogueSources": [
+        "game.js npcLines / npcDenglisch by region",
+        "game.js pedestrianBarks[region] by surface",
+        "game.js crowdArchetypes[archetype].barks[region]",
+        "game.js quizApproaches when this instance is selected as a quizzer"
+      ]
+    },
+    {
+      "gameRole": "crowd-hildegard-brotzeit",
+      "fullName": "Hildegard Brotzeit",
+      "voiceId": "crowd-hildegard-brotzeit",
+      "secretTunnelProfileName": "GS Hildegard Brotzeit (crowd-hildegard-brotzeit)",
+      "secretTunnelProfileId": "82aee08c3fe14b66b457f3783650e825",
+      "gender": "female",
+      "genderEvidence": "game.js female towel archetype slot for this name",
+      "generalDemeanor": "Procedural passerby with territorial sidewalk or towel-reservation complaints",
+      "demeanorEvidence": "Game crowd sidewalk and towel bark pools",
+      "targetValence": "neutral",
+      "targetArousal": "medium",
+      "reference": {
+        "dataset": "EmoDB original",
+        "license": "CC0-1.0",
+        "speakerId": "14",
+        "emotionLabel": "neutral",
+        "sourceFiles": [
+          {
+            "path": "EmoDB_original/data/emodb/wav/14a02Nc.wav",
+            "sha256": "4322426634cac43b632935d4db3745bc4a34bd1ab77775aac88e0387ed463a7f",
+            "emotion_confidence": "1.0"
+          },
+          {
+            "path": "EmoDB_original/data/emodb/wav/14b02Na.wav",
+            "sha256": "05755322165d91943db73ab58099a97eca7a6975459968a05dcecfcc0426ed3f",
+            "emotion_confidence": "1.0"
+          },
+          {
+            "path": "EmoDB_original/data/emodb/wav/14a01Na.wav",
+            "sha256": "520f468fc9a28ee4c6d5a766c9067ffac8cf85ca62909d423d6a20f57fc7bd59",
+            "emotion_confidence": "0.95"
+          },
+          {
+            "path": "EmoDB_original/data/emodb/wav/14a05Na.wav",
+            "sha256": "c315a618321355e3043cf849c616b953f354f5bd5b0913c1ec10340c00967898",
+            "emotion_confidence": "0.95"
+          }
+        ],
+        "workingReferenceSha256": "3ac4c798eaba62700638119b448d4033a7d39a2dfed8a2340496f04bb1cfaefd",
+        "referenceTranscript": "Das will sie am Mittwoch abgeben. Sie haben es gerade hochgetragen und jetzt gehen sie wieder runter. Der Lappen liegt auf dem Eisschrank. Das schwarze Stück Papier befindet sich da oben neben dem Holzstück.",
+        "referenceDurationSeconds": 9.009
+      },
+      "status": "profile-created; dialogue rendering and listening review pending",
+      "dialogueSources": [
+        "game.js npcLines / npcDenglisch by region",
+        "game.js pedestrianBarks[region] by surface",
+        "game.js crowdArchetypes[archetype].barks[region]",
+        "game.js quizApproaches when this instance is selected as a quizzer"
+      ]
+    },
+    {
+      "gameRole": "crowd-horst-hausordnung",
+      "fullName": "Horst Hausordnung",
+      "voiceId": "crowd-horst-hausordnung",
+      "secretTunnelProfileName": "GS Horst Hausordnung (crowd-horst-hausordnung)",
+      "secretTunnelProfileId": "159d0e6984c14c66b8e452f82495ba6c",
+      "gender": "male",
+      "genderEvidence": "game.js male towel archetype slot for this name",
+      "generalDemeanor": "Procedural passerby with territorial sidewalk or towel-reservation complaints",
+      "demeanorEvidence": "Game crowd sidewalk and towel bark pools",
+      "targetValence": "negative",
+      "targetArousal": "high",
+      "reference": {
+        "dataset": "EmoDB original",
+        "license": "CC0-1.0",
+        "speakerId": "15",
+        "emotionLabel": "anger",
+        "sourceFiles": [
+          {
+            "path": "EmoDB_original/data/emodb/wav/15a02Wb.wav",
+            "sha256": "2ea043a6efc78d3b74d2a2ebc38d9298b204c508b34ef29c64dcee022ef7c9bd",
+            "emotion_confidence": "1.0"
+          },
+          {
+            "path": "EmoDB_original/data/emodb/wav/15a04Wa.wav",
+            "sha256": "aa3712a68545d11aa4c1597dfdac27e12f49dd0f20cb3b9e8aaf07a6aa658600",
+            "emotion_confidence": "1.0"
+          },
+          {
+            "path": "EmoDB_original/data/emodb/wav/15a05Wa.wav",
+            "sha256": "474e9c00222aa7ebb2c0486ed9919ae7e7caf0f8f1dfd3839422e0735ff9d66b",
+            "emotion_confidence": "1.0"
+          },
+          {
+            "path": "EmoDB_original/data/emodb/wav/15b01Wc.wav",
+            "sha256": "fcf3a85cbd332a5035c27ab2de9a47f90cbc02420eea8cc6cd0ea6d397d28330",
+            "emotion_confidence": "1.0"
+          }
+        ],
+        "workingReferenceSha256": "f0e22a08d36beb2001646eac2b9a88d4e3d6f89e59d9209efa268f456639f495",
+        "referenceTranscript": "Das will sie am Mittwoch abgeben. Heute abend könnte ich es ihm sagen. Das schwarze Stück Papier befindet sich da oben neben dem Holzstück. Was sind denn das für Tüten, die da unter dem Tisch stehen.",
+        "referenceDurationSeconds": 9.482
+      },
+      "status": "profile-created; dialogue rendering and listening review pending",
+      "dialogueSources": [
+        "game.js npcLines / npcDenglisch by region",
+        "game.js pedestrianBarks[region] by surface",
+        "game.js crowdArchetypes[archetype].barks[region]",
+        "game.js quizApproaches when this instance is selected as a quizzer"
+      ]
+    },
+    {
+      "gameRole": "crowd-irmgard-aktenordner",
+      "fullName": "Irmgard Aktenordner",
+      "voiceId": "crowd-irmgard-aktenordner",
+      "secretTunnelProfileName": "GS Irmgard Aktenordner (crowd-irmgard-aktenordner)",
+      "secretTunnelProfileId": "e8b985f91e0343e8a4526623ec1bee51",
+      "gender": "female",
+      "genderEvidence": "game.js female towel archetype slot for this name",
+      "generalDemeanor": "Procedural passerby with territorial sidewalk or towel-reservation complaints",
+      "demeanorEvidence": "Game crowd sidewalk and towel bark pools",
+      "targetValence": "neutral",
+      "targetArousal": "medium",
+      "reference": {
+        "dataset": "EmoDB original",
+        "license": "CC0-1.0",
+        "speakerId": "8",
+        "emotionLabel": "neutral",
+        "sourceFiles": [
+          {
+            "path": "EmoDB_original/data/emodb/wav/08a02Na.wav",
+            "sha256": "93543f2e3e384253dd29c55ff8ba045bb58fac1ceb5c18932bc6262ec0bee9a6",
+            "emotion_confidence": "1.0"
+          },
+          {
+            "path": "EmoDB_original/data/emodb/wav/08a04Nc.wav",
+            "sha256": "2e54cea686abd7dc97718e020ef3477fcd0c57839e275e5f0f1dd599506fdf52",
+            "emotion_confidence": "1.0"
+          },
+          {
+            "path": "EmoDB_original/data/emodb/wav/08a05Nb.wav",
+            "sha256": "4a3332810772dcc46d1f93b052ec9db86446fd7352ea970a63c45f29f90c47ab",
+            "emotion_confidence": "1.0"
+          },
+          {
+            "path": "EmoDB_original/data/emodb/wav/08a07Na.wav",
+            "sha256": "81fb99969d3ee097acf9126ea4e58a8b0380b2b5248211643e78ea4cb819a12c",
+            "emotion_confidence": "1.0"
+          }
+        ],
+        "workingReferenceSha256": "03e67d1d6614504d1954e447ed6064f4e8df0cc6f07caa158e9215ef4f48cad4",
+        "referenceTranscript": "Das will sie am Mittwoch abgeben. Heute abend könnte ich es ihm sagen. Das schwarze Stück Papier befindet sich da oben neben dem Holzstück. In sieben Stunden wird es soweit sein.",
+        "referenceDurationSeconds": 9.161
+      },
+      "status": "profile-created; dialogue rendering and listening review pending",
+      "dialogueSources": [
+        "game.js npcLines / npcDenglisch by region",
+        "game.js pedestrianBarks[region] by surface",
+        "game.js crowdArchetypes[archetype].barks[region]",
+        "game.js quizApproaches when this instance is selected as a quizzer"
+      ]
+    },
+    {
+      "gameRole": "crowd-klaus-dieter-knoedel",
+      "fullName": "Klaus-Dieter Knödel",
+      "voiceId": "crowd-klaus-dieter-knoedel",
+      "secretTunnelProfileName": "GS Klaus-Dieter Knödel (crowd-klaus-dieter-knoedel)",
+      "secretTunnelProfileId": "d785d0c650e44bba95477261f890747b",
+      "gender": "male",
+      "genderEvidence": "game.js male towel archetype slot for this name",
+      "generalDemeanor": "Procedural passerby with territorial sidewalk or towel-reservation complaints",
+      "demeanorEvidence": "Game crowd sidewalk and towel bark pools",
+      "targetValence": "negative",
+      "targetArousal": "high",
+      "reference": {
+        "dataset": "EmoDB original",
+        "license": "CC0-1.0",
+        "speakerId": "3",
+        "emotionLabel": "anger",
+        "sourceFiles": [
+          {
+            "path": "EmoDB_original/data/emodb/wav/03a02Wb.wav",
+            "sha256": "a63350416f342a745f23b15db6a2f70ea90c62d22a787cccf68c0f3ff9e60fb4",
+            "emotion_confidence": "1.0"
+          },
+          {
+            "path": "EmoDB_original/data/emodb/wav/03a04Wc.wav",
+            "sha256": "aebd9130fcafb34972e2d949c7cfbff40f493d63b30b5842169ad4688421d055",
+            "emotion_confidence": "1.0"
+          },
+          {
+            "path": "EmoDB_original/data/emodb/wav/03a05Wa.wav",
+            "sha256": "f6ddddf2ad974a88fa841f47a9622191d4678725b9287246d43367afc0710089",
+            "emotion_confidence": "1.0"
+          },
+          {
+            "path": "EmoDB_original/data/emodb/wav/03b01Wa.wav",
+            "sha256": "be7effa7e5f777f41ee6f4106edfda690e1e8dfffdb4a03cc6caa7abb25fa731",
+            "emotion_confidence": "1.0"
+          }
+        ],
+        "workingReferenceSha256": "718d21fd8dc250521a21882f86795cf8652845df7c128e655c0e2e771ac3207e",
+        "referenceTranscript": "Das will sie am Mittwoch abgeben. Heute abend könnte ich es ihm sagen. Das schwarze Stück Papier befindet sich da oben neben dem Holzstück. Was sind denn das für Tüten, die da unter dem Tisch stehen.",
+        "referenceDurationSeconds": 9.788
+      },
+      "status": "profile-created; dialogue rendering and listening review pending",
+      "dialogueSources": [
+        "game.js npcLines / npcDenglisch by region",
+        "game.js pedestrianBarks[region] by surface",
+        "game.js crowdArchetypes[archetype].barks[region]",
+        "game.js quizApproaches when this instance is selected as a quizzer"
+      ]
+    },
+    {
+      "gameRole": "crowd-manfred-mittagsruhe",
+      "fullName": "Manfred Mittagsruhe",
+      "voiceId": "crowd-manfred-mittagsruhe",
+      "secretTunnelProfileName": "GS Manfred Mittagsruhe (crowd-manfred-mittagsruhe)",
+      "secretTunnelProfileId": "cf03b787beac49efb23cb9206f012ecd",
+      "gender": "male",
+      "genderEvidence": "game.js male towel archetype slot for this name",
+      "generalDemeanor": "Procedural passerby with territorial sidewalk or towel-reservation complaints",
+      "demeanorEvidence": "Game crowd sidewalk and towel bark pools",
+      "targetValence": "negative",
+      "targetArousal": "low",
+      "reference": {
+        "dataset": "EmoDB original",
+        "license": "CC0-1.0",
+        "speakerId": "11",
+        "emotionLabel": "boredom",
+        "sourceFiles": [
+          {
+            "path": "EmoDB_original/data/emodb/wav/11b09Ld.wav",
+            "sha256": "f3b851967728a2edabebabb4dd116b3837d5edb38198c8c769718c49f8595ef3",
+            "emotion_confidence": "1.0"
+          },
+          {
+            "path": "EmoDB_original/data/emodb/wav/11a01Ld.wav",
+            "sha256": "08e9ffd4e4e6b06cabbc7950f4313ab73601aedb1183e9f33389d03b09d0aa32",
+            "emotion_confidence": "0.95"
+          },
+          {
+            "path": "EmoDB_original/data/emodb/wav/11a07Ld.wav",
+            "sha256": "25615ed6de07f6e95a02fba78a0dee5a59f1cd1716a444c2de3e0e98e5b7c2ce",
+            "emotion_confidence": "0.9"
+          },
+          {
+            "path": "EmoDB_original/data/emodb/wav/11b03Lc.wav",
+            "sha256": "348f5b9ffd51173184b355a9dbe524b3a58e0193cfb12c6e1a96135b93436651",
+            "emotion_confidence": "0.8571"
+          }
+        ],
+        "workingReferenceSha256": "151ae01fd25433a25d40452ba4be9fbebd14336053332b9a0333ce4b7ac1cac5",
+        "referenceTranscript": "Ich will das eben wegbringen und dann mit Karl was trinken gehen. Der Lappen liegt auf dem Eisschrank. In sieben Stunden wird es soweit sein. An den Wochenenden bin ich jetzt immer nach Hause gefahren und habe Agnes besucht.",
+        "referenceDurationSeconds": 11.708
+      },
+      "status": "profile-created; dialogue rendering and listening review pending",
+      "dialogueSources": [
+        "game.js npcLines / npcDenglisch by region",
+        "game.js pedestrianBarks[region] by surface",
+        "game.js crowdArchetypes[archetype].barks[region]",
+        "game.js quizApproaches when this instance is selected as a quizzer"
+      ]
+    },
+    {
+      "gameRole": "crowd-ruediger-rasenkante",
+      "fullName": "Rüdiger Rasenkante",
+      "voiceId": "crowd-ruediger-rasenkante",
+      "secretTunnelProfileName": "GS Rüdiger Rasenkante (crowd-ruediger-rasenkante)",
+      "secretTunnelProfileId": "3cc9340471d3480ba090545b5a9024c9",
+      "gender": "male",
+      "genderEvidence": "game.js male towel archetype slot for this name",
+      "generalDemeanor": "Procedural passerby with territorial sidewalk or towel-reservation complaints",
+      "demeanorEvidence": "Game crowd sidewalk and towel bark pools",
+      "targetValence": "negative",
+      "targetArousal": "high",
+      "reference": {
+        "dataset": "EmoDB original",
+        "license": "CC0-1.0",
+        "speakerId": "12",
+        "emotionLabel": "anger",
+        "sourceFiles": [
+          {
+            "path": "EmoDB_original/data/emodb/wav/12b02Wa.wav",
+            "sha256": "cb73ecd05578345b298e7c1e571c8aa70f1a4554a7f9a725e2315e018c2206d0",
+            "emotion_confidence": "1.0"
+          },
+          {
+            "path": "EmoDB_original/data/emodb/wav/12b10Wa.wav",
+            "sha256": "ec47b8bb8594d6a4899f80b81c8561614e1d051a5d277a744dc8f398eb10a910",
+            "emotion_confidence": "1.0"
+          },
+          {
+            "path": "EmoDB_original/data/emodb/wav/12a01Wc.wav",
+            "sha256": "507a64c66f9e089b0d34e5b01a5dfa7eb87ff3949701508734e2d08ac8de711c",
+            "emotion_confidence": "0.95"
+          },
+          {
+            "path": "EmoDB_original/data/emodb/wav/12a02Wc.wav",
+            "sha256": "a21e65aa133441bc28da7e0e4a34e9f51a229b33e240609744973440e6a9afd1",
+            "emotion_confidence": "0.95"
+          }
+        ],
+        "workingReferenceSha256": "5f3d748de3d95a8090b3d506cf2cf47358d2e7b079e661a1ac186959a2513636",
+        "referenceTranscript": "Sie haben es gerade hochgetragen und jetzt gehen sie wieder runter. Die wird auf dem Platz sein, wo wir sie immer hinlegen. Der Lappen liegt auf dem Eisschrank. Das will sie am Mittwoch abgeben.",
+        "referenceDurationSeconds": 9.158
+      },
+      "status": "profile-created; dialogue rendering and listening review pending",
+      "dialogueSources": [
+        "game.js npcLines / npcDenglisch by region",
+        "game.js pedestrianBarks[region] by surface",
+        "game.js crowdArchetypes[archetype].barks[region]",
+        "game.js quizApproaches when this instance is selected as a quizzer"
+      ]
+    },
+    {
+      "gameRole": "crowd-waltraud-wartemarke",
+      "fullName": "Waltraud Wartemarke",
+      "voiceId": "crowd-waltraud-wartemarke",
+      "secretTunnelProfileName": "GS Waltraud Wartemarke (crowd-waltraud-wartemarke)",
+      "secretTunnelProfileId": "deeeac80eca14f49ae6a8141594d73d2",
+      "gender": "female",
+      "genderEvidence": "game.js female towel archetype slot for this name",
+      "generalDemeanor": "Procedural passerby with territorial sidewalk or towel-reservation complaints",
+      "demeanorEvidence": "Game crowd sidewalk and towel bark pools",
+      "targetValence": "negative",
+      "targetArousal": "high",
+      "reference": {
+        "dataset": "EmoDB original",
+        "license": "CC0-1.0",
+        "speakerId": "13",
+        "emotionLabel": "anger",
+        "sourceFiles": [
+          {
+            "path": "EmoDB_original/data/emodb/wav/13a01Wb.wav",
+            "sha256": "ec2fce2a5b68f694acb0307adb3e07c9cdbc26d44c483c339e3665f89954c27c",
+            "emotion_confidence": "1.0"
+          },
+          {
+            "path": "EmoDB_original/data/emodb/wav/13a04Wc.wav",
+            "sha256": "6294715a4332b9e5d3a1070f96ccc964f2be0c791282cfb99ec65ed295debe80",
+            "emotion_confidence": "1.0"
+          },
+          {
+            "path": "EmoDB_original/data/emodb/wav/13a07Wb.wav",
+            "sha256": "983c385b29e33160533fb0ffb53c6e27f33637ca7dbaa7fa0b2a9a0d909f8593",
+            "emotion_confidence": "1.0"
+          },
+          {
+            "path": "EmoDB_original/data/emodb/wav/13b01Wa.wav",
+            "sha256": "31ff8fecfb835f643ba1f7e9aa43bb15b6743ce0521ab835d94851145ffdcb4e",
+            "emotion_confidence": "1.0"
+          }
+        ],
+        "workingReferenceSha256": "738caada9bedbce8b48a277940d6a2065bbfb1a8d14ab0557b6854bfc9825701",
+        "referenceTranscript": "Der Lappen liegt auf dem Eisschrank. Heute abend könnte ich es ihm sagen. In sieben Stunden wird es soweit sein. Was sind denn das für Tüten, die da unter dem Tisch stehen.",
+        "referenceDurationSeconds": 8.867
+      },
+      "status": "profile-created; dialogue rendering and listening review pending",
+      "dialogueSources": [
+        "game.js npcLines / npcDenglisch by region",
+        "game.js pedestrianBarks[region] by surface",
+        "game.js crowdArchetypes[archetype].barks[region]",
+        "game.js quizApproaches when this instance is selected as a quizzer"
+      ]
+    },
+    {
+      "gameRole": "player",
+      "fullName": "Hans-Peter Mustermann",
+      "voiceId": "spieler-hans-peter-mustermann",
+      "secretTunnelProfileName": "GS Hans-Peter Mustermann (player-default)",
+      "secretTunnelProfileId": "85b9afebb99f40eebad651bcd2e55a1d",
+      "gender": "male",
+      "genderEvidence": "Existing Thorsten male inner-voice recordings; visual player avatar has no fixed gender",
+      "generalDemeanor": "Self-critical, weary inner monologue",
+      "demeanorEvidence": "Ich werde nie etwas zustande bringen",
+      "targetValence": "negative",
+      "targetArousal": "low",
+      "reference": {
+        "dataset": "EmoDB original",
+        "license": "CC0-1.0",
+        "speakerId": "11",
+        "emotionLabel": "sadness",
+        "sourceFiles": [
+          {
+            "path": "EmoDB_original/data/emodb/wav/11b10Td.wav",
+            "sha256": "a9da52d68e13a1730e218bb2dce87afcacee6b2736cb208f8821f3dd182da72c",
+            "emotion_confidence": "0.95"
+          },
+          {
+            "path": "EmoDB_original/data/emodb/wav/11b03Td.wav",
+            "sha256": "317aa38a919bf3cb5d63d2d2f35ed530e55e16cbda2fc5c870876854a10e6ce1",
+            "emotion_confidence": "0.9048"
+          }
+        ],
+        "workingReferenceSha256": "558259e7e4eaec780eeda7b547232ec8bb09075385c2ba9483bfef617339ff21",
+        "referenceTranscript": "Die wird auf dem Platz sein, wo wir sie immer hinlegen. An den Wochenenden bin ich jetzt immer nach Hause gefahren und habe Agnes besucht.",
+        "referenceDurationSeconds": 9.795
+      },
+      "status": "profile-created; dialogue rendering and listening review pending",
+      "dialogueSources": [
+        "game.js innerMonologues[region]",
+        "For-AI/AUDIO-TEXT-LIBRARY.js recordings: existing player Thorsten clips, lawPowerLines"
+      ]
+    },
+    {
+      "gameRole": "police",
+      "fullName": "Heinrich Wachtmeister",
+      "voiceId": "polizei-heinrich-wachtmeister",
+      "secretTunnelProfileName": "GS Heinrich Wachtmeister (police-officer)",
+      "secretTunnelProfileId": "24b741bbe55d4f3a843aa481c3459a96",
+      "gender": "male",
+      "genderEvidence": "Bürgeramt phone scene calls the officer Herr Wachtmeister",
+      "generalDemeanor": "Shouting, demanding enforcement officer",
+      "demeanorEvidence": "HALT! STEHENBLEIBEN!",
+      "targetValence": "negative",
+      "targetArousal": "high",
+      "reference": {
+        "dataset": "EmoDB original",
+        "license": "CC0-1.0",
+        "speakerId": "3",
+        "emotionLabel": "anger",
+        "sourceFiles": [
+          {
+            "path": "EmoDB_original/data/emodb/wav/03a02Wb.wav",
+            "sha256": "a63350416f342a745f23b15db6a2f70ea90c62d22a787cccf68c0f3ff9e60fb4",
+            "emotion_confidence": "1.0"
+          },
+          {
+            "path": "EmoDB_original/data/emodb/wav/03a04Wc.wav",
+            "sha256": "aebd9130fcafb34972e2d949c7cfbff40f493d63b30b5842169ad4688421d055",
+            "emotion_confidence": "1.0"
+          },
+          {
+            "path": "EmoDB_original/data/emodb/wav/03a05Wa.wav",
+            "sha256": "f6ddddf2ad974a88fa841f47a9622191d4678725b9287246d43367afc0710089",
+            "emotion_confidence": "1.0"
+          },
+          {
+            "path": "EmoDB_original/data/emodb/wav/03b01Wa.wav",
+            "sha256": "be7effa7e5f777f41ee6f4106edfda690e1e8dfffdb4a03cc6caa7abb25fa731",
+            "emotion_confidence": "1.0"
+          }
+        ],
+        "workingReferenceSha256": "718d21fd8dc250521a21882f86795cf8652845df7c128e655c0e2e771ac3207e",
+        "referenceTranscript": "Das will sie am Mittwoch abgeben. Heute abend könnte ich es ihm sagen. Das schwarze Stück Papier befindet sich da oben neben dem Holzstück. Was sind denn das für Tüten, die da unter dem Tisch stehen.",
+        "referenceDurationSeconds": 9.788
+      },
+      "status": "profile-created; dialogue rendering and listening review pending",
+      "dialogueSources": [
+        "game.js policeBarks[region]",
+        "buergeramt-story.js police and call for phone role"
+      ]
+    },
+    {
+      "gameRole": "quiz-brigitte-neumann",
+      "fullName": "Brigitte Neumann",
+      "voiceId": "quiz-brigitte-neumann",
+      "secretTunnelProfileName": "GS Brigitte Neumann (quiz-brigitte-neumann)",
+      "secretTunnelProfileId": "a07f2eac0069402c911973d0dff9c122",
+      "gender": "female",
+      "genderEvidence": "QUIZ-CHARACTER-DICTIONARY.js identity and title: SPRECHERIN DER STADTBILDWACHT",
+      "generalDemeanor": "Watchful and procedural cityscape guardian",
+      "demeanorEvidence": "SPRECHERIN DER STADTBILDWACHT",
+      "targetValence": "neutral",
+      "targetArousal": "medium",
+      "reference": {
+        "dataset": "EmoDB original",
+        "license": "CC0-1.0",
+        "speakerId": "9",
+        "emotionLabel": "neutral",
+        "sourceFiles": [
+          {
+            "path": "EmoDB_original/data/emodb/wav/09a05Nb.wav",
+            "sha256": "62e2dcdd728b2c71618b32bbb643a0a099d06ed6362ddc0ecd1b54d271f38e25",
+            "emotion_confidence": "1.0"
+          },
+          {
+            "path": "EmoDB_original/data/emodb/wav/09b02Na.wav",
+            "sha256": "2d227932fe45ba80130890a290b5cb1810cbebae429049967b25a680d8eb7c4e",
+            "emotion_confidence": "1.0"
+          },
+          {
+            "path": "EmoDB_original/data/emodb/wav/09b03Nb.wav",
+            "sha256": "a3a983e176eab81794e726557c4e2812bf71b5d5bc6aa598cfae97b05d3d9dc7",
+            "emotion_confidence": "0.9523999999999999"
+          }
+        ],
+        "workingReferenceSha256": "6a1d75a9744802aeda79b9219dac09256c9eefc5c862af66bfee3d27d5b6778d",
+        "referenceTranscript": "Das schwarze Stück Papier befindet sich da oben neben dem Holzstück. Sie haben es gerade hochgetragen und jetzt gehen sie wieder runter. An den Wochenenden bin ich jetzt immer nach Hause gefahren und habe Agnes besucht.",
+        "referenceDurationSeconds": 9.597
+      },
+      "status": "profile-created; dialogue rendering and listening review pending",
+      "dialogueSources": [
+        "game.js quizApproaches[region]",
+        "game.js quizContexts[category][region]",
+        "game.js citizenshipQuestions and berlinCitizenshipQuestions",
+        "For-AI/AUDIO-TEXT-LIBRARY.js recordings quiz-wrong-answer (legacy sting)"
+      ]
+    },
+    {
+      "gameRole": "quiz-dietmar-schulz",
+      "fullName": "Dietmar Schulz",
+      "voiceId": "quiz-dietmar-schulz",
+      "secretTunnelProfileName": "GS Dietmar Schulz (quiz-dietmar-schulz)",
+      "secretTunnelProfileId": "1f6c2d42bfeb4a63831a616feec67c9a",
+      "gender": "male",
+      "genderEvidence": "QUIZ-CHARACTER-DICTIONARY.js identity and title: INOFFIZIELLER ZERTIFIKATSPRÜFER",
+      "generalDemeanor": "Dry and formal unofficial examiner",
+      "demeanorEvidence": "INOFFIZIELLER ZERTIFIKATSPRÜFER",
+      "targetValence": "neutral",
+      "targetArousal": "medium",
+      "reference": {
+        "dataset": "EmoDB original",
+        "license": "CC0-1.0",
+        "speakerId": "11",
+        "emotionLabel": "neutral",
+        "sourceFiles": [
+          {
+            "path": "EmoDB_original/data/emodb/wav/11a01Nd.wav",
+            "sha256": "72a166e4ab361962c9f48440049288a7c0fcbf885a176f45b7576b08152cea59",
+            "emotion_confidence": "1.0"
+          },
+          {
+            "path": "EmoDB_original/data/emodb/wav/11a02Nc.wav",
+            "sha256": "8d8818704169f26f88877b9b765634f635381f108f89c51ea3e6f4d90934c6d9",
+            "emotion_confidence": "1.0"
+          },
+          {
+            "path": "EmoDB_original/data/emodb/wav/11b03Nb.wav",
+            "sha256": "b0137551a24589e848d4da15cd695c7d53b8d93ac1023c30fdf8e1925855c93a",
+            "emotion_confidence": "0.9523999999999999"
+          },
+          {
+            "path": "EmoDB_original/data/emodb/wav/11b01Nc.wav",
+            "sha256": "002a0d331883e7c7213d49f10b980c2f6e77b9a3be667eb58bc3393b28deb1ed",
+            "emotion_confidence": "0.95"
+          }
+        ],
+        "workingReferenceSha256": "fa0650538001ac77d41584c3742fcc0ceb262ba43e7206a66dbd2ab1e33d9161",
+        "referenceTranscript": "Der Lappen liegt auf dem Eisschrank. Das will sie am Mittwoch abgeben. An den Wochenenden bin ich jetzt immer nach Hause gefahren und habe Agnes besucht. Was sind denn das für Tüten, die da unter dem Tisch stehen.",
+        "referenceDurationSeconds": 9.012
+      },
+      "status": "profile-created; dialogue rendering and listening review pending",
+      "dialogueSources": [
+        "game.js quizApproaches[region]",
+        "game.js quizContexts[category][region]",
+        "game.js citizenshipQuestions and berlinCitizenshipQuestions",
+        "For-AI/AUDIO-TEXT-LIBRARY.js recordings quiz-wrong-answer (legacy sting)"
+      ]
+    },
+    {
+      "gameRole": "quiz-gisela-becker",
+      "fullName": "Gisela Becker",
+      "voiceId": "quiz-gisela-becker",
+      "secretTunnelProfileName": "GS Gisela Becker (quiz-gisela-becker)",
+      "secretTunnelProfileId": "d37d406544a546fb8e5d1839bf3af558",
+      "gender": "female",
+      "genderEvidence": "QUIZ-CHARACTER-DICTIONARY.js identity and title: BESORGTE BÜRGERIN",
+      "generalDemeanor": "Worried and insistently civic-minded",
+      "demeanorEvidence": "BESORGTE BÜRGERIN",
+      "targetValence": "negative",
+      "targetArousal": "medium",
+      "reference": {
+        "dataset": "EmoDB original",
+        "license": "CC0-1.0",
+        "speakerId": "13",
+        "emotionLabel": "fear",
+        "sourceFiles": [
+          {
+            "path": "EmoDB_original/data/emodb/wav/13a05Aa.wav",
+            "sha256": "360133300f896afd9ede1e5e310d2496f1fe19e178f1c0a4d1f3526b6043813a",
+            "emotion_confidence": "1.0"
+          },
+          {
+            "path": "EmoDB_original/data/emodb/wav/13b01Ab.wav",
+            "sha256": "2dd6aecef70ef47acd6faf2b493f8ca81b299fe6a7acd8c8c29f62cae49676e9",
+            "emotion_confidence": "1.0"
+          },
+          {
+            "path": "EmoDB_original/data/emodb/wav/13b09Ab.wav",
+            "sha256": "d9e229c637859f5a73a04c981126516c7b16f10f80fd76253d30d65c90369435",
+            "emotion_confidence": "1.0"
+          },
+          {
+            "path": "EmoDB_original/data/emodb/wav/13b03Ac.wav",
+            "sha256": "be24f3f9cd38dafcf8dc2bb49d9c7d548b6e3319fcecec514c76d8f43433dc77",
+            "emotion_confidence": "0.9523999999999999"
+          }
+        ],
+        "workingReferenceSha256": "aa5c45c11866075d29dce803d542521f21397070bb4ab97025046c5d87dd93fc",
+        "referenceTranscript": "Das schwarze Stück Papier befindet sich da oben neben dem Holzstück. Was sind denn das für Tüten, die da unter dem Tisch stehen. Ich will das eben wegbringen und dann mit Karl was trinken gehen. An den Wochenenden bin ich jetzt immer nach Hause gefahren und habe Agnes besucht.",
+        "referenceDurationSeconds": 11.035
+      },
+      "status": "profile-created; dialogue rendering and listening review pending",
+      "dialogueSources": [
+        "game.js quizApproaches[region]",
+        "game.js quizContexts[category][region]",
+        "game.js citizenshipQuestions and berlinCitizenshipQuestions",
+        "For-AI/AUDIO-TEXT-LIBRARY.js recordings quiz-wrong-answer (legacy sting)"
+      ]
+    },
+    {
+      "gameRole": "quiz-hartmut-keller",
+      "fullName": "Hartmut Keller",
+      "voiceId": "quiz-hartmut-keller",
+      "secretTunnelProfileName": "GS Hartmut Keller (quiz-hartmut-keller)",
+      "secretTunnelProfileId": "0a1ca192e46a476ca372b33f2d370a70",
+      "gender": "male",
+      "genderEvidence": "QUIZ-CHARACTER-DICTIONARY.js identity and title: PARA-POLIZEILICHER NACHBAR",
+      "generalDemeanor": "Wary para-police watcher",
+      "demeanorEvidence": "PARA-POLIZEILICHER NACHBAR",
+      "targetValence": "negative",
+      "targetArousal": "medium",
+      "reference": {
+        "dataset": "EmoDB original",
+        "license": "CC0-1.0",
+        "speakerId": "12",
+        "emotionLabel": "fear",
+        "sourceFiles": [
+          {
+            "path": "EmoDB_original/data/emodb/wav/12a07Ac.wav",
+            "sha256": "47b17aed93333f91fc5dfbb54c22f9ecb61190463a92d94383cb9dddb948c219",
+            "emotion_confidence": "1.0"
+          },
+          {
+            "path": "EmoDB_original/data/emodb/wav/12a05Ab.wav",
+            "sha256": "9123d16fcf780f6cdf6ecd3e833e8f74f3c61557b916227a2c455311c32b486a",
+            "emotion_confidence": "0.95"
+          },
+          {
+            "path": "EmoDB_original/data/emodb/wav/12b02Ad.wav",
+            "sha256": "45cccb485f32b875c7df3a44c60437f77c243369e7e2a7bbb4330c07a53e1cf4",
+            "emotion_confidence": "0.95"
+          },
+          {
+            "path": "EmoDB_original/data/emodb/wav/12a02Ac.wav",
+            "sha256": "8389c338c90b816874514d805a42201656d87aca74b40d96c0f5b84f5d6e1fdc",
+            "emotion_confidence": "0.9"
+          }
+        ],
+        "workingReferenceSha256": "66f055dd3a4e161537c62b12c28960fdc87ba75f044f4796cf26c89e03278402",
+        "referenceTranscript": "In sieben Stunden wird es soweit sein. Das schwarze Stück Papier befindet sich da oben neben dem Holzstück. Sie haben es gerade hochgetragen und jetzt gehen sie wieder runter. Das will sie am Mittwoch abgeben.",
+        "referenceDurationSeconds": 8.171
+      },
+      "status": "profile-created; dialogue rendering and listening review pending",
+      "dialogueSources": [
+        "game.js quizApproaches[region]",
+        "game.js quizContexts[category][region]",
+        "game.js citizenshipQuestions and berlinCitizenshipQuestions",
+        "For-AI/AUDIO-TEXT-LIBRARY.js recordings quiz-wrong-answer (legacy sting)"
+      ]
+    },
+    {
+      "gameRole": "quiz-heike-hoffmann",
+      "fullName": "Heike Hoffmann",
+      "voiceId": "quiz-heike-hoffmann",
+      "secretTunnelProfileName": "GS Heike Hoffmann (quiz-heike-hoffmann)",
+      "secretTunnelProfileId": "299c6b7ec1594f2ea9a4fa8b5a92d13f",
+      "gender": "female",
+      "genderEvidence": "QUIZ-CHARACTER-DICTIONARY.js identity and title: NACHBARSCHAFTLICHE HINWEISPERSON",
+      "generalDemeanor": "Suspicious and alert neighbor",
+      "demeanorEvidence": "NACHBARSCHAFTLICHE HINWEISPERSON",
+      "targetValence": "negative",
+      "targetArousal": "medium",
+      "reference": {
+        "dataset": "EmoDB original",
+        "license": "CC0-1.0",
+        "speakerId": "8",
+        "emotionLabel": "fear",
+        "sourceFiles": [
+          {
+            "path": "EmoDB_original/data/emodb/wav/08b01Aa.wav",
+            "sha256": "0f8cfa1744ef5adb552382bcab25df845c8831efe71bdee9a59d2755468b526e",
+            "emotion_confidence": "0.95"
+          },
+          {
+            "path": "EmoDB_original/data/emodb/wav/08b09Ab.wav",
+            "sha256": "eaea96942cd9a9120ec47a7f693a91c5981c392ed8cb55f2d2fc87109df5b355",
+            "emotion_confidence": "0.95"
+          },
+          {
+            "path": "EmoDB_original/data/emodb/wav/08b10Aa.wav",
+            "sha256": "3b8486b9b120cb2a07ced8568331d635855f8d46e4b3f8224d43c68dd85ad9e0",
+            "emotion_confidence": "0.95"
+          }
+        ],
+        "workingReferenceSha256": "d976ef0fc54d9590420996a7aad7d9b789a3b70bb2e99e096f18dd0cd209b119",
+        "referenceTranscript": "Was sind denn das für Tüten, die da unter dem Tisch stehen. Ich will das eben wegbringen und dann mit Karl was trinken gehen. Die wird auf dem Platz sein, wo wir sie immer hinlegen.",
+        "referenceDurationSeconds": 8.513
+      },
+      "status": "profile-created; dialogue rendering and listening review pending",
+      "dialogueSources": [
+        "game.js quizApproaches[region]",
+        "game.js quizContexts[category][region]",
+        "game.js citizenshipQuestions and berlinCitizenshipQuestions",
+        "For-AI/AUDIO-TEXT-LIBRARY.js recordings quiz-wrong-answer (legacy sting)"
+      ]
+    },
+    {
+      "gameRole": "quiz-klaus-dieter-wagner",
+      "fullName": "Klaus-Dieter Wagner",
+      "voiceId": "quiz-klaus-dieter-wagner",
+      "secretTunnelProfileName": "GS Klaus-Dieter Wagner (quiz-klaus-dieter-wagner)",
+      "secretTunnelProfileId": "ac419e527d1840f5b41d7fbffca39f69",
+      "gender": "male",
+      "genderEvidence": "QUIZ-CHARACTER-DICTIONARY.js identity and title: FREIWILLIGES ORDNUNGSAMT",
+      "generalDemeanor": "Assertive self-appointed order officer",
+      "demeanorEvidence": "FREIWILLIGES ORDNUNGSAMT",
+      "targetValence": "negative",
+      "targetArousal": "high",
+      "reference": {
+        "dataset": "EmoDB original",
+        "license": "CC0-1.0",
+        "speakerId": "10",
+        "emotionLabel": "anger",
+        "sourceFiles": [
+          {
+            "path": "EmoDB_original/data/emodb/wav/10a02Wa.wav",
+            "sha256": "114942c4af4ec02ac721d51bd082cee3e3d45b77d5ed54b2ece9e868b2772669",
+            "emotion_confidence": "1.0"
+          },
+          {
+            "path": "EmoDB_original/data/emodb/wav/10a04Wa.wav",
+            "sha256": "10ff3efe54cb03a43981c5ced747e791148a5e2431ea55000f2821e7bd563143",
+            "emotion_confidence": "1.0"
+          },
+          {
+            "path": "EmoDB_original/data/emodb/wav/10a05Wb.wav",
+            "sha256": "774fdc5b5d6564a2525c9fde788783cb3ffd7f6dea3d6a805d86160060de2bf8",
+            "emotion_confidence": "1.0"
+          }
+        ],
+        "workingReferenceSha256": "b8fd86e3751434f24f93dab162f8ea81ea8df0e8134ddab6bc032253de6d2d85",
+        "referenceTranscript": "Das will sie am Mittwoch abgeben. Heute abend könnte ich es ihm sagen. Das schwarze Stück Papier befindet sich da oben neben dem Holzstück.",
+        "referenceDurationSeconds": 8.708
+      },
+      "status": "profile-created; dialogue rendering and listening review pending",
+      "dialogueSources": [
+        "game.js quizApproaches[region]",
+        "game.js quizContexts[category][region]",
+        "game.js citizenshipQuestions and berlinCitizenshipQuestions",
+        "For-AI/AUDIO-TEXT-LIBRARY.js recordings quiz-wrong-answer (legacy sting)"
+      ]
+    },
+    {
+      "gameRole": "quiz-ruediger-schmidt",
+      "fullName": "Rüdiger Schmidt",
+      "voiceId": "quiz-ruediger-schmidt",
+      "secretTunnelProfileName": "GS Rüdiger Schmidt (quiz-ruediger-schmidt)",
+      "secretTunnelProfileId": "394ec6ba22564d8887e5d29121abe932",
+      "gender": "male",
+      "genderEvidence": "QUIZ-CHARACTER-DICTIONARY.js identity and title: GRAMMATIKPOLIZEI",
+      "generalDemeanor": "Severely corrective about German grammar",
+      "demeanorEvidence": "GRAMMATIKPOLIZEI",
+      "targetValence": "negative",
+      "targetArousal": "high",
+      "reference": {
+        "dataset": "EmoDB original",
+        "license": "CC0-1.0",
+        "speakerId": "3",
+        "emotionLabel": "anger",
+        "sourceFiles": [
+          {
+            "path": "EmoDB_original/data/emodb/wav/03a02Wb.wav",
+            "sha256": "a63350416f342a745f23b15db6a2f70ea90c62d22a787cccf68c0f3ff9e60fb4",
+            "emotion_confidence": "1.0"
+          },
+          {
+            "path": "EmoDB_original/data/emodb/wav/03a04Wc.wav",
+            "sha256": "aebd9130fcafb34972e2d949c7cfbff40f493d63b30b5842169ad4688421d055",
+            "emotion_confidence": "1.0"
+          },
+          {
+            "path": "EmoDB_original/data/emodb/wav/03a05Wa.wav",
+            "sha256": "f6ddddf2ad974a88fa841f47a9622191d4678725b9287246d43367afc0710089",
+            "emotion_confidence": "1.0"
+          },
+          {
+            "path": "EmoDB_original/data/emodb/wav/03b01Wa.wav",
+            "sha256": "be7effa7e5f777f41ee6f4106edfda690e1e8dfffdb4a03cc6caa7abb25fa731",
+            "emotion_confidence": "1.0"
+          }
+        ],
+        "workingReferenceSha256": "718d21fd8dc250521a21882f86795cf8652845df7c128e655c0e2e771ac3207e",
+        "referenceTranscript": "Das will sie am Mittwoch abgeben. Heute abend könnte ich es ihm sagen. Das schwarze Stück Papier befindet sich da oben neben dem Holzstück. Was sind denn das für Tüten, die da unter dem Tisch stehen.",
+        "referenceDurationSeconds": 9.788
+      },
+      "status": "profile-created; dialogue rendering and listening review pending",
+      "dialogueSources": [
+        "game.js quizApproaches[region]",
+        "game.js quizContexts[category][region]",
+        "game.js citizenshipQuestions and berlinCitizenshipQuestions",
+        "For-AI/AUDIO-TEXT-LIBRARY.js recordings quiz-wrong-answer (legacy sting)"
+      ]
+    },
+    {
+      "gameRole": "quiz-sabine-krueger",
+      "fullName": "Sabine Krüger",
+      "voiceId": "quiz-sabine-krueger",
+      "secretTunnelProfileName": "GS Sabine Krüger (quiz-sabine-krueger)",
+      "secretTunnelProfileId": "c6a6e6b4ad1842388b7ac88eb0b71cf6",
+      "gender": "female",
+      "genderEvidence": "QUIZ-CHARACTER-DICTIONARY.js identity and title: SELBSTERNANNTE SPRACHLEHRERIN",
+      "generalDemeanor": "Unsolicited and sharp-tongued language teacher",
+      "demeanorEvidence": "SELBSTERNANNTE SPRACHLEHRERIN",
+      "targetValence": "negative",
+      "targetArousal": "high",
+      "reference": {
+        "dataset": "EmoDB original",
+        "license": "CC0-1.0",
+        "speakerId": "14",
+        "emotionLabel": "anger",
+        "sourceFiles": [
+          {
+            "path": "EmoDB_original/data/emodb/wav/14a04Wb.wav",
+            "sha256": "f61e5982bba59b78bf0170dc5b2eeebc8d0897e121e60058b5ce73fc49835142",
+            "emotion_confidence": "1.0"
+          },
+          {
+            "path": "EmoDB_original/data/emodb/wav/14a05Wa.wav",
+            "sha256": "3b71dee197a845fc715071a5bcbfee1ef0445f85ff87d37aefc63a1c6900d828",
+            "emotion_confidence": "1.0"
+          },
+          {
+            "path": "EmoDB_original/data/emodb/wav/14b02Wd.wav",
+            "sha256": "6c2d6923286246f31b7603ccb39970130f74998646f4d23bce16cd5186bd3f5d",
+            "emotion_confidence": "1.0"
+          }
+        ],
+        "workingReferenceSha256": "2ef53e200a7a031eddb7bc70204ec23ecaef4936dd751cf046bbcde5f91d2b55",
+        "referenceTranscript": "Heute abend könnte ich es ihm sagen. Das schwarze Stück Papier befindet sich da oben neben dem Holzstück. Sie haben es gerade hochgetragen und jetzt gehen sie wieder runter.",
+        "referenceDurationSeconds": 8.036
+      },
+      "status": "profile-created; dialogue rendering and listening review pending",
+      "dialogueSources": [
+        "game.js quizApproaches[region]",
+        "game.js quizContexts[category][region]",
+        "game.js citizenshipQuestions and berlinCitizenshipQuestions",
+        "For-AI/AUDIO-TEXT-LIBRARY.js recordings quiz-wrong-answer (legacy sting)"
+      ]
+    },
+    {
+      "gameRole": "quiz-uwe-moeller",
+      "fullName": "Uwe Möller",
+      "voiceId": "quiz-uwe-moeller",
+      "secretTunnelProfileName": "GS Uwe Möller (quiz-uwe-moeller)",
+      "secretTunnelProfileId": "58566fe420a14f77b44253b9ee2fc780",
+      "gender": "male",
+      "genderEvidence": "QUIZ-CHARACTER-DICTIONARY.js identity and title: VERTRETER DER BÜRGEREMPÖRUNG",
+      "generalDemeanor": "Indignant spokesman for everyday complaints",
+      "demeanorEvidence": "VERTRETER DER BÜRGEREMPÖRUNG",
+      "targetValence": "negative",
+      "targetArousal": "high",
+      "reference": {
+        "dataset": "EmoDB original",
+        "license": "CC0-1.0",
+        "speakerId": "15",
+        "emotionLabel": "anger",
+        "sourceFiles": [
+          {
+            "path": "EmoDB_original/data/emodb/wav/15a02Wb.wav",
+            "sha256": "2ea043a6efc78d3b74d2a2ebc38d9298b204c508b34ef29c64dcee022ef7c9bd",
+            "emotion_confidence": "1.0"
+          },
+          {
+            "path": "EmoDB_original/data/emodb/wav/15a04Wa.wav",
+            "sha256": "aa3712a68545d11aa4c1597dfdac27e12f49dd0f20cb3b9e8aaf07a6aa658600",
+            "emotion_confidence": "1.0"
+          },
+          {
+            "path": "EmoDB_original/data/emodb/wav/15a05Wa.wav",
+            "sha256": "474e9c00222aa7ebb2c0486ed9919ae7e7caf0f8f1dfd3839422e0735ff9d66b",
+            "emotion_confidence": "1.0"
+          },
+          {
+            "path": "EmoDB_original/data/emodb/wav/15b01Wc.wav",
+            "sha256": "fcf3a85cbd332a5035c27ab2de9a47f90cbc02420eea8cc6cd0ea6d397d28330",
+            "emotion_confidence": "1.0"
+          }
+        ],
+        "workingReferenceSha256": "f0e22a08d36beb2001646eac2b9a88d4e3d6f89e59d9209efa268f456639f495",
+        "referenceTranscript": "Das will sie am Mittwoch abgeben. Heute abend könnte ich es ihm sagen. Das schwarze Stück Papier befindet sich da oben neben dem Holzstück. Was sind denn das für Tüten, die da unter dem Tisch stehen.",
+        "referenceDurationSeconds": 9.482
+      },
+      "status": "profile-created; dialogue rendering and listening review pending",
+      "dialogueSources": [
+        "game.js quizApproaches[region]",
+        "game.js quizContexts[category][region]",
+        "game.js citizenshipQuestions and berlinCitizenshipQuestions",
+        "For-AI/AUDIO-TEXT-LIBRARY.js recordings quiz-wrong-answer (legacy sting)"
+      ]
+    },
+    {
+      "gameRole": "herr-sandale",
+      "fullName": "Günther Liegestuhl",
+      "voiceId": "tourist-guenther-liegestuhl",
+      "secretTunnelProfileName": "GS Günther Liegestuhl (towel-man)",
+      "secretTunnelProfileId": "196f20cf54614e868116839d40080cde",
+      "gender": "male",
+      "genderEvidence": "Character-review identifies Herr Sandale / towel-man",
+      "generalDemeanor": "Territorial, rule-fixated lounger owner",
+      "demeanorEvidence": "Dieser Platz ist seit 07:04 Uhr durch textile Willenserklärung reserviert.",
+      "targetValence": "negative",
+      "targetArousal": "high",
+      "reference": {
+        "dataset": "EmoDB original",
+        "license": "CC0-1.0",
+        "speakerId": "15",
+        "emotionLabel": "anger",
+        "sourceFiles": [
+          {
+            "path": "EmoDB_original/data/emodb/wav/15a02Wb.wav",
+            "sha256": "2ea043a6efc78d3b74d2a2ebc38d9298b204c508b34ef29c64dcee022ef7c9bd",
+            "emotion_confidence": "1.0"
+          },
+          {
+            "path": "EmoDB_original/data/emodb/wav/15a04Wa.wav",
+            "sha256": "aa3712a68545d11aa4c1597dfdac27e12f49dd0f20cb3b9e8aaf07a6aa658600",
+            "emotion_confidence": "1.0"
+          },
+          {
+            "path": "EmoDB_original/data/emodb/wav/15a05Wa.wav",
+            "sha256": "474e9c00222aa7ebb2c0486ed9919ae7e7caf0f8f1dfd3839422e0735ff9d66b",
+            "emotion_confidence": "1.0"
+          },
+          {
+            "path": "EmoDB_original/data/emodb/wav/15b01Wc.wav",
+            "sha256": "fcf3a85cbd332a5035c27ab2de9a47f90cbc02420eea8cc6cd0ea6d397d28330",
+            "emotion_confidence": "1.0"
+          }
+        ],
+        "workingReferenceSha256": "f0e22a08d36beb2001646eac2b9a88d4e3d6f89e59d9209efa268f456639f495",
+        "referenceTranscript": "Das will sie am Mittwoch abgeben. Heute abend könnte ich es ihm sagen. Das schwarze Stück Papier befindet sich da oben neben dem Holzstück. Was sind denn das für Tüten, die da unter dem Tisch stehen.",
+        "referenceDurationSeconds": 9.482
+      },
+      "status": "profile-created; dialogue rendering and listening review pending",
+      "dialogueSources": [
+        "game.js npcLines / npcDenglisch by region",
+        "game.js pedestrianBarks[region]",
+        "game.js crowdArchetypes[herr-sandale].barks[region]"
+      ]
+    },
+    {
+      "gameRole": "frau-sandale",
+      "fullName": "Walburga Handtuch",
+      "voiceId": "touristin-walburga-handtuch",
+      "secretTunnelProfileName": "GS Walburga Handtuch (towel-woman)",
+      "secretTunnelProfileId": "70e7d03d3a3d4792baf87a12d95d6dca",
+      "gender": "female",
+      "genderEvidence": "Character-review identifies Frau Sandale / towel-woman",
+      "generalDemeanor": "Protective and indignant about the reserved lounger",
+      "demeanorEvidence": "Ihr Schatten fällt in meinen amtlich vorgemerkten Sonnenkorridor.",
+      "targetValence": "negative",
+      "targetArousal": "high",
+      "reference": {
+        "dataset": "EmoDB original",
+        "license": "CC0-1.0",
+        "speakerId": "13",
+        "emotionLabel": "anger",
+        "sourceFiles": [
+          {
+            "path": "EmoDB_original/data/emodb/wav/13a01Wb.wav",
+            "sha256": "ec2fce2a5b68f694acb0307adb3e07c9cdbc26d44c483c339e3665f89954c27c",
+            "emotion_confidence": "1.0"
+          },
+          {
+            "path": "EmoDB_original/data/emodb/wav/13a04Wc.wav",
+            "sha256": "6294715a4332b9e5d3a1070f96ccc964f2be0c791282cfb99ec65ed295debe80",
+            "emotion_confidence": "1.0"
+          },
+          {
+            "path": "EmoDB_original/data/emodb/wav/13a07Wb.wav",
+            "sha256": "983c385b29e33160533fb0ffb53c6e27f33637ca7dbaa7fa0b2a9a0d909f8593",
+            "emotion_confidence": "1.0"
+          },
+          {
+            "path": "EmoDB_original/data/emodb/wav/13b01Wa.wav",
+            "sha256": "31ff8fecfb835f643ba1f7e9aa43bb15b6743ce0521ab835d94851145ffdcb4e",
+            "emotion_confidence": "1.0"
+          }
+        ],
+        "workingReferenceSha256": "738caada9bedbce8b48a277940d6a2065bbfb1a8d14ab0557b6854bfc9825701",
+        "referenceTranscript": "Der Lappen liegt auf dem Eisschrank. Heute abend könnte ich es ihm sagen. In sieben Stunden wird es soweit sein. Was sind denn das für Tüten, die da unter dem Tisch stehen.",
+        "referenceDurationSeconds": 8.867
+      },
+      "status": "profile-created; dialogue rendering and listening review pending",
+      "dialogueSources": [
+        "game.js npcLines / npcDenglisch by region",
+        "game.js pedestrianBarks[region]",
+        "game.js crowdArchetypes[frau-sandale].barks[region]"
+      ]
+    }
+  ],
+  "existingAssetProfiles": [
+    {
+      "fullName": "Dieter Hupfer",
+      "gameRole": "Civilian traffic driver",
+      "voiceId": "verkehr-dieter-hupfer",
+      "secretTunnelProfileName": "GS Dieter Hupfer (Verkehrsfahrer)",
+      "secretTunnelProfileId": "093079ce208a4f7e8f0d50bb5170ea1f",
+      "source": [
+        {
+          "path": "assets/voices/thorsten-angry-nicht-weg.mp3",
+          "sha256": "61a7d884aef5d3029384f0bff3d0b78ae75464cdbdd9e848ac9020d48e94ebbf",
+          "text": "Nein, ich gehe hier nicht weg!"
+        },
+        {
+          "path": "assets/voices/thorsten-angry-duemmer.mp3",
+          "sha256": "66d2613ee3f5e9f6de1c6b41e16dc27b9776b26520a772235977074db1e88141",
+          "text": "Dümmer geht's nicht mehr."
+        },
+        {
+          "path": "assets/voices/thorsten-angry-klappt-nicht.mp3",
+          "sha256": "853e5bd8f21336589461ab264eb3508be4a38c8dc75c7185aaa41c77bc3042f7",
+          "text": "Das klappt einfach nicht!"
+        }
+      ],
+      "sourceLicense": "CC0-1.0",
+      "referenceSha256": "9e1b68ae4440101bb804763ce1737498ff3ea22ee570eca151e122286e664bfc",
+      "targetValence": "negative",
+      "targetArousal": "high",
+      "demeanor": "Angry driver reacting to player-caused braking."
+    }
+  ]
+}

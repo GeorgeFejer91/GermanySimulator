@@ -17,7 +17,8 @@ assert.match(renderer,/uTime.*uLayer.*uOpacity.*uImpact/s,"the vortex must use i
 assert.match(renderer,/PlaneGeometry\(mouth\*2,mouth\*2,48,48\)/,"the vortex surface must have enough geometry for visible radial ripples");
 assert.match(renderer,/viewX.*viewZ.*layer\.index/s,"the renderer must preserve view-relative parallax");
 assert.match(renderer,/new T\.Line\(geometry,material\).*strikeWirtschaftswunder\(impact\)/s,"swallow impacts must emit procedural lightning from the vortex");
-assert.match(renderer,/slot\.group\.scale\.set\(scale\*\(1\+crush\*\.82\)/,"cars must visibly squash before they disappear");
+assert.match(renderer,/slot\.group\.scale\.set\(base\*scale\*\(1\+crush\*\.82\)/,"vortex squash must preserve the canonical car scale");
+assert.match(renderer,/syncVehicleScale\(slot,scale,crush\)/,"live traffic must use the shared tested squash path");
 assert.match(renderer,/slot\.group\.visible=car\.vortexPhase!=="swallowed"/,"swallowed traffic must be hidden, not deleted or duplicated");
 
 console.log("Wirtschaftswunder vortex traffic and rendering contract OK");

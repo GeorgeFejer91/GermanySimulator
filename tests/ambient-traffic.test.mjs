@@ -7,9 +7,9 @@ const world3d=readFileSync(new URL("../world3d.js",import.meta.url),"utf8");
 
 assert.match(game,/kind=laneY>BORDER_Y\?"beetle":"trabant"/,"Berlin and Deutschland traffic must keep separate vehicle identities");
 assert.match(game,/const trafficCars=\[\].*for\(let roadIndex=0;roadIndex<horizontalRoads\.length/s,"civilian traffic must populate the established horizontal road lanes");
-assert.match(game,/queueGap=.*trafficForwardGap.*playerGap=.*trafficForwardGap.*obstacleGap=Math\.min\(queueGap,playerGap\)/s,"cars must queue behind both the player and stopped traffic");
+assert.match(game,/queueGap=.*trafficForwardGap.*playerGap=.*trafficForwardGap.*obstacleGap=Math\.min\(queueGap,playerGap,trafficGroundGap\(car\)\)/s,"cars must queue behind people, solid objects and stopped traffic");
 assert.match(game,/car\.blockedByPlayer&&!wasBlocked\)\{playTrafficHorn\(car\);shoutTrafficDriver\(car\)/,"the directly obstructed driver must honk and shout as soon as braking begins");
-assert.match(game,/trafficCars\.map\(item=>\(\{item,r:TRAFFIC_CAR_RADIUS\}\)\)/,"civilian cars must block player movement");
+assert.match(game,/for\(const item of \[\.\.\.trafficCars,\.\.\.policeVehicles\]\)/,"complete civilian and police car bodies must block player movement");
 assert.match(game,/getTrafficCars:\(\)=>trafficCars/,"the WebGL renderer must consume the canonical traffic simulation");
 assert.match(world3d,/function makeTrafficCarSlot\(car\).*car\.kind==="beetle"/s,"WebGL must distinguish rounded Beetles from boxy Trabants");
 assert.match(world3d,/assets\/models\/vehicles\/.*spec\.file/s,"traffic must use the complete local fleet models");
@@ -25,7 +25,8 @@ assert.equal(JSON.stringify(sandbox.result),JSON.stringify([20,20,45]),"lane gap
 const trafficUpdate=game.match(/function updateTraffic\(dt\)\{[\s\S]*?\n\s*\}(?=\r?\nfunction nearestRailLocation)/)?.[0];
 assert.ok(trafficUpdate,"traffic update must remain testable");
 const reactions=[];
-const trafficSandbox={trafficCars:[{x:100,y:100,dir:1,lane:"lane",roadIndex:0,vortexPhase:"road",speed:100,cruiseSpeed:120,acceleration:60,blockedByPlayer:false,honkCooldown:0,honkFlash:0,hold:0},{x:0,y:100,dir:1,lane:"lane",roadIndex:0,vortexPhase:"road",speed:100,cruiseSpeed:120,acceleration:60,blockedByPlayer:false,honkCooldown:0,honkFlash:0,hold:0}],player:{x:200,y:100,r:16},TRAFFIC_CAR_RADIUS:42,TRAFFIC_BRAKE_DISTANCE:190,TRAFFIC_STOP_GAP:36,TRAFFIC_MIN_X:0,TRAFFIC_MAX_X:1000,TRAFFIC_LANE_LENGTH:1000,wirtschaftswunderSite:{roadIndex:5},clamp:(v,a,b)=>Math.max(a,Math.min(b,v)),playTrafficHorn:(car,aggressive)=>reactions.push(["horn",car,aggressive]),shoutTrafficDriver:car=>reactions.push(["shout",car]),updateWirtschaftswunderCar:()=>{},enterWirtschaftswunder:()=>{}};
+const trafficSandbox={trafficCars:[{x:500,y:100,dir:1,lane:"lane",roadIndex:0,vortexPhase:"road",speed:100,cruiseSpeed:120,acceleration:60,blockedByPlayer:false,honkCooldown:0,honkFlash:0,hold:0},{x:270,y:100,dir:1,lane:"lane",roadIndex:0,vortexPhase:"road",speed:100,cruiseSpeed:120,acceleration:60,blockedByPlayer:false,honkCooldown:0,honkFlash:0,hold:0}],player:{x:645,y:100,r:16},TRAFFIC_CAR_RADIUS:42,TRAFFIC_BRAKE_DISTANCE:190,TRAFFIC_STOP_GAP:36,TRAFFIC_MIN_X:0,TRAFFIC_MAX_X:1000,TRAFFIC_LANE_LENGTH:1000,wirtschaftswunderSite:{roadIndex:5},clamp:(v,a,b)=>Math.max(a,Math.min(b,v)),trafficGroundGap:()=>Infinity,responderBlocked:()=>false,playTrafficHorn:(car,aggressive)=>reactions.push(["horn",car,aggressive]),shoutTrafficDriver:car=>reactions.push(["shout",car]),updateWirtschaftswunderCar:()=>{},enterWirtschaftswunder:()=>{}};
+trafficSandbox.vehicleMotionBlocked=()=>false;trafficSandbox.vehicleCameraVisible=()=>false;trafficSandbox.vehicleFullyOffMap=()=>true;
 vm.runInNewContext(`${helper};${trafficUpdate};updateTraffic(.016);updateTraffic(.016)`,trafficSandbox);
 assert.deepEqual(reactions.map(([kind])=>kind),["horn","shout"],"braking must trigger both reactions once on entry, before the car stops; queued cars stay quiet");
 vm.runInNewContext("for(let i=0;i<90;i++)updateTraffic(.016)",trafficSandbox);

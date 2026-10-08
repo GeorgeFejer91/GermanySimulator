@@ -2,7 +2,7 @@ version: 0.4.0
 vars: {}
 graph:
   id: germany_simulator_buergeramt
-  description: Bounded production pipeline for the canonical Germany Simulator Bürgeramt episode.
+  description: Bounded production with independent read-only physics and camera/scale review for the canonical Germany Simulator Bürgeramt episode.
   log_level: INFO
   is_majority_voting: false
   start: [Story]
@@ -37,6 +37,12 @@ graph:
     - id: Voice
       type: subgraph
       config: {type: file, config: {path: subgraphs/voice.yaml}}
+    - id: Physics
+      type: subgraph
+      config: {type: file, config: {path: subgraphs/physics.yaml}}
+    - id: Camera
+      type: subgraph
+      config: {type: file, config: {path: subgraphs/camera.yaml}}
     - id: Review
       type: subgraph
       config: {type: file, config: {path: subgraphs/review.yaml}}
@@ -53,5 +59,7 @@ graph:
     - {from: Soundscape, to: Mix}
     - {from: Mix, to: Phone}
     - {from: Phone, to: Voice}
-    - {from: Voice, to: Review}
+    - {from: Voice, to: Physics}
+    - {from: Physics, to: Camera}
+    - {from: Camera, to: Review}
     - {from: Review, to: QA}

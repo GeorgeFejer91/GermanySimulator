@@ -30,7 +30,9 @@ assert.match(game,/ALICE_WALK_SPEED=STANDARD_SPRITE_WALK_SPEED\*1\.5/,"Alice mus
 assert.match(game,/function featuredSpriteEligible\(n\)[\s\S]*audioRadius\|\|SPRITE_AUDIO_RADIUS[\s\S]*showFeaturedSpriteBark\(n,"alice"/,"Alice recordings must remain small-radius gated");
 
 const updateAlice=game.match(/function updateAlice\(n,dt\)\{[\s\S]*?\n\}/)?.[0];
+const moveGroundResponder=game.match(/function moveGroundResponder\(entity,dx,dy,r\)\{[\s\S]*?\n\}/)?.[0];
 assert.ok(updateAlice,"Alice orbit update must exist");
+assert.ok(moveGroundResponder,"Alice must use the collision-aware movement helper");
 let blocked=false,distance=0;
 const motion=vm.createContext({
  state:{region:"germany"},proximityAudioReady:()=>false,aliceBark:()=>{},
@@ -38,7 +40,7 @@ const motion=vm.createContext({
  responderBlocked:()=>blocked,npcSpriteAtlases:{alice:{}},
  advanceSpriteGait:(_n,moved)=>{distance+=moved}
 });
-vm.runInContext(`${updateAlice}; this.stepAlice=updateAlice`,motion);
+vm.runInContext(`${moveGroundResponder}\n${updateAlice}; this.stepAlice=updateAlice`,motion);
 const alice={x:8980,y:680,orbitAngle:0,spriteRow:0},rows=new Set();
 for(let i=0;i<500;i++){motion.stepAlice(alice,.02);rows.add(alice.spriteRow)}
 assert.ok(Math.abs(Math.hypot(alice.x-8860,alice.y-680)-120)<.01,"Alice stays on the orbit");

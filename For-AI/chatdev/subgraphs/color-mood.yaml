@@ -14,6 +14,11 @@ graph:
         name: gpt-4o
         role: >-
           Read For-AI/chatdev/README.md and follow its scoped handoff protocol.
+          Read For-AI/MUSIC-SOUND-DESIGN.md for a changed sound-bearing beat.
+          Require its actual beat ID, candidate revision and compact contract
+          in this invocation; report a missing handoff. Bind tint rise/return
+          to its committed event. For `omen`, align gradual room darkening,
+          near-black peak and abrupt light restoration with the sound beat.
           Read buergeramt-story.js, world3d.js, For-AI/BUERGERAMT.md,
           For-AI/ASSET-POLICY.md, and the moving cast provenance. Map
           each authored line tone and signed valence to a restrained tint

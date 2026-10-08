@@ -10,14 +10,16 @@ const end=game.indexOf("const schreber=");
 const sandbox={};
 
 vm.runInNewContext(`
-const CITY={w:9840,h:4240},RAIL_GUTTER=560;
+const CITY={w:9840,h:4240},RAIL_GUTTER=560,WORLD={w:CITY.w+1120,h:CITY.h+1120};
 const offsetWorldPoint=item=>({...item,x:item.x+RAIL_GUTTER,y:item.y+RAIL_GUTTER});
 ${game.slice(start,end)}
+${game.slice(game.indexOf('const STATION_RISE='),game.indexOf('const TRAIN_CAR_OFFSETS='))}
 globalThis.layout={horizontalRoads,verticalRoads,crossings,trafficLights};
 `,sandbox);
 
 const {horizontalRoads,verticalRoads,crossings,trafficLights}=sandbox.layout;
-assert.equal(crossings.length,horizontalRoads.length*verticalRoads.length*2+3);
+const controlledCount=horizontalRoads.length*verticalRoads.length*2+3;
+assert.equal(crossings.length,controlledCount+6,'side-platform routes have six explicit uncontrolled crossings');
 for(let row=0;row<horizontalRoads.length;row++)for(let column=0;column<verticalRoads.length;column++){
   const pair=(row*verticalRoads.length+column)*2;
   const horizontal=crossings[pair],vertical=crossings[pair+1],roadH=horizontalRoads[row],roadV=verticalRoads[column];
@@ -25,9 +27,10 @@ for(let row=0;row<horizontalRoads.length;row++)for(let column=0;column<verticalR
   assert.deepEqual({...vertical},{x:roadV.x-90,y:roadH.y,w:90,h:roadH.h},"north-south crossing must sit on the west approach");
 }
 
-assert.equal(trafficLights.length,crossings.length*2,"each zebra needs a signal facing each approach");
+assert.equal(trafficLights.length,controlledCount*2,"each controlled zebra needs a signal facing each approach");
 for(let crossingId=0;crossingId<crossings.length;crossingId++){
   const c=crossings[crossingId],a=trafficLights[crossingId*2],b=trafficLights[crossingId*2+1];
+  if(c.uncontrolled){assert.ok(c.stationId);assert.ok(!trafficLights.some(light=>light.crossingId===crossingId),'uncontrolled platform crossings do not invent signal state');continue}
   assert.equal(a.crossingId,crossingId);assert.equal(b.crossingId,crossingId);assert.equal(a.phaseOffset,b.phaseOffset);
   assert.deepEqual([a.x,a.y],[b.waitX,b.waitY],"the opposite approach must look directly at this signal");
   assert.deepEqual([b.x,b.y],[a.waitX,a.waitY],"paired signals must face inward across the same zebra");

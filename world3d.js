@@ -39,6 +39,21 @@ function showRendererFailure(error){
   const rect=(r,m,y=.005)=>plane(r.w*S,r.h*S,m,X(r.x+r.w/2),Z(r.y+r.h/2),y);
   plane(bridge.WORLD.w*S,bridge.WORLD.h*S,M.ground,0,0,0);
   const sidewalk=bridge.SIDEWALK_WIDTH||28;
+  // The simulation owns these physical entry/exit roads. Follow its smooth
+  // platform elevations instead of drawing cars over an invisible corridor.
+  for(const road of bridge.vehicleApproaches||[]){
+    const positions=[],uv=[],indices=[],segments=Math.ceil(road.w/25),tile=M.road.userData.tileSize;
+    for(let i=0;i<=segments;i++){
+      const x=road.x+road.w*i/segments;
+      for(const y of [road.y,road.y+road.h]){
+        positions.push(X(x),(bridge.vehicleElevation?.(x,y)||0)+.016,Z(y));
+        uv.push(X(x)/tile,Z(y)/tile);
+      }
+      if(i<segments){const j=i*2;indices.push(j,j+1,j+2,j+1,j+3,j+2)}
+    }
+    const geometry=new T.BufferGeometry();geometry.setAttribute("position",new T.Float32BufferAttribute(positions,3));geometry.setAttribute("uv",new T.Float32BufferAttribute(uv,2));geometry.setIndex(indices);geometry.computeVertexNormals();
+    const mesh=new T.Mesh(geometry,M.road);mesh.name="Vehicle approach / "+road.side+" / "+road.roadIndex;world.add(mesh);
+  }
   bridge.roads.forEach(r=>rect({x:r.x-sidewalk,y:r.y-sidewalk,w:r.w+sidewalk*2,h:r.h+sidewalk*2},M.walk,.008));
   (bridge.grassAreas||[]).forEach(r=>rect(r,M.grass,.011));(bridge.walkways||[]).forEach(r=>rect(r,M.path,.014));
   const kerbs=[],markings=[],drains=[],grates=[],inside=(r,x,y,pad=0)=>x>=r.x-pad&&x<=r.x+r.w+pad&&y>=r.y-pad&&y<=r.y+r.h+pad;
@@ -58,7 +73,7 @@ function showRendererFailure(error){
     }
   });
   staticBoxes("Road markings",M.cross,markings);staticBoxes("Stone kerbs",M.walk,kerbs);staticBoxes("Storm drains",M.dark,drains);staticBoxes("Drain grilles",M.metal,grates);
-  bridge.crossings.forEach(c=>{for(let i=0;i<8;i+=2){const h=c.w>c.h,f=(i+1)/8;box(h?c.w*S/8*.72:c.w*S,.025,h?c.h*S:c.h*S/8*.72,M.cross,X(c.x+c.w*(h?f:.5)),.04,Z(c.y+c.h*(h?.5:f)))}});rect(bridge.schreber,M.grass,.02);rect(bridge.policeGarden,M.grass,.021);
+  bridge.crossings.forEach(c=>{const surface=bridge.stationElevation(c.x+c.w/2,c.y+c.h/2);for(let i=0;i<8;i+=2){const h=c.w>c.h,f=(i+1)/8;box(h?c.w*S/8*.72:c.w*S,.025,h?c.h*S:c.h*S/8*.72,M.cross,X(c.x+c.w*(h?f:.5)),surface+.04,Z(c.y+c.h*(h?.5:f)))}});rect(bridge.schreber,M.grass,.02);rect(bridge.policeGarden,M.grass,.021);
   const railMaterial=mat(0x343532,.58),sleeperMaterial=mat(0x594f43,.94);
   for(const loop of bridge.railLoops||[]){
     for(const side of [-1,1]){const points=loop.samples.map(p=>new T.Vector3(X(p.x-Math.sin(p.angle)*11*side),.075,Z(p.y+Math.cos(p.angle)*11*side))),curve=new T.CatmullRomCurve3(points,true,"centripetal");world.add(new T.Mesh(new T.TubeGeometry(curve,points.length,.035,4,true),railMaterial))}
@@ -209,14 +224,18 @@ function showRendererFailure(error){
   }
   function stationPlatform(s){
     const g=new T.Group(),length=Math.max(s.w,s.h)*S,depth=Math.min(s.w,s.h)*S,edge=-depth/2,back=depth/2-.52,stone=mat(0xb9b7ae),yellow=mat(0xc8ad63),glass=new T.MeshStandardMaterial({color:0xabc1c6,roughness:.18,transparent:true,opacity:.38,depthWrite:false,side:T.DoubleSide});
+    const throughRoad=(bridge.vehicleApproaches||[]).find(r=>r.side===s.side&&r.y>=s.y&&r.y+r.h<=s.y+s.h),passHalf=throughRoad?throughRoad.h*S/2:0;
     g.position.set(X(s.x+s.w/2),0,Z(s.y+s.h/2));g.rotation.y=s.side==="west"?Math.PI/2:s.side==="east"?-Math.PI/2:s.side==="south"?Math.PI:0;world.add(g);
-    box(length,.3,depth,stone,0,.15,0,g);box(length,.08,.12,M.cross,0,.34,edge,g);box(length,.025,.25,yellow,0,.39,edge+.29,g);
-    for(let i=-Math.floor(length/2);i<=Math.floor(length/2);i++)box(.035,.027,.25,M.dark,i,.41,edge+.29,g);
-    for(let step=0;step<3;step++){const top=.3-step*.1;box(2.8,top,.4,stone,0,top/2,depth/2+.2+step*.4,g);box(2.8,.025,.06,M.cross,0,top+.013,depth/2+.39+step*.4,g)}
+    box(length,.3,depth,stone,0,.15,0,g);
+    const edgeParts=passHalf?[-1,1].map(side=>({width:length/2-passHalf,x:side*(length/4+passHalf/2)})):[{width:length,x:0}];
+    for(const part of edgeParts){box(part.width,.08,.12,M.cross,part.x,.34,edge,g);box(part.width,.025,.25,yellow,part.x,.39,edge+.29,g)}
+    for(let i=-Math.floor(length/2);i<=Math.floor(length/2);i++)if(!passHalf||Math.abs(i)>passHalf+.03)box(.035,.027,.25,M.dark,i,.41,edge+.29,g);
+    if(!passHalf)for(let step=0;step<3;step++){const top=.3-step*.1;box(2.8,top,.4,stone,0,top/2,depth/2+.2+step*.4,g);box(2.8,.025,.06,M.cross,0,top+.013,depth/2+.39+step*.4,g)}
     const canopy=Math.min(7,length*.43);box(canopy,.14,1.45,glass,0,2.65,back,g);
     for(const px of [-canopy/2+.18,canopy/2-.18])for(const pz of [-.54,.54])box(.08,2.35,.08,M.metal,px,1.48,back+pz,g);
     for(const side of [-1,1]){const x=side*(canopy/2-.18);box(.06,1.36,1.08,glass,x,1.55,back,g);box(.07,.07,1.08,M.metal,x,2.23,back,g)}
-    for(const dx of [-canopy*.28,canopy*.28]){box(1.13,.08,.38,M.metal,dx,.66,back,g);box(1.13,.45,.07,M.metal,dx,.92,back+.2,g);for(const leg of [-.42,.42])box(.06,.36,.06,M.metal,dx+leg,.44,back,g)}
+    const benches=passHalf?bridge.props.filter(p=>p.stationId===s.id&&p.fallbackOnly&&p.type==="bench").map(p=>({x:(p.y-s.y-s.h/2)*S*(s.side==="west"?-1:1),z:(p.x-s.x-s.w/2)*S*(s.side==="west"?1:-1)})):[{x:-canopy*.28,z:back},{x:canopy*.28,z:back}];
+    for(const {x:dx,z} of benches){box(1.13,.08,.38,M.metal,dx,.66,z,g);box(1.13,.45,.07,M.metal,dx,.92,z+.2,g);for(const leg of [-.42,.42])box(.06,.36,.06,M.metal,dx+leg,.44,z,g)}
     const board=label("ZUGVERSPÄTUNG",`BAHNHOF ${s.name} · GLEIS 1`,"#16558b","#f6f6f3");board.scale.set(Math.min(4,length*.3),.72,1);board.position.set(0,3.14,back);g.add(board);
     for(const side of [-1,1]){const x=side*(length/2-1);box(.07,1.9,.07,M.metal,x,1.25,back,g);const sign=label("AMT-BAHN",side<0?"GLEIS 1 · +35 MIN":"ABFAHRT UNBESTIMMT","#16558b","#f6f6f3");sign.scale.set(2.45,.54,1);sign.position.set(x,2.45,back);g.add(sign)}
     const clockFace=new T.Mesh(new T.CircleGeometry(.26,24),M.cross);clockFace.position.set(-canopy*.58,2.47,back+.58);g.add(clockFace);const clockRim=new T.Mesh(new T.TorusGeometry(.27,.03,6,24),M.dark);clockRim.position.copy(clockFace.position);g.add(clockRim);box(.02,.17,.02,M.dark,clockFace.position.x,2.51,clockFace.position.z+.02,g);
@@ -226,7 +245,7 @@ function showRendererFailure(error){
     const before=new Set(world.children);stationPlatform(state);
     const fallback=new T.Group();fallback.name="Original station / "+state.id;
     for(const child of [...world.children])if(!before.has(child))fallback.add(child);
-    world.add(fallback);return{state,fallback,model:null,fixtures:bridge.props.filter(p=>p.stationFixture&&p.stationId===state.id)};
+    world.add(fallback);return{state,fallback,model:null,fixtures:bridge.props.filter(p=>p.stationFixture&&!p.fallbackOnly&&p.stationId===state.id)};
   });
   function makeWirtschaftswunderSite(site){
     if(!site)return null;
@@ -308,6 +327,8 @@ function showRendererFailure(error){
       const copy=m=>{if(copies.has(m))return copies.get(m);const c=m.clone();c.userData.baseOpacity=m.opacity;c.userData.baseTransparent=m.transparent;c.userData.baseDepthWrite=m.depthWrite;copies.set(m,c);slot.materials.add(c);return c};
       o.material=Array.isArray(o.material)?o.material.map(copy):copy(o.material);
     });
+    // Bounds are a broad phase only: visible solid meshes decide obstruction.
+    slot.viewBounds=new T.Box3().setFromObject(slot.group);
   }
   function grayMaterial(source,nodeName){
     const c=source&&source.color,lum=c?(c.r*.2126+c.g*.7152+c.b*.0722):.5,name=((source&&source.name)||"")+" "+(nodeName||"");
@@ -322,7 +343,7 @@ function showRendererFailure(error){
     "./assets/models/open-l-gauge-nwagen/n-wagen-coach.glb?v=20260920-1",
     "./assets/models/kenney-trains/train-electric-city-c.glb"
   ],trainModelPromise=modelLoader?Promise.all(trainModelUrls.map(url=>modelLoader.loadAsync(url))):null,
-  policeHelicopterModelPromise=modelLoader?modelLoader.loadAsync("./assets/models/police-response/black-helicopter.glb"):null;
+  policeHelicopterModelPromise=modelLoader?modelLoader.loadAsync("./assets/models/police-response/black-helicopter.glb").catch(error=>{console.warn("Keeping procedural police helicopter",error);return null}):null;
   function makeTrainCarFallback(){
     const g=new T.Group(),red=mat(0xc43d36,.72),white=mat(0xeee9df,.82),glass=mat(0x39454b,.42),wheel=mat(0x292a29,.55);
     box(1.16,.92,4.72,white,0,.62,0,g);box(1.18,.34,4.68,red,0,.45,0,g);for(const side of [-1,1])for(let q=-1.75;q<=1.75;q+=.5)box(.06,.26,.33,glass,side*.61,.83,q,g);for(const side of [-1,1])for(const q of [-1.65,1.65]){const w=new T.Mesh(new T.CylinderGeometry(.16,.16,.09,10),wheel);w.rotation.z=Math.PI/2;w.position.set(side*.6,.18,q);g.add(w)}
@@ -342,7 +363,7 @@ function showRendererFailure(error){
   function responseMaterial(source,kind){const copy=source.clone(),name=(source.name||"").toLowerCase(),c=source.color,lum=c?c.r*.2126+c.g*.7152+c.b*.0722:.5;if(kind==="helicopter")copy.color.setHex(lum>.65?0x282b29:lum>.3?0x171918:0x090a09);else if(/white/.test(name))copy.color.setHex(0xc3c7c5);else if(/bluelight/.test(name)){copy.color.setHex(0x246cff);copy.emissive=new T.Color(0x123b92);copy.emissiveIntensity=1.5}copy.roughness=.72;return copy}
   async function installResponseModel(slot,promise,kind,fit){
     if(!promise)return;
-    try{const gltf=await promise,model=gltf.scene.clone(true),materials=new Map();model.traverse(o=>{if(!o.isMesh)return;o.material=Array.isArray(o.material)?o.material.map(m=>{if(!materials.has(m))materials.set(m,responseMaterial(m,kind));return materials.get(m)}):(()=>{const m=o.material;if(!materials.has(m))materials.set(m,responseMaterial(m,kind));return materials.get(m)})()});fitResponseModel(model,fit);slot.group.add(model);slot.model=model;slot.fallback.visible=false}
+    try{const gltf=await promise;if(!gltf)return;const model=gltf.scene.clone(true),materials=new Map();model.traverse(o=>{if(!o.isMesh)return;o.material=Array.isArray(o.material)?o.material.map(m=>{if(!materials.has(m))materials.set(m,responseMaterial(m,kind));return materials.get(m)}):(()=>{const m=o.material;if(!materials.has(m))materials.set(m,responseMaterial(m,kind));return materials.get(m)})()});fitResponseModel(model,fit);slot.group.add(model);slot.model=model;slot.fallback.visible=false}
     catch(e){console.warn("Keeping procedural police "+kind,e)}
   }
   const vehicleModels={beetle:{file:"beetle",length:2.48},trabant:{file:"trabant",length:2.30},police:{file:"police-estate",length:2.55}};
@@ -391,30 +412,50 @@ function showRendererFailure(error){
       box(.85,.055,.20,chrome,0,1.045,-.1,fallback);
       for(const side of [-1,1]){const blue=mat(0x1265dd,.22);blue.name=side<0?"BeaconLeft":"BeaconRight";box(.24,.075,.19,blue,side*.29,1.10,-.1,fallback)}
     }
+    const renderScale=bridge.VEHICLE_RENDER_SCALE||1.4;group.scale.setScalar(renderScale);
     group.add(fallback);world.add(group);
-    const slot={state:car,kind,group,fallback,model:null,lastX:car.x,lastY:car.y,lastAngle:car.angle,travel:0};
+    const slot={state:car,kind,group,fallback,model:null,renderScale,lastX:car.x,lastY:car.y,lastAngle:car.angle,travel:0};
     bindVehicleParts(slot,fallback);installVehicleModel(slot);return slot;
   }
   function makePoliceCarSlot(car){return makeVehicleSlot(car,"police")}
   function makeTrafficCarSlot(car){return makeVehicleSlot(car,car.kind==="beetle"?"beetle":"trabant")}
+  function syncVehicleScale(slot,scale=1,crush=0){
+    const base=slot.renderScale||1;
+    slot.group.scale.set(base*scale*(1+crush*.82),base*scale*(1-crush*.68),base*scale*(1-crush*.3));
+  }
+  function vehicleRoadPitch(car){
+    if(!bridge.vehicleElevation)return 0;
+    const axle=105/2,c=Math.cos(car.angle),s=Math.sin(car.angle);
+    return -Math.atan2(bridge.vehicleElevation(car.x+c*axle,car.y+s*axle)-bridge.vehicleElevation(car.x-c*axle,car.y-s*axle),105*S);
+  }
   function syncVehicleWheels(slot){
     const car=slot.state,dx=car.x-slot.lastX,dy=car.y-slot.lastY,distance=Math.hypot(dx,dy),turn=Math.atan2(Math.sin(car.angle-slot.lastAngle),Math.cos(car.angle-slot.lastAngle));
     // Actual displacement stops wheel motion in queues/modals; respawn teleports do not spin the tyres.
     if(distance>.0001&&distance<160){
       const direction=Math.sign(dx*Math.cos(car.angle)+dy*Math.sin(car.angle))||1;
       slot.travel=(slot.travel+distance*S*direction)%10000;
-      const steer=Math.max(-.42,Math.min(.42,-Math.atan(turn*1.5/(distance*S))));
-      for(const node of slot.steering)node.rotation.y=steer;
+      const steer=Math.max(-.42,Math.min(.42,-Math.atan(turn*1.5*(slot.renderScale||1)/(distance*S))));
+      if(!Number.isFinite(car.steeringAngle))for(const node of slot.steering)node.rotation.y=steer;
     }
-    for(const {node,radius} of slot.wheels)node.rotation.x=slot.travel/radius;
+    // Wheel steering follows the driver, including steering at rest; the body
+    // still turns only through signed travel in the simulation.
+    if(Number.isFinite(car.steeringAngle))for(const node of slot.steering)node.rotation.y=-car.steeringAngle;
+    for(const {node,radius} of slot.wheels)node.rotation.x=slot.travel/(radius*(slot.renderScale||1));
     for(const material of slot.brakes)material.emissiveIntensity=(car.queued||car.braking)?.8:0;
     const flash=Math.floor(performance.now()/125)%2;
-    for(const {material,left} of slot.beacons)material.emissiveIntensity=!!flash===left?2.6:.08;
+    for(const {material,left} of slot.beacons)material.emissiveIntensity=car.retiring?0:!!flash===left?2.6:.08;
     slot.lastX=car.x;slot.lastY=car.y;slot.lastAngle=car.angle;
   }
   function removeVehicleSlot(slot){world.remove(slot.group);for(const material of slot.materials)material.dispose()}
   function makePoliceHelicopterSlot(helicopter){
     const group=new T.Group(),fallback=new T.Group(),black=mat(0x111312,.48),glass=mat(0x253038,.34);box(1.1,.72,2.05,black,0,.56,0,fallback);box(.74,.46,.72,glass,0,.65,-.88,fallback);box(.2,.18,2.35,black,0,.6,2.05,fallback);const tail=new T.Mesh(new T.ConeGeometry(.5,1.1,3),black);tail.rotation.x=Math.PI/2;tail.position.set(0,.76,3.22);fallback.add(tail);group.add(fallback);const rotor=new T.Group(),bladeGeo=new T.BoxGeometry(4.8,.035,.12),bladeA=new T.Mesh(bladeGeo,black),bladeB=bladeA.clone();bladeB.rotation.y=Math.PI/2;rotor.add(bladeA,bladeB);rotor.position.y=1.55;group.add(rotor);const beam=new T.Mesh(new T.ConeGeometry(2.35,6.4,20,1,true),new T.MeshBasicMaterial({color:0xf1e6a6,transparent:true,opacity:.1,depthWrite:false,side:T.DoubleSide}));beam.position.y=-2.85;beam.visible=false;group.add(beam);world.add(group);const slot={state:helicopter,group,fallback,model:null,rotor,beam};installResponseModel(slot,policeHelicopterModelPromise,"helicopter",{x:3.55,y:1.5,z:4.65});return slot
+  }
+  function cityBuildingYScale(url,height,sourceHeight){
+    // Authored entrance heights in tools/build-city-assets.py. Parcel fitting
+    // must leave the 1.50-unit player at least .20 units of headroom.
+    const doors={"municipal-office":2.1,"berlin-block":2.2,"brick-utility":2.9,"neighborhood-shop":2.35};
+    const family=Object.keys(doors).find(name=>url.includes("/city-kit/"+name+".glb"));
+    return Math.max(height/sourceHeight,family?1.7/doors[family]:0);
   }
   async function installBuildingModel(slot,url,w,h,d){
     if(!modelLoader)return;
@@ -422,9 +463,9 @@ function showRendererFailure(error){
       const gltf=await loadLocalModel(url);if(!gltf)return;const model=gltf.scene.clone(true);
       const bounds=new T.Box3().setFromObject(model),size=bounds.getSize(new T.Vector3()),center=bounds.getCenter(new T.Vector3());
       if(!size.x||!size.y||!size.z)throw new Error("empty building bounds");
-      const landmark=slot.building.id==="bundestag",s=Math.min(w/size.x,h/size.y,d/size.z),sx=landmark?s:w/size.x,sy=landmark?s:h/size.y,sz=landmark?s:d/size.z;
+      const landmark=slot.building.id==="bundestag",s=Math.min(w/size.x,h/size.y,d/size.z),sx=landmark?s:w/size.x,sy=landmark?s:cityBuildingYScale(url,h,size.y),sz=landmark?s:d/size.z;
       model.scale.set(sx,sy,sz);model.position.set(-center.x*sx,-bounds.min.y*sy,-center.z*sz);
-      if(landmark)box(w,.07,d,M.walk,0,.035,0,slot.group);
+      if(landmark){const apron=box(w,.07,d,M.walk,0,.035,0,slot.group);apron.userData.occlusionDecoration=true}
       slot.group.add(model);slot.model=model;slot.fallback.visible=false;registerMaterials(model,slot);
       if(landmark)matchKiesingerHeight();
     }catch(e){console.warn("Keeping procedural building for "+slot.building.id,e)}
@@ -476,9 +517,9 @@ function showRendererFailure(error){
     if(b.kind){powerPlant(b,i);return}
     const g=new T.Group(),fallback=new T.Group(),w=b.w*S,d=b.h*S,h=Math.max(2.8,b.hgt*H),shop=b.id==="krugers-kugellager",cols=[0x65645f,0x706f69,0x5c5d59,0x7a7871],bm=mat(shop?0xe8dac3:cols[i%cols.length],.98);
     g.add(fallback);box(w,h,d,bm,0,h/2,0,fallback);box(w*1.03,.16,d*1.03,mat(shop?0xf36b17:0x89877f),0,h+.08,0,fallback);
-    const dx=(b.doorX-(b.x+b.w/2))*S;box(Math.min(1.3,w*.18),1.55,.1,M.dark,dx,.78,d/2+.06,fallback);
-    if(shop){box(w*.98,.6,.12,mat(0xd72b67),0,1.95,d/2+.08,fallback);box(w*.98,.11,.64,mat(0xffe2b5),0,1.48,d/2+.30,fallback)}
-    else box(Math.min(2,w*.32),.1,.62,mat(0xaaa69b),dx,1.72,d/2+.28,fallback);
+    const dx=(b.doorX-(b.x+b.w/2))*S;box(Math.min(1.3,w*.18),1.7,.1,M.dark,dx,.85,d/2+.06,fallback);
+    if(shop){box(w*.98,.6,.12,mat(0xd72b67),0,2.10,d/2+.08,fallback);box(w*.98,.11,.64,mat(0xffe2b5),0,1.80,d/2+.30,fallback)}
+    else box(Math.min(2,w*.32),.1,.62,mat(0xaaa69b),dx,1.82,d/2+.28,fallback);
     const cn=Math.max(2,Math.min(7,Math.floor(w/1.25))),rn=Math.max(2,Math.min(5,Math.floor(h/1.05)));
     for(let r=0;r<rn;r++)for(let c=0;c<cn;c++)box(.48,.31,.04,shop?M.dark:M.win,-w*.41+c*(w*.82/Math.max(1,cn-1)),.9+r*Math.max(.64,(h-1.6)/Math.max(1,rn-1)),d/2+.025,fallback);
     const l=shop?bearingShopSign(w,d):buildingPlacard(b,w,dx,2.23,d/2+.22);g.add(l);g.position.set(X(b.x+b.w/2),0,Z(b.y+b.h/2));world.add(g);
@@ -772,7 +813,7 @@ function showRendererFailure(error){
   function atlasSprite(kind,scale){
     const source=bridge.getNpcSpriteCanvas?.(kind),grid=bridge.npcSpriteGrids?.[kind];if(!source||!grid)return null;
     let tx=atlasTextureCache.get(kind);if(!tx){tx=new T.CanvasTexture(source);tx.colorSpace=T.SRGBColorSpace;tx.generateMipmaps=false;tx.minFilter=tx.magFilter=T.LinearFilter;tx.premultiplyAlpha=true;atlasTextureCache.set(kind,tx)}
-    let material=atlasMaterialCache.get(kind);if(!material){material=new T.MeshBasicMaterial({map:tx,transparent:true,alphaTest:.02,depthWrite:false,premultipliedAlpha:true,side:T.DoubleSide});atlasMaterialCache.set(kind,material)}
+    let material=atlasMaterialCache.get(kind);if(!material){material=new T.MeshBasicMaterial({map:tx,transparent:true,alphaTest:.08,depthWrite:true,premultipliedAlpha:true,side:T.DoubleSide});atlasMaterialCache.set(kind,material)}
     const geometry=new T.PlaneGeometry(scale*(grid.frameWidth&&grid.frameHeight?grid.frameWidth/grid.frameHeight:1),scale),uv=geometry.attributes.uv,q=new T.Mesh(geometry,material);q.userData={[kind+"Sprite"]:true,grid,plantedHeight:grid.pivot?scale*(grid.pivot[1]/grid.frameHeight-.5):null,baseUv:Float32Array.from(uv.array),spriteFrame:-1,spriteRow:-1,spriteFlip:null};return q
   }
   function specialSprite(n){return n.special==="borderPourer"?atlasSprite("borderPourer",Germany3DBridge.npcSpriteGrids.borderPourer.pivot?2.62*224/208:2.62):n.special==="merkel"?atlasSprite("merkel",2.42):n.special==="bayern"?atlasSprite("bayern",2.91):n.special==="alice"?atlasSprite("alice",2.42):null}
@@ -812,19 +853,34 @@ function showRendererFailure(error){
   const npcMeshes=new Map(),policeMeshes=new Map(),trafficCarMeshes=new Map(),policeVehicleMeshes=new Map(),policeHelicopterMeshes=new Map(),pickupMeshes=new Map();
   bridge.getNPCs().forEach(n=>{const q=npcSprite(n)||character("npc");scene.add(q);npcMeshes.set(n,q)});
   bridge.pickups.forEach(p=>{const q=pickup(p);scene.add(q);pickupMeshes.set(p,q)});
-  function updateBuildingOcclusion(){
-    const px=X(bridge.player.x),pz=Z(bridge.player.y),dx=camera.position.x-px,dz=camera.position.z-pz;
+  const buildingSightline=new T.Raycaster(),sightlineTarget=new T.Vector3(),sightlineDirection=new T.Vector3();
+  let previousOcclusionTime=performance.now();
+  function buildingObstructsPlayer(slot){
+    const px=X(bridge.player.x),pz=Z(bridge.player.y),ground=bridge.stationElevation(bridge.player.x,bridge.player.y);
+    // Sample the actual player's silhouette, never an expanded contact footprint.
+    for(const [side,height] of [[0,.2],[0,.65],[0,.9],[-.12,.9],[.12,.9],[0,1.4]]){
+      sightlineTarget.set(px+side,ground+height,pz);
+      sightlineDirection.subVectors(sightlineTarget,camera.position);
+      const distance=sightlineDirection.length();
+      buildingSightline.set(camera.position,sightlineDirection.normalize());buildingSightline.near=0;buildingSightline.far=distance-.02;
+      if(slot.viewBounds&&!buildingSightline.ray.intersectsBox(slot.viewBounds))continue;
+      const hits=buildingSightline.intersectObject(slot.group,true);
+      if(hits.some(hit=>{
+        let node=hit.object;while(node){if(!node.visible||node===slot.label||node.userData.occlusionDecoration)return false;if(node===slot.group)break;node=node.parent}
+        const materials=hit.object.material,m=Array.isArray(materials)?materials[hit.face?.materialIndex||0]:materials;
+        // Authored glass does not hide the player, even while the facade fades.
+        return m&&(m.userData.baseOpacity??m.opacity)>=.65;
+      }))return true;
+    }
+    return false;
+  }
+  function updateBuildingOcclusion(now=performance.now()){
+    const dt=Math.max(0,(now-previousOcclusionTime)/1000);previousOcclusionTime=now;
     for(const slot of buildingSlots){
-      // Detailed facades have many overlapping surfaces; each blends separately over the player.
-      const b=slot.building;
-      let near=0,far=1;
-      for(let axis=0;axis<2;axis++){
-        const origin=axis?pz:px,delta=axis?dz:dx,min=axis?Z(b.y-35):X(b.x-35),max=axis?Z(b.y+b.h+35):X(b.x+b.w+35);
-        if(Math.abs(delta)<1e-6){if(origin<min||origin>max){near=2;break}continue}
-        const a=(min-origin)/delta,c=(max-origin)/delta;near=Math.max(near,Math.min(a,c));far=Math.min(far,Math.max(a,c));
-      }
-      const target=near<far&&far>0&&near<1 ? .03 : 1;
-      slot.opacity=target<1?target:slot.opacity+(1-slot.opacity)*.16;
+      slot.obstructing=buildingObstructsPlayer(slot);
+      const target=slot.obstructing?.03:1;
+      slot.opacity+=(target-slot.opacity)*(1-Math.exp(-(target<slot.opacity?12:8)*dt));
+      if(Math.abs(slot.opacity-target)<.001)slot.opacity=target;
       const faded=slot.opacity<.985;
       for(const m of slot.materials){
         const transparent=faded||m.userData.baseTransparent;
@@ -955,7 +1011,8 @@ function showRendererFailure(error){
     const geometry=new T.PlaneGeometry(height*320/416,height),uv=geometry.attributes.uv,base=Float32Array.from(uv.array);
     const mesh=new T.Mesh(geometry,amtPaintMaterial());
     mesh.visible=false;amtScene.add(mesh);
-    amtMoving.push({id,height,mesh,uv,base,cell:-1,renderKey:"",mood:0});
+    const walkFrames=["aktenkurier","archivbotin"].includes(id)?16:8;
+    amtMoving.push({id,height,mesh,uv,base,walkFrames,cell:-1,renderKey:"",mood:0});
   }
   const amtPaintedProps=[];
   function amtPaintedProp(column,width,height,x,y,z,turn=0){
@@ -990,7 +1047,7 @@ function showRendererFailure(error){
       actor.detail=textures.get(detailUrl);
     }
     for(const actor of amtMoving){
-      const url=`./assets/buergeramt/characters/${actor.id}-motion${amtMobile?"-mobile":""}.webp?v=20261007-crowd`;
+      const url=`./assets/buergeramt/characters/${actor.id}-motion${amtMobile?"-mobile":""}.webp?v=20261008-dense-walk`;
       const texture=amtTexture(url,()=>{actor.mesh.visible=true},error=>console.warn("Bürgeramt character unavailable",actor.id,error));
       actor.atlas=texture;
       actor.mesh.material.map=texture;actor.mesh.material.needsUpdate=true;
@@ -1039,20 +1096,24 @@ function showRendererFailure(error){
       if(close&&row<4&&actor.walkDirection!==state.direction){
         if(actor.walkDetail){if(actor.mesh.material.map===actor.walkDetail){actor.mesh.material.map=actor.atlas;actor.mesh.material.needsUpdate=true}actor.walkDetail.dispose()}
         actor.walkDirection=state.direction;
-        const url=`./assets/buergeramt/characters/${actor.id}-walk-${state.direction}-detail.webp?v=20261007-paint-detail`;
+        const smallDetail=amtMobile&&(window.devicePixelRatio||1)<1.5&&actor.walkFrames===16;
+        const url=`./assets/buergeramt/characters/${actor.id}-walk-${state.direction}-detail${smallDetail?"-mobile":""}.webp?v=20261008-dense-walk`;
         actor.walkDetail=amtTexture(url,undefined,error=>console.warn("Bürgeramt walk detail unavailable",actor.id,error));
       }
-      const cell=row*8+state.frame;
+      // The simulation's distance clock keeps its cadence and action boundaries.
+      // Denser art samples the same normalized phase; it never speeds up the walk.
+      const sample=row<4?Math.min(actor.walkFrames-1,Math.floor((state.phase??state.frame/8)*actor.walkFrames)):state.frame;
+      const cell=row<4?row*actor.walkFrames+sample:4*actor.walkFrames+(row-4)*8+sample;
       actor.cell=cell;
       const actionDetail=close&&row>=4&&!!actor.detail?.image;
       const walkDetail=close&&row<4&&actor.walkDirection===state.direction&&!!actor.walkDetail?.image;
       const texture=actionDetail?actor.detail:walkDetail?actor.walkDetail:actor.atlas;
       if(texture&&actor.mesh.material.map!==texture){actor.mesh.material.map=texture;actor.mesh.material.needsUpdate=true}
-      const key=actionDetail?`detail:${row}`:walkDetail?`walk:${row}:${state.frame}`:`atlas:${cell}`;
+      const key=actionDetail?`detail:${row}`:walkDetail?`walk:${row}:${sample}`:`atlas:${cell}`;
       if(key!==actor.renderKey){actor.renderKey=key;
         if(actionDetail)amtUv(actor,row-4,0,4,1);
-        else if(walkDetail)amtUv(actor,state.frame%4,Math.floor(state.frame/4),4,2);
-        else amtUv(actor,state.frame,row,8,8);
+        else if(walkDetail)amtUv(actor,sample%4,Math.floor(sample/4),4,actor.walkFrames/4);
+        else {const cols=actor.walkFrames===16?12:8;amtUv(actor,cell%cols,Math.floor(cell/cols),cols,8)}
       }
       if(distance>7){actor.walkDetail?.dispose();actor.walkDetail=null;actor.walkDirection="";actor.detail?.dispose();actor.detail=null}
       actor.mesh.material.userData.breath.value=Math.sin(now/1750+actor.height*7)*.75+Math.sin(now/2900+actor.height*11)*.25;
@@ -1090,14 +1151,27 @@ function showRendererFailure(error){
     return true}
   function resize(){renderer.setSize(innerWidth,innerHeight,false);camera.aspect=innerWidth/innerHeight;camera.updateProjectionMatrix();amtCamera.aspect=innerWidth/innerHeight;amtCamera.updateProjectionMatrix()}resize();addEventListener("resize",resize,{passive:true});
   const spawnProbe=new T.Vector3();
+  const vehicleViewFrustum=new T.Frustum(),vehicleViewMatrix=new T.Matrix4(),vehicleViewBounds=new T.Box3();
+  function isVehicleVisible(x,y,angle=0){
+    camera.updateMatrixWorld();
+    vehicleViewMatrix.multiplyMatrices(camera.projectionMatrix,camera.matrixWorldInverse);
+    vehicleViewFrustum.setFromProjectionMatrix(vehicleViewMatrix);
+    // Conservative complete-car envelope includes maximum steering, mirrors,
+    // roof lamps and its ground shadow, regardless of loaded/fallback model.
+    const radius=107*S,elevation=bridge.vehicleElevation?.(x,y)||0,px=X(x),pz=Z(y);
+    vehicleViewBounds.min.set(px-radius,elevation-.5,pz-radius);
+    vehicleViewBounds.max.set(px+radius,elevation+2.25,pz+radius);
+    return vehicleViewFrustum.intersectsBox(vehicleViewBounds);
+  }
   function isWorldPointVisible(x,y,padding=0,kind="officer"){const height=kind==="helicopter"?6.8:kind==="car"?.7:1;spawnProbe.set(X(x),height,Z(y)).project(camera);const padX=padding/Math.max(1,innerWidth)*2,padY=padding/Math.max(1,innerHeight)*2;return spawnProbe.z>=-1&&spawnProbe.z<=1&&spawnProbe.x>=-1-padX&&spawnProbe.x<=1+padX&&spawnProbe.y>=-1-padY&&spawnProbe.y<=1+padY}
   function inspectAssets(){
     const bounds=model=>{if(!model)return null;const b=new T.Box3().setFromObject(model),s=b.getSize(new T.Vector3());return{width:s.x,height:s.y,depth:s.z,ground:b.min.y}};
     return{brandmauerFire:{loaded:lineFire.visible,fallback:firePlaneA.visible,particles:lineParticleLayers.map(layer=>layer.geometry.attributes.position.count),...fireMaskStatus},dumpsterFire:dumpsterFlames.map(({fire,smoke,fallback,maskStatus,mask,coreMask,smokeMask})=>({loaded:fire.visible,smoke:smoke.visible,fallback:fallback.visible,...maskStatus,images:[mask.image?.width||0,coreMask.image?.width||0,smokeMask.image?.width||0]})),streetCharacters:streetCharacters?.inspect()||null,placards:placardLayouts.map(item=>({...item})),buildings:buildingSlots.filter(s=>!s.building.kind).map(s=>({id:s.building.id,loaded:!!s.model,fallback:s.fallback.visible,bounds:bounds(s.model),glass:[...s.materials].filter(m=>/glass/i.test(m.name)).map(m=>({name:m.name,opacity:m.opacity,baseOpacity:m.userData.baseOpacity}))})),city:cityAssetSlots.map(s=>({file:s.file,loaded:!!s.model,fallback:s.fallback.visible,bounds:bounds(s.model)})),monument:kiesingerMonument?{bounds:bounds(kiesingerMonument),scale:kiesingerMonument.scale.y,loaded:!!kiesingerMonument.getObjectByName("KiesingerSculpture")}:null,banners:landmarkBanners.map(({kind,mesh})=>({kind,bounds:bounds(mesh)})),vehicles:[...trafficCarMeshes.values(),...policeVehicleMeshes.values()].map(s=>({id:s.state.id,kind:s.kind,loaded:!!s.model,fallback:s.fallback.visible,bounds:bounds(s.model),wheels:s.wheels.map(w=>({name:w.node.name,angle:w.node.rotation.x,radius:w.radius})),steering:s.steering.map(o=>o.rotation.y),brakes:s.brakes.map(m=>m.emissiveIntensity),beacons:s.beacons.map(b=>b.material.emissiveIntensity)})),sources:[...localModels.keys()],render:{...renderer.info.render},memory:{...renderer.info.memory}};
   }
   let parkCameraFrame=0,previousCameraTime=performance.now();
-  window.Germany3D={ready:true,isWorldPointVisible,sync(){
-    if(renderAmt())return;
+  window.Germany3D={ready:true,isWorldPointVisible,isVehicleVisible,
+  get buildingVisibility(){return buildingSlots.map(slot=>({id:slot.building.id,opacity:slot.opacity,obstructing:!!slot.obstructing}))},sync(){
+    if(renderAmt()){previousOcclusionTime=performance.now();return}
     syncChar(playerMesh,bridge.player,0);
     playerMesh.rotation.y=bridge.player.facing;
     for(const slot of trainSlots){for(let i=0;i<slot.cars.length;i++){const car=slot.train.cars[i],group=slot.cars[i].group,jolt=Math.sin(performance.now()*.04+i)*slot.train.bump*.1;group.position.set(X(car.x),.07+jolt,Z(car.y));group.rotation.y=Math.PI/2-car.angle}for(let i=0;i<slot.gangways.length;i++){const a=slot.train.cars[i],b=slot.train.cars[i+1],ax=X(a.x),az=Z(a.y),bx=X(b.x),bz=Z(b.y),mesh=slot.gangways[i],length=Math.hypot(bx-ax,bz-az);mesh.position.set((ax+bx)/2,.54,(az+bz)/2);mesh.rotation.y=Math.atan2(bx-ax,bz-az);mesh.scale.z=Math.max(.18,length-4.64)}}
@@ -1131,8 +1205,8 @@ function showRendererFailure(error){
     });
     for(const [n,q] of npcMeshes)if(!ns.includes(n)){if(q.userData.streetCharacter)streetCharacters?.remove(q);else scene.remove(q);npcMeshes.delete(n)}
     const ps=bridge.getPolice();ps.forEach(p=>{let q=policeMeshes.get(p);if(!q){q=character("police");scene.add(q);policeMeshes.set(p,q)}syncChar(q,p,.04)});for(const [p,q] of policeMeshes)if(!ps.includes(p)){scene.remove(q);policeMeshes.delete(p)}
-    const traffic=bridge.getTrafficCars?.()||[];traffic.forEach(car=>{let slot=trafficCarMeshes.get(car);if(!slot){slot=makeTrafficCarSlot(car);trafficCarMeshes.set(car,slot)}const sink=car.vortexSink||0,crush=car.vortexCrush||0,scale=Math.max(.055,1-sink*.93),impact=car.vortexImpact||0;if(impact&&impact!==slot.vortexImpact){slot.vortexImpact=impact;strikeWirtschaftswunder(impact)}slot.group.visible=car.vortexPhase!=="swallowed";slot.group.position.set(X(car.x),.07-sink*.72,Z(car.y));slot.group.scale.set(scale*(1+crush*.82),scale*(1-crush*.68),scale*(1-crush*.3));slot.group.rotation.order="YXZ";slot.group.rotation.set(-sink*1.18,Math.PI/2-car.angle,Math.sin((car.vortexSpin||0)*1.7)*sink*.62);syncVehicleWheels(slot)});for(const [car,slot] of trafficCarMeshes)if(!traffic.includes(car)){removeVehicleSlot(slot);trafficCarMeshes.delete(car)}
-    const vehicles=bridge.getPoliceVehicles?.()||[];vehicles.forEach(car=>{let slot=policeVehicleMeshes.get(car);if(!slot){slot=makePoliceCarSlot(car);policeVehicleMeshes.set(car,slot)}slot.group.position.set(X(car.x),.07,Z(car.y));slot.group.rotation.y=Math.PI/2-car.angle;syncVehicleWheels(slot)});for(const [car,slot] of policeVehicleMeshes)if(!vehicles.includes(car)){removeVehicleSlot(slot);policeVehicleMeshes.delete(car)}
+    const traffic=bridge.getTrafficCars?.()||[];traffic.forEach(car=>{let slot=trafficCarMeshes.get(car);if(!slot){slot=makeTrafficCarSlot(car);trafficCarMeshes.set(car,slot)}const sink=car.vortexSink||0,crush=car.vortexCrush||0,scale=Math.max(.055,1-sink*.93),impact=car.vortexImpact||0;if(impact&&impact!==slot.vortexImpact){slot.vortexImpact=impact;strikeWirtschaftswunder(impact)}slot.group.visible=car.vortexPhase!=="swallowed";slot.group.position.set(X(car.x),(bridge.vehicleElevation?.(car.x,car.y)||0)+.07-sink*.72,Z(car.y));syncVehicleScale(slot,scale,crush);slot.group.rotation.order="YXZ";slot.group.rotation.set(vehicleRoadPitch(car)-sink*1.18,Math.PI/2-car.angle,Math.sin((car.vortexSpin||0)*1.7)*sink*.62);syncVehicleWheels(slot)});for(const [car,slot] of trafficCarMeshes)if(!traffic.includes(car)){removeVehicleSlot(slot);trafficCarMeshes.delete(car)}
+    const vehicles=bridge.getPoliceVehicles?.()||[];vehicles.forEach(car=>{let slot=policeVehicleMeshes.get(car);if(!slot){slot=makePoliceCarSlot(car);policeVehicleMeshes.set(car,slot)}slot.group.position.set(X(car.x),(bridge.vehicleElevation?.(car.x,car.y)||0)+.07,Z(car.y));slot.group.rotation.order="YXZ";slot.group.rotation.set(vehicleRoadPitch(car),Math.PI/2-car.angle,0);syncVehicleWheels(slot)});for(const [car,slot] of policeVehicleMeshes)if(!vehicles.includes(car)){removeVehicleSlot(slot);policeVehicleMeshes.delete(car)}
     const helicopters=bridge.getPoliceHelicopters?.()||[];helicopters.forEach(helicopter=>{let slot=policeHelicopterMeshes.get(helicopter);if(!slot){slot=makePoliceHelicopterSlot(helicopter);policeHelicopterMeshes.set(helicopter,slot)}slot.group.position.set(X(helicopter.x),6.8+Math.sin(performance.now()*.003+helicopter.phase)*.18,Z(helicopter.y));slot.group.rotation.y=Math.PI/2-helicopter.angle;slot.rotor.rotation.y=helicopter.rotor;slot.beam.visible=helicopter.spotlight});for(const [helicopter,slot] of policeHelicopterMeshes)if(!helicopters.includes(helicopter)){world.remove(slot.group);policeHelicopterMeshes.delete(helicopter)}
     bridge.pickups.forEach(p=>{const q=pickupMeshes.get(p);q.visible=!p.taken;if(q.visible){q.position.set(X(p.x),.2,Z(p.y));q.rotation.y+=.012}});
     for(const slot of normObjectSlots){slot.material.color.setHex(slot.state.fixed?0x3f5b43:0x6c3d37);const target=slot.state.fixed?0:.08;slot.group.rotation.y+=(target-slot.group.rotation.y)*.18}

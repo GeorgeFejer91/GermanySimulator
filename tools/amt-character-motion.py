@@ -9,6 +9,7 @@ from __future__ import annotations
 
 import hashlib
 import argparse
+from io import BytesIO
 import json
 import math
 import sys
@@ -17,7 +18,10 @@ from pathlib import Path
 import cv2
 import numpy as np
 from PIL import Image
-from scipy.ndimage import label
+from scipy.ndimage import label, distance_transform_edt
+
+# Bound offline image work instead of spawning a worker for every host CPU.
+cv2.setNumThreads(1)
 
 ROOT = Path(__file__).resolve().parents[1]
 SOURCE = ROOT / "assets/sprite-sources/buergeramt"
@@ -54,6 +58,17 @@ ROWS = ("down", "right", "up", "left", "work", "gesture", "look", "flinch")
 ORIGINAL_NAMES = ("aktenkurier", "archivbotin", "formularsammler")
 NAMES = ORIGINAL_NAMES + ("nummernfluesterer", "nachtschichtmelderin",
                           "pfandarchitektin", "kopiependler", "warteschlangenpoetin")
+# Pilot: preserve 320x416 cells, pack 64 walking + 32 action cells in 12x8.
+# Other characters retain their accepted 8x8 layout.
+DENSE_NAMES = ("aktenkurier", "archivbotin")
+
+
+def mobile_cell(image: Image.Image) -> Image.Image:
+    """Filter one cell in isolation; remove sub-3% alpha ringing from its gutter."""
+    small = image.resize((image.width // 2, image.height // 2), Image.Resampling.LANCZOS)
+    rgba = np.array(small)
+    rgba[rgba[:, :, 3] < 8] = 0
+    return Image.fromarray(rgba)
 def chroma_figure(panel: Image.Image) -> Image.Image:
     """Remove only exterior connected magenta from a source view."""
     rgb = np.array(panel.convert("RGB"))
@@ -95,8 +110,13 @@ def alpha_figure(panel: Image.Image) -> Image.Image:
     return Image.fromarray(rgba, "RGBA")
 
 
-def source_poses(name: str) -> dict[str, Image.Image]:
-    sheet = Image.open(SOURCE / f"{name}-source.png")
+def source_sheet(name: str, raw: bool = False) -> Path:
+    clean = SOURCE / f"{name}-source-clean.png"
+    return clean if not raw and name in DENSE_NAMES else SOURCE / f"{name}-source.png"
+
+
+def source_poses(name: str, raw: bool = False) -> dict[str, Image.Image]:
+    sheet = Image.open(source_sheet(name, raw))
     action = Image.open(SOURCE / f"{name}-action.png")
     if sheet.size != (1536, 1024) or action.size != (1536, 1024):
         raise ValueError(f"{name}: expected 1536x1024 source sheets")
@@ -120,6 +140,64 @@ def source_poses(name: str) -> dict[str, Image.Image]:
         poses.update({direction: extract(action.crop((col * 384, 0, (col + 1) * 384, 1024)))
                       for col, direction in enumerate(("work", "look", "flinch", "gesture"))})
     return poses
+
+
+def prepare_source(name: str) -> dict:
+    """Rebuild the reviewed alpha master from hash-locked raw pixels and ROIs."""
+    if name not in DENSE_NAMES:
+        raise ValueError(f"No reviewed source cleanup for {name}")
+    recipe = json.loads((SOURCE / "clean-source-recipe.json").read_text(encoding="utf-8"))
+    cfg = recipe["characters"][name]
+    raw_path = source_sheet(name, raw=True)
+    if digest(raw_path) != cfg["raw_sha256"]:
+        raise ValueError(f"{name}: raw source changed; review its cleanup recipe first")
+    poses = source_poses(name, raw=True)
+    sheet = Image.new("RGBA", tuple(recipe["canvas"]))
+    removed = {}
+    def mask_for(shape, boxes):
+        mask = np.zeros(shape, dtype=bool)
+        for x0, y0, x1, y1 in boxes:
+            mask[max(0, y0):min(shape[0], y1), max(0, x0):min(shape[1], x1)] = True
+        return mask
+    for col, direction in enumerate(("down", "right", "up", "left")):
+        source = np.asarray(poses[direction])
+        rgba = source.copy()
+        r, g, b = (rgba[:, :, c].astype(float) for c in range(3))
+        opaque = rgba[:, :, 3] > 0
+        view = cfg["views"][direction]
+        protected = mask_for(opaque.shape, view["protected"])
+        hair = mask_for(opaque.shape, [view["hair"]])
+        key = (r >= 130) & (b >= 70) & (g < np.minimum(r, b) * .45) & (b > r * .45) & opaque
+        remove = key & ((distance_transform_edt(opaque) <= 4) | hair) & ~protected
+        # One local pass around the original contour and newly cleared hair gaps.
+        mixed = (r > 70) & (b > 25) & (g < np.minimum(r, b) * .55) & (b > r * .25) & opaque
+        remove |= mixed & (distance_transform_edt(opaque & ~remove) <= 2) & ~protected
+        # Visually measured mixed pink spill inside hair/hand gaps can evade
+        # the stricter screen-colour test. Never apply this to the whole figure.
+        spill = mask_for(opaque.shape, view.get("mixed_spill", []))
+        remove |= spill & (r > 90) & (b > 35) & (g < np.minimum(r, b) * .8) & (b > r * .28) & opaque
+        gap = mask_for(opaque.shape, view["gaps"])
+        gap_remove = gap & (r > 90) & (b > 50) & (g < np.minimum(r, b) * .5) & (b > r * .38) & opaque
+        rgba[remove | gap_remove] = 0
+        clean = alpha_figure(Image.fromarray(rgba))
+        after = np.asarray(clean)
+        surviving = after[:, :, 3] > 0
+        safe = protected & opaque & ~gap_remove & ~(spill & remove)
+        if (not np.array_equal(after[surviving], source[surviving])
+                or not np.array_equal(after[safe], source[safe])
+                or not np.array_equal(after, np.asarray(alpha_figure(clean)))):
+            raise ValueError(f"{name}/{direction}: cleanup changed protected paint or is not idempotent")
+        removed[direction] = int((opaque & ~surviving).sum())
+        sheet.alpha_composite(clean, (col * 384, 0))
+    encoded = BytesIO()
+    sheet.save(encoded, format="PNG")
+    data = encoded.getvalue()
+    if hashlib.sha256(data).hexdigest() != cfg["clean_sha256"]:
+        raise ValueError(f"{name}: prepared source differs from the reviewed candidate")
+    target = SOURCE / f"{name}-source-clean.png"
+    target.write_bytes(data)
+    return {"source_file": target.name, "source_sha256": digest(target),
+            "raw_source_sha256": cfg["raw_sha256"], "removed_pixels": removed}
 
 
 def register_family(poses: dict[str, Image.Image], resolution: int = 1) -> dict[str, Image.Image]:
@@ -184,7 +262,7 @@ def close_paint_pinholes(image: Image.Image) -> Image.Image:
     mask = np.zeros(rgba.shape[:2], np.uint8)
     for index in range(1, count):
         x, y, width, height, area = stats[index]
-        if (10 < area < 400 and y > rgba.shape[0] * .55 and
+        if (10 < area < 400 and y > rgba.shape[0] * .72 and
                 x > 0 and y > 0 and x + width < rgba.shape[1] and y + height < rgba.shape[0]):
             mask[:] = (regions == index).astype(np.uint8) * 255
             patch = rgba[max(0, y - 24):y + height + 24,
@@ -234,6 +312,7 @@ def continuous_walk(source: Image.Image, phase: float, travel: tuple[int, int],
 
 def build(name: str) -> dict:
     print(f"{name}: registering", flush=True)
+    source_path = source_sheet(name)
     poses = source_poses(name)
     registered = register_family(poses)
     detail_poses = register_family(poses, 2)
@@ -241,7 +320,9 @@ def build(name: str) -> dict:
     source_dir.mkdir(exist_ok=True)
     for kind, image in registered.items():
         image.save(source_dir / f"{kind}.png")
-    atlas = Image.new("RGBA", (CELL[0] * 8, CELL[1] * len(ROWS)))
+    count = 16 if name in DENSE_NAMES else 8
+    columns = 12 if count == 16 else 8
+    atlas = Image.new("RGBA", (CELL[0] * columns, CELL[1] * len(ROWS)))
     row_images: dict[str, list[Image.Image]] = {}
     detail_walks = {}
     directions = ("down", "right", "up", "left")
@@ -249,36 +330,52 @@ def build(name: str) -> dict:
     for direction, vector in zip(directions, travel):
         print(f"{name}: walking {direction}", flush=True)
         pose = registered[direction]
-        steps = [continuous_walk(pose, i * math.tau / 8, vector) for i in range(8)]
+        # Full-strength fields inflate/pinch shoes, including front/rear views.
+        # This fixed, reviewed bound applies to the entire cycle at both sizes.
+        strength = .2 if name in DENSE_NAMES else 1
+        steps = [continuous_walk(pose, i * math.tau / count, vector, strength=strength) for i in range(count)]
         row_images[direction] = [frame(im) for im in steps]
-        detail_row = Image.new("RGBA", (CELL[0] * 8, CELL[1] * 4))
-        for index in range(8):
-            high = continuous_walk(detail_poses[direction], index * math.tau / 8,
-                                   vector, resolution=2)
+        detail_row = Image.new("RGBA", (CELL[0] * 8, CELL[1] * (count // 2)))
+        for index in range(count):
+            high = continuous_walk(detail_poses[direction], index * math.tau / count,
+                                   vector, strength=strength, resolution=2)
             detail_row.alpha_composite(frame(high, 2),
                                        ((index % 4) * CELL[0] * 2, (index // 4) * CELL[1] * 2))
         path = OUTPUT / f"{name}-walk-{direction}-detail.webp"
         path.parent.mkdir(parents=True, exist_ok=True)
         detail_row.save(path, "WEBP", quality=94, method=5)
         encoded_walk = Image.open(path).convert("RGBA")
-        for index in range(8):
+        for index in range(count):
             col, row = index % 4, index // 4
             box = encoded_walk.crop((col * 640, row * 832, (col + 1) * 640, (row + 1) * 832)).getbbox()
             if not box or min(box[0], box[1], 640 - box[2], 832 - box[3]) < 8:
                 raise ValueError(f"{name}: {direction} detail walk {index} lost its alpha gutter: {box}")
         detail_walks[direction] = {"sha256": digest(path), "bytes": path.stat().st_size}
+        if count == 16:
+            mobile_walk = OUTPUT / f"{name}-walk-{direction}-detail-mobile.webp"
+            mobile_atlas = Image.new('RGBA', (detail_row.width // 2, detail_row.height // 2))
+            for index in range(count):
+                x, y = index % 4 * 640, index // 4 * 832
+                small = mobile_cell(detail_row.crop((x, y, x + 640, y + 832)))
+                mobile_atlas.alpha_composite(small, (x // 2, y // 2))
+            mobile_atlas.save(mobile_walk, "WEBP", quality=90, method=5)
+            detail_walks[direction].update(mobile_sha256=digest(mobile_walk),
+                                           mobile_bytes=mobile_walk.stat().st_size)
     for state in ("work", "gesture", "look", "flinch"):
         row_images[state] = [frame(idle(registered[state], i)) for i in range(8)]
-    for row, state in enumerate(ROWS):
-        for col, image in enumerate(row_images[state]):
-            atlas.alpha_composite(image, (col * CELL[0], row * CELL[1]))
+    cells = [image for state in ROWS for image in row_images[state]]
+    for index, image in enumerate(cells):
+        atlas.alpha_composite(image, ((index % columns) * CELL[0], (index // columns) * CELL[1]))
     OUTPUT.mkdir(parents=True, exist_ok=True)
     QA.mkdir(parents=True, exist_ok=True)
     output = OUTPUT / f"{name}-motion.webp"
     atlas.save(output, "WEBP", quality=88, method=4)
     mobile = OUTPUT / f"{name}-motion-mobile.webp"
-    atlas.resize((CELL[0] * 4, CELL[1] * len(ROWS) // 2),
-                 Image.Resampling.LANCZOS).save(mobile, "WEBP", quality=85, method=4)
+    mobile_atlas = Image.new('RGBA', (atlas.width // 2, atlas.height // 2))
+    for index, image in enumerate(cells):
+        mobile_atlas.alpha_composite(mobile_cell(image),
+                                    ((index % columns) * CELL[0] // 2, (index // columns) * CELL[1] // 2))
+    mobile_atlas.save(mobile, "WEBP", quality=85, method=4)
     # Near-field action art retains source detail without a 2x 64-frame walk atlas.
     detail = Image.new("RGBA", (CELL[0] * 8, CELL[1] * 2))
     for col, state in enumerate(("work", "gesture", "look", "flinch")):
@@ -294,20 +391,20 @@ def build(name: str) -> dict:
     encoded = Image.open(output).convert("RGBA")
     digest_pixels = []
     for row in range(len(ROWS)):
-        for col in range(8):
+        for col in range(columns):
             cell = encoded.crop((col * CELL[0], row * CELL[1],
                                  (col + 1) * CELL[0], (row + 1) * CELL[1]))
             if not cell.getbbox():
                 raise ValueError(f"Empty encoded cell {name} {row}:{col}")
             digest_pixels.append(hashlib.sha256(cell.tobytes()).hexdigest())
-    contact = Image.new("RGB", (CELL[0] * 8, CELL[1] * len(ROWS)), "#b8b3a4")
+    contact = Image.new("RGB", atlas.size, "#b8b3a4")
     contact.paste(encoded, mask=encoded.getchannel("A"))
-    contact.resize((CELL[0] * 4, CELL[1] * len(ROWS) // 2),
+    contact.resize((atlas.width // 2, atlas.height // 2),
                    Image.Resampling.LANCZOS).save(QA / f"{name}-contact.png")
     mobile_encoded = Image.open(mobile).convert("RGBA")
     mobile_hashes = []
     for row in range(len(ROWS)):
-        for col in range(8):
+        for col in range(columns):
             cell = mobile_encoded.crop((col * CELL[0] // 2, row * CELL[1] // 2,
                                         (col + 1) * CELL[0] // 2, (row + 1) * CELL[1] // 2))
             if not cell.getbbox():
@@ -317,11 +414,18 @@ def build(name: str) -> dict:
     mobile_contact.paste(mobile_encoded, mask=mobile_encoded.getchannel("A"))
     mobile_contact.save(QA / f"{name}-mobile-contact.png")
     return {
-        "source_sha256": digest(SOURCE / f"{name}-source.png"),
+        "source_file": source_path.relative_to(ROOT).as_posix(),
+        "source_sha256": digest(source_path),
+        "raw_source_sha256": digest(SOURCE / f"{name}-source.png"),
+        "source_recipe_sha256": digest(SOURCE / "clean-source-recipe.json") if source_path.name.endswith("-source-clean.png") else None,
         "action_sha256": digest(SOURCE / f"{name}-action.png"),
         "reaction_sha256": digest(SOURCE / f"{name}-reaction.png") if name in ORIGINAL_NAMES else None,
         "atlas_sha256": digest(output),
-        "cell": list(CELL), "rows": list(ROWS), "frames_per_row": 8,
+        "cell": list(CELL), "states": list(ROWS), "walk_frames": count,
+        "action_frames": 8, "atlas_grid": [columns, len(ROWS)],
+        "state_offsets": [0, count, count * 2, count * 3,
+                          count * 4, count * 4 + 8, count * 4 + 16, count * 4 + 24],
+        "walk_detail_grid": [4, count // 4],
         "desktop_bytes": output.stat().st_size,
         "mobile_sha256": digest(mobile), "mobile_bytes": mobile.stat().st_size,
         "detail_sha256": digest(detail_path), "detail_bytes": detail_path.stat().st_size,
@@ -335,7 +439,14 @@ def build(name: str) -> dict:
 def main() -> None:
     parser = argparse.ArgumentParser()
     parser.add_argument("--name", choices=NAMES)
+    parser.add_argument("--prepare-sources", action="store_true", help="Rebuild reviewed clean source PNGs without baking atlases")
     args = parser.parse_args()
+    if args.prepare_sources:
+        selected = (args.name,) if args.name else DENSE_NAMES
+        if any(name not in DENSE_NAMES for name in selected):
+            parser.error("Source preparation is available only for the two reviewed dense characters")
+        print(json.dumps({name: prepare_source(name) for name in selected}, indent=2))
+        return
     selected = (args.name,) if args.name else NAMES
     QA.mkdir(parents=True, exist_ok=True)
     report_path = QA / "interaction-build-report.json"

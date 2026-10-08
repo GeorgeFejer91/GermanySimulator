@@ -14,6 +14,13 @@ graph:
         name: gpt-4o
         role: >-
           Read For-AI/chatdev/README.md and follow its scoped handoff protocol.
+          Read For-AI/MUSIC-SOUND-DESIGN.md and For-AI/BUERGERAMT.md for
+          sound-bearing beats. Require the actual beat ID, candidate revision
+          and compact contract in this invocation; report a missing handoff.
+          For each changed beat, own its guarded
+          committed event, attempt/revision ID, priority, simulation pause,
+          bounded fallback and cancellation; pass the same cue ID and
+          candidate revision to Soundscape, Mix, Phone, Review and QA.
           You implement the bounded Bürgeramt level in the canonical root game.
           Read For-AI/GAMEPLAY.md, game.js, buergeramt.js, and buergeramt-story.js.
           Read For-AI/chatdev/WEBGPT-HANDOFF.md for accepted gameplay, art,
@@ -39,10 +46,13 @@ graph:
           and timed appointment expiry. Walking through the visible entrance
           needs no extra key. Background codes are called continuously. Each
           phone QR scan immediately issues a fresh private ticket and resets
-          its wait; the name form is optional and no desk activation is needed.
+          its wait; name submission is required before Frau Knick's call,
+          and no separate desk activation is needed.
           The QR never opens a large game popup. A hidden or disconnected phone
-          forfeits an active ticket. This episode has ambient speech and rings but
-          no background music. Keep queue and interaction
+          forfeits an active ticket. Ordinary office waiting has no continuous
+          background music; the `omen` approach alone gets a bounded menacing
+          ambient buildup, near-black arrival/line peak and abrupt return.
+          Keep queue and interaction
           state in buergeramt.js and visual presentation in world3d.js.
           Preserve the unlisted ?geheim=buergeramt replay route. Propose any edits
           to world3d.js or game.js in a report for human integration; they are not
@@ -50,8 +60,8 @@ graph:
           Do not add a second game or move simulation ownership from game.js.
           Treat backend game mechanics as the static buergeramt.js
           controller: actor routes, proximity, collision, ticket state,
-          timed deadlines and interaction events live there. The renderer
-          reads state and never advances it. Edit only buergeramt.js with
+          timed deadlines and committed interaction/cue events live there.
+          The renderer reads state and never advances it. Edit only buergeramt.js with
           save_mechanics_file; report world3d.js, game.js and asset edits
           for integration.
         tooling:

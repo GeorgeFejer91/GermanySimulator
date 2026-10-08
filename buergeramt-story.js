@@ -1,35 +1,35 @@
 (function(){"use strict";
 window.BuergeramtStory=Object.freeze({
  characters:{
-  aktenkurier:{speaker:"DER AKTENKURIER",lines:[
+  aktenkurier:{speaker:"DER AKTENKURIER",fullName:"Horst Stempelmann",voiceId:"amt-horst-stempelmann",lines:[
    {line:"Stopp. Sie haben den Aktenlauf ohne Laufzettel gekreuzt. Das gilt als Abkürzung und muss gestempelt werden.",tone:"warning",valence:-.55},
    {line:"Ihr Formular ist jetzt im Umlauf. Bitte bleiben Sie stehen, bis es Sie eingeholt hat.",tone:"procedural",valence:-.18}
   ]},
-  archivbotin:{speaker:"DIE ARCHIVBOTIN",lines:[
+  archivbotin:{speaker:"DIE ARCHIVBOTIN",fullName:"Gisela Aktenberg",voiceId:"amt-gisela-aktenberg",lines:[
    {line:"Sie stehen vor der Ablage, ohne abgelegt zu sein. Ich setze Ihren Vorgang vorsorglich auf Wiedervorlage.",tone:"dread",valence:-.48},
    {line:"Der Schlüssel passt. Das Schloss stellt noch einen Antrag auf Zuständigkeit.",tone:"procedural",valence:-.16}
   ]},
-  formularsammler:{speaker:"DER FORMULARSAMMLER",lines:[
+  formularsammler:{speaker:"DER FORMULARSAMMLER",fullName:"Dieter Papiermann",voiceId:"amt-dieter-papiermann",lines:[
    {line:"Meine Seitenfolge ist nicht genehmigt. Wenn Blatt siebzehn wieder vorn steht, beginnt mein Termin von gestern noch einmal.",tone:"dread",valence:-.72},
    {line:"Die letzte Seite war leer. Frau Knick nennt das ein freies Zeitfenster. Ich nenne es Aussicht.",tone:"relief",valence:.32}
   ]},
-  nummernfluesterer:{speaker:"DER NUMMERNFLÜSTERER",lines:[
+  nummernfluesterer:{speaker:"DER NUMMERNFLÜSTERER",fullName:"Rüdiger Nummermann",voiceId:"amt-ruediger-nummermann",lines:[
    {line:"Die Anzeige hat meine Nummer geflüstert, bevor ich sie gezogen habe. Jetzt verlangt sie einen Nachweis, dass ich noch nicht dran bin.",tone:"dread",valence:-.78},
    {line:"Wenn die Zahl wieder rückwärts läuft, bleibe ich hier. Für Fluchtwege ist Schalter zwei zuständig.",tone:"warning",valence:-.51}
   ]},
-  nachtschichtmelderin:{speaker:"DIE NACHTSCHICHT-MELDERIN",lines:[
+  nachtschichtmelderin:{speaker:"DIE NACHTSCHICHT-MELDERIN",fullName:"Ingrid Feierabend",voiceId:"amt-ingrid-feierabend",lines:[
    {line:"Mein Telefon ist tot. Die App bestätigt trotzdem, dass ich persönlich anwesend bin. Ich halte das Gerät hoch, damit es mich nicht vergisst.",tone:"dread",valence:-.62},
    {line:"Meine Akte ist lesbar. Das ist offenbar der Formfehler. Ich soll sie noch einmal ausdrucken, bis sie müde aussieht.",tone:"procedural",valence:-.3}
   ]},
-  pfandarchitektin:{speaker:"DIE PFANDARCHITEKTIN",lines:[
+  pfandarchitektin:{speaker:"DIE PFANDARCHITEKTIN",fullName:"Bärbel Pfennig",voiceId:"amt-baerbel-pfennig",lines:[
    {line:"Dieser Bon ist länger als der Flur. Die Quittung für die Quittung fehlt noch; ohne sie darf ich den Anfang nicht abreißen.",tone:"procedural",valence:-.45},
    {line:"Vorhin war mein Ordner leichter. Vielleicht hat die Ablage eine Seite behalten. Vielleicht war es meine Hand.",tone:"dread",valence:-.64}
   ]},
-  kopiependler:{speaker:"DER KOPIEPENDLER",lines:[
+  kopiependler:{speaker:"DER KOPIEPENDLER",fullName:"Uwe Kopitz",voiceId:"amt-uwe-kopitz",lines:[
    {line:"Ich habe das Original kopiert, wie verlangt. Jetzt gilt die Kopie als Original und mein Original als verdächtige Zweitschrift.",tone:"warning",valence:-.54},
    {line:"Der Fahrradhelm ist keine Kopfbedeckung. Das hat Schalter vier schriftlich bestätigt; das Schreiben liegt unter dem Helm.",tone:"relief",valence:.15}
   ]},
-  warteschlangenpoetin:{speaker:"DIE WARTESCHLANGENPOETIN",lines:[
+  warteschlangenpoetin:{speaker:"DIE WARTESCHLANGENPOETIN",fullName:"Hilde Wartenscheidt",voiceId:"amt-hilde-wartenscheidt",lines:[
    {line:"Die Nummer auf meinem Zettel hat sich verdoppelt. Ich soll beweisen, welche Hälfte zuerst gewartet hat.",tone:"dread",valence:-.7},
    {line:"Auf der Rückseite steht endlich ein Satz. Leider ist er nicht unterschrieben, also bleibt er vorläufig ein Geräusch.",tone:"relief",valence:.24}
   ]}

@@ -15,7 +15,7 @@ The appearance is not the archetype. Names, skin tones, family histories, ages a
 
 The production order alternates these two accepted figures. Personal names and appearance still rotate independently, so “middle class” describes the performed behavior and props, never an ethnicity.
 
-Both walk horizontal and vertical sidewalk routes and share one animation contract: eight authored contact/down/passing/up keys for both legs in side, front/down and back/up rows; three motion-compensated in-betweens per interval and loop seam; 32 runtime frames in each direction; a registered center and baseline; and horizontal mirroring only for left travel. They are pass-through crowd actors, so they cannot trap the player or jam each other. Runtime speech is circular-proximity based and repeats from the archetype's no-repeat regional pool. Berlin uses Denglisch; Deutschland uses German only.
+Both walk horizontal and vertical sidewalk routes and share one animation contract: eight authored contact/down/passing/up keys for both legs in side, front/down and back/up rows; three motion-compensated in-betweens per interval and loop seam; 32 runtime frames in each direction; a registered center and baseline; and horizontal mirroring only for left travel. They are solid crowd actors. On body-clear sidewalk corridors they pass using lateral clearance or yield/reverse when space is insufficient; collision and corner recovery must not permit overlap or perpetual walking in place. Runtime speech is circular-proximity based and repeats from the archetype's no-repeat regional pool. Berlin uses Denglisch; Deutschland uses German only.
 
 ## Source synthesis
 
