@@ -106,4 +106,4 @@ for(const role of cast.roleProfiles){
  }
 }
 execFileSync(process.execPath,[resolve(root,"tools/build-voice-dialogue-inventory.mjs"),"--check"],{cwd:root,stdio:"pipe"});
-console.log(`${cast.totalNewProfileCount} documented game/Secret Tunnel bindings checked; ${silentPatrons.length} new profiles still need live recognition`);
+console.log(`${cast.totalNewProfileCount} documented game/Secret Tunnel bindings checked; ${silentPatrons.length} static patron bindings checked`);
