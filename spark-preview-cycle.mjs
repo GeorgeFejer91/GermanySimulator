@@ -1,7 +1,7 @@
-// Ten-second clock shared by both renderers. Four original anchors plus ten
+// Shared continuous clock; no holds at intermediate keys. Four original anchors plus ten
 // authored bridge paintings. Crossing/regripping intervals never warp anatomy.
-export const CYCLE_DURATION = 10;
-export const ANCHOR_TIMES = [0,1.6,2,2.4,2.9,3.4,3.8,4.1,5.15,5.55,5.95,6.3,8.42,8.84];
+export const CYCLE_DURATION = 6.25;
+export const ANCHOR_TIMES = [0,1.3,2.5,3.1,3.2,3.3,4,4.25,5.1,5.2,5.3,5.4,5.5,5.6];
 export const ANCHORS = [
  {id:'ready',name:'Ready',file:'anchor-0.webp'},
  {id:'raise-1',name:'Lift to shoulder',file:'bridge-raise-1.webp'},
@@ -18,37 +18,21 @@ export const ANCHORS = [
  {id:'return-1',name:'Unfold arms',file:'bridge-return-1.webp'},
  {id:'return-2',name:'Lower the free hand',file:'bridge-return-2.webp'},
 ];
-// Only these same-side movements may interpolate. The builder may further
-// protect a segment when measured stamp scale or part geometry is incompatible.
-export const SPLAT_CANDIDATES = [0,1,2,5,13];
-export const BEATS = [
- {start:0,end:1.2,pair:0,from:0,to:0,label:'Ready'},
- {start:1.2,end:1.6,pair:0,from:0,to:1,label:'Lift to shoulder'},
- {start:1.6,end:2,pair:1,from:0,to:1,label:'Lift above forehead'},
- {start:2,end:2.4,pair:2,from:0,to:1,label:'Raise the stamp'},
- {start:2.4,end:2.55,pair:3,from:0,to:0,label:'Take aim'},
- {start:2.55,end:2.9,pair:3,from:0,to:1,label:'Take the paperwork'},
- {start:2.9,end:3.4,pair:4,from:0,to:1,label:'Support the document'},
- {start:3.4,end:3.8,pair:5,from:0,to:1,label:'Lower the stamp'},
- {start:3.8,end:4.1,pair:6,from:0,to:1,label:'Stamp the document',ease:'strike'},
- {start:4.1,end:4.8,pair:7,from:0,to:0,label:'Stamp contact'},
- {start:4.8,end:5.15,pair:7,from:0,to:1,label:'Lift off the paper'},
- {start:5.15,end:5.55,pair:8,from:0,to:1,label:'Put the document aside'},
- {start:5.55,end:5.95,pair:9,from:0,to:1,label:'Release the document'},
- {start:5.95,end:6.3,pair:10,from:0,to:1,label:'Fold arms'},
- {start:6.3,end:8,pair:11,from:0,to:0,label:'Refusal'},
- {start:8,end:8.42,pair:11,from:0,to:1,label:'Unfold arms'},
- {start:8.42,end:8.84,pair:12,from:0,to:1,label:'Lower the free hand'},
- {start:8.84,end:9.25,pair:13,from:0,to:1,label:'Return to ready'},
- {start:9.25,end:10,pair:13,from:1,to:1,label:'Ready'},
-];
+// Only these inspected same-side movements interpolate; the narrow stamp
+// layer retains its source size rather than resizing to the next painting.
+export const SPLAT_CANDIDATES = [0,1,2,5,6,7,13];
+// One moving interval per key; no held inbetweens or per-key ease-to-zero.
+export const BEATS = ANCHORS.map((anchor,pair)=>({
+ start:ANCHOR_TIMES[pair],end:ANCHOR_TIMES[pair+1]??CYCLE_DURATION,
+ pair,from:0,to:1,label:ANCHORS[(pair+1)%ANCHORS.length].name,
+}));
 export function cycleAt(time){
  const t=Math.max(0,Math.min(CYCLE_DURATION,Number(time)||0));
  const beat=BEATS.find(b=>t<b.end)||BEATS.at(-1);
- const u=Math.max(0,Math.min(1,(t-beat.start)/(beat.end-beat.start)));
- const ease=beat.ease==='strike'?u*u:u*u*(3-2*u);
- return {pair:beat.pair,phase:beat.from+(beat.to-beat.from)*ease,label:beat.label};
+ const phase=Math.max(0,Math.min(1,(t-beat.start)/(beat.end-beat.start)));
+ return {pair:beat.pair,phase,label:beat.label};
 }
+
 export function advanceClock(time,delta,speed,loop,duration=CYCLE_DURATION){
  const next=time+Math.max(0,delta)*speed;
  return loop?next%duration:Math.min(duration,next);

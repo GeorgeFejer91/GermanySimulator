@@ -420,13 +420,17 @@ and Frau Knick anchor scenes. It compares the same procedural samples/motion in
 native Three.js points and locally pinned Spark 2.3.1, loaded only on selection.
 The character data lives in `assets/previews/knick-splats/`: four unchanged
 original anchors plus ten generated bridge paintings with recorded prompts,
-source hashes and common-canvas registration. The ten-second loop includes
+source hashes and common-canvas registration. The 6.25-second loop includes
 paper pickup/putdown at a side counter, stamping, folding arms and returning.
-Only the compatible same-side stamp approach uses Gaussian interpolation.
-Crossings, grip/prop handoffs and incompatible proportions switch intact poses;
-no dissolve setting bypasses these guards. The fourteen-key binary is 11.18 MB
-and remains opt-in. This deliberately stepped study still has artwork proportion
-jumps and is not accepted gameplay animation. Reduced motion starts paused;
+Seven compatible intervals transport Gaussian paint with a continuous clock;
+no intermediate key has a scheduled hold or repeated ease to zero. Weighted
+local similarity with head/collar guides replaces the global spline that tore
+neck and shoulder paint. A narrow stamp mask follows a rigid curved path.
+Crossings and grip/paper handoffs use 100 ms intact-pose intervals; no dissolve
+setting bypasses those guards. Opaque paint selection avoids translucent
+second arms but painted-detail/proportion changes and short cuts remain visible.
+The fourteen-key binary is 11.18 MB plus a 0.56 MB ownership mask, all opt-in.
+This is not accepted gameplay animation. Reduced motion starts paused;
 fixed allocations and hidden-page suspension preserve game resource ownership.
 Format, resource sizes, validation and remaining limits live beside the data.
 This preview does not revise the code-native Wirtschaftswunder policy.

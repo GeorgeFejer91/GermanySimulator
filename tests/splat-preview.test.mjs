@@ -15,6 +15,7 @@ function sample(pair,group,index){
 test('fourteen-key correspondence stays bound to source art and bounded data',()=>{
  assert.equal(hash(read(manifest.source)),manifest.source_sha256);
  assert.equal(hash(bytes),manifest.correspondence_sha256);
+ const parts=read('assets/previews/knick-splats/parts.bin');assert.equal(hash(parts),manifest.parts_sha256);assert.equal(parts.length,count*14);assert(parts.every(v=>v<=2));
  assert.equal(bytes.length,count*14*20);
  assert.equal(manifest.record_bytes,20);assert.equal(manifest.segment_count,14);
  for(let pair=0;pair<14;pair++)for(let group=0;group<2;group++){
@@ -42,15 +43,15 @@ test('transport never drifts lower-leg and shoe samples',()=>{
  }
 });
 test('performance visits all anchors and has continuous, ordered segment timing',()=>{
- assert.equal(CYCLE_DURATION,10);
+ assert.equal(CYCLE_DURATION,6.25);
  assert.deepEqual(ANCHOR_TIMES.map(t=>{const s=cycleAt(t);return(s.pair+s.phase)%14}),Array.from({length:14},(_,i)=>i));
  for(let i=0;i<BEATS.length;i++){
   const b=BEATS[i];assert.equal(b.start,i?BEATS[i-1].end:0);assert(b.end>b.start);
   if(i){const left=cycleAt(b.start-1e-7),right=cycleAt(b.start);assert(Math.abs(left.pair+left.phase-right.pair-right.phase)<1e-5)}
  }
- assert.equal(cycleAt(10).pair+cycleAt(10).phase,14);
- assert(Math.abs(advanceClock(9.9,.3,1,true)-.2)<1e-12);
- assert.equal(advanceClock(9.9,.3,1,false),10);
+ assert.equal(cycleAt(CYCLE_DURATION).pair+cycleAt(CYCLE_DURATION).phase,14);
+ assert(Math.abs(advanceClock(6.15,.3,1,true)-.2)<1e-12);
+ assert.equal(advanceClock(6.15,.3,1,false),6.25);
  assert.equal(advanceClock(2,2,.25,false),2.5);
  assert.equal(advanceClock(2,0,1,true),2);
 });
@@ -62,7 +63,7 @@ test('Spark is pinned and the experiment is outside canonical game imports',()=>
 
 test('unsafe anatomy uses only intact paint with no position transport',()=>{
  assert.equal(manifest.transitions.length,14);
- assert.deepEqual(manifest.transitions.flatMap((p,i)=>p.mode==='splat'?[i]:[]),[5]);
+ assert.deepEqual(manifest.transitions.flatMap((p,i)=>p.mode==='splat'?[i]:[]),[0,1,2,5,6,7,13]);
  for(let pair=0;pair<14;pair++)if(manifest.transitions[pair].mode==='pose'){
   for(let group=0;group<2;group++)for(let index=0;index<slots;index++){
    const {xy,rgba}=sample(pair,group,index);
@@ -91,5 +92,29 @@ test('paper belongs to the hand exactly between pickup and release keys',()=>{
    if(state.guarded)assert.equal(state.anchor,(state.pair+(state.phase>=.5?1:0))%14);
   }
  }
- assert.equal(at(0).anchor,at(10).anchor);assert.equal(at(0).paperInHand,at(10).paperInHand);
+ assert.equal(at(0).anchor,at(CYCLE_DURATION).anchor);assert.equal(at(0).paperInHand,at(CYCLE_DURATION).paperInHand);
+});
+
+test('moving clock passes through all keys without easing stops or held intervals',()=>{
+ for(const beat of BEATS){
+  assert.equal(beat.from,0);assert.equal(beat.to,1);
+  const a=cycleAt(beat.start+(beat.end-beat.start)*.2),b=cycleAt(beat.start+(beat.end-beat.start)*.8);
+  assert(Math.abs(a.phase-.2)<1e-10);assert(Math.abs(b.phase-.8)<1e-10);
+  if(manifest.transitions[beat.pair].mode==='pose')assert(beat.end-beat.start<=.100001,'protected handoffs cannot create long holds');
+ }
+});
+test('rigid part curves join continuously without overshooting anchor bounds',()=>{
+ for(const name of ['head_curve','stamp_curve'])for(let i=0;i<14;i++){
+  const [a,b,va,vb]=manifest.transitions[i][name],next=manifest.transitions[(i+1)%14][name];
+  assert.deepEqual(b,next[0]);
+  const dt=BEATS[i].end-BEATS[i].start,nt=BEATS[(i+1)%14].end-BEATS[(i+1)%14].start;
+  for(let c=0;c<2;c++)assert(Math.abs(vb[c]/dt-next[2][c]/nt)<1e-10,'part center velocity must join');
+  for(let j=0;j<=20;j++){
+   const t=j/20,t2=t*t,t3=t2*t;
+   for(let c=0;c<2;c++){
+    const v=(2*t3-3*t2+1)*a[c]+(t3-2*t2+t)*va[c]+(-2*t3+3*t2)*b[c]+(t3-t2)*vb[c];
+    assert(v>=Math.min(a[c],b[c])-1e-9&&v<=Math.max(a[c],b[c])+1e-9);
+   }
+  }
+ }
 });
