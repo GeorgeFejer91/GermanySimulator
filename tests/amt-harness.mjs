@@ -7,7 +7,7 @@ import path from 'node:path';
 const root=path.resolve(path.dirname(fileURLToPath(import.meta.url)),'..');
 export const source=name=>readFileSync(path.join(root,name),'utf8');
 
-export function harness(kind='host',{voice=false,synthesis=true,phoneLanguage='de-DE',phoneCaptions=false,phoneAgent='test',phonePlatform='',phoneMobile,phoneClock,cinematics=false,cityAudioBusy,fakeAudio=false,officeFx=null}={}){
+export function harness(kind='host',{voice=false,synthesis=true,phoneLanguage='de-DE',phoneCaptions=false,phoneAgent='test',phonePlatform='',phoneMobile,phoneClock,cinematics=false,cityAudioBusy,fakeAudio=false,officeFx=null,speechAutoStart=true}={}){
  const nodes=new Map(),window=new EventTarget(),document=new EventTarget();
  let now=0,nextTimer=0;const timers=new Map();
  const later=(fn,delay=0,repeat=false)=>{const id=++nextTimer;timers.set(id,{fn,due:now+Math.max(0,delay),repeat,delay});return id};
@@ -41,11 +41,15 @@ export function harness(kind='host',{voice=false,synthesis=true,phoneLanguage='d
   emit(type,detail){this.dispatchEvent(new CustomEvent(type,{detail}))}
   message(detail){this.emit('message',detail)}
  }
- const synth={speaking:false,pending:false,spoken:[],cancelCount:0,current:null,
+ const synth={speaking:false,pending:false,paused:false,spoken:[],cancelCount:0,current:null,
   getVoices:()=>[{name:'German Test',lang:'de-DE'}],
-  cancel(){this.cancelCount++;this.speaking=false;this.pending=false;this.current=null},
-  speak(utterance){this.current=utterance;this.spoken.push(utterance);this.speaking=true;utterance.onstart?.()},
-  end(){const utterance=this.current;this.current=null;this.speaking=false;utterance?.onend?.()}
+  cancel(){this.cancelCount++;this.speaking=false;this.pending=false;this.paused=false;this.current=null},
+  speak(utterance){this.current=utterance;this.spoken.push(utterance);this.pending=true;if(speechAutoStart)this.start()},
+  start(){if(!this.current||this.speaking)return;this.speaking=true;this.pending=false;this.current.onstart?.()},
+  boundary(charIndex,elapsedTime=0){this.current?.onboundary?.({charIndex,elapsedTime})},
+  pause(){if(!this.current||this.paused)return;this.paused=true;this.current.onpause?.()},
+  resume(){if(!this.current||!this.paused)return;this.paused=false;this.current.onresume?.()},
+  end(){const utterance=this.current;this.current=null;this.speaking=false;this.pending=false;this.paused=false;utterance?.onend?.()}
  };
  const vibrations=[];
  const saved=new Map(),localStorage={getItem:key=>saved.has(key)?saved.get(key):null,setItem:(key,value)=>saved.set(key,String(value))};
@@ -69,7 +73,7 @@ export function harness(kind='host',{voice=false,synthesis=true,phoneLanguage='d
    cancelScheduledValues(time){this.events.push(['cancel',time]);return this}
   }
   class Node{
-   constructor(type){this.kind=type;this.type=type;this.started=[];this.stopped=[];this.connections=[];this.gain=new Param(1);this.frequency=new Param(0);this.Q=new Param(1);audio.nodes.push(this)}
+   constructor(type){this.kind=type;this.type=type;this.started=[];this.stopped=[];this.connections=[];this.gain=new Param(1);this.frequency=new Param(0);this.playbackRate=new Param(1);this.Q=new Param(1);audio.nodes.push(this)}
    connect(other){this.connections.push(other);return other}
    disconnect(){this.disconnected=true}
    start(time){this.started.push(time)}
