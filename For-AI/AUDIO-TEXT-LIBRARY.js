@@ -392,8 +392,8 @@ const recordings=Object.freeze({
  "./assets/voices/thorsten-angry-nicht-weg.mp3":Object.freeze({id:"thorsten-angry-nicht-weg",voiceId:"thorsten",targetVoiceId:"passerby-a",trigger:"pedestrian.sidewalk.germany",source:"Nein, ich gehe hier nicht weg!",english:"No, I am not leaving!"}),
  "./assets/voices/thorsten-angry-duemmer.mp3":Object.freeze({id:"thorsten-angry-duemmer",voiceId:"thorsten",targetVoiceId:"passerby-b",trigger:"pedestrian.sidewalk.germany",source:"Dümmer geht's nicht mehr.",english:"It cannot get any stupider than this."}),
  "./assets/voices/thorsten-angry-klappt-nicht.mp3":Object.freeze({id:"thorsten-angry-klappt-nicht",voiceId:"thorsten",targetVoiceId:"passerby-a",trigger:"pedestrian.sidewalk.germany",source:"Das klappt einfach nicht!",english:"This simply does not work!"}),
- "./assets/voices/thorsten-amused-nachschub.mp3":Object.freeze({id:"thorsten-amused-nachschub",voiceId:"thorsten",targetVoiceId:"player-inner",trigger:"player.germanness.gain",source:"Endlich wieder Nachschub!",english:"Finally, more supplies!"}),
- "./assets/voices/thorsten-disgusted-nichts-geschafft.mp3":Object.freeze({id:"thorsten-disgusted-nichts-geschafft",voiceId:"thorsten",targetVoiceId:"player-inner",trigger:"player.germanness.loss",source:"Mist, wieder nichts geschafft.",english:"Damn, failed to achieve anything again."}),
+ "./assets/voices/thorsten-amused-nachschub.mp3":Object.freeze({id:"thorsten-amused-nachschub",voiceId:"thorsten",targetVoiceId:"spieler-hans-peter-mustermann",trigger:"player.germanness.gain",source:"Endlich wieder Nachschub!",english:"Finally, more supplies!"}),
+ "./assets/voices/thorsten-disgusted-nichts-geschafft.mp3":Object.freeze({id:"thorsten-disgusted-nichts-geschafft",voiceId:"thorsten",targetVoiceId:"spieler-hans-peter-mustermann",trigger:"player.germanness.loss",source:"Mist, wieder nichts geschafft.",english:"Damn, failed to achieve anything again."}),
  "./assets/voices/thorsten-sleepy-nichts-geschafft.mp3":Object.freeze({id:"thorsten-sleepy-nichts-geschafft",voiceId:"thorsten",targetVoiceId:"passerby-b",trigger:"pedestrian.sidewalk.germany",source:"Mist, wieder nichts geschafft.",english:"Damn, failed to achieve anything again."}),
  "./assets/voices/quiz-wrong-answer.mp3":Object.freeze({id:"quiz-wrong-answer",voiceId:"quiz-sting",targetVoiceId:"quiz-officer",trigger:"quiz.answer.wrong",source:"Nein! Nein! Nein!",english:"No! No! No!"}),
  "./assets/merkel-wir-schaffen-das.mp3":Object.freeze({id:"merkel-wir-schaffen-das",voiceId:"merkel",trigger:"character.merkel.proximity-or-interact",source:"Wir schaffen das.",english:"We can do this."}),
@@ -440,7 +440,7 @@ const recordings=Object.freeze({
  ].map(([suffix,source,english])=>[`./assets/voices/traffic/driver-${suffix}.mp3`,Object.freeze({id:`traffic-${suffix}`,voiceId:"traffic-driver",trigger:"traffic.player-caused-braking",source,english})])),
  ...Object.fromEntries(lawPowerLines.map((source,index)=>{
   const number=String(index+1).padStart(2,"0"),path=`./assets/voices/laws/thorsten-negative-law-${number}.mp3`;
-  return [path,Object.freeze({id:`law-${number}`,voiceId:"thorsten",targetVoiceId:"player-inner",trigger:"player.law-power",source,english:pools.lawPower[index]})]
+  return [path,Object.freeze({id:`law-${number}`,voiceId:"thorsten",targetVoiceId:"spieler-hans-peter-mustermann",trigger:"player.law-power",source,english:pools.lawPower[index]})]
  })),
  ...Object.fromEntries(rules.map((rule,index)=>{
   const number=String(index+1).padStart(2,"0"),path=`./assets/voices/laws/thorsten-negative-rule-${number}.mp3`;

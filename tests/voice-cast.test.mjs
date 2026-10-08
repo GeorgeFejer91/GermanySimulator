@@ -9,7 +9,7 @@ const source=file=>readFileSync(resolve(root,file),"utf8");
 const cast=JSON.parse(source("For-AI/VOICE-CAST.json"));
 const context=vm.createContext({window:{}});
 vm.runInContext(source("For-AI/AUDIO-TEXT-LIBRARY.js"),context);
-const {voices,castVoices,roleVoices}=context.window.GermanySimulatorAudioText;
+const {voices,castVoices,roleVoices,recordings}=context.window.GermanySimulatorAudioText;
 const game=source("game.js");
 const story=source("buergeramt-story.js");
 vm.runInContext(source("For-AI/QUIZ-CHARACTER-DICTIONARY.js"),context);
@@ -66,6 +66,9 @@ for(const asset of cast.existingAssetProfiles){
  assert.ok(asset.source.every(item=>item.path&&item.sha256&&item.text));
 }
 assert.equal(Object.keys(roleVoices).length,cast.roleProfiles.length);
+for(const clip of Object.values(recordings)){
+ if(clip.trigger?.startsWith("player.")&&clip.targetVoiceId)assert.equal(clip.targetVoiceId,"spieler-hans-peter-mustermann",`replacement identity for ${clip.id}`);
+}
 for(const role of cast.roleProfiles){
  assert.equal(voices[role.voiceId].name,role.fullName);
  assert.equal(voices[role.voiceId].profileId,role.secretTunnelProfileId);
