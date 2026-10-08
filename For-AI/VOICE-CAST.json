@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "scope": "Eight optional Bürgeramt walkers and 19 named city NPCs with exact fixed dialogue; the modeled Brunhilde Knick clerk, shared player/police/tourist roles and named quiz/crowd identities have dialogue-source pointers. An additional traffic-driver profile is imported from shipped CC0 source clips. DistinctReferenceCount covers all 53 new EmoDB profiles; the 27 fixed characters use 23 of those reference edits.",
+  "scope": "Eight optional Bürgeramt walkers and 19 named city NPCs with exact fixed dialogue; the modeled Brunhilde Knick clerk, player, police, twelve named crowd identities, and three newly named silent Bürgeramt patrons have voice bindings. Nine quiz portraits and two towel-archetype review voices are separate profiles. An additional traffic-driver profile is imported from shipped CC0 source clips. DistinctReferenceCount covers all new EmoDB profiles.",
   "source": [
     "game.js",
     "buergeramt-story.js",
@@ -8,9 +8,9 @@
   ],
   "characterCount": 27,
   "dialogueCount": 93,
-  "roleProfileCount": 26,
-  "totalNewProfileCount": 53,
-  "distinctReferenceCount": 28,
+  "roleProfileCount": 29,
+  "totalNewProfileCount": 56,
+  "distinctReferenceCount": 31,
   "distinctSourceSpeakerCount": 10,
   "liveSecretTunnelVerification": {
     "date": "2026-10-08",
@@ -1945,6 +1945,140 @@
       ]
     },
     {
+      "gameRole": "buergeramt-background-renter",
+      "fullName": "Konrad Wohnungszettel",
+      "voiceId": "amt-konrad-wohnungszettel",
+      "secretTunnelProfileName": "GS Konrad Wohnungszettel (amt-renter)",
+      "secretTunnelProfileId": "33355401b5964a32a2435c309fcd4bef",
+      "gender": "male",
+      "genderEvidence": "Visual audit of assets/buergeramt/characters/renter-detail.webp depicts a male-presenting adult; this is casting direction, not a biographical claim.",
+      "generalDemeanor": "Visually anxious and protective of his file bundle; no authored speech yet, so this is a provisional performance direction.",
+      "demeanorEvidence": "Static artwork and paperwork prop only; no authored speech or behavior establishes a firmer baseline.",
+      "targetValence": "negative",
+      "targetArousal": "medium",
+      "reference": {
+        "dataset": "EmoDB original",
+        "license": "CC0-1.0",
+        "speakerId": "15",
+        "emotionLabel": "fear",
+        "sourceFiles": [
+          {
+            "path": "EmoDB_original/data/emodb/wav/15a02Ac.wav",
+            "sha256": "25702389385b1596e378b0bc1f07c3f08c96c9d908ab38cc964be6fd03d810ea",
+            "emotion_confidence": "0.8"
+          },
+          {
+            "path": "EmoDB_original/data/emodb/wav/15b02Aa.wav",
+            "sha256": "ff4730ccb71806b3f786760270a95df586d7446e7278218d3a5484529f5efdfd",
+            "emotion_confidence": "0.85"
+          },
+          {
+            "path": "EmoDB_original/data/emodb/wav/15b09Ac.wav",
+            "sha256": "f3bd6158630ced7fc93df922c9a6b1fb9d4c9681a2dfb25eb0973736933fe7ca",
+            "emotion_confidence": "0.95"
+          },
+          {
+            "path": "EmoDB_original/data/emodb/wav/15b10Ac.wav",
+            "sha256": "c8acb29b20ff85787a2bc9d8f730b7649aa1fa864be04403ed2d8b04411b10af",
+            "emotion_confidence": "0.95"
+          }
+        ],
+        "workingReferenceSha256": "057cc9a425e01a07cfd4451f5f0362b7ae9c210fe38ce1240c198cb05b711c9a",
+        "referenceTranscript": "Das will sie am Mittwoch abgeben. Sie haben es gerade hochgetragen und jetzt gehen sie wieder runter. Ich will das eben wegbringen und dann mit Karl was trinken gehen. Die wird auf dem Platz sein, wo wir sie immer hinlegen.",
+        "referenceDurationSeconds": 9.749125
+      },
+      "status": "profile-created; private audition pending; static figure has no authored runtime dialogue",
+      "dialogueSources": [
+        "world3d.js amtCharacter(\"renter\") static figure; no authored dialogue"
+      ]
+    },
+    {
+      "gameRole": "buergeramt-background-parent",
+      "fullName": "Mechthild Elternbogen",
+      "voiceId": "amt-mechthild-elternbogen",
+      "secretTunnelProfileName": "GS Mechthild Elternbogen (amt-parent)",
+      "secretTunnelProfileId": "9ceb89cea9d4434d93fbd5e5464a9769",
+      "gender": "female",
+      "genderEvidence": "Visual audit of assets/buergeramt/characters/parent-detail.webp depicts a female-presenting adult; this is casting direction, not a biographical claim.",
+      "generalDemeanor": "Visually guarded while carrying paperwork; no authored speech yet, so use a measured neutral baseline rather than assuming anger.",
+      "demeanorEvidence": "Static artwork and paperwork prop only; no authored speech or behavior establishes a firmer baseline.",
+      "targetValence": "neutral",
+      "targetArousal": "medium",
+      "reference": {
+        "dataset": "EmoDB original",
+        "license": "CC0-1.0",
+        "speakerId": "9",
+        "emotionLabel": "neutral",
+        "sourceFiles": [
+          {
+            "path": "EmoDB_original/data/emodb/wav/09a05Nb.wav",
+            "sha256": "62e2dcdd728b2c71618b32bbb643a0a099d06ed6362ddc0ecd1b54d271f38e25",
+            "emotion_confidence": "1.0"
+          },
+          {
+            "path": "EmoDB_original/data/emodb/wav/09b02Na.wav",
+            "sha256": "2d227932fe45ba80130890a290b5cb1810cbebae429049967b25a680d8eb7c4e",
+            "emotion_confidence": "1.0"
+          },
+          {
+            "path": "EmoDB_original/data/emodb/wav/09b03Nb.wav",
+            "sha256": "a3a983e176eab81794e726557c4e2812bf71b5d5bc6aa598cfae97b05d3d9dc7",
+            "emotion_confidence": "0.9523999999999999"
+          }
+        ],
+        "workingReferenceSha256": "3e71ea5cfbfc8b605642028a1b3013cb2e6c1a7bb6a107ad4caeabd96a818c04",
+        "referenceTranscript": "Das schwarze Stück Papier befindet sich da oben neben dem Holzstück. Sie haben es gerade hochgetragen und jetzt gehen sie wieder runter. An den Wochenenden bin ich jetzt immer nach Hause gefahren und habe Agnes besucht.",
+        "referenceDurationSeconds": 9.896833333333333
+      },
+      "status": "profile-created; private audition pending; static figure has no authored runtime dialogue",
+      "dialogueSources": [
+        "world3d.js amtCharacter(\"parent\") static figure; no authored dialogue"
+      ]
+    },
+    {
+      "gameRole": "buergeramt-background-pensioner",
+      "fullName": "Wolfram Rentenbescheid",
+      "voiceId": "amt-wolfram-rentenbescheid",
+      "secretTunnelProfileName": "GS Wolfram Rentenbescheid (amt-pensioner)",
+      "secretTunnelProfileId": "1e22f4cca3ae4f33b95ae1213a06cf47",
+      "gender": "male",
+      "genderEvidence": "Visual audit of assets/buergeramt/characters/pensioner-detail.webp depicts a male-presenting adult; this is casting direction, not a biographical claim.",
+      "generalDemeanor": "Visually stern with a cane and papers; no authored speech yet, so restrained irritation is provisional rather than a measured trait.",
+      "demeanorEvidence": "Static artwork and paperwork prop only; no authored speech or behavior establishes a firmer baseline.",
+      "targetValence": "negative",
+      "targetArousal": "medium",
+      "reference": {
+        "dataset": "EmoDB original",
+        "license": "CC0-1.0",
+        "speakerId": "10",
+        "emotionLabel": "anger",
+        "sourceFiles": [
+          {
+            "path": "EmoDB_original/data/emodb/wav/10a05Wb.wav",
+            "sha256": "774fdc5b5d6564a2525c9fde788783cb3ffd7f6dea3d6a805d86160060de2bf8",
+            "emotion_confidence": "1.0"
+          },
+          {
+            "path": "EmoDB_original/data/emodb/wav/10b03Wb.wav",
+            "sha256": "70249d53c1aa65a520e366dd29ed0de9c60e0d3123bb4d4cc08f2f5ba0ae97ad",
+            "emotion_confidence": "0.9523999999999999"
+          },
+          {
+            "path": "EmoDB_original/data/emodb/wav/10b09Wb.wav",
+            "sha256": "b1b9e77ee70bc6610815ed58182dd62d478306c115fe2049ed7e589baf3ba856",
+            "emotion_confidence": "1.0"
+          }
+        ],
+        "workingReferenceSha256": "fc95bffe99e85cc55e339ad4389e4c67089af8a9727b25172de25dea0460e711",
+        "referenceTranscript": "Das schwarze Stück Papier befindet sich da oben neben dem Holzstück. An den Wochenenden bin ich jetzt immer nach Hause gefahren und habe Agnes besucht. Ich will das eben wegbringen und dann mit Karl was trinken gehen.",
+        "referenceDurationSeconds": 11.751083333333334
+      },
+      "status": "profile-created; private audition pending; static figure has no authored runtime dialogue",
+      "dialogueSources": [
+        "world3d.js amtCharacter(\"pensioner\") static figure; no authored dialogue"
+      ]
+    },
+    {
       "gameRole": "crowd-baerbel-brezel",
       "fullName": "Bärbel Brezel",
       "voiceId": "crowd-baerbel-brezel",
@@ -3286,5 +3420,11 @@
         "status": "private candidate; not release-cleared"
       }
     }
-  ]
+  ],
+  "additionalVisualProfileVerification": {
+    "date": "2026-10-08",
+    "profilesCreated": 3,
+    "matchingOriginalAudioAndSavedName": 3,
+    "auditionStatus": "private auditions pending; no authored runtime dialogue"
+  }
 }

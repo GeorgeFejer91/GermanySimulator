@@ -15,6 +15,24 @@
       ]
     },
     {
+      "voiceId": "amt-konrad-wohnungszettel",
+      "sourcePools": [
+        "world3d.js amtCharacter(\"renter\") static figure; no authored dialogue"
+      ]
+    },
+    {
+      "voiceId": "amt-mechthild-elternbogen",
+      "sourcePools": [
+        "world3d.js amtCharacter(\"parent\") static figure; no authored dialogue"
+      ]
+    },
+    {
+      "voiceId": "amt-wolfram-rentenbescheid",
+      "sourcePools": [
+        "world3d.js amtCharacter(\"pensioner\") static figure; no authored dialogue"
+      ]
+    },
+    {
       "voiceId": "crowd-baerbel-brezel",
       "sourcePools": [
         "game.js npcLines / npcDenglisch by region",

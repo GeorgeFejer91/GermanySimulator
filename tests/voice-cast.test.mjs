@@ -12,6 +12,7 @@ vm.runInContext(source("For-AI/AUDIO-TEXT-LIBRARY.js"),context);
 const {voices,castVoices,roleVoices,recordings}=context.window.GermanySimulatorAudioText;
 const game=source("game.js");
 const story=source("buergeramt-story.js");
+const world=source("world3d.js");
 vm.runInContext(source("For-AI/QUIZ-CHARACTER-DICTIONARY.js"),context);
 const quizPeople=context.window.GermanySimulatorQuizCharacters.characters;
 const crowdNames=JSON.parse(game.match(/const crowdNames=(\[[^;]+\]);/)[1]);
@@ -32,8 +33,22 @@ for(const person of [...cityRoster,...officeRoster]){
  assert.equal(recorded?.fullName,person.fullName,`runtime name for ${person.voiceId}`);
 }
 for(const voiceId of ["spieler-hans-peter-mustermann","polizei-heinrich-wachtmeister","amt-brunhilde-knick","tourist-guenther-liegestuhl","touristin-walburga-handtuch"]){
- assert.ok(cast.roleProfiles.some(person=>person.voiceId===voiceId),`missing modeled role ${voiceId}`);
+ assert.ok(cast.roleProfiles.some(person=>person.voiceId===voiceId),`missing named role ${voiceId}`);
 }
+const modeledVoiceIds=new Set([...cityRoster,...officeRoster].map(person=>person.voiceId));
+for(const voiceId of [...crowdVoiceIds,"spieler-hans-peter-mustermann","polizei-heinrich-wachtmeister","amt-brunhilde-knick"])modeledVoiceIds.add(voiceId);
+const silentPatrons=[...world.matchAll(/amtCharacter\("(renter|parent|pensioner)",[^{\n]+\{id:"([^"]+)",fullName:"([^"]+)",voiceId:"([^"]+)"\}\)/g)].map(([,visualRole,id,fullName,voiceId])=>({visualRole,id,fullName,voiceId}));
+assert.equal(silentPatrons.length,3,"all three static Bürgeramt patrons need readable identities");
+for(const person of silentPatrons){assert.equal(person.id,person.voiceId);modeledVoiceIds.add(person.voiceId)}
+const portraitVoiceIds=new Set(quizPeople.map(person=>person.voiceId));
+const archetypeVoiceIds=new Set(["tourist-guenther-liegestuhl","touristin-walburga-handtuch"]);
+assert.equal(modeledVoiceIds.size,45,"42 speaking and three silent modeled nonpolitical identities");
+assert.equal(portraitVoiceIds.size,9,"separate quiz portrait speaker identities");
+assert.equal(archetypeVoiceIds.size,2,"towel archetypes are review voices, not extra spawned NPCs");
+const allVoiceIds=new Set([...cast.characters,...cast.roleProfiles].map(person=>person.voiceId));
+assert.deepEqual(new Set([...modeledVoiceIds,...portraitVoiceIds,...archetypeVoiceIds]),allVoiceIds,"every profile has one documented runtime role");
+assert.equal(modeledVoiceIds.size+portraitVoiceIds.size+archetypeVoiceIds.size,allVoiceIds.size,"runtime roles must not overlap");
+assert.deepEqual(new Set([...namedNpcs.matchAll(/special:"([^"]+)"/g)].map(([,kind])=>kind)),new Set(["borderPourer","merkel","bayern","alice"]),"the excluded special city sprites must remain explicit");
 
 assert.equal(cast.characterCount,cast.characters.length);
 assert.equal(cast.dialogueCount,cast.characters.reduce((total,person)=>total+person.dialogue.length,0));
@@ -84,9 +99,11 @@ for(const role of cast.roleProfiles){
   assert.equal(role.runtimeArchetype,index%2?"towel-man":"towel-woman",`runtime archetype for ${role.voiceId}`);
  }else if(role.voiceId==="amt-brunhilde-knick"){
   assert.ok(story.includes(`clerkIdentity:{speaker:"SACHBEARBEITERIN FRAU KNICK",fullName:"${role.fullName}",voiceId:"${role.voiceId}"}`),"modeled Bürgeramt clerk identity");
+ }else if(role.gameRole.startsWith("buergeramt-background-")){
+  assert.ok(silentPatrons.some(person=>person.fullName===role.fullName&&person.voiceId===role.voiceId&&role.gameRole.endsWith(person.visualRole)),`static Bürgeramt identity ${role.voiceId}`);
  }else{
   assert.ok(game.includes(`fullName:"${role.fullName}",voiceId:"${role.voiceId}"`),`3D role binding for ${role.voiceId}`);
  }
 }
 execFileSync(process.execPath,[resolve(root,"tools/build-voice-dialogue-inventory.mjs"),"--check"],{cwd:root,stdio:"pipe"});
-console.log(`${cast.totalNewProfileCount} named game and Secret Tunnel voice bindings validated`);
+console.log(`${cast.totalNewProfileCount} documented game/Secret Tunnel bindings checked; ${silentPatrons.length} new profiles still need live recognition`);

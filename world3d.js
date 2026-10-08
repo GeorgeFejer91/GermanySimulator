@@ -1064,20 +1064,20 @@ function showRendererFailure(error){
     for(let i=0;i<actor.uv.count;i++)actor.uv.setXY(i,u0+actor.base[i*2]/cols,v0+actor.base[i*2+1]/rows);
     actor.uv.needsUpdate=true;
   }
-  function amtCharacter(name,x,z,phase=0,height=1.9){
+  function amtCharacter(name,x,z,phase=0,height=1.9,identity={}){
     const performance=name==="clerk";
     const url=`./assets/buergeramt/characters/${performance?"clerk-performance":name}${amtMobile?"-mobile":""}.webp?v=20261007-amt-performance`;
     const geometry=new T.PlaneGeometry(height*192/416,height),uv=geometry.attributes.uv,base=Float32Array.from(uv.array);
     const mesh=new T.Mesh(geometry,amtPaintMaterial());
     mesh.position.set(x,height/2,z);amtScene.add(mesh);
-    amtCharacters.push({name,url,mesh,uv,base,phase,frame:-1,renderKey:"",performance,lead:performance&&x===3.9,mood:0});
+    amtCharacters.push({name,url,mesh,uv,base,phase,frame:-1,renderKey:"",performance,lead:performance&&x===3.9,mood:0,...identity});
   }
-  amtCharacter("clerk",3.9,-9.77,.25,1.82);
-  amtCharacter("clerk",-5.8,-9.77,1.4,1.76);
-  amtCharacter("clerk",-1.6,-9.77,2.2,1.76);
-  amtCharacter("renter",-5.9,1.39,0,1.83);
-  amtCharacter("parent",5.5,1.39,1.1,1.9);
-  amtCharacter("pensioner",1.7,-1.39,2.0,1.82);
+  amtCharacter("clerk",3.9,-9.77,.25,1.82,{id:"amt-brunhilde-knick",fullName:"Brunhilde Knick",voiceId:"amt-brunhilde-knick"});
+  amtCharacter("clerk",-5.8,-9.77,1.4,1.76,{decorativeCloneOf:"amt-brunhilde-knick"});
+  amtCharacter("clerk",-1.6,-9.77,2.2,1.76,{decorativeCloneOf:"amt-brunhilde-knick"});
+  amtCharacter("renter",-5.9,1.39,0,1.83,{id:"amt-konrad-wohnungszettel",fullName:"Konrad Wohnungszettel",voiceId:"amt-konrad-wohnungszettel"});
+  amtCharacter("parent",5.5,1.39,1.1,1.9,{id:"amt-mechthild-elternbogen",fullName:"Mechthild Elternbogen",voiceId:"amt-mechthild-elternbogen"});
+  amtCharacter("pensioner",1.7,-1.39,2.0,1.82,{id:"amt-wolfram-rentenbescheid",fullName:"Wolfram Rentenbescheid",voiceId:"amt-wolfram-rentenbescheid"});
   const amtMoving=[];
   for(const [id,height] of [["aktenkurier",1.96],["archivbotin",1.77],["formularsammler",1.85],
                             ["nummernfluesterer",1.84],["nachtschichtmelderin",1.8],["pfandarchitektin",1.72],
