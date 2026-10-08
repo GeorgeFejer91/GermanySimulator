@@ -352,6 +352,16 @@ The Kiesinger monument carries two `CDU / AB 1948` banners flanking one dated 19
 
 ## Opt-in prop-detail studies
 
+`spark-preview.html` is a silent, opt-in rendering experiment with separate fax
+and Frau Knick anchor scenes. It compares the same procedural samples/motion in
+native Three.js points and locally pinned Spark 2.3.1, loaded only on selection.
+The character data lives in `assets/previews/knick-splats/`; its two lossless
+anchors derive from the existing clerk detail atlas. Its manually guided morph
+has known face/arm interpolation artifacts and is not an accepted character
+animation. The page starts paused, uses bounded rendering and hidden-page
+suspension, and preserves ordinary game loaders, assets and event ownership.
+This preview does not revise the code-native Wirtschaftswunder policy.
+
 Four candidate-unapproved static prop studies are owned by
 `assets/models/prop-details/models.js`: fax kiosk, bottle crate, wheelbarrow and
 recycling containers. Their optional `?propDetails=1` loader produces GLB bytes

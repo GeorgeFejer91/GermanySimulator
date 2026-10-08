@@ -408,6 +408,12 @@ version/hash records and upstream links accompany the files under
 
 ## Legal framing
 
+The optional `spark-preview.html` animation studies use [Spark 2.3.1](https://sparkjs.dev/)
+by World Labs Technologies, Inc., under MIT. The unmodified local module, license
+and hash are under `assets/vendor/spark/2.3.1/`. The Frau Knick anchor images are
+lossless crops of this project's existing painted clerk detail atlas; their
+correspondence and source hashes are under `assets/previews/knick-splats/`.
+
 The Bürgeramt clerk, tenant, parent, pensioner, and office-prop paintings were generated
 for this game with OpenAI ImageGen. The original transparent source strips,
 build method, and output hashes are recorded in
