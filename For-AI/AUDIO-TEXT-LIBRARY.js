@@ -761,7 +761,10 @@ const candidateDialogue=Object.freeze(Object.fromEntries([
  ["polizei-heinrich-wachtmeister","Wer redet da im Hintergrund? Die Frau am Schalter? Stellen Sie laut! Vielleicht deckt Ihr Schalter den Rasen!","assets/voices/candidate-dialogue/polizei-heinrich-wachtmeister-phone-03.mp3"],
  ["polizei-heinrich-wachtmeister","Frau Knick, behindern Sie nicht meine Befragung! Ein Grashalm fehlt, und hier schreit jemand über Stempel!","assets/voices/candidate-dialogue/polizei-heinrich-wachtmeister-phone-04.mp3"],
  ["spieler-hans-peter-mustermann","Papier hinein, Würde heraus. Wenigstens funktioniert der Vorgang.","assets/voices/candidate-dialogue/spieler-hans-peter-mustermann-germany-fax-03.mp3"],
- ["spieler-hans-peter-mustermann","Great. Selbst die Maschine hat mehr Pause verdient als ich.","assets/voices/candidate-dialogue/spieler-hans-peter-mustermann-berlin-coffee-02.mp3"]
+ ["spieler-hans-peter-mustermann","Great. Selbst die Maschine hat mehr Pause verdient als ich.","assets/voices/candidate-dialogue/spieler-hans-peter-mustermann-berlin-coffee-02.mp3"],
+ ["spieler-hans-peter-mustermann","Natürlich verpasse ich den Zug. Even mein Scheitern hat Verspätung.","assets/voices/candidate-dialogue/spieler-hans-peter-mustermann-berlin-train-01.mp3"],
+ ["spieler-hans-peter-mustermann","Nicht einmal der Kaffeeautomat wants responsibility für mich.","assets/voices/candidate-dialogue/spieler-hans-peter-mustermann-berlin-coffee-01.mp3"],
+ ["spieler-hans-peter-mustermann","Schon wieder ein Tag weg. I am late sogar für mein eigenes Scheitern.","assets/voices/candidate-dialogue/spieler-hans-peter-mustermann-berlin-deadline-01.mp3"]
 ].map(([voiceId,text,path])=>[voiceId+"\u0000"+text,path])));
 function candidateClip(voiceId,text){return candidatePreviewEnabled?candidateDialogue[voiceId+"\u0000"+text]||null:null}
 

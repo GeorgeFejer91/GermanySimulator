@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "status": "unreviewed opt-in preview; not release-cleared",
-  "lineCount": 203,
+  "lineCount": 206,
   "clips": [
     {
       "clipId": "amt-horst-stempelmann-01",
@@ -3140,6 +3140,162 @@
       "path": "assets/voices/candidate-dialogue/spieler-hans-peter-mustermann-berlin-coffee-02.mp3",
       "sha256": "84fd687b0690547ea7136517c020ebddd3288546ccacba122fe22070cbfaa849",
       "takeId": "spieler-hans-peter-mustermann-berlin-coffee-02--retry2"
+    },
+    {
+      "clipId": "spieler-hans-peter-mustermann-berlin-train-01",
+      "voiceId": "spieler-hans-peter-mustermann",
+      "profileId": "85b9afebb99f40eebad651bcd2e55a1d",
+      "text": "Natürlich verpasse ich den Zug. Even mein Scheitern hat Verspätung.",
+      "referenceSha256": "558259e7e4eaec780eeda7b547232ec8bb09075385c2ba9483bfef617339ff21",
+      "renderer": "ResembleAI/Chatterbox Multilingual V2 0.1.7",
+      "modelRevision": "5bb1f6ee58e50c3b8d408bc82a6d3740c2db6e18",
+      "modelLicense": "MIT",
+      "durationSeconds": 4.286,
+      "asr": "Natürlich verpasse ich den Zug. Even. Mein Scheitern hat Verspätung.",
+      "asrWordExact": true,
+      "asrSegmentWordExact": true,
+      "asrSegments": [
+        {
+          "language": "de",
+          "text": "Natürlich verpasse ich den Zug.",
+          "asr": "Natürlich verpasse ich den Zug.",
+          "asrWordExact": true
+        },
+        {
+          "language": "en",
+          "text": "Even",
+          "asr": "even.",
+          "asrWordExact": true
+        },
+        {
+          "language": "de",
+          "text": "mein Scheitern hat Verspätung.",
+          "asr": "Mein Scheitern hat Verspätung.",
+          "asrWordExact": true
+        }
+      ],
+      "renderSegments": [
+        {
+          "language": "de",
+          "text": "Natürlich verpasse ich den Zug."
+        },
+        {
+          "language": "en",
+          "text": "Even"
+        },
+        {
+          "language": "de",
+          "text": "mein Scheitern hat Verspätung."
+        }
+      ],
+      "path": "assets/voices/candidate-dialogue/spieler-hans-peter-mustermann-berlin-train-01.mp3",
+      "sha256": "1224d384bd0603a5c50c3f7e6d6c1e7517105c44e9aee10fc89344ca72c1009a",
+      "takeId": "spieler-hans-peter-mustermann-berlin-train-01--segmented-26001",
+      "status": "opt-in listening-review candidate; not release-cleared"
+    },
+    {
+      "clipId": "spieler-hans-peter-mustermann-berlin-coffee-01",
+      "voiceId": "spieler-hans-peter-mustermann",
+      "profileId": "85b9afebb99f40eebad651bcd2e55a1d",
+      "text": "Nicht einmal der Kaffeeautomat wants responsibility für mich.",
+      "referenceSha256": "558259e7e4eaec780eeda7b547232ec8bb09075385c2ba9483bfef617339ff21",
+      "renderer": "ResembleAI/Chatterbox Multilingual V2 0.1.7",
+      "modelRevision": "5bb1f6ee58e50c3b8d408bc82a6d3740c2db6e18",
+      "modelLicense": "MIT",
+      "durationSeconds": 4.143,
+      "asr": "Nicht einmal der Kaffeeautomat. One's Responsibility für mich.",
+      "asrWordExact": false,
+      "asrSegmentWordExact": true,
+      "asrSegments": [
+        {
+          "language": "de",
+          "text": "Nicht einmal der Kaffeeautomat",
+          "asr": "Nicht einmal der Kaffeeautomat.",
+          "asrWordExact": true
+        },
+        {
+          "language": "en",
+          "text": "wants responsibility",
+          "asr": "wants responsibility.",
+          "asrWordExact": true
+        },
+        {
+          "language": "de",
+          "text": "für mich.",
+          "asr": "für mich.",
+          "asrWordExact": true
+        }
+      ],
+      "renderSegments": [
+        {
+          "language": "de",
+          "text": "Nicht einmal der Kaffeeautomat"
+        },
+        {
+          "language": "en",
+          "text": "wants responsibility"
+        },
+        {
+          "language": "de",
+          "text": "für mich."
+        }
+      ],
+      "path": "assets/voices/candidate-dialogue/spieler-hans-peter-mustermann-berlin-coffee-01.mp3",
+      "sha256": "4b52a803bc9d28ea8480c23927676dd47a7c29e47fb91922872362ac5b26878d",
+      "takeId": "spieler-hans-peter-mustermann-berlin-coffee-01--segmented",
+      "status": "opt-in listening-review candidate; not release-cleared"
+    },
+    {
+      "clipId": "spieler-hans-peter-mustermann-berlin-deadline-01",
+      "voiceId": "spieler-hans-peter-mustermann",
+      "profileId": "85b9afebb99f40eebad651bcd2e55a1d",
+      "text": "Schon wieder ein Tag weg. I am late sogar für mein eigenes Scheitern.",
+      "referenceSha256": "558259e7e4eaec780eeda7b547232ec8bb09075385c2ba9483bfef617339ff21",
+      "renderer": "ResembleAI/Chatterbox Multilingual V2 0.1.7",
+      "modelRevision": "5bb1f6ee58e50c3b8d408bc82a6d3740c2db6e18",
+      "modelLicense": "MIT",
+      "durationSeconds": 5.122,
+      "asr": "Schon wieder ein Tag weg. I am late. Sogar für mein eigenes Scheitern.",
+      "asrWordExact": true,
+      "asrSegmentWordExact": true,
+      "asrSegments": [
+        {
+          "language": "de",
+          "text": "Schon wieder ein Tag weg.",
+          "asr": "schon wieder ein Tag weg.",
+          "asrWordExact": true
+        },
+        {
+          "language": "en",
+          "text": "I am late",
+          "asr": "I am late.",
+          "asrWordExact": true
+        },
+        {
+          "language": "de",
+          "text": "sogar für mein eigenes Scheitern.",
+          "asr": "Sogar für mein eigenes Scheitern.",
+          "asrWordExact": true
+        }
+      ],
+      "renderSegments": [
+        {
+          "language": "de",
+          "text": "Schon wieder ein Tag weg."
+        },
+        {
+          "language": "en",
+          "text": "I am late"
+        },
+        {
+          "language": "de",
+          "text": "sogar für mein eigenes Scheitern."
+        }
+      ],
+      "path": "assets/voices/candidate-dialogue/spieler-hans-peter-mustermann-berlin-deadline-01.mp3",
+      "sha256": "fa1f9f90011ba0e77afd547af162dbde55f55afbbc57a2b99034c8f4896b7d7f",
+      "takeId": "spieler-hans-peter-mustermann-berlin-deadline-01--segmented",
+      "status": "opt-in listening-review candidate; not release-cleared"
     }
   ]
 }
