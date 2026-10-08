@@ -168,7 +168,7 @@ function updateCharacters(dt){
   if(distance<.025){actor.x=tx;actor.z=tz;actor.target=(actor.target+1)%actor.route.points.length;action(actor,[["work",1.25],["look",.48]],1);officeCue(actor.id,actor.x,actor.z);continue}
   const step=Math.min(distance,actor.route.speed*dt),nextX=actor.x+dx/distance*step,nextZ=actor.z+dz/distance*step;
   if(Math.hypot(nextX-view.x,nextZ-view.z)<1.05&&Math.hypot(nextX-view.x,nextZ-view.z)<Math.hypot(actor.x-view.x,actor.z-view.z)||
-     characters.some(other=>other!==actor&&Math.hypot(nextX-other.x,nextZ-other.z)<.65)){actor.sequence=[{mode:"work",duration:.35}];startAction(actor);actor.pending=false;continue}
+     characters.some(other=>other!==actor&&Math.hypot(nextX-other.x,nextZ-other.z)<.65)){if(!actor.pending)actor.sequence=[{mode:"work",duration:.35}];actor.pending=false;startAction(actor);continue}
   actor.x=nextX;actor.z=nextZ;const oldLoop=Math.floor(actor.stride/8);actor.stride+=step*8.5;
   actor.direction=Math.abs(dx)>Math.abs(dz)?dx>0?"right":"left":dz>0?"down":"up";actor.mode="walk";
   if(actor.pending&&Math.floor(actor.stride/8)>oldLoop){actor.pending=false;startAction(actor)}

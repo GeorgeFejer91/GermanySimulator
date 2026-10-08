@@ -81,7 +81,7 @@ async function officeCase(name,viewport,mobile,dpr){
   const call=await page.evaluate(start=>{for(let i=0;i<360;i++){__animationStep();if(BuergeramtLevel.queueDisplay!==start)return BuergeramtLevel.queueDisplay}return null},queue);
   assert(call,'a natural background queue call must fire');report.queueCall=call;
   await record(page,dir,'queue-call-entry',images);
-  const selected=await page.evaluate(()=>{for(let i=0;i<420;i++){const actor=BuergeramtLevel.characters.find(a=>a.mode==='flinch');if(actor)return actor.id;__animationStep()}return null});
+  const selected=await page.evaluate(()=>{for(let i=0;i<420;i++){const actor=BuergeramtLevel.characters.find(a=>a.id==='formularsammler'&&a.mode==='flinch');if(actor)return actor.id;__animationStep()}return null});
   assert(selected,'a naturally called actor must enter flinch');report.actor=selected;
   await page.evaluate(id=>{__animationFocus.id=id;__animationFocus.distance=6.2;Germany3D.sync()},selected);
   const first=await page.evaluate(id=>BuergeramtLevel.characters.find(a=>a.id===id),selected);

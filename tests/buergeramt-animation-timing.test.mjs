@@ -1,6 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import {harness} from './amt-harness.mjs';
+import vm from 'node:vm';
+import {harness,source} from './amt-harness.mjs';
 
 function reactions(dt){
  const h=harness();h.enter();
@@ -46,4 +47,34 @@ test('dialogue freezes other actor clips and replay clears action phase',()=>{
  assert.ok(h.level.characters.some(actor=>actor.mode==='walk'||actor.phase>0));
  h.level.replay(h.config);
  assert.ok(h.level.characters.every(actor=>actor.mode==='work'&&actor.phase===0&&actor.frame===0));
+});
+
+for(const dt of [1/60,1/30,.1])test(`a blocked walker keeps its queued reaction at dt=${dt}`,()=>{
+ const h=harness();
+ // Expose fixture state only inside the VM; all action/collision functions are
+ // the production implementation and no debug API is shipped to the browser.
+ const code=source('buergeramt.js').replace(/\}\)\(\);\s*$/,
+  'window.__reactionProbe={characters,view,reactToCall,setStage,setQueueIndex:n=>queueIndex=n};})();');
+ assert.ok(code.includes('window.__reactionProbe='));
+ vm.runInContext(code,h.context);
+ const probe=h.window.__reactionProbe,level=h.window.BuergeramtLevel;
+ level.open(h.config);probe.setStage('waiting');probe.setQueueIndex(2);
+ const actor=probe.characters[2];
+ actor.mode='walk';actor.sequence=[];actor.priority=0;actor.pending=false;actor.stride=3.7;
+ const [tx,tz]=actor.route.points[actor.target],distance=Math.hypot(tx-actor.x,tz-actor.z);
+ probe.view.x=actor.x+(tx-actor.x)/distance*.3;probe.view.z=actor.z+(tz-actor.z)/distance*.3;
+ const origin=[actor.x,actor.z];probe.reactToCall();
+ assert.equal(actor.pending,true);
+ level.update(dt);
+ assert.equal(actor.pending,false);
+ assert.equal(actor.mode,'look','blocked motion must start the queued planted action');
+ const modes=new Set(),flinchFrames=new Set();
+ for(let elapsed=0;elapsed<1.7;elapsed+=dt){
+  const state=level.characters.find(item=>item.id===actor.id);modes.add(state.mode);
+  if(state.mode==='flinch')flinchFrames.add(state.frame);
+  assert.deepEqual([state.x,state.z],origin,'the blocked reaction never advances its root');
+  level.update(dt);
+ }
+ assert.deepEqual([...modes],['look','flinch','work']);
+ if(dt<.1)assert.deepEqual([...flinchFrames],[0,1,2,3,4,5,6,7]);
 });
