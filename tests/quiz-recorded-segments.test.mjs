@@ -69,4 +69,19 @@ vm.runInContext(`const AUDIO_CLASS={TEXT:"audio-text"},AUDIO_MIX={ATTACK_SECONDS
 await new Promise(resolve=>setImmediate(resolve));
 assert.equal(events.at(-1),"whole quiz prompt","a missing segment must replay the complete text through browser speech");
 
+for(const candidate of ["character.mp3",null]){
+ const barks=[],lookups=[];
+ const answer=vm.createContext({
+  state:{quizQuestion:{answer:1},quizCopy:{choices:["A","B"]},quizCharacter:{name:"Brigitte Neumann",title:"STADTBILDWACHT",voiceId:"quiz-brigitte-neumann"},quizNpc:{},quizVoiceToken:0,modal:true},
+  document:{getElementById:()=>({hidden:false})},
+  speechCatalog:{candidateClip:(voiceId,text)=>{lookups.push([voiceId,text]);return candidate}},
+  speechClip:()=>({text:"Nein! Nein! Nein!",recording:"legacy.mp3"}),
+  requestCharacterReaction(){},uiTone(){},addGermanness(){},showWorldBark:(...args)=>barks.push(args),
+  STIMULUS_PRIORITY:{CRITICAL:1}
+ });
+ vm.runInContext(`${sourceOf(game,"answerCitizenshipQuiz")};answerCitizenshipQuiz(0)`,answer);
+ assert.deepEqual(Array.from(lookups[0]),["quiz-brigitte-neumann","Nein! Nein! Nein!"],"feedback lookup must use the shown quiz character and exact words");
+ assert.equal(barks[0][3],candidate||"legacy.mp3","character take should replace the shared sting only when present");
+}
+
 console.log("Composite quiz recording and fallback contracts OK");
