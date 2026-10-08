@@ -60,7 +60,7 @@ async function officeCase(name,viewport,mobile,dpr){
  await silent(context);const page=await context.newPage();observe(page,report);
  try{
   await page.goto(officeUrl.href,{waitUntil:'commit',timeout:60000});
-  await page.waitForFunction(()=>window.BuergeramtLevel?.active&&window.Germany3D?.ready&&Germany3D.amtOffice?.attached&&Germany3D.amtCharacters.length===14&&Germany3D.amtCharacters.every(a=>a.loaded),null,{timeout:90000});
+  await page.waitForFunction(()=>window.BuergeramtLevel?.active&&window.Germany3D?.ready,null,{timeout:60000});
   // Fixture: stop only the game loop's public update call. Manual steps invoke
   // the original production update and real Three.js sync at 60 Hz.
   await page.evaluate(()=>{
@@ -71,6 +71,7 @@ async function officeCase(name,viewport,mobile,dpr){
    Object.defineProperty(level,'view',{configurable:true,get(){const actual=view.get.call(level),focus=window.__animationFocus;if(!focus.id)return actual;const actor=level.characters.find(a=>a.id===focus.id);return actor?{...actual,x:actor.x,z:actor.z-focus.distance,yaw:Math.PI}:actual}});
    window.__animationRestore=()=>Object.defineProperty(level,'view',view);
   });
+  await page.waitForFunction(()=>Germany3D.amtOffice?.attached&&Germany3D.amtCharacters.length===14&&Germany3D.amtCharacters.every(a=>a.loaded),null,{timeout:90000});
   await page.evaluate(()=>{dispatchEvent(new KeyboardEvent('keydown',{code:'KeyW'}));for(let i=0;i<50&&BuergeramtLevel.stage==='outside';i++)__animationStep();dispatchEvent(new KeyboardEvent('keyup',{code:'KeyW'}))});
   assert.equal(await page.evaluate(()=>BuergeramtLevel.stage),'walk-sign','entry must reach the canonical office');
   await record(page,dir,'entry',images);
@@ -130,7 +131,7 @@ async function officeCase(name,viewport,mobile,dpr){
   await record(page,dir,'replay',images);
   await strip(browser,viewport,images,dir);
   report.result=report.errors.length?'FAIL':'PASS';
- }catch(error){report.result='FAIL';report.errors.push(String(error));await page.screenshot({path:path.join(dir,'failure.png'),timeout:10000}).catch(()=>{})}
+ }catch(error){report.result='FAIL';report.errors.push(String(error));report.failureState=await page.evaluate(()=>({stage:window.BuergeramtLevel?.stage,actors:window.Germany3D?.amtCharacters,office:window.Germany3D?.amtOffice?.attached})).catch(()=>null);await page.screenshot({path:path.join(dir,'failure.png'),timeout:10000}).catch(()=>{})}
  finally{report.screenshots=images.map(x=>x.label);fs.writeFileSync(path.join(dir,'result.json'),JSON.stringify(report,null,2));await context.close()}
  return report;
 }
