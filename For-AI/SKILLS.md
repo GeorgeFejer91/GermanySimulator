@@ -87,6 +87,8 @@ Prefer existing deterministic scripts and focused checks. For browser-visible ch
 
 For a moving bitmap character, sprite atlas, gait, reaction, or transition, use `$animate-2d-characters` with `SPRITE-GENERATION-PROTOCOL.md`; review exact encoded frames at desktop and mobile scale. At each completed animation milestone, check for a reusable general method. If one emerged, validate and publish that general guidance to the public skill, then synchronize the project copy; keep project-specific assets and acceptance details here.
 
+For painted Gaussian depth reveals and volumetric tunnels, use the skill's [Gaussian transitions reference](../.agents/skills/animate-2d-characters/references/gaussian-transitions.md), synchronized from [public revision `0ba985c`](https://github.com/GeorgeFejer91/animate-2d-characters/tree/0ba985c6323765b2996ab59095f5714123cebd7d). It covers source registration, detail sampling, bounded turns, shared rendering, delayed readiness and safe asynchronous teardown. Full orbit or independent limb motion still needs suitable views or a rig; the current scene and asset budgets remain owned by `BUERGERAMT.md` and `ASSET-POLICY.md`.
+
 ## HTML text-fitting contract
 
 For new or changed bounded HTML/CSS text, use `$uncodixfy-pretext` and measure the touched UI with actual `@chenglou/pretext`. Verify 320 CSS px reflow, 200% text/zoom, and long German and English strings; define an explicit layout or reveal path when text cannot fit. This route does not imply the existing game UI has already been migrated.
