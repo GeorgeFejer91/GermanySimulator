@@ -55,7 +55,7 @@ test('the Aktenkurier approaches, delivers the dark verse in a spotlight, and re
  assert.ok(Math.abs(h.level.view.yaw)>.1);assert.equal(h.document.body.classList.contains('amt-omen'),true);
  assert.equal(h.node('amt-line').textContent,'Wer die Finsternis sieht, hat sie selbst gewählt!');
  const board=h.level.queueDisplay;h.advanceGame(2);assert.equal(h.level.queueDisplay,board);
- h.tick(6000);h.advanceGame(1.5);
+ h.tick(6000);h.advanceGame(12.5);
  assert.equal(h.level.stage,'walk-sign');assert.equal(h.level.omen.phase,'');assert.equal(h.level.omen.strength,0);
  assert.equal(h.level.characterMood,null);assert.ok(Math.abs(h.level.view.yaw)<.01);assert.equal(h.document.body.classList.contains('amt-omen'),false);h.advanceGame(4);
  assert.notEqual(h.level.queueDisplay,board);

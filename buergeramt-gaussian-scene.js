@@ -31,7 +31,7 @@ export function createAmtGaussianScene({THREE,renderer,scene,queueLoad,mobile=fa
   function update(level,stationary,moving,camera){
     if(!level.active){clear();return}
     prepareGeneration(level.clerkPerformance.animation?.generation??0);
-    const blocked=['approach','blackout','glare'].includes(level.omen.phase),states=level.characters;
+    const blocked=!!level.omen.phase,states=level.characters;
     const candidates=[{id:'clerk',actor:stationary[0],state:level.clerkPerformance.animation},
       ...moving.map(actor=>{const source=states.find(s=>s.id===actor.id);return{id:actor.id,actor,state:source?.mode==='work'?{...source.animation,arc:null,pose:'work'}:source?.animation}})]
       .map(item=>({...item,distance:Math.hypot(camera.position.x-item.actor.mesh.position.x,camera.position.z-item.actor.mesh.position.z)}))

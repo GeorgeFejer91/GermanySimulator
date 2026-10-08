@@ -28,7 +28,7 @@ most 60 Hz from the existing render pass and stop on hidden/inactive play. Teard
 for any owned sort before disposing buffers and its worker. A missing, cancelled
 or late preparation preserves the sprite; ordinary city startup imports none of
 the Spark runtime or Gaussian data. The omen asset has one shared desktop/mobile variant pending
-evidence that another is needed. Runtime behavior belongs in `BUERGERAMT.md`.
+evidence that another is needed. Runtime behavior belongs in `BUERGERAMT.md`. The 2026-10-09 staging adds no asset or renderer: one environment parent and a shared material darkening uniform isolate the courier, and the existing shared owner suppresses ordinary action clouds for the complete cinematic. A bounded office-only path search runs at the trigger and after a blocked return, with exact swept clearance and player yielding; normal rendering keeps its existing cadence and teardown.
 
 Paired action packs under `assets/buergeramt/animation/` select one desktop or
 mobile variant on approach; never fetch the full cast or both variants. Each

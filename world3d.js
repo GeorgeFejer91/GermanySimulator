@@ -1,4 +1,4 @@
-import {createAmtGaussianScene} from './buergeramt-gaussian-scene.js?v=20261008-action-arcs';
+import {createAmtGaussianScene} from './buergeramt-gaussian-scene.js?v=20261009-omen-staging';
 const THREE_URL="https://cdn.jsdelivr.net/npm/three@0.186.0/build/three.module.js";
 const GLTF_LOADER_URL="https://cdn.jsdelivr.net/npm/three@0.186.0/examples/jsm/loaders/GLTFLoader.js";
 function showRendererFailure(error){
@@ -1110,7 +1110,7 @@ function showRendererFailure(error){
     officeAssetPending++;
     const loadDetail=()=>import("./assets/buergeramt/office-detail.js?v=20261006-dense-office").then(()=>{
       const detail=window.GermanyAmtOfficeDetail.create(T,{compact:amtMobile,anisotropy:renderer.capabilities.getMaxAnisotropy()});
-      detail.attach(amtScene);
+      detail.attach(amtEnvironment);isolateAmtMaterials(amtEnvironment);
       officeDetail=detail;
       for(const mesh of plainDeskSupplies)mesh.visible=false;
       window.BuergeramtLevel?.setOfficeObstacles(detail.obstacles);
@@ -1174,11 +1174,18 @@ function showRendererFailure(error){
       const distance=Math.hypot(amtCamera.position.x-state.x,amtCamera.position.z-state.z),close=distance<5;
       if(close&&!actor.detail){const url=`./assets/buergeramt/characters/${actor.id}-detail.webp?v=20261007-paint-detail`;
         actor.detail=amtTexture(url,undefined,error=>console.warn("Bürgeramt detail unavailable",actor.id,error));}
-      const omen=level.omen,facePlayer=actor.id==="aktenkurier"&&["approach","blackout","glare"].includes(omen.phase);
-      if(actor.mesh.material.fog===facePlayer){actor.mesh.material.fog=!facePlayer;actor.mesh.material.needsUpdate=true}
-      const direction=facePlayer?"down":state.direction;
+      const omen=level.omen,facePlayer=actor.id==="aktenkurier"&&["approach","blackout","glare","unwind"].includes(omen.phase);
+      const fogExempt=actor.id==="aktenkurier"&&!!omen.phase;
+      if(actor.mesh.material.fog===fogExempt){actor.mesh.material.fog=!fogExempt;actor.mesh.material.needsUpdate=true}
+      const turning=actor.id==="aktenkurier"&&omen.phase==="turn",departing=actor.id==="aktenkurier"&&["depart","recover"].includes(omen.phase);
+      const direction=facePlayer?"down":departing?"up":state.direction;
+      if(turning&&!amtReducedMotion.matches){
+        // Readable front, side, rear views with a planted pivot, using the accepted paint.
+        const t=omen.turnProgress,local=t<.25?t/.25:t<.73?(t-.25)/.48:(t-.73)/.27;
+        actor.mesh.rotation.y+=Math.sin(local*Math.PI)*.32;
+      }
       // Hold the registered frontal gesture as the paint becomes a relief.
-      const row=facePlayer&&omen.life.opacity>0?5:state.mode==="walk"?({down:0,right:1,up:2,left:3}[direction]??0):({work:4,gesture:5,look:6,flinch:7}[state.mode]??4);
+      const row=facePlayer&&omen.life.opacity>0?5:state.mode==="walk"||turning?({down:0,right:1,up:2,left:3}[direction]??0):({work:4,gesture:5,look:6,flinch:7}[state.mode]??4);
       if(close&&row<4&&actor.walkDirection!==direction){
         if(actor.walkDetail){if(actor.mesh.material.map===actor.walkDetail){actor.mesh.material.map=actor.atlas;actor.mesh.material.needsUpdate=true}actor.walkDetail.dispose()}
         actor.walkDirection=direction;
@@ -1188,7 +1195,7 @@ function showRendererFailure(error){
       }
       // The simulation's distance clock keeps its cadence and action boundaries.
       // Denser art samples the same normalized phase; it never speeds up the walk.
-      const sample=row<4?Math.min(actor.walkFrames-1,Math.floor((state.phase??state.frame/8)*actor.walkFrames)):state.frame;
+      const sample=turning?0:row<4?Math.min(actor.walkFrames-1,Math.floor((state.phase??state.frame/8)*actor.walkFrames)):state.frame;
       const cell=row<4?row*actor.walkFrames+sample:4*actor.walkFrames+(row-4)*8+sample;
       actor.cell=cell;
       const actionDetail=close&&row>=4&&!!actor.detail?.image;
@@ -1236,6 +1243,20 @@ function showRendererFailure(error){
   });
   omenScene.add(new T.Mesh(new T.PlaneGeometry(2,2),omenMaterial));
   const amtReducedMotion=matchMedia("(prefers-reduced-motion: reduce)");
+  const amtEnvironment=new T.Group(),amtIsolation={value:0},amtIsolationMaterials=new WeakSet();
+  function isolateAmtMaterials(root){root.traverse(object=>{
+    for(const material of (Array.isArray(object.material)?object.material:object.material?[object.material]:[])){
+      if(amtIsolationMaterials.has(material))continue;
+      amtIsolationMaterials.add(material);
+      const compile=material.onBeforeCompile,key=material.customProgramCacheKey();
+      material.onBeforeCompile=function(shader,renderer){compile.call(this,shader,renderer);shader.uniforms.amtIsolation=amtIsolation;
+        shader.fragmentShader="uniform float amtIsolation;\n"+shader.fragmentShader.replace("#include <opaque_fragment>","outgoingLight *= 1.0 - amtIsolation;\n#include <opaque_fragment>");};
+      material.customProgramCacheKey=()=>key+":omen-isolation";material.needsUpdate=true;
+    }
+  })}
+  // A parent preserves authored child visibility and material state on restoration.
+  for(const object of [...amtScene.children])if(object!==amtMoving[0].mesh)amtEnvironment.add(object);
+  isolateAmtMaterials(amtEnvironment);amtScene.add(amtEnvironment);
   const amtGaussian=createAmtGaussianScene({THREE:T,renderer,scene:amtScene,queueLoad:bridge.queueAssetLoad,mobile:amtMobile,reducedMotion:amtReducedMotion});
   let amtOmenSplat=null,amtOmenRequest=null,amtOmenVisit=-1,amtOmenSkipped=false,amtOmenFailure="";
   function clearAmtOmenSplat(){
@@ -1258,7 +1279,7 @@ function showRendererFailure(error){
       const request=new AbortController(),visit=amtOmenVisit;amtOmenRequest=request;
       const prepare=async()=>{
         if(request.signal.aborted||document.hidden||!level.active)return null;
-        const module=await import("./buergeramt-splat.js?v=20261008-action-arcs");
+        const module=await import("./buergeramt-splat.js?v=20261009-omen-staging");
         request.signal.throwIfAborted();
         return module.createOmenSplat({THREE:T,renderer,scene:amtScene,signal:request.signal,owner:await amtGaussian.getOwner()});
       };
@@ -1283,7 +1304,7 @@ function showRendererFailure(error){
       return false;
     }
     if(!amtHiDpi){amtHiDpi=true;resize()}
-    loadAmtImages();const darkness=level.omen.strength;amtScene.fog.density=.46*Math.pow(darkness,1.2);amtScene.background.copy(amtDayColor).lerp(amtScene.fog.color,darkness);const view=level.view;amtCamera.position.set(view.x,1.68,view.z);amtCamera.rotation.set(0,-view.yaw,0);if(level.qrSvg)setAmtQr(level.qrSvg);const now=performance.now();animateAmtCharacters(now,level);animateAmtMoving(now,level);amtGaussian.prepareGeneration(level.clerkPerformance.animation?.generation??0);updateAmtOmenSplat(level);amtGaussian.update(level,amtCharacters,amtMoving,amtCamera);amtGaussian.render(amtCamera);const call=level.queueDisplay;if(call!==lastCall){lastCall=call;callCtx.fillStyle="#152527";callCtx.fillRect(0,0,512,256);callCtx.textAlign="center";callCtx.textBaseline="middle";callCtx.fillStyle="#c94839";callCtx.font="bold 112px monospace";callCtx.fillText(call,256,135,460);callTexture.needsUpdate=true}renderer.render(amtScene,amtCamera);
+    loadAmtImages();amtIsolation.value=level.omen.life.isolation;amtEnvironment.visible=amtIsolation.value<.9999;const darkness=Math.max(level.omen.strength,amtIsolation.value);amtScene.fog.density=.46*Math.pow(darkness,1.2);amtScene.background.copy(amtDayColor).lerp(amtScene.fog.color,darkness);const view=level.view;amtCamera.position.set(view.x,1.68,view.z);amtCamera.rotation.set(0,-view.yaw,0);if(level.qrSvg)setAmtQr(level.qrSvg);const now=performance.now();animateAmtCharacters(now,level);animateAmtMoving(now,level);amtGaussian.prepareGeneration(level.clerkPerformance.animation?.generation??0);updateAmtOmenSplat(level);amtGaussian.update(level,amtCharacters,amtMoving,amtCamera);amtGaussian.render(amtCamera);const call=level.queueDisplay;if(call!==lastCall){lastCall=call;callCtx.fillStyle="#152527";callCtx.fillRect(0,0,512,256);callCtx.textAlign="center";callCtx.textBaseline="middle";callCtx.fillStyle="#c94839";callCtx.font="bold 112px monospace";callCtx.fillText(call,256,135,460);callTexture.needsUpdate=true}renderer.render(amtScene,amtCamera);
     const omen=level.omen;if(omen.strength>0){omenFocus.set(omen.x,1.04,omen.z).project(amtCamera);omenMaterial.uniforms.focus.value.set((omenFocus.x+1)/2,(omenFocus.y+1)/2);omenMaterial.uniforms.radius.value.set(Math.min(.43,.31/Math.max(.75,innerWidth/innerHeight)),.47);omenMaterial.uniforms.strength.value=omen.strength;omenMaterial.uniforms.clock.value=amtReducedMotion.matches?0:omen.life.time;omenMaterial.uniforms.reveal.value=amtReducedMotion.matches?0:amtOmenSplat?.inspect().reveal||0;renderer.autoClear=false;renderer.render(omenScene,omenCamera);renderer.autoClear=true}
     return true}
   function resize(){renderer.setPixelRatio(Math.min(devicePixelRatio||1,1,Math.sqrt(1600000/Math.max(1,innerWidth*innerHeight))));renderer.setSize(innerWidth,innerHeight,false);camera.aspect=innerWidth/innerHeight;camera.updateProjectionMatrix();amtCamera.aspect=innerWidth/innerHeight;amtCamera.updateProjectionMatrix()}resize();addEventListener("resize",resize,{passive:true});
@@ -1392,6 +1413,6 @@ function showRendererFailure(error){
     parkCameraFrame+=(parkTarget-parkCameraFrame)*(1-Math.exp(-6*Math.min(.05,Math.max(0,(now-previousCameraTime)/1000))));previousCameraTime=now;
     if(parkCameraFrame>.001){const narrow=Math.max(0,Math.min(1,.95/camera.aspect-1)),cx=X(park.x+park.w/2),cz=Z(park.y+park.h/2),focus=parkCameraFrame*(1-.65*narrow);camera.position.set(px+(cx-px)*focus,11.5+(5+2*narrow)*parkCameraFrame,pz+14+2*narrow*parkCameraFrame);camera.lookAt(px+(cx-px)*focus,1+parkCameraFrame,pz-2.7+(cz-(pz-2.7))*parkCameraFrame)}
     updateGroupVisibility();updateBuildingOcclusion();updateWirtschaftswunder(now);renderer.render(scene,camera);
-  },inspectAssets,setAmtQr,get amtGaussian(){return amtGaussian.inspect()},get amtOmenSplat(){return {visit:amtOmenVisit,loading:!!amtOmenRequest,skipped:amtOmenSkipped,failure:amtOmenFailure,...(amtOmenSplat?.inspect()||{ready:false,visible:false})}},get amtOffice(){return officeDetail?.inspect()||null},get amtCharacters(){return [...amtCharacters.map(actor=>({name:actor.name,frame:actor.frame,loaded:!!actor.mesh.material.map?.image,mapped:!!actor.mesh.material.map,visible:actor.mesh.visible,detail:actor.mesh.material.map===actor.detail,texelHeight:actor.mesh.material.map?.image?.height||0,breath:actor.mesh.material.userData.breath.value})),...amtMoving.map(actor=>({name:actor.id,frame:actor.cell,loaded:!!actor.mesh.material.map?.image,mapped:!!actor.mesh.material.map,visible:actor.mesh.visible,detail:actor.mesh.material.map===actor.detail||actor.mesh.material.map===actor.walkDetail,texelHeight:actor.mesh.material.map?.image?.height||0,breath:actor.mesh.material.userData.breath.value,tint:actor.mesh.material.color.getHexString(),position:[actor.mesh.position.x,actor.mesh.position.z]}))]}};
+  },inspectAssets,setAmtQr,get amtGaussian(){return amtGaussian.inspect()},get amtOmenSplat(){return {visit:amtOmenVisit,loading:!!amtOmenRequest,skipped:amtOmenSkipped,failure:amtOmenFailure,...(amtOmenSplat?.inspect()||{ready:false,visible:false})}},get amtOmenStaging(){return {isolation:amtIsolation.value,environmentVisible:amtEnvironment.visible}},get amtOffice(){return officeDetail?.inspect()||null},get amtCharacters(){return [...amtCharacters.map(actor=>({name:actor.name,frame:actor.frame,loaded:!!actor.mesh.material.map?.image,mapped:!!actor.mesh.material.map,visible:actor.mesh.visible,detail:actor.mesh.material.map===actor.detail,texelHeight:actor.mesh.material.map?.image?.height||0,breath:actor.mesh.material.userData.breath.value})),...amtMoving.map(actor=>({name:actor.id,frame:actor.cell,loaded:!!actor.mesh.material.map?.image,mapped:!!actor.mesh.material.map,visible:actor.mesh.visible,detail:actor.mesh.material.map===actor.detail||actor.mesh.material.map===actor.walkDetail,texelHeight:actor.mesh.material.map?.image?.height||0,breath:actor.mesh.material.userData.breath.value,tint:actor.mesh.material.color.getHexString(),position:[actor.mesh.position.x,actor.mesh.position.z]}))]}};
   app.classList.add("three-ready");
 })().catch(showRendererFailure);

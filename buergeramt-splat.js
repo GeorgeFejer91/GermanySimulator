@@ -3,7 +3,7 @@ const clamp=value=>Math.max(0,Math.min(1,value));
 const TUNNEL_RINGS=32,TUNNEL_AROUND=96;
 
 export function omenSplatPose(omen,reducedMotion=false){
-  const live=['approach','blackout','glare'].includes(omen.phase),life=omen.life||{};
+  const live=['approach','blackout','glare','unwind'].includes(omen.phase),life=omen.life||{};
   const reveal=live?clamp(life.depth||0):0;
   return {
     live,reveal,
@@ -11,7 +11,7 @@ export function omenSplatPose(omen,reducedMotion=false){
     turn:0,
     pressure:live?clamp(life.pressure||0):0,
     pulse:reducedMotion?0:clamp(life.pulse||0),
-    ripple:reducedMotion?0:reveal*(.3+.7*clamp(life.pressure||0))*(omen.speech?.paused ? .15 : 1),
+    ripple:reducedMotion?0:reveal*(.3+.7*clamp(life.pressure||0))*(omen.speech?.paused ? .15 : 1)*(life.motion??1),
     time:reducedMotion?0:Math.max(0,life.time||0),
   };
 }
