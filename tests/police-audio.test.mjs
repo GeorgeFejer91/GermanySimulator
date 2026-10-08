@@ -22,13 +22,13 @@ assert.match(game,/state\.wanted>=2&&policeVehicles\.length/,"continuous chase a
 assert.match(game,/Math\.min\(\.05,\(state\.wanted-2\)\*\.016\)/,"higher response tiers should add slight pass-by urgency");
 assert.match(game,/if\(contactDistance<190&&car\.passbyReady\)/,"a nearby police car must trigger the sourced pass-by accent only once per approach");
 assert.match(game,/\.catch\(\(\)=>\{if\(eligible\(\)\)playSiren\(\)\}\)/,"a missing pass-by recording must retain the synthesized alert fallback only while the approach is active");
-assert.match(game,/function loop\(now\).*updatePoliceChaseAudio\(\);draw\(\)/,"chase audio must follow the latest simulated state, including modal transitions");
+assert.match(game,/function loop\(now\).*updatePoliceChaseAudio\(\);if\(!window\.BuergeramtLevel\?\.active\)draw\(\)/,"chase audio must follow the latest simulated state, including modal transitions");
 
 const passbySource=game.match(/function playPolicePassby\([^\n]+/)?.[0];
 assert.ok(passbySource,"the pass-by cue must exist");
 let rejectRecording,synthFallbacks=0;
 const recording=new Promise((_,reject)=>rejectRecording=reject);
-const context=vm.createContext({performance:{now:()=>1000},recording,playSiren:()=>synthFallbacks++});
+const context=vm.createContext({performance:{now:()=>1000},document:{hidden:false},recording,playSiren:()=>synthFallbacks++});
 vm.runInContext(`
  let policePassbyNextAt=0;
  const state={started:true,modal:false,gameOver:false,wanted:2},player={x:0,y:0},car={x:100,y:0},policeVehicles=[car],POLICE_PASSBY_AUDIO="passby.mp3";

@@ -16,7 +16,7 @@ async function settleVisibility(page,id,obstructing){
  // Capture the actual completed state rather than assuming software-rendered
  // diagnostic frames meet a wall-clock screenshot delay. Fade timing has its
  // separate production-function checks below.
- await page.waitForFunction(({id,obstructing})=>{Germany3D.sync();const state=Germany3D.buildingVisibility.find(b=>b.id===id);return state.obstructing===obstructing&&(obstructing?state.opacity<=.04:state.opacity>=.99)},{id,obstructing},{polling:200,timeout:30000});
+ await page.waitForFunction(({id,obstructing})=>{Germany3D.sync();Germany3D.prepareNearbyAssets();const state=Germany3D.buildingVisibility.find(b=>b.id===id);return Germany3D.nearbyAssetsReady&&state.obstructing===obstructing&&(obstructing?state.opacity<=.04:state.opacity>=.99)},{id,obstructing},{polling:200,timeout:30000});
 }
 const mime={'.js':'text/javascript','.html':'text/html','.css':'text/css','.glb':'model/gltf-binary','.png':'image/png','.webp':'image/webp','.svg':'image/svg+xml','.json':'application/json','.woff2':'font/woff2','.mp3':'audio/mpeg'};
 const server=createServer((request,response)=>{try{const file=resolve(root,'.'+decodeURIComponent(new URL(request.url,'http://localhost').pathname));if(!file.startsWith(root+sep))throw Error('path');const bytes=readFileSync(file);response.writeHead(200,{'Content-Type':mime[extname(file)]||'application/octet-stream'});response.end(bytes)}catch{response.writeHead(404);response.end()}});
@@ -24,7 +24,7 @@ await new Promise(done=>server.listen(0,'127.0.0.1',done));
 let browser;
 const report={revision:Object.fromEntries(['world3d.js','game.js','3d.html'].map(file=>[file,createHash('sha256').update(readFileSync(resolve(root,file))).digest('hex')])),cases:[],limits:['Android emulation only; no physical device','City screenshots use diagnostic player placement with simulation paused at opening screen','Diagnostic animation-frame requests are limited to about 2 fps; no gameplay performance claim','External ChatDev stages were not executed']};
 try{
- browser=await chromium.launch({headless:true,executablePath:process.env.CHROMIUM_PATH,args:['--mute-audio','--use-gl=angle','--use-angle=swiftshader']});
+ browser=await chromium.launch({headless:true,executablePath:process.env.CHROMIUM_PATH,args:process.env.PLAYTEST_GPU==='hardware'?['--mute-audio']:['--mute-audio','--use-gl=angle','--use-angle=swiftshader']});
  for(const [name,viewport] of [['desktop',{width:1280,height:800}],['android-emulated',{width:390,height:844}],['android-landscape-emulated',{width:844,height:390}]]){
   const context=await browser.newContext({viewport,isMobile:name!=='desktop',hasTouch:name!=='desktop'});
   context.setDefaultTimeout(120000);context.setDefaultNavigationTimeout(120000);
@@ -41,7 +41,7 @@ try{
   const page=await context.newPage(),errors=[];page.on('pageerror',error=>errors.push(error.message));
   await page.goto(`http://127.0.0.1:${server.address().port}/index.html`,{waitUntil:'domcontentloaded'});
   await page.waitForFunction(()=>window.Germany3D?.ready,null,{timeout:60000});
-  await page.waitForFunction(()=>Germany3D.inspectAssets().buildings.every(b=>b.loaded),null,{timeout:60000});
+  await page.waitForFunction(()=>Germany3D.startupReady&&Germany3DBridge.startupAssetsReady,null,{timeout:60000});
   const fixture=await page.evaluate(async ({occlusion,fade,atlas,vehicleView,vehicleScale,url})=>{
    const T=await import(url),X=x=>x,Z=y=>y,S=.02;
    const bridge={player:{x:0,y:0},stationElevation:()=>0};
@@ -116,13 +116,15 @@ try{
   }
   await page.evaluate(()=>{const b=Germany3DBridge.buildings.find(b=>b.id==='bundestag');Germany3DBridge.player.x=b.doorX;Germany3DBridge.player.y=b.doorY+80;Germany3D.sync()});
   await settleVisibility(page,'bundestag',false);await page.screenshot({path:resolve(output,`${name}-bundestag.png`)});
-  const assets=await page.evaluate(()=>Germany3D.inspectAssets()),landmark=assets.buildings.find(b=>b.id==='bundestag'),rathaus=assets.buildings.find(b=>b.id==='rathaus');
+  const assets=await page.evaluate(()=>Germany3D.inspectAssets()),landmark=assets.buildings.find(b=>b.id==='bundestag'),rathaus=assets.buildings.find(b=>b.id==='buergeramt');
   if(landmark.bounds.height<8||landmark.bounds.height<=rathaus.bounds.height)throw Error('Bundestag scale hierarchy');
   if(errors.length)throw Error(errors.join('\n'));
   await page.close();
   const direct=await context.newPage();direct.on('pageerror',error=>errors.push(`3d.html: ${error.message}`));
   await direct.goto(`http://127.0.0.1:${server.address().port}/3d.html`,{waitUntil:'domcontentloaded'});
-  await direct.waitForFunction(()=>window.Germany3D?.ready&&Germany3D.inspectAssets().buildings.find(b=>b.id==='bundestag')?.loaded,null,{timeout:60000});
+  await direct.waitForFunction(()=>window.Germany3D?.ready,null,{timeout:60000});
+  await direct.evaluate(()=>{const b=Germany3DBridge.buildings.find(b=>b.id==='bundestag');Germany3DBridge.player.x=b.doorX;Germany3DBridge.player.y=b.doorY+80;Germany3D.sync();Germany3D.prepareNearbyAssets()});
+  await direct.waitForFunction(()=>{Germany3D.prepareNearbyAssets();return Germany3D.nearbyAssetsReady&&Germany3D.inspectAssets().buildings.find(b=>b.id==='bundestag')?.loaded},null,{timeout:60000});
   const diagnostic=await direct.evaluate(()=>{const b=Germany3DBridge.buildings.find(b=>b.id==='bundestag');Germany3DBridge.player.x=b.doorX;Germany3DBridge.player.y=b.doorY+80;Germany3D.sync();return Germany3D.inspectAssets().buildings.find(b=>b.id==='bundestag')});
   if(Math.abs(diagnostic.bounds.height-landmark.bounds.height)>.001)throw Error('3d.html landmark mismatch');
   await direct.screenshot({path:resolve(output,`${name}-3d-landmark.png`)});await direct.close();

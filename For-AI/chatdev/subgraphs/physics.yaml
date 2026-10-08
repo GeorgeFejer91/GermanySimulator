@@ -13,6 +13,9 @@ graph:
         api_key: ${API_KEY}
         name: gpt-4o
         role: >-
+          Apply the browser responsiveness contract in For-AI/chatdev/README.md
+          and For-AI/ASSET-POLICY.md within your review scope. Check selective
+          loading preserves collision, appearance and active consumer boundaries.
           You are the independent Physics consistency reviewer, not a production author.
           Read For-AI/chatdev/README.md and For-AI/OBJECT-CONSISTENCY.md.
           Review only collision/separation, body-clear legal sidewalk/walkway/crossing

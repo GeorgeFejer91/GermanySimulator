@@ -85,7 +85,7 @@ browser profiles. Do not add a new pipeline, service or benchmark dependency.
   copying an accepted full atlas into an additional canvas. Compressed file size
   does not prove low resident memory: report width × height × four bytes, mipmaps,
   decoded copies, draw-buffer size and cache ownership separately.
-- Load office art on entry, close detail on approach, music on trusted input and
+- Prepare required office art on approach, close detail on approach, music on trusted input and
   speech/effects when requested. Never preload both desktop/mobile alternatives,
   all songs/voices, or an opt-in candidate pack. Keep existing load-failure
   fallbacks and readable interaction targets.
@@ -114,10 +114,65 @@ browser profiles. Do not add a new pipeline, service or benchmark dependency.
   retain their buffer until completion. Eviction must permit later replay.
   New caches/queues need a measured bound and cleanup rule.
 
+### Responsiveness and selective preparation protocol
+
+Input responsiveness across modest browser hardware is a standing product goal.
+Each runtime/asset change must keep these requirements in its implementation and
+review brief; size alone cannot establish smooth play.
+
+For skill selection, prefer the available [Three.js performance skill](https://github.com/cesartevisual/threejs-skills/tree/main/skills/threejs-performance)
+for frame time, draw workload and resource lifetime, and the available
+[web-performance source](https://github.com/addyosmani/web-quality-skills/tree/main/skills/performance)
+for critical loading and DOM responsiveness. Their GitHub instructions were
+checked on 2026-10-08. The complementary
+[asset-loading skill](https://github.com/cesartevisual/threejs-skills/tree/main/skills/threejs-assets)
+covers loader state, decoded memory and shared ownership; inspect its pinned
+sources before adding it. Use existing installed skills and project harnesses;
+these references do not require another engine, browser stack, telemetry,
+worker pool or installation. A skill's availability is not performance evidence.
+
+- Preload the starting neighborhood before enabling Start, including decoded
+  character images and installed models. Keyboard shortcuts obey the same
+  readiness gate. Show bounded, readable loading feedback; missing individual
+  assets settle to the existing fallback instead of blocking forever.
+- Select assets from actual player/actor position and active scene. The current
+  city lead is 1500 simulation units plus complete model radius, supplemented by
+  conservative current-camera visibility, scanned at most
+  4 Hz. Prepare office assets before entry; close detail remains approach-only.
+  Distant landmarks, absent response units and unused voice libraries must not
+  load at startup. Use shared source promises and retain accepted geometry,
+  alpha, pivots, material state and collision authority during replacement.
+- Admit at most two asset download/decode/install jobs in total through the
+  existing native Promise queue. Count character atlases, renderer images,
+  models and requested recorded-audio decoding together. Start no new optional
+  jobs while hidden or for an inactive scene. Already committed foreground
+  audio/phone receipts retain their explicit timing exception. Do not add
+  workers, timers or parallel preloading merely to improve a loading score.
+- Use one simulation/render owner. A 60 Hz limit must preserve deadline phase
+  on 60/75/90/120/144 Hz displays and tolerate callback jitter. Keep actual
+  elapsed time, bounded substeps and no hidden-tab catch-up. Early distance
+  checks may reject collision candidates only conservatively; retain exact
+  narrow-phase checks, swept movement and overlap recovery.
+- Write HUD and interaction text only when displayed values change. Keep text
+  measurement out of per-frame work; use the existing coalesced Pretext pass
+  on changed copy/fonts/bounds. Preserve focus, touch targets and readable
+  loading/failure states. Stop title/city scans while the office owns play.
+- Hidden tabs stop background music timers, scheduled oscillators, volume ramps
+  and chase loops. Check late decode completions and visible resume; preserve
+  the music choice and committed foreground event receipts.
+- Profile the actual bottleneck before reducing art or simulation quality. Query
+  the renderer so hardware GPU and software-rendered runs are distinguished.
+  Compare repeated cold readiness, warm frame p50/p95, long tasks, actual input
+  to first changed/rendered state, concurrent jobs, stable-DOM mutations and
+  repeated scene entry/exit. Include selective loading, asset failure, rapid
+  approach and background/resume; keep CPU throttling and Android emulation
+  explicitly separate from physical-device evidence.
+
 ### Executable release checks
 
 Run `node --test tests/browser-performance.test.mjs
-tests/runtime-smoothness.test.mjs tests/tourist-animation.test.mjs
+tests/runtime-smoothness.test.mjs tests/browser-responsiveness.test.mjs
+tests/asset-streaming.test.mjs tests/tourist-animation.test.mjs
 tests/intro-music.test.mjs`, then the Pillow delivery check above. The Pages
 workflow runs these dependency-free Node gates before deployment. They protect
 the 10.1 MB aggregate city-atlas delivery budget, delivery hashes/dimensions,
@@ -126,9 +181,10 @@ hidden/title work and elapsed simulation time. They are not device performance
 or visual evidence.
 
 For runtime/asset releases, run `tools/benchmark-browser.mjs` with existing
-`PLAYWRIGHT_MODULE` and `CHROMIUM_PATH`. `BENCH_CHECK=1` enables the 24 MB cold
+`PLAYWRIGHT_MODULE` and `CHROMIUM_PATH`. `BENCH_CHECK=1` enables the 18 MB cold
 local-transfer ceiling, no deferred/authoring boot downloads, at most 4 Hz title
-rendering, 1.6 MP drawing buffer, console and input gates. Default runs three
+rendering, 1.6 MP drawing buffer, console and input gates. Use `BENCH_GPU=hardware` for the available hardware renderer and `BENCH_PROFILE=1`
+for CPU samples; `BENCH_OFFICE=1` measures the office separately. Default runs three
 cold navigations each on Chromium desktop (1280 × 800) and Android portrait
 emulation (390 × 844), DPR 2; `BENCH_THROTTLE=1` adds 4× CPU and 1.6 Mb/s network
 emulation. Keep logs/screenshots under ignored `output/`. These ceilings describe
@@ -265,7 +321,7 @@ The Kiesinger monument carries two `CDU / AB 1948` banners flanking one dated 19
 - The police estate uses authored silver/blue/yellow surfaces and `POLIZEI` lettering without manufacturer branding or a real police insignia. The old UV-livery tool and PNG are no longer runtime inputs. The helicopter remains black with its existing procedural rotor and searchlight geometry.
 - `game.js` owns wanted thresholds, response counts, pursuit, impacts, searchlight pressure, and reinforcement timing. `world3d.js` only renders those semantic response objects and loads each source GLB once for cloning.
 - Missing-model paths retain procedural 3D car and helicopter stand-ins. Do not add a remote runtime asset host or a vehicle-physics dependency for this bounded chase system.
-- Chase audio stays under `assets/audio/police/`: one CC BY 4.0 Essen police Martinshorn recording supplies the distance-scaled loop and one CC0 German police-car pass-by supplies a cooldown-bound close approach accent. Preserve the adjacent `LICENSES.md` attribution, conversion notes, durations, sizes, and checksums. Both files preload only after the Start gesture, never use a remote runtime host, and fall back to the existing synthesized siren when unavailable.
+- Chase audio stays under `assets/audio/police/`: one CC BY 4.0 Essen police Martinshorn recording supplies the distance-scaled loop and one CC0 German police-car pass-by supplies a cooldown-bound close approach accent. Preserve the adjacent `LICENSES.md` attribution, conversion notes, durations, sizes, and checksums. Both files load only when a chase or pass-by requires them, never use a remote runtime host, and fall back to the existing synthesized siren when unavailable.
 
 ## Opt-in prop-detail studies
 

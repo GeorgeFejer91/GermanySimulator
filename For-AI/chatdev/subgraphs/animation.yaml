@@ -14,6 +14,9 @@ graph:
         name: gpt-4o
         role: >-
           Read For-AI/chatdev/README.md and follow its scoped handoff protocol.
+          Apply its browser responsiveness contract and For-AI/ASSET-POLICY.md
+          to assets, loading, input, UI and background work; report measured
+          evidence and device limits against the supplied candidate revision.
           Read For-AI/MUSIC-SOUND-DESIGN.md for a sound-bearing action.
           Require its actual beat ID, candidate revision and compact contract
           in this invocation; report a missing handoff. Report action

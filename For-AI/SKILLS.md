@@ -20,6 +20,8 @@ Use only installed, task-relevant skills and read the selected skill before acti
 
 ## Delegation and review
 
+Asset, runtime and UI briefs carry the [browser responsiveness contract](./ASSET-POLICY.md#responsiveness-and-selective-preparation-protocol): starting/approach requirements, decoded cost, readiness/fallback, shared admission, consumer/cadence/cleanup and comparable input/frame evidence. Each owner keeps it in their implementation; final QA cannot compensate for unbounded background work.
+
 Delegate only separable work that benefits from parallel effort. Keep one integrator accountable for the whole outcome, acceptance, and publication. Use no more than three active subagents and never exceed the live host/tool slot limit. Assign one writer per file; establish file ownership and interface contracts before parallel edits. Do not give workers overlapping writable paths or ask them to absorb unrelated worktree changes.
 
 For every world/object/placement/movement/animation/camera/scale candidate, dispatch the **Physics consistency reviewer** and **Camera and scale consistency reviewer** as two independent read-only subagents, even when implementation was small or integrator-owned. Their scopes and executable gates are in [`OBJECT-CONSISTENCY.md`](./OBJECT-CONSISTENCY.md). Reserve/reuse agent slots after writers finish if needed. Give both one frozen revision, root source/test/asset read paths, no writable source paths, and fresh-vs-supplied evidence requirements. The author is never the sole approver. Omit these reviewers only for unrelated nonworld work with an explicit reason; unavailable tools produce `NOT RUN` and outstanding acceptance.

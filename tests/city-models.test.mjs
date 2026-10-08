@@ -96,6 +96,7 @@ const source={traverse(fn){sources.forEach(fn)},clone(deep){assert.equal(deep,tr
 const warnings=[],buildingSlots=[],context={
   previousOcclusionTime:0,performance:{now:()=>0},buildingObstructsPlayer:slot=>slot.testObstructed||false,
   S:.02,X:x=>x*.02,Z:y=>y*.02,camera:{position:{x:9999*.02,z:9999*.02+14}},bridge:{player:{x:9999,y:9999}},buildingSlots,localModels:new Map(),console:{warn:(...args)=>warnings.push(args)},
+  queueCityModel:(_position,_radius,task)=>task(),
   modelLoader:{loadAsync(url){requests++;return url==="missing.glb"?Promise.reject(new Error("missing")):Promise.resolve({scene:source})}},
   T:{Vector3:class{},Box3:class{min={y:0};setFromObject(){return this}getSize(){return{x:12,y:6,z:8}}getCenter(){return{x:0,y:3,z:0}}}}
 };
@@ -124,5 +125,5 @@ a.testObstructed=false;context.updateBuildingOcclusion(1016.67);assert.ok(a.opac
 for(let i=62;i<=240;i++)context.updateBuildingOcclusion(i*1000/60);
 assert.ok(Math.abs(aGlass.opacity-.42)<1e-10);assert.equal(aGlass.transparent,true);assert.equal(aGlass.depthWrite,false);assert.equal(aStone.transparent,false);assert.equal(aStone.depthWrite,true);assert.equal(glass.opacity,.42);
 const missing=slot("missing",0);await context.installBuildingModel(missing,"missing.glb",12,6,8);await context.installBuildingModel(missing,"missing.glb",12,6,8);
-assert.equal(missing.model,null);assert.equal(missing.fallback.visible,true);assert.equal(requests,3,"a failed source must retry on a later installation");assert.equal(warnings.length,2);
+assert.equal(missing.model,null);assert.equal(missing.fallback.visible,true);assert.equal(requests,2,"a failed source retains one fallback result rather than retrying on every approach");assert.equal(warnings.length,1);
 console.log(`City kit: ${expected.length} valid local models, ${totalTriangles.toLocaleString()} triangles, ${totalBytes.toLocaleString()} bytes; cached instance loading, fallback and glass fading pass`);

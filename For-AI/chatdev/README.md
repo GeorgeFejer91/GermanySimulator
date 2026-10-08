@@ -19,6 +19,25 @@ Each review returns **task and candidate revision** (commit or base plus changed
 
 For the object-consistency matrix, include the reviewer/role and verdict per scenario and evidence type: production source/CPU checks, fresh Chromium rendered checks, Android emulation and physical Android. A source PASS cannot promote a rendered NOT RUN to PASS. Required FAIL/NOT RUN items keep acceptance outstanding; record out-of-scope rows and reasons rather than implying they passed.
 
+## Browser responsiveness contract
+
+Every affected domain follows the [browser playability gate and responsiveness
+protocol](../ASSET-POLICY.md#responsiveness-and-selective-preparation-protocol).
+Put a compact performance contract in each affected stage's live prompt: starting
+and approach-required assets; transfer/decoded-memory cost; readiness/fallback;
+shared two-job admission; active consumer, cadence and teardown; changed-only UI
+updates; and the frozen candidate plus comparable browser checks. This applies
+to art, animation, gameplay, sound, phone and UI work, not only the final QA stage.
+
+Gameplay owns input/frame scheduling and conservative collision equivalence.
+Character/Animation and Camera own selective atlas/model preparation without
+pose, material or scale regressions. Soundscape/Mix/Voice preserve committed
+receipts while stopping background work; Phone names its live-session exception.
+Review/QA require the executable admission/readiness/cadence gates and repeated
+silent browser evidence for startup, approach, warm input, stable UI, load failure
+and hidden/resume. Return measured limits and untested hardware explicitly. Do
+not claim an external runner's source checks establish browser performance.
+
 ## External runner limits
 
 The runner targets OpenBMB ChatDev v2.2.0 at commit `3c72d860d2553f05129b7dff0fd4efdde5b01d2f` in the sibling `ChatDev` directory. `tools/chatdev.ps1 -ValidateOnly` checks local graph/tool structure and needs Python plus PyYAML only; it does not require that external checkout or credentials and does not execute a stage. Execution additionally needs the pinned external checkout, its Python environment, and local `API_KEY` or `OPENAI_API_KEY` configuration. The graph currently names `gpt-4o`; native Codex routing owns Luna/Sol/Astra task tiers and does not imply an API or ChatDev model migration. Do not claim external model execution or other tools are available unless confirmed in the current environment.

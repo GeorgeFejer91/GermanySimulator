@@ -1,7 +1,7 @@
 import {measureLineStats,measureNaturalWidth,prepareWithSegments} from './assets/vendor/pretext/dist/layout.js';
 
 // Keep the bounded Amt labels readable as the phone, browser zoom, or German copy changes.
-const selectors=['#amt-objective','#amt-nearby','#amt-number-board','#amt-title','#amt-line','#amt-status','#amt-ambient','#amt-actions button','#amt-leave','#amt-exit','#amt-direct-reset','#amt-direct-result-title','#amt-direct-result-copy','.amt-direct-result a','#amt-mix summary','#amt-mix label','#amt-compact-reset','#phone-status','#phone-connect-status','.phone-brand strong','.phone-breadcrumb','.phone-title','#phone-form h2','#phone-form p','#phone-form label','#phone-submit','#phone-caller','#phone-call-state','#phone-answer-label','#phone-decline-label','#phone-swipe-label','.phone-keep','#phone-call-line'];
+const selectors=['#start','#amt-objective','#amt-nearby','#amt-number-board','#amt-title','#amt-line','#amt-status','#amt-ambient','#amt-actions button','#amt-leave','#amt-exit','#amt-direct-reset','#amt-direct-result-title','#amt-direct-result-copy','.amt-direct-result a','#amt-mix summary','#amt-mix label','#amt-compact-reset','#phone-status','#phone-connect-status','.phone-brand strong','.phone-breadcrumb','.phone-title','#phone-form h2','#phone-form p','#phone-form label','#phone-submit','#phone-caller','#phone-call-state','#phone-answer-label','#phone-decline-label','#phone-swipe-label','.phone-keep','#phone-call-line'];
 let queued=false;
 function schedule(){if(queued)return;queued=true;requestAnimationFrame(async()=>{queued=false;await document.fonts.ready;measure()})}
 function measure(){
@@ -32,7 +32,7 @@ function measure(){
   }catch{el.dataset.pretextFit='unavailable'}
  }
 }
-for(const root of [document.getElementById('amt-level'),document.getElementById('amt-walk-hud'),document.getElementById('amt-mix'),document.getElementById('amt-direct-result'),document.querySelector('.phone-shell')]){
+for(const root of [document.getElementById('intro'),document.getElementById('amt-level'),document.getElementById('amt-walk-hud'),document.getElementById('amt-mix'),document.getElementById('amt-direct-result'),document.querySelector('.phone-shell')]){
  if(root)new MutationObserver(schedule).observe(root,{subtree:true,childList:true,characterData:true,attributes:true,attributeFilter:['hidden']});
 }
 addEventListener('resize',schedule,{passive:true});

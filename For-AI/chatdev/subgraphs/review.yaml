@@ -14,6 +14,9 @@ graph:
         name: gpt-4o
         role: >-
           Read For-AI/chatdev/README.md and follow its scoped handoff protocol.
+          Apply its browser responsiveness contract and For-AI/ASSET-POLICY.md
+          to assets, loading, input, UI and background work; report measured
+          evidence and device limits against the supplied candidate revision.
           Read For-AI/OBJECT-CONSISTENCY.md. For any world/object/movement/
           animation/camera/scale candidate, require separate independent read-only
           Physics and Camera reports bound to this same candidate revision.
