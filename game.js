@@ -2,7 +2,7 @@
 "use strict";
 const canvas=document.getElementById("game"),ctx=canvas.getContext("2d"),keys=Object.create(null),CITY={w:9840,h:4240},RAIL_GUTTER=560,WORLD={w:CITY.w+RAIL_GUTTER*2,h:CITY.h+RAIL_GUTTER*2};
 const offsetWorldPoint=item=>({...item,x:item.x+RAIL_GUTTER,y:item.y+RAIL_GUTTER});
-const player={x:1800+RAIL_GUTTER,y:1760+RAIL_GUTTER,r:16,energy:100,facing:0,vx:0,vy:0};
+const player={id:"player-default",fullName:"Hans-Peter Mustermann",voiceId:"spieler-hans-peter-mustermann",x:1800+RAIL_GUTTER,y:1760+RAIL_GUTTER,r:16,energy:100,facing:0,vx:0,vy:0};
 const speechCatalog=window.GermanySimulatorAudioText;
 function speechClip(id){const clip=speechCatalog.clips[id];if(!clip)throw new Error(`Unknown speech clip: ${id}`);return clip}
 const GERMANNESS_MAX=15,LAW_POWER_THRESHOLD=9;
@@ -280,8 +280,8 @@ const pedestrianBarks={
  }
 };
 const crowdArchetypes=Object.freeze([
- {id:"towel-man",sprite:"towelMan",label:"LIEGENRESERVIERER",barks:{berlin:["Dieser Platz ist seit 07:04 durch textile Willenserklärung reserved.","Please Abstand halten: Das Handtuch befindet sich im Vorverfahren."],germany:["Dieser Platz ist seit 07:04 Uhr durch textile Willenserklärung reserviert.","Bitte Abstand halten: Das Handtuch befindet sich im Vorverfahren."]}},
- {id:"towel-woman",sprite:"towelWoman",label:"HANDTUCHHOHEIT",barks:{berlin:["Die Liege ist not frei; die Reservierung trocknet nur kurz.","Your Schatten fällt in meinen amtlich vorgemerkten Sonnenkorridor."],germany:["Die Liege ist nicht frei; die Reservierung trocknet nur kurz.","Ihr Schatten fällt in meinen amtlich vorgemerkten Sonnenkorridor."]}}
+ {id:"towel-man",fullName:"Günther Liegestuhl",voiceId:"tourist-guenther-liegestuhl",sprite:"towelMan",label:"LIEGENRESERVIERER",barks:{berlin:["Dieser Platz ist seit 07:04 durch textile Willenserklärung reserved.","Please Abstand halten: Das Handtuch befindet sich im Vorverfahren."],germany:["Dieser Platz ist seit 07:04 Uhr durch textile Willenserklärung reserviert.","Bitte Abstand halten: Das Handtuch befindet sich im Vorverfahren."]}},
+ {id:"towel-woman",fullName:"Walburga Handtuch",voiceId:"touristin-walburga-handtuch",sprite:"towelWoman",label:"HANDTUCHHOHEIT",barks:{berlin:["Die Liege ist not frei; die Reservierung trocknet nur kurz.","Your Schatten fällt in meinen amtlich vorgemerkten Sonnenkorridor."],germany:["Die Liege ist nicht frei; die Reservierung trocknet nur kurz.","Ihr Schatten fällt in meinen amtlich vorgemerkten Sonnenkorridor."]}}
 ]);
 const crowdArchetypeById=Object.fromEntries(crowdArchetypes.map(archetype=>[archetype.id,archetype]));
 const crowdArchetypeOrder=Object.freeze(["towel-man","towel-woman"].map(id=>crowdArchetypeById[id]));
@@ -720,31 +720,32 @@ const bayernWaypoints=Object.freeze([
 ].map(offsetWorldPoint));
 const politicianLines=Object.freeze({merz:merzLines,merkel:merkelLines});
 const npcs=[
- {x:520,y:720,name:"HERR KLEIN",line:0,vx:16,vy:0,min:470,max:900},
- {x:1470,y:670,name:"FRAU MÜLLER",line:3,vx:-13,vy:0,min:1360,max:1760},
- {x:720,y:1140,name:"HERR SCHULZ",line:6,vx:0,vy:12,min:1100,max:1280},
- {x:2150,y:1120,name:"FRAU NEUMANN",line:2,vx:0,vy:-10,min:1010,max:1240},
- {x:1500,y:1660,name:"HERR DIN",line:8,vx:14,vy:0,min:1360,max:1800},
- {x:2900,y:720,name:"FRAU AKTENSTAPEL",line:3,vx:14,vy:0,min:2700,max:3350},
- {x:4050,y:720,name:"HERR TÜV",line:8,vx:-12,vy:0,min:3820,max:4300},
- {x:2920,y:1880,name:"FRAU SPARKASSE",line:5,vx:13,vy:0,min:2700,max:3350},
- {x:4050,y:1880,name:"HERR POST",line:7,vx:-12,vy:0,min:3820,max:4300},
+ {x:520,y:720,id:"city-klaus-dieter-klein",name:"HERR KLEIN",fullName:"Klaus-Dieter Klein",voiceId:"stadt-klaus-dieter-klein",line:0,vx:16,vy:0,min:470,max:900},
+ {x:1470,y:670,id:"city-brigitte-mueller",name:"FRAU MÜLLER",fullName:"Brigitte Müller",voiceId:"stadt-brigitte-mueller",line:3,vx:-13,vy:0,min:1360,max:1760},
+ {x:720,y:1140,id:"city-wolfgang-schulz",name:"HERR SCHULZ",fullName:"Wolfgang Schulz",voiceId:"stadt-wolfgang-schulz",line:6,vx:0,vy:12,min:1100,max:1280},
+ {x:2150,y:1120,id:"city-ursula-neumann",name:"FRAU NEUMANN",fullName:"Ursula Neumann",voiceId:"stadt-ursula-neumann",line:2,vx:0,vy:-10,min:1010,max:1240},
+ {x:1500,y:1660,id:"city-manfred-din",name:"HERR DIN",fullName:"Manfred DIN",voiceId:"stadt-manfred-din",line:8,vx:14,vy:0,min:1360,max:1800},
+ {x:2900,y:720,id:"city-irmgard-aktenstapel",name:"FRAU AKTENSTAPEL",fullName:"Irmgard Aktenstapel",voiceId:"stadt-irmgard-aktenstapel",line:3,vx:14,vy:0,min:2700,max:3350},
+ {x:4050,y:720,id:"city-guenther-tuev",name:"HERR TÜV",fullName:"Günther TÜV",voiceId:"stadt-guenther-tuev",line:8,vx:-12,vy:0,min:3820,max:4300},
+ {x:2920,y:1880,id:"city-hannelore-sparkasse",name:"FRAU SPARKASSE",fullName:"Hannelore Sparkasse",voiceId:"stadt-hannelore-sparkasse",line:5,vx:13,vy:0,min:2700,max:3350},
+ {x:4050,y:1880,id:"city-karl-heinz-post",name:"HERR POST",fullName:"Karl-Heinz Post",voiceId:"stadt-karl-heinz-post",line:7,vx:-12,vy:0,min:3820,max:4300},
  {x:borderGates[1].x+borderGates[1].w/2,y:BORDER_Y+34,name:"FRIEDRICH MERZ · FIKTIONALE SATIRE",special:"borderPourer",politician:"merz",dir:1,lane:1,state:"sideWalk",stateTimer:1.35,blockedTimer:0,animTime:0,spriteRow:1,spriteFrame:0,spriteFlip:false,barkAt:0,lineIndex:0,minX:80,maxX:WORLD.w-80},
  {x:4620,y:3270,name:"ANGELA MERKEL · SATIRE",special:"merkel",politician:"merkel",route:[[4620,3270],[5750,3270],[6150,3270],[7200,3270],[7200,3880],[6120,3880],[5750,3880],[4620,3880]],target:1,routeDirection:1,blockedTimer:0,facingX:1,facingY:0,animTime:0,spriteRow:2,spriteFrame:1,barkAt:0,lineIndex:0},
  {x:1014,y:784,name:"BAYERN-BEAUFTRAGTER · SATIRE",special:"bayern",spot:0,targetSpot:1,hangTimer:0,animTime:0,spriteRow:1,spriteFrame:0,barkAt:0,lastClip:-1},
  {x:aliceDumpster.x+aliceDumpster.orbitRadius,y:aliceDumpster.y,name:"ALICE WEIDEL · FIKTIONALE SATIRE",special:"alice",orbitAngle:0,animTime:0,spriteRow:0,spriteFrame:0,barkAt:0},
- {x:4200,y:3450,name:"HERR RASENAUFSICHT",line:8,vx:0,vy:10,min:3330,max:3820},
- {x:5100,y:720,name:"FRAU ORDNUNG",line:8,vx:13,vy:0,min:4750,max:5600},
- {x:6650,y:720,name:"HERR ARCHIV",line:3,vx:-11,vy:0,min:6250,max:7100},
- {x:8200,y:720,name:"FRAU TERMIN",line:9,vx:14,vy:0,min:7800,max:8700},
- {x:5200,y:1880,name:"HERR MIETNACHWEIS",line:1,vx:-12,vy:0,min:4750,max:5600},
- {x:6750,y:1880,name:"FRAU ZEBRA",line:8,vx:13,vy:0,min:6250,max:7100},
- {x:8300,y:1880,name:"HERR FUNDSACHE",line:7,vx:-12,vy:0,min:7800,max:8700},
- {x:5200,y:2860,name:"FRAU RUHE",line:5,vx:12,vy:0,min:4750,max:5600},
- {x:6750,y:2860,name:"HERR FAXROLLE",line:4,vx:-13,vy:0,min:6250,max:7100},
- {x:8300,y:2860,name:"FRAU TRENNUNG",line:6,vx:12,vy:0,min:7800,max:8700}
+ {x:4200,y:3450,id:"city-herbert-rasenaufsicht",name:"HERR RASENAUFSICHT",fullName:"Herbert Rasenaufsicht",voiceId:"stadt-herbert-rasenaufsicht",line:8,vx:0,vy:10,min:3330,max:3820},
+ {x:5100,y:720,id:"city-waltraud-ordnung",name:"FRAU ORDNUNG",fullName:"Waltraud Ordnung",voiceId:"stadt-waltraud-ordnung",line:8,vx:13,vy:0,min:4750,max:5600},
+ {x:6650,y:720,id:"city-erwin-archiv",name:"HERR ARCHIV",fullName:"Erwin Archiv",voiceId:"stadt-erwin-archiv",line:3,vx:-11,vy:0,min:6250,max:7100},
+ {x:8200,y:720,id:"city-renate-termin",name:"FRAU TERMIN",fullName:"Renate Termin",voiceId:"stadt-renate-termin",line:9,vx:14,vy:0,min:7800,max:8700},
+ {x:5200,y:1880,id:"city-heinz-mietnachweis",name:"HERR MIETNACHWEIS",fullName:"Heinz Mietnachweis",voiceId:"stadt-heinz-mietnachweis",line:1,vx:-12,vy:0,min:4750,max:5600},
+ {x:6750,y:1880,id:"city-monika-zebra",name:"FRAU ZEBRA",fullName:"Monika Zebra",voiceId:"stadt-monika-zebra",line:8,vx:13,vy:0,min:6250,max:7100},
+ {x:8300,y:1880,id:"city-joachim-fundsache",name:"HERR FUNDSACHE",fullName:"Joachim Fundsache",voiceId:"stadt-joachim-fundsache",line:7,vx:-12,vy:0,min:7800,max:8700},
+ {x:5200,y:2860,id:"city-ute-ruhe",name:"FRAU RUHE",fullName:"Ute Ruhe",voiceId:"stadt-ute-ruhe",line:5,vx:12,vy:0,min:4750,max:5600},
+ {x:6750,y:2860,id:"city-norbert-faxrolle",name:"HERR FAXROLLE",fullName:"Norbert Faxrolle",voiceId:"stadt-norbert-faxrolle",line:4,vx:-13,vy:0,min:6250,max:7100},
+ {x:8300,y:2860,id:"city-edeltraud-trennung",name:"FRAU TRENNUNG",fullName:"Edeltraud Trennung",voiceId:"stadt-edeltraud-trennung",line:6,vx:12,vy:0,min:7800,max:8700}
  ].map(n=>n.special==="borderPourer"?n:{...offsetWorldPoint(n),min:n.min==null?n.min:n.min+RAIL_GUTTER,max:n.max==null?n.max:n.max+RAIL_GUTTER,minY:n.minY==null?n.minY:n.minY+RAIL_GUTTER,maxY:n.maxY==null?n.maxY:n.maxY+RAIL_GUTTER,routeX:n.routeX==null?n.routeX:n.routeX+RAIL_GUTTER,route:n.route?.map(([x,y])=>[x+RAIL_GUTTER,y+RAIL_GUTTER])});
-const crowdNames=["ALEX YILMAZ","SASCHA OKAFOR","TONI NGUYEN","KIM SCHMIDT","MICHA HADDAD","NIKI PETROVIĆ","CHARLIE WEBER","LOU KAYA","ROBIN DEMIR","DANI KOWALSKI","JULE ABDI","ANDREA ROSSI"];
+const crowdNames=["WALTRAUD WARTEMARKE","KLAUS-DIETER KNÖDEL","HILDEGARD BROTZEIT","GÜNTHER GARTENZAUN","BRIGITTE BÜROKLAMMER","HORST HAUSORDNUNG","IRMGARD AKTENORDNER","MANFRED MITTAGSRUHE","ELFRIEDE EINGABE","RÜDIGER RASENKANTE","BÄRBEL BREZEL","DIETMAR DIN-NORM"];
+const crowdVoiceIds=["crowd-waltraud-wartemarke","crowd-klaus-dieter-knoedel","crowd-hildegard-brotzeit","crowd-guenther-gartenzaun","crowd-brigitte-bueroklammer","crowd-horst-hausordnung","crowd-irmgard-aktenordner","crowd-manfred-mittagsruhe","crowd-elfriede-eingabe","crowd-ruediger-rasenkante","crowd-baerbel-brezel","crowd-dietmar-din-norm"];
 const sidewalkSegments=[];
 for(let start=40,i=0;i<=verticalRoads.length;i++){
  const road=verticalRoads[i],end=road?road.x-SIDEWALK_WIDTH:WORLD.w-40;
@@ -753,8 +754,8 @@ for(let start=40,i=0;i<=verticalRoads.length;i++){
 }
 let crowdIndex=0;
 function addCrowdPedestrian(x,y,vx,vy,min,max){
- const j=crowdIndex++,archetype=crowdArchetypeOrder[j%crowdArchetypeOrder.length],vertical=!!vy;
- npcs.push({x,y,name:`${crowdNames[(j*5+3)%crowdNames.length]} · ${archetype.label}`,line:(j*7+2)%npcLines.length,vx,vy,min,max,crowd:true,quizzer:j%3===0,pause:0,barkAt:0,archetype:archetype.id,spriteKind:archetype.sprite,spriteFrame:(j*4)%32,spriteRow:vertical?(vy>0?1:2):0,spriteFlip:vertical?false:vx<0,animTime:(j%16)/16,audioRadius:96})
+ const j=crowdIndex++,archetype=crowdArchetypeOrder[j%crowdArchetypeOrder.length],vertical=!!vy,identityIndex=(j*5+3)%crowdNames.length,fullName=crowdNames[identityIndex],voiceId=crowdVoiceIds[identityIndex];
+ npcs.push({id:`${voiceId}-${j}`,x,y,name:`${fullName} · ${archetype.label}`,fullName,voiceId,line:(j*7+2)%npcLines.length,vx,vy,min,max,crowd:true,quizzer:j%3===0,pause:0,barkAt:0,archetype:archetype.id,spriteKind:archetype.sprite,spriteFrame:(j*4)%32,spriteRow:vertical?(vy>0?1:2):0,spriteFlip:vertical?false:vx<0,animTime:(j%16)/16,audioRadius:96})
 }
 function requestCharacterReaction(n,names,options={}){return globalThis.CharacterInteractions?.request(n,names,npcSpriteAtlases[n?.spriteKind]?.tourist,options)||false}
 function updateCharacterReaction(n,dt){return globalThis.CharacterInteractions?.advance(n,dt,npcSpriteAtlases[n?.spriteKind]?.tourist)||false}
@@ -1141,7 +1142,7 @@ function useLawPower(){
  let target=null,best=Infinity;for(const n of npcs){if(n.special||n.arrested||!n.crowd||n===state.quizApproach)continue;const d=dist(player.x,player.y,n.x,n.y);if(d<best){best=d;target=n}}
  if(!target){toast("KEINE ANDERE ZUSTÄNDIGE PERSON AUFFINDBAR");return}
  const quote=nextLawPowerLine(),recording=speechClip(`law-${String(lastLawPowerLine+1).padStart(2,"0")}`).recording;state.lawCooldown=14;state.wanted=0;state.wantedCooldown=0;state.offence="ZUSTÄNDIGKEIT ERFOLGREICH UMGELENKT";syncPoliceResponse();
- if(!police.length){const point=groundResponsePoint(180,120,14);if(point)police.push({...point,speed:150,barkAt:0,divertedTarget:target})}
+ if(!police.length){const point=groundResponsePoint(180,120,14);if(point)police.push({...point,fullName:"Heinrich Wachtmeister",voiceId:"polizei-heinrich-wachtmeister",speed:150,barkAt:0,divertedTarget:target})}
  for(const p of police)p.divertedTarget=target;
  showWorldBark("SIE · GESETZZITAT",quote,true,recording,"law",{family:"law",priority:STIMULUS_PRIORITY.CRITICAL,ambient:false});toast("§-MACHT AKTIV · "+target.name+" WIRD ÜBERPRÜFT");updateHud();
 }
@@ -1191,7 +1192,7 @@ function announcePoliceResponse(oldLevel,newLevel){
 }
 function wanted(level,msg,instant){const old=state.wanted;state.wanted=clamp(Math.max(state.wanted,level),0,5);state.offence=msg;state.wantedCooldown=14;const gained=state.wanted-old;if(instant||gained>0)spawnPolice(instant?Math.max(3,state.wanted):Math.min(4,gained+(state.wanted>=3?1:0)));syncPoliceResponse();announcePoliceResponse(old,state.wanted);violationAlert(msg,state.wanted);toast(msg+" · "+state.wanted+" STERN"+(state.wanted===1?"":"E"));updateHud()}
 function escalate(msg,amount=1,instant=false){wanted(Math.min(5,Math.max(1,state.wanted+amount)),msg,instant)}
-function spawnPolice(n,announce=true){const count=Math.min(n,Math.max(0,14-police.length)),before=police.length;for(let i=0;i<count;i++){const point=groundResponsePoint(180,120,14);if(!point)break;police.push({...point,speed:105+state.wanted*12,barkAt:0,avoid:Math.random()<.5?-1:1})}if(announce&&police.length>before)policeBark(true)}
+function spawnPolice(n,announce=true){const count=Math.min(n,Math.max(0,14-police.length)),before=police.length;for(let i=0;i<count;i++){const point=groundResponsePoint(180,120,14);if(!point)break;police.push({...point,fullName:"Heinrich Wachtmeister",voiceId:"polizei-heinrich-wachtmeister",speed:105+state.wanted*12,barkAt:0,avoid:Math.random()<.5?-1:1})}if(announce&&police.length>before)policeBark(true)}
 function updatePoliceResponse(dt){
  syncPoliceResponse();
  for(const car of policeVehicles){

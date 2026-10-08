@@ -20,7 +20,7 @@ for(const id of ids){
 assert.match(game,/archetype=crowdArchetypeOrder\[j%crowdArchetypeOrder\.length\]/,"crowd distribution must use the deliberate weighted archetype order");
 assert.match(game,/Object\.freeze\(\["towel-man","towel-woman"\]/,"only the accepted towel characters must populate the ordinary crowd");
 for(const removed of ["bioVegan","wasteMarshal","quietHours","cargoParent","dinInspector","potato"])assert.doesNotMatch(game,new RegExp(removed),`${removed} must not remain in the runtime`);
-assert.match(game,/crowdNames\[\(j\*5\+3\)%crowdNames\.length\]/,"names must rotate independently from the visual stereotype");
+assert.match(game,/identityIndex=\(j\*5\+3\)%crowdNames\.length,fullName=crowdNames\[identityIndex\],voiceId=crowdVoiceIds\[identityIndex\]/,"names and voice IDs must rotate together independently from the visual stereotype");
 assert.match(game,/region=state\.region,archetype=[^;]*surface===\"sidewalk\"&&archetype\?archetype\.barks\[region\]/,"nearby pedestrians must use archetype-specific speech captured in the trigger region");
 assert.match(game,/dist\(player\.x,player\.y,n\.x,n\.y\)<\(n\.audioRadius\|\|NPC_COMPLAINT_DISTANCE\)/,"personal speech must be radius-triggered");
 assert.match(game,/advanceSpriteGait\(n,Math\.hypot\(n\.x-beforeX,n\.y-beforeY\),npcSpriteAtlases\[n\.spriteKind\],CROWD_GAIT_CYCLE_DISTANCE,dt\)/,"walking frames must advance from actual pedestrian distance");
