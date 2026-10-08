@@ -3183,6 +3183,64 @@
       "targetValence": "negative",
       "targetArousal": "high",
       "demeanor": "Angry driver reacting to player-caused braking."
+    },
+    {
+      "fullName": "Theodor Amtsstimme",
+      "gameRole": "alternate reusable narrator/player dialogue source",
+      "voiceId": "sprecher-theodor-amtsstimme-thorsten",
+      "secretTunnelProfileName": "GS Theodor Amtsstimme (Thorsten CC0 asset source)",
+      "secretTunnelProfileId": "f24e025a49484ea7a23a59e1693dc740",
+      "sourceSpeaker": "Thorsten Müller",
+      "source": [
+        {
+          "path": "assets/voices/thorsten-angry-nicht-weg.mp3",
+          "sha256": "61a7d884aef5d3029384f0bff3d0b78ae75464cdbdd9e848ac9020d48e94ebbf",
+          "emotion": "anger",
+          "text": "Nein, ich gehe hier nicht weg!"
+        },
+        {
+          "path": "assets/voices/thorsten-angry-duemmer.mp3",
+          "sha256": "66d2613ee3f5e9f6de1c6b41e16dc27b9776b26520a772235977074db1e88141",
+          "emotion": "anger",
+          "text": "Dümmer geht's nicht mehr."
+        },
+        {
+          "path": "assets/voices/thorsten-angry-klappt-nicht.mp3",
+          "sha256": "853e5bd8f21336589461ab264eb3508be4a38c8dc75c7185aaa41c77bc3042f7",
+          "emotion": "anger",
+          "text": "Das klappt einfach nicht!"
+        },
+        {
+          "path": "assets/voices/thorsten-amused-nachschub.mp3",
+          "sha256": "ae493487da4390e2f0d850f4bcaa30cb9887e5052eebce0bffcf24bf5c225452",
+          "emotion": "amusement",
+          "text": "Endlich wieder Nachschub!"
+        },
+        {
+          "path": "assets/voices/thorsten-disgusted-nichts-geschafft.mp3",
+          "sha256": "152920f2ac48bdc208d221d19822cee7ab2599a639f40819147a79b11704f81e",
+          "emotion": "disgust",
+          "text": "Mist, wieder nichts geschafft."
+        },
+        {
+          "path": "assets/voices/thorsten-sleepy-nichts-geschafft.mp3",
+          "sha256": "739c3e7a73188783f33da4dbd0849c7e539bd5c1ac76eea4d2f33adbc80d60e5",
+          "emotion": "sleepiness",
+          "text": "Mist, wieder nichts geschafft."
+        }
+      ],
+      "sourceLicense": "CC0-1.0",
+      "referenceSha256": "85c25d5ce8ce6e05890510a3ccccaccc9ee7bfcc236d90af9036383d568cf42a",
+      "demeanor": "Optional reusable source voice with multiple emotional takes; choose scene delivery deliberately.",
+      "targetValence": "scene-dependent",
+      "targetArousal": "scene-dependent",
+      "status": "profile-created through Secret Tunnel MCP; verified in native voice_list; one new-dialogue candidate passed independent ASR; listening review pending",
+      "newDialogueReviewSample": {
+        "text": "Willkommen im Bürgeramt. Bitte ziehen Sie eine Nummer.",
+        "renderer": "ResembleAI/Chatterbox Multilingual V2 0.1.7",
+        "asrWordExact": true,
+        "status": "private candidate; not release-cleared"
+      }
     }
   ]
 }
