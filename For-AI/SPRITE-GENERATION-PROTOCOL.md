@@ -37,17 +37,18 @@ The Aktenkurier, Archivbotin, Formularsammler, Nummernflüsterer,
 Nachtschicht-Melderin, Pfandarchitektin, Kopiependler, and
 Warteschlangenpoetin use a second office-only lane: four registered directions
 plus work, gesture, look, and flinch poses built by
-`tools/amt-character-motion.py`. Their 8 × 8 atlases have 320 × 416 desktop
-cells and 160 × 208 mobile cells. Rows are down/right/up/left walks, work,
-gesture, look, and flinch. A route stop performs paperwork and gaze actions
+`tools/amt-character-motion.py`. Cells are 320 × 416 desktop and 160 × 208
+mobile. Aktenkurier and Archivbotin use 16 phases per direction plus eight
+frames for each work/gesture/look/flinch state: 96 cells packed in a 12 × 8
+grid, with state offsets 0/16/32/48/64/72/80/88. The other six retain eight
+phases per state in an 8 × 8 grid. A route stop performs paperwork and gaze actions
 before the next direction begins; queue calls may request a look/flinch
-sequence. Gait phase advances with traveled distance and its side stride is
-wider than the earlier office loop. The
+sequence. Gait phase advances with traveled distance. The
 source paintings touch some side-view shoes to their trousers by only one
 pixel; separating garment and legs in `painted_walk` detached a shoe. For
 these particular paintings, warp the intact silhouette with a continuous
 field and reject any frame with a second substantial alpha component. Verify
-all 64 exact encoded cells per size on light and dark backgrounds, source
+all 96 (pilot) or 64 (other cast) exact encoded cells per size on light and dark backgrounds, source
 registration, prop ownership, ground line, temporal closure, and actual
 first-person playback before accepting a regenerated atlas. Contact sheets
 and hashes in `output/amt-character-motion/` support that visual review.
@@ -61,6 +62,46 @@ when browser speech is unavailable. Build with
 sizes, including a magnified mouth crop and the full counter-distance view.
 
 For close first-person encounters, derive detail poses directly from the original source sheets, not by enlarging encoded atlas cells. Keep the shared ground pivot, figure scale, and prop ownership. `tools/amt-character-motion.py` emits four 640 × 832 action cells and four directional 4 × 2 walk sheets per moving character; `tools/build-amt-sprites.py` emits 384 × 832 waiting poses and a six-pose/eight-mouth-frame clerk sheet. The renderer requests moving detail only near the player, holds at most one close walk direction per actor, and releases detail after departure. Compact atlases remain the fallback. Inspect encoded alpha gutters, source/detail identity, frame continuity, and near/far registration in desktop and mobile gameplay before accepting a bake.
+
+The two dense walkers instead use 4 × 4 close-walk sheets: 640 × 832 desktop
+cells and 320 × 416 low-DPR mobile cells. Mobile screens at DPR≥1.5 use the
+full-detail sheet instead of enlarging the smaller one. Their largest texture is the 3840 × 3328
+compact desktop atlas; all variants remain below 4096 pixels per side. The
+simulation exposes normalized phase while retaining its existing distance
+clock and action boundaries. The renderer uses that phase at both resolutions,
+including fallback, so doubling samples does not double gait or route speed.
+This change densifies walking only. Existing close action art remains one static
+pose per state, while compact action rows have eight samples; an advancing action
+counter does not establish visible movement in that static close-up variant.
+
+This pilot also repaired inherited profile-shoe inflation/pinching by bounding
+the **whole cycle in all four directions** to strength .2.
+The resulting movement is a subtle painted shuffle, not a new articulated gait
+or a claim of measured foot planting. Original source sheets remain intact;
+the pilots consume original-size `*-source-clean.png` RGBA masters. Measured
+source-space regions clear trapped red-magenta in hair and hand/coat/key gaps,
+with narrow edge cleanup and explicit protection for books, glasses and stamp.
+Reproduce these masters with `python tools/amt-character-motion.py --prepare-sources --name <pilot>`,
+then bake with `--name <pilot>`. The recipe binds the original source hashes;
+surviving painted pixels remain identical and alpha re-import is idempotent.
+Close-image pinhole repair is restricted below 72% canvas height to avoid those
+prop gaps. Each mobile cell is filtered separately, then alpha below 8/255 is
+cleared to keep ringing out of the transparent gutter.
+
+Run `python tools/verify-amt-dense-walk.py` after baking the pilots. It checks
+distinct frames, texture bounds, gutters and visible-pixel neighbor/seam changes
+for 8 versus 16 samples of the same repaired field. It emits exact PNG cells and
+source/native/enlarged light/dark/ordered evidence under
+`output/amt-smoothing/review-final/`; it deliberately does not assign visual
+approval. Use the skill's hash-bound final-frame gate for the actual review.
+`tools/playtest-buergeramt-world.mjs` exercises all 16 indices and wraparound on
+desktop/mobile before its existing narrative/doorway/restart checks.
+
+The corresponding flat work→gesture morph was rejected: valid triangles still
+smeared face/collar pixels and ghosted the crossing arm. That candidate remains
+outside runtime assets. The reusable method selection, sequence wrapper and
+failure lessons live in the skill's `references/dense-sampling.md` and
+`references/morphing.md`.
 
 For a narrated movement, apply the skill's
 `references/narrative-action-rigging.md` beat card before commissioning keys.
