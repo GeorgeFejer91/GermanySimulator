@@ -250,8 +250,8 @@ test('phone answer/decline are one-shot and sent with the current call id',()=>{
  for(const decision of ['answer','decline']){const h=harness('phone');h.incoming();h.node('phone-'+decision).click();h.node('phone-'+decision).click();const decisions=h.links[0].sent.filter(m=>m.type===decision);assert.equal(decisions.length,1);assert.equal(decisions[0].id,'grass')}
 });
 test('the incoming caller stays unknown, with host subtitles ahead of the phone browser language',()=>{
- for(const [options,expected] of [[{phoneLanguage:'de-DE'},'UNBEKANNT'],[{phoneLanguage:'en-GB'},'UNKNOWN'],[{phoneLanguage:'de-DE',phoneCaptions:true},'UNKNOWN'],[{phoneLanguage:'fr-FR'},'UNBEKANNT']]){
-  const h=harness('phone',options);h.incoming();assert.equal(h.node('phone-caller').textContent,expected);assert.equal(h.node('phone-call').lang,expected==='UNKNOWN'?'en':'de');assert.equal(h.node('phone-call-state').textContent,expected==='UNKNOWN'?'INCOMING CALL':'EINGEHENDER ANRUF');h.node('phone-answer').click();assert.equal(h.node('phone-call-state').textContent,expected==='UNKNOWN'?'CONNECTED':'VERBUNDEN');
+ for(const [options,expected] of [[{phoneLanguage:'de-DE'},'Unbekannte Nummer'],[{phoneLanguage:'en-GB'},'Unknown number'],[{phoneLanguage:'de-DE',phoneCaptions:true},'Unknown number'],[{phoneLanguage:'fr-FR'},'Unbekannte Nummer']]){
+  const h=harness('phone',options);h.incoming();assert.equal(h.node('phone-caller').textContent,expected);assert.equal(h.node('phone-call').lang,expected==='Unknown number'?'en':'de');assert.equal(h.node('phone-call-state').textContent,expected==='Unknown number'?'INCOMING CALL':'EINGEHENDER ANRUF');h.node('phone-answer').click();assert.equal(h.node('phone-call-state').textContent,expected==='Unknown number'?'CONNECTED':'VERBUNDEN');
  }
 });
 test('Google Phone drags right to answer or left to decline, with tap fallback',()=>{
