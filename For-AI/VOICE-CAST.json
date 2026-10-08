@@ -12,6 +12,14 @@
   "totalNewProfileCount": 53,
   "distinctReferenceCount": 28,
   "distinctSourceSpeakerCount": 10,
+  "liveSecretTunnelVerification": {
+    "date": "2026-10-08",
+    "profilesChecked": 53,
+    "matchingUuidNameAndReferenceHash": 53,
+    "nativeFixedCharacterAuditions": 27,
+    "nativeLiteralAsrMatches": 24,
+    "auditionStatus": "private; three nonliteral ASR readings and all human listening review pending"
+  },
   "characters": [
     {
       "gameCharacterId": "aktenkurier",
@@ -75,13 +83,19 @@
           "locator": "buergeramt-story.js omen.line",
           "text": "Wer die Finsternis sieht, hat sie selbst gewählt!",
           "tone": "dread",
-          "sceneValence": -0.9
+          "sceneValence": -0.9,
+          "deliveryDirection": {
+            "intonation": "Low, controlled warning; lift slightly on Finsternis, then fall and stress selbst gewählt.",
+            "pauseAfter": "sieht,",
+            "pauseMilliseconds": 300,
+            "nonverbalCue": "none"
+          }
         }
       ],
       "secretTunnel": {
         "profileName": "GS Horst Stempelmann (aktenkurier)",
         "profileId": "c4c533edd860444e9e02ce0d22a78e8d",
-        "status": "profile-created; dialogue rendering and listening review pending",
+        "status": "profile-verified; private audition available; listening review pending",
         "engine": "omnivoice-rs"
       }
     },
@@ -147,7 +161,7 @@
       "secretTunnel": {
         "profileName": "GS Gisela Aktenberg (archivbotin)",
         "profileId": "d5f6a634a33947798dc4c5087d1a71b7",
-        "status": "profile-created; dialogue rendering and listening review pending",
+        "status": "profile-verified; private audition available; listening review pending",
         "engine": "omnivoice-rs"
       }
     },
@@ -203,7 +217,7 @@
       "secretTunnel": {
         "profileName": "GS Dieter Papiermann (formularsammler)",
         "profileId": "058eff2142cb457f9bd3fb7471f5accd",
-        "status": "profile-created; dialogue rendering and listening review pending",
+        "status": "profile-verified; private audition available; listening review pending",
         "engine": "omnivoice-rs"
       }
     },
@@ -269,7 +283,7 @@
       "secretTunnel": {
         "profileName": "GS Rüdiger Nummermann (nummernfluesterer)",
         "profileId": "ddf57a3f27bf402ea8c446b88ff3bf26",
-        "status": "profile-created; dialogue rendering and listening review pending",
+        "status": "profile-verified; private audition available; listening review pending",
         "engine": "omnivoice-rs"
       }
     },
@@ -325,7 +339,7 @@
       "secretTunnel": {
         "profileName": "GS Ingrid Feierabend (nachtschichtmelderin)",
         "profileId": "a8c98109d59a4548bcd13f5ee1057062",
-        "status": "profile-created; dialogue rendering and listening review pending",
+        "status": "profile-verified; private audition available; listening review pending",
         "engine": "omnivoice-rs"
       }
     },
@@ -381,7 +395,7 @@
       "secretTunnel": {
         "profileName": "GS Bärbel Pfennig (pfandarchitektin)",
         "profileId": "76bf690f3117421b9ae8223953a661d8",
-        "status": "profile-created; dialogue rendering and listening review pending",
+        "status": "profile-verified; private audition available; listening review pending",
         "engine": "omnivoice-rs"
       }
     },
@@ -447,7 +461,7 @@
       "secretTunnel": {
         "profileName": "GS Uwe Kopitz (kopiependler)",
         "profileId": "0e7b0460e547478b93d57d8d8932e3d4",
-        "status": "profile-created; dialogue rendering and listening review pending",
+        "status": "profile-verified; private audition available; listening review pending",
         "engine": "omnivoice-rs"
       }
     },
@@ -503,7 +517,7 @@
       "secretTunnel": {
         "profileName": "GS Hilde Wartenscheidt (warteschlangenpoetin)",
         "profileId": "9c69e067d71c44449dba5806b780ce98",
-        "status": "profile-created; dialogue rendering and listening review pending",
+        "status": "profile-verified; private audition available; listening review pending",
         "engine": "omnivoice-rs"
       }
     },
@@ -577,7 +591,7 @@
       "secretTunnel": {
         "profileName": "GS Klaus-Dieter Klein (HERR KLEIN)",
         "profileId": "8182da73a54c429391924d62ee339037",
-        "status": "profile-created; dialogue rendering and listening review pending",
+        "status": "profile-verified; private audition available; listening review pending",
         "engine": "omnivoice-rs"
       }
     },
@@ -646,7 +660,7 @@
       "secretTunnel": {
         "profileName": "GS Brigitte Müller (FRAU MÜLLER)",
         "profileId": "8ddc4332b0814aff81e841e116c3b765",
-        "status": "profile-created; dialogue rendering and listening review pending",
+        "status": "profile-verified; private audition available; listening review pending",
         "engine": "omnivoice-rs"
       }
     },
@@ -720,7 +734,7 @@
       "secretTunnel": {
         "profileName": "GS Wolfgang Schulz (HERR SCHULZ)",
         "profileId": "06c942339c3144298f6ce8ed7f09bf48",
-        "status": "profile-created; dialogue rendering and listening review pending",
+        "status": "profile-verified; private audition available; listening review pending",
         "engine": "omnivoice-rs"
       }
     },
@@ -773,7 +787,13 @@
         {
           "region": "germany",
           "text": "Ich möchte mich nicht beschweren, aber ich beschwere mich.",
-          "locator": "game.js npcLines[2]"
+          "locator": "game.js npcLines[2]",
+          "deliveryDirection": {
+            "intonation": "Start with a restrained disclaimer; pause at the comma, then land the complaint dryly.",
+            "pauseAfter": "beschweren,",
+            "pauseMilliseconds": 220,
+            "nonverbalCue": "sigh considered before line; no sound added until a separate cue is reviewed"
+          }
         },
         {
           "region": "germany",
@@ -794,7 +814,7 @@
       "secretTunnel": {
         "profileName": "GS Ursula Neumann (FRAU NEUMANN)",
         "profileId": "5bd2927872e147fc978f49fa8fd893d2",
-        "status": "profile-created; dialogue rendering and listening review pending",
+        "status": "profile-verified; private audition available; listening review pending",
         "engine": "omnivoice-rs"
       }
     },
@@ -868,7 +888,7 @@
       "secretTunnel": {
         "profileName": "GS Manfred DIN (HERR DIN)",
         "profileId": "ce35631d413c42fe83a7637174c3e4a1",
-        "status": "profile-created; dialogue rendering and listening review pending",
+        "status": "profile-verified; private audition available; listening review pending",
         "engine": "omnivoice-rs"
       }
     },
@@ -932,7 +952,7 @@
       "secretTunnel": {
         "profileName": "GS Irmgard Aktenstapel (FRAU AKTENSTAPEL)",
         "profileId": "c166075128d247fabf12e786bfaa60a6",
-        "status": "profile-created; dialogue rendering and listening review pending",
+        "status": "profile-verified; private audition available; listening review pending",
         "engine": "omnivoice-rs"
       }
     },
@@ -1006,7 +1026,7 @@
       "secretTunnel": {
         "profileName": "GS Günther TÜV (HERR TÜV)",
         "profileId": "e3b5de97e2e34fdcbbe48962ba16667e",
-        "status": "profile-created; dialogue rendering and listening review pending",
+        "status": "profile-verified; private audition available; listening review pending",
         "engine": "omnivoice-rs"
       }
     },
@@ -1080,7 +1100,7 @@
       "secretTunnel": {
         "profileName": "GS Hannelore Sparkasse (FRAU SPARKASSE)",
         "profileId": "112312dbaaab44bb90e639b531b69d27",
-        "status": "profile-created; dialogue rendering and listening review pending",
+        "status": "profile-verified; private audition available; listening review pending",
         "engine": "omnivoice-rs"
       }
     },
@@ -1154,7 +1174,7 @@
       "secretTunnel": {
         "profileName": "GS Karl-Heinz Post (HERR POST)",
         "profileId": "45fd0a83c5c9448e85af11b4e7407c6e",
-        "status": "profile-created; dialogue rendering and listening review pending",
+        "status": "profile-verified; private audition available; listening review pending",
         "engine": "omnivoice-rs"
       }
     },
@@ -1223,7 +1243,7 @@
       "secretTunnel": {
         "profileName": "GS Herbert Rasenaufsicht (HERR RASENAUFSICHT)",
         "profileId": "8968878634994c25a5578fd9c2244110",
-        "status": "profile-created; dialogue rendering and listening review pending",
+        "status": "profile-verified; private audition available; listening review pending",
         "engine": "omnivoice-rs"
       }
     },
@@ -1292,7 +1312,7 @@
       "secretTunnel": {
         "profileName": "GS Waltraud Ordnung (FRAU ORDNUNG)",
         "profileId": "fef10195763e41fdbdf7a82382610513",
-        "status": "profile-created; dialogue rendering and listening review pending",
+        "status": "profile-verified; private audition available; listening review pending",
         "engine": "omnivoice-rs"
       }
     },
@@ -1366,7 +1386,7 @@
       "secretTunnel": {
         "profileName": "GS Erwin Archiv (HERR ARCHIV)",
         "profileId": "dd2102af797e486fb66d67ac2cde26bc",
-        "status": "profile-created; dialogue rendering and listening review pending",
+        "status": "profile-verified; private audition available; listening review pending",
         "engine": "omnivoice-rs"
       }
     },
@@ -1440,7 +1460,7 @@
       "secretTunnel": {
         "profileName": "GS Renate Termin (FRAU TERMIN)",
         "profileId": "21f2fc63a2f34d3b81462ca72933e51e",
-        "status": "profile-created; dialogue rendering and listening review pending",
+        "status": "profile-verified; private audition available; listening review pending",
         "engine": "omnivoice-rs"
       }
     },
@@ -1514,7 +1534,7 @@
       "secretTunnel": {
         "profileName": "GS Heinz Mietnachweis (HERR MIETNACHWEIS)",
         "profileId": "bd866bed39104f52a7c3c03c566c241d",
-        "status": "profile-created; dialogue rendering and listening review pending",
+        "status": "profile-verified; private audition available; listening review pending",
         "engine": "omnivoice-rs"
       }
     },
@@ -1588,7 +1608,7 @@
       "secretTunnel": {
         "profileName": "GS Monika Zebra (FRAU ZEBRA)",
         "profileId": "3cb9ea9f6c3e40428ce73acfe639a1ee",
-        "status": "profile-created; dialogue rendering and listening review pending",
+        "status": "profile-verified; private audition available; listening review pending",
         "engine": "omnivoice-rs"
       }
     },
@@ -1657,7 +1677,7 @@
       "secretTunnel": {
         "profileName": "GS Joachim Fundsache (HERR FUNDSACHE)",
         "profileId": "d87b222e98574a8d8ec180f029e8a414",
-        "status": "profile-created; dialogue rendering and listening review pending",
+        "status": "profile-verified; private audition available; listening review pending",
         "engine": "omnivoice-rs"
       }
     },
@@ -1731,7 +1751,7 @@
       "secretTunnel": {
         "profileName": "GS Ute Ruhe (FRAU RUHE)",
         "profileId": "cfdd8b4cda6646daa197e0291e146988",
-        "status": "profile-created; dialogue rendering and listening review pending",
+        "status": "profile-verified; private audition available; listening review pending",
         "engine": "omnivoice-rs"
       }
     },
@@ -1795,7 +1815,7 @@
       "secretTunnel": {
         "profileName": "GS Norbert Faxrolle (HERR FAXROLLE)",
         "profileId": "c00d72eba1514bcfa27d2b420db2d960",
-        "status": "profile-created; dialogue rendering and listening review pending",
+        "status": "profile-verified; private audition available; listening review pending",
         "engine": "omnivoice-rs"
       }
     },
@@ -1869,7 +1889,7 @@
       "secretTunnel": {
         "profileName": "GS Edeltraud Trennung (FRAU TRENNUNG)",
         "profileId": "5590c81828c04845822da28d02d84689",
-        "status": "profile-created; dialogue rendering and listening review pending",
+        "status": "profile-verified; private audition available; listening review pending",
         "engine": "omnivoice-rs"
       }
     }
@@ -1918,7 +1938,7 @@
         "referenceTranscript": "Der Lappen liegt auf dem Eisschrank. Das will sie am Mittwoch abgeben. Heute abend könnte ich es ihm sagen. Das schwarze Stück Papier befindet sich da oben neben dem Holzstück.",
         "referenceDurationSeconds": 8.594
       },
-      "status": "profile-created; dialogue rendering and listening review pending",
+      "status": "profile-verified; private audition available; listening review pending",
       "dialogueSources": [
         "buergeramt-story.js clerk lines and choices",
         "buergeramt.js clerk phone interruption and status lines"
@@ -1967,7 +1987,7 @@
         "referenceTranscript": "Das schwarze Stück Papier befindet sich da oben neben dem Holzstück. Die wird auf dem Platz sein, wo wir sie immer hinlegen. Der Lappen liegt auf dem Eisschrank. Sie haben es gerade hochgetragen und jetzt gehen sie wieder runter.",
         "referenceDurationSeconds": 9.857
       },
-      "status": "profile-created; dialogue rendering and listening review pending",
+      "status": "profile-verified; private audition available; listening review pending",
       "dialogueSources": [
         "game.js npcLines / npcDenglisch by region",
         "game.js pedestrianBarks[region] by surface",
@@ -2020,7 +2040,7 @@
         "referenceTranscript": "Das will sie am Mittwoch abgeben. Heute abend könnte ich es ihm sagen. An den Wochenenden bin ich jetzt immer nach Hause gefahren und habe Agnes besucht. Das schwarze Stück Papier befindet sich da oben neben dem Holzstück.",
         "referenceDurationSeconds": 10.333
       },
-      "status": "profile-created; dialogue rendering and listening review pending",
+      "status": "profile-verified; private audition available; listening review pending",
       "dialogueSources": [
         "game.js npcLines / npcDenglisch by region",
         "game.js pedestrianBarks[region] by surface",
@@ -2068,7 +2088,7 @@
         "referenceTranscript": "Das schwarze Stück Papier befindet sich da oben neben dem Holzstück. An den Wochenenden bin ich jetzt immer nach Hause gefahren und habe Agnes besucht. Ich will das eben wegbringen und dann mit Karl was trinken gehen.",
         "referenceDurationSeconds": 10.074
       },
-      "status": "profile-created; dialogue rendering and listening review pending",
+      "status": "profile-verified; private audition available; listening review pending",
       "dialogueSources": [
         "game.js npcLines / npcDenglisch by region",
         "game.js pedestrianBarks[region] by surface",
@@ -2121,7 +2141,7 @@
         "referenceTranscript": "An den Wochenenden bin ich jetzt immer nach Hause gefahren und habe Agnes besucht. Heute abend könnte ich es ihm sagen. Der Lappen liegt auf dem Eisschrank. In sieben Stunden wird es soweit sein.",
         "referenceDurationSeconds": 9.504
       },
-      "status": "profile-created; dialogue rendering and listening review pending",
+      "status": "profile-verified; private audition available; listening review pending",
       "dialogueSources": [
         "game.js npcLines / npcDenglisch by region",
         "game.js pedestrianBarks[region] by surface",
@@ -2169,7 +2189,7 @@
         "referenceTranscript": "Das will sie am Mittwoch abgeben. Heute abend könnte ich es ihm sagen. Das schwarze Stück Papier befindet sich da oben neben dem Holzstück.",
         "referenceDurationSeconds": 8.708
       },
-      "status": "profile-created; dialogue rendering and listening review pending",
+      "status": "profile-verified; private audition available; listening review pending",
       "dialogueSources": [
         "game.js npcLines / npcDenglisch by region",
         "game.js pedestrianBarks[region] by surface",
@@ -2222,7 +2242,7 @@
         "referenceTranscript": "Das will sie am Mittwoch abgeben. Sie haben es gerade hochgetragen und jetzt gehen sie wieder runter. Der Lappen liegt auf dem Eisschrank. Das schwarze Stück Papier befindet sich da oben neben dem Holzstück.",
         "referenceDurationSeconds": 9.009
       },
-      "status": "profile-created; dialogue rendering and listening review pending",
+      "status": "profile-verified; private audition available; listening review pending",
       "dialogueSources": [
         "game.js npcLines / npcDenglisch by region",
         "game.js pedestrianBarks[region] by surface",
@@ -2275,7 +2295,7 @@
         "referenceTranscript": "Das will sie am Mittwoch abgeben. Heute abend könnte ich es ihm sagen. Das schwarze Stück Papier befindet sich da oben neben dem Holzstück. Was sind denn das für Tüten, die da unter dem Tisch stehen.",
         "referenceDurationSeconds": 9.482
       },
-      "status": "profile-created; dialogue rendering and listening review pending",
+      "status": "profile-verified; private audition available; listening review pending",
       "dialogueSources": [
         "game.js npcLines / npcDenglisch by region",
         "game.js pedestrianBarks[region] by surface",
@@ -2328,7 +2348,7 @@
         "referenceTranscript": "Das will sie am Mittwoch abgeben. Heute abend könnte ich es ihm sagen. Das schwarze Stück Papier befindet sich da oben neben dem Holzstück. In sieben Stunden wird es soweit sein.",
         "referenceDurationSeconds": 9.161
       },
-      "status": "profile-created; dialogue rendering and listening review pending",
+      "status": "profile-verified; private audition available; listening review pending",
       "dialogueSources": [
         "game.js npcLines / npcDenglisch by region",
         "game.js pedestrianBarks[region] by surface",
@@ -2381,7 +2401,7 @@
         "referenceTranscript": "Das will sie am Mittwoch abgeben. Heute abend könnte ich es ihm sagen. Das schwarze Stück Papier befindet sich da oben neben dem Holzstück. Was sind denn das für Tüten, die da unter dem Tisch stehen.",
         "referenceDurationSeconds": 9.788
       },
-      "status": "profile-created; dialogue rendering and listening review pending",
+      "status": "profile-verified; private audition available; listening review pending",
       "dialogueSources": [
         "game.js npcLines / npcDenglisch by region",
         "game.js pedestrianBarks[region] by surface",
@@ -2434,7 +2454,7 @@
         "referenceTranscript": "Ich will das eben wegbringen und dann mit Karl was trinken gehen. Der Lappen liegt auf dem Eisschrank. In sieben Stunden wird es soweit sein. An den Wochenenden bin ich jetzt immer nach Hause gefahren und habe Agnes besucht.",
         "referenceDurationSeconds": 11.708
       },
-      "status": "profile-created; dialogue rendering and listening review pending",
+      "status": "profile-verified; private audition available; listening review pending",
       "dialogueSources": [
         "game.js npcLines / npcDenglisch by region",
         "game.js pedestrianBarks[region] by surface",
@@ -2487,7 +2507,7 @@
         "referenceTranscript": "Sie haben es gerade hochgetragen und jetzt gehen sie wieder runter. Die wird auf dem Platz sein, wo wir sie immer hinlegen. Der Lappen liegt auf dem Eisschrank. Das will sie am Mittwoch abgeben.",
         "referenceDurationSeconds": 9.158
       },
-      "status": "profile-created; dialogue rendering and listening review pending",
+      "status": "profile-verified; private audition available; listening review pending",
       "dialogueSources": [
         "game.js npcLines / npcDenglisch by region",
         "game.js pedestrianBarks[region] by surface",
@@ -2540,7 +2560,7 @@
         "referenceTranscript": "Der Lappen liegt auf dem Eisschrank. Heute abend könnte ich es ihm sagen. In sieben Stunden wird es soweit sein. Was sind denn das für Tüten, die da unter dem Tisch stehen.",
         "referenceDurationSeconds": 8.867
       },
-      "status": "profile-created; dialogue rendering and listening review pending",
+      "status": "profile-verified; private audition available; listening review pending",
       "dialogueSources": [
         "game.js npcLines / npcDenglisch by region",
         "game.js pedestrianBarks[region] by surface",
@@ -2583,7 +2603,7 @@
         "referenceTranscript": "Die wird auf dem Platz sein, wo wir sie immer hinlegen. An den Wochenenden bin ich jetzt immer nach Hause gefahren und habe Agnes besucht.",
         "referenceDurationSeconds": 9.795
       },
-      "status": "profile-created; dialogue rendering and listening review pending",
+      "status": "profile-verified; private audition available; listening review pending",
       "dialogueSources": [
         "game.js innerMonologues[region]",
         "For-AI/AUDIO-TEXT-LIBRARY.js recordings: existing player Thorsten clips, lawPowerLines"
@@ -2632,7 +2652,7 @@
         "referenceTranscript": "Das will sie am Mittwoch abgeben. Heute abend könnte ich es ihm sagen. Das schwarze Stück Papier befindet sich da oben neben dem Holzstück. Was sind denn das für Tüten, die da unter dem Tisch stehen.",
         "referenceDurationSeconds": 9.788
       },
-      "status": "profile-created; dialogue rendering and listening review pending",
+      "status": "profile-verified; private audition available; listening review pending",
       "dialogueSources": [
         "game.js policeBarks[region]",
         "buergeramt-story.js police and call for phone role"
@@ -2676,7 +2696,7 @@
         "referenceTranscript": "Das schwarze Stück Papier befindet sich da oben neben dem Holzstück. Sie haben es gerade hochgetragen und jetzt gehen sie wieder runter. An den Wochenenden bin ich jetzt immer nach Hause gefahren und habe Agnes besucht.",
         "referenceDurationSeconds": 9.597
       },
-      "status": "profile-created; dialogue rendering and listening review pending",
+      "status": "profile-verified; private audition available; listening review pending",
       "dialogueSources": [
         "game.js quizApproaches[region]",
         "game.js quizContexts[category][region]",
@@ -2727,7 +2747,7 @@
         "referenceTranscript": "Der Lappen liegt auf dem Eisschrank. Das will sie am Mittwoch abgeben. An den Wochenenden bin ich jetzt immer nach Hause gefahren und habe Agnes besucht. Was sind denn das für Tüten, die da unter dem Tisch stehen.",
         "referenceDurationSeconds": 9.012
       },
-      "status": "profile-created; dialogue rendering and listening review pending",
+      "status": "profile-verified; private audition available; listening review pending",
       "dialogueSources": [
         "game.js quizApproaches[region]",
         "game.js quizContexts[category][region]",
@@ -2778,7 +2798,7 @@
         "referenceTranscript": "Das schwarze Stück Papier befindet sich da oben neben dem Holzstück. Was sind denn das für Tüten, die da unter dem Tisch stehen. Ich will das eben wegbringen und dann mit Karl was trinken gehen. An den Wochenenden bin ich jetzt immer nach Hause gefahren und habe Agnes besucht.",
         "referenceDurationSeconds": 11.035
       },
-      "status": "profile-created; dialogue rendering and listening review pending",
+      "status": "profile-verified; private audition available; listening review pending",
       "dialogueSources": [
         "game.js quizApproaches[region]",
         "game.js quizContexts[category][region]",
@@ -2829,7 +2849,7 @@
         "referenceTranscript": "In sieben Stunden wird es soweit sein. Das schwarze Stück Papier befindet sich da oben neben dem Holzstück. Sie haben es gerade hochgetragen und jetzt gehen sie wieder runter. Das will sie am Mittwoch abgeben.",
         "referenceDurationSeconds": 8.171
       },
-      "status": "profile-created; dialogue rendering and listening review pending",
+      "status": "profile-verified; private audition available; listening review pending",
       "dialogueSources": [
         "game.js quizApproaches[region]",
         "game.js quizContexts[category][region]",
@@ -2875,7 +2895,7 @@
         "referenceTranscript": "Was sind denn das für Tüten, die da unter dem Tisch stehen. Ich will das eben wegbringen und dann mit Karl was trinken gehen. Die wird auf dem Platz sein, wo wir sie immer hinlegen.",
         "referenceDurationSeconds": 8.513
       },
-      "status": "profile-created; dialogue rendering and listening review pending",
+      "status": "profile-verified; private audition available; listening review pending",
       "dialogueSources": [
         "game.js quizApproaches[region]",
         "game.js quizContexts[category][region]",
@@ -2921,7 +2941,7 @@
         "referenceTranscript": "Das will sie am Mittwoch abgeben. Heute abend könnte ich es ihm sagen. Das schwarze Stück Papier befindet sich da oben neben dem Holzstück.",
         "referenceDurationSeconds": 8.708
       },
-      "status": "profile-created; dialogue rendering and listening review pending",
+      "status": "profile-verified; private audition available; listening review pending",
       "dialogueSources": [
         "game.js quizApproaches[region]",
         "game.js quizContexts[category][region]",
@@ -2972,7 +2992,7 @@
         "referenceTranscript": "Das will sie am Mittwoch abgeben. Heute abend könnte ich es ihm sagen. Das schwarze Stück Papier befindet sich da oben neben dem Holzstück. Was sind denn das für Tüten, die da unter dem Tisch stehen.",
         "referenceDurationSeconds": 9.788
       },
-      "status": "profile-created; dialogue rendering and listening review pending",
+      "status": "profile-verified; private audition available; listening review pending",
       "dialogueSources": [
         "game.js quizApproaches[region]",
         "game.js quizContexts[category][region]",
@@ -3018,7 +3038,7 @@
         "referenceTranscript": "Heute abend könnte ich es ihm sagen. Das schwarze Stück Papier befindet sich da oben neben dem Holzstück. Sie haben es gerade hochgetragen und jetzt gehen sie wieder runter.",
         "referenceDurationSeconds": 8.036
       },
-      "status": "profile-created; dialogue rendering and listening review pending",
+      "status": "profile-verified; private audition available; listening review pending",
       "dialogueSources": [
         "game.js quizApproaches[region]",
         "game.js quizContexts[category][region]",
@@ -3069,7 +3089,7 @@
         "referenceTranscript": "Das will sie am Mittwoch abgeben. Heute abend könnte ich es ihm sagen. Das schwarze Stück Papier befindet sich da oben neben dem Holzstück. Was sind denn das für Tüten, die da unter dem Tisch stehen.",
         "referenceDurationSeconds": 9.482
       },
-      "status": "profile-created; dialogue rendering and listening review pending",
+      "status": "profile-verified; private audition available; listening review pending",
       "dialogueSources": [
         "game.js quizApproaches[region]",
         "game.js quizContexts[category][region]",
@@ -3120,7 +3140,7 @@
         "referenceTranscript": "Das will sie am Mittwoch abgeben. Heute abend könnte ich es ihm sagen. Das schwarze Stück Papier befindet sich da oben neben dem Holzstück. Was sind denn das für Tüten, die da unter dem Tisch stehen.",
         "referenceDurationSeconds": 9.482
       },
-      "status": "profile-created; dialogue rendering and listening review pending",
+      "status": "profile-verified; private audition available; listening review pending",
       "dialogueSources": [
         "character-review.js herr-sandale preview",
         "game.js crowdArchetypes[towel-man].barks[region] as archetype audition text; not the runtime crowd actor identity"
@@ -3170,7 +3190,7 @@
         "referenceTranscript": "Der Lappen liegt auf dem Eisschrank. Heute abend könnte ich es ihm sagen. In sieben Stunden wird es soweit sein. Was sind denn das für Tüten, die da unter dem Tisch stehen.",
         "referenceDurationSeconds": 8.867
       },
-      "status": "profile-created; dialogue rendering and listening review pending",
+      "status": "profile-verified; private audition available; listening review pending",
       "dialogueSources": [
         "character-review.js frau-sandale preview",
         "game.js crowdArchetypes[towel-woman].barks[region] as archetype audition text; not the runtime crowd actor identity"
