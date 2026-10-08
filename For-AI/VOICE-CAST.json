@@ -1973,7 +1973,9 @@
         "game.js pedestrianBarks[region] by surface",
         "game.js crowdArchetypes[archetype].barks[region]",
         "game.js quizApproaches when this instance is selected as a quizzer"
-      ]
+      ],
+      "runtimeArchetype": "towel-woman",
+      "runtimeBinding": "game.js addCrowdPedestrian assigns this voiceId to the named NPC; all speech must use this identity rather than the shared sprite archetype."
     },
     {
       "gameRole": "crowd-brigitte-bueroklammer",
@@ -2024,7 +2026,9 @@
         "game.js pedestrianBarks[region] by surface",
         "game.js crowdArchetypes[archetype].barks[region]",
         "game.js quizApproaches when this instance is selected as a quizzer"
-      ]
+      ],
+      "runtimeArchetype": "towel-woman",
+      "runtimeBinding": "game.js addCrowdPedestrian assigns this voiceId to the named NPC; all speech must use this identity rather than the shared sprite archetype."
     },
     {
       "gameRole": "crowd-dietmar-din-norm",
@@ -2070,7 +2074,9 @@
         "game.js pedestrianBarks[region] by surface",
         "game.js crowdArchetypes[archetype].barks[region]",
         "game.js quizApproaches when this instance is selected as a quizzer"
-      ]
+      ],
+      "runtimeArchetype": "towel-man",
+      "runtimeBinding": "game.js addCrowdPedestrian assigns this voiceId to the named NPC; all speech must use this identity rather than the shared sprite archetype."
     },
     {
       "gameRole": "crowd-elfriede-eingabe",
@@ -2121,7 +2127,9 @@
         "game.js pedestrianBarks[region] by surface",
         "game.js crowdArchetypes[archetype].barks[region]",
         "game.js quizApproaches when this instance is selected as a quizzer"
-      ]
+      ],
+      "runtimeArchetype": "towel-woman",
+      "runtimeBinding": "game.js addCrowdPedestrian assigns this voiceId to the named NPC; all speech must use this identity rather than the shared sprite archetype."
     },
     {
       "gameRole": "crowd-guenther-gartenzaun",
@@ -2167,7 +2175,9 @@
         "game.js pedestrianBarks[region] by surface",
         "game.js crowdArchetypes[archetype].barks[region]",
         "game.js quizApproaches when this instance is selected as a quizzer"
-      ]
+      ],
+      "runtimeArchetype": "towel-man",
+      "runtimeBinding": "game.js addCrowdPedestrian assigns this voiceId to the named NPC; all speech must use this identity rather than the shared sprite archetype."
     },
     {
       "gameRole": "crowd-hildegard-brotzeit",
@@ -2218,7 +2228,9 @@
         "game.js pedestrianBarks[region] by surface",
         "game.js crowdArchetypes[archetype].barks[region]",
         "game.js quizApproaches when this instance is selected as a quizzer"
-      ]
+      ],
+      "runtimeArchetype": "towel-woman",
+      "runtimeBinding": "game.js addCrowdPedestrian assigns this voiceId to the named NPC; all speech must use this identity rather than the shared sprite archetype."
     },
     {
       "gameRole": "crowd-horst-hausordnung",
@@ -2269,7 +2281,9 @@
         "game.js pedestrianBarks[region] by surface",
         "game.js crowdArchetypes[archetype].barks[region]",
         "game.js quizApproaches when this instance is selected as a quizzer"
-      ]
+      ],
+      "runtimeArchetype": "towel-man",
+      "runtimeBinding": "game.js addCrowdPedestrian assigns this voiceId to the named NPC; all speech must use this identity rather than the shared sprite archetype."
     },
     {
       "gameRole": "crowd-irmgard-aktenordner",
@@ -2320,7 +2334,9 @@
         "game.js pedestrianBarks[region] by surface",
         "game.js crowdArchetypes[archetype].barks[region]",
         "game.js quizApproaches when this instance is selected as a quizzer"
-      ]
+      ],
+      "runtimeArchetype": "towel-woman",
+      "runtimeBinding": "game.js addCrowdPedestrian assigns this voiceId to the named NPC; all speech must use this identity rather than the shared sprite archetype."
     },
     {
       "gameRole": "crowd-klaus-dieter-knoedel",
@@ -2371,7 +2387,9 @@
         "game.js pedestrianBarks[region] by surface",
         "game.js crowdArchetypes[archetype].barks[region]",
         "game.js quizApproaches when this instance is selected as a quizzer"
-      ]
+      ],
+      "runtimeArchetype": "towel-man",
+      "runtimeBinding": "game.js addCrowdPedestrian assigns this voiceId to the named NPC; all speech must use this identity rather than the shared sprite archetype."
     },
     {
       "gameRole": "crowd-manfred-mittagsruhe",
@@ -2422,7 +2440,9 @@
         "game.js pedestrianBarks[region] by surface",
         "game.js crowdArchetypes[archetype].barks[region]",
         "game.js quizApproaches when this instance is selected as a quizzer"
-      ]
+      ],
+      "runtimeArchetype": "towel-man",
+      "runtimeBinding": "game.js addCrowdPedestrian assigns this voiceId to the named NPC; all speech must use this identity rather than the shared sprite archetype."
     },
     {
       "gameRole": "crowd-ruediger-rasenkante",
@@ -2473,7 +2493,9 @@
         "game.js pedestrianBarks[region] by surface",
         "game.js crowdArchetypes[archetype].barks[region]",
         "game.js quizApproaches when this instance is selected as a quizzer"
-      ]
+      ],
+      "runtimeArchetype": "towel-man",
+      "runtimeBinding": "game.js addCrowdPedestrian assigns this voiceId to the named NPC; all speech must use this identity rather than the shared sprite archetype."
     },
     {
       "gameRole": "crowd-waltraud-wartemarke",
@@ -2524,7 +2546,9 @@
         "game.js pedestrianBarks[region] by surface",
         "game.js crowdArchetypes[archetype].barks[region]",
         "game.js quizApproaches when this instance is selected as a quizzer"
-      ]
+      ],
+      "runtimeArchetype": "towel-woman",
+      "runtimeBinding": "game.js addCrowdPedestrian assigns this voiceId to the named NPC; all speech must use this identity rather than the shared sprite archetype."
     },
     {
       "gameRole": "player",
@@ -3098,10 +3122,10 @@
       },
       "status": "profile-created; dialogue rendering and listening review pending",
       "dialogueSources": [
-        "game.js npcLines / npcDenglisch by region",
-        "game.js pedestrianBarks[region]",
-        "game.js crowdArchetypes[herr-sandale].barks[region]"
-      ]
+        "character-review.js herr-sandale preview",
+        "game.js crowdArchetypes[towel-man].barks[region] as archetype audition text; not the runtime crowd actor identity"
+      ],
+      "runtimeBinding": "character-review.js archetype profile; moving game crowd instances use their own named crowd voiceIds."
     },
     {
       "gameRole": "frau-sandale",
@@ -3148,10 +3172,10 @@
       },
       "status": "profile-created; dialogue rendering and listening review pending",
       "dialogueSources": [
-        "game.js npcLines / npcDenglisch by region",
-        "game.js pedestrianBarks[region]",
-        "game.js crowdArchetypes[frau-sandale].barks[region]"
-      ]
+        "character-review.js frau-sandale preview",
+        "game.js crowdArchetypes[towel-woman].barks[region] as archetype audition text; not the runtime crowd actor identity"
+      ],
+      "runtimeBinding": "character-review.js archetype profile; moving game crowd instances use their own named crowd voiceIds."
     }
   ],
   "existingAssetProfiles": [

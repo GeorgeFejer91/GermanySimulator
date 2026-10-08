@@ -61,6 +61,7 @@ for(const role of cast.roleProfiles){
   assert.ok(index>=0,`crowd identity ${role.voiceId}`);
   assert.equal(crowdVoiceIds[index],role.voiceId);
   assert.equal(role.gender,index%2?"male":"female",`crowd name and visible archetype gender for ${role.voiceId}`);
+  assert.equal(role.runtimeArchetype,index%2?"towel-man":"towel-woman",`runtime archetype for ${role.voiceId}`);
  }else if(role.voiceId==="amt-brunhilde-knick"){
   assert.ok(story.includes(`clerkIdentity:{speaker:"SACHBEARBEITERIN FRAU KNICK",fullName:"${role.fullName}",voiceId:"${role.voiceId}"}`),"modeled Bürgeramt clerk identity");
  }else{

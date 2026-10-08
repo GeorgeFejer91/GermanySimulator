@@ -27,7 +27,7 @@ assert.match(game,/if\(hasStimulusFamily\(family\)\|\|now<\(n\.barkAt\|\|0\)\|\|
 assert.doesNotMatch(game,/featuredAudioActive/,"discarded or expired requests must not leave an NPC line lock behind");
 assert.doesNotMatch(game,/allowFollowUp&&Math\.random\(\)<\.42/,"featured proximity dialogue must not stop at a random two-line burst");
 assert.match(game,/function featuredSpriteEligible\(n\)[\s\S]*audioRadius\|\|SPRITE_AUDIO_RADIUS/,"the continuous loop must stop at the small audible radius, not the release hysteresis ring");
-assert.match(game,/function innerMonologue\(context,chance=1\)[\s\S]*family:"inner-monologue",priority:STIMULUS_PRIORITY\.REACTIVE/,"contextual self-talk must stay below featured sprite dialogue");
+assert.match(game,/function innerMonologue\(context,chance=1\)[\s\S]*family:"inner-monologue",candidateVoiceId:player\.voiceId,priority:STIMULUS_PRIORITY\.REACTIVE/,"contextual self-talk must stay below featured sprite dialogue and retain the player's voice identity");
 assert.match(game,/innerMonologue\("train"\)/,"the delayed-train interaction must trigger contextual self-talk");
 assert.match(game,/function openHumorWelcome\(\)[\s\S]*Your mission ist simple:[\s\S]*openDialogue\(/,"the opening mission briefing must remain an audible dialogue sequence");
 assert.match(game,/function finishHumorCertification\(openWelcome=true\)[\s\S]*if\(openWelcome\)openHumorWelcome\(\)/,"finishing the opening form must still trigger the mission briefing");

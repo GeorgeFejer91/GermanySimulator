@@ -220,17 +220,15 @@
     {
       "voiceId": "tourist-guenther-liegestuhl",
       "sourcePools": [
-        "game.js npcLines / npcDenglisch by region",
-        "game.js pedestrianBarks[region]",
-        "game.js crowdArchetypes[herr-sandale].barks[region]"
+        "character-review.js herr-sandale preview",
+        "game.js crowdArchetypes[towel-man].barks[region] as archetype audition text; not the runtime crowd actor identity"
       ]
     },
     {
       "voiceId": "touristin-walburga-handtuch",
       "sourcePools": [
-        "game.js npcLines / npcDenglisch by region",
-        "game.js pedestrianBarks[region]",
-        "game.js crowdArchetypes[frau-sandale].barks[region]"
+        "character-review.js frau-sandale preview",
+        "game.js crowdArchetypes[towel-woman].barks[region] as archetype audition text; not the runtime crowd actor identity"
       ]
     }
   ],
