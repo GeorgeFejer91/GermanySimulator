@@ -8,11 +8,11 @@ const objective=document.getElementById("amt-objective"),nearby=document.getElem
 const door={x:0,z:5.55},sign={x:0,z:-2.6},counter={x:4,z:-8.15},view={x:0,z:8,yaw:0};
 const held=new Set(),pendingTimers=new Set();
 // Every callback belongs to one attempt and one visible speech/action cue.
-let attempt=0,cue=0,callOutcome="",speechGateTimer=null;
+let attempt=0,cue=0,callOutcome="",speechGateTimer=null,recordedSpeech=null;
 let clerkClock=0,clerkSpeaking=false,clerkAccent=0,clerkBeat="idle",clerkPulse=0;
 function defer(callback,delay){const owner=attempt;const id=setTimeout(()=>{pendingTimers.delete(id);if(active&&owner===attempt)callback()},delay);pendingTimers.add(id);return id}
 function clearTimer(id){clearTimeout(id);pendingTimers.delete(id)}
-function cancelSpeech(){cue++;clerkSpeaking=false;if(speechGateTimer!==null)clearTimer(speechGateTimer);speechGateTimer=null;try{const engine=window.speechSynthesis;if(engine?.speaking||engine?.pending)engine.cancel()}catch{}}
+function cancelSpeech(){cue++;clerkSpeaking=false;if(speechGateTimer!==null)clearTimer(speechGateTimer);speechGateTimer=null;if(recordedSpeech){recordedSpeech.pause();recordedSpeech.removeAttribute("src");recordedSpeech.load();recordedSpeech=null}try{const engine=window.speechSynthesis;if(engine?.speaking||engine?.pending)engine.cancel()}catch{}}
 let active=false,stage="closed",link=null,number="",registeredName="",activated=false,qrSvg="",queueDisplay="—",queueIndex=0,queueClock=0,ticketWaitCalls=0,ticketSerial=100,lastScanId="",deadline=0,clerkIndex=0,callPending=false,callTriggered=false,callCommitted=false,callArmTimer=null,clockAnchor=null,policeDoneHandler=null,policeStartHandler=null,policeDisconnectHandler=null,options=null,ambientClock=0,ambientIndex=0,officeAudio=null;
 let timing={rttMs:null,oneWayMs:0,jitterMs:0,lastPongAt:null,clockOffsetMs:null,clockUncertaintyMs:null,startLagMs:null,phoneReadyMs:null,phoneFastReadyMs:null,deskStartLagMs:0,deskMsPerChar:55,call:null,cues:{},desk:{}};
 let pingSerial=0,pingTimer=null,hostVoiceStartupMs=null,hostVoiceAttempts=0;const outstandingPings=new Map(),rttSamples=[];
@@ -210,11 +210,23 @@ function walking(){return ["outside","walk-sign","waiting","walk-counter"].inclu
 function setStage(next,preserveMovement=false){if(next!==stage&&!preserveMovement)held.clear();stage=next;document.body.classList.toggle("amt-omen",next==="omen");const moving=walking();if(moving){cancelSpeech();ambient.textContent="";characterMood=null;}root.classList.toggle("walking",moving);walkHud.hidden=!moving;root.classList.toggle("first-person",!!window.Germany3D?.ready);if(moving){objective.textContent=next==="outside"?"BÜRGERAMT · EINGANG":next==="walk-sign"?"QR-SCHILD SCANNEN":next==="waiting"?"AUFRUF ABWARTEN · SCHALTER 3":"IHRE NUMMER · SCHALTER 3 · BEEILEN!";update(0)}}
 function displayNumber(value){queueDisplay=value;board.textContent=value}
 function speechReadableMs(text,delivery){return Math.max(3500,Math.min(14000,text.length*55*.96/(delivery?.rate??.96)))}
-function say(text,onComplete,onStart,onBoundary,delivery=null){
+function say(text,onComplete,onStart,onBoundary,delivery=null,voiceId="",allowPreview=true){
  const owner=attempt,visibleCue=cue,readableMs=speechReadableMs(text,delivery);
  const current=()=>active&&owner===attempt&&visibleCue===cue&&line.textContent===text;
  const begin=()=>{
   if(!current())return;
+  const candidate=allowPreview&&options?.voiceOn?.()&&window.GermanySimulatorAudioText?.candidateClip?.(voiceId,text);
+  if(candidate){
+   try{
+    const player=new Audio(candidate);recordedSpeech=player;player.volume=mix.voice;
+    let started=false,settled=false;
+    const start=()=>{if(!started&&current()){started=true;onStart?.("voice")}};
+    const finish=()=>{if(settled||!current())return;settled=true;start();recordedSpeech=null;onComplete?.("voice")};
+    const fallback=()=>{if(settled||!current())return;settled=true;recordedSpeech=null;say(text,onComplete,onStart,onBoundary,delivery,voiceId,false)};
+    player.onplaying=start;player.onended=finish;player.onerror=fallback;
+    player.play().catch(fallback);return;
+   }catch{recordedSpeech=null}
+  }
   const requestedAt=performance.now();let settled=false,fallback=null,started=false,failed=false,paused=false,completionDue=0,completionRemaining=0,mode="fallback";
  const start=kind=>{if(!started&&current()){started=true;mode=kind;onStart?.(kind)}};
  const complete=()=>{if(settled||!current())return;start("fallback");settled=true;if(fallback!==null)clearTimer(fallback);onComplete?.(mode)};
@@ -242,7 +254,8 @@ function content(who,text,buttons=[],onComplete,onStart,onBoundary,mood=null,del
  const owner=attempt,visibleCue=cue;
  for(const item of buttons){const button=document.createElement("button");button.type="button";button.textContent=item.label;
   button.addEventListener("click",()=>{if(!active||owner!==attempt||visibleCue!==cue||button.disabled)return;button.disabled=true;item.run()});actions.append(button)}
- say(text,onComplete?mode=>{if(isClerk){clerkSpeaking=false;clerkBeat=stage==="reply"?"stamp":stage==="cancelled"?"deny":"review";clerkAccent=.65}onComplete(mode)}:null,mode=>{if(isClerk){clerkSpeaking=true;clerkPulse=0;if(!onComplete){const speakingCue=cue;defer(()=>{if(cue===speakingCue){clerkSpeaking=false;clerkBeat="review";clerkAccent=.65}},Math.max(1800,Math.min(10000,text.length*55)))}}onStart?.(mode)},(charIndex,event)=>{if(isClerk)clerkPulse++;onBoundary?.(charIndex,event)},delivery);
+ const voiceId=isClerk?story.clerkIdentity.voiceId:story.characters[mood?.id]?.voiceId||"";
+ say(text,onComplete?mode=>{if(isClerk){clerkSpeaking=false;clerkBeat=stage==="reply"?"stamp":stage==="cancelled"?"deny":"review";clerkAccent=.65}onComplete(mode)}:null,mode=>{if(isClerk){clerkSpeaking=true;clerkPulse=0;if(!onComplete){const speakingCue=cue;defer(()=>{if(cue===speakingCue){clerkSpeaking=false;clerkBeat="review";clerkAccent=.65}},Math.max(1800,Math.min(10000,text.length*55)))}}onStart?.(mode)},(charIndex,event)=>{if(isClerk)clerkPulse++;onBoundary?.(charIndex,event)},delivery,voiceId);
 }
 function setStatus(text){status.textContent=text}
 function distanceTo(target){return Math.hypot(view.x-target.x,view.z-target.z)}

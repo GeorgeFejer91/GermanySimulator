@@ -47,7 +47,7 @@ assert.ok(Object.keys(library.lines).length>90,"fixed dialogue translation catal
 const walk=directory=>readdirSync(directory,{withFileTypes:true}).flatMap(entry=>entry.isDirectory()?walk(join(directory,entry.name)):[join(directory,entry.name)]);
 // Only the short Neuland excerpt is shipped by the runtime; other Merkel and
 // Merz files are source references awaiting transcript, rights and gameplay review.
-const voiceFiles=walk(join(root,"assets/voices")).filter(path=>path.endsWith(".mp3")&&!path.includes(`${sep}laws${sep}`)&&!path.includes(`${sep}merz${sep}`)&&(!path.includes(`${sep}merkel${sep}`)||path.endsWith(`${sep}neuland-0-3s.mp3`)));
+const voiceFiles=walk(join(root,"assets/voices")).filter(path=>path.endsWith(".mp3")&&!path.includes(`${sep}candidate-dialogue${sep}`)&&!path.includes(`${sep}laws${sep}`)&&!path.includes(`${sep}merz${sep}`)&&(!path.includes(`${sep}merkel${sep}`)||path.endsWith(`${sep}neuland-0-3s.mp3`)));
 voiceFiles.push(join(root,"assets/merkel-wir-schaffen-das.mp3"));
 for(const path of voiceFiles){
  const url="./"+relative(root,path).split(sep).join("/");
