@@ -6,6 +6,13 @@ Codex is the task lead and integrator. Select only affected production domains, 
 
 | Domain | Route |
 | --- | --- |
+| Design validation | `$game-design-reality-check` for an uncertain mechanic/player effect: identify the consequential assumption and cheapest useful test. Keep accepted behavior in `GAMEPLAY.md` or `BUERGERAMT.md`. |
+| Gameplay evaluation | `$eval-driven-game-development` for pacing, rewards or exploit questions. Model implemented mechanics, report omissions/seeds/policy sensitivity, and keep provisional targets separate from approved acceptance. |
+| Level and mission flow | `$level-design` for new layouts, gates or mission routes. Check natural prerequisites, recovery, body clearance and newcomer wayfinding using the existing world. |
+| Measured performance | `$threejs-performance` for frame/resource cost; `$threejs-debugging` for render defects. Use `$web-performance` for loading/DOM responsiveness. `ASSET-POLICY.md` owns measurements and export preservation. |
+| State and validator properties | `$property-based-testing` when a nonvacuous invariant or independent oracle exists. Use existing Node tests and bounded reproducible generators first; no blanket test rewrite. |
+| Playability, input and localization | `$gameplay-validation` for claimed flow coverage; `$browser-input` for focus/touch/background interruptions; `$game-localization` for ID/fallback and language-switch coverage. Keep actual input, debug shortcuts and source evidence distinct. |
+| Busy HUD readability | `$auditing-game-screen-readability` when critical cues/text overlap. Supply representative rendered states; its pixel-game thresholds are suggestions, not this game's type or accessibility standards. |
 | Story and continuity | Read the relevant `GAMEPLAY.md` dialogue rules, `BUERGERAMT.md` beats when applicable, and the owning text/character catalog. Use `chatdev-game-workflows` for cross-domain Bürgeramt work. |
 | Gameplay and episode | `$game-engine` for the custom simulation; `$web-game-foundations` before substantial architecture changes; `$threejs-gameplay-systems` for 3D mechanics. Preserve the existing runtime and mission authority. |
 | Music, sound effects, and timing | Read `MUSIC-SOUND-DESIGN.md` and the affected `GAMEPLAY.md` or `BUERGERAMT.md` section. Use `$music-sound-effects` for a music or nonverbal cue brief, source/render, and playback design; use the existing Web Audio path first. Read `AUDIO-TEXT-LIBRARY.md`; use the available voice-production route with `VOICE-SYNTH-PROTOCOL.md` for new profiles or speech assets. Preserve exact visible-text/audio and speaker ownership. |
@@ -17,6 +24,14 @@ Codex is the task lead and integrator. Select only affected production domains, 
 | Camera and scale consistency review | Separate required read-only subagent on the same candidate. Read `OBJECT-CONSISTENCY.md`; review only actual mesh sightlines, smooth/material-correct fades, sprite depth/layering, model/fallback bounds and person/car/door/building/landmark proportions and full-bounds off-camera car appearance/removal. |
 
 Use only installed, task-relevant skills and read the selected skill before acting. Available project skills live in `.agents/skills/`; personal `$music-sound-effects`, `$ponytail`, `$uncodixfy-pretext`, voice-production, `$imagegen`, and `$multi-source-web-search` routes may be loaded from the configured personal skill root. The project protocol remains readable without a personal skill and is the ChatDev runner's audio authority. Do not route work to unavailable `$system-engineering` or `$rust-work-graph`; use `$web-game-foundations` for architecture and `$ponytail` for YAGNI and minimality.
+
+## Selected skill provenance and applicability
+
+The selected additions are installed under `.agents/skills/`. Their immutable sources, licenses, file hashes and local adaptations are in [the source manifest](../.agents/skill-sources.json). Read only the triggered skill and needed references; do not load the whole audit or collection at startup. Installation establishes availability, not measured workflow improvement. Evaluate usefulness on representative work and remove routes that only add effort.
+
+Project rules override generic defaults: static JavaScript, installed Three.js r186, existing collision/audio/assets, Windows-compatible commands, silent isolated QA, one integrator and current permission boundaries. Keep the user's model/effort choice. Tool declarations, automatic deployment suggestions, paid services and optional dependencies do not grant capabilities or authorization. Reuse existing fixtures and harnesses; no new browser stack, engine, analytics or scheduled job solely to satisfy a skill.
+
+Before updating a bundle, inspect its pinned upstream diff and reachable references/scripts, preserve its license/attribution and adaptations, then refresh file hashes and run `node tools/validate-game-skills.mjs`. It checks inventory, content integrity, basic discovery fields and local references; full frontmatter validation and behavioral usefulness remain separate. Do not execute unreviewed hooks or `@latest` installs. Supporting web-vitals references remain part of the loading skill, not a new default route.
 
 ## Delegation and review
 

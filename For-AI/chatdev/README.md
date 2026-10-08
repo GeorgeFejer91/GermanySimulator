@@ -17,6 +17,8 @@ For any world/object/placement/movement/animation/camera/scale candidate, always
 
 Each review returns **task and candidate revision** (commit or base plus changed-file hashes), **verdict** (`PASS`, `FAIL`, or `NOT RUN`), **checks actually run with results/evidence paths**, **limits**, and **actionable findings with owner**. Attribute supplied evidence separately from fresh checks. Calibrate model routing from first-pass correctness, repair effort and elapsed time; do not invent per-task cost figures or build a benchmark service.
 
+For playtest evidence, also name the driver, browser/device, input mode, shortcuts/forced state and tested natural chain. Distinguish source inspection, deterministic simulation, scripted/debug scenes, automated real input, physical-device runs, newcomer observation and listening. Resolve visual `REVIEW` findings; a scanner's empty or incomplete input cannot establish coverage.
+
 For the object-consistency matrix, include the reviewer/role and verdict per scenario and evidence type: production source/CPU checks, fresh Chromium rendered checks, Android emulation and physical Android. A source PASS cannot promote a rendered NOT RUN to PASS. Required FAIL/NOT RUN items keep acceptance outstanding; record out-of-scope rows and reasons rather than implying they passed.
 
 ## Browser responsiveness contract

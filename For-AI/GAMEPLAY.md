@@ -21,6 +21,14 @@ The first mission enters the existing first-person Bürgeramt episode. A phone Q
 
 The episode uses German dialogue as a local exception to Berlin Denglisch. It shares the root runtime, renderer and assets. The unlisted `?geheim=buergeramt` route reuses the same episode for testing. Admission, phone controls, timing, pause rules, mix and visual beats have one current authority in [`BUERGERAMT.md`](./BUERGERAMT.md).
 
+## Design, flow and access checks
+
+Use the selective design/evaluation routes in `SKILLS.md` when a task introduces uncertainty. State the intended player effect, distinguish observations from assumptions, and choose the smallest decision-changing prototype or check. A tuning model must cover the disputed mechanic; report seeds/trials, player policy and omissions. Targets remain provisional until accepted by the owning gameplay rule.
+
+For mission/layout changes, check the natural prerequisite path, failure/retry, cancellation and resource reachability before using debug shortcuts. Newcomer wayfinding and satire comprehension need player evidence; simulation success alone cannot prove them.
+
+Review relevant access barriers using the [Xbox Accessibility Guidelines](https://learn.microsoft.com/en-us/xbox/accessibility/guidelines): critical cue alternatives, captions/speaker identity, keyboard focus, touch alternatives, transient text and reduced motion. Distinguish UI time limits from deliberate game pressure; retain the authored three-day deadline unless the user changes it. Automated DOM checks provide partial evidence.
+
 ## Controls
 
 - Desktop: WASD or arrow keys move; Shift runs; E interacts; `§` or `Q` activates the law power after unlock.

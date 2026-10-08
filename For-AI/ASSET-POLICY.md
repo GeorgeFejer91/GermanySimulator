@@ -262,6 +262,14 @@ Condensed (OFL), with adjacent provenance; these are not game dependencies.
 
 An asset change is complete only when the correct variant loads on desktop and mobile, missing files fail gracefully, the browser console stays clean, and gameplay/interactions remain unchanged unless the task explicitly changes them.
 
+## Measured performance and export preservation
+
+For a cost regression or optimization, use the matching profiling route in `SKILLS.md`. Record build, scene/state, device/browser, viewport/DPR, loaded/fallback variants, warm/cold conditions and comparable repeated runs. Distinguish initial playable time, long tasks, frame-time distributions/stalls, draw/triangle counts and resource growth across repeated entry/exit. Report measurement variation and CPU/GPU uncertainty; renderer counters and source estimates are partial evidence. Preserve accepted budgets and appearance rather than inventing universal limits or using one Lighthouse score as proof.
+
+For risky GLB re-export/optimization, compare bytes alongside names/hierarchy, world bounds/pivots/scale, materials/textures, animation clips/skins, extensions and loader support. Format validation complements semantic, missing-file/fallback and rendered checks. Compression requiring Draco, Meshopt or KTX2 needs verified decoder integration before shipment. Reuse existing asset tools and accepted source rights; do not copy the unverified-license pascal bundle.
+
+For rendered comparisons, freeze representative game/HUD states and camera, then calibrate repeated unchanged captures before setting tolerances. Verify a known meaningful visual mutation fails. Separate normal/reduced-motion and loaded/fallback states; screenshots cannot alone establish timing, physical-device performance or correct animation.
+
 ## Local 3D buildings
 
 - Root `assets/models/` is the only authority for shipped model files.

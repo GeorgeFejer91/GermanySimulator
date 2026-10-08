@@ -65,6 +65,10 @@ Close characters use additional detail WebPs baked from the original paintings: 
 
 The reusable event-to-motion authoring procedure lives in `.agents/skills/animate-2d-characters/references/narrative-action-rigging.md`. Its ordered action verbs and source poses join the shared audio beat card before new sprites or cues are made. For the `omen` beat: Story owns the exact line; Storyboard owns approach→darkening/build→arrival/line→abrupt release→normal walk; Character owns identity/prop hand; ColorMood owns restrained valence/return; Animation owns registered views and encoded QA; Gameplay owns path, state priority, committed event, and queue pause; Soundscape owns the bounded buildup and release; Mix owns the existing bus and speech clarity; Phone is unchanged; Voice uses browser speech plus the visible text fallback; Review and QA accept the same candidate revision. Static graph validation checks only the optional runner configuration; playable, visual, and listening evidence comes from the integrated game.
 
+## Flow and companion failure coverage
+
+For admission/call changes, use `gameplay-validation` and meaningful state properties from `property-based-testing`. Check natural admission through an outcome, failure/retry, hidden/closed phone, stale session, malformed/out-of-role/replayed events, delayed receipts, reconnect and cancellation cleanup. Host and phone remain separate browser contexts, clocks and audio outputs. Existing protocol/SDK ownership governs fixes; debug admission or simulated messages do not prove a real two-device flow. Record actual drivers and missing device evidence.
+
 ## Episode boundary and clock ownership
 
 The city owns mission progress, A38, its main update loop and entry/exit callbacks. The episode owns its queue, movement, dialogue and attempt/cue cancellation; the existing renderer projects that state. Office-detail collision footprints become active only after their visible assembly attaches. Phone messages remain bounded and ordered under the existing host-authoritative protocol. Shared CSS and renderer changes have one assigned writer.

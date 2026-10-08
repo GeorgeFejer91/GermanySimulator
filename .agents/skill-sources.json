@@ -1,0 +1,726 @@
+{
+  "schemaVersion": 1,
+  "retrievedAt": "2026-10-08",
+  "skills": [
+    {
+      "name": "eval-driven-game-development",
+      "installedPath": ".agents/skills/eval-driven-game-development",
+      "source": {
+        "repository": "edhahn/agent-skills",
+        "commit": "ffc6fc4bf1408bc3cac522916bb58e603f39ab45",
+        "path": "eval-driven-game-development"
+      },
+      "license": {
+        "id": "MIT",
+        "upstreamPath": "LICENSE",
+        "installedPath": "LICENSE",
+        "attribution": "Edward Hahn"
+      },
+      "adaptations": [
+        "Add project applicability and explicit adaptation notice",
+        "SKILL.md: Ponytail: reference the shared project contract instead of repeating global rules",
+        "SKILL.md: Ponytail: reuse accepted task/targets instead of repeating scenario approval"
+      ],
+      "projectApplicability": "Reuse existing Node harnesses and implemented mechanics. Experience targets are provisional unless accepted in gameplay policy. Simulation does not certify satire or fun; external comments/issues and CI changes require existing authorization.",
+      "files": [
+        {
+          "path": "LICENSE",
+          "upstreamPath": "LICENSE",
+          "upstreamSha256": "467db7ed5dd56f2ca25ec66384aa481089d3308df78361c66071f5376674158c",
+          "installedSha256": "467db7ed5dd56f2ca25ec66384aa481089d3308df78361c66071f5376674158c"
+        },
+        {
+          "path": "references/harness.md",
+          "upstreamPath": "eval-driven-game-development/references/harness.md",
+          "upstreamSha256": "e980c7d4a3c4e528ee5be70572d81d2b55bf26ee2f3f40609dbe6641709e41e3",
+          "installedSha256": "e980c7d4a3c4e528ee5be70572d81d2b55bf26ee2f3f40609dbe6641709e41e3"
+        },
+        {
+          "path": "references/metrics.md",
+          "upstreamPath": "eval-driven-game-development/references/metrics.md",
+          "upstreamSha256": "eebd55724687716dc5ae6aac0aff848d2309216245c27ed7d0a141aa815e0ed6",
+          "installedSha256": "eebd55724687716dc5ae6aac0aff848d2309216245c27ed7d0a141aa815e0ed6"
+        },
+        {
+          "path": "references/scenario-catalog.md",
+          "upstreamPath": "eval-driven-game-development/references/scenario-catalog.md",
+          "upstreamSha256": "bff34f83382392f44cb183e847f5f38af4040616dc4fdd672bd2e01c563b0a49",
+          "installedSha256": "bff34f83382392f44cb183e847f5f38af4040616dc4fdd672bd2e01c563b0a49"
+        },
+        {
+          "path": "references/tabletop.md",
+          "upstreamPath": "eval-driven-game-development/references/tabletop.md",
+          "upstreamSha256": "c42e6b3ad857cafbcdf73c72992d924814eb8697aababa075546dc415097dff5",
+          "installedSha256": "c42e6b3ad857cafbcdf73c72992d924814eb8697aababa075546dc415097dff5"
+        },
+        {
+          "path": "SKILL.md",
+          "upstreamPath": "eval-driven-game-development/SKILL.md",
+          "upstreamSha256": "d6d0b96ce12e28e05c96cd0b5c31e1edba6df481004c35fc9b7efdb0bf83a3b5",
+          "installedSha256": "b8801857be95187cb26ff4f18471f80ca49be199f15cf3ab2c756e756d9783ea"
+        },
+        {
+          "path": "SOURCE.md",
+          "upstreamPath": null,
+          "upstreamSha256": null,
+          "installedSha256": "54c1ce53e5d46ae60b734db4846b27363ca3a26a17ad2746603b379b22a50f97"
+        }
+      ],
+      "validation": {
+        "packaging": "PASS",
+        "codexFrontmatter": "PASS",
+        "validatedAt": "2026-10-08",
+        "workflowEffectiveness": "NOT RUN"
+      }
+    },
+    {
+      "name": "threejs-performance",
+      "installedPath": ".agents/skills/threejs-performance",
+      "source": {
+        "repository": "cesartevisual/threejs-skills",
+        "commit": "84f9bcb4bea1f7a28d57fe7f0af78f7f9c3dc467",
+        "path": "skills/threejs-performance"
+      },
+      "license": {
+        "id": "MIT",
+        "upstreamPath": "LICENSE",
+        "installedPath": "LICENSE",
+        "attribution": "Three.js Skills contributors"
+      },
+      "adaptations": [
+        "Add project applicability and explicit adaptation notice",
+        "SKILL.md: Ponytail: reference the shared project contract instead of repeating global rules"
+      ],
+      "projectApplicability": "Profile the installed Three.js r186 WebGL runtime and representative existing scenes. Separate startup, CPU/GPU uncertainty, frame distributions and resource lifetime. Preserve appearance, stepping, audio and shared asset ownership.",
+      "files": [
+        {
+          "path": "LICENSE",
+          "upstreamPath": "LICENSE",
+          "upstreamSha256": "01ec0c5bcde294bfe55837fe35d4a0369f9ed2427c0560b0c9f92763eecd8eb3",
+          "installedSha256": "01ec0c5bcde294bfe55837fe35d4a0369f9ed2427c0560b0c9f92763eecd8eb3"
+        },
+        {
+          "path": "references/profile.md",
+          "upstreamPath": "skills/threejs-performance/references/profile.md",
+          "upstreamSha256": "dcc20affee2c65803e55d5e2c74c21eadc13475963bef5746e363e40d28ffa2a",
+          "installedSha256": "dcc20affee2c65803e55d5e2c74c21eadc13475963bef5746e363e40d28ffa2a"
+        },
+        {
+          "path": "SKILL.md",
+          "upstreamPath": "skills/threejs-performance/SKILL.md",
+          "upstreamSha256": "0d2617bacfb947b415ced97430a17a555fdbf41d21e7bcf5777f2a10141c0fbb",
+          "installedSha256": "5d7f0528c373bac0ea9b0a396332117c8b73970df115c4a1c8068e64094fe292"
+        },
+        {
+          "path": "SOURCE.md",
+          "upstreamPath": null,
+          "upstreamSha256": null,
+          "installedSha256": "50b5cf30b105807571dc49dbb48c79102f528e0bff4e3b6246f1def7bcf79ffd"
+        }
+      ],
+      "validation": {
+        "packaging": "PASS",
+        "codexFrontmatter": "PASS",
+        "validatedAt": "2026-10-08",
+        "workflowEffectiveness": "NOT RUN"
+      }
+    },
+    {
+      "name": "threejs-debugging",
+      "installedPath": ".agents/skills/threejs-debugging",
+      "source": {
+        "repository": "cesartevisual/threejs-skills",
+        "commit": "84f9bcb4bea1f7a28d57fe7f0af78f7f9c3dc467",
+        "path": "skills/threejs-debugging"
+      },
+      "license": {
+        "id": "MIT",
+        "upstreamPath": "LICENSE",
+        "installedPath": "LICENSE",
+        "attribution": "Three.js Skills contributors"
+      },
+      "adaptations": [
+        "Add project applicability and explicit adaptation notice",
+        "SKILL.md: Ponytail: reference the shared project contract instead of repeating global rules"
+      ],
+      "projectApplicability": "Diagnose the installed r186 renderer and existing simulation/render boundary. Use Windows-compatible tools and silent isolated browser sessions. Do not add another render loop, engine or browser stack to follow a recipe.",
+      "files": [
+        {
+          "path": "LICENSE",
+          "upstreamPath": "LICENSE",
+          "upstreamSha256": "01ec0c5bcde294bfe55837fe35d4a0369f9ed2427c0560b0c9f92763eecd8eb3",
+          "installedSha256": "01ec0c5bcde294bfe55837fe35d4a0369f9ed2427c0560b0c9f92763eecd8eb3"
+        },
+        {
+          "path": "references/diagnostics.md",
+          "upstreamPath": "skills/threejs-debugging/references/diagnostics.md",
+          "upstreamSha256": "923cec246e0f5c319a94826c9668234899cc9c050da38bdaf8d01c41ff712165",
+          "installedSha256": "923cec246e0f5c319a94826c9668234899cc9c050da38bdaf8d01c41ff712165"
+        },
+        {
+          "path": "SKILL.md",
+          "upstreamPath": "skills/threejs-debugging/SKILL.md",
+          "upstreamSha256": "61f51bbaf0c88104532c7bed7c0f65a75fa9a9f882f5c79187cbe9046786df50",
+          "installedSha256": "8cc71fb1b98a139e74da7c129b272e6af5188bd4496e1fefba8767df8cc60314"
+        },
+        {
+          "path": "SOURCE.md",
+          "upstreamPath": null,
+          "upstreamSha256": null,
+          "installedSha256": "93ce53b851c8c523bdb02b0e55c1b53da504c4f2ecc729623392eca9e865e90b"
+        }
+      ],
+      "validation": {
+        "packaging": "PASS",
+        "codexFrontmatter": "PASS",
+        "validatedAt": "2026-10-08",
+        "workflowEffectiveness": "NOT RUN"
+      }
+    },
+    {
+      "name": "property-based-testing",
+      "installedPath": ".agents/skills/property-based-testing",
+      "source": {
+        "repository": "trailofbits/skills",
+        "commit": "82fe8226252622fa807643bdca1710901198553a",
+        "path": "plugins/property-based-testing/skills/property-based-testing"
+      },
+      "license": {
+        "id": "CC-BY-SA-4.0",
+        "upstreamPath": "LICENSE",
+        "installedPath": "LICENSE",
+        "attribution": "Trail of Bits / Henrik Brodin"
+      },
+      "adaptations": [
+        "Remove nonportable frontmatter fields: effort",
+        "Add project applicability and explicit adaptation notice",
+        "SKILL.md: Ponytail: reference the shared project contract instead of repeating global rules",
+        "README.md: Ponytail: replace 279-line history/absent-evaluator guide with local task index"
+      ],
+      "projectApplicability": "Preserve the user's model and effort choice. Use bounded seeded generators with existing Node tests, meaningful invariants and independent oracles. No default fast-check dependency, production abstraction, nightly job or repeated approval for already-authorized fixes. Keep browser/device and specialist gates separate.",
+      "files": [
+        {
+          "path": "agents/openai.yaml",
+          "upstreamPath": "plugins/property-based-testing/skills/property-based-testing/agents/openai.yaml",
+          "upstreamSha256": "51d635deefa254d8cdf6dc56450851b6ec9545cd37f88a4eb4035cf3f2262fff",
+          "installedSha256": "51d635deefa254d8cdf6dc56450851b6ec9545cd37f88a4eb4035cf3f2262fff"
+        },
+        {
+          "path": "assets/trail-of-bits-mark.svg",
+          "upstreamPath": "plugins/property-based-testing/skills/property-based-testing/assets/trail-of-bits-mark.svg",
+          "upstreamSha256": "4bf74c789b38dcf6ad762c136b6832363d27ae19fbaa9a18ec18d66ecce6ca05",
+          "installedSha256": "4bf74c789b38dcf6ad762c136b6832363d27ae19fbaa9a18ec18d66ecce6ca05"
+        },
+        {
+          "path": "LICENSE",
+          "upstreamPath": "LICENSE",
+          "upstreamSha256": "7abe19ec9bb73b36141b999b861d24ad855e808bafe0f81e84cce28556f6c297",
+          "installedSha256": "7abe19ec9bb73b36141b999b861d24ad855e808bafe0f81e84cce28556f6c297"
+        },
+        {
+          "path": "README.md",
+          "upstreamPath": "plugins/property-based-testing/skills/property-based-testing/README.md",
+          "upstreamSha256": "ffbe30eec09cc64fb1eae836b07ca1d82939bda3f1e6f0dceadcdd78793a3112",
+          "installedSha256": "f7a77c1c5ba1bc379fa58d0afd49f9fa8239fd707d2c24904d1787dc4caba0cd"
+        },
+        {
+          "path": "references/generating.md",
+          "upstreamPath": "plugins/property-based-testing/skills/property-based-testing/references/generating.md",
+          "upstreamSha256": "c0e72dfc89babe3c32de718b81b94044362c85e776d7475e950dfeaab78bb58e",
+          "installedSha256": "c0e72dfc89babe3c32de718b81b94044362c85e776d7475e950dfeaab78bb58e"
+        },
+        {
+          "path": "references/interpreting-failures.md",
+          "upstreamPath": "plugins/property-based-testing/skills/property-based-testing/references/interpreting-failures.md",
+          "upstreamSha256": "dbae7db8773712ba03268a3d56ea5aa6720af0650a5189580bfd88aa2edc3f9a",
+          "installedSha256": "dbae7db8773712ba03268a3d56ea5aa6720af0650a5189580bfd88aa2edc3f9a"
+        },
+        {
+          "path": "references/libraries.md",
+          "upstreamPath": "plugins/property-based-testing/skills/property-based-testing/references/libraries.md",
+          "upstreamSha256": "f7218acf8e668130ef3048983472579d04e12030c5401926f666363e5f69c686",
+          "installedSha256": "f7218acf8e668130ef3048983472579d04e12030c5401926f666363e5f69c686"
+        },
+        {
+          "path": "references/refactoring.md",
+          "upstreamPath": "plugins/property-based-testing/skills/property-based-testing/references/refactoring.md",
+          "upstreamSha256": "6eb5c206f575704791f089608bb06e41d6eed91b9d3c7fb27912f969aed07a18",
+          "installedSha256": "6eb5c206f575704791f089608bb06e41d6eed91b9d3c7fb27912f969aed07a18"
+        },
+        {
+          "path": "references/reviewing.md",
+          "upstreamPath": "plugins/property-based-testing/skills/property-based-testing/references/reviewing.md",
+          "upstreamSha256": "110b08118a1e7b1a2566def6e9d2a0bf43fc2deefce857d2ce3b4382b07bc774",
+          "installedSha256": "110b08118a1e7b1a2566def6e9d2a0bf43fc2deefce857d2ce3b4382b07bc774"
+        },
+        {
+          "path": "SKILL.md",
+          "upstreamPath": "plugins/property-based-testing/skills/property-based-testing/SKILL.md",
+          "upstreamSha256": "9448cacb65c6237a7c22dc59602667177ecae405524079ae9ff92240590b995a",
+          "installedSha256": "5007d9817da2a538bc520389716c2fc105708c68e09461d65d95682224767893"
+        },
+        {
+          "path": "SOURCE.md",
+          "upstreamPath": null,
+          "upstreamSha256": null,
+          "installedSha256": "5bae57a2e9bfbc2d1dca3cbdea69f732ebec01b11618fa7db5886a9372c81810"
+        }
+      ],
+      "validation": {
+        "packaging": "PASS",
+        "codexFrontmatter": "PASS",
+        "validatedAt": "2026-10-08",
+        "workflowEffectiveness": "NOT RUN"
+      }
+    },
+    {
+      "name": "game-design-reality-check",
+      "installedPath": ".agents/skills/game-design-reality-check",
+      "source": {
+        "repository": "qiuaoru-coder/game-design-agent-skills",
+        "commit": "29e8c759ca26c6bd4f337744b647dc728bf322b6",
+        "path": "game-design-reality-check"
+      },
+      "license": {
+        "id": "MIT",
+        "upstreamPath": "LICENSE",
+        "installedPath": "LICENSE",
+        "attribution": "qiuaoru-coder"
+      },
+      "adaptations": [
+        "Add project applicability and explicit adaptation notice",
+        "SKILL.md: Ponytail: reference the shared project contract instead of repeating global rules"
+      ],
+      "projectApplicability": "Use the lightest useful review; preserve authored bureaucracy, satire, deadlines and intentional frustration. Test a specific consequential player-effect claim rather than substituting a generic convenience ideal.",
+      "files": [
+        {
+          "path": "agents/openai.yaml",
+          "upstreamPath": "game-design-reality-check/agents/openai.yaml",
+          "upstreamSha256": "b773b2f57f647ad995228792352d9ed63aba67d99117574348fffedf82116117",
+          "installedSha256": "b773b2f57f647ad995228792352d9ed63aba67d99117574348fffedf82116117"
+        },
+        {
+          "path": "LICENSE",
+          "upstreamPath": "LICENSE",
+          "upstreamSha256": "c78dfe0f170f9c11e0865c3ebdda760c7536127f82efd8f5242c7f38e1c9f30f",
+          "installedSha256": "c78dfe0f170f9c11e0865c3ebdda760c7536127f82efd8f5242c7f38e1c9f30f"
+        },
+        {
+          "path": "README.md",
+          "upstreamPath": "game-design-reality-check/README.md",
+          "upstreamSha256": "472ee373dfa12e6460280027bf5e0af071b159a7b45424d30576c24efa7e7dca",
+          "installedSha256": "472ee373dfa12e6460280027bf5e0af071b159a7b45424d30576c24efa7e7dca"
+        },
+        {
+          "path": "references/gmt-framework.md",
+          "upstreamPath": "game-design-reality-check/references/gmt-framework.md",
+          "upstreamSha256": "7ccd902a36cc968c2ff199b101a171b022d1962b81153ce76d2a2f1e933585f2",
+          "installedSha256": "7ccd902a36cc968c2ff199b101a171b022d1962b81153ce76d2a2f1e933585f2"
+        },
+        {
+          "path": "references/reality-check-framework.md",
+          "upstreamPath": "game-design-reality-check/references/reality-check-framework.md",
+          "upstreamSha256": "f71ba8a7b16a0d8a04f89b03bb97e55826000f28edeb4c26a8c567c713ee971a",
+          "installedSha256": "f71ba8a7b16a0d8a04f89b03bb97e55826000f28edeb4c26a8c567c713ee971a"
+        },
+        {
+          "path": "references/review-output.md",
+          "upstreamPath": "game-design-reality-check/references/review-output.md",
+          "upstreamSha256": "48aeed67518713009d9a55d698fd8fa0d47e47e43f2439ac1c97ea607c9e8403",
+          "installedSha256": "48aeed67518713009d9a55d698fd8fa0d47e47e43f2439ac1c97ea607c9e8403"
+        },
+        {
+          "path": "SKILL.md",
+          "upstreamPath": "game-design-reality-check/SKILL.md",
+          "upstreamSha256": "81ec3dc5ddaebefb872a357a4406f9149c19cd1ae843e05a514ac33ce9a18505",
+          "installedSha256": "e6d5ef35ca51f23847d5c1751f3ff56bbbc47e73bfb5d0da01d593315bdc73ed"
+        },
+        {
+          "path": "SOURCE.md",
+          "upstreamPath": null,
+          "upstreamSha256": null,
+          "installedSha256": "5e0236dd1c8667664cafd1c6720ea223a1ab81e575baaa3e8c6b2a7c457ba66d"
+        },
+        {
+          "path": "THIRD_PARTY_NOTICES.md",
+          "upstreamPath": "THIRD_PARTY_NOTICES.md",
+          "upstreamSha256": "6995d0a1a84c6ddc2c70b5678cd045f9910651c4bb66e083fa2716a319339325",
+          "installedSha256": "6995d0a1a84c6ddc2c70b5678cd045f9910651c4bb66e083fa2716a319339325"
+        }
+      ],
+      "validation": {
+        "packaging": "PASS",
+        "codexFrontmatter": "PASS",
+        "validatedAt": "2026-10-08",
+        "workflowEffectiveness": "NOT RUN"
+      }
+    },
+    {
+      "name": "gameplay-validation",
+      "installedPath": ".agents/skills/gameplay-validation",
+      "source": {
+        "repository": "jammyfu/open-game-skills",
+        "commit": "4ed0e224e8d8f56c8222a3de6fd439aa7abad4e1",
+        "path": "skills/disciplines/gameplay-validation"
+      },
+      "license": {
+        "id": "MIT",
+        "upstreamPath": "LICENSE",
+        "installedPath": "LICENSE",
+        "attribution": "jammyfu / PaintingCoder"
+      },
+      "adaptations": [
+        "Replace sibling fixture/capture handoffs; infer evidence mode from the task without routine reapproval",
+        "Add project applicability and explicit adaptation notice",
+        "SKILL.md: Ponytail: reference the shared project contract instead of repeating global rules",
+        "SKILL.md: Ponytail: reuse shared session/evidence rows and make the full matrix conditional"
+      ],
+      "projectApplicability": "Use existing root assets and ASSET-POLICY for scenario fixtures; no open-asset-fixture sibling framework. Name driver, mode, cheats, natural-chain coverage and unrun device evidence. Secret admission and synthetic messages do not prove the natural two-device flow.",
+      "files": [
+        {
+          "path": "LICENSE",
+          "upstreamPath": "LICENSE",
+          "upstreamSha256": "92d740b066b19628f9c5e48e32d52bb7d7dae0cc7e32a98b71bf02b6df1b5fd8",
+          "installedSha256": "92d740b066b19628f9c5e48e32d52bb7d7dae0cc7e32a98b71bf02b6df1b5fd8"
+        },
+        {
+          "path": "SKILL.md",
+          "upstreamPath": "skills/disciplines/gameplay-validation/SKILL.md",
+          "upstreamSha256": "f776d1fd18542fe86d185515c2f29e72ff54253159932ceba60bccbef0ea9e18",
+          "installedSha256": "49b1c18c5221a12e4392fd228725c3941a6a40e54332a8307c58e2debf43b1ef"
+        },
+        {
+          "path": "SOURCE.md",
+          "upstreamPath": null,
+          "upstreamSha256": null,
+          "installedSha256": "c83d666b064d1f10fe33f12c17599aa09986e12381c1970aa3cc1f62b18b36e2"
+        }
+      ],
+      "validation": {
+        "packaging": "PASS",
+        "codexFrontmatter": "PASS",
+        "validatedAt": "2026-10-08",
+        "workflowEffectiveness": "NOT RUN"
+      }
+    },
+    {
+      "name": "game-localization",
+      "installedPath": ".agents/skills/game-localization",
+      "source": {
+        "repository": "jammyfu/open-game-skills",
+        "commit": "4ed0e224e8d8f56c8222a3de6fd439aa7abad4e1",
+        "path": "skills/disciplines/game-localization"
+      },
+      "license": {
+        "id": "MIT",
+        "upstreamPath": "LICENSE",
+        "installedPath": "LICENSE",
+        "attribution": "jammyfu / PaintingCoder"
+      },
+      "adaptations": [
+        "Add project applicability and explicit adaptation notice",
+        "SKILL.md: Ponytail: reference the shared project contract instead of repeating global rules"
+      ],
+      "projectApplicability": "Existing audio/text catalogs and game state own stable IDs, fallback and persistent facts; no dialogue-flags sibling required. Preserve German/Denglisch speech, exact speaker/display pairing, supported locales, mission/session state and measured UI text fitting.",
+      "files": [
+        {
+          "path": "LICENSE",
+          "upstreamPath": "LICENSE",
+          "upstreamSha256": "92d740b066b19628f9c5e48e32d52bb7d7dae0cc7e32a98b71bf02b6df1b5fd8",
+          "installedSha256": "92d740b066b19628f9c5e48e32d52bb7d7dae0cc7e32a98b71bf02b6df1b5fd8"
+        },
+        {
+          "path": "SKILL.md",
+          "upstreamPath": "skills/disciplines/game-localization/SKILL.md",
+          "upstreamSha256": "1e5cc145a3403d3e64ef8f473a0c2d225ddb93f68fc241e6ecf8f588167362b8",
+          "installedSha256": "b84b85a709af2ecf054e53b60e31428ae61c14ab6104d72f05613bd10d44cf4f"
+        },
+        {
+          "path": "SOURCE.md",
+          "upstreamPath": null,
+          "upstreamSha256": null,
+          "installedSha256": "aaeb8b0419f35b76d6dc0f20f454d5e884282a2c0f1a5cacf832a7f8f22eb5a2"
+        }
+      ],
+      "validation": {
+        "packaging": "PASS",
+        "codexFrontmatter": "PASS",
+        "validatedAt": "2026-10-08",
+        "workflowEffectiveness": "NOT RUN"
+      }
+    },
+    {
+      "name": "browser-input",
+      "installedPath": ".agents/skills/browser-input",
+      "source": {
+        "repository": "jammyfu/open-game-skills",
+        "commit": "4ed0e224e8d8f56c8222a3de6fd439aa7abad4e1",
+        "path": "skills/disciplines/browser-input"
+      },
+      "license": {
+        "id": "MIT",
+        "upstreamPath": "LICENSE",
+        "installedPath": "LICENSE",
+        "attribution": "jammyfu / PaintingCoder"
+      },
+      "adaptations": [
+        "Add project applicability and explicit adaptation notice",
+        "SKILL.md: Ponytail: reference the shared project contract instead of repeating global rules",
+        "SKILL.md: Ponytail: scope lifecycle acceptance to supported APIs"
+      ],
+      "projectApplicability": "Existing GAMEPLAY controls and desktop/mobile policy own input-design/platform-targets responsibilities; no sibling skills or new controller feature required. Verify blur, hidden tab, pointer-lock loss, touch cancellation and menu transitions through relevant real input.",
+      "files": [
+        {
+          "path": "LICENSE",
+          "upstreamPath": "LICENSE",
+          "upstreamSha256": "92d740b066b19628f9c5e48e32d52bb7d7dae0cc7e32a98b71bf02b6df1b5fd8",
+          "installedSha256": "92d740b066b19628f9c5e48e32d52bb7d7dae0cc7e32a98b71bf02b6df1b5fd8"
+        },
+        {
+          "path": "SKILL.md",
+          "upstreamPath": "skills/disciplines/browser-input/SKILL.md",
+          "upstreamSha256": "e125e11c3c7e97c74ab7dbda6e8acbe8c695b05caae1defd61e87601ff5b3895",
+          "installedSha256": "90e17ac78aa7240dfa57ffdefd0c8b85cae4cfe19b699e771296dc28edb16fd7"
+        },
+        {
+          "path": "SOURCE.md",
+          "upstreamPath": null,
+          "upstreamSha256": null,
+          "installedSha256": "44a117f33c2e04bc311b9ba9435f2dd1c15a778b8c6c81dd75aaf2902ca4e6bc"
+        }
+      ],
+      "validation": {
+        "packaging": "PASS",
+        "codexFrontmatter": "PASS",
+        "validatedAt": "2026-10-08",
+        "workflowEffectiveness": "NOT RUN"
+      }
+    },
+    {
+      "name": "level-design",
+      "installedPath": ".agents/skills/level-design",
+      "source": {
+        "repository": "gamedev-skills/awesome-gamedev-agent-skills",
+        "commit": "d4b0e35550c55ae70bdfcab4ef5a0e94610438a9",
+        "path": "skills/disciplines/level-design"
+      },
+      "license": {
+        "id": "Apache-2.0",
+        "upstreamPath": "LICENSE",
+        "installedPath": "LICENSE",
+        "attribution": "awesome-gamedev-agent-skills contributors"
+      },
+      "adaptations": [
+        "Add project applicability and explicit adaptation notice",
+        "SKILL.md: Ponytail: reference the shared project contract instead of repeating global rules",
+        "SKILL.md: Ponytail: reuse current geometry and existing domain handoffs"
+      ],
+      "projectApplicability": "Adapt flow/pacing to this walking city, office sightlines, mission gates, physical clearance and recovery. GDScript, jump metrics and genre examples are references, not runtime policy. Keep existing Physics and Camera/Scale reviewers for world-affecting changes.",
+      "files": [
+        {
+          "path": "LICENSE",
+          "upstreamPath": "LICENSE",
+          "upstreamSha256": "6f82dcfeb95a1c0a0452180a3b16f21bf82111780018fed59d95a052b5b75f6c",
+          "installedSha256": "6f82dcfeb95a1c0a0452180a3b16f21bf82111780018fed59d95a052b5b75f6c"
+        },
+        {
+          "path": "NOTICE",
+          "upstreamPath": "NOTICE",
+          "upstreamSha256": "2dcb65b1c5be24e5ba11e937f3996100f4e980d8cf8ac5b30ba1d70dae6c40f8",
+          "installedSha256": "2dcb65b1c5be24e5ba11e937f3996100f4e980d8cf8ac5b30ba1d70dae6c40f8"
+        },
+        {
+          "path": "references/pacing-and-flow.md",
+          "upstreamPath": "skills/disciplines/level-design/references/pacing-and-flow.md",
+          "upstreamSha256": "e8e3940f585e376f353aefea009befe8199a1871f99d34d7b2340cb35cb61872",
+          "installedSha256": "e8e3940f585e376f353aefea009befe8199a1871f99d34d7b2340cb35cb61872"
+        },
+        {
+          "path": "SKILL.md",
+          "upstreamPath": "skills/disciplines/level-design/SKILL.md",
+          "upstreamSha256": "f1656cb00b9af8dc625a9655448b410b37ce6f1e523048a5abf09fda25cbfd32",
+          "installedSha256": "85b35066e44b0fa60bf9da2514608e3ec657df9773d60857166f3f99a424bcba"
+        },
+        {
+          "path": "SOURCE.md",
+          "upstreamPath": null,
+          "upstreamSha256": null,
+          "installedSha256": "3847e0552f1b58a4ff08d2e0689d38de15425e7214a6ee47c98470682bbab94d"
+        }
+      ],
+      "validation": {
+        "packaging": "PASS",
+        "codexFrontmatter": "PASS",
+        "validatedAt": "2026-10-08",
+        "workflowEffectiveness": "NOT RUN"
+      }
+    },
+    {
+      "name": "auditing-game-screen-readability",
+      "installedPath": ".agents/skills/auditing-game-screen-readability",
+      "source": {
+        "repository": "abagames/agentic-gamedev-skills",
+        "commit": "72309959e3422acdcb95d30e3b0ffd9ed2bd149d",
+        "path": ".agents/skills/auditing-game-screen-readability"
+      },
+      "license": {
+        "id": "MIT",
+        "upstreamPath": "LICENSE",
+        "installedPath": "LICENSE",
+        "attribution": "abagames"
+      },
+      "adaptations": [
+        "Add project applicability and explicit adaptation notice",
+        "SKILL.md: Ponytail: reference the shared project contract instead of repeating global rules",
+        "SKILL.md: Ponytail: scope enumeration/instrumentation to affected states and label incomplete checker results",
+        "scripts/check-screen-frames.mjs: Correctness: reject nonfinite/empty input; exit 2 for incomplete evidence; extend existing stdlib self-test",
+        "references/frame-manifest.md: Document required inputs, coverage and incomplete exit semantics"
+      ],
+      "projectApplicability": "Require nonzero expected frame/element coverage, disclose missing measurements and resolve REVIEW findings against rendered captures. Empty input or skipped checks cannot establish PASS. Pixel-game starting thresholds are not accessibility/type policy; reuse Pretext and supported layouts.",
+      "files": [
+        {
+          "path": "LICENSE",
+          "upstreamPath": "LICENSE",
+          "upstreamSha256": "141037de19d4de87073c3b70f31ab37572b39a94862cba5d0149bbc3d45b9323",
+          "installedSha256": "141037de19d4de87073c3b70f31ab37572b39a94862cba5d0149bbc3d45b9323"
+        },
+        {
+          "path": "references/frame-manifest.md",
+          "upstreamPath": ".agents/skills/auditing-game-screen-readability/references/frame-manifest.md",
+          "upstreamSha256": "d5c0f52b6f8c95d77afb427d18bcefa8fd549e261843b1b60c157d059bdb675e",
+          "installedSha256": "71c08848505efc3be3f7122c227ce45f935ea288a920f97fa9a0e7d4a965d1a6"
+        },
+        {
+          "path": "references/moments.md",
+          "upstreamPath": ".agents/skills/auditing-game-screen-readability/references/moments.md",
+          "upstreamSha256": "ab020cac438be80c2ca8e7c49cf709a75d4fd3eda76ce57fa1461233670072b9",
+          "installedSha256": "ab020cac438be80c2ca8e7c49cf709a75d4fd3eda76ce57fa1461233670072b9"
+        },
+        {
+          "path": "scripts/check-screen-frames.mjs",
+          "upstreamPath": ".agents/skills/auditing-game-screen-readability/scripts/check-screen-frames.mjs",
+          "upstreamSha256": "dd56db928168d10c04fa47fd491449330fc4bd00875d759630238843772d74ab",
+          "installedSha256": "8a55d8e4f02d5ca8c3a0887627cf4a8375e7d38fe2493990f19f31e9eef583df"
+        },
+        {
+          "path": "SKILL.md",
+          "upstreamPath": ".agents/skills/auditing-game-screen-readability/SKILL.md",
+          "upstreamSha256": "2276ae1aa1f4f360096e7204cb741b0a8f233ddcd7063262ad1409b0d0cda92f",
+          "installedSha256": "baaaa291976ccad2d1988b4e0444783c9a3272e29a2e7ed47d95c433e1035a27"
+        },
+        {
+          "path": "SOURCE.md",
+          "upstreamPath": null,
+          "upstreamSha256": null,
+          "installedSha256": "003b8c7f5eac3465e83591debaeed05cd3d69613230cf02d6bd3ac63cf187637"
+        }
+      ],
+      "validation": {
+        "packaging": "PASS",
+        "codexFrontmatter": "PASS",
+        "validatedAt": "2026-10-08",
+        "workflowEffectiveness": "NOT RUN"
+      }
+    },
+    {
+      "name": "web-performance",
+      "installedPath": ".agents/skills/web-performance",
+      "source": {
+        "repository": "addyosmani/web-quality-skills",
+        "commit": "afa8da942115f2961fdbfa80807ea0b232ff6c00",
+        "path": "skills/performance"
+      },
+      "license": {
+        "id": "MIT",
+        "upstreamPath": "LICENSE",
+        "installedPath": "LICENSE",
+        "attribution": "Addy Osmani"
+      },
+      "adaptations": [
+        "Rename local skill from performance to web-performance",
+        "Add project applicability and explicit adaptation notice",
+        "SKILL.md: rebase bundled references or pin upstream-only documentation links",
+        "references/core-web-vitals.md: rebase bundled references or pin upstream-only documentation links",
+        "SKILL.md: Ponytail: reference the shared project contract instead of repeating global rules",
+        "references/core-web-vitals.md: Ponytail: remove unused discovery metadata and duplicate LCP recipes",
+        "SKILL.md: Ponytail: replace React-specific splitting with native import",
+        "SKILL.md: correct native CSS example fence and remove unrelated framework comments",
+        "SKILL.md and references/core-web-vitals/LCP.md: remove trailing whitespace from code examples"
+      ],
+      "projectApplicability": "This local web-performance alias concerns loading/DOM responsiveness; cesarte owns ongoing Three.js frame/resource costs. Supporting CWV files are references, not another discovered skill. No default analytics/RUM, external URL/trace uploads, service worker or framework migration. Use comparable silent lab runs and report variation; canvas readiness and device performance remain separate.",
+      "files": [
+        {
+          "path": "LICENSE",
+          "upstreamPath": "LICENSE",
+          "upstreamSha256": "c122223ac43e86421958e18623979942c21b642951e2e3736dcb63eff13587c3",
+          "installedSha256": "c122223ac43e86421958e18623979942c21b642951e2e3736dcb63eff13587c3"
+        },
+        {
+          "path": "references/core-web-vitals/CLS.md",
+          "upstreamPath": "skills/core-web-vitals/references/CLS.md",
+          "upstreamSha256": "c4fa0cd6311720b413018471a6ac9240e87db52af3b6e306ffb6684491f15898",
+          "installedSha256": "c4fa0cd6311720b413018471a6ac9240e87db52af3b6e306ffb6684491f15898"
+        },
+        {
+          "path": "references/core-web-vitals/INP.md",
+          "upstreamPath": "skills/core-web-vitals/references/INP.md",
+          "upstreamSha256": "7d40cf6053e9bb8a8a77e02da7c6b25aa8e6c1c092b48d8f9c8f30e9b25cf3a7",
+          "installedSha256": "7d40cf6053e9bb8a8a77e02da7c6b25aa8e6c1c092b48d8f9c8f30e9b25cf3a7"
+        },
+        {
+          "path": "references/core-web-vitals/LCP.md",
+          "upstreamPath": "skills/core-web-vitals/references/LCP.md",
+          "upstreamSha256": "522054d44b7a55409cbde511e8d365f7fa52399dd1e72b8d6b44a92ecddca81f",
+          "installedSha256": "be3a86dd50e009cdc5922362111dc3cb07568a74ddd9d57b95d411363a70f4b5"
+        },
+        {
+          "path": "references/core-web-vitals.md",
+          "upstreamPath": "skills/core-web-vitals/SKILL.md",
+          "upstreamSha256": "731aa78c0347e8b3e191b75962175bee058ce73817278e610ac0fe546e685914",
+          "installedSha256": "6f7b2e0db47e5aac132b31b7cc595ac4ea7e868a40a8105acab479ebba1dca37"
+        },
+        {
+          "path": "references/MEASUREMENT.md",
+          "upstreamPath": "skills/performance/references/MEASUREMENT.md",
+          "upstreamSha256": "128f6f20c6c8fb55fcccd8b259cf680811022cf262dc55b03e9d623bcb555a99",
+          "installedSha256": "128f6f20c6c8fb55fcccd8b259cf680811022cf262dc55b03e9d623bcb555a99"
+        },
+        {
+          "path": "references/RUM.md",
+          "upstreamPath": "skills/performance/references/RUM.md",
+          "upstreamSha256": "a2bdf660ecb23098afbadfb83254d39cef10c0da82938225f61271bad3f81b19",
+          "installedSha256": "a2bdf660ecb23098afbadfb83254d39cef10c0da82938225f61271bad3f81b19"
+        },
+        {
+          "path": "SKILL.md",
+          "upstreamPath": "skills/performance/SKILL.md",
+          "upstreamSha256": "b0c220185d88c61f7770eb127d8facf86c86d2dd1fd82b86e15a4965a0137265",
+          "installedSha256": "714196bdc123627bd1d4d5bdc8825af8a3977bc00c33d0b71f415cf183100a6c"
+        },
+        {
+          "path": "SOURCE.md",
+          "upstreamPath": null,
+          "upstreamSha256": null,
+          "installedSha256": "3bc252a37fd8d88d007e6020e3a4a8a05717a2d3ee2090ffe5dfb24b5dcbcd96"
+        }
+      ],
+      "validation": {
+        "packaging": "PASS",
+        "codexFrontmatter": "PASS",
+        "validatedAt": "2026-10-08",
+        "workflowEffectiveness": "NOT RUN"
+      }
+    }
+  ],
+  "validation": {
+    "command": "node tools/validate-game-skills.mjs",
+    "result": "PASS",
+    "bundles": 11,
+    "hashedFiles": 64,
+    "localReferences": 47,
+    "codexFrontmatterChecks": 11,
+    "readabilityCheckerSelfTest": "PASS",
+    "workflowEffectiveness": "NOT RUN",
+    "readabilityCliCases": 8
+  }
+}
