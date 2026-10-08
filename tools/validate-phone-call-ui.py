@@ -83,7 +83,7 @@ def open_call(browser, base, ui, width=390, height=844, english=False, zoom=1):
         page.evaluate("factor => document.documentElement.style.zoom = factor", zoom)
     page.evaluate("() => document.fonts.ready")
     sleep(.12)
-    assert page.locator("#phone-caller").inner_text() == ("UNKNOWN" if english else "UNBEKANNT")
+    assert page.locator("#phone-caller").inner_text() == ("Unknown number" if english else "Unbekannte Nummer")
     assert page.locator("html").get_attribute("data-call-ui") == ui
     return context, page
 
