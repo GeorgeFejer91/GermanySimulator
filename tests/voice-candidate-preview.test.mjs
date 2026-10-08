@@ -31,7 +31,12 @@ const load=search=>{
 const off=load("");
 const on=load("?voicePreview=1");
 assert.equal(manifest.lineCount,223);
-assert.equal(manifest.clips.filter(clip=>clip.asrWordExact).length,156);
+assert.equal(manifest.clips.filter(clip=>clip.asrWordExact).length,157);
+const a38=manifest.clips.find(clip=>clip.clipId==="amt-brunhilde-knick-09");
+assert.ok(a38?.asrWordExact);
+assert.match(a38.asr,/\bA38\b/);
+assert.equal(a38.construction?.type,"same-profile-segment-splice");
+assert.equal(a38.construction?.sourceWavSha256?.length,2);
 assert.equal(manifest.clips.filter(clip=>clip.voiceId==="polizei-heinrich-wachtmeister"&&!clip.clipId.includes("-phone-")).length,12);
 assert.equal(manifest.clips.filter(clip=>clip.clipId.startsWith("polizei-heinrich-wachtmeister-phone-")).length,4);
 assert.equal(manifest.clips.filter(clip=>clip.voiceId==="spieler-hans-peter-mustermann").length,45);

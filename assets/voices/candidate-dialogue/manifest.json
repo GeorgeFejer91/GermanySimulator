@@ -1527,11 +1527,36 @@
       "renderer": "ResembleAI/Chatterbox Multilingual V2 0.1.7",
       "modelRevision": "5bb1f6ee58e50c3b8d408bc82a6d3740c2db6e18",
       "modelLicense": "MIT",
-      "durationSeconds": 8.74,
-      "asr": "Ich darf Ihnen das Formular 28 ausgeben, die Erlaubnis, eine Erlaubnis zu beantragen. Der Drucker behauptet, er habe morgen schon gedruckt. Wie erfassen wir heute?",
-      "asrWordExact": false,
+      "durationSeconds": 10.4,
+      "asr": "Ich darf Ihnen das Formular A38 ausgeben. Die Erlaubnis, eine Erlaubnis zu beantragen. Der Drucker behauptet, er habe morgen schon gedruckt. Wie erfassen wir heute?",
+      "asrWordExact": true,
       "path": "assets/voices/candidate-dialogue/amt-brunhilde-knick-09.mp3",
-      "sha256": "b0fd8b1d0cf7e5789673703280fe3d99e38bd31f9d0c5a7ea202db4a12ddc3bf"
+      "sha256": "2fe027b1418110c4dec15813142dcfc074f5e086a7c84456c865252f8c9f8406",
+      "edit": "A38 spoken alternate first two sentences through 8.90 s, plus original same-profile final question from 6.90-8.20 s; 80 ms join silence, 20 ms edge fades, 120 ms tail silence, -4 dB MP3 encode. Independent ASR exact on encoded MP3; full human listening pending.",
+      "construction": {
+        "type": "same-profile-segment-splice",
+        "sourceWavSha256": [
+          "333e468baf1dcdfa64a07d51b14aa641ec1f5cc23d2bceacef98b81acb36e5c4",
+          "8c7c94032eb9df83e02a6762957a12903d1d92af235968e9f5b42a74ad95b74c"
+        ],
+        "sourceRangesSeconds": [
+          [
+            0,
+            8.9
+          ],
+          [
+            6.9,
+            8.2
+          ]
+        ],
+        "join": {
+          "silenceMs": 80,
+          "edgeFadeMs": 20,
+          "tailSilenceMs": 120
+        },
+        "workingWavSha256": "8e6ed901f81655e4e235a97489f737e733cbcf98bd05e7f83e33e78eba54303a",
+        "promptVariant": "A achtunddreißig for written A38"
+      }
     },
     {
       "clipId": "amt-brunhilde-knick-10",
