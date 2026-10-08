@@ -1214,20 +1214,69 @@ function showRendererFailure(error){
   const callMesh=new T.Mesh(new T.PlaneGeometry(2.3,.62),new T.MeshBasicMaterial({map:callTexture}));callMesh.position.set(0,3.35,-4.151);amtScene.add(callMesh);
   const omenScene=new T.Scene(),omenCamera=new T.OrthographicCamera(-1,1,1,-1,0,1),omenFocus=new T.Vector3();
   const omenMaterial=new T.ShaderMaterial({transparent:true,depthTest:false,depthWrite:false,
-    uniforms:{focus:{value:new T.Vector2(.5,.5)},radius:{value:new T.Vector2(.25,.45)},strength:{value:0},clock:{value:0}},
+    uniforms:{focus:{value:new T.Vector2(.5,.5)},radius:{value:new T.Vector2(.25,.45)},strength:{value:0},clock:{value:0},reveal:{value:0}},
     vertexShader:"varying vec2 spotUv;void main(){spotUv=uv;gl_Position=vec4(position.xy,0.0,1.0);}",
-    fragmentShader:"varying vec2 spotUv;uniform vec2 focus;uniform vec2 radius;uniform float strength;uniform float clock;void main(){float d=length((spotUv-focus)/radius);float dark=smoothstep(.66,1.04,d);float halo=exp(-pow((d-.86)/.13,2.0));vec3 shimmer=.5+.5*cos(6.28318*(clock*.11+vec3(0.0,.32,.65)+d*.22));vec3 color=mix(vec3(.005,.006,.012),shimmer*.22,halo);gl_FragColor=vec4(color,strength*min(.995,dark*.99+halo*.27));}"
+    fragmentShader:`varying vec2 spotUv;uniform vec2 focus;uniform vec2 radius;
+      uniform float strength;uniform float clock;uniform float reveal;
+      void main(){
+        vec2 p=(spotUv-focus)/radius;float d=length(p);
+        float dark=smoothstep(.66,1.04,d),halo=exp(-pow((d-.86)/.13,2.0));
+        vec3 shimmer=.5+.5*cos(6.28318*(clock*.07+vec3(0.0,.32,.65)+d*.22));
+        vec3 color=mix(vec3(.005,.006,.012),shimmer*.22,halo);
+        // The moving tunnel is now a Gaussian volume. This only seals its edges.
+        float window=exp(-pow((d-1.02)/.42,2.0));
+        gl_FragColor=vec4(color,strength*clamp(dark*.99+halo*.27-reveal*window*.60,0.0,.995));
+      }`
   });
   omenScene.add(new T.Mesh(new T.PlaneGeometry(2,2),omenMaterial));
+  const amtReducedMotion=matchMedia("(prefers-reduced-motion: reduce)");
+  let amtOmenSplat=null,amtOmenRequest=null,amtOmenVisit=-1,amtOmenSkipped=false,amtOmenFailure="";
+  function clearAmtOmenSplat(){
+    amtOmenRequest?.abort();amtOmenRequest=null;
+    amtOmenSplat?.dispose();amtOmenSplat=null;
+    const actor=amtMoving[0];actor.mesh.material.opacity=1;
+    actor.mesh.visible=!!actor.atlas?.image;
+  }
+  function updateAmtOmenSplat(level){
+    if(!level.active){clearAmtOmenSplat();return}
+    const omen=level.omen,actor=amtMoving[0];
+    if(omen.visit!==amtOmenVisit){
+      clearAmtOmenSplat();amtOmenVisit=omen.visit;amtOmenSkipped=false;amtOmenFailure="";
+    }
+    if(omen.phase==="recover"||!omen.enabled||!omen.phase&&!["outside","walk-sign"].includes(level.stage)){clearAmtOmenSplat();amtOmenSkipped=true;return}
+    // A late optional asset never replaces the actor halfway through his line.
+    if((omen.phase==="blackout"||omen.phase==="glare")&&!amtOmenSplat){amtOmenSkipped=true;amtOmenRequest?.abort()}
+    if(!amtOmenRequest&&!amtOmenSplat&&!amtOmenSkipped&&!document.hidden&&
+       ["outside","walk-sign","omen"].includes(level.stage)){
+      const request=new AbortController(),visit=amtOmenVisit;amtOmenRequest=request;
+      const prepare=async()=>{
+        if(request.signal.aborted||document.hidden||!level.active)return null;
+        const module=await import("./buergeramt-splat.js?v=20261008-omen-depth");
+        request.signal.throwIfAborted();
+        return module.createOmenSplat({THREE:T,renderer,scene:amtScene,signal:request.signal});
+      };
+      (bridge.queueAssetLoad?bridge.queueAssetLoad(prepare):prepare()).then(effect=>{
+        if(request.signal.aborted||visit!==amtOmenVisit||amtOmenSkipped||!level.active){effect?.dispose();return}
+        if(effect)amtOmenSplat=effect;
+      }).catch(error=>{
+        if(request.signal.aborted)return;
+        amtOmenSkipped=true;amtOmenFailure=error.message;console.warn("Bürgeramt omen keeps painted fallback",error);
+      }).finally(()=>{if(amtOmenRequest===request)amtOmenRequest=null});
+    }
+    const opacity=amtOmenSplat?.update(omen,actor.mesh,amtCamera,amtReducedMotion.matches)||0;
+    actor.mesh.material.opacity=1-opacity;
+    actor.mesh.visible=opacity<.999&&!!actor.atlas?.image;
+  }
   let lastCall="",amtHiDpi=false;
   function renderAmt(){const level=window.BuergeramtLevel;
     if(!level||!level.active&&!document.body.classList.contains("amt-direct-mode")){
+      if(amtOmenSplat||amtOmenRequest)clearAmtOmenSplat();
       if(amtHiDpi){amtHiDpi=false;resize()}
       return false;
     }
     if(!amtHiDpi){amtHiDpi=true;resize()}
-    loadAmtImages();const view=level.view;amtCamera.position.set(view.x,1.68,view.z);amtCamera.rotation.set(0,-view.yaw,0);if(level.qrSvg)setAmtQr(level.qrSvg);const now=performance.now();animateAmtCharacters(now,level);animateAmtMoving(now,level);const call=level.queueDisplay;if(call!==lastCall){lastCall=call;callCtx.fillStyle="#152527";callCtx.fillRect(0,0,512,256);callCtx.textAlign="center";callCtx.textBaseline="middle";callCtx.fillStyle="#c94839";callCtx.font="bold 112px monospace";callCtx.fillText(call,256,135,460);callTexture.needsUpdate=true}renderer.render(amtScene,amtCamera);
-    const omen=level.omen;if(omen.strength>0){omenFocus.set(omen.x,1.04,omen.z).project(amtCamera);omenMaterial.uniforms.focus.value.set((omenFocus.x+1)/2,(omenFocus.y+1)/2);omenMaterial.uniforms.radius.value.set(Math.min(.43,.31/Math.max(.75,innerWidth/innerHeight)),.47);omenMaterial.uniforms.strength.value=omen.strength;omenMaterial.uniforms.clock.value=now/1000;renderer.autoClear=false;renderer.render(omenScene,omenCamera);renderer.autoClear=true}
+    loadAmtImages();const view=level.view;amtCamera.position.set(view.x,1.68,view.z);amtCamera.rotation.set(0,-view.yaw,0);if(level.qrSvg)setAmtQr(level.qrSvg);const now=performance.now();animateAmtCharacters(now,level);animateAmtMoving(now,level);updateAmtOmenSplat(level);const call=level.queueDisplay;if(call!==lastCall){lastCall=call;callCtx.fillStyle="#152527";callCtx.fillRect(0,0,512,256);callCtx.textAlign="center";callCtx.textBaseline="middle";callCtx.fillStyle="#c94839";callCtx.font="bold 112px monospace";callCtx.fillText(call,256,135,460);callTexture.needsUpdate=true}renderer.render(amtScene,amtCamera);
+    const omen=level.omen;if(omen.strength>0){omenFocus.set(omen.x,1.04,omen.z).project(amtCamera);omenMaterial.uniforms.focus.value.set((omenFocus.x+1)/2,(omenFocus.y+1)/2);omenMaterial.uniforms.radius.value.set(Math.min(.43,.31/Math.max(.75,innerWidth/innerHeight)),.47);omenMaterial.uniforms.strength.value=omen.strength;omenMaterial.uniforms.clock.value=amtReducedMotion.matches?0:omen.revealTime||omen.strength*4;omenMaterial.uniforms.reveal.value=amtReducedMotion.matches?0:amtOmenSplat?.inspect().reveal||0;renderer.autoClear=false;renderer.render(omenScene,omenCamera);renderer.autoClear=true}
     return true}
   function resize(){renderer.setPixelRatio(Math.min(devicePixelRatio||1,1,Math.sqrt(1600000/Math.max(1,innerWidth*innerHeight))));renderer.setSize(innerWidth,innerHeight,false);camera.aspect=innerWidth/innerHeight;camera.updateProjectionMatrix();amtCamera.aspect=innerWidth/innerHeight;amtCamera.updateProjectionMatrix()}resize();addEventListener("resize",resize,{passive:true});
   const spawnProbe=new T.Vector3();
@@ -1270,12 +1319,12 @@ function showRendererFailure(error){
   let parkCameraFrame=0,previousCameraTime=performance.now();
   captureStartupAssets();
   startupModelsCaptured=true;
-  window.Germany3D={ready:true,isWorldPointVisible,isVehicleVisible,prepareNearbyAssets,prepareOfficeAssets:loadAmtImages,
+  window.Germany3D={ready:true,isWorldPointVisible,isVehicleVisible,prepareNearbyAssets,prepareOfficeAssets:loadAmtImages,clearAmtOmenSplat,
   get nearbyAssetsReady(){updateAssetView();return cityModelJobs.every(job=>job.state==="settled"||cityModelDistance(job)>30&&!isCityAssetVisible(job))},
   get officeAssetsReady(){return amtImagesRequested&&officeAssetPending===0},get officeAssetStatus(){return {pending:officeAssetPending,failed:officeAssetFailures}},
   get startupReady(){return startupModelsReady()},get startupStatus(){return {pending:[...startupModelJobs].filter(job=>job.state!=="settled").length,active:cityModelActive,failed:[...startupModelJobs].filter(job=>job.failed).length}},
   get buildingVisibility(){return buildingSlots.map(slot=>({id:slot.building.id,opacity:slot.opacity,obstructing:!!slot.obstructing}))},sync(){
-    if(amtDirectRoute&&!window.BuergeramtLevel?.active){loadAmtImages();return}
+    if(amtDirectRoute&&!window.BuergeramtLevel?.active){clearAmtOmenSplat();loadAmtImages();return}
     if(renderAmt()){previousOcclusionTime=performance.now();return}
     prepareNearbyAssets();
     syncChar(playerMesh,bridge.player,0);
@@ -1335,6 +1384,6 @@ function showRendererFailure(error){
     parkCameraFrame+=(parkTarget-parkCameraFrame)*(1-Math.exp(-6*Math.min(.05,Math.max(0,(now-previousCameraTime)/1000))));previousCameraTime=now;
     if(parkCameraFrame>.001){const narrow=Math.max(0,Math.min(1,.95/camera.aspect-1)),cx=X(park.x+park.w/2),cz=Z(park.y+park.h/2),focus=parkCameraFrame*(1-.65*narrow);camera.position.set(px+(cx-px)*focus,11.5+(5+2*narrow)*parkCameraFrame,pz+14+2*narrow*parkCameraFrame);camera.lookAt(px+(cx-px)*focus,1+parkCameraFrame,pz-2.7+(cz-(pz-2.7))*parkCameraFrame)}
     updateGroupVisibility();updateBuildingOcclusion();updateWirtschaftswunder(now);renderer.render(scene,camera);
-  },inspectAssets,setAmtQr,get amtOffice(){return officeDetail?.inspect()||null},get amtCharacters(){return [...amtCharacters.map(actor=>({name:actor.name,frame:actor.frame,loaded:!!actor.mesh.material.map?.image,mapped:!!actor.mesh.material.map,visible:actor.mesh.visible,detail:actor.mesh.material.map===actor.detail,texelHeight:actor.mesh.material.map?.image?.height||0,breath:actor.mesh.material.userData.breath.value})),...amtMoving.map(actor=>({name:actor.id,frame:actor.cell,loaded:!!actor.mesh.material.map?.image,mapped:!!actor.mesh.material.map,visible:actor.mesh.visible,detail:actor.mesh.material.map===actor.detail||actor.mesh.material.map===actor.walkDetail,texelHeight:actor.mesh.material.map?.image?.height||0,breath:actor.mesh.material.userData.breath.value,tint:actor.mesh.material.color.getHexString(),position:[actor.mesh.position.x,actor.mesh.position.z]}))]}};
+  },inspectAssets,setAmtQr,get amtOmenSplat(){return {visit:amtOmenVisit,loading:!!amtOmenRequest,skipped:amtOmenSkipped,failure:amtOmenFailure,...(amtOmenSplat?.inspect()||{ready:false,visible:false})}},get amtOffice(){return officeDetail?.inspect()||null},get amtCharacters(){return [...amtCharacters.map(actor=>({name:actor.name,frame:actor.frame,loaded:!!actor.mesh.material.map?.image,mapped:!!actor.mesh.material.map,visible:actor.mesh.visible,detail:actor.mesh.material.map===actor.detail,texelHeight:actor.mesh.material.map?.image?.height||0,breath:actor.mesh.material.userData.breath.value})),...amtMoving.map(actor=>({name:actor.id,frame:actor.cell,loaded:!!actor.mesh.material.map?.image,mapped:!!actor.mesh.material.map,visible:actor.mesh.visible,detail:actor.mesh.material.map===actor.detail||actor.mesh.material.map===actor.walkDetail,texelHeight:actor.mesh.material.map?.image?.height||0,breath:actor.mesh.material.userData.breath.value,tint:actor.mesh.material.color.getHexString(),position:[actor.mesh.position.x,actor.mesh.position.z]}))]}};
   app.classList.add("three-ready");
 })().catch(showRendererFailure);

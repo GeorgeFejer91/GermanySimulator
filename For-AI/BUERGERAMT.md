@@ -40,6 +40,23 @@ Optional actor conversations pause the queue and never change ticket ownership o
 
 `buergeramt.js` owns routes, interaction range, work pauses, queue-call reactions, dialogue state, the Aktenkurier beat, Frau Knick's speaking/action row, and the active `{id,tone,valence}`. Moving regulars leave a small walking gap around the player; their gait clock advances by distance walked, and a high-priority story action preempts a routine work loop. Speaking eases the first-person view toward the owning actor. `world3d.js` draws that state: four directional walk rows, work/gesture/look/flinch rows, body-facing billboards, a six-row desk performance for Frau Knick (including lip movement while she speaks), an eased material tint, and the in-world blackout spotlight. The tone target is bounded to a subtle fraction of the paint; it changes only for the actor who owns the currently visible line. Ending the line eases back to the original colors. The room's code geometry and existing stationary painted cast stay in place. The office presents all dialogue, choices, and direct-visit outcomes in a non-modal subtitle rail over the visible room. It has no popup screens; the small `TON` disclosure is an optional in-scene HUD control.
 
+The `omen` visual beat now unfolds the Aktenkurier's registered gesture into a
+small Gaussian sculpture during blackout: a 0.52-second crossfade starts flat,
+depth expands over 1.45 seconds, and a bounded turn and coat ripples reveal the
+volume. A second, procedural 3,072-splat hollow tunnel curls around the sightline
+to his torso: charcoal/violet Gaussian clouds widen toward the camera and narrow
+toward him. Both volumes share the same depth-tested renderer; the existing
+screen vignette only seals the outer darkness. The tunnel is an intentional
+camera-attached hallucination, without collision or changes to the room geometry.
+`buergeramt.js` owns the visit token and
+simulation `revealTime`; `buergeramt-splat.js` projects that state through the
+existing Three.js scene. The exact verse and speech-completion release remain
+owned by the existing cue. Reduced motion keeps the crossfade/depth reveal but
+removes turning, ripples and tunnel rotation. The figure returns immediately to
+its sprite at release. Missing or late assets keep the sprite for that encounter.
+Exit, replay and cancellation retire the effect and reject stale preparation;
+an in-flight GPU sort finishes before its buffers/worker are freed.
+
 ## Sound and mix
 
 For a changed cue, use the shared beat card in [`MUSIC-SOUND-DESIGN.md`](./MUSIC-SOUND-DESIGN.md) so its story purpose, controller event, visual action, cue parameters, mix, receipts, fallback, and cancellation are reviewed at one candidate revision. This episode's sound policy below is the current playback authority; the general skill supplies production methods.

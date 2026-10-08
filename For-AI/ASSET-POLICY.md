@@ -10,6 +10,25 @@ The eight moving office regulars have original four-view painted source sheets a
 
 The same source sheets yield four-pose 640 × 832 action detail cells plus four directional eight-frame close walk sheets per moving regular, 384 × 832 detail poses for waiting patrons, and a compact shared detail sheet with six clerk poses and eight high-resolution lip frames. Moving detail is requested only on approach, one walk direction at a time, and released after the actor leaves; the compact desktop/mobile atlas remains the distance and load-failure fallback. Close walk sheets use a 4 × 2 grid so their maximum texture dimension is 2560 px. This preserves close brushwork without eight full high-resolution 64-frame atlases. The office-only shader gently varies per-character saturation and lightness without modifying the painted files; its renderer follows the shared one-pixel-per-CSS-pixel and 1.6 MP drawing-buffer budget in the browser playability gate below.
 
+The Aktenkurier's blackout alone may replace his sprite with the offline-authored
+Gaussian volume in `assets/buergeramt/omen/`. The deterministic builder and source
+hashes are documented beside the asset: 38,938 splats / 1,246,016 bytes, using the
+accepted gesture and rear paintings. This is a bounded sculpture for small turns,
+not a full human reconstruction. One local Spark 2.3.1 module (2,816,188 bytes,
+MIT, including embedded WASM) shares Three.js r186 and is requested only for an
+active office visit through the existing two-job admission queue. Splats install
+in 2,048-record yielding chunks; no shared decode-worker pool is used. Packed
+record data is 623,008 bytes. The procedural tunnel adds 3,072 records / 49,152
+packed bytes without another download, bringing the shared renderer to 42,010
+splats. Allocation padding, GPU accumulator buffers, sorting and renderer
+overhead are additional and must be measured in browser evidence.
+Only the omen consumes the effect; GPU generation/sorting runs at most 30 Hz
+from the existing render owner and stops on hidden/inactive play. Teardown waits
+for any owned sort before disposing buffers and its worker. A missing, cancelled
+or late preparation preserves the sprite; ordinary city startup imports none of
+this code or asset. The asset has one shared desktop/mobile variant pending
+evidence that another is needed. Runtime behavior belongs in `BUERGERAMT.md`.
+
 The office's original painted prop strip adds a file cabinet, paper tower,
 distorted clock, and noticeboard. Its source and provenance are with the cast;
 the game loads its compressed atlas only when the office is entered, alongside

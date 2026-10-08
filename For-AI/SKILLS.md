@@ -27,6 +27,14 @@ Use only installed, task-relevant skills and read the selected skill before acti
 
 ## Selected skill provenance and applicability
 
+For the omen Gaussian effect, the personal `sparkjs` skill is installed from
+[`shi3z/sparkjs-skill`, revision `6b0179c7c7873bbfb4d1d06314e303947f5f1a26`](https://github.com/shi3z/sparkjs-skill/tree/6b0179c7c7873bbfb4d1d06314e303947f5f1a26).
+It covers Spark/Three.js rendering and GPU modifiers. Its examples use Spark
+2.0.0, so check APIs against the pinned runtime 2.3.1 and official documentation.
+Use the existing renderer, controls, scene clock and admission queue; its generic
+standalone-page template is not this game's architecture. Asset reconstruction
+is a separate authoring task. The skill is guidance, not browser/device evidence.
+
 The selected additions are installed under `.agents/skills/`. Their immutable sources, licenses, file hashes and local adaptations are in [the source manifest](../.agents/skill-sources.json). Read only the triggered skill and needed references; do not load the whole audit or collection at startup. Installation establishes availability, not measured workflow improvement. Evaluate usefulness on representative work and remove routes that only add effort.
 
 Project rules override generic defaults: static JavaScript, installed Three.js r186, existing collision/audio/assets, Windows-compatible commands, silent isolated QA, one integrator and current permission boundaries. Keep the user's model/effort choice. Tool declarations, automatic deployment suggestions, paid services and optional dependencies do not grant capabilities or authorization. Reuse existing fixtures and harnesses; no new browser stack, engine, analytics or scheduled job solely to satisfy a skill.

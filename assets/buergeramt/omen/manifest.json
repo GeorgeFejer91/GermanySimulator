@@ -1,0 +1,65 @@
+{
+  "format": "splat: 32-byte little-endian XYZ/scale float32, RGBA uint8, WXYZ uint8",
+  "method": "authored approximate Gaussian volume; not ML or multi-view reconstruction",
+  "file": "aktenkurier.splat",
+  "splats": 38938,
+  "frontSplats": 33950,
+  "rearSplats": 4988,
+  "bytes": 1246016,
+  "sha256": "1cf67a21da2da7740714b8ae8abc0be17d59453fa996aa7c15ed4cefd805fe91",
+  "sources": {
+    "assets/sprite-sources/buergeramt/aktenkurier/gesture.png": "87bca7b85dcd2bbb9842227facb701a2d8882f6eb33da8ba06425622a8574f77",
+    "assets/sprite-sources/buergeramt/aktenkurier/up.png": "211b5659f6e345bcfaf35cf26f48ae14de1db4d85dd4f96ac1757aa2e95bfb88",
+    "assets/buergeramt/characters/aktenkurier-detail.webp": "382b51b26ceacb3950851e236a594d43bde4029be22323e9def47224c91c29ba"
+  },
+  "detailCell": [
+    640,
+    0,
+    1280,
+    832
+  ],
+  "frame": [
+    640,
+    832
+  ],
+  "width": 1.5076923076923079,
+  "height": 1.96,
+  "planeCenter": [
+    0,
+    0.98,
+    0
+  ],
+  "mapping": "X=((pixelX+0.5)/640-0.5)*width; Y=(1-(pixelY+0.5)/832)*height",
+  "frontAxis": "+Z",
+  "rearMarker": "position.z < 0; hide at collapse, fade with depth expansion",
+  "centerBounds": [
+    [
+      -0.34747597575187683,
+      0.08127404004335403,
+      -0.15399999916553497
+    ],
+    [
+      0.3451201915740967,
+      1.8598798513412476,
+      0.22499999403953552
+    ]
+  ],
+  "maxSigma": [
+    0.008245192468166351,
+    0.008245192468166351,
+    0.006500000134110451
+  ],
+  "suggestedYawDegrees": [
+    -25,
+    25
+  ],
+  "sourceAlphaThreshold": 32,
+  "samplingPixels": {
+    "face": 1,
+    "upperBody": 2,
+    "lowerBody": 3,
+    "rear": 5
+  },
+  "validation": "finite positive scales; count/byte bounds; exact source-pixel XY/RGBA; front/rear sign; deterministic bytes",
+  "limitations": "Rear paint is row-registered approximation; no full orbit, articulated limbs, learned reconstruction or browser-performance claim."
+}
