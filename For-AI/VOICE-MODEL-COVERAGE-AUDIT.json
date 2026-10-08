@@ -2,7 +2,7 @@
   "schemaVersion": 2,
   "status": "explicit_runtime_speakers_verified; optional_visual_template_mapping_curated; rendered_review_pending",
   "sourceSha256": {
-    "For-AI/VOICE-CAST.json": "97f87cd9dd1b5b8391cb26e14578d3b2471b8332b3b166b7f4f70bfc724d2ed7",
+    "For-AI/VOICE-CAST.json": "0c53fea0123ab5d5f9c00f76d09f4ffe658de75d6bd42dff7e1bbfef6bad7d49",
     "game.js": "be3939777ce2ca45cebb1da18cdd554740e8c6eb6457faf9f675782e08ec5d0a",
     "world3d.js": "1696380a6bbf1f473959f4f860d3da9a85ae0de6aa4b6c8780610485595ec894",
     "buergeramt-story.js": "082ed8fbf16cb74f730eaa87268586f5d89b518fe33ef6ee2a12381d0e23f83c",
