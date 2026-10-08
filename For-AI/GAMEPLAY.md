@@ -15,6 +15,14 @@ Mission order:
 7. Ausländerbehörde — residence evidence.
 8. Ausländerbehörde — fictional citizenship application.
 
+### Gameplay paperwork
+
+During city play, keep one small **Akte / M** tab with the current day. Police status appears only while wanted; energy becomes an edge warning at 35 or below. Full energy, forms, Pfand, Germanness, the sausage collection, the current rule, controls and audio/subtitle settings belong in the opened file. Its Mission, Status, Collection and Controls pages keep the ordinary small-screen view readable; long documents and enlarged text have a vertical reading fallback rather than ellipses. Opening the file pauses city simulation and releases held movement input; M, Escape or Back returns to play. A committed speech notice remains visible inside the file.
+
+The mission arrives as a small fax when its title/instruction changes and may return after 90 seconds. Give it 12–30 seconds according to copy length, with unlimited hover/focus reading and a manual full-file action. Defer or retract it during dialogue, warnings, other modals, the office or a hidden page, then show the current instruction when quiet. The optional 450 ms blur/fade reveal and 350 ms departure are DOM effects, not 3D Gaussian splatting; reduced motion uses an immediate appearance/removal. Do not load the omen renderer for HUD decoration.
+
+Short city notices share an edge column with measured clearance above touch controls. Their existing event/speech owners retain their text and lifetime. Keep the full-width controls footer, persistent logo, mission card, rule card and collection meter out of the ordinary playfield. The title screen retains the Grand Theft Amt identity. The Bürgeramt episode retains its own HUD.
+
 ### First Bürgeramt visit
 
 The first mission enters the existing first-person Bürgeramt episode. A phone QR scan issues a private ticket, name submission enables the counter call, and the host owns the queue and appointment outcome. Declining the police call permits Frau Knick's choices and the A38 form; answering cancels the appointment without A38. Hidden/disconnected phones and late arrivals forfeit the current ticket. Eight optional walking encounters add atmosphere without changing these gates.

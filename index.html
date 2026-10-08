@@ -28,27 +28,43 @@
   <link rel="preload" as="image" href="./assets/fire/kenney-smoke-05.png" crossorigin="anonymous">
   <link rel="stylesheet" href="./styles.css?v=20261008-skill-followups">
   <link rel="stylesheet" href="./buergeramt.css?v=20261007-crowd-omen">
+  <link rel="stylesheet" href="./game-hud.css?v=20261008-fax">
 </head>
 <body>
 <main id="app">
   <canvas id="game" hidden aria-hidden="true"></canvas>
-  <header class="hud top">
-    <div class="logo"><b>GERMANY</b><span>SIMULATOR</span><small>GRAND THEFT AMT</small></div>
-    <div class="wanted"><small>ORDNUNGSSTATUS</small><div id="stars"></div><em id="offence">AKTENLAGE: UNAUFFÄLLIG</em></div>
-    <div class="sensor"><small>STEUERUNG</small><b id="sensor-state">KEYBOARD / TOUCH</b></div>
-  </header>
-  <aside class="hud mission" aria-labelledby="mission-title"><div class="mission-head"><span>BUNDESAMT FÜR VORGANGSWESEN</span><span>AZ. GTA-38/BER</span></div><div class="mission-body"><small>ARBEITSAUFTRAG</small><b id="mission-title">ANMELDUNG I</b><p id="mission-text"></p></div><div class="progress"><i id="mission-progress"></i></div></aside>
-  <aside class="hud stats"><span>ENERGIE <b id="energy">100</b></span><span>FORMULARE <b id="forms">0</b></span><span>PFAND <b id="pfand">0</b></span><span>TAG <b id="day">1/3</b></span></aside>
-  <aside class="hud germanness"><small>GERMANNESS</small><div class="germanness-meter" role="progressbar" aria-label="Germanness" aria-valuemin="0" aria-valuemax="15" aria-valuenow="0"><i id="germanness-fill"></i><span class="germanness-threshold" aria-hidden="true"></span></div><output id="germanness-value">0/15</output><span id="law-power">§-MACHT AB 9/15</span><div class="wurst-pass"><b>EXTRA WURST <output id="wurst-count">0/9</output></b><div id="wurst-badges" class="wurst-badges" role="list" aria-label="Collected sausage badges"></div></div></aside>
-  <aside class="hud rule"><small>REGEL DES AUGENBLICKS</small><b id="rule-id">§17.3b</b><p id="rule-text"></p></aside>
-  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+  <nav id="city-status" class="city-status" aria-label="Spielakte" hidden>
+    <button id="file-toggle" type="button" aria-haspopup="dialog" aria-controls="case-file" aria-expanded="false"><span data-de="AKTE" data-en="FILE">AKTE</span> <kbd>M</kbd> <span class="file-day"><span data-de="TAG" data-en="DAY">TAG</span> <b id="day">1/3</b></span></button>
+    <span id="energy-warning" hidden></span>
+    <div class="wanted"><small>POLIZEI</small><div id="stars"></div><em id="offence" hidden></em></div>
+    <span id="sensor-state" hidden>KEYBOARD / TOUCH</span>
+  </nav>
+  <aside id="mission-fax" class="fax-paper mission-fax" hidden aria-labelledby="fax-title">
+    <div class="fax-heading"><span data-de="FAXEINGANG · AUFTRAG" data-en="INCOMING FAX · MISSION">FAXEINGANG · AUFTRAG</span><button id="fax-dismiss" type="button" aria-label="Auftrag ausblenden">×</button></div>
+    <h2 id="fax-title"></h2><p id="fax-text"></p>
+    <button id="fax-open" type="button" data-de="AKTE ÖFFNEN · M" data-en="OPEN FILE · M">AKTE ÖFFNEN · M</button>
+  </aside>
+  <dialog id="case-file" class="fax-paper case-file" aria-labelledby="file-title">
+    <div class="file-header"><h2 id="file-title" data-de="IHRE SPIELAKTE" data-en="YOUR GAME FILE">IHRE SPIELAKTE</h2><button id="file-close" type="button" data-de="ZURÜCK" data-en="BACK">ZURÜCK</button></div>
+    <nav class="file-tabs" aria-label="Aktenblätter"><button type="button" data-file-page="mission" aria-pressed="true" data-de="Auftrag" data-en="Mission">Auftrag</button><button type="button" data-file-page="status" aria-pressed="false" data-de="Stand" data-en="Status">Stand</button><button type="button" data-file-page="collection" aria-pressed="false" data-de="Sammlung" data-en="Collection">Sammlung</button><button type="button" data-file-page="controls" aria-pressed="false" data-de="Bedienung" data-en="Controls">Bedienung</button></nav>
+    <div class="file-page" data-page="mission"><aside class="hud mission" aria-labelledby="mission-title"><div class="mission-head"><span>BUNDESAMT FÜR VORGANGSWESEN</span><span>AZ. GTA-38/BER</span></div><div class="mission-body"><small>ARBEITSAUFTRAG</small><b id="mission-title">ANMELDUNG I</b><p id="mission-text"></p></div><div class="progress"><i id="mission-progress"></i></div></aside><aside class="hud rule"><small>REGEL DES AUGENBLICKS</small><b id="rule-id">§17.3b</b><p id="rule-text"></p></aside></div>
+    <div class="file-page" data-page="status" hidden><aside class="hud stats"><span>ENERGIE <b id="energy">100</b></span><span>FORMULARE <b id="forms">0</b></span><span>PFAND <b id="pfand">0</b></span></aside><aside class="hud germanness"><small>GERMANNESS</small><div class="germanness-meter" role="progressbar" aria-label="Germanness" aria-valuemin="0" aria-valuemax="15" aria-valuenow="0"><i id="germanness-fill"></i></div><output id="germanness-value">0/15</output><span id="law-power">§-MACHT AB 9/15</span></aside></div>
+    <div class="file-page" data-page="collection" hidden><div class="wurst-pass"><b>EXTRA WURST <output id="wurst-count">0/9</output></b><div id="wurst-badges" class="wurst-badges" role="list" aria-label="Collected sausage badges"></div></div></div>
+    <div class="file-page" data-page="controls" hidden>
+      <dl class="file-controls"><dt>WASD / ↑↓←→</dt><dd data-de="Gehen" data-en="Move">Gehen</dd><dt>SHIFT</dt><dd data-de="Verdächtig schnell" data-en="Suspiciously fast">Verdächtig schnell</dd><dt>E</dt><dd data-de="Interagieren" data-en="Interact">Interagieren</dd><dt>§ / Q</dt><dd data-de="Gesetz zitieren · ab 9/15 Germanness" data-en="Quote a law · from 9/15 Germanness">Gesetz zitieren · ab 9/15 Germanness</dd><dt>M / ESC</dt><dd data-de="Akte / Zurück" data-en="File / Back">Akte / Zurück</dd></dl>
+      <div class="file-settings"><button id="mute" type="button">MUSIC ON</button><button id="voice-toggle" type="button">VOICE ON</button>  <button id="subtitle-toggle" class="subtitle-toggle" type="button" aria-label="Toggle English subtitles" aria-pressed="false">EN SUBTITLES OFF</button></div>
+      <a href="https://ec-games.space/">EC GAMES</a>
+    </div>
+  </dialog>
+
+  <div id="city-notices" class="city-notices"><div id="toast" class="toast" role="status" aria-live="polite"></div><div id="police-bark" class="police-bark" hidden role="status" aria-live="polite"><b id="bark-speaker">POLIZEI</b><span id="police-bark-text"></span></div><section id="violation-alert" class="violation-alert" hidden aria-live="assertive"><small id="violation-law">§</small><b id="violation-title">ORDNUNGSWIDRIGKEIT</b><p id="violation-text"></p><div id="violation-stars"></div></section></div>
   <section id="law-unlock-prompt" class="law-unlock-prompt" hidden role="status" aria-live="assertive">
     <div class="law-keycap" aria-hidden="true"><span>§</span></div>
     <div><small>§-MACHT FREIGESCHALTET</small><b><span class="desktop-copy">TASTE § DRÜCKEN</span><span class="mobile-copy">§-TASTE UNTEN ANTIPPEN</span></b><em>ODER Q · GESETZ ZITIEREN</em></div>
   </section>
   <section id="wurst-alert" class="wurst-alert" hidden role="status" aria-live="polite"><small>WURSTSAMMLERPASS · NEUFUND</small><div class="wurst-alert-body"><img id="wurst-alert-image" alt=""><div><b>EXTRA WURST!</b><strong id="wurst-alert-title"></strong><p id="wurst-alert-history"></p><span id="wurst-alert-credit"></span></div></div><em>UNLOCKED · +1 GERMANNESS</em></section>
-  <div id="police-bark" class="police-bark" hidden role="status" aria-live="polite"><b id="bark-speaker">POLIZEI</b><span id="police-bark-text"></span></div>
-  <section id="violation-alert" class="violation-alert" hidden aria-live="assertive"><small id="violation-law">§</small><b id="violation-title">ORDNUNGSWIDRIGKEIT</b><p id="violation-text"></p><div id="violation-stars"></div></section>
+
+
   <section id="quiz-modal" class="modal" hidden><div class="quiz-card" role="dialog" aria-modal="true" aria-labelledby="quiz-person-name quiz-speaker">
     <aside class="quiz-person"><div class="quiz-portrait-frame"><span aria-hidden="true">§</span><img id="quiz-portrait" alt=""></div><b id="quiz-person-name">Herr Becker</b><strong id="quiz-person-title">BESORGTER BÜRGER</strong></aside>
     <div class="quiz-sheet"><div class="quiz-head"><b id="quiz-speaker">EINE FRAGE AN SIE</b><span id="quiz-source">BAMF · AUFGABE</span></div><p id="quiz-prompt"></p><div id="quiz-choices" class="quiz-choices"></div></div>
@@ -81,9 +97,9 @@
   </form></section>
   <div id="humor-scold" class="humor-scold" hidden role="alert" aria-live="assertive"></div>
   <div id="english-subtitle" class="english-subtitle" lang="en" hidden aria-live="polite" aria-atomic="true"></div>
-  <button id="subtitle-toggle" class="subtitle-toggle" type="button" aria-label="Toggle English subtitles" aria-pressed="false">EN SUBTITLES OFF</button>
+
   <nav class="control-dock" aria-label="Touch controls"><div class="dpad"><button data-key="ArrowLeft" aria-label="Left">◀<span class="fraktur">Links</span></button><button data-key="ArrowUp" aria-label="Forward">▲<span class="fraktur">Vor</span></button><button data-key="ArrowDown" aria-label="Back">▼<span class="fraktur">Zurück</span></button><button data-key="ArrowRight" aria-label="Right">▶<span class="fraktur">Rechts</span></button></div><button id="law-action" class="law-action" data-key="KeyQ" type="button" aria-label="Quote a German law" disabled><span class="dock-icon">§</span><span class="fraktur">Gesetz</span></button><button class="action" data-key="KeyE" type="button"><span class="dock-icon">E</span><span class="fraktur">Reden</span></button></nav>
-  <footer><span>WASD / ARROWS · MOVE</span><span>SHIFT · SUSPICIOUSLY FAST</span><span>E · INTERACT</span><span>§ / Q · GESETZ ZITIEREN</span><button id="mute" type="button">MUSIC ON</button><button id="voice-toggle" type="button">VOICE ON</button><a href="https://ec-games.space/">EC GAMES</a></footer>
+
 </main>
 <script type="importmap">{"imports":{"three":"https://cdn.jsdelivr.net/npm/three@0.186.0/build/three.module.js","three/addons/":"https://cdn.jsdelivr.net/npm/three@0.186.0/examples/jsm/"}}</script>
 <script src="./For-AI/QUIZ-CHARACTER-DICTIONARY.js?v=20261003-kugellager"></script>
@@ -98,7 +114,8 @@
 <script type="module" src="./buergeramt-fit.js?v=20261008-skill-followups"></script>
 <script src="./character-interactions.js?v=20261007-walks"></script>
 <script src="./tourist-animation.js?v=20261008-browser-responsive"></script>
-<script src="./game.js?v=20261008-skill-followups"></script>
+<script src="./game.js?v=20261008-fax-hud"></script>
+<script type="module" src="./game-hud.js?v=20261008-fax"></script>
 <script type="module" src="./subtitle-layout.js?v=20260929-fixed-slots"></script>
 <script type="module" src="./quiz-layout.js?v=20260929-dialogue"></script>
 <script type="module" src="./world3d.js?v=20261008-portrait-fit"></script>

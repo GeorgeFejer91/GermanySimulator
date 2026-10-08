@@ -78,7 +78,8 @@ for(const [url,duration] of Object.entries(trainDurations)){
 }
 
 assert.ok(html.indexOf("AUDIO-TEXT-LIBRARY.js")<html.indexOf("game.js"),"subtitle library must load before the game runtime");
-assert.match(html,/id="english-subtitle"[\s\S]*id="subtitle-toggle"/);
+assert.equal((html.match(/id="english-subtitle"/g)||[]).length,1,'one shared subtitle rail');
+assert.equal((html.match(/id="subtitle-toggle"/g)||[]).length,1,'one subtitle control, now in the game file');
 assert.match(css,/\.english-subtitle\{[^}]*background:#050505[^}]*color:#ffcc00[^}]*"Grenze"[^}]*text-shadow:[^}]*#b00018/);
 assert.match(css,/\.english-subtitle\{[^}]*bottom:0/,'subtitles must meet the bottom edge');
 assert.match(css,/\.control-dock\{bottom:calc\(30px \+ var\(--subtitle-height\)\);height:auto;min-height:84px/,"touch controls reserve their slot above subtitles and can grow for enlarged labels");
