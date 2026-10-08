@@ -17,6 +17,23 @@ const quizPeople=context.window.GermanySimulatorQuizCharacters.characters;
 const crowdNames=JSON.parse(game.match(/const crowdNames=(\[[^;]+\]);/)[1]);
 const crowdVoiceIds=JSON.parse(game.match(/const crowdVoiceIds=(\[[^;]+\]);/)[1]);
 const namedNpcs=game.slice(game.indexOf("const npcs=["),game.indexOf("].map(n=>n.special"));
+const cityRoster=[...namedNpcs.matchAll(/id:"(city-[^"]+)",name:"[^"]+",fullName:"([^"]+)",voiceId:"([^"]+)"/g)].map(([,id,fullName,voiceId])=>({id,fullName,voiceId}));
+assert.equal([...namedNpcs.matchAll(/fullName:"[^"]+"/g)].length,cityRoster.length,"every named city model has an ID and voice binding");
+const officeContext=vm.createContext({window:{}});
+vm.runInContext(story,officeContext);
+const officeRoster=Object.entries(officeContext.window.BuergeramtStory.characters).map(([id,person])=>({id,fullName:person.fullName,voiceId:person.voiceId}));
+assert.equal(cityRoster.length,cast.characters.filter(person=>person.gameCharacterId.startsWith("city-")).length,"all fixed nonpolitical city models are inventoried");
+assert.equal(officeRoster.length,cast.characters.filter(person=>!person.gameCharacterId.startsWith("city-")).length,"all optional Bürgeramt walkers are inventoried");
+assert.deepEqual(new Set(cityRoster.map(person=>person.voiceId)),new Set(cast.characters.filter(person=>person.gameCharacterId.startsWith("city-")).map(person=>person.voiceId)));
+assert.deepEqual(new Set(officeRoster.map(person=>person.voiceId)),new Set(cast.characters.filter(person=>!person.gameCharacterId.startsWith("city-")).map(person=>person.voiceId)));
+assert.deepEqual(new Set(crowdVoiceIds),new Set(cast.roleProfiles.filter(person=>person.voiceId.startsWith("crowd-")).map(person=>person.voiceId)));
+for(const person of [...cityRoster,...officeRoster]){
+ const recorded=cast.characters.find(candidate=>candidate.voiceId===person.voiceId);
+ assert.equal(recorded?.fullName,person.fullName,`runtime name for ${person.voiceId}`);
+}
+for(const voiceId of ["spieler-hans-peter-mustermann","polizei-heinrich-wachtmeister","amt-brunhilde-knick","tourist-guenther-liegestuhl","touristin-walburga-handtuch"]){
+ assert.ok(cast.roleProfiles.some(person=>person.voiceId===voiceId),`missing modeled role ${voiceId}`);
+}
 
 assert.equal(cast.characterCount,cast.characters.length);
 assert.equal(cast.dialogueCount,cast.characters.reduce((total,person)=>total+person.dialogue.length,0));

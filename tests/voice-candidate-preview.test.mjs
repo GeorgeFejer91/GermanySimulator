@@ -78,6 +78,18 @@ for(const clip of manifest.clips){
  assert.equal(off.candidateClip(clip.voiceId,clip.text),null);
  assert.equal(createHash("sha256").update(source(clip.path)).digest("hex"),clip.sha256);
 }
+for(const person of cast.characters)for(const line of person.dialogue){
+ assert.ok(keys.has(person.voiceId+"\0"+line.text),`missing fixed-character audition ${person.voiceId}: ${line.text}`);
+}
+const officeContext=vm.createContext({window:{}});
+vm.runInContext(officeStory,officeContext);
+const office=officeContext.window.BuergeramtStory;
+const clerkLines=[...office.clerk.flatMap(counter=>[counter.line,...counter.choices.map(choice=>choice.reply)]),...office.outburst.lines];
+assert.equal(clerkLines.length,21);
+for(const line of clerkLines)assert.ok(keys.has("amt-brunhilde-knick\0"+line),`missing clerk audition ${line}`);
+const policeLines=[...Object.values(inventory.pools.policeBarks).flat(),inventory.pools.buergeramtPolicePhone.call,...inventory.pools.buergeramtPolicePhone.replies];
+assert.equal(new Set(policeLines).size,16);
+for(const line of policeLines)assert.ok(keys.has("polizei-heinrich-wachtmeister\0"+line),`missing police audition ${line}`);
 const playerLines=new Set(Object.values(inventory.pools.innerMonologues).flatMap(contexts=>Object.values(contexts).flat()));
 assert.equal(playerLines.size,45);
 for(const line of playerLines)assert.ok(keys.has("spieler-hans-peter-mustermann\0"+line),`missing player audition ${line}`);
