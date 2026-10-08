@@ -1,9 +1,19 @@
 {
   "schemaVersion": 1,
-  "explanation": "Exact currently authored source pools. Quiz speech concatenates one regional approach, one category context and one regional question; the combinations are generated at runtime. Fixed NPC lines and their owners are in VOICE-CAST.json.",
-  "source": "game.js",
+  "explanation": "Exact currently authored source pools. Quiz speech concatenates one regional approach, one category context and one regional question; the combinations are generated at runtime. Fixed NPC lines and their owners are in VOICE-CAST.json. Bürgeramt clerk dialogue from buergeramt-story.js is inventoried separately; additional call-status sentences in buergeramt.js remain context-dependent.",
+  "source": [
+    "game.js",
+    "buergeramt-story.js"
+  ],
   "fixedCharacterDialogueCount": 93,
   "dynamicIdentityVoiceIds": [
+    {
+      "voiceId": "amt-brunhilde-knick",
+      "sourcePools": [
+        "buergeramt-story.js clerk lines and choices",
+        "buergeramt.js clerk phone interruption and status lines"
+      ]
+    },
     {
       "voiceId": "crowd-baerbel-brezel",
       "sourcePools": [
@@ -1039,6 +1049,54 @@
         "type": "grammar",
         "level": "C1"
       }
+    },
+    "buergeramtClerk": {
+      "identity": {
+        "speaker": "SACHBEARBEITERIN FRAU KNICK",
+        "fullName": "Brunhilde Knick",
+        "voiceId": "amt-brunhilde-knick"
+      },
+      "counter": [
+        {
+          "line": "Ihre Wartenummer bestätigt, dass Sie hier sind. Ihr Gesicht lässt vermuten, dass Sie wieder gehen könnten. Welcher Nachweis hat Vorrang?",
+          "replies": [
+            "Richtig. Ein Gesicht lässt sich verlegen; ein Ticket hat eine Perforation.",
+            "Dann heften Sie es bitte an das Ticket, ohne das nicht vorhandene Passfoto zu beschädigen.",
+            "Ein Telefon bezeugt eine Stimme. Über Schuhe in einem Warteraum hat es keine Zuständigkeit."
+          ]
+        },
+        {
+          "line": "Für die Anmeldung brauche ich eine Wohnungsgeberbestätigung. Um sie anzufordern, brauchen Sie die Erlaubnis zur Anforderung. Welche Anschrift melden Sie an?",
+          "replies": [
+            "Eine Anschrift ohne Bestätigung ist lediglich eine Richtungsangabe.",
+            "Das Formular ist leer. Das ist die neutralste Anschrift, die ich heute gesehen habe.",
+            "Dieser Raum kann nicht angemeldet werden. Er wartet seit Dienstag auf seine eigene Wohnungsgeberbestätigung."
+          ]
+        },
+        {
+          "line": "Ich darf Ihnen das Formular A38 ausgeben: die Erlaubnis, eine Erlaubnis zu beantragen. Der Drucker behauptet, er habe morgen schon gedruckt. Wie erfassen wir heute?",
+          "replies": [
+            "Ein Stempel ist die älteste Form der Zeitreise. Ich datiere ihn auf heute.",
+            "E-Mails nehmen wir nur nach Zustellung per Fax an. Das Faxgerät verlangt einen Ausdruck der E-Mail.",
+            "Morgen wurde bereits gedruckt. Das Warten würde ein doppeltes Datum erzeugen."
+          ]
+        },
+        {
+          "line": "Wir haben Ihre Nummer, den Nachweis Ihrer Anwesenheit und ein Datum, das noch nicht zweimal stattgefunden hat. Was ist nun Ihr Anliegen?",
+          "replies": [
+            "Gut. Zuerst dürfen Sie die Antragstellung beantragen.",
+            "Genau. Die Erlaubnis ist die Warteschlange vor der Warteschlange.",
+            "Dann haben Sie die erste Hälfte jedes Verwaltungsvorgangs abgeschlossen."
+          ]
+        }
+      ],
+      "outburst": [
+        "Sie machen wohl Witze? Sie nehmen während eines Termins im Bürgeramt einen Anruf an? Ich habe den Stempel schon in der Hand!",
+        "Ach, die Polizei? Herr Wachtmeister, ich höre Sie! Der Bürger steht an meinem Schalter und nicht auf Ihrem Rasen. Jetzt lassen Sie mich ausreden!",
+        "Ich bin vierundsiebzig und seit fünfzig Jahren an diesem Schalter. Mein Schalter deckt keinen Rasen. Er deckt Anträge! Fragen Sie ihn nach seinen Schuhen, nicht mich nach meiner Tischplatte!",
+        "Sie beschuldigen meinen Schalter? Dann schreiben Sie ihm eine Anzeige! Der Stempel war halb unten. Ein halber Stempel ist kein Stempel, und ohne Stempel ist Ihr Termin annulliert.",
+        "Ihre Nummer wandert zurück in den Automaten. Gehen Sie bitte durch den Eingang hinaus. Für einen neuen Versuch ziehen Sie draußen eine neue Nummer — dort ist die Polizei für den Rasen zuständig."
+      ]
     }
   }
 }

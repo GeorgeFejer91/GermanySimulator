@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "scope": "Eight optional Bürgeramt walkers and 19 named city NPCs with exact fixed dialogue; shared player/police/tourist roles and named quiz/crowd identities with compositional dialogue-source pointers. An additional traffic-driver profile is imported from shipped CC0 source clips.",
+  "scope": "Eight optional Bürgeramt walkers and 19 named city NPCs with exact fixed dialogue; the modeled Brunhilde Knick clerk, shared player/police/tourist roles and named quiz/crowd identities have dialogue-source pointers. An additional traffic-driver profile is imported from shipped CC0 source clips. DistinctReferenceCount covers all 53 new EmoDB profiles; the 27 fixed characters use 23 of those reference edits.",
   "source": [
     "game.js",
     "buergeramt-story.js",
@@ -8,9 +8,9 @@
   ],
   "characterCount": 27,
   "dialogueCount": 93,
-  "roleProfileCount": 25,
-  "totalNewProfileCount": 52,
-  "distinctReferenceCount": 23,
+  "roleProfileCount": 26,
+  "totalNewProfileCount": 53,
+  "distinctReferenceCount": 28,
   "distinctSourceSpeakerCount": 10,
   "characters": [
     {
@@ -1875,6 +1875,55 @@
     }
   ],
   "roleProfiles": [
+    {
+      "gameRole": "buergeramt-clerk",
+      "fullName": "Brunhilde Knick",
+      "voiceId": "amt-brunhilde-knick",
+      "secretTunnelProfileName": "GS Brunhilde Knick (amt-brunhilde-knick)",
+      "secretTunnelProfileId": "1a28fb7903d344518617d755a7f5cbb0",
+      "gender": "female",
+      "genderEvidence": "buergeramt-story.js SACHBEARBEITERIN FRAU KNICK",
+      "generalDemeanor": "Sharp, impatient counter clerk who rapidly enforces contradictory paperwork rules.",
+      "demeanorEvidence": "Bürgeramt Schalter 3 dialogue and forceful phone interruption",
+      "targetValence": "negative",
+      "targetArousal": "high",
+      "reference": {
+        "dataset": "EmoDB original",
+        "license": "CC0-1.0",
+        "speakerId": "9",
+        "emotionLabel": "anger",
+        "sourceFiles": [
+          {
+            "path": "EmoDB_original/data/emodb/wav/09a01Wb.wav",
+            "sha256": "29c31ff5f3e2f53a013d05139f5b86bca0a4c5e5e643fce6532d71356fe5fb17",
+            "emotion_confidence": "1.0"
+          },
+          {
+            "path": "EmoDB_original/data/emodb/wav/09a02Wb.wav",
+            "sha256": "f8068b676885448d1f7bc8e81721254e694bdd773768824f4cbe3a40c859bf00",
+            "emotion_confidence": "1.0"
+          },
+          {
+            "path": "EmoDB_original/data/emodb/wav/09a04Wa.wav",
+            "sha256": "0ebbba469917bd5b43b8999f0e4f8708457193c0519a93b72a63d702be2e84fb",
+            "emotion_confidence": "1.0"
+          },
+          {
+            "path": "EmoDB_original/data/emodb/wav/09a05Wb.wav",
+            "sha256": "1f84c76202bf6341258868a082550259ba99bc1a23f25711a942245103dcb7c0",
+            "emotion_confidence": "1.0"
+          }
+        ],
+        "workingReferenceSha256": "903884eae81731486a3d4e8f04c69bf86f69a35002d7674f1d709225b7d2934f",
+        "referenceTranscript": "Der Lappen liegt auf dem Eisschrank. Das will sie am Mittwoch abgeben. Heute abend könnte ich es ihm sagen. Das schwarze Stück Papier befindet sich da oben neben dem Holzstück.",
+        "referenceDurationSeconds": 8.594
+      },
+      "status": "profile-created; dialogue rendering and listening review pending",
+      "dialogueSources": [
+        "buergeramt-story.js clerk lines and choices",
+        "buergeramt.js clerk phone interruption and status lines"
+      ]
+    },
     {
       "gameRole": "crowd-baerbel-brezel",
       "fullName": "Bärbel Brezel",

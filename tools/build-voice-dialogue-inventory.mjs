@@ -7,7 +7,9 @@ const game=readFileSync(resolve(root,"game.js"),"utf8");
 const cast=JSON.parse(readFileSync(resolve(root,"For-AI/VOICE-CAST.json"),"utf8"));
 const catalogContext=vm.createContext({window:{}});
 vm.runInContext(readFileSync(resolve(root,"For-AI/AUDIO-TEXT-LIBRARY.js"),"utf8"),catalogContext);
+vm.runInContext(readFileSync(resolve(root,"buergeramt-story.js"),"utf8"),catalogContext);
 const catalog=catalogContext.window.GermanySimulatorAudioText;
+const office=catalogContext.window.BuergeramtStory;
 
 function declaration(name){
  const marker=`const ${name}=`,start=game.indexOf(marker);
@@ -37,11 +39,12 @@ const pools={
  quizApproaches:declaration("quizApproaches"),
  quizContexts:declaration("quizContexts"),
  quizQuestions:Object.fromEntries(questions.map(q=>[String(q.source),{germany:q.question,berlin:berlinQuestions[q.source]?.question??q.question,type:q.type??"civic",level:q.level??null}])),
+ buergeramtClerk:{identity:office.clerkIdentity,counter:office.clerk.map(({line,choices})=>({line,replies:choices.map(({reply})=>reply)})),outburst:office.outburst.lines},
 };
 const inventory={
  schemaVersion:1,
- explanation:"Exact currently authored source pools. Quiz speech concatenates one regional approach, one category context and one regional question; the combinations are generated at runtime. Fixed NPC lines and their owners are in VOICE-CAST.json.",
- source:"game.js",
+ explanation:"Exact currently authored source pools. Quiz speech concatenates one regional approach, one category context and one regional question; the combinations are generated at runtime. Fixed NPC lines and their owners are in VOICE-CAST.json. Bürgeramt clerk dialogue from buergeramt-story.js is inventoried separately; additional call-status sentences in buergeramt.js remain context-dependent.",
+ source:["game.js","buergeramt-story.js"],
  fixedCharacterDialogueCount:cast.dialogueCount,
  dynamicIdentityVoiceIds:cast.roleProfiles.map(person=>({voiceId:person.voiceId,sourcePools:person.dialogueSources})),
  pools,
