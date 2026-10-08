@@ -2,24 +2,59 @@ import {test} from 'node:test';
 import assert from 'node:assert/strict';
 import {readFileSync} from 'node:fs';
 import {createHash} from 'node:crypto';
+import {cycleAt,advanceClock,ANCHOR_TIMES,BEATS,CYCLE_DURATION} from '../spark-preview-cycle.mjs';
 const read=path=>readFileSync(new URL('../'+path,import.meta.url));
 const hash=data=>createHash('sha256').update(data).digest('hex');
-test('Knick preview correspondence stays bound to the existing art and valid point data',()=>{
- const manifest=JSON.parse(read('assets/previews/knick-splats/manifest.json'));
+const manifest=JSON.parse(read('assets/previews/knick-splats/manifest.json'));
+const bytes=read('assets/previews/knick-splats/correspondence.bin');
+const stride=manifest.record_bytes,slots=manifest.slots_per_anchor,count=manifest.sample_count;
+function sample(pair,group,index){
+ const offset=((pair*count)+(group*slots)+index)*stride;
+ return {xy:Array.from({length:4},(_,i)=>bytes.readFloatLE(offset+i*4)),rgba:[...bytes.subarray(offset+16,offset+20)]};
+}
+test('four-anchor correspondence stays bound to original art and bounded data',()=>{
  assert.equal(hash(read(manifest.source)),manifest.source_sha256);
- const bytes=read('assets/previews/knick-splats/correspondence.bin');assert.equal(hash(bytes),manifest.correspondence_sha256);
- assert.equal(bytes.length,manifest.sample_count*manifest.record_floats*4);
- assert.equal(manifest.record_floats,9);const counts=[0,0];
- for(let offset=0;offset<bytes.length;offset+=36){
-  const values=Array.from({length:9},(_,i)=>bytes.readFloatLE(offset+i*4));assert(values.every(Number.isFinite));
-  assert(values.slice(0,4).every(v=>Math.abs(v)<4),'registered point escaped the study canvas');
-  assert(values.slice(4,8).every(v=>v>=0&&v<=1),'invalid colour/opacity');
-  assert(values[8]===0||values[8]===1);counts[values[8]]++;
+ assert.equal(hash(bytes),manifest.correspondence_sha256);
+ assert.equal(bytes.length,count*4*20);
+ assert.equal(manifest.record_bytes,20);assert.equal(manifest.segment_count,4);
+ for(let pair=0;pair<4;pair++)for(let group=0;group<2;group++){
+  let visible=0;
+  for(let index=0;index<slots;index++){
+   const s=sample(pair,group,index);
+   assert(s.xy.every(v=>Number.isFinite(v)&&Math.abs(v)<4),'invalid registered position');
+   if(s.rgba[3])visible++;
+  }
+  assert.equal(visible,manifest.anchor_sample_counts[(pair+group)%4]);
  }
- assert(counts.every(count=>count>1000),'both anchors need visible samples');
  assert.match(manifest.status,/preview-only/);
 });
-test('Spark preview pins its module and remains outside canonical game imports',()=>{
+test('every segment boundary and the loop seam preserve exactly the same painted sample',()=>{
+ for(let anchor=0;anchor<4;anchor++)for(let index=0;index<manifest.anchor_sample_counts[anchor];index++){
+  const incoming=sample((anchor+3)%4,1,index),outgoing=sample(anchor,0,index);
+  assert.deepEqual(incoming.xy.slice(2),outgoing.xy.slice(0,2));
+  assert.deepEqual(incoming.rgba,outgoing.rgba);
+ }
+});
+test('all four transitions keep lower-leg and shoe samples planted',()=>{
+ for(let pair=0;pair<4;pair++)for(let group=0;group<2;group++)for(let index=0;index<slots;index++){
+  const {xy,rgba}=sample(pair,group,index);
+  if(rgba[3]&&xy[group*2+1]<-1.37)assert.deepEqual(xy.slice(0,2),xy.slice(2));
+ }
+});
+test('performance visits all anchors and has continuous, ordered segment timing',()=>{
+ assert.equal(CYCLE_DURATION,10);
+ assert.deepEqual(ANCHOR_TIMES.map(t=>{const s=cycleAt(t);return(s.pair+s.phase)%4}),[0,1,2,3]);
+ for(let i=0;i<BEATS.length;i++){
+  const b=BEATS[i];assert.equal(b.start,i?BEATS[i-1].end:0);assert(b.end>b.start);
+  if(i){const left=cycleAt(b.start-1e-7),right=cycleAt(b.start);assert(Math.abs(left.pair+left.phase-right.pair-right.phase)<1e-5)}
+ }
+ assert.equal(cycleAt(10).pair+cycleAt(10).phase,4);
+ assert(Math.abs(advanceClock(9.9,.3,1,true)-.2)<1e-12);
+ assert.equal(advanceClock(9.9,.3,1,false),10);
+ assert.equal(advanceClock(2,2,.25,false),2.5);
+ assert.equal(advanceClock(2,0,1,true),2);
+});
+test('Spark is pinned and the experiment is outside canonical game imports',()=>{
  assert.equal(hash(read('assets/vendor/spark/2.3.1/spark.module.js')),'2de375d5e489692f976abe3199c8435ecc00f97fabaf35e489eb7d368e1f6f60');
  for(const file of ['index.html','3d.html','game.js','world3d.js'])assert(!read(file).includes(Buffer.from('spark-preview')));
  const html=read('spark-preview.html').toString();assert.match(html,/three@0\.186\.0/);assert(!html.includes('output/'));
