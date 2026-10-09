@@ -73,7 +73,7 @@ window.GermanyHUD={get paused(){return manual},refresh:schedule};
 function sync(){
  queued=false;
  const state=window.Germany3DBridge?.getHUDState();if(!state)return;
- setHidden(rail,!state.started&&!document.body.classList.contains('amt-inside'));rail.classList.toggle('city-busy',!active());
+ setHidden(rail,!state.started||document.body.classList.contains('amt-inside'));rail.classList.toggle('city-busy',!active());
  const lang=state.lang==='en'?'en':'de';
  if(language!==lang){language=lang;for(const el of document.querySelectorAll('[data-de]'))setText(el,el.dataset[lang]);byId('fax-dismiss').setAttribute('aria-label',lang==='en'?'Hide mission':'Auftrag ausblenden')}
  setHidden(byId('energy-warning'),state.energy>35);setText(byId('energy-warning'),(lang==='en'?'ENERGY ':'ENERGIE ')+state.energy);
@@ -124,8 +124,6 @@ function measure(){
  }
  // Stack warnings above speech without covering either, including long text.
  const zoom=parseFloat(getComputedStyle(document.documentElement).zoom)||1;
- const office=document.body.classList.contains('amt-inside'),officeTop=byId('amt-walk-hud').querySelector('.amt-walk-top'),officeTone=byId('amt-mix').querySelector('summary');
- if(office&&!rail.hidden&&officeTop.getClientRects().length)rail.style.top=Math.max(officeTop.getBoundingClientRect().bottom,officeTone.getClientRects().length?officeTone.getBoundingClientRect().bottom:0)/zoom+8+'px';else rail.style.removeProperty('top');
  const top=rail.hidden?12:rail.getBoundingClientRect().bottom/zoom+8,dock=document.querySelector('.control-dock');
  const bottom=dock.getClientRects().length?dock.getBoundingClientRect().top/zoom:innerHeight/zoom-(parseFloat(getComputedStyle(byId('app')).getPropertyValue('--subtitle-height'))||0);
  const noticeTop=innerWidth<=760?top:12;
@@ -137,7 +135,7 @@ const observer=new MutationObserver(schedule);
 for(const id of [...alerts,'mission-title','mission-text','energy','stars','day','germanness-value','law-power','wurst-badges','intro'])observer.observe(byId(id),{subtree:true,childList:true,characterData:true,attributes:true,attributeFilter:['hidden','class']});
 observer.observe(document.body,{attributes:true,attributeFilter:['class']});
 observer.observe(document.documentElement,{attributes:true,attributeFilter:['style','lang']});
-const bounds=new ResizeObserver(schedule);for(const el of [file,rail,document.querySelector('.control-dock'),byId('amt-walk-hud').querySelector('.amt-walk-top')])bounds.observe(el);
+const bounds=new ResizeObserver(schedule);for(const el of [file,rail,document.querySelector('.control-dock')])bounds.observe(el);
 addEventListener('resize',schedule,{passive:true});
 document.addEventListener('visibilitychange',()=>{if(document.hidden){queued=false;const wasVisible=!fax.hidden;hideFax();if(wasVisible){pending=false;reminderAt=performance.now()+FAX_GAP_MS}if(manual)closeFile()}else schedule()});
 addEventListener('pagehide',()=>{hideFax();cache.clear();mask=kernel=null});

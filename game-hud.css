@@ -69,8 +69,6 @@
 #city-notices #violation-stars{font-size:1rem;letter-spacing:2px}
 .dialogue{border-color:#746d5e;background:#eee8d8;box-shadow:3px 4px 0 #24211c45}
 .amt-inside #mission-fax,.amt-inside #city-notices{display:none!important}
-.amt-inside #city-status{z-index:211}
-.amt-inside #germanness-hud{display:grid!important}
 @media(max-width:760px){
  .city-status{top:8px;left:8px;max-width:calc(100vw - 16px)}
  .mission-fax{left:8px;top:64px;width:min(370px,calc(100vw - 16px))}
