@@ -4,13 +4,13 @@ import {anchorBlend,createPaintedAnchor} from '../buergeramt-painted-anchor.js';
 const manifest=JSON.parse(readFileSync(new URL('../assets/buergeramt/animation/clerk.json',import.meta.url)));
 test('main and bridge keys recover original paint without adding a clock or held interval',()=>{
  for(let n=0;n<manifest.segments.length;n++){
-  const pair=manifest.segments[n];assert.deepEqual(anchorBlend(manifest,{segment:n,u:0,arc:'raise'}),{state:pair.from,opacity:1});assert.deepEqual(anchorBlend(manifest,{segment:n,u:1,arc:'raise'}),{state:pair.to,opacity:1});
-  assert.equal(anchorBlend(manifest,{segment:n,u:.5,arc:'raise'}).opacity,0);
+  const pair=manifest.segments[n],start=anchorBlend(manifest,{segment:n,u:0,arc:'raise'}),end=anchorBlend(manifest,{segment:n,u:1,arc:'raise'});
+  assert.equal(start.state,pair.from);assert.equal(end.state,pair.to);assert.equal(start.mix,0);assert.equal(end.mix,1);assert.equal(start.effect,0);assert(end.effect<1e-12);
+  assert.equal(anchorBlend(manifest,{segment:n,u:.5,arc:'raise'}).opacity,1);
   assert.equal(anchorBlend(manifest,{segment:n,u:1,arc:null}).opacity,1);
  }
- const interval=manifest.arcs[0].segments[0],width=manifest.anchors.fade_seconds/(interval.end-interval.start),at=u=>anchorBlend(manifest,{segment:0,u,arc:'raise'}).opacity;
- assert(at(.5-width/4)<at(.5-width/2));assert(at(.5-width/2)<at(.5-width*3/4));assert(at(.5-1e-6)<.000001);assert(at(.5-width+1e-6)>.999999);
- assert.equal(at(.2),1);assert.equal(at(.8),1); // Painted detail survives ordinary motion.
+ let previous=-1;for(let n=0;n<=100;n++){const blend=anchorBlend(manifest,{segment:0,u:n/100,arc:'raise'});assert.equal(blend.opacity,1);assert(blend.mix>=previous);assert(blend.effect>=0&&blend.effect<=1);previous=blend.mix}
+ assert.equal(anchorBlend(manifest,{segment:0,u:.5,arc:null}).effect,0);
 });
 function rig(){
  const disposed=[],closed=[],members=new Set();
@@ -36,11 +36,13 @@ test('paint keeps registered canvas aspect/floor, bounds residency and cancels l
   paint.update({segment:0,u:0,arc:'raise'},r.source,true);assert.equal(paint.inspect().opacity,1);assert.equal(mesh.position.y,r.source.position.y);assert.equal(mesh.size,1.9*1.2);assert.equal(mesh.material.depthWrite,false);
   const shader={uniforms:{},vertexShader:'#include <begin_vertex>',fragmentShader:'#include <map_fragment>'};mesh.material.onBeforeCompile(shader);
   assert.equal(mesh.geometry.parameters.widthSegments,32);assert.equal(shader.uniforms.anchorControlCount.value,16);
-  assert.deepEqual(shader.uniforms.anchorControlSource.value,shader.uniforms.anchorControlTarget.value);
+  assert.notDeepEqual(shader.uniforms.anchorControlSource.value,shader.uniforms.anchorControlTarget.value);
   const first=manifest.states[0].landmarks[0],next=manifest.states[1].landmarks[0];
   paint.update({segment:0,u:.25,arc:'raise'},r.source,true,{speaking:true,mouthFrame:2});
   assert.equal(paint.inspect().opacity,1);assert.equal(shader.uniforms.anchorMouth.value,.9);
-  assert.equal(shader.uniforms.anchorControlTarget.value[0].x,(first[0]+(next[0]-first[0])*.25-512)/832);
+  assert.equal(shader.uniforms.anchorControlSource.value[0].x,(first[0]-512)/832);assert.equal(shader.uniforms.anchorControlTarget.value[0].x,(next[0]-512)/832);
+  assert.equal(shader.uniforms.anchorPhase.value,.25);assert.equal(shader.uniforms.anchorMix.value,.15625);assert.equal(paint.inspect().resident,2);
+  assert.equal(shader.uniforms.anchorWarpGain.value,manifest.segments[0].paint_warp_gain);
   paint.update({segment:0,u:.25,arc:'raise'},r.source,true,{speaking:true,mouthFrame:2,reducedMotion:true});assert.equal(shader.uniforms.anchorMouth.value,0);
   for(let segment=0;segment<6;segment++){
    paint.update({segment,u:1,arc:'raise'},r.source,true);await paint.settle();paint.update({segment,u:1,arc:'raise'},r.source,true);
@@ -49,4 +51,9 @@ test('paint keeps registered canvas aspect/floor, bounds residency and cancels l
   let release;bitmapGate=new Promise(resolve=>{release=resolve});paint.update({segment:12,u:1,arc:'return'},r.source,true);await new Promise(resolve=>setTimeout(resolve,10));signal.abort();release();await paint.settle();
   assert.equal(paint.inspect().visible,false);assert.equal(paint.inspect().resident,0);assert.equal(r.members.size,0);assert(jobs>2);assert.equal(r.closed.length,decodes);assert(r.disposed.length>0);
  }finally{globalThis.fetch=oldFetch;globalThis.createImageBitmap=oldBitmap}
+});
+
+test('an invalid warp gain fails before allocating or loading paintings',async()=>{
+ for(const gain of [-.1,1.01,Infinity,NaN]){const r=rig(),bad=structuredClone(manifest);bad.segments[0].paint_warp_gain=gain;
+  await assert.rejects(createPaintedAnchor({...r,manifest:bad,manifestUrl:new URL('../assets/buergeramt/animation/clerk.json',import.meta.url)}),/warp gain/);assert.equal(r.members.size,0)}
 });

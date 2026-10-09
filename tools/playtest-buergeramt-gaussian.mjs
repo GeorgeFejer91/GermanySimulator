@@ -75,12 +75,12 @@ async function screenshot(page,dir,name){
   // Frozen simulation poses still need fresh generator/sort output. A pending
   // earlier update can otherwise leave a screenshot showing the previous key.
   const target=await page.evaluate(()=>{Germany3D.sync();const state=Germany3D.amtGaussian;
-    return state.actors.some(actor=>actor.visible&&(!actor.anchor?.visible||actor.anchor.opacity<.999))?state.owner.startedUpdates+2:null});
+    return state.actors.some(actor=>actor.visible&&actor.effect>.001)?state.owner.startedUpdates+2:null});
   if(target!==null){
-    await page.waitForFunction(target=>{Germany3D.sync();const state=Germany3D.amtGaussian;return state.owner.completedUpdates>=target||!state.actors.some(actor=>actor.visible&&(!actor.anchor?.visible||actor.anchor.opacity<.999))},target,{timeout:60000});
+    await page.waitForFunction(target=>{Germany3D.sync();const state=Germany3D.amtGaussian;return state.owner.completedUpdates>=target||!state.actors.some(actor=>actor.visible&&actor.effect>.001)},target,{timeout:60000});
     await page.waitForTimeout(90);
     const final=await page.evaluate(()=>{Germany3D.sync();return Germany3D.amtGaussian.owner.startedUpdates+1});
-    await page.waitForFunction(target=>{Germany3D.sync();const state=Germany3D.amtGaussian;return state.owner.completedUpdates>=target||!state.actors.some(actor=>actor.visible&&(!actor.anchor?.visible||actor.anchor.opacity<.999))},final,{timeout:60000});
+    await page.waitForFunction(target=>{Germany3D.sync();const state=Germany3D.amtGaussian;return state.owner.completedUpdates>=target||!state.actors.some(actor=>actor.visible&&actor.effect>.001)},final,{timeout:60000});
   }
   await page.evaluate(()=>Germany3D.sync());
   await page.screenshot({path:path.join(dir,`${name}.png`),timeout:60000});

@@ -1864,67 +1864,83 @@
   "segments": [
     {
       "from": "ready",
-      "to": "raise-1"
+      "to": "raise-1",
+      "paint_warp_gain": 0.325
     },
     {
       "from": "raise-1",
-      "to": "raise-2"
+      "to": "raise-2",
+      "paint_warp_gain": 0.45
     },
     {
       "from": "raise-2",
-      "to": "raised"
+      "to": "raised",
+      "paint_warp_gain": 0.975
     },
     {
       "from": "raised",
-      "to": "stamp-1"
+      "to": "stamp-1",
+      "paint_warp_gain": 0.5
     },
     {
       "from": "stamp-1",
-      "to": "knick-stamp-handoff1"
+      "to": "knick-stamp-handoff1",
+      "paint_warp_gain": 0.275
     },
     {
       "from": "knick-stamp-handoff1",
-      "to": "knick-stamp-handoff2"
+      "to": "knick-stamp-handoff2",
+      "paint_warp_gain": 0.4
     },
     {
       "from": "knick-stamp-handoff2",
-      "to": "stamp-2"
+      "to": "stamp-2",
+      "paint_warp_gain": 0.25
     },
     {
       "from": "stamp-2",
-      "to": "stamp-3"
+      "to": "stamp-3",
+      "paint_warp_gain": 0.775
     },
     {
       "from": "stamp-3",
-      "to": "contact"
+      "to": "contact",
+      "paint_warp_gain": 0.975
     },
     {
       "from": "contact",
-      "to": "fold-1"
+      "to": "fold-1",
+      "paint_warp_gain": 0.975
     },
     {
       "from": "fold-1",
-      "to": "fold-2"
+      "to": "fold-2",
+      "paint_warp_gain": 0.275
     },
     {
       "from": "fold-2",
-      "to": "fold-3"
+      "to": "fold-3",
+      "paint_warp_gain": 0.075
     },
     {
       "from": "fold-3",
-      "to": "refusal"
+      "to": "refusal",
+      "paint_warp_gain": 0.375
     },
     {
       "from": "refusal",
-      "to": "return-1"
+      "to": "return-1",
+      "paint_warp_gain": 0.4
     },
     {
       "from": "return-1",
-      "to": "return-2"
+      "to": "return-2",
+      "paint_warp_gain": 0.425
     },
     {
       "from": "return-2",
-      "to": "ready"
+      "to": "ready",
+      "paint_warp_gain": 0.975
     }
   ],
   "variants": {

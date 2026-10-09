@@ -715,19 +715,23 @@
   "segments": [
     {
       "from": "work",
-      "to": "bridge1"
+      "to": "bridge1",
+      "paint_warp_gain": 0.825
     },
     {
       "from": "bridge1",
-      "to": "bridge1b"
+      "to": "bridge1b",
+      "paint_warp_gain": 0.975
     },
     {
       "from": "bridge1b",
-      "to": "bridge2"
+      "to": "bridge2",
+      "paint_warp_gain": 0.975
     },
     {
       "from": "bridge2",
-      "to": "gesture"
+      "to": "gesture",
+      "paint_warp_gain": 0.975
     }
   ],
   "variants": {

@@ -1,0 +1,14 @@
+{
+  "method": "Constant inverse-MLS gain per adjacent pair; sampled 32x32 UV triangles at phase steps 0.025, both paintings, minimum area ratio 0.20; subtract 0.025 margin. Native pose/face/prop review remains required.",
+  "actors": {
+    "aktenkurier": [0.9, 0.275, 0.5, 0.75],
+    "archivbotin": [0.55, 0.625, 0.975, 0.975],
+    "clerk": [0.325, 0.45, 0.975, 0.5, 0.275, 0.4, 0.25, 0.775, 0.975, 0.975, 0.275, 0.075, 0.375, 0.4, 0.425, 0.975],
+    "formularsammler": [0.975, 0.65, 0.85, 0.975],
+    "kopiependler": [0.275, 0.375, 0.45, 0.975],
+    "nachtschichtmelderin": [0.975, 0.475, 0.425, 0.975],
+    "nummernfluesterer": [0.975, 0.375, 0.35, 0.975],
+    "pfandarchitektin": [0.975, 0.4, 0.725],
+    "warteschlangenpoetin": [0.825, 0.975, 0.975, 0.975]
+  }
+}

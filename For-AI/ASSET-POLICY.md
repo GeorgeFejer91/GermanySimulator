@@ -441,17 +441,20 @@ The Kiesinger monument carries two `CDU / AB 1948` banners flanking one dated 19
 
 Paired character actions retain native painted keys. Their existing builder
 exports lossless runtime WebPs under `assets/buergeramt/animation/`, separate
-from authoring paths. Load the initial key inside the admitted actor job; later
-adjacent keys use the same two-job queue, with one pending image per actor and
+from authoring paths. Decode the initial adjacent pair sequentially inside the
+admitted actor job, without nested queue admission; the third neighboring key
+uses the same two-job queue, with one pending image per actor and
 no new hidden-page work. Evict before decoding a fourth key: at most three
 bitmaps and three corresponding GPU textures are resident per actor. A clerk
 key is 1024×832 (3.41 MB RGBA), a regular key 640×832 (2.13 MB); those costs
 exclude driver allocations. Do not eagerly upload the sixteen-key clerk set.
 Paint planes preserve the registered canvas aspect, floor, tint and alpha.
-One 32×32 plane per actor deforms the original texture with 2–32 common
-landmarks, without rebuilding CPU geometry or adding an animation clock.
-Splats cover the brief midpoint texture handoff; all main and intermediate
-paintings remain stable full-resolution keys, with continuous motion between.
+One 32×32 plane per actor maps two neighboring native textures into the shared
+pose with 2–32 common landmarks, without rebuilding CPU geometry or adding a
+clock. Full-opacity premultiplied paint blending and bounded pair-specific UV
+deformation preserve detail through each interval. Gaussian splats add localized
+moving fringes, with protected face/ground edges; they no longer replace the
+whole body at every midpoint. Stable full-resolution keys have no added pauses.
 The shared batch sorts between the at-most-two admitted paint planes; remove
 its local transparent sorter on retirement. Full raster keys need no Spark
 sort while held. Native transition/depth and comparable frame/input checks

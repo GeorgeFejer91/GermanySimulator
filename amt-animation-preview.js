@@ -1,6 +1,6 @@
 import * as THREE from 'three';
-import {createAmtSplatOwner} from './buergeramt-splat.js?v=20261009-anchor2';
-import {createGaussianActor,sampleArc} from './buergeramt-gaussian-animation.js?v=20261009-anchor2';
+import {createAmtSplatOwner} from './buergeramt-splat.js?v=20261009-flow1';
+import {createGaussianActor,sampleArc} from './buergeramt-gaussian-animation.js?v=20261009-flow1';
 import {prepareWithSegments,measureLineStats,measureNaturalWidth} from './assets/vendor/pretext/dist/layout.js';
 const $=id=>document.getElementById(id),params=new URLSearchParams(location.search);
 const names={knick:'Frau Knick',aktenkurier:'Aktenkurier',archivbotin:'Archivbotin',formularsammler:'Formularsammler',nummernfluesterer:'Nummernflüsterer',nachtschichtmelderin:'Nachtschichtmelderin',pfandarchitektin:'Pfandarchitektin',kopiependler:'Kopiependler',warteschlangenpoetin:'Warteschlangenpoetin'};

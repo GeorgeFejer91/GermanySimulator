@@ -111,24 +111,75 @@ their own painted region, preventing detached fade trails while leaving visible
 anchor paint exact. Correspondence and texture smoothing
 cannot invent an occluded hand or replace a missing action painting.
 
-The 2026-10-09 anchor handoff restores each authored painting at native
-resolution, including every intermediate key. `buergeramt-painted-anchor.js`
-keeps up to three adjacent runtime WebPs per admitted actor; it does not request
-authoring files or load the entire cast's paintings. A 32×32 painted plane
-follows the same adjacent landmark poses through weighted local-similarity
-deformation, retaining source texture detail during ordinary motion. At the
-interval midpoint, a 90ms smooth overlap on each side (bounded to 45% of the
-interval) hands paint through the single Gaussian bridge and switches the
-source texture while its opacity is zero. Exact keys retain their original
-pixels and geometry. This changes rendering weights, never action time:
-there are no added holds or phase resets. The brief splat handoff is softer
-than the painting; correspondence cannot invent missing texture or occlusion.
-Speech retains its small local deformation and tint/breath. Keep two or three
-approved painted inbetweens between ordinary main poses; retain Knick's denser
-stamp and paper-fold keys. Splats smooth adjacent anchor changes rather than
-substituting for missing authored poses.
+The 2026-10-09 continuity repair keeps a native painted body visible throughout
+each interval. The former 90ms-per-side full-body paint→cloud→paint handoff
+caused repeated sharpness/contrast pulses in natural autoplay, especially the
+short stamp segments. `buergeramt-painted-anchor.js` now maps both adjacent
+paintings into their shared moving pose on one 32×32 plane and blends their
+premultiplied linear-light texture over the entire interval. Plane opacity is
+always one; exact keys recover the authored texture and registration. An
+independent similarity around the eyes protects face identity from hand motion.
+Each pair has a constant `paint_warp_gain`, audited against sampled UV triangle
+orientation and reduced by a margin; Knick's crossing-hand fold interval uses
+the tightest bound. The authoring gain table is in the existing Gaussian source
+folder and the existing builder copies it into runtime manifests. The sampled
+orientation audit is not a topology or anatomical proof.
 
-For this anchor repair, three cold-context runs per viewport on Chrome 154 /
+Gaussian splats remain deliberately uncanny: a smooth `0.75 × sin²(πu)`
+envelope adds small flowing displacement and wider fringes around moving paint,
+while protecting the face and ground edge. It reaches zero at the stable keys;
+there is no whole-body representation swap or extra animation clock. The core
+painting preserves coverage, though mismatched silhouettes can still show a
+bounded double exposure. Inspect crossings and props in motion; correspondence
+cannot invent an occluded hand. Keep two or three approved painted inbetweens
+between ordinary main poses and Knick's denser stamp/fold keys. Transition keys
+have no scheduled holds or phase resets. Speech keeps its existing local cue.
+
+The first adjacent image pair decodes sequentially inside the existing actor
+preparation job; only the third neighboring key uses the shared prefetch queue.
+Explicit arc direction handles reverse actions and loop wrap without treating
+an index wrap as a reversal. At most three bitmaps/textures and one pending
+image job reside per actor. A delayed neighbor leaves the available painting
+intact rather than stretching it; it is a readiness fallback, not motion proof.
+No authoring files or full-cast image preload enter the game.
+
+Staged evidence is retained under `output/amt-gaussian-arcs/`: the paint-only
+prototype, localized-fringe prototype, and final bounded warp each have native
+motion captures. Final normal autoplay sampled 514 Aktenkurier and 310 natural
+Knick stamp states with paint opacity exactly one, no invisible actor samples
+and no page/HTTP errors. Consecutive frames, all nine key/midpoint loops and the
+production dialogue/return/walk/replay checks are separate from the CPU audit.
+The intended mild trailing/double-exposure effect remains; the old deliberate
+full-body sharp→soft→sharp pulse is removed.
+
+The continuity repair's three cold-context runs per viewport on Chrome 154 /
+Intel Iris Xe D3D11 kept median active-dialogue frame p95 at 21.0 ms desktop
+and 20.9 ms Android browser emulation. All nine inputs were accepted in each
+run. Median input p95 was 17.1→13.8 ms desktop and 46.6→54.8 ms emulation;
+the final emulated runs ranged 17.5–57.5 ms. These scheduling samples are local
+lab diagnostics, not GPU timings or a physical-device performance claim.
+Median cold office transfer was 28.83→29.07 MB desktop and 16.14→16.42 MB
+emulation. Animation transfer along the sampled dialogue route increased
+4.27→5.65 MB and 2.56→3.73 MB because the next key is prefetched to avoid a
+late handoff. Final sampled texture counts were 56–57 desktop and 49 mobile,
+with the existing three-key cache, two/one actor and 1.6 MP buffer limits held.
+No new artwork, Gaussian records or runtime dependency was added. Baseline
+overrides include the old paint helper at `e369828`, not just its importing
+actor. Evidence: `flow-benchmark-before/after`, `flow-benchmark-summary.json`,
+`flow-dynamic`, `flow-physics-review`, and `flow-camera-review` under the same
+ignored output folder. Physical Android remains NOT RUN.
+
+Independent Physics and Camera review passed the same 22-file frozen renderer
+candidate. Camera's fresh normal-speed captures cover all nine loops and their
+seams, including a focused Nachtschichtmelderin wrap from 3.992 to 0.005 seconds.
+Desktop and Android-emulated ±45° views, opaque office wall/counter occlusion,
+and mixed two-actor paint/cloud ordering passed without page, HTTP or shader
+compilation errors. Gradual local hand/paper/hem trails remain as the requested
+trippy style; they do not waive anatomy, topology, or full-body opacity faults.
+The release regression suite passed 155 checks. Its subtitle validator was
+updated to the already-shipped audio-library version 5; no voice content changed.
+
+For the earlier native-anchor release, three cold-context runs per viewport on Chrome 154 /
 Intel Iris Xe D3D11 measured median active-dialogue frame p95 of 20.9 ms both
 before and after on desktop 1280×800, and 21.0→20.9 ms at 390×844 browser
 emulation. All nine test inputs were accepted per run; median input p95 was
@@ -146,6 +197,8 @@ paint/cloud ordering. All nine preview loops were sampled at their original
 keys and handoffs. Reciprocal overlapping paint/cloud and simultaneous partial
 fades were also checked in an isolated two-character production-renderer
 fixture; those forced samples are not natural mission playthroughs.
+Those earlier paused/forced samples did not detect the autoplay opacity pulse;
+the continuity repair adds consecutive natural-motion review for that defect.
 
 `buergeramt-gaussian-scene.js` admits nearby actions through the existing
 two-job asset queue, with at most two desktop actors or one mobile actor. It
