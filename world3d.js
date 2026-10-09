@@ -1037,10 +1037,13 @@ function showRendererFailure(error){
   let amtQrSource="";
   function setAmtQr(svg){if(!svg||svg===amtQrSource)return;amtQrSource=svg;const picture=new Image();picture.onload=()=>{qrCtx.fillStyle="#f6f3e9";qrCtx.fillRect(0,0,256,256);qrCtx.drawImage(picture,0,0,256,256);qrTexture.needsUpdate=true};picture.src="data:image/svg+xml;charset=utf-8,"+encodeURIComponent(svg)}
   const amtCharacters=[],amtTextureLoader=new T.TextureLoader(),amtMobile=matchMedia("(max-width: 700px)").matches;
-  function amtPaintMaterial(){
+  function amtPaintMaterial(height){
     const material=new T.MeshBasicMaterial({transparent:true,alphaTest:.035,depthWrite:false,side:T.DoubleSide});
     const breath={value:0};material.userData.breath=breath;
-    material.onBeforeCompile=shader=>{shader.uniforms.amtBreath=breath;
+    material.onBeforeCompile=shader=>{shader.uniforms.amtBreath=breath;shader.uniforms.amtBodyHeight={value:height};
+      // Continuous chest/shoulder motion, with the lower body and sole pivot planted.
+      shader.vertexShader="uniform float amtBreath;\nuniform float amtBodyHeight;\n"+shader.vertexShader.replace("#include <begin_vertex>",
+        "#include <begin_vertex>\nfloat amtUpper=smoothstep(-amtBodyHeight*.42,amtBodyHeight*.1,position.y);transformed.y+=.008*amtBreath*amtUpper;transformed.x*=1.+.006*amtBreath*amtUpper;");
       shader.fragmentShader=shader.fragmentShader.replace("#include <map_fragment>",
         "#include <map_fragment>\nfloat amtLightness=dot(diffuseColor.rgb,vec3(.2126,.7152,.0722));diffuseColor.rgb=mix(vec3(amtLightness),diffuseColor.rgb,1.085+.055*amtBreath)*(1.015+.035*amtBreath);");
       shader.fragmentShader="uniform float amtBreath;\n"+shader.fragmentShader;
@@ -1068,7 +1071,7 @@ function showRendererFailure(error){
     const performance=name==="clerk";
     const url=`./assets/buergeramt/characters/${performance?"clerk-performance":name}${amtMobile?"-mobile":""}.webp?v=20261007-amt-performance`;
     const geometry=new T.PlaneGeometry(height*192/416,height),uv=geometry.attributes.uv,base=Float32Array.from(uv.array);
-    const mesh=new T.Mesh(geometry,amtPaintMaterial());
+    const mesh=new T.Mesh(geometry,amtPaintMaterial(height));
     mesh.position.set(x,height/2,z);amtScene.add(mesh);
     amtCharacters.push({name,url,mesh,uv,base,phase,frame:-1,renderKey:"",performance,lead:performance&&x===3.9,mood:0,...identity});
   }
@@ -1083,7 +1086,7 @@ function showRendererFailure(error){
                             ["nummernfluesterer",1.84],["nachtschichtmelderin",1.8],["pfandarchitektin",1.72],
                             ["kopiependler",1.84],["warteschlangenpoetin",1.83]]){
     const geometry=new T.PlaneGeometry(height*320/416,height),uv=geometry.attributes.uv,base=Float32Array.from(uv.array);
-    const mesh=new T.Mesh(geometry,amtPaintMaterial());
+    const mesh=new T.Mesh(geometry,amtPaintMaterial(height));
     mesh.visible=false;amtScene.add(mesh);
     const walkFrames=["aktenkurier","archivbotin"].includes(id)?16:8;
     amtMoving.push({id,height,mesh,uv,base,walkFrames,cell:-1,renderKey:"",mood:0});
@@ -1136,6 +1139,7 @@ function showRendererFailure(error){
   }
   function animateAmtCharacters(now,level){
     for(const actor of amtCharacters){
+      actor.mesh.rotation.y=Math.atan2(amtCamera.position.x-actor.mesh.position.x,amtCamera.position.z-actor.mesh.position.z);
       const frame=actor.performance?actor.lead?level.clerkPerformance.row*8+level.clerkPerformance.frame:Math.floor(now/250+actor.phase*8)%8:Math.floor(now/1000*24+actor.phase*24)%64;
       actor.frame=frame;
       const distance=Math.hypot(amtCamera.position.x-actor.mesh.position.x,amtCamera.position.z-actor.mesh.position.z),close=distance<4.5;
@@ -1155,11 +1159,11 @@ function showRendererFailure(error){
       }
       const breath=Math.sin(now/1900+actor.phase*3)*.78+Math.sin(now/3300+actor.phase*5)*.22;
       actor.mesh.material.userData.breath.value=breath;
-      const stretch=detailed?1+.0025*breath:1;
-      actor.mesh.scale.set(1,stretch,1);actor.mesh.position.y=actor.mesh.geometry.parameters.height*stretch/2;
+      actor.mesh.scale.set(1,1,1);actor.mesh.position.y=actor.mesh.geometry.parameters.height/2;
     }
   }
   const amtNeutral=new T.Color(0xffffff),amtTone={dread:new T.Color(0xaeb3c9),warning:new T.Color(0xc7adb8),procedural:new T.Color(0xc0c8c0),relief:new T.Color(0xd6c5a5)};
+  function amtSnapshot(actor){return {rotation:actor.mesh.rotation.y,height:actor.mesh.geometry.parameters.height,foot:actor.mesh.position.y-actor.mesh.geometry.parameters.height/2,direction:actor.direction,renderKey:actor.renderKey,ground:[actor.mesh.position.x,actor.mesh.position.z]}}
   let lastAmtRender=performance.now();
   function animateAmtMoving(now,level){
     const dt=Math.min(.1,Math.max(0,(now-lastAmtRender)/1000));lastAmtRender=now;
@@ -1172,12 +1176,18 @@ function showRendererFailure(error){
       const distance=Math.hypot(amtCamera.position.x-state.x,amtCamera.position.z-state.z),close=distance<5;
       if(close&&!actor.detail){const url=`./assets/buergeramt/characters/${actor.id}-detail.webp?v=20261007-paint-detail`;
         actor.detail=amtTexture(url,undefined,error=>console.warn("Bürgeramt detail unavailable",actor.id,error));}
-      const row=state.mode==="walk"?({down:0,right:1,up:2,left:3}[state.direction]??0):({work:4,gesture:5,look:6,flinch:7}[state.mode]??4);
-      if(close&&row<4&&actor.walkDirection!==state.direction){
+      const omen=level.omen,facePlayer=actor.id==="aktenkurier"&&["approach","blackout","glare"].includes(omen.phase);
+      const heading=state.heading??({down:0,right:Math.PI/2,up:Math.PI,left:-Math.PI/2}[state.direction]||0);
+      const relative=Math.atan2(Math.sin(heading-actor.mesh.rotation.y),Math.cos(heading-actor.mesh.rotation.y));
+      const direction=facePlayer?"down":["down","right","up","left"][(Math.round(relative/(Math.PI/2))+4)%4];
+      actor.direction=direction;
+      const walking=state.mode==="walk"&&(["outside","walk-sign","waiting","walk-counter"].includes(level.stage)||facePlayer);
+      const row=walking?({down:0,right:1,up:2,left:3}[direction]??0):({work:4,gesture:5,look:6,flinch:7}[state.mode]??4);
+      if(close&&row<4&&actor.walkDirection!==direction){
         if(actor.walkDetail){if(actor.mesh.material.map===actor.walkDetail){actor.mesh.material.map=actor.atlas;actor.mesh.material.needsUpdate=true}actor.walkDetail.dispose()}
-        actor.walkDirection=state.direction;
+        actor.walkDirection=direction;
         const smallDetail=amtMobile&&(window.devicePixelRatio||1)<1.5&&actor.walkFrames===16;
-        const url=`./assets/buergeramt/characters/${actor.id}-walk-${state.direction}-detail${smallDetail?"-mobile":""}.webp?v=20261008-dense-walk`;
+        const url=`./assets/buergeramt/characters/${actor.id}-walk-${direction}-detail${smallDetail?"-mobile":""}.webp?v=20261008-dense-walk`;
         actor.walkDetail=amtTexture(url,undefined,error=>console.warn("Bürgeramt walk detail unavailable",actor.id,error));
       }
       // The simulation's distance clock keeps its cadence and action boundaries.
@@ -1186,7 +1196,7 @@ function showRendererFailure(error){
       const cell=row<4?row*actor.walkFrames+sample:4*actor.walkFrames+(row-4)*8+sample;
       actor.cell=cell;
       const actionDetail=close&&row>=4&&!!actor.detail?.image;
-      const walkDetail=close&&row<4&&actor.walkDirection===state.direction&&!!actor.walkDetail?.image;
+      const walkDetail=close&&row<4&&actor.walkDirection===direction&&!!actor.walkDetail?.image;
       const texture=actionDetail?actor.detail:walkDetail?actor.walkDetail:actor.atlas;
       if(texture&&actor.mesh.material.map!==texture){actor.mesh.material.map=texture;actor.mesh.material.needsUpdate=true}
       const key=actionDetail?`detail:${row}`:walkDetail?`walk:${row}:${sample}`:`atlas:${cell}`;
@@ -1197,8 +1207,7 @@ function showRendererFailure(error){
       }
       if(distance>7){actor.walkDetail?.dispose();actor.walkDetail=null;actor.walkDirection="";actor.detail?.dispose();actor.detail=null}
       actor.mesh.material.userData.breath.value=Math.sin(now/1750+actor.height*7)*.75+Math.sin(now/2900+actor.height*11)*.25;
-      const stretch=actionDetail?1+.0025*actor.mesh.material.userData.breath.value:1;
-      actor.mesh.scale.y=stretch;actor.mesh.position.y=actor.height*stretch/2;
+      actor.mesh.scale.y=1;actor.mesh.position.y=actor.height/2;
       if(mood?.id===actor.id)actor.tone=mood.tone;
       const target=mood?.id===actor.id?Math.min(.25,.08+Math.abs(mood.valence)*.2):0;
       actor.mood+=(target-actor.mood)*(1-Math.exp(-dt/1.05));
@@ -1384,6 +1393,6 @@ function showRendererFailure(error){
     parkCameraFrame+=(parkTarget-parkCameraFrame)*(1-Math.exp(-6*Math.min(.05,Math.max(0,(now-previousCameraTime)/1000))));previousCameraTime=now;
     if(parkCameraFrame>.001){const narrow=Math.max(0,Math.min(1,.95/camera.aspect-1)),cx=X(park.x+park.w/2),cz=Z(park.y+park.h/2),focus=parkCameraFrame*(1-.65*narrow);camera.position.set(px+(cx-px)*focus,11.5+(5+2*narrow)*parkCameraFrame,pz+14+2*narrow*parkCameraFrame);camera.lookAt(px+(cx-px)*focus,1+parkCameraFrame,pz-2.7+(cz-(pz-2.7))*parkCameraFrame)}
     updateGroupVisibility();updateBuildingOcclusion();updateWirtschaftswunder(now);renderer.render(scene,camera);
-  },inspectAssets,setAmtQr,get amtOmenSplat(){return {visit:amtOmenVisit,loading:!!amtOmenRequest,skipped:amtOmenSkipped,failure:amtOmenFailure,...(amtOmenSplat?.inspect()||{ready:false,visible:false})}},get amtOffice(){return officeDetail?.inspect()||null},get amtCharacters(){return [...amtCharacters.map(actor=>({name:actor.name,frame:actor.frame,loaded:!!actor.mesh.material.map?.image,mapped:!!actor.mesh.material.map,visible:actor.mesh.visible,detail:actor.mesh.material.map===actor.detail,texelHeight:actor.mesh.material.map?.image?.height||0,breath:actor.mesh.material.userData.breath.value})),...amtMoving.map(actor=>({name:actor.id,frame:actor.cell,loaded:!!actor.mesh.material.map?.image,mapped:!!actor.mesh.material.map,visible:actor.mesh.visible,detail:actor.mesh.material.map===actor.detail||actor.mesh.material.map===actor.walkDetail,texelHeight:actor.mesh.material.map?.image?.height||0,breath:actor.mesh.material.userData.breath.value,tint:actor.mesh.material.color.getHexString(),position:[actor.mesh.position.x,actor.mesh.position.z]}))]}};
+  },inspectAssets,setAmtQr,get amtOmenSplat(){return {visit:amtOmenVisit,loading:!!amtOmenRequest,skipped:amtOmenSkipped,failure:amtOmenFailure,...(amtOmenSplat?.inspect()||{ready:false,visible:false})}},get amtOffice(){return officeDetail?.inspect()||null},get amtCharacters(){return [...amtCharacters.map(actor=>({...amtSnapshot(actor),name:actor.name,frame:actor.frame,loaded:!!actor.mesh.material.map?.image,mapped:!!actor.mesh.material.map,visible:actor.mesh.visible,detail:actor.mesh.material.map===actor.detail,texelHeight:actor.mesh.material.map?.image?.height||0,breath:actor.mesh.material.userData.breath.value})),...amtMoving.map(actor=>({...amtSnapshot(actor),name:actor.id,frame:actor.cell,loaded:!!actor.mesh.material.map?.image,mapped:!!actor.mesh.material.map,visible:actor.mesh.visible,detail:actor.mesh.material.map===actor.detail||actor.mesh.material.map===actor.walkDetail,texelHeight:actor.mesh.material.map?.image?.height||0,breath:actor.mesh.material.userData.breath.value,tint:actor.mesh.material.color.getHexString(),position:[actor.mesh.position.x,actor.mesh.position.z]}))]}};
   app.classList.add("three-ready");
 })().catch(showRendererFailure);

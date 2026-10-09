@@ -86,8 +86,8 @@ const characterRoutes=[
  {id:"aktenkurier",speed:.75,points:[[-4.8,-7.6],[-4.8,-5.2],[-2.8,-5.2],[-2.8,-7.6]]},
  {id:"archivbotin",speed:.57,points:[[5.5,-7.4],[5.5,-5.2],[3.6,-5.2],[3.6,-7.4]]},
  {id:"formularsammler",speed:.68,points:[[3.4,3.8],[3.4,2.4],[3.4,-.1],[3.4,-2.4]]},
- {id:"nummernfluesterer",speed:.82,points:[[-3.55,5.7],[-3.55,3.6],[-2.65,3.6],[-2.65,5.7]]},
- {id:"nachtschichtmelderin",speed:.72,points:[[4.75,5.5],[6.0,5.5],[6.0,3.65],[4.75,3.65]]},
+ {id:"nummernfluesterer",speed:.82,points:[[-3.25,4.8],[-3.25,3.6],[-2.65,3.6],[-2.65,4.8]]},
+ {id:"nachtschichtmelderin",speed:.72,points:[[5.2,4.8],[6.0,4.8],[6.0,2.7],[5.2,2.7]]},
  {id:"pfandarchitektin",speed:.48,points:[[-.95,2.65],[-.95,.25],[-.15,.25],[-.15,2.65]]},
  {id:"kopiependler",speed:.78,points:[[2.8,-3.25],[4.85,-3.25],[4.85,-2.35],[2.8,-2.35]]},
  {id:"warteschlangenpoetin",speed:.7,points:[[-4.55,-2.25],[-4.55,-3.55],[-5.55,-3.55],[-5.55,-2.25]]}
@@ -151,12 +151,19 @@ function updateOmen(dt){
 }
 function approachOmen(actor,dt){
  const dx=view.x-actor.x,dz=view.z-actor.z,distance=Math.hypot(dx,dz);
- if(distance<1.72){beginOmen(actor);return}
+ if(distance<1.72&&officeSegmentClear(actor.x,actor.z,view.x,view.z,0)){beginOmen(actor);return}
+ if(!actor.omenGoal){
+  const targets=Array.from({length:16},(_,i)=>[view.x+Math.sin(i*Math.PI/8)*1.68,view.z+Math.cos(i*Math.PI/8)*1.68]);
+  let best=null,bestLength=Infinity;
+  for(const [x,z] of targets){if(!officeSegmentClear(x,z,view.x,view.z,0))continue;const path=officePath(actor,x,z);let length=0,last=[actor.x,actor.z];for(const point of path){length+=Math.hypot(point[0]-last[0],point[1]-last[1]);last=point}if(path.length&&length<bestLength){best=[x,z];bestLength=length}}
+  actor.omenGoal=best;
+  if(!best){omen.phase="";omen.strength=0;actor.priority=0;stopOmenTone();applyMix();setStage(omen.resume);return}
+ }
  const step=Math.min(distance-1.62,.78*dt);
- actor.x+=dx/distance*step;actor.z+=dz/distance*step;actor.stride+=step*8.5;
- actor.direction=Math.abs(dx)>Math.abs(dz)?dx>0?"right":"left":dz>0?"down":"up";actor.mode="walk";
+ const moved=moveOfficeCharacter(actor,...actor.omenGoal,step,dt);
+ if(!moved)actor.mode="work";
 }
-function resetCharacters(){for(const actor of characters){actor.x=actor.route.points[0][0];actor.z=actor.route.points[0][1];actor.target=1;actor.direction="up";actor.mode="work";actor.pause=1.1;actor.stride=0;actor.workClock=0;actor.encounters=0;actor.sequence=[{mode:"work",duration:1.1}];actor.pending=false;actor.priority=0;actor.attention=0}characterMood=null}
+function resetCharacters(){for(const actor of characters){actor.x=actor.route.points[0][0];actor.z=actor.route.points[0][1];actor.target=1;actor.direction="up";actor.heading=Math.PI;actor.mode="work";actor.pause=1.1;actor.stride=0;actor.workClock=0;actor.encounters=0;actor.sequence=[{mode:"work",duration:1.1}];actor.pending=false;actor.priority=0;actor.attention=0;actor.path=[];actor.pathGoal="";actor.omenGoal=null;actor.blockedTime=0;recoverOfficeBody(actor,officeCharacterRadius)}characterMood=null}
 function action(actor,steps,priority=1){
  if(priority<actor.priority||actor.mode==="gesture"&&actor.priority>=3&&priority<3)return;
  actor.sequence=steps.map(([mode,duration])=>({mode,duration}));actor.priority=priority;
@@ -184,6 +191,7 @@ function reactToCall(){
   action(actor,[["look",.78],["flinch",.5],["work",.42]],2)}
 }
 function updateCharacters(dt){
+ if(dt<=1e-9)return;
  for(const actor of characters){
   actor.attention=Math.max(0,actor.attention-dt);
   if(actor.id==="aktenkurier"&&omen.phase==="approach"){approachOmen(actor,dt);continue}
@@ -192,12 +200,9 @@ function updateCharacters(dt){
   if(actor.mode==="gesture")continue;
   if(advanceAction(actor,dt))continue;
   const [tx,tz]=actor.route.points[actor.target],dx=tx-actor.x,dz=tz-actor.z,distance=Math.hypot(dx,dz);
-  if(distance<.025){actor.x=tx;actor.z=tz;actor.target=(actor.target+1)%actor.route.points.length;action(actor,[["work",1.25],["look",.48]],1);officeCue(actor.id,actor.x,actor.z);continue}
-  const step=Math.min(distance,actor.route.speed*dt),nextX=actor.x+dx/distance*step,nextZ=actor.z+dz/distance*step;
-  if(Math.hypot(nextX-view.x,nextZ-view.z)<1.05&&Math.hypot(nextX-view.x,nextZ-view.z)<Math.hypot(actor.x-view.x,actor.z-view.z)||
-     characters.some(other=>other!==actor&&Math.hypot(nextX-other.x,nextZ-other.z)<.65)){if(!actor.pending)actor.sequence=[{mode:"work",duration:.35}];actor.pending=false;startAction(actor);continue}
-  actor.x=nextX;actor.z=nextZ;const oldLoop=Math.floor(actor.stride/8);actor.stride+=step*8.5;
-  actor.direction=Math.abs(dx)>Math.abs(dz)?dx>0?"right":"left":dz>0?"down":"up";actor.mode="walk";
+  if(distance<1e-8){actor.target=(actor.target+1)%actor.route.points.length;action(actor,[["work",1.25],["look",.48]],1);officeCue(actor.id,actor.x,actor.z);continue}
+  const oldLoop=Math.floor(actor.stride/8);
+  if(!moveOfficeCharacter(actor,tx,tz,Math.min(distance,actor.route.speed*dt),dt)){if(!actor.pending)actor.sequence=[{mode:"work",duration:.35}];actor.pending=false;startAction(actor);continue}
   if(actor.pending&&Math.floor(actor.stride/8)>oldLoop){actor.pending=false;startAction(actor)}
   if(actor.attention===0&&Math.hypot(actor.x-view.x,actor.z-view.z)<2.5){actor.attention=7.5;action(actor,[["look",.72],["work",.4]],1)}
  }
@@ -262,15 +267,103 @@ function setStatus(text){status.textContent=text}
 function distanceTo(target){return Math.hypot(view.x-target.x,view.z-target.z)}
 function nearbyTarget(){if(stage==="outside")return door;if(stage==="walk-sign")return sign;return counter}
 const officeSeats=[[-5.9,1.7],[-2.1,1.7],[1.7,1.7],[5.5,1.7],[-5.9,-1.1],[-2.1,-1.1],[1.7,-1.1],[5.5,-1.1]];
-let officeObstacles=[];
+const officeCharacterRadius=.32,officePlayerRadius=.22;
+const officeFurniture=[
+ {x:0,z:-9.03,w:14.7,d:1.21},{x:0,z:-4.22,w:2.8,d:.16},
+ {x:-4.65,z:.8,w:1.5,d:.58},
+ ...[-6.8,6.8].map(x=>({x,z:-4.65,w:.48,d:.4})),
+ ...[-4.2,4.3].map(x=>({x,z:3.6,w:.86,d:.24})),
+ ...[-4.525,4.525].map(x=>({x,z:5.55,w:6.35,d:.16})),
+ ...officeSeats.map(([x,z])=>({x,z,w:.9,d:.76}))
+];
+let officeObstacles=[],officeSolids=officeFurniture,officeNavigation=null;
+function officeSolidBlocked(x,z,radius){
+ return Math.abs(x)>7.62-radius||z< -10.37+radius||z>8.65-radius||
+  officeSolids.some(o=>Math.abs(x-o.x)<o.w/2+radius&&Math.abs(z-o.z)<o.d/2+radius);
+}
+function officeSegmentClear(ax,az,bx,bz,radius,solids=officeSolids){
+ if(officeSolidBlocked(bx,bz,radius))return false;
+ for(const o of solids){
+  let enter=0,leave=1;
+  for(const [start,delta,min,max] of [[ax,bx-ax,o.x-o.w/2-radius,o.x+o.w/2+radius],[az,bz-az,o.z-o.d/2-radius,o.z+o.d/2+radius]]){
+   if(Math.abs(delta)<1e-10){if(start<=min||start>=max){enter=2;break}}
+   else {const a=(min-start)/delta,b=(max-start)/delta;enter=Math.max(enter,Math.min(a,b));leave=Math.min(leave,Math.max(a,b))}
+  }
+  if(enter<leave&&leave>0&&enter<1)return false;
+ }
+ return true;
+}
+function recoverOfficeBody(body,radius){
+ if(!officeSolidBlocked(body.x,body.z,radius))return;
+ const x=Math.max(-7.62+radius,Math.min(7.62-radius,body.x)),z=Math.max(-10.37+radius,Math.min(8.65-radius,body.z));
+ const candidates=[[x,z]];
+ for(const o of officeSolids)if(Math.abs(x-o.x)<o.w/2+radius&&Math.abs(z-o.z)<o.d/2+radius){
+  candidates.push([o.x-o.w/2-radius-.005,z],[o.x+o.w/2+radius+.005,z],[x,o.z-o.d/2-radius-.005],[x,o.z+o.d/2+radius+.005]);
+ }
+ candidates.sort((a,b)=>Math.hypot(a[0]-body.x,a[1]-body.z)-Math.hypot(b[0]-body.x,b[1]-body.z));
+ const legal=candidates.find(([cx,cz])=>!officeSolidBlocked(cx,cz,radius)&&officeSolids.every(o=>
+  Math.abs(body.x-o.x)<o.w/2+radius&&Math.abs(body.z-o.z)<o.d/2+radius||officeSegmentClear(body.x,body.z,cx,cz,radius,[o])));
+ if(legal){body.x=legal[0];body.z=legal[1]}
+}
+function officeCorners(solids){
+ const nodes=[];
+ for(const o of solids)for(const x of [o.x-o.w/2-officeCharacterRadius-.015,o.x+o.w/2+officeCharacterRadius+.015])
+  for(const z of [o.z-o.d/2-officeCharacterRadius-.015,o.z+o.d/2+officeCharacterRadius+.015])
+   if(!officeSolidBlocked(x,z,officeCharacterRadius))nodes.push([x,z]);
+ return nodes;
+}
+function officePath(actor,tx,tz,crowd=false){
+ const extras=crowd?[{x:view.x,z:view.z,w:1.46,d:1.46},...characters.filter(other=>other!==actor).map(other=>({x:other.x,z:other.z,w:.66,d:.66}))]:[];
+ const solids=extras.length?[...officeSolids,...extras]:officeSolids;
+ if(!officeNavigation)officeNavigation=officeCorners(officeSolids);
+ // ponytail: a small visibility graph for this fixed office; no navigation service.
+ const nodes=[[actor.x,actor.z],[tx,tz],...officeNavigation,...officeCorners(extras)],cost=nodes.map(()=>Infinity),previous=nodes.map(()=>-1),visited=new Set();cost[0]=0;
+ while(visited.size<nodes.length){
+  let current=-1;for(let i=0;i<nodes.length;i++)if(!visited.has(i)&&(current<0||cost[i]<cost[current]))current=i;
+  if(current<0||!Number.isFinite(cost[current]))break;
+  if(current===1){const path=[];for(let i=1;i>0;i=previous[i])path.unshift(nodes[i]);return path}
+  visited.add(current);
+  for(let i=1;i<nodes.length;i++)if(!visited.has(i)&&officeSegmentClear(...nodes[current],...nodes[i],officeCharacterRadius,solids)){
+   const side=(nodes[i][0]-actor.x)*-(tz-actor.z)+(nodes[i][1]-actor.z)*(tx-actor.x);
+   const next=cost[current]+Math.hypot(nodes[i][0]-nodes[current][0],nodes[i][1]-nodes[current][1])+(current===0&&crowd&&side<0?.025:0);
+   if(next<cost[i]){cost[i]=next;previous[i]=current}
+  }
+ }
+ return [];
+}
+function officePeopleClear(actor,x,z){
+ const clear=(other,gap)=>{
+  const dx=x-actor.x,dz=z-actor.z,length=dx*dx+dz*dz,t=length?Math.max(0,Math.min(1,((other.x-actor.x)*dx+(other.z-actor.z)*dz)/length)):0;
+  const before=Math.hypot(actor.x-other.x,actor.z-other.z),after=Math.hypot(x-other.x,z-other.z);
+  return before<gap?after>before:Math.hypot(actor.x+dx*t-other.x,actor.z+dz*t-other.z)>=gap;
+ };
+ return clear(view,1.05)&&characters.every(other=>other===actor||clear(other,.65));
+}
+function moveOfficeCharacter(actor,tx,tz,budget,dt){
+ if(budget<=0)return false;
+ const goal=tx.toFixed(3)+":"+tz.toFixed(3);
+ if(actor.pathGoal!==goal||!actor.path?.length){actor.path=officeSegmentClear(actor.x,actor.z,tx,tz,officeCharacterRadius)?[[tx,tz]]:officePath(actor,tx,tz);actor.pathGoal=goal}
+ if(actor.blockedTime>=.35){actor.path=officePath(actor,tx,tz,true);actor.blockedTime=0}
+ let moved=0;
+ while(budget>1e-9&&actor.path.length){
+  const [px,pz]=actor.path[0],dx=px-actor.x,dz=pz-actor.z,distance=Math.hypot(dx,dz);
+  if(distance<1e-9){actor.path.shift();continue}
+  const step=Math.min(budget,distance,.08),x=actor.x+dx/distance*step,z=actor.z+dz/distance*step;
+  if(!officeSegmentClear(actor.x,actor.z,x,z,officeCharacterRadius)||!officePeopleClear(actor,x,z))break;
+  actor.x=x;actor.z=z;actor.heading=Math.atan2(dx,dz);actor.direction=Math.abs(dx)>Math.abs(dz)?dx>0?"right":"left":dz>0?"down":"up";
+  actor.stride+=step*8.5;moved+=step;budget-=step;
+ }
+ actor.blockedTime=moved?0:(actor.blockedTime||0)+dt+.35;actor.mode=moved?"walk":"work";
+ return moved>0;
+}
 function officeBlocked(x,z){
- if(z < -8.32 || Math.abs(x)<1.62&&Math.abs(z+4.22)<.34)return true;
- if(Math.abs(x+4.65)<1.05&&Math.abs(z-.8)<.58)return true;
- if(Math.abs(x)>6.35&&Math.abs(z+4.65)<.46)return true;
- if((Math.abs(x+4.2)<.65||Math.abs(x-4.3)<.65)&&Math.abs(z-3.6)<.24)return true;
- if(officeObstacles.some(o=>Math.abs(x-o.x)<o.w/2+.22&&Math.abs(z-o.z)<o.d/2+.22))return true;
- if(characters.some(actor=>Math.hypot(x-actor.x,z-actor.z)<.72))return true;
- return officeSeats.some(([sx,sz])=>Math.abs(x-sx)<.62&&Math.abs(z-sz)<.58);
+ return officeSolidBlocked(x,z,officePlayerRadius)||characters.some(actor=>Math.hypot(x-actor.x,z-actor.z)<.72);
+}
+function setOfficeObstacles(items){
+ officeObstacles=Array.isArray(items)?items.filter(o=>[o.x,o.z,o.w,o.d].every(Number.isFinite)&&o.w>0&&o.d>0):[];
+ officeSolids=[...officeFurniture,...officeObstacles];officeNavigation=null;
+ for(const actor of characters){actor.path=[];actor.pathGoal="";actor.omenGoal=null;recoverOfficeBody(actor,officeCharacterRadius)}
+ if(active)recoverOfficeBody(view,officePlayerRadius);
 }
 function forfeit(reason){if(!active||!activated||["cancelled","expired","closed"].includes(stage))return;activated=false;callPending=false;callOutcome="forfeit";stopCallSignal();if(omen.phase){stopOmenTone();omen.phase="";omen.strength=0;const actor=characters[0];actor.priority=0;actor.mode="walk";actor.sequence=[];applyMix()}link?.send("forfeit");exit.hidden=false;setStage("expired");setStatus("PLATZ VERFALLEN · "+reason);content("ANMELDESCHALTER","Das Telefon war nicht durchgehend erreichbar. Ihre Nummer ist gestrichen. Scannen Sie das Schild erneut.",[{label:"ZURÜCK ZUM QR-SCHILD",run:()=>setStage("walk-sign")},{label:"AMT VERLASSEN",run:()=>{close(false);options.onCancel()}}])}
 function ring(){try{const audio=initOfficeAudio();if(!audio)return;const {ctx,fx}=audio,now=ctx.currentTime;for(const offset of [0,.2,.52,.72]){const osc=ctx.createOscillator(),gain=ctx.createGain();osc.type="sine";osc.frequency.value=425;gain.gain.setValueAtTime(.0001,now+offset);gain.gain.linearRampToValueAtTime(.014,now+offset+.015);gain.gain.setValueAtTime(.014,now+offset+.1);gain.gain.exponentialRampToValueAtTime(.0001,now+offset+.15);osc.connect(gain).connect(fx);osc.onended=()=>{osc.disconnect();gain.disconnect()};osc.start(now+offset);osc.stop(now+offset+.16)}}catch{}}
@@ -447,5 +540,5 @@ document.addEventListener("visibilitychange",()=>{if(document.hidden)held.clear(
 document.addEventListener("pointermove",event=>{if(active&&walking()&&!omen.phase&&event.buttons===1&&!event.target.closest("button"))view.yaw+=event.movementX*.004});
 document.querySelectorAll("[data-amt-key]").forEach(button=>{const key=button.dataset.amtKey;button.addEventListener("pointerdown",e=>{if(!active||!walking()||omen.phase)return;e.preventDefault();button.setPointerCapture(e.pointerId);held.add(key)});for(const type of ["pointerup","pointercancel","lostpointercapture"])button.addEventListener(type,()=>held.delete(key))});
 document.getElementById("amt-touch-e").addEventListener("click",interact);document.getElementById("amt-leave").addEventListener("click",()=>close());exit.addEventListener("click",()=>close());
-window.BuergeramtLevel={open,replay(config){close(false);open(config)},update,interact,setOfficeObstacles(items){officeObstacles=Array.isArray(items)?items.filter(o=>[o.x,o.z,o.w,o.d].every(Number.isFinite)&&o.w>0&&o.d>0):[]},get active(){return active},get stage(){return stage},get queueDisplay(){return queueDisplay},get qrSvg(){return qrSvg},get phoneUrl(){return link?BuergeramtLink.phoneUrl(link.invitation,options.subtitlesOn?.()):""},get timing(){return JSON.parse(JSON.stringify(timing))},get view(){return{x:view.x,z:view.z,yaw:view.yaw}},get characters(){return characters.map(actor=>({id:actor.id,x:actor.x,z:actor.z,direction:actor.direction,mode:actor.mode,phase:characterPhase(actor),frame:Math.min(7,Math.floor(characterPhase(actor)*8))}))},get characterMood(){return characterMood},get clerkPerformance(){return clerkPerformance()},get omen(){return{phase:omen.phase,strength:omen.strength,visit:omen.visit,revealTime:omen.revealTime,enabled:options?.cinematics!==false,x:characters[0].x,z:characters[0].z,speech:omen.speech?{...omen.speech}:null}},get registeredName(){return registeredName},get activated(){return activated}};
+window.BuergeramtLevel={open,replay(config){close(false);open(config)},update,interact,setOfficeObstacles,get active(){return active},get stage(){return stage},get queueDisplay(){return queueDisplay},get qrSvg(){return qrSvg},get phoneUrl(){return link?BuergeramtLink.phoneUrl(link.invitation,options.subtitlesOn?.()):""},get timing(){return JSON.parse(JSON.stringify(timing))},get view(){return{x:view.x,z:view.z,yaw:view.yaw}},get characters(){return characters.map(actor=>({id:actor.id,x:actor.x,z:actor.z,direction:actor.direction,heading:actor.heading,mode:actor.mode,phase:characterPhase(actor),frame:Math.min(7,Math.floor(characterPhase(actor)*8))}))},get characterMood(){return characterMood},get clerkPerformance(){return clerkPerformance()},get omen(){return{phase:omen.phase,strength:omen.strength,visit:omen.visit,revealTime:omen.revealTime,enabled:options?.cinematics!==false,x:characters[0].x,z:characters[0].z,speech:omen.speech?{...omen.speech}:null}},get registeredName(){return registeredName},get activated(){return activated}};
 })();
