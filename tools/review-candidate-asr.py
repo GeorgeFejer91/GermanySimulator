@@ -38,8 +38,34 @@ def word_score(expected: str, decoded: str) -> int:
         "fünfzig": "50", "sechzig": "60", "siebzig": "70",
         "achtzig": "80", "neunzig": "90",
     }
+    for tens, spelling in ((20, "zwanzig"), (30, "dreißig"),
+                           (40, "vierzig"), (50, "fünfzig"),
+                           (60, "sechzig"), (70, "siebzig"),
+                           (80, "achtzig"), (90, "neunzig")):
+        for unit, stem in ((1, "ein"), (2, "zwei"), (3, "drei"),
+                           (4, "vier"), (5, "fünf"), (6, "sechs"),
+                           (7, "sieben"), (8, "acht"), (9, "neun")):
+            number_words[stem + "und" + spelling] = str(tens + unit)
+
+    def clock_text(value: str) -> str:
+        # A script clock time can be written 07:04, while ASR writes 7.04 Uhr
+        # or 7 Uhr vier. Preserve every other number, including legal citations.
+        value = value.casefold()
+        value = re.sub(
+            r"(?<!\w)(\d{1,2})[:.](\d{2})(?:\s+uhr)?\b",
+            lambda match: f"clock{int(match.group(1))}minute{int(match.group(2))}", value)
+
+        def spoken_clock(match: re.Match[str]) -> str:
+            minute = number_words.get(match.group(2), match.group(2))
+            if minute.isdigit() and int(minute) < 60:
+                return f"clock{int(match.group(1))}minute{int(minute)}"
+            return match.group(0)
+
+        return re.sub(r"(?<!\w)(\d{1,2})\s+uhr\s+(\d{1,2}|[a-zäöüß]+)\b",
+                      spoken_clock, value)
 
     def tokens(value: str, join_hyphens: bool) -> list[str]:
+        value = clock_text(value)
         if join_hyphens:
             value = re.sub(r"(?<=\w)[-‐‑–](?=\w)", "", value)
         return [number_words.get(word, word) for word in re.findall(r"\w+", value.casefold())]
@@ -118,9 +144,9 @@ def main() -> None:
     if len(manifest["clips"]) != manifest["lineCount"] or len({clip["clipId"] for clip in manifest["clips"]}) != manifest["lineCount"]:
         raise RuntimeError("Candidate manifest count or IDs are inconsistent")
     metadata = {"schemaVersion": 1, "status": "diagnostic_only; human_listening_pending",
-                "note": "German-pinned retranscription of existing encoded MP3s; score equates limited written German number words with digits and exact split/joined compounds. Original manifest ASR and file hashes stay unchanged.",
+                "note": "German-pinned retranscription of existing encoded MP3s; score equates written German number words (0-99), common clock-time notations, and exact split/joined compounds. Original manifest ASR and file hashes stay unchanged.",
                 "manifestSha256": digest(manifest_path), "asrLanguageHint": "de",
-                "wordScorerVersion": "de-written-number-compound-v2",
+                "wordScorerVersion": "de-written-number-clock-compound-v3",
                 "asrBinarySha256": asr_hash, "whisperModel": "whisper-large-v3-turbo-q4_0.gguf",
                 "whisperModelSha256": model_hash,
                 "whisperConfigSha256": model_config_hash,
