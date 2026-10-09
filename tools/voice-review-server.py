@@ -1,4 +1,4 @@
-"""Local listening queue for the 223 GermanySimulator candidate MP3s.
+"""Local listening queue for the 236 GermanySimulator candidate MP3s.
 
 Run: python tools/voice-review-server.py --music-root "<German emotional voice databases>"
 The printed loopback URL has a per-run token. Nothing is approved automatically.
@@ -22,6 +22,7 @@ from urllib.parse import parse_qs, urlsplit
 
 GAME = Path(__file__).resolve().parents[1]
 QUEUE_NAME = "VOICE-CANDIDATE-REVIEW-QUEUE.csv"
+FIRST_REVIEW_NAME = "VOICE-FIRST-REVIEW-53.csv"
 MANIFEST = GAME / "assets/voices/candidate-dialogue/manifest.json"
 DECISIONS = (
     "heardWords", "speakerIdentityFits", "demeanorFits", "intonationFits",
@@ -64,6 +65,26 @@ def load_queue(path):
                             ("script", "text"), ("mp3Sha256", "sha256"))):
             raise ValueError(f"Review queue provenance changed: {row['clipId']}")
     return raw, fields, rows
+
+
+def first_review_ids(music, rows):
+    path = music / FIRST_REVIEW_NAME
+    if not path.is_file():
+        return set()
+    with path.open("r", encoding="utf-8-sig", newline="") as stream:
+        selected = list(csv.DictReader(stream))
+    current = {row["clipId"]: row for row in rows}
+    if len(selected) != 53 or len({row["clipId"] for row in selected}) != 53 or \
+            len({row["voiceId"] for row in selected}) != 53:
+        raise ValueError("First-review shortlist must contain 53 distinct speakers and clips")
+    for row in selected:
+        saved = current.get(row["clipId"])
+        if not saved or any(row[key] != saved[other] for key, other in (
+                ("voiceId", "voiceId"), ("profileId", "profileId"),
+                ("script", "script"), ("normalizedSha256", "normalizedSha256"),
+                ("originalMp3Sha256", "mp3Sha256"))):
+            raise ValueError(f"First-review shortlist is stale: {row['clipId']}")
+    return {row["clipId"] for row in selected}
 
 
 def row_version(row):
@@ -165,6 +186,7 @@ def make_handler(music, token, queue_path):
             if parts.path == "/api/rows":
                 try:
                     _, _, rows = load_queue(queue_path)
+                    first_review = first_review_ids(music, rows)
                     clips = {clip["clipId"]: clip for clip in json.loads(MANIFEST.read_text(encoding="utf-8"))["clips"]}
                     cast = json.loads((GAME / "For-AI/VOICE-CAST.json").read_text(encoding="utf-8"))
                     people = {person["voiceId"]: person for group in ("characters", "roleProfiles", "existingAssetProfiles")
@@ -173,7 +195,8 @@ def make_handler(music, token, queue_path):
                     for row in rows:
                         clip = clips[row["clipId"]]
                         person = people[row["voiceId"]]
-                        enriched.append(dict(row, reviewVersion=row_version(row), renderer=clip["renderer"],
+                        enriched.append(dict(row, reviewVersion=row_version(row), firstReview=row["clipId"] in first_review,
+                                             renderer=clip["renderer"],
                                              modelLicense=clip["modelLicense"],
                                              referenceDataset=person.get("reference", {}).get("dataset", "Saved source clips"),
                                              referenceLicense=person.get("reference", {}).get("releaseLicense", person.get("sourceLicense", "unknown"))))

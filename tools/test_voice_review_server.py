@@ -21,6 +21,8 @@ parser.add_argument("--music-root", type=Path, required=True)
 music = parser.parse_args().music_root.resolve(strict=True)
 source = music / review.QUEUE_NAME
 raw, _, rows = review.load_queue(source)
+with tempfile.TemporaryDirectory(prefix="voice-review-no-shortlist-") as empty_music:
+    assert review.first_review_ids(Path(empty_music), rows) == set()
 fd, temporary = tempfile.mkstemp(prefix=".voice-review-test-", suffix=".csv", dir=ROOT / "tools")
 assert Path(temporary).resolve().parent == (ROOT / "tools").resolve()
 try:
@@ -48,7 +50,11 @@ try:
 
     try:
         status, body = request("/api/rows")
-        assert status == 200 and len(json.loads(body)["rows"]) == len(rows)
+        served = json.loads(body)["rows"]
+        assert status == 200 and len(served) == len(rows)
+        first_pass = [row for row in served if row["firstReview"]]
+        assert len(first_pass) == 53 and len({row["voiceId"] for row in first_pass}) == 53
+        assert any(row["clipId"] == "polizei-heinrich-wachtmeister-02" for row in first_pass)
         first = rows[0]
         status, audio = request(f"/audio/{first['clipId']}/normalized")
         assert status == 200 and review.sha256(audio) == first["normalizedSha256"]
@@ -73,7 +79,8 @@ try:
         status, _ = request("/api/save", payload)
         assert status == 400
         assert source.read_bytes() == raw, "Real review queue changed"
-        print(json.dumps({"rows": len(rows), "audioHashAndRange": "verified", "localSave": "verified",
+        print(json.dumps({"rows": len(rows), "firstPassSpeakers": len(first_pass),
+                          "audioHashAndRange": "verified", "localSave": "verified",
                           "csrf": "rejected", "staleSave": "rejected", "invalidApproval": "rejected"}))
     finally:
         server.shutdown()

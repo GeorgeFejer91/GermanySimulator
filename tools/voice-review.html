@@ -41,7 +41,7 @@
   <main>
     <div class="toolbar">
       <label><span data-measure>Search name or clip ID</span><input id="search" type="search" autocomplete="off"></label>
-      <label><span data-measure>Show</span><select id="filter"><option value="pending">Pending</option><option value="all">All takes</option><option value="flagged">Score below 100%</option></select></label>
+      <label><span data-measure>Show</span><select id="filter"><option value="first">One per speaker</option><option value="pending">Pending</option><option value="all">All takes</option><option value="flagged">Score below 100%</option></select></label>
       <button id="previous" type="button" data-measure>Previous</button><button id="next" type="button" data-measure>Next</button>
       <button id="reload" type="button" data-measure>Reload queue</button>
     </div>
@@ -107,7 +107,7 @@
     function setApprovalEnabled(){const all=fields.slice(0,-1).every(([key])=>byId(key).value==='yes');const approval=byId('approveForGame');if(!all&&approval.value==='yes'){approval.value='';dirty=true}approval.disabled=!all}
     function refreshFilter(preferred){
       const query=byId('search').value.trim().toLocaleLowerCase('de'),mode=byId('filter').value;
-      const nextVisible=rows.filter(row=>(mode==='all'||mode==='flagged'&&Number(row.normalizedWordPercent)<100||mode==='pending'&&!passes(row))&&
+      const nextVisible=rows.filter(row=>(mode==='all'||mode==='flagged'&&Number(row.normalizedWordPercent)<100||mode==='pending'&&!passes(row)||mode==='first'&&row.firstReview&&!passes(row))&&
         (!query||`${row.speakerName} ${row.clipId} ${row.voiceId}`.toLocaleLowerCase('de').includes(query)));
       if(dirty&&current&&!nextVisible.some(row=>row.clipId===current.clipId)){
         if(!confirm('Discard unsaved review changes?')){setStatus('Save this review before changing to another clip.');return}
@@ -121,7 +121,8 @@
       if(dirty&&!confirm('Discard unsaved review changes?'))return;
       const response=await fetch('/api/rows',{headers:{'X-Review-Token':token}});
       const data=await response.json();if(!response.ok)throw Error(data.error||'Cannot load review queue');
-      rows=data.rows;dirty=false;refreshFilter(preferred);scheduleMeasure();
+      rows=data.rows;if(!rows.some(row=>row.firstReview))byId('filter').value='pending';
+      dirty=false;refreshFilter(preferred);scheduleMeasure();
     }
     async function save(){
       if(!current)return;
