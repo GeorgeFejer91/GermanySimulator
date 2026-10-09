@@ -126,6 +126,13 @@ def main() -> None:
                      "technicalReviewFlags": ";".join(flags)})
     output = args.output_dir.resolve()
     output.mkdir(parents=True, exist_ok=True)
+    diagnostic_path = output / "VOICE-CANDIDATE-GERMAN-ASR-REVIEW.json"
+    diagnostic = json.loads(diagnostic_path.read_text(encoding="utf-8")) if diagnostic_path.is_file() else {}
+    if diagnostic and diagnostic["manifestSha256"] != digest(manifest_path):
+        raise RuntimeError("German ASR diagnostic refers to a different candidate manifest")
+    diagnostic_by_id = {item["clipId"]: item for item in diagnostic.get("clips", [])}
+    if len(diagnostic_by_id) != len(diagnostic.get("clips", [])):
+        raise RuntimeError("Duplicate clip IDs in German ASR diagnostic")
     fields = list(rows[0])
     with (output / "VOICE-CANDIDATE-TECHNICAL-AUDIT.csv").open("w", encoding="utf-8", newline="") as stream:
         writer = csv.DictWriter(stream, fieldnames=fields, lineterminator="\n")
@@ -150,8 +157,18 @@ def main() -> None:
             music_path = str(music_copy.relative_to(output)).replace("\\", "/")
         if not isinstance(clip["asrWordExact"], bool):
             raise RuntimeError(f"Candidate ASR status is not boolean: {clip['clipId']}")
-        priority = "01_word_check" if not clip["asrWordExact"] else (
-            "02_delivery_levels" if measured["technicalReviewFlags"] else "03_full_listening")
+        asr = diagnostic_by_id.get(clip["clipId"])
+        if asr and (asr["audioSha256"] != clip["sha256"] or
+                    asr["profileId"] != clip["profileId"] or asr["script"] != clip["text"]):
+            raise RuntimeError(f"German ASR diagnostic differs from candidate: {clip['clipId']}")
+        if not clip["asrWordExact"] and (not asr or asr["germanPinnedWordPercent"] < 100):
+            priority = "01_word_check"
+        elif not clip["asrWordExact"]:
+            priority = "02_orthography_listen"
+        elif measured["technicalReviewFlags"]:
+            priority = "03_delivery_levels"
+        else:
+            priority = "04_full_listening"
         review.append({"priority": priority, "clipId": clip["clipId"],
                        "speakerName": speaker["fullName"], "voiceId": clip["voiceId"],
                        "profileId": profile_id, "gender": speaker["gender"],
@@ -161,6 +178,8 @@ def main() -> None:
                        "sourceEmotion": source["emotionLabel"],
                        "script": clip["text"], "asrTranscript": clip["asr"],
                        "asrWordExact": clip["asrWordExact"],
+                       "germanPinnedTranscript": asr["germanPinnedTranscript"] if asr else "",
+                       "germanPinnedWordPercent": asr["germanPinnedWordPercent"] if asr else "",
                        "technicalReviewFlags": measured["technicalReviewFlags"],
                        "integratedLufs": measured["integratedLufs"],
                        "truePeakDbtp": measured["truePeakDbtp"],
@@ -175,7 +194,9 @@ def main() -> None:
         with review_path.open(encoding="utf-8", newline="") as stream:
             old_rows = list(csv.DictReader(stream))
         preserve_review_decisions(review, old_rows)
-    review.sort(key=lambda item: (item["priority"], item["voiceId"], item["clipId"]))
+    review.sort(key=lambda item: (item["priority"],
+                                  item["germanPinnedWordPercent"] if item["germanPinnedWordPercent"] != "" else 101,
+                                  item["voiceId"], item["clipId"]))
     with review_path.open("w", encoding="utf-8", newline="") as stream:
         writer = csv.DictWriter(stream, fieldnames=list(review[0]), lineterminator="\n")
         writer.writeheader()
@@ -192,6 +213,10 @@ def main() -> None:
               "loudnessReviewBand": "-20 to -16 LUFS around the foreground target of -18 LUFS",
               "clipCount": len(rows), "speakerCount": len({row["voiceId"] for row in rows}),
               "nonliteralAsrCount": sum(not clip["asrWordExact"] for clip in clips),
+              "germanPinnedDiagnosticCount": len(diagnostic_by_id),
+              "germanPinnedExactCount": sum(item["germanPinnedWordPercent"] == 100
+                                             for item in diagnostic_by_id.values()),
+              "germanPinnedDiagnosticSha256": digest(diagnostic_path) if diagnostic else None,
               "verifiedMusicReviewCopies": sum(bool(row["musicReviewFile"]) for row in review),
               "flagCounts": counts,
               "clipsWithAnyFlag": sum(bool(row["technicalReviewFlags"]) for row in rows),
