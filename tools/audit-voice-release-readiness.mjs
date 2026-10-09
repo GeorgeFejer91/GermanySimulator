@@ -61,6 +61,7 @@ requireMatch(catalog && catalog.candidatePreviewEnabled === false, 'Default cata
 const people = [...cast.characters, ...cast.roleProfiles];
 requireMatch(people.length === cast.totalNewProfileCount && people.length === 56, 'Cast profile count changed');
 const byVoice = new Map(people.map(p => [p.voiceId, p]));
+const existingByVoice = new Map(cast.existingAssetProfiles.map(p => [p.voiceId, p]));
 const byCoverage = new Map(coverage.map(p => [p.voiceId, p]));
 requireMatch(byVoice.size === people.length && byCoverage.size === people.length, 'Duplicate or missing profile IDs');
 requireMatch(candidate.clips.length === candidate.lineCount && review.clips.length === candidate.clips.length,
@@ -97,10 +98,12 @@ for (const recording of Object.values(catalog.recordings)) {
     (defaultCounts.get(recording.voiceId) ?? 0) + 1);
 }
 for (const clip of approved.clips) {
-  requireMatch(byVoice.get(clip.voiceId) && clip.profileId ===
-    (byVoice.get(clip.voiceId).secretTunnel?.profileId ?? byVoice.get(clip.voiceId).secretTunnelProfileId),
+  const person = byVoice.get(clip.voiceId) ?? existingByVoice.get(clip.voiceId);
+  requireMatch(person && clip.profileId ===
+    (person.secretTunnel?.profileId ?? person.secretTunnelProfileId),
   `Approved clip identity mismatch: ${clip.clipId}`);
-  defaultCounts.set(clip.voiceId, (defaultCounts.get(clip.voiceId) ?? 0) + 1);
+  if (byVoice.has(clip.voiceId)) defaultCounts.set(clip.voiceId,
+    (defaultCounts.get(clip.voiceId) ?? 0) + 1);
 }
 const rows = people.map(person => {
   const saved = byCoverage.get(person.voiceId);
@@ -140,6 +143,7 @@ const report = {
   optInCandidateCount: rows.reduce((n, r) => n + r.optInCandidateCount, 0),
   candidateHumanApprovedCount: rows.reduce((n, r) => n + r.candidateHumanApprovedCount, 0),
   normalizedDiagnosticWordExactCount: rows.reduce((n, r) => n + r.normalizedDiagnosticWordExactCount, 0),
+  existingAssetProfileApprovedClipCount: approved.clips.filter(c => existingByVoice.has(c.voiceId)).length,
   rows,
 };
 const output = resolve(music, 'GERMANY-SIMULATOR-VOICE-RELEASE-READINESS.json');

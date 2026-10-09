@@ -57,7 +57,8 @@ const normalized = json(normalizedPath);
 const cast = json(resolve(root, 'For-AI/VOICE-CAST.json'));
 const oldManifest = json(manifestPath);
 requireMatch(normalized.sourceManifestSha256 === hash(candidatePath), 'Normalized source manifest is stale');
-const byVoice = new Map([...cast.characters, ...cast.roleProfiles].map(p => [p.voiceId, p]));
+const byVoice = new Map([...cast.characters, ...cast.roleProfiles, ...cast.existingAssetProfiles]
+  .map(p => [p.voiceId, p]));
 const byQueue = new Map(queue.map(row => [row.clipId, row]));
 const byNormalized = new Map(normalized.copies.map(row => [row.clipId, row]));
 requireMatch(byQueue.size === queue.length && byNormalized.size === normalized.copies.length,
@@ -72,10 +73,12 @@ for (const clip of candidates.clips) {
   const row = byQueue.get(clip.clipId);
   const copy = byNormalized.get(clip.clipId);
   const profileId = person?.secretTunnel?.profileId ?? person?.secretTunnelProfileId;
+  const referenceSha256 = person?.reference?.workingReferenceSha256 ?? person?.referenceSha256;
   requireMatch(person && row && copy && clip.profileId === profileId && row.profileId === profileId &&
     copy.profileId === profileId && row.voiceId === clip.voiceId && copy.voiceId === clip.voiceId &&
     row.script === clip.text && copy.script === clip.text && row.mp3Sha256 === clip.sha256 &&
-    copy.sourceSha256 === clip.sha256 && row.normalizedSha256 === copy.outputSha256,
+    copy.sourceSha256 === clip.sha256 && row.normalizedSha256 === copy.outputSha256 &&
+    clip.referenceSha256 === referenceSha256,
   `Review provenance mismatch: ${clip.clipId}`);
   if (row.approveForGame.trim().toLowerCase() !== 'yes') continue;
   requireMatch(approvalFields.every(field => row[field].trim().toLowerCase() === 'yes'),
@@ -95,8 +98,8 @@ for (const clip of candidates.clips) {
     profileId, text: clip.text, path, sha256: copy.outputSha256,
     sourceCandidateSha256: clip.sha256, sourceReferenceSha256: clip.referenceSha256,
     renderer: clip.renderer, modelRevision: clip.modelRevision, modelLicense: clip.modelLicense,
-    referenceDataset: person.reference?.dataset ?? null,
-    referenceLicense: person.reference?.releaseLicense ?? null,
+    referenceDataset: person.reference?.dataset ?? 'Saved CC0 source voice clips',
+    referenceLicense: person.reference?.releaseLicense ?? person.sourceLicense ?? null,
     humanReviewQueueSha256: hash(queuePath)});
   approvedSourceFiles.push({source, path: within(root, path), sha256: copy.outputSha256});
 }
