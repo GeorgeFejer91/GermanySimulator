@@ -111,73 +111,119 @@ their own painted region, preventing detached fade trails while leaving visible
 anchor paint exact. Correspondence and texture smoothing
 cannot invent an occluded hand or replace a missing action painting.
 
-The 2026-10-09 continuity repair keeps a native painted body visible throughout
-each interval. The former 90ms-per-side full-body paint→cloud→paint handoff
-caused repeated sharpness/contrast pulses in natural autoplay, especially the
-short stamp segments. `buergeramt-painted-anchor.js` now maps both adjacent
-paintings into their shared moving pose on one 32×32 plane and blends their
-premultiplied linear-light texture over the entire interval. Plane opacity is
-always one; exact keys recover the authored texture and registration. An
-independent similarity around the eyes protects face identity from hand motion.
-Each pair has a constant `paint_warp_gain`, audited against sampled UV triangle
-orientation and reduced by a margin; Knick's crossing-hand fold interval uses
-the tightest bound. The authoring gain table is in the existing Gaussian source
-folder and the existing builder copies it into runtime manifests. The sampled
-orientation audit is not a topology or anatomical proof.
+The current full-frame morph uses the paired records as the movement authority
+for the entire painting. `buergeramt-painted-anchor.js` draws one instanced
+Gaussian texture patch per paired slot, sampling both original native WebPs
+inside each moving support. Unlike a point-colour Gaussian, its image patch
+retains source detail. Each patch follows the same position and owned prop
+rotation as the Spark cloud; source/target UV offsets rotate with the part.
+The two paints blend in premultiplied linear light across the entire interval.
+The patch material stays at opacity one. There is no sharp-paint/cloud/sharp
+swap, midpoint image switch, bounded MLS plane, or extra animation clock.
 
-Gaussian splats remain deliberately uncanny: a smooth `0.75 × sin²(πu)`
-envelope adds small flowing displacement and wider fringes around moving paint,
-while protecting the face and ground edge. It reaches zero at the stable keys;
-there is no whole-body representation swap or extra animation clock. The core
-painting preserves coverage, though mismatched silhouettes can still show a
-bounded double exposure. Inspect crossings and props in motion; correspondence
-cannot invent an occluded hand. Keep two or three approved painted inbetweens
+The material's explicit program cache key binds canvas aspect, record rows,
+sampling stride and owned trajectory code. Three's default key saw only the
+shared `onBeforeCompile` closure text and could reuse one actor's embedded
+constants for another. In a mixed clerk/regular draw this incorrectly widened
+the old painted plane and cropped the new texture patches; multi-actor checks
+must compare the true native image and isolated actor at the same height, not
+preserve that old width error. The shader cache regression is tested directly.
+
+Patch sigma is one selected sampling stride; support is 2.7 strides. The shader
+partitions log transmittance with kernel mass 6.20, adjusted for the small phase
+expansion, so overlapping supports do not turn a half-transparent painted edge
+opaque. This approximates native alpha on a regular grid; it is not an exact
+general overlap resolve. Endpoint occupancy gates prevent alpha-zero births
+and deaths from sampling visible paint at unrelated predicted coordinates.
+Main and bridge keys recover the original image coordinates and detail; inspect
+coverage and antialiased edges on both backgrounds before accepting new art.
+
+The older clerk cloud replaced its head with one source head silhouette. That
+left up to 9.192% of sampled native pixels outside patch support when used as a
+full texture renderer. The existing builder now retains her complete original
+image grid, with named anatomical ownership and the same curved paper paths.
+The 55 runtime anchor WebPs are unchanged. Clerk has 7,680 desktop and 3,072
+mobile slots; its new compressed records are 1,333,481 and 523,530 bytes, with
+2,949,120 and 1,179,648 decoded bytes. The other eight packs are unchanged.
+The legacy `paint_warp_gain` table is retained for older consumers; it does not
+attenuate the current paired texture transport.
+
+Knick's paper is absent in the raised pose. Holding its invisible birth
+coordinates at the target location made a nearly opaque sheet appear beyond
+her reaching fingers. The builder now translates a wholly absent paper part's
+alpha-zero endpoint by the corresponding `hand_left` displacement. The same
+rule handles its disappearance. It preserves the paper's extent and all visible
+XY/RGBA; 245/186 desktop and 94/72 mobile invisible birth/death endpoints changed
+in segments 3/11. Named attachment is an explicit ownership instruction, not
+an inferred skeleton or a replacement for handoff keys. Unbound parts and
+ordinary border projection keep their existing behavior.
+
+The deliberately uncanny full-body Spark halo uses the same paired paths and
+local phase as the native texture Gaussians. The user's liquid, dissociated
+motion direction adds a spatial phase delay
+`0.085 × sin(9 × midpoint.y + 6 × midpoint.x) × sin²(πu)` to each paired path.
+Its derivative stays between 0.733 and 1.267: every part keeps moving, with
+exact endpoints and unit slope at keys. An owned prop uses one common delay
+from its pivot midpoint, rather than splitting its corners across phases.
+Native paint blending follows that local phase in premultiplied linear colour.
+A broad planted-foot wave has normalized amplitudes 0.022/0.007 and grows and
+recedes as `0.75 × sin²(πu)`; the halo's alpha is attenuated to 18% while texture
+patches are present. Both renderers share the same GLSL expressions and existing
+simulation clock. No random per-frame jitter or global opacity pulse is added.
+Every part still travels through the full transition, even
+when the halo reaches zero at a key. Keep two or three approved inbetweens
 between ordinary main poses and Knick's denser stamp/fold keys. Transition keys
-have no scheduled holds or phase resets. Speech keeps its existing local cue.
+have no scheduled holds. Correspondence cannot invent an occluded hand; review
+crossing parts, turning props, and loop closure in natural playback. Speech
+keeps its existing local cue.
 
-The first adjacent image pair decodes sequentially inside the existing actor
-preparation job; only the third neighboring key uses the shared prefetch queue.
-Explicit arc direction handles reverse actions and loop wrap without treating
-an index wrap as a reversal. At most three bitmaps/textures and one pending
-image job reside per actor. A delayed neighbor leaves the available painting
-intact rather than stretching it; it is a readiness fallback, not motion proof.
-No authoring files or full-cast image preload enter the game.
+The patch mesh shares the three packed-record textures already owned by its
+actor. It adds one instanced slot attribute (four bytes per slot), no new image
+asset, framebuffer, dependency, worker, or render loop. The first adjacent
+image pair decodes sequentially inside the existing actor preparation job; only
+the third neighboring key uses the shared prefetch queue. Explicit arc direction
+handles reverse actions and loop wrap. At most three bitmaps/textures and one
+pending image job reside per actor. A delayed neighbor keeps the available
+painting intact as a readiness fallback. Runtime manifest cache tags and the
+record content hash bind newly rebuilt data without a stale length mismatch.
 
-Staged evidence is retained under `output/amt-gaussian-arcs/`: the paint-only
-prototype, localized-fringe prototype, and final bounded warp each have native
-motion captures. Final normal autoplay sampled 514 Aktenkurier and 310 natural
-Knick stamp states with paint opacity exactly one, no invisible actor samples
-and no page/HTTP errors. Consecutive frames, all nine key/midpoint loops and the
-production dialogue/return/walk/replay checks are separate from the CPU audit.
-The intended mild trailing/double-exposure effect remains; the old deliberate
-full-body sharp→soft→sharp pulse is removed.
+Liquid full-morph natural autoplay covers all nine loop seams: 913 displayed
+frames and 2,354 sampled states across the unchanged eight actors and repaired
+Knick loop. Fresh Knick coverage includes 193 frames through the actual 9.1 s
+wrap and 136 dense desktop/mobile-angle captures around paper birth and
+disappearance. Native texture Gaussian mode, opacity one and actor visibility
+remain continuous, with no page/HTTP/compile errors or observed whole-image
+flash. One benign Three signed/unsigned warning remains. Opacity alone does
+not prove perceptual continuity: independent C4/X1 reviewed the motion and
+grip, and P5 compared exact binary changes and authoritative timing.
+Evidence is retained under `output/amt-gaussian-arcs/dissociated-camera-review/`
+and `dissociated-paper-camera-review/`. The final upstream voice integration
+changes only speech recording/overlay callbacks, entry cache tags and a subtitle
+test; renderer, clock, data, builder and geometry bytes are unchanged. Final
+review bindings are under `liquid-final-camera-review/` and
+`liquid-final-physics-review/`. Production desk/wall and mixed paint/cloud depth
+use the unchanged compositor with supplied office frames and carried earlier
+independent depth checks; exact final-candidate forced overlapping pixels and
+physical Android were not freshly tested. The former continuity
+repair's continuous bounded paint/local-fringe renderer removed the opacity
+pulse but was rejected because its full-body movement looked like a crossfade.
+The current renderer transports original image detail on the actual splat paths.
 
-The continuity repair's three cold-context runs per viewport on Chrome 154 /
-Intel Iris Xe D3D11 kept median active-dialogue frame p95 at 21.0 ms desktop
-and 20.9 ms Android browser emulation. All nine inputs were accepted in each
-run. Median input p95 was 17.1→13.8 ms desktop and 46.6→54.8 ms emulation;
-the final emulated runs ranged 17.5–57.5 ms. These scheduling samples are local
-lab diagnostics, not GPU timings or a physical-device performance claim.
-Median cold office transfer was 28.83→29.07 MB desktop and 16.14→16.42 MB
-emulation. Animation transfer along the sampled dialogue route increased
-4.27→5.65 MB and 2.56→3.73 MB because the next key is prefetched to avoid a
-late handoff. Final sampled texture counts were 56–57 desktop and 49 mobile,
-with the existing three-key cache, two/one actor and 1.6 MP buffer limits held.
-No new artwork, Gaussian records or runtime dependency was added. Baseline
-overrides include the old paint helper at `e369828`, not just its importing
-actor. Evidence: `flow-benchmark-before/after`, `flow-benchmark-summary.json`,
-`flow-dynamic`, `flow-physics-review`, and `flow-camera-review` under the same
-ignored output folder. Physical Android remains NOT RUN.
-
-Independent Physics and Camera review passed the same 22-file frozen renderer
-candidate. Camera's fresh normal-speed captures cover all nine loops and their
-seams, including a focused Nachtschichtmelderin wrap from 3.992 to 0.005 seconds.
-Desktop and Android-emulated ±45° views, opaque office wall/counter occlusion,
-and mixed two-actor paint/cloud ordering passed without page, HTTP or shader
-compilation errors. Gradual local hand/paper/hem trails remain as the requested
-trippy style; they do not waive anatomy, topology, or full-body opacity faults.
-The release regression suite passed 155 checks. Its subtitle validator was
-updated to the already-shipped audio-library version 5; no voice content changed.
+Three cold contexts per profile compare the liquid renderer to `7a161e5` on
+Chrome 154 / Intel Iris Xe D3D11, local uncompressed HTTP, seed 12345, DPR2;
+no physical Android or GPU timing. Median active-dialogue frame p95 is
+21.0→21.7 ms desktop 1280×800 and 21.0→21.8 ms at 390×844 emulation. All nine
+inputs were accepted in every run, with zero page errors; median input p95 is
+14.3→19.7 ms desktop and 17.1→22.0 ms emulation, whose final runs span
+12.9–63.9 ms. Median measured cold transfer is roughly 30.08 MB / 17.02 MB
+before and after; settled-byte totals vary with asynchronous asset completion.
+Median dialogue transfer is 6.10 MB / 3.73 MB in both versions. Actor limits
+2/1, three resident native images per actor and the 1.6 MP buffer cap hold.
+This measures the small renderer cost, not a speedup or field playability.
+Evidence: `liquid-benchmark-before/`, `liquid-benchmark-after/` and
+`liquid-benchmark-summary.json` under `output/amt-gaussian-arcs/`. The subsequent
+`6b06989` voice integration leaves these render inputs unchanged; its fresh
+production smoke is recorded separately in `liquid-final-dynamic/`.
 
 For the earlier native-anchor release, three cold-context runs per viewport on Chrome 154 /
 Intel Iris Xe D3D11 measured median active-dialogue frame p95 of 20.9 ms both

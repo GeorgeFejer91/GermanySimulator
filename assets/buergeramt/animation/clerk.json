@@ -6,7 +6,7 @@
     1024,
     832
   ],
-  "head_paint_source": "ready",
+  "head_paint_source": null,
   "states": [
     {
       "id": "ready",
@@ -1946,19 +1946,19 @@
   "variants": {
     "desktop": {
       "file": "clerk-desktop.bin.gz",
-      "sha256": "e08ac06f3134d9bb78eedf3e80bfb8a399d380cd2d5ed4898f2a53f7bf3f341e",
-      "decoded_sha256": "158c10d3817b956f4296e4f65c2715756d05e627f1f3990e67b5d8a3df8671da",
-      "bytes": 1451440,
-      "decoded_bytes": 2850816,
-      "sample_count": 7424,
+      "sha256": "a275d4449104c0c331f164c0ef1eb4ba04ab80a3680a09c1cfda10151c798e9d",
+      "decoded_sha256": "7a6799ef0f3e0ad09da3096b7c0de593681ac894a0a9b23074486a99411cef45",
+      "bytes": 1333481,
+      "decoded_bytes": 2949120,
+      "sample_count": 7680,
       "stride_px": 5,
       "segment_count": 16,
       "record_bytes": 24,
       "trajectories": [
         {
           "segment": 4,
-          "start_slot": 5094,
-          "end_slot": 5339,
+          "start_slot": 5865,
+          "end_slot": 6110,
           "pivot_start": [
             0.47716346153846156,
             0.5709134615384616
@@ -1971,8 +1971,8 @@
         },
         {
           "segment": 5,
-          "start_slot": 4663,
-          "end_slot": 4881,
+          "start_slot": 5197,
+          "end_slot": 5415,
           "pivot_start": [
             0.34375,
             0.5480769230769231
@@ -1985,8 +1985,8 @@
         },
         {
           "segment": 6,
-          "start_slot": 4743,
-          "end_slot": 4921,
+          "start_slot": 5383,
+          "end_slot": 5561,
           "pivot_start": [
             0.11057692307692307,
             0.5324519230769231
@@ -1999,8 +1999,8 @@
         },
         {
           "segment": 7,
-          "start_slot": 3976,
-          "end_slot": 4221,
+          "start_slot": 4698,
+          "end_slot": 4943,
           "pivot_start": [
             0.06370192307692307,
             0.5336538461538461
@@ -2013,8 +2013,8 @@
         },
         {
           "segment": 8,
-          "start_slot": 3654,
-          "end_slot": 3905,
+          "start_slot": 4329,
+          "end_slot": 4580,
           "pivot_start": [
             0.027644230769230768,
             0.5132211538461539
@@ -2027,8 +2027,8 @@
         },
         {
           "segment": 9,
-          "start_slot": 4021,
-          "end_slot": 4272,
+          "start_slot": 4643,
+          "end_slot": 4894,
           "pivot_start": [
             0.03245192307692308,
             0.4987980769230769
@@ -2041,8 +2041,8 @@
         },
         {
           "segment": 10,
-          "start_slot": 4380,
-          "end_slot": 4596,
+          "start_slot": 4918,
+          "end_slot": 5134,
           "pivot_start": [
             0.051682692307692304,
             0.5168269230769231
@@ -2057,9 +2057,9 @@
     },
     "mobile": {
       "file": "clerk-mobile.bin.gz",
-      "sha256": "104a836685fb9e90435ec96d63eed64a58cf497a8426f7fee912e9a9c68a8538",
-      "decoded_sha256": "7ea5f8b2983c1568a0fd14b23ead7a8fb58de0a4a90db6b374ae6aff66874957",
-      "bytes": 572812,
+      "sha256": "54856f1e139f173769dd56b426726d515abc209551a78255639a4092a9da91d9",
+      "decoded_sha256": "03aec67ba64e4982c9276cb52487cac22bb3e9cac695cad89e0cff666a95869b",
+      "bytes": 523530,
       "decoded_bytes": 1179648,
       "sample_count": 3072,
       "stride_px": 8,
@@ -2068,8 +2068,8 @@
       "trajectories": [
         {
           "segment": 4,
-          "start_slot": 1991,
-          "end_slot": 2085,
+          "start_slot": 2290,
+          "end_slot": 2384,
           "pivot_start": [
             0.47716346153846156,
             0.5709134615384616
@@ -2082,8 +2082,8 @@
         },
         {
           "segment": 5,
-          "start_slot": 1821,
-          "end_slot": 1899,
+          "start_slot": 2028,
+          "end_slot": 2106,
           "pivot_start": [
             0.34375,
             0.5480769230769231
@@ -2096,8 +2096,8 @@
         },
         {
           "segment": 6,
-          "start_slot": 1845,
-          "end_slot": 1912,
+          "start_slot": 2100,
+          "end_slot": 2167,
           "pivot_start": [
             0.11057692307692307,
             0.5324519230769231
@@ -2110,8 +2110,8 @@
         },
         {
           "segment": 7,
-          "start_slot": 1538,
-          "end_slot": 1636,
+          "start_slot": 1824,
+          "end_slot": 1922,
           "pivot_start": [
             0.06370192307692307,
             0.5336538461538461
@@ -2124,8 +2124,8 @@
         },
         {
           "segment": 8,
-          "start_slot": 1419,
-          "end_slot": 1517,
+          "start_slot": 1704,
+          "end_slot": 1802,
           "pivot_start": [
             0.027644230769230768,
             0.5132211538461539
@@ -2138,8 +2138,8 @@
         },
         {
           "segment": 9,
-          "start_slot": 1562,
-          "end_slot": 1656,
+          "start_slot": 1810,
+          "end_slot": 1904,
           "pivot_start": [
             0.03245192307692308,
             0.4987980769230769
@@ -2152,8 +2152,8 @@
         },
         {
           "segment": 10,
-          "start_slot": 1716,
-          "end_slot": 1805,
+          "start_slot": 1922,
+          "end_slot": 2011,
           "pivot_start": [
             0.051682692307692304,
             0.5168269230769231

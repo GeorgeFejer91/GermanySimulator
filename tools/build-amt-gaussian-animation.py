@@ -48,7 +48,7 @@ def ownership(q,l,stamp_region=True):
  if stamp_region:p[prop]=2
  return p
 
-def match(a,b,s,t,stride,fixed_parts=(),local_controls=()):
+def match(a,b,s,t,stride,fixed_parts=(),local_controls=(),missing_attachments=()):
  ax,ac=a[:2];bx,bc=b[:2];ap=a[2] if len(a)>2 else ownership(ax,s);bp=b[2] if len(b)>2 else ownership(bx,t);pred=transport(s,t,ax);back=transport(t,s,bx)
  for part,source,target in local_controls:
   ps,pt=map(lambda p:np.asarray(p,float),(source,target))
@@ -56,6 +56,7 @@ def match(a,b,s,t,stride,fixed_parts=(),local_controls=()):
  pairs=[];ranges={}
  # One-to-one local proposals preserve a single silhouette rather than two
  # independently warped images. Unmatched border paint is born/dies gradually.
+ attachments={part:(np.asarray(source,float),np.asarray(target,float)) for part,source,target in missing_attachments}
  for part in range(9):
   first=len(pairs)
   ai=np.flatnonzero(ap==part);bi=np.flatnonzero(bp==part)
@@ -83,9 +84,14 @@ def match(a,b,s,t,stride,fixed_parts=(),local_controls=()):
  for part in range(9):
   born=np.array([j for i,j in pairs if i is None and bp[j]==part],dtype=int)
   dying=np.array([i for i,j in pairs if j is None and ap[i]==part],dtype=int)
-  for missing,support,predicted,visible in [(born,ax[ap==part],back,bx),(dying,bx[bp==part],pred,ax)]:
+  attachment=attachments.get(part)
+  for missing,support,predicted,visible,reverse in [(born,ax[ap==part],back,bx,False),(dying,bx[bp==part],pred,ax,True)]:
    if not len(missing):continue
-   if not len(support):predicted[missing]=visible[missing];continue
+   if not len(support):
+    # A held part newly appearing/disappearing travels beside its owner. Only
+    # the invisible endpoint moves; painted keys and the part's extent stay exact.
+    shift=(attachment[1]-attachment[0] if reverse else attachment[0]-attachment[1]) if attachment is not None else 0
+    predicted[missing]=visible[missing]+shift;continue
    distance,nearest=cKDTree(support).query(predicted[missing])
    outside=distance>stride
    predicted[missing[outside]]=support[nearest[outside]]
@@ -116,7 +122,7 @@ def knick():
   duration=times[b]-times[a]
   keys=[{'state':states[i%len(states)]['id'],'time':times[i]-times[a]} for i in range(a,b+1)]
   arcs.append({'id':name,'from':keys[0]['state'],'to':keys[-1]['state'],'duration':duration,'keys':keys})
- return {'version':1,'id':'clerk','canvas_xy':[1024,832],'states':states,'arcs':arcs,'source_sha256':old['source_sha256'],'head_paint_source':'ready'}
+ return {'version':1,'id':'clerk','canvas_xy':[1024,832],'states':states,'arcs':arcs,'source_sha256':old['source_sha256'],'head_paint_source':None,'stamp_character':True}
 
 def build(spec):
  OUT.mkdir(parents=True,exist_ok=True);w,h=spec['canvas_xy'];states=spec['states'];ids={s['id']:i for i,s in enumerate(states)}
@@ -144,7 +150,7 @@ def build(spec):
   for i,(state,lm) in enumerate(zip(states,landmarks)):
    regions=[(3,state.get('arm_polygon_xy')),(6,state.get('paper_polygon_xy')),(2,state.get('prop_polygon_xy'))]
    if any(polygon for part,polygon in regions):
-    xy,rgba=samples[i];parts=ownership(xy,lm,stamp_region=bool(spec.get('head_paint_source')) and not state.get('prop_polygon_xy'))
+    xy,rgba=samples[i];parts=ownership(xy,lm,stamp_region=bool(spec.get('head_paint_source') or spec.get('stamp_character')) and not state.get('prop_polygon_xy'))
     for part,polygon in regions:
      if not polygon:continue
      region=Image.new('L',(w,h));ImageDraw.Draw(region).polygon([tuple(p) for p in polygon],fill=1)
@@ -178,6 +184,7 @@ def build(spec):
     samples[i]=(xy,rgba,parts)
   blocks=[match(samples[a],samples[b],landmarks[a],landmarks[b],stride,
     fixed_parts=(1,7) if spec.get('head_paint_source') else (),
+    missing_attachments=[(6,landmarks[a][11],landmarks[b][11])] if spec.get('stamp_character') else (),
     local_controls=[(part,states[a][key],states[b][key]) for part,key in [(3,'arm_landmarks_xy'),(2,'prop_landmarks_xy'),(6,'paper_landmarks_xy')] if states[a].get(key) and states[b].get(key)]) for a,b in segments]
   count=((max(len(b[0]) for b in blocks)+255)//256)*256
   assert count<=20000,(spec['id'],count)

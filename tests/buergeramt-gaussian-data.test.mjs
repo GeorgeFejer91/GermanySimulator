@@ -15,6 +15,27 @@ function paint(buffer,count,segment,end){
  return points.sort();
 }
 
+test('newly visible Knick paper travels beside its hand instead of fading at the destination',()=>{
+ const manifest=JSON.parse(readFileSync(new URL('clerk.json',folder)));
+ const segment=manifest.segments.findIndex(pair=>pair.from==='raised'&&pair.to==='stamp-1');
+ const state=id=>manifest.states.find(item=>item.id===id),hand=item=>Array.isArray(item.landmarks)?item.landmarks[11]:item.landmarks.hand_left;
+ const a=hand(state('raised')),b=hand(state('stamp-1')),[w,h]=manifest.canvas_xy;
+ for(const variant of Object.values(manifest.variants)){
+  const data=gunzipSync(readFileSync(new URL(variant.file,folder)));let checked=0;
+  for(let slot=0;slot<variant.sample_count;slot++){
+   const offset=(segment*variant.sample_count+slot)*24;
+   const end=[data.readFloatLE(offset+8)*h+w/2,h-data.readFloatLE(offset+12)*h];
+   // Interior paper samples, well clear of polygon edges and the hand.
+   if(data[offset+19]!==0||data[offset+23]===0||end[0]<850||end[0]>970||end[1]<342||end[1]>361)continue;
+   const start=[data.readFloatLE(offset)*h+w/2,h-data.readFloatLE(offset+4)*h];
+   assert(Math.hypot(start[0]-end[0]-(a[0]-b[0]),start[1]-end[1]-(a[1]-b[1]))<.001,
+    'invisible paper endpoint must preserve its offset to the moving grip');
+   checked++;
+  }
+  assert(checked>=30,'exercise substantial visible paper in both variants');
+ }
+});
+
 for(const id of ['nachtschichtmelderin','kopiependler'])test(`${id} new leg paint begins on existing paint rather than in empty air`,()=>{
  const manifest=JSON.parse(readFileSync(new URL(`${id}.json`,folder)));
  for(const variant of Object.values(manifest.variants)){

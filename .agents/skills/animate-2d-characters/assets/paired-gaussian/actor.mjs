@@ -1,5 +1,5 @@
 // One registered Gaussian cloud per actor. The simulation supplies all action time.
-import {createPaintedAnchor,anchorBlend} from './anchor.mjs';
+import {createPaintedAnchor,anchorBlend,gaussianFlowGlsl} from './anchor.mjs';
 const clamp=value=>Math.max(0,Math.min(1,Number.isFinite(value)?value:0));
 const RECORD_BYTES=24,TEXTURE_WIDTH=256,MAX_SAMPLES=20000,MAX_SEGMENTS=32,MAX_TRAJECTORIES=64,MAX_TRAJECTORIES_PER_SEGMENT=8;
 
@@ -135,6 +135,7 @@ export async function createGaussianActor({THREE,owner,manifestUrl,variant='desk
   const trajectoryCode=segmentExpression=>(selected.trajectories??[]).map(item=>`
     if(int(${segmentExpression})==${item.segment}&&slot>=${item.start_slot}&&slot<${item.end_slot}){
       vec2 pivotA=vec2(${item.pivot_start.map(glslNumber).join(',')}),pivotB=vec2(${item.pivot_end.map(glslNumber).join(',')});
+      u=${gaussianFlowGlsl.phase('phase','.5*(pivotA+pivotB)','envelope')};
       float angle=${glslNumber(item.angle_radians)},theta=u*angle;
       vec2 localB=endpoints.zw-pivotB;
       vec2 unturnedB=vec2(cos(angle)*localB.x+sin(angle)*localB.y,-sin(angle)*localB.x+cos(angle)*localB.y);
@@ -157,9 +158,9 @@ export async function createGaussianActor({THREE,owner,manifestUrl,variant='desk
       texture.generateMipmaps=false;texture.flipY=false;texture.needsUpdate=true;
       textures.push(texture);
     }
-    const segment=dyno.dynoFloat(0),blend=dyno.dynoFloat(0),strength=dyno.dynoFloat(1),painted=dyno.dynoFloat(0),mouth=dyno.dynoFloat(0),mouthCenter=dyno.dynoVec2(new THREE.Vector2()),faceCenter=dyno.dynoVec2(new THREE.Vector2()),faceEnabled=dyno.dynoFloat(0),tint=dyno.dynoVec3(new THREE.Vector3(1,1,1)),breath=dyno.dynoFloat(0);
+    const segment=dyno.dynoFloat(0),blend=dyno.dynoFloat(0),strength=dyno.dynoFloat(1),painted=dyno.dynoFloat(0),mouth=dyno.dynoFloat(0),mouthCenter=dyno.dynoVec2(new THREE.Vector2()),tint=dyno.dynoVec3(new THREE.Vector3(1,1,1)),breath=dyno.dynoFloat(0);
     const modifier=dyno.dynoBlock({gsplat:dyno.Gsplat},{gsplat:dyno.Gsplat},({gsplat})=>({gsplat:new dyno.Dyno({
-      inTypes:{gsplat:dyno.Gsplat,segment:'float',blend:'float',strength:'float',painted:'float',mouth:'float',mouthCenter:'vec2',faceCenter:'vec2',faceEnabled:'float',tint:'vec3',breath:'float',xy:'sampler2D',start:'sampler2D',end:'sampler2D'},
+      inTypes:{gsplat:dyno.Gsplat,segment:'float',blend:'float',strength:'float',painted:'float',mouth:'float',mouthCenter:'vec2',tint:'vec3',breath:'float',xy:'sampler2D',start:'sampler2D',end:'sampler2D'},
       outTypes:{gsplat:dyno.Gsplat},
       statements:({inputs:i,outputs:o})=>dyno.unindentLines(`
         ${o.gsplat}=${i.gsplat};
@@ -168,15 +169,13 @@ export async function createGaussianActor({THREE,owner,manifestUrl,variant='desk
         cell.y+=int(${i.segment})*${data.rows};
         vec4 endpoints=texelFetch(${i.xy},cell,0);
         vec4 paintA=texelFetch(${i.start},cell,0),paintB=texelFetch(${i.end},cell,0);
-        float u=clamp(${i.blend},0.,1.);
+        float phase=clamp(${i.blend},0.,1.),envelope=${i.strength}*${i.painted}/.75;
+        float u=${gaussianFlowGlsl.phase('phase','.5*(endpoints.xy+endpoints.zw)','envelope')};
         vec2 p=mix(endpoints.xy,endpoints.zw,u);
         ${trajectoryCode(i.segment)}
-        float moving=smoothstep(.008,.05,length(endpoints.zw-endpoints.xy));
-        float faceMask=1.-smoothstep(.75,1.3,length((p-${i.faceCenter}-vec2(0.,.035))/vec2(.135,.18)));
         float planted=smoothstep(.025,.11,p.y);
-        float local=mix(1.,moving*(1.-${i.faceEnabled}*faceMask)*planted,${i.painted});
-        float flow=${i.strength}*local*${i.painted};
-        p+=flow*vec2(.008*sin(p.y*19.+u*3.14159265),.003*sin(p.x*23.-u*3.14159265));
+        float flow=${i.strength}*planted*${i.painted};
+        p+=flow*${gaussianFlowGlsl.wave('p','phase')};
         ${o.gsplat}.scales.xy*=1.+flow*.45;
         vec2 face=(p-${i.mouthCenter})/vec2(${speechRadius[0]/manifest.canvas_xy[1]},${speechRadius[1]/manifest.canvas_xy[1]});
         float lip=exp(-dot(face,face)*3.5)*${i.mouth};
@@ -184,8 +183,9 @@ export async function createGaussianActor({THREE,owner,manifestUrl,variant='desk
         ${o.gsplat}.center=vec3(p,0.);
         vec3 linearA=mix(paintA.rgb/12.92,pow((paintA.rgb+.055)/1.055,vec3(2.4)),step(vec3(.04045),paintA.rgb));
         vec3 linearB=mix(paintB.rgb/12.92,pow((paintB.rgb+.055)/1.055,vec3(2.4)),step(vec3(.04045),paintB.rgb));
-        float alpha=mix(paintA.a,paintB.a,u);
-        vec3 premul=mix(linearA*paintA.a,linearB*paintB.a,u);
+        float paintPhase=mix(u,smoothstep(0.,1.,u),${i.painted});
+        float alpha=mix(paintA.a,paintB.a,paintPhase);
+        vec3 premul=mix(linearA*paintA.a,linearB*paintB.a,paintPhase);
         vec3 linear=alpha>1e-5?premul/alpha:vec3(0.);
         linear*=${i.tint};
         float lightness=dot(linear,vec3(.2126,.7152,.0722));
@@ -193,9 +193,9 @@ export async function createGaussianActor({THREE,owner,manifestUrl,variant='desk
         vec3 srgb=mix(linear*12.92,1.055*pow(max(linear,vec3(0.)),vec3(1./2.4))-.055,step(vec3(.0031308),linear));
         // Spark decodes Gsplat RGB as sRGB during rendering.
         ${o.gsplat}.rgba=vec4(srgb,alpha);
-        ${o.gsplat}.rgba.a*=${i.strength}*local;
+        ${o.gsplat}.rgba.a*=${i.strength}*mix(1.,.18,${i.painted});
       `),
-    }).apply({gsplat,segment,blend,strength,painted,mouth,mouthCenter,faceCenter,faceEnabled,tint,breath,xy:dyno.dynoSampler2D(textures[0]),start:dyno.dynoSampler2D(textures[1]),end:dyno.dynoSampler2D(textures[2])}).gsplat}));
+    }).apply({gsplat,segment,blend,strength,painted,mouth,mouthCenter,tint,breath,xy:dyno.dynoSampler2D(textures[0]),start:dyno.dynoSampler2D(textures[1]),end:dyno.dynoSampler2D(textures[2])}).gsplat}));
     mesh=new SplatMesh({maxSplats:data.count,lod:false,enableLod:false,editable:false,raycastable:false,
       objectModifier:modifier,constructSplats:splats=>{
         const center=new THREE.Vector3(),scale=new THREE.Vector3(data.stride/manifest.canvas_xy[1]*.65,data.stride/manifest.canvas_xy[1]*.65,.0008),rotation=new THREE.Quaternion(),white=new THREE.Color(1,1,1);
@@ -207,7 +207,8 @@ export async function createGaussianActor({THREE,owner,manifestUrl,variant='desk
     await mesh.initialized;signal?.throwIfAborted?.();
     mesh.visible=false;owner.attach(mesh);attached=true;
     mesh.updateGenerator?.();
-    if(anchorPaint)paint=await createPaintedAnchor({THREE,owner,manifest,manifestUrl:url,signal,queueLoad});
+    if(anchorPaint)paint=await createPaintedAnchor({THREE,owner,manifest,manifestUrl:url,signal,queueLoad,
+      paired:{count:data.count,rows:data.rows,stride:data.stride,textures,trajectories:selected.trajectories}});
     const onAbort=()=>{api.dispose()};
     const api={
       update(state,sourceMesh,{visible=true,reducedMotion=false}={}){
@@ -226,19 +227,6 @@ export async function createGaussianActor({THREE,owner,manifestUrl,variant='desk
             tint.value.set(color?.r??1,color?.g??1,color?.b??1);breath.value=paintBreath;
             const pair=manifest.segments[sample.segment];
             const point=(id,name)=>stateById.get(id)?.landmarks?.[name];
-            const eyes=[pair.from,pair.to].map(id=>['eye_right','eye_left'].map(name=>point(id,name)));
-            const validEye=pair=>pair.every(p=>Array.isArray(p)&&p.length===2&&p.every(Number.isFinite))&&Math.hypot(pair[0][0]-pair[1][0],pair[0][1]-pair[1][1])>1e-3;
-            faceEnabled.value=eyes.every(validEye)?1:0;
-            if(faceEnabled.value){
-              const vx=(eyes[0][1][0]-eyes[0][0][0])*(1-sample.u)+(eyes[1][1][0]-eyes[1][0][0])*sample.u;
-              const vy=(eyes[0][1][1]-eyes[0][0][1])*(1-sample.u)+(eyes[1][1][1]-eyes[1][0][1])*sample.u;
-              if(Math.hypot(vx,vy)<=1e-3)faceEnabled.value=0;
-            }
-            if(faceEnabled.value){
-              const center=pair=>[(pair[0][0]+pair[1][0])/2,(pair[0][1]+pair[1][1])/2],a=center(eyes[0]),b=center(eyes[1]);
-              faceCenter.value.set(((a[0]+(b[0]-a[0])*sample.u)-manifest.canvas_xy[0]/2)/manifest.canvas_xy[1],
-                (manifest.canvas_xy[1]-(a[1]+(b[1]-a[1])*sample.u))/manifest.canvas_xy[1]);
-            }
             const source=speechNames.map(name=>point(pair.from,name)),target=speechNames.map(name=>point(pair.to,name));
             const hasSpeechPoint=speechNames.length>0&&source.every(Array.isArray)&&target.every(Array.isArray);
             if(hasSpeechPoint){
