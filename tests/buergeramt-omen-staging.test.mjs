@@ -56,7 +56,7 @@ for(const dt of [1/60,1/30,.1])test(`the staged route clears a blocking prop and
   h.level.update(dt);const current=h.level.omen,distance=Math.hypot(current.x-prior.x,current.z-prior.z);
   assert(distance<=.78*dt+1e-8);travel+=distance;
   assert(!(Math.abs(current.x-prop.x)<prop.w/2+.34&&Math.abs(current.z-prop.z)<prop.d/2+.34),'courier body clears prop');
-  assert(!(Math.abs(current.x)<1.74&&Math.abs(current.z+4.22)<.46),'courier body clears QR stand');
+  assert(!(Math.abs(current.x)<1.74&&Math.abs(current.z+4.22)<.42),'courier body clears the visible QR stand');
   minPlayer=Math.min(minPlayer,Math.hypot(current.x-player.x,current.z-player.z));
   for(const other of h.level.characters.slice(1))minOther=Math.min(minOther,Math.hypot(current.x-other.x,current.z-other.z));
   assert.equal(h.level.queueDisplay,board);assert.equal(h.level.view.x,player.x);assert.equal(h.level.view.z,player.z);

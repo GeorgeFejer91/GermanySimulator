@@ -1136,6 +1136,7 @@ function showRendererFailure(error){
     texture.minFilter=texture.magFilter=T.LinearFilter;
     for(const mesh of amtPaintedProps){mesh.material.map=texture;mesh.material.needsUpdate=true}
   }
+  function amtSnapshot(actor){const height=actor.height||actor.mesh.geometry.parameters.height;return{rotation:actor.mesh.rotation.y,height,foot:actor.mesh.position.y-height*actor.mesh.scale.y/2,ground:[actor.mesh.position.x,actor.mesh.position.z],direction:actor.direction,renderKey:actor.renderKey}}
   function animateAmtCharacters(now,level){
     for(const actor of amtCharacters){
       const frame=actor.performance?actor.lead?level.clerkPerformance.row*8+level.clerkPerformance.frame:Math.floor(now/250+actor.phase*8)%8:Math.floor(now/1000*24+actor.phase*24)%64;
@@ -1157,7 +1158,8 @@ function showRendererFailure(error){
       }
       const breath=Math.sin(now/1900+actor.phase*3)*.78+Math.sin(now/3300+actor.phase*5)*.22;
       actor.mesh.material.userData.breath.value=breath;
-      const stretch=detailed?1+.0025*breath:1;
+      actor.mesh.rotation.y=Math.atan2(amtCamera.position.x-actor.mesh.position.x,amtCamera.position.z-actor.mesh.position.z);
+      const stretch=1+.0025*breath;
       actor.mesh.scale.set(1,stretch,1);actor.mesh.position.y=actor.mesh.geometry.parameters.height*stretch/2;
     }
   }
@@ -1178,7 +1180,11 @@ function showRendererFailure(error){
       const fogExempt=actor.id==="aktenkurier"&&!!omen.phase;
       if(actor.mesh.material.fog===fogExempt){actor.mesh.material.fog=!fogExempt;actor.mesh.material.needsUpdate=true}
       const turning=actor.id==="aktenkurier"&&omen.phase==="turn",departing=actor.id==="aktenkurier"&&["depart","recover"].includes(omen.phase);
-      const direction=facePlayer?"down":departing?"up":state.direction;
+      const heading=state.heading??({down:0,right:Math.PI/2,up:Math.PI,left:-Math.PI/2}[state.direction]??0);
+      const relative=Math.atan2(Math.sin(heading-actor.mesh.rotation.y),Math.cos(heading-actor.mesh.rotation.y));
+      const travelDirection=Math.abs(relative)<Math.PI/4?"down":Math.abs(relative)>3*Math.PI/4?"up":relative>0?"right":"left";
+      const direction=facePlayer?"down":departing?"up":turning?state.direction:travelDirection;
+      actor.direction=direction;
       if(turning&&!amtReducedMotion.matches){
         // Readable front, side, rear views with a planted pivot, using the accepted paint.
         const t=omen.turnProgress,local=t<.25?t/.25:t<.73?(t-.25)/.48:(t-.73)/.27;
@@ -1210,7 +1216,7 @@ function showRendererFailure(error){
       }
       if(distance>7){actor.walkDetail?.dispose();actor.walkDetail=null;actor.walkDirection="";actor.detail?.dispose();actor.detail=null}
       actor.mesh.material.userData.breath.value=Math.sin(now/1750+actor.height*7)*.75+Math.sin(now/2900+actor.height*11)*.25;
-      const stretch=actionDetail?1+.0025*actor.mesh.material.userData.breath.value:1;
+      const stretch=1+.0025*actor.mesh.material.userData.breath.value;
       actor.mesh.scale.y=stretch;actor.mesh.position.y=actor.height*stretch/2;
       if(mood?.id===actor.id)actor.tone=mood.tone;
       const target=mood?.id===actor.id?Math.min(.25,.08+Math.abs(mood.valence)*.2):0;
@@ -1413,6 +1419,6 @@ function showRendererFailure(error){
     parkCameraFrame+=(parkTarget-parkCameraFrame)*(1-Math.exp(-6*Math.min(.05,Math.max(0,(now-previousCameraTime)/1000))));previousCameraTime=now;
     if(parkCameraFrame>.001){const narrow=Math.max(0,Math.min(1,.95/camera.aspect-1)),cx=X(park.x+park.w/2),cz=Z(park.y+park.h/2),focus=parkCameraFrame*(1-.65*narrow);camera.position.set(px+(cx-px)*focus,11.5+(5+2*narrow)*parkCameraFrame,pz+14+2*narrow*parkCameraFrame);camera.lookAt(px+(cx-px)*focus,1+parkCameraFrame,pz-2.7+(cz-(pz-2.7))*parkCameraFrame)}
     updateGroupVisibility();updateBuildingOcclusion();updateWirtschaftswunder(now);renderer.render(scene,camera);
-  },inspectAssets,setAmtQr,get amtGaussian(){return amtGaussian.inspect()},get amtOmenSplat(){return {visit:amtOmenVisit,loading:!!amtOmenRequest,skipped:amtOmenSkipped,failure:amtOmenFailure,...(amtOmenSplat?.inspect()||{ready:false,visible:false})}},get amtOmenStaging(){return {isolation:amtIsolation.value,environmentVisible:amtEnvironment.visible}},get amtOffice(){return officeDetail?.inspect()||null},get amtCharacters(){return [...amtCharacters.map(actor=>({name:actor.name,frame:actor.frame,loaded:!!actor.mesh.material.map?.image,mapped:!!actor.mesh.material.map,visible:actor.mesh.visible,detail:actor.mesh.material.map===actor.detail,texelHeight:actor.mesh.material.map?.image?.height||0,breath:actor.mesh.material.userData.breath.value})),...amtMoving.map(actor=>({name:actor.id,frame:actor.cell,loaded:!!actor.mesh.material.map?.image,mapped:!!actor.mesh.material.map,visible:actor.mesh.visible,detail:actor.mesh.material.map===actor.detail||actor.mesh.material.map===actor.walkDetail,texelHeight:actor.mesh.material.map?.image?.height||0,breath:actor.mesh.material.userData.breath.value,tint:actor.mesh.material.color.getHexString(),position:[actor.mesh.position.x,actor.mesh.position.z]}))]}};
+  },inspectAssets,setAmtQr,get amtGaussian(){return amtGaussian.inspect()},get amtOmenSplat(){return {visit:amtOmenVisit,loading:!!amtOmenRequest,skipped:amtOmenSkipped,failure:amtOmenFailure,...(amtOmenSplat?.inspect()||{ready:false,visible:false})}},get amtOmenStaging(){return {isolation:amtIsolation.value,environmentVisible:amtEnvironment.visible}},get amtOffice(){return officeDetail?.inspect()||null},get amtCharacters(){return [...amtCharacters.map(actor=>({name:actor.name,...amtSnapshot(actor),frame:actor.frame,loaded:!!actor.mesh.material.map?.image,mapped:!!actor.mesh.material.map,visible:actor.mesh.visible,detail:actor.mesh.material.map===actor.detail,texelHeight:actor.mesh.material.map?.image?.height||0,breath:actor.mesh.material.userData.breath.value})),...amtMoving.map(actor=>({name:actor.id,...amtSnapshot(actor),frame:actor.cell,loaded:!!actor.mesh.material.map?.image,mapped:!!actor.mesh.material.map,visible:actor.mesh.visible,detail:actor.mesh.material.map===actor.detail||actor.mesh.material.map===actor.walkDetail,texelHeight:actor.mesh.material.map?.image?.height||0,breath:actor.mesh.material.userData.breath.value,tint:actor.mesh.material.color.getHexString(),position:[actor.mesh.position.x,actor.mesh.position.z]}))]}};
   app.classList.add("three-ready");
 })().catch(showRendererFailure);

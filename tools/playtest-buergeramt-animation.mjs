@@ -60,14 +60,25 @@ async function officeCase(name,viewport,mobile,dpr){
    BuergeramtLevel.replay({cinematics:false,voiceOn:()=>false,subtitlesOn:()=>false});
    const level=BuergeramtLevel,update=level.update.bind(level),view=Object.getOwnPropertyDescriptor(level,'view');
    level.update=()=>{};window.__animationStep=()=>update(1/60);
-   window.__animationFocus={id:null,distance:6.2};
-   Object.defineProperty(level,'view',{configurable:true,get(){const actual=view.get.call(level),focus=window.__animationFocus;if(!focus.id)return actual;const actor=level.characters.find(a=>a.id===focus.id);return actor?{...actual,x:actor.x,z:actor.z-focus.distance,yaw:Math.PI}:actual}});
+   window.__animationFocus={id:null,distance:6.2,angle:Math.PI};
+   Object.defineProperty(level,'view',{configurable:true,get(){const actual=view.get.call(level),focus=window.__animationFocus;if(!focus.id)return actual;const actor=level.characters.find(a=>a.id===focus.id);return actor?{...actual,x:actor.x+Math.sin(focus.angle)*focus.distance,z:actor.z+Math.cos(focus.angle)*focus.distance,yaw:-focus.angle}:actual}});
    window.__animationRestore=()=>Object.defineProperty(level,'view',view);
   });
   await page.waitForFunction(()=>Germany3D.amtOffice?.attached&&Germany3D.amtCharacters.length===14&&Germany3D.amtCharacters.every(a=>a.loaded),null,{timeout:90000});
   await page.evaluate(()=>{dispatchEvent(new KeyboardEvent('keydown',{code:'KeyW'}));for(let i=0;i<50&&BuergeramtLevel.stage==='outside';i++)__animationStep();dispatchEvent(new KeyboardEvent('keyup',{code:'KeyW'}))});
   assert.equal(await page.evaluate(()=>BuergeramtLevel.stage),'walk-sign','entry must reach the canonical office');
   await record(page,dir,'entry',images);
+  report.billboards=[];
+  for(const angle of [0,Math.PI/2,Math.PI,-Math.PI/2]){
+   const sample=await page.evaluate(angle=>{
+    __animationFocus.id='aktenkurier';__animationFocus.distance=2.7;__animationFocus.angle=angle;Germany3D.sync();
+    const camera=BuergeramtLevel.view;
+    return Germany3D.amtCharacters.map(actor=>({...actor,expected:Math.atan2(camera.x-actor.ground[0],camera.z-actor.ground[1])}));
+   },angle);
+   for(const actor of sample){assert(Math.abs(Math.sin(actor.rotation-actor.expected))<1e-8&&Math.cos(actor.rotation-actor.expected)>.999999,'every office figure faces the actual camera');assert(Math.abs(actor.foot)<1e-8,'sole pivot remains on the ground')}
+   report.billboards.push({angle,count:sample.length});await record(page,dir,`camera-${Math.round(angle*180/Math.PI)}`,images);
+  }
+  await page.evaluate(()=>{__animationFocus.id=null;__animationFocus.angle=Math.PI});
   const queue=await page.evaluate(()=>BuergeramtLevel.queueDisplay);
   const call=await page.evaluate(start=>{for(let i=0;i<360;i++){__animationStep();if(BuergeramtLevel.queueDisplay!==start)return BuergeramtLevel.queueDisplay}return null},queue);
   assert(call,'a natural background queue call must fire');report.queueCall=call;
@@ -113,6 +124,12 @@ async function officeCase(name,viewport,mobile,dpr){
   const speaker=await page.evaluate(()=>BuergeramtLevel.characterMood?.id);
   assert.deepEqual(paused.filter(a=>a.id!==speaker),held.filter(a=>a.id!==speaker),'modal must freeze other actor actions');
   await record(page,dir,'modal-paused',images);
+  const breathBefore=await page.evaluate(()=>Germany3D.amtCharacters);
+  await page.waitForTimeout(450);await page.evaluate(()=>Germany3D.sync());
+  const breathAfter=await page.evaluate(()=>Germany3D.amtCharacters);
+  assert(breathAfter.every((actor,i)=>Math.abs(actor.breath-breathBefore[i].breath)>1e-5),'every figure keeps breathing while action clocks pause');
+  assert(breathAfter.every(actor=>Math.abs(actor.foot)<1e-8),'breathing never lifts the feet');
+  report.pausedBreathing=breathAfter.length;await record(page,dir,'modal-breathing',images);
   await page.locator('#amt-actions button').first().evaluate(button=>button.click());
   assert.equal(await page.evaluate(()=>BuergeramtLevel.stage),'walk-sign','conversation must resume walking');
   await page.evaluate(()=>{for(let i=0;i<20;i++)__animationStep()});

@@ -76,7 +76,7 @@ test('city audio gates optional actor speech and a replaced cue never starts lat
  h.enter();h.moveTo(3.4,1.2);const before=h.synth.spoken.length;h.level.interact();
  assert.equal(h.level.stage,'character');h.tick(2500);assert.equal(h.synth.spoken.length,before);
  h.action();cityBusy=false;h.tick(500);assert.equal(h.synth.spoken.length,before);
- h.level.interact();assert.equal(h.level.stage,'character');h.tick(20);
+ h.advanceGame(2);h.level.interact();assert.equal(h.level.stage,'character');h.tick(20);
  assert.equal(h.synth.spoken.length,before+1);
 });
 

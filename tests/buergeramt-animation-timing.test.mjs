@@ -69,7 +69,7 @@ for(const dt of [1/60,1/30,.1])test(`a blocked walker keeps its queued reaction 
  assert.equal(actor.pending,false);
  assert.equal(actor.mode,'look','blocked motion must start the queued planted action');
  const modes=new Set(),flinchFrames=new Set();
- for(let elapsed=0;elapsed<1.7;elapsed+=dt){
+ for(let elapsed=0;elapsed<1.7-1e-9;elapsed+=dt){
   const state=level.characters.find(item=>item.id===actor.id);modes.add(state.mode);
   if(state.mode==='flinch')flinchFrames.add(state.frame);
   assert.deepEqual([state.x,state.z],origin,'the blocked reaction never advances its root');
