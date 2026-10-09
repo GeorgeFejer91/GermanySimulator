@@ -13,6 +13,7 @@ const source=readFileSync(path.join(root,'game.js'),'utf8');
 const marker='requestAnimationFrame(loop);\n})();';
 if(!source.includes(marker))throw new Error('City loop insertion point changed');
 const probe=`window.__amtAudioHandoff={
+ ready(){startupNpcsCaptured=true;window.Germany3D={startupReady:true,sync(){},isWorldPointVisible(){return false}};refreshStartup()},
  prepare(){stopSpeech();state.started=true;state.modal=false;document.getElementById('intro').classList.add('hidden');document.getElementById('humor-modal').hidden=true},
  startTrain(){queueStimulus({family:'train',priority:STIMULUS_PRIORITY.CRITICAL,ambient:false,recording:'./test-train.wav',start:()=>{window.__trainStartedAt=performance.now()},done:()=>{window.__trainEndedAt=performance.now();setTimeout(()=>{window.BuergeramtLevel.update(.1);window.__gap50={busy:audioTextActive(),speech:window.__officeSpeech.length}},50);setTimeout(()=>{window.BuergeramtLevel.update(.1);window.__gap350={busy:audioTextActive(),speech:window.__officeSpeech.length}},350)}})},
  enter(){bureaucrat({id:'buergeramt'},missions[0])},
@@ -51,6 +52,7 @@ try{
   });
   page.on('pageerror',error=>errors.push(error.message));
   await page.goto(base,{waitUntil:'domcontentloaded'});
+  await page.evaluate(()=>window.__amtAudioHandoff.ready());
   await page.locator('#start').click();
   await page.evaluate(()=>window.__amtAudioHandoff.prepare());
   await page.evaluate(()=>window.__amtAudioHandoff.startTrain());
