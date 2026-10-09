@@ -51,6 +51,8 @@ def main() -> None:
     parser.add_argument("--game-root", required=True, type=Path)
     parser.add_argument("--ffmpeg", required=True, type=Path)
     parser.add_argument("--output-dir", required=True, type=Path)
+    parser.add_argument("--normalized-dir", type=Path,
+                        help="Optional complete private normalized listening set with encoded word review")
     args = parser.parse_args()
     root = args.game_root.resolve(strict=True)
     ffmpeg = args.ffmpeg.resolve(strict=True)
@@ -133,6 +135,36 @@ def main() -> None:
     diagnostic_by_id = {item["clipId"]: item for item in diagnostic.get("clips", [])}
     if len(diagnostic_by_id) != len(diagnostic.get("clips", [])):
         raise RuntimeError("Duplicate clip IDs in German ASR diagnostic")
+    normalized_dir = args.normalized_dir.resolve(strict=True) if args.normalized_dir else None
+    normalized_manifest_path = normalized_dir / "manifest.json" if normalized_dir else None
+    normalized_words_path = normalized_dir / "word-review.json" if normalized_dir else None
+    comparison_path = normalized_dir / "original-comparison.json" if normalized_dir else None
+    normalized_copies = {}
+    normalized_words = {}
+    comparisons = {}
+    if normalized_dir:
+        if not normalized_dir.is_relative_to(output):
+            raise RuntimeError("Normalized listening set must be inside the Music output root")
+        normalized_manifest = json.loads(normalized_manifest_path.read_text(encoding="utf-8"))
+        normalized_report = json.loads(normalized_words_path.read_text(encoding="utf-8"))
+        if (normalized_manifest["sourceManifestSha256"] != digest(manifest_path) or
+                normalized_report["normalizedManifestSha256"] != digest(normalized_manifest_path) or
+                normalized_manifest["completedCount"] != len(clips) or
+                normalized_report["completedCount"] != len(clips)):
+            raise RuntimeError("Normalized listening set or word review is incomplete or stale")
+        normalized_copies = {item["clipId"]: item for item in normalized_manifest["copies"]}
+        normalized_words = {item["clipId"]: item for item in normalized_report["clips"]}
+        if len(normalized_copies) != len(clips) or len(normalized_words) != len(clips):
+            raise RuntimeError("Duplicate or missing normalized listening clip IDs")
+        if comparison_path.is_file():
+            comparison = json.loads(comparison_path.read_text(encoding="utf-8"))
+            if (comparison["sourceManifestSha256"] != digest(manifest_path) or
+                    comparison["normalizedManifestSha256"] != digest(normalized_manifest_path) or
+                    comparison["completedCount"] != comparison["targetCount"]):
+                raise RuntimeError("Original/normalized ASR comparison is incomplete or stale")
+            comparisons = {item["clipId"]: item for item in comparison["clips"]}
+            if len(comparisons) != comparison["completedCount"]:
+                raise RuntimeError("Duplicate clip ID in original/normalized ASR comparison")
     fields = list(rows[0])
     with (output / "VOICE-CANDIDATE-TECHNICAL-AUDIT.csv").open("w", encoding="utf-8", newline="") as stream:
         writer = csv.DictWriter(stream, fieldnames=fields, lineterminator="\n")
@@ -161,7 +193,41 @@ def main() -> None:
         if asr and (asr["audioSha256"] != clip["sha256"] or
                     asr["profileId"] != clip["profileId"] or asr["script"] != clip["text"]):
             raise RuntimeError(f"German ASR diagnostic differs from candidate: {clip['clipId']}")
-        if not clip["asrWordExact"] and (not asr or asr["germanPinnedWordPercent"] < 100):
+        normalized_copy = normalized_copies.get(clip["clipId"])
+        normalized_word = normalized_words.get(clip["clipId"])
+        comparison = comparisons.get(clip["clipId"])
+        if normalized_dir and (not normalized_copy or not normalized_word):
+            raise RuntimeError(f"Normalized review record is missing: {clip['clipId']}")
+        normalized_path = ""
+        if normalized_copy:
+            candidate_copy = (normalized_dir / normalized_copy["copyFile"]).resolve(strict=True)
+            if (not candidate_copy.is_relative_to(normalized_dir) or
+                    normalized_copy["sourceSha256"] != clip["sha256"] or
+                    normalized_copy["profileId"] != clip["profileId"] or
+                    normalized_copy["script"] != clip["text"] or
+                    digest(candidate_copy) != normalized_copy["outputSha256"] or
+                    normalized_word["outputSha256"] != normalized_copy["outputSha256"] or
+                    normalized_word["script"] != clip["text"]):
+                raise RuntimeError(f"Normalized review copy or ASR differs from candidate: {clip['clipId']}")
+            normalized_path = str(candidate_copy.relative_to(output)).replace("\\", "/")
+        if comparison and (comparison["sourceSha256"] != clip["sha256"] or
+                           comparison["normalizedSha256"] != normalized_copy["outputSha256"] or
+                           comparison["script"] != clip["text"]):
+            raise RuntimeError(f"Original/normalized comparison differs from candidate: {clip['clipId']}")
+        asr_regression = bool(comparison and comparison["originalGermanPinnedPercent"] == 100 and
+                              normalized_word["normalizedWordPercent"] < 100)
+        if asr_regression:
+            priority = "00_compare_original_normalized"
+        elif normalized_word and normalized_word["normalizedWordPercent"] < 100:
+            priority = "01_encoded_word_check"
+        elif normalized_word and (not clip["asrWordExact"] and
+                                  (not asr or asr["germanPinnedWordPercent"] < 100)):
+            priority = "02_original_word_check"
+        elif normalized_copy and normalized_copy.get("processingMethod", "").startswith("dynamic_"):
+            priority = "03_compressed_delivery_listen"
+        elif normalized_word:
+            priority = "04_full_listening"
+        elif not clip["asrWordExact"] and (not asr or asr["germanPinnedWordPercent"] < 100):
             priority = "01_word_check"
         elif not clip["asrWordExact"]:
             priority = "02_orthography_listen"
@@ -180,6 +246,16 @@ def main() -> None:
                        "asrWordExact": clip["asrWordExact"],
                        "germanPinnedTranscript": asr["germanPinnedTranscript"] if asr else "",
                        "germanPinnedWordPercent": asr["germanPinnedWordPercent"] if asr else "",
+                       "normalizedTranscript": normalized_word["normalizedTranscript"] if normalized_word else "",
+                       "normalizedWordPercent": normalized_word["normalizedWordPercent"] if normalized_word else "",
+                       "originalPinnedTranscriptForComparison": comparison["originalGermanPinnedTranscript"] if comparison else "",
+                       "originalPinnedWordPercentForComparison": comparison["originalGermanPinnedPercent"] if comparison else "",
+                       "asrRegressionAfterNormalization": asr_regression,
+                       "normalizedReviewFile": normalized_path,
+                       "normalizedSha256": normalized_copy["outputSha256"] if normalized_copy else "",
+                       "normalizedLufs": normalized_copy["outputLufs"] if normalized_copy else "",
+                       "normalizedTruePeakDbtp": normalized_copy["outputTruePeakDbtp"] if normalized_copy else "",
+                       "normalizedProcessingMethod": normalized_copy.get("processingMethod", "") if normalized_copy else "",
                        "technicalReviewFlags": measured["technicalReviewFlags"],
                        "integratedLufs": measured["integratedLufs"],
                        "truePeakDbtp": measured["truePeakDbtp"],
@@ -195,7 +271,8 @@ def main() -> None:
             old_rows = list(csv.DictReader(stream))
         preserve_review_decisions(review, old_rows)
     review.sort(key=lambda item: (item["priority"],
-                                  item["germanPinnedWordPercent"] if item["germanPinnedWordPercent"] != "" else 101,
+                                  item["normalizedWordPercent"] if item["normalizedWordPercent"] != "" else
+                                  (item["germanPinnedWordPercent"] if item["germanPinnedWordPercent"] != "" else 101),
                                   item["voiceId"], item["clipId"]))
     with review_path.open("w", encoding="utf-8", newline="") as stream:
         writer = csv.DictWriter(stream, fieldnames=list(review[0]), lineterminator="\n")
@@ -217,6 +294,15 @@ def main() -> None:
               "germanPinnedExactCount": sum(item["germanPinnedWordPercent"] == 100
                                              for item in diagnostic_by_id.values()),
               "germanPinnedDiagnosticSha256": digest(diagnostic_path) if diagnostic else None,
+              "normalizedReviewCopyCount": len(normalized_copies),
+              "normalizedWordDiagnosticExactCount": sum(item["normalizedWordPercent"] == 100
+                                                         for item in normalized_words.values()),
+              "normalizedManifestSha256": digest(normalized_manifest_path) if normalized_dir else None,
+              "normalizedWordReviewSha256": digest(normalized_words_path) if normalized_dir else None,
+              "originalNormalizedComparisonCount": len(comparisons),
+              "asrRegressionAfterNormalizationCount": sum(row["asrRegressionAfterNormalization"]
+                                                           for row in review),
+              "originalNormalizedComparisonSha256": digest(comparison_path) if comparisons else None,
               "verifiedMusicReviewCopies": sum(bool(row["musicReviewFile"]) for row in review),
               "flagCounts": counts,
               "clipsWithAnyFlag": sum(bool(row["technicalReviewFlags"]) for row in rows),
