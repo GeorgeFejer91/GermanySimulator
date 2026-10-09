@@ -137,7 +137,7 @@ def main() -> None:
     report = {"schemaVersion": 1, "status": "human_listening_shortlist_only",
               "note": "One clip per speaking profile. The 100% word diagnostic does not approve audible words, voice identity, demeanor, intonation, artifacts, rights or release.",
               "candidateCount": len(queued), "selectedProfileCount": len(selected),
-              "unselectedSilentProfiles": sorted(set(people) - set(by_voice)),
+              "unselectedProfilesWithoutCandidate": sorted(set(people) - set(by_voice)),
               "queueProvenanceSha256": hashlib.sha256(
                   json.dumps(provenance, ensure_ascii=False, sort_keys=True).encode("utf-8")
               ).hexdigest(),
@@ -151,7 +151,7 @@ def main() -> None:
                   (json.dumps(report, ensure_ascii=False, indent=2) + "\n").encode("utf-8"),
                   args.check)
     print(json.dumps({"check": args.check, "selectedProfiles": len(selected),
-                      "silentProfiles": len(report["unselectedSilentProfiles"]),
+                      "profilesWithoutCandidate": len(report["unselectedProfilesWithoutCandidate"]),
                       "policeGrassClip": next(row["clipId"] for row in selected
                                               if row["voiceId"] == "polizei-heinrich-wachtmeister")}))
 

@@ -97,6 +97,7 @@ const characterRoutes=[
  {id:"warteschlangenpoetin",speed:.7,points:[[-4.55,-2.25],[-4.55,-3.55],[-5.55,-3.55],[-5.55,-2.25]]}
 ];
 const characters=characterRoutes.map(route=>({id:route.id,route,x:route.points[0][0],z:route.points[0][1],target:1,direction:"up",mode:"work",pause:1.1,stride:0,workClock:0,animationClock:0,returning:null,encounters:0,sequence:[{mode:"work",duration:1.1}],pending:false,priority:0,attention:0}));
+let patronEncounters={};
 let characterMood=null;
 const omen={used:false,phase:"",strength:0,hold:0,elapsed:0,travel:0,path:[],pathIndex:0,roomTime:0,startDistance:0,resume:"walk-sign",resumeYaw:0,recoverFromYaw:0,speech:null,visit:0,revealTime:0,lifeTime:0,lifeClock:0};
 const ease=value=>{const t=Math.max(0,Math.min(1,value));return t*t*(3-2*t)};
@@ -308,9 +309,10 @@ function updateCharacters(dt){
   if(actor.attention===0&&Math.hypot(actor.x-view.x,actor.z-view.z)<2.5){actor.attention=7.5;action(actor,[["look",.72],["work",.4]],1)}
  }
 }
-function nearestCharacter(){if(!["walk-sign","waiting"].includes(stage))return null;let found=null,distance=1.65;for(const actor of characters){if(actor.returning)continue;const d=Math.hypot(view.x-actor.x,view.z-actor.z);if(d<distance){found=actor;distance=d}}return found}
+function nearestCharacter(){if(!["walk-sign","waiting"].includes(stage))return null;let found=null,distance=1.65;for(const actor of characters){if(actor.returning)continue;const d=Math.hypot(view.x-actor.x,view.z-actor.z);if(d<distance){found=actor;distance=d}}for(const [id,patron] of Object.entries(story.patrons)){const d=Math.hypot(view.x-patron.x,view.z-patron.z);if(d<distance){found={id,x:patron.x,z:patron.z,static:true};distance=d}}return found}
 function showCharacter(actor){
- const entry=story.characters[actor.id],spoken=entry.lines[actor.encounters++%entry.lines.length],resume=stage;
+ const entry=actor.static?story.patrons[actor.id]:story.characters[actor.id],index=actor.static?(patronEncounters[actor.id]||0):actor.encounters++,spoken=entry.lines[index%entry.lines.length],resume=stage;
+ if(actor.static){patronEncounters[actor.id]=index+1;setStage("character");content(entry.speaker,spoken.line,[{label:"ZURÜCK ZUM VORGANG",run:()=>setStage(resume)}],null,null,null,{id:actor.id,tone:spoken.tone,valence:spoken.valence});return}
  actor.pending=false;actor.sequence=[];actor.priority=3;actor.mode="gesture";actor.workClock=0;actor.animationClock=0;actor.returning=null;setStage("character");content(entry.speaker,spoken.line,[{label:"ZURÜCK ZUM VORGANG",run:()=>{
   const phase=(actor.animationClock%4)/4;actor.returning={phase,direction:phase<.5?-1:1};actor.sequence=[{mode:"look",duration:.45},{mode:"work",duration:.7}];actor.pending=false;
   setStage(resume);
@@ -364,7 +366,7 @@ function content(who,text,buttons=[],onComplete,onStart,onBoundary,mood=null,del
  const owner=attempt,visibleCue=cue;
  for(const item of buttons){const button=document.createElement("button");button.type="button";button.textContent=item.label;
   button.addEventListener("click",()=>{if(!active||owner!==attempt||visibleCue!==cue||button.disabled)return;button.disabled=true;item.run()});actions.append(button)}
- const voiceId=isClerk?story.clerkIdentity.voiceId:story.characters[mood?.id]?.voiceId||"";
+ const voiceId=isClerk?story.clerkIdentity.voiceId:story.characters[mood?.id]?.voiceId||story.patrons[mood?.id]?.voiceId||"";
  say(text,onComplete?mode=>{if(isClerk){clerkSpeaking=false;clerkAnimation?.setSpeech(false);clerkBeat=stage==="reply"?"stamp":stage==="cancelled"?"deny":"review";clerkAccent=.65}onComplete(mode)}:null,mode=>{if(isClerk){clerkSpeaking=true;clerkPulse=0;clerkAnimation?.setSpeech(true,0);if(!onComplete){const speakingCue=cue;defer(()=>{if(cue===speakingCue){clerkSpeaking=false;clerkAnimation?.setSpeech(false);clerkBeat="review";clerkAccent=.65}},Math.max(1800,Math.min(10000,text.length*55)))}}onStart?.(mode)},(charIndex,event)=>{if(isClerk){clerkPulse++;clerkAnimation?.setSpeech(clerkSpeaking,clerkPulse)}onBoundary?.(charIndex,event)},delivery,voiceId);
 }
 function setStatus(text){status.textContent=text}
@@ -455,7 +457,7 @@ function update(dt){
  updateCharacters(elapsed);
  if(omen.phase)return;
  if(stage==="character"){
-  const actor=characters.find(item=>item.id===characterMood?.id);
+  const actor=characters.find(item=>item.id===characterMood?.id)||story.patrons[characterMood?.id];
   if(actor){const target=Math.atan2(actor.x-view.x,view.z-actor.z),turn=Math.atan2(Math.sin(target-view.yaw),Math.cos(target-view.yaw));view.yaw+=turn*(1-Math.exp(-4*elapsed))}
   return;
  }
@@ -471,7 +473,7 @@ function update(dt){
  const f=(held.has("KeyW")||held.has("ArrowUp")?1:0)-(held.has("KeyS")||held.has("ArrowDown")?1:0),s=(held.has("KeyD")?1:0)-(held.has("KeyA")?1:0);
  if(f||s){const length=Math.hypot(f,s),speed=held.has("ShiftLeft")?5.8:3.6,dx=(Math.sin(view.yaw)*f+Math.cos(view.yaw)*s)/length*speed*elapsed,dz=(-Math.cos(view.yaw)*f+Math.sin(view.yaw)*s)/length*speed*elapsed;const steps=Math.max(1,Math.ceil(Math.hypot(dx,dz)/.1));for(let i=0;i<steps;i++){const x=Math.max(-7.45,Math.min(7.45,view.x+dx/steps)),z=Math.max(-10.05,Math.min(8.45,view.z+dz/steps));const crossing=view.z>=door.z&&z<door.z||view.z<door.z&&z>=door.z;if(crossing&&Math.abs(x)>1.3)break;if(!officeBlocked(x,view.z))view.x=x;if(!officeBlocked(view.x,z)){view.z=z;if(crossing&&stage==="outside"&&z<door.z){setStage(activated?"waiting":"walk-sign",true);setStatus(activated?"WARTENUMMER "+number+" · AUFRUF ABWARTEN":"QR-CODE MIT DEM TELEFON SCANNEN")}}}}
  const near=distanceTo(nearbyTarget())<1.9&&(stage!=="outside"||Math.abs(view.x)<1.3),actor=stage==="waiting"&&near?null:nearestCharacter();
- const nearbyText=actor?"E · "+story.characters[actor.id].speaker+" ANSPRECHEN":near?(stage==="outside"?"DURCH DEN EINGANG GEHEN":stage==="walk-sign"?"QR-CODE MIT DEM TELEFON SCANNEN":stage==="waiting"?"E · VORZEITIG AN SCHALTER 3":"E · FRAU KNICK ANSPRECHEN"):(stage==="outside"?"ZUR EINGANGSTÜR":stage==="walk-sign"?"QR-SCHILD UNTER DER ANZEIGE":"AUFRUFTAFEL BEOBACHTEN");
+ const nearbyText=actor?"E · "+(story.characters[actor.id]||story.patrons[actor.id]).speaker+" ANSPRECHEN":near?(stage==="outside"?"DURCH DEN EINGANG GEHEN":stage==="walk-sign"?"QR-CODE MIT DEM TELEFON SCANNEN":stage==="waiting"?"E · VORZEITIG AN SCHALTER 3":"E · FRAU KNICK ANSPRECHEN"):(stage==="outside"?"ZUR EINGANGSTÜR":stage==="walk-sign"?"QR-SCHILD UNTER DER ANZEIGE":"AUFRUFTAFEL BEOBACHTEN");
  if(nearby.textContent!==nearbyText)nearby.textContent=nearbyText;
 }
 function interact(){if(!walking()||omen.phase)return;const near=distanceTo(nearbyTarget())<1.9,actor=stage==="waiting"&&near?null:nearestCharacter();if(actor){showCharacter(actor);return}if(!near||stage==="outside"&&Math.abs(view.x)>=1.3)return;
@@ -559,7 +561,7 @@ function close(notify=true){
  try{officeAudio?.ctx.close()?.catch(()=>{})}catch{}officeAudio=null;held.clear();root.hidden=true;walkHud.hidden=true;mixPanel.open=false;mixPanel.hidden=true;ambient.textContent="";
  document.body.classList.remove("amt-inside");const previous=link;link=null;previous?.send("done");previous?.close();config.music?.(false);if(notify)config.onClose();
 }
-function open(config){if(active)return;resetTiming();hostVoiceStartupMs=null;hostVoiceAttempts=0;attempt++;callOutcome="";options=config;active=true;clerkIndex=0;callPending=false;callTriggered=false;callCommitted=false;callArmTimer=null;clockAnchor=null;registeredName="";number="";activated=false;lastScanId="";queueClock=0;queueIndex=1;ticketWaitCalls=0;deadline=0;ambientClock=0;clerkClock=0;clerkSpeaking=false;clerkAccent=0;clerkBeat="idle";clerkPulse=0;clerkAnimation?.reset(attempt);displayNumber("B-041");view.x=0;view.z=8;view.yaw=0;held.clear();resetCharacters();resetOmen();exit.hidden=false;root.hidden=false;mixPanel.hidden=false;document.body.classList.add("amt-inside");options.music?.(true);beginLink();setStage("outside");setStatus("EINGANG · BÜRGERAMT");const owner=attempt;window.BuergeramtClock?.sample?.().then(anchor=>{if(active&&attempt===owner)clockAnchor=anchor}).catch(()=>{})}
+function open(config){if(active)return;resetTiming();hostVoiceStartupMs=null;hostVoiceAttempts=0;attempt++;callOutcome="";options=config;active=true;clerkIndex=0;callPending=false;callTriggered=false;callCommitted=false;callArmTimer=null;clockAnchor=null;registeredName="";number="";activated=false;lastScanId="";queueClock=0;queueIndex=1;ticketWaitCalls=0;deadline=0;ambientClock=0;clerkClock=0;clerkSpeaking=false;clerkAccent=0;clerkBeat="idle";clerkPulse=0;patronEncounters={};clerkAnimation?.reset(attempt);displayNumber("B-041");view.x=0;view.z=8;view.yaw=0;held.clear();resetCharacters();resetOmen();exit.hidden=false;root.hidden=false;mixPanel.hidden=false;document.body.classList.add("amt-inside");options.music?.(true);beginLink();setStage("outside");setStatus("EINGANG · BÜRGERAMT");const owner=attempt;window.BuergeramtClock?.sample?.().then(anchor=>{if(active&&attempt===owner)clockAnchor=anchor}).catch(()=>{})}
 function clerkPerformance(){
  const names={idle:0,review:1,raise:2,stamp:3,deny:4,talk:5};
  let mode="idle";

@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "scope": "Eight optional Bürgeramt walkers and 19 named city NPCs with exact fixed dialogue; the modeled Brunhilde Knick clerk, player, police, twelve named crowd identities, and three newly named silent Bürgeramt patrons have voice bindings. Nine quiz portraits and two towel-archetype review voices are separate profiles. An additional traffic-driver profile is imported from shipped CC0 source clips. DistinctReferenceCount covers all new EmoDB profiles.",
+  "scope": "Eight optional Bürgeramt walkers and 19 named city NPCs with exact fixed dialogue; the modeled Brunhilde Knick clerk, player, police, twelve named crowd identities, and three named static Bürgeramt patrons have voice bindings and authored interactions. Nine quiz portraits and two towel-archetype review voices are separate profiles. An additional traffic-driver profile is imported from shipped CC0 source clips. DistinctReferenceCount covers all new EmoDB profiles.",
   "source": [
     "game.js",
     "buergeramt-story.js",
@@ -1952,8 +1952,8 @@
       "secretTunnelProfileId": "33355401b5964a32a2435c309fcd4bef",
       "gender": "male",
       "genderEvidence": "Visual audit of assets/buergeramt/characters/renter-detail.webp depicts a male-presenting adult; this is casting direction, not a biographical claim.",
-      "generalDemeanor": "Visually anxious and protective of his file bundle; no authored speech yet, so this is a provisional performance direction.",
-      "demeanorEvidence": "Static artwork and paperwork prop only; no authored speech or behavior establishes a firmer baseline.",
+      "generalDemeanor": "Anxious about whether his file bundle will suffice; keep the delivery worried and restrained.",
+      "demeanorEvidence": "Renter artwork and buergeramt-story.js patrons.amt-konrad-wohnungszettel.lines[0].",
       "targetValence": "negative",
       "targetArousal": "medium",
       "reference": {
@@ -1987,9 +1987,9 @@
         "referenceTranscript": "Das will sie am Mittwoch abgeben. Sie haben es gerade hochgetragen und jetzt gehen sie wieder runter. Ich will das eben wegbringen und dann mit Karl was trinken gehen. Die wird auf dem Platz sein, wo wir sie immer hinlegen.",
         "referenceDurationSeconds": 9.749125
       },
-      "status": "profile-created; private audition pending; static figure has no authored runtime dialogue",
+      "status": "profile-verified; private audition saved; authored interaction uses browser speech pending rights-cleared audio review",
       "dialogueSources": [
-        "world3d.js amtCharacter(\"renter\") static figure; no authored dialogue"
+        "buergeramt-story.js patrons.amt-konrad-wohnungszettel.lines[0]"
       ]
     },
     {
@@ -2000,8 +2000,8 @@
       "secretTunnelProfileId": "9ceb89cea9d4434d93fbd5e5464a9769",
       "gender": "female",
       "genderEvidence": "Visual audit of assets/buergeramt/characters/parent-detail.webp depicts a female-presenting adult; this is casting direction, not a biographical claim.",
-      "generalDemeanor": "Visually guarded while carrying paperwork; no authored speech yet, so use a measured neutral baseline rather than assuming anger.",
-      "demeanorEvidence": "Static artwork and paperwork prop only; no authored speech or behavior establishes a firmer baseline.",
+      "generalDemeanor": "Measured and guarded while awaiting confirmation for her child; use a neutral medium-arousal delivery.",
+      "demeanorEvidence": "Parent artwork and buergeramt-story.js patrons.amt-mechthild-elternbogen.lines[0].",
       "targetValence": "neutral",
       "targetArousal": "medium",
       "reference": {
@@ -2030,9 +2030,9 @@
         "referenceTranscript": "Das schwarze Stück Papier befindet sich da oben neben dem Holzstück. Sie haben es gerade hochgetragen und jetzt gehen sie wieder runter. An den Wochenenden bin ich jetzt immer nach Hause gefahren und habe Agnes besucht.",
         "referenceDurationSeconds": 9.896833333333333
       },
-      "status": "profile-created; private audition pending; static figure has no authored runtime dialogue",
+      "status": "profile-verified; private audition saved; authored interaction uses browser speech pending rights-cleared audio review",
       "dialogueSources": [
-        "world3d.js amtCharacter(\"parent\") static figure; no authored dialogue"
+        "buergeramt-story.js patrons.amt-mechthild-elternbogen.lines[0]"
       ]
     },
     {
@@ -2043,8 +2043,8 @@
       "secretTunnelProfileId": "1e22f4cca3ae4f33b95ae1213a06cf47",
       "gender": "male",
       "genderEvidence": "Visual audit of assets/buergeramt/characters/pensioner-detail.webp depicts a male-presenting adult; this is casting direction, not a biographical claim.",
-      "generalDemeanor": "Visually stern with a cane and papers; no authored speech yet, so restrained irritation is provisional rather than a measured trait.",
-      "demeanorEvidence": "Static artwork and paperwork prop only; no authored speech or behavior establishes a firmer baseline.",
+      "generalDemeanor": "Restrained irritation over a delayed notice; sound stern without turning the line into a shout.",
+      "demeanorEvidence": "Pensioner artwork and buergeramt-story.js patrons.amt-wolfram-rentenbescheid.lines[0].",
       "targetValence": "negative",
       "targetArousal": "medium",
       "reference": {
@@ -2073,9 +2073,9 @@
         "referenceTranscript": "Das schwarze Stück Papier befindet sich da oben neben dem Holzstück. An den Wochenenden bin ich jetzt immer nach Hause gefahren und habe Agnes besucht. Ich will das eben wegbringen und dann mit Karl was trinken gehen.",
         "referenceDurationSeconds": 11.751083333333334
       },
-      "status": "profile-created; private audition pending; static figure has no authored runtime dialogue",
+      "status": "profile-verified; private audition saved; authored interaction uses browser speech pending rights-cleared audio review",
       "dialogueSources": [
-        "world3d.js amtCharacter(\"pensioner\") static figure; no authored dialogue"
+        "buergeramt-story.js patrons.amt-wolfram-rentenbescheid.lines[0]"
       ]
     },
     {

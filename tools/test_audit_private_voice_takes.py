@@ -39,10 +39,22 @@ def main() -> None:
         shutil.copy2(source_music / audit_module.CAST_INDEX, music / audit_module.CAST_INDEX)
         shutil.copy2(source_music / take["queue"], music / take["queue"])
         (game / "For-AI").mkdir(parents=True)
-        for name in ("VOICE-CAST.json", "VOICE-DIALOGUE-INVENTORY.json"):
+        for name in ("VOICE-CAST.json", "VOICE-DIALOGUE-INVENTORY.json",
+                     audit_module.QUEUE_BASELINE):
             shutil.copy2(source_game / "For-AI" / name, game / "For-AI" / name)
         clean = audit_module.audit(music, game)
         assert (clean["receiptCount"], clean["verifiedCount"], clean["errorCount"]) == (1, 1, 0), clean
+        inventory = game / "For-AI/VOICE-DIALOGUE-INVENTORY.json"
+        original_inventory = inventory.read_bytes()
+        changed_inventory = json.loads(original_inventory)
+        changed_inventory["pools"]["quizContexts"]["civic"]["germany"] += " Zusatz."
+        inventory.write_text(json.dumps(changed_inventory), encoding="utf-8")
+        try:
+            audit_module.audit(music, game)
+            raise AssertionError("A changed quiz source pool was accepted")
+        except ValueError as error:
+            assert "source pools changed" in str(error), error
+        inventory.write_bytes(original_inventory)
         audio = target / take["audioFile"]
         original_bytes = audio.read_bytes()
         audio.write_bytes(original_bytes + b"changed")
@@ -55,7 +67,7 @@ def main() -> None:
         (target / "take.json").write_text(json.dumps(tampered), encoding="utf-8")
         changed = audit_module.audit(music, game)
         assert changed["verifiedCount"] == 0 and "Source request row changed" in changed["errors"][0]["error"], changed
-    print(json.dumps({"cleanReceipt": "verified", "tamperedMp3": "rejected",
+    print(json.dumps({"cleanReceipt": "verified", "changedQuizPool": "rejected", "tamperedMp3": "rejected",
                       "tamperedRequestRow": "rejected"}))
 
 

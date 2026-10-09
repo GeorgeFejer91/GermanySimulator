@@ -1,6 +1,7 @@
 import {createHash} from 'node:crypto';
 import {readFileSync, writeFileSync, existsSync} from 'node:fs';
 import {resolve} from 'node:path';
+import vm from 'node:vm';
 import {STREET_CATALOG} from '../assets/models/street-characters/models.js';
 import {STREET_PERSONA_MAP, STREET_TEMPLATE_GENDER} from '../assets/models/street-characters/persona-map.js';
 
@@ -68,6 +69,22 @@ for (const person of officeSpeakers) requireMatch(person.gameCharacterId === per
   `Bürgeramt model/speaker mismatch for ${person.gameCharacterId}`);
 for (const person of officeClones) requireMatch(byVoice.has(person.decorativeCloneOf) &&
   !person.voiceId && !person.gameCharacterId, 'A decorative clerk clone gained a speech identity');
+const storyContext = {window: {}};
+vm.runInNewContext(source('buergeramt-story.js'), storyContext);
+const patronDialogue = storyContext.window.BuergeramtStory.patrons;
+const patronModels = [...world.matchAll(/amtCharacter\("([^"]+)",(-?[\d.]+),(-?[\d.]+),[^\n]*?\{id:"([^"]+)"/g)]
+  .filter(([, kind]) => ['renter', 'parent', 'pensioner'].includes(kind))
+  .map(([, kind, x, z, voiceId]) => ({kind, x: Number(x), z: Number(z), voiceId}));
+requireMatch(patronModels.length === 3 && Object.keys(patronDialogue).length === 3,
+  'Expected three authored static Bürgeramt patrons');
+for (const model of patronModels) {
+  const entry = patronDialogue[model.voiceId], castPerson = byVoice.get(model.voiceId);
+  requireMatch(entry && castPerson && entry.voiceId === model.voiceId &&
+    entry.fullName === castPerson.fullName && entry.x === model.x && entry.z === model.z &&
+    entry.lines.length > 0 && entry.lines.every(({line}) => typeof line === 'string' && line.length > 0) &&
+    castPerson.dialogueSources?.includes(`buergeramt-story.js patrons.${model.voiceId}.lines[0]`),
+  `Static patron model/dialogue/cast mismatch for ${model.voiceId}`);
+}
 
 requireMatch(existsSync(resolve(root, 'assets/models/towel-pedestrians/man.glb')) &&
   existsSync(resolve(root, 'assets/models/towel-pedestrians/woman.glb')),
@@ -107,10 +124,11 @@ const report = {
     'assets/models/street-characters/persona-map.js'].map(file => [file, hash(file)])),
   counts: {newNonpoliticalProfiles: newProfiles.length, existingPoliticalProfiles: political.length,
     namedCityNpcBindings: city.length, namedCrowdIdentities: crowd.length,
-    staticBuergeramtSpeakers: officeSpeakers.length, decorativeClerkClones: officeClones.length,
+    staticBuergeramtSpeakers: officeSpeakers.length, authoredStaticPatrons: patronModels.length, decorativeClerkClones: officeClones.length,
     optionalStreetVisualTemplates: STREET_CATALOG.length,
     mappedStreetSpeakers: streetPersonaMapping.length},
   staticBuergeramt: office,
+  staticPatronDialogue: patronModels.map(model => ({...model, lineCount: patronDialogue[model.voiceId].lines.length})),
   city,
   crowdVoiceIds: crowd,
   optionalStreetVisualTemplates: STREET_CATALOG.map(({id, title, role}) =>

@@ -100,6 +100,7 @@ def main() -> None:
     if not output.is_dir():
         raise ValueError(f"Derived output directory is missing: {output}")
     inventory_sha = digest(game / "For-AI/VOICE-DIALOGUE-INVENTORY.json")
+    valid_inventory_hashes = module.valid_inventory_hashes(game)
     count = {"quiz": {"source": 0, "saved": 0, "remaining": 0},
              "crowd": {"source": 0, "saved": 0, "remaining": 0}}
     index = []
@@ -113,8 +114,8 @@ def main() -> None:
         remaining = []
         saved = []
         for row in rows:
-            if row.get("sourceInventorySha256") != inventory_sha:
-                raise ValueError(f"Queue inventory is stale: {source.name}")
+            if row.get("sourceInventorySha256") not in valid_inventory_hashes:
+                raise ValueError(f"Queue inventory has no validated source: {source.name}")
             person = profiles.get(row.get("voiceId"))
             if (not person or row.get("profileId") != person["profileId"] or
                     row.get("referenceSha256") not in
@@ -157,6 +158,7 @@ def main() -> None:
     report = {"schemaVersion": 1, "status": "generated_request_reconciliation_only",
               "note": "Saved private takes are excluded from remaining CSVs, but still need listening, model/source rights review and game catalog integration. No automatic regeneration or approval.",
               "gameInventorySha256": inventory_sha,
+              "acceptedSourceInventorySha256": sorted(valid_inventory_hashes),
               "castSha256": verified["gameCastSha256"],
               "quizSourceIndexSha256": digest(quiz_root / "INDEX.csv"),
               "privateReceiptCount": verified["receiptCount"],
@@ -169,7 +171,9 @@ def main() -> None:
     readme = (
         "# Remaining GermanySimulator voice requests\n\n"
         f"Current game dialogue inventory SHA-256: `{inventory_sha}`. The source queues "
-        "are unchanged; this directory is a derived handoff.\n\n"
+        f"retain archived baseline SHA-256 `{module.QUEUE_BASELINE_SHA256}`. The audit verifies that "
+        "only three static-patron dialogue entries were added; the quiz and crowd pools are "
+        "identical in the two parsed inventories. This directory is a derived handoff.\n\n"
         f"The 18 quiz CSVs contain {count['quiz']['remaining']} remaining exact segments "
         f"from {count['quiz']['source']} requests; {count['quiz']['saved']} already have "
         "hash-verified private Secret Tunnel takes. The two crowd CSVs contain "

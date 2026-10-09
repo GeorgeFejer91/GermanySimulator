@@ -10,12 +10,15 @@ import argparse
 import csv
 import hashlib
 import json
+import os
 from collections import Counter
 from pathlib import Path
 
 
 RESULTS = "GermanySimulator Whisper-scored private candidates 2026-10-08"
 CAST_INDEX = "GERMANY-SIMULATOR-CAST-INDEX.json"
+QUEUE_BASELINE = "VOICE-DIALOGUE-INVENTORY-QUEUE-BASELINE.json"
+QUEUE_BASELINE_SHA256 = "5c8373587b0c5b686eb2e99e122b3bc2c4e2f00afac3543a62bf2ee2bff4130a"
 
 
 def digest(path: Path) -> str:
@@ -24,6 +27,35 @@ def digest(path: Path) -> str:
         for block in iter(lambda: stream.read(1024 * 1024), b""):
             result.update(block)
     return result.hexdigest()
+
+
+def valid_inventory_hashes(game: Path) -> set[str]:
+    """Preserve exact old requests when only the three static patrons were added."""
+    directory = game / "For-AI"
+    current_path = directory / "VOICE-DIALOGUE-INVENTORY.json"
+    baseline_path = directory / QUEUE_BASELINE
+    if digest(baseline_path) != QUEUE_BASELINE_SHA256:
+        raise ValueError("Archived source inventory bytes changed")
+    current = json.loads(current_path.read_text(encoding="utf-8"))
+    baseline = json.loads(baseline_path.read_text(encoding="utf-8"))
+    old_pools = baseline["pools"]
+    new_pools = current["pools"]
+    if ({key: value for key, value in new_pools.items() if key != "buergeramtPatrons"} != old_pools or
+            set(new_pools["buergeramtPatrons"]) != {
+                "amt-konrad-wohnungszettel", "amt-mechthild-elternbogen",
+                "amt-wolfram-rentenbescheid"}):
+        raise ValueError("Existing quiz/crowd source pools changed; old queues need reauthoring")
+    old_dynamic = {item["voiceId"]: item["sourcePools"] for item in baseline["dynamicIdentityVoiceIds"]}
+    new_dynamic = {item["voiceId"]: item["sourcePools"] for item in current["dynamicIdentityVoiceIds"]}
+    expected_dynamic = dict(old_dynamic)
+    for voice_id in new_pools["buergeramtPatrons"]:
+        expected_dynamic[voice_id] = [f"buergeramt-story.js patrons.{voice_id}.lines[0]"]
+    if new_dynamic != expected_dynamic:
+        raise ValueError("Inventory speaker sources changed outside the three new patrons")
+    for key in baseline.keys() | current.keys():
+        if key not in {"pools", "dynamicIdentityVoiceIds"} and current.get(key) != baseline.get(key):
+            raise ValueError(f"Inventory metadata changed outside the patron addition: {key}")
+    return {digest(current_path), QUEUE_BASELINE_SHA256}
 
 
 def child_file(parent: Path, name: str, suffix: str) -> Path:
@@ -51,7 +83,7 @@ def queue_rows(music: Path, names: set[str]) -> dict[str, list[dict]]:
 
 
 def verify_receipt(receipt: Path, music: Path, profiles: dict,
-                   queues: dict, inventory_sha: str) -> dict:
+                   queues: dict, inventory_hashes: set[str]) -> dict:
     take = json.loads(receipt.read_text(encoding="utf-8"))
     voice_id = take["voiceId"]
     profile = profiles.get(voice_id)
@@ -91,8 +123,8 @@ def verify_receipt(receipt: Path, music: Path, profiles: dict,
     if (source_row.get("script") or source_row.get("sourceText")) != source_text:
         raise ValueError("Queue script differs from generated text")
     if (source_row.get("sourceInventorySha256") and
-            source_row["sourceInventorySha256"] != inventory_sha):
-        raise ValueError("Queue was made from an older game dialogue inventory")
+            source_row["sourceInventorySha256"] not in inventory_hashes):
+        raise ValueError("Queue inventory lacks a validated current or archived source")
 
     audio = child_file(receipt.parent, take["audioFile"], ".mp3")
     metadata = child_file(receipt.parent, take["speechMetadataFile"], ".json")
@@ -144,14 +176,16 @@ def audit(music: Path, game: Path) -> dict:
     names = {json.loads(path.read_text(encoding="utf-8"))["queue"] for path in receipts}
     queues = queue_rows(music, names)
     inventory_sha = digest(inventory_path)
+    inventory_hashes = valid_inventory_hashes(game)
     verified, errors = [], []
     for receipt in receipts:
         try:
-            verified.append(verify_receipt(receipt, music, profiles, queues, inventory_sha))
+            verified.append(verify_receipt(receipt, music, profiles, queues, inventory_hashes))
         except (KeyError, ValueError, OSError, json.JSONDecodeError, TypeError) as error:
             errors.append({"receipt": str(receipt.relative_to(music)), "error": str(error)})
     return {"schemaVersion": 1, "gameCastSha256": digest(cast_path),
             "gameInventorySha256": inventory_sha, "receiptCount": len(receipts),
+            "acceptedSourceInventorySha256": sorted(inventory_hashes),
             "verifiedCount": len(verified), "errorCount": len(errors),
             "byVoice": dict(sorted(Counter(row["voiceId"] for row in verified).items())),
             "verified": verified, "errors": errors,
@@ -162,9 +196,20 @@ def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--music-root", required=True, type=Path)
     parser.add_argument("--game-root", type=Path, default=Path(__file__).resolve().parents[1])
+    parser.add_argument("--write-report", action="store_true",
+                        help="Atomically refresh the Music library's private audit JSON")
     args = parser.parse_args()
-    result = audit(args.music_root.resolve(strict=True), args.game_root.resolve(strict=True))
-    print(json.dumps(result, ensure_ascii=False, indent=2))
+    music = args.music_root.resolve(strict=True)
+    result = audit(music, args.game_root.resolve(strict=True))
+    rendered = json.dumps(result, ensure_ascii=False, indent=2) + "\n"
+    if args.write_report:
+        if result["errorCount"]:
+            raise RuntimeError("Cannot save an audit report with invalid private receipts")
+        path = music / "GERMANY-SIMULATOR-PRIVATE-TAKE-AUDIT.json"
+        temporary = path.with_name(path.name + ".part")
+        temporary.write_text(rendered, encoding="utf-8")
+        os.replace(temporary, path)
+    print(rendered, end="")
     return 1 if result["errorCount"] else 0
 
 

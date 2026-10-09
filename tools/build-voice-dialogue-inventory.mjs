@@ -41,6 +41,7 @@ const pools={
  quizQuestions:Object.fromEntries(questions.map(q=>[String(q.source),{germany:q.question,berlin:berlinQuestions[q.source]?.question??q.question,type:q.type??"civic",level:q.level??null}])),
  buergeramtPolicePhone:{voiceId:"polizei-heinrich-wachtmeister",call:office.call.line,replies:office.police},
  buergeramtClerk:{identity:office.clerkIdentity,counter:office.clerk.map(({line,choices})=>({line,replies:choices.map(({reply})=>reply)})),outburst:office.outburst.lines},
+ buergeramtPatrons:office.patrons,
 };
 const inventory={
  schemaVersion:1,

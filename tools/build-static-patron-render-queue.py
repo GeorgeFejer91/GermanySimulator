@@ -24,7 +24,7 @@ FIELDS = [
     "voiceId", "fullName", "gameRole", "gender", "generalDemeanor",
     "targetValence", "targetArousal", "sourceEmotion", "sourceLicense",
     "profileId", "referencePath", "referenceSha256", "script", "requestStatus",
-    "gameCastSha256",
+    "gameCastSha256", "gameInventorySha256",
 ]
 
 
@@ -44,6 +44,9 @@ def main() -> None:
     music = args.music_root.resolve(strict=True)
     cast_path = GAME_ROOT / "For-AI/VOICE-CAST.json"
     cast = json.loads(cast_path.read_text(encoding="utf-8"))
+    inventory_path = GAME_ROOT / "For-AI/VOICE-DIALOGUE-INVENTORY.json"
+    inventory = json.loads(inventory_path.read_text(encoding="utf-8"))
+    authored = inventory["pools"]["buergeramtPatrons"]
     roles = {person["voiceId"]: person for person in cast["roleProfiles"]}
     konrad_manifest = json.loads((music / "GermanySimulator additional visual cast references 2026-10-08/AUDITIONS-MANIFEST.json").read_text(encoding="utf-8"))
     audition_text = {item["character_id"]: item["source_text"] for item in konrad_manifest["clips"]}
@@ -55,8 +58,11 @@ def main() -> None:
     rows = []
     for voice_id, script in REQUESTS.items():
         person = roles[voice_id]
-        if audition_text[voice_id] != script:
-            raise RuntimeError(f"Audition text changed for {voice_id}")
+        line = authored[voice_id]
+        if (audition_text[voice_id] != script or line["voiceId"] != voice_id or
+                line["fullName"] != person["fullName"] or
+                [item["line"] for item in line["lines"]] != [script]):
+            raise RuntimeError(f"Audition or authored game text changed for {voice_id}")
         profile_id = person["secretTunnelProfileId"]
         reference_rel = f"Secret Tunnel shared voice data/profiles/{profile_id}/reference.wav"
         reference_path = music / reference_rel
@@ -79,6 +85,7 @@ def main() -> None:
             "script": script,
             "requestStatus": "new_rights_cleared_render_needed",
             "gameCastSha256": sha256(cast_path),
+            "gameInventorySha256": sha256(inventory_path),
         })
 
     buffer = io.StringIO(newline="")

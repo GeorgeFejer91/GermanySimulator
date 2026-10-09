@@ -2,10 +2,10 @@
   "schemaVersion": 2,
   "status": "explicit_runtime_speakers_verified; optional_visual_template_mapping_curated; rendered_review_pending",
   "sourceSha256": {
-    "For-AI/VOICE-CAST.json": "97f87cd9dd1b5b8391cb26e14578d3b2471b8332b3b166b7f4f70bfc724d2ed7",
+    "For-AI/VOICE-CAST.json": "6fd86e3c97f30e5f82ad9ccf481f3c342d6a8312e41466e5a9461ad5153db000",
     "game.js": "619c0088147eb2f26b74902dc1e6a1083966b286939698c7266311c4ae38d6ac",
     "world3d.js": "8b878980c0d4cff39af157966d862490fae97ab6098b4d94b5cc8f43d5d18c39",
-    "buergeramt-story.js": "082ed8fbf16cb74f730eaa87268586f5d89b518fe33ef6ee2a12381d0e23f83c",
+    "buergeramt-story.js": "fc705140e10ed451305f646fb36bdce046d38f224dedb03df0e37f6c75483b5d",
     "assets/models/street-characters/models.js": "f221585150735d365e007f2eadfe58d1461f704824f8bd18f356f6bacfe5a4a8",
     "assets/models/street-characters/runtime.js": "d4c25e1d37762571a0aeedc4e15c456e137fa9be21abfccb20829a1f58d16f62",
     "assets/models/street-characters/persona-map.js": "77fd249de275c7e12debd0af4f14f30826158e0207c6920c5b01633d2aaee652"
@@ -16,6 +16,7 @@
     "namedCityNpcBindings": 19,
     "namedCrowdIdentities": 12,
     "staticBuergeramtSpeakers": 4,
+    "authoredStaticPatrons": 3,
     "decorativeClerkClones": 2,
     "optionalStreetVisualTemplates": 8,
     "mappedStreetSpeakers": 31
@@ -62,6 +63,29 @@
       "fullName": "Wolfram Rentenbescheid",
       "voiceId": "amt-wolfram-rentenbescheid",
       "decorativeCloneOf": null
+    }
+  ],
+  "staticPatronDialogue": [
+    {
+      "kind": "renter",
+      "x": -5.9,
+      "z": 1.39,
+      "voiceId": "amt-konrad-wohnungszettel",
+      "lineCount": 1
+    },
+    {
+      "kind": "parent",
+      "x": 5.5,
+      "z": 1.39,
+      "voiceId": "amt-mechthild-elternbogen",
+      "lineCount": 1
+    },
+    {
+      "kind": "pensioner",
+      "x": 1.7,
+      "z": -1.39,
+      "voiceId": "amt-wolfram-rentenbescheid",
+      "lineCount": 1
     }
   ],
   "city": [
