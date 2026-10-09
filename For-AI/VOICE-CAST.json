@@ -96,7 +96,30 @@
         "profileName": "GS Horst Stempelmann (aktenkurier)",
         "profileId": "c4c533edd860444e9e02ce0d22a78e8d",
         "status": "profile-verified; private audition available; listening review pending",
-        "engine": "omnivoice-rs"
+        "engine": "omnivoice-rs",
+        "candidateProfiles": [
+          {
+            "candidateNumber": 2,
+            "profileId": "09b19a96ec8848138ab0a0910af09ece",
+            "profileName": "GS Horst Stempelmann (Aktenkurier) · official candidate 2 · ominous",
+            "status": "official profile candidate; omen recording user-approved",
+            "sourceUrl": "https://www.youtube.com/watch?v=MtGyTnkvNKk",
+            "referenceClipSeconds": 30,
+            "originalSha256": "7de4a343ef08a06189c6d1cecdbab6c134a2192bd98425875e4c440a8685c317",
+            "referenceSha256": "177545215cfeccbbe758ab24e62011dcfc37c43aaca1c0ae15c75b24824b53ff",
+            "sourceLicense": "not independently verified; user-directed use in this project",
+            "renderer": "ResembleAI/Chatterbox Multilingual V2 0.1.7",
+            "modelRevision": "5bb1f6ee58e50c3b8d408bc82a6d3740c2db6e18",
+            "modelLicense": "MIT",
+            "approval": {
+              "status": "user-approved",
+              "date": "2026-10-09",
+              "scope": "second profile candidate and official omen-scene recording",
+              "decision": "very good, I like this profile, save it as a second official voice profile candidate and make this the official audio of the aktenkurier scene"
+            },
+            "officialClipId": "aktenkurier-omen-candidate-02"
+          }
+        ]
       }
     },
     {

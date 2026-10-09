@@ -30,8 +30,10 @@ const load=search=>{
 };
 const off=load("");
 const on=load("?voicePreview=1");
-assert.equal(manifest.lineCount,223);
-assert.equal(manifest.clips.filter(clip=>clip.asrWordExact).length,158);
+assert.equal(manifest.lineCount,236);
+assert.equal(manifest.clips.filter(clip=>clip.asrWordExact).length,171);
+const originalCandidates=manifest.clips.filter(clip=>!clip.provenanceManifest);
+assert.equal(originalCandidates.length,223);
 const a38=manifest.clips.find(clip=>clip.clipId==="amt-brunhilde-knick-09");
 assert.ok(a38?.asrWordExact);
 assert.match(a38.asr,/\bA38\b/);
@@ -76,15 +78,16 @@ assert.equal(new Set(crowdClips.map(clip=>clip.voiceId)).size,12);
 assert.equal(on.candidatePreviewEnabled,true);
 assert.equal(off.candidatePreviewEnabled,false);
 const keys=new Set();
-for(const clip of manifest.clips){
+for(const clip of originalCandidates){
  const key=clip.voiceId+"\0"+clip.text;
  assert.ok(!keys.has(key),`duplicate candidate ${clip.clipId}`);
  keys.add(key);
  assert.ok(authored.has(key)||clip.voiceId==="amt-brunhilde-knick"&&(officeStory.includes(clip.text)||officeRuntime.includes(clip.text)),`unowned line ${clip.clipId}`);
  assert.equal(clip.profileId,owners.get(clip.voiceId)?.profileId,`profile binding ${clip.clipId}`);
  assert.equal(clip.referenceSha256,owners.get(clip.voiceId)?.referenceSha256,`reference binding ${clip.clipId}`);
- assert.equal(on.candidateClip(clip.voiceId,clip.text),clip.path);
- assert.equal(off.candidateClip(clip.voiceId,clip.text),null);
+ const official=off.candidateClip(clip.voiceId,clip.text);
+ assert.equal(on.candidateClip(clip.voiceId,clip.text),official||clip.path);
+ assert.equal(official,clip.clipId==='amt-horst-stempelmann-03'?'./assets/voices/horst-stempelmann/omen-candidate-02.mp3':null);
  assert.equal(createHash("sha256").update(source(clip.path)).digest("hex"),clip.sha256);
 }
 for(const person of cast.characters)for(const line of person.dialogue){

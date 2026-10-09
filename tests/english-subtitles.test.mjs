@@ -14,9 +14,9 @@ const context=vm.createContext({window:{}});
 vm.runInContext(librarySource,context,{filename:"AUDIO-TEXT-LIBRARY.js"});
 const library=context.window.GermanySimulatorAudioText;
 
-assert.equal(library.version,5);
-assert.equal(Object.keys(library.clips).length,55,"all shipped foreground clips need stable IDs");
-assert.equal(new Set(Object.values(library.clips).map(clip=>clip.path)).size,55,"clip paths must be unique");
+assert.equal(library.version,6);
+assert.equal(Object.keys(library.clips).length,56,"all shipped foreground clips need stable IDs");
+assert.equal(new Set(Object.values(library.clips).map(clip=>clip.path)).size,56,"clip paths must be unique");
 for(const clip of Object.values(library.clips)){
  assert.ok(library.voices[clip.voiceId],`${clip.id} needs a registered voice ID`);
  if(clip.targetVoiceId)assert.ok(library.voices[clip.targetVoiceId]?.profileId,`${clip.id} needs a saved replacement profile`);

@@ -45,6 +45,9 @@ def main() -> None:
         row["generalDemeanor"] = person["generalDemeanor"]
         row["targetValence"] = person["targetValence"]
         row["targetArousal"] = person["targetArousal"]
+        candidates = person.get("secretTunnel", {}).get("candidateProfiles")
+        if candidates:
+            row["candidateProfiles"] = candidates
         if voice_id in PATRONS:
             row["runtimeStatus"] = person["status"]
     index["castSourceSha256"] = hashlib.sha256(game_cast_path.read_bytes()).hexdigest()

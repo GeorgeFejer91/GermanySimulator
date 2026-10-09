@@ -93,9 +93,15 @@ for (const clip of candidate.clips) {
     (approvedCounts.get(clip.voiceId) ?? 0) + 1);
 }
 const defaultCounts = new Map();
+const defaultProfiles = new Map();
 for (const recording of Object.values(catalog.recordings)) {
-  if (byVoice.has(recording.voiceId)) defaultCounts.set(recording.voiceId,
-    (defaultCounts.get(recording.voiceId) ?? 0) + 1);
+  if (byVoice.has(recording.voiceId)) {
+    const person=byVoice.get(recording.voiceId),primary=person.secretTunnel?.profileId??person.secretTunnelProfileId;
+    const profiles=[primary,...(person.secretTunnel?.candidateProfiles??[]).map(p=>p.profileId)];
+    requireMatch(!recording.profileId||profiles.includes(recording.profileId),`Default recording profile mismatch: ${recording.id}`);
+    defaultCounts.set(recording.voiceId,(defaultCounts.get(recording.voiceId) ?? 0) + 1);
+    if(recording.profileId)defaultProfiles.set(recording.voiceId,[...new Set([...(defaultProfiles.get(recording.voiceId)??[]),recording.profileId])]);
+  }
 }
 for (const clip of approved.clips) {
   const person = byVoice.get(clip.voiceId) ?? existingByVoice.get(clip.voiceId);
@@ -104,6 +110,8 @@ for (const clip of approved.clips) {
   `Approved clip identity mismatch: ${clip.clipId}`);
   if (byVoice.has(clip.voiceId)) defaultCounts.set(clip.voiceId,
     (defaultCounts.get(clip.voiceId) ?? 0) + 1);
+  if (byVoice.has(clip.voiceId)) defaultProfiles.set(clip.voiceId,
+    [...new Set([...(defaultProfiles.get(clip.voiceId) ?? []), clip.profileId])]);
 }
 const rows = people.map(person => {
   const saved = byCoverage.get(person.voiceId);
@@ -116,6 +124,7 @@ const rows = people.map(person => {
   return {
     voiceId: person.voiceId, fullName: person.fullName, profileId,
     defaultPlayableClipCount: defaultCounts.get(person.voiceId) ?? 0,
+    defaultPlayableProfileIds: defaultProfiles.get(person.voiceId) ?? [],
     optInCandidateCount,
     candidateHumanApprovedCount: approvedCounts.get(person.voiceId) ?? 0,
     normalizedDiagnosticWordExactCount: normalizedExact.get(person.voiceId) ?? 0,

@@ -8,12 +8,12 @@ const objective=document.getElementById("amt-objective"),nearby=document.getElem
 const door={x:0,z:5.55},sign={x:0,z:-2.6},counter={x:4,z:-8.15},view={x:0,z:8,yaw:0};
 const held=new Set(),pendingTimers=new Set();
 // Every callback belongs to one attempt and one visible speech/action cue.
-let attempt=0,cue=0,callOutcome="",speechGateTimer=null,recordedSpeech=null;
+let attempt=0,cue=0,callOutcome="",speechGateTimer=null,recordedSpeech=null,recordedCleanup=null;
 let clerkClock=0,clerkSpeaking=false,clerkAccent=0,clerkBeat="idle",clerkPulse=0;
 const clerkAnimation=window.BuergeramtAnimationClock?.createClerk?.();
 function defer(callback,delay){const owner=attempt;const id=setTimeout(()=>{pendingTimers.delete(id);if(active&&owner===attempt)callback()},delay);pendingTimers.add(id);return id}
 function clearTimer(id){clearTimeout(id);pendingTimers.delete(id)}
-function cancelSpeech(){cue++;clerkSpeaking=false;clerkAnimation?.setSpeech(false);if(speechGateTimer!==null)clearTimer(speechGateTimer);speechGateTimer=null;if(recordedSpeech){recordedSpeech.pause();recordedSpeech.removeAttribute("src");recordedSpeech.load();recordedSpeech=null}try{const engine=window.speechSynthesis;if(engine?.speaking||engine?.pending)engine.cancel()}catch{}}
+function cancelSpeech(){cue++;clerkSpeaking=false;clerkAnimation?.setSpeech(false);if(speechGateTimer!==null)clearTimer(speechGateTimer);speechGateTimer=null;recordedCleanup?.();if(recordedSpeech){recordedSpeech.pause();recordedSpeech.removeAttribute("src");recordedSpeech.load();recordedSpeech=null}try{const engine=window.speechSynthesis;if(engine?.speaking||engine?.pending)engine.cancel()}catch{}}
 let active=false,stage="closed",link=null,number="",registeredName="",activated=false,qrSvg="",queueDisplay="—",queueIndex=0,queueClock=0,ticketWaitCalls=0,ticketSerial=100,lastScanId="",deadline=0,clerkIndex=0,callPending=false,callTriggered=false,callCommitted=false,callArmTimer=null,clockAnchor=null,policeDoneHandler=null,policeStartHandler=null,policeDisconnectHandler=null,options=null,ambientClock=0,ambientIndex=0,officeAudio=null;
 let timing={rttMs:null,oneWayMs:0,jitterMs:0,lastPongAt:null,clockOffsetMs:null,clockUncertaintyMs:null,startLagMs:null,phoneReadyMs:null,phoneFastReadyMs:null,deskStartLagMs:0,deskMsPerChar:55,call:null,cues:{},desk:{}};
 let pingSerial=0,pingTimer=null,hostVoiceStartupMs=null,hostVoiceAttempts=0;const outstandingPings=new Map(),rttSamples=[];
@@ -30,7 +30,7 @@ function receivePoliceDone(index,mode,durationMs,atMs){const record=timing.cues[
 const ambientLines=[["WARTERAUM","Mein Termin war gestern. Ich war heute pünktlich."],["SCHALTER 1","Für die Kopie des Originals benötigen Sie das Original der Kopie."],["TELEFON AM SCHALTER 2","Nein, die Warteschleife ist persönlich zu nehmen."],["WARTERAUM","Mein Buchstabe wurde aufgerufen, aber die Zahl gehört jemand anderem."],["SCHALTER 4","Einen Moment. Ich verbinde Sie mit Ihrem Moment."]];
 const mix={ambience:.35,voice:.8,fx:.6},mixPanel=document.getElementById("amt-mix");
 try{const saved=JSON.parse(localStorage.getItem("amt-mix-v1")||"null");for(const key of Object.keys(mix))if(Number.isFinite(saved?.[key]))mix[key]=Math.max(0,Math.min(1,saved[key]))}catch{}
-function applyMix(){if(officeAudio){officeAudio.ambience.gain.value=.006*mix.ambience*(1-.92*omen.strength);officeAudio.fx.gain.value=mix.fx;officeAudio.signal.gain.value=mix.fx}}
+function applyMix(){if(recordedSpeech)recordedSpeech.volume=mix.voice;if(officeAudio){officeAudio.ambience.gain.value=.006*mix.ambience*(1-.92*omen.strength);officeAudio.fx.gain.value=mix.fx;officeAudio.signal.gain.value=mix.fx}}
 for(const slider of mixPanel.querySelectorAll("[data-amt-volume]")){const key=slider.dataset.amtVolume;slider.value=String(Math.round(mix[key]*100));slider.addEventListener("input",()=>{mix[key]=Number(slider.value)/100;applyMix();try{localStorage.setItem("amt-mix-v1",JSON.stringify(mix))}catch{}})}
 function initOfficeAudio(){
  try{if(options?.cityAudioBusy?.())return null;const Audio=window.AudioContext||window.webkitAudioContext;if(!Audio||navigator.userActivation&&!navigator.userActivation.hasBeenActive)return null;
@@ -129,11 +129,11 @@ function beginOmen(actor){
  const speech=omen.speech={mode:"waiting",timing:"estimated",startedAt:null,charIndex:-1,progress:0,paused:false,pausedAt:null,pausedMs:0,tension:0,semitones:0,rate:verse.delivery.rate,pitch:verse.delivery.pitch,durationMs:speechReadableMs(verse.line,verse.delivery)};
  updateOmenTone();
  const delivery={...verse.delivery,onPause:()=>{if(speech.paused)return;updateOmenSpeech();speech.paused=true;speech.pausedAt=performance.now();updateOmenTone()},onResume:()=>{if(speech.paused){speech.pausedMs+=performance.now()-speech.pausedAt;speech.paused=false;speech.pausedAt=null;updateOmenTone()}},onFallback:()=>{speech.mode="fallback";speech.timing="estimated";speech.charIndex=-1;speech.startedAt=performance.now()-speech.progress*speech.durationMs;speech.paused=false;speech.pausedMs=0;speech.pausedAt=null;updateOmenTone()}};
- content(verse.speaker,verse.line,[],()=>{if(omen.phase==="blackout"){speech.mode="done";speech.paused=false;omen.phase="glare";omen.hold=3.4;updateOmenTone()}},mode=>{
-  speech.mode=mode;speech.startedAt=performance.now();updateOmenTone();
+ content(verse.speaker,verse.line,[],()=>{if(omen.phase==="blackout"){speech.mode="done";speech.paused=false;omen.phase="glare";omen.hold=3.4;updateOmenTone()}},(mode,recording)=>{
+  speech.mode=mode;if(Number.isFinite(recording?.durationMs)&&recording.durationMs>0)speech.durationMs=recording.durationMs;speech.recording=recording?.recording||null;speech.startedAt=performance.now()-speech.progress*speech.durationMs;updateOmenTone();
  },(charIndex,event)=>{
-  if(speech.paused||charIndex<0||charIndex>verse.line.length||charIndex<=speech.charIndex)return;
-  speech.charIndex=charIndex;speech.progress=charIndex/verse.line.length;speech.timing="boundary";speech.boundaryAt=performance.now();speech.elapsedTime=Number.isFinite(event?.elapsedTime)?event.elapsedTime:null;updateOmenTone();
+  if(speech.paused||charIndex<0||charIndex>verse.line.length||charIndex<=speech.charIndex||charIndex/verse.line.length<speech.progress)return;
+  speech.charIndex=charIndex;speech.progress=charIndex/verse.line.length;speech.timing=event?.type==="recording-cue"?"recording-cues":"boundary";speech.boundaryAt=performance.now();speech.elapsedTime=Number.isFinite(event?.elapsedTime)?event.elapsedTime:null;updateOmenTone();
  },{id:actor.id,tone:"dread",valence:-.9},delivery);
 }
 function updateOmen(dt){
@@ -315,12 +315,21 @@ function say(text,onComplete,onStart,onBoundary,delivery=null,voiceId="",allowCa
   if(candidate){
    try{
     const player=new Audio(candidate);recordedSpeech=player;player.volume=mix.voice;
-    let started=false,settled=false;
-    const start=()=>{if(!started&&current()){started=true;onStart?.("voice")}};
-    const finish=()=>{if(settled||!current())return;settled=true;start();recordedSpeech=null;onComplete?.("voice")};
-    const fallback=()=>{if(settled||!current())return;settled=true;recordedSpeech=null;say(text,onComplete,onStart,onBoundary,delivery,voiceId,false)};
-    player.onplaying=start;player.onended=finish;player.onerror=fallback;
-    player.play().catch(fallback);return;
+    const clip=window.GermanySimulatorAudioText.recordings?.[candidate],marks=clip?.wordCues||[];
+    let started=false,settled=false,paused=false,hiddenPaused=false,nextMark=0,watchdog=null,due=0,remaining=20000,playAttempt=0;
+    const clearWatchdog=()=>{if(watchdog!==null)clearTimer(watchdog);watchdog=null};
+    const arm=(milliseconds,callback)=>{clearWatchdog();due=performance.now()+milliseconds;watchdog=defer(callback,milliseconds)};
+    const cleanup=()=>{playAttempt++;clearWatchdog();document.removeEventListener("visibilitychange",visibility);if(recordedCleanup===cleanup)recordedCleanup=null};
+    const progress=()=>{if(!started||settled||paused||!current())return;while(nextMark<marks.length&&marks[nextMark].at<=player.currentTime){const mark=marks[nextMark++];onBoundary?.(mark.charIndex,{type:"recording-cue",elapsedTime:player.currentTime})}};
+    const finish=()=>{if(settled||!current())return;if(!started)start();settled=true;cleanup();recordedSpeech=null;onComplete?.("voice")};
+    const fallback=()=>{if(settled||!current())return;if(document.hidden){clearWatchdog();hiddenPaused=true;return}settled=true;cleanup();player.pause();player.removeAttribute("src");player.load();recordedSpeech=null;delivery?.onFallback?.();say(text,onComplete,onStart,onBoundary,delivery,voiceId,false)};
+    const start=()=>{if(settled||!current())return;if(!started){started=true;remaining=Math.max(20000,Number.isFinite(player.duration)?player.duration*1000+2000:20000);onStart?.("voice",{durationMs:player.duration*1000,recording:candidate})}else if(paused){paused=false;delivery?.onResume?.()}arm(remaining,fallback);progress();if(document.hidden)visibility()};
+    const play=()=>{const serial=++playAttempt;player.play().catch(()=>{if(serial===playAttempt&&!document.hidden)fallback()})};
+    const visibility=()=>{if(settled||!current())return;if(document.hidden){playAttempt++;clearWatchdog();if(!player.paused){hiddenPaused=true;player.pause()}}else{if(!started)arm(1800,fallback);if(hiddenPaused){hiddenPaused=false;play()}}};
+    player.onplaying=start;player.onended=finish;player.onerror=fallback;player.ontimeupdate=progress;
+    player.onpause=()=>{if(!started||settled||paused||!current())return;paused=true;remaining=Math.max(0,due-performance.now());clearWatchdog();delivery?.onPause?.()};
+    recordedCleanup=cleanup;document.addEventListener("visibilitychange",visibility);arm(1800,fallback);
+    play();return;
    }catch{recordedSpeech=null}
   }
   const requestedAt=performance.now();let settled=false,fallback=null,started=false,failed=false,paused=false,completionDue=0,completionRemaining=0,mode="fallback";
@@ -351,7 +360,7 @@ function content(who,text,buttons=[],onComplete,onStart,onBoundary,mood=null,del
  for(const item of buttons){const button=document.createElement("button");button.type="button";button.textContent=item.label;
   button.addEventListener("click",()=>{if(!active||owner!==attempt||visibleCue!==cue||button.disabled)return;button.disabled=true;item.run()});actions.append(button)}
  const voiceId=isClerk?story.clerkIdentity.voiceId:story.characters[mood?.id]?.voiceId||story.patrons[mood?.id]?.voiceId||"";
- say(text,onComplete?mode=>{if(isClerk){clerkSpeaking=false;clerkAnimation?.setSpeech(false);clerkBeat=stage==="reply"?"stamp":stage==="cancelled"?"deny":"review";clerkAccent=.65}onComplete(mode)}:null,mode=>{if(isClerk){clerkSpeaking=true;clerkPulse=0;clerkAnimation?.setSpeech(true,0);if(!onComplete){const speakingCue=cue;defer(()=>{if(cue===speakingCue){clerkSpeaking=false;clerkAnimation?.setSpeech(false);clerkBeat="review";clerkAccent=.65}},Math.max(1800,Math.min(10000,text.length*55)))}}onStart?.(mode)},(charIndex,event)=>{if(isClerk){clerkPulse++;clerkAnimation?.setSpeech(clerkSpeaking,clerkPulse)}onBoundary?.(charIndex,event)},delivery,voiceId);
+ say(text,onComplete?mode=>{if(isClerk){clerkSpeaking=false;clerkAnimation?.setSpeech(false);clerkBeat=stage==="reply"?"stamp":stage==="cancelled"?"deny":"review";clerkAccent=.65}onComplete(mode)}:null,(mode,recording)=>{if(isClerk){clerkSpeaking=true;clerkPulse=0;clerkAnimation?.setSpeech(true,0);if(!onComplete){const speakingCue=cue;defer(()=>{if(cue===speakingCue){clerkSpeaking=false;clerkAnimation?.setSpeech(false);clerkBeat="review";clerkAccent=.65}},Math.max(1800,Math.min(10000,text.length*55)))}}onStart?.(mode,recording)},(charIndex,event)=>{if(isClerk){clerkPulse++;clerkAnimation?.setSpeech(clerkSpeaking,clerkPulse)}onBoundary?.(charIndex,event)},delivery,voiceId);
 }
 function setStatus(text){status.textContent=text}
 function distanceTo(target){return Math.hypot(view.x-target.x,view.z-target.z)}
