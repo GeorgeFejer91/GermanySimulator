@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "clipCount": 11,
-  "status": "Review-only profile auditions; Brigitte Neumann's approach also supplies one opt-in quiz prompt; human listening required",
+  "status": "Eleven authored auditions are indexed as opt-in candidates; only Brigitte has a complete quiz prompt; human listening pending",
   "clips": [
     {
       "clipId": "quiz-brigitte-neumann-approach-review",
@@ -25,7 +25,7 @@
       "takeVariant": "first",
       "sha256": "0753bcda1df4c4be8977cb22dfdba8099f94e89479a6cf3212fd64b0c5cbf83b",
       "path": "assets/voices/profile-auditions/quiz-brigitte-neumann-approach-review.mp3",
-      "status": "review-only; also first segment of one opt-in quiz preview"
+      "status": "opt-in candidate; human listening pending"
     },
     {
       "clipId": "quiz-dietmar-schulz-approach-review",
@@ -49,7 +49,7 @@
       "takeVariant": "first",
       "sha256": "d59888cbfe3efb258cf7d48fd00d85cb87af3a47d64c11bab0cb04c53fd05e4e",
       "path": "assets/voices/profile-auditions/quiz-dietmar-schulz-approach-review.mp3",
-      "status": "review-only; not a gameplay line"
+      "status": "opt-in candidate; human listening pending"
     },
     {
       "clipId": "quiz-gisela-becker-approach-review",
@@ -73,7 +73,7 @@
       "takeVariant": "retry",
       "sha256": "edbaffd2726c9f4c38d81e6777725cdc0166b444bf058aff1211107865479e35",
       "path": "assets/voices/profile-auditions/quiz-gisela-becker-approach-review.mp3",
-      "status": "review-only; not a gameplay line"
+      "status": "opt-in candidate; human listening pending"
     },
     {
       "clipId": "quiz-hartmut-keller-approach-review",
@@ -97,7 +97,7 @@
       "takeVariant": "first",
       "sha256": "3f31b6edb962ce0d53b9d7bccc39b2d20408990a9bfcaa65709fda7e2161816d",
       "path": "assets/voices/profile-auditions/quiz-hartmut-keller-approach-review.mp3",
-      "status": "review-only; not a gameplay line"
+      "status": "opt-in candidate; human listening pending"
     },
     {
       "clipId": "quiz-heike-hoffmann-approach-review",
@@ -121,7 +121,7 @@
       "takeVariant": "first",
       "sha256": "30b37555db2334d47e93ff77b1697d9622b9f02af8c7efc8286bda2bce37d2cf",
       "path": "assets/voices/profile-auditions/quiz-heike-hoffmann-approach-review.mp3",
-      "status": "review-only; not a gameplay line"
+      "status": "opt-in candidate; human listening pending"
     },
     {
       "clipId": "quiz-klaus-dieter-wagner-approach-review",
@@ -145,7 +145,7 @@
       "takeVariant": "first",
       "sha256": "0e891adef44ef5ac47644a38876f0a6d43be6cbb430180526afaabb20f415b4e",
       "path": "assets/voices/profile-auditions/quiz-klaus-dieter-wagner-approach-review.mp3",
-      "status": "review-only; not a gameplay line"
+      "status": "opt-in candidate; human listening pending"
     },
     {
       "clipId": "quiz-ruediger-schmidt-approach-review",
@@ -169,7 +169,7 @@
       "takeVariant": "first",
       "sha256": "2f74e548a1959804fabf8045d3ee8c66ef7c0f9776081513eb0a48b3553d0316",
       "path": "assets/voices/profile-auditions/quiz-ruediger-schmidt-approach-review.mp3",
-      "status": "review-only; not a gameplay line"
+      "status": "opt-in candidate; human listening pending"
     },
     {
       "clipId": "quiz-sabine-krueger-approach-review",
@@ -193,7 +193,7 @@
       "takeVariant": "first",
       "sha256": "39e6d7db5367267316518222bf4219a531454e29e04ec1686c46d0e13bdbf388",
       "path": "assets/voices/profile-auditions/quiz-sabine-krueger-approach-review.mp3",
-      "status": "review-only; not a gameplay line"
+      "status": "opt-in candidate; human listening pending"
     },
     {
       "clipId": "quiz-uwe-moeller-approach-review",
@@ -217,7 +217,7 @@
       "takeVariant": "first",
       "sha256": "1831478a94dadd64c3e71560ca0304306af5ff1f35d47e6bf7f9d530862e43e3",
       "path": "assets/voices/profile-auditions/quiz-uwe-moeller-approach-review.mp3",
-      "status": "review-only; not a gameplay line"
+      "status": "opt-in candidate; human listening pending"
     },
     {
       "clipId": "tourist-guenther-liegestuhl-02",
@@ -241,7 +241,7 @@
       "takeVariant": "first",
       "sha256": "64fbf05aa35cad37e322f414ba6ef3cc75fe50ce131327d8f1de8d7a2febd38a",
       "path": "assets/voices/profile-auditions/tourist-guenther-liegestuhl-02.mp3",
-      "status": "review-only; not a gameplay line"
+      "status": "opt-in candidate; human listening pending"
     },
     {
       "clipId": "touristin-walburga-handtuch-01",
@@ -265,7 +265,7 @@
       "takeVariant": "first",
       "sha256": "fe9f7fc12f55ca6c308d47ac90a3e34c8d1a2a80c8b12c4fec00d9f828993d2a",
       "path": "assets/voices/profile-auditions/touristin-walburga-handtuch-01.mp3",
-      "status": "review-only; not a gameplay line"
+      "status": "opt-in candidate; human listening pending"
     }
   ]
 }

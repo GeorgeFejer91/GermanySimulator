@@ -788,7 +788,20 @@ const candidateDialogue=Object.freeze(Object.fromEntries([
  ["spieler-hans-peter-mustermann","Sogar ein Fahrrad has more Richtung im Leben als ich.","assets/voices/candidate-dialogue/spieler-hans-peter-mustermann-berlin-bicycle-02.mp3"],
  ["spieler-hans-peter-mustermann","Der Faxapparat has a clearer purpose als ich.","assets/voices/candidate-dialogue/spieler-hans-peter-mustermann-berlin-fax-02.mp3"],
  ["spieler-hans-peter-mustermann","Nicht einmal Leergut. I bring literally nichts Verwertbares mit.","assets/voices/candidate-dialogue/spieler-hans-peter-mustermann-berlin-pfand-01.mp3"],
- ["spieler-hans-peter-mustermann","At this rate werde ich nie anything amounten—außer einem offenen Vorgang.","assets/voices/candidate-dialogue/spieler-hans-peter-mustermann-berlin-lost-02.mp3"]
+ ["spieler-hans-peter-mustermann","At this rate werde ich nie anything amounten—außer einem offenen Vorgang.","assets/voices/candidate-dialogue/spieler-hans-peter-mustermann-berlin-lost-02.mp3"],
+ ["quiz-brigitte-neumann","Ihre Jacke ist sehr ordentlich. Sogar die Knöpfe wirken zuständig. Apropos.","assets/voices/profile-auditions/quiz-brigitte-neumann-approach-review.mp3"],
+ ["quiz-dietmar-schulz","Sie sprechen schon genug Deutsch, um zu wissen, dass Sie noch mehr lernen sollten. Das ist praktisch B2.","assets/voices/profile-auditions/quiz-dietmar-schulz-approach-review.mp3"],
+ ["quiz-gisela-becker","Sie haben so ein vertrauenswürdiges Formulargesicht. Da kann eine kleine Prüfungsfrage nicht schaden.","assets/voices/profile-auditions/quiz-gisela-becker-approach-review.mp3"],
+ ["quiz-hartmut-keller","Ach, Sie sind nicht von hier, oder? Dann eine ganz gewöhnliche Prüfungsfrage.","assets/voices/profile-auditions/quiz-hartmut-keller-approach-review.mp3"],
+ ["quiz-heike-hoffmann","Bei kurzen Sätzen klingen Sie fast wie von hier. Kompliment.","assets/voices/profile-auditions/quiz-heike-hoffmann-approach-review.mp3"],
+ ["quiz-klaus-dieter-wagner","Was für ein schöner Name. Ist die Aussprache korrekt, oder braucht sie eine DIN-Norm? Egal.","assets/voices/profile-auditions/quiz-klaus-dieter-wagner-approach-review.mp3"],
+ ["quiz-ruediger-schmidt","Ihre Fälle sind wunderbar flexibel. Dativ, Akkusativ—warum sich so früh entscheiden?","assets/voices/profile-auditions/quiz-ruediger-schmidt-approach-review.mp3"],
+ ["quiz-sabine-krueger","Sie verwenden der, die und das herrlich kreativ. Sprache lebt schließlich von Überraschungen.","assets/voices/profile-auditions/quiz-sabine-krueger-approach-review.mp3"],
+ ["quiz-uwe-moeller","Sie sehen heute außerordentlich eingebürgert aus. Nur eine zufällige Kontrolle.","assets/voices/profile-auditions/quiz-uwe-moeller-approach-review.mp3"],
+ ["tourist-guenther-liegestuhl","Bitte Abstand halten: Das Handtuch befindet sich im Vorverfahren.","assets/voices/profile-auditions/tourist-guenther-liegestuhl-02.mp3"],
+ ["touristin-walburga-handtuch","Die Liege ist nicht frei; die Reservierung trocknet nur kurz.","assets/voices/profile-auditions/touristin-walburga-handtuch-01.mp3"],
+ ["quiz-brigitte-neumann","Sie wollen einen Führerschein? Dann sagen Sie mir, wie Sie mit diesem Fall umgehen:","assets/voices/quiz-segments/quiz-brigitte-neumann-context-traffic-germany.mp3"],
+ ["quiz-brigitte-neumann","Ein Igel in Warnweste überquert langsam die Straße. Welche Reaktion ist angemessen?","assets/voices/quiz-segments/quiz-brigitte-neumann-question-fs-10-germany.mp3"]
 ].map(([voiceId,text,path])=>[voiceId+"\u0000"+text,path])));
 function candidateClip(voiceId,text){const key=voiceId+"\u0000"+text;return approvedDialogue[key]||(candidatePreviewEnabled?candidateDialogue[key]||null:null)}
 const quizSegmentDialogue=Object.freeze(Object.fromEntries([
