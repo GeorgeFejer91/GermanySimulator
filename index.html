@@ -28,7 +28,7 @@
   <link rel="preload" as="image" href="./assets/fire/kenney-smoke-05.png" crossorigin="anonymous">
   <link rel="stylesheet" href="./styles.css?v=20261008-skill-followups">
   <link rel="stylesheet" href="./buergeramt.css?v=20261007-crowd-omen">
-  <link rel="stylesheet" href="./game-hud.css?v=20261009-city-germanness">
+  <link rel="stylesheet" href="./game-hud.css?v=20261009-subtitle-toggle">
 </head>
 <body>
 <main id="app">
@@ -54,7 +54,7 @@
     <div class="file-page" data-page="collection" hidden><div class="wurst-pass"><b>EXTRA WURST <output id="wurst-count">0/9</output></b><div id="wurst-badges" class="wurst-badges" role="list" aria-label="Collected sausage badges"></div></div></div>
     <div class="file-page" data-page="controls" hidden>
       <dl class="file-controls"><dt>WASD / ↑↓←→</dt><dd data-de="Gehen" data-en="Move">Gehen</dd><dt>SHIFT</dt><dd data-de="Verdächtig schnell" data-en="Suspiciously fast">Verdächtig schnell</dd><dt>E</dt><dd data-de="Interagieren" data-en="Interact">Interagieren</dd><dt>§ / Q</dt><dd data-de="Gesetz zitieren · ab 9/15 Germanness" data-en="Quote a law · from 9/15 Germanness">Gesetz zitieren · ab 9/15 Germanness</dd><dt>M / ESC</dt><dd data-de="Akte / Zurück" data-en="File / Back">Akte / Zurück</dd></dl>
-      <div class="file-settings"><button id="mute" type="button">MUSIC ON</button><button id="voice-toggle" type="button">VOICE ON</button>  <button id="subtitle-toggle" class="subtitle-toggle" type="button" aria-label="Toggle English subtitles" aria-pressed="false">EN SUBTITLES OFF</button></div>
+      <div class="file-settings"><button id="mute" type="button">MUSIC ON</button><button id="voice-toggle" type="button">VOICE ON</button></div>
       <a href="https://ec-games.space/">EC GAMES</a>
     </div>
   </dialog>
@@ -99,6 +99,7 @@
   </form></section>
   <div id="humor-scold" class="humor-scold" hidden role="alert" aria-live="assertive"></div>
   <div id="english-subtitle" class="english-subtitle" lang="en" hidden aria-live="polite" aria-atomic="true"></div>
+  <button id="subtitle-toggle" class="subtitle-toggle" type="button" lang="en" aria-label="Toggle English subtitles" aria-pressed="false">EN SUBTITLES OFF</button>
 
   <nav class="control-dock" aria-label="Touch controls"><div class="dpad"><button data-key="ArrowLeft" aria-label="Left">◀<span class="fraktur">Links</span></button><button data-key="ArrowUp" aria-label="Forward">▲<span class="fraktur">Vor</span></button><button data-key="ArrowDown" aria-label="Back">▼<span class="fraktur">Zurück</span></button><button data-key="ArrowRight" aria-label="Right">▶<span class="fraktur">Rechts</span></button></div><button id="law-action" class="law-action" data-key="KeyQ" type="button" aria-label="Quote a German law" disabled><span class="dock-icon">§</span><span class="fraktur">Gesetz</span></button><button class="action" data-key="KeyE" type="button"><span class="dock-icon">E</span><span class="fraktur">Reden</span></button></nav>
 
@@ -118,7 +119,7 @@
 <script src="./character-interactions.js?v=20261007-walks"></script>
 <script src="./tourist-animation.js?v=20261008-browser-responsive"></script>
 <script src="./game.js?v=20261008-germanness-splats"></script>
-<script type="module" src="./game-hud.js?v=20261009-city-germanness"></script>
+<script type="module" src="./game-hud.js?v=20261009-subtitle-toggle"></script>
 <script type="module" src="./subtitle-layout.js?v=20260929-fixed-slots"></script>
 <script type="module" src="./quiz-layout.js?v=20260929-dialogue"></script>
 <script type="module" src="./world3d.js?v=20261009-morph2"></script>
