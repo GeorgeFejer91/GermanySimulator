@@ -320,12 +320,12 @@ function walking(){return ["outside","walk-sign","waiting","walk-counter"].inclu
 function setStage(next,preserveMovement=false){if(next!==stage&&!preserveMovement)held.clear();stage=next;document.body.classList.toggle("amt-omen",next==="omen");const moving=walking();if(moving){cancelSpeech();clerkAnimation?.request(null);ambient.textContent="";characterMood=null;}root.classList.toggle("walking",moving);walkHud.hidden=!moving;root.classList.toggle("first-person",!!window.Germany3D?.ready);if(moving){objective.textContent=next==="outside"?"BÜRGERAMT · EINGANG":next==="walk-sign"?"QR-SCHILD SCANNEN":next==="waiting"?"AUFRUF ABWARTEN · SCHALTER 3":"IHRE NUMMER · SCHALTER 3 · BEEILEN!";update(0)}}
 function displayNumber(value){queueDisplay=value;board.textContent=value}
 function speechReadableMs(text,delivery){return Math.max(3500,Math.min(14000,text.length*55*.96/(delivery?.rate??.96)))}
-function say(text,onComplete,onStart,onBoundary,delivery=null,voiceId="",allowPreview=true){
+function say(text,onComplete,onStart,onBoundary,delivery=null,voiceId="",allowCatalogClip=true){
  const owner=attempt,visibleCue=cue,readableMs=speechReadableMs(text,delivery);
  const current=()=>active&&owner===attempt&&visibleCue===cue&&line.textContent===text;
  const begin=()=>{
   if(!current())return;
-  const candidate=allowPreview&&options?.voiceOn?.()&&window.GermanySimulatorAudioText?.candidateClip?.(voiceId,text);
+  const candidate=allowCatalogClip&&options?.voiceOn?.()&&window.GermanySimulatorAudioText?.candidateClip?.(voiceId,text);
   if(candidate){
    try{
     const player=new Audio(candidate);recordedSpeech=player;player.volume=mix.voice;

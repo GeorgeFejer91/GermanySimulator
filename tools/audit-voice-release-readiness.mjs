@@ -44,11 +44,13 @@ function parseCsv(source) {
 const castPath = resolve(root, 'For-AI/VOICE-CAST.json');
 const catalogPath = resolve(root, 'For-AI/AUDIO-TEXT-LIBRARY.js');
 const candidatePath = resolve(root, 'assets/voices/candidate-dialogue/manifest.json');
+const approvedPath = resolve(root, 'assets/voices/approved-dialogue/manifest.json');
 const coveragePath = resolve(music, 'GERMANY-SIMULATOR-VOICE-ASSET-COVERAGE.csv');
 const queuePath = resolve(music, 'VOICE-CANDIDATE-REVIEW-QUEUE.csv');
 const reviewPath = resolve(music, 'GermanySimulator normalized voice review 2026-10-09/word-review.json');
 const cast = json(castPath);
 const candidate = json(candidatePath);
+const approved = json(approvedPath);
 const coverage = parseCsv(read(coveragePath).toString('utf8').replace(/^\uFEFF/, ''));
 const queue = parseCsv(read(queuePath).toString('utf8').replace(/^\uFEFF/, ''));
 const review = json(reviewPath);
@@ -94,6 +96,12 @@ for (const recording of Object.values(catalog.recordings)) {
   if (byVoice.has(recording.voiceId)) defaultCounts.set(recording.voiceId,
     (defaultCounts.get(recording.voiceId) ?? 0) + 1);
 }
+for (const clip of approved.clips) {
+  requireMatch(byVoice.get(clip.voiceId) && clip.profileId ===
+    (byVoice.get(clip.voiceId).secretTunnel?.profileId ?? byVoice.get(clip.voiceId).secretTunnelProfileId),
+  `Approved clip identity mismatch: ${clip.clipId}`);
+  defaultCounts.set(clip.voiceId, (defaultCounts.get(clip.voiceId) ?? 0) + 1);
+}
 const rows = people.map(person => {
   const saved = byCoverage.get(person.voiceId);
   const profileId = person.secretTunnel?.profileId ?? person.secretTunnelProfileId;
@@ -104,7 +112,7 @@ const rows = people.map(person => {
     `Music/game candidate count mismatch: ${person.voiceId}`);
   return {
     voiceId: person.voiceId, fullName: person.fullName, profileId,
-    defaultRecordingCount: defaultCounts.get(person.voiceId) ?? 0,
+    defaultPlayableClipCount: defaultCounts.get(person.voiceId) ?? 0,
     optInCandidateCount,
     candidateHumanApprovedCount: approvedCounts.get(person.voiceId) ?? 0,
     normalizedDiagnosticWordExactCount: normalizedExact.get(person.voiceId) ?? 0,
@@ -112,21 +120,22 @@ const rows = people.map(person => {
     privateOrAuditionCount: Number(saved.profileAuditionMp3Count) + Number(saved.quizPreviewSegmentCount) +
       Number(saved.newPrivateScoredMp3Count) + Number(saved.privateQuizPromptReviewMp3Count) +
       Number(saved.supplementaryPrivateAuditionCount),
-    releaseState: defaultCounts.get(person.voiceId) ? 'default_recording_present' : 'no_default_recording',
+    releaseState: defaultCounts.get(person.voiceId) ? 'default_clip_present' : 'no_default_clip',
   };
 });
 const report = {
   schemaVersion: 1,
-  scope: '56 new nonpolitical voice profiles; direct default recordings only. Legacy targetVoiceId is editorial and not credited.',
+  scope: '56 new nonpolitical voice profiles; direct default recordings plus approved-dialogue manifest. Legacy targetVoiceId is editorial and not credited.',
   diagnosticNote: 'A Whisper word match is a diagnostic, not human listening or release approval. Private auditions are not game assets.',
   sourceSha256: {
     cast: sha256(read(castPath)), catalog: sha256(read(catalogPath)),
-    candidateManifest: sha256(read(candidatePath)), musicCoverageCsv: sha256(read(coveragePath)),
+    candidateManifest: sha256(read(candidatePath)), approvedManifest: sha256(read(approvedPath)),
+    musicCoverageCsv: sha256(read(coveragePath)),
     humanReviewQueueCsv: sha256(read(queuePath)),
     normalizedWordReview: sha256(read(reviewPath)),
   },
   profileCount: rows.length,
-  profilesWithDefaultRecording: rows.filter(r => r.defaultRecordingCount).length,
+  profilesWithDefaultClip: rows.filter(r => r.defaultPlayableClipCount).length,
   profilesWithOptInCandidate: rows.filter(r => r.optInCandidateCount).length,
   optInCandidateCount: rows.reduce((n, r) => n + r.optInCandidateCount, 0),
   candidateHumanApprovedCount: rows.reduce((n, r) => n + r.candidateHumanApprovedCount, 0),
@@ -138,5 +147,5 @@ const serialized = JSON.stringify(report, null, 2) + '\n';
 if (check) requireMatch(read(output).toString('utf8') === serialized, 'Release-readiness report is stale');
 else writeFileSync(output, serialized);
 console.log(JSON.stringify({output, check, profiles: report.profileCount,
-  default: report.profilesWithDefaultRecording, optInProfiles: report.profilesWithOptInCandidate,
+  default: report.profilesWithDefaultClip, optInProfiles: report.profilesWithOptInCandidate,
   optInCandidates: report.optInCandidateCount, diagnostic100: report.normalizedDiagnosticWordExactCount}));

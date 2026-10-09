@@ -561,6 +561,10 @@ const speechFamilies=Object.freeze({
 const clips=Object.freeze(Object.fromEntries(Object.entries(recordings).map(([path,item])=>[item.id,Object.freeze({...item,path,text:item.source,recording:path})])));
 // Opt-in audition only: selected takes still need full human listening review.
 const candidatePreviewEnabled=typeof location!=="undefined"&&new URLSearchParams(location.search).get("voicePreview")==="1";
+// Generated only from clips that pass every human review field in the Music queue.
+const approvedDialogue=Object.freeze(Object.fromEntries([
+
+].map(([voiceId,text,path])=>[voiceId+"\u0000"+text,path])));
 const candidateDialogue=Object.freeze(Object.fromEntries([
  ["amt-horst-stempelmann","Stopp. Sie haben den Aktenlauf ohne Laufzettel gekreuzt. Das gilt als Abkürzung und muss gestempelt werden.","assets/voices/candidate-dialogue/amt-horst-stempelmann-01.mp3"],
  ["amt-horst-stempelmann","Ihr Formular ist jetzt im Umlauf. Bitte bleiben Sie stehen, bis es Sie eingeholt hat.","assets/voices/candidate-dialogue/amt-horst-stempelmann-02.mp3"],
@@ -786,17 +790,17 @@ const candidateDialogue=Object.freeze(Object.fromEntries([
  ["spieler-hans-peter-mustermann","Nicht einmal Leergut. I bring literally nichts Verwertbares mit.","assets/voices/candidate-dialogue/spieler-hans-peter-mustermann-berlin-pfand-01.mp3"],
  ["spieler-hans-peter-mustermann","At this rate werde ich nie anything amounten—außer einem offenen Vorgang.","assets/voices/candidate-dialogue/spieler-hans-peter-mustermann-berlin-lost-02.mp3"]
 ].map(([voiceId,text,path])=>[voiceId+"\u0000"+text,path])));
-function candidateClip(voiceId,text){return candidatePreviewEnabled?candidateDialogue[voiceId+"\u0000"+text]||null:null}
+function candidateClip(voiceId,text){const key=voiceId+"\u0000"+text;return approvedDialogue[key]||(candidatePreviewEnabled?candidateDialogue[key]||null:null)}
 const quizSegmentDialogue=Object.freeze(Object.fromEntries([
  ["quiz-brigitte-neumann","Ihre Jacke ist sehr ordentlich. Sogar die Knöpfe wirken zuständig. Apropos.","assets/voices/profile-auditions/quiz-brigitte-neumann-approach-review.mp3"],
  ["quiz-brigitte-neumann","Sie wollen einen Führerschein? Dann sagen Sie mir, wie Sie mit diesem Fall umgehen:","assets/voices/quiz-segments/quiz-brigitte-neumann-context-traffic-germany.mp3"],
  ["quiz-brigitte-neumann","Ein Igel in Warnweste überquert langsam die Straße. Welche Reaktion ist angemessen?","assets/voices/quiz-segments/quiz-brigitte-neumann-question-fs-10-germany.mp3"]
 ].map(([voiceId,text,path])=>[voiceId+"\u0000"+text,path])));
-function candidateSequence(voiceId,segments){if(!candidatePreviewEnabled||!voiceId||!Array.isArray(segments)||!segments.length)return null;const paths=segments.map(text=>quizSegmentDialogue[voiceId+"\u0000"+text]||candidateDialogue[voiceId+"\u0000"+text]);return paths.every(Boolean)?paths:null}
+function candidateSequence(voiceId,segments){if(!voiceId||!Array.isArray(segments)||!segments.length)return null;const paths=segments.map(text=>{const key=voiceId+"\u0000"+text;return approvedDialogue[key]||(candidatePreviewEnabled?quizSegmentDialogue[key]||candidateDialogue[key]:null)});return paths.every(Boolean)?paths:null}
 
 
 window.GermanySimulatorAudioText=Object.freeze({
- version:4,
+ version:5,
  method:"Known clips use authored/source transcripts; the five station recordings were transcribed and English-segmented locally with OpenAI Whisper small on 2026-09-21, then manually corrected against filenames and audible context.",
  exclusions:Object.freeze(["background-music","sound-effect"]),
  pools,
@@ -810,6 +814,7 @@ window.GermanySimulatorAudioText=Object.freeze({
  speechFamilies,
  clips,
  candidatePreviewEnabled,
+ approvedDialogue,
  candidateClip,
  candidateSequence,
  lawPowerLines,
