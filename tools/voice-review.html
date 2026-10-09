@@ -1,0 +1,177 @@
+<!doctype html>
+<html lang="en" data-text-measurement="unavailable">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="robots" content="noindex,nofollow,noarchive">
+  <meta name="referrer" content="no-referrer">
+  <title>Stimmprüfung · Germany Simulator</title>
+  <style>
+    @font-face{font-family:"Review Sans";src:url("/assets/fonts/roboto-condensed/RobotoCondensed.ttf") format("truetype");font-weight:100 900;font-display:swap}
+    :root{font-family:"Review Sans",sans-serif;color:#25231f;background:#77756f;--paper:#e9e3d5;--line:#6f6a60;--accent:#762f29}
+    *{box-sizing:border-box}body{margin:0;line-height:1.4}button,input,select,textarea{font:inherit}button,select,input,textarea{outline-offset:2px}button:focus-visible,select:focus-visible,input:focus-visible,textarea:focus-visible,a:focus-visible{outline:3px solid var(--accent)}
+    .bar{background:var(--paper);border-bottom:3px double #35312b;padding:14px max(14px,calc((100vw - 1080px)/2));display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}
+    h1{font-size:1.4rem;line-height:1.2;margin:0}h1 small{display:block;font-size:.75rem;font-weight:500;color:#5b554d}
+    main{max-width:1080px;margin:auto;padding:18px 14px 38px;min-width:0}
+    .toolbar{display:flex;flex-wrap:wrap;gap:10px;align-items:end;margin-bottom:12px}.toolbar label{display:grid;gap:4px;min-width:min(100%,180px);flex:1 1 190px}
+    .toolbar input,.toolbar select,.checks select,textarea{min-height:44px;width:100%;padding:8px;border:1px solid var(--line);border-radius:3px;background:#faf6ed;color:#24221e}
+    button{min-height:44px;padding:8px 13px;border:1px solid #35312b;border-radius:3px;background:#f5efe3;color:#24221e;font-weight:700;cursor:pointer;white-space:normal;text-align:center}
+    button:hover{background:#ded4c3}button:disabled{opacity:.55;cursor:default}.toolbar button{flex:0 0 auto}
+    .status{color:#f8f2e5;min-height:1.5em;margin:0 0 12px}.status[data-error="true"]{color:#fff0b4}
+    .sheet{background:var(--paper);border:1px solid var(--line);padding:16px;min-width:0}
+    .identity{display:flex;justify-content:space-between;gap:12px;align-items:start;flex-wrap:wrap;border-bottom:1px solid var(--line);padding-bottom:10px}
+    .identity h2{margin:0;font-size:1.45rem;line-height:1.2;min-width:0;overflow-wrap:anywhere}.identity p{margin:4px 0 0;color:#5c554c;overflow-wrap:anywhere}
+    .score{font-weight:800;border:1px solid var(--line);padding:6px 10px;flex:none}.score[data-low="true"]{color:#6e211f;border-color:#9f625d}
+    .meta{display:flex;flex-wrap:wrap;gap:8px 15px;margin:10px 0 0;color:#5c554c}.meta span{overflow-wrap:anywhere}
+    .columns{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,1fr);gap:14px;margin-top:14px}.columns>*{min-width:0}
+    section h3{font-size:1rem;margin:0 0 8px}.script,.transcript{white-space:pre-wrap;overflow-wrap:break-word;margin:0 0 12px;line-height:1.48}
+    .script{font-size:1.17rem;font-weight:700}.transcript{padding:9px;border-left:3px solid #a9a092;background:#f4eee3}
+    .audio-pair{display:grid;gap:10px}.audio-pair label{display:grid;gap:5px;font-weight:700}.audio-pair audio{width:100%;min-width:0}
+    .note{color:#5e554c;font-size:.93rem;margin:8px 0 0}.alert{color:#7a2926;font-weight:700;margin:8px 0}
+    .checks{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.checks label{display:grid;gap:4px;min-width:0;font-weight:700}.checks label span{overflow-wrap:break-word}
+    .checks .approval{grid-column:1/-1;border-top:1px solid var(--line);padding-top:10px}
+    .review-note{display:grid;gap:4px;margin-top:12px;font-weight:700}.review-note textarea{min-height:80px;resize:vertical}
+    .actions{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin-top:13px}.actions button{background:#d5c6ac}.actions span{color:#5c554c;overflow-wrap:break-word}
+    @media(max-width:760px){.columns{grid-template-columns:minmax(0,1fr)}.checks{grid-template-columns:minmax(0,1fr)}.bar{padding:12px 14px}}
+    @media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important}}
+  </style>
+</head>
+<body>
+  <header class="bar"><h1><span data-measure>STIMMAKTE</span><small data-measure>Private dialogue listening review · Germany Simulator</small></h1><span data-measure>One clip at a time · decisions remain local</span></header>
+  <main>
+    <div class="toolbar">
+      <label><span data-measure>Search name or clip ID</span><input id="search" type="search" autocomplete="off"></label>
+      <label><span data-measure>Show</span><select id="filter"><option value="pending">Pending</option><option value="all">All takes</option><option value="flagged">Score below 100%</option></select></label>
+      <button id="previous" type="button" data-measure>Previous</button><button id="next" type="button" data-measure>Next</button>
+      <button id="reload" type="button" data-measure>Reload queue</button>
+    </div>
+    <p id="status" class="status" role="status" aria-live="polite"></p>
+    <article class="sheet" id="sheet" hidden>
+      <div class="identity"><div><h2 id="speaker" data-measure></h2><p id="identity" data-measure></p></div><strong id="score" class="score" data-measure></strong></div>
+      <p class="meta"><span id="position" data-measure></span><span id="emotion" data-measure></span><span id="loudness" data-measure></span></p>
+      <p class="meta"><span id="rights" data-measure></span></p>
+      <div class="columns">
+        <section aria-label="Audio and transcript comparison">
+          <h3 data-measure>Exact game script</h3><p id="script" class="script" lang="de" data-measure></p>
+          <div class="audio-pair">
+            <label><span data-measure>Original candidate</span><audio id="original" controls preload="none"></audio></label>
+            <label><span data-measure>Level-matched review copy</span><audio id="normalized" controls preload="none"></audio></label>
+          </div>
+          <p class="note" data-measure>Listen to the full level-matched take. Whisper percentages check words only; they do not establish voice fit or release rights.</p>
+          <h3 data-measure>Whisper on original</h3><p id="original-transcript" class="transcript" lang="de" data-measure></p>
+          <h3 data-measure>Whisper on review copy</h3><p id="normalized-transcript" class="transcript" lang="de" data-measure></p>
+          <p id="regression" class="alert" hidden data-measure>ASR changed after level matching. Compare both audio files carefully.</p>
+        </section>
+        <section aria-label="Human review decision">
+          <h3 data-measure>Listening decision</h3>
+          <div class="checks" id="checks"></div>
+          <label class="review-note"><span data-measure>Review notes</span><textarea id="review-notes" maxlength="1200"></textarea></label>
+          <div class="actions"><button id="save" type="button" data-measure>Save this review</button><span id="save-state" data-measure></span></div>
+        </section>
+      </div>
+    </article>
+  </main>
+  <script type="module">
+    import {prepareWithSegments,measureLineStats,measureNaturalWidth,setLocale} from '/assets/vendor/pretext/dist/layout.js';
+    const token=new URL(location.href).searchParams.get('token')||'';
+    const fields=[['heardWords','All audible words match the script'],['speakerIdentityFits','Speaker identity fits'],['demeanorFits','Demeanor fits the character'],['intonationFits','Pauses and intonation fit'],['artifactsAbsent','No audible artifacts or echo'],['sourceRightsCleared','Source and model rights checked'],['approveForGame','Approve for game playback']];
+    const byId=id=>document.getElementById(id),status=byId('status'),checks=byId('checks');
+    let rows=[],visible=[],current=null,dirty=false,measuring=false,measurementLocale='';
+    function setStatus(message,error=false){status.textContent=message;status.dataset.error=String(error)}
+    function countText(row){return row.normalizedWordPercent===''?'Score unavailable':`${row.normalizedWordPercent}% words`}
+    function passes(row){return row.approveForGame==='yes'}
+    function selectRow(id){
+      if(current?.clipId===id){const index=visible.findIndex(item=>item.clipId===id);
+        byId('position').textContent=`${index+1} of ${visible.length} · ${current.clipId} · ${current.priority}`;
+        byId('previous').disabled=index<=0;byId('next').disabled=index>=visible.length-1;return}
+      if(dirty&&!confirm('Discard unsaved review changes?'))return;
+      const row=rows.find(item=>item.clipId===id);if(!row)return;
+      current=row;dirty=false;byId('sheet').hidden=false;
+      const index=visible.findIndex(item=>item.clipId===id);byId('position').textContent=`${index+1} of ${visible.length} · ${row.clipId} · ${row.priority}`;
+      byId('speaker').textContent=row.speakerName;byId('identity').textContent=`${row.voiceId} · profile ${row.profileId}`;
+      byId('score').textContent=countText(row);byId('score').dataset.low=String(Number(row.normalizedWordPercent)<100);
+      byId('emotion').textContent=`${row.sourceEmotion} source · target ${row.targetValence}/${row.targetArousal}`;
+      byId('loudness').textContent=`${row.normalizedLufs} LUFS · ${row.normalizedTruePeakDbtp} dBTP`;
+      byId('rights').textContent=`${row.renderer} (${row.modelLicense}) · ${row.referenceDataset} (${row.referenceLicense}). Verify intended use before marking rights checked.`;
+      byId('script').textContent=row.script;byId('original-transcript').textContent=row.originalPinnedTranscriptForComparison||row.germanPinnedTranscript||row.asrTranscript||'No transcript saved';
+      byId('normalized-transcript').textContent=row.normalizedTranscript||'No transcript saved';
+      byId('regression').hidden=row.asrRegressionAfterNormalization!=='True';
+      for(const audio of [byId('original'),byId('normalized')]){audio.pause();audio.removeAttribute('src');audio.load()}
+      byId('original').src=`/audio/${row.clipId}/original?token=${encodeURIComponent(token)}`;
+      byId('normalized').src=`/audio/${row.clipId}/normalized?token=${encodeURIComponent(token)}`;
+      for(const [key] of fields)byId(key).value=row[key]||'';
+      byId('review-notes').value=row.reviewNotes||'';byId('save-state').textContent=passes(row)?'Approved in queue':'Not approved';
+      setApprovalEnabled();byId('previous').disabled=index<=0;byId('next').disabled=index>=visible.length-1;
+      setStatus(`Reviewing ${row.speakerName}: ${row.clipId}`);scheduleMeasure();
+    }
+    function setApprovalEnabled(){const all=fields.slice(0,-1).every(([key])=>byId(key).value==='yes');const approval=byId('approveForGame');if(!all&&approval.value==='yes'){approval.value='';dirty=true}approval.disabled=!all}
+    function refreshFilter(preferred){
+      const query=byId('search').value.trim().toLocaleLowerCase('de'),mode=byId('filter').value;
+      const nextVisible=rows.filter(row=>(mode==='all'||mode==='flagged'&&Number(row.normalizedWordPercent)<100||mode==='pending'&&!passes(row))&&
+        (!query||`${row.speakerName} ${row.clipId} ${row.voiceId}`.toLocaleLowerCase('de').includes(query)));
+      if(dirty&&current&&!nextVisible.some(row=>row.clipId===current.clipId)){
+        if(!confirm('Discard unsaved review changes?')){setStatus('Save this review before changing to another clip.');return}
+        dirty=false;
+      }
+      visible=nextVisible;
+      if(!visible.length){current=null;byId('sheet').hidden=true;setStatus('No takes match this filter.');return}
+      selectRow(visible.some(row=>row.clipId===preferred)?preferred:visible[0].clipId);
+    }
+    async function load(preferred){
+      if(dirty&&!confirm('Discard unsaved review changes?'))return;
+      const response=await fetch('/api/rows',{headers:{'X-Review-Token':token}});
+      const data=await response.json();if(!response.ok)throw Error(data.error||'Cannot load review queue');
+      rows=data.rows;dirty=false;refreshFilter(preferred);scheduleMeasure();
+    }
+    async function save(){
+      if(!current)return;
+      const decisions=Object.fromEntries(fields.map(([key])=>[key,byId(key).value]));
+      const payload={clipId:current.clipId,mp3Sha256:current.mp3Sha256,reviewVersion:current.reviewVersion,
+        decisions,reviewNotes:byId('review-notes').value};
+      const response=await fetch('/api/save',{method:'POST',headers:{'Content-Type':'application/json','X-Review-Token':token},body:JSON.stringify(payload)});
+      const result=await response.json();if(!response.ok)throw Error(result.error||'Could not save review');
+      Object.assign(current,decisions,{reviewNotes:payload.reviewNotes.trim(),reviewVersion:result.reviewVersion});dirty=false;
+      byId('save-state').textContent=passes(current)?'Approved in queue':'Saved; not approved';
+      const selected=current.clipId;refreshFilter(selected);
+      setStatus(`Saved ${selected}. Queue hash: ${result.queueSha256.slice(0,12)}…`);
+    }
+    for(const [key,label] of fields){const wrap=document.createElement('label');if(key==='approveForGame')wrap.className='approval';
+      const title=document.createElement('span');title.textContent=label;title.dataset.measure='';
+      const select=document.createElement('select');select.id=key;for(const [value,text] of [['','Pending'],['yes','Yes'],['no','No']]){
+        const option=document.createElement('option');option.value=value;option.textContent=text;select.append(option)}
+      select.addEventListener('change',()=>{dirty=true;setApprovalEnabled();byId('save-state').textContent='Unsaved changes';scheduleMeasure()});
+      wrap.append(title,select);checks.append(wrap)}
+    byId('review-notes').addEventListener('input',()=>{dirty=true;byId('save-state').textContent='Unsaved changes'});
+    for(const id of ['original','normalized'])byId(id).addEventListener('play',()=>byId(id==='original'?'normalized':'original').pause());
+    byId('previous').onclick=()=>selectRow(visible[visible.findIndex(row=>row.clipId===current?.clipId)-1]?.clipId);
+    byId('next').onclick=()=>selectRow(visible[visible.findIndex(row=>row.clipId===current?.clipId)+1]?.clipId);
+    byId('reload').onclick=()=>load(current?.clipId).catch(error=>setStatus(error.message,true));
+    byId('save').onclick=()=>save().catch(error=>setStatus(error.message,true));
+    byId('search').addEventListener('input',()=>refreshFilter(current?.clipId));
+    byId('filter').addEventListener('change',()=>refreshFilter(current?.clipId));
+    addEventListener('beforeunload',event=>{if(dirty){event.preventDefault();event.returnValue=''}});
+    function scheduleMeasure(){if(!measuring){measuring=true;requestAnimationFrame(measure)}}
+    async function measure(){
+      measuring=false;const ready=document.fonts.check('16px "Review Sans"')&&typeof Intl.Segmenter==='function';
+      for(const el of document.querySelectorAll('[data-measure]')){
+        if(!el.getClientRects().length)continue;
+        if(!ready){el.dataset.fit='unavailable';continue}
+        try{const locale=el.lang||document.documentElement.lang;if(locale!==measurementLocale){setLocale(locale);measurementLocale=locale}
+          const css=getComputedStyle(el),width=Math.max(1,el.clientWidth-parseFloat(css.paddingLeft)-parseFloat(css.paddingRight)),
+          height=Math.max(1,el.clientHeight-parseFloat(css.paddingTop)-parseFloat(css.paddingBottom)),
+          text=el.textContent||'',font=`${css.fontStyle} ${css.fontWeight} ${css.fontSize} ${css.fontFamily}`,
+          prepared=prepareWithSegments(text,font,{letterSpacing:parseFloat(css.letterSpacing)||0}),stats=measureLineStats(prepared,width),
+          lineHeight=parseFloat(css.lineHeight)||parseFloat(css.fontSize)*1.4,oneLine=el.tagName==='BUTTON';
+          el.dataset.fit=stats.maxLineWidth<=width+.5&&stats.lineCount*lineHeight<=height+1&&
+            (!oneLine||stats.lineCount===1&&measureNaturalWidth(prepared)<=width+.5)?'fit':'reflow';
+        }catch{el.dataset.fit='unavailable'}
+      }
+      document.documentElement.dataset.textMeasurement=ready?'pretext-0.0.9':'unavailable';
+    }
+    new ResizeObserver(scheduleMeasure).observe(document.body);
+    new MutationObserver(scheduleMeasure).observe(document.body,{subtree:true,childList:true,characterData:true});
+    await document.fonts.load('16px "Review Sans"');
+    load().catch(error=>setStatus(error.message,true));
+  </script>
+</body>
+</html>
