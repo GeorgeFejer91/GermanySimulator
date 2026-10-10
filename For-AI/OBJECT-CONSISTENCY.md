@@ -31,10 +31,17 @@ For suitable numeric/state invariants, use `property-based-testing` with product
 - Sprites stay camera-facing with stable foot pivots. Opaque parts obey real depth, and transparent atlas pixels do not hide later geometry. A person in front of a wall is visible, a person behind an opaque wall is hidden, and the player is readable through an intentionally faded blocker. Avoid global always-on-top character layers and sorting that puts a person in front of every building.
 - Compare rendered world-space extents after fitting, including procedural fallbacks; source GLB bounds or parcel area alone do not prove scale. Human doors clear the displayed person, cars read as cars beside people, and a major government landmark is visibly much larger than ordinary shops/office parcels. Preserve authored landmark proportions through uniform scale and align displayed bases with their collision parcel. Perspective must not be used to conceal a miniature Bundestag. Any intentional caricature/monument exaggeration belongs in its existing owning product document and still gets a relational scale review.
 
-The user's explicit 2026-10-10 Bürgeramt encounter requirement is a scoped
-exception to ordinary sprite depth: the selected cinematic speaker remains in
-the foreground as the room fades and returns. Restore world depth on release;
+The user's explicit 2026-10-10 Bürgeramt requirement renders every office person
+after visual effects while respecting the room's depth buffer and camera-depth
+order between people.
+Fading room surfaces retain their existing depth-write policy. Restore the
+ordinary actor layer on office close;
 this does not change city/building occlusion. See `BUERGERAMT.md` for ownership.
+The shared Spark batch sorts at active native paint anchors or its visible body
+positions after those anchors retire; its camera-attached tunnel must not move
+that depth proxy. Keep the comparator until synchronous owner disposal. The
+actual-body near/far-person and opaque-wall GPU probes are required alongside
+ordinary sprite probes; Spark's scene origin alone cannot establish body depth.
 
 ## Executable verification matrix
 

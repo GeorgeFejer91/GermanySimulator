@@ -141,8 +141,9 @@ function createPaintSplat(T){
    if(material.map!==actor.mesh.material.map){material.map=actor.mesh.material.map;material.needsUpdate=true}
    if(material.fog!==actor.mesh.material.fog){material.fog=actor.mesh.material.fog;material.needsUpdate=true}
    material.color.copy(actor.mesh.material.color);material.opacity=actor.mesh.material.opacity;material.depthTest=actor.mesh.material.depthTest;mesh.renderOrder=actor.mesh.renderOrder;
+   mesh.layers.mask=actor.mesh.layers.mask;
   },
-  inspect(){return{actor:actor?.lipId||actor?.id||actor?.name||null,visible:mesh.visible,shape:shape.value.toArray(),kernels:count,depthTest:material.depthTest,depthWrite:material.depthWrite}},
+  inspect(){return{actor:actor?.lipId||actor?.id||actor?.name||null,visible:mesh.visible,shape:shape.value.toArray(),kernels:count,layer:mesh.layers.mask,depthTest:material.depthTest,depthWrite:material.depthWrite}},
   dispose(){if(disposed)return;disposed=true;if(actor)actor.mesh.material.userData.lipHole.value=0;mesh.removeFromParent();geometry.dispose();material.dispose()},
  };
 }

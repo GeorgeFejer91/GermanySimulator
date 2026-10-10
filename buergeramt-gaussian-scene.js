@@ -1,6 +1,6 @@
 // Optional close-up paint interpolation. The simulation owns every action;
 // the existing render pass and two-job admission queue own preparation/update.
-export function createAmtGaussianScene({THREE,renderer,scene,queueLoad,mobile=false,reducedMotion}){
+export function createAmtGaussianScene({THREE,renderer,scene,actorLayer=0,queueLoad,mobile=false,reducedMotion}){
   const slots=new Map(),failedActors=new Map(),limit=mobile?1:2;
   let generation=null,controller=new AbortController(),owner=null,ownerPromise=null,failure='';
   const enqueue=task=>queueLoad?queueLoad(task):Promise.resolve().then(task);
@@ -10,7 +10,7 @@ export function createAmtGaussianScene({THREE,renderer,scene,queueLoad,mobile=fa
     if(!ownerPromise){
       const request=controller;
       ownerPromise=import('./buergeramt-splat.js?v=20261011-published-features').then(module=>
-        module.createAmtSplatOwner({THREE,renderer,scene,signal:request.signal})).then(value=>{
+        module.createAmtSplatOwner({THREE,renderer,scene,actorLayer,signal:request.signal})).then(value=>{
         if(request!==controller||request.signal.aborted){void value.dispose();throw new DOMException('Retired office','AbortError')}
         owner=value;return value;
       }).catch(error=>{if(!request.signal.aborted)failure=error.message;throw error});

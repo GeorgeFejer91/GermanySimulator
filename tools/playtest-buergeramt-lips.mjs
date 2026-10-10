@@ -81,10 +81,13 @@ try{
    if(nativePaint){
     await page.waitForFunction(()=>{Germany3D.sync();return Germany3D.amtGaussian.actors.some(a=>a.anchor?.visible&&a.anchor.lipShape[0]>.75)},null,{timeout:90000}).catch(async error=>{writeFileSync(`${output}/${name}-${id}-failure.json`,JSON.stringify(await page.evaluate(()=>({speech:BuergeramtLevel.lipSpeech,gaussian:Germany3D.amtGaussian,clerk:BuergeramtLevel.clerkPerformance,view:BuergeramtLevel.view})),null,2));throw error});
     open.gaussian=await page.evaluate(()=>Germany3D.amtGaussian);open.splat=await page.evaluate(()=>Germany3D.amtLipSplat);assert.equal(open.splat.visible,false);
-   }else{assert.equal(open.splat.visible,true);assert.equal(open.actor.hole,1);assert.equal(open.splat.depthTest,true)}
+   }else{assert.equal(open.splat.visible,true);assert.equal(open.actor.hole,1);assert.equal(open.splat.depthTest,true);assert.equal(open.splat.layer,2,'mouth shares the final actor pass')}
    if(!nativePaint&&id===actors[0])renderCost=await page.evaluate(()=>{
     const a=__lipRender.amtMoving.find(a=>a.id===BuergeramtLevel.lipSpeech.actor),patch=a.mesh.children.find(m=>m.geometry?.instanceCount===425);
-    const sample=()=>{const times=[];for(let n=0;n<30;n++){const at=performance.now();__lipRender.renderer.render(__lipRender.scene,__lipRender.camera);times.push(performance.now()-at)}times.sort((a,b)=>a-b);return{p50Ms:times[15],p95Ms:times[28],calls:__lipRender.renderer.info.render.calls,triangles:__lipRender.renderer.info.render.triangles,memory:{...__lipRender.renderer.info.memory}}};
+    const sample=()=>{const times=[];for(let n=0;n<30;n++){const at=performance.now(),r=__lipRender.renderer,s=__lipRender.scene,c=__lipRender.camera;
+     r.render(s,c);const background=s.background;s.background=null;r.autoClear=false;c.layers.set(1);
+     try{r.render(s,c)}finally{c.layers.set(0);r.autoClear=true;s.background=background}
+     times.push(performance.now()-at)}times.sort((a,b)=>a-b);return{p50Ms:times[15],p95Ms:times[28],calls:__lipRender.renderer.info.render.calls,triangles:__lipRender.renderer.info.render.triangles,memory:{...__lipRender.renderer.info.memory}}};
     const active=sample();patch.visible=false;a.mesh.material.userData.lipHole.value=0;const baseline=sample();patch.visible=true;a.mesh.material.userData.lipHole.value=1;
     return{active,baseline,scope:'same frozen production scene, CPU submission only; GPU timing unavailable'};
    });

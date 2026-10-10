@@ -1230,7 +1230,7 @@ function showRendererFailure(error){
     texture.minFilter=texture.magFilter=T.LinearFilter;
     for(const mesh of amtPaintedProps){mesh.material.map=texture;mesh.material.needsUpdate=true}
   }
-  function amtSnapshot(actor){const height=actor.height||actor.mesh.geometry.parameters.height;return{rotation:actor.mesh.rotation.y,height,foot:actor.mesh.position.y-height*actor.mesh.scale.y/2,ground:[actor.mesh.position.x,actor.mesh.position.z],direction:actor.direction,renderKey:actor.renderKey,opacity:actor.mesh.material.opacity,depthTest:actor.mesh.material.depthTest,renderOrder:actor.mesh.renderOrder,foreground:!!actor.mesh.userData.amtForeground}}
+  function amtSnapshot(actor){const height=actor.height||actor.mesh.geometry.parameters.height;return{rotation:actor.mesh.rotation.y,height,foot:actor.mesh.position.y-height*actor.mesh.scale.y/2,ground:[actor.mesh.position.x,actor.mesh.position.z],direction:actor.direction,renderKey:actor.renderKey,opacity:actor.mesh.material.opacity,depthTest:actor.mesh.material.depthTest,renderOrder:actor.mesh.renderOrder,layer:actor.mesh.layers.mask,foreground:!!actor.mesh.userData.amtForeground}}
   function animateAmtCharacters(now,level){
     const speech=level.lipSpeech;
     for(const actor of amtCharacters){
@@ -1443,7 +1443,7 @@ function showRendererFailure(error){
     const transparent=fading||original.transparent;if(material.transparent!==transparent){material.transparent=transparent;material.needsUpdate=true}
     material.depthWrite=fading?false:original.depthWrite;
   }}
-  const amtGaussian=createAmtGaussianScene({THREE:T,renderer,scene:amtScene,queueLoad:bridge.queueAssetLoad,mobile:amtMobile,reducedMotion:amtReducedMotion});
+  const amtGaussian=createAmtGaussianScene({THREE:T,renderer,scene:amtScene,actorLayer:1,queueLoad:bridge.queueAssetLoad,mobile:amtMobile,reducedMotion:amtReducedMotion});
   let amtOmenSplat=null,amtOmenRequest=null,amtOmenVisit=-1,amtOmenSkipped=false,amtOmenFailure="";
   function clearAmtOmenSplat(){
     amtOmenRequest?.abort();amtOmenRequest=null;
@@ -1493,7 +1493,7 @@ function showRendererFailure(error){
   let lastCall="",amtHiDpi=false;
   function restoreAmtCharacterLayers(){
     for(const actor of [...amtCharacters,...amtMoving]){
-      actor.mesh.material.opacity=1;actor.mesh.material.depthTest=true;actor.mesh.renderOrder=100;actor.mesh.userData.amtForeground=false;
+      actor.mesh.material.opacity=1;actor.mesh.material.depthTest=true;actor.mesh.renderOrder=100;actor.mesh.layers.set(0);actor.mesh.userData.amtForeground=false;
       const keep=actor.mesh.material.userData.amtKeep;if(keep)keep.value=0;
     }
   }
@@ -1513,10 +1513,10 @@ function showRendererFailure(error){
     for(const actor of [...amtCharacters,...amtMoving]){
       const id=actor.lead?'clerk':actor.animationId??actor.id,foreground=!!(level.omen.phase&&id==='aktenkurier'||fever?.active&&id===fever.id);
       const keep=actor.mesh.material.userData.amtKeep;if(keep)keep.value=foreground?1:0;
-      // Office paintings follow the fading room in the transparent pass. The
-      // encounter's speaker stays in front for entry, hold and restoration.
-      actor.mesh.userData.amtForeground=foreground;actor.mesh.renderOrder=foreground?200:100;
-      actor.mesh.material.depthTest=!foreground;
+      // People composite after the effects using the room's existing depth.
+      // Equal order retains camera-depth sorting between people and paint.
+      actor.mesh.userData.amtForeground=foreground;actor.mesh.renderOrder=200;actor.mesh.layers.set(1);
+      actor.mesh.material.depthTest=true;
     }
     const darkness=Math.max(level.omen.strength,amtIsolation.value);amtScene.fog.density=.46*Math.pow(darkness,1.2);amtScene.background.copy(amtDayColor).lerp(amtScene.fog.color,darkness);const view=level.view;amtCamera.position.set(view.x,1.68,view.z);amtCamera.rotation.set(0,-view.yaw,0);if(level.qrSvg)setAmtQr(level.qrSvg);const now=performance.now();animateAmtCharacters(now,level);animateAmtMoving(now,level);amtGaussian.prepareGeneration(level.clerkPerformance.animation?.generation??0);updateAmtOmenSplat(level);amtGaussian.update(level,amtCharacters,amtMoving,amtCamera);amtGaussian.render(amtCamera);updateAmtMouth(level,now);const call=level.queueDisplay;if(call!==lastCall){lastCall=call;callCtx.fillStyle="#152527";callCtx.fillRect(0,0,512,256);callCtx.textAlign="center";callCtx.textBaseline="middle";callCtx.fillStyle="#c94839";callCtx.font="bold 112px monospace";callCtx.fillText(call,256,135,460);callTexture.needsUpdate=true}renderer.render(amtScene,amtCamera);
     const omen=level.omen,themed=fever?.active&&fever.strength>0,selected=themed?[...amtCharacters,...amtMoving].find(actor=>(actor.lead?'clerk':actor.animationId??actor.id)===fever.id):null;
@@ -1529,6 +1529,11 @@ function showRendererFailure(error){
       uniforms.reveal.value=themed||amtReducedMotion.matches?0:amtOmenSplat?.inspect().reveal||0;
       renderer.autoClear=false;renderer.render(omenScene,omenCamera);renderer.autoClear=true;
     }
+    // Retain room depth; a Color background would otherwise force a clear on
+    // this second pass even with autoClear disabled.
+    const background=amtScene.background;amtScene.background=null;
+    renderer.autoClear=false;amtCamera.layers.set(1);
+    try{renderer.render(amtScene,amtCamera)}finally{amtCamera.layers.set(0);renderer.autoClear=true;amtScene.background=background}
     return true}
   function resize(){renderer.setPixelRatio(Math.min(devicePixelRatio||1,1,Math.sqrt(1600000/Math.max(1,innerWidth*innerHeight))));renderer.setSize(innerWidth,innerHeight,false);camera.aspect=innerWidth/innerHeight;camera.updateProjectionMatrix();amtCamera.aspect=innerWidth/innerHeight;amtCamera.updateProjectionMatrix();layoutMissionPointer()}resize();addEventListener("resize",resize,{passive:true});
   const spawnProbe=new T.Vector3();

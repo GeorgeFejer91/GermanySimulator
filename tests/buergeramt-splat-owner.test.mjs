@@ -3,12 +3,12 @@ import assert from 'node:assert/strict';
 import {createAmtSplatOwner,createOmenSplat} from '../buergeramt-splat.js';
 
 function deferred(){let resolve,reject;const promise=new Promise((yes,no)=>{resolve=yes;reject=no});return{promise,resolve,reject}}
-async function fixture(){
+async function fixture(actorLayer=0){
  let time=0;
  const members=new Set(),scene={add:x=>members.add(x),remove:x=>members.delete(x)};
  const jobs=[];
  class SparkRenderer{
-  constructor(options){this.options=options;this.material={depthTest:options.depthTest};this.visible=false;this.activeSplats=12;this.disposals=0;this.dirty=0}
+  constructor(options){this.options=options;this.material={depthTest:options.depthTest};this.layers={set(value){this.mask=1<<value}};this.visible=false;this.activeSplats=12;this.disposals=0;this.dirty=0}
   setDirty(){this.dirty++}
   update(){const job=deferred();jobs.push(job);return job.promise}
   dispose(){this.disposals++}
@@ -21,7 +21,7 @@ async function fixture(){
  }
  const dyno={Gsplat:'Gsplat',dynoFloat:value=>({value}),dynoVec2:value=>({value}),dynoBlock:()=>({})};
  const renderer={setTransparentSort(value){this.sort=value}};
- const owner=await createAmtSplatOwner({THREE:{},renderer,scene,signal:new AbortController().signal,sparkModule:{SparkRenderer,SplatMesh,dyno},nowMs:()=>time});
+ const owner=await createAmtSplatOwner({THREE:{},renderer,scene,actorLayer,signal:new AbortController().signal,sparkModule:{SparkRenderer,SplatMesh,dyno},nowMs:()=>time});
  return{owner,renderer,scene,members,jobs,SplatMesh,setTime:value=>time=value};
 }
 
@@ -35,8 +35,24 @@ test('a shared Gaussian batch sorts between two paint planes without owning thei
   const z=depth=>-depth*projectionScale+projectionOffset,item=(object,z,id)=>({object,z,id,groupOrder:0,renderOrder:0});
   const ordered=[item(near,z(nearDepth),3),item(owner.spark,z(-2),1),item(far,z(farDepth),2)].sort(f.renderer.sort);
   assert.deepEqual(ordered.map(x=>x.object),[far,owner.spark,near]);assert.equal(owner.inspect().meshes,0);assert.equal(owner.inspect().paintedAnchors,2);
-  owner.retirePaint(far);assert(f.renderer.sort);owner.retirePaint(near);assert.equal(f.renderer.sort,null);await owner.dispose();
+  owner.retirePaint(far);assert(f.renderer.sort);owner.retirePaint(near);assert(f.renderer.sort);await owner.dispose();assert.equal(f.renderer.sort,null);
  }
+});
+
+test('courier body keeps near/far person order after paint retirement and excludes the camera tunnel',async()=>{
+ const f=await fixture(1),{owner}=f;
+ const paint={visible:true,userData:{anchorActive:false}};owner.attachPaint(paint);owner.retirePaint(paint);
+ const body=owner.attach(new f.SplatMesh()),tunnel=owner.attach(new f.SplatMesh());
+ body.renderOrder=tunnel.renderOrder=200;tunnel.userData.amtSortExclude=true;
+ body.getWorldPosition=()=>({applyMatrix4:()=>({x:0,y:0,z:-3})});
+ tunnel.getWorldPosition=()=>({applyMatrix4:()=>({x:0,y:0,z:0})});
+ const elements=Array(16).fill(0);elements[10]=-1;elements[14]=-.2;
+ const pending=owner.update({position:{clone:()=>({})},projectionMatrix:{elements},updateMatrixWorld(){}});await Promise.resolve();
+ const near={},far={},item=(object,z,id)=>({object,z,id,groupOrder:0,renderOrder:200});
+ const ordered=[item(near,1.8,3),item(owner.spark,-2,1),item(far,3.8,2)].sort(f.renderer.sort);
+ assert.deepEqual(ordered.map(x=>x.object),[far,owner.spark,near]);
+ const done=owner.dispose();assert.equal(f.renderer.sort,null,'restore sort before deferred GPU cleanup');
+ f.jobs[0].resolve();await pending;await done;
 });
 
 test('one pinned renderer updates at bounded cadence without overlapping sorts',async()=>{
@@ -71,9 +87,11 @@ test('retirement detaches immediately but frees mesh and texture only after read
  await owner.dispose();
 });
 
-test('foreground encounter splats follow the room and restore depth when their owner retires',async()=>{
- const f=await fixture(),mesh=f.owner.attach(new f.SplatMesh());mesh.renderOrder=200;mesh.userData.amtForeground=true;
- const sorted=f.owner.update({});await Promise.resolve();assert.equal(f.owner.spark.renderOrder,200);assert.equal(f.owner.spark.material.depthTest,false);
+test('foreground paint and splats share an actor pass while respecting room depth',async()=>{
+ const f=await fixture(1),mesh=f.owner.attach(new f.SplatMesh());mesh.renderOrder=200;mesh.userData.amtForeground=true;
+ const paint={layers:{set(value){this.mask=1<<value}}};f.owner.attachPaint(paint);
+ assert.equal(f.owner.spark.layers.mask,2);assert.equal(paint.layers.mask,2);f.owner.retirePaint(paint);
+ const sorted=f.owner.update({});await Promise.resolve();assert.equal(f.owner.spark.renderOrder,200);assert.equal(f.owner.spark.material.depthTest,true);
  f.jobs[0].resolve();await sorted;f.owner.retire(mesh);f.setTime(20);f.owner.update({});
  assert.equal(f.owner.spark.renderOrder,0);assert.equal(f.owner.spark.material.depthTest,true);assert.equal(f.owner.spark.visible,false);
  await f.owner.dispose();
