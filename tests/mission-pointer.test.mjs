@@ -27,7 +27,7 @@ test('sausage nose aims at the target in all quadrants, follows position/elevati
  let target=null;const player={x:560,y:560,facing:2.5},position={set(x,y,z){Object.assign(this,{x,y,z})}},pointer={rotation:{y:0},position,userData:{}};
  const scope=vm.createContext({bridge:{player,getMissionWaypoint:()=>target,stationElevation:()=>.7},missionPointer:pointer,X:x=>x*.02-100,Z:y=>y*.02-50});
  vm.runInContext(render.slice(start,end+4),scope);
- for(const [dx,dz] of [[0,500],[500,0],[0,-500],[-500,0],[350,-280]]){target={id:'entrance',x:player.x+dx,y:player.y+dz};scope.updateMissionPointer();assert.equal(pointer.visible,true);const length=Math.hypot(dx,dz);assert.ok(Math.abs(Math.sin(pointer.rotation.y)-dx/length)<1e-9);assert.ok(Math.abs(Math.cos(pointer.rotation.y)-dz/length)<1e-9);assert.equal(position.x,player.x*.02-100);assert.equal(position.z,player.y*.02-50);assert.equal(position.y,2.65)}
+ for(const [dx,dz] of [[0,500],[500,0],[0,-500],[-500,0],[350,-280]]){target={id:'entrance',x:player.x+dx,y:player.y+dz};scope.updateMissionPointer();assert.equal(pointer.visible,true);const length=Math.hypot(dx,dz);assert.ok(Math.abs(Math.sin(pointer.rotation.y)-dx/length)<1e-9);assert.ok(Math.abs(Math.cos(pointer.rotation.y)-dz/length)<1e-9);assert.equal(position.x,player.x*.02-100);assert.equal(position.z,player.y*.02-50);assert.equal(position.y,3.3)}
  target={id:'entrance',x:player.x+35,y:player.y};scope.updateMissionPointer();assert.equal(pointer.visible,false);
  target=null;scope.updateMissionPointer();assert.equal(pointer.visible,false);assert.equal(pointer.userData.target,null);
 });

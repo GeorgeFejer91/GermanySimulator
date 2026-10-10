@@ -377,30 +377,42 @@ function showRendererFailure(error){
     }
     return localModels.get(url);
   }
-  function installCityModel(group,fallback,file,fit,location=null){
+  function installCityModel(group,fallback,file,fit,location=null,prepare=null){
     const slot={file,group,fallback,model:null};cityAssetSlots.push(slot);if(!modelLoader)return;
     return queueCityModel(()=>location?{x:X(location.x),z:Z(location.y)}:{x:group.position.x,z:group.position.z},Math.hypot(fit.x,fit.z)/2,async()=>{
-      try{const gltf=await loadLocalModel(file.startsWith("./")?file:cityModelUrl(file));if(!gltf)return false;const model=gltf.scene.clone(true);fitResponseModel(model,fit);model.name=file;group.add(model);slot.model=model;fallback.visible=false;return true}
+      try{const gltf=await loadLocalModel(file.startsWith("./")?file:cityModelUrl(file));if(!gltf)return false;const model=gltf.scene.clone(true);fitResponseModel(model,fit);prepare?.(model);model.name=file;group.add(model);slot.model=model;fallback.visible=false;return true}
       catch(error){console.warn("Keeping procedural city asset "+file,error);return false}
     },slot);
   }
   // An airborne navigation cue, outside the simulation's solid-object lists.
   const missionPointer=new T.Group();missionPointer.name="Mission sausage pointer";missionPointer.visible=false;
-  missionPointer.position.set(initialPlayerX,1.95,initialPlayerZ);world.add(missionPointer);
+  missionPointer.position.set(initialPlayerX,2.6,initialPlayerZ);missionPointer.scale.setScalar(2.5);world.add(missionPointer);
   const sausageFallback=new T.Group(),sausageCurve=new T.CatmullRomCurve3([new T.Vector3(-.12,.12,-.78),new T.Vector3(.12,.12,-.4),new T.Vector3(.18,.12,0),new T.Vector3(.12,.12,.4),new T.Vector3(-.12,.12,.78)]);
   const sausageSkin=mat(0xb96632,.5);sausageFallback.add(new T.Mesh(new T.TubeGeometry(sausageCurve,20,.105,8,false),sausageSkin));
-  for(const end of [0,1]){const cap=new T.Mesh(new T.SphereGeometry(.105,8,6),sausageSkin);cap.position.copy(sausageCurve.getPoint(end));sausageFallback.add(cap)}
+  for(const end of [0,1]){const p=sausageCurve.getPoint(end),cap=new T.Mesh(new T.SphereGeometry(.105,8,6).translate(p.x,p.y,p.z),sausageSkin);sausageFallback.add(cap)}
+  function glowSausageTip(root){
+    const copies=new Map();root.traverse(node=>{if(!node.material)return;const copy=source=>{if(copies.has(source))return copies.get(source);const material=source.clone();
+      material.onBeforeCompile=shader=>{
+        shader.vertexShader="varying float vWurstTip;\n"+shader.vertexShader.replace("#include <begin_vertex>","#include <begin_vertex>\nvWurstTip = smoothstep(0.45, 0.875, position.z);");
+        shader.fragmentShader="varying float vWurstTip;\n"+shader.fragmentShader.replace("#include <color_fragment>","#include <color_fragment>\ndiffuseColor.rgb = mix(diffuseColor.rgb, vec3(1.0, 0.005, 0.002), vWurstTip * 0.9);").replace("#include <emissivemap_fragment>","#include <emissivemap_fragment>\ntotalEmissiveRadiance += vec3(2.4, 0.005, 0.002) * vWurstTip;");
+      };material.customProgramCacheKey=()=>"mission-sausage-red-tip";copies.set(source,material);return material;
+    };node.material=Array.isArray(node.material)?node.material.map(copy):copy(node.material)});
+  }
+  glowSausageTip(sausageFallback);
   missionPointer.add(sausageFallback);
-  const mustardTip=new T.Mesh(new T.ConeGeometry(.28,.46,3),mat(0xf6c744,.6));mustardTip.rotation.x=Math.PI/2;mustardTip.position.set(0,.12,1.03);missionPointer.add(mustardTip);
-  if(bridge.getMissionWaypoint)installCityModel(missionPointer,sausageFallback,"./assets/models/mission-sausage/sausage.glb",{x:.5,y:.24,z:1.75});
+  const tipCanvas=document.createElement("canvas");tipCanvas.width=tipCanvas.height=64;const tipContext=tipCanvas.getContext("2d"),tipGradient=tipContext.createRadialGradient(32,32,0,32,32,32);
+  tipGradient.addColorStop(0,"rgba(255,35,15,.9)");tipGradient.addColorStop(.3,"rgba(255,0,0,.55)");tipGradient.addColorStop(1,"rgba(255,0,0,0)");tipContext.fillStyle=tipGradient;tipContext.fillRect(0,0,64,64);
+  const tipTexture=new T.CanvasTexture(tipCanvas);tipTexture.colorSpace=T.SRGBColorSpace;
+  const sausageTipGlow=new T.Sprite(new T.SpriteMaterial({map:tipTexture,transparent:true,blending:T.AdditiveBlending,depthWrite:false,toneMapped:false}));sausageTipGlow.name="Red sausage tip glow";sausageTipGlow.position.set(-.13,.12,.83);sausageTipGlow.scale.set(.65,.65,1);missionPointer.add(sausageTipGlow);
+  if(bridge.getMissionWaypoint)installCityModel(missionPointer,sausageFallback,"./assets/models/mission-sausage/sausage.glb",{x:.5,y:.24,z:1.75},null,glowSausageTip);
   function updateMissionPointer(){
     const target=bridge.getMissionWaypoint?.();missionPointer.visible=!!target;
     missionPointer.userData.target=target?.id||null;
     if(!target)return;
     const dx=target.x-bridge.player.x,dz=target.y-bridge.player.y;
-    // The long axis and mustard tip face the actual entrance, independent of facing/camera.
+    // The long axis and glowing red end face the actual entrance, independent of facing/camera.
     missionPointer.rotation.y=Math.atan2(dx,dz);
-    missionPointer.position.set(X(bridge.player.x),1.95+(bridge.stationElevation?.(bridge.player.x,bridge.player.y)||0),Z(bridge.player.y));
+    missionPointer.position.set(X(bridge.player.x),2.6+(bridge.stationElevation?.(bridge.player.x,bridge.player.y)||0),Z(bridge.player.y));
     missionPointer.visible=Math.hypot(dx,dz)>36;
   }
   function registerMaterials(root,slot){
@@ -1323,7 +1335,7 @@ function showRendererFailure(error){
   function isWorldPointVisible(x,y,padding=0,kind="officer"){const height=kind==="helicopter"?6.8:kind==="car"?.7:1;spawnProbe.set(X(x),height,Z(y)).project(camera);const padX=padding/Math.max(1,innerWidth)*2,padY=padding/Math.max(1,innerHeight)*2;return spawnProbe.z>=-1&&spawnProbe.z<=1&&spawnProbe.x>=-1-padX&&spawnProbe.x<=1+padX&&spawnProbe.y>=-1-padY&&spawnProbe.y<=1+padY}
   function inspectAssets(){
     const bounds=model=>{if(!model)return null;const b=new T.Box3().setFromObject(model),s=b.getSize(new T.Vector3());return{width:s.x,height:s.y,depth:s.z,ground:b.min.y}};
-    return{missionPointer:{visible:missionPointer.visible,target:missionPointer.userData.target,loaded:!sausageFallback.visible,heading:missionPointer.rotation.y,position:missionPointer.position.toArray(),bounds:bounds(missionPointer)},brandmauerFire:{loaded:lineFire.visible,fallback:firePlaneA.visible,particles:lineParticleLayers.map(layer=>layer.geometry.attributes.position.count),...fireMaskStatus},dumpsterFire:dumpsterFlames.map(({fire,smoke,fallback,maskStatus,mask,coreMask,smokeMask})=>({loaded:fire.visible,smoke:smoke.visible,fallback:fallback.visible,...maskStatus,images:[mask.image?.width||0,coreMask.image?.width||0,smokeMask.image?.width||0]})),streetCharacters:streetCharacters?.inspect()||null,placards:placardLayouts.map(item=>({...item})),buildings:buildingSlots.filter(s=>!s.building.kind).map(s=>({id:s.building.id,loaded:!!s.model,fallback:s.fallback.visible,bounds:bounds(s.model),glass:[...s.materials].filter(m=>/glass/i.test(m.name)).map(m=>({name:m.name,opacity:m.opacity,baseOpacity:m.userData.baseOpacity}))})),city:cityAssetSlots.map(s=>({file:s.file,loaded:!!s.model,fallback:s.fallback.visible,bounds:bounds(s.model)})),monument:kiesingerMonument?{bounds:bounds(kiesingerMonument),scale:kiesingerMonument.scale.y,loaded:!!kiesingerMonument.getObjectByName("KiesingerSculpture")}:null,banners:landmarkBanners.map(({kind,mesh})=>({kind,bounds:bounds(mesh)})),vehicles:[...trafficCarMeshes.values(),...policeVehicleMeshes.values()].map(s=>({id:s.state.id,kind:s.kind,loaded:!!s.model,fallback:s.fallback.visible,bounds:bounds(s.model),wheels:s.wheels.map(w=>({name:w.node.name,angle:w.node.rotation.x,radius:w.radius})),steering:s.steering.map(o=>o.rotation.y),brakes:s.brakes.map(m=>m.emissiveIntensity),beacons:s.beacons.map(b=>b.material.emissiveIntensity)})),sources:[...localModels.keys()],render:{...renderer.info.render},memory:{...renderer.info.memory}};
+    return{missionPointer:{visible:missionPointer.visible,target:missionPointer.userData.target,loaded:!sausageFallback.visible,heading:missionPointer.rotation.y,position:missionPointer.position.toArray(),scale:missionPointer.scale.x,tip:{position:sausageTipGlow.getWorldPosition(new T.Vector3()).toArray(),depthTest:sausageTipGlow.material.depthTest,depthWrite:sausageTipGlow.material.depthWrite},bounds:bounds(missionPointer)},brandmauerFire:{loaded:lineFire.visible,fallback:firePlaneA.visible,particles:lineParticleLayers.map(layer=>layer.geometry.attributes.position.count),...fireMaskStatus},dumpsterFire:dumpsterFlames.map(({fire,smoke,fallback,maskStatus,mask,coreMask,smokeMask})=>({loaded:fire.visible,smoke:smoke.visible,fallback:fallback.visible,...maskStatus,images:[mask.image?.width||0,coreMask.image?.width||0,smokeMask.image?.width||0]})),streetCharacters:streetCharacters?.inspect()||null,placards:placardLayouts.map(item=>({...item})),buildings:buildingSlots.filter(s=>!s.building.kind).map(s=>({id:s.building.id,loaded:!!s.model,fallback:s.fallback.visible,bounds:bounds(s.model),glass:[...s.materials].filter(m=>/glass/i.test(m.name)).map(m=>({name:m.name,opacity:m.opacity,baseOpacity:m.userData.baseOpacity}))})),city:cityAssetSlots.map(s=>({file:s.file,loaded:!!s.model,fallback:s.fallback.visible,bounds:bounds(s.model)})),monument:kiesingerMonument?{bounds:bounds(kiesingerMonument),scale:kiesingerMonument.scale.y,loaded:!!kiesingerMonument.getObjectByName("KiesingerSculpture")}:null,banners:landmarkBanners.map(({kind,mesh})=>({kind,bounds:bounds(mesh)})),vehicles:[...trafficCarMeshes.values(),...policeVehicleMeshes.values()].map(s=>({id:s.state.id,kind:s.kind,loaded:!!s.model,fallback:s.fallback.visible,bounds:bounds(s.model),wheels:s.wheels.map(w=>({name:w.node.name,angle:w.node.rotation.x,radius:w.radius})),steering:s.steering.map(o=>o.rotation.y),brakes:s.brakes.map(m=>m.emissiveIntensity),beacons:s.beacons.map(b=>b.material.emissiveIntensity)})),sources:[...localModels.keys()],render:{...renderer.info.render},memory:{...renderer.info.memory}};
   }
   // Prune complete off-camera groups, including the many meshes in distant stand-ins.
   const renderFrustum=new T.Frustum(),renderViewMatrix=new T.Matrix4(),trainRenderSphere=new T.Sphere();

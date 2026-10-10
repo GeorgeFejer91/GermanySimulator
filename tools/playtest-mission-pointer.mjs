@@ -12,29 +12,34 @@ await new Promise(done=>server.listen(0,'127.0.0.1',done));
 const browser=await chromium.launch({headless:true,executablePath:process.env.CHROMIUM_PATH,args:['--mute-audio']});
 const report={cases:[],limits:['Forced mission selection and diagnostic placement; no full natural mission chain','Android emulation only; physical Android not available','Audio muted at all outputs; no listening review']};
 try{
- for(const [name,viewport,failure,diagnostic] of [['desktop',{width:1280,height:800},false,false],['android-portrait',{width:390,height:844},false,false],['android-landscape',{width:844,height:390},false,false],['fallback',{width:1280,height:800},true,false],['diagnostic',{width:1280,height:800},false,true]]){
-  const context=await browser.newContext({viewport,isMobile:name.startsWith('android'),hasTouch:name.startsWith('android')});
+ for(const [name,viewport,failure,diagnostic] of [['desktop',{width:1280,height:800},false,false],['android-portrait',{width:390,height:844},false,false],['android-landscape',{width:844,height:390},false,false],['android-small',{width:320,height:640},false,false],['android-fallback',{width:390,height:844},true,false],['reduced-motion',{width:1280,height:800},false,false],['fallback',{width:1280,height:800},true,false],['diagnostic',{width:1280,height:800},false,true]]){
+  const context=await browser.newContext({viewport,isMobile:name.startsWith('android'),hasTouch:name.startsWith('android'),reducedMotion:name==='reduced-motion'?'reduce':'no-preference'});
   await context.addInitScript(()=>{
    const play=HTMLMediaElement.prototype.play;HTMLMediaElement.prototype.play=function(...args){this.muted=true;this.volume=0;return play.apply(this,args)};
    const connect=AudioNode.prototype.connect;AudioNode.prototype.connect=function(target,...args){if(target===this.context.destination){const gain=this.context.createGain();gain.gain.value=0;connect.call(gain,target);return connect.call(this,gain,...args)}return connect.call(this,target,...args)};
    const speak=speechSynthesis.speak.bind(speechSynthesis);speechSynthesis.speak=u=>{u.volume=0;speak(u)};
   });
-  const page=await context.newPage(),errors=[];page.on('pageerror',e=>errors.push(e.message));
+  const page=await context.newPage(),errors=[];page.on('pageerror',e=>errors.push(e.message));page.on('console',message=>{if(message.type()==='error'&&/WebGL|shader/i.test(message.text()))errors.push(message.text())});
   if(failure)await page.route('**/mission-sausage/sausage.glb',route=>route.abort());
   await page.goto(`http://127.0.0.1:${server.address().port}/${diagnostic?'3d.html':'index.html'}`,{waitUntil:'domcontentloaded'});
   await page.waitForFunction(()=>window.Germany3D?.startupReady&&(window.__pointerTest?Germany3DBridge.startupAssetsReady:true),null,{timeout:120000});
   if(!diagnostic){assert.equal(await page.evaluate(()=>Germany3D.inspectAssets().missionPointer.visible),false);await page.keyboard.press('s');await page.evaluate(()=>{for(let i=0;i<8;i++)document.getElementById('dialogue-next').click()});await page.waitForFunction(()=>Germany3D.inspectAssets().missionPointer.visible);}
   else await page.waitForFunction(()=>Germany3D.inspectAssets().missionPointer.visible);
-  let pointer=await page.evaluate(()=>Germany3D.inspectAssets().missionPointer);assert.equal(pointer.loaded,!failure);assert.equal(pointer.target,'buergeramt');
+  let pointer=await page.evaluate(()=>Germany3D.inspectAssets().missionPointer);assert.equal(pointer.loaded,!failure);assert.equal(pointer.target,'buergeramt');assert.equal(pointer.scale,2.5);assert.equal(pointer.tip.depthTest,true);assert.equal(pointer.tip.depthWrite,false);assert.equal(pointer.position[1],2.6);
   await page.screenshot({path:resolve(out,name+'.png')});
-  const before=await page.evaluate(()=>({x:Germany3DBridge.player.x,y:Germany3DBridge.player.y}));await page.keyboard.down('ArrowUp');await page.waitForTimeout(350);await page.keyboard.up('ArrowUp');
+  if(['desktop','android-portrait','fallback'].includes(name))for(const [direction,dx,dz] of [['north',0,-500],['east',500,0],['south',0,500],['west',-500,0]]){
+   await page.evaluate(([dx,dz])=>{window.__originalWaypoint??=Germany3DBridge.getMissionWaypoint;Germany3DBridge.getMissionWaypoint=()=>({id:'visual-bearing',x:Germany3DBridge.player.x+dx,y:Germany3DBridge.player.y+dz});Germany3D.sync()},[dx,dz]);
+   await page.screenshot({path:resolve(out,name+'-'+direction+'.png')});
+  }
+  await page.evaluate(()=>{if(window.__originalWaypoint){Germany3DBridge.getMissionWaypoint=__originalWaypoint;Germany3D.sync()}});
+  const before=await page.evaluate(()=>({x:Germany3DBridge.player.x,y:Germany3DBridge.player.y}));await page.keyboard.down('ArrowUp');try{await page.waitForFunction(before=>Math.hypot(Germany3DBridge.player.x-before.x,Germany3DBridge.player.y-before.y)>0,before,{timeout:3000})}finally{await page.keyboard.up('ArrowUp')}
   const after=await page.evaluate(()=>({x:Germany3DBridge.player.x,y:Germany3DBridge.player.y}));assert.ok(Math.hypot(after.x-before.x,after.y-before.y)>0);
   const missions=[];
   if(!diagnostic){
    for(let mission=0;mission<8;mission++){const result=await page.evaluate(mission=>{__pointerTest.state.mission=mission;Germany3D.sync();return{target:Germany3DBridge.getMissionWaypoint(),pointer:Germany3D.inspectAssets().missionPointer}},mission);assert.equal(result.pointer.target,result.target.id);const dx=result.target.x-after.x,dz=result.target.y-after.y;assert.ok(Math.abs(Math.sin(result.pointer.heading)-dx/Math.hypot(dx,dz))<1e-8);missions.push(result.target.id)}
    await page.evaluate(()=>{__pointerTest.state.mission=0;__pointerTest.state.modal=true;Germany3D.sync()});assert.equal(await page.evaluate(()=>Germany3D.inspectAssets().missionPointer.visible),false);
    await page.evaluate(()=>{__pointerTest.state.modal=false;Germany3D.sync()});assert.equal(await page.evaluate(()=>Germany3D.inspectAssets().missionPointer.visible),true);
-   await page.keyboard.press('m');await page.waitForTimeout(200);assert.equal(await page.evaluate(()=>Germany3D.inspectAssets().missionPointer.visible),false);await page.keyboard.press('Escape');
+   await page.keyboard.press('m');await page.waitForFunction(()=>!Germany3D.inspectAssets().missionPointer.visible,null,{timeout:3000});await page.keyboard.press('Escape');await page.waitForFunction(()=>Germany3D.inspectAssets().missionPointer.visible,null,{timeout:3000});
   }
   assert.deepEqual(errors,[]);report.cases.push({name,verdict:'PASS',pointer,missions,movement:Math.hypot(after.x-before.x,after.y-before.y),errors});console.log(name,'PASS');await context.close();
  }

@@ -371,7 +371,11 @@ terms. It adds 274,344 transferred bytes, 3,640 triangles, one material and thre
 512 px maps (3 MiB decoded RGBA / about 4 MiB with mipmaps). The starting
 neighborhood queue prepares it before Start through the existing two-job
 admission owner. A curved procedural sausage retains the same compass behavior
-on failure. The existing render dispatch updates its bearing without a new
+on failure. Both representations use a steady emissive red forward end and one
+64 × 64 procedural halo texture (16 KiB decoded RGBA, about 21 KiB with mipmaps),
+with real depth testing and no shadow light, bloom pass or additional download.
+The cue is uniformly enlarged 2.5 times and raised above the player's head.
+The existing render dispatch updates its bearing without a new
 timer, text measurement, collision object, service or asset variant. The shared
 source/instance lives with the city renderer; office/hidden states consume no
 pointer updates. Replace this noncommercial model before commercial release.
