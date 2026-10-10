@@ -40,6 +40,8 @@ test('recording playback owns the word contour and only its real end starts the 
  const {h,player}=recorded();assert.equal(h.synth.current,null);assert.equal(player.src,path);
  assert.equal(h.level.omen.speech.recording,path);assert.equal(h.level.omen.speech.durationMs,4760);
  player.at(1.6);assert.equal(h.level.omen.speech.charIndex,text.indexOf('Finsternis'));assert.equal(h.level.omen.speech.timing,'recording-cues');
+ player.currentTime=1.71;h.level.update(.016);assert.equal(h.level.omen.speech.mediaTime,1.71,'mouth clock reads native playback between timeupdate events');
+ assert.equal(h.level.omen.speech.recordingSha256,'da75a78e3d721f478f44e02327961f3d2933595dcc1bbdc8c73510af0ccf5df4');
  player.at(3.95);assert.equal(h.level.omen.speech.charIndex,text.indexOf('gewählt'));
  h.tick(5000);assert.equal(h.level.omen.phase,'blackout');player.end();assert.equal(h.level.omen.phase,'glare');
  assert.equal(h.level.omen.speech.progress,1);h.advanceGame(3.2);assert.equal(h.level.omen.phase,'glare');
@@ -47,6 +49,7 @@ test('recording playback owns the word contour and only its real end starts the 
 test('pause suspends the recording watchdog and Gaussian life; resume keeps the same playhead',()=>{
  const {h,player}=recorded();player.at(1.6);h.advanceGame(.2);player.pause();const before=h.level.omen.life;
  h.tick(22000);h.advanceGame(1);assert.equal(h.level.omen.phase,'blackout');assert.equal(h.level.omen.life.clock,before.clock);
+ const pausedTime=h.level.omen.speech.mediaTime;player.currentTime=3;h.level.update(.05);assert.equal(h.level.omen.speech.mediaTime,pausedTime);player.currentTime=1.6;
  assert.equal(h.level.omen.speech.paused,true);player.play();h.tick(16);assert.equal(h.level.omen.speech.paused,false);
  assert.equal(h.level.omen.speech.charIndex,text.indexOf('Finsternis'));player.at(3.95);player.end();assert.equal(h.level.omen.phase,'glare');
 });

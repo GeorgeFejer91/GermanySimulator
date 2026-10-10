@@ -1,6 +1,8 @@
 // Gaussian rendering shares the existing scene clock and render pass.
+import {sampleOmenMouth} from './buergeramt-lipsync.js';
 const clamp=value=>Math.max(0,Math.min(1,value));
 const TUNNEL_RINGS=32,TUNNEL_AROUND=96;
+const MOUTH_SPLATS=96;
 
 export function omenSplatPose(omen,reducedMotion=false){
   const live=['approach','blackout','glare','unwind'].includes(omen.phase),life=omen.life||{};
@@ -13,6 +15,7 @@ export function omenSplatPose(omen,reducedMotion=false){
     pulse:reducedMotion?0:clamp(life.pulse||0),
     ripple:reducedMotion?0:reveal*(.3+.7*clamp(life.pressure||0))*(omen.speech?.paused ? .15 : 1)*(life.motion??1),
     time:reducedMotion?0:Math.max(0,life.time||0),
+    mouth:sampleOmenMouth(omen.phase==='blackout'?omen.speech:null),
   };
 }
 
@@ -99,17 +102,42 @@ export async function createOmenSplat({THREE,renderer,scene,signal,owner:sharedO
     const response=await fetch(new URL('./assets/buergeramt/omen/aktenkurier.splat',import.meta.url),{signal});
     if(!response.ok)throw new Error('Omen splat unavailable');
     bytes=await response.arrayBuffer();count=bytes.byteLength/32;
-    if(!Number.isInteger(count)||count<1||count>40000)throw new Error('Invalid omen splat size');
+    if(!Number.isInteger(count)||count<1||count>40000-MOUTH_SPLATS)throw new Error('Invalid omen splat size');
     signal?.throwIfAborted();
   }catch(error){if(!sharedOwner)await owner.dispose();throw error}
   const depth=dyno.dynoFloat(0),clock=dyno.dynoFloat(0),ripple=dyno.dynoFloat(0),pulse=dyno.dynoFloat(0);
+  const mouth=dyno.dynoVec2(new THREE.Vector2()),mouthShape=dyno.dynoVec2(new THREE.Vector2());
   const modifier=dyno.dynoBlock({gsplat:dyno.Gsplat},{gsplat:dyno.Gsplat},({gsplat})=>{
     const effect=new dyno.Dyno({
-      inTypes:{gsplat:dyno.Gsplat,depth:'float',clock:'float',ripple:'float',pulse:'float'},
-      outTypes:{gsplat:dyno.Gsplat},inputs:{gsplat,depth,clock,ripple,pulse},
+      inTypes:{gsplat:dyno.Gsplat,depth:'float',clock:'float',ripple:'float',pulse:'float',mouth:'vec2',mouthShape:'vec2'},
+      outTypes:{gsplat:dyno.Gsplat},inputs:{gsplat,depth,clock,ripple,pulse,mouth,mouthShape},
       statements:({inputs:i,outputs:o})=>[`
         ${o.gsplat} = ${i.gsplat};
         vec3 p = ${i.gsplat}.center;
+        // Registered lip centre: detail pixel (346.5,134), in floor-based metres.
+        float lipX = 0.0636, lipY = 1.64315;
+        float opening = ${i.mouth}.x, spreading = ${i.mouth}.y;
+        float rounding = ${i.mouthShape}.x, biting = ${i.mouthShape}.y;
+        if (p.z > 0.30) {
+          // A small, depth-sorted Gaussian oral cavity; absent at rest.
+          p.x = lipX+(p.x-lipX)*(1.0+spreading*0.24-rounding*0.30);
+          p.y = lipY-opening*0.013+(p.y-lipY)*opening*3.0;
+          // Mouth samples reach Z=.156: keep the opening in front of the lip
+          // crease on both sides, with relief following the curved face.
+          p.z = 0.174-12.0*(p.x-lipX)*(p.x-lipX)+rounding*0.010;
+          ${o.gsplat}.rgba.a *= smoothstep(0.015,0.16,opening);
+          ${o.gsplat}.scales.y *= max(0.06,opening*3.0);
+        } else if (p.z > 0.0) {
+          float dx = p.x-lipX, dy = p.y-lipY;
+          float side = 1.0-smoothstep(0.034,0.068,abs(dx));
+          float jaw = side*(1.0-smoothstep(-0.006,0.003,dy))*smoothstep(-0.080,-0.035,dy);
+          float lips = side*(1.0-smoothstep(0.006,0.020,abs(dy)));
+          p.y -= opening*0.027*jaw;
+          p.y += biting*0.003*lips*(1.0-smoothstep(-0.004,0.003,dy));
+          p.x += dx*lips*(spreading*0.20-rounding*0.28);
+          p.z += rounding*0.013*lips;
+          ${o.gsplat}.scales.y *= 1.0+opening*0.18*jaw;
+        }
         float expand = ${i.depth};
         float t = ${i.clock};
         float wave = ${i.ripple};
@@ -163,7 +191,7 @@ export async function createOmenSplat({THREE,renderer,scene,signal,owner:sharedO
   });
   let mesh,tunnel,disposed=false;
   try{
-    mesh=new SplatMesh({maxSplats:count,lod:false,enableLod:false,editable:false,raycastable:false,
+    mesh=new SplatMesh({maxSplats:count+MOUTH_SPLATS,lod:false,enableLod:false,editable:false,raycastable:false,
       objectModifier:modifier,
       constructSplats:async splats=>{
         const data=new DataView(bytes),point=new THREE.Vector3(),scale=new THREE.Vector3(),quaternion=new THREE.Quaternion(),color=new THREE.Color();
@@ -176,6 +204,13 @@ export async function createOmenSplat({THREE,renderer,scene,signal,owner:sharedO
           quaternion.set((data.getUint8(i+29)-128)/128,(data.getUint8(i+30)-128)/128,(data.getUint8(i+31)-128)/128,(data.getUint8(i+28)-128)/128).normalize();
           color.setRGB(data.getUint8(i+24)/255,data.getUint8(i+25)/255,data.getUint8(i+26)/255);
           splats.pushSplat(point,scale,quaternion,data.getUint8(i+27)/255,color);
+        }
+        // Elliptical, overlapping dark kernels stay within the painted lip width.
+        for(let row=0;row<8;row++)for(let column=0;column<12;column++){
+          const u=(column+.5)/6-1,v=(row+.5)/4-1,edge=Math.max(0,1-u*u-v*v);
+          point.set(.0636+u*.026,1.64315+v*.006,.4);
+          scale.set(.0027,.0018,.0007);quaternion.set(0,0,0,1);color.setRGB(.090+.035*Math.abs(v),.031,.024);
+          splats.pushSplat(point,scale,quaternion,.95*Math.min(1,edge*3),color);
         }
       },
     });
@@ -212,6 +247,7 @@ export async function createOmenSplat({THREE,renderer,scene,signal,owner:sharedO
       if(!pose.live)readyAfterSort=null;
       if(pose.live){
         depth.value=pose.reveal;clock.value=pose.time;ripple.value=pose.ripple;pulse.value=pose.pulse*pose.pressure;
+        mouth.value.set(pose.mouth.open,pose.mouth.spread);mouthShape.value.set(pose.mouth.round,pose.mouth.bite);
         mesh.opacity=pose.opacity;
         mesh.position.set(actor.position.x,0,actor.position.z);
         mesh.rotation.y=Math.atan2(camera.position.x-actor.position.x,camera.position.z-actor.position.z);
@@ -230,7 +266,7 @@ export async function createOmenSplat({THREE,renderer,scene,signal,owner:sharedO
       if(!sharedOwner)owner.update(camera,30);
       return readyAfterSort!==null&&owner.inspect().completedUpdates>=readyAfterSort&&owner.spark.activeSplats>0?pose.opacity:0;
     },
-    inspect(){const status=owner.inspect();return {ready:!disposed&&status.ready,count,tunnelCount:TUNNEL_RINGS*TUNNEL_AROUND,tunnelVisible:!disposed&&tunnel.visible,tunnelTime:tunnelClock.value,facingY:mesh.rotation.y,bytes:bytes.byteLength,failure:status.failure,activeSplats:status.activeSplats,pending:status.pending,visible:!disposed&&mesh.visible&&status.visible,...pose}},
+    inspect(){const status=owner.inspect();return {ready:!disposed&&status.ready,count,mouthSplats:MOUTH_SPLATS,tunnelCount:TUNNEL_RINGS*TUNNEL_AROUND,tunnelVisible:!disposed&&tunnel.visible,tunnelTime:tunnelClock.value,facingY:mesh.rotation.y,bytes:bytes.byteLength,failure:status.failure,activeSplats:status.activeSplats,pending:status.pending,visible:!disposed&&mesh.visible&&status.visible,...pose}},
     dispose(){
       if(disposed)return;disposed=true;
       owner.retire(mesh);owner.retire(tunnel);

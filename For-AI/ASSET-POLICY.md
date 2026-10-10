@@ -20,8 +20,9 @@ active office visit through the existing two-job admission queue. Splats install
 in 2,048-record yielding chunks; no shared decode-worker pool is used. Packed
 record data is 623,008 bytes. The procedural tunnel adds 3,072 records / 49,152
 packed bytes without another download, bringing the shared renderer to 42,010
-splats. Allocation padding, GPU accumulator buffers, sorting and renderer
+splats before mouth articulation. Allocation padding, GPU accumulator buffers, sorting and renderer
 overhead are additional and must be measured in browser evidence.
+The official recorded line adds 96 procedural mouth kernels / 1,536 packed bytes in the same body mesh (39,034 body and 42,106 body+tunnel records). A 2,131-byte JavaScript cue track contains 24 estimated viseme intervals and 238 energy samples; it is imported only with the existing office/omen module. Two small Vec2 uniforms are updated in the existing frame pass from native media time; there is no additional RAF, polling loop, renderer, audio decode or runtime recognizer. The portable Rhubarb authoring tool and temporary WAV remain outside shipped assets. The original body and approved MP3 bytes are unchanged. Silent real-playback browser comparison at 1280×800 measured baseline and articulated p50 14 ms / p95 21 ms game-sync dispatch, with Android portrait/landscape emulation also 14/21 ms; these short held-pose samples are not full mission or physical-device performance evidence. Mouth failure, pause, replay and end checks belong to `BUERGERAMT.md`.
 The omen and bounded nearby painted action clouds share the effect owner.
 Omen-only generation/sorting runs at most 30 Hz; active action clouds use at
 most 60 Hz from the existing render pass and stop on hidden/inactive play. Teardown waits

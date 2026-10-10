@@ -114,8 +114,9 @@ function omenLife(){
 const omenSpeechMarks=story.omen.delivery.contour.map(mark=>({...mark,index:story.omen.line.indexOf(mark.word)})).filter(mark=>mark.index>=0);
 function updateOmenSpeech(){
  const speech=omen.speech;if(!speech||speech.mode==="waiting")return;
+ if(speech.mode==="voice"&&speech.recording&&recordedSpeech&&!speech.paused)speech.mediaTime=recordedSpeech.currentTime;
  if(speech.mode==="done")speech.progress=1;
- else if(!speech.paused&&speech.startedAt!==null&&speech.charIndex<0){
+ else if(!speech.paused&&speech.startedAt!==null&&speech.charIndex<0&&speech.timing!=="recording-cues"){
   speech.progress=Math.min(.92,Math.max(0,(performance.now()-speech.startedAt-speech.pausedMs)/speech.durationMs));
  }
  const index=speech.progress*story.omen.line.length,marks=omenSpeechMarks;
@@ -132,7 +133,7 @@ function beginOmen(actor){
  updateOmenTone();
  const delivery={...verse.delivery,onPause:()=>{if(speech.paused)return;updateOmenSpeech();speech.paused=true;speech.pausedAt=performance.now();updateOmenTone()},onResume:()=>{if(speech.paused){speech.pausedMs+=performance.now()-speech.pausedAt;speech.paused=false;speech.pausedAt=null;updateOmenTone()}},onFallback:()=>{speech.mode="fallback";speech.timing="estimated";speech.charIndex=-1;speech.startedAt=performance.now()-speech.progress*speech.durationMs;speech.paused=false;speech.pausedMs=0;speech.pausedAt=null;updateOmenTone()}};
  content(verse.speaker,verse.line,[],()=>{if(omen.phase==="blackout"){speech.mode="done";speech.paused=false;omen.phase="glare";omen.hold=3.4;updateOmenTone()}},(mode,recording)=>{
-  speech.mode=mode;if(Number.isFinite(recording?.durationMs)&&recording.durationMs>0)speech.durationMs=recording.durationMs;speech.recording=recording?.recording||null;speech.startedAt=performance.now()-speech.progress*speech.durationMs;updateOmenTone();
+  speech.mode=mode;if(Number.isFinite(recording?.durationMs)&&recording.durationMs>0)speech.durationMs=recording.durationMs;speech.recording=recording?.recording||null;speech.recordingSha256=recording?.sha256||null;speech.timing=recording?.hasWordCues?"recording-cues":"estimated";speech.mediaTime=0;speech.startedAt=performance.now()-speech.progress*speech.durationMs;updateOmenTone();
  },(charIndex,event)=>{
   if(speech.paused||charIndex<0||charIndex>verse.line.length||charIndex<=speech.charIndex||charIndex/verse.line.length<speech.progress)return;
   speech.charIndex=charIndex;speech.progress=charIndex/verse.line.length;speech.timing=event?.type==="recording-cue"?"recording-cues":"boundary";speech.boundaryAt=performance.now();speech.elapsedTime=Number.isFinite(event?.elapsedTime)?event.elapsedTime:null;updateOmenTone();
@@ -326,7 +327,7 @@ function say(text,onComplete,onStart,onBoundary,delivery=null,voiceId="",allowCa
     const progress=()=>{if(!started||settled||paused||!current())return;while(nextMark<marks.length&&marks[nextMark].at<=player.currentTime){const mark=marks[nextMark++];onBoundary?.(mark.charIndex,{type:"recording-cue",elapsedTime:player.currentTime})}};
     const finish=()=>{if(settled||!current())return;if(!started)start();settled=true;cleanup();recordedSpeech=null;officeSpeechBusy=false;onComplete?.("voice")};
     const fallback=()=>{if(settled||!current())return;if(document.hidden){clearWatchdog();hiddenPaused=true;return}settled=true;cleanup();player.pause();player.removeAttribute("src");player.load();recordedSpeech=null;officeSpeechBusy=false;delivery?.onFallback?.();say(text,onComplete,onStart,onBoundary,delivery,voiceId,false)};
-    const start=()=>{if(settled||!current())return;if(!started){started=true;remaining=Math.max(20000,Number.isFinite(player.duration)?player.duration*1000+2000:20000);onStart?.("voice",{durationMs:player.duration*1000,recording:candidate})}else if(paused){paused=false;delivery?.onResume?.()}arm(remaining,fallback);progress();if(document.hidden)visibility()};
+    const start=()=>{if(settled||!current())return;if(!started){started=true;remaining=Math.max(20000,Number.isFinite(player.duration)?player.duration*1000+2000:20000);onStart?.("voice",{durationMs:player.duration*1000,recording:candidate,sha256:clip?.sha256,hasWordCues:marks.length>0})}else if(paused){paused=false;delivery?.onResume?.()}arm(remaining,fallback);progress();if(document.hidden)visibility()};
     const play=()=>{const serial=++playAttempt;player.play().catch(()=>{if(serial===playAttempt&&!document.hidden)fallback()})};
     const visibility=()=>{if(settled||!current())return;if(document.hidden){playAttempt++;clearWatchdog();if(!player.paused){hiddenPaused=true;player.pause()}}else{if(!started)arm(1800,fallback);if(hiddenPaused){hiddenPaused=false;play()}}};
     player.onplaying=start;player.onended=finish;player.onerror=fallback;player.ontimeupdate=progress;

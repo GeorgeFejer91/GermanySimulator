@@ -1302,7 +1302,7 @@ function showRendererFailure(error){
       const request=new AbortController(),visit=amtOmenVisit;amtOmenRequest=request;
       const prepare=async()=>{
         if(request.signal.aborted||document.hidden||!level.active)return null;
-        const module=await import("./buergeramt-splat.js?v=20261010-liquid");
+        const module=await import("./buergeramt-splat.js?v=20261010-omen-mouth");
         request.signal.throwIfAborted();
         return module.createOmenSplat({THREE:T,renderer,scene:amtScene,signal:request.signal,owner:await amtGaussian.getOwner()});
       };

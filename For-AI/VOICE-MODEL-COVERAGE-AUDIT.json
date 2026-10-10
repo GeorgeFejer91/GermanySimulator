@@ -3,8 +3,8 @@
   "status": "explicit_runtime_speakers_verified; optional_visual_template_mapping_curated; rendered_review_pending",
   "sourceSha256": {
     "For-AI/VOICE-CAST.json": "485a349d6115b7c4fca7bc9259f2190dfe7260411faad2a33fe52488eff202b2",
-    "game.js": "619c0088147eb2f26b74902dc1e6a1083966b286939698c7266311c4ae38d6ac",
-    "world3d.js": "0e200585f33a830e0f6f9848f2cf5a0bc56bbbbca8183c190be46f1f00b47370",
+    "game.js": "8b84251c3fcb01abb36b2d66cb5e44dc3c0b6d94f8bed59ffe4a36aae4a43974",
+    "world3d.js": "d564610d541c0cd8a59eac9ed418f61dfd07f8c786549be9d9b50dd9e2202a42",
     "buergeramt-story.js": "fc705140e10ed451305f646fb36bdce046d38f224dedb03df0e37f6c75483b5d",
     "assets/models/street-characters/models.js": "f221585150735d365e007f2eadfe58d1461f704824f8bd18f356f6bacfe5a4a8",
     "assets/models/street-characters/runtime.js": "d4c25e1d37762571a0aeedc4e15c456e137fa9be21abfccb20829a1f58d16f62",
