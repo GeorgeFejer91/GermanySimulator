@@ -1,4 +1,4 @@
-import {createAmtGaussianScene} from './buergeramt-gaussian-scene.js?v=20261010-e-fever';
+import {createAmtGaussianScene} from './buergeramt-gaussian-scene.js?v=20261010-solid-morph';
 const THREE_URL="https://cdn.jsdelivr.net/npm/three@0.186.0/build/three.module.js";
 const GLTF_LOADER_URL="https://cdn.jsdelivr.net/npm/three@0.186.0/examples/jsm/loaders/GLTFLoader.js";
 function buergeramtDoorRadiance(time,reducedMotion=false){
@@ -1224,7 +1224,7 @@ function showRendererFailure(error){
     texture.minFilter=texture.magFilter=T.LinearFilter;
     for(const mesh of amtPaintedProps){mesh.material.map=texture;mesh.material.needsUpdate=true}
   }
-  function amtSnapshot(actor){const height=actor.height||actor.mesh.geometry.parameters.height;return{rotation:actor.mesh.rotation.y,height,foot:actor.mesh.position.y-height*actor.mesh.scale.y/2,ground:[actor.mesh.position.x,actor.mesh.position.z],direction:actor.direction,renderKey:actor.renderKey}}
+  function amtSnapshot(actor){const height=actor.height||actor.mesh.geometry.parameters.height;return{rotation:actor.mesh.rotation.y,height,foot:actor.mesh.position.y-height*actor.mesh.scale.y/2,ground:[actor.mesh.position.x,actor.mesh.position.z],direction:actor.direction,renderKey:actor.renderKey,opacity:actor.mesh.material.opacity,depthTest:actor.mesh.material.depthTest,renderOrder:actor.mesh.renderOrder,foreground:!!actor.mesh.userData.amtForeground}}
   function animateAmtCharacters(now,level){
     for(const actor of amtCharacters){
       const frame=actor.performance?actor.lead?level.clerkPerformance.row*8+level.clerkPerformance.frame:Math.floor(now/250+actor.phase*8)%8:Math.floor(now/1000*24+actor.phase*24)%64;
@@ -1453,7 +1453,7 @@ function showRendererFailure(error){
       const request=new AbortController(),visit=amtOmenVisit;amtOmenRequest=request;
       const prepare=async()=>{
         if(request.signal.aborted||document.hidden||!level.active)return null;
-        const module=await import("./buergeramt-splat.js?v=20261010-omen-mouth");
+        const module=await import("./buergeramt-splat.js?v=20261010-solid-morph");
         request.signal.throwIfAborted();
         return module.createOmenSplat({THREE:T,renderer,scene:amtScene,signal:request.signal,owner:await amtGaussian.getOwner()});
       };
@@ -1466,22 +1466,38 @@ function showRendererFailure(error){
       }).finally(()=>{if(amtOmenRequest===request)amtOmenRequest=null});
     }
     const opacity=amtOmenSplat?.update(omen,actor.mesh,amtCamera,amtReducedMotion.matches)||0;
-    actor.mesh.material.opacity=1-opacity;
+    // Representation ownership is binary. The volume gains/loses depth while
+    // staying solid; fading both bodies would expose the room through their sum.
+    actor.mesh.material.opacity=1;
     actor.mesh.visible=opacity<.999&&!!actor.atlas?.image;
   }
   let lastCall="",amtHiDpi=false;
+  function restoreAmtCharacterLayers(){
+    for(const actor of [...amtCharacters,...amtMoving]){
+      actor.mesh.material.opacity=1;actor.mesh.material.depthTest=true;actor.mesh.renderOrder=100;actor.mesh.userData.amtForeground=false;
+      const keep=actor.mesh.material.userData.amtKeep;if(keep)keep.value=0;
+    }
+  }
   function renderAmt(){const level=window.BuergeramtLevel;
     if(!level||!level.active&&!document.body.classList.contains("amt-direct-mode")){
       if(amtOmenSplat||amtOmenRequest)clearAmtOmenSplat();
       amtGaussian.clear();
       amtIsolation.value=0;amtEnvironment.visible=true;amtActorEnvironment.visible=true;fadeAmtStructure(0);
+      restoreAmtCharacterLayers();
       if(amtHiDpi){amtHiDpi=false;resize()}
       return false;
     }
     if(!amtHiDpi){amtHiDpi=true;resize()}
     loadAmtImages();const fever=level.fever;
     amtIsolation.value=Math.max(level.omen.life.isolation,fever?.strength||0);amtEnvironment.visible=amtIsolation.value<.9999;amtActorEnvironment.visible=level.omen.life.isolation<.9999;fadeAmtStructure(fever?.strength||0);
-    for(const actor of [...amtCharacters,...amtMoving]){const id=actor.lead?'clerk':actor.animationId??actor.id;const keep=actor.mesh.material.userData.amtKeep;if(keep)keep.value=level.omen.phase&&id==='aktenkurier'||fever?.active&&id===fever.id?1:0}
+    for(const actor of [...amtCharacters,...amtMoving]){
+      const id=actor.lead?'clerk':actor.animationId??actor.id,foreground=!!(level.omen.phase&&id==='aktenkurier'||fever?.active&&id===fever.id);
+      const keep=actor.mesh.material.userData.amtKeep;if(keep)keep.value=foreground?1:0;
+      // Office paintings follow the fading room in the transparent pass. The
+      // encounter's speaker stays in front for entry, hold and restoration.
+      actor.mesh.userData.amtForeground=foreground;actor.mesh.renderOrder=foreground?200:100;
+      actor.mesh.material.depthTest=!foreground;
+    }
     const darkness=Math.max(level.omen.strength,amtIsolation.value);amtScene.fog.density=.46*Math.pow(darkness,1.2);amtScene.background.copy(amtDayColor).lerp(amtScene.fog.color,darkness);const view=level.view;amtCamera.position.set(view.x,1.68,view.z);amtCamera.rotation.set(0,-view.yaw,0);if(level.qrSvg)setAmtQr(level.qrSvg);const now=performance.now();animateAmtCharacters(now,level);animateAmtMoving(now,level);amtGaussian.prepareGeneration(level.clerkPerformance.animation?.generation??0);updateAmtOmenSplat(level);amtGaussian.update(level,amtCharacters,amtMoving,amtCamera);amtGaussian.render(amtCamera);const call=level.queueDisplay;if(call!==lastCall){lastCall=call;callCtx.fillStyle="#152527";callCtx.fillRect(0,0,512,256);callCtx.textAlign="center";callCtx.textBaseline="middle";callCtx.fillStyle="#c94839";callCtx.font="bold 112px monospace";callCtx.fillText(call,256,135,460);callTexture.needsUpdate=true}renderer.render(amtScene,amtCamera);
     const omen=level.omen,themed=fever?.active&&fever.strength>0,selected=themed?[...amtCharacters,...amtMoving].find(actor=>(actor.lead?'clerk':actor.animationId??actor.id)===fever.id):null;
     if(omen.strength>0||selected){
@@ -1537,7 +1553,7 @@ function showRendererFailure(error){
   let parkCameraFrame=0,previousCameraTime=performance.now();
   captureStartupAssets();
   startupModelsCaptured=true;
-  window.Germany3D={ready:true,isWorldPointVisible,isVehicleVisible,prepareNearbyAssets,prepareOfficeAssets:loadAmtImages,clearAmtOmenSplat,clearAmtGaussianAnimations:()=>amtGaussian.clear(),
+  window.Germany3D={ready:true,isWorldPointVisible,isVehicleVisible,prepareNearbyAssets,prepareOfficeAssets:loadAmtImages,clearAmtOmenSplat,clearAmtGaussianAnimations(){amtGaussian.clear();restoreAmtCharacterLayers()},
   get nearbyAssetsReady(){updateAssetView();return cityModelJobs.every(job=>job.state==="settled"||cityModelDistance(job)>30&&!isCityAssetVisible(job))},
   get officeAssetsReady(){return amtImagesRequested&&officeAssetPending===0},get officeAssetStatus(){return {pending:officeAssetPending,failed:officeAssetFailures}},
   get startupReady(){return startupModelsReady()},get startupStatus(){return {pending:[...startupModelJobs].filter(job=>job.state!=="settled").length,active:cityModelActive,failed:[...startupModelJobs].filter(job=>job.failed).length}},

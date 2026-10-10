@@ -131,6 +131,30 @@ clearance below the visible audio/subtitle controls. Caption overflow uses the
 same bounded DOM region. The earlier peak and root measurements above describe
 their recorded candidates, not a new benchmark of this controller/UI change.
 
+The 2026-10-10 foreground repair adds no art, splat pack, worker or render loop.
+Native patches inherit their source layer/depth policy; one isolated speaker
+owns the shared cloud's foreground policy. Bodies remain opaque during depth
+morphs, and close restores original material layers synchronously.
+Three cold contexts per viewport used Chrome 154 / Intel Iris Xe, local HTTP,
+seed 91, requested DPR 2 and no CPU throttling. Ordinary-office median active
+p95 was 20.9 ms desktop and 21.0 ms Android emulation (ranges 20.9–21.0/21.0);
+geometry/texture counts were 168/42 and 145/32. Input p95 medians were 20.1 and
+60.9 ms, with emulated range 20.4–71.5 ms, so no stable-latency improvement is
+claimed. The controlled base `dbc37af0` office samples had 20.9 ms medians;
+the final probe additionally waits for asset settlement before active sampling.
+These condition differences and short samples do not establish a speedup.
+The six root samples pass input/error, 18 MB transfer, deferred-resource,
+4 Hz title and 1.6 MP buffer gates: maximum startup 16,470,981 bytes and
+12–13 title calls per measured three-second window. Root active p95 medians
+were 31.7/21.8 ms. All final samples accepted nine input events with no page
+errors. Initial probes failed their input guard; those reports are retained.
+Final probes explicitly wait for controller admission, settled office assets
+and released welcome before active sampling.
+Reports and exact metrics: ignored `output/character-morph/bench-summary.json`,
+`bench-office-{controlled-before,settled-final}/` and `bench-root-admitted-final/`.
+The separate three held omen samples measured 20.9–21.1 ms sync intervals.
+Physical Android, GPU timing and perceptual listening remain NOT RUN.
+
 The office's original painted prop strip adds a file cabinet, paper tower,
 distorted clock, and noticeboard. Its source and provenance are with the cast;
 the game loads its compressed atlas only when the office is entered, alongside

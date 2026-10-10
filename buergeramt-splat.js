@@ -9,7 +9,9 @@ export function omenSplatPose(omen,reducedMotion=false){
   const reveal=live?clamp(life.depth||0):0;
   return {
     live,reveal,
-    opacity:live?clamp(life.opacity||0):0,
+    // The registered body morphs in depth, never dissolves into the room.
+    // life.opacity remains the simulation's handover window, not body alpha.
+    opacity:live&&life.opacity>0?1:0,
     turn:0,
     pressure:live?clamp(life.pressure||0):0,
     pulse:reducedMotion?0:clamp(life.pulse||0),
@@ -61,6 +63,8 @@ export async function createAmtSplatOwner({THREE,renderer,scene,signal,sparkModu
       // Three r186 sorts homogeneous clip Z without dividing by W.
       paintDepth=anchors.length?anchors.reduce((sum,mesh)=>{mesh.updateMatrixWorld(true);const p=mesh.getWorldPosition(camera.position.clone()).applyMatrix4(camera.matrixWorldInverse),e=camera.projectionMatrix.elements;return sum+e[2]*p.x+e[6]*p.y+e[10]*p.z+e[14]},0)/anchors.length:null;
       const visible=[...meshes].filter(mesh=>mesh.visible);
+      spark.renderOrder=Math.max(0,...visible.map(mesh=>mesh.renderOrder??0));
+      if(spark.material)spark.material.depthTest=!visible.some(mesh=>mesh.userData?.amtForeground);
       spark.visible=visible.length>0;
       if(!visible.length||pending)return pending;
       try{
@@ -242,13 +246,15 @@ export async function createOmenSplat({THREE,renderer,scene,signal,owner:sharedO
     update(omen,actor,camera,reducedMotion=false){
       if(disposed||!owner.inspect().ready)return 0;
       pose=omenSplatPose(omen,reducedMotion);
-      mesh.visible=tunnel.visible=pose.live;
-      if(pose.live&&readyAfterSort===null)readyAfterSort=owner.inspect().startedUpdates+1;
-      if(!pose.live)readyAfterSort=null;
+      mesh.visible=pose.opacity>0;tunnel.visible=pose.live;
+      if(pose.opacity>0&&readyAfterSort===null)readyAfterSort=owner.inspect().startedUpdates+1;
+      if(!pose.opacity)readyAfterSort=null;
       if(pose.live){
         depth.value=pose.reveal;clock.value=pose.time;ripple.value=pose.ripple;pulse.value=pose.pulse*pose.pressure;
         mouth.value.set(pose.mouth.open,pose.mouth.spread);mouthShape.value.set(pose.mouth.round,pose.mouth.bite);
         mesh.opacity=pose.opacity;
+        mesh.renderOrder=actor.renderOrder??0;mesh.userData.amtForeground=!!actor.userData?.amtForeground;
+        tunnel.renderOrder=mesh.renderOrder;tunnel.userData.amtForeground=mesh.userData.amtForeground;
         mesh.position.set(actor.position.x,0,actor.position.z);
         mesh.rotation.y=Math.atan2(camera.position.x-actor.position.x,camera.position.z-actor.position.z);
         mesh.needsUpdate=true;

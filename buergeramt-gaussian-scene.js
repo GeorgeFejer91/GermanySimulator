@@ -9,7 +9,7 @@ export function createAmtGaussianScene({THREE,renderer,scene,queueLoad,mobile=fa
     if(failure)throw new Error(failure);
     if(!ownerPromise){
       const request=controller;
-      ownerPromise=import('./buergeramt-splat.js?v=20261010-liquid').then(module=>
+      ownerPromise=import('./buergeramt-splat.js?v=20261010-solid-morph').then(module=>
         module.createAmtSplatOwner({THREE,renderer,scene,signal:request.signal})).then(value=>{
         if(request!==controller||request.signal.aborted){void value.dispose();throw new DOMException('Retired office','AbortError')}
         owner=value;return value;
@@ -50,7 +50,7 @@ export function createAmtGaussianScene({THREE,renderer,scene,queueLoad,mobile=fa
   function update(level,stationary,moving,camera){
     if(!level.active){clear();return}
     prepareGeneration(level.clerkPerformance.animation?.generation??0);
-    const blocked=!!level.omen.phase,states=level.characters;
+    const blocked=!!level.omen.phase,states=level.characters,fever=level.fever;
     const stationaryStates=level.stationaryAnimations??{};
     const candidates=[...stationary.map((actor,index)=>({id:index===0?'clerk':actor.animationId??actor.id,
       manifestId:actor.performance||index===0?'clerk':actor.name,actor,
@@ -69,12 +69,13 @@ export function createAmtGaussianScene({THREE,renderer,scene,queueLoad,mobile=fa
     }
     if(!blocked&&!document.hidden&&!reducedMotion.matches&&!failure){
       for(const item of candidates){
+        if(fever?.active&&fever.id!==item.id)continue;
         if(!item.inView||!item.state||item.distance>=6||slots.has(item.id)||failedActors.has(item.id)||slots.size>=limit)continue;
         const request=new AbortController(),entry={...item,controller:request,effect:null,admitted:false,failure:''};
         slots.set(item.id,entry);
         const prepare=async()=>{
           if(request.signal.aborted||controller.signal.aborted||document.hidden)return null;
-          const [module,shared]=await Promise.all([import('./buergeramt-gaussian-animation.js?v=20261010-e-fever'),getOwner()]);
+          const [module,shared]=await Promise.all([import('./buergeramt-gaussian-animation.js?v=20261010-solid-morph'),getOwner()]);
           request.signal.throwIfAborted();
           return module.createGaussianActor({THREE,owner:shared,manifestUrl:`./assets/buergeramt/animation/${item.manifestId??item.id}.json?v=20261010-cast`,variant:mobile?'mobile':'desktop',signal:request.signal,queueLoad:enqueue});
         };
@@ -89,12 +90,14 @@ export function createAmtGaussianScene({THREE,renderer,scene,queueLoad,mobile=fa
       const entry=slots.get(item.id),state=item.state;
       if(!(blocked&&item.id==='aktenkurier'))item.actor.mesh.material.opacity=1;
       if(!entry?.effect)continue;
-      const eligible=!blocked&&!reducedMotion.matches&&item.distance<5&&!!state&&!owner?.inspect().failure;
+      // One Spark batch has one depth policy. Other office actors keep their
+      // ordinary sprites while the isolated speaker owns the foreground.
+      const eligible=!blocked&&(!fever?.active||fever.id===item.id)&&!reducedMotion.matches&&item.distance<5&&!!state&&!owner?.inspect().failure;
       if(!eligible)entry.admitted=false;
       // Preparation never replaces a painting halfway through an action.
       const atMain=state&&safeAnchor(item);
       if(eligible&&atMain)entry.admitted=true;
-      const fever=level.fever,isolation=fever?.active&&fever.id!==item.id?fever.strength:0;
+      const isolation=fever?.active&&fever.id!==item.id?fever.strength:0;
       entry.effect.update(state,item.actor.mesh,{visible:eligible&&entry.admitted,reducedMotion:reducedMotion.matches,isolation});
       if(entry.effect.inspect().visible){item.actor.mesh.material.opacity=0}
     }

@@ -8,13 +8,13 @@ async function fixture(){
  const members=new Set(),scene={add:x=>members.add(x),remove:x=>members.delete(x)};
  const jobs=[];
  class SparkRenderer{
-  constructor(options){this.options=options;this.visible=false;this.activeSplats=12;this.disposals=0;this.dirty=0}
+  constructor(options){this.options=options;this.material={depthTest:options.depthTest};this.visible=false;this.activeSplats=12;this.disposals=0;this.dirty=0}
   setDirty(){this.dirty++}
   update(){const job=deferred();jobs.push(job);return job.promise}
   dispose(){this.disposals++}
  }
  class SplatMesh{
-  constructor(){this.visible=true;this.disposals=0;this.matrices=0;this.position={set(){},copy(){}};this.rotation={y:0};this.quaternion={copy(){}};this.scale={setScalar(){}}}
+  constructor(){this.visible=true;this.userData={};this.disposals=0;this.matrices=0;this.position={set(){},copy(){}};this.rotation={y:0};this.quaternion={copy(){}};this.scale={setScalar(){}}}
   initialized=Promise.resolve();
   updateMatrixWorld(){this.matrices++}
   dispose(){this.disposals++}
@@ -71,6 +71,14 @@ test('retirement detaches immediately but frees mesh and texture only after read
  await owner.dispose();
 });
 
+test('foreground encounter splats follow the room and restore depth when their owner retires',async()=>{
+ const f=await fixture(),mesh=f.owner.attach(new f.SplatMesh());mesh.renderOrder=200;mesh.userData.amtForeground=true;
+ const sorted=f.owner.update({});await Promise.resolve();assert.equal(f.owner.spark.renderOrder,200);assert.equal(f.owner.spark.material.depthTest,false);
+ f.jobs[0].resolve();await sorted;f.owner.retire(mesh);f.setTime(20);f.owner.update({});
+ assert.equal(f.owner.spark.renderOrder,0);assert.equal(f.owner.spark.material.depthTest,true);assert.equal(f.owner.spark.visible,false);
+ await f.owner.dispose();
+});
+
 test('dispose detaches the whole owner immediately and awaits pending cleanup once',async()=>{
  const f=await fixture(),{owner}=f,a=owner.attach(new f.SplatMesh()),b=owner.attach(new f.SplatMesh());
  owner.update({});await Promise.resolve();
@@ -110,7 +118,7 @@ test('an omen with a provided owner attaches and retires only its meshes',async(
  }finally{globalThis.fetch=originalFetch}
 });
 
-test('an existing actor sort cannot start the omen crossfade before omen meshes are sorted',async()=>{
+test('an existing actor sort cannot hand over the omen before its own meshes are sorted',async()=>{
  const f=await fixture(),{owner}=f,originalFetch=globalThis.fetch;
  class Vector2{set(x,y){this.x=x;this.y=y}}
  class Vector3{set(x,y,z){this.x=x;this.y=y;this.z=z;return this}}
@@ -123,6 +131,7 @@ test('an existing actor sort cannot start the omen crossfade before omen meshes 
   const actorSort=owner.update(camera);await Promise.resolve();
   const omen=await createOmenSplat({THREE,renderer:{},scene:f.scene,signal:new AbortController().signal,owner});
   const state={phase:'blackout',revealTime:1.2,strength:1,life:{time:1.2,depth:.9,opacity:1,pressure:1,pulse:0}};
+  assert.equal(omen.update({...state,life:{...state.life,opacity:0}},actor,camera),0);
   assert.equal(omen.update(state,actor,camera),0);
   f.jobs[0].resolve();await actorSort;
   assert.equal(omen.update(state,actor,camera),0);

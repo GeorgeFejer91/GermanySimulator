@@ -145,6 +145,7 @@ export async function createPaintedAnchor({THREE,owner,manifest,manifestUrl,sign
       pump();
       const height=source.geometry.parameters.height*source.scale.y;
       mesh.position.copy(source.position);mesh.quaternion.copy(source.quaternion);mesh.scale.setScalar(height);
+      mesh.renderOrder=source.renderOrder??0;material.depthTest=source.material?.depthTest??true;
       material.color.copy(source.material?.color??new THREE.Color(1,1,1));const atmosphere=animation.atmosphere??1;material.color.r*=atmosphere;material.color.g*=atmosphere;material.color.b*=atmosphere;breath.value=source.material?.userData?.breath?.value??0;
       if(material.fog!==source.material?.fog){material.fog=source.material?.fog;material.needsUpdate=true}
       const a=cache.get(pair.from),b=cache.get(pair.to),entry=a??b;

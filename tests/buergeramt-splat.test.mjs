@@ -13,7 +13,7 @@ test('depth unfolds towards the player during approach and shares the score puls
     assert(pose.reveal>=previous&&pose.reveal<=1);previous=pose.reveal;
     assert.equal(pose.turn,0);assert.equal(pose.pulse,omen.life.pulse);
     assert.equal(pose.pressure,omen.life.pressure);
-    assert(pose.opacity>=0&&pose.opacity<=1);
+    assert.equal(pose.opacity,omen.life.opacity>0?1:0,'body stays solid throughout the depth morph');
     if(omen.phase==='approach'&&pose.reveal>.2&&pose.reveal<.8){middle=true;assert(pose.opacity>0)}
   }
   assert(middle,'volume must already exist before arrival');
@@ -31,6 +31,14 @@ test('the simulation reveal clock resets on arrival, replay, and cancellation',(
   h.level.update(.1);assert.equal(h.level.omen.revealTime,.1);
   h.level.replay(h.config);assert(h.level.omen.visit>visit);assert.equal(h.level.omen.revealTime,0);
   assert.equal(h.level.omen.phase,'');
+});
+
+test('flattening retains full body opacity until the registered sprite handover',()=>{
+ for(const phase of ['approach','blackout','glare','unwind'])for(const opacity of [.001,.1,.5,1]){
+  const pose=omenSplatPose({phase,life:{opacity,depth:phase==='unwind'?0:.5}});
+  assert.equal(pose.opacity,1);assert.equal(pose.reveal,phase==='unwind'?0:.5);
+ }
+ assert.equal(omenSplatPose({phase:'unwind',life:{opacity:0,depth:0}}).opacity,0);
 });
 
 test('the shipped Gaussian body has bounded count, positive scales, real depth, and recorded provenance',()=>{

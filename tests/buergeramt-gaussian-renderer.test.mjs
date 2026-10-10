@@ -110,7 +110,7 @@ test('actor uses one cloud, source floor and scale, and waits for its own comple
  class DataTexture{constructor(data,w,h){this.data=data;this.width=w;this.height=h;this.disposals=0;textures.push(this)}dispose(){this.disposals++}}
  class Vector2{set(x,y){this.x=x;this.y=y}}
  class Vector3{constructor(x=0,y=0,z=0){this.x=x;this.y=y;this.z=z}set(x,y,z){this.x=x;this.y=y;this.z=z;return this}copy(other){Object.assign(this,other);return this}}
- class SplatMesh{constructor(options){this.options=options;this.initialized=Promise.resolve();this.position=new Vector3();this.quaternion={copy(){}};this.scale={setScalar:value=>{this.size=value}};this.visible=false;this.generatorUpdates=0}updateGenerator(){this.generatorUpdates++}}
+ class SplatMesh{constructor(options){this.options=options;this.initialized=Promise.resolve();this.position=new Vector3();this.quaternion={copy(){}};this.scale={setScalar:value=>{this.size=value}};this.visible=false;this.userData={};this.generatorUpdates=0}updateGenerator(){this.generatorUpdates++}}
  let tint,shader='';
  class Dyno{constructor(options){this.options=options}apply(input){const names=Object.fromEntries(Object.keys(input).map(key=>[key,key]));shader=this.options.statements({inputs:names,outputs:{gsplat:'outGsplat'}});return{gsplat:'compiled'}}}
  const dyno={Gsplat:'Gsplat',Dyno,unindentLines:value=>value,dynoSampler2D:value=>value,
@@ -134,6 +134,10 @@ test('actor uses one cloud, source floor and scale, and waits for its own comple
   assert.equal(actor.update({arc:'work-gesture-work',phase:.05,pose:'work'},source),true);
   assert.equal(actor.inspect().visible,true);
   assert.equal(actor.inspect().cloudVisible,true,'a cloud-only actor retains its full Gaussian representation');
+  source.renderOrder=200;source.userData={amtForeground:true};actor.update({arc:'work-gesture-work',phase:.05,pose:'work'},source);
+  assert.equal(owner.attached[0].renderOrder,200);assert.equal(owner.attached[0].userData.amtForeground,true);
+  source.renderOrder=100;source.userData.amtForeground=false;actor.update({arc:'work-gesture-work',phase:.05,pose:'work'},source);
+  assert.equal(owner.attached[0].renderOrder,100);assert.equal(owner.attached[0].userData.amtForeground,false);
   assert.equal(actor.inspect().trajectoryCount,1);
   assert.deepEqual(actor.inspect().activeTrajectory,trajectory);
   source.material={color:{r:.2,g:.5,b:.9},userData:{breath:{value:.4}}};

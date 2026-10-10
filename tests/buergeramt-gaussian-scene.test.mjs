@@ -22,3 +22,11 @@ test('a queued job skipped while hidden releases its slot and can retry on retur
 test('hidden simulation calls cannot separate route/gait from Gaussian action time',()=>{
  const h=harness();h.enter();const actors=h.level.characters,clerk=h.level.clerkPerformance.animation;h.hide();h.level.update(.1);assert.deepEqual(h.level.characters,actors);assert.deepEqual(h.level.clerkPerformance.animation,clerk);
 });
+
+test('only the isolated speaker prepares a cloud; ordinary actors resume their slots after release',()=>{
+ const old=globalThis.document;globalThis.document={hidden:false};
+ try{const f=fixture();f.level.fever={active:true,id:'archivbotin',strength:.5};f.update();
+  assert.deepEqual(f.manager.inspect().actors.map(a=>a.id),['archivbotin']);assert.equal(f.tasks.length,1);
+  f.level.fever.active=false;f.update();assert.equal(f.tasks.length,2);assert.equal(f.manager.inspect().actors.length,2);f.manager.clear();
+ }finally{globalThis.document=old}
+});

@@ -62,6 +62,10 @@ test('paint keeps registered canvas aspect/floor, bounds residency and cancels l
   assert.equal(paint.inspect().opacity,1);assert.equal(shader.uniforms.anchorMouth.value,.9);
   assert.equal(shader.uniforms.anchorPhase.value,.25);assert.equal(shader.uniforms.anchorMix.value,.15625);assert.equal(paint.inspect().resident,2);
   assert.equal(shader.uniforms.anchorMode.value,1);assert.equal(mesh.material.opacity,1);
+  r.source.renderOrder=200;r.source.material.depthTest=false;paint.update({segment:0,u:.25,arc:'raise'},r.source,true);
+  assert.equal(mesh.renderOrder,200);assert.equal(mesh.material.depthTest,false);assert.equal(mesh.material.opacity,1);
+  r.source.renderOrder=100;r.source.material.depthTest=true;paint.update({segment:0,u:.25,arc:'raise'},r.source,true);
+  assert.equal(mesh.renderOrder,100);assert.equal(mesh.material.depthTest,true);
   paint.update({segment:0,u:.25,arc:'raise'},r.source,true,{speaking:true,mouthFrame:2,reducedMotion:true});assert.equal(shader.uniforms.anchorMouth.value,0);
   for(let segment=0;segment<6;segment++){
    paint.update({segment,u:1,arc:'raise'},r.source,true);await paint.settle();paint.update({segment,u:1,arc:'raise'},r.source,true);

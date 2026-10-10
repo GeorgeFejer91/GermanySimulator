@@ -1,5 +1,5 @@
 // One registered Gaussian cloud per actor. The simulation supplies all action time.
-import {createPaintedAnchor,gaussianFlowGlsl} from './buergeramt-painted-anchor.js?v=20261010-e-fever';
+import {createPaintedAnchor,gaussianFlowGlsl} from './buergeramt-painted-anchor.js?v=20261010-solid-morph';
 const clamp=value=>Math.max(0,Math.min(1,Number.isFinite(value)?value:0));
 const RECORD_BYTES=24,TEXTURE_WIDTH=256,MAX_SAMPLES=20000,MAX_SEGMENTS=32;
 
@@ -206,6 +206,7 @@ export async function createGaussianActor({THREE,owner,manifestUrl,variant='desk
         if(disposed||failure||!owner.inspect().ready||!state||!sourceMesh){if(mesh)mesh.visible=false;paint?.update(null,sourceMesh,false);return false}
         try{
           if(!visible){mesh.visible=false;paint?.update(null,sourceMesh,false);readyAfterSort=null;return false}
+          mesh.renderOrder=sourceMesh.renderOrder??0;mesh.userData.amtForeground=!!sourceMesh.userData?.amtForeground;
           const sample=sampleArc(manifest,state),height=sourceMesh.geometry?.parameters?.height;
           if(!(height>0)||!(sourceMesh.scale?.y>0))throw new Error('Gaussian source height unavailable');
           const atmosphere=1-clamp(isolation),anchorOpacity=paint?.update(sample,sourceMesh,true,{...state,reducedMotion,atmosphere})??0;
