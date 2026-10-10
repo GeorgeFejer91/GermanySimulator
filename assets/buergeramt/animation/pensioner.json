@@ -1,0 +1,878 @@
+{
+  "version": 1,
+  "id": "pensioner",
+  "representation": "paired-gaussian-paint",
+  "canvas_xy": [
+    384,
+    832
+  ],
+  "head_paint_source": null,
+  "states": [
+    {
+      "id": "work",
+      "role": "main",
+      "file": "assets/sprite-sources/buergeramt/gaussian-arcs/pensioner/key-0.png",
+      "landmarks": {
+        "eye_right": [
+          216,
+          137
+        ],
+        "eye_left": [
+          249,
+          147
+        ],
+        "nose": [
+          235,
+          160
+        ],
+        "chin": [
+          227,
+          198
+        ],
+        "shoulder_right": [
+          124,
+          224
+        ],
+        "elbow_right": [
+          110,
+          340
+        ],
+        "grip_right": [
+          160,
+          429
+        ],
+        "stamp_knob": [
+          176,
+          452
+        ],
+        "stamp_base": [
+          145,
+          763
+        ],
+        "shoulder_left": [
+          269,
+          225
+        ],
+        "elbow_left": [
+          296,
+          320
+        ],
+        "hand_left": [
+          270,
+          368
+        ],
+        "hip_center": [
+          185,
+          455
+        ],
+        "skirt_hem_center": [
+          184,
+          543
+        ],
+        "foot_screen_left": [
+          139,
+          741
+        ],
+        "foot_screen_right": [
+          261,
+          733
+        ]
+      },
+      "paper_polygon_xy": [
+        [
+          224,
+          331
+        ],
+        [
+          283,
+          331
+        ],
+        [
+          283,
+          386
+        ],
+        [
+          224,
+          386
+        ]
+      ],
+      "paper_landmarks_xy": [
+        [
+          270,
+          368
+        ],
+        [
+          245,
+          339
+        ],
+        [
+          278,
+          336
+        ]
+      ],
+      "prop_polygon_xy": [
+        [
+          168,
+          428
+        ],
+        [
+          199,
+          437
+        ],
+        [
+          177,
+          466
+        ],
+        [
+          152,
+          768
+        ],
+        [
+          128,
+          768
+        ],
+        [
+          164,
+          463
+        ]
+      ],
+      "prop_landmarks_xy": [
+        [
+          176,
+          452
+        ],
+        [
+          145,
+          763
+        ]
+      ],
+      "sha256": "d6056b361689229dcfa9b29531dcd869ff349dabe7e7f0977af6c0c820687a3b"
+    },
+    {
+      "id": "bridge-1",
+      "role": "transition",
+      "file": "assets/sprite-sources/buergeramt/gaussian-arcs/pensioner/key-1.png",
+      "landmarks": {
+        "eye_right": [
+          198,
+          140
+        ],
+        "eye_left": [
+          239,
+          149
+        ],
+        "nose": [
+          225,
+          167
+        ],
+        "chin": [
+          206,
+          202
+        ],
+        "shoulder_right": [
+          101,
+          224
+        ],
+        "elbow_right": [
+          82,
+          340
+        ],
+        "grip_right": [
+          118,
+          420
+        ],
+        "stamp_knob": [
+          144,
+          442
+        ],
+        "stamp_base": [
+          120,
+          765
+        ],
+        "shoulder_left": [
+          251,
+          227
+        ],
+        "elbow_left": [
+          301,
+          349
+        ],
+        "hand_left": [
+          303,
+          295
+        ],
+        "hip_center": [
+          180,
+          455
+        ],
+        "skirt_hem_center": [
+          178,
+          544
+        ],
+        "foot_screen_left": [
+          116,
+          743
+        ],
+        "foot_screen_right": [
+          261,
+          733
+        ]
+      },
+      "paper_polygon_xy": [
+        [
+          272,
+          241
+        ],
+        [
+          329,
+          241
+        ],
+        [
+          329,
+          289
+        ],
+        [
+          272,
+          289
+        ]
+      ],
+      "paper_landmarks_xy": [
+        [
+          303,
+          295
+        ],
+        [
+          291,
+          246
+        ],
+        [
+          324,
+          247
+        ]
+      ],
+      "prop_polygon_xy": [
+        [
+          136,
+          416
+        ],
+        [
+          163,
+          424
+        ],
+        [
+          144,
+          453
+        ],
+        [
+          129,
+          768
+        ],
+        [
+          105,
+          768
+        ],
+        [
+          130,
+          452
+        ]
+      ],
+      "prop_landmarks_xy": [
+        [
+          144,
+          442
+        ],
+        [
+          120,
+          765
+        ]
+      ],
+      "sha256": "48675f6309e76948b4bad202ceadf88bf47f74398b8d63b9de8bacaaabb5d019"
+    },
+    {
+      "id": "bridge-2",
+      "role": "transition",
+      "file": "assets/sprite-sources/buergeramt/gaussian-arcs/pensioner/key-2.png",
+      "landmarks": {
+        "eye_right": [
+          193,
+          138
+        ],
+        "eye_left": [
+          231,
+          133
+        ],
+        "nose": [
+          220,
+          156
+        ],
+        "chin": [
+          203,
+          196
+        ],
+        "shoulder_right": [
+          100,
+          228
+        ],
+        "elbow_right": [
+          82,
+          347
+        ],
+        "grip_right": [
+          119,
+          420
+        ],
+        "stamp_knob": [
+          143,
+          440
+        ],
+        "stamp_base": [
+          120,
+          765
+        ],
+        "shoulder_left": [
+          247,
+          211
+        ],
+        "elbow_left": [
+          321,
+          280
+        ],
+        "hand_left": [
+          300,
+          196
+        ],
+        "hip_center": [
+          180,
+          455
+        ],
+        "skirt_hem_center": [
+          178,
+          544
+        ],
+        "foot_screen_left": [
+          116,
+          743
+        ],
+        "foot_screen_right": [
+          261,
+          733
+        ]
+      },
+      "paper_polygon_xy": [
+        [
+          265,
+          136
+        ],
+        [
+          322,
+          136
+        ],
+        [
+          322,
+          193
+        ],
+        [
+          265,
+          193
+        ]
+      ],
+      "paper_landmarks_xy": [
+        [
+          300,
+          196
+        ],
+        [
+          281,
+          141
+        ],
+        [
+          317,
+          142
+        ]
+      ],
+      "prop_polygon_xy": [
+        [
+          135,
+          415
+        ],
+        [
+          163,
+          424
+        ],
+        [
+          144,
+          451
+        ],
+        [
+          129,
+          768
+        ],
+        [
+          105,
+          768
+        ],
+        [
+          130,
+          451
+        ]
+      ],
+      "prop_landmarks_xy": [
+        [
+          143,
+          440
+        ],
+        [
+          120,
+          765
+        ]
+      ],
+      "sha256": "9938af6dd24d27812a0f12e1a6216116e7210bb619ecf87a29af74cb7556ec4f"
+    },
+    {
+      "id": "gesture",
+      "role": "main",
+      "file": "assets/sprite-sources/buergeramt/gaussian-arcs/pensioner/key-3.png",
+      "landmarks": {
+        "eye_right": [
+          162,
+          143
+        ],
+        "eye_left": [
+          195,
+          137
+        ],
+        "nose": [
+          199,
+          153
+        ],
+        "chin": [
+          181,
+          191
+        ],
+        "shoulder_right": [
+          100,
+          237
+        ],
+        "elbow_right": [
+          82,
+          348
+        ],
+        "grip_right": [
+          119,
+          428
+        ],
+        "stamp_knob": [
+          145,
+          447
+        ],
+        "stamp_base": [
+          122,
+          768
+        ],
+        "shoulder_left": [
+          251,
+          218
+        ],
+        "elbow_left": [
+          329,
+          222
+        ],
+        "hand_left": [
+          307,
+          124
+        ],
+        "hip_center": [
+          180,
+          455
+        ],
+        "skirt_hem_center": [
+          178,
+          544
+        ],
+        "foot_screen_left": [
+          116,
+          743
+        ],
+        "foot_screen_right": [
+          261,
+          733
+        ]
+      },
+      "paper_polygon_xy": [
+        [
+          265,
+          51
+        ],
+        [
+          316,
+          51
+        ],
+        [
+          316,
+          115
+        ],
+        [
+          265,
+          115
+        ]
+      ],
+      "paper_landmarks_xy": [
+        [
+          307,
+          124
+        ],
+        [
+          270,
+          69
+        ],
+        [
+          303,
+          56
+        ]
+      ],
+      "prop_polygon_xy": [
+        [
+          135,
+          424
+        ],
+        [
+          164,
+          431
+        ],
+        [
+          146,
+          461
+        ],
+        [
+          130,
+          770
+        ],
+        [
+          106,
+          770
+        ],
+        [
+          132,
+          459
+        ]
+      ],
+      "prop_landmarks_xy": [
+        [
+          145,
+          447
+        ],
+        [
+          122,
+          768
+        ]
+      ],
+      "sha256": "60850c4b1ab39060092af5743646df6dcddf9d99846b68fcebf2653bce4e0ecc"
+    }
+  ],
+  "arcs": [
+    {
+      "id": "work-gesture",
+      "from": "work",
+      "to": "gesture",
+      "duration": 6,
+      "keys": [
+        {
+          "state": "work",
+          "time": 0
+        },
+        {
+          "state": "bridge-1",
+          "time": 2
+        },
+        {
+          "state": "bridge-2",
+          "time": 4
+        },
+        {
+          "state": "gesture",
+          "time": 6
+        }
+      ],
+      "segments": [
+        {
+          "segment": 0,
+          "start": 0,
+          "end": 2
+        },
+        {
+          "segment": 1,
+          "start": 2,
+          "end": 4
+        },
+        {
+          "segment": 2,
+          "start": 4,
+          "end": 6
+        }
+      ]
+    }
+  ],
+  "segments": [
+    {
+      "from": "work",
+      "to": "bridge-1",
+      "paint_warp_gain": 0.55
+    },
+    {
+      "from": "bridge-1",
+      "to": "bridge-2",
+      "paint_warp_gain": 0.55
+    },
+    {
+      "from": "bridge-2",
+      "to": "gesture",
+      "paint_warp_gain": 0.55
+    }
+  ],
+  "variants": {
+    "desktop": {
+      "file": "pensioner-desktop.bin.gz",
+      "sha256": "966712777c08c8855222d5e0c57f235fc9b2738c7eeca7cf327514f28db83919",
+      "decoded_sha256": "d561c88849fb1e86cfb8503c576e3a763a5f3d2806f544cfbaccdb7a0b35ea1a",
+      "bytes": 241998,
+      "decoded_bytes": 460800,
+      "sample_count": 6400,
+      "stride_px": 5,
+      "segment_count": 3,
+      "record_bytes": 24,
+      "trajectories": [
+        {
+          "segment": 0,
+          "start_slot": 4793,
+          "end_slot": 4937,
+          "pivot_start": [
+            0.09375,
+            0.5576923076923077
+          ],
+          "pivot_end": [
+            0.13341346153846154,
+            0.6454326923076923
+          ],
+          "angle_radians": -0.32786935915216275
+        },
+        {
+          "segment": 0,
+          "start_slot": 2614,
+          "end_slot": 2899,
+          "pivot_start": [
+            -0.019230769230769232,
+            0.4567307692307692
+          ],
+          "pivot_end": [
+            -0.057692307692307696,
+            0.46875
+          ],
+          "angle_radians": 0.02518316872461267
+        },
+        {
+          "segment": 1,
+          "start_slot": 5049,
+          "end_slot": 5146,
+          "pivot_start": [
+            0.13341346153846154,
+            0.6454326923076923
+          ],
+          "pivot_end": [
+            0.12980769230769232,
+            0.7644230769230769
+          ],
+          "angle_radians": 0.09997214773551558
+        },
+        {
+          "segment": 1,
+          "start_slot": 2832,
+          "end_slot": 3117,
+          "pivot_start": [
+            -0.057692307692307696,
+            0.46875
+          ],
+          "pivot_end": [
+            -0.05889423076923077,
+            0.47115384615384615
+          ],
+          "angle_radians": 0.003515673443608892
+        },
+        {
+          "segment": 2,
+          "start_slot": 5107,
+          "end_slot": 5204,
+          "pivot_start": [
+            0.12980769230769232,
+            0.7644230769230769
+          ],
+          "pivot_end": [
+            0.13822115384615385,
+            0.8509615384615384
+          ],
+          "angle_radians": 0.31165154640065645
+        },
+        {
+          "segment": 2,
+          "start_slot": 2815,
+          "end_slot": 3099,
+          "pivot_start": [
+            -0.05889423076923077,
+            0.47115384615384615
+          ],
+          "pivot_end": [
+            -0.056490384615384616,
+            0.46274038461538464
+          ],
+          "angle_radians": -0.000877410269434684
+        }
+      ]
+    },
+    "mobile": {
+      "file": "pensioner-mobile.bin.gz",
+      "sha256": "1279df369051797cdf0823fa3575c1d9cc244254b09f3ea962cef299dc06e591",
+      "decoded_sha256": "7eba1459b8305bea3850500fabaaab14347becb3cd82fde044c6b900d2f8df29",
+      "bytes": 93723,
+      "decoded_bytes": 184320,
+      "sample_count": 2560,
+      "stride_px": 8,
+      "segment_count": 3,
+      "record_bytes": 24,
+      "trajectories": [
+        {
+          "segment": 0,
+          "start_slot": 1858,
+          "end_slot": 1914,
+          "pivot_start": [
+            0.09375,
+            0.5576923076923077
+          ],
+          "pivot_end": [
+            0.13341346153846154,
+            0.6454326923076923
+          ],
+          "angle_radians": -0.32786935915216275
+        },
+        {
+          "segment": 0,
+          "start_slot": 1013,
+          "end_slot": 1122,
+          "pivot_start": [
+            -0.019230769230769232,
+            0.4567307692307692
+          ],
+          "pivot_end": [
+            -0.057692307692307696,
+            0.46875
+          ],
+          "angle_radians": 0.02518316872461267
+        },
+        {
+          "segment": 1,
+          "start_slot": 1963,
+          "end_slot": 2003,
+          "pivot_start": [
+            0.13341346153846154,
+            0.6454326923076923
+          ],
+          "pivot_end": [
+            0.12980769230769232,
+            0.7644230769230769
+          ],
+          "angle_radians": 0.09997214773551558
+        },
+        {
+          "segment": 1,
+          "start_slot": 1098,
+          "end_slot": 1207,
+          "pivot_start": [
+            -0.057692307692307696,
+            0.46875
+          ],
+          "pivot_end": [
+            -0.05889423076923077,
+            0.47115384615384615
+          ],
+          "angle_radians": 0.003515673443608892
+        },
+        {
+          "segment": 2,
+          "start_slot": 2000,
+          "end_slot": 2040,
+          "pivot_start": [
+            0.12980769230769232,
+            0.7644230769230769
+          ],
+          "pivot_end": [
+            0.13822115384615385,
+            0.8509615384615384
+          ],
+          "angle_radians": 0.31165154640065645
+        },
+        {
+          "segment": 2,
+          "start_slot": 1096,
+          "end_slot": 1207,
+          "pivot_start": [
+            -0.05889423076923077,
+            0.47115384615384615
+          ],
+          "pivot_end": [
+            -0.056490384615384616,
+            0.46274038461538464
+          ],
+          "angle_radians": -0.000877410269434684
+        }
+      ]
+    }
+  },
+  "limits": [
+    "Main and terminal anchors are semantic checkpoints; transition anchors never create scheduled holds",
+    "One paired cloud blends position and linear-light paint; no whole-character scatter or midpoint paint swap",
+    "A fixed source head paint is similarity-transformed by face landmarks when head_paint_source is set",
+    "Main source paintings differ; Gaussian correspondence needs rendered anatomical review",
+    "Existing route/gait and dialogue owners remain authoritative"
+  ],
+  "source_notes": [
+    "Original native work painting plus imagegen-authored registered bridges; no procedural body wiggle",
+    "Work/gesture are main stages; two stable transition paintings; six-second outward arc and six-second reverse",
+    "Original cast scale, floor and paper/cane ownership retained; runtime screenshot review required"
+  ],
+  "anchors": {
+    "frames": {
+      "work": {
+        "file": "pensioner-anchor-0.webp",
+        "sha256": "276bd476da769c81547f0cf1631397ddbd37b64a6aebd86de8d226da07e69805",
+        "bytes": 250912,
+        "width": 384,
+        "height": 832,
+        "rgba_sha256": "58924e544db4683d45409668336556b9f2c38a796c5849b0cb3f4aa4dedbafde"
+      },
+      "bridge-1": {
+        "file": "pensioner-anchor-1.webp",
+        "sha256": "1a72ea742a0afe317497a7bca47f54dc0893b29e387bc3334ec80ada2ea81fb2",
+        "bytes": 296522,
+        "width": 384,
+        "height": 832,
+        "rgba_sha256": "1a796fb7fd34d4a4e84174ce0ecc5ae6922ee9a566258d61611b17a8e1892721"
+      },
+      "bridge-2": {
+        "file": "pensioner-anchor-2.webp",
+        "sha256": "89b920828765a9d98d1da201b61264741130362b20f3ef37ffc49e2e7eb0d85c",
+        "bytes": 303044,
+        "width": 384,
+        "height": 832,
+        "rgba_sha256": "56c0d2bf1853c66bf4c95f36bf389129b466defd9863d23ac146c72232df2780"
+      },
+      "gesture": {
+        "file": "pensioner-anchor-3.webp",
+        "sha256": "b5cb4db5dd9ce4326a50c10e95f9f6159e5503c27f9ee639b8586ef350d1f797",
+        "bytes": 312102,
+        "width": 384,
+        "height": 832,
+        "rgba_sha256": "3d8ab2d3f74e619d5cdfb0cef4bbb09c42e8f9b15e4289a1dc41bd00ded0547c"
+      }
+    },
+    "maximum_resident": 3,
+    "fade_seconds": 0.09
+  }
+}

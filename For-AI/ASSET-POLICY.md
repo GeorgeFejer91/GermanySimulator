@@ -42,6 +42,48 @@ decoded costs in generated manifests; compare actual frame and input latency
 against the same scene without the action renderer. Missing or late data keeps
 the original sprite. `BUERGERAMT.md` owns timing, residency and state handoff.
 
+The 2026-10-10 extension covers all fourteen office figures with twelve action
+packs: the two extra clerks reuse Knick's pack, while renter, parent and
+pensioner add four 384×832 native keys each. Their desktop compressed/decoded
+records are respectively 200,673/387,072, 215,412/423,936 and 241,998/460,800 bytes;
+mobile records are 78,363/165,888, 84,172/165,888 and 93,723/184,320 bytes.
+Each decoded patron key costs 1,277,952 RGBA bytes; no more than three keys
+(3,833,856 bytes before GPU copies) reside per admitted actor. Four-key transfer
+totals are 1,083,160, 1,047,092 and 1,162,580 bytes, but the initial job requests
+only the current pair, then a queued neighbor. These additions keep the shared
+two-job queue, two-desktop/one-mobile actor caps and existing render cadence.
+Do not request new authoring sheets or private voice references from the game.
+Camera-negative candidates do not consume preparation; a fully off-camera
+paused actor can retire for the visible speaker without a visible pose jump.
+Registered original/generated source hashes and crop/scale provenance remain
+beside the three source packs. Browser delivery hints add no speech download;
+alternate Voice Cloner references remain private; UUID metadata identifies
+the unlistened candidates.
+
+The full-cast release compared three cold office runs per viewport against
+`2b36be9`, using Chrome 154/Intel Iris Xe, local uncompressed HTTP, seed 424242,
+DPR 2 requested and no CPU throttling. The naturally selected Konrad dialogue
+was sampled for three seconds. Median active p95 frame time was 21.0 → 20.9 ms
+on desktop and mobile emulation (after ranges 20.9–20.9 ms); frame cadence
+stayed approximately 60 Hz. Median input p95 was 18.6 → 15.8 ms desktop
+(after range 13.1–17.1) and 67.7 → 19.3 ms emulation (12.9–20.4). These short
+lab samples do not establish a causal speedup or physical-device performance.
+Desktop geometry count stayed 168, textures 43–44 and draw calls 117; mobile
+stayed 161/41/88. Selected-action transfer was 3,980,014 → 3,284,494 bytes
+desktop and 1,818,102 → 1,936,660 mobile, including other prepared office packs.
+Cold office startup median/range was 28,531,765 / 25,299,076–30,137,390 bytes
+desktop and 16,927,169 / 16,927,164–16,927,171 mobile. This direct-office
+scenario loads office assets and is separate from the root title's 18 MB gate.
+After ready/settled medians were 871/1,188 ms desktop and 832/1,205 ms mobile;
+async readiness ranged widely, so do not claim a loading speedup. Both six-run
+benchmark reports passed applicable input/error/drawing-buffer guards under
+`output/amt-gaussian-arcs/full-cast-benchmark-{before,after}/`; Android is
+emulated, GPU timing and physical-device p95 remain NOT RUN.
+The separate six-run root benchmark also passed its 18 MB startup, deferred
+resource, title cadence, input and drawing-buffer gates: desktop startup
+15,696,445–16,448,172 bytes, mobile 15,027,020–16,098,517; title cadence
+12 calls per measured three-second window. Evidence: `full-cast-root-benchmark/`.
+
 The office's original painted prop strip adds a file cabinet, paper tower,
 distorted clock, and noticeboard. Its source and provenance are with the cast;
 the game loads its compressed atlas only when the office is entered, alongside

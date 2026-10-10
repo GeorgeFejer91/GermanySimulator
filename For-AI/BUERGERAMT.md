@@ -279,12 +279,66 @@ their resources. There is no extra scene animation loop.
 Registered sources, landmarks, polygons and provenance live under
 `assets/sprite-sources/buergeramt/gaussian-arcs/`; runtime manifests and selected
 desktop/mobile records and lossless runtime anchor frames live under `assets/buergeramt/animation/`. The three
-stationary waiting patrons and decorative clerk copies keep their existing
-performances. The opt-in `spark-preview.html?scene=knick&workflow=arcs` preview
+stationary waiting patrons now have their own registered action packs, while
+the two decorative clerk copies share Knick's pack through separate animation
+slot IDs. All fourteen rendered office figures are eligible for the same
+bounded Gaussian action renderer. The opt-in `spark-preview.html?scene=knick&workflow=arcs` preview
 uses the same actor implementation; other cast IDs select their action packs.
 Native rendered anatomy/props/loop review, integrated depth/floor review and
 browser costs remain acceptance gates. Binary checks do not certify the art;
 Android emulation does not establish physical-device performance.
+
+The 2026-10-10 cast extension adds two main paintings and two stable transition
+paintings for each of Konrad, Mechthild and Wolfram. Their outward gesture takes
+six seconds and reverses over six seconds with no intermediate holds. The
+original native work painting remains the first key. Generated bridges use one
+uniform scale for the whole sequence and the original floor; raised hands do
+not shrink the body. Konrad opens his free hand, Mechthild brings her free hand
+toward the papers, and Wolfram raises his notice while keeping the cane planted.
+The existing builder consumes registered landmarks and owned paper/cane masks.
+`tools/prepare-amt-patron-arcs.py` performs crop/alpha cleanup/registration only;
+the stored imagegen bridge sheets own the new poses.
+
+Independent C4 review rejected an initial Mechthild reaching interval and a
+Wolfram receipt interval because the paired paint showed two hand/prop positions.
+The repair authors a real halfway reach, registers horizontal shoe centroids,
+and measures each key's face/shoulder/elbow/grip, receipt corners and cane
+controls on its native painting. Estimates copied across poses had missed the
+receipt and left the reaching elbow stationary. The final encoded packs must
+pass midpoint and normal-speed review; smooth frame timing alone cannot certify
+anatomical correspondence. The final pensioner mask also includes the pale
+antialiased receipt edge that otherwise appeared as a detached head-area fleck.
+Final independent C4 and P5 verdicts are PASS, bound to all 58 candidate path
+hashes in `full-cast-candidate.json` (manifest SHA-256
+`2525081666145bbcd8bae7662913346f8715099e94cc7d1a521b4faf38a05702`).
+The final fresh C4 pensioner loop observed 409 frames and 616 timed states
+without visibility/opacity loss or browser errors; P5 reran 15 data checks for
+the narrow mask repair and carried only unchanged clock/floor/manager evidence.
+
+Five additional stationary clocks advance from office simulation time, staggered
+by actor. Hidden time freezes them; dialogue freezes background figures while
+the selected patron continues. Replay resets phases and generation. Admission
+and visible slot retirement wait for the stationary figure's original work or
+ready key, avoiding a raised-pose-to-rest snap. An actor whose complete billboard
+is outside the camera may release a frozen slot for a new visible speaker.
+Preparation skips off-camera or unavailable actions. The caps stay two desktop
+and one mobile; extending the cast does not mean fourteen simultaneous clouds.
+
+`buergeramt-voice-profiles.js` gives the twelve named speakers distinct infernal,
+Kafkaesque performance briefs and browser rate/pitch hints. Explicit story
+delivery and approved exact-speaker recordings retain priority. Twelve actual
+alternate profiles were saved in Secret Tunnel's local Voice Cloner from the
+documented CC0 emotional references, with private transformed WAVs. These are
+unlistened alternatives, not accepted cloned game recordings. The two decorative
+clerks reuse Brunhilde's identity. IDs, provenance and the separate listening
+gate are owned by `VOICE-SYNTH-PROTOCOL.md`.
+
+Author checks passed 235 affected Node regressions and normal-speed full cycles
+for all five added figures in desktop and Android browser emulation, with
+ground pivots, full-opacity native paint, residency limits, reduced-motion
+fallback and replay cleanup. Evidence is retained under
+`output/amt-gaussian-arcs/full-cast*`. Forced office camera samples are separate
+from natural dialogue selection, physical Android and perceived voice quality.
 
 The 2026-10-08 release review covers all nine exact encoded native loops,
 390px mobile emulation at ±45°, planted roots, shortest return before walking,

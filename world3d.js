@@ -1,4 +1,4 @@
-import {createAmtGaussianScene} from './buergeramt-gaussian-scene.js?v=20261010-liquid';
+import {createAmtGaussianScene} from './buergeramt-gaussian-scene.js?v=20261010-cast';
 const THREE_URL="https://cdn.jsdelivr.net/npm/three@0.186.0/build/three.module.js";
 const GLTF_LOADER_URL="https://cdn.jsdelivr.net/npm/three@0.186.0/examples/jsm/loaders/GLTFLoader.js";
 function showRendererFailure(error){
@@ -1075,8 +1075,8 @@ function showRendererFailure(error){
     amtCharacters.push({name,url,mesh,uv,base,phase,frame:-1,renderKey:"",performance,lead:performance&&x===3.9,mood:0,...identity});
   }
   amtCharacter("clerk",3.9,-9.77,.25,1.82,{id:"amt-brunhilde-knick",fullName:"Brunhilde Knick",voiceId:"amt-brunhilde-knick"});
-  amtCharacter("clerk",-5.8,-9.77,1.4,1.76,{decorativeCloneOf:"amt-brunhilde-knick"});
-  amtCharacter("clerk",-1.6,-9.77,2.2,1.76,{decorativeCloneOf:"amt-brunhilde-knick"});
+  amtCharacter("clerk",-5.8,-9.77,1.4,1.76,{animationId:"clerk-desk-1",decorativeCloneOf:"amt-brunhilde-knick"});
+  amtCharacter("clerk",-1.6,-9.77,2.2,1.76,{animationId:"clerk-desk-2",decorativeCloneOf:"amt-brunhilde-knick"});
   amtCharacter("renter",-5.9,1.39,0,1.83,{id:"amt-konrad-wohnungszettel",fullName:"Konrad Wohnungszettel",voiceId:"amt-konrad-wohnungszettel"});
   amtCharacter("parent",5.5,1.39,1.1,1.9,{id:"amt-mechthild-elternbogen",fullName:"Mechthild Elternbogen",voiceId:"amt-mechthild-elternbogen"});
   amtCharacter("pensioner",1.7,-1.39,2.0,1.82,{id:"amt-wolfram-rentenbescheid",fullName:"Wolfram Rentenbescheid",voiceId:"amt-wolfram-rentenbescheid"});
@@ -1417,6 +1417,6 @@ function showRendererFailure(error){
     parkCameraFrame+=(parkTarget-parkCameraFrame)*(1-Math.exp(-6*Math.min(.05,Math.max(0,(now-previousCameraTime)/1000))));previousCameraTime=now;
     if(parkCameraFrame>.001){const narrow=Math.max(0,Math.min(1,.95/camera.aspect-1)),cx=X(park.x+park.w/2),cz=Z(park.y+park.h/2),focus=parkCameraFrame*(1-.65*narrow);camera.position.set(px+(cx-px)*focus,11.5+(5+2*narrow)*parkCameraFrame,pz+14+2*narrow*parkCameraFrame);camera.lookAt(px+(cx-px)*focus,1+parkCameraFrame,pz-2.7+(cz-(pz-2.7))*parkCameraFrame)}
     updateGroupVisibility();updateBuildingOcclusion();updateWirtschaftswunder(now);renderer.render(scene,camera);
-  },inspectAssets,setAmtQr,get amtGaussian(){return amtGaussian.inspect()},get amtOmenSplat(){return {visit:amtOmenVisit,loading:!!amtOmenRequest,skipped:amtOmenSkipped,failure:amtOmenFailure,...(amtOmenSplat?.inspect()||{ready:false,visible:false})}},get amtOmenStaging(){return {isolation:amtIsolation.value,environmentVisible:amtEnvironment.visible}},get amtOffice(){return officeDetail?.inspect()||null},get amtCharacters(){return [...amtCharacters.map(actor=>({name:actor.name,...amtSnapshot(actor),frame:actor.frame,loaded:!!actor.mesh.material.map?.image,mapped:!!actor.mesh.material.map,visible:actor.mesh.visible,detail:actor.mesh.material.map===actor.detail,texelHeight:actor.mesh.material.map?.image?.height||0,breath:actor.mesh.material.userData.breath.value})),...amtMoving.map(actor=>({name:actor.id,...amtSnapshot(actor),frame:actor.cell,loaded:!!actor.mesh.material.map?.image,mapped:!!actor.mesh.material.map,visible:actor.mesh.visible,detail:actor.mesh.material.map===actor.detail||actor.mesh.material.map===actor.walkDetail,texelHeight:actor.mesh.material.map?.image?.height||0,breath:actor.mesh.material.userData.breath.value,tint:actor.mesh.material.color.getHexString(),position:[actor.mesh.position.x,actor.mesh.position.z]}))]}};
+  },inspectAssets,setAmtQr,get amtGaussian(){return amtGaussian.inspect()},get amtOmenSplat(){return {visit:amtOmenVisit,loading:!!amtOmenRequest,skipped:amtOmenSkipped,failure:amtOmenFailure,...(amtOmenSplat?.inspect()||{ready:false,visible:false})}},get amtOmenStaging(){return {isolation:amtIsolation.value,environmentVisible:amtEnvironment.visible}},get amtOffice(){return officeDetail?.inspect()||null},get amtCharacters(){return [...amtCharacters.map(actor=>({name:actor.name,id:actor.animationId??actor.id,...amtSnapshot(actor),frame:actor.frame,loaded:!!actor.mesh.material.map?.image,mapped:!!actor.mesh.material.map,visible:actor.mesh.visible,detail:actor.mesh.material.map===actor.detail,texelHeight:actor.mesh.material.map?.image?.height||0,breath:actor.mesh.material.userData.breath.value})),...amtMoving.map(actor=>({name:actor.id,...amtSnapshot(actor),frame:actor.cell,loaded:!!actor.mesh.material.map?.image,mapped:!!actor.mesh.material.map,visible:actor.mesh.visible,detail:actor.mesh.material.map===actor.detail||actor.mesh.material.map===actor.walkDetail,texelHeight:actor.mesh.material.map?.image?.height||0,breath:actor.mesh.material.userData.breath.value,tint:actor.mesh.material.color.getHexString(),position:[actor.mesh.position.x,actor.mesh.position.z]}))]}};
   app.classList.add("three-ready");
 })().catch(showRendererFailure);

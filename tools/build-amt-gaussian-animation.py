@@ -209,7 +209,7 @@ def build(spec):
  manifest={'version':1,'id':spec['id'],'representation':'paired-gaussian-paint','canvas_xy':spec['canvas_xy'],'head_paint_source':spec.get('head_paint_source'),'states':[{**s,'sha256':sha(ROOT/s['file'])} for s in states],'arcs':spec['arcs'],'segments':[{'from':states[a]['id'],'to':states[b]['id']} for a,b in segments],'variants':variants,'limits':['Main and terminal anchors are semantic checkpoints; transition anchors never create scheduled holds','One paired cloud blends position and linear-light paint; no whole-character scatter or midpoint paint swap','A fixed source head paint is similarity-transformed by face landmarks when head_paint_source is set','Main source paintings differ; Gaussian correspondence needs rendered anatomical review','Existing route/gait and dialogue owners remain authoritative']}
  if spec.get('prop_ownership'):manifest['prop_ownership']=spec['prop_ownership']
  if spec.get('compatibility'):manifest['source_notes']=spec['compatibility']
- gains=json.loads((ROOT/'assets/sprite-sources/buergeramt/gaussian-arcs/paint-warp-gains.json').read_text())['actors'][spec['id']]
+ gains=spec['paint_warp_gains'] if 'paint_warp_gains' in spec else json.loads((ROOT/'assets/sprite-sources/buergeramt/gaussian-arcs/paint-warp-gains.json').read_text())['actors'][spec['id']]
  assert len(gains)==len(segments) and all(0<=gain<=1 for gain in gains)
  for pair,gain in zip(manifest['segments'],gains):pair['paint_warp_gain']=gain
  manifest['anchors']=write_anchor_paint(spec,images)

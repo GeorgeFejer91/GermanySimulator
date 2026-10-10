@@ -50,5 +50,17 @@ function createClerk(){
   }}
  };
 }
-window.BuergeramtAnimationClock={createClerk};
+function ambientClerk(time,generation=0){
+ const total=forward.reduce((n,edge)=>n+edge.duration,0),cycle=Math.max(0,time),local=cycle%total;
+ let offset=0;
+ for(const edge of forward){
+  if(local<offset+edge.duration)return{generation,actionId:Math.floor(cycle/total)+1,arc:edge.arc,phase:(local-offset)/edge.duration,pose:edge.fromPose};
+  offset+=edge.duration;
+ }
+}
+function ambientPatron(time,generation=0){
+ const cycle=Math.max(0,time),phase=(cycle%12)/12;
+ return{generation,actionId:Math.floor(cycle/12)+1,arc:"work-gesture-work",phase,pose:phase>=.25&&phase<.75?"gesture":"work"};
+}
+window.BuergeramtAnimationClock={createClerk,ambientClerk,ambientPatron};
 })();

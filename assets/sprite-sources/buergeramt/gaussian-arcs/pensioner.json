@@ -1,0 +1,603 @@
+{
+  "version": 1,
+  "id": "pensioner",
+  "canvas_xy": [
+    384,
+    832
+  ],
+  "head_paint_source": null,
+  "states": [
+    {
+      "id": "work",
+      "role": "main",
+      "file": "assets/sprite-sources/buergeramt/gaussian-arcs/pensioner/key-0.png",
+      "landmarks": {
+        "eye_right": [
+          216,
+          137
+        ],
+        "eye_left": [
+          249,
+          147
+        ],
+        "nose": [
+          235,
+          160
+        ],
+        "chin": [
+          227,
+          198
+        ],
+        "shoulder_right": [
+          124,
+          224
+        ],
+        "elbow_right": [
+          110,
+          340
+        ],
+        "grip_right": [
+          160,
+          429
+        ],
+        "stamp_knob": [
+          176,
+          452
+        ],
+        "stamp_base": [
+          145,
+          763
+        ],
+        "shoulder_left": [
+          269,
+          225
+        ],
+        "elbow_left": [
+          296,
+          320
+        ],
+        "hand_left": [
+          270,
+          368
+        ],
+        "hip_center": [
+          185,
+          455
+        ],
+        "skirt_hem_center": [
+          184,
+          543
+        ],
+        "foot_screen_left": [
+          139,
+          741
+        ],
+        "foot_screen_right": [
+          261,
+          733
+        ]
+      },
+      "paper_polygon_xy": [
+        [
+          224,
+          331
+        ],
+        [
+          283,
+          331
+        ],
+        [
+          283,
+          386
+        ],
+        [
+          224,
+          386
+        ]
+      ],
+      "paper_landmarks_xy": [
+        [
+          270,
+          368
+        ],
+        [
+          245,
+          339
+        ],
+        [
+          278,
+          336
+        ]
+      ],
+      "prop_polygon_xy": [
+        [
+          168,
+          428
+        ],
+        [
+          199,
+          437
+        ],
+        [
+          177,
+          466
+        ],
+        [
+          152,
+          768
+        ],
+        [
+          128,
+          768
+        ],
+        [
+          164,
+          463
+        ]
+      ],
+      "prop_landmarks_xy": [
+        [
+          176,
+          452
+        ],
+        [
+          145,
+          763
+        ]
+      ]
+    },
+    {
+      "id": "bridge-1",
+      "role": "transition",
+      "file": "assets/sprite-sources/buergeramt/gaussian-arcs/pensioner/key-1.png",
+      "landmarks": {
+        "eye_right": [
+          198,
+          140
+        ],
+        "eye_left": [
+          239,
+          149
+        ],
+        "nose": [
+          225,
+          167
+        ],
+        "chin": [
+          206,
+          202
+        ],
+        "shoulder_right": [
+          101,
+          224
+        ],
+        "elbow_right": [
+          82,
+          340
+        ],
+        "grip_right": [
+          118,
+          420
+        ],
+        "stamp_knob": [
+          144,
+          442
+        ],
+        "stamp_base": [
+          120,
+          765
+        ],
+        "shoulder_left": [
+          251,
+          227
+        ],
+        "elbow_left": [
+          301,
+          349
+        ],
+        "hand_left": [
+          303,
+          295
+        ],
+        "hip_center": [
+          180,
+          455
+        ],
+        "skirt_hem_center": [
+          178,
+          544
+        ],
+        "foot_screen_left": [
+          116,
+          743
+        ],
+        "foot_screen_right": [
+          261,
+          733
+        ]
+      },
+      "paper_polygon_xy": [
+        [
+          272,
+          241
+        ],
+        [
+          329,
+          241
+        ],
+        [
+          329,
+          289
+        ],
+        [
+          272,
+          289
+        ]
+      ],
+      "paper_landmarks_xy": [
+        [
+          303,
+          295
+        ],
+        [
+          291,
+          246
+        ],
+        [
+          324,
+          247
+        ]
+      ],
+      "prop_polygon_xy": [
+        [
+          136,
+          416
+        ],
+        [
+          163,
+          424
+        ],
+        [
+          144,
+          453
+        ],
+        [
+          129,
+          768
+        ],
+        [
+          105,
+          768
+        ],
+        [
+          130,
+          452
+        ]
+      ],
+      "prop_landmarks_xy": [
+        [
+          144,
+          442
+        ],
+        [
+          120,
+          765
+        ]
+      ]
+    },
+    {
+      "id": "bridge-2",
+      "role": "transition",
+      "file": "assets/sprite-sources/buergeramt/gaussian-arcs/pensioner/key-2.png",
+      "landmarks": {
+        "eye_right": [
+          193,
+          138
+        ],
+        "eye_left": [
+          231,
+          133
+        ],
+        "nose": [
+          220,
+          156
+        ],
+        "chin": [
+          203,
+          196
+        ],
+        "shoulder_right": [
+          100,
+          228
+        ],
+        "elbow_right": [
+          82,
+          347
+        ],
+        "grip_right": [
+          119,
+          420
+        ],
+        "stamp_knob": [
+          143,
+          440
+        ],
+        "stamp_base": [
+          120,
+          765
+        ],
+        "shoulder_left": [
+          247,
+          211
+        ],
+        "elbow_left": [
+          321,
+          280
+        ],
+        "hand_left": [
+          300,
+          196
+        ],
+        "hip_center": [
+          180,
+          455
+        ],
+        "skirt_hem_center": [
+          178,
+          544
+        ],
+        "foot_screen_left": [
+          116,
+          743
+        ],
+        "foot_screen_right": [
+          261,
+          733
+        ]
+      },
+      "paper_polygon_xy": [
+        [
+          265,
+          136
+        ],
+        [
+          322,
+          136
+        ],
+        [
+          322,
+          193
+        ],
+        [
+          265,
+          193
+        ]
+      ],
+      "paper_landmarks_xy": [
+        [
+          300,
+          196
+        ],
+        [
+          281,
+          141
+        ],
+        [
+          317,
+          142
+        ]
+      ],
+      "prop_polygon_xy": [
+        [
+          135,
+          415
+        ],
+        [
+          163,
+          424
+        ],
+        [
+          144,
+          451
+        ],
+        [
+          129,
+          768
+        ],
+        [
+          105,
+          768
+        ],
+        [
+          130,
+          451
+        ]
+      ],
+      "prop_landmarks_xy": [
+        [
+          143,
+          440
+        ],
+        [
+          120,
+          765
+        ]
+      ]
+    },
+    {
+      "id": "gesture",
+      "role": "main",
+      "file": "assets/sprite-sources/buergeramt/gaussian-arcs/pensioner/key-3.png",
+      "landmarks": {
+        "eye_right": [
+          162,
+          143
+        ],
+        "eye_left": [
+          195,
+          137
+        ],
+        "nose": [
+          199,
+          153
+        ],
+        "chin": [
+          181,
+          191
+        ],
+        "shoulder_right": [
+          100,
+          237
+        ],
+        "elbow_right": [
+          82,
+          348
+        ],
+        "grip_right": [
+          119,
+          428
+        ],
+        "stamp_knob": [
+          145,
+          447
+        ],
+        "stamp_base": [
+          122,
+          768
+        ],
+        "shoulder_left": [
+          251,
+          218
+        ],
+        "elbow_left": [
+          329,
+          222
+        ],
+        "hand_left": [
+          307,
+          124
+        ],
+        "hip_center": [
+          180,
+          455
+        ],
+        "skirt_hem_center": [
+          178,
+          544
+        ],
+        "foot_screen_left": [
+          116,
+          743
+        ],
+        "foot_screen_right": [
+          261,
+          733
+        ]
+      },
+      "paper_polygon_xy": [
+        [
+          265,
+          51
+        ],
+        [
+          316,
+          51
+        ],
+        [
+          316,
+          115
+        ],
+        [
+          265,
+          115
+        ]
+      ],
+      "paper_landmarks_xy": [
+        [
+          307,
+          124
+        ],
+        [
+          270,
+          69
+        ],
+        [
+          303,
+          56
+        ]
+      ],
+      "prop_polygon_xy": [
+        [
+          135,
+          424
+        ],
+        [
+          164,
+          431
+        ],
+        [
+          146,
+          461
+        ],
+        [
+          130,
+          770
+        ],
+        [
+          106,
+          770
+        ],
+        [
+          132,
+          459
+        ]
+      ],
+      "prop_landmarks_xy": [
+        [
+          145,
+          447
+        ],
+        [
+          122,
+          768
+        ]
+      ]
+    }
+  ],
+  "arcs": [
+    {
+      "id": "work-gesture",
+      "from": "work",
+      "to": "gesture",
+      "duration": 6,
+      "keys": [
+        {
+          "state": "work",
+          "time": 0
+        },
+        {
+          "state": "bridge-1",
+          "time": 2
+        },
+        {
+          "state": "bridge-2",
+          "time": 4
+        },
+        {
+          "state": "gesture",
+          "time": 6
+        }
+      ]
+    }
+  ],
+  "paint_warp_gains": [
+    0.55,
+    0.55,
+    0.55
+  ],
+  "compatibility": [
+    "Original native work painting plus imagegen-authored registered bridges; no procedural body wiggle",
+    "Work/gesture are main stages; two stable transition paintings; six-second outward arc and six-second reverse",
+    "Original cast scale, floor and paper/cane ownership retained; runtime screenshot review required"
+  ]
+}
