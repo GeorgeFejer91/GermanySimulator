@@ -201,6 +201,82 @@ selection retains its V4 result. `candidate-v5.json` and `root-v5.txt`/`audio-v5
 record this source continuity without relabeling the rendered V2/V3/V4 evidence.
 Physical Android, GPU timing and perceptual listening remain NOT RUN.
 
+The subsequent room-depth follow-up renders every Bürgeramt person in a final
+actor pass after the room and visual effects. It reuses the room depth buffer,
+existing renderer, source paint and shared Spark owner. No asset, dependency,
+framebuffer, worker or frame clock is added. Keep depth testing enabled for
+paint and splats and preserve camera-depth sorting between people. City
+rendering and its resource ownership are unchanged.
+
+Three cold office runs per viewport compare this pass with `1e0a657`, using
+Chrome 154 / Intel Iris Xe D3D11, local uncompressed HTTP, seed 91, requested
+DPR 2 and no CPU throttling. The source override includes both Gaussian imports;
+the shipped assets are identical. Median active sync-interval p95 is 21.5 →
+21.5 ms desktop and 21.1 → 21.5 ms Android portrait emulation (after ranges
+21.5–21.6 / 21.4–21.7). All nine inputs were accepted per run, with no page
+errors. Input p95 medians are 18.6 → 14.7 ms desktop and 26.5 → 17.5 ms
+emulation, with after ranges 13.5–20.1 / 14.1–20.6. Geometry/texture counts
+remain 168/42 and 145/32. Cold office transfer medians are 30.26 / 17.05 MB;
+the office scenario is separate from the root title's 18 MB guard.
+These short samples establish no causal speedup or physical-device result.
+`renderer.info` reports only the final pass, so before/after draw calls are
+not whole-scene comparisons. Evidence is under ignored
+`output/office-top-layer/bench-{before-clear,after-clear}/` and `bench-summary.json`.
+
+The separate six-run root report passes input/error, 18 MB startup, deferred
+resource, title cadence and 1.6 MP buffer guards. Startup transfer ranges are
+13,878,060–16,404,876 bytes desktop and 14,929,503–16,490,324 emulation. Its
+active timing is variable: frame p95 medians 48.2 / 36.8 ms, with ranges
+46.1–235.0 / 31.7–463.4. Another Chrome visual test was observed at completion;
+these root timings are diagnostic, not a controlled performance comparison.
+The earlier overlapping/low-memory baseline and candidate failures, including
+missing p95 and pose-response timeouts, remain under `bench-*/`; they are not
+acceptance evidence. The corrected probe waits for controller admission and
+the existing asset queue, emulates focus only in its isolated headless document,
+and rejects missing p95 while preserving the eight-response input gate.
+Shipping Node selections and exact city delivery checks pass; rendered
+functional coverage is recorded in `BUERGERAMT.md`. Physical Android and GPU
+timing remain NOT RUN.
+
+The later `839c43a` city-dialogue integration adds Merz recordings/catalog
+entries and game/audio cache tags. The three office renderer files and office
+paint assets remain byte-identical to the measured candidate at `72c15c6`;
+office comparison and rendered evidence carry under the source review addenda.
+At that integration, the release checks passed 230 tests. A fresh single cold root
+cache/guard smoke per viewport also passes, with 16,838,504 / 16,490,745 startup
+bytes and nine accepted inputs each. Evidence is under `bench-root-integration/`.
+Those two runs check integration and release guards; they are not a repeated
+performance comparison and retain the same timing/device limitations.
+
+The final room-depth candidate, including the owner-lifetime body-depth sorter,
+is compared against `bc647de` with three cold office runs per viewport. The
+baseline/candidate executed probe hashes are identical (`23a5c265…`); Chrome,
+hardware GPU, seed, DPR, network and CPU settings match the earlier comparison.
+Median active sync-interval p95 is 21.7 → 21.4 ms desktop and 21.3 → 21.4 ms
+portrait emulation (candidate ranges 21.4–21.8 / 21.2–21.6). Input p95 medians
+are 21.3 → 21.0 / 19.6 → 20.1 ms, with candidate ranges 15.4–21.2 /
+17.5–75.2. Each run accepts nine inputs with no page errors; geometry/texture
+counts stay 168/42 and 145/32. Candidate cold office transfer medians are
+30,264,344 / 17,054,104 bytes. No shipped asset changes relative to that base.
+These short shared-desktop samples establish no causal speedup or GPU-time claim.
+Evidence is under `bench-{before-relief-stable-v2,after-relief-final}/` and
+`bench-summary-final.json` in `output/office-top-layer/`.
+
+The initial new baseline mobile input timeout and a subsequent recursive
+test-wrapper error are retained separately, rather than treated as candidate
+performance. The corrected fixture requires one continuous second of controller
+admission before measuring; the two-second per-key response bound and
+eight-response minimum are preserved. The final six-run root report also
+passes download, title-cadence, input, error and drawing-buffer guards. Startup
+transfer ranges are 16,130,518–16,816,721 bytes desktop and
+14,255,824–16,480,251 emulation. Root sync p95 is variable: median 78.4 / 48.1 ms,
+ranges 64.8–93.9 / 47.5–97.7. These are diagnostic root timings, not a controlled
+city-performance comparison. Evidence is under `bench-root-relief-final/`;
+release checks pass 232 tests (231 shipping-workflow tests and the additional
+Merz voice regression), including the new near/far/tunnel ordering case.
+Physical Android, displayed-frame/GPU timing and perceptual listening
+remain NOT RUN.
+
 The office's original painted prop strip adds a file cabinet, paper tower,
 distorted clock, and noticeboard. Its source and provenance are with the cast;
 the game loads its compressed atlas only when the office is entered, alongside

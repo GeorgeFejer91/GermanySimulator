@@ -95,16 +95,82 @@ an in-flight GPU sort finishes before its buffers/worker are freed.
 
 The user's 2026-10-10 foreground requirement keeps the encounter's painted
 speaker solid throughout entry, hold and room restoration. Office characters
-draw after transparent structural surfaces; the selected speaker disables
-room depth testing for that encounter. Native Gaussian patches inherit this
-layer/depth policy, and the shared Spark fallback follows it too. Only the
+draw in a final actor pass after the room and visual effects throughout the
+office scene, including walking, waiting and encounter release. The user's
+follow-up preserves room depth: keep its depth buffer and depth-test every
+person against solid walls and furniture. Use equal actor order and camera-depth
+sorting between people. Native Gaussian patches inherit this layer/depth policy,
+and the shared Spark fallback follows it too. Only the
 selected speaker prepares an action cloud during isolation; other actors retain
-their ordinary sprites and depth policy. On release or an early scene close,
-ordinary depth testing and full painted opacity return. Source and Gaussian ownership stays binary;
+their ordinary sprites on the final actor layer. On encounter release,
+full painted opacity returns while the actor layer remains; an early scene
+close restores the ordinary layer. Source and Gaussian ownership stays binary;
 the Aktenkurier's body remains opaque while its depth morphs and flattens.
 Intrinsic painted transparency is preserved. City sprites retain their normal
 opaque-wall occlusion. The shared action clock, paired paint paths, official
 voices, scene isolation and slow turn/retreat are unchanged.
+
+The room-depth follow-up passes seven silent Chromium renderer fixtures:
+desktop, Android portrait/landscape emulation, reduced motion, missing native
+anchors and room models, Konrad and the clerk. Controlled production-pass pixel
+checks verify solid occlusion, paint above the visual motif, clear alpha edges
+and crossing person depth. Entry/hold/release, resize, planted feet, paused action
+clocks and early-close sprite restoration also pass. Physics and Camera specialists
+independently reviewed the frozen renderer; evidence is under ignored
+`output/office-top-layer/accepted/` and `objects/`. The final desktop fixture
+under `final-assertion/` also passes the ordinary layer mask after an explicit
+render on early close; the seven-profile run predates that stricter assertion and a
+report-limit wording correction. Runtime renderer hashes are unchanged by
+those harness edits. These are forced scenes and geometry probes; physical
+Android and a natural mission playthrough are NOT RUN for this rendering change.
+After integration with `1e0a657`'s background-slot retirement, fresh portrait,
+landscape and desktop handoff fixtures also pass. The prior background native
+painting is retired before speaker admission, its ordinary sprite opacity
+returns to one, and selected paint keeps the final actor layer and room depth.
+Seven fixed action phases, reduced-motion fallback and return to background
+animation are captured under `output/office-top-layer/handoff-final/`. The
+first additional assertion used the sprite's display name instead of its
+character ID and failed; that probe and report remain separately in
+`handoff-rebased/`. The corrected fixture changes no production behavior.
+Fresh focused lifecycle tests pass 13/13. Comparable office measurements and
+the six-run root release guards pass as recorded in `ASSET-POLICY.md`.
+Independent Physics source and Camera source/rendered rebase reviews pass.
+The added handoff assertion checks the selected sprite's layer/depth/order;
+native patch policy is covered by the unchanged owner source and unit checks,
+with actual native-paint visibility checked in the captured frames.
+The later `839c43a` Merz city-dialogue/cache integration leaves all three office
+renderer files byte-identical; both specialist source addenda carry this
+rendered coverage. Fresh release selections and root cache smoke also pass.
+
+After the `bc647de` stronger courier relief was integrated, an actual-body
+overlap probe found Spark sorting at the world origin once all native paint
+anchors retired. Keep the shared owner's transparent comparator until its
+synchronous disposal. Its depth comes from active native anchors, or visible
+body splats when those anchors are gone; the camera-attached tunnel is excluded.
+The corrected desktop, portrait/landscape and reduced-motion GPU pixels verify
+opaque room occlusion, a nearer person in front, a farther person behind, and
+the courier above the visual motif. Production framing, missing-splat fallback
+and restoration pass under `output/office-top-layer/relief-final-all/` (five
+completed profiles). The separate `relief-final-fullbody-diagnostic/` PASS run
+checks feet and flattening with explicit diagnostic FOV/pitch. The first
+full-body run's speech timer advanced past a sampled checkpoint; its failure
+is retained, and the corrected fixture pauses mocked speech during its held
+dispatch samples. Those samples establish neither GPU time nor audio playback.
+The ordering repair changes no relief geometry, movement or action clock.
+Fresh `native-final/` and `relief-final-early-close-root/` fixtures preserve the
+game's actual direct-visit callbacks and assert its closed-visit response after
+mid-effect exit. All fourteen sprite layer/depth/opacity states restore, effects
+dispose and no page errors occur. The direct route keeps its last canvas frame
+behind that response; this is evidence of the closed-visit UI and ownership
+cleanup, not visible city restoration. The earlier noop-callback cleanup run and
+the first missing-callback test failure are retained separately. Ordinary room
+restoration is verified by the completed-encounter production captures above.
+The final `objects-final/` renderer report passes desktop and portrait/landscape
+emulation on both root and direct-3D entry points, including loaded/fallback
+and nonblocking city geometry. Current actual-body, native-paint, grounding and
+root-close evidence is separately reviewed by the Physics and Camera specialists;
+the unchanged source hashes are frozen in `candidate.json`. Device and natural
+mission coverage retains the limits above.
 
 Foreground verification (2026-10-10): the reported floor leak was reproduced
 before the repair. Seven silent renderer fixtures cover desktop, Android

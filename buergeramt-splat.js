@@ -29,19 +29,20 @@ export function omenSplatPose(omen,reducedMotion=false){
   };
 }
 
-export async function createAmtSplatOwner({THREE,renderer,scene,signal,sparkModule,nowMs=()=>performance.now()}){
+export async function createAmtSplatOwner({THREE,renderer,scene,actorLayer=0,signal,sparkModule,nowMs=()=>performance.now()}){
   const {SparkRenderer,SplatMesh,dyno}=sparkModule??await import('./assets/vendor/spark/2.3.1/spark.module.js');
   signal?.throwIfAborted();
   const spark=new SparkRenderer({renderer,autoUpdate:false,enableLod:false,enableDriveLod:false,enableLodFetching:false,
     minSortIntervalMs:0,maxStdDev:Math.sqrt(5),maxPixelRadius:48,depthTest:true,depthWrite:false});
-  spark.visible=false;
+  spark.visible=false;spark.layers?.set(actorLayer);
   scene.add(spark);
   const meshes=new Set(),paints=new Set(),retired=new Map(),freed=new WeakSet();
   let paintDepth=null;
-  // One batch can sit between the two admitted painted actors in Three's
-  // transparent pass. This keeps a farther anchor behind a nearer cloud.
+  // Sort the shared batch at its body anchors, including after native paint
+  // retires. Spark's own origin does not locate the courier in the room.
   const transparentSort=(a,b)=>a.groupOrder-b.groupOrder||a.renderOrder-b.renderOrder||
     (b.object===spark&&paintDepth!==null?paintDepth:b.z)-(a.object===spark&&paintDepth!==null?paintDepth:a.z)||a.id-b.id;
+  renderer.setTransparentSort?.(transparentSort);
   let pending=null,lastUpdate=-Infinity,startedUpdates=0,completedUpdates=0,failure='',disposed=false,disposePromise=null;
   function hide(){spark.visible=false;for(const mesh of meshes)mesh.visible=false;for(const mesh of paints){mesh.visible=false;mesh.userData.anchorActive=false}}
   function fail(error){failure=error?.message||String(error);hide()}
@@ -56,8 +57,8 @@ export async function createAmtSplatOwner({THREE,renderer,scene,signal,sparkModu
   }
   const owner={
     spark,SplatMesh,dyno,
-    attachPaint(mesh){if(disposed||failure)throw new Error('Bürgeramt paint owner unavailable');if(!paints.size)renderer.setTransparentSort?.(transparentSort);paints.add(mesh);scene.add(mesh)},
-    retirePaint(mesh){paints.delete(mesh);mesh.visible=false;scene.remove(mesh);if(!paints.size){paintDepth=null;renderer.setTransparentSort?.(null)}},
+    attachPaint(mesh){if(disposed||failure)throw new Error('Bürgeramt paint owner unavailable');mesh.layers?.set(actorLayer);paints.add(mesh);scene.add(mesh)},
+    retirePaint(mesh){paints.delete(mesh);mesh.visible=false;scene.remove(mesh);if(!paints.size)paintDepth=null},
     attach(mesh){if(disposed||failure)throw new Error('Bürgeramt splat owner unavailable');if(retired.has(mesh)||freed.has(mesh))throw new Error('Retired splat cannot be attached');if(!meshes.has(mesh)){meshes.add(mesh);scene.add(mesh)}return mesh},
     retire(mesh,cleanup){
       if(!mesh||retired.has(mesh)||freed.has(mesh))return;
@@ -67,12 +68,13 @@ export async function createAmtSplatOwner({THREE,renderer,scene,signal,sparkModu
     update(camera,rate=60){
       if(disposed||failure||!camera)return null;
       camera.updateMatrixWorld?.(true);
-      const anchors=[...paints].filter(mesh=>mesh.userData.anchorActive);
+      const visible=[...meshes].filter(mesh=>mesh.visible);
+      const painted=[...paints].filter(mesh=>mesh.userData.anchorActive);
+      const anchors=painted.length?painted:visible.filter(mesh=>!mesh.userData?.amtSortExclude&&typeof mesh.getWorldPosition==='function');
       // Three r186 sorts homogeneous clip Z without dividing by W.
       paintDepth=anchors.length?anchors.reduce((sum,mesh)=>{mesh.updateMatrixWorld(true);const p=mesh.getWorldPosition(camera.position.clone()).applyMatrix4(camera.matrixWorldInverse),e=camera.projectionMatrix.elements;return sum+e[2]*p.x+e[6]*p.y+e[10]*p.z+e[14]},0)/anchors.length:null;
-      const visible=[...meshes].filter(mesh=>mesh.visible);
       spark.renderOrder=Math.max(0,...visible.map(mesh=>mesh.renderOrder??0));
-      if(spark.material)spark.material.depthTest=!visible.some(mesh=>mesh.userData?.amtForeground);
+      if(spark.material)spark.material.depthTest=true;
       spark.visible=visible.length>0;
       if(!visible.length||pending)return pending;
       try{
@@ -92,6 +94,7 @@ export async function createAmtSplatOwner({THREE,renderer,scene,signal,sparkModu
     dispose(){
       if(disposePromise)return disposePromise;
       disposed=true;hide();scene.remove(spark);
+      renderer.setTransparentSort?.(null);
       for(const mesh of [...paints])owner.retirePaint(mesh);
       for(const mesh of [...meshes])owner.retire(mesh);
       signal?.removeEventListener?.('abort',onAbort);
@@ -259,7 +262,7 @@ export async function createOmenSplat({THREE,renderer,scene,signal,owner:sharedO
         }
       }});
     await tunnel.initialized;signal?.throwIfAborted();
-    mesh.visible=false;tunnel.visible=false;
+    mesh.visible=false;tunnel.visible=false;tunnel.userData.amtSortExclude=true;
     owner.attach(mesh);owner.attach(tunnel);
   }catch(error){
     if(mesh)owner.retire(mesh);
