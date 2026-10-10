@@ -105,7 +105,7 @@ test('city audio gates waiting-room speech and releases it when the city clears'
 
 test('city audio defers the optional omen and its tone until the city clears',()=>{
  let cityBusy=true;const h=harness('host',{voice:true,cinematics:true,cityAudioBusy:()=>cityBusy});
- h.enter();h.advanceGame(9);
+ h.enter();h.key('KeyE');h.advanceGame(9);
  assert.equal(h.level.stage,'walk-sign');assert.equal(h.level.omen.phase,'');
  cityBusy=false;h.advanceGame(9);
  assert.equal(h.level.stage,'omen');assert.equal(h.level.omen.phase,'blackout');

@@ -1,5 +1,5 @@
 // One registered Gaussian cloud per actor. The simulation supplies all action time.
-import {createPaintedAnchor,gaussianFlowGlsl} from './buergeramt-painted-anchor.js?v=20261010-liquid';
+import {createPaintedAnchor,gaussianFlowGlsl} from './buergeramt-painted-anchor.js?v=20261010-e-fever';
 const clamp=value=>Math.max(0,Math.min(1,Number.isFinite(value)?value:0));
 const RECORD_BYTES=24,TEXTURE_WIDTH=256,MAX_SAMPLES=20000,MAX_SEGMENTS=32;
 
@@ -202,22 +202,22 @@ export async function createGaussianActor({THREE,owner,manifestUrl,variant='desk
       paired:{count:data.count,rows:data.rows,stride:data.stride,textures,trajectories:selected.trajectories}});
     const onAbort=()=>{api.dispose()};
     const api={
-      update(state,sourceMesh,{visible=true,reducedMotion=false}={}){
+      update(state,sourceMesh,{visible=true,reducedMotion=false,isolation=0}={}){
         if(disposed||failure||!owner.inspect().ready||!state||!sourceMesh){if(mesh)mesh.visible=false;paint?.update(null,sourceMesh,false);return false}
         try{
           if(!visible){mesh.visible=false;paint?.update(null,sourceMesh,false);readyAfterSort=null;return false}
           const sample=sampleArc(manifest,state),height=sourceMesh.geometry?.parameters?.height;
           if(!(height>0)||!(sourceMesh.scale?.y>0))throw new Error('Gaussian source height unavailable');
-          const anchorOpacity=paint?.update(sample,sourceMesh,true,{...state,reducedMotion})??0;
+          const atmosphere=1-clamp(isolation),anchorOpacity=paint?.update(sample,sourceMesh,true,{...state,reducedMotion,atmosphere})??0;
           painted.value=anchorOpacity>0?1:0;
           // Native Gaussian patches carry the complete morph. A second cloud
           // would duplicate its silhouette as a soft halo or ghost trail.
           strength.value=anchorOpacity>0?0:1;
           const color=sourceMesh.material?.color,paintBreath=sourceMesh.material?.userData?.breath?.value??0;
-          const key=[sample.segment,sample.u,anchorOpacity,state.speaking,state.mouthFrame,reducedMotion,sourceMesh.position.x,sourceMesh.position.y,sourceMesh.position.z,sourceMesh.scale.y,sourceMesh.rotation.x,sourceMesh.rotation.y,sourceMesh.rotation.z,color?.r,color?.g,color?.b,paintBreath].join(':');
+          const key=[sample.segment,sample.u,anchorOpacity,state.speaking,state.mouthFrame,reducedMotion,atmosphere,sourceMesh.position.x,sourceMesh.position.y,sourceMesh.position.z,sourceMesh.scale.y,sourceMesh.rotation.x,sourceMesh.rotation.y,sourceMesh.rotation.z,color?.r,color?.g,color?.b,paintBreath].join(':');
           if(key!==lastKey){
             segment.value=sample.segment;blend.value=sample.u;
-            tint.value.set(color?.r??1,color?.g??1,color?.b??1);breath.value=paintBreath;
+            tint.value.set((color?.r??1)*atmosphere,(color?.g??1)*atmosphere,(color?.b??1)*atmosphere);breath.value=paintBreath;
             const pair=manifest.segments[sample.segment];
             const point=(id,name)=>{const marks=stateById.get(id)?.landmarks;return Array.isArray(marks)?marks[name==='nose'?2:3]:marks?.[name]};
             const noseA=point(pair.from,'nose'),noseB=point(pair.to,'nose'),chinA=point(pair.from,'chin'),chinB=point(pair.to,'chin');

@@ -15,7 +15,7 @@ const stationaryClocks={"clerk-desk-1":1.4,"clerk-desk-2":2.2,"amt-konrad-wohnun
 function resetStationaryClocks(){Object.assign(stationaryClocks,{"clerk-desk-1":1.4,"clerk-desk-2":2.2,"amt-konrad-wohnungszettel":0,"amt-mechthild-elternbogen":3.7,"amt-wolfram-rentenbescheid":7.1})}
 function defer(callback,delay){const owner=attempt;const id=setTimeout(()=>{pendingTimers.delete(id);if(active&&owner===attempt)callback()},delay);pendingTimers.add(id);return id}
 function clearTimer(id){clearTimeout(id);pendingTimers.delete(id)}
-function cancelSpeech(){cue++;officeSpeechBusy=false;clerkSpeaking=false;clerkAnimation?.setSpeech(false);if(speechGateTimer!==null)clearTimer(speechGateTimer);speechGateTimer=null;recordedCleanup?.();if(recordedSpeech){recordedSpeech.pause();recordedSpeech.removeAttribute("src");recordedSpeech.load();recordedSpeech=null}try{const engine=window.speechSynthesis;if(!options?.cityAudioActive?.()&&(engine?.speaking||engine?.pending))engine.cancel()}catch{}}
+function cancelSpeech(){feverClock?.release();cue++;officeSpeechBusy=false;clerkSpeaking=false;clerkAnimation?.setSpeech(false);if(speechGateTimer!==null)clearTimer(speechGateTimer);speechGateTimer=null;recordedCleanup?.();if(recordedSpeech){recordedSpeech.pause();recordedSpeech.removeAttribute("src");recordedSpeech.load();recordedSpeech=null}try{const engine=window.speechSynthesis;if(!options?.cityAudioActive?.()&&(engine?.speaking||engine?.pending))engine.cancel()}catch{}}
 let active=false,stage="closed",link=null,number="",registeredName="",activated=false,qrSvg="",queueDisplay="—",queueIndex=0,queueClock=0,ticketWaitCalls=0,ticketSerial=100,lastScanId="",deadline=0,clerkIndex=0,callPending=false,callTriggered=false,callCommitted=false,callArmTimer=null,clockAnchor=null,policeDoneHandler=null,policeStartHandler=null,policeDisconnectHandler=null,options=null,ambientClock=0,ambientIndex=0,officeAudio=null;
 let timing={rttMs:null,oneWayMs:0,jitterMs:0,lastPongAt:null,clockOffsetMs:null,clockUncertaintyMs:null,startLagMs:null,phoneReadyMs:null,phoneFastReadyMs:null,deskStartLagMs:0,deskMsPerChar:55,call:null,cues:{},desk:{}};
 let pingSerial=0,pingTimer=null,hostVoiceStartupMs=null,hostVoiceAttempts=0;const outstandingPings=new Map(),rttSamples=[];
@@ -88,6 +88,38 @@ function stopOmenTone(){
  const now=tone.ctx.currentTime;tone.output.gain.cancelScheduledValues(now);tone.output.gain.setValueAtTime(tone.output.gain.value,now);tone.output.gain.linearRampToValueAtTime(0,now+.025);
  for(const voice of tone.voices)if(!voice.ended){try{voice.source.stop(now+.03)}catch{voice.source.onended()}}
 }
+let feverTone=null;
+function startFeverTone(){
+ const state=feverClock?.inspect(),audio=initOfficeAudio();if(!state?.active||!audio)return;
+ stopFeverTone();const {ctx,fx}=audio,now=ctx.currentTime,output=ctx.createGain(),filter=ctx.createBiquadFilter();
+ output.gain.value=0;filter.type="lowpass";filter.frequency.value=380;output.connect(filter).connect(fx);
+ const register=[0,58,72,84,49,67,62,91,55,45,77,69,51][state.theme.index];
+ const tone={ctx,output,filter,voices:[],id:state.id,cue:state.cue};feverTone=tone;
+ for(const [index,ratio] of [1,1.008,1.5].entries()){
+  const source=ctx.createOscillator(),gain=ctx.createGain();source.type=index===2?"triangle":"sine";source.frequency.value=register*ratio;gain.gain.value=index===2?.035:.06;
+  source.connect(gain).connect(output);const voice={source,gain,ended:false};tone.voices.push(voice);
+  source.onended=()=>{voice.ended=true;source.disconnect();gain.disconnect();if(tone.voices.every(v=>v.ended)){output.disconnect();filter.disconnect()}};
+  source.start(now);source.stop(now+45);
+ }
+ updateFeverTone();
+}
+function updateFeverTone(){
+ const state=feverClock?.inspect(),tone=feverTone;if(!tone)return;
+ if(!state?.active||state.cue!==tone.cue){stopFeverTone();return}
+ // A long pause can outlive the bounded sources. Rebuild only on an owned,
+ // visible resume; old sources already disconnected in their end receipts.
+ if(tone.voices.every(v=>v.ended)){if(!state.paused&&!document.hidden)startFeverTone();return}
+ const now=tone.ctx.currentTime,duck=state.phase==="speaking"?.3:.65;
+ tone.output.gain.setTargetAtTime(document.hidden||state.paused?0:state.strength*duck,now,.09);
+ tone.filter.frequency.setTargetAtTime(280+state.pressure*(700+state.theme.index*95),now,.15);
+ if(officeAudio)officeAudio.ambience.gain.setTargetAtTime(.006*mix.ambience*(1-.92*state.strength),now,.09);
+}
+function stopFeverTone(){
+ const tone=feverTone;if(!tone)return;feverTone=null;const now=tone.ctx.currentTime;
+ tone.output.gain.cancelScheduledValues(now);tone.output.gain.setValueAtTime(tone.output.gain.value,now);tone.output.gain.linearRampToValueAtTime(0,now+.04);
+ for(const voice of tone.voices)if(!voice.ended){try{voice.source.stop(now+.05)}catch{voice.source.onended()}}
+ if(officeAudio)officeAudio.ambience.gain.setTargetAtTime(.006*mix.ambience,now,.15);
+}
 const characterRoutes=[
  {id:"aktenkurier",speed:.75,points:[[-4.8,-7.6],[-4.8,-5.2],[-2.8,-5.2],[-2.8,-7.6]]},
  {id:"archivbotin",speed:.57,points:[[5.5,-7.4],[5.5,-5.2],[3.6,-5.2],[3.6,-7.4]]},
@@ -100,8 +132,9 @@ const characterRoutes=[
 ];
 const characters=characterRoutes.map(route=>({id:route.id,route,x:route.points[0][0],z:route.points[0][1],target:1,direction:"up",mode:"work",pause:1.1,stride:0,workClock:0,animationClock:0,returning:null,encounters:0,sequence:[{mode:"work",duration:1.1}],pending:false,priority:0,attention:0}));
 let patronEncounters={};
-let characterMood=null;
-const omen={used:false,phase:"",strength:0,hold:0,elapsed:0,travel:0,path:[],pathIndex:0,roomTime:0,startDistance:0,resume:"walk-sign",resumeYaw:0,recoverFromYaw:0,speech:null,visit:0,revealTime:0,lifeTime:0,lifeClock:0};
+let characterMood=null,encounterArmed=false;
+const feverClock=window.BuergeramtFever?.create();
+const omen={used:false,requested:false,phase:"",strength:0,hold:0,elapsed:0,travel:0,path:[],pathIndex:0,roomTime:0,startDistance:0,resume:"walk-sign",resumeYaw:0,recoverFromYaw:0,speech:null,visit:0,revealTime:0,lifeTime:0,lifeClock:0};
 const ease=value=>{const t=Math.max(0,Math.min(1,value));return t*t*(3-2*t)};
 function omenLife(){
  const live=["approach","blackout","glare","unwind"].includes(omen.phase),p=live?omen.strength:0,tension=omen.speech?.tension||0;
@@ -125,7 +158,7 @@ function updateOmenSpeech(){
  const blend=left===right?0:Math.max(0,Math.min(1,(index-left.index)/(right.index-left.index)));
  speech.tension=left.tension+(right.tension-left.tension)*blend;speech.semitones=left.semitones+(right.semitones-left.semitones)*blend;
 }
-function resetOmen(){stopOmenTone();omen.used=false;omen.phase="";omen.strength=0;omen.hold=0;omen.elapsed=0;omen.travel=0;omen.path=[];omen.pathIndex=0;omen.roomTime=0;omen.speech=null;omen.visit++;omen.revealTime=0;omen.lifeTime=0;omen.lifeClock=0;omen.resumeYaw=view.yaw;omen.recoverFromYaw=view.yaw;applyMix()}
+function resetOmen(){stopOmenTone();omen.used=false;omen.requested=false;omen.phase="";omen.strength=0;omen.hold=0;omen.elapsed=0;omen.travel=0;omen.path=[];omen.pathIndex=0;omen.roomTime=0;omen.speech=null;omen.visit++;omen.revealTime=0;omen.lifeTime=0;omen.lifeClock=0;omen.resumeYaw=view.yaw;omen.recoverFromYaw=view.yaw;applyMix()}
 function beginOmen(actor){
  const verse=story.omen;
  omen.phase="blackout";omen.strength=1;omen.revealTime=0;actor.pending=false;actor.sequence=[];actor.priority=4;actor.mode="gesture";actor.workClock=0;
@@ -144,7 +177,7 @@ function updateOmen(dt){
  if(omen.phase==="blackout"||omen.phase==="glare")omen.revealTime+=dt;
  if(["walk-sign","waiting"].includes(stage))omen.roomTime+=dt;
  const actor=characters[0];
- if(options?.cinematics!==false&&!options?.cityAudioBusy?.()&&!omen.used&&!activated&&omen.roomTime>1.2&&stage==="walk-sign"&&Math.hypot(actor.x-view.x,actor.z-view.z)<6.2){
+ if(options?.cinematics!==false&&!options?.cityAudioBusy?.()&&!omen.used&&omen.requested&&["walk-sign","waiting"].includes(stage)&&Math.hypot(actor.x-view.x,actor.z-view.z)<6.2){
   const path=omenPath(actor);
   if(!path)return; // A blocked room postpones the optional beat, never walks through a solid.
   omen.used=true;omen.phase="approach";omen.elapsed=0;omen.travel=0;omen.path=path;omen.pathIndex=1;omen.resume=stage;omen.resumeYaw=view.yaw;omen.startDistance=path.slice(1).reduce((sum,point,i)=>sum+Math.hypot(point[0]-path[i][0],point[1]-path[i][1]),0);actor.sequence=[];actor.pending=false;actor.returning=null;actor.priority=4;
@@ -296,8 +329,10 @@ function updateCharacters(dt){
   if(actor.attention===0&&Math.hypot(actor.x-view.x,actor.z-view.z)<2.5){actor.attention=7.5;action(actor,[["look",.72],["work",.4]],1)}
  }
 }
-function nearestCharacter(){if(!["walk-sign","waiting"].includes(stage))return null;let found=null,distance=1.65;for(const actor of characters){if(actor.returning)continue;const d=Math.hypot(view.x-actor.x,view.z-actor.z);if(d<distance){found=actor;distance=d}}for(const [id,patron] of Object.entries(story.patrons)){const d=Math.hypot(view.x-patron.x,view.z-patron.z);if(d<distance){found={id,x:patron.x,z:patron.z,static:true};distance=d}}return found}
+function nearestCharacter(){if(!["walk-sign","waiting"].includes(stage))return null;let found=null,distance=1.65;for(const actor of characters){if(actor.returning)continue;const d=Math.hypot(view.x-actor.x,view.z-actor.z);if(d<distance){found=actor;distance=d}}for(const [id,patron] of Object.entries(story.patrons)){const d=Math.hypot(view.x-patron.x,view.z-patron.z);if(d<distance){found={id,x:patron.x,z:patron.z,static:true};distance=d}}if(!found&&!omen.used&&options?.cinematics!==false&&Math.hypot(view.x-characters[0].x,view.z-characters[0].z)<6.2)found=characters[0];return found}
 function showCharacter(actor){
+ encounterArmed=true;
+ if(actor.id==="aktenkurier"&&!omen.used&&options?.cinematics!==false){omen.requested=true;updateOmen(0);if(omen.phase||options?.cityAudioBusy?.())return;omen.requested=false}
  const entry=actor.static?story.patrons[actor.id]:story.characters[actor.id],index=actor.static?(patronEncounters[actor.id]||0):actor.encounters++,spoken=entry.lines[index%entry.lines.length],resume=stage;
  if(actor.static){patronEncounters[actor.id]=index+1;setStage("character");content(entry.speaker,spoken.line,[{label:"ZURÜCK ZUM VORGANG",run:()=>setStage(resume)}],null,null,null,{id:actor.id,tone:spoken.tone,valence:spoken.valence});return}
  actor.pending=false;actor.sequence=[];actor.priority=3;actor.mode="gesture";actor.workClock=0;actor.animationClock=0;actor.returning=null;setStage("character");content(entry.speaker,spoken.line,[{label:"ZURÜCK ZUM VORGANG",run:()=>{
@@ -306,7 +341,7 @@ function showCharacter(actor){
  }}],null,null,null,{id:actor.id,tone:spoken.tone,valence:spoken.valence});
 }
 function walking(){return ["outside","walk-sign","waiting","walk-counter"].includes(stage)}
-function setStage(next,preserveMovement=false){if(next!==stage&&!preserveMovement)held.clear();stage=next;document.body.classList.toggle("amt-omen",next==="omen");const moving=walking();if(moving){cancelSpeech();clerkAnimation?.request(null);ambient.textContent="";characterMood=null;}root.classList.toggle("walking",moving);walkHud.hidden=!moving;root.classList.toggle("first-person",!!window.Germany3D?.ready);if(moving){objective.textContent=next==="outside"?"BÜRGERAMT · EINGANG":next==="walk-sign"?"QR-SCHILD SCANNEN":next==="waiting"?"AUFRUF ABWARTEN · SCHALTER 3":"IHRE NUMMER · SCHALTER 3 · BEEILEN!";update(0)}}
+function setStage(next,preserveMovement=false){if(next!==stage&&!preserveMovement)held.clear();stage=next;document.body.classList.toggle("amt-omen",next==="omen");const moving=walking();if(moving){encounterArmed=false;cancelSpeech();clerkAnimation?.request(null);ambient.textContent="";characterMood=null;}root.classList.toggle("walking",moving);walkHud.hidden=!moving;root.classList.toggle("first-person",!!window.Germany3D?.ready);if(moving){objective.textContent=next==="outside"?"BÜRGERAMT · EINGANG":next==="walk-sign"?"QR-SCHILD SCANNEN":next==="waiting"?"AUFRUF ABWARTEN · SCHALTER 3":"IHRE NUMMER · SCHALTER 3 · BEEILEN!";update(0)}}
 function displayNumber(value){queueDisplay=value;board.textContent=value}
 function speechReadableMs(text,delivery){return Math.max(3500,Math.min(14000,text.length*55*.96/(delivery?.rate??.96)))}
 function say(text,onComplete,onStart,onBoundary,delivery=null,voiceId="",allowCatalogClip=true){
@@ -365,7 +400,10 @@ function content(who,text,buttons=[],onComplete,onStart,onBoundary,mood=null,del
  for(const item of buttons){const button=document.createElement("button");button.type="button";button.textContent=item.label;
   button.addEventListener("click",()=>{if(!active||owner!==attempt||visibleCue!==cue||button.disabled)return;button.disabled=true;item.run()});actions.append(button)}
  const voiceId=isClerk?story.clerkIdentity.voiceId:story.characters[mood?.id]?.voiceId||story.patrons[mood?.id]?.voiceId||"";
- say(text,onComplete?mode=>{if(isClerk){clerkSpeaking=false;clerkAnimation?.setSpeech(false);clerkBeat=stage==="reply"?"stamp":stage==="cancelled"?"deny":"review";clerkAccent=.65}onComplete(mode)}:null,(mode,recording)=>{if(isClerk){clerkSpeaking=true;clerkPulse=0;clerkAnimation?.setSpeech(true,0);if(!onComplete){const speakingCue=cue;defer(()=>{if(cue===speakingCue){clerkSpeaking=false;clerkAnimation?.setSpeech(false);clerkBeat="review";clerkAccent=.65}},Math.max(1800,Math.min(10000,text.length*55)))}}onStart?.(mode,recording)},(charIndex,event)=>{if(isClerk){clerkPulse++;clerkAnimation?.setSpeech(clerkSpeaking,clerkPulse)}onBoundary?.(charIndex,event)},delivery,voiceId);
+ const fever=encounterArmed&&!omen.phase&&options?.cinematics!==false&&feverClock?.begin({id:characterMood?.id,text,cue,generation:attempt,durationMs:speechReadableMs(text,delivery)});
+ const currentFever=()=>fever&&active&&owner===attempt&&visibleCue===cue&&feverClock.inspect().cue===visibleCue;
+ const hooks=fever?{...delivery,onPause:()=>{if(currentFever())feverClock.pause();delivery?.onPause?.();updateFeverTone()},onResume:()=>{if(currentFever())feverClock.resume();delivery?.onResume?.();updateFeverTone()},onFallback:()=>{if(currentFever())feverClock.fallback();delivery?.onFallback?.()}}:delivery;
+ say(text,onComplete||fever?mode=>{if(isClerk){clerkSpeaking=false;clerkAnimation?.setSpeech(false);clerkBeat=stage==="reply"?"stamp":stage==="cancelled"?"deny":"review";clerkAccent=.65}if(currentFever())feverClock.done();onComplete?.(mode)}:null,(mode,recording)=>{if(currentFever()){feverClock.start(mode,recording);startFeverTone()}if(isClerk){clerkSpeaking=true;clerkPulse=0;clerkAnimation?.setSpeech(true,0);if(!onComplete&&!fever){const speakingCue=cue;defer(()=>{if(cue===speakingCue){clerkSpeaking=false;clerkAnimation?.setSpeech(false);clerkBeat="review";clerkAccent=.65}},Math.max(1800,Math.min(10000,text.length*55)))}}onStart?.(mode,recording)},(charIndex,event)=>{if(currentFever())feverClock.boundary(charIndex,event);if(isClerk){clerkPulse++;clerkAnimation?.setSpeech(clerkSpeaking,clerkPulse)}onBoundary?.(charIndex,event)},hooks,voiceId);
 }
 function setStatus(text){status.textContent=text}
 function distanceTo(target){return Math.hypot(view.x-target.x,view.z-target.z)}
@@ -551,7 +589,7 @@ function ambientStep(dt){
 function update(dt){
  if(!active||document.hidden)return;
  if(window.Germany3D?.ready&&!root.classList.contains("first-person"))root.classList.add("first-person");
- const elapsed=Number.isFinite(dt)?Math.min(.1,Math.max(0,dt)):0;ambientStep(elapsed);
+ const elapsed=Number.isFinite(dt)?Math.min(.1,Math.max(0,dt)):0;if(!document.hidden)feverClock?.advance(elapsed);updateFeverTone();ambientStep(elapsed);
  clerkClock+=elapsed;clerkAccent=Math.max(0,clerkAccent-elapsed);if(!document.hidden)clerkAnimation?.advance(elapsed);
  if(!omen.phase)for(const id of Object.keys(stationaryClocks))if(walking()||characterMood?.id===id)stationaryClocks[id]+=elapsed;
  updateOmen(elapsed);
@@ -580,7 +618,7 @@ function update(dt){
 function interact(){if(!walking()||omen.phase)return;const near=distanceTo(nearbyTarget())<1.9,actor=stage==="waiting"&&near?null:nearestCharacter();if(actor){showCharacter(actor);return}if(!near||stage==="outside"&&Math.abs(view.x)>=1.3)return;
  if(stage==="outside"){view.z=4.8;setStage(activated?"waiting":"walk-sign");setStatus(activated?"WARTENUMMER "+number+" · AUFRUF ABWARTEN":"QR-CODE MIT DEM TELEFON SCANNEN");return}
  if(stage==="walk-sign")return;
- if(stage==="waiting"){setStage("early");content("FRAU KNICK · SCHALTER 3","Steht Ihre Nummer auf der Tafel? Nein? Dann treten Sie zurück! Dass ich hier gerade nichts tue, ist eine dienstliche Tätigkeit.",[{label:"ZURÜCK IN DEN WARTERAUM",run:()=>setStage("waiting")}]);setStatus("FALSCHER AUFRUF · "+queueDisplay);return}showClerk()}
+ if(stage==="waiting"){encounterArmed=true;setStage("early");content("FRAU KNICK · SCHALTER 3","Steht Ihre Nummer auf der Tafel? Nein? Dann treten Sie zurück! Dass ich hier gerade nichts tue, ist eine dienstliche Tätigkeit.",[{label:"ZURÜCK IN DEN WARTERAUM",run:()=>setStage("waiting")}]);setStatus("FALSCHER AUFRUF · "+queueDisplay);return}showClerk()}
 function beginLink(){
  const invitation=BuergeramtLink.invitation();
  const code=qrcode(0,"M");code.addData(BuergeramtLink.phoneUrl(invitation,options.subtitlesOn?.()));code.make();qrSvg=code.createSvgTag({cellSize:5,margin:4,scalable:true});window.Germany3D?.setAmtQr?.(qrSvg);
@@ -616,7 +654,7 @@ function beginLink(){
  });
  currentLink.start().catch(e=>{if(current()&&!terminal())setStatus("Verbindung fehlgeschlagen: "+e.message)});
 }
-function showClerk(){if(!active||!activated||callPending||["cancelled","expired","closed"].includes(stage))return;if(!registeredName){setStatus("VOR- UND NACHNAME AM TELEFON EINTRAGEN");return}view.x=4;view.z=-8.15;view.yaw=0;setStage("counter");const node=story.clerk[clerkIndex];if(clerkIndex===0&&!callTriggered){callTriggered=true;callPending=true;content(node.speaker,"Nummer "+number+"? Beeilen Sie sich! Ich bin sehr beschäftigt. Was? Ihr Telefon klingelt während meiner Vorsprache.",[],null,armCall);return}if(callOutcome!=="decline"||!node)return;const choices=node.choices.map(choice=>({label:choice.label,run:()=>{setStage("reply");content(node.speaker,choice.reply,[{label:clerkIndex===story.clerk.length-1?"FORMULAR A38 ENTGEGENNEHMEN":"WEITER",run:()=>{clerkIndex++;if(clerkIndex<story.clerk.length)showClerk();else finish()}}])}}));content(node.speaker,node.line,choices)}
+function showClerk(){if(!active||!activated||callPending||["cancelled","expired","closed"].includes(stage))return;if(!registeredName){setStatus("VOR- UND NACHNAME AM TELEFON EINTRAGEN");return}encounterArmed=true;view.x=4;view.z=-8.15;view.yaw=0;setStage("counter");const node=story.clerk[clerkIndex];if(clerkIndex===0&&!callTriggered){callTriggered=true;callPending=true;content(node.speaker,"Nummer "+number+"? Beeilen Sie sich! Ich bin sehr beschäftigt. Was? Ihr Telefon klingelt während meiner Vorsprache.",[],null,armCall);return}if(callOutcome!=="decline"||!node)return;const choices=node.choices.map(choice=>({label:choice.label,run:()=>{setStage("reply");content(node.speaker,choice.reply,[{label:clerkIndex===story.clerk.length-1?"FORMULAR A38 ENTGEGENNEHMEN":"WEITER",run:()=>{clerkIndex++;if(clerkIndex<story.clerk.length)showClerk();else finish()}}])}}));content(node.speaker,node.line,choices)}
 function showOutburst(){
  const upset=story.outburst;exit.hidden=true;
  const heard=new Set();let waiting=null,phoneTimeout=null,deskFirst=false,phoneFirst=false,started=false,disconnected=false;
@@ -653,6 +691,7 @@ function showOutburst(){
 }
 function finish(){if(!active||!activated||callPending||callOutcome!=="decline"||clerkIndex!==story.clerk.length)return;const callback=options.onForm;close(false);callback()}
 function close(notify=true){
+ feverClock?.clear();stopFeverTone();
  if(!active)return;const config=options;stopCallSignal();active=false;attempt++;callPending=false;activated=false;callOutcome="";policeDoneHandler=null;policeStartHandler=null;policeDisconnectHandler=null;characterMood=null;
  window.Germany3D?.clearAmtOmenSplat?.();
  window.Germany3D?.clearAmtGaussianAnimations?.();
@@ -662,7 +701,7 @@ function close(notify=true){
  try{officeAudio?.ctx.close()?.catch(()=>{})}catch{}officeAudio=null;held.clear();root.hidden=true;walkHud.hidden=true;mixPanel.open=false;mixPanel.hidden=true;ambient.textContent="";
  document.body.classList.remove("amt-inside");const previous=link;link=null;previous?.send("done");previous?.close();config.music?.(false);if(notify)config.onClose();
 }
-function open(config){if(active)return;resetTiming();hostVoiceStartupMs=null;hostVoiceAttempts=0;attempt++;callOutcome="";options=config;active=true;resetStationaryClocks();clerkIndex=0;callPending=false;callTriggered=false;callCommitted=false;callArmTimer=null;clockAnchor=null;registeredName="";number="";activated=false;lastScanId="";queueClock=0;queueIndex=1;ticketWaitCalls=0;deadline=0;ambientClock=0;clerkClock=0;clerkSpeaking=false;clerkAccent=0;clerkBeat="idle";clerkPulse=0;patronEncounters={};clerkAnimation?.reset(attempt);displayNumber("B-041");view.x=0;view.z=8;view.yaw=0;held.clear();resetCharacters();resetOmen();exit.hidden=false;root.hidden=false;mixPanel.hidden=false;document.body.classList.add("amt-inside");options.music?.(true);beginLink();setStage("outside");setStatus("EINGANG · BÜRGERAMT");const owner=attempt;window.BuergeramtClock?.sample?.().then(anchor=>{if(active&&attempt===owner)clockAnchor=anchor}).catch(()=>{})}
+function open(config){if(active)return;resetTiming();hostVoiceStartupMs=null;hostVoiceAttempts=0;attempt++;callOutcome="";options=config;active=true;resetStationaryClocks();feverClock?.clear();encounterArmed=false;clerkIndex=0;callPending=false;callTriggered=false;callCommitted=false;callArmTimer=null;clockAnchor=null;registeredName="";number="";activated=false;lastScanId="";queueClock=0;queueIndex=1;ticketWaitCalls=0;deadline=0;ambientClock=0;clerkClock=0;clerkSpeaking=false;clerkAccent=0;clerkBeat="idle";clerkPulse=0;patronEncounters={};clerkAnimation?.reset(attempt);displayNumber("B-041");view.x=0;view.z=8;view.yaw=0;held.clear();resetCharacters();resetOmen();exit.hidden=false;root.hidden=false;mixPanel.hidden=false;document.body.classList.add("amt-inside");options.music?.(true);beginLink();setStage("outside");setStatus("EINGANG · BÜRGERAMT");const owner=attempt;window.BuergeramtClock?.sample?.().then(anchor=>{if(active&&attempt===owner)clockAnchor=anchor}).catch(()=>{})}
 function clerkPerformance(){
  const names={idle:0,review:1,raise:2,stamp:3,deny:4,talk:5};
  let mode="idle";
@@ -674,7 +713,7 @@ function clerkPerformance(){
 }
 function captureKey(event){if(event.type==="keyup")held.delete(event.code);if(!active)return;if(event.type==="keydown"&&event.code==="KeyE"&&walking()){event.preventDefault();event.stopImmediatePropagation();if(!event.repeat)interact();return}if(!walking()||omen.phase)return;if(["KeyW","KeyA","KeyS","KeyD","ArrowUp","ArrowDown","ArrowLeft","ArrowRight","ShiftLeft"].includes(event.code)){event.preventDefault();event.stopImmediatePropagation();if(event.type==="keydown")held.add(event.code);else held.delete(event.code)}}
 window.addEventListener("keydown",captureKey,true);window.addEventListener("keyup",captureKey,true);window.addEventListener("blur",()=>held.clear());
-document.addEventListener("visibilitychange",()=>{if(document.hidden)held.clear();updateOmenTone()});
+document.addEventListener("visibilitychange",()=>{if(document.hidden)held.clear();updateOmenTone();updateFeverTone()});
 document.addEventListener("pointermove",event=>{if(active&&walking()&&!omen.phase&&event.buttons===1&&!event.target.closest("button"))view.yaw+=event.movementX*.004});
 document.querySelectorAll("[data-amt-key]").forEach(button=>{const key=button.dataset.amtKey;button.addEventListener("pointerdown",e=>{if(!active||!walking()||omen.phase)return;e.preventDefault();button.setPointerCapture(e.pointerId);held.add(key)});for(const type of ["pointerup","pointercancel","lostpointercapture"])button.addEventListener(type,()=>held.delete(key))});
 document.getElementById("amt-touch-e").addEventListener("click",interact);document.getElementById("amt-leave").addEventListener("click",()=>close());exit.addEventListener("click",()=>close());
@@ -684,5 +723,5 @@ window.BuergeramtLevel={open,replay(config){close(false);open(config)},update,in
  "amt-konrad-wohnungszettel":window.BuergeramtAnimationClock?.ambientPatron(stationaryClocks["amt-konrad-wohnungszettel"],attempt),
  "amt-mechthild-elternbogen":window.BuergeramtAnimationClock?.ambientPatron(stationaryClocks["amt-mechthild-elternbogen"],attempt),
  "amt-wolfram-rentenbescheid":window.BuergeramtAnimationClock?.ambientPatron(stationaryClocks["amt-wolfram-rentenbescheid"],attempt)
-}},get characterMood(){return characterMood},get clerkPerformance(){return clerkPerformance()},get omen(){return{turnProgress:omen.phase==="turn"?1-omen.hold/2.4:0,phase:omen.phase,strength:omen.strength,visit:omen.visit,revealTime:omen.revealTime,life:omenLife(),enabled:options?.cinematics!==false,x:characters[0].x,z:characters[0].z,speech:omen.speech?{...omen.speech}:null}},get registeredName(){return registeredName},get activated(){return activated}};
+}},get characterMood(){return characterMood},get fever(){return feverClock?.inspect()||{active:false,strength:0}},get clerkPerformance(){return clerkPerformance()},get omen(){return{turnProgress:omen.phase==="turn"?1-omen.hold/2.4:0,phase:omen.phase,strength:omen.strength,visit:omen.visit,revealTime:omen.revealTime,life:omenLife(),enabled:options?.cinematics!==false,x:characters[0].x,z:characters[0].z,speech:omen.speech?{...omen.speech}:null}},get registeredName(){return registeredName},get activated(){return activated}};
 })();

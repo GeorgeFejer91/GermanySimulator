@@ -45,12 +45,15 @@ const castPath = resolve(root, 'For-AI/VOICE-CAST.json');
 const catalogPath = resolve(root, 'For-AI/AUDIO-TEXT-LIBRARY.js');
 const candidatePath = resolve(root, 'assets/voices/candidate-dialogue/manifest.json');
 const approvedPath = resolve(root, 'assets/voices/approved-dialogue/manifest.json');
+const feverPath = resolve(root, 'assets/voices/amt-fever/manifest.json');
 const coveragePath = resolve(music, 'GERMANY-SIMULATOR-VOICE-ASSET-COVERAGE.csv');
 const queuePath = resolve(music, 'VOICE-CANDIDATE-REVIEW-QUEUE.csv');
 const reviewPath = resolve(music, 'GermanySimulator normalized voice review 2026-10-09/word-review.json');
 const cast = json(castPath);
 const candidate = json(candidatePath);
 const approved = json(approvedPath);
+const fever = json(feverPath);
+const feverProfiles = new Map(fever.clips.filter(c => c.approval?.status === 'user-approved').map(c => [c.voiceId, c.profileId]));
 const coverage = parseCsv(read(coveragePath).toString('utf8').replace(/^\uFEFF/, ''));
 const queue = parseCsv(read(queuePath).toString('utf8').replace(/^\uFEFF/, ''));
 const review = json(reviewPath);
@@ -95,9 +98,10 @@ for (const clip of candidate.clips) {
 const defaultCounts = new Map();
 const defaultProfiles = new Map();
 for (const recording of Object.values(catalog.recordings)) {
+  if (recording.candidateStatus) continue; // Opt-in metadata is not default playback approval.
   if (byVoice.has(recording.voiceId)) {
     const person=byVoice.get(recording.voiceId),primary=person.secretTunnel?.profileId??person.secretTunnelProfileId;
-    const profiles=[primary,...(person.secretTunnel?.candidateProfiles??[]).map(p=>p.profileId)];
+    const profiles=[primary,...(person.secretTunnel?.candidateProfiles??[]).map(p=>p.profileId),feverProfiles.get(recording.voiceId)].filter(Boolean);
     requireMatch(!recording.profileId||profiles.includes(recording.profileId),`Default recording profile mismatch: ${recording.id}`);
     defaultCounts.set(recording.voiceId,(defaultCounts.get(recording.voiceId) ?? 0) + 1);
     if(recording.profileId)defaultProfiles.set(recording.voiceId,[...new Set([...(defaultProfiles.get(recording.voiceId)??[]),recording.profileId])]);
@@ -142,6 +146,7 @@ const report = {
   sourceSha256: {
     cast: sha256(read(castPath)), catalog: sha256(read(catalogPath)),
     candidateManifest: sha256(read(candidatePath)), approvedManifest: sha256(read(approvedPath)),
+    feverManifest: sha256(read(feverPath)),
     musicCoverageCsv: sha256(read(coveragePath)),
     humanReviewQueueCsv: sha256(read(queuePath)),
     normalizedWordReview: sha256(read(reviewPath)),

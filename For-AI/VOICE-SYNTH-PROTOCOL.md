@@ -4,6 +4,38 @@
 
 ## Bürgeramt fever-dream voice alternatives (2026-10-10)
 
+The subsequent E-interaction pass renders actual speech from these twelve
+alternate references with the cached Chatterbox Multilingual V2 0.1.7 model,
+MIT revision `5bb1f6ee58e50c3b8d408bc82a6d3740c2db6e18`. The separate
+`assets/voices/amt-fever/manifest.json` binds each final MP3 to its exact authored
+speaker/text, alternate UUID, transformed CC0 EmoDB reference hash, seed, raw
+hash, processing, normalization and independent final-encoding ASR. The game
+uses this family in ordinary gameplay following the user's explicit instruction
+“I approve, just implement it” on 2026-10-10. That use approval is recorded in
+each clip and catalogue entry; it is not evidence of perceptual listening and
+does not fabricate the seven-field queue. Horst's approved omen recording
+remains unchanged. Each speaker
+has a playable alternate: 40 clips (4,107,104 bytes) from 42 scripted lines,
+39 with spoken-word-exact ASR and one explicit homophone flag. The two semantic ASR failures (Rüdiger's second line
+and Knick's A38 reply) remain private and use the same-text browser fallback.
+Bärbel's Bon/Bohn transcription is an explicit homophone listening flag, not
+a literal ASR pass. Script correctness and pleasant or frightening delivery
+still require human listening; ASR does not approve either.
+
+Clean speech retains a quiet, fixed pitch-shifted undertone (16%, low-pass
+1,450 Hz, per-speaker ratio 0.78–0.96), without repeated delays or trails.
+Final mono 48 kHz / 128 kbit/s MP3s are measured at -18 LUFS ±0.3 and at most
+-1.5 dBTP. Independent CPU int8 faster-whisper reads the encoded MP3 without
+an expected-script prompt; number spellings are compared by spoken-word
+equivalence. Estimated word onsets are bound to the real media playhead.
+The private family queue and all normalized review takes are in Music's
+`GermanySimulator amt fever listening review 2026-10-10/`. All seven human
+decision fields remain blank. The existing 236-clip primary queue and its
+promotion tool are unchanged. These 40 alternate recordings use direct
+catalogue entries with the actual user approval, as the individually approved
+omen does. Do not pass their queue to the primary promoter as though alternate
+profile bindings or seven listening decisions had been verified.
+
 `buergeramt-voice-profiles.js` defines distinct, intelligible Kafkaesque fever-dream delivery for the eight moving regulars, Brunhilde Knick, and three named patrons. Its `window.BuergeramtVoiceProfiles.byVoiceId` entries hold demeanor, rhythm, texture, an exact existing sample line, a **non-spoken** synthesis brief, the saved `candidateProfileId` with `candidateStatus: "private-unlistened"`, and immutable browser `rate`/`pitch` hints; `deliveryFor(voiceId)` returns those two browser hints or `null`. Horst's omen fallback remains `0.82`/`0.72`, and its user-approved candidate-2 recording remains the default at that exact cue. The two decorative desk figures share Brunhilde's identity and receive no extra speaker profile.
 
 The installed Secret Tunnel v6 native CLI saved the following **private alternate profile candidates** from lightly pitch-shifted and band-limited copies of each speaker's existing EmoDB reference. These are additional profile UUIDs, not replacements for the primary UUIDs in `VOICE-CAST.json` or for Horst's official candidate 2:
@@ -23,9 +55,9 @@ The installed Secret Tunnel v6 native CLI saved the following **private alternat
 | `amt-mechthild-elternbogen` | `2946f9d627084b68933cb72f64bc32b7` |
 | `amt-wolfram-rentenbescheid` | `65ebfa45e9394ccb9b4f4f5075ab672c` |
 
-Full per-speaker source UUID, original and transformed reference SHA-256, exact FFmpeg filter, saved profile name/reference SHA-256, and CC0-1.0 source declaration are in the private `output/amt-fever-voices/private-profiles.json` receipt; transformed WAVs are under the Music library's `AMT-FEVER-VOICE-REFERENCES/`, outside the shipped game. The reference source is the Berlin Database of Emotional Speech original release already documented in `VOICE-CAST.json`; Horst's new *private* alternate uses his primary EmoDB reference, not the user-selected YouTube source of official candidate 2. No synthesis model rendered an utterance in this pass, so model name/license for a generated take are **not applicable**. The native CLI `list` operation and on-disk SHA-256 comparison verified all twelve saved names, UUIDs, uploaded originals, and normalized references. No one listened to these transformed references or generated speech; timbre and intelligibility remain unapproved, and no cloned MP3 or new default game recording was added. Any later take needs exact-text, rights, model, normalization, ASR, and human listening review under this protocol.
+Full per-speaker source UUID, original and transformed reference SHA-256, exact FFmpeg filter, saved profile name/reference SHA-256, and CC0-1.0 source declaration are in the private `output/amt-fever-voices/private-profiles.json` receipt; transformed WAVs are under the Music library's `AMT-FEVER-VOICE-REFERENCES/`, outside the shipped game. The reference source is the Berlin Database of Emotional Speech original release already documented in `VOICE-CAST.json`; Horst's new *private* alternate uses his primary EmoDB reference, not the user-selected YouTube source of official candidate 2. The initial profile-saving pass rendered no utterance; the later default speech pass and explicit user use approval are recorded above. The native CLI `list` operation and on-disk SHA-256 comparison verified all twelve saved names, UUIDs, uploaded originals, and normalized references. Perceptual listening to these transformed references and new speech has not been verified. The user explicitly approved default use of the forty eligible recordings; no listening outcome is inferred from that instruction.
 
-The per-profile release audit is `GERMANY-SIMULATOR-VOICE-RELEASE-READINESS.json` in the shared Music library. Refresh it with `node tools/audit-voice-release-readiness.mjs --music-root "<German emotional voice databases>"`; add `--check` to detect stale inputs without writing. It joins the game cast, direct default `recordings` ownership, opt-in dialogue candidates, normalized Whisper diagnostics, private audition coverage, and human review queue by voice ID, profile UUID, script, and audio hash. All 56 named cast bindings have saved audio somewhere; Horst now has one direct default recording using his second candidate profile below, while 53 cast bindings have 236 opt-in dialogue candidates. The report records the actual default recording profile UUID separately from the primary binding. None of the 236 bulk candidates has all human approval fields marked yes. Legacy `targetVoiceId` is an editorial destination and does not make its recording use the new cloned voice. Do not describe profile creation, an opt-in clip, or a Whisper score as an integrated default game voice.
+The per-profile release audit is `GERMANY-SIMULATOR-VOICE-RELEASE-READINESS.json` in the shared Music library. Refresh it with `node tools/audit-voice-release-readiness.mjs --music-root "<German emotional voice databases>"`; add `--check` to detect stale inputs without writing. It joins the game cast, direct default `recordings` ownership, opt-in dialogue candidates, normalized Whisper diagnostics, private audition coverage, and human review queue by voice ID, profile UUID, script, and audio hash. All 56 named cast bindings have saved audio somewhere; twelve Bürgeramt bindings now have forty direct fever recordings, and Horst retains his additional official candidate-two omen below, while 53 cast bindings have 236 opt-in primary dialogue candidates. The report records the actual default recording profile UUID separately from the primary binding. None of the 236 bulk candidates has all human approval fields marked yes. Legacy `targetVoiceId` is an editorial destination and does not make its recording use the new cloned voice. Do not describe profile creation, an opt-in clip, or a Whisper score as an integrated default game voice.
 
 **Horst Stempelmann / Aktenkurier, official candidate 2 (2026-10-09).** The user listened to the requested audition and explicitly instructed: “very good, I like this profile, save it as a second official voice profile candidate and make this the official audio of the aktenkurier scene”. Preserve primary candidate 1 (`c4c533edd860444e9e02ce0d22a78e8d`, EmoDB CC0). The additional saved Secret Tunnel profile is `09b19a96ec8848138ab0a0910af09ece`, named `GS Horst Stempelmann (Aktenkurier) · official candidate 2 · ominous`, using the first 30 seconds of the user-selected YouTube source. `VOICE-CAST.json` and the Music cast projection retain both identities. Only “Wer die Finsternis sieht, hat sie selbst gewählt!” is official scene audio: `assets/voices/horst-stempelmann/omen-candidate-02.mp3`, clip `aktenkurier-omen-candidate-02`. The other two auditions remain private and unapproved for gameplay. This individually approved clip is a direct `recordings` entry with the exact human instruction, not a fabricated seven-field approval of the separate 236-clip queue. Source/license/hash and renderer records are in [`assets/voices/LICENSES.md`](../assets/voices/LICENSES.md); source rights were not independently verified and no CC0 source claim is made. The saved reference was rendered with Chatterbox Multilingual V2 0.1.7 (MIT model revision `5bb1f6ee58e50c3b8d408bc82a6d3740c2db6e18`) after the native renderer failed. The approved normalized MP3 is unchanged: 77,612 bytes, 4.760 s, mono 24 kHz, -18.19 LUFS and -2.34 dBTP. Independent German ASR matched all authored words; the user's listening acceptance is separate evidence.
 

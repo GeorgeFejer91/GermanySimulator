@@ -74,7 +74,7 @@ export function createAmtGaussianScene({THREE,renderer,scene,queueLoad,mobile=fa
         slots.set(item.id,entry);
         const prepare=async()=>{
           if(request.signal.aborted||controller.signal.aborted||document.hidden)return null;
-          const [module,shared]=await Promise.all([import('./buergeramt-gaussian-animation.js?v=20261010-liquid'),getOwner()]);
+          const [module,shared]=await Promise.all([import('./buergeramt-gaussian-animation.js?v=20261010-e-fever'),getOwner()]);
           request.signal.throwIfAborted();
           return module.createGaussianActor({THREE,owner:shared,manifestUrl:`./assets/buergeramt/animation/${item.manifestId??item.id}.json?v=20261010-cast`,variant:mobile?'mobile':'desktop',signal:request.signal,queueLoad:enqueue});
         };
@@ -94,7 +94,8 @@ export function createAmtGaussianScene({THREE,renderer,scene,queueLoad,mobile=fa
       // Preparation never replaces a painting halfway through an action.
       const atMain=state&&safeAnchor(item);
       if(eligible&&atMain)entry.admitted=true;
-      entry.effect.update(state,item.actor.mesh,{visible:eligible&&entry.admitted,reducedMotion:reducedMotion.matches});
+      const fever=level.fever,isolation=fever?.active&&fever.id!==item.id?fever.strength:0;
+      entry.effect.update(state,item.actor.mesh,{visible:eligible&&entry.admitted,reducedMotion:reducedMotion.matches,isolation});
       if(entry.effect.inspect().visible){item.actor.mesh.material.opacity=0}
     }
   }

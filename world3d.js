@@ -1,4 +1,4 @@
-import {createAmtGaussianScene} from './buergeramt-gaussian-scene.js?v=20261010-cast';
+import {createAmtGaussianScene} from './buergeramt-gaussian-scene.js?v=20261010-e-fever';
 const THREE_URL="https://cdn.jsdelivr.net/npm/three@0.186.0/build/three.module.js";
 const GLTF_LOADER_URL="https://cdn.jsdelivr.net/npm/three@0.186.0/examples/jsm/loaders/GLTFLoader.js";
 function buergeramtDoorRadiance(time,reducedMotion=false){
@@ -1235,6 +1235,8 @@ function showRendererFailure(error){
       actor.mesh.material.userData.breath.value=breath;
       actor.mesh.rotation.y=Math.atan2(amtCamera.position.x-actor.mesh.position.x,amtCamera.position.z-actor.mesh.position.z);
       actor.mesh.scale.set(1,1,1);actor.mesh.position.y=actor.mesh.geometry.parameters.height/2;
+      const id=actor.lead?'clerk':actor.animationId??actor.id,fogExempt=level.fever?.active&&level.fever.id===id;
+      if(actor.mesh.material.fog===fogExempt){actor.mesh.material.fog=!fogExempt;actor.mesh.material.needsUpdate=true}
     }
   }
   const amtNeutral=new T.Color(0xffffff),amtTone={dread:new T.Color(0xaeb3c9),warning:new T.Color(0xc7adb8),procedural:new T.Color(0xc0c8c0),relief:new T.Color(0xd6c5a5)};
@@ -1251,7 +1253,7 @@ function showRendererFailure(error){
       if(close&&!actor.detail){const url=`./assets/buergeramt/characters/${actor.id}-detail.webp?v=20261007-paint-detail`;
         actor.detail=amtTexture(url,undefined,error=>console.warn("Bürgeramt detail unavailable",actor.id,error));}
       const omen=level.omen,facePlayer=actor.id==="aktenkurier"&&["approach","blackout","glare","unwind"].includes(omen.phase);
-      const fogExempt=actor.id==="aktenkurier"&&!!omen.phase;
+      const fogExempt=actor.id==="aktenkurier"&&!!omen.phase||level.fever?.active&&level.fever.id===actor.id;
       if(actor.mesh.material.fog===fogExempt){actor.mesh.material.fog=!fogExempt;actor.mesh.material.needsUpdate=true}
       const turning=actor.id==="aktenkurier"&&omen.phase==="turn",departing=actor.id==="aktenkurier"&&["depart","recover"].includes(omen.phase);
       const heading=state.heading??({down:0,right:Math.PI/2,up:Math.PI,left:-Math.PI/2}[state.direction]??0);
@@ -1304,12 +1306,59 @@ function showRendererFailure(error){
   const callCanvas=document.createElement("canvas");callCanvas.width=512;callCanvas.height=256;const callCtx=callCanvas.getContext("2d");const callTexture=new T.CanvasTexture(callCanvas);callTexture.colorSpace=T.SRGBColorSpace;
   ab(2.6,.9,.11,screen,0,3.33,-4.22);
   const callMesh=new T.Mesh(new T.PlaneGeometry(2.3,.62),new T.MeshBasicMaterial({map:callTexture}));callMesh.position.set(0,3.35,-4.151);amtScene.add(callMesh);
-  const omenScene=new T.Scene(),omenCamera=new T.OrthographicCamera(-1,1,1,-1,0,1),omenFocus=new T.Vector3();
+  const omenScene=new T.Scene(),omenCamera=new T.OrthographicCamera(-1,1,1,-1,0,1),omenFocus=new T.Vector3(),feverCorner=new T.Vector3();
   const omenMaterial=new T.ShaderMaterial({transparent:true,depthTest:false,depthWrite:false,
-    uniforms:{focus:{value:new T.Vector2(.5,.5)},radius:{value:new T.Vector2(.25,.45)},strength:{value:0},clock:{value:0},reveal:{value:0}},
+    uniforms:{focus:{value:new T.Vector2(.5,.5)},radius:{value:new T.Vector2(.25,.45)},bodyWindow:{value:new T.Vector4(0,0,1,1)},strength:{value:0},clock:{value:0},reveal:{value:0},theme:{value:0},tint:{value:new T.Color()},progress:{value:0}},
     vertexShader:"varying vec2 spotUv;void main(){spotUv=uv;gl_Position=vec4(position.xy,0.0,1.0);}",
     fragmentShader:`varying vec2 spotUv;uniform vec2 focus;uniform vec2 radius;
-      uniform float strength;uniform float clock;uniform float reveal;
+      uniform vec4 bodyWindow;uniform float strength;uniform float clock;uniform float reveal;uniform float theme;uniform vec3 tint;uniform float progress;
+      float lineInk(float d,float width){return exp(-d*d/(width*width));}
+      float boxInk(vec2 p,vec2 b){vec2 q=abs(p)-b;return lineInk(abs(max(q.x,q.y)),.018);}
+      mat2 rot(float a){return mat2(cos(a),-sin(a),sin(a),cos(a));}
+      float digit(vec2 p,float n){
+        // Seven-segment bureaucracy, continuously transported rather than flashing.
+        float a=step(abs(p.x),.12)*lineInk(p.y-.22,.017),d=step(abs(p.x),.12)*lineInk(p.y+.22,.017),g=step(abs(p.x),.12)*lineInk(p.y,.017);
+        float b=lineInk(p.x-.13,.017)*step(abs(p.y-.11),.10),c=lineInk(p.x-.13,.017)*step(abs(p.y+.11),.10);
+        float e=lineInk(p.x+.13,.017)*step(abs(p.y+.11),.10),f=lineInk(p.x+.13,.017)*step(abs(p.y-.11),.10);
+        return n<.5?a+b+c+d+e+f:n<1.5?b+c:n<2.5?a+b+g+e+d:n<3.5?a+b+g+c+d:n<4.5?f+g+b+c:n<5.5?a+f+g+c+d:n<6.5?a+f+g+c+d+e:n<7.5?a+b+c:n<8.5?a+b+c+d+e+f+g:a+b+c+d+f+g;
+      }
+      float motif(vec2 p,float t){
+        float m=0.;
+        if(theme<1.5){m=lineInk(length(p)-1.15-.10*sin(t),.04);}
+        else if(theme<2.5){ // archive drawers: depth compresses around the witness
+          vec2 q=vec2(p.x*(1.+.18*sin(p.y*.7+t)),p.y+t*.22);vec2 c=mod(q+vec2(.75,.22),vec2(1.5,.44))-vec2(.75,.22);
+          m=boxInk(c,vec2(.64,.17))+lineInk(length(c-vec2(0.,.015))-.055,.012);
+        }else if(theme<3.5){ // forms bend along one continuous fold
+          vec2 q=rot(.12*sin(t*.3))*p;q.x+=.25*sin(q.y*.8+t);vec2 c=mod(q+vec2(.7,.85),vec2(1.4,1.7))-vec2(.7,.85);
+          m=boxInk(c,vec2(.54,.71))+lineInk(c.x-.15*sin(c.y*3.+t),.018)+.3*lineInk(sin(c.y*22.),.13)*step(abs(c.x),.43);
+        }else if(theme<4.5){
+          vec2 q=vec2(p.x,p.y+t*.18),cell=floor((q+vec2(.4,.5))/vec2(.8,1.));vec2 c=mod(q+vec2(.4,.5),vec2(.8,1.))-vec2(.4,.5);
+          float n=mod(abs(cell.x+cell.y*3.),10.);m=digit(c,n)+.15*boxInk(c,vec2(.32,.39));
+        }else if(theme<5.5){ // phone windows sink; no ringing flash
+          vec2 q=rot(.08*sin(t*.25))*p;q.y+=t*.12;vec2 c=mod(q+vec2(.55,.85),vec2(1.1,1.7))-vec2(.55,.85);
+          m=boxInk(c,vec2(.28,.55))+lineInk(length(c-vec2(0.,-.43))-.035,.012)+.5*lineInk(c.y-.11*sin(c.x*10.+t),.025)*step(abs(c.x),.21);
+        }else if(theme<6.5){
+          vec2 q=p;q.x+=.24*sin(q.y*.9+t*.4);float edge=lineInk(abs(q.x)-1.3,.022);float teeth=.3*lineInk(abs(q.x)-1.29-.05*sin(q.y*35.),.018);
+          m=edge+teeth+.5*lineInk(sin((q.y+t*.20)*28.),.13)*step(abs(q.x),1.23);
+        }else if(theme<7.5){
+          for(int i=0;i<6;i++){float z=float(i)*.28;vec2 q=rot(.10*sin(t*.18+z))*p;m+=boxInk(q,vec2(.95+z,.9+z*.8))*(.65-z*.2);}
+        }else if(theme<8.5){
+          vec2 q=vec2(p.x,p.y+t*.12),c=mod(q+vec2(.6,.8),vec2(1.2,1.6))-vec2(.6,.8);
+          m=boxInk(c,vec2(.30,.50))+lineInk(length(c-vec2(0.,.40))-.31,.018)*step(.40,c.y)+.4*lineInk(c.y+.1,.02)*step(abs(c.x),.23);
+        }else if(theme<9.5){
+          vec2 q=rot(t*.10)*p;float r=length(q);m=lineInk(r-1.38-.10*progress,.032)+lineInk(r-1.65,.018);
+          m+=.45*lineInk(sin(atan(q.y,q.x)*24.),.15)*lineInk(r-1.53,.09);
+        }else if(theme<10.5){
+          vec2 q=p;q.x+=.17*sin(q.y+t*.3);vec2 c=mod(q+vec2(.9,.8),vec2(1.8,1.6))-vec2(.9,.8);
+          m=boxInk(c,vec2(.73,.62))+boxInk(c-vec2(.28,.12),vec2(.24,.28))+lineInk(c.x+.24,.016)*step(abs(c.y),.60);
+        }else if(theme<11.5){
+          vec2 q=p;q.y+=t*.11;vec2 c=mod(q+vec2(.9,.20),vec2(1.8,.40))-vec2(.9,.20);
+          float blank=smoothstep(-.6,.6,sin(q.y*.8-t*.2));m=boxInk(c,vec2(.82,.14))+.4*lineInk(c.y,.018)*step(abs(c.x),.65)*blank;
+        }else{
+          vec2 q=rot(-t*.08)*p;float r=length(q),a=atan(q.y,q.x);m=lineInk(r-1.35,.023)+.55*lineInk(sin(a*12.),.12)*lineInk(r-1.24,.10);
+          m+=lineInk(q.x*cos(t*.13)+q.y*sin(t*.13),.024)*smoothstep(.8,1.,r)*(1.-smoothstep(1.18,1.4,r));
+        }return min(1.,m);
+      }
       void main(){
         vec2 p=(spotUv-focus)/radius;float d=length(p);
         float dark=smoothstep(.66,1.04,d),halo=exp(-pow((d-.86)/.13,2.0));
@@ -1317,25 +1366,58 @@ function showRendererFailure(error){
         vec3 color=mix(vec3(.003,.002,.007),ink,halo);
         // The moving tunnel is now a Gaussian volume. This only seals its edges.
         float window=exp(-pow((d-1.02)/.42,2.0));
-        gl_FragColor=vec4(color,strength*clamp(dark*.99+halo*.27-reveal*window*.60,0.0,.995));
+        if(theme>.5){
+          // Slow liquid space around one clear painted body; never a second body.
+          vec2 q=p*(1.+.035*sin(d*.8-clock*.2));float marks=motif(q,clock);
+          vec2 edge=max(max(bodyWindow.xy-spotUv,spotUv-bodyWindow.zw),vec2(0.));
+          float outside=smoothstep(.015,.085,length(edge));color=vec3(.004,.003,.008)+tint*(marks*.34+halo*.045)*outside;
+          gl_FragColor=vec4(color,strength*outside*.985);
+        }else gl_FragColor=vec4(color,strength*clamp(dark*.99+halo*.27-reveal*window*.60,0.0,.995));
       }`
   });
   omenScene.add(new T.Mesh(new T.PlaneGeometry(2,2),omenMaterial));
+  function projectAmtFeverWindow(actor){
+    // Protect the visible painting, including the face at very close E distances.
+    // Four authored plane corners are enough; no per-frame scene bounds traversal.
+    const positions=actor.mesh.geometry.attributes.position;let x0=1,y0=1,x1=0,y1=0;
+    for(let i=0;i<positions.count;i++){
+      feverCorner.fromBufferAttribute(positions,i).applyMatrix4(actor.mesh.matrixWorld).project(amtCamera);
+      const x=T.MathUtils.clamp((feverCorner.x+1)/2,0,1),y=T.MathUtils.clamp((feverCorner.y+1)/2,0,1);
+      x0=Math.min(x0,x);x1=Math.max(x1,x);y0=Math.min(y0,y);y1=Math.max(y1,y);
+    }
+    const uniforms=omenMaterial.uniforms;uniforms.bodyWindow.value.set(x0,y0,x1,y1);
+    uniforms.focus.value.set((x0+x1)/2,(y0+y1)/2);
+    uniforms.radius.value.set(Math.max(.18,(x1-x0)*.65),Math.max(.32,(y1-y0)*.65));
+  }
   const amtReducedMotion=matchMedia("(prefers-reduced-motion: reduce)");
-  const amtEnvironment=new T.Group(),amtIsolation={value:0},amtIsolationMaterials=new WeakSet();
+  const amtEnvironment=new T.Group(),amtActorEnvironment=new T.Group(),amtIsolation={value:0},amtIsolationMaterials=new WeakSet(),amtStructuralMaterials=new Map();
   function isolateAmtMaterials(root){root.traverse(object=>{
     for(const material of (Array.isArray(object.material)?object.material:object.material?[object.material]:[])){
       if(amtIsolationMaterials.has(material))continue;
       amtIsolationMaterials.add(material);
       const compile=material.onBeforeCompile,key=material.customProgramCacheKey();
-      material.onBeforeCompile=function(shader,renderer){compile.call(this,shader,renderer);shader.uniforms.amtIsolation=amtIsolation;
-        shader.fragmentShader="uniform float amtIsolation;\n"+shader.fragmentShader.replace("#include <opaque_fragment>","outgoingLight *= 1.0 - amtIsolation;\n#include <opaque_fragment>");};
+      const keep={value:0};material.userData.amtKeep=keep;
+      material.onBeforeCompile=function(shader,renderer){compile.call(this,shader,renderer);shader.uniforms.amtIsolation=amtIsolation;shader.uniforms.amtKeep=keep;
+        shader.fragmentShader="uniform float amtIsolation;uniform float amtKeep;\n"+shader.fragmentShader.replace("#include <opaque_fragment>","outgoingLight *= 1.0 - amtIsolation * (1.0 - amtKeep);\n#include <opaque_fragment>");};
       material.customProgramCacheKey=()=>key+":omen-isolation";material.needsUpdate=true;
     }
   })}
   // A parent preserves authored child visibility and material state on restoration.
   for(const object of [...amtScene.children])if(object!==amtMoving[0].mesh)amtEnvironment.add(object);
   isolateAmtMaterials(amtEnvironment);amtScene.add(amtEnvironment);
+  isolateAmtMaterials(amtMoving[0].mesh);
+  // Structural desks can occlude a seated patron. Fade them as surfaces rather
+  // than leaving an opaque black rectangle in front of the isolated painting.
+  for(const actor of [...amtCharacters,...amtMoving])if(actor!==amtMoving[0])amtActorEnvironment.add(actor.mesh);
+  amtScene.add(amtActorEnvironment);
+  amtEnvironment.traverse(object=>{for(const material of(Array.isArray(object.material)?object.material:object.material?[object.material]:[])){
+    if(!amtStructuralMaterials.has(material))amtStructuralMaterials.set(material,{opacity:material.opacity,transparent:material.transparent,depthWrite:material.depthWrite});
+  }});
+  function fadeAmtStructure(strength){for(const [material,original]of amtStructuralMaterials){
+    const fading=strength>0;material.opacity=original.opacity*(1-strength);
+    const transparent=fading||original.transparent;if(material.transparent!==transparent){material.transparent=transparent;material.needsUpdate=true}
+    material.depthWrite=fading?false:original.depthWrite;
+  }}
   const amtGaussian=createAmtGaussianScene({THREE:T,renderer,scene:amtScene,queueLoad:bridge.queueAssetLoad,mobile:amtMobile,reducedMotion:amtReducedMotion});
   let amtOmenSplat=null,amtOmenRequest=null,amtOmenVisit=-1,amtOmenSkipped=false,amtOmenFailure="";
   function clearAmtOmenSplat(){
@@ -1379,12 +1461,25 @@ function showRendererFailure(error){
     if(!level||!level.active&&!document.body.classList.contains("amt-direct-mode")){
       if(amtOmenSplat||amtOmenRequest)clearAmtOmenSplat();
       amtGaussian.clear();
+      amtIsolation.value=0;amtEnvironment.visible=true;amtActorEnvironment.visible=true;fadeAmtStructure(0);
       if(amtHiDpi){amtHiDpi=false;resize()}
       return false;
     }
     if(!amtHiDpi){amtHiDpi=true;resize()}
-    loadAmtImages();amtIsolation.value=level.omen.life.isolation;amtEnvironment.visible=amtIsolation.value<.9999;const darkness=Math.max(level.omen.strength,amtIsolation.value);amtScene.fog.density=.46*Math.pow(darkness,1.2);amtScene.background.copy(amtDayColor).lerp(amtScene.fog.color,darkness);const view=level.view;amtCamera.position.set(view.x,1.68,view.z);amtCamera.rotation.set(0,-view.yaw,0);if(level.qrSvg)setAmtQr(level.qrSvg);const now=performance.now();animateAmtCharacters(now,level);animateAmtMoving(now,level);amtGaussian.prepareGeneration(level.clerkPerformance.animation?.generation??0);updateAmtOmenSplat(level);amtGaussian.update(level,amtCharacters,amtMoving,amtCamera);amtGaussian.render(amtCamera);const call=level.queueDisplay;if(call!==lastCall){lastCall=call;callCtx.fillStyle="#152527";callCtx.fillRect(0,0,512,256);callCtx.textAlign="center";callCtx.textBaseline="middle";callCtx.fillStyle="#c94839";callCtx.font="bold 112px monospace";callCtx.fillText(call,256,135,460);callTexture.needsUpdate=true}renderer.render(amtScene,amtCamera);
-    const omen=level.omen;if(omen.strength>0){omenFocus.set(omen.x,1.04,omen.z).project(amtCamera);omenMaterial.uniforms.focus.value.set((omenFocus.x+1)/2,(omenFocus.y+1)/2);omenMaterial.uniforms.radius.value.set(Math.min(.43,.31/Math.max(.75,innerWidth/innerHeight)),.47);omenMaterial.uniforms.strength.value=omen.strength;omenMaterial.uniforms.clock.value=amtReducedMotion.matches?0:omen.life.time;omenMaterial.uniforms.reveal.value=amtReducedMotion.matches?0:amtOmenSplat?.inspect().reveal||0;renderer.autoClear=false;renderer.render(omenScene,omenCamera);renderer.autoClear=true}
+    loadAmtImages();const fever=level.fever;
+    amtIsolation.value=Math.max(level.omen.life.isolation,fever?.strength||0);amtEnvironment.visible=amtIsolation.value<.9999;amtActorEnvironment.visible=level.omen.life.isolation<.9999;fadeAmtStructure(fever?.strength||0);
+    for(const actor of [...amtCharacters,...amtMoving]){const id=actor.lead?'clerk':actor.animationId??actor.id;const keep=actor.mesh.material.userData.amtKeep;if(keep)keep.value=level.omen.phase&&id==='aktenkurier'||fever?.active&&id===fever.id?1:0}
+    const darkness=Math.max(level.omen.strength,amtIsolation.value);amtScene.fog.density=.46*Math.pow(darkness,1.2);amtScene.background.copy(amtDayColor).lerp(amtScene.fog.color,darkness);const view=level.view;amtCamera.position.set(view.x,1.68,view.z);amtCamera.rotation.set(0,-view.yaw,0);if(level.qrSvg)setAmtQr(level.qrSvg);const now=performance.now();animateAmtCharacters(now,level);animateAmtMoving(now,level);amtGaussian.prepareGeneration(level.clerkPerformance.animation?.generation??0);updateAmtOmenSplat(level);amtGaussian.update(level,amtCharacters,amtMoving,amtCamera);amtGaussian.render(amtCamera);const call=level.queueDisplay;if(call!==lastCall){lastCall=call;callCtx.fillStyle="#152527";callCtx.fillRect(0,0,512,256);callCtx.textAlign="center";callCtx.textBaseline="middle";callCtx.fillStyle="#c94839";callCtx.font="bold 112px monospace";callCtx.fillText(call,256,135,460);callTexture.needsUpdate=true}renderer.render(amtScene,amtCamera);
+    const omen=level.omen,themed=fever?.active&&fever.strength>0,selected=themed?[...amtCharacters,...amtMoving].find(actor=>(actor.lead?'clerk':actor.animationId??actor.id)===fever.id):null;
+    if(omen.strength>0||selected){
+      const uniforms=omenMaterial.uniforms;
+      if(selected)projectAmtFeverWindow(selected);
+      else{omenFocus.set(omen.x,1.04,omen.z).project(amtCamera);uniforms.focus.value.set((omenFocus.x+1)/2,(omenFocus.y+1)/2);uniforms.radius.value.set(Math.min(.43,.31/Math.max(.75,innerWidth/innerHeight)),.47)}
+      uniforms.strength.value=themed?fever.strength:omen.strength;uniforms.clock.value=amtReducedMotion.matches?0:themed?fever.time*fever.theme.speed:omen.life.time;
+      uniforms.theme.value=themed?fever.theme.index:0;uniforms.progress.value=themed?fever.progress:0;if(themed)uniforms.tint.value.setRGB(...fever.theme.color);
+      uniforms.reveal.value=themed||amtReducedMotion.matches?0:amtOmenSplat?.inspect().reveal||0;
+      renderer.autoClear=false;renderer.render(omenScene,omenCamera);renderer.autoClear=true;
+    }
     return true}
   function resize(){renderer.setPixelRatio(Math.min(devicePixelRatio||1,1,Math.sqrt(1600000/Math.max(1,innerWidth*innerHeight))));renderer.setSize(innerWidth,innerHeight,false);camera.aspect=innerWidth/innerHeight;camera.updateProjectionMatrix();amtCamera.aspect=innerWidth/innerHeight;amtCamera.updateProjectionMatrix()}resize();addEventListener("resize",resize,{passive:true});
   const spawnProbe=new T.Vector3();

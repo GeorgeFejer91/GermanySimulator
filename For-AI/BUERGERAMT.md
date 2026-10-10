@@ -35,7 +35,7 @@ Optional actor conversations pause the queue and never change ticket ownership o
 | Queue | The Archivbotin patrols between the right shelves and counter, consults her ledger and keys, and can be addressed. | Her two lines describe the impossible archive procedure. | Key and paper rustle stays below the dialogue. Dread leans cool blue violet. |
 | Wait | The Formularsammler shuffles an accordion application along the central aisle, pauses to sort pages, and can be addressed. | His second line offers a small, uneasy release. | Dry paper cue; dread eases to weak amber on relief. |
 | Crowded office | Nummernflüsterer, Nachtschicht-Melderin, Pfandarchitektin, Kopiependler, and Warteschlangenpoetin circle short paths with documents, phone, receipt, copies, or numbered ticket. They look up at calls, flinch, read, gesture, and address the player. | Each owns two optional German lines in `buergeramt-story.js`; their speech cannot alter the appointment. | Painted Berlin street clothes, fatigue and uneasy colors distinguish them. Queue calls briefly draw their gaze; only the current speaker receives a subtle color-valence tint. |
-| Omen (`omen`) | Before the first ticket, the Aktenkurier leaves his route and approaches the player. The camera turns to keep him in view while the room progressively darkens. At his arrival, the surroundings are nearly black around a bright, slightly iridescent spotlight; tension peaks as he says “Wer die Finsternis sieht, hat sie selbst gewählt!” He holds a longer threatening stare, gradually flattens back into paint, turns through front/side/rear views, and retreats slowly before the office returns. | The exact German verse lives in `buergeramt-story.js`. The in-scene subtitle rail remains the text surface if speech is unavailable. | A harsh, unresolved cinematic cue grows through the approach; its accelerating pulse also drives the frontal depth reveal, coat and tunnel. It peaks with the near-black arrival and line, then dwindles with the reverse depth reveal, without a resolving chord or attack. The queue clock pauses for the encounter, then resumes. The scene is once per visit and clears on exit or replay. |
+| Omen (`omen`) | After the player presses E to address him, the Aktenkurier leaves his route and approaches the player (before a ticket or while waiting). The camera turns to keep him in view while the room progressively darkens. At his arrival, the surroundings are nearly black around a bright, slightly iridescent spotlight; tension peaks as he says “Wer die Finsternis sieht, hat sie selbst gewählt!” He holds a longer threatening stare, gradually flattens back into paint, turns through front/side/rear views, and retreats slowly before the office returns. | The exact German verse lives in `buergeramt-story.js`. The in-scene subtitle rail remains the text surface if speech is unavailable. | A harsh, unresolved cinematic cue grows through the approach; its accelerating pulse also drives the frontal depth reveal, coat and tunnel. It peaks with the near-black arrival and line, then dwindles with the reverse depth reveal, without a resolving chord or attack. The queue clock pauses for the encounter, then resumes. The scene is once per visit and clears on exit or replay. |
 | Call | Existing number board, QR ticket, phone, police, and Frau Knick take priority. | Existing counter and phone scripts keep their exact visible speech strings. | All optional actor tint returns smoothly to neutral after the encounter. Phone ring, static, and police voice follow the phone's own call level. |
 
 `buergeramt.js` owns routes, interaction range, work pauses, queue-call reactions, dialogue state, the Aktenkurier beat, Frau Knick's speaking/action row, and the active `{id,tone,valence}`. Moving regulars leave a small walking gap around the player; their gait clock advances by distance walked, and a high-priority story action preempts a routine work loop. Speaking eases the first-person view toward the owning actor. `world3d.js` draws that state: four directional walk rows, work/gesture/look/flinch rows, body-facing billboards, a six-row desk performance for Frau Knick (including lip movement while she speaks), an eased material tint, and the in-world blackout spotlight. The tone target is bounded to a subtle fraction of the paint; it changes only for the actor who owns the currently visible line. Ending the line eases back to the original colors. The room's code geometry and existing stationary painted cast stay in place. The office presents all dialogue, choices, and direct-visit outcomes in a non-modal subtitle rail over the visible room. It has no popup screens; the small `TON` disclosure is an optional in-scene HUD control.
@@ -62,6 +62,76 @@ owned by the existing cue. Reduced motion keeps the crossfade/depth reveal but
 removes pulsing, ripples and tunnel rotation. The figure flattens and crossfades back into its registered sprite over 1.8 seconds before turning. Missing or late assets keep the sprite for that encounter.
 Exit, replay and cancellation retire the effect and reject stale preparation;
 an in-flight GPU sort finishes before its buffers/worker are freed.
+
+## E-triggered fever encounters
+
+Every distinct Bürgeramt speaker has an authored dark surreal space, entered by
+pressing E (the existing touch interaction button is equivalent). Walking near
+someone, queue reactions, ambient lines and phone messages do not begin it.
+Nearby regulars/patrons within 1.65 m take precedence. The Aktenkurier's unused
+one-off cinematic can be requested within 6.2 m from the hall; his existing
+body-clear approach carries him into speaking range. A busy city foreground cue
+can defer that requested cinematic. After it is used, his ordinary E dialogue
+uses his own ink-vault theme. Decorative desk copies share Brunhilde's painting;
+they are not additional speakers.
+
+| Identity | Distortion theme |
+| --- | --- |
+| Horst Stempelmann, Aktenkurier | Sealed sentence; the accepted Gaussian tunnel and frontal relief, then ink-vault dialogue |
+| Gisela Aktenberg, Archivbotin | Repeating archive drawers close around the person being filed |
+| Dieter Papiermann, Formularsammler | Forms fold the room along an impossible continuous crease |
+| Rüdiger Nummermann, Nummernflüsterer | A descending litany of numbered tickets |
+| Ingrid Feierabend, Nachtschicht-Melderin | Dead telephone windows drift through an empty signal |
+| Bärbel Pfennig, Pfandarchitektin | A receipt with no beginning unspools around her |
+| Uwe Kopitz, Kopiependler | Empty mirrored office frames prosecute their original |
+| Hilde Wartenscheidt, Warteschlangenpoetin | Numbered waiting places become a funeral queue |
+| Brunhilde Knick | A rotating half-stamp tribunal surrounds the counter exchange |
+| Konrad Wohnungszettel | A floor plan with rooms but no inside |
+| Mechthild Elternbogen | Registry rows continuously erase their entries |
+| Wolfram Rentenbescheid | A clock court counts backwards around the unresolved notice |
+
+`buergeramt-fever.js` owns the theme map and a clock advanced only by the existing
+office update. Entry takes 1.2 s; actual recording/browser start and word receipts
+own speech progress. Completion holds 0.65 s and releases over 1.5 s. Returning
+to walking releases from the current strength without a cut. Hidden pages and
+speech pause freeze the clock. Cue/generation ownership rejects old callbacks;
+exit/replay clears the clock and bounded sound graph. Consecutive counter lines
+carry the current strength and space time instead of flashing back to the room.
+
+The registered character action remains the native Gaussian texture transport
+between sharp painted anchors. The surrounding motifs are a single existing
+fullscreen shader pass, not reconstructed 3D character volumes. A clear window
+projects the four actual painted plane corners, clips their bounds to the
+viewport and protects the complete visible face/body, including very close E
+interactions; no extra bodies, trails, camera shake or FOV
+oscillation are introduced. Structural materials fade through their own original
+opacity, with temporary transparency/depth-write settings restored exactly on
+release/exit. Actors are kept in a separate group so a desk cannot become an
+opaque black rectangle across the selected patron. Gaussian background paintings
+receive the same isolation strength, preserving safe anchor admission and the
+2 desktop / 1 mobile residency limit. Reduced motion freezes motif movement and
+retains the readable painted fallback. The document's existing Gaussian effect
+still applies only to the ABGELEHNT stamp.
+
+The 40 new voice recordings across all twelve speakers are default dialogue,
+approved by the user's “I approve, just implement it” instruction. Their exact
+scripts, English annotations, source rights and listening status are owned by
+`VOICE-SYNTH-PROTOCOL.md`; use approval is separate from listening verification.
+
+Validation is retained under `output/amt-fever-interactions/`. Independent P5
+and C4 reviewers checked the same frozen source and their later source-delta
+addenda preserve upstream mission-compass, official omen lip-sync and entrance
+radiance changes.
+The first controlled 12-theme × desktop/Android portrait/landscape sweep proves
+motif variety on that candidate; after its close-E face-mask repair, fresh natural
+Nummernflüsterer captures prove readable painted faces in all three profiles.
+Fresh final Konrad checks use real muted native MP3 playback, manual pause/resume,
+actual media end and complete room restoration on desktop and Android emulation;
+`3d.html` also starts without page errors. These are distinct from ASR and listening.
+Affected controller/Gaussian/voice/lip-sync and root regression checks pass.
+Peak performance scope and numbers belong in `ASSET-POLICY.md`. Physical Android
+and perceptual listening are outstanding; the explicit use approval was recorded
+without inventing listening results.
 
 ## Sound and mix
 

@@ -4,6 +4,23 @@ This protocol defines the shared beat interface and evidence for music and nonve
 
 The reusable skill is pinned to [`GeorgeFejer91/music-sound-effects-skill`, commit `e6afde61c713aa0524f4a344ef289e1fc0c2159e`](https://github.com/GeorgeFejer91/music-sound-effects-skill/tree/e6afde61c713aa0524f4a344ef289e1fc0c2159e/skills/music-sound-effects) (private). Install that package directory as `$CODEX_HOME/skills/music-sound-effects` and read its `SKILL.md` plus only the relevant reference before use. The current personal installation is `C:\Users\cogpsy-vrlab\.codex\skills\music-sound-effects`. To update it, validate a new source revision first, then update the installation and this pin together. External ChatDev cannot read the personal installation; use the compact project contract and stage prompt described below.
 
+## Bürgeramt E encounter sound
+
+The twelve fever spaces begin only from an E-owned character/counter exchange.
+Their nonverbal three-oscillator beds share the existing office effects bus;
+a separate register per identity sets their colour. The same office clock and
+speech receipts control entry, foreground ducking, pause, gradual release and
+cleanup. Sources have a 45 s maximum lifetime even if scene updates stop. Hidden
+pages and paused speech mute the bed; EFFEKTE and STIMMEN retain their existing
+roles. There is no new playlist, RAF, timer loop or audio service. Horst's accepted
+omen score and official recording remain intact.
+
+New user-approved default cloned speech uses each saved fever reference and a quiet, fixed
+pitch-shifted undertone mixed beneath the clean words. This processing is offline,
+with a separately rechecked encoded loudness and independent transcript; it is
+not a live voice filter on browser speech. The explicit use approval and unverified perceptual listening are recorded
+separately in `VOICE-SYNTH-PROTOCOL.md`.
+
 ## Start with the beat
 
 State the player action, story purpose, emotional turn, and desired silence before choosing a timbre or tool. Keep four decisions distinct: **brief** (intent and constraints), **source** (licensed recording, synthesis patch, or score sketch), **render** (reviewed asset or browser synthesis), and **playback** (the runtime event that starts and stops it). Prefer the game's existing Web Audio paths. Strudel can sketch a pattern and SuperCollider can render an offline source when useful; neither is a runtime dependency. No paid API, model, or DAW is required. Only accepted, licensed and attributed renders enter `assets/`; existing source/provenance rules remain in [`ASSET-POLICY.md`](./ASSET-POLICY.md).

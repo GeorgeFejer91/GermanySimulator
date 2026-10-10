@@ -85,6 +85,45 @@ resource, title cadence, input and drawing-buffer gates: desktop startup
 15,696,445–16,448,172 bytes, mobile 15,027,020–16,098,517; title cadence
 12 calls per measured three-second window. Evidence: `full-cast-root-benchmark/`.
 
+The E-triggered fever pass uses one existing full-screen shader pass with twelve
+analytic motifs and the existing Gaussian action owner. Four painted plane
+corner projections protect the selected character; no new image/3D asset,
+render loop, worker, synthesis dependency or splat pack is introduced. Structure
+materials return to their original opacity/transparency/depth settings on
+release. Native anchor painting receives the same shared isolation uniform;
+existing 2/1 actor caps, admission queue and 1.6 MP buffer cap remain in force.
+The user-approved alternate voice family adds 40 MP3s / 4,107,104 bytes under
+`assets/voices/amt-fever/`, fetched only for an exact speaker/text cue in normal
+gameplay. No clip is preloaded at office or city startup.
+Its manifest/catalog carry actual hashes, alternate profiles, CC0 reference and
+MIT model provenance, final-encoding levels/ASR and pending human listening.
+The two semantic failures remain outside the shipped family. The original
+approved Horst omen recording is unchanged. `VOICE-SYNTH-PROTOCOL.md` records
+the explicit use approval separately from the unverified listening fields.
+
+Peak-effect measurements used three cold runs per viewport against `e4ffe34`,
+Chrome 154 / Intel Iris Xe, local uncompressed HTTP, seed 424242, requested DPR 2,
+no CPU throttling. A silent held TTS start receipt kept Konrad's same dialogue
+active; every after sample ended at fever strength 1. Median active p95 stayed
+21.0 → 21.0 ms desktop and Android emulation (after range 20.9–21.0 ms).
+Input p95 medians were 17.4 → 20.4 ms desktop and 17.4 → 21.0 ms emulation,
+with an emulated 80.3 ms outlier; these short samples do not establish field
+responsiveness or a speedup. Geometry/texture counts were 169/43–44 desktop
+and 162/41 mobile after. The final overlay pass reports one draw call because
+Three.js resets its per-render counters; it is not the complete office draw cost.
+Reports: `output/amt-fever-interactions/peak-{before,after}/`. Initial samples
+whose effect had finished are preliminary and excluded from peak evidence.
+The six-run root benchmark passed the 18 MB/title-cadence/input/buffer gates.
+The later `b3aafb3` upstream integration preserves the fever shader/window and
+adds official omen-only lip-sync, outside these Konrad samples. Source-delta
+peer addenda and fresh native-media/3d checks bind that integration separately.
+The subsequent approved-default root smoke benchmark passed both viewports:
+16,813,631 bytes desktop and 16,465,819 bytes emulation, with 13/12 title sync
+calls in about three seconds and no page errors. Desktop input p95 had a
+142.5 ms outlier, while emulation was 16.4 ms; these single runs do not establish
+stable input latency. This is a two-run smoke check, not a new peak baseline.
+Physical Android, GPU timers and perceptual listening remain NOT RUN.
+
 The office's original painted prop strip adds a file cabinet, paper tower,
 distorted clock, and noticeboard. Its source and provenance are with the cast;
 the game loads its compressed atlas only when the office is entered, alongside

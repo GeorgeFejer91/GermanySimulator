@@ -228,6 +228,25 @@ The 223 MP3s under `candidate-dialogue/`, eleven samples under `profile-audition
 
 Separately stored Music-library Secret Tunnel takes were rendered with the pinned OmniVoice pre-trained model. Its [model card](https://huggingface.co/k2-fsa/OmniVoice/blob/c5fdb5ccb189668d56333f77ba2629f4cd7535f4/README.md) states CC BY-NC for the weights, and the [maintainer confirms noncommercial use](https://huggingface.co/k2-fsa/OmniVoice/discussions/37). Their `commercialUseStatus: not_cleared` is a release gate, even where the EmoDB source is CC0 and Whisper matches every word. Do not copy a private OmniVoice take into a commercial game build without separately documented rights; use the actual model provenance of any replacement take. The [pinned Chatterbox model repository](https://huggingface.co/ResembleAI/chatterbox/tree/5bb1f6ee58e50c3b8d408bc82a6d3740c2db6e18) is marked MIT, but source rights and full listening review remain required for its preview candidates too.
 
+## Bürgeramt fever listening alternatives
+
+`amt-fever/manifest.json` records the separate user-approved family for twelve saved
+alternate profiles: 40 MP3s / 4,107,104 bytes. These use transformed references from the original EmoDB
+CC0-1.0 release, preserving each reference hash, and the cached Chatterbox
+Multilingual V2 0.1.7 model, MIT revision
+`5bb1f6ee58e50c3b8d408bc82a6d3740c2db6e18`. No OmniVoice weights were used for
+these files. Each eligible encoded MP3 records its exact current authored text,
+speaker/profile, raw/output hash, seed, processing and independent ASR.
+They retain clean speech with a quiet fixed pitch-shifted undertone, and are
+measured at -18 LUFS ±0.3 / at most -1.5 dBTP, mono 48 kHz, 128 kbit/s.
+
+The user's 2026-10-10 instruction “I approve, just implement it” authorizes
+default dialogue use; the exact approval is retained in the manifest/catalogue.
+Perceptual listening and the seven-field review queue remain unverified. Semantic
+ASR failures remain private; the Bon/Bohn spelling flag needs listening.
+The original user-approved Horst omen file and its provenance above are
+unchanged. Private references and normalized review queue remain in Music.
+
 ## Approved fictional character dialogue
 
 `approved-dialogue/manifest.json` is the per-file provenance ledger for bulk Chatterbox clips promoted to normal gameplay. Each entry records the speaking voice ID and Secret Tunnel profile UUID, exact script, shipping and source hashes, reference hash/dataset/license, renderer revision/license, and the reviewed Music queue hash. `tools/promote-reviewed-voice-dialogue.mjs` verifies the seven human review fields, original and normalized hashes, and delivery levels before copying a clip. That manifest is currently empty: none of the 236 bulk candidates has passed that gate. The individually user-approved Aktenkurier omen above is a separate direct catalogue recording with its actual approval instruction. Approved clips play by exact voice ID and text; remaining bulk candidates retain their opt-in preview status.

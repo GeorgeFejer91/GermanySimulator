@@ -87,7 +87,8 @@ for(const clip of originalCandidates){
  assert.equal(clip.referenceSha256,owners.get(clip.voiceId)?.referenceSha256,`reference binding ${clip.clipId}`);
  const official=off.candidateClip(clip.voiceId,clip.text);
  assert.equal(on.candidateClip(clip.voiceId,clip.text),official||clip.path);
- assert.equal(official,clip.clipId==='amt-horst-stempelmann-03'?'./assets/voices/horst-stempelmann/omen-candidate-02.mp3':null);
+ const fever=JSON.parse(source('./assets/voices/amt-fever/manifest.json')).clips.find(c=>c.voiceId===clip.voiceId&&c.text===clip.text);
+ assert.equal(official,clip.clipId==='amt-horst-stempelmann-03'?'./assets/voices/horst-stempelmann/omen-candidate-02.mp3':fever?'./'+fever.path:null);
  assert.equal(createHash("sha256").update(source(clip.path)).digest("hex"),clip.sha256);
 }
 for(const person of cast.characters)for(const line of person.dialogue){

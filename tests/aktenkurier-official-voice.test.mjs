@@ -32,7 +32,7 @@ test('the accepted second profile retains candidate one and supplies default exa
  const clip=catalog.clips['aktenkurier-omen-candidate-02'];assert.equal(clip.profileId,second.profileId);assert.equal(clip.source,text);
  assert.equal(catalog.candidatePreviewEnabled,false);assert.equal(catalog.candidateClip(voiceId,text),path);
  assert.equal(catalog.candidateClip('amt-gisela-aktenberg',text),null);assert.equal(catalog.candidateClip(voiceId,text+' '),null);
- assert.equal(catalog.candidateClip(voiceId,horst.dialogue[0].text),null);
+ assert.equal(catalog.candidateClip(voiceId,horst.dialogue[0].text),'./assets/voices/amt-fever/amt-horst-stempelmann-fever-1.mp3');
  assert.equal(createHash('sha256').update(readFileSync(new URL('../'+path.slice(2),import.meta.url))).digest('hex'),clip.sha256);
  assert(clip.wordCues.every((cue,i)=>cue.at>=0&&cue.at<clip.durationSeconds&&(!i||cue.at>=clip.wordCues[i-1].at)&&text.slice(cue.charIndex).startsWith(cue.word)));
 });

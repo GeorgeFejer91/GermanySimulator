@@ -9,9 +9,7 @@ function retreatFixture(dt){
  vm.runInContext(source('buergeramt.js').replace(/\}\)\(\);\s*$/,
   'window.retreatProbe={characters,view,officeBlocked};})();'),h.context);
  const level=h.window.BuergeramtLevel,probe=h.window.retreatProbe,actor=probe.characters[0];
- level.open(h.config);h.key('KeyW');
- for(let i=0;i<300&&level.stage!=='omen';i++)level.update(.05);
- h.key('KeyW','keyup');
+ level.open(h.config);h.key('KeyW');for(let i=0;i<300&&level.view.z> -2.6;i++)level.update(.05);h.key('KeyW','keyup');h.key('KeyE');h.key('KeyE','keyup');
  for(let i=0;i<40/dt&&level.omen.phase==='approach';i++)level.update(dt);
  assert.equal(level.omen.phase,'blackout');h.tick(16);h.synth.start();h.synth.end();
  function until(phase){for(let i=0;i<40/dt&&level.omen.phase!==phase;i++)level.update(dt);assert.equal(level.omen.phase,phase)}

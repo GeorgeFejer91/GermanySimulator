@@ -1,0 +1,5606 @@
+{
+  "schemaVersion": 1,
+  "status": "user-approved default dialogue; perceptual listening not independently verified",
+  "generatedLineCount": 42,
+  "lineCount": 40,
+  "heldPrivateClipIds": [
+    "amt-ruediger-nummermann-fever-2",
+    "amt-brunhilde-knick-fever-9"
+  ],
+  "clips": [
+    {
+      "actorId": "aktenkurier",
+      "voiceId": "amt-horst-stempelmann",
+      "text": "Stopp. Sie haben den Aktenlauf ohne Laufzettel gekreuzt. Das gilt als Abkürzung und muss gestempelt werden.",
+      "profileId": "833480652ccf455f8184cbe752861420",
+      "referenceSha256": "53b3bfdeb2e2e2df5437eb630cee74577a3639943b0bcf87e9b8993290b84378",
+      "rawSha256": "4a963811f0bcadaa77abdb7a45bef3a164d00cb44b43a3d68d0ec6e79ede2af0",
+      "renderer": "ResembleAI/Chatterbox Multilingual V2 0.1.7",
+      "modelRevision": "5bb1f6ee58e50c3b8d408bc82a6d3740c2db6e18",
+      "modelLicense": "MIT",
+      "referenceLicense": "CC0-1.0 (EmoDB original, transformed reference)",
+      "durationSeconds": 6.4,
+      "listening": "pending",
+      "seed": 61000,
+      "processing": "[0:a]highpass=f=65,lowpass=f=7600,asplit[clean][wet];[wet]rubberband=pitch=0.83,lowpass=f=1450,volume=0.16[shadow];[clean][shadow]amix=inputs=2:duration=first:normalize=0[a]",
+      "normalization": {
+        "targetLufs": -18,
+        "targetTruePeakDbtp": -1.5,
+        "filter": "loudnorm=I=-13.879999999999999:TP=-1.8:LRA=11:linear=false",
+        "iterations": 5
+      },
+      "asr": "Stopp! Sie haben den Aktenlauf ohne Laufzettel gekreuzt. Das gilt als Abkürzung und muss gestempelt werden.",
+      "asrWordExact": true,
+      "asrModel": "independent faster-whisper, cached local model, CPU int8, no script prompt",
+      "wordCues": [
+        {
+          "at": 0,
+          "charIndex": 0,
+          "word": "Stopp",
+          "end": 0.38
+        },
+        {
+          "at": 0.62,
+          "charIndex": 7,
+          "word": "Sie",
+          "end": 0.88
+        },
+        {
+          "at": 0.88,
+          "charIndex": 11,
+          "word": "haben",
+          "end": 1.14
+        },
+        {
+          "at": 1.14,
+          "charIndex": 17,
+          "word": "den",
+          "end": 1.3
+        },
+        {
+          "at": 1.3,
+          "charIndex": 21,
+          "word": "Aktenlauf",
+          "end": 1.9
+        },
+        {
+          "at": 1.9,
+          "charIndex": 31,
+          "word": "ohne",
+          "end": 2.16
+        },
+        {
+          "at": 2.16,
+          "charIndex": 36,
+          "word": "Laufzettel",
+          "end": 2.74
+        },
+        {
+          "at": 2.74,
+          "charIndex": 47,
+          "word": "gekreuzt",
+          "end": 3.24
+        },
+        {
+          "at": 3.38,
+          "charIndex": 57,
+          "word": "Das",
+          "end": 3.64
+        },
+        {
+          "at": 3.64,
+          "charIndex": 61,
+          "word": "gilt",
+          "end": 3.84
+        },
+        {
+          "at": 3.84,
+          "charIndex": 66,
+          "word": "als",
+          "end": 4.06
+        },
+        {
+          "at": 4.06,
+          "charIndex": 70,
+          "word": "Abkürzung",
+          "end": 4.62
+        },
+        {
+          "at": 4.62,
+          "charIndex": 80,
+          "word": "und",
+          "end": 4.8
+        },
+        {
+          "at": 4.8,
+          "charIndex": 84,
+          "word": "muss",
+          "end": 4.96
+        },
+        {
+          "at": 4.96,
+          "charIndex": 89,
+          "word": "gestempelt",
+          "end": 5.4
+        },
+        {
+          "at": 5.4,
+          "charIndex": 100,
+          "word": "werden",
+          "end": 5.62
+        }
+      ],
+      "integratedLufs": -18.19,
+      "truePeakDbtp": -2.22,
+      "sha256": "5000b1ad43ec8b746d907baf3587630b744004a55c194ceabe685fc041bb8918",
+      "rawDurationSeconds": 6.4,
+      "asrOrthographicListeningFlag": false,
+      "clipId": "amt-horst-stempelmann-fever-1",
+      "path": "assets/voices/amt-fever/amt-horst-stempelmann-fever-1.mp3",
+      "status": "user-approved default dialogue",
+      "provenanceManifest": "assets/voices/amt-fever/manifest.json",
+      "approval": {
+        "status": "user-approved",
+        "date": "2026-10-10",
+        "instruction": "I approve, just implement it",
+        "scope": "Default Bürgeramt fever encounters and alternate voice recordings",
+        "listeningVerified": false
+      },
+      "english": "Stop. You crossed the file route without a routing slip. That counts as a shortcut and must be stamped."
+    },
+    {
+      "actorId": "archivbotin",
+      "voiceId": "amt-gisela-aktenberg",
+      "text": "Sie stehen vor der Ablage, ohne abgelegt zu sein. Ich setze Ihren Vorgang vorsorglich auf Wiedervorlage.",
+      "profileId": "44d0f901322e403fa5ad8140c68ae426",
+      "referenceSha256": "2e52936700b3c2d670661a3154bf2f5fec7b2859155b11b9c50f28c20ecd928a",
+      "rawSha256": "f61b48f7e1ef57d28d4e2a5fff2084eaaa9ff47a81e933b7e9777eb984cdc160",
+      "renderer": "ResembleAI/Chatterbox Multilingual V2 0.1.7",
+      "modelRevision": "5bb1f6ee58e50c3b8d408bc82a6d3740c2db6e18",
+      "modelLicense": "MIT",
+      "referenceLicense": "CC0-1.0 (EmoDB original, transformed reference)",
+      "durationSeconds": 6.08,
+      "listening": "pending",
+      "seed": 61001,
+      "processing": "[0:a]highpass=f=65,lowpass=f=7600,asplit[clean][wet];[wet]rubberband=pitch=0.93,lowpass=f=1450,volume=0.16[shadow];[clean][shadow]amix=inputs=2:duration=first:normalize=0[a]",
+      "normalization": {
+        "targetLufs": -18,
+        "targetTruePeakDbtp": -1.5,
+        "filter": "loudnorm=I=-16.58:TP=-1.8:LRA=11:linear=false",
+        "iterations": 2
+      },
+      "asr": "Sie stehen vor der Ablage, ohne abgelegt zu sein. Ich setze Ihren Vorgang vorsorglich auf Wiedervorlage.",
+      "asrWordExact": true,
+      "asrModel": "independent faster-whisper, cached local model, CPU int8, no script prompt",
+      "wordCues": [
+        {
+          "at": 0,
+          "charIndex": 0,
+          "word": "Sie",
+          "end": 0.2
+        },
+        {
+          "at": 0.2,
+          "charIndex": 4,
+          "word": "stehen",
+          "end": 0.5
+        },
+        {
+          "at": 0.5,
+          "charIndex": 11,
+          "word": "vor",
+          "end": 0.66
+        },
+        {
+          "at": 0.66,
+          "charIndex": 15,
+          "word": "der",
+          "end": 0.8
+        },
+        {
+          "at": 0.8,
+          "charIndex": 19,
+          "word": "Ablage",
+          "end": 1.26
+        },
+        {
+          "at": 1.4,
+          "charIndex": 27,
+          "word": "ohne",
+          "end": 1.56
+        },
+        {
+          "at": 1.56,
+          "charIndex": 32,
+          "word": "abgelegt",
+          "end": 2.06
+        },
+        {
+          "at": 2.06,
+          "charIndex": 41,
+          "word": "zu",
+          "end": 2.22
+        },
+        {
+          "at": 2.22,
+          "charIndex": 44,
+          "word": "sein",
+          "end": 2.48
+        },
+        {
+          "at": 2.68,
+          "charIndex": 50,
+          "word": "Ich",
+          "end": 3.16
+        },
+        {
+          "at": 3.16,
+          "charIndex": 54,
+          "word": "setze",
+          "end": 3.48
+        },
+        {
+          "at": 3.48,
+          "charIndex": 60,
+          "word": "Ihren",
+          "end": 3.72
+        },
+        {
+          "at": 3.72,
+          "charIndex": 66,
+          "word": "Vorgang",
+          "end": 4.12
+        },
+        {
+          "at": 4.12,
+          "charIndex": 74,
+          "word": "vorsorglich",
+          "end": 4.74
+        },
+        {
+          "at": 4.74,
+          "charIndex": 86,
+          "word": "auf",
+          "end": 4.86
+        },
+        {
+          "at": 4.86,
+          "charIndex": 90,
+          "word": "Wiedervorlage",
+          "end": 5.56
+        }
+      ],
+      "integratedLufs": -18.11,
+      "truePeakDbtp": -2.23,
+      "sha256": "a5a3b611ea74c40ca604ceffd6220e01904e2e876ebee9a8d3e8f325b89c469b",
+      "rawDurationSeconds": 6.08,
+      "asrOrthographicListeningFlag": false,
+      "clipId": "amt-gisela-aktenberg-fever-1",
+      "path": "assets/voices/amt-fever/amt-gisela-aktenberg-fever-1.mp3",
+      "status": "user-approved default dialogue",
+      "provenanceManifest": "assets/voices/amt-fever/manifest.json",
+      "approval": {
+        "status": "user-approved",
+        "date": "2026-10-10",
+        "instruction": "I approve, just implement it",
+        "scope": "Default Bürgeramt fever encounters and alternate voice recordings",
+        "listeningVerified": false
+      },
+      "english": "You are standing before the filing system without being filed. As a precaution, I am scheduling your case for resubmission."
+    },
+    {
+      "actorId": "formularsammler",
+      "voiceId": "amt-dieter-papiermann",
+      "text": "Meine Seitenfolge ist nicht genehmigt. Wenn Blatt siebzehn wieder vorn steht, beginnt mein Termin von gestern noch einmal.",
+      "profileId": "eb4aab1842eb450eacbdd5d4ccc38ab6",
+      "referenceSha256": "299dc1e9eef10ded8821becc7f198700e20d446ca902744d53dfa0c22988da91",
+      "rawSha256": "29dbc0b3455a131a77f69cbb31c5b41083d7650f3994aef6cc154ce56922c28b",
+      "renderer": "ResembleAI/Chatterbox Multilingual V2 0.1.7",
+      "modelRevision": "5bb1f6ee58e50c3b8d408bc82a6d3740c2db6e18",
+      "modelLicense": "MIT",
+      "referenceLicense": "CC0-1.0 (EmoDB original, transformed reference)",
+      "durationSeconds": 7.92,
+      "listening": "pending",
+      "seed": 65000,
+      "processing": "[0:a]highpass=f=65,lowpass=f=7600,asplit[clean][wet];[wet]rubberband=pitch=0.89,lowpass=f=1450,volume=0.16[shadow];[clean][shadow]amix=inputs=2:duration=first:normalize=0[a]",
+      "normalization": {
+        "targetLufs": -18,
+        "targetTruePeakDbtp": -1.5,
+        "filter": "loudnorm=I=-16.33:TP=-1.8:LRA=11:linear=false",
+        "iterations": 3
+      },
+      "asr": "Meine Seitenfolge ist nicht genehmigt. Wenn Blatt 17 wieder vorn steht, beginnt mein Termin von gestern noch einmal.",
+      "asrWordExact": true,
+      "asrModel": "independent faster-whisper, cached local model, CPU int8, no script prompt",
+      "wordCues": [
+        {
+          "at": 0,
+          "charIndex": 0,
+          "word": "Meine",
+          "end": 0.3
+        },
+        {
+          "at": 0.3,
+          "charIndex": 6,
+          "word": "Seitenfolge",
+          "end": 1
+        },
+        {
+          "at": 1,
+          "charIndex": 18,
+          "word": "ist",
+          "end": 1.18
+        },
+        {
+          "at": 1.18,
+          "charIndex": 22,
+          "word": "nicht",
+          "end": 1.36
+        },
+        {
+          "at": 1.36,
+          "charIndex": 28,
+          "word": "genehmigt",
+          "end": 1.98
+        },
+        {
+          "at": 2.42,
+          "charIndex": 39,
+          "word": "Wenn",
+          "end": 3.06
+        },
+        {
+          "at": 3.06,
+          "charIndex": 44,
+          "word": "Blatt",
+          "end": 3.32
+        },
+        {
+          "at": 3.32,
+          "charIndex": 50,
+          "word": "siebzehn",
+          "end": 3.7
+        },
+        {
+          "at": 3.7,
+          "charIndex": 59,
+          "word": "wieder",
+          "end": 4
+        },
+        {
+          "at": 4,
+          "charIndex": 66,
+          "word": "vorn",
+          "end": 4.26
+        },
+        {
+          "at": 4.26,
+          "charIndex": 71,
+          "word": "steht",
+          "end": 4.58
+        },
+        {
+          "at": 4.82,
+          "charIndex": 78,
+          "word": "beginnt",
+          "end": 5.38
+        },
+        {
+          "at": 5.38,
+          "charIndex": 86,
+          "word": "mein",
+          "end": 5.54
+        },
+        {
+          "at": 5.54,
+          "charIndex": 91,
+          "word": "Termin",
+          "end": 5.88
+        },
+        {
+          "at": 5.88,
+          "charIndex": 98,
+          "word": "von",
+          "end": 6.04
+        },
+        {
+          "at": 6.04,
+          "charIndex": 102,
+          "word": "gestern",
+          "end": 6.38
+        },
+        {
+          "at": 6.38,
+          "charIndex": 110,
+          "word": "noch",
+          "end": 6.54
+        },
+        {
+          "at": 6.54,
+          "charIndex": 115,
+          "word": "einmal",
+          "end": 6.86
+        }
+      ],
+      "integratedLufs": -18.23,
+      "truePeakDbtp": -2.24,
+      "sha256": "ea748e703f53624de0a95d9bd9e77480585a7bdd3ddf3c7493ef44299db21f30",
+      "rawDurationSeconds": 7.92,
+      "asrOrthographicListeningFlag": false,
+      "clipId": "amt-dieter-papiermann-fever-1",
+      "path": "assets/voices/amt-fever/amt-dieter-papiermann-fever-1.mp3",
+      "status": "user-approved default dialogue",
+      "provenanceManifest": "assets/voices/amt-fever/manifest.json",
+      "approval": {
+        "status": "user-approved",
+        "date": "2026-10-10",
+        "instruction": "I approve, just implement it",
+        "scope": "Default Bürgeramt fever encounters and alternate voice recordings",
+        "listeningVerified": false
+      },
+      "english": "My page order has not been approved. If page seventeen returns to the front, my appointment from yesterday starts again."
+    },
+    {
+      "actorId": "nummernfluesterer",
+      "voiceId": "amt-ruediger-nummermann",
+      "text": "Die Anzeige hat meine Nummer geflüstert, bevor ich sie gezogen habe. Jetzt verlangt sie einen Nachweis, dass ich noch nicht dran bin.",
+      "profileId": "e2b59f89c1a84259aaa8f7006741fae2",
+      "referenceSha256": "36384c38f7ef08283c5cf6a6d7158e92c2bbd503063885b3c27a532e7a0a0302",
+      "rawSha256": "32cc001830dcbe08df72e3af509901d31750b3d25f4002e2fdbd25f8f1c2565f",
+      "renderer": "ResembleAI/Chatterbox Multilingual V2 0.1.7",
+      "modelRevision": "5bb1f6ee58e50c3b8d408bc82a6d3740c2db6e18",
+      "modelLicense": "MIT",
+      "referenceLicense": "CC0-1.0 (EmoDB original, transformed reference)",
+      "durationSeconds": 6.38,
+      "listening": "pending",
+      "seed": 61003,
+      "processing": "[0:a]highpass=f=65,lowpass=f=7600,asplit[clean][wet];[wet]rubberband=pitch=0.8,lowpass=f=1450,volume=0.16[shadow];[clean][shadow]amix=inputs=2:duration=first:normalize=0[a]",
+      "normalization": {
+        "targetLufs": -18,
+        "targetTruePeakDbtp": -1.5,
+        "filter": "loudnorm=I=-15.629999999999999:TP=-1.8:LRA=11:linear=false",
+        "iterations": 4
+      },
+      "asr": "Die Anzeige hat meine Nummer geflüstert, bevor ich sie gezogen habe. Jetzt verlangt sie einen Nachweis, dass ich noch nicht dran bin.",
+      "asrWordExact": true,
+      "asrModel": "independent faster-whisper, cached local model, CPU int8, no script prompt",
+      "wordCues": [
+        {
+          "at": 0,
+          "charIndex": 0,
+          "word": "Die",
+          "end": 0.14
+        },
+        {
+          "at": 0.14,
+          "charIndex": 4,
+          "word": "Anzeige",
+          "end": 0.56
+        },
+        {
+          "at": 0.56,
+          "charIndex": 12,
+          "word": "hat",
+          "end": 0.7
+        },
+        {
+          "at": 0.7,
+          "charIndex": 16,
+          "word": "meine",
+          "end": 0.94
+        },
+        {
+          "at": 0.94,
+          "charIndex": 22,
+          "word": "Nummer",
+          "end": 1.1
+        },
+        {
+          "at": 1.1,
+          "charIndex": 29,
+          "word": "geflüstert",
+          "end": 1.66
+        },
+        {
+          "at": 1.78,
+          "charIndex": 41,
+          "word": "bevor",
+          "end": 1.88
+        },
+        {
+          "at": 1.88,
+          "charIndex": 47,
+          "word": "ich",
+          "end": 2.04
+        },
+        {
+          "at": 2.04,
+          "charIndex": 51,
+          "word": "sie",
+          "end": 2.14
+        },
+        {
+          "at": 2.14,
+          "charIndex": 55,
+          "word": "gezogen",
+          "end": 2.52
+        },
+        {
+          "at": 2.52,
+          "charIndex": 63,
+          "word": "habe",
+          "end": 2.78
+        },
+        {
+          "at": 3.1,
+          "charIndex": 69,
+          "word": "Jetzt",
+          "end": 3.34
+        },
+        {
+          "at": 3.34,
+          "charIndex": 75,
+          "word": "verlangt",
+          "end": 3.76
+        },
+        {
+          "at": 3.76,
+          "charIndex": 84,
+          "word": "sie",
+          "end": 3.84
+        },
+        {
+          "at": 3.84,
+          "charIndex": 88,
+          "word": "einen",
+          "end": 4.02
+        },
+        {
+          "at": 4.02,
+          "charIndex": 94,
+          "word": "Nachweis",
+          "end": 4.52
+        },
+        {
+          "at": 4.66,
+          "charIndex": 104,
+          "word": "dass",
+          "end": 4.84
+        },
+        {
+          "at": 4.84,
+          "charIndex": 109,
+          "word": "ich",
+          "end": 4.96
+        },
+        {
+          "at": 4.96,
+          "charIndex": 113,
+          "word": "noch",
+          "end": 5.1
+        },
+        {
+          "at": 5.1,
+          "charIndex": 118,
+          "word": "nicht",
+          "end": 5.26
+        },
+        {
+          "at": 5.26,
+          "charIndex": 124,
+          "word": "dran",
+          "end": 5.44
+        },
+        {
+          "at": 5.44,
+          "charIndex": 129,
+          "word": "bin",
+          "end": 5.62
+        }
+      ],
+      "integratedLufs": -18.27,
+      "truePeakDbtp": -2.16,
+      "sha256": "9f38d8aecb4160b38826a56a41e15924c0d07f0335fe5b4ea6d4024c544e6032",
+      "rawDurationSeconds": 6.38,
+      "asrOrthographicListeningFlag": false,
+      "clipId": "amt-ruediger-nummermann-fever-1",
+      "path": "assets/voices/amt-fever/amt-ruediger-nummermann-fever-1.mp3",
+      "status": "user-approved default dialogue",
+      "provenanceManifest": "assets/voices/amt-fever/manifest.json",
+      "approval": {
+        "status": "user-approved",
+        "date": "2026-10-10",
+        "instruction": "I approve, just implement it",
+        "scope": "Default Bürgeramt fever encounters and alternate voice recordings",
+        "listeningVerified": false
+      },
+      "english": "The display whispered my number before I drew it. Now it demands proof that it is not my turn yet."
+    },
+    {
+      "actorId": "nachtschichtmelderin",
+      "voiceId": "amt-ingrid-feierabend",
+      "text": "Mein Telefon ist tot. Die App bestätigt trotzdem, dass ich persönlich anwesend bin. Ich halte das Gerät hoch, damit es mich nicht vergisst.",
+      "profileId": "b456ded2b16d4bc38f6751bfe52266e8",
+      "referenceSha256": "bdbab9a001e15f222d47699ab12616a02740cf50993d2b841a9fe77bdd78d67c",
+      "rawSha256": "93e023974b43234fe41fc36364e0ba610d9873459b936dc58020d340e8da90ba",
+      "renderer": "ResembleAI/Chatterbox Multilingual V2 0.1.7",
+      "modelRevision": "5bb1f6ee58e50c3b8d408bc82a6d3740c2db6e18",
+      "modelLicense": "MIT",
+      "referenceLicense": "CC0-1.0 (EmoDB original, transformed reference)",
+      "durationSeconds": 7.94,
+      "listening": "pending",
+      "seed": 61004,
+      "processing": "[0:a]highpass=f=65,lowpass=f=7600,asplit[clean][wet];[wet]rubberband=pitch=0.96,lowpass=f=1450,volume=0.16[shadow];[clean][shadow]amix=inputs=2:duration=first:normalize=0[a]",
+      "normalization": {
+        "targetLufs": -18,
+        "targetTruePeakDbtp": -1.5,
+        "filter": "loudnorm=I=-17.33:TP=-1.8:LRA=11:linear=false",
+        "iterations": 2
+      },
+      "asr": "Mein Telefon ist tot. Die App bestätigt trotzdem, dass ich persönlich anwesend bin. Ich halte das Gerät hoch, damit es mich nicht vergisst.",
+      "asrWordExact": true,
+      "asrModel": "independent faster-whisper, cached local model, CPU int8, no script prompt",
+      "wordCues": [
+        {
+          "at": 0,
+          "charIndex": 0,
+          "word": "Mein",
+          "end": 0.22
+        },
+        {
+          "at": 0.22,
+          "charIndex": 5,
+          "word": "Telefon",
+          "end": 0.66
+        },
+        {
+          "at": 0.66,
+          "charIndex": 13,
+          "word": "ist",
+          "end": 0.8
+        },
+        {
+          "at": 0.8,
+          "charIndex": 17,
+          "word": "tot",
+          "end": 1.1
+        },
+        {
+          "at": 1.38,
+          "charIndex": 22,
+          "word": "Die",
+          "end": 1.74
+        },
+        {
+          "at": 1.74,
+          "charIndex": 26,
+          "word": "App",
+          "end": 1.9
+        },
+        {
+          "at": 1.9,
+          "charIndex": 30,
+          "word": "bestätigt",
+          "end": 2.38
+        },
+        {
+          "at": 2.38,
+          "charIndex": 40,
+          "word": "trotzdem",
+          "end": 2.78
+        },
+        {
+          "at": 2.94,
+          "charIndex": 50,
+          "word": "dass",
+          "end": 3.04
+        },
+        {
+          "at": 3.04,
+          "charIndex": 55,
+          "word": "ich",
+          "end": 3.16
+        },
+        {
+          "at": 3.16,
+          "charIndex": 59,
+          "word": "persönlich",
+          "end": 3.64
+        },
+        {
+          "at": 3.64,
+          "charIndex": 70,
+          "word": "anwesend",
+          "end": 4.22
+        },
+        {
+          "at": 4.22,
+          "charIndex": 79,
+          "word": "bin",
+          "end": 4.42
+        },
+        {
+          "at": 4.64,
+          "charIndex": 84,
+          "word": "Ich",
+          "end": 4.92
+        },
+        {
+          "at": 4.92,
+          "charIndex": 88,
+          "word": "halte",
+          "end": 5.18
+        },
+        {
+          "at": 5.18,
+          "charIndex": 94,
+          "word": "das",
+          "end": 5.32
+        },
+        {
+          "at": 5.32,
+          "charIndex": 98,
+          "word": "Gerät",
+          "end": 5.62
+        },
+        {
+          "at": 5.62,
+          "charIndex": 104,
+          "word": "hoch",
+          "end": 5.94
+        },
+        {
+          "at": 6.08,
+          "charIndex": 110,
+          "word": "damit",
+          "end": 6.26
+        },
+        {
+          "at": 6.26,
+          "charIndex": 116,
+          "word": "es",
+          "end": 6.44
+        },
+        {
+          "at": 6.44,
+          "charIndex": 119,
+          "word": "mich",
+          "end": 6.54
+        },
+        {
+          "at": 6.54,
+          "charIndex": 124,
+          "word": "nicht",
+          "end": 6.74
+        },
+        {
+          "at": 6.74,
+          "charIndex": 130,
+          "word": "vergisst",
+          "end": 7.16
+        }
+      ],
+      "integratedLufs": -18.08,
+      "truePeakDbtp": -2.19,
+      "sha256": "a3d93f63f57b42cccd3939f50c027d7c45758ad298e8723d004a99b3100fe094",
+      "rawDurationSeconds": 7.94,
+      "asrOrthographicListeningFlag": false,
+      "clipId": "amt-ingrid-feierabend-fever-1",
+      "path": "assets/voices/amt-fever/amt-ingrid-feierabend-fever-1.mp3",
+      "status": "user-approved default dialogue",
+      "provenanceManifest": "assets/voices/amt-fever/manifest.json",
+      "approval": {
+        "status": "user-approved",
+        "date": "2026-10-10",
+        "instruction": "I approve, just implement it",
+        "scope": "Default Bürgeramt fever encounters and alternate voice recordings",
+        "listeningVerified": false
+      },
+      "english": "My phone is dead. The app still confirms that I am here in person. I hold the device up so it does not forget me."
+    },
+    {
+      "actorId": "pfandarchitektin",
+      "voiceId": "amt-baerbel-pfennig",
+      "text": "Dieser Bon ist länger als der Flur. Die Quittung für die Quittung fehlt noch; ohne sie darf ich den Anfang nicht abreißen.",
+      "profileId": "fd76c3fc053c4932b910fa504f376edc",
+      "referenceSha256": "721d1481053acd148bf91b59699fea241311b6db2610508a3570c55fde0e7cf1",
+      "rawSha256": "61fe6069d0a597017e0ef46036def001caf4e714e83c6b596b7459bb2ada78da",
+      "renderer": "ResembleAI/Chatterbox Multilingual V2 0.1.7",
+      "modelRevision": "5bb1f6ee58e50c3b8d408bc82a6d3740c2db6e18",
+      "modelLicense": "MIT",
+      "referenceLicense": "CC0-1.0 (EmoDB original, transformed reference)",
+      "durationSeconds": 7.52,
+      "listening": "pending",
+      "seed": 65001,
+      "processing": "[0:a]highpass=f=65,lowpass=f=7600,asplit[clean][wet];[wet]rubberband=pitch=0.85,lowpass=f=1450,volume=0.16[shadow];[clean][shadow]amix=inputs=2:duration=first:normalize=0[a]",
+      "normalization": {
+        "targetLufs": -18,
+        "targetTruePeakDbtp": -1.5,
+        "filter": "loudnorm=I=-16.96:TP=-1.8:LRA=11:linear=false",
+        "iterations": 2
+      },
+      "asr": "Dieser Bohn ist länger als der Flur. Die Quittung für die Quittung fehlt noch, ohne sie darf ich den Anfang nicht abreißen.",
+      "asrWordExact": false,
+      "asrModel": "independent faster-whisper, cached local model, CPU int8, no script prompt",
+      "wordCues": [],
+      "integratedLufs": -18.2,
+      "truePeakDbtp": -2.2,
+      "sha256": "53bc3b50346edef6629f431ce9fc5fbd78fa107ebd00e64741258eb22f780e14",
+      "rawDurationSeconds": 7.52,
+      "asrOrthographicListeningFlag": true,
+      "clipId": "amt-baerbel-pfennig-fever-1",
+      "path": "assets/voices/amt-fever/amt-baerbel-pfennig-fever-1.mp3",
+      "status": "user-approved default dialogue",
+      "provenanceManifest": "assets/voices/amt-fever/manifest.json",
+      "approval": {
+        "status": "user-approved",
+        "date": "2026-10-10",
+        "instruction": "I approve, just implement it",
+        "scope": "Default Bürgeramt fever encounters and alternate voice recordings",
+        "listeningVerified": false
+      },
+      "english": "This receipt is longer than the corridor. The receipt for the receipt is still missing; without it, I cannot tear off the beginning."
+    },
+    {
+      "actorId": "kopiependler",
+      "voiceId": "amt-uwe-kopitz",
+      "text": "Ich habe das Original kopiert, wie verlangt. Jetzt gilt die Kopie als Original und mein Original als verdächtige Zweitschrift.",
+      "profileId": "e7a5a74103884c308730d7effa496ce2",
+      "referenceSha256": "ab193397a1f9a143cacd700fc2234b4ac9f72366ad2c799cf84ef509dd4c2df0",
+      "rawSha256": "55a0cbb9525faa8a63cd7942e644af71d0b015c8ec49d83f4defbcef240380e0",
+      "renderer": "ResembleAI/Chatterbox Multilingual V2 0.1.7",
+      "modelRevision": "5bb1f6ee58e50c3b8d408bc82a6d3740c2db6e18",
+      "modelLicense": "MIT",
+      "referenceLicense": "CC0-1.0 (EmoDB original, transformed reference)",
+      "durationSeconds": 8.48,
+      "listening": "pending",
+      "seed": 61006,
+      "processing": "[0:a]highpass=f=65,lowpass=f=7600,asplit[clean][wet];[wet]rubberband=pitch=0.9,lowpass=f=1450,volume=0.16[shadow];[clean][shadow]amix=inputs=2:duration=first:normalize=0[a]",
+      "normalization": {
+        "targetLufs": -18,
+        "targetTruePeakDbtp": -1.5,
+        "filter": "loudnorm=I=-16.18:TP=-1.8:LRA=11:linear=false",
+        "iterations": 3
+      },
+      "asr": "Ich habe das Original kopiert, wie verlangt. Jetzt gilt die Kopie als Original und mein Original als verdächtige Zweitschrift.",
+      "asrWordExact": true,
+      "asrModel": "independent faster-whisper, cached local model, CPU int8, no script prompt",
+      "wordCues": [
+        {
+          "at": 0,
+          "charIndex": 0,
+          "word": "Ich",
+          "end": 0.22
+        },
+        {
+          "at": 0.22,
+          "charIndex": 4,
+          "word": "habe",
+          "end": 0.42
+        },
+        {
+          "at": 0.42,
+          "charIndex": 9,
+          "word": "das",
+          "end": 0.6
+        },
+        {
+          "at": 0.6,
+          "charIndex": 13,
+          "word": "Original",
+          "end": 1.02
+        },
+        {
+          "at": 1.02,
+          "charIndex": 22,
+          "word": "kopiert",
+          "end": 1.62
+        },
+        {
+          "at": 1.64,
+          "charIndex": 31,
+          "word": "wie",
+          "end": 2.02
+        },
+        {
+          "at": 2.02,
+          "charIndex": 35,
+          "word": "verlangt",
+          "end": 2.52
+        },
+        {
+          "at": 2.76,
+          "charIndex": 45,
+          "word": "Jetzt",
+          "end": 3.32
+        },
+        {
+          "at": 3.32,
+          "charIndex": 51,
+          "word": "gilt",
+          "end": 3.54
+        },
+        {
+          "at": 3.54,
+          "charIndex": 56,
+          "word": "die",
+          "end": 3.7
+        },
+        {
+          "at": 3.7,
+          "charIndex": 60,
+          "word": "Kopie",
+          "end": 4.08
+        },
+        {
+          "at": 4.08,
+          "charIndex": 66,
+          "word": "als",
+          "end": 4.3
+        },
+        {
+          "at": 4.3,
+          "charIndex": 70,
+          "word": "Original",
+          "end": 4.78
+        },
+        {
+          "at": 4.78,
+          "charIndex": 79,
+          "word": "und",
+          "end": 5.32
+        },
+        {
+          "at": 5.32,
+          "charIndex": 83,
+          "word": "mein",
+          "end": 5.58
+        },
+        {
+          "at": 5.58,
+          "charIndex": 88,
+          "word": "Original",
+          "end": 6.08
+        },
+        {
+          "at": 6.08,
+          "charIndex": 97,
+          "word": "als",
+          "end": 6.4
+        },
+        {
+          "at": 6.4,
+          "charIndex": 101,
+          "word": "verdächtige",
+          "end": 6.94
+        },
+        {
+          "at": 6.94,
+          "charIndex": 113,
+          "word": "Zweitschrift",
+          "end": 7.54
+        }
+      ],
+      "integratedLufs": -18.21,
+      "truePeakDbtp": -2.24,
+      "sha256": "60c266324c237efa456c83b09c80502b05cb9c66e3197e4dfbeec2b1a1d2a1cf",
+      "rawDurationSeconds": 8.48,
+      "asrOrthographicListeningFlag": false,
+      "clipId": "amt-uwe-kopitz-fever-1",
+      "path": "assets/voices/amt-fever/amt-uwe-kopitz-fever-1.mp3",
+      "status": "user-approved default dialogue",
+      "provenanceManifest": "assets/voices/amt-fever/manifest.json",
+      "approval": {
+        "status": "user-approved",
+        "date": "2026-10-10",
+        "instruction": "I approve, just implement it",
+        "scope": "Default Bürgeramt fever encounters and alternate voice recordings",
+        "listeningVerified": false
+      },
+      "english": "I copied the original as requested. Now the copy counts as the original, and my original is a suspicious duplicate."
+    },
+    {
+      "actorId": "warteschlangenpoetin",
+      "voiceId": "amt-hilde-wartenscheidt",
+      "text": "Die Nummer auf meinem Zettel hat sich verdoppelt. Ich soll beweisen, welche Hälfte zuerst gewartet hat.",
+      "profileId": "f55b40ca02e84ae696c396f211f880d6",
+      "referenceSha256": "d7bc37151dbe6b06f47ef7a65e2a6ec6e3cfa3a49cb5ccd90049165a445dfb27",
+      "rawSha256": "f0f35fddc07e20a542e58ccc1493fa5585310c413cd8820ec6f1a35cd221bfd0",
+      "renderer": "ResembleAI/Chatterbox Multilingual V2 0.1.7",
+      "modelRevision": "5bb1f6ee58e50c3b8d408bc82a6d3740c2db6e18",
+      "modelLicense": "MIT",
+      "referenceLicense": "CC0-1.0 (EmoDB original, transformed reference)",
+      "durationSeconds": 5.56,
+      "listening": "pending",
+      "seed": 61007,
+      "processing": "[0:a]highpass=f=65,lowpass=f=7600,asplit[clean][wet];[wet]rubberband=pitch=0.87,lowpass=f=1450,volume=0.16[shadow];[clean][shadow]amix=inputs=2:duration=first:normalize=0[a]",
+      "normalization": {
+        "targetLufs": -18,
+        "targetTruePeakDbtp": -1.5,
+        "filter": "loudnorm=I=-16.79:TP=-1.8:LRA=11:linear=false",
+        "iterations": 2
+      },
+      "asr": "Die Nummer auf meinem Zettel hat sich verdoppelt. Ich soll beweisen, welche Hälfte zuerst gewartet hat.",
+      "asrWordExact": true,
+      "asrModel": "independent faster-whisper, cached local model, CPU int8, no script prompt",
+      "wordCues": [
+        {
+          "at": 0,
+          "charIndex": 0,
+          "word": "Die",
+          "end": 0.2
+        },
+        {
+          "at": 0.2,
+          "charIndex": 4,
+          "word": "Nummer",
+          "end": 0.48
+        },
+        {
+          "at": 0.48,
+          "charIndex": 11,
+          "word": "auf",
+          "end": 0.74
+        },
+        {
+          "at": 0.74,
+          "charIndex": 15,
+          "word": "meinem",
+          "end": 0.96
+        },
+        {
+          "at": 0.96,
+          "charIndex": 22,
+          "word": "Zettel",
+          "end": 1.38
+        },
+        {
+          "at": 1.38,
+          "charIndex": 29,
+          "word": "hat",
+          "end": 1.5
+        },
+        {
+          "at": 1.5,
+          "charIndex": 33,
+          "word": "sich",
+          "end": 1.66
+        },
+        {
+          "at": 1.66,
+          "charIndex": 38,
+          "word": "verdoppelt",
+          "end": 2.22
+        },
+        {
+          "at": 2.44,
+          "charIndex": 50,
+          "word": "Ich",
+          "end": 2.86
+        },
+        {
+          "at": 2.86,
+          "charIndex": 54,
+          "word": "soll",
+          "end": 3.02
+        },
+        {
+          "at": 3.02,
+          "charIndex": 59,
+          "word": "beweisen",
+          "end": 3.5
+        },
+        {
+          "at": 3.6,
+          "charIndex": 69,
+          "word": "welche",
+          "end": 3.8
+        },
+        {
+          "at": 3.8,
+          "charIndex": 76,
+          "word": "Hälfte",
+          "end": 4.18
+        },
+        {
+          "at": 4.18,
+          "charIndex": 83,
+          "word": "zuerst",
+          "end": 4.54
+        },
+        {
+          "at": 4.54,
+          "charIndex": 90,
+          "word": "gewartet",
+          "end": 4.96
+        },
+        {
+          "at": 4.96,
+          "charIndex": 99,
+          "word": "hat",
+          "end": 5.2
+        }
+      ],
+      "integratedLufs": -18,
+      "truePeakDbtp": -3.25,
+      "sha256": "555c271bd0ed581188e71dd84c91b7a383d8fb7ddf1d5171669eadfbe3dcd7bf",
+      "rawDurationSeconds": 5.56,
+      "asrOrthographicListeningFlag": false,
+      "clipId": "amt-hilde-wartenscheidt-fever-1",
+      "path": "assets/voices/amt-fever/amt-hilde-wartenscheidt-fever-1.mp3",
+      "status": "user-approved default dialogue",
+      "provenanceManifest": "assets/voices/amt-fever/manifest.json",
+      "approval": {
+        "status": "user-approved",
+        "date": "2026-10-10",
+        "instruction": "I approve, just implement it",
+        "scope": "Default Bürgeramt fever encounters and alternate voice recordings",
+        "listeningVerified": false
+      },
+      "english": "The number on my ticket has doubled. I must prove which half waited first."
+    },
+    {
+      "actorId": "amt-konrad-wohnungszettel",
+      "voiceId": "amt-konrad-wohnungszettel",
+      "text": "Ich habe alle Unterlagen dabei. Hoffentlich reicht das.",
+      "profileId": "a1fd2081df674fba90118c4e6be303da",
+      "referenceSha256": "cacffb09242b3ee90b340daafbf81740b9134cfe36efbd234776674f21071efa",
+      "rawSha256": "e0ae2f6c84111982df6939050ad0646c55fc680c917558f0a3f99afc4418e4a5",
+      "renderer": "ResembleAI/Chatterbox Multilingual V2 0.1.7",
+      "modelRevision": "5bb1f6ee58e50c3b8d408bc82a6d3740c2db6e18",
+      "modelLicense": "MIT",
+      "referenceLicense": "CC0-1.0 (EmoDB original, transformed reference)",
+      "durationSeconds": 4.02,
+      "listening": "pending",
+      "seed": 61008,
+      "processing": "[0:a]highpass=f=65,lowpass=f=7600,asplit[clean][wet];[wet]rubberband=pitch=0.92,lowpass=f=1450,volume=0.16[shadow];[clean][shadow]amix=inputs=2:duration=first:normalize=0[a]",
+      "normalization": {
+        "targetLufs": -18,
+        "targetTruePeakDbtp": -1.5,
+        "filter": "loudnorm=I=-11.680000000000003:TP=-1.8:LRA=11:linear=false",
+        "iterations": 7
+      },
+      "asr": "Ich habe alle Unterlagen dabei. Hoffentlich reicht das.",
+      "asrWordExact": true,
+      "asrModel": "independent faster-whisper, cached local model, CPU int8, no script prompt",
+      "wordCues": [
+        {
+          "at": 0,
+          "charIndex": 0,
+          "word": "Ich",
+          "end": 0.22
+        },
+        {
+          "at": 0.22,
+          "charIndex": 4,
+          "word": "habe",
+          "end": 0.44
+        },
+        {
+          "at": 0.44,
+          "charIndex": 9,
+          "word": "alle",
+          "end": 0.66
+        },
+        {
+          "at": 0.66,
+          "charIndex": 14,
+          "word": "Unterlagen",
+          "end": 1.22
+        },
+        {
+          "at": 1.22,
+          "charIndex": 25,
+          "word": "dabei",
+          "end": 1.5
+        },
+        {
+          "at": 1.78,
+          "charIndex": 32,
+          "word": "Hoffentlich",
+          "end": 2.26
+        },
+        {
+          "at": 2.26,
+          "charIndex": 44,
+          "word": "reicht",
+          "end": 2.62
+        },
+        {
+          "at": 2.62,
+          "charIndex": 51,
+          "word": "das",
+          "end": 2.94
+        }
+      ],
+      "integratedLufs": -18.29,
+      "truePeakDbtp": -2.15,
+      "sha256": "9f43d2826f529223d124425129c138c3f56a1dd24d344adb50b024df4de2aa23",
+      "rawDurationSeconds": 4.02,
+      "asrOrthographicListeningFlag": false,
+      "clipId": "amt-konrad-wohnungszettel-fever-1",
+      "path": "assets/voices/amt-fever/amt-konrad-wohnungszettel-fever-1.mp3",
+      "status": "user-approved default dialogue",
+      "provenanceManifest": "assets/voices/amt-fever/manifest.json",
+      "approval": {
+        "status": "user-approved",
+        "date": "2026-10-10",
+        "instruction": "I approve, just implement it",
+        "scope": "Default Bürgeramt fever encounters and alternate voice recordings",
+        "listeningVerified": false
+      },
+      "english": "I have all the documents with me. Hopefully that is enough."
+    },
+    {
+      "actorId": "amt-mechthild-elternbogen",
+      "voiceId": "amt-mechthild-elternbogen",
+      "text": "Ich warte auf die Bestätigung für mein Kind.",
+      "profileId": "2946f9d627084b68933cb72f64bc32b7",
+      "referenceSha256": "57c14bf44e4e90bbe0faee463b511ea6cda09b147ad85800e748442ee3e0172d",
+      "rawSha256": "86ce5b981a16500a6f16859629046fa1a4ff6645f1a0371b2086e0fa504978c7",
+      "renderer": "ResembleAI/Chatterbox Multilingual V2 0.1.7",
+      "modelRevision": "5bb1f6ee58e50c3b8d408bc82a6d3740c2db6e18",
+      "modelLicense": "MIT",
+      "referenceLicense": "CC0-1.0 (EmoDB original, transformed reference)",
+      "durationSeconds": 2.5,
+      "listening": "pending",
+      "seed": 61009,
+      "processing": "[0:a]highpass=f=65,lowpass=f=7600,asplit[clean][wet];[wet]rubberband=pitch=0.94,lowpass=f=1450,volume=0.16[shadow];[clean][shadow]amix=inputs=2:duration=first:normalize=0[a]",
+      "normalization": {
+        "targetLufs": -18,
+        "targetTruePeakDbtp": -1.5,
+        "filter": "volume=1.1402497875611688,alimiter=limit=0.78:attack=1:release=80:level=false:latency=true",
+        "iterations": 2
+      },
+      "asr": "Ich warte auf die Bestätigung für mein Kind.",
+      "asrWordExact": true,
+      "asrModel": "independent faster-whisper, cached local model, CPU int8, no script prompt",
+      "wordCues": [
+        {
+          "at": 0,
+          "charIndex": 0,
+          "word": "Ich",
+          "end": 0.18
+        },
+        {
+          "at": 0.18,
+          "charIndex": 4,
+          "word": "warte",
+          "end": 0.5
+        },
+        {
+          "at": 0.5,
+          "charIndex": 10,
+          "word": "auf",
+          "end": 0.64
+        },
+        {
+          "at": 0.64,
+          "charIndex": 14,
+          "word": "die",
+          "end": 0.76
+        },
+        {
+          "at": 0.76,
+          "charIndex": 18,
+          "word": "Bestätigung",
+          "end": 1.36
+        },
+        {
+          "at": 1.36,
+          "charIndex": 30,
+          "word": "für",
+          "end": 1.56
+        },
+        {
+          "at": 1.56,
+          "charIndex": 34,
+          "word": "mein",
+          "end": 1.74
+        },
+        {
+          "at": 1.74,
+          "charIndex": 39,
+          "word": "Kind",
+          "end": 2.06
+        }
+      ],
+      "integratedLufs": -18.1,
+      "truePeakDbtp": -2.58,
+      "sha256": "d6960b76dbe7311ae88f0dcc4225cda7067cc46d9ecf49128a6f3c193168e705",
+      "rawDurationSeconds": 2.5,
+      "asrOrthographicListeningFlag": false,
+      "clipId": "amt-mechthild-elternbogen-fever-1",
+      "path": "assets/voices/amt-fever/amt-mechthild-elternbogen-fever-1.mp3",
+      "status": "user-approved default dialogue",
+      "provenanceManifest": "assets/voices/amt-fever/manifest.json",
+      "approval": {
+        "status": "user-approved",
+        "date": "2026-10-10",
+        "instruction": "I approve, just implement it",
+        "scope": "Default Bürgeramt fever encounters and alternate voice recordings",
+        "listeningVerified": false
+      },
+      "english": "I am waiting for the confirmation for my child."
+    },
+    {
+      "actorId": "amt-wolfram-rentenbescheid",
+      "voiceId": "amt-wolfram-rentenbescheid",
+      "text": "Mein Bescheid ist seit drei Wochen unterwegs.",
+      "profileId": "65ebfa45e9394ccb9b4f4f5075ab672c",
+      "referenceSha256": "93811e803ba4467524fb6ca043cca90b403fb0b68515cfaccbbb5b34bc59104e",
+      "rawSha256": "1d80c57e12b694a5d7c3f507eddb0ba2593536db62e86c3046ca12bef0f60dc7",
+      "renderer": "ResembleAI/Chatterbox Multilingual V2 0.1.7",
+      "modelRevision": "5bb1f6ee58e50c3b8d408bc82a6d3740c2db6e18",
+      "modelLicense": "MIT",
+      "referenceLicense": "CC0-1.0 (EmoDB original, transformed reference)",
+      "durationSeconds": 3.16,
+      "listening": "pending",
+      "seed": 61010,
+      "processing": "[0:a]highpass=f=65,lowpass=f=7600,asplit[clean][wet];[wet]rubberband=pitch=0.82,lowpass=f=1450,volume=0.16[shadow];[clean][shadow]amix=inputs=2:duration=first:normalize=0[a]",
+      "normalization": {
+        "targetLufs": -18,
+        "targetTruePeakDbtp": -1.5,
+        "filter": "loudnorm=I=-13.279999999999998:TP=-1.8:LRA=11:linear=false",
+        "iterations": 6
+      },
+      "asr": "Mein Bescheid ist seit drei Wochen unterwegs.",
+      "asrWordExact": true,
+      "asrModel": "independent faster-whisper, cached local model, CPU int8, no script prompt",
+      "wordCues": [
+        {
+          "at": 0,
+          "charIndex": 0,
+          "word": "Mein",
+          "end": 0.2
+        },
+        {
+          "at": 0.2,
+          "charIndex": 5,
+          "word": "Bescheid",
+          "end": 0.66
+        },
+        {
+          "at": 0.66,
+          "charIndex": 14,
+          "word": "ist",
+          "end": 0.84
+        },
+        {
+          "at": 0.84,
+          "charIndex": 18,
+          "word": "seit",
+          "end": 1.04
+        },
+        {
+          "at": 1.04,
+          "charIndex": 23,
+          "word": "drei",
+          "end": 1.26
+        },
+        {
+          "at": 1.26,
+          "charIndex": 28,
+          "word": "Wochen",
+          "end": 1.6
+        },
+        {
+          "at": 1.6,
+          "charIndex": 35,
+          "word": "unterwegs",
+          "end": 2.04
+        }
+      ],
+      "integratedLufs": -18.27,
+      "truePeakDbtp": -2.22,
+      "sha256": "3a0bf2fd19b5366068abe176543f178af13a3dabdd4d75b81dace4da1f6170ba",
+      "rawDurationSeconds": 3.16,
+      "asrOrthographicListeningFlag": false,
+      "clipId": "amt-wolfram-rentenbescheid-fever-1",
+      "path": "assets/voices/amt-fever/amt-wolfram-rentenbescheid-fever-1.mp3",
+      "status": "user-approved default dialogue",
+      "provenanceManifest": "assets/voices/amt-fever/manifest.json",
+      "approval": {
+        "status": "user-approved",
+        "date": "2026-10-10",
+        "instruction": "I approve, just implement it",
+        "scope": "Default Bürgeramt fever encounters and alternate voice recordings",
+        "listeningVerified": false
+      },
+      "english": "My decision letter has been on its way for three weeks."
+    },
+    {
+      "actorId": "clerk",
+      "voiceId": "amt-brunhilde-knick",
+      "text": "Ihre Wartenummer bestätigt, dass Sie hier sind. Ihr Gesicht lässt vermuten, dass Sie wieder gehen könnten. Welcher Nachweis hat Vorrang?",
+      "profileId": "b080c7d95ecd418fb428282461d7fbe7",
+      "referenceSha256": "901e9ad60eda5cbb36337b12864b6a2b0d133570acb90941b9eabd9888c16351",
+      "rawSha256": "a2b45cae149830a3c1d21fdbc79201154744b3c75554c83b7b87797ff054c25d",
+      "renderer": "ResembleAI/Chatterbox Multilingual V2 0.1.7",
+      "modelRevision": "5bb1f6ee58e50c3b8d408bc82a6d3740c2db6e18",
+      "modelLicense": "MIT",
+      "referenceLicense": "CC0-1.0 (EmoDB original, transformed reference)",
+      "durationSeconds": 7.76,
+      "listening": "pending",
+      "seed": 65002,
+      "processing": "[0:a]highpass=f=65,lowpass=f=7600,asplit[clean][wet];[wet]rubberband=pitch=0.78,lowpass=f=1450,volume=0.16[shadow];[clean][shadow]amix=inputs=2:duration=first:normalize=0[a]",
+      "normalization": {
+        "targetLufs": -18,
+        "targetTruePeakDbtp": -1.5,
+        "filter": "loudnorm=I=-11.27:TP=-1.8:LRA=11:linear=false",
+        "iterations": 6
+      },
+      "asr": "Ihre Wartenummer bestätigt, dass sie hier sind. Ihr Gesicht lässt vermuten, dass sie wieder gehen könnten. Welcher Nachweis hat Vorrang?",
+      "asrWordExact": true,
+      "asrModel": "independent faster-whisper, cached local model, CPU int8, no script prompt",
+      "wordCues": [
+        {
+          "at": 0,
+          "charIndex": 0,
+          "word": "Ihre",
+          "end": 0.34
+        },
+        {
+          "at": 0.34,
+          "charIndex": 5,
+          "word": "Wartenummer",
+          "end": 0.96
+        },
+        {
+          "at": 0.96,
+          "charIndex": 17,
+          "word": "bestätigt",
+          "end": 1.64
+        },
+        {
+          "at": 1.76,
+          "charIndex": 28,
+          "word": "dass",
+          "end": 2.02
+        },
+        {
+          "at": 2.02,
+          "charIndex": 33,
+          "word": "Sie",
+          "end": 2.18
+        },
+        {
+          "at": 2.18,
+          "charIndex": 37,
+          "word": "hier",
+          "end": 2.38
+        },
+        {
+          "at": 2.38,
+          "charIndex": 42,
+          "word": "sind",
+          "end": 2.68
+        },
+        {
+          "at": 2.84,
+          "charIndex": 48,
+          "word": "Ihr",
+          "end": 3.14
+        },
+        {
+          "at": 3.14,
+          "charIndex": 52,
+          "word": "Gesicht",
+          "end": 3.48
+        },
+        {
+          "at": 3.48,
+          "charIndex": 60,
+          "word": "lässt",
+          "end": 3.72
+        },
+        {
+          "at": 3.72,
+          "charIndex": 66,
+          "word": "vermuten",
+          "end": 4.22
+        },
+        {
+          "at": 4.32,
+          "charIndex": 76,
+          "word": "dass",
+          "end": 4.4
+        },
+        {
+          "at": 4.4,
+          "charIndex": 81,
+          "word": "Sie",
+          "end": 4.52
+        },
+        {
+          "at": 4.52,
+          "charIndex": 85,
+          "word": "wieder",
+          "end": 4.72
+        },
+        {
+          "at": 4.72,
+          "charIndex": 92,
+          "word": "gehen",
+          "end": 5
+        },
+        {
+          "at": 5,
+          "charIndex": 98,
+          "word": "könnten",
+          "end": 5.42
+        },
+        {
+          "at": 5.7,
+          "charIndex": 107,
+          "word": "Welcher",
+          "end": 6.04
+        },
+        {
+          "at": 6.04,
+          "charIndex": 115,
+          "word": "Nachweis",
+          "end": 6.48
+        },
+        {
+          "at": 6.48,
+          "charIndex": 124,
+          "word": "hat",
+          "end": 6.64
+        },
+        {
+          "at": 6.64,
+          "charIndex": 128,
+          "word": "Vorrang",
+          "end": 7.1
+        }
+      ],
+      "integratedLufs": -18.27,
+      "truePeakDbtp": -2.19,
+      "sha256": "b545bccd1a3599cf70e85f7863d91ddbdc2d10769ff13259dc55a32528d968ab",
+      "rawDurationSeconds": 7.76,
+      "asrOrthographicListeningFlag": false,
+      "clipId": "amt-brunhilde-knick-fever-1",
+      "path": "assets/voices/amt-fever/amt-brunhilde-knick-fever-1.mp3",
+      "status": "user-approved default dialogue",
+      "provenanceManifest": "assets/voices/amt-fever/manifest.json",
+      "approval": {
+        "status": "user-approved",
+        "date": "2026-10-10",
+        "instruction": "I approve, just implement it",
+        "scope": "Default Bürgeramt fever encounters and alternate voice recordings",
+        "listeningVerified": false
+      },
+      "english": "Your waiting number confirms that you are here. Your face suggests that you might leave again. Which proof takes priority?"
+    },
+    {
+      "actorId": "aktenkurier",
+      "voiceId": "amt-horst-stempelmann",
+      "text": "Ihr Formular ist jetzt im Umlauf. Bitte bleiben Sie stehen, bis es Sie eingeholt hat.",
+      "profileId": "833480652ccf455f8184cbe752861420",
+      "referenceSha256": "53b3bfdeb2e2e2df5437eb630cee74577a3639943b0bcf87e9b8993290b84378",
+      "rawSha256": "cbfb28493628fa1254d6a2267a49b6c9977d320f8b82f8a0e0dbe223ffba85c5",
+      "renderer": "ResembleAI/Chatterbox Multilingual V2 0.1.7",
+      "modelRevision": "5bb1f6ee58e50c3b8d408bc82a6d3740c2db6e18",
+      "modelLicense": "MIT",
+      "referenceLicense": "CC0-1.0 (EmoDB original, transformed reference)",
+      "durationSeconds": 4.76,
+      "listening": "pending",
+      "seed": 61012,
+      "processing": "[0:a]highpass=f=65,lowpass=f=7600,asplit[clean][wet];[wet]rubberband=pitch=0.83,lowpass=f=1450,volume=0.16[shadow];[clean][shadow]amix=inputs=2:duration=first:normalize=0[a]",
+      "normalization": {
+        "targetLufs": -18,
+        "targetTruePeakDbtp": -1.5,
+        "filter": "loudnorm=I=-15.61:TP=-1.8:LRA=11:linear=false",
+        "iterations": 4
+      },
+      "asr": "Ihr Formular ist jetzt im Umlauf. Bitte bleiben Sie stehen, bis es Sie eingeholt hat.",
+      "asrWordExact": true,
+      "asrModel": "independent faster-whisper, cached local model, CPU int8, no script prompt",
+      "wordCues": [
+        {
+          "at": 0,
+          "charIndex": 0,
+          "word": "Ihr",
+          "end": 0.26
+        },
+        {
+          "at": 0.26,
+          "charIndex": 4,
+          "word": "Formular",
+          "end": 0.78
+        },
+        {
+          "at": 0.78,
+          "charIndex": 13,
+          "word": "ist",
+          "end": 1
+        },
+        {
+          "at": 1,
+          "charIndex": 17,
+          "word": "jetzt",
+          "end": 1.16
+        },
+        {
+          "at": 1.16,
+          "charIndex": 23,
+          "word": "im",
+          "end": 1.32
+        },
+        {
+          "at": 1.32,
+          "charIndex": 26,
+          "word": "Umlauf",
+          "end": 1.72
+        },
+        {
+          "at": 1.92,
+          "charIndex": 34,
+          "word": "Bitte",
+          "end": 2.14
+        },
+        {
+          "at": 2.14,
+          "charIndex": 40,
+          "word": "bleiben",
+          "end": 2.42
+        },
+        {
+          "at": 2.42,
+          "charIndex": 48,
+          "word": "Sie",
+          "end": 2.56
+        },
+        {
+          "at": 2.56,
+          "charIndex": 52,
+          "word": "stehen",
+          "end": 2.88
+        },
+        {
+          "at": 2.98,
+          "charIndex": 60,
+          "word": "bis",
+          "end": 3.06
+        },
+        {
+          "at": 3.06,
+          "charIndex": 64,
+          "word": "es",
+          "end": 3.14
+        },
+        {
+          "at": 3.14,
+          "charIndex": 67,
+          "word": "Sie",
+          "end": 3.24
+        },
+        {
+          "at": 3.24,
+          "charIndex": 71,
+          "word": "eingeholt",
+          "end": 3.66
+        },
+        {
+          "at": 3.66,
+          "charIndex": 81,
+          "word": "hat",
+          "end": 3.82
+        }
+      ],
+      "integratedLufs": -18.23,
+      "truePeakDbtp": -2.23,
+      "sha256": "c21f80e1b7911b28959c9654dff488d482270f05c57c1dbf3a2087684ee8033a",
+      "rawDurationSeconds": 4.76,
+      "asrOrthographicListeningFlag": false,
+      "clipId": "amt-horst-stempelmann-fever-2",
+      "path": "assets/voices/amt-fever/amt-horst-stempelmann-fever-2.mp3",
+      "status": "user-approved default dialogue",
+      "provenanceManifest": "assets/voices/amt-fever/manifest.json",
+      "approval": {
+        "status": "user-approved",
+        "date": "2026-10-10",
+        "instruction": "I approve, just implement it",
+        "scope": "Default Bürgeramt fever encounters and alternate voice recordings",
+        "listeningVerified": false
+      },
+      "english": "Your form is now in circulation. Please stand still until it catches up with you."
+    },
+    {
+      "actorId": "archivbotin",
+      "voiceId": "amt-gisela-aktenberg",
+      "text": "Der Schlüssel passt. Das Schloss stellt noch einen Antrag auf Zuständigkeit.",
+      "profileId": "44d0f901322e403fa5ad8140c68ae426",
+      "referenceSha256": "2e52936700b3c2d670661a3154bf2f5fec7b2859155b11b9c50f28c20ecd928a",
+      "rawSha256": "872b69c5ca9a14437cac193464825ca34a4cfe860130084c64cddf600ada8b66",
+      "renderer": "ResembleAI/Chatterbox Multilingual V2 0.1.7",
+      "modelRevision": "5bb1f6ee58e50c3b8d408bc82a6d3740c2db6e18",
+      "modelLicense": "MIT",
+      "referenceLicense": "CC0-1.0 (EmoDB original, transformed reference)",
+      "durationSeconds": 5,
+      "listening": "pending",
+      "seed": 61013,
+      "processing": "[0:a]highpass=f=65,lowpass=f=7600,asplit[clean][wet];[wet]rubberband=pitch=0.93,lowpass=f=1450,volume=0.16[shadow];[clean][shadow]amix=inputs=2:duration=first:normalize=0[a]",
+      "normalization": {
+        "targetLufs": -18,
+        "targetTruePeakDbtp": -1.5,
+        "filter": "loudnorm=I=-17.12:TP=-1.8:LRA=11:linear=false",
+        "iterations": 2
+      },
+      "asr": "Der Schlüssel passt. Das Schloss stellt noch einen Antrag auf Zuständigkeit.",
+      "asrWordExact": true,
+      "asrModel": "independent faster-whisper, cached local model, CPU int8, no script prompt",
+      "wordCues": [
+        {
+          "at": 0,
+          "charIndex": 0,
+          "word": "Der",
+          "end": 0.2
+        },
+        {
+          "at": 0.2,
+          "charIndex": 4,
+          "word": "Schlüssel",
+          "end": 0.58
+        },
+        {
+          "at": 0.58,
+          "charIndex": 14,
+          "word": "passt",
+          "end": 0.96
+        },
+        {
+          "at": 1.32,
+          "charIndex": 21,
+          "word": "Das",
+          "end": 1.84
+        },
+        {
+          "at": 1.84,
+          "charIndex": 25,
+          "word": "Schloss",
+          "end": 2.12
+        },
+        {
+          "at": 2.12,
+          "charIndex": 33,
+          "word": "stellt",
+          "end": 2.36
+        },
+        {
+          "at": 2.36,
+          "charIndex": 40,
+          "word": "noch",
+          "end": 2.54
+        },
+        {
+          "at": 2.54,
+          "charIndex": 45,
+          "word": "einen",
+          "end": 2.76
+        },
+        {
+          "at": 2.76,
+          "charIndex": 51,
+          "word": "Antrag",
+          "end": 3.1
+        },
+        {
+          "at": 3.1,
+          "charIndex": 58,
+          "word": "auf",
+          "end": 3.34
+        },
+        {
+          "at": 3.34,
+          "charIndex": 62,
+          "word": "Zuständigkeit",
+          "end": 4.2
+        }
+      ],
+      "integratedLufs": -18.2,
+      "truePeakDbtp": -2.24,
+      "sha256": "e964813630d2ea54e742d42e616ddae064b223dc45ba9fde1fc637ee8c3a5f07",
+      "rawDurationSeconds": 5,
+      "asrOrthographicListeningFlag": false,
+      "clipId": "amt-gisela-aktenberg-fever-2",
+      "path": "assets/voices/amt-fever/amt-gisela-aktenberg-fever-2.mp3",
+      "status": "user-approved default dialogue",
+      "provenanceManifest": "assets/voices/amt-fever/manifest.json",
+      "approval": {
+        "status": "user-approved",
+        "date": "2026-10-10",
+        "instruction": "I approve, just implement it",
+        "scope": "Default Bürgeramt fever encounters and alternate voice recordings",
+        "listeningVerified": false
+      },
+      "english": "The key fits. The lock is still applying for jurisdiction."
+    },
+    {
+      "actorId": "formularsammler",
+      "voiceId": "amt-dieter-papiermann",
+      "text": "Die letzte Seite war leer. Frau Knick nennt das ein freies Zeitfenster. Ich nenne es Aussicht.",
+      "profileId": "eb4aab1842eb450eacbdd5d4ccc38ab6",
+      "referenceSha256": "299dc1e9eef10ded8821becc7f198700e20d446ca902744d53dfa0c22988da91",
+      "rawSha256": "ad27e634e799f276cd69b3146707ec0263561cea56363a698c77b4234e192a55",
+      "renderer": "ResembleAI/Chatterbox Multilingual V2 0.1.7",
+      "modelRevision": "5bb1f6ee58e50c3b8d408bc82a6d3740c2db6e18",
+      "modelLicense": "MIT",
+      "referenceLicense": "CC0-1.0 (EmoDB original, transformed reference)",
+      "durationSeconds": 6.68,
+      "listening": "pending",
+      "seed": 61014,
+      "processing": "[0:a]highpass=f=65,lowpass=f=7600,asplit[clean][wet];[wet]rubberband=pitch=0.89,lowpass=f=1450,volume=0.16[shadow];[clean][shadow]amix=inputs=2:duration=first:normalize=0[a]",
+      "normalization": {
+        "targetLufs": -18,
+        "targetTruePeakDbtp": -1.5,
+        "filter": "loudnorm=I=-13.900000000000002:TP=-1.8:LRA=11:linear=false",
+        "iterations": 5
+      },
+      "asr": "Die letzte Seite war leer. Frau Knick nennt das ein freies Zeitfenster. Ich nenne es Aussicht.",
+      "asrWordExact": true,
+      "asrModel": "independent faster-whisper, cached local model, CPU int8, no script prompt",
+      "wordCues": [
+        {
+          "at": 0,
+          "charIndex": 0,
+          "word": "Die",
+          "end": 0.18
+        },
+        {
+          "at": 0.18,
+          "charIndex": 4,
+          "word": "letzte",
+          "end": 0.52
+        },
+        {
+          "at": 0.52,
+          "charIndex": 11,
+          "word": "Seite",
+          "end": 0.82
+        },
+        {
+          "at": 0.82,
+          "charIndex": 17,
+          "word": "war",
+          "end": 1.04
+        },
+        {
+          "at": 1.04,
+          "charIndex": 21,
+          "word": "leer",
+          "end": 1.3
+        },
+        {
+          "at": 1.62,
+          "charIndex": 27,
+          "word": "Frau",
+          "end": 2.1
+        },
+        {
+          "at": 2.1,
+          "charIndex": 32,
+          "word": "Knick",
+          "end": 2.42
+        },
+        {
+          "at": 2.42,
+          "charIndex": 38,
+          "word": "nennt",
+          "end": 2.72
+        },
+        {
+          "at": 2.72,
+          "charIndex": 44,
+          "word": "das",
+          "end": 2.84
+        },
+        {
+          "at": 2.84,
+          "charIndex": 48,
+          "word": "ein",
+          "end": 3
+        },
+        {
+          "at": 3,
+          "charIndex": 52,
+          "word": "freies",
+          "end": 3.38
+        },
+        {
+          "at": 3.38,
+          "charIndex": 59,
+          "word": "Zeitfenster",
+          "end": 4.12
+        },
+        {
+          "at": 4.36,
+          "charIndex": 72,
+          "word": "Ich",
+          "end": 4.78
+        },
+        {
+          "at": 4.78,
+          "charIndex": 76,
+          "word": "nenne",
+          "end": 5.02
+        },
+        {
+          "at": 5.02,
+          "charIndex": 82,
+          "word": "es",
+          "end": 5.2
+        },
+        {
+          "at": 5.2,
+          "charIndex": 85,
+          "word": "Aussicht",
+          "end": 5.72
+        }
+      ],
+      "integratedLufs": -18.28,
+      "truePeakDbtp": -2.23,
+      "sha256": "5892c28c1b7c9abd7ea22c3838158ec13d2e231144b4c180b8357246830730b8",
+      "rawDurationSeconds": 6.68,
+      "asrOrthographicListeningFlag": false,
+      "clipId": "amt-dieter-papiermann-fever-2",
+      "path": "assets/voices/amt-fever/amt-dieter-papiermann-fever-2.mp3",
+      "status": "user-approved default dialogue",
+      "provenanceManifest": "assets/voices/amt-fever/manifest.json",
+      "approval": {
+        "status": "user-approved",
+        "date": "2026-10-10",
+        "instruction": "I approve, just implement it",
+        "scope": "Default Bürgeramt fever encounters and alternate voice recordings",
+        "listeningVerified": false
+      },
+      "english": "The last page was blank. Ms Knick calls that an available time slot. I call it a view."
+    },
+    {
+      "actorId": "nachtschichtmelderin",
+      "voiceId": "amt-ingrid-feierabend",
+      "text": "Meine Akte ist lesbar. Das ist offenbar der Formfehler. Ich soll sie noch einmal ausdrucken, bis sie müde aussieht.",
+      "profileId": "b456ded2b16d4bc38f6751bfe52266e8",
+      "referenceSha256": "bdbab9a001e15f222d47699ab12616a02740cf50993d2b841a9fe77bdd78d67c",
+      "rawSha256": "699f8a3f36be1c6f1385155ddc4f5acd892c0d7909e3bfe776911d75114c2b60",
+      "renderer": "ResembleAI/Chatterbox Multilingual V2 0.1.7",
+      "modelRevision": "5bb1f6ee58e50c3b8d408bc82a6d3740c2db6e18",
+      "modelLicense": "MIT",
+      "referenceLicense": "CC0-1.0 (EmoDB original, transformed reference)",
+      "durationSeconds": 6.46,
+      "listening": "pending",
+      "seed": 61016,
+      "processing": "[0:a]highpass=f=65,lowpass=f=7600,asplit[clean][wet];[wet]rubberband=pitch=0.96,lowpass=f=1450,volume=0.16[shadow];[clean][shadow]amix=inputs=2:duration=first:normalize=0[a]",
+      "normalization": {
+        "targetLufs": -18,
+        "targetTruePeakDbtp": -1.5,
+        "filter": "loudnorm=I=-17.32:TP=-1.8:LRA=11:linear=false",
+        "iterations": 2
+      },
+      "asr": "Meine Akte ist lesbar. Das ist offenbar der Formfehler. Ich soll sie noch einmal ausdrucken, bis sie müde aussieht.",
+      "asrWordExact": true,
+      "asrModel": "independent faster-whisper, cached local model, CPU int8, no script prompt",
+      "wordCues": [
+        {
+          "at": 0,
+          "charIndex": 0,
+          "word": "Meine",
+          "end": 0.28
+        },
+        {
+          "at": 0.28,
+          "charIndex": 6,
+          "word": "Akte",
+          "end": 0.64
+        },
+        {
+          "at": 0.64,
+          "charIndex": 11,
+          "word": "ist",
+          "end": 0.82
+        },
+        {
+          "at": 0.82,
+          "charIndex": 15,
+          "word": "lesbar",
+          "end": 1.28
+        },
+        {
+          "at": 1.44,
+          "charIndex": 23,
+          "word": "Das",
+          "end": 1.66
+        },
+        {
+          "at": 1.66,
+          "charIndex": 27,
+          "word": "ist",
+          "end": 1.8
+        },
+        {
+          "at": 1.8,
+          "charIndex": 31,
+          "word": "offenbar",
+          "end": 2.14
+        },
+        {
+          "at": 2.14,
+          "charIndex": 40,
+          "word": "der",
+          "end": 2.28
+        },
+        {
+          "at": 2.28,
+          "charIndex": 44,
+          "word": "Formfehler",
+          "end": 2.9
+        },
+        {
+          "at": 3.08,
+          "charIndex": 56,
+          "word": "Ich",
+          "end": 3.36
+        },
+        {
+          "at": 3.36,
+          "charIndex": 60,
+          "word": "soll",
+          "end": 3.52
+        },
+        {
+          "at": 3.52,
+          "charIndex": 65,
+          "word": "sie",
+          "end": 3.64
+        },
+        {
+          "at": 3.64,
+          "charIndex": 69,
+          "word": "noch",
+          "end": 3.76
+        },
+        {
+          "at": 3.76,
+          "charIndex": 74,
+          "word": "einmal",
+          "end": 4.04
+        },
+        {
+          "at": 4.04,
+          "charIndex": 81,
+          "word": "ausdrucken",
+          "end": 4.64
+        },
+        {
+          "at": 4.68,
+          "charIndex": 93,
+          "word": "bis",
+          "end": 4.8
+        },
+        {
+          "at": 4.8,
+          "charIndex": 97,
+          "word": "sie",
+          "end": 4.9
+        },
+        {
+          "at": 4.9,
+          "charIndex": 101,
+          "word": "müde",
+          "end": 5.16
+        },
+        {
+          "at": 5.16,
+          "charIndex": 106,
+          "word": "aussieht",
+          "end": 5.68
+        }
+      ],
+      "integratedLufs": -18.29,
+      "truePeakDbtp": -2.24,
+      "sha256": "f0a4097bcaeef94d937def813c2a947051b38392eddd206e4f92236a80fde94a",
+      "rawDurationSeconds": 6.46,
+      "asrOrthographicListeningFlag": false,
+      "clipId": "amt-ingrid-feierabend-fever-2",
+      "path": "assets/voices/amt-fever/amt-ingrid-feierabend-fever-2.mp3",
+      "status": "user-approved default dialogue",
+      "provenanceManifest": "assets/voices/amt-fever/manifest.json",
+      "approval": {
+        "status": "user-approved",
+        "date": "2026-10-10",
+        "instruction": "I approve, just implement it",
+        "scope": "Default Bürgeramt fever encounters and alternate voice recordings",
+        "listeningVerified": false
+      },
+      "english": "My file is legible. Apparently that is the procedural defect. I must print it again until it looks tired."
+    },
+    {
+      "actorId": "pfandarchitektin",
+      "voiceId": "amt-baerbel-pfennig",
+      "text": "Vorhin war mein Ordner leichter. Vielleicht hat die Ablage eine Seite behalten. Vielleicht war es meine Hand.",
+      "profileId": "fd76c3fc053c4932b910fa504f376edc",
+      "referenceSha256": "721d1481053acd148bf91b59699fea241311b6db2610508a3570c55fde0e7cf1",
+      "rawSha256": "942fa8b149f207cdf1ccf13b5fd76dae8e1498d93d39e5a31446d285d84fcacb",
+      "renderer": "ResembleAI/Chatterbox Multilingual V2 0.1.7",
+      "modelRevision": "5bb1f6ee58e50c3b8d408bc82a6d3740c2db6e18",
+      "modelLicense": "MIT",
+      "referenceLicense": "CC0-1.0 (EmoDB original, transformed reference)",
+      "durationSeconds": 7.04,
+      "listening": "pending",
+      "seed": 61017,
+      "processing": "[0:a]highpass=f=65,lowpass=f=7600,asplit[clean][wet];[wet]rubberband=pitch=0.85,lowpass=f=1450,volume=0.16[shadow];[clean][shadow]amix=inputs=2:duration=first:normalize=0[a]",
+      "normalization": {
+        "targetLufs": -18,
+        "targetTruePeakDbtp": -1.5,
+        "filter": "loudnorm=I=-18.0:TP=-1.8:LRA=11:linear=false",
+        "iterations": 1
+      },
+      "asr": "Vorhin war mein Ordner leichter. Vielleicht hat die Ablage eine Seite behalten. Vielleicht war es meine Hand.",
+      "asrWordExact": true,
+      "asrModel": "independent faster-whisper, cached local model, CPU int8, no script prompt",
+      "wordCues": [
+        {
+          "at": 0,
+          "charIndex": 0,
+          "word": "Vorhin",
+          "end": 0.5
+        },
+        {
+          "at": 0.5,
+          "charIndex": 7,
+          "word": "war",
+          "end": 0.64
+        },
+        {
+          "at": 0.64,
+          "charIndex": 11,
+          "word": "mein",
+          "end": 0.84
+        },
+        {
+          "at": 0.84,
+          "charIndex": 16,
+          "word": "Ordner",
+          "end": 1.2
+        },
+        {
+          "at": 1.2,
+          "charIndex": 23,
+          "word": "leichter",
+          "end": 1.76
+        },
+        {
+          "at": 2.1,
+          "charIndex": 33,
+          "word": "Vielleicht",
+          "end": 2.66
+        },
+        {
+          "at": 2.66,
+          "charIndex": 44,
+          "word": "hat",
+          "end": 2.86
+        },
+        {
+          "at": 2.86,
+          "charIndex": 48,
+          "word": "die",
+          "end": 3
+        },
+        {
+          "at": 3,
+          "charIndex": 52,
+          "word": "Ablage",
+          "end": 3.46
+        },
+        {
+          "at": 3.46,
+          "charIndex": 59,
+          "word": "eine",
+          "end": 3.74
+        },
+        {
+          "at": 3.74,
+          "charIndex": 64,
+          "word": "Seite",
+          "end": 4.04
+        },
+        {
+          "at": 4.04,
+          "charIndex": 70,
+          "word": "behalten",
+          "end": 4.58
+        },
+        {
+          "at": 4.82,
+          "charIndex": 80,
+          "word": "Vielleicht",
+          "end": 5.36
+        },
+        {
+          "at": 5.36,
+          "charIndex": 91,
+          "word": "war",
+          "end": 5.6
+        },
+        {
+          "at": 5.6,
+          "charIndex": 95,
+          "word": "es",
+          "end": 5.74
+        },
+        {
+          "at": 5.74,
+          "charIndex": 98,
+          "word": "meine",
+          "end": 5.96
+        },
+        {
+          "at": 5.96,
+          "charIndex": 104,
+          "word": "Hand",
+          "end": 6.28
+        }
+      ],
+      "integratedLufs": -18.09,
+      "truePeakDbtp": -2.24,
+      "sha256": "eb4b826c33ec93ad7f95fe75a5dcbf1a162e53e22cb1530626ec5ed847aecf10",
+      "rawDurationSeconds": 7.04,
+      "asrOrthographicListeningFlag": false,
+      "clipId": "amt-baerbel-pfennig-fever-2",
+      "path": "assets/voices/amt-fever/amt-baerbel-pfennig-fever-2.mp3",
+      "status": "user-approved default dialogue",
+      "provenanceManifest": "assets/voices/amt-fever/manifest.json",
+      "approval": {
+        "status": "user-approved",
+        "date": "2026-10-10",
+        "instruction": "I approve, just implement it",
+        "scope": "Default Bürgeramt fever encounters and alternate voice recordings",
+        "listeningVerified": false
+      },
+      "english": "My folder was lighter earlier. Perhaps the filing system kept a page. Perhaps it was my hand."
+    },
+    {
+      "actorId": "kopiependler",
+      "voiceId": "amt-uwe-kopitz",
+      "text": "Der Fahrradhelm ist keine Kopfbedeckung. Das hat Schalter vier schriftlich bestätigt; das Schreiben liegt unter dem Helm.",
+      "profileId": "e7a5a74103884c308730d7effa496ce2",
+      "referenceSha256": "ab193397a1f9a143cacd700fc2234b4ac9f72366ad2c799cf84ef509dd4c2df0",
+      "rawSha256": "408b4d0b39698e4e8b3ee89dd68998ec7d65465084414fa421891460b2411f3a",
+      "renderer": "ResembleAI/Chatterbox Multilingual V2 0.1.7",
+      "modelRevision": "5bb1f6ee58e50c3b8d408bc82a6d3740c2db6e18",
+      "modelLicense": "MIT",
+      "referenceLicense": "CC0-1.0 (EmoDB original, transformed reference)",
+      "durationSeconds": 7.36,
+      "listening": "pending",
+      "seed": 61018,
+      "processing": "[0:a]highpass=f=65,lowpass=f=7600,asplit[clean][wet];[wet]rubberband=pitch=0.9,lowpass=f=1450,volume=0.16[shadow];[clean][shadow]amix=inputs=2:duration=first:normalize=0[a]",
+      "normalization": {
+        "targetLufs": -18,
+        "targetTruePeakDbtp": -1.5,
+        "filter": "loudnorm=I=-16.34:TP=-1.8:LRA=11:linear=false",
+        "iterations": 3
+      },
+      "asr": "Der Fahrradhelm ist keine Kopfbedeckung. Das hat Schalter 4 schriftlich bestätigt. Das Schreiben liegt unter dem Helm.",
+      "asrWordExact": true,
+      "asrModel": "independent faster-whisper, cached local model, CPU int8, no script prompt",
+      "wordCues": [
+        {
+          "at": 0,
+          "charIndex": 0,
+          "word": "Der",
+          "end": 0.2
+        },
+        {
+          "at": 0.2,
+          "charIndex": 4,
+          "word": "Fahrradhelm",
+          "end": 0.84
+        },
+        {
+          "at": 0.84,
+          "charIndex": 16,
+          "word": "ist",
+          "end": 1.06
+        },
+        {
+          "at": 1.06,
+          "charIndex": 20,
+          "word": "keine",
+          "end": 1.3
+        },
+        {
+          "at": 1.3,
+          "charIndex": 26,
+          "word": "Kopfbedeckung",
+          "end": 2.08
+        },
+        {
+          "at": 2.26,
+          "charIndex": 41,
+          "word": "Das",
+          "end": 2.74
+        },
+        {
+          "at": 2.74,
+          "charIndex": 45,
+          "word": "hat",
+          "end": 2.9
+        },
+        {
+          "at": 2.9,
+          "charIndex": 49,
+          "word": "Schalter",
+          "end": 3.18
+        },
+        {
+          "at": 3.18,
+          "charIndex": 58,
+          "word": "vier",
+          "end": 3.42
+        },
+        {
+          "at": 3.42,
+          "charIndex": 63,
+          "word": "schriftlich",
+          "end": 3.92
+        },
+        {
+          "at": 3.92,
+          "charIndex": 75,
+          "word": "bestätigt",
+          "end": 4.54
+        },
+        {
+          "at": 4.72,
+          "charIndex": 86,
+          "word": "das",
+          "end": 5.1
+        },
+        {
+          "at": 5.1,
+          "charIndex": 90,
+          "word": "Schreiben",
+          "end": 5.5
+        },
+        {
+          "at": 5.5,
+          "charIndex": 100,
+          "word": "liegt",
+          "end": 5.72
+        },
+        {
+          "at": 5.72,
+          "charIndex": 106,
+          "word": "unter",
+          "end": 5.94
+        },
+        {
+          "at": 5.94,
+          "charIndex": 112,
+          "word": "dem",
+          "end": 6.12
+        },
+        {
+          "at": 6.12,
+          "charIndex": 116,
+          "word": "Helm",
+          "end": 6.42
+        }
+      ],
+      "integratedLufs": -18.28,
+      "truePeakDbtp": -2.23,
+      "sha256": "6567e1ca28a00910749a276f6659935ab108f07e104321a4742ee8f5507b371f",
+      "rawDurationSeconds": 7.36,
+      "asrOrthographicListeningFlag": false,
+      "clipId": "amt-uwe-kopitz-fever-2",
+      "path": "assets/voices/amt-fever/amt-uwe-kopitz-fever-2.mp3",
+      "status": "user-approved default dialogue",
+      "provenanceManifest": "assets/voices/amt-fever/manifest.json",
+      "approval": {
+        "status": "user-approved",
+        "date": "2026-10-10",
+        "instruction": "I approve, just implement it",
+        "scope": "Default Bürgeramt fever encounters and alternate voice recordings",
+        "listeningVerified": false
+      },
+      "english": "The bicycle helmet is not headwear. Counter four confirmed that in writing; the letter is under the helmet."
+    },
+    {
+      "actorId": "warteschlangenpoetin",
+      "voiceId": "amt-hilde-wartenscheidt",
+      "text": "Auf der Rückseite steht endlich ein Satz. Leider ist er nicht unterschrieben, also bleibt er vorläufig ein Geräusch.",
+      "profileId": "f55b40ca02e84ae696c396f211f880d6",
+      "referenceSha256": "d7bc37151dbe6b06f47ef7a65e2a6ec6e3cfa3a49cb5ccd90049165a445dfb27",
+      "rawSha256": "effdc063661eb9b67b3e0ae39c8022a42cb8ccd95d897b391c02e70f73b5e6e8",
+      "renderer": "ResembleAI/Chatterbox Multilingual V2 0.1.7",
+      "modelRevision": "5bb1f6ee58e50c3b8d408bc82a6d3740c2db6e18",
+      "modelLicense": "MIT",
+      "referenceLicense": "CC0-1.0 (EmoDB original, transformed reference)",
+      "durationSeconds": 6.44,
+      "listening": "pending",
+      "seed": 61019,
+      "processing": "[0:a]highpass=f=65,lowpass=f=7600,asplit[clean][wet];[wet]rubberband=pitch=0.87,lowpass=f=1450,volume=0.16[shadow];[clean][shadow]amix=inputs=2:duration=first:normalize=0[a]",
+      "normalization": {
+        "targetLufs": -18,
+        "targetTruePeakDbtp": -1.5,
+        "filter": "loudnorm=I=-18.0:TP=-1.8:LRA=11:linear=false",
+        "iterations": 1
+      },
+      "asr": "Auf der Rückseite steht endlich ein Satz. Leider ist er nicht unterschrieben, also bleibt er vorläufig ein Geräusch.",
+      "asrWordExact": true,
+      "asrModel": "independent faster-whisper, cached local model, CPU int8, no script prompt",
+      "wordCues": [
+        {
+          "at": 0,
+          "charIndex": 0,
+          "word": "Auf",
+          "end": 0.22
+        },
+        {
+          "at": 0.22,
+          "charIndex": 4,
+          "word": "der",
+          "end": 0.36
+        },
+        {
+          "at": 0.36,
+          "charIndex": 8,
+          "word": "Rückseite",
+          "end": 0.88
+        },
+        {
+          "at": 0.88,
+          "charIndex": 18,
+          "word": "steht",
+          "end": 1.12
+        },
+        {
+          "at": 1.12,
+          "charIndex": 24,
+          "word": "endlich",
+          "end": 1.42
+        },
+        {
+          "at": 1.42,
+          "charIndex": 32,
+          "word": "ein",
+          "end": 1.66
+        },
+        {
+          "at": 1.66,
+          "charIndex": 36,
+          "word": "Satz",
+          "end": 2.08
+        },
+        {
+          "at": 2.4,
+          "charIndex": 42,
+          "word": "Leider",
+          "end": 2.88
+        },
+        {
+          "at": 2.88,
+          "charIndex": 49,
+          "word": "ist",
+          "end": 3.04
+        },
+        {
+          "at": 3.04,
+          "charIndex": 53,
+          "word": "er",
+          "end": 3.14
+        },
+        {
+          "at": 3.14,
+          "charIndex": 56,
+          "word": "nicht",
+          "end": 3.28
+        },
+        {
+          "at": 3.28,
+          "charIndex": 62,
+          "word": "unterschrieben",
+          "end": 3.94
+        },
+        {
+          "at": 4.16,
+          "charIndex": 78,
+          "word": "also",
+          "end": 4.48
+        },
+        {
+          "at": 4.48,
+          "charIndex": 83,
+          "word": "bleibt",
+          "end": 4.78
+        },
+        {
+          "at": 4.78,
+          "charIndex": 90,
+          "word": "er",
+          "end": 4.9
+        },
+        {
+          "at": 4.9,
+          "charIndex": 93,
+          "word": "vorläufig",
+          "end": 5.42
+        },
+        {
+          "at": 5.42,
+          "charIndex": 103,
+          "word": "ein",
+          "end": 5.54
+        },
+        {
+          "at": 5.54,
+          "charIndex": 107,
+          "word": "Geräusch",
+          "end": 6.12
+        }
+      ],
+      "integratedLufs": -18.09,
+      "truePeakDbtp": -2.25,
+      "sha256": "3588af041af6f75ac96bddf84dd6341a9caf4935d83a6a4f1724532c314e9c2d",
+      "rawDurationSeconds": 6.44,
+      "asrOrthographicListeningFlag": false,
+      "clipId": "amt-hilde-wartenscheidt-fever-2",
+      "path": "assets/voices/amt-fever/amt-hilde-wartenscheidt-fever-2.mp3",
+      "status": "user-approved default dialogue",
+      "provenanceManifest": "assets/voices/amt-fever/manifest.json",
+      "approval": {
+        "status": "user-approved",
+        "date": "2026-10-10",
+        "instruction": "I approve, just implement it",
+        "scope": "Default Bürgeramt fever encounters and alternate voice recordings",
+        "listeningVerified": false
+      },
+      "english": "There is finally a sentence on the reverse. Unfortunately it is unsigned, so for now it remains a noise."
+    },
+    {
+      "actorId": "clerk",
+      "voiceId": "amt-brunhilde-knick",
+      "text": "Richtig. Ein Gesicht lässt sich verlegen; ein Ticket hat eine Perforation.",
+      "profileId": "b080c7d95ecd418fb428282461d7fbe7",
+      "referenceSha256": "901e9ad60eda5cbb36337b12864b6a2b0d133570acb90941b9eabd9888c16351",
+      "rawSha256": "666517a30800857b9cce50ed2ff81eaae0df71a2d873a21c545b5c2c29c38545",
+      "renderer": "ResembleAI/Chatterbox Multilingual V2 0.1.7",
+      "modelRevision": "5bb1f6ee58e50c3b8d408bc82a6d3740c2db6e18",
+      "modelLicense": "MIT",
+      "referenceLicense": "CC0-1.0 (EmoDB original, transformed reference)",
+      "durationSeconds": 4.08,
+      "listening": "pending",
+      "seed": 61020,
+      "processing": "[0:a]highpass=f=65,lowpass=f=7600,asplit[clean][wet];[wet]rubberband=pitch=0.78,lowpass=f=1450,volume=0.16[shadow];[clean][shadow]amix=inputs=2:duration=first:normalize=0[a]",
+      "normalization": {
+        "targetLufs": -18,
+        "targetTruePeakDbtp": -1.5,
+        "filter": "loudnorm=I=-16.32:TP=-1.8:LRA=11:linear=false",
+        "iterations": 3
+      },
+      "asr": "Richtig. Ein Gesicht lässt sich verlegen. Ein Ticket hat eine Perforation.",
+      "asrWordExact": true,
+      "asrModel": "independent faster-whisper, cached local model, CPU int8, no script prompt",
+      "wordCues": [
+        {
+          "at": 0,
+          "charIndex": 0,
+          "word": "Richtig",
+          "end": 0.3
+        },
+        {
+          "at": 0.64,
+          "charIndex": 9,
+          "word": "Ein",
+          "end": 1
+        },
+        {
+          "at": 1,
+          "charIndex": 13,
+          "word": "Gesicht",
+          "end": 1.34
+        },
+        {
+          "at": 1.34,
+          "charIndex": 21,
+          "word": "lässt",
+          "end": 1.6
+        },
+        {
+          "at": 1.6,
+          "charIndex": 27,
+          "word": "sich",
+          "end": 1.78
+        },
+        {
+          "at": 1.78,
+          "charIndex": 32,
+          "word": "verlegen",
+          "end": 2.26
+        },
+        {
+          "at": 2.44,
+          "charIndex": 42,
+          "word": "ein",
+          "end": 2.7
+        },
+        {
+          "at": 2.7,
+          "charIndex": 46,
+          "word": "Ticket",
+          "end": 3
+        },
+        {
+          "at": 3,
+          "charIndex": 53,
+          "word": "hat",
+          "end": 3.18
+        },
+        {
+          "at": 3.18,
+          "charIndex": 57,
+          "word": "eine",
+          "end": 3.42
+        },
+        {
+          "at": 3.42,
+          "charIndex": 62,
+          "word": "Perforation",
+          "end": 3.96
+        }
+      ],
+      "integratedLufs": -18.27,
+      "truePeakDbtp": -2.17,
+      "sha256": "87190ccb6e06671d9110128f8b042705383593fa9f7168df44c19e10c24229be",
+      "rawDurationSeconds": 4.08,
+      "asrOrthographicListeningFlag": false,
+      "clipId": "amt-brunhilde-knick-fever-2",
+      "path": "assets/voices/amt-fever/amt-brunhilde-knick-fever-2.mp3",
+      "status": "user-approved default dialogue",
+      "provenanceManifest": "assets/voices/amt-fever/manifest.json",
+      "approval": {
+        "status": "user-approved",
+        "date": "2026-10-10",
+        "instruction": "I approve, just implement it",
+        "scope": "Default Bürgeramt fever encounters and alternate voice recordings",
+        "listeningVerified": false
+      },
+      "english": "Correct. A face can be misplaced; a ticket has a perforation."
+    },
+    {
+      "actorId": "clerk",
+      "voiceId": "amt-brunhilde-knick",
+      "text": "Dann heften Sie es bitte an das Ticket, ohne das nicht vorhandene Passfoto zu beschädigen.",
+      "profileId": "b080c7d95ecd418fb428282461d7fbe7",
+      "referenceSha256": "901e9ad60eda5cbb36337b12864b6a2b0d133570acb90941b9eabd9888c16351",
+      "rawSha256": "11b298d68707cd2df4c185d8dfbd1ff9524fcddfbb02d6e85b162435719bdee4",
+      "renderer": "ResembleAI/Chatterbox Multilingual V2 0.1.7",
+      "modelRevision": "5bb1f6ee58e50c3b8d408bc82a6d3740c2db6e18",
+      "modelLicense": "MIT",
+      "referenceLicense": "CC0-1.0 (EmoDB original, transformed reference)",
+      "durationSeconds": 5.28,
+      "listening": "pending",
+      "seed": 61021,
+      "processing": "[0:a]highpass=f=65,lowpass=f=7600,asplit[clean][wet];[wet]rubberband=pitch=0.78,lowpass=f=1450,volume=0.16[shadow];[clean][shadow]amix=inputs=2:duration=first:normalize=0[a]",
+      "normalization": {
+        "targetLufs": -18,
+        "targetTruePeakDbtp": -1.5,
+        "filter": "loudnorm=I=-12.290000000000003:TP=-1.8:LRA=11:linear=false",
+        "iterations": 4
+      },
+      "asr": "Dann heften Sie es bitte an das Ticket, ohne das nicht vorhandene Passfoto zu beschädigen.",
+      "asrWordExact": true,
+      "asrModel": "independent faster-whisper, cached local model, CPU int8, no script prompt",
+      "wordCues": [
+        {
+          "at": 0,
+          "charIndex": 0,
+          "word": "Dann",
+          "end": 0.12
+        },
+        {
+          "at": 0.12,
+          "charIndex": 5,
+          "word": "heften",
+          "end": 0.46
+        },
+        {
+          "at": 0.46,
+          "charIndex": 12,
+          "word": "Sie",
+          "end": 0.6
+        },
+        {
+          "at": 0.6,
+          "charIndex": 16,
+          "word": "es",
+          "end": 0.78
+        },
+        {
+          "at": 0.78,
+          "charIndex": 19,
+          "word": "bitte",
+          "end": 0.98
+        },
+        {
+          "at": 0.98,
+          "charIndex": 25,
+          "word": "an",
+          "end": 1.14
+        },
+        {
+          "at": 1.14,
+          "charIndex": 28,
+          "word": "das",
+          "end": 1.32
+        },
+        {
+          "at": 1.32,
+          "charIndex": 32,
+          "word": "Ticket",
+          "end": 1.62
+        },
+        {
+          "at": 1.8,
+          "charIndex": 40,
+          "word": "ohne",
+          "end": 2.26
+        },
+        {
+          "at": 2.26,
+          "charIndex": 45,
+          "word": "das",
+          "end": 2.5
+        },
+        {
+          "at": 2.5,
+          "charIndex": 49,
+          "word": "nicht",
+          "end": 2.68
+        },
+        {
+          "at": 2.68,
+          "charIndex": 55,
+          "word": "vorhandene",
+          "end": 3.22
+        },
+        {
+          "at": 3.22,
+          "charIndex": 66,
+          "word": "Passfoto",
+          "end": 3.76
+        },
+        {
+          "at": 3.76,
+          "charIndex": 75,
+          "word": "zu",
+          "end": 3.92
+        },
+        {
+          "at": 3.92,
+          "charIndex": 78,
+          "word": "beschädigen",
+          "end": 4.52
+        }
+      ],
+      "integratedLufs": -18.1,
+      "truePeakDbtp": -2.04,
+      "sha256": "15efdda704b44faceb78514e5200d29a2dd52199b718defec0ffda6fec2898fc",
+      "rawDurationSeconds": 5.28,
+      "asrOrthographicListeningFlag": false,
+      "clipId": "amt-brunhilde-knick-fever-3",
+      "path": "assets/voices/amt-fever/amt-brunhilde-knick-fever-3.mp3",
+      "status": "user-approved default dialogue",
+      "provenanceManifest": "assets/voices/amt-fever/manifest.json",
+      "approval": {
+        "status": "user-approved",
+        "date": "2026-10-10",
+        "instruction": "I approve, just implement it",
+        "scope": "Default Bürgeramt fever encounters and alternate voice recordings",
+        "listeningVerified": false
+      },
+      "english": "Then attach it to the ticket without damaging the nonexistent passport photo."
+    },
+    {
+      "actorId": "clerk",
+      "voiceId": "amt-brunhilde-knick",
+      "text": "Ein Telefon bezeugt eine Stimme. Über Schuhe in einem Warteraum hat es keine Zuständigkeit.",
+      "profileId": "b080c7d95ecd418fb428282461d7fbe7",
+      "referenceSha256": "901e9ad60eda5cbb36337b12864b6a2b0d133570acb90941b9eabd9888c16351",
+      "rawSha256": "829adb5696a2fc1ac21e17ad35d2f9f729a0795cd7d83a901ba2a2591cf3cd2b",
+      "renderer": "ResembleAI/Chatterbox Multilingual V2 0.1.7",
+      "modelRevision": "5bb1f6ee58e50c3b8d408bc82a6d3740c2db6e18",
+      "modelLicense": "MIT",
+      "referenceLicense": "CC0-1.0 (EmoDB original, transformed reference)",
+      "durationSeconds": 6.24,
+      "listening": "pending",
+      "seed": 61022,
+      "processing": "[0:a]highpass=f=65,lowpass=f=7600,asplit[clean][wet];[wet]rubberband=pitch=0.78,lowpass=f=1450,volume=0.16[shadow];[clean][shadow]amix=inputs=2:duration=first:normalize=0[a]",
+      "normalization": {
+        "targetLufs": -18,
+        "targetTruePeakDbtp": -1.5,
+        "filter": "loudnorm=I=-14.009999999999998:TP=-1.8:LRA=11:linear=false",
+        "iterations": 4
+      },
+      "asr": "Ein Telefon bezeugt eine Stimme. Über Schuhe in einem Warteraum hat es keine Zuständigkeit.",
+      "asrWordExact": true,
+      "asrModel": "independent faster-whisper, cached local model, CPU int8, no script prompt",
+      "wordCues": [
+        {
+          "at": 0,
+          "charIndex": 0,
+          "word": "Ein",
+          "end": 0.22
+        },
+        {
+          "at": 0.22,
+          "charIndex": 4,
+          "word": "Telefon",
+          "end": 0.72
+        },
+        {
+          "at": 0.72,
+          "charIndex": 12,
+          "word": "bezeugt",
+          "end": 1.14
+        },
+        {
+          "at": 1.14,
+          "charIndex": 20,
+          "word": "eine",
+          "end": 1.34
+        },
+        {
+          "at": 1.34,
+          "charIndex": 25,
+          "word": "Stimme",
+          "end": 1.76
+        },
+        {
+          "at": 1.98,
+          "charIndex": 33,
+          "word": "Über",
+          "end": 2.36
+        },
+        {
+          "at": 2.36,
+          "charIndex": 38,
+          "word": "Schuhe",
+          "end": 2.74
+        },
+        {
+          "at": 2.74,
+          "charIndex": 45,
+          "word": "in",
+          "end": 2.92
+        },
+        {
+          "at": 2.92,
+          "charIndex": 48,
+          "word": "einem",
+          "end": 3.2
+        },
+        {
+          "at": 3.2,
+          "charIndex": 54,
+          "word": "Warteraum",
+          "end": 3.88
+        },
+        {
+          "at": 3.88,
+          "charIndex": 64,
+          "word": "hat",
+          "end": 4.2
+        },
+        {
+          "at": 4.2,
+          "charIndex": 68,
+          "word": "es",
+          "end": 4.34
+        },
+        {
+          "at": 4.34,
+          "charIndex": 71,
+          "word": "keine",
+          "end": 4.56
+        },
+        {
+          "at": 4.56,
+          "charIndex": 77,
+          "word": "Zuständigkeit",
+          "end": 5.48
+        }
+      ],
+      "integratedLufs": -18.28,
+      "truePeakDbtp": -2.15,
+      "sha256": "d2071cd408c7cffaee26790fbe641a000868565b916b90736d9066e49dc08175",
+      "rawDurationSeconds": 6.24,
+      "asrOrthographicListeningFlag": false,
+      "clipId": "amt-brunhilde-knick-fever-4",
+      "path": "assets/voices/amt-fever/amt-brunhilde-knick-fever-4.mp3",
+      "status": "user-approved default dialogue",
+      "provenanceManifest": "assets/voices/amt-fever/manifest.json",
+      "approval": {
+        "status": "user-approved",
+        "date": "2026-10-10",
+        "instruction": "I approve, just implement it",
+        "scope": "Default Bürgeramt fever encounters and alternate voice recordings",
+        "listeningVerified": false
+      },
+      "english": "A telephone attests to a voice. It has no jurisdiction over shoes in a waiting room."
+    },
+    {
+      "actorId": "clerk",
+      "voiceId": "amt-brunhilde-knick",
+      "text": "Für die Anmeldung brauche ich eine Wohnungsgeberbestätigung. Um sie anzufordern, brauchen Sie die Erlaubnis zur Anforderung. Welche Anschrift melden Sie an?",
+      "profileId": "b080c7d95ecd418fb428282461d7fbe7",
+      "referenceSha256": "901e9ad60eda5cbb36337b12864b6a2b0d133570acb90941b9eabd9888c16351",
+      "rawSha256": "909382391458caf11f0634dcd88b444f3e40f75251dce0b45c8cd44f6e2f3e67",
+      "renderer": "ResembleAI/Chatterbox Multilingual V2 0.1.7",
+      "modelRevision": "5bb1f6ee58e50c3b8d408bc82a6d3740c2db6e18",
+      "modelLicense": "MIT",
+      "referenceLicense": "CC0-1.0 (EmoDB original, transformed reference)",
+      "durationSeconds": 9,
+      "listening": "pending",
+      "seed": 61023,
+      "processing": "[0:a]highpass=f=65,lowpass=f=7600,asplit[clean][wet];[wet]rubberband=pitch=0.78,lowpass=f=1450,volume=0.16[shadow];[clean][shadow]amix=inputs=2:duration=first:normalize=0[a]",
+      "normalization": {
+        "targetLufs": -18,
+        "targetTruePeakDbtp": -1.5,
+        "filter": "loudnorm=I=-13.219999999999999:TP=-1.8:LRA=11:linear=false",
+        "iterations": 6
+      },
+      "asr": "Für die Anmeldung brauche ich eine Wohnungsgeberbestätigung. Um Sie anzufordern, brauchen Sie die Erlaubnis zur Anforderung. Welche Anschrift melden Sie an?",
+      "asrWordExact": true,
+      "asrModel": "independent faster-whisper, cached local model, CPU int8, no script prompt",
+      "wordCues": [
+        {
+          "at": 0,
+          "charIndex": 0,
+          "word": "Für",
+          "end": 0.22
+        },
+        {
+          "at": 0.22,
+          "charIndex": 4,
+          "word": "die",
+          "end": 0.36
+        },
+        {
+          "at": 0.36,
+          "charIndex": 8,
+          "word": "Anmeldung",
+          "end": 0.9
+        },
+        {
+          "at": 0.9,
+          "charIndex": 18,
+          "word": "brauche",
+          "end": 1.22
+        },
+        {
+          "at": 1.22,
+          "charIndex": 26,
+          "word": "ich",
+          "end": 1.34
+        },
+        {
+          "at": 1.34,
+          "charIndex": 30,
+          "word": "eine",
+          "end": 1.52
+        },
+        {
+          "at": 1.52,
+          "charIndex": 35,
+          "word": "Wohnungsgeberbestätigung",
+          "end": 2.84
+        },
+        {
+          "at": 3.08,
+          "charIndex": 61,
+          "word": "Um",
+          "end": 3.5
+        },
+        {
+          "at": 3.5,
+          "charIndex": 64,
+          "word": "sie",
+          "end": 3.64
+        },
+        {
+          "at": 3.64,
+          "charIndex": 68,
+          "word": "anzufordern",
+          "end": 4.48
+        },
+        {
+          "at": 4.62,
+          "charIndex": 81,
+          "word": "brauchen",
+          "end": 4.84
+        },
+        {
+          "at": 4.84,
+          "charIndex": 90,
+          "word": "Sie",
+          "end": 5.02
+        },
+        {
+          "at": 5.02,
+          "charIndex": 94,
+          "word": "die",
+          "end": 5.16
+        },
+        {
+          "at": 5.16,
+          "charIndex": 98,
+          "word": "Erlaubnis",
+          "end": 5.72
+        },
+        {
+          "at": 5.72,
+          "charIndex": 108,
+          "word": "zur",
+          "end": 5.9
+        },
+        {
+          "at": 5.9,
+          "charIndex": 112,
+          "word": "Anforderung",
+          "end": 6.62
+        },
+        {
+          "at": 6.78,
+          "charIndex": 125,
+          "word": "Welche",
+          "end": 7.22
+        },
+        {
+          "at": 7.22,
+          "charIndex": 132,
+          "word": "Anschrift",
+          "end": 7.68
+        },
+        {
+          "at": 7.68,
+          "charIndex": 142,
+          "word": "melden",
+          "end": 7.98
+        },
+        {
+          "at": 7.98,
+          "charIndex": 149,
+          "word": "Sie",
+          "end": 8.14
+        },
+        {
+          "at": 8.14,
+          "charIndex": 153,
+          "word": "an",
+          "end": 8.36
+        }
+      ],
+      "integratedLufs": -18.19,
+      "truePeakDbtp": -2.21,
+      "sha256": "ec8f4fbd1f9c7691dd9835b1f8acf0ad5ffbcbfae03cd6e3d5797232cbce0d2f",
+      "rawDurationSeconds": 9,
+      "asrOrthographicListeningFlag": false,
+      "clipId": "amt-brunhilde-knick-fever-5",
+      "path": "assets/voices/amt-fever/amt-brunhilde-knick-fever-5.mp3",
+      "status": "user-approved default dialogue",
+      "provenanceManifest": "assets/voices/amt-fever/manifest.json",
+      "approval": {
+        "status": "user-approved",
+        "date": "2026-10-10",
+        "instruction": "I approve, just implement it",
+        "scope": "Default Bürgeramt fever encounters and alternate voice recordings",
+        "listeningVerified": false
+      },
+      "english": "Registration requires confirmation from your housing provider. To request it, you need permission to make the request. Which address are you registering?"
+    },
+    {
+      "actorId": "clerk",
+      "voiceId": "amt-brunhilde-knick",
+      "text": "Eine Anschrift ohne Bestätigung ist lediglich eine Richtungsangabe.",
+      "profileId": "b080c7d95ecd418fb428282461d7fbe7",
+      "referenceSha256": "901e9ad60eda5cbb36337b12864b6a2b0d133570acb90941b9eabd9888c16351",
+      "rawSha256": "0913984aa7ab99dc78716f254f5aab42c1c4cbea3bcc05479966b9a2fa55bbb2",
+      "renderer": "ResembleAI/Chatterbox Multilingual V2 0.1.7",
+      "modelRevision": "5bb1f6ee58e50c3b8d408bc82a6d3740c2db6e18",
+      "modelLicense": "MIT",
+      "referenceLicense": "CC0-1.0 (EmoDB original, transformed reference)",
+      "durationSeconds": 5.12,
+      "listening": "pending",
+      "seed": 61024,
+      "processing": "[0:a]highpass=f=65,lowpass=f=7600,asplit[clean][wet];[wet]rubberband=pitch=0.78,lowpass=f=1450,volume=0.16[shadow];[clean][shadow]amix=inputs=2:duration=first:normalize=0[a]",
+      "normalization": {
+        "targetLufs": -18,
+        "targetTruePeakDbtp": -1.5,
+        "filter": "loudnorm=I=-15.030000000000001:TP=-1.8:LRA=11:linear=false",
+        "iterations": 3
+      },
+      "asr": "Eine Anschrift ohne Bestätigung ist lediglich eine Richtungsangabe.",
+      "asrWordExact": true,
+      "asrModel": "independent faster-whisper, cached local model, CPU int8, no script prompt",
+      "wordCues": [
+        {
+          "at": 0,
+          "charIndex": 0,
+          "word": "Eine",
+          "end": 0.28
+        },
+        {
+          "at": 0.28,
+          "charIndex": 5,
+          "word": "Anschrift",
+          "end": 0.9
+        },
+        {
+          "at": 0.9,
+          "charIndex": 15,
+          "word": "ohne",
+          "end": 1.2
+        },
+        {
+          "at": 1.2,
+          "charIndex": 20,
+          "word": "Bestätigung",
+          "end": 1.94
+        },
+        {
+          "at": 1.94,
+          "charIndex": 32,
+          "word": "ist",
+          "end": 2.46
+        },
+        {
+          "at": 2.46,
+          "charIndex": 36,
+          "word": "lediglich",
+          "end": 3.14
+        },
+        {
+          "at": 3.14,
+          "charIndex": 46,
+          "word": "eine",
+          "end": 3.4
+        },
+        {
+          "at": 3.4,
+          "charIndex": 51,
+          "word": "Richtungsangabe",
+          "end": 4.36
+        }
+      ],
+      "integratedLufs": -18.29,
+      "truePeakDbtp": -2.22,
+      "sha256": "d1cea65a0103d563b93bf43544b17a635ddbf38f0901fd997d3072c0c1c4f483",
+      "rawDurationSeconds": 5.12,
+      "asrOrthographicListeningFlag": false,
+      "clipId": "amt-brunhilde-knick-fever-6",
+      "path": "assets/voices/amt-fever/amt-brunhilde-knick-fever-6.mp3",
+      "status": "user-approved default dialogue",
+      "provenanceManifest": "assets/voices/amt-fever/manifest.json",
+      "approval": {
+        "status": "user-approved",
+        "date": "2026-10-10",
+        "instruction": "I approve, just implement it",
+        "scope": "Default Bürgeramt fever encounters and alternate voice recordings",
+        "listeningVerified": false
+      },
+      "english": "An address without confirmation is merely a direction."
+    },
+    {
+      "actorId": "clerk",
+      "voiceId": "amt-brunhilde-knick",
+      "text": "Das Formular ist leer. Das ist die neutralste Anschrift, die ich heute gesehen habe.",
+      "profileId": "b080c7d95ecd418fb428282461d7fbe7",
+      "referenceSha256": "901e9ad60eda5cbb36337b12864b6a2b0d133570acb90941b9eabd9888c16351",
+      "rawSha256": "b511e06a1259cd9b00dbdfe167565496a1572d564b29477dcb6a05bc5cd2f04e",
+      "renderer": "ResembleAI/Chatterbox Multilingual V2 0.1.7",
+      "modelRevision": "5bb1f6ee58e50c3b8d408bc82a6d3740c2db6e18",
+      "modelLicense": "MIT",
+      "referenceLicense": "CC0-1.0 (EmoDB original, transformed reference)",
+      "durationSeconds": 6.04,
+      "listening": "pending",
+      "seed": 61025,
+      "processing": "[0:a]highpass=f=65,lowpass=f=7600,asplit[clean][wet];[wet]rubberband=pitch=0.78,lowpass=f=1450,volume=0.16[shadow];[clean][shadow]amix=inputs=2:duration=first:normalize=0[a]",
+      "normalization": {
+        "targetLufs": -18,
+        "targetTruePeakDbtp": -1.5,
+        "filter": "loudnorm=I=-9.870000000000001:TP=-1.8:LRA=11:linear=false",
+        "iterations": 6
+      },
+      "asr": "Das Formular ist leer. Das ist die neutralste Anschrift, die ich heute gesehen habe.",
+      "asrWordExact": true,
+      "asrModel": "independent faster-whisper, cached local model, CPU int8, no script prompt",
+      "wordCues": [
+        {
+          "at": 0,
+          "charIndex": 0,
+          "word": "Das",
+          "end": 0.28
+        },
+        {
+          "at": 0.28,
+          "charIndex": 4,
+          "word": "Formular",
+          "end": 0.92
+        },
+        {
+          "at": 0.92,
+          "charIndex": 13,
+          "word": "ist",
+          "end": 1.24
+        },
+        {
+          "at": 1.24,
+          "charIndex": 17,
+          "word": "leer",
+          "end": 1.62
+        },
+        {
+          "at": 1.9,
+          "charIndex": 23,
+          "word": "Das",
+          "end": 2.24
+        },
+        {
+          "at": 2.24,
+          "charIndex": 27,
+          "word": "ist",
+          "end": 2.38
+        },
+        {
+          "at": 2.38,
+          "charIndex": 31,
+          "word": "die",
+          "end": 2.54
+        },
+        {
+          "at": 2.54,
+          "charIndex": 35,
+          "word": "neutralste",
+          "end": 3.3
+        },
+        {
+          "at": 3.3,
+          "charIndex": 46,
+          "word": "Anschrift",
+          "end": 3.84
+        },
+        {
+          "at": 3.86,
+          "charIndex": 57,
+          "word": "die",
+          "end": 4.02
+        },
+        {
+          "at": 4.02,
+          "charIndex": 61,
+          "word": "ich",
+          "end": 4.16
+        },
+        {
+          "at": 4.16,
+          "charIndex": 65,
+          "word": "heute",
+          "end": 4.42
+        },
+        {
+          "at": 4.42,
+          "charIndex": 71,
+          "word": "gesehen",
+          "end": 4.82
+        },
+        {
+          "at": 4.82,
+          "charIndex": 79,
+          "word": "habe",
+          "end": 5.2
+        }
+      ],
+      "integratedLufs": -18.2,
+      "truePeakDbtp": -1.95,
+      "sha256": "0f6be04ad90077969a46afd618e0c508ce440acc91c367d60710490ee5a02713",
+      "rawDurationSeconds": 6.04,
+      "asrOrthographicListeningFlag": false,
+      "clipId": "amt-brunhilde-knick-fever-7",
+      "path": "assets/voices/amt-fever/amt-brunhilde-knick-fever-7.mp3",
+      "status": "user-approved default dialogue",
+      "provenanceManifest": "assets/voices/amt-fever/manifest.json",
+      "approval": {
+        "status": "user-approved",
+        "date": "2026-10-10",
+        "instruction": "I approve, just implement it",
+        "scope": "Default Bürgeramt fever encounters and alternate voice recordings",
+        "listeningVerified": false
+      },
+      "english": "The form is blank. That is the most neutral address I have seen today."
+    },
+    {
+      "actorId": "clerk",
+      "voiceId": "amt-brunhilde-knick",
+      "text": "Dieser Raum kann nicht angemeldet werden. Er wartet seit Dienstag auf seine eigene Wohnungsgeberbestätigung.",
+      "profileId": "b080c7d95ecd418fb428282461d7fbe7",
+      "referenceSha256": "901e9ad60eda5cbb36337b12864b6a2b0d133570acb90941b9eabd9888c16351",
+      "rawSha256": "0ec6b7fe6bb5eba4d17e884ce78b6d728943cdc5b4b930b063835d4c41e4db69",
+      "renderer": "ResembleAI/Chatterbox Multilingual V2 0.1.7",
+      "modelRevision": "5bb1f6ee58e50c3b8d408bc82a6d3740c2db6e18",
+      "modelLicense": "MIT",
+      "referenceLicense": "CC0-1.0 (EmoDB original, transformed reference)",
+      "durationSeconds": 6.6,
+      "listening": "pending",
+      "seed": 61026,
+      "processing": "[0:a]highpass=f=65,lowpass=f=7600,asplit[clean][wet];[wet]rubberband=pitch=0.78,lowpass=f=1450,volume=0.16[shadow];[clean][shadow]amix=inputs=2:duration=first:normalize=0[a]",
+      "normalization": {
+        "targetLufs": -18,
+        "targetTruePeakDbtp": -1.5,
+        "filter": "loudnorm=I=-11.880000000000003:TP=-1.8:LRA=11:linear=false",
+        "iterations": 6
+      },
+      "asr": "Dieser Raum kann nicht angemeldet werden. Er wartet seit Dienstag auf seine eigene Wohnungsgeberbestätigung.",
+      "asrWordExact": true,
+      "asrModel": "independent faster-whisper, cached local model, CPU int8, no script prompt",
+      "wordCues": [
+        {
+          "at": 0,
+          "charIndex": 0,
+          "word": "Dieser",
+          "end": 0.28
+        },
+        {
+          "at": 0.28,
+          "charIndex": 7,
+          "word": "Raum",
+          "end": 0.64
+        },
+        {
+          "at": 0.64,
+          "charIndex": 12,
+          "word": "kann",
+          "end": 0.88
+        },
+        {
+          "at": 0.88,
+          "charIndex": 17,
+          "word": "nicht",
+          "end": 1.08
+        },
+        {
+          "at": 1.08,
+          "charIndex": 23,
+          "word": "angemeldet",
+          "end": 1.7
+        },
+        {
+          "at": 1.7,
+          "charIndex": 34,
+          "word": "werden",
+          "end": 2
+        },
+        {
+          "at": 2.2,
+          "charIndex": 42,
+          "word": "Er",
+          "end": 2.46
+        },
+        {
+          "at": 2.46,
+          "charIndex": 45,
+          "word": "wartet",
+          "end": 2.82
+        },
+        {
+          "at": 2.82,
+          "charIndex": 52,
+          "word": "seit",
+          "end": 3.02
+        },
+        {
+          "at": 3.02,
+          "charIndex": 57,
+          "word": "Dienstag",
+          "end": 3.52
+        },
+        {
+          "at": 3.52,
+          "charIndex": 66,
+          "word": "auf",
+          "end": 3.68
+        },
+        {
+          "at": 3.68,
+          "charIndex": 70,
+          "word": "seine",
+          "end": 3.9
+        },
+        {
+          "at": 3.9,
+          "charIndex": 76,
+          "word": "eigene",
+          "end": 4.34
+        },
+        {
+          "at": 4.34,
+          "charIndex": 83,
+          "word": "Wohnungsgeberbestätigung",
+          "end": 5.68
+        }
+      ],
+      "integratedLufs": -18.16,
+      "truePeakDbtp": -2.23,
+      "sha256": "0dca70816bfdd9ed14a44b3a3e2c818de1c1917cf9ee342b1f591694bde6e4e0",
+      "rawDurationSeconds": 6.6,
+      "asrOrthographicListeningFlag": false,
+      "clipId": "amt-brunhilde-knick-fever-8",
+      "path": "assets/voices/amt-fever/amt-brunhilde-knick-fever-8.mp3",
+      "status": "user-approved default dialogue",
+      "provenanceManifest": "assets/voices/amt-fever/manifest.json",
+      "approval": {
+        "status": "user-approved",
+        "date": "2026-10-10",
+        "instruction": "I approve, just implement it",
+        "scope": "Default Bürgeramt fever encounters and alternate voice recordings",
+        "listeningVerified": false
+      },
+      "english": "This room cannot be registered. It has been waiting since Tuesday for its own housing-provider confirmation."
+    },
+    {
+      "actorId": "clerk",
+      "voiceId": "amt-brunhilde-knick",
+      "text": "Ein Stempel ist die älteste Form der Zeitreise. Ich datiere ihn auf heute.",
+      "profileId": "b080c7d95ecd418fb428282461d7fbe7",
+      "referenceSha256": "901e9ad60eda5cbb36337b12864b6a2b0d133570acb90941b9eabd9888c16351",
+      "rawSha256": "c9ee42c070edd7ac11c3dce7213a1e43bcb17406af23fd5f3a10b3fd1d99fd2b",
+      "renderer": "ResembleAI/Chatterbox Multilingual V2 0.1.7",
+      "modelRevision": "5bb1f6ee58e50c3b8d408bc82a6d3740c2db6e18",
+      "modelLicense": "MIT",
+      "referenceLicense": "CC0-1.0 (EmoDB original, transformed reference)",
+      "durationSeconds": 4.8,
+      "listening": "pending",
+      "seed": 61028,
+      "processing": "[0:a]highpass=f=65,lowpass=f=7600,asplit[clean][wet];[wet]rubberband=pitch=0.78,lowpass=f=1450,volume=0.16[shadow];[clean][shadow]amix=inputs=2:duration=first:normalize=0[a]",
+      "normalization": {
+        "targetLufs": -18,
+        "targetTruePeakDbtp": -1.5,
+        "filter": "loudnorm=I=-13.350000000000001:TP=-1.8:LRA=11:linear=false",
+        "iterations": 5
+      },
+      "asr": "Ein Stempel ist die älteste Form der Zeitreise. Ich datiere ihn auf heute.",
+      "asrWordExact": true,
+      "asrModel": "independent faster-whisper, cached local model, CPU int8, no script prompt",
+      "wordCues": [
+        {
+          "at": 0,
+          "charIndex": 0,
+          "word": "Ein",
+          "end": 0.22
+        },
+        {
+          "at": 0.22,
+          "charIndex": 4,
+          "word": "Stempel",
+          "end": 0.78
+        },
+        {
+          "at": 0.78,
+          "charIndex": 12,
+          "word": "ist",
+          "end": 0.96
+        },
+        {
+          "at": 0.96,
+          "charIndex": 16,
+          "word": "die",
+          "end": 1.1
+        },
+        {
+          "at": 1.1,
+          "charIndex": 20,
+          "word": "älteste",
+          "end": 1.6
+        },
+        {
+          "at": 1.6,
+          "charIndex": 28,
+          "word": "Form",
+          "end": 1.86
+        },
+        {
+          "at": 1.86,
+          "charIndex": 33,
+          "word": "der",
+          "end": 2.02
+        },
+        {
+          "at": 2.02,
+          "charIndex": 37,
+          "word": "Zeitreise",
+          "end": 2.74
+        },
+        {
+          "at": 2.84,
+          "charIndex": 48,
+          "word": "Ich",
+          "end": 2.96
+        },
+        {
+          "at": 2.96,
+          "charIndex": 52,
+          "word": "datiere",
+          "end": 3.36
+        },
+        {
+          "at": 3.36,
+          "charIndex": 60,
+          "word": "ihn",
+          "end": 3.5
+        },
+        {
+          "at": 3.5,
+          "charIndex": 64,
+          "word": "auf",
+          "end": 3.68
+        },
+        {
+          "at": 3.68,
+          "charIndex": 68,
+          "word": "heute",
+          "end": 3.98
+        }
+      ],
+      "integratedLufs": -18.23,
+      "truePeakDbtp": -2.2,
+      "sha256": "cee12d2caf625d238d268c9d3cc36e795f1f411814d0528f5c40d08d0415631e",
+      "rawDurationSeconds": 4.8,
+      "asrOrthographicListeningFlag": false,
+      "clipId": "amt-brunhilde-knick-fever-10",
+      "path": "assets/voices/amt-fever/amt-brunhilde-knick-fever-10.mp3",
+      "status": "user-approved default dialogue",
+      "provenanceManifest": "assets/voices/amt-fever/manifest.json",
+      "approval": {
+        "status": "user-approved",
+        "date": "2026-10-10",
+        "instruction": "I approve, just implement it",
+        "scope": "Default Bürgeramt fever encounters and alternate voice recordings",
+        "listeningVerified": false
+      },
+      "english": "A stamp is the oldest form of time travel. I will date it today."
+    },
+    {
+      "actorId": "clerk",
+      "voiceId": "amt-brunhilde-knick",
+      "text": "E-Mails nehmen wir nur nach Zustellung per Fax an. Das Faxgerät verlangt einen Ausdruck der E-Mail.",
+      "profileId": "b080c7d95ecd418fb428282461d7fbe7",
+      "referenceSha256": "901e9ad60eda5cbb36337b12864b6a2b0d133570acb90941b9eabd9888c16351",
+      "rawSha256": "0356b3fb80c035e587f6117d0c9cdde970fe853cb59a0dbb83a7d521b5bad7f6",
+      "renderer": "ResembleAI/Chatterbox Multilingual V2 0.1.7",
+      "modelRevision": "5bb1f6ee58e50c3b8d408bc82a6d3740c2db6e18",
+      "modelLicense": "MIT",
+      "referenceLicense": "CC0-1.0 (EmoDB original, transformed reference)",
+      "durationSeconds": 6,
+      "listening": "pending",
+      "seed": 61029,
+      "processing": "[0:a]highpass=f=65,lowpass=f=7600,asplit[clean][wet];[wet]rubberband=pitch=0.78,lowpass=f=1450,volume=0.16[shadow];[clean][shadow]amix=inputs=2:duration=first:normalize=0[a]",
+      "normalization": {
+        "targetLufs": -18,
+        "targetTruePeakDbtp": -1.5,
+        "filter": "loudnorm=I=-14.77:TP=-1.8:LRA=11:linear=false",
+        "iterations": 4
+      },
+      "asr": "E-Mails nehmen wir nur nach Zustellung per Fax an. Das Faxgerät verlangt einen Ausdruck der E-Mail.",
+      "asrWordExact": true,
+      "asrModel": "independent faster-whisper, cached local model, CPU int8, no script prompt",
+      "wordCues": [
+        {
+          "at": 0,
+          "charIndex": 0,
+          "word": "E",
+          "end": 0.2
+        },
+        {
+          "at": 0.2,
+          "charIndex": 2,
+          "word": "Mails",
+          "end": 0.48
+        },
+        {
+          "at": 0.48,
+          "charIndex": 8,
+          "word": "nehmen",
+          "end": 0.74
+        },
+        {
+          "at": 0.74,
+          "charIndex": 15,
+          "word": "wir",
+          "end": 0.94
+        },
+        {
+          "at": 0.94,
+          "charIndex": 19,
+          "word": "nur",
+          "end": 1.1
+        },
+        {
+          "at": 1.1,
+          "charIndex": 23,
+          "word": "nach",
+          "end": 1.3
+        },
+        {
+          "at": 1.3,
+          "charIndex": 28,
+          "word": "Zustellung",
+          "end": 1.84
+        },
+        {
+          "at": 1.84,
+          "charIndex": 39,
+          "word": "per",
+          "end": 2.04
+        },
+        {
+          "at": 2.04,
+          "charIndex": 43,
+          "word": "Fax",
+          "end": 2.32
+        },
+        {
+          "at": 2.32,
+          "charIndex": 47,
+          "word": "an",
+          "end": 2.58
+        },
+        {
+          "at": 2.78,
+          "charIndex": 51,
+          "word": "Das",
+          "end": 3.14
+        },
+        {
+          "at": 3.14,
+          "charIndex": 55,
+          "word": "Faxgerät",
+          "end": 3.88
+        },
+        {
+          "at": 3.88,
+          "charIndex": 64,
+          "word": "verlangt",
+          "end": 4.28
+        },
+        {
+          "at": 4.28,
+          "charIndex": 73,
+          "word": "einen",
+          "end": 4.46
+        },
+        {
+          "at": 4.46,
+          "charIndex": 79,
+          "word": "Ausdruck",
+          "end": 4.86
+        },
+        {
+          "at": 4.86,
+          "charIndex": 88,
+          "word": "der",
+          "end": 5
+        },
+        {
+          "at": 5,
+          "charIndex": 92,
+          "word": "E",
+          "end": 5.2
+        },
+        {
+          "at": 5.2,
+          "charIndex": 94,
+          "word": "Mail",
+          "end": 5.44
+        }
+      ],
+      "integratedLufs": -18.27,
+      "truePeakDbtp": -2.22,
+      "sha256": "10e71339e8dd0797b82b6538388f8c2420876fbe490f76b342fd23e359557c4e",
+      "rawDurationSeconds": 6,
+      "asrOrthographicListeningFlag": false,
+      "clipId": "amt-brunhilde-knick-fever-11",
+      "path": "assets/voices/amt-fever/amt-brunhilde-knick-fever-11.mp3",
+      "status": "user-approved default dialogue",
+      "provenanceManifest": "assets/voices/amt-fever/manifest.json",
+      "approval": {
+        "status": "user-approved",
+        "date": "2026-10-10",
+        "instruction": "I approve, just implement it",
+        "scope": "Default Bürgeramt fever encounters and alternate voice recordings",
+        "listeningVerified": false
+      },
+      "english": "We accept emails only after delivery by fax. The fax machine demands a printout of the email."
+    },
+    {
+      "actorId": "clerk",
+      "voiceId": "amt-brunhilde-knick",
+      "text": "Morgen wurde bereits gedruckt. Das Warten würde ein doppeltes Datum erzeugen.",
+      "profileId": "b080c7d95ecd418fb428282461d7fbe7",
+      "referenceSha256": "901e9ad60eda5cbb36337b12864b6a2b0d133570acb90941b9eabd9888c16351",
+      "rawSha256": "384c0dd7ff1fe881d960bf6ce6d67895250c93dd4fcdaa574b116bab22300315",
+      "renderer": "ResembleAI/Chatterbox Multilingual V2 0.1.7",
+      "modelRevision": "5bb1f6ee58e50c3b8d408bc82a6d3740c2db6e18",
+      "modelLicense": "MIT",
+      "referenceLicense": "CC0-1.0 (EmoDB original, transformed reference)",
+      "durationSeconds": 5.12,
+      "listening": "pending",
+      "seed": 65005,
+      "processing": "[0:a]highpass=f=65,lowpass=f=7600,asplit[clean][wet];[wet]rubberband=pitch=0.78,lowpass=f=1450,volume=0.16[shadow];[clean][shadow]amix=inputs=2:duration=first:normalize=0[a]",
+      "normalization": {
+        "targetLufs": -18,
+        "targetTruePeakDbtp": -1.5,
+        "filter": "loudnorm=I=-14.459999999999997:TP=-1.8:LRA=11:linear=false",
+        "iterations": 5
+      },
+      "asr": "Morgen wurde bereits gedruckt. Das Warten würde ein doppeltes Datum erzeugen.",
+      "asrWordExact": true,
+      "asrModel": "independent faster-whisper, cached local model, CPU int8, no script prompt",
+      "wordCues": [
+        {
+          "at": 0,
+          "charIndex": 0,
+          "word": "Morgen",
+          "end": 0.4
+        },
+        {
+          "at": 0.4,
+          "charIndex": 7,
+          "word": "wurde",
+          "end": 0.62
+        },
+        {
+          "at": 0.62,
+          "charIndex": 13,
+          "word": "bereits",
+          "end": 0.98
+        },
+        {
+          "at": 0.98,
+          "charIndex": 21,
+          "word": "gedruckt",
+          "end": 1.52
+        },
+        {
+          "at": 1.64,
+          "charIndex": 31,
+          "word": "Das",
+          "end": 2.08
+        },
+        {
+          "at": 2.08,
+          "charIndex": 35,
+          "word": "Warten",
+          "end": 2.46
+        },
+        {
+          "at": 2.46,
+          "charIndex": 42,
+          "word": "würde",
+          "end": 2.68
+        },
+        {
+          "at": 2.68,
+          "charIndex": 48,
+          "word": "ein",
+          "end": 2.9
+        },
+        {
+          "at": 2.9,
+          "charIndex": 52,
+          "word": "doppeltes",
+          "end": 3.44
+        },
+        {
+          "at": 3.44,
+          "charIndex": 62,
+          "word": "Datum",
+          "end": 3.8
+        },
+        {
+          "at": 3.8,
+          "charIndex": 68,
+          "word": "erzeugen",
+          "end": 4.4
+        }
+      ],
+      "integratedLufs": -18.19,
+      "truePeakDbtp": -1.83,
+      "sha256": "c93313a34c9a32c9c24806d372f5b6062cf0fcc2f06b45ba673cf22649f23bb9",
+      "rawDurationSeconds": 5.12,
+      "asrOrthographicListeningFlag": false,
+      "clipId": "amt-brunhilde-knick-fever-12",
+      "path": "assets/voices/amt-fever/amt-brunhilde-knick-fever-12.mp3",
+      "status": "user-approved default dialogue",
+      "provenanceManifest": "assets/voices/amt-fever/manifest.json",
+      "approval": {
+        "status": "user-approved",
+        "date": "2026-10-10",
+        "instruction": "I approve, just implement it",
+        "scope": "Default Bürgeramt fever encounters and alternate voice recordings",
+        "listeningVerified": false
+      },
+      "english": "Tomorrow has already been printed. Waiting would create a duplicate date."
+    },
+    {
+      "actorId": "clerk",
+      "voiceId": "amt-brunhilde-knick",
+      "text": "Wir haben Ihre Nummer, den Nachweis Ihrer Anwesenheit und ein Datum, das noch nicht zweimal stattgefunden hat. Was ist nun Ihr Anliegen?",
+      "profileId": "b080c7d95ecd418fb428282461d7fbe7",
+      "referenceSha256": "901e9ad60eda5cbb36337b12864b6a2b0d133570acb90941b9eabd9888c16351",
+      "rawSha256": "3eeeb85b2fe7407ababd65e7b565890d7c6a9b904aec431d6cc22c026f4cdf62",
+      "renderer": "ResembleAI/Chatterbox Multilingual V2 0.1.7",
+      "modelRevision": "5bb1f6ee58e50c3b8d408bc82a6d3740c2db6e18",
+      "modelLicense": "MIT",
+      "referenceLicense": "CC0-1.0 (EmoDB original, transformed reference)",
+      "durationSeconds": 8.6,
+      "listening": "pending",
+      "seed": 61031,
+      "processing": "[0:a]highpass=f=65,lowpass=f=7600,asplit[clean][wet];[wet]rubberband=pitch=0.78,lowpass=f=1450,volume=0.16[shadow];[clean][shadow]amix=inputs=2:duration=first:normalize=0[a]",
+      "normalization": {
+        "targetLufs": -18,
+        "targetTruePeakDbtp": -1.5,
+        "filter": "loudnorm=I=-11.440000000000001:TP=-1.8:LRA=11:linear=false",
+        "iterations": 6
+      },
+      "asr": "Wir haben Ihre Nummer, den Nachweis Ihrer Anwesenheit und ein Datum, das noch nicht zweimal stattgefunden hat. Was ist nun Ihr Anliegen?",
+      "asrWordExact": true,
+      "asrModel": "independent faster-whisper, cached local model, CPU int8, no script prompt",
+      "wordCues": [
+        {
+          "at": 0,
+          "charIndex": 0,
+          "word": "Wir",
+          "end": 0.24
+        },
+        {
+          "at": 0.24,
+          "charIndex": 4,
+          "word": "haben",
+          "end": 0.48
+        },
+        {
+          "at": 0.48,
+          "charIndex": 10,
+          "word": "Ihre",
+          "end": 0.7
+        },
+        {
+          "at": 0.7,
+          "charIndex": 15,
+          "word": "Nummer",
+          "end": 1.02
+        },
+        {
+          "at": 1.48,
+          "charIndex": 23,
+          "word": "den",
+          "end": 1.58
+        },
+        {
+          "at": 1.58,
+          "charIndex": 27,
+          "word": "Nachweis",
+          "end": 2.08
+        },
+        {
+          "at": 2.08,
+          "charIndex": 36,
+          "word": "Ihrer",
+          "end": 2.32
+        },
+        {
+          "at": 2.32,
+          "charIndex": 42,
+          "word": "Anwesenheit",
+          "end": 3.08
+        },
+        {
+          "at": 3.08,
+          "charIndex": 54,
+          "word": "und",
+          "end": 3.46
+        },
+        {
+          "at": 3.46,
+          "charIndex": 58,
+          "word": "ein",
+          "end": 3.66
+        },
+        {
+          "at": 3.66,
+          "charIndex": 62,
+          "word": "Datum",
+          "end": 4.12
+        },
+        {
+          "at": 4.18,
+          "charIndex": 69,
+          "word": "das",
+          "end": 4.44
+        },
+        {
+          "at": 4.44,
+          "charIndex": 73,
+          "word": "noch",
+          "end": 4.62
+        },
+        {
+          "at": 4.62,
+          "charIndex": 78,
+          "word": "nicht",
+          "end": 4.78
+        },
+        {
+          "at": 4.78,
+          "charIndex": 84,
+          "word": "zweimal",
+          "end": 5.26
+        },
+        {
+          "at": 5.26,
+          "charIndex": 92,
+          "word": "stattgefunden",
+          "end": 5.94
+        },
+        {
+          "at": 5.94,
+          "charIndex": 106,
+          "word": "hat",
+          "end": 6.22
+        },
+        {
+          "at": 6.4,
+          "charIndex": 111,
+          "word": "Was",
+          "end": 6.72
+        },
+        {
+          "at": 6.72,
+          "charIndex": 115,
+          "word": "ist",
+          "end": 6.88
+        },
+        {
+          "at": 6.88,
+          "charIndex": 119,
+          "word": "nun",
+          "end": 7.04
+        },
+        {
+          "at": 7.04,
+          "charIndex": 123,
+          "word": "Ihr",
+          "end": 7.22
+        },
+        {
+          "at": 7.22,
+          "charIndex": 127,
+          "word": "Anliegen",
+          "end": 7.78
+        }
+      ],
+      "integratedLufs": -18.27,
+      "truePeakDbtp": -2.22,
+      "sha256": "e169bf1122b85cf36ade6ac8e7fbffc6195acf0c3f2642ab3b481b5de847439a",
+      "rawDurationSeconds": 8.6,
+      "asrOrthographicListeningFlag": false,
+      "clipId": "amt-brunhilde-knick-fever-13",
+      "path": "assets/voices/amt-fever/amt-brunhilde-knick-fever-13.mp3",
+      "status": "user-approved default dialogue",
+      "provenanceManifest": "assets/voices/amt-fever/manifest.json",
+      "approval": {
+        "status": "user-approved",
+        "date": "2026-10-10",
+        "instruction": "I approve, just implement it",
+        "scope": "Default Bürgeramt fever encounters and alternate voice recordings",
+        "listeningVerified": false
+      },
+      "english": "We have your number, proof of your presence, and a date that has not happened twice yet. What is your business?"
+    },
+    {
+      "actorId": "clerk",
+      "voiceId": "amt-brunhilde-knick",
+      "text": "Gut. Zuerst dürfen Sie die Antragstellung beantragen.",
+      "profileId": "b080c7d95ecd418fb428282461d7fbe7",
+      "referenceSha256": "901e9ad60eda5cbb36337b12864b6a2b0d133570acb90941b9eabd9888c16351",
+      "rawSha256": "aba9cb85fde7ad08fffbbbc1794645fe1d36a36d25f876d12fc19c66c02e473b",
+      "renderer": "ResembleAI/Chatterbox Multilingual V2 0.1.7",
+      "modelRevision": "5bb1f6ee58e50c3b8d408bc82a6d3740c2db6e18",
+      "modelLicense": "MIT",
+      "referenceLicense": "CC0-1.0 (EmoDB original, transformed reference)",
+      "durationSeconds": 3.76,
+      "listening": "pending",
+      "seed": 61032,
+      "processing": "[0:a]highpass=f=65,lowpass=f=7600,asplit[clean][wet];[wet]rubberband=pitch=0.78,lowpass=f=1450,volume=0.16[shadow];[clean][shadow]amix=inputs=2:duration=first:normalize=0[a]",
+      "normalization": {
+        "targetLufs": -18,
+        "targetTruePeakDbtp": -1.5,
+        "filter": "loudnorm=I=-13.690000000000001:TP=-1.8:LRA=11:linear=false",
+        "iterations": 4
+      },
+      "asr": "Gut, zuerst dürfen Sie die Antragstellung beantragen.",
+      "asrWordExact": true,
+      "asrModel": "independent faster-whisper, cached local model, CPU int8, no script prompt",
+      "wordCues": [
+        {
+          "at": 0,
+          "charIndex": 0,
+          "word": "Gut",
+          "end": 0.26
+        },
+        {
+          "at": 0.7,
+          "charIndex": 5,
+          "word": "Zuerst",
+          "end": 1.04
+        },
+        {
+          "at": 1.04,
+          "charIndex": 12,
+          "word": "dürfen",
+          "end": 1.32
+        },
+        {
+          "at": 1.32,
+          "charIndex": 19,
+          "word": "Sie",
+          "end": 1.44
+        },
+        {
+          "at": 1.44,
+          "charIndex": 23,
+          "word": "die",
+          "end": 1.56
+        },
+        {
+          "at": 1.56,
+          "charIndex": 27,
+          "word": "Antragstellung",
+          "end": 2.2
+        },
+        {
+          "at": 2.2,
+          "charIndex": 42,
+          "word": "beantragen",
+          "end": 2.88
+        }
+      ],
+      "integratedLufs": -18.24,
+      "truePeakDbtp": -1.93,
+      "sha256": "bd1cfc43057e0112d8db07ab23cd2cf3550641f7d4f65c893ca1375287b00c69",
+      "rawDurationSeconds": 3.76,
+      "asrOrthographicListeningFlag": false,
+      "clipId": "amt-brunhilde-knick-fever-14",
+      "path": "assets/voices/amt-fever/amt-brunhilde-knick-fever-14.mp3",
+      "status": "user-approved default dialogue",
+      "provenanceManifest": "assets/voices/amt-fever/manifest.json",
+      "approval": {
+        "status": "user-approved",
+        "date": "2026-10-10",
+        "instruction": "I approve, just implement it",
+        "scope": "Default Bürgeramt fever encounters and alternate voice recordings",
+        "listeningVerified": false
+      },
+      "english": "Good. First you may apply for permission to submit an application."
+    },
+    {
+      "actorId": "clerk",
+      "voiceId": "amt-brunhilde-knick",
+      "text": "Genau. Die Erlaubnis ist die Warteschlange vor der Warteschlange.",
+      "profileId": "b080c7d95ecd418fb428282461d7fbe7",
+      "referenceSha256": "901e9ad60eda5cbb36337b12864b6a2b0d133570acb90941b9eabd9888c16351",
+      "rawSha256": "05de31f2ccaafbd78127e2a5039c736538b076d971059a367387f70aa2489a08",
+      "renderer": "ResembleAI/Chatterbox Multilingual V2 0.1.7",
+      "modelRevision": "5bb1f6ee58e50c3b8d408bc82a6d3740c2db6e18",
+      "modelLicense": "MIT",
+      "referenceLicense": "CC0-1.0 (EmoDB original, transformed reference)",
+      "durationSeconds": 4.08,
+      "listening": "pending",
+      "seed": 61033,
+      "processing": "[0:a]highpass=f=65,lowpass=f=7600,asplit[clean][wet];[wet]rubberband=pitch=0.78,lowpass=f=1450,volume=0.16[shadow];[clean][shadow]amix=inputs=2:duration=first:normalize=0[a]",
+      "normalization": {
+        "targetLufs": -18,
+        "targetTruePeakDbtp": -1.5,
+        "filter": "loudnorm=I=-13.810000000000002:TP=-1.8:LRA=11:linear=false",
+        "iterations": 7
+      },
+      "asr": "Genau, die Erlaubnis ist die Warteschlange vor der Warteschlange.",
+      "asrWordExact": true,
+      "asrModel": "independent faster-whisper, cached local model, CPU int8, no script prompt",
+      "wordCues": [
+        {
+          "at": 0,
+          "charIndex": 0,
+          "word": "Genau",
+          "end": 0.3
+        },
+        {
+          "at": 0.68,
+          "charIndex": 7,
+          "word": "Die",
+          "end": 0.74
+        },
+        {
+          "at": 0.74,
+          "charIndex": 11,
+          "word": "Erlaubnis",
+          "end": 1.22
+        },
+        {
+          "at": 1.22,
+          "charIndex": 21,
+          "word": "ist",
+          "end": 1.4
+        },
+        {
+          "at": 1.4,
+          "charIndex": 25,
+          "word": "die",
+          "end": 1.54
+        },
+        {
+          "at": 1.54,
+          "charIndex": 29,
+          "word": "Warteschlange",
+          "end": 2.26
+        },
+        {
+          "at": 2.26,
+          "charIndex": 43,
+          "word": "vor",
+          "end": 2.48
+        },
+        {
+          "at": 2.48,
+          "charIndex": 47,
+          "word": "der",
+          "end": 2.62
+        },
+        {
+          "at": 2.62,
+          "charIndex": 51,
+          "word": "Warteschlange",
+          "end": 3.28
+        }
+      ],
+      "integratedLufs": -18.28,
+      "truePeakDbtp": -2.23,
+      "sha256": "6066e8c7a1baf85f62ae8ee26fa4b0e9e834619a9377d3d1eea1e54c5c783198",
+      "rawDurationSeconds": 4.08,
+      "asrOrthographicListeningFlag": false,
+      "clipId": "amt-brunhilde-knick-fever-15",
+      "path": "assets/voices/amt-fever/amt-brunhilde-knick-fever-15.mp3",
+      "status": "user-approved default dialogue",
+      "provenanceManifest": "assets/voices/amt-fever/manifest.json",
+      "approval": {
+        "status": "user-approved",
+        "date": "2026-10-10",
+        "instruction": "I approve, just implement it",
+        "scope": "Default Bürgeramt fever encounters and alternate voice recordings",
+        "listeningVerified": false
+      },
+      "english": "Exactly. Permission is the queue before the queue."
+    },
+    {
+      "actorId": "clerk",
+      "voiceId": "amt-brunhilde-knick",
+      "text": "Dann haben Sie die erste Hälfte jedes Verwaltungsvorgangs abgeschlossen.",
+      "profileId": "b080c7d95ecd418fb428282461d7fbe7",
+      "referenceSha256": "901e9ad60eda5cbb36337b12864b6a2b0d133570acb90941b9eabd9888c16351",
+      "rawSha256": "7f43fafca97aa87ecde7dc556406a9fd7ce6940a769faef25d44e7704d6d6401",
+      "renderer": "ResembleAI/Chatterbox Multilingual V2 0.1.7",
+      "modelRevision": "5bb1f6ee58e50c3b8d408bc82a6d3740c2db6e18",
+      "modelLicense": "MIT",
+      "referenceLicense": "CC0-1.0 (EmoDB original, transformed reference)",
+      "durationSeconds": 5.16,
+      "listening": "pending",
+      "seed": 61034,
+      "processing": "[0:a]highpass=f=65,lowpass=f=7600,asplit[clean][wet];[wet]rubberband=pitch=0.78,lowpass=f=1450,volume=0.16[shadow];[clean][shadow]amix=inputs=2:duration=first:normalize=0[a]",
+      "normalization": {
+        "targetLufs": -18,
+        "targetTruePeakDbtp": -1.5,
+        "filter": "loudnorm=I=-12.989999999999995:TP=-1.8:LRA=11:linear=false",
+        "iterations": 5
+      },
+      "asr": "Dann haben Sie die erste Hälfte jedes Verwaltungsvorgangs abgeschlossen.",
+      "asrWordExact": true,
+      "asrModel": "independent faster-whisper, cached local model, CPU int8, no script prompt",
+      "wordCues": [
+        {
+          "at": 0,
+          "charIndex": 0,
+          "word": "Dann",
+          "end": 0.16
+        },
+        {
+          "at": 0.16,
+          "charIndex": 5,
+          "word": "haben",
+          "end": 0.4
+        },
+        {
+          "at": 0.4,
+          "charIndex": 11,
+          "word": "Sie",
+          "end": 0.56
+        },
+        {
+          "at": 0.56,
+          "charIndex": 15,
+          "word": "die",
+          "end": 0.72
+        },
+        {
+          "at": 0.72,
+          "charIndex": 19,
+          "word": "erste",
+          "end": 1.1
+        },
+        {
+          "at": 1.1,
+          "charIndex": 25,
+          "word": "Hälfte",
+          "end": 1.66
+        },
+        {
+          "at": 1.66,
+          "charIndex": 32,
+          "word": "jedes",
+          "end": 2.08
+        },
+        {
+          "at": 2.08,
+          "charIndex": 38,
+          "word": "Verwaltungsvorgangs",
+          "end": 3.46
+        },
+        {
+          "at": 3.46,
+          "charIndex": 58,
+          "word": "abgeschlossen",
+          "end": 4.3
+        }
+      ],
+      "integratedLufs": -18.29,
+      "truePeakDbtp": -2.18,
+      "sha256": "5bf1dd18feef39f7e49bbcff48a6e19fd706f2181bb66000cc75a43993327b5c",
+      "rawDurationSeconds": 5.16,
+      "asrOrthographicListeningFlag": false,
+      "clipId": "amt-brunhilde-knick-fever-16",
+      "path": "assets/voices/amt-fever/amt-brunhilde-knick-fever-16.mp3",
+      "status": "user-approved default dialogue",
+      "provenanceManifest": "assets/voices/amt-fever/manifest.json",
+      "approval": {
+        "status": "user-approved",
+        "date": "2026-10-10",
+        "instruction": "I approve, just implement it",
+        "scope": "Default Bürgeramt fever encounters and alternate voice recordings",
+        "listeningVerified": false
+      },
+      "english": "Then you have completed the first half of every administrative procedure."
+    },
+    {
+      "actorId": "clerk",
+      "voiceId": "amt-brunhilde-knick",
+      "text": "Sie machen wohl Witze? Sie nehmen während eines Termins im Bürgeramt einen Anruf an? Ich habe den Stempel schon in der Hand!",
+      "profileId": "b080c7d95ecd418fb428282461d7fbe7",
+      "referenceSha256": "901e9ad60eda5cbb36337b12864b6a2b0d133570acb90941b9eabd9888c16351",
+      "rawSha256": "419ef05db276f6a321399596be96dde938f63bb7abe49f2f2bb02afbeca83740",
+      "renderer": "ResembleAI/Chatterbox Multilingual V2 0.1.7",
+      "modelRevision": "5bb1f6ee58e50c3b8d408bc82a6d3740c2db6e18",
+      "modelLicense": "MIT",
+      "referenceLicense": "CC0-1.0 (EmoDB original, transformed reference)",
+      "durationSeconds": 6.52,
+      "listening": "pending",
+      "seed": 61035,
+      "processing": "[0:a]highpass=f=65,lowpass=f=7600,asplit[clean][wet];[wet]rubberband=pitch=0.78,lowpass=f=1450,volume=0.16[shadow];[clean][shadow]amix=inputs=2:duration=first:normalize=0[a]",
+      "normalization": {
+        "targetLufs": -18,
+        "targetTruePeakDbtp": -1.5,
+        "filter": "loudnorm=I=-14.96:TP=-1.8:LRA=11:linear=false",
+        "iterations": 4
+      },
+      "asr": "Sie machen wohl Witze? Sie nehmen während eines Termins im Bürgeramt einen Anruf an? Ich habe den Stempel schon in der Hand.",
+      "asrWordExact": true,
+      "asrModel": "independent faster-whisper, cached local model, CPU int8, no script prompt",
+      "wordCues": [
+        {
+          "at": 0,
+          "charIndex": 0,
+          "word": "Sie",
+          "end": 0.18
+        },
+        {
+          "at": 0.18,
+          "charIndex": 4,
+          "word": "machen",
+          "end": 0.38
+        },
+        {
+          "at": 0.38,
+          "charIndex": 11,
+          "word": "wohl",
+          "end": 0.56
+        },
+        {
+          "at": 0.56,
+          "charIndex": 16,
+          "word": "Witze",
+          "end": 1
+        },
+        {
+          "at": 1.18,
+          "charIndex": 23,
+          "word": "Sie",
+          "end": 1.48
+        },
+        {
+          "at": 1.48,
+          "charIndex": 27,
+          "word": "nehmen",
+          "end": 1.68
+        },
+        {
+          "at": 1.68,
+          "charIndex": 34,
+          "word": "während",
+          "end": 1.94
+        },
+        {
+          "at": 1.94,
+          "charIndex": 42,
+          "word": "eines",
+          "end": 2.18
+        },
+        {
+          "at": 2.18,
+          "charIndex": 48,
+          "word": "Termins",
+          "end": 2.56
+        },
+        {
+          "at": 2.56,
+          "charIndex": 56,
+          "word": "im",
+          "end": 2.68
+        },
+        {
+          "at": 2.68,
+          "charIndex": 59,
+          "word": "Bürgeramt",
+          "end": 3.02
+        },
+        {
+          "at": 3.02,
+          "charIndex": 69,
+          "word": "einen",
+          "end": 3.22
+        },
+        {
+          "at": 3.22,
+          "charIndex": 75,
+          "word": "Anruf",
+          "end": 3.58
+        },
+        {
+          "at": 3.58,
+          "charIndex": 81,
+          "word": "an",
+          "end": 3.76
+        },
+        {
+          "at": 3.92,
+          "charIndex": 85,
+          "word": "Ich",
+          "end": 4.1
+        },
+        {
+          "at": 4.1,
+          "charIndex": 89,
+          "word": "habe",
+          "end": 4.26
+        },
+        {
+          "at": 4.26,
+          "charIndex": 94,
+          "word": "den",
+          "end": 4.44
+        },
+        {
+          "at": 4.44,
+          "charIndex": 98,
+          "word": "Stempel",
+          "end": 4.84
+        },
+        {
+          "at": 4.84,
+          "charIndex": 106,
+          "word": "schon",
+          "end": 5
+        },
+        {
+          "at": 5,
+          "charIndex": 112,
+          "word": "in",
+          "end": 5.14
+        },
+        {
+          "at": 5.14,
+          "charIndex": 115,
+          "word": "der",
+          "end": 5.24
+        },
+        {
+          "at": 5.24,
+          "charIndex": 119,
+          "word": "Hand",
+          "end": 5.48
+        }
+      ],
+      "integratedLufs": -18.28,
+      "truePeakDbtp": -2.19,
+      "sha256": "bdb32bc3a59f292b14fa21b96aed01ef2df8f22efcdbe1fc65cb5b0b8a8ed816",
+      "rawDurationSeconds": 6.52,
+      "asrOrthographicListeningFlag": false,
+      "clipId": "amt-brunhilde-knick-fever-17",
+      "path": "assets/voices/amt-fever/amt-brunhilde-knick-fever-17.mp3",
+      "status": "user-approved default dialogue",
+      "provenanceManifest": "assets/voices/amt-fever/manifest.json",
+      "approval": {
+        "status": "user-approved",
+        "date": "2026-10-10",
+        "instruction": "I approve, just implement it",
+        "scope": "Default Bürgeramt fever encounters and alternate voice recordings",
+        "listeningVerified": false
+      },
+      "english": "Are you joking? You are taking a call during an appointment at the citizens office? I already have the stamp in my hand!"
+    },
+    {
+      "actorId": "clerk",
+      "voiceId": "amt-brunhilde-knick",
+      "text": "Ach, die Polizei? Herr Wachtmeister, ich höre Sie! Der Bürger steht an meinem Schalter und nicht auf Ihrem Rasen. Jetzt lassen Sie mich ausreden!",
+      "profileId": "b080c7d95ecd418fb428282461d7fbe7",
+      "referenceSha256": "901e9ad60eda5cbb36337b12864b6a2b0d133570acb90941b9eabd9888c16351",
+      "rawSha256": "7f367b14470afc03ac68b845bfe4974eb2844b5971786a612a37c20df8ff5a6e",
+      "renderer": "ResembleAI/Chatterbox Multilingual V2 0.1.7",
+      "modelRevision": "5bb1f6ee58e50c3b8d408bc82a6d3740c2db6e18",
+      "modelLicense": "MIT",
+      "referenceLicense": "CC0-1.0 (EmoDB original, transformed reference)",
+      "durationSeconds": 7.6,
+      "listening": "pending",
+      "seed": 61036,
+      "processing": "[0:a]highpass=f=65,lowpass=f=7600,asplit[clean][wet];[wet]rubberband=pitch=0.78,lowpass=f=1450,volume=0.16[shadow];[clean][shadow]amix=inputs=2:duration=first:normalize=0[a]",
+      "normalization": {
+        "targetLufs": -18,
+        "targetTruePeakDbtp": -1.5,
+        "filter": "loudnorm=I=-12.919999999999998:TP=-1.8:LRA=11:linear=false",
+        "iterations": 6
+      },
+      "asr": "»Ach, die Polizei? Herr Wachtmeister, ich höre Sie. Der Bürger steht an meinem Schalter und nicht auf Ihrem Rasen. Jetzt lassen Sie mich ausreden.«",
+      "asrWordExact": true,
+      "asrModel": "independent faster-whisper, cached local model, CPU int8, no script prompt",
+      "wordCues": [
+        {
+          "at": 0,
+          "charIndex": 0,
+          "word": "Ach",
+          "end": 0.28
+        },
+        {
+          "at": 0.36,
+          "charIndex": 5,
+          "word": "die",
+          "end": 0.4
+        },
+        {
+          "at": 0.4,
+          "charIndex": 9,
+          "word": "Polizei",
+          "end": 0.92
+        },
+        {
+          "at": 1.14,
+          "charIndex": 18,
+          "word": "Herr",
+          "end": 1.42
+        },
+        {
+          "at": 1.42,
+          "charIndex": 23,
+          "word": "Wachtmeister",
+          "end": 1.96
+        },
+        {
+          "at": 2.04,
+          "charIndex": 37,
+          "word": "ich",
+          "end": 2.1
+        },
+        {
+          "at": 2.1,
+          "charIndex": 41,
+          "word": "höre",
+          "end": 2.38
+        },
+        {
+          "at": 2.38,
+          "charIndex": 46,
+          "word": "Sie",
+          "end": 2.52
+        },
+        {
+          "at": 2.7,
+          "charIndex": 51,
+          "word": "Der",
+          "end": 2.88
+        },
+        {
+          "at": 2.88,
+          "charIndex": 55,
+          "word": "Bürger",
+          "end": 3.16
+        },
+        {
+          "at": 3.16,
+          "charIndex": 62,
+          "word": "steht",
+          "end": 3.4
+        },
+        {
+          "at": 3.4,
+          "charIndex": 68,
+          "word": "an",
+          "end": 3.54
+        },
+        {
+          "at": 3.54,
+          "charIndex": 71,
+          "word": "meinem",
+          "end": 3.76
+        },
+        {
+          "at": 3.76,
+          "charIndex": 78,
+          "word": "Schalter",
+          "end": 4.16
+        },
+        {
+          "at": 4.16,
+          "charIndex": 87,
+          "word": "und",
+          "end": 4.34
+        },
+        {
+          "at": 4.34,
+          "charIndex": 91,
+          "word": "nicht",
+          "end": 4.54
+        },
+        {
+          "at": 4.54,
+          "charIndex": 97,
+          "word": "auf",
+          "end": 4.7
+        },
+        {
+          "at": 4.7,
+          "charIndex": 101,
+          "word": "Ihrem",
+          "end": 4.94
+        },
+        {
+          "at": 4.94,
+          "charIndex": 107,
+          "word": "Rasen",
+          "end": 5.38
+        },
+        {
+          "at": 5.52,
+          "charIndex": 114,
+          "word": "Jetzt",
+          "end": 5.74
+        },
+        {
+          "at": 5.74,
+          "charIndex": 120,
+          "word": "lassen",
+          "end": 6.02
+        },
+        {
+          "at": 6.02,
+          "charIndex": 127,
+          "word": "Sie",
+          "end": 6.16
+        },
+        {
+          "at": 6.16,
+          "charIndex": 131,
+          "word": "mich",
+          "end": 6.34
+        },
+        {
+          "at": 6.34,
+          "charIndex": 136,
+          "word": "ausreden",
+          "end": 6.96
+        }
+      ],
+      "integratedLufs": -18.26,
+      "truePeakDbtp": -2.21,
+      "sha256": "be371179eb34c904e2f1c8b93604df7de3a18afd09bd3f86af9d49c4acd1e7e6",
+      "rawDurationSeconds": 7.6,
+      "asrOrthographicListeningFlag": false,
+      "clipId": "amt-brunhilde-knick-fever-18",
+      "path": "assets/voices/amt-fever/amt-brunhilde-knick-fever-18.mp3",
+      "status": "user-approved default dialogue",
+      "provenanceManifest": "assets/voices/amt-fever/manifest.json",
+      "approval": {
+        "status": "user-approved",
+        "date": "2026-10-10",
+        "instruction": "I approve, just implement it",
+        "scope": "Default Bürgeramt fever encounters and alternate voice recordings",
+        "listeningVerified": false
+      },
+      "english": "Oh, the police? Officer Wachtmeister, I hear you! This citizen is at my counter, not on your lawn. Now let me finish!"
+    },
+    {
+      "actorId": "clerk",
+      "voiceId": "amt-brunhilde-knick",
+      "text": "Ich bin vierundsiebzig und seit fünfzig Jahren an diesem Schalter. Mein Schalter deckt keinen Rasen. Er deckt Anträge! Fragen Sie ihn nach seinen Schuhen, nicht mich nach meiner Tischplatte!",
+      "profileId": "b080c7d95ecd418fb428282461d7fbe7",
+      "referenceSha256": "901e9ad60eda5cbb36337b12864b6a2b0d133570acb90941b9eabd9888c16351",
+      "rawSha256": "108c2b4024f0f70ebcb2a9870cc8470c65bc87e6ab51479e21e882c77419328c",
+      "renderer": "ResembleAI/Chatterbox Multilingual V2 0.1.7",
+      "modelRevision": "5bb1f6ee58e50c3b8d408bc82a6d3740c2db6e18",
+      "modelLicense": "MIT",
+      "referenceLicense": "CC0-1.0 (EmoDB original, transformed reference)",
+      "durationSeconds": 10,
+      "listening": "pending",
+      "seed": 61037,
+      "processing": "[0:a]highpass=f=65,lowpass=f=7600,asplit[clean][wet];[wet]rubberband=pitch=0.78,lowpass=f=1450,volume=0.16[shadow];[clean][shadow]amix=inputs=2:duration=first:normalize=0[a]",
+      "normalization": {
+        "targetLufs": -18,
+        "targetTruePeakDbtp": -1.5,
+        "filter": "loudnorm=I=-12.190000000000001:TP=-1.8:LRA=11:linear=false",
+        "iterations": 7
+      },
+      "asr": "Ich bin 74 und seit 50 Jahren an diesem Schalter. Mein Schalter deckt keinen Rasen, er deckt Anträge. Fragen Sie ihn nach seinen Schuhen, nicht mich nach meiner Tischplatte.",
+      "asrWordExact": true,
+      "asrModel": "independent faster-whisper, cached local model, CPU int8, no script prompt",
+      "wordCues": [
+        {
+          "at": 0,
+          "charIndex": 0,
+          "word": "Ich",
+          "end": 0.18
+        },
+        {
+          "at": 0.18,
+          "charIndex": 4,
+          "word": "bin",
+          "end": 0.36
+        },
+        {
+          "at": 0.36,
+          "charIndex": 8,
+          "word": "vierundsiebzig",
+          "end": 0.98
+        },
+        {
+          "at": 0.98,
+          "charIndex": 23,
+          "word": "und",
+          "end": 1.6
+        },
+        {
+          "at": 1.6,
+          "charIndex": 27,
+          "word": "seit",
+          "end": 1.82
+        },
+        {
+          "at": 1.82,
+          "charIndex": 32,
+          "word": "fünfzig",
+          "end": 2.22
+        },
+        {
+          "at": 2.22,
+          "charIndex": 40,
+          "word": "Jahren",
+          "end": 2.62
+        },
+        {
+          "at": 2.62,
+          "charIndex": 47,
+          "word": "an",
+          "end": 2.8
+        },
+        {
+          "at": 2.8,
+          "charIndex": 50,
+          "word": "diesem",
+          "end": 3.04
+        },
+        {
+          "at": 3.04,
+          "charIndex": 57,
+          "word": "Schalter",
+          "end": 3.48
+        },
+        {
+          "at": 3.7,
+          "charIndex": 67,
+          "word": "Mein",
+          "end": 3.9
+        },
+        {
+          "at": 3.9,
+          "charIndex": 72,
+          "word": "Schalter",
+          "end": 4.22
+        },
+        {
+          "at": 4.22,
+          "charIndex": 81,
+          "word": "deckt",
+          "end": 4.5
+        },
+        {
+          "at": 4.5,
+          "charIndex": 87,
+          "word": "keinen",
+          "end": 4.7
+        },
+        {
+          "at": 4.7,
+          "charIndex": 94,
+          "word": "Rasen",
+          "end": 5.16
+        },
+        {
+          "at": 5.42,
+          "charIndex": 101,
+          "word": "Er",
+          "end": 5.52
+        },
+        {
+          "at": 5.52,
+          "charIndex": 104,
+          "word": "deckt",
+          "end": 5.78
+        },
+        {
+          "at": 5.78,
+          "charIndex": 110,
+          "word": "Anträge",
+          "end": 6.24
+        },
+        {
+          "at": 6.5,
+          "charIndex": 119,
+          "word": "Fragen",
+          "end": 6.8
+        },
+        {
+          "at": 6.8,
+          "charIndex": 126,
+          "word": "Sie",
+          "end": 6.98
+        },
+        {
+          "at": 6.98,
+          "charIndex": 130,
+          "word": "ihn",
+          "end": 7.1
+        },
+        {
+          "at": 7.1,
+          "charIndex": 134,
+          "word": "nach",
+          "end": 7.2
+        },
+        {
+          "at": 7.2,
+          "charIndex": 139,
+          "word": "seinen",
+          "end": 7.44
+        },
+        {
+          "at": 7.44,
+          "charIndex": 146,
+          "word": "Schuhen",
+          "end": 7.8
+        },
+        {
+          "at": 7.98,
+          "charIndex": 155,
+          "word": "nicht",
+          "end": 8.16
+        },
+        {
+          "at": 8.16,
+          "charIndex": 161,
+          "word": "mich",
+          "end": 8.3
+        },
+        {
+          "at": 8.3,
+          "charIndex": 166,
+          "word": "nach",
+          "end": 8.44
+        },
+        {
+          "at": 8.44,
+          "charIndex": 171,
+          "word": "meiner",
+          "end": 8.68
+        },
+        {
+          "at": 8.68,
+          "charIndex": 178,
+          "word": "Tischplatte",
+          "end": 9.3
+        }
+      ],
+      "integratedLufs": -18.2,
+      "truePeakDbtp": -2.18,
+      "sha256": "2d7ef05cb4472ecbbc139dc3e8d93edb5e90a4633a192f907475a4dbcfe86b08",
+      "rawDurationSeconds": 10,
+      "asrOrthographicListeningFlag": false,
+      "clipId": "amt-brunhilde-knick-fever-19",
+      "path": "assets/voices/amt-fever/amt-brunhilde-knick-fever-19.mp3",
+      "status": "user-approved default dialogue",
+      "provenanceManifest": "assets/voices/amt-fever/manifest.json",
+      "approval": {
+        "status": "user-approved",
+        "date": "2026-10-10",
+        "instruction": "I approve, just implement it",
+        "scope": "Default Bürgeramt fever encounters and alternate voice recordings",
+        "listeningVerified": false
+      },
+      "english": "I am seventy-four and have worked at this counter for fifty years. My counter does not cover lawns. It covers applications! Ask him about his shoes, not me about my desktop!"
+    },
+    {
+      "actorId": "clerk",
+      "voiceId": "amt-brunhilde-knick",
+      "text": "Sie beschuldigen meinen Schalter? Dann schreiben Sie ihm eine Anzeige! Der Stempel war halb unten. Ein halber Stempel ist kein Stempel, und ohne Stempel ist Ihr Termin annulliert.",
+      "profileId": "b080c7d95ecd418fb428282461d7fbe7",
+      "referenceSha256": "901e9ad60eda5cbb36337b12864b6a2b0d133570acb90941b9eabd9888c16351",
+      "rawSha256": "c1a02d3411711463fe789fc9c12ce0a57c4020a9c34c150a8a8d4cc99644986b",
+      "renderer": "ResembleAI/Chatterbox Multilingual V2 0.1.7",
+      "modelRevision": "5bb1f6ee58e50c3b8d408bc82a6d3740c2db6e18",
+      "modelLicense": "MIT",
+      "referenceLicense": "CC0-1.0 (EmoDB original, transformed reference)",
+      "durationSeconds": 9.56,
+      "listening": "pending",
+      "seed": 65006,
+      "processing": "[0:a]highpass=f=65,lowpass=f=7600,asplit[clean][wet];[wet]rubberband=pitch=0.78,lowpass=f=1450,volume=0.16[shadow];[clean][shadow]amix=inputs=2:duration=first:normalize=0[a]",
+      "normalization": {
+        "targetLufs": -18,
+        "targetTruePeakDbtp": -1.5,
+        "filter": "loudnorm=I=-13.649999999999999:TP=-1.8:LRA=11:linear=false",
+        "iterations": 5
+      },
+      "asr": "Sie beschuldigen meinen Schalter? Dann schreiben Sie ihm eine Anzeige. Der Stempel war halb unten, ein halber Stempel ist kein Stempel und ohne Stempel ist Ihr Termin annulliert.",
+      "asrWordExact": true,
+      "asrModel": "independent faster-whisper, cached local model, CPU int8, no script prompt",
+      "wordCues": [
+        {
+          "at": 0,
+          "charIndex": 0,
+          "word": "Sie",
+          "end": 0.16
+        },
+        {
+          "at": 0.16,
+          "charIndex": 4,
+          "word": "beschuldigen",
+          "end": 0.64
+        },
+        {
+          "at": 0.64,
+          "charIndex": 17,
+          "word": "meinen",
+          "end": 0.84
+        },
+        {
+          "at": 0.84,
+          "charIndex": 24,
+          "word": "Schalter",
+          "end": 1.34
+        },
+        {
+          "at": 1.58,
+          "charIndex": 34,
+          "word": "Dann",
+          "end": 1.92
+        },
+        {
+          "at": 1.92,
+          "charIndex": 39,
+          "word": "schreiben",
+          "end": 2.22
+        },
+        {
+          "at": 2.22,
+          "charIndex": 49,
+          "word": "Sie",
+          "end": 2.36
+        },
+        {
+          "at": 2.36,
+          "charIndex": 53,
+          "word": "ihm",
+          "end": 2.46
+        },
+        {
+          "at": 2.46,
+          "charIndex": 57,
+          "word": "eine",
+          "end": 2.66
+        },
+        {
+          "at": 2.66,
+          "charIndex": 62,
+          "word": "Anzeige",
+          "end": 3.2
+        },
+        {
+          "at": 3.34,
+          "charIndex": 71,
+          "word": "Der",
+          "end": 3.58
+        },
+        {
+          "at": 3.58,
+          "charIndex": 75,
+          "word": "Stempel",
+          "end": 3.92
+        },
+        {
+          "at": 3.92,
+          "charIndex": 83,
+          "word": "war",
+          "end": 4.08
+        },
+        {
+          "at": 4.08,
+          "charIndex": 87,
+          "word": "halb",
+          "end": 4.26
+        },
+        {
+          "at": 4.26,
+          "charIndex": 92,
+          "word": "unten",
+          "end": 4.58
+        },
+        {
+          "at": 4.8,
+          "charIndex": 99,
+          "word": "Ein",
+          "end": 5.02
+        },
+        {
+          "at": 5.02,
+          "charIndex": 103,
+          "word": "halber",
+          "end": 5.36
+        },
+        {
+          "at": 5.36,
+          "charIndex": 110,
+          "word": "Stempel",
+          "end": 5.7
+        },
+        {
+          "at": 5.7,
+          "charIndex": 118,
+          "word": "ist",
+          "end": 5.84
+        },
+        {
+          "at": 5.84,
+          "charIndex": 122,
+          "word": "kein",
+          "end": 6.06
+        },
+        {
+          "at": 6.06,
+          "charIndex": 127,
+          "word": "Stempel",
+          "end": 6.56
+        },
+        {
+          "at": 6.56,
+          "charIndex": 136,
+          "word": "und",
+          "end": 6.94
+        },
+        {
+          "at": 6.94,
+          "charIndex": 140,
+          "word": "ohne",
+          "end": 7.24
+        },
+        {
+          "at": 7.24,
+          "charIndex": 145,
+          "word": "Stempel",
+          "end": 7.64
+        },
+        {
+          "at": 7.64,
+          "charIndex": 153,
+          "word": "ist",
+          "end": 7.82
+        },
+        {
+          "at": 7.82,
+          "charIndex": 157,
+          "word": "Ihr",
+          "end": 7.98
+        },
+        {
+          "at": 7.98,
+          "charIndex": 161,
+          "word": "Termin",
+          "end": 8.34
+        },
+        {
+          "at": 8.34,
+          "charIndex": 168,
+          "word": "annulliert",
+          "end": 8.88
+        }
+      ],
+      "integratedLufs": -18.17,
+      "truePeakDbtp": -2.2,
+      "sha256": "21040d4a2236f6166f81c2fdf8b337fa25b12e35a8c435a37ec15e2c9df15f17",
+      "rawDurationSeconds": 9.56,
+      "asrOrthographicListeningFlag": false,
+      "clipId": "amt-brunhilde-knick-fever-20",
+      "path": "assets/voices/amt-fever/amt-brunhilde-knick-fever-20.mp3",
+      "status": "user-approved default dialogue",
+      "provenanceManifest": "assets/voices/amt-fever/manifest.json",
+      "approval": {
+        "status": "user-approved",
+        "date": "2026-10-10",
+        "instruction": "I approve, just implement it",
+        "scope": "Default Bürgeramt fever encounters and alternate voice recordings",
+        "listeningVerified": false
+      },
+      "english": "You are accusing my counter? Then file a complaint against it! The stamp was halfway down. Half a stamp is no stamp, and without a stamp your appointment is annulled."
+    },
+    {
+      "actorId": "clerk",
+      "voiceId": "amt-brunhilde-knick",
+      "text": "Ihre Nummer wandert zurück in den Automaten. Gehen Sie bitte durch den Eingang hinaus. Für einen neuen Versuch ziehen Sie draußen eine neue Nummer — dort ist die Polizei für den Rasen zuständig.",
+      "profileId": "b080c7d95ecd418fb428282461d7fbe7",
+      "referenceSha256": "901e9ad60eda5cbb36337b12864b6a2b0d133570acb90941b9eabd9888c16351",
+      "rawSha256": "525c82f3d515745f3de541f652ff9d838516bf534fea9d31aedbd38fe0377e46",
+      "renderer": "ResembleAI/Chatterbox Multilingual V2 0.1.7",
+      "modelRevision": "5bb1f6ee58e50c3b8d408bc82a6d3740c2db6e18",
+      "modelLicense": "MIT",
+      "referenceLicense": "CC0-1.0 (EmoDB original, transformed reference)",
+      "durationSeconds": 10.92,
+      "listening": "pending",
+      "seed": 61039,
+      "processing": "[0:a]highpass=f=65,lowpass=f=7600,asplit[clean][wet];[wet]rubberband=pitch=0.78,lowpass=f=1450,volume=0.16[shadow];[clean][shadow]amix=inputs=2:duration=first:normalize=0[a]",
+      "normalization": {
+        "targetLufs": -18,
+        "targetTruePeakDbtp": -1.5,
+        "filter": "loudnorm=I=-15.68:TP=-1.8:LRA=11:linear=false",
+        "iterations": 4
+      },
+      "asr": "Ihre Nummer wandert zurück in den Automaten. Gehen Sie bitte durch den Eingang hinaus. Für einen neuen Versuch ziehen Sie draußen eine neue Nummer. Dort ist die Polizei für den Rasen zuständig.",
+      "asrWordExact": true,
+      "asrModel": "independent faster-whisper, cached local model, CPU int8, no script prompt",
+      "wordCues": [
+        {
+          "at": 0,
+          "charIndex": 0,
+          "word": "Ihre",
+          "end": 0.28
+        },
+        {
+          "at": 0.28,
+          "charIndex": 5,
+          "word": "Nummer",
+          "end": 0.5
+        },
+        {
+          "at": 0.5,
+          "charIndex": 12,
+          "word": "wandert",
+          "end": 0.92
+        },
+        {
+          "at": 0.92,
+          "charIndex": 20,
+          "word": "zurück",
+          "end": 1.22
+        },
+        {
+          "at": 1.22,
+          "charIndex": 27,
+          "word": "in",
+          "end": 1.4
+        },
+        {
+          "at": 1.4,
+          "charIndex": 30,
+          "word": "den",
+          "end": 1.56
+        },
+        {
+          "at": 1.56,
+          "charIndex": 34,
+          "word": "Automaten",
+          "end": 2.28
+        },
+        {
+          "at": 2.66,
+          "charIndex": 45,
+          "word": "Gehen",
+          "end": 2.88
+        },
+        {
+          "at": 2.88,
+          "charIndex": 51,
+          "word": "Sie",
+          "end": 3
+        },
+        {
+          "at": 3,
+          "charIndex": 55,
+          "word": "bitte",
+          "end": 3.2
+        },
+        {
+          "at": 3.2,
+          "charIndex": 61,
+          "word": "durch",
+          "end": 3.42
+        },
+        {
+          "at": 3.42,
+          "charIndex": 67,
+          "word": "den",
+          "end": 3.6
+        },
+        {
+          "at": 3.6,
+          "charIndex": 71,
+          "word": "Eingang",
+          "end": 3.96
+        },
+        {
+          "at": 3.96,
+          "charIndex": 79,
+          "word": "hinaus",
+          "end": 4.4
+        },
+        {
+          "at": 4.64,
+          "charIndex": 87,
+          "word": "Für",
+          "end": 4.86
+        },
+        {
+          "at": 4.86,
+          "charIndex": 91,
+          "word": "einen",
+          "end": 5.08
+        },
+        {
+          "at": 5.08,
+          "charIndex": 97,
+          "word": "neuen",
+          "end": 5.34
+        },
+        {
+          "at": 5.34,
+          "charIndex": 103,
+          "word": "Versuch",
+          "end": 5.82
+        },
+        {
+          "at": 5.82,
+          "charIndex": 111,
+          "word": "ziehen",
+          "end": 6.06
+        },
+        {
+          "at": 6.06,
+          "charIndex": 118,
+          "word": "Sie",
+          "end": 6.2
+        },
+        {
+          "at": 6.2,
+          "charIndex": 122,
+          "word": "draußen",
+          "end": 6.52
+        },
+        {
+          "at": 6.52,
+          "charIndex": 130,
+          "word": "eine",
+          "end": 6.82
+        },
+        {
+          "at": 6.82,
+          "charIndex": 135,
+          "word": "neue",
+          "end": 7.14
+        },
+        {
+          "at": 7.14,
+          "charIndex": 140,
+          "word": "Nummer",
+          "end": 7.46
+        },
+        {
+          "at": 7.7,
+          "charIndex": 149,
+          "word": "dort",
+          "end": 8
+        },
+        {
+          "at": 8,
+          "charIndex": 154,
+          "word": "ist",
+          "end": 8.18
+        },
+        {
+          "at": 8.18,
+          "charIndex": 158,
+          "word": "die",
+          "end": 8.3
+        },
+        {
+          "at": 8.3,
+          "charIndex": 162,
+          "word": "Polizei",
+          "end": 8.76
+        },
+        {
+          "at": 8.76,
+          "charIndex": 170,
+          "word": "für",
+          "end": 8.98
+        },
+        {
+          "at": 8.98,
+          "charIndex": 174,
+          "word": "den",
+          "end": 9.16
+        },
+        {
+          "at": 9.16,
+          "charIndex": 178,
+          "word": "Rasen",
+          "end": 9.5
+        },
+        {
+          "at": 9.5,
+          "charIndex": 184,
+          "word": "zuständig",
+          "end": 10.22
+        }
+      ],
+      "integratedLufs": -18.29,
+      "truePeakDbtp": -2.2,
+      "sha256": "df4758707219501ba8a1e373bec944ac43c4ab64e9e960e19f6a3c6cabe443be",
+      "rawDurationSeconds": 10.92,
+      "asrOrthographicListeningFlag": false,
+      "clipId": "amt-brunhilde-knick-fever-21",
+      "path": "assets/voices/amt-fever/amt-brunhilde-knick-fever-21.mp3",
+      "status": "user-approved default dialogue",
+      "provenanceManifest": "assets/voices/amt-fever/manifest.json",
+      "approval": {
+        "status": "user-approved",
+        "date": "2026-10-10",
+        "instruction": "I approve, just implement it",
+        "scope": "Default Bürgeramt fever encounters and alternate voice recordings",
+        "listeningVerified": false
+      },
+      "english": "Your number returns to the dispenser. Please leave through the entrance. Draw a new number outside to try again; the police have jurisdiction over the lawn there."
+    },
+    {
+      "actorId": "clerk",
+      "voiceId": "amt-brunhilde-knick",
+      "text": "Steht Ihre Nummer auf der Tafel? Nein? Dann treten Sie zurück! Dass ich hier gerade nichts tue, ist eine dienstliche Tätigkeit.",
+      "profileId": "b080c7d95ecd418fb428282461d7fbe7",
+      "referenceSha256": "901e9ad60eda5cbb36337b12864b6a2b0d133570acb90941b9eabd9888c16351",
+      "rawSha256": "00716d7918d092cfc87a634b32232d4d181174594e9df5f2ccb6b49b3d47e6a8",
+      "renderer": "ResembleAI/Chatterbox Multilingual V2 0.1.7",
+      "modelRevision": "5bb1f6ee58e50c3b8d408bc82a6d3740c2db6e18",
+      "modelLicense": "MIT",
+      "referenceLicense": "CC0-1.0 (EmoDB original, transformed reference)",
+      "durationSeconds": 7.4,
+      "listening": "pending",
+      "seed": 61040,
+      "processing": "[0:a]highpass=f=65,lowpass=f=7600,asplit[clean][wet];[wet]rubberband=pitch=0.78,lowpass=f=1450,volume=0.16[shadow];[clean][shadow]amix=inputs=2:duration=first:normalize=0[a]",
+      "normalization": {
+        "targetLufs": -18,
+        "targetTruePeakDbtp": -1.5,
+        "filter": "loudnorm=I=-14.429999999999996:TP=-1.8:LRA=11:linear=false",
+        "iterations": 4
+      },
+      "asr": "Steht Ihre Nummer auf der Tafel? Nein? Dann treten Sie zurück. Dass ich hier gerade nichts tue, ist eine dienstliche Tätigkeit.",
+      "asrWordExact": true,
+      "asrModel": "independent faster-whisper, cached local model, CPU int8, no script prompt",
+      "wordCues": [
+        {
+          "at": 0,
+          "charIndex": 0,
+          "word": "Steht",
+          "end": 0.36
+        },
+        {
+          "at": 0.36,
+          "charIndex": 6,
+          "word": "Ihre",
+          "end": 0.52
+        },
+        {
+          "at": 0.52,
+          "charIndex": 11,
+          "word": "Nummer",
+          "end": 0.8
+        },
+        {
+          "at": 0.8,
+          "charIndex": 18,
+          "word": "auf",
+          "end": 1.02
+        },
+        {
+          "at": 1.02,
+          "charIndex": 22,
+          "word": "der",
+          "end": 1.12
+        },
+        {
+          "at": 1.12,
+          "charIndex": 26,
+          "word": "Tafel",
+          "end": 1.52
+        },
+        {
+          "at": 1.66,
+          "charIndex": 33,
+          "word": "Nein",
+          "end": 2.02
+        },
+        {
+          "at": 2.26,
+          "charIndex": 39,
+          "word": "Dann",
+          "end": 2.34
+        },
+        {
+          "at": 2.34,
+          "charIndex": 44,
+          "word": "treten",
+          "end": 2.64
+        },
+        {
+          "at": 2.64,
+          "charIndex": 51,
+          "word": "Sie",
+          "end": 2.78
+        },
+        {
+          "at": 2.78,
+          "charIndex": 55,
+          "word": "zurück",
+          "end": 3.16
+        },
+        {
+          "at": 3.38,
+          "charIndex": 63,
+          "word": "Dass",
+          "end": 3.54
+        },
+        {
+          "at": 3.54,
+          "charIndex": 68,
+          "word": "ich",
+          "end": 3.72
+        },
+        {
+          "at": 3.72,
+          "charIndex": 72,
+          "word": "hier",
+          "end": 3.88
+        },
+        {
+          "at": 3.88,
+          "charIndex": 77,
+          "word": "gerade",
+          "end": 4.2
+        },
+        {
+          "at": 4.2,
+          "charIndex": 84,
+          "word": "nichts",
+          "end": 4.48
+        },
+        {
+          "at": 4.48,
+          "charIndex": 91,
+          "word": "tue",
+          "end": 4.86
+        },
+        {
+          "at": 4.98,
+          "charIndex": 96,
+          "word": "ist",
+          "end": 5.24
+        },
+        {
+          "at": 5.24,
+          "charIndex": 100,
+          "word": "eine",
+          "end": 5.44
+        },
+        {
+          "at": 5.44,
+          "charIndex": 105,
+          "word": "dienstliche",
+          "end": 5.98
+        },
+        {
+          "at": 5.98,
+          "charIndex": 117,
+          "word": "Tätigkeit",
+          "end": 6.64
+        }
+      ],
+      "integratedLufs": -18.25,
+      "truePeakDbtp": -2.23,
+      "sha256": "6ac5431db572a9f464806d40fa5c5a8a9aed07f1509311123caf4d86a8c8e81b",
+      "rawDurationSeconds": 7.4,
+      "asrOrthographicListeningFlag": false,
+      "clipId": "amt-brunhilde-knick-fever-22",
+      "path": "assets/voices/amt-fever/amt-brunhilde-knick-fever-22.mp3",
+      "status": "user-approved default dialogue",
+      "provenanceManifest": "assets/voices/amt-fever/manifest.json",
+      "approval": {
+        "status": "user-approved",
+        "date": "2026-10-10",
+        "instruction": "I approve, just implement it",
+        "scope": "Default Bürgeramt fever encounters and alternate voice recordings",
+        "listeningVerified": false
+      },
+      "english": "Is your number on the board? No? Then step back! My doing nothing here is an official duty."
+    },
+    {
+      "actorId": "clerk",
+      "voiceId": "amt-brunhilde-knick",
+      "text": "Sehr gut. In diesem Schalterbereich sind private Anrufe nicht zuständig.",
+      "profileId": "b080c7d95ecd418fb428282461d7fbe7",
+      "referenceSha256": "901e9ad60eda5cbb36337b12864b6a2b0d133570acb90941b9eabd9888c16351",
+      "rawSha256": "e2d8578bb67ba2ac1d1da351df2b6d1dd282827e03b9e6392c31b839f8b3f359",
+      "renderer": "ResembleAI/Chatterbox Multilingual V2 0.1.7",
+      "modelRevision": "5bb1f6ee58e50c3b8d408bc82a6d3740c2db6e18",
+      "modelLicense": "MIT",
+      "referenceLicense": "CC0-1.0 (EmoDB original, transformed reference)",
+      "durationSeconds": 4.96,
+      "listening": "pending",
+      "seed": 65000,
+      "processing": "[0:a]highpass=f=65,lowpass=f=7600,asplit[clean][wet];[wet]rubberband=pitch=0.78,lowpass=f=1450,volume=0.16[shadow];[clean][shadow]amix=inputs=2:duration=first:normalize=0[a]",
+      "normalization": {
+        "targetLufs": -18,
+        "targetTruePeakDbtp": -1.5,
+        "filter": "loudnorm=I=-7.810000000000002:TP=-1.8:LRA=11:linear=false",
+        "iterations": 6
+      },
+      "asr": "Sehr gut. In diesem Schalterbereich sind private Anrufe nicht zuständig.",
+      "asrWordExact": true,
+      "asrModel": "independent faster-whisper, cached local model, CPU int8, no script prompt",
+      "wordCues": [
+        {
+          "at": 0,
+          "charIndex": 0,
+          "word": "Sehr",
+          "end": 0.26
+        },
+        {
+          "at": 0.26,
+          "charIndex": 5,
+          "word": "gut",
+          "end": 0.56
+        },
+        {
+          "at": 0.84,
+          "charIndex": 10,
+          "word": "In",
+          "end": 1.12
+        },
+        {
+          "at": 1.12,
+          "charIndex": 13,
+          "word": "diesem",
+          "end": 1.4
+        },
+        {
+          "at": 1.4,
+          "charIndex": 20,
+          "word": "Schalterbereich",
+          "end": 2.08
+        },
+        {
+          "at": 2.08,
+          "charIndex": 36,
+          "word": "sind",
+          "end": 2.32
+        },
+        {
+          "at": 2.32,
+          "charIndex": 41,
+          "word": "private",
+          "end": 2.76
+        },
+        {
+          "at": 2.76,
+          "charIndex": 49,
+          "word": "Anrufe",
+          "end": 3.24
+        },
+        {
+          "at": 3.24,
+          "charIndex": 56,
+          "word": "nicht",
+          "end": 3.42
+        },
+        {
+          "at": 3.42,
+          "charIndex": 62,
+          "word": "zuständig",
+          "end": 4.08
+        }
+      ],
+      "integratedLufs": -18.15,
+      "truePeakDbtp": -2.2,
+      "sha256": "9366d2bbccf4d00ad37b3ee757d3eee2523afdbc53680f0baa653740ae6b839b",
+      "rawDurationSeconds": 4.96,
+      "asrOrthographicListeningFlag": false,
+      "clipId": "amt-brunhilde-knick-fever-23",
+      "path": "assets/voices/amt-fever/amt-brunhilde-knick-fever-23.mp3",
+      "status": "user-approved default dialogue",
+      "provenanceManifest": "assets/voices/amt-fever/manifest.json",
+      "approval": {
+        "status": "user-approved",
+        "date": "2026-10-10",
+        "instruction": "I approve, just implement it",
+        "scope": "Default Bürgeramt fever encounters and alternate voice recordings",
+        "listeningVerified": false
+      },
+      "english": "Very good. Private calls have no jurisdiction in this counter area."
+    }
+  ],
+  "approval": {
+    "status": "user-approved",
+    "date": "2026-10-10",
+    "instruction": "I approve, just implement it",
+    "scope": "Default Bürgeramt fever encounters and alternate voice recordings",
+    "listeningVerified": false
+  }
+}

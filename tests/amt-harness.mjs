@@ -109,7 +109,7 @@ export function harness(kind='host',{voice=false,synthesis=true,phoneLanguage='d
  if(phoneClock)window.BuergeramtClock=phoneClock;
  const context=vm.createContext(globals);
  vm.runInContext(source('buergeramt-story.js'),context,{filename:'buergeramt-story.js'});
- if(kind==='host')for(const file of ['buergeramt-animation-clock.js','buergeramt-voice-profiles.js'])vm.runInContext(source(file),context,{filename:file});
+ if(kind==='host')for(const file of ['buergeramt-animation-clock.js','buergeramt-voice-profiles.js','buergeramt-fever.js'])vm.runInContext(source(file),context,{filename:file});
  vm.runInContext(source(kind==='host'?'buergeramt.js':'buergeramt-phone.js'),context,{filename:kind});
  const counts={form:0,cancel:0,close:0},music=[];
  const config={voiceOn:()=>voice,subtitlesOn:()=>phoneCaptions,onForm:()=>counts.form++,onCancel:()=>counts.cancel++,onClose:()=>counts.close++,music:x=>music.push(x),cinematics,cityAudioBusy};
@@ -120,7 +120,7 @@ export function harness(kind='host',{voice=false,synthesis=true,phoneLanguage='d
  function action(index=0){const button=node('amt-actions').children[index];if(!button)throw new Error(`No action ${index} at ${level.stage}`);button.click();return button}
  function advanceGame(seconds){for(let t=0;t<seconds;t+=.05)level.update(Math.min(.05,seconds-t))}
  function enter(){moveTo(0,-2.6)}
- function enterUntilOmen(){key('KeyW');try{for(let i=0;i<300;i++){if(level.stage==='omen')return;level.update(.05)}throw new Error(`Omen did not begin during entry; stage=${level.stage}, view=${JSON.stringify(level.view)}`)}finally{key('KeyW','keyup')}}
+ function enterUntilOmen(){enter();key('KeyE');key('KeyE','keyup');if(level.stage!=='omen')throw new Error(`E encounter did not begin; ${JSON.stringify(level.view)}`)}
  function approachRegistration(){moveTo(-3.3,-2.6);moveTo(-3.3,2.5);moveTo(-4.65,2.5)}
  function register(){enter();Link.instances.at(-1).message({type:'scan',id:'a'.repeat(24)})}
  function wait(){register()}

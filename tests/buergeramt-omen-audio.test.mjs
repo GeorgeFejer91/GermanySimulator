@@ -23,10 +23,10 @@ test('the approach pauses the queue and player, grows with distance, and waits u
  assert.notEqual(h.node('amt-line').textContent,verse);
  const board=h.level.queueDisplay,position=h.level.view;
  h.key('KeyW');
- let previousDistance=distance(h),previousStrength=h.level.omen.strength,progressed=false;
+ const initialDistance=distance(h);let previousDistance=initialDistance,previousStrength=h.level.omen.strength,progressed=false;
  for(let i=0;i<300&&h.level.omen.phase==='approach';i++){
   h.level.update(.05);const nextDistance=distance(h),nextStrength=h.level.omen.strength;
-  assert.ok(nextDistance<=previousDistance+1e-6,'the courier moves toward the player');
+  assert.ok(Number.isFinite(nextDistance),'the body-clear approach remains finite');
   assert.ok(nextStrength>=previousStrength-1e-6,'darkness never recedes during approach');
   assert.equal(h.level.queueDisplay,board);assert.equal(h.level.view.x,position.x);assert.equal(h.level.view.z,position.z);
   if(h.level.omen.phase==='approach')assert.notEqual(h.node('amt-line').textContent,verse);
@@ -34,7 +34,7 @@ test('the approach pauses the queue and player, grows with distance, and waits u
   previousDistance=nextDistance;previousStrength=nextStrength;
  }
  h.key('KeyW','keyup');
- assert.ok(progressed);assert.equal(h.level.omen.phase,'blackout');
+ assert.ok(progressed);assert(distance(h)<initialDistance,'the full route approaches the player');assert.equal(h.level.omen.phase,'blackout');
  assert.equal(h.level.omen.strength,1);assert.equal(h.node('amt-line').textContent,verse);
  assert.equal(h.level.queueDisplay,board);
 });
@@ -95,7 +95,7 @@ test('exit and replay cancel pending omen callbacks',()=>{
 
 test('city foreground audio defers the omen until it clears',()=>{
  let cityBusy=true;const h=harness('host',{cinematics:true,cityAudioBusy:()=>cityBusy,fakeAudio:true});
- h.enter();h.advanceGame(9);assert.equal(h.level.stage,'walk-sign');assert.equal(h.level.omen.phase,'');
+ h.enter();h.key('KeyE');h.advanceGame(9);assert.equal(h.level.stage,'walk-sign');assert.equal(h.level.omen.phase,'');
  assert.equal(h.audio.contexts.length,0);
  cityBusy=false;
  for(let i=0;i<100&&h.level.stage!=='omen';i++)h.level.update(.05);
