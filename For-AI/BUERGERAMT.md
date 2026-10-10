@@ -81,9 +81,12 @@ by a 0.25 s settle before walking resumes. A moving regular finishes the nearest
 work anchor before returning to patrol. Early/expired counter outcomes also
 return automatically to waiting or the QR. Consecutive clerk lines continue
 without a full release between them, retaining one continuous space. The final
-reply releases before the existing A38 form. Pending continuations carry the
-attempt and speech cue; hidden time, paused speech, exit and replay cannot
-advance a stale scene. The existing office update is the only scheduler.
+reply releases before the existing A38 form. Phone scans during a regular or
+patron conversation issue the ticket immediately, preserve the current speech
+and release, and resume in waiting when that sequence ends.
+Pending continuations carry the attempt and speech cue; hidden time, paused
+speech, exit and replay cannot advance a stale scene. The existing office update
+is the only scheduler.
 Audio/subtitle controls occupy the top edge during a sequence. The existing
 Pretext fitter measures their actual bottom edge and reserves a caption region
 below them and above the English subtitle rail. Long source text retains a

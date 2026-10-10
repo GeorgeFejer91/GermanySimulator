@@ -333,10 +333,10 @@ function nearestCharacter(){if(!["walk-sign","waiting"].includes(stage))return n
 function showCharacter(actor){
  encounterArmed=true;
  const entry=actor.static?story.patrons[actor.id]:story.characters[actor.id],index=actor.static?(patronEncounters[actor.id]||0):actor.encounters++,spoken=entry.lines[index%entry.lines.length],resume=stage;
- if(actor.static){patronEncounters[actor.id]=index+1;setStage("character");content(entry.speaker,spoken.line,[{run:()=>setStage(resume)}],null,null,null,{id:actor.id,tone:spoken.tone,valence:spoken.valence});return}
+ if(actor.static){patronEncounters[actor.id]=index+1;setStage("character");content(entry.speaker,spoken.line,[{run:()=>setStage(activated?"waiting":resume)}],null,null,null,{id:actor.id,tone:spoken.tone,valence:spoken.valence});return}
  actor.pending=false;actor.sequence=[];actor.priority=3;actor.mode="gesture";actor.workClock=0;actor.animationClock=0;actor.returning=null;setStage("character");content(entry.speaker,spoken.line,[{run:()=>{
   const phase=(actor.animationClock%4)/4;actor.returning={phase,direction:phase<.5?-1:1};actor.sequence=[{mode:"look",duration:.45},{mode:"work",duration:.7}];actor.pending=false;
-  setStage(resume);
+  setStage(activated?"waiting":resume);
  }}],null,null,null,{id:actor.id,tone:spoken.tone,valence:spoken.valence});
 }
 function walking(){return ["outside","walk-sign","waiting","walk-counter"].includes(stage)}
@@ -644,7 +644,7 @@ function beginLink(){
    ticketSerial=ticketSerial===899?100:ticketSerial+1;lastScanId=m.id;
    number=next;registeredName="";activated=true;ticketWaitCalls=5;deadline=0;callPending=false;callTriggered=false;callCommitted=false;callOutcome="";clerkIndex=0;
    if(omen.phase){omen.resume="waiting"}
-   else if(stage!=="outside")setStage("waiting");
+   else if(stage!=="outside"&&stage!=="character")setStage("waiting");
    setStatus("WARTENUMMER "+number+" · AUFRUF ABWARTEN");
   }else if(m.type==="register"&&activated&&typeof m.name==="string"&&m.name.trim().length>=2&&m.name.length<=80){registeredName=m.name.trim().replace(/\s+/g," ");if(stage==="walk-counter")setStatus("NAME EINGETRAGEN · FRAU KNICK ANSPRECHEN")}
   else if(m.type==="phone-hidden")forfeit("TELEFON NICHT SICHTBAR");

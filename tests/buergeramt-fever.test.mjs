@@ -5,6 +5,35 @@ import {harness,source} from './amt-harness.mjs';
 
 function clock(){const window={};vm.runInNewContext(source('buergeramt-fever.js'),{window});return window.BuergeramtFever}
 function approachPatron(h){h.config.cinematics=false;h.enter();h.approachRegistration();h.config.cinematics=true;h.key('KeyE');h.tick(16)}
+
+for(const recorded of [false,true])test(`a phone ticket during Konrad ${recorded?'recording':'browser speech'} waits for completion and returns to waiting`,()=>{
+ let player;
+ const h=harness('host',{cinematics:true,voice:true});
+ if(recorded){
+  vm.runInContext(source('For-AI/AUDIO-TEXT-LIBRARY.js'),h.context);
+  h.context.Audio=class{
+   constructor(src){this.src=src;this.duration=4.02;this.currentTime=0;this.paused=true;player=this}
+   play(){this.paused=false;h.context.setTimeout(()=>this.onplaying?.(),16);return Promise.resolve()}
+   pause(){this.paused=true;this.onpause?.()}removeAttribute(){this.src=''}load(){}
+  };
+ }
+ approachPatron(h);
+ const utterance=h.synth.current,cancellations=h.synth.cancelCount;
+ assert.equal(h.level.fever.id,'amt-konrad-wohnungszettel');
+ const line='Ich habe alle Unterlagen dabei. Hoffentlich reicht das.';
+ assert.equal(h.node('amt-line').textContent,line);
+ if(recorded){assert.equal(utterance,null);assert(player.src.includes('amt-konrad-wohnungszettel-fever-1.mp3'));player.currentTime=1.9;player.ontimeupdate()}
+ else{assert.equal(utterance.text,line);h.synth.boundary(line.indexOf('Hoffentlich'))}
+ h.links[0].message({type:'scan',id:'konrad-phone-scan'});
+ assert.equal(h.links[0].sent.at(-1).type,'ticket');assert.equal(h.level.activated,true);
+ assert.equal(h.level.stage,'character');assert.equal(h.synth.current,utterance);
+ if(recorded){assert.equal(player.paused,false);assert(player.src.includes('amt-konrad-wohnungszettel-fever-1.mp3'))}
+ assert.equal(h.synth.cancelCount,cancellations);assert.equal(h.level.audioTextBusy,true);
+ h.advanceGame(8);assert.equal(h.level.stage,'character');assert.equal(h.level.fever.phase,'speaking');
+ if(recorded){player.currentTime=player.duration;player.onended()}else h.synth.end();h.advanceGame(2.5);
+ assert.equal(h.level.stage,'waiting');assert.equal(h.level.fever.active,false);
+ assert.equal(h.level.activated,true);assert.equal(h.node('amt-ambient').textContent,'');
+});
 test('every distinct Bürgeramt identity owns a unique authored motif',()=>{
  const h=harness('host'),themes=h.window.BuergeramtFever.themes;
  const ids=[...Object.keys(h.window.BuergeramtStory.characters),...Object.keys(h.window.BuergeramtStory.patrons),'clerk'];
