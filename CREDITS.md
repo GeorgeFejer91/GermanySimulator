@@ -434,3 +434,6 @@ by [__Maros__(oooFFFFEDDMODELS)](https://sketchfab.com/pierre.marcos.19), under
 cooked-sausage curve and PBR appearance are retained, with normalized placement
 and smaller textures. The mustard arrowhead is original game geometry. Source,
 changes and hashes: [asset attribution](assets/models/mission-sausage/LICENSES.md).
+
+
+Friedrich Merz dialogue was synthesized on 10 October 2026 with the user-selected saved “GS Merz” profile. The two existing game scripts and five added historical quotations share this profile; they are synthetic game audio. The quotations’ source URLs, event dates, excerpt boundary, and context are recorded in `assets/voices/merz/manifest.json`, and synthesis/reference provenance and license limits are in `assets/voices/LICENSES.md`.

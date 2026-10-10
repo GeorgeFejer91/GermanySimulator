@@ -726,8 +726,8 @@ const missions=[
 const rules=speechCatalog.rules;
 const RULE_ROTATION_SECONDS=14;
 const npcLines=["Also das ist jetzt aber auch nicht so gedacht.","Kann man machen. Muss man aber wirklich nicht.","Ich möchte mich nicht beschweren, aber ich beschwere mich.","Dafür gibt es bestimmt ein Formular.","Früher war hier weniger Vorgang.","Sie stehen minimal im Weg.","Das ist bestimmt wegen der Baustelle. Die ist seit 2009 da.","Dafür bin ich nicht zuständig.","Ordnung muss schon sein.","Haben Sie dafür einen Termin?"];
-const merzLines=Object.freeze(["Das Rote Rathaus zu stürmen? Das muss ein Ende haben.","Mein Großvater war kein Nationalsozialist, sondern eine beeindruckende Persönlichkeit und ein erfolgreicher Bürgermeister."]);
-const MERZ_RECORDINGS=Object.freeze(Object.fromEntries(["merz-rotes-rathaus","merz-grossvater"].map(id=>{const clip=speechClip(id);return[clip.text,clip.recording]})));
+const merzLines=Object.freeze(["Das Rote Rathaus zu stürmen? Das muss ein Ende haben.","Mein Großvater war kein Nationalsozialist, sondern eine beeindruckende Persönlichkeit und ein erfolgreicher Bürgermeister.","Links ist vorbei.","Es gibt keine linke Mehrheit und keine linke Politik mehr in Deutschland.","… aber nicht für irgendwelche Grünen und linken Spinner auf dieser Welt.","Die sitzen beim Arzt und lassen sich die Zähne neu machen, und die deutschen Bürger nebendran kriegen keine Termine.","Fragen Sie mal Ihre Töchter, was ich damit gemeint haben könnte."]);
+const MERZ_RECORDINGS=Object.freeze(Object.fromEntries(["merz-rotes-rathaus","merz-grossvater","merz-links-vorbei","merz-keine-linke-politik","merz-gruene-linke-spinner","merz-zahnarzt","merz-fragen-toechter"].map(id=>{const clip=speechClip(id);return[clip.text,clip.recording]})));
 const MERKEL_AUDIO_LINE=speechClip("merkel-wir-schaffen-das").text;
 const MERKEL_NEULAND_LINE=speechClip("merkel-neuland").text;
 const MERKEL_BEHIND_LINE="Sie stehen hinter mir.";
