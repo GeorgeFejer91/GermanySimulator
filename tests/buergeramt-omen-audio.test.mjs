@@ -79,7 +79,7 @@ test('phone forfeiture during the omen cancels it and cannot return to waiting',
  const link=h.links[0];link.message({type:'scan',id:'a'.repeat(24)});link.message({type:'phone-hidden'});
  assert.equal(h.level.stage,'expired');assert.equal(h.level.activated,false);
  assert.equal(h.level.omen.phase,'');assert.equal(h.level.omen.strength,0);
- h.tick(10000);h.advanceGame(10);assert.equal(h.level.stage,'expired');
+ h.elapse(20);assert.equal(h.level.stage,'walk-sign');assert.equal(h.level.activated,false);assert.equal(h.level.omen.phase,'');
 });
 
 test('exit and replay cancel pending omen callbacks',()=>{

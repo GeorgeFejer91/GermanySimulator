@@ -82,7 +82,7 @@ test('a nearby regular owns the visible dialogue mood and releases the queue on 
  const board=h.level.queueDisplay;h.level.interact();assert.equal(h.level.stage,'character');
  assert.equal(h.level.characterMood.id,'formularsammler');assert.equal(h.level.characterMood.tone,'dread');
  assert.equal(h.node('amt-line').textContent,h.window.BuergeramtStory.characters.formularsammler.lines[0].line);
- h.advanceGame(4);assert.equal(h.level.queueDisplay,board);h.action();
+ h.advanceGame(4);assert.equal(h.level.queueDisplay,board);assert.equal(h.node('amt-actions').children.length,0);h.elapse(15);
  assert.equal(h.level.stage,'walk-sign');assert.equal(h.level.characterMood,null);
 });
 
@@ -90,8 +90,8 @@ test('city audio gates optional actor speech and a replaced cue never starts lat
  let cityBusy=true;const h=harness('host',{voice:true,cinematics:false,cityAudioBusy:()=>cityBusy});
  h.enter();h.moveTo(3.4,1.2);const before=h.synth.spoken.length;h.level.interact();
  assert.equal(h.level.stage,'character');h.tick(2500);assert.equal(h.synth.spoken.length,before);
- h.action();cityBusy=false;h.tick(500);assert.equal(h.synth.spoken.length,before);
- h.advanceGame(2);h.level.interact();assert.equal(h.level.stage,'character');h.tick(20);
+ h.level.replay(h.config);cityBusy=false;h.tick(500);assert.equal(h.synth.spoken.length,before);
+ h.enter();h.moveTo(3.4,1.2);h.level.interact();assert.equal(h.level.stage,'character');h.tick(20);
  assert.equal(h.synth.spoken.length,before+1);
 });
 
@@ -105,7 +105,7 @@ test('city audio gates waiting-room speech and releases it when the city clears'
 
 test('city audio defers the optional omen and its tone until the city clears',()=>{
  let cityBusy=true;const h=harness('host',{voice:true,cinematics:true,cityAudioBusy:()=>cityBusy});
- h.enter();h.key('KeyE');h.advanceGame(9);
+ h.enter();h.advanceGame(9);
  assert.equal(h.level.stage,'walk-sign');assert.equal(h.level.omen.phase,'');
  cityBusy=false;h.advanceGame(9);
  assert.equal(h.level.stage,'omen');assert.equal(h.level.omen.phase,'blackout');
@@ -155,9 +155,9 @@ test('a new scan after a missed appointment starts another counter opportunity',
  const h=harness();h.wait();const first=h.links[0].sent.at(-1).number;h.advanceGame(17);assert.equal(h.level.stage,'walk-counter');h.advanceGame(20);assert.equal(h.level.stage,'expired');h.links[0].message({type:'scan',id:'b'.repeat(24)});assert.equal(h.level.stage,'waiting');assert.equal(h.level.activated,true);assert.notEqual(h.links[0].sent.at(-1).number,first);
 });
 test('decline completes all clerk questions and grants A38 exactly once',()=>{
- const h=harness();h.counter();assert.equal(h.node('amt-actions').children.length,0);h.links[0].message({type:'decline',id:'grass'});assert.equal(h.level.timing.cues[-1].status,'declined');h.action();
- let finalButton;for(let i=0;i<4;i++){assert.equal(h.node('amt-actions').children.length,3);h.action();finalButton=h.action()}
- assert.deepEqual(h.counts,{form:1,cancel:0,close:0});assert.equal(h.level.active,false);assert.equal(h.level.activated,false);finalButton.click();assert.equal(h.counts.form,1);
+ const h=harness();h.counter();assert.equal(h.node('amt-actions').children.length,0);h.links[0].message({type:'decline',id:'grass'});assert.equal(h.level.timing.cues[-1].status,'declined');
+ for(let i=0;i<1500&&h.level.active;i++){h.elapse(.1);assert.equal(h.node('amt-actions').children.length,0,'no dialogue or return buttons at any counter step')}
+ assert.deepEqual(h.counts,{form:1,cancel:0,close:0});assert.equal(h.level.active,false);assert.equal(h.level.activated,false);h.elapse(30);assert.equal(h.counts.form,1);
  assert.deepEqual(h.music,[true,false]);
 });
 test('answer automatically cancels without ever issuing A38',()=>{
@@ -166,8 +166,8 @@ test('answer automatically cancels without ever issuing A38',()=>{
  assert.equal(h.links[0].sent.filter(m=>m.type==='police-line').length,3);
 });
 test('early approach reprimands; late arrival expires without A38',()=>{
- const h=harness();h.wait();h.moveTo(4,-8.15);h.level.interact();assert.equal(h.level.stage,'early');assert.match(h.node('amt-line').textContent,/dienstliche Tätigkeit/);h.action();
- h.advanceGame(16);assert.equal(h.level.stage,'walk-counter');h.advanceGame(20);assert.equal(h.level.stage,'expired');assert.equal(h.level.activated,false);h.action(1);assert.equal(h.counts.cancel,1);assert.equal(h.counts.form,0);
+ const h=harness();h.wait();h.moveTo(4,-8.15);h.level.interact();assert.equal(h.level.stage,'early');assert.match(h.node('amt-line').textContent,/dienstliche Tätigkeit/);assert.equal(h.node('amt-actions').children.length,0);h.elapse(14);
+ h.advanceGame(16);assert.equal(h.level.stage,'walk-counter');h.advanceGame(20);assert.equal(h.level.stage,'expired');assert.equal(h.level.activated,false);h.elapse(16);assert.equal(h.level.stage,'walk-sign');assert.equal(h.counts.form,0);
 });
 test('a delayed decline cannot resurrect a forfeited appointment',()=>{
  const h=harness();h.counter();h.links[0].message({type:'phone-hidden'});assert.equal(h.level.stage,'expired');h.links[0].message({type:'decline',id:'grass'});assert.equal(h.level.stage,'expired');assert.equal(h.counts.form,0);
@@ -179,7 +179,7 @@ test('a failed ticket delivery does not start a queue slot',()=>{
  const h=harness();h.enter();h.links[0].fail=true;h.links[0].message({type:'scan',id:'a'.repeat(24)});assert.equal(h.level.stage,'walk-sign');assert.equal(h.level.activated,false);
 });
 test('failed police-call delivery cannot trap the player at the counter',()=>{
- const h=harness();h.wait();h.links[0].message({type:'register',name:'Erika Mustermann'});h.moveTo(4,-8.15);h.advanceGame(16);h.links[0].fail=true;h.level.interact();assert.equal(h.level.stage,'expired');assert.equal(h.node('amt-actions').children.length,2);
+ const h=harness();h.wait();h.links[0].message({type:'register',name:'Erika Mustermann'});h.moveTo(4,-8.15);h.advanceGame(16);h.links[0].fail=true;h.level.interact();assert.equal(h.level.stage,'expired');assert.equal(h.node('amt-actions').children.length,0);h.elapse(16);assert.equal(h.level.stage,'walk-sign');
 });
 test('the name button is required before the host arms a call, then readiness schedules its lead-in',()=>{
  const h=harness();h.wait();h.moveTo(4,-8.15);h.advanceGame(16);h.level.interact();assert.equal(h.level.stage,'walk-counter');assert.equal(h.links[0].sent.filter(m=>m.type==='call-arm').length,0);
@@ -204,17 +204,18 @@ test('replay cancels the previous argument timers',()=>{
  const h=harness();h.counter();h.links[0].message({type:'answer',id:'grass'});h.tick(4000);h.level.replay(h.config);h.counter();h.links[1].message({type:'answer',id:'grass'});
  h.tick(27501);assert.equal(h.counts.cancel,0);assert.equal(h.level.stage,'cancelled');h.tick(150000);assert.equal(h.counts.cancel,1);assert.equal(h.counts.form,0);
 });
-test('key release during a modal does not leave movement stuck',()=>{
- const h=harness();h.wait();h.moveTo(4,-8.15);h.key('KeyW');h.level.interact();assert.equal(h.level.stage,'early');h.key('KeyW','keyup');h.action();const before=h.level.view;h.level.update(.1);assert.deepEqual(h.level.view,before);
+test('key release during a sequence does not leave movement stuck',()=>{
+ const h=harness();h.wait();h.moveTo(4,-8.15);h.key('KeyW');h.level.interact();assert.equal(h.level.stage,'early');h.key('KeyW','keyup');h.elapse(14);const before=h.level.view;h.level.update(.1);assert.deepEqual(h.level.view,before);
 });
-test('stale choice and continuation buttons cannot skip clerk stages',()=>{
- const h=harness();h.counter();h.links[0].message({type:'decline',id:'grass'});h.action();const oldChoice=h.node('amt-actions').children[0];oldChoice.click();const oldNext=h.node('amt-actions').children[0];oldNext.click();const second=h.node('amt-line').textContent;oldNext.click();oldChoice.click();assert.equal(h.node('amt-line').textContent,second);assert.equal(h.counts.form,0);
+test('a stale automatic continuation cannot skip clerk stages after replay',()=>{
+ const h=harness('host',{voice:true});h.counter();h.links[0].message({type:'decline',id:'grass'});h.tick(16);const old=h.synth.current;h.synth.end();h.level.replay(h.config);h.counter();const line=h.node('amt-line').textContent;
+ old.onend?.();h.advanceGame(.5);assert.equal(h.node('amt-line').textContent,line);assert.equal(h.level.stage,'counter');assert.equal(h.node('amt-actions').children.length,0);assert.equal(h.counts.form,0);
 });
 test('identical speech from a previous attempt cannot start after replay',()=>{
  const h=harness('host',{voice:true});h.wait();h.moveTo(4,-8.15);h.level.interact();h.level.replay(h.config);h.wait();h.moveTo(4,-8.15);h.level.interact();h.tick(20);assert.equal(h.synth.spoken.length,1);assert.equal(h.synth.spoken[0].text,h.node('amt-line').textContent);
 });
-test('returning to walking cancels speech whose modal is now hidden',()=>{
- const h=harness('host',{voice:true});h.wait();h.moveTo(4,-8.15);h.level.interact();h.tick(20);assert.equal(h.synth.speaking,true);h.action();assert.equal(h.synth.speaking,false);
+test('walking resumes only after the in-scene speech completes',()=>{
+ const h=harness('host',{voice:true});h.wait();h.moveTo(4,-8.15);h.level.interact();h.tick(20);assert.equal(h.synth.speaking,true);assert.equal(h.node('amt-actions').children.length,0);h.synth.end();h.advanceGame(.3);assert.equal(h.level.stage,'waiting');assert.equal(h.synth.speaking,false);assert.equal(h.node('amt-ambient').textContent,'');
 });
 test('starting a clerk cue does not cancel an already idle speech engine',()=>{
  const h=harness('host',{voice:true});h.counter();h.tick(20);h.synth.end();const before=h.synth.cancelCount;h.links[0].message({type:'answer',id:'grass'});assert.equal(h.synth.cancelCount,before);

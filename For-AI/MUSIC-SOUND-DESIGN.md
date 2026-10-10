@@ -4,9 +4,13 @@ This protocol defines the shared beat interface and evidence for music and nonve
 
 The reusable skill is pinned to [`GeorgeFejer91/music-sound-effects-skill`, commit `e6afde61c713aa0524f4a344ef289e1fc0c2159e`](https://github.com/GeorgeFejer91/music-sound-effects-skill/tree/e6afde61c713aa0524f4a344ef289e1fc0c2159e/skills/music-sound-effects) (private). Install that package directory as `$CODEX_HOME/skills/music-sound-effects` and read its `SKILL.md` plus only the relevant reference before use. The current personal installation is `C:\Users\cogpsy-vrlab\.codex\skills\music-sound-effects`. To update it, validate a new source revision first, then update the installation and this pin together. External ChatDev cannot read the personal installation; use the compact project contract and stage prompt described below.
 
-## Bürgeramt E encounter sound
+## Bürgeramt encounter sound
 
-The twelve fever spaces begin only from an E-owned character/counter exchange.
+Eleven fever spaces begin from an E-owned character/counter exchange. The
+Aktenkurier's existing omen approaches automatically once per visit and retains
+its separate score and official recording. There is no additional E dialogue
+for him. Scene completion uses speech receipts and the gradual visual release;
+no return button is required.
 Their nonverbal three-oscillator beds share the existing office effects bus;
 a separate register per identity sets their colour. The same office clock and
 speech receipts control entry, foreground ducking, pause, gradual release and

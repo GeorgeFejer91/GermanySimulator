@@ -124,6 +124,13 @@ calls in about three seconds and no page errors. Desktop input p95 had a
 stable input latency. This is a two-run smoke check, not a new peak baseline.
 Physical Android, GPU timers and perceptual listening remain NOT RUN.
 
+The automatic in-scene interaction change retains those same rendering and
+asset paths. It adds no assets or frame loop: the existing office update owns
+speech/fade continuations, and the existing Pretext fitter measures caption
+clearance below the visible audio/subtitle controls. Caption overflow uses the
+same bounded DOM region. The earlier peak and root measurements above describe
+their recorded candidates, not a new benchmark of this controller/UI change.
+
 The office's original painted prop strip adds a file cabinet, paper tower,
 distorted clock, and noticeboard. Its source and provenance are with the cast;
 the game loads its compressed atlas only when the office is entered, alongside

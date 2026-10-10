@@ -76,15 +76,15 @@ test('moving regulars hold work and freeze background actions during dialogue',(
 });
 
 for(const seconds of [1,3])test(`dialogue actor returns to the nearest work anchor after ${seconds}s`,()=>{
- const h=harness();h.enter();h.moveTo(3.4,1.2);h.level.interact();
+ const h=harness('host',{voice:true});h.enter();h.moveTo(3.4,1.2);h.level.interact();h.tick(16);
  assert.equal(h.level.stage,'character');const id=h.level.characterMood.id;
  h.advanceGame(seconds);
  const spoken=h.level.characters.find(actor=>actor.id===id);
  assert.equal(spoken.mode,'gesture');assert.equal(spoken.animation.arc,'work-gesture-work');
  const phase=spoken.animation.phase;
- h.action();assert.notEqual(h.level.stage,'character');
+ h.synth.end();h.advanceGame(.25);assert.notEqual(h.level.stage,'character');
  const released=h.level.characters.find(actor=>actor.id===id);
- assert.equal(released.mode,'gesture');assert.equal(released.animation.phase,phase);
+ assert.equal(released.mode,'gesture');assert(Math.abs(released.animation.phase-phase)<=.25/4+1e-8,'automatic completion retains continuous body phase');
  const origin=[released.x,released.z];
  h.advanceGame(.2);
  const settling=h.level.characters.find(actor=>actor.id===id);

@@ -117,10 +117,10 @@ export function harness(kind='host',{voice=false,synthesis=true,phoneLanguage='d
  if(kind==='host')level.open(config);
  function key(code,type='keydown'){const event=new Event(type,{cancelable:true});Object.assign(event,{code,repeat:false});window.dispatchEvent(event)}
  function moveTo(x,z){for(const [axis,target,pos,neg] of [['x',x,'KeyD','KeyA'],['z',z,'KeyS','KeyW']]){let steps=0;while(Math.abs(level.view[axis]-target)>.07){if(++steps>300)throw new Error(`Cannot reach ${axis}=${target} from ${JSON.stringify(level.view)}`);const code=level.view[axis]<target?pos:neg;key(code);level.update(Math.min(.05,Math.abs(level.view[axis]-target)/3.6));key(code,'keyup')}}}
- function action(index=0){const button=node('amt-actions').children[index];if(!button)throw new Error(`No action ${index} at ${level.stage}`);button.click();return button}
  function advanceGame(seconds){for(let t=0;t<seconds;t+=.05)level.update(Math.min(.05,seconds-t))}
  function enter(){moveTo(0,-2.6)}
- function enterUntilOmen(){enter();key('KeyE');key('KeyE','keyup');if(level.stage!=='omen')throw new Error(`E encounter did not begin; ${JSON.stringify(level.view)}`)}
+ function enterUntilOmen(){key('KeyW');try{for(let i=0;i<300;i++){if(level.stage==='omen')return;level.update(.05)}throw new Error(`Automatic omen did not begin; ${JSON.stringify(level.view)}`)}finally{key('KeyW','keyup')}}
+ function elapse(seconds){for(let t=0;t<seconds;t+=.05){const step=Math.min(.05,seconds-t);tick(step*1000);level.update(step)}}
  function approachRegistration(){moveTo(-3.3,-2.6);moveTo(-3.3,2.5);moveTo(-4.65,2.5)}
  function register(){enter();Link.instances.at(-1).message({type:'scan',id:'a'.repeat(24)})}
  function wait(){register()}
@@ -128,5 +128,5 @@ export function harness(kind='host',{voice=false,synthesis=true,phoneLanguage='d
  function phoneReady(){const link=Link.instances.at(-1);link.emit('connected',{});link.message({type:'ticket',number:'B-223'});return link}
  function incoming(){const link=phoneReady();node('phone-name').value='Erika Mustermann';node('phone-form').dispatchEvent(new Event('submit',{cancelable:true}));link.message({type:'call-arm',id:'grass'});link.message({type:'call',id:'grass',line:window.BuergeramtStory.call.line,ringAtPhoneMs:now,ringAtUtcMs:null,leadMs:2200});return link}
  function hide(){document.hidden=true;document.dispatchEvent(new Event('visibilitychange'))}
- return{window,document,node,tick,now:()=>now,timers,key,moveTo,action,advanceGame,enter,enterUntilOmen,approachRegistration,register,wait,counter,phoneReady,incoming,hide,synth,audio,vibrations,fullscreenRequests,counts,music,config,level,links:Link.instances,context};
+ return{window,document,node,tick,now:()=>now,timers,key,moveTo,advanceGame,elapse,enter,enterUntilOmen,approachRegistration,register,wait,counter,phoneReady,incoming,hide,synth,audio,vibrations,fullscreenRequests,counts,music,config,level,links:Link.instances,context};
 }

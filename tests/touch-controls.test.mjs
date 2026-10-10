@@ -13,7 +13,7 @@ const box={fontSize:'17px',lineHeight:'17px',paddingLeft:'8px',paddingRight:'8px
 let available=true,lines=1,natural=50,measuredWidth,clearance='',dockTop=237;
 const dock={getClientRects:()=>[{}],getBoundingClientRect:()=>({top:dockTop})};
 const scope={selectors:['.control-dock button'],innerWidth:844,innerHeight:390,Intl,
- document:{documentElement:{},fonts:{check:()=>available},body:{style:{getPropertyValue:()=>clearance,setProperty:(_,v)=>{clearance=v}},classList:{toggle(){},contains:()=>false}},querySelectorAll:()=>[button],querySelector:()=>dock},
+ document:{documentElement:{},fonts:{check:()=>available},body:{style:{getPropertyValue:()=>clearance,setProperty:(_,v)=>{clearance=v}},classList:{toggle(){},contains:()=>false}},querySelectorAll:()=>[button],querySelector:s=>s==='.control-dock'?dock:null},
  getComputedStyle:el=>el===label?typography:el===button?box:{zoom:'1'},
  prepareWithSegments:(text,font)=>{assert.equal(text,'Rechts');assert.equal(font,'normal 700 13px Fraktur');return{}},
  measureLineStats:(_,width)=>{measuredWidth=width;return{lineCount:lines,maxLineWidth:50}},measureNaturalWidth:()=>natural};

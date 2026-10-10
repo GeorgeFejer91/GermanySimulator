@@ -43,7 +43,7 @@ test('dialogue freezes other actor clips and replay clears action phase',()=>{
  const before=h.level.characters.filter(actor=>actor.id!==speaker);
  h.advanceGame(2);
  assert.deepEqual(h.level.characters.filter(actor=>actor.id!==speaker),before);
- h.action();h.advanceGame(.2);
+ h.elapse(15);assert.notEqual(h.level.stage,'character');h.advanceGame(.2);
  assert.ok(h.level.characters.some(actor=>actor.mode==='walk'||actor.phase>0));
  h.level.replay(h.config);
  assert.ok(h.level.characters.every(actor=>actor.mode==='work'&&actor.phase===0&&actor.frame===0));

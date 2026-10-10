@@ -1,4 +1,10 @@
 .amt-level[hidden],.amt-ticket[hidden],.phone-call[hidden]{display:none!important}
+.amt-level .amt-sheet{display:none!important}
+.amt-sequence #amt-direct-reset{visibility:hidden}
+.amt-walk-hud.sequence :is(.amt-walk-top,.amt-reticle,.amt-walk-bottom,.amt-touch-controls){display:none}
+#amt-walk-hud.sequence #amt-ambient{bottom:calc(max(18px,env(safe-area-inset-bottom)) + var(--subtitle-height,0px));max-height:calc(100% - var(--amt-caption-top,12px) - max(18px,env(safe-area-inset-bottom)) - var(--subtitle-height,0px));box-sizing:border-box;padding:6px 3px;overflow:auto;pointer-events:auto;background:linear-gradient(transparent,#10191bcc 16%,#10191bcc 84%,transparent)}
+.amt-inside.amt-sequence #amt-mix{top:12px;left:12px}
+.amt-inside.amt-sequence .subtitle-toggle{top:12px;right:12px;bottom:auto;max-width:calc(100% - 24px)}
 .amt-level{position:fixed;inset:0;z-index:200;display:grid;place-items:end center;overflow:auto;background:#353b3a;color:#241e18;font-family:Arial,sans-serif}
 .amt-room{position:absolute;inset:0;overflow:hidden;perspective:850px;background:linear-gradient(#99988a 0 57%,#6d6b62 57%)}
 .amt-back-wall{position:absolute;left:10%;right:10%;top:8%;height:56%;border:16px solid #b2ac9c;background:linear-gradient(90deg,#b2ae9d,#d0c9b5 50%,#aaa494);box-shadow:inset 0 -14px #7d796c;transform:rotateX(-3deg)}

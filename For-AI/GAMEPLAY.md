@@ -41,7 +41,7 @@ Short city notices share an edge column with measured clearance above touch cont
 
 ### First Bürgeramt visit
 
-The first mission enters the existing first-person Bürgeramt episode. A phone QR scan issues a private ticket, name submission enables the counter call, and the host owns the queue and appointment outcome. Declining the police call permits Frau Knick's choices and the A38 form; answering cancels the appointment without A38. Hidden/disconnected phones and late arrivals forfeit the current ticket. Eight optional walking encounters add atmosphere without changing these gates.
+The first mission enters the existing first-person Bürgeramt episode. A phone QR scan issues a private ticket, name submission enables the counter call, and the host owns the queue and appointment outcome. Declining the police call plays Frau Knick's four exchanges automatically, using each first authored response, and grants the A38 form; answering cancels the appointment without A38. Hidden/disconnected phones and late arrivals forfeit the current ticket. Character interactions are short in-scene sequences with plain captions, no popup or return button, and automatic return after speech and the gradual release. The Aktenkurier approaches automatically once per visit; every other character requires E or its touch equivalent. Optional encounters add atmosphere without changing the ticket gates.
 
 The episode uses German dialogue as a local exception to Berlin Denglisch. It shares the root runtime, renderer and assets. The unlisted `?geheim=buergeramt` route reuses the same episode for testing. Admission, phone controls, timing, pause rules, mix and visual beats have one current authority in [`BUERGERAMT.md`](./BUERGERAMT.md).
 

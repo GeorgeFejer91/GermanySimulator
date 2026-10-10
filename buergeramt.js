@@ -8,14 +8,14 @@ const objective=document.getElementById("amt-objective"),nearby=document.getElem
 const door={x:0,z:5.55},sign={x:0,z:-2.6},counter={x:4,z:-8.15},view={x:0,z:8,yaw:0};
 const held=new Set(),pendingTimers=new Set();
 // Every callback belongs to one attempt and one visible speech/action cue.
-let attempt=0,cue=0,callOutcome="",speechGateTimer=null,recordedSpeech=null,recordedCleanup=null,officeSpeechBusy=false;
+let attempt=0,cue=0,callOutcome="",speechGateTimer=null,recordedSpeech=null,recordedCleanup=null,officeSpeechBusy=false,sceneContinuation=null;
 let clerkClock=0,clerkSpeaking=false,clerkAccent=0,clerkBeat="idle",clerkPulse=0;
 const clerkAnimation=window.BuergeramtAnimationClock?.createClerk?.();
 const stationaryClocks={"clerk-desk-1":1.4,"clerk-desk-2":2.2,"amt-konrad-wohnungszettel":0,"amt-mechthild-elternbogen":3.7,"amt-wolfram-rentenbescheid":7.1};
 function resetStationaryClocks(){Object.assign(stationaryClocks,{"clerk-desk-1":1.4,"clerk-desk-2":2.2,"amt-konrad-wohnungszettel":0,"amt-mechthild-elternbogen":3.7,"amt-wolfram-rentenbescheid":7.1})}
 function defer(callback,delay){const owner=attempt;const id=setTimeout(()=>{pendingTimers.delete(id);if(active&&owner===attempt)callback()},delay);pendingTimers.add(id);return id}
 function clearTimer(id){clearTimeout(id);pendingTimers.delete(id)}
-function cancelSpeech(){feverClock?.release();cue++;officeSpeechBusy=false;clerkSpeaking=false;clerkAnimation?.setSpeech(false);if(speechGateTimer!==null)clearTimer(speechGateTimer);speechGateTimer=null;recordedCleanup?.();if(recordedSpeech){recordedSpeech.pause();recordedSpeech.removeAttribute("src");recordedSpeech.load();recordedSpeech=null}try{const engine=window.speechSynthesis;if(!options?.cityAudioActive?.()&&(engine?.speaking||engine?.pending))engine.cancel()}catch{}}
+function cancelSpeech(){sceneContinuation=null;feverClock?.release();cue++;officeSpeechBusy=false;clerkSpeaking=false;clerkAnimation?.setSpeech(false);if(speechGateTimer!==null)clearTimer(speechGateTimer);speechGateTimer=null;recordedCleanup?.();if(recordedSpeech){recordedSpeech.pause();recordedSpeech.removeAttribute("src");recordedSpeech.load();recordedSpeech=null}try{const engine=window.speechSynthesis;if(!options?.cityAudioActive?.()&&(engine?.speaking||engine?.pending))engine.cancel()}catch{}}
 let active=false,stage="closed",link=null,number="",registeredName="",activated=false,qrSvg="",queueDisplay="—",queueIndex=0,queueClock=0,ticketWaitCalls=0,ticketSerial=100,lastScanId="",deadline=0,clerkIndex=0,callPending=false,callTriggered=false,callCommitted=false,callArmTimer=null,clockAnchor=null,policeDoneHandler=null,policeStartHandler=null,policeDisconnectHandler=null,options=null,ambientClock=0,ambientIndex=0,officeAudio=null;
 let timing={rttMs:null,oneWayMs:0,jitterMs:0,lastPongAt:null,clockOffsetMs:null,clockUncertaintyMs:null,startLagMs:null,phoneReadyMs:null,phoneFastReadyMs:null,deskStartLagMs:0,deskMsPerChar:55,call:null,cues:{},desk:{}};
 let pingSerial=0,pingTimer=null,hostVoiceStartupMs=null,hostVoiceAttempts=0;const outstandingPings=new Map(),rttSamples=[];
@@ -134,7 +134,7 @@ const characters=characterRoutes.map(route=>({id:route.id,route,x:route.points[0
 let patronEncounters={};
 let characterMood=null,encounterArmed=false;
 const feverClock=window.BuergeramtFever?.create();
-const omen={used:false,requested:false,phase:"",strength:0,hold:0,elapsed:0,travel:0,path:[],pathIndex:0,roomTime:0,startDistance:0,resume:"walk-sign",resumeYaw:0,recoverFromYaw:0,speech:null,visit:0,revealTime:0,lifeTime:0,lifeClock:0};
+const omen={used:false,phase:"",strength:0,hold:0,elapsed:0,travel:0,path:[],pathIndex:0,roomTime:0,startDistance:0,resume:"walk-sign",resumeYaw:0,recoverFromYaw:0,speech:null,visit:0,revealTime:0,lifeTime:0,lifeClock:0};
 const ease=value=>{const t=Math.max(0,Math.min(1,value));return t*t*(3-2*t)};
 function omenLife(){
  const live=["approach","blackout","glare","unwind"].includes(omen.phase),p=live?omen.strength:0,tension=omen.speech?.tension||0;
@@ -158,7 +158,7 @@ function updateOmenSpeech(){
  const blend=left===right?0:Math.max(0,Math.min(1,(index-left.index)/(right.index-left.index)));
  speech.tension=left.tension+(right.tension-left.tension)*blend;speech.semitones=left.semitones+(right.semitones-left.semitones)*blend;
 }
-function resetOmen(){stopOmenTone();omen.used=false;omen.requested=false;omen.phase="";omen.strength=0;omen.hold=0;omen.elapsed=0;omen.travel=0;omen.path=[];omen.pathIndex=0;omen.roomTime=0;omen.speech=null;omen.visit++;omen.revealTime=0;omen.lifeTime=0;omen.lifeClock=0;omen.resumeYaw=view.yaw;omen.recoverFromYaw=view.yaw;applyMix()}
+function resetOmen(){stopOmenTone();omen.used=false;omen.phase="";omen.strength=0;omen.hold=0;omen.elapsed=0;omen.travel=0;omen.path=[];omen.pathIndex=0;omen.roomTime=0;omen.speech=null;omen.visit++;omen.revealTime=0;omen.lifeTime=0;omen.lifeClock=0;omen.resumeYaw=view.yaw;omen.recoverFromYaw=view.yaw;applyMix()}
 function beginOmen(actor){
  const verse=story.omen;
  omen.phase="blackout";omen.strength=1;omen.revealTime=0;actor.pending=false;actor.sequence=[];actor.priority=4;actor.mode="gesture";actor.workClock=0;
@@ -177,7 +177,7 @@ function updateOmen(dt){
  if(omen.phase==="blackout"||omen.phase==="glare")omen.revealTime+=dt;
  if(["walk-sign","waiting"].includes(stage))omen.roomTime+=dt;
  const actor=characters[0];
- if(options?.cinematics!==false&&!options?.cityAudioBusy?.()&&!omen.used&&omen.requested&&["walk-sign","waiting"].includes(stage)&&Math.hypot(actor.x-view.x,actor.z-view.z)<6.2){
+ if(options?.cinematics!==false&&!options?.cityAudioBusy?.()&&!officeSpeechBusy&&!feverClock?.inspect().active&&!omen.used&&omen.roomTime>1.2&&["walk-sign","waiting"].includes(stage)&&Math.hypot(actor.x-view.x,actor.z-view.z)<6.2){
   const path=omenPath(actor);
   if(!path)return; // A blocked room postpones the optional beat, never walks through a solid.
   omen.used=true;omen.phase="approach";omen.elapsed=0;omen.travel=0;omen.path=path;omen.pathIndex=1;omen.resume=stage;omen.resumeYaw=view.yaw;omen.startDistance=path.slice(1).reduce((sum,point,i)=>sum+Math.hypot(point[0]-path[i][0],point[1]-path[i][1]),0);actor.sequence=[];actor.pending=false;actor.returning=null;actor.priority=4;
@@ -197,7 +197,7 @@ function updateOmen(dt){
   if(omen.hold===0){omen.phase="turn";omen.hold=2.4;stopOmenTone();actor.mode="turn";actor.workClock=0;
    actor.omenReturn=[...omen.path.slice(0,omen.pathIndex)].reverse();
    actor.target=actor.route.points.reduce((best,point,index)=>Math.hypot(actor.x-point[0],actor.z-point[1])<Math.hypot(actor.x-actor.route.points[best][0],actor.z-actor.route.points[best][1])?index:best,0);
-   speaker.textContent="";line.textContent="";
+   speaker.textContent="";line.textContent="";ambient.textContent="";
   }
  }
  else if(omen.phase==="turn"){
@@ -329,19 +329,18 @@ function updateCharacters(dt){
   if(actor.attention===0&&Math.hypot(actor.x-view.x,actor.z-view.z)<2.5){actor.attention=7.5;action(actor,[["look",.72],["work",.4]],1)}
  }
 }
-function nearestCharacter(){if(!["walk-sign","waiting"].includes(stage))return null;let found=null,distance=1.65;for(const actor of characters){if(actor.returning)continue;const d=Math.hypot(view.x-actor.x,view.z-actor.z);if(d<distance){found=actor;distance=d}}for(const [id,patron] of Object.entries(story.patrons)){const d=Math.hypot(view.x-patron.x,view.z-patron.z);if(d<distance){found={id,x:patron.x,z:patron.z,static:true};distance=d}}if(!found&&!omen.used&&options?.cinematics!==false&&Math.hypot(view.x-characters[0].x,view.z-characters[0].z)<6.2)found=characters[0];return found}
+function nearestCharacter(){if(!["walk-sign","waiting"].includes(stage))return null;let found=null,distance=1.65;for(const actor of characters){if(actor.id==="aktenkurier"||actor.returning)continue;const d=Math.hypot(view.x-actor.x,view.z-actor.z);if(d<distance){found=actor;distance=d}}for(const [id,patron] of Object.entries(story.patrons)){const d=Math.hypot(view.x-patron.x,view.z-patron.z);if(d<distance){found={id,x:patron.x,z:patron.z,static:true};distance=d}}return found}
 function showCharacter(actor){
  encounterArmed=true;
- if(actor.id==="aktenkurier"&&!omen.used&&options?.cinematics!==false){omen.requested=true;updateOmen(0);if(omen.phase||options?.cityAudioBusy?.())return;omen.requested=false}
  const entry=actor.static?story.patrons[actor.id]:story.characters[actor.id],index=actor.static?(patronEncounters[actor.id]||0):actor.encounters++,spoken=entry.lines[index%entry.lines.length],resume=stage;
- if(actor.static){patronEncounters[actor.id]=index+1;setStage("character");content(entry.speaker,spoken.line,[{label:"ZURÜCK ZUM VORGANG",run:()=>setStage(resume)}],null,null,null,{id:actor.id,tone:spoken.tone,valence:spoken.valence});return}
- actor.pending=false;actor.sequence=[];actor.priority=3;actor.mode="gesture";actor.workClock=0;actor.animationClock=0;actor.returning=null;setStage("character");content(entry.speaker,spoken.line,[{label:"ZURÜCK ZUM VORGANG",run:()=>{
+ if(actor.static){patronEncounters[actor.id]=index+1;setStage("character");content(entry.speaker,spoken.line,[{run:()=>setStage(resume)}],null,null,null,{id:actor.id,tone:spoken.tone,valence:spoken.valence});return}
+ actor.pending=false;actor.sequence=[];actor.priority=3;actor.mode="gesture";actor.workClock=0;actor.animationClock=0;actor.returning=null;setStage("character");content(entry.speaker,spoken.line,[{run:()=>{
   const phase=(actor.animationClock%4)/4;actor.returning={phase,direction:phase<.5?-1:1};actor.sequence=[{mode:"look",duration:.45},{mode:"work",duration:.7}];actor.pending=false;
   setStage(resume);
  }}],null,null,null,{id:actor.id,tone:spoken.tone,valence:spoken.valence});
 }
 function walking(){return ["outside","walk-sign","waiting","walk-counter"].includes(stage)}
-function setStage(next,preserveMovement=false){if(next!==stage&&!preserveMovement)held.clear();stage=next;document.body.classList.toggle("amt-omen",next==="omen");const moving=walking();if(moving){encounterArmed=false;cancelSpeech();clerkAnimation?.request(null);ambient.textContent="";characterMood=null;}root.classList.toggle("walking",moving);walkHud.hidden=!moving;root.classList.toggle("first-person",!!window.Germany3D?.ready);if(moving){objective.textContent=next==="outside"?"BÜRGERAMT · EINGANG":next==="walk-sign"?"QR-SCHILD SCANNEN":next==="waiting"?"AUFRUF ABWARTEN · SCHALTER 3":"IHRE NUMMER · SCHALTER 3 · BEEILEN!";update(0)}}
+function setStage(next,preserveMovement=false){if(next!==stage&&!preserveMovement)held.clear();stage=next;document.body.classList.toggle("amt-omen",next==="omen");const moving=walking(),sequence=!moving&&next!=="closed";document.body.classList.toggle("amt-sequence",sequence);if(moving){encounterArmed=false;cancelSpeech();clerkAnimation?.request(null);ambient.textContent="";characterMood=null;}root.classList.toggle("walking",moving);walkHud.classList.toggle("sequence",sequence);walkHud.hidden=next==="closed";root.classList.toggle("first-person",!!window.Germany3D?.ready);if(moving){objective.textContent=next==="outside"?"BÜRGERAMT · EINGANG":next==="walk-sign"?"QR-SCHILD SCANNEN":next==="waiting"?"AUFRUF ABWARTEN · SCHALTER 3":"IHRE NUMMER · SCHALTER 3 · BEEILEN!";update(0)}}
 function displayNumber(value){queueDisplay=value;board.textContent=value}
 function speechReadableMs(text,delivery){return Math.max(3500,Math.min(14000,text.length*55*.96/(delivery?.rate??.96)))}
 function say(text,onComplete,onStart,onBoundary,delivery=null,voiceId="",allowCatalogClip=true){
@@ -392,18 +391,20 @@ function say(text,onComplete,onStart,onBoundary,delivery=null,voiceId="",allowCa
 }
 function content(who,text,buttons=[],onComplete,onStart,onBoundary,mood=null,delivery=null){
  const isClerk=who.includes("KNICK");
- cancelSpeech();ambient.textContent="";speaker.textContent=who;line.textContent=text;
+ cancelSpeech();speaker.textContent=who;line.textContent=text;ambient.textContent="";
  characterMood=isClerk?{id:"clerk",tone:stage==="cancelled"||stage==="early"||stage==="expired"?"warning":"procedural",valence:stage==="cancelled"?-.82:-.38}:mood;
  actions.replaceChildren();
  if(isClerk){clerkBeat=stage==="reply"?"stamp":stage==="cancelled"||stage==="early"||stage==="expired"?"deny":"raise";clerkAccent=.4;clerkPulse=0;clerkAnimation?.request(stage==="reply"?"contact":["cancelled","early","expired"].includes(stage)?"refusal":"raised")}
  const owner=attempt,visibleCue=cue;
- for(const item of buttons){const button=document.createElement("button");button.type="button";button.textContent=item.label;
-  button.addEventListener("click",()=>{if(!active||owner!==attempt||visibleCue!==cue||button.disabled)return;button.disabled=true;item.run()});actions.append(button)}
+ // The first authored response preserves the A38 route without a question
+ // panel. Speech completion and the shared fade own each automatic continuation.
+ const waitForFade=["character","early","expired"].includes(stage)||stage==="reply"&&clerkIndex===story.clerk.length-1;
+ const completed=onComplete||buttons[0]&&(()=>{sceneContinuation={owner,cue:visibleCue,run:buttons[0].run,waitForFade,hold:waitForFade ? .25 : 0}});
  const voiceId=isClerk?story.clerkIdentity.voiceId:story.characters[mood?.id]?.voiceId||story.patrons[mood?.id]?.voiceId||"";
  const fever=encounterArmed&&!omen.phase&&options?.cinematics!==false&&feverClock?.begin({id:characterMood?.id,text,cue,generation:attempt,durationMs:speechReadableMs(text,delivery)});
  const currentFever=()=>fever&&active&&owner===attempt&&visibleCue===cue&&feverClock.inspect().cue===visibleCue;
  const hooks=fever?{...delivery,onPause:()=>{if(currentFever())feverClock.pause();delivery?.onPause?.();updateFeverTone()},onResume:()=>{if(currentFever())feverClock.resume();delivery?.onResume?.();updateFeverTone()},onFallback:()=>{if(currentFever())feverClock.fallback();delivery?.onFallback?.()}}:delivery;
- say(text,onComplete||fever?mode=>{if(isClerk){clerkSpeaking=false;clerkAnimation?.setSpeech(false);clerkBeat=stage==="reply"?"stamp":stage==="cancelled"?"deny":"review";clerkAccent=.65}if(currentFever())feverClock.done();onComplete?.(mode)}:null,(mode,recording)=>{if(currentFever()){feverClock.start(mode,recording);startFeverTone()}if(isClerk){clerkSpeaking=true;clerkPulse=0;clerkAnimation?.setSpeech(true,0);if(!onComplete&&!fever){const speakingCue=cue;defer(()=>{if(cue===speakingCue){clerkSpeaking=false;clerkAnimation?.setSpeech(false);clerkBeat="review";clerkAccent=.65}},Math.max(1800,Math.min(10000,text.length*55)))}}onStart?.(mode,recording)},(charIndex,event)=>{if(currentFever())feverClock.boundary(charIndex,event);if(isClerk){clerkPulse++;clerkAnimation?.setSpeech(clerkSpeaking,clerkPulse)}onBoundary?.(charIndex,event)},hooks,voiceId);
+ say(text,completed||fever?mode=>{if(isClerk){clerkSpeaking=false;clerkAnimation?.setSpeech(false);clerkBeat=stage==="reply"?"stamp":stage==="cancelled"?"deny":"review";clerkAccent=.65}if(currentFever())feverClock.done();completed?.(mode)}:null,(mode,recording)=>{ambient.textContent=who+" · "+text;if(currentFever()){feverClock.start(mode,recording);startFeverTone()}if(isClerk){clerkSpeaking=true;clerkPulse=0;clerkAnimation?.setSpeech(true,0);if(!completed&&!fever){const speakingCue=cue;defer(()=>{if(cue===speakingCue){clerkSpeaking=false;clerkAnimation?.setSpeech(false);clerkBeat="review";clerkAccent=.65}},Math.max(1800,Math.min(10000,text.length*55)))}}onStart?.(mode,recording)},(charIndex,event)=>{if(currentFever())feverClock.boundary(charIndex,event);if(isClerk){clerkPulse++;clerkAnimation?.setSpeech(clerkSpeaking,clerkPulse)}onBoundary?.(charIndex,event)},hooks,voiceId);
 }
 function setStatus(text){status.textContent=text}
 function distanceTo(target){return Math.hypot(view.x-target.x,view.z-target.z)}
@@ -590,6 +591,7 @@ function update(dt){
  if(!active||document.hidden)return;
  if(window.Germany3D?.ready&&!root.classList.contains("first-person"))root.classList.add("first-person");
  const elapsed=Number.isFinite(dt)?Math.min(.1,Math.max(0,dt)):0;if(!document.hidden)feverClock?.advance(elapsed);updateFeverTone();ambientStep(elapsed);
+ if(sceneContinuation&&(!sceneContinuation.waitForFade||!feverClock?.inspect().active)){const next=sceneContinuation;next.hold-=elapsed;if(next.hold<=1e-9){sceneContinuation=null;if(next.owner===attempt&&next.cue===cue)next.run();if(!active)return}}
  clerkClock+=elapsed;clerkAccent=Math.max(0,clerkAccent-elapsed);if(!document.hidden)clerkAnimation?.advance(elapsed);
  if(!omen.phase)for(const id of Object.keys(stationaryClocks))if(walking()||characterMood?.id===id)stationaryClocks[id]+=elapsed;
  updateOmen(elapsed);
