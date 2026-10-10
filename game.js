@@ -739,7 +739,7 @@ const merkelLines=Object.freeze([
  "Wer das erkennt, muss eine neue Bewertung vornehmen.",
  "Wir müssen uns darauf einstellen, dass wir schneller aussteigen.",
  "Wir wollen das schaffen."
-]),MERKEL_RECORDINGS=Object.freeze({[MERKEL_AUDIO_LINE]:speechClip("merkel-wir-schaffen-das").recording,[MERKEL_NEULAND_LINE]:speechClip("merkel-neuland").recording});
+]),MERKEL_RECORDINGS=Object.freeze(Object.fromEntries(["merkel-wir-schaffen-das","merkel-neuland","merkel-abschaltgesetz","merkel-neue-bewertung","merkel-risiken-kernenergie","merkel-wer-das-erkennt","merkel-schneller-aussteigen","merkel-wollen-schaffen","merkel-hinter-mir"].map(id=>{const clip=speechClip(id);return[clip.text,clip.recording]})));
 const bayernClips=Object.freeze([
  speechClip("bayern-baden-wuerttemberg-not-bayern"),
  speechClip("bayern-wie-schoen-bayern-ist"),

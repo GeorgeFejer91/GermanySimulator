@@ -165,7 +165,7 @@ foreground role (`−18 LUFS`, maximum `−1.5 dBTP`) while preserving their sam
 rate, channel layout, approximate bitrate, and duration. The hashes above refer
 to those normalized shipping copies.
 
-## Merkel quotation excerpt
+## Retired Merkel quotation excerpt
 
 `merkel/neuland-0-3s.mp3` is the user-supplied local file
 `D:\Downloads\neuland-0-3s.mp3`, mapped only to the displayed/spoken line “Das
@@ -174,6 +174,14 @@ Internet ist für uns alle Neuland.” It is 3.030 seconds, 73,394 bytes, mono
 `6E6DF76D99DB89E462335AE6A8FB6D7909C0611015B58A98FD9C8A3E0A8CB336`.
 No external source URL or redistribution license was supplied; it is not
 relicensed under the repository's other asset licenses.
+
+The excerpt and the earlier root-level “Wir schaffen das” recording are retired from runtime delivery following the user's request to resynthesize every Merkel line with the newly saved `GS Merkel` profile.
+
+## User-selected GS Merkel speech
+
+All nine authored German lines, including “Sie stehen hinter mir,” use saved profile `25916e5981064e09a2c42350d5fe5f04` (`GS Merkel`), selected by the user for replacement on 2026-10-11. Its source is `https://www.youtube.com/watch?v=kDQki0MMFh4`; original SHA-256 is `683260d6d6eaef951a8bc5778efce547a45d6c55172e2c90a504280f8e82ba92`, and the preserved 24.636375-second mono 24 kHz reference has SHA-256 `9a43f754972aa8a5dfa491d4c97f0eac417b0725731aaa417617d82bc43b3f6c`. Private references remain outside the game assets.
+
+Secret Tunnel 6's installed OmniVoice Rust runtime rendered the exact authored text with `k2-fsa/OmniVoice`, model revision `c5fdb5ccb189668d56333f77ba2629f4cd7535f4`. Its noncommercial model terms and Boson/Meta tokenizer terms apply; this entry does not grant a new license to the user-selected source recording. The selected clip IDs, renderer hashes, generated and encoded transcripts, durations, byte sizes, decoded costs and final SHA-256 hashes are in `merkel/manifest.json`. Delivery uses the existing foreground target of −18 LUFS ±0.3 LU and at most −1.5 dBTP. Whole-clip Whisper feedback checks the spoken words; listening review is unperformed. The user's explicit replacement request sets these clips as default speech, with exact-text browser fallback and no startup preload.
 
 ## Civilian traffic-driver shouts
 
