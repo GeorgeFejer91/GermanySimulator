@@ -422,6 +422,15 @@ For rendered comparisons, freeze representative game/HUD states and camera, then
 
 ## Local 3D buildings
 
+The Bürgeramt entrance radiance is original runtime geometry: one retained door
+plane, one 5 × 5 ray/halo shader plane, and one short-range shadow-free point
+light. It follows both the authored municipal GLB glass entrance and procedural
+door dimensions, uses normal depth testing, and is excluded from obstruction
+tests as decoration. It adds no downloads, textures, postprocessing, timer or
+asset queue jobs. The existing render dispatch advances a bounded visible-city
+clock; hidden/off-camera doors stop work and lighting, pause freezes animation,
+and reduced motion is steady gold. Resources live with the existing city scene.
+
 The mission Bratwurst uses one local textured cooked-sausage GLB under
 `assets/models/mission-sausage/`, with adjacent attribution and CC BY-NC 4.0
 terms. It adds 274,344 transferred bytes, 3,640 triangles, one material and three
