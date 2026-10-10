@@ -15,10 +15,14 @@ Mission order:
 7. Ausländerbehörde — residence evidence.
 8. Ausländerbehörde — fictional citizenship application.
 
-A floating grilled Bratwurst above the player points its mustard arrowhead toward
+A grilled Bratwurst fixed at the top of the screen points its mustard arrowhead toward
 the current mission's actual office entrance. It follows all eight procedures;
 during Stadtbild work it selects the nearest unfinished object, then the office.
-It is a compass bearing, with existing streets, crossings and interaction rules
+The existing 3D model is drawn in a screen-space pass by the same renderer: top
+centre on wide screens, in the top-left gap above the file rail at widths up to
+1000 CSS px, with stable CSS-pixel size and matching file-rail clearance.
+Its bearing follows the current camera projection. It is a
+compass bearing, with existing streets, crossings and interaction rules
 still governing travel. It hides during title, dialogue, file/modal, office and
 end states, and within 36 units of its target. It has no collision footprint.
 

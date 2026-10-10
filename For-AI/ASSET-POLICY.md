@@ -480,6 +480,16 @@ on failure. The existing render dispatch updates its bearing without a new
 timer, text measurement, collision object, service or asset variant. The shared
 source/instance lives with the city renderer; office/hidden states consume no
 pointer updates. Replace this noncommercial model before commercial release.
+It is a fixed screen-space HUD object rendered after the city with the same
+WebGL renderer and a small orthographic view: 76 px on wide screens, 48 px at
+widths up to 1000 CSS px, with matching file-rail clearance. The current city
+camera projects its mission bearing into screen XY. Layout updates on resize;
+its unchanged model job uses the player's location for admission. No collision,
+extra canvas, asset variant, new animation loop or text surface is added.
+A short silent native-Chrome comparison at 1280 × 800 measured render dispatch
+p50/p95 of 14.0/21.7 ms before and 15.0/21.1 ms after this move. These
+73/72-sample live-city measurements include the HUD pass but do not establish
+physical-phone or full-mission performance.
 
 - Root `assets/models/` is the only authority for shipped model files.
 - The root game has one required WebGL presentation path. Do not preload or restore the retired SVG/Canvas world-art set. Registered moving-character PNG atlases remain the deliberate bitmap exception; DOM UI art and billboard textures are not alternate world renderers.

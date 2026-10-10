@@ -88,5 +88,5 @@
  .case-file[open]{gap:10px}.file-header{gap:8px}.file-tabs button{padding:7px}
  .control-dock{bottom:var(--subtitle-height)}
 }
-@media(pointer:coarse),(max-width:760px){.city-status{top:calc(var(--subtitle-toggle-height,44px) + 14px)}}
+@media(pointer:coarse),(max-width:1000px){.city-status{top:calc(var(--subtitle-toggle-height,44px) + 14px)}}
 @media(prefers-reduced-motion:reduce){#germanness-hud .germanness-meter i{transition:none}}

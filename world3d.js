@@ -390,23 +390,36 @@ function showRendererFailure(error){
       catch(error){console.warn("Keeping procedural city asset "+file,error);return false}
     },slot);
   }
-  // An airborne navigation cue, outside the simulation's solid-object lists.
+  // Screen-space navigation cue, drawn by the same renderer after the city.
+  const missionHudScene=new T.Scene(),missionHudCamera=new T.OrthographicCamera(-1,1,1,-1,.1,100);
+  missionHudCamera.position.z=50;missionHudScene.add(new T.HemisphereLight(0xe4e0d6,0x454440,2.3));
+  const missionHudLight=new T.DirectionalLight(0xf4f1e8,1.4);missionHudLight.position.set(-3,5,7);missionHudScene.add(missionHudLight);
+  const missionDirection=new T.Vector3();
   const missionPointer=new T.Group();missionPointer.name="Mission sausage pointer";missionPointer.visible=false;
-  missionPointer.position.set(initialPlayerX,1.95,initialPlayerZ);world.add(missionPointer);
+  missionHudScene.add(missionPointer);
   const sausageFallback=new T.Group(),sausageCurve=new T.CatmullRomCurve3([new T.Vector3(-.12,.12,-.78),new T.Vector3(.12,.12,-.4),new T.Vector3(.18,.12,0),new T.Vector3(.12,.12,.4),new T.Vector3(-.12,.12,.78)]);
   const sausageSkin=mat(0xb96632,.5);sausageFallback.add(new T.Mesh(new T.TubeGeometry(sausageCurve,20,.105,8,false),sausageSkin));
   for(const end of [0,1]){const cap=new T.Mesh(new T.SphereGeometry(.105,8,6),sausageSkin);cap.position.copy(sausageCurve.getPoint(end));sausageFallback.add(cap)}
   missionPointer.add(sausageFallback);
   const mustardTip=new T.Mesh(new T.ConeGeometry(.28,.46,3),mat(0xf6c744,.6));mustardTip.rotation.x=Math.PI/2;mustardTip.position.set(0,.12,1.03);missionPointer.add(mustardTip);
-  if(bridge.getMissionWaypoint)installCityModel(missionPointer,sausageFallback,"./assets/models/mission-sausage/sausage.glb",{x:.5,y:.24,z:1.75});
+  if(bridge.getMissionWaypoint)installCityModel(missionPointer,sausageFallback,"./assets/models/mission-sausage/sausage.glb",{x:.5,y:.24,z:1.75},bridge.player);
+  function layoutMissionPointer(){
+    const compact=innerWidth<=1000,size=compact?48:76;
+    // Phones reserve the top-left gap above the file rail, beside subtitles.
+    const x=compact?32:innerWidth/2,top=document.getElementById('city-status')?8:Math.max(document.querySelector('.hud')?.getBoundingClientRect().bottom||0,document.querySelector('.help')?.getBoundingClientRect().bottom||0)+8;
+    missionPointer.position.set(x-innerWidth/2,innerHeight/2-top-size/2,0);
+    missionPointer.scale.setScalar(size/2.8);missionPointer.userData.screen={x,y:top+size/2,size};
+    Object.assign(missionHudCamera,{left:-innerWidth/2,right:innerWidth/2,top:innerHeight/2,bottom:-innerHeight/2});missionHudCamera.updateProjectionMatrix();
+  }
   function updateMissionPointer(){
     const target=bridge.getMissionWaypoint?.();missionPointer.visible=!!target;
     missionPointer.userData.target=target?.id||null;
     if(!target)return;
     const dx=target.x-bridge.player.x,dz=target.y-bridge.player.y;
-    // The long axis and mustard tip face the actual entrance, independent of facing/camera.
-    missionPointer.rotation.y=Math.atan2(dx,dz);
-    missionPointer.position.set(X(bridge.player.x),1.95+(bridge.stationElevation?.(bridge.player.x,bridge.player.y)||0),Z(bridge.player.y));
+    // Project the ground bearing through the current city camera into HUD XY.
+    camera.updateMatrixWorld(true);missionDirection.set(dx,0,dz).transformDirection(camera.matrixWorldInverse);
+    missionPointer.userData.heading=Math.atan2(dx,dz);
+    missionPointer.rotation.set(-Math.PI/2,0,Math.atan2(-missionDirection.x,missionDirection.y),'ZXY');
     missionPointer.visible=Math.hypot(dx,dz)>36;
   }
   function registerMaterials(root,slot){
@@ -1481,7 +1494,7 @@ function showRendererFailure(error){
       renderer.autoClear=false;renderer.render(omenScene,omenCamera);renderer.autoClear=true;
     }
     return true}
-  function resize(){renderer.setPixelRatio(Math.min(devicePixelRatio||1,1,Math.sqrt(1600000/Math.max(1,innerWidth*innerHeight))));renderer.setSize(innerWidth,innerHeight,false);camera.aspect=innerWidth/innerHeight;camera.updateProjectionMatrix();amtCamera.aspect=innerWidth/innerHeight;amtCamera.updateProjectionMatrix()}resize();addEventListener("resize",resize,{passive:true});
+  function resize(){renderer.setPixelRatio(Math.min(devicePixelRatio||1,1,Math.sqrt(1600000/Math.max(1,innerWidth*innerHeight))));renderer.setSize(innerWidth,innerHeight,false);camera.aspect=innerWidth/innerHeight;camera.updateProjectionMatrix();amtCamera.aspect=innerWidth/innerHeight;amtCamera.updateProjectionMatrix();layoutMissionPointer()}resize();addEventListener("resize",resize,{passive:true});
   const spawnProbe=new T.Vector3();
   const vehicleViewFrustum=new T.Frustum(),vehicleViewMatrix=new T.Matrix4(),vehicleViewBounds=new T.Box3();
   function isVehicleVisible(x,y,angle=0){
@@ -1497,9 +1510,10 @@ function showRendererFailure(error){
   }
   function isWorldPointVisible(x,y,padding=0,kind="officer"){const height=kind==="helicopter"?6.8:kind==="car"?.7:1;spawnProbe.set(X(x),height,Z(y)).project(camera);const padX=padding/Math.max(1,innerWidth)*2,padY=padding/Math.max(1,innerHeight)*2;return spawnProbe.z>=-1&&spawnProbe.z<=1&&spawnProbe.x>=-1-padX&&spawnProbe.x<=1+padX&&spawnProbe.y>=-1-padY&&spawnProbe.y<=1+padY}
   function inspectAssets(){
+    const pointerBounds=new T.Box3().setFromObject(missionPointer);
     const bounds=model=>{if(!model)return null;const b=new T.Box3().setFromObject(model),s=b.getSize(new T.Vector3());return{width:s.x,height:s.y,depth:s.z,ground:b.min.y}};
     const glow=buergeramtDoorGlow,doorRadiance=glow?{visible:glow.group.visible&&glow.slot.group.visible,loaded:!!glow.slot.model,phase:["black","red","gold"][glow.phase],time:glow.time,pulse:glow.pulse,color:glow.skin.color.getHexString(),rayTime:glow.raysMaterial.uniforms.uTime.value,rayColor:glow.raysMaterial.uniforms.uColor.value.getHexString(),lightIntensity:glow.light.intensity,position:glow.group.getWorldPosition(new T.Vector3()).toArray(),doorSize:glow.size.toArray(),depthTest:glow.raysMaterial.depthTest,depthWrite:glow.raysMaterial.depthWrite}:null;
-    return{doorRadiance,missionPointer:{visible:missionPointer.visible,target:missionPointer.userData.target,loaded:!sausageFallback.visible,heading:missionPointer.rotation.y,position:missionPointer.position.toArray(),bounds:bounds(missionPointer)},brandmauerFire:{loaded:lineFire.visible,fallback:firePlaneA.visible,particles:lineParticleLayers.map(layer=>layer.geometry.attributes.position.count),...fireMaskStatus},dumpsterFire:dumpsterFlames.map(({fire,smoke,fallback,maskStatus,mask,coreMask,smokeMask})=>({loaded:fire.visible,smoke:smoke.visible,fallback:fallback.visible,...maskStatus,images:[mask.image?.width||0,coreMask.image?.width||0,smokeMask.image?.width||0]})),streetCharacters:streetCharacters?.inspect()||null,placards:placardLayouts.map(item=>({...item})),buildings:buildingSlots.filter(s=>!s.building.kind).map(s=>({id:s.building.id,loaded:!!s.model,fallback:s.fallback.visible,bounds:bounds(s.model),glass:[...s.materials].filter(m=>/glass/i.test(m.name)).map(m=>({name:m.name,opacity:m.opacity,baseOpacity:m.userData.baseOpacity}))})),city:cityAssetSlots.map(s=>({file:s.file,loaded:!!s.model,fallback:s.fallback.visible,bounds:bounds(s.model)})),monument:kiesingerMonument?{bounds:bounds(kiesingerMonument),scale:kiesingerMonument.scale.y,loaded:!!kiesingerMonument.getObjectByName("KiesingerSculpture")}:null,banners:landmarkBanners.map(({kind,mesh})=>({kind,bounds:bounds(mesh)})),vehicles:[...trafficCarMeshes.values(),...policeVehicleMeshes.values()].map(s=>({id:s.state.id,kind:s.kind,loaded:!!s.model,fallback:s.fallback.visible,bounds:bounds(s.model),wheels:s.wheels.map(w=>({name:w.node.name,angle:w.node.rotation.x,radius:w.radius})),steering:s.steering.map(o=>o.rotation.y),brakes:s.brakes.map(m=>m.emissiveIntensity),beacons:s.beacons.map(b=>b.material.emissiveIntensity)})),sources:[...localModels.keys()],render:{...renderer.info.render},memory:{...renderer.info.memory}};
+    return{doorRadiance,missionPointer:{visible:missionPointer.visible,target:missionPointer.userData.target,loaded:!sausageFallback.visible,heading:missionPointer.userData.heading,screenHeading:missionPointer.rotation.z,screen:missionPointer.userData.screen,pixelBounds:{left:pointerBounds.min.x+innerWidth/2,right:pointerBounds.max.x+innerWidth/2,top:innerHeight/2-pointerBounds.max.y,bottom:innerHeight/2-pointerBounds.min.y},position:missionPointer.position.toArray(),bounds:bounds(missionPointer)},brandmauerFire:{loaded:lineFire.visible,fallback:firePlaneA.visible,particles:lineParticleLayers.map(layer=>layer.geometry.attributes.position.count),...fireMaskStatus},dumpsterFire:dumpsterFlames.map(({fire,smoke,fallback,maskStatus,mask,coreMask,smokeMask})=>({loaded:fire.visible,smoke:smoke.visible,fallback:fallback.visible,...maskStatus,images:[mask.image?.width||0,coreMask.image?.width||0,smokeMask.image?.width||0]})),streetCharacters:streetCharacters?.inspect()||null,placards:placardLayouts.map(item=>({...item})),buildings:buildingSlots.filter(s=>!s.building.kind).map(s=>({id:s.building.id,loaded:!!s.model,fallback:s.fallback.visible,bounds:bounds(s.model),glass:[...s.materials].filter(m=>/glass/i.test(m.name)).map(m=>({name:m.name,opacity:m.opacity,baseOpacity:m.userData.baseOpacity}))})),city:cityAssetSlots.map(s=>({file:s.file,loaded:!!s.model,fallback:s.fallback.visible,bounds:bounds(s.model)})),monument:kiesingerMonument?{bounds:bounds(kiesingerMonument),scale:kiesingerMonument.scale.y,loaded:!!kiesingerMonument.getObjectByName("KiesingerSculpture")}:null,banners:landmarkBanners.map(({kind,mesh})=>({kind,bounds:bounds(mesh)})),vehicles:[...trafficCarMeshes.values(),...policeVehicleMeshes.values()].map(s=>({id:s.state.id,kind:s.kind,loaded:!!s.model,fallback:s.fallback.visible,bounds:bounds(s.model),wheels:s.wheels.map(w=>({name:w.node.name,angle:w.node.rotation.x,radius:w.radius})),steering:s.steering.map(o=>o.rotation.y),brakes:s.brakes.map(m=>m.emissiveIntensity),beacons:s.beacons.map(b=>b.material.emissiveIntensity)})),sources:[...localModels.keys()],render:{...renderer.info.render},memory:{...renderer.info.memory}};
   }
   // Prune complete off-camera groups, including the many meshes in distant stand-ins.
   const renderFrustum=new T.Frustum(),renderViewMatrix=new T.Matrix4(),trainRenderSphere=new T.Sphere();
@@ -1531,7 +1545,6 @@ function showRendererFailure(error){
     if(amtDirectRoute&&!window.BuergeramtLevel?.active){clearAmtOmenSplat();amtGaussian.clear();loadAmtImages();return}
     if(renderAmt()){missionPointer.visible=false;if(buergeramtDoorGlow){buergeramtDoorGlow.light.intensity=0;buergeramtDoorGlow.lastTime=performance.now()}previousOcclusionTime=performance.now();return}
     prepareNearbyAssets();
-    updateMissionPointer();
     syncChar(playerMesh,bridge.player,0);
     playerMesh.rotation.y=bridge.player.facing;
     for(const slot of trainSlots){for(let i=0;i<slot.cars.length;i++){const car=slot.train.cars[i],group=slot.cars[i].group,jolt=Math.sin(performance.now()*.04+i)*slot.train.bump*.1;group.position.set(X(car.x),.07+jolt,Z(car.y));group.rotation.y=Math.PI/2-car.angle}for(let i=0;i<slot.gangways.length;i++){const a=slot.train.cars[i],b=slot.train.cars[i+1],ax=X(a.x),az=Z(a.y),bx=X(b.x),bz=Z(b.y),mesh=slot.gangways[i],length=Math.hypot(bx-ax,bz-az);mesh.position.set((ax+bx)/2,.54,(az+bz)/2);mesh.rotation.y=Math.atan2(bx-ax,bz-az);mesh.scale.z=Math.max(.18,length-4.64)}}
@@ -1588,7 +1601,8 @@ function showRendererFailure(error){
     const parkTarget=park&&bridge.player.y>park.y+park.h-30?Math.max(0,Math.min(1,(440-parkDistance)/250)):0;
     parkCameraFrame+=(parkTarget-parkCameraFrame)*(1-Math.exp(-6*Math.min(.05,Math.max(0,(now-previousCameraTime)/1000))));previousCameraTime=now;
     if(parkCameraFrame>.001){const narrow=Math.max(0,Math.min(1,.95/camera.aspect-1)),cx=X(park.x+park.w/2),cz=Z(park.y+park.h/2),focus=parkCameraFrame*(1-.65*narrow);camera.position.set(px+(cx-px)*focus,11.5+(5+2*narrow)*parkCameraFrame,pz+14+2*narrow*parkCameraFrame);camera.lookAt(px+(cx-px)*focus,1+parkCameraFrame,pz-2.7+(cz-(pz-2.7))*parkCameraFrame)}
-    updateGroupVisibility();updateBuergeramtDoorGlow(now);updateBuildingOcclusion();updateWirtschaftswunder(now);renderer.render(scene,camera);
+    updateGroupVisibility();updateBuergeramtDoorGlow(now);updateBuildingOcclusion();updateWirtschaftswunder(now);updateMissionPointer();renderer.render(scene,camera);
+    if(missionPointer.visible){renderer.autoClear=false;renderer.clearDepth();renderer.info.autoReset=false;renderer.render(missionHudScene,missionHudCamera);renderer.info.autoReset=true;renderer.autoClear=true}
   },inspectAssets,setAmtQr,get amtGaussian(){return amtGaussian.inspect()},get amtOmenSplat(){return {visit:amtOmenVisit,loading:!!amtOmenRequest,skipped:amtOmenSkipped,failure:amtOmenFailure,...(amtOmenSplat?.inspect()||{ready:false,visible:false})}},get amtOmenStaging(){return {isolation:amtIsolation.value,environmentVisible:amtEnvironment.visible}},get amtOffice(){return officeDetail?.inspect()||null},get amtCharacters(){return [...amtCharacters.map(actor=>({name:actor.name,id:actor.animationId??actor.id,...amtSnapshot(actor),frame:actor.frame,loaded:!!actor.mesh.material.map?.image,mapped:!!actor.mesh.material.map,visible:actor.mesh.visible,detail:actor.mesh.material.map===actor.detail,texelHeight:actor.mesh.material.map?.image?.height||0,breath:actor.mesh.material.userData.breath.value})),...amtMoving.map(actor=>({name:actor.id,...amtSnapshot(actor),frame:actor.cell,loaded:!!actor.mesh.material.map?.image,mapped:!!actor.mesh.material.map,visible:actor.mesh.visible,detail:actor.mesh.material.map===actor.detail||actor.mesh.material.map===actor.walkDetail,texelHeight:actor.mesh.material.map?.image?.height||0,breath:actor.mesh.material.userData.breath.value,tint:actor.mesh.material.color.getHexString(),position:[actor.mesh.position.x,actor.mesh.position.z]}))]}};
   app.classList.add("three-ready");
 })().catch(showRendererFailure);
