@@ -1,0 +1,8 @@
+{
+  "source": "assets/buergeramt/characters/renter-detail.webp",
+  "source_sha256": "79a0a7fe03c284358b73c0ce5011795c714cd49593851fe39d7c67c141fe6aac",
+  "bridge_sheet": "assets/sprite-sources/buergeramt/gaussian-arcs/renter/bridge-sheet.png",
+  "bridge_sha256": "1b5358c43603696a3837896dbf6e142755237aade42cecf8f1de34715876c2f6",
+  "authoring": "OpenAI built-in imagegen edit, 2026-10-10; reference original patron source strip; transparent output",
+  "registration": "Alpha figure bounds, uniform scale to original figure height and original floor; no deformation"
+}

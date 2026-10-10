@@ -133,14 +133,14 @@ function createPaintSplat(T){
    const target=speech?.active?speech.shape:rest;
    if(!speech?.paused)for(let i=0;i<4;i++)shape.value.setComponent(i,shape.value.getComponent(i)+(target[i]-shape.value.getComponent(i))*(1-Math.exp(-dt/.035)));
    const active=shape.value.x+shape.value.y+shape.value.z+shape.value.w>.015;
-   mesh.visible=active;actor.mesh.material.userData.lipHole.value=active?1:0;
+   mesh.visible=active&&actor.mesh.material.opacity>.001;actor.mesh.material.userData.lipHole.value=active?1:0;
    rect.value.fromArray(registration);actor.mesh.material.userData.lipRect.value.set(registration[0],registration[1],registration[2]*2.5,registration[3]*3);
    const uv=actor.uv;crop.value.set(uv.getX(2),uv.getY(2),uv.getX(3)-uv.getX(2),uv.getY(0)-uv.getY(2));
    size.value.set(actor.mesh.geometry.parameters.width,actor.mesh.geometry.parameters.height);
    breath.value=actor.mesh.material.userData.breath.value;
    if(material.map!==actor.mesh.material.map){material.map=actor.mesh.material.map;material.needsUpdate=true}
    if(material.fog!==actor.mesh.material.fog){material.fog=actor.mesh.material.fog;material.needsUpdate=true}
-   material.color.copy(actor.mesh.material.color);material.opacity=actor.mesh.material.opacity;
+   material.color.copy(actor.mesh.material.color);material.opacity=actor.mesh.material.opacity;material.depthTest=actor.mesh.material.depthTest;mesh.renderOrder=actor.mesh.renderOrder;
   },
   inspect(){return{actor:actor?.lipId||actor?.id||actor?.name||null,visible:mesh.visible,shape:shape.value.toArray(),kernels:count,depthTest:material.depthTest,depthWrite:material.depthWrite}},
   dispose(){if(disposed)return;disposed=true;if(actor)actor.mesh.material.userData.lipHole.value=0;mesh.removeFromParent();geometry.dispose();material.dispose()},

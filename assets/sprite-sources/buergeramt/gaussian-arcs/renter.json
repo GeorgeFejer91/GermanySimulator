@@ -1,0 +1,459 @@
+{
+  "version": 1,
+  "id": "renter",
+  "canvas_xy": [
+    384,
+    832
+  ],
+  "head_paint_source": null,
+  "states": [
+    {
+      "id": "work",
+      "role": "main",
+      "file": "assets/sprite-sources/buergeramt/gaussian-arcs/renter/key-0.png",
+      "landmarks": {
+        "eye_right": [
+          177,
+          104
+        ],
+        "eye_left": [
+          205,
+          104
+        ],
+        "nose": [
+          191,
+          122
+        ],
+        "chin": [
+          191,
+          143
+        ],
+        "shoulder_right": [
+          137,
+          177
+        ],
+        "elbow_right": [
+          103,
+          280
+        ],
+        "grip_right": [
+          153,
+          300
+        ],
+        "stamp_knob": [
+          203,
+          211
+        ],
+        "stamp_base": [
+          220,
+          379
+        ],
+        "shoulder_left": [
+          265,
+          177
+        ],
+        "elbow_left": [
+          283,
+          285
+        ],
+        "hand_left": [
+          257,
+          319
+        ],
+        "hip_center": [
+          194,
+          432
+        ],
+        "skirt_hem_center": [
+          194,
+          607
+        ],
+        "foot_screen_left": [
+          123,
+          762
+        ],
+        "foot_screen_right": [
+          259,
+          761
+        ]
+      },
+      "paper_polygon_xy": [
+        [
+          162,
+          202
+        ],
+        [
+          284,
+          192
+        ],
+        [
+          275,
+          394
+        ],
+        [
+          156,
+          393
+        ]
+      ],
+      "paper_landmarks_xy": [
+        [
+          257,
+          319
+        ],
+        [
+          162,
+          202
+        ],
+        [
+          284,
+          192
+        ]
+      ]
+    },
+    {
+      "id": "bridge-1",
+      "role": "transition",
+      "file": "assets/sprite-sources/buergeramt/gaussian-arcs/renter/key-1.png",
+      "landmarks": {
+        "eye_right": [
+          177,
+          104
+        ],
+        "eye_left": [
+          205,
+          104
+        ],
+        "nose": [
+          191,
+          122
+        ],
+        "chin": [
+          191,
+          143
+        ],
+        "shoulder_right": [
+          137,
+          177
+        ],
+        "elbow_right": [
+          103,
+          280
+        ],
+        "grip_right": [
+          140,
+          304
+        ],
+        "stamp_knob": [
+          203,
+          211
+        ],
+        "stamp_base": [
+          220,
+          379
+        ],
+        "shoulder_left": [
+          265,
+          177
+        ],
+        "elbow_left": [
+          283,
+          285
+        ],
+        "hand_left": [
+          257,
+          319
+        ],
+        "hip_center": [
+          194,
+          432
+        ],
+        "skirt_hem_center": [
+          194,
+          607
+        ],
+        "foot_screen_left": [
+          123,
+          762
+        ],
+        "foot_screen_right": [
+          259,
+          761
+        ]
+      },
+      "paper_polygon_xy": [
+        [
+          162,
+          202
+        ],
+        [
+          284,
+          192
+        ],
+        [
+          275,
+          394
+        ],
+        [
+          156,
+          393
+        ]
+      ],
+      "paper_landmarks_xy": [
+        [
+          257,
+          319
+        ],
+        [
+          162,
+          202
+        ],
+        [
+          284,
+          192
+        ]
+      ]
+    },
+    {
+      "id": "bridge-2",
+      "role": "transition",
+      "file": "assets/sprite-sources/buergeramt/gaussian-arcs/renter/key-2.png",
+      "landmarks": {
+        "eye_right": [
+          177,
+          104
+        ],
+        "eye_left": [
+          205,
+          104
+        ],
+        "nose": [
+          191,
+          122
+        ],
+        "chin": [
+          191,
+          143
+        ],
+        "shoulder_right": [
+          137,
+          177
+        ],
+        "elbow_right": [
+          103,
+          280
+        ],
+        "grip_right": [
+          116,
+          317
+        ],
+        "stamp_knob": [
+          203,
+          211
+        ],
+        "stamp_base": [
+          220,
+          379
+        ],
+        "shoulder_left": [
+          265,
+          177
+        ],
+        "elbow_left": [
+          283,
+          285
+        ],
+        "hand_left": [
+          257,
+          319
+        ],
+        "hip_center": [
+          194,
+          432
+        ],
+        "skirt_hem_center": [
+          194,
+          607
+        ],
+        "foot_screen_left": [
+          123,
+          762
+        ],
+        "foot_screen_right": [
+          259,
+          761
+        ]
+      },
+      "paper_polygon_xy": [
+        [
+          162,
+          202
+        ],
+        [
+          284,
+          192
+        ],
+        [
+          275,
+          394
+        ],
+        [
+          156,
+          393
+        ]
+      ],
+      "paper_landmarks_xy": [
+        [
+          257,
+          319
+        ],
+        [
+          162,
+          202
+        ],
+        [
+          284,
+          192
+        ]
+      ]
+    },
+    {
+      "id": "gesture",
+      "role": "main",
+      "file": "assets/sprite-sources/buergeramt/gaussian-arcs/renter/key-3.png",
+      "landmarks": {
+        "eye_right": [
+          177,
+          104
+        ],
+        "eye_left": [
+          205,
+          104
+        ],
+        "nose": [
+          191,
+          122
+        ],
+        "chin": [
+          191,
+          143
+        ],
+        "shoulder_right": [
+          137,
+          177
+        ],
+        "elbow_right": [
+          103,
+          280
+        ],
+        "grip_right": [
+          103,
+          319
+        ],
+        "stamp_knob": [
+          203,
+          211
+        ],
+        "stamp_base": [
+          220,
+          379
+        ],
+        "shoulder_left": [
+          265,
+          177
+        ],
+        "elbow_left": [
+          283,
+          285
+        ],
+        "hand_left": [
+          257,
+          319
+        ],
+        "hip_center": [
+          194,
+          432
+        ],
+        "skirt_hem_center": [
+          194,
+          607
+        ],
+        "foot_screen_left": [
+          123,
+          762
+        ],
+        "foot_screen_right": [
+          259,
+          761
+        ]
+      },
+      "paper_polygon_xy": [
+        [
+          162,
+          202
+        ],
+        [
+          284,
+          192
+        ],
+        [
+          275,
+          394
+        ],
+        [
+          156,
+          393
+        ]
+      ],
+      "paper_landmarks_xy": [
+        [
+          257,
+          319
+        ],
+        [
+          162,
+          202
+        ],
+        [
+          284,
+          192
+        ]
+      ]
+    }
+  ],
+  "arcs": [
+    {
+      "id": "work-gesture",
+      "from": "work",
+      "to": "gesture",
+      "duration": 6,
+      "keys": [
+        {
+          "state": "work",
+          "time": 0
+        },
+        {
+          "state": "bridge-1",
+          "time": 2
+        },
+        {
+          "state": "bridge-2",
+          "time": 4
+        },
+        {
+          "state": "gesture",
+          "time": 6
+        }
+      ]
+    }
+  ],
+  "paint_warp_gains": [
+    0.55,
+    0.55,
+    0.55
+  ],
+  "compatibility": [
+    "Original native work painting plus imagegen-authored registered bridges; no procedural body wiggle",
+    "Work/gesture are main stages; two stable transition paintings; six-second outward arc and six-second reverse",
+    "Original cast scale, floor and paper/cane ownership retained; runtime screenshot review required"
+  ]
+}

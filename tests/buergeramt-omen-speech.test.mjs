@@ -15,14 +15,14 @@ function speaking(options={}){
  return h;
 }
 
-test('the authored omen delivery reaches the actual browser utterance; clerk speech retains its defaults',()=>{
+test('the authored omen delivery overrides profile hints; clerk speech uses her profile',()=>{
  const h=speaking(),delivery=h.window.BuergeramtStory.omen.delivery,utterance=h.synth.current;
  assert.equal(utterance.text,line);assert.equal(utterance.rate,delivery.rate);assert.equal(utterance.pitch,delivery.pitch);
  assert.equal(delivery.rate,.82);assert.equal(delivery.pitch,.72);
  assert.ok(delivery.contour.every(mark=>line.includes(mark.word)&&mark.tension>=0&&mark.tension<=1&&mark.semitones>=-6&&mark.semitones<=3));
  assert.equal(h.level.omen.speech.mode,'voice');assert.equal(h.level.omen.speech.rate,delivery.rate);assert.equal(h.level.omen.speech.pitch,delivery.pitch);
  const desk=harness('host',{voice:true});desk.counter();
- assert.equal(desk.synth.current.rate,.96);assert.equal(desk.synth.current.pitch,1);
+ assert.equal(desk.synth.current.rate,.89);assert.equal(desk.synth.current.pitch,.77);
 });
 
 test('arrival waits for an observed voice start before speech progress or ducking',()=>{
@@ -128,13 +128,13 @@ test('voice failure switches to estimated timing without rewinding an observed w
  h.tick(700);h.level.update(0);assert.ok(h.level.omen.speech.progress>before);
 });
 
-test('estimated progress caps before the real end; onend starts the 0.7-second glare',()=>{
+test('estimated progress caps before the real end; onend starts the extended glare',()=>{
  const h=speaking();h.tick(5000);h.level.update(0);
  assert.equal(h.level.omen.phase,'blackout');assert.equal(h.level.omen.speech.progress,.92);
  h.synth.end();assert.equal(h.level.omen.speech.mode,'done');
  assert.equal(h.level.omen.speech.progress,1);assert.equal(h.level.omen.phase,'glare');
  h.advanceGame(.65);assert.equal(h.level.omen.phase,'glare');
- h.advanceGame(.1);assert.equal(h.level.omen.strength,0);
+ h.advanceGame(2.85);assert.equal(h.level.omen.phase,'unwind');assert.equal(h.level.omen.strength,1);
 });
 
 test('word contours reach both decoded stems while EFFEKTE mute remains authoritative',async()=>{
@@ -171,7 +171,7 @@ test('the Gaussian life clock holds with speech pause, follows word tension and 
  assert.equal(h.level.omen.life.depth,1);
  h.synth.resume();h.synth.boundary(line.indexOf('gewählt'));h.advanceGame(.25);
  assert(h.level.omen.life.clock>before.clock);assert(h.level.omen.life.pressure>before.pressure);
- h.synth.end();h.advanceGame(.75);
+ h.synth.end();h.advanceGame(5.3);
  assert.equal(h.level.omen.life.pressure,0);assert.equal(h.level.omen.life.depth,0);assert.equal(h.level.omen.life.pulse,0);
  h.level.replay(h.config);assert.equal(h.level.omen.life.time,0);assert.equal(h.level.omen.life.clock,0);
 });

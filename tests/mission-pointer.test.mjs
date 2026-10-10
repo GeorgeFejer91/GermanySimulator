@@ -22,12 +22,14 @@ test('mission compass follows every office entrance and nearest unfinished Stadt
  state.started=false;assert.equal(scope.getMissionWaypoint(),null);state.started=true;state.mission=8;assert.equal(scope.getMissionWaypoint(),null);
 });
 
-test('sausage nose aims at the target in all quadrants, follows position/elevation, and hides at arrival',()=>{
- const start=render.indexOf('  function updateMissionPointer(){'),end=render.indexOf('\n  }',start);
- let target=null;const player={x:560,y:560,facing:2.5},position={set(x,y,z){Object.assign(this,{x,y,z})}},pointer={rotation:{y:0},position,userData:{}};
- const scope=vm.createContext({bridge:{player,getMissionWaypoint:()=>target,stationElevation:()=>.7},missionPointer:pointer,X:x=>x*.02-100,Z:y=>y*.02-50});
- vm.runInContext(render.slice(start,end+4),scope);
- for(const [dx,dz] of [[0,500],[500,0],[0,-500],[-500,0],[350,-280]]){target={id:'entrance',x:player.x+dx,y:player.y+dz};scope.updateMissionPointer();assert.equal(pointer.visible,true);const length=Math.hypot(dx,dz);assert.ok(Math.abs(Math.sin(pointer.rotation.y)-dx/length)<1e-9);assert.ok(Math.abs(Math.cos(pointer.rotation.y)-dz/length)<1e-9);assert.equal(position.x,player.x*.02-100);assert.equal(position.z,player.y*.02-50);assert.equal(position.y,3.3)}
+test('HUD sausage stays at the upper edge and points along the camera-projected bearing',()=>{
+ const extract=name=>{const a=render.indexOf('  function '+name+'(){'),b=render.indexOf('\n  }',a);return render.slice(a,b+4)};
+ let target=null;const player={x:560,y:560,facing:2.5},position={set(x,y,z){Object.assign(this,{x,y,z})}},pointer={rotation:{set(x,y,z,order){Object.assign(this,{x,y,z,order})}},position,scale:{setScalar(x){this.value=x}},userData:{}};
+ const direction={set(x,y,z){Object.assign(this,{x,y,z});return this},transformDirection(){this.y=-this.z*.6;return this}};
+ const scope=vm.createContext({bridge:{player,getMissionWaypoint:()=>target},missionPointer:pointer,missionDirection:direction,camera:{updateMatrixWorld(){},matrixWorldInverse:{}},missionHudCamera:{updateProjectionMatrix(){}},innerWidth:1280,innerHeight:800,document:{getElementById:()=>true}});
+ vm.runInContext(extract('layoutMissionPointer')+extract('updateMissionPointer'),scope);scope.layoutMissionPointer();
+ for(const [dx,dz] of [[0,500],[500,0],[0,-500],[-500,0],[350,-280]]){target={id:'entrance',x:player.x+dx,y:player.y+dz};scope.updateMissionPointer();assert.equal(pointer.visible,true);const length=Math.hypot(dx,dz);assert.ok(Math.abs(Math.sin(pointer.userData.heading)-dx/length)<1e-9);const screenLength=Math.hypot(dx,dz*.6);assert.ok(Math.abs(-Math.sin(pointer.rotation.z)-dx/screenLength)<1e-9);assert.ok(Math.abs(Math.cos(pointer.rotation.z)+dz*.6/screenLength)<1e-9);assert.equal(pointer.rotation.order,'ZXY');assert.equal(position.z,0)}
+ for(const [width,height] of [[1280,800],[390,844],[844,390],[320,568]]){scope.innerWidth=width;scope.innerHeight=height;scope.layoutMissionPointer();const {x,y,size}=pointer.userData.screen;assert.equal(x,width<=1000?32:width/2);assert.equal(y-size/2,8);assert(x-size/2>=8);assert(x+size/2<=width-8);assert.equal(position.x,x-width/2);assert.equal(position.y,height/2-y)}
  target={id:'entrance',x:player.x+35,y:player.y};scope.updateMissionPointer();assert.equal(pointer.visible,false);
  target=null;scope.updateMissionPointer();assert.equal(pointer.visible,false);assert.equal(pointer.userData.target,null);
 });

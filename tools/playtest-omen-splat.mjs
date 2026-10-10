@@ -7,7 +7,7 @@ const output=process.env.PLAYTEST_OUTPUT||'output/omen-splat/review';mkdirSync(o
 const browser=await chromium.launch({headless:true,executablePath:process.env.CHROMIUM_PATH,args:['--mute-audio']});
 const reports=[];
 try{
-  const cases=[['desktop',1280,800],['android-portrait',390,844],['android-landscape',844,390],['reduced-motion',1280,800],['asset-failure',1280,800]];
+  const cases=[['desktop',1280,800],['android-portrait',390,844],['android-landscape',844,390],['reduced-motion',1280,800],['asset-failure',1280,800],['office-failure',1280,800],['fullbody-diagnostic',1280,800]];
   for(const [name,width,height] of cases.filter(([name])=>!process.env.PLAYTEST_VIEWPORT||name===process.env.PLAYTEST_VIEWPORT)){
     const context=await browser.newContext({viewport:{width,height},isMobile:name.startsWith('android'),hasTouch:name.startsWith('android'),reducedMotion:name==='reduced-motion'?'reduce':'no-preference',recordVideo:name==='desktop'?{dir:output,size:{width,height}}:undefined});
     await context.addInitScript(()=>{
@@ -20,11 +20,20 @@ try{
     page.on('pageerror',e=>errors.push(e.message));page.on('console',m=>{if(['warning','error'].includes(m.type()))warnings.push(m.text())});
     page.on('request',r=>{if(/spark|omen\/aktenkurier|buergeramt-splat/.test(r.url()))requests.push(r.url())});
     if(name==='asset-failure')await page.route('**/omen/aktenkurier.splat',route=>route.abort('failed'));
+    if(name==='office-failure')await page.route('**/assets/buergeramt/office-detail.js*',route=>route.abort('failed'));
+    if(name==='fullbody-diagnostic')await page.route('**/world3d.js*',async route=>{
+      const response=await route.fetch();let body=await response.text();
+      // Forced diagnostic framing only; production FOV and camera pitch stay intact.
+      body=body.replace('new T.PerspectiveCamera(69,','new T.PerspectiveCamera(94,')
+        .replace('amtCamera.rotation.set(0,-view.yaw,0)','amtCamera.rotation.set(-.28,-view.yaw,0)')
+        .replace('},inspectAssets,setAmtQr,get amtGaussian()', '},get amtTurnDiagnostic(){const a=amtMoving.find(a=>a.id==="aktenkurier");return {forcedFraming:true,fov:amtCamera.fov,position:a.mesh.position.toArray(),rotation:a.mesh.rotation.toArray(),scale:a.mesh.scale.toArray()}},inspectAssets,setAmtQr,get amtGaussian()');
+      await route.fulfill({response,body});
+    });
     const base=process.env.GAME_URL||'http://127.0.0.1:8876/index.html';
     await page.goto(base+'?geheim=buergeramt',{waitUntil:'domcontentloaded'});
-    await page.waitForFunction(()=>window.BuergeramtLevel?.active&&window.Germany3D?.ready&&Germany3D.amtCharacters.every(a=>a.loaded)&&Germany3D.amtOffice?.attached,null,{timeout:90000});
+    await page.waitForFunction(officeFailure=>window.BuergeramtLevel?.active&&window.Germany3D?.ready&&Germany3D.amtCharacters.every(a=>a.loaded)&&(officeFailure?Germany3D.officeAssetStatus.failed>0:Germany3D.amtOffice?.attached),name==='office-failure',{timeout:90000});
     await page.evaluate(()=>{const update=BuergeramtLevel.update.bind(BuergeramtLevel);window.omenOriginalUpdate=update;BuergeramtLevel.update=()=>{};window.omenStep=seconds=>{for(let t=0;t<seconds;t+=.025)update(Math.min(.025,seconds-t));Germany3D.sync()}});
-    const inspect=()=>page.evaluate(()=>({omen:BuergeramtLevel.omen,view:BuergeramtLevel.view,stage:BuergeramtLevel.stage,splat:Germany3D.amtOmenSplat,actor:Germany3D.amtCharacters.find(a=>a.name==='aktenkurier'),assets:Germany3D.inspectAssets()}));
+    const inspect=()=>page.evaluate(()=>({omen:BuergeramtLevel.omen,view:BuergeramtLevel.view,stage:BuergeramtLevel.stage,splat:Germany3D.amtOmenSplat,gaussian:Germany3D.amtGaussian,staging:Germany3D.amtOmenStaging,office:Germany3D.amtOffice,turnDiagnostic:Germany3D.amtTurnDiagnostic,actor:Germany3D.amtCharacters.find(a=>a.name==='aktenkurier'),assets:Germany3D.inspectAssets()}));
     await page.waitForFunction(()=>Germany3D.amtOmenSplat.ready||Germany3D.amtOmenSplat.skipped,null,{timeout:30000});
     const prepared=await inspect();
     if(name!=='asset-failure')assert.equal(prepared.splat.ready,true,JSON.stringify({prepared,warnings}));
@@ -61,6 +70,7 @@ try{
       }
     }
     const peak=await inspect();
+    assert(peak.gaussian.actors.every(a=>!a.visible),'ordinary Gaussian actors are suppressed');
     if(name!=='asset-failure'){
       assert.equal(peak.splat.visible,true);assert.equal(peak.splat.reveal,1);assert.equal(peak.actor.visible,false);
       assert.equal(peak.splat.tunnelVisible,true);assert.equal(peak.splat.tunnelCount,3072);
@@ -76,9 +86,21 @@ try{
         resolve({metric:'game sync dispatch interval',p50:times[Math.floor(times.length*.5)],p95:times[Math.floor(times.length*.95)],frames:times.length,memory:Germany3D.inspectAssets().memory});};
       requestAnimationFrame(frame);
     })));
-    // Existing speech completion owns the abrupt release.
-    await page.evaluate(()=>{omenTestSpeech.onresume?.();omenTestSpeech.onend?.();omenStep(.75)});await page.waitForTimeout(200);
+    // Actual completion owns the extended threat and ordered de-transition.
+    await page.evaluate(()=>{omenTestSpeech.onresume?.();omenTestSpeech.onend?.();omenStep(3.2)});
+    assert.equal((await inspect()).omen.phase,'glare');assert.equal((await inspect()).staging.environmentVisible,false);
+    await page.screenshot({path:output+'/'+name+'-glare.png'});
+    const ending=[];
+    for(const [label,seconds] of [['unwind',1.1],['crossfade',.65],['turn-front',.55],['turn-side',.7],['turn-back',1.15],['depart',2.2]]){
+      await page.evaluate(seconds=>omenStep(seconds),seconds);await page.waitForTimeout(120);
+      await page.screenshot({path:output+'/'+name+'-'+label+'.png'});
+      const state=await inspect();ending.push({label,state});assert.equal(state.staging.environmentVisible,false);
+      assert(state.gaussian.actors.every(a=>!a.visible));
+    }
+    await page.evaluate(()=>{for(let i=0;i<400&&BuergeramtLevel.omen.phase;i++)omenStep(.025)});await page.waitForTimeout(200);
     const released=await inspect();assert.equal(released.splat.ready,false);assert.equal(released.actor.visible,true);assert.equal(released.omen.strength,0);
+    assert.equal(released.staging.environmentVisible,true);assert.equal(released.staging.isolation,0);
+    if(name==='office-failure')assert.equal(released.office,null);
     await page.screenshot({path:`${output}/${name}-release.png`});
     // Replay cancels the old owner and creates a bounded fresh effect.
     await page.locator('#amt-direct-reset').evaluate(node=>node.click());
@@ -88,10 +110,10 @@ try{
     await page.locator('#amt-leave').evaluate(node=>node.click());await page.waitForTimeout(300);
     const exited=await inspect();assert.equal(exited.splat.ready,false);assert.equal(exited.splat.loading,false);
     assert.deepEqual(errors,[]);
-    const unexpectedWarnings=warnings.filter(w=>/Shader Error|VALIDATE_STATUS|GL_INVALID|TypeError/.test(w)&&!(name==='asset-failure'&&w.startsWith('Bürgeramt omen keeps painted fallback TypeError: Failed to fetch')));
+    const unexpectedWarnings=warnings.filter(w=>/Shader Error|VALIDATE_STATUS|GL_INVALID|TypeError/.test(w)&&!(name==='asset-failure'&&w.startsWith('Bürgeramt omen keeps painted fallback TypeError: Failed to fetch'))&&!(name==='office-failure'&&w.startsWith('Bürgeramt office detail unavailable TypeError: Failed to fetch dynamically imported module')));
     assert.equal(unexpectedWarnings.length,0,JSON.stringify(unexpectedWarnings));
     const evidence=await page.evaluate(()=>({longTasks:omenLongTasks,gpu:(()=>{const gl=document.getElementById('world3d').getContext('webgl2');const ext=gl?.getExtension('WEBGL_debug_renderer_info');return ext?gl.getParameter(ext.UNMASKED_RENDERER_WEBGL):'unavailable'})()}));
-    reports.push({name,silent:true,physicalAndroid:false,prepared,approachPhases,phases,peak,released,replay,exited,frameSamples,requests,errors,warnings,evidence});
+    reports.push({name,silent:true,physicalAndroid:false,prepared,approachPhases,phases,peak,ending,released,replay,exited,frameSamples,requests,errors,warnings,evidence});
     await context.close();writeFileSync(`${output}/results.json`,JSON.stringify(reports,null,2));
     console.log(JSON.stringify({name,result:'PASS',count:peak.splat.count,errors,gpu:evidence.gpu,p95:frameSamples.map(s=>s.p95),warnings}));
   }

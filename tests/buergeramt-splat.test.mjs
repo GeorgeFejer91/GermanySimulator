@@ -2,8 +2,20 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import {readFileSync} from 'node:fs';
 import {createHash} from 'node:crypto';
-import {omenSplatPose} from '../buergeramt-splat.js';
+import {omenSplatPose,omenReliefGain} from '../buergeramt-splat.js';
 import {harness} from './amt-harness.mjs';
+
+test('narrow-view relief fits the projecting prop while desktop retains full intensity',()=>{
+  assert.equal(omenReliefGain({aspect:1280/800,fov:69}),3.4);
+  assert.equal(omenReliefGain({aspect:844/390,fov:69}),3.4);
+  const portrait=omenReliefGain({aspect:390/844,fov:69});
+  assert(portrait>2.4&&portrait<2.5,'phone retains pronounced depth with room at the sleeve edge');
+  assert(omenReliefGain({aspect:320/844,fov:69})<portrait);
+  assert(omenReliefGain({aspect:390/844,fov:50})<portrait);
+  for(const aspect of [.1,.3,.462,.8,1.6,4,NaN,Infinity])for(const fov of [0,20,50,69,120,NaN,Infinity]){
+    const gain=omenReliefGain({aspect,fov});assert(Number.isFinite(gain)&&gain>=1&&gain<=3.4);
+  }
+});
 
 test('depth unfolds towards the player during approach and shares the score pulse',()=>{
   const h=harness('host',{cinematics:true});h.enterUntilOmen();
@@ -13,7 +25,7 @@ test('depth unfolds towards the player during approach and shares the score puls
     assert(pose.reveal>=previous&&pose.reveal<=1);previous=pose.reveal;
     assert.equal(pose.turn,0);assert.equal(pose.pulse,omen.life.pulse);
     assert.equal(pose.pressure,omen.life.pressure);
-    assert(pose.opacity>=0&&pose.opacity<=1);
+    assert.equal(pose.opacity,omen.life.opacity>0?1:0,'body stays solid throughout the depth morph');
     if(omen.phase==='approach'&&pose.reveal>.2&&pose.reveal<.8){middle=true;assert(pose.opacity>0)}
   }
   assert(middle,'volume must already exist before arrival');
@@ -31,6 +43,14 @@ test('the simulation reveal clock resets on arrival, replay, and cancellation',(
   h.level.update(.1);assert.equal(h.level.omen.revealTime,.1);
   h.level.replay(h.config);assert(h.level.omen.visit>visit);assert.equal(h.level.omen.revealTime,0);
   assert.equal(h.level.omen.phase,'');
+});
+
+test('flattening retains full body opacity until the registered sprite handover',()=>{
+ for(const phase of ['approach','blackout','glare','unwind'])for(const opacity of [.001,.1,.5,1]){
+  const pose=omenSplatPose({phase,life:{opacity,depth:phase==='unwind'?0:.5}});
+  assert.equal(pose.opacity,1);assert.equal(pose.reveal,phase==='unwind'?0:.5);
+ }
+ assert.equal(omenSplatPose({phase:'unwind',life:{opacity:0,depth:0}}).opacity,0);
 });
 
 test('the shipped Gaussian body has bounded count, positive scales, real depth, and recorded provenance',()=>{

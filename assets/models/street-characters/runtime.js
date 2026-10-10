@@ -1,9 +1,11 @@
 /** Opt-in render adapter. Never creates NPC state, dialogue, collisions or audio. */
 import {buildStreetCharacter, STREET_IDS, VERSION} from './models.js';
 import {samplePose, WALK_DISTANCE, CLIP_SECONDS} from './rig.js';
+import {STREET_PERSONA_MAP} from './persona-map.js';
 export const WORLD_SCALE = .82;
 
 export function characterIdFor(state) {
+  if (state.voiceId) return STREET_PERSONA_MAP[state.voiceId]?.templateId ?? null;
   if (STREET_IDS.includes(state.streetCharacterId)) return state.streetCharacterId;
   const key = String(state.id ?? state.name ?? `${state.spriteKind || 'npc'}:${state.homeX ?? state.x}:${state.homeY ?? state.y}`);
   let hash = 2166136261;
@@ -29,7 +31,8 @@ export function createStreetCharacterSystem(T, {forcedId = null} = {}) {
   }
   function create(state) {
     if (disposed || !state || state.special) return null;
-    const id = forcedId || characterIdFor(state); if (failed.has(id)) return null;
+    // forcedId is only for the explicit visual-debug URL; normal actors use their voice identity.
+    const id = forcedId || characterIdFor(state); if (!id || failed.has(id)) return null;
     try {
       const item = template(id), group = new T.Group(), mesh = new T.SkinnedMesh(item.geometry, item.material);
       const bones = item.model.rig.map(b => {const bone = new T.Bone(); bone.name = b.name; bone.position.fromArray(b.translation); return bone;});

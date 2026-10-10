@@ -1,4 +1,10 @@
 .amt-level[hidden],.amt-ticket[hidden],.phone-call[hidden]{display:none!important}
+.amt-level .amt-sheet{display:none!important}
+.amt-sequence #amt-direct-reset{visibility:hidden}
+.amt-walk-hud.sequence :is(.amt-walk-top,.amt-reticle,.amt-walk-bottom,.amt-touch-controls){display:none}
+#amt-walk-hud.sequence #amt-ambient{bottom:calc(max(18px,env(safe-area-inset-bottom)) + var(--subtitle-height,0px));max-height:calc(100% - var(--amt-caption-top,12px) - max(18px,env(safe-area-inset-bottom)) - var(--subtitle-height,0px));box-sizing:border-box;padding:6px 3px;overflow:auto;pointer-events:auto;background:linear-gradient(transparent,#10191bcc 16%,#10191bcc 84%,transparent)}
+.amt-inside.amt-sequence #amt-mix{top:12px;left:12px}
+.amt-inside.amt-sequence .subtitle-toggle{top:12px;right:12px;bottom:auto;max-width:calc(100% - 24px)}
 .amt-level{position:fixed;inset:0;z-index:200;display:grid;place-items:end center;overflow:auto;background:#353b3a;color:#241e18;font-family:Arial,sans-serif}
 .amt-room{position:absolute;inset:0;overflow:hidden;perspective:850px;background:linear-gradient(#99988a 0 57%,#6d6b62 57%)}
 .amt-back-wall{position:absolute;left:10%;right:10%;top:8%;height:56%;border:16px solid #b2ac9c;background:linear-gradient(90deg,#b2ae9d,#d0c9b5 50%,#aaa494);box-shadow:inset 0 -14px #7d796c;transform:rotateX(-3deg)}
@@ -201,3 +207,9 @@ html[data-call-ui="google"] .amt-compact .phone-choices #phone-answer{background
 .amt-counter-notice small{display:block;font:700 11px/1.4 Arial,sans-serif}.amt-counter-notice strong{display:block;margin-top:3px;font:700 clamp(16px,2.4vw,24px)/1.3 Arial,sans-serif;overflow-wrap:break-word}
 .amt-actions{display:grid;grid-template-columns:repeat(2,minmax(0,1fr))}.amt-actions button{min-width:0;min-height:44px;font-size:14px;overflow-wrap:break-word}.amt-actions button:only-child{grid-column:1/-1}
 @media(max-width:700px){.amt-counter-notice{top:58px;left:12px;transform:none;width:calc(100% - 24px);padding:8px 12px}.amt-counter-notice strong{font-size:17px}.amt-walk-top{padding-top:140px}.amt-board-hud{display:none}.amt-actions{grid-template-columns:minmax(0,1fr)}.amt-actions button{font-size:14px}}
+
+.amt-level.first-person.interactive .amt-sheet{display:block!important;pointer-events:auto}
+.amt-level.first-person.interactive .amt-sheet header,.amt-level.first-person.interactive #amt-status,.amt-level.first-person.interactive .amt-actions{display:grid}
+.amt-level.first-person.interactive .amt-sheet header{display:flex;justify-content:flex-end;padding-bottom:4px}
+.amt-level.first-person.interactive .amt-sheet header span{display:none}
+.amt-level.first-person.interactive .amt-sheet h2{font:700 12px/1.3 Arial,sans-serif;margin:5px 0}

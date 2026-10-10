@@ -20,26 +20,186 @@ active office visit through the existing two-job admission queue. Splats install
 in 2,048-record yielding chunks; no shared decode-worker pool is used. Packed
 record data is 623,008 bytes. The procedural tunnel adds 3,072 records / 49,152
 packed bytes without another download, bringing the shared renderer to 42,010
-splats. Allocation padding, GPU accumulator buffers, sorting and renderer
+splats before mouth articulation. Allocation padding, GPU accumulator buffers, sorting and renderer
 overhead are additional and must be measured in browser evidence.
-Only the omen consumes the effect; GPU generation/sorting runs at most 30 Hz
-from the existing render owner and stops on hidden/inactive play. Teardown waits
+The official recorded line adds 96 procedural mouth kernels / 1,536 packed bytes in the same body mesh (39,034 body and 42,106 body+tunnel records). A 2,131-byte JavaScript cue track contains 24 estimated viseme intervals and 238 energy samples; it is imported only with the existing office/omen module. Two small Vec2 uniforms are updated in the existing frame pass from native media time; there is no additional RAF, polling loop, renderer, audio decode or runtime recognizer. The portable Rhubarb authoring tool and temporary WAV remain outside shipped assets. The original body and approved MP3 bytes are unchanged. Silent real-playback browser comparison at 1280×800 measured baseline and articulated p50 14 ms / p95 21 ms game-sync dispatch, with Android portrait/landscape emulation also 14/21 ms; these short held-pose samples are not full mission or physical-device performance evidence. Mouth failure, pause, replay and end checks belong to `BUERGERAMT.md`.
+The omen and bounded nearby painted action clouds share the effect owner.
+Omen-only generation/sorting runs at most 30 Hz; active action clouds use at
+most 60 Hz from the existing render pass and stop on hidden/inactive play. Teardown waits
 for any owned sort before disposing buffers and its worker. A missing, cancelled
 or late preparation preserves the sprite; ordinary city startup imports none of
-this code or asset. The asset has one shared desktop/mobile variant pending
-evidence that another is needed. Runtime behavior belongs in `BUERGERAMT.md`.
+the Spark runtime or Gaussian data. The omen asset has one shared desktop/mobile variant pending
+evidence that another is needed. Runtime behavior belongs in `BUERGERAMT.md`. The 2026-10-09 staging adds no asset or renderer: one environment parent and a shared material darkening uniform isolate the courier, and the existing shared owner suppresses ordinary action clouds for the complete cinematic. A bounded office-only path search runs at the trigger and after a blocked return, with exact swept clearance and player yielding; normal rendering keeps its existing cadence and teardown.
 
-Office lip articulation adds a small classic script, with no media download or
-new dependency. Its shared native-paint patch has 425 Gaussian instances in
-one draw (5,100 bytes of instance coordinates), borrowing the selected actor's
-current texture rather than decoding/copying it. It allocates on first actual
-speech, updates from the existing renderer, hides/restores the source mouth at
-rest and releases geometry/material on scene exit. Source face registrations
-work with the existing close and compact variants. The omen adds one oral
-record to its existing volume (42,011 total figure/tunnel records); its original
-38,938-record file and byte count stay unchanged, as does its 30 Hz sort cap.
-Browser evidence is local under `output/lip-motion/`; physical-device and
-natural-flow coverage remain separate from forced render/timing fixtures.
+Paired action packs under `assets/buergeramt/animation/` select one desktop or
+mobile variant on approach; never fetch the full cast or both variants. Each
+24-byte record stores two XY centers and two RGBA paint samples. The decoder
+bounds records to 20,000 slots, 32 segment rows and the declared decoded size.
+Three lookup textures cost 24 bytes per slot/segment in addition to CPU
+records, Spark buffers, sorting and renderer overhead. Two desktop or one
+mobile actor may reside, with the dialogue owner prioritized. Authoring images
+and SciPy/Pillow tools stay outside runtime requests. Track compressed and
+decoded costs in generated manifests; compare actual frame and input latency
+against the same scene without the action renderer. Missing or late data keeps
+the original sprite. `BUERGERAMT.md` owns timing, residency and state handoff.
+
+The 2026-10-10 extension covers all fourteen office figures with twelve action
+packs: the two extra clerks reuse Knick's pack, while renter, parent and
+pensioner add four 384×832 native keys each. Their desktop compressed/decoded
+records are respectively 200,673/387,072, 215,412/423,936 and 241,998/460,800 bytes;
+mobile records are 78,363/165,888, 84,172/165,888 and 93,723/184,320 bytes.
+Each decoded patron key costs 1,277,952 RGBA bytes; no more than three keys
+(3,833,856 bytes before GPU copies) reside per admitted actor. Four-key transfer
+totals are 1,083,160, 1,047,092 and 1,162,580 bytes, but the initial job requests
+only the current pair, then a queued neighbor. These additions keep the shared
+two-job queue, two-desktop/one-mobile actor caps and existing render cadence.
+Do not request new authoring sheets or private voice references from the game.
+Camera-negative candidates do not consume preparation; a fully off-camera
+paused actor can retire for the visible speaker without a visible pose jump.
+Registered original/generated source hashes and crop/scale provenance remain
+beside the three source packs. Browser delivery hints add no speech download;
+alternate Voice Cloner references remain private; UUID metadata identifies
+the unlistened candidates.
+
+The full-cast release compared three cold office runs per viewport against
+`2b36be9`, using Chrome 154/Intel Iris Xe, local uncompressed HTTP, seed 424242,
+DPR 2 requested and no CPU throttling. The naturally selected Konrad dialogue
+was sampled for three seconds. Median active p95 frame time was 21.0 → 20.9 ms
+on desktop and mobile emulation (after ranges 20.9–20.9 ms); frame cadence
+stayed approximately 60 Hz. Median input p95 was 18.6 → 15.8 ms desktop
+(after range 13.1–17.1) and 67.7 → 19.3 ms emulation (12.9–20.4). These short
+lab samples do not establish a causal speedup or physical-device performance.
+Desktop geometry count stayed 168, textures 43–44 and draw calls 117; mobile
+stayed 161/41/88. Selected-action transfer was 3,980,014 → 3,284,494 bytes
+desktop and 1,818,102 → 1,936,660 mobile, including other prepared office packs.
+Cold office startup median/range was 28,531,765 / 25,299,076–30,137,390 bytes
+desktop and 16,927,169 / 16,927,164–16,927,171 mobile. This direct-office
+scenario loads office assets and is separate from the root title's 18 MB gate.
+After ready/settled medians were 871/1,188 ms desktop and 832/1,205 ms mobile;
+async readiness ranged widely, so do not claim a loading speedup. Both six-run
+benchmark reports passed applicable input/error/drawing-buffer guards under
+`output/amt-gaussian-arcs/full-cast-benchmark-{before,after}/`; Android is
+emulated, GPU timing and physical-device p95 remain NOT RUN.
+The separate six-run root benchmark also passed its 18 MB startup, deferred
+resource, title cadence, input and drawing-buffer gates: desktop startup
+15,696,445–16,448,172 bytes, mobile 15,027,020–16,098,517; title cadence
+12 calls per measured three-second window. Evidence: `full-cast-root-benchmark/`.
+
+The E-triggered fever pass uses one existing full-screen shader pass with twelve
+analytic motifs and the existing Gaussian action owner. Four painted plane
+corner projections protect the selected character; no new image/3D asset,
+render loop, worker, synthesis dependency or splat pack is introduced. Structure
+materials return to their original opacity/transparency/depth settings on
+release. Native anchor painting receives the same shared isolation uniform;
+existing 2/1 actor caps, admission queue and 1.6 MP buffer cap remain in force.
+The user-approved alternate voice family adds 40 MP3s / 4,107,104 bytes under
+`assets/voices/amt-fever/`, fetched only for an exact speaker/text cue in normal
+gameplay. No clip is preloaded at office or city startup.
+Its manifest/catalog carry actual hashes, alternate profiles, CC0 reference and
+MIT model provenance, final-encoding levels/ASR and pending human listening.
+The two semantic failures remain outside the shipped family. The original
+approved Horst omen recording is unchanged. `VOICE-SYNTH-PROTOCOL.md` records
+the explicit use approval separately from the unverified listening fields.
+
+Peak-effect measurements used three cold runs per viewport against `e4ffe34`,
+Chrome 154 / Intel Iris Xe, local uncompressed HTTP, seed 424242, requested DPR 2,
+no CPU throttling. A silent held TTS start receipt kept Konrad's same dialogue
+active; every after sample ended at fever strength 1. Median active p95 stayed
+21.0 → 21.0 ms desktop and Android emulation (after range 20.9–21.0 ms).
+Input p95 medians were 17.4 → 20.4 ms desktop and 17.4 → 21.0 ms emulation,
+with an emulated 80.3 ms outlier; these short samples do not establish field
+responsiveness or a speedup. Geometry/texture counts were 169/43–44 desktop
+and 162/41 mobile after. The final overlay pass reports one draw call because
+Three.js resets its per-render counters; it is not the complete office draw cost.
+Reports: `output/amt-fever-interactions/peak-{before,after}/`. Initial samples
+whose effect had finished are preliminary and excluded from peak evidence.
+The six-run root benchmark passed the 18 MB/title-cadence/input/buffer gates.
+The later `b3aafb3` upstream integration preserves the fever shader/window and
+adds official omen-only lip-sync, outside these Konrad samples. Source-delta
+peer addenda and fresh native-media/3d checks bind that integration separately.
+The subsequent approved-default root smoke benchmark passed both viewports:
+16,813,631 bytes desktop and 16,465,819 bytes emulation, with 13/12 title sync
+calls in about three seconds and no page errors. Desktop input p95 had a
+142.5 ms outlier, while emulation was 16.4 ms; these single runs do not establish
+stable input latency. This is a two-run smoke check, not a new peak baseline.
+Physical Android, GPU timers and perceptual listening remain NOT RUN.
+
+The automatic in-scene interaction change retains those same rendering and
+asset paths. It adds no assets or frame loop: the existing office update owns
+speech/fade continuations, and the existing Pretext fitter measures caption
+clearance below the visible audio/subtitle controls. Caption overflow uses the
+same bounded DOM region. The earlier peak and root measurements above describe
+their recorded candidates, not a new benchmark of this controller/UI change.
+
+The 2026-10-10 foreground repair adds no art, splat pack, worker or render loop.
+Native patches inherit their source layer/depth policy; one isolated speaker
+owns the shared cloud's foreground policy. Bodies remain opaque during depth
+morphs, and close restores original material layers synchronously.
+Three cold contexts per viewport used Chrome 154 / Intel Iris Xe, local HTTP,
+seed 91, requested DPR 2 and no CPU throttling. Ordinary-office median active
+p95 was 20.9 ms desktop and 21.0 ms Android emulation (ranges 20.9–21.0/21.0);
+geometry/texture counts were 168/42 and 145/32. Input p95 medians were 20.1 and
+60.9 ms, with emulated range 20.4–71.5 ms, so no stable-latency improvement is
+claimed. The controlled base `dbc37af0` office samples had 20.9 ms medians;
+the final probe additionally waits for asset settlement before active sampling.
+These condition differences and short samples do not establish a speedup.
+The six root samples pass input/error, 18 MB transfer, deferred-resource,
+4 Hz title and 1.6 MP buffer gates: maximum startup 16,470,981 bytes and
+12–13 title calls per measured three-second window. Root active p95 medians
+were 31.7/21.8 ms. All final samples accepted nine input events with no page
+errors. Initial probes failed their input guard; those reports are retained.
+Final probes explicitly wait for controller admission, settled office assets
+and released welcome before active sampling.
+Reports and exact metrics: ignored `output/character-morph/bench-summary.json`,
+`bench-office-{controlled-before,settled-final}/` and `bench-root-admitted-final/`.
+The separate three held omen samples measured 20.9–21.1 ms sync intervals.
+Physical Android, GPU timing and perceptual listening remain NOT RUN.
+
+The 2026-10-11 Aktenkurier intensity adjustment multiplies the existing upper-body
+relief by up to 3.4 and its width by at most 1.12, with bounded broad cloth
+displacement and directional shading in the same Dyno modifier. Mouth articulation
+runs before that shared deformation. One float fits relief to the view's horizontal
+field; it adds no samples, asset bytes, renderer, clock or admission work. The
+flattened geometry and floor baseline remain registered. Independent Camera and
+Physics reviews bind the integrated candidate to `output/omen-intense/candidate-v4.json`;
+fresh source/CPU checks preserve the upstream mobile background-slot retirement.
+Native MP3 mouth captures pass on desktop, portrait, landscape and reduced motion
+for V2; the identical shader/camera paths retain those source hashes through V4.
+A first V4 portrait probe passes framing and pause/exit assertions but its
+approximately 1004 ms dispatch interval leaves consonant capture timing unproved.
+The final V4 portrait probe waits for two completed owner updates and a rendered
+dispatch at each paused native cue. All phonetic captures and assertions pass;
+72 dispatch intervals have p50/p95 15.2/23.4 ms. The earlier V2 p95 samples were
+21.5–22.5 ms. These variable host conditions do not establish a performance
+improvement. V3 full-body ending and splat-failure captures
+pass opaque flattening, staged painted turn, restoration and cleanup. Exact GPU
+shader readback checks 38,938 body points across 20 reveal/pulse states; all centers
+are finite, with unchanged Y/sole baseline and exact flattened centers. This is
+bounded deformation evidence, not GPU timing or a natural mission traversal.
+The V4 six-context root check passes unchanged 18 MB, deferred-resource, actual
+4 Hz title, 1.6 MP, error and brief-input guards, with nine inputs accepted in
+every run and maximum startup 16,761,047 bytes. The diagnostic probe explicitly
+waits for five title dispatches with four 200–350 ms intervals before warm sampling;
+the added settle delays are reported (1.06–1.28 s), not subtracted from readiness.
+Desktop asset readiness ranges 6.79–33.13 s; portrait emulation 2.56–2.98 s.
+Desktop active p95 median is 41.8 ms (39.9–1290.1), input p95 median 50.4 ms
+(48.8–1582.7); portrait medians are 33.3 ms (28.0–36.3) and 39.0 ms (34.6–49.4).
+The outliers and preserved early-input failures preclude a stable-latency claim.
+This probe changes only ignored test admission/warm-up, retaining the original
+400/45 ms key windows and ceilings. It omits root screenshots; the separate V3
+direct `3d.html` smoke supplies shared-city render evidence. Reports:
+`output/omen-intense/root-settled-final/`,
+`root-short-final/`, `native-final-fit-2/`, `native-integrated/`,
+`native-rendered-integrated/`, `ending-fit/` and
+`deformation-v2.json`. The current Pages test selection passes 230/230 and the
+Pillow delivery check preserves all six city atlases' exact RGBA pixels.
+Final V5 integration preserves upstream `839c43a`'s Merz dialogue/catalog/assets;
+five V4 frozen runtime/test hashes remain exact, and the root HTML differs only
+by its two upstream dialogue cache tokens. The root selection passes again
+(43/43), plus 19/19 Merz/official-omen/lipsync/splat checks; the unchanged office
+selection retains its V4 result. `candidate-v5.json` and `root-v5.txt`/`audio-v5.txt`
+record this source continuity without relabeling the rendered V2/V3/V4 evidence.
+Physical Android, GPU timing and perceptual listening remain NOT RUN.
 
 The office's original painted prop strip adds a file cabinet, paper tower,
 distorted clock, and noticeboard. Its source and provenance are with the cast;
@@ -80,7 +240,8 @@ runtime cost; do not reskin the entire city from an unreviewed style sheet.
 - The user-linked humor-form fax recording is an in-game-only local MP3 at `assets/fax-machine-paper-feed.mp3`. Preserve its source and checksum in `CREDITS.md`, do not claim a license that the source does not provide, and keep the synthesized Web Audio fax feed as the missing-file fallback.
 - The user-supplied opening music is one in-game-only local MP3 at `assets/intro-song.mp3`, trimmed by exactly 24 seconds at the start. It plays once before the shared background playlist. The sung pool under `assets/audio/music/sung/` follows one song after every three synthesized 8-bit arrangements. The user-supplied `assets/audio/music/wurst.mp3` interrupts that playlist once when the fifth of nine unique sausages is collected, while still obeying the music toggle and audio-text ducking. Preserve source and shipped checksums in `CREDITS.md` and `assets/audio/music/PROVENANCE.md`; do not claim external redistribution rights that have not been established.
 - Keep emotional pedestrian recordings to a small local MP3 subset with exact-text bark mappings, durable source and checksum records in `assets/voices/LICENSES.md`, and browser-speech fallback. Do not fetch the full dataset or depend on a remote audio host at runtime.
-- Merkel's nine authored lines use the user-selected `GS Merkel` profile under `assets/voices/merkel/`, including the behind-player response. Load one requested recording through the existing bounded speech cache; retain exact-text browser speech on failure. Her original Neuland and “Wir schaffen das” excerpts are retired from runtime delivery. Preserve profile, model, transcript, normalization and output hashes in `manifest.json`, with provenance in `CREDITS.md` and `assets/voices/LICENSES.md`; do not imply external redistribution rights.
+- The user-approved Aktenkurier omen adds one local 77,612-byte MP3 under `assets/voices/horst-stempelmann/`. It loads only when that exact speaker/text cue starts; mono 24 kHz decoded float audio is approximately 0.44 MiB. Native `timeupdate` advances eight stored word cues during playback, with no idle polling. The existing visit/cue owner pauses hidden playback and releases source/listeners/watchdogs on cancellation or failure. Voice-off requests no clip. Reference audio, models and the other two private auditions remain outside shipped assets; provenance and the scoped human approval are in `assets/voices/LICENSES.md` and `VOICE-SYNTH-PROTOCOL.md`.
+- Keep Merkel's user-supplied Neuland excerpt under `assets/voices/merkel/`, mapped only to its exact displayed quotation and documented in `CREDITS.md` plus `assets/voices/LICENSES.md`. It follows the same foreground normalization and proximity-broker rules as her existing “Wir schaffen das” excerpt; do not imply external redistribution rights.
 - Keep the 13 generated §-power readings and 11 rotating-rule readings under `assets/voices/laws/`, indexed directly to their fixed decks. §-power audio must use the exact displayed quotation; rotating-rule audio must read the complete displayed body while its shorthand identifier remains visual. Both retain German browser-speech fallback and record their CC0 references, local XTTS-v2 generation method, durations, and checksums in `assets/voices/LICENSES.md`. The cloning model is an offline production tool, never a runtime dependency or shipped model.
 - Keep the user-supplied Bayern and Alice recordings as local foreground MP3s under `assets/voices/bayern/` and `assets/voices/alice-weidel/`, with exact-text runtime mappings and checksums in `assets/voices/LICENSES.md`. Alice's source recordings are user-supplied satirical material, not verified quotations or factual claims. The root game loads the accepted painted Merkel, Bayern, Alice, and Merz manifests under `assets/characters/`, each with four distinct eight-phase walks, planted whole-body corners, and a shared ground pivot. Merz also retains gait-synchronized pouring actions. The archived pre-rig atlases are missing-file fallbacks. The experimental identity-matched part sheets under `assets/sprite-sources/rigs/`, biomechanical builder, audit, verification ledger, and active root atlas outputs remain available to the authoring pipeline but are not game runtime inputs until explicitly accepted. The isolated Merkel candidate under `assets/sprite-sources/candidates/merkel-21/` is also preview-only: its 20-frame playback plus exact closure audit must retain `candidate-unapproved` status, use the archived sprite for immutable identity pixels, and never become a game loader input without explicit visual acceptance. The narrower Merkel left-walk pilot under `assets/sprite-sources/candidates/merkel-cmu-left/` is likewise preview-only and `candidate-unapproved`; it may use the pinned CMU subject 69/01 capture under `assets/sprite-sources/reference/cmu-walk-69-01/` only as an offline bone-direction authority, with the CMU acknowledgment and non-resale condition preserved beside the BVH. It must remain one-direction-only until explicit visual acceptance. `sprite-preview.html` can switch among both candidates, the experimental outputs, and the exact stable game atlases without changing the game loader. The shared Three.js staging canvas remains the only game rendering path; no skeleton, BVH parser, Pillow, SciPy, or authoring dependency ships to the browser. Follow `SPRITE-GENERATION-PROTOCOL.md` for the experimental gait, grid, direction, build, overlay, and signed acceptance contracts.
 - The shared sprite rig preserves compact caricature anatomy: torso and limb plates receive the same bounded fullness correction, articulated limb lengths remain deliberately compact, directional source parts are normalized to one character-consistent scale, and every chin anchor must meet the shoulder line within eight 512-grid pixels. Merkel additionally keeps one deterministic, all-frame identity calibration measured against her archived original: broad head and jacket plates, full arms and trouser mass, compact legs, and direction-specific ground registration. Do not restore the long-necked, narrow-body composition or tune isolated runtime frames around it.
@@ -407,14 +568,20 @@ terms. It adds 274,344 transferred bytes, 3,640 triangles, one material and thre
 512 px maps (3 MiB decoded RGBA / about 4 MiB with mipmaps). The starting
 neighborhood queue prepares it before Start through the existing two-job
 admission owner. A curved procedural sausage retains the same compass behavior
-on failure. Both representations use a steady emissive red forward end and one
-64 × 64 procedural halo texture (16 KiB decoded RGBA, about 21 KiB with mipmaps),
-with real depth testing and no shadow light, bloom pass or additional download.
-The cue is uniformly enlarged 2.5 times and raised above the player's head.
-The existing render dispatch updates its bearing without a new
+on failure. The existing render dispatch updates its bearing without a new
 timer, text measurement, collision object, service or asset variant. The shared
 source/instance lives with the city renderer; office/hidden states consume no
 pointer updates. Replace this noncommercial model before commercial release.
+It is a fixed screen-space HUD object rendered after the city with the same
+WebGL renderer and a small orthographic view: 76 px on wide screens, 48 px at
+widths up to 1000 CSS px, with matching file-rail clearance. The current city
+camera projects its mission bearing into screen XY. Layout updates on resize;
+its unchanged model job uses the player's location for admission. No collision,
+extra canvas, asset variant, new animation loop or text surface is added.
+A short silent native-Chrome comparison at 1280 × 800 measured render dispatch
+p50/p95 of 14.0/21.7 ms before and 15.0/21.1 ms after this move. These
+73/72-sample live-city measurements include the HUD pass but do not establish
+physical-phone or full-mission performance.
 
 - Root `assets/models/` is the only authority for shipped model files.
 - The root game has one required WebGL presentation path. Do not preload or restore the retired SVG/Canvas world-art set. Registered moving-character PNG atlases remain the deliberate bitmap exception; DOM UI art and billboard textures are not alternate world renderers.
@@ -477,9 +644,43 @@ The Kiesinger monument carries two `CDU / AB 1948` banners flanking one dated 19
 
 ## Opt-in prop-detail studies
 
-`spark-preview.html` is a silent, opt-in rendering experiment with separate fax
-and Frau Knick anchor scenes. It compares the same procedural samples/motion in
+Paired character actions retain native painted keys. Their existing builder
+exports lossless runtime WebPs under `assets/buergeramt/animation/`, separate
+from authoring paths. Decode the initial adjacent pair sequentially inside the
+admitted actor job, without nested queue admission; the third neighboring key
+uses the same two-job queue, with one pending image per actor and
+no new hidden-page work. Evict before decoding a fourth key: at most three
+bitmaps and three corresponding GPU textures are resident per actor. A clerk
+key is 1024×832 (3.41 MB RGBA), a regular key 640×832 (2.13 MB); those costs
+exclude driver allocations. Do not eagerly upload the sixteen-key clerk set.
+Paint planes preserve the registered canvas aspect, floor, tint and alpha.
+One 32×32 plane per actor maps two neighboring native textures into the shared
+pose with 2–32 common landmarks, without rebuilding CPU geometry or adding a
+clock. Full-opacity premultiplied paint blending and bounded pair-specific UV
+deformation preserve detail through each interval. Gaussian splats add localized
+moving fringes, with protected face/ground edges; they no longer replace the
+whole body at every midpoint. Stable full-resolution keys have no added pauses.
+The shared batch sorts between the at-most-two admitted paint planes; remove
+its local transparent sorter on retirement. Full raster keys need no Spark
+sort while held. Native transition/depth and comparable frame/input checks
+remain required before publishing this fidelity change.
+
+The `workflow=arcs` route uses the paired action packs described above. The
+original `spark-preview.html` routes remain silent, opt-in rendering experiments
+with separate fax and Frau Knick anchor scenes. It compares the same procedural samples/motion in
 native Three.js points and locally pinned Spark 2.3.1, loaded only on selection.
+The document preview animates only the transparent red `ABGELEHNT` lettering
+and stamp border. Paper and printed fields use one fixed 288×384 native canvas
+texture (442,368 RGBA bytes) and an opaque depth-tested plane; neither enters
+the particle samples. The preview uses 2,193 nonzero ink-alpha samples instead
+of the previous 6,912 whole-sheet samples in the shared motion,
+and both renderer choices preserve that mask. The texture and plane dispose
+with the existing preview owner. This adds no download, dependency or clock. Fresh desktop/Android-emulated
+Spark/points captures cover the start, full dissolve and return at ±45°. Timed
+playback traces wrap the seven-second loop and hold exact time while paused;
+the paper transform and texture version stay constant. Text fit was checked at
+320 px, landscape and 200% text size. Physical Android was not tested. Evidence
+is under `output/spark-preview/stamp-only*`; the canonical game/cast are unchanged.
 The character data lives in `assets/previews/knick-splats/`: four unchanged
 original anchors plus ten generated bridge paintings with recorded prompts,
 source hashes and common-canvas registration. The 6.25-second loop includes
@@ -488,8 +689,8 @@ Seven compatible intervals transport Gaussian paint with a continuous clock;
 no intermediate key has a scheduled hold or repeated ease to zero. Weighted
 local similarity with head/collar guides replaces the global spline that tore
 neck and shoulder paint. A narrow stamp mask follows a rigid curved path.
-Crossings and grip/paper handoffs use 100 ms intact-pose intervals; no dissolve
-setting bypasses those guards. Opaque paint selection avoids translucent
+Crossings and grip/paper handoffs use 100 ms intact-pose intervals. The character
+has no whole-body scatter/dissolve mode; the fax retains its toner-cloud effect. Opaque paint selection avoids translucent
 second arms but painted-detail/proportion changes and short cuts remain visible.
 The fourteen-key binary is 11.18 MB plus a 0.56 MB ownership mask, all opt-in.
 This is not accepted gameplay animation. Reduced motion starts paused;
@@ -547,3 +748,9 @@ unchanged.
 ## Opt-in 3D street-character candidates
 
 `assets/models/street-characters/` owns eight code-authored caricatures and one direct Three.js adapter. The pack reuses the existing geometry helpers and stays behind `?streetCharacters=1`; default play does not request its modules or replace accepted sprites. The existing simulation still owns placement, collisions, dialogue, and voice. `tools/export-street-characters.mjs` can regenerate GLBs for validation, but the browser adapter uses the source geometry directly, so generated GLBs are not shipped as duplicate runtime assets. The pack remains `candidate-unapproved` pending the visual and gameplay gates in [`STREET-CHARACTERS-CHECKLIST.md`](./STREET-CHARACTERS-CHECKLIST.md).
+
+## Shared speech mouth layer (2026-10-11)
+
+`buergeramt-lips.js` owns one cue track and one lazy 425-kernel instanced native-paint patch for the currently speaking atlas actor. It borrows the actor texture and shares its registration, breathing, tint, fog and depth policy; cancellation, exit and pagehide release ownership. Whole-body Gaussian paint consumes the same continuous cue shape in its existing shader and suppresses the atlas patch. The approved omen retains its existing recording-bound Gaussian mouth. No new media or runtime dependency is needed for lips. All 15 office actor instances use this shared scene clock.
+
+Merkel’s nine exact-text recordings now use the user-selected GS Merkel profile, including the behind-player response. `assets/voices/merkel/manifest.json` owns hashes, transcripts and normalization. Clips load on speech demand through the bounded cache with browser fallback. The former two runtime excerpts are retired.

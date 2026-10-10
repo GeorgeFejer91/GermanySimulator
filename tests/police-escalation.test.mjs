@@ -2,6 +2,7 @@ import assert from "node:assert/strict";
 import {createHash} from "node:crypto";
 import {readFileSync,statSync} from "node:fs";
 import {join} from "node:path";
+import vm from "node:vm";
 
 const game=readFileSync("game.js","utf8"),world3d=readFileSync("world3d.js","utf8"),assetRoot=join("assets","models","police-response");
 const assets=[
@@ -32,4 +33,27 @@ assert.match(world3d,/function makePoliceCarSlot\(car\)/,"WebGL needs a procedur
 assert.match(world3d,/function makePoliceHelicopterSlot\(helicopter\)/,"WebGL needs a procedural helicopter fallback");
 assert.match(world3d,/window\.Germany3D=\{ready:true,isWorldPointVisible,/,"the active Three.js camera must report its padded frustum to the simulation");
 assert.doesNotMatch(world3d,/box\(\.045,\.2,1\.9,blue/,"the old floating full-length blue stripe must stay removed");
+const barks=[];
+const barkScope=vm.createContext({performance:{now:()=>10000},state:{region:"germany",wanted:0},police:[],STIMULUS_PRIORITY:{REACTIVE:2},
+ nextVariant:()=>"OTHER POLICE LINE",hasStimulusFamily:()=>false,
+ showWorldBark:(...args)=>barks.push(args),groundResponsePoint:()=>({x:0,y:0}),
+ clamp:(value,min,max)=>Math.max(min,Math.min(max,value)),syncPoliceResponse:()=>{},
+ announcePoliceResponse:()=>{},violationAlert:()=>{},toast:()=>{},updateHud:()=>{}});
+const barkPool=game.slice(game.indexOf("const policeBarks="),game.indexOf("\nconst TRAIN_ANNOUNCEMENT_AUDIO="));
+const barkFunction=game.slice(game.indexOf("function policeBark("),game.indexOf("\nfunction jaywalkerBark("));
+vm.runInContext(`${barkPool}\n${barkFunction}\nglobalThis.bark=policeBark`,barkScope);
+barkScope.bark(true,"RASENBETRETUNG IM SCHREBERGARTEN");
+assert.equal(barks.at(-1)[1],"NICHT ÜBER DEN RASEN!");
+assert.equal(barks.at(-1)[5].candidateVoiceId,"polizei-heinrich-wachtmeister");
+barkScope.state.region="berlin";
+barkScope.bark(true,"GRÜNFLÄCHENNUTZUNG OHNE ERLAUBNIS");
+assert.equal(barks.at(-1)[1],"Nicht auf ze grass, bitte!");
+barkScope.bark(true,"SPAZIERGANG OHNE VORGANG");
+assert.equal(barks.at(-1)[1],"OTHER POLICE LINE");
+const wantedFunction=game.slice(game.indexOf("function wanted("),game.indexOf("\nfunction escalate("));
+const spawnFunction=game.slice(game.indexOf("function spawnPolice("),game.indexOf("\nfunction updatePoliceResponse("));
+vm.runInContext(`${spawnFunction}\n${wantedFunction}\nglobalThis.offend=wanted`,barkScope);
+barkScope.state.region="germany";
+barkScope.offend(1,"RASENBETRETUNG IM SCHREBERGARTEN",false);
+assert.equal(barks.at(-1)[1],"NICHT ÜBER DEN RASEN!","a real grass star must call Heinrich's grass bark");
 console.log("Faster offenses and progressive police response contract OK");

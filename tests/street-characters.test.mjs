@@ -38,6 +38,9 @@ test('catalog and deterministic identity guards', () => {
   assert.throws(() => buildStreetCharacter('missing'), RangeError);
   assert.equal(characterIdFor({id: 'same', x: 0}), characterIdFor({id: 'same', x: 999}));
   assert.equal(characterIdFor({streetCharacterId: 'kehrwoche'}), 'kehrwoche');
+  assert.equal(characterIdFor({id: 'city-brigitte-mueller', voiceId: 'stadt-brigitte-mueller',
+    streetCharacterId: 'ordnungsamt'}), 'warteschlange');
+  assert.equal(characterIdFor({id: 'unmapped', voiceId: 'future-named-speaker'}), null);
 });
 for (const id of STREET_IDS) {
   const model = buildStreetCharacter(id);

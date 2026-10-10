@@ -1,0 +1,809 @@
+{
+  "version": 1,
+  "id": "formularsammler",
+  "canvas_xy": [
+    640,
+    832
+  ],
+  "source_authority": "assets/buergeramt/characters/formularsammler-detail.webp",
+  "source_sha256": "3dbf2c77665aec509456b2ecebf66ad7d43cdf8c5cfecd234fcd08a97301f84e",
+  "event_owner": "buergeramt.js dialogue gesture; work/look/flinch and walking remain existing controllers",
+  "prop_ownership": {
+    "type": "flexible_accordion_forms",
+    "owner": "anatomical_right_top_sheet_and_left_arm_stack"
+  },
+  "landmark_note": "Native 640x832 visual reading; anatomical right is screen-left. stamp_knob/base mark the top and bottom of the continuous accordion sheet chain. Common shoe baseline; source resolution classes are registered with fixed scales.",
+  "arcs": [
+    {
+      "id": "work-gesture",
+      "from": "work",
+      "to": "gesture",
+      "duration": 2.0,
+      "keys": [
+        {
+          "state": "work",
+          "time": 0
+        },
+        {
+          "state": "bridge1",
+          "time": 0.4
+        },
+        {
+          "state": "bridge2",
+          "time": 0.95
+        },
+        {
+          "state": "bridge3",
+          "time": 1.5
+        },
+        {
+          "state": "gesture",
+          "time": 2.0
+        }
+      ],
+      "reverse": "Traverse the same keys and matched Gaussian segments backwards over 2.0s, with no new paintings or holds."
+    }
+  ],
+  "states": [
+    {
+      "id": "work",
+      "role": "main",
+      "file": "assets/buergeramt/characters/formularsammler-detail.webp",
+      "crop_xywh": [
+        0,
+        0,
+        640,
+        832
+      ],
+      "landmarks": {
+        "eye_right": [
+          333,
+          113
+        ],
+        "eye_left": [
+          365,
+          113
+        ],
+        "nose": [
+          351,
+          137
+        ],
+        "chin": [
+          351,
+          169
+        ],
+        "shoulder_right": [
+          257,
+          203
+        ],
+        "elbow_right": [
+          187,
+          266
+        ],
+        "grip_right": [
+          265,
+          209
+        ],
+        "stamp_knob": [
+          298,
+          215
+        ],
+        "stamp_base": [
+          412,
+          570
+        ],
+        "shoulder_left": [
+          419,
+          212
+        ],
+        "elbow_left": [
+          448,
+          334
+        ],
+        "hand_left": [
+          378,
+          326
+        ],
+        "hip_center": [
+          348,
+          449
+        ],
+        "skirt_hem_center": [
+          350,
+          486
+        ],
+        "foot_screen_left": [
+          255,
+          768
+        ],
+        "foot_screen_right": [
+          402,
+          767
+        ]
+      },
+      "paper_polygon_xy": [
+        [
+          271,
+          198
+        ],
+        [
+          334,
+          199
+        ],
+        [
+          339,
+          225
+        ],
+        [
+          382,
+          238
+        ],
+        [
+          446,
+          210
+        ],
+        [
+          451,
+          311
+        ],
+        [
+          403,
+          335
+        ],
+        [
+          437,
+          355
+        ],
+        [
+          444,
+          576
+        ],
+        [
+          375,
+          582
+        ],
+        [
+          365,
+          392
+        ],
+        [
+          369,
+          347
+        ],
+        [
+          307,
+          292
+        ],
+        [
+          270,
+          237
+        ]
+      ],
+      "paper_landmarks_xy": [
+        [
+          294,
+          220
+        ],
+        [
+          364,
+          267
+        ],
+        [
+          405,
+          399
+        ],
+        [
+          410,
+          555
+        ]
+      ]
+    },
+    {
+      "id": "bridge1",
+      "role": "transition",
+      "file": "assets/sprite-sources/buergeramt/gaussian-arcs/formularsammler-bridge1.webp",
+      "source_file": "assets/sprite-sources/buergeramt/gaussian-arcs/formularsammler-bridge1-source.png",
+      "source_sha256": "57cbc807a9eac9700d51d429518d4134ef6cf7902a3be63af6b6f18327ba92d0",
+      "uniform_scale": 0.533,
+      "translation_xy": [
+        47,
+        23
+      ],
+      "landmarks": {
+        "eye_right": [
+          342,
+          110
+        ],
+        "eye_left": [
+          371,
+          110
+        ],
+        "nose": [
+          356,
+          132
+        ],
+        "chin": [
+          355,
+          166
+        ],
+        "shoulder_right": [
+          265,
+          180
+        ],
+        "elbow_right": [
+          207,
+          248
+        ],
+        "grip_right": [
+          285,
+          185
+        ],
+        "stamp_knob": [
+          320,
+          186
+        ],
+        "stamp_base": [
+          397,
+          566
+        ],
+        "shoulder_left": [
+          432,
+          198
+        ],
+        "elbow_left": [
+          445,
+          333
+        ],
+        "hand_left": [
+          371,
+          330
+        ],
+        "hip_center": [
+          350,
+          447
+        ],
+        "skirt_hem_center": [
+          346,
+          480
+        ],
+        "foot_screen_left": [
+          253,
+          770
+        ],
+        "foot_screen_right": [
+          409,
+          770
+        ]
+      },
+      "paper_polygon_xy": [
+        [
+          288,
+          174
+        ],
+        [
+          355,
+          180
+        ],
+        [
+          357,
+          213
+        ],
+        [
+          385,
+          225
+        ],
+        [
+          444,
+          207
+        ],
+        [
+          451,
+          312
+        ],
+        [
+          403,
+          338
+        ],
+        [
+          431,
+          355
+        ],
+        [
+          435,
+          573
+        ],
+        [
+          357,
+          579
+        ],
+        [
+          354,
+          388
+        ],
+        [
+          351,
+          339
+        ],
+        [
+          313,
+          286
+        ],
+        [
+          289,
+          241
+        ]
+      ],
+      "paper_landmarks_xy": [
+        [
+          322,
+          195
+        ],
+        [
+          371,
+          268
+        ],
+        [
+          397,
+          401
+        ],
+        [
+          399,
+          555
+        ]
+      ]
+    },
+    {
+      "id": "bridge2",
+      "role": "transition",
+      "file": "assets/sprite-sources/buergeramt/gaussian-arcs/formularsammler-bridge2.webp",
+      "source_file": "assets/sprite-sources/buergeramt/gaussian-arcs/formularsammler-bridge2-source.png",
+      "source_sha256": "a1cceea49aef9f9395b690dc3328716452f8e048f545c20f9637072674c179d7",
+      "uniform_scale": 0.533,
+      "translation_xy": [
+        55,
+        23
+      ],
+      "landmarks": {
+        "eye_right": [
+          348,
+          109
+        ],
+        "eye_left": [
+          378,
+          109
+        ],
+        "nose": [
+          365,
+          135
+        ],
+        "chin": [
+          367,
+          168
+        ],
+        "shoulder_right": [
+          275,
+          176
+        ],
+        "elbow_right": [
+          227,
+          260
+        ],
+        "grip_right": [
+          340,
+          203
+        ],
+        "stamp_knob": [
+          366,
+          204
+        ],
+        "stamp_base": [
+          432,
+          557
+        ],
+        "shoulder_left": [
+          438,
+          196
+        ],
+        "elbow_left": [
+          461,
+          328
+        ],
+        "hand_left": [
+          391,
+          326
+        ],
+        "hip_center": [
+          345,
+          448
+        ],
+        "skirt_hem_center": [
+          342,
+          475
+        ],
+        "foot_screen_left": [
+          193,
+          770
+        ],
+        "foot_screen_right": [
+          396,
+          765
+        ]
+      },
+      "paper_polygon_xy": [
+        [
+          329,
+          187
+        ],
+        [
+          400,
+          190
+        ],
+        [
+          400,
+          215
+        ],
+        [
+          420,
+          229
+        ],
+        [
+          463,
+          209
+        ],
+        [
+          466,
+          310
+        ],
+        [
+          421,
+          341
+        ],
+        [
+          451,
+          357
+        ],
+        [
+          469,
+          574
+        ],
+        [
+          389,
+          581
+        ],
+        [
+          379,
+          393
+        ],
+        [
+          380,
+          348
+        ],
+        [
+          346,
+          291
+        ],
+        [
+          328,
+          244
+        ]
+      ],
+      "paper_landmarks_xy": [
+        [
+          365,
+          214
+        ],
+        [
+          415,
+          274
+        ],
+        [
+          419,
+          406
+        ],
+        [
+          438,
+          554
+        ]
+      ]
+    },
+    {
+      "id": "bridge3",
+      "role": "transition",
+      "file": "assets/sprite-sources/buergeramt/gaussian-arcs/formularsammler-bridge3.webp",
+      "source_file": "assets/sprite-sources/buergeramt/gaussian-arcs/formularsammler-bridge3-source.png",
+      "source_sha256": "624839263f3614e6ff5dc93b4a44a01433781a1c5a50e575608c80fb630ccd9a",
+      "uniform_scale": 0.533,
+      "translation_xy": [
+        35,
+        36
+      ],
+      "landmarks": {
+        "eye_right": [
+          352,
+          139
+        ],
+        "eye_left": [
+          382,
+          139
+        ],
+        "nose": [
+          366,
+          161
+        ],
+        "chin": [
+          366,
+          188
+        ],
+        "shoulder_right": [
+          284,
+          204
+        ],
+        "elbow_right": [
+          250,
+          310
+        ],
+        "grip_right": [
+          375,
+          264
+        ],
+        "stamp_knob": [
+          400,
+          221
+        ],
+        "stamp_base": [
+          436,
+          556
+        ],
+        "shoulder_left": [
+          436,
+          217
+        ],
+        "elbow_left": [
+          446,
+          344
+        ],
+        "hand_left": [
+          372,
+          337
+        ],
+        "hip_center": [
+          346,
+          457
+        ],
+        "skirt_hem_center": [
+          335,
+          498
+        ],
+        "foot_screen_left": [
+          225,
+          771
+        ],
+        "foot_screen_right": [
+          401,
+          756
+        ]
+      },
+      "paper_polygon_xy": [
+        [
+          363,
+          207
+        ],
+        [
+          435,
+          210
+        ],
+        [
+          442,
+          242
+        ],
+        [
+          451,
+          266
+        ],
+        [
+          454,
+          319
+        ],
+        [
+          414,
+          343
+        ],
+        [
+          427,
+          363
+        ],
+        [
+          470,
+          573
+        ],
+        [
+          377,
+          582
+        ],
+        [
+          354,
+          400
+        ],
+        [
+          354,
+          342
+        ],
+        [
+          365,
+          291
+        ]
+      ],
+      "paper_landmarks_xy": [
+        [
+          401,
+          235
+        ],
+        [
+          399,
+          299
+        ],
+        [
+          397,
+          406
+        ],
+        [
+          439,
+          553
+        ]
+      ]
+    },
+    {
+      "id": "gesture",
+      "role": "terminal",
+      "file": "assets/buergeramt/characters/formularsammler-detail.webp",
+      "crop_xywh": [
+        1920,
+        0,
+        640,
+        832
+      ],
+      "landmarks": {
+        "eye_right": [
+          350,
+          116
+        ],
+        "eye_left": [
+          380,
+          116
+        ],
+        "nose": [
+          367,
+          133
+        ],
+        "chin": [
+          367,
+          166
+        ],
+        "shoulder_right": [
+          282,
+          192
+        ],
+        "elbow_right": [
+          239,
+          285
+        ],
+        "grip_right": [
+          365,
+          230
+        ],
+        "stamp_knob": [
+          406,
+          194
+        ],
+        "stamp_base": [
+          450,
+          553
+        ],
+        "shoulder_left": [
+          420,
+          199
+        ],
+        "elbow_left": [
+          442,
+          333
+        ],
+        "hand_left": [
+          368,
+          329
+        ],
+        "hip_center": [
+          340,
+          451
+        ],
+        "skirt_hem_center": [
+          327,
+          496
+        ],
+        "foot_screen_left": [
+          226,
+          768
+        ],
+        "foot_screen_right": [
+          403,
+          754
+        ]
+      },
+      "paper_polygon_xy": [
+        [
+          364,
+          183
+        ],
+        [
+          438,
+          184
+        ],
+        [
+          450,
+          218
+        ],
+        [
+          456,
+          248
+        ],
+        [
+          456,
+          319
+        ],
+        [
+          410,
+          340
+        ],
+        [
+          427,
+          363
+        ],
+        [
+          481,
+          567
+        ],
+        [
+          390,
+          577
+        ],
+        [
+          362,
+          398
+        ],
+        [
+          349,
+          336
+        ],
+        [
+          361,
+          275
+        ]
+      ],
+      "paper_landmarks_xy": [
+        [
+          404,
+          214
+        ],
+        [
+          399,
+          277
+        ],
+        [
+          403,
+          407
+        ],
+        [
+          446,
+          552
+        ]
+      ]
+    }
+  ],
+  "compatibility": "Anatomical right hand moves a top form toward the chest while the left arm keeps the long accordion stack; no detached/repeated paper segments. Matched Gaussian correspondence must be reviewed through ordered playback; no unconstrained whole-body TPS.",
+  "paper_landmark_order": [
+    "grip_top",
+    "first_bend",
+    "mid_chain",
+    "far_bottom"
+  ],
+  "paper_region_note": "Polygons bound the visible accordion chain; separate this light paper group from legs and shoe paint before matching. The four ordered points run top-to-bottom."
+}

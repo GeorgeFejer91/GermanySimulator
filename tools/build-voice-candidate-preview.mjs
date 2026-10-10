@@ -14,9 +14,9 @@ const rows=manifest.clips.filter(clip=>!clip.retiredReason).map(clip=>{
 const block=`const candidateDialogue=Object.freeze(Object.fromEntries([\n${rows.join(",\n")}\n].map(([voiceId,text,path])=>[voiceId+"\\u0000"+text,path])));\n`;
 const path=resolve(root,"For-AI/AUDIO-TEXT-LIBRARY.js");
 const source=readFileSync(path,"utf8");
-const pattern=/const candidateDialogue=Object\.freeze\(Object\.fromEntries\(\[[\s\S]*?\nfunction candidateClip/;
+const pattern=/const candidateDialogue=Object\.freeze\(Object\.fromEntries\(\[[\s\S]*?\n\]\.map\([^\n]+\n/;
 if(!pattern.test(source))throw new Error("Candidate preview block not found");
-const updated=source.replace(pattern,block+"function candidateClip");
+const updated=source.replace(pattern,block);
 if(process.argv.includes("--check")){
  if(updated!==source)throw new Error("Candidate preview lookup differs from manifest; regenerate it.");
  console.log(`Verified ${rows.length} candidate preview lookups`);

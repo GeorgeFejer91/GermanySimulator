@@ -30,12 +30,13 @@ for(const clip of audition.clips){
  assert.equal(createHash('sha256').update(source(clip.path)).digest('hex'),clip.sha256,`file ${clip.clipId}`);
 }
 const auditioned=new Set([...candidates.clips,...audition.clips].map(clip=>clip.voiceId));
-const silentPatrons=cast.roleProfiles.filter(person=>person.gameRole.startsWith('buergeramt-background-'));
-assert.equal(silentPatrons.length,3,'three distinct static patrons have provisional profiles but no spoken game text');
-for(const person of silentPatrons){
- assert.match(person.status,/audition pending/);
- assert.ok(person.dialogueSources.every(source=>source.includes('no authored dialogue')));
- assert.ok(!auditioned.has(person.voiceId),`silent patron ${person.voiceId} must not be represented by an invented game line`);
+const patrons=cast.roleProfiles.filter(person=>person.gameRole.startsWith('buergeramt-background-'));
+assert.equal(patrons.length,3,'three distinct static patrons own authored dialogue and private auditions');
+for(const person of patrons){
+ assert.match(person.status,/private audition saved/);
+ assert.match(person.status,/browser speech pending rights-cleared audio review/);
+ assert.deepEqual(person.dialogueSources,[`buergeramt-story.js patrons.${person.voiceId}.lines[0]`]);
+ assert.ok(!auditioned.has(person.voiceId),`private patron ${person.voiceId} must not be promoted into the shipped audition catalog`);
 }
-const pending=new Set(silentPatrons.map(person=>person.voiceId));
+const pending=new Set(patrons.map(person=>person.voiceId));
 for(const voiceId of owners.keys())if(!pending.has(voiceId))assert.ok(auditioned.has(voiceId),`missing audition for ${voiceId}`);

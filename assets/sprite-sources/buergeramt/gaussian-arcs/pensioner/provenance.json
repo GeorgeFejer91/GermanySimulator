@@ -1,0 +1,8 @@
+{
+  "source": "assets/buergeramt/characters/pensioner-detail.webp",
+  "source_sha256": "7235dce2b4b2c6823bf31ac22d829597998b1f2c31a0bfb244a1a28d9fa0d4c8",
+  "bridge_sheet": "assets/sprite-sources/buergeramt/gaussian-arcs/pensioner/bridge-sheet.png",
+  "bridge_sha256": "a61724f077ffd7a6e5a609e629296340756fc2bcd006e38f409aeb7ee636f57f",
+  "authoring": "OpenAI built-in imagegen edit, 2026-10-10; reference original patron source strip; transparent output",
+  "registration": "One uniform scale, original floor; parent/pensioner horizontal shoe-alpha centroid registration. Native per-key arm/face/receipt/cane controls; no deformation"
+}

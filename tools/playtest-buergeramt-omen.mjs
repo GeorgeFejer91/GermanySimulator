@@ -62,6 +62,12 @@ try{
    await page.waitForFunction(()=>window.omenTestSpeech?.text==='Wer die Finsternis sieht, hat sie selbst gewählt!',null,{timeout:2000});
    assert.equal(await page.evaluate(()=>BuergeramtLevel.omen.speech.mode),'voice');
   }else await page.waitForFunction(()=>Germany3D.amtCharacters.find(actor=>actor.name==='aktenkurier')?.detail,null,{timeout:10000});
+  await page.waitForFunction(()=>Germany3D.amtOmenSplat.visible&&Germany3D.amtOmenSplat.activeSplats>0,null,{timeout:60000});
+  const gaussianPeak=await page.evaluate(()=>({omen:Germany3D.amtOmenSplat,scene:Germany3D.amtGaussian}));
+  assert.equal(gaussianPeak.scene.failure,'');assert.equal(gaussianPeak.omen.failure,'');
+  assert.equal(gaussianPeak.scene.owner.meshes,gaussianPeak.scene.actors.filter(actor=>!actor.loading).length+2,
+    'the shared owner must include actor clouds plus the omen figure and tunnel');
+  assert(gaussianPeak.scene.actors.every(actor=>!actor.visible),'ordinary action clouds must yield during blackout');
   await page.screenshot({path:`${output}/${name}-peak.png`});
   let speechRig=null;
   if(controlledSpeech){
@@ -87,13 +93,15 @@ try{
   assert.equal(audio.length,2);assert(audio.every(item=>Math.abs(item.duration-16)<.025&&item.channels===2&&item.stop<=item.now+.04),JSON.stringify(audio));
   await page.evaluate(()=>omenStep(.3));
   const beforeWalk=await state();await page.evaluate(()=>omenStep(.6));const walked=await state();assert.equal(walked.phase,'');assert(Math.hypot(walked.x-beforeWalk.x,walked.z-beforeWalk.z)>.05);
-  assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth>innerWidth+1),false);
+  const fit=await page.evaluate(()=>({width:innerWidth,scrollWidth:document.documentElement.scrollWidth,overflow:[...document.querySelectorAll('body *')].filter(e=>{const r=e.getBoundingClientRect();return r.width&&getComputedStyle(e).display!=='none'&&r.right>innerWidth+1}).map(e=>({tag:e.tagName,id:e.id,className:String(e.className),right:e.getBoundingClientRect().right})).slice(0,12)}));
+  assert(fit.scrollWidth<=fit.width+1,JSON.stringify(fit));
   await page.locator('#amt-leave').evaluate(element=>element.click());
   assert.equal(await page.evaluate(()=>BuergeramtLevel.active),false);
   await page.waitForFunction(()=>omenAudioEvidence.contexts.every(context=>context.state==='closed'),null,{timeout:3000});
+  await page.waitForFunction(()=>Germany3D.amtGaussian.actors.length===0&&Germany3D.amtGaussian.owner===null&&!Germany3D.amtOmenSplat.visible,null,{timeout:3000});
   assert.deepEqual(errors,[]);
   const platformSpeech=controlledSpeech?null:await page.evaluate(()=>window.omenPlatformEvents||[]);
-  reports.push({name,approach,middle,peak,release,audio,speechRig,platformSpeech,errors});
+  reports.push({name,approach,middle,peak,release,gaussianPeak,audio,speechRig,platformSpeech,errors});
   fs.writeFileSync(`${output}/results-${name}.json`,JSON.stringify({silent:true,physicalDevice:false,reports},null,2));
   console.log(JSON.stringify({name,result:'PASS',decodedLoops:audio.length,errors}));
   await page.close();

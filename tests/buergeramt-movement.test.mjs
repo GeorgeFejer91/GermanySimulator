@@ -7,7 +7,7 @@ function fixture(){
  const h=harness(),steps=[];
  h.window.__acceptedOfficeStep=(id,x,z)=>steps.push({id,x,z});
  const code=source('buergeramt.js')
-  .replace('actor.x=x;actor.z=z;actor.heading=', 'window.__acceptedOfficeStep(actor.id,x,z);actor.x=x;actor.z=z;actor.heading=')
+  .replaceAll('actor.x=x;actor.z=z;actor.heading=', 'window.__acceptedOfficeStep(actor.id,x,z);actor.x=x;actor.z=z;actor.heading=')
   .replace(/\}\)\(\);\s*$/, 'window.__officeProbe={characters,view,setStage,moveOfficeCharacter,officePath};})();');
  vm.runInContext(code,h.context);
  const level=h.window.BuergeramtLevel;level.open(h.config);
@@ -29,7 +29,7 @@ const furniture=[
  ...[-4.525,4.525].map(x=>({x,z:5.55,w:6.35,d:.16})),
  ...[-5.9,-2.1,1.7,5.5].flatMap(x=>[1.7,-1.1].map(z=>({x,z,w:.9,d:.76})))
 ];
-function legal(x,z,solids,r=.32){
+function legal(x,z,solids,r=.34){
  assert.ok(Math.abs(x)+r<=7.62+1e-8&&z-r>=-10.37-1e-8&&z+r<=8.65+1e-8,'complete body stays inside the hall');
  for(const o of solids)assert.ok(Math.abs(x-o.x)>=o.w/2+r-1e-8||Math.abs(z-o.z)>=o.d/2+r-1e-8,`body overlaps ${JSON.stringify(o)} at ${x},${z}`);
 }
@@ -99,3 +99,28 @@ test('a late attached prop resolves an invalid body placement and replay stays l
  h.level.replay(h.config);
  for(const actor of h.level.characters)legal(actor.x,actor.z,[...furniture,...h.detail,prop]);
 });
+
+function isolate(h,a,b){h.probe.characters.forEach((actor,i)=>{if(actor!==a&&actor!==b)Object.assign(actor,{x:-5+(i-2)*1.1,z:7,path:[],pathGoal:''})})}
+function place(actor,x,z){Object.assign(actor,{x,z,path:[],pathGoal:'',blockedTime:0,stride:0})}
+for(const dt of [1/60,1/30,.1]){
+ for(const side of [-1,1])test(`offset opposing walkers pass and reach both goals at dt=${dt}, side=${side}`,()=>{
+  const h=fixture(),[a,b]=h.probe.characters;isolate(h,a,b);place(a,-2.5,-6.8+side*.15);place(b,2.5,-6.8-side*.15);let passAt=null;
+  for(let t=0;t<20;t+=dt){
+   h.probe.moveOfficeCharacter(a,2.5,-6.8+side*.15,.75*dt,dt);h.probe.moveOfficeCharacter(b,-2.5,-6.8-side*.15,.75*dt,dt);
+   assert.ok(Math.hypot(a.x-b.x,a.z-b.z)>=.68-1e-8);legal(a.x,a.z,[...furniture,...h.detail]);legal(b.x,b.z,[...furniture,...h.detail]);
+   if(a.x>b.x&&passAt===null)passAt=t+dt;
+  }
+  assert.ok(passAt!==null&&passAt<=5,'both sides pass within five seconds');assert.ok(a.x>2.4&&b.x< -2.4,'both original goals remain reachable');
+ });
+ test(`overtaking keeps both destinations reachable at dt=${dt}`,()=>{
+  const h=fixture(),[a,b]=h.probe.characters;isolate(h,a,b);place(a,-2.5,-6.8);place(b,-1.25,-6.8);let passAt=null;
+  for(let t=0;t<20;t+=dt){h.probe.moveOfficeCharacter(a,3.6,-6.8,.82*dt,dt);h.probe.moveOfficeCharacter(b,2.4,-6.8,.4*dt,dt);assert.ok(Math.hypot(a.x-b.x,a.z-b.z)>=.68-1e-8);if(a.x>b.x&&passAt===null)passAt=t+dt}
+  assert.ok(passAt!==null&&passAt<=5);assert.ok(a.x>3.5&&b.x>2.3,'passing leaves a clear route to both goals');
+ });
+ test(`inside L corner recovers with the favored side occupied at dt=${dt}`,()=>{
+  const h=fixture(),[a,b]=h.probe.characters,props=[{x:0,z:-6.8,w:1.4,d:.14},{x:.63,z:-6.2,w:.14,d:1.4}];
+  h.level.setOfficeObstacles([...h.detail,...props]);isolate(h,a,b);place(a,0,-6.15);place(b,-.98,-6.05);
+  for(let t=0;t<5;t+=dt){h.probe.moveOfficeCharacter(a,-1.5,-7.7,.75*dt,dt);legal(a.x,a.z,[...furniture,...h.detail,...props]);assert.ok(Math.hypot(a.x-b.x,a.z-b.z)>=.68-1e-8)}
+  assert.ok(Math.hypot(a.x,a.z+6.15)>=.68,'legal exit makes one body diameter of progress within five seconds');
+ });
+}
