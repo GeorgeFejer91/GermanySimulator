@@ -12,7 +12,7 @@
 nav{display:flex;flex-wrap:wrap;gap:10px 24px;margin-bottom:12px}nav a{display:block;line-height:1.5}.anchors{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(240px,100%),1fr));gap:12px;background:#e9e3d5;padding:12px}.anchors[hidden]{display:none}.anchors img{display:block;height:240px;width:100%;object-fit:contain;background:#66685f}.anchors figcaption{padding:8px;font-size:1rem;line-height:1.5}.anchors button{display:block;width:100%}
 </style>
 <main>
- <header><nav aria-label="Preview studies"><a href="?scene=knick&amp;renderer=spark">Frau Knick · image anchors</a><a href="?scene=fax&amp;renderer=spark">Fax · particle dissolve</a></nav><h1>Fax animation comparison</h1><p id="description">Turn a rejected form into a cloud of toner, then put it back together. Switch renderer at any point to compare the same motion.</p></header>
+ <header><nav aria-label="Preview studies"><a href="?scene=knick&amp;renderer=spark">Frau Knick · image anchors</a><a href="?scene=fax&amp;renderer=spark">Abgelehnt · stamp dissolve</a></nav><h1>Abgelehnt stamp animation</h1><p id="description">The red rejection stamp dissolves and reforms. The paper and printed form stay intact. Switch renderer to compare the same motion.</p></header>
  <section class="controls" aria-label="Animation controls">
   <button id="points" aria-pressed="true">Three.js particles</button><button id="spark" aria-pressed="false">Spark splats</button>
   <button id="play" disabled>Play cycle</button><button id="loop" aria-pressed="false">Loop off</button><button id="reload" hidden>Reload preview</button>
@@ -20,12 +20,12 @@ nav{display:flex;flex-wrap:wrap;gap:10px 24px;margin-bottom:12px}nav a{display:b
   <label><span>Animation position</span><input id="time" aria-label="Animation position" type="range" min="0" max="7" step="0.01" value="0"></label>
   <label><span>Viewing angle</span><input id="angle" aria-label="Viewing angle" type="range" min="-45" max="45" step="1" value="0"></label>
  </section>
- <figure><div id="view" role="img" aria-label="Animated rejected fax form above a municipal office desk"></div><figcaption><p id="status" role="status">Preparing the form…</p></figcaption></figure>
+ <figure><div id="view" role="img" aria-label="Animated Abgelehnt stamp on a stable form above a municipal office desk"></div><figcaption><p id="status" role="status">Preparing the form…</p></figcaption></figure>
  <section class="anchors" hidden aria-label="Fourteen painted animation poses"></section>
  <footer><p id="footnote">Three.js r186 · Spark 2.3.1 · Experimental preview. The game is unchanged.</p></footer>
 </main>
 <script type="importmap">{"imports":{"three":"https://cdn.jsdelivr.net/npm/three@0.186.0/build/three.module.js","three/addons/postprocessing/Pass.js":"https://cdn.jsdelivr.net/npm/three@0.186.0/examples/jsm/postprocessing/Pass.js","@sparkjsdev/spark":"./assets/vendor/spark/2.3.1/spark.module.js"}}</script>
 <script type="module">
- import(new URLSearchParams(location.search).get('workflow')==='arcs'?'./amt-animation-preview.js?v=20261010-liquid':'./spark-preview.js?v=20261008-cycle5').catch(error=>{document.getElementById('status').textContent='The preview could not start: '+error.message;document.getElementById('reload').hidden=false;document.getElementById('reload').onclick=()=>location.reload();console.error(error)});
+ import(new URLSearchParams(location.search).get('workflow')==='arcs'?'./amt-animation-preview.js?v=20261010-liquid':'./spark-preview.js?v=20261010-stamp-only').catch(error=>{document.getElementById('status').textContent='The preview could not start: '+error.message;document.getElementById('reload').hidden=false;document.getElementById('reload').onclick=()=>location.reload();console.error(error)});
 </script>
 </html>

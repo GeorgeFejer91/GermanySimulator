@@ -12,7 +12,7 @@ renderer.outputColorSpace=THREE.SRGBColorSpace;view.append(renderer.domElement);
 const scene=new THREE.Scene();scene.background=new THREE.Color(0x66685f);
 const camera=new THREE.PerspectiveCamera(43,1,.1,50);
 const geometry=new THREE.BufferGeometry(),samples=[];
-let count,rows,segments,slots=0,mappingData,paintData,partData,policies=[];
+let count,rows,segments,slots=0,mappingData,paintData,partData,policies=[],documentPaper=null,documentPaperTexture=null;
 if(character){
  document.querySelector('h1').textContent='Frau Knick · the complete stamp cycle';
  byId('description').textContent='A continuous clock carries fourteen painted anchors through the stamp cycle. Compatible poses keep moving; arm crossings and paperwork use brief protected handoffs.';
@@ -44,8 +44,10 @@ if(character){
   for(let c=0;c<4;c++)paintData[i*4+c]=data.getUint8(i*20+16+c);
  }
 }else{
-const sheet=document.createElement('canvas');sheet.width=144;sheet.height=192;
+// The form is a fixed native texture; only transparent red stamp ink is sampled.
+const sheet=document.createElement('canvas');sheet.width=288;sheet.height=384;
 const ctx=sheet.getContext('2d',{willReadFrequently:true});
+ctx.scale(2,2);
 ctx.fillStyle='#e6dfc7';ctx.fillRect(0,0,144,192);
 ctx.fillStyle='#34342c';ctx.font='700 11px Study';ctx.fillText('BÜRGERAMT',10,19);
 ctx.font='8px Study';ctx.fillText('Antrag auf einen weiteren Antrag',10,34);
@@ -53,16 +55,24 @@ ctx.fillRect(10,41,122,1);
 ctx.fillText('Aktenzeichen  08 / 15',10,55);
 ctx.strokeStyle='#888779';ctx.lineWidth=1;
 for(let y=68;y<170;y+=14){ctx.strokeRect(10,y,5,5);ctx.fillStyle='#888779';ctx.fillRect(23,y+1,98-(y%3)*12,2)}
-ctx.save();ctx.translate(73,111);ctx.rotate(-.18);ctx.fillStyle='#923b2e';ctx.strokeStyle='#923b2e';ctx.lineWidth=3;ctx.strokeRect(-64,-16,128,30);ctx.font='700 22px Study';ctx.textAlign='center';ctx.fillText('ABGELEHNT',0,6);ctx.restore();
-const pixels=ctx.getImageData(0,0,144,192).data;
-for(let y=0;y<192;y+=2)for(let x=0;x<144;x+=2){
- const i=(y*144+x)*4,p=new THREE.Vector3((x-71)/55,(95-y)/55,0),color=new THREE.Color().setRGB(pixels[i]/255,pixels[i+1]/255,pixels[i+2]/255,THREE.SRGBColorSpace);
- samples.push({p,target:p,color,alpha:1,group:0});
+documentPaperTexture=new THREE.CanvasTexture(sheet);documentPaperTexture.colorSpace=THREE.SRGBColorSpace;
+documentPaperTexture.generateMipmaps=false;documentPaperTexture.minFilter=THREE.LinearFilter;
+documentPaper=new THREE.Mesh(new THREE.PlaneGeometry(144/55,192/55),new THREE.MeshBasicMaterial({map:documentPaperTexture,side:THREE.DoubleSide}));
+documentPaper.position.set(0,2,-.025);scene.add(documentPaper);
+const ink=document.createElement('canvas');ink.width=288;ink.height=384;
+const stamp=ink.getContext('2d',{willReadFrequently:true});stamp.scale(2,2);
+stamp.translate(73,111);stamp.rotate(-.18);stamp.fillStyle='#923b2e';stamp.strokeStyle='#923b2e';stamp.lineWidth=3;stamp.strokeRect(-64,-16,128,30);stamp.font='700 22px Study';stamp.textAlign='center';stamp.fillText('ABGELEHNT',0,6);
+const pixels=stamp.getImageData(0,0,288,384).data;
+for(let y=0;y<192;y++)for(let x=0;x<144;x++){
+ const i=((y*2+1)*288+x*2+1)*4;if(!pixels[i+3])continue;
+ const p=new THREE.Vector3((x+.5-72)/55,(96-y-.5)/55,0),color=new THREE.Color().setRGB(pixels[i]/255,pixels[i+1]/255,pixels[i+2]/255,THREE.SRGBColorSpace);
+ samples.push({p,target:p,color,alpha:pixels[i+3]/255,group:0});
 }
  count=samples.length;rows=Math.ceil(count/256);segments=1;
  mappingData=new Float32Array(256*rows*4);paintData=new Uint8Array(256*rows*4);
- samples.forEach(({p,color},i)=>{mappingData.set([p.x,p.y,p.x,p.y],i*4);const c=color.clone().convertLinearToSRGB();paintData.set([Math.round(c.r*255),Math.round(c.g*255),Math.round(c.b*255),255],i*4)});
+ samples.forEach(({p,color,alpha},i)=>{mappingData.set([p.x,p.y,p.x,p.y],i*4);const c=color.clone().convertLinearToSRGB();paintData.set([Math.round(c.r*255),Math.round(c.g*255),Math.round(c.b*255),Math.round(alpha*255)],i*4)});
 }
+const documentInkOnly=!character&&samples.every(s=>s.alpha>0&&s.color.r>s.color.g&&s.color.r>s.color.b);
 partData??=new Uint8Array(256*rows*segments);
 const indices=new Float32Array(count*3);
 for(let i=0;i<count;i++)indices.set([i%256,Math.floor(i/256),character&&i>=slots?1:0],i*3);
@@ -136,7 +146,7 @@ function measureText(){
  }
 }
 function setStatus(text){if(lastStatus===text)return;lastStatus=text;status.textContent=text;measureText()}
-function updateStatus(){setStatus(`${mode==='points'?'Three.js particles':'Spark splats'} · ${character?cycleAt(time).label:'Fax dissolve'}${character?' · '+(transitionAt(time,policies).guarded?'Intact pose':'Splat motion'):''} · ${playing?'Playing':'Paused'}${playing&&loop?' · Loop on':''}`)}
+function updateStatus(){setStatus(`${mode==='points'?'Three.js particles':'Spark splats'} · ${character?cycleAt(time).label:'Stamp dissolve'}${character?' · '+(transitionAt(time,policies).guarded?'Intact pose':'Splat motion'):''} · ${playing?'Playing':'Paused'}${playing&&loop?' · Loop on':''}`)}
 function wake(){dirty=true;if(!raf&&!disposed&&!lost&&!document.hidden)raf=requestAnimationFrame(frame)}
 function resize(){
  const r=view.getBoundingClientRect(),scale=Math.min(1,Math.sqrt(1600000/(r.width*r.height)));
@@ -164,7 +174,7 @@ async function loadSpark(){
    ${o.gsplat}.rgba.w*=sampleFade(${i.gsplat}.center.z,${i.t},${i.phase},${i.guarded},part);`)
  }).apply({gsplat,...sparkValues,mapping:dyno.dynoSampler2D(correspondence),paint:dyno.dynoSampler2D(paint),parts:dyno.dynoSampler2D(parts)}).gsplat}));
  splat.updateGenerator();splat.position.y=character?1.86:2;
- spark=new SparkRenderer({renderer,enableLod:false,maxStdDev:Math.sqrt(7),onDirty:()=>{if(mode==='spark')wake()}});
+ spark=new SparkRenderer({renderer,enableLod:false,maxStdDev:Math.sqrt(7),...(!character?{depthTest:true,depthWrite:false}:{}),onDirty:()=>{if(mode==='spark')wake()}});
  modeStartupMs=performance.now()-start;
 }
 async function setMode(next){
@@ -236,9 +246,9 @@ document.addEventListener('visibilitychange',()=>{if(document.hidden){cancelAnim
 reducedMotion.addEventListener('change',event=>{if(event.matches)setPlaying(false)});
 renderer.domElement.addEventListener('webglcontextlost',event=>{event.preventDefault();lost=true;playing=false;cancelAnimationFrame(raf);raf=0;byId('play').disabled=true;setStatus('Graphics paused. Reload the preview to restore the scene.');byId('reload').hidden=false});
 const observer=new ResizeObserver(resize);observer.observe(view);observer.observe(document.querySelector('main'));
-function dispose(){disposed=true;cancelAnimationFrame(raf);observer.disconnect();splat?.dispose();spark?.dispose();correspondence.dispose();paint.dispose();parts.dispose();geometry.dispose();material.dispose();for(const mesh of [desk,box,...props]){mesh.geometry.dispose();mesh.material.dispose()}renderer.dispose()}
+function dispose(){disposed=true;cancelAnimationFrame(raf);observer.disconnect();splat?.dispose();spark?.dispose();correspondence.dispose();paint.dispose();parts.dispose();geometry.dispose();material.dispose();for(const mesh of [desk,box,...props,...(documentPaper?[documentPaper]:[])]){mesh.geometry.dispose();mesh.material.dispose()}documentPaperTexture?.dispose();renderer.dispose()}
 addEventListener('pagehide',event=>{if(!event.persisted)dispose()});
-window.faxStudy={setMode,setTime,setEffect,setLoop,setSpeed,play,inspect:()=>({version:'cycle5',mode,scene:character?'knick':'fax',time,duration,cycle:character?transitionAt(time,policies):null,anchorCount:character?ANCHORS.length:0,paperOnCounter:paperStack?.visible??null,playing,loop,speed,frames,count,modeStartupMs,buffer:[renderer.domElement.width,renderer.domElement.height],render:{...renderer.info.render},memory:{...renderer.info.memory},cpuTimes:[...cpuTimes],frameTimes:[...frameTimes],three:THREE.REVISION,measurement:document.documentElement.dataset.textMeasurement}),resetMetrics(){cpuTimes.length=frameTimes.length=0;lastRendered=0},async settle(){syncMotion();if(spark&&mode==='spark')await spark.update({scene,camera});wake()}};
+window.faxStudy={setMode,setTime,setEffect,setLoop,setSpeed,play,inspect:()=>({version:'cycle5',mode,scene:character?'knick':'fax',time,duration,cycle:character?transitionAt(time,policies):null,anchorCount:character?ANCHORS.length:0,paperOnCounter:paperStack?.visible??null,document:documentPaper?{effectScope:'rejection-stamp',paperVisible:documentPaper.visible,paperPosition:documentPaper.position.toArray(),paperDimensions:[144/55,192/55],textureSize:[documentPaperTexture.image.width,documentPaperTexture.image.height],textureVersion:documentPaperTexture.version,inkOnly:documentInkOnly}:null,playing,loop,speed,frames,count,modeStartupMs,buffer:[renderer.domElement.width,renderer.domElement.height],render:{...renderer.info.render},memory:{...renderer.info.memory},cpuTimes:[...cpuTimes],frameTimes:[...frameTimes],three:THREE.REVISION,measurement:document.documentElement.dataset.textMeasurement}),resetMetrics(){cpuTimes.length=frameTimes.length=0;lastRendered=0},async settle(){syncMotion();if(spark&&mode==='spark')await spark.update({scene,camera});wake()}};
 resize();setLoop(loop);updateStatus();
 if(params.get('renderer')==='spark')await setMode('spark');byId('play').disabled=false;
 if(character&&!reducedMotion.matches&&params.get('autoplay')!=='0'){pendingAutoplay=true;wake()}

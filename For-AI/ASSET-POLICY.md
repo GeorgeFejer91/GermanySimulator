@@ -465,6 +465,18 @@ The `workflow=arcs` route uses the paired action packs described above. The
 original `spark-preview.html` routes remain silent, opt-in rendering experiments
 with separate fax and Frau Knick anchor scenes. It compares the same procedural samples/motion in
 native Three.js points and locally pinned Spark 2.3.1, loaded only on selection.
+The document preview animates only the transparent red `ABGELEHNT` lettering
+and stamp border. Paper and printed fields use one fixed 288×384 native canvas
+texture (442,368 RGBA bytes) and an opaque depth-tested plane; neither enters
+the particle samples. The preview uses 2,193 nonzero ink-alpha samples instead
+of the previous 6,912 whole-sheet samples in the shared motion,
+and both renderer choices preserve that mask. The texture and plane dispose
+with the existing preview owner. This adds no download, dependency or clock. Fresh desktop/Android-emulated
+Spark/points captures cover the start, full dissolve and return at ±45°. Timed
+playback traces wrap the seven-second loop and hold exact time while paused;
+the paper transform and texture version stay constant. Text fit was checked at
+320 px, landscape and 200% text size. Physical Android was not tested. Evidence
+is under `output/spark-preview/stamp-only*`; the canonical game/cast are unchanged.
 The character data lives in `assets/previews/knick-splats/`: four unchanged
 original anchors plus ten generated bridge paintings with recorded prompts,
 source hashes and common-canvas registration. The 6.25-second loop includes
