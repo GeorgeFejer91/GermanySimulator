@@ -1,4 +1,4 @@
-import {createAmtGaussianScene} from './buergeramt-gaussian-scene.js?v=20261009-morph2';
+import {createAmtGaussianScene} from './buergeramt-gaussian-scene.js?v=20261010-liquid';
 const THREE_URL="https://cdn.jsdelivr.net/npm/three@0.186.0/build/three.module.js";
 const GLTF_LOADER_URL="https://cdn.jsdelivr.net/npm/three@0.186.0/examples/jsm/loaders/GLTFLoader.js";
 function showRendererFailure(error){
@@ -1159,8 +1159,7 @@ function showRendererFailure(error){
       const breath=Math.sin(now/1900+actor.phase*3)*.78+Math.sin(now/3300+actor.phase*5)*.22;
       actor.mesh.material.userData.breath.value=breath;
       actor.mesh.rotation.y=Math.atan2(amtCamera.position.x-actor.mesh.position.x,amtCamera.position.z-actor.mesh.position.z);
-      const stretch=1+.0025*breath;
-      actor.mesh.scale.set(1,stretch,1);actor.mesh.position.y=actor.mesh.geometry.parameters.height*stretch/2;
+      actor.mesh.scale.set(1,1,1);actor.mesh.position.y=actor.mesh.geometry.parameters.height/2;
     }
   }
   const amtNeutral=new T.Color(0xffffff),amtTone={dread:new T.Color(0xaeb3c9),warning:new T.Color(0xc7adb8),procedural:new T.Color(0xc0c8c0),relief:new T.Color(0xd6c5a5)};
@@ -1216,8 +1215,7 @@ function showRendererFailure(error){
       }
       if(distance>7){actor.walkDetail?.dispose();actor.walkDetail=null;actor.walkDirection="";actor.detail?.dispose();actor.detail=null}
       actor.mesh.material.userData.breath.value=Math.sin(now/1750+actor.height*7)*.75+Math.sin(now/2900+actor.height*11)*.25;
-      const stretch=1+.0025*actor.mesh.material.userData.breath.value;
-      actor.mesh.scale.y=stretch;actor.mesh.position.y=actor.height*stretch/2;
+      actor.mesh.scale.y=1;actor.mesh.position.y=actor.height/2;
       if(mood?.id===actor.id)actor.tone=mood.tone;
       const target=mood?.id===actor.id?Math.min(.25,.08+Math.abs(mood.valence)*.2):0;
       actor.mood+=(target-actor.mood)*(1-Math.exp(-dt/1.05));
@@ -1285,7 +1283,7 @@ function showRendererFailure(error){
       const request=new AbortController(),visit=amtOmenVisit;amtOmenRequest=request;
       const prepare=async()=>{
         if(request.signal.aborted||document.hidden||!level.active)return null;
-        const module=await import("./buergeramt-splat.js?v=20261009-morph2");
+        const module=await import("./buergeramt-splat.js?v=20261010-liquid");
         request.signal.throwIfAborted();
         return module.createOmenSplat({THREE:T,renderer,scene:amtScene,signal:request.signal,owner:await amtGaussian.getOwner()});
       };

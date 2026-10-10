@@ -53,6 +53,9 @@ test('paint keeps registered canvas aspect/floor, bounds residency and cancels l
   const mesh=[...r.members][0];assert.equal(mesh.geometry.parameters.width,1024/832);
   paint.update({segment:0,u:0,arc:'raise'},r.source,true);assert.equal(paint.inspect().opacity,1);assert.equal(mesh.position.y,r.source.position.y);assert.equal(mesh.size,1.9*1.2);assert.equal(mesh.material.depthWrite,false);
   const shader={uniforms:{},vertexShader:'#include <begin_vertex>',fragmentShader:'#include <map_fragment>'};mesh.material.onBeforeCompile(shader);
+  assert.match(shader.vertexShader,/vec2 p=mix\(endpoints.xy,endpoints.zw,u\)/,'the complete native painting still moves along paired paths');
+  assert.doesNotMatch(shader.vertexShader,/gaussianFlowWave|p\+=anchorEffect|radius=.*anchorEffect/,'no added spatial wave or pulsing patch support');
+  assert.match(shader.fragmentShader,/float mass=6\.20;/,'constant optical kernel mass preserves edge coverage');
   assert.equal(mesh.geometry.instanceCount,256);assert.equal(mesh.geometry.attributes.anchorSlot.array.length,256);
   assert.equal(shader.uniforms.anchorXY.value,paired.textures[0]);assert.equal(paint.inspect().technique,'native-texture-gaussians');
   paint.update({segment:0,u:.25,arc:'raise'},r.source,true,{speaking:true,mouthFrame:2});

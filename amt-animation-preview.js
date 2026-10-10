@@ -1,11 +1,11 @@
 import * as THREE from 'three';
-import {createAmtSplatOwner} from './buergeramt-splat.js?v=20261009-morph2';
-import {createGaussianActor,sampleArc} from './buergeramt-gaussian-animation.js?v=20261009-morph2';
+import {createAmtSplatOwner} from './buergeramt-splat.js?v=20261010-liquid';
+import {createGaussianActor,sampleArc} from './buergeramt-gaussian-animation.js?v=20261010-liquid';
 import {prepareWithSegments,measureLineStats,measureNaturalWidth} from './assets/vendor/pretext/dist/layout.js';
 const $=id=>document.getElementById(id),params=new URLSearchParams(location.search);
 const names={knick:'Frau Knick',aktenkurier:'Aktenkurier',archivbotin:'Archivbotin',formularsammler:'Formularsammler',nummernfluesterer:'Nummernflüsterer',nachtschichtmelderin:'Nachtschichtmelderin',pfandarchitektin:'Pfandarchitektin',kopiependler:'Kopiependler',warteschlangenpoetin:'Warteschlangenpoetin'};
 const character=names[params.get('scene')]?params.get('scene'):'knick',id=character==='knick'?'clerk':character;
-const manifestUrl=`./assets/buergeramt/animation/${id}.json?v=20261009-morph2`;
+const manifestUrl=`./assets/buergeramt/animation/${id}.json?v=20261010-liquid`;
 const response=await fetch(manifestUrl);if(!response.ok)throw Error('Character action is unavailable');
 const manifest=await response.json(),duration=id==='clerk'?manifest.arcs.reduce((n,a)=>n+a.duration,0):manifest.arcs[0].duration*2;
 const view=$('view'),renderer=new THREE.WebGLRenderer({antialias:false});renderer.outputColorSpace=THREE.SRGBColorSpace;view.append(renderer.domElement);

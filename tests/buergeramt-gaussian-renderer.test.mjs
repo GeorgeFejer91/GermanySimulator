@@ -125,6 +125,7 @@ test('actor uses one cloud, source floor and scale, and waits for its own comple
   assert.match(shader,/int slot=cell\.x\+cell\.y\*256;/,'slot must be captured before adding the segment texture row');
   assert.match(shader,/if\(int\(segment\)==0&&slot>=12&&slot<32\)/);
   assert.match(shader,/p=mix\(pivotA,pivotB,u\)\+vec2\(cos\(theta\)/);
+  assert.doesNotMatch(shader,/float flow=|scales\.xy\*=|\.022\*sin/,'paired transport has no added wave or enlarged trail cloud');
   assert(!shader.includes('${'),'trajectory code must be resolved before Spark compilation');
   const source={geometry:{parameters:{height:1.96}},scale:{y:1},position:new Vector3(3, .98,-4),rotation:{x:0,y:.4,z:0},quaternion:{}};
   assert.equal(actor.update({arc:'work-gesture-work',phase:.05,pose:'work'},source),false);
@@ -132,6 +133,7 @@ test('actor uses one cloud, source floor and scale, and waits for its own comple
   owner.started=1;owner.completed=1;
   assert.equal(actor.update({arc:'work-gesture-work',phase:.05,pose:'work'},source),true);
   assert.equal(actor.inspect().visible,true);
+  assert.equal(actor.inspect().cloudVisible,true,'a cloud-only actor retains its full Gaussian representation');
   assert.equal(actor.inspect().trajectoryCount,1);
   assert.deepEqual(actor.inspect().activeTrajectory,trajectory);
   source.material={color:{r:.2,g:.5,b:.9},userData:{breath:{value:.4}}};

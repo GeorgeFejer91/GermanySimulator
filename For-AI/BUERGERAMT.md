@@ -158,24 +158,26 @@ in segments 3/11. Named attachment is an explicit ownership instruction, not
 an inferred skeleton or a replacement for handoff keys. Unbound parts and
 ordinary border projection keep their existing behavior.
 
-The deliberately uncanny full-body Spark halo uses the same paired paths and
-local phase as the native texture Gaussians. The user's liquid, dissociated
-motion direction adds a spatial phase delay
-`0.085 × sin(9 × midpoint.y + 6 × midpoint.x) × sin²(πu)` to each paired path.
-Its derivative stays between 0.733 and 1.267: every part keeps moving, with
-exact endpoints and unit slope at keys. An owned prop uses one common delay
-from its pivot midpoint, rather than splitting its corners across phases.
-Native paint blending follows that local phase in premultiplied linear colour.
-A broad planted-foot wave has normalized amplitudes 0.022/0.007 and grows and
-recedes as `0.75 × sin²(πu)`; the halo's alpha is attenuated to 18% while texture
-patches are present. Both renderers share the same GLSL expressions and existing
-simulation clock. No random per-frame jitter or global opacity pulse is added.
-Every part still travels through the full transition, even
-when the halo reaches zero at a key. Keep two or three approved inbetweens
-between ordinary main poses and Knick's denser stamp/fold keys. Transition keys
-have no scheduled holds. Correspondence cannot invent an occluded hand; review
-crossing parts, turning props, and loop closure in natural playback. Speech
-keeps its existing local cue.
+Liquid motion comes from the native-image Gaussian patches transporting the
+whole painting along paired paths. A bounded spatial phase delay
+`0.085 × sin(9 × midpoint.y + 6 × midpoint.x) × sin²(πu)` lets different regions
+flow into their anchors at slightly different rates. Its derivative stays
+between 0.733 and 1.267, with exact endpoints and unit slope at keys. An owned
+prop shares one delay from its pivot midpoint, preserving its corners. Native
+paint blending follows that phase in premultiplied linear colour.
+
+The user's correction on 2026-10-10 removes positional waves, body breathing
+stretch, changing Gaussian support size and the duplicate Spark halo. Native
+texture Gaussians alone carry the complete transition at opacity one, with a
+fixed support and optical mass. The fallback Spark cloud remains available for
+cloud-only manifests or unavailable native paint, but is invisible whenever the
+native painting is displayed. There is no trail or ghost overlay, random jitter,
+extra clock or global opacity pulse. Colour breath and the existing local speech
+cue remain; the authored action and displacement-driven gait are unchanged.
+Keep two or three approved inbetweens between ordinary main poses and Knick's
+denser stamp/fold keys. Transition keys have no scheduled holds. Correspondence
+cannot invent an occluded hand; review crossing parts, turning props and loop
+closure in natural playback.
 
 The patch mesh shares the three packed-record textures already owned by its
 actor. It adds one instanced slot attribute (four bytes per slot), no new image
@@ -187,7 +189,24 @@ pending image job reside per actor. A delayed neighbor keeps the available
 painting intact as a readiness fallback. Runtime manifest cache tags and the
 record content hash bind newly rebuilt data without a stale length mismatch.
 
-Liquid full-morph natural autoplay covers all nine loop seams: 913 displayed
+The 2026-10-10 liquid-only correction passes 182 shipping regression checks
+and fresh production desktop, Android-emulated and reduced-motion profiles.
+Those traces verify constant authored height, grounded registration, full
+four-second action/return continuity, displacement-driven gait, replay/close
+and the two/one actor limits. Independent P5 and C4/X1 bind the same frozen
+31-file candidate. C4 recorded all nine actual autoplay wraps (1,436 displayed
+frames), plus Knick/Aktenkurier desktop and mobile-emulated ±45° key/midpoint
+views: crisp keys, no separate positional wave or duplicate cloud trail,
+and retained paper contact. The portable method passes twenty Node tests and
+an eighteen-sample native Spark 2.3.1/Three r186 smoke, including cloud-hidden
+and paint-opacity-one assertions. Evidence is under `liquid-only-dynamic/`,
+`liquid-only-camera-review/`, `liquid-only-physics-review/` and
+`portable-native-liquid-only-result.json` in `output/amt-gaussian-arcs/`.
+Physical Android and fresh forced overlapping depth pixels were not tested;
+the compositor/data are unchanged and earlier depth checks are carried.
+These are local browser and source checks, not a new performance benchmark.
+
+The previous wave/halo candidate’s liquid full-morph natural autoplay covered all nine loop seams: 913 displayed
 frames and 2,354 sampled states across the unchanged eight actors and repaired
 Knick loop. Fresh Knick coverage includes 193 frames through the actual 9.1 s
 wrap and 136 dense desktop/mobile-angle captures around paper birth and
@@ -307,4 +326,4 @@ An already active city train announcement finishes before office speech. The opt
 
 Office patrols and the authored Aktenkurier approach/retreat share body-clear routing and swept collision against the visible hall, furniture and attached detail props. People use circular separation in both planning and movement; gait advances only with accepted displacement. Obstructed actors hold a planted action and retry a legal detour. The entrance-side patrols stay clear of the facade wings and rope supports.
 
-All fourteen office figures face the actual viewer with a planted floor pivot. Ordinary walking views follow travel relative to that viewer; the authored omen front/turn/retreat views keep their story ownership. The existing staggered, subtle breathing stretch and colour breath apply at every detail level, during dialogue and to painted/Gaussian replacements. Hidden simulation retains its existing pause policy.
+All fourteen office figures face the actual viewer with a planted floor pivot. Ordinary walking views follow travel relative to that viewer; the authored omen front/turn/retreat views keep their story ownership. The existing staggered colour breath applies at every detail level, during dialogue and to painted/Gaussian replacements. Body height remains fixed; only authored poses and accepted movement change its shape. Hidden simulation retains its existing pause policy.

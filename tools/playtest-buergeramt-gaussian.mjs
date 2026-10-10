@@ -124,7 +124,10 @@ function assertPlanted(sample,id){
   assert(Math.abs(transform.x-sample.state.x)<1e-4&&Math.abs(transform.z-sample.state.z)<1e-4,
     `${id} Gaussian and painted source have different world XZ`);
   assert(Math.abs(transform.y-(sample.anchorTransform?transform.scale/2:0))<1e-4,`${id} root must remain on the source floor`);
-  const expected=heights[id]*(sample.painted.detail?1+.0025*sample.painted.breath:1);
+  const expected=heights[id];
+  assert.equal(sample.painted.height,expected,'office figures keep a constant authored height');
+  const native=sample.gaussian.actors.find(actor=>actor.id===id);
+  if(native?.anchor?.visible){assert.equal(native.cloudVisible,false,'native Gaussian morph must not acquire an extra trail cloud');assert.equal(native.anchor.opacity,1)}
   assert(Math.abs(transform.scale-expected)<.005,`${id} height must follow source plane scale`);
 }
 async function runCase(item){

@@ -1,5 +1,5 @@
 // One registered Gaussian cloud per actor. The simulation supplies all action time.
-import {anchorBlend,createPaintedAnchor,gaussianFlowGlsl} from './buergeramt-painted-anchor.js?v=20261009-morph2';
+import {createPaintedAnchor,gaussianFlowGlsl} from './buergeramt-painted-anchor.js?v=20261010-liquid';
 const clamp=value=>Math.max(0,Math.min(1,Number.isFinite(value)?value:0));
 const RECORD_BYTES=24,TEXTURE_WIDTH=256,MAX_SAMPLES=20000,MAX_SEGMENTS=32;
 
@@ -171,11 +171,6 @@ export async function createGaussianActor({THREE,owner,manifestUrl,variant='desk
         vec2 face=(p-${i.mouthCenter})/vec2(.085,.055);
         float lip=exp(-dot(face,face)*3.5)*${i.mouth};
         p.y-=lip*.0025;
-        // Both native texture splats and Spark move the entire paired cloud.
-        float planted=smoothstep(.025,.11,p.y);
-        float flow=${i.strength}*planted*${i.painted};
-        p+=flow*${gaussianFlowGlsl.wave('p','phase')};
-        ${o.gsplat}.scales.xy*=1.+flow*.45;
         ${o.gsplat}.center=vec3(p,0.);
         vec3 linearA=mix(paintA.rgb/12.92,pow((paintA.rgb+.055)/1.055,vec3(2.4)),step(vec3(.04045),paintA.rgb));
         vec3 linearB=mix(paintB.rgb/12.92,pow((paintB.rgb+.055)/1.055,vec3(2.4)),step(vec3(.04045),paintB.rgb));
@@ -189,7 +184,7 @@ export async function createGaussianActor({THREE,owner,manifestUrl,variant='desk
         vec3 srgb=mix(linear*12.92,1.055*pow(max(linear,vec3(0.)),vec3(1./2.4))-.055,step(vec3(.0031308),linear));
         // Spark decodes Gsplat RGB as sRGB during rendering.
         ${o.gsplat}.rgba=vec4(srgb,alpha);
-        ${o.gsplat}.rgba.a*=${i.strength}*mix(1.,.18,${i.painted});
+        ${o.gsplat}.rgba.a*=${i.strength};
       `),
     }).apply({gsplat,segment,blend,strength,painted,mouth,mouthCenter,tint,breath,xy:dyno.dynoSampler2D(textures[0]),start:dyno.dynoSampler2D(textures[1]),end:dyno.dynoSampler2D(textures[2])}).gsplat}));
     mesh=new SplatMesh({maxSplats:data.count,lod:false,enableLod:false,editable:false,raycastable:false,
@@ -215,7 +210,9 @@ export async function createGaussianActor({THREE,owner,manifestUrl,variant='desk
           if(!(height>0)||!(sourceMesh.scale?.y>0))throw new Error('Gaussian source height unavailable');
           const anchorOpacity=paint?.update(sample,sourceMesh,true,{...state,reducedMotion})??0;
           painted.value=anchorOpacity>0?1:0;
-          strength.value=anchorOpacity>0?(reducedMotion?0:.75*anchorBlend(manifest,sample).effect):1;
+          // Native Gaussian patches carry the complete morph. A second cloud
+          // would duplicate its silhouette as a soft halo or ghost trail.
+          strength.value=anchorOpacity>0?0:1;
           const color=sourceMesh.material?.color,paintBreath=sourceMesh.material?.userData?.breath?.value??0;
           const key=[sample.segment,sample.u,anchorOpacity,state.speaking,state.mouthFrame,reducedMotion,sourceMesh.position.x,sourceMesh.position.y,sourceMesh.position.z,sourceMesh.scale.y,sourceMesh.rotation.x,sourceMesh.rotation.y,sourceMesh.rotation.z,color?.r,color?.g,color?.b,paintBreath].join(':');
           if(key!==lastKey){
@@ -240,7 +237,7 @@ export async function createGaussianActor({THREE,owner,manifestUrl,variant='desk
           return api.inspect().visible;
         }catch(error){failure=error.message||String(error);mesh.visible=false;paint?.update(null,sourceMesh,false);return false}
       },
-      inspect(){const status=owner.inspect(),anchor=paint?.inspect()??null;return{ready:!disposed&&!failure&&status.ready,visible:!disposed&&!failure&&status.ready&&(anchor?.visible||mesh.visible&&readyAfterSort!==null&&status.completedUpdates>=readyAfterSort&&status.activeSplats>0),pending:status.pending,failure:failure||status.failure,variant,id:manifest.id,count:data.count,segmentCount:data.segments,bytes:selected.decoded_bytes,segment:segment.value,blend:blend.value,effect:strength.value,anchor,trajectoryCount:selected.trajectories?.length??0,activeTrajectory:selected.trajectories?.find(item=>item.segment===segment.value)??null}},
+      inspect(){const status=owner.inspect(),anchor=paint?.inspect()??null;return{ready:!disposed&&!failure&&status.ready,visible:!disposed&&!failure&&status.ready&&(anchor?.visible||mesh.visible&&readyAfterSort!==null&&status.completedUpdates>=readyAfterSort&&status.activeSplats>0),cloudVisible:!disposed&&mesh.visible,pending:status.pending,failure:failure||status.failure,variant,id:manifest.id,count:data.count,segmentCount:data.segments,bytes:selected.decoded_bytes,segment:segment.value,blend:blend.value,effect:strength.value,anchor,trajectoryCount:selected.trajectories?.length??0,activeTrajectory:selected.trajectories?.find(item=>item.segment===segment.value)??null}},
       settle:async()=>{await paint?.settle()},
       dispose(){if(disposed)return;disposed=true;signal?.removeEventListener?.('abort',onAbort);paint?.dispose();owner.retire(mesh,releaseTextures)},
     };
