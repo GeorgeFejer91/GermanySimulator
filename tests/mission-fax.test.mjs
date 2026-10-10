@@ -16,6 +16,7 @@ function hud({reduced=true,audioRate=1}={}){
  const ctx={createImageData:(w,h)=>({data:new Uint8ClampedArray(w*h*4)}),putImageData(){},clearRect(){},drawImage(){},fillRect(){}};
  const state={started:true,busy:false,lang:'de',energy:100},document={hidden:false,activeElement:null,getElementById:node,createElement:()=>({getContext:()=>ctx,toDataURL(){maskFrames++;return'data:image/png;base64,mask'}}),createComment:()=>node('comment-'+ ++serial),querySelector:()=>node('dock'),querySelectorAll:()=>[],body:node('body'),documentElement:node('html'),fonts:{ready:{then(){}}},addEventListener:(name,fn)=>events.set(name,fn)};
  node('germanness-hud').parentElement=node('city-status');node('mission-title').textContent='ANMELDUNG I';node('mission-text').textContent='Zum Bürgeramt gehen.';
+ node('file-close').parentElement=node('case-file.file-header');node('subtitle-toggle').parentElement=node('app');node('english-subtitle').parentElement=node('app');
  const context=vm.createContext({document,window:{Germany3DBridge:{getHUDState:()=>state,clearInput(){},playFaxTransition(){feeds++;const start=now;return{duration:1.08,elapsed:()=>(now-start)/1000*audioRate,cancel(){cancellations++}}}}},performance:{now:()=>now},setTimeout:later,clearTimeout:id=>tasks.delete(id),requestAnimationFrame:fn=>later(()=>fn(now),16),cancelAnimationFrame:id=>tasks.delete(id),matchMedia:()=>({matches:reduced}),CSS:{supports:()=>true},MutationObserver:class{observe(){}},ResizeObserver:class{observe(){}},getComputedStyle:()=>({zoom:'1',getPropertyValue:()=>0}),innerWidth:1280,innerHeight:800,addEventListener:(name,fn)=>events.set(name,fn)});
  vm.runInContext(source,context);
  function advance(ms){const end=now+ms;for(let count=0;count<10000;count++){const next=[...tasks].filter(([,t])=>t.at<=end).sort((a,b)=>a[1].at-b[1].at)[0];if(!next){now=end;return}tasks.delete(next[0]);now=next[1].at;next[1].fn()}throw Error('unbounded timer work')}
@@ -63,6 +64,16 @@ test('enlarged file anchors trigger whole-document reading and recover when spac
  const h=hud();h.node('file-toggle').onclick();assert.equal(h.node('case-file').dataset.layout,'bounded');
  h.node('case-file.file-header').rect.height=330;h.node('case-file.file-tabs').rect.height=210;h.refresh();assert.equal(h.node('case-file').dataset.layout,'scroll');
  h.node('case-file').clientHeight=900;h.refresh();assert.equal(h.node('case-file').dataset.layout,'bounded');
+});
+
+test('the same subtitle control and rail enter the native modal and return on close',()=>{
+ const h=hud();h.node('file-toggle').onclick();
+ assert.equal(h.node('subtitle-toggle').parentElement.id,'case-file.file-header');
+ assert.equal(h.node('english-subtitle').parentElement.id,'case-file');
+ h.node('file-close').onclick();
+ assert.equal(h.node('subtitle-toggle').parentElement.id,'app');
+ assert.equal(h.node('english-subtitle').parentElement.id,'app');
+ assert.equal(h.state.started,true);
 });
 
 test('fax sound supplies its audio clock, effects bus and cancellation for all scheduled sources',()=>{

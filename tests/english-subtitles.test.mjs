@@ -95,6 +95,39 @@ assert.match(game,/const time=item\.subtitleElapsed\?\.\(\)\?\?elapsed[\s\S]*req
 assert.match(game,/function finishStimulus\([^)]*\)\{[^}]*clearSubtitle\(\)/,"broker completion must clear subtitles");
 assert.match(game,/function stopSpeech\([^)]*\)[\s\S]*clearSubtitle\(\)/,"broker cancellation must clear subtitles");
 assert.match(game,/localStorage\.setItem\("germany-simulator-english-subtitles"/,"subtitle preference must persist locally");
+// Exercise the shipped preference handler, including its OFF -> ON audio trigger.
+function subtitlePreference(saved){
+ const button={textContent:'',attributes:{},setAttribute(name,value){this.attributes[name]=value}},requests=[],storage=new Map(saved===undefined?[]:[['germany-simulator-english-subtitles',saved]]);
+ let clears=0,pending=false;
+ const scope={state:{subtitlesOn:false},document:{getElementById:()=>button},localStorage:{getItem:key=>storage.get(key),setItem:(key,value)=>storage.set(key,value)},activeStimulus:null,hasStimulusFamily:()=>pending,clearSubtitle:()=>clears++,startSubtitle(){},STIMULUS_PRIORITY:{CRITICAL:3},showWorldBark:(speaker,text,urgent,recording,placement,options)=>requests.push({speaker,text,options})};
+ const start=game.indexOf('const SUBTITLE_APPROVAL_LINES='),end=game.indexOf('\nwindow.addEventListener("resize"',start);
+ vm.runInNewContext(game.slice(start,end),scope);
+ return {button,requests,storage,set pending(value){pending=value},get clears(){return clears}};
+}
+const preference=subtitlePreference();
+assert.equal(preference.button.attributes['aria-pressed'],'false','fresh preferences default OFF');
+assert.equal(preference.requests.length,0,'loading the game must not chastise the player');
+preference.button.onclick();
+assert.equal(preference.button.attributes['aria-pressed'],'true');
+assert.equal(preference.storage.get('germany-simulator-english-subtitles'),'on');
+assert.equal(preference.requests.length,3,'enabling queues all three authored chastising lines');
+assert.ok(preference.requests.every(request=>request.speaker==='UNTERTITELSTELLE'&&request.options.voiceKey==='SUBTITLE AUTHORITY'&&request.options.family==='subtitle-approval'&&request.options.isEligible()));
+preference.button.onclick();
+assert.equal(preference.clears,1);assert.equal(preference.requests.length,3);
+assert.ok(preference.requests.every(request=>!request.options.isEligible()),'disable removes queued approval eligibility');
+preference.button.onclick();assert.equal(preference.requests.length,6,'a later enable triggers the cue again');
+preference.pending=true;preference.button.onclick();preference.button.onclick();assert.equal(preference.requests.length,6,'an in-flight approval must not stack duplicate speech');
+const restored=subtitlePreference('on');assert.equal(restored.button.attributes['aria-pressed'],'true');assert.equal(restored.requests.length,0,'restoring an opt-in is not a new enable action');
+// The final line releases its item before the broker releases foreground ownership.
+// Office admission must wait through that required completion gap as well.
+const finalLine={family:'subtitle-approval'},timers=[];
+const admission={activeStimulus:finalLine,stimulusQueue:[],activeAudioText:{owner:'subtitle-approval'},stimulusGeneration:1,stimulusTimer:0,recordedSpeechSource:null,recordedSpeechGain:null,clearSubtitle(){},clearTimeout(){},setTimeout(callback,delay){timers.push({callback,delay});return 1},AUDIO_MIX:{REQUIRED_GAP_MS:250},setAudioText(){admission.activeAudioText=null},stimulusEligible:()=>true};
+for(const name of ['audioTextActive','stimulusBusy','finishStimulus'])vm.runInNewContext(game.match(new RegExp(`function ${name}\\([^\\n]+`))[0],admission);
+assert.equal(admission.stimulusBusy(),true);
+admission.finishStimulus(finalLine,1);
+assert.equal(admission.activeStimulus,null);assert.equal(admission.stimulusQueue.length,0);
+assert.equal(timers[0].delay,250);assert.equal(admission.stimulusBusy(),true,'city retains admission during the final gap');
+timers[0].callback();assert.equal(admission.stimulusBusy(),false,'office admission resumes after the gap');
 assert.deepEqual(["Englische Untertitel sind äußerst wichtig, insbesondere wenn Sie Deutsch lernen möchten.","Aufgrund Ihres bemerkenswerten Lerneifers wird die Verwendung von Untertiteln hiermit genehmigt.","Wir gratulieren Ihnen zu dieser verwaltungstechnisch ausgezeichneten Entscheidung."].map(text=>library.lines[text]),["English subtitles are extremely important, especially when you want to learn German.","In recognition of your remarkable eagerness to learn, the use of subtitles is hereby approved.","We congratulate you on this administratively excellent decision."]);
 assert.match(game,/if\(!hasStimulusFamily\("subtitle-approval"\)\)for\(const text of SUBTITLE_APPROVAL_LINES\)showWorldBark\("UNTERTITELSTELLE",text/ ,"subtitle approval must show the exact spoken line");
 assert.match(game,/subtitleAuthority=\/\^SUBTITLE AUTHORITY\/[\s\S]*u\.rate=subtitleAuthority\?\.72[\s\S]*u\.pitch=subtitleAuthority\?\.55/,"subtitle approval needs a deterministic low, measured robotic delivery");

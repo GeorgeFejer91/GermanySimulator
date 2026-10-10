@@ -2,6 +2,21 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import {harness} from './amt-harness.mjs';
 
+test('office speech owns admission until completion, with no busy voice-off fallback',()=>{
+ const h=harness('host',{voice:true});h.counter();assert.equal(h.level.audioTextBusy,true,'office voice must block city approval admission');
+ h.synth.end();assert.equal(h.level.audioTextBusy,false);
+ const silent=harness('host',{voice:false});silent.counter();assert.equal(silent.level.audioTextBusy,false);
+});
+
+test('pending city approval gates office speech and office exit cannot cancel its active voice',()=>{
+ let pending=true,active=false;
+ const h=harness('host',{voice:true,cityAudioBusy:()=>pending});h.config.cityAudioActive=()=>active;
+ h.counter();h.tick(80);assert.equal(h.synth.spoken.length,0);assert.equal(h.level.audioTextBusy,false);
+ active=true;h.synth.speak({text:'Englische Untertitel sind äußerst wichtig.'});const cancellations=h.synth.cancelCount;
+ h.node('amt-leave').click();assert.equal(h.synth.cancelCount,cancellations);assert.equal(h.synth.current.text,'Englische Untertitel sind äußerst wichtig.');
+ pending=false;
+});
+
 test('walking through the open doorway continues into the room',()=>{
  const h=harness();h.key('KeyW');h.advanceGame(1.5);h.key('KeyW','keyup');
  assert.equal(h.level.stage,'walk-sign');assert.ok(h.level.view.z<5.55);
