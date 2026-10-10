@@ -266,6 +266,10 @@ const lines=Object.freeze({
  "Berlin liegt hinter der Brandmauer. Welcome back. Denglisch ist wieder erlaubt.":"Berlin is behind the Brandmauer. Welcome back. Denglisch is allowed again.",
  "Das Rote Rathaus zu stürmen? Das muss ein Ende haben.":"Storming the Red City Hall? This must come to an end.",
  "Mein Großvater war kein Nationalsozialist, sondern eine beeindruckende Persönlichkeit und ein erfolgreicher Bürgermeister.":"My grandfather was not a National Socialist, but an impressive personality and a successful mayor.",
+ "Ich habe gar nichts zurückzunehmen.":"I have absolutely nothing to retract.",
+ "Ich unterstreiche es noch einmal: Wir müssen daran etwas ändern.":"I emphasize it again: We must change something about it.",
+ "… aber wir haben natürlich immer im Stadtbild noch dieses Problem …":"… but of course we still have this problem in the cityscape …",
+ "Die perfideste Form der Ausländerfeindlichkeit ist Antisemitismus.":"The most insidious form of xenophobia is antisemitism.",
  "Links ist vorbei.":"The left is finished.",
  "Es gibt keine linke Mehrheit und keine linke Politik mehr in Deutschland.":"There is no left-wing majority and no more left-wing politics in Germany.",
  "… aber nicht für irgendwelche Grünen und linken Spinner auf dieser Welt.":"… but not for any Greens and left-wing nutcases in this world.",
@@ -398,6 +402,10 @@ const feverRecordings=Object.freeze({"./assets/voices/amt-fever/amt-horst-stempe
 const recordings=Object.freeze({
  "./assets/voices/merz/merz-rotes-rathaus.mp3":Object.freeze({id:"merz-rotes-rathaus",voiceId:"merz",trigger:"politician:merz proximity or direct interaction",source:"Das Rote Rathaus zu stürmen? Das muss ein Ende haben.",english:"Storming the Red City Hall? This must come to an end."}),
  "./assets/voices/merz/merz-grossvater.mp3":Object.freeze({id:"merz-grossvater",voiceId:"merz",trigger:"politician:merz proximity or direct interaction",source:"Mein Großvater war kein Nationalsozialist, sondern eine beeindruckende Persönlichkeit und ein erfolgreicher Bürgermeister.",english:"My grandfather was not a National Socialist, but an impressive personality and a successful mayor."}),
+ "./assets/voices/merz/merz-nichts-zurueckzunehmen.mp3":Object.freeze({"id":"merz-nichts-zurueckzunehmen","voiceId":"merz","trigger":"politician:merz proximity or direct interaction","source":"Ich habe gar nichts zurückzunehmen.","english":"I have absolutely nothing to retract.","provenanceManifest":"assets/voices/merz/manifest.json"}),
+ "./assets/voices/merz/merz-unterstreiche.mp3":Object.freeze({"id":"merz-unterstreiche","voiceId":"merz","trigger":"politician:merz proximity or direct interaction","source":"Ich unterstreiche es noch einmal: Wir müssen daran etwas ändern.","english":"I emphasize it again: We must change something about it.","provenanceManifest":"assets/voices/merz/manifest.json"}),
+ "./assets/voices/merz/merz-stadtbild.mp3":Object.freeze({"id":"merz-stadtbild","voiceId":"merz","trigger":"politician:merz proximity or direct interaction","source":"… aber wir haben natürlich immer im Stadtbild noch dieses Problem …","english":"… but of course we still have this problem in the cityscape …","provenanceManifest":"assets/voices/merz/manifest.json"}),
+ "./assets/voices/merz/merz-antisemitismus.mp3":Object.freeze({"id":"merz-antisemitismus","voiceId":"merz","trigger":"politician:merz proximity or direct interaction","source":"Die perfideste Form der Ausländerfeindlichkeit ist Antisemitismus.","english":"The most insidious form of xenophobia is antisemitism.","provenanceManifest":"assets/voices/merz/manifest.json"}),
  "./assets/voices/merz/merz-links-vorbei.mp3":Object.freeze({"id":"merz-links-vorbei","voiceId":"merz","trigger":"politician:merz proximity or direct interaction","source":"Links ist vorbei.","english":"The left is finished.","provenanceManifest":"assets/voices/merz/manifest.json"}),
  "./assets/voices/merz/merz-keine-linke-politik.mp3":Object.freeze({"id":"merz-keine-linke-politik","voiceId":"merz","trigger":"politician:merz proximity or direct interaction","source":"Es gibt keine linke Mehrheit und keine linke Politik mehr in Deutschland.","english":"There is no left-wing majority and no more left-wing politics in Germany.","provenanceManifest":"assets/voices/merz/manifest.json"}),
  "./assets/voices/merz/merz-gruene-linke-spinner.mp3":Object.freeze({"id":"merz-gruene-linke-spinner","voiceId":"merz","trigger":"politician:merz proximity or direct interaction","source":"… aber nicht für irgendwelche Grünen und linken Spinner auf dieser Welt.","english":"… but not for any Greens and left-wing nutcases in this world.","provenanceManifest":"assets/voices/merz/manifest.json"}),
@@ -834,7 +842,7 @@ function candidateSequence(voiceId,segments){if(!voiceId||!Array.isArray(segment
 
 
 window.GermanySimulatorAudioText=Object.freeze({
- version:6,
+ version:7,
  method:"Known clips use authored/source transcripts; the five station recordings were transcribed and English-segmented locally with OpenAI Whisper small on 2026-09-21, then manually corrected against filenames and audible context.",
  exclusions:Object.freeze(["background-music","sound-effect"]),
  pools,

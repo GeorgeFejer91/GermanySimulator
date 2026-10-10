@@ -10,12 +10,12 @@ const catalog=context.window.GermanySimulatorAudioText,manifest=JSON.parse(readF
 const lines=JSON.parse(game.match(/const merzLines=Object.freeze\((\[.*?\])\);/)[1]);
 assert.deepEqual(manifest.clips.map(clip=>clip.text),lines,"all authored Merz lines need their own generated recording");
 const quotations=manifest.clips.filter(clip=>clip.quotation);
-assert.equal(quotations.length,5,"the five added original quotations need source receipts");
+assert.equal(quotations.length,9,"all added original quotations need source receipts");
 for(const clip of quotations){
  assert.match(clip.quotation.date,/^\d{4}-\d{2}-\d{2}$/);
  assert.match(clip.quotation.source,/^https:\/\//);
  assert.ok(clip.quotation.event&&clip.quotation.context);
- if(clip.quotation.kind.startsWith("verbatim closing clause"))assert.ok(clip.text.startsWith("… "),"a shortened clause must visibly mark the omission");
+ if(clip.quotation.kind.includes("clause"))assert.ok(clip.text.startsWith("… "),"a shortened clause must visibly mark the omission");
 }
 for(const item of manifest.clips){
  const clip=catalog.clips[item.clipId],bytes=readFileSync(new URL(item.path,root));
