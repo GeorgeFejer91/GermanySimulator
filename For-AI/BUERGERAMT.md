@@ -54,10 +54,20 @@ Optional actor conversations pause the queue and never change ticket ownership o
 `buergeramt.js` owns routes, interaction range, work pauses, queue-call reactions, dialogue state, the Aktenkurier beat, Frau Knick's speaking/action row, and the active `{id,tone,valence}`. Moving regulars leave a small walking gap around the player; their gait clock advances by distance walked, and a high-priority story action preempts a routine work loop. Speaking eases the first-person view toward the owning actor. `world3d.js` draws that state: four directional walk rows, work/gesture/look/flinch rows, body-facing billboards, a six-row desk performance for Frau Knick (including lip movement while she speaks), an eased material tint, and the in-world blackout spotlight. The tone target is bounded to a subtle fraction of the paint; it changes only for the actor who owns the currently visible line. Ending the line eases back to the original colors. The room's code geometry and existing stationary painted cast stay in place. The office presents exact speech as plain in-scene captions over the visible room, beginning on actual speech start or its guarded readable fallback. The hidden legacy sheet retains cue ownership only; no dialogue panel or action button is displayed. Walking controls and the direct restart link hide during a sequence and return afterward. The small `TON` disclosure and shared English subtitle toggle remain available.
 
 The `omen` visual beat unfolds the Aktenkurier's registered frontal gesture into a
-small Gaussian sculpture while he approaches. He faces the player throughout;
+pronounced Gaussian sculpture while he approaches. He faces the player throughout;
 local +Z expands toward the viewer without a sideways turn. Distance progress
 drives the reveal: smoothstep over strength 0.05–1 for depth. The legacy
 opacity window selects representation ownership; the body itself stays opaque.
+The upper-body relief expands up to 3.4 times its authored depth, with 12% coherent
+width expansion: the face, stamping hand and carried files visibly project toward
+the player. The lip rig receives the same deformation after articulation. A
+directional light field emphasizes the cheek and coat curvature without hiding
+the painting. A broad coat billow and a small forward surge follow the existing
+score pulse; face and rigid files retain their registered relationships. The
+foot baseline and actor/camera transforms do not change. Reduced motion retains
+the strong static volume and lighting while disabling the decorative billow/surge.
+The view's horizontal field limits the gain on narrow screens (about 2.45 at
+390×844), preserving room around both sleeves and the files without moving the camera.
 The Gaussian body takes ownership only after its own visible-body sort completes.
 At the handoff the sprite holds the registered gesture; this deliberately
 statuesque, supernatural approach is a translated relief, not an articulated walk.

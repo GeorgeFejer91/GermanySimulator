@@ -4,6 +4,14 @@ const clamp=value=>Math.max(0,Math.min(1,value));
 const TUNNEL_RINGS=32,TUNNEL_AROUND=96;
 const MOUTH_SPLATS=96;
 
+export function omenReliefGain(camera={}){
+  // Keep the projecting sleeve/prop inside narrow views. Progress, support and
+  // the lip rig remain shared; only the final amount of relief is fitted.
+  const aspect=Number.isFinite(camera.aspect)?Math.max(.1,camera.aspect):1;
+  const fov=Number.isFinite(camera.fov)?Math.max(20,Math.min(120,camera.fov)):69;
+  return Math.max(1,Math.min(3.4,5.3*aspect*Math.tan(fov*Math.PI/360)/Math.tan(69*Math.PI/360)));
+}
+
 export function omenSplatPose(omen,reducedMotion=false){
   const live=['approach','blackout','glare','unwind'].includes(omen.phase),life=omen.life||{};
   const reveal=live?clamp(life.depth||0):0;
@@ -110,11 +118,12 @@ export async function createOmenSplat({THREE,renderer,scene,signal,owner:sharedO
     signal?.throwIfAborted();
   }catch(error){if(!sharedOwner)await owner.dispose();throw error}
   const depth=dyno.dynoFloat(0),clock=dyno.dynoFloat(0),ripple=dyno.dynoFloat(0),pulse=dyno.dynoFloat(0);
+  const reliefGain=dyno.dynoFloat(3.4);
   const mouth=dyno.dynoVec2(new THREE.Vector2()),mouthShape=dyno.dynoVec2(new THREE.Vector2());
   const modifier=dyno.dynoBlock({gsplat:dyno.Gsplat},{gsplat:dyno.Gsplat},({gsplat})=>{
     const effect=new dyno.Dyno({
-      inTypes:{gsplat:dyno.Gsplat,depth:'float',clock:'float',ripple:'float',pulse:'float',mouth:'vec2',mouthShape:'vec2'},
-      outTypes:{gsplat:dyno.Gsplat},inputs:{gsplat,depth,clock,ripple,pulse,mouth,mouthShape},
+      inTypes:{gsplat:dyno.Gsplat,depth:'float',clock:'float',ripple:'float',pulse:'float',reliefGain:'float',mouth:'vec2',mouthShape:'vec2'},
+      outTypes:{gsplat:dyno.Gsplat},inputs:{gsplat,depth,clock,ripple,pulse,reliefGain,mouth,mouthShape},
       statements:({inputs:i,outputs:o})=>[`
         ${o.gsplat} = ${i.gsplat};
         vec3 p = ${i.gsplat}.center;
@@ -149,18 +158,36 @@ export async function createOmenSplat({THREE,renderer,scene,signal,owner:sharedO
         float shell = p.z < 0.0 ? smoothstep(0.06, 0.65, expand) : 1.0;
         float planted = smoothstep(0.12, 0.72, p.y);
         float face = smoothstep(1.44, 1.7, p.y);
-        float tremor = sin(p.y*15.0-t*2.0+p.x*8.0);
-        float loosen = sin(expand*3.14159265)*wave;
-        p.z *= expand;
-        p.x += loosen*planted*(1.0-face*.7)*.035*sin(p.y*73.0+p.x*121.0);
-        p.z += loosen*planted*.09*cos(p.y*33.0-p.x*52.0);
-        p.x += wave*planted*(1.0-face*.72)*0.014*tremor;
-        // Local +Z faces the viewer: the coat pushes towards them with the score.
-        p.z += wave*planted*(1.0-face*.8)*(.02+.055*${i.pulse});
+        // Amplify the authored anatomy, including the nose, hands and files.
+        // Local +Z points at the viewer; soles retain their original relief.
+        // Mouth kernels pass through this same field after articulation.
+        float relief = p.z;
+        float volume = expand*planted;
+        p.z *= expand*mix(1.0,${i.reliefGain},planted);
+        p.x *= 1.0+volume*.12;
+        // Coherent coat billow rather than unrelated per-point scatter. A rigid
+        // file/hand group and the face keep their authored depth relationships.
+        float cloth = planted*(1.0-face)*(1.0-smoothstep(.17,.20,relief));
+        float swell = sin(expand*3.14159265)*wave;
+        float breath = wave*(.025+.085*${i.pulse});
+        p.x += cloth*(swell*.045+breath*.18)*sin(p.y*5.0-t*.8);
+        p.z += cloth*(swell*.16*cos(p.y*5.0+p.x*4.0)+breath);
+        p.z += volume*wave*${i.pulse}*.06;
         ${o.gsplat}.center = p;
         ${o.gsplat}.scales.z *= mix(0.12, 1.0, expand);
-        ${o.gsplat}.scales *= 1.0+loosen*.55;
+        // The widening paint needs matching support, without smearing detail.
+        ${o.gsplat}.scales.x *= 1.0+volume*.12;
         ${o.gsplat}.rgba.a *= shell;
+        // A directional key makes the sculpted cheek/coat curvature legible
+        // even head-on. Light is geometry-owned, including in reduced motion.
+        vec3 coatNormal = normalize(vec3(p.x*3.2,(p.y-1.05)*.28,max(.055,abs(relief))*2.2));
+        vec3 headNormal = normalize(vec3((p.x-.055)*7.5,(p.y-1.65)*3.2,.48));
+        vec3 normal = normalize(mix(coatNormal,headNormal,face));
+        float key = max(0.0,dot(normal,normalize(vec3(-.72,.55,.85))));
+        float light = .34+key*1.04;
+        // Papers remain planar and readable rather than acquiring coat folds.
+        light = mix(light,.94,smoothstep(.19,.205,relief)*(1.0-face));
+        ${o.gsplat}.rgba.rgb *= mix(1.0,light,expand*.82);
         // Bruised, cold paint; preserve face detail without rainbow cycling.
         vec3 ink = vec3(.39,.35,.50)+vec3(.07,.035,.09)*sin(p.y*6.5-t*.65);
         ${o.gsplat}.rgba.rgb = mix(${o.gsplat}.rgba.rgb,
@@ -251,6 +278,7 @@ export async function createOmenSplat({THREE,renderer,scene,signal,owner:sharedO
       if(!pose.opacity)readyAfterSort=null;
       if(pose.live){
         depth.value=pose.reveal;clock.value=pose.time;ripple.value=pose.ripple;pulse.value=pose.pulse*pose.pressure;
+        reliefGain.value=omenReliefGain(camera);
         mouth.value.set(pose.mouth.open,pose.mouth.spread);mouthShape.value.set(pose.mouth.round,pose.mouth.bite);
         mesh.opacity=pose.opacity;
         mesh.renderOrder=actor.renderOrder??0;mesh.userData.amtForeground=!!actor.userData?.amtForeground;
@@ -272,7 +300,7 @@ export async function createOmenSplat({THREE,renderer,scene,signal,owner:sharedO
       if(!sharedOwner)owner.update(camera,30);
       return readyAfterSort!==null&&owner.inspect().completedUpdates>=readyAfterSort&&owner.spark.activeSplats>0?pose.opacity:0;
     },
-    inspect(){const status=owner.inspect();return {ready:!disposed&&status.ready,count,mouthSplats:MOUTH_SPLATS,tunnelCount:TUNNEL_RINGS*TUNNEL_AROUND,tunnelVisible:!disposed&&tunnel.visible,tunnelTime:tunnelClock.value,facingY:mesh.rotation.y,bytes:bytes.byteLength,failure:status.failure,activeSplats:status.activeSplats,pending:status.pending,visible:!disposed&&mesh.visible&&status.visible,...pose}},
+    inspect(){const status=owner.inspect();return {ready:!disposed&&status.ready,count,mouthSplats:MOUTH_SPLATS,tunnelCount:TUNNEL_RINGS*TUNNEL_AROUND,tunnelVisible:!disposed&&tunnel.visible,tunnelTime:tunnelClock.value,facingY:mesh.rotation.y,reliefGain:reliefGain.value,bytes:bytes.byteLength,failure:status.failure,activeSplats:status.activeSplats,pending:status.pending,visible:!disposed&&mesh.visible&&status.visible,...pose}},
     dispose(){
       if(disposed)return;disposed=true;
       owner.retire(mesh);owner.retire(tunnel);

@@ -1,4 +1,4 @@
-import {createAmtGaussianScene} from './buergeramt-gaussian-scene.js?v=20261010-mobile-handoff';
+import {createAmtGaussianScene} from './buergeramt-gaussian-scene.js?v=20261010-fitted-relief';
 const THREE_URL="https://cdn.jsdelivr.net/npm/three@0.186.0/build/three.module.js";
 const GLTF_LOADER_URL="https://cdn.jsdelivr.net/npm/three@0.186.0/examples/jsm/loaders/GLTFLoader.js";
 function buergeramtDoorRadiance(time,reducedMotion=false){
@@ -1453,7 +1453,7 @@ function showRendererFailure(error){
       const request=new AbortController(),visit=amtOmenVisit;amtOmenRequest=request;
       const prepare=async()=>{
         if(request.signal.aborted||document.hidden||!level.active)return null;
-        const module=await import("./buergeramt-splat.js?v=20261010-solid-morph");
+        const module=await import("./buergeramt-splat.js?v=20261010-fitted-relief");
         request.signal.throwIfAborted();
         return module.createOmenSplat({THREE:T,renderer,scene:amtScene,signal:request.signal,owner:await amtGaussian.getOwner()});
       };

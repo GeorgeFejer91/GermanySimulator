@@ -9,7 +9,7 @@ export function createAmtGaussianScene({THREE,renderer,scene,queueLoad,mobile=fa
     if(failure)throw new Error(failure);
     if(!ownerPromise){
       const request=controller;
-      ownerPromise=import('./buergeramt-splat.js?v=20261010-solid-morph').then(module=>
+      ownerPromise=import('./buergeramt-splat.js?v=20261010-fitted-relief').then(module=>
         module.createAmtSplatOwner({THREE,renderer,scene,signal:request.signal})).then(value=>{
         if(request!==controller||request.signal.aborted){void value.dispose();throw new DOMException('Retired office','AbortError')}
         owner=value;return value;

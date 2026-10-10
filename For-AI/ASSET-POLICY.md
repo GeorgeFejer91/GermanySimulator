@@ -155,6 +155,52 @@ Reports and exact metrics: ignored `output/character-morph/bench-summary.json`,
 The separate three held omen samples measured 20.9–21.1 ms sync intervals.
 Physical Android, GPU timing and perceptual listening remain NOT RUN.
 
+The 2026-10-11 Aktenkurier intensity adjustment multiplies the existing upper-body
+relief by up to 3.4 and its width by at most 1.12, with bounded broad cloth
+displacement and directional shading in the same Dyno modifier. Mouth articulation
+runs before that shared deformation. One float fits relief to the view's horizontal
+field; it adds no samples, asset bytes, renderer, clock or admission work. The
+flattened geometry and floor baseline remain registered. Independent Camera and
+Physics reviews bind the integrated candidate to `output/omen-intense/candidate-v4.json`;
+fresh source/CPU checks preserve the upstream mobile background-slot retirement.
+Native MP3 mouth captures pass on desktop, portrait, landscape and reduced motion
+for V2; the identical shader/camera paths retain those source hashes through V4.
+A first V4 portrait probe passes framing and pause/exit assertions but its
+approximately 1004 ms dispatch interval leaves consonant capture timing unproved.
+The final V4 portrait probe waits for two completed owner updates and a rendered
+dispatch at each paused native cue. All phonetic captures and assertions pass;
+72 dispatch intervals have p50/p95 15.2/23.4 ms. The earlier V2 p95 samples were
+21.5–22.5 ms. These variable host conditions do not establish a performance
+improvement. V3 full-body ending and splat-failure captures
+pass opaque flattening, staged painted turn, restoration and cleanup. Exact GPU
+shader readback checks 38,938 body points across 20 reveal/pulse states; all centers
+are finite, with unchanged Y/sole baseline and exact flattened centers. This is
+bounded deformation evidence, not GPU timing or a natural mission traversal.
+The V4 six-context root check passes unchanged 18 MB, deferred-resource, actual
+4 Hz title, 1.6 MP, error and brief-input guards, with nine inputs accepted in
+every run and maximum startup 16,761,047 bytes. The diagnostic probe explicitly
+waits for five title dispatches with four 200–350 ms intervals before warm sampling;
+the added settle delays are reported (1.06–1.28 s), not subtracted from readiness.
+Desktop asset readiness ranges 6.79–33.13 s; portrait emulation 2.56–2.98 s.
+Desktop active p95 median is 41.8 ms (39.9–1290.1), input p95 median 50.4 ms
+(48.8–1582.7); portrait medians are 33.3 ms (28.0–36.3) and 39.0 ms (34.6–49.4).
+The outliers and preserved early-input failures preclude a stable-latency claim.
+This probe changes only ignored test admission/warm-up, retaining the original
+400/45 ms key windows and ceilings. It omits root screenshots; the separate V3
+direct `3d.html` smoke supplies shared-city render evidence. Reports:
+`output/omen-intense/root-settled-final/`,
+`root-short-final/`, `native-final-fit-2/`, `native-integrated/`,
+`native-rendered-integrated/`, `ending-fit/` and
+`deformation-v2.json`. The current Pages test selection passes 230/230 and the
+Pillow delivery check preserves all six city atlases' exact RGBA pixels.
+Final V5 integration preserves upstream `839c43a`'s Merz dialogue/catalog/assets;
+five V4 frozen runtime/test hashes remain exact, and the root HTML differs only
+by its two upstream dialogue cache tokens. The root selection passes again
+(43/43), plus 19/19 Merz/official-omen/lipsync/splat checks; the unchanged office
+selection retains its V4 result. `candidate-v5.json` and `root-v5.txt`/`audio-v5.txt`
+record this source continuity without relabeling the rendered V2/V3/V4 evidence.
+Physical Android, GPU timing and perceptual listening remain NOT RUN.
+
 The office's original painted prop strip adds a file cabinet, paper tower,
 distorted clock, and noticeboard. Its source and provenance are with the cast;
 the game loads its compressed atlas only when the office is entered, alongside

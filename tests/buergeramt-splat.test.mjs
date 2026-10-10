@@ -2,8 +2,20 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import {readFileSync} from 'node:fs';
 import {createHash} from 'node:crypto';
-import {omenSplatPose} from '../buergeramt-splat.js';
+import {omenSplatPose,omenReliefGain} from '../buergeramt-splat.js';
 import {harness} from './amt-harness.mjs';
+
+test('narrow-view relief fits the projecting prop while desktop retains full intensity',()=>{
+  assert.equal(omenReliefGain({aspect:1280/800,fov:69}),3.4);
+  assert.equal(omenReliefGain({aspect:844/390,fov:69}),3.4);
+  const portrait=omenReliefGain({aspect:390/844,fov:69});
+  assert(portrait>2.4&&portrait<2.5,'phone retains pronounced depth with room at the sleeve edge');
+  assert(omenReliefGain({aspect:320/844,fov:69})<portrait);
+  assert(omenReliefGain({aspect:390/844,fov:50})<portrait);
+  for(const aspect of [.1,.3,.462,.8,1.6,4,NaN,Infinity])for(const fov of [0,20,50,69,120,NaN,Infinity]){
+    const gain=omenReliefGain({aspect,fov});assert(Number.isFinite(gain)&&gain>=1&&gain<=3.4);
+  }
+});
 
 test('depth unfolds towards the player during approach and shares the score pulse',()=>{
   const h=harness('host',{cinematics:true});h.enterUntilOmen();
