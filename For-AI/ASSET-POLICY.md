@@ -242,6 +242,21 @@ browser profiles. Do not add a new pipeline, service or benchmark dependency.
 
 ### Frame, background work and lifetime contract
 
+The first city Bürgeramt entry uses `buergeramt-entry.js` and the existing WebGL
+renderer. One on-demand GPU color/depth capture has a longest edge of at most
+960 px on desktop or 640 px on compact screens (at most 7.04 MiB for its two
+four-byte surfaces). One instanced Gaussian draw samples about 18,000 city pixels
+on desktop or 7,000 on compact screens; grid rounding is bounded below 18,500
+instances on supported portrait/landscape profiles. A second draw dissolves
+the frozen image and marks the door's vortex. This is a depth-assisted visible
+surface effect, not a reconstructed splat asset. No CPU pixel readback, extra
+renderer, Spark import, downloaded art, worker or independent animation loop
+is needed. Capture occurs at committed entry; drawing lasts at most 3.4 seconds
+of active frame time. Reduced motion allocates only the color surface and uses
+one draw for a 0.24-second fade. Hidden pages stop its clock; completion/pagehide
+release both textures, materials and geometry. Module/render failure keeps
+direct entry. The existing office readiness gate runs before the transition.
+
 The mission-fax HUD transition uses native Canvas 2D Gaussian alpha kernels as a
 CSS mask over the actual DOM paper. One reusable 192 × 256 mask and 32 × 32 kernel
 occupy about 0.192 MiB of raw RGBA surfaces; 432 splats are composited at no more

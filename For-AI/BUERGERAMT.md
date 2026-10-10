@@ -4,6 +4,19 @@ The secret Bürgeramt is an episode of the canonical root game. QR admission, th
 
 ## Admission, queue and outcomes
 
+On the first city-to-office entry, the visible city dissolves into source-colored
+Gaussian particles and spirals into the fitted Bürgeramt door over 3.4 seconds.
+The existing city renderer captures color and depth once, projects sampled
+surfaces toward that doorway, and opens the ordinary outside stage only after
+the collapse completes. City simulation and held input pause during the effect;
+the office queue, phone and omen begin through their normal owners afterward.
+Reduced motion uses a 0.24-second fade. A missing effect module or renderer
+failure enters directly. Hidden time does not advance the effect; completion
+and page exit dispose its capture and particle buffers. Returning through the
+browser's page cache completes the preserved handoff directly. Direct office testing
+has no city snapshot and retains its ordinary entrance. `buergeramt-entry.js`
+owns the GPU projection, with `world3d.js` owning its clock and handoff.
+
 Entering the first Bürgeramt opens a hidden first-person episode outside the building's door. WASD or touch controls lead through the open doorway without an extra interaction into a larger office with a waiting area, several visitors, and four service counters. The QR code lives on a physical sign under the number display; it never opens a game popup. Each phone scan connects to the game session and immediately issues a fresh private `B-###` ticket, which appears on that phone and activates a place in the host-controlled waiting list. A retry with the same scan ID returns the same ticket if the pairing was delayed. The player enters a name on the phone after receiving the ticket; that submission is required before Frau Knick starts the call and there is no separate Anmeldeschalter activation. Background lettered codes cycle continuously even before the player scans. After several calls while the ticket is active, the player's number is called on the red ceiling display and HUD. The phone page must remain visible and connected until the call; hiding it or losing the connection forfeits that ticket. Scanning again or leaving and rescanning issues a new ticket and a new counter opportunity. Schalter 3 looks idle. Approaching Frau Knick before the player's number earns a reprimand and returns the player to waiting. When the player's number appears, the player has a short window to reach her; being late forfeits the appointment without advancing mission 1. The ordinary waiting room has no continuous background music; occasional counter conversations and telephone rings make it busy. The Aktenkurier encounter below is a brief, scene-only musical exception.
 
 The unlisted `?geheim=buergeramt` URL opens directly at the office entrance for repeated level testing. Its fixed restart link reloads only this episode; the normal city entry remains the canonical story route. Direct entry skips unrelated city GLB downloads; normal entry keeps the city asset path. The shortcut is a convenience link, not authentication or a separate game deployment.

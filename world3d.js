@@ -1551,13 +1551,43 @@ function showRendererFailure(error){
   }
   // Only these owned roots gate updateMatrixWorld; Box3/updateWorldMatrix diagnostics remain available.
   let parkCameraFrame=0,previousCameraTime=performance.now();
+  let entryFactory=null,amtEntry=null,amtEntryDone=null,amtEntryResume=null,entryLastTime=0,entryFailure="";
+  try{({createBuergeramtEntry:entryFactory}=await import("./buergeramt-entry.js?v=20261010-door-vortex"))}
+  catch(error){entryFailure=error.message;console.warn("Bürgeramt entry keeps direct transition",error)}
+  function clearAmtEntry(){amtEntry?.dispose();amtEntry=null;amtEntryDone=null;entryLastTime=0;if(!window.BuergeramtLevel?.active)document.body.classList.remove("amt-inside")}
+  function enterBuergeramt(done){
+    if(amtEntry)return;
+    if(!entryFactory){done();return}
+    try{
+      const building=bridge.buildings.find(b=>b.id==="buergeramt");
+      const slot=buildingSlots.find(s=>s.building===building);
+      const door=slot?.model?slot.model.localToWorld(new T.Vector3(0,1.05,4.17)):new T.Vector3(X(building.doorX),.85,Z(building.y+building.h)+.12);
+      missionPointer.visible=false;bridge.clearInput?.();
+      amtEntry=entryFactory({THREE:T,renderer,scene,camera,door,mobile:amtMobile,reducedMotion:amtReducedMotion.matches});
+      document.body.classList.add("amt-inside");const hint=document.getElementById("interact-hint");if(hint)hint.hidden=true;
+      amtEntryDone=done;entryLastTime=performance.now();entryFailure="";
+    }catch(error){clearAmtEntry();entryFailure=error.message;console.warn("Bürgeramt entry keeps direct transition",error);done()}
+  }
+  document.addEventListener("visibilitychange",()=>{entryLastTime=performance.now()});
+  addEventListener("pagehide",()=>{amtEntryResume=amtEntryDone;clearAmtEntry()});
+  addEventListener("pageshow",()=>{const done=amtEntryResume;amtEntryResume=null;bridge.clearInput?.();done?.()});
   captureStartupAssets();
   startupModelsCaptured=true;
-  window.Germany3D={ready:true,isWorldPointVisible,isVehicleVisible,prepareNearbyAssets,prepareOfficeAssets:loadAmtImages,clearAmtOmenSplat,clearAmtGaussianAnimations(){amtGaussian.clear();restoreAmtCharacterLayers()},
+  window.Germany3D={ready:true,isWorldPointVisible,isVehicleVisible,prepareNearbyAssets,prepareOfficeAssets:loadAmtImages,clearAmtOmenSplat,enterBuergeramt,clearAmtGaussianAnimations(){amtGaussian.clear();restoreAmtCharacterLayers()},
+  get amtEntry(){return {active:!!amtEntry,failure:entryFailure,...amtEntry?.inspect()}},
   get nearbyAssetsReady(){updateAssetView();return cityModelJobs.every(job=>job.state==="settled"||cityModelDistance(job)>30&&!isCityAssetVisible(job))},
   get officeAssetsReady(){return amtImagesRequested&&officeAssetPending===0},get officeAssetStatus(){return {pending:officeAssetPending,failed:officeAssetFailures}},
   get startupReady(){return startupModelsReady()},get startupStatus(){return {pending:[...startupModelJobs].filter(job=>job.state!=="settled").length,active:cityModelActive,failed:[...startupModelJobs].filter(job=>job.failed).length}},
   get buildingVisibility(){return buildingSlots.map(slot=>({id:slot.building.id,opacity:slot.opacity,obstructing:!!slot.obstructing}))},sync(){
+    if(amtEntry){
+      if(document.hidden)return;
+      const now=performance.now(),dt=(now-entryLastTime)/1000;entryLastTime=now;
+      let finished=false;
+      try{finished=amtEntry.render(dt,amtReducedMotion.matches)}
+      catch(error){entryFailure=error.message;finished=true;console.warn("Bürgeramt entry rendering unavailable",error)}
+      if(!finished)return;
+      const done=amtEntryDone;clearAmtEntry();bridge.clearInput?.();done?.();
+    }
     if(amtDirectRoute&&!window.BuergeramtLevel?.active){clearAmtOmenSplat();amtGaussian.clear();loadAmtImages();return}
     if(renderAmt()){missionPointer.visible=false;if(buergeramtDoorGlow){buergeramtDoorGlow.light.intensity=0;buergeramtDoorGlow.lastTime=performance.now()}previousOcclusionTime=performance.now();return}
     prepareNearbyAssets();
