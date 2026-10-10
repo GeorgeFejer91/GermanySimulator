@@ -223,11 +223,18 @@ test('starting a clerk cue does not cancel an already idle speech engine',()=>{
 test('the host remains playable without a browser speech implementation',()=>{
  const h=harness('host',{synthesis:false});h.enter();assert.equal(h.level.stage,'walk-sign');h.level.replay(h.config);assert.equal(h.level.stage,'outside');
 });
-test('answered call waits for each screen, then overlaps one deliberate interruption',()=>{
- const h=harness('host',{voice:true});h.counter();h.links[0].message({type:'answer',id:'grass'});h.tick(20);const first=h.node('amt-line').textContent;h.tick(6000);assert.equal(h.node('amt-line').textContent,first);h.synth.end();h.tick(500);assert.equal(h.links[0].sent.filter(m=>m.type==='police-line').length,0);
- h.links[0].message({type:'police-done',index:-1,mode:'voice',durationMs:0,atMs:h.now()});h.tick(700);assert.equal(h.links[0].sent.filter(m=>m.type==='police-line').length,1);assert.equal(h.node('amt-line').textContent,first);
- h.links[0].message({type:'police-done',index:0,mode:'voice',durationMs:0,atMs:h.now()});h.tick(500);assert.match(h.node('amt-line').textContent,/Herr Wachtmeister/);h.synth.end();h.tick(350);assert.equal(h.links[0].sent.filter(m=>m.type==='police-line').length,2);
- h.links[0].message({type:'police-done',index:1,mode:'voice',durationMs:0,atMs:h.now()});h.tick(500);assert.match(h.node('amt-line').textContent,/vierundsiebzig/);h.tick(7000);assert.equal(h.links[0].sent.filter(m=>m.type==='police-line').length,3);assert.match(h.node('amt-line').textContent,/vierundsiebzig/);
+test('both speakers cut off each other throughout the escalating argument',()=>{
+ const h=harness('host',{voice:true}),link=h.links[0];h.counter();link.message({type:'answer',id:'grass'});
+ for(let index=-1;index<3;index++){
+  link.message({type:'police-start',index,mode:'voice',readyDelayMs:20,atMs:h.now()});
+  if(index>=0)assert.equal(h.level.timing.desk[index].mode,'interrupted','the officer stops the clerk at the start receipt');
+  const target=h.window.BuergeramtStory.outburst.phoneCutAfterMs[index+1];h.tick(target+40);
+  assert.equal(h.level.timing.cues[index].interrupted,true);assert.ok(link.sent.some(m=>m.type==='police-cutoff'&&m.index===index));
+  assert.equal(h.node('amt-line').textContent,h.window.BuergeramtStory.outburst.lines[index+1]);
+  link.message({type:'police-done',index,mode:'voice',durationMs:target,atMs:h.now()});
+  if(index<2){h.tick(h.window.BuergeramtStory.outburst.cutAfterMs[index+1]+20);assert.equal(link.sent.filter(m=>m.type==='police-line').at(-1).index,index+1)}
+ }
+ h.synth.end();h.tick(200);assert.equal(h.node('amt-line').textContent,h.window.BuergeramtStory.outburst.lines[4]);h.synth.end();h.tick(250);assert.equal(h.counts.cancel,1);assert.equal(h.counts.form,0);
 });
 test('the host measures round trip delay on its own clock and ignores stale pongs',()=>{
  const h=harness(),link=h.links[0];link.emit('connected',{});assert.deepEqual(link.sent.at(-1),{type:'sync-ping',id:1});h.tick(120);link.message({type:'sync-pong',id:1,receivedAtMs:50,sentAtMs:70});assert.equal(h.level.timing.rttMs,100);assert.equal(h.level.timing.oneWayMs,50);assert.equal(h.level.timing.clockOffsetMs,0);assert.equal(h.level.timing.clockUncertaintyMs,50);
@@ -236,32 +243,30 @@ test('the host measures round trip delay on its own clock and ignores stale pong
 });
 test('police receipts verify duration and do not advance a turn twice',()=>{
  const h=harness('host',{voice:true}),link=h.links[0];link.emit('connected',{});h.tick(20);link.message({type:'sync-pong',id:1,receivedAtMs:10,sentAtMs:10});h.counter();link.message({type:'answer',id:'grass'});h.tick(20);link.message({type:'police-start',index:-1,mode:'voice',readyDelayMs:20,atMs:h.now()});h.tick(320);link.message({type:'police-done',index:-1,mode:'voice',durationMs:320,atMs:h.now()});assert.equal(h.level.timing.cues[-1].status,'verified');const doneAt=h.level.timing.cues[-1].doneAt;
- link.message({type:'police-done',index:-1,mode:'voice',durationMs:9000,atMs:h.now()});assert.equal(h.level.timing.cues[-1].doneAt,doneAt);h.synth.end();h.tick(700);assert.equal(link.sent.filter(m=>m.type==='police-line').length,1);
+ link.message({type:'police-done',index:-1,mode:'voice',durationMs:9000,atMs:h.now()});assert.equal(h.level.timing.cues[-1].doneAt,doneAt);h.tick(20);h.synth.end();h.tick(700);assert.equal(link.sent.filter(m=>m.type==='police-line').length,1);
  link.message({type:'police-start',index:0,mode:'voice',readyDelayMs:50,atMs:h.now()});h.tick(800);link.message({type:'police-done',index:0,mode:'voice',durationMs:100,atMs:h.now()});assert.equal(h.level.timing.cues[0].status,'drift');
 });
 test('clock-offset mapping keeps phone speech time stable when a receipt arrives late',()=>{
  const h=harness('host',{voice:true}),link=h.links[0];link.emit('connected',{});h.tick(100);link.message({type:'sync-pong',id:1,receivedAtMs:5045,sentAtMs:5055});assert.equal(h.level.timing.clockOffsetMs,5000);h.counter();link.message({type:'answer',id:'grass'});h.tick(20);link.message({type:'police-start',index:-1,mode:'voice',readyDelayMs:20,atMs:5120});h.tick(900);link.message({type:'police-done',index:-1,mode:'voice',durationMs:300,atMs:5420});const cue=h.level.timing.cues[-1];assert.equal(cue.status,'verified');assert.equal(cue.estimatedStartAt,120);assert.equal(cue.estimatedEndAt,420);assert.equal(cue.receiptJitter,true);
 });
 test('a late phone receipt cannot replace a timed-out turn',()=>{
- const h=harness(),link=h.links[0];h.counter();link.message({type:'answer',id:'grass'});h.tick(18000);assert.equal(h.level.timing.cues[-1].status,'timeout');link.message({type:'police-start',index:-1,mode:'voice',readyDelayMs:0,atMs:h.now()});link.message({type:'police-done',index:-1,mode:'voice',durationMs:100,atMs:h.now()});assert.equal(h.level.timing.cues[-1].status,'timeout');assert.ok(Number.isFinite(h.level.timing.cues[-1].lateDoneAt));h.tick(700);assert.equal(link.sent.filter(m=>m.type==='police-line').length,1);
+ const h=harness(),link=h.links[0];h.counter();link.message({type:'answer',id:'grass'});h.tick(18000);assert.equal(h.level.timing.cues[-1].status,'timeout');link.message({type:'police-start',index:-1,mode:'voice',readyDelayMs:0,atMs:h.now()});link.message({type:'police-done',index:-1,mode:'voice',durationMs:100,atMs:h.now()});assert.equal(h.level.timing.cues[-1].status,'timeout');assert.ok(Number.isFinite(h.level.timing.cues[-1].lateDoneAt));h.tick(4000);assert.equal(link.sent.filter(m=>m.type==='police-line').length,1);
 });
-test('a confirmed phone speech start extends only its own completion deadline',()=>{
- const h=harness(),link=h.links[0];h.counter();link.message({type:'answer',id:'grass'});h.tick(17000);assert.equal(h.level.timing.cues[-1].status,'waiting');link.message({type:'police-start',index:-1,mode:'voice',readyDelayMs:4000,atMs:h.now()});h.tick(23000);assert.equal(h.level.timing.cues[-1].status,'waiting');h.tick(1000);assert.equal(h.level.timing.cues[-1].status,'timeout');
+test('a confirmed phone start schedules its own cutoff instead of waiting for the whole line',()=>{
+ const h=harness(),link=h.links[0];h.counter();link.message({type:'answer',id:'grass'});h.tick(17000);assert.equal(h.level.timing.cues[-1].status,'waiting');link.message({type:'police-start',index:-1,mode:'voice',readyDelayMs:4000,atMs:h.now()});h.tick(7000);assert.equal(h.level.timing.desk[0],undefined);h.tick(300);assert.equal(h.level.timing.cues[-1].interrupted,true);assert.ok(link.sent.some(m=>m.type==='police-cutoff'&&m.index===-1));
 });
 test('a disconnected phone releases the argument without waiting through four timeouts',()=>{
  const h=harness(),link=h.links[0];h.counter();link.message({type:'answer',id:'grass'});link.emit('status','Telefon getrennt');assert.equal(h.level.timing.cues[-1].status,'disconnected');h.tick(100000);assert.equal(h.counts.cancel,1);assert.equal(h.counts.form,0);
 });
-test('the officer interrupts after Frau Knick says her counter handles applications',()=>{
- const h=harness('host',{voice:true}),link=h.links[0];h.counter();link.message({type:'answer',id:'grass'});h.tick(20);h.synth.end();link.message({type:'police-done',index:-1,mode:'voice',durationMs:0,atMs:h.now()});h.tick(700);assert.equal(link.sent.filter(m=>m.type==='police-line').length,1);
- h.tick(500);link.message({type:'police-start',index:0,mode:'voice',readyDelayMs:500,atMs:h.now()});assert.equal(h.level.timing.phoneReadyMs,500);assert.equal(h.level.timing.startLagMs,500);link.message({type:'police-done',index:0,mode:'voice',durationMs:0,atMs:h.now()});h.tick(500);h.synth.end();h.tick(1);assert.equal(link.sent.filter(m=>m.type==='police-line').length,2);
- link.message({type:'police-done',index:1,mode:'voice',durationMs:0,atMs:h.now()});h.tick(500);assert.match(h.node('amt-line').textContent,/vierundsiebzig/);h.tick(1800);assert.equal(link.sent.filter(m=>m.type==='police-line').length,2);const boundary=h.node('amt-line').textContent.indexOf('!')-9;h.synth.current.onboundary({charIndex:boundary});assert.equal(link.sent.filter(m=>m.type==='police-line').length,3);h.synth.current.onboundary({charIndex:boundary+1});assert.equal(link.sent.filter(m=>m.type==='police-line').length,3);
+test('a stale interrupted phone completion cannot skip the next clerk line',()=>{
+ const h=harness('host',{voice:true}),link=h.links[0];h.counter();link.message({type:'answer',id:'grass'});link.message({type:'police-start',index:-1,mode:'voice',readyDelayMs:20,atMs:h.now()});h.tick(7300);h.tick(4000);link.message({type:'police-start',index:0,mode:'voice',readyDelayMs:500,atMs:h.now()});h.tick(4600);const text=h.node('amt-line').textContent;assert.match(text,/Die Dame hat einen Namen/);link.message({type:'police-done',index:-1,mode:'voice',durationMs:500,atMs:h.now()});link.message({type:'police-done',index:0,mode:'voice',durationMs:500,atMs:h.now()});assert.equal(h.node('amt-line').textContent,text);assert.equal(link.sent.filter(m=>m.type==='police-line').length,1);
 });
 test('phone emits start and finish receipts around actual speech, and answers pings',()=>{
  const h=harness('phone');h.incoming();const link=h.links[0];link.message({type:'sync-ping',id:19});assert.deepEqual(link.sent.at(-1),{type:'sync-pong',id:19,receivedAtMs:0,sentAtMs:0});h.node('phone-answer').click();h.tick(20);assert.equal(link.sent.at(-1).type,'police-start');assert.equal(link.sent.at(-1).index,-1);assert.ok(link.sent.at(-1).readyDelayMs>=0);assert.equal(link.sent.at(-1).atMs,16);h.tick(240);h.synth.end();const done=link.sent.at(-1);assert.equal(done.type,'police-done');assert.equal(done.index,-1);assert.equal(done.mode,'voice');assert.ok(done.durationMs>=240&&done.durationMs<=260);assert.equal(done.atMs,h.now());
 });
-test('opt-in phone recording keeps Heinrichs voice ID and paired timing receipts',()=>{
+test('phone recording uses the Kriminalpolizei voice and paired timing receipts',()=>{
  const h=harness('phone',{candidatePhone:true});h.incoming();const link=h.links[0];h.node('phone-answer').click();h.tick(20);
- assert.equal(h.audio.recordings.length,1);assert.match(h.audio.recordings[0].src,/polizei-heinrich-wachtmeister-phone-01\.mp3$/);
+ assert.equal(h.audio.recordings.length,1);assert.match(h.audio.recordings[0].src,/kriminalpolizei-phone-01\.mp3$/);
  assert.equal(h.synth.spoken.length,0);assert.equal(link.sent.at(-1).type,'police-start');assert.equal(link.sent.at(-1).mode,'recording');assert.equal(h.node('phone-call-line').hidden,false);
  h.tick(400);h.audio.recordings[0].end();const done=link.sent.at(-1);assert.equal(done.type,'police-done');assert.equal(done.mode,'recording');assert.equal(done.index,-1);assert.equal(done.durationMs,404);
 });
@@ -299,9 +304,9 @@ test('phone police speech automatically uses maximum browser volume',()=>{
 test('phone answer/decline are one-shot and sent with the current call id',()=>{
  for(const decision of ['answer','decline']){const h=harness('phone');h.incoming();h.node('phone-'+decision).click();h.node('phone-'+decision).click();const decisions=h.links[0].sent.filter(m=>m.type===decision);assert.equal(decisions.length,1);assert.equal(decisions[0].id,'grass')}
 });
-test('the incoming caller stays unknown, with host subtitles ahead of the phone browser language',()=>{
- for(const [options,expected] of [[{phoneLanguage:'de-DE'},'Unbekannte Nummer'],[{phoneLanguage:'en-GB'},'Unknown number'],[{phoneLanguage:'de-DE',phoneCaptions:true},'Unknown number'],[{phoneLanguage:'fr-FR'},'Unbekannte Nummer']]){
-  const h=harness('phone',options);h.incoming();assert.equal(h.node('phone-caller').textContent,expected);assert.equal(h.node('phone-call').lang,expected==='Unknown number'?'en':'de');assert.equal(h.node('phone-call-state').textContent,expected==='Unknown number'?'INCOMING CALL':'EINGEHENDER ANRUF');h.node('phone-answer').click();assert.equal(h.node('phone-call-state').textContent,expected==='Unknown number'?'CONNECTED':'VERBUNDEN');
+test('the caller stays Unbekannte Nummer while subtitles and browser language select call controls',()=>{
+ for(const [options,english] of [[{phoneLanguage:'de-DE'},false],[{phoneLanguage:'en-GB'},true],[{phoneLanguage:'de-DE',phoneCaptions:true},true],[{phoneLanguage:'fr-FR'},false]]){
+  const h=harness('phone',options);h.incoming();assert.equal(h.node('phone-caller').textContent,'Unbekannte Nummer');assert.equal(h.node('phone-call').lang,english?'en':'de');assert.equal(h.node('phone-call-state').textContent,english?'INCOMING CALL':'EINGEHENDER ANRUF');h.node('phone-answer').click();assert.equal(h.node('phone-call-state').textContent,english?'CONNECTED':'VERBUNDEN');
  }
 });
 test('Google Phone drags right to answer or left to decline, with tap fallback',()=>{
@@ -350,10 +355,10 @@ test('page exit cancels the clock and all pending phone callbacks',()=>{
  const h=harness('phone');h.incoming();h.node('phone-answer').click();h.window.dispatchEvent(new Event('pagehide'));h.tick(90000);assert.equal(h.synth.spoken.length,0);assert.equal(h.timers.size,0);assert.equal(h.links[0].closed,true);
 });
 test('a failed clerk voice retains a readable automatic-argument line',()=>{
- const h=harness('host',{voice:true});h.counter();h.links[0].message({type:'answer',id:'grass'});h.tick(20);const first=h.node('amt-line').textContent;h.synth.current.onerror();h.tick(2000);assert.equal(h.node('amt-line').textContent,first);assert.equal(h.counts.cancel,0);
+ const h=harness('host',{voice:true});h.counter();h.links[0].message({type:'answer',id:'grass'});h.links[0].message({type:'police-done',index:-1,mode:'voice',durationMs:0,atMs:h.now()});h.tick(20);const first=h.node('amt-line').textContent;h.synth.current.onerror();h.tick(2000);assert.equal(h.node('amt-line').textContent,first);assert.equal(h.counts.cancel,0);
 });
 test('a stalled clerk voice starts a readable fallback within the learned startup limit and rejects late speech',()=>{
- const h=harness('host',{voice:true});let late;h.synth.speak=utterance=>{late=utterance};h.counter();h.links[0].message({type:'answer',id:'grass'});h.tick(1199);assert.equal(h.level.timing.desk[0].startAt,null);h.tick(1);assert.equal(h.level.timing.desk[0].startMode,'fallback');assert.equal(h.level.timing.desk[0].startAt,h.now());late.onstart();late.onend();assert.equal(h.level.timing.desk[0].endAt,null);h.tick(100);assert.equal(h.counts.cancel,0);
+ const h=harness('host',{voice:true});let late;h.synth.speak=utterance=>{late=utterance};h.counter();h.links[0].message({type:'answer',id:'grass'});h.links[0].message({type:'police-done',index:-1,mode:'voice',durationMs:0,atMs:h.now()});h.tick(1199);assert.equal(h.level.timing.desk[0].startAt,null);h.tick(1);assert.equal(h.level.timing.desk[0].startMode,'fallback');assert.equal(h.level.timing.desk[0].startAt,h.now());late.onstart();late.onend();assert.equal(h.level.timing.desk[0].endAt,null);h.tick(100);assert.equal(h.counts.cancel,0);
 });
 test('a failed police voice displays its line instead of silently skipping it',()=>{
  const h=harness('phone');h.incoming();h.node('phone-answer').click();h.tick(20);h.node('phone-call-line').hidden=true;h.synth.current.onerror();assert.equal(h.node('phone-call-line').hidden,false);assert.equal(h.node('phone-call-line').textContent,h.window.BuergeramtStory.call.line);
@@ -361,4 +366,45 @@ test('a failed police voice displays its line instead of silently skipping it',(
 
 test('a synchronous speech failure retains the automatic clerk line for reading',()=>{
  const h=harness('host',{voice:true});h.synth.speak=()=>{throw new Error('Speech service unavailable')};h.counter();h.links[0].message({type:'answer',id:'grass'});const first=h.node('amt-line').textContent;h.tick(2000);assert.equal(h.node('amt-line').textContent,first);assert.equal(h.counts.cancel,0);h.tick(150000);assert.equal(h.counts.cancel,1);assert.equal(h.counts.form,0);
+});
+
+test('a cutoff stops only the active phone line and emits one completion receipt',()=>{
+ const h=harness('phone',{candidatePhone:true});h.incoming();h.node('phone-answer').click();h.tick(500);const link=h.links[0],clip=h.audio.recordings[0],lateEnd=clip.onended;
+ link.message({type:'police-cutoff',index:0});assert.equal(clip.paused,false,'wrong index must not stop the opening');
+ link.message({type:'police-cutoff',index:-1});assert.equal(clip.paused,true);assert.equal(link.sent.filter(m=>m.type==='police-done').length,1);assert.equal(link.sent.at(-1).mode,'recording');
+ link.message({type:'police-cutoff',index:-1});lateEnd();assert.equal(link.sent.filter(m=>m.type==='police-done').length,1);
+ link.message({type:'police-line',index:0,line:h.window.BuergeramtStory.police[0]});h.tick(20);assert.equal(h.audio.recordings.length,2);assert.equal(link.sent.at(-1).type,'police-start');
+});
+
+test('a scheduled cutoff stops at the phone deadline despite late delivery',()=>{
+ const h=harness('phone',{candidatePhone:true});h.incoming();h.node('phone-answer').click();h.tick(500);const link=h.links[0],clip=h.audio.recordings[0];
+ link.message({type:'police-cutoff',index:-1,stopAtPhoneMs:7216,stopAtUtcMs:null});h.tick(6715);assert.equal(clip.paused,false);h.tick(1);assert.equal(clip.paused,true);
+ const done=link.sent.filter(m=>m.type==='police-done');assert.equal(done.length,1);assert.equal(done[0].durationMs,7200);assert.equal(done[0].atMs,7216);
+});
+
+test('TimeAPI UTC maps a phone cutoff when a peer deadline is unavailable',async()=>{
+ const service={sample:async()=>({utcOffsetMs:100000}),usable:a=>!!a,utcAt:(a,t)=>a.utcOffsetMs+t,monoAt:(a,t)=>t-a.utcOffsetMs};
+ const h=harness('phone',{candidatePhone:true,phoneClock:service});await Promise.resolve();h.incoming();h.node('phone-answer').click();h.tick(20);const link=h.links[0];assert.equal(link.sent.at(-1).atUtcMs,100016);
+ link.message({type:'police-cutoff',index:-1,stopAtPhoneMs:null,stopAtUtcMs:107216});h.tick(7195);assert.equal(h.audio.recordings[0].paused,false);h.tick(1);assert.equal(h.audio.recordings[0].paused,true);
+});
+
+test('the host maps a TimeAPI speech timestamp rather than adding delivery delay',async()=>{
+ const service={sample:async()=>({utcOffsetMs:100000}),usable:a=>!!a,utcAt:(a,t)=>a.utcOffsetMs+t,monoAt:(a,t)=>t-a.utcOffsetMs};
+ const h=harness('host',{phoneClock:service}),link=h.links[0];await Promise.resolve();h.counter();link.message({type:'answer',id:'grass'});const start=h.now();h.tick(600);
+ link.message({type:'police-start',index:-1,mode:'recording',readyDelayMs:20,atMs:5000,atUtcMs:100000+start});
+ const cut=link.sent.find(m=>m.type==='police-cutoff');assert.equal(cut.stopAtPhoneMs,12200);assert.equal(cut.stopAtUtcMs,100000+start+7200);assert.equal(h.level.timing.cues[-1].clockDomain,'utc');
+ h.tick(6599);assert.equal(h.level.timing.desk[0],undefined);h.tick(1);assert.equal(h.level.timing.desk[0].startAt,start+7200);
+});
+
+test('cutoff send failure retries and waits for natural completion without false interruption',()=>{
+ const h=harness('host',{voice:true}),link=h.links[0];h.counter();link.message({type:'answer',id:'grass'});link.fail=true;
+ link.message({type:'police-start',index:-1,mode:'recording',readyDelayMs:20,atMs:h.now()});h.tick(8000);
+ assert.notEqual(h.level.timing.cues[-1].interrupted,true);assert.equal(h.level.timing.cues[-1].cutoffSendFailed,true);assert.equal(h.level.timing.desk[0],undefined);
+ link.fail=false;link.message({type:'police-done',index:-1,mode:'recording',durationMs:8000,atMs:h.now()});h.tick(20);assert.equal(h.node('amt-line').textContent,h.window.BuergeramtStory.outburst.lines[0]);
+});
+
+test('a transient cutoff send failure recovers before the shared deadline',()=>{
+ const h=harness(),link=h.links[0];h.counter();link.message({type:'answer',id:'grass'});link.fail=true;
+ link.message({type:'police-start',index:-1,mode:'recording',readyDelayMs:20,atMs:h.now()});h.tick(50);link.fail=false;h.tick(50);
+ assert.equal(link.sent.filter(m=>m.type==='police-cutoff').length,1);assert.equal(h.level.timing.cues[-1].interrupted,true);h.tick(7100);assert.equal(h.level.timing.desk[0].startAt,h.now());
 });

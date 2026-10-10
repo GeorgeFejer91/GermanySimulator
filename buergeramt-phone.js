@@ -11,7 +11,7 @@ if(phoneOs==="android"&&!callUiOverride)navigator.userAgentData?.getHighEntropyV
  if(call.hidden&&/^SM-|^Galaxy/i.test(model||"")){callUi="samsung";document.documentElement.dataset.callUi=callUi}
 }).catch(()=>{});
 const captions=new URLSearchParams(window.location?.hash?.slice(1)||"").get("captions")==="en",browserLanguage=navigator.languages?.[0]||navigator.language||"de",callLanguage=captions||/^en(?:-|$)/i.test(browserLanguage)?"en":"de";
-const copy=callLanguage==="en"?{ringing:"INCOMING CALL",connected:"CONNECTED",caller:"Unknown number",answer:"ANSWER",decline:"DECLINE",answeredStatus:"Call answered.",declinedStatus:"Call declined. The appointment continues."}:{ringing:"EINGEHENDER ANRUF",connected:"VERBUNDEN",caller:"Unbekannte Nummer",answer:"ANNEHMEN",decline:"ABLEHNEN",answeredStatus:"Anruf angenommen.",declinedStatus:"Anruf abgelehnt. Der Termin läuft weiter."};
+const copy=callLanguage==="en"?{ringing:"INCOMING CALL",connected:"CONNECTED",caller:"Unbekannte Nummer",answer:"ANSWER",decline:"DECLINE",answeredStatus:"Call answered.",declinedStatus:"Call declined. The appointment continues."}:{ringing:"EINGEHENDER ANRUF",connected:"VERBUNDEN",caller:"Unbekannte Nummer",answer:"ANNEHMEN",decline:"ABLEHNEN",answeredStatus:"Anruf angenommen.",declinedStatus:"Anruf abgelehnt. Der Termin läuft weiter."};
 call.lang=callLanguage;callState.textContent=copy.ringing;document.getElementById("phone-caller").textContent=copy.caller;document.getElementById("phone-answer-label").textContent=copy.answer;document.getElementById("phone-decline-label").textContent=copy.decline;document.getElementById("phone-swipe-label").textContent=copy.answer;
 const clockService=window.BuergeramtClock;let clockAnchor=null;
 const clock=document.getElementById("phone-time");function updateClock(){const utc=clockService?.usable?.(clockAnchor)?clockService.utcAt(clockAnchor,performance.now()):Date.now();clock.textContent=new Intl.DateTimeFormat(callLanguage,{hour:"2-digit",minute:"2-digit",hour12:false}).format(new Date(utc))}updateClock();const clockTimer=setInterval(updateClock,30000);window.addEventListener("pagehide",()=>clearInterval(clockTimer));
@@ -19,10 +19,11 @@ if(!invitation){connection.textContent="Dieser Aufruf hat keine gültige Wartesc
 clockService?.sample?.().then(anchor=>{clockAnchor=anchor;updateClock()}).catch(()=>{});
 const link=new BuergeramtLink("phone",invitation),scanId=Array.from(crypto.getRandomValues(new Uint8Array(12)),n=>n.toString(16).padStart(2,"0")).join("");let currentCall="",resolved="",policeIndex=-1,audioContext=null,phoneFxGain=null,staticSource=null,recordedSpeech=null,voiceGeneration=0,submittedName="",slotActive=false,finished=false,closed=false,voiceBusy=false,voiceTimer=null,ringTimer=null,callStartTimer=null,armedCall=false,scanTimer=null,voiceStartupMs=null,voiceAttempts=0,drag=null,ignoreClickTarget=null;
 const voiceQueue=[],ringSources=new Set();
+let activePoliceIndex=null,finishPoliceVoice=null,cutoffTimer=null;
 function stopRing(){clearTimeout(ringTimer);clearTimeout(callStartTimer);ringTimer=callStartTimer=null;for(const source of ringSources){try{source.stop()}catch{}}ringSources.clear();try{navigator.vibrate?.(0)}catch{}}
 function stopRecorded(){const clip=recordedSpeech;recordedSpeech=null;if(clip){clip.onplaying=clip.onended=clip.onerror=null;try{clip.pause()}catch{}}}
 function resetSwipe(){drag=null;for(const button of [answer,decline]){button.style?.removeProperty("--amt-swipe-x");button.style?.removeProperty("--amt-swipe-y");button.classList.remove("dragging")}}
-function stopCall(){voiceGeneration++;voiceQueue.length=0;voiceBusy=false;clearTimeout(voiceTimer);voiceTimer=null;stopRecorded();stopStatic();stopRing();armedCall=false;resetSwipe();try{window.speechSynthesis?.cancel()}catch{}call.classList.remove("answered");callState.textContent=copy.ringing;call.hidden=true;answer.hidden=true;decline.hidden=true}
+function stopCall(){voiceGeneration++;voiceQueue.length=0;voiceBusy=false;activePoliceIndex=finishPoliceVoice=null;clearTimeout(cutoffTimer);cutoffTimer=null;clearTimeout(voiceTimer);voiceTimer=null;stopRecorded();stopStatic();stopRing();armedCall=false;resetSwipe();try{window.speechSynthesis?.cancel()}catch{}call.classList.remove("answered");callState.textContent=copy.ringing;call.hidden=true;answer.hidden=true;decline.hidden=true}
 function endSlot(text){slotActive=false;finished=true;submit.disabled=true;clearInterval(scanTimer);scanTimer=null;stopCall();status.textContent=text;try{wakeLock?.release()?.catch(()=>{})}catch{}wakeLock=null}
 function initAudio(){try{const Audio=window.AudioContext||window.webkitAudioContext;if(Audio&&!audioContext){audioContext=new Audio();phoneFxGain=audioContext.createGain();phoneFxGain.gain.value=1;phoneFxGain.connect(audioContext.destination)}audioContext?.resume()?.catch(()=>{})}catch{}}
 function requestTicket(){if(closed||finished||slotActive||link.channel?.readyState!=="open")return;if(!link.send("scan",{id:scanId}))connection.textContent="Wartenummer wird erneut angefordert."}
@@ -57,16 +58,17 @@ function showPolice(text,index,receivedAt=performance.now()){
 }
 function playNextPolice(){
  if(voiceBusy||!voiceQueue.length||resolved!=="answer"||finished||closed||document.hidden||call.hidden)return;
- voiceBusy=true;const {text,index,receivedAt}=voiceQueue.shift(),generation=++voiceGeneration;
+ voiceBusy=true;const {text,index,receivedAt}=voiceQueue.shift(),generation=++voiceGeneration;activePoliceIndex=index;
  const current=()=>generation===voiceGeneration&&!finished&&!closed&&resolved==="answer"&&!call.hidden;
  let startedAt=null,mode="fallback";
- const started=kind=>{if(!current()||startedAt!==null)return;startedAt=performance.now();mode=kind;const readyDelayMs=Math.min(60000,Math.max(0,Math.round(startedAt-receivedAt)));if(kind==="voice")voiceStartupMs=voiceStartupMs===null?readyDelayMs:Math.round(voiceStartupMs*.6+readyDelayMs*.4);link.send("police-start",{index,mode,readyDelayMs,atMs:startedAt})};
+ const started=kind=>{if(!current()||startedAt!==null)return;startedAt=performance.now();mode=kind;const readyDelayMs=Math.min(60000,Math.max(0,Math.round(startedAt-receivedAt)));if(kind==="voice")voiceStartupMs=voiceStartupMs===null?readyDelayMs:Math.round(voiceStartupMs*.6+readyDelayMs*.4);const atUtcMs=clockService?.usable?.(clockAnchor,startedAt)?Math.round(clockService.utcAt(clockAnchor,startedAt)):null;link.send("police-start",{index,mode,readyDelayMs,atMs:startedAt,atUtcMs})};
  const show=()=>{if(current()){line.textContent=text;line.hidden=false}};
- const finish=()=>{if(!current())return;const endedAt=performance.now();voiceGeneration++;clearTimeout(voiceTimer);stopRecorded();stopStatic();voiceBusy=false;link.send("police-done",{index,mode,durationMs:Math.min(60000,Math.max(0,Math.round(endedAt-(startedAt??endedAt)))),atMs:endedAt});voiceTimer=setTimeout(playNextPolice,0)};
+ const finish=()=>{if(!current())return;const endedAt=performance.now();voiceGeneration++;clearTimeout(cutoffTimer);cutoffTimer=null;clearTimeout(voiceTimer);stopRecorded();stopStatic();voiceBusy=false;activePoliceIndex=finishPoliceVoice=null;link.send("police-done",{index,mode,durationMs:Math.min(60000,Math.max(0,Math.round(endedAt-(startedAt??endedAt)))),atMs:endedAt});voiceTimer=setTimeout(playNextPolice,0)};
+ finishPoliceVoice=finish;
  const fallback=()=>{if(!current()||startedAt!==null&&mode==="fallback")return;clearTimeout(voiceTimer);mode="fallback";show();started("fallback");voiceTimer=setTimeout(finish,Math.max(3500,text.length*55))};
  const browserSpeech=()=>{
   if(!window.speechSynthesis||typeof window.SpeechSynthesisUtterance!=="function"){fallback();return}
-  const utterance=new SpeechSynthesisUtterance(text);utterance.lang="de-DE";utterance.rate=.87;utterance.pitch=.66;utterance.volume=1;
+  const utterance=new SpeechSynthesisUtterance(text);utterance.lang="de-DE";utterance.rate=.87+Math.max(0,index+1)*.06;utterance.pitch=.66;utterance.volume=1;
   const voices=speechSynthesis.getVoices();utterance.voice=voices.find(v=>/^de/i.test(v.lang)&&/male|daniel|stefan|markus|martin|thomas|tim/i.test(v.name))||voices.find(v=>/^de/i.test(v.lang))||null;
   utterance.onstart=()=>{if(!current()||startedAt!==null)return;clearTimeout(voiceTimer);show();started("voice");startStatic();voiceTimer=setTimeout(()=>{if(current()){speechSynthesis.cancel();finish()}},Math.max(20000,text.length*140))};
   utterance.onend=()=>{if(mode==="voice")finish()};utterance.onerror=()=>{if(current()&&(startedAt===null||mode==="voice")){stopStatic();fallback()}};
@@ -74,7 +76,8 @@ function playNextPolice(){
   voiceTimer=setTimeout(()=>{if(current()){speechSynthesis.cancel();fallback()}},startupLimit);
   requestAnimationFrame(()=>{if(current()){try{speechSynthesis.speak(utterance)}catch{clearTimeout(voiceTimer);fallback()}}});
  };
- const candidate=window.GermanySimulatorAudioText?.candidateClip?.("polizei-heinrich-wachtmeister",text);
+ const catalog=window.GermanySimulatorAudioText,voiceId=catalog?.speechFamilies?.amtPolice?.voiceId||"kriminalpolizei";
+ const candidate=catalog?.recordedClip?.(voiceId,text)||catalog?.candidateClip?.(voiceId,text);
  if(!candidate||typeof window.Audio!=="function"){browserSpeech();return}
  const clip=new window.Audio(candidate);recordedSpeech=clip;clip.preload="auto";
  const recordingFailed=()=>{if(recordedSpeech!==clip||!current())return;stopRecorded();clearTimeout(voiceTimer);if(startedAt===null)browserSpeech();else finish()};
@@ -102,6 +105,14 @@ link.addEventListener("message",e=>{
  else if(m.type==="call-arm"&&slotActive&&submittedName&&!currentCall&&m.id==="grass"){armedCall=true;initAudio();link.send("call-ready",{id:m.id,atMs:performance.now()})}
  else if(m.type==="call"&&slotActive&&!currentCall&&m.id==="grass"&&typeof m.line==="string"&&m.line.length<350)incomingCall(m);
  else if(m.type==="police-line"&&resolved==="answer"&&slotActive&&m.id===undefined&&Number.isInteger(m.index)&&m.index>policeIndex&&m.index>=0&&m.index<3&&typeof m.line==="string"&&m.line.length<350){policeIndex=m.index;showPolice(m.line,m.index,performance.now())}
+ else if(m.type==="police-cutoff"&&resolved==="answer"&&slotActive&&Number.isInteger(m.index)&&m.index===activePoliceIndex&&finishPoliceVoice){
+  const now=performance.now();let target=Number.isFinite(m.stopAtPhoneMs)?m.stopAtPhoneMs:null;
+  if(target===null&&Number.isSafeInteger(m.stopAtUtcMs)&&clockService?.usable?.(clockAnchor,now))target=clockService.monoAt(clockAnchor,m.stopAtUtcMs);
+  if(target!==null&&(target<now-12000||target>now+12000))return;
+  const generation=voiceGeneration,finish=finishPoliceVoice;clearTimeout(cutoffTimer);
+  const cut=()=>{cutoffTimer=null;if(generation!==voiceGeneration||m.index!==activePoliceIndex)return;finish();try{window.speechSynthesis?.cancel()}catch{}};
+  if(target===null||target<=now)cut();else cutoffTimer=setTimeout(cut,target-now);
+ }
 });
 form.addEventListener("submit",e=>{
  e.preventDefault();if(closed||finished||submittedName)return;const value=name.value.trim().replace(/\s+/g," ");

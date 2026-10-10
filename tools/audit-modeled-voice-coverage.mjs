@@ -13,7 +13,8 @@ const cast = JSON.parse(source('For-AI/VOICE-CAST.json'));
 const fixed = cast.characters;
 const roles = cast.roleProfiles;
 const political = cast.existingAssetProfiles;
-const people = [...fixed, ...roles, ...political];
+const institutions = cast.institutionProfiles || [];
+const people = [...fixed, ...roles, ...political, ...institutions];
 const byVoice = new Map(people.map(person => [person.voiceId, person]));
 requireMatch(byVoice.size === people.length, 'Duplicate voiceId in cast');
 requireMatch(fixed.length === cast.characterCount && roles.length === cast.roleProfileCount,
@@ -72,6 +73,14 @@ for (const person of officeClones) requireMatch(byVoice.has(person.decorativeClo
 const storyContext = {window: {}};
 vm.runInNewContext(source('buergeramt-story.js'), storyContext);
 const patronDialogue = storyContext.window.BuergeramtStory.patrons;
+for (const person of institutions) {
+  requireMatch(/^[0-9a-f]{32}$/.test(person.secretTunnelProfileId) &&
+    person.secretTunnelProfileName && person.reference?.workingReferenceSha256,
+  `Missing saved institution profile binding for ${person.voiceId}`);
+  requireMatch(person.gameRole === 'buergeramt-phone' &&
+    storyContext.window.BuergeramtStory.call.voiceId === person.voiceId,
+  `Institution phone/dialogue mismatch for ${person.voiceId}`);
+}
 const patronModels = [...world.matchAll(/amtCharacter\("([^"]+)",(-?[\d.]+),(-?[\d.]+),[^\n]*?\{id:"([^"]+)"/g)]
   .filter(([, kind]) => ['renter', 'parent', 'pensioner'].includes(kind))
   .map(([, kind, x, z, voiceId]) => ({kind, x: Number(x), z: Number(z), voiceId}));
@@ -123,11 +132,16 @@ const report = {
     'assets/models/street-characters/runtime.js',
     'assets/models/street-characters/persona-map.js'].map(file => [file, hash(file)])),
   counts: {newNonpoliticalProfiles: newProfiles.length, existingPoliticalProfiles: political.length,
+    institutionPhoneProfiles: institutions.length,
     namedCityNpcBindings: city.length, namedCrowdIdentities: crowd.length,
     staticBuergeramtSpeakers: officeSpeakers.length, authoredStaticPatrons: patronModels.length, decorativeClerkClones: officeClones.length,
     optionalStreetVisualTemplates: STREET_CATALOG.length,
     mappedStreetSpeakers: streetPersonaMapping.length},
   staticBuergeramt: office,
+  institutionPhones: institutions.map(person => ({gameRole: person.gameRole,
+    voiceId: person.voiceId, displayRole: person.displayRole,
+    profileId: person.secretTunnelProfileId, profileName: person.secretTunnelProfileName,
+    referenceSha256: person.reference.workingReferenceSha256})),
   staticPatronDialogue: patronModels.map(model => ({...model, lineCount: patronDialogue[model.voiceId].lines.length})),
   city,
   crowdVoiceIds: crowd,

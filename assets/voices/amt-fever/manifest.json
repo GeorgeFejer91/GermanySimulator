@@ -4465,7 +4465,8 @@
         "scope": "Default Bürgeramt fever encounters and alternate voice recordings",
         "listeningVerified": false
       },
-      "english": "Are you joking? You are taking a call during an appointment at the citizens office? I already have the stamp in my hand!"
+      "english": "Are you joking? You are taking a call during an appointment at the citizens office? I already have the stamp in my hand!",
+      "retiredReason": "Replaced by the user-requested escalating Kriminalpolizei argument on 2026-10-10; preserve the previously approved audio and provenance as history."
     },
     {
       "actorId": "clerk",
@@ -4653,7 +4654,8 @@
         "scope": "Default Bürgeramt fever encounters and alternate voice recordings",
         "listeningVerified": false
       },
-      "english": "Oh, the police? Officer Wachtmeister, I hear you! This citizen is at my counter, not on your lawn. Now let me finish!"
+      "english": "Oh, the police? Officer Wachtmeister, I hear you! This citizen is at my counter, not on your lawn. Now let me finish!",
+      "retiredReason": "Replaced by the user-requested escalating Kriminalpolizei argument on 2026-10-10; preserve the previously approved audio and provenance as history."
     },
     {
       "actorId": "clerk",
@@ -4871,7 +4873,8 @@
         "scope": "Default Bürgeramt fever encounters and alternate voice recordings",
         "listeningVerified": false
       },
-      "english": "I am seventy-four and have worked at this counter for fifty years. My counter does not cover lawns. It covers applications! Ask him about his shoes, not me about my desktop!"
+      "english": "I am seventy-four and have worked at this counter for fifty years. My counter does not cover lawns. It covers applications! Ask him about his shoes, not me about my desktop!",
+      "retiredReason": "Replaced by the user-requested escalating Kriminalpolizei argument on 2026-10-10; preserve the previously approved audio and provenance as history."
     },
     {
       "actorId": "clerk",
@@ -5083,7 +5086,8 @@
         "scope": "Default Bürgeramt fever encounters and alternate voice recordings",
         "listeningVerified": false
       },
-      "english": "You are accusing my counter? Then file a complaint against it! The stamp was halfway down. Half a stamp is no stamp, and without a stamp your appointment is annulled."
+      "english": "You are accusing my counter? Then file a complaint against it! The stamp was halfway down. Half a stamp is no stamp, and without a stamp your appointment is annulled.",
+      "retiredReason": "Replaced by the user-requested escalating Kriminalpolizei argument on 2026-10-10; preserve the previously approved audio and provenance as history."
     },
     {
       "actorId": "clerk",
@@ -5319,7 +5323,8 @@
         "scope": "Default Bürgeramt fever encounters and alternate voice recordings",
         "listeningVerified": false
       },
-      "english": "Your number returns to the dispenser. Please leave through the entrance. Draw a new number outside to try again; the police have jurisdiction over the lawn there."
+      "english": "Your number returns to the dispenser. Please leave through the entrance. Draw a new number outside to try again; the police have jurisdiction over the lawn there.",
+      "retiredReason": "Replaced by the user-requested escalating Kriminalpolizei argument on 2026-10-10; preserve the previously approved audio and provenance as history."
     },
     {
       "actorId": "clerk",
@@ -5602,5 +5607,6 @@
     "instruction": "I approve, just implement it",
     "scope": "Default Bürgeramt fever encounters and alternate voice recordings",
     "listeningVerified": false
-  }
+  },
+  "activeLineCount": 35
 }

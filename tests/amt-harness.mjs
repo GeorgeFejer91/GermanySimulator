@@ -72,7 +72,7 @@ export function harness(kind='host',{voice=false,synthesis=true,phoneLanguage='d
    fail(){this.onerror?.()}
   }
   globals.Audio=RecordedAudio;
-  window.GermanySimulatorAudioText={candidateClip:(voiceId,text)=>voiceId==='polizei-heinrich-wachtmeister'&&text?`./assets/voices/candidate-dialogue/${voiceId}-phone-01.mp3`:null};
+  window.GermanySimulatorAudioText={speechFamilies:{amtPolice:{voiceId:'kriminalpolizei'}},recordedClip:(voiceId,text)=>voiceId==='kriminalpolizei'&&text?`./assets/voices/kriminalpolizei/${voiceId}-phone-01.mp3`:null};
  }
  if(fakeAudio){
   class Param{

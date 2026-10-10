@@ -250,3 +250,21 @@ unchanged. Private references and normalized review queue remain in Music.
 ## Approved fictional character dialogue
 
 `approved-dialogue/manifest.json` is the per-file provenance ledger for bulk Chatterbox clips promoted to normal gameplay. Each entry records the speaking voice ID and Secret Tunnel profile UUID, exact script, shipping and source hashes, reference hash/dataset/license, renderer revision/license, and the reviewed Music queue hash. `tools/promote-reviewed-voice-dialogue.mjs` verifies the seven human review fields, original and normalized hashes, and delivery levels before copying a clip. That manifest is currently empty: none of the 236 bulk candidates has passed that gate. The individually user-approved Aktenkurier omen above is a separate direct catalogue recording with its actual approval instruction. Approved clips play by exact voice ID and text; remaining bulk candidates retain their opt-in preview status.
+
+
+
+
+## User-selected Kriminalpolizei phone voice (2026-10-10)
+
+The user selected saved Secret Tunnel profile `GS Kriminalpolizei` (`f700170f840543bca7413d3ccf6ac028`) for the Bürgeramt call. Its source note is https://www.youtube.com/watch?v=egBl1QgsdXQ, original hash `0a1f98a15137640d3913ac3e0bc28811d5304dd16119ffab5aa8ad6653df0acf`, and normalized reference hash `ef452114430b47167239cdb065b1e01d502c0148f1492ac1b66098a03c0ea82e`. This metadata does not establish a CC0 license. Source recordings and models are private authoring inputs and do not ship. The four authored phone recordings use Secret Tunnel 6’s bundled OmniVoice Rust runtime, revision `4c7b088294fd6f3a5fb9e3b1dfd3a77bc12f105b`, and model revision `c5fdb5ccb189668d56333f77ba2629f4cd7535f4`. Model weights have noncommercial terms with Boson and Meta tokenizer conditions.
+
+The opening and shouted final phone reply use direct seeded retakes from that same saved profile because the first native takes changed words. Seed, rejected native feedback, exact source/encoded hashes and bundled Whisper large-v3-turbo q4_0 transcripts are in `kriminalpolizei/manifest.json`. All four final encoded phone clips matched the complete script after case and punctuation normalization. Final MP3s are mono 24 kHz, 64 kbit/s, measured within 0.3 LU of −18 LUFS and at or below −1.5 dBTP. The user’s explicit voice selection authorizes default playback for this phone family. Full listening review has not been performed; silent timing checks do not establish voice quality. Each clip loads after Answer at its own turn, with exact-text browser speech on load failure.
+
+| File | Duration | SHA-256 |
+| --- | ---: | --- |
+| `kriminalpolizei/kriminalpolizei-phone-01.mp3` | 10.480 s | `2ac486e5b558dc909d96f6afce7767def77a891f81076b0b6f5e33274da20e24` |
+| `kriminalpolizei/kriminalpolizei-phone-02.mp3` | 7.240 s | `0905883e183ae8993363a45ba6b8444264d39a4c0c2e0d725aa7e9c98110eb5f` |
+| `kriminalpolizei/kriminalpolizei-phone-03.mp3` | 6.840 s | `5f6f9f1be2c78798d9250ff696eaba0ecc611803524cbaa277e250c79ad0cfc9` |
+| `kriminalpolizei/kriminalpolizei-phone-04.mp3` | 7.680 s | `5e93de3c3d87f132ba45857be3508e77704376152def6c1a3853bcf01a4eb7c5` |
+
+Five new Frau Knick escalation clips (`candidate-dialogue/amt-brunhilde-knick-17-escalation.mp3` through `-21-escalation.mp3`) remain opt-in candidates from her unchanged profile `1a28fb7903d344518617d755a7f5cbb0`. The CC0 EmoDB original input hash is `903884eae81731486a3d4e8f04c69bf86f69a35002d7674f1d709225b7d2934f`; normalized native input hash `7844b1c83d829fa08c2fe1d5474697d81868bec0334dadf4642fae7591125cbf` is recorded separately. The manifest retains all five previous candidates. Direct retakes corrected “Grashalm” and “annulliert”; upper/lower case affected the latter take and the final spoken words remain exact. Numeric/compound-only transcript equivalence is marked separately from literal agreement. All five encoded outputs passed the same loudness targets; complete listening remains pending. Four former Heinrich phone candidates are retained for history and excluded from active preview.

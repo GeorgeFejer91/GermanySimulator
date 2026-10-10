@@ -27,7 +27,7 @@ function phoneTime(atMs,receiptAt,offset=timing.clockOffsetMs){return offset!==n
 function phoneStartLag(){return Math.min(1200,oneWay()+(timing.phoneReadyMs??180))}
 function phoneFastLag(){return Math.min(1200,oneWay()+(timing.phoneFastReadyMs??180))}
 function sentPolice(index){timing.cues[index]={sentAt:performance.now(),startedAt:null,doneAt:null,status:"waiting"}}
-function receivePoliceStart(index,mode,readyDelayMs,atMs){const record=timing.cues[index];if(!record||record.status!=="waiting"||record.startedAt!==null||record.doneAt!==null)return false;record.startedAt=performance.now();record.phoneStartedAtMs=atMs;record.clockOffsetMs=timing.lastPongAt!==null&&record.startedAt-timing.lastPongAt<6000?timing.clockOffsetMs:null;record.estimatedStartAt=phoneTime(atMs,record.startedAt,record.clockOffsetMs);record.startMode=mode;record.readyDelayMs=readyDelayMs;record.startTransportMs=Math.round(record.startedAt-record.sentAt-readyDelayMs);if(readyDelayMs<5000)timing.phoneFastReadyMs=timing.phoneFastReadyMs===null?readyDelayMs:Math.min(timing.phoneFastReadyMs,readyDelayMs);if(index>=0&&index<2&&readyDelayMs<5000)timing.phoneReadyMs=timing.phoneReadyMs===null?readyDelayMs:Math.round(timing.phoneReadyMs*.6+readyDelayMs*.4);timing.startLagMs=phoneStartLag();return true}
+function receivePoliceStart(index,mode,readyDelayMs,atMs,atUtcMs=null){const record=timing.cues[index];if(!record||record.status!=="waiting"||record.startedAt!==null||record.doneAt!==null)return false;record.startedAt=performance.now();record.phoneStartedAtMs=atMs;record.clockOffsetMs=timing.lastPongAt!==null&&record.startedAt-timing.lastPongAt<6000?timing.clockOffsetMs:null;record.estimatedStartAt=phoneTime(atMs,record.startedAt,record.clockOffsetMs);record.phoneStartedAtUtcMs=atUtcMs;record.clockDomain=record.clockOffsetMs!==null?"peer":"receipt";if(record.clockOffsetMs===null&&Number.isSafeInteger(atUtcMs)&&window.BuergeramtClock?.usable?.(clockAnchor,record.startedAt)){record.estimatedStartAt=window.BuergeramtClock.monoAt(clockAnchor,atUtcMs);record.clockDomain="utc"}record.startMode=mode;record.readyDelayMs=readyDelayMs;record.startTransportMs=Math.round(record.startedAt-record.sentAt-readyDelayMs);if(readyDelayMs<5000)timing.phoneFastReadyMs=timing.phoneFastReadyMs===null?readyDelayMs:Math.min(timing.phoneFastReadyMs,readyDelayMs);if(index>=0&&index<2&&readyDelayMs<5000)timing.phoneReadyMs=timing.phoneReadyMs===null?readyDelayMs:Math.round(timing.phoneReadyMs*.6+readyDelayMs*.4);timing.startLagMs=phoneStartLag();return true}
 function receivePoliceDone(index,mode,durationMs,atMs){const record=timing.cues[index];if(!record||record.doneAt!==null)return false;if(record.status==="timeout"||record.status==="disconnected"){record.lateDoneAt=performance.now();return false}record.doneAt=performance.now();record.phoneEndedAtMs=atMs;if(record.clockOffsetMs===null&&timing.lastPongAt!==null&&record.doneAt-timing.lastPongAt<6000){record.clockOffsetMs=timing.clockOffsetMs;if(record.phoneStartedAtMs!==undefined)record.estimatedStartAt=phoneTime(record.phoneStartedAtMs,record.startedAt,record.clockOffsetMs)}record.estimatedEndAt=phoneTime(atMs,record.doneAt,record.clockOffsetMs);record.durationMs=durationMs;record.mode=mode;const span=record.startedAt===null?null:record.doneAt-record.startedAt;record.errorMs=span===null?null:Math.round(span-durationMs);record.localErrorMs=record.phoneStartedAtMs===undefined?null:Math.round(atMs-record.phoneStartedAtMs-durationMs);record.uncertaintyMs=timing.clockUncertaintyMs;record.receiptJitter=span!==null&&Math.abs(record.errorMs)>Math.max(250,(timing.rttMs??0)+timing.jitterMs+100);record.status=span===null?"missing-start":record.startMode!==mode?"mode-changed":Math.abs(record.localErrorMs)>25?"drift":record.clockOffsetMs===null?"unsynced":"verified";return true}
 const ambientLines=[["WARTERAUM","Mein Termin war gestern. Ich war heute pünktlich."],["SCHALTER 1","Für die Kopie des Originals benötigen Sie das Original der Kopie."],["TELEFON AM SCHALTER 2","Nein, die Warteschleife ist persönlich zu nehmen."],["WARTERAUM","Mein Buchstabe wurde aufgerufen, aber die Zahl gehört jemand anderem."],["SCHALTER 4","Einen Moment. Ich verbinde Sie mit Ihrem Moment."]];
 const mix={ambience:.35,voice:.8,fx:.6},mixPanel=document.getElementById("amt-mix");
@@ -634,7 +634,7 @@ function beginLink(){
   if(m.type==="sync-pong"){receivePong(m.id,m.receivedAtMs,m.sentAtMs);return}
   if(m.type==="call-ready"){if(stage==="counter"&&callPending&&m.id===story.call.id)commitCall("phone-ready");return}
   if(m.type==="call-scheduled"){if(timing.call&&m.id===story.call.id&&timing.call.phoneScheduledAtMs===null){timing.call.phoneScheduledAtMs=m.atMs;timing.call.phoneMode=m.mode;timing.call.lateMs=m.lateMs}return}
-  if(m.type==="police-start"){if(stage==="cancelled"&&receivePoliceStart(m.index,m.mode,m.readyDelayMs,m.atMs))policeStartHandler?.(m.index);return}
+  if(m.type==="police-start"){if(stage==="cancelled"&&receivePoliceStart(m.index,m.mode,m.readyDelayMs,m.atMs,m.atUtcMs))policeStartHandler?.(m.index);return}
   if(m.type==="police-done"){if(stage==="cancelled"&&receivePoliceDone(m.index,m.mode,m.durationMs,m.atMs))policeDoneHandler?.(m.index);return}
   if(terminal())return;
   if(m.type==="scan"){
@@ -658,38 +658,53 @@ function beginLink(){
 }
 function showClerk(){if(!active||!activated||callPending||["cancelled","expired","closed"].includes(stage))return;if(!registeredName){setStatus("VOR- UND NACHNAME AM TELEFON EINTRAGEN");return}encounterArmed=true;view.x=4;view.z=-8.15;view.yaw=0;setStage("counter");const node=story.clerk[clerkIndex];if(clerkIndex===0&&!callTriggered){callTriggered=true;callPending=true;content(node.speaker,"Nummer "+number+"? Beeilen Sie sich! Ich bin sehr beschäftigt. Was? Ihr Telefon klingelt während meiner Vorsprache.",[],null,armCall);return}if(callOutcome!=="decline"||!node)return;const choices=node.choices.map(choice=>({label:choice.label,run:()=>{setStage("reply");content(node.speaker,choice.reply,[{label:clerkIndex===story.clerk.length-1?"FORMULAR A38 ENTGEGENNEHMEN":"WEITER",run:()=>{clerkIndex++;if(clerkIndex<story.clerk.length)showClerk();else finish()}}])}}));content(node.speaker,node.line,choices)}
 function showOutburst(){
- const upset=story.outburst;exit.hidden=true;
- const heard=new Set();let waiting=null,phoneTimeout=null,deskFirst=false,phoneFirst=false,started=false,disconnected=false;
- const afterPhone=(next,beat=420)=>defer(next,Math.max(60,beat-oneWay()-timing.deskStartLagMs));
- const afterDesk=(next,beat=420)=>defer(next,Math.max(0,beat-phoneStartLag()));
- function releasePhone(index){
-  heard.add(index);if(waiting?.index!==index)return;
-  if(timing.cues[index]?.doneAt===null)timing.cues[index].status=disconnected?"disconnected":"timeout";
-  const next=waiting.next;waiting=null;if(phoneTimeout!==null)clearTimer(phoneTimeout);phoneTimeout=null;next();
+ const upset=story.outburst;exit.hidden=true;cancelSpeech();
+ let waiting=null,deskIndex=null,deskTimer=null,disconnected=false;
+ function stopDesk(){
+  if(deskTimer!==null)clearTimer(deskTimer);deskTimer=null;
+  const record=timing.desk[deskIndex];if(record&&record.endAt===null){record.endAt=performance.now();record.mode="interrupted";cancelSpeech()}
  }
- policeDoneHandler=releasePhone;
- policeStartHandler=index=>{if(waiting?.index===index){if(phoneTimeout!==null)clearTimer(phoneTimeout);phoneTimeout=defer(()=>releasePhone(index),24000)}};
- policeDisconnectHandler=()=>{disconnected=true;if(waiting)releasePhone(waiting.index)};
- function waitPhone(index,next){waiting={index,next};if(heard.has(index)){releasePhone(index);return}phoneTimeout=defer(()=>releasePhone(index),18000)}
- function desk(index,next,onStart,onBoundary){
+ function nextDesk(index,missing=false){
+  if(waiting?.index!==index)return;const pending=waiting;waiting=null;clearTimer(pending.timer);
+  if(missing&&timing.cues[index]?.doneAt===null)timing.cues[index].status=disconnected?"disconnected":"timeout";
+  desk(index+1);
+ }
+ policeDoneHandler=index=>nextDesk(index);
+ policeStartHandler=index=>{
+  if(waiting?.index!==index)return;stopDesk();clearTimer(waiting.timer);
+  const pending=waiting,record=timing.cues[index],budget=upset.phoneCutAfterMs[index+1],target=record.estimatedStartAt+budget;
+  const service=window.BuergeramtClock;
+  const stopAtUtcMs=Number.isSafeInteger(record.phoneStartedAtUtcMs)?record.phoneStartedAtUtcMs+budget:service?.usable?.(clockAnchor)?Math.round(service.utcAt(clockAnchor,target)):null;
+  const payload={index,stopAtPhoneMs:record.phoneStartedAtMs+budget,stopAtUtcMs};
+  record.cutoffAtPhoneMs=payload.stopAtPhoneMs;record.cutoffAtUtcMs=stopAtUtcMs;
+  let tries=0;
+  const schedule=()=>{
+   if(waiting!==pending||record.doneAt!==null)return;
+   if(!disconnected&&link?.send("police-cutoff",payload)){
+    record.interrupted=true;record.cutoffSentAt=performance.now();
+    pending.timer=defer(()=>nextDesk(index),Math.max(0,target-performance.now()-timing.deskStartLagMs));
+   }else if(++tries<3)pending.timer=defer(schedule,100);
+   else{record.cutoffSendFailed=true;pending.timer=defer(()=>nextDesk(index,true),60000)}
+  };
+  schedule();
+ };
+ policeDisconnectHandler=()=>{disconnected=true;if(waiting)nextDesk(waiting.index,true)};
+ function police(index){
+  if(waiting)return;
+  waiting={index,timer:defer(()=>nextDesk(index,true),18000)};
+  if(index>=0){if(!disconnected&&link?.send("police-line",{index,line:story.police[index]}))sentPolice(index);else nextDesk(index,true)}
+ }
+ function desk(index){
+  stopDesk();deskIndex=index;let advanced=false;
   const text=upset.lines[index],record={requestedAt:performance.now(),startAt:null,endAt:null,mode:"waiting"};timing.desk[index]=record;
-  content(upset.speaker,text,[],mode=>{record.endAt=performance.now();record.mode=mode;if(record.startAt!==null){const rate=(record.endAt-record.startAt)/text.length;if(rate>=20&&rate<=180)timing.deskMsPerChar=Math.round(timing.deskMsPerChar*.65+rate*.35)}next?.()},mode=>{record.startAt=performance.now();record.startMode=mode;if(mode==="voice")timing.deskStartLagMs=Math.round(timing.deskStartLagMs*.6+(record.startAt-record.requestedAt)*.4);onStart?.()},onBoundary);
+  const advance=()=>{if(advanced)return;advanced=true;if(deskTimer!==null)clearTimer(deskTimer);deskTimer=null;if(index<3)police(index);else if(index===3)defer(()=>desk(4),150);else defer(finishArgument,200)};
+  content(upset.speaker,text,[],mode=>{record.endAt=performance.now();record.mode=mode;advance()},mode=>{
+   record.startAt=performance.now();record.startMode=mode;if(mode==="voice")timing.deskStartLagMs=Math.round(timing.deskStartLagMs*.6+(record.startAt-record.requestedAt)*.4);
+   if(index<3)deskTimer=defer(advance,Math.max(300,upset.cutAfterMs[index]-phoneFastLag()));
+  },null,null,upset.delivery[index]);
  }
- function police(index,next){waitPhone(index,next);if(!disconnected&&link?.send("police-line",{index,line:story.police[index]}))sentPolice(index);else releasePhone(index)}
  function finishArgument(){const callback=options.onCancel;close(false);callback()}
- function overlap(){
-  let deskDone=false,phoneDone=false,continued=false,phoneSent=false,overlapTimer=null;
-  const continueWhenBoth=()=>{if(deskDone&&phoneDone&&!continued){continued=true;const latest=Math.max(timing.desk[2].endAt,timing.cues[2]?.estimatedEndAt??performance.now());defer(()=>desk(3,()=>defer(()=>desk(4,()=>defer(finishArgument,300)),Math.max(100,520-timing.deskStartLagMs))),Math.max(80,420-(performance.now()-latest)-timing.deskStartLagMs))}};
-  const interrupt=()=>{if(phoneSent)return;phoneSent=true;if(overlapTimer!==null)clearTimer(overlapTimer);police(2,()=>{phoneDone=true;continueWhenBoth()})};
-  const clause=upset.lines[2].indexOf("!")+1,lead=Math.max(0,clause-10);
-  desk(2,()=>{deskDone=true;interrupt();continueWhenBoth()},()=>{const target=Math.max(3500,Math.min(6500,lead*timing.deskMsPerChar));overlapTimer=defer(interrupt,Math.max(300,target-phoneFastLag()))},charIndex=>{if(charIndex>=lead)interrupt()});
- }
- function afterOfficerOne(){afterPhone(overlap)}
- function afterKnickOne(){afterDesk(()=>police(1,afterOfficerOne))}
- function afterOfficerZero(){afterPhone(()=>desk(1,afterKnickOne))}
- function beginExchange(){if(!deskFirst||!phoneFirst||started)return;started=true;const latest=Math.max(timing.desk[0].endAt,timing.cues[-1]?.estimatedEndAt??performance.now());defer(()=>police(0,afterOfficerZero),Math.max(0,latest+520-performance.now()-phoneStartLag()))}
- waitPhone(-1,()=>{phoneFirst=true;beginExchange()});
- desk(0,()=>{deskFirst=true;beginExchange()});
+ police(-1);
 }
 function finish(){if(!active||!activated||callPending||callOutcome!=="decline"||clerkIndex!==story.clerk.length)return;const callback=options.onForm;close(false);callback()}
 function close(notify=true){

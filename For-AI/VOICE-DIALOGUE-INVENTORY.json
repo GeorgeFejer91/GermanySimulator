@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "explanation": "Exact currently authored source pools. Quiz speech concatenates one regional approach, one category context and one regional question; the combinations are generated at runtime. Fixed NPC lines and their owners are in VOICE-CAST.json. Bürgeramt clerk and Heinrich Wachtmeister phone dialogue from buergeramt-story.js are inventoried separately; additional call-status sentences in buergeramt.js remain context-dependent.",
+  "explanation": "Exact currently authored source pools. Quiz speech concatenates one regional approach, one category context and one regional question; the combinations are generated at runtime. Fixed NPC lines and their owners are in VOICE-CAST.json. Bürgeramt clerk and Kriminalpolizei phone dialogue from buergeramt-story.js are inventoried separately; additional call-status sentences in buergeramt.js remain context-dependent.",
   "source": [
     "game.js",
     "buergeramt-story.js"
@@ -150,8 +150,7 @@
     {
       "voiceId": "polizei-heinrich-wachtmeister",
       "sourcePools": [
-        "game.js policeBarks[region]",
-        "buergeramt-story.js police and call for phone role"
+        "game.js policeBarks[region]"
       ]
     },
     {
@@ -1067,12 +1066,12 @@
       }
     },
     "buergeramtPolicePhone": {
-      "voiceId": "polizei-heinrich-wachtmeister",
-      "call": "Polizei, Ordnungskontrolle. Sie sind heute über eine Grünfläche gelaufen. Antworten Sie: linker Schuh, rechter Schuh, oder beide?",
+      "voiceId": "kriminalpolizei",
+      "call": "Hier ist die Kriminalpolizei. Gegen Sie wird wegen unerlaubten Betretens einer Grünfläche ermittelt. Welcher Schuh hat den Rasen zuerst berührt: der linke, der rechte oder beide?",
       "replies": [
-        "Hallo? Sprechen Sie lauter! Wir können Sie nicht hören. Haben Sie etwa etwas Wichtigeres zu tun, oder was?!",
-        "Wer redet da im Hintergrund? Die Frau am Schalter? Stellen Sie laut! Vielleicht deckt Ihr Schalter den Rasen!",
-        "Frau Knick, behindern Sie nicht meine Befragung! Ein Grashalm fehlt, und hier schreit jemand über Stempel!"
+        "Hallo? Das ist kein Kaffeekränzchen. Die Dame am Schalter hält sich bitte heraus. Ich brauche jetzt Ihre Aussage, und zwar...",
+        "Frau Knick, wie reizend. Vielleicht bearbeiten Sie gleich Ihre eigene Anzeige. Wer einen Beschuldigten deckt, der...",
+        "NEIN, SIE HÖREN JETZT ZU! Ein Grashalm fehlt, und Sie behindern meine Befragung! Noch ein Wort, und ich lasse Ihren ganzen Schalter..."
       ]
     },
     "buergeramtClerk": {
@@ -1116,11 +1115,11 @@
         }
       ],
       "outburst": [
-        "Sie machen wohl Witze? Sie nehmen während eines Termins im Bürgeramt einen Anruf an? Ich habe den Stempel schon in der Hand!",
-        "Ach, die Polizei? Herr Wachtmeister, ich höre Sie! Der Bürger steht an meinem Schalter und nicht auf Ihrem Rasen. Jetzt lassen Sie mich ausreden!",
-        "Ich bin vierundsiebzig und seit fünfzig Jahren an diesem Schalter. Mein Schalter deckt keinen Rasen. Er deckt Anträge! Fragen Sie ihn nach seinen Schuhen, nicht mich nach meiner Tischplatte!",
-        "Sie beschuldigen meinen Schalter? Dann schreiben Sie ihm eine Anzeige! Der Stempel war halb unten. Ein halber Stempel ist kein Stempel, und ohne Stempel ist Ihr Termin annulliert.",
-        "Ihre Nummer wandert zurück in den Automaten. Gehen Sie bitte durch den Eingang hinaus. Für einen neuen Versuch ziehen Sie draußen eine neue Nummer — dort ist die Polizei für den Rasen zuständig."
+        "Ach, wie schön. Für private Telefonate haben Sie Zeit. Für Ihr Formular offenbar nicht. Ich sitze hier ja nur...",
+        "Die Dame hat einen Namen. Frau Knick. Und die Dame bearbeitet hier einen Antrag, während Sie einem Grashalm hinterhertelefonieren. Wenn Sie jetzt bitte...",
+        "Sie zeigen meinen Schalter an? Ich bin vierundsiebzig und seit fünfzig Jahren hier! Mein Schalter deckt keinen Rasen. Er deckt Anträge! Jetzt halten Sie doch endlich...",
+        "SIE DROHEN MEINEM SCHALTER? DANN VERHAFTEN SIE DOCH DEN LOCHER! Ich lasse mich von Ihnen nicht anschreien!",
+        "UND SIE STEHEN HIER NICHT SO UNSCHULDIG! Der Stempel bleibt oben! Ihr Termin ist ANNULLIERT! Raus! Für einen neuen Versuch ziehen Sie draußen eine neue Nummer."
       ]
     },
     "buergeramtPatrons": {

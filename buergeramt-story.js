@@ -46,19 +46,19 @@ window.BuergeramtStory=Object.freeze({
   {word:"selbst",tension:.85,semitones:-2},{word:"gewählt",tension:1,semitones:-3.2}
  ]}},
  entrance:{speaker:"PFÖRTNERIN",line:"Halt. Sie haben das Bürgeramt betreten, ohne nachzuweisen, dass Sie vorher draußen waren. Ziehen Sie bitte eine Nummer für den Übergang."},
- call:{id:"grass",line:"Polizei, Ordnungskontrolle. Sie sind heute über eine Grünfläche gelaufen. Antworten Sie: linker Schuh, rechter Schuh, oder beide?",declined:"Sehr gut. In diesem Schalterbereich sind private Anrufe nicht zuständig."},
+ call:{id:"grass",voiceId:"kriminalpolizei",line:"Hier ist die Kriminalpolizei. Gegen Sie wird wegen unerlaubten Betretens einer Grünfläche ermittelt. Welcher Schuh hat den Rasen zuerst berührt: der linke, der rechte oder beide?",declined:"Sehr gut. In diesem Schalterbereich sind private Anrufe nicht zuständig."},
  police:[
-  "Hallo? Sprechen Sie lauter! Wir können Sie nicht hören. Haben Sie etwa etwas Wichtigeres zu tun, oder was?!",
-  "Wer redet da im Hintergrund? Die Frau am Schalter? Stellen Sie laut! Vielleicht deckt Ihr Schalter den Rasen!",
-  "Frau Knick, behindern Sie nicht meine Befragung! Ein Grashalm fehlt, und hier schreit jemand über Stempel!"
+  "Hallo? Das ist kein Kaffeekränzchen. Die Dame am Schalter hält sich bitte heraus. Ich brauche jetzt Ihre Aussage, und zwar...",
+  "Frau Knick, wie reizend. Vielleicht bearbeiten Sie gleich Ihre eigene Anzeige. Wer einen Beschuldigten deckt, der...",
+  "NEIN, SIE HÖREN JETZT ZU! Ein Grashalm fehlt, und Sie behindern meine Befragung! Noch ein Wort, und ich lasse Ihren ganzen Schalter..."
  ],
  outburst:{speaker:"FRAU KNICK · SCHALTER 3",lines:[
-  "Sie machen wohl Witze? Sie nehmen während eines Termins im Bürgeramt einen Anruf an? Ich habe den Stempel schon in der Hand!",
-  "Ach, die Polizei? Herr Wachtmeister, ich höre Sie! Der Bürger steht an meinem Schalter und nicht auf Ihrem Rasen. Jetzt lassen Sie mich ausreden!",
-  "Ich bin vierundsiebzig und seit fünfzig Jahren an diesem Schalter. Mein Schalter deckt keinen Rasen. Er deckt Anträge! Fragen Sie ihn nach seinen Schuhen, nicht mich nach meiner Tischplatte!",
-  "Sie beschuldigen meinen Schalter? Dann schreiben Sie ihm eine Anzeige! Der Stempel war halb unten. Ein halber Stempel ist kein Stempel, und ohne Stempel ist Ihr Termin annulliert.",
-  "Ihre Nummer wandert zurück in den Automaten. Gehen Sie bitte durch den Eingang hinaus. Für einen neuen Versuch ziehen Sie draußen eine neue Nummer — dort ist die Polizei für den Rasen zuständig."
- ]},
+  "Ach, wie schön. Für private Telefonate haben Sie Zeit. Für Ihr Formular offenbar nicht. Ich sitze hier ja nur...",
+  "Die Dame hat einen Namen. Frau Knick. Und die Dame bearbeitet hier einen Antrag, während Sie einem Grashalm hinterhertelefonieren. Wenn Sie jetzt bitte...",
+  "Sie zeigen meinen Schalter an? Ich bin vierundsiebzig und seit fünfzig Jahren hier! Mein Schalter deckt keinen Rasen. Er deckt Anträge! Jetzt halten Sie doch endlich...",
+  "SIE DROHEN MEINEM SCHALTER? DANN VERHAFTEN SIE DOCH DEN LOCHER! Ich lasse mich von Ihnen nicht anschreien!",
+  "UND SIE STEHEN HIER NICHT SO UNSCHULDIG! Der Stempel bleibt oben! Ihr Termin ist ANNULLIERT! Raus! Für einen neuen Versuch ziehen Sie draußen eine neue Nummer."
+ ],cutAfterMs:[3900,5200,6100],phoneCutAfterMs:[7200,4500,4700,5000],delivery:[{rate:.94,pitch:1},{rate:1.02,pitch:1.04},{rate:1.08,pitch:1.08},{rate:1.15,pitch:1.1},{rate:1.1,pitch:1.08}]},
  clerk:[
   {speaker:"SACHBEARBEITERIN FRAU KNICK",line:"Ihre Wartenummer bestätigt, dass Sie hier sind. Ihr Gesicht lässt vermuten, dass Sie wieder gehen könnten. Welcher Nachweis hat Vorrang?",choices:[
    {label:"Das Ticket.",reply:"Richtig. Ein Gesicht lässt sich verlegen; ein Ticket hat eine Perforation."},
