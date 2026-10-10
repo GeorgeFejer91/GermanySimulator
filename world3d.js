@@ -1,4 +1,4 @@
-import {createAmtGaussianScene} from './buergeramt-gaussian-scene.js?v=20261010-solid-morph';
+import {createAmtGaussianScene} from './buergeramt-gaussian-scene.js?v=20261010-mobile-handoff';
 const THREE_URL="https://cdn.jsdelivr.net/npm/three@0.186.0/build/three.module.js";
 const GLTF_LOADER_URL="https://cdn.jsdelivr.net/npm/three@0.186.0/examples/jsm/loaders/GLTFLoader.js";
 function buergeramtDoorRadiance(time,reducedMotion=false){

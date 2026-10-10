@@ -7,7 +7,7 @@ function fixture(mobile=false){
  const state={generation:1,arc:null,pose:'ready',phase:1};
  const level={active:true,clerkPerformance:{animation:state},omen:{phase:''},characters:[{id:'archivbotin',mode:'work',animation:{generation:1,arc:null,pose:'work',phase:1}}]};
  const manager=createAmtGaussianScene({THREE:{},renderer:{},scene:{},queueLoad:task=>new Promise((resolve,reject)=>tasks.push(()=>Promise.resolve().then(task).then(resolve,reject))),mobile,reducedMotion:{matches:false}});
- return{tasks,manager,level,update:()=>manager.update(level,[clerk],[regular],{position:{x:0,z:0}})};
+ return{tasks,manager,level,clerk,regular,update:()=>manager.update(level,[clerk],[regular],{position:{x:0,z:0}})};
 }
 test('nearby consumers retain admitted slots without preparation churn',()=>{
  const old=globalThis.document;globalThis.document={hidden:false};
@@ -28,5 +28,24 @@ test('only the isolated speaker prepares a cloud; ordinary actors resume their s
  try{const f=fixture();f.level.fever={active:true,id:'archivbotin',strength:.5};f.update();
   assert.deepEqual(f.manager.inspect().actors.map(a=>a.id),['archivbotin']);assert.equal(f.tasks.length,1);
   f.level.fever.active=false;f.update();assert.equal(f.tasks.length,2);assert.equal(f.manager.inspect().actors.length,2);f.manager.clear();
+ }finally{globalThis.document=old}
+});
+
+test('a frozen background patron releases the single mobile slot to the isolated speaker',()=>{
+ const old=globalThis.document;globalThis.document={hidden:false};
+ try{
+  const f=fixture(true);f.clerk.mesh.position.x=20;
+  const patron={id:'konrad',name:'konrad',animationId:'konrad',mesh:{position:{x:0,z:-2},material:{opacity:1}}};
+  f.level.stationaryAnimations={konrad:{generation:1,arc:'work-gesture-work',phase:.4,pose:'gesture'}};
+  const update=()=>f.manager.update(f.level,[f.clerk,patron],[f.regular],{position:{x:0,z:0}});
+  update();assert.deepEqual(f.manager.inspect().actors.map(a=>a.id),['konrad']);
+  // Dialogue freezes this background phase while it hides its Gaussian paint.
+  f.level.characterMood={id:'archivbotin'};f.level.fever={active:true,id:'archivbotin',strength:.5};
+  for(let n=0;n<20;n++)update();
+  assert.deepEqual(f.manager.inspect().actors.map(a=>a.id),['archivbotin']);
+  assert.equal(f.tasks.length,2,'prepare the new speaker once, without waiting for the frozen patron');
+  assert.equal(patron.mesh.material.opacity,1,'restore the existing background sprite');
+  assert.equal(f.manager.inspect().actors.length,1,'preserve the mobile residency cap');
+  f.manager.clear();assert.equal(f.manager.inspect().actors.length,0);
  }finally{globalThis.document=old}
 });

@@ -471,6 +471,16 @@ is outside the camera may release a frozen slot for a new visible speaker.
 Preparation skips off-camera or unavailable actions. The caps stay two desktop
 and one mobile; extending the cast does not mean fourteen simultaneous clouds.
 
+An isolated conversation retires background Gaussian slots immediately. Those
+background action clocks may freeze between main paintings, so waiting for a
+safe anchor would prevent the selected speaker from acquiring the single mobile
+slot. The existing isolation already hides those replacements; retirement
+restores their ordinary sprites and leaves the speaker's safe admission rule,
+simulation clock, floor, depth and two/one actor limits intact. The focused
+`tools/playtest-mobile-gaussian-handoff.mjs` fixture uses the actual office
+renderer and assets with deliberately frozen state. Its mobile scenarios are
+browser emulation; they do not establish behavior on a physical Brave device.
+
 `buergeramt-voice-profiles.js` gives the twelve named speakers distinct infernal,
 Kafkaesque performance briefs and browser rate/pitch hints. Explicit story
 delivery and approved exact-speaker recordings retain priority. Twelve actual
