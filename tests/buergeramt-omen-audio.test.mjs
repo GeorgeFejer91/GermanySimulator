@@ -101,7 +101,7 @@ test('city foreground audio defers the omen until it clears',()=>{
 test('late decoding after scene cancellation cannot start omen stems',async()=>{
  const h=harness('host',{cinematics:true,fakeAudio:true});h.enterUntilOmen();await flushPromises();
  assert.deepEqual(h.audio.fetches.filter(path=>path.includes('buergeramt-omen/')).sort(),[
-  'assets/audio/buergeramt-omen/bed.ogg','assets/audio/buergeramt-omen/tension.ogg'
+  'assets/audio/buergeramt-omen/bed.ogg?v=20261008-frontal-score','assets/audio/buergeramt-omen/tension.ogg?v=20261008-frontal-score'
  ]);
  assert.equal(h.audio.pendingDecodes.length,2);
  const started=()=>h.audio.nodes.filter(node=>node.kind==='buffer-source'&&node.started.length).length;

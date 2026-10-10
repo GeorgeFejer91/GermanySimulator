@@ -2,7 +2,7 @@
 
 This directory owns concise, durable project rules and routes. Product source, shipped assets, user documentation, and final deliverables stay outside it. The user’s current request and nearest `AGENTS.md` define authority; subject documents below own their named details. Link to those authorities instead of duplicating their rules.
 
-Codex leads work in this repository. It selects only affected domains, assigns bounded work where parallelism helps, integrates proposals, and remains accountable for review and publication. ChatDev is an optional inspiration and pinned legacy runner for the Bürgeramt episode; it is not the default coordinator. See [`SKILLS.md`](./SKILLS.md) and [`chatdev/README.md`](./chatdev/README.md).
+Codex leads work in this repository. It selects only affected domains, assigns bounded work where parallelism helps, integrates proposals, and remains accountable for review and publication. Always publish all completed new features and fixes, including a validated combined set when pending features overlap; the standing policy is in [`AGENT-START.md`](./AGENT-START.md#validation-and-publication). ChatDev is an optional inspiration and pinned legacy runner for the Bürgeramt episode; it is not the default coordinator. See [`SKILLS.md`](./SKILLS.md) and [`chatdev/README.md`](./chatdev/README.md).
 
 Use the smallest coherent change. Prefer existing code, tools, and skills. Update an owning durable document when a lasting rule or decision changes. Do not keep chat logs, duplicate ledgers, generated evidence, or speculative backlogs here. Report checks and evidence precisely; distinguish browser emulation from device results and silent audio-state checks from listening review.
 

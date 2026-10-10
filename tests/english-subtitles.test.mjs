@@ -15,8 +15,8 @@ vm.runInContext(librarySource,context,{filename:"AUDIO-TEXT-LIBRARY.js"});
 const library=context.window.GermanySimulatorAudioText;
 
 assert.equal(library.version,4);
-assert.equal(Object.keys(library.clips).length,55,"all shipped foreground clips need stable IDs");
-assert.equal(new Set(Object.values(library.clips).map(clip=>clip.path)).size,55,"clip paths must be unique");
+assert.equal(Object.keys(library.clips).length,77,"all shipped foreground clips need stable IDs");
+assert.equal(new Set(Object.values(library.clips).map(clip=>clip.path)).size,77,"clip paths must be unique");
 for(const clip of Object.values(library.clips)){
  assert.ok(library.voices[clip.voiceId],`${clip.id} needs a registered voice ID`);
  if(clip.targetVoiceId)assert.ok(library.voices[clip.targetVoiceId]?.profileId,`${clip.id} needs a saved replacement profile`);
@@ -30,10 +30,16 @@ assert.equal(new Set(profileRoles.map(id=>library.voices[id].profileId)).size,10
 assert.equal(new Set(profileRoles.map(id=>library.voices[id].referenceSha256)).size,10,"character roles need distinct source references");
 assert.equal(library.voices.narrator.profileId,undefined,"the official computer voice uses browser speech");
 assert.equal(library.clips["rule-01"].targetVoiceId,undefined,"recorded rules must not target a retired narrator clone");
-for(const [family,id] of [["merz","merz-character"],["merkel","merkel-character"],["bayern","soeder-character"],["alice","weidel-character"]]){
+for(const [family,id] of [["bayern","soeder-character"],["alice","weidel-character"]]){
  assert.equal(library.speechFamilies[family].profileVoiceId,id,`${family} needs its own generation profile`);
  assert.equal(library.voices[id].license,"CC BY 4.0");
 }
+assert.equal(library.speechFamilies.merz.profileVoiceId,"merz");
+assert.equal(library.voices.merz.profileName,"GS Merz");
+assert.equal(library.voices.merz.profileId,"cb7f3cee85f648c186355329316c6b3b");
+assert.equal(library.speechFamilies.merkel.profileVoiceId,"merkel");
+assert.equal(library.voices.merkel.profileName,"GS Merkel");
+assert.equal(library.voices.merkel.profileId,"25916e5981064e09a2c42350d5fe5f04");
 assert.equal(library.clips["quiz-wrong-answer"].voiceId,"quiz-sting","existing quiz audio must not be labeled as a new clone");
 assert.equal(library.clips["quiz-wrong-answer"].targetVoiceId,"quiz-officer");
 assert.deepEqual([...library.exclusions],["background-music","sound-effect"]);
@@ -45,10 +51,8 @@ assert.equal(library.pools.railLaw.length,3,"every synthesized rail warning need
 assert.ok(Object.keys(library.lines).length>90,"fixed dialogue translation catalog is unexpectedly small");
 
 const walk=directory=>readdirSync(directory,{withFileTypes:true}).flatMap(entry=>entry.isDirectory()?walk(join(directory,entry.name)):[join(directory,entry.name)]);
-// Only the short Neuland excerpt is shipped by the runtime; other Merkel and
-// Merz files are source references awaiting transcript, rights and gameplay review.
-const voiceFiles=walk(join(root,"assets/voices")).filter(path=>path.endsWith(".mp3")&&!path.includes(`${sep}candidate-dialogue${sep}`)&&!path.includes(`${sep}profile-auditions${sep}`)&&!path.includes(`${sep}quiz-segments${sep}`)&&!path.includes(`${sep}laws${sep}`)&&!path.includes(`${sep}merz${sep}`)&&(!path.includes(`${sep}merkel${sep}`)||path.endsWith(`${sep}neuland-0-3s.mp3`)));
-voiceFiles.push(join(root,"assets/merkel-wir-schaffen-das.mp3"));
+// All nine Merkel recordings now ship as exact-text generated speech.
+const voiceFiles=walk(join(root,"assets/voices")).filter(path=>path.endsWith(".mp3")&&!path.includes(`${sep}candidate-dialogue${sep}`)&&!path.includes(`${sep}profile-auditions${sep}`)&&!path.includes(`${sep}quiz-segments${sep}`)&&!path.includes(`${sep}laws${sep}`));
 for(const path of voiceFiles){
  const url="./"+relative(root,path).split(sep).join("/");
  assert.ok(library.recordings[url],`${url} is missing from the audio-text library`);
@@ -79,7 +83,9 @@ for(const [url,duration] of Object.entries(trainDurations)){
 
 assert.ok(html.indexOf("AUDIO-TEXT-LIBRARY.js")<html.indexOf("game.js"),"subtitle library must load before the game runtime");
 assert.equal((html.match(/id="english-subtitle"/g)||[]).length,1,'one shared subtitle rail');
-assert.equal((html.match(/id="subtitle-toggle"/g)||[]).length,1,'one subtitle control, now in the game file');
+assert.equal((html.match(/id="subtitle-toggle"/g)||[]).length,1,'one persistent subtitle control');
+assert.ok(html.indexOf('id="subtitle-toggle"')<html.indexOf('id="case-file"'),'subtitles must be available outside the hidden game file');
+assert.match(css,/#subtitle-toggle\{[^}]*position:fixed[^}]*top:env\(safe-area-inset-top,0px\)[^}]*right:env\(safe-area-inset-right,0px\)[^}]*bottom:auto/,'subtitles stay at the safe top-right corner');
 assert.match(css,/\.english-subtitle\{[^}]*background:#050505[^}]*color:#ffcc00[^}]*"Grenze"[^}]*text-shadow:[^}]*#b00018/);
 assert.match(css,/\.english-subtitle\{[^}]*bottom:0/,'subtitles must meet the bottom edge');
 assert.match(css,/\.control-dock\{bottom:calc\(30px \+ var\(--subtitle-height\)\);height:auto;min-height:84px/,"touch controls reserve their slot above subtitles and can grow for enlarged labels");

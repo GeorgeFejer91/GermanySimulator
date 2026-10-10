@@ -4,10 +4,10 @@ These two encounter-only loops were composed and synthesized for Germany Simulat
 
 | Shipped file | Role | Format | Duration | Size | SHA-256 |
 | --- | --- | --- | ---: | ---: | --- |
-| `bed.ogg` | Low, slowly beating A pedal with a quiet flattened second and narrow airy partials | Ogg Vorbis, 48 kHz stereo | 16.000 s | 74,681 B | `38fefe527023df07ba57e080fe6f9c05bbfae0869b71cac8e5a66194ed6eb6ef` |
-| `tension.ogg` | Thin inharmonic metallic and airy upper layer | Ogg Vorbis, 48 kHz stereo | 16.000 s | 137,463 B | `c785087e06cebca4a4937f72ec265cc51a9abab91ebe4be341e2c8c0f0a22ca1` |
+| `bed.ogg` | Beating bass, FM growl, crushed saw brass and unresolved flattened-second/tritone pressure | Ogg Vorbis, 48 kHz stereo | 16.000 s | 101,889 B | `3c6278bbc2fdabe643fb1fd31a2d750177da4393846edf7488a6550180e237b6` |
+| `tension.ogg` | Saturated inharmonic partials and ring-modulated bowed-metal/machinery bands | Ogg Vorbis, 48 kHz stereo | 16.000 s | 178,628 B | `339b662268595ab146efa979848caa764ae8ab2ac84cae837282ea14f5bcc55c` |
 
-Combined shipped audio: 212,144 B. The oscillator frequencies and modulations have integer cycles over 16 seconds, so a loop can hold while approach time varies. No fixed riser is baked into either file. The game owns approach intensity, arrival peak, speech ducking, and abrupt reset.
+Combined shipped audio: 280,517 B; decoded float32 stereo costs 12,288,000 bytes for both 16-second layers. The oscillator frequencies have integer cycles over 16 seconds, so a loop can hold while approach time varies. No fixed pulse, riser, attack or resolving chord is baked into either file. The controller's shared `omen.life` signal owns depth, pressure, accelerating pulses, speech contour and abrupt reset; Web Audio and Gaussian animation both project it. The 2026-10-08 revision deliberately increases timbral aggression through distortion and metallic density while retaining sample headroom.
 
 ## Rebuild
 
@@ -15,6 +15,7 @@ Production used the portable SuperCollider 3.14.1 `sclang.exe` and `scsynth.exe`
 
 ```powershell
 $env:SC_SYNTH_PATH='C:\Users\cogpsy-vrlab\AppData\Local\Programs\SuperCollider-3.14.1\SuperCollider\scsynth.exe'
+New-Item -ItemType Directory -Force output/omen-audio | Out-Null
 & 'C:\Users\cogpsy-vrlab\AppData\Local\Programs\SuperCollider-3.14.1\SuperCollider\sclang.exe' 'assets/audio/buergeramt-omen/render.scd'
 ffmpeg -y -i output/omen-audio/bed-warm.wav -af 'atrim=start_sample=768000:end_sample=1536000,asetpts=PTS-STARTPTS' -c:a pcm_f32le output/omen-audio/bed.wav
 ffmpeg -y -i output/omen-audio/tension-warm.wav -af 'atrim=start_sample=768000:end_sample=1536000,asetpts=PTS-STARTPTS' -c:a pcm_f32le output/omen-audio/tension.wav
@@ -23,10 +24,10 @@ ffmpeg -y -i output/omen-audio/tension.wav -c:a libvorbis -q:a 3 assets/audio/bu
 & 'C:\Users\cogpsy-vrlab\AppData\Local\Programs\SuperCollider-3.14.1\SuperCollider\sclang.exe' 'assets/audio/buergeramt-omen/preview.scd'
 ```
 
-The 32-second NRT renders include a 16-second warm-up. The exact 768,000-frame second pass is cropped to each shipped loop. [`preview.scd`](preview.scd) produces the finite 13.1-second `output/omen-audio/omen-choreography-preview.wav`: approach rise, 7.2-second arrival peak, a reduced bed during the space for the existing line, a 30 ms cutoff, and ordinary fluorescent hum after the reset. It synthesizes no dialogue. WAV renders, analysis and the preview stay in ignored `output/omen-audio/`.
+The 32-second NRT renders include a 16-second warm-up. The exact 768,000-frame second pass is cropped to each shipped loop. [`preview.scd`](preview.scd) produces an illustrative finite 13.1-second mix from those WAVs, with speech space and a cutoff. It synthesizes no dialogue and does not reproduce the controller's adaptive pulse or actual speech receipts; the integrated game is the timing authority. WAV renders, analysis and the preview stay in ignored `output/omen-audio/`.
 
 ## Measured checks and limits
 
-FFprobe identifies both files as Vorbis, 48 kHz, stereo and 16.000 seconds. FFmpeg decoded each to exactly 768,000 frames. FFmpeg `loudnorm` measured `bed.ogg` at −22.45 LUFS integrated and −12.20 dBTP; `tension.ogg` at −21.57 LUFS and −12.04 dBTP. The unattenuated sum measured −18.98 LUFS and −8.32 dBTP. Decoded sample-join jumps were −66.98 dBFS for the bed and −57.69 dBFS for tension; each is smaller than the corresponding ordinary adjacent-sample steps. The preview rose from −49.06 dBFS RMS during its first two seconds to −25.17 around arrival, then fell to −35.24 during the line space and −41.68 after reset. Exact PCM and checksum checks are recorded in ignored `output/omen-audio/analysis.json`.
+FFmpeg identifies both revised files as Vorbis, 48 kHz stereo and 16.000 seconds. Its `loudnorm` input analysis measured `bed.ogg` at −22.30 LUFS integrated and −13.31 dBTP; `tension.ogg` at −19.99 LUFS and −12.62 dBTP. These measurements describe the revised source layers before the runtime bus, pulse, filter and voice ducking; they do not imply an acoustic synchronization or perceived-quality result.
 
 These are file and signal measurements. They do not establish perceived quality, dialogue intelligibility, browser/device playback, or acoustic timing. A browser game should fetch/decode after its normal audio gesture, use its existing bus and mute controls, and keep the oscillator fallback if loading fails. A late decode must not revive an already completed or cancelled omen.

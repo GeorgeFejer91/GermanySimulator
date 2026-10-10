@@ -1,0 +1,43 @@
+import assert from 'node:assert/strict';
+import {createHash} from 'node:crypto';
+import {readFileSync} from 'node:fs';
+import vm from 'node:vm';
+
+const root=new URL('../',import.meta.url),game=readFileSync(new URL('game.js',root),'utf8');
+const context=vm.createContext({window:{}});
+vm.runInContext(readFileSync(new URL('For-AI/AUDIO-TEXT-LIBRARY.js',root),'utf8'),context);
+const catalog=context.window.GermanySimulatorAudioText,manifest=JSON.parse(readFileSync(new URL('assets/voices/merkel/manifest.json',root),'utf8'));
+const calls=[],elements=new Map();
+const sandbox=vm.createContext({speechClip:id=>catalog.clips[id],state:{voiceOn:true,dialogueData:{speaker:'ANGELA MERKEL · SATIRE'}},STIMULUS_PRIORITY:{CRITICAL:0,REACTIVE:2,AMBIENT:3},document:{getElementById:id=>{if(!elements.has(id))elements.set(id,{textContent:'',hidden:true,classList:{toggle(){},remove(){}}});return elements.get(id)}},setTimeout:()=>1,clearTimeout(){},uiTone(){},setDialogueVoiceBusy(){},queueStimulus:item=>calls.push({mode:'recording',...item}),speak:(text,options)=>calls.push({mode:'browser',text,...options}),speakMerzLine:(text,options)=>calls.push({mode:'merz',text,...options})});
+vm.runInContext(game.match(/const MERKEL_AUDIO_LINE=[\s\S]*?\nconst bayernClips=/)[0].replace(/\nconst bayernClips=$/,''),sandbox);
+const lines=vm.runInContext('[...merkelLines,MERKEL_BEHIND_LINE]',sandbox);
+assert.deepEqual(manifest.clips.map(clip=>clip.text),Array.from(lines),'all authored lines, including the behind-player response, need replacement clips');
+assert.equal(manifest.clips.length,9);
+assert.equal(manifest.profileId,'25916e5981064e09a2c42350d5fe5f04');
+assert.equal(manifest.profileId,catalog.voices.merkel.profileId);
+for(const name of ['speakRecorded','speakMerkelLine','showWorldBark','speakDialogueLine'])vm.runInContext(game.match(new RegExp(`^function ${name}\\(.*$`,'m'))[0],sandbox);
+for(const item of manifest.clips){
+ const clip=catalog.clips[item.clipId],bytes=readFileSync(new URL(item.path,root));
+ assert.equal(clip.voiceId,'merkel');
+ assert.equal(clip.source,item.text);
+ assert.equal(clip.english,item.english);
+ assert.equal(catalog.recordings[clip.recording].source,item.text);
+ assert.equal(item.profileId,manifest.profileId);
+ assert.equal(createHash('sha256').update(bytes).digest('hex'),item.sha256);
+ assert.equal(item.asrWordExact,true);
+ assert.ok(Math.abs(item.integratedLufs+18)<=.3);
+ assert.ok(item.truePeakDbtp<=-1.5);
+ assert.ok(item.decodedBytes<=16*1024*1024,'a line must fit the existing bounded cache');
+ sandbox.showWorldBark('ANGELA MERKEL · SATIRE',item.text,false,'','',{family:'politician:merkel'});
+ let request=calls.pop();
+ assert.equal(request.mode,'recording');
+ assert.equal(request.recording,clip.recording);
+ request.start();assert.equal(elements.get('police-bark-text').textContent,item.text);
+ request.done();assert.equal(elements.get('police-bark').hidden,true);
+ sandbox.speakDialogueLine(item.text,()=>{});
+ request=calls.pop();assert.equal(request.recording,clip.recording);assert.equal(request.family,'dialogue');
+}
+sandbox.speakMerkelLine('Eine noch nicht aufgenommene Zeile.');assert.equal(calls.pop().mode,'browser');
+sandbox.showWorldBark('FRIEDRICH MERZ',lines[0],false);assert.notEqual(calls.pop().mode,'recording','other speakers must never inherit Merkel recordings');
+sandbox.state.voiceOn=false;sandbox.speakDialogueLine(lines[0],()=>{});assert.equal(calls.length,0);
+console.log('GS Merkel: nine exact lines, profile/hash/subtitle ownership, both triggers, voice off and browser fallback passed');

@@ -6,7 +6,7 @@ The player has three deliberately fictional administration days to complete eigh
 
 Mission order:
 
-1. Bürgeramt — permission to submit an application (`A38`).
+1. Bürgeramt — Anmeldung, persistent completion badge, and permission to submit the next application (`A38`).
 2. Hausverwaltung — Wohnungsgeberbestätigung.
 3. Bürgeramt — supplementary sheet.
 4. Finanzamt — tax registration.
@@ -24,17 +24,22 @@ It is a compass bearing, with existing streets, crossings and interaction rules
 still governing travel. It hides during title, dialogue, file/modal, office and
 end states, and within 36 units of its target. It has no collision footprint.
 
+The Bürgeramt's exterior door glows and emits outward rays while the city is
+active. A slow nine-second black/red/gold cycle and 2.8-second brightness pulse
+mark the actual fitted entrance; black keeps a charcoal door and pale luminous
+edge. Pause/dialogue freezes the effect; reduced motion keeps steady gold.
+
 ### Gameplay paperwork
 
-Keep the **Germanness** gauge, numeric 0–15 score and law-power threshold salient and continuously visible during play, including the Bürgeramt. It is the player's ongoing progression goal. Use a compact horizontal Schwarz-Rot-Gold rail above the small **Akte / M** tab with the current day on desktop and phones. Move that same gauge into the opened file header so every file page retains it. Police status appears only while wanted; energy becomes an edge warning at 35 or below. Full energy, forms, Pfand, the sausage collection, the current rule, controls and audio/subtitle settings belong in the opened file. Its Mission, Status, Collection and Controls pages keep the ordinary small-screen view readable; long documents and enlarged text have a vertical reading fallback rather than ellipses. Opening the file pauses city simulation and releases held movement input; M, Escape or Back returns to play. A committed speech notice remains visible inside the file.
+Keep the **Germanness** gauge, numeric 0–15 score and law-power threshold salient and continuously visible during city play. Hide the city rail throughout the Bürgeramt episode, including direct entry, and restore it on returning to the city without changing progression. It is the player's ongoing progression goal. Use a compact horizontal Schwarz-Rot-Gold rail above the small **Akte / M** tab with the current day on desktop and phones. Move that same gauge into the opened file header so every file page retains it. Police status appears only while wanted; energy becomes an edge warning at 35 or below. Full energy, forms, Pfand, the sausage collection, the current rule, controls and audio/subtitle settings belong in the opened file. Its Mission, Status, Collection and Controls pages keep the ordinary small-screen view readable; long documents and enlarged text have a vertical reading fallback rather than ellipses. Opening the file pauses city simulation and releases held movement input; M, Escape or Back returns to play. A committed speech notice remains visible inside the file.
 
 The mission arrives as a small fax when its title/instruction changes. Give it 12 readable seconds after its 1.08-second arrival, then retract it for 150 seconds before the next quiet reminder. Incidental pointer hover never pins it; keyboard focus may extend reading, and M/tap always opens the complete instruction. Defer new instructions during dialogue, warnings, other modals, the office or a hidden page. Interrupting a displayed reminder starts the 150-second gap instead of replaying it after each bark. The complete DOM paper and text assemble/dissolve through screen-space 2D Gaussian alpha splats on both arrival and departure. The existing synthesized fax motor, roller clicks and paper noise begin with each transition and supply its Web Audio clock; priority interruptions cancel both immediately. Reduced motion or unsupported masks use immediate appearance/removal with the same bounded cue. This is a HUD effect, not a 3D reconstruction, and must not load Spark or the omen renderer.
 
-Short city notices share an edge column with measured clearance above touch controls. Their existing event/speech owners retain their text and lifetime. Keep the full-width controls footer, persistent logo, mission card, rule card and sausage collection meter out of the ordinary playfield. The title screen retains the Grand Theft Amt identity. The Bürgeramt episode retains its own HUD; position the shared Germanness gauge beneath its top controls.
+Short city notices share an edge column with measured clearance above touch controls. Their existing event/speech owners retain their text and lifetime. Keep the full-width controls footer, persistent logo, mission card, rule card and sausage collection meter out of the ordinary playfield. The title screen retains the Grand Theft Amt identity. The Bürgeramt episode retains its own HUD without the Germanness gauge.
 
 ### First Bürgeramt visit
 
-The first mission enters the existing first-person Bürgeramt episode. A phone QR scan issues a private ticket, name submission enables the counter call, and the host owns the queue and appointment outcome. Declining the police call permits Frau Knick's choices and the A38 form; answering cancels the appointment without A38. Hidden/disconnected phones and late arrivals forfeit the current ticket. Eight optional walking encounters add atmosphere without changing these gates.
+The first mission enters the existing first-person Bürgeramt episode. A phone QR scan issues a private ticket, name submission enables the counter call, and the host owns the queue and appointment outcome. Silencing calls permits completion of a 24-stage Anmeldung interrogation with two answers per question, recoverable document detours and a withheld-landlord-confirmation branch. Declining or ignoring a call provokes Frau Knick; a put-away call returns within 30 seconds until silenced. Answering retains the automatic argument and cancels the appointment without A38. The stamped registration awards a persistent Anmeldung badge in the file’s Collection page before the existing A38 mission handoff. Each fresh ticket randomly selects Schalter 1–4, shown prominently with the ticket; the matching desk clerk owns the conversation. Bürgeramt entry requests browser fullscreen automatically, with no added fullscreen button. Browser permission and exit rules remain native. Hidden/disconnected phones and late arrivals forfeit the current ticket. Eight optional walking encounters add atmosphere without changing these gates.
 
 The episode uses German dialogue as a local exception to Berlin Denglisch. It shares the root runtime, renderer and assets. The unlisted `?geheim=buergeramt` route reuses the same episode for testing. Admission, phone controls, timing, pause rules, mix and visual beats have one current authority in [`BUERGERAMT.md`](./BUERGERAMT.md).
 
@@ -116,11 +121,13 @@ Merkel, Merz, the Bayern-Beauftragter, and Alice each own a 176-unit circular au
 
 ## Satirical voice and dialogue
 
-In the Bürgeramt answered-call branch, the phone reports when each police line
-starts and ends. Frau Knick waits for the completion receipt for ordinary turns;
-the opening and later interruption intentionally overlap. The host measures
-phone link delay and uses it to pace the later interruption. A lost receipt
-falls back to a timed continuation so the attempted Anmeldung can still end.
+In the Bürgeramt answered-call branch, the Kriminalpolizei and Frau Knick
+escalate from passive aggression to shouting and repeatedly interrupt each
+other. Phone start receipts arm the clerk’s cut-in and a local phone cutoff
+deadline; the next phone start stops her active speech. TimeAPI UTC and
+peer clock mapping anchor the observed starts and timers, with natural completion
+and missing-receipt/disconnect fallbacks. Only the final retort and dismissal
+finish normally; the appointment still ends without A38.
 
 The game is an affectionate satire of life in Germany, made with love for German culture and its capacity for self-irony. It exaggerates recognizable everyday interactions with people and institutions; the joke targets bureaucratic habits, social friction, and inflexible systems rather than expressing contempt for Germans.
 

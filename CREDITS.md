@@ -284,15 +284,17 @@ Merkel's energy-district dialogue uses short historical quotations attributed to
 
 Her recurring line, "Wir schaffen das", is a documented historical quote from August 2015. Reference: https://www.bundesregierung.de/breg-de/aktuelles/-vor-allem-ein-satz-des-anpackens--353854
 
-The game uses an approximately one-second excerpt of Merkel saying "Wir schaffen das" from phoenix's recording of the 31 August 2015 press conference. Source recording: https://www.youtube.com/watch?v=kDQki0MMFh4. The normalized shipped excerpt has SHA-256 `7C0C26F1C55D1ECF78FDB5A9D48E6C50A658972F36D42A7994511996A0B083C7`. It is included as a short attributed quotation for the game's satirical interaction; phoenix/rightsholder rights remain unaffected, and redistribution outside this project should be reviewed separately.
+The game previously used an approximately one-second excerpt of Merkel saying "Wir schaffen das" from phoenix's recording of the 31 August 2015 press conference. Source recording: https://www.youtube.com/watch?v=kDQki0MMFh4. The retired normalized excerpt had SHA-256 `7C0C26F1C55D1ECF78FDB5A9D48E6C50A658972F36D42A7994511996A0B083C7`. Phoenix/rightsholder rights remain unaffected.
 
-Merkel's spontaneous proximity pool also uses the user-supplied 3.030-second
+Merkel's spontaneous proximity pool previously used the user-supplied 3.030-second
 `D:\Downloads\neuland-0-3s.mp3` clip for the displayed line “Das Internet ist
 für uns alle Neuland.” No external source URL or redistribution license was
-provided. The normalized mono shipping copy at
+provided. The retired normalized mono copy at
 `assets/voices/merkel/neuland-0-3s.mp3` has SHA-256
 `6E6DF76D99DB89E462335AE6A8FB6D7909C0611015B58A98FD9C8A3E0A8CB336`;
 separate permission is required before reuse outside this project.
+
+On 11 October 2026, all nine authored Merkel lines were resynthesized at the user's request with the saved `GS Merkel` profile (`25916e5981064e09a2c42350d5fe5f04`) through Secret Tunnel 6's bundled OmniVoice Rust runtime. This replaces the old recordings for proximity and direct interaction, including “Sie stehen hinter mir.” The user-selected profile references the phoenix recording above; reference hashes, selected takes, encoded transcripts and normalized MP3 hashes are recorded in `assets/voices/merkel/manifest.json`. The model has noncommercial and tokenizer terms; no new redistribution license is claimed for the reference. Listening review remains unperformed.
 
 The FAX 3000 PRO advertising claim ("2.75× faster") is entirely fictional game copy.
 
@@ -434,3 +436,6 @@ by [__Maros__(oooFFFFEDDMODELS)](https://sketchfab.com/pierre.marcos.19), under
 cooked-sausage curve and PBR appearance are retained, with normalized placement
 and smaller textures. The mustard arrowhead is original game geometry. Source,
 changes and hashes: [asset attribution](assets/models/mission-sausage/LICENSES.md).
+
+
+Friedrich Merz dialogue was synthesized on 10 and 11 October 2026 with the user-selected saved “GS Merz” profile. The two existing game scripts and nine added historical quotations share this profile; they are synthetic game audio. The quotations’ source URLs, event dates, excerpt boundary, and context are recorded in `assets/voices/merz/manifest.json`, and synthesis/reference provenance and license limits are in `assets/voices/LICENSES.md`.

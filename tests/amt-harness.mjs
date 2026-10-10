@@ -7,7 +7,7 @@ import path from 'node:path';
 const root=path.resolve(path.dirname(fileURLToPath(import.meta.url)),'..');
 export const source=name=>readFileSync(path.join(root,name),'utf8');
 
-export function harness(kind='host',{voice=false,synthesis=true,phoneLanguage='de-DE',phoneCaptions=false,phoneAgent='test',phonePlatform='',phoneMobile,phoneClock,cinematics=false,cityAudioBusy,fakeAudio=false,candidatePhone=false,officeFx=null,speechAutoStart=true}={}){
+export function harness(kind='host',{voice=false,synthesis=true,phoneLanguage='de-DE',phoneCaptions=false,phoneAgent='test',phonePlatform='',phoneMobile,phoneClock,cinematics=false,cityAudioBusy,fakeAudio=false,candidatePhone=false,officeFx=null,speechAutoStart=true,random=()=>.6}={}){
  const nodes=new Map(),window=new EventTarget(),document=new EventTarget();
  let now=0,nextTimer=0;const timers=new Map();
  const later=(fn,delay=0,repeat=false)=>{const id=++nextTimer;timers.set(id,{fn,due:now+Math.max(0,delay),repeat,delay});return id};
@@ -54,7 +54,7 @@ export function harness(kind='host',{voice=false,synthesis=true,phoneLanguage='d
  const vibrations=[];
  const saved=new Map(),localStorage={getItem:key=>saved.has(key)?saved.get(key):null,setItem:(key,value)=>saved.set(key,String(value))};
  if(officeFx!==null)saved.set('amt-mix-v1',JSON.stringify({ambience:.35,voice:.8,fx:officeFx}));
- const globals={console,Event,EventTarget,CustomEvent,TextEncoder,URL,URLSearchParams,Intl,Date,Math,Number,Set,Promise,performance:{now:()=>now},localStorage,
+ const globals={console,Event,EventTarget,CustomEvent,TextEncoder,URL,URLSearchParams,Intl,Date,Math:Object.assign(Object.create(Math),{random}),Number,Set,Promise,performance:{now:()=>now},localStorage,
   window,document,navigator:{userAgent:phoneAgent,userAgentData:phonePlatform?{platform:phonePlatform,mobile:phoneMobile??true}:undefined,language:phoneLanguage,languages:[phoneLanguage],userActivation:{hasBeenActive:fakeAudio},vibrate(pattern){vibrations.push(pattern)}},
   crypto:{getRandomValues(a){a.fill(123);return a}},BuergeramtLink:Link,
   qrcode:()=>({addData(){},make(){},createSvgTag:()=>'<svg></svg>'}),
@@ -72,7 +72,7 @@ export function harness(kind='host',{voice=false,synthesis=true,phoneLanguage='d
    fail(){this.onerror?.()}
   }
   globals.Audio=RecordedAudio;
-  window.GermanySimulatorAudioText={candidateClip:(voiceId,text)=>voiceId==='polizei-heinrich-wachtmeister'&&text?`./assets/voices/candidate-dialogue/${voiceId}-phone-01.mp3`:null};
+  window.GermanySimulatorAudioText={speechFamilies:{amtPolice:{voiceId:'kriminalpolizei'}},recordedClip:(voiceId,text)=>voiceId==='kriminalpolizei'&&text?`./assets/voices/kriminalpolizei/${voiceId}-phone-01.mp3`:null};
  }
  if(fakeAudio){
   class Param{
@@ -109,6 +109,7 @@ export function harness(kind='host',{voice=false,synthesis=true,phoneLanguage='d
  if(phoneClock)window.BuergeramtClock=phoneClock;
  const context=vm.createContext(globals);
  vm.runInContext(source('buergeramt-story.js'),context,{filename:'buergeramt-story.js'});
+ vm.runInContext(source('buergeramt-lips.js'),context,{filename:'buergeramt-lips.js'});
  vm.runInContext(source(kind==='host'?'buergeramt.js':'buergeramt-phone.js'),context,{filename:kind});
  const counts={form:0,cancel:0,close:0},music=[];
  const config={voiceOn:()=>voice,subtitlesOn:()=>phoneCaptions,onForm:()=>counts.form++,onCancel:()=>counts.cancel++,onClose:()=>counts.close++,music:x=>music.push(x),cinematics,cityAudioBusy};
@@ -123,9 +124,10 @@ export function harness(kind='host',{voice=false,synthesis=true,phoneLanguage='d
  function approachRegistration(){moveTo(-3.3,-2.6);moveTo(-3.3,2.5);moveTo(-4.65,2.5)}
  function register(){enter();Link.instances.at(-1).message({type:'scan',id:'a'.repeat(24)})}
  function wait(){register()}
- function counter(){wait();const link=Link.instances.at(-1);link.message({type:'register',name:'Erika Mustermann'});moveTo(4,-8.15);advanceGame(16);if(level.stage!=='walk-counter')throw new Error(`Expected active call, got ${level.stage}`);level.interact();tick(16);if(!link.sent.some(message=>message.type==='call-arm'))tick(1800);if(link.sent.some(message=>message.type==='call-arm'))link.message({type:'call-ready',id:'grass',atMs:now})}
+ function approachCounter(){const x=level.assignedCounter.x;if(x===-5.8){moveTo(-2,-2.6);moveTo(-2,-6.4);moveTo(-5.4,-6.4);moveTo(-5.4,-8.15);moveTo(x,-8.15)}else{moveTo(x===-1.6?-2:3.9,-2.6);moveTo(x===-1.6?-2:3.9,-8.15);moveTo(x,-8.15)}}
+ function counter(){wait();const link=Link.instances.at(-1);link.message({type:'register',name:'Erika Mustermann'});approachCounter();advanceGame(16);if(level.stage!=='walk-counter')throw new Error(`Expected active call, got ${level.stage}`);level.interact();tick(16);if(!link.sent.some(message=>message.type==='call-arm'))tick(1800);if(link.sent.some(message=>message.type==='call-arm'))link.message({type:'call-ready',id:'grass',atMs:now})}
  function phoneReady(){const link=Link.instances.at(-1);link.emit('connected',{});link.message({type:'ticket',number:'B-223'});return link}
  function incoming(){const link=phoneReady();node('phone-name').value='Erika Mustermann';node('phone-form').dispatchEvent(new Event('submit',{cancelable:true}));link.message({type:'call-arm',id:'grass'});link.message({type:'call',id:'grass',line:window.BuergeramtStory.call.line,ringAtPhoneMs:now,ringAtUtcMs:null,leadMs:2200});return link}
  function hide(){document.hidden=true;document.dispatchEvent(new Event('visibilitychange'))}
- return{window,document,node,tick,now:()=>now,timers,key,moveTo,action,advanceGame,enter,enterUntilOmen,approachRegistration,register,wait,counter,phoneReady,incoming,hide,synth,audio,vibrations,fullscreenRequests,counts,music,config,level,links:Link.instances,context};
+ return{window,document,node,tick,now:()=>now,timers,key,moveTo,action,advanceGame,enter,enterUntilOmen,approachRegistration,approachCounter,register,wait,counter,phoneReady,incoming,hide,synth,audio,vibrations,fullscreenRequests,counts,music,config,level,links:Link.instances,context};
 }

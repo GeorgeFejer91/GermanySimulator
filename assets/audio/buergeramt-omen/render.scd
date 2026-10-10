@@ -1,4 +1,6 @@
-// Bürgeramt Aktenkurier omen: two stationary, 16-second layers.
+// Bürgeramt Aktenkurier omen: two unresolved, stationary 16-second layers.
+// No baked tempo/riser/payoff: buergeramt.js owns pulse, pressure and speech;
+// the same life signal unfolds and contracts the player-facing Gaussian relief.
 // Run from the repository root with the SuperCollider 3.14.1 sclang executable.
 // NRT only: this file does not boot an audio device or play sound.
 // The first 16 seconds warm the server filters; crop seconds 16..32 from each WAV.
@@ -17,33 +19,22 @@ options.numOutputBusChannels = 2;
 options.sampleRate = rate;
 
 bedDef = SynthDef(\amtOmenBed, {
-    var swell, body, infra, hollow, cold, breath, left, right;
+    var body, infra, brass, cold, left, right;
     // All oscillators and modulations complete an integer number of cycles in 16 s.
     // A one-eighth-Hz beating pair gives the drone a slow unstable centre.
-    swell = 0.82 + (SinOsc.kr(0.0625, -pi / 2) * 0.10);
-    infra = SinOsc.ar(55, 0, 0.080) + SinOsc.ar(55.125, 1.3, 0.061);
-    body = SinOsc.ar(82.5, 0.7, 0.034) + SinOsc.ar(110, 1.8, 0.023);
-    // Flattened second against the A pedal: present without becoming a melody.
-    cold = SinOsc.ar(116.5, 0.2, 0.016) + SinOsc.ar(233.0, 0.9, 0.009);
-    hollow = VarSaw.ar(55, 0, 0.43, 0.014);
-    hollow = LPF.ar(hollow, 260 + (SinOsc.kr(0.125, 0.4) * 85));
-    // Narrow, organ-like air avoids external samples and broadband noise seams.
-    breath = Mix.fill(18, { |i|
-        var f = 390 + (i * 73.25);
-        SinOsc.ar(f, i * 0.73, 0.00090 / (1 + (i * 0.035)))
-    });
-    breath = HPF.ar(breath, 340);
-    left = (infra + body + cold + hollow + breath) * swell;
-    right = (infra * 0.96) + (body * 0.91) + (cold * 1.08)
-        + (hollow * 0.89) + (breath * 0.82);
-    right = right * (0.81 + (SinOsc.kr(0.0625, 0.5) * 0.10));
-    Out.ar(0, (LeakDC.ar([left, right]) * 1.5).tanh);
+    infra = SinOsc.ar(55, 0, 0.14) + SinOsc.ar(55.125, 1.3, 0.09);
+    body = SinOsc.ar(82.5 + SinOsc.ar(55, 0, 12), 0.7, 0.075);
+    // Flattened second/tritone, crushed brass and audible midrange on small speakers.
+    cold = SinOsc.ar(77.8125, 0.2, 0.035) + SinOsc.ar(116.5, 0.9, 0.035);
+    brass = VarSaw.ar([55, 58.25, 110.125], [0, 0.31, 0.67], 0.18).sum;
+    brass = LPF.ar((brass * 2.8).tanh, 1800) * 0.11;
+    left = infra + body + cold + brass;
+    right = (infra * 0.96) + (body * 0.91) + (cold * 1.08) + (brass * 0.93);
+    Out.ar(0, HPF.ar(LeakDC.ar([left, right] * 2.4).tanh, 32) * 0.24);
 });
 
 tensionDef = SynthDef(\amtOmenTension, {
-    var pulse, tremor, glass, scrape, haze, left, right;
-    pulse = 0.76 + (SinOsc.kr(0.125, -0.7) * 0.13);
-    tremor = 0.77 + (SinOsc.kr(0.375, 0.2) * 0.18);
+    var glass, scrape, haze, metal, left, right;
     // Inharmonic but periodic metallic partials; small dissonances climb
     // above the low bed while leaving the spoken line a clear centre.
     glass = SinOsc.ar(587.3125, 0.6, 0.013)
@@ -59,12 +50,15 @@ tensionDef = SynthDef(\amtOmenTension, {
         var f = 910 + (i * 311.25);
         SinOsc.ar(f, i * 0.89, 0.00058)
     });
-    scrape = HPF.ar(scrape, 1100) * tremor;
-    haze = HPF.ar(haze, 760) * (0.55 + (SinOsc.kr(0.0625, 1.1) * 0.22));
-    left = ((glass * 0.75) + scrape + haze) * pulse;
-    right = ((glass * 0.67) + (scrape * 0.86) + (haze * 1.1))
-        * (0.76 + (SinOsc.kr(0.125, 0.4) * 0.12));
-    Out.ar(0, (LeakDC.ar([left, right]) * 8.8).tanh);
+    // Ring-modulated machinery and bowed-metal bands; no independent rhythmic pulse.
+    metal = VarSaw.ar([174.625, 233.0625], [0.2, 0.7], 0.12).sum
+        * SinOsc.ar(73.25, 0.3);
+    metal = BPF.ar((metal * 3).tanh, [970, 1840, 3170], 0.24).sum * 0.085;
+    scrape = HPF.ar(scrape, 1100);
+    haze = HPF.ar(haze, 760);
+    left = glass + (scrape * 1.6) + haze + metal;
+    right = (glass * 0.92) + (scrape * 1.4) + (haze * 1.1) + (metal * 0.95);
+    Out.ar(0, LeakDC.ar([left, right] * 18).tanh * 0.24);
 });
 
 render = { |def, name, done|

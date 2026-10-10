@@ -5,19 +5,22 @@ import {createHash} from 'node:crypto';
 import {omenSplatPose} from '../buergeramt-splat.js';
 import {harness} from './amt-harness.mjs';
 
-test('only blackout/glare unfold the character, with bounded motion and immediate restoration',()=>{
-  for(const phase of ['', 'approach','recover'])assert.equal(omenSplatPose({phase,revealTime:4}).opacity,0);
-  let previous=-1;
-  for(let time=0;time<20;time+=.025){
-    const pose=omenSplatPose({phase:'blackout',revealTime:time,speech:{tension:1}});
+test('depth unfolds towards the player during approach and shares the score pulse',()=>{
+  const h=harness('host',{cinematics:true});h.enterUntilOmen();
+  let previous=0,middle=false;
+  for(let i=0;i<400&&h.level.omen.phase==='approach';i++){
+    h.level.update(.025);const omen=h.level.omen,pose=omenSplatPose(omen);
     assert(pose.reveal>=previous&&pose.reveal<=1);previous=pose.reveal;
-    assert(pose.opacity>=0&&pose.opacity<=1);assert(Math.abs(pose.turn)<25*Math.PI/180);
-    assert(pose.ripple>=0&&pose.ripple<=1);
+    assert.equal(pose.turn,0);assert.equal(pose.pulse,omen.life.pulse);
+    assert.equal(pose.pressure,omen.life.pressure);
+    assert(pose.opacity>=0&&pose.opacity<=1);
+    if(omen.phase==='approach'&&pose.reveal>.2&&pose.reveal<.8){middle=true;assert(pose.opacity>0)}
   }
-  assert.equal(omenSplatPose({phase:'blackout',revealTime:0}).opacity,0);
-  assert.equal(omenSplatPose({phase:'blackout',revealTime:2}).reveal,1);
-  const quiet=omenSplatPose({phase:'blackout',revealTime:4,speech:{tension:1}},true);
-  assert.equal(quiet.opacity,1);assert.equal(quiet.turn,0);assert.equal(quiet.ripple,0);assert.equal(quiet.time,0);
+  assert(middle,'volume must already exist before arrival');
+  assert.equal(omenSplatPose(h.level.omen).reveal,1);
+  const quiet=omenSplatPose(h.level.omen,true);
+  assert.equal(quiet.opacity,1);assert.equal(quiet.turn,0);assert.equal(quiet.ripple,0);assert.equal(quiet.time,0);assert.equal(quiet.pulse,0);
+  for(const phase of ['', 'recover'])assert.equal(omenSplatPose({...h.level.omen,phase}).opacity,0);
 });
 
 test('the simulation reveal clock resets on arrival, replay, and cancellation',()=>{

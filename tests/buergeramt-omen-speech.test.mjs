@@ -162,3 +162,16 @@ test('old word, pause, resume and end callbacks cannot change a replayed encount
  assert.equal(h.level.omen.speech.progress,0);assert.equal(h.level.omen.speech.paused,false);
  assert.equal(h.level.omen.speech.mode,'voice');
 });
+
+test('the Gaussian life clock holds with speech pause, follows word tension and clears on replay',()=>{
+ const h=speaking();h.synth.boundary(line.indexOf('Finsternis'));h.advanceGame(.25);
+ const before=h.level.omen.life;
+ h.synth.pause();h.advanceGame(1);
+ assert.equal(h.level.omen.life.time,before.time);assert.equal(h.level.omen.life.clock,before.clock);
+ assert.equal(h.level.omen.life.depth,1);
+ h.synth.resume();h.synth.boundary(line.indexOf('gewählt'));h.advanceGame(.25);
+ assert(h.level.omen.life.clock>before.clock);assert(h.level.omen.life.pressure>before.pressure);
+ h.synth.end();h.advanceGame(.75);
+ assert.equal(h.level.omen.life.pressure,0);assert.equal(h.level.omen.life.depth,0);assert.equal(h.level.omen.life.pulse,0);
+ h.level.replay(h.config);assert.equal(h.level.omen.life.time,0);assert.equal(h.level.omen.life.clock,0);
+});

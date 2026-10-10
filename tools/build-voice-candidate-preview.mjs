@@ -5,7 +5,7 @@ const root=resolve(import.meta.dirname,"..");
 const manifest=JSON.parse(readFileSync(resolve(root,"assets/voices/candidate-dialogue/manifest.json"),"utf8"));
 if(manifest.lineCount!==manifest.clips.length)throw new Error("Candidate count differs from manifest");
 const keys=new Set();
-const rows=manifest.clips.map(clip=>{
+const rows=manifest.clips.filter(clip=>!clip.retiredReason).map(clip=>{
  const key=clip.voiceId+"\0"+clip.text;
  if(keys.has(key))throw new Error(`Duplicate candidate ${clip.clipId}`);
  keys.add(key);

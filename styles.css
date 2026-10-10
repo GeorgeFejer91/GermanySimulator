@@ -194,9 +194,8 @@ button,.control-dock,.control-dock *{touch-action:none}
 .english-subtitle{position:fixed;z-index:120;left:0;right:0;bottom:0;height:calc(2.56em + 15px);display:flex;align-items:flex-end;justify-content:center;overflow:auto;overflow-wrap:break-word;padding:7px 14px;border-top:1px solid #d4a900;background:#050505;color:#ffcc00;font:700 clamp(15px,1.65vw,21px)/1.28 "Grenze",Georgia,serif;text-align:center;text-shadow:1.5px 1.5px 0 #b00018;pointer-events:none}
 .english-subtitle[hidden]{display:flex;visibility:hidden}
 .english-subtitle[data-fit="scroll"]{display:block;pointer-events:auto;touch-action:pan-y;overscroll-behavior:contain}
-.subtitle-toggle{position:fixed;z-index:121;right:12px;bottom:calc(var(--subtitle-height) + 6px);min-height:24px;padding:3px 7px;border:1px solid #d4a900;background:#080808;color:#ffcc00;font:700 10px/1.1 "Grenze",Georgia,serif;text-shadow:1px 1px 0 #b00018}
-.subtitle-toggle:focus-visible{outline:2px solid #f0eadc;outline-offset:2px}
-@media(pointer:coarse){.subtitle-toggle{top:6px;bottom:auto}}
+#subtitle-toggle{position:fixed;z-index:231;top:env(safe-area-inset-top,0px);right:env(safe-area-inset-right,0px);bottom:auto;left:auto;margin:0;max-width:calc(100vw - env(safe-area-inset-left,0px) - env(safe-area-inset-right,0px));min-height:44px;padding:7px 10px;border:1px solid #d4a900;background:#080808;color:#ffcc00;font:700 12px/1.35 "Grenze",Georgia,serif;text-shadow:1px 1px 0 #b00018;white-space:normal;overflow-wrap:break-word}
+#subtitle-toggle:focus-visible{outline:2px solid #f0eadc;outline-offset:2px}
 footer{bottom:calc(var(--subtitle-height) + 8px)}
 .dialogue{bottom:calc(var(--subtitle-height) + 46px);height:168px;min-height:0;max-height:calc(100dvh - var(--subtitle-height) - 72px);overflow:hidden}
 .dialogue-copy{max-height:100%;min-height:0;overflow:auto;align-self:stretch}
@@ -206,7 +205,6 @@ footer{bottom:calc(var(--subtitle-height) + 8px)}
 @media(max-width:760px){
   #app{--subtitle-height:50px}
   .english-subtitle{height:calc(2.48em + 13px + env(safe-area-inset-bottom));padding:6px 9px calc(6px + env(safe-area-inset-bottom));font-size:15px;line-height:1.24}
-  .subtitle-toggle{top:6px;right:6px;bottom:auto;min-height:23px;font-size:9px}
   .germanness{bottom:var(--subtitle-height);height:30px;min-height:0;padding-bottom:3px;overflow:auto}
   .control-dock{bottom:calc(30px + var(--subtitle-height));height:auto;min-height:84px;padding-bottom:5px}
   .interact-hint{bottom:calc(121px + var(--subtitle-height))}

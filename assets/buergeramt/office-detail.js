@@ -154,7 +154,7 @@
     function phone(x,y,z) { prop('desk-phone'); box(x,y+.025,z,.22,.05,.24,m.dark); for(let row=0;row<4;row++)for(let col=0;col<3;col++)box(x-.043+col*.04,y+.058,z-.028+row*.029,.022,.012,.019,m.cream); box(x-.086,y+.086,z,.045,.039,.22,m.black); for(let i=0;i<12;i++)ring(x-.145,y+.035,z-.035+i*.012,.018,m.black,Math.PI/2); }
     function monitor(x,y,z) { prop('crt-terminal'); box(x,y+.16,z,.43,.34,.31,m.cream); box(x,y+.16,z+.163,.37,.26,.018,m.black); box(x,y+.16,z+.175,.33,.21,.008,m.dark); for(let i=0;i<5;i++)box(x-.058,y+.23-i*.033,z+.182,.17-(i%2)*.06,.005,.003,m.olive); box(x,y-.035,z,.22,.065,.19,m.cream); for(let i=0;i<8;i++)box(x+.219,y+.23-i*.023,z,.006,.009,.19,m.steel); }
     function deskSupplies(x,clerkStation=false) {
-      // Keep Frau Knick's face clear from the public side of Schalter 3.
+      // Any assigned counter can host Frau Knick; keep her whole face clear.
       const screenOffset=clerkStation?-.74:0;
       monitor(x-.04+screenOffset,1.1775,-5.64); keyboard(x-.06+screenOffset,1.108,-5.12); phone(x+.67,1.108,-5.59); tray(x-(clerkStation?.28:.72),1.12,-5.38); mug(x+.39,1.11,-5.17);
       paperStack(x+.19,1.11,-5.44,12,.29,.37); stamp(x-.40,1.11,-5.04);
@@ -169,7 +169,7 @@
     }
     // Keep the accepted hall, rows of chairs, QR, red display and Frau Knick.
     // The integrator hides only the old four desks' simplified supplies after attach succeeds.
-    for(const [i,x] of [-5.8,-1.6,3.9,6.2].entries())placed(0,-.06,-3.66,()=>deskSupplies(x,i===2));
+    for(const x of [-5.8,-1.6,3.9,6.2])placed(0,-.06,-3.66,()=>deskSupplies(x,true));
     for(const o of obstacles.filter(o=>o.id.startsWith('archive-')))shelving(o.x,o.z,o.x<0?Math.PI/2:-Math.PI/2,o.z>0?21:o.z<-4?19:20);
     // Copier and fax are one compact corner, not a second interactive terminal.
     placed(-3.12,0,-3.39,()=>{

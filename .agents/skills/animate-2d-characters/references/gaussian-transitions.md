@@ -21,6 +21,22 @@ back view, establish correspondences between poses, or animate joints by itself.
   orbit, substantial disocclusion or articulated movement is required. Treat that
   as separate asset work; do not imply a renderer installation solved it.
 
+For a bounded action with approved painted main and transition poses, the
+[paired Gaussian action starter](paired-gaussian-actions.md) supplies a reusable
+builder, native-image Gaussian texture-patch mesh, fallback Spark cloud,
+shared owner and synthetic test. The native patches follow paired correspondences at
+simulation-owned phases, without a separate clock or a second visible overlay. Full-resolution source
+sampling does not prove endpoint coverage or anatomical correspondence; inspect
+the entire arc and repair uncovered or incorrect parts before promotion.
+Its bounded spatial phase delay creates liquid transport while returning
+exactly to each authored key; owned props share a pivot-derived phase.
+Use that reference's [flicker diagnosis](paired-gaussian-actions.md#diagnose-flicker-before-changing-the-look)
+for rapid transitions, wrong part correspondence, incomplete native coverage,
+cross-actor shader caching or late image handovers. A depth reveal may crossfade
+representations once; a liquid 2D action keeps native texture transport active
+throughout every available anchor pair. Do not copy reveal fades into every
+intermediate action key.
+
 ## Register the actual displayed pose
 
 Inspect the texture, atlas cell, UVs, billboard dimensions and pivot actually
@@ -90,6 +106,41 @@ Gaussian renderer has produced a usable sorted frame, then crossfade. On failure
 or a preparation that misses the chosen handoff, retain the sprite for that
 encounter instead of replacing it abruptly mid-line. The existing event receipt
 still decides when the scene releases; restore the sprite and its material state.
+
+## Articulate a painted Gaussian mouth from recorded speech
+
+Bind the mouth track to the approved recording's exact identity and byte hash.
+Analyze it offline into estimated viseme intervals and a compact energy envelope;
+use a recognizer suitable for the spoken language. Keep generated estimates
+separate from verified words and phoneme alignment. Ship cue data rather than a
+recognizer, reference recording or authoring model. Preserve the original audio.
+
+Read the native media playhead in the existing render/update pass. Blend closure,
+vowel opening, spreading, rounding and lower-lip biting across short boundaries;
+energy can modulate opening but cannot replace articulation. Select recorded-word
+receipt mode before the first word event, so a wall-clock estimate cannot advance
+past and reject that receipt. Freeze the pose during pause; close on actual end,
+exit and replay. Unowned or failed audio should retain a neutral mouth unless a
+separate fallback rig has been validated. Reduced motion can retain these small
+semantic movements while removing decorative waves.
+
+Register the lips against the exact source crop and its world-coordinate mapping.
+Use a bounded lip/lower-jaw mask that preserves eyes, scalp, props and floor pivot.
+A small Gaussian oral cavity may share the same mesh and renderer, with zero alpha
+at rest. Inspect actual face relief before choosing its depth: an opening placed
+behind one lip edge can appear off-centre despite correct XY registration. Scale
+its height with opening rather than leaving a dark oval under every consonant.
+Keep the jaw connected and the original painted crease visible at closure.
+
+Inspect normal-speed rendered motion plus native-scale closed, consonant, open
+vowel, rounded and biting extremes, comparing the neutral frame to the original.
+Do not seek the media for the only synchronization test: some test servers or
+media paths reset a seek, making all sampled images the same closed state. Record
+real playback and its playhead/pose trace. Include pause/resume, end, replay,
+missing audio, splat failure, reduced motion and mobile framing. Measure added
+kernels, cue transfer and frame/input cost against the same scene without the rig.
+Localized deformation approximates speech; it does not supply a general face rig,
+new teeth anatomy or correct views beyond the inspected source angle.
 
 ## Build a hollow tunnel with real splats
 

@@ -10,7 +10,7 @@ The eight moving office regulars have original four-view painted source sheets a
 
 The same source sheets yield four-pose 640 × 832 action detail cells plus four directional eight-frame close walk sheets per moving regular, 384 × 832 detail poses for waiting patrons, and a compact shared detail sheet with six clerk poses and eight high-resolution lip frames. Moving detail is requested only on approach, one walk direction at a time, and released after the actor leaves; the compact desktop/mobile atlas remains the distance and load-failure fallback. Close walk sheets use a 4 × 2 grid so their maximum texture dimension is 2560 px. This preserves close brushwork without eight full high-resolution 64-frame atlases. The office-only shader gently varies per-character saturation and lightness without modifying the painted files; its renderer follows the shared one-pixel-per-CSS-pixel and 1.6 MP drawing-buffer budget in the browser playability gate below.
 
-The Aktenkurier's blackout alone may replace his sprite with the offline-authored
+The Aktenkurier's omen approach and blackout alone may replace his sprite with the offline-authored
 Gaussian volume in `assets/buergeramt/omen/`. The deterministic builder and source
 hashes are documented beside the asset: 38,938 splats / 1,246,016 bytes, using the
 accepted gesture and rear paintings. This is a bounded sculpture for small turns,
@@ -28,6 +28,18 @@ for any owned sort before disposing buffers and its worker. A missing, cancelled
 or late preparation preserves the sprite; ordinary city startup imports none of
 this code or asset. The asset has one shared desktop/mobile variant pending
 evidence that another is needed. Runtime behavior belongs in `BUERGERAMT.md`.
+
+Office lip articulation adds a small classic script, with no media download or
+new dependency. Its shared native-paint patch has 425 Gaussian instances in
+one draw (5,100 bytes of instance coordinates), borrowing the selected actor's
+current texture rather than decoding/copying it. It allocates on first actual
+speech, updates from the existing renderer, hides/restores the source mouth at
+rest and releases geometry/material on scene exit. Source face registrations
+work with the existing close and compact variants. The omen adds one oral
+record to its existing volume (42,011 total figure/tunnel records); its original
+38,938-record file and byte count stay unchanged, as does its 30 Hz sort cap.
+Browser evidence is local under `output/lip-motion/`; physical-device and
+natural-flow coverage remain separate from forced render/timing fixtures.
 
 The office's original painted prop strip adds a file cabinet, paper tower,
 distorted clock, and noticeboard. Its source and provenance are with the cast;
@@ -68,7 +80,7 @@ runtime cost; do not reskin the entire city from an unreviewed style sheet.
 - The user-linked humor-form fax recording is an in-game-only local MP3 at `assets/fax-machine-paper-feed.mp3`. Preserve its source and checksum in `CREDITS.md`, do not claim a license that the source does not provide, and keep the synthesized Web Audio fax feed as the missing-file fallback.
 - The user-supplied opening music is one in-game-only local MP3 at `assets/intro-song.mp3`, trimmed by exactly 24 seconds at the start. It plays once before the shared background playlist. The sung pool under `assets/audio/music/sung/` follows one song after every three synthesized 8-bit arrangements. The user-supplied `assets/audio/music/wurst.mp3` interrupts that playlist once when the fifth of nine unique sausages is collected, while still obeying the music toggle and audio-text ducking. Preserve source and shipped checksums in `CREDITS.md` and `assets/audio/music/PROVENANCE.md`; do not claim external redistribution rights that have not been established.
 - Keep emotional pedestrian recordings to a small local MP3 subset with exact-text bark mappings, durable source and checksum records in `assets/voices/LICENSES.md`, and browser-speech fallback. Do not fetch the full dataset or depend on a remote audio host at runtime.
-- Keep Merkel's user-supplied Neuland excerpt under `assets/voices/merkel/`, mapped only to its exact displayed quotation and documented in `CREDITS.md` plus `assets/voices/LICENSES.md`. It follows the same foreground normalization and proximity-broker rules as her existing “Wir schaffen das” excerpt; do not imply external redistribution rights.
+- Merkel's nine authored lines use the user-selected `GS Merkel` profile under `assets/voices/merkel/`, including the behind-player response. Load one requested recording through the existing bounded speech cache; retain exact-text browser speech on failure. Her original Neuland and “Wir schaffen das” excerpts are retired from runtime delivery. Preserve profile, model, transcript, normalization and output hashes in `manifest.json`, with provenance in `CREDITS.md` and `assets/voices/LICENSES.md`; do not imply external redistribution rights.
 - Keep the 13 generated §-power readings and 11 rotating-rule readings under `assets/voices/laws/`, indexed directly to their fixed decks. §-power audio must use the exact displayed quotation; rotating-rule audio must read the complete displayed body while its shorthand identifier remains visual. Both retain German browser-speech fallback and record their CC0 references, local XTTS-v2 generation method, durations, and checksums in `assets/voices/LICENSES.md`. The cloning model is an offline production tool, never a runtime dependency or shipped model.
 - Keep the user-supplied Bayern and Alice recordings as local foreground MP3s under `assets/voices/bayern/` and `assets/voices/alice-weidel/`, with exact-text runtime mappings and checksums in `assets/voices/LICENSES.md`. Alice's source recordings are user-supplied satirical material, not verified quotations or factual claims. The root game loads the accepted painted Merkel, Bayern, Alice, and Merz manifests under `assets/characters/`, each with four distinct eight-phase walks, planted whole-body corners, and a shared ground pivot. Merz also retains gait-synchronized pouring actions. The archived pre-rig atlases are missing-file fallbacks. The experimental identity-matched part sheets under `assets/sprite-sources/rigs/`, biomechanical builder, audit, verification ledger, and active root atlas outputs remain available to the authoring pipeline but are not game runtime inputs until explicitly accepted. The isolated Merkel candidate under `assets/sprite-sources/candidates/merkel-21/` is also preview-only: its 20-frame playback plus exact closure audit must retain `candidate-unapproved` status, use the archived sprite for immutable identity pixels, and never become a game loader input without explicit visual acceptance. The narrower Merkel left-walk pilot under `assets/sprite-sources/candidates/merkel-cmu-left/` is likewise preview-only and `candidate-unapproved`; it may use the pinned CMU subject 69/01 capture under `assets/sprite-sources/reference/cmu-walk-69-01/` only as an offline bone-direction authority, with the CMU acknowledgment and non-resale condition preserved beside the BVH. It must remain one-direction-only until explicit visual acceptance. `sprite-preview.html` can switch among both candidates, the experimental outputs, and the exact stable game atlases without changing the game loader. The shared Three.js staging canvas remains the only game rendering path; no skeleton, BVH parser, Pillow, SciPy, or authoring dependency ships to the browser. Follow `SPRITE-GENERATION-PROTOCOL.md` for the experimental gait, grid, direction, build, overlay, and signed acceptance contracts.
 - The shared sprite rig preserves compact caricature anatomy: torso and limb plates receive the same bounded fullness correction, articulated limb lengths remain deliberately compact, directional source parts are normalized to one character-consistent scale, and every chin anchor must meet the shoulder line within eight 512-grid pixels. Merkel additionally keeps one deterministic, all-frame identity calibration measured against her archived original: broad head and jacket plates, full arms and trouser mass, compact legs, and direction-specific ground registration. Do not restore the long-necked, narrow-body composition or tune isolated runtime frames around it.
@@ -114,6 +126,21 @@ browser profiles. Do not add a new pipeline, service or benchmark dependency.
   new export only after actual display-size and rendered review.
 
 ### Frame, background work and lifetime contract
+
+The first city Bürgeramt entry uses `buergeramt-entry.js` and the existing WebGL
+renderer. One on-demand GPU color/depth capture has a longest edge of at most
+960 px on desktop or 640 px on compact screens (at most 7.04 MiB for its two
+four-byte surfaces). One instanced Gaussian draw samples about 18,000 city pixels
+on desktop or 7,000 on compact screens; grid rounding is bounded below 18,500
+instances on supported portrait/landscape profiles. A second draw dissolves
+the frozen image and marks the door's vortex. This is a depth-assisted visible
+surface effect, not a reconstructed splat asset. No CPU pixel readback, extra
+renderer, Spark import, downloaded art, worker or independent animation loop
+is needed. Capture occurs at committed entry; drawing lasts at most 3.4 seconds
+of active frame time. Reduced motion allocates only the color surface and uses
+one draw for a 0.24-second fade. Hidden pages stop its clock; completion/pagehide
+release both textures, materials and geometry. Module/render failure keeps
+direct entry. The existing office readiness gate runs before the transition.
 
 The mission-fax HUD transition uses native Canvas 2D Gaussian alpha kernels as a
 CSS mask over the actual DOM paper. One reusable 192 × 256 mask and 32 × 32 kernel
@@ -364,6 +391,15 @@ For risky GLB re-export/optimization, compare bytes alongside names/hierarchy, w
 For rendered comparisons, freeze representative game/HUD states and camera, then calibrate repeated unchanged captures before setting tolerances. Verify a known meaningful visual mutation fails. Separate normal/reduced-motion and loaded/fallback states; screenshots cannot alone establish timing, physical-device performance or correct animation.
 
 ## Local 3D buildings
+
+The Bürgeramt entrance radiance is original runtime geometry: one retained door
+plane, one 5 × 5 ray/halo shader plane, and one short-range shadow-free point
+light. It follows both the authored municipal GLB glass entrance and procedural
+door dimensions, uses normal depth testing, and is excluded from obstruction
+tests as decoration. It adds no downloads, textures, postprocessing, timer or
+asset queue jobs. The existing render dispatch advances a bounded visible-city
+clock; hidden/off-camera doors stop work and lighting, pause freezes animation,
+and reduced motion is steady gold. Resources live with the existing city scene.
 
 The mission Bratwurst uses one local textured cooked-sausage GLB under
 `assets/models/mission-sausage/`, with adjacent attribution and CC BY-NC 4.0

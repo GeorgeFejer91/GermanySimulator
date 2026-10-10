@@ -24,6 +24,15 @@ test('the QR invitation can carry the host subtitle preference without changing 
 });
 test('a bounded scan id reaches the host without form data',()=>{const h=transport();h.channel.receive({type:'scan',id:'a'.repeat(24)});assert.equal(h.messages.length,1);assert.equal(h.messages[0].id,'a'.repeat(24))});
 test('only bounded police speech receipts reach the host',()=>{const h=transport();h.channel.receive({type:'police-done',index:-2,mode:'voice',durationMs:100,atMs:500});h.channel.receive({type:'police-start',index:-1,mode:'voice',readyDelayMs:25,atMs:400,seq:2});h.channel.receive({type:'police-done',index:-1,mode:'voice',durationMs:100,atMs:500,seq:3});assert.equal(h.messages.length,2);assert.equal(h.messages[1].index,-1)});
+test('only the host may schedule a bounded phone cutoff',()=>{
+ const phone=transport('phone'),host=transport(),payload={stopAtPhoneMs:7200,stopAtUtcMs:1791648007200};
+ for(const index of [-2,3,NaN,1.5])phone.channel.receive({type:'police-cutoff',index,...payload});
+ for(const stopAtPhoneMs of [-1,1e12+1,'7200'])phone.channel.receive({type:'police-cutoff',index:-1,...payload,stopAtPhoneMs});
+ phone.channel.receive({type:'police-cutoff',index:-1,...payload,unexpected:true});assert.equal(phone.messages.length,0);
+ phone.channel.receive({type:'police-cutoff',index:-1,...payload});assert.equal(phone.messages.length,1);
+ host.channel.receive({type:'police-cutoff',index:0,...payload});assert.equal(host.messages.length,0);
+ assert.equal(phone.link.send('police-cutoff',{index:0,...payload}),false);assert.equal(host.link.send('police-cutoff',{index:2,...payload}),true);
+});
 test('recorded audition mode uses the existing bounded police receipt contract',()=>{const h=transport();h.channel.receive({type:'police-start',index:-1,mode:'recording',readyDelayMs:25,atMs:400});h.channel.receive({type:'police-done',index:-1,mode:'recording',durationMs:900,atMs:1300,seq:2});assert.equal(h.messages.length,2);assert.equal(h.messages[1].mode,'recording')});
 test('timing handshake rejects invalid IDs, modes and durations',()=>{const host=transport(),phone=transport('phone');for(const bad of [{type:'sync-pong',id:0,receivedAtMs:1,sentAtMs:1},{type:'sync-pong',id:1.5,receivedAtMs:1,sentAtMs:1},{type:'sync-pong',id:1,receivedAtMs:12,sentAtMs:11},{type:'sync-pong',id:1,receivedAtMs:0,sentAtMs:12001},{type:'police-start',index:3,mode:'voice',readyDelayMs:0,atMs:1},{type:'police-start',index:0,mode:'bogus',readyDelayMs:0,atMs:1},{type:'police-start',index:0,mode:'voice',readyDelayMs:-1,atMs:1},{type:'police-done',index:0,mode:'voice',durationMs:-1,atMs:1},{type:'police-done',index:0,mode:'voice',durationMs:60001,atMs:1}])host.channel.receive(bad);assert.equal(host.messages.length,0);host.channel.receive({type:'sync-pong',id:7,receivedAtMs:50,sentAtMs:55});assert.equal(host.messages.length,1);phone.channel.receive({type:'sync-ping',id:7});assert.equal(phone.messages.length,1);assert.equal(phone.link.send('sync-pong',{id:7,receivedAtMs:50,sentAtMs:55}),true);assert.equal(host.link.send('sync-ping',{id:7}),true)});
 test('call targets and scheduling receipts reject malformed clock modes and lead times',()=>{
