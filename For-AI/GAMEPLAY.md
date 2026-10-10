@@ -15,6 +15,13 @@ Mission order:
 7. Ausländerbehörde — residence evidence.
 8. Ausländerbehörde — fictional citizenship application.
 
+A floating grilled Bratwurst above the player points its mustard arrowhead toward
+the current mission's actual office entrance. It follows all eight procedures;
+during Stadtbild work it selects the nearest unfinished object, then the office.
+It is a compass bearing, with existing streets, crossings and interaction rules
+still governing travel. It hides during title, dialogue, file/modal, office and
+end states, and within 36 units of its target. It has no collision footprint.
+
 ### Gameplay paperwork
 
 Keep the **Germanness** gauge, numeric 0–15 score and law-power threshold salient and continuously visible during city play. Hide the city rail throughout the Bürgeramt episode, including direct entry, and restore it on returning to the city without changing progression. It is the player's ongoing progression goal. Use a compact horizontal Schwarz-Rot-Gold rail above the small **Akte / M** tab with the current day on desktop and phones. Move that same gauge into the opened file header so every file page retains it. Police status appears only while wanted; energy becomes an edge warning at 35 or below. Full energy, forms, Pfand, the sausage collection, the current rule, controls and audio settings belong in the opened file. Keep the shared English-subtitle toggle directly available on every game screen, including forms, the opened file and the Bürgeramt, on desktop and phones; its preference persists locally. Its Mission, Status, Collection and Controls pages keep the ordinary small-screen view readable; long documents and enlarged text have a vertical reading fallback rather than ellipses. Opening the file pauses city simulation and releases held movement input; M, Escape or Back returns to play. A committed speech notice remains visible inside the file.

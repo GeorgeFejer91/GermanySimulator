@@ -425,3 +425,12 @@ build method, and output hashes are recorded in
 `assets/sprite-sources/buergeramt/PROVENANCE.md`.
 
 All game rules, wanted levels, immigration deadlines, forms, and enforcement mechanics are fictional parody and do not represent German law, police practice, citizenship requirements, or immigration procedure.
+# Mission Bratwurst pointer
+
+The mission pointer uses a reduced derivative of [Saucisse](https://sketchfab.com/3d-models/saucisse-2583fa564f0f46da8be70958fdf057dd)
+by [__Maros__(oooFFFFEDDMODELS)](https://sketchfab.com/pierre.marcos.19), under
+[CC BY-NC 4.0](https://creativecommons.org/licenses/by-nc/4.0/), distributed via
+[Objaverse](https://huggingface.co/datasets/allenai/objaverse). The original
+cooked-sausage curve and PBR appearance are retained, with normalized placement
+and smaller textures. The mustard arrowhead is original game geometry. Source,
+changes and hashes: [asset attribution](assets/models/mission-sausage/LICENSES.md).

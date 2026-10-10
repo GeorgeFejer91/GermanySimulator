@@ -421,6 +421,17 @@ For rendered comparisons, freeze representative game/HUD states and camera, then
 
 ## Local 3D buildings
 
+The mission Bratwurst uses one local textured cooked-sausage GLB under
+`assets/models/mission-sausage/`, with adjacent attribution and CC BY-NC 4.0
+terms. It adds 274,344 transferred bytes, 3,640 triangles, one material and three
+512 px maps (3 MiB decoded RGBA / about 4 MiB with mipmaps). The starting
+neighborhood queue prepares it before Start through the existing two-job
+admission owner. A curved procedural sausage retains the same compass behavior
+on failure. The existing render dispatch updates its bearing without a new
+timer, text measurement, collision object, service or asset variant. The shared
+source/instance lives with the city renderer; office/hidden states consume no
+pointer updates. Replace this noncommercial model before commercial release.
+
 - Root `assets/models/` is the only authority for shipped model files.
 - The root game has one required WebGL presentation path. Do not preload or restore the retired SVG/Canvas world-art set. Registered moving-character PNG atlases remain the deliberate bitmap exception; DOM UI art and billboard textures are not alternate world renderers.
 - Trees are canonical world data in `game.js`, not renderer-local decoration. Apply the rail-gutter city offset exactly once, keep each trunk center at least 48 world units outside every road rectangle, expose the same placement to `world3d.js` and `3d.html`, and keep trees solid to ground movement.
