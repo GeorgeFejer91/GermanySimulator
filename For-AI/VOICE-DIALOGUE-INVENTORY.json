@@ -327,7 +327,6 @@
           {
             "id": "thorsten-angry-nicht-weg",
             "voiceId": "thorsten",
-            "targetVoiceId": "passerby-a",
             "trigger": "pedestrian.sidewalk.germany",
             "source": "Nein, ich gehe hier nicht weg!",
             "english": "No, I am not leaving!",
@@ -338,7 +337,6 @@
           {
             "id": "thorsten-angry-duemmer",
             "voiceId": "thorsten",
-            "targetVoiceId": "passerby-b",
             "trigger": "pedestrian.sidewalk.germany",
             "source": "Dümmer geht's nicht mehr.",
             "english": "It cannot get any stupider than this.",
@@ -349,7 +347,6 @@
           {
             "id": "thorsten-angry-klappt-nicht",
             "voiceId": "thorsten",
-            "targetVoiceId": "passerby-a",
             "trigger": "pedestrian.sidewalk.germany",
             "source": "Das klappt einfach nicht!",
             "english": "This simply does not work!",
@@ -360,7 +357,6 @@
           {
             "id": "thorsten-sleepy-nichts-geschafft",
             "voiceId": "thorsten",
-            "targetVoiceId": "passerby-b",
             "trigger": "pedestrian.sidewalk.germany",
             "source": "Mist, wieder nichts geschafft.",
             "english": "Damn, failed to achieve anything again.",
