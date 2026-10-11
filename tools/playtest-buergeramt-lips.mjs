@@ -4,11 +4,30 @@ import {readFileSync,mkdirSync,writeFileSync} from 'node:fs';
 import assert from 'node:assert/strict';
 import {createHash} from 'node:crypto';
 const nativePaint=process.env.PLAYTEST_NATIVE_PAINT==='1';
-const revision=Object.fromEntries(['buergeramt.js','world3d.js','buergeramt-lips.js','buergeramt-gaussian-scene.js','buergeramt-painted-anchor.js'].map(f=>[f,createHash('sha256').update(readFileSync(f)).digest('hex')]));
+const revision=Object.fromEntries(['buergeramt.js','world3d.js','buergeramt-lips.js','buergeramt-lipsync.js','buergeramt-mouth-paint.js','buergeramt-splat.js','buergeramt-gaussian-scene.js','buergeramt-painted-anchor.js','assets/buergeramt/speech/mouth-cues.js'].map(f=>[f,createHash('sha256').update(readFileSync(f)).digest('hex')]));
 const {chromium}=createRequire(import.meta.url)(process.env.PLAYWRIGHT_MODULE||'playwright');
 const output=process.env.PLAYTEST_OUTPUT||'output/lip-motion/review';mkdirSync(output,{recursive:true});
 const browser=await chromium.launch({headless:true,executablePath:process.env.CHROMIUM_PATH,args:['--mute-audio']});
 const reports=[];
+async function faceClip(page,id){
+ return page.evaluate(async({id,nativePaint})=>{
+  const T=await import('https://cdn.jsdelivr.net/npm/three@0.186.0/build/three.module.js');
+  const actor=[...__lipRender.amtMoving,...__lipRender.amtCharacters].find(a=>a.id===id||a.lipId===id),height=actor.mesh.geometry.parameters.height*actor.mesh.scale.y;
+  let rect,aspect=actor.mesh.geometry.parameters.width/actor.mesh.geometry.parameters.height;
+  if(nativePaint){
+   const entry=Germany3D.amtGaussian.actors.find(a=>a.anchor?.visible&&(a.id===id||a.id===actor.id||id===actor.lipId));
+   const manifest=await(await fetch('./assets/buergeramt/animation/'+entry.manifestId+'.json')).json();
+   const {nativeMouthRect}=await import('./buergeramt-mouth-paint.js?v=20261011-acoustic-mouth');rect=nativeMouthRect(manifest,entry.anchor.state);aspect=manifest.canvas_xy[0]/manifest.canvas_xy[1];
+  }else rect=GermanyAmtLips.mouths[actor.lipId||actor.id||actor.name];
+  const points=[];
+  for(const x of [-3,3])for(const y of [-3,3]){
+   const p=new T.Vector3((rect[0]+x*rect[2]-.5)*height*aspect,(rect[1]+y*rect[3]-.5)*height,0);
+   p.applyQuaternion(actor.mesh.quaternion).add(actor.mesh.position).project(__lipRender.camera);points.push([(p.x+1)*innerWidth/2,(1-p.y)*innerHeight/2]);
+  }
+  const x=Math.max(0,Math.floor(Math.min(...points.map(p=>p[0])))),y=Math.max(0,Math.floor(Math.min(...points.map(p=>p[1]))));
+  return{x,y,width:Math.max(1,Math.min(innerWidth-x,Math.ceil(Math.max(...points.map(p=>p[0])))-x)),height:Math.max(1,Math.min(innerHeight-y,Math.ceil(Math.max(...points.map(p=>p[1])))-y))};
+ },{id,nativePaint});
+}
 try{
  for(const [name,width,height] of [['desktop',1280,800],['android-portrait',390,844],['android-landscape',844,390],['reduced-motion',1280,800],['asset-failure',1280,800]].filter(([name])=>!process.env.PLAYTEST_VIEWPORT||process.env.PLAYTEST_VIEWPORT.split(',').includes(name))){
   const context=await browser.newContext({viewport:{width,height},isMobile:name.startsWith('android'),hasTouch:name.startsWith('android'),reducedMotion:name==='reduced-motion'?'reduce':'no-preference',...(process.env.PLAYTEST_VIDEO&&name==='desktop'?{recordVideo:{dir:output+'/video',size:{width,height}}}:{})});
@@ -83,7 +102,7 @@ try{
     open.gaussian=await page.evaluate(()=>Germany3D.amtGaussian);open.splat=await page.evaluate(()=>Germany3D.amtLipSplat);assert.equal(open.splat.visible,false);
    }else{assert.equal(open.splat.visible,true);assert.equal(open.actor.hole,1);assert.equal(open.splat.depthTest,true);assert.equal(open.splat.layer,2,'mouth shares the final actor pass')}
    if(!nativePaint&&id===actors[0])renderCost=await page.evaluate(()=>{
-    const a=__lipRender.amtMoving.find(a=>a.id===BuergeramtLevel.lipSpeech.actor),patch=a.mesh.children.find(m=>m.geometry?.instanceCount===425);
+    const a=[...__lipRender.amtMoving,...__lipRender.amtCharacters].find(a=>a.id===BuergeramtLevel.lipSpeech.actor||a.lipId===BuergeramtLevel.lipSpeech.actor),patch=a.mesh.children.find(m=>m.geometry?.instanceCount===425);
     const sample=()=>{const times=[];for(let n=0;n<30;n++){const at=performance.now(),r=__lipRender.renderer,s=__lipRender.scene,c=__lipRender.camera;
      r.render(s,c);const background=s.background;s.background=null;r.autoClear=false;c.layers.set(1);
      try{r.render(s,c)}finally{c.layers.set(0);r.autoClear=true;s.background=background}
@@ -92,6 +111,7 @@ try{
     return{active,baseline,scope:'same frozen production scene, CPU submission only; GPU timing unavailable'};
    });
    await page.screenshot({path:`${output}/${name}-${id}-open.png`});
+   const face=await faceClip(page,id);await page.screenshot({path:`${output}/${name}-${id}-face-open.png`,clip:face});
    await page.evaluate(()=>{lipTestSpeech.onresume?.();lipTestSpeech.onboundary({charIndex:5});window.lipFixtureTime+=35;window.lipFixtureRenderTime+=100;Germany3D.sync();lipTestSpeech.onpause?.()});await page.waitForTimeout(120);
    await page.evaluate(()=>{Germany3D.sync();lipTestSpeech.onpause?.();Germany3D.sync()});
    const bite=await page.evaluate(()=>BuergeramtLevel.lipSpeech);assert(bite.shape[3]>.75);
@@ -102,10 +122,20 @@ try{
    const round=await page.evaluate(()=>BuergeramtLevel.lipSpeech);assert(round.shape[2]>.75);
    if(nativePaint)assert(await page.evaluate(()=>Germany3D.amtGaussian.actors.some(a=>a.anchor?.visible&&a.anchor.lipShape[2]>.75)));
    await page.screenshot({path:`${output}/${name}-${id}-round.png`});
-   await page.evaluate(()=>{lipTestSpeech.onend?.();Germany3D.sync()});
-   const closed=await page.evaluate(()=>Germany3D.amtLipSplat);assert.equal(closed.visible,false);assert.equal(closed.actor,null);
+   await page.screenshot({path:`${output}/${name}-${id}-face-round.png`,clip:face});
+   // A closed consonant in a fresh owned utterance keeps the same speaking
+   // body key. Ending speech here used to switch the clerk's painting and
+   // confound mouth-only comparisons with a stamp/head pose change.
+   await page.evaluate(id=>{window.lipFixtureTime=0;window.lipTestSpeech=null;__lipProbe.content(id==='clerk'?'FRAU KNICK':id,'Mama fünf Omi schöne Euro!',[],null,null,null,{id,tone:'procedural',valence:0})},id);
+   await page.waitForFunction(()=>!!window.lipTestSpeech);
+   await page.evaluate(()=>{lipTestSpeech.onresume?.();lipTestSpeech.onboundary({charIndex:0});window.lipFixtureTime=35;Germany3D.sync();lipTestSpeech.onpause?.();Germany3D.sync()});
+   const closed=await page.evaluate(()=>Germany3D.amtLipSplat);assert.equal(closed.visible,false);
+   assert.equal(await page.evaluate(()=>BuergeramtLevel.lipSpeech.shape[0]),0);
    await page.screenshot({path:`${output}/${name}-${id}-closed.png`});
-   snapshots.push({id,open,bite,round,closed});
+   await page.screenshot({path:`${output}/${name}-${id}-face-closed.png`,clip:face});
+   await page.evaluate(()=>{lipTestSpeech.onend?.();Germany3D.sync()});
+   assert.equal(await page.evaluate(()=>Germany3D.amtLipSplat.actor),null);
+   snapshots.push({id,open,bite,round,closed,face});
    console.log(name,id,'PASS');
   }
   if(nativePaint){
@@ -126,7 +156,9 @@ try{
    const trace=[];for(let i=0;i<40;i++){const sample=BuergeramtLevel.lipSpeech;if(sample.mode!=='recorded')break;trace.push(sample);if(sample.time-trace[0].time>=1.1)break;await new Promise(r=>setTimeout(r,120))}return trace;
   });
   writeFileSync(`${output}/${name}-native-media.json`,JSON.stringify(mediaTrace,null,2));
-  assert(mediaTrace.at(-1).time>mediaTrace[0].time+.8);assert(new Set(mediaTrace.map(s=>s.shape.map(v=>v.toFixed(2)).join(','))).size>5);
+  assert(mediaTrace.at(-1).time>mediaTrace[0].time+.8);
+  assert(mediaTrace.some(s=>s.shape[0]>.5)&&mediaTrace.some(s=>s.shape[0]<.01),'real speech contains both an audible opening and a closure');
+  assert(mediaTrace.every(s=>s.timing==='audio-cues'),'the approved MP3 must use its acoustic binding');
   nativeWindow.end=await page.evaluate(()=>performance.now()/1000);
   await page.screenshot({path:`${output}/${name}-recorded-clerk.png`});
   await page.evaluate(()=>__lipProbe.cancelSpeech());
@@ -164,7 +196,10 @@ try{
   }
   writeFileSync(`${output}/${name}-omen-diagnostics.json`,JSON.stringify(omenFrames,null,2));
   if(name==='asset-failure')assert(omenFrames.every(f=>f.paint.visible&&!f.volume.ready&&f.volume.skipped));
-  else assert(omenFrames.every(f=>f.volume.visible&&f.volume.mouthSplats===96&&f.volume.activeSplats>0));
+  else{
+   assert(omenFrames.every(f=>f.volume.visible&&f.volume.mouthSplats===96&&f.volume.activeSplats>0));
+   assert(omenFrames[0].volume.mouth.open>.75);assert(omenFrames[1].volume.mouth.bite>.75);assert(omenFrames[2].volume.mouth.round>.75);
+  }
   await page.evaluate(()=>{__lipProbe.cancelSpeech();Germany3D.sync()});
   await page.evaluate(()=>{BuergeramtLevel.update=lipOriginalUpdate});
   await page.locator('#amt-leave').evaluate(n=>n.click());

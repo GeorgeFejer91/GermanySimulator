@@ -22,6 +22,26 @@ Three distinct stationary Bürgeramt patrons now have name-bearing IDs and priva
 
 For catalog/locale changes, use `game-localization` to check stable IDs, missing translations and fallback coverage. Preserve exact display/speech/speaker pairing and region-specific spoken language. Presentation-language changes must preserve mission/session state, current cue ownership and focus; reuse these catalogs rather than adding a second translation database.
 
+### Recorded office mouth timing
+
+All 41 approved existing office MP3s now share hash-bound phonetic mouth cues and
+an acoustic envelope sampled every 10 ms. `assets/buergeramt/speech/mouth-cues.js`
+is derived from the unchanged encoded recordings. The independent local
+Whisper decode and existing approved catalogue word timestamps are diagnostics
+and semantic receipts; the actual media playhead and sound envelope own visible
+openings, silence, pause and completion. No voice profile or source text changes.
+
+The cue binding is ready before `play()`, subject to the existing startup
+watchdog and attempt/cue guard. A late import cannot start a cancelled line.
+Native Gaussian paint, its atlas fallback and the approved omen use the same
+sampler. Coarticulation is centred on a measured boundary, with at most 40 ms
+anticipation/release and no second delayed filter. This is a sampling/blending
+contract, not a claim of 10 ms phoneme accuracy or hardware acoustic latency.
+German phonetic shapes remain estimates. Dynamic browser speech and optional
+preview recordings without approved cue data retain approximate articulation;
+voice-off and failed speech remain neutral. Reproduction and tool versions are
+in `assets/buergeramt/speech/PROVENANCE.md`.
+
 ### Bürgeramt timekeeping contract
 
 The wire envelope is version 3; the QR points to the versioned phone page and both HTML pages request versioned timing scripts so cached older peers cannot silently mix with this protocol. The host records monotonic `t0` before `sync-ping(id)`; the phone returns monotonic `t1` at receipt and `t2` when sending `sync-pong(id)`; the host records `t3` on receipt. All four values are in their own browser's `performance.now()` domain. Calculate network round trip as `t3 - t0 - (t2 - t1)` and phone-minus-host clock offset as `((t1 - t0) + (t2 - t3)) / 2`. Reject unknown IDs, malformed stamps, negative or over-12-second trips. Keep at most two pings outstanding and seven valid samples. Use the median trip for one-way pacing, the spread for jitter, and the median offset of the three lowest-trip samples for mapping phone events. An offset older than six seconds is stale. Half the slowest of those three selected trips is a diagnostic uncertainty estimate, not a guaranteed acoustic timing bound.

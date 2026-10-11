@@ -9,7 +9,7 @@ export function createAmtGaussianScene({THREE,renderer,scene,actorLayer=0,queueL
     if(failure)throw new Error(failure);
     if(!ownerPromise){
       const request=controller;
-      ownerPromise=import('./buergeramt-splat.js?v=20261011-published-features').then(module=>
+      ownerPromise=import('./buergeramt-splat.js?v=20261011-acoustic-mouth').then(module=>
         module.createAmtSplatOwner({THREE,renderer,scene,actorLayer,signal:request.signal})).then(value=>{
         if(request!==controller||request.signal.aborted){void value.dispose();throw new DOMException('Retired office','AbortError')}
         owner=value;return value;
@@ -78,9 +78,9 @@ export function createAmtGaussianScene({THREE,renderer,scene,actorLayer=0,queueL
         slots.set(item.id,entry);
         const prepare=async()=>{
           if(request.signal.aborted||controller.signal.aborted||document.hidden)return null;
-          const [module,shared]=await Promise.all([import('./buergeramt-gaussian-animation.js?v=20261011-published-features'),getOwner()]);
+          const [module,shared]=await Promise.all([import('./buergeramt-gaussian-animation.js?v=20261011-acoustic-mouth'),getOwner()]);
           request.signal.throwIfAborted();
-          return module.createGaussianActor({THREE,owner:shared,manifestUrl:`./assets/buergeramt/animation/${item.manifestId??item.id}.json?v=20261011-published-features`,variant:mobile?'mobile':'desktop',signal:request.signal,queueLoad:enqueue});
+          return module.createGaussianActor({THREE,owner:shared,manifestUrl:`./assets/buergeramt/animation/${item.manifestId??item.id}.json?v=20261011-acoustic-mouth`,variant:mobile?'mobile':'desktop',signal:request.signal,queueLoad:enqueue});
         };
         enqueue(prepare).then(effect=>{
           if(request.signal.aborted||slots.get(item.id)!==entry){effect?.dispose();return}

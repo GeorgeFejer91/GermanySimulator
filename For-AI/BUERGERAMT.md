@@ -308,7 +308,7 @@ The two authored layers are `assets/audio/buergeramt-omen/bed.ogg` and `tension.
 
 The same story entry owns the omen's authored delivery: browser fallback rate `0.82`, pitch `0.72`, and a word-anchored score contour. Its default voice is the user-approved `aktenkurier-omen-candidate-02` recording from Horst's second official profile; candidate 1 remains preserved. `AUDIO-TEXT-LIBRARY.js` and `VOICE-SYNTH-PROTOCOL.md` own the exact source line, approval and provenance. Actual native playback start begins ducking; ASR-estimated word cues observed against the media playhead move the cue through “Finsternis,” the comma/“hat,” “selbst,” and the falling cadence of “gewählt.” The contour changes filter brightness, upper-layer density, Gaussian pressure and bounded score transposition while speech remains foreground. Browser pitch is a requested fallback setting, not measured fundamental frequency; the score mapping is artistic. With word receipts, the cue holds its last observed position rather than finishing on a separate timer. Pause/resume freezes that position and the shared Gaussian life/pulse clock, attenuates pulse motion and suspends the voice completion watchdog. Hidden-page media playback pauses and resumes with visibility. Engines without usable boundaries, voice-off and failed voice use a rate-scaled estimate, capped before completion; only native playback end, browser speech end or guarded fallback completion starts the 3.4-second stare and the ordered unwind, turn, retreat and recovery. `BuergeramtLevel.omen.speech` exposes receipt mode, recording path and progress for silent checks. Attempt/cue guards reject late events after cancellation.
 
-**Gaussian mouth articulation (2026-10-10).** The official candidate-02 MP3 also owns the mouth clock. `buergeramt-lipsync.js` samples 24 offline phonetic viseme intervals and a 50 Hz energy envelope from `assets/buergeramt/omen/mouth-cues.js`, bound to the recording's exact SHA-256. These are estimated mouth shapes, not verified German phoneme alignment. Each existing frame reads native `currentTime`; the rig blends shapes over 55 ms, moves only front lip/lower-jaw samples, and adds 96 depth-sorted oral-cavity kernels in the same Gaussian body. Closure, vowel opening, rounding and lower-lip biting preserve the painted face, eyes, actor root and feet. The sculpted lip centre is registered to detail pixel `(346.5,134)`; the cavity follows its curved relief and has zero opacity at rest. It articulates only during the owned recorded line. Pause holds its exact pose, completion closes it before the glare, and cancellation/replay clears the owner. Reduced motion retains semantic articulation while disabling decorative ripples. Voice-off, browser speech and failed audio keep a closed mouth rather than advancing an estimated lip clock. Real word receipts are selected at recorded start, before any time estimate can outrun the first boundary. The offline builder, analyzer provenance, immutable audio and reproduction commands are documented beside the omen asset.
+**Historical omen-only articulation (2026-10-10; superseded by the shared speech pipeline below).** The official candidate-02 MP3 also owns the mouth clock. `buergeramt-lipsync.js` samples 24 offline phonetic viseme intervals and a 50 Hz energy envelope from `assets/buergeramt/omen/mouth-cues.js`, bound to the recording's exact SHA-256. These are estimated mouth shapes, not verified German phoneme alignment. Each existing frame reads native `currentTime`; the rig blends shapes over 55 ms, moves only front lip/lower-jaw samples, and adds 96 depth-sorted oral-cavity kernels in the same Gaussian body. Closure, vowel opening, rounding and lower-lip biting preserve the painted face, eyes, actor root and feet. The sculpted lip centre is registered to detail pixel `(346.5,134)`; the cavity follows its curved relief and has zero opacity at rest. It articulates only during the owned recorded line. Pause holds its exact pose, completion closes it before the glare, and cancellation/replay clears the owner. Reduced motion retains semantic articulation while disabling decorative ripples. Voice-off, browser speech and failed audio keep a closed mouth rather than advancing an estimated lip clock. Real word receipts are selected at recorded start, before any time estimate can outrun the first boundary. The offline builder, analyzer provenance, immutable audio and reproduction commands are documented beside the omen asset.
 
 **Shared `omen` life/score card (2026-10-09).** The existing visit/attempt and pre-ticket trigger own one isolated approach→line→glare→unwind→turn→retreat→ordinary-office event. With strength `p` and authored speech tension `t`, pressure is `p² × (0.72 + 0.28t)`, multiplied by the shared smooth reverse envelope during unwind. Simulation integrates pulse cycles at `0.65 + 2.1p + 0.35t` Hz and shapes each pulse as `((1 + cos(2πclock))/2)^8`; speech pause freezes phase/time. Audio follows the same pulse through gain, upper-layer density and filter resonance; splats use it for bounded forward coat expansion and tunnel contraction. The stationary stems contain distorted brass/bass and ring-modulated metallic bands, with no baked tempo, finite riser or payoff. Audio automation maps current controller values to Web Audio time with 18–60 ms smoothing. Voice remains foreground; `EFFEKTE` mute, hidden-page silence and the 24-second source cap remain authoritative. Glare lifts ducking and holds the threat; the shared 1.8-second reverse sequence settles deformation, flattens depth, then holds the opaque flat representation until the registered painting takes ownership while pulse and score pressure drain. Keeping the Gaussian opaque until flat avoids doubled hands and file edges. The turn and silent slow retreat leave the expected catastrophe absent; room/view recovery follows. No accent advances the queue or mission. The figure's painted projection retains its ground pivot; room collision/scale and the 0.78 m/s approach remain unchanged. A missing preparation at the first opacity handoff preserves the frontal sprite for that visit. Source, silent-browser, emulated-device and listening evidence remain separate.
 
@@ -657,7 +657,7 @@ Legal/document anchors: [BMG §17](https://www.gesetze-im-internet.de/bmg/__17.h
 
 **Local validation, 2026-10-10.** Targeted registration/session/protocol checks pass (111 tests), with separate object, city-model and mission-fax checks. The silent scripted browser matrix completes the 24-question main route at desktop, Android portrait and landscape sizes, and the 52-question detour at 320 px. Rendered text has no horizontal overflow in the sampled question/success views; 200% text sizing was also inspected. Supplied screenshots and exact candidate hashes are in `output/playwright/anmeldung/report.json` and `report-hud-fullscreen.json`. The latter uses separate host/phone contexts and observes native fullscreen allowed from the existing E interaction, plus the repaired dynamic HUD label. Independent Physics checks pass all four approaches at 60/30/10 updates per second with actual office-detail obstacles; independent camera review prompted clear-face desk supplies at all four stations, now recaptured. The main matrix used direct entry, accelerated keys/queue, simulated signaling and DOM-handler graph traversal; natural city progression, QR/WebRTC pairing, physical Android and perceptual audio remain unverified. The 2026-10-11 integrated release combines this registration work with the pending renderer and voice changes under the standing publication policy.
 
-The integrated 2026-10-11 release retains automatic in-scene encounters and opaque whole-body Gaussian transitions. The Anmeldung questions and telephone warnings retain explicit answer controls. One cue-owned speech track drives atlas mouth patches and continuous native-paint mouth deformation on admitted whole-body Gaussian actors. The approved Aktenkurier volume keeps its recording-bound viseme track. No second mouth cloud is drawn over a whole-body Gaussian replacement. Native recorded playback and browser speech receipts own motion; synthetic grapheme timing remains an estimate.
+The integrated 2026-10-11 release retains automatic in-scene encounters and opaque whole-body Gaussian transitions. The Anmeldung questions and telephone warnings retain explicit answer controls. One cue-owned speech track drives atlas mouth patches and continuous native-paint mouth deformation on admitted whole-body Gaussian actors. The Aktenkurier volume consumes the same owned shape. No second mouth cloud is drawn over a whole-body Gaussian replacement. Native recorded playback uses audio-derived cues; browser speech receipts and synthetic grapheme articulation remain estimates. The current full-opening contract is below.
 
 **Initial integrated release validation, 2026-10-11.** The complete deterministic suite passed 459/459, followed by 25/25 checks for the final speech and caption repairs. Independent read-only Physics and Camera reviews passed the affected office scope (143 and 98 focused checks). The registration matrix passed desktop, Android portrait/landscape emulation and 320 px reflow, including four counter assignments, the 24-question route, the 52-question detour, fullscreen, badge and A38 handoff. Interactive speech now renders one caption with a compact header. Native Gaussian articulation passed all 15 actors on desktop and portrait Android emulation; that fixture holds stationary work anchors. Atlas articulation passed all 15 actors in desktop, portrait, landscape, reduced-motion and missing-asset cases, including full patron IDs, native recorded time, opaque occlusion and disposal. Grapheme shapes estimate articulation; these silent fixtures do not establish phoneme accuracy or perceptual quality.
 
@@ -670,3 +670,80 @@ Input probes hold until a real rendered response or a 650 ms timeout and try alt
 **Final room-depth integration, 2026-10-11.** The release incorporates `dc5e8b2` before publication: all office people draw in actor layer 1 after effects, retaining the room's opaque depth and shared near/far sorting. A mouth child copies its actor's layer mask each update. The frozen integration tree `e4155f7f4185c3bb07cb910eb9b3d153636e2aa8` passed the complete 460/460 suite; independent Physics and Camera rechecks passed 19/19 and 42/42, with no geometry, movement or scale delta. Fresh native articulation passed all 15 actors on desktop and Android portrait emulation; fresh atlas articulation passed the five desktop/mobile/reduced-motion/missing-asset cases. The Camera reviewer inspected native actor and opaque-blocker captures and accepted affected C4/C5 and scripted X1 scope. Evidence: `output/publish-all/merged-depth-tests.log`, `depth-native-lips/`, `depth-fallback-lips/` and `candidate.json`. The fixture freezes stationary work anchors and injects controlled speech shapes; it does not establish natural admission or phoneme accuracy.
 
 Six fresh hardware-ANGLE office benchmark runs passed after depth integration, accepting nine inputs per run with no page errors. Maximum office transfer was 30.33 MB, sampled input p95 137.6 ms and warm frame p95 21.8 ms (`output/publish-all/benchmark-office-depth/report.json`). Earlier root measurements are carried forward because the city runtime path is unchanged; root transfer stays within its 18 MB gate, while the office loads additional assets. The final diagnostic-only repair directs `3d.html` to the current exact Merkel clip; its asset-retirement assertion and the three affected voice checks pass. Physical Android, natural mission progression, QR/WebRTC pairing, listening and perceptual lip cadence remain NOT RUN.
+
+## Full mouth opening and recorded timing (2026-10-11)
+
+The earlier texture-shift mouth caused visible lip vibration without an oral
+opening. `buergeramt-mouth-paint.js` now separates the original painted lips
+and lower jaw around a bounded, recessed mouth cavity. Native whole-body
+Gaussian paint and the 425-kernel atlas fallback use the same shader function.
+Main mouth centres/radii are registered to the encoded paintings; bridges carry
+their calibrated offsets through existing facial landmarks. Eyes, props, actor
+roots, body bounds, movement, floor pivots and depth ownership stay authored.
+Inactive speech returns the original painting. The existing 96-kernel omen
+mouth consumes the Aktenkurier's owned shape, including browser fallback.
+
+All 41 approved office MP3s now share the exact-hash cue data in
+`assets/buergeramt/speech/mouth-cues.js`. The local analyzer samples sound every
+10 ms and records phonetic mouth intervals. The unchanged audio playhead owns
+openings, pauses, rate changes and seeking; coarticulation is centred on each
+boundary with at most 40 ms anticipation/release. The extra 35 ms visual filter
+and text-length timing are removed for analyzed recordings. Cue preparation is
+lazy and ready before playback, guarded by the existing watchdog and attempt.
+Late preparation cannot start a cancelled speaker. Completion, replay and exit
+clear ownership. Reduced motion retains semantic mouth movement.
+
+This sampling resolution does not prove 10 ms German phoneme alignment or
+hardware acoustic latency. Phonetic shapes remain estimates. Installed Whisper
+independently decoded all existing recordings without prompting; its diagnostic
+errors do not rewrite approved catalogue word marks, dialogue or voices. Dynamic
+browser speech and optional unanalyzed preview clips retain estimated timing.
+The shared builder replaces the earlier omen-only 50 Hz/55 ms implementation
+described in the historical articulation record. Reproduction, pinned tool
+versions and limits are in `assets/buergeramt/speech/PROVENANCE.md`.
+
+**Rendered acceptance.** Independent Physics and Camera reviews accepted the
+office scope on runtime tree `45295804906240f285e7b99a1a6c6b66f9214be5`; both
+carried it forward to `2d8058092c04d24c5fb3009e21186011a3eb2d55` after the
+published city HUD pointer integration. Physics passed 63/63 integrated checks,
+37/37 final speech checks and 17/17 pointer/turn checks; Camera passed 36/36
+focused checks and inspected registered faces, feet and opaque occlusion.
+The native gallery covers all 15 actors on desktop and portrait emulation;
+the corrected clerk registration was recaptured for all four counters. Final
+atlas captures pass desktop, portrait and landscape with the same speaking
+body key. Earlier reduced-motion and missing-asset coverage carries forward
+for the unchanged ownership/shader paths. A silent 25 fps MP3 motion capture
+shows closed, partial, rounded and full apertures. Brief phonetic intervals
+can still change within one captured frame. All 41 unchanged recordings passed
+real playback, pause, rate-change and cancellation receipts without seeking;
+the shared builder reproduces their shipped analysis exactly.
+The final integrated deterministic release suite passes 473/473; the deploy
+workflow now includes the shared 41-recording cue regression test. The obsolete
+omen audio fixture's samples were shortened to remain inside the newly published
+1.8-second turn and 2.2-second departure; its planted-turn/retreat assertions
+remain enforced.
+
+**Office budget.** Six cold hardware-ANGLE runs before and six after the mouth
+change compare against published `008b017`. Median warm sync-interval p95 is
+21.1 → 21.2 ms desktop and 20.9 → 20.9 ms portrait emulation. Median input p95
+is 19.4 → 20.2 ms desktop and 58.4 → 72.4 ms portrait; the worst new cold input
+sample is 223.6 ms. All runs accept nine movement inputs without page errors.
+Maximum office transfer is 30.47 MB desktop and 17.24 MB portrait, including
+the lazy analysis module. The paired active/hidden atlas mouth fixture adds
+one draw and 850 triangles with the same 37 resident textures; CPU submission
+p50 is 1.9/1.7 ms. This is not GPU/displayed-frame timing or a causal speedup
+claim. The later city HUD change leaves the measured office paths unchanged.
+
+Six fresh cold root runs after that integration also pass: at most 16.77 MB
+against the 18 MB startup gate, title dispatch within 4 Hz and draw buffers
+within 1.6 MP. Every run accepts nine inputs with zero page errors; worst warm
+sync-interval p95 is 40.6 ms and input p95 is 44.1 ms. Default startup requests
+no authoring files or deferred intro song. See `bench-root-final/report.json`.
+
+Evidence stays under ignored `output/mouth-sync/`: `native-frozen/`, corrected
+clerk captures, `smooth-final/`, `recordings-final/`, builder/ASR diagnostics,
+reviewer logs and benchmark reports. Tests remain silent, local HTTP lab checks
+on Chrome/Intel Iris Xe at DPR 2. Physical Android, natural mission progression,
+perceptual listening and measured German phoneme/hardware latency accuracy
+remain NOT RUN. Cue interpolation and actual media receipts establish timing
+ownership; they do not establish those perceptual/device claims.

@@ -1,4 +1,5 @@
-import {createAmtGaussianScene} from './buergeramt-gaussian-scene.js?v=20261011-published-features';
+import {createAmtGaussianScene} from './buergeramt-gaussian-scene.js?v=20261011-acoustic-mouth';
+import {mouthPaintGlsl} from './buergeramt-mouth-paint.js?v=20261011-acoustic-mouth';
 import {prepareWithSegments,measureNaturalWidth,measureLineStats} from './assets/vendor/pretext/dist/layout.js';
 const THREE_URL="https://cdn.jsdelivr.net/npm/three@0.186.0/build/three.module.js";
 const GLTF_LOADER_URL="https://cdn.jsdelivr.net/npm/three@0.186.0/examples/jsm/loaders/GLTFLoader.js";
@@ -1529,7 +1530,7 @@ function showRendererFailure(error){
         amtOmenSkipped=true;amtOmenFailure=error.message;console.warn("Bürgeramt omen keeps painted fallback",error);
       }).finally(()=>{if(amtOmenRequest===request)amtOmenRequest=null});
     }
-    const opacity=amtOmenSplat?.update(omen,actor.mesh,amtCamera,amtReducedMotion.matches)||0;
+    const opacity=amtOmenSplat?.update({...omen,lipSpeech:level.lipSpeech},actor.mesh,amtCamera,amtReducedMotion.matches)||0;
     // Representation ownership is binary. The volume gains/loses depth while
     // staying solid; fading both bodies would expose the room through their sum.
     actor.mesh.material.opacity=1;
@@ -1539,7 +1540,7 @@ function showRendererFailure(error){
   addEventListener("pagehide",()=>{amtMouthSplat?.dispose();amtMouthSplat=null},{once:true});
   function updateAmtMouth(level,now){
     const speech=level.lipSpeech,actor=speech?.actor&&([...amtMoving,...amtCharacters].find(item=>item.id===speech.actor||item.lipId===speech.actor||item.performance&&speech.actor==="clerk-"+item.counter));
-    if(!amtMouthSplat&&actor&&speech.active)amtMouthSplat=window.GermanyAmtLips.createPaintSplat(T);
+    if(!amtMouthSplat&&actor&&speech.active)amtMouthSplat=window.GermanyAmtLips.createPaintSplat(T,mouthPaintGlsl);
     amtMouthSplat?.update(actor||null,speech,now);
   }
   let lastCall="",amtHiDpi=false;

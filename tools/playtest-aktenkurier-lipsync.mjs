@@ -33,7 +33,7 @@ try{
   const inspect=()=>page.evaluate(()=>({phase:BuergeramtLevel.omen.phase,speech:BuergeramtLevel.omen.speech,splat:Germany3D.amtOmenSplat,life:BuergeramtLevel.omen.life,actor:Germany3D.amtCharacters.find(a=>a.name==='aktenkurier'),players:omenPlayers.map(p=>({src:p.getAttribute('src'),time:p.currentTime,paused:p.paused,ended:p.ended,muted:p.muted}))}));
   const samples=[];
   if(name==='missing-audio'){
-   await page.waitForFunction(()=>!!window.omenFallback);await page.evaluate(()=>omenStep(.1));assert.equal((await inspect()).splat.mouth.open,0);await page.evaluate(()=>omenFallback.onend());
+   await page.waitForFunction(()=>!!window.omenFallback);await page.evaluate(()=>{omenStep(.1);omenFallback.onboundary?.({charIndex:5});Germany3D.sync()});assert((await inspect()).splat.mouth.open>0,'owned browser fallback visibly articulates with estimated timing');await page.evaluate(()=>omenFallback.onend());
   }else{
    await page.waitForFunction(()=>omenPlayers.at(-1)?.currentTime>.1&&!omenPlayers.at(-1).paused);
    // Real playback trace, from native currentTime at render cadence, no seek.

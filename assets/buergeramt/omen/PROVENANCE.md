@@ -80,24 +80,26 @@ The immutable official second voice recording is
 4.760 seconds. Its approval/provenance remains in `assets/voices/LICENSES.md`.
 No audio or source raster was changed for articulation.
 
-`tools/build-omen-lipsync.py` uses portable
+`tools/build-buergeramt-speech-cues.py` uses portable
 [Rhubarb Lip Sync 1.14.0](https://github.com/DanielSWolf/rhubarb-lip-sync/tree/v1.14.0)
 with its language-independent phonetic recognizer and FFmpeg mono 16 kHz decode.
 Its software is [MIT licensed](https://github.com/DanielSWolf/rhubarb-lip-sync/blob/v1.14.0/LICENSE.md);
 no executable, recognizer data or temporary WAV ships. The Windows release ZIP
 was 87,374,842 bytes, SHA-256
 `62fa416a8d5e382a3828ee4bef358ce520d0b4cabdeaea75a7ac266d098d1fe3`.
-The compact derived `mouth-cues.js` is project-owned estimated animation data:
-24 intervals / 238 RMS-envelope samples at 50 Hz / 2,131 UTF-8 bytes.
+The omen now shares `../speech/mouth-cues.js` with all 41 approved office clips.
+Its project-owned estimated animation data has 24 intervals and 476 acoustic
+samples at 100 Hz. The former separate omen data/builder is retired.
 Phonetic output approximates articulation; it is not exact German alignment.
 
 ```powershell
-python tools/build-omen-lipsync.py --rhubarb <portable-rhubarb.exe> --ffmpeg <ffmpeg.exe>
-python tools/build-omen-lipsync.py --rhubarb <portable-rhubarb.exe> --ffmpeg <ffmpeg.exe> --check
+python tools/build-buergeramt-speech-cues.py --rhubarb <portable-rhubarb.exe> --ffmpeg <ffmpeg.exe>
+python tools/build-buergeramt-speech-cues.py --rhubarb <portable-rhubarb.exe> --ffmpeg <ffmpeg.exe> --check
 ```
 
 The runtime uses native media `currentTime` in the existing frame pass, with
-55 ms shape blending. The registered lip centre is detail pixel `(346.5,134)`
+centred coarticulation spanning at most 12 ms on each side of an acoustic
+boundary, with no extra delayed filter. The registered lip centre is detail pixel `(346.5,134)`
 (local X=.0636, Y=1.64315). The original front lip crease reaches Z=.156;
 96 small procedural Gaussian kernels form a curved opening at Z=.174 minus
 12×X-offset², with zero alpha at rest. Front lip/lower-jaw splats deform within
@@ -105,8 +107,10 @@ a bounded local mask; eyes, scalp, coat, props and floor pivot stay authored.
 Kernels share the body mesh, depth sorting, admission and teardown. They add
 1,536 packed bytes, with allocation/sorting overhead additional.
 
-The exact recording path and SHA guard the rig. Other phases, voice-off,
-browser-speech fallback, failed audio and ended playback are neutral. Pause
+The exact recording path and SHA guard recorded articulation. The scene also
+passes the Aktenkurier's owned speech shape to this rig, so browser speech after
+an audio failure visibly articulates with explicitly estimated timing. Other
+phases, voice-off, unowned or ended speech are neutral. Pause
 holds the media pose and existing life clock; reduced motion retains the
 articulation. `tests/aktenkurier-lipsync.test.mjs` covers clip ownership, cues,
 shapes, closure and fallback; the official-voice tests cover native clock and
