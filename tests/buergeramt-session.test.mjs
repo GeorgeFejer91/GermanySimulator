@@ -436,3 +436,28 @@ test('a transient cutoff send failure recovers before the shared deadline',()=>{
  link.message({type:'police-start',index:-1,mode:'recording',readyDelayMs:20,atMs:h.now()});h.tick(50);link.fail=false;h.tick(50);
  assert.equal(link.sent.filter(m=>m.type==='police-cutoff').length,1);assert.equal(h.level.timing.cues[-1].interrupted,true);h.tick(7100);assert.equal(h.level.timing.desk[0].startAt,h.now());
 });
+
+test('active spoof calls show elapsed time and native hang-up, never police text',()=>{
+ const h=harness('phone',{candidatePhone:true,fakeAudio:true});h.incoming();assert.equal(h.node('phone-active-controls').hidden,true);
+ h.node('phone-answer').click();h.tick(20);assert.equal(h.node('phone-call-state').textContent,'00:00');assert.equal(h.node('phone-active-controls').hidden,false);assert.equal(h.node('phone-choices').hidden,true);
+ h.tick(61000);assert.equal(h.node('phone-call-state').textContent,'01:01');const caption=h.node('phone-call-state').textContent,clip=h.audio.recordings[0];
+ h.node('phone-hangup').click();assert.equal(h.links[0].sent.at(-1).type,'hangup');assert.equal(h.node('phone-call').hidden,true);assert.equal(h.node('phone-active-controls').hidden,true);assert.equal(clip.paused,true);assert(h.audio.nodes.filter(n=>n.kind==='buffer-source').every(n=>n.stopped.length));
+ const sent=h.links[0].sent.length;h.node('phone-hangup').click();h.links[0].message({type:'police-line',index:0,line:'This must never appear or start.'});h.tick(2000);assert.equal(h.links[0].sent.length,sent);assert.equal(h.audio.recordings.length,1);assert.notEqual(h.node('phone-call-state').textContent,caption);
+});
+test('hanging up releases an answered police wait once and keeps the cancelled appointment outcome',()=>{
+ const h=harness('host',{voice:true});h.counter();h.links[0].message({type:'answer',id:'grass'});assert.equal(h.level.stage,'cancelled');
+ h.links[0].message({type:'hangup',id:'wrong'});assert.equal(h.level.timing.cues[-1].status,'waiting');
+ h.links[0].message({type:'hangup',id:'grass'});assert.equal(h.level.timing.cues[-1].status,'disconnected');const text=h.node('amt-line').textContent;
+ h.links[0].message({type:'hangup',id:'grass'});assert.equal(h.node('amt-line').textContent,text);
+ for(let i=0;i<10&&h.level.active;i++){h.tick(500);h.synth.end();h.tick(16000)}
+ assert.equal(h.counts.form,0);assert.equal(h.counts.cancel,1);
+});
+test('pre-ring interference has one louder pulsed tone and crackle, honors mute and cleans up on replay',()=>{
+ const h=harness('host',{fakeAudio:true});h.counter();h.links[0].message({type:'call-ready',id:'grass',atMs:h.now()});
+ const tone=h.audio.nodes.find(n=>n.kind==='oscillator'&&n.frequency.value===217),noise=h.audio.nodes.find(n=>n.kind==='buffer-source'&&n.loop);
+ assert(tone&&noise);assert.equal(noise.buffer.length,15360);assert.equal(tone.started[0],noise.started[0]);assert.equal(tone.stopped[0],noise.stopped[0]);assert(Math.abs(tone.stopped[0]-tone.started[0]-.9)<1e-8);
+ const envelope=tone.connections[0].connections[0],peaks=envelope.gain.events.filter(([kind,v])=>kind==='linear'&&v===.16);
+ assert.equal(peaks.length,6);assert.equal(noise.connections[0].type,'bandpass');assert.equal(noise.connections[0].frequency.value,2400);
+ h.level.replay(h.config);h.audio.flushEnded();assert(tone.disconnected&&noise.disconnected&&envelope.disconnected);
+ const muted=harness('host',{fakeAudio:true,officeFx:0});muted.counter();muted.links[0].message({type:'call-ready',id:'grass',atMs:muted.now()});assert.equal(muted.audio.nodes.some(n=>n.kind==='oscillator'&&n.frequency.value===217),false);
+});

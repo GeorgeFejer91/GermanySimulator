@@ -581,8 +581,10 @@ function playCallSignal(signalAtMs,ringAtMs){
  if(end-start<.25)return;
  bus.gain.cancelScheduledValues(ctx.currentTime);bus.gain.setValueAtTime(bus.gain.value,ctx.currentTime);bus.gain.linearRampToValueAtTime(.16,start+.035);bus.gain.setValueAtTime(.16,end-.12);bus.gain.linearRampToValueAtTime(1,end);
  const tone=ctx.createOscillator(),low=ctx.createBiquadFilter(),envelope=ctx.createGain();tone.type="sawtooth";tone.frequency.value=217;low.type="lowpass";low.frequency.value=1700;envelope.gain.setValueAtTime(0,start);
- for(const offset of [0,.12,.24,.5,.62,.74]){const at=start+offset;if(at+.075>=end)break;envelope.gain.setValueAtTime(0,at);envelope.gain.linearRampToValueAtTime(.052,at+.006);envelope.gain.setValueAtTime(.052,at+.055);envelope.gain.linearRampToValueAtTime(0,at+.075)}
- tone.connect(low).connect(envelope).connect(signal);tone.onended=()=>{callSignalSources.delete(tone);tone.disconnect();low.disconnect();envelope.disconnect()};callSignalSources.add(tone);tone.start(start);tone.stop(end);
+ for(const offset of [0,.12,.24,.5,.62,.74]){const at=start+offset;if(at+.075>=end)break;envelope.gain.setValueAtTime(0,at);envelope.gain.linearRampToValueAtTime(.16,at+.006);envelope.gain.setValueAtTime(.16,at+.055);envelope.gain.linearRampToValueAtTime(0,at+.075)}
+ const noise=ctx.createBufferSource(),noiseFilter=ctx.createBiquadFilter(),buffer=ctx.createBuffer(1,Math.round(ctx.sampleRate*.32),ctx.sampleRate),samples=buffer.getChannelData(0);for(let i=0;i<samples.length;i++)samples[i]=(Math.random()*2-1)*.28;noise.buffer=buffer;noise.loop=true;noiseFilter.type="bandpass";noiseFilter.frequency.value=2400;noiseFilter.Q.value=.55;
+ tone.connect(low).connect(envelope).connect(signal);noise.connect(noiseFilter).connect(envelope);
+ let remainingSources=2;for(const [source,filter] of [[tone,low],[noise,noiseFilter]]){source.onended=()=>{callSignalSources.delete(source);source.disconnect();filter.disconnect();if(--remainingSources===0)envelope.disconnect()};callSignalSources.add(source);source.start(start);source.stop(end)}
  signalPauseTimer=defer(()=>{signalPauseTimer=null;if(mix.fx>0&&stage==="counter"&&callPending&&window.speechSynthesis?.speaking&&!window.speechSynthesis.paused){try{window.speechSynthesis.pause();signalPaused=true}catch{}}},Math.max(0,signalAtMs-performance.now()));
  signalEndTimer=defer(()=>{signalEndTimer=null;stopCallSignal()},Math.max(0,ringAtMs-performance.now()));
 }
@@ -658,6 +660,7 @@ function beginLink(){
   if(m.type==="sync-pong"){receivePong(m.id,m.receivedAtMs,m.sentAtMs);return}
   if(m.type==="call-ready"){if(["counter","reply","phone-warning"].includes(stage)&&callPending&&m.id===story.call.id)commitCall("phone-ready");return}
   if(m.type==="call-scheduled"){if(timing.call&&m.id===story.call.id&&timing.call.phoneScheduledAtMs===null){timing.call.phoneScheduledAtMs=m.atMs;timing.call.phoneMode=m.mode;timing.call.lateMs=m.lateMs}return}
+  if(m.type==="hangup"){if(stage==="cancelled"&&callOutcome==="answer"&&m.id===story.call.id)policeDisconnectHandler?.();return}
   if(m.type==="police-start"){if(stage==="cancelled"&&receivePoliceStart(m.index,m.mode,m.readyDelayMs,m.atMs,m.atUtcMs))policeStartHandler?.(m.index);return}
   if(m.type==="police-done"){if(stage==="cancelled"&&receivePoliceDone(m.index,m.mode,m.durationMs,m.atMs))policeDoneHandler?.(m.index);return}
   if(terminal())return;

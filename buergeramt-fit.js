@@ -1,13 +1,14 @@
 import {measureLineStats,measureNaturalWidth,prepareWithSegments} from './assets/vendor/pretext/dist/layout.js';
 
 // Keep the bounded Amt labels readable as the phone, browser zoom, or German copy changes.
-const selectors=['#start','#amt-counter-call','#amt-counter-notice small','#amt-objective','#amt-nearby','#amt-number-board','#amt-title','#amt-line','#amt-status','#amt-ambient','#amt-actions button','#amt-leave','#amt-exit','#amt-direct-reset','#amt-direct-result-title','#amt-direct-result-copy','.amt-direct-result a','#amt-mix summary','#amt-mix label','#amt-compact-reset','#phone-status','#phone-admission-status','.phone-brand strong','.phone-breadcrumb','.phone-title','#phone-form h2','#phone-form p','#phone-form label','#phone-submit','#phone-caller','#phone-call-state','#phone-answer-label','#phone-decline-label','#phone-swipe-label','.phone-keep'];
+const selectors=['#start','#amt-counter-call','#amt-counter-notice small','#amt-objective','#amt-nearby','#amt-number-board','#amt-title','#amt-line','#amt-status','#amt-ambient','#amt-actions button','#amt-leave','#amt-exit','#amt-direct-reset','#amt-direct-result-title','#amt-direct-result-copy','.amt-direct-result a','#amt-mix summary','#amt-mix label','#amt-compact-reset','#phone-status','#phone-admission-status','.phone-brand strong','.phone-breadcrumb','.phone-title','#phone-form h2','#phone-form p','#phone-form label','#phone-submit','#phone-caller','#phone-call-state','#phone-answer-label','#phone-decline-label','#phone-swipe-label','#phone-hangup-label','.phone-keep'];
 selectors.push('.control-dock button');
 let queued=false;
 function schedule(){if(queued)return;queued=true;requestAnimationFrame(async()=>{queued=false;await document.fonts.ready;measure()})}
 function measure(){
  const zoom=Number.parseFloat(getComputedStyle(document.documentElement).zoom)||1;
  document.body.classList.toggle('amt-compact',innerWidth/zoom<260);
+ const phoneCall=document.getElementById('phone-call');if(phoneCall){const height=(innerHeight/zoom)+'px';if(phoneCall.style.getPropertyValue('--phone-height')!==height)phoneCall.style.setProperty('--phone-height',height)}
  const sequence=document.querySelector('#amt-walk-hud.sequence');
  if(sequence){
   const top=sequence.getBoundingClientRect().top;

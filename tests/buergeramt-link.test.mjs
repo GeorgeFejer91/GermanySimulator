@@ -139,3 +139,11 @@ test('generated properties fail when replay or exact-payload guards are delibera
  const fields=original.replace('if(keys.length!==fields.length||keys.some(key=>!fields.includes(key)))return false;','');assert.notEqual(fields,original);
  assert.throws(()=>generatedProtocol(fields),/malformed envelope reached a consumer|unexpected field consumed sequence/);
 });
+
+test('only the phone may hang up its exact current call',()=>{
+ const host=transport(),phone=transport('phone');
+ host.channel.receive({type:'hangup',id:'wrong'});host.channel.receive({type:'hangup',id:'grass',extra:true});assert.equal(host.messages.length,0);
+ host.channel.receive({type:'hangup',id:'grass'});assert.equal(host.messages.length,1);
+ phone.channel.receive({type:'hangup',id:'grass'});assert.equal(phone.messages.length,0);
+ assert.equal(phone.link.send('hangup',{id:'grass'}),true);assert.equal(host.link.send('hangup',{id:'grass'}),false);
+});

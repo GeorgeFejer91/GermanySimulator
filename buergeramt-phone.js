@@ -1,5 +1,5 @@
 (function(){"use strict";
-const invitation=BuergeramtLink.fromHash(),number=document.getElementById("phone-number"),status=document.getElementById("phone-status"),admission=document.getElementById("phone-admission-status"),form=document.getElementById("phone-form"),name=document.getElementById("phone-name"),submit=document.getElementById("phone-submit"),ticket=document.getElementById("phone-ticket"),call=document.getElementById("phone-call"),choices=document.getElementById("phone-choices"),answer=document.getElementById("phone-answer"),decline=document.getElementById("phone-decline"),track=document.getElementById("phone-answer-track"),callState=document.getElementById("phone-call-state");
+const invitation=BuergeramtLink.fromHash(),number=document.getElementById("phone-number"),status=document.getElementById("phone-status"),admission=document.getElementById("phone-admission-status"),form=document.getElementById("phone-form"),name=document.getElementById("phone-name"),submit=document.getElementById("phone-submit"),ticket=document.getElementById("phone-ticket"),call=document.getElementById("phone-call"),choices=document.getElementById("phone-choices"),answer=document.getElementById("phone-answer"),decline=document.getElementById("phone-decline"),track=document.getElementById("phone-answer-track"),callState=document.getElementById("phone-call-state"),activeControls=document.getElementById("phone-active-controls"),hangup=document.getElementById("phone-hangup");
 const platform=navigator.userAgentData?.platform||"",agent=navigator.userAgent||"",mobile=navigator.userAgentData?.mobile??/iPhone|iPod|Android.*Mobile/i.test(agent);
 const phoneOs=mobile&&(/Android/i.test(platform)||/Android/i.test(agent))?"android":mobile&&/iPhone|iPod|iOS/i.test(platform+" "+agent)?"ios":"generic";
 document.documentElement.dataset.phoneOs=phoneOs;
@@ -11,8 +11,8 @@ if(phoneOs==="android"&&!callUiOverride)navigator.userAgentData?.getHighEntropyV
  if(call.hidden&&/^SM-|^Galaxy/i.test(model||"")){callUi="samsung";document.documentElement.dataset.callUi=callUi}
 }).catch(()=>{});
 const captions=new URLSearchParams(window.location?.hash?.slice(1)||"").get("captions")==="en",browserLanguage=navigator.languages?.[0]||navigator.language||"de",callLanguage=captions||/^en(?:-|$)/i.test(browserLanguage)?"en":"de";
-const copy=callLanguage==="en"?{ringing:"INCOMING CALL",caller:"Unbekannte Nummer",answer:"ANSWER",decline:"DECLINE"}:{ringing:"EINGEHENDER ANRUF",caller:"Unbekannte Nummer",answer:"ANNEHMEN",decline:"ABLEHNEN"};
-call.lang=callLanguage;callState.textContent=copy.ringing;document.getElementById("phone-caller").textContent=copy.caller;document.getElementById("phone-answer-label").textContent=copy.answer;document.getElementById("phone-decline-label").textContent=copy.decline;document.getElementById("phone-swipe-label").textContent=copy.answer;
+const copy=callLanguage==="en"?{ringing:"INCOMING CALL",caller:"Unbekannte Nummer",answer:"ANSWER",decline:"DECLINE",hangup:"END CALL"}:{ringing:"EINGEHENDER ANRUF",caller:"Unbekannte Nummer",answer:"ANNEHMEN",decline:"ABLEHNEN",hangup:"AUFLEGEN"};
+call.lang=callLanguage;callState.textContent=copy.ringing;document.getElementById("phone-caller").textContent=copy.caller;document.getElementById("phone-answer-label").textContent=copy.answer;document.getElementById("phone-decline-label").textContent=copy.decline;document.getElementById("phone-swipe-label").textContent=copy.answer;document.getElementById("phone-hangup-label").textContent=copy.hangup;
 const clockService=window.BuergeramtClock;let clockAnchor=null;
 const clock=document.getElementById("phone-time");function updateClock(){const utc=clockService?.usable?.(clockAnchor)?clockService.utcAt(clockAnchor,performance.now()):Date.now();clock.textContent=new Intl.DateTimeFormat(callLanguage,{hour:"2-digit",minute:"2-digit",hour12:false}).format(new Date(utc))}updateClock();const clockTimer=setInterval(updateClock,30000);window.addEventListener("pagehide",()=>clearInterval(clockTimer));
 if(!invitation){admission.textContent="Bitte scannen Sie den QR-Code im Amt, um eine Wartenummer zu ziehen.";form.hidden=true;return}
@@ -26,7 +26,7 @@ let activePoliceIndex=null,finishPoliceVoice=null,cutoffTimer=null;
 function stopRing(){clearTimeout(ringTimer);clearTimeout(callStartTimer);ringTimer=callStartTimer=null;for(const source of ringSources){try{source.stop()}catch{}}ringSources.clear();try{navigator.vibrate?.(0)}catch{}}
 function stopRecorded(){const clip=recordedSpeech;recordedSpeech=null;if(clip){clip.onplaying=clip.onended=clip.onerror=null;try{clip.pause()}catch{}}}
 function resetSwipe(){drag=null;for(const button of [answer,decline]){button.style?.removeProperty("--amt-swipe-x");button.style?.removeProperty("--amt-swipe-y");button.classList.remove("dragging")}}
-function stopCall(){voiceGeneration++;voiceQueue.length=0;voiceBusy=false;activePoliceIndex=finishPoliceVoice=null;clearTimeout(cutoffTimer);cutoffTimer=null;clearTimeout(voiceTimer);voiceTimer=null;clearInterval(durationTimer);durationTimer=null;answeredAt=null;stopRecorded();stopStatic();stopRing();armedCall=false;resetSwipe();try{window.speechSynthesis?.cancel()}catch{}call.classList.remove("answered");callState.textContent=copy.ringing;call.hidden=true;answer.hidden=true;decline.hidden=true;choices.hidden=true}
+function stopCall(){voiceGeneration++;voiceQueue.length=0;voiceBusy=false;activePoliceIndex=finishPoliceVoice=null;clearTimeout(cutoffTimer);cutoffTimer=null;clearTimeout(voiceTimer);voiceTimer=null;clearInterval(durationTimer);durationTimer=null;answeredAt=null;stopRecorded();stopStatic();stopRing();armedCall=false;resetSwipe();try{window.speechSynthesis?.cancel()}catch{}call.classList.remove("answered");document.body.classList.remove("amt-phone-in-call");activeControls.hidden=true;callState.textContent=copy.ringing;call.hidden=true;answer.hidden=true;decline.hidden=true;choices.hidden=true}
 function endSlot(text){slotActive=false;finished=true;submit.disabled=true;clearInterval(scanTimer);scanTimer=null;stopCall();status.textContent=text;try{wakeLock?.release()?.catch(()=>{})}catch{}wakeLock=null}
 function initAudio(){try{const Audio=window.AudioContext||window.webkitAudioContext;if(Audio&&!audioContext){audioContext=new Audio();phoneFxGain=audioContext.createGain();phoneFxGain.gain.value=1;phoneFxGain.connect(audioContext.destination)}audioContext?.resume()?.catch(()=>{})}catch{}}
 function requestTicket(){if(closed||finished||slotActive||link.channel?.readyState!=="open")return;if(!link.send("scan",{id:scanId}))admission.textContent="Wartenummer wird erneut angefordert."}
@@ -46,7 +46,7 @@ function incomingCall(message){
  const lateMs=Math.min(12000,Math.max(0,Math.round(receivedAt-target))),ringAtMs=Math.max(receivedAt,target);
  currentCall=message.id;armedCall=false;resolved="";policeIndex=-1;openingPoliceLine=message.line;callState.textContent=copy.ringing;
  scheduleRingSound(ringAtMs);link.send("call-scheduled",{id:currentCall,atMs:ringAtMs,mode,lateMs});
- const show=()=>{callStartTimer=null;if(closed||finished||resolved||!slotActive)return;answer.hidden=false;decline.hidden=false;choices.hidden=false;call.hidden=false;ringHaptic();const next=ringAtMs+2800;scheduleRingSound(next);ringTimer=setTimeout(()=>repeatRing(next),Math.max(0,next-performance.now()))};
+ const show=()=>{callStartTimer=null;if(closed||finished||resolved||!slotActive)return;answer.hidden=false;decline.hidden=false;choices.hidden=false;activeControls.hidden=true;call.hidden=false;document.body.classList.add("amt-phone-in-call");ringHaptic();const next=ringAtMs+2800;scheduleRingSound(next);ringTimer=setTimeout(()=>repeatRing(next),Math.max(0,next-performance.now()))};
  if(ringAtMs-receivedAt<15)show();else callStartTimer=setTimeout(show,ringAtMs-receivedAt);
 }
 let wakeLock=null;async function keepAwake(){
@@ -93,8 +93,9 @@ function endCall(kind){
  if(!link.send(kind,{id:currentCall})){endSlot("Ihr Platz ist verfallen. Bitte ziehen Sie eine neue Nummer.");link.close();return}
  resolved=kind;stopRing();
  if(kind==="decline"){stopCall();currentCall="";resolved="";}
- else{resetSwipe();answer.hidden=true;decline.hidden=true;choices.hidden=true;call.classList.add("answered");answeredAt=performance.now();updateDuration();durationTimer=setInterval(updateDuration,1000);initAudio();showPolice(openingPoliceLine,-1)}
+ else{resetSwipe();answer.hidden=true;decline.hidden=true;choices.hidden=true;call.classList.add("answered");activeControls.hidden=false;hangup.focus?.({preventScroll:true});answeredAt=performance.now();updateDuration();durationTimer=setInterval(updateDuration,1000);initAudio();showPolice(openingPoliceLine,-1)}
 }
+hangup.onclick=()=>{if(resolved!=="answer"||!currentCall||!slotActive||finished||closed||call.hidden)return;link.send("hangup",{id:currentCall});stopCall();currentCall="";resolved="hangup"};
 link.addEventListener("status",e=>{if(closed)return;if(/getrennt|unterbrochen/i.test(e.detail)){submit.disabled=true;if(slotActive)endSlot("Ihr Platz ist verfallen. Bitte ziehen Sie eine neue Nummer.")}});
 link.addEventListener("connected",()=>{if(closed||finished)return;submit.disabled=!!submittedName;requestTicket();clearInterval(scanTimer);scanTimer=setInterval(requestTicket,1500)});
 link.addEventListener("message",e=>{
