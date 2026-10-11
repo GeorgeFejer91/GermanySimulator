@@ -32,8 +32,11 @@ The unlisted `?geheim=buergeramt` URL opens directly at the office entrance for 
 
 The QR sign sits directly beneath the red ceiling number display and asks
 visitors to scan it to receive a number. Submitting the phone's ordinary
-"Name eintragen" form silently unlocks browser audio and requests fullscreen
-and wake lock in that same browser gesture. There is no setup button, test tone,
+"Name eintragen" form silently unlocks browser audio and requests wake lock
+in that same browser gesture. The QR page shares the game's load/first-interaction
+fullscreen behavior documented in `GAMEPLAY.md`. The incoming-call overlay has
+only answer/decline controls; the appointment page retains its Lautlos action
+after putting away a call. There is no setup button, test tone,
 or early vibration: the incoming police call is the first sound cue. The
 browser cannot read or change device volume or Do Not Disturb settings, so an
 audible ring cannot be guaranteed. The phone session persists through name

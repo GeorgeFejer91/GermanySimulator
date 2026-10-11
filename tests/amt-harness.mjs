@@ -108,6 +108,7 @@ export function harness(kind='host',{voice=false,synthesis=true,phoneLanguage='d
  Object.assign(window,globals);window.location={hash:phoneCaptions?'#captions=en':''};window.Germany3D={ready:true,setAmtQr(){}};
  if(phoneClock)window.BuergeramtClock=phoneClock;
  const context=vm.createContext(globals);
+ window.GermanyFullscreen={autoEnter:()=>document.documentElement.requestFullscreen()};
  vm.runInContext(source('buergeramt-story.js'),context,{filename:'buergeramt-story.js'});
  if(kind==='host')for(const file of ['buergeramt-animation-clock.js','buergeramt-voice-profiles.js','buergeramt-fever.js'])vm.runInContext(source(file),context,{filename:file});
  vm.runInContext(source('buergeramt-lips.js'),context,{filename:'buergeramt-lips.js'});

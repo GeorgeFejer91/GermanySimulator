@@ -2,6 +2,26 @@
 
 ## Core loop
 
+The root game, `3d.html` and Bürgeramt QR companion share `fullscreen.js`.
+Each requests fullscreen on load and retries on the first trusted click or
+ordinary key press when browser activation rules block that request. Fullscreen
+is the whole document so HUD and call controls remain included. Escape or an
+explicit exit is respected for the rest of the page visit, including office
+entry and name submission; Alt+Enter explicitly toggles fullscreen. Unsupported
+or denied fullscreen keeps the ordinary responsive page usable. This controller
+adds no frame loop or assets and does not change world/camera geometry.
+
+Fullscreen validation (2026-10-11): the isolated candidate passed 250 deployment
+tests, followed by five fullscreen lifecycle checks after adding touch-release
+entry. Twenty-two silently muted Chromium cases cover the three entry pages on
+desktop/Android emulation and four call families, portrait/landscape, 320 CSS px
+and 200% enlargement with actual Pretext. Before/after cold desktop/mobile
+budget smoke checks passed with nine accepted inputs and no page errors per run.
+They used SwiftShader and do not establish hardware performance. Physical
+Android, Safari and listening are untested; WebKit fallback is source-tested.
+World reviewers are omitted because this change alters only document fullscreen
+and phone controls, with no world, collision, movement, camera or scale change.
+
 The player has three deliberately fictional administration days to complete eight linked procedures. Progress alternates between travelling through the city, locating the correct office, speaking to officials, completing absurd forms, collecting resources, and surviving petty rule enforcement.
 
 Mission order:

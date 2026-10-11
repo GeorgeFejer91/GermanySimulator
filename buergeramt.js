@@ -9,7 +9,7 @@ const door={x:0,z:5.55},sign={x:0,z:-2.6},counter={x:4,z:-8.15},view={x:0,z:8,ya
 const held=new Set(),pendingTimers=new Set();
 const counterXs=[-5.8,-1.6,3.9,6.2];let assignedCounter=3;
 const counterNotice=document.getElementById("amt-counter-notice"),counterCall=document.getElementById("amt-counter-call");
-function requestFullscreen(){try{const task=document.documentElement.requestFullscreen?.({navigationUI:"hide"});task?.catch(()=>{});}catch{}}
+function requestFullscreen(){window.GermanyFullscreen?.autoEnter()}
 function refreshCounterNotice(){counterNotice.hidden=!active||!activated;document.getElementById("amt-room-counter").textContent=activated?"SCHALTER "+assignedCounter:"AUFRUF";counterCall.textContent=stage==="waiting"||stage==="outside"?"IHRE NUMMER "+number+" · SCHALTER "+assignedCounter+" · AUFRUF ABWARTEN":"IHRE NUMMER "+number+" → SCHALTER "+assignedCounter}
 // Every callback belongs to one attempt and one visible speech/action cue.
 let attempt=0,cue=0,callOutcome="",speechGateTimer=null,recordedSpeech=null,recordedCleanup=null,officeSpeechBusy=false,sceneContinuation=null;

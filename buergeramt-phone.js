@@ -18,10 +18,10 @@ const clock=document.getElementById("phone-time");function updateClock(){const u
 if(!invitation){connection.textContent="Dieser Aufruf hat keine gültige Warteschlange.";form.hidden=true;return}
 clockService?.sample?.().then(anchor=>{clockAnchor=anchor;updateClock()}).catch(()=>{});
 const link=new BuergeramtLink("phone",invitation),scanId=Array.from(crypto.getRandomValues(new Uint8Array(12)),n=>n.toString(16).padStart(2,"0")).join("");let currentCall="",resolved="",policeIndex=-1,audioContext=null,phoneFxGain=null,staticSource=null,recordedSpeech=null,voiceGeneration=0,submittedName="",slotActive=false,finished=false,closed=false,voiceBusy=false,voiceTimer=null,ringTimer=null,callStartTimer=null,armedCall=false,scanTimer=null,voiceStartupMs=null,voiceAttempts=0,drag=null,ignoreClickTarget=null;
-const silence=document.getElementById("phone-silence"),callSilence=document.getElementById("phone-call-silence");let phoneSilent=false;
+const silence=document.getElementById("phone-silence");let phoneSilent=false;
 const voiceQueue=[],ringSources=new Set();
 function silenceCalls(send=true){if(!slotActive||finished||closed||resolved==="answer")return;if(send&&!link.send("silence",{id:"grass"})){endSlot("Verbindung verloren. Ihr Platz ist verfallen.");return}phoneSilent=true;stopCall();currentCall="";resolved="silent";status.textContent=callLanguage==="en"?"Calls silenced. Keep this page visible for your appointment.":"Anrufe lautlos. Lassen Sie die Seite für Ihren Termin sichtbar.";silence.disabled=true;silence.textContent=callLanguage==="en"?"CALLS SILENCED":"ANRUFE LAUTLOS";}
-silence.textContent=callSilence.textContent=callLanguage==="en"?"SILENCE CALLS":"ANRUFE LAUTLOS SCHALTEN";silence.onclick=callSilence.onclick=()=>silenceCalls();
+silence.textContent=callLanguage==="en"?"SILENCE CALLS":"ANRUFE LAUTLOS SCHALTEN";silence.onclick=()=>silenceCalls();
 let activePoliceIndex=null,finishPoliceVoice=null,cutoffTimer=null;
 function stopRing(){clearTimeout(ringTimer);clearTimeout(callStartTimer);ringTimer=callStartTimer=null;for(const source of ringSources){try{source.stop()}catch{}}ringSources.clear();try{navigator.vibrate?.(0)}catch{}}
 function stopRecorded(){const clip=recordedSpeech;recordedSpeech=null;if(clip){clip.onplaying=clip.onended=clip.onerror=null;try{clip.pause()}catch{}}}
@@ -123,7 +123,7 @@ form.addEventListener("submit",e=>{
  if(value.length<2||value.length>80)return;initAudio();
  if(!link.send("register",{name:value}))return;
  submittedName=value;submit.disabled=true;form.hidden=true;silence.hidden=false;connection.textContent="Name zur Wartenummer eingetragen.";
- try{document.documentElement.requestFullscreen?.({navigationUI:"hide"})?.catch(()=>{})}catch{}
+ window.GermanyFullscreen?.autoEnter();
  keepAwake();
 });
 function startSwipe(event){
