@@ -12,7 +12,7 @@ test('every approved office recording has contiguous phonetic cues bound to its 
  vm.runInContext(readFileSync(new URL('../For-AI/AUDIO-TEXT-LIBRARY.js',import.meta.url),'utf8'),context);
  const catalog=context.window.GermanySimulatorAudioText.recordings;
  const expected=Object.entries(catalog).filter(([,clip])=>clip.voiceId?.startsWith('amt-'));
- assert.equal(expected.length,41);assert.equal(Object.keys(speechMouthTracks).length,expected.length);
+ assert.equal(expected.length,53);assert.equal(Object.keys(speechMouthTracks).length,expected.length);
  for(const [path,clip] of expected){
   const track=speechMouthTracks[path],hash=createHash('sha256').update(readFileSync(new URL('../'+path.slice(2),import.meta.url))).digest('hex');
   assert.equal(track.audioSha256,hash);assert.equal(track.audioSha256,clip.sha256);

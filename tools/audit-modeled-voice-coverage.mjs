@@ -22,8 +22,7 @@ requireMatch(fixed.length === cast.characterCount && roles.length === cast.roleP
 requireMatch(fixed.length + roles.length === cast.totalNewProfileCount,
   'New profile count does not match the cast');
 
-const newProfiles = [...fixed.map(person => person.secretTunnel?.profileId),
-  ...roles.map(person => person.secretTunnelProfileId)];
+const newProfiles = [...fixed, ...roles].map(person => cast.productionVoices[person.voiceId]?.profileId);
 requireMatch(newProfiles.every(id => /^[0-9a-f]{32}$/.test(id)) &&
   new Set(newProfiles).size === newProfiles.length, 'Missing or duplicate new Secret Tunnel UUID');
 for (const person of [...fixed, ...roles]) {
@@ -60,10 +59,10 @@ const office = [...world.matchAll(/amtCharacter\("([^"]+)"[^\n]*?\{([^{}]+)\}\);
     return {modelKind, gameCharacterId: value('id'), fullName: value('fullName'),
       voiceId: value('voiceId'), decorativeCloneOf: value('decorativeCloneOf')};
   });
-requireMatch(office.length === 6, `Expected six static Bürgeramt figures; found ${office.length}`);
+requireMatch(office.length === 7, `Expected seven static Bürgeramt figures; found ${office.length}`);
 const officeSpeakers = office.filter(person => person.gameCharacterId);
 const officeClones = office.filter(person => person.decorativeCloneOf);
-requireMatch(officeSpeakers.length === 4 && officeClones.length === 2,
+requireMatch(officeSpeakers.length === 4 && officeClones.length === 3,
   'Bürgeramt identity/clone distinction changed');
 for (const person of officeSpeakers) requireMatch(person.gameCharacterId === person.voiceId &&
   byVoice.get(person.voiceId)?.fullName === person.fullName,

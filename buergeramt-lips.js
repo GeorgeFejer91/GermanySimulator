@@ -146,6 +146,6 @@ function createPaintSplat(T,paintGlsl){
  };
 }
 let recordingModule;
-const loadRecording=(path,sha)=>{recordingModule??=import('./buergeramt-lipsync.js?v=20261011-acoustic-mouth');return recordingModule.then(m=>m.resolveMouthTrack(path,sha))};
+const loadRecording=(path,sha)=>{recordingModule??=import('./buergeramt-lipsync.js?v=20261011-phone-illusion');return recordingModule.then(m=>m.resolveMouthTrack(path,sha))};
 global.GermanyAmtLips={createTrack,score,poseAt,mouths,installMask,createPaintSplat,loadRecording};
 })(typeof window!=="undefined"?window:globalThis);

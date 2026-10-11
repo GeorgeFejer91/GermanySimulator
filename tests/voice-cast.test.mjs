@@ -62,9 +62,10 @@ for(const person of cast.characters){
  const {gameCharacterId,voiceId,fullName,secretTunnel,reference}=person;
  assert.match(voiceId,/^(amt|stadt)-[a-z0-9-]+-[a-z0-9-]+$/);
  assert.ok(secretTunnel.profileId,/missing Secret Tunnel profile for ${voiceId}/);
- assert.equal(voices[voiceId].profileId,secretTunnel.profileId);
- assert.equal(voices[voiceId].profileName,secretTunnel.profileName);
- assert.equal(voices[voiceId].referenceSha256,reference.workingReferenceSha256);
+ assert.equal(voices[voiceId].profileId,cast.productionVoices[voiceId].profileId);
+ assert.equal(voices[voiceId].profileName,cast.productionVoices[voiceId].profileName);
+ assert.equal(voices[voiceId].referenceSha256,cast.productionVoices[voiceId].referenceSha256);
+ assert.equal(castVoices[voiceId].profileId,cast.productionVoices[voiceId].profileId,'exported cast binding matches production');
  assert.equal(voices[voiceId].name,fullName);
  assert.ok(person.dialogue.every(item=>item.text&&item.locator),`missing exact dialogue for ${voiceId}`);
  if(gameCharacterId.startsWith("city-")){
@@ -75,9 +76,9 @@ for(const person of cast.characters){
  }
 }
 for(const asset of cast.existingAssetProfiles){
- assert.equal(voices[asset.voiceId].profileId,asset.secretTunnelProfileId);
- assert.equal(voices[asset.voiceId].profileName,asset.secretTunnelProfileName);
- assert.equal(voices[asset.voiceId].referenceSha256,asset.referenceSha256);
+ assert.equal(voices[asset.voiceId].profileId,cast.productionVoices[asset.voiceId].profileId);
+ assert.equal(voices[asset.voiceId].profileName,cast.productionVoices[asset.voiceId].profileName);
+ assert.equal(voices[asset.voiceId].referenceSha256,cast.productionVoices[asset.voiceId].referenceSha256);
  assert.ok(asset.source.every(item=>item.path&&item.sha256&&item.text));
 }
 assert.equal(Object.keys(roleVoices).length,cast.roleProfiles.length);
@@ -86,9 +87,10 @@ for(const clip of Object.values(recordings)){
 }
 for(const role of cast.roleProfiles){
  assert.equal(voices[role.voiceId].name,role.fullName);
- assert.equal(voices[role.voiceId].profileId,role.secretTunnelProfileId);
- assert.equal(voices[role.voiceId].profileName,role.secretTunnelProfileName);
- assert.equal(voices[role.voiceId].referenceSha256,role.reference.workingReferenceSha256);
+ assert.equal(voices[role.voiceId].profileId,cast.productionVoices[role.voiceId].profileId);
+ assert.equal(voices[role.voiceId].profileName,cast.productionVoices[role.voiceId].profileName);
+ assert.equal(voices[role.voiceId].referenceSha256,cast.productionVoices[role.voiceId].referenceSha256);
+ assert.equal(roleVoices[role.voiceId].profileId,cast.productionVoices[role.voiceId].profileId,'exported role binding matches production');
  if(role.voiceId.startsWith("quiz-")){
   assert.ok(quizPeople.some(person=>person.name.replace(/^Dr\. /,"")===role.fullName&&person.voiceId===role.voiceId),`quiz identity ${role.voiceId}`);
  }else if(role.voiceId.startsWith("crowd-")){

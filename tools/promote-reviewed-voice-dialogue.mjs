@@ -72,8 +72,11 @@ for (const clip of candidates.clips) {
   const person = byVoice.get(clip.voiceId);
   const row = byQueue.get(clip.clipId);
   const copy = byNormalized.get(clip.clipId);
-  const profileId = person?.secretTunnel?.profileId ?? person?.secretTunnelProfileId;
-  const referenceSha256 = person?.reference?.workingReferenceSha256 ?? person?.referenceSha256;
+  if(clip.retiredReason){requireMatch(row&&row.approveForGame.trim().toLowerCase()!=='yes',`Approved take uses a retired profile or renderer: ${clip.clipId}`);continue}
+  const selected=cast.productionVoices[clip.voiceId];
+  const usesSelected=clip.profileId===selected?.profileId;
+  const profileId = usesSelected?selected.profileId:person?.secretTunnel?.profileId ?? person?.secretTunnelProfileId;
+  const referenceSha256 = usesSelected?(clip.referenceHashKind==='uploaded-original'?selected.originalSha256:selected.referenceSha256):person?.reference?.workingReferenceSha256 ?? person?.referenceSha256;
   requireMatch(person && row && copy && clip.profileId === profileId && row.profileId === profileId &&
     copy.profileId === profileId && row.voiceId === clip.voiceId && copy.voiceId === clip.voiceId &&
     row.script === clip.text && copy.script === clip.text && row.mp3Sha256 === clip.sha256 &&
@@ -81,6 +84,8 @@ for (const clip of candidates.clips) {
     clip.referenceSha256 === referenceSha256,
   `Review provenance mismatch: ${clip.clipId}`);
   if (row.approveForGame.trim().toLowerCase() !== 'yes') continue;
+  requireMatch(!clip.retiredReason&&(!selected||clip.profileId===selected.profileId&&clip.renderer===selected.renderer&&clip.modelRevision===selected.modelRevision&&clip.processing===selected.processing&&(!clip.referenceOriginalSha256||clip.referenceOriginalSha256===selected.originalSha256)),
+    `Approved take uses a retired profile or renderer: ${clip.clipId}`);
   requireMatch(approvalFields.every(field => row[field].trim().toLowerCase() === 'yes'),
     `Incomplete human gate: ${clip.clipId}`);
   requireMatch(Math.abs(copy.outputLufs + 18) <= .3 && copy.outputTruePeakDbtp <= -1.5,
@@ -98,6 +103,9 @@ for (const clip of candidates.clips) {
     profileId, text: clip.text, path, sha256: copy.outputSha256,
     sourceCandidateSha256: clip.sha256, sourceReferenceSha256: clip.referenceSha256,
     renderer: clip.renderer, modelRevision: clip.modelRevision, modelLicense: clip.modelLicense,
+    referenceSha256:clip.referenceSha256,referenceHashKind:clip.referenceHashKind,
+    ...(clip.processing?{processing:clip.processing}:{}),
+    ...(clip.referenceOriginalSha256?{referenceOriginalSha256:clip.referenceOriginalSha256}:{}),
     referenceDataset: person.reference?.dataset ?? 'Saved CC0 source voice clips',
     referenceLicense: person.reference?.releaseLicense ?? person.sourceLicense ?? null,
     humanReviewQueueSha256: hash(queuePath)});

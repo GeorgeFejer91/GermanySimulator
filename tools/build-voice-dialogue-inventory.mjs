@@ -4,6 +4,7 @@ import vm from "node:vm";
 
 const root=resolve(import.meta.dirname,"..");
 const game=readFileSync(resolve(root,"game.js"),"utf8");
+const officeRuntime=readFileSync(resolve(root,"buergeramt.js"),"utf8");
 const cast=JSON.parse(readFileSync(resolve(root,"For-AI/VOICE-CAST.json"),"utf8"));
 const catalogContext=vm.createContext({window:{}});
 vm.runInContext(readFileSync(resolve(root,"For-AI/AUDIO-TEXT-LIBRARY.js"),"utf8"),catalogContext);
@@ -11,12 +12,12 @@ vm.runInContext(readFileSync(resolve(root,"buergeramt-story.js"),"utf8"),catalog
 const catalog=catalogContext.window.GermanySimulatorAudioText;
 const office=catalogContext.window.BuergeramtStory;
 
-function declaration(name){
- const marker=`const ${name}=`,start=game.indexOf(marker);
+function declaration(name,source=game){
+ const marker=`const ${name}=`,start=source.indexOf(marker);
  if(start<0)throw new Error(`Missing game declaration ${name}`);
  let quote="",escaped=false,depth=0,expression="";
- for(let i=start+marker.length;i<game.length;i++){
-  const c=game[i];
+ for(let i=start+marker.length;i<source.length;i++){
+  const c=source[i];
   if(quote){expression+=c;if(escaped)escaped=false;else if(c==="\\")escaped=true;else if(c===quote)quote="";continue}
   if(c==='"'||c==="'"||c==="`"){quote=c;expression+=c;continue}
   if("([{ ".includes(c)&&c!==" ")depth++;
@@ -40,13 +41,14 @@ const pools={
  quizContexts:declaration("quizContexts"),
  quizQuestions:Object.fromEntries(questions.map(q=>[String(q.source),{germany:q.question,berlin:berlinQuestions[q.source]?.question??q.question,type:q.type??"civic",level:q.level??null}])),
  buergeramtPolicePhone:{voiceId:office.call.voiceId,call:office.call.line,replies:office.police},
- buergeramtClerk:{identity:office.clerkIdentity,counter:office.clerk.map(({line,choices})=>({line,replies:choices.map(({reply})=>reply)})),outburst:office.outburst.lines},
+ buergeramtClerk:{identity:office.clerkIdentity,counter:office.clerk.map(({line,choices})=>({line,replies:choices.map(({reply})=>reply)})),outburst:office.outburst.lines,phoneWarnings:office.phoneWarnings,registration:office.registration},
  buergeramtPatrons:office.patrons,
+ buergeramtAmbient:declaration("ambientLines",officeRuntime).map(([speaker,text],index)=>({speaker,text,voiceId:index===0?office.patrons["amt-konrad-wohnungszettel"].voiceId:index===3?office.patrons["amt-wolfram-rentenbescheid"].voiceId:office.clerkIdentity.voiceId})),
 };
 const inventory={
  schemaVersion:1,
  explanation:"Exact currently authored source pools. Quiz speech concatenates one regional approach, one category context and one regional question; the combinations are generated at runtime. Fixed NPC lines and their owners are in VOICE-CAST.json. Bürgeramt clerk and Kriminalpolizei phone dialogue from buergeramt-story.js are inventoried separately; additional call-status sentences in buergeramt.js remain context-dependent.",
- source:["game.js","buergeramt-story.js"],
+ source:["game.js","buergeramt-story.js","buergeramt.js"],
  fixedCharacterDialogueCount:cast.dialogueCount,
  dynamicIdentityVoiceIds:cast.roleProfiles.map(person=>({voiceId:person.voiceId,sourcePools:person.dialogueSources})),
  pools,

@@ -2,10 +2,10 @@
   "schemaVersion": 2,
   "status": "explicit_runtime_speakers_verified; optional_visual_template_mapping_curated; rendered_review_pending",
   "sourceSha256": {
-    "For-AI/VOICE-CAST.json": "10e4ab58b443724e9d6933f1325ed4ff5a102f0176aec6a9e6713ca9b92a9e4a",
-    "game.js": "7bdfd2592067a7066dd8bce59bf0b2eed143531342d21015a06028a1f94faf08",
-    "world3d.js": "8d373327256fcdf264d6302ace061ee0d3bd0d015d7b9c724a7d917e619da65c",
-    "buergeramt-story.js": "155f54d867adb702f8ff50e9e62f76716ae1666fe8965b1b4743e2cfbd591ca7",
+    "For-AI/VOICE-CAST.json": "603bf5f0e8ae0509e922ed4888e60da888ed2b40eb9cf0a3fdbaaf4d067afeff",
+    "game.js": "7bd8a6604e30b9c28c288a59248d0fc985be48f676075d4e71349cb36ea3d0f5",
+    "world3d.js": "6d7f3ecda0f09385adb5a62524175a53dae189b57cbf1ebbe648154ecfa6c54f",
+    "buergeramt-story.js": "8e708f719c2d7f41f1599441a34880788afe837e0da57731b497101e7c9a1d0b",
     "assets/models/street-characters/models.js": "f221585150735d365e007f2eadfe58d1461f704824f8bd18f356f6bacfe5a4a8",
     "assets/models/street-characters/runtime.js": "d4c25e1d37762571a0aeedc4e15c456e137fa9be21abfccb20829a1f58d16f62",
     "assets/models/street-characters/persona-map.js": "77fd249de275c7e12debd0af4f14f30826158e0207c6920c5b01633d2aaee652"
@@ -18,7 +18,7 @@
     "namedCrowdIdentities": 12,
     "staticBuergeramtSpeakers": 4,
     "authoredStaticPatrons": 3,
-    "decorativeClerkClones": 2,
+    "decorativeClerkClones": 3,
     "optionalStreetVisualTemplates": 8,
     "mappedStreetSpeakers": 31
   },
@@ -29,6 +29,13 @@
       "fullName": "Brunhilde Knick",
       "voiceId": "amt-brunhilde-knick",
       "decorativeCloneOf": null
+    },
+    {
+      "modelKind": "clerk",
+      "gameCharacterId": null,
+      "fullName": null,
+      "voiceId": null,
+      "decorativeCloneOf": "amt-brunhilde-knick"
     },
     {
       "modelKind": "clerk",

@@ -1,4 +1,4 @@
-"""Local listening queue for the 236 GermanySimulator candidate MP3s.
+"""Local listening review of current GermanySimulator voice candidates.
 
 Run: python tools/voice-review-server.py --music-root "<German emotional voice databases>"
 The printed loopback URL has a per-run token. Nothing is approved automatically.
@@ -24,6 +24,7 @@ GAME = Path(__file__).resolve().parents[1]
 QUEUE_NAME = "VOICE-CANDIDATE-REVIEW-QUEUE.csv"
 FIRST_REVIEW_NAME = "VOICE-FIRST-REVIEW-53.csv"
 MANIFEST = GAME / "assets/voices/candidate-dialogue/manifest.json"
+CAST = GAME / "For-AI/VOICE-CAST.json"
 DECISIONS = (
     "heardWords", "speakerIdentityFits", "demeanorFits", "intonationFits",
     "artifactsAbsent", "sourceRightsCleared", "approveForGame",
@@ -47,6 +48,46 @@ def under(base, relative):
     return path
 
 
+def candidate_index():
+    clips = json.loads(MANIFEST.read_text(encoding="utf-8"))["clips"]
+    index = {clip["clipId"]: clip for clip in clips}
+    if len(index) != len(clips):
+        raise ValueError("Candidate manifest has duplicate clip IDs")
+    return index
+
+
+def provenance_matches(row, clip):
+    return bool(clip) and all(row[queue_key] == clip[manifest_key] for queue_key, manifest_key in (
+        ("voiceId", "voiceId"), ("profileId", "profileId"),
+        ("script", "text"), ("mp3Sha256", "sha256"), ("gameFile", "path")))
+
+
+def queued_take(row, clip):
+    for take in (clip, clip.get("previousCandidate")):
+        if provenance_matches(row, take):
+            return take
+    raise ValueError(f"Review queue provenance changed: {row['clipId']}")
+
+
+def active_rows(rows):
+    clips = candidate_index()
+    production = json.loads(CAST.read_text(encoding="utf-8"))["productionVoices"]
+    active = []
+    for row in rows:
+        clip, binding = clips.get(row["clipId"]), production.get(row["voiceId"])
+        if not clip or not binding or clip.get("retiredReason") or not provenance_matches(row, clip):
+            continue
+        expected = {key: binding[key] for key in ("profileId", "renderer", "modelRevision")}
+        expected["referenceSha256"] = binding["originalSha256" if
+            clip.get("referenceHashKind") == "uploaded-original" else "referenceSha256"]
+        expected["processing"] = binding.get("processing")
+        if clip.get("referenceOriginalSha256"):
+            expected["referenceOriginalSha256"] = binding["originalSha256"]
+        if all(clip.get(key) == value for key, value in expected.items()):
+            active.append(row)
+    return active
+
+
 def load_queue(path):
     raw = path.read_bytes()
     reader = csv.DictReader(io.StringIO(raw.decode("utf-8-sig"), newline=""))
@@ -54,16 +95,14 @@ def load_queue(path):
     if not REQUIRED.issubset(fields):
         raise ValueError("Review queue has missing columns")
     rows = list(reader)
-    clips = json.loads(MANIFEST.read_text(encoding="utf-8"))["clips"]
-    index = {clip["clipId"]: clip for clip in clips}
-    if len(index) != len(clips) or len(rows) != len(clips) or len({row["clipId"] for row in rows}) != len(rows):
+    index = candidate_index()
+    if len(rows) != len(index) or len({row["clipId"] for row in rows}) != len(rows):
         raise ValueError("Review queue or candidate manifest is incomplete or duplicated")
     for row in rows:
         clip = index.get(row["clipId"])
-        if not clip or any((row[queue_key] != clip[manifest_key]) for queue_key, manifest_key in
-                           (("voiceId", "voiceId"), ("profileId", "profileId"),
-                            ("script", "text"), ("mp3Sha256", "sha256"))):
+        if not clip:
             raise ValueError(f"Review queue provenance changed: {row['clipId']}")
+        queued_take(row, clip)
     return raw, fields, rows
 
 
@@ -73,10 +112,11 @@ def first_review_ids(music, rows):
         return set()
     with path.open("r", encoding="utf-8-sig", newline="") as stream:
         selected = list(csv.DictReader(stream))
-    current = {row["clipId"]: row for row in rows}
-    if len(selected) != 53 or len({row["clipId"] for row in selected}) != 53 or \
-            len({row["voiceId"] for row in selected}) != 53:
-        raise ValueError("First-review shortlist must contain 53 distinct speakers and clips")
+    current = {row["clipId"]: row for row in active_rows(rows)}
+    voices = {row["voiceId"] for row in current.values()}
+    if len(selected) != len(voices) or len({row["clipId"] for row in selected}) != len(selected) or \
+            {row["voiceId"] for row in selected} != voices:
+        raise ValueError("First-review shortlist must cover each active speaking profile once")
     for row in selected:
         saved = current.get(row["clipId"])
         if not saved or any(row[key] != saved[other] for key, other in (
@@ -111,6 +151,8 @@ def save_row(queue_path, lock, incoming):
         if len(matches) != 1:
             raise ValueError("Unknown clip ID")
         row = matches[0]
+        if not any(active["clipId"] == clip_id for active in active_rows(rows)):
+            raise ValueError("Retired or wrong-profile take is not eligible for game review")
         if incoming.get("reviewVersion") != row_version(row) or incoming.get("mp3Sha256") != row["mp3Sha256"]:
             raise RuntimeError("This review row changed; reload it before saving")
         row.update(choices)
@@ -186,11 +228,12 @@ def make_handler(music, token, queue_path):
             if parts.path == "/api/rows":
                 try:
                     _, _, rows = load_queue(queue_path)
+                    rows = active_rows(rows)
                     first_review = first_review_ids(music, rows)
-                    clips = {clip["clipId"]: clip for clip in json.loads(MANIFEST.read_text(encoding="utf-8"))["clips"]}
-                    cast = json.loads((GAME / "For-AI/VOICE-CAST.json").read_text(encoding="utf-8"))
+                    clips = candidate_index()
+                    cast = json.loads(CAST.read_text(encoding="utf-8"))
                     people = {person["voiceId"]: person for group in ("characters", "roleProfiles", "existingAssetProfiles")
-                              for person in cast[group]}
+                              for person in cast.get(group, [])}
                     enriched = []
                     for row in rows:
                         clip = clips[row["clipId"]]
@@ -208,7 +251,7 @@ def make_handler(music, token, queue_path):
             if match:
                 try:
                     _, _, rows = load_queue(queue_path)
-                    row = next(row for row in rows if row["clipId"] == match[1])
+                    row = next(row for row in active_rows(rows) if row["clipId"] == match[1])
                     normalized = match[2] == "normalized"
                     path = under(music if normalized else GAME,
                                  row["normalizedReviewFile"] if normalized else row["gameFile"])

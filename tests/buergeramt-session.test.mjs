@@ -1,6 +1,29 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import {harness} from './amt-harness.mjs';
+import {harness,source} from './amt-harness.mjs';
+
+test('the appointment page exposes no call transcript, silence action or pairing status',()=>{
+ assert.doesNotMatch(source('buergeramt-phone.html'),/phone-call-line|phone-silence|phone-connect-status|Verbindung|SILENCE CALLS/);
+ const h=harness('phone');h.incoming();const status=h.node('phone-status').textContent;
+ h.node('phone-answer').click();h.tick(2020);assert.equal(h.node('phone-call-state').textContent,'00:02');assert.equal(h.node('phone-choices').hidden,true);assert.equal(h.node('phone-status').textContent,status);
+ h.links[0].message({type:'done'});assert.equal(h.node('phone-call').hidden,true);const end=h.node('phone-call-state').textContent;h.tick(3000);assert.equal(h.node('phone-call-state').textContent,end);
+});
+
+test('phone playback receipts own desktop police captions and stale receipts cannot replace the clerk',()=>{
+ const h=harness('host',{voice:true}),link=h.links[0];h.counter();link.message({type:'answer',id:'grass'});
+ assert.equal(h.node('amt-ambient').textContent,'');
+ link.message({type:'police-start',index:-1,mode:'recording',readyDelayMs:20,atMs:h.now()});
+ assert.equal(h.node('amt-ambient').textContent,'KRIMINALPOLIZEI · '+h.window.BuergeramtStory.call.line);
+ link.message({type:'police-done',index:-1,mode:'recording',durationMs:100,atMs:h.now()+100});h.tick(20);
+ const clerk=h.node('amt-ambient').textContent;assert.ok(clerk.includes(h.window.BuergeramtStory.outburst.lines[0]));
+ link.message({type:'police-start',index:-1,mode:'recording',readyDelayMs:20,atMs:h.now()});assert.equal(h.node('amt-ambient').textContent,clerk);
+ link.message({type:'police-start',index:0,mode:'recording',readyDelayMs:20,atMs:h.now()});assert.equal(h.node('amt-ambient').textContent,clerk,'unsolicited line cannot start a caption');
+});
+
+test('the smartphone game browser does not show telephone subtitles',()=>{
+ const h=harness('host',{voice:true,phonePlatform:'Android'}),link=h.links[0];h.counter();link.message({type:'answer',id:'grass'});link.message({type:'police-start',index:-1,mode:'recording',readyDelayMs:20,atMs:h.now()});assert.equal(h.node('amt-ambient').textContent,'');
+ link.message({type:'police-done',index:-1,mode:'recording',durationMs:100,atMs:h.now()+100});h.tick(20);assert.ok(h.node('amt-ambient').textContent.includes(h.window.BuergeramtStory.outburst.lines[0]));
+});
 
 test('office speech owns admission until completion, with no busy voice-off fallback',()=>{
  const h=harness('host',{voice:true});h.counter();assert.equal(h.level.audioTextBusy,true,'office voice must block city approval admission');
@@ -99,7 +122,7 @@ test('city audio gates waiting-room speech and releases it when the city clears'
  let cityBusy=true;const h=harness('host',{voice:true,cinematics:false,cityAudioBusy:()=>cityBusy});
  h.enter();h.advanceGame(9);const before=h.synth.spoken.length;
  assert.equal(before,0);assert.equal(h.node('amt-ambient').textContent,'');
- cityBusy=false;h.level.update(.1);assert.equal(h.synth.spoken.length,1);
+ cityBusy=false;h.level.update(.1);h.tick(20);assert.equal(h.synth.spoken.length,1);
  assert.match(h.node('amt-ambient').textContent,/WARTERAUM/);
 });
 
@@ -107,12 +130,12 @@ test('city audio defers the optional omen and its tone until the city clears',()
  let cityBusy=true;const h=harness('host',{voice:true,cinematics:true,cityAudioBusy:()=>cityBusy});
  h.enter();h.advanceGame(9);
  assert.equal(h.level.stage,'walk-sign');assert.equal(h.level.omen.phase,'');
- cityBusy=false;h.advanceGame(9);
+ cityBusy=false;h.level.update(.1);h.tick(20);h.synth.end();h.advanceGame(9);
  assert.equal(h.level.stage,'omen');assert.equal(h.level.omen.phase,'blackout');
 });
 
 test('the clerk speech watchdog starts after city audio clears, not while waiting',()=>{
- let cityBusy=false;const h=harness('host',{voice:true,cinematics:false,cityAudioBusy:()=>cityBusy});
+ let cityBusy=true;const h=harness('host',{voice:true,cinematics:false,cityAudioBusy:()=>cityBusy});
  h.wait();const link=h.links[0];link.message({type:'register',name:'Erika Mustermann'});
  h.approachCounter();h.advanceGame(16);assert.equal(h.level.stage,'walk-counter');
  cityBusy=true;h.synth.speak=()=>{};h.level.interact();h.tick(3000);
@@ -266,15 +289,15 @@ test('phone emits start and finish receipts around actual speech, and answers pi
 test('phone recording uses the Kriminalpolizei voice and paired timing receipts',()=>{
  const h=harness('phone',{candidatePhone:true});h.incoming();const link=h.links[0];h.node('phone-answer').click();h.tick(20);
  assert.equal(h.audio.recordings.length,1);assert.match(h.audio.recordings[0].src,/kriminalpolizei-phone-01\.mp3$/);
- assert.equal(h.synth.spoken.length,0);assert.equal(link.sent.at(-1).type,'police-start');assert.equal(link.sent.at(-1).mode,'recording');assert.equal(h.node('phone-call-line').hidden,false);
+ assert.equal(h.synth.spoken.length,0);assert.equal(link.sent.at(-1).type,'police-start');assert.equal(link.sent.at(-1).mode,'recording');assert.equal(h.node('phone-call-line').hidden,true);
  h.tick(400);h.audio.recordings[0].end();const done=link.sent.at(-1);assert.equal(done.type,'police-done');assert.equal(done.mode,'recording');assert.equal(done.index,-1);assert.equal(done.durationMs,404);
 });
 test('a failed phone recording falls back to browser speech before its start receipt',()=>{
  const h=harness('phone',{candidatePhone:true});h.incoming();h.node('phone-answer').click();h.audio.recordings[0].fail();h.tick(20);
  assert.equal(h.audio.recordings[0].paused,true);assert.equal(h.synth.spoken.length,1);assert.equal(h.links[0].sent.at(-1).mode,'voice');
 });
-test('stalled phone speech becomes readable within 1.8 seconds and ignores a late start',()=>{
- const h=harness('phone');let late;h.synth.speak=utterance=>{late=utterance};h.incoming();const link=h.links[0];h.node('phone-answer').click();h.tick(1799);assert.equal(link.sent.filter(m=>m.type==='police-start').length,0);h.tick(1);const start=link.sent.at(-1);assert.equal(start.type,'police-start');assert.equal(start.mode,'fallback');assert.equal(h.node('phone-call-line').hidden,false);late.onstart();late.onerror();assert.equal(link.sent.filter(m=>m.type==='police-start').length,1);h.tick(10000);assert.equal(link.sent.filter(m=>m.type==='police-done').length,1);
+test('stalled phone speech sends a fallback receipt within 1.8 seconds without revealing a transcript',()=>{
+ const h=harness('phone');let late;h.synth.speak=utterance=>{late=utterance};h.incoming();const link=h.links[0];h.node('phone-answer').click();h.tick(1799);assert.equal(link.sent.filter(m=>m.type==='police-start').length,0);h.tick(1);const start=link.sent.at(-1);assert.equal(start.type,'police-start');assert.equal(start.mode,'fallback');assert.equal(h.node('phone-call-line').hidden,true);late.onstart();late.onerror();assert.equal(link.sent.filter(m=>m.type==='police-start').length,1);h.tick(10000);assert.equal(link.sent.filter(m=>m.type==='police-done').length,1);
 });
 test('a measured quick phone voice start shortens the next stalled-line watchdog',()=>{
  const h=harness('phone');h.incoming();const link=h.links[0];h.node('phone-answer').click();h.tick(20);h.synth.end();h.tick(1);h.synth.speak=()=>{};link.message({type:'police-line',index:0,line:'Können Sie mich hören?'});h.tick(1199);assert.equal(link.sent.filter(m=>m.type==='police-start'&&m.index===0).length,0);h.tick(1);const start=link.sent.at(-1);assert.equal(start.type,'police-start');assert.equal(start.index,0);assert.equal(start.mode,'fallback');
@@ -297,7 +320,7 @@ test('incoming call repeats vibration and stops it after decline',()=>{
 test('phone police speech automatically uses maximum browser volume',()=>{
  const h=harness('phone');
  h.incoming();h.node('phone-answer').click();h.tick(20);
- assert.equal(h.synth.spoken[0].text,h.node('phone-call-line').textContent);
+ assert.equal(h.synth.spoken[0].text,h.window.BuergeramtStory.call.line);
  assert.equal(h.synth.spoken[0].volume,1);
 });
 test('phone answer/decline are one-shot and sent with the current call id',()=>{
@@ -305,7 +328,7 @@ test('phone answer/decline are one-shot and sent with the current call id',()=>{
 });
 test('the caller stays Unbekannte Nummer while subtitles and browser language select call controls',()=>{
  for(const [options,english] of [[{phoneLanguage:'de-DE'},false],[{phoneLanguage:'en-GB'},true],[{phoneLanguage:'de-DE',phoneCaptions:true},true],[{phoneLanguage:'fr-FR'},false]]){
-  const h=harness('phone',options);h.incoming();assert.equal(h.node('phone-caller').textContent,'Unbekannte Nummer');assert.equal(h.node('phone-call').lang,english?'en':'de');assert.equal(h.node('phone-call-state').textContent,english?'INCOMING CALL':'EINGEHENDER ANRUF');h.node('phone-answer').click();assert.equal(h.node('phone-call-state').textContent,english?'CONNECTED':'VERBUNDEN');
+  const h=harness('phone',options);h.incoming();assert.equal(h.node('phone-caller').textContent,'Unbekannte Nummer');assert.equal(h.node('phone-call').lang,english?'en':'de');assert.equal(h.node('phone-call-state').textContent,english?'INCOMING CALL':'EINGEHENDER ANRUF');h.node('phone-answer').click();assert.equal(h.node('phone-call-state').textContent,'00:00');
  }
 });
 test('Google Phone drags right to answer or left to decline, with tap fallback',()=>{
@@ -341,8 +364,8 @@ test('backgrounding an active phone forfeits it and stops call audio',()=>{
 test('ticket delivered to an already hidden phone is forfeited',()=>{
  const h=harness('phone');h.document.hidden=true;h.phoneReady();assert.equal(h.links[0].sent.at(-1).type,'phone-hidden');assert.match(h.node('phone-status').textContent,/verfallen/);
 });
-test('police lines queue without replacing the text of speech still playing',()=>{
- const h=harness('phone');h.incoming();h.node('phone-answer').click();h.tick(20);const first=h.node('phone-call-line').textContent;h.links[0].message({type:'police-line',index:0,line:'Die nächste polizeiliche Zeile.'});h.tick(20);assert.equal(h.synth.spoken.length,1);assert.equal(h.node('phone-call-line').textContent,first);h.synth.end();assert.equal(h.links[0].sent.at(-1).index,-1);h.tick(300);assert.equal(h.synth.spoken.length,2);assert.equal(h.node('phone-call-line').textContent,'Die nächste polizeiliche Zeile.');h.synth.end();assert.equal(h.links[0].sent.at(-1).index,0);
+test('police lines queue without revealing transcripts on the phone',()=>{
+ const h=harness('phone');h.incoming();h.node('phone-answer').click();h.tick(20);const first=h.synth.spoken[0].text;h.links[0].message({type:'police-line',index:0,line:'Die nächste polizeiliche Zeile.'});h.tick(20);assert.equal(h.synth.spoken.length,1);assert.equal(h.synth.spoken[0].text,first);h.synth.end();assert.equal(h.links[0].sent.at(-1).index,-1);h.tick(300);assert.equal(h.synth.spoken.length,2);assert.equal(h.synth.spoken[1].text,'Die nächste polizeiliche Zeile.');assert.equal(h.node('phone-call-line').hidden,true);h.synth.end();assert.equal(h.links[0].sent.at(-1).index,0);
 });
 test('declining prevents subsequent police speech or a duplicate call',()=>{
  const h=harness('phone');h.incoming();h.node('phone-decline').click();h.links[0].message({type:'police-line',index:0,line:'Darf nicht sprechen.'});h.links[0].message({type:'call',id:'grass',line:'Doppelter Anruf'});h.tick(30);assert.equal(h.node('phone-call').hidden,true);assert.equal(h.synth.spoken.length,0);
@@ -359,8 +382,8 @@ test('a failed clerk voice retains a readable automatic-argument line',()=>{
 test('a stalled clerk voice starts a readable fallback within the learned startup limit and rejects late speech',()=>{
  const h=harness('host',{voice:true});let late;h.synth.speak=utterance=>{late=utterance};h.counter();h.links[0].message({type:'answer',id:'grass'});h.links[0].message({type:'police-done',index:-1,mode:'voice',durationMs:0,atMs:h.now()});h.tick(1199);assert.equal(h.level.timing.desk[0].startAt,null);h.tick(1);assert.equal(h.level.timing.desk[0].startMode,'fallback');assert.equal(h.level.timing.desk[0].startAt,h.now());late.onstart();late.onend();assert.equal(h.level.timing.desk[0].endAt,null);h.tick(100);assert.equal(h.counts.cancel,0);
 });
-test('a failed police voice displays its line instead of silently skipping it',()=>{
- const h=harness('phone');h.incoming();h.node('phone-answer').click();h.tick(20);h.node('phone-call-line').hidden=true;h.synth.current.onerror();assert.equal(h.node('phone-call-line').hidden,false);assert.equal(h.node('phone-call-line').textContent,h.window.BuergeramtStory.call.line);
+test('a failed police voice retains desktop fallback receipts without displaying phone text',()=>{
+ const h=harness('phone');h.incoming();h.node('phone-answer').click();h.tick(20);h.node('phone-call-line').hidden=true;h.synth.current.onerror();assert.equal(h.node('phone-call-line').hidden,true);assert.equal(h.node('phone-call-line').textContent,'');
 });
 
 test('a synchronous speech failure retains the automatic clerk line for reading',()=>{

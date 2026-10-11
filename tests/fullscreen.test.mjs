@@ -38,5 +38,5 @@ test('permitted load entry, missing APIs, hidden pages, and WebKit fallback',asy
 });
 test('all entry pages share fullscreen and the call screen has only answer/decline actions',()=>{
  for(const file of ['index.html','3d.html','buergeramt-phone.html'])assert.match(readFileSync(new URL('../'+file,import.meta.url),'utf8'),/src="\.\/fullscreen\.js\?/);
- const phone=readFileSync(new URL('../buergeramt-phone.html',import.meta.url),'utf8');assert.doesNotMatch(phone,/phone-call-silence/);assert.match(phone,/id="phone-silence"/);
+ const phone=readFileSync(new URL('../buergeramt-phone.html',import.meta.url),'utf8');assert.doesNotMatch(phone,/phone-call-silence/);assert.doesNotMatch(phone,/id="phone-silence"/);assert.match(phone,/id="phone-answer"/);assert.match(phone,/id="phone-decline"/);
 });

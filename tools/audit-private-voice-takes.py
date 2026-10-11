@@ -30,7 +30,7 @@ def digest(path: Path) -> str:
 
 
 def valid_inventory_hashes(game: Path) -> set[str]:
-    """Preserve exact old requests when only the three static patrons were added."""
+    """Verify frozen city/quiz/crowd requests independently of office revisions."""
     directory = game / "For-AI"
     current_path = directory / "VOICE-DIALOGUE-INVENTORY.json"
     baseline_path = directory / QUEUE_BASELINE
@@ -40,21 +40,23 @@ def valid_inventory_hashes(game: Path) -> set[str]:
     baseline = json.loads(baseline_path.read_text(encoding="utf-8"))
     old_pools = baseline["pools"]
     new_pools = current["pools"]
-    if ({key: value for key, value in new_pools.items() if key != "buergeramtPatrons"} != old_pools or
-            set(new_pools["buergeramtPatrons"]) != {
-                "amt-konrad-wohnungszettel", "amt-mechthild-elternbogen",
-                "amt-wolfram-rentenbescheid"}):
+    unchanged = ("npcLines", "npcDenglisch", "policeBarks", "pedestrianBarks",
+                 "crowdArchetypes", "innerMonologues", "quizApproaches",
+                 "quizContexts", "quizQuestions")
+    if any(new_pools.get(key) != old_pools[key] for key in unchanged):
         raise ValueError("Existing quiz/crowd source pools changed; old queues need reauthoring")
-    old_dynamic = {item["voiceId"]: item["sourcePools"] for item in baseline["dynamicIdentityVoiceIds"]}
-    new_dynamic = {item["voiceId"]: item["sourcePools"] for item in current["dynamicIdentityVoiceIds"]}
-    expected_dynamic = dict(old_dynamic)
-    for voice_id in new_pools["buergeramtPatrons"]:
-        expected_dynamic[voice_id] = [f"buergeramt-story.js patrons.{voice_id}.lines[0]"]
-    if new_dynamic != expected_dynamic:
-        raise ValueError("Inventory speaker sources changed outside the three new patrons")
+    def city_sources(inventory):
+        result = {}
+        for item in inventory["dynamicIdentityVoiceIds"]:
+            sources = [source for source in item["sourcePools"] if not source.startswith(("buergeramt", "world3d.js amtCharacter("))]
+            if sources:
+                result[item["voiceId"]] = sources
+        return result
+    if city_sources(current) != city_sources(baseline):
+        raise ValueError("Inventory city/quiz/crowd speaker sources changed")
     for key in baseline.keys() | current.keys():
-        if key not in {"pools", "dynamicIdentityVoiceIds"} and current.get(key) != baseline.get(key):
-            raise ValueError(f"Inventory metadata changed outside the patron addition: {key}")
+        if key not in {"pools", "dynamicIdentityVoiceIds", "source", "explanation"} and current.get(key) != baseline.get(key):
+            raise ValueError(f"Inventory metadata changed outside office authoring: {key}")
     return {digest(current_path), QUEUE_BASELINE_SHA256}
 
 

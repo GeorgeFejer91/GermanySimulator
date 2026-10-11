@@ -2,6 +2,8 @@
 
 The secret Bürgeramt is an episode of the canonical root game. QR admission, the linked phone, the numbered queue, Frau Knick, the police interruption, A38, and the existing exit outcomes remain its required chain. Eight optional walking encounters add movement and atmosphere while the player waits; they never award a ticket or change a counter answer.
 
+Character voices follow [`VOICE-SYNTH-PROTOCOL.md`](./VOICE-SYNTH-PROTOCOL.md#fixed-voices-and-the-agent-workflow-2026-10-11). `VOICE-CAST.json`'s `productionVoices` pins the selected Secret Tunnel profile, reference hashes, renderer and processing. Brunhilde Knick keeps profile `b080c7d95ecd418fb428282461d7fbe7` for counter, registration, warning and ambient speech. Missing, failed and dynamic Knick lines retain exact captions. The decorative clerks share her voice and speech lifecycle; ambient remarks do not interrupt active office speech. Earlier profile IDs in historical notes below are provenance.
+
 ## Admission, queue and outcomes
 
 The office HUD allocates a top toolbar for sound, restart in direct mode, and
@@ -35,8 +37,8 @@ visitors to scan it to receive a number. Submitting the phone's ordinary
 "Name eintragen" form silently unlocks browser audio and requests wake lock
 in that same browser gesture. The QR page shares the game's load/first-interaction
 fullscreen behavior documented in `GAMEPLAY.md`. The incoming-call overlay has
-only answer/decline controls; the appointment page retains its Lautlos action
-after putting away a call. There is no setup button, test tone,
+only answer/decline controls; the appointment page has no call-management action,
+pairing status, connection message or call transcript. There is no setup button, test tone,
 or early vibration: the incoming police call is the first sound cue. The
 browser cannot read or change device volume or Do Not Disturb settings, so an
 audible ring cannot be guaranteed. The phone session persists through name
@@ -48,9 +50,27 @@ readable interaction cues. Archive cupboards, a copier/fax corner, and a file
 trolley are solid furniture; counter tools and dense paperwork add visual
 clutter without changing the registration, queue, or call rules.
 
-At the correct counter, Frau Knick starts her existing line, the desktop arms the linked phone, and a brief 217 Hz style speaker-interference cue begins 900 ms before the planned ring. The office's synthesized sound bus ducks during that cue. The phone receives a future ring target in its measured monotonic clock domain when possible, with a public UTC cross-check and receipt-relative fallback; it reveals the call, sounds its first ring burst, and requests vibration at that target. The exact beat and limits are in [the timing evidence ledger](./PHONE-CALL-TIMING-RESEARCH.md). The caller is always displayed as `Unbekannte Nummer`, including with English call controls; the Kriminalpolizei identity is revealed only after answering. The four phone recordings use the user-selected Secret Tunnel profile `GS Kriminalpolizei` (`f700170f840543bca7413d3ccf6ac028`) and load one exact line at a time, with German browser speech on failure. Heinrich Wachtmeister remains the city police voice. The call controls and status use English when the host game's English subtitles were on at QR creation, otherwise the phone browser's preferred English or German, with German as the fallback. This affects call chrome only: the ticket page, office captions, police speech, and Frau Knick dialogue remain German, an explicit local exception to Berlin's Denglisch rule. The staged incoming-call screen follows a documented phone family: separate tap controls for iPhone and unknown browsers, a centered left-decline/right-answer drag for Google Phone, and separate green-left/red-right drag controls for Samsung Phone. Google and Samsung controls retain tap fallback. Browser hints can identify an OS and sometimes a Samsung model, but not the installed dialer or its settings; [the visual evidence ledger](./PHONE-CALL-UI-RESEARCH.md) defines the fidelity boundary. Declining plays the four German counter exchanges automatically with their first authored responses, then grants the existing A38 form. There are no question, continue, or take buttons in the encounter. Answering starts an automatic, choice-free argument that escalates from passive aggression to shouting. The opening investigator line begins first. Each observed phone start arms the next clerk interruption from its mapped timestamp and sends an indexed cutoff deadline ahead of time. The phone stops locally at that deadline, while the host compensates for learned clerk startup delay. Each of her first three lines requests the officer’s reply before she finishes; its start receipt cancels her active speech. Both sides leave unfinished clauses, cut each other off repeatedly and reject stale completion events. Natural completion may advance an early-ending line; missing starts, disconnects and failed speech retain a bounded continuation. The final two clerk lines deliver her shouting retort and cancel the appointment. She cancels the appointment and the player returns to the street without A38. The mission chain is otherwise unchanged. Spoken text must exactly match the currently visible line on its own screen.
+At the correct counter, Frau Knick starts her existing line, the desktop arms the linked phone, and a brief 217 Hz style speaker-interference cue begins 900 ms before the planned ring. The office's synthesized sound bus ducks during that cue. The phone receives a future ring target in its measured monotonic clock domain when possible, with a public UTC cross-check and receipt-relative fallback; it reveals the call, sounds its first ring burst, and requests vibration at that target. The exact beat and limits are in [the timing evidence ledger](./PHONE-CALL-TIMING-RESEARCH.md). The caller is always displayed as `Unbekannte Nummer`, including with English call controls; the Kriminalpolizei identity is revealed only after answering. The four phone recordings use the user-selected Secret Tunnel profile `GS Kriminalpolizei` (`f700170f840543bca7413d3ccf6ac028`) and load one exact line at a time, with German browser speech on failure. Heinrich Wachtmeister remains the city police voice. The call controls and status use English when the host game's English subtitles were on at QR creation, otherwise the phone browser's preferred English or German, with German as the fallback. This affects call chrome only: the ticket page, office captions, police speech, and Frau Knick dialogue remain German, an explicit local exception to Berlin's Denglisch rule. The staged incoming-call screen follows a documented phone family: separate tap controls for iPhone and unknown browsers, a centered left-decline/right-answer drag for Google Phone, and separate green-left/red-right drag controls for Samsung Phone. Google and Samsung controls retain tap fallback. Browser hints can identify an OS and sometimes a Samsung model, but not the installed dialer or its settings; [the visual evidence ledger](./PHONE-CALL-UI-RESEARCH.md) defines the fidelity boundary. Declining plays the four German counter exchanges automatically with their first authored responses, then grants the existing A38 form. There are no question, continue, or take buttons in the encounter. Answering starts an automatic, choice-free argument that escalates from passive aggression to shouting. The opening investigator line begins first. Each observed phone start arms the next clerk interruption from its mapped timestamp and sends an indexed cutoff deadline ahead of time. The phone stops locally at that deadline, while the host compensates for learned clerk startup delay. Each of her first three lines requests the officer’s reply before she finishes; its start receipt cancels her active speech. Both sides leave unfinished clauses, cut each other off repeatedly and reject stale completion events. Natural completion may advance an early-ending line; missing starts, disconnects and failed speech retain a bounded continuation. The final two clerk lines deliver her shouting retort and cancel the appointment. She cancels the appointment and the player returns to the street without A38. The mission chain is otherwise unchanged. Counter captions keep their exact spoken source; police captions follow playback receipts on the desktop game, with no telephone transcript on the phone.
 
 Optional actor conversations pause the queue and never change ticket ownership or either counter outcome.
+
+The telephone is a staged incoming-call screen. The appointment page reveals no
+phone pairing or connection state and has no silence-calls button. After answer,
+the incoming controls disappear and an elapsed call timer replaces the incoming
+label. Police speech never enters the phone DOM, including failed-audio fallback.
+The phone still emits start/done receipts and obeys indexed cutoffs. On those
+receipts, the desktop game shows the exact police line with `KRIMINALPOLIZEI` in
+the existing in-scene subtitle rail and clears it at completion, interruption or
+exit. A smartphone game browser also omits telephone subtitles. Clerk speech
+keeps its own captions and selected `amt-brunhilde-knick` profile throughout the
+argument. The runtime selects checked exact-text recordings from that profile;
+rejected and unrendered takes retain her caption fallback.
+
+This change affects phone HTML, captions and speech lookup only. It changes no
+world geometry, physics, routes, camera, sprite scale or movement, so the two
+world consistency reviewers are out of scope. Rendered phone checks use silent
+Chromium and Android emulation with simulated signaling; physical Android,
+audible listening and natural QR/WebRTC coverage remain separate checks.
 
 ## Playable storyboard
 
@@ -683,7 +703,7 @@ roots, body bounds, movement, floor pivots and depth ownership stay authored.
 Inactive speech returns the original painting. The existing 96-kernel omen
 mouth consumes the Aktenkurier's owned shape, including browser fallback.
 
-All 41 approved office MP3s now share the exact-hash cue data in
+All 53 approved office MP3s now share the exact-hash cue data in
 `assets/buergeramt/speech/mouth-cues.js`. The local analyzer samples sound every
 10 ms and records phonetic mouth intervals. The unchanged audio playhead owns
 openings, pauses, rate changes and seeking; coarticulation is centred on each
@@ -714,11 +734,11 @@ atlas captures pass desktop, portrait and landscape with the same speaking
 body key. Earlier reduced-motion and missing-asset coverage carries forward
 for the unchanged ownership/shader paths. A silent 25 fps MP3 motion capture
 shows closed, partial, rounded and full apertures. Brief phonetic intervals
-can still change within one captured frame. All 41 unchanged recordings passed
+can still change within one captured frame. The original 41 unchanged recordings passed
 real playback, pause, rate-change and cancellation receipts without seeking;
 the shared builder reproduces their shipped analysis exactly.
 The final integrated deterministic release suite passes 473/473; the deploy
-workflow now includes the shared 41-recording cue regression test. The obsolete
+workflow now includes the shared 53-recording cue regression test. The obsolete
 omen audio fixture's samples were shortened to remain inside the newly published
 1.8-second turn and 2.2-second departure; its planted-turn/retreat assertions
 remain enforced.

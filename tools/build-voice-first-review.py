@@ -10,6 +10,7 @@ import argparse
 import csv
 import hashlib
 import io
+import importlib.util
 import json
 import os
 from collections import defaultdict
@@ -17,6 +18,9 @@ from pathlib import Path
 
 
 ROOT = Path(__file__).resolve().parents[1]
+_review_spec = importlib.util.spec_from_file_location("voice_review_server", ROOT / "tools/voice-review-server.py")
+review = importlib.util.module_from_spec(_review_spec)
+_review_spec.loader.exec_module(review)
 QUEUE = "VOICE-CANDIDATE-REVIEW-QUEUE.csv"
 NORMALIZED = "GermanySimulator normalized voice review 2026-10-09"
 OUTPUT = "VOICE-FIRST-REVIEW-53.csv"
@@ -59,8 +63,7 @@ def main() -> None:
     cast_path = ROOT / "For-AI/VOICE-CAST.json"
     candidate_path = ROOT / "assets/voices/candidate-dialogue/manifest.json"
     normalized_path = music / NORMALIZED / "manifest.json"
-    with queue_path.open("r", encoding="utf-8-sig", newline="") as stream:
-        queued = list(csv.DictReader(stream))
+    _, _, queued = review.load_queue(queue_path)
     cast = json.loads(cast_path.read_text(encoding="utf-8"))
     candidate = json.loads(candidate_path.read_text(encoding="utf-8"))
     normalized = json.loads(normalized_path.read_text(encoding="utf-8"))
@@ -71,6 +74,7 @@ def main() -> None:
             len(copies) != candidate["lineCount"] or
             normalized["sourceManifestSha256"] != digest(candidate_path)):
         raise ValueError("Candidate, normalized and human-review sets differ")
+    active = review.active_rows(queued)
     by_voice = defaultdict(list)
     for row in queued:
         clip = clips.get(row["clipId"])
@@ -78,16 +82,15 @@ def main() -> None:
         person = people.get(row["voiceId"])
         if not clip or not copy or not person:
             raise ValueError(f"Missing candidate owner or copy: {row['clipId']}")
-        profile_id = (person.get("secretTunnel") or {}).get("profileId") or person.get("secretTunnelProfileId")
-        if (row["profileId"] != profile_id or clip["profileId"] != profile_id or
-                clip["voiceId"] != row["voiceId"] or clip["text"] != row["script"] or
-                clip["sha256"] != row["mp3Sha256"] or
-                copy["outputSha256"] != row["normalizedSha256"] or
-                copy["script"] != row["script"]):
+        if (copy["outputSha256"] != row["normalizedSha256"] or
+                any(copy[copy_key] != row[row_key] for copy_key, row_key in (
+                    ("script", "script"), ("voiceId", "voiceId"), ("profileId", "profileId"),
+                    ("sourcePath", "gameFile"), ("sourceSha256", "mp3Sha256")))):
             raise ValueError(f"Candidate provenance mismatch: {row['clipId']}")
+    for row in active:
         by_voice[row["voiceId"]].append(row)
-    if len(by_voice) != 53:
-        raise ValueError(f"Expected 53 speaking profiles, found {len(by_voice)}")
+    if not by_voice:
+        raise ValueError("No current selected-profile candidates to shortlist")
 
     selected = []
     for voice_id, options in sorted(by_voice.items()):
@@ -137,7 +140,8 @@ def main() -> None:
     report = {"schemaVersion": 1, "status": "human_listening_shortlist_only",
               "note": "One clip per speaking profile. The 100% word diagnostic does not approve audible words, voice identity, demeanor, intonation, artifacts, rights or release.",
               "candidateCount": len(queued), "selectedProfileCount": len(selected),
-              "unselectedProfilesWithoutCandidate": sorted(set(people) - set(by_voice)),
+              "activeCandidateCount": len(active), "historicalQueueRowCount": len(queued) - len(active),
+              "productionProfilesWithoutCandidate": sorted(set(cast["productionVoices"]) - set(by_voice)),
               "queueProvenanceSha256": hashlib.sha256(
                   json.dumps(provenance, ensure_ascii=False, sort_keys=True).encode("utf-8")
               ).hexdigest(),
@@ -151,9 +155,10 @@ def main() -> None:
                   (json.dumps(report, ensure_ascii=False, indent=2) + "\n").encode("utf-8"),
                   args.check)
     print(json.dumps({"check": args.check, "selectedProfiles": len(selected),
-                      "profilesWithoutCandidate": len(report["unselectedProfilesWithoutCandidate"]),
-                      "policeGrassClip": next(row["clipId"] for row in selected
-                                              if row["voiceId"] == "polizei-heinrich-wachtmeister")}))
+                      "activeCandidates": len(active),
+                      "profilesWithoutCandidate": len(report["productionProfilesWithoutCandidate"]),
+                      "policeGrassClip": next((row["clipId"] for row in selected
+                                               if row["voiceId"] == "polizei-heinrich-wachtmeister"), None)}))
 
 
 if __name__ == "__main__":

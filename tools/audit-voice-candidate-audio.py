@@ -51,6 +51,7 @@ def main() -> None:
     parser.add_argument("--game-root", required=True, type=Path)
     parser.add_argument("--ffmpeg", required=True, type=Path)
     parser.add_argument("--output-dir", required=True, type=Path)
+    parser.add_argument("--archive-root", type=Path, help="Private GermanySimulator voice archive for historical takes")
     parser.add_argument("--normalized-dir", type=Path,
                         help="Optional complete private normalized listening set with encoded word review")
     args = parser.parse_args()
@@ -70,8 +71,10 @@ def main() -> None:
         raise RuntimeError("Duplicate cast voice ID")
     rows = []
     for clip in clips:
-        audio = (root / clip["path"]).resolve(strict=True)
-        if not audio.is_relative_to(root) or digest(audio) != clip["sha256"]:
+        audio_root = args.archive_root.resolve(strict=True) if clip.get("archiveRelativePath") and args.archive_root else root
+        relative = clip.get("archiveRelativePath") if audio_root != root else clip["path"]
+        audio = (audio_root / relative).resolve(strict=True)
+        if not audio.is_relative_to(audio_root) or digest(audio) != clip["sha256"]:
             raise RuntimeError(f"Candidate path/hash mismatch: {clip['clipId']}")
         probe = json.loads(run([str(ffprobe), "-v", "error", "-show_entries", "format=duration",
                                 "-of", "json", str(audio)]))

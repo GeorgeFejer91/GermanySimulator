@@ -24,6 +24,7 @@ FIELDS = [
     "voiceId", "fullName", "gameRole", "gender", "generalDemeanor",
     "targetValence", "targetArousal", "sourceEmotion", "sourceLicense",
     "profileId", "referencePath", "referenceSha256", "script", "requestStatus",
+    "renderer", "modelRevision", "processing", "referenceOriginalSha256",
     "gameCastSha256", "gameInventorySha256",
 ]
 
@@ -63,10 +64,11 @@ def main() -> None:
                 line["fullName"] != person["fullName"] or
                 [item["line"] for item in line["lines"]] != [script]):
             raise RuntimeError(f"Audition or authored game text changed for {voice_id}")
-        profile_id = person["secretTunnelProfileId"]
+        binding = cast["productionVoices"][voice_id]
+        profile_id = binding["profileId"]
         reference_rel = f"Secret Tunnel shared voice data/profiles/{profile_id}/reference.wav"
         reference_path = music / reference_rel
-        reference_hash = person["reference"]["workingReferenceSha256"]
+        reference_hash = binding["referenceSha256"]
         if sha256(reference_path) != reference_hash:
             raise RuntimeError(f"Saved reference differs from cast for {voice_id}")
         rows.append({
@@ -83,7 +85,11 @@ def main() -> None:
             "referencePath": reference_rel,
             "referenceSha256": reference_hash,
             "script": script,
-            "requestStatus": "new_rights_cleared_render_needed",
+            "requestStatus": "check_existing_selected_profile_take_before_rendering",
+            "renderer": binding["renderer"],
+            "modelRevision": binding["modelRevision"],
+            "processing": binding.get("processing", ""),
+            "referenceOriginalSha256": binding["originalSha256"],
             "gameCastSha256": sha256(cast_path),
             "gameInventorySha256": sha256(inventory_path),
         })

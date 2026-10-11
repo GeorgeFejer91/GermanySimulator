@@ -80,9 +80,53 @@ test('every authored clerk and roaming line owns lips; late completion cannot ca
 
 test('ambient clerks and waiting voices share ownership; voice-off stays neutral',()=>{
  const {h,p,level}=probe();p.setStage('waiting');
+ h.window.GermanySimulatorAudioText.productionVoices[h.window.BuergeramtStory.clerkIdentity.voiceId].fallback='captions';
  for(const actor of ['renter','clerk-1','clerk-2','pensioner','clerk-4']){
-  p.ambientStep(9);assert.equal(level.lipSpeech.actor,actor);assert.equal(level.lipSpeech.active,true);h.synth.end();assert.equal(level.lipSpeech.actor,null);
+  const before=h.synth.spoken.length;
+  p.ambientStep(9);h.tick(20);assert.equal(level.lipSpeech.actor,actor);
+  if(actor.startsWith('clerk-')){assert.equal(level.lipSpeech.active,false);assert.equal(h.synth.spoken.length,before);h.tick(15000)}
+  else{assert.equal(level.lipSpeech.active,true);h.synth.end()}
+  assert.equal(level.lipSpeech.actor,null);
  }
  const quiet=probe({voice:false});quiet.p.content('FRAU KNICK','Mama');assert.equal(quiet.level.lipSpeech.active,false);
  assert(Object.values(mouths).every(rect=>rect.length===4&&rect.every(v=>Number.isFinite(v)&&v>0&&v<1)));
+});
+
+test('Knick waits for a slow native start, keeps hidden startup alive and still bounds failure',()=>{
+ const {h,p,level}=probe(),players=[],text='Ich sitze hier ja nur...';
+ h.window.GermanySimulatorAudioText={productionVoices:{'amt-brunhilde-knick':{fallback:'captions'}},recordedClip:()=> './selected-knick.mp3',recordings:{'./selected-knick.mp3':{sha256:'selected-hash'}}};
+ h.context.Audio=class{
+  constructor(src){this.src=src;this.currentTime=0;this.duration=7;this.paused=true;this.ended=false;players.push(this)}
+  play(){this.paused=false;return Promise.resolve()}
+  pause(){this.paused=true;this.onpause?.()}removeAttribute(){this.src=''}load(){}
+ };
+ p.content('FRAU KNICK',text);const slow=players.at(-1);h.tick(2500);
+ assert.equal(slow.src,'./selected-knick.mp3');assert.equal(level.lipSpeech.mode,'waiting');assert.equal(h.synth.current,null);
+ slow.currentTime=.05;slow.onplaying();assert.equal(level.lipSpeech.mode,'recorded');assert.equal(level.clerkPerformance.speaking,true);assert.equal(h.node('amt-ambient').textContent,'FRAU KNICK · '+text);
+ slow.ended=true;slow.onended();assert.equal(level.lipSpeech.actor,null);
+ p.content('FRAU KNICK',text);const failed=players.at(-1);h.tick(4016);assert.equal(failed.src,'');assert.equal(level.lipSpeech.mode,'fallback');assert.equal(h.synth.current,null);
+ p.content('FRAU KNICK',text);const hidden=players.at(-1);h.tick(1000);h.hide();h.tick(23000);assert.equal(hidden.src,'./selected-knick.mp3');
+ h.document.hidden=false;h.document.dispatchEvent(new Event('visibilitychange'));h.tick(2500);assert.equal(hidden.src,'./selected-knick.mp3');hidden.currentTime=.05;hidden.onplaying();assert.equal(level.lipSpeech.mode,'recorded');
+ level.replay(h.config);hidden.onplaying();assert.equal(level.lipSpeech.actor,null);assert.equal(hidden.src,'');
+});
+
+test('native playback survives slow media progress and bounds a true stall without losing pause ownership',()=>{
+ const {h,p,level}=probe(),players=[];
+ h.window.GermanySimulatorAudioText={productionVoices:{'amt-brunhilde-knick':{fallback:'captions'}},recordedClip:()=> './selected-knick.mp3',recordings:{'./selected-knick.mp3':{sha256:'selected-hash'}}};
+ h.context.Audio=class{
+  constructor(src){this.src=src;this.currentTime=0;this.duration=9;this.paused=true;this.ended=false;players.push(this)}
+  play(){this.paused=false;this.onplaying?.();return Promise.resolve()}
+  pause(){this.paused=true;this.onpause?.()}removeAttribute(){this.src=''}load(){}
+ };
+ p.content('FRAU KNICK','Eine langsame Aufnahme.');const slow=players.at(-1);
+ h.tick(19000);slow.currentTime=.7;slow.ontimeupdate();h.tick(19000);
+ assert.equal(slow.src,'./selected-knick.mp3','advancing native media outlives its wall duration');assert.equal(level.lipSpeech.mode,'recorded');
+ slow.ontimeupdate();h.tick(1016);assert.equal(slow.src,'','unchanged timeupdate does not extend the finite stall limit');assert.equal(level.lipSpeech.mode,'fallback');assert.equal(h.synth.current,null);
+ p.content('FRAU KNICK','Eine weitere Aufnahme.');const resumed=players.at(-1);
+ h.tick(19000);resumed.currentTime=.8;h.hide();h.tick(23000);assert.equal(resumed.src,'./selected-knick.mp3');
+ h.document.hidden=false;h.document.dispatchEvent(new Event('visibilitychange'));h.tick(1016);
+ assert.equal(resumed.src,'./selected-knick.mp3','resuming samples progress even without timeupdate');resumed.currentTime=1.2;resumed.ontimeupdate();
+ resumed.ended=true;resumed.onended();assert.equal(level.lipSpeech.actor,null);
+ p.content('FRAU KNICK','Die neue Zeile.');const newest=players.at(-1);resumed.onended();assert.equal(newest.src,'./selected-knick.mp3');assert.equal(level.lipSpeech.mode,'recorded');
+ level.replay(h.config);h.tick(23000);assert.equal(newest.src,'');assert.equal(level.lipSpeech.actor,null);
 });

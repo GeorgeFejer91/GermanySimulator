@@ -2,6 +2,7 @@ import {createHash} from 'node:crypto';
 import {readFileSync, writeFileSync} from 'node:fs';
 import {resolve} from 'node:path';
 import vm from 'node:vm';
+import {matchesProduction} from './curate-voice-library.mjs';
 
 // Usage: node tools/audit-voice-release-readiness.mjs --music-root <library> [--check]
 // Read-only --check verifies the saved report against current cast/catalogue and review data.
@@ -53,7 +54,6 @@ const cast = json(castPath);
 const candidate = json(candidatePath);
 const approved = json(approvedPath);
 const fever = json(feverPath);
-const feverProfiles = new Map(fever.clips.filter(c => c.approval?.status === 'user-approved').map(c => [c.voiceId, c.profileId]));
 const coverage = parseCsv(read(coveragePath).toString('utf8').replace(/^\uFEFF/, ''));
 const queue = parseCsv(read(queuePath).toString('utf8').replace(/^\uFEFF/, ''));
 const review = json(reviewPath);
@@ -74,19 +74,24 @@ const byQueuedClip = new Map(queue.map(c => [c.clipId, c]));
 requireMatch(byClip.size === candidate.clips.length && byQueuedClip.size === candidate.clips.length,
   'Duplicate or missing review queue clip');
 const candidateCounts = new Map();
+const historicalCandidateCounts = new Map();
 const normalizedExact = new Map();
 const approvedCounts = new Map();
 for (const clip of candidate.clips) {
   const person = byVoice.get(clip.voiceId);
   const inspected = byClip.get(clip.clipId);
   const queued = byQueuedClip.get(clip.clipId);
-  requireMatch(person && inspected && inspected.voiceId === clip.voiceId && inspected.sourceSha256 === clip.sha256,
+  // A rewritten retired take retains its earlier review row, not a fabricated review of new words.
+  const reviewed=clip.previousCandidate?.sha256===inspected?.sourceSha256?clip.previousCandidate:clip;
+  requireMatch(person && inspected && inspected.voiceId === reviewed.voiceId && inspected.sourceSha256 === reviewed.sha256,
     `Candidate/review mismatch: ${clip.clipId}`);
-  requireMatch(queued && queued.voiceId === clip.voiceId && queued.mp3Sha256 === clip.sha256 &&
-    queued.script === clip.text, `Human review queue mismatch: ${clip.clipId}`);
+  requireMatch(queued && queued.voiceId === reviewed.voiceId && queued.mp3Sha256 === reviewed.sha256 &&
+    queued.script === reviewed.text, `Human review queue mismatch: ${clip.clipId}`);
   const profileId = person.secretTunnel?.profileId ?? person.secretTunnelProfileId;
-  requireMatch(clip.profileId === profileId && inspected.profileId === profileId,
+  requireMatch(reviewed.profileId === profileId && inspected.profileId === profileId,
     `Candidate profile mismatch: ${clip.clipId}`);
+  historicalCandidateCounts.set(clip.voiceId,(historicalCandidateCounts.get(clip.voiceId)??0)+1);
+  if(clip.retiredReason||!matchesProduction(cast,clip))continue;
   candidateCounts.set(clip.voiceId, (candidateCounts.get(clip.voiceId) ?? 0) + 1);
   if (inspected.normalizedWordPercent === 100) normalizedExact.set(clip.voiceId,
     (normalizedExact.get(clip.voiceId) ?? 0) + 1);
@@ -99,49 +104,44 @@ const defaultCounts = new Map();
 const defaultProfiles = new Map();
 for (const recording of Object.values(catalog.recordings)) {
   if (recording.candidateStatus) continue; // Opt-in metadata is not default playback approval.
-  if (byVoice.has(recording.voiceId)) {
-    const person=byVoice.get(recording.voiceId),primary=person.secretTunnel?.profileId??person.secretTunnelProfileId;
-    const profiles=[primary,...(person.secretTunnel?.candidateProfiles??[]).map(p=>p.profileId),feverProfiles.get(recording.voiceId)].filter(Boolean);
-    requireMatch(!recording.profileId||profiles.includes(recording.profileId),`Default recording profile mismatch: ${recording.id}`);
+  if (cast.productionVoices[recording.voiceId]) {
+    requireMatch(matchesProduction(cast,recording,false),`Default recording profile mismatch: ${recording.id}`);
     defaultCounts.set(recording.voiceId,(defaultCounts.get(recording.voiceId) ?? 0) + 1);
     if(recording.profileId)defaultProfiles.set(recording.voiceId,[...new Set([...(defaultProfiles.get(recording.voiceId)??[]),recording.profileId])]);
   }
 }
 for (const clip of approved.clips) {
-  const person = byVoice.get(clip.voiceId) ?? existingByVoice.get(clip.voiceId);
-  requireMatch(person && clip.profileId ===
-    (person.secretTunnel?.profileId ?? person.secretTunnelProfileId),
+  requireMatch(cast.productionVoices[clip.voiceId]&&matchesProduction(cast,clip),
   `Approved clip identity mismatch: ${clip.clipId}`);
-  if (byVoice.has(clip.voiceId)) defaultCounts.set(clip.voiceId,
-    (defaultCounts.get(clip.voiceId) ?? 0) + 1);
-  if (byVoice.has(clip.voiceId)) defaultProfiles.set(clip.voiceId,
-    [...new Set([...(defaultProfiles.get(clip.voiceId) ?? []), clip.profileId])]);
 }
-const rows = people.map(person => {
+for(const person of people){
   const saved = byCoverage.get(person.voiceId);
-  const profileId = person.secretTunnel?.profileId ?? person.secretTunnelProfileId;
-  requireMatch(saved && saved.profileId === profileId && saved.fullName === person.fullName,
+  const historicalProfileId=person.secretTunnel?.profileId??person.secretTunnelProfileId;
+  requireMatch(saved&&saved.profileId===historicalProfileId&&saved.fullName===person.fullName,
     `Music/game identity mismatch: ${person.voiceId}`);
-  const optInCandidateCount = candidateCounts.get(person.voiceId) ?? 0;
-  requireMatch(optInCandidateCount === Number(saved.optInCandidateMp3Count),
-    `Music/game candidate count mismatch: ${person.voiceId}`);
+  requireMatch((historicalCandidateCounts.get(person.voiceId)??0)===Number(saved.optInCandidateMp3Count),
+    `Historical Music/game candidate count mismatch: ${person.voiceId}`);
+}
+const rows = Object.entries(cast.productionVoices).map(([voiceId,binding])=>{
+  const saved=byCoverage.get(voiceId),person=byVoice.get(voiceId)??existingByVoice.get(voiceId);
+  const optInCandidateCount=candidateCounts.get(voiceId)??0;
   return {
-    voiceId: person.voiceId, fullName: person.fullName, profileId,
-    defaultPlayableClipCount: defaultCounts.get(person.voiceId) ?? 0,
-    defaultPlayableProfileIds: defaultProfiles.get(person.voiceId) ?? [],
+    voiceId, fullName: person?.fullName??binding.profileName, profileId:binding.profileId,
+    defaultPlayableClipCount: defaultCounts.get(voiceId) ?? 0,
+    defaultPlayableProfileIds: defaultProfiles.get(voiceId) ?? [],
     optInCandidateCount,
-    candidateHumanApprovedCount: approvedCounts.get(person.voiceId) ?? 0,
-    normalizedDiagnosticWordExactCount: normalizedExact.get(person.voiceId) ?? 0,
-    normalizedDiagnosticWordBelow100Count: optInCandidateCount - (normalizedExact.get(person.voiceId) ?? 0),
-    privateOrAuditionCount: Number(saved.profileAuditionMp3Count) + Number(saved.quizPreviewSegmentCount) +
+    candidateHumanApprovedCount: approvedCounts.get(voiceId) ?? 0,
+    normalizedDiagnosticWordExactCount: normalizedExact.get(voiceId) ?? 0,
+    normalizedDiagnosticWordBelow100Count: optInCandidateCount - (normalizedExact.get(voiceId) ?? 0),
+    historicalPrivateOrAuditionCount: saved?Number(saved.profileAuditionMp3Count) + Number(saved.quizPreviewSegmentCount) +
       Number(saved.newPrivateScoredMp3Count) + Number(saved.privateQuizPromptReviewMp3Count) +
-      Number(saved.supplementaryPrivateAuditionCount),
-    releaseState: defaultCounts.get(person.voiceId) ? 'default_clip_present' : 'no_default_clip',
+      Number(saved.supplementaryPrivateAuditionCount):0,
+    releaseState: defaultCounts.get(voiceId) ? 'default_clip_present' : 'no_default_clip',
   };
 });
 const report = {
-  schemaVersion: 1,
-  scope: '56 new nonpolitical voice profiles; direct default recordings plus approved-dialogue manifest. Legacy targetVoiceId is editorial and not credited.',
+  schemaVersion: 2,
+  scope: 'Current productionVoices bindings and exact scene exceptions. Retired candidates are historical evidence and excluded from active coverage; targetVoiceId is editorial and not credited.',
   diagnosticNote: 'A Whisper word match is a diagnostic, not human listening or release approval. Private auditions are not game assets.',
   sourceSha256: {
     cast: sha256(read(castPath)), catalog: sha256(read(catalogPath)),
@@ -155,6 +155,8 @@ const report = {
   profilesWithDefaultClip: rows.filter(r => r.defaultPlayableClipCount).length,
   profilesWithOptInCandidate: rows.filter(r => r.optInCandidateCount).length,
   optInCandidateCount: rows.reduce((n, r) => n + r.optInCandidateCount, 0),
+  historicalCandidateCount:candidate.clips.length,
+  retiredCandidateCount:candidate.clips.filter(c=>c.retiredReason||!matchesProduction(cast,c)).length,
   candidateHumanApprovedCount: rows.reduce((n, r) => n + r.candidateHumanApprovedCount, 0),
   normalizedDiagnosticWordExactCount: rows.reduce((n, r) => n + r.normalizedDiagnosticWordExactCount, 0),
   existingAssetProfileApprovedClipCount: approved.clips.filter(c => existingByVoice.has(c.voiceId)).length,

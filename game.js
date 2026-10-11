@@ -1499,8 +1499,8 @@ function update(dt){
 
  let sx=(keys.ArrowRight||keys.KeyD?1:0)-(keys.ArrowLeft||keys.KeyA?1:0),fy=(keys.ArrowUp||keys.KeyW?1:0)-(keys.ArrowDown||keys.KeyS?1:0);
  const mag=Math.hypot(sx,fy);if(mag>1){sx/=mag;fy/=mag}
- const sprint=!!(keys.ShiftLeft||keys.ShiftRight);
- const speed=146*(sprint?1.58:1)*(player.energy<25?.84:1),px=player.x,py=player.y,bumped=movePlayerGround(sx*speed*dt,-fy*speed*dt);
+ const sprint=!!(keys.KeyR||keys.ShiftLeft||keys.ShiftRight);
+ const speed=146*(keys.KeyR?2:sprint?1.58:1)*(player.energy<25?.84:1),px=player.x,py=player.y,bumped=movePlayerGround(sx*speed*dt,-fy*speed*dt);
  if(bumped){bumped.pause=Math.max(bumped.pause||0,.48);pedestrianBark(bumped,playerSurface())}
  const frameVx=(player.x-px)/Math.max(dt,.001),frameVy=(player.y-py)/Math.max(dt,.001),velocityBlend=Math.min(1,dt*12);player.vx+=(frameVx-player.vx)*velocityBlend;player.vy+=(frameVy-player.vy)*velocityBlend;if(player.x!==px||player.y!==py)player.facing=Math.atan2(player.x-px,player.y-py);
  updateRegion();
