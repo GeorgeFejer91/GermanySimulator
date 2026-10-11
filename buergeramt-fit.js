@@ -1,7 +1,7 @@
 import {measureLineStats,measureNaturalWidth,prepareWithSegments} from './assets/vendor/pretext/dist/layout.js';
 
 // Keep the bounded Amt labels readable as the phone, browser zoom, or German copy changes.
-const selectors=['#start','#amt-counter-call','#amt-counter-notice small','#amt-objective','#amt-nearby','#amt-number-board','#amt-title','#amt-line','#amt-status','#amt-ambient','#amt-actions button','#amt-leave','#amt-exit','#amt-direct-reset','#amt-direct-result-title','#amt-direct-result-copy','.amt-direct-result a','#amt-mix summary','#amt-mix label','#amt-compact-reset','#phone-silence','#phone-status','#phone-connect-status','.phone-brand strong','.phone-breadcrumb','.phone-title','#phone-form h2','#phone-form p','#phone-form label','#phone-submit','#phone-caller','#phone-call-state','#phone-answer-label','#phone-decline-label','#phone-swipe-label','.phone-keep','#phone-call-line'];
+const selectors=['#start','#amt-counter-call','#amt-counter-notice small','#amt-objective','#amt-nearby','#amt-number-board','#amt-title','#amt-line','#amt-status','#amt-ambient','#amt-actions button','#amt-leave','#amt-exit','#amt-direct-reset','#amt-direct-result-title','#amt-direct-result-copy','.amt-direct-result a','#amt-mix summary','#amt-mix label','#amt-compact-reset','#phone-status','#phone-admission-status','.phone-brand strong','.phone-breadcrumb','.phone-title','#phone-form h2','#phone-form p','#phone-form label','#phone-submit','#phone-caller','#phone-call-state','#phone-answer-label','#phone-decline-label','#phone-swipe-label','.phone-keep'];
 selectors.push('.control-dock button');
 let queued=false;
 function schedule(){if(queued)return;queued=true;requestAnimationFrame(async()=>{queued=false;await document.fonts.ready;measure()})}
@@ -43,7 +43,7 @@ function measure(){
    const reflow=label&&(!oneLine||minimum>el.offsetHeight);
    // Flex and grid regions can grow; the subtitle rail and phone page scroll when needed.
    if(document.body.classList.contains('amt-compact')&&el.matches('#amt-actions button'))el.style.removeProperty('min-height');
-   else if(el.matches('button,#amt-objective,#amt-nearby,#phone-call-line,#phone-status,#phone-connect-status,#amt-ambient'))el.style.minHeight=`${minimum}px`;
+   else if(el.matches('button,#amt-objective,#amt-nearby,#phone-status,#phone-admission-status,#amt-ambient'))el.style.minHeight=`${minimum}px`;
    el.dataset.pretextFit=reflow?'reflow':oneLine?'one-line':stats.lineCount>0?'wrapped':'empty';
   }catch{el.dataset.pretextFit='unavailable'}
  }

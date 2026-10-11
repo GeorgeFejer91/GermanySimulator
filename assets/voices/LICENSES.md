@@ -185,24 +185,7 @@ Secret Tunnel 6's installed OmniVoice Rust runtime rendered the exact authored t
 
 ## Civilian traffic-driver shouts
 
-Four German-language MP3s under `traffic/` were generated on 2026-09-30 with
-the local Voice Cloner, Qwen3-TTS 1.7B Base (Apache 2.0), using its German
-mode on CPU. The saved `GS traffic driver` profile ID is
-`0f4a57f7b5ad4447b11111b8f5e42631`. Its 5.120-second reference
-(SHA-256 `EAC473D6BC2580AA39A9369A7EA1A0FB03A937630CEED68F4BC06EDB515CF6B5`)
-joins the three CC0 Thorsten angry source clips listed at the top of this
-file. The approved files are mono, 24 kHz, 64 kbit/s MP3, normalized to the
-foreground target of −18 LUFS and at most −1.5 dBTP. Whole-clip German
-Whisper `small` transcription retained all spoken words; punctuation and
-colloquial spelling were checked against the catalog source strings. The
-synthetic horn is code-generated and has no speech recording.
-
-| Shipped file | Duration | SHA-256 |
-| --- | ---: | --- |
-| `traffic/driver-berlin-01.mp3` | 2.880 s | `B0CB1E459C8446EA1089A462EDC58EDF89D9490827081110E0E48BC133708F14` |
-| `traffic/driver-berlin-02.mp3` | 2.960 s | `41F48026CC99CC859E333157F79FD58B8DF71B0C0735D36B9DF2A7DCAFF6A782` |
-| `traffic/driver-germany-01.mp3` | 2.080 s | `88070DBDE09CAF488FAA5E8AA3E81FE4A6ABFAAAA45DD0AFC3E4F78AE9E02298` |
-| `traffic/driver-germany-02.mp3` | 2.320 s | `48F810565B49EC6ED207D3EA038CDB2D89B811575F30CC218B5DD1A5B7102914` |
+The four former synthesized traffic recordings were removed on 2026-10-11 at the user’s request. Their exact files, hashes, reference and model credits remain in the private voice archive. The game retains the four authored German shouts, English translations and existing browser-speech fallback. The synthetic horn is code-generated. The CC0 Thorsten source clips above still supply the selected Dieter Hupfer reference.
 
 ## Horst Stempelmann · official omen audio, candidate 2
 
@@ -238,6 +221,10 @@ Separately stored Music-library Secret Tunnel takes were rendered with the pinne
 
 ## Bürgeramt fever listening alternatives
 
+The 2026-10-11 curation retains 35 current recordings; five rewritten Knick takes
+are hash-verified in the private Music archive and no longer ship. The selected
+production profiles in `For-AI/VOICE-CAST.json` now own generation identity.
+
 `amt-fever/manifest.json` records the separate user-approved family for twelve saved
 alternate profiles: 40 MP3s / 4,107,104 bytes. These use transformed references from the original EmoDB
 CC0-1.0 release, preserving each reference hash, and the cached Chatterbox
@@ -256,6 +243,17 @@ The original user-approved Horst omen file and its provenance above are
 unchanged. Private references and normalized review queue remain in Music.
 
 ## Approved fictional character dialogue
+
+`knick/manifest.json` records the subsequent
+same-profile Knick batch requested on 2026-10-11. Its selected UUID is
+`b080c7d95ecd418fb428282461d7fbe7`, using the transformed CC0 EmoDB reference
+and pinned MIT Chatterbox model above. Its receipts preserve original and
+normalized reference hashes, model revision, synthesis precision/settings,
+raw and encoded hashes, fixed undertone, measured levels, independent German
+ASR and estimated word cues. Only eligible exact-text takes ship. The user
+requested implementation with this voice; this use authorization does not
+establish listening acceptance. Rejected takes and all source/model files stay
+in Music. Earlier Knick and unused profile candidates are archived.
 
 `approved-dialogue/manifest.json` is the per-file provenance ledger for bulk Chatterbox clips promoted to normal gameplay. Each entry records the speaking voice ID and Secret Tunnel profile UUID, exact script, shipping and source hashes, reference hash/dataset/license, renderer revision/license, and the reviewed Music queue hash. `tools/promote-reviewed-voice-dialogue.mjs` verifies the seven human review fields, original and normalized hashes, and delivery levels before copying a clip. That manifest is currently empty: none of the 236 bulk candidates has passed that gate. The individually user-approved Aktenkurier omen above is a separate direct catalogue recording with its actual approval instruction. Approved clips play by exact voice ID and text; remaining bulk candidates retain their opt-in preview status.
 

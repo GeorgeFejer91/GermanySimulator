@@ -1,0 +1,4423 @@
+{
+  "schemaVersion": 1,
+  "voiceId": "amt-brunhilde-knick",
+  "profileId": "b080c7d95ecd418fb428282461d7fbe7",
+  "fallback": "captions",
+  "status": "same-profile technical and independent ASR audit; perceptual listening not independently verified",
+  "generatedLineCount": 21,
+  "requestedLineCount": 168,
+  "lineCount": 17,
+  "clips": [
+    {
+      "clipId": "knick-outburst-1",
+      "actorId": "clerk",
+      "voiceId": "amt-brunhilde-knick",
+      "profileId": "b080c7d95ecd418fb428282461d7fbe7",
+      "text": "Ach, wie schön. Für private Telefonate haben Sie Zeit. Für Ihr Formular offenbar nicht. Ich sitze hier ja nur...",
+      "sourceLocator": "buergeramt-story.js outburst.lines[0]",
+      "seed": 71000,
+      "referenceSha256": "901e9ad60eda5cbb36337b12864b6a2b0d133570acb90941b9eabd9888c16351",
+      "referenceOriginalSha256": "f87daaf53e9e3183065dbe38a65097f5c8df3ae11454ea56676a8298800683c2",
+      "profileJsonSha256": "7ab5d210047d226539dcf34c1cefad516ee937b1e9573821733d97514c48e50c",
+      "rawSha256": "bb1189e07980fdd20e136516ee74feb233667b22661cf5a6b3b9e46c6df53d90",
+      "renderer": "ResembleAI/Chatterbox Multilingual V2 0.1.7",
+      "modelRevision": "5bb1f6ee58e50c3b8d408bc82a6d3740c2db6e18",
+      "modelLicense": "MIT",
+      "referenceLicense": "CC0-1.0 (EmoDB original, transformed reference)",
+      "durationSeconds": 6.56,
+      "renderSeconds": 28.97,
+      "synthesis": {
+        "temperature": 0.65,
+        "repetitionPenalty": 3,
+        "cfgWeight": 0.6,
+        "languageId": "de"
+      },
+      "listening": "pending",
+      "status": "eligible exact-text recording; human listening pending",
+      "processing": "[0:a]highpass=f=65,lowpass=f=7600,asplit[clean][wet];[wet]rubberband=pitch=0.78,lowpass=f=1450,volume=0.16[shadow];[clean][shadow]amix=inputs=2:duration=first:normalize=0[a]",
+      "normalization": {
+        "targetLufs": -18,
+        "targetTruePeakDbtp": -1.5,
+        "filter": "loudnorm=I=-13.45:TP=-1.8:LRA=11:linear=false",
+        "iterations": 4
+      },
+      "integratedLufs": -18.28,
+      "truePeakDbtp": -2.23,
+      "asr": "Ach, wie schön. Für private Telefonate haben Sie Zeit. Für Ihr Formular offenbar nicht. Ich sitze hier ja nur.",
+      "asrWordExact": true,
+      "asrModel": "independent faster-whisper, cached local model, CPU int8, no script prompt",
+      "asrModelDirectoryName": "voice-asr-model",
+      "wordCues": [
+        {
+          "at": 0,
+          "charIndex": 0,
+          "word": "Ach",
+          "end": 0.28
+        },
+        {
+          "at": 0.4,
+          "charIndex": 5,
+          "word": "wie",
+          "end": 0.46
+        },
+        {
+          "at": 0.46,
+          "charIndex": 9,
+          "word": "schön",
+          "end": 0.82
+        },
+        {
+          "at": 1.04,
+          "charIndex": 16,
+          "word": "Für",
+          "end": 1.32
+        },
+        {
+          "at": 1.32,
+          "charIndex": 20,
+          "word": "private",
+          "end": 1.72
+        },
+        {
+          "at": 1.72,
+          "charIndex": 28,
+          "word": "Telefonate",
+          "end": 2.38
+        },
+        {
+          "at": 2.38,
+          "charIndex": 39,
+          "word": "haben",
+          "end": 2.58
+        },
+        {
+          "at": 2.58,
+          "charIndex": 45,
+          "word": "Sie",
+          "end": 2.72
+        },
+        {
+          "at": 2.72,
+          "charIndex": 49,
+          "word": "Zeit",
+          "end": 3.1
+        },
+        {
+          "at": 3.26,
+          "charIndex": 55,
+          "word": "Für",
+          "end": 3.52
+        },
+        {
+          "at": 3.52,
+          "charIndex": 59,
+          "word": "Ihr",
+          "end": 3.68
+        },
+        {
+          "at": 3.68,
+          "charIndex": 63,
+          "word": "Formular",
+          "end": 4.18
+        },
+        {
+          "at": 4.18,
+          "charIndex": 72,
+          "word": "offenbar",
+          "end": 4.58
+        },
+        {
+          "at": 4.58,
+          "charIndex": 81,
+          "word": "nicht",
+          "end": 4.84
+        },
+        {
+          "at": 5.04,
+          "charIndex": 88,
+          "word": "Ich",
+          "end": 5.26
+        },
+        {
+          "at": 5.26,
+          "charIndex": 92,
+          "word": "sitze",
+          "end": 5.52
+        },
+        {
+          "at": 5.52,
+          "charIndex": 98,
+          "word": "hier",
+          "end": 5.72
+        },
+        {
+          "at": 5.72,
+          "charIndex": 103,
+          "word": "ja",
+          "end": 5.9
+        },
+        {
+          "at": 5.9,
+          "charIndex": 106,
+          "word": "nur",
+          "end": 6.14
+        }
+      ],
+      "sha256": "566582485f0bfc28cbc63db596f75765cbc6f0eb94ec9db7f777c4d7a649d38e",
+      "bytes": 106028,
+      "sampleRateHz": 48000,
+      "channels": 1,
+      "bitrateBitsPerSecond": 128000,
+      "file": "assets/voices/knick/knick-outburst-1.mp3",
+      "asrLiteralWordExact": true,
+      "asrNormalization": "case/punctuation, German numeric and A38 spoken equivalents, section sign, German compound spacing",
+      "processingSha256": "1c7968d73192bfbf5d2b759fce5dc07b092badbd133718ae05d67dbdda72ccb2",
+      "english": "Oh, how lovely. You have time for private calls. Apparently not for your form. I am only sitting here...",
+      "approval": {
+        "status": "user-approved",
+        "date": "2026-10-11",
+        "instruction": "Also the police telephone call between Frau Knick doesn't use her new profile, this is the same person as the one behind counter!",
+        "scope": "Use the selected Brunhilde Knick profile consistently at the counter and in the police argument",
+        "listeningVerified": false
+      }
+    },
+    {
+      "clipId": "knick-outburst-3",
+      "actorId": "clerk",
+      "voiceId": "amt-brunhilde-knick",
+      "profileId": "b080c7d95ecd418fb428282461d7fbe7",
+      "text": "Sie zeigen meinen Schalter an? Ich bin vierundsiebzig und seit fünfzig Jahren hier! Mein Schalter deckt keinen Rasen. Er deckt Anträge! Jetzt halten Sie doch endlich...",
+      "sourceLocator": "buergeramt-story.js outburst.lines[2]",
+      "seed": 71002,
+      "referenceSha256": "901e9ad60eda5cbb36337b12864b6a2b0d133570acb90941b9eabd9888c16351",
+      "referenceOriginalSha256": "f87daaf53e9e3183065dbe38a65097f5c8df3ae11454ea56676a8298800683c2",
+      "profileJsonSha256": "7ab5d210047d226539dcf34c1cefad516ee937b1e9573821733d97514c48e50c",
+      "rawSha256": "1a1070668da2fa3820da11090acf36338c451ad6eb88e0cc3fdced4c6aa24b35",
+      "renderer": "ResembleAI/Chatterbox Multilingual V2 0.1.7",
+      "modelRevision": "5bb1f6ee58e50c3b8d408bc82a6d3740c2db6e18",
+      "modelLicense": "MIT",
+      "referenceLicense": "CC0-1.0 (EmoDB original, transformed reference)",
+      "durationSeconds": 8.92,
+      "renderSeconds": 48.16,
+      "synthesis": {
+        "temperature": 0.65,
+        "repetitionPenalty": 3,
+        "cfgWeight": 0.6,
+        "languageId": "de"
+      },
+      "listening": "pending",
+      "status": "eligible exact-text recording; human listening pending",
+      "processing": "[0:a]highpass=f=65,lowpass=f=7600,asplit[clean][wet];[wet]rubberband=pitch=0.78,lowpass=f=1450,volume=0.16[shadow];[clean][shadow]amix=inputs=2:duration=first:normalize=0[a]",
+      "normalization": {
+        "targetLufs": -18,
+        "targetTruePeakDbtp": -1.5,
+        "filter": "loudnorm=I=-13.45:TP=-1.8:LRA=11:linear=false",
+        "iterations": 7
+      },
+      "integratedLufs": -18.24,
+      "truePeakDbtp": -2.18,
+      "asr": "Sie zeigen meinen Schalter an? Ich bin 74 und seit 50 Jahren hier. Mein Schalter deckt keinen Rasen. Er deckt Anträge. Jetzt halten Sie doch endlich!",
+      "asrWordExact": true,
+      "asrModel": "independent faster-whisper, cached local model, CPU int8, no script prompt",
+      "asrModelDirectoryName": "voice-asr-model",
+      "wordCues": [
+        {
+          "at": 0,
+          "charIndex": 0,
+          "word": "Sie",
+          "end": 0.2
+        },
+        {
+          "at": 0.2,
+          "charIndex": 4,
+          "word": "zeigen",
+          "end": 0.52
+        },
+        {
+          "at": 0.52,
+          "charIndex": 11,
+          "word": "meinen",
+          "end": 0.72
+        },
+        {
+          "at": 0.72,
+          "charIndex": 18,
+          "word": "Schalter",
+          "end": 1.1
+        },
+        {
+          "at": 1.1,
+          "charIndex": 27,
+          "word": "an",
+          "end": 1.36
+        },
+        {
+          "at": 1.56,
+          "charIndex": 31,
+          "word": "Ich",
+          "end": 1.86
+        },
+        {
+          "at": 1.86,
+          "charIndex": 35,
+          "word": "bin",
+          "end": 2
+        },
+        {
+          "at": 2,
+          "charIndex": 39,
+          "word": "vierundsiebzig",
+          "end": 2.58
+        },
+        {
+          "at": 2.58,
+          "charIndex": 54,
+          "word": "und",
+          "end": 2.94
+        },
+        {
+          "at": 2.94,
+          "charIndex": 58,
+          "word": "seit",
+          "end": 3.12
+        },
+        {
+          "at": 3.12,
+          "charIndex": 63,
+          "word": "fünfzig",
+          "end": 3.5
+        },
+        {
+          "at": 3.5,
+          "charIndex": 71,
+          "word": "Jahren",
+          "end": 3.84
+        },
+        {
+          "at": 3.84,
+          "charIndex": 78,
+          "word": "hier",
+          "end": 4.12
+        },
+        {
+          "at": 4.32,
+          "charIndex": 84,
+          "word": "Mein",
+          "end": 4.54
+        },
+        {
+          "at": 4.54,
+          "charIndex": 89,
+          "word": "Schalter",
+          "end": 4.92
+        },
+        {
+          "at": 4.92,
+          "charIndex": 98,
+          "word": "deckt",
+          "end": 5.2
+        },
+        {
+          "at": 5.2,
+          "charIndex": 104,
+          "word": "keinen",
+          "end": 5.46
+        },
+        {
+          "at": 5.46,
+          "charIndex": 111,
+          "word": "Rasen",
+          "end": 5.92
+        },
+        {
+          "at": 6.04,
+          "charIndex": 118,
+          "word": "Er",
+          "end": 6.16
+        },
+        {
+          "at": 6.16,
+          "charIndex": 121,
+          "word": "deckt",
+          "end": 6.48
+        },
+        {
+          "at": 6.48,
+          "charIndex": 127,
+          "word": "Anträge",
+          "end": 6.96
+        },
+        {
+          "at": 7.24,
+          "charIndex": 136,
+          "word": "Jetzt",
+          "end": 7.42
+        },
+        {
+          "at": 7.42,
+          "charIndex": 142,
+          "word": "halten",
+          "end": 7.7
+        },
+        {
+          "at": 7.7,
+          "charIndex": 149,
+          "word": "Sie",
+          "end": 7.8
+        },
+        {
+          "at": 7.8,
+          "charIndex": 153,
+          "word": "doch",
+          "end": 7.96
+        },
+        {
+          "at": 7.96,
+          "charIndex": 158,
+          "word": "endlich",
+          "end": 8.28
+        }
+      ],
+      "sha256": "afca78656714932bb1c00abd7bc162656f0014d339727a6eb0272a79c5453ee5",
+      "bytes": 143660,
+      "sampleRateHz": 48000,
+      "channels": 1,
+      "bitrateBitsPerSecond": 128000,
+      "file": "assets/voices/knick/knick-outburst-3.mp3",
+      "asrLiteralWordExact": true,
+      "asrNormalization": "case/punctuation, German numeric and A38 spoken equivalents, section sign, German compound spacing",
+      "processingSha256": "1c7968d73192bfbf5d2b759fce5dc07b092badbd133718ae05d67dbdda72ccb2",
+      "english": "You are reporting my counter? I am seventy-four and have been here for fifty years! My counter does not cover grass. It covers applications! Now finally keep...",
+      "approval": {
+        "status": "user-approved",
+        "date": "2026-10-11",
+        "instruction": "Also the police telephone call between Frau Knick doesn't use her new profile, this is the same person as the one behind counter!",
+        "scope": "Use the selected Brunhilde Knick profile consistently at the counter and in the police argument",
+        "listeningVerified": false
+      }
+    },
+    {
+      "clipId": "knick-outburst-4",
+      "actorId": "clerk",
+      "voiceId": "amt-brunhilde-knick",
+      "profileId": "b080c7d95ecd418fb428282461d7fbe7",
+      "text": "SIE DROHEN MEINEM SCHALTER? DANN VERHAFTEN SIE DOCH DEN LOCHER! Ich lasse mich von Ihnen nicht anschreien!",
+      "sourceLocator": "buergeramt-story.js outburst.lines[3]",
+      "seed": 71003,
+      "referenceSha256": "901e9ad60eda5cbb36337b12864b6a2b0d133570acb90941b9eabd9888c16351",
+      "referenceOriginalSha256": "f87daaf53e9e3183065dbe38a65097f5c8df3ae11454ea56676a8298800683c2",
+      "profileJsonSha256": "4071c9052ebb393358d9957cc5f2271d93c52f13b747fad9f5253bd81b00ce66",
+      "rawSha256": "e34436f6ce16d9ce732cc165be836d8754bda95a4309c8672fa4ddb489c1a3bd",
+      "renderer": "ResembleAI/Chatterbox Multilingual V2 0.1.7",
+      "modelRevision": "5bb1f6ee58e50c3b8d408bc82a6d3740c2db6e18",
+      "modelLicense": "MIT",
+      "referenceLicense": "CC0-1.0 (EmoDB original, transformed reference)",
+      "durationSeconds": 5.84,
+      "renderSeconds": 20.28,
+      "synthesis": {
+        "temperature": 0.65,
+        "repetitionPenalty": 3,
+        "cfgWeight": 0.6,
+        "languageId": "de"
+      },
+      "listening": "pending",
+      "status": "eligible exact-text recording; human listening pending",
+      "processing": "[0:a]highpass=f=65,lowpass=f=7600,asplit[clean][wet];[wet]rubberband=pitch=0.78,lowpass=f=1450,volume=0.16[shadow];[clean][shadow]amix=inputs=2:duration=first:normalize=0[a]",
+      "normalization": {
+        "targetLufs": -18,
+        "targetTruePeakDbtp": -1.5,
+        "filter": "loudnorm=I=-14.96:TP=-1.8:LRA=11:linear=false",
+        "iterations": 5
+      },
+      "integratedLufs": -18.2,
+      "truePeakDbtp": -2.22,
+      "asr": "Sie drohen meinem Schalter? Dann verhaften Sie doch den Locher! Ich lasse mich von Ihnen nicht anschreien!",
+      "asrWordExact": true,
+      "asrModel": "independent faster-whisper, cached local model, CPU int8, no script prompt",
+      "asrModelDirectoryName": "voice-asr-model",
+      "wordCues": [
+        {
+          "at": 0,
+          "charIndex": 0,
+          "word": "SIE",
+          "end": 0.2
+        },
+        {
+          "at": 0.2,
+          "charIndex": 4,
+          "word": "DROHEN",
+          "end": 0.58
+        },
+        {
+          "at": 0.58,
+          "charIndex": 11,
+          "word": "MEINEM",
+          "end": 0.82
+        },
+        {
+          "at": 0.82,
+          "charIndex": 18,
+          "word": "SCHALTER",
+          "end": 1.34
+        },
+        {
+          "at": 1.58,
+          "charIndex": 28,
+          "word": "DANN",
+          "end": 1.86
+        },
+        {
+          "at": 1.86,
+          "charIndex": 33,
+          "word": "VERHAFTEN",
+          "end": 2.3
+        },
+        {
+          "at": 2.3,
+          "charIndex": 43,
+          "word": "SIE",
+          "end": 2.42
+        },
+        {
+          "at": 2.42,
+          "charIndex": 47,
+          "word": "DOCH",
+          "end": 2.6
+        },
+        {
+          "at": 2.6,
+          "charIndex": 52,
+          "word": "DEN",
+          "end": 2.76
+        },
+        {
+          "at": 2.76,
+          "charIndex": 56,
+          "word": "LOCHER",
+          "end": 3.08
+        },
+        {
+          "at": 3.3,
+          "charIndex": 64,
+          "word": "Ich",
+          "end": 3.5
+        },
+        {
+          "at": 3.5,
+          "charIndex": 68,
+          "word": "lasse",
+          "end": 3.82
+        },
+        {
+          "at": 3.82,
+          "charIndex": 74,
+          "word": "mich",
+          "end": 3.92
+        },
+        {
+          "at": 3.92,
+          "charIndex": 79,
+          "word": "von",
+          "end": 4.12
+        },
+        {
+          "at": 4.12,
+          "charIndex": 83,
+          "word": "Ihnen",
+          "end": 4.32
+        },
+        {
+          "at": 4.32,
+          "charIndex": 89,
+          "word": "nicht",
+          "end": 4.56
+        },
+        {
+          "at": 4.56,
+          "charIndex": 95,
+          "word": "anschreien",
+          "end": 5.22
+        }
+      ],
+      "sha256": "2d066a9c02fcbd18efc9573a3b6beec3dbda3d410e8ee5f40dd2f790b8725c23",
+      "bytes": 94508,
+      "sampleRateHz": 48000,
+      "channels": 1,
+      "bitrateBitsPerSecond": 128000,
+      "file": "assets/voices/knick/knick-outburst-4.mp3",
+      "asrLiteralWordExact": true,
+      "asrNormalization": "case/punctuation, German numeric and A38 spoken equivalents, section sign, German compound spacing",
+      "processingSha256": "1c7968d73192bfbf5d2b759fce5dc07b092badbd133718ae05d67dbdda72ccb2",
+      "english": "YOU ARE THREATENING MY COUNTER? THEN ARREST THE HOLE PUNCH! I will not have you shouting at me!",
+      "approval": {
+        "status": "user-approved",
+        "date": "2026-10-11",
+        "instruction": "Also the police telephone call between Frau Knick doesn't use her new profile, this is the same person as the one behind counter!",
+        "scope": "Use the selected Brunhilde Knick profile consistently at the counter and in the police argument",
+        "listeningVerified": false
+      }
+    },
+    {
+      "clipId": "knick-outburst-5",
+      "actorId": "clerk",
+      "voiceId": "amt-brunhilde-knick",
+      "profileId": "b080c7d95ecd418fb428282461d7fbe7",
+      "text": "UND SIE STEHEN HIER NICHT SO UNSCHULDIG! Der Stempel bleibt oben! Ihr Termin ist ANNULLIERT! Raus! Für einen neuen Versuch ziehen Sie draußen eine neue Nummer.",
+      "sourceLocator": "buergeramt-story.js outburst.lines[4]",
+      "seed": 71004,
+      "referenceSha256": "901e9ad60eda5cbb36337b12864b6a2b0d133570acb90941b9eabd9888c16351",
+      "referenceOriginalSha256": "f87daaf53e9e3183065dbe38a65097f5c8df3ae11454ea56676a8298800683c2",
+      "profileJsonSha256": "4071c9052ebb393358d9957cc5f2271d93c52f13b747fad9f5253bd81b00ce66",
+      "rawSha256": "77c89a927f4c10e81df367edee471fd1eba66b12de29db1ee846d5257da057b2",
+      "renderer": "ResembleAI/Chatterbox Multilingual V2 0.1.7",
+      "modelRevision": "5bb1f6ee58e50c3b8d408bc82a6d3740c2db6e18",
+      "modelLicense": "MIT",
+      "referenceLicense": "CC0-1.0 (EmoDB original, transformed reference)",
+      "durationSeconds": 8.52,
+      "renderSeconds": 53.78,
+      "synthesis": {
+        "temperature": 0.65,
+        "repetitionPenalty": 3,
+        "cfgWeight": 0.6,
+        "languageId": "de"
+      },
+      "listening": "pending",
+      "status": "eligible exact-text recording; human listening pending",
+      "processing": "[0:a]highpass=f=65,lowpass=f=7600,asplit[clean][wet];[wet]rubberband=pitch=0.78,lowpass=f=1450,volume=0.16[shadow];[clean][shadow]amix=inputs=2:duration=first:normalize=0[a]",
+      "normalization": {
+        "targetLufs": -18,
+        "targetTruePeakDbtp": -1.5,
+        "filter": "loudnorm=I=-15.150000000000002:TP=-1.8:LRA=11:linear=false",
+        "iterations": 3
+      },
+      "integratedLufs": -18.29,
+      "truePeakDbtp": -2.06,
+      "asr": "Und sie stehen hier nicht so unschuldig. Der Stempel bleibt oben, ihr Termin ist annulliert. Raus! Für einen neuen Versuch ziehen sie draußen eine neue Nummer.",
+      "asrWordExact": true,
+      "asrModel": "independent faster-whisper, cached local model, CPU int8, no script prompt",
+      "asrModelDirectoryName": "voice-asr-model",
+      "wordCues": [
+        {
+          "at": 0,
+          "charIndex": 0,
+          "word": "UND",
+          "end": 0.18
+        },
+        {
+          "at": 0.18,
+          "charIndex": 4,
+          "word": "SIE",
+          "end": 0.3
+        },
+        {
+          "at": 0.3,
+          "charIndex": 8,
+          "word": "STEHEN",
+          "end": 0.58
+        },
+        {
+          "at": 0.58,
+          "charIndex": 15,
+          "word": "HIER",
+          "end": 0.72
+        },
+        {
+          "at": 0.72,
+          "charIndex": 20,
+          "word": "NICHT",
+          "end": 0.92
+        },
+        {
+          "at": 0.92,
+          "charIndex": 26,
+          "word": "SO",
+          "end": 1.08
+        },
+        {
+          "at": 1.08,
+          "charIndex": 29,
+          "word": "UNSCHULDIG",
+          "end": 1.64
+        },
+        {
+          "at": 1.8,
+          "charIndex": 41,
+          "word": "Der",
+          "end": 2.08
+        },
+        {
+          "at": 2.08,
+          "charIndex": 45,
+          "word": "Stempel",
+          "end": 2.48
+        },
+        {
+          "at": 2.48,
+          "charIndex": 53,
+          "word": "bleibt",
+          "end": 2.74
+        },
+        {
+          "at": 2.74,
+          "charIndex": 60,
+          "word": "oben",
+          "end": 3.06
+        },
+        {
+          "at": 3.26,
+          "charIndex": 66,
+          "word": "Ihr",
+          "end": 3.48
+        },
+        {
+          "at": 3.48,
+          "charIndex": 70,
+          "word": "Termin",
+          "end": 3.86
+        },
+        {
+          "at": 3.86,
+          "charIndex": 77,
+          "word": "ist",
+          "end": 4
+        },
+        {
+          "at": 4,
+          "charIndex": 81,
+          "word": "ANNULLIERT",
+          "end": 4.54
+        },
+        {
+          "at": 4.72,
+          "charIndex": 93,
+          "word": "Raus",
+          "end": 5.16
+        },
+        {
+          "at": 5.34,
+          "charIndex": 99,
+          "word": "Für",
+          "end": 5.56
+        },
+        {
+          "at": 5.56,
+          "charIndex": 103,
+          "word": "einen",
+          "end": 5.76
+        },
+        {
+          "at": 5.76,
+          "charIndex": 109,
+          "word": "neuen",
+          "end": 6.02
+        },
+        {
+          "at": 6.02,
+          "charIndex": 115,
+          "word": "Versuch",
+          "end": 6.42
+        },
+        {
+          "at": 6.42,
+          "charIndex": 123,
+          "word": "ziehen",
+          "end": 6.62
+        },
+        {
+          "at": 6.62,
+          "charIndex": 130,
+          "word": "Sie",
+          "end": 6.74
+        },
+        {
+          "at": 6.74,
+          "charIndex": 134,
+          "word": "draußen",
+          "end": 7
+        },
+        {
+          "at": 7,
+          "charIndex": 142,
+          "word": "eine",
+          "end": 7.3
+        },
+        {
+          "at": 7.3,
+          "charIndex": 147,
+          "word": "neue",
+          "end": 7.56
+        },
+        {
+          "at": 7.56,
+          "charIndex": 152,
+          "word": "Nummer",
+          "end": 7.78
+        }
+      ],
+      "sha256": "a960a45908701c56eb903a5cc024604b56bf908ad29de59e905393184083f256",
+      "bytes": 137132,
+      "sampleRateHz": 48000,
+      "channels": 1,
+      "bitrateBitsPerSecond": 128000,
+      "file": "assets/voices/knick/knick-outburst-5.mp3",
+      "asrLiteralWordExact": true,
+      "asrNormalization": "case/punctuation, German numeric and A38 spoken equivalents, section sign, German compound spacing",
+      "processingSha256": "1c7968d73192bfbf5d2b759fce5dc07b092badbd133718ae05d67dbdda72ccb2",
+      "english": "AND YOU ARE NOT STANDING HERE SO INNOCENTLY! The stamp stays up! Your appointment is CANCELLED! Out! For another attempt, draw a new number outside.",
+      "approval": {
+        "status": "user-approved",
+        "date": "2026-10-11",
+        "instruction": "Also the police telephone call between Frau Knick doesn't use her new profile, this is the same person as the one behind counter!",
+        "scope": "Use the selected Brunhilde Knick profile consistently at the counter and in the police argument",
+        "listeningVerified": false
+      }
+    },
+    {
+      "clipId": "knick-phone-warning-1",
+      "actorId": "clerk",
+      "voiceId": "amt-brunhilde-knick",
+      "profileId": "b080c7d95ecd418fb428282461d7fbe7",
+      "text": "Nicht rangehen reicht Ihnen, ja? MIR REICHT ES NICHT! Ihr Telefon klingelt an meinem Schalter! Stellen Sie es LAUTLOS oder schalten Sie es AUS, wenn Sie eine Anmeldung wollen! Wegstecken ist keine Einstellung!",
+      "sourceLocator": "buergeramt-story.js phoneWarnings[0]",
+      "seed": 71006,
+      "referenceSha256": "901e9ad60eda5cbb36337b12864b6a2b0d133570acb90941b9eabd9888c16351",
+      "referenceOriginalSha256": "f87daaf53e9e3183065dbe38a65097f5c8df3ae11454ea56676a8298800683c2",
+      "profileJsonSha256": "4071c9052ebb393358d9957cc5f2271d93c52f13b747fad9f5253bd81b00ce66",
+      "rawSha256": "770a2d08635f1bed6ef304a6481daf4fd012763ce320a82152a92c7b88afe9fb",
+      "renderer": "ResembleAI/Chatterbox Multilingual V2 0.1.7",
+      "modelRevision": "5bb1f6ee58e50c3b8d408bc82a6d3740c2db6e18",
+      "modelLicense": "MIT",
+      "referenceLicense": "CC0-1.0 (EmoDB original, transformed reference)",
+      "durationSeconds": 11.8,
+      "renderSeconds": 38.66,
+      "synthesis": {
+        "temperature": 0.65,
+        "repetitionPenalty": 3,
+        "cfgWeight": 0.6,
+        "languageId": "de"
+      },
+      "listening": "pending",
+      "status": "eligible exact-text recording; human listening pending",
+      "processing": "[0:a]highpass=f=65,lowpass=f=7600,asplit[clean][wet];[wet]rubberband=pitch=0.78,lowpass=f=1450,volume=0.16[shadow];[clean][shadow]amix=inputs=2:duration=first:normalize=0[a]",
+      "normalization": {
+        "targetLufs": -18,
+        "targetTruePeakDbtp": -1.5,
+        "filter": "loudnorm=I=-13.899999999999999:TP=-1.8:LRA=11:linear=false",
+        "iterations": 5
+      },
+      "integratedLufs": -18.27,
+      "truePeakDbtp": -2.15,
+      "asr": "Nicht rangehen reicht Ihnen, ja? Mir reicht es nicht. Ihr Telefon klingelt an meinem Schalter. Stellen Sie es lautlos oder schalten Sie es aus, wenn Sie eine Anmeldung wollen. Wegstecken ist keine Einstellung.",
+      "asrWordExact": true,
+      "asrModel": "independent faster-whisper, cached local model, CPU int8, no script prompt",
+      "asrModelDirectoryName": "voice-asr-model",
+      "wordCues": [
+        {
+          "at": 0,
+          "charIndex": 0,
+          "word": "Nicht",
+          "end": 0.36
+        },
+        {
+          "at": 0.36,
+          "charIndex": 6,
+          "word": "rangehen",
+          "end": 0.88
+        },
+        {
+          "at": 0.88,
+          "charIndex": 15,
+          "word": "reicht",
+          "end": 1.18
+        },
+        {
+          "at": 1.18,
+          "charIndex": 22,
+          "word": "Ihnen",
+          "end": 1.44
+        },
+        {
+          "at": 1.6,
+          "charIndex": 29,
+          "word": "ja",
+          "end": 1.72
+        },
+        {
+          "at": 2,
+          "charIndex": 33,
+          "word": "MIR",
+          "end": 2.22
+        },
+        {
+          "at": 2.22,
+          "charIndex": 37,
+          "word": "REICHT",
+          "end": 2.56
+        },
+        {
+          "at": 2.56,
+          "charIndex": 44,
+          "word": "ES",
+          "end": 2.74
+        },
+        {
+          "at": 2.74,
+          "charIndex": 47,
+          "word": "NICHT",
+          "end": 3
+        },
+        {
+          "at": 3.22,
+          "charIndex": 54,
+          "word": "Ihr",
+          "end": 3.4
+        },
+        {
+          "at": 3.4,
+          "charIndex": 58,
+          "word": "Telefon",
+          "end": 3.96
+        },
+        {
+          "at": 3.96,
+          "charIndex": 66,
+          "word": "klingelt",
+          "end": 4.34
+        },
+        {
+          "at": 4.34,
+          "charIndex": 75,
+          "word": "an",
+          "end": 4.48
+        },
+        {
+          "at": 4.48,
+          "charIndex": 78,
+          "word": "meinem",
+          "end": 4.72
+        },
+        {
+          "at": 4.72,
+          "charIndex": 85,
+          "word": "Schalter",
+          "end": 5.16
+        },
+        {
+          "at": 5.48,
+          "charIndex": 95,
+          "word": "Stellen",
+          "end": 5.68
+        },
+        {
+          "at": 5.68,
+          "charIndex": 103,
+          "word": "Sie",
+          "end": 5.84
+        },
+        {
+          "at": 5.84,
+          "charIndex": 107,
+          "word": "es",
+          "end": 6
+        },
+        {
+          "at": 6,
+          "charIndex": 110,
+          "word": "LAUTLOS",
+          "end": 6.54
+        },
+        {
+          "at": 6.54,
+          "charIndex": 118,
+          "word": "oder",
+          "end": 6.88
+        },
+        {
+          "at": 6.88,
+          "charIndex": 123,
+          "word": "schalten",
+          "end": 7.34
+        },
+        {
+          "at": 7.34,
+          "charIndex": 132,
+          "word": "Sie",
+          "end": 7.5
+        },
+        {
+          "at": 7.5,
+          "charIndex": 136,
+          "word": "es",
+          "end": 7.66
+        },
+        {
+          "at": 7.66,
+          "charIndex": 139,
+          "word": "AUS",
+          "end": 7.9
+        },
+        {
+          "at": 7.92,
+          "charIndex": 144,
+          "word": "wenn",
+          "end": 8.06
+        },
+        {
+          "at": 8.06,
+          "charIndex": 149,
+          "word": "Sie",
+          "end": 8.18
+        },
+        {
+          "at": 8.18,
+          "charIndex": 153,
+          "word": "eine",
+          "end": 8.38
+        },
+        {
+          "at": 8.38,
+          "charIndex": 158,
+          "word": "Anmeldung",
+          "end": 8.88
+        },
+        {
+          "at": 8.88,
+          "charIndex": 168,
+          "word": "wollen",
+          "end": 9.18
+        },
+        {
+          "at": 9.54,
+          "charIndex": 176,
+          "word": "Wegstecken",
+          "end": 10.02
+        },
+        {
+          "at": 10.02,
+          "charIndex": 187,
+          "word": "ist",
+          "end": 10.18
+        },
+        {
+          "at": 10.18,
+          "charIndex": 191,
+          "word": "keine",
+          "end": 10.46
+        },
+        {
+          "at": 10.46,
+          "charIndex": 197,
+          "word": "Einstellung",
+          "end": 11.06
+        }
+      ],
+      "sha256": "cc26d9f367a5398648dcd62d61aca647cfcb38aeb9ae807b921c6de48f7ea7d5",
+      "bytes": 189740,
+      "sampleRateHz": 48000,
+      "channels": 1,
+      "bitrateBitsPerSecond": 128000,
+      "file": "assets/voices/knick/knick-phone-warning-1.mp3",
+      "asrLiteralWordExact": true,
+      "asrNormalization": "case/punctuation, German numeric and A38 spoken equivalents, section sign, German compound spacing",
+      "processingSha256": "1c7968d73192bfbf5d2b759fce5dc07b092badbd133718ae05d67dbdda72ccb2",
+      "english": "Not answering is enough for you, is it? IT IS NOT ENOUGH FOR ME! Your phone is ringing at my counter! Put it on SILENT or switch it OFF if you want to register! Putting it away is not a setting!",
+      "approval": {
+        "status": "user-approved",
+        "date": "2026-10-11",
+        "instruction": "Also the police telephone call between Frau Knick doesn't use her new profile, this is the same person as the one behind counter!",
+        "scope": "Use the selected Brunhilde Knick profile consistently at the counter and in the police argument",
+        "listeningVerified": false
+      }
+    },
+    {
+      "clipId": "knick-phone-warning-3",
+      "actorId": "clerk",
+      "voiceId": "amt-brunhilde-knick",
+      "profileId": "b080c7d95ecd418fb428282461d7fbe7",
+      "text": "JETZT IST SCHLUSS MIT DEM GEKLINGEL! Solange dieses Ding an meinem Schalter Lärm macht, bleibt mein Stempel oben! Schalten Sie das Telefon aus oder stellen Sie es lautlos. DANN sprechen wir weiter!",
+      "sourceLocator": "buergeramt-story.js phoneWarnings[2]",
+      "seed": 71008,
+      "referenceSha256": "901e9ad60eda5cbb36337b12864b6a2b0d133570acb90941b9eabd9888c16351",
+      "referenceOriginalSha256": "f87daaf53e9e3183065dbe38a65097f5c8df3ae11454ea56676a8298800683c2",
+      "profileJsonSha256": "4071c9052ebb393358d9957cc5f2271d93c52f13b747fad9f5253bd81b00ce66",
+      "rawSha256": "5a53060ddcbb4930dfd7a7ed781fc9e44401d36ad1d23fa3aaed0274bcd1f9d9",
+      "renderer": "ResembleAI/Chatterbox Multilingual V2 0.1.7",
+      "modelRevision": "5bb1f6ee58e50c3b8d408bc82a6d3740c2db6e18",
+      "modelLicense": "MIT",
+      "referenceLicense": "CC0-1.0 (EmoDB original, transformed reference)",
+      "durationSeconds": 10.56,
+      "renderSeconds": 31.41,
+      "synthesis": {
+        "temperature": 0.65,
+        "repetitionPenalty": 3,
+        "cfgWeight": 0.6,
+        "languageId": "de",
+        "conditioningCached": true,
+        "cpuThreads": 2,
+        "inferenceMode": true
+      },
+      "listening": "pending",
+      "status": "eligible exact-text recording; human listening pending",
+      "processing": "[0:a]highpass=f=65,lowpass=f=7600,asplit[clean][wet];[wet]rubberband=pitch=0.78,lowpass=f=1450,volume=0.16[shadow];[clean][shadow]amix=inputs=2:duration=first:normalize=0[a]",
+      "normalization": {
+        "targetLufs": -18,
+        "targetTruePeakDbtp": -1.5,
+        "filter": "loudnorm=I=-15.419999999999998:TP=-1.8:LRA=11:linear=false",
+        "iterations": 4
+      },
+      "integratedLufs": -18.29,
+      "truePeakDbtp": -2.08,
+      "asr": "Jetzt ist Schluss mit dem Geklingel. Solange dieses Ding an meinem Schalterlärm macht, bleibt mein Stempel oben. Schalten Sie das Telefon aus oder stellen Sie es lautlos. Dann sprechen wir weiter.",
+      "asrWordExact": true,
+      "asrModel": "independent faster-whisper, cached local model, CPU int8, no script prompt",
+      "asrModelDirectoryName": "voice-asr-model",
+      "wordCues": [],
+      "sha256": "950dce475c24825c00336199ddd21c57aada9b33340bfd45e9d0b256a3ed3705",
+      "bytes": 169772,
+      "sampleRateHz": 48000,
+      "channels": 1,
+      "bitrateBitsPerSecond": 128000,
+      "file": "assets/voices/knick/knick-phone-warning-3.mp3",
+      "asrLiteralWordExact": false,
+      "asrNormalization": "case/punctuation, German numeric and A38 spoken equivalents, section sign, German compound spacing",
+      "processingSha256": "1c7968d73192bfbf5d2b759fce5dc07b092badbd133718ae05d67dbdda72ccb2",
+      "english": "ENOUGH OF THE RINGING! As long as that thing makes noise at my counter, my stamp stays up! Switch off the phone or put it on silent. THEN we talk!",
+      "approval": {
+        "status": "user-approved",
+        "date": "2026-10-11",
+        "instruction": "Also the police telephone call between Frau Knick doesn't use her new profile, this is the same person as the one behind counter!",
+        "scope": "Use the selected Brunhilde Knick profile consistently at the counter and in the police argument",
+        "listeningVerified": false
+      }
+    },
+    {
+      "clipId": "knick-status-1",
+      "actorId": "clerk",
+      "voiceId": "amt-brunhilde-knick",
+      "profileId": "b080c7d95ecd418fb428282461d7fbe7",
+      "text": "Ihre Nummer war aufgerufen. Ich habe währenddessen sehr viel nicht getan. Ihr Termin ist verfallen. Scannen Sie das Schild für einen neuen Vorgang.",
+      "sourceLocator": "buergeramt.js:630",
+      "seed": 71009,
+      "referenceSha256": "901e9ad60eda5cbb36337b12864b6a2b0d133570acb90941b9eabd9888c16351",
+      "referenceOriginalSha256": "f87daaf53e9e3183065dbe38a65097f5c8df3ae11454ea56676a8298800683c2",
+      "profileJsonSha256": "4071c9052ebb393358d9957cc5f2271d93c52f13b747fad9f5253bd81b00ce66",
+      "rawSha256": "b1ddc2df960c4a49e017af8cc74df7fa608f3d5c9197c268453c87434ebc19b2",
+      "renderer": "ResembleAI/Chatterbox Multilingual V2 0.1.7",
+      "modelRevision": "5bb1f6ee58e50c3b8d408bc82a6d3740c2db6e18",
+      "modelLicense": "MIT",
+      "referenceLicense": "CC0-1.0 (EmoDB original, transformed reference)",
+      "durationSeconds": 7.64,
+      "renderSeconds": 28.52,
+      "synthesis": {
+        "temperature": 0.65,
+        "repetitionPenalty": 3,
+        "cfgWeight": 0.6,
+        "languageId": "de",
+        "conditioningCached": true,
+        "cpuThreads": 2,
+        "inferenceMode": true
+      },
+      "listening": "pending",
+      "status": "eligible exact-text recording; human listening pending",
+      "processing": "[0:a]highpass=f=65,lowpass=f=7600,asplit[clean][wet];[wet]rubberband=pitch=0.78,lowpass=f=1450,volume=0.16[shadow];[clean][shadow]amix=inputs=2:duration=first:normalize=0[a]",
+      "normalization": {
+        "targetLufs": -18,
+        "targetTruePeakDbtp": -1.5,
+        "filter": "loudnorm=I=-14.120000000000001:TP=-1.8:LRA=11:linear=false",
+        "iterations": 4
+      },
+      "integratedLufs": -18.24,
+      "truePeakDbtp": -2.19,
+      "asr": "Ihre Nummer war aufgerufen. Ich habe währenddessen sehr viel nicht getan. Ihr Termin ist verfallen. Scannen Sie das Schild für einen neuen Vorgang.",
+      "asrWordExact": true,
+      "asrModel": "independent faster-whisper, cached local model, CPU int8, no script prompt",
+      "asrModelDirectoryName": "voice-asr-model",
+      "wordCues": [
+        {
+          "at": 0,
+          "charIndex": 0,
+          "word": "Ihre",
+          "end": 0.24
+        },
+        {
+          "at": 0.24,
+          "charIndex": 5,
+          "word": "Nummer",
+          "end": 0.46
+        },
+        {
+          "at": 0.46,
+          "charIndex": 12,
+          "word": "war",
+          "end": 0.66
+        },
+        {
+          "at": 0.66,
+          "charIndex": 16,
+          "word": "aufgerufen",
+          "end": 1.34
+        },
+        {
+          "at": 1.6,
+          "charIndex": 28,
+          "word": "Ich",
+          "end": 1.82
+        },
+        {
+          "at": 1.82,
+          "charIndex": 32,
+          "word": "habe",
+          "end": 1.98
+        },
+        {
+          "at": 1.98,
+          "charIndex": 37,
+          "word": "währenddessen",
+          "end": 2.52
+        },
+        {
+          "at": 2.52,
+          "charIndex": 51,
+          "word": "sehr",
+          "end": 2.66
+        },
+        {
+          "at": 2.66,
+          "charIndex": 56,
+          "word": "viel",
+          "end": 2.86
+        },
+        {
+          "at": 2.86,
+          "charIndex": 61,
+          "word": "nicht",
+          "end": 3.06
+        },
+        {
+          "at": 3.06,
+          "charIndex": 67,
+          "word": "getan",
+          "end": 3.44
+        },
+        {
+          "at": 3.7,
+          "charIndex": 74,
+          "word": "Ihr",
+          "end": 3.84
+        },
+        {
+          "at": 3.84,
+          "charIndex": 78,
+          "word": "Termin",
+          "end": 4.2
+        },
+        {
+          "at": 4.2,
+          "charIndex": 85,
+          "word": "ist",
+          "end": 4.3
+        },
+        {
+          "at": 4.3,
+          "charIndex": 89,
+          "word": "verfallen",
+          "end": 4.8
+        },
+        {
+          "at": 5.12,
+          "charIndex": 100,
+          "word": "Scannen",
+          "end": 5.32
+        },
+        {
+          "at": 5.32,
+          "charIndex": 108,
+          "word": "Sie",
+          "end": 5.46
+        },
+        {
+          "at": 5.46,
+          "charIndex": 112,
+          "word": "das",
+          "end": 5.64
+        },
+        {
+          "at": 5.64,
+          "charIndex": 116,
+          "word": "Schild",
+          "end": 5.86
+        },
+        {
+          "at": 5.86,
+          "charIndex": 123,
+          "word": "für",
+          "end": 6.02
+        },
+        {
+          "at": 6.02,
+          "charIndex": 127,
+          "word": "einen",
+          "end": 6.18
+        },
+        {
+          "at": 6.18,
+          "charIndex": 133,
+          "word": "neuen",
+          "end": 6.46
+        },
+        {
+          "at": 6.46,
+          "charIndex": 139,
+          "word": "Vorgang",
+          "end": 6.98
+        }
+      ],
+      "sha256": "151ae2cced728f67a21d6394e5318da69c5cbfbb1b5dba613d18f2b62116af0a",
+      "bytes": 123308,
+      "sampleRateHz": 48000,
+      "channels": 1,
+      "bitrateBitsPerSecond": 128000,
+      "file": "assets/voices/knick/knick-status-1.mp3",
+      "asrLiteralWordExact": true,
+      "asrNormalization": "case/punctuation, German numeric and A38 spoken equivalents, section sign, German compound spacing",
+      "processingSha256": "1c7968d73192bfbf5d2b759fce5dc07b092badbd133718ae05d67dbdda72ccb2",
+      "english": "Your number was called. In the meantime I did a great deal of nothing. Your appointment has expired. Scan the sign for a new application.",
+      "approval": {
+        "status": "user-approved",
+        "date": "2026-10-11",
+        "instruction": "Also the police telephone call between Frau Knick doesn't use her new profile, this is the same person as the one behind counter!",
+        "scope": "Use the selected Brunhilde Knick profile consistently at the counter and in the police argument",
+        "listeningVerified": false
+      }
+    },
+    {
+      "clipId": "knick-status-3",
+      "actorId": "clerk",
+      "voiceId": "amt-brunhilde-knick",
+      "profileId": "b080c7d95ecd418fb428282461d7fbe7",
+      "text": "RAUS! Drei Aufforderungen und immer noch ein klingelndes Telefon! Ihr Wohnsitz wartet jetzt ohne Sie. Neue Nummer. Neuer Versuch. Und diesmal LAUTLOS!",
+      "sourceLocator": "buergeramt.js:687",
+      "seed": 71010,
+      "referenceSha256": "901e9ad60eda5cbb36337b12864b6a2b0d133570acb90941b9eabd9888c16351",
+      "referenceOriginalSha256": "f87daaf53e9e3183065dbe38a65097f5c8df3ae11454ea56676a8298800683c2",
+      "profileJsonSha256": "4071c9052ebb393358d9957cc5f2271d93c52f13b747fad9f5253bd81b00ce66",
+      "rawSha256": "f51b5cd731357452cca74d9d9be843e5d6e2639a329a08feb4bb9d0faee3dccf",
+      "renderer": "ResembleAI/Chatterbox Multilingual V2 0.1.7",
+      "modelRevision": "5bb1f6ee58e50c3b8d408bc82a6d3740c2db6e18",
+      "modelLicense": "MIT",
+      "referenceLicense": "CC0-1.0 (EmoDB original, transformed reference)",
+      "durationSeconds": 9.44,
+      "renderSeconds": 20.5,
+      "synthesis": {
+        "temperature": 0.65,
+        "repetitionPenalty": 3,
+        "cfgWeight": 0.6,
+        "languageId": "de",
+        "conditioningCached": true,
+        "cpuThreads": 2,
+        "inferenceMode": true
+      },
+      "listening": "pending",
+      "status": "eligible exact-text recording; human listening pending",
+      "processing": "[0:a]highpass=f=65,lowpass=f=7600,asplit[clean][wet];[wet]rubberband=pitch=0.78,lowpass=f=1450,volume=0.16[shadow];[clean][shadow]amix=inputs=2:duration=first:normalize=0[a]",
+      "normalization": {
+        "targetLufs": -18,
+        "targetTruePeakDbtp": -1.5,
+        "filter": "loudnorm=I=-15.170000000000002:TP=-1.8:LRA=11:linear=false",
+        "iterations": 5
+      },
+      "integratedLufs": -18.23,
+      "truePeakDbtp": -2.23,
+      "asr": "raus drei aufforderungen und immer noch ein klingelndes telefon ihr wohnsitz wartet jetzt ohne sie neue nummer neuer versuch und diesmal lautlos",
+      "asrWordExact": true,
+      "asrModel": "independent faster-whisper, cached local model, CPU int8, no script prompt",
+      "asrModelDirectoryName": "voice-asr-model",
+      "wordCues": [
+        {
+          "at": 0,
+          "charIndex": 0,
+          "word": "RAUS",
+          "end": 0.58
+        },
+        {
+          "at": 0.58,
+          "charIndex": 6,
+          "word": "Drei",
+          "end": 1.24
+        },
+        {
+          "at": 1.24,
+          "charIndex": 11,
+          "word": "Aufforderungen",
+          "end": 2.2
+        },
+        {
+          "at": 2.2,
+          "charIndex": 26,
+          "word": "und",
+          "end": 2.66
+        },
+        {
+          "at": 2.66,
+          "charIndex": 30,
+          "word": "immer",
+          "end": 2.88
+        },
+        {
+          "at": 2.88,
+          "charIndex": 36,
+          "word": "noch",
+          "end": 3.04
+        },
+        {
+          "at": 3.04,
+          "charIndex": 41,
+          "word": "ein",
+          "end": 3.2
+        },
+        {
+          "at": 3.2,
+          "charIndex": 45,
+          "word": "klingelndes",
+          "end": 3.72
+        },
+        {
+          "at": 3.72,
+          "charIndex": 57,
+          "word": "Telefon",
+          "end": 4.04
+        },
+        {
+          "at": 4.04,
+          "charIndex": 66,
+          "word": "Ihr",
+          "end": 4.64
+        },
+        {
+          "at": 4.64,
+          "charIndex": 70,
+          "word": "Wohnsitz",
+          "end": 5.1
+        },
+        {
+          "at": 5.1,
+          "charIndex": 79,
+          "word": "wartet",
+          "end": 5.36
+        },
+        {
+          "at": 5.36,
+          "charIndex": 86,
+          "word": "jetzt",
+          "end": 5.58
+        },
+        {
+          "at": 5.58,
+          "charIndex": 92,
+          "word": "ohne",
+          "end": 5.82
+        },
+        {
+          "at": 5.82,
+          "charIndex": 97,
+          "word": "Sie",
+          "end": 6.04
+        },
+        {
+          "at": 6.04,
+          "charIndex": 102,
+          "word": "Neue",
+          "end": 6.54
+        },
+        {
+          "at": 6.54,
+          "charIndex": 107,
+          "word": "Nummer",
+          "end": 6.88
+        },
+        {
+          "at": 6.88,
+          "charIndex": 115,
+          "word": "Neuer",
+          "end": 7.38
+        },
+        {
+          "at": 7.38,
+          "charIndex": 121,
+          "word": "Versuch",
+          "end": 7.8
+        },
+        {
+          "at": 7.8,
+          "charIndex": 130,
+          "word": "Und",
+          "end": 7.98
+        },
+        {
+          "at": 7.98,
+          "charIndex": 134,
+          "word": "diesmal",
+          "end": 8.38
+        },
+        {
+          "at": 8.38,
+          "charIndex": 142,
+          "word": "LAUTLOS",
+          "end": 8.96
+        }
+      ],
+      "sha256": "0277a6e9e4adf7784e1861ed84bf79ddf7859a9176146e0dffa3cdb965530714",
+      "bytes": 152108,
+      "sampleRateHz": 48000,
+      "channels": 1,
+      "bitrateBitsPerSecond": 128000,
+      "file": "assets/voices/knick/knick-status-3.mp3",
+      "asrLiteralWordExact": true,
+      "asrNormalization": "case/punctuation, German numeric and A38 spoken equivalents, section sign, German compound spacing",
+      "processingSha256": "1c7968d73192bfbf5d2b759fce5dc07b092badbd133718ae05d67dbdda72ccb2",
+      "english": "OUT! Three warnings and still a ringing phone! Your residence will now wait without you. New number. New attempt. And SILENT this time!",
+      "approval": {
+        "status": "user-approved",
+        "date": "2026-10-11",
+        "instruction": "Also the police telephone call between Frau Knick doesn't use her new profile, this is the same person as the one behind counter!",
+        "scope": "Use the selected Brunhilde Knick profile consistently at the counter and in the police argument",
+        "listeningVerified": false
+      }
+    },
+    {
+      "clipId": "knick-status-4",
+      "actorId": "clerk",
+      "voiceId": "amt-brunhilde-knick",
+      "profileId": "b080c7d95ecd418fb428282461d7fbe7",
+      "text": "Endlich! Das Telefon bleibt lautlos. Und jetzt hören Sie MIR zu. Eine Anmeldung ist kein Plausch mit Ihrem Vermieter!",
+      "sourceLocator": "buergeramt.js:697",
+      "seed": 71011,
+      "referenceSha256": "901e9ad60eda5cbb36337b12864b6a2b0d133570acb90941b9eabd9888c16351",
+      "referenceOriginalSha256": "f87daaf53e9e3183065dbe38a65097f5c8df3ae11454ea56676a8298800683c2",
+      "profileJsonSha256": "4071c9052ebb393358d9957cc5f2271d93c52f13b747fad9f5253bd81b00ce66",
+      "rawSha256": "eeec4ccd8eabe9d57cdd62a85419b52c4784f5ada47735162bfc9b80e7fd13b8",
+      "renderer": "ResembleAI/Chatterbox Multilingual V2 0.1.7",
+      "modelRevision": "5bb1f6ee58e50c3b8d408bc82a6d3740c2db6e18",
+      "modelLicense": "MIT",
+      "referenceLicense": "CC0-1.0 (EmoDB original, transformed reference)",
+      "durationSeconds": 7.8,
+      "renderSeconds": 23.97,
+      "synthesis": {
+        "temperature": 0.65,
+        "repetitionPenalty": 3,
+        "cfgWeight": 0.6,
+        "languageId": "de",
+        "conditioningCached": true,
+        "cpuThreads": 2,
+        "inferenceMode": true
+      },
+      "listening": "pending",
+      "status": "eligible exact-text recording; human listening pending",
+      "processing": "[0:a]highpass=f=65,lowpass=f=7600,asplit[clean][wet];[wet]rubberband=pitch=0.78,lowpass=f=1450,volume=0.16[shadow];[clean][shadow]amix=inputs=2:duration=first:normalize=0[a]",
+      "normalization": {
+        "targetLufs": -18,
+        "targetTruePeakDbtp": -1.5,
+        "filter": "loudnorm=I=-13.25:TP=-1.8:LRA=11:linear=false",
+        "iterations": 6
+      },
+      "integratedLufs": -18.22,
+      "truePeakDbtp": -2.16,
+      "asr": "Endlich! Das Telefon bleibt lautlos. Und jetzt hören Sie mir zu. Eine Anmeldung ist kein Plausch mit Ihrem Vermieter.",
+      "asrWordExact": true,
+      "asrModel": "independent faster-whisper, cached local model, CPU int8, no script prompt",
+      "asrModelDirectoryName": "voice-asr-model",
+      "wordCues": [
+        {
+          "at": 0,
+          "charIndex": 0,
+          "word": "Endlich",
+          "end": 0.72
+        },
+        {
+          "at": 0.98,
+          "charIndex": 9,
+          "word": "Das",
+          "end": 1.34
+        },
+        {
+          "at": 1.34,
+          "charIndex": 13,
+          "word": "Telefon",
+          "end": 1.8
+        },
+        {
+          "at": 1.8,
+          "charIndex": 21,
+          "word": "bleibt",
+          "end": 2.08
+        },
+        {
+          "at": 2.08,
+          "charIndex": 28,
+          "word": "lautlos",
+          "end": 2.9
+        },
+        {
+          "at": 3.06,
+          "charIndex": 37,
+          "word": "Und",
+          "end": 3.36
+        },
+        {
+          "at": 3.36,
+          "charIndex": 41,
+          "word": "jetzt",
+          "end": 3.54
+        },
+        {
+          "at": 3.54,
+          "charIndex": 47,
+          "word": "hören",
+          "end": 3.82
+        },
+        {
+          "at": 3.82,
+          "charIndex": 53,
+          "word": "Sie",
+          "end": 3.94
+        },
+        {
+          "at": 3.94,
+          "charIndex": 57,
+          "word": "MIR",
+          "end": 4.1
+        },
+        {
+          "at": 4.1,
+          "charIndex": 61,
+          "word": "zu",
+          "end": 4.38
+        },
+        {
+          "at": 4.58,
+          "charIndex": 65,
+          "word": "Eine",
+          "end": 4.92
+        },
+        {
+          "at": 4.92,
+          "charIndex": 70,
+          "word": "Anmeldung",
+          "end": 5.4
+        },
+        {
+          "at": 5.4,
+          "charIndex": 80,
+          "word": "ist",
+          "end": 5.58
+        },
+        {
+          "at": 5.58,
+          "charIndex": 84,
+          "word": "kein",
+          "end": 5.86
+        },
+        {
+          "at": 5.86,
+          "charIndex": 89,
+          "word": "Plausch",
+          "end": 6.28
+        },
+        {
+          "at": 6.28,
+          "charIndex": 97,
+          "word": "mit",
+          "end": 6.46
+        },
+        {
+          "at": 6.46,
+          "charIndex": 101,
+          "word": "Ihrem",
+          "end": 6.66
+        },
+        {
+          "at": 6.66,
+          "charIndex": 107,
+          "word": "Vermieter",
+          "end": 7.2
+        }
+      ],
+      "sha256": "7e51525e7bdbed9615a40b2d4e26e960c954bfbb88bf462d993156f6ffbfb75a",
+      "bytes": 125612,
+      "sampleRateHz": 48000,
+      "channels": 1,
+      "bitrateBitsPerSecond": 128000,
+      "file": "assets/voices/knick/knick-status-4.mp3",
+      "asrLiteralWordExact": true,
+      "asrNormalization": "case/punctuation, German numeric and A38 spoken equivalents, section sign, German compound spacing",
+      "processingSha256": "1c7968d73192bfbf5d2b759fce5dc07b092badbd133718ae05d67dbdda72ccb2",
+      "english": "Finally! The phone stays silent. And now listen to ME. Registering your address is not a chat with your landlord!",
+      "approval": {
+        "status": "user-approved",
+        "date": "2026-10-11",
+        "instruction": "Also the police telephone call between Frau Knick doesn't use her new profile, this is the same person as the one behind counter!",
+        "scope": "Use the selected Brunhilde Knick profile consistently at the counter and in the police argument",
+        "listeningVerified": false
+      }
+    },
+    {
+      "clipId": "knick-registration-presence",
+      "actorId": "clerk",
+      "voiceId": "amt-brunhilde-knick",
+      "profileId": "b080c7d95ecd418fb428282461d7fbe7",
+      "text": "So. Sie wollen eine Anmeldung. Dann bleiben Sie geistig hier, körperlich hier und telefonisch STILL. Ihre Nummer liegt links, Sie stehen rechts. Was soll ich Ihrer Akte als Beweis der Anwesenheit glauben?",
+      "sourceLocator": "buergeramt-story.js registration.nodes.presence.line",
+      "seed": 71012,
+      "referenceSha256": "901e9ad60eda5cbb36337b12864b6a2b0d133570acb90941b9eabd9888c16351",
+      "referenceOriginalSha256": "f87daaf53e9e3183065dbe38a65097f5c8df3ae11454ea56676a8298800683c2",
+      "profileJsonSha256": "4071c9052ebb393358d9957cc5f2271d93c52f13b747fad9f5253bd81b00ce66",
+      "rawSha256": "ec3c573054f9ade44100f1441fcb5d77ea83cb1d3bbf35a687e71ec9b96ee2f8",
+      "renderer": "ResembleAI/Chatterbox Multilingual V2 0.1.7",
+      "modelRevision": "5bb1f6ee58e50c3b8d408bc82a6d3740c2db6e18",
+      "modelLicense": "MIT",
+      "referenceLicense": "CC0-1.0 (EmoDB original, transformed reference)",
+      "durationSeconds": 9.64,
+      "renderSeconds": 29.42,
+      "synthesis": {
+        "temperature": 0.65,
+        "repetitionPenalty": 3,
+        "cfgWeight": 0.6,
+        "languageId": "de",
+        "conditioningCached": true,
+        "cpuThreads": 2,
+        "inferenceMode": true
+      },
+      "listening": "pending",
+      "status": "eligible exact-text recording; human listening pending",
+      "processing": "[0:a]highpass=f=65,lowpass=f=7600,asplit[clean][wet];[wet]rubberband=pitch=0.78,lowpass=f=1450,volume=0.16[shadow];[clean][shadow]amix=inputs=2:duration=first:normalize=0[a]",
+      "processingSha256": "1c7968d73192bfbf5d2b759fce5dc07b092badbd133718ae05d67dbdda72ccb2",
+      "normalization": {
+        "targetLufs": -18,
+        "targetTruePeakDbtp": -1.5,
+        "filter": "loudnorm=I=-13.940000000000001:TP=-1.8:LRA=11:linear=false",
+        "iterations": 5
+      },
+      "integratedLufs": -18.29,
+      "truePeakDbtp": -2.03,
+      "asr": "So, Sie wollen eine Anmeldung. Dann bleiben Sie geistig hier, körperlich hier und telefonisch still. Ihre Nummer liegt links, Sie stehen rechts. Was soll ich Ihrer Akte als Beweis der Anwesenheit glauben?",
+      "asrWordExact": true,
+      "asrLiteralWordExact": true,
+      "asrNormalization": "case/punctuation, German numeric and A38 spoken equivalents, section sign, German compound spacing",
+      "asrModel": "independent faster-whisper, cached local model, CPU int8, no script prompt",
+      "asrModelDirectoryName": "voice-asr-model",
+      "wordCues": [
+        {
+          "at": 0,
+          "charIndex": 0,
+          "word": "So",
+          "end": 0.26
+        },
+        {
+          "at": 0.56,
+          "charIndex": 4,
+          "word": "Sie",
+          "end": 0.64
+        },
+        {
+          "at": 0.64,
+          "charIndex": 8,
+          "word": "wollen",
+          "end": 0.82
+        },
+        {
+          "at": 0.82,
+          "charIndex": 15,
+          "word": "eine",
+          "end": 1.04
+        },
+        {
+          "at": 1.04,
+          "charIndex": 20,
+          "word": "Anmeldung",
+          "end": 1.54
+        },
+        {
+          "at": 1.62,
+          "charIndex": 31,
+          "word": "Dann",
+          "end": 1.74
+        },
+        {
+          "at": 1.74,
+          "charIndex": 36,
+          "word": "bleiben",
+          "end": 1.98
+        },
+        {
+          "at": 1.98,
+          "charIndex": 44,
+          "word": "Sie",
+          "end": 2.12
+        },
+        {
+          "at": 2.12,
+          "charIndex": 48,
+          "word": "geistig",
+          "end": 2.56
+        },
+        {
+          "at": 2.56,
+          "charIndex": 56,
+          "word": "hier",
+          "end": 2.78
+        },
+        {
+          "at": 2.92,
+          "charIndex": 62,
+          "word": "körperlich",
+          "end": 3.32
+        },
+        {
+          "at": 3.32,
+          "charIndex": 73,
+          "word": "hier",
+          "end": 3.48
+        },
+        {
+          "at": 3.48,
+          "charIndex": 78,
+          "word": "und",
+          "end": 3.62
+        },
+        {
+          "at": 3.62,
+          "charIndex": 82,
+          "word": "telefonisch",
+          "end": 4.12
+        },
+        {
+          "at": 4.12,
+          "charIndex": 94,
+          "word": "STILL",
+          "end": 4.36
+        },
+        {
+          "at": 4.7,
+          "charIndex": 101,
+          "word": "Ihre",
+          "end": 4.9
+        },
+        {
+          "at": 4.9,
+          "charIndex": 106,
+          "word": "Nummer",
+          "end": 5.1
+        },
+        {
+          "at": 5.1,
+          "charIndex": 113,
+          "word": "liegt",
+          "end": 5.38
+        },
+        {
+          "at": 5.38,
+          "charIndex": 119,
+          "word": "links",
+          "end": 5.62
+        },
+        {
+          "at": 5.72,
+          "charIndex": 126,
+          "word": "Sie",
+          "end": 5.84
+        },
+        {
+          "at": 5.84,
+          "charIndex": 130,
+          "word": "stehen",
+          "end": 6.02
+        },
+        {
+          "at": 6.02,
+          "charIndex": 137,
+          "word": "rechts",
+          "end": 6.32
+        },
+        {
+          "at": 6.6,
+          "charIndex": 145,
+          "word": "Was",
+          "end": 6.8
+        },
+        {
+          "at": 6.8,
+          "charIndex": 149,
+          "word": "soll",
+          "end": 6.94
+        },
+        {
+          "at": 6.94,
+          "charIndex": 154,
+          "word": "ich",
+          "end": 7.08
+        },
+        {
+          "at": 7.08,
+          "charIndex": 158,
+          "word": "Ihrer",
+          "end": 7.26
+        },
+        {
+          "at": 7.26,
+          "charIndex": 164,
+          "word": "Akte",
+          "end": 7.56
+        },
+        {
+          "at": 7.56,
+          "charIndex": 169,
+          "word": "als",
+          "end": 7.72
+        },
+        {
+          "at": 7.72,
+          "charIndex": 173,
+          "word": "Beweis",
+          "end": 8.06
+        },
+        {
+          "at": 8.06,
+          "charIndex": 180,
+          "word": "der",
+          "end": 8.18
+        },
+        {
+          "at": 8.18,
+          "charIndex": 184,
+          "word": "Anwesenheit",
+          "end": 8.7
+        },
+        {
+          "at": 8.7,
+          "charIndex": 196,
+          "word": "glauben",
+          "end": 8.98
+        }
+      ],
+      "sha256": "0169e58632f8726f1bab09700b6924c4c26535e785240d48178e24ceda76a848",
+      "bytes": 155180,
+      "sampleRateHz": 48000,
+      "channels": 1,
+      "bitrateBitsPerSecond": 128000,
+      "file": "assets/voices/knick/knick-registration-presence.mp3",
+      "english": "So. You want to register. Then stay here mentally, here physically, and SILENT on the phone. Your number is on the left; you are on the right. What should your file accept as proof of your presence?",
+      "approval": {
+        "status": "user-approved",
+        "date": "2026-10-11",
+        "instruction": "Also the police telephone call between Frau Knick doesn't use her new profile, this is the same person as the one behind counter!",
+        "scope": "Use the selected Brunhilde Knick profile consistently at the counter and in the police argument",
+        "listeningVerified": false
+      }
+    },
+    {
+      "clipId": "knick-registration-presence-reply-1",
+      "actorId": "clerk",
+      "voiceId": "amt-brunhilde-knick",
+      "profileId": "b080c7d95ecd418fb428282461d7fbe7",
+      "text": "Endlich etwas mit Rand und Ziffern. Ihre Nummer kommt oben auf die Akte. Sie bleiben darunter.",
+      "sourceLocator": "buergeramt-story.js registration.nodes.presence.choices[0].reply",
+      "seed": 71013,
+      "referenceSha256": "901e9ad60eda5cbb36337b12864b6a2b0d133570acb90941b9eabd9888c16351",
+      "referenceOriginalSha256": "f87daaf53e9e3183065dbe38a65097f5c8df3ae11454ea56676a8298800683c2",
+      "profileJsonSha256": "4071c9052ebb393358d9957cc5f2271d93c52f13b747fad9f5253bd81b00ce66",
+      "rawSha256": "d18e1bbef4d4ab52be2084fae38c48e0109ca45d30a11be284b95888008102ae",
+      "renderer": "ResembleAI/Chatterbox Multilingual V2 0.1.7",
+      "modelRevision": "5bb1f6ee58e50c3b8d408bc82a6d3740c2db6e18",
+      "modelLicense": "MIT",
+      "referenceLicense": "CC0-1.0 (EmoDB original, transformed reference)",
+      "durationSeconds": 6.08,
+      "renderSeconds": 15.33,
+      "synthesis": {
+        "temperature": 0.65,
+        "repetitionPenalty": 3,
+        "cfgWeight": 0.6,
+        "languageId": "de",
+        "conditioningCached": true,
+        "cpuThreads": 2,
+        "inferenceMode": true
+      },
+      "listening": "pending",
+      "status": "eligible exact-text recording; human listening pending",
+      "processing": "[0:a]highpass=f=65,lowpass=f=7600,asplit[clean][wet];[wet]rubberband=pitch=0.78,lowpass=f=1450,volume=0.16[shadow];[clean][shadow]amix=inputs=2:duration=first:normalize=0[a]",
+      "processingSha256": "1c7968d73192bfbf5d2b759fce5dc07b092badbd133718ae05d67dbdda72ccb2",
+      "normalization": {
+        "targetLufs": -18,
+        "targetTruePeakDbtp": -1.5,
+        "filter": "loudnorm=I=-13.939999999999994:TP=-1.8:LRA=11:linear=false",
+        "iterations": 6
+      },
+      "integratedLufs": -18.24,
+      "truePeakDbtp": -2.21,
+      "asr": "Endlich etwas mit Rand und Ziffern. Ihre Nummer kommt oben auf die Akte. Sie bleiben darunter.",
+      "asrWordExact": true,
+      "asrLiteralWordExact": true,
+      "asrNormalization": "case/punctuation, German numeric and A38 spoken equivalents, section sign, German compound spacing",
+      "asrModel": "independent faster-whisper, cached local model, CPU int8, no script prompt",
+      "asrModelDirectoryName": "voice-asr-model",
+      "wordCues": [
+        {
+          "at": 0,
+          "charIndex": 0,
+          "word": "Endlich",
+          "end": 0.48
+        },
+        {
+          "at": 0.48,
+          "charIndex": 8,
+          "word": "etwas",
+          "end": 0.7
+        },
+        {
+          "at": 0.7,
+          "charIndex": 14,
+          "word": "mit",
+          "end": 0.96
+        },
+        {
+          "at": 0.96,
+          "charIndex": 18,
+          "word": "Rand",
+          "end": 1.28
+        },
+        {
+          "at": 1.28,
+          "charIndex": 23,
+          "word": "und",
+          "end": 1.5
+        },
+        {
+          "at": 1.5,
+          "charIndex": 27,
+          "word": "Ziffern",
+          "end": 1.98
+        },
+        {
+          "at": 2.16,
+          "charIndex": 36,
+          "word": "Ihre",
+          "end": 2.44
+        },
+        {
+          "at": 2.44,
+          "charIndex": 41,
+          "word": "Nummer",
+          "end": 2.7
+        },
+        {
+          "at": 2.7,
+          "charIndex": 48,
+          "word": "kommt",
+          "end": 3.02
+        },
+        {
+          "at": 3.02,
+          "charIndex": 54,
+          "word": "oben",
+          "end": 3.28
+        },
+        {
+          "at": 3.28,
+          "charIndex": 59,
+          "word": "auf",
+          "end": 3.46
+        },
+        {
+          "at": 3.46,
+          "charIndex": 63,
+          "word": "die",
+          "end": 3.62
+        },
+        {
+          "at": 3.62,
+          "charIndex": 67,
+          "word": "Akte",
+          "end": 4
+        },
+        {
+          "at": 4.16,
+          "charIndex": 73,
+          "word": "Sie",
+          "end": 4.38
+        },
+        {
+          "at": 4.38,
+          "charIndex": 77,
+          "word": "bleiben",
+          "end": 4.74
+        },
+        {
+          "at": 4.74,
+          "charIndex": 85,
+          "word": "darunter",
+          "end": 5.18
+        }
+      ],
+      "sha256": "96af8c7b67b946976d3bfa8ddf942c195accdeb26a2e828681b8cceb23f1f27f",
+      "bytes": 98348,
+      "sampleRateHz": 48000,
+      "channels": 1,
+      "bitrateBitsPerSecond": 128000,
+      "file": "assets/voices/knick/knick-registration-presence-reply-1.mp3",
+      "english": "Finally something with edges and digits. Your number goes on top of the file. You stay underneath.",
+      "approval": {
+        "status": "user-approved",
+        "date": "2026-10-11",
+        "instruction": "Also the police telephone call between Frau Knick doesn't use her new profile, this is the same person as the one behind counter!",
+        "scope": "Use the selected Brunhilde Knick profile consistently at the counter and in the police argument",
+        "listeningVerified": false
+      }
+    },
+    {
+      "clipId": "knick-registration-presence-reply-2",
+      "actorId": "clerk",
+      "voiceId": "amt-brunhilde-knick",
+      "profileId": "b080c7d95ecd418fb428282461d7fbe7",
+      "text": "Und morgen stehen Sie irgendwo anders. Ihr Gesicht ist kein Ordnungsmerkmal. Legen Sie die Nummer hin!",
+      "sourceLocator": "buergeramt-story.js registration.nodes.presence.choices[1].reply",
+      "seed": 71014,
+      "referenceSha256": "901e9ad60eda5cbb36337b12864b6a2b0d133570acb90941b9eabd9888c16351",
+      "referenceOriginalSha256": "f87daaf53e9e3183065dbe38a65097f5c8df3ae11454ea56676a8298800683c2",
+      "profileJsonSha256": "4071c9052ebb393358d9957cc5f2271d93c52f13b747fad9f5253bd81b00ce66",
+      "rawSha256": "ca98c62a923d9fd7420726d44c8abe2c712f74d65f2fe899080ea16b864302d0",
+      "renderer": "ResembleAI/Chatterbox Multilingual V2 0.1.7",
+      "modelRevision": "5bb1f6ee58e50c3b8d408bc82a6d3740c2db6e18",
+      "modelLicense": "MIT",
+      "referenceLicense": "CC0-1.0 (EmoDB original, transformed reference)",
+      "durationSeconds": 5.84,
+      "renderSeconds": 18.08,
+      "synthesis": {
+        "temperature": 0.65,
+        "repetitionPenalty": 3,
+        "cfgWeight": 0.6,
+        "languageId": "de",
+        "conditioningCached": true,
+        "cpuThreads": 2,
+        "inferenceMode": true
+      },
+      "listening": "pending",
+      "status": "eligible exact-text recording; human listening pending",
+      "processing": "[0:a]highpass=f=65,lowpass=f=7600,asplit[clean][wet];[wet]rubberband=pitch=0.78,lowpass=f=1450,volume=0.16[shadow];[clean][shadow]amix=inputs=2:duration=first:normalize=0[a]",
+      "processingSha256": "1c7968d73192bfbf5d2b759fce5dc07b092badbd133718ae05d67dbdda72ccb2",
+      "normalization": {
+        "targetLufs": -18,
+        "targetTruePeakDbtp": -1.5,
+        "filter": "loudnorm=I=-16.53:TP=-1.8:LRA=11:linear=false",
+        "iterations": 3
+      },
+      "integratedLufs": -18.21,
+      "truePeakDbtp": -2.21,
+      "asr": "Und morgen stehen Sie irgendwo anders. Ihr Gesicht ist kein Ordnungsmerkmal. Legen Sie die Nummer hin!",
+      "asrWordExact": true,
+      "asrLiteralWordExact": true,
+      "asrNormalization": "case/punctuation, German numeric and A38 spoken equivalents, section sign, German compound spacing",
+      "asrModel": "independent faster-whisper, cached local model, CPU int8, no script prompt",
+      "asrModelDirectoryName": "voice-asr-model",
+      "wordCues": [
+        {
+          "at": 0,
+          "charIndex": 0,
+          "word": "Und",
+          "end": 0.22
+        },
+        {
+          "at": 0.22,
+          "charIndex": 4,
+          "word": "morgen",
+          "end": 0.54
+        },
+        {
+          "at": 0.54,
+          "charIndex": 11,
+          "word": "stehen",
+          "end": 0.82
+        },
+        {
+          "at": 0.82,
+          "charIndex": 18,
+          "word": "Sie",
+          "end": 0.98
+        },
+        {
+          "at": 0.98,
+          "charIndex": 22,
+          "word": "irgendwo",
+          "end": 1.32
+        },
+        {
+          "at": 1.32,
+          "charIndex": 31,
+          "word": "anders",
+          "end": 1.72
+        },
+        {
+          "at": 1.96,
+          "charIndex": 39,
+          "word": "Ihr",
+          "end": 2.26
+        },
+        {
+          "at": 2.26,
+          "charIndex": 43,
+          "word": "Gesicht",
+          "end": 2.52
+        },
+        {
+          "at": 2.52,
+          "charIndex": 51,
+          "word": "ist",
+          "end": 2.7
+        },
+        {
+          "at": 2.7,
+          "charIndex": 55,
+          "word": "kein",
+          "end": 2.88
+        },
+        {
+          "at": 2.88,
+          "charIndex": 60,
+          "word": "Ordnungsmerkmal",
+          "end": 3.82
+        },
+        {
+          "at": 3.96,
+          "charIndex": 77,
+          "word": "Legen",
+          "end": 4.32
+        },
+        {
+          "at": 4.32,
+          "charIndex": 83,
+          "word": "Sie",
+          "end": 4.42
+        },
+        {
+          "at": 4.42,
+          "charIndex": 87,
+          "word": "die",
+          "end": 4.54
+        },
+        {
+          "at": 4.54,
+          "charIndex": 91,
+          "word": "Nummer",
+          "end": 4.74
+        },
+        {
+          "at": 4.74,
+          "charIndex": 98,
+          "word": "hin",
+          "end": 5.04
+        }
+      ],
+      "sha256": "a9eba3a09cc01545489b529a9cf31cbe2dffad759083c87f4ca277b1cc7ce7b9",
+      "bytes": 94508,
+      "sampleRateHz": 48000,
+      "channels": 1,
+      "bitrateBitsPerSecond": 128000,
+      "file": "assets/voices/knick/knick-registration-presence-reply-2.mp3",
+      "english": "And tomorrow you will be standing somewhere else. Your face is not a filing identifier. Put the number down!",
+      "approval": {
+        "status": "user-approved",
+        "date": "2026-10-11",
+        "instruction": "Also the police telephone call between Frau Knick doesn't use her new profile, this is the same person as the one behind counter!",
+        "scope": "Use the selected Brunhilde Knick profile consistently at the counter and in the police argument",
+        "listeningVerified": false
+      }
+    },
+    {
+      "clipId": "knick-registration-presencefix-reply-1",
+      "actorId": "clerk",
+      "voiceId": "amt-brunhilde-knick",
+      "profileId": "b080c7d95ecd418fb428282461d7fbe7",
+      "text": "Gut. Ihre Anwesenheit hat jetzt eine Ablagekante.",
+      "sourceLocator": "buergeramt-story.js registration.nodes.presenceFix.choices[0].reply",
+      "seed": 71016,
+      "referenceSha256": "901e9ad60eda5cbb36337b12864b6a2b0d133570acb90941b9eabd9888c16351",
+      "referenceOriginalSha256": "f87daaf53e9e3183065dbe38a65097f5c8df3ae11454ea56676a8298800683c2",
+      "profileJsonSha256": "4071c9052ebb393358d9957cc5f2271d93c52f13b747fad9f5253bd81b00ce66",
+      "rawSha256": "ce83c98ec8453f37a40a8b6ec3e3e03c00e3cb9fbd0f73ffa12189c58315ba82",
+      "renderer": "ResembleAI/Chatterbox Multilingual V2 0.1.7",
+      "modelRevision": "5bb1f6ee58e50c3b8d408bc82a6d3740c2db6e18",
+      "modelLicense": "MIT",
+      "referenceLicense": "CC0-1.0 (EmoDB original, transformed reference)",
+      "durationSeconds": 4.2,
+      "renderSeconds": 15.8,
+      "synthesis": {
+        "temperature": 0.65,
+        "repetitionPenalty": 3,
+        "cfgWeight": 0.6,
+        "languageId": "de",
+        "conditioningCached": true,
+        "cpuThreads": 2,
+        "inferenceMode": true
+      },
+      "listening": "pending",
+      "status": "eligible exact-text recording; human listening pending",
+      "processing": "[0:a]highpass=f=65,lowpass=f=7600,asplit[clean][wet];[wet]rubberband=pitch=0.78,lowpass=f=1450,volume=0.16[shadow];[clean][shadow]amix=inputs=2:duration=first:normalize=0[a]",
+      "processingSha256": "1c7968d73192bfbf5d2b759fce5dc07b092badbd133718ae05d67dbdda72ccb2",
+      "normalization": {
+        "targetLufs": -18,
+        "targetTruePeakDbtp": -1.5,
+        "filter": "volume=2.877398414735669,alimiter=limit=0.78:attack=1:release=80:level=false:latency=true",
+        "iterations": 7
+      },
+      "integratedLufs": -18.19,
+      "truePeakDbtp": -2.45,
+      "asr": "Gut, ihre Anwesenheit hat jetzt eine Ablagekante.",
+      "asrWordExact": true,
+      "asrLiteralWordExact": true,
+      "asrNormalization": "case/punctuation, German numeric and A38 spoken equivalents, section sign, German compound spacing",
+      "asrModel": "independent faster-whisper, cached local model, CPU int8, no script prompt",
+      "asrModelDirectoryName": "voice-asr-model",
+      "wordCues": [
+        {
+          "at": 0,
+          "charIndex": 0,
+          "word": "Gut",
+          "end": 0.3
+        },
+        {
+          "at": 0.64,
+          "charIndex": 5,
+          "word": "Ihre",
+          "end": 0.78
+        },
+        {
+          "at": 0.78,
+          "charIndex": 10,
+          "word": "Anwesenheit",
+          "end": 1.62
+        },
+        {
+          "at": 1.62,
+          "charIndex": 22,
+          "word": "hat",
+          "end": 1.78
+        },
+        {
+          "at": 1.78,
+          "charIndex": 26,
+          "word": "jetzt",
+          "end": 1.98
+        },
+        {
+          "at": 1.98,
+          "charIndex": 32,
+          "word": "eine",
+          "end": 2.24
+        },
+        {
+          "at": 2.24,
+          "charIndex": 37,
+          "word": "Ablagekante",
+          "end": 3.1
+        }
+      ],
+      "sha256": "fe013a26c2f27fd85e41667cbc474bfa8c36af07f75f8504009dc80049b105e3",
+      "bytes": 68012,
+      "sampleRateHz": 48000,
+      "channels": 1,
+      "bitrateBitsPerSecond": 128000,
+      "file": "assets/voices/knick/knick-registration-presencefix-reply-1.mp3",
+      "english": "Good. Your presence now has a filing edge.",
+      "approval": {
+        "status": "user-approved",
+        "date": "2026-10-11",
+        "instruction": "Also the police telephone call between Frau Knick doesn't use her new profile, this is the same person as the one behind counter!",
+        "scope": "Use the selected Brunhilde Knick profile consistently at the counter and in the police argument",
+        "listeningVerified": false
+      }
+    },
+    {
+      "clipId": "knick-registration-presencefix-reply-2",
+      "actorId": "clerk",
+      "voiceId": "amt-brunhilde-knick",
+      "profileId": "b080c7d95ecd418fb428282461d7fbe7",
+      "text": "Zu viel Papier, aber wenigstens das richtige. Die Nummer oben. Der Termin wartet darunter.",
+      "sourceLocator": "buergeramt-story.js registration.nodes.presenceFix.choices[1].reply",
+      "seed": 71017,
+      "referenceSha256": "901e9ad60eda5cbb36337b12864b6a2b0d133570acb90941b9eabd9888c16351",
+      "referenceOriginalSha256": "f87daaf53e9e3183065dbe38a65097f5c8df3ae11454ea56676a8298800683c2",
+      "profileJsonSha256": "4071c9052ebb393358d9957cc5f2271d93c52f13b747fad9f5253bd81b00ce66",
+      "rawSha256": "29496ffa4735c1080eb8ee6390b2d6969533823fe7668a3b53224ba716f9a817",
+      "renderer": "ResembleAI/Chatterbox Multilingual V2 0.1.7",
+      "modelRevision": "5bb1f6ee58e50c3b8d408bc82a6d3740c2db6e18",
+      "modelLicense": "MIT",
+      "referenceLicense": "CC0-1.0 (EmoDB original, transformed reference)",
+      "durationSeconds": 6,
+      "renderSeconds": 20.78,
+      "synthesis": {
+        "temperature": 0.65,
+        "repetitionPenalty": 3,
+        "cfgWeight": 0.6,
+        "languageId": "de",
+        "conditioningCached": true,
+        "cpuThreads": 2,
+        "inferenceMode": true
+      },
+      "listening": "pending",
+      "status": "eligible exact-text recording; human listening pending",
+      "processing": "[0:a]highpass=f=65,lowpass=f=7600,asplit[clean][wet];[wet]rubberband=pitch=0.78,lowpass=f=1450,volume=0.16[shadow];[clean][shadow]amix=inputs=2:duration=first:normalize=0[a]",
+      "processingSha256": "1c7968d73192bfbf5d2b759fce5dc07b092badbd133718ae05d67dbdda72ccb2",
+      "normalization": {
+        "targetLufs": -18,
+        "targetTruePeakDbtp": -1.5,
+        "filter": "loudnorm=I=-13.93:TP=-1.8:LRA=11:linear=false",
+        "iterations": 5
+      },
+      "integratedLufs": -18.21,
+      "truePeakDbtp": -2.18,
+      "asr": "Zu viel Papier, aber wenigstens das Richtige. Die Nummer oben. Der Termin wartet darunter.",
+      "asrWordExact": true,
+      "asrLiteralWordExact": true,
+      "asrNormalization": "case/punctuation, German numeric and A38 spoken equivalents, section sign, German compound spacing",
+      "asrModel": "independent faster-whisper, cached local model, CPU int8, no script prompt",
+      "asrModelDirectoryName": "voice-asr-model",
+      "wordCues": [
+        {
+          "at": 0,
+          "charIndex": 0,
+          "word": "Zu",
+          "end": 0.16
+        },
+        {
+          "at": 0.16,
+          "charIndex": 3,
+          "word": "viel",
+          "end": 0.34
+        },
+        {
+          "at": 0.34,
+          "charIndex": 8,
+          "word": "Papier",
+          "end": 0.78
+        },
+        {
+          "at": 1.1,
+          "charIndex": 16,
+          "word": "aber",
+          "end": 1.28
+        },
+        {
+          "at": 1.28,
+          "charIndex": 21,
+          "word": "wenigstens",
+          "end": 1.84
+        },
+        {
+          "at": 1.84,
+          "charIndex": 32,
+          "word": "das",
+          "end": 2.04
+        },
+        {
+          "at": 2.04,
+          "charIndex": 36,
+          "word": "richtige",
+          "end": 2.5
+        },
+        {
+          "at": 2.68,
+          "charIndex": 46,
+          "word": "Die",
+          "end": 2.86
+        },
+        {
+          "at": 2.86,
+          "charIndex": 50,
+          "word": "Nummer",
+          "end": 3.06
+        },
+        {
+          "at": 3.06,
+          "charIndex": 57,
+          "word": "oben",
+          "end": 3.44
+        },
+        {
+          "at": 3.68,
+          "charIndex": 63,
+          "word": "Der",
+          "end": 3.92
+        },
+        {
+          "at": 3.92,
+          "charIndex": 67,
+          "word": "Termin",
+          "end": 4.3
+        },
+        {
+          "at": 4.3,
+          "charIndex": 74,
+          "word": "wartet",
+          "end": 4.66
+        },
+        {
+          "at": 4.66,
+          "charIndex": 81,
+          "word": "darunter",
+          "end": 5.12
+        }
+      ],
+      "sha256": "00b1d5966429c480df9181956ad355cd38ab45e7985a4efd04532dd38138536c",
+      "bytes": 96812,
+      "sampleRateHz": 48000,
+      "channels": 1,
+      "bitrateBitsPerSecond": 128000,
+      "file": "assets/voices/knick/knick-registration-presencefix-reply-2.mp3",
+      "english": "Too much paper, but at least it is the right paper. The number on top. The appointment waits underneath.",
+      "approval": {
+        "status": "user-approved",
+        "date": "2026-10-11",
+        "instruction": "Also the police telephone call between Frau Knick doesn't use her new profile, this is the same person as the one behind counter!",
+        "scope": "Use the selected Brunhilde Knick profile consistently at the counter and in the police argument",
+        "listeningVerified": false
+      }
+    },
+    {
+      "clipId": "knick-registration-identity",
+      "actorId": "clerk",
+      "voiceId": "amt-brunhilde-knick",
+      "profileId": "b080c7d95ecd418fb428282461d7fbe7",
+      "text": "Identitätsnachweis. Gültiger Pass oder Ausweis, im Original. Nicht Ihr Profilbild, nicht die Erinnerung an einen Pass. Ich will feststellen, wer hier wohnt, bevor ich feststelle, wo dieser Jemand wohnt. Was haben Sie?",
+      "sourceLocator": "buergeramt-story.js registration.nodes.identity.line",
+      "seed": 71018,
+      "referenceSha256": "901e9ad60eda5cbb36337b12864b6a2b0d133570acb90941b9eabd9888c16351",
+      "referenceOriginalSha256": "f87daaf53e9e3183065dbe38a65097f5c8df3ae11454ea56676a8298800683c2",
+      "profileJsonSha256": "4071c9052ebb393358d9957cc5f2271d93c52f13b747fad9f5253bd81b00ce66",
+      "rawSha256": "8e2217fd5a1ed74f277a5dae38520334ebb437b471e73020b91739b76a6778c4",
+      "renderer": "ResembleAI/Chatterbox Multilingual V2 0.1.7",
+      "modelRevision": "5bb1f6ee58e50c3b8d408bc82a6d3740c2db6e18",
+      "modelLicense": "MIT",
+      "referenceLicense": "CC0-1.0 (EmoDB original, transformed reference)",
+      "durationSeconds": 10.68,
+      "renderSeconds": 208.75,
+      "synthesis": {
+        "temperature": 0.65,
+        "repetitionPenalty": 3,
+        "cfgWeight": 0.6,
+        "languageId": "de",
+        "conditioningCached": true,
+        "cpuThreads": 2,
+        "inferenceMode": true
+      },
+      "listening": "pending",
+      "status": "eligible exact-text recording; human listening pending",
+      "processing": "[0:a]highpass=f=65,lowpass=f=7600,asplit[clean][wet];[wet]rubberband=pitch=0.78,lowpass=f=1450,volume=0.16[shadow];[clean][shadow]amix=inputs=2:duration=first:normalize=0[a]",
+      "processingSha256": "1c7968d73192bfbf5d2b759fce5dc07b092badbd133718ae05d67dbdda72ccb2",
+      "normalization": {
+        "targetLufs": -18,
+        "targetTruePeakDbtp": -1.5,
+        "filter": "loudnorm=I=-15.809999999999999:TP=-1.8:LRA=11:linear=false",
+        "iterations": 4
+      },
+      "integratedLufs": -18.22,
+      "truePeakDbtp": -2.2,
+      "asr": "Identitätsnachweis, gültiger Pass oder Ausweis im Original. Nicht Ihr Profilbild, nicht die Erinnerung an einen Pass. Ich will feststellen, wer hier wohnt, bevor ich feststelle, wo dieser jemand wohnt. Was haben Sie?",
+      "asrWordExact": true,
+      "asrLiteralWordExact": true,
+      "asrNormalization": "case/punctuation, German numeric and A38 spoken equivalents, section sign, German compound spacing",
+      "asrModel": "independent faster-whisper, cached local model, CPU int8, no script prompt",
+      "asrModelDirectoryName": "voice-asr-model",
+      "wordCues": [
+        {
+          "at": 0.84,
+          "charIndex": 0,
+          "word": "Identitätsnachweis",
+          "end": 1.2
+        },
+        {
+          "at": 1.34,
+          "charIndex": 20,
+          "word": "Gültiger",
+          "end": 1.66
+        },
+        {
+          "at": 1.66,
+          "charIndex": 29,
+          "word": "Pass",
+          "end": 1.86
+        },
+        {
+          "at": 1.86,
+          "charIndex": 34,
+          "word": "oder",
+          "end": 2.04
+        },
+        {
+          "at": 2.04,
+          "charIndex": 39,
+          "word": "Ausweis",
+          "end": 2.46
+        },
+        {
+          "at": 2.46,
+          "charIndex": 48,
+          "word": "im",
+          "end": 2.6
+        },
+        {
+          "at": 2.6,
+          "charIndex": 51,
+          "word": "Original",
+          "end": 3.02
+        },
+        {
+          "at": 3.4,
+          "charIndex": 61,
+          "word": "Nicht",
+          "end": 3.56
+        },
+        {
+          "at": 3.56,
+          "charIndex": 67,
+          "word": "Ihr",
+          "end": 3.7
+        },
+        {
+          "at": 3.7,
+          "charIndex": 71,
+          "word": "Profilbild",
+          "end": 4.38
+        },
+        {
+          "at": 4.56,
+          "charIndex": 83,
+          "word": "nicht",
+          "end": 4.74
+        },
+        {
+          "at": 4.74,
+          "charIndex": 89,
+          "word": "die",
+          "end": 4.88
+        },
+        {
+          "at": 4.88,
+          "charIndex": 93,
+          "word": "Erinnerung",
+          "end": 5.28
+        },
+        {
+          "at": 5.28,
+          "charIndex": 104,
+          "word": "an",
+          "end": 5.42
+        },
+        {
+          "at": 5.42,
+          "charIndex": 107,
+          "word": "einen",
+          "end": 5.66
+        },
+        {
+          "at": 5.66,
+          "charIndex": 113,
+          "word": "Pass",
+          "end": 5.9
+        },
+        {
+          "at": 6.1,
+          "charIndex": 119,
+          "word": "Ich",
+          "end": 6.22
+        },
+        {
+          "at": 6.22,
+          "charIndex": 123,
+          "word": "will",
+          "end": 6.34
+        },
+        {
+          "at": 6.34,
+          "charIndex": 128,
+          "word": "feststellen",
+          "end": 6.86
+        },
+        {
+          "at": 6.92,
+          "charIndex": 141,
+          "word": "wer",
+          "end": 7.02
+        },
+        {
+          "at": 7.02,
+          "charIndex": 145,
+          "word": "hier",
+          "end": 7.16
+        },
+        {
+          "at": 7.16,
+          "charIndex": 150,
+          "word": "wohnt",
+          "end": 7.48
+        },
+        {
+          "at": 7.54,
+          "charIndex": 157,
+          "word": "bevor",
+          "end": 7.66
+        },
+        {
+          "at": 7.66,
+          "charIndex": 163,
+          "word": "ich",
+          "end": 7.86
+        },
+        {
+          "at": 7.86,
+          "charIndex": 167,
+          "word": "feststelle",
+          "end": 8.36
+        },
+        {
+          "at": 8.4,
+          "charIndex": 179,
+          "word": "wo",
+          "end": 8.48
+        },
+        {
+          "at": 8.48,
+          "charIndex": 182,
+          "word": "dieser",
+          "end": 8.68
+        },
+        {
+          "at": 8.68,
+          "charIndex": 189,
+          "word": "Jemand",
+          "end": 8.92
+        },
+        {
+          "at": 8.92,
+          "charIndex": 196,
+          "word": "wohnt",
+          "end": 9.24
+        },
+        {
+          "at": 9.36,
+          "charIndex": 203,
+          "word": "Was",
+          "end": 9.58
+        },
+        {
+          "at": 9.58,
+          "charIndex": 207,
+          "word": "haben",
+          "end": 9.84
+        },
+        {
+          "at": 9.84,
+          "charIndex": 213,
+          "word": "Sie",
+          "end": 10.02
+        }
+      ],
+      "sha256": "e21294af80fed3ac34513761563d68bb68fa66cb4c7bf9eed384b1e863fe1583",
+      "bytes": 171692,
+      "sampleRateHz": 48000,
+      "channels": 1,
+      "bitrateBitsPerSecond": 128000,
+      "file": "assets/voices/knick/knick-registration-identity.mp3",
+      "english": "Proof of identity. A valid passport or ID card, the original. Not your profile picture, not the memory of a passport. I want to establish who lives here before I establish where that person lives. What do you have?",
+      "approval": {
+        "status": "user-approved",
+        "date": "2026-10-11",
+        "instruction": "Also the police telephone call between Frau Knick doesn't use her new profile, this is the same person as the one behind counter!",
+        "scope": "Use the selected Brunhilde Knick profile consistently at the counter and in the police argument",
+        "listeningVerified": false
+      }
+    },
+    {
+      "clipId": "knick-registration-identity-reply-1",
+      "actorId": "clerk",
+      "voiceId": "amt-brunhilde-knick",
+      "profileId": "b080c7d95ecd418fb428282461d7fbe7",
+      "text": "Der Pass wird geprüft. Sie sind vorläufig dieselbe Person wie auf der letzten Seite.",
+      "sourceLocator": "buergeramt-story.js registration.nodes.identity.choices[0].reply",
+      "seed": 71019,
+      "referenceSha256": "901e9ad60eda5cbb36337b12864b6a2b0d133570acb90941b9eabd9888c16351",
+      "referenceOriginalSha256": "f87daaf53e9e3183065dbe38a65097f5c8df3ae11454ea56676a8298800683c2",
+      "profileJsonSha256": "4071c9052ebb393358d9957cc5f2271d93c52f13b747fad9f5253bd81b00ce66",
+      "rawSha256": "5165c0d73fb88ad80e51f983bd3272c171e675f677c60cd4960649e2af565bea",
+      "renderer": "ResembleAI/Chatterbox Multilingual V2 0.1.7",
+      "modelRevision": "5bb1f6ee58e50c3b8d408bc82a6d3740c2db6e18",
+      "modelLicense": "MIT",
+      "referenceLicense": "CC0-1.0 (EmoDB original, transformed reference)",
+      "durationSeconds": 5.36,
+      "renderSeconds": 13.12,
+      "synthesis": {
+        "temperature": 0.65,
+        "repetitionPenalty": 3,
+        "cfgWeight": 0.6,
+        "languageId": "de",
+        "device": "cuda",
+        "precision": "fp16",
+        "conditioningCached": true,
+        "cpuThreads": 2,
+        "inferenceMode": true
+      },
+      "listening": "pending",
+      "status": "eligible exact-text recording; human listening pending",
+      "processing": "[0:a]highpass=f=65,lowpass=f=7600,asplit[clean][wet];[wet]rubberband=pitch=0.78,lowpass=f=1450,volume=0.16[shadow];[clean][shadow]amix=inputs=2:duration=first:normalize=0[a]",
+      "processingSha256": "1c7968d73192bfbf5d2b759fce5dc07b092badbd133718ae05d67dbdda72ccb2",
+      "normalization": {
+        "targetLufs": -18,
+        "targetTruePeakDbtp": -1.5,
+        "filter": "loudnorm=I=-15.11:TP=-1.8:LRA=11:linear=false",
+        "iterations": 4
+      },
+      "integratedLufs": -18.23,
+      "truePeakDbtp": -2.22,
+      "asr": "Der Pass wird geprüft. Sie sind vorläufig dieselbe Person wie auf der letzten Seite.",
+      "asrWordExact": true,
+      "asrLiteralWordExact": true,
+      "asrNormalization": "case/punctuation, German numeric and A38 spoken equivalents, section sign, German compound spacing",
+      "asrModel": "independent faster-whisper, cached local model, CPU int8, no script prompt",
+      "asrModelDirectoryName": "voice-asr-model",
+      "wordCues": [
+        {
+          "at": 0,
+          "charIndex": 0,
+          "word": "Der",
+          "end": 0.22
+        },
+        {
+          "at": 0.22,
+          "charIndex": 4,
+          "word": "Pass",
+          "end": 0.48
+        },
+        {
+          "at": 0.48,
+          "charIndex": 9,
+          "word": "wird",
+          "end": 0.68
+        },
+        {
+          "at": 0.68,
+          "charIndex": 14,
+          "word": "geprüft",
+          "end": 1.28
+        },
+        {
+          "at": 1.46,
+          "charIndex": 23,
+          "word": "Sie",
+          "end": 1.7
+        },
+        {
+          "at": 1.7,
+          "charIndex": 27,
+          "word": "sind",
+          "end": 1.9
+        },
+        {
+          "at": 1.9,
+          "charIndex": 32,
+          "word": "vorläufig",
+          "end": 2.42
+        },
+        {
+          "at": 2.42,
+          "charIndex": 42,
+          "word": "dieselbe",
+          "end": 2.9
+        },
+        {
+          "at": 2.9,
+          "charIndex": 51,
+          "word": "Person",
+          "end": 3.28
+        },
+        {
+          "at": 3.28,
+          "charIndex": 58,
+          "word": "wie",
+          "end": 3.46
+        },
+        {
+          "at": 3.46,
+          "charIndex": 62,
+          "word": "auf",
+          "end": 3.6
+        },
+        {
+          "at": 3.6,
+          "charIndex": 66,
+          "word": "der",
+          "end": 3.72
+        },
+        {
+          "at": 3.72,
+          "charIndex": 70,
+          "word": "letzten",
+          "end": 4.04
+        },
+        {
+          "at": 4.04,
+          "charIndex": 78,
+          "word": "Seite",
+          "end": 4.48
+        }
+      ],
+      "sha256": "b60839c1de57102f942fcffe39b9517191a6960757501d7a3a4150a0cffd59c6",
+      "bytes": 86828,
+      "sampleRateHz": 48000,
+      "channels": 1,
+      "bitrateBitsPerSecond": 128000,
+      "file": "assets/voices/knick/knick-registration-identity-reply-1.mp3",
+      "english": "The passport is being checked. For now you are the same person as on the last page.",
+      "approval": {
+        "status": "user-approved",
+        "date": "2026-10-11",
+        "instruction": "Also the police telephone call between Frau Knick doesn't use her new profile, this is the same person as the one behind counter!",
+        "scope": "Use the selected Brunhilde Knick profile consistently at the counter and in the police argument",
+        "listeningVerified": false
+      }
+    },
+    {
+      "clipId": "knick-registration-identity-reply-2",
+      "actorId": "clerk",
+      "voiceId": "amt-brunhilde-knick",
+      "profileId": "b080c7d95ecd418fb428282461d7fbe7",
+      "text": "Ein Foto vom Pass! Soll ich Ihre Anmeldung dann an ein Foto von einer Wohnung schicken? Original her!",
+      "sourceLocator": "buergeramt-story.js registration.nodes.identity.choices[1].reply",
+      "seed": 71020,
+      "referenceSha256": "901e9ad60eda5cbb36337b12864b6a2b0d133570acb90941b9eabd9888c16351",
+      "referenceOriginalSha256": "f87daaf53e9e3183065dbe38a65097f5c8df3ae11454ea56676a8298800683c2",
+      "profileJsonSha256": "4071c9052ebb393358d9957cc5f2271d93c52f13b747fad9f5253bd81b00ce66",
+      "rawSha256": "c6b67e19cfeac8064d53539881dc25e3f8f685e16007a17d95f9c6f0c09ae5d9",
+      "renderer": "ResembleAI/Chatterbox Multilingual V2 0.1.7",
+      "modelRevision": "5bb1f6ee58e50c3b8d408bc82a6d3740c2db6e18",
+      "modelLicense": "MIT",
+      "referenceLicense": "CC0-1.0 (EmoDB original, transformed reference)",
+      "durationSeconds": 5.6,
+      "renderSeconds": 13.49,
+      "synthesis": {
+        "temperature": 0.65,
+        "repetitionPenalty": 3,
+        "cfgWeight": 0.6,
+        "languageId": "de",
+        "device": "cuda",
+        "precision": "fp16",
+        "conditioningCached": true,
+        "cpuThreads": 2,
+        "inferenceMode": true
+      },
+      "listening": "pending",
+      "status": "eligible exact-text recording; human listening pending",
+      "processing": "[0:a]highpass=f=65,lowpass=f=7600,asplit[clean][wet];[wet]rubberband=pitch=0.78,lowpass=f=1450,volume=0.16[shadow];[clean][shadow]amix=inputs=2:duration=first:normalize=0[a]",
+      "processingSha256": "1c7968d73192bfbf5d2b759fce5dc07b092badbd133718ae05d67dbdda72ccb2",
+      "normalization": {
+        "targetLufs": -18,
+        "targetTruePeakDbtp": -1.5,
+        "filter": "loudnorm=I=-12.8:TP=-1.8:LRA=11:linear=false",
+        "iterations": 5
+      },
+      "integratedLufs": -18.24,
+      "truePeakDbtp": -2.23,
+      "asr": "Ein Foto vom Pass. Soll ich Ihre Anmeldung dann an ein Foto von einer Wohnung schicken? Original her.",
+      "asrWordExact": true,
+      "asrLiteralWordExact": true,
+      "asrNormalization": "case/punctuation, German numeric and A38 spoken equivalents, section sign, German compound spacing",
+      "asrModel": "independent faster-whisper, cached local model, CPU int8, no script prompt",
+      "asrModelDirectoryName": "voice-asr-model",
+      "wordCues": [
+        {
+          "at": 0,
+          "charIndex": 0,
+          "word": "Ein",
+          "end": 0.26
+        },
+        {
+          "at": 0.26,
+          "charIndex": 4,
+          "word": "Foto",
+          "end": 0.66
+        },
+        {
+          "at": 0.66,
+          "charIndex": 9,
+          "word": "vom",
+          "end": 0.84
+        },
+        {
+          "at": 0.84,
+          "charIndex": 13,
+          "word": "Pass",
+          "end": 1.12
+        },
+        {
+          "at": 1.3,
+          "charIndex": 19,
+          "word": "Soll",
+          "end": 1.6
+        },
+        {
+          "at": 1.6,
+          "charIndex": 24,
+          "word": "ich",
+          "end": 1.7
+        },
+        {
+          "at": 1.7,
+          "charIndex": 28,
+          "word": "Ihre",
+          "end": 1.86
+        },
+        {
+          "at": 1.86,
+          "charIndex": 33,
+          "word": "Anmeldung",
+          "end": 2.4
+        },
+        {
+          "at": 2.4,
+          "charIndex": 43,
+          "word": "dann",
+          "end": 2.56
+        },
+        {
+          "at": 2.56,
+          "charIndex": 48,
+          "word": "an",
+          "end": 2.7
+        },
+        {
+          "at": 2.7,
+          "charIndex": 51,
+          "word": "ein",
+          "end": 2.86
+        },
+        {
+          "at": 2.86,
+          "charIndex": 55,
+          "word": "Foto",
+          "end": 3.18
+        },
+        {
+          "at": 3.18,
+          "charIndex": 60,
+          "word": "von",
+          "end": 3.36
+        },
+        {
+          "at": 3.36,
+          "charIndex": 64,
+          "word": "einer",
+          "end": 3.56
+        },
+        {
+          "at": 3.56,
+          "charIndex": 70,
+          "word": "Wohnung",
+          "end": 3.9
+        },
+        {
+          "at": 3.9,
+          "charIndex": 78,
+          "word": "schicken",
+          "end": 4.26
+        },
+        {
+          "at": 4.62,
+          "charIndex": 88,
+          "word": "Original",
+          "end": 5.02
+        },
+        {
+          "at": 5.02,
+          "charIndex": 97,
+          "word": "her",
+          "end": 5.4
+        }
+      ],
+      "sha256": "bd2dfbc6a9283ea2578e4de9ed5168de88fbe8e1178217a4b629377e40556c16",
+      "bytes": 90668,
+      "sampleRateHz": 48000,
+      "channels": 1,
+      "bitrateBitsPerSecond": 128000,
+      "file": "assets/voices/knick/knick-registration-identity-reply-2.mp3",
+      "english": "A photo of your passport! Should I send your registration to a photo of a flat, then? Give me the original!",
+      "approval": {
+        "status": "user-approved",
+        "date": "2026-10-11",
+        "instruction": "Also the police telephone call between Frau Knick doesn't use her new profile, this is the same person as the one behind counter!",
+        "scope": "Use the selected Brunhilde Knick profile consistently at the counter and in the police argument",
+        "listeningVerified": false
+      }
+    }
+  ],
+  "heldPrivate": [
+    {
+      "clipId": "knick-outburst-2",
+      "actorId": "clerk",
+      "voiceId": "amt-brunhilde-knick",
+      "profileId": "b080c7d95ecd418fb428282461d7fbe7",
+      "text": "Die Dame hat einen Namen. Frau Knick. Und die Dame bearbeitet hier einen Antrag, während Sie einem Grashalm hinterhertelefonieren. Wenn Sie jetzt bitte...",
+      "sourceLocator": "buergeramt-story.js outburst.lines[1]",
+      "reason": "held private; selected production fallback",
+      "asr": "Die Dame hat einen Namen, Frau Knick, und die Dame bearbeitet hier einen Antrag, während Sie einen Grashalm hinterher telefonieren. Wenn Sie jetzt bitte..."
+    },
+    {
+      "clipId": "knick-counter-3",
+      "actorId": "clerk",
+      "voiceId": "amt-brunhilde-knick",
+      "profileId": "b080c7d95ecd418fb428282461d7fbe7",
+      "text": "Ich darf Ihnen das Formular A38 ausgeben: die Erlaubnis, eine Erlaubnis zu beantragen. Der Drucker behauptet, er habe morgen schon gedruckt. Wie erfassen wir heute?",
+      "sourceLocator": "buergeramt-story.js clerk[2].line",
+      "reason": "held private; selected production fallback",
+      "asr": "Ich darf Ihnen das Formular 88 ausgeben, die Erlaubnis, eine Erlaubnis zu beantragen. Der Drucker behauptet, er habe morgen schon gedruckt. Wie erfassen wir heute?"
+    },
+    {
+      "clipId": "knick-phone-warning-2",
+      "actorId": "clerk",
+      "voiceId": "amt-brunhilde-knick",
+      "profileId": "b080c7d95ecd418fb428282461d7fbe7",
+      "text": "SCHON WIEDER! Habe ich mich undeutlich ausgedrückt? Sie stecken das Telefon weg und lassen es weiterklingeln! LAUTLOS. ODER AUS. Ich bearbeite Ihren Wohnsitz, keine Klingeltonsammlung!",
+      "sourceLocator": "buergeramt-story.js phoneWarnings[1]",
+      "reason": "held private; selected production fallback",
+      "asr": "Schon wieder! Habe ich mich undeutlich ausgedrückt? Sie stecken das Telefon weg und lassen es weiter klingeln. Lautlos oder aus. Ich bearbeite Ihrem Wohnsitz keine Klingeltonsammlung."
+    },
+    {
+      "clipId": "knick-registration-presencefix",
+      "actorId": "clerk",
+      "voiceId": "amt-brunhilde-knick",
+      "profileId": "b080c7d95ecd418fb428282461d7fbe7",
+      "text": "Ich habe Ihre Anwesenheit gesehen. Jetzt fehlt der Nachweis, dass ich sie zuordnen darf. Die Nummer liegt in Ihrer Hand. Sie müssen sie nicht philosophisch verteidigen. Was legen Sie hin?",
+      "sourceLocator": "buergeramt-story.js registration.nodes.presenceFix.line",
+      "reason": "held private; selected production fallback",
+      "asr": "Ich habe ihre Anwesenheit gesehen. Jetzt fehlt der Nachweis, dass ich sie zuordnen darf. Die Nummer liegt in ihrer Hand. Sie müssen sie nicht philosophisch verteidigen. Was legen sie hin? Dad auch ist, aber Peit auch immer habt. Die diest auch enner habt, auch immer habt, auch immer habt, auch immer habt. Die sie auch, auch immer habt, auch immer habt. Das weiß das Feind der Lesen. Jetzt hat, jetzt hat auch immer habt. Jetzt hat auch enner habt."
+    },
+    {
+      "clipId": "knick-registration-identityfix",
+      "actorId": "clerk",
+      "voiceId": "amt-brunhilde-knick",
+      "profileId": "b080c7d95ecd418fb428282461d7fbe7",
+      "text": "Der Originalpass steckt in Ihrer Dokumentenmappe. Holen Sie ihn heraus. Ihr Telefon bleibt lautlos. Ich werde die Identität Ihres Ladekabels heute nicht mitprüfen. Wie reichen Sie den Pass?",
+      "sourceLocator": "buergeramt-story.js registration.nodes.identityFix.line",
+      "reason": "not rendered; selected production fallback"
+    },
+    {
+      "clipId": "knick-registration-identityfix-reply-1",
+      "actorId": "clerk",
+      "voiceId": "amt-brunhilde-knick",
+      "profileId": "b080c7d95ecd418fb428282461d7fbe7",
+      "text": "Lesbar. Das ist noch kein Lob. Ihre Identität ist geprüft.",
+      "sourceLocator": "buergeramt-story.js registration.nodes.identityFix.choices[0].reply",
+      "reason": "not rendered; selected production fallback"
+    },
+    {
+      "clipId": "knick-registration-identityfix-reply-2",
+      "actorId": "clerk",
+      "voiceId": "amt-brunhilde-knick",
+      "profileId": "b080c7d95ecd418fb428282461d7fbe7",
+      "text": "Beide Originale, eine Person. Ich habe Sie gezählt. Einmal reicht.",
+      "sourceLocator": "buergeramt-story.js registration.nodes.identityFix.choices[1].reply",
+      "reason": "not rendered; selected production fallback"
+    },
+    {
+      "clipId": "knick-registration-name",
+      "actorId": "clerk",
+      "voiceId": "amt-brunhilde-knick",
+      "profileId": "b080c7d95ecd418fb428282461d7fbe7",
+      "text": "Auf der Nummer steht Ihr eingetragener Name. Im Pass stehen Ihre amtlichen Namen. Der Schalter ist keine Bühne für einen Künstlernamen. Welche Schreibweise kommt aufs Anmeldeformular?",
+      "sourceLocator": "buergeramt-story.js registration.nodes.name.line",
+      "reason": "not rendered; selected production fallback"
+    },
+    {
+      "clipId": "knick-registration-name-reply-1",
+      "actorId": "clerk",
+      "voiceId": "amt-brunhilde-knick",
+      "profileId": "b080c7d95ecd418fb428282461d7fbe7",
+      "text": "Auch der Vorname, den Sie angeblich nie benutzen. Das Register benutzt ihn. Es hat Sie nicht gefragt.",
+      "sourceLocator": "buergeramt-story.js registration.nodes.name.choices[0].reply",
+      "reason": "not rendered; selected production fallback"
+    },
+    {
+      "clipId": "knick-registration-name-reply-2",
+      "actorId": "clerk",
+      "voiceId": "amt-brunhilde-knick",
+      "profileId": "b080c7d95ecd418fb428282461d7fbe7",
+      "text": "Das Register ruft Sie nicht zum Abendessen. Übernehmen Sie die amtlichen Namen vollständig!",
+      "sourceLocator": "buergeramt-story.js registration.nodes.name.choices[1].reply",
+      "reason": "not rendered; selected production fallback"
+    },
+    {
+      "clipId": "knick-registration-namefix",
+      "actorId": "clerk",
+      "voiceId": "amt-brunhilde-knick",
+      "profileId": "b080c7d95ecd418fb428282461d7fbe7",
+      "text": "Das Feld heißt Vornamen, mit einem N am Ende. Das hat jemand absichtlich gedruckt. Sie können die Namen aus dem Pass abschreiben oder sie mir zur Übernahme zeigen. Was tun Sie?",
+      "sourceLocator": "buergeramt-story.js registration.nodes.nameFix.line",
+      "reason": "not rendered; selected production fallback"
+    },
+    {
+      "clipId": "knick-registration-namefix-reply-1",
+      "actorId": "clerk",
+      "voiceId": "amt-brunhilde-knick",
+      "profileId": "b080c7d95ecd418fb428282461d7fbe7",
+      "text": "Jetzt passt die Person in das Feld. Den Rest Ihrer Persönlichkeit lassen wir draußen.",
+      "sourceLocator": "buergeramt-story.js registration.nodes.nameFix.choices[0].reply",
+      "reason": "not rendered; selected production fallback"
+    },
+    {
+      "clipId": "knick-registration-namefix-reply-2",
+      "actorId": "clerk",
+      "voiceId": "amt-brunhilde-knick",
+      "profileId": "b080c7d95ecd418fb428282461d7fbe7",
+      "text": "Ich lese, Sie bestätigen. Ein kooperativer Moment. Bitte gewöhnen Sie sich nicht daran.",
+      "sourceLocator": "buergeramt-story.js registration.nodes.nameFix.choices[1].reply",
+      "reason": "not rendered; selected production fallback"
+    },
+    {
+      "clipId": "knick-registration-movein",
+      "actorId": "clerk",
+      "voiceId": "amt-brunhilde-knick",
+      "profileId": "b080c7d95ecd418fb428282461d7fbe7",
+      "text": "Einzugsdatum. Ihr Mietvertrag begann am Ersten. Den Schlüssel bekamen Sie am Dritten. Eingezogen sind Sie am Fünften. Drei Daten, aber nur eins wohnt in diesem Feld. Welches?",
+      "sourceLocator": "buergeramt-story.js registration.nodes.movein.line",
+      "reason": "not rendered; selected production fallback"
+    },
+    {
+      "clipId": "knick-registration-movein-reply-1",
+      "actorId": "clerk",
+      "voiceId": "amt-brunhilde-knick",
+      "profileId": "b080c7d95ecd418fb428282461d7fbe7",
+      "text": "Richtig. Gemeldet wird der Einzug. Der Mietvertrag darf sein Datum behalten, aber nicht dieses Feld besetzen.",
+      "sourceLocator": "buergeramt-story.js registration.nodes.movein.choices[0].reply",
+      "reason": "not rendered; selected production fallback"
+    },
+    {
+      "clipId": "knick-registration-movein-reply-2",
+      "actorId": "clerk",
+      "voiceId": "amt-brunhilde-knick",
+      "profileId": "b080c7d95ecd418fb428282461d7fbe7",
+      "text": "Ihr Vertrag hat am Ersten gewohnt? Mit eigenem Bett? Nein! Wir brauchen den tatsächlichen Einzug!",
+      "sourceLocator": "buergeramt-story.js registration.nodes.movein.choices[1].reply",
+      "reason": "not rendered; selected production fallback"
+    },
+    {
+      "clipId": "knick-registration-moveinfix",
+      "actorId": "clerk",
+      "voiceId": "amt-brunhilde-knick",
+      "profileId": "b080c7d95ecd418fb428282461d7fbe7",
+      "text": "Der Schlüssel beweist eine Tür. Der Vertrag beweist eine Vereinbarung. Sie sind am Fünften eingezogen. Welches Datum tragen Sie ein, ohne Ihrer Wohnung zwei Geburtstage zu geben?",
+      "sourceLocator": "buergeramt-story.js registration.nodes.moveinFix.line",
+      "reason": "not rendered; selected production fallback"
+    },
+    {
+      "clipId": "knick-registration-moveinfix-reply-1",
+      "actorId": "clerk",
+      "voiceId": "amt-brunhilde-knick",
+      "profileId": "b080c7d95ecd418fb428282461d7fbe7",
+      "text": "Gut. Die Tür bleibt älter als Ihr Einzug. Das ist ausnahmsweise zulässig.",
+      "sourceLocator": "buergeramt-story.js registration.nodes.moveinFix.choices[0].reply",
+      "reason": "not rendered; selected production fallback"
+    },
+    {
+      "clipId": "knick-registration-moveinfix-reply-2",
+      "actorId": "clerk",
+      "voiceId": "amt-brunhilde-knick",
+      "profileId": "b080c7d95ecd418fb428282461d7fbe7",
+      "text": "Vertrag und Einzug dürfen verschieden datiert sein. Jetzt ist das ausdrücklich vermerkt.",
+      "sourceLocator": "buergeramt-story.js registration.nodes.moveinFix.choices[1].reply",
+      "reason": "not rendered; selected production fallback"
+    },
+    {
+      "clipId": "knick-registration-deadline",
+      "actorId": "clerk",
+      "voiceId": "amt-brunhilde-knick",
+      "profileId": "b080c7d95ecd418fb428282461d7fbe7",
+      "text": "Sie sind dauerhaft eingezogen. § 17 Bundesmeldegesetz: zwei Wochen ab Einzug. Keine zwei Wochen ab Mut, WLAN oder einem freundlichen Gedanken der Hausverwaltung. Wann beginnt Ihre Meldefrist?",
+      "sourceLocator": "buergeramt-story.js registration.nodes.deadline.line",
+      "reason": "not rendered; selected production fallback"
+    },
+    {
+      "clipId": "knick-registration-deadline-reply-1",
+      "actorId": "clerk",
+      "voiceId": "amt-brunhilde-knick",
+      "profileId": "b080c7d95ecd418fb428282461d7fbe7",
+      "text": "Das Datum bleibt. Ich streiche nur Ihren Versuch, daneben ein zweites zu erfinden.",
+      "sourceLocator": "buergeramt-story.js registration.nodes.deadline.choices[0].reply",
+      "reason": "not rendered; selected production fallback"
+    },
+    {
+      "clipId": "knick-registration-deadline-reply-2",
+      "actorId": "clerk",
+      "voiceId": "amt-brunhilde-knick",
+      "profileId": "b080c7d95ecd418fb428282461d7fbe7",
+      "text": "NEIN. Der Vermieter verwaltet keine Zeit! Seine Verzögerung müssen Sie melden, nicht in einen neuen Einzug umbenennen!",
+      "sourceLocator": "buergeramt-story.js registration.nodes.deadline.choices[1].reply",
+      "reason": "not rendered; selected production fallback"
+    },
+    {
+      "clipId": "knick-registration-deadlinefix",
+      "actorId": "clerk",
+      "voiceId": "amt-brunhilde-knick",
+      "profileId": "b080c7d95ecd418fb428282461d7fbe7",
+      "text": "Die fehlende Bestätigung verschiebt Ihren Einzug nicht. Halten Sie die Verzögerung und Ihre Anfragen fest. Sagen Sie mir jetzt, was in der Akte als Beginn stehen bleibt!",
+      "sourceLocator": "buergeramt-story.js registration.nodes.deadlineFix.line",
+      "reason": "not rendered; selected production fallback"
+    },
+    {
+      "clipId": "knick-registration-deadlinefix-reply-1",
+      "actorId": "clerk",
+      "voiceId": "amt-brunhilde-knick",
+      "profileId": "b080c7d95ecd418fb428282461d7fbe7",
+      "text": "Dann sind wir wieder in derselben Kalenderwoche. Ich notiere die Verzögerung gesondert.",
+      "sourceLocator": "buergeramt-story.js registration.nodes.deadlineFix.choices[0].reply",
+      "reason": "not rendered; selected production fallback"
+    },
+    {
+      "clipId": "knick-registration-deadlinefix-reply-2",
+      "actorId": "clerk",
+      "voiceId": "amt-brunhilde-knick",
+      "profileId": "b080c7d95ecd418fb428282461d7fbe7",
+      "text": "Zwei Tatsachen, zwei Vermerke. Das hätte Ihr Vermieter ebenfalls begreifen können.",
+      "sourceLocator": "buergeramt-story.js registration.nodes.deadlineFix.choices[1].reply",
+      "reason": "not rendered; selected production fallback"
+    },
+    {
+      "clipId": "knick-registration-appointment",
+      "actorId": "clerk",
+      "voiceId": "amt-brunhilde-knick",
+      "profileId": "b080c7d95ecd418fb428282461d7fbe7",
+      "text": "Sie haben tagelang die Terminseite neu geladen. Erst keine Termine, dann ein Termin am anderen Ende der Stadt. Jetzt wollen Sie aus einer Fehlermeldung ein Einzugsdatum machen? Was lege ich zur Fristakte?",
+      "sourceLocator": "buergeramt-story.js registration.nodes.appointment.line",
+      "reason": "not rendered; selected production fallback"
+    },
+    {
+      "clipId": "knick-registration-appointment-reply-1",
+      "actorId": "clerk",
+      "voiceId": "amt-brunhilde-knick",
+      "profileId": "b080c7d95ecd418fb428282461d7fbe7",
+      "text": "Ich vermerke die Bemühungen. Der Einzug bleibt der Einzug. Ein Browserfehler ist keine Wohnungsart.",
+      "sourceLocator": "buergeramt-story.js registration.nodes.appointment.choices[0].reply",
+      "reason": "not rendered; selected production fallback"
+    },
+    {
+      "clipId": "knick-registration-appointment-reply-2",
+      "actorId": "clerk",
+      "voiceId": "amt-brunhilde-knick",
+      "profileId": "b080c7d95ecd418fb428282461d7fbe7",
+      "text": "Sie sind bereits eingezogen! Wenn Sie Ihr Datum ändern, damit es hübscher aussieht, mache ich es Ihnen SOFORT wieder hässlich!",
+      "sourceLocator": "buergeramt-story.js registration.nodes.appointment.choices[1].reply",
+      "reason": "not rendered; selected production fallback"
+    },
+    {
+      "clipId": "knick-registration-appointmentfix",
+      "actorId": "clerk",
+      "voiceId": "amt-brunhilde-knick",
+      "profileId": "b080c7d95ecd418fb428282461d7fbe7",
+      "text": "Sie brauchen keinen erfundenen Einzug. Legen Sie Ihren gebuchten Termin und die dokumentierten Versuche vor. Ich kann Gründe prüfen. Gedankenlesen ist trotz Personalmangel noch nicht eingeführt. Was geben Sie mir?",
+      "sourceLocator": "buergeramt-story.js registration.nodes.appointmentFix.line",
+      "reason": "not rendered; selected production fallback"
+    },
+    {
+      "clipId": "knick-registration-appointmentfix-reply-1",
+      "actorId": "clerk",
+      "voiceId": "amt-brunhilde-knick",
+      "profileId": "b080c7d95ecd418fb428282461d7fbe7",
+      "text": "Die kommt hinter den Einzugsvermerk. Ja, hinter. Der Termin ist später passiert.",
+      "sourceLocator": "buergeramt-story.js registration.nodes.appointmentFix.choices[0].reply",
+      "reason": "not rendered; selected production fallback"
+    },
+    {
+      "clipId": "knick-registration-appointmentfix-reply-2",
+      "actorId": "clerk",
+      "voiceId": "amt-brunhilde-knick",
+      "profileId": "b080c7d95ecd418fb428282461d7fbe7",
+      "text": "Ich notiere die Versuche. Die Fehlermeldung unterschreibt trotzdem nicht Ihren Antrag.",
+      "sourceLocator": "buergeramt-story.js registration.nodes.appointmentFix.choices[1].reply",
+      "reason": "not rendered; selected production fallback"
+    },
+    {
+      "clipId": "knick-registration-landlord",
+      "actorId": "clerk",
+      "voiceId": "amt-brunhilde-knick",
+      "profileId": "b080c7d95ecd418fb428282461d7fbe7",
+      "text": "Haben Sie Ihren Vermieter oder Wohnungsgeber um die Einzugsbestätigung gebeten? Ich frage nach einer Anfrage, nicht nach Ihrer Hoffnung, dass Menschen von selbst Formulare ausfüllen. Was liegt vor?",
+      "sourceLocator": "buergeramt-story.js registration.nodes.landlord.line",
+      "reason": "not rendered; selected production fallback"
+    },
+    {
+      "clipId": "knick-registration-landlord-reply-1",
+      "actorId": "clerk",
+      "voiceId": "amt-brunhilde-knick",
+      "profileId": "b080c7d95ecd418fb428282461d7fbe7",
+      "text": "Eine Anfrage mit Datum! Da müsste sogar eine Hausverwaltung erkennen, worauf sie nicht antwortet.",
+      "sourceLocator": "buergeramt-story.js registration.nodes.landlord.choices[0].reply",
+      "reason": "not rendered; selected production fallback"
+    },
+    {
+      "clipId": "knick-registration-landlord-reply-2",
+      "actorId": "clerk",
+      "voiceId": "amt-brunhilde-knick",
+      "profileId": "b080c7d95ecd418fb428282461d7fbe7",
+      "text": "Ach. Und die Wohnung ist zufällig möglich? Eine Anzeige ohne Anmeldung hebt keine Meldepflicht auf! Wir klären, wer Ihnen den Raum gibt.",
+      "sourceLocator": "buergeramt-story.js registration.nodes.landlord.choices[1].reply",
+      "reason": "not rendered; selected production fallback"
+    },
+    {
+      "clipId": "knick-registration-landlordfix",
+      "actorId": "clerk",
+      "voiceId": "amt-brunhilde-knick",
+      "profileId": "b080c7d95ecd418fb428282461d7fbe7",
+      "text": "Sie wohnen dort tatsächlich und auf Dauer. Notieren Sie, wen Sie gefragt haben und was die Person ablehnt. Die Aussage ohne Anmeldung wird nicht durch häufiges Wiederholen zum Formular. Welche Angaben halten Sie fest?",
+      "sourceLocator": "buergeramt-story.js registration.nodes.landlordFix.line",
+      "reason": "not rendered; selected production fallback"
+    },
+    {
+      "clipId": "knick-registration-landlordfix-reply-1",
+      "actorId": "clerk",
+      "voiceId": "amt-brunhilde-knick",
+      "profileId": "b080c7d95ecd418fb428282461d7fbe7",
+      "text": "Die Ablehnung bekommt einen Vermerk. Ihr Wohnungsgeber bekommt gleich eine Zuständigkeit.",
+      "sourceLocator": "buergeramt-story.js registration.nodes.landlordFix.choices[0].reply",
+      "reason": "not rendered; selected production fallback"
+    },
+    {
+      "clipId": "knick-registration-landlordfix-reply-2",
+      "actorId": "clerk",
+      "voiceId": "amt-brunhilde-knick",
+      "profileId": "b080c7d95ecd418fb428282461d7fbe7",
+      "text": "Gut. Jetzt fehlt dem Schreiben nicht mehr das, was es verlangt. Weiter.",
+      "sourceLocator": "buergeramt-story.js registration.nodes.landlordFix.choices[1].reply",
+      "reason": "not rendered; selected production fallback"
+    },
+    {
+      "clipId": "knick-registration-provider",
+      "actorId": "clerk",
+      "voiceId": "amt-brunhilde-knick",
+      "profileId": "b080c7d95ecd418fb428282461d7fbe7",
+      "text": "Untermiete. Sie zahlen an den Hauptmieter, der Ihnen das Zimmer überlassen hat. Die Eigentümerin besitzt das Haus und erklärt sich für alles unzuständig. Wer ist hier Ihr Wohnungsgeber?",
+      "sourceLocator": "buergeramt-story.js registration.nodes.provider.line",
+      "reason": "not rendered; selected production fallback"
+    },
+    {
+      "clipId": "knick-registration-provider-reply-1",
+      "actorId": "clerk",
+      "voiceId": "amt-brunhilde-knick",
+      "profileId": "b080c7d95ecd418fb428282461d7fbe7",
+      "text": "Richtig. Wohnungsgeber und Eigentümer können verschieden sein. Das ist kein Fehler. Das sind zwei Felder.",
+      "sourceLocator": "buergeramt-story.js registration.nodes.provider.choices[0].reply",
+      "reason": "not rendered; selected production fallback"
+    },
+    {
+      "clipId": "knick-registration-provider-reply-2",
+      "actorId": "clerk",
+      "voiceId": "amt-brunhilde-knick",
+      "profileId": "b080c7d95ecd418fb428282461d7fbe7",
+      "text": "Sie haben das Wort Eigentümerin gefunden und den Rest der Wohnsituation verloren! Bei Ihrer Untermiete ist der Hauptmieter der Wohnungsgeber!",
+      "sourceLocator": "buergeramt-story.js registration.nodes.provider.choices[1].reply",
+      "reason": "not rendered; selected production fallback"
+    },
+    {
+      "clipId": "knick-registration-providerfix",
+      "actorId": "clerk",
+      "voiceId": "amt-brunhilde-knick",
+      "profileId": "b080c7d95ecd418fb428282461d7fbe7",
+      "text": "Der Hauptmieter bestätigt Ihren tatsächlichen Einzug als Wohnungsgeber. Die Eigentümerin wird zusätzlich benannt. Mietrechtliche Erlaubnisse sind ein anderes Thema. Welche Person schreiben Sie ins Wohnungsgeberfeld?",
+      "sourceLocator": "buergeramt-story.js registration.nodes.providerFix.line",
+      "reason": "not rendered; selected production fallback"
+    },
+    {
+      "clipId": "knick-registration-providerfix-reply-1",
+      "actorId": "clerk",
+      "voiceId": "amt-brunhilde-knick",
+      "profileId": "b080c7d95ecd418fb428282461d7fbe7",
+      "text": "Jetzt ist das richtige Feld zuständig. Ich werde dem Haus das Eigentum deshalb nicht entziehen.",
+      "sourceLocator": "buergeramt-story.js registration.nodes.providerFix.choices[0].reply",
+      "reason": "not rendered; selected production fallback"
+    },
+    {
+      "clipId": "knick-registration-providerfix-reply-2",
+      "actorId": "clerk",
+      "voiceId": "amt-brunhilde-knick",
+      "profileId": "b080c7d95ecd418fb428282461d7fbe7",
+      "text": "Zwei Namen in zwei Feldern. Keine Fusion im Unterschriftenbereich.",
+      "sourceLocator": "buergeramt-story.js registration.nodes.providerFix.choices[1].reply",
+      "reason": "not rendered; selected production fallback"
+    },
+    {
+      "clipId": "knick-registration-confirmation",
+      "actorId": "clerk",
+      "voiceId": "amt-brunhilde-knick",
+      "profileId": "b080c7d95ecd418fb428282461d7fbe7",
+      "text": "Wohnungsgeberbestätigung, § 19. Haben Sie die Bestätigung des tatsächlichen Einzugs? Oder schickt Ihr Wohnungsgeber Sie seit Wochen zwischen Hauptmieter, Verwaltung und dem Begriff nächste Woche im Kreis?",
+      "sourceLocator": "buergeramt-story.js registration.nodes.confirmation.line",
+      "reason": "not rendered; selected production fallback"
+    },
+    {
+      "clipId": "knick-registration-confirmation-reply-1",
+      "actorId": "clerk",
+      "voiceId": "amt-brunhilde-knick",
+      "profileId": "b080c7d95ecd418fb428282461d7fbe7",
+      "text": "Dann endet der Kreis hier. Ich werde prüfen, ob das Blatt innen ebenfalls eine Bestätigung enthält.",
+      "sourceLocator": "buergeramt-story.js registration.nodes.confirmation.choices[0].reply",
+      "reason": "not rendered; selected production fallback"
+    },
+    {
+      "clipId": "knick-registration-confirmation-reply-2",
+      "actorId": "clerk",
+      "voiceId": "amt-brunhilde-knick",
+      "profileId": "b080c7d95ecd418fb428282461d7fbe7",
+      "text": "Dann MELDEN Sie mir das! § 19 Absatz 2: Die fehlende oder verweigerte Bestätigung ist unverzüglich der Meldebehörde mitzuteilen. Sie stehen gerade vor einer!",
+      "sourceLocator": "buergeramt-story.js registration.nodes.confirmation.choices[1].reply",
+      "reason": "not rendered; selected production fallback"
+    },
+    {
+      "clipId": "knick-registration-withheldreport",
+      "actorId": "clerk",
+      "voiceId": "amt-brunhilde-knick",
+      "profileId": "b080c7d95ecd418fb428282461d7fbe7",
+      "text": "Ich erfasse die fehlende Bestätigung. Was berichten Sie: die konkreten Anfragen samt Antwort, oder eine neue Ausrede, warum Sie vorsichtshalber weder hier noch dort existieren?",
+      "sourceLocator": "buergeramt-story.js registration.nodes.withheldReport.line",
+      "reason": "not rendered; selected production fallback"
+    },
+    {
+      "clipId": "knick-registration-withheldreport-reply-1",
+      "actorId": "clerk",
+      "voiceId": "amt-brunhilde-knick",
+      "profileId": "b080c7d95ecd418fb428282461d7fbe7",
+      "text": "Die Mitteilung ist aufgenommen. Ihr Einzug verschwindet dadurch nicht. Wir klären die Bestätigung jetzt mit dem Wohnungsgeber.",
+      "sourceLocator": "buergeramt-story.js registration.nodes.withheldReport.choices[0].reply",
+      "reason": "not rendered; selected production fallback"
+    },
+    {
+      "clipId": "knick-registration-withheldreport-reply-2",
+      "actorId": "clerk",
+      "voiceId": "amt-brunhilde-knick",
+      "profileId": "b080c7d95ecd418fb428282461d7fbe7",
+      "text": "NEIN! Nicht warten und heimlich verschwinden. Fehlende Bestätigung melden. Namen, Anschrift, Einzug und bisherige Anfragen. Jetzt!",
+      "sourceLocator": "buergeramt-story.js registration.nodes.withheldReport.choices[1].reply",
+      "reason": "not rendered; selected production fallback"
+    },
+    {
+      "clipId": "knick-registration-withheldreportfix",
+      "actorId": "clerk",
+      "voiceId": "amt-brunhilde-knick",
+      "profileId": "b080c7d95ecd418fb428282461d7fbe7",
+      "text": "Sein Schweigen ersetzt Ihre Mitteilung nicht. Ich nehme sie hier auf. Sie können mir den bisherigen Schriftwechsel geben oder die Verweigerung mit Datum schildern. Welche Form der Auskunft gelingt Ihnen?",
+      "sourceLocator": "buergeramt-story.js registration.nodes.withheldReportFix.line",
+      "reason": "not rendered; selected production fallback"
+    },
+    {
+      "clipId": "knick-registration-withheldreportfix-reply-1",
+      "actorId": "clerk",
+      "voiceId": "amt-brunhilde-knick",
+      "profileId": "b080c7d95ecd418fb428282461d7fbe7",
+      "text": "Aufgenommen. Ich loche die Nachrichten, nicht Sie.",
+      "sourceLocator": "buergeramt-story.js registration.nodes.withheldReportFix.choices[0].reply",
+      "reason": "not rendered; selected production fallback"
+    },
+    {
+      "clipId": "knick-registration-withheldreportfix-reply-2",
+      "actorId": "clerk",
+      "voiceId": "amt-brunhilde-knick",
+      "profileId": "b080c7d95ecd418fb428282461d7fbe7",
+      "text": "Ich protokolliere das und gleiche die Daten ab. Endlich gibt es eine Mitteilung über das Ausbleiben einer Mitteilung.",
+      "sourceLocator": "buergeramt-story.js registration.nodes.withheldReportFix.choices[1].reply",
+      "reason": "not rendered; selected production fallback"
+    },
+    {
+      "clipId": "knick-registration-withheldrecord",
+      "actorId": "clerk",
+      "voiceId": "amt-brunhilde-knick",
+      "profileId": "b080c7d95ecd418fb428282461d7fbe7",
+      "text": "Für die Rückfrage brauche ich Name und Anschrift des Hauptmieters, Ihre Wohnanschrift und das Einzugsdatum. Sein Kontaktformular antwortet nur automatisch. Welche Unterlagen helfen uns trotzdem weiter?",
+      "sourceLocator": "buergeramt-story.js registration.nodes.withheldRecord.line",
+      "reason": "not rendered; selected production fallback"
+    },
+    {
+      "clipId": "knick-registration-withheldrecord-reply-1",
+      "actorId": "clerk",
+      "voiceId": "amt-brunhilde-knick",
+      "profileId": "b080c7d95ecd418fb428282461d7fbe7",
+      "text": "Damit kann ich die Rückfrage zuordnen. Der Mietvertrag ist dabei ein Beleg, kein Ersatz für die Bestätigung.",
+      "sourceLocator": "buergeramt-story.js registration.nodes.withheldRecord.choices[0].reply",
+      "reason": "not rendered; selected production fallback"
+    },
+    {
+      "clipId": "knick-registration-withheldrecord-reply-2",
+      "actorId": "clerk",
+      "voiceId": "amt-brunhilde-knick",
+      "profileId": "b080c7d95ecd418fb428282461d7fbe7",
+      "text": "Er ersetzt sie NICHT! Er hilft bei der Klärung. Sie müssen nicht jedes Papier zum selben Papier erklären!",
+      "sourceLocator": "buergeramt-story.js registration.nodes.withheldRecord.choices[1].reply",
+      "reason": "not rendered; selected production fallback"
+    },
+    {
+      "clipId": "knick-registration-withheldlookup",
+      "actorId": "clerk",
+      "voiceId": "amt-brunhilde-knick",
+      "profileId": "b080c7d95ecd418fb428282461d7fbe7",
+      "text": "Ich verlange vom Wohnungsgeber Auskunft zum Einzug. Die Verwaltung faxt zurück: nicht Eigentümer. Das wussten wir. Wie beantworten Sie die Rückfrage, ohne die Akte wieder an den Anfang zu katapultieren?",
+      "sourceLocator": "buergeramt-story.js registration.nodes.withheldLookup.line",
+      "reason": "not rendered; selected production fallback"
+    },
+    {
+      "clipId": "knick-registration-withheldlookup-reply-1",
+      "actorId": "clerk",
+      "voiceId": "amt-brunhilde-knick",
+      "profileId": "b080c7d95ecd418fb428282461d7fbe7",
+      "text": "Ich ergänze den Vermerk. Der Hauptmieter findet plötzlich einen Stift. Die bestätigten Einzugsdaten kommen zurück.",
+      "sourceLocator": "buergeramt-story.js registration.nodes.withheldLookup.choices[0].reply",
+      "reason": "not rendered; selected production fallback"
+    },
+    {
+      "clipId": "knick-registration-withheldlookup-reply-2",
+      "actorId": "clerk",
+      "voiceId": "amt-brunhilde-knick",
+      "profileId": "b080c7d95ecd418fb428282461d7fbe7",
+      "text": "Ich halte beide Zuständigkeiten getrennt fest. Der Hauptmieter liefert endlich die unterschriebene Bestätigung nach.",
+      "sourceLocator": "buergeramt-story.js registration.nodes.withheldLookup.choices[1].reply",
+      "reason": "not rendered; selected production fallback"
+    },
+    {
+      "clipId": "knick-registration-withheldreturn",
+      "actorId": "clerk",
+      "voiceId": "amt-brunhilde-knick",
+      "profileId": "b080c7d95ecd418fb428282461d7fbe7",
+      "text": "Die nachgereichte Bestätigung liegt hier. Der Hauptmieter entschuldigt sich mit einem Druckerproblem. Der Drucker besitzt weder das Haus noch eine Meldefrist. Was prüfen wir zuerst auf dem neuen Blatt?",
+      "sourceLocator": "buergeramt-story.js registration.nodes.withheldReturn.line",
+      "reason": "not rendered; selected production fallback"
+    },
+    {
+      "clipId": "knick-registration-withheldreturn-reply-1",
+      "actorId": "clerk",
+      "voiceId": "amt-brunhilde-knick",
+      "profileId": "b080c7d95ecd418fb428282461d7fbe7",
+      "text": "Genau. Die Verzögerung ist vermerkt. Das Blatt wird jetzt mit Ihrem Dossier abgeglichen.",
+      "sourceLocator": "buergeramt-story.js registration.nodes.withheldReturn.choices[0].reply",
+      "reason": "not rendered; selected production fallback"
+    },
+    {
+      "clipId": "knick-registration-withheldreturn-reply-2",
+      "actorId": "clerk",
+      "voiceId": "amt-brunhilde-knick",
+      "profileId": "b080c7d95ecd418fb428282461d7fbe7",
+      "text": "Der Umschlag wohnt draußen in der Postablage. Wir prüfen den INHALT. Datum, Anschrift, Namen, Unterschrift!",
+      "sourceLocator": "buergeramt-story.js registration.nodes.withheldReturn.choices[1].reply",
+      "reason": "not rendered; selected production fallback"
+    },
+    {
+      "clipId": "knick-registration-dossier",
+      "actorId": "clerk",
+      "voiceId": "amt-brunhilde-knick",
+      "profileId": "b080c7d95ecd418fb428282461d7fbe7",
+      "text": "Ihr Dossier enthält Mietvertrag, Wohnungsgeberbestätigung und Anmeldeformular. Drei Blätter. Sie legen sie so übereinander, als könnten sie gegenseitig ihre Arbeit erledigen. Welches bestätigt den tatsächlichen Einzug?",
+      "sourceLocator": "buergeramt-story.js registration.nodes.dossier.line",
+      "reason": "not rendered; selected production fallback"
+    },
+    {
+      "clipId": "knick-registration-dossier-reply-1",
+      "actorId": "clerk",
+      "voiceId": "amt-brunhilde-knick",
+      "profileId": "b080c7d95ecd418fb428282461d7fbe7",
+      "text": "Die kommt zuerst. Der Mietvertrag hat daneben genug Platz, um weiter kein Ersatz zu sein.",
+      "sourceLocator": "buergeramt-story.js registration.nodes.dossier.choices[0].reply",
+      "reason": "not rendered; selected production fallback"
+    },
+    {
+      "clipId": "knick-registration-dossier-reply-2",
+      "actorId": "clerk",
+      "voiceId": "amt-brunhilde-knick",
+      "profileId": "b080c7d95ecd418fb428282461d7fbe7",
+      "text": "Dicke ist keine Rechtsgrundlage! Einen Telefonkatalog würde ich Ihnen auch nicht als Reisepass stempeln!",
+      "sourceLocator": "buergeramt-story.js registration.nodes.dossier.choices[1].reply",
+      "reason": "not rendered; selected production fallback"
+    },
+    {
+      "clipId": "knick-registration-dossierfix",
+      "actorId": "clerk",
+      "voiceId": "amt-brunhilde-knick",
+      "profileId": "b080c7d95ecd418fb428282461d7fbe7",
+      "text": "Der Vertrag vereinbart die Miete. Die Bestätigung bestätigt den Einzug. Ihr Anmeldeformular meldet Sie an. Ordnen Sie die drei Blätter so, dass jedes seinen einzigen Beruf ausüben darf!",
+      "sourceLocator": "buergeramt-story.js registration.nodes.dossierFix.line",
+      "reason": "not rendered; selected production fallback"
+    },
+    {
+      "clipId": "knick-registration-dossierfix-reply-1",
+      "actorId": "clerk",
+      "voiceId": "amt-brunhilde-knick",
+      "profileId": "b080c7d95ecd418fb428282461d7fbe7",
+      "text": "Ordnung hergestellt. Der Vertrag bleibt als ergänzende Unterlage dahinter.",
+      "sourceLocator": "buergeramt-story.js registration.nodes.dossierFix.choices[0].reply",
+      "reason": "not rendered; selected production fallback"
+    },
+    {
+      "clipId": "knick-registration-dossierfix-reply-2",
+      "actorId": "clerk",
+      "voiceId": "amt-brunhilde-knick",
+      "profileId": "b080c7d95ecd418fb428282461d7fbe7",
+      "text": "Gut. Ihre Blätter haben ihre Zuständigkeiten wiedergefunden.",
+      "sourceLocator": "buergeramt-story.js registration.nodes.dossierFix.choices[1].reply",
+      "reason": "not rendered; selected production fallback"
+    },
+    {
+      "clipId": "knick-registration-address",
+      "actorId": "clerk",
+      "voiceId": "amt-brunhilde-knick",
+      "profileId": "b080c7d95ecd418fb428282461d7fbe7",
+      "text": "Wohnanschrift. Straße, Hausnummer, Postleitzahl, Ort. Sie haben Hinterhof, die kaputte Klingel geschrieben. Der Hinterhof hat heute leider keine eigene Meldestelle. Welche Anschrift wird eingetragen?",
+      "sourceLocator": "buergeramt-story.js registration.nodes.address.line",
+      "reason": "not rendered; selected production fallback"
+    },
+    {
+      "clipId": "knick-registration-address-reply-1",
+      "actorId": "clerk",
+      "voiceId": "amt-brunhilde-knick",
+      "profileId": "b080c7d95ecd418fb428282461d7fbe7",
+      "text": "Und die Wohnlage nur ergänzend, damit wir die Wohnung zuordnen können. Die kaputte Klingel bleibt Bauzustand.",
+      "sourceLocator": "buergeramt-story.js registration.nodes.address.choices[0].reply",
+      "reason": "not rendered; selected production fallback"
+    },
+    {
+      "clipId": "knick-registration-address-reply-2",
+      "actorId": "clerk",
+      "voiceId": "amt-brunhilde-knick",
+      "profileId": "b080c7d95ecd418fb428282461d7fbe7",
+      "text": "Sie wohnen nicht beim Briefkasten Ihres Freundes! Eine freundliche Adresse ersetzt keinen tatsächlichen Einzug!",
+      "sourceLocator": "buergeramt-story.js registration.nodes.address.choices[1].reply",
+      "reason": "not rendered; selected production fallback"
+    },
+    {
+      "clipId": "knick-registration-addressfix",
+      "actorId": "clerk",
+      "voiceId": "amt-brunhilde-knick",
+      "profileId": "b080c7d95ecd418fb428282461d7fbe7",
+      "text": "Sie melden die Wohnung an, die Sie tatsächlich bezogen haben. Nicht die schönste Zustellmöglichkeit. Gleichen Sie Straße, Nummer, Postleitzahl und Ort mit der Einzugsbestätigung ab. Was tragen Sie ein?",
+      "sourceLocator": "buergeramt-story.js registration.nodes.addressFix.line",
+      "reason": "not rendered; selected production fallback"
+    },
+    {
+      "clipId": "knick-registration-addressfix-reply-1",
+      "actorId": "clerk",
+      "voiceId": "amt-brunhilde-knick",
+      "profileId": "b080c7d95ecd418fb428282461d7fbe7",
+      "text": "So. Die Post darf Sie dann ebenfalls finden. Das ist eine Folge, keine zweite Wohnung.",
+      "sourceLocator": "buergeramt-story.js registration.nodes.addressFix.choices[0].reply",
+      "reason": "not rendered; selected production fallback"
+    },
+    {
+      "clipId": "knick-registration-addressfix-reply-2",
+      "actorId": "clerk",
+      "voiceId": "amt-brunhilde-knick",
+      "profileId": "b080c7d95ecd418fb428282461d7fbe7",
+      "text": "Beide Blätter zeigen dieselbe Wohnung. Ich muss das Haus nicht mehr in der Akte suchen.",
+      "sourceLocator": "buergeramt-story.js registration.nodes.addressFix.choices[1].reply",
+      "reason": "not rendered; selected production fallback"
+    },
+    {
+      "clipId": "knick-registration-owner",
+      "actorId": "clerk",
+      "voiceId": "amt-brunhilde-knick",
+      "profileId": "b080c7d95ecd418fb428282461d7fbe7",
+      "text": "Ihr Hauptmieter ist Wohnungsgeber, aber kein Eigentümer. Auf der Bestätigung stehen sein Name und seine Anschrift. Welcher zusätzliche Name fehlt noch? Nein, nicht meiner. Ich wohne NICHT in Ihrer Akte!",
+      "sourceLocator": "buergeramt-story.js registration.nodes.owner.line",
+      "reason": "not rendered; selected production fallback"
+    },
+    {
+      "clipId": "knick-registration-owner-reply-1",
+      "actorId": "clerk",
+      "voiceId": "amt-brunhilde-knick",
+      "profileId": "b080c7d95ecd418fb428282461d7fbe7",
+      "text": "Jetzt kann ich Eigentum und Überlassung auseinanderhalten, ohne einen Stammbaum des Hauses anzulegen.",
+      "sourceLocator": "buergeramt-story.js registration.nodes.owner.choices[0].reply",
+      "reason": "not rendered; selected production fallback"
+    },
+    {
+      "clipId": "knick-registration-owner-reply-2",
+      "actorId": "clerk",
+      "voiceId": "amt-brunhilde-knick",
+      "profileId": "b080c7d95ecd418fb428282461d7fbe7",
+      "text": "Ein Spitzname ersetzt weder Namen noch Eigentümerin! Das Eigentümerfeld ist leer. Lassen Sie es vervollständigen!",
+      "sourceLocator": "buergeramt-story.js registration.nodes.owner.choices[1].reply",
+      "reason": "not rendered; selected production fallback"
+    },
+    {
+      "clipId": "knick-registration-ownerfix",
+      "actorId": "clerk",
+      "voiceId": "amt-brunhilde-knick",
+      "profileId": "b080c7d95ecd418fb428282461d7fbe7",
+      "text": "Die Hausunterlagen nennen die Eigentümerin. Der Hauptmieter ergänzt ihren Namen auf der Bestätigung. Seinen eigenen Namen und seine Anschrift behalten wir. Welche Angabe prüfen Sie danach?",
+      "sourceLocator": "buergeramt-story.js registration.nodes.ownerFix.line",
+      "reason": "not rendered; selected production fallback"
+    },
+    {
+      "clipId": "knick-registration-ownerfix-reply-1",
+      "actorId": "clerk",
+      "voiceId": "amt-brunhilde-knick",
+      "profileId": "b080c7d95ecd418fb428282461d7fbe7",
+      "text": "Vollständig. Das Haus gehört weiter der Eigentümerin, auch wenn sie nun in einem zweiten Formular vorkommt.",
+      "sourceLocator": "buergeramt-story.js registration.nodes.ownerFix.choices[0].reply",
+      "reason": "not rendered; selected production fallback"
+    },
+    {
+      "clipId": "knick-registration-ownerfix-reply-2",
+      "actorId": "clerk",
+      "voiceId": "amt-brunhilde-knick",
+      "profileId": "b080c7d95ecd418fb428282461d7fbe7",
+      "text": "Keine Partei wurde durch Weglassen entlastet. Weiter zur Liste der Eingezogenen.",
+      "sourceLocator": "buergeramt-story.js registration.nodes.ownerFix.choices[1].reply",
+      "reason": "not rendered; selected production fallback"
+    },
+    {
+      "clipId": "knick-registration-residents",
+      "actorId": "clerk",
+      "voiceId": "amt-brunhilde-knick",
+      "profileId": "b080c7d95ecd418fb428282461d7fbe7",
+      "text": "Namen der einziehenden meldepflichtigen Personen. Der Wohnungsgeber hat neue Leute geschrieben. Wie aufmerksam. Soll ich neue Leute jetzt als Familiennamen eintragen? Welche Fassung legen Sie vor?",
+      "sourceLocator": "buergeramt-story.js registration.nodes.residents.line",
+      "reason": "not rendered; selected production fallback"
+    },
+    {
+      "clipId": "knick-registration-residents-reply-1",
+      "actorId": "clerk",
+      "voiceId": "amt-brunhilde-knick",
+      "profileId": "b080c7d95ecd418fb428282461d7fbe7",
+      "text": "Vollständige Namen der tatsächlich Eingezogenen. Der Wohnungsgeber korrigiert den Sammelbegriff.",
+      "sourceLocator": "buergeramt-story.js registration.nodes.residents.choices[0].reply",
+      "reason": "not rendered; selected production fallback"
+    },
+    {
+      "clipId": "knick-registration-residents-reply-2",
+      "actorId": "clerk",
+      "voiceId": "amt-brunhilde-knick",
+      "profileId": "b080c7d95ecd418fb428282461d7fbe7",
+      "text": "NEBENWOHNUNG ist ein Begriff. Nebenmensch ist keiner! Auf die Bestätigung gehören die meldepflichtigen Eingezogenen!",
+      "sourceLocator": "buergeramt-story.js registration.nodes.residents.choices[1].reply",
+      "reason": "not rendered; selected production fallback"
+    },
+    {
+      "clipId": "knick-registration-residentsfix",
+      "actorId": "clerk",
+      "voiceId": "amt-brunhilde-knick",
+      "profileId": "b080c7d95ecd418fb428282461d7fbe7",
+      "text": "Wir ergänzen die fehlenden Namen der tatsächlich Eingezogenen. Sie müssen keine Nachbarn miterfinden. Wer auf dieser Bestätigung steht, muss zu diesem Einzug gehören. Wie korrigieren wir die Liste?",
+      "sourceLocator": "buergeramt-story.js registration.nodes.residentsFix.line",
+      "reason": "not rendered; selected production fallback"
+    },
+    {
+      "clipId": "knick-registration-residentsfix-reply-1",
+      "actorId": "clerk",
+      "voiceId": "amt-brunhilde-knick",
+      "profileId": "b080c7d95ecd418fb428282461d7fbe7",
+      "text": "Die Liste ist berichtigt. Die Bewohner der Nachbarwohnung bleiben bei ihrem eigenen Papier.",
+      "sourceLocator": "buergeramt-story.js registration.nodes.residentsFix.choices[0].reply",
+      "reason": "not rendered; selected production fallback"
+    },
+    {
+      "clipId": "knick-registration-residentsfix-reply-2",
+      "actorId": "clerk",
+      "voiceId": "amt-brunhilde-knick",
+      "profileId": "b080c7d95ecd418fb428282461d7fbe7",
+      "text": "Jetzt stimmen die Namen mit den Personen überein. Ein seltenes, aber zulässiges Ergebnis.",
+      "sourceLocator": "buergeramt-story.js registration.nodes.residentsFix.choices[1].reply",
+      "reason": "not rendered; selected production fallback"
+    },
+    {
+      "clipId": "knick-registration-providersignature",
+      "actorId": "clerk",
+      "voiceId": "amt-brunhilde-knick",
+      "profileId": "b080c7d95ecd418fb428282461d7fbe7",
+      "text": "Die Wohnungsgeberbestätigung ist schriftlich da. Unten steht gesendet von meinem Smartphone. Hat das Smartphone Ihnen das Zimmer überlassen? Wer muss diesen Einzug bestätigen?",
+      "sourceLocator": "buergeramt-story.js registration.nodes.providerSignature.line",
+      "reason": "not rendered; selected production fallback"
+    },
+    {
+      "clipId": "knick-registration-providersignature-reply-1",
+      "actorId": "clerk",
+      "voiceId": "amt-brunhilde-knick",
+      "profileId": "b080c7d95ecd418fb428282461d7fbe7",
+      "text": "Dann prüfen wir dessen Unterschrift auf der Bestätigung. Ihr Telefon wird nicht zum Vermieter befördert.",
+      "sourceLocator": "buergeramt-story.js registration.nodes.providerSignature.choices[0].reply",
+      "reason": "not rendered; selected production fallback"
+    },
+    {
+      "clipId": "knick-registration-providersignature-reply-2",
+      "actorId": "clerk",
+      "voiceId": "amt-brunhilde-knick",
+      "profileId": "b080c7d95ecd418fb428282461d7fbe7",
+      "text": "SIE UNTERSCHREIBEN NICHT FÜR IHN! Das Blatt darf nur der Wohnungsgeber oder seine beauftragte Person ausstellen!",
+      "sourceLocator": "buergeramt-story.js registration.nodes.providerSignature.choices[1].reply",
+      "reason": "not rendered; selected production fallback"
+    },
+    {
+      "clipId": "knick-registration-providersignaturefix",
+      "actorId": "clerk",
+      "voiceId": "amt-brunhilde-knick",
+      "profileId": "b080c7d95ecd418fb428282461d7fbe7",
+      "text": "Der Wohnungsgeber hat die korrigierte Fassung unterschrieben nachgereicht. Ihr eigener Stift bleibt liegen. Vergleichen Sie die Unterschrift mit der angegebenen ausstellenden Person. Was prüfen Sie?",
+      "sourceLocator": "buergeramt-story.js registration.nodes.providerSignatureFix.line",
+      "reason": "not rendered; selected production fallback"
+    },
+    {
+      "clipId": "knick-registration-providersignaturefix-reply-1",
+      "actorId": "clerk",
+      "voiceId": "amt-brunhilde-knick",
+      "profileId": "b080c7d95ecd418fb428282461d7fbe7",
+      "text": "Die Bestätigung ist unterschrieben. Keine Stellvertretung durch Ihre Ungeduld.",
+      "sourceLocator": "buergeramt-story.js registration.nodes.providerSignatureFix.choices[0].reply",
+      "reason": "not rendered; selected production fallback"
+    },
+    {
+      "clipId": "knick-registration-providersignaturefix-reply-2",
+      "actorId": "clerk",
+      "voiceId": "amt-brunhilde-knick",
+      "profileId": "b080c7d95ecd418fb428282461d7fbe7",
+      "text": "Die Person ist beauftragt, die Bestätigung ist zugeordnet. Das können wir so prüfen.",
+      "sourceLocator": "buergeramt-story.js registration.nodes.providerSignatureFix.choices[1].reply",
+      "reason": "not rendered; selected production fallback"
+    },
+    {
+      "clipId": "knick-registration-dates",
+      "actorId": "clerk",
+      "voiceId": "amt-brunhilde-knick",
+      "profileId": "b080c7d95ecd418fb428282461d7fbe7",
+      "text": "Auf dem Anmeldeformular steht der Fünfte. In der Bestätigung stand zuerst der Erste, das Vertragsdatum. Der Wohnungsgeber hat es korrigiert. Welche Fassung geht in die Akte?",
+      "sourceLocator": "buergeramt-story.js registration.nodes.dates.line",
+      "reason": "not rendered; selected production fallback"
+    },
+    {
+      "clipId": "knick-registration-dates-reply-1",
+      "actorId": "clerk",
+      "voiceId": "amt-brunhilde-knick",
+      "profileId": "b080c7d95ecd418fb428282461d7fbe7",
+      "text": "Beide Blätter nennen jetzt den tatsächlichen Einzug. Ich hefte die alte Fassung hinter den Korrekturvermerk.",
+      "sourceLocator": "buergeramt-story.js registration.nodes.dates.choices[0].reply",
+      "reason": "not rendered; selected production fallback"
+    },
+    {
+      "clipId": "knick-registration-dates-reply-2",
+      "actorId": "clerk",
+      "voiceId": "amt-brunhilde-knick",
+      "profileId": "b080c7d95ecd418fb428282461d7fbe7",
+      "text": "MEIN NAME IST KNICK, NICHT MEIN PRÜFKRITERIUM! Das falsche Datum wird nicht durch Falten richtig!",
+      "sourceLocator": "buergeramt-story.js registration.nodes.dates.choices[1].reply",
+      "reason": "not rendered; selected production fallback"
+    },
+    {
+      "clipId": "knick-registration-datesfix",
+      "actorId": "clerk",
+      "voiceId": "amt-brunhilde-knick",
+      "profileId": "b080c7d95ecd418fb428282461d7fbe7",
+      "text": "Die berichtigte Bestätigung liegt direkt vor Ihnen. Der Einzug war am Fünften. Nehmen Sie die richtige Fassung. Oder markieren Sie die alte ausdrücklich als ersetzt. Wie verhindern Sie ein zweites falsches Datum?",
+      "sourceLocator": "buergeramt-story.js registration.nodes.datesFix.line",
+      "reason": "not rendered; selected production fallback"
+    },
+    {
+      "clipId": "knick-registration-datesfix-reply-1",
+      "actorId": "clerk",
+      "voiceId": "amt-brunhilde-knick",
+      "profileId": "b080c7d95ecd418fb428282461d7fbe7",
+      "text": "So kommt sie ins Dossier. Der schöne Knick darf in der Altunterlage wohnen.",
+      "sourceLocator": "buergeramt-story.js registration.nodes.datesFix.choices[0].reply",
+      "reason": "not rendered; selected production fallback"
+    },
+    {
+      "clipId": "knick-registration-datesfix-reply-2",
+      "actorId": "clerk",
+      "voiceId": "amt-brunhilde-knick",
+      "profileId": "b080c7d95ecd418fb428282461d7fbe7",
+      "text": "Jetzt ist die Korrektur nachvollziehbar. Weiter, bevor der Kalender in Rente geht.",
+      "sourceLocator": "buergeramt-story.js registration.nodes.datesFix.choices[1].reply",
+      "reason": "not rendered; selected production fallback"
+    },
+    {
+      "clipId": "knick-registration-registrationsignature",
+      "actorId": "clerk",
+      "voiceId": "amt-brunhilde-knick",
+      "profileId": "b080c7d95ecd418fb428282461d7fbe7",
+      "text": "Nun IHRE Unterschrift auf IHREM Anmeldeformular. Der Vermieter unterschreibt seine Bestätigung, Sie Ihre Anmeldung. Ich habe zwei Linien vorgedruckt, damit niemand dafür ein Gutachten bestellen muss. Was unterschreiben Sie?",
+      "sourceLocator": "buergeramt-story.js registration.nodes.registrationSignature.line",
+      "reason": "not rendered; selected production fallback"
+    },
+    {
+      "clipId": "knick-registration-registrationsignature-reply-1",
+      "actorId": "clerk",
+      "voiceId": "amt-brunhilde-knick",
+      "profileId": "b080c7d95ecd418fb428282461d7fbe7",
+      "text": "In Ihrem Namen, auf Ihrem Antrag. Der Kugelschreiber hat seine Zuständigkeit verstanden.",
+      "sourceLocator": "buergeramt-story.js registration.nodes.registrationSignature.choices[0].reply",
+      "reason": "not rendered; selected production fallback"
+    },
+    {
+      "clipId": "knick-registration-registrationsignature-reply-2",
+      "actorId": "clerk",
+      "voiceId": "amt-brunhilde-knick",
+      "profileId": "b080c7d95ecd418fb428282461d7fbe7",
+      "text": "Er ist nicht Sie! Es sei denn, Ihr Pass hat mir gerade einen vollständigen Identitätswechsel verschwiegen!",
+      "sourceLocator": "buergeramt-story.js registration.nodes.registrationSignature.choices[1].reply",
+      "reason": "not rendered; selected production fallback"
+    },
+    {
+      "clipId": "knick-registration-registrationsignaturefix",
+      "actorId": "clerk",
+      "voiceId": "amt-brunhilde-knick",
+      "profileId": "b080c7d95ecd418fb428282461d7fbe7",
+      "text": "Ihre Angaben stehen auf dem Formular. Prüfen Sie sie und unterschreiben Sie selbst die Anmeldung. Die Wohnungsgeberbestätigung ist bereits vom richtigen Aussteller unterschrieben. Welche Linie gehört Ihnen?",
+      "sourceLocator": "buergeramt-story.js registration.nodes.registrationSignatureFix.line",
+      "reason": "not rendered; selected production fallback"
+    },
+    {
+      "clipId": "knick-registration-registrationsignaturefix-reply-1",
+      "actorId": "clerk",
+      "voiceId": "amt-brunhilde-knick",
+      "profileId": "b080c7d95ecd418fb428282461d7fbe7",
+      "text": "Unterschrieben. Zwei Blätter, zwei Unterschriften, kein Personentausch.",
+      "sourceLocator": "buergeramt-story.js registration.nodes.registrationSignatureFix.choices[0].reply",
+      "reason": "not rendered; selected production fallback"
+    },
+    {
+      "clipId": "knick-registration-registrationsignaturefix-reply-2",
+      "actorId": "clerk",
+      "voiceId": "amt-brunhilde-knick",
+      "profileId": "b080c7d95ecd418fb428282461d7fbe7",
+      "text": "Sie bestätigen Ihre Angaben. Ich bestätige später, dass ich sie registriert habe. Die Reihenfolge hat einen Sinn.",
+      "sourceLocator": "buergeramt-story.js registration.nodes.registrationSignatureFix.choices[1].reply",
+      "reason": "not rendered; selected production fallback"
+    },
+    {
+      "clipId": "knick-registration-residence",
+      "actorId": "clerk",
+      "voiceId": "amt-brunhilde-knick",
+      "profileId": "b080c7d95ecd418fb428282461d7fbe7",
+      "text": "Alleinige Wohnung oder mehrere Wohnungen in Deutschland? Antworten Sie nach Ihrer Wohnsituation, nicht nach der Anzahl der Schlüssel an Ihrem Bund. Ein Fahrradschlüssel zählt mir hier nicht als Nebenwohnung!",
+      "sourceLocator": "buergeramt-story.js registration.nodes.residence.line",
+      "reason": "not rendered; selected production fallback"
+    },
+    {
+      "clipId": "knick-registration-residence-reply-1",
+      "actorId": "clerk",
+      "voiceId": "amt-brunhilde-knick",
+      "profileId": "b080c7d95ecd418fb428282461d7fbe7",
+      "text": "Dann erfasse ich sie als alleinige Wohnung. Ein Feld weniger. Ich sehe Ihre unangebrachte Erleichterung.",
+      "sourceLocator": "buergeramt-story.js registration.nodes.residence.choices[0].reply",
+      "reason": "not rendered; selected production fallback"
+    },
+    {
+      "clipId": "knick-registration-residence-reply-2",
+      "actorId": "clerk",
+      "voiceId": "amt-brunhilde-knick",
+      "profileId": "b080c7d95ecd418fb428282461d7fbe7",
+      "text": "Dann benennen Sie alle und bestimmen die Hauptwohnung. Dafür gibt es das Beiblatt, das Sie gerade wegschieben wollten.",
+      "sourceLocator": "buergeramt-story.js registration.nodes.residence.choices[1].reply",
+      "reason": "not rendered; selected production fallback"
+    },
+    {
+      "clipId": "knick-registration-residencedetails",
+      "actorId": "clerk",
+      "voiceId": "amt-brunhilde-knick",
+      "profileId": "b080c7d95ecd418fb428282461d7fbe7",
+      "text": "Weitere Wohnungen kommen aufs Beiblatt. Hauptwohnung ist grundsätzlich die vorwiegend benutzte Wohnung; auch Ihre familiäre Wohnsituation kann maßgeblich sein. Wie verhindern Sie, dass zwei Hauptwohnungen gegeneinander regieren?",
+      "sourceLocator": "buergeramt-story.js registration.nodes.residenceDetails.line",
+      "reason": "not rendered; selected production fallback"
+    },
+    {
+      "clipId": "knick-registration-residencedetails-reply-1",
+      "actorId": "clerk",
+      "voiceId": "amt-brunhilde-knick",
+      "profileId": "b080c7d95ecd418fb428282461d7fbe7",
+      "text": "Wir prüfen die Einordnung und vermerken diese als Hauptwohnung. Die übrigen bleiben als Nebenwohnungen erfasst.",
+      "sourceLocator": "buergeramt-story.js registration.nodes.residenceDetails.choices[0].reply",
+      "reason": "not rendered; selected production fallback"
+    },
+    {
+      "clipId": "knick-registration-residencedetails-reply-2",
+      "actorId": "clerk",
+      "voiceId": "amt-brunhilde-knick",
+      "profileId": "b080c7d95ecd418fb428282461d7fbe7",
+      "text": "NEIN! § 21 verlangt die Angaben zu weiteren Wohnungen im Inland. Eine weggelassene Wohnung wird nicht abgerissen!",
+      "sourceLocator": "buergeramt-story.js registration.nodes.residenceDetails.choices[1].reply",
+      "reason": "not rendered; selected production fallback"
+    },
+    {
+      "clipId": "knick-registration-residencefix",
+      "actorId": "clerk",
+      "voiceId": "amt-brunhilde-knick",
+      "profileId": "b080c7d95ecd418fb428282461d7fbe7",
+      "text": "Geben Sie die weiteren Wohnungen vollständig an. Hauptwohnung bestimmen wir anhand der maßgeblichen tatsächlichen Nutzung und der Angaben zu Ihrer Wohnsituation. Was reichen Sie nach?",
+      "sourceLocator": "buergeramt-story.js registration.nodes.residenceFix.line",
+      "reason": "not rendered; selected production fallback"
+    },
+    {
+      "clipId": "knick-registration-residencefix-reply-1",
+      "actorId": "clerk",
+      "voiceId": "amt-brunhilde-knick",
+      "profileId": "b080c7d95ecd418fb428282461d7fbe7",
+      "text": "Beiblatt geprüft. Die Einordnung wird eingetragen. Ihre Schlüssel dürfen Sie behalten.",
+      "sourceLocator": "buergeramt-story.js registration.nodes.residenceFix.choices[0].reply",
+      "reason": "not rendered; selected production fallback"
+    },
+    {
+      "clipId": "knick-registration-residencefix-reply-2",
+      "actorId": "clerk",
+      "voiceId": "amt-brunhilde-knick",
+      "profileId": "b080c7d95ecd418fb428282461d7fbe7",
+      "text": "Die Wohnsituationen sind erfasst. Wir legen die Hauptwohnung fest und gehen weiter.",
+      "sourceLocator": "buergeramt-story.js registration.nodes.residenceFix.choices[1].reply",
+      "reason": "not rendered; selected production fallback"
+    },
+    {
+      "clipId": "knick-registration-previous",
+      "actorId": "clerk",
+      "voiceId": "amt-brunhilde-knick",
+      "profileId": "b080c7d95ecd418fb428282461d7fbe7",
+      "text": "Sie haben Ihre bisherige Wohnung in Deutschland aufgegeben und sind hierhergezogen. Haben Sie sich dort extra abgemeldet, oder bringen Sie mir jetzt den Antrag auf einen Antrag für einen Abschiedsstempel?",
+      "sourceLocator": "buergeramt-story.js registration.nodes.previous.line",
+      "reason": "not rendered; selected production fallback"
+    },
+    {
+      "clipId": "knick-registration-previous-reply-1",
+      "actorId": "clerk",
+      "voiceId": "amt-brunhilde-knick",
+      "profileId": "b080c7d95ecd418fb428282461d7fbe7",
+      "text": "Bei diesem Umzug innerhalb Deutschlands brauchen Sie keine gesonderte Abmeldung dort. Ich schicke die Meldedaten weiter, nicht Sie.",
+      "sourceLocator": "buergeramt-story.js registration.nodes.previous.choices[0].reply",
+      "reason": "not rendered; selected production fallback"
+    },
+    {
+      "clipId": "knick-registration-previous-reply-2",
+      "actorId": "clerk",
+      "voiceId": "amt-brunhilde-knick",
+      "profileId": "b080c7d95ecd418fb428282461d7fbe7",
+      "text": "Sie können gern spazieren fahren. Für diesen Umzug ist eine gesonderte Abmeldung dort aber nicht nötig! Bleiben Sie bei Ihrer Anmeldung hier!",
+      "sourceLocator": "buergeramt-story.js registration.nodes.previous.choices[1].reply",
+      "reason": "not rendered; selected production fallback"
+    },
+    {
+      "clipId": "knick-registration-previousfix",
+      "actorId": "clerk",
+      "voiceId": "amt-brunhilde-knick",
+      "profileId": "b080c7d95ecd418fb428282461d7fbe7",
+      "text": "Sie beziehen eine neue Wohnung im Inland. Die bisherige ist aufgegeben. Ich brauche deren Anschrift für den Umzug, keinen besonderen Abschiedsstempel. Welche Angaben vervollständigen Sie?",
+      "sourceLocator": "buergeramt-story.js registration.nodes.previousFix.line",
+      "reason": "not rendered; selected production fallback"
+    },
+    {
+      "clipId": "knick-registration-previousfix-reply-1",
+      "actorId": "clerk",
+      "voiceId": "amt-brunhilde-knick",
+      "profileId": "b080c7d95ecd418fb428282461d7fbe7",
+      "text": "Die bisherige Wohnung ist zugeordnet. Kein Rückfahrtauftrag.",
+      "sourceLocator": "buergeramt-story.js registration.nodes.previousFix.choices[0].reply",
+      "reason": "not rendered; selected production fallback"
+    },
+    {
+      "clipId": "knick-registration-previousfix-reply-2",
+      "actorId": "clerk",
+      "voiceId": "amt-brunhilde-knick",
+      "profileId": "b080c7d95ecd418fb428282461d7fbe7",
+      "text": "Vermerkt. Das Register darf den Umzug jetzt ebenfalls mitbekommen.",
+      "sourceLocator": "buergeramt-story.js registration.nodes.previousFix.choices[1].reply",
+      "reason": "not rendered; selected production fallback"
+    },
+    {
+      "clipId": "knick-registration-civilstatus",
+      "actorId": "clerk",
+      "voiceId": "amt-brunhilde-knick",
+      "profileId": "b080c7d95ecd418fb428282461d7fbe7",
+      "text": "Erste Anmeldung in Berlin. Zur Klärung Ihrer Daten kann ich vorhandene Personenstandsurkunden brauchen. Sie haben die Mappe sorgsam sortiert und die Geburtsurkunde unter unwichtig gelegt. Was geben Sie mir?",
+      "sourceLocator": "buergeramt-story.js registration.nodes.civilStatus.line",
+      "reason": "not rendered; selected production fallback"
+    },
+    {
+      "clipId": "knick-registration-civilstatus-reply-1",
+      "actorId": "clerk",
+      "voiceId": "amt-brunhilde-knick",
+      "profileId": "b080c7d95ecd418fb428282461d7fbe7",
+      "text": "Ich gleiche die erforderlichen Angaben ab. Die Urkunden bleiben Urkunden; sie werden keine zusätzlichen Wohnungsgeber.",
+      "sourceLocator": "buergeramt-story.js registration.nodes.civilStatus.choices[0].reply",
+      "reason": "not rendered; selected production fallback"
+    },
+    {
+      "clipId": "knick-registration-civilstatus-reply-2",
+      "actorId": "clerk",
+      "voiceId": "amt-brunhilde-knick",
+      "profileId": "b080c7d95ecd418fb428282461d7fbe7",
+      "text": "Der Pass erledigt Identität. Wenn Personendaten geklärt werden müssen, klären wir sie. Ihre Mappe hat die Urkunde bereits dabei!",
+      "sourceLocator": "buergeramt-story.js registration.nodes.civilStatus.choices[1].reply",
+      "reason": "not rendered; selected production fallback"
+    },
+    {
+      "clipId": "knick-registration-civilstatusfix",
+      "actorId": "clerk",
+      "voiceId": "amt-brunhilde-knick",
+      "profileId": "b080c7d95ecd418fb428282461d7fbe7",
+      "text": "Wir klären, welche vorhandene Urkunde für Ihren konkreten Vorgang gebraucht wird. Nicht jede Person braucht jede Urkunde. Ich bestelle hier keine komplette Familienchronik. Wie gehen Sie vor?",
+      "sourceLocator": "buergeramt-story.js registration.nodes.civilStatusFix.line",
+      "reason": "not rendered; selected production fallback"
+    },
+    {
+      "clipId": "knick-registration-civilstatusfix-reply-1",
+      "actorId": "clerk",
+      "voiceId": "amt-brunhilde-knick",
+      "profileId": "b080c7d95ecd418fb428282461d7fbe7",
+      "text": "Abgleich erledigt. Sie dürfen unwichtig jetzt in hätte fast gefehlt umbenennen.",
+      "sourceLocator": "buergeramt-story.js registration.nodes.civilStatusFix.choices[0].reply",
+      "reason": "not rendered; selected production fallback"
+    },
+    {
+      "clipId": "knick-registration-civilstatusfix-reply-2",
+      "actorId": "clerk",
+      "voiceId": "amt-brunhilde-knick",
+      "profileId": "b080c7d95ecd418fb428282461d7fbe7",
+      "text": "Die erforderlichen Daten sind geklärt. Ich verlange keine Heiratsurkunde für eine Ehe, die Sie nicht haben.",
+      "sourceLocator": "buergeramt-story.js registration.nodes.civilStatusFix.choices[1].reply",
+      "reason": "not rendered; selected production fallback"
+    },
+    {
+      "clipId": "knick-registration-originals",
+      "actorId": "clerk",
+      "voiceId": "amt-brunhilde-knick",
+      "profileId": "b080c7d95ecd418fb428282461d7fbe7",
+      "text": "Sie haben Originale UND Kopien. Der Kopierer hat aus allem eine blasse Familie gemacht. Welche Unterlagen lassen Sie mich zum Nachweis prüfen? Achtung: eine Kopie wird durch dreimaliges Kopieren nicht wieder zum Original!",
+      "sourceLocator": "buergeramt-story.js registration.nodes.originals.line",
+      "reason": "not rendered; selected production fallback"
+    },
+    {
+      "clipId": "knick-registration-originals-reply-1",
+      "actorId": "clerk",
+      "voiceId": "amt-brunhilde-knick",
+      "profileId": "b080c7d95ecd418fb428282461d7fbe7",
+      "text": "Originale geprüft. Die Kopien dürfen als Kopien bei der Akte bleiben, wo sie gebraucht werden.",
+      "sourceLocator": "buergeramt-story.js registration.nodes.originals.choices[0].reply",
+      "reason": "not rendered; selected production fallback"
+    },
+    {
+      "clipId": "knick-registration-originals-reply-2",
+      "actorId": "clerk",
+      "voiceId": "amt-brunhilde-knick",
+      "profileId": "b080c7d95ecd418fb428282461d7fbe7",
+      "text": "Kostbar ist hier auch meine Zeit! Bringen Sie die vorhandenen Originale nach vorne, ich prüfe sie und gebe sie zurück!",
+      "sourceLocator": "buergeramt-story.js registration.nodes.originals.choices[1].reply",
+      "reason": "not rendered; selected production fallback"
+    },
+    {
+      "clipId": "knick-registration-originalsfix",
+      "actorId": "clerk",
+      "voiceId": "amt-brunhilde-knick",
+      "profileId": "b080c7d95ecd418fb428282461d7fbe7",
+      "text": "Ihre Originale stecken hinter den Kopien. Legen Sie sie zum Abgleich daneben. Kein neuer Kopierauftrag, kein weiterer Raum, kein Pilgerweg zum Drucker. Wie machen Sie den Abgleich möglich?",
+      "sourceLocator": "buergeramt-story.js registration.nodes.originalsFix.line",
+      "reason": "not rendered; selected production fallback"
+    },
+    {
+      "clipId": "knick-registration-originalsfix-reply-1",
+      "actorId": "clerk",
+      "voiceId": "amt-brunhilde-knick",
+      "profileId": "b080c7d95ecd418fb428282461d7fbe7",
+      "text": "Abgeglichen. Die Originale gehen wieder an Sie. Die Kopien wissen nun, zu wem sie gehören.",
+      "sourceLocator": "buergeramt-story.js registration.nodes.originalsFix.choices[0].reply",
+      "reason": "not rendered; selected production fallback"
+    },
+    {
+      "clipId": "knick-registration-originalsfix-reply-2",
+      "actorId": "clerk",
+      "voiceId": "amt-brunhilde-knick",
+      "profileId": "b080c7d95ecd418fb428282461d7fbe7",
+      "text": "Eines nach dem anderen geprüft. Der Kopierer hat heute keine weitere Zuständigkeit.",
+      "sourceLocator": "buergeramt-story.js registration.nodes.originalsFix.choices[1].reply",
+      "reason": "not rendered; selected production fallback"
+    },
+    {
+      "clipId": "knick-registration-chronology",
+      "actorId": "clerk",
+      "voiceId": "amt-brunhilde-knick",
+      "profileId": "b080c7d95ecd418fb428282461d7fbe7",
+      "text": "Sie haben jetzt einen Termin, einen tatsächlichen Einzug und die nachgereichten Unterlagen. Die Verwaltung schlägt vor, alles auf heute zu datieren, dann sehe es ordentlicher aus. Welche Chronologie bestätige ich?",
+      "sourceLocator": "buergeramt-story.js registration.nodes.chronology.line",
+      "reason": "not rendered; selected production fallback"
+    },
+    {
+      "clipId": "knick-registration-chronology-reply-1",
+      "actorId": "clerk",
+      "voiceId": "amt-brunhilde-knick",
+      "profileId": "b080c7d95ecd418fb428282461d7fbe7",
+      "text": "Richtig. Die Akte darf zeigen, dass etwas zu spät kam. Sie muss deshalb nicht behaupten, Sie seien zu spät geboren.",
+      "sourceLocator": "buergeramt-story.js registration.nodes.chronology.choices[0].reply",
+      "reason": "not rendered; selected production fallback"
+    },
+    {
+      "clipId": "knick-registration-chronology-reply-2",
+      "actorId": "clerk",
+      "voiceId": "amt-brunhilde-knick",
+      "profileId": "b080c7d95ecd418fb428282461d7fbe7",
+      "text": "Ordentlich FALSCH bleibt falsch! Einzug, Anfrage, Termin und Nachreichung haben ihre tatsächlichen Daten!",
+      "sourceLocator": "buergeramt-story.js registration.nodes.chronology.choices[1].reply",
+      "reason": "not rendered; selected production fallback"
+    },
+    {
+      "clipId": "knick-registration-chronologyfix",
+      "actorId": "clerk",
+      "voiceId": "amt-brunhilde-knick",
+      "profileId": "b080c7d95ecd418fb428282461d7fbe7",
+      "text": "Die Daten stimmen, wenn sie die Ereignisse wiedergeben. Ich brauche keinen Kalender, der auf Wunsch zusammengefaltet wurde. Wie lassen Sie die unterschiedlichen Daten nachvollziehbar?",
+      "sourceLocator": "buergeramt-story.js registration.nodes.chronologyFix.line",
+      "reason": "not rendered; selected production fallback"
+    },
+    {
+      "clipId": "knick-registration-chronologyfix-reply-1",
+      "actorId": "clerk",
+      "voiceId": "amt-brunhilde-knick",
+      "profileId": "b080c7d95ecd418fb428282461d7fbe7",
+      "text": "Chronologie geschlossen. Die Verzögerung hat ihren Vermerk und keinen neuen Wohnsitz.",
+      "sourceLocator": "buergeramt-story.js registration.nodes.chronologyFix.choices[0].reply",
+      "reason": "not rendered; selected production fallback"
+    },
+    {
+      "clipId": "knick-registration-chronologyfix-reply-2",
+      "actorId": "clerk",
+      "voiceId": "amt-brunhilde-knick",
+      "profileId": "b080c7d95ecd418fb428282461d7fbe7",
+      "text": "Die Fassungen sind zugeordnet. Ich kann die Geschichte des Blattes lesen, ohne sie zu erraten.",
+      "sourceLocator": "buergeramt-story.js registration.nodes.chronologyFix.choices[1].reply",
+      "reason": "not rendered; selected production fallback"
+    },
+    {
+      "clipId": "knick-registration-printer",
+      "actorId": "clerk",
+      "voiceId": "amt-brunhilde-knick",
+      "profileId": "b080c7d95ecd418fb428282461d7fbe7",
+      "text": "Der Drucker blinkt Papier fehlt. Im Fach liegt Papier. Er meint vermutlich Papier, das seine Abwesenheit bestätigt. Ihre Unterlagen sind geprüft. Wie retten wir den Ausdruck Ihrer Meldebestätigung?",
+      "sourceLocator": "buergeramt-story.js registration.nodes.printer.line",
+      "reason": "not rendered; selected production fallback"
+    },
+    {
+      "clipId": "knick-registration-printer-reply-1",
+      "actorId": "clerk",
+      "voiceId": "amt-brunhilde-knick",
+      "profileId": "b080c7d95ecd418fb428282461d7fbe7",
+      "text": "Ich ziehe das gelbe Blatt aus dem weißen Fach und das weiße aus dem gelben. Der Drucker akzeptiert den Zuständigkeitswechsel.",
+      "sourceLocator": "buergeramt-story.js registration.nodes.printer.choices[0].reply",
+      "reason": "not rendered; selected production fallback"
+    },
+    {
+      "clipId": "knick-registration-printer-reply-2",
+      "actorId": "clerk",
+      "voiceId": "amt-brunhilde-knick",
+      "profileId": "b080c7d95ecd418fb428282461d7fbe7",
+      "text": "DER DRUCKER HAT KEINEN TERMIN! Sie bleiben hier. Ich öffne das Ersatzfach. Ihre Anmeldung wartet nicht auf seine Gemütslage!",
+      "sourceLocator": "buergeramt-story.js registration.nodes.printer.choices[1].reply",
+      "reason": "not rendered; selected production fallback"
+    },
+    {
+      "clipId": "knick-registration-printerfix",
+      "actorId": "clerk",
+      "voiceId": "amt-brunhilde-knick",
+      "profileId": "b080c7d95ecd418fb428282461d7fbe7",
+      "text": "Das Ersatzfach ist gefüllt. Der Druckauftrag darf nicht doppelt laufen, sonst druckt er zwei Bestätigungen und verlangt eine Trennungsurkunde. Welchen Auftrag lassen wir laufen?",
+      "sourceLocator": "buergeramt-story.js registration.nodes.printerFix.line",
+      "reason": "not rendered; selected production fallback"
+    },
+    {
+      "clipId": "knick-registration-printerfix-reply-1",
+      "actorId": "clerk",
+      "voiceId": "amt-brunhilde-knick",
+      "profileId": "b080c7d95ecd418fb428282461d7fbe7",
+      "text": "Ein Vorgang, ein Ausdruck. Der Drucker hat sich einer Mehrheit von einem Blatt gebeugt.",
+      "sourceLocator": "buergeramt-story.js registration.nodes.printerFix.choices[0].reply",
+      "reason": "not rendered; selected production fallback"
+    },
+    {
+      "clipId": "knick-registration-printerfix-reply-2",
+      "actorId": "clerk",
+      "voiceId": "amt-brunhilde-knick",
+      "profileId": "b080c7d95ecd418fb428282461d7fbe7",
+      "text": "Doppelter Auftrag entfernt. Der richtige Ausdruck läuft. Wir brauchen keine Scheidung zweier Seiten.",
+      "sourceLocator": "buergeramt-story.js registration.nodes.printerFix.choices[1].reply",
+      "reason": "not rendered; selected production fallback"
+    },
+    {
+      "clipId": "knick-registration-review",
+      "actorId": "clerk",
+      "voiceId": "amt-brunhilde-knick",
+      "profileId": "b080c7d95ecd418fb428282461d7fbe7",
+      "text": "Letzte Prüfung: Name, tatsächliches Einzugsdatum, Anschrift und Wohnungsart. Prüfen Sie die Angaben, bevor ich den Vorgang abschließe. Wenn Sie jetzt nur auf den Stempel starren, starrt er zurück. Was tun Sie?",
+      "sourceLocator": "buergeramt-story.js registration.nodes.review.line",
+      "reason": "not rendered; selected production fallback"
+    },
+    {
+      "clipId": "knick-registration-review-reply-1",
+      "actorId": "clerk",
+      "voiceId": "amt-brunhilde-knick",
+      "profileId": "b080c7d95ecd418fb428282461d7fbe7",
+      "text": "Angaben stimmen. Die Identität ist geprüft, der Einzug bestätigt und das Formular unterschrieben. Mein Stempel hat keine offene Ausrede mehr.",
+      "sourceLocator": "buergeramt-story.js registration.nodes.review.choices[0].reply",
+      "reason": "not rendered; selected production fallback"
+    },
+    {
+      "clipId": "knick-registration-review-reply-2",
+      "actorId": "clerk",
+      "voiceId": "amt-brunhilde-knick",
+      "profileId": "b080c7d95ecd418fb428282461d7fbe7",
+      "text": "ICH HALTE ES AUCH NICHT MEHR AUS! Trotzdem prüfen Sie die Angaben. Ein falsches Register wird nicht durch Eile richtig!",
+      "sourceLocator": "buergeramt-story.js registration.nodes.review.choices[1].reply",
+      "reason": "not rendered; selected production fallback"
+    },
+    {
+      "clipId": "knick-registration-reviewfix",
+      "actorId": "clerk",
+      "voiceId": "amt-brunhilde-knick",
+      "profileId": "b080c7d95ecd418fb428282461d7fbe7",
+      "text": "Hier steht Ihr Name. Dort Ihre Wohnung. Das Datum ist der Fünfte. Die Wohnungsart ist geklärt. Nehmen Sie diese vier Angaben zur Kenntnis, bevor Sie das Amt mit einer schönen neuen falschen Adresse verlassen!",
+      "sourceLocator": "buergeramt-story.js registration.nodes.reviewFix.line",
+      "reason": "not rendered; selected production fallback"
+    },
+    {
+      "clipId": "knick-registration-reviewfix-reply-1",
+      "actorId": "clerk",
+      "voiceId": "amt-brunhilde-knick",
+      "profileId": "b080c7d95ecd418fb428282461d7fbe7",
+      "text": "Bestätigt. Ich schließe den Prüfvorgang. Ihre Akte hat endlich keine lose Frage mehr.",
+      "sourceLocator": "buergeramt-story.js registration.nodes.reviewFix.choices[0].reply",
+      "reason": "not rendered; selected production fallback"
+    },
+    {
+      "clipId": "knick-registration-reviewfix-reply-2",
+      "actorId": "clerk",
+      "voiceId": "amt-brunhilde-knick",
+      "profileId": "b080c7d95ecd418fb428282461d7fbe7",
+      "text": "Abgeglichen und richtig. Der Stempel darf nun das tun, was Sie ihm seit zwanzig Minuten unterstellen.",
+      "sourceLocator": "buergeramt-story.js registration.nodes.reviewFix.choices[1].reply",
+      "reason": "not rendered; selected production fallback"
+    },
+    {
+      "clipId": "knick-registration-final",
+      "actorId": "clerk",
+      "voiceId": "amt-brunhilde-knick",
+      "profileId": "b080c7d95ecd418fb428282461d7fbe7",
+      "text": "So. Die Anmeldung wird jetzt abgeschlossen. Gleich bekommen Sie Ihre Meldebestätigung. Nicht noch einen Antrag, keinen Rückweg, keine neue Nummer. Sind die geprüften Angaben richtig und nehmen Sie die Bestätigung entgegen?",
+      "sourceLocator": "buergeramt-story.js registration.nodes.final.line",
+      "reason": "not rendered; selected production fallback"
+    },
+    {
+      "clipId": "knick-registration-final-reply-1",
+      "actorId": "clerk",
+      "voiceId": "amt-brunhilde-knick",
+      "profileId": "b080c7d95ecd418fb428282461d7fbe7",
+      "text": "ANGEMELDET. Hier ist Ihre Meldebestätigung. Anmeldung abgeschlossen, Abzeichen auf Ihrer Akte. Sie existieren jetzt auch schriftlich. Gehen Sie, bevor der Drucker eine Rückfrage hat!",
+      "sourceLocator": "buergeramt-story.js registration.nodes.final.choices[0].reply",
+      "reason": "not rendered; selected production fallback"
+    },
+    {
+      "clipId": "knick-registration-final-reply-2",
+      "actorId": "clerk",
+      "voiceId": "amt-brunhilde-knick",
+      "profileId": "b080c7d95ecd418fb428282461d7fbe7",
+      "text": "VOLLSTÄNDIG ANGEMELDET. Die Meldebestätigung gehört Ihnen. Ihr Abzeichen lautet Anmeldung abgeschlossen. Ich unterschreibe nichts über Ihre Begeisterung. Die fehlt hier auch nicht!",
+      "sourceLocator": "buergeramt-story.js registration.nodes.final.choices[1].reply",
+      "reason": "not rendered; selected production fallback"
+    }
+  ]
+}

@@ -11,11 +11,6 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[3]
 CHATDEV = Path(os.environ.get("CHATDEV_HOME") or ROOT.parent / "ChatDev").expanduser().resolve()
-VOICE = CHATDEV.parent / "voice-cloner" / "Voice.cmd"
-VOICE_PORT = os.environ.get("VOICE_CLONER_PORT", "18765")
-if not VOICE_PORT.isdecimal() or not 1 <= int(VOICE_PORT) <= 65535:
-    raise ValueError("VOICE_CLONER_PORT must be a TCP port number")
-VOICE_CLI = [str(VOICE), "--port", VOICE_PORT]
 READABLE = {
     "game.js", "world3d.js", "index.html", "3d.html", "styles.css", "buergeramt.js",
     "tourist-animation.js", "character-interactions.js", "goerlitzer-park.js",
@@ -23,6 +18,7 @@ READABLE = {
     "buergeramt-link.js", "buergeramt.css", "CREDITS.md",
     "For-AI/README.md", "For-AI/GAMEPLAY.md", "For-AI/BUERGERAMT.md", "For-AI/ASSET-POLICY.md",
     "For-AI/VOICE-SYNTH-PROTOCOL.md", "For-AI/MUSIC-SOUND-DESIGN.md", "For-AI/AUDIO-TEXT-LIBRARY.md",
+    "For-AI/VOICE-CAST.json", "For-AI/VOICE-DIALOGUE-INVENTORY.json",
     "For-AI/AUDIO-TEXT-LIBRARY.js", "assets/voices/LICENSES.md",
     "For-AI/SPRITE-GENERATION-PROTOCOL.md",
     "For-AI/OBJECT-CONSISTENCY.md",
@@ -141,79 +137,3 @@ def run_game_checks() -> str:
         results.append(f"Node tests: {'PASS' if run.returncode == 0 else 'FAIL'}\n{(run.stdout + run.stderr)[-5000:]}")
     results.append("Browser, real-device and perceptual audio/visual checks: NOT RUN by this tool")
     return "\n".join(results)
-
-
-def voice_cloner_status() -> str:
-    """Check whether the local Voice Cloner CLI and runtime are ready."""
-    if not VOICE.exists():
-        return f"Voice Cloner CLI missing: {VOICE}"
-    runtime = VOICE.parent / ".venv" / "Scripts" / "python.exe"
-    alternate = VOICE.parent / "runtime.path"
-    if not runtime.exists() and not alternate.exists():
-        return "Voice Cloner CLI exists, but its runtime is missing. Run Setup.ps1 after space is available."
-    run = subprocess.run([*VOICE_CLI, "doctor"], cwd=VOICE.parent, text=True, capture_output=True, timeout=120)
-    return f"exit={run.returncode} {run.stdout[:4000]} {run.stderr[:1000]}"
-
-
-def voice_cloner_create_profile(name: str, youtube_url: str, start_seconds: int, duration_seconds: int, source_note: str) -> str:
-    """Create one deferred Qwen profile from a verified YouTube voice reference."""
-    if not name.startswith("GS ") or len(name) > 65:
-        raise ValueError("Use a short GS-prefixed profile name")
-    if not re.fullmatch(r"https://(?:www\.)?youtube\.com/watch\?v=[A-Za-z0-9_-]{11}", youtube_url):
-        raise ValueError("Use a canonical YouTube watch URL")
-    if not 0 <= start_seconds <= 36000 or not 10 <= duration_seconds <= 30:
-        raise ValueError("Choose a clean 10–30 second segment")
-    if len(source_note) < 30 or len(source_note) > 500:
-        raise ValueError("Record speaker, source, license, and intended use")
-    if "runtime is missing" in voice_cloner_status():
-        raise RuntimeError("Voice Cloner runtime is missing")
-    run = subprocess.run([*VOICE_CLI, "voices", "create", "--name", name, "--youtube", youtube_url,
-                          "--start", str(start_seconds), "--duration", str(duration_seconds),
-                          "--source-note", source_note, "--engine", "qwen", "--defer"],
-                         cwd=VOICE.parent, text=True, capture_output=True, timeout=900)
-    if run.returncode:
-        raise RuntimeError((run.stdout + run.stderr)[-2500:])
-    return run.stdout[:4000]
-
-
-def voice_cloner_create_profile_file(name: str, reference_path: str, source_note: str) -> str:
-    """Create a deferred Qwen profile from a licensed local reference outside game assets."""
-    reference = Path(reference_path).expanduser().resolve()
-    if not name.startswith("GS ") or len(name) > 65:
-        raise ValueError("Use a short GS-prefixed profile name")
-    if reference.is_relative_to(ROOT.resolve()) or not reference.is_file():
-        raise ValueError("Reference must be an existing file outside the game checkout")
-    if reference.suffix.lower() not in {".wav", ".mp3", ".flac", ".m4a"}:
-        raise ValueError("Use a supported audio reference")
-    if len(source_note) < 30 or len(source_note) > 500:
-        raise ValueError("Record speaker, source, license, and intended use")
-    if "runtime is missing" in voice_cloner_status():
-        raise RuntimeError("Voice Cloner runtime is missing")
-    run = subprocess.run([*VOICE_CLI, "voices", "create", "--name", name,
-                          "--file", str(reference), "--source-note", source_note,
-                          "--engine", "qwen", "--defer"],
-                         cwd=VOICE.parent, text=True, capture_output=True, timeout=900)
-    if run.returncode:
-        raise RuntimeError((run.stdout + run.stderr)[-2500:])
-    return run.stdout[:4000]
-
-
-def voice_cloner_render_line(profile_id: str, clip_id: str, text: str, _context: dict | None = None) -> str:
-    """Render one exact German line to ChatDev's external scratch directory."""
-    if not re.fullmatch(r"[a-f0-9]{32}", profile_id):
-        raise ValueError("Use the saved Voice Cloner profile ID")
-    if not re.fullmatch(r"[a-z0-9-]{1,50}", clip_id) or not 1 <= len(text) <= 350:
-        raise ValueError("Invalid clip ID or text length")
-    if "runtime is missing" in voice_cloner_status():
-        raise RuntimeError("Voice Cloner runtime is missing")
-    directory = Path((_context or {}).get("graph_directory") or CHATDEV / "WareHouse" / "germany-manual").resolve() / "germany-voice-scratch"
-    if directory.is_relative_to(ROOT.resolve()):
-        raise ValueError("Voice scratch must stay outside the game checkout")
-    directory.mkdir(parents=True, exist_ok=True)
-    output = directory / f"{clip_id}.mp3"
-    run = subprocess.run([*VOICE_CLI, "generate", "--voice", profile_id, "--text", text,
-                          "--language", "de", "--engine", "qwen", "--output", str(output)],
-                         cwd=VOICE.parent, text=True, capture_output=True, timeout=900)
-    if run.returncode:
-        raise RuntimeError((run.stdout + run.stderr)[-2500:])
-    return run.stdout[:4000]

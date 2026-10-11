@@ -51,6 +51,13 @@ def main() -> None:
         if voice_id in PATRONS:
             row["runtimeStatus"] = person["status"]
     index["castSourceSha256"] = hashlib.sha256(game_cast_path.read_bytes()).hexdigest()
+    # The existing corpus rows retain historical evidence; generation uses the
+    # current, hash-bound production projection rather than those primary UUIDs.
+    index["profilesStatus"] = "historical primary references; use productionVoices for generation"
+    index["productionVoices"] = cast["productionVoices"]
+    index["productionExceptions"] = cast["productionExceptions"]
+    index["preservedProfileIds"] = cast["preservedProfileIds"]
+    index["retiredProfileIds"] = [row["profileId"] for row in cast["retiredProfiles"]]
     rendered = json.dumps(index, ensure_ascii=False, indent=2) + "\n"
     if args.check:
         if path.read_text(encoding="utf-8") != rendered:

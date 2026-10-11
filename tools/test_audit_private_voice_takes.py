@@ -55,6 +55,16 @@ def main() -> None:
         except ValueError as error:
             assert "source pools changed" in str(error), error
         inventory.write_bytes(original_inventory)
+        changed_inventory = json.loads(original_inventory)
+        city = next(item for item in changed_inventory["dynamicIdentityVoiceIds"] if any(source.startswith("game.js") for source in item["sourcePools"]))
+        city["sourcePools"].append("game.js unverifiedPool")
+        inventory.write_text(json.dumps(changed_inventory), encoding="utf-8")
+        try:
+            audit_module.audit(music, game)
+            raise AssertionError("Changed city speaker ownership was accepted")
+        except ValueError as error:
+            assert "speaker sources changed" in str(error), error
+        inventory.write_bytes(original_inventory)
         audio = target / take["audioFile"]
         original_bytes = audio.read_bytes()
         audio.write_bytes(original_bytes + b"changed")

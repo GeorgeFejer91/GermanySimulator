@@ -1,6 +1,6 @@
 # Recorded office mouth cues
 
-`mouth-cues.js` is derived animation data for the 41 approved `amt-` recordings
+`mouth-cues.js` is derived animation data for the 53 approved `amt-` recordings
 in `For-AI/AUDIO-TEXT-LIBRARY.js`, including the official Aktenkurier omen.
 Every entry retains the exact source text, recording path and SHA-256. Audio,
 voice profiles and painted images are unchanged.
@@ -15,7 +15,7 @@ No executable, model, WAV or analysis log ships.
 
 The sound envelope samples RMS every 10 ms, normalizes to the clip's 90th
 percentile, suppresses levels below 4.5% of that reference and stores a
-gamma-adjusted unsigned byte. The compact module is 79,891 UTF-8 bytes with LF line endings. The
+gamma-adjusted unsigned byte. The compact module is 105,608 UTF-8 bytes with LF line endings. The
 runtime interpolates this envelope and centres smooth mouth-shape changes on
 their measured boundaries, with at most 40 ms anticipation/release. Native
 media `currentTime` owns playback, pause, seeking and rate changes. This
@@ -24,7 +24,7 @@ acoustic latency. Phonetic shapes remain estimates.
 
 The optional independent ASR check used the already installed OpenAI Whisper
 20250625 with its cached `base` model, German, word timestamps, deterministic
-temperature zero, CPU and no expected-text prompt. All 41 clips were decoded;
+temperature zero, CPU and no expected-text prompt. The original 41-clip pack was decoded;
 normalized transcript similarity averaged 97.94%, with a minimum of 90.48%.
 These diagnostics stay under ignored `output/mouth-sync/analysis/`. Approved
 catalogue word timestamps remain the word-receipt authority; ASR mistakes do
@@ -40,3 +40,9 @@ The shared builder/data replaces the separate omen-only mouth pipeline.
 `tests/buergeramt-speech-cues.test.mjs` checks every approved hash, acoustic
 silence, contiguous intervals and centred timing. The silent recorded-mouth
 browser fixture checks actual media receipts and cleanup for every clip.
+
+On 2026-10-11 the pack retained 36 unchanged accepted tracks, removed the five
+retired fever recordings, and added acoustic analysis of 17 independently
+word-checked selected-profile Knick MP3s. The added analysis used the same
+FFmpeg/Rhubarb pipeline; no additional Whisper pass, synthesis, listening or
+artwork edit occurred. Exact source and encoded hashes remain mandatory.

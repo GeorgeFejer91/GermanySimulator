@@ -16,7 +16,9 @@
       "asr": "Stopp! Sie haben den Aktenlauf ohne Laufzettel gekreuzt. Das gilt als Abkürzung und muss gestempelt werden.",
       "asrWordExact": true,
       "path": "assets/voices/candidate-dialogue/amt-horst-stempelmann-01.mp3",
-      "sha256": "1bbf26a1f22f7aae36d38fad1610bcb4527b69155e7596b23ee36ee8e337a385"
+      "sha256": "1bbf26a1f22f7aae36d38fad1610bcb4527b69155e7596b23ee36ee8e337a385",
+      "archiveRelativePath": "assets/assets/voices/candidate-dialogue/amt-horst-stempelmann-01.mp3",
+      "retiredReason": "Superseded by the selected production profile on 2026-10-11; private archive retains exact audio and provenance."
     },
     {
       "clipId": "amt-horst-stempelmann-02",
@@ -31,7 +33,9 @@
       "asr": "Ihr Formular ist jetzt im Umlauf. Bitte bleiben Sie stehen, bis es Sie eingeholt hat.",
       "asrWordExact": true,
       "path": "assets/voices/candidate-dialogue/amt-horst-stempelmann-02.mp3",
-      "sha256": "c4105287c1cabb7eee7583ab030a84d79ff2339f93ba36ee7592ca9420203dd9"
+      "sha256": "c4105287c1cabb7eee7583ab030a84d79ff2339f93ba36ee7592ca9420203dd9",
+      "archiveRelativePath": "assets/assets/voices/candidate-dialogue/amt-horst-stempelmann-02.mp3",
+      "retiredReason": "Superseded by the selected production profile on 2026-10-11; private archive retains exact audio and provenance."
     },
     {
       "clipId": "amt-horst-stempelmann-03",
@@ -46,7 +50,9 @@
       "asr": "Wer die Finsternis sieht, hat sie selbst gewählt.",
       "asrWordExact": true,
       "path": "assets/voices/candidate-dialogue/amt-horst-stempelmann-03.mp3",
-      "sha256": "d4d414c4762ba4526d0fe4bf1e23c0ed038c58447cb0cbd58d13362575c158ad"
+      "sha256": "d4d414c4762ba4526d0fe4bf1e23c0ed038c58447cb0cbd58d13362575c158ad",
+      "archiveRelativePath": "assets/assets/voices/candidate-dialogue/amt-horst-stempelmann-03.mp3",
+      "retiredReason": "Superseded by the selected production profile on 2026-10-11; private archive retains exact audio and provenance."
     },
     {
       "clipId": "amt-gisela-aktenberg-01",
@@ -61,7 +67,9 @@
       "asr": "Sie stehen vor der Ablage, ohne abgelegt zu sein. Ich setze Ihren Vorgang vorsorglich auf Wiedervorlage.",
       "asrWordExact": true,
       "path": "assets/voices/candidate-dialogue/amt-gisela-aktenberg-01.mp3",
-      "sha256": "ec650d510ca4e637913a18e60fd9f28acc628ad6ab0b21082b21cb5e10ce9848"
+      "sha256": "ec650d510ca4e637913a18e60fd9f28acc628ad6ab0b21082b21cb5e10ce9848",
+      "archiveRelativePath": "assets/assets/voices/candidate-dialogue/amt-gisela-aktenberg-01.mp3",
+      "retiredReason": "Superseded by the selected production profile on 2026-10-11; private archive retains exact audio and provenance."
     },
     {
       "clipId": "amt-gisela-aktenberg-02",
@@ -76,7 +84,9 @@
       "asr": "Der Schlüssel passt. Das Schloss stellt noch einen Antrag auf Zuständigkeit.",
       "asrWordExact": true,
       "path": "assets/voices/candidate-dialogue/amt-gisela-aktenberg-02.mp3",
-      "sha256": "e9afe9f3648c086e1f9af2d71481adc58760dcd1eb5e3d302a579d8b1bf4af3c"
+      "sha256": "e9afe9f3648c086e1f9af2d71481adc58760dcd1eb5e3d302a579d8b1bf4af3c",
+      "archiveRelativePath": "assets/assets/voices/candidate-dialogue/amt-gisela-aktenberg-02.mp3",
+      "retiredReason": "Superseded by the selected production profile on 2026-10-11; private archive retains exact audio and provenance."
     },
     {
       "clipId": "amt-dieter-papiermann-01",
@@ -91,7 +101,9 @@
       "asr": "Meine Seitenfolge ist nicht genehmigt. Wenn Blatt 17 wieder vorn steht, beginnt mein Termin von gestern noch einmal.",
       "asrWordExact": false,
       "path": "assets/voices/candidate-dialogue/amt-dieter-papiermann-01.mp3",
-      "sha256": "8bbefe5c17171cd166a739a48ec5e9100051dcb583e4d14a7c214338df02409e"
+      "sha256": "8bbefe5c17171cd166a739a48ec5e9100051dcb583e4d14a7c214338df02409e",
+      "archiveRelativePath": "assets/assets/voices/candidate-dialogue/amt-dieter-papiermann-01.mp3",
+      "retiredReason": "Superseded by the selected production profile on 2026-10-11; private archive retains exact audio and provenance."
     },
     {
       "clipId": "amt-dieter-papiermann-02",
@@ -138,7 +150,9 @@
           "tailSilenceMs": 150
         },
         "workingWavSha256": "29720ce38cec77c3e3a9610378cad857ed7b0c02671459d4a41eda0745b93553"
-      }
+      },
+      "archiveRelativePath": "assets/assets/voices/candidate-dialogue/amt-dieter-papiermann-02.mp3",
+      "retiredReason": "Superseded by the selected production profile on 2026-10-11; private archive retains exact audio and provenance."
     },
     {
       "clipId": "amt-ruediger-nummermann-01",
@@ -153,7 +167,9 @@
       "asr": "Die Anzeige hat meine Nummer geflüstert, bevor ich sie gezogen habe. Jetzt verlangt sie einen Nachweis, dass ich noch nicht dran bin.",
       "asrWordExact": true,
       "path": "assets/voices/candidate-dialogue/amt-ruediger-nummermann-01.mp3",
-      "sha256": "2244cbfdbefd053a1956d2addd728ad2ac727e13a51a496cb7c5985d328dff82"
+      "sha256": "2244cbfdbefd053a1956d2addd728ad2ac727e13a51a496cb7c5985d328dff82",
+      "archiveRelativePath": "assets/assets/voices/candidate-dialogue/amt-ruediger-nummermann-01.mp3",
+      "retiredReason": "Superseded by the selected production profile on 2026-10-11; private archive retains exact audio and provenance."
     },
     {
       "clipId": "amt-ruediger-nummermann-02",
@@ -168,7 +184,9 @@
       "asr": "Wenn die Zahl wieder rückwärts läuft, bleibe ich hier. Für Fluchtwege ist Schalter 2 zuständig.",
       "asrWordExact": false,
       "path": "assets/voices/candidate-dialogue/amt-ruediger-nummermann-02.mp3",
-      "sha256": "6d81dc9677516a872e8c135703b658541a0a845ba851d751ca7c422830513982"
+      "sha256": "6d81dc9677516a872e8c135703b658541a0a845ba851d751ca7c422830513982",
+      "archiveRelativePath": "assets/assets/voices/candidate-dialogue/amt-ruediger-nummermann-02.mp3",
+      "retiredReason": "Superseded by the selected production profile on 2026-10-11; private archive retains exact audio and provenance."
     },
     {
       "clipId": "amt-ingrid-feierabend-01",
@@ -183,7 +201,9 @@
       "asr": "Mein Telefon ist tot. Die App bestätigt trotzdem, dass ich persönlich anwesend bin. Ich halte das Gerät hoch, damit es mich nicht vergisst.",
       "asrWordExact": true,
       "path": "assets/voices/candidate-dialogue/amt-ingrid-feierabend-01.mp3",
-      "sha256": "383908048a3e1b01b816edee57fe923c7a108936f2c1a654c1fcff38c39cffd4"
+      "sha256": "383908048a3e1b01b816edee57fe923c7a108936f2c1a654c1fcff38c39cffd4",
+      "archiveRelativePath": "assets/assets/voices/candidate-dialogue/amt-ingrid-feierabend-01.mp3",
+      "retiredReason": "Superseded by the selected production profile on 2026-10-11; private archive retains exact audio and provenance."
     },
     {
       "clipId": "amt-ingrid-feierabend-02",
@@ -198,7 +218,9 @@
       "asr": "Meine Akte ist lesbar. Das ist offenbar der Formfehler. Ich soll sie noch einmal ausdrucken, bis sie müde aussieht.",
       "asrWordExact": true,
       "path": "assets/voices/candidate-dialogue/amt-ingrid-feierabend-02.mp3",
-      "sha256": "991fe81add3c12fb914d0cf62437f8f6126fc9f84497cff26085d729a7b22ba3"
+      "sha256": "991fe81add3c12fb914d0cf62437f8f6126fc9f84497cff26085d729a7b22ba3",
+      "archiveRelativePath": "assets/assets/voices/candidate-dialogue/amt-ingrid-feierabend-02.mp3",
+      "retiredReason": "Superseded by the selected production profile on 2026-10-11; private archive retains exact audio and provenance."
     },
     {
       "clipId": "amt-baerbel-pfennig-01",
@@ -213,7 +235,9 @@
       "asr": "Dieser Bohnen ist länger als der Flur. Die Quittung für die Quittung fehlt noch. Ohne sie darf ich den Anfang nicht abreißen.",
       "asrWordExact": false,
       "path": "assets/voices/candidate-dialogue/amt-baerbel-pfennig-01.mp3",
-      "sha256": "7579e9111c116de997a3f4e5be16de3832f87e13a5dc3a30384b80508ce0255f"
+      "sha256": "7579e9111c116de997a3f4e5be16de3832f87e13a5dc3a30384b80508ce0255f",
+      "archiveRelativePath": "assets/assets/voices/candidate-dialogue/amt-baerbel-pfennig-01.mp3",
+      "retiredReason": "Superseded by the selected production profile on 2026-10-11; private archive retains exact audio and provenance."
     },
     {
       "clipId": "amt-baerbel-pfennig-02",
@@ -228,7 +252,9 @@
       "asr": "Vorhin war mein Ordner leichter. Vielleicht hat die Ablage eine Seite behalten, vielleicht war es meine Hand.",
       "asrWordExact": true,
       "path": "assets/voices/candidate-dialogue/amt-baerbel-pfennig-02.mp3",
-      "sha256": "4a7b89f6f73ba2df1c8194213cdf9c6b0b90a5a5ce4074479cbfaa195ab5a59b"
+      "sha256": "4a7b89f6f73ba2df1c8194213cdf9c6b0b90a5a5ce4074479cbfaa195ab5a59b",
+      "archiveRelativePath": "assets/assets/voices/candidate-dialogue/amt-baerbel-pfennig-02.mp3",
+      "retiredReason": "Superseded by the selected production profile on 2026-10-11; private archive retains exact audio and provenance."
     },
     {
       "clipId": "amt-uwe-kopitz-01",
@@ -243,7 +269,9 @@
       "asr": "Ich habe das Original kopiert, wie verlangt. Jetzt gilt die Kopie als Original und mein Original als verdächtige Zweitschrift.",
       "asrWordExact": true,
       "path": "assets/voices/candidate-dialogue/amt-uwe-kopitz-01.mp3",
-      "sha256": "5aec7bb805e6307ff7f6b2a22a5d8fbe0820c44f6621eaefe8a4a04e17cbbd22"
+      "sha256": "5aec7bb805e6307ff7f6b2a22a5d8fbe0820c44f6621eaefe8a4a04e17cbbd22",
+      "archiveRelativePath": "assets/assets/voices/candidate-dialogue/amt-uwe-kopitz-01.mp3",
+      "retiredReason": "Superseded by the selected production profile on 2026-10-11; private archive retains exact audio and provenance."
     },
     {
       "clipId": "amt-uwe-kopitz-02",
@@ -258,7 +286,9 @@
       "asr": "Der Fahrradhelm ist keine Kopfbedeckung. Das hat Schalter 4 schriftlich bestätigt. Das Schreiben liegt unter dem Helm.",
       "asrWordExact": false,
       "path": "assets/voices/candidate-dialogue/amt-uwe-kopitz-02.mp3",
-      "sha256": "1f908be2c90cbfba8d979cf921b17f8471569c7488640e4f8fcf77f5a9937c03"
+      "sha256": "1f908be2c90cbfba8d979cf921b17f8471569c7488640e4f8fcf77f5a9937c03",
+      "archiveRelativePath": "assets/assets/voices/candidate-dialogue/amt-uwe-kopitz-02.mp3",
+      "retiredReason": "Superseded by the selected production profile on 2026-10-11; private archive retains exact audio and provenance."
     },
     {
       "clipId": "amt-hilde-wartenscheidt-01",
@@ -273,7 +303,9 @@
       "asr": "Die Nummer auf meinem Zettel hat sich verdoppelt. Ich soll beweisen, welche Helfte zuerst gewartet hat.",
       "asrWordExact": false,
       "path": "assets/voices/candidate-dialogue/amt-hilde-wartenscheidt-01.mp3",
-      "sha256": "793580cdddf2e33803c9d787aee0bb2a17e5c3f7e5627f96e7dc8b2618d6080c"
+      "sha256": "793580cdddf2e33803c9d787aee0bb2a17e5c3f7e5627f96e7dc8b2618d6080c",
+      "archiveRelativePath": "assets/assets/voices/candidate-dialogue/amt-hilde-wartenscheidt-01.mp3",
+      "retiredReason": "Superseded by the selected production profile on 2026-10-11; private archive retains exact audio and provenance."
     },
     {
       "clipId": "amt-hilde-wartenscheidt-02",
@@ -288,7 +320,9 @@
       "asr": "Auf der Rückseite steht endlich ein Satz. Leider ist er nicht unterschrieben, also bleibt er vorläufig ein Geräusch.",
       "asrWordExact": true,
       "path": "assets/voices/candidate-dialogue/amt-hilde-wartenscheidt-02.mp3",
-      "sha256": "2711bfce1dc7ee4cc37c93d29402d5afd39f51b0ef675dca30a67e5192eea0be"
+      "sha256": "2711bfce1dc7ee4cc37c93d29402d5afd39f51b0ef675dca30a67e5192eea0be",
+      "archiveRelativePath": "assets/assets/voices/candidate-dialogue/amt-hilde-wartenscheidt-02.mp3",
+      "retiredReason": "Superseded by the selected production profile on 2026-10-11; private archive retains exact audio and provenance."
     },
     {
       "clipId": "stadt-klaus-dieter-klein-01",
@@ -303,7 +337,8 @@
       "asr": "Also, das ist jetzt aber auch nicht so gedacht.",
       "asrWordExact": true,
       "path": "assets/voices/candidate-dialogue/stadt-klaus-dieter-klein-01.mp3",
-      "sha256": "02bb9e8bb19900a7741624844de78c6d62cc1ed47823dec6340a4494f60c2cbf"
+      "sha256": "02bb9e8bb19900a7741624844de78c6d62cc1ed47823dec6340a4494f60c2cbf",
+      "referenceHashKind": "uploaded-original"
     },
     {
       "clipId": "stadt-klaus-dieter-klein-02",
@@ -318,7 +353,8 @@
       "asr": "Dafür gibt es bestimmt ein Formular.",
       "asrWordExact": true,
       "path": "assets/voices/candidate-dialogue/stadt-klaus-dieter-klein-02.mp3",
-      "sha256": "3692f19467ce218137c077c4ebc4f2cb681a4fe844deb74f4ab6a9be7156d1b6"
+      "sha256": "3692f19467ce218137c077c4ebc4f2cb681a4fe844deb74f4ab6a9be7156d1b6",
+      "referenceHashKind": "uploaded-original"
     },
     {
       "clipId": "stadt-klaus-dieter-klein-03",
@@ -333,7 +369,8 @@
       "asr": "Also das ist jetzt aber auch nicht so gedacht.",
       "asrWordExact": false,
       "path": "assets/voices/candidate-dialogue/stadt-klaus-dieter-klein-03.mp3",
-      "sha256": "57f183a2a5a47212f21ba90e6c108e1c03d1d1575342fd5e35c8427ada6b756c"
+      "sha256": "57f183a2a5a47212f21ba90e6c108e1c03d1d1575342fd5e35c8427ada6b756c",
+      "referenceHashKind": "uploaded-original"
     },
     {
       "clipId": "stadt-klaus-dieter-klein-04",
@@ -348,7 +385,8 @@
       "asr": "Dafür gibt es bestimmt ein Formular, probably online but not really.",
       "asrWordExact": true,
       "path": "assets/voices/candidate-dialogue/stadt-klaus-dieter-klein-04.mp3",
-      "sha256": "2ed696f4fdb7ce7d83751e7b3658e27c616d4faee9606ca731c2c36aeea34ac3"
+      "sha256": "2ed696f4fdb7ce7d83751e7b3658e27c616d4faee9606ca731c2c36aeea34ac3",
+      "referenceHashKind": "uploaded-original"
     },
     {
       "clipId": "stadt-brigitte-mueller-01",
@@ -363,7 +401,8 @@
       "asr": "Dafür gibt es bestimmt ein Formular.",
       "asrWordExact": true,
       "path": "assets/voices/candidate-dialogue/stadt-brigitte-mueller-01.mp3",
-      "sha256": "cbaa2f213f0690c48fbed740b078577ed47317b8939109eb4b3ff9123ed6ad75"
+      "sha256": "cbaa2f213f0690c48fbed740b078577ed47317b8939109eb4b3ff9123ed6ad75",
+      "referenceHashKind": "uploaded-original"
     },
     {
       "clipId": "stadt-brigitte-mueller-02",
@@ -378,7 +417,8 @@
       "asr": "Das ist bestimmt wegen der Baustelle. Die ist seit 2009 da.",
       "asrWordExact": true,
       "path": "assets/voices/candidate-dialogue/stadt-brigitte-mueller-02.mp3",
-      "sha256": "4aa20233b5bb20ddc8fa2b0d260e77d0bcd24d482ac17fd680d18e6111246ac7"
+      "sha256": "4aa20233b5bb20ddc8fa2b0d260e77d0bcd24d482ac17fd680d18e6111246ac7",
+      "referenceHashKind": "uploaded-original"
     },
     {
       "clipId": "stadt-brigitte-mueller-03",
@@ -393,7 +433,8 @@
       "asr": "Dafür gibt es bestimmt ein Formular, probably online, but not really.",
       "asrWordExact": true,
       "path": "assets/voices/candidate-dialogue/stadt-brigitte-mueller-03.mp3",
-      "sha256": "2d362cba22d2bf7f69640c74a94c6300696ec9c0bf35a3e5fe8e86853e4c5b3a"
+      "sha256": "2d362cba22d2bf7f69640c74a94c6300696ec9c0bf35a3e5fe8e86853e4c5b3a",
+      "referenceHashKind": "uploaded-original"
     },
     {
       "clipId": "stadt-brigitte-mueller-04",
@@ -408,7 +449,8 @@
       "asr": "Das ist bestimmt wegen der Baustelle. Die ist in C2009 da.",
       "asrWordExact": false,
       "path": "assets/voices/candidate-dialogue/stadt-brigitte-mueller-04.mp3",
-      "sha256": "6b921b24bd2e3935a355661222f56c49ac3cd85ccac0b40966a02f566c685d17"
+      "sha256": "6b921b24bd2e3935a355661222f56c49ac3cd85ccac0b40966a02f566c685d17",
+      "referenceHashKind": "uploaded-original"
     },
     {
       "clipId": "stadt-wolfgang-schulz-01",
@@ -423,7 +465,8 @@
       "asr": "Das ist bestimmt wegen der Baustelle, die ist seit 2009 da.",
       "asrWordExact": true,
       "path": "assets/voices/candidate-dialogue/stadt-wolfgang-schulz-01.mp3",
-      "sha256": "c6ee6259869add695469c37ffd3adad679e5b5070376dbe07cc0146d2cc4224b"
+      "sha256": "c6ee6259869add695469c37ffd3adad679e5b5070376dbe07cc0146d2cc4224b",
+      "referenceHashKind": "uploaded-original"
     },
     {
       "clipId": "stadt-wolfgang-schulz-02",
@@ -438,7 +481,8 @@
       "asr": "Haben Sie dafür einen Termin?",
       "asrWordExact": true,
       "path": "assets/voices/candidate-dialogue/stadt-wolfgang-schulz-02.mp3",
-      "sha256": "71925edf8d3ca00d2720b4974deee2048bdc9fa884a63ed5e539fde589d939df"
+      "sha256": "71925edf8d3ca00d2720b4974deee2048bdc9fa884a63ed5e539fde589d939df",
+      "referenceHashKind": "uploaded-original"
     },
     {
       "clipId": "stadt-wolfgang-schulz-03",
@@ -453,7 +497,8 @@
       "asr": "Das ist bestimmt wegen der Baustelle, die ist Sins 2009 da.",
       "asrWordExact": false,
       "path": "assets/voices/candidate-dialogue/stadt-wolfgang-schulz-03.mp3",
-      "sha256": "ad21aeaf49a99424c40499ab13bbbd46a18a5a1c8070ffaab93a484128279ad3"
+      "sha256": "ad21aeaf49a99424c40499ab13bbbd46a18a5a1c8070ffaab93a484128279ad3",
+      "referenceHashKind": "uploaded-original"
     },
     {
       "clipId": "stadt-wolfgang-schulz-04",
@@ -468,7 +513,8 @@
       "asr": "Haben Sie dafür ein Appointment?",
       "asrWordExact": false,
       "path": "assets/voices/candidate-dialogue/stadt-wolfgang-schulz-04.mp3",
-      "sha256": "da3deaf3cf7fe61d6158e404b9b70c68d7493d2a14c6b3fb599cfc0b15cebca9"
+      "sha256": "da3deaf3cf7fe61d6158e404b9b70c68d7493d2a14c6b3fb599cfc0b15cebca9",
+      "referenceHashKind": "uploaded-original"
     },
     {
       "clipId": "stadt-ursula-neumann-01",
@@ -483,7 +529,8 @@
       "asr": "Ich möchte mich nicht beschweren, aber ich beschwere mich.",
       "asrWordExact": true,
       "path": "assets/voices/candidate-dialogue/stadt-ursula-neumann-01.mp3",
-      "sha256": "0f0fc48a5c32a4fa3493c65cff984bd78405a205af4d76e828822f30da3760b5"
+      "sha256": "0f0fc48a5c32a4fa3493c65cff984bd78405a205af4d76e828822f30da3760b5",
+      "referenceHashKind": "uploaded-original"
     },
     {
       "clipId": "stadt-ursula-neumann-02",
@@ -498,7 +545,8 @@
       "asr": "Sie stehen minimal im Weg.",
       "asrWordExact": true,
       "path": "assets/voices/candidate-dialogue/stadt-ursula-neumann-02.mp3",
-      "sha256": "43270bb793ce42bff6ae8582fc2bce8534578595c787e5c1fcecc9312778cd8e"
+      "sha256": "43270bb793ce42bff6ae8582fc2bce8534578595c787e5c1fcecc9312778cd8e",
+      "referenceHashKind": "uploaded-original"
     },
     {
       "clipId": "stadt-ursula-neumann-03",
@@ -513,7 +561,8 @@
       "asr": "Ich möchte mich nicht komplinen, aber ich komplaine jetzt.",
       "asrWordExact": false,
       "path": "assets/voices/candidate-dialogue/stadt-ursula-neumann-03.mp3",
-      "sha256": "8c36018b5d86810cc9226a8b4503a3e9e6c49781923e64a7967e9e5c72e4d15b"
+      "sha256": "8c36018b5d86810cc9226a8b4503a3e9e6c49781923e64a7967e9e5c72e4d15b",
+      "referenceHashKind": "uploaded-original"
     },
     {
       "clipId": "stadt-ursula-neumann-04",
@@ -528,7 +577,8 @@
       "asr": "Sie stehen minimal im Bei.",
       "asrWordExact": false,
       "path": "assets/voices/candidate-dialogue/stadt-ursula-neumann-04.mp3",
-      "sha256": "27f3eff3083ffc187684fb1f18b3d3880aea7739d362a7f56a9b7c0a14b6e599"
+      "sha256": "27f3eff3083ffc187684fb1f18b3d3880aea7739d362a7f56a9b7c0a14b6e599",
+      "referenceHashKind": "uploaded-original"
     },
     {
       "clipId": "stadt-manfred-din-01",
@@ -543,7 +593,8 @@
       "asr": "Ordnung muss schon sein.",
       "asrWordExact": true,
       "path": "assets/voices/candidate-dialogue/stadt-manfred-din-01.mp3",
-      "sha256": "02aa15a5f9e8f74b106564a892207a07b5d2950ca9853d6edb1229b82717cc67"
+      "sha256": "02aa15a5f9e8f74b106564a892207a07b5d2950ca9853d6edb1229b82717cc67",
+      "referenceHashKind": "uploaded-original"
     },
     {
       "clipId": "stadt-manfred-din-02",
@@ -558,7 +609,8 @@
       "asr": "Kann man machen, muss man aber wirklich nicht.",
       "asrWordExact": true,
       "path": "assets/voices/candidate-dialogue/stadt-manfred-din-02.mp3",
-      "sha256": "ffa2f2c3a6bc60eb12ef2289d18fc825cf9fb6918b303694f8a35ab570cbd369"
+      "sha256": "ffa2f2c3a6bc60eb12ef2289d18fc825cf9fb6918b303694f8a35ab570cbd369",
+      "referenceHashKind": "uploaded-original"
     },
     {
       "clipId": "stadt-manfred-din-03",
@@ -573,7 +625,8 @@
       "asr": "Ordnung muss schon sein, you know.",
       "asrWordExact": true,
       "path": "assets/voices/candidate-dialogue/stadt-manfred-din-03.mp3",
-      "sha256": "d9341c35e467f2005f442fdf4539b1b92549070c85770ad7db230a9fe7781b17"
+      "sha256": "d9341c35e467f2005f442fdf4539b1b92549070c85770ad7db230a9fe7781b17",
+      "referenceHashKind": "uploaded-original"
     },
     {
       "clipId": "stadt-manfred-din-04",
@@ -588,7 +641,8 @@
       "asr": "Kann man machen, muss man aber Reli nicht.",
       "asrWordExact": false,
       "path": "assets/voices/candidate-dialogue/stadt-manfred-din-04.mp3",
-      "sha256": "10a09c2a84cd6c5eed4876292b3f5410c7355321e684948bc8739ef92f161248"
+      "sha256": "10a09c2a84cd6c5eed4876292b3f5410c7355321e684948bc8739ef92f161248",
+      "referenceHashKind": "uploaded-original"
     },
     {
       "clipId": "stadt-irmgard-aktenstapel-01",
@@ -603,7 +657,8 @@
       "asr": "Dafür gibt es bestimmt ein Formular.",
       "asrWordExact": true,
       "path": "assets/voices/candidate-dialogue/stadt-irmgard-aktenstapel-01.mp3",
-      "sha256": "3863ab4fa80bb78403c292f17251d606eeaa3c253e142fd8dde84f418659f339"
+      "sha256": "3863ab4fa80bb78403c292f17251d606eeaa3c253e142fd8dde84f418659f339",
+      "referenceHashKind": "uploaded-original"
     },
     {
       "clipId": "stadt-irmgard-aktenstapel-02",
@@ -618,7 +673,8 @@
       "asr": "Das ist bestimmt wegen der Baustelle, die ist seit 2009 da.",
       "asrWordExact": true,
       "path": "assets/voices/candidate-dialogue/stadt-irmgard-aktenstapel-02.mp3",
-      "sha256": "90b525cdce9638106b0b73580818fc874e217828717b18e8278fed5a8de4073b"
+      "sha256": "90b525cdce9638106b0b73580818fc874e217828717b18e8278fed5a8de4073b",
+      "referenceHashKind": "uploaded-original"
     },
     {
       "clipId": "stadt-irmgard-aktenstapel-03",
@@ -633,7 +689,8 @@
       "asr": "Dafür gibt es bestimmt ein Formular, probably online, but not really.",
       "asrWordExact": true,
       "path": "assets/voices/candidate-dialogue/stadt-irmgard-aktenstapel-03.mp3",
-      "sha256": "60c217686be9a1d5417293147c0af0fe895d489a2581164bd5fcf8bd2133397b"
+      "sha256": "60c217686be9a1d5417293147c0af0fe895d489a2581164bd5fcf8bd2133397b",
+      "referenceHashKind": "uploaded-original"
     },
     {
       "clipId": "stadt-irmgard-aktenstapel-04",
@@ -648,7 +705,8 @@
       "asr": "Das ist bestimmt wegen der Baustelle. Die ist Zinse 2009 da.",
       "asrWordExact": false,
       "path": "assets/voices/candidate-dialogue/stadt-irmgard-aktenstapel-04.mp3",
-      "sha256": "e9d6c9fd5a27bbd9cde186179b4a31b917912e0e0b723cd2f99427826d9f60ba"
+      "sha256": "e9d6c9fd5a27bbd9cde186179b4a31b917912e0e0b723cd2f99427826d9f60ba",
+      "referenceHashKind": "uploaded-original"
     },
     {
       "clipId": "stadt-guenther-tuev-01",
@@ -663,7 +721,8 @@
       "asr": "Ordnung muss schon sein.",
       "asrWordExact": true,
       "path": "assets/voices/candidate-dialogue/stadt-guenther-tuev-01.mp3",
-      "sha256": "edbfd921540aadac7013695809121c95bd3b864769420357581b9bc9d3eb5f5f"
+      "sha256": "edbfd921540aadac7013695809121c95bd3b864769420357581b9bc9d3eb5f5f",
+      "referenceHashKind": "uploaded-original"
     },
     {
       "clipId": "stadt-guenther-tuev-02",
@@ -678,7 +737,8 @@
       "asr": "Kann man machen, muss man aber wirklich nicht.",
       "asrWordExact": true,
       "path": "assets/voices/candidate-dialogue/stadt-guenther-tuev-02.mp3",
-      "sha256": "cc36bb155bfe0b51a179e3705c44b136b0874b671b9b75bfaced7188110f7069"
+      "sha256": "cc36bb155bfe0b51a179e3705c44b136b0874b671b9b75bfaced7188110f7069",
+      "referenceHashKind": "uploaded-original"
     },
     {
       "clipId": "stadt-guenther-tuev-03",
@@ -693,7 +753,8 @@
       "asr": "Ordnung muss schon sein, you know. You, you...",
       "asrWordExact": false,
       "path": "assets/voices/candidate-dialogue/stadt-guenther-tuev-03.mp3",
-      "sha256": "8696a77c9a6b4dbd7842cc3747de04b21ae03d45d0f4c43111cc809dcc67b444"
+      "sha256": "8696a77c9a6b4dbd7842cc3747de04b21ae03d45d0f4c43111cc809dcc67b444",
+      "referenceHashKind": "uploaded-original"
     },
     {
       "clipId": "stadt-guenther-tuev-04",
@@ -708,7 +769,8 @@
       "asr": "Kann man machen, muss man aber Lili nicht.",
       "asrWordExact": false,
       "path": "assets/voices/candidate-dialogue/stadt-guenther-tuev-04.mp3",
-      "sha256": "b9c0a04f7740d06d54d6e3904039399551d52ad9b678a8766863ba86ab71525e"
+      "sha256": "b9c0a04f7740d06d54d6e3904039399551d52ad9b678a8766863ba86ab71525e",
+      "referenceHashKind": "uploaded-original"
     },
     {
       "clipId": "stadt-hannelore-sparkasse-01",
@@ -723,7 +785,8 @@
       "asr": "Sie stehen minimal im Weg.",
       "asrWordExact": true,
       "path": "assets/voices/candidate-dialogue/stadt-hannelore-sparkasse-01.mp3",
-      "sha256": "fefcf8fa4c31d1528c2a7b8bbf90948211bd27184648ff6ede7ba460e1eeeda2"
+      "sha256": "fefcf8fa4c31d1528c2a7b8bbf90948211bd27184648ff6ede7ba460e1eeeda2",
+      "referenceHashKind": "uploaded-original"
     },
     {
       "clipId": "stadt-hannelore-sparkasse-02",
@@ -738,7 +801,8 @@
       "asr": "Ordnung muss schon sein.",
       "asrWordExact": true,
       "path": "assets/voices/candidate-dialogue/stadt-hannelore-sparkasse-02.mp3",
-      "sha256": "e3e3c8bfe1b2009af64027ffa1097c8323360555b62efe2320e64a9c17a05741"
+      "sha256": "e3e3c8bfe1b2009af64027ffa1097c8323360555b62efe2320e64a9c17a05741",
+      "referenceHashKind": "uploaded-original"
     },
     {
       "clipId": "stadt-hannelore-sparkasse-03",
@@ -753,7 +817,8 @@
       "asr": "Sie stehen minimal im Weih.",
       "asrWordExact": false,
       "path": "assets/voices/candidate-dialogue/stadt-hannelore-sparkasse-03.mp3",
-      "sha256": "d5bf74759e83747041cdff4fb84f25f7ad8a8b5dfa4c3af47926c6a211aed589"
+      "sha256": "d5bf74759e83747041cdff4fb84f25f7ad8a8b5dfa4c3af47926c6a211aed589",
+      "referenceHashKind": "uploaded-original"
     },
     {
       "clipId": "stadt-hannelore-sparkasse-04",
@@ -768,7 +833,8 @@
       "asr": "Ordnung muss schon sein, Juno.",
       "asrWordExact": false,
       "path": "assets/voices/candidate-dialogue/stadt-hannelore-sparkasse-04.mp3",
-      "sha256": "4b558567ad0f068979a0c6279fc7fe95f5bf1b28f2a65edbe240a0614ed043b9"
+      "sha256": "4b558567ad0f068979a0c6279fc7fe95f5bf1b28f2a65edbe240a0614ed043b9",
+      "referenceHashKind": "uploaded-original"
     },
     {
       "clipId": "stadt-karl-heinz-post-01",
@@ -783,7 +849,8 @@
       "asr": "Dafür bin ich nicht zuständig.",
       "asrWordExact": true,
       "path": "assets/voices/candidate-dialogue/stadt-karl-heinz-post-01.mp3",
-      "sha256": "178d98391a278aa585db670959d62869060a8db5110939a1ff35eeb3e14576b9"
+      "sha256": "178d98391a278aa585db670959d62869060a8db5110939a1ff35eeb3e14576b9",
+      "referenceHashKind": "uploaded-original"
     },
     {
       "clipId": "stadt-karl-heinz-post-02",
@@ -798,7 +865,8 @@
       "asr": "Also das ist jetzt aber auch nicht so gedacht.",
       "asrWordExact": true,
       "path": "assets/voices/candidate-dialogue/stadt-karl-heinz-post-02.mp3",
-      "sha256": "6c5e95728ca5e0989c2a5f201469a42e2b604f372ad8347d4c828d628be2ead1"
+      "sha256": "6c5e95728ca5e0989c2a5f201469a42e2b604f372ad8347d4c828d628be2ead1",
+      "referenceHashKind": "uploaded-original"
     },
     {
       "clipId": "stadt-karl-heinz-post-03",
@@ -813,7 +881,8 @@
       "asr": "Dafür bin ich not responsible.",
       "asrWordExact": true,
       "path": "assets/voices/candidate-dialogue/stadt-karl-heinz-post-03.mp3",
-      "sha256": "d3e3fbe6be33111cd475bf0236ef46263ae6d62b8829ecdacff6adbaa850d798"
+      "sha256": "d3e3fbe6be33111cd475bf0236ef46263ae6d62b8829ecdacff6adbaa850d798",
+      "referenceHashKind": "uploaded-original"
     },
     {
       "clipId": "stadt-karl-heinz-post-04",
@@ -828,7 +897,8 @@
       "asr": "Also das ist jetzt aber auch nicht so gedacht.",
       "asrWordExact": false,
       "path": "assets/voices/candidate-dialogue/stadt-karl-heinz-post-04.mp3",
-      "sha256": "230678339995e1f34b2eb2c06936121a409350a731a3d919ab33e1e7a84f5ac2"
+      "sha256": "230678339995e1f34b2eb2c06936121a409350a731a3d919ab33e1e7a84f5ac2",
+      "referenceHashKind": "uploaded-original"
     },
     {
       "clipId": "stadt-herbert-rasenaufsicht-01",
@@ -843,7 +913,8 @@
       "asr": "Ordnung muss schon sein.",
       "asrWordExact": true,
       "path": "assets/voices/candidate-dialogue/stadt-herbert-rasenaufsicht-01.mp3",
-      "sha256": "4608e87cebfc443018dbdb45d348edd4e9ce1e7bfb41ed17eb6f9c73746ec1b0"
+      "sha256": "4608e87cebfc443018dbdb45d348edd4e9ce1e7bfb41ed17eb6f9c73746ec1b0",
+      "referenceHashKind": "uploaded-original"
     },
     {
       "clipId": "stadt-herbert-rasenaufsicht-02",
@@ -858,7 +929,8 @@
       "asr": "Kann man machen, muss man aber wirklich nicht.",
       "asrWordExact": true,
       "path": "assets/voices/candidate-dialogue/stadt-herbert-rasenaufsicht-02.mp3",
-      "sha256": "a8f8085cdfb9905cf778d48dbf34941bb6794c83503967650b14308b84e88906"
+      "sha256": "a8f8085cdfb9905cf778d48dbf34941bb6794c83503967650b14308b84e88906",
+      "referenceHashKind": "uploaded-original"
     },
     {
       "clipId": "stadt-herbert-rasenaufsicht-03",
@@ -873,7 +945,8 @@
       "asr": "Ordnung muss schon sein, you know.",
       "asrWordExact": true,
       "path": "assets/voices/candidate-dialogue/stadt-herbert-rasenaufsicht-03.mp3",
-      "sha256": "b2324adf3c804201d79bf6868bb0fa0987fd5482d2a752cf76a3353f620deb5e"
+      "sha256": "b2324adf3c804201d79bf6868bb0fa0987fd5482d2a752cf76a3353f620deb5e",
+      "referenceHashKind": "uploaded-original"
     },
     {
       "clipId": "stadt-herbert-rasenaufsicht-04",
@@ -888,7 +961,8 @@
       "asr": "Kann man machen, muss man aber Heli nicht.",
       "asrWordExact": false,
       "path": "assets/voices/candidate-dialogue/stadt-herbert-rasenaufsicht-04.mp3",
-      "sha256": "c21cd457c547b8d7563e2bb7426dda60b69a8f3186964350610bacc95ae93835"
+      "sha256": "c21cd457c547b8d7563e2bb7426dda60b69a8f3186964350610bacc95ae93835",
+      "referenceHashKind": "uploaded-original"
     },
     {
       "clipId": "stadt-waltraud-ordnung-01",
@@ -903,7 +977,8 @@
       "asr": "Ordnung muss schon sein.",
       "asrWordExact": true,
       "path": "assets/voices/candidate-dialogue/stadt-waltraud-ordnung-01.mp3",
-      "sha256": "312d52fbee180aea4a22c333a23871bc9e7ae87e6f060db9f3eb3f9ffff1095e"
+      "sha256": "312d52fbee180aea4a22c333a23871bc9e7ae87e6f060db9f3eb3f9ffff1095e",
+      "referenceHashKind": "uploaded-original"
     },
     {
       "clipId": "stadt-waltraud-ordnung-02",
@@ -918,7 +993,8 @@
       "asr": "Kann man machen, muss man aber wirklich nicht.",
       "asrWordExact": true,
       "path": "assets/voices/candidate-dialogue/stadt-waltraud-ordnung-02.mp3",
-      "sha256": "37bb9107952b22291883b281977b045de321469320670b7609d6f93c06288515"
+      "sha256": "37bb9107952b22291883b281977b045de321469320670b7609d6f93c06288515",
+      "referenceHashKind": "uploaded-original"
     },
     {
       "clipId": "stadt-waltraud-ordnung-03",
@@ -933,7 +1009,8 @@
       "asr": "Ordnung muss schon sein, you know.",
       "asrWordExact": true,
       "path": "assets/voices/candidate-dialogue/stadt-waltraud-ordnung-03.mp3",
-      "sha256": "08154eb86166c3f5c624b9431c393530af9220b7aa2dcf782c9f9b789d5c6b63"
+      "sha256": "08154eb86166c3f5c624b9431c393530af9220b7aa2dcf782c9f9b789d5c6b63",
+      "referenceHashKind": "uploaded-original"
     },
     {
       "clipId": "stadt-waltraud-ordnung-04",
@@ -948,7 +1025,8 @@
       "asr": "Kann man machen, muss man aber Willi nicht.",
       "asrWordExact": false,
       "path": "assets/voices/candidate-dialogue/stadt-waltraud-ordnung-04.mp3",
-      "sha256": "aeecd8d3cff1fc8d593fb4d285e9effe4478e02dc2363ad5430b2dcf7377f7f3"
+      "sha256": "aeecd8d3cff1fc8d593fb4d285e9effe4478e02dc2363ad5430b2dcf7377f7f3",
+      "referenceHashKind": "uploaded-original"
     },
     {
       "clipId": "stadt-erwin-archiv-01",
@@ -963,7 +1041,8 @@
       "asr": "Dafür gibt es bestimmt ein Formular.",
       "asrWordExact": true,
       "path": "assets/voices/candidate-dialogue/stadt-erwin-archiv-01.mp3",
-      "sha256": "1a9cfb3362fd874ffe9c270721bb9cdb975ca476275abee0d60184fd6f8e15c6"
+      "sha256": "1a9cfb3362fd874ffe9c270721bb9cdb975ca476275abee0d60184fd6f8e15c6",
+      "referenceHashKind": "uploaded-original"
     },
     {
       "clipId": "stadt-erwin-archiv-02",
@@ -978,7 +1057,8 @@
       "asr": "Das ist bestimmt wegen der Baustelle. Die ist seit 2009 da.",
       "asrWordExact": true,
       "path": "assets/voices/candidate-dialogue/stadt-erwin-archiv-02.mp3",
-      "sha256": "280fd069460aa8382bf57089c2633c9fe1872eae4c7722971eef03acd581a069"
+      "sha256": "280fd069460aa8382bf57089c2633c9fe1872eae4c7722971eef03acd581a069",
+      "referenceHashKind": "uploaded-original"
     },
     {
       "clipId": "stadt-erwin-archiv-03",
@@ -993,7 +1073,8 @@
       "asr": "Dafür gibt es bestimmt ein Formular, probably online but not really.",
       "asrWordExact": true,
       "path": "assets/voices/candidate-dialogue/stadt-erwin-archiv-03.mp3",
-      "sha256": "562611b348015aed3bd6713b5aef1c3a0c60a3d05b10d93d1abd8bc5a5cf5fc7"
+      "sha256": "562611b348015aed3bd6713b5aef1c3a0c60a3d05b10d93d1abd8bc5a5cf5fc7",
+      "referenceHashKind": "uploaded-original"
     },
     {
       "clipId": "stadt-erwin-archiv-04",
@@ -1008,7 +1089,8 @@
       "asr": "Das ist bestimmt wegen der Baustelle, die ist since 2009 da.",
       "asrWordExact": true,
       "path": "assets/voices/candidate-dialogue/stadt-erwin-archiv-04.mp3",
-      "sha256": "1c1e78cc6a0af06870a2f2ee9b2fba594e6449ed9e4bfd4cef64d7293bc9bc18"
+      "sha256": "1c1e78cc6a0af06870a2f2ee9b2fba594e6449ed9e4bfd4cef64d7293bc9bc18",
+      "referenceHashKind": "uploaded-original"
     },
     {
       "clipId": "stadt-renate-termin-01",
@@ -1023,7 +1105,8 @@
       "asr": "Haben Sie dafür einen Termin?",
       "asrWordExact": true,
       "path": "assets/voices/candidate-dialogue/stadt-renate-termin-01.mp3",
-      "sha256": "6af661f37b5037db168e85b024415dfd65b4a0033d0122269a3f29cacb193c68"
+      "sha256": "6af661f37b5037db168e85b024415dfd65b4a0033d0122269a3f29cacb193c68",
+      "referenceHashKind": "uploaded-original"
     },
     {
       "clipId": "stadt-renate-termin-02",
@@ -1038,7 +1121,8 @@
       "asr": "Ich möchte mich nicht beschweren, aber ich beschwere mich.",
       "asrWordExact": true,
       "path": "assets/voices/candidate-dialogue/stadt-renate-termin-02.mp3",
-      "sha256": "d1609b37976767c9fe832bdbd5f007d9bbb1c4909705cf19fc8a71f79611adb7"
+      "sha256": "d1609b37976767c9fe832bdbd5f007d9bbb1c4909705cf19fc8a71f79611adb7",
+      "referenceHashKind": "uploaded-original"
     },
     {
       "clipId": "stadt-renate-termin-03",
@@ -1053,7 +1137,8 @@
       "asr": "Haben Sie dafür ein Appointment?",
       "asrWordExact": false,
       "path": "assets/voices/candidate-dialogue/stadt-renate-termin-03.mp3",
-      "sha256": "0bbae3224a46c5ec024dfe0205fd795a723d3f59e13e4b9c421656b09fea8b52"
+      "sha256": "0bbae3224a46c5ec024dfe0205fd795a723d3f59e13e4b9c421656b09fea8b52",
+      "referenceHashKind": "uploaded-original"
     },
     {
       "clipId": "stadt-renate-termin-04",
@@ -1068,7 +1153,8 @@
       "asr": "Ich möchte mich nicht komplänen, aber ich kompläne jetzt.",
       "asrWordExact": false,
       "path": "assets/voices/candidate-dialogue/stadt-renate-termin-04.mp3",
-      "sha256": "85c55fc9e216a1a6a65e65cca9f4d4a95aebaf26d1684acfe6cf45b93e99870a"
+      "sha256": "85c55fc9e216a1a6a65e65cca9f4d4a95aebaf26d1684acfe6cf45b93e99870a",
+      "referenceHashKind": "uploaded-original"
     },
     {
       "clipId": "stadt-heinz-mietnachweis-01",
@@ -1083,7 +1169,8 @@
       "asr": "Kann man machen, muss man aber wirklich nicht.",
       "asrWordExact": true,
       "path": "assets/voices/candidate-dialogue/stadt-heinz-mietnachweis-01.mp3",
-      "sha256": "3637be81731673b467393c5e3780a8c23afbb3c56a12948c21eee71492c6da07"
+      "sha256": "3637be81731673b467393c5e3780a8c23afbb3c56a12948c21eee71492c6da07",
+      "referenceHashKind": "uploaded-original"
     },
     {
       "clipId": "stadt-heinz-mietnachweis-02",
@@ -1098,7 +1185,8 @@
       "asr": "Früher war hier weniger Vorgang.",
       "asrWordExact": true,
       "path": "assets/voices/candidate-dialogue/stadt-heinz-mietnachweis-02.mp3",
-      "sha256": "5a536f7f8133b464de11809fdf063d21ac9b55083aad0cb92a25769e46ac167b"
+      "sha256": "5a536f7f8133b464de11809fdf063d21ac9b55083aad0cb92a25769e46ac167b",
+      "referenceHashKind": "uploaded-original"
     },
     {
       "clipId": "stadt-heinz-mietnachweis-03",
@@ -1113,7 +1201,8 @@
       "asr": "Kann man machen, muss man aber Veli nicht.",
       "asrWordExact": false,
       "path": "assets/voices/candidate-dialogue/stadt-heinz-mietnachweis-03.mp3",
-      "sha256": "580f1f5040e9cdc843b6cfcbe74d094741a79b451792af784199ebb526dea1fe"
+      "sha256": "580f1f5040e9cdc843b6cfcbe74d094741a79b451792af784199ebb526dea1fe",
+      "referenceHashKind": "uploaded-original"
     },
     {
       "clipId": "stadt-heinz-mietnachweis-04",
@@ -1128,7 +1217,8 @@
       "asr": "Früher war hier weniger Prozess.",
       "asrWordExact": false,
       "path": "assets/voices/candidate-dialogue/stadt-heinz-mietnachweis-04.mp3",
-      "sha256": "84f03ade9925e100be106cd5918bb0e1b8c5499cd47c140d300b0d1fbc683c94"
+      "sha256": "84f03ade9925e100be106cd5918bb0e1b8c5499cd47c140d300b0d1fbc683c94",
+      "referenceHashKind": "uploaded-original"
     },
     {
       "clipId": "stadt-monika-zebra-01",
@@ -1143,7 +1233,8 @@
       "asr": "Ordnung muss schon sein.",
       "asrWordExact": true,
       "path": "assets/voices/candidate-dialogue/stadt-monika-zebra-01.mp3",
-      "sha256": "3f4d6ed36b980761e6b3712360e997a0c7a705b3136d4ca3f0d854ddd0edaea8"
+      "sha256": "3f4d6ed36b980761e6b3712360e997a0c7a705b3136d4ca3f0d854ddd0edaea8",
+      "referenceHashKind": "uploaded-original"
     },
     {
       "clipId": "stadt-monika-zebra-02",
@@ -1158,7 +1249,8 @@
       "asr": "Kann man machen, muss man aber wirklich nicht.",
       "asrWordExact": true,
       "path": "assets/voices/candidate-dialogue/stadt-monika-zebra-02.mp3",
-      "sha256": "bcb0b746b7e398553bcf6cdda5d23d6354e4b0f26c7375180248958027a21377"
+      "sha256": "bcb0b746b7e398553bcf6cdda5d23d6354e4b0f26c7375180248958027a21377",
+      "referenceHashKind": "uploaded-original"
     },
     {
       "clipId": "stadt-monika-zebra-03",
@@ -1173,7 +1265,8 @@
       "asr": "Ordnung muss schon sein, you know.",
       "asrWordExact": true,
       "path": "assets/voices/candidate-dialogue/stadt-monika-zebra-03.mp3",
-      "sha256": "ec9a2a44148e0accb70df962c573ecaea2101b1c72f28fbe1dbab5a6ae902de6"
+      "sha256": "ec9a2a44148e0accb70df962c573ecaea2101b1c72f28fbe1dbab5a6ae902de6",
+      "referenceHashKind": "uploaded-original"
     },
     {
       "clipId": "stadt-monika-zebra-04",
@@ -1188,7 +1281,8 @@
       "asr": "Kann man machen, muss man aber Rehle nicht.",
       "asrWordExact": false,
       "path": "assets/voices/candidate-dialogue/stadt-monika-zebra-04.mp3",
-      "sha256": "04f19844128d1fa037077103e0972a5d1df7d1d05a67aa234e56566dac3c191f"
+      "sha256": "04f19844128d1fa037077103e0972a5d1df7d1d05a67aa234e56566dac3c191f",
+      "referenceHashKind": "uploaded-original"
     },
     {
       "clipId": "stadt-joachim-fundsache-01",
@@ -1203,7 +1297,8 @@
       "asr": "Dafür bin ich nicht zuständig.",
       "asrWordExact": true,
       "path": "assets/voices/candidate-dialogue/stadt-joachim-fundsache-01.mp3",
-      "sha256": "abb18891165da39a9ce2e6961fff8d0f145e1e1f957ceb693667a72bf13290e9"
+      "sha256": "abb18891165da39a9ce2e6961fff8d0f145e1e1f957ceb693667a72bf13290e9",
+      "referenceHashKind": "uploaded-original"
     },
     {
       "clipId": "stadt-joachim-fundsache-02",
@@ -1218,7 +1313,8 @@
       "asr": "Also das ist jetzt aber auch nicht so gedacht.",
       "asrWordExact": true,
       "path": "assets/voices/candidate-dialogue/stadt-joachim-fundsache-02.mp3",
-      "sha256": "d5230ca39da1f48aa02fd9600b1c18cfe0820641b6ba13d697632eba0666f2e1"
+      "sha256": "d5230ca39da1f48aa02fd9600b1c18cfe0820641b6ba13d697632eba0666f2e1",
+      "referenceHashKind": "uploaded-original"
     },
     {
       "clipId": "stadt-joachim-fundsache-03",
@@ -1233,7 +1329,8 @@
       "asr": "Dafür bin ich nur responsible.",
       "asrWordExact": false,
       "path": "assets/voices/candidate-dialogue/stadt-joachim-fundsache-03.mp3",
-      "sha256": "233d78117f6d4ff643df33e5c064c3001c52faf6e090a8201db16a86ff5af134"
+      "sha256": "233d78117f6d4ff643df33e5c064c3001c52faf6e090a8201db16a86ff5af134",
+      "referenceHashKind": "uploaded-original"
     },
     {
       "clipId": "stadt-joachim-fundsache-04",
@@ -1248,7 +1345,8 @@
       "asr": "Also das ist jetzt aber auch nicht so gedacht.",
       "asrWordExact": false,
       "path": "assets/voices/candidate-dialogue/stadt-joachim-fundsache-04.mp3",
-      "sha256": "42c421191fd0800c4445392592312a1ae84d65400fcfa92af92e07cd01473f39"
+      "sha256": "42c421191fd0800c4445392592312a1ae84d65400fcfa92af92e07cd01473f39",
+      "referenceHashKind": "uploaded-original"
     },
     {
       "clipId": "stadt-ute-ruhe-01",
@@ -1263,7 +1361,8 @@
       "asr": "Sie stehen minimal im Weg.",
       "asrWordExact": true,
       "path": "assets/voices/candidate-dialogue/stadt-ute-ruhe-01.mp3",
-      "sha256": "ddcc1691df8fdf3ab088b38c24798e8544f470e1e9e977b15ba36afa0d87f00f"
+      "sha256": "ddcc1691df8fdf3ab088b38c24798e8544f470e1e9e977b15ba36afa0d87f00f",
+      "referenceHashKind": "uploaded-original"
     },
     {
       "clipId": "stadt-ute-ruhe-02",
@@ -1278,7 +1377,8 @@
       "asr": "Ordnung muss schon sein.",
       "asrWordExact": true,
       "path": "assets/voices/candidate-dialogue/stadt-ute-ruhe-02.mp3",
-      "sha256": "2f07d247545f03dd0d66758616070d1b002752c3a17b38cc15560c61444b5829"
+      "sha256": "2f07d247545f03dd0d66758616070d1b002752c3a17b38cc15560c61444b5829",
+      "referenceHashKind": "uploaded-original"
     },
     {
       "clipId": "stadt-ute-ruhe-03",
@@ -1293,7 +1393,8 @@
       "asr": "Sie stehen minimal im Weih.",
       "asrWordExact": false,
       "path": "assets/voices/candidate-dialogue/stadt-ute-ruhe-03.mp3",
-      "sha256": "d11d950e6f34f5d496edd3377aa478b2498476d034dcbbc62caa3751db74f186"
+      "sha256": "d11d950e6f34f5d496edd3377aa478b2498476d034dcbbc62caa3751db74f186",
+      "referenceHashKind": "uploaded-original"
     },
     {
       "clipId": "stadt-ute-ruhe-04",
@@ -1308,7 +1409,8 @@
       "asr": "Ordnung muss schon sein, you know?",
       "asrWordExact": true,
       "path": "assets/voices/candidate-dialogue/stadt-ute-ruhe-04.mp3",
-      "sha256": "337345d4446527da0db277ec53b2e2f81ef73c7d880e54ca613f812942907a84"
+      "sha256": "337345d4446527da0db277ec53b2e2f81ef73c7d880e54ca613f812942907a84",
+      "referenceHashKind": "uploaded-original"
     },
     {
       "clipId": "stadt-norbert-faxrolle-01",
@@ -1323,7 +1425,8 @@
       "asr": "Früher war hier weniger Vorgang.",
       "asrWordExact": true,
       "path": "assets/voices/candidate-dialogue/stadt-norbert-faxrolle-01.mp3",
-      "sha256": "b1a551b86834f3d935c7a92e86e376dadc9c1ebd5cda26adf76248af90cf48ae"
+      "sha256": "b1a551b86834f3d935c7a92e86e376dadc9c1ebd5cda26adf76248af90cf48ae",
+      "referenceHashKind": "uploaded-original"
     },
     {
       "clipId": "stadt-norbert-faxrolle-02",
@@ -1338,7 +1441,8 @@
       "asr": "Dafür bin ich nicht zuständig.",
       "asrWordExact": true,
       "path": "assets/voices/candidate-dialogue/stadt-norbert-faxrolle-02.mp3",
-      "sha256": "0eada248dec82bae0f650dfeb3a58e9617f26c6696e19e13d06b747b447e334f"
+      "sha256": "0eada248dec82bae0f650dfeb3a58e9617f26c6696e19e13d06b747b447e334f",
+      "referenceHashKind": "uploaded-original"
     },
     {
       "clipId": "stadt-norbert-faxrolle-03",
@@ -1353,7 +1457,8 @@
       "asr": "Früher war hier weniger Prozess.",
       "asrWordExact": false,
       "path": "assets/voices/candidate-dialogue/stadt-norbert-faxrolle-03.mp3",
-      "sha256": "c7b80a5b98e7755f8c49ee15299996fe5717a818e6d1c1dde7039e54293ba02a"
+      "sha256": "c7b80a5b98e7755f8c49ee15299996fe5717a818e6d1c1dde7039e54293ba02a",
+      "referenceHashKind": "uploaded-original"
     },
     {
       "clipId": "stadt-norbert-faxrolle-04",
@@ -1368,7 +1473,8 @@
       "asr": "Dafür bin ich Nord-Responsible.",
       "asrWordExact": false,
       "path": "assets/voices/candidate-dialogue/stadt-norbert-faxrolle-04.mp3",
-      "sha256": "a775f2b66b314e03679d7b2a7b13a9cde62cda89b9770091b8212d0b3eaddb8b"
+      "sha256": "a775f2b66b314e03679d7b2a7b13a9cde62cda89b9770091b8212d0b3eaddb8b",
+      "referenceHashKind": "uploaded-original"
     },
     {
       "clipId": "stadt-edeltraud-trennung-01",
@@ -1383,7 +1489,8 @@
       "asr": "Das ist bestimmt wegen der Baustelle. Die ist seit 2009 da.",
       "asrWordExact": true,
       "path": "assets/voices/candidate-dialogue/stadt-edeltraud-trennung-01.mp3",
-      "sha256": "d68b6ce6600a3683bb3b2daeb64f64326382ee8228977770bb546bd32421d2e5"
+      "sha256": "d68b6ce6600a3683bb3b2daeb64f64326382ee8228977770bb546bd32421d2e5",
+      "referenceHashKind": "uploaded-original"
     },
     {
       "clipId": "stadt-edeltraud-trennung-02",
@@ -1398,7 +1505,8 @@
       "asr": "Haben Sie dafür einen Termin?",
       "asrWordExact": true,
       "path": "assets/voices/candidate-dialogue/stadt-edeltraud-trennung-02.mp3",
-      "sha256": "35219fdb8d7fb9e7642865282b5d4fb835aba1cd2d87a831651fb4c0b3fdc35f"
+      "sha256": "35219fdb8d7fb9e7642865282b5d4fb835aba1cd2d87a831651fb4c0b3fdc35f",
+      "referenceHashKind": "uploaded-original"
     },
     {
       "clipId": "stadt-edeltraud-trennung-03",
@@ -1413,7 +1521,8 @@
       "asr": "Das ist bestimmt wegen der Baustelle. Die ist Zins 2009 da.",
       "asrWordExact": false,
       "path": "assets/voices/candidate-dialogue/stadt-edeltraud-trennung-03.mp3",
-      "sha256": "eefb3e136b2e9173db12bc912e59250fedda88661394117792d7c61ff75c900f"
+      "sha256": "eefb3e136b2e9173db12bc912e59250fedda88661394117792d7c61ff75c900f",
+      "referenceHashKind": "uploaded-original"
     },
     {
       "clipId": "stadt-edeltraud-trennung-04",
@@ -1428,7 +1537,8 @@
       "asr": "Haben Sie dafür ein Appointment?",
       "asrWordExact": false,
       "path": "assets/voices/candidate-dialogue/stadt-edeltraud-trennung-04.mp3",
-      "sha256": "a2a6e9a781a2de2a280ab2c492c68665b58535d93911760ee08934c60ce6d9b3"
+      "sha256": "a2a6e9a781a2de2a280ab2c492c68665b58535d93911760ee08934c60ce6d9b3",
+      "referenceHashKind": "uploaded-original"
     },
     {
       "clipId": "amt-brunhilde-knick-01",
@@ -1443,7 +1553,9 @@
       "asr": "Ihre Wartnummer bestätigt, dass sie hier sind. Ihr Gesicht lässt vermuten, dass sie wieder gehen könnten. Welcher Nachweis hat Vorrang?",
       "asrWordExact": false,
       "path": "assets/voices/candidate-dialogue/amt-brunhilde-knick-01.mp3",
-      "sha256": "32245a73a4c6f57ab334cd8220519d19315603c933d58c67db52c3f2510bb762"
+      "sha256": "32245a73a4c6f57ab334cd8220519d19315603c933d58c67db52c3f2510bb762",
+      "archiveRelativePath": "assets/assets/voices/candidate-dialogue/amt-brunhilde-knick-01.mp3",
+      "retiredReason": "Superseded by the selected production profile on 2026-10-11; private archive retains exact audio and provenance."
     },
     {
       "clipId": "amt-brunhilde-knick-02",
@@ -1458,7 +1570,9 @@
       "asr": "Richtig. Ein Gesicht lässt sich verlegen. Ein Ticket hat eine Perforation.",
       "asrWordExact": true,
       "path": "assets/voices/candidate-dialogue/amt-brunhilde-knick-02.mp3",
-      "sha256": "7ab6deff5b8782859d810ebd53541bb8b6c39fb30ec68abec2772b09bb028ac1"
+      "sha256": "7ab6deff5b8782859d810ebd53541bb8b6c39fb30ec68abec2772b09bb028ac1",
+      "archiveRelativePath": "assets/assets/voices/candidate-dialogue/amt-brunhilde-knick-02.mp3",
+      "retiredReason": "Superseded by the selected production profile on 2026-10-11; private archive retains exact audio and provenance."
     },
     {
       "clipId": "amt-brunhilde-knick-03",
@@ -1473,7 +1587,9 @@
       "asr": "Dann heften Sie es bitte an das Ticket, ohne das nicht vorhandene Passfoto zu beschädigen.",
       "asrWordExact": true,
       "path": "assets/voices/candidate-dialogue/amt-brunhilde-knick-03.mp3",
-      "sha256": "818e0002f4bf98e9d8c37e7e79f476636403146b76017b56116449b796bd8a28"
+      "sha256": "818e0002f4bf98e9d8c37e7e79f476636403146b76017b56116449b796bd8a28",
+      "archiveRelativePath": "assets/assets/voices/candidate-dialogue/amt-brunhilde-knick-03.mp3",
+      "retiredReason": "Superseded by the selected production profile on 2026-10-11; private archive retains exact audio and provenance."
     },
     {
       "clipId": "amt-brunhilde-knick-04",
@@ -1488,7 +1604,9 @@
       "asr": "Ein Telefon bezeugt eine Stimme. Über Schuhe in einem Warteraum hat es keine Zuständigkeit.",
       "asrWordExact": true,
       "path": "assets/voices/candidate-dialogue/amt-brunhilde-knick-04.mp3",
-      "sha256": "34477db23f132228cb9fa469403b9ae755636432d7fa2e1b11c1ecd814dfa16f"
+      "sha256": "34477db23f132228cb9fa469403b9ae755636432d7fa2e1b11c1ecd814dfa16f",
+      "archiveRelativePath": "assets/assets/voices/candidate-dialogue/amt-brunhilde-knick-04.mp3",
+      "retiredReason": "Superseded by the selected production profile on 2026-10-11; private archive retains exact audio and provenance."
     },
     {
       "clipId": "amt-brunhilde-knick-05",
@@ -1503,7 +1621,9 @@
       "asr": "Für die Anmeldung brauche ich eine Wohnungsgeberbestätigung. Um Sie anzufordern, brauchen Sie die Erlaubnis zur Anforderung. Welche Anschrift melden Sie an?",
       "asrWordExact": true,
       "path": "assets/voices/candidate-dialogue/amt-brunhilde-knick-05.mp3",
-      "sha256": "d28f44e1b12795584816d9bc8f208c28173d5cebea8f0d6fbc89db1930fbb0ea"
+      "sha256": "d28f44e1b12795584816d9bc8f208c28173d5cebea8f0d6fbc89db1930fbb0ea",
+      "archiveRelativePath": "assets/assets/voices/candidate-dialogue/amt-brunhilde-knick-05.mp3",
+      "retiredReason": "Superseded by the selected production profile on 2026-10-11; private archive retains exact audio and provenance."
     },
     {
       "clipId": "amt-brunhilde-knick-06",
@@ -1518,7 +1638,9 @@
       "asr": "Eine Anschrift ohne Bestätigung ist lediglich eine Richtungsangabe.",
       "asrWordExact": true,
       "path": "assets/voices/candidate-dialogue/amt-brunhilde-knick-06.mp3",
-      "sha256": "994c6307ab6e4c3100553f50dd64ec499e287b42069a69bb4924c3c3cfd1c6c4"
+      "sha256": "994c6307ab6e4c3100553f50dd64ec499e287b42069a69bb4924c3c3cfd1c6c4",
+      "archiveRelativePath": "assets/assets/voices/candidate-dialogue/amt-brunhilde-knick-06.mp3",
+      "retiredReason": "Superseded by the selected production profile on 2026-10-11; private archive retains exact audio and provenance."
     },
     {
       "clipId": "amt-brunhilde-knick-07",
@@ -1533,7 +1655,9 @@
       "asr": "Das Formular ist leer. Das ist die neutralste Anschrift, die ich heute gesehen habe.",
       "asrWordExact": true,
       "path": "assets/voices/candidate-dialogue/amt-brunhilde-knick-07.mp3",
-      "sha256": "604293c88cc1a9d4a0d09e95230aa1c1aa2760d5d5f921395944ebf9acde1fec"
+      "sha256": "604293c88cc1a9d4a0d09e95230aa1c1aa2760d5d5f921395944ebf9acde1fec",
+      "archiveRelativePath": "assets/assets/voices/candidate-dialogue/amt-brunhilde-knick-07.mp3",
+      "retiredReason": "Superseded by the selected production profile on 2026-10-11; private archive retains exact audio and provenance."
     },
     {
       "clipId": "amt-brunhilde-knick-08",
@@ -1548,7 +1672,9 @@
       "asr": "Dieser Raum kann nicht angemeldet werden. Er wartet seit Dienstag auf seine eigene Wohnungsgeberbestätigung.",
       "asrWordExact": true,
       "path": "assets/voices/candidate-dialogue/amt-brunhilde-knick-08.mp3",
-      "sha256": "a6d0dbf5a23ca7b367e54eedf5984cd408793d9f6bd622f2ba5d7612dd3d27b0"
+      "sha256": "a6d0dbf5a23ca7b367e54eedf5984cd408793d9f6bd622f2ba5d7612dd3d27b0",
+      "archiveRelativePath": "assets/assets/voices/candidate-dialogue/amt-brunhilde-knick-08.mp3",
+      "retiredReason": "Superseded by the selected production profile on 2026-10-11; private archive retains exact audio and provenance."
     },
     {
       "clipId": "amt-brunhilde-knick-09",
@@ -1588,7 +1714,9 @@
         },
         "workingWavSha256": "8e6ed901f81655e4e235a97489f737e733cbcf98bd05e7f83e33e78eba54303a",
         "promptVariant": "A achtunddreißig for written A38"
-      }
+      },
+      "archiveRelativePath": "assets/assets/voices/candidate-dialogue/amt-brunhilde-knick-09.mp3",
+      "retiredReason": "Superseded by the selected production profile on 2026-10-11; private archive retains exact audio and provenance."
     },
     {
       "clipId": "amt-brunhilde-knick-10",
@@ -1603,7 +1731,9 @@
       "asr": "Ein Stempel ist die älteste Form der Zeitreise. Ich datiere ihn auf heute.",
       "asrWordExact": true,
       "path": "assets/voices/candidate-dialogue/amt-brunhilde-knick-10.mp3",
-      "sha256": "bdee5157f42a0d24390e05c3089546f063691cced22cbeedb15ad3163ac4ddc4"
+      "sha256": "bdee5157f42a0d24390e05c3089546f063691cced22cbeedb15ad3163ac4ddc4",
+      "archiveRelativePath": "assets/assets/voices/candidate-dialogue/amt-brunhilde-knick-10.mp3",
+      "retiredReason": "Superseded by the selected production profile on 2026-10-11; private archive retains exact audio and provenance."
     },
     {
       "clipId": "amt-brunhilde-knick-11",
@@ -1618,7 +1748,9 @@
       "asr": "E-Mails nehmen wir nur nach Zustellung per Fax an. Das Faxgerät verlangt einen Ausdruck der E-Mail.",
       "asrWordExact": true,
       "path": "assets/voices/candidate-dialogue/amt-brunhilde-knick-11.mp3",
-      "sha256": "4bbffee281638e192edb324d8fc238d8062b31b1be2cee2c4d6056ccf9115fcd"
+      "sha256": "4bbffee281638e192edb324d8fc238d8062b31b1be2cee2c4d6056ccf9115fcd",
+      "archiveRelativePath": "assets/assets/voices/candidate-dialogue/amt-brunhilde-knick-11.mp3",
+      "retiredReason": "Superseded by the selected production profile on 2026-10-11; private archive retains exact audio and provenance."
     },
     {
       "clipId": "amt-brunhilde-knick-12",
@@ -1633,7 +1765,9 @@
       "asr": "Morgen wurde bereits gedruckt. Das Warten würde ein doppeltes Datum erzeugen.",
       "asrWordExact": true,
       "path": "assets/voices/candidate-dialogue/amt-brunhilde-knick-12.mp3",
-      "sha256": "0b9eaa598a966a43eb9d5214243d79488f119d479f94d1b9ec00f663e522101e"
+      "sha256": "0b9eaa598a966a43eb9d5214243d79488f119d479f94d1b9ec00f663e522101e",
+      "archiveRelativePath": "assets/assets/voices/candidate-dialogue/amt-brunhilde-knick-12.mp3",
+      "retiredReason": "Superseded by the selected production profile on 2026-10-11; private archive retains exact audio and provenance."
     },
     {
       "clipId": "amt-brunhilde-knick-13",
@@ -1648,7 +1782,9 @@
       "asr": "Wir haben ihre Nummer, den Nachweis ihrer Anwesenheit und ein Datum, das noch nicht zweimal stattgefunden hat. Was ist nun ihr Anliegen?",
       "asrWordExact": true,
       "path": "assets/voices/candidate-dialogue/amt-brunhilde-knick-13.mp3",
-      "sha256": "ed3443ff0fef2d2c83e4bf1cb4c86510d64c5f0169e5fe51a0cbeda6cb7f1345"
+      "sha256": "ed3443ff0fef2d2c83e4bf1cb4c86510d64c5f0169e5fe51a0cbeda6cb7f1345",
+      "archiveRelativePath": "assets/assets/voices/candidate-dialogue/amt-brunhilde-knick-13.mp3",
+      "retiredReason": "Superseded by the selected production profile on 2026-10-11; private archive retains exact audio and provenance."
     },
     {
       "clipId": "amt-brunhilde-knick-14",
@@ -1663,7 +1799,9 @@
       "asr": "Gut, zuerst dürfen Sie die Antragstellung beantragen.",
       "asrWordExact": true,
       "path": "assets/voices/candidate-dialogue/amt-brunhilde-knick-14.mp3",
-      "sha256": "e7c47023d153556f6340cc25d46a18b86159b2f4052a96f7aff045591826166a"
+      "sha256": "e7c47023d153556f6340cc25d46a18b86159b2f4052a96f7aff045591826166a",
+      "archiveRelativePath": "assets/assets/voices/candidate-dialogue/amt-brunhilde-knick-14.mp3",
+      "retiredReason": "Superseded by the selected production profile on 2026-10-11; private archive retains exact audio and provenance."
     },
     {
       "clipId": "amt-brunhilde-knick-15",
@@ -1678,7 +1816,9 @@
       "asr": "Genau. Die Erlaubnis ist die Warteschlange vor der Warteschlange.",
       "asrWordExact": true,
       "path": "assets/voices/candidate-dialogue/amt-brunhilde-knick-15.mp3",
-      "sha256": "928c8d3955bb608131f4b175aaaa9979d29a877e27f29bd837650d596d84f82e"
+      "sha256": "928c8d3955bb608131f4b175aaaa9979d29a877e27f29bd837650d596d84f82e",
+      "archiveRelativePath": "assets/assets/voices/candidate-dialogue/amt-brunhilde-knick-15.mp3",
+      "retiredReason": "Superseded by the selected production profile on 2026-10-11; private archive retains exact audio and provenance."
     },
     {
       "clipId": "amt-brunhilde-knick-16",
@@ -1693,7 +1833,9 @@
       "asr": "Dann haben Sie die erste Hälfte jedes Verwaltungsvorgangs abgeschlossen.",
       "asrWordExact": true,
       "path": "assets/voices/candidate-dialogue/amt-brunhilde-knick-16.mp3",
-      "sha256": "a409621463278d10adfa6f48eed692d3b4fe5101bf1d8cacd7523ea7d0b0b7e1"
+      "sha256": "a409621463278d10adfa6f48eed692d3b4fe5101bf1d8cacd7523ea7d0b0b7e1",
+      "archiveRelativePath": "assets/assets/voices/candidate-dialogue/amt-brunhilde-knick-16.mp3",
+      "retiredReason": "Superseded by the selected production profile on 2026-10-11; private archive retains exact audio and provenance."
     },
     {
       "clipId": "amt-brunhilde-knick-17",
@@ -1748,8 +1890,12 @@
         "asr": "Sie machen wohl Witze? Sie nehmen während eines Termins im Bürgeramt einen Anruf an? Ich habe den Stempel schon in der Hand.",
         "asrWordExact": true,
         "path": "assets/voices/candidate-dialogue/amt-brunhilde-knick-17.mp3",
-        "sha256": "66ae694a926b0ff5da232abe9acb61efe2a5dd8a5f0acbea0f3fc566214b942f"
-      }
+        "sha256": "66ae694a926b0ff5da232abe9acb61efe2a5dd8a5f0acbea0f3fc566214b942f",
+        "archiveRelativePath": "assets/assets/voices/candidate-dialogue/amt-brunhilde-knick-17.mp3",
+        "retiredReason": "Superseded by the selected production profile on 2026-10-11; private archive retains exact audio and provenance."
+      },
+      "archiveRelativePath": "assets/assets/voices/candidate-dialogue/amt-brunhilde-knick-17-escalation.mp3",
+      "retiredReason": "Superseded by the selected production profile on 2026-10-11; private archive retains exact audio and provenance."
     },
     {
       "clipId": "amt-brunhilde-knick-18",
@@ -1807,8 +1953,12 @@
         "asr": "Ach, die Polizei? Herr Wachtmeister, ich höre Sie. Der Bürger steht an meinem Schalter und nicht auf Ihrem Rasen. Jetzt lassen Sie mich ausreden.",
         "asrWordExact": true,
         "path": "assets/voices/candidate-dialogue/amt-brunhilde-knick-18.mp3",
-        "sha256": "04c49018a4f3abc6d6f75270a96abf951417c678b1d6b1f533dc61a62b19e794"
-      }
+        "sha256": "04c49018a4f3abc6d6f75270a96abf951417c678b1d6b1f533dc61a62b19e794",
+        "archiveRelativePath": "assets/assets/voices/candidate-dialogue/amt-brunhilde-knick-18.mp3",
+        "retiredReason": "Superseded by the selected production profile on 2026-10-11; private archive retains exact audio and provenance."
+      },
+      "archiveRelativePath": "assets/assets/voices/candidate-dialogue/amt-brunhilde-knick-18-escalation.mp3",
+      "retiredReason": "Superseded by the selected production profile on 2026-10-11; private archive retains exact audio and provenance."
     },
     {
       "clipId": "amt-brunhilde-knick-19",
@@ -1865,8 +2015,12 @@
         "asr": "Ich bin 74 und seit 50 Jahren an diesem Schalter. Mein Schalter deckt keinen Rasen, er deckt Anträge. Fragen Sie ihn nach seinen Schuhen, nicht mich nach meiner Tischplotte.",
         "asrWordExact": false,
         "path": "assets/voices/candidate-dialogue/amt-brunhilde-knick-19.mp3",
-        "sha256": "14d0699028051f8146f5bbe7952dcb9268b678c86a7696f483f3062d0d4095a9"
-      }
+        "sha256": "14d0699028051f8146f5bbe7952dcb9268b678c86a7696f483f3062d0d4095a9",
+        "archiveRelativePath": "assets/assets/voices/candidate-dialogue/amt-brunhilde-knick-19.mp3",
+        "retiredReason": "Superseded by the selected production profile on 2026-10-11; private archive retains exact audio and provenance."
+      },
+      "archiveRelativePath": "assets/assets/voices/candidate-dialogue/amt-brunhilde-knick-19-escalation.mp3",
+      "retiredReason": "Superseded by the selected production profile on 2026-10-11; private archive retains exact audio and provenance."
     },
     {
       "clipId": "amt-brunhilde-knick-20",
@@ -1921,8 +2075,12 @@
         "asr": "Sie beschuldigen meinen Schalter? Dann schreiben Sie ihm eine Anzeige. Der Stempel war halb unten. Ein halber Stempel ist kein Stempel und ohne Stempel ist Ihr Termin annulliert.",
         "asrWordExact": true,
         "path": "assets/voices/candidate-dialogue/amt-brunhilde-knick-20.mp3",
-        "sha256": "4f6773f4da58f6c1722bef77faa4953a4814c9ba3c846242853ee31611d28181"
-      }
+        "sha256": "4f6773f4da58f6c1722bef77faa4953a4814c9ba3c846242853ee31611d28181",
+        "archiveRelativePath": "assets/assets/voices/candidate-dialogue/amt-brunhilde-knick-20.mp3",
+        "retiredReason": "Superseded by the selected production profile on 2026-10-11; private archive retains exact audio and provenance."
+      },
+      "archiveRelativePath": "assets/assets/voices/candidate-dialogue/amt-brunhilde-knick-20-escalation.mp3",
+      "retiredReason": "Superseded by the selected production profile on 2026-10-11; private archive retains exact audio and provenance."
     },
     {
       "clipId": "amt-brunhilde-knick-21",
@@ -1978,8 +2136,12 @@
         "asr": "Ihre Nummer wandert zurück in den Automaten. Gehen Sie bitte durch den Eingang hinaus. Für einen neuen Versuch ziehen Sie draußen eine neue Nummer. Dort ist die Polizei für den Rasen zuständig.",
         "asrWordExact": true,
         "path": "assets/voices/candidate-dialogue/amt-brunhilde-knick-21.mp3",
-        "sha256": "ade437b035a9fd88a6e1b1a8863794a31c4c285d3c0bbeff28eb68076e983029"
-      }
+        "sha256": "ade437b035a9fd88a6e1b1a8863794a31c4c285d3c0bbeff28eb68076e983029",
+        "archiveRelativePath": "assets/assets/voices/candidate-dialogue/amt-brunhilde-knick-21.mp3",
+        "retiredReason": "Superseded by the selected production profile on 2026-10-11; private archive retains exact audio and provenance."
+      },
+      "archiveRelativePath": "assets/assets/voices/candidate-dialogue/amt-brunhilde-knick-21-escalation.mp3",
+      "retiredReason": "Superseded by the selected production profile on 2026-10-11; private archive retains exact audio and provenance."
     },
     {
       "clipId": "polizei-heinrich-wachtmeister-01",
@@ -1995,7 +2157,8 @@
       "asrWordExact": false,
       "path": "assets/voices/candidate-dialogue/polizei-heinrich-wachtmeister-01.mp3",
       "sha256": "4aa0567bcb613edce3ad033d6b85fd6faa0fe7756edd0d2db4820af212da944f",
-      "takeId": "polizei-heinrich-wachtmeister-01"
+      "takeId": "polizei-heinrich-wachtmeister-01",
+      "referenceHashKind": "uploaded-original"
     },
     {
       "clipId": "polizei-heinrich-wachtmeister-02",
@@ -2011,7 +2174,8 @@
       "asrWordExact": true,
       "path": "assets/voices/candidate-dialogue/polizei-heinrich-wachtmeister-02.mp3",
       "sha256": "cf506f4332a8c7a81657d34bff1a1546b6fd3c0d786960c182822d9a558fdd06",
-      "takeId": "polizei-heinrich-wachtmeister-02--retry1"
+      "takeId": "polizei-heinrich-wachtmeister-02--retry1",
+      "referenceHashKind": "uploaded-original"
     },
     {
       "clipId": "polizei-heinrich-wachtmeister-03",
@@ -2027,7 +2191,8 @@
       "asrWordExact": true,
       "path": "assets/voices/candidate-dialogue/polizei-heinrich-wachtmeister-03.mp3",
       "sha256": "b0676aedb52d37ac8a141f3a492e3d68c9d6ee0c4fd1d3603fec23d77cf26b7e",
-      "takeId": "polizei-heinrich-wachtmeister-03--retry1"
+      "takeId": "polizei-heinrich-wachtmeister-03--retry1",
+      "referenceHashKind": "uploaded-original"
     },
     {
       "clipId": "polizei-heinrich-wachtmeister-04",
@@ -2043,7 +2208,8 @@
       "asrWordExact": false,
       "path": "assets/voices/candidate-dialogue/polizei-heinrich-wachtmeister-04.mp3",
       "sha256": "0f102ea6dc5517264dce8a8261e2cbe7f00d317aad7b1f5cda27aa45f83f0372",
-      "takeId": "polizei-heinrich-wachtmeister-04"
+      "takeId": "polizei-heinrich-wachtmeister-04",
+      "referenceHashKind": "uploaded-original"
     },
     {
       "clipId": "polizei-heinrich-wachtmeister-05",
@@ -2059,7 +2225,8 @@
       "asrWordExact": true,
       "path": "assets/voices/candidate-dialogue/polizei-heinrich-wachtmeister-05.mp3",
       "sha256": "5c3712c2d6f41cba2b1a9542e14eeac132516c1524a9584228c1408b4a0f2a98",
-      "takeId": "polizei-heinrich-wachtmeister-05"
+      "takeId": "polizei-heinrich-wachtmeister-05",
+      "referenceHashKind": "uploaded-original"
     },
     {
       "clipId": "polizei-heinrich-wachtmeister-06",
@@ -2075,7 +2242,8 @@
       "asrWordExact": true,
       "path": "assets/voices/candidate-dialogue/polizei-heinrich-wachtmeister-06.mp3",
       "sha256": "87c12a494c1b502fcfe4a97ae0d4ed3980dfd96527485a5ac37d5a26e47f2f37",
-      "takeId": "polizei-heinrich-wachtmeister-06"
+      "takeId": "polizei-heinrich-wachtmeister-06",
+      "referenceHashKind": "uploaded-original"
     },
     {
       "clipId": "polizei-heinrich-wachtmeister-07",
@@ -2091,7 +2259,8 @@
       "asrWordExact": false,
       "path": "assets/voices/candidate-dialogue/polizei-heinrich-wachtmeister-07.mp3",
       "sha256": "76416d7b9c24ef1e946a44f031c31af5245f1ebc1cc8376d2473af361419c6f1",
-      "takeId": "polizei-heinrich-wachtmeister-07"
+      "takeId": "polizei-heinrich-wachtmeister-07",
+      "referenceHashKind": "uploaded-original"
     },
     {
       "clipId": "polizei-heinrich-wachtmeister-08",
@@ -2107,7 +2276,8 @@
       "asrWordExact": false,
       "path": "assets/voices/candidate-dialogue/polizei-heinrich-wachtmeister-08.mp3",
       "sha256": "695cee14a32104dcc7170fb6f412cd0ab504402e9b57a5dcf8cc8e2429276a1a",
-      "takeId": "polizei-heinrich-wachtmeister-08--retry1"
+      "takeId": "polizei-heinrich-wachtmeister-08--retry1",
+      "referenceHashKind": "uploaded-original"
     },
     {
       "clipId": "polizei-heinrich-wachtmeister-09",
@@ -2123,7 +2293,8 @@
       "asrWordExact": false,
       "path": "assets/voices/candidate-dialogue/polizei-heinrich-wachtmeister-09.mp3",
       "sha256": "4efd40b109bf5e1f57615910863e9909625935ea3f456adff33b38b5406e7c49",
-      "takeId": "polizei-heinrich-wachtmeister-09--retry1"
+      "takeId": "polizei-heinrich-wachtmeister-09--retry1",
+      "referenceHashKind": "uploaded-original"
     },
     {
       "clipId": "polizei-heinrich-wachtmeister-10",
@@ -2139,7 +2310,8 @@
       "asrWordExact": false,
       "path": "assets/voices/candidate-dialogue/polizei-heinrich-wachtmeister-10.mp3",
       "sha256": "a7b4c0e99c46cc21d32566dc10dc621fbebbd1d06cd4d4f04f3bf6fc0f03ba67",
-      "takeId": "polizei-heinrich-wachtmeister-10"
+      "takeId": "polizei-heinrich-wachtmeister-10",
+      "referenceHashKind": "uploaded-original"
     },
     {
       "clipId": "polizei-heinrich-wachtmeister-11",
@@ -2155,7 +2327,8 @@
       "asrWordExact": false,
       "path": "assets/voices/candidate-dialogue/polizei-heinrich-wachtmeister-11.mp3",
       "sha256": "275c6154d7f1b547d594eee2df72d84e68a13ee883bfda6d0e93db04ae349681",
-      "takeId": "polizei-heinrich-wachtmeister-11"
+      "takeId": "polizei-heinrich-wachtmeister-11",
+      "referenceHashKind": "uploaded-original"
     },
     {
       "clipId": "polizei-heinrich-wachtmeister-12",
@@ -2171,7 +2344,8 @@
       "asrWordExact": false,
       "path": "assets/voices/candidate-dialogue/polizei-heinrich-wachtmeister-12.mp3",
       "sha256": "5f99661ee8677ce54a439ad695a9e96926db14cb8ceb31d1cd9334ef709a4fb8",
-      "takeId": "polizei-heinrich-wachtmeister-12--retry1"
+      "takeId": "polizei-heinrich-wachtmeister-12--retry1",
+      "referenceHashKind": "uploaded-original"
     },
     {
       "clipId": "crowd-guenther-gartenzaun-01",
@@ -2187,7 +2361,8 @@
       "asrWordExact": false,
       "path": "assets/voices/candidate-dialogue/crowd-guenther-gartenzaun-01.mp3",
       "sha256": "9eb558d6e790dd2126a78232cccf9be0cbe46851a1aac0d32536b4254d97aa13",
-      "takeId": "crowd-guenther-gartenzaun-01"
+      "takeId": "crowd-guenther-gartenzaun-01",
+      "referenceHashKind": "uploaded-original"
     },
     {
       "clipId": "crowd-guenther-gartenzaun-02",
@@ -2203,7 +2378,8 @@
       "asrWordExact": true,
       "path": "assets/voices/candidate-dialogue/crowd-guenther-gartenzaun-02.mp3",
       "sha256": "ea0c175febeaf2a20629231fe6a96c6ecba0e7460a6a1f7682acd80dbe9a0550",
-      "takeId": "crowd-guenther-gartenzaun-02"
+      "takeId": "crowd-guenther-gartenzaun-02",
+      "referenceHashKind": "uploaded-original"
     },
     {
       "clipId": "crowd-guenther-gartenzaun-04",
@@ -2219,7 +2395,8 @@
       "asrWordExact": true,
       "path": "assets/voices/candidate-dialogue/crowd-guenther-gartenzaun-04.mp3",
       "sha256": "2e88ab0c6b19828c0ef2de5aaed3b31117701ff7b4b63a43b1e8698449ccaa15",
-      "takeId": "crowd-guenther-gartenzaun-04"
+      "takeId": "crowd-guenther-gartenzaun-04",
+      "referenceHashKind": "uploaded-original"
     },
     {
       "clipId": "crowd-elfriede-eingabe-01",
@@ -2235,7 +2412,8 @@
       "asrWordExact": true,
       "path": "assets/voices/candidate-dialogue/crowd-elfriede-eingabe-01.mp3",
       "sha256": "e9ab50cf5c6194c884cc8c727950645ca307b11d84ee13eaa8ed92e29fb88bcc",
-      "takeId": "crowd-elfriede-eingabe-01"
+      "takeId": "crowd-elfriede-eingabe-01",
+      "referenceHashKind": "uploaded-original"
     },
     {
       "clipId": "crowd-elfriede-eingabe-02",
@@ -2251,7 +2429,8 @@
       "asrWordExact": true,
       "path": "assets/voices/candidate-dialogue/crowd-elfriede-eingabe-02.mp3",
       "sha256": "13f2a6caa810ee290e7a8dbba806ae781cf54c7973c26e3dc4d04ca49971cc68",
-      "takeId": "crowd-elfriede-eingabe-02"
+      "takeId": "crowd-elfriede-eingabe-02",
+      "referenceHashKind": "uploaded-original"
     },
     {
       "clipId": "crowd-elfriede-eingabe-03",
@@ -2267,7 +2446,8 @@
       "asrWordExact": false,
       "path": "assets/voices/candidate-dialogue/crowd-elfriede-eingabe-03.mp3",
       "sha256": "7f7f005699db0cb6d8208488b5f1d93c0a591d94153a138519376d6ae238f724",
-      "takeId": "crowd-elfriede-eingabe-03"
+      "takeId": "crowd-elfriede-eingabe-03",
+      "referenceHashKind": "uploaded-original"
     },
     {
       "clipId": "crowd-klaus-dieter-knoedel-01",
@@ -2284,7 +2464,8 @@
       "path": "assets/voices/candidate-dialogue/crowd-klaus-dieter-knoedel-01.mp3",
       "sha256": "f2130e261c04bc7e370f73b522f6edcc99d778cf07f23adf03f714105533b5a6",
       "takeId": "crowd-klaus-dieter-knoedel-01--spoken-number",
-      "renderText": "Dieser Platz ist seit sieben Uhr vier durch textile Willenserklärung reserviert."
+      "renderText": "Dieser Platz ist seit sieben Uhr vier durch textile Willenserklärung reserviert.",
+      "referenceHashKind": "uploaded-original"
     },
     {
       "clipId": "crowd-klaus-dieter-knoedel-02",
@@ -2300,7 +2481,8 @@
       "asrWordExact": true,
       "path": "assets/voices/candidate-dialogue/crowd-klaus-dieter-knoedel-02.mp3",
       "sha256": "8b1603d2e38ec3444dac091ac50779705486421583437bf7c4214d2b2ca08256",
-      "takeId": "crowd-klaus-dieter-knoedel-02"
+      "takeId": "crowd-klaus-dieter-knoedel-02",
+      "referenceHashKind": "uploaded-original"
     },
     {
       "clipId": "crowd-klaus-dieter-knoedel-04",
@@ -2316,7 +2498,8 @@
       "asrWordExact": true,
       "path": "assets/voices/candidate-dialogue/crowd-klaus-dieter-knoedel-04.mp3",
       "sha256": "59943365ae5f32ff5a74f159a8c9527c55e068ee627ed8d55a656ac26c1eaae0",
-      "takeId": "crowd-klaus-dieter-knoedel-04"
+      "takeId": "crowd-klaus-dieter-knoedel-04",
+      "referenceHashKind": "uploaded-original"
     },
     {
       "clipId": "crowd-irmgard-aktenordner-01",
@@ -2332,7 +2515,8 @@
       "asrWordExact": true,
       "path": "assets/voices/candidate-dialogue/crowd-irmgard-aktenordner-01.mp3",
       "sha256": "3cae67aa02d350914b6da5de628a903fd5e6dd97c84bedf3913eb977abdb9627",
-      "takeId": "crowd-irmgard-aktenordner-01"
+      "takeId": "crowd-irmgard-aktenordner-01",
+      "referenceHashKind": "uploaded-original"
     },
     {
       "clipId": "crowd-irmgard-aktenordner-02",
@@ -2348,7 +2532,8 @@
       "asrWordExact": true,
       "path": "assets/voices/candidate-dialogue/crowd-irmgard-aktenordner-02.mp3",
       "sha256": "1828c0ec14dc787bc918d6515e08fec08880580923b5a1515f59291edac82ea0",
-      "takeId": "crowd-irmgard-aktenordner-02"
+      "takeId": "crowd-irmgard-aktenordner-02",
+      "referenceHashKind": "uploaded-original"
     },
     {
       "clipId": "crowd-irmgard-aktenordner-03",
@@ -2364,7 +2549,8 @@
       "asrWordExact": false,
       "path": "assets/voices/candidate-dialogue/crowd-irmgard-aktenordner-03.mp3",
       "sha256": "af2df0f8611a6cf55dcf660c3c74fa6bb75d02762d474ba2d419d9069df79a20",
-      "takeId": "crowd-irmgard-aktenordner-03--retry1"
+      "takeId": "crowd-irmgard-aktenordner-03--retry1",
+      "referenceHashKind": "uploaded-original"
     },
     {
       "clipId": "crowd-dietmar-din-norm-02",
@@ -2380,7 +2566,8 @@
       "asrWordExact": true,
       "path": "assets/voices/candidate-dialogue/crowd-dietmar-din-norm-02.mp3",
       "sha256": "436ef92782c4d0e77fdfb9e0509979e5b507b685a74e934d229cb67a7f1478f5",
-      "takeId": "crowd-dietmar-din-norm-02"
+      "takeId": "crowd-dietmar-din-norm-02",
+      "referenceHashKind": "uploaded-original"
     },
     {
       "clipId": "crowd-dietmar-din-norm-04",
@@ -2396,7 +2583,8 @@
       "asrWordExact": true,
       "path": "assets/voices/candidate-dialogue/crowd-dietmar-din-norm-04.mp3",
       "sha256": "4c9493091df7b105363cf55fa6e6606457d4c19889e165ea9b844c03c5b8eb28",
-      "takeId": "crowd-dietmar-din-norm-04--retry1"
+      "takeId": "crowd-dietmar-din-norm-04--retry1",
+      "referenceHashKind": "uploaded-original"
     },
     {
       "clipId": "crowd-brigitte-bueroklammer-01",
@@ -2412,7 +2600,8 @@
       "asrWordExact": true,
       "path": "assets/voices/candidate-dialogue/crowd-brigitte-bueroklammer-01.mp3",
       "sha256": "daf13c97b5002677665166aebee66b14a65167c174995cedc8c1fcbceb687642",
-      "takeId": "crowd-brigitte-bueroklammer-01"
+      "takeId": "crowd-brigitte-bueroklammer-01",
+      "referenceHashKind": "uploaded-original"
     },
     {
       "clipId": "crowd-brigitte-bueroklammer-02",
@@ -2428,7 +2617,8 @@
       "asrWordExact": true,
       "path": "assets/voices/candidate-dialogue/crowd-brigitte-bueroklammer-02.mp3",
       "sha256": "6e41c27583402706f4f6211a85b2e3e99678a9112f4c2febf83359850b74fa58",
-      "takeId": "crowd-brigitte-bueroklammer-02"
+      "takeId": "crowd-brigitte-bueroklammer-02",
+      "referenceHashKind": "uploaded-original"
     },
     {
       "clipId": "crowd-brigitte-bueroklammer-03",
@@ -2444,7 +2634,8 @@
       "asrWordExact": true,
       "path": "assets/voices/candidate-dialogue/crowd-brigitte-bueroklammer-03.mp3",
       "sha256": "90817951d52d498785e895706be01e3e2c3e4c9a7835d94c04b90f6b239c0c96",
-      "takeId": "crowd-brigitte-bueroklammer-03"
+      "takeId": "crowd-brigitte-bueroklammer-03",
+      "referenceHashKind": "uploaded-original"
     },
     {
       "clipId": "crowd-ruediger-rasenkante-01",
@@ -2461,7 +2652,8 @@
       "path": "assets/voices/candidate-dialogue/crowd-ruediger-rasenkante-01.mp3",
       "sha256": "d870883ed733ba6e0e487e9ae44ef0e1e561dbc6b92bd149552bf00e41592222",
       "takeId": "crowd-ruediger-rasenkante-01--spoken-number",
-      "renderText": "Dieser Platz ist seit sieben Uhr vier durch textile Willenserklärung reserviert."
+      "renderText": "Dieser Platz ist seit sieben Uhr vier durch textile Willenserklärung reserviert.",
+      "referenceHashKind": "uploaded-original"
     },
     {
       "clipId": "crowd-ruediger-rasenkante-02",
@@ -2477,7 +2669,8 @@
       "asrWordExact": true,
       "path": "assets/voices/candidate-dialogue/crowd-ruediger-rasenkante-02.mp3",
       "sha256": "168304895b867614a570dbe24e31edc43721345fae0adb2652d47cec83d2fb32",
-      "takeId": "crowd-ruediger-rasenkante-02"
+      "takeId": "crowd-ruediger-rasenkante-02",
+      "referenceHashKind": "uploaded-original"
     },
     {
       "clipId": "crowd-ruediger-rasenkante-04",
@@ -2493,7 +2686,8 @@
       "asrWordExact": true,
       "path": "assets/voices/candidate-dialogue/crowd-ruediger-rasenkante-04.mp3",
       "sha256": "2bee965f7d4fd87bfa69047e74434287f9ce2bb49b3e4f2c324d990c088ffa13",
-      "takeId": "crowd-ruediger-rasenkante-04"
+      "takeId": "crowd-ruediger-rasenkante-04",
+      "referenceHashKind": "uploaded-original"
     },
     {
       "clipId": "crowd-hildegard-brotzeit-01",
@@ -2509,7 +2703,8 @@
       "asrWordExact": true,
       "path": "assets/voices/candidate-dialogue/crowd-hildegard-brotzeit-01.mp3",
       "sha256": "4e1533c4e5e2eaa58bc9b86791d04fa1906edb660840202299d49b13ef2a2034",
-      "takeId": "crowd-hildegard-brotzeit-01"
+      "takeId": "crowd-hildegard-brotzeit-01",
+      "referenceHashKind": "uploaded-original"
     },
     {
       "clipId": "crowd-hildegard-brotzeit-02",
@@ -2525,7 +2720,8 @@
       "asrWordExact": true,
       "path": "assets/voices/candidate-dialogue/crowd-hildegard-brotzeit-02.mp3",
       "sha256": "ef5006f4e6ed11f0452d67968a04cff2280586d5dc3761cf6956fd579853a526",
-      "takeId": "crowd-hildegard-brotzeit-02"
+      "takeId": "crowd-hildegard-brotzeit-02",
+      "referenceHashKind": "uploaded-original"
     },
     {
       "clipId": "crowd-hildegard-brotzeit-03",
@@ -2541,7 +2737,8 @@
       "asrWordExact": true,
       "path": "assets/voices/candidate-dialogue/crowd-hildegard-brotzeit-03.mp3",
       "sha256": "95d6d66abd7829c6b666376210effdd9360c511bb1a570f7a23627b7ef6f26d3",
-      "takeId": "crowd-hildegard-brotzeit-03"
+      "takeId": "crowd-hildegard-brotzeit-03",
+      "referenceHashKind": "uploaded-original"
     },
     {
       "clipId": "crowd-hildegard-brotzeit-04",
@@ -2557,7 +2754,8 @@
       "asrWordExact": true,
       "path": "assets/voices/candidate-dialogue/crowd-hildegard-brotzeit-04.mp3",
       "sha256": "83e10191da66499f439d88ee8d6af13d5d2f98d56bd5d864217df78d6af0c1f5",
-      "takeId": "crowd-hildegard-brotzeit-04"
+      "takeId": "crowd-hildegard-brotzeit-04",
+      "referenceHashKind": "uploaded-original"
     },
     {
       "clipId": "crowd-manfred-mittagsruhe-01",
@@ -2574,7 +2772,8 @@
       "path": "assets/voices/candidate-dialogue/crowd-manfred-mittagsruhe-01.mp3",
       "sha256": "b5afe762149891492d8eea6c0756b8ec9312772c8f263a1d589c82d51c9bfb65",
       "takeId": "crowd-manfred-mittagsruhe-01--spoken-number",
-      "renderText": "Dieser Platz ist seit sieben Uhr vier durch textile Willenserklärung reserviert."
+      "renderText": "Dieser Platz ist seit sieben Uhr vier durch textile Willenserklärung reserviert.",
+      "referenceHashKind": "uploaded-original"
     },
     {
       "clipId": "crowd-manfred-mittagsruhe-02",
@@ -2590,7 +2789,8 @@
       "asrWordExact": true,
       "path": "assets/voices/candidate-dialogue/crowd-manfred-mittagsruhe-02.mp3",
       "sha256": "a3bfd4e9c1bd13773d9ec25f2601a56fdcfedfe3e02cbff3a0c9472957309525",
-      "takeId": "crowd-manfred-mittagsruhe-02"
+      "takeId": "crowd-manfred-mittagsruhe-02",
+      "referenceHashKind": "uploaded-original"
     },
     {
       "clipId": "crowd-manfred-mittagsruhe-04",
@@ -2606,7 +2806,8 @@
       "asrWordExact": true,
       "path": "assets/voices/candidate-dialogue/crowd-manfred-mittagsruhe-04.mp3",
       "sha256": "aaa9b44d876914d007a173a721ef76a9b5ec1646066843ce748de84e28ae517b",
-      "takeId": "crowd-manfred-mittagsruhe-04--retry1"
+      "takeId": "crowd-manfred-mittagsruhe-04--retry1",
+      "referenceHashKind": "uploaded-original"
     },
     {
       "clipId": "crowd-waltraud-wartemarke-01",
@@ -2622,7 +2823,8 @@
       "asrWordExact": true,
       "path": "assets/voices/candidate-dialogue/crowd-waltraud-wartemarke-01.mp3",
       "sha256": "8cbbb9f83c8b00626c95c2c9dd5619c381afdce2fec50a4ce359faaca71e2aa2",
-      "takeId": "crowd-waltraud-wartemarke-01"
+      "takeId": "crowd-waltraud-wartemarke-01",
+      "referenceHashKind": "uploaded-original"
     },
     {
       "clipId": "crowd-waltraud-wartemarke-02",
@@ -2638,7 +2840,8 @@
       "asrWordExact": true,
       "path": "assets/voices/candidate-dialogue/crowd-waltraud-wartemarke-02.mp3",
       "sha256": "1928cfe7ac3dee7ba4a68fb7305d9cdf83d12c39d892cb423a720c6e323b2607",
-      "takeId": "crowd-waltraud-wartemarke-02"
+      "takeId": "crowd-waltraud-wartemarke-02",
+      "referenceHashKind": "uploaded-original"
     },
     {
       "clipId": "crowd-waltraud-wartemarke-03",
@@ -2654,7 +2857,8 @@
       "asrWordExact": true,
       "path": "assets/voices/candidate-dialogue/crowd-waltraud-wartemarke-03.mp3",
       "sha256": "b9e1ed73f5333ba683730ac5efac4671ab4498b8a7e089215c6c2d9992a61480",
-      "takeId": "crowd-waltraud-wartemarke-03"
+      "takeId": "crowd-waltraud-wartemarke-03",
+      "referenceHashKind": "uploaded-original"
     },
     {
       "clipId": "crowd-horst-hausordnung-01",
@@ -2671,7 +2875,8 @@
       "path": "assets/voices/candidate-dialogue/crowd-horst-hausordnung-01.mp3",
       "sha256": "650ef3baa251fc0df25df8b9ada49d056f28184536053b5deadd51080656026a",
       "takeId": "crowd-horst-hausordnung-01--spoken-number",
-      "renderText": "Dieser Platz ist seit sieben Uhr vier durch textile Willenserklärung reserviert."
+      "renderText": "Dieser Platz ist seit sieben Uhr vier durch textile Willenserklärung reserviert.",
+      "referenceHashKind": "uploaded-original"
     },
     {
       "clipId": "crowd-horst-hausordnung-02",
@@ -2687,7 +2892,8 @@
       "asrWordExact": true,
       "path": "assets/voices/candidate-dialogue/crowd-horst-hausordnung-02.mp3",
       "sha256": "a197bb4ceaf3e02b47f68bd464a7dcfd1f6fb739df8b687cbe391bfefe133121",
-      "takeId": "crowd-horst-hausordnung-02"
+      "takeId": "crowd-horst-hausordnung-02",
+      "referenceHashKind": "uploaded-original"
     },
     {
       "clipId": "crowd-horst-hausordnung-04",
@@ -2703,7 +2909,8 @@
       "asrWordExact": true,
       "path": "assets/voices/candidate-dialogue/crowd-horst-hausordnung-04.mp3",
       "sha256": "d877394c1ede667b98cb68b69b276666698f3489fc4263a86b1fa2902114f4a3",
-      "takeId": "crowd-horst-hausordnung-04"
+      "takeId": "crowd-horst-hausordnung-04",
+      "referenceHashKind": "uploaded-original"
     },
     {
       "clipId": "crowd-baerbel-brezel-01",
@@ -2719,7 +2926,8 @@
       "asrWordExact": true,
       "path": "assets/voices/candidate-dialogue/crowd-baerbel-brezel-01.mp3",
       "sha256": "861bc4bfa3dd1726ee2c58bc42d9acaacad21cc33a8cf37bef174d5688869851",
-      "takeId": "crowd-baerbel-brezel-01"
+      "takeId": "crowd-baerbel-brezel-01",
+      "referenceHashKind": "uploaded-original"
     },
     {
       "clipId": "crowd-baerbel-brezel-02",
@@ -2735,7 +2943,8 @@
       "asrWordExact": true,
       "path": "assets/voices/candidate-dialogue/crowd-baerbel-brezel-02.mp3",
       "sha256": "32fc42ca1bd8c425432a357eeb68716fb25732a0fd375e81c477697daa4c684a",
-      "takeId": "crowd-baerbel-brezel-02"
+      "takeId": "crowd-baerbel-brezel-02",
+      "referenceHashKind": "uploaded-original"
     },
     {
       "clipId": "crowd-baerbel-brezel-03",
@@ -2751,7 +2960,8 @@
       "asrWordExact": false,
       "path": "assets/voices/candidate-dialogue/crowd-baerbel-brezel-03.mp3",
       "sha256": "4b27be3568d050ef0454c8449514581b5bd52338e9b5f51d1d1072fb0f69680a",
-      "takeId": "crowd-baerbel-brezel-03"
+      "takeId": "crowd-baerbel-brezel-03",
+      "referenceHashKind": "uploaded-original"
     },
     {
       "clipId": "spieler-hans-peter-mustermann-germany-train-01",
@@ -2767,7 +2977,8 @@
       "asrWordExact": true,
       "path": "assets/voices/candidate-dialogue/spieler-hans-peter-mustermann-germany-train-01.mp3",
       "sha256": "3a0e7bb8a8f38f6ea9a4748163d5f7f78d412d1da52e85cd8b33bd8f5f65e5fe",
-      "takeId": "spieler-hans-peter-mustermann-germany-train-01"
+      "takeId": "spieler-hans-peter-mustermann-germany-train-01",
+      "referenceHashKind": "uploaded-original"
     },
     {
       "clipId": "spieler-hans-peter-mustermann-germany-train-02",
@@ -2783,7 +2994,8 @@
       "asrWordExact": true,
       "path": "assets/voices/candidate-dialogue/spieler-hans-peter-mustermann-germany-train-02.mp3",
       "sha256": "205fef5b8d3d25dd1a0d5077ada92ee69472a22131f3cf04edebd9317e49bbf6",
-      "takeId": "spieler-hans-peter-mustermann-germany-train-02"
+      "takeId": "spieler-hans-peter-mustermann-germany-train-02",
+      "referenceHashKind": "uploaded-original"
     },
     {
       "clipId": "spieler-hans-peter-mustermann-germany-train-03",
@@ -2799,7 +3011,8 @@
       "asrWordExact": true,
       "path": "assets/voices/candidate-dialogue/spieler-hans-peter-mustermann-germany-train-03.mp3",
       "sha256": "90d7fb00effffccb7259c955b53ccb0b0e291be93ae039947790353c3339e597",
-      "takeId": "spieler-hans-peter-mustermann-germany-train-03"
+      "takeId": "spieler-hans-peter-mustermann-germany-train-03",
+      "referenceHashKind": "uploaded-original"
     },
     {
       "clipId": "spieler-hans-peter-mustermann-germany-wrongoffice-01",
@@ -2815,7 +3028,8 @@
       "asrWordExact": true,
       "path": "assets/voices/candidate-dialogue/spieler-hans-peter-mustermann-germany-wrongoffice-01.mp3",
       "sha256": "00e2f896b37a249cf212c470b213fc19bd2a41521c2914dc31deb207a5943a81",
-      "takeId": "spieler-hans-peter-mustermann-germany-wrongoffice-01"
+      "takeId": "spieler-hans-peter-mustermann-germany-wrongoffice-01",
+      "referenceHashKind": "uploaded-original"
     },
     {
       "clipId": "spieler-hans-peter-mustermann-germany-wrongoffice-02",
@@ -2831,7 +3045,8 @@
       "asrWordExact": true,
       "path": "assets/voices/candidate-dialogue/spieler-hans-peter-mustermann-germany-wrongoffice-02.mp3",
       "sha256": "5d452bd829f916fd1c3b283a4eaf7c953fdcd38ee112157f5a6c9b8dc4b4a5fa",
-      "takeId": "spieler-hans-peter-mustermann-germany-wrongoffice-02"
+      "takeId": "spieler-hans-peter-mustermann-germany-wrongoffice-02",
+      "referenceHashKind": "uploaded-original"
     },
     {
       "clipId": "spieler-hans-peter-mustermann-germany-wrongoffice-03",
@@ -2847,7 +3062,8 @@
       "asrWordExact": true,
       "path": "assets/voices/candidate-dialogue/spieler-hans-peter-mustermann-germany-wrongoffice-03.mp3",
       "sha256": "b93217fb94afacc0cc7ea8bf45c99104111f77a4d10a1624a6b659d869a4185e",
-      "takeId": "spieler-hans-peter-mustermann-germany-wrongoffice-03"
+      "takeId": "spieler-hans-peter-mustermann-germany-wrongoffice-03",
+      "referenceHashKind": "uploaded-original"
     },
     {
       "clipId": "spieler-hans-peter-mustermann-germany-bicycle-02",
@@ -2863,7 +3079,8 @@
       "asrWordExact": true,
       "path": "assets/voices/candidate-dialogue/spieler-hans-peter-mustermann-germany-bicycle-02.mp3",
       "sha256": "b639c423354c2f9b691b4e702e26eb61b7dbab05674bfb5f29e2b36cbcedbaec",
-      "takeId": "spieler-hans-peter-mustermann-germany-bicycle-02"
+      "takeId": "spieler-hans-peter-mustermann-germany-bicycle-02",
+      "referenceHashKind": "uploaded-original"
     },
     {
       "clipId": "spieler-hans-peter-mustermann-germany-fax-01",
@@ -2879,7 +3096,8 @@
       "asrWordExact": true,
       "path": "assets/voices/candidate-dialogue/spieler-hans-peter-mustermann-germany-fax-01.mp3",
       "sha256": "4e4a49302549235ee6bb610ee2bf0428ff1574bcd2b6fea24532178f642b3a51",
-      "takeId": "spieler-hans-peter-mustermann-germany-fax-01"
+      "takeId": "spieler-hans-peter-mustermann-germany-fax-01",
+      "referenceHashKind": "uploaded-original"
     },
     {
       "clipId": "spieler-hans-peter-mustermann-germany-fax-02",
@@ -2895,7 +3113,8 @@
       "asrWordExact": true,
       "path": "assets/voices/candidate-dialogue/spieler-hans-peter-mustermann-germany-fax-02.mp3",
       "sha256": "c1cd832b03fd354d80af50760e640817055e5af5ee37894167e1aaa545199206",
-      "takeId": "spieler-hans-peter-mustermann-germany-fax-02"
+      "takeId": "spieler-hans-peter-mustermann-germany-fax-02",
+      "referenceHashKind": "uploaded-original"
     },
     {
       "clipId": "spieler-hans-peter-mustermann-germany-coffee-01",
@@ -2911,7 +3130,8 @@
       "asrWordExact": true,
       "path": "assets/voices/candidate-dialogue/spieler-hans-peter-mustermann-germany-coffee-01.mp3",
       "sha256": "d6c3ec8ae5346b06a1295cda7a97f51f30b15492c0e6ddad1529b0439ecf5825",
-      "takeId": "spieler-hans-peter-mustermann-germany-coffee-01"
+      "takeId": "spieler-hans-peter-mustermann-germany-coffee-01",
+      "referenceHashKind": "uploaded-original"
     },
     {
       "clipId": "spieler-hans-peter-mustermann-germany-coffee-02",
@@ -2927,7 +3147,8 @@
       "asrWordExact": true,
       "path": "assets/voices/candidate-dialogue/spieler-hans-peter-mustermann-germany-coffee-02.mp3",
       "sha256": "264c26fca05453b0595af377abd85294ac0ca9fdd9eba5996cc4e57deebedeb6",
-      "takeId": "spieler-hans-peter-mustermann-germany-coffee-02"
+      "takeId": "spieler-hans-peter-mustermann-germany-coffee-02",
+      "referenceHashKind": "uploaded-original"
     },
     {
       "clipId": "spieler-hans-peter-mustermann-germany-pfand-01",
@@ -2943,7 +3164,8 @@
       "asrWordExact": true,
       "path": "assets/voices/candidate-dialogue/spieler-hans-peter-mustermann-germany-pfand-01.mp3",
       "sha256": "de46e3e5c85bd5f2b3c839cf2459a762992c8548f4ae1d8652341ac6c8321af8",
-      "takeId": "spieler-hans-peter-mustermann-germany-pfand-01--retry1"
+      "takeId": "spieler-hans-peter-mustermann-germany-pfand-01--retry1",
+      "referenceHashKind": "uploaded-original"
     },
     {
       "clipId": "spieler-hans-peter-mustermann-germany-pfand-02",
@@ -2959,7 +3181,8 @@
       "asrWordExact": true,
       "path": "assets/voices/candidate-dialogue/spieler-hans-peter-mustermann-germany-pfand-02.mp3",
       "sha256": "4ff7eca06a9946ff20a8fffc240b1494b4b0675811cd0bdf9c67e30aea625e26",
-      "takeId": "spieler-hans-peter-mustermann-germany-pfand-02"
+      "takeId": "spieler-hans-peter-mustermann-germany-pfand-02",
+      "referenceHashKind": "uploaded-original"
     },
     {
       "clipId": "spieler-hans-peter-mustermann-germany-wrongtask-01",
@@ -2975,7 +3198,8 @@
       "asrWordExact": true,
       "path": "assets/voices/candidate-dialogue/spieler-hans-peter-mustermann-germany-wrongtask-01.mp3",
       "sha256": "dee43091a912beda6976897f6afa7ac838fc76de272d58976355200237cdaf66",
-      "takeId": "spieler-hans-peter-mustermann-germany-wrongtask-01--retry1"
+      "takeId": "spieler-hans-peter-mustermann-germany-wrongtask-01--retry1",
+      "referenceHashKind": "uploaded-original"
     },
     {
       "clipId": "spieler-hans-peter-mustermann-germany-wrongtask-02",
@@ -2991,7 +3215,8 @@
       "asrWordExact": true,
       "path": "assets/voices/candidate-dialogue/spieler-hans-peter-mustermann-germany-wrongtask-02.mp3",
       "sha256": "a59fb8f1183a3a877936594e645ece5a016f8dfce6c5daac8133d43ca03194f2",
-      "takeId": "spieler-hans-peter-mustermann-germany-wrongtask-02"
+      "takeId": "spieler-hans-peter-mustermann-germany-wrongtask-02",
+      "referenceHashKind": "uploaded-original"
     },
     {
       "clipId": "spieler-hans-peter-mustermann-germany-lost-01",
@@ -3007,7 +3232,8 @@
       "asrWordExact": true,
       "path": "assets/voices/candidate-dialogue/spieler-hans-peter-mustermann-germany-lost-01.mp3",
       "sha256": "89030424bd65d9903b1c3dcbd772a11620e4f9759ca6770c6eb1ba0fc2f304c3",
-      "takeId": "spieler-hans-peter-mustermann-germany-lost-01"
+      "takeId": "spieler-hans-peter-mustermann-germany-lost-01",
+      "referenceHashKind": "uploaded-original"
     },
     {
       "clipId": "spieler-hans-peter-mustermann-germany-lost-02",
@@ -3023,7 +3249,8 @@
       "asrWordExact": true,
       "path": "assets/voices/candidate-dialogue/spieler-hans-peter-mustermann-germany-lost-02.mp3",
       "sha256": "cde84311b1a1f35a11020281856a55aad85d837bfa20e0e306b58684154f93ba",
-      "takeId": "spieler-hans-peter-mustermann-germany-lost-02"
+      "takeId": "spieler-hans-peter-mustermann-germany-lost-02",
+      "referenceHashKind": "uploaded-original"
     },
     {
       "clipId": "spieler-hans-peter-mustermann-germany-lost-03",
@@ -3039,7 +3266,8 @@
       "asrWordExact": true,
       "path": "assets/voices/candidate-dialogue/spieler-hans-peter-mustermann-germany-lost-03.mp3",
       "sha256": "c6d6bc6f7c75bdd34f4b08912976e90b0c0a87eb38f00ca95e3d1dae2bdc6f0d",
-      "takeId": "spieler-hans-peter-mustermann-germany-lost-03"
+      "takeId": "spieler-hans-peter-mustermann-germany-lost-03",
+      "referenceHashKind": "uploaded-original"
     },
     {
       "clipId": "spieler-hans-peter-mustermann-germany-exhaustion-01",
@@ -3055,7 +3283,8 @@
       "asrWordExact": true,
       "path": "assets/voices/candidate-dialogue/spieler-hans-peter-mustermann-germany-exhaustion-01.mp3",
       "sha256": "59a6e6ff694b31115f24f73aaadc608b3c0b981f7b3fad532f7fb1b444c310ca",
-      "takeId": "spieler-hans-peter-mustermann-germany-exhaustion-01"
+      "takeId": "spieler-hans-peter-mustermann-germany-exhaustion-01",
+      "referenceHashKind": "uploaded-original"
     },
     {
       "clipId": "spieler-hans-peter-mustermann-germany-exhaustion-02",
@@ -3071,7 +3300,8 @@
       "asrWordExact": true,
       "path": "assets/voices/candidate-dialogue/spieler-hans-peter-mustermann-germany-exhaustion-02.mp3",
       "sha256": "dad2f5f8eb76e2fdc1a972ecb0cd6f7f0bb1550413c8be97d527d5c24db3192b",
-      "takeId": "spieler-hans-peter-mustermann-germany-exhaustion-02--retry1"
+      "takeId": "spieler-hans-peter-mustermann-germany-exhaustion-02--retry1",
+      "referenceHashKind": "uploaded-original"
     },
     {
       "clipId": "spieler-hans-peter-mustermann-germany-deadline-01",
@@ -3087,7 +3317,8 @@
       "asrWordExact": true,
       "path": "assets/voices/candidate-dialogue/spieler-hans-peter-mustermann-germany-deadline-01.mp3",
       "sha256": "93ef479dece333e9cf9797b1735fadd37b68c0d7c2fbe69a548230618c37c4c3",
-      "takeId": "spieler-hans-peter-mustermann-germany-deadline-01"
+      "takeId": "spieler-hans-peter-mustermann-germany-deadline-01",
+      "referenceHashKind": "uploaded-original"
     },
     {
       "clipId": "spieler-hans-peter-mustermann-germany-deadline-02",
@@ -3103,7 +3334,8 @@
       "asrWordExact": true,
       "path": "assets/voices/candidate-dialogue/spieler-hans-peter-mustermann-germany-deadline-02.mp3",
       "sha256": "dadb23c00bd923d9a4c95bb64f7b207e2ba78dea11048821396ab3aed492084d",
-      "takeId": "spieler-hans-peter-mustermann-germany-deadline-02"
+      "takeId": "spieler-hans-peter-mustermann-germany-deadline-02",
+      "referenceHashKind": "uploaded-original"
     },
     {
       "clipId": "spieler-hans-peter-mustermann-berlin-train-02",
@@ -3119,7 +3351,8 @@
       "asrWordExact": true,
       "path": "assets/voices/candidate-dialogue/spieler-hans-peter-mustermann-berlin-train-02.mp3",
       "sha256": "903d7d45c2b0369d2189bda730e10c90962631b0e6ddbae6d71a8b79c1128caf",
-      "takeId": "spieler-hans-peter-mustermann-berlin-train-02--retry1"
+      "takeId": "spieler-hans-peter-mustermann-berlin-train-02--retry1",
+      "referenceHashKind": "uploaded-original"
     },
     {
       "clipId": "spieler-hans-peter-mustermann-berlin-train-03",
@@ -3135,7 +3368,8 @@
       "asrWordExact": true,
       "path": "assets/voices/candidate-dialogue/spieler-hans-peter-mustermann-berlin-train-03.mp3",
       "sha256": "2eadab0e272bce945313e2bb37835093a49a3a975dc7d17160061798401c9cdf",
-      "takeId": "spieler-hans-peter-mustermann-berlin-train-03"
+      "takeId": "spieler-hans-peter-mustermann-berlin-train-03",
+      "referenceHashKind": "uploaded-original"
     },
     {
       "clipId": "spieler-hans-peter-mustermann-berlin-wrongoffice-01",
@@ -3151,7 +3385,8 @@
       "asrWordExact": true,
       "path": "assets/voices/candidate-dialogue/spieler-hans-peter-mustermann-berlin-wrongoffice-01.mp3",
       "sha256": "34a7e576648d106b30f70b24aeb8509b522c4209b738c55a06911770bc1e2d4e",
-      "takeId": "spieler-hans-peter-mustermann-berlin-wrongoffice-01"
+      "takeId": "spieler-hans-peter-mustermann-berlin-wrongoffice-01",
+      "referenceHashKind": "uploaded-original"
     },
     {
       "clipId": "spieler-hans-peter-mustermann-berlin-wrongoffice-02",
@@ -3167,7 +3402,8 @@
       "asrWordExact": true,
       "path": "assets/voices/candidate-dialogue/spieler-hans-peter-mustermann-berlin-wrongoffice-02.mp3",
       "sha256": "0c222c7621372ea293b2f0dd41ea9c1f64a622956ab7b3ffb1ba68ee3a903d33",
-      "takeId": "spieler-hans-peter-mustermann-berlin-wrongoffice-02--retry1"
+      "takeId": "spieler-hans-peter-mustermann-berlin-wrongoffice-02--retry1",
+      "referenceHashKind": "uploaded-original"
     },
     {
       "clipId": "spieler-hans-peter-mustermann-berlin-wrongoffice-03",
@@ -3183,7 +3419,8 @@
       "asrWordExact": true,
       "path": "assets/voices/candidate-dialogue/spieler-hans-peter-mustermann-berlin-wrongoffice-03.mp3",
       "sha256": "8e543835e05405dacde38921a22eaf44fc8a0d183bbba4a848fbfb18cbe4584e",
-      "takeId": "spieler-hans-peter-mustermann-berlin-wrongoffice-03"
+      "takeId": "spieler-hans-peter-mustermann-berlin-wrongoffice-03",
+      "referenceHashKind": "uploaded-original"
     },
     {
       "clipId": "spieler-hans-peter-mustermann-berlin-bicycle-01",
@@ -3199,7 +3436,8 @@
       "asrWordExact": true,
       "path": "assets/voices/candidate-dialogue/spieler-hans-peter-mustermann-berlin-bicycle-01.mp3",
       "sha256": "4b745088d9c0aec7cca13cd77da623d22c41c74ece73d274cdf0b5a6ed6585be",
-      "takeId": "spieler-hans-peter-mustermann-berlin-bicycle-01"
+      "takeId": "spieler-hans-peter-mustermann-berlin-bicycle-01",
+      "referenceHashKind": "uploaded-original"
     },
     {
       "clipId": "spieler-hans-peter-mustermann-berlin-fax-01",
@@ -3215,7 +3453,8 @@
       "asrWordExact": true,
       "path": "assets/voices/candidate-dialogue/spieler-hans-peter-mustermann-berlin-fax-01.mp3",
       "sha256": "306f5580ac639c479a47ca719761742b18c0f02efd76213a98a04474e618b3ed",
-      "takeId": "spieler-hans-peter-mustermann-berlin-fax-01"
+      "takeId": "spieler-hans-peter-mustermann-berlin-fax-01",
+      "referenceHashKind": "uploaded-original"
     },
     {
       "clipId": "spieler-hans-peter-mustermann-berlin-fax-03",
@@ -3231,7 +3470,8 @@
       "asrWordExact": true,
       "path": "assets/voices/candidate-dialogue/spieler-hans-peter-mustermann-berlin-fax-03.mp3",
       "sha256": "7f356b686c02627963bc5d093c7fac5a80a9adcd1ce914cecfe5f85c4ac81d80",
-      "takeId": "spieler-hans-peter-mustermann-berlin-fax-03--retry1"
+      "takeId": "spieler-hans-peter-mustermann-berlin-fax-03--retry1",
+      "referenceHashKind": "uploaded-original"
     },
     {
       "clipId": "spieler-hans-peter-mustermann-berlin-pfand-02",
@@ -3247,7 +3487,8 @@
       "asrWordExact": true,
       "path": "assets/voices/candidate-dialogue/spieler-hans-peter-mustermann-berlin-pfand-02.mp3",
       "sha256": "88032e7c1f4b266a783da4254d4135f331add0b74f739fc1bad6a14490b24486",
-      "takeId": "spieler-hans-peter-mustermann-berlin-pfand-02"
+      "takeId": "spieler-hans-peter-mustermann-berlin-pfand-02",
+      "referenceHashKind": "uploaded-original"
     },
     {
       "clipId": "spieler-hans-peter-mustermann-berlin-wrongtask-02",
@@ -3263,7 +3504,8 @@
       "asrWordExact": true,
       "path": "assets/voices/candidate-dialogue/spieler-hans-peter-mustermann-berlin-wrongtask-02.mp3",
       "sha256": "d2c9efcea77e51a0b93ffd6b271b54692f059ef1b07682100fd33c6e8f39ed6c",
-      "takeId": "spieler-hans-peter-mustermann-berlin-wrongtask-02--retry1"
+      "takeId": "spieler-hans-peter-mustermann-berlin-wrongtask-02--retry1",
+      "referenceHashKind": "uploaded-original"
     },
     {
       "clipId": "spieler-hans-peter-mustermann-berlin-lost-03",
@@ -3279,7 +3521,8 @@
       "asrWordExact": true,
       "path": "assets/voices/candidate-dialogue/spieler-hans-peter-mustermann-berlin-lost-03.mp3",
       "sha256": "430333aa2a5ca201c8778ae045a7bfb5de5d80ce51caec8d5a744aaa47f2c3a1",
-      "takeId": "spieler-hans-peter-mustermann-berlin-lost-03"
+      "takeId": "spieler-hans-peter-mustermann-berlin-lost-03",
+      "referenceHashKind": "uploaded-original"
     },
     {
       "clipId": "spieler-hans-peter-mustermann-berlin-exhaustion-02",
@@ -3295,7 +3538,8 @@
       "asrWordExact": true,
       "path": "assets/voices/candidate-dialogue/spieler-hans-peter-mustermann-berlin-exhaustion-02.mp3",
       "sha256": "e60e8aa824594dfac7457ed8e3c935f331dbaaf4f85cd1babd1fc2ce12c3309c",
-      "takeId": "spieler-hans-peter-mustermann-berlin-exhaustion-02--retry1"
+      "takeId": "spieler-hans-peter-mustermann-berlin-exhaustion-02--retry1",
+      "referenceHashKind": "uploaded-original"
     },
     {
       "clipId": "spieler-hans-peter-mustermann-berlin-deadline-02",
@@ -3311,7 +3555,8 @@
       "asrWordExact": true,
       "path": "assets/voices/candidate-dialogue/spieler-hans-peter-mustermann-berlin-deadline-02.mp3",
       "sha256": "da6054348d877c7a82272696dc70e1a110d7c7a66cbbf780d210b6fab12d6884",
-      "takeId": "spieler-hans-peter-mustermann-berlin-deadline-02--retry1"
+      "takeId": "spieler-hans-peter-mustermann-berlin-deadline-02--retry1",
+      "referenceHashKind": "uploaded-original"
     },
     {
       "clipId": "polizei-heinrich-wachtmeister-phone-01",
@@ -3328,7 +3573,8 @@
       "path": "assets/voices/candidate-dialogue/polizei-heinrich-wachtmeister-phone-01.mp3",
       "sha256": "0325017afec9819f050779a798a143ed7a4036aba599d7aa7750825fa284d80d",
       "takeId": "polizei-heinrich-wachtmeister-phone-01",
-      "retiredReason": "The user recast this phone call as Kriminalpolizei with GS Kriminalpolizei on 2026-10-10. Kept for historical comparison; excluded from runtime preview."
+      "retiredReason": "The user recast this phone call as Kriminalpolizei with GS Kriminalpolizei on 2026-10-10. Kept for historical comparison; excluded from runtime preview.",
+      "archiveRelativePath": "assets/assets/voices/candidate-dialogue/polizei-heinrich-wachtmeister-phone-01.mp3"
     },
     {
       "clipId": "polizei-heinrich-wachtmeister-phone-02",
@@ -3345,7 +3591,8 @@
       "path": "assets/voices/candidate-dialogue/polizei-heinrich-wachtmeister-phone-02.mp3",
       "sha256": "9e0262b47dd493e75dd57eb42c7e9061be562c9343ea34e3afd0bdd8e800fdeb",
       "takeId": "polizei-heinrich-wachtmeister-phone-02",
-      "retiredReason": "The user recast this phone call as Kriminalpolizei with GS Kriminalpolizei on 2026-10-10. Kept for historical comparison; excluded from runtime preview."
+      "retiredReason": "The user recast this phone call as Kriminalpolizei with GS Kriminalpolizei on 2026-10-10. Kept for historical comparison; excluded from runtime preview.",
+      "archiveRelativePath": "assets/assets/voices/candidate-dialogue/polizei-heinrich-wachtmeister-phone-02.mp3"
     },
     {
       "clipId": "polizei-heinrich-wachtmeister-phone-03",
@@ -3362,7 +3609,8 @@
       "path": "assets/voices/candidate-dialogue/polizei-heinrich-wachtmeister-phone-03.mp3",
       "sha256": "5e34dfc996f1569c3d0e53b017a0c7a392e4edc5b5a9d0b5d5a11f951478a71e",
       "takeId": "polizei-heinrich-wachtmeister-phone-03",
-      "retiredReason": "The user recast this phone call as Kriminalpolizei with GS Kriminalpolizei on 2026-10-10. Kept for historical comparison; excluded from runtime preview."
+      "retiredReason": "The user recast this phone call as Kriminalpolizei with GS Kriminalpolizei on 2026-10-10. Kept for historical comparison; excluded from runtime preview.",
+      "archiveRelativePath": "assets/assets/voices/candidate-dialogue/polizei-heinrich-wachtmeister-phone-03.mp3"
     },
     {
       "clipId": "polizei-heinrich-wachtmeister-phone-04",
@@ -3379,7 +3627,8 @@
       "path": "assets/voices/candidate-dialogue/polizei-heinrich-wachtmeister-phone-04.mp3",
       "sha256": "7d168ac047c014672afe8e38543e09451a977cae055671578d89541de62be4cc",
       "takeId": "polizei-heinrich-wachtmeister-phone-04",
-      "retiredReason": "The user recast this phone call as Kriminalpolizei with GS Kriminalpolizei on 2026-10-10. Kept for historical comparison; excluded from runtime preview."
+      "retiredReason": "The user recast this phone call as Kriminalpolizei with GS Kriminalpolizei on 2026-10-10. Kept for historical comparison; excluded from runtime preview.",
+      "archiveRelativePath": "assets/assets/voices/candidate-dialogue/polizei-heinrich-wachtmeister-phone-04.mp3"
     },
     {
       "clipId": "spieler-hans-peter-mustermann-germany-fax-03",
@@ -3395,7 +3644,8 @@
       "asrWordExact": true,
       "path": "assets/voices/candidate-dialogue/spieler-hans-peter-mustermann-germany-fax-03.mp3",
       "sha256": "2827dcd498456e4317008c36669cf6ceea99aaad8243091179d0fe6225680a7a",
-      "takeId": "spieler-hans-peter-mustermann-germany-fax-03--retry2"
+      "takeId": "spieler-hans-peter-mustermann-germany-fax-03--retry2",
+      "referenceHashKind": "uploaded-original"
     },
     {
       "clipId": "spieler-hans-peter-mustermann-berlin-coffee-02",
@@ -3411,7 +3661,8 @@
       "asrWordExact": true,
       "path": "assets/voices/candidate-dialogue/spieler-hans-peter-mustermann-berlin-coffee-02.mp3",
       "sha256": "84fd687b0690547ea7136517c020ebddd3288546ccacba122fe22070cbfaa849",
-      "takeId": "spieler-hans-peter-mustermann-berlin-coffee-02--retry2"
+      "takeId": "spieler-hans-peter-mustermann-berlin-coffee-02--retry2",
+      "referenceHashKind": "uploaded-original"
     },
     {
       "clipId": "spieler-hans-peter-mustermann-berlin-train-01",
@@ -3463,7 +3714,8 @@
       "path": "assets/voices/candidate-dialogue/spieler-hans-peter-mustermann-berlin-train-01.mp3",
       "sha256": "1224d384bd0603a5c50c3f7e6d6c1e7517105c44e9aee10fc89344ca72c1009a",
       "takeId": "spieler-hans-peter-mustermann-berlin-train-01--segmented-26001",
-      "status": "opt-in listening-review candidate; not release-cleared"
+      "status": "opt-in listening-review candidate; not release-cleared",
+      "referenceHashKind": "uploaded-original"
     },
     {
       "clipId": "spieler-hans-peter-mustermann-berlin-coffee-01",
@@ -3515,7 +3767,8 @@
       "path": "assets/voices/candidate-dialogue/spieler-hans-peter-mustermann-berlin-coffee-01.mp3",
       "sha256": "4b52a803bc9d28ea8480c23927676dd47a7c29e47fb91922872362ac5b26878d",
       "takeId": "spieler-hans-peter-mustermann-berlin-coffee-01--segmented",
-      "status": "opt-in listening-review candidate; not release-cleared"
+      "status": "opt-in listening-review candidate; not release-cleared",
+      "referenceHashKind": "uploaded-original"
     },
     {
       "clipId": "spieler-hans-peter-mustermann-berlin-deadline-01",
@@ -3567,7 +3820,8 @@
       "path": "assets/voices/candidate-dialogue/spieler-hans-peter-mustermann-berlin-deadline-01.mp3",
       "sha256": "fa1f9f90011ba0e77afd547af162dbde55f55afbbc57a2b99034c8f4896b7d7f",
       "takeId": "spieler-hans-peter-mustermann-berlin-deadline-01--segmented",
-      "status": "opt-in listening-review candidate; not release-cleared"
+      "status": "opt-in listening-review candidate; not release-cleared",
+      "referenceHashKind": "uploaded-original"
     },
     {
       "clipId": "crowd-dietmar-din-norm-01",
@@ -3599,7 +3853,8 @@
       "path": "assets/voices/candidate-dialogue/crowd-dietmar-din-norm-01.mp3",
       "sha256": "c68845ee898000c8d7278f0f82a619bc4d070f42f267c3e1b2c88c152769b656",
       "takeId": "crowd-dietmar-din-norm-01--segmented",
-      "status": "opt-in listening-review candidate; clock/spacing-equivalent ASR, not literal word-exact"
+      "status": "opt-in listening-review candidate; clock/spacing-equivalent ASR, not literal word-exact",
+      "referenceHashKind": "uploaded-original"
     },
     {
       "clipId": "crowd-dietmar-din-norm-03",
@@ -3641,7 +3896,8 @@
       "path": "assets/voices/candidate-dialogue/crowd-dietmar-din-norm-03.mp3",
       "sha256": "7c03560d40516ed378dd37b550aa118c4044745860d42cce9e72231d3fb1e3b9",
       "takeId": "crowd-dietmar-din-norm-03--segmented",
-      "status": "opt-in listening-review candidate; clock/spacing-equivalent ASR, not literal word-exact"
+      "status": "opt-in listening-review candidate; clock/spacing-equivalent ASR, not literal word-exact",
+      "referenceHashKind": "uploaded-original"
     },
     {
       "clipId": "crowd-horst-hausordnung-03",
@@ -3683,7 +3939,8 @@
       "path": "assets/voices/candidate-dialogue/crowd-horst-hausordnung-03.mp3",
       "sha256": "79afef199b35a6cce12c93a0543967212088f3e49d15049b39773e1fc981b7e5",
       "takeId": "crowd-horst-hausordnung-03--segmented",
-      "status": "opt-in listening-review candidate; clock/spacing-equivalent ASR, not literal word-exact"
+      "status": "opt-in listening-review candidate; clock/spacing-equivalent ASR, not literal word-exact",
+      "referenceHashKind": "uploaded-original"
     },
     {
       "clipId": "crowd-manfred-mittagsruhe-03",
@@ -3725,7 +3982,8 @@
       "path": "assets/voices/candidate-dialogue/crowd-manfred-mittagsruhe-03.mp3",
       "sha256": "ae86d7db1880bb8bae5b721a39123961896afb7ce0f8b0245642d814c708975f",
       "takeId": "crowd-manfred-mittagsruhe-03--segmented",
-      "status": "opt-in listening-review candidate; clock/spacing-equivalent ASR, not literal word-exact"
+      "status": "opt-in listening-review candidate; clock/spacing-equivalent ASR, not literal word-exact",
+      "referenceHashKind": "uploaded-original"
     },
     {
       "clipId": "crowd-elfriede-eingabe-04",
@@ -3782,7 +4040,8 @@
       "path": "assets/voices/candidate-dialogue/crowd-elfriede-eingabe-04.mp3",
       "sha256": "71012ab59cb35b392fcab6f924e82f03fa2d4a879c0d09880c3517259774c731",
       "takeId": "crowd-elfriede-eingabe-04--word-cut-and-joined",
-      "status": "opt-in listening-review candidate; bilingual word cut and join need listening"
+      "status": "opt-in listening-review candidate; bilingual word cut and join need listening",
+      "referenceHashKind": "uploaded-original"
     },
     {
       "clipId": "crowd-irmgard-aktenordner-04",
@@ -3839,7 +4098,8 @@
       "path": "assets/voices/candidate-dialogue/crowd-irmgard-aktenordner-04.mp3",
       "sha256": "0d32407cbb589b75a074a18ba2b92bb18a043b10dca241e709516f86ef239675",
       "takeId": "crowd-irmgard-aktenordner-04--word-cut-and-joined",
-      "status": "opt-in listening-review candidate; bilingual word cut and join need listening"
+      "status": "opt-in listening-review candidate; bilingual word cut and join need listening",
+      "referenceHashKind": "uploaded-original"
     },
     {
       "clipId": "crowd-brigitte-bueroklammer-04",
@@ -3896,7 +4156,8 @@
       "path": "assets/voices/candidate-dialogue/crowd-brigitte-bueroklammer-04.mp3",
       "sha256": "5352a2e1f6c607a4427c4fe74cca9391951da9c4298757b2c5ea5e1da79bae47",
       "takeId": "crowd-brigitte-bueroklammer-04--word-cut-and-joined",
-      "status": "opt-in listening-review candidate; bilingual word cut and join need listening"
+      "status": "opt-in listening-review candidate; bilingual word cut and join need listening",
+      "referenceHashKind": "uploaded-original"
     },
     {
       "clipId": "crowd-waltraud-wartemarke-04",
@@ -3953,7 +4214,8 @@
       "path": "assets/voices/candidate-dialogue/crowd-waltraud-wartemarke-04.mp3",
       "sha256": "c5eb8e55588444f9e7709425a7ed8766721e3d258962bbe1cbedbeb2c66e8de0",
       "takeId": "crowd-waltraud-wartemarke-04--word-cut-and-joined",
-      "status": "opt-in listening-review candidate; bilingual word cut and join need listening"
+      "status": "opt-in listening-review candidate; bilingual word cut and join need listening",
+      "referenceHashKind": "uploaded-original"
     },
     {
       "clipId": "crowd-baerbel-brezel-04",
@@ -4010,7 +4272,8 @@
       "path": "assets/voices/candidate-dialogue/crowd-baerbel-brezel-04.mp3",
       "sha256": "807f2cf0a9da32da7faec26d208fa3ef4b2b51ca189163c92341d1d465f50afb",
       "takeId": "crowd-baerbel-brezel-04--word-cut-and-joined",
-      "status": "opt-in listening-review candidate; bilingual word cut and join need listening"
+      "status": "opt-in listening-review candidate; bilingual word cut and join need listening",
+      "referenceHashKind": "uploaded-original"
     },
     {
       "clipId": "crowd-guenther-gartenzaun-03",
@@ -4067,7 +4330,8 @@
       "path": "assets/voices/candidate-dialogue/crowd-guenther-gartenzaun-03.mp3",
       "sha256": "85a9271cf2cfa12e5cb9660cd995786dc99a88830aa77ba52a610a7073de19ea",
       "takeId": "crowd-guenther-gartenzaun-03--word-cut-and-joined",
-      "status": "opt-in listening-review candidate; clock-equivalent bilingual word cut and join need listening"
+      "status": "opt-in listening-review candidate; clock-equivalent bilingual word cut and join need listening",
+      "referenceHashKind": "uploaded-original"
     },
     {
       "clipId": "crowd-klaus-dieter-knoedel-03",
@@ -4124,7 +4388,8 @@
       "path": "assets/voices/candidate-dialogue/crowd-klaus-dieter-knoedel-03.mp3",
       "sha256": "50c70a31c53a60de4dd9e0b8937d5b53a658116e7b52ef935f8ba8fa9d1ae9af",
       "takeId": "crowd-klaus-dieter-knoedel-03--word-cut-and-joined",
-      "status": "opt-in listening-review candidate; clock-equivalent bilingual word cut and join need listening"
+      "status": "opt-in listening-review candidate; clock-equivalent bilingual word cut and join need listening",
+      "referenceHashKind": "uploaded-original"
     },
     {
       "clipId": "crowd-ruediger-rasenkante-03",
@@ -4181,7 +4446,8 @@
       "path": "assets/voices/candidate-dialogue/crowd-ruediger-rasenkante-03.mp3",
       "sha256": "3e13feda7359c49d19b364d91d6520375f05fd0d5ec2d3e6cd37437e9a3be9c7",
       "takeId": "crowd-ruediger-rasenkante-03--word-cut-and-joined",
-      "status": "opt-in listening-review candidate; clock-equivalent bilingual word cut and join need listening"
+      "status": "opt-in listening-review candidate; clock-equivalent bilingual word cut and join need listening",
+      "referenceHashKind": "uploaded-original"
     },
     {
       "clipId": "spieler-hans-peter-mustermann-germany-bicycle-01",
@@ -4198,7 +4464,8 @@
       "path": "assets/voices/candidate-dialogue/spieler-hans-peter-mustermann-germany-bicycle-01.mp3",
       "sha256": "1d1174ac195b589001c39a3389db0ce3f18d27cc0c4758fc4f633dbbccd2075a",
       "takeId": "spieler-hans-peter-mustermann-germany-bicycle-01--60002",
-      "status": "opt-in listening-review candidate; not release-cleared"
+      "status": "opt-in listening-review candidate; not release-cleared",
+      "referenceHashKind": "uploaded-original"
     },
     {
       "clipId": "spieler-hans-peter-mustermann-berlin-bicycle-02",
@@ -4257,7 +4524,8 @@
       "sha256": "66b93449d60ad55f1792d38acbd352b633d61250eb075308d2be8ef5ceca52fc",
       "takeId": "spieler-hans-peter-mustermann-berlin-bicycle-02--assembled",
       "status": "opt-in listening-review candidate; bilingual joins need listening",
-      "asrSegmentWordExact": true
+      "asrSegmentWordExact": true,
+      "referenceHashKind": "uploaded-original"
     },
     {
       "clipId": "spieler-hans-peter-mustermann-berlin-fax-02",
@@ -4316,7 +4584,8 @@
       "sha256": "d4433fad3ad3e05cb05081444f85a633379108109e4d81ce6106755913dda8b9",
       "takeId": "spieler-hans-peter-mustermann-berlin-fax-02--assembled",
       "status": "opt-in listening-review candidate; bilingual joins need listening",
-      "asrSegmentWordExact": true
+      "asrSegmentWordExact": true,
+      "referenceHashKind": "uploaded-original"
     },
     {
       "clipId": "spieler-hans-peter-mustermann-berlin-pfand-01",
@@ -4375,7 +4644,8 @@
       "sha256": "04f113327953faadaf1a24ced9cd092cb740ed6bafb3db2b9c0c6023feecb9f9",
       "takeId": "spieler-hans-peter-mustermann-berlin-pfand-01--assembled",
       "status": "opt-in listening-review candidate; bilingual joins need listening",
-      "asrSegmentCompoundEquivalent": true
+      "asrSegmentCompoundEquivalent": true,
+      "referenceHashKind": "uploaded-original"
     },
     {
       "clipId": "spieler-hans-peter-mustermann-berlin-lost-02",
@@ -4445,7 +4715,8 @@
       "path": "assets/voices/candidate-dialogue/spieler-hans-peter-mustermann-berlin-lost-02.mp3",
       "sha256": "1db905217cba828c0c418a5cbc8aa59d6adff081aeb50eb6ac6e9965e535dc26",
       "takeId": "spieler-hans-peter-mustermann-berlin-lost-02--assembled",
-      "status": "opt-in listening-review candidate; bilingual joins need listening"
+      "status": "opt-in listening-review candidate; bilingual joins need listening",
+      "referenceHashKind": "uploaded-original"
     },
     {
       "clipId": "quiz-brigitte-neumann-approach-review",
@@ -4462,7 +4733,8 @@
       "path": "assets/voices/profile-auditions/quiz-brigitte-neumann-approach-review.mp3",
       "sha256": "0753bcda1df4c4be8977cb22dfdba8099f94e89479a6cf3212fd64b0c5cbf83b",
       "sourcePool": "game.js quizApproaches.germany[8]",
-      "provenanceManifest": "assets/voices/profile-auditions/manifest.json"
+      "provenanceManifest": "assets/voices/profile-auditions/manifest.json",
+      "referenceHashKind": "uploaded-original"
     },
     {
       "clipId": "quiz-dietmar-schulz-approach-review",
@@ -4479,7 +4751,8 @@
       "path": "assets/voices/profile-auditions/quiz-dietmar-schulz-approach-review.mp3",
       "sha256": "d59888cbfe3efb258cf7d48fd00d85cb87af3a47d64c11bab0cb04c53fd05e4e",
       "sourcePool": "game.js quizApproaches.germany[31]",
-      "provenanceManifest": "assets/voices/profile-auditions/manifest.json"
+      "provenanceManifest": "assets/voices/profile-auditions/manifest.json",
+      "referenceHashKind": "uploaded-original"
     },
     {
       "clipId": "quiz-gisela-becker-approach-review",
@@ -4496,7 +4769,8 @@
       "path": "assets/voices/profile-auditions/quiz-gisela-becker-approach-review.mp3",
       "sha256": "edbaffd2726c9f4c38d81e6777725cdc0166b444bf058aff1211107865479e35",
       "sourcePool": "game.js quizApproaches.germany[11]",
-      "provenanceManifest": "assets/voices/profile-auditions/manifest.json"
+      "provenanceManifest": "assets/voices/profile-auditions/manifest.json",
+      "referenceHashKind": "uploaded-original"
     },
     {
       "clipId": "quiz-hartmut-keller-approach-review",
@@ -4513,7 +4787,8 @@
       "path": "assets/voices/profile-auditions/quiz-hartmut-keller-approach-review.mp3",
       "sha256": "3f31b6edb962ce0d53b9d7bccc39b2d20408990a9bfcaa65709fda7e2161816d",
       "sourcePool": "game.js quizApproaches.germany[0]",
-      "provenanceManifest": "assets/voices/profile-auditions/manifest.json"
+      "provenanceManifest": "assets/voices/profile-auditions/manifest.json",
+      "referenceHashKind": "uploaded-original"
     },
     {
       "clipId": "quiz-heike-hoffmann-approach-review",
@@ -4530,7 +4805,8 @@
       "path": "assets/voices/profile-auditions/quiz-heike-hoffmann-approach-review.mp3",
       "sha256": "30b37555db2334d47e93ff77b1697d9622b9f02af8c7efc8286bda2bce37d2cf",
       "sourcePool": "game.js quizApproaches.germany[20]",
-      "provenanceManifest": "assets/voices/profile-auditions/manifest.json"
+      "provenanceManifest": "assets/voices/profile-auditions/manifest.json",
+      "referenceHashKind": "uploaded-original"
     },
     {
       "clipId": "quiz-klaus-dieter-wagner-approach-review",
@@ -4547,7 +4823,8 @@
       "path": "assets/voices/profile-auditions/quiz-klaus-dieter-wagner-approach-review.mp3",
       "sha256": "0e891adef44ef5ac47644a38876f0a6d43be6cbb430180526afaabb20f415b4e",
       "sourcePool": "game.js quizApproaches.germany[6]",
-      "provenanceManifest": "assets/voices/profile-auditions/manifest.json"
+      "provenanceManifest": "assets/voices/profile-auditions/manifest.json",
+      "referenceHashKind": "uploaded-original"
     },
     {
       "clipId": "quiz-ruediger-schmidt-approach-review",
@@ -4564,7 +4841,8 @@
       "path": "assets/voices/profile-auditions/quiz-ruediger-schmidt-approach-review.mp3",
       "sha256": "2f74e548a1959804fabf8045d3ee8c66ef7c0f9776081513eb0a48b3553d0316",
       "sourcePool": "game.js quizApproaches.germany[25]",
-      "provenanceManifest": "assets/voices/profile-auditions/manifest.json"
+      "provenanceManifest": "assets/voices/profile-auditions/manifest.json",
+      "referenceHashKind": "uploaded-original"
     },
     {
       "clipId": "quiz-sabine-krueger-approach-review",
@@ -4581,7 +4859,8 @@
       "path": "assets/voices/profile-auditions/quiz-sabine-krueger-approach-review.mp3",
       "sha256": "39e6d7db5367267316518222bf4219a531454e29e04ec1686c46d0e13bdbf388",
       "sourcePool": "game.js quizApproaches.germany[16]",
-      "provenanceManifest": "assets/voices/profile-auditions/manifest.json"
+      "provenanceManifest": "assets/voices/profile-auditions/manifest.json",
+      "referenceHashKind": "uploaded-original"
     },
     {
       "clipId": "quiz-uwe-moeller-approach-review",
@@ -4598,7 +4877,8 @@
       "path": "assets/voices/profile-auditions/quiz-uwe-moeller-approach-review.mp3",
       "sha256": "1831478a94dadd64c3e71560ca0304306af5ff1f35d47e6bf7f9d530862e43e3",
       "sourcePool": "game.js quizApproaches.germany[7]",
-      "provenanceManifest": "assets/voices/profile-auditions/manifest.json"
+      "provenanceManifest": "assets/voices/profile-auditions/manifest.json",
+      "referenceHashKind": "uploaded-original"
     },
     {
       "clipId": "tourist-guenther-liegestuhl-02",
@@ -4615,7 +4895,8 @@
       "path": "assets/voices/profile-auditions/tourist-guenther-liegestuhl-02.mp3",
       "sha256": "64fbf05aa35cad37e322f414ba6ef3cc75fe50ce131327d8f1de8d7a2febd38a",
       "sourcePool": "game.js crowdArchetypes.towel-man.germany[1]",
-      "provenanceManifest": "assets/voices/profile-auditions/manifest.json"
+      "provenanceManifest": "assets/voices/profile-auditions/manifest.json",
+      "referenceHashKind": "uploaded-original"
     },
     {
       "clipId": "touristin-walburga-handtuch-01",
@@ -4632,7 +4913,8 @@
       "path": "assets/voices/profile-auditions/touristin-walburga-handtuch-01.mp3",
       "sha256": "fe9f7fc12f55ca6c308d47ac90a3e34c8d1a2a80c8b12c4fec00d9f828993d2a",
       "sourcePool": "game.js crowdArchetypes.towel-woman.germany[0]",
-      "provenanceManifest": "assets/voices/profile-auditions/manifest.json"
+      "provenanceManifest": "assets/voices/profile-auditions/manifest.json",
+      "referenceHashKind": "uploaded-original"
     },
     {
       "clipId": "quiz-brigitte-neumann-context-traffic-germany",
@@ -4649,7 +4931,8 @@
       "path": "assets/voices/quiz-segments/quiz-brigitte-neumann-context-traffic-germany.mp3",
       "sha256": "7f77bb31c47b46aaff2011c2a3ed47e837192115f207d524267c3f18163fd2c7",
       "sourcePool": "game.js quizContexts.traffic.germany",
-      "provenanceManifest": "assets/voices/quiz-segments/manifest.json"
+      "provenanceManifest": "assets/voices/quiz-segments/manifest.json",
+      "referenceHashKind": "uploaded-original"
     },
     {
       "clipId": "quiz-brigitte-neumann-question-fs-10-germany",
@@ -4666,7 +4949,75 @@
       "path": "assets/voices/quiz-segments/quiz-brigitte-neumann-question-fs-10-germany.mp3",
       "sha256": "36d24818d9306e4401a9bb527cd06aaf4d798496f90ddf65d74312a630b2f0b2",
       "sourcePool": "game.js citizenshipQuestions.FS-10.question",
-      "provenanceManifest": "assets/voices/quiz-segments/manifest.json"
+      "provenanceManifest": "assets/voices/quiz-segments/manifest.json",
+      "referenceHashKind": "uploaded-original"
+    }
+  ],
+  "retiredClips": [
+    {
+      "clipId": "retired-knick-18-kriminalpolizei",
+      "voiceId": "amt-brunhilde-knick",
+      "path": "assets/voices/candidate-dialogue/amt-brunhilde-knick-18-kriminalpolizei.mp3",
+      "sha256": "9f0a1874a996ae5e22646b7710030de0e84a9285482c38007b1b60506a2b74a3",
+      "provenanceNote": "Historical assets/voices/LICENSES.md identifies this as the previous Knick phone reply; its exact generation receipt is absent from the current manifest. Preserve these bytes without inventing missing transcript/renderer metadata.",
+      "retiredReason": "Unused, superseded Knick phone reply; no active catalog or manifest lookup. Archived on 2026-10-11.",
+      "archiveRelativePath": "assets/assets/voices/candidate-dialogue/amt-brunhilde-knick-18-kriminalpolizei.mp3"
+    },
+    {
+      "clipId": "traffic-berlin-01",
+      "voiceId": "traffic-driver",
+      "profileId": "0f4a57f7b5ad4447b11111b8f5e42631",
+      "path": "assets/voices/traffic/driver-berlin-01.mp3",
+      "text": "Move, du Arschloch! Hier ist 'ne Fahrbahn!",
+      "english": "Move, asshole! This is a road!",
+      "sha256": "b0cb1e459c8446ea1089a462edc58edf89d9490827081110e0e48bc133708f14",
+      "renderer": "Qwen3-TTS 1.7B Base",
+      "modelLicense": "Apache-2.0",
+      "referenceSha256": "eac473d6bc2580aa39a9369a7ea1a0fb03a937630ceed68f4bc06edb515cf6b5",
+      "retiredReason": "Qwen pipeline removed at user request on 2026-10-11; exact traffic dialogue retained with existing browser-speech fallback.",
+      "archiveRelativePath": "assets/assets/voices/traffic/driver-berlin-01.mp3"
+    },
+    {
+      "clipId": "traffic-berlin-02",
+      "voiceId": "traffic-driver",
+      "profileId": "0f4a57f7b5ad4447b11111b8f5e42631",
+      "path": "assets/voices/traffic/driver-berlin-02.mp3",
+      "text": "Seriously? Augen auf, du verdammter Trottel!",
+      "english": "Seriously? Open your eyes, you damn idiot!",
+      "sha256": "41f48026cc99cc859e333157f79fd58b8df71b0c0735d36b9df2a7dcaff6a782",
+      "renderer": "Qwen3-TTS 1.7B Base",
+      "modelLicense": "Apache-2.0",
+      "referenceSha256": "eac473d6bc2580aa39a9369a7ea1a0fb03a937630ceed68f4bc06edb515cf6b5",
+      "retiredReason": "Qwen pipeline removed at user request on 2026-10-11; exact traffic dialogue retained with existing browser-speech fallback.",
+      "archiveRelativePath": "assets/assets/voices/traffic/driver-berlin-02.mp3"
+    },
+    {
+      "clipId": "traffic-germany-01",
+      "voiceId": "traffic-driver",
+      "profileId": "0f4a57f7b5ad4447b11111b8f5e42631",
+      "path": "assets/voices/traffic/driver-germany-01.mp3",
+      "text": "Augen auf, du Vollpfosten!",
+      "english": "Open your eyes, you complete moron!",
+      "sha256": "88070dbde09caf488faa5e8aa3e81fe4a6abfaaaa45dd0afc3e4f78ae9e02298",
+      "renderer": "Qwen3-TTS 1.7B Base",
+      "modelLicense": "Apache-2.0",
+      "referenceSha256": "eac473d6bc2580aa39a9369a7ea1a0fb03a937630ceed68f4bc06edb515cf6b5",
+      "retiredReason": "Qwen pipeline removed at user request on 2026-10-11; exact traffic dialogue retained with existing browser-speech fallback.",
+      "archiveRelativePath": "assets/assets/voices/traffic/driver-germany-01.mp3"
+    },
+    {
+      "clipId": "traffic-germany-02",
+      "voiceId": "traffic-driver",
+      "profileId": "0f4a57f7b5ad4447b11111b8f5e42631",
+      "path": "assets/voices/traffic/driver-germany-02.mp3",
+      "text": "Runter von der Fahrbahn, du Arschloch!",
+      "english": "Get off the road, asshole!",
+      "sha256": "48f810565b49ec6ed207d3ea038cdb2d89b811575f30cc218b5dd1a5b7102914",
+      "renderer": "Qwen3-TTS 1.7B Base",
+      "modelLicense": "Apache-2.0",
+      "referenceSha256": "eac473d6bc2580aa39a9369a7ea1a0fb03a937630ceed68f4bc06edb515cf6b5",
+      "retiredReason": "Qwen pipeline removed at user request on 2026-10-11; exact traffic dialogue retained with existing browser-speech fallback.",
+      "archiveRelativePath": "assets/assets/voices/traffic/driver-germany-02.mp3"
     }
   ]
 }

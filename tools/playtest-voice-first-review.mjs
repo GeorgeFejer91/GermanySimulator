@@ -7,6 +7,7 @@ const modulePath = process.env.PLAYWRIGHT_MODULE;
 if (!url || !modulePath) throw new Error('Pass the local review URL and PLAYWRIGHT_MODULE');
 const {chromium} = await import(pathToFileURL(resolve(modulePath, 'index.mjs')).href);
 const browser = await chromium.launch({headless: true,
+  args: ['--mute-audio'],
   executablePath: process.env.CHROMIUM_PATH || 'C:/Program Files/Google/Chrome/Application/chrome.exe'});
 try {
   for (const [name, width, height, scale] of [
@@ -15,9 +16,20 @@ try {
     ['narrow', 320, 700, 1], ['narrow-text-200', 320, 700, 2],
   ]) {
     const page = await browser.newPage({viewport: {width, height}});
+    await page.addInitScript(() => {
+      const play = HTMLMediaElement.prototype.play;
+      HTMLMediaElement.prototype.play = function () { this.muted = true; return play.call(this); };
+      Object.defineProperty(window, 'speechSynthesis', {configurable: true,
+        value: {speaking: false, pending: false, getVoices: () => [], cancel() {}, speak() {}}});
+    });
     await page.goto(url);
+    const counts = await page.evaluate(async () => {
+      const {rows} = await (await fetch('/api/rows' + location.search)).json();
+      return {all: rows.length, first: rows.filter(row => row.firstReview).length};
+    });
+    assert(counts.first > 0 && counts.all >= counts.first);
     if (scale > 1) await page.addStyleTag({content: `html{font-size:${scale * 100}%}`});
-    await page.waitForFunction(() => document.querySelector('#position')?.textContent?.startsWith('1 of 53'));
+    await page.waitForFunction(count => document.querySelector('#position')?.textContent?.startsWith(`1 of ${count}`), counts.first);
     const result = await page.evaluate(() => {
       const select = document.querySelector('#filter');
       const rect = select.getBoundingClientRect();
@@ -35,12 +47,12 @@ try {
     assert.equal(result.filterOverflow, false, name);
     assert.equal(result.measured, 'pretext-0.0.9', name);
     await page.selectOption('#filter', 'all');
-    await page.waitForFunction(() => document.querySelector('#position')?.textContent?.includes('of 236'));
+    await page.waitForFunction(count => document.querySelector('#position')?.textContent?.includes(`of ${count}`), counts.all);
     await page.selectOption('#filter', 'first');
     await page.fill('#search', 'polizei-heinrich-wachtmeister-02');
     await page.waitForFunction(() => document.querySelector('#position')?.textContent?.startsWith('1 of 1'));
     assert.match(await page.locator('#script').textContent(), /NICHT ÜBER DEN RASEN!/);
-    console.log(JSON.stringify({name, ...result, allClips: 236, grassWarning: 'found'}));
+    console.log(JSON.stringify({name, ...result, allClips: counts.all, firstPassSpeakers: counts.first, grassWarning: 'found'}));
     await page.close();
   }
 } finally {

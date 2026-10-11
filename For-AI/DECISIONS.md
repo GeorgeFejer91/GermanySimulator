@@ -645,14 +645,7 @@ assignments where the intended new character differs from the current voice.
 
 ## 2026-09-28 — Named political character profiles
 
-Merz, Merkel, Markus Söder (the Bayern-Beauftragter), and Alice Weidel each
-have a separate saved Qwen profile with an independent VCTK speaker reference.
-The four CC BY 4.0 references, their source URLs and hashes, and the local
-profile IDs are in the voice registry. `speechFamilies.profileVoiceId` connects
-each character trigger family to its future generation profile without
-mislabeling existing recordings or changing the current game audio. Short
-German smoke renders establish technical readiness; voice fit remains subject
-to listening review. The preexisting Merz-likeness profile is not selected.
+Superseded on 2026-10-11: the redundant experimental political clone bindings and their legacy generation adapters were removed at the user’s request. Merz and Merkel now use their selected native profiles. Söder/Bayern and Alice retain their separately credited source recordings without a future clone binding. Current voice authority is `VOICE-CAST.json`’s `productionVoices`.
 
 ## 2026-09-29 — Expiring proximity audio
 

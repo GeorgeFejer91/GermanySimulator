@@ -46,8 +46,8 @@ try:
     with (music / "VOICE-CANDIDATE-REVIEW-QUEUE.csv").open(newline="", encoding="utf-8-sig") as stream:
         reader = csv.DictReader(stream)
         fields, rows = reader.fieldnames, list(reader)
-    row = next(row for row in rows if row["normalizedWordPercent"] == "100")
     candidates = {clip["clipId"]: clip for clip in json.loads((GAME / candidate_path).read_text(encoding="utf-8"))["clips"]}
+    row = next(row for row in rows if row["normalizedWordPercent"] == "100" and not candidates[row["clipId"]].get("retiredReason"))
     clip = candidates[row["clipId"]]
     copy(GAME / clip["path"], test_game / clip["path"])
     copy(music / row["normalizedReviewFile"], test_music / row["normalizedReviewFile"])
@@ -60,6 +60,14 @@ try:
             writer = csv.DictWriter(stream, fieldnames=fields, lineterminator="\r\n")
             writer.writeheader()
             writer.writerows(rows)
+
+    retired = next(item for item in rows if candidates[item["clipId"]].get("retiredReason"))
+    prior_decisions = {key: retired[key] for key in approval_fields}
+    retired.update({key: "yes" for key in approval_fields})
+    write_queue()
+    denied_retired = run("--dry-run", success=False)
+    assert "Approved take uses a retired profile or renderer" in denied_retired.stderr
+    retired.update(prior_decisions)
 
     for key in approval_fields:
         row[key] = "yes"
@@ -97,7 +105,7 @@ try:
     write_queue()
     revoked = run("--dry-run", success=False)
     assert "Previously promoted clip was revoked or changed" in revoked.stderr
-    print(json.dumps({"clipId": clip["clipId"], "incompleteApproval": "rejected",
+    print(json.dumps({"clipId": clip["clipId"], "retiredApproval": "rejected", "incompleteApproval": "rejected",
                       "dryRun": "no-write", "publishedHash": "verified", "catalog": "default lookup verified",
                       "idempotent": True, "revocation": "blocked", "check": "passed"}))
 finally:

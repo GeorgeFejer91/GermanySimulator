@@ -47,6 +47,8 @@ Before updating a bundle, inspect its pinned upstream diff and reachable referen
 
 ## Delegation and review
 
+For character speech, the lead reads `VOICE-CAST.json`'s `productionVoices` and follows [the fixed-voice workflow](./VOICE-SYNTH-PROTOCOL.md#fixed-voices-and-the-agent-workflow-2026-10-11). Assign synthesis only its requested assets/manifest and authoring script; assign subtitle work its bounded text output; the integrator owns catalog edits and publication. Every handoff includes stable voice ID, selected UUID, original/normalized reference hashes, renderer/revision/processing, exact source hash, accepted/held counts and listening status. Run `node tools/curate-voice-library.mjs --check` before acceptance. Reuse saved profiles and takes; no new service, scheduler or parallel voice database.
+
 Asset, runtime and UI briefs carry the [browser responsiveness contract](./ASSET-POLICY.md#responsiveness-and-selective-preparation-protocol): starting/approach requirements, decoded cost, readiness/fallback, shared admission, consumer/cadence/cleanup and comparable input/frame evidence. Each owner keeps it in their implementation; final QA cannot compensate for unbounded background work.
 
 Delegate only separable work that benefits from parallel effort. Keep one integrator accountable for the whole outcome, acceptance, and publication. Use no more than three active subagents and never exceed the live host/tool slot limit. Assign one writer per file; establish file ownership and interface contracts before parallel edits. Do not give workers overlapping writable paths or ask them to absorb unrelated worktree changes.

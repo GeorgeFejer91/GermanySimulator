@@ -41,7 +41,7 @@ function receivePoliceDone(index,mode,durationMs,atMs){const record=timing.cues[
 const ambientLines=[["WARTERAUM","Mein Termin war gestern. Ich war heute pünktlich."],["SCHALTER 1","Für die Kopie des Originals benötigen Sie das Original der Kopie."],["TELEFON AM SCHALTER 2","Nein, die Warteschleife ist persönlich zu nehmen."],["WARTERAUM","Mein Buchstabe wurde aufgerufen, aber die Zahl gehört jemand anderem."],["SCHALTER 4","Einen Moment. Ich verbinde Sie mit Ihrem Moment."]];
 const mix={ambience:.35,voice:.8,fx:.6},mixPanel=document.getElementById("amt-mix");
 try{const saved=JSON.parse(localStorage.getItem("amt-mix-v1")||"null");for(const key of Object.keys(mix))if(Number.isFinite(saved?.[key]))mix[key]=Math.max(0,Math.min(1,saved[key]))}catch{}
-function applyMix(){if(recordedSpeech)recordedSpeech.volume=mix.voice;if(officeAudio){officeAudio.ambience.gain.value=.006*mix.ambience*(1-.92*omen.strength);officeAudio.fx.gain.value=mix.fx;officeAudio.signal.gain.value=mix.fx}}
+function applyMix(){if(recordedSpeech)recordedSpeech.volume=mix.voice*(recordedSpeech.amtVolumeScale??1);if(officeAudio){officeAudio.ambience.gain.value=.006*mix.ambience*(1-.92*omen.strength);officeAudio.fx.gain.value=mix.fx;officeAudio.signal.gain.value=mix.fx}}
 for(const slider of mixPanel.querySelectorAll("[data-amt-volume]")){const key=slider.dataset.amtVolume;slider.value=String(Math.round(mix[key]*100));slider.addEventListener("input",()=>{mix[key]=Number(slider.value)/100;applyMix();try{localStorage.setItem("amt-mix-v1",JSON.stringify(mix))}catch{}})}
 function initOfficeAudio(){
  try{if(options?.cityAudioBusy?.())return null;const Audio=window.AudioContext||window.webkitAudioContext;if(!Audio||navigator.userActivation&&!navigator.userActivation.hasBeenActive)return null;
@@ -359,27 +359,29 @@ function speechReadableMs(text,delivery){return Math.max(3500,Math.min(14000,tex
 function say(text,onComplete,onStart,onBoundary,delivery=null,voiceId="",allowCatalogClip=true){
  delivery={...window.BuergeramtVoiceProfiles?.deliveryFor(voiceId),...delivery};
  const owner=attempt,visibleCue=cue,readableMs=speechReadableMs(text,delivery);
- const current=()=>active&&owner===attempt&&visibleCue===cue&&line.textContent===text;
+ const current=()=>active&&owner===attempt&&visibleCue===cue&&(delivery.isCurrent?delivery.isCurrent():line.textContent===text);
  const begin=()=>{
   if(!current())return;
-  const candidate=allowCatalogClip&&options?.voiceOn?.()&&window.GermanySimulatorAudioText?.candidateClip?.(voiceId,text);
+  const catalog=window.GermanySimulatorAudioText;
+  const candidate=allowCatalogClip&&options?.voiceOn?.()&&(catalog?.recordedClip?.(voiceId,text)||catalog?.candidateClip?.(voiceId,text));
   if(candidate){
    try{
-    const player=new Audio(candidate);officeSpeechBusy=true;recordedSpeech=player;player.volume=mix.voice;
-    const clip=window.GermanySimulatorAudioText.recordings?.[candidate],marks=clip?.wordCues||[];
-    let started=false,settled=false,paused=false,hiddenPaused=false,nextMark=0,watchdog=null,due=0,remaining=20000,playAttempt=0,mouthBinding=null,mouthReady=!window.GermanyAmtLips?.loadRecording;
+    const player=new Audio(candidate);officeSpeechBusy=true;recordedSpeech=player;player.amtVolumeScale=delivery.volumeScale??1;player.volume=mix.voice*player.amtVolumeScale;
+    const clip=window.GermanySimulatorAudioText.recordings?.[candidate],marks=clip?.wordCues||[],startupMs=voiceId==="amt-brunhilde-knick"?4000:1800;
+    let started=false,settled=false,paused=false,hiddenPaused=false,nextMark=0,watchdog=null,due=0,remaining=20000,lastProgressTime=0,playAttempt=0,mouthBinding=null,mouthReady=!window.GermanyAmtLips?.loadRecording;
     const clearWatchdog=()=>{if(watchdog!==null)clearTimer(watchdog);watchdog=null};
     const arm=(milliseconds,callback)=>{clearWatchdog();due=performance.now()+milliseconds;watchdog=defer(callback,milliseconds)};
     const cleanup=()=>{playAttempt++;clearWatchdog();document.removeEventListener("visibilitychange",visibility);if(recordedCleanup===cleanup)recordedCleanup=null};
-    const progress=()=>{if(!started||settled||paused||!current())return;while(nextMark<marks.length&&marks[nextMark].at<=player.currentTime){const mark=marks[nextMark++];onBoundary?.(mark.charIndex,{type:"recording-cue",elapsedTime:player.currentTime})}};
+    const progress=()=>{if(!started||settled||paused||!current())return;const mediaTime=Number(player.currentTime);if(Number.isFinite(mediaTime)&&mediaTime>lastProgressTime){lastProgressTime=mediaTime;remaining=20000;arm(remaining,stalled)}while(nextMark<marks.length&&marks[nextMark].at<=player.currentTime){const mark=marks[nextMark++];onBoundary?.(mark.charIndex,{type:"recording-cue",elapsedTime:player.currentTime})}};
     const finish=()=>{if(settled||!current())return;if(!started)start();settled=true;lips.finish();clerkSpeaking=false;clerkAnimation?.setSpeech(false);cleanup();recordedSpeech=null;officeSpeechBusy=false;onComplete?.("voice")};
     const fallback=()=>{if(settled||!current())return;if(document.hidden){clearWatchdog();hiddenPaused=true;return}settled=true;lips.start("fallback");cleanup();player.pause();player.removeAttribute("src");player.load();recordedSpeech=null;officeSpeechBusy=false;delivery?.onFallback?.();say(text,onComplete,onStart,onBoundary,delivery,voiceId,false)};
-    const start=()=>{if(settled||!current())return;if(!started){started=true;lips.start("voice",player,mouthBinding);remaining=Math.max(20000,Number.isFinite(player.duration)?player.duration*1000+2000:20000);onStart?.("voice",{durationMs:player.duration*1000,recording:candidate,sha256:clip?.sha256,hasWordCues:marks.length>0})}else if(paused){paused=false;delivery?.onResume?.()}arm(remaining,fallback);progress();if(document.hidden)visibility()};
+    const stalled=()=>{const previous=lastProgressTime;progress();if(lastProgressTime===previous)fallback()};
+    const start=()=>{if(settled||!current())return;if(!started){started=true;lastProgressTime=Number(player.currentTime)||0;lips.start("voice",player,mouthBinding);remaining=Math.max(20000,Number.isFinite(player.duration)?player.duration*1000+2000:20000);onStart?.("voice",{durationMs:player.duration*1000,recording:candidate,sha256:clip?.sha256,hasWordCues:marks.length>0})}else if(paused){paused=false;delivery?.onResume?.()}arm(remaining,stalled);progress();if(document.hidden)visibility()};
     const play=()=>{if(!mouthReady)return;const serial=++playAttempt;player.play().catch(()=>{if(serial===playAttempt&&!document.hidden)fallback()})};
-    const visibility=()=>{if(settled||!current())return;if(document.hidden){playAttempt++;clearWatchdog();if(!player.paused){hiddenPaused=true;player.pause()}}else{if(!started)arm(1800,fallback);if(hiddenPaused){hiddenPaused=false;play()}}};
+    const visibility=()=>{if(settled||!current())return;if(document.hidden){playAttempt++;clearWatchdog();if(!player.paused){hiddenPaused=true;player.pause()}}else{if(!started)arm(startupMs,fallback);if(hiddenPaused){hiddenPaused=false;play()}}};
     player.onplaying=start;player.onended=finish;player.onerror=fallback;player.ontimeupdate=progress;
     player.onpause=()=>{if(!started||settled||paused||!current())return;paused=true;remaining=Math.max(0,due-performance.now());clearWatchdog();delivery?.onPause?.()};
-    recordedCleanup=cleanup;document.addEventListener("visibilitychange",visibility);arm(1800,fallback);
+    recordedCleanup=cleanup;document.addEventListener("visibilitychange",visibility);arm(startupMs,fallback);
     // Bind the unchanged MP3's analysis before its first sound. Late imports
     // cannot start a cancelled cue or replace a newer speaker's articulation.
     const loadMouth=window.GermanyAmtLips?.loadRecording;
@@ -391,12 +393,13 @@ function say(text,onComplete,onStart,onBoundary,delivery=null,voiceId="",allowCa
   const requestedAt=performance.now();let settled=false,fallback=null,started=false,failed=false,paused=false,completionDue=0,completionRemaining=0,mode="fallback";
  const start=kind=>{if(!started&&current()){started=true;mode=kind;lips.start(kind);onStart?.(kind)}};
  const complete=()=>{if(settled||!current())return;start("fallback");settled=true;lips.finish();clerkSpeaking=false;clerkAnimation?.setSpeech(false);officeSpeechBusy=false;if(fallback!==null)clearTimer(fallback);onComplete?.(mode)};
- const voiced=options?.voiceOn?.()&&window.speechSynthesis&&typeof window.SpeechSynthesisUtterance==="function";
+ const fallbackPolicy=window.GermanySimulatorAudioText?.productionVoices?.[voiceId]?.fallback??(voiceId===story.clerkIdentity.voiceId?"captions":"browser");
+ const voiced=fallbackPolicy!=="captions"&&options?.voiceOn?.()&&window.speechSynthesis&&typeof window.SpeechSynthesisUtterance==="function";
  const beginFallback=()=>{if(settled||failed||!current())return;failed=true;officeSpeechBusy=false;mode="fallback";lips.start("fallback");if(fallback!==null)clearTimer(fallback);try{if(speechSynthesis.speaking||speechSynthesis.pending)speechSynthesis.cancel()}catch{}start("fallback");delivery?.onFallback?.();if(onComplete)fallback=defer(complete,readableMs)};
  if(onComplete||onStart){if(voiced){const limit=hostVoiceStartupMs===null?(hostVoiceAttempts===0?1800:1200):Math.max(900,Math.min(1800,Math.round(hostVoiceStartupMs*2+250)));hostVoiceAttempts++;fallback=defer(beginFallback,limit)}else if(onComplete)fallback=defer(complete,readableMs)}
  if(!voiced){start("fallback");return}
  officeSpeechBusy=true;
- const utterance=new SpeechSynthesisUtterance(text);utterance.lang="de-DE";utterance.rate=delivery?.rate??.96;utterance.pitch=delivery?.pitch??1;utterance.volume=mix.voice;
+ const utterance=new SpeechSynthesisUtterance(text);utterance.lang="de-DE";utterance.rate=delivery?.rate??.96;utterance.pitch=delivery?.pitch??1;utterance.volume=mix.voice*(delivery.volumeScale??1);
  utterance.onstart=()=>{if(!current()||settled||failed)return;start("voice");if(onComplete||onStart){const lag=Math.max(0,performance.now()-requestedAt);hostVoiceStartupMs=hostVoiceStartupMs===null?lag:Math.round(hostVoiceStartupMs*.6+lag*.4)}if(fallback!==null)clearTimer(fallback);if(onComplete){completionRemaining=Math.max(20000,text.length*120);completionDue=performance.now()+completionRemaining;fallback=defer(complete,completionRemaining)}};
  utterance.onboundary=event=>{if(current()&&started&&!settled&&!failed&&Number.isInteger(event.charIndex)){lips.boundary(event.charIndex);onBoundary?.(event.charIndex,event)}};
  utterance.onpause=()=>{if(!current()||!started||settled||failed||paused)return;paused=true;lips.pause();if(onComplete&&fallback!==null){completionRemaining=Math.max(0,completionDue-performance.now());clearTimer(fallback);fallback=null}delivery?.onPause?.()};
@@ -422,7 +425,7 @@ function content(who,text,buttons=[],onComplete,onStart,onBoundary,mood=null,del
  root.classList.toggle("interactive",interactive);
  const waitForFade=["character","early","expired"].includes(stage)||stage==="reply"&&clerkIndex===story.clerk.length-1;
  const completed=onComplete||!interactive&&buttons[0]&&(()=>{sceneContinuation={owner,cue:visibleCue,run:buttons[0].run,waitForFade,hold:waitForFade ? .25 : 0}});
- const voiceId=isClerk?story.clerkIdentity.voiceId:story.characters[mood?.id]?.voiceId||story.patrons[mood?.id]?.voiceId||"";
+ const voiceId=isClerk||who==="ANMELDESCHALTER"?story.clerkIdentity.voiceId:story.characters[mood?.id]?.voiceId||story.patrons[mood?.id]?.voiceId||"";
  const fever=encounterArmed&&!omen.phase&&options?.cinematics!==false&&feverClock?.begin({id:characterMood?.id,text,cue,generation:attempt,durationMs:speechReadableMs(text,delivery)});
  const currentFever=()=>fever&&active&&owner===attempt&&visibleCue===cue&&feverClock.inspect().cue===visibleCue;
  const hooks=fever?{...delivery,onPause:()=>{if(currentFever())feverClock.pause();delivery?.onPause?.();updateFeverTone()},onResume:()=>{if(currentFever())feverClock.resume();delivery?.onResume?.();updateFeverTone()},onFallback:()=>{if(currentFever())feverClock.fallback();delivery?.onFallback?.()}}:delivery;
@@ -590,26 +593,22 @@ function commitCall(reason){
  const peerFresh=timing.lastPongAt!==null&&now-timing.lastPongAt<6000&&timing.clockUncertaintyMs<=250;
  const ringAtPhoneMs=peerFresh?ringAtMs+timing.clockOffsetMs:null;
  const ringAtUtcMs=window.BuergeramtClock?.usable?.(clockAnchor,now)?Math.round(window.BuergeramtClock.utcAt(clockAnchor,ringAtMs)):null;
- if(!link.send("call",{id:story.call.id,line:story.call.line,ringAtPhoneMs,ringAtUtcMs,leadMs})){forfeit("TELEFON GETRENNT");return}
+ if(!link.send("call",{id:story.call.id,line:story.call.line,ringAtPhoneMs,ringAtUtcMs,leadMs})){forfeit("TERMIN NICHT MEHR VERFÜGBAR");return}
  timing.call={reason,armedAtMs:now,ringAtMs,signalAtMs:ringAtMs-900,ringAtPhoneMs,ringAtUtcMs,peerUncertaintyMs:peerFresh?timing.clockUncertaintyMs:null,utcUncertaintyMs:ringAtUtcMs!==null?clockAnchor.uncertaintyMs:null,phoneScheduledAtMs:null,phoneMode:null,lateMs:null};
  sentPolice(-1);playCallSignal(ringAtMs-900,ringAtMs);setStatus("TELEFON KLINGELT · LAUTLOS FÜR DIE ANMELDUNG");schedulePhoneWarning(Math.max(0,ringAtMs-performance.now())+3200);
 }
-function armCall(){if(!active||phoneSilent||!callPending||callCommitted||callArmTimer!==null)return;if(!link.send("call-arm",{id:story.call.id})){forfeit("TELEFON GETRENNT");return}callArmTimer=defer(()=>commitCall("ready-timeout"),1000)}
+function armCall(){if(!active||phoneSilent||!callPending||callCommitted||callArmTimer!==null)return;if(!link.send("call-arm",{id:story.call.id})){forfeit("TERMIN NICHT MEHR VERFÜGBAR");return}callArmTimer=defer(()=>commitCall("ready-timeout"),1000)}
 function ambientStep(dt){
  if(!walking()||stage==="outside")return;ambientClock+=dt;
- if(ambientClock<8.5||options?.cityAudioBusy?.()||window.speechSynthesis?.speaking||window.speechSynthesis?.pending)return;
+ if(ambientClock<8.5||officeSpeechBusy||options?.cityAudioBusy?.()||window.speechSynthesis?.speaking||window.speechSynthesis?.pending)return;
  ambientClock=0;cancelSpeech();const ambientVoice=ambientIndex++%ambientLines.length,[who,text]=ambientLines[ambientVoice];
  lips.prepare(["renter","clerk-1","clerk-2","pensioner","clerk-4"][ambientVoice],text,1.1);
  const owner=attempt,visibleCue=++cue,caption=who+": "+text;
  const current=()=>active&&owner===attempt&&visibleCue===cue&&walking();
  const show=()=>{if(current())ambient.textContent=caption};
- if(options.voiceOn?.()&&window.speechSynthesis&&typeof window.SpeechSynthesisUtterance==="function"){
-  const voice=new SpeechSynthesisUtterance(text);voice.lang="de-DE";voice.volume=.22*mix.voice;voice.rate=1.1;voice.onstart=()=>{if(current()){lips.start("voice");show()}};
-  voice.onboundary=event=>{if(current())lips.boundary(event.charIndex)};
-  voice.onpause=()=>{if(current())lips.pause()};voice.onresume=()=>{if(current())lips.resume()};
-  voice.onend=voice.onerror=()=>{if(current()){lips.finish();ambient.textContent=""}};
-  try{speechSynthesis.speak(voice)}catch{show()}
- }else show();
+ const actor=["renter","clerk-1","clerk-2","pensioner","clerk-4"][ambientVoice];
+ const voiceId=actor.startsWith("clerk-")?story.clerkIdentity.voiceId:story.patrons[actor==="renter"?"amt-konrad-wohnungszettel":"amt-wolfram-rentenbescheid"]?.voiceId||"";
+ say(text,()=>{if(current())ambient.textContent=""},show,null,{rate:1.1,volumeScale:.22,isCurrent:walking},voiceId);
  if(ambientIndex%2===0)ring();
 }
 function update(dt){
@@ -652,8 +651,8 @@ function beginLink(){
  const owner=attempt,currentLink=new BuergeramtLink("host",invitation);link=currentLink;
  const current=()=>active&&owner===attempt&&link===currentLink;
  const terminal=()=>["cancelled","closed","success"].includes(stage);
- currentLink.addEventListener("status",e=>{if(!current())return;if(stage==="cancelled"&&/getrennt|unterbrochen/i.test(e.detail)){policeDisconnectHandler?.();return}if(terminal())return;if(activated&&/getrennt|unterbrochen/i.test(e.detail))forfeit("TELEFON GETRENNT");else if(!activated)setStatus(e.detail)});
- currentLink.addEventListener("connected",()=>{if(!current()||terminal())return;setStatus("TELEFON VERBUNDEN · SCAN WIRD ERWARTET");probeLink();if(pingTimer===null)pingTimer=setInterval(()=>{if(current())probeLink()},1500)});
+ currentLink.addEventListener("status",e=>{if(!current())return;if(stage==="cancelled"&&/getrennt|unterbrochen/i.test(e.detail)){policeDisconnectHandler?.();return}if(terminal())return;if(activated&&/getrennt|unterbrochen/i.test(e.detail))forfeit("TERMIN NICHT MEHR VERFÜGBAR");else if(!activated)setStatus("QR-CODE SCANNEN · WARTENUMMER ZIEHEN")});
+ currentLink.addEventListener("connected",()=>{if(!current()||terminal())return;setStatus("QR-CODE SCANNEN · WARTENUMMER ZIEHEN");probeLink();if(pingTimer===null)pingTimer=setInterval(()=>{if(current())probeLink()},1500)});
  currentLink.addEventListener("message",e=>{
   if(!current())return;const m=e.detail;
   if(m.type==="sync-pong"){receivePong(m.id,m.receivedAtMs,m.sentAtMs);return}
@@ -683,7 +682,7 @@ function beginLink(){
    warnPhone();
   }
  });
- currentLink.start().catch(e=>{if(current()&&!terminal())setStatus("Verbindung fehlgeschlagen: "+e.message)});
+ currentLink.start().catch(()=>{if(current()&&!terminal())setStatus("WARTENUMMER DERZEIT NICHT VERFÜGBAR")});
 }
 function schedulePhoneWarning(delay){if(phoneWarningTimer!==null)clearTimer(phoneWarningTimer);phoneWarningTimer=defer(()=>{phoneWarningTimer=null;if(callPending&&!phoneSilent)warnPhone()},delay)}
 function warnPhone(){
@@ -696,7 +695,7 @@ function warnPhone(){
 }
 function silencePhone(send){
  if(!active||!activated||phoneSilent||registrationCompleted||["cancelled","expired","closed"].includes(stage))return;
- if(send&&!link?.send("silence",{id:story.call.id})){forfeit("TELEFON GETRENNT");return}
+ if(send&&!link?.send("silence",{id:story.call.id})){forfeit("TERMIN NICHT MEHR VERFÜGBAR");return}
  phoneSilent=true;callPending=false;callOutcome="silent";clearPhonePressure();if(callArmTimer!==null)clearTimer(callArmTimer);callArmTimer=null;stopCallSignal();
  if(["counter","reply","phone-warning"].includes(stage)){
   setStage("reply");setStatus("TELEFON LAUTLOS · VORGANG WIRD FORTGESETZT");content(story.clerkIdentity.speaker,"Endlich! Das Telefon bleibt lautlos. Und jetzt hören Sie MIR zu. Eine Anmeldung ist kein Plausch mit Ihrem Vermieter!",[{label:"Vorgang fortsetzen.",run:showRegistration}]);
@@ -730,20 +729,25 @@ function showClerk(){
  if(!callPending||phoneSilent)showRegistration();
 }
 function showOutburst(){
- const upset={...story.outburst,speaker:"FRAU KNICK · SCHALTER "+assignedCounter};exit.hidden=true;cancelSpeech();
- let waiting=null,deskIndex=null,deskTimer=null,disconnected=false;
+ const upset={...story.outburst,speaker:"FRAU KNICK · SCHALTER "+assignedCounter};exit.hidden=true;cancelSpeech();ambient.textContent="";
+ const phoneBrowser=navigator.userAgentData?.mobile??/iPhone|iPod|Android.*Mobile/i.test(navigator.userAgent||"");
+ let waiting=null,deskIndex=null,deskTimer=null,disconnected=false,phoneCaption="";
+ function clearPhoneCaption(){if(phoneCaption&&ambient.textContent===phoneCaption)ambient.textContent="";phoneCaption=""}
  function stopDesk(){
   if(deskTimer!==null)clearTimer(deskTimer);deskTimer=null;
   const record=timing.desk[deskIndex];if(record&&record.endAt===null){record.endAt=performance.now();record.mode="interrupted";cancelSpeech()}
  }
  function nextDesk(index,missing=false){
   if(waiting?.index!==index)return;const pending=waiting;waiting=null;clearTimer(pending.timer);
+  clearPhoneCaption();
   if(missing&&timing.cues[index]?.doneAt===null)timing.cues[index].status=disconnected?"disconnected":"timeout";
   desk(index+1);
  }
  policeDoneHandler=index=>nextDesk(index);
  policeStartHandler=index=>{
-  if(waiting?.index!==index)return;stopDesk();clearTimer(waiting.timer);
+  if(waiting?.index!==index)return;stopDesk();clearTimer(waiting.timer);ambient.textContent="";
+  clearPhoneCaption();
+  if(!phoneBrowser){phoneCaption="KRIMINALPOLIZEI · "+(index===-1?story.call.line:story.police[index]);ambient.textContent=phoneCaption}
   const pending=waiting,record=timing.cues[index],budget=upset.phoneCutAfterMs[index+1],target=record.estimatedStartAt+budget;
   const service=window.BuergeramtClock;
   const stopAtUtcMs=Number.isSafeInteger(record.phoneStartedAtUtcMs)?record.phoneStartedAtUtcMs+budget:service?.usable?.(clockAnchor)?Math.round(service.utcAt(clockAnchor,target)):null;

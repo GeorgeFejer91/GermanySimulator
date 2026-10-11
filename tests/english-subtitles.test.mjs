@@ -15,25 +15,24 @@ vm.runInContext(librarySource,context,{filename:"AUDIO-TEXT-LIBRARY.js"});
 const library=context.window.GermanySimulatorAudioText;
 
 assert.equal(library.version,8);
-assert.equal(Object.keys(library.clips).length,118,"all shipped foreground clips need stable IDs");
-assert.equal(new Set(Object.values(library.clips).map(clip=>clip.path)).size,118,"clip paths must be unique");
+const knickCount=['manifest.json','ambient-manifest.json'].reduce((n,file)=>n+(existsSync(join(root,'assets/voices/knick',file))?JSON.parse(readFileSync(join(root,'assets/voices/knick',file),'utf8')).clips.length:0),0);
+assert.equal(Object.keys(library.clips).length,113+knickCount,"recorded and text-only dialogue need stable IDs");
+const recordedClips=Object.values(library.clips).filter(clip=>clip.recording);
+assert.equal(recordedClips.length,109+knickCount,"retired clerk and traffic takes must not ship");
+assert.equal(new Set(recordedClips.map(clip=>clip.path)).size,109+knickCount,"recorded clip paths must be unique");
 for(const clip of Object.values(library.clips)){
  assert.ok(library.voices[clip.voiceId],`${clip.id} needs a registered voice ID`);
  if(clip.targetVoiceId)assert.ok(library.voices[clip.targetVoiceId]?.profileId,`${clip.id} needs a saved replacement profile`);
  assert.ok(clip.source?.trim(),`${clip.id} needs exact spoken text`);
  assert.ok(clip.english?.trim()||clip.cues?.length,`${clip.id} needs an English subtitle`);
  assert.ok(clip.trigger?.trim(),`${clip.id} needs a trigger family`);
- assert.ok(existsSync(join(root,clip.path.slice(2))),`${clip.id} points to a missing recording`);
+ if(clip.recording)assert.ok(existsSync(join(root,clip.path.slice(2))),`${clip.id} points to a missing recording`);
 }
-const profileRoles=["player-inner","passerby-a","passerby-b","police-officer","quiz-officer","traffic-driver","merz-character","merkel-character","soeder-character","weidel-character"];
-assert.equal(new Set(profileRoles.map(id=>library.voices[id].profileId)).size,10,"character roles need distinct saved profiles");
-assert.equal(new Set(profileRoles.map(id=>library.voices[id].referenceSha256)).size,10,"character roles need distinct source references");
+const cast=JSON.parse(readFileSync(join(root,'For-AI/VOICE-CAST.json'),'utf8'));
+assert.equal(new Set(Object.values(cast.productionVoices).map(voice=>voice.profileId)).size,61,"selected production roles need distinct saved profiles");
 assert.equal(library.voices.narrator.profileId,undefined,"the official computer voice uses browser speech");
 assert.equal(library.clips["rule-01"].targetVoiceId,undefined,"recorded rules must not target a retired narrator clone");
-for(const [family,id] of [["bayern","soeder-character"],["alice","weidel-character"]]){
- assert.equal(library.speechFamilies[family].profileVoiceId,id,`${family} needs its own generation profile`);
- assert.equal(library.voices[id].license,"CC BY 4.0");
-}
+for(const family of ['bayern','alice'])assert.equal(library.speechFamilies[family].profileVoiceId,undefined,"source recordings must not retain removed generation profiles");
 assert.equal(library.speechFamilies.merz.profileVoiceId,"merz");
 assert.equal(library.voices.merz.profileName,"GS Merz");
 assert.equal(library.voices.merz.profileId,"cb7f3cee85f648c186355329316c6b3b");
@@ -41,7 +40,7 @@ assert.equal(library.speechFamilies.merkel.profileVoiceId,"merkel");
 assert.equal(library.voices.merkel.profileName,"GS Merkel");
 assert.equal(library.voices.merkel.profileId,"25916e5981064e09a2c42350d5fe5f04");
 assert.equal(library.clips["quiz-wrong-answer"].voiceId,"quiz-sting","existing quiz audio must not be labeled as a new clone");
-assert.equal(library.clips["quiz-wrong-answer"].targetVoiceId,"quiz-officer");
+assert.equal(library.clips["quiz-wrong-answer"].targetVoiceId,undefined,"the generic sting has no selected named replacement speaker");
 assert.deepEqual([...library.exclusions],["background-music","sound-effect"]);
 assert.equal(Object.keys(library.questions).length,77,"every spoken quiz question needs English text");
 assert.deepEqual(Object.keys(library.quizContexts).sort(),["civic","grammar-b1","grammar-b2","grammar-c1","technik","traffic"],"each quiz family needs an English factual context");

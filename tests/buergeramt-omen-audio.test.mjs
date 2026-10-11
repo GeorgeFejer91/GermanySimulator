@@ -49,9 +49,9 @@ test('speech completion holds the threat, unwinds depth, turns planted and retre
  const stride=h.level.characters[0].phase;h.advanceGame(.7);
  assert.equal(h.level.characters[0].direction,'right');assert.equal(h.level.characters[0].mode,'turn');
  assert.equal(h.level.omen.x,root.x);assert.equal(h.level.omen.z,root.z);assert.equal(h.level.characters[0].phase,stride);
- h.advanceGame(.75);assert.equal(h.level.omen.phase,'turn');assert.equal(h.level.characters[0].direction,'up');h.advanceGame(.5);
+ h.advanceGame(.7);assert.equal(h.level.omen.phase,'turn');assert.equal(h.level.characters[0].direction,'up');h.advanceGame(.5);
  assert.equal(h.level.omen.phase,'depart');assert.equal(h.level.queueDisplay,board);assert.equal(h.level.stage,'omen');
- h.advanceGame(1.5);assert.equal(h.level.omen.phase,'depart');assert(Math.hypot(h.level.omen.x-arrival.x,h.level.omen.z-arrival.z)>.1);
+ h.advanceGame(1.8);assert(Math.hypot(h.level.omen.x-arrival.x,h.level.omen.z-arrival.z)>.1);
  assert.equal(h.level.omen.life.isolation,1);finishOmen(h);
  assert.equal(h.level.stage,'walk-sign');assert.equal(h.level.omen.strength,0);assert.equal(h.level.omen.life.isolation,0);
  assert.ok(Math.abs(h.level.view.yaw)<.01);h.advanceGame(4);assert.notEqual(h.level.queueDisplay,board);

@@ -112,6 +112,9 @@ export function harness(kind='host',{voice=false,synthesis=true,phoneLanguage='d
  vm.runInContext(source('buergeramt-story.js'),context,{filename:'buergeramt-story.js'});
  if(kind==='host')for(const file of ['buergeramt-animation-clock.js','buergeramt-voice-profiles.js','buergeramt-fever.js'])vm.runInContext(source(file),context,{filename:file});
  vm.runInContext(source('buergeramt-lips.js'),context,{filename:'buergeramt-lips.js'});
+ // Most legacy lifecycle fixtures deliberately exercise the browser engine.
+ // Fixed-profile tests replace this synthetic policy with the real catalogue.
+ if(kind==='host'&&!window.GermanySimulatorAudioText)window.GermanySimulatorAudioText={productionVoices:{[window.BuergeramtStory.clerkIdentity.voiceId]:{fallback:'browser'}}};
  // This DOM/clock fixture has no module/network loader. Acoustic-byte and
  // pending-load lifecycle tests supply their own analysis binding explicitly.
  window.GermanyAmtLips.loadRecording=()=>null;

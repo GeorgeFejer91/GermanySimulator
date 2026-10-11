@@ -40,12 +40,22 @@ playtest verified QR visibility, moving sprites, and clear room navigation;
 2,135 primitives are grouped into 24 static draws. Keep the proposal file as
 an intake record, not runtime authority.
 
-`VOICE-01` now has a coordinator-prepared starting point: the external ChatDev
-`WareHouse/germany-voice-reference/manifest.md` records a CC0 German Frau
-Knick reference, her saved Qwen profile, the existing separate police profile,
-and exact-story smoke previews. No clip has entered game assets. An incoming
-voice contributor should review those files and propose precise fixes or
-alternatives; a human listening decision is still pending before line batches.
+`VOICE-01`'s early profile experiments and smoke previews are **superseded**.
+Current voice work uses the 61 selected bindings in
+[`VOICE-CAST.json`](../VOICE-CAST.json) `productionVoices` and the
+[fixed-voice protocol](../VOICE-SYNTH-PROTOCOL.md#fixed-voices-and-the-agent-workflow-2026-10-11).
+The cast pins each Secret Tunnel UUID, original/normalized reference hash,
+renderer/model revision and processing recipe. Its 58 Chatterbox bindings
+include `amt-brunhilde-knick`; the three existing OmniVoice bindings remain
+`kriminalpolizei`, `merz` and `merkel`. Use each binding's recorded renderer,
+not a name match or an older profile. Knick's approved selected voice and
+caption-only fallback apply to counter and phone-overlap dialogue; the phone
+officer uses `kriminalpolizei`. Exact lines and asset ownership come from
+`VOICE-DIALOGUE-INVENTORY.json` and `AUDIO-TEXT-LIBRARY.js`. Retired profiles
+and takes stay archived. The optional Voice stage only audits supplied evidence
+and reports to Codex; profile creation, rendering and publication are not its
+tools. Keep source rights, user use-approval and actual listening decisions
+distinct, and preserve the explicit Horst scene exception.
 
 ## Task record
 
@@ -83,7 +93,7 @@ source, base commit, owner, exact paths, and checks in a fresh task record.
 | ENV-01 | Closed / Gameplay + QA | Accepted scoped office dressing and collision integration. | Future area edits require their own visual and performance review. |
 | STORY-01 | Medium / Story + Review | Polish the German-only Frau Knick/police exchange, especially the counter-phone overlap and cancelled appointment, in a proposed dialogue diff. | Answer has no player choices; decline retains choices and A38; visible words equal spoken words on each screen. |
 | PHONE-01 | High / Phone + QA | Exercise real phone-to-desktop VDO.Ninja pairing, immediate and repeated QR ticket scans, foreground requirement, call answer/decline, reconnect and late/early branches; submit a compact issue report or focused fix. | Two real browsers sync without camera/microphone; no choice on answer branch; pairing failures and privacy behavior are documented. |
-| VOICE-01 | Medium / Voice + Review | Review the external CC0 Frau Knick and police smoke previews; propose precise voice or telephone-effect changes before line batches. | Source license, segment, hashes, whole-line wording, and listening notes; no unverified YouTube voice is cloned. |
+| VOICE-01 | Superseded / Voice + Review | Early profile experiments are archived history; current work audits the selected production bindings under the fixed-voice protocol above. | Exact profile/reference/renderer/text correspondence, current fallback, source rights and separate use-approval/listening evidence. |
 | QA-01 | High / QA | Run silent desktop/mobile/320px/200% playthroughs of the direct Bürgeramt route and main-city entry; report reproducible issues with screenshots. | No focus stealing or audible test output; record console, asset loads, frame progression, ticket/queue/counter outcomes, and restart. |
 | VIS-01 | Medium / Gameplay + Review | Survey the existing city and office place assets for their fit with the new grimy, painted caricature cast. Propose an area-by-area style pass for facades, signs, clutter, light, and props; implement one bounded accepted area at a time. | Keep every place recognizable and every interaction legible, preserve existing source/asset authority, give before/after screenshots and mobile performance evidence. |
 

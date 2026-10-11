@@ -1,7 +1,7 @@
 version: 0.4.0
 graph:
   id: amt_voice
-  description: Source, render, and audit two distinct character voices.
+  description: Audit selected character voice bindings and supplied production evidence.
   log_level: INFO
   start: [VoiceProducer]
   nodes:
@@ -23,23 +23,25 @@ graph:
           report a missing handoff. Report how exact visible text, speech
           start/done receipts and cancellation fit the controller event.
           Keep the `omen` verse unchanged and intelligible at its music peak.
-          You are the voice producer. Read For-AI/VOICE-SYNTH-PROTOCOL.md,
-          For-AI/AUDIO-TEXT-LIBRARY.md, and buergeramt-story.js.
-          Read For-AI/chatdev/WEBGPT-HANDOFF.md for accepted VOICE source
-          research and cite its task IDs in your report. Use distinct
-          sources for Frau Knick and the police officer. The existing GS
-          police-officer profile may be reused. For new voices, record exact source,
-          license, SHA-256, and intended use. A YouTube upload alone is not a
-          reuse license; check the actual recording. Call voice_cloner_status first.
-          If no licensed YouTube recording is verifiable, use a licensed local
-          reference with voice_cloner_create_profile_file instead.
-          If the runtime is missing, write a production report and leave browser
-          speech fallback intact. If available, create a profile, render one German
-          smoke line, inspect it, then render exact visible lines into the external
-          workflow directory. Do not publish audio into assets until normalized,
-          transcribed, listened to, and cataloged.
+          You audit the existing fixed-voice production workflow. Read the current
+          fixed-voices section of For-AI/VOICE-SYNTH-PROTOCOL.md,
+          For-AI/VOICE-CAST.json productionVoices, For-AI/VOICE-DIALOGUE-INVENTORY.json,
+          For-AI/AUDIO-TEXT-LIBRARY.md, For-AI/AUDIO-TEXT-LIBRARY.js, and
+          buergeramt-story.js. Historical handoffs are context, not profile authority.
+          Match each supplied take to its stable voice ID, selected Secret Tunnel
+          UUID, original and normalized reference hashes, exact renderer/model
+          revision, processing recipe and authored text. Check the documented scene
+          exceptions separately. Report source/license, asset hashes, independent
+          final-encoding transcript and level evidence, user use-approval, actual
+          listening evidence, and default/preview ownership without inventing results.
+          Preserve each character's current fallback; Frau Knick uses exact captions
+          when an eligible recording is unavailable, never a different browser voice.
+          Never create profiles, change selected bindings, generate audio, edit sources
+          or publish assets. Return missing evidence or drift to the Codex integrator
+          for the existing production tools and protocol; supplied evidence is not a
+          fresh listening or browser check. Mark checks you cannot perform NOT RUN.
         tooling:
           - type: function
             config:
-              tools: [{name: read_game_file}, {name: voice_cloner_status}, {name: voice_cloner_create_profile}, {name: voice_cloner_create_profile_file}, {name: voice_cloner_render_line}, {name: write_workflow_report}]
+              tools: [{name: read_game_file}, {name: write_workflow_report}]
   edges: []

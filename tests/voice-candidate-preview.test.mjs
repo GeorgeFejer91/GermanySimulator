@@ -86,10 +86,12 @@ for(const clip of originalCandidates){
  assert.equal(clip.profileId,owners.get(clip.voiceId)?.profileId,`profile binding ${clip.clipId}`);
  assert.equal(clip.referenceSha256,owners.get(clip.voiceId)?.referenceSha256,`reference binding ${clip.clipId}`);
  const official=off.candidateClip(clip.voiceId,clip.text);
- assert.equal(on.candidateClip(clip.voiceId,clip.text),clip.retiredReason?null:official||clip.path);
+ assert.equal(on.candidateClip(clip.voiceId,clip.text),official||(clip.retiredReason?null:clip.path));
  const fever=JSON.parse(source('./assets/voices/amt-fever/manifest.json')).clips.find(c=>c.voiceId===clip.voiceId&&c.text===clip.text);
- assert.equal(official,clip.clipId==='amt-horst-stempelmann-03'?'./assets/voices/horst-stempelmann/omen-candidate-02.mp3':fever?'./'+fever.path:null);
- assert.equal(createHash("sha256").update(source(clip.path)).digest("hex"),clip.sha256);
+ const knick=JSON.parse(source('./assets/voices/knick/manifest.json')).clips.find(c=>c.voiceId===clip.voiceId&&c.text===clip.text);
+ assert.equal(official,clip.clipId==='amt-horst-stempelmann-03'?'./assets/voices/horst-stempelmann/omen-candidate-02.mp3':knick?'./'+knick.file:fever?'./'+fever.path:null);
+ if(clip.archiveRelativePath)assert.equal(clip.archiveRelativePath,'assets/'+clip.path);
+ else assert.equal(createHash("sha256").update(source(clip.path)).digest("hex"),clip.sha256);
 }
 for(const person of cast.characters)for(const line of person.dialogue){
  assert.ok(keys.has(person.voiceId+"\0"+line.text),`missing fixed-character audition ${person.voiceId}: ${line.text}`);
