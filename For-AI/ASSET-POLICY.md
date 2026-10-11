@@ -662,24 +662,26 @@ asset queue jobs. The existing render dispatch advances a bounded visible-city
 clock; hidden/off-camera doors stop work and lighting, pause freezes animation,
 and reduced motion is steady gold. Resources live with the existing city scene.
 
-The mission Bratwurst uses one local textured cooked-sausage GLB under
-`assets/models/mission-sausage/`, with adjacent attribution and CC BY-NC 4.0
-terms. It adds 274,344 transferred bytes, 3,640 triangles, one material and three
-512 px maps (3 MiB decoded RGBA / about 4 MiB with mipmaps). The starting
+The mission Weißwurst uses one original, texture-free GLB under
+`assets/models/mission-sausage/`, built by the existing standard-library Python
+builder with adjacent provenance. It adds 98,536 transferred bytes, 5,376 triangles
+and one material; it replaces the former licensed grilled model and its three maps. The starting
 neighborhood queue prepares it before Start through the existing two-job
-admission owner. A curved procedural sausage retains the same compass behavior
+admission owner. A pale, plump procedural sausage retains the same compass behavior
 on failure. The existing render dispatch updates its bearing without a new
 timer, collision object, service or asset variant. The shared
 source/instance lives with the city renderer; office/hidden states consume no
-pointer updates. Replace this noncommercial model before commercial release.
+pointer updates. Pale glossy casing, sparse shader herb flecks and small tied ends
+give the model a Weißwurst appearance with only a gentle bend.
 It is a fixed screen-space HUD object rendered after the city with the same
 WebGL renderer and a small orthographic view. Its body scales 1.65 across and
-0.7 along the existing source, yielding a short, fat shape without another
+0.7 along the source, yielding a short, fat shape without another
 model download. A 64 px radial sprite (16 KiB decoded RGBA) and cloned tip
 materials provide the red glow; the mustard cone is removed. The HUD reserves
 168 px on desktop or 128 px on compact layouts. A 1024 × 256 canvas
 (1 MiB decoded RGBA, one shared texture) prints black-red-gold UnifrakturCook
-“Wegweiser” directly onto the curved skin in the existing material shader.
+“Wegweiser” directly onto the skin in the existing material shader. A wider print
+area, 176 px authoring type and dark outline improve the displayed lettering's size and contrast.
 The pinned Pretext measures its exact loaded canvas font before painting;
 local PlacardGrenze remains the named font fallback. No text overlay floats
 above the sausage.
@@ -688,10 +690,33 @@ updates through resize/DOM observers and the existing coalesced HUD refresh;
 its unchanged model job uses the player's location for admission. No collision,
 extra WebGL canvas, asset variant or new animation loop is added. The measured DOM reservation hides with its pointer during title, dialogue,
 file and office states; it has no visible text.
-A short silent native-Chrome comparison at 1280 × 800 measured render dispatch
-p50/p95 of 14.0/21.7 ms before and 15.0/21.1 ms after this move. These
-73/72-sample live-city measurements include the HUD pass but do not establish
-physical-phone or full-mission performance.
+The existing coalesced HUD measurement marks a no-fit below 88 CSS px of free
+height between header and lower controls. The HUD mesh then hides while the
+mission remains in Akte, and returns after resize without another loop.
+The Weißwurst comparison used three cold contexts per viewport against `0447bea`,
+including the old model bytes and HUD source in the baseline. Chrome 154 / Intel
+Iris Xe hardware, local uncompressed HTTP, DPR 2 and seed 4781 were shared, with
+no CPU throttle. Active dispatch p95 medians were 68.1 → 53.4 ms desktop
+(ranges 47.6–84.3 / 37.0–53.5) and 37.8 → 50.0 ms portrait emulation
+(28.6–41.4 / 37.1–52.0). Both six-run guard checks passed with nine accepted
+inputs and no page errors. Timings, loading and movement endpoints varied;
+these samples do not establish a causal speedup. Reports remain under
+`output/wegweiser/weisswurst-{before,after}/`.
+
+After integrating `008b017`, all six final hardware runs passed the existing
+startup/deferred-resource/title/input/buffer guards: 13.39–16.32 MB desktop and
+15.28–16.08 MB emulation, nine accepted inputs each, and no page errors. Active
+p95 medians were 38.7 / 43.2 ms (ranges 37.8–44.9 / 41.1–52.6); input p95
+medians were 595.7 / 68.4 ms, with a 1564.7 ms mobile outlier. The attempted
+`008b017` baseline stopped on seven accepted inputs, so it cannot support a
+new comparison. That failed report is preserved beside the final candidate
+report in `weisswurst-integrated-{before,after}/`. No guard was relaxed.
+The source-identical rendered matrix covers twelve desktop/Android-emulated
+layouts, loaded/fallback bearings, real movement and enlarged-text Akte/restore.
+One initial narrow resize timed out despite matching captured bounds; a single
+instrumented rerun passed without a source or timeout change. Consolidated
+evidence and that limitation are in `weisswurst-integrated-verified/report.json`.
+Physical Android, GPU timing and the full natural mission chain remain NOT RUN.
 
 - Root `assets/models/` is the only authority for shipped model files.
 - The root game has one required WebGL presentation path. Do not preload or restore the retired SVG/Canvas world-art set. Registered moving-character PNG atlases remain the deliberate bitmap exception; DOM UI art and billboard textures are not alternate world renderers.
@@ -861,7 +886,9 @@ unchanged.
 
 ## Shared speech mouth layer (2026-10-11)
 
-`buergeramt-lips.js` owns one cue track and one lazy 425-kernel instanced native-paint patch for the currently speaking atlas actor. It borrows the actor texture and shares its registration, breathing, tint, fog and depth policy; cancellation, exit and pagehide release ownership. Whole-body Gaussian paint consumes the same continuous cue shape in its existing shader and suppresses the atlas patch. The approved omen retains its existing recording-bound Gaussian mouth. No new media or runtime dependency is needed for lips. All 15 office actor instances use this shared scene clock.
+`buergeramt-lips.js` owns one cue track and one lazy 425-kernel instanced native-paint patch for the currently speaking atlas actor. It borrows the actor texture and shares its registration, breathing, tint, fog and depth policy; cancellation, exit and pagehide release ownership. Whole-body Gaussian paint consumes the same continuous cue shape in its existing shader and suppresses the atlas patch. `buergeramt-mouth-paint.js` separates painted lips and lower jaw around a visible, bounded oral cavity, retaining original closed paint at rest. All 15 office actor instances share this rig and retain their body bounds and floor pivots.
+
+Recorded speech lazily loads the 79,891-byte `assets/buergeramt/speech/mouth-cues.js` module when the office requests a clip or its existing Gaussian owner. All 41 unchanged approved office recordings, including the omen, have exact path/hash bindings, phonetic intervals and 100 Hz compact acoustic envelopes. The shared builder replaces the former omen-only data/pipeline. It uses local FFmpeg/Rhubarb; optional installed Whisper diagnostics remain offline. No runtime recognizer, model, new recording, image or texture is introduced. The module is cached once, with decoded envelopes in a weak cache; existing cue cancellation/watchdogs own async preparation and disposal. Audio playhead sampling replaces both text-length timing and the additional 35 ms visual filter. Browser speech and optional unanalyzed preview recordings retain estimated articulation. See `assets/buergeramt/speech/PROVENANCE.md` for reproduction and precision limits.
 
 The mouth patch copies its actor's layer mask on every update so both use the final office actor pass with the existing opaque room depth. A hidden atlas replacement cannot keep a visible patch. Disposal and office exit release the patch and restore ordinary actor ownership. Final integration evidence and measured limits are in `BUERGERAMT.md`.
 

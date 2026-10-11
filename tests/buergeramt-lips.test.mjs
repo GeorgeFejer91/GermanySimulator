@@ -17,7 +17,7 @@ test('German lip shapes close consonants and blend continuously at every boundar
  for(let i=0;i<24;i+=.01)assert(poseAt(keys,i).every(v=>v>=0&&v<=1));
 });
 
-test('recorded articulation follows media time, freezes on pause, and closes on end',()=>{
+test('an unanalyzed preview recording retains the explicitly estimated fallback',()=>{
  let now=0;const track=createTrack(()=>now),media={duration:4,currentTime:.3,paused:false,ended:false};
  track.prepare('clerk','Mama');track.start('voice',media);
  const first=track.sample();now+=20000;assert.deepEqual(track.sample().shape,first.shape);
@@ -26,6 +26,23 @@ test('recorded articulation follows media time, freezes on pause, and closes on 
  media.paused=false;media.currentTime=2.5;assert.equal(track.sample().shape[0],0);
  media.ended=true;assert.deepEqual(track.sample().shape,[0,0,0,0]);
  track.finish();assert.equal(track.sample().actor,null);
+});
+
+test('late acoustic loading cannot play or bind a cancelled speaker',async()=>{
+ const {h,p,level}=probe(),pending=[],players=[];
+ h.window.GermanyAmtLips.loadRecording=()=>new Promise(resolve=>pending.push(resolve));
+ h.window.GermanySimulatorAudioText={candidateClip:()=> './clip.mp3',recordings:{'./clip.mp3':{sha256:'hash'}}};
+ h.context.Audio=class{
+  constructor(){this.currentTime=.5;this.duration=2;this.paused=true;this.ended=false;this.plays=0;players.push(this)}
+  play(){this.plays++;this.paused=false;this.onplaying?.();return Promise.resolve()}
+  pause(){this.paused=true;this.onpause?.()}removeAttribute(){}load(){}
+ };
+ p.content('DER AKTENKURIER','Erste Zeile',[],null,null,null,{id:'aktenkurier'});
+ p.content('FRAU KNICK','Zweite Zeile');
+ const binding={track:{recording:'./clip.mp3'},sample:()=>({open:1,spread:.2,round:0,bite:0,viseme:'D'})};
+ pending[0](binding);await new Promise(setImmediate);assert.equal(players[0].plays,0);
+ pending[1](binding);await new Promise(setImmediate);assert.equal(players[1].plays,1);assert.equal(level.lipSpeech.actor,'clerk');assert.equal(level.lipSpeech.timing,'audio-cues');assert.equal(level.lipSpeech.shape[0],1);
+ level.replay(h.config);assert.equal(level.lipSpeech.actor,null);
 });
 
 test('browser boundaries, pause/resume and missing speech keep their owning clock',()=>{

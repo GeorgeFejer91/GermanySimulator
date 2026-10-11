@@ -367,20 +367,25 @@ function say(text,onComplete,onStart,onBoundary,delivery=null,voiceId="",allowCa
    try{
     const player=new Audio(candidate);officeSpeechBusy=true;recordedSpeech=player;player.volume=mix.voice;
     const clip=window.GermanySimulatorAudioText.recordings?.[candidate],marks=clip?.wordCues||[];
-    let started=false,settled=false,paused=false,hiddenPaused=false,nextMark=0,watchdog=null,due=0,remaining=20000,playAttempt=0;
+    let started=false,settled=false,paused=false,hiddenPaused=false,nextMark=0,watchdog=null,due=0,remaining=20000,playAttempt=0,mouthBinding=null,mouthReady=!window.GermanyAmtLips?.loadRecording;
     const clearWatchdog=()=>{if(watchdog!==null)clearTimer(watchdog);watchdog=null};
     const arm=(milliseconds,callback)=>{clearWatchdog();due=performance.now()+milliseconds;watchdog=defer(callback,milliseconds)};
     const cleanup=()=>{playAttempt++;clearWatchdog();document.removeEventListener("visibilitychange",visibility);if(recordedCleanup===cleanup)recordedCleanup=null};
     const progress=()=>{if(!started||settled||paused||!current())return;while(nextMark<marks.length&&marks[nextMark].at<=player.currentTime){const mark=marks[nextMark++];onBoundary?.(mark.charIndex,{type:"recording-cue",elapsedTime:player.currentTime})}};
     const finish=()=>{if(settled||!current())return;if(!started)start();settled=true;lips.finish();clerkSpeaking=false;clerkAnimation?.setSpeech(false);cleanup();recordedSpeech=null;officeSpeechBusy=false;onComplete?.("voice")};
     const fallback=()=>{if(settled||!current())return;if(document.hidden){clearWatchdog();hiddenPaused=true;return}settled=true;lips.start("fallback");cleanup();player.pause();player.removeAttribute("src");player.load();recordedSpeech=null;officeSpeechBusy=false;delivery?.onFallback?.();say(text,onComplete,onStart,onBoundary,delivery,voiceId,false)};
-    const start=()=>{if(settled||!current())return;if(!started){started=true;lips.start("voice",player);remaining=Math.max(20000,Number.isFinite(player.duration)?player.duration*1000+2000:20000);onStart?.("voice",{durationMs:player.duration*1000,recording:candidate,sha256:clip?.sha256,hasWordCues:marks.length>0})}else if(paused){paused=false;delivery?.onResume?.()}arm(remaining,fallback);progress();if(document.hidden)visibility()};
-    const play=()=>{const serial=++playAttempt;player.play().catch(()=>{if(serial===playAttempt&&!document.hidden)fallback()})};
+    const start=()=>{if(settled||!current())return;if(!started){started=true;lips.start("voice",player,mouthBinding);remaining=Math.max(20000,Number.isFinite(player.duration)?player.duration*1000+2000:20000);onStart?.("voice",{durationMs:player.duration*1000,recording:candidate,sha256:clip?.sha256,hasWordCues:marks.length>0})}else if(paused){paused=false;delivery?.onResume?.()}arm(remaining,fallback);progress();if(document.hidden)visibility()};
+    const play=()=>{if(!mouthReady)return;const serial=++playAttempt;player.play().catch(()=>{if(serial===playAttempt&&!document.hidden)fallback()})};
     const visibility=()=>{if(settled||!current())return;if(document.hidden){playAttempt++;clearWatchdog();if(!player.paused){hiddenPaused=true;player.pause()}}else{if(!started)arm(1800,fallback);if(hiddenPaused){hiddenPaused=false;play()}}};
     player.onplaying=start;player.onended=finish;player.onerror=fallback;player.ontimeupdate=progress;
     player.onpause=()=>{if(!started||settled||paused||!current())return;paused=true;remaining=Math.max(0,due-performance.now());clearWatchdog();delivery?.onPause?.()};
     recordedCleanup=cleanup;document.addEventListener("visibilitychange",visibility);arm(1800,fallback);
-    play();return;
+    // Bind the unchanged MP3's analysis before its first sound. Late imports
+    // cannot start a cancelled cue or replace a newer speaker's articulation.
+    const loadMouth=window.GermanyAmtLips?.loadRecording;
+    const bind=binding=>{if(!settled&&current()){mouthBinding=binding;mouthReady=true;if(document.hidden){hiddenPaused=true;clearWatchdog()}else play()}};
+    if(loadMouth){const loaded=loadMouth(candidate,clip?.sha256);if(loaded?.then)loaded.catch(()=>null).then(bind);else bind(loaded)}
+    else play();return;
    }catch{recordedSpeech=null;officeSpeechBusy=false}
   }
   const requestedAt=performance.now();let settled=false,fallback=null,started=false,failed=false,paused=false,completionDue=0,completionRemaining=0,mode="fallback";

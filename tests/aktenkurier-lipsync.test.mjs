@@ -2,7 +2,8 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import {readFileSync} from 'node:fs';
 import {createHash} from 'node:crypto';
-import {omenMouthTrack as track} from '../assets/buergeramt/omen/mouth-cues.js';
+import {speechMouthTracks} from '../assets/buergeramt/speech/mouth-cues.js';
+const track=Object.values(speechMouthTracks).find(t=>t.clipId==='aktenkurier-omen-candidate-02');
 import {sampleOmenMouth} from '../buergeramt-lipsync.js';
 import {omenSplatPose} from '../buergeramt-splat.js';
 const speech=t=>({mode:'voice',recording:track.recording,recordingSha256:track.audioSha256,mediaTime:t});
@@ -12,7 +13,8 @@ test('phonetic articulation is bound to approved bytes and covers the whole utte
  assert.equal(track.duration,4.76);assert.equal(track.cues[0][0],0);assert.equal(track.cues.at(-1)[1],track.duration);
  assert(track.cues.length>=20);assert(new Set(track.cues.map(c=>c[2])).size>=6);
  for(let i=0;i<track.cues.length;i++){const [a,b]=track.cues[i];assert(b>a);if(i)assert.equal(a,track.cues[i-1][1])}
- assert.equal(track.energy.length,Math.ceil(track.duration*track.sampleHz));assert(track.energy.every(x=>x>=0&&x<=1));
+ const energy=Uint8Array.from(atob(track.energyBase64),c=>c.charCodeAt(0));
+ assert.equal(track.sampleHz,100);assert.equal(energy.length,Math.ceil(track.duration*track.sampleHz));assert(energy.every(x=>x>=0&&x<=255));
 });
 test('mouth shapes articulate closures, vowels, rounding and lower-lip bites with smooth transitions',()=>{
  assert.equal(sampleOmenMouth(speech(.47)).open,0);assert.equal(sampleOmenMouth(speech(2.62)).open,0);
@@ -28,4 +30,12 @@ test('unowned, failed, ended, silent and non-speaking scene states retain the or
  for(const phase of ['approach','glare','unwind','turn','depart','recover',''])assert.equal(omenSplatPose({phase,speech:speech(2)}).mouth.open,0);
  const paused={...speech(2.04),paused:true};assert.deepEqual(sampleOmenMouth(paused),sampleOmenMouth({...paused}));
  assert.deepEqual(omenSplatPose({phase:'blackout',speech:paused},true).mouth,sampleOmenMouth(paused),'semantic articulation survives reduced motion');
+});
+
+test('the Gaussian omen also consumes its owned browser speech shape through reduced motion',()=>{
+ const lipSpeech={active:true,actor:'aktenkurier',mode:'voice',shape:[1,.2,0,0],time:.4};
+ const state={phase:'blackout',lipSpeech};assert.equal(omenSplatPose(state).mouth.open,1);assert.equal(omenSplatPose(state,true).mouth.open,1);
+ assert.equal(omenSplatPose({...state,lipSpeech:{...lipSpeech,actor:'clerk'}}).mouth.open,0);
+ assert.equal(omenSplatPose({...state,phase:'glare'}).mouth.open,0);
+ assert.equal(omenSplatPose({...state,lipSpeech:{...lipSpeech,active:false}}).mouth.open,0);
 });

@@ -35,11 +35,11 @@ Mission order:
 7. Ausländerbehörde — residence evidence.
 8. Ausländerbehörde — fictional citizenship application.
 
-A short, fat grilled Bratwurst fixed at the top of the screen points its glowing red end toward
+A short, fat, pale Weißwurst fixed at the top of the screen points its glowing red end toward
 the current mission's actual office entrance. It follows all eight procedures;
 during Stadtbild work it selects the nearest unfinished object, then the office.
-The existing 3D model has a shorter, thicker HUD presentation, drawn by the same
-renderer with Schwarz-Rot-Gold Fraktur “Wegweiser” printed directly on its curved surface. It sits at the top
+The original 3D model has a full glossy casing, small tied ends and only a gentle bend, drawn by the same
+renderer with larger, dark-outlined Schwarz-Rot-Gold Fraktur “Wegweiser” printed directly on its surface. It sits at the top
 centre between the status controls on wide screens and below the shared top rail on narrow phones. The model and
 procedural fallback share the shape and glowing end. The surface print flips
 its orientation when needed to keep the word readable while the pointer turns. Measured print and notice/file-rail clearance follow font loading, resizing and enlarged text.
@@ -47,6 +47,9 @@ Its bearing follows the current camera projection. It is a
 compass bearing, with existing streets, crossings and interaction rules
 still governing travel. It hides during title, dialogue, file/modal, office and
 end states, and within 36 units of its target. It has no collision footprint.
+When enlarged controls leave less than 88 CSS px between the top rail and lower
+controls, the sausage yields to the mission in Akte instead of covering controls
+or shrinking its surface lettering beyond readability. It returns when space is available.
 
 The Bürgeramt's exterior door glows and emits outward rays while the city is
 active. A slow nine-second black/red/gold cycle and 2.8-second brightness pulse

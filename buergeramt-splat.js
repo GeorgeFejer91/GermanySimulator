@@ -1,5 +1,5 @@
 // Gaussian rendering shares the existing scene clock and render pass.
-import {sampleOmenMouth} from './buergeramt-lipsync.js';
+import {sampleOmenMouth} from './buergeramt-lipsync.js?v=20261011-acoustic-mouth';
 const clamp=value=>Math.max(0,Math.min(1,value));
 const TUNNEL_RINGS=32,TUNNEL_AROUND=96;
 const MOUTH_SPLATS=96;
@@ -14,6 +14,8 @@ export function omenReliefGain(camera={}){
 
 export function omenSplatPose(omen,reducedMotion=false){
   const live=['approach','blackout','glare','unwind'].includes(omen.phase),life=omen.life||{};
+  const speech=omen.lipSpeech,owned=omen.phase==='blackout'&&speech?.active&&speech.actor==='aktenkurier'&&['recorded','voice'].includes(speech.mode);
+  const mouth=owned?{open:speech.shape[0],spread:speech.shape[1],round:speech.shape[2],bite:speech.shape[3],time:speech.time,viseme:speech.viseme||'estimated'}:sampleOmenMouth(omen.phase==='blackout'?omen.speech:null);
   const reveal=live?clamp(life.depth||0):0;
   return {
     live,reveal,
@@ -25,7 +27,7 @@ export function omenSplatPose(omen,reducedMotion=false){
     pulse:reducedMotion?0:clamp(life.pulse||0),
     ripple:reducedMotion?0:reveal*(.3+.7*clamp(life.pressure||0))*(omen.speech?.paused ? .15 : 1)*(life.motion??1),
     time:reducedMotion?0:Math.max(0,life.time||0),
-    mouth:sampleOmenMouth(omen.phase==='blackout'?omen.speech:null),
+    mouth,
   };
 }
 

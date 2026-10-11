@@ -1,4 +1,5 @@
-import {createAmtGaussianScene} from './buergeramt-gaussian-scene.js?v=20261011-published-features';
+import {createAmtGaussianScene} from './buergeramt-gaussian-scene.js?v=20261011-acoustic-mouth';
+import {mouthPaintGlsl} from './buergeramt-mouth-paint.js?v=20261011-acoustic-mouth';
 import {prepareWithSegments,measureNaturalWidth,measureLineStats} from './assets/vendor/pretext/dist/layout.js';
 const THREE_URL="https://cdn.jsdelivr.net/npm/three@0.186.0/build/three.module.js";
 const GLTF_LOADER_URL="https://cdn.jsdelivr.net/npm/three@0.186.0/examples/jsm/loaders/GLTFLoader.js";
@@ -400,9 +401,9 @@ function showRendererFailure(error){
   missionHudScene.add(missionPointer);
   const missionGuide=document.getElementById('mission-guide'),pointerSpace=document.getElementById('mission-pointer-space');
   const sausageBody=new T.Group();sausageBody.scale.set(1.65,1.65,.7);missionPointer.add(sausageBody);
-  const sausageFallback=new T.Group(),sausageCurve=new T.CatmullRomCurve3([new T.Vector3(-.12,.12,-.78),new T.Vector3(.12,.12,-.4),new T.Vector3(.18,.12,0),new T.Vector3(.12,.12,.4),new T.Vector3(-.12,.12,.78)]);
-  const sausageSkin=mat(0xb96632,.5);sausageFallback.add(new T.Mesh(new T.TubeGeometry(sausageCurve,20,.105,8,false),sausageSkin));
-  for(const end of [0,1]){const p=sausageCurve.getPoint(end),cap=new T.Mesh(new T.SphereGeometry(.105,8,6).translate(p.x,p.y,p.z),sausageSkin);sausageFallback.add(cap)}
+  const sausageFallback=new T.Group(),sausageCurve=new T.CatmullRomCurve3([new T.Vector3(0,.12,-.7),new T.Vector3(.014,.12,-.35),new T.Vector3(.018,.12,0),new T.Vector3(.014,.12,.35),new T.Vector3(0,.12,.7)]);
+  const sausageSkin=new T.MeshPhysicalMaterial({color:0xf3e8cd,roughness:.32,metalness:0,clearcoat:.65,clearcoatRoughness:.22});sausageFallback.add(new T.Mesh(new T.TubeGeometry(sausageCurve,24,.17,16,false),sausageSkin));
+  for(const end of [0,1]){const p=sausageCurve.getPoint(end),cap=new T.Mesh(new T.SphereGeometry(.17,16,10).translate(p.x,p.y,p.z),sausageSkin);sausageFallback.add(cap)}
   const wurstPrintCanvas=document.createElement('canvas');wurstPrintCanvas.width=1024;wurstPrintCanvas.height=256;
   const wurstPrintTexture=new T.CanvasTexture(wurstPrintCanvas);wurstPrintTexture.colorSpace=T.SRGBColorSpace;
   const wurstPrintCrop=new T.Vector2(0,1);
@@ -410,21 +411,22 @@ function showRendererFailure(error){
   async function paintWurstPrint(){
     await placardFontReady;
     let family='"PlacardGrenze"';
-    try{const faces=await document.fonts.load('700 160px "UnifrakturCook"','Wegweiser');if(faces.length)family='"UnifrakturCook"'}catch{}
-    const ctx=wurstPrintCanvas.getContext('2d'),font=`700 160px ${family}`,text='Wegweiser';
+    try{const faces=await document.fonts.load('700 176px "UnifrakturCook"','Wegweiser');if(faces.length)family='"UnifrakturCook"'}catch{}
+    const ctx=wurstPrintCanvas.getContext('2d'),font=`700 176px ${family}`,text='Wegweiser';
     ctx.clearRect(0,0,1024,256);ctx.font=font;ctx.textAlign='center';ctx.textBaseline='middle';ctx.lineJoin='round';
     const prepared=prepareWithSegments(text,font,{letterSpacing:0}),naturalWidth=measureNaturalWidth(prepared),stats=measureLineStats(prepared,960);
     missionPointer.userData.print={text,font,naturalWidth,lineCount:stats.lineCount,innerWidth:960,lineHeight:192,innerHeight:224,fit:naturalWidth<=958&&stats.lineCount===1?'one-line':'unavailable'};
     const ink=ctx.createLinearGradient(512-naturalWidth/2,0,512+naturalWidth/2,0);ink.addColorStop(0,'#101010');ink.addColorStop(.333,'#101010');ink.addColorStop(.333,'#dd0000');ink.addColorStop(.667,'#dd0000');ink.addColorStop(.667,'#ffcc00');ink.addColorStop(1,'#ffcc00');
-    ctx.strokeStyle='#fff0cf';ctx.lineWidth=3;ctx.strokeText(text,512,128);ctx.fillStyle=ink;ctx.fillText(text,512,128);wurstPrintCrop.set((512-naturalWidth/2-16)/1024,(512+naturalWidth/2+16)/1024);wurstPrintTexture.needsUpdate=true;
+    ctx.strokeStyle='#261b12';ctx.lineWidth=10;ctx.strokeText(text,512,128);ctx.fillStyle=ink;ctx.fillText(text,512,128);wurstPrintCrop.set((512-naturalWidth/2-16)/1024,(512+naturalWidth/2+16)/1024);wurstPrintTexture.needsUpdate=true;
   }
   paintWurstPrint().catch(()=>{missionPointer.userData.print={text:'Wegweiser',fit:'unavailable'}});
   function glowSausageTip(root){
-    const copies=new Map();root.traverse(node=>{if(!node.material)return;const copy=source=>{if(copies.has(source))return copies.get(source);const material=source.clone();
+    const copies=new Map();root.traverse(node=>{if(!node.material)return;
+      const copy=source=>{if(copies.has(source))return copies.get(source);const material=sausageSkin.clone();
       material.onBeforeCompile=shader=>{
-        shader.uniforms.wurstPrint={value:wurstPrintTexture};shader.uniforms.wurstPrintCrop={value:wurstPrintCrop};shader.uniforms.wurstPrintFlip=wurstPrintFlip;shader.uniforms.wurstCurve={value:root===sausageFallback?new T.Vector3(.18,.45,0):new T.Vector3(.132,.31,.045)};
-        shader.vertexShader="varying float vWurstTip; varying vec2 vWurstPrint; varying float vWurstFace; uniform vec3 wurstCurve;\n"+shader.vertexShader.replace("#include <begin_vertex>","#include <begin_vertex>\nvWurstTip = smoothstep(0.45, 0.875, position.z);\nfloat centre = wurstCurve.x - wurstCurve.y * position.z * position.z - wurstCurve.z * position.z;\nvWurstPrint = vec2((0.63 - position.z) / 1.26, (position.x - centre) / 0.22 + 0.5); vWurstFace = -normal.y;");
-        shader.fragmentShader="varying float vWurstTip; varying vec2 vWurstPrint; varying float vWurstFace; uniform sampler2D wurstPrint; uniform vec2 wurstPrintCrop; uniform float wurstPrintFlip;\n"+shader.fragmentShader.replace("#include <color_fragment>","#include <color_fragment>\nvec2 printUV = mix(vWurstPrint, vec2(1.0) - vWurstPrint, wurstPrintFlip); vec4 ink = texture2D(wurstPrint, vec2(mix(wurstPrintCrop.x, wurstPrintCrop.y, printUV.x), printUV.y)); ink.a *= smoothstep(0.15, 0.45, vWurstFace) * step(0.0, vWurstPrint.x) * step(vWurstPrint.x, 1.0) * step(0.0, vWurstPrint.y) * step(vWurstPrint.y, 1.0);\ndiffuseColor.rgb = mix(diffuseColor.rgb, ink.rgb, ink.a);\ndiffuseColor.rgb = mix(diffuseColor.rgb, vec3(1.0, 0.005, 0.002), vWurstTip * 0.9);").replace("#include <emissivemap_fragment>","#include <emissivemap_fragment>\ntotalEmissiveRadiance += ink.rgb * ink.a * 0.25 + vec3(2.4, 0.005, 0.002) * vWurstTip;");
+        shader.uniforms.wurstPrint={value:wurstPrintTexture};shader.uniforms.wurstPrintCrop={value:wurstPrintCrop};shader.uniforms.wurstPrintFlip=wurstPrintFlip;shader.uniforms.wurstCurve={value:new T.Vector3(root===sausageFallback ? .018 : .0047344,.028,0)};
+        shader.vertexShader="varying float vWurstTip; varying vec2 vWurstPrint; varying float vWurstFace; varying vec2 vWurstSkin; uniform vec3 wurstCurve;\n"+shader.vertexShader.replace("#include <begin_vertex>","#include <begin_vertex>\nvWurstTip = smoothstep(0.62, 0.875, position.z);\nfloat centre = wurstCurve.x - wurstCurve.y * position.z * position.z - wurstCurve.z * position.z;\nvWurstPrint = vec2((0.72 - position.z) / 1.44, (position.x - centre) / 0.34 + 0.5); vWurstFace = -normal.y; vWurstSkin = position.xz * 90.0;");
+        shader.fragmentShader="varying float vWurstTip; varying vec2 vWurstPrint; varying float vWurstFace; varying vec2 vWurstSkin; uniform sampler2D wurstPrint; uniform vec2 wurstPrintCrop; uniform float wurstPrintFlip;\n"+shader.fragmentShader.replace("#include <color_fragment>","#include <color_fragment>\nfloat herb = step(0.985, fract(sin(dot(floor(vWurstSkin), vec2(12.9898, 78.233))) * 43758.5453)) * (1.0 - smoothstep(0.10, 0.30, length(fract(vWurstSkin) - 0.5)));\ndiffuseColor.rgb = mix(diffuseColor.rgb, vec3(0.24, 0.28, 0.10), herb * 0.45);\nvec2 printUV = mix(vWurstPrint, vec2(1.0) - vWurstPrint, wurstPrintFlip); vec4 ink = texture2D(wurstPrint, vec2(mix(wurstPrintCrop.x, wurstPrintCrop.y, printUV.x), printUV.y)); ink.a *= smoothstep(0.15, 0.45, vWurstFace) * step(0.0, vWurstPrint.x) * step(vWurstPrint.x, 1.0) * step(0.0, vWurstPrint.y) * step(vWurstPrint.y, 1.0);\ndiffuseColor.rgb = mix(diffuseColor.rgb, ink.rgb, ink.a);\ndiffuseColor.rgb = mix(diffuseColor.rgb, vec3(1.0, 0.005, 0.002), vWurstTip * 0.9);").replace("#include <emissivemap_fragment>","#include <emissivemap_fragment>\ntotalEmissiveRadiance += ink.rgb * ink.a * 0.25 + vec3(2.4, 0.005, 0.002) * vWurstTip;");
       };material.customProgramCacheKey=()=>"mission-sausage-printed-red-tip";copies.set(source,material);return material;
     };node.material=Array.isArray(node.material)?node.material.map(copy):copy(node.material)});
   }
@@ -434,17 +436,18 @@ function showRendererFailure(error){
   tipGradient.addColorStop(0,'rgba(255,35,15,.9)');tipGradient.addColorStop(.3,'rgba(255,0,0,.55)');tipGradient.addColorStop(1,'rgba(255,0,0,0)');tipCtx.fillStyle=tipGradient;tipCtx.fillRect(0,0,64,64);
   const tipTexture=new T.CanvasTexture(tipCanvas);tipTexture.colorSpace=T.SRGBColorSpace;
   const sausageTipGlow=new T.Sprite(new T.SpriteMaterial({map:tipTexture,transparent:true,blending:T.AdditiveBlending,depthWrite:false,toneMapped:false}));
-  sausageTipGlow.name='Red sausage tip glow';sausageTipGlow.position.set(-.13*1.65,.12*1.65,.83*.7);sausageTipGlow.scale.set(.5,.5,1);missionPointer.add(sausageTipGlow);
-  if(bridge.getMissionWaypoint)installCityModel(sausageBody,sausageFallback,"./assets/models/mission-sausage/sausage.glb",{x:.5,y:.24,z:1.75},bridge.player,glowSausageTip);
+  sausageTipGlow.name='Red sausage tip glow';sausageTipGlow.position.set(0,.12*1.65,.83*.7);sausageTipGlow.scale.set(.5,.5,1);missionPointer.add(sausageTipGlow);
+  if(bridge.getMissionWaypoint)installCityModel(sausageBody,sausageFallback,"./assets/models/mission-sausage/sausage.glb?v=20261011-weisswurst",{x:.5,y:.34,z:1.75},bridge.player,glowSausageTip);
   function showMissionPointer(visible){
-    missionPointer.visible=visible;
+    missionPointer.visible=visible&&missionGuide?.dataset.pointerFit!=='file';
     if(missionGuide&&missionGuide.hidden===visible){missionGuide.hidden=!visible;window.GermanyHUD?.refresh();if(visible)layoutMissionPointer()}
   }
   function layoutMissionPointer(){
     const rect=pointerSpace?.getBoundingClientRect(),size=rect?.width?Math.min(rect.width,rect.height):128;
     const x=rect?.width?(rect.left+rect.right)/2:innerWidth/2,top=rect?.width?rect.top:Math.max(document.querySelector('.hud')?.getBoundingClientRect().bottom||0,document.querySelector('.help')?.getBoundingClientRect().bottom||0)+8;
     missionPointer.position.set(x-innerWidth/2,innerHeight/2-top-size/2,0);
-    missionPointer.scale.setScalar(size/1.65);missionPointer.userData.screen={x,y:top+size/2,size};
+    missionPointer.scale.setScalar(size/1.65);missionPointer.userData.screen={x,y:top+size/2,size,fit:missionGuide?.dataset.pointerFit||'fit'};
+    if(missionPointer.userData.screen.fit==='file')missionPointer.visible=false;
     Object.assign(missionHudCamera,{left:-innerWidth/2,right:innerWidth/2,top:innerHeight/2,bottom:-innerHeight/2});missionHudCamera.updateProjectionMatrix();
   }
   function updateMissionPointer(){
@@ -1527,7 +1530,7 @@ function showRendererFailure(error){
         amtOmenSkipped=true;amtOmenFailure=error.message;console.warn("Bürgeramt omen keeps painted fallback",error);
       }).finally(()=>{if(amtOmenRequest===request)amtOmenRequest=null});
     }
-    const opacity=amtOmenSplat?.update(omen,actor.mesh,amtCamera,amtReducedMotion.matches)||0;
+    const opacity=amtOmenSplat?.update({...omen,lipSpeech:level.lipSpeech},actor.mesh,amtCamera,amtReducedMotion.matches)||0;
     // Representation ownership is binary. The volume gains/loses depth while
     // staying solid; fading both bodies would expose the room through their sum.
     actor.mesh.material.opacity=1;
@@ -1537,7 +1540,7 @@ function showRendererFailure(error){
   addEventListener("pagehide",()=>{amtMouthSplat?.dispose();amtMouthSplat=null},{once:true});
   function updateAmtMouth(level,now){
     const speech=level.lipSpeech,actor=speech?.actor&&([...amtMoving,...amtCharacters].find(item=>item.id===speech.actor||item.lipId===speech.actor||item.performance&&speech.actor==="clerk-"+item.counter));
-    if(!amtMouthSplat&&actor&&speech.active)amtMouthSplat=window.GermanyAmtLips.createPaintSplat(T);
+    if(!amtMouthSplat&&actor&&speech.active)amtMouthSplat=window.GermanyAmtLips.createPaintSplat(T,mouthPaintGlsl);
     amtMouthSplat?.update(actor||null,speech,now);
   }
   let lastCall="",amtHiDpi=false;
