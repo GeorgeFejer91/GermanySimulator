@@ -122,7 +122,13 @@
           400,
           774
         ]
-      }
+      },
+      "mouth_xywh": [
+        303,
+        132,
+        12,
+        8
+      ]
     },
     {
       "id": "bridge1",
@@ -200,7 +206,13 @@
           403,
           775
         ]
-      }
+      },
+      "mouth_xywh": [
+        297,
+        121,
+        12,
+        8
+      ]
     },
     {
       "id": "bridge2",
@@ -278,7 +290,13 @@
           405,
           766
         ]
-      }
+      },
+      "mouth_xywh": [
+        323,
+        104,
+        12,
+        8
+      ]
     },
     {
       "id": "bridge3",
@@ -356,7 +374,13 @@
           396,
           765
         ]
-      }
+      },
+      "mouth_xywh": [
+        322,
+        110,
+        12,
+        8
+      ]
     },
     {
       "id": "gesture",
@@ -433,7 +457,13 @@
           390,
           763
         ]
-      }
+      },
+      "mouth_xywh": [
+        309,
+        143,
+        12,
+        8
+      ]
     }
   ],
   "compatibility": "Ticket passes from anatomical right hand to left at bridge2 where both hands meet. At bridge3 right hand supports the folder and left holds ticket. This transfer changes ownership; preview only until ordered motion verifies release and receipt. Matched Gaussian correspondence must be reviewed through ordered playback; no unconstrained whole-body TPS.",

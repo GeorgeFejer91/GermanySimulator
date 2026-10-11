@@ -52,23 +52,57 @@ function createTrack(now=()=>performance.now()){
 }
 
 // Registered on the exact detail cells, in their native pixel coordinates.
-// Regular speech holds gesture paint; stationary voices hold their neutral pose.
+// Each displayed painting owns its registration. Mesh transforms are inherited.
 const mouths={
  clerk:[256/384,1-169/832,16/384,16/832],
- renter:[210/384,1-160/832,13/384,8/832],
- parent:[243/384,1-147/832,12/384,8/832],
- pensioner:[228/384,1-176/832,14/384,8/832],
- aktenkurier:[344/640,1-128/832,11/640,7/832],
- archivbotin:[264/640,1-121/832,14/640,8/832],
- formularsammler:[307/640,1-158/832,13/640,8/832],
- nummernfluesterer:[299/640,1-111/832,13/640,9/832],
- nachtschichtmelderin:[269/640,1-129/832,11/640,8/832],
- pfandarchitektin:[280/640,1-138/832,14/640,9/832],
- kopiependler:[252/640,1-128/832,12/640,8/832],
- warteschlangenpoetin:[254/640,1-150/832,12/640,8/832],
+ renter:[210/384,1-165/832,13/384,8/832],
+ parent:[249/384,1-151/832,12/384,8/832],
+ pensioner:[216/384,1-176/832,14/384,8/832],
 };
 mouths["clerk-left"]=mouths["clerk-middle"]=mouths.clerk;
 for(let i=1;i<=4;i++)mouths["clerk-"+i]=mouths.clerk;
+const posePixels={
+ clerk:[[256,169,16,16],[213,168,16,16],[273,201,16,16],[215,230,16,16],[213,168,16,16],[256,169,16,16]],
+ aktenkurier:[[350,123,11,8],[346,134,11,7],[290,112,10,7],[293,145,11,8]],
+ archivbotin:[[335,157,14,9],[264,125,14,8],[321,106,10,7],[312,137,13,8]],
+ formularsammler:[[346,160,13,9],[327,159,13,8],[303,148,12,8],[352,160,13,8]],
+ nummernfluesterer:[[303,135,12,8],[311,115,13,9],[337,96,10,7],[311,148,12,8]],
+ nachtschichtmelderin:[[320,145,11,8],[291,129,11,8],[342,115,10,7],[311,170,11,8]],
+ pfandarchitektin:[[312,144,13,9],[289,137,14,9],[315,111,11,8],[294,165,13,9]],
+ kopiependler:[[340,146,12,8],[279,128,12,8],[339,120,11,7],[265,181,12,8]],
+ warteschlangenpoetin:[[322,156,11,8],[265,150,12,8],[350,114,10,7],[305,181,12,8]],
+};
+for(const [id,poses] of Object.entries(posePixels))if(id!=='clerk'){
+ const [x,y,w,h]=poses[1];mouths[id]=[x/640,1-y/832,w/640,h/832];
+}
+function displayedMouth(actor){
+ const id=actor.lipId||actor.id||actor.name,key=actor.performance?'clerk':id;
+ // Unregistered rear/turn/walk paintings have no frontal oral patch. Restore
+ // the original mouth rather than projecting another pose's face onto them.
+ if(actor.mouthPose===null)return null;
+ const p=posePixels[key]?.[actor.mouthPose],w=actor.performance?384:640;
+ let rect=p?[p[0]/w,1-p[1]/832,p[2]/w,p[3]/832]:mouths[id]?.slice();
+ if(!rect||!actor.renderKey?.startsWith('atlas:'))return rect;
+ // Follow the same source-pixel fields used by the existing offline builders.
+ // Their phase is the displayed cell; no elapsed speech/body clock is added.
+ if(p&&!actor.performance){
+  const phase=2*Math.PI*(actor.mouthSample??0)/8,scale=455/512;
+  const sx=(rect[0]*640+135)/(2*scale),sy=((1-rect[1])*832+53)/(2*scale);
+  const a=1.1*Math.sin(phase+.5),y=(sy+a*410/350)/(1+a/350),upper=clamp((410-y)/350);
+  const x=sx+1.15*Math.sin(phase)*upper;
+  // The builder rounds atlas offsets (-68,-27) separately from detail (-135,-53).
+  rect[0]=(x*2*scale-136)/640;rect[1]=1-(y*2*scale-54)/832;
+ }else{
+  const index=actor.performance?(actor.frame%8)*8:actor.frame??0,phase=2*Math.PI*index/64;
+  const sway=({clerk:3.3,renter:4.5,parent:3.8,pensioner:2.7}[key]??3.3)*Math.sin(phase),nod=1.7*Math.sin(phase+.8),breath=.012*Math.sin(phase*2+.7);
+  const sx=rect[0]*192,sy=(1-rect[1])*416;let y=sy;
+  for(let n=0;n<6;n++)y=sy+nod*Math.exp(-(((y-74)/57)**2))+1.3*Math.sin(phase*2)*Math.exp(-(((y-185)/82)**2));
+  const chest=Math.exp(-(((y-185)/82)**2)),upper=clamp((400-y)/384)**1.35;
+  const x=96+(sx-96+sway*upper)*(1+breath*chest);
+  rect[0]=x/192;rect[1]=1-y/416;
+ }
+ return rect;
+}
 function installMask(T,actor){
  const material=actor.mesh.material,hole={value:0},rect={value:new T.Vector4()},compile=material.onBeforeCompile;
  material.userData.lipHole=hole;material.userData.lipRect=rect;
@@ -124,7 +158,7 @@ function createPaintSplat(T,paintGlsl){
    if(disposed)return;
    if(source!==actor){if(actor)actor.mesh.material.userData.lipHole.value=0;mesh.removeFromParent();shape.value.set(0,0,0,0);actor=source;if(actor)actor.mesh.add(mesh)}
    if(!actor){mesh.visible=false;return}
-   const registration=mouths[actor.lipId||actor.id||actor.name];
+   const registration=displayedMouth(actor);
    if(!registration||!actor.mesh.material.map?.image){mesh.visible=false;actor.mesh.material.userData.lipHole.value=0;return}
    const target=speech?.active?speech.shape:rest;
    // The cue sampler already coarticulates. Copy its playhead pose directly;
@@ -141,11 +175,11 @@ function createPaintSplat(T,paintGlsl){
    material.color.copy(actor.mesh.material.color);material.opacity=actor.mesh.material.opacity;material.depthTest=actor.mesh.material.depthTest;mesh.renderOrder=actor.mesh.renderOrder;
    mesh.layers.mask=actor.mesh.layers.mask;
   },
-  inspect(){return{actor:actor?.lipId||actor?.id||actor?.name||null,visible:mesh.visible,shape:shape.value.toArray(),kernels:count,layer:mesh.layers.mask,depthTest:material.depthTest,depthWrite:material.depthWrite}},
+  inspect(){return{actor:actor?.lipId||actor?.id||actor?.name||null,pose:actor?.mouthPose??null,rect:rect.value.toArray(),visible:mesh.visible,shape:shape.value.toArray(),kernels:count,layer:mesh.layers.mask,depthTest:material.depthTest,depthWrite:material.depthWrite}},
   dispose(){if(disposed)return;disposed=true;if(actor)actor.mesh.material.userData.lipHole.value=0;mesh.removeFromParent();geometry.dispose();material.dispose()},
  };
 }
 let recordingModule;
-const loadRecording=(path,sha)=>{recordingModule??=import('./buergeramt-lipsync.js?v=20261011-phone-illusion');return recordingModule.then(m=>m.resolveMouthTrack(path,sha))};
-global.GermanyAmtLips={createTrack,score,poseAt,mouths,installMask,createPaintSplat,loadRecording};
+const loadRecording=(path,sha)=>{recordingModule??=import('./buergeramt-lipsync.js?v=20261011-mouth-consistency');return recordingModule.then(m=>m.resolveMouthTrack(path,sha))};
+global.GermanyAmtLips={createTrack,score,poseAt,mouths,displayedMouth,installMask,createPaintSplat,loadRecording};
 })(typeof window!=="undefined"?window:globalThis);

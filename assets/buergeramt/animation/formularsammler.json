@@ -160,7 +160,13 @@
           555
         ]
       ],
-      "sha256": "3dbf2c77665aec509456b2ecebf66ad7d43cdf8c5cfecd234fcd08a97301f84e"
+      "sha256": "3dbf2c77665aec509456b2ecebf66ad7d43cdf8c5cfecd234fcd08a97301f84e",
+      "mouth_xywh": [
+        346,
+        160,
+        13,
+        9
+      ]
     },
     {
       "id": "bridge1",
@@ -315,7 +321,13 @@
           555
         ]
       ],
-      "sha256": "58e28759ecb4cede8cd7311039b3d1e165d73bc7fc89514edcb56a4c337ba056"
+      "sha256": "58e28759ecb4cede8cd7311039b3d1e165d73bc7fc89514edcb56a4c337ba056",
+      "mouth_xywh": [
+        343,
+        151,
+        13,
+        9
+      ]
     },
     {
       "id": "bridge2",
@@ -470,7 +482,13 @@
           554
         ]
       ],
-      "sha256": "42092a1b2a1f975a0ce3efbb4360c050d335b6abb0ab7baa107d757ab8f4c94b"
+      "sha256": "42092a1b2a1f975a0ce3efbb4360c050d335b6abb0ab7baa107d757ab8f4c94b",
+      "mouth_xywh": [
+        355,
+        157,
+        13,
+        9
+      ]
     },
     {
       "id": "bridge3",
@@ -617,7 +635,13 @@
           553
         ]
       ],
-      "sha256": "4d036bc67554a610048886d6479b5773fa7afa33a70f7c07f83cc76c5c4aadf6"
+      "sha256": "4d036bc67554a610048886d6479b5773fa7afa33a70f7c07f83cc76c5c4aadf6",
+      "mouth_xywh": [
+        362,
+        180,
+        13,
+        9
+      ]
     },
     {
       "id": "gesture",
@@ -763,7 +787,13 @@
           552
         ]
       ],
-      "sha256": "3dbf2c77665aec509456b2ecebf66ad7d43cdf8c5cfecd234fcd08a97301f84e"
+      "sha256": "3dbf2c77665aec509456b2ecebf66ad7d43cdf8c5cfecd234fcd08a97301f84e",
+      "mouth_xywh": [
+        360,
+        159,
+        13,
+        9
+      ]
     }
   ],
   "arcs": [

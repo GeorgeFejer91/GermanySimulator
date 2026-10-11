@@ -187,7 +187,7 @@ function updateOmen(dt){
  if(omen.phase==="blackout"||omen.phase==="glare")omen.revealTime+=dt;
  if(["walk-sign","waiting"].includes(stage))omen.roomTime+=dt;
  const actor=characters[0];
- if(options?.cinematics!==false&&!options?.cityAudioBusy?.()&&!officeSpeechBusy&&!feverClock?.inspect().active&&!omen.used&&omen.roomTime>1.2&&["walk-sign","waiting"].includes(stage)&&Math.hypot(actor.x-view.x,actor.z-view.z)<6.2){
+ if(options?.cinematics!==false&&window.Germany3D?.amtCinematicReady!==false&&!options?.cityAudioBusy?.()&&!officeSpeechBusy&&!feverClock?.inspect().active&&!omen.used&&omen.roomTime>1.2&&["walk-sign","waiting"].includes(stage)&&Math.hypot(actor.x-view.x,actor.z-view.z)<6.2){
   const path=omenPath(actor);
   if(!path)return; // A blocked room postpones the optional beat, never walks through a solid.
   omen.used=true;omen.phase="approach";omen.elapsed=0;omen.travel=0;omen.path=path;omen.pathIndex=1;omen.resume=stage;omen.resumeYaw=view.yaw;omen.startDistance=path.slice(1).reduce((sum,point,i)=>sum+Math.hypot(point[0]-path[i][0],point[1]-path[i][1]),0);actor.sequence=[];actor.pending=false;actor.returning=null;actor.priority=4;
@@ -377,11 +377,11 @@ function say(text,onComplete,onStart,onBoundary,delivery=null,voiceId="",allowCa
     const fallback=()=>{if(settled||!current())return;if(document.hidden){clearWatchdog();hiddenPaused=true;return}settled=true;lips.start("fallback");cleanup();player.pause();player.removeAttribute("src");player.load();recordedSpeech=null;officeSpeechBusy=false;delivery?.onFallback?.();say(text,onComplete,onStart,onBoundary,delivery,voiceId,false)};
     const stalled=()=>{const previous=lastProgressTime;progress();if(lastProgressTime===previous)fallback()};
     const start=()=>{if(settled||!current())return;if(!started){started=true;lastProgressTime=Number(player.currentTime)||0;lips.start("voice",player,mouthBinding);remaining=Math.max(20000,Number.isFinite(player.duration)?player.duration*1000+2000:20000);onStart?.("voice",{durationMs:player.duration*1000,recording:candidate,sha256:clip?.sha256,hasWordCues:marks.length>0})}else if(paused){paused=false;delivery?.onResume?.()}arm(remaining,stalled);progress();if(document.hidden)visibility()};
-    const play=()=>{if(!mouthReady)return;const serial=++playAttempt;player.play().catch(()=>{if(serial===playAttempt&&!document.hidden)fallback()})};
-    const visibility=()=>{if(settled||!current())return;if(document.hidden){playAttempt++;clearWatchdog();if(!player.paused){hiddenPaused=true;player.pause()}}else{if(!started)arm(startupMs,fallback);if(hiddenPaused){hiddenPaused=false;play()}}};
+    const play=()=>{if(!mouthReady)return;if(!started)arm(startupMs,fallback);const serial=++playAttempt;player.play().catch(()=>{if(serial===playAttempt&&!document.hidden)fallback()})};
+    const visibility=()=>{if(settled||!current())return;if(document.hidden){playAttempt++;clearWatchdog();if(!player.paused){hiddenPaused=true;player.pause()}}else{if(!started)arm(mouthReady?startupMs:20000,fallback);if(hiddenPaused){hiddenPaused=false;play()}}};
     player.onplaying=start;player.onended=finish;player.onerror=fallback;player.ontimeupdate=progress;
     player.onpause=()=>{if(!started||settled||paused||!current())return;paused=true;remaining=Math.max(0,due-performance.now());clearWatchdog();delivery?.onPause?.()};
-    recordedCleanup=cleanup;document.addEventListener("visibilitychange",visibility);arm(startupMs,fallback);
+    recordedCleanup=cleanup;document.addEventListener("visibilitychange",visibility);arm(20000,fallback);
     // Bind the unchanged MP3's analysis before its first sound. Late imports
     // cannot start a cancelled cue or replace a newer speaker's articulation.
     const loadMouth=window.GermanyAmtLips?.loadRecording;
@@ -798,11 +798,11 @@ function open(config){if(active)return;resetRegistration();resetTiming();hostVoi
 function clerkPerformance(){
  const names={idle:0,review:1,raise:2,stamp:3,deny:4,talk:5};
  let mode="idle";
- if(clerkSpeaking)mode="talk";
+ if(clerkSpeaking&&clerkAnimation){const state=clerkAnimation.state,pose=state.arc&&state.phase>=.5?state.toPose:state.pose;mode=({ready:'idle',raised:'raise',contact:'stamp',refusal:'deny'}[pose]||'idle')}
  else if(clerkAccent>0)mode=clerkBeat;
  else if(["counter","reply","cancelled","early","expired"].includes(stage))mode=stage==="cancelled"||stage==="early"||stage==="expired"?"deny":"review";
  else{const beat=clerkClock%9.2;mode=beat<2.6?"idle":beat<4.1?"review":beat<4.6?"raise":beat<4.95?"stamp":beat<6.1?"deny":"idle"}
- return{row:names[mode],frame:mode==="talk"?0:Math.floor(clerkClock*4+clerkPulse)%8,speaking:clerkSpeaking,animation:clerkAnimation?.state??null};
+ return{row:names[mode],frame:Math.floor(clerkClock*4+clerkPulse)%8,speaking:clerkSpeaking,animation:clerkAnimation?.state??null};
 }
 function captureKey(event){if(event.type==="keyup")held.delete(event.code);if(!active)return;if(event.type==="keydown"&&event.code==="KeyE"&&walking()){event.preventDefault();event.stopImmediatePropagation();if(!event.repeat)interact();return}if(!walking()||omen.phase)return;if(["KeyW","KeyA","KeyS","KeyD","KeyR","ArrowUp","ArrowDown","ArrowLeft","ArrowRight","ShiftLeft"].includes(event.code)){event.preventDefault();event.stopImmediatePropagation();if(event.type==="keydown")held.add(event.code);else held.delete(event.code)}}
 window.addEventListener("keydown",captureKey,true);window.addEventListener("keyup",captureKey,true);window.addEventListener("blur",()=>held.clear());

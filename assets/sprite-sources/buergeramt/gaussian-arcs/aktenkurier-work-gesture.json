@@ -121,7 +121,13 @@
           410,
           771
         ]
-      }
+      },
+      "mouth_xywh": [
+        350,
+        121,
+        11,
+        8
+      ]
     },
     {
       "id": "bridge1",
@@ -199,7 +205,13 @@
           414,
           777
         ]
-      }
+      },
+      "mouth_xywh": [
+        340,
+        120,
+        11,
+        8
+      ]
     },
     {
       "id": "bridge2",
@@ -277,7 +289,13 @@
           410,
           774
         ]
-      }
+      },
+      "mouth_xywh": [
+        315,
+        139,
+        11,
+        8
+      ]
     },
     {
       "id": "bridge3",
@@ -355,7 +373,13 @@
           386,
           768
         ]
-      }
+      },
+      "mouth_xywh": [
+        293,
+        140,
+        11,
+        8
+      ]
     },
     {
       "id": "gesture",
@@ -432,7 +456,13 @@
           386,
           766
         ]
-      }
+      },
+      "mouth_xywh": [
+        295,
+        145,
+        11,
+        8
+      ]
     }
   ],
   "compatibility": "Stamp remains in anatomical right hand and paper bundle in left throughout. Head turns and torso leans gradually. Matched Gaussian correspondence must be reviewed through ordered playback; no unconstrained whole-body TPS."

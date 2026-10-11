@@ -6,7 +6,7 @@
   "frontSplats": 33950,
   "rearSplats": 4988,
   "bytes": 1246016,
-  "sha256": "1cf67a21da2da7740714b8ae8abc0be17d59453fa996aa7c15ed4cefd805fe91",
+  "sha256": "eafe83bbb32a20ff8224039a6c1944c6f520413d782cf903e9423d71830303b3",
   "sources": {
     "assets/sprite-sources/buergeramt/aktenkurier/gesture.png": "87bca7b85dcd2bbb9842227facb701a2d8882f6eb33da8ba06425622a8574f77",
     "assets/sprite-sources/buergeramt/aktenkurier/up.png": "211b5659f6e345bcfaf35cf26f48ae14de1db4d85dd4f96ac1757aa2e95bfb88",
@@ -36,12 +36,12 @@
     [
       -0.34747597575187683,
       0.08127404004335403,
-      -0.15399999916553497
+      -0.15398603677749634
     ],
     [
       0.3451201915740967,
       1.8598798513412476,
-      0.22499999403953552
+      0.22488339245319366
     ]
   ],
   "maxSigma": [
@@ -59,6 +59,12 @@
     "upperBody": 2,
     "lowerBody": 3,
     "rear": 5
+  },
+  "depthSmoothingSigmaPixels": 1.6,
+  "xySigmaSpacing": {
+    "face": 0.65,
+    "body": 0.68,
+    "rear": 0.7
   },
   "validation": "finite positive scales; count/byte bounds; exact source-pixel XY/RGBA; front/rear sign; deterministic bytes",
   "limitations": "Rear paint is row-registered approximation; no full orbit, articulated limbs, learned reconstruction or browser-performance claim."

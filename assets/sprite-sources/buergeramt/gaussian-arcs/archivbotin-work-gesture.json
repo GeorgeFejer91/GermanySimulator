@@ -121,7 +121,13 @@
           405,
           777
         ]
-      }
+      },
+      "mouth_xywh": [
+        335,
+        157,
+        14,
+        9
+      ]
     },
     {
       "id": "bridge1",
@@ -199,7 +205,13 @@
           412,
           776
         ]
-      }
+      },
+      "mouth_xywh": [
+        330,
+        134,
+        14,
+        9
+      ]
     },
     {
       "id": "bridge2",
@@ -277,7 +289,13 @@
           403,
           775
         ]
-      }
+      },
+      "mouth_xywh": [
+        333,
+        120,
+        14,
+        9
+      ]
     },
     {
       "id": "bridge3",
@@ -355,7 +373,13 @@
           414,
           774
         ]
-      }
+      },
+      "mouth_xywh": [
+        331,
+        122,
+        14,
+        9
+      ]
     },
     {
       "id": "gesture",
@@ -432,7 +456,13 @@
           404,
           775
         ]
-      }
+      },
+      "mouth_xywh": [
+        312,
+        137,
+        14,
+        9
+      ]
     }
   ],
   "compatibility": "Open ledger closes and is hugged by anatomical right arm while keys stay in left hand. Book closure changes occlusion; inspect sampled intermediate paint. Matched Gaussian correspondence must be reviewed through ordered playback; no unconstrained whole-body TPS."

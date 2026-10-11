@@ -697,8 +697,8 @@ The earlier texture-shift mouth caused visible lip vibration without an oral
 opening. `buergeramt-mouth-paint.js` now separates the original painted lips
 and lower jaw around a bounded, recessed mouth cavity. Native whole-body
 Gaussian paint and the 425-kernel atlas fallback use the same shader function.
-Main mouth centres/radii are registered to the encoded paintings; bridges carry
-their calibrated offsets through existing facial landmarks. Eyes, props, actor
+Mouth centres/radii are registered to each encoded painting, including native
+bridge keys. Eyes, props, actor
 roots, body bounds, movement, floor pivots and depth ownership stay authored.
 Inactive speech returns the original painting. The existing 96-kernel omen
 mouth consumes the Aktenkurier's owned shape, including browser fallback.
@@ -718,6 +718,118 @@ hardware acoustic latency. Phonetic shapes remain estimates. Installed Whisper
 independently decoded all existing recordings without prompting; its diagnostic
 errors do not rewrite approved catalogue word marks, dialogue or voices. Dynamic
 browser speech and optional unanalyzed preview clips retain estimated timing.
+**Mouth/render consistency repair (2026-10-11).** `loadAmtSplatModule` supplies
+one current, versioned module identity to ordinary office actions and the
+Aktenkurier encounter. The nested mouth sampler, cue data and relief asset have
+current cache keys as well. Preparation has priority within the existing two-job
+queue and survives earlier character conversations, registration and waiting.
+The optional automatic encounter waits for preparation to settle before taking
+control; genuine failure releases it to the articulated painting. The same
+visit/generation cancellation and sorted-body handover remain authoritative.
+Recorded cue preparation has a separate 20-second bounded deadline; the
+native playback-start watchdog (four seconds for Knick, 1.8 for other voices)
+begins when the recording can play.
+Slow cue import therefore cannot prematurely select browser speech.
+
+The low-resolution fallback cloud's tiny lip displacement and guessed frame
+cycle are retired. During speech, absent native mouth paint retains the original
+sprite with its full-opening Gaussian paint rig. Ready native frames use the
+shared oral-cavity shader and recorded playhead shapes. The omen relief smooths
+depth over 1.6 detail pixels inside the source silhouette and slightly increases
+XY Gaussian overlap (face .65, body .68 times spacing). Exact source XY/RGBA,
+38,938 body records, 96 oral kernels, transfer size, pivots, scene timing and
+collision remain unchanged. This is a small authored relief repair, not a new
+model or asset pipeline. Source/CPU, supplied/fresh rendered, emulated-device
+and listening evidence remain separate.
+
+**Mouth registration through changing poses (2026-10-11).** Speech no longer
+pins sprites to a talk cell while native Gaussian bodies advance. The speaking
+clerk's fallback row follows the same requested ready/raised/contact/refusal
+action; moving patrons retain their displayed action row/sample. The oral patch
+selects the exact work/gesture/look/flinch or clerk detail registration alongside
+that crop, and transports it through the existing baked idle field on atlas
+cells. Its parent supplies camera-facing rotation, position, scale, layers and
+breath. Native mouths articulate both source paintings before their shared
+paired transport. All 67 native keys own `mouth_xywh` oral-crease coordinates in
+their existing source specifications and compiled animation manifests; the clerk
+builder carries them from its anchor/handoff specifications. Nose/chin and
+filename guesses are retired. Authored key times still own transport timing.
+Here x/y are the oral-crease centre in top-left source pixels and w/h are the
+oral patch's half extents, matching `amtMouthPaint`'s normalized source UVs.
+Native paint and clouds also retain host nonuniform
+scale without restarting their action or media clocks.
+
+Current authored lines finish before walking, rear views and the departure turn:
+E dialogue first parks a moving actor in gesture, and its completion schedules
+return only after `lips.finish`; the omen turn follows actual speech completion,
+glare and unwind. Those unregistered hidden-mouth views keep their original
+paint instead of receiving a previous frontal rectangle. New speaking walk or
+profile art would require its own registered source poses. This is coverage for
+the current office, not a general reconstructed face rig. The project and
+installed `animate-2d-characters` skill now describe pose registration, shared
+ownership, capture-time accuracy and native/fallback transformation checks; its
+portable synthetic speech cue is explicitly distinguished from full lip sync.
+
+**Consistency acceptance.** Independent Physics and Camera reviews accept the
+affected office runtime on tree `bfa5efa2d94a9e1d6ea9f0ad19a7b92426648be1`
+(base `95f17de`, retaining the published R running shortcut). Physics passes
+34/34 final movement/lip/input checks; Camera passes 22/22 focused checks.
+The source matrix validates all 67 native mouth registrations and preserves the
+other state, arc and source-hash data in all 12 compiled manifests. The complete
+native clerk browser receipt covers 36 key/midpoint frames through raise, stamp,
+refuse and return, with planted feet, visible native mouths and zero page errors
+or console errors. Both reviewers inspect those supplied rendered frames.
+Native moving-cast batches supply additional reviewed images, but their later
+wait timeouts mean they are not completed all-cast receipts.
+
+The atlas fixture completes all 15 actors on desktop and portrait Android
+emulation, with zero page or console errors, including full-opening, rounded,
+closed and transformed action poses. Its first desktop capture precedes the
+final three stationary default registrations; their corrected pose-only rerun
+completes desktop and portrait (three actors each, zero page/console errors),
+with rendered faces separately accepted by Camera. The actual Aktenkurier MP3 desktop receipt
+passes delayed preparation, earlier-conversation lifetime, pause/playhead
+ownership and single-module identity with zero page errors; its 19 browser
+warnings include fullscreen gesture, unused preload, shader compiler and
+optional WebSocket notices, so this is not a clean-console claim.
+
+The unchanged atlas mouth costs one draw and 850 triangles with no added
+texture in the paired frozen-scene probe. The relief retains its record count
+and transfer size, and its builder reproduces the shipped binary. Fresh broad
+browser batches and the first benchmark attempt also record startup timeouts;
+partial runs are retained as such, not counted as passing cases. Evidence is in
+ignored `output/consistency/`, including `native-clerk-final/`,
+`registered-transforms-fallback/`, `stationary-pose-final/`,
+`recorded-current/` and source/test logs. These are silent local Chrome checks;
+physical Android, natural mission traversal, listening, hardware audio latency
+and measured German phoneme accuracy remain NOT RUN. Brief source-paint
+midpoints retain the existing paired Gaussian morph's face softening.
+
+The publication candidate integrates the already published voice/phone update
+`8e2570c`: its 53 exact-hash mouth tracks retain 36 prior recordings and add
+17 selected-profile Knick recordings after five retired files are removed.
+The selected voice and captions-only missing-recording policy stay authoritative.
+Cue preparation keeps its separate 20-second deadline; playback uses the
+character's native-start deadline and renews a stall deadline only on real
+media progress. The mouth/body renderer, registrations, pivots and relief
+remain the independently accepted bytes. Synthetic shape probes override the
+missing-recording policy only inside the test fixture, then restore the actual
+production catalogue for native-media checks. The final office script cache
+identity is `20261011-mouth-transforms`; both Gaussian consumers retain the
+single current `loadAmtSplatModule` identity.
+The complete merged local suite passes 495/495. Independent speech integration
+checks pass 106/106 (Physics) and 101/101 (Camera); both confirm unchanged
+mouth/body renderer and registered-paint assets. The merged desktop clerk
+fixture completes transformed synthetic shapes, retained selected-profile
+native playback, opaque occlusion and live Spark handover with zero page or
+console errors (`merged-clerk-final/`).
+The targeted new `knick-registration-presence.mp3` receipt also completes with
+15 actual-playhead samples, exact catalogue selection and zero page/console
+errors (`merged-new-knick/`). Portrait Android emulation completes the actual
+Aktenkurier MP3, delayed-loading walk, prior-conversation lifetime and pause
+checks with zero page errors (`merged-recorded-mobile/`). These remain scripted
+silent media checks; they do not establish perceptual or physical-device claims.
+
 The shared builder replaces the earlier omen-only 50 Hz/55 ms implementation
 described in the historical articulation record. Reproduction, pinned tool
 versions and limits are in `assets/buergeramt/speech/PROVENANCE.md`.

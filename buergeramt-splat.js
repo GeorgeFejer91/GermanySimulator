@@ -1,5 +1,5 @@
 // Gaussian rendering shares the existing scene clock and render pass.
-import {sampleOmenMouth} from './buergeramt-lipsync.js?v=20261011-acoustic-mouth';
+import {sampleOmenMouth} from './buergeramt-lipsync.js?v=20261011-mouth-consistency';
 const clamp=value=>Math.max(0,Math.min(1,value));
 const TUNNEL_RINGS=32,TUNNEL_AROUND=96;
 const MOUTH_SPLATS=96;
@@ -116,7 +116,7 @@ export async function createOmenSplat({THREE,renderer,scene,signal,owner:sharedO
   try{signal?.throwIfAborted()}catch(error){if(!sharedOwner)await owner.dispose();throw error}
   let bytes,count;
   try{
-    const response=await fetch(new URL('./assets/buergeramt/omen/aktenkurier.splat',import.meta.url),{signal});
+    const response=await fetch(new URL('./assets/buergeramt/omen/aktenkurier.splat?v=20261011-mouth-consistency',import.meta.url),{signal});
     if(!response.ok)throw new Error('Omen splat unavailable');
     bytes=await response.arrayBuffer();count=bytes.byteLength/32;
     if(!Number.isInteger(count)||count<1||count>40000-MOUTH_SPLATS)throw new Error('Invalid omen splat size');

@@ -4,7 +4,10 @@ import {readFileSync,mkdirSync,writeFileSync} from 'node:fs';
 import assert from 'node:assert/strict';
 import {createHash} from 'node:crypto';
 const nativePaint=process.env.PLAYTEST_NATIVE_PAINT==='1';
-const revision=Object.fromEntries(['buergeramt.js','world3d.js','buergeramt-lips.js','buergeramt-lipsync.js','buergeramt-mouth-paint.js','buergeramt-splat.js','buergeramt-gaussian-scene.js','buergeramt-painted-anchor.js','assets/buergeramt/speech/mouth-cues.js'].map(f=>[f,createHash('sha256').update(readFileSync(f)).digest('hex')]));
+const transforms=process.env.PLAYTEST_TRANSFORMS==='1';
+const poseOnly=process.env.PLAYTEST_POSE_ONLY==='1';
+const nativeIds=['clerk','aktenkurier','archivbotin','formularsammler','nummernfluesterer','nachtschichtmelderin','pfandarchitektin','kopiependler','warteschlangenpoetin','renter','parent','pensioner'];
+const readRevision=()=>Object.fromEntries(['buergeramt.js','world3d.js','buergeramt-lips.js','buergeramt-lipsync.js','buergeramt-mouth-paint.js','buergeramt-splat.js','buergeramt-gaussian-scene.js','buergeramt-painted-anchor.js','assets/buergeramt/speech/mouth-cues.js',...nativeIds.map(id=>'assets/buergeramt/animation/'+id+'.json')].map(f=>[f,createHash('sha256').update(readFileSync(f)).digest('hex')]));
 const {chromium}=createRequire(import.meta.url)(process.env.PLAYWRIGHT_MODULE||'playwright');
 const output=process.env.PLAYTEST_OUTPUT||'output/lip-motion/review';mkdirSync(output,{recursive:true});
 const browser=await chromium.launch({headless:true,executablePath:process.env.CHROMIUM_PATH,args:['--mute-audio']});
@@ -17,8 +20,8 @@ async function faceClip(page,id){
   if(nativePaint){
    const entry=Germany3D.amtGaussian.actors.find(a=>a.anchor?.visible&&(a.id===id||a.id===actor.id||id===actor.lipId));
    const manifest=await(await fetch('./assets/buergeramt/animation/'+entry.manifestId+'.json')).json();
-   const {nativeMouthRect}=await import('./buergeramt-mouth-paint.js?v=20261011-acoustic-mouth');rect=nativeMouthRect(manifest,entry.anchor.state);aspect=manifest.canvas_xy[0]/manifest.canvas_xy[1];
-  }else rect=GermanyAmtLips.mouths[actor.lipId||actor.id||actor.name];
+   const {nativeMouthRect}=await import('./buergeramt-mouth-paint.js?v=20261011-mouth-consistency');rect=nativeMouthRect(manifest,entry.anchor.state);aspect=manifest.canvas_xy[0]/manifest.canvas_xy[1];
+  }else rect=GermanyAmtLips.displayedMouth(actor);
   const points=[];
   for(const x of [-3,3])for(const y of [-3,3]){
    const p=new T.Vector3((rect[0]+x*rect[2]-.5)*height*aspect,(rect[1]+y*rect[3]-.5)*height,0);
@@ -30,6 +33,7 @@ async function faceClip(page,id){
 }
 try{
  for(const [name,width,height] of [['desktop',1280,800],['android-portrait',390,844],['android-landscape',844,390],['reduced-motion',1280,800],['asset-failure',1280,800]].filter(([name])=>!process.env.PLAYTEST_VIEWPORT||process.env.PLAYTEST_VIEWPORT.split(',').includes(name))){
+  const revision=readRevision();
   const context=await browser.newContext({viewport:{width,height},isMobile:name.startsWith('android'),hasTouch:name.startsWith('android'),reducedMotion:name==='reduced-motion'?'reduce':'no-preference',...(process.env.PLAYTEST_VIDEO&&name==='desktop'?{recordVideo:{dir:output+'/video',size:{width,height}}}:{})});
   await context.addInitScript(()=>{
    const play=HTMLMediaElement.prototype.play;HTMLMediaElement.prototype.play=function(...args){this.muted=true;this.volume=0;return play.apply(this,args)};
@@ -41,32 +45,39 @@ try{
   await page.route('**/buergeramt-lips.js?*',route=>route.fulfill({contentType:'text/javascript',body:readFileSync('buergeramt-lips.js','utf8').replace('createTrack(now=()=>performance.now())','createTrack(now=()=>window.lipFixtureTime??performance.now())')}));
   await page.route('**/buergeramt.js?*',route=>route.fulfill({contentType:'text/javascript',body:readFileSync('buergeramt.js','utf8').replace('requestAnimationFrame(()=>{if(current()&&!settled)','queueMicrotask(()=>{if(current()&&!settled)').replace(/\}\)\(\);\s*$/,'window.__lipProbe={content,view,setStage,characters,cancelSpeech,showCharacter,beginOmen,resetOmen,omen,get options(){return options}};})();')}));
   await page.route('**/world3d.js?*',route=>route.fulfill({contentType:'text/javascript',body:readFileSync('world3d.js','utf8').replace('updateAmtMouth(level,now);','updateAmtMouth(level,window.lipFixtureRenderTime??now);').replace('window.Germany3D={ready:true,','window.__lipRender={scene:amtScene,camera:amtCamera,renderer,amtMoving,amtCharacters};window.Germany3D={ready:true,')}));
-  if(name==='asset-failure')await page.route('**/omen/aktenkurier.splat',route=>route.abort('failed'));
-  await page.goto((process.env.GAME_URL||'http://127.0.0.1:8876/index.html')+'?geheim=buergeramt&voicePreview=1',{waitUntil:'domcontentloaded',timeout:90000});
+  if(name==='asset-failure')await page.route('**/omen/aktenkurier.splat*',route=>route.abort('failed'));
+  await page.goto((process.env.GAME_URL||'http://127.0.0.1:8876/index.html')+'?geheim=buergeramt&voicePreview=1',{waitUntil:'commit',timeout:45000});
   try{await page.waitForFunction(()=>window.Germany3D?.ready&&window.BuergeramtLevel?.active&&Germany3D.officeAssetsReady,null,{timeout:90000})}
   catch(error){console.log(await page.evaluate(()=>({level:!!window.BuergeramtLevel,active:window.BuergeramtLevel?.active,renderer:window.Germany3D?.ready,lips:!!window.GermanyAmtLips,status:window.Germany3D?.officeAssetStatus})));throw error}
   console.log(name,'ready');
-  await page.evaluate(nativePaint=>{
-   window.lipOriginalCatalog=GermanySimulatorAudioText;window.GermanySimulatorAudioText={...GermanySimulatorAudioText,candidateClip:()=>null};
+  await page.evaluate(({nativePaint,transforms})=>{
+   window.lipTransformOverrides={};
+   window.lipOriginalCatalog=GermanySimulatorAudioText;
+   // Synthetic shape probes explicitly bypass Knick's captions-only missing
+   // recording policy. The real-media pass restores the production catalogue.
+   const clerkVoice=BuergeramtStory.clerkIdentity.voiceId;
+   window.lipControlledCatalog={...lipOriginalCatalog,recordedClip:()=>null,candidateClip:()=>null,productionVoices:{...lipOriginalCatalog.productionVoices,[clerkVoice]:{...lipOriginalCatalog.productionVoices?.[clerkVoice],fallback:'browser'}}};
+   window.GermanySimulatorAudioText=lipControlledCatalog;
    // This fixture checks the atlas fallback; active native Gaussian paint has
    // its own production-scene fixture. Disable only admission in this context.
    const nativeCharacters=Object.getOwnPropertyDescriptor(BuergeramtLevel,'characters').get,nativeClerk=Object.getOwnPropertyDescriptor(BuergeramtLevel,'clerkPerformance').get;
    if(!nativePaint){
     // A work-mode actor synthesizes its own native work anchor; select the
     // frozen gesture fallback so a null animation actually prevents admission.
-    Object.defineProperty(BuergeramtLevel,'characters',{get:()=>nativeCharacters().map(a=>({...a,mode:'gesture',animation:null}))});
-    Object.defineProperty(BuergeramtLevel,'clerkPerformance',{get:()=>({...nativeClerk(),animation:null})});
+    Object.defineProperty(BuergeramtLevel,'characters',{get:()=>nativeCharacters().map(a=>({...a,mode:lipTransformOverrides[a.id]?.mode??'gesture',animation:null}))});
+    Object.defineProperty(BuergeramtLevel,'clerkPerformance',{get:()=>({...nativeClerk(),row:lipTransformOverrides.clerk?.row??nativeClerk().row,animation:null})});
     Object.defineProperty(BuergeramtLevel,'stationaryAnimations',{get:()=>({})});
    }else{
     // Hold native work anchors for this articulation fixture. Natural body
     // admission and return arcs are covered by the separate scene playtest.
     const stationary=Object.getOwnPropertyDescriptor(BuergeramtLevel,'stationaryAnimations').get;
-    Object.defineProperty(BuergeramtLevel,'stationaryAnimations',{get:()=>Object.fromEntries(Object.entries(stationary()).map(([id,state])=>[id,{...state,arc:null,pose:id.startsWith('clerk-desk')?'ready':'work'}]))});
-    Object.defineProperty(BuergeramtLevel,'clerkPerformance',{get:()=>{const state=nativeClerk();return{...state,animation:{...state.animation,arc:null,pose:'ready',phase:1}}}});
+    Object.defineProperty(BuergeramtLevel,'characters',{get:()=>nativeCharacters().map(a=>({...a,mode:transforms?'gesture':a.mode,animation:lipTransformOverrides[a.id]??(transforms?{...a.animation,arc:null,pose:'work',phase:1}:a.animation)}))});
+    Object.defineProperty(BuergeramtLevel,'stationaryAnimations',{get:()=>Object.fromEntries(Object.entries(stationary()).map(([id,state])=>[id,lipTransformOverrides[id]??{...state,arc:null,pose:id.startsWith('clerk-desk')?'ready':'work'}]))});
+    Object.defineProperty(BuergeramtLevel,'clerkPerformance',{get:()=>{const state=nativeClerk();return{...state,row:lipTransformOverrides.clerk?.row??0,animation:lipTransformOverrides.clerk??{...state.animation,arc:null,pose:'ready',phase:1}}}});
    }
    window.lipOriginalUpdate=BuergeramtLevel.update;BuergeramtLevel.update=()=>{};__lipProbe.options.voiceOn=()=>true;window.lipFixtureTime=0;window.lipFixtureRenderTime=performance.now();__lipProbe.setStage('character');
    window.lipActorOrigins=__lipProbe.characters.map(a=>({id:a.id,x:a.x,z:a.z}));
-  },nativePaint);
+  },{nativePaint,transforms});
   const actors=await page.evaluate(()=>[...__lipRender.amtMoving.map(a=>a.id),...__lipRender.amtCharacters.map(a=>a.performance?a.lipId:a.id)]);
   if(process.env.PLAYTEST_ACTOR)for(let i=actors.length-1;i>=0;i--)if(!process.env.PLAYTEST_ACTOR.split(',').includes(actors[i]))actors.splice(i,1);
   if(process.env.PLAYTEST_OMEN_ONLY)actors.length=0;
@@ -112,6 +123,31 @@ try{
    });
    await page.screenshot({path:`${output}/${name}-${id}-open.png`});
    const face=await faceClip(page,id);await page.screenshot({path:`${output}/${name}-${id}-face-open.png`,clip:face});
+   const transformationFrames=[];
+   if(transforms){
+    const metadata=await page.evaluate(id=>{const a=[...__lipRender.amtMoving,...__lipRender.amtCharacters].find(a=>a.id===id||a.lipId===id),moving=__lipRender.amtMoving.includes(a);return{key:a.performance&&a.lead?'clerk':a.animationId??a.id,manifestId:a.performance?'clerk':moving?a.id:a.name,performance:!!a.performance,moving}},id);
+    let steps=nativePaint?metadata.performance?
+     ['raise','stamp','refuse','return'].flatMap(arc=>[0,.5,1].map(phase=>({arc,phase}))):[0,.25,.5,.75,1].map(phase=>({arc:'work-gesture-work',phase})):
+     metadata.performance?[0,1,2,3,4].map(row=>({row})):metadata.moving?['work','gesture','look','flinch'].map(mode=>({mode})):[];
+    if(nativePaint&&process.env.PLAYTEST_ALL_KEYS==='1'){
+     const manifest=JSON.parse(readFileSync('assets/buergeramt/animation/'+metadata.manifestId+'.json'));
+     steps=manifest.arcs.flatMap(arc=>[0,...arc.segments.flatMap(s=>[(s.start+s.end)/2,s.end])].map(time=>({arc:metadata.performance?arc.id:'work-gesture-work',phase:time/arc.duration*(metadata.performance?1:.5)})));
+    }
+    for(const [number,step] of steps.entries()){
+     await page.evaluate(({key,step})=>{lipTransformOverrides[key]={generation:BuergeramtLevel.clerkPerformance.animation?.generation??0,actionId:1,pose:key.startsWith('clerk')?'ready':'work',...step};Germany3D.sync()}, {key:metadata.key,step});
+     if(nativePaint)await page.waitForFunction(({key,step})=>{Germany3D.sync();const a=Germany3D.amtGaussian.actors.find(a=>a.id===key);return a?.anchor?.visible&&a.anchor.technique==='native-texture-gaussians'&&a.anchor.lipShape[0]>.75&&!a.anchor.pending}, {key:metadata.key,step},{timeout:90000});
+     const target=await page.evaluate(()=>Germany3D.amtGaussian.owner?.activeSplats>0?Germany3D.amtGaussian.owner.startedUpdates+2:NaN);
+     if(Number.isFinite(target))await page.waitForFunction(target=>{Germany3D.sync();return Germany3D.amtGaussian.owner.completedUpdates>=target},target,{timeout:45000});
+     else await page.evaluate(()=>new Promise(resolve=>requestAnimationFrame(()=>{Germany3D.sync();requestAnimationFrame(()=>{Germany3D.sync();resolve()})})));
+     const frame=await page.evaluate(id=>{const a=[...__lipRender.amtMoving,...__lipRender.amtCharacters].find(a=>a.id===id||a.lipId===id);return{speech:BuergeramtLevel.lipSpeech,registration:GermanyAmtLips.displayedMouth(a),crop:a.renderKey,foot:a.mesh.position.y-a.mesh.geometry.parameters.height*a.mesh.scale.y/2,gaussian:Germany3D.amtGaussian}},id);
+     assert.equal(frame.foot,0);assert(frame.speech.shape[0]>.75);assert(frame.registration?.every(Number.isFinite));
+     await page.screenshot({path:`${output}/${name}-${id}-transform-${number}.png`});
+     const crop=await faceClip(page,id);await page.screenshot({path:`${output}/${name}-${id}-transform-face-${number}.png`,clip:crop});
+     transformationFrames.push({step,frame});
+    }
+    await page.evaluate(key=>{delete lipTransformOverrides[key];Germany3D.sync()},metadata.key);
+    await page.waitForTimeout(200);
+   }
    await page.evaluate(()=>{lipTestSpeech.onresume?.();lipTestSpeech.onboundary({charIndex:5});window.lipFixtureTime+=35;window.lipFixtureRenderTime+=100;Germany3D.sync();lipTestSpeech.onpause?.()});await page.waitForTimeout(120);
    await page.evaluate(()=>{Germany3D.sync();lipTestSpeech.onpause?.();Germany3D.sync()});
    const bite=await page.evaluate(()=>BuergeramtLevel.lipSpeech);assert(bite.shape[3]>.75);
@@ -135,22 +171,25 @@ try{
    await page.screenshot({path:`${output}/${name}-${id}-face-closed.png`,clip:face});
    await page.evaluate(()=>{lipTestSpeech.onend?.();Germany3D.sync()});
    assert.equal(await page.evaluate(()=>Germany3D.amtLipSplat.actor),null);
-   snapshots.push({id,open,bite,round,closed,face});
+   snapshots.push({id,open,bite,round,closed,face,transformationFrames});
+   writeFileSync(`${output}/${name}-progress.json`,JSON.stringify({name,nativePaint,silent:true,complete:false,revision,snapshots,errors,warnings},null,2));
    console.log(name,id,'PASS');
   }
-  if(nativePaint){
+  if(nativePaint||poseOnly){
    await page.evaluate(()=>{BuergeramtLevel.update=lipOriginalUpdate;document.getElementById('amt-leave').click();Germany3D.sync()});
    assert.equal(await page.evaluate(()=>Germany3D.amtGaussian.actors.length),0);assert.deepEqual(errors,[]);
-   reports.push({name,nativePaint,silent:true,physicalAndroid:false,forcedDialogue:true,stationaryWorkAnchors:true,revision,snapshots,errors,warnings});
+   reports.push({name,nativePaint,poseOnly,silent:true,physicalAndroid:false,forcedDialogue:true,stationaryWorkAnchors:true,revision,snapshots,errors,warnings});
    await context.close();writeFileSync(`${output}/results.json`,JSON.stringify(reports,null,2));console.log(JSON.stringify({name,result:'PASS',nativePaint,actors:actors.length,errors}));continue;
   }
   // Native MP3 plays normally: do not seek or substitute a wall clock.
   const nativeWindow={start:await page.evaluate(()=>performance.now()/1000)};
-  await page.evaluate(()=>{
+  await page.evaluate(recordingPath=>{
    window.lipFixtureTime=null;window.lipFixtureRenderTime=null;window.GermanySimulatorAudioText=lipOriginalCatalog;
    const a=__lipRender.amtCharacters[0];__lipProbe.view.x=a.mesh.position.x;__lipProbe.view.z=a.mesh.position.z+1.6;
-   __lipProbe.content('FRAU KNICK',BuergeramtStory.clerk[0].line);Germany3D.sync();
-  });
+   const text=recordingPath?lipOriginalCatalog.recordings[recordingPath]?.source:BuergeramtStory.clerk[0].line;
+   if(!text)throw Error('No catalogued source for recording probe');
+   __lipProbe.content('FRAU KNICK',text);Germany3D.sync();
+  },process.env.PLAYTEST_RECORDING||null);
   await page.waitForFunction(()=>BuergeramtLevel.lipSpeech.mode==='recorded',null,{timeout:15000});
   const mediaTrace=await page.evaluate(async()=>{
    const trace=[];for(let i=0;i<40;i++){const sample=BuergeramtLevel.lipSpeech;if(sample.mode!=='recorded')break;trace.push(sample);if(sample.time-trace[0].time>=1.1)break;await new Promise(r=>setTimeout(r,120))}return trace;
@@ -159,13 +198,14 @@ try{
   assert(mediaTrace.at(-1).time>mediaTrace[0].time+.8);
   assert(mediaTrace.some(s=>s.shape[0]>.5)&&mediaTrace.some(s=>s.shape[0]<.01),'real speech contains both an audible opening and a closure');
   assert(mediaTrace.every(s=>s.timing==='audio-cues'),'the approved MP3 must use its acoustic binding');
+  if(process.env.PLAYTEST_RECORDING)assert(mediaTrace.every(s=>s.recording===process.env.PLAYTEST_RECORDING),'recording probe keeps its exact catalogue selection');
   nativeWindow.end=await page.evaluate(()=>performance.now()/1000);
   await page.screenshot({path:`${output}/${name}-recorded-clerk.png`});
   await page.evaluate(()=>__lipProbe.cancelSpeech());
   // A real opaque blocker must occlude the mouth with its source actor.
   const occlusion=await page.evaluate(async()=>{
    const T=await import('https://cdn.jsdelivr.net/npm/three@0.186.0/build/three.module.js');
-   window.GermanySimulatorAudioText={...lipOriginalCatalog,candidateClip:()=>null};__lipProbe.content('FRAU KNICK','Mama');
+   window.GermanySimulatorAudioText=lipControlledCatalog;__lipProbe.content('FRAU KNICK','Mama');
    await new Promise(r=>setTimeout(r,35));lipTestSpeech.onpause();Germany3D.sync();
    const a=__lipRender.amtCharacters[0],wall=new T.Mesh(new T.PlaneGeometry(.9,1),new T.MeshBasicMaterial({color:0x2560a0}));
    wall.position.set(a.mesh.position.x,1.5,a.mesh.position.z+.6);__lipRender.scene.add(wall);Germany3D.sync();
@@ -191,6 +231,10 @@ try{
   for(const [pose,index] of [['open',1],['bite',5],['round',10]]){
    await page.evaluate(index=>{lipTestSpeech.onresume?.();lipTestSpeech.onboundary({charIndex:index});window.lipFixtureTime+=43},index);
    await page.waitForTimeout(160);await page.evaluate(()=>{Germany3D.sync();lipTestSpeech.onpause?.();Germany3D.sync()});
+   if(name!=='asset-failure'){
+    const target=await page.evaluate(()=>Germany3D.amtGaussian.owner.startedUpdates+2);
+    await page.waitForFunction(target=>{Germany3D.sync();return Germany3D.amtGaussian.owner.completedUpdates>=target},target,{timeout:45000});
+   }
    omenFrames.push(await page.evaluate(()=>({speech:BuergeramtLevel.lipSpeech,volume:Germany3D.amtOmenSplat,paint:Germany3D.amtLipSplat})));
    await page.screenshot({path:`${output}/${name}-omen-${pose}.png`});
   }
