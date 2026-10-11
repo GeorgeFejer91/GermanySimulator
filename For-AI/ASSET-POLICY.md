@@ -664,21 +664,25 @@ and reduced motion is steady gold. Resources live with the existing city scene.
 
 The mission Weißwurst uses one original, texture-free GLB under
 `assets/models/mission-sausage/`, built by the existing standard-library Python
-builder with adjacent provenance. It adds 98,536 transferred bytes, 5,376 triangles
+builder with adjacent provenance. It adds 89,740 transferred bytes, 4,928 triangles
 and one material; it replaces the former licensed grilled model and its three maps. The starting
 neighborhood queue prepares it before Start through the existing two-job
 admission owner. A pale, plump procedural sausage retains the same compass behavior
 on failure. The existing render dispatch updates its bearing without a new
 timer, collision object, service or asset variant. The shared
 source/instance lives with the city renderer; office/hidden states consume no
-pointer updates. Pale glossy casing, sparse shader herb flecks and small tied ends
-give the model a Weißwurst appearance with only a gentle bend.
+pointer updates. Pale glossy casing, sparse shader herb flecks, rounded meat,
+pinched necks and six-fold twisted wrapper fans give the model a juicy Weißwurst
+appearance with only a gentle bend. The fallback shares this casing profile.
 It is a fixed screen-space HUD object rendered after the city with the same
-WebGL renderer and a small orthographic view. Its body scales 1.65 across and
-0.7 along the source, yielding a short, fat shape without another
-model download. A 64 px radial sprite (16 KiB decoded RGBA) and cloned tip
+WebGL renderer and a small orthographic view. Its body scales 1.6 across and
+0.84 along the source, making it moderately longer while remaining plump.
+The body is offset by 0.3528 along Z so rotation pivots at source Z −0.42,
+about 26% from the non-glowing end; its centre genuinely orbits that fixed anchor.
+A 64 px radial sprite (16 KiB decoded RGBA) and cloned tip
 materials provide the red glow; the mustard cone is removed. The HUD reserves
-168 px on desktop or 128 px on compact layouts. A 1024 × 256 canvas
+256 px on desktop or up to 192 px on compact layouts for the full pivot sweep.
+A 1024 × 256 canvas
 (1 MiB decoded RGBA, one shared texture) prints black-red-gold UnifrakturCook
 “Wegweiser” directly onto the skin in the existing material shader. A wider print
 area, 176 px authoring type and dark outline improve the displayed lettering's size and contrast.
@@ -690,7 +694,7 @@ updates through resize/DOM observers and the existing coalesced HUD refresh;
 its unchanged model job uses the player's location for admission. No collision,
 extra WebGL canvas, asset variant or new animation loop is added. The measured DOM reservation hides with its pointer during title, dialogue,
 file and office states; it has no visible text.
-The existing coalesced HUD measurement marks a no-fit below 88 CSS px of free
+The existing coalesced HUD measurement marks a no-fit below 160 CSS px of free
 height between header and lower controls. The HUD mesh then hides while the
 mission remains in Akte, and returns after resize without another loop.
 The Weißwurst comparison used three cold contexts per viewport against `0447bea`,
@@ -717,6 +721,36 @@ One initial narrow resize timed out despite matching captured bounds; a single
 instrumented rerun passed without a source or timeout change. Consolidated
 evidence and that limitation are in `weisswurst-integrated-verified/report.json`.
 Physical Android, GPU timing and the full natural mission chain remain NOT RUN.
+
+The folded-casing and tail-pivot revision is bound to GLB `b9b375ec…` and
+renderer `d115cf3e…` at base `933e069`. Twelve source-identical Chromium cases
+pass movement, mission bearing, complete bounds and HUD clearance, including
+loaded/fallback cardinal bearings, portrait/landscape, both compact breakpoints,
+320 px enlarged text with Akte/restore, zoom, reduced motion and `3d.html`.
+Independent Physics and Camera reviews pass the affected scope. The matrix is
+consolidated from separate runs; its initial startup and wall-time failures are
+retained. Modal/resize checks now arm before the native event and require the
+condition within three browser frames, recording wall time with a 30 s stall
+watchdog. This is a functional frame contract, not a wall-time latency bound;
+three-second movement and startup deadlines remain unchanged. Evidence is in
+`output/wegweiser/casing-validated/` and its referenced source reports/freezes.
+
+The repeated hardware comparison against `933e069` uses Chrome 154 / Intel
+Iris Xe, cold local HTTP, DPR 2, seed 4781 and no CPU throttle. Six completed
+candidate contexts pass the unchanged startup/deferred/title/input/buffer guards
+with nine inputs and no page errors each; the last portrait context runs separately
+with read-only visibility/focus/fullscreen diagnostics. Earlier readiness timeout
+and five-input failure reports remain included. Active sync p95 medians are
+260.6 → 1031.2 ms desktop and 185.1 → 1041.1 ms emulation; candidate ranges are
+476.3–1046.6 / 361.4–1049.9 ms. Input p95 medians are 180.5 → 1023.3 /
+189.1 → 2664.4 ms. These poor, variable timings on a shared Windows host do not
+certify stable responsiveness or a causal change. A fresh diagnostic baseline
+and candidate portrait accepted nine inputs, but neither overrides the retained
+failures or establishes a speedup. Candidate boot transfers range 14.74–16.32 MB
+desktop and 14.01–15.79 MB emulation. Exact results and instrumentation are in
+`casing-performance-{before,completed}/` and `casing-performance-summary.jsonl`.
+Physical Android, displayed-frame/GPU timing and a natural mission traversal
+remain NOT RUN.
 
 - Root `assets/models/` is the only authority for shipped model files.
 - The root game has one required WebGL presentation path. Do not preload or restore the retired SVG/Canvas world-art set. Registered moving-character PNG atlases remain the deliberate bitmap exception; DOM UI art and billboard textures are not alternate world renderers.

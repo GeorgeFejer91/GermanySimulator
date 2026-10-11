@@ -6,9 +6,10 @@ from pathlib import Path
 import struct
 
 root = Path(__file__).resolve().parents[1]
-# A full casing, rounded shoulders and small tied ends; +Z is the glowing end.
-profile = [(0, .17), (.56, .17), (.64, .168), (.70, .15), (.76, .11),
-           (.80, .055), (.82, .023), (.845, .035), (.86, .025), (.875, 0)]
+# Rounded meat, pinched casing necks and folded wrapper fans; +Z glows.
+profile = [(0, .18), (.24, .176), (.43, .167), (.59, .149), (.65, .125),
+           (.70, .085), (.73, .035), (.755, .023), (.775, .024),
+           (.81, .065), (.845, .078), (.875, .068)]
 
 def radius(z):
     z = abs(z)
@@ -19,15 +20,17 @@ def radius(z):
     return 0
 
 sides = 32
-zs = sorted(set([-z for z, _ in profile] + [z for z, _ in profile] +
-                [i*.025 for i in range(-34, 35)]))
+# Merge rings before float32 encoding (for example 0.81 and 27 * 0.03).
+zs = sorted({round(z, 8) for z in ([-z for z, _ in profile] +
+             [z for z, _ in profile] + [i*.03 for i in range(-29, 30)])})
 points, indices = [], []
 for z in zs:
     r = radius(z)
     centre = .018-.028*z*z
     for side in range(sides):
         theta = 2*math.pi*side/sides
-        fold = 1 + .035*math.cos(theta*6)*max(0, (abs(z)-.75)/.125)
+        gathered = max(0, min(1, (abs(z)-.72)/.06))
+        fold = 1 + .22*math.cos(theta*6+math.copysign(1, z)*(abs(z)-.72)*22)*gathered
         points.append((centre + r*math.cos(theta)*fold, r*math.sin(theta), z))
 centre_x = (min(p[0] for p in points)+max(p[0] for p in points))/2
 points = [(x-centre_x, y, z) for x, y, z in points]
@@ -36,6 +39,14 @@ for row in range(len(zs)-1):
         a, c = row*sides+side, row*sides+(side+1)%sides
         b, d = a+sides, c+sides
         indices.extend((a, c, b, c, d, b))
+
+for row, sign in [(0, -1), (len(zs)-1, 1)]:
+    z = zs[row]
+    cap = len(points)
+    points.append((.018-.028*z*z-centre_x, 0, z))
+    for side in range(sides):
+        a, c = row*sides+side, row*sides+(side+1)%sides
+        indices.extend((cap, c, a) if sign < 0 else (cap, a, c))
 
 normals = [[0., 0., 0.] for _ in points]
 for i in range(0, len(indices), 3):

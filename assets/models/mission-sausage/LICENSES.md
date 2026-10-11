@@ -6,12 +6,15 @@ Every vertex and material is project-authored. No downloaded geometry, image,
 reference photograph or texture pack is embedded. Existing project licensing
 governs this original; this notice grants no rights to unrelated assets.
 
-- SHA-256: `eb747231f5719e04b223b85320dbdc4bdd58019dd4d6d3ff77aee7654353f3b6`.
-- Cost: 98,536 bytes, 5,376 triangles, 2,720 vertices, one material, no image textures.
-- Bounds: X ±0.1747344, Y ±0.17, Z ±0.875; centered, Y-up, +Z pointing end.
-- Shape: full casing, rounded shoulders, small tied ends and a gentle bend.
+- SHA-256: `b9b375ec7d42dc5b7b1e6b568b137c0ccd415cce6fe4a1aa6f7def334b4cf5e0`.
+- Cost: 89,740 bytes, 4,928 triangles, 2,466 vertices, one material, no image textures.
+- Bounds: X/Y ±0.18, Z ±0.875; centered, Y-up, +Z pointing end.
+- Shape: plump tapered meat, rounded shoulders, pinched necks and twisted,
+  six-fold casing fans at both ends; only a gentle bend.
 - Runtime: pale glossy physical material, sparse herb flecks, larger dark-outlined
   black/red/gold “Wegweiser” printed on the skin, and a glowing red pointing end.
+  A longer 1.6/1.6/0.84 presentation turns around source Z −0.42, near the
+  non-glowing end. The procedural stand-in shares its casing profile and pivot.
   One shared desktop/mobile source and instance, admitted through the existing
   two-job startup queue and retained with the city renderer. The pale procedural
   fallback preserves shape and wayfinding. No additional renderer or timer.

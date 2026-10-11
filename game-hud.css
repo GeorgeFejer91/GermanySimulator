@@ -1,8 +1,8 @@
-.mission-guide{position:fixed;z-index:21;top:8px;left:50%;transform:translateX(-50%);width:12rem;display:grid;grid-template-rows:168px;pointer-events:none}
+.mission-guide{position:fixed;z-index:21;top:8px;left:50%;transform:translateX(-50%);width:18rem;display:grid;grid-template-rows:256px;pointer-events:none}
 .mission-guide[hidden]{display:none}
-.mission-guide.compact{width:min(10rem,calc(50vw - 16px));grid-template-rows:128px}
+.mission-guide.compact{width:min(14rem,calc(100vw - 32px));grid-template-rows:192px}
 .mission-guide.stacked{left:50%;transform:translateX(-50%)}
-.mission-guide.large-text{top:calc(var(--subtitle-toggle-height,44px) + 16px);grid-template-rows:144px}
+.mission-guide.large-text{top:calc(var(--subtitle-toggle-height,44px) + 16px);grid-template-rows:192px}
 /* A small file tab during play; the paperwork opens only when it is useful. */
 .fax-paper{color:#28261f;background:repeating-linear-gradient(0deg,transparent 0 3px,#71685008 3px 4px),#eee8d8;border:1px solid #746d5e;border-left:10px dotted #c0b7a3;box-shadow:3px 4px 0 #24211c45;font:1rem/1.4 "Courier New",monospace}
 .city-status{position:fixed;z-index:20;top:calc(env(safe-area-inset-top,0px) + 8px);left:calc(env(safe-area-inset-left,0px) + 8px);right:calc(env(safe-area-inset-right,0px) + 8px);display:grid;grid-template-columns:minmax(0,1fr) minmax(0,auto);align-items:start;gap:6px 8px;pointer-events:none}

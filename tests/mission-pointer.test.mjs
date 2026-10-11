@@ -48,8 +48,13 @@ test('shipped Weisswurst is local, compact, centered, +Z aligned, with the recor
  const binaryOffset=28+bytes.readUInt32LE(12),normal=doc.accessors[primitive.attributes.NORMAL];
  const vectors=accessor=>Array.from({length:accessor.count},(_,i)=>Array.from({length:3},(_,k)=>bytes.readFloatLE(binaryOffset+(doc.bufferViews[accessor.bufferView].byteOffset||0)+(accessor.byteOffset||0)+i*12+k*4)));
  const points=vectors(position),normals=vectors(normal);assert.equal(normals.length,points.length);
+ const ring=z=>points.filter(p=>Math.abs(p[2]-z)<1e-6).map(p=>Math.hypot(p[0]+.028*p[2]*p[2],p[1]));
+ const widest=z=>Math.max(...ring(z));
+ assert.ok(widest(0)>widest(.59)*1.1,'the meat bulges and tapers rather than forming a straight cylinder');
+ for(const sign of [-1,1]){assert.ok(widest(sign*.755)<.04,'wrapper has a pinched neck');assert.ok(widest(sign*.845)>.08&&widest(sign*.845)>widest(sign*.755)*2,'wrapper flares visibly beyond its neck');const end=ring(sign*.845);assert.ok(Math.max(...end)-Math.min(...end)>.02,'wrapper end has real folded geometry')}
  for(let i=0;i<points.length;i++){assert.ok(normals[i].every(Number.isFinite));assert.ok(Math.abs(Math.hypot(...normals[i])-1)<1e-5);for(let k=0;k<3;k++)assert.ok(points[i][k]>=position.min[k]-1e-6&&points[i][k]<=position.max[k]+1e-6)}
  const indices=doc.accessors[primitive.indices],indexOffset=binaryOffset+(doc.bufferViews[indices.bufferView].byteOffset||0)+(indices.byteOffset||0);
  for(let i=0;i<indices.count;i++)assert.ok(bytes.readUInt16LE(indexOffset+i*2)<points.length);
+ for(let i=0;i<indices.count;i+=3){const [a,b,c]=[0,1,2].map(k=>points[bytes.readUInt16LE(indexOffset+(i+k)*2)]),u=b.map((v,k)=>v-a[k]),v=c.map((n,k)=>n-a[k]);assert.ok(Math.hypot(u[1]*v[2]-u[2]*v[1],u[2]*v[0]-u[0]*v[2],u[0]*v[1]-u[1]*v[0])>1e-10,'every triangle has a real surface area')}
  assert.ok(readFileSync(new URL('../assets/models/mission-sausage/LICENSES.md',import.meta.url),'utf8').includes(createHash('sha256').update(bytes).digest('hex')));
 });

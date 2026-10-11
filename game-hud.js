@@ -152,7 +152,7 @@ function measure(){
  const top=rail.hidden?12:rail.getBoundingClientRect().bottom/zoom+8,dock=document.querySelector('.control-dock');
  const bottom=dock.getClientRects().length?dock.getBoundingClientRect().top/zoom:innerHeight/zoom-(parseFloat(getComputedStyle(byId('app')).getPropertyValue('--subtitle-height'))||0);
  const guideBounds=guide.getBoundingClientRect(),noticeBounds=notices.getBoundingClientRect();
- if(guide.classList.contains('stacked')&&!rail.hidden){guide.style.top=top+'px';const available=Math.max(0,bottom-top-12);guide.dataset.pointerFit=available>=88?'fit':'file';guide.style.gridTemplateRows=Math.max(88,Math.min(128,available))+'px'}else{guide.dataset.pointerFit='fit';guide.style.removeProperty('top');guide.style.removeProperty('grid-template-rows')}
+ if(guide.classList.contains('stacked')&&!rail.hidden){guide.style.top=top+'px';const available=Math.max(0,bottom-top-12);guide.dataset.pointerFit=available>=160?'fit':'file';guide.style.gridTemplateRows=Math.max(160,Math.min(192,available))+'px'}else{guide.dataset.pointerFit='fit';guide.style.removeProperty('top');guide.style.removeProperty('grid-template-rows')}
  window.Germany3D?.layoutMissionPointer();
  const finalGuide=guide.getBoundingClientRect();
  const noticeTop=Math.max(top,subtitleBottom+8,!guide.hidden&&guide.dataset.pointerFit!=='file'&&(!noticeBounds.width||finalGuide.left<noticeBounds.right&&finalGuide.right>noticeBounds.left)?finalGuide.bottom/zoom+8:0);

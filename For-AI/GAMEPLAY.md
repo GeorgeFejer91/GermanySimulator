@@ -35,19 +35,21 @@ Mission order:
 7. Ausländerbehörde — residence evidence.
 8. Ausländerbehörde — fictional citizenship application.
 
-A short, fat, pale Weißwurst fixed at the top of the screen points its glowing red end toward
+A plump, pale Weißwurst fixed at the top of the screen points its glowing red end toward
 the current mission's actual office entrance. It follows all eight procedures;
 during Stadtbild work it selects the nearest unfinished object, then the office.
-The original 3D model has a full glossy casing, small tied ends and only a gentle bend, drawn by the same
+The original 3D model has a slightly longer, tapered body, juicy gloss, pinched
+casing necks and visible twisted wrapper fans at both ends, with only a gentle bend. It is drawn by the same
 renderer with larger, dark-outlined Schwarz-Rot-Gold Fraktur “Wegweiser” printed directly on its surface. It sits at the top
 centre between the status controls on wide screens and below the shared top rail on narrow phones. The model and
 procedural fallback share the shape and glowing end. The surface print flips
 its orientation when needed to keep the word readable while the pointer turns. Measured print and notice/file-rail clearance follow font loading, resizing and enlarged text.
-Its bearing follows the current camera projection. It is a
+Its 3D rotation pivots about one quarter of the way in from the non-glowing end,
+so the body centre and red tip swing around a fixed HUD anchor. Its bearing follows the current camera projection. It is a
 compass bearing, with existing streets, crossings and interaction rules
 still governing travel. It hides during title, dialogue, file/modal, office and
 end states, and within 36 units of its target. It has no collision footprint.
-When enlarged controls leave less than 88 CSS px between the top rail and lower
+When enlarged controls leave less than 160 CSS px between the top rail and lower
 controls, the sausage yields to the mission in Akte instead of covering controls
 or shrinking its surface lettering beyond readability. It returns when space is available.
 
