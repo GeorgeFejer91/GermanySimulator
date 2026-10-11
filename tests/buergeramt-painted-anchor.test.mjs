@@ -1,7 +1,28 @@
 import test from 'node:test';import assert from 'node:assert/strict';
 import {readFileSync} from 'node:fs';
 import {anchorBlend,createPaintedAnchor,gaussianFlowPhase} from '../buergeramt-painted-anchor.js';
+import {nativeMouthRect} from '../buergeramt-mouth-paint.js';
 const manifest=JSON.parse(readFileSync(new URL('../assets/buergeramt/animation/clerk.json',import.meta.url)));
+
+test('mouth registrations belong to each encoded painting, independently of names and arc timing',()=>{
+ for(const name of ['clerk','aktenkurier','archivbotin','formularsammler','nummernfluesterer','nachtschichtmelderin','pfandarchitektin','kopiependler','warteschlangenpoetin','renter','parent','pensioner']){
+  const original=JSON.parse(readFileSync(new URL(`../assets/buergeramt/animation/${name}.json`,import.meta.url))),copy=structuredClone(original),renames=new Map();
+  for(const s of copy.states)if(!['ready','raised','contact','refusal','work','gesture'].includes(s.id)){const previous=s.id;s.id='renamed-'+renames.size;renames.set(previous,s.id)}
+  for(const p of copy.segments){p.from=renames.get(p.from)??p.from;p.to=renames.get(p.to)??p.to}
+  for(const arc of copy.arcs)arc.duration*=2;
+  for(const state of original.states){const a=nativeMouthRect(original,state.id),b=nativeMouthRect(copy,renames.get(state.id)??state.id);assert.deepEqual(a,b);assert(a.every(Number.isFinite));assert(a[0]>0&&a[0]<1&&a[1]>0&&a[1]<1);assert.deepEqual(a,[state.mouth_xywh[0]/original.canvas_xy[0],1-state.mouth_xywh[1]/original.canvas_xy[1],state.mouth_xywh[2]/original.canvas_xy[0],state.mouth_xywh[3]/original.canvas_xy[1]])}
+  delete copy.states[1].mouth_xywh;assert.throws(()=>nativeMouthRect(copy,copy.states[1].id),/Unregistered native mouth pose/);
+ }
+});
+
+test('native mouth coordinates survive the existing source-to-manifest build contract',()=>{
+ const load=path=>JSON.parse(readFileSync(new URL('../'+path,import.meta.url))),base='assets/sprite-sources/buergeramt/gaussian-arcs/';
+ for(const name of ['aktenkurier','archivbotin','formularsammler','nummernfluesterer','nachtschichtmelderin','pfandarchitektin','kopiependler','warteschlangenpoetin','renter','parent','pensioner']){
+  const spec=load(base+name+(['renter','parent','pensioner'].includes(name)?'':'-work-gesture')+'.json'),compiled=load('assets/buergeramt/animation/'+name+'.json');
+  for(const state of spec.states)assert.deepEqual(compiled.states.find(s=>s.id===state.id).mouth_xywh,state.mouth_xywh);
+ }
+ for(const state of [...load('assets/previews/knick-splats/manifest.json').anchors,...load(base+'knick-stamp-handoff.json').frames])assert.deepEqual(manifest.states.find(s=>s.id===state.id).mouth_xywh,state.mouth_xywh);
+});
 test('liquid phase lag stays monotonic, recovers keys and does not stop at inbetweens',()=>{
  // The closed-form derivative is bounded by 1 ± .085π; numerical sampling
  // checks arbitrary parts and both playback directions without trusting GLSL.
@@ -39,7 +60,7 @@ function rig(){
  class PlaneGeometry{constructor(width,height,widthSegments,heightSegments){this.parameters={width,height,widthSegments,heightSegments};this.attributes={position:new Attribute(new Float32Array(12),3)};this.index={}}setAttribute(key,value){this.attributes[key]=value}dispose(){}}
  class InstancedBufferGeometry extends PlaneGeometry{constructor(){super();this.isInstancedBufferGeometry=true}}
  class MeshBasicMaterial{constructor(options){Object.assign(this,options);this.userData={};this.color=new Color()}dispose(){}}
- class Mesh{constructor(geometry,material){this.geometry=geometry;this.material=material;this.position=new Vector3();this.quaternion={copy(){}};this.scale={setScalar:x=>{this.size=x}};this.userData={}}}
+ class Mesh{constructor(geometry,material){this.geometry=geometry;this.material=material;this.position=new Vector3();this.quaternion={copy(other){Object.assign(this,other)}};this.scale={set:(x,y,z)=>{this.size=y;this.stretch=[x,y,z]}};this.userData={}}}
  const THREE={Vector2,Vector3,Vector4,Color,Texture,PlaneGeometry,InstancedBufferGeometry,Float32BufferAttribute:Attribute,InstancedBufferAttribute:Attribute,MeshBasicMaterial,Mesh,ShaderChunk:{map_fragment:'texture2D(map,vMapUv)'},SRGBColorSpace:'srgb',LinearFilter:'linear',DoubleSide:'both'};
  const owner={attachPaint:mesh=>members.add(mesh),retirePaint:mesh=>members.delete(mesh)};
  const source={geometry:{parameters:{height:1.9}},scale:{y:1.2},position:{x:3,y:1.14,z:-7},quaternion:{},material:{color:{r:.8,g:.7,b:.6},userData:{breath:{value:.2}}}};
@@ -59,15 +80,20 @@ test('paint keeps registered canvas aspect/floor, bounds residency and cancels l
   assert.match(shader.fragmentShader,/float mass=6\.20;/,'constant optical kernel mass preserves edge coverage');
   assert.equal(mesh.geometry.instanceCount,256);assert.equal(mesh.geometry.attributes.anchorSlot.array.length,256);
   assert.equal(shader.uniforms.anchorXY.value,paired.textures[0]);assert.equal(paint.inspect().technique,'native-texture-gaussians');
-  paint.update({segment:0,u:.25,arc:'raise'},r.source,true,{speaking:true,mouthFrame:2});
+  paint.update({segment:0,u:.25,arc:'raise'},r.source,true,{speaking:true,lipShape:[.9,.2,.1,0]});
   assert.equal(paint.inspect().opacity,1);assert.equal(shader.uniforms.anchorMouth.value,.9);
   assert.equal(shader.uniforms.anchorPhase.value,.25);assert.equal(shader.uniforms.anchorMix.value,.15625);assert.equal(paint.inspect().resident,2);
   assert.equal(shader.uniforms.anchorMode.value,1);assert.equal(mesh.material.opacity,1);
+  r.source.scale.x=1.8;r.source.scale.z=.6;r.source.position.x=-4;r.source.quaternion.z=.2;
+  paint.update({segment:0,u:.25,arc:'raise'},r.source,true,{speaking:true,lipShape:[.9,.2,.1,0]});
+  assert.deepEqual(mesh.stretch,[1.9*1.2*1.8/1.2,1.9*1.2,1.9*1.2*.6/1.2]);assert.equal(mesh.position.x,-4);assert.equal(mesh.quaternion.z,.2);
+  assert.equal(shader.uniforms.anchorPhase.value,.25,'transform updates do not restart the body arc');assert.equal(shader.uniforms.anchorMouth.value,.9);
   r.source.renderOrder=200;r.source.material.depthTest=false;paint.update({segment:0,u:.25,arc:'raise'},r.source,true);
   assert.equal(mesh.renderOrder,200);assert.equal(mesh.material.depthTest,false);assert.equal(mesh.material.opacity,1);
   r.source.renderOrder=100;r.source.material.depthTest=true;paint.update({segment:0,u:.25,arc:'raise'},r.source,true);
   assert.equal(mesh.renderOrder,100);assert.equal(mesh.material.depthTest,true);
-  paint.update({segment:0,u:.25,arc:'raise'},r.source,true,{speaking:true,mouthFrame:2,reducedMotion:true});assert.equal(shader.uniforms.anchorMouth.value,0);
+  paint.update({segment:0,u:.25,arc:'raise'},r.source,true,{speaking:true,lipShape:[.9,.2,.1,0],reducedMotion:true});assert.equal(shader.uniforms.anchorMouth.value,.9);
+  paint.update({segment:0,u:.25,arc:'raise'},r.source,true,{speaking:true,mouthFrame:2});assert.equal(shader.uniforms.anchorMouth.value,0,'retired frame cycles cannot invent speech');
   for(let segment=0;segment<6;segment++){
    paint.update({segment,u:1,arc:'raise'},r.source,true);await paint.settle();paint.update({segment,u:1,arc:'raise'},r.source,true);
    assert.equal(paint.inspect().opacity,1);assert(paint.inspect().resident<=3);assert.equal(Object.keys(paint.inspect().failures).length,0);

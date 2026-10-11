@@ -5,6 +5,17 @@ import {harness,source} from './amt-harness.mjs';
 await import('../buergeramt-lips.js');
 const {createTrack,score,poseAt,mouths}=globalThis.GermanyAmtLips;
 
+test('mouth registration belongs to the displayed pose and atlas cell, never speech time',()=>{
+ const {displayedMouth}=globalThis.GermanyAmtLips,actor={id:'aktenkurier',mouthPose:0,renderKey:'detail:4'};
+ const work=displayedMouth(actor);actor.mouthPose=1;const gesture=displayedMouth(actor);assert.notDeepEqual(work,gesture);
+ actor.mouthPose=2;assert.notDeepEqual(displayedMouth(actor),gesture);
+ actor.mouthPose=null;assert.equal(displayedMouth(actor),null,'a rear/turn cell cannot reuse a frontal face');
+ actor.mouthPose=1;actor.renderKey='atlas:72';actor.mouthSample=0;const first=displayedMouth(actor);
+ actor.mouthSample=2;assert.notDeepEqual(displayedMouth(actor),first,'the registered face follows the baked body field');
+ actor.mouthSample=0;assert.deepEqual(displayedMouth(actor),first);
+ const clerk={performance:true,lipId:'clerk-2',mouthPose:0,renderKey:'detail:0'};const ready=displayedMouth(clerk);clerk.mouthPose=3;assert.notDeepEqual(displayedMouth(clerk),ready);
+});
+
 test('German lip shapes close consonants and blend continuously at every boundary',()=>{
  const keys=score('Mama, fünf schöne Euro!');
  assert.equal(poseAt(keys,.5)[0],0);
@@ -43,6 +54,23 @@ test('late acoustic loading cannot play or bind a cancelled speaker',async()=>{
  pending[0](binding);await new Promise(setImmediate);assert.equal(players[0].plays,0);
  pending[1](binding);await new Promise(setImmediate);assert.equal(players[1].plays,1);assert.equal(level.lipSpeech.actor,'clerk');assert.equal(level.lipSpeech.timing,'audio-cues');assert.equal(level.lipSpeech.shape[0],1);
  level.replay(h.config);assert.equal(level.lipSpeech.actor,null);
+});
+
+test('slow acoustic preparation gets its own deadline before the playback watchdog',async()=>{
+ const {h,p,level}=probe(),pending=[],players=[];
+ h.window.GermanyAmtLips.loadRecording=()=>new Promise(resolve=>pending.push(resolve));
+ h.window.GermanySimulatorAudioText={candidateClip:()=> './clip.mp3',recordings:{'./clip.mp3':{sha256:'hash'}}};
+ h.context.Audio=class{
+  constructor(){this.currentTime=.5;this.duration=2;this.paused=true;this.ended=false;this.plays=0;players.push(this)}
+  play(){this.plays++;this.paused=false;this.onplaying?.();return Promise.resolve()}
+  pause(){this.paused=true;this.onpause?.()}removeAttribute(){}load(){}
+ };
+ p.content('FRAU KNICK','Langsame Vorbereitung');h.tick(4000);
+ assert.equal(h.synth.current,null,'do not silently replace an existing recording during cue import');
+ assert.equal(players[0].plays,0);
+ pending[0]({track:{recording:'./clip.mp3'},sample:()=>({open:1,spread:0,round:0,bite:0,viseme:'D'})});
+ await new Promise(setImmediate);assert.equal(players[0].plays,1);assert.equal(level.lipSpeech.timing,'audio-cues');
+ level.replay(h.config);assert.equal(level.lipSpeech.active,false);
 });
 
 test('browser boundaries, pause/resume and missing speech keep their owning clock',()=>{

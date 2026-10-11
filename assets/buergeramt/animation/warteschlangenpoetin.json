@@ -132,7 +132,13 @@
           433
         ]
       ],
-      "sha256": "476ed3a0714b2f8ee82579efa617a93c1bbcd8d494ca78a58d27cd201be87168"
+      "sha256": "476ed3a0714b2f8ee82579efa617a93c1bbcd8d494ca78a58d27cd201be87168",
+      "mouth_xywh": [
+        320,
+        155,
+        11,
+        8
+      ]
     },
     {
       "id": "bridge1",
@@ -259,7 +265,13 @@
           437
         ]
       ],
-      "sha256": "45daccd9e6b2296e8ffbff9f57d0fe8085af1cfd62e0510ae0975cb234c1ac23"
+      "sha256": "45daccd9e6b2296e8ffbff9f57d0fe8085af1cfd62e0510ae0975cb234c1ac23",
+      "mouth_xywh": [
+        331,
+        140,
+        11,
+        8
+      ]
     },
     {
       "id": "bridge1b",
@@ -395,7 +407,13 @@
         ]
       ],
       "prop_occlusion": "The one brown bag is mostly behind the torso; only its screen-right edge is visible.",
-      "sha256": "c48a15db452a4902fb5750d674a75490947f5093ab4870d40ce47afde45ce31b"
+      "sha256": "c48a15db452a4902fb5750d674a75490947f5093ab4870d40ce47afde45ce31b",
+      "mouth_xywh": [
+        318,
+        145,
+        11,
+        8
+      ]
     },
     {
       "id": "bridge2",
@@ -526,7 +544,13 @@
           438
         ]
       ],
-      "sha256": "20f8a997310103d86fccd0717fd733de3b41c03281d18c7239cd68d5867dd73a"
+      "sha256": "20f8a997310103d86fccd0717fd733de3b41c03281d18c7239cd68d5867dd73a",
+      "mouth_xywh": [
+        313,
+        143,
+        11,
+        8
+      ]
     },
     {
       "id": "gesture",
@@ -656,7 +680,13 @@
           446
         ]
       ],
-      "sha256": "476ed3a0714b2f8ee82579efa617a93c1bbcd8d494ca78a58d27cd201be87168"
+      "sha256": "476ed3a0714b2f8ee82579efa617a93c1bbcd8d494ca78a58d27cd201be87168",
+      "mouth_xywh": [
+        301,
+        183,
+        11,
+        8
+      ]
     }
   ],
   "arcs": [

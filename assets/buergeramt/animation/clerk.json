@@ -78,7 +78,13 @@
         ]
       ],
       "role": "main",
-      "sha256": "02d42800d71538bab9cc9977e40b8b471f91488074ee738cd56c6e02f98bdf8f"
+      "sha256": "02d42800d71538bab9cc9977e40b8b471f91488074ee738cd56c6e02f98bdf8f",
+      "mouth_xywh": [
+        580,
+        169,
+        16,
+        16
+      ]
     },
     {
       "id": "raise-1",
@@ -150,7 +156,13 @@
         ]
       ],
       "role": "transition",
-      "sha256": "fd136638f458d02e5508bd6fbceecb1156e59b5dfcae65c49d6c204a8cb4d73a"
+      "sha256": "fd136638f458d02e5508bd6fbceecb1156e59b5dfcae65c49d6c204a8cb4d73a",
+      "mouth_xywh": [
+        566,
+        186,
+        16,
+        16
+      ]
     },
     {
       "id": "raise-2",
@@ -222,7 +234,13 @@
         ]
       ],
       "role": "transition",
-      "sha256": "51c8525aa11069e5cb106ec2c04af269bfed7458d3f6426034a40a1c18eaeb17"
+      "sha256": "51c8525aa11069e5cb106ec2c04af269bfed7458d3f6426034a40a1c18eaeb17",
+      "mouth_xywh": [
+        576,
+        190,
+        16,
+        16
+      ]
     },
     {
       "id": "raised",
@@ -294,7 +312,13 @@
         ]
       ],
       "role": "main",
-      "sha256": "e23f5852be9a064ce8360b2093ea14e2f82b2e872281d2386b67ecfced3224b4"
+      "sha256": "e23f5852be9a064ce8360b2093ea14e2f82b2e872281d2386b67ecfced3224b4",
+      "mouth_xywh": [
+        597,
+        201,
+        16,
+        16
+      ]
     },
     {
       "id": "stamp-1",
@@ -406,7 +430,13 @@
           381
         ]
       ],
-      "sha256": "eac6cf9b89229a6ab4e14873ec63a48052ad2015c559fa9c704ad93aaf4f4be7"
+      "sha256": "eac6cf9b89229a6ab4e14873ec63a48052ad2015c559fa9c704ad93aaf4f4be7",
+      "mouth_xywh": [
+        574,
+        189,
+        16,
+        16
+      ]
     },
     {
       "id": "knick-stamp-handoff1",
@@ -607,7 +637,13 @@
           399
         ]
       ],
-      "role": "transition"
+      "role": "transition",
+      "mouth_xywh": [
+        566,
+        190,
+        16,
+        16
+      ]
     },
     {
       "id": "knick-stamp-handoff2",
@@ -808,7 +844,13 @@
           407
         ]
       ],
-      "role": "transition"
+      "role": "transition",
+      "mouth_xywh": [
+        562,
+        187,
+        16,
+        16
+      ]
     },
     {
       "id": "stamp-2",
@@ -920,7 +962,13 @@
           402
         ]
       ],
-      "sha256": "ec2239b038f32e8294d23b1f4aa096c55fa908b875e9a4cb447d4d8345893ebd"
+      "sha256": "ec2239b038f32e8294d23b1f4aa096c55fa908b875e9a4cb447d4d8345893ebd",
+      "mouth_xywh": [
+        556,
+        208,
+        16,
+        16
+      ]
     },
     {
       "id": "stamp-3",
@@ -1032,7 +1080,13 @@
           423
         ]
       ],
-      "sha256": "97af6cdf94d8062945d26c311da3ceea3901997e9b84f6803bbd6175f51b56f3"
+      "sha256": "97af6cdf94d8062945d26c311da3ceea3901997e9b84f6803bbd6175f51b56f3",
+      "mouth_xywh": [
+        554,
+        223,
+        16,
+        16
+      ]
     },
     {
       "id": "contact",
@@ -1144,7 +1198,13 @@
           439
         ]
       ],
-      "sha256": "51c085117d070130f0cd6748cfb16be74c2c092e2d7a141a3c1e3220e1538da8"
+      "sha256": "51c085117d070130f0cd6748cfb16be74c2c092e2d7a141a3c1e3220e1538da8",
+      "mouth_xywh": [
+        538,
+        230,
+        16,
+        16
+      ]
     },
     {
       "id": "fold-1",
@@ -1256,7 +1316,13 @@
           418
         ]
       ],
-      "sha256": "236d797b0fd7146af127069513c54e89bf5ae6e244f3a3ec0c03345efd90782d"
+      "sha256": "236d797b0fd7146af127069513c54e89bf5ae6e244f3a3ec0c03345efd90782d",
+      "mouth_xywh": [
+        568,
+        173,
+        16,
+        16
+      ]
     },
     {
       "id": "fold-2",
@@ -1368,7 +1434,13 @@
           414
         ]
       ],
-      "sha256": "e58f9483e63fabe1a11f278d7b03bde63afcfa035bd8a782e54ede3d897f4c3c"
+      "sha256": "e58f9483e63fabe1a11f278d7b03bde63afcfa035bd8a782e54ede3d897f4c3c",
+      "mouth_xywh": [
+        560,
+        165,
+        16,
+        16
+      ]
     },
     {
       "id": "fold-3",
@@ -1440,7 +1512,13 @@
         ]
       ],
       "role": "transition",
-      "sha256": "6ca2dfd5adda09b3715ab635ce762a96544897a84e803ab8a088a40f62b0e75b"
+      "sha256": "6ca2dfd5adda09b3715ab635ce762a96544897a84e803ab8a088a40f62b0e75b",
+      "mouth_xywh": [
+        553,
+        165,
+        16,
+        16
+      ]
     },
     {
       "id": "refusal",
@@ -1512,7 +1590,13 @@
         ]
       ],
       "role": "main",
-      "sha256": "d4e410849624a6d2560f4c6e489d5a051dc6b4f265abcb8d16742f39907c6ceb"
+      "sha256": "d4e410849624a6d2560f4c6e489d5a051dc6b4f265abcb8d16742f39907c6ceb",
+      "mouth_xywh": [
+        543,
+        165,
+        16,
+        16
+      ]
     },
     {
       "id": "return-1",
@@ -1584,7 +1668,13 @@
         ]
       ],
       "role": "transition",
-      "sha256": "f249f93ad828bb55db8242e04e8052d25e574eaa6e8ff8864f772412faba657a"
+      "sha256": "f249f93ad828bb55db8242e04e8052d25e574eaa6e8ff8864f772412faba657a",
+      "mouth_xywh": [
+        555,
+        160,
+        16,
+        16
+      ]
     },
     {
       "id": "return-2",
@@ -1656,7 +1746,13 @@
         ]
       ],
       "role": "transition",
-      "sha256": "e42d361c1f7e5d4857e446ccdc807c1aa3ffe26ea967dcb770b9dbf691e6c3e3"
+      "sha256": "e42d361c1f7e5d4857e446ccdc807c1aa3ffe26ea967dcb770b9dbf691e6c3e3",
+      "mouth_xywh": [
+        565,
+        158,
+        16,
+        16
+      ]
     }
   ],
   "arcs": [

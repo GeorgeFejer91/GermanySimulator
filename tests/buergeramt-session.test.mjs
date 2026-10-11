@@ -50,9 +50,15 @@ test('the entrance action cannot pass through the facade wing',()=>{
 test('the clerk encounter remains on the public side of the desk',()=>{
  const h=harness();h.counter();assert.ok(h.level.view.z>=-8.32);
 });
-test('Frau Knick uses her talk row only while her visible counter line is active',()=>{
- const h=harness('host',{voice:true});h.counter();assert.equal(h.level.clerkPerformance.row,5);assert.equal(h.level.clerkPerformance.speaking,true);
- h.synth.end();assert.equal(h.level.clerkPerformance.speaking,false);assert.notEqual(h.level.clerkPerformance.row,5);
+test('Frau Knick speaks through the current body action instead of pinning a talk row',()=>{
+ const h=harness('host',{voice:true});h.counter();const before=h.level.clerkPerformance;
+ assert.equal(before.speaking,true);assert.notEqual(before.row,5);
+ h.advanceGame(.25);const after=h.level.clerkPerformance;
+ assert.equal(after.speaking,true);assert.equal(after.animation.generation,before.animation.generation);
+ assert(after.animation.actionId!==before.animation.actionId||after.animation.phase!==before.animation.phase,'speech keeps the authored body phase advancing');
+ const pose=after.animation.arc&&after.animation.phase>=.5?after.animation.toPose:after.animation.pose;
+ assert.equal(after.row,{ready:0,raised:2,contact:3,refusal:4}[pose]);
+ h.synth.end();assert.equal(h.level.clerkPerformance.speaking,false);
 });
 test('an invalid frame delta cannot corrupt first-person movement',()=>{
  const h=harness();h.key('KeyW');const before=h.level.view;h.level.update(Number.NaN);h.key('KeyW','keyup');assert.deepEqual(h.level.view,before);

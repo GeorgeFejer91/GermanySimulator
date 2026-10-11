@@ -18,7 +18,7 @@ if(!Number.isSafeInteger(requestedRuns)||requestedRuns<1)throw Error('BENCH_RUNS
 function openingRenderWithinBudget({elapsedMs,syncCalls}){return Number.isFinite(elapsedMs)&&elapsedMs>0&&Number.isSafeInteger(syncCalls)&&syncCalls>0&&syncCalls<=Math.ceil((elapsedMs+.5)/250)}
 mkdirSync(output,{recursive:true});
 // Only these source files are overridden; asset comparisons require an isolated checkout.
-const baseline=process.env.BENCH_REF?new Map(['game.js','world3d.js','tourist-animation.js','index.html','3d.html','buergeramt.js','buergeramt-fit.js','buergeramt-lips.js','buergeramt-lipsync.js','buergeramt-painted-anchor.js','buergeramt-gaussian-scene.js','buergeramt-gaussian-animation.js','buergeramt-splat.js','assets/buergeramt/omen/mouth-cues.js'].map(file=>[resolve(root,file),execFileSync('git',['show',process.env.BENCH_REF+':'+file])])):null;
+const baseline=process.env.BENCH_REF?new Map(['game.js','world3d.js','tourist-animation.js','index.html','3d.html','buergeramt.js','buergeramt-fit.js','buergeramt-lips.js','buergeramt-lipsync.js','buergeramt-mouth-paint.js','buergeramt-painted-anchor.js','buergeramt-gaussian-scene.js','buergeramt-gaussian-animation.js','buergeramt-splat.js','assets/buergeramt/omen/mouth-cues.js','assets/buergeramt/speech/mouth-cues.js','assets/buergeramt/omen/aktenkurier.splat','assets/buergeramt/omen/manifest.json'].filter(file=>{try{execFileSync('git',['cat-file','-e',process.env.BENCH_REF+':'+file],{stdio:'ignore'});return true}catch{return false}}).map(file=>[resolve(root,file),execFileSync('git',['show',process.env.BENCH_REF+':'+file],{maxBuffer:8_000_000})])):null;
 const source=file=>baseline?.get(resolve(file))||readFileSync(file);
 const mime={'.html':'text/html','.js':'text/javascript','.css':'text/css','.webp':'image/webp','.png':'image/png','.svg':'image/svg+xml','.json':'application/json','.glb':'model/gltf-binary','.mp3':'audio/mpeg','.ttf':'font/ttf'};
 const server=createServer((req,res)=>{try{const path=new URL(req.url,'http://localhost').pathname,file=resolve(root,'.'+decodeURIComponent(path==='/'?'/index.html':path));if(!file.startsWith(root+sep))throw Error('path');res.writeHead(200,{'Content-Type':mime[extname(file)]||'application/octet-stream','Cache-Control':'no-store'});res.end(source(file))}catch{res.writeHead(404);res.end()}});
@@ -43,7 +43,7 @@ try{
   if(process.env.BENCH_PROFILE)await cdp.send('Profiler.enable');
   if(process.env.BENCH_THROTTLE){await cdp.send('Emulation.setCPUThrottlingRate',{rate:4});await cdp.send('Network.emulateNetworkConditions',{offline:false,latency:150,downloadThroughput:200000,uploadThroughput:93750})}
   console.log(JSON.stringify({stage:'start',name,run}));
-  await page.goto(`http://127.0.0.1:${server.address().port}/${process.env.BENCH_OFFICE?'?geheim=buergeramt':''}`,{waitUntil:'domcontentloaded',timeout:120000});
+  await page.goto(`http://127.0.0.1:${server.address().port}/${process.env.BENCH_OFFICE?'?geheim=buergeramt':''}`,{waitUntil:'commit',timeout:120000});
   await page.waitForFunction(()=>window.Germany3D?.ready,null,{timeout:120000});
   const readyMs=await page.evaluate(()=>performance.now());
   const gpu=await page.evaluate(()=>{const gl=document.createElement('canvas').getContext('webgl2');const d=gl?.getExtension('WEBGL_debug_renderer_info');return d?gl.getParameter(d.UNMASKED_RENDERER_WEBGL):'unavailable'});

@@ -1,5 +1,5 @@
 // One registered Gaussian cloud per actor. The simulation supplies all action time.
-import {createPaintedAnchor,gaussianFlowGlsl} from './buergeramt-painted-anchor.js?v=20261011-acoustic-mouth';
+import {createPaintedAnchor,gaussianFlowGlsl} from './buergeramt-painted-anchor.js?v=20261011-mouth-consistency';
 const clamp=value=>Math.max(0,Math.min(1,Number.isFinite(value)?value:0));
 const RECORD_BYTES=24,TEXTURE_WIDTH=256,MAX_SAMPLES=20000,MAX_SEGMENTS=32;
 
@@ -142,7 +142,6 @@ export async function createGaussianActor({THREE,owner,manifestUrl,variant='desk
       p=mix(pivotA,pivotB,u)+vec2(cos(theta)*local.x-sin(theta)*local.y,sin(theta)*local.x+cos(theta)*local.y);
     }
   `).join('\n');
-  const stateById=new Map(manifest.states.map(item=>[item.id,item]));
   let mesh=null,paint=null,attached=false,disposed=false,failure='',readyAfterSort=null,lastKey='';
   const releaseTextures=()=>{for(const texture of textures)texture.dispose()};
   try{
@@ -153,9 +152,9 @@ export async function createGaussianActor({THREE,owner,manifestUrl,variant='desk
       texture.generateMipmaps=false;texture.flipY=false;texture.needsUpdate=true;
       textures.push(texture);
     }
-    const segment=dyno.dynoFloat(0),blend=dyno.dynoFloat(0),strength=dyno.dynoFloat(1),painted=dyno.dynoFloat(0),mouth=dyno.dynoFloat(0),mouthCenter=dyno.dynoVec2(new THREE.Vector2()),tint=dyno.dynoVec3(new THREE.Vector3(1,1,1)),breath=dyno.dynoFloat(0);
+    const segment=dyno.dynoFloat(0),blend=dyno.dynoFloat(0),strength=dyno.dynoFloat(1),painted=dyno.dynoFloat(0),tint=dyno.dynoVec3(new THREE.Vector3(1,1,1)),breath=dyno.dynoFloat(0);
     const modifier=dyno.dynoBlock({gsplat:dyno.Gsplat},{gsplat:dyno.Gsplat},({gsplat})=>({gsplat:new dyno.Dyno({
-      inTypes:{gsplat:dyno.Gsplat,segment:'float',blend:'float',strength:'float',painted:'float',mouth:'float',mouthCenter:'vec2',tint:'vec3',breath:'float',xy:'sampler2D',start:'sampler2D',end:'sampler2D'},
+      inTypes:{gsplat:dyno.Gsplat,segment:'float',blend:'float',strength:'float',painted:'float',tint:'vec3',breath:'float',xy:'sampler2D',start:'sampler2D',end:'sampler2D'},
       outTypes:{gsplat:dyno.Gsplat},
       statements:({inputs:i,outputs:o})=>dyno.unindentLines(`
         ${o.gsplat}=${i.gsplat};
@@ -168,9 +167,6 @@ export async function createGaussianActor({THREE,owner,manifestUrl,variant='desk
         float u=${gaussianFlowGlsl.phase('phase','.5*(endpoints.xy+endpoints.zw)','envelope')};
         vec2 p=mix(endpoints.xy,endpoints.zw,u);
         ${trajectoryCode(i.segment)}
-        vec2 face=(p-${i.mouthCenter})/vec2(.085,.055);
-        float lip=exp(-dot(face,face)*3.5)*${i.mouth};
-        p.y-=lip*.0025;
         ${o.gsplat}.center=vec3(p,0.);
         vec3 linearA=mix(paintA.rgb/12.92,pow((paintA.rgb+.055)/1.055,vec3(2.4)),step(vec3(.04045),paintA.rgb));
         vec3 linearB=mix(paintB.rgb/12.92,pow((paintB.rgb+.055)/1.055,vec3(2.4)),step(vec3(.04045),paintB.rgb));
@@ -186,7 +182,7 @@ export async function createGaussianActor({THREE,owner,manifestUrl,variant='desk
         ${o.gsplat}.rgba=vec4(srgb,alpha);
         ${o.gsplat}.rgba.a*=${i.strength};
       `),
-    }).apply({gsplat,segment,blend,strength,painted,mouth,mouthCenter,tint,breath,xy:dyno.dynoSampler2D(textures[0]),start:dyno.dynoSampler2D(textures[1]),end:dyno.dynoSampler2D(textures[2])}).gsplat}));
+    }).apply({gsplat,segment,blend,strength,painted,tint,breath,xy:dyno.dynoSampler2D(textures[0]),start:dyno.dynoSampler2D(textures[1]),end:dyno.dynoSampler2D(textures[2])}).gsplat}));
     mesh=new SplatMesh({maxSplats:data.count,lod:false,enableLod:false,editable:false,raycastable:false,
       objectModifier:modifier,constructSplats:splats=>{
         const center=new THREE.Vector3(),scale=new THREE.Vector3(data.stride/manifest.canvas_xy[1]*.65,data.stride/manifest.canvas_xy[1]*.65,.0008),rotation=new THREE.Quaternion(),white=new THREE.Color(1,1,1);
@@ -213,24 +209,17 @@ export async function createGaussianActor({THREE,owner,manifestUrl,variant='desk
           painted.value=anchorOpacity>0?1:0;
           // Native Gaussian patches carry the complete morph. A second cloud
           // would duplicate its silhouette as a soft halo or ghost trail.
-          strength.value=anchorOpacity>0?0:1;
+          // The low-resolution cloud has no oral cavity. During speech keep
+          // the articulated original sprite until native mouth paint is ready.
+          strength.value=anchorOpacity>0||state.speaking?0:1;
           const color=sourceMesh.material?.color,paintBreath=sourceMesh.material?.userData?.breath?.value??0;
-          const key=[sample.segment,sample.u,anchorOpacity,state.speaking,state.mouthFrame,...(state.lipShape||[]),reducedMotion,atmosphere,sourceMesh.position.x,sourceMesh.position.y,sourceMesh.position.z,sourceMesh.scale.y,sourceMesh.rotation.x,sourceMesh.rotation.y,sourceMesh.rotation.z,color?.r,color?.g,color?.b,paintBreath].join(':');
+          const key=[sample.segment,sample.u,anchorOpacity,state.speaking,...(state.lipShape||[]),reducedMotion,atmosphere,sourceMesh.position.x,sourceMesh.position.y,sourceMesh.position.z,sourceMesh.scale.x,sourceMesh.scale.y,sourceMesh.scale.z,sourceMesh.rotation.x,sourceMesh.rotation.y,sourceMesh.rotation.z,color?.r,color?.g,color?.b,paintBreath].join(':');
           if(key!==lastKey){
             segment.value=sample.segment;blend.value=sample.u;
             tint.value.set((color?.r??1)*atmosphere,(color?.g??1)*atmosphere,(color?.b??1)*atmosphere);breath.value=paintBreath;
-            const pair=manifest.segments[sample.segment];
-            const point=(id,name)=>{const marks=stateById.get(id)?.landmarks;return Array.isArray(marks)?marks[name==='nose'?2:3]:marks?.[name]};
-            const noseA=point(pair.from,'nose'),noseB=point(pair.to,'nose'),chinA=point(pair.from,'chin'),chinB=point(pair.to,'chin');
-            if(noseA&&noseB&&chinA&&chinB){
-              const xA=noseA[0]*.45+chinA[0]*.55,xB=noseB[0]*.45+chinB[0]*.55;
-              const yA=noseA[1]*.45+chinA[1]*.55,yB=noseB[1]*.45+chinB[1]*.55;
-              mouthCenter.value.set(((xA+(xB-xA)*sample.u)-manifest.canvas_xy[0]/2)/manifest.canvas_xy[1],(manifest.canvas_xy[1]-(yA+(yB-yA)*sample.u))/manifest.canvas_xy[1]);
-            }
-            mouth.value=state.speaking?(state.lipShape?.[0]??(!reducedMotion?([0,.45,.9,.3,.7,.25,1,.1][state.mouthFrame%8]??0):0)):0;
             mesh.position.copy(sourceMesh.position);mesh.position.y=sourceMesh.position.y-height*sourceMesh.scale.y/2;
             mesh.quaternion.copy(sourceMesh.quaternion);
-            mesh.scale.setScalar(height*sourceMesh.scale.y);
+            mesh.scale.set(height*(sourceMesh.scale.x??sourceMesh.scale.y),height*sourceMesh.scale.y,height*(sourceMesh.scale.z??sourceMesh.scale.y));
             mesh.needsUpdate=true;lastKey=key;
           }
           mesh.visible=strength.value>.001;

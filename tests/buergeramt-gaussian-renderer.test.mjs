@@ -110,7 +110,7 @@ test('actor uses one cloud, source floor and scale, and waits for its own comple
  class DataTexture{constructor(data,w,h){this.data=data;this.width=w;this.height=h;this.disposals=0;textures.push(this)}dispose(){this.disposals++}}
  class Vector2{set(x,y){this.x=x;this.y=y}}
  class Vector3{constructor(x=0,y=0,z=0){this.x=x;this.y=y;this.z=z}set(x,y,z){this.x=x;this.y=y;this.z=z;return this}copy(other){Object.assign(this,other);return this}}
- class SplatMesh{constructor(options){this.options=options;this.initialized=Promise.resolve();this.position=new Vector3();this.quaternion={copy(){}};this.scale={setScalar:value=>{this.size=value}};this.visible=false;this.userData={};this.generatorUpdates=0}updateGenerator(){this.generatorUpdates++}}
+ class SplatMesh{constructor(options){this.options=options;this.initialized=Promise.resolve();this.position=new Vector3();this.quaternion={copy(){}};this.scale={set:(x,y,z)=>{this.size=y;this.stretch=[x,y,z]}};this.visible=false;this.userData={};this.generatorUpdates=0}updateGenerator(){this.generatorUpdates++}}
  let tint,shader='';
  class Dyno{constructor(options){this.options=options}apply(input){const names=Object.fromEntries(Object.keys(input).map(key=>[key,key]));shader=this.options.statements({inputs:names,outputs:{gsplat:'outGsplat'}});return{gsplat:'compiled'}}}
  const dyno={Gsplat:'Gsplat',Dyno,unindentLines:value=>value,dynoSampler2D:value=>value,
@@ -141,8 +141,13 @@ test('actor uses one cloud, source floor and scale, and waits for its own comple
   assert.equal(actor.inspect().trajectoryCount,1);
   assert.deepEqual(actor.inspect().activeTrajectory,trajectory);
   source.material={color:{r:.2,g:.5,b:.9},userData:{breath:{value:.4}}};
+  source.scale.x=1.4;source.scale.z=.6;
   actor.update({arc:'work-gesture-work',phase:.05,pose:'work'},source);
+  assert.deepEqual(owner.attached[0].stretch,[1.96*1.4,1.96,1.96*.6]);
   assert.deepEqual([tint.value.x,tint.value.y,tint.value.z],[.2,.5,.9]);
+  assert.equal(actor.update({arc:'work-gesture-work',phase:.05,pose:'work',speaking:true,lipShape:[1,0,0,0]},source),false);
+  assert.equal(actor.inspect().cloudVisible,false,'speech retains the full-opening sprite when native mouth paint is unavailable');
+  assert.equal(actor.update({arc:'work-gesture-work',phase:.05,pose:'work',speaking:false},source),true);
   actor.dispose();assert.equal(owner.retired.length,1);assert(textures.every(texture=>texture.disposals===1));
  }finally{globalThis.fetch=originalFetch}
 });

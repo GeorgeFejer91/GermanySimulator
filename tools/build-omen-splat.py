@@ -17,6 +17,7 @@ DETAIL = ROOT / "assets/buergeramt/characters/aktenkurier-detail.webp"
 HEIGHT = 1.96
 WIDTH = HEIGHT * 320 / 416
 PIXEL = HEIGHT / 832
+DEPTH_SIGMA = 1.6
 DTYPE = np.dtype([("position", "<f4", (3,)), ("scale", "<f4", (3,)),
                   ("rgba", "u1", (4,)), ("rotation_wxyz", "u1", (4,))])
 
@@ -78,7 +79,23 @@ def sculpture(image):
     files = (x > 261) & (x < 314) & (y > 155) & (y < 244)
     front = np.where(files, np.maximum(front, .205 + .012 * (x - 261) / 53), front)
     back = -.009 - np.minimum(.145, width * .40) * radial
-    return front, back, x, y
+    # Smooth only geometry across a few detail pixels. Normalize by the painted
+    # silhouette so transparent margins cannot flatten cheeks or join limb gaps.
+    weights = np.exp(-np.arange(-5, 6, dtype=float) ** 2 / (2 * DEPTH_SIGMA ** 2))
+    weights /= weights.sum()
+    visible = (alpha >= 32).astype(float)
+    def filter_depth(field):
+        numerator, denominator = field * visible, visible.copy()
+        for axis in (0, 1):
+            def convolve(values):
+                pads = [(0, 0), (0, 0)]
+                pads[axis] = (5, 5)
+                padded = np.pad(values, pads, mode="edge")
+                return sum(weight * np.take(padded, np.arange(values.shape[axis]) + i, axis=axis)
+                           for i, weight in enumerate(weights))
+            numerator, denominator = convolve(numerator), convolve(denominator)
+        return np.where(visible, numerator / np.maximum(denominator, 1e-9), field)
+    return filter_depth(front), filter_depth(back), x, y
 
 
 def build():
@@ -106,7 +123,7 @@ def build():
         r["position"][:, 1] = (1 - (py + .5) / 832) * HEIGHT
         r["position"][:, 2] = (front_z if front else back_z)[py, px]
         spacing = np.where(face[py, px], 1, np.where(detailed[py, px], 2, 3)) if front else np.full(n, 5)
-        sigma = np.where(face[py, px], .62, .61) if front else .70
+        sigma = np.where(face[py, px], .65, .68) if front else .70
         r["scale"][:, :2] = (spacing * sigma * PIXEL)[:, None]
         # Thick front kernels project into XY blur during a turn, especially eyes.
         r["scale"][:, 2] = np.where(face[py, px], .0009, .002) if front else .0065
@@ -147,6 +164,8 @@ def build():
         "maxSigma": data["scale"].max(axis=0).tolist(),
         "suggestedYawDegrees": [-25, 25], "sourceAlphaThreshold": 32,
         "samplingPixels": {"face": 1, "upperBody": 2, "lowerBody": 3, "rear": 5},
+        "depthSmoothingSigmaPixels": DEPTH_SIGMA,
+        "xySigmaSpacing": {"face": .65, "body": .68, "rear": .70},
         "validation": "finite positive scales; count/byte bounds; exact source-pixel XY/RGBA; front/rear sign; deterministic bytes",
         "limitations": "Rear paint is row-registered approximation; no full orbit, articulated limbs, learned reconstruction or browser-performance claim.",
     }

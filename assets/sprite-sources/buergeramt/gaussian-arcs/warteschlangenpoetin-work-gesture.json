@@ -170,6 +170,12 @@
           221,
           433
         ]
+      ],
+      "mouth_xywh": [
+        320,
+        155,
+        11,
+        8
       ]
     },
     {
@@ -296,6 +302,12 @@
           225,
           437
         ]
+      ],
+      "mouth_xywh": [
+        331,
+        140,
+        11,
+        8
       ]
     },
     {
@@ -431,7 +443,13 @@
           399
         ]
       ],
-      "prop_occlusion": "The one brown bag is mostly behind the torso; only its screen-right edge is visible."
+      "prop_occlusion": "The one brown bag is mostly behind the torso; only its screen-right edge is visible.",
+      "mouth_xywh": [
+        318,
+        145,
+        11,
+        8
+      ]
     },
     {
       "id": "bridge2",
@@ -561,6 +579,12 @@
           425,
           438
         ]
+      ],
+      "mouth_xywh": [
+        313,
+        143,
+        11,
+        8
       ]
     },
     {
@@ -690,6 +714,12 @@
           434,
           446
         ]
+      ],
+      "mouth_xywh": [
+        301,
+        183,
+        11,
+        8
       ]
     }
   ],

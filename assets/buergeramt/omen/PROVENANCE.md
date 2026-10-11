@@ -37,15 +37,25 @@ has no general skeletal or relighting model.
   spatial registration, not a claim of pixel-identical rendered output.
 - Face/hair use one sample per detail pixel; the upper body, hands, file stack
   and coat through working-source Y=350 use a 2px grid. Lower coat/legs use a
-  3px grid and the rear uses 5px. Front XY sigma is .62 times face spacing and
-  .61 times other spacing. Front depth sigma is .0009 for the face and .002
+  3px grid and the rear uses 5px. Front XY sigma is .65 times face spacing and
+  .68 times other spacing. Front depth sigma is .0009 for the face and .002
   elsewhere to keep thickness from blurring paint when viewed at an angle.
+  A separable 1.6-detail-pixel Gaussian smooths front/rear center depth only,
+  normalized within the painted silhouette. It softens abrupt relief ridges;
+  original XY, color, alpha, sampling count and floor registration stay exact.
 - Front centers have Z > 0; rear centers have Z < 0. Hide the rear when depth
   collapses and fade it in with expansion. Multiply center Z by the expansion
   amount. All rotations are identity to preserve the collapsed XY footprint.
 - Load only on office/omen approach, keep the accepted sprite as the loading
   and failure fallback, and let the integrator own cache/teardown and browser
   responsiveness checks. Asset size alone does not establish playability.
+
+The office action and omen consumers share `loadAmtSplatModule` and one versioned
+module identity. Preparation survives earlier conversations and registration;
+the optional automatic encounter waits to commit until preparation has settled.
+A genuine asset failure releases that gate to the articulated painted fallback.
+Replay owns a fresh visit and cancels stale preparation. Recorded cue preparation
+has a separate bounded deadline before the native playback-start watchdog.
 
 ## Reproduce and inspect
 

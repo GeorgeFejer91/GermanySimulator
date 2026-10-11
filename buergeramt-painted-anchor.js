@@ -1,5 +1,5 @@
 // Native-image Gaussian patches transport the whole painting on the paired paths.
-import {mouthPaintGlsl,nativeMouthRect} from './buergeramt-mouth-paint.js?v=20261011-acoustic-mouth';
+import {mouthPaintGlsl,nativeMouthRect} from './buergeramt-mouth-paint.js?v=20261011-mouth-consistency';
 const smooth=value=>{const t=Math.max(0,Math.min(1,value));return t*t*(3-2*t)};
 // A bounded spatial delay gives liquid motion, using only the existing phase.
 // Its slope stays positive and returns to one at both authored endpoints.
@@ -143,10 +143,13 @@ export async function createPaintedAnchor({THREE,owner,manifest,manifestUrl,sign
       phase.value=sample.u;segment.value=sample.segment;effect.value=animation.reducedMotion?0:.75*blend.effect;
       for(const [id,center] of [[pair.from,mouthA],[pair.to,mouthB]])center.value.fromArray(mouthRects.get(id));
       lipShape.value.fromArray(animation.lipShape||[0,0,0,0]);
-      mouth.value=animation.speaking?(animation.lipShape?.[0]??(!animation.reducedMotion?([0,.45,.9,.3,.7,.25,1,.1][animation.mouthFrame%8]??0):0)):0;
+      mouth.value=animation.speaking?(animation.lipShape?.[0]??0):0;
       pump();
       const height=source.geometry.parameters.height*source.scale.y;
-      mesh.position.copy(source.position);mesh.quaternion.copy(source.quaternion);mesh.scale.setScalar(height);
+      mesh.position.copy(source.position);mesh.quaternion.copy(source.quaternion);
+      // The registered canvas sets aspect; retain any additional host stretch.
+      const sy=source.scale.y||1;
+      mesh.scale.set(height*(source.scale.x??sy)/sy,height,height*(source.scale.z??sy)/sy);
       mesh.renderOrder=source.renderOrder??0;material.depthTest=source.material?.depthTest??true;
       material.color.copy(source.material?.color??new THREE.Color(1,1,1));const atmosphere=animation.atmosphere??1;material.color.r*=atmosphere;material.color.g*=atmosphere;material.color.b*=atmosphere;breath.value=source.material?.userData?.breath?.value??0;
       if(material.fog!==source.material?.fog){material.fog=source.material?.fog;material.needsUpdate=true}
@@ -161,7 +164,7 @@ export async function createPaintedAnchor({THREE,owner,manifest,manifestUrl,sign
       material.opacity=opacity;mesh.visible=true;return opacity;
     },
     async settle(){for(let n=0;n<3;n++){pump();if(!pending)break;await pending}},
-    inspect(){return{state:selected,opacity:mesh.visible?opacity:0,textureMix:mix.value,phase:phase.value,lipShape:[lipShape.value.x,lipShape.value.y,lipShape.value.z,lipShape.value.w],technique:mode.value?'native-texture-gaussians':'native-anchor-fallback',splatCount:mode.value?paired.count:0,visible:!disposed&&mesh.visible,resident:cache.size,pending:!!pending,failures:Object.fromEntries(failures),dimensions:mesh.visible?[spec.frames[states[0]].width,spec.frames[states[0]].height]:null}},
+    inspect(){return{state:selected,pair:manifest.segments[segment.value],mouthA:[mouthA.value.x,mouthA.value.y,mouthA.value.z,mouthA.value.w],mouthB:[mouthB.value.x,mouthB.value.y,mouthB.value.z,mouthB.value.w],opacity:mesh.visible?opacity:0,textureMix:mix.value,phase:phase.value,lipShape:[lipShape.value.x,lipShape.value.y,lipShape.value.z,lipShape.value.w],technique:mode.value?'native-texture-gaussians':'native-anchor-fallback',splatCount:mode.value?paired.count:0,visible:!disposed&&mesh.visible,resident:cache.size,pending:!!pending,failures:Object.fromEntries(failures),dimensions:mesh.visible?[spec.frames[states[0]].width,spec.frames[states[0]].height]:null}},
     dispose(){if(disposed)return;disposed=true;controller.abort();signal?.removeEventListener?.('abort',onAbort);mesh.visible=false;mesh.userData.anchorActive=false;owner.retirePaint(mesh);geometry.dispose();patches?.dispose();material.dispose();for(const entry of cache.values())free(entry);cache.clear()},
   };
   signal?.addEventListener?.('abort',onAbort,{once:true});

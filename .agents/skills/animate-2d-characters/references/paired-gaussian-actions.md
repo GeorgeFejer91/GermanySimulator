@@ -279,6 +279,10 @@ or owner failure makes `actor.update()` return false for the host sprite fallbac
 The actor's `settle()` is a test helper,
 not a render-loop wait. Hosts without approved anchors can set `anchorPaint:false`
 for a cloud-only experiment; older manifests without `anchors` stay readable.
+The portable starter's `mouthFrame`/`speech_landmarks` deformation is a small
+synthetic motion cue, not a complete opening or recorded phoneme synchronization.
+For full speech mouths, follow [the transformed-mouth contract](gaussian-transitions.md#keep-the-mouth-attached-through-transformations): use source-specific registrations and an owned media cue shape inside the existing paint transport. Do not certify the starter as a full lip-sync rig without implementing and rendering that binding.
+
 When the spec declares up to two named `speech_landmarks`, the texture patches use
 the same localized mouth cue and reduced-motion suppression as the cloud;
 without them, their paint stays unchanged during speech.

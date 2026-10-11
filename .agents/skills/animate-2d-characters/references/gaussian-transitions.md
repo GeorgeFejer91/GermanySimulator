@@ -142,6 +142,48 @@ behind one lip edge can appear off-centre despite correct XY registration. Scale
 its height with opening rather than leaving a dark oval under every consonant.
 Keep the jaw connected and the original painted crease visible at closure.
 
+### Keep the mouth attached through transformations
+
+Bind face registration to the painting actually being displayed: source identity,
+crop, pose/frame and authored facial landmarks. A patch parented to the character
+already inherits world movement, billboarding and scale; that does not track a
+face moving inside a different atlas cell. Select the cell and its mouth
+registration together. If the export deforms source paint, transport the
+registration through that same field at the displayed sample, rather than adding
+another mouth timer. Author visible front/profile registrations as needed; a
+frontal mouth must not be projected onto a rear view without visible lips.
+
+For paired native-image Gaussians, articulate each source painting in its own
+registered UV space before the existing paired transport mixes it. Carry its
+head/jaw landmarks, local size and orientation through the same body paths.
+Register the actual lip crease on every encoded key, including bridges, in its
+existing source specification and compiled manifest. Nose/chin interpolation
+does not locate mouths reliably in separately painted keys. Authored key times
+own transport timing, not oral coordinates; filenames such as `bridge1` specify
+neither. Check registrations against enlarged source pixels and full-aperture
+renders: finite coordinates can still place a cavity on a cheek. Keep the body arc
+advancing during speech. Pinning the fallback to one talk picture while the
+Gaussian body advances creates a pose jump at readiness or representation
+handover. Both consumers need the same action intent and phase; fallback art
+may have fewer samples, which should be stated and inspected.
+
+Trace media time separately from body phase and selected paint. Render held
+closed/open/rounded/biting shapes through changing head positions, raised and
+lowered extremes, return, camera-facing changes, nonuniform transforms supported
+by the host, and native/fallback handover. Check the lip crease, connected jaw,
+eyes/props and floor in ordered playback, not just isolated face screenshots.
+Reduced motion can retain speech articulation. Missing pose registration is an
+asset/coverage finding; silently reusing the previous face is not adaptation.
+
+Test recorded synchronization with actual native playback. Arm capture cutoffs
+inside the browser before playback resumes; host tool calls can outlast a short
+line. Compare the sampled mouth with the cue at the **actual** media time and
+report capture overshoot instead of treating a requested timestamp as observed.
+For asynchronous splat batches, wait for completed updates containing the new
+pose before evaluating the screenshot. Separate these captures from deliberately
+held semantic extremes, and keep estimated acoustic cues distinct from verified
+phoneme alignment.
+
 Inspect normal-speed rendered motion plus native-scale closed, consonant, open
 vowel, rounded and biting extremes, comparing the neutral frame to the original.
 Do not seek the media for the only synchronization test: some test servers or

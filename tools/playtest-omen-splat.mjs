@@ -19,7 +19,7 @@ try{
     const page=await context.newPage(),errors=[],warnings=[],requests=[];
     page.on('pageerror',e=>errors.push(e.message));page.on('console',m=>{if(['warning','error'].includes(m.type()))warnings.push(m.text())});
     page.on('request',r=>{if(/spark|omen\/aktenkurier|buergeramt-splat/.test(r.url()))requests.push(r.url())});
-    if(name==='asset-failure')await page.route('**/omen/aktenkurier.splat',route=>route.abort('failed'));
+    if(name==='asset-failure')await page.route('**/omen/aktenkurier.splat*',route=>route.abort('failed'));
     if(name==='office-failure')await page.route('**/assets/buergeramt/office-detail.js*',route=>route.abort('failed'));
     if(name==='fullbody-diagnostic')await page.route('**/world3d.js*',async route=>{
       const response=await route.fetch();let body=await response.text();

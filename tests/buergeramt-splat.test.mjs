@@ -45,6 +45,15 @@ test('the simulation reveal clock resets on arrival, replay, and cancellation',(
   assert.equal(h.level.omen.phase,'');
 });
 
+test('automatic encounter waits for current renderer preparation without taking movement control',()=>{
+ const h=harness('host',{cinematics:true});
+ h.window.Germany3D={amtCinematicReady:false};h.enter();h.key('KeyW');
+ for(let i=0;i<120;i++)h.level.update(.05);
+ h.key('KeyW','keyup');assert.equal(h.level.omen.phase,'');assert.equal(h.level.stage,'walk-sign');
+ h.window.Germany3D.amtCinematicReady=true;h.level.update(.05);
+ assert.equal(h.level.omen.phase,'approach');assert.equal(h.level.stage,'omen');
+});
+
 test('flattening retains full body opacity until the registered sprite handover',()=>{
  for(const phase of ['approach','blackout','glare','unwind'])for(const opacity of [.001,.1,.5,1]){
   const pose=omenSplatPose({phase,life:{opacity,depth:phase==='unwind'?0:.5}});
