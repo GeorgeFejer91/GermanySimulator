@@ -752,6 +752,20 @@ desktop and 14.01–15.79 MB emulation. Exact results and instrumentation are in
 Physical Android, displayed-frame/GPU timing and a natural mission traversal
 remain NOT RUN.
 
+Publication integration at `db6c73c` retains origin `b5d2c3a`'s office-mouth
+changes. The full renderer hash is now `cc9ca8e9…`; its complete mission-pointer
+block is byte-identical to the reviewed candidate, with the same GLB and HUD.
+The final frozen candidate passes 280 release tests, voice-library curation,
+six exact-RGBA delivery checks, fresh root/`3d.html` movement and clearance,
+and one cold hardware guard context per desktop/Android-emulated viewport.
+Each guard accepts nine inputs with no page errors. Independent Physics and
+Camera reviews pass the final affected scope. These two single guard contexts
+supplement the repeated comparison above; they do not certify stable timing or
+physical-device performance. The final browser stages were resumed after a
+runner dependency-path error before any page opened; production source remained
+unchanged. Local evidence is in `output/wegweiser/casing-final-*` and
+`casing-candidate-final-merged.json`.
+
 - Root `assets/models/` is the only authority for shipped model files.
 - The root game has one required WebGL presentation path. Do not preload or restore the retired SVG/Canvas world-art set. Registered moving-character PNG atlases remain the deliberate bitmap exception; DOM UI art and billboard textures are not alternate world renderers.
 - Trees are canonical world data in `game.js`, not renderer-local decoration. Apply the rail-gutter city offset exactly once, keep each trunk center at least 48 world units outside every road rectangle, expose the same placement to `world3d.js` and `3d.html`, and keep trees solid to ground movement.
