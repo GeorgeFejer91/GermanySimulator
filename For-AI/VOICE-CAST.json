@@ -2750,7 +2750,7 @@
       "secretTunnelProfileName": "GS Heinrich Wachtmeister (police-officer)",
       "secretTunnelProfileId": "24b741bbe55d4f3a843aa481c3459a96",
       "gender": "male",
-      "genderEvidence": "Bürgeramt phone scene calls the officer Herr Wachtmeister",
+      "genderEvidence": "EmoDB original source speaker 3; city police model",
       "generalDemeanor": "Shouting, demanding enforcement officer",
       "demeanorEvidence": "HALT! STEHENBLEIBEN!",
       "targetValence": "negative",
@@ -2788,8 +2788,7 @@
       },
       "status": "profile-verified; private audition available; listening review pending",
       "dialogueSources": [
-        "game.js policeBarks[region]",
-        "buergeramt-story.js police and call for phone role"
+        "game.js policeBarks[region]"
       ]
     },
     {
@@ -3426,5 +3425,26 @@
     "profilesCreated": 3,
     "matchingOriginalAudioAndSavedName": 3,
     "auditionStatus": "private auditions pending; no authored runtime dialogue"
-  }
+  },
+  "institutionProfiles": [
+    {
+      "gameRole": "buergeramt-phone",
+      "displayRole": "Kriminalpolizei",
+      "voiceId": "kriminalpolizei",
+      "secretTunnelProfileName": "GS Kriminalpolizei",
+      "secretTunnelProfileId": "f700170f840543bca7413d3ccf6ac028",
+      "generalDemeanor": "Condescending criminal investigator escalating through accusations to shouted threats during a lawn-violation phone call.",
+      "targetValence": "negative",
+      "targetArousal": "medium to high",
+      "reference": {
+        "source": "https://www.youtube.com/watch?v=egBl1QgsdXQ",
+        "originalSha256": "0a1f98a15137640d3913ac3e0bc28811d5304dd16119ffab5aa8ad6653df0acf",
+        "workingReferenceSha256": "ef452114430b47167239cdb065b1e01d502c0148f1492ac1b66098a03c0ea82e"
+      },
+      "status": "verified with native Secret Tunnel list on 2026-10-10; user-selected for default phone playback; encoded words verified; listening review not performed",
+      "dialogueSources": [
+        "buergeramt-story.js call.line and police"
+      ]
+    }
+  ]
 }

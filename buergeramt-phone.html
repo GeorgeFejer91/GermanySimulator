@@ -1,17 +1,18 @@
 <!doctype html>
-<html lang="de"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="theme-color" content="#ffffff"><link rel="icon" href="data:,"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"><meta name="mobile-web-app-capable" content="yes"><title>Bürgeramt · Anmeldung</title><link rel="stylesheet" href="./buergeramt.css?v=20261008-phone-full-volume"></head>
+<html lang="de"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="theme-color" content="#ffffff"><link rel="icon" href="data:,"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"><meta name="mobile-web-app-capable" content="yes"><title>Bürgeramt · Anmeldung</title><link rel="stylesheet" href="./buergeramt.css?v=20261011-gameplay-text"></head>
 <body class="amt-phone"><main class="phone-shell">
 <header><div class="phone-brand"><b>AMT <span>38</span></b><strong>ServicePortal Bürgeramt</strong></div><small>LANDESAMT FÜR ANWESENHEIT · ONLINE-DIENST</small></header>
 <div class="phone-breadcrumb">Bürgeramt / Anmeldung zur Vorsprache</div>
 <h1 class="phone-title">Anmeldung zur Vorsprache</h1>
 <section id="phone-ticket" class="phone-ticket" hidden><small>IHRE WARTENUMMER</small><b id="phone-number">—</b><p id="phone-status" role="status">Verbindung zur Warteschlange wird hergestellt.</p><p class="phone-keep">Lassen Sie diese Seite geöffnet und sichtbar, bis Ihre Nummer aufgerufen wird. Sonst verfällt Ihr Platz.</p></section>
+<button id="phone-silence" class="phone-silence" type="button" hidden>ANRUFE LAUTLOS SCHALTEN</button>
 <form id="phone-form" class="phone-form"><h2>Angaben zur Vorsprache</h2><p>Für die weitere Bearbeitung tragen Sie Ihren Namen zu dieser Wartenummer ein.</p><label for="phone-name">VOR- UND NACHNAME</label><input id="phone-name" name="name" type="text" autocomplete="name" maxlength="80" required><button id="phone-submit" type="submit" disabled>NAME EINTRAGEN</button></form>
 <p id="phone-connect-status" role="status">Verbindung zum Amt wird hergestellt.</p>
 <section id="phone-call" class="phone-call" hidden role="dialog" aria-modal="true" aria-labelledby="phone-caller phone-call-state">
   <div class="call-status"><time id="phone-time">12:00</time></div>
   <small id="phone-call-state">EINGEHENDER ANRUF</small>
   <div class="call-symbol" aria-hidden="true"><svg viewBox="0 0 64 64"><circle cx="32" cy="23" r="11"/><path d="M12 55c0-12 8-19 20-19s20 7 20 19"/></svg></div>
-  <b id="phone-caller">Unbekannte Nummer</b>
+  <b id="phone-caller" lang="de">Unbekannte Nummer</b>
   <p id="phone-call-line" lang="de" hidden></p>
   <div id="phone-choices" class="phone-choices">
     <button id="phone-decline" type="button"><svg class="call-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M2 12c5-5 15-5 20 0l-2 5-4-1 .5-3c-3-1.5-6-1.5-9 0L8 16l-4 1z"/></svg><span id="phone-decline-label" class="call-label">ABLEHNEN</span></button>
@@ -20,5 +21,6 @@
       <button id="phone-answer" type="button"><svg class="call-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 2h3l2 5-2 2c1.8 3.5 4.5 6.2 8 8l2-2 5 2v3c0 1.1-.9 2-2 2C10.1 22 2 13.9 2 4c0-1.1.9-2 2-2z"/></svg><span id="phone-answer-label" class="call-label">ANNEHMEN</span></button>
     </div>
   </div>
+  <button id="phone-call-silence" class="phone-call-silence" type="button">ANRUFE LAUTLOS SCHALTEN</button>
 </section>
-<footer>Vorgänge werden nur bei bestehender Verbindung aufgerufen.</footer></main><script src="./assets/vendor/vdoninja/1.5.5/vdoninja-sdk.min.js"></script><script src="./buergeramt-time.js?v=20261007-call-sync4"></script><script src="./buergeramt-link.js?v=20261008-voice-preview"></script><script src="./For-AI/AUDIO-TEXT-LIBRARY.js?v=20261008-phone-preview"></script><script src="./buergeramt-phone.js?v=20261008-voice-preview"></script><script type="module" src="./buergeramt-fit.js?v=20261008-phone-full-volume"></script></body></html>
+<footer>Vorgänge werden nur bei bestehender Verbindung aufgerufen.</footer></main><script src="./assets/vendor/vdoninja/1.5.5/vdoninja-sdk.min.js"></script><script src="./buergeramt-time.js?v=20261011-gameplay-text"></script><script src="./buergeramt-link.js?v=20261011-gameplay-text"></script><script src="./For-AI/AUDIO-TEXT-LIBRARY.js?v=20261011-gameplay-text"></script><script src="./buergeramt-phone.js?v=20261011-gameplay-text"></script><script type="module" src="./buergeramt-fit.js?v=20261011-gameplay-text"></script></body></html>

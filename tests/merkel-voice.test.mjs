@@ -15,7 +15,7 @@ assert.deepEqual(manifest.clips.map(clip=>clip.text),Array.from(lines),'all auth
 assert.equal(manifest.clips.length,9);
 assert.equal(manifest.profileId,'25916e5981064e09a2c42350d5fe5f04');
 assert.equal(manifest.profileId,catalog.voices.merkel.profileId);
-for(const name of ['speakRecorded','speakMerkelLine','showWorldBark','speakDialogueLine'])vm.runInContext(game.match(new RegExp(`^function ${name}\\(.*$`,'m'))[0],sandbox);
+for(const name of ['speakRecorded','speakMerkelLine','showWorldBark','speakDialogueLine'])vm.runInContext(game.slice(game.indexOf(`function ${name}(`),game.indexOf('\n}',game.indexOf(`function ${name}(`))+2).split('\nfunction ')[0],sandbox);
 for(const item of manifest.clips){
  const clip=catalog.clips[item.clipId],bytes=readFileSync(new URL(item.path,root));
  assert.equal(clip.voiceId,'merkel');
@@ -31,6 +31,8 @@ for(const item of manifest.clips){
  sandbox.showWorldBark('ANGELA MERKEL · SATIRE',item.text,false,'','',{family:'politician:merkel'});
  let request=calls.pop();
  assert.equal(request.mode,'recording');
+ assert.equal(request.captionOnly,true,'ambient recordings must retain the single-caption presentation through the broker');
+ assert.equal(request.captionSpeaker,'ANGELA MERKEL · SATIRE');
  assert.equal(request.recording,clip.recording);
  request.start();assert.equal(elements.get('police-bark-text').textContent,item.text);
  request.done();assert.equal(elements.get('police-bark').hidden,true);

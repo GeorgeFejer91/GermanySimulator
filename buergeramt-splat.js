@@ -1,18 +1,18 @@
 // Omen-only Gaussian projection. The existing episode owns all timing and movement.
 const clamp=value=>Math.max(0,Math.min(1,value));
-const smooth=value=>{const t=clamp(value);return t*t*(3-2*t)};
 const TUNNEL_RINGS=32,TUNNEL_AROUND=96;
 
 export function omenSplatPose(omen,reducedMotion=false){
-  const live=omen.phase==='blackout'||omen.phase==='glare';
-  const time=Math.max(0,omen.revealTime||0),reveal=live?smooth(time/1.45):0;
-  const tension=clamp(omen.speech?.tension||0);
+  const live=['approach','blackout','glare'].includes(omen.phase),life=omen.life||{};
+  const reveal=live?clamp(life.depth||0):0;
   return {
     live,reveal,
-    opacity:live?smooth(time/.52):0,
-    turn:reducedMotion?0:reveal*(.23+.12*Math.sin(time*.85)),
-    ripple:reducedMotion?0:reveal*(.45+.55*tension)*(omen.speech?.paused ? .25 : 1),
-    time:reducedMotion?0:time,
+    opacity:live?clamp(life.opacity||0):0,
+    turn:0,
+    pressure:live?clamp(life.pressure||0):0,
+    pulse:reducedMotion?0:clamp(life.pulse||0),
+    ripple:reducedMotion?0:reveal*(.3+.7*clamp(life.pressure||0))*(omen.speech?.paused ? .15 : 1),
+    time:reducedMotion?0:Math.max(0,life.time||0),
   };
 }
 
@@ -24,17 +24,33 @@ export async function createOmenSplat({THREE,renderer,scene,signal}){
   const bytes=await response.arrayBuffer(),count=bytes.byteLength/32;
   if(!Number.isInteger(count)||count<1||count>40000)throw new Error('Invalid omen splat size');
   signal.throwIfAborted();
-  const depth=dyno.dynoFloat(0),clock=dyno.dynoFloat(0),ripple=dyno.dynoFloat(0);
+  const depth=dyno.dynoFloat(0),clock=dyno.dynoFloat(0),ripple=dyno.dynoFloat(0),pulse=dyno.dynoFloat(0),mouth=dyno.dynoVec4(new THREE.Vector4());
   const modifier=dyno.dynoBlock({gsplat:dyno.Gsplat},{gsplat:dyno.Gsplat},({gsplat})=>{
     const effect=new dyno.Dyno({
-      inTypes:{gsplat:dyno.Gsplat,depth:'float',clock:'float',ripple:'float'},
-      outTypes:{gsplat:dyno.Gsplat},inputs:{gsplat,depth,clock,ripple},
+      inTypes:{gsplat:dyno.Gsplat,depth:'float',clock:'float',ripple:'float',pulse:'float',mouth:'vec4'},
+      outTypes:{gsplat:dyno.Gsplat},inputs:{gsplat,depth,clock,ripple,pulse,mouth},
       statements:({inputs:i,outputs:o})=>[`
         ${o.gsplat} = ${i.gsplat};
         vec3 p = ${i.gsplat}.center;
+        // Same registered gesture mouth as the native-paint fallback. A tiny
+        // thin oral kernel is tagged by Z scale; existing source splats are thicker.
+        bool oral = ${i.gsplat}.scales.z < .0002;
+        vec2 lip = (p.xy-vec2(.0577,1.6585))/vec2(.026,.017);
+        float lipWeight = p.z>0.0 ? exp(-.7*dot(lip,lip)) : 0.0;
+        float lowerLip = 1.0-smoothstep(-.22,.22,lip.y);
+        p.y -= ${i.mouth}.x*.0119*lowerLip*lipWeight;
+        p.y += ${i.mouth}.x*.0020*(1.0-lowerLip)*lipWeight;
+        p.x += (p.x-.0577)*lipWeight*(${i.mouth}.y*.13-${i.mouth}.z*.22);
+        p.y += ${i.mouth}.w*.0027*lowerLip*lipWeight;
+        if(oral){
+          p=vec3(.0577,1.6585-${i.mouth}.x*.0034,.174);
+          ${o.gsplat}.center=p;
+          ${o.gsplat}.scales.xy=vec2(.018*(1.0-${i.mouth}.z*.35),max(.0001,${i.mouth}.x*.0055));
+          ${o.gsplat}.rgba.a=${i.mouth}.x*.9;
+        }else{
         float expand = ${i.depth};
         float t = ${i.clock};
-        float wave = ${i.ripple};
+        float wave = ${i.ripple}*(1.0-lipWeight);
         // Sculpted rear shell stays absent while the projection is still flat.
         float shell = p.z < 0.0 ? smoothstep(0.06, 0.65, expand) : 1.0;
         float planted = smoothstep(0.12, 0.72, p.y);
@@ -45,16 +61,18 @@ export async function createOmenSplat({THREE,renderer,scene,signal}){
         p.x += loosen*planted*(1.0-face*.7)*.035*sin(p.y*73.0+p.x*121.0);
         p.z += loosen*planted*.09*cos(p.y*33.0-p.x*52.0);
         p.x += wave*planted*(1.0-face*.72)*0.014*tremor;
-        p.z += wave*planted*0.018*sin(p.y*10.0+t*1.4);
+        // Local +Z faces the viewer: the coat pushes towards them with the score.
+        p.z += wave*planted*(1.0-face*.8)*(.02+.055*${i.pulse});
         ${o.gsplat}.center = p;
         ${o.gsplat}.scales.z *= mix(0.12, 1.0, expand);
         ${o.gsplat}.scales *= 1.0+loosen*.55;
         ${o.gsplat}.rgba.a *= shell;
-        vec3 prism = 0.5+0.5*cos(vec3(0.0,2.094,4.189)+p.y*6.5-t*.65);
-        // Keep eyes and facial paint readable; chromatic motion lives in the coat.
+        // Bruised, cold paint; preserve face detail without rainbow cycling.
+        vec3 ink = vec3(.39,.35,.50)+vec3(.07,.035,.09)*sin(p.y*6.5-t*.65);
         ${o.gsplat}.rgba.rgb = mix(${o.gsplat}.rgba.rgb,
-          ${o.gsplat}.rgba.rgb*(.65+prism*.9)+prism*.055,
-          wave*(.30-face*.20));
+          ${o.gsplat}.rgba.rgb*ink,
+          wave*(.42-face*.32));
+        }
       `],
     });
     return {gsplat:effect.outputs.gsplat};
@@ -62,22 +80,21 @@ export async function createOmenSplat({THREE,renderer,scene,signal}){
   const tunnelClock=dyno.dynoFloat(0),tunnelAim=dyno.dynoVec2(new THREE.Vector2()),tunnelFov=dyno.dynoFloat(1);
   const tunnelModifier=dyno.dynoBlock({gsplat:dyno.Gsplat},{gsplat:dyno.Gsplat},({gsplat})=>{
     const effect=new dyno.Dyno({
-      inTypes:{gsplat:dyno.Gsplat,clock:'float',aim:'vec2',fov:'float'},
-      outTypes:{gsplat:dyno.Gsplat},inputs:{gsplat,clock:tunnelClock,aim:tunnelAim,fov:tunnelFov},
+      inTypes:{gsplat:dyno.Gsplat,clock:'float',aim:'vec2',fov:'float',pulse:'float'},
+      outTypes:{gsplat:dyno.Gsplat},inputs:{gsplat,clock:tunnelClock,aim:tunnelAim,fov:tunnelFov,pulse},
       statements:({inputs:i,outputs:o})=>[`
         ${o.gsplat} = ${i.gsplat};
         vec3 p = ${i.gsplat}.center;
         float u = -p.z;
         float a = atan(p.y,p.x)+${i.clock}*.18+u*4.8;
-        float curl = 1.0+.065*sin(a*5.0-u*12.0+${i.clock}*.3);
+        float curl = 1.0-.10*${i.pulse}+.075*sin(a*5.0-u*12.0+${i.clock}*1.2);
         float widening = 1.0-u;
         vec2 radius = vec2(.58+widening*1.35,1.00+widening*.95)*${i.fov};
         p.xy = u*(vec2(cos(a),sin(a))*radius*curl+${i.aim});
         ${o.gsplat}.center = p;
         ${o.gsplat}.scales.xy *= ${i.fov};
         float veins = .5+.5*sin(a*3.0-u*19.0-${i.clock}*.4);
-        vec3 ink = mix(vec3(.018,.010,.032),vec3(.23,.082,.32),veins*.75);
-        ink += vec3(.008,.042,.040)*(.5+.5*sin(a*4.0+u*13.0));
+        vec3 ink = mix(vec3(.009,.005,.018),vec3(.12,.035,.17),veins*.65);
         ${o.gsplat}.rgba.rgb = ink;
       `],
     });
@@ -85,7 +102,7 @@ export async function createOmenSplat({THREE,renderer,scene,signal}){
   });
   let mesh,tunnel,spark,disposed=false,pending=null,failure='',lastUpdate=-Infinity;
   try{
-    mesh=new SplatMesh({maxSplats:count,lod:false,enableLod:false,editable:false,raycastable:false,
+    mesh=new SplatMesh({maxSplats:count+1,lod:false,enableLod:false,editable:false,raycastable:false,
       objectModifier:modifier,
       constructSplats:async splats=>{
         const data=new DataView(bytes),point=new THREE.Vector3(),scale=new THREE.Vector3(),quaternion=new THREE.Quaternion(),color=new THREE.Color();
@@ -99,6 +116,7 @@ export async function createOmenSplat({THREE,renderer,scene,signal}){
           color.setRGB(data.getUint8(i+24)/255,data.getUint8(i+25)/255,data.getUint8(i+26)/255);
           splats.pushSplat(point,scale,quaternion,data.getUint8(i+27)/255,color);
         }
+        splats.pushSplat(new THREE.Vector3(.0577,1.6585,.174),new THREE.Vector3(.018,.0001,.0001),new THREE.Quaternion(),.9,new THREE.Color(.085,.027,.022));
       },
     });
     await mesh.initialized;signal.throwIfAborted();
@@ -121,18 +139,23 @@ export async function createOmenSplat({THREE,renderer,scene,signal}){
     scene.add(spark,mesh,tunnel);
   }catch(error){mesh?.dispose();tunnel?.dispose();spark?.dispose();throw error}
   let pose=omenSplatPose({});
+  let lastMouthTime=performance.now();
   const target=new THREE.Vector3();
   const release=()=>{mesh.dispose();tunnel.dispose();spark.dispose()};
   return {
-    update(omen,actor,camera,reducedMotion=false){
+    update(omen,actor,camera,reducedMotion=false,speech=null){
       if(disposed||failure)return 0;
       pose=omenSplatPose(omen,reducedMotion);
       spark.visible=mesh.visible=tunnel.visible=pose.live;
       if(pose.live){
-        depth.value=pose.reveal;clock.value=pose.time;ripple.value=pose.ripple;
+        const mouthNow=performance.now(),mouthDt=Math.min(.1,Math.max(0,(mouthNow-lastMouthTime)/1000));lastMouthTime=mouthNow;
+        const speaking=speech?.active&&speech.actor==='aktenkurier';
+        if(!speaking)mouth.value.set(0,0,0,0);
+        else if(!speech.paused)for(let i=0;i<4;i++)mouth.value.setComponent(i,mouth.value.getComponent(i)+(speech.shape[i]-mouth.value.getComponent(i))*(1-Math.exp(-mouthDt/.035)));
+        depth.value=pose.reveal;clock.value=pose.time;ripple.value=pose.ripple;pulse.value=pose.pulse*pose.pressure;
         mesh.opacity=pose.opacity;
         mesh.position.set(actor.position.x,0,actor.position.z);
-        mesh.rotation.y=actor.rotation.y+pose.turn;
+        mesh.rotation.y=Math.atan2(camera.position.x-actor.position.x,camera.position.z-actor.position.z);
         mesh.needsUpdate=true;
         camera.updateMatrixWorld(true);
         target.set(actor.position.x,1.04,actor.position.z);camera.worldToLocal(target);
@@ -142,7 +165,7 @@ export async function createOmenSplat({THREE,renderer,scene,signal}){
         tunnelAim.value.set(target.x/distance,target.y/distance);
         tunnelFov.value=Math.tan(THREE.MathUtils.degToRad(camera.fov*.5));
         tunnelClock.value=reducedMotion?0:pose.time;
-        tunnel.opacity=clamp(omen.strength||0)*smooth(pose.reveal*2);
+        tunnel.opacity=clamp(omen.strength||0)*pose.reveal;
         tunnel.needsUpdate=true;
         spark.setDirty();
         // Own the asynchronous GPU readback/sort so teardown cannot free its target
@@ -158,7 +181,7 @@ export async function createOmenSplat({THREE,renderer,scene,signal}){
       }
       return spark.activeSplats>0?pose.opacity:0;
     },
-    inspect(){return {ready:!disposed&&!failure,count,tunnelCount:TUNNEL_RINGS*TUNNEL_AROUND,tunnelVisible:!disposed&&tunnel.visible,tunnelTime:tunnelClock.value,bytes:bytes.byteLength,failure,activeSplats:spark.activeSplats,pending:!!pending,visible:!disposed&&spark.visible,...pose}},
+    inspect(){return {ready:!disposed&&!failure,count,mouthKernels:1,mouth:mouth.value.toArray(),tunnelCount:TUNNEL_RINGS*TUNNEL_AROUND,tunnelVisible:!disposed&&tunnel.visible,tunnelTime:tunnelClock.value,facingY:mesh.rotation.y,bytes:bytes.byteLength,failure,activeSplats:spark.activeSplats,pending:!!pending,visible:!disposed&&spark.visible,...pose}},
     dispose(){
       if(disposed)return;disposed=true;
       scene.remove(spark,mesh,tunnel);if(!pending)release();

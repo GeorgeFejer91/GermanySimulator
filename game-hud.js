@@ -1,7 +1,10 @@
-import {prepareWithSegments,measureLineStats,measureNaturalWidth} from './assets/vendor/pretext/dist/layout.js';
+import {prepareWithSegments,measureLineStats,measureNaturalWidth,setLocale} from './assets/vendor/pretext/dist/layout.js';
 
 const byId=id=>document.getElementById(id),file=byId('case-file'),fax=byId('mission-fax'),rail=byId('city-status'),toggle=byId('file-toggle'),notices=byId('city-notices');
+const subtitles=byId('subtitle-toggle'),subtitleAnchor=document.createComment('subtitle control position');subtitles.before(subtitleAnchor);
 const noticeAnchor=document.createComment('city notice position');notices.before(noticeAnchor);
+const noticeOrder=['violation-alert','law-unlock-prompt','police-bark','wurst-alert','border-alert','toast'];
+for(const id of ['law-unlock-prompt','wurst-alert','border-alert'])notices.append(byId(id));
 const meter=byId('germanness-hud'),meterAnchor=document.createComment('Germanness HUD position');meter.before(meterAnchor);
 const alerts=['toast','police-bark','violation-alert','wurst-alert','law-unlock-prompt','border-alert','dialogue','quiz-modal','form-modal','humor-modal','end-modal'];
 const cache=new Map();
@@ -56,11 +59,12 @@ function page(name){for(const el of file.querySelectorAll('[data-page]'))el.hidd
 function openFile(){
  if(!active())return;
  hideFax();pending=false;manual=true;window.Germany3DBridge.clearInput();
- file.append(notices);file.querySelector('.file-header').append(meter);file.showModal();toggle.setAttribute('aria-expanded','true');page('mission');byId('file-close').focus();schedule();
+ file.append(notices);file.append(subtitles);file.querySelector('.file-header').append(meter);file.showModal();toggle.setAttribute('aria-expanded','true');page('mission');byId('file-close').focus();schedule();
 }
-function closeFile(){file.close()}
-file.addEventListener('close',()=>{manual=false;noticeAnchor.after(notices);meterAnchor.after(meter);toggle.setAttribute('aria-expanded','false');window.Germany3DBridge.clearInput();if(!rail.hidden)toggle.focus({preventScroll:true});if(!document.hidden)reminder(true);schedule()});
-byId('file-close').onclick=closeFile;toggle.onclick=openFile;byId('fax-open').onclick=openFile;
+function closeFile(){subtitleAnchor.after(subtitles);file.close()}
+file.addEventListener('cancel',()=>subtitleAnchor.after(subtitles));
+file.addEventListener('close',()=>{manual=false;subtitleAnchor.after(subtitles);noticeAnchor.after(notices);meterAnchor.after(meter);toggle.setAttribute('aria-expanded','false');window.Germany3DBridge.clearInput();if(!rail.hidden)toggle.focus({preventScroll:true});if(!document.hidden)reminder(true);schedule()});
+byId('file-close').onclick=closeFile;toggle.onclick=openFile;
 byId('fax-dismiss').onclick=()=>{pending=false;hideFax(true,()=>reminder(true));toggle.focus({preventScroll:true})};
 for(const el of file.querySelectorAll('[data-file-page]'))el.onclick=()=>page(el.dataset.filePage);
 addEventListener('keydown',event=>{
@@ -73,9 +77,12 @@ window.GermanyHUD={get paused(){return manual},refresh:schedule};
 function sync(){
  queued=false;
  const state=window.Germany3DBridge?.getHUDState();if(!state)return;
- setHidden(rail,!state.started&&!document.body.classList.contains('amt-inside'));rail.classList.toggle('city-busy',!active());
+ setHidden(rail,!state.started||document.body.classList.contains('amt-inside'));rail.classList.toggle('city-busy',!active());
+ if(!manual){if(!rail.hidden){if(subtitles.parentElement!==rail)rail.append(subtitles)}else if(subtitles.parentElement===rail)subtitleAnchor.after(subtitles)}
  const lang=state.lang==='en'?'en':'de';
- if(language!==lang){language=lang;for(const el of document.querySelectorAll('[data-de]'))setText(el,el.dataset[lang]);byId('fax-dismiss').setAttribute('aria-label',lang==='en'?'Hide mission':'Auftrag ausblenden')}
+ if(language!==lang){language=lang;if(typeof setLocale==='function')setLocale(lang);cache.clear();for(const el of document.querySelectorAll('[data-de]'))setText(el,el.dataset[lang]);byId('fax-dismiss').setAttribute('aria-label',lang==='en'?'Hide mission':'Auftrag ausblenden')}
+ const notice=noticeOrder.find(id=>visible(byId(id))&&!byId(id).classList.contains('caption-only'));
+ for(const id of noticeOrder)byId(id).classList.toggle('notice-deferred',id!==notice);
  setHidden(byId('energy-warning'),state.energy>35);setText(byId('energy-warning'),(lang==='en'?'ENERGY ':'ENERGIE ')+state.energy);
  const next=byId('mission-title').textContent+'\n'+byId('mission-text').textContent;
  if(next!==mission){mission=next;pending=true;hideFax()}
@@ -90,8 +97,13 @@ function schedule(){if(queued||document.hidden)return;queued=true;requestAnimati
 
 // Actual, bounded text measurements with the shipped Pretext version. DOM owns
 // wrapping; a long file page scrolls at zoom rather than truncating instructions.
-const fitSelectors=['#city-status button','#energy-warning','.wanted small','#fax-title','#fax-text','.fax-heading>span','#mission-fax button','.file-header h2','.file-header button','.file-tabs button','.file-page button','.mission-body small','#mission-title','#mission-text','.rule small','#rule-id','#rule-text','.stats span','.germanness>small','#germanness-value','#law-power','.wurst-pass>b','.file-controls dt','.file-controls dd','.file-page>a','#toast','#bark-speaker','#police-bark-text','#violation-law','#violation-title','#violation-text'];
+const fitSelectors=['#subtitle-toggle','#city-status button','#energy-warning','.wanted small','#fax-title','#fax-text','.fax-heading>span','#mission-fax button','.file-header h2','.file-header button','.file-tabs button','.file-page button','.mission-body small','#anmeldung-badge','#mission-title','#mission-text','.rule small','#rule-id','#rule-text','.stats span','.germanness>small','#germanness-value','#law-power','.wurst-pass>b','.file-controls dt','.file-controls dd','.file-page>a','#toast','#bark-speaker','#police-bark-text','#violation-law','#violation-title','#violation-text','#city-notices small','#city-notices strong','#city-notices b','#city-notices p','#city-notices em','#city-notices .wurst-alert-body span'];
 function measure(){
+ if(typeof setLocale==='function')setLocale(language||'de');
+ const pageZoom=parseFloat(getComputedStyle(document.documentElement).zoom)||1;
+ const preferred=parseFloat(getComputedStyle(document.documentElement).fontSize)||16;
+ const layout=innerWidth/pageZoom<Math.max(300,preferred*18)?'stack':'paired';
+ if(document.body.dataset.hudLayout!==layout)document.body.dataset.hudLayout=layout;
  for(const el of document.querySelectorAll(fitSelectors.join(','))){
   if(!el.getClientRects().length||el.hidden)continue;
   const text=el.textContent.trim();if(!text)continue;
@@ -101,7 +113,7 @@ function measure(){
   if(width<=0)continue;
   try{
    if(!document.fonts.check(font)||typeof Intl.Segmenter!=='function')throw Error('font unavailable');
-   const key=JSON.stringify([text,font,spacing]);let prepared=cache.get(key);
+   const key=JSON.stringify([text,font,spacing,language]);let prepared=cache.get(key);
    if(!prepared){prepared=prepareWithSegments(text,font,{letterSpacing:spacing});if(cache.size>=96)cache.delete(cache.keys().next().value);cache.set(key,prepared)}
    const usable=Math.max(1,width-(parseFloat(css.wordSpacing)||0)*(text.match(/ /g)||[]).length);
    const stats=measureLineStats(prepared,usable+.1),natural=measureNaturalWidth(prepared);
@@ -111,7 +123,7 @@ function measure(){
     const min=Math.max(44,Math.ceil(stats.lineCount*line+parseFloat(css.paddingTop)+parseFloat(css.paddingBottom)+parseFloat(css.borderTopWidth)+parseFloat(css.borderBottomWidth)));
     if(el.style.minHeight!==min+'px')el.style.minHeight=min+'px';
    }
-  }catch{el.dataset.pretextFit='unavailable';el.style.removeProperty('min-height')}
+  }catch{el.dataset.pretextFit='unavailable';el.dataset.measurement='unavailable';el.style.removeProperty('min-height')}
  }
  if(file.open){
   const p=file.querySelector('.file-page:not([hidden])'),css=getComputedStyle(file),zoom=parseFloat(getComputedStyle(document.documentElement).zoom)||1;
@@ -124,22 +136,23 @@ function measure(){
  }
  // Stack warnings above speech without covering either, including long text.
  const zoom=parseFloat(getComputedStyle(document.documentElement).zoom)||1;
- const office=document.body.classList.contains('amt-inside'),officeTop=byId('amt-walk-hud').querySelector('.amt-walk-top'),officeTone=byId('amt-mix').querySelector('summary');
- if(office&&!rail.hidden&&officeTop.getClientRects().length)rail.style.top=Math.max(officeTop.getBoundingClientRect().bottom,officeTone.getClientRects().length?officeTone.getBoundingClientRect().bottom:0)/zoom+8+'px';else rail.style.removeProperty('top');
+ const subtitleBottom=subtitles.getBoundingClientRect().bottom/zoom;
+ document.body.style.setProperty('--subtitle-toggle-bottom',subtitleBottom+'px');
  const top=rail.hidden?12:rail.getBoundingClientRect().bottom/zoom+8,dock=document.querySelector('.control-dock');
  const bottom=dock.getClientRects().length?dock.getBoundingClientRect().top/zoom:innerHeight/zoom-(parseFloat(getComputedStyle(byId('app')).getPropertyValue('--subtitle-height'))||0);
- const noticeTop=innerWidth<=760?top:12;
- if(!manual){notices.style.top=noticeTop+'px';notices.style.maxHeight=Math.max(44,bottom-noticeTop-12)+'px'}
+ const noticeTop=Math.max(top,subtitleBottom+8);
+ const fit=bottom-noticeTop-12<44?'file':'play';if(document.body.dataset.hudFit!==fit)document.body.dataset.hudFit=fit;
+ if(!manual){notices.style.top=noticeTop+'px';notices.style.maxHeight=Math.max(44,Math.min(innerHeight/zoom*.34,bottom-noticeTop-12))+'px'}
  else{notices.style.removeProperty('top');notices.style.removeProperty('max-height')}
- if(!fax.hidden){fax.style.top=top+'px';fax.style.maxHeight=Math.max(44,bottom-top-12)+'px'}
+ if(!fax.hidden){fax.style.top=noticeTop+'px';fax.style.maxHeight=Math.max(44,bottom-noticeTop-12)+'px'}
 }
 const observer=new MutationObserver(schedule);
-for(const id of [...alerts,'mission-title','mission-text','energy','stars','day','germanness-value','law-power','wurst-badges','intro'])observer.observe(byId(id),{subtree:true,childList:true,characterData:true,attributes:true,attributeFilter:['hidden','class']});
+for(const id of [...alerts,'subtitle-toggle','mission-title','mission-text','energy','stars','day','germanness-value','law-power','wurst-badges','anmeldung-badge','intro'])observer.observe(byId(id),{subtree:true,childList:true,characterData:true,attributes:true,attributeFilter:['hidden','class']});
 observer.observe(document.body,{attributes:true,attributeFilter:['class']});
 observer.observe(document.documentElement,{attributes:true,attributeFilter:['style','lang']});
-const bounds=new ResizeObserver(schedule);for(const el of [file,rail,document.querySelector('.control-dock'),byId('amt-walk-hud').querySelector('.amt-walk-top')])bounds.observe(el);
+const bounds=new ResizeObserver(schedule);for(const el of [subtitles,file,rail,document.querySelector('.control-dock')])bounds.observe(el);
 addEventListener('resize',schedule,{passive:true});
 document.addEventListener('visibilitychange',()=>{if(document.hidden){queued=false;const wasVisible=!fax.hidden;hideFax();if(wasVisible){pending=false;reminderAt=performance.now()+FAX_GAP_MS}if(manual)closeFile()}else schedule()});
 addEventListener('pagehide',()=>{hideFax();cache.clear();mask=kernel=null});
 addEventListener('pageshow',schedule);
-document.fonts.ready.then(schedule);schedule();
+document.fonts.ready.then(()=>{cache.clear();schedule()});schedule();

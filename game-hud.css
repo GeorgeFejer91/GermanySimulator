@@ -1,6 +1,17 @@
 /* A small file tab during play; the paperwork opens only when it is useful. */
 .fax-paper{color:#28261f;background:repeating-linear-gradient(0deg,transparent 0 3px,#71685008 3px 4px),#eee8d8;border:1px solid #746d5e;border-left:10px dotted #c0b7a3;box-shadow:3px 4px 0 #24211c45;font:1rem/1.4 "Courier New",monospace}
-.city-status{position:fixed;z-index:20;top:12px;left:12px;display:flex;align-items:flex-start;flex-wrap:wrap;gap:6px;width:min(300px,calc(100vw - 24px));max-width:calc(100vw - 24px)}
+.city-status{position:fixed;z-index:20;top:calc(env(safe-area-inset-top,0px) + 8px);left:calc(env(safe-area-inset-left,0px) + 8px);right:calc(env(safe-area-inset-right,0px) + 8px);display:grid;grid-template-columns:minmax(0,1fr) minmax(0,auto);align-items:start;gap:6px 8px;pointer-events:none}
+.city-status>*{min-width:0;min-height:0;pointer-events:auto}
+.city-status #germanness-hud{grid-column:1;grid-row:1;max-width:300px}
+.city-status #subtitle-toggle{position:static;grid-column:2;grid-row:1;justify-self:end;width:8rem;max-width:100%;font-size:.875rem;line-height:1.35}
+.city-status #file-toggle{grid-column:1/-1;grid-row:2;justify-self:start;max-width:100%;white-space:normal;overflow-wrap:anywhere}
+.city-status .wanted,.city-status #energy-warning{grid-column:1;justify-self:start;max-width:100%}
+[data-hud-layout="stack"] .city-status{grid-template-columns:repeat(2,minmax(0,1fr))}
+[data-hud-layout="stack"] .city-status #germanness-hud{grid-column:1/-1}
+[data-hud-layout="stack"] .city-status #subtitle-toggle{grid-row:2;width:100%;max-width:100%}
+[data-hud-layout="stack"] .city-status #file-toggle{grid-column:1;grid-row:2}
+[data-hud-fit="file"] #mission-fax,[data-hud-fit="file"] #city-notices{display:none}
+.case-file #city-notices{display:flex}
 .city-status[hidden],.mission-fax[hidden]{display:none}
 .mission-announcement{position:absolute;width:1px;height:1px;padding:0;margin:0;overflow:hidden;clip-path:inset(50%);white-space:nowrap}
 #germanness-hud{position:static;inset:auto;flex:1 0 100%;display:grid;grid-template-columns:minmax(0,1fr) auto;grid-template-areas:"label value" "meter meter" "law law";gap:5px 8px;width:100%;min-width:0;height:auto;min-height:0;margin:0;padding:9px 12px;border:1px solid #494439;background:#eee8d8;box-shadow:3px 4px 0 #24211c45;backdrop-filter:none;text-align:left;overflow:visible;color:#28261f}
@@ -9,7 +20,7 @@
 #germanness-hud .germanness-meter{grid-area:meter;width:100%;height:14px;margin:0;border:1px solid #665f50;background:#d7d0bf}
 #germanness-hud .germanness-meter i{top:0;right:auto;bottom:0;width:var(--germanness,0);height:100%!important;background:linear-gradient(to right,#000 0 33.333%,#dd0000 33.333% 66.666%,#ffcc00 66.666%);transition:width .28s ease,filter .28s ease}
 #germanness-hud #law-power{grid-area:law;display:block;margin:0;font:.75rem/1.4 "Courier New",monospace;white-space:normal;overflow:visible;text-overflow:clip;overflow-wrap:anywhere}
-.city-status.city-busy>:not(#germanness-hud){display:none}
+.city-status.city-busy>:not(#germanness-hud):not(#subtitle-toggle){display:none}
 .city-status button{min-height:44px;padding:9px 12px;border:1px solid #494439;border-bottom:3px double #494439;background:#eee8d8;color:#28261f;font:700 .875rem/1.3 "Courier New",monospace}
 .city-status kbd{padding:1px 4px;border:1px solid #797263;font:inherit}
 .file-day{margin-left:12px;font-weight:400}.file-day b{font-weight:700}
@@ -25,7 +36,7 @@
 .fax-heading{display:flex;align-items:center;justify-content:space-between;gap:8px;border-bottom:1px dashed #a69b85;font:700 .75rem/1.4 "Courier New",monospace}
 .fax-heading button{flex:0 0 44px;font-size:1.3rem}.mission-fax h2{margin:12px 0 6px;font:700 1.125rem/1.3 "Courier New",monospace;overflow-wrap:anywhere}.mission-fax p{margin:0 0 12px;font:1rem/1.45 "Courier New",monospace;overflow-wrap:anywhere}
 .mission-fax.fax-leaving{pointer-events:none}
-.case-file{position:fixed;inset:0;width:min(620px,calc(100vw - 24px));max-width:none;height:min(620px,calc(100dvh - 24px));max-height:none;margin:auto;padding:18px;overflow:hidden}
+.case-file{position:fixed;inset:calc(var(--subtitle-toggle-bottom,44px) + 8px) 0 0;width:min(620px,calc(100vw - 24px));max-width:none;height:min(620px,calc(100dvh - var(--subtitle-toggle-bottom,44px) - 24px));max-height:none;margin:auto;padding:18px;overflow:hidden}
 .case-file[open]{display:grid;grid-template-rows:auto auto minmax(0,1fr) auto;gap:14px}
 .case-file[open][data-layout="scroll"]{display:block;overflow:auto;overscroll-behavior:contain;touch-action:pan-y}
 .case-file[data-layout="scroll"] .file-tabs{margin:14px 0}
@@ -50,7 +61,7 @@
 .case-file .wurst-pass{margin-top:22px;padding-top:16px;border-top:1px dashed #a69b85}.case-file .wurst-pass>b,.case-file .wurst-pass output{font:700 .875rem/1.4 "Courier New",monospace}
 .case-file .wurst-badges{display:grid;grid-template-columns:repeat(3,44px);gap:8px;margin-top:12px;justify-content:start}.case-file .wurst-badge{width:44px;height:44px}.case-file .wurst-badge::after{font-size:1rem}
 .file-controls{display:grid;grid-template-columns:minmax(80px,1fr) minmax(0,2fr);gap:10px;margin:0 0 18px;font:.875rem/1.45 "Courier New",monospace}.file-controls dt{font-weight:700}.file-controls dd{margin:0;overflow-wrap:anywhere}
-.file-settings{display:flex;flex-wrap:wrap;gap:8px;margin:18px 0}.case-file .subtitle-toggle{position:static;inset:auto;text-shadow:none}.file-page>a{display:inline-block;padding:8px 0;color:inherit;font:.875rem/1.4 "Courier New",monospace}
+.file-settings{display:flex;flex-wrap:wrap;gap:8px;margin:18px 0}.file-page>a{display:inline-block;padding:8px 0;color:inherit;font:.875rem/1.4 "Courier New",monospace}
 /* Notices flow in one edge column. The speech broker still owns their lifetime. */
 .city-notices{position:fixed;z-index:35;right:12px;top:12px;width:min(440px,calc(100vw - 24px));display:flex;flex-direction:column;gap:8px;pointer-events:none}
 .city-notices:has(>:not([hidden])){max-height:calc(100dvh - var(--city-control-clearance,var(--subtitle-height)) - 76px);overflow:auto;overscroll-behavior:contain;touch-action:pan-y;pointer-events:auto}
@@ -59,6 +70,17 @@
 #city-notices .toast,#city-notices .police-bark,#city-notices .violation-alert{position:static;inset:auto;transform:none;width:100%;max-width:none;margin:0;padding:12px 14px;border:1px solid #746d5e;border-left:5px solid #8c7b5d;box-shadow:3px 4px 0 #24211c45;background:#eee8d8;text-align:left;animation:none}
 #city-notices .toast{display:none;font:700 .875rem/1.4 "Courier New",monospace}#city-notices .toast.show{display:block;opacity:1}
 #city-notices .police-bark{max-height:none;overflow:visible;pointer-events:auto;touch-action:pan-y}
+#city-notices .police-bark.caption-only{display:none}
+#city-notices .notice-deferred{display:none!important}
+#city-notices .law-unlock-prompt,#city-notices .wurst-alert,#city-notices .border-alert{position:static;inset:auto;transform:none;width:100%;max-width:none;margin:0;padding:12px 14px;border:1px solid #746d5e;box-shadow:3px 4px 0 #24211c45;background:#eee8d8;text-align:left;animation:none;pointer-events:auto}
+#city-notices .law-unlock-prompt{grid-template-columns:60px minmax(0,1fr);gap:12px}
+#city-notices .law-keycap{width:52px;height:48px;box-shadow:inset 0 -5px 0 #a9a298,0 4px 0 #292825;animation:none}
+#city-notices .law-keycap span{font-size:2rem}
+#city-notices .wurst-alert-body{grid-template-columns:80px minmax(0,1fr);gap:10px}
+#city-notices .wurst-alert-body img{width:80px;height:80px}
+#city-notices .wurst-alert b,#city-notices .law-unlock-prompt b,#city-notices .border-alert b{margin:4px 0;font:700 1rem/1.35 "Courier New",monospace;letter-spacing:0;overflow-wrap:anywhere}
+#city-notices small,#city-notices strong,#city-notices em,#city-notices .wurst-alert-body span{font:700 .875rem/1.4 "Courier New",monospace;letter-spacing:0;overflow-wrap:anywhere}
+#city-notices .wurst-alert p,#city-notices .border-alert p{font:1rem/1.4 "Courier New",monospace;letter-spacing:0;overflow-wrap:anywhere}
 #city-notices .police-bark b{display:block;margin:0 0 6px;font:700 .75rem/1.4 "Courier New",monospace;letter-spacing:.03em}
 #city-notices .police-bark span{font:1rem/1.4 "Courier New",monospace;text-transform:none;overflow-wrap:anywhere}
 #city-notices .violation-alert{order:-1;border-left-color:#833a31;padding-top:8px;padding-bottom:8px}
@@ -69,14 +91,17 @@
 #city-notices #violation-stars{font-size:1rem;letter-spacing:2px}
 .dialogue{border-color:#746d5e;background:#eee8d8;box-shadow:3px 4px 0 #24211c45}
 .amt-inside #mission-fax,.amt-inside #city-notices{display:none!important}
-.amt-inside #city-status{z-index:211}
-.amt-inside #germanness-hud{display:grid!important}
+.amt-walk-top{top:calc(var(--subtitle-toggle-bottom,44px) + 12px)}
 @media(max-width:760px){
- .city-status{top:8px;left:8px;max-width:calc(100vw - 16px)}
+ .city-status{gap:6px}
+ .city-status #subtitle-toggle{width:7rem;max-width:40vw}
+ #germanness-hud{padding:6px 8px;gap:3px 6px;grid-template-areas:"label label" "meter value" "law law"}
  .mission-fax{left:8px;top:64px;width:min(370px,calc(100vw - 16px))}
  .city-notices{left:8px;right:8px;top:64px;width:auto}
- .case-file{width:calc(100vw - 16px);height:calc(100dvh - 16px);padding:12px;border-left-width:6px}
+ .case-file{width:calc(100vw - 16px);height:calc(100dvh - var(--subtitle-toggle-bottom,44px) - 24px);padding:12px;border-left-width:6px}
  .case-file[open]{gap:10px}.file-header{gap:8px}.file-tabs button{padding:7px}
  .control-dock{bottom:var(--subtitle-height)}
 }
 @media(prefers-reduced-motion:reduce){#germanness-hud .germanness-meter i{transition:none}}
+
+.anmeldung-badge{padding:12px 0;border-bottom:2px solid #426042;color:#27432e;font:700 1rem/1.4 Arial,sans-serif;overflow-wrap:break-word}

@@ -10,7 +10,7 @@ The eight moving office regulars have original four-view painted source sheets a
 
 The same source sheets yield four-pose 640 × 832 action detail cells plus four directional eight-frame close walk sheets per moving regular, 384 × 832 detail poses for waiting patrons, and a compact shared detail sheet with six clerk poses and eight high-resolution lip frames. Moving detail is requested only on approach, one walk direction at a time, and released after the actor leaves; the compact desktop/mobile atlas remains the distance and load-failure fallback. Close walk sheets use a 4 × 2 grid so their maximum texture dimension is 2560 px. This preserves close brushwork without eight full high-resolution 64-frame atlases. The office-only shader gently varies per-character saturation and lightness without modifying the painted files; its renderer follows the shared one-pixel-per-CSS-pixel and 1.6 MP drawing-buffer budget in the browser playability gate below.
 
-The Aktenkurier's blackout alone may replace his sprite with the offline-authored
+The Aktenkurier's omen approach and blackout alone may replace his sprite with the offline-authored
 Gaussian volume in `assets/buergeramt/omen/`. The deterministic builder and source
 hashes are documented beside the asset: 38,938 splats / 1,246,016 bytes, using the
 accepted gesture and rear paintings. This is a bounded sculpture for small turns,
@@ -28,6 +28,18 @@ for any owned sort before disposing buffers and its worker. A missing, cancelled
 or late preparation preserves the sprite; ordinary city startup imports none of
 this code or asset. The asset has one shared desktop/mobile variant pending
 evidence that another is needed. Runtime behavior belongs in `BUERGERAMT.md`.
+
+Office lip articulation adds a small classic script, with no media download or
+new dependency. Its shared native-paint patch has 425 Gaussian instances in
+one draw (5,100 bytes of instance coordinates), borrowing the selected actor's
+current texture rather than decoding/copying it. It allocates on first actual
+speech, updates from the existing renderer, hides/restores the source mouth at
+rest and releases geometry/material on scene exit. Source face registrations
+work with the existing close and compact variants. The omen adds one oral
+record to its existing volume (42,011 total figure/tunnel records); its original
+38,938-record file and byte count stay unchanged, as does its 30 Hz sort cap.
+Browser evidence is local under `output/lip-motion/`; physical-device and
+natural-flow coverage remain separate from forced render/timing fixtures.
 
 The office's original painted prop strip adds a file cabinet, paper tower,
 distorted clock, and noticeboard. Its source and provenance are with the cast;
@@ -114,6 +126,21 @@ browser profiles. Do not add a new pipeline, service or benchmark dependency.
   new export only after actual display-size and rendered review.
 
 ### Frame, background work and lifetime contract
+
+The first city Bürgeramt entry uses `buergeramt-entry.js` and the existing WebGL
+renderer. One on-demand GPU color/depth capture has a longest edge of at most
+960 px on desktop or 640 px on compact screens (at most 7.04 MiB for its two
+four-byte surfaces). One instanced Gaussian draw samples about 18,000 city pixels
+on desktop or 7,000 on compact screens; grid rounding is bounded below 18,500
+instances on supported portrait/landscape profiles. A second draw dissolves
+the frozen image and marks the door's vortex. This is a depth-assisted visible
+surface effect, not a reconstructed splat asset. No CPU pixel readback, extra
+renderer, Spark import, downloaded art, worker or independent animation loop
+is needed. Capture occurs at committed entry; drawing lasts at most 3.4 seconds
+of active frame time. Reduced motion allocates only the color surface and uses
+one draw for a 0.24-second fade. Hidden pages stop its clock; completion/pagehide
+release both textures, materials and geometry. Module/render failure keeps
+direct entry. The existing office readiness gate runs before the transition.
 
 The mission-fax HUD transition uses native Canvas 2D Gaussian alpha kernels as a
 CSS mask over the actual DOM paper. One reusable 192 × 256 mask and 32 × 32 kernel
@@ -364,6 +391,15 @@ For risky GLB re-export/optimization, compare bytes alongside names/hierarchy, w
 For rendered comparisons, freeze representative game/HUD states and camera, then calibrate repeated unchanged captures before setting tolerances. Verify a known meaningful visual mutation fails. Separate normal/reduced-motion and loaded/fallback states; screenshots cannot alone establish timing, physical-device performance or correct animation.
 
 ## Local 3D buildings
+
+The Bürgeramt entrance radiance is original runtime geometry: one retained door
+plane, one 5 × 5 ray/halo shader plane, and one short-range shadow-free point
+light. It follows both the authored municipal GLB glass entrance and procedural
+door dimensions, uses normal depth testing, and is excluded from obstruction
+tests as decoration. It adds no downloads, textures, postprocessing, timer or
+asset queue jobs. The existing render dispatch advances a bounded visible-city
+clock; hidden/off-camera doors stop work and lighting, pause freezes animation,
+and reduced motion is steady gold. Resources live with the existing city scene.
 
 The mission Bratwurst uses one local textured cooked-sausage GLB under
 `assets/models/mission-sausage/`, with adjacent attribution and CC BY-NC 4.0

@@ -22,9 +22,9 @@ try{
     if(name==='asset-failure')await page.route('**/omen/aktenkurier.splat',route=>route.abort('failed'));
     const base=process.env.GAME_URL||'http://127.0.0.1:8876/index.html';
     await page.goto(base+'?geheim=buergeramt',{waitUntil:'domcontentloaded'});
-    await page.waitForFunction(()=>window.Germany3D?.ready&&Germany3D.amtCharacters.every(a=>a.loaded)&&Germany3D.amtOffice?.attached,null,{timeout:90000});
+    await page.waitForFunction(()=>window.BuergeramtLevel?.active&&window.Germany3D?.ready&&Germany3D.amtCharacters.every(a=>a.loaded)&&Germany3D.amtOffice?.attached,null,{timeout:90000});
     await page.evaluate(()=>{const update=BuergeramtLevel.update.bind(BuergeramtLevel);window.omenOriginalUpdate=update;BuergeramtLevel.update=()=>{};window.omenStep=seconds=>{for(let t=0;t<seconds;t+=.025)update(Math.min(.025,seconds-t));Germany3D.sync()}});
-    const inspect=()=>page.evaluate(()=>({omen:BuergeramtLevel.omen,stage:BuergeramtLevel.stage,splat:Germany3D.amtOmenSplat,actor:Germany3D.amtCharacters.find(a=>a.name==='aktenkurier'),assets:Germany3D.inspectAssets()}));
+    const inspect=()=>page.evaluate(()=>({omen:BuergeramtLevel.omen,view:BuergeramtLevel.view,stage:BuergeramtLevel.stage,splat:Germany3D.amtOmenSplat,actor:Germany3D.amtCharacters.find(a=>a.name==='aktenkurier'),assets:Germany3D.inspectAssets()}));
     await page.waitForFunction(()=>Germany3D.amtOmenSplat.ready||Germany3D.amtOmenSplat.skipped,null,{timeout:30000});
     const prepared=await inspect();
     if(name!=='asset-failure')assert.equal(prepared.splat.ready,true,JSON.stringify({prepared,warnings}));
@@ -33,8 +33,24 @@ try{
     await page.evaluate(()=>{dispatchEvent(new KeyboardEvent('keydown',{code:'KeyW'}));for(let i=0;i<150&&BuergeramtLevel.stage!=='omen';i++)omenStep(.05);dispatchEvent(new KeyboardEvent('keyup',{code:'KeyW'}))});
     assert.equal((await inspect()).omen.phase,'approach');
     await page.screenshot({path:`${output}/${name}-approach.png`});
+    const approachPhases=[];
+    for(const strength of [.18,.45,.75]){
+      await page.evaluate(strength=>{for(let i=0;i<300&&BuergeramtLevel.omen.strength<strength&&BuergeramtLevel.omen.phase==='approach';i++)omenStep(.025)},strength);
+      await page.waitForTimeout(150);
+      const state=await inspect();approachPhases.push(state);
+      assert.equal(state.omen.phase,'approach');
+      if(name!=='asset-failure'){
+        assert(state.splat.reveal>0&&state.splat.reveal<1);
+        assert.equal(state.splat.turn,0);
+        const yaw=Math.atan2(state.view.x-state.omen.x,state.view.z-state.omen.z);
+        assert(Math.abs(state.splat.facingY-yaw)<1e-6,'courier faces player');
+        assert.equal(state.splat.pulse,name==='reduced-motion'?0:state.omen.life.pulse);
+      }
+      await page.screenshot({path:`${output}/${name}-approach-${strength}.png`});
+    }
     await page.evaluate(()=>{for(let i=0;i<300&&BuergeramtLevel.omen.phase==='approach';i++)omenStep(.025)});
     assert.equal((await inspect()).omen.phase,'blackout');
+    await page.evaluate(()=>{omenTestSpeech.onresume?.();omenTestSpeech.onboundary?.({charIndex:omenTestSpeech.text.indexOf('Finsternis')})});
     await page.waitForTimeout(200);
     const phases=[];
     for(let i=0;i<35;i++){
@@ -75,7 +91,7 @@ try{
     const unexpectedWarnings=warnings.filter(w=>/Shader Error|VALIDATE_STATUS|GL_INVALID|TypeError/.test(w)&&!(name==='asset-failure'&&w.startsWith('Bürgeramt omen keeps painted fallback TypeError: Failed to fetch')));
     assert.equal(unexpectedWarnings.length,0,JSON.stringify(unexpectedWarnings));
     const evidence=await page.evaluate(()=>({longTasks:omenLongTasks,gpu:(()=>{const gl=document.getElementById('world3d').getContext('webgl2');const ext=gl?.getExtension('WEBGL_debug_renderer_info');return ext?gl.getParameter(ext.UNMASKED_RENDERER_WEBGL):'unavailable'})()}));
-    reports.push({name,silent:true,physicalAndroid:false,prepared,phases,peak,released,replay,exited,frameSamples,requests,errors,warnings,evidence});
+    reports.push({name,silent:true,physicalAndroid:false,prepared,approachPhases,phases,peak,released,replay,exited,frameSamples,requests,errors,warnings,evidence});
     await context.close();writeFileSync(`${output}/results.json`,JSON.stringify(reports,null,2));
     console.log(JSON.stringify({name,result:'PASS',count:peak.splat.count,errors,gpu:evidence.gpu,p95:frameSamples.map(s=>s.p95),warnings}));
   }

@@ -84,3 +84,9 @@ across several ring frames. These tests confirm browser event order and layout;
 they cannot establish perceived loudness, native ringtone identity, hardware
 vibration or end-to-end acoustic millisecond accuracy. Those require physical
 phone and speaker measurements.
+
+## Escalating argument deadlines (2026-10-10)
+
+The user requested TimeAPI-backed timing for the reciprocal interruption. The existing bounded TimeAPI samples now supply optional UTC stamps on actual phone speech starts, alongside the phone monotonic stamp. The host maps onset through fresh peer offset, then qualified UTC, then receipt-relative fallback. It immediately sends `police-cutoff` with the exact line index, `stopAtPhoneMs` and `stopAtUtcMs`; the phone uses its own onset-domain deadline, with qualified UTC as fallback, and rejects targets outside a 12 s past/future window. Timers carry the current speech generation and are cleared on natural end, cutoff, hidden-page forfeiture, disconnect and exit.
+
+The host schedules the next desk voice from mapped onset plus 7.2/4.5/4.7/5.0 s minus observed desk startup. It retries a failed send twice at 100 ms; persistent failure waits for the phone’s natural end or a 60 s bound rather than starting unchecked overlapping speech. Clerk reply requests use 3.9/5.2/6.1 s minus observed fast phone lag, and the incoming phone start stops her current voice. Deterministic tests cover late delivery, UTC fallback, send failure, stale generations, duplicate completion and teardown. Silent browser timing is separate from physical-device and perceptual listening evidence.

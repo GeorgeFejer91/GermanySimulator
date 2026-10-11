@@ -207,3 +207,41 @@ synthetic horn is code-generated and has no speech recording.
 ## Opt-in fictional character voice candidates
 
 The 223 MP3s under `candidate-dialogue/`, eleven samples under `profile-auditions/`, and two additional MP3s under `quiz-segments/` are generated preview candidates. Brigitte Neumann's existing audition supplies the first of her three quiz segments. The source voice references are hash-verified clips from the Berlin Database of Emotional Speech (EmoDB) under CC0 1.0; exact source files, actor IDs, emotion labels, and hashes are in `For-AI/VOICE-CAST.json`. The alternate renderer is ResembleAI Chatterbox Multilingual V2 0.1.7 under MIT. The three adjacent manifests record each output's exact text, source reference hash, model revision, profile UUID, output hash, and independent ASR check. These assets are reachable only through `?voicePreview=1`; their words, character identity, emotional fit, and production quality require listening review before default playback.
+
+
+## User-selected Kriminalpolizei phone voice (2026-10-10)
+
+The user selected saved Secret Tunnel profile `GS Kriminalpolizei` (`f700170f840543bca7413d3ccf6ac028`) for the Bürgeramt call. Its source note is https://www.youtube.com/watch?v=egBl1QgsdXQ, original hash `0a1f98a15137640d3913ac3e0bc28811d5304dd16119ffab5aa8ad6653df0acf`, and normalized reference hash `ef452114430b47167239cdb065b1e01d502c0148f1492ac1b66098a03c0ea82e`. This metadata does not establish a CC0 license. Source recordings and models are private authoring inputs and do not ship. The four authored phone recordings use Secret Tunnel 6’s bundled OmniVoice Rust runtime, revision `4c7b088294fd6f3a5fb9e3b1dfd3a77bc12f105b`, and model revision `c5fdb5ccb189668d56333f77ba2629f4cd7535f4`. Model weights have noncommercial terms with Boson and Meta tokenizer conditions.
+
+The opening and shouted final phone reply use direct seeded retakes from that same saved profile because the first native takes changed words. Seed, rejected native feedback, exact source/encoded hashes and bundled Whisper large-v3-turbo q4_0 transcripts are in `kriminalpolizei/manifest.json`. All four final encoded phone clips matched the complete script after case and punctuation normalization. Final MP3s are mono 24 kHz, 64 kbit/s, measured within 0.3 LU of −18 LUFS and at or below −1.5 dBTP. The user’s explicit voice selection authorizes default playback for this phone family. Full listening review has not been performed; silent timing checks do not establish voice quality. Each clip loads after Answer at its own turn, with exact-text browser speech on load failure.
+
+| File | Duration | SHA-256 |
+| --- | ---: | --- |
+| `kriminalpolizei/kriminalpolizei-phone-01.mp3` | 10.480 s | `2ac486e5b558dc909d96f6afce7767def77a891f81076b0b6f5e33274da20e24` |
+| `kriminalpolizei/kriminalpolizei-phone-02.mp3` | 7.240 s | `0905883e183ae8993363a45ba6b8444264d39a4c0c2e0d725aa7e9c98110eb5f` |
+| `kriminalpolizei/kriminalpolizei-phone-03.mp3` | 6.840 s | `5f6f9f1be2c78798d9250ff696eaba0ecc611803524cbaa277e250c79ad0cfc9` |
+| `kriminalpolizei/kriminalpolizei-phone-04.mp3` | 7.680 s | `5e93de3c3d87f132ba45857be3508e77704376152def6c1a3853bcf01a4eb7c5` |
+
+Five new Frau Knick escalation clips (`candidate-dialogue/amt-brunhilde-knick-17-escalation.mp3` through `-21-escalation.mp3`) remain opt-in candidates from her unchanged profile `1a28fb7903d344518617d755a7f5cbb0`. The CC0 EmoDB original input hash is `903884eae81731486a3d4e8f04c69bf86f69a35002d7674f1d709225b7d2934f`; normalized native input hash `7844b1c83d829fa08c2fe1d5474697d81868bec0334dadf4642fae7591125cbf` is recorded separately. The manifest retains all five previous candidates. Direct retakes corrected “Grashalm” and “annulliert”; upper/lower case affected the latter take and the final spoken words remain exact. Numeric/compound-only transcript equivalence is marked separately from literal agreement. All five encoded outputs passed the same loudness targets; complete listening remains pending. Four former Heinrich phone candidates are retained for history and excluded from active preview.
+
+## User-selected GS Merz speech (2026-10-10, extended 2026-10-11)
+
+The user requested all authored Friedrich Merz lines and nine short source-verified controversial quotations with the saved `GS Merz` profile (`cb7f3cee85f648c186355329316c6b3b`). Its source note is https://www.youtube.com/watch?v=TtO9A8t3AaA, original SHA-256 `b5579f4d31d4f138353232cd0708fc9ad62b8a4683dc35f6830d5557d9b87d8e`, and normalized reference SHA-256 `9c28278551a4a68180ca410306ebf322f94bb8034b7a1c2222d635ee014a178e`. This is a user-selected reference, without an established CC0 license; the private source and reference recording are not shipped. All eleven game lines use Secret Tunnel 6's bundled OmniVoice Rust runtime and model revision `c5fdb5ccb189668d56333f77ba2629f4cd7535f4`, under the model's noncommercial, Boson and Meta tokenizer terms. No synthesis model ships. Previous source MP3s were preserved privately in the Music voice library's `GermanySimulator GS Merz resynthesis 2026-10-10/` folder.
+
+The first native take passed the bundled word check. The first Großvater take was rejected after Whisper recognized “Großhoffater”; a direct seed-42 render from the same verified saved reference replaced it. The two original game scripts and nine added quotations were normalized, encoded, decoded and independently transcribed again with bundled Whisper large-v3-turbo q4_0 and matched all authored words after case and punctuation normalization. The manifest records profile ownership, selected/rejected takes, hashes, duration, loudness and peak levels. Full listening review was not performed. The user's explicit selection supplies default Merz speech for proximity and direct interaction; the exact German script remains the masculine browser-voice fallback on load failure.
+
+| File | Duration | SHA-256 |
+| --- | ---: | --- |
+| `merz/merz-rotes-rathaus.mp3` | 2.880 s | `45d44cc182250d11cb3f7d29ea85e9b1623253a22c22d55f3cd509b09d1a4f92` |
+| `merz/merz-grossvater.mp3` | 6.730 s | `ecf8a7c8ac685dbbf4cf1698807103c2cd1046d9e3fb33236b737a9ba918d707` |
+| `merz/merz-links-vorbei.mp3` | 1.710 s | `1d29d2509928a78b2c92735bdbdeeeebaeb7744011b160d1ed0eadca769ca08c` |
+| `merz/merz-keine-linke-politik.mp3` | 4.000 s | `6456961335ffb6c720c02ae8ab1149e31cd602bc6200b9b2595f52995246567b` |
+| `merz/merz-gruene-linke-spinner.mp3` | 3.840 s | `f1f7808a60a5169dc26f87f07b5b564e389f5ef9b8c9c9a86baea6d64e087503` |
+| `merz/merz-zahnarzt.mp3` | 6.180 s | `02cb8c3aa32ca21f402b328773f39433dde14d1eb753d4ceda8394ac98c9f900` |
+| `merz/merz-fragen-toechter.mp3` | 3.480 s | `126e23a1ceced38535365865b1eb9bb7290f4ffba32f3f6fed6af009a3e87d19` |
+| `merz/merz-antisemitismus.mp3` | 3.800 s | `0c371a1665f3c51e9af7e480ec6f1656d69514c2f9885950b7c4a274b10a312d` |
+| `merz/merz-stadtbild.mp3` | 3.600 s | `58cdc0758d5480c9e3cbbb8574f37e94f4d2adb5ec6ab4e74e0ee5eaee1c10e5` |
+| `merz/merz-unterstreiche.mp3` | 3.520 s | `c9f2eba286426f5c9c1c6ff963587241ad4f1f3f259b33c214c0ee3b75263846` |
+| `merz/merz-nichts-zurueckzunehmen.mp3` | 2.120 s | `46d528683e4cac9d8e70a756d1e89d9404904bef199e72404daf86d52e8c6077` |
+
+The added quote texts are documented in `merz/manifest.json` with dates, publication sources, original-video links, and context. The “Spinner” line retains only the original closing clause and marks the omitted lead-in with an ellipsis. These MP3s are synthetic game renditions, not historical recordings. No listening review or popularity ranking is claimed.

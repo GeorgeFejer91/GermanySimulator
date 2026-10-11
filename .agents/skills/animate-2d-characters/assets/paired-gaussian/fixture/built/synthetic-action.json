@@ -1,0 +1,385 @@
+{
+  "version": 1,
+  "id": "synthetic-action",
+  "representation": "paired-gaussian-paint",
+  "canvas_xy": [
+    64,
+    64
+  ],
+  "states": [
+    {
+      "id": "work",
+      "role": "main",
+      "file": "work.png",
+      "landmarks": {
+        "core": [
+          32,
+          37
+        ],
+        "grip": [
+          39,
+          29
+        ],
+        "tip": [
+          51,
+          34
+        ],
+        "base": [
+          32,
+          57
+        ],
+        "face": [
+          32,
+          17
+        ]
+      },
+      "regions": [
+        {
+          "part": "held_baton",
+          "polygon": [
+            [
+              38,
+              23
+            ],
+            [
+              56,
+              27
+            ],
+            [
+              56,
+              41
+            ],
+            [
+              38,
+              34
+            ]
+          ],
+          "pivot_xy": [
+            39,
+            29
+          ],
+          "orientation_landmarks": [
+            "grip",
+            "tip"
+          ]
+        }
+      ],
+      "sha256": "f675a4d3636890ddf865974b8317c7cb318e5159723249193b52e19c4a32d3a3"
+    },
+    {
+      "id": "bridge",
+      "role": "transition",
+      "file": "bridge.png",
+      "landmarks": {
+        "core": [
+          32,
+          37
+        ],
+        "grip": [
+          39,
+          29
+        ],
+        "tip": [
+          50,
+          20
+        ],
+        "base": [
+          32,
+          57
+        ],
+        "face": [
+          32,
+          17
+        ]
+      },
+      "regions": [
+        {
+          "part": "held_baton",
+          "polygon": [
+            [
+              36,
+              12
+            ],
+            [
+              55,
+              13
+            ],
+            [
+              55,
+              31
+            ],
+            [
+              37,
+              35
+            ]
+          ],
+          "pivot_xy": [
+            39,
+            29
+          ],
+          "orientation_landmarks": [
+            "grip",
+            "tip"
+          ]
+        }
+      ],
+      "sha256": "e998e1ff93989ea7f1c387300c3eba784c07ac431b6657ec5678e6e72440876a"
+    },
+    {
+      "id": "gesture",
+      "role": "main",
+      "file": "gesture.png",
+      "landmarks": {
+        "core": [
+          32,
+          37
+        ],
+        "grip": [
+          39,
+          29
+        ],
+        "tip": [
+          44,
+          9
+        ],
+        "base": [
+          32,
+          57
+        ],
+        "face": [
+          32,
+          17
+        ]
+      },
+      "regions": [
+        {
+          "part": "held_baton",
+          "polygon": [
+            [
+              35,
+              4
+            ],
+            [
+              49,
+              4
+            ],
+            [
+              49,
+              27
+            ],
+            [
+              38,
+              35
+            ]
+          ],
+          "pivot_xy": [
+            39,
+            29
+          ],
+          "orientation_landmarks": [
+            "grip",
+            "tip"
+          ]
+        }
+      ],
+      "sha256": "02bdfeedcde66d20cf1fe7b0988ee18b4be05344fce77c13b8f3ac452b8498b7"
+    }
+  ],
+  "arcs": [
+    {
+      "id": "extend",
+      "from": "work",
+      "to": "gesture",
+      "duration": 1.1,
+      "segments": [
+        {
+          "segment": 0,
+          "start": 0,
+          "end": 0.45
+        },
+        {
+          "segment": 1,
+          "start": 0.45,
+          "end": 1.1
+        }
+      ]
+    },
+    {
+      "id": "swing",
+      "from": "work",
+      "to": "gesture",
+      "duration": 1.1,
+      "segments": [
+        {
+          "segment": 2,
+          "start": 0,
+          "end": 1.1
+        }
+      ]
+    }
+  ],
+  "segments": [
+    {
+      "from": "work",
+      "to": "bridge"
+    },
+    {
+      "from": "bridge",
+      "to": "gesture"
+    },
+    {
+      "from": "work",
+      "to": "gesture"
+    }
+  ],
+  "variants": {
+    "desktop": {
+      "file": "synthetic-action-desktop.bin.gz",
+      "sha256": "a01f72d8cc77552b402601dab460dd30467343679dadffd1f9aa1371276634c1",
+      "decoded_sha256": "a81740aca7ecccbf1681399254beb32bcd0ace4dd7fe7f50554c91c17ba25d90",
+      "bytes": 2148,
+      "decoded_bytes": 18432,
+      "sample_count": 256,
+      "stride_px": 2,
+      "segment_count": 3,
+      "record_bytes": 24,
+      "trajectories": [
+        {
+          "segment": 0,
+          "start_slot": 205,
+          "end_slot": 245,
+          "pivot_start": [
+            0.109375,
+            0.546875
+          ],
+          "pivot_end": [
+            0.109375,
+            0.546875
+          ],
+          "angle_radians": 1.0805206306060477
+        },
+        {
+          "segment": 1,
+          "start_slot": 198,
+          "end_slot": 244,
+          "pivot_start": [
+            0.109375,
+            0.546875
+          ],
+          "pivot_end": [
+            0.109375,
+            0.546875
+          ],
+          "angle_radians": 0.6400881527617461
+        },
+        {
+          "segment": 2,
+          "start_slot": 205,
+          "end_slot": 251,
+          "pivot_start": [
+            0.109375,
+            0.546875
+          ],
+          "pivot_end": [
+            0.109375,
+            0.546875
+          ],
+          "angle_radians": 1.7206087833677939
+        }
+      ]
+    },
+    "mobile": {
+      "file": "synthetic-action-mobile.bin.gz",
+      "sha256": "aade7d4c1a4dc15fa94f8a42116da3a612f03008438a54010a343bd181099a5b",
+      "decoded_sha256": "0c80ae2471db2d9c348a17a4d3ebfdc5bd2c9c1f445282a4ca50b00dd85742f6",
+      "bytes": 628,
+      "decoded_bytes": 18432,
+      "sample_count": 256,
+      "stride_px": 4,
+      "segment_count": 3,
+      "record_bytes": 24,
+      "trajectories": [
+        {
+          "segment": 0,
+          "start_slot": 44,
+          "end_slot": 54,
+          "pivot_start": [
+            0.109375,
+            0.546875
+          ],
+          "pivot_end": [
+            0.109375,
+            0.546875
+          ],
+          "angle_radians": 1.0805206306060477
+        },
+        {
+          "segment": 1,
+          "start_slot": 42,
+          "end_slot": 56,
+          "pivot_start": [
+            0.109375,
+            0.546875
+          ],
+          "pivot_end": [
+            0.109375,
+            0.546875
+          ],
+          "angle_radians": 0.6400881527617461
+        },
+        {
+          "segment": 2,
+          "start_slot": 44,
+          "end_slot": 58,
+          "pivot_start": [
+            0.109375,
+            0.546875
+          ],
+          "pivot_end": [
+            0.109375,
+            0.546875
+          ],
+          "angle_radians": 1.7206087833677939
+        }
+      ]
+    }
+  },
+  "anchors": {
+    "frames": {
+      "work": {
+        "file": "synthetic-action-anchor-0.webp",
+        "sha256": "24425a205a3d36a5f6cf6c3fb95cfbe69121a249731693aee800c0fbb30fe160",
+        "bytes": 166,
+        "width": 64,
+        "height": 64,
+        "rgba_sha256": "d10526453385c70e9595bbc4133f5c7b496914c3f25be8acb1bbf426abaabc20"
+      },
+      "bridge": {
+        "file": "synthetic-action-anchor-1.webp",
+        "sha256": "82b59e0a61bd29817e3f72cca71707f99381e09c501dff2f994967900239b201",
+        "bytes": 180,
+        "width": 64,
+        "height": 64,
+        "rgba_sha256": "7453e9a081ce405b1e6e24a51484e01cf1fc5a11e8586e3c047f25ec350696fa"
+      },
+      "gesture": {
+        "file": "synthetic-action-anchor-2.webp",
+        "sha256": "5c670255a51f6ff3e26fae8cc2b6f9b6945945739c40fcfa7a4294f751704abf",
+        "bytes": 166,
+        "width": 64,
+        "height": 64,
+        "rgba_sha256": "9bf48f729cd655156289d84d6e8ff5f00c07b3780383cc01cce592cec87c896d"
+      }
+    },
+    "maximum_resident": 3,
+    "fade_seconds": 0.09
+  },
+  "speech_landmarks": [
+    "face"
+  ],
+  "speech_radius_px": [
+    9,
+    6
+  ],
+  "speech_amplitude_px": 0.5
+}

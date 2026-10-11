@@ -14,7 +14,7 @@ const inventory=JSON.parse(source("For-AI/VOICE-DIALOGUE-INVENTORY.json"));
 const officeStory=source("buergeramt-story.js").toString();
 const officeRuntime=source("buergeramt.js").toString();
 for(const lines of Object.values(inventory.pools.policeBarks))for(const line of lines)authored.add("polizei-heinrich-wachtmeister\0"+line);
-for(const line of [inventory.pools.buergeramtPolicePhone.call,...inventory.pools.buergeramtPolicePhone.replies])authored.add("polizei-heinrich-wachtmeister\0"+line);
+for(const line of [inventory.pools.buergeramtPolicePhone.call,...inventory.pools.buergeramtPolicePhone.replies])authored.add(inventory.pools.buergeramtPolicePhone.voiceId+"\0"+line);
 for(const contexts of Object.values(inventory.pools.innerMonologues))for(const lines of Object.values(contexts))for(const line of lines)authored.add("spieler-hans-peter-mustermann\0"+line);
 const crowdArchetypes=new Map(inventory.pools.crowdArchetypes.map(archetype=>[archetype.id,archetype]));
 for(const person of cast.roleProfiles.filter(person=>person.voiceId.startsWith("crowd-"))){
@@ -31,7 +31,7 @@ const load=search=>{
 const off=load("");
 const on=load("?voicePreview=1");
 assert.equal(manifest.lineCount,223);
-assert.equal(manifest.clips.filter(clip=>clip.asrWordExact).length,158);
+assert.equal(manifest.clips.filter(clip=>clip.asrWordExact).length,157);
 const a38=manifest.clips.find(clip=>clip.clipId==="amt-brunhilde-knick-09");
 assert.ok(a38?.asrWordExact);
 assert.match(a38.asr,/\bA38\b/);
@@ -80,10 +80,10 @@ for(const clip of manifest.clips){
  const key=clip.voiceId+"\0"+clip.text;
  assert.ok(!keys.has(key),`duplicate candidate ${clip.clipId}`);
  keys.add(key);
- assert.ok(authored.has(key)||clip.voiceId==="amt-brunhilde-knick"&&(officeStory.includes(clip.text)||officeRuntime.includes(clip.text)),`unowned line ${clip.clipId}`);
+ assert.ok(clip.retiredReason||authored.has(key)||clip.voiceId==="amt-brunhilde-knick"&&(officeStory.includes(clip.text)||officeRuntime.includes(clip.text)),`unowned line ${clip.clipId}`);
  assert.equal(clip.profileId,owners.get(clip.voiceId)?.profileId,`profile binding ${clip.clipId}`);
  assert.equal(clip.referenceSha256,owners.get(clip.voiceId)?.referenceSha256,`reference binding ${clip.clipId}`);
- assert.equal(on.candidateClip(clip.voiceId,clip.text),clip.path);
+ assert.equal(on.candidateClip(clip.voiceId,clip.text),clip.retiredReason?null:clip.path);
  assert.equal(off.candidateClip(clip.voiceId,clip.text),null);
  assert.equal(createHash("sha256").update(source(clip.path)).digest("hex"),clip.sha256);
 }
@@ -96,8 +96,8 @@ const office=officeContext.window.BuergeramtStory;
 const clerkLines=[...office.clerk.flatMap(counter=>[counter.line,...counter.choices.map(choice=>choice.reply)]),...office.outburst.lines];
 assert.equal(clerkLines.length,21);
 for(const line of clerkLines)assert.ok(keys.has("amt-brunhilde-knick\0"+line),`missing clerk audition ${line}`);
-const policeLines=[...Object.values(inventory.pools.policeBarks).flat(),inventory.pools.buergeramtPolicePhone.call,...inventory.pools.buergeramtPolicePhone.replies];
-assert.equal(new Set(policeLines).size,16);
+const policeLines=Object.values(inventory.pools.policeBarks).flat();
+assert.equal(new Set(policeLines).size,12);
 for(const line of policeLines)assert.ok(keys.has("polizei-heinrich-wachtmeister\0"+line),`missing police audition ${line}`);
 const playerLines=new Set(Object.values(inventory.pools.innerMonologues).flatMap(contexts=>Object.values(contexts).flat()));
 assert.equal(playerLines.size,45);
@@ -115,4 +115,4 @@ assert.ok(game.includes("candidateVoiceId:n.voiceId"));
 assert.ok(game.includes('candidateVoiceId:"polizei-heinrich-wachtmeister"'));
 assert.ok(amt.includes("story.clerkIdentity.voiceId"));
 assert.ok(amt.includes("candidateClip?.(voiceId,text)"));
-assert.ok(phone.includes('candidateClip?.("polizei-heinrich-wachtmeister",text)'));
+assert.ok(phone.includes('catalog?.recordedClip?.(voiceId,text)||catalog?.candidateClip?.(voiceId,text)'));

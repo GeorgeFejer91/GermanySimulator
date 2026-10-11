@@ -46,7 +46,7 @@ hud.player.energy=99.8;hud.updateHud();assert.equal(writes,initial,'fractional e
 hud.state.wanted=2;hud.updateHud();assert.ok(writes>initial,'a displayed change must still update immediately');
 
 // Hidden-tab cleanup stops all scheduled background music without changing user preference.
-const musicHandler=game.slice(game.indexOf('document.addEventListener("visibilitychange",()=>{\n if(document.hidden){backgroundWasPlaying'),game.indexOf('\nconst humorModal='));
+const musicHandler=game.match(/document.addEventListener\("visibilitychange",\(\)=>\{\s*if\(document.hidden\)\{backgroundWasPlaying[\s\S]*?\n\}\);/)?.[0]||'';
 assert.ok(musicHandler.startsWith('document.addEventListener'));
 let handler,stops=0,pauses=0,resumes=0;const musicDoc={hidden:true,addEventListener:(_,fn)=>handler=fn};
 const music=vm.createContext({document:musicDoc,backgroundWasPlaying:false,musicBus:{disconnect(){}},sungMusicActive:false,introMusicAudio:{paused:false,pause(){pauses++}},sungMusicAudio:{pause(){pauses++}},musicPlaybackSerial:0,wurstTransitioning:false,musicTimer:1,introRampFrame:1,sungRampFrame:2,musicSources:new Set([{stop(){stops++}},{stop(){stops++}}]),clearTimeout(){},cancelAnimationFrame(){},startMusic(){resumes++}});
