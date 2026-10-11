@@ -95,7 +95,7 @@ function endCall(kind){
  if(kind==="decline"){stopCall();currentCall="";resolved="";}
  else{resetSwipe();answer.hidden=true;decline.hidden=true;choices.hidden=true;call.classList.add("answered");activeControls.hidden=false;hangup.focus?.({preventScroll:true});answeredAt=performance.now();updateDuration();durationTimer=setInterval(updateDuration,1000);initAudio();showPolice(openingPoliceLine,-1)}
 }
-hangup.onclick=()=>{if(resolved!=="answer"||!currentCall||!slotActive||finished||closed||call.hidden)return;link.send("hangup",{id:currentCall});stopCall();currentCall="";resolved="hangup"};
+hangup.onclick=()=>{if(resolved!=="answer"||!currentCall||!slotActive||finished||closed||call.hidden)return;if(!link.send("hangup",{id:currentCall})){endSlot("Ihr Platz ist verfallen. Bitte ziehen Sie eine neue Nummer.");link.close();return}stopCall();currentCall="";resolved="hangup"};
 link.addEventListener("status",e=>{if(closed)return;if(/getrennt|unterbrochen/i.test(e.detail)){submit.disabled=true;if(slotActive)endSlot("Ihr Platz ist verfallen. Bitte ziehen Sie eine neue Nummer.")}});
 link.addEventListener("connected",()=>{if(closed||finished)return;submit.disabled=!!submittedName;requestTicket();clearInterval(scanTimer);scanTimer=setInterval(requestTicket,1500)});
 link.addEventListener("message",e=>{

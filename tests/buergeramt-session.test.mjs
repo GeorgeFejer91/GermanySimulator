@@ -461,3 +461,9 @@ test('pre-ring interference has one louder pulsed tone and crackle, honors mute 
  h.level.replay(h.config);h.audio.flushEnded();assert(tone.disconnected&&noise.disconnected&&envelope.disconnected);
  const muted=harness('host',{fakeAudio:true,officeFx:0});muted.counter();muted.links[0].message({type:'call-ready',id:'grass',atMs:muted.now()});assert.equal(muted.audio.nodes.some(n=>n.kind==='oscillator'&&n.frequency.value===217),false);
 });
+
+test('failed hang-up reporting still stops local call media and closes the channel',()=>{
+ const h=harness('phone',{candidatePhone:true,fakeAudio:true});h.incoming();h.node('phone-answer').click();h.tick(20);const clip=h.audio.recordings[0];h.links[0].fail=true;
+ h.node('phone-hangup').click();assert.equal(h.links[0].closed,true);assert.equal(h.node('phone-call').hidden,true);assert.equal(h.node('phone-active-controls').hidden,true);assert.equal(clip.paused,true);assert.match(h.node('phone-status').textContent,/verfallen/);
+ h.links[0].message({type:'police-line',index:0,line:'A stale line.'});h.tick(4000);assert.equal(h.audio.recordings.length,1);assert(h.audio.nodes.filter(n=>n.kind==='buffer-source').every(n=>n.stopped.length));
+});
