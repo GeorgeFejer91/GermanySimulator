@@ -17,6 +17,25 @@ function retreatFixture(dt){
 }
 
 for(const dt of [1/60,1/30,.1]){
+ test(`the painted turn is planted and the quicker exit remains bounded at dt=${dt}`,()=>{
+  const {level,actor,until}=retreatFixture(dt);until('turn');
+  const origin=[actor.x,actor.z],frames=new Set();let turnTime=0;
+  while(level.omen.phase==='turn'){
+   frames.add(Math.min(8,Math.floor(level.omen.turnProgress*9)));
+   level.update(dt);turnTime+=dt;
+   if(level.omen.phase==='turn'){assert.equal(actor.x,origin[0]);assert.equal(actor.z,origin[1])}
+  }
+  assert.equal(frames.size,9,'every individual turn view receives playback time');
+  assert(Math.abs(turnTime-1.8)<=dt+1e-8,'turn ends in 1.8 seconds');
+  let departTime=0,travel=0;
+  while(level.omen.phase==='depart'){
+   const before=[actor.x,actor.z];level.update(dt);departTime+=dt;
+   const move=Math.hypot(actor.x-before[0],actor.z-before[1]);travel+=move;
+   assert(move<=(level.omen.phase==='depart'?.60:.75)*dt+1e-8,'faster exit retains swept movement bounds');
+  }
+  assert(Math.abs(departTime-2.2)<=dt+1e-8,'departure hold ends in 2.2 seconds');
+  assert(travel>.85,'the courier visibly retreats before room recovery');
+ });
  test(`remaining return yields to a legal stationary player at dt=${dt}`,()=>{
   const {level,probe,actor,until}=retreatFixture(dt);until('');
   const target=actor.omenReturn?.[0];assert(target,'fixture still has a return path when controls resume');

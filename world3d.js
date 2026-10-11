@@ -1268,6 +1268,12 @@ function showRendererFailure(error){
     for(const mesh of amtPaintedProps){mesh.material.map=texture;mesh.material.needsUpdate=true}
   }
   function amtSnapshot(actor){const height=actor.height||actor.mesh.geometry.parameters.height;return{rotation:actor.mesh.rotation.y,height,foot:actor.mesh.position.y-height*actor.mesh.scale.y/2,ground:[actor.mesh.position.x,actor.mesh.position.z],direction:actor.direction,renderKey:actor.renderKey,opacity:actor.mesh.material.opacity,depthTest:actor.mesh.material.depthTest,renderOrder:actor.mesh.renderOrder,layer:actor.mesh.layers.mask,foreground:!!actor.mesh.userData.amtForeground}}
+  function clearAmtTurnPaint(){
+    const actor=amtMoving[0];
+    if(!actor.turnDetail)return;
+    if(actor.mesh.material.map===actor.turnDetail){actor.mesh.material.map=actor.atlas;actor.mesh.material.needsUpdate=true;actor.renderKey=""}
+    actor.turnDetail.dispose();actor.turnDetail=null;
+  }
   function animateAmtCharacters(now,level){
     const speech=level.lipSpeech;
     for(const actor of amtCharacters){
@@ -1317,20 +1323,25 @@ function showRendererFailure(error){
       const fogExempt=actor.id==="aktenkurier"&&!!omen.phase||level.fever?.active&&level.fever.id===actor.id;
       if(actor.mesh.material.fog===fogExempt){actor.mesh.material.fog=!fogExempt;actor.mesh.material.needsUpdate=true}
       const turning=actor.id==="aktenkurier"&&omen.phase==="turn",departing=actor.id==="aktenkurier"&&["depart","recover"].includes(omen.phase);
+      if(actor.id==="aktenkurier"){
+        if(actor.turnVisit!==omen.visit){clearAmtTurnPaint();actor.turnVisit=omen.visit}
+        // Prepare only this encounter's selected variant through the shared queue.
+        // A failed load retains the existing directional paint without retrying.
+        if(omen.phase==="approach"&&!actor.turnDetail){
+          const small=amtMobile&&(window.devicePixelRatio||1)<1.5;
+          actor.turnDetail=amtTexture(`./assets/buergeramt/characters/aktenkurier-turn${small?"-mobile":""}.webp?v=20261011-painted-turn`);
+        }
+        if(!omen.phase)clearAmtTurnPaint();
+      }
       const heading=state.heading??({down:0,right:Math.PI/2,up:Math.PI,left:-Math.PI/2}[state.direction]??0);
       const relative=Math.atan2(Math.sin(heading-actor.mesh.rotation.y),Math.cos(heading-actor.mesh.rotation.y));
       const travelDirection=Math.abs(relative)<Math.PI/4?"down":Math.abs(relative)>3*Math.PI/4?"up":relative>0?"right":"left";
       const direction=facePlayer?"down":departing?"up":turning?state.direction:travelDirection;
       actor.direction=direction;
-      if(turning&&!amtReducedMotion.matches){
-        // Readable front, side, rear views with a planted pivot, using the accepted paint.
-        const t=omen.turnProgress,local=t<.25?t/.25:t<.73?(t-.25)/.48:(t-.73)/.27;
-        actor.mesh.rotation.y+=Math.sin(local*Math.PI)*.32;
-      }
       // Hold the registered frontal gesture as the paint becomes a relief.
       const speaking=speech?.active&&speech.actor===actor.id;
       const row=speaking||facePlayer&&omen.life.opacity>0?5:state.mode==="walk"||turning?({down:0,right:1,up:2,left:3}[direction]??0):({work:4,gesture:5,look:6,flinch:7}[state.mode]??4);
-      if(close&&row<4&&actor.walkDirection!==direction){
+      if(close&&row<4&&!turning&&actor.walkDirection!==direction){
         if(actor.walkDetail){if(actor.mesh.material.map===actor.walkDetail){actor.mesh.material.map=actor.atlas;actor.mesh.material.needsUpdate=true}actor.walkDetail.dispose()}
         actor.walkDirection=direction;
         const smallDetail=amtMobile&&(window.devicePixelRatio||1)<1.5&&actor.walkFrames===16;
@@ -1344,11 +1355,13 @@ function showRendererFailure(error){
       actor.cell=cell;
       const actionDetail=close&&row>=4&&!!actor.detail?.image;
       const walkDetail=close&&row<4&&actor.walkDirection===direction&&!!actor.walkDetail?.image;
-      const texture=actionDetail?actor.detail:walkDetail?actor.walkDetail:actor.atlas;
+      const turnDetail=turning&&!!actor.turnDetail?.image,turnFrame=Math.min(8,Math.floor(omen.turnProgress*9));
+      const texture=turnDetail?actor.turnDetail:actionDetail?actor.detail:walkDetail?actor.walkDetail:actor.atlas;
       if(texture&&actor.mesh.material.map!==texture){actor.mesh.material.map=texture;actor.mesh.material.needsUpdate=true}
-      const key=actionDetail?`detail:${row}`:walkDetail?`walk:${row}:${sample}`:`atlas:${cell}`;
+      const key=turnDetail?`turn:${turnFrame}`:actionDetail?`detail:${row}`:walkDetail?`walk:${row}:${sample}`:`atlas:${cell}`;
       if(key!==actor.renderKey){actor.renderKey=key;
-        if(actionDetail)amtUv(actor,row-4,0,4,1);
+        if(turnDetail)amtUv(actor,turnFrame%3,Math.floor(turnFrame/3),3,3);
+        else if(actionDetail)amtUv(actor,row-4,0,4,1);
         else if(walkDetail)amtUv(actor,sample%4,Math.floor(sample/4),4,actor.walkFrames/4);
         else {const cols=actor.walkFrames===16?12:8;amtUv(actor,cell%cols,Math.floor(cell/cols),cols,8)}
       }
@@ -1536,6 +1549,7 @@ function showRendererFailure(error){
   }
   function renderAmt(){const level=window.BuergeramtLevel;
     if(!level||!level.active&&!document.body.classList.contains("amt-direct-mode")){
+      clearAmtTurnPaint();
       if(amtOmenSplat||amtOmenRequest)clearAmtOmenSplat();
       amtMouthSplat?.dispose();amtMouthSplat=null;
       amtGaussian.clear();
@@ -1712,6 +1726,6 @@ function showRendererFailure(error){
     if(parkCameraFrame>.001){const narrow=Math.max(0,Math.min(1,.95/camera.aspect-1)),cx=X(park.x+park.w/2),cz=Z(park.y+park.h/2),focus=parkCameraFrame*(1-.65*narrow);camera.position.set(px+(cx-px)*focus,11.5+(5+2*narrow)*parkCameraFrame,pz+14+2*narrow*parkCameraFrame);camera.lookAt(px+(cx-px)*focus,1+parkCameraFrame,pz-2.7+(cz-(pz-2.7))*parkCameraFrame)}
     updateGroupVisibility();updateBuergeramtDoorGlow(now);updateBuildingOcclusion();updateWirtschaftswunder(now);updateMissionPointer();renderer.render(scene,camera);
     if(missionPointer.visible){renderer.autoClear=false;renderer.clearDepth();renderer.info.autoReset=false;renderer.render(missionHudScene,missionHudCamera);renderer.info.autoReset=true;renderer.autoClear=true}
-  },layoutMissionPointer,inspectAssets,setAmtQr,get amtLipSplat(){return amtMouthSplat?.inspect()||null},get amtGaussian(){return amtGaussian.inspect()},get amtOmenSplat(){return {visit:amtOmenVisit,loading:!!amtOmenRequest,skipped:amtOmenSkipped,failure:amtOmenFailure,...(amtOmenSplat?.inspect()||{ready:false,visible:false})}},get amtOmenStaging(){return {isolation:amtIsolation.value,environmentVisible:amtEnvironment.visible}},get amtOffice(){return officeDetail?.inspect()||null},get amtCharacters(){return [...amtCharacters.map(actor=>({name:actor.name,id:actor.animationId??actor.id,...amtSnapshot(actor),frame:actor.frame,loaded:!!actor.mesh.material.map?.image,mapped:!!actor.mesh.material.map,visible:actor.mesh.visible,detail:actor.mesh.material.map===actor.detail,texelHeight:actor.mesh.material.map?.image?.height||0,breath:actor.mesh.material.userData.breath.value})),...amtMoving.map(actor=>({name:actor.id,...amtSnapshot(actor),frame:actor.cell,loaded:!!actor.mesh.material.map?.image,mapped:!!actor.mesh.material.map,visible:actor.mesh.visible,detail:actor.mesh.material.map===actor.detail||actor.mesh.material.map===actor.walkDetail,texelHeight:actor.mesh.material.map?.image?.height||0,breath:actor.mesh.material.userData.breath.value,tint:actor.mesh.material.color.getHexString(),position:[actor.mesh.position.x,actor.mesh.position.z]}))]}};
+  },layoutMissionPointer,inspectAssets,setAmtQr,get amtLipSplat(){return amtMouthSplat?.inspect()||null},get amtGaussian(){return amtGaussian.inspect()},get amtOmenSplat(){return {visit:amtOmenVisit,loading:!!amtOmenRequest,skipped:amtOmenSkipped,failure:amtOmenFailure,...(amtOmenSplat?.inspect()||{ready:false,visible:false})}},get amtOmenStaging(){return {isolation:amtIsolation.value,environmentVisible:amtEnvironment.visible}},get amtOffice(){return officeDetail?.inspect()||null},get amtCharacters(){return [...amtCharacters.map(actor=>({name:actor.name,id:actor.animationId??actor.id,...amtSnapshot(actor),frame:actor.frame,loaded:!!actor.mesh.material.map?.image,mapped:!!actor.mesh.material.map,visible:actor.mesh.visible,detail:actor.mesh.material.map===actor.detail,texelHeight:actor.mesh.material.map?.image?.height||0,breath:actor.mesh.material.userData.breath.value})),...amtMoving.map(actor=>({name:actor.id,...amtSnapshot(actor),frame:actor.cell,loaded:!!actor.mesh.material.map?.image,mapped:!!actor.mesh.material.map,visible:actor.mesh.visible,detail:actor.mesh.material.map===actor.detail||actor.mesh.material.map===actor.walkDetail||actor.mesh.material.map===actor.turnDetail,turnPrepared:!!actor.turnDetail,turnReady:!!actor.turnDetail?.image,texelHeight:actor.mesh.material.map?.image?.height||0,breath:actor.mesh.material.userData.breath.value,tint:actor.mesh.material.color.getHexString(),position:[actor.mesh.position.x,actor.mesh.position.z]}))]}};
   app.classList.add("three-ready");
 })().catch(showRendererFailure);

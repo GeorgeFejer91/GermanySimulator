@@ -1,0 +1,56 @@
+{
+  "character": "aktenkurier",
+  "frames": 9,
+  "grid": [
+    3,
+    3
+  ],
+  "durationSeconds": 1.8,
+  "loop": false,
+  "pivot": [
+    0.5,
+    0.9615384615384616
+  ],
+  "method": "six-painted-bridges-between-existing-front-profile-rear",
+  "sources": {
+    "assets/sprite-sources/buergeramt/aktenkurier/down.png": "554c54bb9c90eaa78ee13e3882e255a1767ec723375b68f0b76ae7f87c9204f2",
+    "assets/sprite-sources/buergeramt/aktenkurier-turn/front-quarter.png": "bfa58217ba67fa674887635d7181278a243f9f217c747ebc377aaa74a001ec6c",
+    "assets/sprite-sources/buergeramt/aktenkurier-turn/front-diagonal.png": "1bf078d09e3673f31ad5abff6b245cbce9481adab0a175c50800161346e21659",
+    "assets/sprite-sources/buergeramt/aktenkurier-turn/front-profile.png": "9c9707635de102115e03a54c19de27f97b5905800049dd95a7f7185d96f086b7",
+    "assets/sprite-sources/buergeramt/aktenkurier/right.png": "878a558281e619cd9890d2d3d42706f16152e724ee8759b0e2c780afeb000e0c",
+    "assets/sprite-sources/buergeramt/aktenkurier-turn/rear-profile.png": "bbb6b3b517a55d0d93e326def04eb44234e2e9e380f80326305659dcac5fa3cc",
+    "assets/sprite-sources/buergeramt/aktenkurier-turn/rear-diagonal.png": "d868a3aa5f21f8e7f4fa441dc397d52fdf9b8284eb7042e25ae4ffb575d8c8a8",
+    "assets/sprite-sources/buergeramt/aktenkurier-turn/rear-quarter.png": "f221fbd572ddf9044bde40e6b8fc27387f167a15e66a6473f35601791cd95b51",
+    "assets/sprite-sources/buergeramt/aktenkurier/up.png": "211b5659f6e345bcfaf35cf26f48ae14de1db4d85dd4f96ac1757aa2e95bfb88"
+  },
+  "variants": {
+    "desktop": {
+      "file": "aktenkurier-turn.webp",
+      "cell": [
+        480,
+        624
+      ],
+      "size": [
+        1440,
+        1872
+      ],
+      "bytes": 480988,
+      "decodedRGBABytes": 10782720,
+      "sha256": "d4ccbd0c4d4da4eaa4fbdd6dab57a44b90d41eda05646e178cd0c55da67247e6"
+    },
+    "mobile": {
+      "file": "aktenkurier-turn-mobile.webp",
+      "cell": [
+        240,
+        312
+      ],
+      "size": [
+        720,
+        936
+      ],
+      "bytes": 147658,
+      "decodedRGBABytes": 2695680,
+      "sha256": "45d2d2d49a211a6cd3b543f46affeddc545787d11d57abd46956ae689c2b5fa1"
+    }
+  }
+}

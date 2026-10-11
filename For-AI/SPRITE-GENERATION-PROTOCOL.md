@@ -19,6 +19,19 @@ they cannot waive an orphaned paint strip, doubled hand or anatomical defect.
 
 ## Bürgeramt character loops
 
+The Aktenkurier's omen exit has a separate nine-view planted turn: existing
+registered front/profile/rear keys plus six ImageGen perspective bridges in
+`assets/sprite-sources/buergeramt/aktenkurier-turn/`. Rebuild only this clip with
+`python tools/build-aktenkurier-turn.py` (`--check` verifies stored bytes).
+It packs a 3 × 3 WebP with 480 × 624 desktop/high-DPR cells or 240 × 312
+low-DPR mobile cells. The 1.8-second simulation clock samples all nine views;
+the billboard remains camera-facing without the former rotation pulses.
+Keep the shared family scale, floor pivot, left-arm files and right-hand stamp.
+These are distinct painted views, not interpolated anatomy or a new walk rig.
+The renderer prepares one selected variant only on omen approach, retains the
+existing directional fallback on failure, and disposes it on release/replay/close.
+Review every exact encoded cell and both action-to-turn and turn-to-walk handoffs.
+
 The first-person office keeps its original stationary cast and does not change
 the city walk pipeline below. Four caricatured painted source strips live in
 `assets/sprite-sources/buergeramt/*-source.png`; the builder is

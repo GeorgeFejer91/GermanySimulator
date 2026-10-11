@@ -2,6 +2,11 @@
 
 ## Bürgeramt episode
 
+Six painted Aktenkurier turn bridges were generated with OpenAI ImageGen from
+the existing character reference. Original anchors and new source art retain
+the character's prop hands and painterly costume. The reproducible turn atlas
+and source hashes are recorded in `assets/buergeramt/characters/aktenkurier-turn.json`.
+
 The Aktenkurier's blackout transformation and procedural dark Gaussian tunnel use [Spark 2.3.1](https://github.com/sparkjsdev/spark/tree/v2.3.1), MIT licensed under `assets/vendor/spark/2.3.1/LICENSE`. His Gaussian sculpture is deterministically authored from the existing painted character; source hashes, limitations and rebuild instructions are in `assets/buergeramt/omen/PROVENANCE.md`.
 
 The Aktenkurier's electronic omen uses original oscillator and filter compositions rendered with the free, open-source [SuperCollider](https://supercollider.github.io/) and encoded with [FFmpeg](https://ffmpeg.org/). No sample library or generative music service was used. Editable source, exact file hashes, and rebuild instructions are in [the audio provenance](assets/audio/buergeramt-omen/LICENSES.md).

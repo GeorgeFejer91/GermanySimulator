@@ -339,6 +339,30 @@ browser profiles. Do not add a new pipeline, service or benchmark dependency.
 
 ### Asset and loader contract
 
+The omen turn adds one approach-only Aktenkurier texture, selected as desktop
+or low-DPR mobile, never both. The 1440 × 1872 desktop sheet transfers 480,988
+bytes and decodes to 10,782,720 RGBA bytes; the 720 × 936 mobile sheet transfers
+147,658 bytes and decodes to 2,695,680 bytes. Neither has mipmaps. The existing
+two-job admission queue owns loading; existing simulation/render dispatch owns
+playback and UV changes. No idle consumer or additional timer is introduced.
+The actor releases the texture at encounter completion, replay, or office close;
+late loads cannot install into a disposed texture. Source PNGs and the manifest
+are authoring material and are never requested at runtime. The manifest and
+`tools/build-aktenkurier-turn.py --check` own hashes, dimensions and exact bytes.
+
+Turn acceptance covers every encoded desktop/mobile cell, seven silent browser
+cases (including reduced motion and missing art), and independent movement and
+rendered depth reviews. Three cold office runs per viewport compare `0447bea`
+with the animation candidate on Chrome 148 / Intel Iris Xe, local HTTP, DPR 2,
+and headless focus emulation. All runs accept nine inputs without page errors.
+Median active sync-interval p95 is 21.2 → 27.0 ms desktop and 24.2 → 21.1 ms
+portrait emulation; desktop ranges overlap (21.2–26.9 / 21.7–27.5 ms). Shared
+desktop scheduling and differing asset completion limit this comparison; it
+establishes no causal speedup or physical-device result. Evidence is under
+`output/aktenkurier-turn/focus-{baseline,candidate}/`. Earlier incomplete and
+background-throttled samples are retained separately and are not acceptance
+evidence. Physical Android and GPU/displayed-frame timing remain NOT RUN.
+
 - Keep authoring PNGs, Blender/BVH files, base64 transfer parts, source sheets,
   audit records and preview candidates out of runtime requests. Shipped runtime
   variants stay under the single `assets/` authority.

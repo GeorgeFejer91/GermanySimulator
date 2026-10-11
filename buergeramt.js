@@ -144,6 +144,7 @@ let patronEncounters={};
 let characterMood=null,encounterArmed=false;
 const feverClock=window.BuergeramtFever?.create();
 const omen={used:false,phase:"",strength:0,hold:0,elapsed:0,travel:0,path:[],pathIndex:0,roomTime:0,startDistance:0,resume:"walk-sign",resumeYaw:0,recoverFromYaw:0,speech:null,visit:0,revealTime:0,lifeTime:0,lifeClock:0};
+const omenTurnSeconds=1.8,omenDepartSeconds=2.2;
 const ease=value=>{const t=Math.max(0,Math.min(1,value));return t*t*(3-2*t)};
 function omenLife(){
  const live=["approach","blackout","glare","unwind"].includes(omen.phase),p=live?omen.strength:0,tension=omen.speech?.tension||0;
@@ -203,15 +204,15 @@ function updateOmen(dt){
  }}
  else if(omen.phase==="unwind"){
   omen.hold=Math.max(0,omen.hold-dt);
-  if(omen.hold===0){omen.phase="turn";omen.hold=2.4;stopOmenTone();actor.mode="turn";actor.workClock=0;
+  if(omen.hold===0){omen.phase="turn";omen.hold=omenTurnSeconds;stopOmenTone();actor.mode="turn";actor.workClock=0;
    actor.omenReturn=[...omen.path.slice(0,omen.pathIndex)].reverse();
    actor.target=actor.route.points.reduce((best,point,index)=>Math.hypot(actor.x-point[0],actor.z-point[1])<Math.hypot(actor.x-actor.route.points[best][0],actor.z-actor.route.points[best][1])?index:best,0);
    speaker.textContent="";line.textContent="";ambient.textContent="";
   }
  }
  else if(omen.phase==="turn"){
-  omen.hold=Math.max(0,omen.hold-dt);actor.direction=omen.hold>1.8?"down":omen.hold>.65?"right":"up";
-  if(omen.hold===0){omen.phase="depart";omen.hold=2.8;actor.mode="walk"}
+  omen.hold=Math.max(0,omen.hold-dt);const progress=1-omen.hold/omenTurnSeconds;actor.direction=progress<.25?"down":progress<.75?"right":"up";
+  if(omen.hold===0){omen.phase="depart";omen.hold=omenDepartSeconds;actor.mode="walk"}
  }
  else if(omen.phase==="depart"){
   omen.hold=Math.max(0,omen.hold-dt);
@@ -256,7 +257,7 @@ function moveOmenActor(actor,point,budget,avoidPlayer=false){
 function returnOmenActor(actor,dt){
  const point=actor.omenReturn[0];
  if(!point){actor.omenReturn=null;return}
- const distance=Math.hypot(point[0]-actor.x,point[1]-actor.z),speed=omen.phase==="depart"?.48*(.35+.65*ease(1-omen.hold/2.8)):.75;
+ const distance=Math.hypot(point[0]-actor.x,point[1]-actor.z),speed=omen.phase==="depart"?.60*(.5+.5*ease(1-omen.hold/omenDepartSeconds)):.75;
  const moved=moveOmenActor(actor,point,speed*dt,true);
  if(moved>=distance-1e-8){actor.omenReturn.shift();actor.omenBlocked=0}
  else if(moved>0)actor.omenBlocked=0;
@@ -808,5 +809,5 @@ window.BuergeramtLevel={open,requestFullscreen,get registrationTicket(){return n
  "amt-konrad-wohnungszettel":window.BuergeramtAnimationClock?.ambientPatron(stationaryClocks["amt-konrad-wohnungszettel"],attempt),
  "amt-mechthild-elternbogen":window.BuergeramtAnimationClock?.ambientPatron(stationaryClocks["amt-mechthild-elternbogen"],attempt),
  "amt-wolfram-rentenbescheid":window.BuergeramtAnimationClock?.ambientPatron(stationaryClocks["amt-wolfram-rentenbescheid"],attempt)
-}},get characterMood(){return characterMood},get fever(){return feverClock?.inspect()||{active:false,strength:0}},get clerkPerformance(){return clerkPerformance()},get omen(){return{turnProgress:omen.phase==="turn"?1-omen.hold/2.4:0,phase:omen.phase,strength:omen.strength,visit:omen.visit,revealTime:omen.revealTime,life:omenLife(),enabled:options?.cinematics!==false,x:characters[0].x,z:characters[0].z,speech:omen.speech?{...omen.speech}:null}},get registeredName(){return registeredName},get activated(){return activated}};
+}},get characterMood(){return characterMood},get fever(){return feverClock?.inspect()||{active:false,strength:0}},get clerkPerformance(){return clerkPerformance()},get omen(){return{turnProgress:omen.phase==="turn"?1-omen.hold/omenTurnSeconds:0,phase:omen.phase,strength:omen.strength,visit:omen.visit,revealTime:omen.revealTime,life:omenLife(),enabled:options?.cinematics!==false,x:characters[0].x,z:characters[0].z,speech:omen.speech?{...omen.speech}:null}},get registeredName(){return registeredName},get activated(){return activated}};
 })();
