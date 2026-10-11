@@ -28,11 +28,14 @@
   <link rel="preload" as="image" href="./assets/fire/kenney-smoke-05.png" crossorigin="anonymous">
   <link rel="stylesheet" href="./styles.css?v=20261011-published-features">
   <link rel="stylesheet" href="./buergeramt.css?v=20261011-published-features">
-  <link rel="stylesheet" href="./game-hud.css?v=20261011-published-features">
+  <link rel="stylesheet" href="./game-hud.css?v=20261011-wegweiser">
 </head>
 <body>
 <main id="app">
   <canvas id="game" hidden aria-hidden="true"></canvas>
+  <aside id="mission-guide" class="mission-guide" hidden aria-label="Wegweiser">
+    <div id="mission-pointer-space" aria-hidden="true"></div>
+  </aside>
   <nav id="city-status" class="city-status" aria-label="Spielakte" hidden>
     <aside id="germanness-hud" class="hud germanness" aria-label="Germanness"><small>GERMANNESS</small><div class="germanness-meter" role="progressbar" aria-label="Germanness" aria-valuemin="0" aria-valuemax="15" aria-valuenow="0"><i id="germanness-fill"></i></div><output id="germanness-value">0/15</output><span id="law-power">§-MACHT AB 9/15</span></aside>
     <button id="file-toggle" type="button" aria-haspopup="dialog" aria-controls="case-file" aria-expanded="false"><span data-de="AKTE" data-en="FILE">AKTE</span> <kbd>M</kbd> <span class="file-day"><span data-de="TAG" data-en="DAY">TAG</span> <b id="day">1/3</b></span></button>
@@ -123,9 +126,9 @@
 <script src="./character-interactions.js?v=20261011-published-features"></script>
 <script src="./tourist-animation.js?v=20261011-published-features"></script>
 <script src="./game.js?v=20261011-published-features"></script>
-<script type="module" src="./game-hud.js?v=20261011-published-features"></script>
+<script type="module" src="./game-hud.js?v=20261011-wegweiser"></script>
 <script type="module" src="./subtitle-layout.js?v=20261011-published-features"></script>
 <script type="module" src="./quiz-layout.js?v=20261011-published-features"></script>
-<script type="module" src="./world3d.js?v=20261011-published-features"></script>
+<script type="module" src="./world3d.js?v=20261011-wegweiser"></script>
 </body>
 </html>

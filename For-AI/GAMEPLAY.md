@@ -15,12 +15,14 @@ Mission order:
 7. Ausländerbehörde — residence evidence.
 8. Ausländerbehörde — fictional citizenship application.
 
-A grilled Bratwurst fixed at the top of the screen points its mustard arrowhead toward
+A short, fat grilled Bratwurst fixed at the top of the screen points its glowing red end toward
 the current mission's actual office entrance. It follows all eight procedures;
 during Stadtbild work it selects the nearest unfinished object, then the office.
-The existing 3D model is drawn in a screen-space pass by the same renderer: top
-centre on wide screens, in the top-left gap above the file rail at widths up to
-1000 CSS px, with stable CSS-pixel size and matching file-rail clearance.
+The existing 3D model has a shorter, thicker HUD presentation, drawn by the same
+renderer with Schwarz-Rot-Gold Fraktur “Wegweiser” printed directly on its curved surface. It sits at the top
+centre on wide screens and above the file rail on narrow phones. The model and
+procedural fallback share the shape and glowing end. The surface print flips
+its orientation when needed to keep the word readable while the pointer turns. Measured print and notice/file-rail clearance follow font loading, resizing and enlarged text.
 Its bearing follows the current camera projection. It is a
 compass bearing, with existing streets, crossings and interaction rules
 still governing travel. It hides during title, dialogue, file/modal, office and

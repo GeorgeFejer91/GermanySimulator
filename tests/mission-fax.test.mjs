@@ -3,7 +3,7 @@ import vm from 'node:vm';
 import assert from 'node:assert/strict';
 import test from 'node:test';
 
-const source=readFileSync(new URL('../game-hud.js',import.meta.url),'utf8').replace(/^import .*\n/,'');
+const source=readFileSync(new URL('../game-hud.js',import.meta.url),'utf8').replace(/^import .*\r?\n/,'');
 function hud({reduced=true,audioRate=1}={}){
  let now=0,serial=0,feeds=0,cancellations=0,maskFrames=0;
  const tasks=new Map(),events=new Map(),nodes=new Map();
@@ -14,7 +14,7 @@ function hud({reduced=true,audioRate=1}={}){
   nodes.set(id,el);return el;
  }
  const ctx={createImageData:(w,h)=>({data:new Uint8ClampedArray(w*h*4)}),putImageData(){},clearRect(){},drawImage(){},fillRect(){}};
- const state={started:true,busy:false,lang:'de',energy:100},document={hidden:false,activeElement:null,getElementById:node,createElement:()=>({getContext:()=>ctx,toDataURL(){maskFrames++;return'data:image/png;base64,mask'}}),createComment:()=>node('comment-'+ ++serial),querySelector:()=>node('dock'),querySelectorAll:()=>[],body:node('body'),documentElement:node('html'),fonts:{ready:{then(){}}},addEventListener:(name,fn)=>events.set(name,fn)};
+ const state={started:true,busy:false,lang:'de',energy:100},document={hidden:false,activeElement:null,getElementById:node,createElement:()=>({getContext:()=>ctx,toDataURL(){maskFrames++;return'data:image/png;base64,mask'}}),createComment:()=>node('comment-'+ ++serial),querySelector:()=>node('dock'),querySelectorAll:()=>[],body:node('body'),documentElement:node('html'),fonts:{load:()=>({then:()=>({catch(){}})}),ready:{then(){}}},addEventListener:(name,fn)=>events.set(name,fn)};
  node('germanness-hud').parentElement=node('city-status');node('mission-title').textContent='ANMELDUNG I';node('mission-text').textContent='Zum Bürgeramt gehen.';
  node('file-close').parentElement=node('case-file.file-header');node('subtitle-toggle').parentElement=node('app');node('english-subtitle').parentElement=node('app');
  const context=vm.createContext({document,window:{Germany3DBridge:{getHUDState:()=>state,clearInput(){},playFaxTransition(){feeds++;const start=now;return{duration:1.08,elapsed:()=>(now-start)/1000*audioRate,cancel(){cancellations++}}}}},performance:{now:()=>now},setTimeout:later,clearTimeout:id=>tasks.delete(id),requestAnimationFrame:fn=>later(()=>fn(now),16),cancelAnimationFrame:id=>tasks.delete(id),matchMedia:()=>({matches:reduced}),CSS:{supports:()=>true},MutationObserver:class{observe(){}},ResizeObserver:class{observe(){}},getComputedStyle:()=>({zoom:'1',getPropertyValue:()=>0}),innerWidth:1280,innerHeight:800,addEventListener:(name,fn)=>events.set(name,fn)});

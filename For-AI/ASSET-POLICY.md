@@ -645,15 +645,25 @@ terms. It adds 274,344 transferred bytes, 3,640 triangles, one material and thre
 neighborhood queue prepares it before Start through the existing two-job
 admission owner. A curved procedural sausage retains the same compass behavior
 on failure. The existing render dispatch updates its bearing without a new
-timer, text measurement, collision object, service or asset variant. The shared
+timer, collision object, service or asset variant. The shared
 source/instance lives with the city renderer; office/hidden states consume no
 pointer updates. Replace this noncommercial model before commercial release.
 It is a fixed screen-space HUD object rendered after the city with the same
-WebGL renderer and a small orthographic view: 76 px on wide screens, 48 px at
-widths up to 1000 CSS px, with matching file-rail clearance. The current city
-camera projects its mission bearing into screen XY. Layout updates on resize;
+WebGL renderer and a small orthographic view. Its body scales 1.65 across and
+0.7 along the existing source, yielding a short, fat shape without another
+model download. A 64 px radial sprite (16 KiB decoded RGBA) and cloned tip
+materials provide the red glow; the mustard cone is removed. The HUD reserves
+168 px on desktop or 128 px on compact layouts. A 1024 × 256 canvas
+(1 MiB decoded RGBA, one shared texture) prints black-red-gold UnifrakturCook
+“Wegweiser” directly onto the curved skin in the existing material shader.
+The pinned Pretext measures its exact loaded canvas font before painting;
+local PlacardGrenze remains the named font fallback. No text overlay floats
+above the sausage.
+The current city camera projects its mission bearing into screen XY. Layout
+updates through resize/DOM observers and the existing coalesced HUD refresh;
 its unchanged model job uses the player's location for admission. No collision,
-extra canvas, asset variant, new animation loop or text surface is added.
+extra WebGL canvas, asset variant or new animation loop is added. The measured DOM reservation hides with its pointer during title, dialogue,
+file and office states; it has no visible text.
 A short silent native-Chrome comparison at 1280 × 800 measured render dispatch
 p50/p95 of 14.0/21.7 ms before and 15.0/21.1 ms after this move. These
 73/72-sample live-city measurements include the HUD pass but do not establish

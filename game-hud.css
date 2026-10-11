@@ -1,4 +1,11 @@
 /* A small file tab during play; the paperwork opens only when it is useful. */
+.mission-guide{position:fixed;z-index:21;top:8px;left:50%;transform:translateX(-50%);width:12rem;display:grid;grid-template-rows:168px;pointer-events:none}
+.mission-guide[hidden]{display:none}
+.mission-guide.compact{width:min(10rem,calc(50vw - 16px));grid-template-rows:128px}
+.mission-guide.stacked{left:8px;transform:none}
+.mission-guide.large-text{top:calc(var(--subtitle-toggle-height,44px) + 16px);grid-template-rows:144px}
+.mission-guide.stacked~.city-status{top:max(calc(var(--subtitle-toggle-height,44px) + 14px),var(--wegweiser-clearance,144px))}
+.mission-guide.compact:not(.stacked)~.city-status{top:8px}
 .fax-paper{color:#28261f;background:repeating-linear-gradient(0deg,transparent 0 3px,#71685008 3px 4px),#eee8d8;border:1px solid #746d5e;border-left:10px dotted #c0b7a3;box-shadow:3px 4px 0 #24211c45;font:1rem/1.4 "Courier New",monospace}
 .city-status{position:fixed;z-index:20;top:12px;left:12px;display:flex;align-items:flex-start;flex-wrap:wrap;gap:6px;width:min(300px,calc(100vw - 24px));max-width:calc(100vw - 24px)}
 .city-status[hidden],.mission-fax[hidden]{display:none}

@@ -95,6 +95,12 @@ function schedule(){if(queued||document.hidden)return;queued=true;requestAnimati
 // wrapping; a long file page scrolls at zoom rather than truncating instructions.
 const fitSelectors=['#subtitle-toggle','#city-status button','#energy-warning','.wanted small','#fax-title','#fax-text','.fax-heading>span','#mission-fax button','.file-header h2','.file-header button','.file-tabs button','.file-page button','.mission-body small','#anmeldung-badge','#mission-title','#mission-text','.rule small','#rule-id','#rule-text','.stats span','.germanness>small','#germanness-value','#law-power','.wurst-pass>b','.file-controls dt','.file-controls dd','.file-page>a','#toast','#bark-speaker','#police-bark-text','#violation-law','#violation-title','#violation-text'];
 function measure(){
+ const guide=byId('mission-guide'),guideZoom=parseFloat(getComputedStyle(document.documentElement).zoom)||1;
+ guide.classList.toggle('compact',innerWidth/guideZoom<=1000||matchMedia('(pointer:coarse)').matches);
+ guide.classList.toggle('stacked',innerWidth/guideZoom<=700);
+ guide.classList.toggle('large-text',innerWidth/guideZoom<=700&&parseFloat(getComputedStyle(document.documentElement).fontSize)>20);
+ document.body.style.setProperty('--wegweiser-clearance',guide.hidden?'0px':guide.getBoundingClientRect().bottom/guideZoom+8+'px');
+ window.Germany3D?.layoutMissionPointer();
  if(file.open){const viewportZoom=parseFloat(getComputedStyle(document.documentElement).zoom)||1;file.style.setProperty('--file-viewport-width',innerWidth/viewportZoom+'px');file.style.setProperty('--file-viewport-height',innerHeight/viewportZoom+'px');file.style.setProperty('--file-caption-height',subtitleRail.getBoundingClientRect().height/viewportZoom+'px')}
  for(const el of document.querySelectorAll(fitSelectors.join(','))){
   if(!el.getClientRects().length||el.hidden)continue;
@@ -138,16 +144,18 @@ function measure(){
  const bottom=dock.getClientRects().length?dock.getBoundingClientRect().top/zoom:innerHeight/zoom-(parseFloat(getComputedStyle(byId('app')).getPropertyValue('--subtitle-height'))||0);
  const approval=byId('police-bark').dataset.family==='subtitle-approval'&&!byId('police-bark').hidden;
  const approvalTop=subtitleToggle.getBoundingClientRect().bottom/zoom+8;
- const noticeTop=approval&&approvalTop<bottom-80?Math.max(top,approvalTop):innerWidth<=760?top:12;
+ let noticeTop=approval&&approvalTop<bottom-80?Math.max(top,approvalTop):innerWidth<=760?top:12;
+ const guideBounds=guide.getBoundingClientRect(),noticeBounds=notices.getBoundingClientRect();
+ if(!guide.hidden&&guideBounds.left<noticeBounds.right&&guideBounds.right>noticeBounds.left)noticeTop=Math.max(noticeTop,guideBounds.bottom/zoom+8);
  if(!manual){notices.style.top=noticeTop+'px';notices.style.maxHeight=Math.max(44,bottom-noticeTop-12)+'px'}
  else{notices.style.removeProperty('top');notices.style.removeProperty('max-height')}
  if(!fax.hidden){fax.style.top=top+'px';fax.style.maxHeight=Math.max(44,bottom-top-12)+'px'}
 }
 const observer=new MutationObserver(schedule);
-for(const id of [...alerts,'subtitle-toggle','anmeldung-badge','mission-title','mission-text','energy','stars','day','germanness-value','law-power','wurst-badges','intro'])observer.observe(byId(id),{subtree:true,childList:true,characterData:true,attributes:true,attributeFilter:['hidden','class']});
+for(const id of [...alerts,'mission-guide','subtitle-toggle','anmeldung-badge','mission-title','mission-text','energy','stars','day','germanness-value','law-power','wurst-badges','intro'])observer.observe(byId(id),{subtree:true,childList:true,characterData:true,attributes:true,attributeFilter:['hidden','class']});
 observer.observe(document.body,{attributes:true,attributeFilter:['class']});
 observer.observe(document.documentElement,{attributes:true,attributeFilter:['style','lang']});
-const bounds=new ResizeObserver(schedule);for(const el of [file,rail,subtitleToggle,byId('amt-walk-hud').querySelector('.amt-walk-top'),byId('amt-mix'),byId('amt-direct-reset'),document.querySelector('.control-dock')])bounds.observe(el);
+const bounds=new ResizeObserver(schedule);for(const el of [byId('mission-guide'),file,rail,subtitleToggle,byId('amt-walk-hud').querySelector('.amt-walk-top'),byId('amt-mix'),byId('amt-direct-reset'),document.querySelector('.control-dock')])bounds.observe(el);
 addEventListener('resize',schedule,{passive:true});
 document.addEventListener('visibilitychange',()=>{if(document.hidden){queued=false;const wasVisible=!fax.hidden;hideFax();if(wasVisible){pending=false;reminderAt=performance.now()+FAX_GAP_MS}if(manual)closeFile()}else schedule()});
 addEventListener('pagehide',()=>{hideFax();cache.clear();mask=kernel=null});
