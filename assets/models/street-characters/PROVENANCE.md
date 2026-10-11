@@ -37,6 +37,8 @@ Normal play makes no request for this pack. In the existing HTTP-served root gam
 
 The opt-in adapter changes only eligible ordinary NPC presentation. It retains original NPC state and interactions, protects all `special` characters, leaves player and police renderers alone, and keeps the original art on module/model failure. Nearby construction is bounded to two actors per sync; distant actors retain original artwork until approached. Templates share geometry and material, actors own their skeletons, and retired actors release their skeleton resources. Inspect counts with `window.Germany3D.inspectAssets().streetCharacters`.
 
+`persona-map.js` binds every named city and crowd `voiceId` to one reviewed template choice, recording the declared visual gender presentation and a short demeanor rationale. The runtime uses that binding before any generic fallback, and an unmapped named voice keeps its existing sprite. The query parameter `streetCharacter=<id>` deliberately overrides this only for visual inspection. A template's art-source title is never the speaking NPC's displayed identity or voice profile. The generated audit in `For-AI/VOICE-MODEL-COVERAGE-AUDIT.json` checks all 31 bindings against the voice cast; rendered appearance review is still pending.
+
 From the repository root, using Node 22 or a compatible runtime:
 
 ```sh

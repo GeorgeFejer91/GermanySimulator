@@ -1,0 +1,666 @@
+{
+  "version": 1,
+  "id": "parent",
+  "representation": "paired-gaussian-paint",
+  "canvas_xy": [
+    384,
+    832
+  ],
+  "head_paint_source": null,
+  "states": [
+    {
+      "id": "work",
+      "role": "main",
+      "file": "assets/sprite-sources/buergeramt/gaussian-arcs/parent/key-0.png",
+      "landmarks": {
+        "eye_right": [
+          225,
+          120
+        ],
+        "eye_left": [
+          256,
+          112
+        ],
+        "nose": [
+          249,
+          141
+        ],
+        "chin": [
+          239,
+          173
+        ],
+        "shoulder_right": [
+          144,
+          196
+        ],
+        "elbow_right": [
+          121,
+          316
+        ],
+        "grip_right": [
+          258,
+          337
+        ],
+        "stamp_knob": [
+          189,
+          214
+        ],
+        "stamp_base": [
+          251,
+          413
+        ],
+        "shoulder_left": [
+          292,
+          213
+        ],
+        "elbow_left": [
+          311,
+          349
+        ],
+        "hand_left": [
+          322,
+          464
+        ],
+        "hip_center": [
+          224,
+          454
+        ],
+        "skirt_hem_center": [
+          200,
+          539
+        ],
+        "foot_screen_left": [
+          162,
+          759
+        ],
+        "foot_screen_right": [
+          277,
+          742
+        ]
+      },
+      "paper_polygon_xy": [
+        [
+          189,
+          214
+        ],
+        [
+          304,
+          247
+        ],
+        [
+          251,
+          413
+        ],
+        [
+          162,
+          380
+        ]
+      ],
+      "paper_landmarks_xy": [
+        [
+          258,
+          337
+        ],
+        [
+          189,
+          214
+        ],
+        [
+          304,
+          247
+        ]
+      ],
+      "sha256": "8a7442b57e6b61ddec544278ea94951b704615f6c3d3ef5ac41496ec6e8c3ab8"
+    },
+    {
+      "id": "bridge-1",
+      "role": "transition",
+      "file": "assets/sprite-sources/buergeramt/gaussian-arcs/parent/key-1.png",
+      "landmarks": {
+        "eye_right": [
+          204,
+          118
+        ],
+        "eye_left": [
+          235,
+          110
+        ],
+        "nose": [
+          228,
+          139
+        ],
+        "chin": [
+          220,
+          171
+        ],
+        "shoulder_right": [
+          122,
+          193
+        ],
+        "elbow_right": [
+          108,
+          314
+        ],
+        "grip_right": [
+          238,
+          334
+        ],
+        "stamp_knob": [
+          166,
+          216
+        ],
+        "stamp_base": [
+          234,
+          406
+        ],
+        "shoulder_left": [
+          276,
+          212
+        ],
+        "elbow_left": [
+          307,
+          319
+        ],
+        "hand_left": [
+          281,
+          310
+        ],
+        "hip_center": [
+          201,
+          454
+        ],
+        "skirt_hem_center": [
+          190,
+          539
+        ],
+        "foot_screen_left": [
+          151,
+          759
+        ],
+        "foot_screen_right": [
+          267,
+          743
+        ]
+      },
+      "paper_polygon_xy": [
+        [
+          166,
+          216
+        ],
+        [
+          281,
+          247
+        ],
+        [
+          234,
+          406
+        ],
+        [
+          144,
+          374
+        ]
+      ],
+      "paper_landmarks_xy": [
+        [
+          238,
+          334
+        ],
+        [
+          166,
+          216
+        ],
+        [
+          281,
+          247
+        ]
+      ],
+      "sha256": "f278721efc6c498e009724ae2527d76daa5c1908ea9d76ab7b8fa4dfd8b9b55e"
+    },
+    {
+      "id": "bridge-2",
+      "role": "transition",
+      "file": "assets/sprite-sources/buergeramt/gaussian-arcs/parent/key-2.png",
+      "landmarks": {
+        "eye_right": [
+          212,
+          134
+        ],
+        "eye_left": [
+          241,
+          130
+        ],
+        "nose": [
+          230,
+          150
+        ],
+        "chin": [
+          221,
+          176
+        ],
+        "shoulder_right": [
+          124,
+          193
+        ],
+        "elbow_right": [
+          110,
+          316
+        ],
+        "grip_right": [
+          234,
+          330
+        ],
+        "stamp_knob": [
+          171,
+          216
+        ],
+        "stamp_base": [
+          229,
+          406
+        ],
+        "shoulder_left": [
+          274,
+          211
+        ],
+        "elbow_left": [
+          307,
+          283
+        ],
+        "hand_left": [
+          275,
+          239
+        ],
+        "hip_center": [
+          202,
+          454
+        ],
+        "skirt_hem_center": [
+          190,
+          539
+        ],
+        "foot_screen_left": [
+          157,
+          759
+        ],
+        "foot_screen_right": [
+          270,
+          748
+        ]
+      },
+      "paper_polygon_xy": [
+        [
+          171,
+          216
+        ],
+        [
+          277,
+          250
+        ],
+        [
+          229,
+          406
+        ],
+        [
+          149,
+          374
+        ]
+      ],
+      "paper_landmarks_xy": [
+        [
+          234,
+          330
+        ],
+        [
+          171,
+          216
+        ],
+        [
+          277,
+          250
+        ]
+      ],
+      "sha256": "c6b9738f61f536094048a45a594704b54a85cd747ae944800be9abda742b59d3"
+    },
+    {
+      "id": "gesture",
+      "role": "main",
+      "file": "assets/sprite-sources/buergeramt/gaussian-arcs/parent/key-3.png",
+      "landmarks": {
+        "eye_right": [
+          212,
+          144
+        ],
+        "eye_left": [
+          242,
+          145
+        ],
+        "nose": [
+          228,
+          158
+        ],
+        "chin": [
+          220,
+          178
+        ],
+        "shoulder_right": [
+          125,
+          193
+        ],
+        "elbow_right": [
+          110,
+          316
+        ],
+        "grip_right": [
+          232,
+          333
+        ],
+        "stamp_knob": [
+          166,
+          216
+        ],
+        "stamp_base": [
+          227,
+          405
+        ],
+        "shoulder_left": [
+          278,
+          210
+        ],
+        "elbow_left": [
+          317,
+          272
+        ],
+        "hand_left": [
+          294,
+          223
+        ],
+        "hip_center": [
+          202,
+          454
+        ],
+        "skirt_hem_center": [
+          190,
+          539
+        ],
+        "foot_screen_left": [
+          157,
+          759
+        ],
+        "foot_screen_right": [
+          270,
+          748
+        ]
+      },
+      "paper_polygon_xy": [
+        [
+          166,
+          216
+        ],
+        [
+          214,
+          228
+        ],
+        [
+          233,
+          207
+        ],
+        [
+          289,
+          218
+        ],
+        [
+          274,
+          261
+        ],
+        [
+          283,
+          264
+        ],
+        [
+          227,
+          405
+        ],
+        [
+          142,
+          375
+        ]
+      ],
+      "paper_landmarks_xy": [
+        [
+          232,
+          333
+        ],
+        [
+          166,
+          216
+        ],
+        [
+          214,
+          228
+        ]
+      ],
+      "sha256": "5910eab3078096cf9a9b83e0edb953055e710d9b55f6a9af7639e9c8631e22e8"
+    }
+  ],
+  "arcs": [
+    {
+      "id": "work-gesture",
+      "from": "work",
+      "to": "gesture",
+      "duration": 6,
+      "keys": [
+        {
+          "state": "work",
+          "time": 0
+        },
+        {
+          "state": "bridge-1",
+          "time": 2
+        },
+        {
+          "state": "bridge-2",
+          "time": 4
+        },
+        {
+          "state": "gesture",
+          "time": 6
+        }
+      ],
+      "segments": [
+        {
+          "segment": 0,
+          "start": 0,
+          "end": 2
+        },
+        {
+          "segment": 1,
+          "start": 2,
+          "end": 4
+        },
+        {
+          "segment": 2,
+          "start": 4,
+          "end": 6
+        }
+      ]
+    }
+  ],
+  "segments": [
+    {
+      "from": "work",
+      "to": "bridge-1",
+      "paint_warp_gain": 0.55
+    },
+    {
+      "from": "bridge-1",
+      "to": "bridge-2",
+      "paint_warp_gain": 0.55
+    },
+    {
+      "from": "bridge-2",
+      "to": "gesture",
+      "paint_warp_gain": 0.55
+    }
+  ],
+  "variants": {
+    "desktop": {
+      "file": "parent-desktop.bin.gz",
+      "sha256": "77cf4c88c1ec41ceb8f5b7841ddcb3e14981839f35a9ce18ea4f7721f2281c8b",
+      "decoded_sha256": "c48ec953e8d9466dfbfe7d8105559abea05208f069645a566a5c777b7b56f1db",
+      "bytes": 215412,
+      "decoded_bytes": 423936,
+      "sample_count": 5888,
+      "stride_px": 5,
+      "segment_count": 3,
+      "record_bytes": 24,
+      "trajectories": [
+        {
+          "segment": 0,
+          "start_slot": 4120,
+          "end_slot": 4860,
+          "pivot_start": [
+            0.07932692307692307,
+            0.5949519230769231
+          ],
+          "pivot_end": [
+            0.055288461538461536,
+            0.5985576923076923
+          ],
+          "angle_radians": 0.028875549882806717
+        },
+        {
+          "segment": 1,
+          "start_slot": 3985,
+          "end_slot": 4685,
+          "pivot_start": [
+            0.055288461538461536,
+            0.5985576923076923
+          ],
+          "pivot_end": [
+            0.05048076923076923,
+            0.6033653846153846
+          ],
+          "angle_radians": -0.04009493153409286
+        },
+        {
+          "segment": 2,
+          "start_slot": 3971,
+          "end_slot": 4754,
+          "pivot_start": [
+            0.05048076923076923,
+            0.6033653846153846
+          ],
+          "pivot_end": [
+            0.04807692307692308,
+            0.5997596153846154
+          ],
+          "angle_radians": 0.2385057151439164
+        }
+      ]
+    },
+    "mobile": {
+      "file": "parent-mobile.bin.gz",
+      "sha256": "ef5781507a002c33cec6fbb173a6efe5720cef812dd1dcd8df24160661a6a727",
+      "decoded_sha256": "d688303203959bf81195a9183e1bbbbaf93b6ef985984b1a1fa1d879cc24208b",
+      "bytes": 84172,
+      "decoded_bytes": 165888,
+      "sample_count": 2304,
+      "stride_px": 8,
+      "segment_count": 3,
+      "record_bytes": 24,
+      "trajectories": [
+        {
+          "segment": 0,
+          "start_slot": 1608,
+          "end_slot": 1895,
+          "pivot_start": [
+            0.07932692307692307,
+            0.5949519230769231
+          ],
+          "pivot_end": [
+            0.055288461538461536,
+            0.5985576923076923
+          ],
+          "angle_radians": 0.028875549882806717
+        },
+        {
+          "segment": 1,
+          "start_slot": 1565,
+          "end_slot": 1838,
+          "pivot_start": [
+            0.055288461538461536,
+            0.5985576923076923
+          ],
+          "pivot_end": [
+            0.05048076923076923,
+            0.6033653846153846
+          ],
+          "angle_radians": -0.04009493153409286
+        },
+        {
+          "segment": 2,
+          "start_slot": 1568,
+          "end_slot": 1876,
+          "pivot_start": [
+            0.05048076923076923,
+            0.6033653846153846
+          ],
+          "pivot_end": [
+            0.04807692307692308,
+            0.5997596153846154
+          ],
+          "angle_radians": 0.2385057151439164
+        }
+      ]
+    }
+  },
+  "limits": [
+    "Main and terminal anchors are semantic checkpoints; transition anchors never create scheduled holds",
+    "One paired cloud blends position and linear-light paint; no whole-character scatter or midpoint paint swap",
+    "A fixed source head paint is similarity-transformed by face landmarks when head_paint_source is set",
+    "Main source paintings differ; Gaussian correspondence needs rendered anatomical review",
+    "Existing route/gait and dialogue owners remain authoritative"
+  ],
+  "source_notes": [
+    "Original native work painting plus imagegen-authored registered bridges; no procedural body wiggle",
+    "Work/gesture are main stages; two stable transition paintings; six-second outward arc and six-second reverse",
+    "Original cast scale, floor and paper/cane ownership retained; runtime screenshot review required"
+  ],
+  "anchors": {
+    "frames": {
+      "work": {
+        "file": "parent-anchor-0.webp",
+        "sha256": "bd7e65a34d0a08b3aafbedd2890bdddcf1935164ec327c29906dbb5ebc0a53ab",
+        "bytes": 239874,
+        "width": 384,
+        "height": 832,
+        "rgba_sha256": "575157b731eb5b52e3a321c1f78b2e05f217ccd49f85b8151a8dea4649d5a6de"
+      },
+      "bridge-1": {
+        "file": "parent-anchor-1.webp",
+        "sha256": "73da38dc11247b2a7a299f330890bdb36c023ed1ed07e8be659eee991a81ca2d",
+        "bytes": 266194,
+        "width": 384,
+        "height": 832,
+        "rgba_sha256": "dd75d5938e116ffd06ee1918b96f417c659c06bf2bbc107f1373f423a102e255"
+      },
+      "bridge-2": {
+        "file": "parent-anchor-2.webp",
+        "sha256": "c1354fe0fad58ce9f28153e560fbcffc67107c96ddf88ed61f38cf96af5570fe",
+        "bytes": 271728,
+        "width": 384,
+        "height": 832,
+        "rgba_sha256": "05ecd69f90483d9c06fe629e89309083adafc0169acce4c26e8e5d20a9e6460b"
+      },
+      "gesture": {
+        "file": "parent-anchor-3.webp",
+        "sha256": "844a5af3ce75c863c33e9f378d4a23e732ddeb355d06a2891a366a22ecf7d5f3",
+        "bytes": 269296,
+        "width": 384,
+        "height": 832,
+        "rgba_sha256": "b68ae95b42cd47aa1d35fb5807eb7ccf880c4bf6f8fe5f508b44262be057e50e"
+      }
+    },
+    "maximum_resident": 3,
+    "fade_seconds": 0.09
+  }
+}

@@ -48,6 +48,10 @@ test('every authored clerk and roaming line owns lips; late completion cannot ca
   for(const line of character.lines){p.content(character.speaker,line.line,[],null,null,null,{id,tone:line.tone,valence:line.valence});h.tick(16);assert.equal(level.lipSpeech.actor,id);assert.equal(level.lipSpeech.active,true);h.synth.end();assert.equal(level.lipSpeech.active,false)}
  }
  const story=h.window.BuergeramtStory;
+ for(const [id,patron] of Object.entries(story.patrons))for(const line of patron.lines){
+  p.content(patron.speaker,line.line,[],null,null,null,{id,tone:line.tone,valence:line.valence});h.tick(16);
+  assert.equal(level.lipSpeech.actor,id);assert.equal(level.lipSpeech.active,true);h.synth.end();assert.equal(level.lipSpeech.active,false);
+ }
  const registration=Object.values(story.registration?.nodes||{}).flatMap(node=>[node.line,...node.choices.map(c=>c.reply)]).filter(Boolean);
  for(const line of [...story.clerk.flatMap(node=>[node.line,...node.choices.map(c=>c.reply)]),...registration,...story.outburst.lines,story.call.declined]){
   p.content(story.clerkIdentity.speaker,line);h.tick(16);assert.equal(level.lipSpeech.actor,'clerk');assert.equal(level.clerkPerformance.frame,0);h.synth.end();assert.equal(level.clerkPerformance.speaking,false);

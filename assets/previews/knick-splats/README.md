@@ -1,6 +1,6 @@
 # Frau Knick: fourteen-key tactical splat study
 
-Open spark-preview.html?scene=knick&renderer=spark&v=cycle4 for the
+Open spark-preview.html?scene=knick&renderer=spark&v=cycle5 for the
 6.25-second loop. Four original anchors and ten authored bridge paintings cover
 raising, paper pickup, stamping, releasing the document, folding and returning.
 Reduced motion and &autoplay=0 start paused. Every key has a seek button;
@@ -12,7 +12,8 @@ spark-preview-cycle.mjs owns key order, timing and paper ownership. Every
 interval has a linear advancing phase, with no scheduled intermediate holds
 or repeated easing to zero. Compatible pairs 0, 1, 2, 5, 6, 7 and 13 transport
 paint. Pairs 3, 4 and 8 through 12 use 100 ms intact-pose intervals for changing
-occlusion, gripping and paper ownership. Optional dissolve respects these guards.
+occlusion, gripping and paper ownership. The character has no whole-body
+dissolve mode; the fax study retains its toner-cloud effect.
 
 The builder maps compatible body paint with weighted local similarity using
 registered landmarks and extra head/collar guides. This replaces the global
@@ -100,3 +101,22 @@ protected cuts. Neither reviewer accepts this as organic production animation.
 Earlier cycle4 trials failed for neck tears and ghosted forearms and were not
 published. Fresh evidence is under ignored output/spark-preview/flow-motion-final/
 and flow-visual-final/. Production integration remains unaccepted.
+
+## Character dissolve removal (cycle5, 2026-10-08)
+
+The user reported a tangled whole-character cloud while Approach dissolve was
+selected. That mode scattered body paint through the prop-effect shader during
+compatible intervals. Removing its UI controls alone would leave the debug
+entry point available, so the character shader now returns connected transported
+paint without invoking scatter, and setEffect ignores character requests.
+The fax cloud remains unchanged. Source paintings, correspondence, part masks,
+6.25-second timing and protected handoffs are identical to reviewed cycle4.
+
+Both independent targeted motion and visual gates pass. At t3.55 and +20°,
+requesting setEffect(1) changes zero pixels in both renderers on desktop and
+Android emulation. A fresh loop wraps without tangling; fax t3 remains a cloud.
+The simplified controls fit at 320 px with simulated 200% text and Pretext.
+No browser errors occur; checked source/data hashes remain stable. The full
+Pages suite passes 29/29. Fresh evidence is under ignored
+output/spark-preview/no-character-dissolve-motion/ and no-character-dissolve-visual/.
+Physical Android is NOT RUN; prior paint pops and production limits remain.

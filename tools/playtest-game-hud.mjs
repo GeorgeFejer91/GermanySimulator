@@ -30,7 +30,7 @@ try{
   const snapshot=()=>page.evaluate(()=>{
    const shown=el=>!!el?.getClientRects().length&&getComputedStyle(el).visibility!=='hidden';
    const rect=el=>{const r=el.getBoundingClientRect();return{x:r.x,y:r.y,width:r.width,height:r.height,right:r.right,bottom:r.bottom}};
-   const ids=['germanness-hud','subtitle-toggle','file-toggle','city-notices','mission-fax','english-subtitle'];
+   const ids=['germanness-hud','subtitle-toggle','file-toggle','city-status','mission-guide','city-notices','mission-fax','english-subtitle'];
    const boxes=Object.fromEntries(ids.filter(id=>shown(document.getElementById(id))).map(id=>[id,rect(document.getElementById(id))]));
    const dock=document.querySelector('.control-dock');if(shown(dock))boxes.dock=rect(dock);
    const noticeIds=[...document.getElementById('city-notices').children].filter(shown).map(el=>el.id);
@@ -40,6 +40,8 @@ try{
   const check=async phase=>{await page.evaluate(()=>new Promise(done=>requestAnimationFrame(()=>requestAnimationFrame(()=>requestAnimationFrame(done)))));const data=await snapshot();assert.deepEqual(data.overflow,[],name+' '+phase+' horizontal text overflow');assert.equal(data.pageOverflow,false);if(data.hudLayout==='paired'){assert.ok(Math.abs(data.boxes['germanness-hud'].y-data.boxes['subtitle-toggle'].y)<1,'matching top anchors');assert.ok(data.boxes['germanness-hud'].right+5<=data.boxes['subtitle-toggle'].x,'separated top controls')}else{assert.ok(data.boxes['germanness-hud'].bottom+5<=data.boxes['subtitle-toggle'].y,'enlarged text reflows below the meter')};assert.ok(data.noticeIds.length<=1,'only one temporary notice');for(const id of data.noticeIds){const bounds=await page.locator('#'+id).boundingBox();assert.ok(bounds.y>=data.boxes['file-toggle'].bottom+5,'notice below controls')}
    if(data.boxes.dock&&data.noticeIds.length)assert.ok(data.boxes['city-notices'].bottom<=data.boxes.dock.y-5,'notice above dock');
    if(data.boxes.dock&&data.boxes['english-subtitle'])assert.ok(Math.abs(data.boxes.dock.bottom-data.boxes['english-subtitle'].y)<1,'dock uses caption height in CSS pixels, including zoom');
+   if(data.boxes.dock)assert.ok(data.boxes['city-status'].bottom<=data.boxes.dock.y-5,'top controls stay above movement controls');
+   if(data.boxes['mission-guide'])for(const id of ['germanness-hud','subtitle-toggle','file-toggle','dock']){const a=data.boxes['mission-guide'],b=data.boxes[id];if(b)assert.ok(Math.min(a.right,b.right)<=Math.max(a.x,b.x)+1||Math.min(a.bottom,b.bottom)<=Math.max(a.y,b.y)+1,'Wegweiser does not cover '+id)}
    assert.ok(data.measurements.some(([,measurement])=>measurement==='pretext-0.0.9'),'actual runtime measurement');
    await page.screenshot({path:resolve(out,name+'-'+phase+'.png')});report.cases.push({name,phase,...data});return data;
   };
@@ -63,7 +65,7 @@ try{
   data=await check('collection');assert.deepEqual(data.noticeIds,['wurst-alert']);
   await page.evaluate(()=>{__hudTest.stopSpeech();document.getElementById('wurst-alert').hidden=true;document.getElementById('toast').classList.remove('show')});
   await page.keyboard.press('m');await page.waitForFunction(()=>document.getElementById('case-file').open);
-  assert.equal(await page.evaluate(()=>GermanyHUD.paused),true);assert.equal(await page.locator('#subtitle-toggle').evaluate(el=>el.parentElement.id),'case-file');
+  assert.equal(await page.evaluate(()=>GermanyHUD.paused),true);assert.equal(await page.locator('#subtitle-toggle').evaluate(el=>el.closest('dialog').id),'case-file');
   const fileBounds=await page.locator('#case-file').boundingBox();await page.evaluate(()=>GermanyHUD.refresh());await page.waitForTimeout(250);assert.deepEqual(await page.locator('#case-file').boundingBox(),fileBounds,'file geometry stays stable after measuring its subtitle control');
   await page.screenshot({path:resolve(out,name+'-file.png')});await page.keyboard.press('Escape');
   for(const [phase,css] of [['text-200','html{font-size:32px!important} #english-subtitle{font-size:30px!important}'],['spacing','html{font-size:16px!important} #city-status *,.city-notices *,#english-subtitle{line-height:1.5!important;letter-spacing:.12em!important;word-spacing:.16em!important}'],['zoom-200','html{zoom:2!important}']]){

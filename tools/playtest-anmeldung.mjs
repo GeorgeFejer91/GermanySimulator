@@ -51,6 +51,7 @@ try{
   await phone.locator('#phone-call-silence').click();await office.waitForFunction(()=>BuergeramtLevel.registration.phoneSilent);await office.locator('#amt-actions button').first().click();
   await office.waitForFunction(()=>document.querySelector('#amt-actions button')?.dataset.pretextFit);
   const questionBounds=await bounds(office);assert.equal(questionBounds.overflow,false);for(const region of questionBounds.regions)assert.ok(region.scroll<=region.width+1,'horizontal overflow '+region.id);
+  assert.equal(await office.locator('#amt-ambient').textContent(),'','interactive speech has one caption');
   await office.screenshot({path:resolve(out,name+'-question.png')});
   if(name==='desktop'){
    await office.evaluate(()=>{document.documentElement.style.zoom='2'});await office.waitForTimeout(150);report.zoom=await bounds(office);await office.screenshot({path:resolve(out,'desktop-200-percent.png')});await office.evaluate(()=>{document.documentElement.style.zoom='1'});

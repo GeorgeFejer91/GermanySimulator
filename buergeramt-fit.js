@@ -8,6 +8,13 @@ function schedule(){if(queued)return;queued=true;requestAnimationFrame(async()=>
 function measure(){
  const zoom=Number.parseFloat(getComputedStyle(document.documentElement).zoom)||1;
  document.body.classList.toggle('amt-compact',innerWidth/zoom<260);
+ const sequence=document.querySelector('#amt-walk-hud.sequence');
+ if(sequence){
+  const top=sequence.getBoundingClientRect().top;
+  const controls=[...document.querySelectorAll('#amt-mix,.subtitle-toggle')].filter(el=>el.getClientRects().length&&getComputedStyle(el).visibility!=='hidden');
+  const clearance=Math.max(0,...controls.map(el=>(el.getBoundingClientRect().bottom-top)/zoom))+12;
+  sequence.style.setProperty('--amt-caption-top',`${Math.ceil(clearance)}px`);
+ }
  for(const el of document.querySelectorAll(selectors.join(','))){
   if(el.hidden||!el.getClientRects().length)continue;
   const label=el.matches('.control-dock button')?el.querySelector('.fraktur'):null;
@@ -28,6 +35,11 @@ function measure(){
    const stats=measureLineStats(prepared,width);
    const oneLine=stats.lineCount===1&&measureNaturalWidth(prepared)<=width-2;
    const minimum=Math.ceil(Math.max(1,stats.lineCount)*lineHeight+y+iconHeight+4);
+   if(el.matches('#amt-ambient')&&el.closest('.sequence')){
+    el.style.removeProperty('min-height');
+    el.dataset.pretextFit=minimum>el.clientHeight+4?'scroll':oneLine?'one-line':'wrapped';
+    continue;
+   }
    const reflow=label&&(!oneLine||minimum>el.offsetHeight);
    // Flex and grid regions can grow; the subtitle rail and phone page scroll when needed.
    if(document.body.classList.contains('amt-compact')&&el.matches('#amt-actions button'))el.style.removeProperty('min-height');
@@ -48,11 +60,15 @@ function measure(){
  }
 }
 for(const root of [document.getElementById('intro'),document.getElementById('amt-level'),document.getElementById('amt-walk-hud'),document.getElementById('amt-counter-notice'),document.getElementById('amt-mix'),document.getElementById('amt-direct-result'),document.querySelector('.phone-shell')]){
- if(root)new MutationObserver(schedule).observe(root,{subtree:true,childList:true,characterData:true,attributes:true,attributeFilter:['hidden']});
+ if(root)new MutationObserver(schedule).observe(root,{subtree:true,childList:true,characterData:true,attributes:true,attributeFilter:['hidden','open','class']});
 }
 addEventListener('resize',schedule,{passive:true});
 const dock=document.querySelector('.control-dock');if(dock)new ResizeObserver(schedule).observe(dock);
 const officeBounds=new ResizeObserver(schedule);for(const el of [document.getElementById('subtitle-toggle'),document.getElementById('amt-counter-notice'),document.getElementById('amt-direct-reset')])if(el)officeBounds.observe(el);
+// The shared HUD fitter positions the subtitle control after its own measure.
+// Follow that final position without a separate animation/update loop.
+const subtitleControl=document.querySelector('.subtitle-toggle');
+if(subtitleControl)new MutationObserver(schedule).observe(subtitleControl,{attributes:true,attributeFilter:['style','hidden','class']});
 new MutationObserver(schedule).observe(document.documentElement,{attributes:true,attributeFilter:['style']});
 window.BuergeramtFit=schedule;
 schedule();

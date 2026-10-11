@@ -1,5 +1,22 @@
 # Biomechanical Sprite Animation Protocol
 
+## Paired Gaussian action paint
+
+Use the animation skill's [paired Gaussian starter](../.agents/skills/animate-2d-characters/references/paired-gaussian-actions.md)
+for registered main/end poses and continuous transition arcs. The office's
+source specifications live under `assets/sprite-sources/buergeramt/gaussian-arcs/`;
+`tools/build-amt-gaussian-animation.py` emits its runtime action records.
+Preserve the original direction, family scale, floor and prop hand. Add painted
+bridge keys for crossings, changing grip or occlusion before packing. Track
+paper/phone/helmet separately from legs and torso; a rotating prop needs its
+own pivot path to avoid midpoint collapse. Transition keys never introduce
+holds or independent clocks. Review the encoded cloud at endpoints, between
+every pair, in reverse, across the loop seam and at normal speed, including
+desktop/mobile sampling and light/dark backgrounds. Check source identity,
+gaze, attached limbs, one owned prop, texture continuity and scene depth.
+Manifests, source hashes and exact endpoint tests establish reproducibility;
+they cannot waive an orphaned paint strip, doubled hand or anatomical defect.
+
 ## Bürgeramt character loops
 
 The first-person office keeps its original stationary cast and does not change

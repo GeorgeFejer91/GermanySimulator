@@ -26,7 +26,7 @@ browser's page cache completes the preserved handoff directly. Direct office tes
 has no city snapshot and retains its ordinary entrance. `buergeramt-entry.js`
 owns the GPU projection, with `world3d.js` owning its clock and handoff.
 
-Entering the first Bürgeramt opens a hidden first-person episode outside the building's door. WASD or touch controls lead through the open doorway without an extra interaction into a larger office with a waiting area, several visitors, and four service counters. The QR code lives on a physical sign under the number display; it never opens a game popup. Each phone scan connects to the game session and immediately issues a fresh private `B-###` ticket, which appears on that phone and activates a place in the host-controlled waiting list. A retry with the same scan ID returns the same ticket if the pairing was delayed. The player enters a name on the phone after receiving the ticket; that submission is required before Frau Knick starts the call and there is no separate Anmeldeschalter activation. Background lettered codes cycle continuously even before the player scans. After several calls while the ticket is active, the player's number is called on the red ceiling display and HUD. The phone page must remain visible and connected until the call; hiding it or losing the connection forfeits that ticket. Scanning again or leaving and rescanning issues a new ticket and a new counter opportunity. Each fresh ticket randomly selects one of Schalter 1–4. A persistent high-contrast notice pairs the private ticket with that counter, changes to a “go now” instruction at the call, and the ceiling display includes the matching counter for the player’s call. All four desks have a stationary painted clerk; the allocated desk owns Frau Knick’s speech and face performance. Approaching that desk before the player’s number earns a reprimand and returns the player to waiting. When the player's number appears, the player has a short window to reach her; being late forfeits the appointment without advancing mission 1. The ordinary waiting room has no continuous background music; occasional counter conversations and telephone rings make it busy. The Aktenkurier encounter below is a brief, scene-only musical exception.
+Entering the first Bürgeramt opens a hidden first-person episode outside the building's door. WASD or touch controls lead through the open doorway without an extra interaction into a larger office with a waiting area, several visitors, and four service counters. The QR code lives on a physical sign under the number display; it never opens a game popup. Each phone scan connects to the game session and immediately issues a fresh private `B-###` ticket, which appears on that phone and activates a place in the host-controlled waiting list. A retry with the same scan ID returns the same ticket if the pairing was delayed. The player enters a name on the phone after receiving the ticket; that submission is required before Frau Knick starts the call and there is no separate Anmeldeschalter activation. Background lettered codes cycle continuously even before the player scans. After several calls while the ticket is active, the player's number is called on the red ceiling display and HUD. The phone page must remain visible and connected until the call; hiding it or losing the connection forfeits that ticket. Scanning again or leaving and rescanning issues a new ticket and a new counter opportunity. Schalter 3 looks idle. Approaching Frau Knick before the player's number earns a reprimand and returns the player to waiting. When the player's number appears, the player has a short window to reach her; being late forfeits the appointment without advancing mission 1. The ordinary waiting room has no continuous background music; occasional counter conversations and telephone rings make it busy. The Aktenkurier encounter below is a brief, scene-only musical exception.
 
 The unlisted `?geheim=buergeramt` URL opens directly at the office entrance for repeated level testing. Its fixed restart link reloads only this episode; the normal city entry remains the canonical story route. Direct entry skips unrelated city GLB downloads; normal entry keeps the city asset path. The shortcut is a convenience link, not authentication or a separate game deployment.
 
@@ -45,7 +45,7 @@ readable interaction cues. Archive cupboards, a copier/fax corner, and a file
 trolley are solid furniture; counter tools and dense paperwork add visual
 clutter without changing the registration, queue, or call rules.
 
-At the correct counter, Frau Knick starts her existing line, the desktop arms the linked phone, and a brief 217 Hz style speaker-interference cue begins 900 ms before the planned ring. The office's synthesized sound bus ducks during that cue. The phone receives a future ring target in its measured monotonic clock domain when possible, with a public UTC cross-check and receipt-relative fallback; it reveals the call, sounds its first ring burst, and requests vibration at that target. The exact beat and limits are in [the timing evidence ledger](./PHONE-CALL-TIMING-RESEARCH.md). The caller is always displayed as `Unbekannte Nummer`, including with English call controls; the Kriminalpolizei identity is revealed only after answering. The four phone recordings use the user-selected Secret Tunnel profile `GS Kriminalpolizei` (`f700170f840543bca7413d3ccf6ac028`) and load one exact line at a time, with German browser speech on failure. Heinrich Wachtmeister remains the city police voice. The call controls and status use English when the host game's English subtitles were on at QR creation, otherwise the phone browser's preferred English or German, with German as the fallback. This affects call chrome only: the ticket page, office choices, police speech, and Frau Knick dialogue remain German, an explicit local exception to Berlin's Denglisch rule. The staged incoming-call screen follows a documented phone family: separate tap controls for iPhone and unknown browsers, a centered left-decline/right-answer drag for Google Phone, and separate green-left/red-right drag controls for Samsung Phone. Google and Samsung controls retain tap fallback. Browser hints can identify an OS and sometimes a Samsung model, but not the installed dialer or its settings; [the visual evidence ledger](./PHONE-CALL-UI-RESEARCH.md) defines the fidelity boundary. Declining puts the call away and immediately provokes a German reprimand; it does not establish Lautlos. A repeat arm begins 24 seconds later, with the existing readiness/2.2-second lead making the next ring arrive within 30 seconds. Ignoring the ring triggers a warning 3.2 seconds after its target, then every six seconds; three warnings offer a last chance and the fourth forfeits the ticket. The existing phone and counter-choice Lautlos actions stop the call, vibration, pre-ring signal and future retries while preserving the question or reply. The companion remains open, visible and linked. Silencing is an in-game call setting, not an OS-volume change. The registration graph below ends with the Anmeldung badge and then the existing A38 form. Answering starts an automatic, choice-free argument that escalates from passive aggression to shouting. The opening investigator line begins first. Each observed phone start arms the next clerk interruption from its mapped timestamp and sends an indexed cutoff deadline ahead of time. The phone stops locally at that deadline, while the host compensates for learned clerk startup delay. Each of her first three lines requests the officer’s reply before she finishes; its start receipt cancels her active speech. Both sides leave unfinished clauses, cut each other off repeatedly and reject stale completion events. Natural completion may advance an early-ending line; missing starts, disconnects and failed speech retain a bounded continuation. The final two clerk lines deliver her shouting retort and cancel the appointment. She cancels the appointment and the player returns to the street without A38. The later city mission chain remains in place, with A38 as the handoff after the Anmeldung completion. Spoken text must exactly match the currently visible line on its own screen.
+At the correct counter, Frau Knick starts her existing line, the desktop arms the linked phone, and a brief 217 Hz style speaker-interference cue begins 900 ms before the planned ring. The office's synthesized sound bus ducks during that cue. The phone receives a future ring target in its measured monotonic clock domain when possible, with a public UTC cross-check and receipt-relative fallback; it reveals the call, sounds its first ring burst, and requests vibration at that target. The exact beat and limits are in [the timing evidence ledger](./PHONE-CALL-TIMING-RESEARCH.md). The caller is always displayed as `Unbekannte Nummer`, including with English call controls; the Kriminalpolizei identity is revealed only after answering. The four phone recordings use the user-selected Secret Tunnel profile `GS Kriminalpolizei` (`f700170f840543bca7413d3ccf6ac028`) and load one exact line at a time, with German browser speech on failure. Heinrich Wachtmeister remains the city police voice. The call controls and status use English when the host game's English subtitles were on at QR creation, otherwise the phone browser's preferred English or German, with German as the fallback. This affects call chrome only: the ticket page, office captions, police speech, and Frau Knick dialogue remain German, an explicit local exception to Berlin's Denglisch rule. The staged incoming-call screen follows a documented phone family: separate tap controls for iPhone and unknown browsers, a centered left-decline/right-answer drag for Google Phone, and separate green-left/red-right drag controls for Samsung Phone. Google and Samsung controls retain tap fallback. Browser hints can identify an OS and sometimes a Samsung model, but not the installed dialer or its settings; [the visual evidence ledger](./PHONE-CALL-UI-RESEARCH.md) defines the fidelity boundary. Declining plays the four German counter exchanges automatically with their first authored responses, then grants the existing A38 form. There are no question, continue, or take buttons in the encounter. Answering starts an automatic, choice-free argument that escalates from passive aggression to shouting. The opening investigator line begins first. Each observed phone start arms the next clerk interruption from its mapped timestamp and sends an indexed cutoff deadline ahead of time. The phone stops locally at that deadline, while the host compensates for learned clerk startup delay. Each of her first three lines requests the officer’s reply before she finishes; its start receipt cancels her active speech. Both sides leave unfinished clauses, cut each other off repeatedly and reject stale completion events. Natural completion may advance an early-ending line; missing starts, disconnects and failed speech retain a bounded continuation. The final two clerk lines deliver her shouting retort and cancel the appointment. She cancels the appointment and the player returns to the street without A38. The mission chain is otherwise unchanged. Spoken text must exactly match the currently visible line on its own screen.
 
 Optional actor conversations pause the queue and never change ticket ownership or either counter outcome.
 
@@ -53,52 +53,261 @@ Optional actor conversations pause the queue and never change ticket ownership o
 
 | Beat | Performance and interaction | Spoken line ownership | Image and sound tone |
 | --- | --- | --- | --- |
-| Entry | The player enters and approaches the QR. The Aktenkurier walks a short loop beside the left files, stops, and stamps a carried stack. | `buergeramt-story.js` owns his two rotating German lines. | File stamp is a brief low paper thud. Warning shifts his painted texture slightly toward old rose. |
+| Entry | The player enters and approaches the QR. The Aktenkurier walks a short loop beside the left files, stops, and stamps a carried stack. | `buergeramt-story.js` owns his automatic omen verse; his two optional lines remain catalogued without an E trigger. | File stamp is a brief low paper thud. Warning shifts his painted texture slightly toward old rose. |
 | Queue | The Archivbotin patrols between the right shelves and counter, consults her ledger and keys, and can be addressed. | Her two lines describe the impossible archive procedure. | Key and paper rustle stays below the dialogue. Dread leans cool blue violet. |
 | Wait | The Formularsammler shuffles an accordion application along the central aisle, pauses to sort pages, and can be addressed. | His second line offers a small, uneasy release. | Dry paper cue; dread eases to weak amber on relief. |
 | Crowded office | Nummernflüsterer, Nachtschicht-Melderin, Pfandarchitektin, Kopiependler, and Warteschlangenpoetin circle short paths with documents, phone, receipt, copies, or numbered ticket. They look up at calls, flinch, read, gesture, and address the player. | Each owns two optional German lines in `buergeramt-story.js`; their speech cannot alter the appointment. | Painted Berlin street clothes, fatigue and uneasy colors distinguish them. Queue calls briefly draw their gaze; only the current speaker receives a subtle color-valence tint. |
-| Omen (`omen`) | Before the first ticket, the Aktenkurier leaves his route and approaches the player. The camera turns to keep him in view while the room progressively darkens. At his arrival, the surroundings are nearly black around a bright, slightly iridescent spotlight; tension peaks as he says “Wer die Finsternis sieht, hat sie selbst gewählt!” He holds a stare, then light and audio return abruptly to normal as he resumes the nearest route point. | The exact German verse lives in `buergeramt-story.js`. The in-scene subtitle rail remains the text surface if speech is unavailable. | A harsh, unresolved cinematic cue grows through the approach; its accelerating pulse also drives the frontal depth reveal, coat and tunnel. It peaks with the near-black arrival and line, then cuts out on release. The queue clock pauses for the encounter, then resumes. The scene is once per visit and clears on exit or replay. |
+| Omen (`omen`) | The Aktenkurier leaves his route and automatically approaches the player (before a ticket or while waiting). He alone needs no E press. The camera turns to keep him in view while the room progressively darkens. At his arrival, the surroundings are nearly black around a bright, slightly iridescent spotlight; tension peaks as he says “Wer die Finsternis sieht, hat sie selbst gewählt!” He holds a longer threatening stare, gradually flattens back into paint, turns through front/side/rear views, and retreats slowly before the office returns. | The exact German verse lives in `buergeramt-story.js`. The in-scene subtitle rail remains the text surface if speech is unavailable. | A harsh, unresolved cinematic cue grows through the approach; its accelerating pulse also drives the frontal depth reveal, coat and tunnel. It peaks with the near-black arrival and line, then dwindles with the reverse depth reveal, without a resolving chord or attack. The queue clock pauses for the encounter, then resumes. The scene is once per visit and clears on exit or replay. |
 | Call | Existing number board, QR ticket, phone, police, and Frau Knick take priority. | Existing counter and phone scripts keep their exact visible speech strings. | All optional actor tint returns smoothly to neutral after the encounter. Phone ring, static, and police voice follow the phone's own call level. |
 
-`buergeramt.js` owns routes, interaction range, work pauses, queue-call reactions, dialogue state, the Aktenkurier beat, Frau Knick's speaking/action row, and the active `{id,tone,valence}`. Moving regulars leave a small walking gap around the player; their gait clock advances by distance walked, and a high-priority story action preempts a routine work loop. Speaking eases the first-person view toward the owning actor. `world3d.js` draws that state: four directional walk rows, work/gesture/look/flinch rows, body-facing billboards, a six-row desk performance for Frau Knick (including lip movement while she speaks), an eased material tint, and the in-world blackout spotlight. The tone target is bounded to a subtle fraction of the paint; it changes only for the actor who owns the currently visible line. Ending the line eases back to the original colors. The room's code geometry and existing stationary painted cast stay in place. The office presents all dialogue, choices, and direct-visit outcomes in a non-modal subtitle rail over the visible room. It has no popup screens; the small `TON` disclosure is an optional in-scene HUD control.
+`buergeramt.js` owns routes, interaction range, work pauses, queue-call reactions, dialogue state, the Aktenkurier beat, Frau Knick's speaking/action row, and the active `{id,tone,valence}`. Moving regulars leave a small walking gap around the player; their gait clock advances by distance walked, and a high-priority story action preempts a routine work loop. Speaking eases the first-person view toward the owning actor. `world3d.js` draws that state: four directional walk rows, work/gesture/look/flinch rows, body-facing billboards, a six-row desk performance for Frau Knick (including lip movement while she speaks), an eased material tint, and the in-world blackout spotlight. The tone target is bounded to a subtle fraction of the paint; it changes only for the actor who owns the currently visible line. Ending the line eases back to the original colors. The room's code geometry and existing stationary painted cast stay in place. The office presents exact speech as plain in-scene captions over the visible room, beginning on actual speech start or its guarded readable fallback. The hidden legacy sheet retains cue ownership only; no dialogue panel or action button is displayed. Walking controls and the direct restart link hide during a sequence and return afterward. The small `TON` disclosure and shared English subtitle toggle remain available.
 
 The `omen` visual beat unfolds the Aktenkurier's registered frontal gesture into a
-small Gaussian sculpture while he approaches. He faces the player throughout;
+pronounced Gaussian sculpture while he approaches. He faces the player throughout;
 local +Z expands toward the viewer without a sideways turn. Distance progress
-drives the reveal: smoothstep over strength 0.05–1 for depth and 0.08–0.32 for
-opacity. At the handoff the sprite holds the registered gesture; this deliberately
+drives the reveal: smoothstep over strength 0.05–1 for depth. The legacy
+opacity window selects representation ownership; the body itself stays opaque.
+The upper-body relief expands up to 3.4 times its authored depth, with 12% coherent
+width expansion: the face, stamping hand and carried files visibly project toward
+the player. The lip rig receives the same deformation after articulation. A
+directional light field emphasizes the cheek and coat curvature without hiding
+the painting. A broad coat billow and a small forward surge follow the existing
+score pulse; face and rigid files retain their registered relationships. The
+foot baseline and actor/camera transforms do not change. Reduced motion retains
+the strong static volume and lighting while disabling the decorative billow/surge.
+The view's horizontal field limits the gain on narrow screens (about 2.45 at
+390×844), preserving room around both sleeves and the files without moving the camera.
+The Gaussian body takes ownership only after its own visible-body sort completes.
+At the handoff the sprite holds the registered gesture; this deliberately
 statuesque, supernatural approach is a translated relief, not an articulated walk.
-The simulation retains its displacement clock and normal walking resumes at release.
+The simulation retains its displacement clock; the staged turn is planted and the slow retreat advances gait only with actual travel.
 A second, procedural 3,072-splat hollow tunnel curls around the sightline
 to his torso: charcoal/violet Gaussian clouds widen toward the camera and narrow
 toward him. The shared musical pulse contracts the tunnel and pushes his coat
 toward the camera, protecting face detail and the planted foot baseline. Bruised
-violet/charcoal replaces rainbow cycling. Both volumes share the same depth-tested
-renderer. Distance fog darkens the office behind the readable figure, while the
+violet/charcoal replaces rainbow cycling. Both volumes share the existing
+renderer, with the speaker's temporary foreground depth policy during the omen.
+Distance fog darkens the office behind the readable figure, while the
 existing screen vignette seals the outer darkness. The tunnel is an intentional
 camera-attached hallucination, without collision or changes to the room geometry.
 `buergeramt.js` owns the visit token and
 continuous simulation `life` signal; `buergeramt-splat.js` projects that state through the
 existing Three.js scene. The exact verse and speech-completion release remain
-owned by the existing cue. Reduced motion keeps the crossfade/depth reveal but
-removes pulsing, ripples and tunnel rotation. The figure returns immediately to
-its sprite at release. Missing or late assets keep the sprite for that encounter.
+owned by the existing cue. Reduced motion keeps the opaque depth morph but
+removes pulsing, ripples and tunnel rotation. The figure flattens over 1.8 seconds
+before handing ownership back to its registered sprite and turning. Missing or
+late assets keep the sprite for that encounter.
 Exit, replay and cancellation retire the effect and reject stale preparation;
 an in-flight GPU sort finishes before its buffers/worker are freed.
+
+## In-scene fever encounters
+
+The user's 2026-10-10 foreground requirement keeps the encounter's painted
+speaker solid throughout entry, hold and room restoration. Office characters
+draw in a final actor pass after the room and visual effects throughout the
+office scene, including walking, waiting and encounter release. The user's
+follow-up preserves room depth: keep its depth buffer and depth-test every
+person against solid walls and furniture. Use equal actor order and camera-depth
+sorting between people. Native Gaussian patches inherit this layer/depth policy,
+and the shared Spark fallback follows it too. Only the
+selected speaker prepares an action cloud during isolation; other actors retain
+their ordinary sprites on the final actor layer. On encounter release,
+full painted opacity returns while the actor layer remains; an early scene
+close restores the ordinary layer. Source and Gaussian ownership stays binary;
+the Aktenkurier's body remains opaque while its depth morphs and flattens.
+Intrinsic painted transparency is preserved. City sprites retain their normal
+opaque-wall occlusion. The shared action clock, paired paint paths, official
+voices, scene isolation and slow turn/retreat are unchanged.
+
+The room-depth follow-up passes seven silent Chromium renderer fixtures:
+desktop, Android portrait/landscape emulation, reduced motion, missing native
+anchors and room models, Konrad and the clerk. Controlled production-pass pixel
+checks verify solid occlusion, paint above the visual motif, clear alpha edges
+and crossing person depth. Entry/hold/release, resize, planted feet, paused action
+clocks and early-close sprite restoration also pass. Physics and Camera specialists
+independently reviewed the frozen renderer; evidence is under ignored
+`output/office-top-layer/accepted/` and `objects/`. The final desktop fixture
+under `final-assertion/` also passes the ordinary layer mask after an explicit
+render on early close; the seven-profile run predates that stricter assertion and a
+report-limit wording correction. Runtime renderer hashes are unchanged by
+those harness edits. These are forced scenes and geometry probes; physical
+Android and a natural mission playthrough are NOT RUN for this rendering change.
+After integration with `1e0a657`'s background-slot retirement, fresh portrait,
+landscape and desktop handoff fixtures also pass. The prior background native
+painting is retired before speaker admission, its ordinary sprite opacity
+returns to one, and selected paint keeps the final actor layer and room depth.
+Seven fixed action phases, reduced-motion fallback and return to background
+animation are captured under `output/office-top-layer/handoff-final/`. The
+first additional assertion used the sprite's display name instead of its
+character ID and failed; that probe and report remain separately in
+`handoff-rebased/`. The corrected fixture changes no production behavior.
+Fresh focused lifecycle tests pass 13/13. Comparable office measurements and
+the six-run root release guards pass as recorded in `ASSET-POLICY.md`.
+Independent Physics source and Camera source/rendered rebase reviews pass.
+The added handoff assertion checks the selected sprite's layer/depth/order;
+native patch policy is covered by the unchanged owner source and unit checks,
+with actual native-paint visibility checked in the captured frames.
+The later `839c43a` Merz city-dialogue/cache integration leaves all three office
+renderer files byte-identical; both specialist source addenda carry this
+rendered coverage. Fresh release selections and root cache smoke also pass.
+
+After the `bc647de` stronger courier relief was integrated, an actual-body
+overlap probe found Spark sorting at the world origin once all native paint
+anchors retired. Keep the shared owner's transparent comparator until its
+synchronous disposal. Its depth comes from active native anchors, or visible
+body splats when those anchors are gone; the camera-attached tunnel is excluded.
+The corrected desktop, portrait/landscape and reduced-motion GPU pixels verify
+opaque room occlusion, a nearer person in front, a farther person behind, and
+the courier above the visual motif. Production framing, missing-splat fallback
+and restoration pass under `output/office-top-layer/relief-final-all/` (five
+completed profiles). The separate `relief-final-fullbody-diagnostic/` PASS run
+checks feet and flattening with explicit diagnostic FOV/pitch. The first
+full-body run's speech timer advanced past a sampled checkpoint; its failure
+is retained, and the corrected fixture pauses mocked speech during its held
+dispatch samples. Those samples establish neither GPU time nor audio playback.
+The ordering repair changes no relief geometry, movement or action clock.
+Fresh `native-final/` and `relief-final-early-close-root/` fixtures preserve the
+game's actual direct-visit callbacks and assert its closed-visit response after
+mid-effect exit. All fourteen sprite layer/depth/opacity states restore, effects
+dispose and no page errors occur. The direct route keeps its last canvas frame
+behind that response; this is evidence of the closed-visit UI and ownership
+cleanup, not visible city restoration. The earlier noop-callback cleanup run and
+the first missing-callback test failure are retained separately. Ordinary room
+restoration is verified by the completed-encounter production captures above.
+The final `objects-final/` renderer report passes desktop and portrait/landscape
+emulation on both root and direct-3D entry points, including loaded/fallback
+and nonblocking city geometry. Current actual-body, native-paint, grounding and
+root-close evidence is separately reviewed by the Physics and Camera specialists;
+the unchanged source hashes are frozen in `candidate.json`. Device and natural
+mission coverage retains the limits above.
+
+Foreground verification (2026-10-10): the reported floor leak was reproduced
+before the repair. Seven silent renderer fixtures cover desktop, Android
+portrait/landscape emulation, reduced motion, missing anchor art, a seated
+visitor and the clerk; all retain solid speaker coverage and restore normal
+layers on release and early close. Adjacent full-body omen frames verify its
+own sorted-body handover and flat return without a visible contour/foot jump
+at the captured scale. Actual candidate-02 playback separately passes its
+native-media mouth/pause/end checks. Evidence lives under ignored
+`output/character-morph/{final-layers,omen-boundaries-final,native-omen,direct-smoke}/`.
+These are forced renderer fixtures, not a full natural mission playthrough.
+Physical Android and perceptual listening are NOT RUN; intrinsic painted
+alpha and the existing paired texture transport remain part of the artwork.
+
+Every distinct Bürgeramt speaker has an authored dark surreal space. Eleven
+begin by pressing E (the existing touch interaction button is equivalent), with
+nearby regulars/patrons within 1.65 m taking precedence. Walking nearby, queue
+reactions, ambient lines and phone messages do not begin those spaces.
+The Aktenkurier alone approaches automatically once per visit: after 1.2 s in
+the office, within 6.2 m and with a body-clear route. Active speech, city audio
+or another fever sequence defers his approach; it may happen before scanning or
+while waiting. He has no ordinary E interaction. Decorative desk copies share
+Brunhilde's painting; they are not additional speakers.
+
+These are short self-ending animation sequences, with no popup or return
+button. Actual speech completion owns the 0.65 s hold and 1.5 s fade, followed
+by a 0.25 s settle before walking resumes. A moving regular finishes the nearest
+work anchor before returning to patrol. Early/expired counter outcomes also
+return automatically to waiting or the QR. Consecutive clerk lines continue
+without a full release between them, retaining one continuous space. The final
+reply releases before the existing A38 form. Phone scans during a regular or
+patron conversation issue the ticket immediately, preserve the current speech
+and release, and resume in waiting when that sequence ends.
+Pending continuations carry the attempt and speech cue; hidden time, paused
+speech, exit and replay cannot advance a stale scene. The existing office update
+is the only scheduler.
+Audio/subtitle controls occupy the top edge during a sequence. The existing
+Pretext fitter measures their actual bottom edge and reserves a caption region
+below them and above the English subtitle rail. Long source text retains a
+scrollable fallback there, with a soft dark text backing for bright room geometry.
+
+| Identity | Distortion theme |
+| --- | --- |
+| Horst Stempelmann, Aktenkurier | Sealed sentence; the automatic accepted Gaussian tunnel and frontal relief |
+| Gisela Aktenberg, Archivbotin | Repeating archive drawers close around the person being filed |
+| Dieter Papiermann, Formularsammler | Forms fold the room along an impossible continuous crease |
+| Rüdiger Nummermann, Nummernflüsterer | A descending litany of numbered tickets |
+| Ingrid Feierabend, Nachtschicht-Melderin | Dead telephone windows drift through an empty signal |
+| Bärbel Pfennig, Pfandarchitektin | A receipt with no beginning unspools around her |
+| Uwe Kopitz, Kopiependler | Empty mirrored office frames prosecute their original |
+| Hilde Wartenscheidt, Warteschlangenpoetin | Numbered waiting places become a funeral queue |
+| Brunhilde Knick | A rotating half-stamp tribunal surrounds the counter exchange |
+| Konrad Wohnungszettel | A floor plan with rooms but no inside |
+| Mechthild Elternbogen | Registry rows continuously erase their entries |
+| Wolfram Rentenbescheid | A clock court counts backwards around the unresolved notice |
+
+`buergeramt-fever.js` owns the theme map and a clock advanced only by the existing
+office update. Entry takes 1.2 s; actual recording/browser start and word receipts
+own speech progress. Completion holds 0.65 s and releases over 1.5 s. Returning
+to walking releases from the current strength without a cut. Hidden pages and
+speech pause freeze the clock. Cue/generation ownership rejects old callbacks;
+exit/replay clears the clock and bounded sound graph. Consecutive counter lines
+carry the current strength and space time instead of flashing back to the room.
+
+The registered character action remains the native Gaussian texture transport
+between sharp painted anchors. The surrounding motifs are a single existing
+fullscreen shader pass, not reconstructed 3D character volumes. A clear window
+projects the four actual painted plane corners, clips their bounds to the
+viewport and protects the complete visible face/body, including very close E
+interactions; no extra bodies, trails, camera shake or FOV
+oscillation are introduced. Structural materials fade through their own original
+opacity, with temporary transparency/depth-write settings restored exactly on
+release/exit. Actors are kept in a separate group so a desk cannot become an
+opaque black rectangle across the selected patron. Gaussian background paintings
+receive the same isolation strength, preserving safe anchor admission and the
+2 desktop / 1 mobile residency limit. Reduced motion freezes motif movement and
+retains the readable painted fallback. The document's existing Gaussian effect
+still applies only to the ABGELEHNT stamp.
+
+The 40 new voice recordings across all twelve speakers are default dialogue,
+approved by the user's “I approve, just implement it” instruction. Their exact
+scripts, English annotations, source rights and listening status are owned by
+`VOICE-SYNTH-PROTOCOL.md`; use approval is separate from listening verification.
+
+Validation is retained under `output/amt-fever-interactions/`. Independent P5
+and C4 reviewers checked the same frozen source and their later source-delta
+addenda preserve upstream mission-compass, official omen lip-sync and entrance
+radiance changes.
+The first controlled 12-theme × desktop/Android portrait/landscape sweep proves
+motif variety on that candidate; after its close-E face-mask repair, fresh natural
+Nummernflüsterer captures prove readable painted faces in all three profiles.
+Fresh final Konrad checks use real muted native MP3 playback, manual pause/resume,
+actual media end and complete room restoration on desktop and Android emulation;
+`3d.html` also starts without page errors. These are distinct from ASR and listening.
+Affected controller/Gaussian/voice/lip-sync and root regression checks pass.
+Peak performance scope and numbers belong in `ASSET-POLICY.md`. Physical Android
+and perceptual listening are outstanding; the explicit use approval was recorded
+without inventing listening results.
+
+The subsequent self-ending sequence revision retains the same art and Gaussian
+transport. Controller checks cover automatic courier entry, E-only other
+characters, speech/fade completion, hidden/replay cleanup, and automatic A38
+progression: 228 office tests and 16 voice/subtitle checks pass, as do the 42
+root deployment regressions. Silent natural automatic-omen and Konrad E cycles
+on desktop and Android portrait/landscape emulation prove panel-free playback,
+native pause/end handling and room restoration. A controlled longest-caption
+check at 320 px and 200% zoom separately verifies control clearance and native
+scroll to the final text; it does not prove a natural counter story trigger.
+The original overlapping caption failed rendered review and was repaired before
+acceptance. Frozen source and independent P5/C4 reports are retained in that
+same evidence directory. These checks add neither physical-device nor listening
+evidence.
 
 ## Sound and mix
 
 For a changed cue, use the shared beat card in [`MUSIC-SOUND-DESIGN.md`](./MUSIC-SOUND-DESIGN.md) so its story purpose, controller event, visual action, cue parameters, mix, receipts, fallback, and cancellation are reviewed at one candidate revision. This episode's sound policy below is the current playback authority; the general skill supplies production methods.
 
-The room has a quiet 53 Hz fluorescent hum and short nonverbal file, key, paper, and copy cues at work stops. Effects attenuate with player distance. The red call-board ring and work cues use `EFFEKTE`; `RAUM` controls hum, and `STIMMEN` controls new office speech utterances. During the one-off Aktenkurier encounter, the existing effects bus carries a bounded aggressive cinematic buildup with distorted bass/brass, beating dissonance and abrasive metallic bands. It grows with approach and darkness, holds below the exact spoken line at the peak, then releases abruptly with the restored room light and ordinary sound. It obeys the existing effects mute and clears on exit/replay; it does not start a continuous office playlist or override city music preferences. The compact `TON` disclosure persists the three office levels locally. The phone automatically uses full browser output gain for ring and static, and maximum utterance volume for police speech, with no visible volume control or saved phone-volume preference. Cue envelopes keep their authored relative levels. Device volume remains controlled by the phone's operating system. A voice already in progress follows the level captured at its start because browser speech does not expose a live gain node. No media stream or server is added.
+The room has a quiet 53 Hz fluorescent hum and short nonverbal file, key, paper, and copy cues at work stops. Effects attenuate with player distance. The red call-board ring and work cues use `EFFEKTE`; `RAUM` controls hum, and `STIMMEN` controls new office speech utterances. During the one-off Aktenkurier encounter, the existing effects bus carries a bounded aggressive cinematic buildup with distorted bass/brass, beating dissonance and abrasive metallic bands. It grows with approach and darkness, holds below the exact spoken line at the peak, then holds the threat and gradually drains with the reverse depth reveal before the turn and silent retreat. It obeys the existing effects mute and clears on exit/replay; it does not start a continuous office playlist or override city music preferences. The compact `TON` disclosure persists the three office levels locally. The phone automatically uses full browser output gain for ring and static, and maximum utterance volume for police speech, with no visible volume control or saved phone-volume preference. Cue envelopes keep their authored relative levels. Device volume remains controlled by the phone's operating system. A voice already in progress follows the level captured at its start because browser speech does not expose a live gain node. No media stream or server is added.
 
-**`omen` beat contract.** Before the first ticket, one encounter per visit commits when the Aktenkurier begins approaching. He moves at 0.78 m/s (typically 5–6 seconds); distance-based smoothstep progress drives the rising cue and darkening while player movement and the queue pause. At 1.72 m the room reaches near-black around his spotlight and he delivers the unchanged German line. Completion of speech or its visible-text fallback owns the following 0.7-second glare. Light then restores instantly, the cue releases in 25 ms, and the view returns over 0.25 seconds before normal walking and queue progression resume. QR scans during the cinematic are accepted and set the resumed stage to waiting; registration remains active. A phone forfeiture interrupts and cancels the encounter.
+**`omen` beat contract (2026-10-09).** Before a ticket or while waiting, one automatic encounter per visit commits only with a reachable, body-clear office path. A bounded 0.35 m grid search uses the existing QR, seats, furniture and paused-character footprints, then removes unnecessary waypoints along continuously clear segments. Exact segment/rectangle and segment/circle checks cover narrow corners between simulation samples. The first 0.9 seconds turn the camera toward him and fade all other office objects and characters to black; an environment parent hides them completely before he advances. Geometry and people retain collision. He follows the clear path at 0.78 m/s, with path-distance progress driving the rising cue and frontal depth. At a clear stop 1.68–1.82 m from the player he delivers the unchanged German line. Actual speech/fallback completion owns a 3.4-second threatening stare, then a 1.8-second reverse sequence: motion settles first, depth flattens over the first 1.17 seconds, and the body stays opaque through the final 0.63-second flat hold before the registered painting takes ownership. Score pressure drains smoothly throughout. The same release drains sound without an attack or resolution; the existing 25 ms source cleanup follows its near-silent endpoint. A planted 2.4-second front→side→rear turn uses the accepted directional paint with bounded pivot motion, not an articulated full-orbit reconstruction. His first 2.8 seconds of retreat accelerate gently to 0.48 m/s along the approach path in reverse. The room and original view restore over 1.6 seconds, then control and the queue resume; any remaining return path completes before ordinary patrol, yielding at 1.05 m to the player and replanning around newly loaded props without teleporting. QR scans/name registration remain accepted in every phase and select the resumed waiting stage. A newly blocked route either replans or takes the bounded recovery; phone forfeiture, exit and replay cancel all ownership.
 
 The two authored layers are `assets/audio/buergeramt-omen/bed.ogg` and `tension.ogg`, produced from [original core SuperCollider 3.14.1 source](../assets/audio/buergeramt-omen/render.scd); [provenance and rebuild commands](../assets/audio/buergeramt-omen/LICENSES.md) accompany them. Existing Web Audio on `EFFEKTE` owns playback; an oscillator fallback covers a missing, failed, or late fetch/decode. A newly ready layer cannot enter after 75% approach progress. Source playback has a finite 24-second cap; a hidden document mutes it, and exit or replay stops it and clears the beat. Silent timing checks do not establish perceptual acceptance.
 
-The same story entry owns the omen's authored delivery: browser rate `0.82`, pitch `0.72`, and a word-anchored score contour. Actual speech start begins ducking; word-boundary receipts move the cue through “Finsternis,” the comma/“hat,” “selbst,” and the falling cadence of “gewählt.” The contour changes filter brightness, upper-layer density, Gaussian pressure and bounded score transposition while speech remains foreground. Pitch is a requested browser voice setting, not measured fundamental frequency; the score mapping is an artistic response to that setting. With word receipts, the cue holds its last observed position rather than finishing on a separate timer. Pause/resume freezes that position and the shared Gaussian life/pulse clock, attenuates pulse motion and suspends the voice completion watchdog while paused. Engines without usable boundaries, voice-off and failed voice use a rate-scaled estimate, capped before completion; only speech end or the existing guarded speech/fallback completion starts the final 0.7-second swell and abrupt reset. `BuergeramtLevel.omen.speech` exposes receipt mode and progress for silent checks. Attempt/cue guards reject late speech events after cancellation.
+The same story entry owns the omen's authored delivery: browser fallback rate `0.82`, pitch `0.72`, and a word-anchored score contour. Its default voice is the user-approved `aktenkurier-omen-candidate-02` recording from Horst's second official profile; candidate 1 remains preserved. `AUDIO-TEXT-LIBRARY.js` and `VOICE-SYNTH-PROTOCOL.md` own the exact source line, approval and provenance. Actual native playback start begins ducking; ASR-estimated word cues observed against the media playhead move the cue through “Finsternis,” the comma/“hat,” “selbst,” and the falling cadence of “gewählt.” The contour changes filter brightness, upper-layer density, Gaussian pressure and bounded score transposition while speech remains foreground. Browser pitch is a requested fallback setting, not measured fundamental frequency; the score mapping is artistic. With word receipts, the cue holds its last observed position rather than finishing on a separate timer. Pause/resume freezes that position and the shared Gaussian life/pulse clock, attenuates pulse motion and suspends the voice completion watchdog. Hidden-page media playback pauses and resumes with visibility. Engines without usable boundaries, voice-off and failed voice use a rate-scaled estimate, capped before completion; only native playback end, browser speech end or guarded fallback completion starts the 3.4-second stare and the ordered unwind, turn, retreat and recovery. `BuergeramtLevel.omen.speech` exposes receipt mode, recording path and progress for silent checks. Attempt/cue guards reject late events after cancellation.
 
-**Shared `omen` life/score card (2026-10-08).** The existing visit/attempt and pre-ticket trigger own one approach→line→glare→ordinary-office event. With strength `p` and authored speech tension `t`, pressure is `p² × (0.72 + 0.28t)`. Simulation integrates pulse cycles at `0.65 + 2.1p + 0.35t` Hz and shapes each pulse as `((1 + cos(2πclock))/2)^8`; speech pause freezes phase/time. Audio follows the same pulse through gain, upper-layer density and filter resonance; splats use it for bounded forward coat expansion and tunnel contraction. The stationary stems contain distorted brass/bass and ring-modulated metallic bands, with no baked tempo, finite riser or payoff. Audio automation maps current controller values to Web Audio time with 18–60 ms smoothing. Voice remains foreground; `EFFEKTE` mute, hidden-page silence and the 24-second source cap remain authoritative. Glare lifts ducking, then the 25 ms cut and immediate light/pose restoration deliberately leave the expected catastrophe absent. No accent advances the queue or mission. The figure's painted projection retains its ground pivot; room collision/scale and the 0.78 m/s approach remain unchanged. A missing preparation at the first opacity handoff preserves the frontal sprite for that visit. Source, silent-browser, emulated-device and listening evidence remain separate.
+**Gaussian mouth articulation (2026-10-10).** The official candidate-02 MP3 also owns the mouth clock. `buergeramt-lipsync.js` samples 24 offline phonetic viseme intervals and a 50 Hz energy envelope from `assets/buergeramt/omen/mouth-cues.js`, bound to the recording's exact SHA-256. These are estimated mouth shapes, not verified German phoneme alignment. Each existing frame reads native `currentTime`; the rig blends shapes over 55 ms, moves only front lip/lower-jaw samples, and adds 96 depth-sorted oral-cavity kernels in the same Gaussian body. Closure, vowel opening, rounding and lower-lip biting preserve the painted face, eyes, actor root and feet. The sculpted lip centre is registered to detail pixel `(346.5,134)`; the cavity follows its curved relief and has zero opacity at rest. It articulates only during the owned recorded line. Pause holds its exact pose, completion closes it before the glare, and cancellation/replay clears the owner. Reduced motion retains semantic articulation while disabling decorative ripples. Voice-off, browser speech and failed audio keep a closed mouth rather than advancing an estimated lip clock. Real word receipts are selected at recorded start, before any time estimate can outrun the first boundary. The offline builder, analyzer provenance, immutable audio and reproduction commands are documented beside the omen asset.
+
+**Shared `omen` life/score card (2026-10-09).** The existing visit/attempt and pre-ticket trigger own one isolated approach→line→glare→unwind→turn→retreat→ordinary-office event. With strength `p` and authored speech tension `t`, pressure is `p² × (0.72 + 0.28t)`, multiplied by the shared smooth reverse envelope during unwind. Simulation integrates pulse cycles at `0.65 + 2.1p + 0.35t` Hz and shapes each pulse as `((1 + cos(2πclock))/2)^8`; speech pause freezes phase/time. Audio follows the same pulse through gain, upper-layer density and filter resonance; splats use it for bounded forward coat expansion and tunnel contraction. The stationary stems contain distorted brass/bass and ring-modulated metallic bands, with no baked tempo, finite riser or payoff. Audio automation maps current controller values to Web Audio time with 18–60 ms smoothing. Voice remains foreground; `EFFEKTE` mute, hidden-page silence and the 24-second source cap remain authoritative. Glare lifts ducking and holds the threat; the shared 1.8-second reverse sequence settles deformation, flattens depth, then holds the opaque flat representation until the registered painting takes ownership while pulse and score pressure drain. Keeping the Gaussian opaque until flat avoids doubled hands and file edges. The turn and silent slow retreat leave the expected catastrophe absent; room/view recovery follows. No accent advances the queue or mission. The figure's painted projection retains its ground pivot; room collision/scale and the 0.78 m/s approach remain unchanged. A missing preparation at the first opacity handoff preserves the frontal sprite for that visit. Source, silent-browser, emulated-device and listening evidence remain separate.
 
 
 The name submission on the phone unlocks Web Audio in a user gesture and is required before the counter call. Frau Knick's first sentence arms the phone. Once it replies ready, the desktop commits a future ring target 2.2 seconds away. A filtered, gated 217 Hz cue starts 900 ms before that target, ducks the office audio bus, and briefly pauses browser speech where supported. The phone schedules its first ringtone burst on Web Audio before the target, reveals the call and requests vibration at the target, then repeats on a 2.8-second cadence. A keyless [TimeAPI.io](https://timeapi.io/) sample supplies an optional UTC fallback; the existing direct four-stamp phone link is the primary synchronization source. Call timing diagnostics and the limits of acoustic and haptic precision are documented in [`PHONE-CALL-TIMING-RESEARCH.md`](./PHONE-CALL-TIMING-RESEARCH.md).
@@ -109,9 +318,293 @@ Codex coordinates affected domains under [`SKILLS.md`](./SKILLS.md) and the [pro
 
 The offline character builder is `tools/amt-character-motion.py`; `tools/build-amt-sprites.py --clerk-performance` bakes the desk performance. Source sheets and registered poses stay under `assets/sprite-sources/buergeramt/`; only desktop/mobile WebP atlases are loaded from `assets/buergeramt/characters/` on office entry. Review the exact encoded desktop and mobile cells, connected silhouettes, alpha edges, props, and scale together before accepting a new art pass. `output/amt-character-motion/interaction-build-report.json` and the clerk performance report record source/atlas hashes and frame hashes; they are local review artifacts, not runtime inputs.
 
-Close characters use additional detail WebPs baked from the original paintings: four action poses and four directional walk sheets (16 frames for Aktenkurier/Archivbotin, eight for the other six walkers), a single pose for each waiting patron, and a compact performance sheet for Frau Knick with eight lip frames. The renderer requests only the nearby moving character's current walk direction and releases its detail textures after the character leaves the near field; compact atlases remain the distance and load-failure fallback. The two dense walkers also have half-resolution mobile close-up sheets; their normalized phase retains the existing gait cadence. See `SPRITE-GENERATION-PROTOCOL.md` for the reviewed field/matte repairs and exact export checks. Every figure has a staggered, slow saturation and lightness breath in linear color; the active speaker's dialogue tint still eases by emotional tone. The office alone renders at up to 2× device pixel ratio, returning to the city's cap on exit.
+Close characters use additional detail WebPs baked from the original paintings: four action poses and four directional walk sheets (16 frames for Aktenkurier/Archivbotin, eight for the other six walkers), a single pose for each waiting patron, and a compact performance sheet for Frau Knick with eight lip frames. The renderer requests only the nearby moving character's current walk direction and releases its detail textures after the character leaves the near field; compact atlases remain the distance and load-failure fallback. The two dense walkers also have half-resolution mobile close-up sheets; their normalized phase retains the existing gait cadence. See `SPRITE-GENERATION-PROTOCOL.md` for the reviewed field/matte repairs and exact export checks. Every figure has a staggered, slow saturation and lightness breath in linear color; the active speaker's dialogue tint still eases by emotional tone. The office shares the one-pixel-per-CSS-pixel and 1.6 MP drawing-buffer budget.
 
-The reusable event-to-motion authoring procedure lives in `.agents/skills/animate-2d-characters/references/narrative-action-rigging.md`. Its ordered action verbs and source poses join the shared audio beat card before new sprites or cues are made. For the `omen` beat: Story owns the exact line; Storyboard owns approach→darkening/build→arrival/line→abrupt release→normal walk; Character owns identity/prop hand; ColorMood owns restrained valence/return; Animation owns registered views and encoded QA; Gameplay owns path, state priority, committed event, and queue pause; Soundscape owns the bounded buildup and release; Mix owns the existing bus and speech clarity; Phone is unchanged; Voice uses browser speech plus the visible text fallback; Review and QA accept the same candidate revision. Static graph validation checks only the optional runner configuration; playable, visual, and listening evidence comes from the integrated game.
+The reusable event-to-motion authoring procedure lives in `.agents/skills/animate-2d-characters/references/narrative-action-rigging.md`. Its ordered action verbs and source poses join the shared audio beat card before new sprites or cues are made. For the `omen` beat: Story owns the exact line; Storyboard owns isolated approach→build→arrival/line→stare→unwind→planted turn→slow retreat→normal walk; Character owns identity/prop hand; ColorMood owns restrained valence/return; Animation owns registered views and encoded QA; Gameplay owns path, state priority, committed event, and queue pause; Soundscape owns the bounded buildup and release; Mix owns the existing bus and speech clarity; Phone is unchanged; Voice uses browser speech plus the visible text fallback; Review and QA accept the same candidate revision. Static graph validation checks only the optional runner configuration; playable, visual, and listening evidence comes from the integrated game.
+
+## Painted Gaussian action arcs
+
+`buergeramt-animation-clock.js` owns Frau Knick's main poses (`ready`, `raised`,
+`contact`, `refusal`) and the authored routes between them. The preview cycle
+lasts 9.1 seconds: raise 3.1, stamp 2.25, refusal 2.2, return 1.55. Repeated
+intent does not restart a route. A changed target waits for a safe main pose;
+speech is a localized overlay. The eight moving regulars use a four-second
+work→gesture→work action for dialogue. After the sequence releases, a regular completes the
+shortest remaining route to work before its existing look/work pause and walk.
+Walking remains displacement-driven. Hidden play freezes simulation time.
+
+Main poses can hold for an interaction; transition keys have no scheduled
+pauses or repeated ease to zero. Registered painted bridge keys supply missing
+limb/grip/occlusion changes. `tools/build-amt-gaussian-animation.py` pairs paint
+within owned regions into one Gaussian cloud. Paint blends in premultiplied
+linear light; tracked prop polygons and stable object pivots can follow curved paths
+without flattening a rotating sheet. Alpha-zero border births/deaths stay near
+their own painted region, preventing detached fade trails while leaving visible
+anchor paint exact. Correspondence and texture smoothing
+cannot invent an occluded hand or replace a missing action painting.
+
+The current full-frame morph uses the paired records as the movement authority
+for the entire painting. `buergeramt-painted-anchor.js` draws one instanced
+Gaussian texture patch per paired slot, sampling both original native WebPs
+inside each moving support. Unlike a point-colour Gaussian, its image patch
+retains source detail. Each patch follows the same position and owned prop
+rotation as the Spark cloud; source/target UV offsets rotate with the part.
+The two paints blend in premultiplied linear light across the entire interval.
+The patch material stays at opacity one. There is no sharp-paint/cloud/sharp
+swap, midpoint image switch, bounded MLS plane, or extra animation clock.
+
+The material's explicit program cache key binds canvas aspect, record rows,
+sampling stride and owned trajectory code. Three's default key saw only the
+shared `onBeforeCompile` closure text and could reuse one actor's embedded
+constants for another. In a mixed clerk/regular draw this incorrectly widened
+the old painted plane and cropped the new texture patches; multi-actor checks
+must compare the true native image and isolated actor at the same height, not
+preserve that old width error. The shader cache regression is tested directly.
+
+Patch sigma is one selected sampling stride; support is 2.7 strides. The shader
+partitions log transmittance with kernel mass 6.20, adjusted for the small phase
+expansion, so overlapping supports do not turn a half-transparent painted edge
+opaque. This approximates native alpha on a regular grid; it is not an exact
+general overlap resolve. Endpoint occupancy gates prevent alpha-zero births
+and deaths from sampling visible paint at unrelated predicted coordinates.
+Main and bridge keys recover the original image coordinates and detail; inspect
+coverage and antialiased edges on both backgrounds before accepting new art.
+
+The older clerk cloud replaced its head with one source head silhouette. That
+left up to 9.192% of sampled native pixels outside patch support when used as a
+full texture renderer. The existing builder now retains her complete original
+image grid, with named anatomical ownership and the same curved paper paths.
+The 55 runtime anchor WebPs are unchanged. Clerk has 7,680 desktop and 3,072
+mobile slots; its new compressed records are 1,333,481 and 523,530 bytes, with
+2,949,120 and 1,179,648 decoded bytes. The other eight packs are unchanged.
+The legacy `paint_warp_gain` table is retained for older consumers; it does not
+attenuate the current paired texture transport.
+
+Knick's paper is absent in the raised pose. Holding its invisible birth
+coordinates at the target location made a nearly opaque sheet appear beyond
+her reaching fingers. The builder now translates a wholly absent paper part's
+alpha-zero endpoint by the corresponding `hand_left` displacement. The same
+rule handles its disappearance. It preserves the paper's extent and all visible
+XY/RGBA; 245/186 desktop and 94/72 mobile invisible birth/death endpoints changed
+in segments 3/11. Named attachment is an explicit ownership instruction, not
+an inferred skeleton or a replacement for handoff keys. Unbound parts and
+ordinary border projection keep their existing behavior.
+
+Liquid motion comes from the native-image Gaussian patches transporting the
+whole painting along paired paths. A bounded spatial phase delay
+`0.085 × sin(9 × midpoint.y + 6 × midpoint.x) × sin²(πu)` lets different regions
+flow into their anchors at slightly different rates. Its derivative stays
+between 0.733 and 1.267, with exact endpoints and unit slope at keys. An owned
+prop shares one delay from its pivot midpoint, preserving its corners. Native
+paint blending follows that phase in premultiplied linear colour.
+
+The user's correction on 2026-10-10 removes positional waves, body breathing
+stretch, changing Gaussian support size and the duplicate Spark halo. Native
+texture Gaussians alone carry the complete transition at opacity one, with a
+fixed support and optical mass. The fallback Spark cloud remains available for
+cloud-only manifests or unavailable native paint, but is invisible whenever the
+native painting is displayed. There is no trail or ghost overlay, random jitter,
+extra clock or global opacity pulse. Colour breath and the existing local speech
+cue remain; the authored action and displacement-driven gait are unchanged.
+Keep two or three approved inbetweens between ordinary main poses and Knick's
+denser stamp/fold keys. Transition keys have no scheduled holds. Correspondence
+cannot invent an occluded hand; review crossing parts, turning props and loop
+closure in natural playback.
+
+The patch mesh shares the three packed-record textures already owned by its
+actor. It adds one instanced slot attribute (four bytes per slot), no new image
+asset, framebuffer, dependency, worker, or render loop. The first adjacent
+image pair decodes sequentially inside the existing actor preparation job; only
+the third neighboring key uses the shared prefetch queue. Explicit arc direction
+handles reverse actions and loop wrap. At most three bitmaps/textures and one
+pending image job reside per actor. A delayed neighbor keeps the available
+painting intact as a readiness fallback. Runtime manifest cache tags and the
+record content hash bind newly rebuilt data without a stale length mismatch.
+
+The 2026-10-10 liquid-only correction passes 182 shipping regression checks
+and fresh production desktop, Android-emulated and reduced-motion profiles.
+Those traces verify constant authored height, grounded registration, full
+four-second action/return continuity, displacement-driven gait, replay/close
+and the two/one actor limits. Independent P5 and C4/X1 bind the same frozen
+31-file candidate. C4 recorded all nine actual autoplay wraps (1,436 displayed
+frames), plus Knick/Aktenkurier desktop and mobile-emulated ±45° key/midpoint
+views: crisp keys, no separate positional wave or duplicate cloud trail,
+and retained paper contact. The portable method passes twenty Node tests and
+an eighteen-sample native Spark 2.3.1/Three r186 smoke, including cloud-hidden
+and paint-opacity-one assertions. Evidence is under `liquid-only-dynamic/`,
+`liquid-only-camera-review/`, `liquid-only-physics-review/` and
+`portable-native-liquid-only-result.json` in `output/amt-gaussian-arcs/`.
+Physical Android and fresh forced overlapping depth pixels were not tested;
+the compositor/data are unchanged and earlier depth checks are carried.
+These are local browser and source checks, not a new performance benchmark.
+
+The previous wave/halo candidate’s liquid full-morph natural autoplay covered all nine loop seams: 913 displayed
+frames and 2,354 sampled states across the unchanged eight actors and repaired
+Knick loop. Fresh Knick coverage includes 193 frames through the actual 9.1 s
+wrap and 136 dense desktop/mobile-angle captures around paper birth and
+disappearance. Native texture Gaussian mode, opacity one and actor visibility
+remain continuous, with no page/HTTP/compile errors or observed whole-image
+flash. One benign Three signed/unsigned warning remains. Opacity alone does
+not prove perceptual continuity: independent C4/X1 reviewed the motion and
+grip, and P5 compared exact binary changes and authoritative timing.
+Evidence is retained under `output/amt-gaussian-arcs/dissociated-camera-review/`
+and `dissociated-paper-camera-review/`. The final upstream voice integration
+changes only speech recording/overlay callbacks, entry cache tags and a subtitle
+test; renderer, clock, data, builder and geometry bytes are unchanged. Final
+review bindings are under `liquid-final-camera-review/` and
+`liquid-final-physics-review/`. Production desk/wall and mixed paint/cloud depth
+use the unchanged compositor with supplied office frames and carried earlier
+independent depth checks; exact final-candidate forced overlapping pixels and
+physical Android were not freshly tested. The former continuity
+repair's continuous bounded paint/local-fringe renderer removed the opacity
+pulse but was rejected because its full-body movement looked like a crossfade.
+The current renderer transports original image detail on the actual splat paths.
+
+Three cold contexts per profile compare the liquid renderer to `7a161e5` on
+Chrome 154 / Intel Iris Xe D3D11, local uncompressed HTTP, seed 12345, DPR2;
+no physical Android or GPU timing. Median active-dialogue frame p95 is
+21.0→21.7 ms desktop 1280×800 and 21.0→21.8 ms at 390×844 emulation. All nine
+inputs were accepted in every run, with zero page errors; median input p95 is
+14.3→19.7 ms desktop and 17.1→22.0 ms emulation, whose final runs span
+12.9–63.9 ms. Median measured cold transfer is roughly 30.08 MB / 17.02 MB
+before and after; settled-byte totals vary with asynchronous asset completion.
+Median dialogue transfer is 6.10 MB / 3.73 MB in both versions. Actor limits
+2/1, three resident native images per actor and the 1.6 MP buffer cap hold.
+This measures the small renderer cost, not a speedup or field playability.
+Evidence: `liquid-benchmark-before/`, `liquid-benchmark-after/` and
+`liquid-benchmark-summary.json` under `output/amt-gaussian-arcs/`. The subsequent
+`6b06989` voice integration leaves these render inputs unchanged; its fresh
+production smoke is recorded separately in `liquid-final-dynamic/`.
+
+For the earlier native-anchor release, three cold-context runs per viewport on Chrome 154 /
+Intel Iris Xe D3D11 measured median active-dialogue frame p95 of 20.9 ms both
+before and after on desktop 1280×800, and 21.0→20.9 ms at 390×844 browser
+emulation. All nine test inputs were accepted per run; median input p95 was
+15.0→20.7 ms desktop and 19.1→42.9 ms emulation, with individual runs spanning
+11.9–59.9 ms and 12.9–57.7 ms after the repair. This is local lab evidence,
+not a field performance result. Median cold office transfer was 28.05→28.82 MB
+desktop and 15.60→16.13 MB emulation; the sampled conversation's animation
+transfer rose from 1.24→4.56 MB and 0.26→2.56 MB respectively to retain native
+paint. The existing two/one actor and 1.6 MP drawing-buffer limits held, with
+zero page errors. Physical Android was not tested. Separate Physics and Camera
+reviews checked the frozen repair after upstream omen staging was integrated:
+continuous gesture phases, floor registration, return through the existing
+look/work beats to displacement-driven walking, replay/close, and native mixed
+paint/cloud ordering. All nine preview loops were sampled at their original
+keys and handoffs. Reciprocal overlapping paint/cloud and simultaneous partial
+fades were also checked in an isolated two-character production-renderer
+fixture; those forced samples are not natural mission playthroughs.
+Those earlier paused/forced samples did not detect the autoplay opacity pulse;
+the continuity repair adds consecutive natural-motion review for that defect.
+
+`buergeramt-gaussian-scene.js` admits nearby actions through the existing
+two-job asset queue, with at most two desktop actors or one mobile actor. It
+prepares inside six world units, displays inside five, and retires outside
+seven. `buergeramt-gaussian-animation.js` takes its floor, height, orientation
+and tint from the existing sprite. Action clouds and the omen share one Spark
+owner and the ordinary office render pass. The source sprite stays visible
+until the native painting is ready or the new cloud completes its first visible sort. Walk/look/flinch,
+reduced motion, unavailable assets and preparation failures retain sprites.
+Exit/replay detach actors immediately and settle pending sorts before freeing
+their resources. There is no extra scene animation loop.
+
+Registered sources, landmarks, polygons and provenance live under
+`assets/sprite-sources/buergeramt/gaussian-arcs/`; runtime manifests and selected
+desktop/mobile records and lossless runtime anchor frames live under `assets/buergeramt/animation/`. The three
+stationary waiting patrons now have their own registered action packs, while
+the two decorative clerk copies share Knick's pack through separate animation
+slot IDs. All fourteen rendered office figures are eligible for the same
+bounded Gaussian action renderer. The opt-in `spark-preview.html?scene=knick&workflow=arcs` preview
+uses the same actor implementation; other cast IDs select their action packs.
+Native rendered anatomy/props/loop review, integrated depth/floor review and
+browser costs remain acceptance gates. Binary checks do not certify the art;
+Android emulation does not establish physical-device performance.
+
+The 2026-10-10 cast extension adds two main paintings and two stable transition
+paintings for each of Konrad, Mechthild and Wolfram. Their outward gesture takes
+six seconds and reverses over six seconds with no intermediate holds. The
+original native work painting remains the first key. Generated bridges use one
+uniform scale for the whole sequence and the original floor; raised hands do
+not shrink the body. Konrad opens his free hand, Mechthild brings her free hand
+toward the papers, and Wolfram raises his notice while keeping the cane planted.
+The existing builder consumes registered landmarks and owned paper/cane masks.
+`tools/prepare-amt-patron-arcs.py` performs crop/alpha cleanup/registration only;
+the stored imagegen bridge sheets own the new poses.
+
+Independent C4 review rejected an initial Mechthild reaching interval and a
+Wolfram receipt interval because the paired paint showed two hand/prop positions.
+The repair authors a real halfway reach, registers horizontal shoe centroids,
+and measures each key's face/shoulder/elbow/grip, receipt corners and cane
+controls on its native painting. Estimates copied across poses had missed the
+receipt and left the reaching elbow stationary. The final encoded packs must
+pass midpoint and normal-speed review; smooth frame timing alone cannot certify
+anatomical correspondence. The final pensioner mask also includes the pale
+antialiased receipt edge that otherwise appeared as a detached head-area fleck.
+Final independent C4 and P5 verdicts are PASS, bound to all 58 candidate path
+hashes in `full-cast-candidate.json` (manifest SHA-256
+`2525081666145bbcd8bae7662913346f8715099e94cc7d1a521b4faf38a05702`).
+The final fresh C4 pensioner loop observed 409 frames and 616 timed states
+without visibility/opacity loss or browser errors; P5 reran 15 data checks for
+the narrow mask repair and carried only unchanged clock/floor/manager evidence.
+
+Five additional stationary clocks advance from office simulation time, staggered
+by actor. Hidden time freezes them; dialogue freezes background figures while
+the selected patron continues. Replay resets phases and generation. Admission
+and visible slot retirement wait for the stationary figure's original work or
+ready key, avoiding a raised-pose-to-rest snap. An actor whose complete billboard
+is outside the camera may release a frozen slot for a new visible speaker.
+Preparation skips off-camera or unavailable actions. The caps stay two desktop
+and one mobile; extending the cast does not mean fourteen simultaneous clouds.
+
+An isolated conversation retires background Gaussian slots immediately. Those
+background action clocks may freeze between main paintings, so waiting for a
+safe anchor would prevent the selected speaker from acquiring the single mobile
+slot. The existing isolation already hides those replacements; retirement
+restores their ordinary sprites and leaves the speaker's safe admission rule,
+simulation clock, floor, depth and two/one actor limits intact. The focused
+`tools/playtest-mobile-gaussian-handoff.mjs` fixture uses the actual office
+renderer and assets with deliberately frozen state. Its mobile scenarios are
+browser emulation; they do not establish behavior on a physical Brave device.
+
+`buergeramt-voice-profiles.js` gives the twelve named speakers distinct infernal,
+Kafkaesque performance briefs and browser rate/pitch hints. Explicit story
+delivery and approved exact-speaker recordings retain priority. Twelve actual
+alternate profiles were saved in Secret Tunnel's local Voice Cloner from the
+documented CC0 emotional references, with private transformed WAVs. These are
+unlistened alternatives, not accepted cloned game recordings. The two decorative
+clerks reuse Brunhilde's identity. IDs, provenance and the separate listening
+gate are owned by `VOICE-SYNTH-PROTOCOL.md`.
+
+Author checks passed 235 affected Node regressions and normal-speed full cycles
+for all five added figures in desktop and Android browser emulation, with
+ground pivots, full-opacity native paint, residency limits, reduced-motion
+fallback and replay cleanup. Evidence is retained under
+`output/amt-gaussian-arcs/full-cast*`. Forced office camera samples are separate
+from natural dialogue selection, physical Android and perceived voice quality.
+
+The 2026-10-08 release review covers all nine exact encoded native loops,
+390px mobile emulation at ±45°, planted roots, shortest return before walking,
+replay/close, reduced-motion fallback, opaque counter/wall depth and a supported
+two-cloud camera sweep. Knick's counter hides the stamp contact itself; the
+standalone preview shows the whole action. Office blockers are opaque; city
+fading, car/door/landmark geometry and scale are unchanged. Physical Android
+and perceived audio quality were not tested.
+
+Three cold-context runs per viewport on Chrome 154 / Intel Iris Xe D3D11 gave
+median active-dialogue frame p95 of 21.0 ms before/after on desktop 1280×800,
+and 21.8→21.0 ms on 390×844 Android browser emulation. Desktop retained two
+visible clouds; mobile retained one. Nine keyboard inputs were accepted per
+run; median entry input p95 was 15.5→19.3 ms desktop and 22.3→13.5 ms emulation.
+These local scheduling measurements are not GPU timings or a causal speedup.
+Entry transfer varied 22.35–27.44→26.73–28.05 MB desktop and
+15.46→15.32–15.60 MB emulation; the approach/dialogue route downloaded 1.24 MB
+and 0.26 MB of Gaussian action data respectively, including retired preparations.
+Baseline overrides the same seven runtime entry files at `734e203`; existing
+painted atlases remain unchanged. The retained local evidence is under
+`output/amt-gaussian-arcs/` (`benchmark-active-*`, `camera-final*`, `physics-final`).
+The release suite passed 177 checks; the portable skill passed ten functional
+tests, four adversarial builder cases and a fresh native Spark smoke. The preview
+also passed 320px, 200% typography and German-label fitting with actual Pretext.
 
 ## Flow and companion failure coverage
 
@@ -119,44 +612,22 @@ For admission/call changes, use `gameplay-validation` and meaningful state prope
 
 ## Episode boundary and clock ownership
 
-Every office speech cue owns one facial track in `buergeramt-lips.js`, including
-ambient voices, roaming dialogue, desk questions/replies, interruptions and the
-Aktenkurier's omen. Recorded lines use the unchanged native media playhead;
-browser speech uses observed start/boundary/pause/end receipts and a bounded
-character-time estimate between receipts. German grapheme visemes approximate
-open, wide, rounded, closed and lip-bite shapes with continuous coarticulation
-and 35 ms rendering smoothing. This is approximate articulation, not measured
-phoneme alignment. Voice-off, failed speech, cancellation and stale cues return
-to the original painted mouth. Speech pause holds the current facial shape.
-
-The active speaker holds a registered painted face pose. One shared draw
-transports its native lip/jaw texture through 425 local Gaussian kernels;
-the original map, body pivot, breath, tint, fog and occlusion
-remain authoritative. It reuses existing near/distant textures, with no new
-face art, voice asset or animation loop. The omen's existing Spark volume uses
-the same track for local mouth deformation and one oral splat. Reduced motion
-retains semantic articulation while the existing omen motion policy applies.
-The forced browser fixture `tools/playtest-buergeramt-lips.mjs` exercises each
-cast instance and native recorded playback; it does not establish a natural
-mission playthrough, phoneme accuracy, listening quality or physical Android.
-
 The city owns mission progress, A38, its main update loop and entry/exit callbacks. The episode owns its queue, movement, dialogue and attempt/cue cancellation; the existing renderer projects that state. Office-detail collision footprints become active only after their visible assembly attaches. Phone messages remain bounded and ordered under the existing host-authoritative protocol. Shared CSS and renderer changes have one assigned writer.
 
 Simulation `dt` owns movement and queue progression. Monotonic peer timestamps own call scheduling and receipt deadlines; Web Audio time owns scheduled audio. Web Speech start/boundary/end events provide observed speech timing, with existing bounded fallbacks. Document which of these a changed beat uses, what pauses, what continues, and what is cancelled on close/replay. Do not replace one clock with another or assume browser speech is sample-accurate.
 
 Queue-call `look` and `flinch` steps sample their eight compact cells once over each authored step duration, starting when the planted action actually begins. Their phase comes from the step's remaining time, independently of the ambient work clock and distance-driven walking. Step changes preserve update overshoot; dialogue freezes background action phases, and replay or a replacement performance clears the old phase. A blocked walker starts its pending planted reaction without discarding the queued steps or moving its root. The omen's owned approach still advances while the room is paused. Close-up actions retain the existing single painted detail pose with a subtle renderer breath; this timing change does not add articulated poses or change the art. `tests/buergeramt-animation-timing.test.mjs` exercises different actors at 60/30 fps and a delayed update, blocked queued reactions, planted roots, dialogue pause and replay. The focused browser probe is `tools/playtest-buergeramt-animation.mjs`; it checks sampled controller-to-atlas mapping, placement and pause/replay in desktop and mobile emulation. Those samples do not establish normal-speed artistic smoothness or physical-device performance.
 
-Office movement uses the same fitted furniture and entrance-wall footprints for the player (0.22 m radius) and regulars (0.32 m radius). Regulars sweep every accepted segment, at most 0.08 m per substep, with at least 0.65 m between people and a 1.05 m player stopping gap. A blocked regular plants a work pose, preserves queued reactions, and retries after its work pause; a small visibility graph finds body-clear paths around furniture and people, with a consistent preference to pass on the right. Route endpoints stay on the waiting-room side of the entrance wall. The Aktenkurier's approach also uses these rules and selects a reachable, unobstructed stopping point 1.68 m from the player; an unreachable approach releases the scene rather than crossing a solid. Attached detail invalidates paths and resolves invalid placements to the nearest available clear edge. Route arrival has no position snap, and only accepted ground travel advances gait.
-
-All fourteen painted figures use vertical camera-facing planes. Walking views are selected from actual travel relative to the observer, so an approaching walker shows its front from either side of the hall; planted actions face the viewer. Dialogue pauses route/action clocks while an independent, slow renderer breath continues for every figure, including distant atlases and close detail poses. Its bounded chest/shoulder deformation leaves the lower body and foot pivot fixed; paused walkers display a planted work pose. Existing painted idle, paperwork, gaze, lip and reaction patterns remain authoritative. `tests/buergeramt-movement.test.mjs` checks full patrols, thin props, passing, blocked gait and late attachment at 60/30 fps and 0.1 s delayed frames. The animation browser probe additionally checks all camera-facing planes and breathing during dialogue; screenshots and emulated Android evidence remain separate from physical-device acceptance.
-
 An already active city train announcement finishes before office speech. The optional `cityAudioBusy()` entry callback covers that recording and the existing broker gap. Office lines wait before starting speech watchdogs; ambient chatter is skipped while the city owns foreground audio. Attempt/cue changes invalidate deferred lines. The isolated episode defaults to ready when the callback is absent. Train recordings intentionally have no invented transcript; character speech retains its exact visible-text contract.
+
+Office patrols and the authored Aktenkurier approach/retreat share body-clear routing and swept collision against the visible hall, furniture and attached detail props. People use circular separation in both planning and movement; gait advances only with accepted displacement. Obstructed actors hold a planted action and retry a legal detour. The entrance-side patrols stay clear of the facade wings and rope supports.
+
+All fourteen office figures face the actual viewer with a planted floor pivot. Ordinary walking views follow travel relative to that viewer; the authored omen front/turn/retreat views keep their story ownership. The existing staggered colour breath applies at every detail level, during dialogue and to painted/Gaussian replacements. Body height remains fixed; only authored poses and accepted movement change its shape. Hidden simulation retains its existing pause policy.
 
 
 The 2026-10-10 phone recast changes caller copy, authored speech, reciprocal voice cutoffs and recordings only. Physics and Camera specialist reviews are omitted because world placement, movement, art, collision, camera and scale are unchanged. Encoded transcripts and silent phone scheduling checks do not establish listening quality or physical-device coverage.
 
 TimeAPI UTC stamps now also anchor the escalating argument when a fresh peer offset is unavailable. Each observed phone onset produces an advance cutoff deadline in phone-monotonic and UTC time; the phone stops locally instead of waiting for a last-moment network message. Host desk timing uses the mapped onset and measured startup lag. Two 100 ms retries cover a failed cutoff send, followed by natural completion or a 60 s bound. This records browser timing and does not establish physical acoustic precision.
-
 
 ## Anmeldung interrogation and completion
 
@@ -181,4 +652,18 @@ Reddit material is unverified self-report inspiration, not established fact or l
 Legal/document anchors: [BMG §17](https://www.gesetze-im-internet.de/bmg/__17.html), [§19](https://www.gesetze-im-internet.de/bmg/__19.html), [§21](https://www.gesetze-im-internet.de/bmg/__21.html), [§22](https://www.gesetze-im-internet.de/bmg/__22.html), [Berlin’s registration service](https://service.berlin.de/dienstleistung/120686/) and [municipal Wohnungsgeber guidance](https://www.neuenhagen-bei-berlin.de/startseite-de/buergerservice-einwohnermeldeamt/informationen-fuer-wohnungsgeber/?sds=1). Verified 2026-10-10. These support document/date distinctions and the duty to report a withheld confirmation; the game’s fictional detours are not added legal requirements.
 
 
-**Local validation, 2026-10-10.** Targeted registration/session/protocol checks pass (111 tests), with separate object, city-model and mission-fax checks. The silent scripted browser matrix completes the 24-question main route at desktop, Android portrait and landscape sizes, and the 52-question detour at 320 px. Rendered text has no horizontal overflow in the sampled question/success views; 200% text sizing was also inspected. Supplied screenshots and exact candidate hashes are in `output/playwright/anmeldung/report.json` and `report-hud-fullscreen.json`. The latter uses separate host/phone contexts and observes native fullscreen allowed from the existing E interaction, plus the repaired dynamic HUD label. Independent Physics checks pass all four approaches at 60/30/10 updates per second with actual office-detail obstacles; independent camera review prompted clear-face desk supplies at all four stations, now recaptured. The main matrix used direct entry, accelerated keys/queue, simulated signaling and DOM-handler graph traversal; natural city progression, QR/WebRTC pairing, physical Android and perceptual audio remain unverified. Concurrent unrelated renderer/voice work is mixed into the shared files, so this task is kept local rather than publishing those changes.
+**Local validation, 2026-10-10.** Targeted registration/session/protocol checks pass (111 tests), with separate object, city-model and mission-fax checks. The silent scripted browser matrix completes the 24-question main route at desktop, Android portrait and landscape sizes, and the 52-question detour at 320 px. Rendered text has no horizontal overflow in the sampled question/success views; 200% text sizing was also inspected. Supplied screenshots and exact candidate hashes are in `output/playwright/anmeldung/report.json` and `report-hud-fullscreen.json`. The latter uses separate host/phone contexts and observes native fullscreen allowed from the existing E interaction, plus the repaired dynamic HUD label. Independent Physics checks pass all four approaches at 60/30/10 updates per second with actual office-detail obstacles; independent camera review prompted clear-face desk supplies at all four stations, now recaptured. The main matrix used direct entry, accelerated keys/queue, simulated signaling and DOM-handler graph traversal; natural city progression, QR/WebRTC pairing, physical Android and perceptual audio remain unverified. The 2026-10-11 integrated release combines this registration work with the pending renderer and voice changes under the standing publication policy.
+
+The integrated 2026-10-11 release retains automatic in-scene encounters and opaque whole-body Gaussian transitions. The Anmeldung questions and telephone warnings retain explicit answer controls. One cue-owned speech track drives atlas mouth patches and continuous native-paint mouth deformation on admitted whole-body Gaussian actors. The approved Aktenkurier volume keeps its recording-bound viseme track. No second mouth cloud is drawn over a whole-body Gaussian replacement. Native recorded playback and browser speech receipts own motion; synthetic grapheme timing remains an estimate.
+
+**Initial integrated release validation, 2026-10-11.** The complete deterministic suite passed 459/459, followed by 25/25 checks for the final speech and caption repairs. Independent read-only Physics and Camera reviews passed the affected office scope (143 and 98 focused checks). The registration matrix passed desktop, Android portrait/landscape emulation and 320 px reflow, including four counter assignments, the 24-question route, the 52-question detour, fullscreen, badge and A38 handoff. Interactive speech now renders one caption with a compact header. Native Gaussian articulation passed all 15 actors on desktop and portrait Android emulation; that fixture holds stationary work anchors. Atlas articulation passed all 15 actors in desktop, portrait, landscape, reduced-motion and missing-asset cases, including full patron IDs, native recorded time, opaque occlusion and disposal. Grapheme shapes estimate articulation; these silent fixtures do not establish phoneme accuracy or perceptual quality.
+
+Silent hardware-ANGLE benchmarks passed three cold contexts per desktop/mobile viewport for both city startup and direct office entry (12 runs). City startup transfer stayed at or below 16.86 MB against the 18 MB local-transfer gate; title rendering stayed within the 4 Hz allowance and drawing buffers within 1.6 MP. Every run accepted at least eight movement inputs, with no page errors. Worst sampled input-to-render p95 was 377.9 ms. These are local uncompressed HTTP lab measurements, without network/CPU throttling or GPU timing.
+
+Worst sampled warm game-sync frame p95 was 47.6 ms in the city and 23.2 ms in the office. Cold input samples include latency spikes; passing functional/transfer gates does not establish uniformly fast input. The fallback mouth adds one draw and 850 triangles with no additional texture; paired active/baseline CPU submissions are recorded in the lip fixture (GPU timing unavailable).
+
+Input probes hold until a real rendered response or a 650 ms timeout and try alternative headings when collision blocks one direction. A fixed initialization seed (42 plus run index) makes cold contexts repeatable. Frame and latency measurements remain lab observations, not a field-playability claim. Evidence remains in ignored `output/publish-all/` (frozen hash manifests, release test log and native/fallback lip matrices), `output/publish-all/benchmark-root-final/report.json`, `output/publish-all/benchmark-office-final/report.json` and `output/playwright/anmeldung/report.json`. The earlier benchmark report records the short-pulse fixture failure. Physical Android, natural city mission progression, QR/WebRTC pairing, listening, and perceptual temporal cadence remain NOT RUN. The frozen candidate preserves the existing automatic encounters, approved recording-bound omen lips, scene geometry and desktop/mobile control contracts.
+
+**Final room-depth integration, 2026-10-11.** The release incorporates `dc5e8b2` before publication: all office people draw in actor layer 1 after effects, retaining the room's opaque depth and shared near/far sorting. A mouth child copies its actor's layer mask each update. The frozen integration tree `e4155f7f4185c3bb07cb910eb9b3d153636e2aa8` passed the complete 460/460 suite; independent Physics and Camera rechecks passed 19/19 and 42/42, with no geometry, movement or scale delta. Fresh native articulation passed all 15 actors on desktop and Android portrait emulation; fresh atlas articulation passed the five desktop/mobile/reduced-motion/missing-asset cases. The Camera reviewer inspected native actor and opaque-blocker captures and accepted affected C4/C5 and scripted X1 scope. Evidence: `output/publish-all/merged-depth-tests.log`, `depth-native-lips/`, `depth-fallback-lips/` and `candidate.json`. The fixture freezes stationary work anchors and injects controlled speech shapes; it does not establish natural admission or phoneme accuracy.
+
+Six fresh hardware-ANGLE office benchmark runs passed after depth integration, accepting nine inputs per run with no page errors. Maximum office transfer was 30.33 MB, sampled input p95 137.6 ms and warm frame p95 21.8 ms (`output/publish-all/benchmark-office-depth/report.json`). Earlier root measurements are carried forward because the city runtime path is unchanged; root transfer stays within its 18 MB gate, while the office loads additional assets. The final diagnostic-only repair directs `3d.html` to the current exact Merkel clip; its asset-retirement assertion and the three affected voice checks pass. Physical Android, natural mission progression, QR/WebRTC pairing, listening and perceptual lip cadence remain NOT RUN.

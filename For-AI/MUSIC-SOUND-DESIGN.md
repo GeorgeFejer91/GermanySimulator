@@ -4,6 +4,27 @@ This protocol defines the shared beat interface and evidence for music and nonve
 
 The reusable skill is pinned to [`GeorgeFejer91/music-sound-effects-skill`, commit `e6afde61c713aa0524f4a344ef289e1fc0c2159e`](https://github.com/GeorgeFejer91/music-sound-effects-skill/tree/e6afde61c713aa0524f4a344ef289e1fc0c2159e/skills/music-sound-effects) (private). Install that package directory as `$CODEX_HOME/skills/music-sound-effects` and read its `SKILL.md` plus only the relevant reference before use. The current personal installation is `C:\Users\cogpsy-vrlab\.codex\skills\music-sound-effects`. To update it, validate a new source revision first, then update the installation and this pin together. External ChatDev cannot read the personal installation; use the compact project contract and stage prompt described below.
 
+## Bürgeramt encounter sound
+
+Eleven fever spaces begin from an E-owned character/counter exchange. The
+Aktenkurier's existing omen approaches automatically once per visit and retains
+its separate score and official recording. There is no additional E dialogue
+for him. Scene completion uses speech receipts and the gradual visual release;
+no return button is required.
+Their nonverbal three-oscillator beds share the existing office effects bus;
+a separate register per identity sets their colour. The same office clock and
+speech receipts control entry, foreground ducking, pause, gradual release and
+cleanup. Sources have a 45 s maximum lifetime even if scene updates stop. Hidden
+pages and paused speech mute the bed; EFFEKTE and STIMMEN retain their existing
+roles. There is no new playlist, RAF, timer loop or audio service. Horst's accepted
+omen score and official recording remain intact.
+
+New user-approved default cloned speech uses each saved fever reference and a quiet, fixed
+pitch-shifted undertone mixed beneath the clean words. This processing is offline,
+with a separately rechecked encoded loudness and independent transcript; it is
+not a live voice filter on browser speech. The explicit use approval and unverified perceptual listening are recorded
+separately in `VOICE-SYNTH-PROTOCOL.md`.
+
 ## Start with the beat
 
 State the player action, story purpose, emotional turn, and desired silence before choosing a timbre or tool. Keep four decisions distinct: **brief** (intent and constraints), **source** (licensed recording, synthesis patch, or score sketch), **render** (reviewed asset or browser synthesis), and **playback** (the runtime event that starts and stops it). Prefer the game's existing Web Audio paths. Strudel can sketch a pattern and SuperCollider can render an offline source when useful; neither is a runtime dependency. No paid API, model, or DAW is required. Only accepted, licensed and attributed renders enter `assets/`; existing source/provenance rules remain in [`ASSET-POLICY.md`](./ASSET-POLICY.md).
@@ -24,7 +45,7 @@ When a visual transformation and a score are one dramatic process, define their 
 
 ## Bürgeramt example and boundary
 
-The ordinary office has no continuous background music. The Aktenkurier's approach is a bounded, encounter-only exception: distorted low brass, beating bass and abrasive inharmonic metal build a Kafka-like threat that never pays off. `BuergeramtLevel.omen.life` supplies the shared distance/depth, pressure and accelerating pulse for audio, the frontal Gaussian relief and the contracting dark tunnel. Speech receipts contour their peak; completion owns the final glare, then light restores and the sound cuts without a resolving chord or attack. Keep the queue pause and exit/replay cancellation. The office and phone retain separate audio contexts; the desk owns the committed pre-ring cue while the phone owns its ring and speech receipts. [`BUERGERAMT.md`](./BUERGERAMT.md) owns the cue sequence, buses, mix and numeric settings, and [`PHONE-CALL-TIMING-RESEARCH.md`](./PHONE-CALL-TIMING-RESEARCH.md) owns the measured phone timing limits.
+The ordinary office has no continuous background music. The Aktenkurier's approach is a bounded, encounter-only exception: distorted low brass, beating bass and abrasive inharmonic metal build a Kafka-like threat that never pays off. `BuergeramtLevel.omen.life` supplies the shared distance/depth, pressure and accelerating pulse for audio, the frontal Gaussian relief and the contracting dark tunnel. Speech receipts contour their peak; completion owns the final 3.4-second glare, then the shared reverse sequence drains sound, settles deformation, flattens Gaussian depth and then restores paint before a planted turn and silent slow retreat. The room returns afterward, without a resolving chord or attack. Keep the queue pause and exit/replay cancellation. The office and phone retain separate audio contexts; the desk owns the committed pre-ring cue while the phone owns its ring and speech receipts. [`BUERGERAMT.md`](./BUERGERAMT.md) owns the cue sequence, buses, mix and numeric settings, and [`PHONE-CALL-TIMING-RESEARCH.md`](./PHONE-CALL-TIMING-RESEARCH.md) owns the measured phone timing limits. The official recording also drives Gaussian lip/jaw articulation from native media time and an offline phonetic/energy track; word receipts continue to own the score contour. Pause freezes both clocks, and completion closes the mouth before the threatening stare. Keep phonetic estimates separate from exact text/audio ownership; the articulation contract and fallback are in `BUERGERAMT.md`.
 
 The existing city soundtrack remains governed by its music toggle, foreground audio broker, and `GAMEPLAY.md`; an office cue must not silently change city music policy or voice priority. The static controller owns state and committed events; renderer and audio projection follow that state. A new audio requirement does not justify a service, asset pipeline, or parallel scheduler.
 

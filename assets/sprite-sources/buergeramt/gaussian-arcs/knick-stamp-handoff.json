@@ -1,0 +1,686 @@
+{
+  "version": 1,
+  "paper_landmark_order": [
+    "sheet_center",
+    "sheet_left_top",
+    "sheet_right_top",
+    "sheet_bottom_center"
+  ],
+  "paper_orientation_note": "The stack stays approximately horizontal while the anatomical-left hand changes support from its left to its right edge. Track stable sheet geometry around center; do not interpret grip migration as a 180-degree sheet rotation. Anatomical hand_left separately tracks the supporting hand. Mask stamp paint above paper where they overlap.",
+  "frames": [
+    {
+      "id": "knick-stamp-handoff1",
+      "file": "assets/sprite-sources/buergeramt/gaussian-arcs/knick-stamp-handoff1.webp",
+      "sha256": "edc8f4e6a66679e777ad10e171a85cd71187f70c0d1b790f4fa38120a945fc87",
+      "source_file": "assets/sprite-sources/buergeramt/gaussian-arcs/knick-stamp-handoff-mid-source.png",
+      "source_sha256": "610b85f7436b3f69d70168e30fde6bbc98b043188827e303f9abfea372cca8f1",
+      "source_crop_xyxy": [
+        362,
+        34,
+        1152,
+        1099
+      ],
+      "canvas_xy": [
+        1024,
+        832
+      ],
+      "scale": 0.71,
+      "translation_xy": [
+        50,
+        18
+      ],
+      "alpha_bbox_xyxy": [
+        307,
+        42,
+        868,
+        799
+      ],
+      "landmarks": {
+        "eye_right": [
+          544,
+          147
+        ],
+        "eye_left": [
+          591,
+          160
+        ],
+        "nose": [
+          568,
+          172
+        ],
+        "chin": [
+          566,
+          212
+        ],
+        "shoulder_right": [
+          445,
+          229
+        ],
+        "elbow_right": [
+          344,
+          284
+        ],
+        "grip_right": [
+          394,
+          216
+        ],
+        "stamp_knob": [
+          430,
+          181
+        ],
+        "stamp_base": [
+          380,
+          274
+        ],
+        "shoulder_left": [
+          619,
+          251
+        ],
+        "elbow_left": [
+          675,
+          346
+        ],
+        "hand_left": [
+          751,
+          368
+        ],
+        "hip_center": [
+          519,
+          402
+        ],
+        "skirt_hem_center": [
+          520,
+          599
+        ],
+        "foot_screen_left": [
+          468,
+          781
+        ],
+        "foot_screen_right": [
+          620,
+          764
+        ]
+      },
+      "source_landmarks_xy": {
+        "eye_right": [
+          695.8,
+          181.7
+        ],
+        "eye_left": [
+          762.0,
+          200.0
+        ],
+        "nose": [
+          729.6,
+          216.9
+        ],
+        "chin": [
+          726.8,
+          273.2
+        ],
+        "shoulder_right": [
+          556.3,
+          297.2
+        ],
+        "elbow_right": [
+          414.1,
+          374.6
+        ],
+        "grip_right": [
+          484.5,
+          278.9
+        ],
+        "stamp_knob": [
+          535.2,
+          229.6
+        ],
+        "stamp_base": [
+          464.8,
+          360.6
+        ],
+        "shoulder_left": [
+          801.4,
+          328.2
+        ],
+        "elbow_left": [
+          880.3,
+          462.0
+        ],
+        "hand_left": [
+          987.3,
+          493.0
+        ],
+        "hip_center": [
+          660.6,
+          540.8
+        ],
+        "skirt_hem_center": [
+          662.0,
+          818.3
+        ],
+        "foot_screen_left": [
+          588.7,
+          1074.6
+        ],
+        "foot_screen_right": [
+          802.8,
+          1050.7
+        ]
+      },
+      "paper_polygon_xy": [
+        [
+          724,
+          351
+        ],
+        [
+          860,
+          350
+        ],
+        [
+          870,
+          380
+        ],
+        [
+          814,
+          403
+        ],
+        [
+          726,
+          386
+        ]
+      ],
+      "paper_landmarks_xy": [
+        [
+          798,
+          376
+        ],
+        [
+          728,
+          355
+        ],
+        [
+          859,
+          353
+        ],
+        [
+          809,
+          399
+        ]
+      ]
+    },
+    {
+      "id": "knick-stamp-handoff2",
+      "file": "assets/sprite-sources/buergeramt/gaussian-arcs/knick-stamp-handoff2.webp",
+      "sha256": "1ffc86dee796a023e6ff3eb25009c44ab1434c5270aeef13c4addd59db34349a",
+      "source_file": "assets/sprite-sources/buergeramt/gaussian-arcs/knick-stamp-handoff1-source.png",
+      "source_sha256": "d51dbdea498302c64f9c2e0cbd04655bd23804386d3be66a6afa50b9ec52073a",
+      "source_crop_xyxy": [
+        346,
+        31,
+        903,
+        1094
+      ],
+      "canvas_xy": [
+        1024,
+        832
+      ],
+      "scale": 0.71,
+      "translation_xy": [
+        65,
+        21
+      ],
+      "alpha_bbox_xyxy": [
+        311,
+        43,
+        706,
+        798
+      ],
+      "landmarks": {
+        "eye_right": [
+          544,
+          144
+        ],
+        "eye_left": [
+          588,
+          156
+        ],
+        "nose": [
+          565,
+          169
+        ],
+        "chin": [
+          557,
+          213
+        ],
+        "shoulder_right": [
+          438,
+          230
+        ],
+        "elbow_right": [
+          342,
+          270
+        ],
+        "grip_right": [
+          380,
+          200
+        ],
+        "stamp_knob": [
+          418,
+          160
+        ],
+        "stamp_base": [
+          378,
+          248
+        ],
+        "shoulder_left": [
+          624,
+          249
+        ],
+        "elbow_left": [
+          690,
+          345
+        ],
+        "hand_left": [
+          649,
+          386
+        ],
+        "hip_center": [
+          520,
+          400
+        ],
+        "skirt_hem_center": [
+          521,
+          597
+        ],
+        "foot_screen_left": [
+          472,
+          782
+        ],
+        "foot_screen_right": [
+          608,
+          763
+        ]
+      },
+      "source_landmarks_xy": {
+        "eye_right": [
+          674.6,
+          173.2
+        ],
+        "eye_left": [
+          736.6,
+          190.1
+        ],
+        "nose": [
+          704.2,
+          208.5
+        ],
+        "chin": [
+          693.0,
+          270.4
+        ],
+        "shoulder_right": [
+          525.4,
+          294.4
+        ],
+        "elbow_right": [
+          390.1,
+          350.7
+        ],
+        "grip_right": [
+          443.7,
+          252.1
+        ],
+        "stamp_knob": [
+          497.2,
+          195.8
+        ],
+        "stamp_base": [
+          440.8,
+          319.7
+        ],
+        "shoulder_left": [
+          787.3,
+          321.1
+        ],
+        "elbow_left": [
+          880.3,
+          456.3
+        ],
+        "hand_left": [
+          822.5,
+          514.1
+        ],
+        "hip_center": [
+          640.8,
+          533.8
+        ],
+        "skirt_hem_center": [
+          642.3,
+          811.3
+        ],
+        "foot_screen_left": [
+          573.2,
+          1071.8
+        ],
+        "foot_screen_right": [
+          764.8,
+          1045.1
+        ]
+      },
+      "paper_polygon_xy": [
+        [
+          533,
+          375
+        ],
+        [
+          666,
+          365
+        ],
+        [
+          676,
+          391
+        ],
+        [
+          562,
+          410
+        ],
+        [
+          534,
+          399
+        ]
+      ],
+      "paper_landmarks_xy": [
+        [
+          604,
+          389
+        ],
+        [
+          540,
+          377
+        ],
+        [
+          665,
+          370
+        ],
+        [
+          601,
+          407
+        ]
+      ]
+    }
+  ],
+  "existing_states": {
+    "bridge-stamp-1": {
+      "file": "assets/previews/knick-splats/bridge-stamp-1.webp",
+      "paper_polygon_xy": [
+        [
+          823,
+          330
+        ],
+        [
+          990,
+          332
+        ],
+        [
+          998,
+          358
+        ],
+        [
+          930,
+          385
+        ],
+        [
+          823,
+          367
+        ]
+      ],
+      "paper_landmarks_xy": [
+        [
+          909,
+          357
+        ],
+        [
+          826,
+          338
+        ],
+        [
+          990,
+          336
+        ],
+        [
+          923,
+          381
+        ]
+      ],
+      "sha256": "eac6cf9b89229a6ab4e14873ec63a48052ad2015c559fa9c704ad93aaf4f4be7"
+    },
+    "bridge-stamp-2": {
+      "file": "assets/previews/knick-splats/bridge-stamp-2.webp",
+      "paper_polygon_xy": [
+        [
+          486,
+          374
+        ],
+        [
+          630,
+          370
+        ],
+        [
+          645,
+          387
+        ],
+        [
+          597,
+          405
+        ],
+        [
+          505,
+          405
+        ]
+      ],
+      "paper_landmarks_xy": [
+        [
+          565,
+          388
+        ],
+        [
+          489,
+          378
+        ],
+        [
+          629,
+          374
+        ],
+        [
+          570,
+          402
+        ]
+      ],
+      "sha256": "ec2239b038f32e8294d23b1f4aa096c55fa908b875e9a4cb447d4d8345893ebd"
+    },
+    "bridge-stamp-3": {
+      "file": "assets/previews/knick-splats/bridge-stamp-3.webp",
+      "paper_polygon_xy": [
+        [
+          446,
+          390
+        ],
+        [
+          607,
+          385
+        ],
+        [
+          629,
+          407
+        ],
+        [
+          589,
+          427
+        ],
+        [
+          470,
+          425
+        ]
+      ],
+      "paper_landmarks_xy": [
+        [
+          535,
+          405
+        ],
+        [
+          451,
+          394
+        ],
+        [
+          608,
+          389
+        ],
+        [
+          535,
+          423
+        ]
+      ],
+      "sha256": "97af6cdf94d8062945d26c311da3ceea3901997e9b84f6803bbd6175f51b56f3"
+    },
+    "anchor-contact": {
+      "file": "assets/previews/knick-splats/anchor-2.webp",
+      "source_canvas_xy": [
+        384,
+        832
+      ],
+      "source_to_canvas_translation_xy": [
+        320,
+        0
+      ],
+      "paper_polygon_xy": [
+        [
+          456,
+          405
+        ],
+        [
+          606,
+          392
+        ],
+        [
+          626,
+          414
+        ],
+        [
+          593,
+          438
+        ],
+        [
+          471,
+          442
+        ]
+      ],
+      "paper_landmarks_xy": [
+        [
+          539,
+          417
+        ],
+        [
+          463,
+          410
+        ],
+        [
+          606,
+          397
+        ],
+        [
+          543,
+          439
+        ]
+      ],
+      "sha256": "825dcb1461938543a200e47310c1a637a344b456581001fd4d393bd2420aa633"
+    },
+    "bridge-fold-1": {
+      "file": "assets/previews/knick-splats/bridge-fold-1.webp",
+      "paper_polygon_xy": [
+        [
+          469,
+          389
+        ],
+        [
+          632,
+          381
+        ],
+        [
+          650,
+          400
+        ],
+        [
+          605,
+          421
+        ],
+        [
+          486,
+          420
+        ]
+      ],
+      "paper_landmarks_xy": [
+        [
+          555,
+          402
+        ],
+        [
+          473,
+          393
+        ],
+        [
+          632,
+          385
+        ],
+        [
+          553,
+          418
+        ]
+      ],
+      "sha256": "236d797b0fd7146af127069513c54e89bf5ae6e244f3a3ec0c03345efd90782d"
+    },
+    "bridge-fold-2": {
+      "file": "assets/previews/knick-splats/bridge-fold-2.webp",
+      "paper_polygon_xy": [
+        [
+          749,
+          378
+        ],
+        [
+          909,
+          379
+        ],
+        [
+          919,
+          397
+        ],
+        [
+          864,
+          417
+        ],
+        [
+          749,
+          411
+        ]
+      ],
+      "paper_landmarks_xy": [
+        [
+          835,
+          397
+        ],
+        [
+          752,
+          382
+        ],
+        [
+          909,
+          382
+        ],
+        [
+          834,
+          414
+        ]
+      ],
+      "sha256": "e58f9483e63fabe1a11f278d7b03bde63afcfa035bd8a782e54ede3d897f4c3c"
+    }
+  }
+}

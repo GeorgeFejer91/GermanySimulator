@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover,user-scalable=no">
   <meta name="theme-color" content="#77756f">
   <meta name="description" content="Germany Simulator — a 3D bureaucratic open-world parody.">
   <meta property="og:title" content="Germany Simulator · Grand Theft Amt">
@@ -32,8 +32,10 @@
 </head>
 <body>
 <main id="app">
-  <button id="subtitle-toggle" class="subtitle-toggle" type="button" aria-label="Toggle English subtitles" aria-pressed="false">EN SUBTITLES OFF</button>
   <canvas id="game" hidden aria-hidden="true"></canvas>
+  <aside id="mission-guide" class="mission-guide" hidden aria-label="Wegweiser">
+    <div id="mission-pointer-space" aria-hidden="true"></div>
+  </aside>
   <nav id="city-status" class="city-status" aria-label="Spielakte" hidden>
     <aside id="germanness-hud" class="hud germanness" aria-label="Germanness"><small>GERMANNESS</small><div class="germanness-meter" role="progressbar" aria-label="Germanness" aria-valuemin="0" aria-valuemax="15" aria-valuenow="0"><i id="germanness-fill"></i></div><output id="germanness-value">0/15</output><span id="law-power">§-MACHT AB 9/15</span></aside>
     <button id="file-toggle" type="button" aria-haspopup="dialog" aria-controls="case-file" aria-expanded="false"><span data-de="AKTE" data-en="FILE">AKTE</span> <kbd>M</kbd> <span class="file-day"><span data-de="TAG" data-en="DAY">TAG</span> <b id="day">1/3</b></span></button>
@@ -45,6 +47,7 @@
   <aside id="mission-fax" class="fax-paper mission-fax" hidden aria-labelledby="fax-title">
     <div class="fax-heading"><span data-de="FAXEINGANG · AUFTRAG" data-en="INCOMING FAX · MISSION">FAXEINGANG · AUFTRAG</span><button id="fax-dismiss" type="button" aria-label="Auftrag ausblenden">×</button></div>
     <h2 id="fax-title"></h2><p id="fax-text"></p>
+
   </aside>
   <dialog id="case-file" class="fax-paper case-file" aria-labelledby="file-title">
     <div class="file-header"><h2 id="file-title" data-de="IHRE SPIELAKTE" data-en="YOUR GAME FILE">IHRE SPIELAKTE</h2><button id="file-close" type="button" data-de="ZURÜCK" data-en="BACK">ZURÜCK</button></div>
@@ -100,28 +103,32 @@
   </form></section>
   <div id="humor-scold" class="humor-scold" hidden role="alert" aria-live="assertive"></div>
   <div id="english-subtitle" class="english-subtitle" lang="en" hidden aria-live="polite" aria-atomic="true"></div>
+  <button id="subtitle-toggle" class="subtitle-toggle" type="button" lang="en" aria-label="Toggle English subtitles" aria-pressed="false">EN SUBTITLES OFF</button>
 
   <nav class="control-dock" aria-label="Touch controls"><div class="dpad"><button data-key="ArrowLeft" aria-label="Left">◀<span class="fraktur">Links</span></button><button data-key="ArrowUp" aria-label="Forward">▲<span class="fraktur">Vor</span></button><button data-key="ArrowDown" aria-label="Back">▼<span class="fraktur">Zurück</span></button><button data-key="ArrowRight" aria-label="Right">▶<span class="fraktur">Rechts</span></button></div><button id="law-action" class="law-action" data-key="KeyQ" type="button" aria-label="Quote a German law" disabled><span class="dock-icon">§</span><span class="fraktur">Gesetz</span></button><button class="action" data-key="KeyE" type="button"><span class="dock-icon">E</span><span class="fraktur">Reden</span></button></nav>
 
 </main>
 <script type="importmap">{"imports":{"three":"https://cdn.jsdelivr.net/npm/three@0.186.0/build/three.module.js","three/addons/":"https://cdn.jsdelivr.net/npm/three@0.186.0/examples/jsm/"}}</script>
-<script src="./For-AI/QUIZ-CHARACTER-DICTIONARY.js?v=20261010-anmeldung-flow"></script>
-<script src="./For-AI/AUDIO-TEXT-LIBRARY.js?v=20261011-gs-merz-stadtbild"></script>
-<script src="./goerlitzer-park.js?v=20261010-anmeldung-flow"></script>
+<script src="./For-AI/QUIZ-CHARACTER-DICTIONARY.js?v=20261011-published-features"></script>
+<script src="./For-AI/AUDIO-TEXT-LIBRARY.js?v=20261011-published-features"></script>
+<script src="./goerlitzer-park.js?v=20261011-published-features"></script>
 <script src="./assets/vendor/qrcode/qrcode.js"></script>
 <script src="./assets/vendor/vdoninja/1.5.5/vdoninja-sdk.min.js"></script>
-<script src="./buergeramt-time.js?v=20261010-anmeldung-flow"></script>
-<script src="./buergeramt-link.js?v=20261010-anmeldung-flow"></script>
-<script src="./buergeramt-story.js?v=20261010-anmeldung-flow"></script>
-<script src="./buergeramt-lips.js?v=20261010-gaussian-speech"></script>
-<script src="./buergeramt.js?v=20261010-gaussian-speech"></script>
+<script src="./buergeramt-time.js?v=20261011-published-features"></script>
+<script src="./buergeramt-link.js?v=20261011-published-features"></script>
+<script src="./buergeramt-story.js?v=20261011-published-features"></script>
+<script src="./buergeramt-voice-profiles.js?v=20261011-published-features"></script>
+<script src="./buergeramt-fever.js?v=20261011-published-features"></script>
+<script src="./buergeramt-animation-clock.js?v=20261011-published-features"></script>
+<script src="./buergeramt-lips.js?v=20261011-published-features"></script>
+<script src="./buergeramt.js?v=20261011-published-features"></script>
 <script type="module" src="./buergeramt-fit.js?v=20261011-gameplay-text"></script>
-<script src="./character-interactions.js?v=20261010-anmeldung-flow"></script>
-<script src="./tourist-animation.js?v=20261010-anmeldung-flow"></script>
+<script src="./character-interactions.js?v=20261011-published-features"></script>
+<script src="./tourist-animation.js?v=20261011-published-features"></script>
 <script src="./game.js?v=20261011-gameplay-text"></script>
 <script type="module" src="./game-hud.js?v=20261011-gameplay-text"></script>
 <script type="module" src="./subtitle-layout.js?v=20261011-gameplay-text"></script>
-<script type="module" src="./quiz-layout.js?v=20261010-anmeldung-flow"></script>
-<script type="module" src="./world3d.js?v=20261010-gaussian-speech"></script>
+<script type="module" src="./quiz-layout.js?v=20261011-published-features"></script>
+<script type="module" src="./world3d.js?v=20261011-wegweiser"></script>
 </body>
 </html>

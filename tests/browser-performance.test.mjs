@@ -32,9 +32,10 @@ assert.match(world,/antialias:false/,'default renderer must avoid multisample bu
 const resize=world.match(/function resize\(\)\{[^\n]+?\}/)?.[0];
 assert.ok(resize);
 for(const [width,height,dpr] of [[390,844,3],[844,390,2],[1280,800,2],[3840,2160,2]]){
- let ratio,size;
- new Function('renderer','camera','amtCamera','innerWidth','innerHeight','devicePixelRatio',resize+';resize()')({setPixelRatio:v=>ratio=v,setSize:(w,h)=>size=[Math.floor(w*ratio),Math.floor(h*ratio)]},{updateProjectionMatrix(){}},{updateProjectionMatrix(){}},width,height,dpr);
+ let ratio,size,hudLayouts=0;
+ new Function('renderer','camera','amtCamera','innerWidth','innerHeight','devicePixelRatio','layoutMissionPointer',resize+';resize()')({setPixelRatio:v=>ratio=v,setSize:(w,h)=>size=[Math.floor(w*ratio),Math.floor(h*ratio)]},{updateProjectionMatrix(){}},{updateProjectionMatrix(){}},width,height,dpr,()=>hudLayouts++);
  assert.ok(size[0]*size[1]<=1600000);assert.ok(ratio<=1);
+ assert.equal(hudLayouts,1,'resize also refreshes the separately tested mission HUD layout');
 }
 
 // Execute the production cache against a controlled decoder, not a copy of it.

@@ -18,12 +18,12 @@ function sourceOf(source,name){
 }
 
 const lookup=vm.createContext({});
-vm.runInContext(`const candidatePreviewEnabled=true,quizSegmentDialogue={"quiz-brigitte-neumann\\u0000approach":"a.mp3","quiz-brigitte-neumann\\u0000context":"b.mp3","quiz-brigitte-neumann\\u0000question":"c.mp3"},candidateDialogue={};${sourceOf(catalog,"candidateSequence")};globalThis.find=candidateSequence`,lookup);
+vm.runInContext(`const candidatePreviewEnabled=true,quizSegmentDialogue={"quiz-brigitte-neumann\\u0000approach":"a.mp3","quiz-brigitte-neumann\\u0000context":"b.mp3","quiz-brigitte-neumann\\u0000question":"c.mp3"},candidateDialogue={},approvedDialogue={};${sourceOf(catalog,"candidateSequence")};globalThis.find=candidateSequence`,lookup);
 assert.deepEqual(Array.from(lookup.find("quiz-brigitte-neumann",["approach","context","question"])),["a.mp3","b.mp3","c.mp3"]);
 assert.equal(lookup.find("quiz-brigitte-neumann",["approach","context","missing"]),null,"a partial prompt must use the full browser voice");
 assert.equal(lookup.find("another-voice",["approach","context","question"]),null,"segments must all belong to the selected character");
 const lookupOff=vm.createContext({});
-vm.runInContext(`const candidatePreviewEnabled=false,quizSegmentDialogue={"quiz-brigitte-neumann\\u0000approach":"a.mp3"},candidateDialogue={};${sourceOf(catalog,"candidateSequence")};globalThis.find=candidateSequence`,lookupOff);
+vm.runInContext(`const candidatePreviewEnabled=false,quizSegmentDialogue={"quiz-brigitte-neumann\\u0000approach":"a.mp3"},candidateDialogue={},approvedDialogue={};${sourceOf(catalog,"candidateSequence")};globalThis.find=candidateSequence`,lookupOff);
 assert.equal(lookupOff.find("quiz-brigitte-neumann",["approach"]),null,"ordinary gameplay must keep browser speech");
 assert.equal(manifest.segmentCount,3);
 const segmentMap=vm.createContext({Object});

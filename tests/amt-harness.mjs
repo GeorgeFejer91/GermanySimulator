@@ -109,6 +109,7 @@ export function harness(kind='host',{voice=false,synthesis=true,phoneLanguage='d
  if(phoneClock)window.BuergeramtClock=phoneClock;
  const context=vm.createContext(globals);
  vm.runInContext(source('buergeramt-story.js'),context,{filename:'buergeramt-story.js'});
+ if(kind==='host')for(const file of ['buergeramt-animation-clock.js','buergeramt-voice-profiles.js','buergeramt-fever.js'])vm.runInContext(source(file),context,{filename:file});
  vm.runInContext(source('buergeramt-lips.js'),context,{filename:'buergeramt-lips.js'});
  vm.runInContext(source(kind==='host'?'buergeramt.js':'buergeramt-phone.js'),context,{filename:kind});
  const counts={form:0,cancel:0,close:0},music=[];
@@ -120,7 +121,8 @@ export function harness(kind='host',{voice=false,synthesis=true,phoneLanguage='d
  function action(index=0){const button=node('amt-actions').children[index];if(!button)throw new Error(`No action ${index} at ${level.stage}`);button.click();return button}
  function advanceGame(seconds){for(let t=0;t<seconds;t+=.05)level.update(Math.min(.05,seconds-t))}
  function enter(){moveTo(0,-2.6)}
- function enterUntilOmen(){key('KeyW');try{for(let i=0;i<300;i++){if(level.stage==='omen')return;level.update(.05)}throw new Error(`Omen did not begin during entry; stage=${level.stage}, view=${JSON.stringify(level.view)}`)}finally{key('KeyW','keyup')}}
+ function enterUntilOmen(){key('KeyW');try{for(let i=0;i<300;i++){if(level.stage==='omen')return;level.update(.05)}throw new Error(`Automatic omen did not begin; ${JSON.stringify(level.view)}`)}finally{key('KeyW','keyup')}}
+ function elapse(seconds){for(let t=0;t<seconds;t+=.05){const step=Math.min(.05,seconds-t);tick(step*1000);level.update(step)}}
  function approachRegistration(){moveTo(-3.3,-2.6);moveTo(-3.3,2.5);moveTo(-4.65,2.5)}
  function register(){enter();Link.instances.at(-1).message({type:'scan',id:'a'.repeat(24)})}
  function wait(){register()}
@@ -129,5 +131,5 @@ export function harness(kind='host',{voice=false,synthesis=true,phoneLanguage='d
  function phoneReady(){const link=Link.instances.at(-1);link.emit('connected',{});link.message({type:'ticket',number:'B-223'});return link}
  function incoming(){const link=phoneReady();node('phone-name').value='Erika Mustermann';node('phone-form').dispatchEvent(new Event('submit',{cancelable:true}));link.message({type:'call-arm',id:'grass'});link.message({type:'call',id:'grass',line:window.BuergeramtStory.call.line,ringAtPhoneMs:now,ringAtUtcMs:null,leadMs:2200});return link}
  function hide(){document.hidden=true;document.dispatchEvent(new Event('visibilitychange'))}
- return{window,document,node,tick,now:()=>now,timers,key,moveTo,action,advanceGame,enter,enterUntilOmen,approachRegistration,approachCounter,register,wait,counter,phoneReady,incoming,hide,synth,audio,vibrations,fullscreenRequests,counts,music,config,level,links:Link.instances,context};
+ return{window,document,node,tick,now:()=>now,timers,key,moveTo,action,advanceGame,elapse,enter,enterUntilOmen,approachRegistration,approachCounter,register,wait,counter,phoneReady,incoming,hide,synth,audio,vibrations,fullscreenRequests,counts,music,config,level,links:Link.instances,context};
 }

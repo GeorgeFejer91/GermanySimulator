@@ -1,0 +1,439 @@
+{
+  "version": 1,
+  "id": "archivbotin",
+  "canvas_xy": [
+    640,
+    832
+  ],
+  "source_authority": "assets/buergeramt/characters/archivbotin-detail.webp",
+  "source_sha256": "92e48be3bd4a32d09819f9f4cba92cbec717d23317a539314ef29d2beaaa8b26",
+  "event_owner": "buergeramt.js dialogue gesture; work/look/flinch and walking remain existing controllers",
+  "prop_ownership": {
+    "type": "folding_book",
+    "owner": "anatomical_right_arm",
+    "secondary": "keyring_in_anatomical_left_hand"
+  },
+  "landmark_note": "Native 640x832 visual reading; anatomical right is screen-left. stamp_knob/base mark the book's upper and lower ends; anatomical left hand holds the keyring. Common shoe baseline; source resolution classes are registered with fixed scales.",
+  "arcs": [
+    {
+      "id": "work-gesture",
+      "from": "work",
+      "to": "gesture",
+      "duration": 2.0,
+      "keys": [
+        {
+          "state": "work",
+          "time": 0
+        },
+        {
+          "state": "bridge1",
+          "time": 0.4
+        },
+        {
+          "state": "bridge2",
+          "time": 0.95
+        },
+        {
+          "state": "bridge3",
+          "time": 1.5
+        },
+        {
+          "state": "gesture",
+          "time": 2.0
+        }
+      ],
+      "reverse": "Traverse the same keys and matched Gaussian segments backwards over 2.0s, with no new paintings or holds."
+    }
+  ],
+  "states": [
+    {
+      "id": "work",
+      "role": "main",
+      "file": "assets/buergeramt/characters/archivbotin-detail.webp",
+      "crop_xywh": [
+        0,
+        0,
+        640,
+        832
+      ],
+      "landmarks": {
+        "eye_right": [
+          326,
+          130
+        ],
+        "eye_left": [
+          367,
+          131
+        ],
+        "nose": [
+          348,
+          148
+        ],
+        "chin": [
+          346,
+          168
+        ],
+        "shoulder_right": [
+          250,
+          207
+        ],
+        "elbow_right": [
+          185,
+          312
+        ],
+        "grip_right": [
+          258,
+          338
+        ],
+        "stamp_knob": [
+          240,
+          220
+        ],
+        "stamp_base": [
+          300,
+          365
+        ],
+        "shoulder_left": [
+          417,
+          207
+        ],
+        "elbow_left": [
+          460,
+          315
+        ],
+        "hand_left": [
+          380,
+          264
+        ],
+        "hip_center": [
+          324,
+          425
+        ],
+        "skirt_hem_center": [
+          327,
+          585
+        ],
+        "foot_screen_left": [
+          244,
+          776
+        ],
+        "foot_screen_right": [
+          405,
+          777
+        ]
+      }
+    },
+    {
+      "id": "bridge1",
+      "role": "transition",
+      "file": "assets/sprite-sources/buergeramt/gaussian-arcs/archivbotin-bridge1.webp",
+      "source_file": "assets/sprite-sources/buergeramt/gaussian-arcs/archivbotin-bridge1-source.png",
+      "source_sha256": "91bd4d9c885742be93beea60f7b0a6c8b34aa107dd66dfb7e92f3f9696709216",
+      "uniform_scale": 0.54,
+      "translation_xy": [
+        50,
+        10
+      ],
+      "landmarks": {
+        "eye_right": [
+          309,
+          104
+        ],
+        "eye_left": [
+          345,
+          104
+        ],
+        "nose": [
+          328,
+          123
+        ],
+        "chin": [
+          329,
+          147
+        ],
+        "shoulder_right": [
+          247,
+          190
+        ],
+        "elbow_right": [
+          192,
+          305
+        ],
+        "grip_right": [
+          270,
+          318
+        ],
+        "stamp_knob": [
+          237,
+          220
+        ],
+        "stamp_base": [
+          293,
+          368
+        ],
+        "shoulder_left": [
+          410,
+          192
+        ],
+        "elbow_left": [
+          444,
+          316
+        ],
+        "hand_left": [
+          405,
+          330
+        ],
+        "hip_center": [
+          330,
+          427
+        ],
+        "skirt_hem_center": [
+          332,
+          585
+        ],
+        "foot_screen_left": [
+          244,
+          776
+        ],
+        "foot_screen_right": [
+          412,
+          776
+        ]
+      }
+    },
+    {
+      "id": "bridge2",
+      "role": "transition",
+      "file": "assets/sprite-sources/buergeramt/gaussian-arcs/archivbotin-bridge2.webp",
+      "source_file": "assets/sprite-sources/buergeramt/gaussian-arcs/archivbotin-bridge2-source.png",
+      "source_sha256": "0d187b47b09ff9cc9738d2118fb736c42cd1ea37823cbf0ccfdee523f50d6a89",
+      "uniform_scale": 0.54,
+      "translation_xy": [
+        32,
+        1
+      ],
+      "landmarks": {
+        "eye_right": [
+          307,
+          99
+        ],
+        "eye_left": [
+          341,
+          96
+        ],
+        "nose": [
+          325,
+          117
+        ],
+        "chin": [
+          330,
+          145
+        ],
+        "shoulder_right": [
+          246,
+          187
+        ],
+        "elbow_right": [
+          200,
+          316
+        ],
+        "grip_right": [
+          308,
+          285
+        ],
+        "stamp_knob": [
+          250,
+          211
+        ],
+        "stamp_base": [
+          285,
+          377
+        ],
+        "shoulder_left": [
+          407,
+          190
+        ],
+        "elbow_left": [
+          432,
+          322
+        ],
+        "hand_left": [
+          367,
+          330
+        ],
+        "hip_center": [
+          322,
+          420
+        ],
+        "skirt_hem_center": [
+          322,
+          587
+        ],
+        "foot_screen_left": [
+          231,
+          775
+        ],
+        "foot_screen_right": [
+          403,
+          775
+        ]
+      }
+    },
+    {
+      "id": "bridge3",
+      "role": "transition",
+      "file": "assets/sprite-sources/buergeramt/gaussian-arcs/archivbotin-bridge3.webp",
+      "source_file": "assets/sprite-sources/buergeramt/gaussian-arcs/archivbotin-bridge3-source.png",
+      "source_sha256": "273dfeb18bee7b09223806be8fb2bfd5cbbd11a1bef0d329f311b48a573be44c",
+      "uniform_scale": 0.54,
+      "translation_xy": [
+        32,
+        2
+      ],
+      "landmarks": {
+        "eye_right": [
+          309,
+          93
+        ],
+        "eye_left": [
+          339,
+          94
+        ],
+        "nose": [
+          326,
+          114
+        ],
+        "chin": [
+          329,
+          143
+        ],
+        "shoulder_right": [
+          241,
+          183
+        ],
+        "elbow_right": [
+          190,
+          309
+        ],
+        "grip_right": [
+          299,
+          279
+        ],
+        "stamp_knob": [
+          225,
+          196
+        ],
+        "stamp_base": [
+          283,
+          357
+        ],
+        "shoulder_left": [
+          398,
+          182
+        ],
+        "elbow_left": [
+          426,
+          320
+        ],
+        "hand_left": [
+          358,
+          344
+        ],
+        "hip_center": [
+          318,
+          421
+        ],
+        "skirt_hem_center": [
+          323,
+          586
+        ],
+        "foot_screen_left": [
+          230,
+          774
+        ],
+        "foot_screen_right": [
+          414,
+          774
+        ]
+      }
+    },
+    {
+      "id": "gesture",
+      "role": "terminal",
+      "file": "assets/buergeramt/characters/archivbotin-detail.webp",
+      "crop_xywh": [
+        1920,
+        0,
+        640,
+        832
+      ],
+      "landmarks": {
+        "eye_right": [
+          304,
+          100
+        ],
+        "eye_left": [
+          336,
+          98
+        ],
+        "nose": [
+          322,
+          119
+        ],
+        "chin": [
+          329,
+          149
+        ],
+        "shoulder_right": [
+          237,
+          183
+        ],
+        "elbow_right": [
+          184,
+          305
+        ],
+        "grip_right": [
+          290,
+          284
+        ],
+        "stamp_knob": [
+          219,
+          209
+        ],
+        "stamp_base": [
+          273,
+          381
+        ],
+        "shoulder_left": [
+          392,
+          187
+        ],
+        "elbow_left": [
+          422,
+          323
+        ],
+        "hand_left": [
+          351,
+          343
+        ],
+        "hip_center": [
+          321,
+          420
+        ],
+        "skirt_hem_center": [
+          319,
+          583
+        ],
+        "foot_screen_left": [
+          244,
+          777
+        ],
+        "foot_screen_right": [
+          404,
+          775
+        ]
+      }
+    }
+  ],
+  "compatibility": "Open ledger closes and is hugged by anatomical right arm while keys stay in left hand. Book closure changes occlusion; inspect sampled intermediate paint. Matched Gaussian correspondence must be reviewed through ordered playback; no unconstrained whole-body TPS."
+}

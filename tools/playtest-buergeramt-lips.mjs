@@ -2,6 +2,9 @@
 import {createRequire} from 'node:module';
 import {readFileSync,mkdirSync,writeFileSync} from 'node:fs';
 import assert from 'node:assert/strict';
+import {createHash} from 'node:crypto';
+const nativePaint=process.env.PLAYTEST_NATIVE_PAINT==='1';
+const revision=Object.fromEntries(['buergeramt.js','world3d.js','buergeramt-lips.js','buergeramt-gaussian-scene.js','buergeramt-painted-anchor.js'].map(f=>[f,createHash('sha256').update(readFileSync(f)).digest('hex')]));
 const {chromium}=createRequire(import.meta.url)(process.env.PLAYWRIGHT_MODULE||'playwright');
 const output=process.env.PLAYTEST_OUTPUT||'output/lip-motion/review';mkdirSync(output,{recursive:true});
 const browser=await chromium.launch({headless:true,executablePath:process.env.CHROMIUM_PATH,args:['--mute-audio']});
@@ -24,18 +27,35 @@ try{
   try{await page.waitForFunction(()=>window.Germany3D?.ready&&window.BuergeramtLevel?.active&&Germany3D.officeAssetsReady,null,{timeout:90000})}
   catch(error){console.log(await page.evaluate(()=>({level:!!window.BuergeramtLevel,active:window.BuergeramtLevel?.active,renderer:window.Germany3D?.ready,lips:!!window.GermanyAmtLips,status:window.Germany3D?.officeAssetStatus})));throw error}
   console.log(name,'ready');
-  await page.evaluate(()=>{
+  await page.evaluate(nativePaint=>{
    window.lipOriginalCatalog=GermanySimulatorAudioText;window.GermanySimulatorAudioText={...GermanySimulatorAudioText,candidateClip:()=>null};
+   // This fixture checks the atlas fallback; active native Gaussian paint has
+   // its own production-scene fixture. Disable only admission in this context.
+   const nativeCharacters=Object.getOwnPropertyDescriptor(BuergeramtLevel,'characters').get,nativeClerk=Object.getOwnPropertyDescriptor(BuergeramtLevel,'clerkPerformance').get;
+   if(!nativePaint){
+    // A work-mode actor synthesizes its own native work anchor; select the
+    // frozen gesture fallback so a null animation actually prevents admission.
+    Object.defineProperty(BuergeramtLevel,'characters',{get:()=>nativeCharacters().map(a=>({...a,mode:'gesture',animation:null}))});
+    Object.defineProperty(BuergeramtLevel,'clerkPerformance',{get:()=>({...nativeClerk(),animation:null})});
+    Object.defineProperty(BuergeramtLevel,'stationaryAnimations',{get:()=>({})});
+   }else{
+    // Hold native work anchors for this articulation fixture. Natural body
+    // admission and return arcs are covered by the separate scene playtest.
+    const stationary=Object.getOwnPropertyDescriptor(BuergeramtLevel,'stationaryAnimations').get;
+    Object.defineProperty(BuergeramtLevel,'stationaryAnimations',{get:()=>Object.fromEntries(Object.entries(stationary()).map(([id,state])=>[id,{...state,arc:null,pose:id.startsWith('clerk-desk')?'ready':'work'}]))});
+    Object.defineProperty(BuergeramtLevel,'clerkPerformance',{get:()=>{const state=nativeClerk();return{...state,animation:{...state.animation,arc:null,pose:'ready',phase:1}}}});
+   }
    window.lipOriginalUpdate=BuergeramtLevel.update;BuergeramtLevel.update=()=>{};__lipProbe.options.voiceOn=()=>true;window.lipFixtureTime=0;window.lipFixtureRenderTime=performance.now();__lipProbe.setStage('character');
    window.lipActorOrigins=__lipProbe.characters.map(a=>({id:a.id,x:a.x,z:a.z}));
-  });
-  const actors=await page.evaluate(()=>[...__lipRender.amtMoving.map(a=>a.id),...__lipRender.amtCharacters.map(a=>a.lipId)]);
+  },nativePaint);
+  const actors=await page.evaluate(()=>[...__lipRender.amtMoving.map(a=>a.id),...__lipRender.amtCharacters.map(a=>a.performance?a.lipId:a.id)]);
+  if(process.env.PLAYTEST_ACTOR)for(let i=actors.length-1;i>=0;i--)if(!process.env.PLAYTEST_ACTOR.split(',').includes(actors[i]))actors.splice(i,1);
   if(process.env.PLAYTEST_OMEN_ONLY)actors.length=0;
   const snapshots=[];let renderCost=null;
   for(const id of actors){
    await page.evaluate(id=>{
     for(const a of __lipProbe.characters){const origin=lipActorOrigins.find(o=>o.id===a.id);a.x=origin.x;a.z=origin.z}
-    const actor=[...__lipRender.amtMoving,...__lipRender.amtCharacters].find(a=>(a.lipId||a.id)===id);
+    const actor=[...__lipRender.amtMoving,...__lipRender.amtCharacters].find(a=>a.id===id||a.lipId===id);
     const state=__lipProbe.characters.find(a=>a.id===id);
     // Present each native actor in an unobstructed fixture lane, away from walls.
     if(state){state.x=0;state.z=1.8;actor.mesh.position.set(0,actor.mesh.position.y,1.8)}
@@ -56,12 +76,18 @@ try{
    await page.evaluate(()=>{lipTestSpeech.onresume?.();window.lipFixtureTime=0;lipTestSpeech.onboundary({charIndex:1});window.lipFixtureTime=35;window.lipFixtureRenderTime+=100;Germany3D.sync();lipTestSpeech.onpause?.()});
    await page.waitForTimeout(120);
    await page.evaluate(()=>{Germany3D.sync();lipTestSpeech.onpause?.();Germany3D.sync()});await page.waitForTimeout(100);
-   const open=await page.evaluate(()=>({speech:BuergeramtLevel.lipSpeech,splat:Germany3D.amtLipSplat,actor:(()=>{const a=[...__lipRender.amtMoving,...__lipRender.amtCharacters].find(a=>(a.lipId||a.id)===BuergeramtLevel.lipSpeech.actor);return{hole:a.mesh.material.userData.lipHole.value,foot:a.mesh.position.y-a.mesh.geometry.parameters.height/2,crop:a.renderKey}})(),memory:Germany3D.inspectAssets().memory}));
+   const open=await page.evaluate(()=>({speech:BuergeramtLevel.lipSpeech,splat:Germany3D.amtLipSplat,actor:(()=>{const a=[...__lipRender.amtMoving,...__lipRender.amtCharacters].find(a=>a.id===BuergeramtLevel.lipSpeech.actor||a.lipId===BuergeramtLevel.lipSpeech.actor);return{hole:a.mesh.material.userData.lipHole.value,foot:a.mesh.position.y-a.mesh.geometry.parameters.height/2,crop:a.renderKey}})(),memory:Germany3D.inspectAssets().memory}));
    assert.equal(open.speech.actor,id);assert.equal(open.speech.paused,true);assert(open.speech.shape[0]>.75);assert.equal(open.splat.kernels,425);assert.equal(open.actor.foot,0);
-   assert.equal(open.splat.visible,true);assert.equal(open.actor.hole,1);assert.equal(open.splat.depthTest,true);
-   if(id===actors[0])renderCost=await page.evaluate(()=>{
+   if(nativePaint){
+    await page.waitForFunction(()=>{Germany3D.sync();return Germany3D.amtGaussian.actors.some(a=>a.anchor?.visible&&a.anchor.lipShape[0]>.75)},null,{timeout:90000}).catch(async error=>{writeFileSync(`${output}/${name}-${id}-failure.json`,JSON.stringify(await page.evaluate(()=>({speech:BuergeramtLevel.lipSpeech,gaussian:Germany3D.amtGaussian,clerk:BuergeramtLevel.clerkPerformance,view:BuergeramtLevel.view})),null,2));throw error});
+    open.gaussian=await page.evaluate(()=>Germany3D.amtGaussian);open.splat=await page.evaluate(()=>Germany3D.amtLipSplat);assert.equal(open.splat.visible,false);
+   }else{assert.equal(open.splat.visible,true);assert.equal(open.actor.hole,1);assert.equal(open.splat.depthTest,true);assert.equal(open.splat.layer,2,'mouth shares the final actor pass')}
+   if(!nativePaint&&id===actors[0])renderCost=await page.evaluate(()=>{
     const a=__lipRender.amtMoving.find(a=>a.id===BuergeramtLevel.lipSpeech.actor),patch=a.mesh.children.find(m=>m.geometry?.instanceCount===425);
-    const sample=()=>{const times=[];for(let n=0;n<30;n++){const at=performance.now();__lipRender.renderer.render(__lipRender.scene,__lipRender.camera);times.push(performance.now()-at)}times.sort((a,b)=>a-b);return{p50Ms:times[15],p95Ms:times[28],calls:__lipRender.renderer.info.render.calls,triangles:__lipRender.renderer.info.render.triangles,memory:{...__lipRender.renderer.info.memory}}};
+    const sample=()=>{const times=[];for(let n=0;n<30;n++){const at=performance.now(),r=__lipRender.renderer,s=__lipRender.scene,c=__lipRender.camera;
+     r.render(s,c);const background=s.background;s.background=null;r.autoClear=false;c.layers.set(1);
+     try{r.render(s,c)}finally{c.layers.set(0);r.autoClear=true;s.background=background}
+     times.push(performance.now()-at)}times.sort((a,b)=>a-b);return{p50Ms:times[15],p95Ms:times[28],calls:__lipRender.renderer.info.render.calls,triangles:__lipRender.renderer.info.render.triangles,memory:{...__lipRender.renderer.info.memory}}};
     const active=sample();patch.visible=false;a.mesh.material.userData.lipHole.value=0;const baseline=sample();patch.visible=true;a.mesh.material.userData.lipHole.value=1;
     return{active,baseline,scope:'same frozen production scene, CPU submission only; GPU timing unavailable'};
    });
@@ -69,16 +95,24 @@ try{
    await page.evaluate(()=>{lipTestSpeech.onresume?.();lipTestSpeech.onboundary({charIndex:5});window.lipFixtureTime+=35;window.lipFixtureRenderTime+=100;Germany3D.sync();lipTestSpeech.onpause?.()});await page.waitForTimeout(120);
    await page.evaluate(()=>{Germany3D.sync();lipTestSpeech.onpause?.();Germany3D.sync()});
    const bite=await page.evaluate(()=>BuergeramtLevel.lipSpeech);assert(bite.shape[3]>.75);
+   if(nativePaint)assert(await page.evaluate(()=>Germany3D.amtGaussian.actors.some(a=>a.anchor?.visible&&a.anchor.lipShape[3]>.75)));
    await page.screenshot({path:`${output}/${name}-${id}-bite.png`});
    await page.evaluate(()=>{lipTestSpeech.onresume?.();lipTestSpeech.onboundary({charIndex:10});window.lipFixtureTime+=35;window.lipFixtureRenderTime+=100;Germany3D.sync();lipTestSpeech.onpause?.()});await page.waitForTimeout(120);
    await page.evaluate(()=>{Germany3D.sync();lipTestSpeech.onpause?.();Germany3D.sync()});
    const round=await page.evaluate(()=>BuergeramtLevel.lipSpeech);assert(round.shape[2]>.75);
+   if(nativePaint)assert(await page.evaluate(()=>Germany3D.amtGaussian.actors.some(a=>a.anchor?.visible&&a.anchor.lipShape[2]>.75)));
    await page.screenshot({path:`${output}/${name}-${id}-round.png`});
    await page.evaluate(()=>{lipTestSpeech.onend?.();Germany3D.sync()});
    const closed=await page.evaluate(()=>Germany3D.amtLipSplat);assert.equal(closed.visible,false);assert.equal(closed.actor,null);
    await page.screenshot({path:`${output}/${name}-${id}-closed.png`});
    snapshots.push({id,open,bite,round,closed});
    console.log(name,id,'PASS');
+  }
+  if(nativePaint){
+   await page.evaluate(()=>{BuergeramtLevel.update=lipOriginalUpdate;document.getElementById('amt-leave').click();Germany3D.sync()});
+   assert.equal(await page.evaluate(()=>Germany3D.amtGaussian.actors.length),0);assert.deepEqual(errors,[]);
+   reports.push({name,nativePaint,silent:true,physicalAndroid:false,forcedDialogue:true,stationaryWorkAnchors:true,revision,snapshots,errors,warnings});
+   await context.close();writeFileSync(`${output}/results.json`,JSON.stringify(reports,null,2));console.log(JSON.stringify({name,result:'PASS',nativePaint,actors:actors.length,errors}));continue;
   }
   // Native MP3 plays normally: do not seek or substitute a wall clock.
   const nativeWindow={start:await page.evaluate(()=>performance.now()/1000)};
@@ -130,14 +164,14 @@ try{
   }
   writeFileSync(`${output}/${name}-omen-diagnostics.json`,JSON.stringify(omenFrames,null,2));
   if(name==='asset-failure')assert(omenFrames.every(f=>f.paint.visible&&!f.volume.ready&&f.volume.skipped));
-  else assert(omenFrames.every(f=>f.volume.visible&&f.volume.mouthKernels===1&&f.volume.activeSplats>0));
+  else assert(omenFrames.every(f=>f.volume.visible&&f.volume.mouthSplats===96&&f.volume.activeSplats>0));
   await page.evaluate(()=>{__lipProbe.cancelSpeech();Germany3D.sync()});
   await page.evaluate(()=>{BuergeramtLevel.update=lipOriginalUpdate});
   await page.locator('#amt-leave').evaluate(n=>n.click());
   await page.waitForFunction(()=>{if(BuergeramtLevel.active)return false;Germany3D.sync();return Germany3D.amtLipSplat===null},null,{timeout:15000});
   assert.equal(await page.evaluate(()=>Germany3D.amtLipSplat),null);
   assert.deepEqual(errors,[]);assert.deepEqual(warnings.filter(w=>/Shader Error|VALIDATE_STATUS|GL_INVALID/.test(w)),[]);
-  reports.push({name,silent:true,physicalAndroid:false,forcedDialogue:true,snapshots,mediaTrace,nativeWindow,occlusion,omenFrames,renderCost,errors,warnings});
+  reports.push({name,silent:true,physicalAndroid:false,forcedDialogue:true,revision,snapshots,mediaTrace,nativeWindow,occlusion,omenFrames,renderCost,errors,warnings});
   const video=page.video();await context.close();if(video)await video.saveAs(`${output}/${name}-motion.webm`);
   writeFileSync(`${output}/results.json`,JSON.stringify(reports,null,2));console.log(JSON.stringify({name,result:'PASS',actors:actors.length,errors}));
  }

@@ -12,8 +12,7 @@ const stepToGlare=h=>{stepToBlackout(h);h.tick(6000);assert.equal(h.level.omen.p
 const finishOmen=h=>{
  if(h.level.omen.phase==='approach')stepToBlackout(h);
  if(h.level.omen.phase==='blackout')h.tick(6000);
- for(let i=0;i<30&&h.level.omen.phase==='glare';i++)h.level.update(.05);
- for(let i=0;i<10&&h.level.omen.phase==='recover';i++)h.level.update(.05);
+ for(let i=0;i<300&&h.level.omen.phase;i++)h.level.update(.05);
  assert.equal(h.level.omen.phase,'');
 };
 const flushPromises=async()=>{for(let i=0;i<8;i++)await Promise.resolve()};
@@ -24,10 +23,10 @@ test('the approach pauses the queue and player, grows with distance, and waits u
  assert.notEqual(h.node('amt-line').textContent,verse);
  const board=h.level.queueDisplay,position=h.level.view;
  h.key('KeyW');
- let previousDistance=distance(h),previousStrength=h.level.omen.strength,progressed=false;
+ const initialDistance=distance(h);let previousDistance=initialDistance,previousStrength=h.level.omen.strength,progressed=false;
  for(let i=0;i<300&&h.level.omen.phase==='approach';i++){
   h.level.update(.05);const nextDistance=distance(h),nextStrength=h.level.omen.strength;
-  assert.ok(nextDistance<=previousDistance+1e-6,'the courier moves toward the player');
+  assert.ok(Number.isFinite(nextDistance),'the body-clear approach remains finite');
   assert.ok(nextStrength>=previousStrength-1e-6,'darkness never recedes during approach');
   assert.equal(h.level.queueDisplay,board);assert.equal(h.level.view.x,position.x);assert.equal(h.level.view.z,position.z);
   if(h.level.omen.phase==='approach')assert.notEqual(h.node('amt-line').textContent,verse);
@@ -35,34 +34,39 @@ test('the approach pauses the queue and player, grows with distance, and waits u
   previousDistance=nextDistance;previousStrength=nextStrength;
  }
  h.key('KeyW','keyup');
- assert.ok(progressed);assert.equal(h.level.omen.phase,'blackout');
+ assert.ok(progressed);assert(distance(h)<initialDistance,'the full route approaches the player');assert.equal(h.level.omen.phase,'blackout');
  assert.equal(h.level.omen.strength,1);assert.equal(h.node('amt-line').textContent,verse);
  assert.equal(h.level.queueDisplay,board);
 });
 
-test('the payoff holds for the line, releases abruptly, and returns camera, queue and walking',()=>{
+test('speech completion holds the threat, unwinds depth, turns planted and retreats before restoring control',()=>{
  const h=harness('host',{cinematics:true});h.enterUntilOmen();stepToBlackout(h);
- const board=h.level.queueDisplay;h.advanceGame(4);assert.equal(h.level.queueDisplay,board);
- assert.equal(h.level.omen.strength,1);h.tick(6000);assert.equal(h.level.omen.phase,'glare');
- h.advanceGame(.65);assert.equal(h.level.omen.phase,'glare');assert.equal(h.level.omen.strength,1);
- h.advanceGame(.1);assert.equal(h.level.omen.phase,'recover');assert.equal(h.level.omen.strength,0);
- assert.equal(h.level.stage,'walk-sign');assert.equal(h.document.body.classList.contains('amt-omen'),false);
- const actorAtRelease=h.level.omen;h.advanceGame(.3);assert.equal(h.level.omen.phase,'');
- assert.ok(Math.abs(h.level.view.yaw)<.01);h.advanceGame(4);
- assert.notEqual(h.level.queueDisplay,board);
- assert.ok(Math.hypot(h.level.omen.x-actorAtRelease.x,h.level.omen.z-actorAtRelease.z)>.05,'courier returns to his route');
+ const board=h.level.queueDisplay,arrival=h.level.omen;
+ h.tick(6000);h.advanceGame(3.3);assert.equal(h.level.omen.phase,'glare');assert.equal(h.level.omen.life.depth,1);
+ h.advanceGame(.2);assert.equal(h.level.omen.phase,'unwind');h.advanceGame(.8);
+ assert(h.level.omen.life.depth>0&&h.level.omen.life.depth<1);assert.equal(h.level.omen.life.opacity,1);assert.equal(h.level.omen.life.motion,0);
+ h.advanceGame(1.1);assert.equal(h.level.omen.phase,'turn');const root=h.level.omen;
+ const stride=h.level.characters[0].phase;h.advanceGame(.7);
+ assert.equal(h.level.characters[0].direction,'right');assert.equal(h.level.characters[0].mode,'turn');
+ assert.equal(h.level.omen.x,root.x);assert.equal(h.level.omen.z,root.z);assert.equal(h.level.characters[0].phase,stride);
+ h.advanceGame(1.4);assert.equal(h.level.omen.phase,'turn');assert.equal(h.level.characters[0].direction,'up');h.advanceGame(.5);
+ assert.equal(h.level.omen.phase,'depart');assert.equal(h.level.queueDisplay,board);assert.equal(h.level.stage,'omen');
+ h.advanceGame(2);assert(Math.hypot(h.level.omen.x-arrival.x,h.level.omen.z-arrival.z)>.1);
+ assert.equal(h.level.omen.life.isolation,1);finishOmen(h);
+ assert.equal(h.level.stage,'walk-sign');assert.equal(h.level.omen.strength,0);assert.equal(h.level.omen.life.isolation,0);
+ assert.ok(Math.abs(h.level.view.yaw)<.01);h.advanceGame(4);assert.notEqual(h.level.queueDisplay,board);
 });
 
 test('a scan and name registration survive approach, blackout, glare, and camera recovery',()=>{
- for(const phase of ['approach','blackout','glare','recover']){
+ for(const phase of ['approach','blackout','glare','unwind','turn','depart','recover']){
   const h=harness('host',{cinematics:true});h.enterUntilOmen();
   if(phase==='blackout')stepToBlackout(h);
-  if(phase==='glare'||phase==='recover')stepToGlare(h);
-  if(phase==='recover'){h.advanceGame(.75);assert.equal(h.level.omen.phase,'recover')}
+  if(!['approach','blackout'].includes(phase))stepToGlare(h);
+  for(let i=0;i<500&&h.level.omen.phase!==phase;i++)h.level.update(.025);
   assert.equal(h.level.omen.phase,phase);
   const link=h.links[0];link.message({type:'scan',id:'a'.repeat(24)});
   assert.equal(h.level.activated,true);assert.equal(link.sent.at(-1).type,'ticket');
-  assert.equal(h.level.stage,phase==='recover'?'waiting':'omen');
+  assert.equal(h.level.stage,'omen');
   link.message({type:'register',name:'Erika Mustermann'});
   assert.equal(h.level.registeredName,'Erika Mustermann');
   finishOmen(h);assert.equal(h.level.stage,'waiting');assert.equal(h.level.activated,true);
@@ -75,7 +79,7 @@ test('phone forfeiture during the omen cancels it and cannot return to waiting',
  const link=h.links[0];link.message({type:'scan',id:'a'.repeat(24)});link.message({type:'phone-hidden'});
  assert.equal(h.level.stage,'expired');assert.equal(h.level.activated,false);
  assert.equal(h.level.omen.phase,'');assert.equal(h.level.omen.strength,0);
- h.tick(10000);h.advanceGame(10);assert.equal(h.level.stage,'expired');
+ h.elapse(20);assert.equal(h.level.stage,'expired');h.action();assert.equal(h.level.stage,'walk-sign');assert.equal(h.level.activated,false);assert.equal(h.level.omen.phase,'');
 });
 
 test('exit and replay cancel pending omen callbacks',()=>{
@@ -91,7 +95,7 @@ test('exit and replay cancel pending omen callbacks',()=>{
 
 test('city foreground audio defers the omen until it clears',()=>{
  let cityBusy=true;const h=harness('host',{cinematics:true,cityAudioBusy:()=>cityBusy,fakeAudio:true});
- h.enter();h.advanceGame(9);assert.equal(h.level.stage,'walk-sign');assert.equal(h.level.omen.phase,'');
+ h.enter();h.key('KeyE');h.advanceGame(9);assert.equal(h.level.stage,'walk-sign');assert.equal(h.level.omen.phase,'');
  assert.equal(h.audio.contexts.length,0);
  cityBusy=false;
  for(let i=0;i<100&&h.level.stage!=='omen';i++)h.level.update(.05);
@@ -110,15 +114,15 @@ test('late decoding after scene cancellation cannot start omen stems',async()=>{
  assert.equal(h.level.stage,'closed');
 });
 
-test('decoded stems and fallback oscillators stop on the abrupt release',async()=>{
+test('decoded stems and fallback oscillators stop after the shared gradual unwind',async()=>{
  const h=harness('host',{cinematics:true,fakeAudio:true});h.enterUntilOmen();await flushPromises();
  assert.equal(h.audio.pendingDecodes.length,2);h.audio.resolveDecodes();await flushPromises();
  const stems=h.audio.nodes.filter(node=>node.kind==='buffer-source'&&node.loop&&node.started.length);
  assert.equal(stems.length,2);assert.ok(stems.every(node=>node.stopped[0]<=24));
  const fallback=h.audio.nodes.filter(node=>node.kind==='oscillator'&&[63.7,64.4,95.35,191.1].includes(node.frequency.value));
  assert.equal(fallback.length,4);assert.ok(fallback.every(node=>node.started.length===1));
- stepToGlare(h);h.advanceGame(.75);
- assert.equal(h.level.omen.strength,0);
+ stepToGlare(h);h.advanceGame(5.3);
+ assert.equal(h.level.omen.life.pressure,0);
  assert.ok([...stems,...fallback].every(node=>node.stopped.length>=2&&node.stopped.at(-1)<node.stopped[0]));
 });
 

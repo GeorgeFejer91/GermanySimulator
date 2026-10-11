@@ -34,6 +34,11 @@ window.BuergeramtStory=Object.freeze({
    {line:"Auf der Rückseite steht endlich ein Satz. Leider ist er nicht unterschrieben, also bleibt er vorläufig ein Geräusch.",tone:"relief",valence:.24}
   ]}
  },
+ patrons:{
+  "amt-konrad-wohnungszettel":{speaker:"KONRAD WOHNUNGSZETTEL",fullName:"Konrad Wohnungszettel",voiceId:"amt-konrad-wohnungszettel",x:-5.9,z:1.39,lines:[{line:"Ich habe alle Unterlagen dabei. Hoffentlich reicht das.",tone:"dread",valence:-.45}]},
+  "amt-mechthild-elternbogen":{speaker:"MECHTHILD ELTERNBOGEN",fullName:"Mechthild Elternbogen",voiceId:"amt-mechthild-elternbogen",x:5.5,z:1.39,lines:[{line:"Ich warte auf die Bestätigung für mein Kind.",tone:"procedural",valence:0}]},
+  "amt-wolfram-rentenbescheid":{speaker:"WOLFRAM RENTENBESCHEID",fullName:"Wolfram Rentenbescheid",voiceId:"amt-wolfram-rentenbescheid",x:1.7,z:-1.39,lines:[{line:"Mein Bescheid ist seit drei Wochen unterwegs.",tone:"warning",valence:-.45}]}
+ },
  clerkIdentity:{speaker:"SACHBEARBEITERIN FRAU KNICK",fullName:"Brunhilde Knick",voiceId:"amt-brunhilde-knick"},
  omen:{speaker:"DER AKTENKURIER",line:"Wer die Finsternis sieht, hat sie selbst gewählt!",delivery:{rate:.82,pitch:.72,contour:[
   {word:"Wer",tension:.12,semitones:1},{word:"Finsternis",tension:.55,semitones:.5},

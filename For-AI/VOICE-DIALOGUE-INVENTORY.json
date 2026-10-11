@@ -17,19 +17,19 @@
     {
       "voiceId": "amt-konrad-wohnungszettel",
       "sourcePools": [
-        "world3d.js amtCharacter(\"renter\") static figure; no authored dialogue"
+        "buergeramt-story.js patrons.amt-konrad-wohnungszettel.lines[0]"
       ]
     },
     {
       "voiceId": "amt-mechthild-elternbogen",
       "sourcePools": [
-        "world3d.js amtCharacter(\"parent\") static figure; no authored dialogue"
+        "buergeramt-story.js patrons.amt-mechthild-elternbogen.lines[0]"
       ]
     },
     {
       "voiceId": "amt-wolfram-rentenbescheid",
       "sourcePools": [
-        "world3d.js amtCharacter(\"pensioner\") static figure; no authored dialogue"
+        "buergeramt-story.js patrons.amt-wolfram-rentenbescheid.lines[0]"
       ]
     },
     {
@@ -1121,6 +1121,50 @@
         "SIE DROHEN MEINEM SCHALTER? DANN VERHAFTEN SIE DOCH DEN LOCHER! Ich lasse mich von Ihnen nicht anschreien!",
         "UND SIE STEHEN HIER NICHT SO UNSCHULDIG! Der Stempel bleibt oben! Ihr Termin ist ANNULLIERT! Raus! Für einen neuen Versuch ziehen Sie draußen eine neue Nummer."
       ]
+    },
+    "buergeramtPatrons": {
+      "amt-konrad-wohnungszettel": {
+        "speaker": "KONRAD WOHNUNGSZETTEL",
+        "fullName": "Konrad Wohnungszettel",
+        "voiceId": "amt-konrad-wohnungszettel",
+        "x": -5.9,
+        "z": 1.39,
+        "lines": [
+          {
+            "line": "Ich habe alle Unterlagen dabei. Hoffentlich reicht das.",
+            "tone": "dread",
+            "valence": -0.45
+          }
+        ]
+      },
+      "amt-mechthild-elternbogen": {
+        "speaker": "MECHTHILD ELTERNBOGEN",
+        "fullName": "Mechthild Elternbogen",
+        "voiceId": "amt-mechthild-elternbogen",
+        "x": 5.5,
+        "z": 1.39,
+        "lines": [
+          {
+            "line": "Ich warte auf die Bestätigung für mein Kind.",
+            "tone": "procedural",
+            "valence": 0
+          }
+        ]
+      },
+      "amt-wolfram-rentenbescheid": {
+        "speaker": "WOLFRAM RENTENBESCHEID",
+        "fullName": "Wolfram Rentenbescheid",
+        "voiceId": "amt-wolfram-rentenbescheid",
+        "x": 1.7,
+        "z": -1.39,
+        "lines": [
+          {
+            "line": "Mein Bescheid ist seit drei Wochen unterwegs.",
+            "tone": "warning",
+            "valence": -0.45
+          }
+        ]
+      }
     }
   }
 }

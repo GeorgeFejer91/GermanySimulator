@@ -4,6 +4,11 @@ import {harness} from './amt-harness.mjs';
 
 function finish(h,option){h.links[0].message({type:'silence',id:'grass'});h.action();let count=0;while(h.level.stage!=='success'){assert.equal(h.node('amt-actions').children.length,2);h.action(option);h.action();assert.ok(++count<=60)}return count}
 
+test('registration renders a single caption when speech starts',()=>{
+ const h=harness('host',{voice:true});h.counter();h.links[0].message({type:'silence',id:'grass'});h.action();h.tick(16);
+ assert(h.node('amt-line').textContent.length>0);assert.equal(h.node('amt-ambient').textContent,'');
+});
+
 test('every registration node has two choices and an eventual completion route',()=>{
  const graph=harness().window.BuergeramtStory.registration,reachable=new Set(),queue=[graph.first],canComplete=new Set();
  while(queue.length){const id=queue.pop();if(reachable.has(id))continue;reachable.add(id);const node=graph.nodes[id];assert.equal(node.choices.length,2);for(const choice of node.choices){assert.ok(choice.next==='complete'||graph.nodes[choice.next]);if(choice.next!=='complete')queue.push(choice.next)}}

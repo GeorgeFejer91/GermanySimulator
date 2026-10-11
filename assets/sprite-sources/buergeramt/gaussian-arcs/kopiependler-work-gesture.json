@@ -1,0 +1,973 @@
+{
+  "version": 1,
+  "id": "kopiependler",
+  "canvas_xy": [
+    640,
+    832
+  ],
+  "source_authority": "assets/buergeramt/characters/kopiependler-detail.webp",
+  "source_sha256": "92d5e4a4adbf6fc8b824131abcd9cf6d842f2bf13b7cf66ef45c8b122065e5e3",
+  "event_owner": "buergeramt.js dialogue gesture; work/look/flinch and walking remain existing controllers",
+  "prop_ownership": {
+    "type": "rigid_bicycle_helmet",
+    "owner": "belt_hanger_until_bridge1_then_anatomical_right_hand",
+    "secondary": "paper_stack_in_anatomical_left_arm"
+  },
+  "landmark_note": "Native 640x832 visual reading; anatomical right is screen-left. stamp_knob/base mark the top and bottom of one bicycle helmet; right hand takes its strap from the right hip. Common shoe baseline; source resolution classes are registered with fixed scales.",
+  "arcs": [
+    {
+      "id": "work-gesture",
+      "from": "work",
+      "to": "gesture",
+      "duration": 2.0,
+      "keys": [
+        {
+          "state": "work",
+          "time": 0
+        },
+        {
+          "state": "bridge1",
+          "time": 0.4
+        },
+        {
+          "state": "bridge2",
+          "time": 0.95
+        },
+        {
+          "state": "bridge3",
+          "time": 1.5
+        },
+        {
+          "state": "gesture",
+          "time": 2.0
+        }
+      ],
+      "reverse": "Traverse the same keys and matched Gaussian segments backwards over 2.0s, with no new paintings or holds."
+    }
+  ],
+  "states": [
+    {
+      "id": "work",
+      "role": "main",
+      "file": "assets/buergeramt/characters/kopiependler-detail.webp",
+      "crop_xywh": [
+        0,
+        0,
+        640,
+        832
+      ],
+      "landmarks": {
+        "eye_right": [
+          334,
+          111
+        ],
+        "eye_left": [
+          366,
+          111
+        ],
+        "nose": [
+          349,
+          130
+        ],
+        "chin": [
+          350,
+          158
+        ],
+        "shoulder_right": [
+          254,
+          195
+        ],
+        "elbow_right": [
+          199,
+          294
+        ],
+        "grip_right": [
+          277,
+          234
+        ],
+        "stamp_knob": [
+          385,
+          360
+        ],
+        "stamp_base": [
+          392,
+          446
+        ],
+        "shoulder_left": [
+          414,
+          205
+        ],
+        "elbow_left": [
+          447,
+          309
+        ],
+        "hand_left": [
+          319,
+          311
+        ],
+        "hip_center": [
+          321,
+          445
+        ],
+        "skirt_hem_center": [
+          318,
+          424
+        ],
+        "foot_screen_left": [
+          247,
+          775
+        ],
+        "foot_screen_right": [
+          402,
+          773
+        ]
+      },
+      "paper_polygon_xy": [
+        [
+          273,
+          214
+        ],
+        [
+          302,
+          211
+        ],
+        [
+          420,
+          227
+        ],
+        [
+          426,
+          247
+        ],
+        [
+          412,
+          377
+        ],
+        [
+          273,
+          377
+        ],
+        [
+          271,
+          349
+        ],
+        [
+          281,
+          306
+        ]
+      ],
+      "paper_landmarks_xy": [
+        [
+          350,
+          294
+        ],
+        [
+          278,
+          217
+        ],
+        [
+          419,
+          231
+        ],
+        [
+          331,
+          374
+        ]
+      ],
+      "prop_polygon_xy": [
+        [
+          367,
+          353
+        ],
+        [
+          410,
+          349
+        ],
+        [
+          438,
+          380
+        ],
+        [
+          440,
+          420
+        ],
+        [
+          414,
+          452
+        ],
+        [
+          373,
+          452
+        ],
+        [
+          345,
+          423
+        ],
+        [
+          347,
+          385
+        ]
+      ],
+      "prop_landmarks_xy": [
+        [
+          369,
+          362
+        ],
+        [
+          385,
+          360
+        ],
+        [
+          393,
+          399
+        ],
+        [
+          393,
+          447
+        ]
+      ]
+    },
+    {
+      "id": "bridge1",
+      "role": "transition",
+      "file": "assets/sprite-sources/buergeramt/gaussian-arcs/kopiependler-bridge1.webp",
+      "source_file": "assets/sprite-sources/buergeramt/gaussian-arcs/kopiependler-bridge1-source.png",
+      "source_sha256": "eeeee7f652810d2190bb30f928f991da92cb36bf786bd46cba70ba74739adb62",
+      "uniform_scale": 0.54,
+      "translation_xy": [
+        39,
+        18
+      ],
+      "landmarks": {
+        "eye_right": [
+          309,
+          114
+        ],
+        "eye_left": [
+          341,
+          113
+        ],
+        "nose": [
+          325,
+          136
+        ],
+        "chin": [
+          329,
+          162
+        ],
+        "shoulder_right": [
+          249,
+          207
+        ],
+        "elbow_right": [
+          209,
+          320
+        ],
+        "grip_right": [
+          312,
+          355
+        ],
+        "stamp_knob": [
+          387,
+          355
+        ],
+        "stamp_base": [
+          397,
+          453
+        ],
+        "shoulder_left": [
+          411,
+          212
+        ],
+        "elbow_left": [
+          445,
+          318
+        ],
+        "hand_left": [
+          339,
+          299
+        ],
+        "hip_center": [
+          320,
+          446
+        ],
+        "skirt_hem_center": [
+          320,
+          413
+        ],
+        "foot_screen_left": [
+          239,
+          776
+        ],
+        "foot_screen_right": [
+          399,
+          772
+        ]
+      },
+      "paper_polygon_xy": [
+        [
+          303,
+          222
+        ],
+        [
+          420,
+          217
+        ],
+        [
+          435,
+          251
+        ],
+        [
+          426,
+          361
+        ],
+        [
+          323,
+          367
+        ],
+        [
+          301,
+          345
+        ],
+        [
+          304,
+          287
+        ]
+      ],
+      "paper_landmarks_xy": [
+        [
+          363,
+          293
+        ],
+        [
+          308,
+          226
+        ],
+        [
+          422,
+          222
+        ],
+        [
+          369,
+          362
+        ]
+      ],
+      "prop_polygon_xy": [
+        [
+          367,
+          348
+        ],
+        [
+          412,
+          347
+        ],
+        [
+          441,
+          378
+        ],
+        [
+          443,
+          421
+        ],
+        [
+          416,
+          457
+        ],
+        [
+          371,
+          457
+        ],
+        [
+          346,
+          420
+        ],
+        [
+          351,
+          381
+        ]
+      ],
+      "prop_landmarks_xy": [
+        [
+          320,
+          362
+        ],
+        [
+          389,
+          356
+        ],
+        [
+          397,
+          403
+        ],
+        [
+          397,
+          455
+        ]
+      ]
+    },
+    {
+      "id": "bridge2",
+      "role": "transition",
+      "file": "assets/sprite-sources/buergeramt/gaussian-arcs/kopiependler-bridge2.webp",
+      "source_file": "assets/sprite-sources/buergeramt/gaussian-arcs/kopiependler-bridge2-source.png",
+      "source_sha256": "479ecaa283ea1d1b97588d318645b9e628a50504456924d9c339a70751e713fa",
+      "uniform_scale": 0.54,
+      "translation_xy": [
+        33,
+        12
+      ],
+      "landmarks": {
+        "eye_right": [
+          280,
+          99
+        ],
+        "eye_left": [
+          312,
+          98
+        ],
+        "nose": [
+          293,
+          123
+        ],
+        "chin": [
+          298,
+          150
+        ],
+        "shoulder_right": [
+          245,
+          200
+        ],
+        "elbow_right": [
+          225,
+          330
+        ],
+        "grip_right": [
+          320,
+          384
+        ],
+        "stamp_knob": [
+          325,
+          438
+        ],
+        "stamp_base": [
+          329,
+          552
+        ],
+        "shoulder_left": [
+          417,
+          209
+        ],
+        "elbow_left": [
+          459,
+          297
+        ],
+        "hand_left": [
+          356,
+          309
+        ],
+        "hip_center": [
+          329,
+          445
+        ],
+        "skirt_hem_center": [
+          328,
+          406
+        ],
+        "foot_screen_left": [
+          168,
+          771
+        ],
+        "foot_screen_right": [
+          468,
+          771
+        ]
+      },
+      "paper_polygon_xy": [
+        [
+          306,
+          232
+        ],
+        [
+          381,
+          198
+        ],
+        [
+          424,
+          195
+        ],
+        [
+          434,
+          220
+        ],
+        [
+          466,
+          345
+        ],
+        [
+          450,
+          380
+        ],
+        [
+          368,
+          393
+        ],
+        [
+          326,
+          355
+        ]
+      ],
+      "paper_landmarks_xy": [
+        [
+          386,
+          290
+        ],
+        [
+          311,
+          232
+        ],
+        [
+          425,
+          199
+        ],
+        [
+          415,
+          386
+        ]
+      ],
+      "prop_polygon_xy": [
+        [
+          309,
+          412
+        ],
+        [
+          351,
+          424
+        ],
+        [
+          372,
+          459
+        ],
+        [
+          368,
+          517
+        ],
+        [
+          348,
+          548
+        ],
+        [
+          324,
+          558
+        ],
+        [
+          293,
+          535
+        ],
+        [
+          278,
+          494
+        ],
+        [
+          287,
+          449
+        ]
+      ],
+      "prop_landmarks_xy": [
+        [
+          320,
+          384
+        ],
+        [
+          326,
+          438
+        ],
+        [
+          328,
+          487
+        ],
+        [
+          328,
+          552
+        ]
+      ]
+    },
+    {
+      "id": "bridge3",
+      "role": "transition",
+      "file": "assets/sprite-sources/buergeramt/gaussian-arcs/kopiependler-bridge3.webp",
+      "source_file": "assets/sprite-sources/buergeramt/gaussian-arcs/kopiependler-bridge3-source.png",
+      "source_sha256": "dc12d0637705a7e8f260204e4fe6e82b643295111675119105f714c67a07604e",
+      "uniform_scale": 0.54,
+      "translation_xy": [
+        3,
+        3
+      ],
+      "landmarks": {
+        "eye_right": [
+          238,
+          111
+        ],
+        "eye_left": [
+          266,
+          110
+        ],
+        "nose": [
+          253,
+          136
+        ],
+        "chin": [
+          256,
+          161
+        ],
+        "shoulder_right": [
+          209,
+          210
+        ],
+        "elbow_right": [
+          205,
+          370
+        ],
+        "grip_right": [
+          256,
+          443
+        ],
+        "stamp_knob": [
+          253,
+          489
+        ],
+        "stamp_base": [
+          250,
+          620
+        ],
+        "shoulder_left": [
+          384,
+          208
+        ],
+        "elbow_left": [
+          429,
+          291
+        ],
+        "hand_left": [
+          340,
+          316
+        ],
+        "hip_center": [
+          316,
+          455
+        ],
+        "skirt_hem_center": [
+          311,
+          407
+        ],
+        "foot_screen_left": [
+          268,
+          774
+        ],
+        "foot_screen_right": [
+          445,
+          774
+        ]
+      },
+      "paper_polygon_xy": [
+        [
+          268,
+          250
+        ],
+        [
+          351,
+          191
+        ],
+        [
+          388,
+          187
+        ],
+        [
+          403,
+          216
+        ],
+        [
+          441,
+          339
+        ],
+        [
+          416,
+          371
+        ],
+        [
+          354,
+          387
+        ],
+        [
+          302,
+          334
+        ]
+      ],
+      "paper_landmarks_xy": [
+        [
+          363,
+          291
+        ],
+        [
+          272,
+          250
+        ],
+        [
+          387,
+          191
+        ],
+        [
+          397,
+          383
+        ]
+      ],
+      "prop_polygon_xy": [
+        [
+          243,
+          470
+        ],
+        [
+          282,
+          482
+        ],
+        [
+          300,
+          522
+        ],
+        [
+          298,
+          579
+        ],
+        [
+          267,
+          620
+        ],
+        [
+          225,
+          613
+        ],
+        [
+          202,
+          575
+        ],
+        [
+          202,
+          518
+        ]
+      ],
+      "prop_landmarks_xy": [
+        [
+          256,
+          443
+        ],
+        [
+          255,
+          488
+        ],
+        [
+          249,
+          546
+        ],
+        [
+          249,
+          618
+        ]
+      ]
+    },
+    {
+      "id": "gesture",
+      "role": "terminal",
+      "file": "assets/buergeramt/characters/kopiependler-detail.webp",
+      "crop_xywh": [
+        1920,
+        0,
+        640,
+        832
+      ],
+      "landmarks": {
+        "eye_right": [
+          240,
+          151
+        ],
+        "eye_left": [
+          265,
+          151
+        ],
+        "nose": [
+          253,
+          174
+        ],
+        "chin": [
+          258,
+          199
+        ],
+        "shoulder_right": [
+          224,
+          239
+        ],
+        "elbow_right": [
+          200,
+          382
+        ],
+        "grip_right": [
+          251,
+          432
+        ],
+        "stamp_knob": [
+          226,
+          474
+        ],
+        "stamp_base": [
+          228,
+          590
+        ],
+        "shoulder_left": [
+          384,
+          238
+        ],
+        "elbow_left": [
+          430,
+          318
+        ],
+        "hand_left": [
+          339,
+          340
+        ],
+        "hip_center": [
+          313,
+          470
+        ],
+        "skirt_hem_center": [
+          308,
+          425
+        ],
+        "foot_screen_left": [
+          250,
+          771
+        ],
+        "foot_screen_right": [
+          425,
+          762
+        ]
+      },
+      "paper_polygon_xy": [
+        [
+          270,
+          282
+        ],
+        [
+          350,
+          220
+        ],
+        [
+          387,
+          216
+        ],
+        [
+          405,
+          245
+        ],
+        [
+          440,
+          359
+        ],
+        [
+          418,
+          394
+        ],
+        [
+          365,
+          418
+        ],
+        [
+          302,
+          365
+        ]
+      ],
+      "paper_landmarks_xy": [
+        [
+          364,
+          320
+        ],
+        [
+          275,
+          283
+        ],
+        [
+          387,
+          221
+        ],
+        [
+          394,
+          414
+        ]
+      ],
+      "prop_polygon_xy": [
+        [
+          215,
+          456
+        ],
+        [
+          256,
+          468
+        ],
+        [
+          278,
+          507
+        ],
+        [
+          277,
+          551
+        ],
+        [
+          244,
+          589
+        ],
+        [
+          205,
+          587
+        ],
+        [
+          185,
+          555
+        ],
+        [
+          184,
+          507
+        ]
+      ],
+      "prop_landmarks_xy": [
+        [
+          251,
+          432
+        ],
+        [
+          227,
+          473
+        ],
+        [
+          228,
+          526
+        ],
+        [
+          228,
+          588
+        ]
+      ]
+    }
+  ],
+  "compatibility": "One helmet moves from belt at screen-right through center into right-hand grip at screen-left, while left arm retains papers. Exact source endpoint depicts a larger foreground helmet than work; inspect gradual apparent-size growth. Matched Gaussian correspondence must be reviewed through ordered playback; no unconstrained whole-body TPS.",
+  "paper_landmark_order": [
+    "stack_center",
+    "left_top",
+    "right_top",
+    "bottom_center"
+  ],
+  "paper_region_note": "The full visible document stack is a paper-only group, separate from trouser paint. Hands may partly occlude paper; preserve anatomical arm controls.",
+  "prop_landmark_order": [
+    "grip",
+    "top",
+    "center",
+    "bottom"
+  ],
+  "prop_region_note": "Polygons bound the handset, helmet, or bag in native encoded cells. Keep this group separate from leg and coat matching; the ordered controls track grip, upper edge, center and lower edge."
+}

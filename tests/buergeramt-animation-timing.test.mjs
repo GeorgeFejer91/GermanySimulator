@@ -43,7 +43,7 @@ test('dialogue freezes other actor clips and replay clears action phase',()=>{
  const before=h.level.characters.filter(actor=>actor.id!==speaker);
  h.advanceGame(2);
  assert.deepEqual(h.level.characters.filter(actor=>actor.id!==speaker),before);
- h.action();h.advanceGame(.2);
+ h.elapse(15);assert.notEqual(h.level.stage,'character');h.advanceGame(.2);
  assert.ok(h.level.characters.some(actor=>actor.mode==='walk'||actor.phase>0));
  h.level.replay(h.config);
  assert.ok(h.level.characters.every(actor=>actor.mode==='work'&&actor.phase===0&&actor.frame===0));
@@ -69,7 +69,7 @@ for(const dt of [1/60,1/30,.1])test(`a blocked walker keeps its queued reaction 
  assert.equal(actor.pending,false);
  assert.equal(actor.mode,'look','blocked motion must start the queued planted action');
  const modes=new Set(),flinchFrames=new Set();
- for(let elapsed=0;elapsed<1.7;elapsed+=dt){
+ for(let elapsed=0;elapsed<1.7-1e-9;elapsed+=dt){
   const state=level.characters.find(item=>item.id===actor.id);modes.add(state.mode);
   if(state.mode==='flinch')flinchFrames.add(state.frame);
   assert.deepEqual([state.x,state.z],origin,'the blocked reaction never advances its root');

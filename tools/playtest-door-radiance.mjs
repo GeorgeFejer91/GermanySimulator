@@ -27,7 +27,7 @@ try{
   if(!diagnostic){assert.equal(await page.evaluate(()=>Germany3D.inspectAssets().doorRadiance.visible),false);await page.keyboard.press('s');await page.evaluate(()=>{for(let i=0;i<8;i++)document.getElementById('dialogue-next').click()});}
   const before=await page.evaluate(()=>({x:Germany3DBridge.player.x,y:Germany3DBridge.player.y}));
   if(mobile){const b=await page.locator('.control-dock [data-key="ArrowUp"]').boundingBox();assert.ok(b&&b.width>0);const cdp=await context.newCDPSession(page);await cdp.send('Input.dispatchTouchEvent',{type:'touchStart',touchPoints:[{x:b.x+b.width/2,y:b.y+b.height/2}]});await page.waitForTimeout(300);await cdp.send('Input.dispatchTouchEvent',{type:'touchEnd',touchPoints:[]});}
-  else {await page.keyboard.down('ArrowUp');await page.waitForFunction(before=>Math.hypot(Germany3DBridge.player.x-before.x,Germany3DBridge.player.y-before.y)>0,before,{timeout:15000});await page.keyboard.up('ArrowUp');}
+  else {await page.keyboard.down('ArrowUp');await page.waitForTimeout(300);await page.keyboard.up('ArrowUp');}
   const after=await page.evaluate(()=>({x:Germany3DBridge.player.x,y:Germany3DBridge.player.y}));assert.ok(Math.hypot(after.x-before.x,after.y-before.y)>0);
   const pose=await page.evaluate(()=>{const b=Germany3DBridge.buildings.find(b=>b.id==='buergeramt'),p=Germany3DBridge.player;p.x=b.doorX;p.y=b.doorY+200;Germany3D.sync();return{x:p.x,y:p.y}});
   await page.waitForFunction(failure=>{Germany3D.sync();const d=Germany3D.inspectAssets().doorRadiance;return d.visible&&(failure?!d.loaded:!!d.loaded)&&Germany3D.nearbyAssetsReady},failure,{timeout:120000});

@@ -1,0 +1,1151 @@
+{
+  "version": 1,
+  "id": "nachtschichtmelderin",
+  "canvas_xy": [
+    640,
+    832
+  ],
+  "source_authority": "assets/buergeramt/characters/nachtschichtmelderin-detail.webp",
+  "source_sha256": "b4cfe19bc7eafd0259896ca0fa91d27ce81a1de769b5c3071a6f205a7ed4ec2d",
+  "event_owner": "buergeramt.js dialogue gesture; work/look/flinch and walking remain existing controllers",
+  "prop_ownership": {
+    "type": "rigid_phone",
+    "owner": "anatomical_right_hand",
+    "secondary": "document_stack_in_anatomical_left_arm"
+  },
+  "landmark_note": "Native 640x832 visual reading; anatomical right is screen-left. stamp_knob/base mark the phone's top and bottom in anatomical right hand. Common shoe baseline; source resolution classes are registered with fixed scales.",
+  "arcs": [
+    {
+      "id": "work-gesture",
+      "from": "work",
+      "to": "gesture",
+      "duration": 2.0,
+      "keys": [
+        {
+          "state": "work",
+          "time": 0
+        },
+        {
+          "state": "bridge1",
+          "time": 0.4
+        },
+        {
+          "state": "bridge2",
+          "time": 0.95
+        },
+        {
+          "state": "bridge3",
+          "time": 1.5
+        },
+        {
+          "state": "gesture",
+          "time": 2.0
+        }
+      ],
+      "reverse": "Traverse the same keys and matched Gaussian segments backwards over 2.0s, with no new paintings or holds."
+    }
+  ],
+  "states": [
+    {
+      "id": "work",
+      "role": "main",
+      "file": "assets/buergeramt/characters/nachtschichtmelderin-detail.webp",
+      "crop_xywh": [
+        0,
+        0,
+        640,
+        832
+      ],
+      "landmarks": {
+        "eye_right": [
+          306,
+          117
+        ],
+        "eye_left": [
+          329,
+          115
+        ],
+        "nose": [
+          318,
+          136
+        ],
+        "chin": [
+          317,
+          153
+        ],
+        "shoulder_right": [
+          246,
+          194
+        ],
+        "elbow_right": [
+          208,
+          300
+        ],
+        "grip_right": [
+          257,
+          231
+        ],
+        "stamp_knob": [
+          261,
+          209
+        ],
+        "stamp_base": [
+          263,
+          242
+        ],
+        "shoulder_left": [
+          393,
+          197
+        ],
+        "elbow_left": [
+          434,
+          326
+        ],
+        "hand_left": [
+          344,
+          309
+        ],
+        "hip_center": [
+          325,
+          457
+        ],
+        "skirt_hem_center": [
+          316,
+          439
+        ],
+        "foot_screen_left": [
+          236,
+          770
+        ],
+        "foot_screen_right": [
+          409,
+          772
+        ]
+      },
+      "paper_polygon_xy": [
+        [
+          262,
+          253
+        ],
+        [
+          322,
+          251
+        ],
+        [
+          322,
+          218
+        ],
+        [
+          425,
+          217
+        ],
+        [
+          440,
+          239
+        ],
+        [
+          425,
+          385
+        ],
+        [
+          322,
+          385
+        ],
+        [
+          319,
+          327
+        ],
+        [
+          263,
+          325
+        ]
+      ],
+      "paper_landmarks_xy": [
+        [
+          348,
+          300
+        ],
+        [
+          266,
+          257
+        ],
+        [
+          424,
+          220
+        ],
+        [
+          371,
+          384
+        ]
+      ],
+      "arm_polygon_xy": [
+        [
+          232,
+          168
+        ],
+        [
+          271,
+          181
+        ],
+        [
+          280,
+          207
+        ],
+        [
+          274,
+          261
+        ],
+        [
+          238,
+          284
+        ],
+        [
+          222,
+          333
+        ],
+        [
+          193,
+          330
+        ],
+        [
+          188,
+          282
+        ],
+        [
+          204,
+          231
+        ]
+      ],
+      "arm_landmarks_xy": [
+        [
+          246,
+          194
+        ],
+        [
+          208,
+          300
+        ],
+        [
+          257,
+          231
+        ]
+      ],
+      "prop_polygon_xy": [
+        [
+          247,
+          202
+        ],
+        [
+          278,
+          201
+        ],
+        [
+          286,
+          245
+        ],
+        [
+          254,
+          252
+        ]
+      ],
+      "prop_landmarks_xy": [
+        [
+          257,
+          231
+        ],
+        [
+          263,
+          204
+        ],
+        [
+          265,
+          225
+        ],
+        [
+          266,
+          246
+        ]
+      ]
+    },
+    {
+      "id": "bridge1",
+      "role": "transition",
+      "file": "assets/sprite-sources/buergeramt/gaussian-arcs/nachtschichtmelderin-bridge1.webp",
+      "source_file": "assets/sprite-sources/buergeramt/gaussian-arcs/nachtschichtmelderin-bridge1-source.png",
+      "source_sha256": "af44f219fc5ac608a771a2c7d724e2379949a9141b50c52b14b8e1710053fd91",
+      "uniform_scale": 0.8,
+      "translation_xy": [
+        -284,
+        16
+      ],
+      "landmarks": {
+        "eye_right": [
+          310,
+          130
+        ],
+        "eye_left": [
+          339,
+          129
+        ],
+        "nose": [
+          327,
+          151
+        ],
+        "chin": [
+          327,
+          176
+        ],
+        "shoulder_right": [
+          244,
+          204
+        ],
+        "elbow_right": [
+          201,
+          327
+        ],
+        "grip_right": [
+          250,
+          280
+        ],
+        "stamp_knob": [
+          253,
+          250
+        ],
+        "stamp_base": [
+          257,
+          286
+        ],
+        "shoulder_left": [
+          405,
+          215
+        ],
+        "elbow_left": [
+          439,
+          333
+        ],
+        "hand_left": [
+          360,
+          318
+        ],
+        "hip_center": [
+          325,
+          457
+        ],
+        "skirt_hem_center": [
+          316,
+          439
+        ],
+        "foot_screen_left": [
+          236,
+          770
+        ],
+        "foot_screen_right": [
+          409,
+          772
+        ]
+      },
+      "paper_polygon_xy": [
+        [
+          273,
+          278
+        ],
+        [
+          342,
+          277
+        ],
+        [
+          343,
+          235
+        ],
+        [
+          431,
+          232
+        ],
+        [
+          443,
+          253
+        ],
+        [
+          419,
+          399
+        ],
+        [
+          327,
+          397
+        ],
+        [
+          326,
+          346
+        ],
+        [
+          273,
+          346
+        ]
+      ],
+      "paper_landmarks_xy": [
+        [
+          358,
+          312
+        ],
+        [
+          275,
+          283
+        ],
+        [
+          433,
+          235
+        ],
+        [
+          374,
+          395
+        ]
+      ],
+      "arm_polygon_xy": [
+        [
+          226,
+          183
+        ],
+        [
+          262,
+          195
+        ],
+        [
+          269,
+          244
+        ],
+        [
+          279,
+          303
+        ],
+        [
+          270,
+          332
+        ],
+        [
+          230,
+          347
+        ],
+        [
+          187,
+          352
+        ],
+        [
+          182,
+          314
+        ],
+        [
+          197,
+          251
+        ]
+      ],
+      "arm_landmarks_xy": [
+        [
+          244,
+          204
+        ],
+        [
+          201,
+          327
+        ],
+        [
+          250,
+          280
+        ]
+      ],
+      "prop_polygon_xy": [
+        [
+          238,
+          244
+        ],
+        [
+          270,
+          245
+        ],
+        [
+          277,
+          284
+        ],
+        [
+          245,
+          292
+        ]
+      ],
+      "prop_landmarks_xy": [
+        [
+          250,
+          280
+        ],
+        [
+          253,
+          248
+        ],
+        [
+          257,
+          266
+        ],
+        [
+          261,
+          287
+        ]
+      ]
+    },
+    {
+      "id": "bridge2",
+      "role": "transition",
+      "file": "assets/sprite-sources/buergeramt/gaussian-arcs/nachtschichtmelderin-bridge2.webp",
+      "source_file": "assets/sprite-sources/buergeramt/gaussian-arcs/nachtschichtmelderin-bridge2-source.png",
+      "source_sha256": "3b8d4ba7ac59aa7cece34034b48c835cfab42433374f41d862ef1d75b174fe1b",
+      "uniform_scale": 0.535,
+      "translation_xy": [
+        23,
+        10
+      ],
+      "landmarks": {
+        "eye_right": [
+          295,
+          101
+        ],
+        "eye_left": [
+          322,
+          102
+        ],
+        "nose": [
+          311,
+          122
+        ],
+        "chin": [
+          317,
+          146
+        ],
+        "shoulder_right": [
+          253,
+          182
+        ],
+        "elbow_right": [
+          203,
+          310
+        ],
+        "grip_right": [
+          227,
+          342
+        ],
+        "stamp_knob": [
+          252,
+          334
+        ],
+        "stamp_base": [
+          263,
+          359
+        ],
+        "shoulder_left": [
+          388,
+          180
+        ],
+        "elbow_left": [
+          423,
+          312
+        ],
+        "hand_left": [
+          337,
+          277
+        ],
+        "hip_center": [
+          328,
+          443
+        ],
+        "skirt_hem_center": [
+          320,
+          425
+        ],
+        "foot_screen_left": [
+          248,
+          757
+        ],
+        "foot_screen_right": [
+          410,
+          772
+        ]
+      },
+      "paper_polygon_xy": [
+        [
+          311,
+          206
+        ],
+        [
+          398,
+          190
+        ],
+        [
+          416,
+          211
+        ],
+        [
+          413,
+          349
+        ],
+        [
+          323,
+          352
+        ],
+        [
+          315,
+          321
+        ]
+      ],
+      "paper_landmarks_xy": [
+        [
+          365,
+          273
+        ],
+        [
+          315,
+          208
+        ],
+        [
+          405,
+          195
+        ],
+        [
+          370,
+          349
+        ]
+      ],
+      "arm_polygon_xy": [
+        [
+          222,
+          189
+        ],
+        [
+          262,
+          211
+        ],
+        [
+          245,
+          271
+        ],
+        [
+          275,
+          332
+        ],
+        [
+          269,
+          368
+        ],
+        [
+          218,
+          376
+        ],
+        [
+          185,
+          352
+        ],
+        [
+          185,
+          310
+        ],
+        [
+          201,
+          257
+        ]
+      ],
+      "arm_landmarks_xy": [
+        [
+          253,
+          182
+        ],
+        [
+          203,
+          310
+        ],
+        [
+          227,
+          342
+        ]
+      ],
+      "prop_polygon_xy": [
+        [
+          234,
+          326
+        ],
+        [
+          270,
+          328
+        ],
+        [
+          280,
+          362
+        ],
+        [
+          243,
+          368
+        ]
+      ],
+      "prop_landmarks_xy": [
+        [
+          227,
+          342
+        ],
+        [
+          251,
+          332
+        ],
+        [
+          256,
+          348
+        ],
+        [
+          263,
+          363
+        ]
+      ]
+    },
+    {
+      "id": "bridge3",
+      "role": "transition",
+      "file": "assets/sprite-sources/buergeramt/gaussian-arcs/nachtschichtmelderin-bridge3.webp",
+      "source_file": "assets/sprite-sources/buergeramt/gaussian-arcs/nachtschichtmelderin-bridge3-source.png",
+      "source_sha256": "e0cac6126b781e8d17316f7b7f976589ef9f660fbb7bfc6eb7dbcbd8df31bfcc",
+      "uniform_scale": 0.515,
+      "translation_xy": [
+        44,
+        29
+      ],
+      "landmarks": {
+        "eye_right": [
+          291,
+          99
+        ],
+        "eye_left": [
+          320,
+          99
+        ],
+        "nose": [
+          308,
+          120
+        ],
+        "chin": [
+          316,
+          145
+        ],
+        "shoulder_right": [
+          251,
+          201
+        ],
+        "elbow_right": [
+          210,
+          365
+        ],
+        "grip_right": [
+          202,
+          436
+        ],
+        "stamp_knob": [
+          205,
+          447
+        ],
+        "stamp_base": [
+          192,
+          494
+        ],
+        "shoulder_left": [
+          400,
+          174
+        ],
+        "elbow_left": [
+          445,
+          281
+        ],
+        "hand_left": [
+          345,
+          266
+        ],
+        "hip_center": [
+          320,
+          432
+        ],
+        "skirt_hem_center": [
+          325,
+          412
+        ],
+        "foot_screen_left": [
+          253,
+          755
+        ],
+        "foot_screen_right": [
+          408,
+          771
+        ]
+      },
+      "paper_polygon_xy": [
+        [
+          313,
+          207
+        ],
+        [
+          395,
+          180
+        ],
+        [
+          417,
+          199
+        ],
+        [
+          425,
+          338
+        ],
+        [
+          331,
+          344
+        ],
+        [
+          322,
+          306
+        ]
+      ],
+      "paper_landmarks_xy": [
+        [
+          369,
+          263
+        ],
+        [
+          317,
+          209
+        ],
+        [
+          403,
+          185
+        ],
+        [
+          375,
+          340
+        ]
+      ],
+      "arm_polygon_xy": [
+        [
+          235,
+          194
+        ],
+        [
+          272,
+          210
+        ],
+        [
+          260,
+          278
+        ],
+        [
+          232,
+          368
+        ],
+        [
+          228,
+          419
+        ],
+        [
+          181,
+          465
+        ],
+        [
+          171,
+          446
+        ],
+        [
+          192,
+          389
+        ],
+        [
+          201,
+          289
+        ],
+        [
+          203,
+          234
+        ]
+      ],
+      "arm_landmarks_xy": [
+        [
+          251,
+          201
+        ],
+        [
+          210,
+          365
+        ],
+        [
+          202,
+          436
+        ]
+      ],
+      "prop_polygon_xy": [
+        [
+          192,
+          437
+        ],
+        [
+          224,
+          446
+        ],
+        [
+          209,
+          498
+        ],
+        [
+          172,
+          492
+        ]
+      ],
+      "prop_landmarks_xy": [
+        [
+          202,
+          436
+        ],
+        [
+          211,
+          447
+        ],
+        [
+          199,
+          470
+        ],
+        [
+          185,
+          493
+        ]
+      ]
+    },
+    {
+      "id": "gesture",
+      "role": "terminal",
+      "file": "assets/buergeramt/characters/nachtschichtmelderin-detail.webp",
+      "crop_xywh": [
+        1920,
+        0,
+        640,
+        832
+      ],
+      "landmarks": {
+        "eye_right": [
+          293,
+          148
+        ],
+        "eye_left": [
+          324,
+          148
+        ],
+        "nose": [
+          311,
+          166
+        ],
+        "chin": [
+          315,
+          190
+        ],
+        "shoulder_right": [
+          265,
+          230
+        ],
+        "elbow_right": [
+          227,
+          402
+        ],
+        "grip_right": [
+          210,
+          454
+        ],
+        "stamp_knob": [
+          216,
+          451
+        ],
+        "stamp_base": [
+          204,
+          509
+        ],
+        "shoulder_left": [
+          395,
+          223
+        ],
+        "elbow_left": [
+          442,
+          316
+        ],
+        "hand_left": [
+          342,
+          311
+        ],
+        "hip_center": [
+          327,
+          457
+        ],
+        "skirt_hem_center": [
+          329,
+          432
+        ],
+        "foot_screen_left": [
+          270,
+          756
+        ],
+        "foot_screen_right": [
+          404,
+          771
+        ]
+      },
+      "paper_polygon_xy": [
+        [
+          315,
+          241
+        ],
+        [
+          404,
+          219
+        ],
+        [
+          421,
+          236
+        ],
+        [
+          422,
+          374
+        ],
+        [
+          333,
+          378
+        ],
+        [
+          326,
+          334
+        ]
+      ],
+      "paper_landmarks_xy": [
+        [
+          370,
+          298
+        ],
+        [
+          318,
+          242
+        ],
+        [
+          407,
+          224
+        ],
+        [
+          376,
+          374
+        ]
+      ],
+      "arm_polygon_xy": [
+        [
+          239,
+          216
+        ],
+        [
+          274,
+          226
+        ],
+        [
+          269,
+          298
+        ],
+        [
+          243,
+          383
+        ],
+        [
+          239,
+          436
+        ],
+        [
+          189,
+          469
+        ],
+        [
+          181,
+          449
+        ],
+        [
+          203,
+          392
+        ],
+        [
+          205,
+          286
+        ],
+        [
+          212,
+          239
+        ]
+      ],
+      "arm_landmarks_xy": [
+        [
+          265,
+          230
+        ],
+        [
+          227,
+          402
+        ],
+        [
+          210,
+          454
+        ]
+      ],
+      "prop_polygon_xy": [
+        [
+          203,
+          444
+        ],
+        [
+          230,
+          453
+        ],
+        [
+          216,
+          511
+        ],
+        [
+          178,
+          500
+        ]
+      ],
+      "prop_landmarks_xy": [
+        [
+          210,
+          454
+        ],
+        [
+          218,
+          453
+        ],
+        [
+          207,
+          478
+        ],
+        [
+          192,
+          505
+        ]
+      ]
+    }
+  ],
+  "compatibility": "Phone descends from face through chest and waist to thigh in the same right hand; documents stay hugged in anatomical left arm. Matched Gaussian correspondence must be reviewed through ordered playback; no unconstrained whole-body TPS.",
+  "paper_landmark_order": [
+    "stack_center",
+    "left_top",
+    "right_top",
+    "bottom_center"
+  ],
+  "paper_region_note": "The full visible document stack is a paper-only group, separate from trouser paint. Hands may partly occlude paper; preserve anatomical arm controls.",
+  "arm_landmark_order": [
+    "shoulder_right",
+    "elbow_right",
+    "grip_right"
+  ],
+  "arm_region_note": "Anatomical-right dark sleeve/hand is an explicit part3 group, separate from lower-body trousers. Apply arm before paper and phone masks, with phone part2 last at overlap.",
+  "prop_landmark_order": [
+    "grip",
+    "top",
+    "center",
+    "bottom"
+  ],
+  "prop_region_note": "Polygons bound the handset, helmet, or bag in native encoded cells. Keep this group separate from leg and coat matching; the ordered controls track grip, upper edge, center and lower edge."
+}

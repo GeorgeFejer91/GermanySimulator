@@ -1,0 +1,439 @@
+{
+  "version": 1,
+  "id": "aktenkurier",
+  "canvas_xy": [
+    640,
+    832
+  ],
+  "source_authority": "assets/buergeramt/characters/aktenkurier-detail.webp",
+  "source_sha256": "382b51b26ceacb3950851e236a594d43bde4029be22323e9def47224c91c29ba",
+  "event_owner": "buergeramt.js dialogue gesture and Aktenkurier omen; work/look/flinch and walking remain existing controllers",
+  "prop_ownership": {
+    "type": "rigid_stamp",
+    "owner": "anatomical_right_hand",
+    "secondary": "document_bundle_in_anatomical_left_arm"
+  },
+  "landmark_note": "Native 640x832 visual reading; anatomical right is screen-left. stamp_knob/base mark rigid wooden stamp ends. Common shoe baseline; source resolution classes are registered with fixed scales.",
+  "arcs": [
+    {
+      "id": "work-gesture",
+      "from": "work",
+      "to": "gesture",
+      "duration": 2.0,
+      "keys": [
+        {
+          "state": "work",
+          "time": 0
+        },
+        {
+          "state": "bridge1",
+          "time": 0.4
+        },
+        {
+          "state": "bridge2",
+          "time": 0.95
+        },
+        {
+          "state": "bridge3",
+          "time": 1.5
+        },
+        {
+          "state": "gesture",
+          "time": 2.0
+        }
+      ],
+      "reverse": "Traverse the same keys and matched Gaussian segments backwards over 2.0s, with no new paintings or holds."
+    }
+  ],
+  "states": [
+    {
+      "id": "work",
+      "role": "main",
+      "file": "assets/buergeramt/characters/aktenkurier-detail.webp",
+      "crop_xywh": [
+        0,
+        0,
+        640,
+        832
+      ],
+      "landmarks": {
+        "eye_right": [
+          335,
+          89
+        ],
+        "eye_left": [
+          365,
+          89
+        ],
+        "nose": [
+          352,
+          106
+        ],
+        "chin": [
+          353,
+          128
+        ],
+        "shoulder_right": [
+          280,
+          174
+        ],
+        "elbow_right": [
+          190,
+          197
+        ],
+        "grip_right": [
+          263,
+          110
+        ],
+        "stamp_knob": [
+          279,
+          85
+        ],
+        "stamp_base": [
+          268,
+          151
+        ],
+        "shoulder_left": [
+          407,
+          180
+        ],
+        "elbow_left": [
+          450,
+          322
+        ],
+        "hand_left": [
+          370,
+          302
+        ],
+        "hip_center": [
+          350,
+          410
+        ],
+        "skirt_hem_center": [
+          348,
+          603
+        ],
+        "foot_screen_left": [
+          260,
+          769
+        ],
+        "foot_screen_right": [
+          410,
+          771
+        ]
+      }
+    },
+    {
+      "id": "bridge1",
+      "role": "transition",
+      "file": "assets/sprite-sources/buergeramt/gaussian-arcs/aktenkurier-bridge1.webp",
+      "source_file": "assets/sprite-sources/buergeramt/gaussian-arcs/aktenkurier-bridge1-source.png",
+      "source_sha256": "a21c0145f698751dcd1cd33405c7835953357c4a0f0aae5ea05355a29238ec5f",
+      "uniform_scale": 0.585,
+      "translation_xy": [
+        4,
+        -1
+      ],
+      "landmarks": {
+        "eye_right": [
+          330,
+          95
+        ],
+        "eye_left": [
+          357,
+          95
+        ],
+        "nose": [
+          344,
+          111
+        ],
+        "chin": [
+          346,
+          137
+        ],
+        "shoulder_right": [
+          282,
+          179
+        ],
+        "elbow_right": [
+          187,
+          225
+        ],
+        "grip_right": [
+          253,
+          150
+        ],
+        "stamp_knob": [
+          270,
+          132
+        ],
+        "stamp_base": [
+          263,
+          197
+        ],
+        "shoulder_left": [
+          405,
+          180
+        ],
+        "elbow_left": [
+          452,
+          324
+        ],
+        "hand_left": [
+          359,
+          307
+        ],
+        "hip_center": [
+          352,
+          412
+        ],
+        "skirt_hem_center": [
+          350,
+          607
+        ],
+        "foot_screen_left": [
+          255,
+          776
+        ],
+        "foot_screen_right": [
+          414,
+          777
+        ]
+      }
+    },
+    {
+      "id": "bridge2",
+      "role": "transition",
+      "file": "assets/sprite-sources/buergeramt/gaussian-arcs/aktenkurier-bridge2.webp",
+      "source_file": "assets/sprite-sources/buergeramt/gaussian-arcs/aktenkurier-bridge2-source.png",
+      "source_sha256": "8afa26ea5ef8935503a95e5fe3802d698bc4aa29e794f95b3d3d74b6bd317304",
+      "uniform_scale": 0.585,
+      "translation_xy": [
+        -5,
+        5
+      ],
+      "landmarks": {
+        "eye_right": [
+          315,
+          104
+        ],
+        "eye_left": [
+          343,
+          102
+        ],
+        "nose": [
+          333,
+          126
+        ],
+        "chin": [
+          333,
+          153
+        ],
+        "shoulder_right": [
+          275,
+          173
+        ],
+        "elbow_right": [
+          185,
+          228
+        ],
+        "grip_right": [
+          313,
+          259
+        ],
+        "stamp_knob": [
+          333,
+          234
+        ],
+        "stamp_base": [
+          302,
+          285
+        ],
+        "shoulder_left": [
+          405,
+          178
+        ],
+        "elbow_left": [
+          449,
+          321
+        ],
+        "hand_left": [
+          365,
+          316
+        ],
+        "hip_center": [
+          345,
+          415
+        ],
+        "skirt_hem_center": [
+          345,
+          613
+        ],
+        "foot_screen_left": [
+          262,
+          773
+        ],
+        "foot_screen_right": [
+          410,
+          774
+        ]
+      }
+    },
+    {
+      "id": "bridge3",
+      "role": "transition",
+      "file": "assets/sprite-sources/buergeramt/gaussian-arcs/aktenkurier-bridge3.webp",
+      "source_file": "assets/sprite-sources/buergeramt/gaussian-arcs/aktenkurier-bridge3-source.png",
+      "source_sha256": "f4c963517273fc900d0f4be5421c1b82afcc44a39fde760ed8b4485c6788b1ae",
+      "uniform_scale": 0.585,
+      "translation_xy": [
+        -6,
+        8
+      ],
+      "landmarks": {
+        "eye_right": [
+          285,
+          100
+        ],
+        "eye_left": [
+          313,
+          99
+        ],
+        "nose": [
+          299,
+          119
+        ],
+        "chin": [
+          305,
+          145
+        ],
+        "shoulder_right": [
+          234,
+          181
+        ],
+        "elbow_right": [
+          222,
+          273
+        ],
+        "grip_right": [
+          344,
+          219
+        ],
+        "stamp_knob": [
+          359,
+          188
+        ],
+        "stamp_base": [
+          365,
+          242
+        ],
+        "shoulder_left": [
+          391,
+          189
+        ],
+        "elbow_left": [
+          442,
+          330
+        ],
+        "hand_left": [
+          345,
+          330
+        ],
+        "hip_center": [
+          337,
+          410
+        ],
+        "skirt_hem_center": [
+          336,
+          600
+        ],
+        "foot_screen_left": [
+          207,
+          770
+        ],
+        "foot_screen_right": [
+          386,
+          768
+        ]
+      }
+    },
+    {
+      "id": "gesture",
+      "role": "terminal",
+      "file": "assets/buergeramt/characters/aktenkurier-detail.webp",
+      "crop_xywh": [
+        1920,
+        0,
+        640,
+        832
+      ],
+      "landmarks": {
+        "eye_right": [
+          279,
+          96
+        ],
+        "eye_left": [
+          306,
+          94
+        ],
+        "nose": [
+          293,
+          116
+        ],
+        "chin": [
+          300,
+          143
+        ],
+        "shoulder_right": [
+          240,
+          182
+        ],
+        "elbow_right": [
+          224,
+          283
+        ],
+        "grip_right": [
+          334,
+          248
+        ],
+        "stamp_knob": [
+          313,
+          211
+        ],
+        "stamp_base": [
+          339,
+          286
+        ],
+        "shoulder_left": [
+          392,
+          190
+        ],
+        "elbow_left": [
+          442,
+          329
+        ],
+        "hand_left": [
+          344,
+          325
+        ],
+        "hip_center": [
+          334,
+          411
+        ],
+        "skirt_hem_center": [
+          333,
+          600
+        ],
+        "foot_screen_left": [
+          207,
+          770
+        ],
+        "foot_screen_right": [
+          386,
+          766
+        ]
+      }
+    }
+  ],
+  "compatibility": "Stamp remains in anatomical right hand and paper bundle in left throughout. Head turns and torso leans gradually. Matched Gaussian correspondence must be reviewed through ordered playback; no unconstrained whole-body TPS."
+}

@@ -32,16 +32,16 @@ for(const item of manifest.clips){
 }
 
 const calls=[],elements=new Map();
-const sandbox=vm.createContext({speechClip:id=>catalog.clips[id],state:{voiceOn:true,dialogueData:{speaker:"FRIEDRICH MERZ · FIKTIONALE SATIRE"}},STIMULUS_PRIORITY:{CRITICAL:0,REACTIVE:2,AMBIENT:3},document:{getElementById:id=>{if(!elements.has(id))elements.set(id,{textContent:"",hidden:true,dataset:{},classList:{toggle(){},remove(){}}});return elements.get(id)}},setTimeout:()=>1,clearTimeout(){},uiTone(){},setDialogueVoiceBusy(){},queueStimulus:item=>calls.push({mode:"recording",...item}),speak:(text,options)=>calls.push({mode:"browser",text,...options}),speakMerkelLine:(text,options)=>calls.push({mode:"merkel",text,...options})});
+const sandbox=vm.createContext({textOnlyBark:null,performance:{now:()=>0},startSubtitle(){},clearSubtitle(){},speechClip:id=>catalog.clips[id],state:{voiceOn:true,dialogueData:{speaker:"FRIEDRICH MERZ · FIKTIONALE SATIRE"}},STIMULUS_PRIORITY:{CRITICAL:0,REACTIVE:2,AMBIENT:3},document:{getElementById:id=>{if(!elements.has(id))elements.set(id,{textContent:"",hidden:true,dataset:{},classList:{toggle(){},remove(){}}});return elements.get(id)}},setTimeout:()=>1,clearTimeout(){},uiTone(){},setDialogueVoiceBusy(){},queueStimulus:item=>calls.push({mode:"recording",...item}),speak:(text,options)=>calls.push({mode:"browser",text,...options}),speakMerkelLine:(text,options)=>calls.push({mode:"merkel",text,...options})});
 vm.runInContext(`const merzLines=${JSON.stringify(lines)};${game.match(/^const MERZ_RECORDINGS=.*$/m)[0]}`,sandbox);
-for(const name of ["speakRecorded","speakMerzLine","showWorldBark","speakDialogueLine"])vm.runInContext(game.slice(game.indexOf(`function ${name}(`),game.indexOf('\n}',game.indexOf(`function ${name}(`))+2).split('\nfunction ')[0],sandbox);
+const extract=name=>{const rest=game.slice(game.indexOf("function "+name+"(")),first=rest.split(/\r?\n/)[0];return first.endsWith("}")?first:rest.slice(0,rest.indexOf("\n}")+2)};
+for(const name of ["speakRecorded","speakMerzLine","showWorldBark","speakDialogueLine","hideWorldBark"])vm.runInContext(extract(name),sandbox);
 for(const text of lines){
  sandbox.showWorldBark("FRIEDRICH MERZ · FIKTIONALE SATIRE",text,false,"","",{family:"politician:merz"});
  let item=calls.pop();
+ assert.equal(item.captionOnly,true,'world speech uses the shared caption channel');assert.match(item.captionSpeaker,/FRIEDRICH MERZ/);
  assert.equal(item.recording,Object.values(catalog.clips).find(clip=>clip.voiceId==="merz"&&clip.text===text).recording);
  assert.equal(item.masculine,true,"recording load failure must retain German masculine browser fallback");
- assert.equal(item.captionOnly,true,'the recorded and browser-fallback line must share the caption channel');
- assert.equal(item.captionSpeaker,'FRIEDRICH MERZ · FIKTIONALE SATIRE');
  item.start();
  assert.equal(elements.get("police-bark-text").textContent,text);
  assert.equal(elements.get("police-bark").hidden,false);

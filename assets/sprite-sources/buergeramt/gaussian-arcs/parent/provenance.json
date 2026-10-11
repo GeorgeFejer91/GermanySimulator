@@ -1,0 +1,8 @@
+{
+  "source": "assets/buergeramt/characters/parent-detail.webp",
+  "source_sha256": "f6a3c2b389cb4381d27aaa7cfa5ddeaa9f794dee9a7346599a8d706d235eb24f",
+  "bridge_sheet": "assets/sprite-sources/buergeramt/gaussian-arcs/parent/bridge-sheet.png",
+  "bridge_sha256": "0a5d2f6f8b11b7fd4277d4a5900e7b3ce3f98e06212249e88f580bc0f53bafdf",
+  "authoring": "OpenAI built-in imagegen edit, 2026-10-10; reference original patron source strip; transparent output",
+  "registration": "One uniform scale, original floor; parent/pensioner horizontal shoe-alpha centroid registration. Native per-key arm/face/receipt/cane controls; no deformation"
+}
