@@ -27,21 +27,29 @@ test('HUD sausage stays at the upper edge and points along the camera-projected 
  let target=null;const player={x:560,y:560,facing:2.5},position={set(x,y,z){Object.assign(this,{x,y,z})}},pointer={rotation:{set(x,y,z,order){Object.assign(this,{x,y,z,order})}},position,scale:{setScalar(x){this.value=x}},userData:{}};
  const direction={set(x,y,z){Object.assign(this,{x,y,z});return this},transformDirection(){this.y=-this.z*.6;return this}};
  let rect={left:576,right:704,top:60,width:128,height:128};
- const scope=vm.createContext({bridge:{player,getMissionWaypoint:()=>target},wurstPrintFlip:{value:0},showMissionPointer:visible=>{pointer.visible=visible},pointerSpace:{getBoundingClientRect:()=>rect},missionPointer:pointer,missionDirection:direction,camera:{updateMatrixWorld(){},matrixWorldInverse:{}},missionHudCamera:{updateProjectionMatrix(){}},innerWidth:1280,innerHeight:800,document:{querySelector:()=>null}});
+ const scope=vm.createContext({bridge:{player,getMissionWaypoint:()=>target},missionGuide:{dataset:{}},wurstPrintFlip:{value:0},showMissionPointer:visible=>{pointer.visible=visible},pointerSpace:{getBoundingClientRect:()=>rect},missionPointer:pointer,missionDirection:direction,camera:{updateMatrixWorld(){},matrixWorldInverse:{}},missionHudCamera:{updateProjectionMatrix(){}},innerWidth:1280,innerHeight:800,document:{querySelector:()=>null}});
  vm.runInContext(extract('layoutMissionPointer')+extract('updateMissionPointer'),scope);scope.layoutMissionPointer();
  for(const [dx,dz] of [[0,500],[500,0],[0,-500],[-500,0],[350,-280]]){target={id:'entrance',x:player.x+dx,y:player.y+dz};scope.updateMissionPointer();assert.equal(pointer.visible,true);const length=Math.hypot(dx,dz);assert.ok(Math.abs(Math.sin(pointer.userData.heading)-dx/length)<1e-9);const screenLength=Math.hypot(dx,dz*.6);assert.ok(Math.abs(-Math.sin(pointer.rotation.z)-dx/screenLength)<1e-9);assert.ok(Math.abs(Math.cos(pointer.rotation.z)+dz*.6/screenLength)<1e-9);assert.equal(pointer.rotation.order,'ZXY');assert.equal(position.z,0)}
  for(const [width,height] of [[1280,800],[390,844],[844,390],[320,568]]){scope.innerWidth=width;scope.innerHeight=height;const size=width<=1000?88:128;rect={left:width<=1000?36:(width-size)/2,right:width<=1000?36+size:(width+size)/2,top:44,width:size,height:size};scope.layoutMissionPointer();const {x,y}=pointer.userData.screen;assert.equal(y-size/2,44);assert(x-size/2>=8);assert(x+size/2<=width-8);assert.equal(position.x,x-width/2);assert.equal(position.y,height/2-y)}
  target={id:'entrance',x:player.x+35,y:player.y};scope.updateMissionPointer();assert.equal(pointer.visible,false);
  target=null;scope.updateMissionPointer();assert.equal(pointer.visible,false);assert.equal(pointer.userData.target,null);
+ pointer.visible=true;scope.missionGuide.dataset.pointerFit='file';scope.layoutMissionPointer();assert.equal(pointer.visible,false);assert.equal(pointer.userData.screen.fit,'file');
 });
 
-test('shipped model is local, compact, centered, +Z aligned, with the attributed hash',()=>{
+test('shipped Weisswurst is local, compact, centered, +Z aligned, with the recorded hash',()=>{
  const bytes=readFileSync(new URL('../assets/models/mission-sausage/sausage.glb',import.meta.url));
- assert.equal(bytes.toString('ascii',0,4),'glTF');assert.equal(bytes.readUInt32LE(8),bytes.length);assert.ok(bytes.length<300000);
+ assert.equal(bytes.toString('ascii',0,4),'glTF');assert.equal(bytes.readUInt32LE(8),bytes.length);assert.ok(bytes.length<100000);
  const doc=JSON.parse(bytes.subarray(20,20+bytes.readUInt32LE(12)).toString());
- assert.equal(doc.nodes.length,1);assert.equal(doc.meshes.length,1);assert.equal(doc.images.length,3);assert.ok(doc.images.every(i=>i.bufferView!==undefined&&!i.uri));
+ assert.equal(doc.nodes.length,1);assert.equal(doc.meshes.length,1);assert.equal(doc.materials.length,1);assert.equal(doc.images?.length||0,0);
  const primitive=doc.meshes[0].primitives[0],position=doc.accessors[primitive.attributes.POSITION];
- assert.equal(doc.accessors[primitive.indices].count/3,3640);assert.equal(position.max[2]-position.min[2],1.75);
+ assert.ok(doc.accessors[primitive.indices].count/3<6000);assert.equal(position.max[2]-position.min[2],1.75);
+ assert.ok(position.max[0]-position.min[0]>.33,'full pale casing has a plump silhouette');
  for(let k=0;k<3;k++)assert.ok(Math.abs(position.max[k]+position.min[k])<1e-9);
+ const binaryOffset=28+bytes.readUInt32LE(12),normal=doc.accessors[primitive.attributes.NORMAL];
+ const vectors=accessor=>Array.from({length:accessor.count},(_,i)=>Array.from({length:3},(_,k)=>bytes.readFloatLE(binaryOffset+(doc.bufferViews[accessor.bufferView].byteOffset||0)+(accessor.byteOffset||0)+i*12+k*4)));
+ const points=vectors(position),normals=vectors(normal);assert.equal(normals.length,points.length);
+ for(let i=0;i<points.length;i++){assert.ok(normals[i].every(Number.isFinite));assert.ok(Math.abs(Math.hypot(...normals[i])-1)<1e-5);for(let k=0;k<3;k++)assert.ok(points[i][k]>=position.min[k]-1e-6&&points[i][k]<=position.max[k]+1e-6)}
+ const indices=doc.accessors[primitive.indices],indexOffset=binaryOffset+(doc.bufferViews[indices.bufferView].byteOffset||0)+(indices.byteOffset||0);
+ for(let i=0;i<indices.count;i++)assert.ok(bytes.readUInt16LE(indexOffset+i*2)<points.length);
  assert.ok(readFileSync(new URL('../assets/models/mission-sausage/LICENSES.md',import.meta.url),'utf8').includes(createHash('sha256').update(bytes).digest('hex')));
 });

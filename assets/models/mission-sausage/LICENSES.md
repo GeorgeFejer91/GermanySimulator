@@ -1,19 +1,24 @@
-# Mission sausage
+# Original mission Weißwurst
 
-`sausage.glb` adapts **Saucisse** by **__Maros__(oooFFFFEDDMODELS)**
-([pierre.marcos.19](https://sketchfab.com/pierre.marcos.19)), published 2020-04-19.
+`sausage.glb` is original Germany Simulator geometry built by
+[`tools/build-mission-sausage.py`](../../../tools/build-mission-sausage.py).
+Every vertex and material is project-authored. No downloaded geometry, image,
+reference photograph or texture pack is embedded. Existing project licensing
+governs this original; this notice grants no rights to unrelated assets.
 
-- Original model: https://sketchfab.com/3d-models/saucisse-2583fa564f0f46da8be70958fdf057dd
-- License: **Creative Commons Attribution-NonCommercial 4.0 International** — https://creativecommons.org/licenses/by-nc/4.0/
-- Downloaded from the licensed [Objaverse distribution](https://huggingface.co/datasets/allenai/objaverse): `glbs/000-052/2583fa564f0f46da8be70958fdf057dd.glb`.
-- Source SHA-256: `b0927613b574e17533ca185de510bdd5f427e94f0f96133702e0fb6ee5d35f54`.
-- Runtime SHA-256: `1bccb83c57028e917119feda9f534a2d6a85b358e68d1fb4961d8c49396de469`.
-- Changes: removed import hierarchy/transforms, centered and uniformly scaled the original curve to 1.75 world units along +Z; reduced the three PBR maps to 512 × 512 JPEG; disabled unnecessary double-sided rendering. The HUD reshapes this same source into a short, fat sausage, with a glowing red tip and black-red-gold “Wegweiser” printed onto its curved surface. The shipped GLB is unchanged.
-- Runtime cost: 274,344 bytes; 3,640 triangles; one material; three 512 × 512 textures (3 MiB decoded RGBA, about 4 MiB including mipmaps). One shared desktop/mobile model, prepared through the existing two-job queue before Start. One retained source and instance for the city renderer's lifetime; no separate animation loop or cache.
+- SHA-256: `eb747231f5719e04b223b85320dbdc4bdd58019dd4d6d3ff77aee7654353f3b6`.
+- Cost: 98,536 bytes, 5,376 triangles, 2,720 vertices, one material, no image textures.
+- Bounds: X ±0.1747344, Y ±0.17, Z ±0.875; centered, Y-up, +Z pointing end.
+- Shape: full casing, rounded shoulders, small tied ends and a gentle bend.
+- Runtime: pale glossy physical material, sparse herb flecks, larger dark-outlined
+  black/red/gold “Wegweiser” printed on the skin, and a glowing red pointing end.
+  One shared desktop/mobile source and instance, admitted through the existing
+  two-job startup queue and retained with the city renderer. The pale procedural
+  fallback preserves shape and wayfinding. No additional renderer or timer.
 
-Use only in noncommercial distributions; preserve this attribution and license
-notice with any modified version. Replace the model before a commercial release.
-The source represents a cooked sausage; the game uses it as its Bratwurst compass.
+This replaces the former Saucisse derivative by __Maros__. That retired model's
+CC BY-NC 4.0 terms apply to its historical versions, not this independently
+authored replacement. The original source and attribution remain in Git history.
 
-Rebuild with the existing Pillow environment:
-`python tools/build-mission-sausage.py <original.glb>`.
+Rebuild without third-party authoring dependencies:
+`python tools/build-mission-sausage.py`.
