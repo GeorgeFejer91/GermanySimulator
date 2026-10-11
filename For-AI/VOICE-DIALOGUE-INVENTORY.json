@@ -54,10 +54,9 @@
     {
       "voiceId": "crowd-dietmar-din-norm",
       "sourcePools": [
-        "game.js npcLines / npcDenglisch by region",
-        "game.js pedestrianBarks[region] by surface",
-        "game.js crowdArchetypes[archetype].barks[region]",
-        "game.js quizApproaches when this instance is selected as a quizzer"
+        "For-AI/AUDIO-TEXT-LIBRARY.js rules[2][1]",
+        "For-AI/AUDIO-TEXT-LIBRARY.js rules[5][1]",
+        "For-AI/AUDIO-TEXT-LIBRARY.js rules[8][1]"
       ]
     },
     {
@@ -90,10 +89,10 @@
     {
       "voiceId": "crowd-horst-hausordnung",
       "sourcePools": [
-        "game.js npcLines / npcDenglisch by region",
-        "game.js pedestrianBarks[region] by surface",
-        "game.js crowdArchetypes[archetype].barks[region]",
-        "game.js quizApproaches when this instance is selected as a quizzer"
+        "For-AI/AUDIO-TEXT-LIBRARY.js rules[1][1]",
+        "For-AI/AUDIO-TEXT-LIBRARY.js rules[4][1]",
+        "For-AI/AUDIO-TEXT-LIBRARY.js rules[7][1]",
+        "For-AI/AUDIO-TEXT-LIBRARY.js rules[10][1]"
       ]
     },
     {
@@ -135,10 +134,10 @@
     {
       "voiceId": "crowd-waltraud-wartemarke",
       "sourcePools": [
-        "game.js npcLines / npcDenglisch by region",
-        "game.js pedestrianBarks[region] by surface",
-        "game.js crowdArchetypes[archetype].barks[region]",
-        "game.js quizApproaches when this instance is selected as a quizzer"
+        "For-AI/AUDIO-TEXT-LIBRARY.js rules[0][1]",
+        "For-AI/AUDIO-TEXT-LIBRARY.js rules[3][1]",
+        "For-AI/AUDIO-TEXT-LIBRARY.js rules[6][1]",
+        "For-AI/AUDIO-TEXT-LIBRARY.js rules[9][1]"
       ]
     },
     {

@@ -43,7 +43,20 @@ def valid_inventory_hashes(game: Path) -> set[str]:
     unchanged = ("npcLines", "npcDenglisch", "policeBarks", "pedestrianBarks",
                  "crowdArchetypes", "innerMonologues", "quizApproaches",
                  "quizContexts", "quizQuestions")
-    if any(new_pools.get(key) != old_pools[key] for key in unchanged):
+    def source_pool(key, pools):
+        value = json.loads(json.dumps(pools.get(key)))
+        # These four future-profile targets were retired; their original
+        # speaker, scripts and recording paths remain historical provenance.
+        if key == "pedestrianBarks":
+            retired_targets = {"thorsten-angry-nicht-weg": "passerby-a",
+                               "thorsten-angry-duemmer": "passerby-b",
+                               "thorsten-angry-klappt-nicht": "passerby-a",
+                               "thorsten-sleepy-nichts-geschafft": "passerby-b"}
+            for row in value["germany"]["sidewalk"]:
+                if isinstance(row, dict) and row.get("targetVoiceId") == retired_targets.get(row.get("id")):
+                    row.pop("targetVoiceId", None)
+        return value
+    if any(source_pool(key, new_pools) != source_pool(key, old_pools) for key in unchanged):
         raise ValueError("Existing quiz/crowd source pools changed; old queues need reauthoring")
     def city_sources(inventory):
         result = {}
@@ -52,7 +65,18 @@ def valid_inventory_hashes(game: Path) -> set[str]:
             if sources:
                 result[item["voiceId"]] = sources
         return result
-    if city_sources(current) != city_sources(baseline):
+    current_sources, historical_sources = city_sources(current), city_sources(baseline)
+    street_decks = {"crowd-waltraud-wartemarke": (0, 3, 6, 9),
+                    "crowd-horst-hausordnung": (1, 4, 7, 10),
+                    "crowd-dietmar-din-norm": (2, 5, 8)}
+    for voice, indices in street_decks.items():
+        expected = [f"For-AI/AUDIO-TEXT-LIBRARY.js rules[{index}][1]" for index in indices]
+        if current_sources.get(voice) == expected:
+            # Frozen crowd auditions remain private source evidence; they do
+            # not become playable lines in the adviser's new rule deck.
+            current_sources.pop(voice)
+            historical_sources.pop(voice, None)
+    if current_sources != historical_sources:
         raise ValueError("Inventory city/quiz/crowd speaker sources changed")
     for key in baseline.keys() | current.keys():
         if key not in {"pools", "dynamicIdentityVoiceIds", "source", "explanation"} and current.get(key) != baseline.get(key):

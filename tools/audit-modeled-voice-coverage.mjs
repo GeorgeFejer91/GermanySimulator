@@ -31,7 +31,7 @@ for (const person of [...fixed, ...roles]) {
   `Missing identity or demeanor audit for ${person.voiceId}`);
 }
 
-const runtimeFiles = ['game.js', 'world3d.js', 'buergeramt-story.js'];
+const runtimeFiles = ['game.js', 'world3d.js', 'buergeramt-story.js', 'street-wisdom.js'];
 const explicit = runtimeFiles.flatMap(file => [...source(file).matchAll(/\bvoiceId\s*:\s*["']([^"']+)["']/g)]
   .map(match => ({file, voiceId: match[1]})));
 for (const entry of explicit) requireMatch(byVoice.has(entry.voiceId),
@@ -47,6 +47,9 @@ for (const person of city) requireMatch(byVoice.get(person.voiceId)?.fullName ==
 const crowdSource = game.match(/const crowdVoiceIds=\[([^\]]+)\]/)?.[1];
 requireMatch(crowdSource, 'Missing crowd voice identity array');
 const crowd = [...crowdSource.matchAll(/"([^"]+)"/g)].map(match => match[1]);
+const wisdomContext={window:{}};vm.runInNewContext(source('street-wisdom.js'),wisdomContext);
+const streetAdvisers=JSON.parse(JSON.stringify(wisdomContext.window.StreetWisdom.definitions));
+for(const person of streetAdvisers)requireMatch(crowd.includes(person.voiceId)&&byVoice.get(person.voiceId)?.fullName===person.fullName,`Street adviser model/speaker mismatch: ${person.id}`);
 requireMatch(crowd.length === 12 && new Set(crowd).size === 12,
   'Expected twelve distinct named crowd identities');
 for (const voiceId of crowd) requireMatch(byVoice.has(voiceId),
@@ -132,7 +135,7 @@ const report = {
     'assets/models/street-characters/persona-map.js'].map(file => [file, hash(file)])),
   counts: {newNonpoliticalProfiles: newProfiles.length, existingPoliticalProfiles: political.length,
     institutionPhoneProfiles: institutions.length,
-    namedCityNpcBindings: city.length, namedCrowdIdentities: crowd.length,
+    namedCityNpcBindings: city.length, namedCrowdIdentities: crowd.length, dedicatedStreetAdvisers: streetAdvisers.length,
     staticBuergeramtSpeakers: officeSpeakers.length, authoredStaticPatrons: patronModels.length, decorativeClerkClones: officeClones.length,
     optionalStreetVisualTemplates: STREET_CATALOG.length,
     mappedStreetSpeakers: streetPersonaMapping.length},
@@ -144,6 +147,7 @@ const report = {
   staticPatronDialogue: patronModels.map(model => ({...model, lineCount: patronDialogue[model.voiceId].lines.length})),
   city,
   crowdVoiceIds: crowd,
+  dedicatedStreetAdvisers: streetAdvisers,
   optionalStreetVisualTemplates: STREET_CATALOG.map(({id, title, role}) =>
     ({id, title, role, genderPresentation: STREET_TEMPLATE_GENDER[id]})),
   optionalStreetPersonaMapping: streetPersonaMapping,

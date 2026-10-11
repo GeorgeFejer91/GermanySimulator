@@ -2214,9 +2214,9 @@
       "secretTunnelProfileName": "GS Dietmar DIN-Norm (crowd-dietmar-din-norm)",
       "secretTunnelProfileId": "44123656a3404719abf0a2d6a05047ee",
       "gender": "male",
-      "genderEvidence": "game.js male towel archetype slot for this name",
-      "generalDemeanor": "Procedural passerby with territorial sidewalk or towel-reservation complaints",
-      "demeanorEvidence": "Game crowd sidewalk and towel bark pools",
+      "genderEvidence": "Dedicated street-wisdom appearance in street-wisdom.js; retains the existing same-speaker profile",
+      "generalDemeanor": "Dry, methodical street adviser offering unsolicited standards and crossing wisdom",
+      "demeanorEvidence": "Unchanged authored rule deck owned by this dedicated street actor",
       "targetValence": "negative",
       "targetArousal": "low",
       "reference": {
@@ -2247,13 +2247,14 @@
       },
       "status": "profile-verified; private audition available; listening review pending",
       "dialogueSources": [
-        "game.js npcLines / npcDenglisch by region",
-        "game.js pedestrianBarks[region] by surface",
-        "game.js crowdArchetypes[archetype].barks[region]",
-        "game.js quizApproaches when this instance is selected as a quizzer"
+        "For-AI/AUDIO-TEXT-LIBRARY.js rules[2][1]",
+        "For-AI/AUDIO-TEXT-LIBRARY.js rules[5][1]",
+        "For-AI/AUDIO-TEXT-LIBRARY.js rules[8][1]"
       ],
-      "runtimeArchetype": "towel-man",
-      "runtimeBinding": "game.js addCrowdPedestrian assigns this voiceId to the named NPC; all speech must use this identity rather than the shared sprite archetype."
+      "runtimeArchetype": "street-wisdom",
+      "runtimeBinding": "street-wisdom.js definition street-dietmar-din-norm owns this name, profile and rule deck; game.js excludes its voiceId from generic crowd assignment.",
+      "historicalRuntimeArchetype": "towel-man",
+      "gameCharacterId": "street-dietmar-din-norm"
     },
     {
       "gameRole": "crowd-elfriede-eingabe",
@@ -2416,9 +2417,9 @@
       "secretTunnelProfileName": "GS Horst Hausordnung (crowd-horst-hausordnung)",
       "secretTunnelProfileId": "159d0e6984c14c66b8e452f82495ba6c",
       "gender": "male",
-      "genderEvidence": "game.js male towel archetype slot for this name",
-      "generalDemeanor": "Procedural passerby with territorial sidewalk or towel-reservation complaints",
-      "demeanorEvidence": "Game crowd sidewalk and towel bark pools",
+      "genderEvidence": "Dedicated street-wisdom appearance in street-wisdom.js; retains the existing same-speaker profile",
+      "generalDemeanor": "Procedural street adviser offering unsolicited rules about orderly daily life",
+      "demeanorEvidence": "Unchanged authored rule deck owned by this dedicated street actor",
       "targetValence": "negative",
       "targetArousal": "high",
       "reference": {
@@ -2454,13 +2455,15 @@
       },
       "status": "profile-verified; private audition available; listening review pending",
       "dialogueSources": [
-        "game.js npcLines / npcDenglisch by region",
-        "game.js pedestrianBarks[region] by surface",
-        "game.js crowdArchetypes[archetype].barks[region]",
-        "game.js quizApproaches when this instance is selected as a quizzer"
+        "For-AI/AUDIO-TEXT-LIBRARY.js rules[1][1]",
+        "For-AI/AUDIO-TEXT-LIBRARY.js rules[4][1]",
+        "For-AI/AUDIO-TEXT-LIBRARY.js rules[7][1]",
+        "For-AI/AUDIO-TEXT-LIBRARY.js rules[10][1]"
       ],
-      "runtimeArchetype": "towel-man",
-      "runtimeBinding": "game.js addCrowdPedestrian assigns this voiceId to the named NPC; all speech must use this identity rather than the shared sprite archetype."
+      "runtimeArchetype": "street-wisdom",
+      "runtimeBinding": "street-wisdom.js definition street-horst-hausordnung owns this name, profile and rule deck; game.js excludes its voiceId from generic crowd assignment.",
+      "historicalRuntimeArchetype": "towel-man",
+      "gameCharacterId": "street-horst-hausordnung"
     },
     {
       "gameRole": "crowd-irmgard-aktenordner",
@@ -2681,9 +2684,9 @@
       "secretTunnelProfileName": "GS Waltraud Wartemarke (crowd-waltraud-wartemarke)",
       "secretTunnelProfileId": "deeeac80eca14f49ae6a8141594d73d2",
       "gender": "female",
-      "genderEvidence": "game.js female towel archetype slot for this name",
-      "generalDemeanor": "Procedural passerby with territorial sidewalk or towel-reservation complaints",
-      "demeanorEvidence": "Game crowd sidewalk and towel bark pools",
+      "genderEvidence": "Dedicated street-wisdom appearance in street-wisdom.js; retains the existing same-speaker profile",
+      "generalDemeanor": "Procedural street adviser offering unsolicited rules about orderly daily life",
+      "demeanorEvidence": "Unchanged authored rule deck owned by this dedicated street actor",
       "targetValence": "negative",
       "targetArousal": "high",
       "reference": {
@@ -2719,13 +2722,15 @@
       },
       "status": "profile-verified; private audition available; listening review pending",
       "dialogueSources": [
-        "game.js npcLines / npcDenglisch by region",
-        "game.js pedestrianBarks[region] by surface",
-        "game.js crowdArchetypes[archetype].barks[region]",
-        "game.js quizApproaches when this instance is selected as a quizzer"
+        "For-AI/AUDIO-TEXT-LIBRARY.js rules[0][1]",
+        "For-AI/AUDIO-TEXT-LIBRARY.js rules[3][1]",
+        "For-AI/AUDIO-TEXT-LIBRARY.js rules[6][1]",
+        "For-AI/AUDIO-TEXT-LIBRARY.js rules[9][1]"
       ],
-      "runtimeArchetype": "towel-woman",
-      "runtimeBinding": "game.js addCrowdPedestrian assigns this voiceId to the named NPC; all speech must use this identity rather than the shared sprite archetype."
+      "runtimeArchetype": "street-wisdom",
+      "runtimeBinding": "street-wisdom.js definition street-waltraud-wartemarke owns this name, profile and rule deck; game.js excludes its voiceId from generic crowd assignment.",
+      "historicalRuntimeArchetype": "towel-woman",
+      "gameCharacterId": "street-waltraud-wartemarke"
     },
     {
       "gameRole": "player",
@@ -3778,7 +3783,8 @@
       "originalSha256": "36dc3144368143e0894dc1f400bdffe82e6842b2ae3d54a7fb03a3b7c94c55bf",
       "referenceSha256": "5d73e85d067761add5b8b6530d33aafe63d40b7e0a41e9d81acb223a1f2ef26b",
       "renderer": "ResembleAI/Chatterbox Multilingual V2 0.1.7",
-      "modelRevision": "5bb1f6ee58e50c3b8d408bc82a6d3740c2db6e18"
+      "modelRevision": "5bb1f6ee58e50c3b8d408bc82a6d3740c2db6e18",
+      "fallback": "captions"
     },
     "crowd-elfriede-eingabe": {
       "profileId": "fe71f4c14887460fab20d07f25ad003d",
@@ -3810,7 +3816,8 @@
       "originalSha256": "f0e22a08d36beb2001646eac2b9a88d4e3d6f89e59d9209efa268f456639f495",
       "referenceSha256": "13ce940fbe69a9d8575a258710ee2b57cc85784230c22d2428461d97cdf35cdb",
       "renderer": "ResembleAI/Chatterbox Multilingual V2 0.1.7",
-      "modelRevision": "5bb1f6ee58e50c3b8d408bc82a6d3740c2db6e18"
+      "modelRevision": "5bb1f6ee58e50c3b8d408bc82a6d3740c2db6e18",
+      "fallback": "captions"
     },
     "crowd-irmgard-aktenordner": {
       "profileId": "e8b985f91e0343e8a4526623ec1bee51",
@@ -3850,7 +3857,8 @@
       "originalSha256": "738caada9bedbce8b48a277940d6a2065bbfb1a8d14ab0557b6854bfc9825701",
       "referenceSha256": "f8a8787c6361d0a0a6d6620d9cddba223b777e06a5c4fea009f3adf64643b99a",
       "renderer": "ResembleAI/Chatterbox Multilingual V2 0.1.7",
-      "modelRevision": "5bb1f6ee58e50c3b8d408bc82a6d3740c2db6e18"
+      "modelRevision": "5bb1f6ee58e50c3b8d408bc82a6d3740c2db6e18",
+      "fallback": "captions"
     },
     "spieler-hans-peter-mustermann": {
       "profileId": "85b9afebb99f40eebad651bcd2e55a1d",

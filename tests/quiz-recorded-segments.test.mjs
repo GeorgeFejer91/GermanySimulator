@@ -43,7 +43,7 @@ const started=[],events=[];
 const audio={state:"running",currentTime:10,createBufferSource:()=>({connect:target=>target,start:when=>started.push(when),stop(){events.push("stop")}}),createGain:()=>({gain:{setValueAtTime(){},linearRampToValueAtTime(){}},connect:target=>target})};
 const item={text:"approach context question",recordingSequence:["a.mp3","b.mp3","c.mp3"],start:()=>events.push("reveal")};
 const playback=vm.createContext({
- item,Promise,Array,ensureAudio:()=>audio,foregroundOutput:()=>({}),
+ item,Promise,Array,stimulusEligible:()=>true,ensureAudio:()=>audio,foregroundOutput:()=>({}),
  prepareRecording:path=>Promise.resolve({duration:{"a.mp3":1,"b.mp3":2,"c.mp3":3}[path]}),
  startSubtitle:()=>events.push("subtitle"),finishStimulus:()=>events.push("done"),
  playSyntheticStimulus:()=>events.push("synthetic")
@@ -61,7 +61,7 @@ assert.equal(events.filter(event=>event==="stop").length,3,"cancellation must st
 
 const broken={text:"whole quiz prompt",recordingSequence:["a.mp3","missing.mp3"]};
 const fallback=vm.createContext({
- item:broken,Promise,Array,ensureAudio:()=>audio,foregroundOutput:()=>({}),
+ item:broken,Promise,Array,stimulusEligible:()=>true,ensureAudio:()=>audio,foregroundOutput:()=>({}),
  prepareRecording:path=>path==="missing.mp3"?Promise.reject(new Error("404")):Promise.resolve({duration:1}),
  startSubtitle:()=>{},finishStimulus:()=>{},playSyntheticStimulus:received=>events.push(received.text)
 });

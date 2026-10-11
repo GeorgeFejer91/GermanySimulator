@@ -1,0 +1,329 @@
+{
+  "schemaVersion": 1,
+  "voiceId": "crowd-waltraud-wartemarke",
+  "profileId": "deeeac80eca14f49ae6a8141594d73d2",
+  "fallback": "captions",
+  "status": "same-profile technical and independent ASR audit; perceptual listening not independently verified",
+  "generatedLineCount": 4,
+  "requestedLineCount": 4,
+  "lineCount": 2,
+  "clips": [
+    {
+      "clipId": "street-waltraud-wartemarke-rule-04",
+      "actorId": "street-waltraud-wartemarke",
+      "voiceId": "crowd-waltraud-wartemarke",
+      "profileId": "deeeac80eca14f49ae6a8141594d73d2",
+      "text": "Mülltonnen müssen parallel zur gefühlten Bordsteinkante stehen.",
+      "english": "Bins must remain parallel to the perceived kerb.",
+      "sourceLocator": "For-AI/AUDIO-TEXT-LIBRARY.js rules[3][1]",
+      "ruleIndex": 3,
+      "seed": 71001,
+      "synthesisAttempt": 1,
+      "referenceSha256": "f8a8787c6361d0a0a6d6620d9cddba223b777e06a5c4fea009f3adf64643b99a",
+      "rendererInputText": "Mülltonnen müssen parallel zur gefühlten Bordsteinkante stehen.",
+      "decode": {
+        "maxSpeechTokens": 250,
+        "attentionHooksBefore": 0,
+        "generatedSpeechTokens": 104,
+        "eosReached": true,
+        "t3InferenceSeconds": 29.58,
+        "temporaryAnalyzerHooksRemoved": 3,
+        "attentionHooksAfter": 0
+      },
+      "rendererInputBasis": "exact authored source",
+      "requestSha256": "db0bbd2033d7f3b96a8c9e8f354ce693a42ec061b776e290de29487289a0f940",
+      "referenceOriginalSha256": "738caada9bedbce8b48a277940d6a2065bbfb1a8d14ab0557b6854bfc9825701",
+      "profileJsonSha256": "c6f63969d44662a47c57b2938fc721974b94cc8feb8b8995ffaca0ef3b811357",
+      "rawSha256": "ba4a2c32c0d77ae5b034b99f149699e99f3aaece2e70a5d265b4eb4ff81ea275",
+      "renderer": "ResembleAI/Chatterbox Multilingual V2 0.1.7",
+      "modelRevision": "5bb1f6ee58e50c3b8d408bc82a6d3740c2db6e18",
+      "modelLicense": "MIT",
+      "referenceLicense": "CC0-1.0 (EmoDB original)",
+      "durationSeconds": 4.1,
+      "renderSeconds": 39.06,
+      "synthesis": {
+        "temperature": 0.65,
+        "repetitionPenalty": 3,
+        "cfgWeight": 0.6,
+        "languageId": "de",
+        "device": "cuda",
+        "precision": "fp16",
+        "t3WeightPrecision": "float16",
+        "conditioningPrecision": "float32",
+        "autocastPrecision": "float16",
+        "conditioningCached": true,
+        "referenceReconditionedForProfile": "deeeac80eca14f49ae6a8141594d73d2",
+        "referenceConditioningVerifiedFloat32": true,
+        "modelSessionReused": true,
+        "cpuThreads": 2,
+        "inferenceMode": true
+      },
+      "listening": "pending",
+      "status": "eligible exact-text recording; human listening pending",
+      "processing": null,
+      "processingSha256": null,
+      "normalization": {
+        "targetLufs": -18,
+        "targetTruePeakDbtp": -1.5,
+        "filter": "loudnorm=I=-15.23:TP=-1.8:LRA=11:linear=false",
+        "iterations": 4
+      },
+      "integratedLufs": -18.15,
+      "truePeakDbtp": -2.21,
+      "asr": "Mülltonnen müssen parallel zur gefühlten Bordsteinkante stehen.",
+      "asrWordExact": true,
+      "asrLiteralWordExact": true,
+      "asrNormalization": "case/punctuation, German numeric and A38 spoken equivalents, section sign/Paragraf orthography, German compound spacing",
+      "asrModel": "independent faster-whisper, cached local model, CPU int8, no script prompt",
+      "asrCpuThreads": 1,
+      "asrLanguageId": "de",
+      "asrComputeType": "int8",
+      "asrScriptPrompt": null,
+      "asrBeamSize": 1,
+      "asrReadings": [
+        {
+          "beamSize": 1,
+          "transcript": "Mülltonnen müssen parallel zur gefühlten Bordsteinkante stehen.",
+          "transcribeSeconds": 97.06
+        }
+      ],
+      "asrModelSha256": "e76620f83d5f5b69efd3d87e3dc180c1bd21df9fbebacfd4335e5e1efcc018da",
+      "asrModelDirectoryName": "voice-asr-model",
+      "wordCues": [
+        {
+          "at": 0,
+          "charIndex": 0,
+          "word": "Mülltonnen",
+          "end": 0.5
+        },
+        {
+          "at": 0.5,
+          "charIndex": 11,
+          "word": "müssen",
+          "end": 0.76
+        },
+        {
+          "at": 0.76,
+          "charIndex": 18,
+          "word": "parallel",
+          "end": 1.22
+        },
+        {
+          "at": 1.22,
+          "charIndex": 27,
+          "word": "zur",
+          "end": 1.54
+        },
+        {
+          "at": 1.54,
+          "charIndex": 31,
+          "word": "gefühlten",
+          "end": 2.14
+        },
+        {
+          "at": 2.14,
+          "charIndex": 41,
+          "word": "Bordsteinkante",
+          "end": 3.04
+        },
+        {
+          "at": 3.04,
+          "charIndex": 56,
+          "word": "stehen",
+          "end": 3.4
+        }
+      ],
+      "sha256": "0fa59eda6331c2eaabd26144afb2781c493f17f913d679898c26b1e21929e744",
+      "bytes": 66476,
+      "sampleRateHz": 48000,
+      "channels": 1,
+      "bitrateBitsPerSecond": 128000,
+      "file": "assets/voices/street-wisdom/street-waltraud-wartemarke-rule-04.mp3",
+      "approval": {
+        "status": "user-approved",
+        "date": "2026-10-11",
+        "instruction": "for the Regel des Moments can we tie these to characters interactions, in general try to link most audio pop ups to character interactions, like people telling you unsolicited wisdoms like Regel des Augenblicks etc These should be done by new characters, design new street people that day these rules in vicinity",
+        "listeningConfirmed": false
+      }
+    },
+    {
+      "clipId": "street-waltraud-wartemarke-rule-10",
+      "actorId": "street-waltraud-wartemarke",
+      "voiceId": "crowd-waltraud-wartemarke",
+      "profileId": "deeeac80eca14f49ae6a8141594d73d2",
+      "text": "Unangekündigte Ortsveränderungen können als spontane Absicht gewertet werden.",
+      "english": "Unannounced changes of location may be treated as spontaneous intent.",
+      "sourceLocator": "For-AI/AUDIO-TEXT-LIBRARY.js rules[9][1]",
+      "ruleIndex": 9,
+      "seed": 71003,
+      "synthesisAttempt": 1,
+      "referenceSha256": "f8a8787c6361d0a0a6d6620d9cddba223b777e06a5c4fea009f3adf64643b99a",
+      "rendererInputText": "Unangekündigte Ortsveränderungen können als spontane Absicht gewertet werden.",
+      "decode": {
+        "maxSpeechTokens": 256,
+        "attentionHooksBefore": 0,
+        "generatedSpeechTokens": 141,
+        "eosReached": true,
+        "t3InferenceSeconds": 40.28,
+        "temporaryAnalyzerHooksRemoved": 3,
+        "attentionHooksAfter": 0
+      },
+      "rendererInputBasis": "exact authored source",
+      "requestSha256": "db0bbd2033d7f3b96a8c9e8f354ce693a42ec061b776e290de29487289a0f940",
+      "referenceOriginalSha256": "738caada9bedbce8b48a277940d6a2065bbfb1a8d14ab0557b6854bfc9825701",
+      "profileJsonSha256": "c6f63969d44662a47c57b2938fc721974b94cc8feb8b8995ffaca0ef3b811357",
+      "rawSha256": "857eb32dac97c3e60eb3034f38ed0020b38d532c777a7a3d6be596fcc3039d3c",
+      "renderer": "ResembleAI/Chatterbox Multilingual V2 0.1.7",
+      "modelRevision": "5bb1f6ee58e50c3b8d408bc82a6d3740c2db6e18",
+      "modelLicense": "MIT",
+      "referenceLicense": "CC0-1.0 (EmoDB original)",
+      "durationSeconds": 5.58,
+      "renderSeconds": 51.14,
+      "synthesis": {
+        "temperature": 0.65,
+        "repetitionPenalty": 3,
+        "cfgWeight": 0.6,
+        "languageId": "de",
+        "device": "cuda",
+        "precision": "fp16",
+        "t3WeightPrecision": "float16",
+        "conditioningPrecision": "float32",
+        "autocastPrecision": "float16",
+        "conditioningCached": true,
+        "referenceReconditionedForProfile": "deeeac80eca14f49ae6a8141594d73d2",
+        "referenceConditioningVerifiedFloat32": true,
+        "modelSessionReused": true,
+        "cpuThreads": 2,
+        "inferenceMode": true
+      },
+      "listening": "pending",
+      "status": "eligible exact-text recording; human listening pending",
+      "processing": null,
+      "processingSha256": null,
+      "normalization": {
+        "targetLufs": -18,
+        "targetTruePeakDbtp": -1.5,
+        "filter": "loudnorm=I=-17.67:TP=-1.8:LRA=11:linear=false",
+        "iterations": 2
+      },
+      "integratedLufs": -18.12,
+      "truePeakDbtp": -2.14,
+      "asr": "Unangekündigte Ortsveränderungen können als spontane Absicht gewertet werden.",
+      "asrWordExact": true,
+      "asrLiteralWordExact": true,
+      "asrNormalization": "case/punctuation, German numeric and A38 spoken equivalents, section sign/Paragraf orthography, German compound spacing",
+      "asrModel": "independent faster-whisper, cached local model, CPU int8, no script prompt",
+      "asrCpuThreads": 1,
+      "asrLanguageId": "de",
+      "asrComputeType": "int8",
+      "asrScriptPrompt": null,
+      "asrBeamSize": 1,
+      "asrReadings": [
+        {
+          "beamSize": 1,
+          "transcript": "Unangekündigte Ortsveränderungen können als spontane Absicht gewertet werden.",
+          "transcribeSeconds": 84.08
+        }
+      ],
+      "asrModelSha256": "e76620f83d5f5b69efd3d87e3dc180c1bd21df9fbebacfd4335e5e1efcc018da",
+      "asrModelDirectoryName": "voice-asr-model",
+      "wordCues": [
+        {
+          "at": 0,
+          "charIndex": 0,
+          "word": "Unangekündigte",
+          "end": 1.12
+        },
+        {
+          "at": 1.12,
+          "charIndex": 15,
+          "word": "Ortsveränderungen",
+          "end": 2.14
+        },
+        {
+          "at": 2.14,
+          "charIndex": 33,
+          "word": "können",
+          "end": 2.62
+        },
+        {
+          "at": 2.62,
+          "charIndex": 40,
+          "word": "als",
+          "end": 2.92
+        },
+        {
+          "at": 2.92,
+          "charIndex": 44,
+          "word": "spontane",
+          "end": 3.5
+        },
+        {
+          "at": 3.5,
+          "charIndex": 53,
+          "word": "Absicht",
+          "end": 4
+        },
+        {
+          "at": 4,
+          "charIndex": 61,
+          "word": "gewertet",
+          "end": 4.48
+        },
+        {
+          "at": 4.48,
+          "charIndex": 70,
+          "word": "werden",
+          "end": 4.82
+        }
+      ],
+      "sha256": "3732472c88c5a3ea93fb7fc47ca0fc57fb316436e4c0f066e85f840146319a60",
+      "bytes": 90284,
+      "sampleRateHz": 48000,
+      "channels": 1,
+      "bitrateBitsPerSecond": 128000,
+      "file": "assets/voices/street-wisdom/street-waltraud-wartemarke-rule-10.mp3",
+      "approval": {
+        "status": "user-approved",
+        "date": "2026-10-11",
+        "instruction": "for the Regel des Moments can we tie these to characters interactions, in general try to link most audio pop ups to character interactions, like people telling you unsolicited wisdoms like Regel des Augenblicks etc These should be done by new characters, design new street people that day these rules in vicinity",
+        "listeningConfirmed": false
+      }
+    }
+  ],
+  "heldPrivate": [
+    {
+      "clipId": "street-waltraud-wartemarke-rule-01",
+      "actorId": "street-waltraud-wartemarke",
+      "voiceId": "crowd-waltraud-wartemarke",
+      "profileId": "deeeac80eca14f49ae6a8141594d73d2",
+      "text": "Schrebergarten-Rasen ist anzuschauen, nicht zu betreten. Zuwiderhandlung löst sofortige Gefahrenabwehr aus.",
+      "english": "Allotment-garden lawn is for viewing, not walking. Violations trigger immediate intervention.",
+      "sourceLocator": "For-AI/AUDIO-TEXT-LIBRARY.js rules[0][1]",
+      "ruleIndex": 0,
+      "reason": "held private; selected production fallback",
+      "failedGates": [
+        "independent spoken-word equivalence"
+      ],
+      "candidateSha256": "f82fc1c8c96cfeff5bd6c2c048f39b0c75fe3f93e089390f02aa730ce9ed6853",
+      "asr": "Schrebergartenrasen ist anzuschauen, nicht zu betreten. Zu Widerhandlungen löst sofortige Gefahrenabwehr aus."
+    },
+    {
+      "clipId": "street-waltraud-wartemarke-rule-07",
+      "actorId": "street-waltraud-wartemarke",
+      "voiceId": "crowd-waltraud-wartemarke",
+      "profileId": "deeeac80eca14f49ae6a8141594d73d2",
+      "text": "Nach 22:00 Uhr ist sogar enthusiastisches Denken nur in Zimmerlautstärke zulässig.",
+      "english": "After 22:00 even enthusiastic thinking is permitted only at room volume.",
+      "sourceLocator": "For-AI/AUDIO-TEXT-LIBRARY.js rules[6][1]",
+      "ruleIndex": 6,
+      "reason": "held private; selected production fallback",
+      "failedGates": [
+        "independent spoken-word equivalence"
+      ],
+      "candidateSha256": "dbac67284eb28bcbd675311a133940a16da13b68e2776513965e08281a7fd889",
+      "asr": "Nach 22,100 Uhr ist sogar enthusiastisches Denken nur in Zimmerlautstärke zulässig."
+    }
+  ],
+  "approvedExistingReuse": []
+}

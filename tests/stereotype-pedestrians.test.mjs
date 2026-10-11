@@ -1,5 +1,6 @@
 import assert from "node:assert/strict";
 import {readFileSync} from "node:fs";
+import vm from "node:vm";
 
 const game=readFileSync("game.js","utf8");
 const world=readFileSync("world3d.js","utf8");
@@ -20,10 +21,35 @@ for(const id of ids){
 assert.match(game,/archetype=crowdArchetypeOrder\[j%crowdArchetypeOrder\.length\]/,"crowd distribution must use the deliberate weighted archetype order");
 assert.match(game,/Object\.freeze\(\["towel-man","towel-woman"\]/,"only the accepted towel characters must populate the ordinary crowd");
 for(const removed of ["bioVegan","wasteMarshal","quietHours","cargoParent","dinInspector","potato"])assert.doesNotMatch(game,new RegExp(removed),`${removed} must not remain in the runtime`);
-assert.match(game,/identityIndex=\(j\*5\+3\)%crowdNames\.length,fullName=crowdNames\[identityIndex\],voiceId=crowdVoiceIds\[identityIndex\]/,"names and voice IDs must rotate together independently from the visual stereotype");
+const context=vm.createContext({window:{},npcs:[],crowdIndex:0,npcLines:['fixture']});
+vm.runInContext(readFileSync('street-wisdom.js','utf8'),context);context.StreetWisdom=context.window.StreetWisdom;
+for(const name of ['crowdNames','crowdVoiceIds'])vm.runInContext(game.match(new RegExp(`const ${name}=[^\\n]+;`))[0],context);
+const archetypeStart=game.indexOf('const crowdArchetypes='),archetypeEnd=game.indexOf('\n',game.indexOf('const crowdArchetypeOrder='));
+vm.runInContext(game.slice(archetypeStart,archetypeEnd)+game.match(/function addCrowdPedestrian\([\s\S]*?\n\}/)[0],context);
+for(let i=0;i<24;i++)vm.runInContext('addCrowdPedestrian(100,100,12,0,0,200)',context);
+assert.equal(new Set(context.npcs.map(n=>n.voiceId)).size,9,'all remaining names rotate through the crowd');
+const profiles=JSON.parse(readFileSync('For-AI/VOICE-CAST.json')).roleProfiles;
+for(const person of context.npcs){
+ assert(!context.StreetWisdom.definitions.some(d=>d.voiceId===person.voiceId),'adviser identities are reserved');
+ assert.equal(profiles.find(p=>p.voiceId===person.voiceId).gender,person.spriteKind==='towelMan'?'male':'female');
+ assert.equal(profiles.find(p=>p.voiceId===person.voiceId).fullName.toUpperCase(),person.fullName);
+}
 assert.match(game,/region=state\.region,archetype=[^;]*surface===\"sidewalk\"&&archetype\?archetype\.barks\[region\]/,"nearby pedestrians must use archetype-specific speech captured in the trigger region");
 assert.match(game,/dist\(player\.x,player\.y,n\.x,n\.y\)<\(n\.audioRadius\|\|NPC_COMPLAINT_DISTANCE\)/,"personal speech must be radius-triggered");
 assert.match(game,/advanceSpriteGait\(n,Math\.hypot\(n\.x-beforeX,n\.y-beforeY\),npcSpriteAtlases\[n\.spriteKind\],CROWD_GAIT_CYCLE_DISTANCE,dt\)/,"walking frames must advance from actual pedestrian distance");
+
+// Execute the real shared bark producer: a named pedestrian cannot borrow
+// an anonymous recording even when that body remains in a legacy text pool.
+for(const matching of [false,true]){
+ let delivery;
+ const voiceId='crowd-hildegard-brotzeit',item={text:'Nein, ich gehe hier nicht weg!',voiceId:matching?voiceId:'thorsten',recording:'./fixture.mp3'};
+ const bark=vm.createContext({performance:{now:()=>10000},state:{region:'germany'},crowdArchetypeById:{},pedestrianBarks:{germany:{sidewalk:[item]}},nextVariant:(_,lines)=>lines[0],STIMULUS_PRIORITY:{REACTIVE:1},showWorldBark:(...args)=>delivery=args});
+ vm.runInContext(game.match(/function pedestrianBark\([\s\S]*?\n\}/)[0],bark);
+ bark.person={name:'HILDEGARD BROTZEIT',voiceId};
+ vm.runInContext('pedestrianBark(person,"sidewalk")',bark);
+ assert.equal(delivery[0],bark.person.name);assert.equal(delivery[1],item.text);
+ assert.equal(delivery[3],matching?item.recording:'');assert.equal(delivery[5].candidateVoiceId,voiceId);
+}
 assert.match(game,/TouristAnimations\.request\(n,dx,dy,atlas\.tourist\)/,"ordinary pedestrians must request all four painted directions from movement");
 assert.match(game,/verticalSidewalkSegments/,"ordinary pedestrians must walk vertically as well as horizontally");
 assert.match(world,/n\.spriteKind&&q\.userData\[n\.spriteKind\+\"Sprite\"\]/,"the WebGL renderer must keep ordinary crowd sprites synchronized");

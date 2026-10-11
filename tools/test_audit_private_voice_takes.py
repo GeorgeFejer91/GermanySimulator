@@ -65,6 +65,17 @@ def main() -> None:
         except ValueError as error:
             assert "speaker sources changed" in str(error), error
         inventory.write_bytes(original_inventory)
+        changed_inventory = json.loads(original_inventory)
+        street = next(item for item in changed_inventory["dynamicIdentityVoiceIds"]
+                      if item["voiceId"] == "crowd-waltraud-wartemarke")
+        street["sourcePools"][0] = "For-AI/AUDIO-TEXT-LIBRARY.js rules[1][1]"
+        inventory.write_text(json.dumps(changed_inventory), encoding="utf-8")
+        try:
+            audit_module.audit(music, game)
+            raise AssertionError("Changed street-rule ownership was accepted")
+        except ValueError as error:
+            assert "speaker sources changed" in str(error), error
+        inventory.write_bytes(original_inventory)
         audio = target / take["audioFile"]
         original_bytes = audio.read_bytes()
         audio.write_bytes(original_bytes + b"changed")
@@ -77,7 +88,7 @@ def main() -> None:
         (target / "take.json").write_text(json.dumps(tampered), encoding="utf-8")
         changed = audit_module.audit(music, game)
         assert changed["verifiedCount"] == 0 and "Source request row changed" in changed["errors"][0]["error"], changed
-    print(json.dumps({"cleanReceipt": "verified", "changedQuizPool": "rejected", "tamperedMp3": "rejected",
+    print(json.dumps({"cleanReceipt": "verified", "changedQuizPool": "rejected", "changedStreetRuleOwner": "rejected", "tamperedMp3": "rejected",
                       "tamperedRequestRow": "rejected"}))
 
 

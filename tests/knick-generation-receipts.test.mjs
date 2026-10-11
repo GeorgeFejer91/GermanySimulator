@@ -3,9 +3,9 @@ import assert from 'node:assert/strict';
 import {readFileSync} from 'node:fs';
 import {knickGenerationComplete} from '../tools/curate-voice-library.mjs';
 const manifest=JSON.parse(readFileSync(new URL('../assets/voices/knick/legacy-receipts.json',import.meta.url)));
-test('only the immutable audited first pass may lack native EOS receipts',()=>{
+test('new fixed voice takes require native EOS even when a first-pass receipt exists',()=>{
  for(const take of manifest.clips){
-  assert.equal(knickGenerationComplete(take),true);
+  assert.equal(knickGenerationComplete(take),false);
   assert.equal(knickGenerationComplete({...take,sha256:'changed'}),false);
   assert.equal(knickGenerationComplete({...take,rawSha256:'changed'}),false);
   assert.equal(knickGenerationComplete({...take,text:take.text+' changed'}),false);

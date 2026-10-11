@@ -22,7 +22,7 @@ const context=vm.createContext({
  Math,
  performance:{now:()=>100},state:{subtitlesOn:true},
  window:{speechSynthesis:{},GermanySubtitleLayout:{captionAtProgress:(parts,progress)=>parts[Math.min(parts.length-1,Math.floor(progress*parts.length))]}},
- item,
+ item,stimulusEligible:()=>true,speechCatalog:{productionVoices:{}},
  finished:()=>finished++,
  setSubtitle:value=>caption=value,
  SpeechSynthesisUtterance:class{constructor(text){this.text=text;this.voice=null}},
@@ -89,7 +89,7 @@ assert.equal(activeCancel,1,"replacing active speech must still cancel it");
 const order=[],recorded={text:"Recorded line",recording:"line.mp3",start:()=>order.push("text")};
 let resumeAudio;
 const recordingContext=vm.createContext({
- item:recorded,prepareRecording:()=>Promise.resolve({duration:2}),
+ item:recorded,stimulusEligible:()=>true,prepareRecording:()=>Promise.resolve({duration:2}),
  ensureAudio:()=>({state:"suspended",resume:()=>new Promise(resolve=>resumeAudio=resolve),currentTime:0,
   createBufferSource:()=>({connect:target=>target,start:()=>order.push("audio")}),
   createGain:()=>({gain:{setValueAtTime(){},linearRampToValueAtTime(){}},connect:target=>target})}),

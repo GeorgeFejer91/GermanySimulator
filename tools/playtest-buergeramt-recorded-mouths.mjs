@@ -11,7 +11,7 @@ const browser=await chromium.launch({headless:true,executablePath:process.env.CH
 try{
  const context=await browser.newContext({viewport:{width:1280,height:800}});
  await context.addInitScript(()=>{
-  const NativeAudio=window.Audio;window.Audio=function(...args){const media=new NativeAudio(...args);media.muted=true;window.mouthMedia=media;return media};
+  const NativeAudio=window.Audio;window.Audio=function(...args){const media=new NativeAudio(...args);media.muted=true;(window.mouthPlayers??=[]).push(media);return media};
   const play=HTMLMediaElement.prototype.play;HTMLMediaElement.prototype.play=function(...args){this.muted=true;return play.apply(this,args)};
   const connect=AudioNode.prototype.connect;AudioNode.prototype.connect=function(target,...args){if(target===this.context.destination){const mute=this.context.createGain();mute.gain.value=0;connect.call(mute,target);return connect.call(this,mute,...args)}return connect.call(this,target,...args)};
   speechSynthesis.speak=u=>{u.volume=0;u.onstart?.()};speechSynthesis.cancel=()=>{};
@@ -27,13 +27,13 @@ try{
    GermanySimulatorAudioText={...mouthCatalog,candidateClip:()=>path};
    __mouthProbe.content('FRAU KNICK',text);
   },{path,text:track.source});
-  await page.waitForFunction(path=>BuergeramtLevel.lipSpeech.timing==='audio-cues'&&BuergeramtLevel.lipSpeech.recording===path&&!mouthMedia.paused,path,{timeout:10000});
+  await page.waitForFunction(path=>{const media=mouthPlayers.findLast(media=>media.getAttribute('src')===path);if(BuergeramtLevel.lipSpeech.timing==='audio-cues'&&BuergeramtLevel.lipSpeech.recording===path&&media&&!media.paused){window.mouthMedia=media;return true}},path,{timeout:10000});
   const traces=[];
   for(let n=0;n<5;n++){
    const receipt=await page.evaluate(()=>{const pose=BuergeramtLevel.lipSpeech;return{pose,mediaTime:mouthMedia.currentTime,rate:mouthMedia.playbackRate}});
    const expected=sampleTimedMouth(track,receipt.pose.time);
    assert.deepEqual(receipt.pose.shape,[expected.open,expected.spread,expected.round,expected.bite]);
-   assert(Math.abs(receipt.mediaTime-receipt.pose.time)<.04);traces.push(receipt);await page.waitForTimeout(90);
+   assert(Math.abs(receipt.mediaTime-receipt.pose.time)<.04,`${track.clipId}: media ${receipt.mediaTime}, pose ${receipt.pose.time}`);traces.push(receipt);await page.waitForTimeout(90);
   }
   const held=await page.evaluate(()=>{mouthMedia.pause();return BuergeramtLevel.lipSpeech});await page.waitForTimeout(130);
   assert.deepEqual(await page.evaluate(()=>BuergeramtLevel.lipSpeech.shape),held.shape);

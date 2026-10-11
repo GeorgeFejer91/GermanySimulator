@@ -1,0 +1,461 @@
+{
+  "schemaVersion": 1,
+  "voiceId": "amt-brunhilde-knick",
+  "profileId": "b080c7d95ecd418fb428282461d7fbe7",
+  "fallback": "captions",
+  "status": "same-profile technical and independent ASR audit; perceptual listening not independently verified",
+  "generatedLineCount": 3,
+  "requestedLineCount": 3,
+  "lineCount": 3,
+  "clips": [
+    {
+      "clipId": "knick-ambient-clerk-1",
+      "actorId": "clerk",
+      "voiceId": "amt-brunhilde-knick",
+      "profileId": "b080c7d95ecd418fb428282461d7fbe7",
+      "text": "Für die Kopie des Originals benötigen Sie das Original der Kopie.",
+      "sourceLocator": "buergeramt.js ambientLines[1]",
+      "seed": 71000,
+      "synthesisAttempt": 1,
+      "referenceSha256": "901e9ad60eda5cbb36337b12864b6a2b0d133570acb90941b9eabd9888c16351",
+      "rendererInputText": "Für die Kopie des Originals benötigen Sie das Original der Kopie.",
+      "decode": {
+        "maxSpeechTokens": 292,
+        "attentionHooksBefore": 0,
+        "generatedSpeechTokens": 109,
+        "eosReached": true,
+        "t3InferenceSeconds": 30.12,
+        "temporaryAnalyzerHooksRemoved": 3,
+        "attentionHooksAfter": 0
+      },
+      "rendererInputBasis": "exact authored source",
+      "requestSha256": "ed6b893b9817ab6d70a227ab6708ceb367c65d854aba3ac7c82e3b775f3434d5",
+      "referenceOriginalSha256": "f87daaf53e9e3183065dbe38a65097f5c8df3ae11454ea56676a8298800683c2",
+      "profileJsonSha256": "4071c9052ebb393358d9957cc5f2271d93c52f13b747fad9f5253bd81b00ce66",
+      "rawSha256": "98e7e75e02e79927f78bd7eb4b83b27bdaaa243f40649faa23fbfd772a1a97b1",
+      "renderer": "ResembleAI/Chatterbox Multilingual V2 0.1.7",
+      "modelRevision": "5bb1f6ee58e50c3b8d408bc82a6d3740c2db6e18",
+      "modelLicense": "MIT",
+      "referenceLicense": "CC0-1.0 (EmoDB original, transformed reference)",
+      "durationSeconds": 4.32,
+      "renderSeconds": 37.56,
+      "synthesis": {
+        "temperature": 0.65,
+        "repetitionPenalty": 3,
+        "cfgWeight": 0.6,
+        "languageId": "de",
+        "device": "cuda",
+        "precision": "fp16",
+        "t3WeightPrecision": "float16",
+        "conditioningPrecision": "float32",
+        "autocastPrecision": "float16",
+        "conditioningCached": true,
+        "referenceReconditionedForProfile": "b080c7d95ecd418fb428282461d7fbe7",
+        "referenceConditioningVerifiedFloat32": true,
+        "modelSessionReused": true,
+        "cpuThreads": 2,
+        "inferenceMode": true
+      },
+      "listening": "pending",
+      "status": "eligible exact-text recording; human listening pending",
+      "processing": "[0:a]highpass=f=65,lowpass=f=7600,asplit[clean][wet];[wet]rubberband=pitch=0.78,lowpass=f=1450,volume=0.16[shadow];[clean][shadow]amix=inputs=2:duration=first:normalize=0[a]",
+      "processingSha256": "1c7968d73192bfbf5d2b759fce5dc07b092badbd133718ae05d67dbdda72ccb2",
+      "normalization": {
+        "targetLufs": -18,
+        "targetTruePeakDbtp": -1.5,
+        "filter": "loudnorm=I=-12.82:TP=-1.8:LRA=11:linear=false",
+        "iterations": 4
+      },
+      "integratedLufs": -18.24,
+      "truePeakDbtp": -2.24,
+      "asr": "Für die Kopie des Originals benötigen Sie das Original der Kopie.",
+      "asrWordExact": true,
+      "asrLiteralWordExact": true,
+      "asrNormalization": "case/punctuation, German numeric and A38 spoken equivalents, section sign/Paragraf orthography, German compound spacing",
+      "asrModel": "independent faster-whisper, cached local model, cuda int8 (effective int8_float16), no script prompt",
+      "asrCpuThreads": 1,
+      "asrDevice": "cuda",
+      "asrEffectiveComputeType": "int8_float16",
+      "asrLanguageId": "de",
+      "asrComputeType": "int8",
+      "asrScriptPrompt": null,
+      "asrBeamSize": 1,
+      "asrReadings": [
+        {
+          "beamSize": 1,
+          "transcript": "Für die Kopie des Originals benötigen Sie das Original der Kopie.",
+          "transcribeSeconds": 3.36
+        }
+      ],
+      "asrModelSha256": "e76620f83d5f5b69efd3d87e3dc180c1bd21df9fbebacfd4335e5e1efcc018da",
+      "asrModelDirectoryName": "voice-asr-model",
+      "wordCues": [
+        {
+          "at": 0,
+          "charIndex": 0,
+          "word": "Für",
+          "end": 0.2
+        },
+        {
+          "at": 0.2,
+          "charIndex": 4,
+          "word": "die",
+          "end": 0.34
+        },
+        {
+          "at": 0.34,
+          "charIndex": 8,
+          "word": "Kopie",
+          "end": 0.68
+        },
+        {
+          "at": 0.68,
+          "charIndex": 14,
+          "word": "des",
+          "end": 0.84
+        },
+        {
+          "at": 0.84,
+          "charIndex": 18,
+          "word": "Originals",
+          "end": 1.46
+        },
+        {
+          "at": 1.46,
+          "charIndex": 28,
+          "word": "benötigen",
+          "end": 2.1
+        },
+        {
+          "at": 2.1,
+          "charIndex": 38,
+          "word": "Sie",
+          "end": 2.24
+        },
+        {
+          "at": 2.24,
+          "charIndex": 42,
+          "word": "das",
+          "end": 2.46
+        },
+        {
+          "at": 2.46,
+          "charIndex": 46,
+          "word": "Original",
+          "end": 2.9
+        },
+        {
+          "at": 2.9,
+          "charIndex": 55,
+          "word": "der",
+          "end": 3.08
+        },
+        {
+          "at": 3.08,
+          "charIndex": 59,
+          "word": "Kopie",
+          "end": 3.56
+        }
+      ],
+      "sha256": "93e185833be4cfaa72b73dc645a04d92385cccf1569df3a254aa9e64fb2e9b8f",
+      "bytes": 69932,
+      "sampleRateHz": 48000,
+      "channels": 1,
+      "bitrateBitsPerSecond": 128000,
+      "file": "assets/voices/knick/knick-ambient-clerk-1.mp3",
+      "english": "For a copy of the original, you need the original of the copy.",
+      "approval": {
+        "status": "user-approved",
+        "date": "2026-10-11",
+        "instruction": "the frau am schalter has a new voice, I like this on, but from what I se there is a th old voice that is still triggered, can you establish protocols, for having fixed voices for characters",
+        "listeningConfirmed": false
+      }
+    },
+    {
+      "clipId": "knick-ambient-clerk-2",
+      "actorId": "clerk",
+      "voiceId": "amt-brunhilde-knick",
+      "profileId": "b080c7d95ecd418fb428282461d7fbe7",
+      "text": "Nein, die Warteschleife ist persönlich zu nehmen.",
+      "sourceLocator": "buergeramt.js ambientLines[2]",
+      "seed": 71001,
+      "synthesisAttempt": 1,
+      "referenceSha256": "901e9ad60eda5cbb36337b12864b6a2b0d133570acb90941b9eabd9888c16351",
+      "rendererInputText": "Nein, die Warteschleife ist persönlich zu nehmen.",
+      "decode": {
+        "maxSpeechTokens": 250,
+        "attentionHooksBefore": 0,
+        "generatedSpeechTokens": 108,
+        "eosReached": true,
+        "t3InferenceSeconds": 28.38,
+        "temporaryAnalyzerHooksRemoved": 3,
+        "attentionHooksAfter": 0
+      },
+      "rendererInputBasis": "exact authored source",
+      "requestSha256": "ed6b893b9817ab6d70a227ab6708ceb367c65d854aba3ac7c82e3b775f3434d5",
+      "referenceOriginalSha256": "f87daaf53e9e3183065dbe38a65097f5c8df3ae11454ea56676a8298800683c2",
+      "profileJsonSha256": "4071c9052ebb393358d9957cc5f2271d93c52f13b747fad9f5253bd81b00ce66",
+      "rawSha256": "d0f54c6128c8613c0f6cbb82482ea27b30c2ec87de7dc4ce575339c1931e0a12",
+      "renderer": "ResembleAI/Chatterbox Multilingual V2 0.1.7",
+      "modelRevision": "5bb1f6ee58e50c3b8d408bc82a6d3740c2db6e18",
+      "modelLicense": "MIT",
+      "referenceLicense": "CC0-1.0 (EmoDB original, transformed reference)",
+      "durationSeconds": 4.28,
+      "renderSeconds": 38.03,
+      "synthesis": {
+        "temperature": 0.65,
+        "repetitionPenalty": 3,
+        "cfgWeight": 0.6,
+        "languageId": "de",
+        "device": "cuda",
+        "precision": "fp16",
+        "t3WeightPrecision": "float16",
+        "conditioningPrecision": "float32",
+        "autocastPrecision": "float16",
+        "conditioningCached": true,
+        "referenceReconditionedForProfile": "b080c7d95ecd418fb428282461d7fbe7",
+        "referenceConditioningVerifiedFloat32": true,
+        "modelSessionReused": true,
+        "cpuThreads": 2,
+        "inferenceMode": true
+      },
+      "listening": "pending",
+      "status": "eligible exact-text recording; human listening pending",
+      "processing": "[0:a]highpass=f=65,lowpass=f=7600,asplit[clean][wet];[wet]rubberband=pitch=0.78,lowpass=f=1450,volume=0.16[shadow];[clean][shadow]amix=inputs=2:duration=first:normalize=0[a]",
+      "processingSha256": "1c7968d73192bfbf5d2b759fce5dc07b092badbd133718ae05d67dbdda72ccb2",
+      "normalization": {
+        "targetLufs": -18,
+        "targetTruePeakDbtp": -1.5,
+        "filter": "loudnorm=I=-12.600000000000001:TP=-1.8:LRA=11:linear=false",
+        "iterations": 6
+      },
+      "integratedLufs": -18.24,
+      "truePeakDbtp": -2.23,
+      "asr": "Nein, die Warteschleife ist persönlich zu nehmen.",
+      "asrWordExact": true,
+      "asrLiteralWordExact": true,
+      "asrNormalization": "case/punctuation, German numeric and A38 spoken equivalents, section sign/Paragraf orthography, German compound spacing",
+      "asrModel": "independent faster-whisper, cached local model, cuda int8 (effective int8_float16), no script prompt",
+      "asrCpuThreads": 1,
+      "asrDevice": "cuda",
+      "asrEffectiveComputeType": "int8_float16",
+      "asrLanguageId": "de",
+      "asrComputeType": "int8",
+      "asrScriptPrompt": null,
+      "asrBeamSize": 1,
+      "asrReadings": [
+        {
+          "beamSize": 1,
+          "transcript": "Nein, die Warteschleife ist persönlich zu nehmen.",
+          "transcribeSeconds": 3.23
+        }
+      ],
+      "asrModelSha256": "e76620f83d5f5b69efd3d87e3dc180c1bd21df9fbebacfd4335e5e1efcc018da",
+      "asrModelDirectoryName": "voice-asr-model",
+      "wordCues": [
+        {
+          "at": 0,
+          "charIndex": 0,
+          "word": "Nein",
+          "end": 0.56
+        },
+        {
+          "at": 0.86,
+          "charIndex": 6,
+          "word": "die",
+          "end": 0.96
+        },
+        {
+          "at": 0.96,
+          "charIndex": 10,
+          "word": "Warteschleife",
+          "end": 1.74
+        },
+        {
+          "at": 1.74,
+          "charIndex": 24,
+          "word": "ist",
+          "end": 1.9
+        },
+        {
+          "at": 1.9,
+          "charIndex": 28,
+          "word": "persönlich",
+          "end": 2.4
+        },
+        {
+          "at": 2.4,
+          "charIndex": 39,
+          "word": "zu",
+          "end": 2.7
+        },
+        {
+          "at": 2.7,
+          "charIndex": 42,
+          "word": "nehmen",
+          "end": 2.92
+        }
+      ],
+      "sha256": "00e463f5f365755c9aa4bdf74a0416549575dcb389557f6317eba02aa38a332e",
+      "bytes": 69548,
+      "sampleRateHz": 48000,
+      "channels": 1,
+      "bitrateBitsPerSecond": 128000,
+      "file": "assets/voices/knick/knick-ambient-clerk-2.mp3",
+      "english": "No, being put on hold is to be taken personally.",
+      "approval": {
+        "status": "user-approved",
+        "date": "2026-10-11",
+        "instruction": "the frau am schalter has a new voice, I like this on, but from what I se there is a th old voice that is still triggered, can you establish protocols, for having fixed voices for characters",
+        "listeningConfirmed": false
+      }
+    },
+    {
+      "clipId": "knick-ambient-clerk-4",
+      "actorId": "clerk",
+      "voiceId": "amt-brunhilde-knick",
+      "profileId": "b080c7d95ecd418fb428282461d7fbe7",
+      "text": "Einen Moment. Ich verbinde Sie mit Ihrem Moment.",
+      "sourceLocator": "buergeramt.js ambientLines[4]",
+      "seed": 71002,
+      "synthesisAttempt": 1,
+      "referenceSha256": "901e9ad60eda5cbb36337b12864b6a2b0d133570acb90941b9eabd9888c16351",
+      "rendererInputText": "Einen Moment. Ich verbinde Sie mit Ihrem Moment.",
+      "decode": {
+        "maxSpeechTokens": 256,
+        "attentionHooksBefore": 0,
+        "generatedSpeechTokens": 91,
+        "eosReached": true,
+        "t3InferenceSeconds": 30.72,
+        "temporaryAnalyzerHooksRemoved": 3,
+        "attentionHooksAfter": 0
+      },
+      "rendererInputBasis": "exact authored source",
+      "requestSha256": "ed6b893b9817ab6d70a227ab6708ceb367c65d854aba3ac7c82e3b775f3434d5",
+      "referenceOriginalSha256": "f87daaf53e9e3183065dbe38a65097f5c8df3ae11454ea56676a8298800683c2",
+      "profileJsonSha256": "4071c9052ebb393358d9957cc5f2271d93c52f13b747fad9f5253bd81b00ce66",
+      "rawSha256": "84036c25ee8c5feac10a0c58f39f4b555dc23d0e491c13c5e35f223924c53e15",
+      "renderer": "ResembleAI/Chatterbox Multilingual V2 0.1.7",
+      "modelRevision": "5bb1f6ee58e50c3b8d408bc82a6d3740c2db6e18",
+      "modelLicense": "MIT",
+      "referenceLicense": "CC0-1.0 (EmoDB original, transformed reference)",
+      "durationSeconds": 3.6,
+      "renderSeconds": 38.2,
+      "synthesis": {
+        "temperature": 0.65,
+        "repetitionPenalty": 3,
+        "cfgWeight": 0.6,
+        "languageId": "de",
+        "device": "cuda",
+        "precision": "fp16",
+        "t3WeightPrecision": "float16",
+        "conditioningPrecision": "float32",
+        "autocastPrecision": "float16",
+        "conditioningCached": true,
+        "referenceReconditionedForProfile": "b080c7d95ecd418fb428282461d7fbe7",
+        "referenceConditioningVerifiedFloat32": true,
+        "modelSessionReused": true,
+        "cpuThreads": 2,
+        "inferenceMode": true
+      },
+      "listening": "pending",
+      "status": "eligible exact-text recording; human listening pending",
+      "processing": "[0:a]highpass=f=65,lowpass=f=7600,asplit[clean][wet];[wet]rubberband=pitch=0.78,lowpass=f=1450,volume=0.16[shadow];[clean][shadow]amix=inputs=2:duration=first:normalize=0[a]",
+      "processingSha256": "1c7968d73192bfbf5d2b759fce5dc07b092badbd133718ae05d67dbdda72ccb2",
+      "normalization": {
+        "targetLufs": -18,
+        "targetTruePeakDbtp": -1.5,
+        "filter": "loudnorm=I=-14.809999999999999:TP=-1.8:LRA=11:linear=false",
+        "iterations": 3
+      },
+      "integratedLufs": -18.18,
+      "truePeakDbtp": -2.22,
+      "asr": "Einen Moment. Ich verbinde sie mit ihrem Moment.",
+      "asrWordExact": true,
+      "asrLiteralWordExact": true,
+      "asrNormalization": "case/punctuation, German numeric and A38 spoken equivalents, section sign/Paragraf orthography, German compound spacing",
+      "asrModel": "independent faster-whisper, cached local model, cuda int8 (effective int8_float16), no script prompt",
+      "asrCpuThreads": 1,
+      "asrDevice": "cuda",
+      "asrEffectiveComputeType": "int8_float16",
+      "asrLanguageId": "de",
+      "asrComputeType": "int8",
+      "asrScriptPrompt": null,
+      "asrBeamSize": 1,
+      "asrReadings": [
+        {
+          "beamSize": 1,
+          "transcript": "Einen Moment. Ich verbinde sie mit ihrem Moment.",
+          "transcribeSeconds": 3.25
+        }
+      ],
+      "asrModelSha256": "e76620f83d5f5b69efd3d87e3dc180c1bd21df9fbebacfd4335e5e1efcc018da",
+      "asrModelDirectoryName": "voice-asr-model",
+      "wordCues": [
+        {
+          "at": 0,
+          "charIndex": 0,
+          "word": "Einen",
+          "end": 0.38
+        },
+        {
+          "at": 0.38,
+          "charIndex": 6,
+          "word": "Moment",
+          "end": 0.7
+        },
+        {
+          "at": 1.12,
+          "charIndex": 14,
+          "word": "Ich",
+          "end": 1.46
+        },
+        {
+          "at": 1.46,
+          "charIndex": 18,
+          "word": "verbinde",
+          "end": 1.96
+        },
+        {
+          "at": 1.96,
+          "charIndex": 27,
+          "word": "Sie",
+          "end": 2.12
+        },
+        {
+          "at": 2.12,
+          "charIndex": 31,
+          "word": "mit",
+          "end": 2.3
+        },
+        {
+          "at": 2.3,
+          "charIndex": 35,
+          "word": "Ihrem",
+          "end": 2.54
+        },
+        {
+          "at": 2.54,
+          "charIndex": 41,
+          "word": "Moment",
+          "end": 3
+        }
+      ],
+      "sha256": "8741bfe1fea55b7d18192fac5442ba5592143ff3d658e2a98663c2086aafbd52",
+      "bytes": 58412,
+      "sampleRateHz": 48000,
+      "channels": 1,
+      "bitrateBitsPerSecond": 128000,
+      "file": "assets/voices/knick/knick-ambient-clerk-4.mp3",
+      "english": "One moment. I'll connect you to your moment.",
+      "approval": {
+        "status": "user-approved",
+        "date": "2026-10-11",
+        "instruction": "the frau am schalter has a new voice, I like this on, but from what I se there is a th old voice that is still triggered, can you establish protocols, for having fixed voices for characters",
+        "listeningConfirmed": false
+      }
+    }
+  ],
+  "heldPrivate": [],
+  "approvedExistingReuse": []
+}

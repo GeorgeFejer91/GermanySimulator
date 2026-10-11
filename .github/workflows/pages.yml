@@ -32,7 +32,7 @@ jobs:
       - name: Check fixed character voices
         run: |
           node tools/curate-voice-library.mjs --check
-          node --test tests/voice-consistency.test.mjs tests/voice-cast.test.mjs tests/voice-candidate-preview.test.mjs tests/knick-generation-receipts.test.mjs
+          node --test tests/voice-consistency.test.mjs tests/voice-cast.test.mjs tests/voice-candidate-preview.test.mjs tests/street-wisdom.test.mjs tests/street-wisdom-encounters.test.mjs tests/law-voice-assets.test.mjs tests/knick-generation-receipts.test.mjs
       - name: Check game and browser regressions
         run: node --test tests/browser-performance.test.mjs tests/runtime-smoothness.test.mjs tests/browser-responsiveness.test.mjs tests/asset-streaming.test.mjs tests/tourist-animation.test.mjs tests/intro-music.test.mjs tests/splat-preview.test.mjs tests/crossing-layout.test.mjs tests/browser-benchmark.test.mjs tests/touch-controls.test.mjs tests/english-subtitles.test.mjs tests/merkel-voice.test.mjs tests/mission-fax.test.mjs tests/mission-pointer.test.mjs tests/buergeramt-door-radiance.test.mjs tests/buergeramt-entry.test.mjs
       - name: Check office Gaussian actions and lifetime

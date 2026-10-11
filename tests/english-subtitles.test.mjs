@@ -16,10 +16,11 @@ const library=context.window.GermanySimulatorAudioText;
 
 assert.equal(library.version,8);
 const knickCount=['manifest.json','ambient-manifest.json'].reduce((n,file)=>n+(existsSync(join(root,'assets/voices/knick',file))?JSON.parse(readFileSync(join(root,'assets/voices/knick',file),'utf8')).clips.length:0),0);
+const streetDirectory=join(root,'assets/voices/street-wisdom'),streetCount=existsSync(streetDirectory)?readdirSync(streetDirectory).filter(file=>file.endsWith('-manifest.json')).reduce((n,file)=>n+JSON.parse(readFileSync(join(streetDirectory,file),'utf8')).clips.length,0):0;
 assert.equal(Object.keys(library.clips).length,113+knickCount,"recorded and text-only dialogue need stable IDs");
 const recordedClips=Object.values(library.clips).filter(clip=>clip.recording);
-assert.equal(recordedClips.length,109+knickCount,"retired clerk and traffic takes must not ship");
-assert.equal(new Set(recordedClips.map(clip=>clip.path)).size,109+knickCount,"recorded clip paths must be unique");
+assert.equal(recordedClips.length,98+knickCount+streetCount,"retired clerk, traffic and anonymous rule takes must not ship");
+assert.equal(new Set(recordedClips.map(clip=>clip.path)).size,98+knickCount+streetCount,"recorded clip paths must be unique");
 for(const clip of Object.values(library.clips)){
  assert.ok(library.voices[clip.voiceId],`${clip.id} needs a registered voice ID`);
  if(clip.targetVoiceId)assert.ok(library.voices[clip.targetVoiceId]?.profileId,`${clip.id} needs a saved replacement profile`);

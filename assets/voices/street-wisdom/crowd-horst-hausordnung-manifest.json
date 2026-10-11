@@ -1,0 +1,465 @@
+{
+  "schemaVersion": 1,
+  "voiceId": "crowd-horst-hausordnung",
+  "profileId": "159d0e6984c14c66b8e452f82495ba6c",
+  "fallback": "captions",
+  "status": "same-profile technical and independent ASR audit; perceptual listening not independently verified",
+  "generatedLineCount": 4,
+  "requestedLineCount": 4,
+  "lineCount": 3,
+  "clips": [
+    {
+      "clipId": "street-horst-hausordnung-rule-02",
+      "actorId": "street-horst-hausordnung",
+      "voiceId": "crowd-horst-hausordnung",
+      "profileId": "159d0e6984c14c66b8e452f82495ba6c",
+      "text": "Überdurchschnittlich zügiges Gehen kann als unnötige Dynamik gewertet werden.",
+      "english": "Above-average walking speed may be treated as unnecessary dynamism.",
+      "sourceLocator": "For-AI/AUDIO-TEXT-LIBRARY.js rules[1][1]",
+      "ruleIndex": 1,
+      "seed": 71000,
+      "synthesisAttempt": 1,
+      "referenceSha256": "13ce940fbe69a9d8575a258710ee2b57cc85784230c22d2428461d97cdf35cdb",
+      "rendererInputText": "Überdurchschnittlich zügiges Gehen kann als unnötige Dynamik gewertet werden.",
+      "decode": {
+        "maxSpeechTokens": 268,
+        "attentionHooksBefore": 0,
+        "generatedSpeechTokens": 117,
+        "eosReached": true,
+        "t3InferenceSeconds": 33.61,
+        "temporaryAnalyzerHooksRemoved": 3,
+        "attentionHooksAfter": 0
+      },
+      "rendererInputBasis": "exact authored source",
+      "requestSha256": "a10723ba8fb6fe8c3ad05c4e459d6859a7b9faf005e77125a26eb9db954e8ede",
+      "referenceOriginalSha256": "f0e22a08d36beb2001646eac2b9a88d4e3d6f89e59d9209efa268f456639f495",
+      "profileJsonSha256": "5e8424986280db42c1a3d6a06a0e3edbb04903e8c14deda3548034ab94bdb45f",
+      "rawSha256": "bc03d92c3a7f9099346d2f827f58de206f95c5820ca246066d608d6d68b62f10",
+      "renderer": "ResembleAI/Chatterbox Multilingual V2 0.1.7",
+      "modelRevision": "5bb1f6ee58e50c3b8d408bc82a6d3740c2db6e18",
+      "modelLicense": "MIT",
+      "referenceLicense": "CC0-1.0 (EmoDB original)",
+      "durationSeconds": 4.64,
+      "renderSeconds": 44.59,
+      "synthesis": {
+        "temperature": 0.65,
+        "repetitionPenalty": 3,
+        "cfgWeight": 0.6,
+        "languageId": "de",
+        "device": "cuda",
+        "precision": "fp16",
+        "t3WeightPrecision": "float16",
+        "conditioningPrecision": "float32",
+        "autocastPrecision": "float16",
+        "conditioningCached": true,
+        "referenceReconditionedForProfile": "159d0e6984c14c66b8e452f82495ba6c",
+        "referenceConditioningVerifiedFloat32": true,
+        "modelSessionReused": true,
+        "cpuThreads": 2,
+        "inferenceMode": true
+      },
+      "listening": "pending",
+      "status": "eligible exact-text recording; human listening pending",
+      "processing": null,
+      "processingSha256": null,
+      "normalization": {
+        "targetLufs": -18,
+        "targetTruePeakDbtp": -1.5,
+        "filter": "loudnorm=I=-17.21:TP=-1.8:LRA=11:linear=false",
+        "iterations": 2
+      },
+      "integratedLufs": -18.26,
+      "truePeakDbtp": -2.14,
+      "asr": "Überdurchschnittlich zügiges Gehen kann als unnötige Dynamik gewertet werden.",
+      "asrWordExact": true,
+      "asrLiteralWordExact": true,
+      "asrNormalization": "case/punctuation, German numeric and A38 spoken equivalents, section sign/Paragraf orthography, German compound spacing",
+      "asrModel": "independent faster-whisper, cached local model, CPU int8, no script prompt",
+      "asrCpuThreads": 1,
+      "asrLanguageId": "de",
+      "asrComputeType": "int8",
+      "asrScriptPrompt": null,
+      "asrBeamSize": 1,
+      "asrReadings": [
+        {
+          "beamSize": 1,
+          "transcript": "Überdurchschnittlich zügiges Gehen kann als unnötige Dynamik gewertet werden.",
+          "transcribeSeconds": 98.17
+        }
+      ],
+      "asrModelSha256": "e76620f83d5f5b69efd3d87e3dc180c1bd21df9fbebacfd4335e5e1efcc018da",
+      "asrModelDirectoryName": "voice-asr-model",
+      "wordCues": [
+        {
+          "at": 0,
+          "charIndex": 0,
+          "word": "Überdurchschnittlich",
+          "end": 1.06
+        },
+        {
+          "at": 1.06,
+          "charIndex": 21,
+          "word": "zügiges",
+          "end": 1.6
+        },
+        {
+          "at": 1.6,
+          "charIndex": 29,
+          "word": "Gehen",
+          "end": 1.88
+        },
+        {
+          "at": 1.88,
+          "charIndex": 35,
+          "word": "kann",
+          "end": 2.06
+        },
+        {
+          "at": 2.06,
+          "charIndex": 40,
+          "word": "als",
+          "end": 2.4
+        },
+        {
+          "at": 2.4,
+          "charIndex": 44,
+          "word": "unnötige",
+          "end": 3
+        },
+        {
+          "at": 3,
+          "charIndex": 53,
+          "word": "Dynamik",
+          "end": 3.48
+        },
+        {
+          "at": 3.48,
+          "charIndex": 61,
+          "word": "gewertet",
+          "end": 3.88
+        },
+        {
+          "at": 3.88,
+          "charIndex": 70,
+          "word": "werden",
+          "end": 4.16
+        }
+      ],
+      "sha256": "02dc9e930991605d7d3a467bd0c1c67f5c1942cccc33034e771939463cb379cf",
+      "bytes": 75308,
+      "sampleRateHz": 48000,
+      "channels": 1,
+      "bitrateBitsPerSecond": 128000,
+      "file": "assets/voices/street-wisdom/street-horst-hausordnung-rule-02.mp3",
+      "approval": {
+        "status": "user-approved",
+        "date": "2026-10-11",
+        "instruction": "for the Regel des Moments can we tie these to characters interactions, in general try to link most audio pop ups to character interactions, like people telling you unsolicited wisdoms like Regel des Augenblicks etc These should be done by new characters, design new street people that day these rules in vicinity",
+        "listeningConfirmed": false
+      }
+    },
+    {
+      "clipId": "street-horst-hausordnung-rule-05",
+      "actorId": "street-horst-hausordnung",
+      "voiceId": "crowd-horst-hausordnung",
+      "profileId": "159d0e6984c14c66b8e452f82495ba6c",
+      "text": "Spontaneität bedarf grundsätzlich der vorherigen Terminvereinbarung.",
+      "english": "Spontaneity generally requires a prior appointment.",
+      "sourceLocator": "For-AI/AUDIO-TEXT-LIBRARY.js rules[4][1]",
+      "ruleIndex": 4,
+      "seed": 71001,
+      "synthesisAttempt": 1,
+      "referenceSha256": "13ce940fbe69a9d8575a258710ee2b57cc85784230c22d2428461d97cdf35cdb",
+      "rendererInputText": "Spontaneität bedarf grundsätzlich der vorherigen Terminvereinbarung.",
+      "decode": {
+        "maxSpeechTokens": 250,
+        "attentionHooksBefore": 0,
+        "generatedSpeechTokens": 111,
+        "eosReached": true,
+        "t3InferenceSeconds": 29.77,
+        "temporaryAnalyzerHooksRemoved": 3,
+        "attentionHooksAfter": 0
+      },
+      "rendererInputBasis": "exact authored source",
+      "requestSha256": "a10723ba8fb6fe8c3ad05c4e459d6859a7b9faf005e77125a26eb9db954e8ede",
+      "referenceOriginalSha256": "f0e22a08d36beb2001646eac2b9a88d4e3d6f89e59d9209efa268f456639f495",
+      "profileJsonSha256": "5e8424986280db42c1a3d6a06a0e3edbb04903e8c14deda3548034ab94bdb45f",
+      "rawSha256": "27f89c66de63b6fadc548f278c0623ee9fe826c29282d5a26bad1e4b93670f1a",
+      "renderer": "ResembleAI/Chatterbox Multilingual V2 0.1.7",
+      "modelRevision": "5bb1f6ee58e50c3b8d408bc82a6d3740c2db6e18",
+      "modelLicense": "MIT",
+      "referenceLicense": "CC0-1.0 (EmoDB original)",
+      "durationSeconds": 4.4,
+      "renderSeconds": 38.58,
+      "synthesis": {
+        "temperature": 0.65,
+        "repetitionPenalty": 3,
+        "cfgWeight": 0.6,
+        "languageId": "de",
+        "device": "cuda",
+        "precision": "fp16",
+        "t3WeightPrecision": "float16",
+        "conditioningPrecision": "float32",
+        "autocastPrecision": "float16",
+        "conditioningCached": true,
+        "referenceReconditionedForProfile": "159d0e6984c14c66b8e452f82495ba6c",
+        "referenceConditioningVerifiedFloat32": true,
+        "modelSessionReused": true,
+        "cpuThreads": 2,
+        "inferenceMode": true
+      },
+      "listening": "pending",
+      "status": "eligible exact-text recording; human listening pending",
+      "processing": null,
+      "processingSha256": null,
+      "normalization": {
+        "targetLufs": -18,
+        "targetTruePeakDbtp": -1.5,
+        "filter": "loudnorm=I=-16.32:TP=-1.8:LRA=11:linear=false",
+        "iterations": 3
+      },
+      "integratedLufs": -18.11,
+      "truePeakDbtp": -2.02,
+      "asr": "Spontaneität bedarf grundsätzlich der vorherigen Terminvereinbarung.",
+      "asrWordExact": true,
+      "asrLiteralWordExact": true,
+      "asrNormalization": "case/punctuation, German numeric and A38 spoken equivalents, section sign/Paragraf orthography, German compound spacing",
+      "asrModel": "independent faster-whisper, cached local model, CPU int8, no script prompt",
+      "asrCpuThreads": 1,
+      "asrLanguageId": "de",
+      "asrComputeType": "int8",
+      "asrScriptPrompt": null,
+      "asrBeamSize": 1,
+      "asrReadings": [
+        {
+          "beamSize": 1,
+          "transcript": "Spontaneität bedarf grundsätzlich der vorherigen Terminvereinbarung.",
+          "transcribeSeconds": 58.36
+        }
+      ],
+      "asrModelSha256": "e76620f83d5f5b69efd3d87e3dc180c1bd21df9fbebacfd4335e5e1efcc018da",
+      "asrModelDirectoryName": "voice-asr-model",
+      "wordCues": [
+        {
+          "at": 0,
+          "charIndex": 0,
+          "word": "Spontaneität",
+          "end": 0.86
+        },
+        {
+          "at": 0.86,
+          "charIndex": 13,
+          "word": "bedarf",
+          "end": 1.2
+        },
+        {
+          "at": 1.2,
+          "charIndex": 20,
+          "word": "grundsätzlich",
+          "end": 1.74
+        },
+        {
+          "at": 1.74,
+          "charIndex": 34,
+          "word": "der",
+          "end": 1.92
+        },
+        {
+          "at": 1.92,
+          "charIndex": 38,
+          "word": "vorherigen",
+          "end": 2.42
+        },
+        {
+          "at": 2.42,
+          "charIndex": 49,
+          "word": "Terminvereinbarung",
+          "end": 3.32
+        }
+      ],
+      "sha256": "cec9399671ccc59689c174d1ed673e9f9cf0d6aa69c7a127322b5f4bdb90b537",
+      "bytes": 71468,
+      "sampleRateHz": 48000,
+      "channels": 1,
+      "bitrateBitsPerSecond": 128000,
+      "file": "assets/voices/street-wisdom/street-horst-hausordnung-rule-05.mp3",
+      "approval": {
+        "status": "user-approved",
+        "date": "2026-10-11",
+        "instruction": "for the Regel des Moments can we tie these to characters interactions, in general try to link most audio pop ups to character interactions, like people telling you unsolicited wisdoms like Regel des Augenblicks etc These should be done by new characters, design new street people that day these rules in vicinity",
+        "listeningConfirmed": false
+      }
+    },
+    {
+      "clipId": "street-horst-hausordnung-rule-08",
+      "actorId": "street-horst-hausordnung",
+      "voiceId": "crowd-horst-hausordnung",
+      "profileId": "159d0e6984c14c66b8e452f82495ba6c",
+      "text": "Wer wartet, hat durch sichtbares Warten seine Wartebereitschaft nachzuweisen.",
+      "english": "Anyone waiting must demonstrate willingness to wait by visibly waiting.",
+      "sourceLocator": "For-AI/AUDIO-TEXT-LIBRARY.js rules[7][1]",
+      "ruleIndex": 7,
+      "seed": 71002,
+      "synthesisAttempt": 1,
+      "referenceSha256": "13ce940fbe69a9d8575a258710ee2b57cc85784230c22d2428461d97cdf35cdb",
+      "rendererInputText": "Wer wartet, hat durch sichtbares Warten seine Wartebereitschaft nachzuweisen.",
+      "decode": {
+        "maxSpeechTokens": 268,
+        "attentionHooksBefore": 0,
+        "generatedSpeechTokens": 111,
+        "eosReached": true,
+        "t3InferenceSeconds": 31.94,
+        "temporaryAnalyzerHooksRemoved": 3,
+        "attentionHooksAfter": 0
+      },
+      "rendererInputBasis": "exact authored source",
+      "requestSha256": "a10723ba8fb6fe8c3ad05c4e459d6859a7b9faf005e77125a26eb9db954e8ede",
+      "referenceOriginalSha256": "f0e22a08d36beb2001646eac2b9a88d4e3d6f89e59d9209efa268f456639f495",
+      "profileJsonSha256": "5e8424986280db42c1a3d6a06a0e3edbb04903e8c14deda3548034ab94bdb45f",
+      "rawSha256": "5c9ee6ec9c8606aaf90c1031cb8c8fd31718133c0eecdec29ffc051ac6fd7dd6",
+      "renderer": "ResembleAI/Chatterbox Multilingual V2 0.1.7",
+      "modelRevision": "5bb1f6ee58e50c3b8d408bc82a6d3740c2db6e18",
+      "modelLicense": "MIT",
+      "referenceLicense": "CC0-1.0 (EmoDB original)",
+      "durationSeconds": 4.4,
+      "renderSeconds": 42.23,
+      "synthesis": {
+        "temperature": 0.65,
+        "repetitionPenalty": 3,
+        "cfgWeight": 0.6,
+        "languageId": "de",
+        "device": "cuda",
+        "precision": "fp16",
+        "t3WeightPrecision": "float16",
+        "conditioningPrecision": "float32",
+        "autocastPrecision": "float16",
+        "conditioningCached": true,
+        "referenceReconditionedForProfile": "159d0e6984c14c66b8e452f82495ba6c",
+        "referenceConditioningVerifiedFloat32": true,
+        "modelSessionReused": true,
+        "cpuThreads": 2,
+        "inferenceMode": true
+      },
+      "listening": "pending",
+      "status": "eligible exact-text recording; human listening pending",
+      "processing": null,
+      "processingSha256": null,
+      "normalization": {
+        "targetLufs": -18,
+        "targetTruePeakDbtp": -1.5,
+        "filter": "loudnorm=I=-17.42:TP=-1.8:LRA=11:linear=false",
+        "iterations": 2
+      },
+      "integratedLufs": -18.01,
+      "truePeakDbtp": -2.11,
+      "asr": "Wer wartet, hat durch sichtbares Warten seine Wartebereitschaft nachzuweisen.",
+      "asrWordExact": true,
+      "asrLiteralWordExact": true,
+      "asrNormalization": "case/punctuation, German numeric and A38 spoken equivalents, section sign/Paragraf orthography, German compound spacing",
+      "asrModel": "independent faster-whisper, cached local model, cuda int8 (effective int8_float16), no script prompt",
+      "asrCpuThreads": 1,
+      "asrDevice": "cuda",
+      "asrEffectiveComputeType": "int8_float16",
+      "asrLanguageId": "de",
+      "asrComputeType": "int8",
+      "asrScriptPrompt": null,
+      "asrBeamSize": 1,
+      "asrReadings": [
+        {
+          "beamSize": 1,
+          "transcript": "Wer wartet, hat durch sichtbares Warten seine Wartebereitschaft nachzuweisen.",
+          "transcribeSeconds": 12
+        }
+      ],
+      "asrModelSha256": "e76620f83d5f5b69efd3d87e3dc180c1bd21df9fbebacfd4335e5e1efcc018da",
+      "asrModelDirectoryName": "voice-asr-model",
+      "wordCues": [
+        {
+          "at": 0,
+          "charIndex": 0,
+          "word": "Wer",
+          "end": 0.18
+        },
+        {
+          "at": 0.18,
+          "charIndex": 4,
+          "word": "wartet",
+          "end": 0.66
+        },
+        {
+          "at": 0.9,
+          "charIndex": 12,
+          "word": "hat",
+          "end": 1.02
+        },
+        {
+          "at": 1.02,
+          "charIndex": 16,
+          "word": "durch",
+          "end": 1.2
+        },
+        {
+          "at": 1.2,
+          "charIndex": 22,
+          "word": "sichtbares",
+          "end": 1.82
+        },
+        {
+          "at": 1.82,
+          "charIndex": 33,
+          "word": "Warten",
+          "end": 2.16
+        },
+        {
+          "at": 2.16,
+          "charIndex": 40,
+          "word": "seine",
+          "end": 2.44
+        },
+        {
+          "at": 2.44,
+          "charIndex": 46,
+          "word": "Wartebereitschaft",
+          "end": 3.24
+        },
+        {
+          "at": 3.24,
+          "charIndex": 64,
+          "word": "nachzuweisen",
+          "end": 3.92
+        }
+      ],
+      "sha256": "e920eb430ddc47b6a5f6344b77cd0ec7c3e8177bcc67d8dc3a861335fa4e4405",
+      "bytes": 71468,
+      "sampleRateHz": 48000,
+      "channels": 1,
+      "bitrateBitsPerSecond": 128000,
+      "file": "assets/voices/street-wisdom/street-horst-hausordnung-rule-08.mp3",
+      "approval": {
+        "status": "user-approved",
+        "date": "2026-10-11",
+        "instruction": "for the Regel des Moments can we tie these to characters interactions, in general try to link most audio pop ups to character interactions, like people telling you unsolicited wisdoms like Regel des Augenblicks etc These should be done by new characters, design new street people that day these rules in vicinity",
+        "listeningConfirmed": false
+      }
+    }
+  ],
+  "heldPrivate": [
+    {
+      "clipId": "street-horst-hausordnung-rule-11",
+      "actorId": "street-horst-hausordnung",
+      "voiceId": "crowd-horst-hausordnung",
+      "profileId": "159d0e6984c14c66b8e452f82495ba6c",
+      "text": "Berlin liegt hinter der Brandmauer und dort wird gedenglischt. Auf der Deutschlandseite wird ausschließlich Deutsch gesprochen.",
+      "english": "Berlin is behind the Brandmauer and speaks Denglisch. On the Germany side, characters speak German only.",
+      "sourceLocator": "For-AI/AUDIO-TEXT-LIBRARY.js rules[10][1]",
+      "ruleIndex": 10,
+      "reason": "held private; selected production fallback",
+      "failedGates": [
+        "independent spoken-word equivalence"
+      ],
+      "candidateSha256": "0f25d8b04168eaa06d56a1025eec5a269b0e1ab976282993a79b1175c556983a",
+      "asr": "Berlin liegt hinter der Brandmauer und dort wird gedänglicht. Auf der Deutschlandseite wird ausschließlich Deutsch gesprochen."
+    }
+  ],
+  "approvedExistingReuse": []
+}

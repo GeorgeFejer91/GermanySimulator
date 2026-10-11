@@ -703,7 +703,7 @@ roots, body bounds, movement, floor pivots and depth ownership stay authored.
 Inactive speech returns the original painting. The existing 96-kernel omen
 mouth consumes the Aktenkurier's owned shape, including browser fallback.
 
-All 53 approved office MP3s now share the exact-hash cue data in
+All eligible office MP3s share the exact-hash cue data in
 `assets/buergeramt/speech/mouth-cues.js`. The local analyzer samples sound every
 10 ms and records phonetic mouth intervals. The unchanged audio playhead owns
 openings, pauses, rate changes and seeking; coarticulation is centred on each
@@ -850,10 +850,22 @@ can still change within one captured frame. The original 41 unchanged recordings
 real playback, pause, rate-change and cancellation receipts without seeking;
 the shared builder reproduces their shipped analysis exactly.
 The final integrated deterministic release suite passes 473/473; the deploy
-workflow now includes the shared 53-recording cue regression test. The obsolete
+workflow includes the shared eligible-recording cue regression test. The obsolete
 omen audio fixture's samples were shortened to remain inside the newly published
 1.8-second turn and 2.2-second departure; its planted-turn/retreat assertions
 remain enforced.
+
+### Fixed-voice integration verification (2026-10-11)
+
+The final office pack contains 180 exact-path/hash tracks: 36 retained
+recordings and 144 selected-profile Knick recordings. The isolated silent
+browser fixture passes actual native playback, shape/playhead agreement within
+40 ms, pause, 1.5× playback rate and cancellation for all 180, with no page
+errors. The fixture now selects the media element belonging to the current
+recording rather than whichever unrelated audio element was created last.
+It forces the shared dialogue owner to exercise each recording; this is timing
+and lifecycle evidence, not natural mission, seeking, listening or physical
+Android evidence. Receipts are in `output/mouth-sync/final-recordings/`.
 
 **Office budget.** Six cold hardware-ANGLE runs before and six after the mouth
 change compare against published `008b017`. Median warm sync-interval p95 is

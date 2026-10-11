@@ -17,8 +17,11 @@ for(const lines of Object.values(inventory.pools.policeBarks))for(const line of 
 for(const line of [inventory.pools.buergeramtPolicePhone.call,...inventory.pools.buergeramtPolicePhone.replies])authored.add(inventory.pools.buergeramtPolicePhone.voiceId+"\0"+line);
 for(const contexts of Object.values(inventory.pools.innerMonologues))for(const lines of Object.values(contexts))for(const line of lines)authored.add("spieler-hans-peter-mustermann\0"+line);
 const crowdArchetypes=new Map(inventory.pools.crowdArchetypes.map(archetype=>[archetype.id,archetype]));
+// The frozen 48 crowd auditions retain their original body scripts; dedicated
+// advisers now use separately verified rule decks instead of these auditions.
+const historicalCrowdArchetype=person=>crowdArchetypes.get(person.runtimeArchetype==='street-wisdom'?(person.gender==='male'?'towel-man':'towel-woman'):person.runtimeArchetype);
 for(const person of cast.roleProfiles.filter(person=>person.voiceId.startsWith("crowd-"))){
- const archetype=crowdArchetypes.get(person.runtimeArchetype);
+ const archetype=historicalCrowdArchetype(person);
  assert.ok(archetype,`missing crowd archetype ${person.voiceId}`);
  for(const lines of Object.values(archetype.barks))for(const line of lines)authored.add(person.voiceId+"\0"+line);
 }
@@ -109,7 +112,7 @@ const playerLines=new Set(Object.values(inventory.pools.innerMonologues).flatMap
 assert.equal(playerLines.size,45);
 for(const line of playerLines)assert.ok(keys.has("spieler-hans-peter-mustermann\0"+line),`missing player audition ${line}`);
 for(const person of cast.roleProfiles.filter(person=>person.voiceId.startsWith("crowd-"))){
- const archetype=crowdArchetypes.get(person.runtimeArchetype);
+ const archetype=historicalCrowdArchetype(person);
  for(const line of new Set(Object.values(archetype.barks).flat()))assert.ok(keys.has(person.voiceId+"\0"+line),`missing crowd audition ${person.voiceId}: ${line}`);
 }
 assert.equal(on.candidateClip("amt-horst-stempelmann","a different line"),null);

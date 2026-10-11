@@ -3,10 +3,61 @@ import assert from 'node:assert/strict';
 import {linkSync,mkdtempSync,mkdirSync,readFileSync,rmSync,symlinkSync,writeFileSync} from 'node:fs';
 import {tmpdir} from 'node:os';
 import {join} from 'node:path';
+import {execFileSync} from 'node:child_process';
 import vm from 'node:vm';
-import {archiveFiles,matchesProduction,runtimeBlock,verifyProfiles,writeArchiveMetadata} from '../tools/curate-voice-library.mjs';
+import {archiveFiles,fixedRecordingsBlock,matchesProduction,runtimeBlock,spokenWords,streetRulesBlock,verifyProfiles,writeArchiveMetadata} from '../tools/curate-voice-library.mjs';
 import {harness} from './amt-harness.mjs';
 const cast=JSON.parse(readFileSync('For-AI/VOICE-CAST.json'));
+
+test('a fixed recording cannot use a script-prompted transcript as independent evidence',()=>{
+ const clip=JSON.parse(readFileSync('assets/voices/knick/manifest.json')).clips[0];
+ Object.assign(clip,{decode:{eosReached:true},asrScriptPrompt:null,asrLanguageId:'de',asrComputeType:'int8',asrModelSha256:'a'.repeat(64),asrCpuThreads:1});
+ assert.doesNotThrow(()=>fixedRecordingsBlock(cast,{clips:[clip]}));
+ assert.throws(()=>fixedRecordingsBlock(cast,{clips:[{...clip,asrScriptPrompt:clip.text}]}),/independent final-encoding ASR receipt/);
+ const missing={...clip};delete missing.asrModelSha256;
+ assert.throws(()=>fixedRecordingsBlock(cast,{clips:[missing]}),/independent final-encoding ASR receipt/);
+});
+
+test('failed fixed-voice integration leaves the complete playable catalogue unchanged',()=>{
+ const scratch=mkdtempSync(join(tmpdir(),'voice-sync-'));
+ try{
+  for(const folder of ['For-AI','tools','assets/voices/candidate-dialogue','assets/voices/knick'])mkdirSync(join(scratch,folder),{recursive:true});
+  for(const path of ['For-AI/AUDIO-TEXT-LIBRARY.js','tools/curate-voice-library.mjs','street-wisdom.js'])writeFileSync(join(scratch,path),readFileSync(path));
+  const altered=JSON.parse(JSON.stringify(cast));altered.productionVoices['amt-brunhilde-knick'].profileName='Changed projection for failed transaction';
+  writeFileSync(join(scratch,'For-AI/VOICE-CAST.json'),JSON.stringify(altered));
+  writeFileSync(join(scratch,'assets/voices/candidate-dialogue/manifest.json'),JSON.stringify({clips:[]}));
+  const clip=JSON.parse(readFileSync('assets/voices/knick/manifest.json')).clips[0];
+  clip.decode={...clip.decode,eosReached:false};delete clip.reusedApproved;
+  writeFileSync(join(scratch,'assets/voices/knick/manifest.json'),JSON.stringify({requestedLineCount:1,generatedLineCount:1,clips:[clip],heldPrivate:[]}));
+  const catalog=join(scratch,'For-AI/AUDIO-TEXT-LIBRARY.js'),before=readFileSync(catalog);
+  assert.throws(()=>execFileSync(process.execPath,[join(scratch,'tools/curate-voice-library.mjs'),'--sync'],{stdio:'pipe'}),/Missing or incomplete Knick generation receipt/);
+  assert.deepEqual(readFileSync(catalog),before);
+ }finally{assert(scratch.startsWith(join(tmpdir(),'voice-sync-')));rmSync(scratch,{recursive:true,force:true});}
+});
+
+test('spoken-word equivalence preserves negation, cases and time values',()=>{
+ assert.equal(spokenWords('Ab 22:00 Uhr gilt § 17.'),spokenWords('Ab zweiundzwanzig Uhr gilt Paragraph siebzehn.'));
+ assert.equal(spokenWords('A38, an meinem Schalter Lärm.'),spokenWords('A achtunddreißig, an meinem Schalterlärm.'));
+ for(const changed of ['Ab 22:30 Uhr gilt § 17.','Ab 23 Uhr gilt § 17.','Ab 22 Uhr gilt § 18.','Ab 22 Uhr gilt nicht § 17.'])assert.notEqual(spokenWords('Ab 22:00 Uhr gilt § 17.'),spokenWords(changed));
+ assert.notEqual(spokenWords('Ihren Wohnsitz'),spokenWords('Ihrem Wohnsitz'));
+});
+
+test('German date ordinals normalize only am followed by a complete day ordinal',()=>{
+ const days=['ersten','zweiten','dritten','vierten','fünften','sechsten','siebten','achten','neunten','zehnten','elften','zwölften','dreizehnten','vierzehnten','fünfzehnten','sechzehnten','siebzehnten','achtzehnten','neunzehnten','zwanzigsten','einundzwanzigsten','zweiundzwanzigsten','dreiundzwanzigsten','vierundzwanzigsten','fünfundzwanzigsten','sechsundzwanzigsten','siebenundzwanzigsten','achtundzwanzigsten','neunundzwanzigsten','dreißigsten','einunddreißigsten'];
+ days.forEach((day,index)=>assert.equal(spokenWords(`Sie sind am ${day} eingezogen.`),spokenWords(`Sie sind am ${index+1}. eingezogen.`)));
+ for(const changed of ['am 4.','am 5','am 5.5','am 0.','am 32.','mit 5.'])assert.notEqual(spokenWords('am Fünften'),spokenWords(changed));
+});
+
+test('every stable rule belongs to one dedicated street identity',()=>{
+ const source=readFileSync('For-AI/AUDIO-TEXT-LIBRARY.js','utf8'),window={};vm.runInNewContext(source,{window});vm.runInNewContext(readFileSync('street-wisdom.js','utf8'),{window});
+ assert(source.replace(/\r\n/g,'\n').includes(streetRulesBlock(source)));
+ const catalog=window.GermanySimulatorAudioText;
+ catalog.rules.forEach((row,index)=>{
+  const person=window.StreetWisdom.definitions.find(p=>p.ruleIndices.includes(index)),clip=catalog.clips[`rule-${String(index+1).padStart(2,'0')}`];
+  assert.equal(clip.voiceId,person.voiceId);assert.equal(clip.text,row[1]);assert.equal(clip.english,catalog.ruleEnglish[index]);
+  assert(!clip.path||clip.path.startsWith('./assets/voices/street-wisdom/'));assert.equal(catalog.productionVoices[person.voiceId].fallback,'captions');
+ });
+});
 test('archive metadata cannot follow a junction or hardlink into live files',()=>{
  const scratch=mkdtempSync(join(tmpdir(),'voice-metadata-')),archive=join(scratch,'archive'),live=join(scratch,'live');
  try{

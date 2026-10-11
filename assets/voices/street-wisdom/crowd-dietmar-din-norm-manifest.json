@@ -1,0 +1,199 @@
+{
+  "schemaVersion": 1,
+  "voiceId": "crowd-dietmar-din-norm",
+  "profileId": "44123656a3404719abf0a2d6a05047ee",
+  "fallback": "captions",
+  "status": "same-profile technical and independent ASR audit; perceptual listening not independently verified",
+  "generatedLineCount": 3,
+  "requestedLineCount": 3,
+  "lineCount": 1,
+  "clips": [
+    {
+      "clipId": "street-dietmar-din-norm-rule-03",
+      "actorId": "street-dietmar-din-norm",
+      "voiceId": "crowd-dietmar-din-norm",
+      "profileId": "44123656a3404719abf0a2d6a05047ee",
+      "text": "Fahrbahnen sind ausschließlich an geometrisch vorgesehenen Stellen zu überqueren.",
+      "english": "Roads may only be crossed at geometrically designated locations.",
+      "sourceLocator": "For-AI/AUDIO-TEXT-LIBRARY.js rules[2][1]",
+      "ruleIndex": 2,
+      "seed": 71000,
+      "synthesisAttempt": 1,
+      "referenceSha256": "5d73e85d067761add5b8b6530d33aafe63d40b7e0a41e9d81acb223a1f2ef26b",
+      "rendererInputText": "Fahrbahnen sind ausschließlich an geometrisch vorgesehenen Stellen zu überqueren.",
+      "decode": {
+        "maxSpeechTokens": 268,
+        "attentionHooksBefore": 0,
+        "generatedSpeechTokens": 120,
+        "eosReached": true,
+        "t3InferenceSeconds": 34.16,
+        "temporaryAnalyzerHooksRemoved": 3,
+        "attentionHooksAfter": 0
+      },
+      "rendererInputBasis": "exact authored source",
+      "requestSha256": "fe2cb408a9314de3771fcdaa78a989cae13f25cef02a7d654e4eb02a56822feb",
+      "referenceOriginalSha256": "36dc3144368143e0894dc1f400bdffe82e6842b2ae3d54a7fb03a3b7c94c55bf",
+      "profileJsonSha256": "364334b8e63ea1fa0ffbd1ac099513cd7d7cc2c090e7b638096d08237763e36a",
+      "rawSha256": "e83a1f5e59acb5af1fae0883e7d3815d1ffdae9b7dcb94871196d314470a6d54",
+      "renderer": "ResembleAI/Chatterbox Multilingual V2 0.1.7",
+      "modelRevision": "5bb1f6ee58e50c3b8d408bc82a6d3740c2db6e18",
+      "modelLicense": "MIT",
+      "referenceLicense": "CC0-1.0 (EmoDB original)",
+      "durationSeconds": 4.76,
+      "renderSeconds": 46.2,
+      "synthesis": {
+        "temperature": 0.65,
+        "repetitionPenalty": 3,
+        "cfgWeight": 0.6,
+        "languageId": "de",
+        "device": "cuda",
+        "precision": "fp16",
+        "t3WeightPrecision": "float16",
+        "conditioningPrecision": "float32",
+        "autocastPrecision": "float16",
+        "conditioningCached": true,
+        "referenceReconditionedForProfile": "44123656a3404719abf0a2d6a05047ee",
+        "referenceConditioningVerifiedFloat32": true,
+        "modelSessionReused": true,
+        "cpuThreads": 2,
+        "inferenceMode": true
+      },
+      "listening": "pending",
+      "status": "eligible exact-text recording; human listening pending",
+      "processing": null,
+      "processingSha256": null,
+      "normalization": {
+        "targetLufs": -18,
+        "targetTruePeakDbtp": -1.5,
+        "filter": "loudnorm=I=-15.73:TP=-1.8:LRA=11:linear=false",
+        "iterations": 3
+      },
+      "integratedLufs": -18.12,
+      "truePeakDbtp": -2.18,
+      "asr": "Fahrbahnen sind ausschließlich an geometrisch vorgesehenen Stellen zu überqueren.",
+      "asrWordExact": true,
+      "asrLiteralWordExact": true,
+      "asrNormalization": "case/punctuation, German numeric and A38 spoken equivalents, section sign/Paragraf orthography, German compound spacing",
+      "asrModel": "independent faster-whisper, cached local model, cuda int8 (effective int8_float16), no script prompt",
+      "asrCpuThreads": 1,
+      "asrDevice": "cuda",
+      "asrEffectiveComputeType": "int8_float16",
+      "asrLanguageId": "de",
+      "asrComputeType": "int8",
+      "asrScriptPrompt": null,
+      "asrBeamSize": 1,
+      "asrReadings": [
+        {
+          "beamSize": 1,
+          "transcript": "Fahrbahnen sind ausschließlich an geometrisch vorgesehenen Stellen zu überqueren.",
+          "transcribeSeconds": 3.44
+        }
+      ],
+      "asrModelSha256": "e76620f83d5f5b69efd3d87e3dc180c1bd21df9fbebacfd4335e5e1efcc018da",
+      "asrModelDirectoryName": "voice-asr-model",
+      "wordCues": [
+        {
+          "at": 0,
+          "charIndex": 0,
+          "word": "Fahrbahnen",
+          "end": 0.6
+        },
+        {
+          "at": 0.6,
+          "charIndex": 11,
+          "word": "sind",
+          "end": 0.78
+        },
+        {
+          "at": 0.78,
+          "charIndex": 16,
+          "word": "ausschließlich",
+          "end": 1.26
+        },
+        {
+          "at": 1.26,
+          "charIndex": 31,
+          "word": "an",
+          "end": 1.56
+        },
+        {
+          "at": 1.56,
+          "charIndex": 34,
+          "word": "geometrisch",
+          "end": 2.12
+        },
+        {
+          "at": 2.12,
+          "charIndex": 46,
+          "word": "vorgesehenen",
+          "end": 2.74
+        },
+        {
+          "at": 2.74,
+          "charIndex": 59,
+          "word": "Stellen",
+          "end": 2.9
+        },
+        {
+          "at": 2.9,
+          "charIndex": 67,
+          "word": "zu",
+          "end": 3.08
+        },
+        {
+          "at": 3.08,
+          "charIndex": 70,
+          "word": "überqueren",
+          "end": 3.6
+        }
+      ],
+      "sha256": "099c2c9daf0b07a237fbe1a5b106544ec89f201436b2e29a4f2ced0c5a658d86",
+      "bytes": 77228,
+      "sampleRateHz": 48000,
+      "channels": 1,
+      "bitrateBitsPerSecond": 128000,
+      "file": "assets/voices/street-wisdom/street-dietmar-din-norm-rule-03.mp3",
+      "approval": {
+        "status": "user-approved",
+        "date": "2026-10-11",
+        "instruction": "for the Regel des Moments can we tie these to characters interactions, in general try to link most audio pop ups to character interactions, like people telling you unsolicited wisdoms like Regel des Augenblicks etc These should be done by new characters, design new street people that day these rules in vicinity",
+        "listeningConfirmed": false
+      }
+    }
+  ],
+  "heldPrivate": [
+    {
+      "clipId": "street-dietmar-din-norm-rule-06",
+      "actorId": "street-dietmar-din-norm",
+      "voiceId": "crowd-dietmar-din-norm",
+      "profileId": "44123656a3404719abf0a2d6a05047ee",
+      "text": "Leergut ist kein Müll, sondern temporär illiquides Vermögen.",
+      "english": "Empty returnable bottles are not rubbish but temporarily illiquid assets.",
+      "sourceLocator": "For-AI/AUDIO-TEXT-LIBRARY.js rules[5][1]",
+      "ruleIndex": 5,
+      "reason": "held private; selected production fallback",
+      "failedGates": [
+        "independent spoken-word equivalence"
+      ],
+      "candidateSha256": "8baa5bfc8063c5046a89a1c4352faa84b245de9d0a95f246d1753268a4bda5a0",
+      "asr": "Der gut ist kein Müll, sondern temporär Eliquides-Vermögen."
+    },
+    {
+      "clipId": "street-dietmar-din-norm-rule-09",
+      "actorId": "street-dietmar-din-norm",
+      "voiceId": "crowd-dietmar-din-norm",
+      "profileId": "44123656a3404719abf0a2d6a05047ee",
+      "text": "Zebrastreifen sind sichtbar, amtlich und mit angemessener Dankbarkeit zu benutzen.",
+      "english": "Zebra crossings are visible, official, and must be used with appropriate gratitude.",
+      "sourceLocator": "For-AI/AUDIO-TEXT-LIBRARY.js rules[8][1]",
+      "ruleIndex": 8,
+      "reason": "held private; selected production fallback",
+      "failedGates": [
+        "independent spoken-word equivalence"
+      ],
+      "candidateSha256": "b6ea2667689a771bb8c73a85c36e1efe0039ba34c86afa9daab60a198ec3917b",
+      "asr": "Tebrastreifen sind sichtbar, amtlich und mit angemessener Dankbarkeit zu benutzen."
+    }
+  ],
+  "approvedExistingReuse": []
+}

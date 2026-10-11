@@ -21,7 +21,7 @@ export function matchesProduction(cast,clip,requireReceipt=true){
   ((!requireReceipt&&!clip.modelRevision)||clip.modelRevision===binding.modelRevision)&&
   ((!requireReceipt&&!clip.referenceSha256)||clip.referenceSha256===reference)&&
   (!clip.referenceOriginalSha256||clip.referenceOriginalSha256===binding.originalSha256)&&
-  ((!requireReceipt&&!clip.processing)||clip.processing===binding.processing);
+  ((!requireReceipt&&!clip.processing)||(clip.processing??'')===(binding.processing??''));
 }
 export function writeArchiveMetadata(archive,relative,contents){
  const base=realpathSync(archive),target=resolve(base,relative);requireMatch(target.startsWith(base+sep),'Archive metadata escapes archive');
@@ -69,29 +69,58 @@ export function runtimeBlock(cast){
   'function productionClip(clip){const exception=productionExceptions[clip.id];return !productionVoices[clip.voiceId]||clip.profileId===(exception?.voiceId===clip.voiceId?exception.profileId:productionVoices[clip.voiceId].profileId)}\n';
 }
 export function knickGenerationComplete(clip){
- if(clip.decode?.eosReached===true)return true;
- if(clip.decode!=null)return false;
- const legacy=json(resolve(root,'assets/voices/knick/legacy-receipts.json'));
- const prior=legacy.clips.find(take=>take.clipId===clip.clipId);
- return !!prior&&legacy.identityKeys.every(key=>prior[key]===clip[key]);
+ return clip.decode?.eosReached===true;
 }
-function knickBlock(cast,manifest){
- const entries={},seen=new Set();
+function fixedAssetInventory(family,clips){
+ const listed=clips.map(clip=>clip.file.slice(`assets/voices/${family}/`.length)).sort();
+ const shipped=readdirSync(resolve(root,`assets/voices/${family}`)).filter(name=>name.endsWith('.mp3')).sort();
+ requireMatch(JSON.stringify(listed)===JSON.stringify(shipped),`Unlisted or missing fixed recordings: ${family}`);
+}
+export function spokenWords(text){
+ const units=['null','eins','zwei','drei','vier','fünf','sechs','sieben','acht','neun'],small=[...units,'zehn','elf','zwölf','dreizehn','vierzehn','fünfzehn','sechzehn','siebzehn','achtzehn','neunzehn'],tens=['','','zwanzig','dreißig','vierzig','fünfzig','sechzig','siebzig','achtzig','neunzig'];
+ const numbers=Array.from({length:100},(_,n)=>n<20?small[n]:((n%10?(n%10===1?'ein':units[n%10])+'und':'')+tens[Math.floor(n/10)]));
+ const ordinals=['','ersten','zweiten','dritten','vierten','fünften','sechsten','siebten','achten'];
+ return text.toLowerCase().replaceAll('ß','ss').replace(/\bam\s+([1-9]|[12]\d|3[01])\.(?=\s|$)/g,(_,day)=>'am '+(ordinals[Number(day)]||numbers[Number(day)]+(Number(day)<20?'ten':'sten'))).replaceAll('§',' paragraph ').replace(/\b([01]?\d|2[0-3]):00(?=\s*uhr\b)/g,'$1').replace(/\bparagraf\b/g,'paragraph').replace(/\ba\s*38\b/g,'a achtunddreißig').match(/[\p{L}\p{N}_]+/gu)?.map(word=>(/^\d+$/.test(word)&&Number(word)<100?numbers[Number(word)]:word).replaceAll('ß','ss')).join('')||'';
+}
+function streetAuthority(source=readFileSync(resolve(root,'For-AI/AUDIO-TEXT-LIBRARY.js'),'utf8')){
+ const window={};vm.runInNewContext(source,{window});vm.runInNewContext(readFileSync(resolve(root,'street-wisdom.js'),'utf8'),{window});
+ const catalog=window.GermanySimulatorAudioText,definitions=window.StreetWisdom.definitions;
+ requireMatch(definitions.flatMap(person=>person.ruleIndices).sort((a,b)=>a-b).join(',')===catalog.rules.map((_,i)=>i).join(','),'Street rule decks must own every rule exactly once');
+ return {catalog,definitions};
+}
+export function streetRulesBlock(source){
+ const {catalog,definitions}=streetAuthority(source),entries=Object.fromEntries(catalog.rules.map((row,index)=>{
+  const person=definitions.find(person=>person.ruleIndices.includes(index)),id=`rule-${String(index+1).padStart(2,'0')}`;
+  return [id,{id,voiceId:person.voiceId,actorId:person.id,trigger:'nearby-street-rule',source:row[1],text:row[1],english:catalog.ruleEnglish[index],recording:null}];
+ }));
+ return 'const streetRuleClips=Object.freeze('+JSON.stringify(entries)+');\n';
+}
+export function fixedRecordingsBlock(cast,manifest,family='knick'){
+ requireMatch(['knick','street-wisdom'].includes(family),'Unknown fixed recording family');
+ const entries={},seen=new Set(),street=family==='street-wisdom'?streetAuthority():null;
  for(const clip of manifest.clips){
-  requireMatch(clip.voiceId==='amt-brunhilde-knick'&&matchesProduction(cast,clip),'Knick profile/reference/renderer drift');
+  requireMatch((family!=='knick'||clip.voiceId==='amt-brunhilde-knick')&&matchesProduction(cast,clip),'Fixed profile/reference/renderer drift');
   const binding=cast.productionVoices[clip.voiceId];
-  requireMatch(clip.renderer===binding.renderer&&clip.modelRevision===binding.modelRevision&&clip.referenceSha256===binding.referenceSha256&&clip.processing===binding.processing,`Incomplete Knick production receipt: ${clip.clipId}`);
-  requireMatch(clip.asrWordExact&&Math.abs(clip.integratedLufs+18)<=.3&&clip.truePeakDbtp<=-1.5,`Unverified Knick take: ${clip.clipId}`);
-  requireMatch(knickGenerationComplete(clip),`Incomplete Knick generation: ${clip.clipId}`);
+  requireMatch(clip.renderer===binding.renderer&&clip.modelRevision===binding.modelRevision&&clip.referenceSha256===binding.referenceSha256&&clip.referenceOriginalSha256===binding.originalSha256&&(clip.processing??'')===(binding.processing??''),`Incomplete fixed production receipt: ${clip.clipId}`);
+  requireMatch(clip.asrWordExact&&typeof clip.asr==='string'&&spokenWords(clip.text)===spokenWords(clip.asr)&&Math.abs(clip.integratedLufs+18)<=.3&&clip.truePeakDbtp<=-1.5,`Unverified fixed take: ${clip.clipId}`);
+  requireMatch(family==='knick'?knickGenerationComplete(clip):clip.decode?.eosReached===true,`Missing or incomplete Knick generation receipt: ${clip.clipId}`);
+  requireMatch(clip.asrScriptPrompt===null&&clip.asrLanguageId==='de'&&clip.asrComputeType==='int8'&&/^[a-f0-9]{64}$/.test(clip.asrModelSha256)&&[1,2,4].includes(clip.asrCpuThreads),`Missing independent final-encoding ASR receipt: ${clip.clipId}`);
   requireMatch(clip.english?.trim()&&clip.approval?.status==='user-approved',`Missing Knick subtitle/use approval: ${clip.clipId}`);
-  requireMatch(clip.file.startsWith('assets/voices/knick/')&&resolve(root,clip.file).startsWith(resolve(root,'assets/voices/knick')+sep),`Invalid Knick asset path: ${clip.clipId}`);
+  requireMatch(clip.file.startsWith(`assets/voices/${family}/`)&&resolve(root,clip.file).startsWith(resolve(root,`assets/voices/${family}`)+sep),`Invalid fixed asset path: ${clip.clipId}`);
   requireMatch(hash(resolve(root,clip.file))===clip.sha256,`Knick audio hash drift: ${clip.clipId}`);
   const key=clip.voiceId+'\0'+clip.text;requireMatch(!seen.has(key),`Duplicate Knick line: ${clip.clipId}`);seen.add(key);
-  entries['./'+clip.file]={id:clip.clipId,voiceId:clip.voiceId,profileId:clip.profileId,source:clip.text,english:clip.english,trigger:'buergeramt-exact-dialogue',durationMs:Math.round(clip.durationSeconds*1000),wordCues:clip.wordCues,sha256:clip.sha256,approval:clip.approval,provenanceManifest:clip.provenanceManifest};
+  let id=clip.clipId;
+  if(street){
+   const index=clip.ruleIndex,person=street.definitions.find(person=>person.ruleIndices.includes(index));
+   requireMatch(Number.isInteger(index)&&person&&clip.actorId===person.id&&clip.voiceId===person.voiceId&&clip.clipId===`${person.id}-rule-${String(index+1).padStart(2,'0')}`&&clip.text===street.catalog.rules[index][1]&&clip.english===street.catalog.ruleEnglish[index],`Wrong street rule ownership/text: ${clip.clipId}`);
+   id=`rule-${String(index+1).padStart(2,'0')}`;
+  }
+  entries['./'+clip.file]={id,...(street?{clipId:clip.clipId,actorId:clip.actorId}:{}),voiceId:clip.voiceId,profileId:clip.profileId,source:clip.text,english:clip.english,trigger:family==='knick'?'buergeramt-exact-dialogue':'nearby-street-rule',durationMs:Math.round(clip.durationSeconds*1000),wordCues:clip.wordCues,sha256:clip.sha256,approval:clip.approval,provenanceManifest:clip.provenanceManifest};
  }
- return 'const knickRecordings=Object.freeze('+JSON.stringify(entries)+');\n';
+ return `const ${family==='knick'?'knick':'streetWisdom'}Recordings=Object.freeze(`+JSON.stringify(entries)+');\n';
 }
 export function main(args=process.argv.slice(2)){
+ requireMatch(!(args.includes('--sync')&&args.includes('--rename-production')),'Rename production profiles first, then sync their verified bindings');
  const value=name=>{const i=args.indexOf(name);return i<0?null:args[i+1]};
  const cast=json(resolve(root,'For-AI/VOICE-CAST.json'));
  requireMatch(new Set(Object.values(cast.productionVoices).map(p=>p.profileId)).size===Object.keys(cast.productionVoices).length,'Production characters share a profile UUID');
@@ -99,8 +128,11 @@ export function main(args=process.argv.slice(2)){
  const catalogPath=resolve(root,'For-AI/AUDIO-TEXT-LIBRARY.js');let source=readFileSync(catalogPath,'utf8').replace(/\r\n/g,'\n');
  const marker=/\/\/ Generated by tools\/curate-voice-library\.mjs --sync from VOICE-CAST\.json\.\n[\s\S]*?function productionClip\(clip\)\{[^\n]+\}\n/;
  const expected=runtimeBlock(cast);
- if(args.includes('--sync')){source=source.replace(marker,'');source=source.replace('const legacyVoices=',()=>expected+'const legacyVoices=');writeFileSync(catalogPath,source);}
+ if(args.includes('--sync')){source=source.replace(marker,'');source=source.replace('const legacyVoices=',()=>expected+'const legacyVoices=');}
  else requireMatch(source.match(marker)?.[0]===expected,'Runtime voice bindings stale; run --sync');
+ const rulesBlock=streetRulesBlock(source),rulesPattern=/const streetRuleClips=Object\.freeze\(\{[^\n]*\}\);\n/;
+ if(args.includes('--sync')){source=source.replace(rulesPattern,'').replace('const trafficDialogue=',()=>rulesBlock+'const trafficDialogue=');source=source.replace('const clips=Object.freeze({...trafficDialogue,','const clips=Object.freeze({...streetRuleClips,...trafficDialogue,');}
+ else requireMatch(source.match(rulesPattern)?.[0]===rulesBlock,'Street rule bindings stale; run --sync');
  const knickPath=resolve(root,'assets/voices/knick/manifest.json');
  if(existsSync(knickPath)&&!args.includes('--archive-assets')&&!args.includes('--archive-profiles')){
   const clips=[];
@@ -110,12 +142,27 @@ export function main(args=process.argv.slice(2)){
    requireMatch(Number.isInteger(manifest.generatedLineCount)&&manifest.generatedLineCount>=manifest.clips.length&&manifest.generatedLineCount<=manifest.requestedLineCount&&manifest.clips.length+manifest.heldPrivate.length===manifest.requestedLineCount,`Unaccounted Knick lines: ${path}`);
    clips.push(...manifest.clips.map(c=>({...c,provenanceManifest:path})));
   }
-  const block=knickBlock(cast,{clips}),pattern=/const knickRecordings=Object\.freeze\(\{[^\n]*\}\);\n/;
+  const block=fixedRecordingsBlock(cast,{clips}),pattern=/const knickRecordings=Object\.freeze\(\{[^\n]*\}\);\n/;
+  fixedAssetInventory('knick',clips);
   if(args.includes('--sync')){
    source=source.replace(pattern,'').replace('const recordings=Object.freeze({',()=>block+'const recordings=Object.freeze({');
    if(!source.includes(' ...knickRecordings,'))source=source.replace(' ...feverRecordings,',' ...feverRecordings,\n ...knickRecordings,');
-   writeFileSync(catalogPath,source);
   }else requireMatch(source.match(pattern)?.[0]===block,'Knick recording lookup stale; run --sync');
+ }
+ const streetDir=resolve(root,'assets/voices/street-wisdom');
+ if(existsSync(streetDir)&&!args.includes('--archive-assets')&&!args.includes('--archive-profiles')){
+  const clips=[];
+  for(const filename of readdirSync(streetDir).filter(name=>name.endsWith('-manifest.json')).sort()){
+   const path=`assets/voices/street-wisdom/${filename}`,manifest=json(resolve(root,path));
+   requireMatch(Number.isInteger(manifest.generatedLineCount)&&manifest.generatedLineCount>=manifest.clips.length&&manifest.generatedLineCount<=manifest.requestedLineCount&&manifest.clips.length+manifest.heldPrivate.length===manifest.requestedLineCount,`Unaccounted street rules: ${path}`);
+   clips.push(...manifest.clips.map(clip=>({...clip,provenanceManifest:path})));
+  }
+  const block=fixedRecordingsBlock(cast,{clips},'street-wisdom'),pattern=/const streetWisdomRecordings=Object\.freeze\(\{[^\n]*\}\);\n/;
+  fixedAssetInventory('street-wisdom',clips);
+  if(args.includes('--sync')){
+   source=source.replace(pattern,'').replace('const recordings=Object.freeze({',()=>block+'const recordings=Object.freeze({');
+   if(!source.includes(' ...streetWisdomRecordings,'))source=source.replace(' ...feverRecordings,',' ...feverRecordings,\n ...streetWisdomRecordings,');
+  }else requireMatch(source.match(pattern)?.[0]===block,'Street rule recording lookup stale; run --sync');
  }
  const context={window:{},location:{search:'?voicePreview=1'},URLSearchParams};vm.runInNewContext(source,context);const catalog=context.window.GermanySimulatorAudioText;
  for(const [path,clip] of Object.entries(catalog.recordings)){
@@ -133,6 +180,8 @@ export function main(args=process.argv.slice(2)){
  requireMatch(!args.includes('--archive-assets')||archive,'Asset archive requires --archive-root');
  let profiles;
  if(exe){profiles=request(resolve(exe),'list').profiles;verifyProfiles(cast,profiles,data&&resolve(data));}
+ // A failed receipt or live binding check must leave the playable catalogue intact.
+ if(args.includes('--sync'))writeFileSync(catalogPath,source);
  if(args.includes('--rename-production')){
   requireMatch(exe,'Rename requires --voice-exe');
   const people=[...cast.characters,...cast.roleProfiles];

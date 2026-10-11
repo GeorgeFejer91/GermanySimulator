@@ -73,14 +73,13 @@ fallback.
 | `laws/thorsten-negative-law-12.mp3` | 24.268 s | `06FDD1B46A266CBEAEE5EAB0261E19FE3CEEC712BE1F48923FC8E8F63BF07A1B` |
 | `laws/thorsten-negative-law-13.mp3` | 23.327 s | `1529047B596C19F946F565755B9707C3032937B5BA11F71CD2997D162B2AE9E5` |
 
-### Rotating `REGEL DES AUGENBLICKS` readings
+### Archived anonymous `REGEL DES AUGENBLICKS` readings
 
-The 11 `thorsten-negative-rule-*` files use the same model, negative-delivery
+The 11 `thorsten-negative-rule-*` files were archived outside the game on 2026-10-11 when rules became nearby character interactions. Their historical hashes below remain provenance, and they have no runtime lookup. They used the same model, negative-delivery
 references, output format, and validation workflow. Each file maps to the same
 one-based entry in the fixed `rules` deck and reads the complete displayed rule
 body. The fictional shorthand identifier remains visual because tokens such as
-`QuerO` and `Bln/DE` are not stable speech-model input. Runtime fallback sends
-the identical displayed body to the browser's German voice.
+`QuerO` and `Bln/DE` are not stable speech-model input. The current street-adviser family below preserves the identical displayed bodies with each selected character voice or captions.
 
 | Shipped file | Duration | SHA-256 |
 | --- | ---: | --- |
@@ -253,7 +252,25 @@ raw and encoded hashes, fixed undertone, measured levels, independent German
 ASR and estimated word cues. Only eligible exact-text takes ship. The user
 requested implementation with this voice; this use authorization does not
 establish listening acceptance. Rejected takes and all source/model files stay
-in Music. Earlier Knick and unused profile candidates are archived.
+in Music. The main request accounts for 168 generated lines: 141 eligible
+recordings and 27 held captions; the ambient supplement adds three eligible
+recordings. Every new shipped take has explicit successful native EOS.
+Seventeen superseded first-pass public files retain exact old hashes and
+manifest provenance in the private archive, including the two now held
+lines. Earlier Knick and unused profile candidates are archived.
+
+`street-wisdom/` contains six exact-text rule recordings across the three
+existing selected profiles: Waltraud Wartemarke (two), Horst Hausordnung
+(three) and Dietmar DIN-Norm (one). Their manifests bind each stable rule ID
+to its original German body, English subtitle, dedicated actor, UUID, both
+reference hashes, successful native EOS, independent encoded-file ASR and
+measured levels. The references are the same hash-verified CC0-1.0 original
+EmoDB sources already itemized in `For-AI/VOICE-CAST.json`; generation uses
+the pinned MIT Chatterbox revision above, with dry speech and no Knick
+undertone. Five rejected rules retain exact captions. The user's request
+authorizes these interactions; perceptual listening remains pending. The
+eleven former anonymous Thorsten rule MP3s and their provenance are archived
+privately, with no active fallback lookup.
 
 `approved-dialogue/manifest.json` is the per-file provenance ledger for bulk Chatterbox clips promoted to normal gameplay. Each entry records the speaking voice ID and Secret Tunnel profile UUID, exact script, shipping and source hashes, reference hash/dataset/license, renderer revision/license, and the reviewed Music queue hash. `tools/promote-reviewed-voice-dialogue.mjs` verifies the seven human review fields, original and normalized hashes, and delivery levels before copying a clip. That manifest is currently empty: none of the 236 bulk candidates has passed that gate. The individually user-approved Aktenkurier omen above is a separate direct catalogue recording with its actual approval instruction. Approved clips play by exact voice ID and text; remaining bulk candidates retain their opt-in preview status.
 
@@ -273,7 +290,7 @@ The opening and shouted final phone reply use direct seeded retakes from that sa
 | `kriminalpolizei/kriminalpolizei-phone-03.mp3` | 6.840 s | `5f6f9f1be2c78798d9250ff696eaba0ecc611803524cbaa277e250c79ad0cfc9` |
 | `kriminalpolizei/kriminalpolizei-phone-04.mp3` | 7.680 s | `5e93de3c3d87f132ba45857be3508e77704376152def6c1a3853bcf01a4eb7c5` |
 
-Five new Frau Knick escalation clips (`candidate-dialogue/amt-brunhilde-knick-17-escalation.mp3` through `-21-escalation.mp3`) remain opt-in candidates from her unchanged profile `1a28fb7903d344518617d755a7f5cbb0`. The CC0 EmoDB original input hash is `903884eae81731486a3d4e8f04c69bf86f69a35002d7674f1d709225b7d2934f`; normalized native input hash `7844b1c83d829fa08c2fe1d5474697d81868bec0334dadf4642fae7591125cbf` is recorded separately. The manifest retains all five previous candidates. Direct retakes corrected “Grashalm” and “annulliert”; upper/lower case affected the latter take and the final spoken words remain exact. Numeric/compound-only transcript equivalence is marked separately from literal agreement. All five encoded outputs passed the same loudness targets; complete listening remains pending. Four former Heinrich phone candidates are retained for history and excluded from active preview.
+The five earlier Frau Knick escalation clips (`candidate-dialogue/amt-brunhilde-knick-17-escalation.mp3` through `-21-escalation.mp3`) used her retired primary profile `1a28fb7903d344518617d755a7f5cbb0`. They and the four former Heinrich phone candidates now live in the private Music archive and have no active preview lookup. The CC0 EmoDB original input hash was `903884eae81731486a3d4e8f04c69bf86f69a35002d7674f1d709225b7d2934f`; normalized native input hash `7844b1c83d829fa08c2fe1d5474697d81868bec0334dadf4642fae7591125cbf` remains separately recorded. The manifest preserves the previous candidates and their provenance. Historical retakes corrected “Grashalm” and “annulliert”; numeric/compound-only transcript equivalence is marked separately from literal agreement. These archived outputs passed the loudness checks; no complete listening acceptance is claimed.
 
 ## User-selected GS Merz speech (2026-10-10, extended 2026-10-11)
 

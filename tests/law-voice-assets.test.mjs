@@ -8,7 +8,7 @@ vm.runInContext(readFileSync("For-AI/AUDIO-TEXT-LIBRARY.js","utf8"),context);
 const catalog=context.window.GermanySimulatorAudioText;
 
 assert.equal(catalog.lawPowerLines.length,13,"every law quotation needs one recording");
-assert.equal(catalog.rules.length,11,"every rotating rule needs one recording");
+assert.equal(catalog.rules.length,11,"all authored rules retain stable encounter IDs");
 assert.equal(catalog.ruleEnglish.length,11,"every rule needs an English subtitle");
 assert.match(game,/const lawPowerLines=speechCatalog\.lawPowerLines/);
 assert.match(game,/const rules=speechCatalog\.rules/);
@@ -21,10 +21,16 @@ for(const [family,lines] of [["law",catalog.lawPowerLines],["rule",catalog.rules
   assert.ok(clip,`missing catalog entry ${id}`);
   assert.equal(clip.text,text,`${id} must speak its displayed source`);
   assert.ok(clip.english?.trim(),`${id} needs an English subtitle`);
+  if(family==='rule'){
+   assert.match(clip.voiceId,/^crowd-(waltraud-wartemarke|horst-hausordnung|dietmar-din-norm)$/);
+   assert.equal(clip.trigger,'nearby-street-rule');
+   assert.ok(!clip.path||clip.path.startsWith('./assets/voices/street-wisdom/'));
+   if(!clip.recording){assert.equal(clip.path,undefined);return}
+  }
   const path=clip.path.slice(2);
   assert.ok(existsSync(path),`missing ${path}`);
   assert.ok(statSync(path).size>1_000,`empty ${path}`);
  });
 }
 
-console.log("Law and rotating-rule catalog IDs, source text, subtitles, and assets OK");
+console.log("Law recordings and fixed street-rule IDs, owners, source text and subtitles OK");

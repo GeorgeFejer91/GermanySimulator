@@ -9,6 +9,8 @@ const source=file=>readFileSync(resolve(root,file),"utf8");
 const cast=JSON.parse(source("For-AI/VOICE-CAST.json"));
 const context=vm.createContext({window:{}});
 vm.runInContext(source("For-AI/AUDIO-TEXT-LIBRARY.js"),context);
+vm.runInContext(source("street-wisdom.js"),context);
+const advisers=context.window.StreetWisdom.definitions;
 const {voices,castVoices,roleVoices,recordings}=context.window.GermanySimulatorAudioText;
 const game=source("game.js");
 const story=source("buergeramt-story.js");
@@ -98,7 +100,13 @@ for(const role of cast.roleProfiles){
   assert.ok(index>=0,`crowd identity ${role.voiceId}`);
   assert.equal(crowdVoiceIds[index],role.voiceId);
   assert.equal(role.gender,index%2?"male":"female",`crowd name and visible archetype gender for ${role.voiceId}`);
-  assert.equal(role.runtimeArchetype,index%2?"towel-man":"towel-woman",`runtime archetype for ${role.voiceId}`);
+  const adviser=advisers.find(person=>person.voiceId===role.voiceId);
+  assert.equal(role.runtimeArchetype,adviser?"street-wisdom":index%2?"towel-man":"towel-woman",`runtime archetype for ${role.voiceId}`);
+  if(adviser){
+   assert.equal(role.gameCharacterId,adviser.id);
+   assert.equal(role.fullName,adviser.fullName);
+   assert.deepEqual(Array.from(role.dialogueSources),Array.from(adviser.ruleIndices,index=>`For-AI/AUDIO-TEXT-LIBRARY.js rules[${index}][1]`));
+  }
  }else if(role.voiceId==="amt-brunhilde-knick"){
   assert.ok(story.includes(`clerkIdentity:{speaker:"SACHBEARBEITERIN FRAU KNICK",fullName:"${role.fullName}",voiceId:"${role.voiceId}"}`),"modeled Bürgeramt clerk identity");
  }else if(role.gameRole.startsWith("buergeramt-background-")){

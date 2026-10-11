@@ -18,7 +18,7 @@
     aside{background:#d9d2c4;border-right:1px solid var(--dark);padding:16px;min-width:0;max-height:calc(100vh - 74px);overflow:auto;position:sticky;top:0;align-self:start}aside label{display:grid;gap:5px;font-weight:700}input[type="search"],select{width:100%;min-height:44px;border:1px solid var(--line);border-radius:4px;background:#f6f0e5;padding:8px;color:var(--dark)}
     #directory{margin-top:12px}#directory h2{margin:16px 0 5px;font-size:.9rem;border-bottom:1px solid var(--line)}#directory a{display:block;padding:8px 6px;color:var(--dark);text-decoration:none;border-radius:3px;overflow-wrap:break-word}#directory a:hover,#directory a[aria-current="page"]{background:#eee8dc}#directory a[aria-current="page"]{font-weight:800;border-left:3px solid var(--accent);padding-left:7px}
     .content{padding:20px;min-width:0;max-width:1150px;width:100%;margin:0 auto;align-self:start}#status{margin:0 0 12px;color:#eee8dc}#profile-title{font-size:1.55rem;margin:0 0 3px;color:#f4eee2}#profile-kind{margin:0 0 16px;color:#eee8dc}
-    .profile-head{display:flex;align-items:flex-start;justify-content:space-between;gap:10px;flex-wrap:wrap}.profile-head>div{min-width:0}.profile-head button{flex:none}
+    .profile-head{display:flex;align-items:flex-start;justify-content:space-between;gap:10px;flex-wrap:wrap}.profile-head>div{min-width:0}.profile-head button{flex:none}#profile-title{overflow-wrap:anywhere}
     .layout{display:grid;grid-template-columns:minmax(0,410px) minmax(0,1fr);gap:18px}.sheet{background:var(--paper);border:1px solid var(--line);min-width:0}.sheet h3{font-size:1rem;margin:0;padding:9px 12px;border-bottom:1px solid var(--line);background:#d9d2c4}
     .stage{padding:12px}.stage canvas{display:block;width:100%;height:auto;background:#a7a39a;border:1px solid var(--line)}.portrait{width:86px;height:86px;object-fit:cover;float:right;border:1px solid var(--line);margin:0 0 8px 10px}.stage p{margin:10px 0 0;line-height:1.4}
     .motion-controls{display:flex;gap:8px;align-items:end;flex-wrap:wrap;margin-top:12px}.motion-controls label{display:grid;gap:4px;flex:1 1 180px}.motion-controls label[hidden]{display:none}.motion-controls button{flex:0 0 auto}
@@ -26,8 +26,9 @@
     #audio-list{list-style:none;margin:0;padding:0}.audio-row{border-top:1px solid #bbb2a3;padding:10px 12px}.audio-row:first-child{border-top:0}.audio-row header{display:flex;gap:8px;align-items:flex-start;justify-content:space-between}.audio-row header div{min-width:0}.audio-row strong{display:block}.audio-row span{display:block;color:#615a50;font-size:.87rem}.audio-row p{margin:6px 0 0;line-height:1.4;overflow-wrap:break-word}.audio-row button{flex:none}.audio-row[data-active="true"]{background:#f6f0e5;border-left:3px solid var(--accent);padding-left:9px}
     #audio-now{margin:0;padding:10px 12px;min-height:48px;background:#f6f0e5;border-bottom:1px solid var(--line);line-height:1.4}#audio-now:empty:before{content:"Select a line to hear its trigger.";color:#615a50}
     .audio-actions{padding:8px 12px;border-bottom:1px solid var(--line)}.note{color:#5b554c;line-height:1.4;margin:14px 0 0}
-    @media(max-width:800px){main{display:block}aside{position:static;max-height:none;overflow:visible;border-right:0;border-bottom:1px solid var(--dark)}#directory{max-height:210px;overflow:auto}.content{padding:14px}.layout{grid-template-columns:1fr}}
-    @media(max-width:400px){.top{padding:10px 12px}.content{padding:8px}.profile-head button{width:100%}dl{grid-template-columns:90px minmax(0,1fr)}}
+    @media(max-width:1100px){.layout{grid-template-columns:1fr}}
+    @media(max-width:800px){main{display:block}aside{position:static;max-height:none;overflow:visible;border-right:0;border-bottom:1px solid var(--dark)}#directory{max-height:210px;overflow:auto}.content{padding:14px}}
+    @media(max-width:400px){.top{padding:10px 12px}.content{padding:8px}.profile-head button{width:100%}dl{grid-template-columns:1fr}}
   </style>
 </head>
 <body>
@@ -45,10 +46,10 @@
     </section>
   </main>
   <audio id="clip-player" preload="none"></audio>
-  <script src="./For-AI/AUDIO-TEXT-LIBRARY.js?v=20260928-voices"></script>
+  <script src="./For-AI/AUDIO-TEXT-LIBRARY.js?v=20261011-fixed-street-voices"></script>
   <script src="./For-AI/QUIZ-CHARACTER-DICTIONARY.js?v=20260927-cars2"></script>
   <script src="./tourist-animation.js?v=20261007-foot-gait"></script>
-  <script src="./character-review.js?v=20261007-foot-gait"></script>
+  <script src="./character-review.js?v=20261011-fixed-street-voices"></script>
   <script type="module">
     import {prepareWithSegments,measureLineStats,measureNaturalWidth} from "./assets/vendor/pretext/dist/layout.js";
     await document.fonts.load('16px "Preview Sans"');

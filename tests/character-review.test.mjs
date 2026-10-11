@@ -10,6 +10,7 @@ const context=vm.createContext({window:{}});
 for(const file of ["For-AI/AUDIO-TEXT-LIBRARY.js","For-AI/QUIZ-CHARACTER-DICTIONARY.js","character-review.js"])vm.runInContext(source(file),context,{filename:file});
 const {profiles,atlases,previewCell}=context.window.GermanySimulatorCharacterReview;
 const {clips}=context.window.GermanySimulatorAudioText;
+const cast=JSON.parse(source('For-AI/VOICE-CAST.json'));
 const game=source("game.js");
 const namedBlock=game.slice(game.indexOf("const npcs=["),game.indexOf("].map(n=>n.special"));
 const physicalNames=[...namedBlock.matchAll(/name:"([^"]+)"/g)].map(match=>match[1].split(" · ")[0]);
@@ -46,6 +47,21 @@ for(const [kind,atlas] of Object.entries(atlases)){
   if(m.interactions)assert.equal(previewCell(m,"waving","right","up",.2,40).row,m.interactions.states.waving.row,`${kind} reaction cells`);
 }
 for(const id of ["herr-sandale","frau-sandale"])assert.ok(profiles.some(person=>person.id===id),`${id} needs a direct link`);
+assert(!profiles.some(person=>person.id==='rule-announcer'),'anonymous rule narration is retired');
+const advisers=profiles.filter(person=>person.group==='Street advisers');
+assert.equal(advisers.length,3);
+assert.equal(advisers.flatMap(person=>person.lines('germany')).length,11);
+for(const person of advisers){
+ assert.equal(person.id,person.voiceId,'existing character links remain stable');
+ assert.equal(person.actorId,cast.roleProfiles.find(role=>role.voiceId===person.voiceId).gameCharacterId);
+ for(const row of person.lines('germany')){
+  const clip=Object.values(clips).find(item=>item.voiceId===person.voiceId&&item.text===row.text);
+  assert.equal(clip.trigger,'nearby-street-rule');assert.equal(row.clip,clip.path||'');
+ }
+}
+const ordinary=profiles.filter(person=>person.group==='Crowd');assert.equal(ordinary.length,9);
+for(const person of ordinary)assert.equal(cast.roleProfiles.find(role=>role.voiceId===person.voiceId).gender,person.body==='towel-man'?'male':'female');
+for(const person of profiles.filter(person=>person.group==='Named passersby'))for(const row of person.lines('germany'))if(row.clip)assert.equal(Object.values(clips).find(clip=>clip.path===row.clip).voiceId,person.voiceId);
 const owner={merz:"merz",merkel:"merkel",bayern:"bayern",alice:"alice"};
 for(const [id,voiceId] of Object.entries(owner))for(const row of profiles.find(person=>person.id===id).lines("germany"))if(row.clip)assert.equal(Object.values(clips).find(clip=>clip.path===row.clip).voiceId,voiceId,`${id} clip ownership`);
 assert.match(source("character-review.html"),/name="robots" content="noindex,nofollow,noarchive"/);
