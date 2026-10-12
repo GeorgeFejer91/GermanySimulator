@@ -49,7 +49,7 @@ test('stationary figures have unique slots while reusing the correct family pack
 
 test('Frau Knick browser speech consumes her profile without changing displayed words',()=>{
  const h=harness('host',{voice:true});h.counter();h.tick(20);
- assert.equal(h.synth.current.rate,.89);assert.equal(h.synth.current.pitch,.77);
+ assert.equal(h.synth.current.rate,.89*h.level.timeScale);assert.equal(h.synth.current.pitch,.77*h.level.timeScale);
  assert.equal(h.synth.current.text,h.node('amt-line').textContent);
 });
 

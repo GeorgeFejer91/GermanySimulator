@@ -40,7 +40,7 @@ test('the simulation reveal clock resets on arrival, replay, and cancellation',(
   const visit=h.level.omen.visit;
   for(let i=0;i<400&&h.level.omen.phase==='approach';i++)h.level.update(.025);
   assert.equal(h.level.omen.phase,'blackout');assert.equal(h.level.omen.revealTime,0);
-  h.level.update(.1);assert.equal(h.level.omen.revealTime,.1);
+  const before=h.level.floorState.visualTime;h.level.update(.1);assert.ok(Math.abs(h.level.omen.revealTime-(h.level.floorState.visualTime-before))<1e-8);
   h.level.replay(h.config);assert(h.level.omen.visit>visit);assert.equal(h.level.omen.revealTime,0);
   assert.equal(h.level.omen.phase,'');
 });

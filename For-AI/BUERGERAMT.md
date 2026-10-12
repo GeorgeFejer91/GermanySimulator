@@ -48,6 +48,80 @@ same name and selected voice, while visible mouth ownership stays local to its
 desk. The original refusal also reuses Knick's approved fever recording.
 No new synthesis or voice profile is needed for this restoration.
 
+## Waiting-room floor
+
+The room begins with .82 m black-and-white checkerboard tiles and painted grout.
+Over **210 seconds (3.5 minutes) of visible, unscaled residence inside the actual
+doorway**, their pigment gradually stretches into curling veins and merging oily
+pools. Grout disappears and the surface develops shallow specular ridges and
+distorted analytic reflections of the five existing fluorescent ceiling strips.
+These are authored fixture reflections, not mirrors of people or the whole room.
+No floor height, furniture, body clearance or collision changes; gait remains
+tied to accepted displacement.
+
+**Liquidation and deceleration must map one to one.** `buergeramt-goop.js` is the
+single immutable authority: `p = clamp(age / 210, 0, 1)`,
+`goop = p²(3 − 2p)`, and `speed = 1 − 0.6 × goop`. Thus the start is 100% speed,
+105 seconds is 50% goop / 70% speed, and 210 seconds is full goop / **40% speed**.
+Keep the final floor and time scale capped there. Never add a separate melting
+delay, independent easing, second time-scale ramp, or feed slowed time back into
+the 210-second age; that would break the user's explicit coupling requirement.
+
+`buergeramt.js` owns unscaled `floorState.time`, integrated `visualTime`, and
+attempt generation. Count age only while the player's position is inside the
+door; continue through conversations and fever/omen beats, pause age in the
+vestibule and when hidden/closed, and reset both clocks on close/replay. Its exact
+integral of speed drives player/NPC movement, queue and deadlines, action/fever/
+omen clocks, atlas/breath/mouth animation and liquid transport. Render and input
+dispatch stay responsive. `buergeramt-floor.js` carries one pigment
+field forward with prescribed curl flow, mild diffusion and an artistic contrast
+retention term. It is a texture transport effect, not a Navier–Stokes or physical
+two-fluid solver. It never replaces the evolving pigment with unrelated noise.
+Without renderable, linearly sampled floating targets, a bounded procedural
+flow approximation retains the checkerboard, goop mapping and foot ripples.
+Actual accepted displacement emits faint radial surface ripples, directional
+pigment wakes and local diffusion near walking feet; stationary/blocked roots
+and teleport/re-entry do not. Use the controller’s monotonic accepted-walk
+distance plus position generation; root displacement alone includes collision
+recovery and must never trigger a pulse. Reserve two ripple slots for the player, with eight
+total on desktop and four on compact screens; nearby NPCs share the remainder.
+The existing room isolation/fade owns opacity and depth-write restoration.
+Reduced motion and GPU failure retain a static spatial melting approximation
+with the same goop/speed value, without ripple animation or pigment targets.
+
+Recorded host and phone voices use this same playback rate with pitch preservation
+disabled; their media clocks still own word/mouth cues. Office hum, score, FX,
+ring cadence and newly started browser-speech fallbacks also take the shared
+tempo. Web Speech can sample rate/pitch at onset but cannot reliably retime an
+utterance already speaking. Caption-only duration uses the onset rate. Host
+`office-tempo` updates are bounded to 4 Hz under existing link/session guards.
+Authored first-ring and interruption spans are scaled before committing absolute
+peer/UTC deadlines; receipt, network/startup and true-stall watchdog timestamps
+remain monotonic wall time. Close/replay cancels the owning cues and leaves city
+time/audio at ordinary speed. Beat ID: `amt-goop-time`; no new text or recordings.
+
+The method combines backward texture transport from [GPU Gems chapter 38](https://developer.nvidia.com/gpugems/gpugems/part-vi-beyond-triangles/chapter-38-fast-fluid-dynamics-simulation-gpu)
+with a procedural stream-function field informed by [Bridson et al.'s curl-noise method](https://www.cs.ubc.ca/~rbridson/docs/bridson-siggraph2007-curlnoise.pdf).
+The resource contract belongs to `ASSET-POLICY.md`. Clock, cadence, replay and
+failure checks live in `tests/buergeramt-floor.test.mjs`; the silent GPU evolution,
+both-color retention, Android-emulated views and material restoration probe is
+`tools/playtest-buergeramt-floor.mjs`. Accelerated shader captures do not prove
+natural mission flow or physical-device performance.
+
+The 2026-10-12 floor candidate passed 396 workflow-selected Node checks, separate
+Physics and Camera reviews, and silent desktop/Android portrait/landscape GPU
+checks. Six-minute accelerated captures retain both pigments; native host media
+playheads follow .4/.7/1 rates. Collision recovery, including recovery plus a
+walk in one frame, produces no false pulse. Three cold runs per desktop/mobile
+profile passed the browser budgets before/after and at forced full goop; median
+sampled frame p95 stayed about 21 ms on Intel Iris Xe Chromium. Startup and input
+timings varied; this is scoped regression evidence, not a speedup claim. Root
+and `3d.html` passed startup smoke at all three viewports. Task evidence and the
+causal map remain under ignored `output/oil-floor/`. Actual paired-phone delivery,
+physical Android, perceptual listening and natural full mission traversal were
+not exercised. Minor bright-edge specular stippling is cosmetic; sampled stills
+do not establish continuous flicker-free presentation.
+
 ## Admission, queue and outcomes
 
 The office HUD allocates a top toolbar for sound, restart in direct mode, and

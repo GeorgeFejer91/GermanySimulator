@@ -432,6 +432,32 @@ object reviewers; rendered HUD and independent timing/lifecycle review apply.
   retain their buffer until completion. Eviction must permit later replay.
   New caches/queues need a measured bound and cleanup rule.
 
+The office checkerboard uses the existing floor mesh and lit material. Its
+painted grout replaces the former individual grout boxes. `buergeramt-floor.js`
+adds no image, video, runtime package or extra WebGL context. When visible
+inside-room progression begins it allocates two 256 × 320 desktop or
+128 × 160 compact-screen pigment targets. R32F requires renderable float and
+linear float sampling; unsupported devices use bounded procedural flow and
+foot ripples without feedback targets. R32F uses four bytes per texel:
+the pair totals 655,360 bytes
+(0.625 MiB) on desktop or 163,840 bytes (0.15625 MiB) on compact screens, without
+depth/stencil or mipmaps. Half-float was rejected after actual GPU tests showed
+white disappearing during repeated tiny transport steps.
+
+Transport runs through the existing render owner at at most 20 Hz of scaled
+scene time, at most two tiny
+offscreen passes per frame, with bounded elapsed time and no hidden catch-up.
+There is no idle timer, download, CPU pixel readback or per-frame shader compile.
+The visible floor retains ordinary depth and the room's existing fade hooks.
+Analytic ceiling-strip highlights need no reflective scene capture. Close,
+replay, reduced motion, context loss and pagehide release the owned targets,
+pass material and geometry; a failed render keeps a static spatial melting
+approximation, preserving the shared goop/speed mapping. Ripple uniforms are
+bounded to eight desktop or four compact-screen events; the existing controller
+supplies accepted-walk distance and reposition generations, with no polling or
+extra animation loop.
+GPU readback exists only in the test server's injected measurement seam.
+
 ### Responsiveness and selective preparation protocol
 
 Input responsiveness across modest browser hardware is a standing product goal.

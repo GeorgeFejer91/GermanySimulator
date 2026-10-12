@@ -264,9 +264,9 @@ test('both speakers cut off each other throughout the escalating argument',()=>{
  h.synth.end();h.tick(200);assert.equal(h.node('amt-line').textContent,h.window.BuergeramtStory.outburst.lines[4]);h.synth.end();h.tick(250);assert.equal(h.counts.cancel,1);assert.equal(h.counts.form,0);
 });
 test('the host measures round trip delay on its own clock and ignores stale pongs',()=>{
- const h=harness(),link=h.links[0];link.emit('connected',{});assert.deepEqual(link.sent.at(-1),{type:'sync-ping',id:1});h.tick(120);link.message({type:'sync-pong',id:1,receivedAtMs:50,sentAtMs:70});assert.equal(h.level.timing.rttMs,100);assert.equal(h.level.timing.oneWayMs,50);assert.equal(h.level.timing.clockOffsetMs,0);assert.equal(h.level.timing.clockUncertaintyMs,50);
+ const h=harness(),link=h.links[0];link.emit('connected',{});assert.deepEqual(link.sent.filter(m=>m.type==='sync-ping').at(-1),{type:'sync-ping',id:1});h.tick(120);link.message({type:'sync-pong',id:1,receivedAtMs:50,sentAtMs:70});assert.equal(h.level.timing.rttMs,100);assert.equal(h.level.timing.oneWayMs,50);assert.equal(h.level.timing.clockOffsetMs,0);assert.equal(h.level.timing.clockUncertaintyMs,50);
  h.tick(1380);assert.equal(link.sent.at(-1).id,2);h.tick(260);link.message({type:'sync-pong',id:2,receivedAtMs:1600,sentAtMs:1610});assert.equal(h.level.timing.rttMs,250);assert.equal(h.level.timing.oneWayMs,125);assert.equal(h.level.timing.jitterMs,150);assert.equal(h.level.timing.clockUncertaintyMs,125);
- link.message({type:'sync-pong',id:1,receivedAtMs:50,sentAtMs:70});assert.equal(h.level.timing.jitterMs,150);h.level.replay(h.config);assert.equal(h.level.timing.rttMs,null);assert.equal(h.links[1].sent.length,0);
+ link.message({type:'sync-pong',id:1,receivedAtMs:50,sentAtMs:70});assert.equal(h.level.timing.jitterMs,150);h.level.replay(h.config);assert.equal(h.level.timing.rttMs,null);assert.equal(h.links[1].sent.filter(m=>m.type==='sync-ping').length,0);
 });
 test('police receipts verify duration and do not advance a turn twice',()=>{
  const h=harness('host',{voice:true}),link=h.links[0];link.emit('connected',{});h.tick(20);link.message({type:'sync-pong',id:1,receivedAtMs:10,sentAtMs:10});h.counter();link.message({type:'answer',id:'grass'});h.tick(20);link.message({type:'police-start',index:-1,mode:'voice',readyDelayMs:20,atMs:h.now()});h.tick(320);link.message({type:'police-done',index:-1,mode:'voice',durationMs:320,atMs:h.now()});assert.equal(h.level.timing.cues[-1].status,'verified');const doneAt=h.level.timing.cues[-1].doneAt;
@@ -435,8 +435,8 @@ test('the host maps a TimeAPI speech timestamp rather than adding delivery delay
  const service={sample:async()=>({utcOffsetMs:100000}),usable:a=>!!a,utcAt:(a,t)=>a.utcOffsetMs+t,monoAt:(a,t)=>t-a.utcOffsetMs};
  const h=harness('host',{phoneClock:service}),link=h.links[0];await Promise.resolve();h.counter();link.message({type:'answer',id:'grass'});const start=h.now();h.tick(600);
  link.message({type:'police-start',index:-1,mode:'recording',readyDelayMs:20,atMs:5000,atUtcMs:100000+start});
- const cut=link.sent.find(m=>m.type==='police-cutoff');assert.equal(cut.stopAtPhoneMs,12200);assert.equal(cut.stopAtUtcMs,100000+start+7200);assert.equal(h.level.timing.cues[-1].clockDomain,'utc');
- h.tick(6599);assert.equal(h.level.timing.desk[0],undefined);h.tick(1);assert.equal(h.level.timing.desk[0].startAt,start+7200);
+ const budget=Math.round(7200/h.level.timeScale),cut=link.sent.find(m=>m.type==='police-cutoff');assert.equal(cut.stopAtPhoneMs,5000+budget);assert.equal(cut.stopAtUtcMs,100000+start+budget);assert.equal(h.level.timing.cues[-1].clockDomain,'utc');
+ h.tick(budget-601);assert.equal(h.level.timing.desk[0],undefined);h.tick(1);assert.equal(h.level.timing.desk[0].startAt,start+budget);
 });
 
 test('cutoff send failure retries and waits for natural completion without false interruption',()=>{
@@ -449,7 +449,7 @@ test('cutoff send failure retries and waits for natural completion without false
 test('a transient cutoff send failure recovers before the shared deadline',()=>{
  const h=harness(),link=h.links[0];h.counter();link.message({type:'answer',id:'grass'});link.fail=true;
  link.message({type:'police-start',index:-1,mode:'recording',readyDelayMs:20,atMs:h.now()});h.tick(50);link.fail=false;h.tick(50);
- assert.equal(link.sent.filter(m=>m.type==='police-cutoff').length,1);assert.equal(h.level.timing.cues[-1].interrupted,true);h.tick(7100);assert.equal(h.level.timing.desk[0].startAt,h.now());
+ assert.equal(link.sent.filter(m=>m.type==='police-cutoff').length,1);assert.equal(h.level.timing.cues[-1].interrupted,true);h.tick(link.sent.find(m=>m.type==='police-cutoff').stopAtPhoneMs-h.now());assert.equal(h.level.timing.desk[0].startAt,h.now());
 });
 
 test('active spoof calls show elapsed time and native hang-up, never police text',()=>{
@@ -469,8 +469,8 @@ test('hanging up releases an answered police wait once and keeps the cancelled a
 });
 test('pre-ring interference has one louder pulsed tone and crackle, honors mute and cleans up on replay',()=>{
  const h=harness('host',{fakeAudio:true});h.counter();h.links[0].message({type:'call-ready',id:'grass',atMs:h.now()});
- const tone=h.audio.nodes.find(n=>n.kind==='oscillator'&&n.frequency.value===217),noise=h.audio.nodes.find(n=>n.kind==='buffer-source'&&n.loop);
- assert(tone&&noise);assert.equal(noise.buffer.length,15360);assert.equal(tone.started[0],noise.started[0]);assert.equal(tone.stopped[0],noise.stopped[0]);assert(Math.abs(tone.stopped[0]-tone.started[0]-.9)<1e-8);
+ const tone=h.audio.nodes.find(n=>n.kind==='oscillator'&&n.amtFrequency===217),noise=h.audio.nodes.find(n=>n.kind==='buffer-source'&&n.loop);
+ assert(tone&&noise);assert.equal(noise.buffer.length,15360);assert.equal(tone.started[0],noise.started[0]);assert.equal(tone.stopped[0],noise.stopped[0]);assert(Math.abs(tone.stopped[0]-tone.started[0]-(h.level.timing.call.ringAtMs-h.level.timing.call.signalAtMs)/1000)<1e-8);
  const envelope=tone.connections[0].connections[0],peaks=envelope.gain.events.filter(([kind,v])=>kind==='linear'&&v===.16);
  assert.equal(peaks.length,6);assert.equal(noise.connections[0].type,'bandpass');assert.equal(noise.connections[0].frequency.value,2400);
  h.level.replay(h.config);h.audio.flushEnded();assert(tone.disconnected&&noise.disconnected&&envelope.disconnected);

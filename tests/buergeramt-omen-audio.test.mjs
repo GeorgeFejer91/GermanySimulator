@@ -119,8 +119,8 @@ test('decoded stems and fallback oscillators stop after the shared gradual unwin
  const h=harness('host',{cinematics:true,fakeAudio:true});h.enterUntilOmen();await flushPromises();
  assert.equal(h.audio.pendingDecodes.length,2);h.audio.resolveDecodes();await flushPromises();
  const stems=h.audio.nodes.filter(node=>node.kind==='buffer-source'&&node.loop&&node.started.length);
- assert.equal(stems.length,2);assert.ok(stems.every(node=>node.stopped[0]<=24));
- const fallback=h.audio.nodes.filter(node=>node.kind==='oscillator'&&[63.7,64.4,95.35,191.1].includes(node.frequency.value));
+ assert.equal(stems.length,2);assert.ok(stems.every(node=>node.stopped[0]<=60));
+ const fallback=h.audio.nodes.filter(node=>node.kind==='oscillator'&&[63.7,64.4,95.35,191.1].includes(node.amtFrequency));
  assert.equal(fallback.length,4);assert.ok(fallback.every(node=>node.started.length===1));
  stepToGlare(h);h.advanceGame(5.3);
  assert.equal(h.level.omen.life.pressure,0);
@@ -139,8 +139,8 @@ test('the existing EFFEKTE mute keeps the omen graph silent',async()=>{
 test('the bounded fallback frees its graph if the scene never advances',async()=>{
  const h=harness('host',{cinematics:true,fakeAudio:true});h.enterUntilOmen();await flushPromises();
  h.audio.resolveDecodes();await flushPromises();
- const fallback=h.audio.nodes.filter(node=>node.kind==='oscillator'&&[63.7,64.4,95.35,191.1].includes(node.frequency.value));
+ const fallback=h.audio.nodes.filter(node=>node.kind==='oscillator'&&[63.7,64.4,95.35,191.1].includes(node.amtFrequency));
  const output=fallback[0].connections[0].connections[0];
- h.tick(24010);h.audio.flushEnded();
+ h.tick(60010);h.audio.flushEnded();
  assert.ok(fallback.every(node=>node.ended));assert.equal(output.disconnected,true);
 });

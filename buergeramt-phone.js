@@ -23,15 +23,29 @@ function showExpired(){expired.hidden=false;form.hidden=true;clearInterval(clock
 try{if(sessionStorage.getItem(expiryKey)==="1"){showExpired();return}}catch{}
 clockService?.sample?.().then(anchor=>{clockAnchor=anchor;updateClock()}).catch(()=>{});
 const link=new BuergeramtLink("phone",invitation),scanId=Array.from(crypto.getRandomValues(new Uint8Array(12)),n=>n.toString(16).padStart(2,"0")).join("");let currentCall="",resolved="",policeIndex=-1,audioContext=null,phoneFxGain=null,staticSource=null,recordedSpeech=null,voiceGeneration=0,submittedName="",slotActive=false,finished=false,closed=false,voiceBusy=false,voiceTimer=null,ringTimer=null,callStartTimer=null,armedCall=false,scanTimer=null,voiceStartupMs=null,voiceAttempts=0,drag=null,ignoreClickTarget=null;
-let phoneSilent=false,openingPoliceLine="",answeredAt=null,durationTimer=null;
+let phoneSilent=false,openingPoliceLine="",answeredAt=null,durationTimer=null,officeTempo=1,ringCadence=null,readableFallback=null,staticFilter=null,staticGain=null,committedRingAtMs=null;
 const voiceQueue=[],ringSources=new Set();
 function silenceCalls(){if(!slotActive||finished||closed||resolved==="answer")return;phoneSilent=true;stopCall();currentCall="";resolved="silent";}
 function updateDuration(){const seconds=Math.max(0,Math.floor((performance.now()-answeredAt)/1000));callState.textContent=String(Math.floor(seconds/60)).padStart(2,"0")+":"+String(seconds%60).padStart(2,"0")}
 let activePoliceIndex=null,finishPoliceVoice=null,cutoffTimer=null;
-function stopRing(){clearTimeout(ringTimer);clearTimeout(callStartTimer);ringTimer=callStartTimer=null;for(const source of ringSources){try{source.stop()}catch{}}ringSources.clear();try{navigator.vibrate?.(0)}catch{}}
+function stopRing(){clearTimeout(ringTimer);clearTimeout(callStartTimer);ringTimer=callStartTimer=null;ringCadence=null;committedRingAtMs=null;for(const source of ringSources){try{source.stop()}catch{}}ringSources.clear();try{navigator.vibrate?.(0)}catch{}}
 function stopRecorded(){const clip=recordedSpeech;recordedSpeech=null;if(clip){clip.onplaying=clip.onended=clip.onerror=null;try{clip.pause()}catch{}}}
+function rateRecording(clip){if(!clip)return;clip.defaultPlaybackRate=clip.playbackRate=officeTempo;clip.preservesPitch=clip.mozPreservesPitch=clip.webkitPreservesPitch=false}
+// Peer deadlines and receipts stay monotonic. Only authored audio and repeat/read
+// durations consume the host's one office tempo; this page has no goop clock.
+function officeRate(rate){
+ if(!Number.isFinite(rate)||rate<.4||rate>1||rate===officeTempo)return;
+ const now=performance.now(),previous=officeTempo;
+ for(const phase of [ringCadence,readableFallback])if(phase){phase.remainingMs=Math.max(0,phase.remainingMs-Math.max(0,now-phase.atMs)*previous);phase.atMs=now}
+ officeTempo=rate;rateRecording(recordedSpeech);
+ if(staticSource)staticSource.playbackRate.value=rate;if(staticFilter)staticFilter.frequency.value=2200*rate;
+ if(committedRingAtMs!==null&&now<committedRingAtMs){for(const source of ringSources)try{source.stop()}catch{}ringSources.clear();scheduleRingSound(committedRingAtMs)}
+ else for(const source of ringSources)source.frequency.value=440*rate;
+ if(ringCadence){clearTimeout(ringTimer);ringTimer=setTimeout(()=>repeatRing(performance.now()),ringCadence.remainingMs/rate)}
+ if(readableFallback&&finishPoliceVoice){clearTimeout(voiceTimer);voiceTimer=setTimeout(finishPoliceVoice,readableFallback.remainingMs/rate)}
+}
 function resetSwipe(){drag=null;for(const button of [answer,decline]){button.style?.removeProperty("--amt-swipe-x");button.style?.removeProperty("--amt-swipe-y");button.classList.remove("dragging")}}
-function stopCall(){voiceGeneration++;voiceQueue.length=0;voiceBusy=false;activePoliceIndex=finishPoliceVoice=null;clearTimeout(cutoffTimer);cutoffTimer=null;clearTimeout(voiceTimer);voiceTimer=null;clearInterval(durationTimer);durationTimer=null;answeredAt=null;stopRecorded();stopStatic();stopRing();armedCall=false;resetSwipe();try{window.speechSynthesis?.cancel()}catch{}call.classList.remove("answered");document.body.classList.remove("amt-phone-in-call");activeControls.hidden=true;callState.textContent=copy.ringing;call.hidden=true;answer.hidden=true;decline.hidden=true;choices.hidden=true}
+function stopCall(){voiceGeneration++;voiceQueue.length=0;voiceBusy=false;activePoliceIndex=finishPoliceVoice=null;readableFallback=null;clearTimeout(cutoffTimer);cutoffTimer=null;clearTimeout(voiceTimer);voiceTimer=null;clearInterval(durationTimer);durationTimer=null;answeredAt=null;stopRecorded();stopStatic();stopRing();armedCall=false;resetSwipe();try{window.speechSynthesis?.cancel()}catch{}call.classList.remove("answered");document.body.classList.remove("amt-phone-in-call");activeControls.hidden=true;callState.textContent=copy.ringing;call.hidden=true;answer.hidden=true;decline.hidden=true;choices.hidden=true}
 function endSlot(text,completed=false){slotActive=false;finished=true;submit.disabled=true;clearInterval(scanTimer);scanTimer=null;stopCall();status.textContent=text;if(!completed)showExpired();try{wakeLock?.release()?.catch(()=>{})}catch{}wakeLock=null}
 function initAudio(){try{const Audio=window.AudioContext||window.webkitAudioContext;if(Audio&&!audioContext){audioContext=new Audio();phoneFxGain=audioContext.createGain();phoneFxGain.gain.value=1;phoneFxGain.connect(audioContext.destination)}audioContext?.resume()?.catch(()=>{})}catch{}}
 function acknowledgeTicket(){if(link.send("ticket-received",{id:scanId,number:number.textContent})){clearInterval(scanTimer);scanTimer=null}}
@@ -39,28 +53,29 @@ function requestTicket(){if(closed||finished||link.channel?.readyState!=="open")
 function scheduleRingSound(atMs){
  if(!audioContext||phoneSilent)return;
  const start=audioContext.currentTime+Math.max(0,(atMs-performance.now())/1000);
- for(const offset of [0,.22,.6,.82]){const osc=audioContext.createOscillator(),gain=audioContext.createGain();osc.type="sine";osc.frequency.value=440;gain.gain.setValueAtTime(0,start+offset);gain.gain.linearRampToValueAtTime(.025,start+offset+.02);gain.gain.exponentialRampToValueAtTime(.0001,start+offset+.17);osc.connect(gain).connect(phoneFxGain);ringSources.add(osc);osc.onended=()=>{ringSources.delete(osc);osc.disconnect();gain.disconnect()};osc.start(start+offset);osc.stop(start+offset+.18)}
+ for(const offset of [0,.22,.6,.82]){const osc=audioContext.createOscillator(),gain=audioContext.createGain(),delay=offset/officeTempo;osc.type="sine";osc.frequency.value=440*officeTempo;gain.gain.setValueAtTime(0,start+delay);gain.gain.linearRampToValueAtTime(.025,start+delay+.02/officeTempo);gain.gain.exponentialRampToValueAtTime(.0001,start+delay+.17/officeTempo);osc.connect(gain).connect(phoneFxGain);ringSources.add(osc);osc.onended=()=>{ringSources.delete(osc);osc.disconnect();gain.disconnect()};osc.start(start+delay);osc.stop(start+delay+.18/officeTempo)}
 }
-function ringHaptic(){if(closed||finished||phoneSilent||call.hidden||resolved)return;try{navigator.vibrate?.([240,150,240,150,240])}catch{}}
-function repeatRing(atMs){if(closed||finished||call.hidden||resolved)return;ringHaptic();const next=atMs+2800;scheduleRingSound(next);ringTimer=setTimeout(()=>repeatRing(next),Math.max(0,next-performance.now()))}
+function ringHaptic(){if(closed||finished||phoneSilent||call.hidden||resolved)return;try{navigator.vibrate?.([240,150,240,150,240].map(ms=>Math.round(ms/officeTempo)))}catch{}}
+function nextRing(atMs){ringCadence={remainingMs:2800,atMs};ringTimer=setTimeout(()=>repeatRing(performance.now()),Math.max(0,atMs+2800/officeTempo-performance.now()))}
+function repeatRing(atMs){ringTimer=null;ringCadence=null;if(closed||finished||call.hidden||resolved)return;ringHaptic();scheduleRingSound(atMs);nextRing(atMs)}
 function incomingCall(message){
  if(!armedCall||!slotActive||currentCall||phoneSilent||finished||closed)return;
  const receivedAt=performance.now(),leadMs=message.leadMs;let target=null,mode="receipt";
- if(Number.isFinite(message.ringAtPhoneMs)&&message.ringAtPhoneMs>=receivedAt-12000&&message.ringAtPhoneMs<=receivedAt+5000){target=message.ringAtPhoneMs;mode="peer"}
- else if(Number.isSafeInteger(message.ringAtUtcMs)&&clockService?.usable?.(clockAnchor,receivedAt)){const proposed=clockService.monoAt(clockAnchor,message.ringAtUtcMs);if(proposed>=receivedAt-12000&&proposed<=receivedAt+5000){target=proposed;mode="utc"}}
+ if(Number.isFinite(message.ringAtPhoneMs)&&message.ringAtPhoneMs>=receivedAt-12000&&message.ringAtPhoneMs<=receivedAt+5500){target=message.ringAtPhoneMs;mode="peer"}
+ else if(Number.isSafeInteger(message.ringAtUtcMs)&&clockService?.usable?.(clockAnchor,receivedAt)){const proposed=clockService.monoAt(clockAnchor,message.ringAtUtcMs);if(proposed>=receivedAt-12000&&proposed<=receivedAt+5500){target=proposed;mode="utc"}}
  if(target===null)target=receivedAt+leadMs;
  const lateMs=Math.min(12000,Math.max(0,Math.round(receivedAt-target))),ringAtMs=Math.max(receivedAt,target);
  currentCall=message.id;armedCall=false;resolved="";policeIndex=-1;openingPoliceLine=message.line;callState.textContent=copy.ringing;
- scheduleRingSound(ringAtMs);link.send("call-scheduled",{id:currentCall,atMs:ringAtMs,mode,lateMs});
- const show=()=>{callStartTimer=null;if(closed||finished||resolved||!slotActive)return;answer.hidden=false;decline.hidden=false;choices.hidden=false;activeControls.hidden=true;call.hidden=false;document.body.classList.add("amt-phone-in-call");ringHaptic();const next=ringAtMs+2800;scheduleRingSound(next);ringTimer=setTimeout(()=>repeatRing(next),Math.max(0,next-performance.now()))};
+ committedRingAtMs=ringAtMs;scheduleRingSound(ringAtMs);link.send("call-scheduled",{id:currentCall,atMs:ringAtMs,mode,lateMs});
+ const show=()=>{callStartTimer=null;committedRingAtMs=null;if(closed||finished||resolved||!slotActive)return;answer.hidden=false;decline.hidden=false;choices.hidden=false;activeControls.hidden=true;call.hidden=false;document.body.classList.add("amt-phone-in-call");ringHaptic();nextRing(ringAtMs)};
  if(ringAtMs-receivedAt<15)show();else callStartTimer=setTimeout(show,ringAtMs-receivedAt);
 }
 let wakeLock=null;async function keepAwake(){
  if(closed||finished||document.hidden||wakeLock&&!wakeLock.released)return;
  try{const lock=await navigator.wakeLock?.request("screen");if(!lock)return;if(closed||finished||document.hidden){await lock.release();return}wakeLock=lock}catch{wakeLock=null}
 }
-function stopStatic(){try{staticSource?.stop()}catch{}staticSource=null}
-function startStatic(){if(!audioContext)return;stopStatic();const buffer=audioContext.createBuffer(1,Math.floor(audioContext.sampleRate*.32),audioContext.sampleRate),samples=buffer.getChannelData(0);for(let i=0;i<samples.length;i++)samples[i]=(Math.random()*2-1)*(.45+.55*Math.random());const source=audioContext.createBufferSource(),filter=audioContext.createBiquadFilter(),gain=audioContext.createGain();source.buffer=buffer;source.loop=true;filter.type="bandpass";filter.frequency.value=2200;filter.Q.value=.45;gain.gain.value=.035;source.connect(filter).connect(gain).connect(phoneFxGain);source.start();staticSource=source}
+function stopStatic(){try{staticSource?.stop()}catch{}for(const node of [staticSource,staticFilter,staticGain])try{node?.disconnect()}catch{}staticSource=staticFilter=staticGain=null}
+function startStatic(){if(!audioContext)return;stopStatic();const buffer=audioContext.createBuffer(1,Math.floor(audioContext.sampleRate*.32),audioContext.sampleRate),samples=buffer.getChannelData(0);for(let i=0;i<samples.length;i++)samples[i]=(Math.random()*2-1)*(.45+.55*Math.random());const source=audioContext.createBufferSource(),filter=audioContext.createBiquadFilter(),gain=audioContext.createGain();source.buffer=buffer;source.loop=true;source.playbackRate.value=officeTempo;filter.type="bandpass";filter.frequency.value=2200*officeTempo;filter.Q.value=.45;gain.gain.value=.035;source.connect(filter).connect(gain).connect(phoneFxGain);source.start();staticSource=source;staticFilter=filter;staticGain=gain}
 function showPolice(text,index,receivedAt=performance.now()){
  if(resolved!=="answer"||finished||closed||call.hidden)return;
  voiceQueue.push({text,index,receivedAt});playNextPolice();
@@ -71,25 +86,28 @@ function playNextPolice(){
  const current=()=>generation===voiceGeneration&&!finished&&!closed&&resolved==="answer"&&!call.hidden;
  let startedAt=null,mode="fallback";
  const started=kind=>{if(!current()||startedAt!==null)return;startedAt=performance.now();mode=kind;const readyDelayMs=Math.min(60000,Math.max(0,Math.round(startedAt-receivedAt)));if(kind==="voice")voiceStartupMs=voiceStartupMs===null?readyDelayMs:Math.round(voiceStartupMs*.6+readyDelayMs*.4);const atUtcMs=clockService?.usable?.(clockAnchor,startedAt)?Math.round(clockService.utcAt(clockAnchor,startedAt)):null;link.send("police-start",{index,mode,readyDelayMs,atMs:startedAt,atUtcMs})};
- const finish=()=>{if(!current())return;const endedAt=performance.now();voiceGeneration++;clearTimeout(cutoffTimer);cutoffTimer=null;clearTimeout(voiceTimer);stopRecorded();stopStatic();voiceBusy=false;activePoliceIndex=finishPoliceVoice=null;link.send("police-done",{index,mode,durationMs:Math.min(60000,Math.max(0,Math.round(endedAt-(startedAt??endedAt)))),atMs:endedAt});voiceTimer=setTimeout(playNextPolice,0)};
+ const finish=()=>{if(!current())return;const endedAt=performance.now();voiceGeneration++;clearTimeout(cutoffTimer);cutoffTimer=null;clearTimeout(voiceTimer);readableFallback=null;stopRecorded();stopStatic();voiceBusy=false;activePoliceIndex=finishPoliceVoice=null;link.send("police-done",{index,mode,durationMs:Math.min(60000,Math.max(0,Math.round(endedAt-(startedAt??endedAt)))),atMs:endedAt});voiceTimer=setTimeout(playNextPolice,0)};
  finishPoliceVoice=finish;
- const fallback=()=>{if(!current()||startedAt!==null&&mode==="fallback")return;clearTimeout(voiceTimer);mode="fallback";started("fallback");voiceTimer=setTimeout(finish,Math.max(3500,text.length*55))};
+ const fallback=()=>{if(!current()||startedAt!==null&&mode==="fallback")return;clearTimeout(voiceTimer);mode="fallback";started("fallback");readableFallback={remainingMs:Math.max(3500,text.length*55),atMs:performance.now()};voiceTimer=setTimeout(finish,readableFallback.remainingMs/officeTempo)};
+ // Live recordings can slow down after onset. Reserve the bounded slowest
+ // playback lifetime rather than cutting a valid 0.4x line at the old timeout.
+ const playbackLimit=Math.max(20000,text.length*140)/.4;
  const browserSpeech=()=>{
   if(!window.speechSynthesis||typeof window.SpeechSynthesisUtterance!=="function"){fallback();return}
-  const utterance=new SpeechSynthesisUtterance(text);utterance.lang="de-DE";utterance.rate=.87+Math.max(0,index+1)*.06;utterance.pitch=.66;utterance.volume=1;
+  const utterance=new SpeechSynthesisUtterance(text);utterance.lang="de-DE";utterance.volume=1;
   const voices=speechSynthesis.getVoices();utterance.voice=voices.find(v=>/^de/i.test(v.lang)&&/male|daniel|stefan|markus|martin|thomas|tim/i.test(v.name))||voices.find(v=>/^de/i.test(v.lang))||null;
-  utterance.onstart=()=>{if(!current()||startedAt!==null)return;clearTimeout(voiceTimer);started("voice");startStatic();voiceTimer=setTimeout(()=>{if(current()){speechSynthesis.cancel();finish()}},Math.max(20000,text.length*140))};
+  utterance.onstart=()=>{if(!current()||startedAt!==null)return;clearTimeout(voiceTimer);started("voice");startStatic();voiceTimer=setTimeout(()=>{if(current()){speechSynthesis.cancel();finish()}},playbackLimit)};
   utterance.onend=()=>{if(mode==="voice")finish()};utterance.onerror=()=>{if(current()&&(startedAt===null||mode==="voice")){stopStatic();fallback()}};
   const startupLimit=voiceStartupMs===null?(voiceAttempts===0?1800:1200):Math.max(1200,Math.min(2500,Math.round(voiceStartupMs*3+500)));voiceAttempts++;
   voiceTimer=setTimeout(()=>{if(current()){speechSynthesis.cancel();fallback()}},startupLimit);
-  requestAnimationFrame(()=>{if(current()){try{speechSynthesis.speak(utterance)}catch{clearTimeout(voiceTimer);fallback()}}});
+  requestAnimationFrame(()=>{if(current()){try{utterance.rate=(.87+Math.max(0,index+1)*.06)*officeTempo;utterance.pitch=.66*officeTempo;speechSynthesis.speak(utterance)}catch{clearTimeout(voiceTimer);fallback()}}});
  };
  const catalog=window.GermanySimulatorAudioText,voiceId=catalog?.speechFamilies?.amtPolice?.voiceId||"kriminalpolizei";
  const candidate=catalog?.recordedClip?.(voiceId,text)||catalog?.candidateClip?.(voiceId,text);
  if(!candidate||typeof window.Audio!=="function"){browserSpeech();return}
- const clip=new window.Audio(candidate);recordedSpeech=clip;clip.preload="auto";
+ const clip=new window.Audio(candidate);recordedSpeech=clip;clip.preload="auto";rateRecording(clip);
  const recordingFailed=()=>{if(recordedSpeech!==clip||!current())return;stopRecorded();clearTimeout(voiceTimer);if(startedAt===null)browserSpeech();else finish()};
- clip.onplaying=()=>{if(recordedSpeech!==clip||!current()||startedAt!==null)return;clearTimeout(voiceTimer);started("recording");startStatic();voiceTimer=setTimeout(finish,Math.max(20000,text.length*140))};
+ clip.onplaying=()=>{if(recordedSpeech!==clip||!current()||startedAt!==null)return;clearTimeout(voiceTimer);started("recording");startStatic();voiceTimer=setTimeout(finish,playbackLimit)};
  clip.onended=()=>{if(recordedSpeech===clip&&mode==="recording")finish()};clip.onerror=recordingFailed;
  voiceTimer=setTimeout(recordingFailed,3000);
  try{Promise.resolve(clip.play()).catch(recordingFailed)}catch{recordingFailed()}
@@ -109,7 +127,8 @@ link.addEventListener("message",e=>{
  if(m.type==="sync-ping"){const receivedAtMs=performance.now();link.send("sync-pong",{id:m.id,receivedAtMs,sentAtMs:performance.now()});return}
  if(m.type==="done"){if(!finished)endSlot("Dieser Termin wurde am Schalter bearbeitet.",true);else stopCall();return}
  if(finished)return;
- if(m.type==="scan-ready"){admission.hidden=true;submit.disabled=!!submittedName}
+ if(m.type==="office-tempo")officeRate(m.rate);
+ else if(m.type==="scan-ready"){admission.hidden=true;submit.disabled=!!submittedName}
  else if(m.type==="ticket"&&submittedName&&/^[A-Z]-\d{1,3}$/.test(m.number||"")&&Number.isInteger(m.counter)&&m.counter>=1&&m.counter<=4){if(slotActive&&number.textContent===m.number){acknowledgeTicket();return}stopCall();phoneSilent=false;admission.hidden=true;currentCall="";resolved="";number.textContent=m.number;ticket.hidden=false;form.hidden=true;slotActive=!document.hidden;status.textContent="Achten Sie auf die Aufruftafel im Amt.";if(slotActive){acknowledgeTicket();keepAwake()}else{link.send("phone-hidden");endSlot("Seite verlassen. Ihr Platz ist verfallen.");link.close()}}
  else if(m.type==="forfeit")endSlot("Ihr Platz ist verfallen.");
  else if(m.type==="silence"&&slotActive&&m.id==="grass")silenceCalls();
@@ -119,7 +138,7 @@ link.addEventListener("message",e=>{
  else if(m.type==="police-cutoff"&&resolved==="answer"&&slotActive&&Number.isInteger(m.index)&&m.index===activePoliceIndex&&finishPoliceVoice){
   const now=performance.now();let target=Number.isFinite(m.stopAtPhoneMs)?m.stopAtPhoneMs:null;
   if(target===null&&Number.isSafeInteger(m.stopAtUtcMs)&&clockService?.usable?.(clockAnchor,now))target=clockService.monoAt(clockAnchor,m.stopAtUtcMs);
-  if(target!==null&&(target<now-12000||target>now+12000))return;
+  if(target!==null&&(target<now-12000||target>now+20000))return;
   const generation=voiceGeneration,finish=finishPoliceVoice;clearTimeout(cutoffTimer);
   const cut=()=>{cutoffTimer=null;if(generation!==voiceGeneration||m.index!==activePoliceIndex)return;finish();try{window.speechSynthesis?.cancel()}catch{}};
   if(target===null||target<=now)cut();else cutoffTimer=setTimeout(cut,target-now);

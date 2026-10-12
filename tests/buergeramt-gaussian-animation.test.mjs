@@ -82,14 +82,14 @@ for(const seconds of [1,3])test(`dialogue actor returns to the nearest work anch
  const spoken=h.level.characters.find(actor=>actor.id===id);
  assert.equal(spoken.mode,'gesture');assert.equal(spoken.animation.arc,'work-gesture-work');
  const phase=spoken.animation.phase;
- h.synth.end();h.advanceGame(.25);assert.notEqual(h.level.stage,'character');
+ h.synth.end();h.advanceGame(.27);assert.notEqual(h.level.stage,'character');
  const released=h.level.characters.find(actor=>actor.id===id);
- assert.equal(released.mode,'gesture');assert(Math.abs(released.animation.phase-phase)<=.25/4+1e-8,'automatic completion retains continuous body phase');
+ assert.equal(released.mode,'gesture');assert(Math.abs(released.animation.phase-phase)<=.27/4+1e-8,'automatic completion retains continuous body phase');
  const origin=[released.x,released.z];
  h.advanceGame(.2);
  const settling=h.level.characters.find(actor=>actor.id===id);
  assert.equal(settling.mode,'gesture');assert.deepEqual([settling.x,settling.z],origin);
- assert(seconds===1?settling.animation.phase<phase:settling.animation.phase>phase);
+ assert(released.animation.phase<.5?settling.animation.phase<released.animation.phase:settling.animation.phase>released.animation.phase,'return moves toward the nearest work anchor from the actual release phase');
  h.advanceGame(1.9);
  const returned=h.level.characters.find(actor=>actor.id===id);
  assert.notEqual(returned.mode,'gesture');

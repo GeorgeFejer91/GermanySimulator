@@ -20,15 +20,16 @@ const beeps=h=>h.audio.nodes.filter(n=>n.kind==='oscillator'&&n.type==='square')
 
 test('each new board call schedules exactly one bounded abrasive double beep',()=>{
  const h=harness('host',{fakeAudio:true});h.enter();h.advanceGame(3.2);
- assert.equal(h.level.queueDisplay,'Z-7');assert.deepEqual(beeps(h).map(n=>n.frequency.value),[1480,1960]);
- const [a,b]=beeps(h);assert.ok(Math.abs(b.started[0]-a.started[0]-.18)<1e-8);assert.ok(beeps(h).every(n=>n.stopped[0]-n.started[0]<.18));
+ assert.equal(h.level.queueDisplay,'Z-7');assert.deepEqual(beeps(h).map(n=>n.amtFrequency),[1480,1960]);assert.ok(beeps(h).every(n=>Math.abs(n.frequency.value-n.amtFrequency*h.level.timeScale)<1e-8));
+ const [a,b]=beeps(h);assert.ok(Math.abs((b.started[0]-a.started[0])/(a.stopped[0]-a.started[0])-.18/.17)<1e-8,'both scheduled spans use the same onset tempo');assert.ok(beeps(h).every(n=>n.stopped[0]-n.started[0]<=.17/.4+1e-8));
  h.level.update(0);h.level.update(0);assert.equal(beeps(h).length,2);h.advanceGame(3.2);assert.equal(beeps(h).length,4);
  h.hide();h.advanceGame(10);assert.equal(beeps(h).length,4);
 });
 
 test('the exact recorded shout follows the beep, belongs to Knick at desk three, and starts its caption on playing',()=>{
  const h=harness('host',{fakeAudio:true,voice:true}),clips=recording(h);h.enter();h.advanceGame(3.2);
- assert.equal(clips.length,0);h.tick(359);h.level.update(0);assert.equal(clips.length,0);
+ const delay=Math.ceil(360*(beeps(h)[0].stopped[0]-beeps(h)[0].started[0])/.17);
+ assert.equal(clips.length,0);h.tick(delay-1);h.level.update(0);assert.equal(clips.length,0);
  h.tick(1);h.level.update(0);assert.equal(clips.length,1);assert.equal(h.node('amt-ambient').textContent,'');
  h.tick(16);assert.equal(h.node('amt-ambient').textContent,'FRAU KNICK: Nächste bitte!');assert.equal(h.level.lipSpeech.actor,'clerk-3');
  assert.equal(h.level.activated,false);clips[0].end();assert.equal(h.node('amt-ambient').textContent,'');assert.equal(h.level.audioTextBusy,false);
@@ -41,8 +42,8 @@ test('queued calls do not interrupt speech and only the latest pending announcem
 });
 
 test('voice-off uses a short exact caption without fetching speech, and replay clears queued/active calls',()=>{
- const h=harness('host',{fakeAudio:true}),clips=recording(h);h.enter();h.advanceGame(3.2);h.tick(360);h.level.update(0);
- assert.equal(clips.length,0);assert.equal(h.node('amt-ambient').textContent,'FRAU KNICK: Nächste bitte!');h.tick(1200);assert.equal(h.node('amt-ambient').textContent,'');
+ const h=harness('host',{fakeAudio:true}),clips=recording(h);h.enter();h.advanceGame(3.2);h.tick(Math.ceil(360/h.level.timeScale));h.level.update(0);
+ assert.equal(clips.length,0);assert.equal(h.node('amt-ambient').textContent,'FRAU KNICK: Nächste bitte!');h.tick(Math.ceil(1200/h.level.timeScale));assert.equal(h.node('amt-ambient').textContent,'');
  h.advanceGame(3.2);h.level.replay(h.config);h.tick(5000);h.level.update(0);assert.equal(h.node('amt-ambient').textContent,'');assert.equal(h.level.stage,'outside');assert.ok(h.audio.contexts[0].state==='closed');
 });
 

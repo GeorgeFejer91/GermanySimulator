@@ -49,7 +49,7 @@ test('the courier approaches automatically once; other identities wait for E',()
 test('E starts the correct patron theme and returns automatically after the voice and smooth fade',()=>{
  const h=harness('host',{cinematics:true,voice:true,speechAutoStart:false});approachPatron(h);
  assert.equal(h.level.fever.id,'amt-konrad-wohnungszettel');assert.equal(h.level.fever.mode,'waiting');
- h.synth.start();h.advanceGame(1.2);assert.equal(h.level.fever.strength,1);
+ h.synth.start();h.advanceGame(1.3);assert.equal(h.level.fever.strength,1);
  h.synth.boundary(10);const progress=h.level.fever.progress;h.synth.boundary(5);assert.equal(h.level.fever.progress,progress);
  h.synth.pause();const time=h.level.fever.time;h.advanceGame(20);assert.equal(h.level.fever.time,time);
  h.synth.resume();h.advanceGame(.1);assert(h.level.fever.time>time);
@@ -77,7 +77,7 @@ test('continuous envelope is monotonic at entry and exit without boundary or fal
 
 test('a long paused encounter rebuilds its bounded sound bed only on visible resume',()=>{
  const h=harness('host',{cinematics:true,voice:true,fakeAudio:true});approachPatron(h);h.synth.start();h.advanceGame(1.2);
- h.synth.pause();h.tick(46000);h.audio.flushEnded();h.advanceGame(.05);
+ h.synth.pause();h.tick(113000);h.audio.flushEnded();h.advanceGame(.05);
  const before=h.audio.nodes.filter(n=>n.kind==='oscillator'&&n.started.length).length;
  h.advanceGame(3);assert.equal(h.audio.nodes.filter(n=>n.kind==='oscillator'&&n.started.length).length,before);
  h.synth.resume();h.advanceGame(.1);assert.equal(h.audio.nodes.filter(n=>n.kind==='oscillator'&&n.started.length).length,before+3);

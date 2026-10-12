@@ -7,7 +7,7 @@ const status=root.querySelector("#amt-status");
 // Choices belong to the scene HUD; the legacy paper sheet stays hidden.
 walkHud.append(actions);actions.setAttribute?.("role","group");actions.setAttribute?.("aria-label","Antwort wählen");
 const objective=document.getElementById("amt-objective"),nearby=document.getElementById("amt-nearby"),exit=root.querySelector("#amt-exit"),ambient=document.getElementById("amt-ambient");
-const door={x:0,z:5.55},sign={x:0,z:-2.6},counter={x:4,z:-8.15},view={x:0,z:8,yaw:0};
+const door={x:0,z:5.55},sign={x:0,z:-2.6},counter={x:4,z:-8.15},view={x:0,z:8,yaw:0,walkedDistance:0,positionGeneration:0};
 const held=new Set(),pendingTimers=new Set();
 const counterXs=[-5.8,-1.6,3.9,6.2];let assignedCounter=0,interactingCounter=0;
 const queueCodes=["B-041","Z-7","F-91","A-004","K-002","C-201","H-73","D-008","M-62","E-319","R-5","G-086","W-204","J-17","P-003","N-58"];
@@ -21,8 +21,19 @@ let phoneSilent=false,phoneWarnings=0,phoneWarningTimer=null,phoneRetryTimer=nul
 const registrationStamps=new Set();
 function clearPhonePressure(){if(phoneWarningTimer!==null)clearTimer(phoneWarningTimer);if(phoneRetryTimer!==null)clearTimer(phoneRetryTimer);phoneWarningTimer=phoneRetryTimer=null}
 function resetRegistration(){clearPhonePressure();phoneSilent=false;phoneWarnings=0;registrationNode="";registrationReply=null;registrationCompleted=false;registrationStamps.clear()}
-const lips=window.GermanyAmtLips.createTrack();
-let clerkClock=0,clerkSpeaking=false,clerkAccent=0,clerkBeat="idle",clerkPulse=0;
+const lips=window.GermanyAmtLips.createTrack(()=>visualClock*1000);
+let clerkClock=0,clerkSpeaking=false,clerkAccent=0,clerkBeat="idle",clerkPulse=0,floorClock=0,visualClock=0,tempoSentAt=-Infinity,tempoSentRate=null;
+const goop=window.BuergeramtGoop;
+function timeScale(){return goop.speed(floorClock);}
+function applyOfficeTempo(force=false){
+ const rate=timeScale();
+ if(recordedSpeech){recordedSpeech.playbackRate=rate;recordedSpeech.preservesPitch=false;}
+ if(officeAudio){officeAudio.hum.frequency.value=53*rate;for(const source of officeAudio.transients){if(source.amtFrequency)source.frequency.value=source.amtFrequency*rate;else if(source.playbackRate)source.playbackRate.value=rate;}}
+ for(const source of callSignalSources){if(source.amtFrequency)source.frequency.value=source.amtFrequency*rate;else if(source.playbackRate)source.playbackRate.value=rate;}
+ if(link&&(force||performance.now()-tempoSentAt>=250)&&(force||tempoSentRate===null||Math.abs(rate-tempoSentRate)>.0001)){
+  if(link.send('office-tempo',{rate})){tempoSentAt=performance.now();tempoSentRate=rate;}
+ }
+}
 const clerkAnimation=window.BuergeramtAnimationClock?.createClerk?.();
 const stationaryClocks={"clerk-desk-1":1.4,"clerk-desk-2":2.2,"clerk-desk-3":.25,"clerk-desk-4":2.8,"amt-konrad-wohnungszettel":0,"amt-mechthild-elternbogen":3.7,"amt-wolfram-rentenbescheid":7.1};
 function resetStationaryClocks(){Object.assign(stationaryClocks,{"clerk-desk-1":1.4,"clerk-desk-2":2.2,"clerk-desk-3":.25,"clerk-desk-4":2.8,"amt-konrad-wohnungszettel":0,"amt-mechthild-elternbogen":3.7,"amt-wolfram-rentenbescheid":7.1})}
@@ -58,7 +69,7 @@ function applyMix(){if(recordedSpeech)recordedSpeech.volume=mix.voice*(recordedS
 for(const slider of mixPanel.querySelectorAll("[data-amt-volume]")){const key=slider.dataset.amtVolume;slider.value=String(Math.round(mix[key]*100));slider.addEventListener("input",()=>{mix[key]=Number(slider.value)/100;applyMix();try{localStorage.setItem("amt-mix-v1",JSON.stringify(mix))}catch{}})}
 function initOfficeAudio(){
  try{if(options?.cityAudioBusy?.())return null;const Audio=window.AudioContext||window.webkitAudioContext;if(!Audio||navigator.userActivation&&!navigator.userActivation.hasBeenActive)return null;
-  if(!officeAudio){const ctx=new Audio(),ambience=ctx.createGain(),fx=ctx.createGain(),bus=ctx.createGain(),signal=ctx.createGain(),hum=ctx.createOscillator();hum.type="sine";hum.frequency.value=53;ambience.connect(bus);fx.connect(bus);bus.connect(ctx.destination);signal.connect(ctx.destination);hum.connect(ambience);hum.start();officeAudio={ctx,ambience,fx,bus,signal,hum};applyMix();officeAudio.omenBuffers=Promise.all(["bed","tension"].map(async name=>{const response=await fetch("assets/audio/buergeramt-omen/"+name+".ogg?v=20261008-frontal-score");if(!response.ok)throw new Error("Omen audio unavailable");return ctx.decodeAudioData(await response.arrayBuffer())})).catch(()=>null)}
+  if(!officeAudio){const ctx=new Audio(),ambience=ctx.createGain(),fx=ctx.createGain(),bus=ctx.createGain(),signal=ctx.createGain(),hum=ctx.createOscillator();hum.type="sine";hum.frequency.value=53*timeScale();ambience.connect(bus);fx.connect(bus);bus.connect(ctx.destination);signal.connect(ctx.destination);hum.connect(ambience);hum.start();officeAudio={ctx,ambience,fx,bus,signal,hum,transients:new Set()};applyMix();officeAudio.omenBuffers=Promise.all(["bed","tension"].map(async name=>{const response=await fetch("assets/audio/buergeramt-omen/"+name+".ogg?v=20261008-frontal-score");if(!response.ok)throw new Error("Omen audio unavailable");return ctx.decodeAudioData(await response.arrayBuffer())})).catch(()=>null)}
   if(officeAudio.ctx.state==="suspended")officeAudio.ctx.resume().catch(()=>{});return officeAudio;
  }catch{return null}
 }
@@ -67,18 +78,18 @@ function officeCue(id,x,z){const audio=initOfficeAudio();if(!audio)return;const 
  const buffer=ctx.createBuffer(1,Math.round(ctx.sampleRate*spec[1]),ctx.sampleRate),data=buffer.getChannelData(0);
  for(let i=0;i<data.length;i++)data[i]=(Math.random()*2-1)*(1-i/data.length);
  const source=ctx.createBufferSource(),filter=ctx.createBiquadFilter(),gain=ctx.createGain();source.buffer=buffer;filter.type="bandpass";filter.frequency.value=spec[0];filter.Q.value=id==="aktenkurier"?.6:1.5;
- gain.gain.value=spec[2]*Math.max(.15,1-Math.hypot(view.x-x,view.z-z)/9);source.connect(filter).connect(gain).connect(fx);source.onended=()=>{source.disconnect();filter.disconnect();gain.disconnect()};source.start(now);
+ gain.gain.value=spec[2]*Math.max(.15,1-Math.hypot(view.x-x,view.z-z)/9);source.playbackRate.value=timeScale();audio.transients.add(source);source.connect(filter).connect(gain).connect(fx);source.onended=()=>{audio.transients.delete(source);source.disconnect();filter.disconnect();gain.disconnect()};source.start(now);
 }
 let omenTone=null;
 function startOmenTone(){
  const audio=initOfficeAudio();if(!audio||omenTone)return;
  const {ctx,fx}=audio,now=ctx.currentTime,output=ctx.createGain(),filter=ctx.createBiquadFilter();
  output.gain.setValueAtTime(0,now);filter.type="lowpass";filter.frequency.value=280;output.connect(filter).connect(fx);
- const tone={ctx,output,filter,voices:[],stems:[],endAt:now+24,rendered:false},owner=attempt;
+ const tone={ctx,output,filter,voices:[],stems:[],endAt:now+60,rendered:false},owner=attempt;
  const attach=(source,gain)=>{const voice={source,gain,ended:false};tone.voices.push(voice);source.onended=()=>{if(voice.ended)return;voice.ended=true;source.disconnect();gain.disconnect();if(tone.voices.every(item=>item.ended)){output.disconnect();filter.disconnect()}}};
  // The small oscillator bed is also the no-network/no-codec fallback.
  for(const [index,frequency] of [63.7,64.4,95.35,191.1].entries()){
-  const osc=ctx.createOscillator(),gain=ctx.createGain();osc.type=["sine","sine","sawtooth","square"][index];osc.frequency.value=frequency;gain.gain.value=index===3?.018:.045;osc.connect(gain).connect(output);attach(osc,gain);osc.start(now);osc.stop(tone.endAt);
+  const osc=ctx.createOscillator(),gain=ctx.createGain();osc.type=["sine","sine","sawtooth","square"][index];osc.amtFrequency=frequency;osc.frequency.value=frequency;gain.gain.value=index===3?.018:.045;osc.connect(gain).connect(output);attach(osc,gain);osc.start(now);osc.stop(tone.endAt);
  }
  omenTone=tone;updateOmenTone();
  audio.omenBuffers.then(buffers=>{
@@ -101,7 +112,7 @@ function updateOmenTone(){
  tone.filter.Q.setTargetAtTime(.65+1.35*life.pressure,now,.06);
  tone.stems.forEach((gain,index)=>gain.gain.setTargetAtTime(index===0?.72:life.pressure*(.55+.45*life.pulse)*(speaking?.25+.65*tension:1),now,.025));
  // Pitch is an authored voice control, not measured Hz. Map it gently to score colour.
- const semitones=speech?Math.max(-6,Math.min(3,(speech.pitch-1)*4+speech.semitones)):0,ratio=Math.pow(2,semitones/12);
+ const semitones=speech?Math.max(-6,Math.min(3,(speech.pitch-1)*4+speech.semitones)):0,ratio=Math.pow(2,semitones/12)*timeScale();
  tone.voices.forEach(({source},index)=>{if(index<4)source.frequency.setTargetAtTime([63.7,64.4,95.35,191.1][index]*ratio,now,.12);else source.playbackRate.setTargetAtTime(ratio,now,.12)});
  if(officeAudio)officeAudio.ambience.gain.setTargetAtTime(.006*mix.ambience*(1-.92*p),now,.04);
 }
@@ -119,9 +130,9 @@ function startFeverTone(){
  const tone={ctx,output,filter,voices:[],id:state.id,cue:state.cue};feverTone=tone;
  for(const [index,ratio] of [1,1.008,1.5].entries()){
   const source=ctx.createOscillator(),gain=ctx.createGain();source.type=index===2?"triangle":"sine";source.frequency.value=register*ratio;gain.gain.value=index===2?.035:.06;
-  source.connect(gain).connect(output);const voice={source,gain,ended:false};tone.voices.push(voice);
+  source.connect(gain).connect(output);const voice={source,gain,frequency:register*ratio,ended:false};tone.voices.push(voice);
   source.onended=()=>{voice.ended=true;source.disconnect();gain.disconnect();if(tone.voices.every(v=>v.ended)){output.disconnect();filter.disconnect()}};
-  source.start(now);source.stop(now+45);
+  source.start(now);source.stop(now+112.5);
  }
  updateFeverTone();
 }
@@ -132,6 +143,7 @@ function updateFeverTone(){
  // visible resume; old sources already disconnected in their end receipts.
  if(tone.voices.every(v=>v.ended)){if(!state.paused&&!document.hidden)startFeverTone();return}
  const now=tone.ctx.currentTime,duck=state.phase==="speaking"?.3:.65;
+ for(const voice of tone.voices)if(!voice.ended)voice.source.frequency.setTargetAtTime(voice.frequency*timeScale(),now,.08);
  tone.output.gain.setTargetAtTime(document.hidden||state.paused?0:state.strength*duck,now,.09);
  tone.filter.frequency.setTargetAtTime(280+state.pressure*(700+state.theme.index*95),now,.15);
  if(officeAudio)officeAudio.ambience.gain.setTargetAtTime(.006*mix.ambience*(1-.92*state.strength),now,.09);
@@ -152,7 +164,7 @@ const characterRoutes=[
  {id:"kopiependler",speed:.78,points:[[2.8,-3.25],[4.85,-3.25],[4.85,-2.35],[2.8,-2.35]]},
  {id:"warteschlangenpoetin",speed:.7,points:[[-4.55,-2.25],[-4.55,-3.55],[-5.55,-3.55],[-5.55,-2.25]]}
 ];
-const characters=characterRoutes.map(route=>({id:route.id,route,x:route.points[0][0],z:route.points[0][1],target:1,direction:"up",mode:"work",pause:1.1,stride:0,workClock:0,animationClock:0,returning:null,encounters:0,sequence:[{mode:"work",duration:1.1}],pending:false,priority:0,attention:0}));
+const characters=characterRoutes.map(route=>({id:route.id,route,x:route.points[0][0],z:route.points[0][1],target:1,direction:"up",mode:"work",pause:1.1,stride:0,walkedDistance:0,positionGeneration:0,workClock:0,animationClock:0,returning:null,encounters:0,sequence:[{mode:"work",duration:1.1}],pending:false,priority:0,attention:0}));
 let patronEncounters={};
 let characterMood=null,encounterArmed=false;
 const feverClock=window.BuergeramtFever?.create();
@@ -264,7 +276,7 @@ function moveOmenActor(actor,point,budget,avoidPlayer=false){
  if(distance<1e-8)return 0;
  const x=actor.x+dx/distance*step,z=actor.z+dz/distance*step;
  if(!omenSegmentClear([actor.x,actor.z],[x,z],actor,avoidPlayer)){actor.mode="look";return 0}
- actor.x=x;actor.z=z;actor.heading=Math.atan2(dx,dz);actor.stride+=step*8.5;actor.mode="walk";
+ actor.x=x;actor.z=z;actor.heading=Math.atan2(dx,dz);actor.stride+=step*8.5;actor.walkedDistance+=step;actor.mode="walk";
  actor.direction=Math.abs(dx)>Math.abs(dz)?dx>0?"right":"left":dz>0?"down":"up";return step;
 }
 function returnOmenActor(actor,dt){
@@ -293,7 +305,7 @@ function omenPath(actor,target=view,exact=false){
 function omenSegmentClear(a,b,actor,avoidPlayer=false){
  return officeSegmentClear(...a,...b,officeCharacterRadius)&&officeCirclesClear(...a,...b,officePeople(actor,true,avoidPlayer?1.05:1.68));
 }
-function resetCharacters(){for(const actor of characters){actor.x=actor.route.points[0][0];actor.z=actor.route.points[0][1];actor.target=1;actor.direction="up";actor.heading=Math.PI;actor.path=[];actor.pathGoal="";actor.blockedTime=0;actor.velocity=[0,0];recoverOfficeBody(actor,officeCharacterRadius);actor.mode="work";actor.pause=1.1;actor.stride=0;actor.workClock=0;actor.animationClock=0;actor.returning=null;actor.omenReturn=null;actor.encounters=0;actor.sequence=[{mode:"work",duration:1.1}];actor.pending=false;actor.priority=0;actor.attention=0}characterMood=null}
+function resetCharacters(){for(const actor of characters){actor.x=actor.route.points[0][0];actor.z=actor.route.points[0][1];actor.target=1;actor.direction="up";actor.heading=Math.PI;actor.path=[];actor.pathGoal="";actor.blockedTime=0;actor.velocity=[0,0];recoverOfficeBody(actor,officeCharacterRadius);actor.mode="work";actor.pause=1.1;actor.stride=0;actor.walkedDistance=0;actor.workClock=0;actor.animationClock=0;actor.returning=null;actor.omenReturn=null;actor.encounters=0;actor.sequence=[{mode:"work",duration:1.1}];actor.pending=false;actor.priority=0;actor.attention=0}characterMood=null}
 function action(actor,steps,priority=1){
  if(priority<actor.priority||actor.mode==="gesture"&&actor.priority>=3&&priority<3)return;
  actor.sequence=steps.map(([mode,duration])=>({mode,duration}));actor.priority=priority;
@@ -374,7 +386,7 @@ function refuseCounter(desk){interactingCounter=desk;encounterArmed=true;setStag
 function speechReadableMs(text,delivery){return delivery?.readableMs??Math.max(3500,Math.min(14000,text.length*55*.96/(delivery?.rate??.96)))}
 function say(text,onComplete,onStart,onBoundary,delivery=null,voiceId="",allowCatalogClip=true){
  delivery={...window.BuergeramtVoiceProfiles?.deliveryFor(voiceId),...delivery};
- const owner=attempt,visibleCue=cue,readableMs=speechReadableMs(text,delivery);
+ const owner=attempt,visibleCue=cue,readableMs=speechReadableMs(text,delivery)/timeScale();
  const current=()=>active&&owner===attempt&&visibleCue===cue&&(delivery.isCurrent?delivery.isCurrent():line.textContent===text);
  const begin=()=>{
   if(!current())return;
@@ -383,7 +395,7 @@ function say(text,onComplete,onStart,onBoundary,delivery=null,voiceId="",allowCa
   if(candidate){
    try{
     const clip=catalog.recordings?.[candidate],mediaUrl=/^[a-f0-9]{64}$/.test(clip?.sha256||"")?candidate+(candidate.includes("?")?"&":"?")+"v="+clip.sha256:candidate;
-    const player=new Audio(mediaUrl);officeSpeechBusy=true;recordedSpeech=player;player.amtVolumeScale=delivery.volumeScale??1;player.volume=mix.voice*player.amtVolumeScale;
+    const player=new Audio(mediaUrl);officeSpeechBusy=true;recordedSpeech=player;player.amtVolumeScale=delivery.volumeScale??1;player.volume=mix.voice*player.amtVolumeScale;player.playbackRate=timeScale();player.preservesPitch=false;
     const marks=clip?.wordCues||[],startupMs=voiceId==="amt-brunhilde-knick"?4000:1800;
     let started=false,settled=false,paused=false,hiddenPaused=false,nextMark=0,watchdog=null,due=0,remaining=20000,lastProgressTime=0,playAttempt=0,mouthBinding=null,mouthReady=!window.GermanyAmtLips?.loadRecording;
     const clearWatchdog=()=>{if(watchdog!==null)clearTimer(watchdog);watchdog=null};
@@ -416,8 +428,8 @@ function say(text,onComplete,onStart,onBoundary,delivery=null,voiceId="",allowCa
  if(onComplete||onStart){if(voiced){const limit=hostVoiceStartupMs===null?(hostVoiceAttempts===0?1800:1200):Math.max(900,Math.min(1800,Math.round(hostVoiceStartupMs*2+250)));hostVoiceAttempts++;fallback=defer(beginFallback,limit)}else if(onComplete)fallback=defer(complete,readableMs)}
  if(!voiced){start("fallback");return}
  officeSpeechBusy=true;
- const utterance=new SpeechSynthesisUtterance(text);utterance.lang="de-DE";utterance.rate=delivery?.rate??.96;utterance.pitch=delivery?.pitch??1;utterance.volume=mix.voice*(delivery.volumeScale??1);
- utterance.onstart=()=>{if(!current()||settled||failed)return;start("voice");if(onComplete||onStart){const lag=Math.max(0,performance.now()-requestedAt);hostVoiceStartupMs=hostVoiceStartupMs===null?lag:Math.round(hostVoiceStartupMs*.6+lag*.4)}if(fallback!==null)clearTimer(fallback);if(onComplete){completionRemaining=Math.max(20000,text.length*120);completionDue=performance.now()+completionRemaining;fallback=defer(complete,completionRemaining)}};
+ const utterance=new SpeechSynthesisUtterance(text);utterance.lang="de-DE";utterance.rate=(delivery?.rate??.96)*timeScale();utterance.pitch=(delivery?.pitch??1)*timeScale();utterance.volume=mix.voice*(delivery.volumeScale??1);
+ utterance.onstart=()=>{if(!current()||settled||failed)return;start("voice");if(onComplete||onStart){const lag=Math.max(0,performance.now()-requestedAt);hostVoiceStartupMs=hostVoiceStartupMs===null?lag:Math.round(hostVoiceStartupMs*.6+lag*.4)}if(fallback!==null)clearTimer(fallback);if(onComplete){completionRemaining=Math.max(20000,text.length*120)/.4;completionDue=performance.now()+completionRemaining;fallback=defer(complete,completionRemaining)}};
  utterance.onboundary=event=>{if(current()&&started&&!settled&&!failed&&Number.isInteger(event.charIndex)){lips.boundary(event.charIndex);onBoundary?.(event.charIndex,event)}};
  utterance.onpause=()=>{if(!current()||!started||settled||failed||paused)return;paused=true;lips.pause();if(onComplete&&fallback!==null){completionRemaining=Math.max(0,completionDue-performance.now());clearTimer(fallback);fallback=null}delivery?.onPause?.()};
  utterance.onresume=()=>{if(!current()||!started||settled||failed||!paused)return;paused=false;lips.resume();if(onComplete){completionDue=performance.now()+completionRemaining;fallback=defer(complete,completionRemaining)}delivery?.onResume?.()};
@@ -490,7 +502,7 @@ function recoverOfficeBody(body,radius){
  candidates.sort((a,b)=>Math.hypot(a[0]-body.x,a[1]-body.z)-Math.hypot(b[0]-body.x,b[1]-body.z));
  const legal=candidates.find(([cx,cz])=>!officeSolidBlocked(cx,cz,radius)&&officeSolids.every(o=>
   Math.abs(body.x-o.x)<o.w/2+radius&&Math.abs(body.z-o.z)<o.d/2+radius||officeSegmentClear(body.x,body.z,cx,cz,radius,[o])));
- if(legal){body.x=legal[0];body.z=legal[1]}
+ if(legal){body.x=legal[0];body.z=legal[1];body.positionGeneration=(body.positionGeneration||0)+1}
 }
 function officeCorners(solids){
  const nodes=[];
@@ -569,7 +581,7 @@ function moveOfficeCharacter(actor,tx,tz,budget,dt){
   const step=Math.min(budget,distance,.08),x=actor.x+dx/distance*step,z=actor.z+dz/distance*step;
   if(!officeSegmentClear(actor.x,actor.z,x,z,officeCharacterRadius)||!officePeopleClear(actor,x,z)){blocked=true;break}
   actor.x=x;actor.z=z;actor.heading=Math.atan2(dx,dz);actor.direction=Math.abs(dx)>Math.abs(dz)?dx>0?"right":"left":dz>0?"down":"up";
-  actor.stride+=step*8.5;moved+=step;budget-=step;
+  actor.stride+=step*8.5;actor.walkedDistance+=step;moved+=step;budget-=step;
  }
  actor.blockedTime=blocked||!moved?(actor.blockedTime||0)+dt:actor.blockedTime||0;actor.mode=moved?"walk":"work";
  actor.velocity=dt>0?[(actor.x-startX)/dt,(actor.z-startZ)/dt]:[0,0];
@@ -594,11 +606,11 @@ function forfeit(reason){
  // Retire the URL as well as the ticket: reloading the stamped page cannot rescan.
  resetTiming();beginLink();setTimeout(()=>expiredLink?.close(),250);
 }
-function ring(){try{const audio=initOfficeAudio();if(!audio)return;const {ctx,fx}=audio,now=ctx.currentTime;for(const offset of [0,.2,.52,.72]){const osc=ctx.createOscillator(),gain=ctx.createGain();osc.type="sine";osc.frequency.value=425;gain.gain.setValueAtTime(.0001,now+offset);gain.gain.linearRampToValueAtTime(.014,now+offset+.015);gain.gain.setValueAtTime(.014,now+offset+.1);gain.gain.exponentialRampToValueAtTime(.0001,now+offset+.15);osc.connect(gain).connect(fx);osc.onended=()=>{osc.disconnect();gain.disconnect()};osc.start(now+offset);osc.stop(now+offset+.16)}}catch{}}
+function ring(){try{const audio=initOfficeAudio();if(!audio)return;const {ctx,fx}=audio,now=ctx.currentTime,rate=timeScale();for(const offset of [0,.2,.52,.72]){const osc=ctx.createOscillator(),gain=ctx.createGain(),at=now+offset/rate;osc.type="sine";osc.amtFrequency=425;osc.frequency.value=425*rate;gain.gain.setValueAtTime(.0001,at);gain.gain.linearRampToValueAtTime(.014,at+.015/rate);gain.gain.setValueAtTime(.014,at+.1/rate);gain.gain.exponentialRampToValueAtTime(.0001,at+.15/rate);audio.transients.add(osc);osc.connect(gain).connect(fx);osc.onended=()=>{audio.transients.delete(osc);osc.disconnect();gain.disconnect()};osc.start(at);osc.stop(at+.16/rate)}}catch{}}
 function queueBeep(){
  if(mix.fx<=0)return;
- try{const audio=initOfficeAudio();if(!audio)return;const {ctx,fx}=audio,now=ctx.currentTime;
-  for(const [offset,hz] of [[0,1480],[.18,1960]]){const osc=ctx.createOscillator(),gain=ctx.createGain();osc.type="square";osc.frequency.value=hz;gain.gain.setValueAtTime(.0001,now+offset);gain.gain.linearRampToValueAtTime(.035,now+offset+.008);gain.gain.setValueAtTime(.035,now+offset+.11);gain.gain.exponentialRampToValueAtTime(.0001,now+offset+.16);osc.connect(gain).connect(fx);osc.onended=()=>{osc.disconnect();gain.disconnect()};osc.start(now+offset);osc.stop(now+offset+.17)}
+ try{const audio=initOfficeAudio();if(!audio)return;const {ctx,fx}=audio,now=ctx.currentTime,rate=timeScale();
+  for(const [offset,hz] of [[0,1480],[.18,1960]]){const osc=ctx.createOscillator(),gain=ctx.createGain(),at=now+offset/rate;osc.type="square";osc.amtFrequency=hz;osc.frequency.value=hz*rate;gain.gain.setValueAtTime(.0001,at);gain.gain.linearRampToValueAtTime(.035,at+.008/rate);gain.gain.setValueAtTime(.035,at+.11/rate);gain.gain.exponentialRampToValueAtTime(.0001,at+.16/rate);audio.transients.add(osc);osc.connect(gain).connect(fx);osc.onended=()=>{audio.transients.delete(osc);osc.disconnect();gain.disconnect()};osc.start(at);osc.stop(at+.17/rate)}
  }catch{}
 }
 function playQueueCall(){
@@ -621,12 +633,12 @@ function stopCallSignal(){
 function playCallSignal(signalAtMs,ringAtMs){
  if(mix.fx<=0)return;
  const audio=initOfficeAudio();if(!audio)return;
- const {ctx,bus,signal}=audio,now=performance.now(),start=ctx.currentTime+Math.max(0,(signalAtMs-now)/1000),end=ctx.currentTime+Math.max(.08,(ringAtMs-now)/1000);
+ const {ctx,bus,signal}=audio,now=performance.now(),rate=timeScale(),start=ctx.currentTime+Math.max(0,(signalAtMs-now)/1000),end=ctx.currentTime+Math.max(.08,(ringAtMs-now)/1000);
  if(end-start<.25)return;
  bus.gain.cancelScheduledValues(ctx.currentTime);bus.gain.setValueAtTime(bus.gain.value,ctx.currentTime);bus.gain.linearRampToValueAtTime(.16,start+.035);bus.gain.setValueAtTime(.16,end-.12);bus.gain.linearRampToValueAtTime(1,end);
- const tone=ctx.createOscillator(),low=ctx.createBiquadFilter(),envelope=ctx.createGain();tone.type="sawtooth";tone.frequency.value=217;low.type="lowpass";low.frequency.value=1700;envelope.gain.setValueAtTime(0,start);
- for(const offset of [0,.12,.24,.5,.62,.74]){const at=start+offset;if(at+.075>=end)break;envelope.gain.setValueAtTime(0,at);envelope.gain.linearRampToValueAtTime(.16,at+.006);envelope.gain.setValueAtTime(.16,at+.055);envelope.gain.linearRampToValueAtTime(0,at+.075)}
- const noise=ctx.createBufferSource(),noiseFilter=ctx.createBiquadFilter(),buffer=ctx.createBuffer(1,Math.round(ctx.sampleRate*.32),ctx.sampleRate),samples=buffer.getChannelData(0);for(let i=0;i<samples.length;i++)samples[i]=(Math.random()*2-1)*.28;noise.buffer=buffer;noise.loop=true;noiseFilter.type="bandpass";noiseFilter.frequency.value=2400;noiseFilter.Q.value=.55;
+ const tone=ctx.createOscillator(),low=ctx.createBiquadFilter(),envelope=ctx.createGain();tone.type="sawtooth";tone.amtFrequency=217;tone.frequency.value=217*timeScale();low.type="lowpass";low.frequency.value=1700;envelope.gain.setValueAtTime(0,start);
+ for(const offset of [0,.12,.24,.5,.62,.74]){const at=start+offset/rate;if(at+.075/rate>=end)break;envelope.gain.setValueAtTime(0,at);envelope.gain.linearRampToValueAtTime(.16,at+.006/rate);envelope.gain.setValueAtTime(.16,at+.055/rate);envelope.gain.linearRampToValueAtTime(0,at+.075/rate)}
+ const noise=ctx.createBufferSource(),noiseFilter=ctx.createBiquadFilter(),buffer=ctx.createBuffer(1,Math.round(ctx.sampleRate*.32),ctx.sampleRate),samples=buffer.getChannelData(0);for(let i=0;i<samples.length;i++)samples[i]=(Math.random()*2-1)*.28;noise.buffer=buffer;noise.loop=true;noise.playbackRate.value=timeScale();noiseFilter.type="bandpass";noiseFilter.frequency.value=2400;noiseFilter.Q.value=.55;
  tone.connect(low).connect(envelope).connect(signal);noise.connect(noiseFilter).connect(envelope);
  let remainingSources=2;for(const [source,filter] of [[tone,low],[noise,noiseFilter]]){source.onended=()=>{callSignalSources.delete(source);source.disconnect();filter.disconnect();if(--remainingSources===0)envelope.disconnect()};callSignalSources.add(source);source.start(start);source.stop(end)}
  signalPauseTimer=defer(()=>{signalPauseTimer=null;if(mix.fx>0&&stage==="counter"&&callPending&&window.speechSynthesis?.speaking&&!window.speechSynthesis.paused){try{window.speechSynthesis.pause();signalPaused=true}catch{}}},Math.max(0,signalAtMs-performance.now()));
@@ -635,13 +647,13 @@ function playCallSignal(signalAtMs,ringAtMs){
 function commitCall(reason){
  if(!active||!activated||!callPending||callCommitted||phoneSilent||!["counter","reply","phone-warning"].includes(stage))return;
  callCommitted=true;if(callArmTimer!==null)clearTimer(callArmTimer);callArmTimer=null;
- const now=performance.now(),leadMs=2200,ringAtMs=now+leadMs;
+ const now=performance.now(),leadMs=Math.round(2200/timeScale()),signalMs=Math.round(900/timeScale()),ringAtMs=now+leadMs;
  const peerFresh=timing.lastPongAt!==null&&now-timing.lastPongAt<6000&&timing.clockUncertaintyMs<=250;
  const ringAtPhoneMs=peerFresh?ringAtMs+timing.clockOffsetMs:null;
  const ringAtUtcMs=window.BuergeramtClock?.usable?.(clockAnchor,now)?Math.round(window.BuergeramtClock.utcAt(clockAnchor,ringAtMs)):null;
  if(!link.send("call",{id:story.call.id,line:story.call.line,ringAtPhoneMs,ringAtUtcMs,leadMs})){forfeit("TERMIN NICHT MEHR VERFÜGBAR");return}
- timing.call={reason,armedAtMs:now,ringAtMs,signalAtMs:ringAtMs-900,ringAtPhoneMs,ringAtUtcMs,peerUncertaintyMs:peerFresh?timing.clockUncertaintyMs:null,utcUncertaintyMs:ringAtUtcMs!==null?clockAnchor.uncertaintyMs:null,phoneScheduledAtMs:null,phoneMode:null,lateMs:null};
- sentPolice(-1);playCallSignal(ringAtMs-900,ringAtMs);setStatus("TELEFON KLINGELT · LAUTLOS FÜR DIE ANMELDUNG");schedulePhoneWarning(Math.max(0,ringAtMs-performance.now())+3200);
+ timing.call={reason,armedAtMs:now,ringAtMs,signalAtMs:ringAtMs-signalMs,ringAtPhoneMs,ringAtUtcMs,peerUncertaintyMs:peerFresh?timing.clockUncertaintyMs:null,utcUncertaintyMs:ringAtUtcMs!==null?clockAnchor.uncertaintyMs:null,phoneScheduledAtMs:null,phoneMode:null,lateMs:null};
+ sentPolice(-1);playCallSignal(ringAtMs-signalMs,ringAtMs);setStatus("TELEFON KLINGELT · LAUTLOS FÜR DIE ANMELDUNG");schedulePhoneWarning(Math.max(0,ringAtMs-performance.now())+3200/timeScale());
 }
 function armCall(){if(!active||phoneSilent||!callPending||callCommitted||callArmTimer!==null)return;if(!link.send("call-arm",{id:story.call.id})){forfeit("TERMIN NICHT MEHR VERFÜGBAR");return}callArmTimer=defer(()=>commitCall("ready-timeout"),1000)}
 function ambientStep(dt){
@@ -658,7 +670,10 @@ function ambientStep(dt){
 function update(dt){
  if(!active||document.hidden)return;
  if(window.Germany3D?.ready&&!root.classList.contains("first-person"))root.classList.add("first-person");
- const elapsed=Number.isFinite(dt)?Math.min(.1,Math.max(0,dt)):0;if(!document.hidden)feverClock?.advance(elapsed);updateFeverTone();playQueueCall();ambientStep(elapsed);
+ const realElapsed=Number.isFinite(dt)?Math.min(.1,Math.max(0,dt)):0,previousFloor=floorClock,inside=view.z<door.z;
+ if(inside)floorClock+=realElapsed;
+ const elapsed=inside?goop.motion(floorClock)-goop.motion(previousFloor):realElapsed*timeScale();visualClock+=elapsed;applyOfficeTempo();
+ if(!document.hidden)feverClock?.advance(elapsed);updateFeverTone();playQueueCall();ambientStep(elapsed);
  if(sceneContinuation&&(!sceneContinuation.waitForFade||!feverClock?.inspect().active)){const next=sceneContinuation;next.hold-=elapsed;if(next.hold<=1e-9){sceneContinuation=null;if(next.owner===attempt&&next.cue===cue)next.run();if(!active)return}}
  clerkClock+=elapsed;clerkAccent=Math.max(0,clerkAccent-elapsed);if(!document.hidden)clerkAnimation?.advance(elapsed);
  if(!omen.phase)for(const id of Object.keys(stationaryClocks))if(walking()||characterMood?.id===id)stationaryClocks[id]+=elapsed;
@@ -676,18 +691,18 @@ function update(dt){
   if(deadline<=1e-9){forfeit("AUFRUF VERPASST");return}
  }
  queueClock+=elapsed;
- if(queueClock+1e-9>=callInterval){queueClock=Math.max(0,queueClock-callInterval);queueIndex++;const desk=queueCounters[queueIndex%4];displayNumber(queueCodes[queueIndex%queueCodes.length],desk);if(activated&&queueIndex===ticketQueueIndex){deadline=callWindow;if(stage!=="early"&&stage!=="outside")setStage("walk-counter");setStatus("AUFRUFTAFEL")}reactToCall();queueBeep();queueCallPending=queueIndex;queueCallReadyAt=performance.now()+360;}
+ if(queueClock+1e-9>=callInterval){queueClock=Math.max(0,queueClock-callInterval);queueIndex++;const desk=queueCounters[queueIndex%4];displayNumber(queueCodes[queueIndex%queueCodes.length],desk);if(activated&&queueIndex===ticketQueueIndex){deadline=callWindow;if(stage!=="early"&&stage!=="outside")setStage("walk-counter");setStatus("AUFRUFTAFEL")}reactToCall();queueBeep();queueCallPending=queueIndex;queueCallReadyAt=performance.now()+360/timeScale();}
  if(!walking())return;
  if(held.has("ArrowLeft"))view.yaw-=elapsed*1.8;
  if(held.has("ArrowRight"))view.yaw+=elapsed*1.8;
  const f=(held.has("KeyW")||held.has("ArrowUp")?1:0)-(held.has("KeyS")||held.has("ArrowDown")?1:0),s=(held.has("KeyD")?1:0)-(held.has("KeyA")?1:0);
- if(f||s){const length=Math.hypot(f,s),speed=held.has("KeyR")?7.2:held.has("ShiftLeft")?5.8:3.6,dx=(Math.sin(view.yaw)*f+Math.cos(view.yaw)*s)/length*speed*elapsed,dz=(-Math.cos(view.yaw)*f+Math.sin(view.yaw)*s)/length*speed*elapsed;const steps=Math.max(1,Math.ceil(Math.hypot(dx,dz)/.1));for(let i=0;i<steps;i++){const x=Math.max(-7.45,Math.min(7.45,view.x+dx/steps)),z=Math.max(-10.05,Math.min(8.45,view.z+dz/steps));const crossing=view.z>=door.z&&z<door.z||view.z<door.z&&z>=door.z;if(crossing&&Math.abs(x)>1.3)break;if(!officeBlocked(x,view.z))view.x=x;if(!officeBlocked(view.x,z)){view.z=z;if(crossing&&stage==="outside"&&z<door.z){setStage(activated?"waiting":"walk-sign",true);setStatus(activated?"WARTENUMMER "+number+" · AUFRUF ABWARTEN":"QR-CODE MIT DEM TELEFON SCANNEN")}}}}
+ if(f||s){const length=Math.hypot(f,s),speed=held.has("KeyR")?7.2:held.has("ShiftLeft")?5.8:3.6,dx=(Math.sin(view.yaw)*f+Math.cos(view.yaw)*s)/length*speed*elapsed,dz=(-Math.cos(view.yaw)*f+Math.sin(view.yaw)*s)/length*speed*elapsed;const steps=Math.max(1,Math.ceil(Math.hypot(dx,dz)/.1));for(let i=0;i<steps;i++){const stepX=view.x,stepZ=view.z,x=Math.max(-7.45,Math.min(7.45,view.x+dx/steps)),z=Math.max(-10.05,Math.min(8.45,view.z+dz/steps));const crossing=view.z>=door.z&&z<door.z||view.z<door.z&&z>=door.z;if(crossing&&Math.abs(x)>1.3)break;if(!officeBlocked(x,view.z))view.x=x;if(!officeBlocked(view.x,z)){view.z=z;if(crossing&&stage==="outside"&&z<door.z){setStage(activated?"waiting":"walk-sign",true);setStatus(activated?"WARTENUMMER "+number+" · AUFRUF ABWARTEN":"QR-CODE MIT DEM TELEFON SCANNEN")}}view.walkedDistance+=Math.hypot(view.x-stepX,view.z-stepZ);}}
  const desk=nearestCounter(),near=distanceTo(nearbyTarget())<1.9&&(stage!=="outside"||Math.abs(view.x)<1.3),actor=desk?null:nearestCharacter();
  const nearbyText=desk?"E · SCHALTER "+desk+" ANSPRECHEN":actor?"E · "+(story.characters[actor.id]||story.patrons[actor.id]).speaker+" ANSPRECHEN":near?(stage==="outside"?"DURCH DEN EINGANG GEHEN":stage==="walk-sign"?"QR-CODE MIT DEM TELEFON SCANNEN":"AUFRUFTAFEL"):(stage==="outside"?"ZUR EINGANGSTÜR":stage==="walk-sign"?"QR-SCHILD UNTER DER ANZEIGE":"AUFRUFTAFEL");
  if(nearby.textContent!==nearbyText)nearby.textContent=nearbyText;
 }
 function interact(){if(!walking()||omen.phase)return;if(!document.fullscreenElement)requestFullscreen();const desk=nearestCounter();if(desk){if(activated&&registeredName&&deadline>0&&desk===assignedCounter&&counterCalls[desk-1]===number){interactingCounter=desk;showClerk()}else refuseCounter(desk);return}const near=distanceTo(nearbyTarget())<1.9,actor=nearestCharacter();if(actor){showCharacter(actor);return}if(!near||stage==="outside"&&Math.abs(view.x)>=1.3)return;
- if(stage==="outside"){view.z=4.8;setStage(activated?"waiting":"walk-sign");setStatus(activated?"WARTENUMMER "+number+" · AUFRUF ABWARTEN":"QR-CODE MIT DEM TELEFON SCANNEN");return}
+ if(stage==="outside"){view.positionGeneration++;view.z=4.8;setStage(activated?"waiting":"walk-sign");setStatus(activated?"WARTENUMMER "+number+" · AUFRUF ABWARTEN":"QR-CODE MIT DEM TELEFON SCANNEN");return}
  if(stage==="walk-sign")return;
 }
 function beginLink(){
@@ -697,7 +712,7 @@ function beginLink(){
  const current=()=>active&&owner===attempt&&link===currentLink;
  const terminal=()=>["cancelled","closed","success"].includes(stage);
  currentLink.addEventListener("status",e=>{if(!current())return;if(stage==="cancelled"&&/getrennt|unterbrochen/i.test(e.detail)){policeDisconnectHandler?.();return}if(terminal())return;if(number&&/getrennt|unterbrochen/i.test(e.detail))forfeit("TERMIN NICHT MEHR VERFÜGBAR");else if(!activated)setStatus("QR-CODE SCANNEN · WARTENUMMER ZIEHEN")});
- currentLink.addEventListener("connected",()=>{if(!current()||terminal())return;setStatus("QR-CODE SCANNEN · WARTENUMMER ZIEHEN");probeLink();if(pingTimer===null)pingTimer=setInterval(()=>{if(current())probeLink()},1500)});
+ currentLink.addEventListener("connected",()=>{if(!current()||terminal())return;setStatus("QR-CODE SCANNEN · WARTENUMMER ZIEHEN");probeLink();applyOfficeTempo(true);if(pingTimer===null)pingTimer=setInterval(()=>{if(current())probeLink()},1500)});
  currentLink.addEventListener("message",e=>{
   if(!current())return;const m=e.detail;
   if(m.type==="sync-pong"){receivePong(m.id,m.receivedAtMs,m.sentAtMs);return}
@@ -739,7 +754,7 @@ function beginLink(){
   }else if(activated&&callPending&&callCommitted&&["counter","reply","phone-warning"].includes(stage)&&m.id===story.call.id&&m.type==="decline"){
    callPending=false;callOutcome="decline";if(phoneWarningTimer!==null)clearTimer(phoneWarningTimer);phoneWarningTimer=null;stopCallSignal();if(timing.cues[-1]?.status==="waiting")timing.cues[-1].status="declined";
    // The host owns repeat calls. Putting the call away leaves the page connected.
-   phoneRetryTimer=defer(()=>{phoneRetryTimer=null;if(phoneSilent||!activated||registrationCompleted)return;callPending=true;callCommitted=false;armCall()},24000);
+   phoneRetryTimer=defer(()=>{phoneRetryTimer=null;if(phoneSilent||!activated||registrationCompleted)return;callPending=true;callCommitted=false;armCall()},24000/timeScale());
    warnPhone();
   }
  });
@@ -752,7 +767,7 @@ function warnPhone(){
  if(phoneWarnings>3){forfeit("TELEFON NICHT LAUTLOS");return}
  setStage("phone-warning");setStatus("TELEFON-VERSTOSS "+phoneWarnings+"/3 · LAUTLOS SCHALTEN");
  content(story.clerkIdentity.speaker,story.phoneWarnings[phoneWarnings-1],[{label:"Telefon auf lautlos schalten.",run:()=>silencePhone(true,"Telefon auf lautlos schalten.")},{label:"Nicht rangehen. Telefon weglegen.",run:()=>readPlayerReply("Nicht rangehen. Telefon weglegen.",showRegistration)}],null,null,null,null,{rate:1.12,pitch:1.08});
- if(callPending)schedulePhoneWarning(6000);
+ if(callPending)schedulePhoneWarning(6000/timeScale());
 }
 function readPlayerReply(text,next){content(story.playerIdentity.speaker,text,[],next)}
 function silencePhone(send,spokenReply=""){
@@ -786,7 +801,7 @@ function completeRegistration(){
 function showClerk(){
  if(!active||!activated||["cancelled","expired","closed","success"].includes(stage))return;
  if(!registeredName){setStatus("VOR- UND NACHNAME AM TELEFON EINTRAGEN");return}
- view.x=counter.x;view.z=-8.15;view.yaw=0;setStage("counter");
+ view.positionGeneration++;view.x=counter.x;view.z=-8.15;view.yaw=0;setStage("counter");
  if(!callTriggered){callTriggered=true;if(phoneSilent){showRegistration();return}callPending=true;content(story.clerkIdentity.speaker,"Ihre Nummer ist aufgerufen. Beeilen Sie sich! Ich bin sehr beschäftigt. Was? Ihr Telefon klingelt während meiner Vorsprache.",[],null,armCall);return}
  if(!callPending||phoneSilent)showRegistration();
 }
@@ -810,7 +825,7 @@ function showOutburst(){
   if(waiting?.index!==index)return;stopDesk();clearTimer(waiting.timer);ambient.textContent="";
   clearPhoneCaption();
   if(!phoneBrowser){phoneCaption="KRIMINALPOLIZEI · "+(index===-1?story.call.line:story.police[index]);ambient.textContent=phoneCaption}
-  const pending=waiting,record=timing.cues[index],budget=upset.phoneCutAfterMs[index+1],target=record.estimatedStartAt+budget;
+  const pending=waiting,record=timing.cues[index],budget=Math.round(upset.phoneCutAfterMs[index+1]/timeScale()),target=record.estimatedStartAt+budget;
   const service=window.BuergeramtClock;
   const stopAtUtcMs=Number.isSafeInteger(record.phoneStartedAtUtcMs)?record.phoneStartedAtUtcMs+budget:service?.usable?.(clockAnchor)?Math.round(service.utcAt(clockAnchor,target)):null;
   const payload={index,stopAtPhoneMs:record.phoneStartedAtMs+budget,stopAtUtcMs};
@@ -838,7 +853,7 @@ function showOutburst(){
   const advance=()=>{if(advanced)return;advanced=true;if(deskTimer!==null)clearTimer(deskTimer);deskTimer=null;if(index<3)police(index);else if(index===3)defer(()=>desk(4),150);else defer(finishArgument,200)};
   content(upset.speaker,text,[],mode=>{record.endAt=performance.now();record.mode=mode;advance()},mode=>{
    record.startAt=performance.now();record.startMode=mode;if(mode==="voice")timing.deskStartLagMs=Math.round(timing.deskStartLagMs*.6+(record.startAt-record.requestedAt)*.4);
-   if(index<3)deskTimer=defer(advance,Math.max(300,upset.cutAfterMs[index]-phoneFastLag()));
+   if(index<3)deskTimer=defer(advance,Math.max(300,upset.cutAfterMs[index]/timeScale()-phoneFastLag()));
   },null,null,upset.delivery[index]);
  }
  function finishArgument(){const callback=options.onCancel;close(false);callback()}
@@ -849,6 +864,8 @@ function close(notify=true){
  feverClock?.clear();stopFeverTone();
  if(!active)return;const config=options,phoneComplete=stage==="success"&&registrationCompleted;clearPhonePressure();stopCallSignal();active=false;attempt++;callPending=false;activated=false;callOutcome="";policeDoneHandler=null;policeStartHandler=null;policeDisconnectHandler=null;characterMood=null;
  window.Germany3D?.clearAmtOmenSplat?.();
+ window.Germany3D?.clearAmtFloor?.();
+ floorClock=visualClock=0;
  window.Germany3D?.clearAmtGaussianAnimations?.();
  clerkSpeaking=false;clerkAccent=0;clerkAnimation?.reset(attempt);resetOmen();
  if(pingTimer!==null)clearInterval(pingTimer);pingTimer=null;outstandingPings.clear();
@@ -856,7 +873,7 @@ function close(notify=true){
  try{officeAudio?.ctx.close()?.catch(()=>{})}catch{}officeAudio=null;held.clear();root.hidden=true;walkHud.hidden=true;mixPanel.open=false;mixPanel.hidden=true;ambient.textContent="";
  document.body.classList.remove("amt-inside");const previous=link;link=null;previous?.send(phoneComplete?"done":"forfeit");setTimeout(()=>previous?.close(),250);config.music?.(false);if(notify)config.onClose();
 }
-function open(config){if(active)return;resetRegistration();resetTiming();hostVoiceStartupMs=null;hostVoiceAttempts=0;attempt++;callOutcome="";options=config;active=true;requestFullscreen();assignedCounter=0;interactingCounter=0;counter.x=counterXs[2];resetStationaryClocks();feverClock?.clear();encounterArmed=false;clerkIndex=0;callPending=false;callTriggered=false;callCommitted=false;callArmTimer=null;clockAnchor=null;registeredName="";number="";activated=false;lastScanId="";queueClock=0;queueIndex=0;queueCallPending=-1;queueCallReadyAt=0;queueCallSpeaking=false;ticketQueueIndex=-1;for(let i=-3;i<=0;i++)counterCalls[queueCounters[(i+4)%4]-1]=queueCodes[(i+queueCodes.length)%queueCodes.length];deadline=0;ambientClock=0;clerkClock=0;clerkSpeaking=false;clerkAccent=0;clerkBeat="idle";clerkPulse=0;patronEncounters={};clerkAnimation?.reset(attempt);displayNumber(queueCodes[0],queueCounters[0]);view.x=0;view.z=8;view.yaw=0;held.clear();resetCharacters();resetOmen();exit.hidden=false;root.hidden=false;mixPanel.hidden=false;document.body.classList.add("amt-inside");options.music?.(true);beginLink();setStage("outside");setStatus("EINGANG · BÜRGERAMT");const owner=attempt;window.BuergeramtClock?.sample?.().then(anchor=>{if(active&&attempt===owner)clockAnchor=anchor}).catch(()=>{})}
+function open(config){if(active)return;resetRegistration();resetTiming();hostVoiceStartupMs=null;hostVoiceAttempts=0;attempt++;callOutcome="";options=config;active=true;requestFullscreen();assignedCounter=0;interactingCounter=0;counter.x=counterXs[2];resetStationaryClocks();feverClock?.clear();encounterArmed=false;clerkIndex=0;callPending=false;callTriggered=false;callCommitted=false;callArmTimer=null;clockAnchor=null;registeredName="";number="";activated=false;lastScanId="";queueClock=0;queueIndex=0;queueCallPending=-1;queueCallReadyAt=0;queueCallSpeaking=false;ticketQueueIndex=-1;for(let i=-3;i<=0;i++)counterCalls[queueCounters[(i+4)%4]-1]=queueCodes[(i+queueCodes.length)%queueCodes.length];deadline=0;ambientClock=0;clerkClock=0;floorClock=0;visualClock=0;tempoSentAt=-Infinity;tempoSentRate=null;clerkSpeaking=false;clerkAccent=0;clerkBeat="idle";clerkPulse=0;patronEncounters={};clerkAnimation?.reset(attempt);displayNumber(queueCodes[0],queueCounters[0]);view.x=0;view.z=8;view.yaw=0;view.walkedDistance=0;held.clear();resetCharacters();resetOmen();exit.hidden=false;root.hidden=false;mixPanel.hidden=false;document.body.classList.add("amt-inside");options.music?.(true);beginLink();setStage("outside");setStatus("EINGANG · BÜRGERAMT");const owner=attempt;window.BuergeramtClock?.sample?.().then(anchor=>{if(active&&attempt===owner)clockAnchor=anchor}).catch(()=>{})}
 function clerkPerformance(){
  const names={idle:0,review:1,raise:2,stamp:3,deny:4,talk:5};
  let mode="idle";
@@ -869,10 +886,10 @@ function clerkPerformance(){
 function captureKey(event){if(event.type==="keyup")held.delete(event.code);if(!active)return;if(event.type==="keydown"&&event.code==="KeyE"&&walking()){event.preventDefault();event.stopImmediatePropagation();if(!event.repeat)interact();return}if(!walking()||omen.phase)return;if(["KeyW","KeyA","KeyS","KeyD","KeyR","ArrowUp","ArrowDown","ArrowLeft","ArrowRight","ShiftLeft"].includes(event.code)){event.preventDefault();event.stopImmediatePropagation();if(event.type==="keydown")held.add(event.code);else held.delete(event.code)}}
 window.addEventListener("keydown",captureKey,true);window.addEventListener("keyup",captureKey,true);window.addEventListener("blur",()=>held.clear());
 document.addEventListener("visibilitychange",()=>{if(document.hidden)held.clear();updateOmenTone();updateFeverTone()});
-document.addEventListener("pointermove",event=>{if(active&&walking()&&!omen.phase&&event.buttons===1&&!event.target.closest("button"))view.yaw+=event.movementX*.004});
+document.addEventListener("pointermove",event=>{if(active&&walking()&&!omen.phase&&event.buttons===1&&!event.target.closest("button"))view.yaw+=event.movementX*.004*timeScale()});
 document.querySelectorAll("[data-amt-key]").forEach(button=>{const key=button.dataset.amtKey;button.addEventListener("pointerdown",e=>{if(!active||!walking()||omen.phase)return;e.preventDefault();button.setPointerCapture(e.pointerId);held.add(key)});for(const type of ["pointerup","pointercancel","lostpointercapture"])button.addEventListener(type,()=>held.delete(key))});
 document.getElementById("amt-touch-e").addEventListener("click",interact);document.getElementById("amt-leave").addEventListener("click",()=>close());exit.addEventListener("click",()=>close());
-window.BuergeramtLevel={open,requestFullscreen,get registrationTicket(){return number},get activeClerkCounter(){return interactingCounter||assignedCounter||3},get queueCalls(){return counterCalls.map((number,index)=>({number,counter:index+1}))},get assignedCounter(){return{number:assignedCounter,x:counter.x,z:counter.z}},get registration(){return{node:registrationNode,completed:registrationCompleted,phoneSilent,warnings:phoneWarnings,stamps:[...registrationStamps]}},get lipSpeech(){return lips.sample()},replay(config){close(false);open(config)},update,interact,setOfficeObstacles,get active(){return active},get audioTextBusy(){return officeSpeechBusy},get stage(){return stage},get queueDisplay(){return queueDisplay},get qrSvg(){return qrSvg},get phoneUrl(){return link?BuergeramtLink.phoneUrl(link.invitation,options.subtitlesOn?.()):""},get timing(){return JSON.parse(JSON.stringify(timing))},get view(){return{x:view.x,z:view.z,yaw:view.yaw}},get characters(){return characters.map(actor=>({id:actor.id,x:actor.x,z:actor.z,direction:actor.direction,heading:actor.heading??Math.PI,mode:actor.mode,phase:characterPhase(actor),frame:Math.min(7,Math.floor(characterPhase(actor)*8)),animation:characterAnimation(actor)}))},get stationaryAnimations(){return{
+window.BuergeramtLevel={open,requestFullscreen,get registrationTicket(){return number},get activeClerkCounter(){return interactingCounter||assignedCounter||3},get queueCalls(){return counterCalls.map((number,index)=>({number,counter:index+1}))},get assignedCounter(){return{number:assignedCounter,x:counter.x,z:counter.z}},get registration(){return{node:registrationNode,completed:registrationCompleted,phoneSilent,warnings:phoneWarnings,stamps:[...registrationStamps]}},get lipSpeech(){return lips.sample()},replay(config){close(false);open(config)},update,interact,setOfficeObstacles,get active(){return active},get timeScale(){return timeScale()},get floorState(){return{time:floorClock,visualTime:visualClock,goop:goop.goop(floorClock),speed:timeScale(),visit:attempt}},get audioTextBusy(){return officeSpeechBusy},get stage(){return stage},get queueDisplay(){return queueDisplay},get qrSvg(){return qrSvg},get phoneUrl(){return link?BuergeramtLink.phoneUrl(link.invitation,options.subtitlesOn?.()):""},get timing(){return JSON.parse(JSON.stringify(timing))},get view(){return{x:view.x,z:view.z,yaw:view.yaw,walkedDistance:view.walkedDistance,positionGeneration:view.positionGeneration}},get characters(){return characters.map(actor=>({id:actor.id,x:actor.x,z:actor.z,walkedDistance:actor.walkedDistance,positionGeneration:actor.positionGeneration,direction:actor.direction,heading:actor.heading??Math.PI,mode:actor.mode,phase:characterPhase(actor),frame:Math.min(7,Math.floor(characterPhase(actor)*8)),animation:characterAnimation(actor)}))},get stationaryAnimations(){return{
  "clerk-desk-1":window.BuergeramtAnimationClock?.ambientClerk(stationaryClocks["clerk-desk-1"],attempt),
  "clerk-desk-2":window.BuergeramtAnimationClock?.ambientClerk(stationaryClocks["clerk-desk-2"],attempt),
  "clerk-desk-3":window.BuergeramtAnimationClock?.ambientClerk(stationaryClocks["clerk-desk-3"],attempt),
