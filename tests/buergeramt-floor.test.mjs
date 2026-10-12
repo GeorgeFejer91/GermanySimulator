@@ -34,16 +34,16 @@ test('the room clock starts inside the doorway, continues in dialogue and freeze
   assert.equal(h.level.floorState.time,0);assert.ok(h.level.floorState.visit>visit);
   h.node('amt-exit').click();h.advanceGame(10);assert.equal(h.level.floorState.time,0);
 });
-test('liquidation and slowdown share a late-accelerating 780-second sigmoid, capped at 65% speed',()=>{
+test('liquidation and slowdown share an eight-minute downward wave, capped at 65% speed',()=>{
   for(const t of [-1,0,NaN,Infinity])assert.equal(amtFloorMelt(t),0);
   const api=globalThis.BuergeramtGoop;
-  assert.equal(api.duration,780);assert.equal(api.minSpeed,.65);assert.equal(api.speed(0),1);assert.equal(api.speed(780),.65);assert.equal(api.goop(780),1);assert.equal(api.goop(10000),1);
-  assert.ok(api.speed(260)>.998&&api.speed(390)>.988,'opening minutes remain almost unchanged');
-  assert.ok(api.speed(624)<.83&&api.speed(728)<.70,'decay becomes pronounced late in the visit');
-  assert.ok(api.goop(720)-api.goop(600)>api.goop(600)-api.goop(480),'late decay accelerates');
-  assert.ok(Math.abs(api.motion(780)-722.4376455344702)<1e-8);
-  for(const t of [30,150,260,390,520,624,728,779,790]){const derivative=(api.motion(t+.001)-api.motion(t-.001))/.002;assert.ok(Math.abs(derivative-api.speed(t))<1e-7,'integrated scene time follows the exact shared speed');}
-  let previous=0;for(let t=0;t<1000;t+=.1){const value=amtFloorMelt(t);assert.ok(value>=previous&&value<=1);previous=value;}
+  assert.equal(api.duration,480);assert.equal(api.minSpeed,.65);assert.equal(api.speed(0),1);assert.equal(api.speed(480),.65);assert.equal(api.goop(480),1);assert.equal(api.goop(10000),1);
+  assert.ok(api.goop(30)>.08&&api.goop(60)>.17,'melting is visible in the first minute');
+  assert.ok(api.speed(120)>api.speed(60)&&api.speed(280)>api.speed(220)&&api.speed(420)>api.speed(360),'three slow waves briefly restore speed');
+  assert.ok(api.speed(220)<api.speed(60)&&api.speed(380)<api.speed(220),'successive slow troughs descend');
+  assert.ok(Math.abs(api.motion(480)-396)<1e-8);
+  for(const t of [30,60,120,160,220,280,320,380,440,479,490]){const derivative=(api.motion(t+.001)-api.motion(t-.001))/.002;assert.ok(Math.abs(derivative-api.speed(t))<1e-7,'integrated scene time follows the exact shared speed');}
+  let previous=0;for(let t=0;t<1000;t+=.1){const value=amtFloorMelt(t),motion=api.motion(t);assert.ok(value>=0&&value<=1);assert.ok(api.speed(t)>=.65&&api.speed(t)<=1);assert.ok(motion>=previous,'scene time never reverses');previous=motion;}
   for(const time of [0,1,21,60,300,160,600,900,999]){const f=fixture();f.floor.update({visit:1,time});assert.equal(f.floor.inspect().speed,1-.35*f.floor.inspect().melt);f.floor.update({visit:1,time},true);assert.equal(f.floor.inspect().speed,1-.35*f.floor.inspect().melt);}
 });
 
@@ -96,10 +96,10 @@ test('only accepted displacement makes bounded footsteps; standing, blocked root
   for(let n=142;n<=330;n++)update(n*.05);assert.equal(f.floor.inspect().activeRipples,0);
   update(16.5);f.floor.update(null);assert.equal(f.floor.inspect().footsteps,0);
 });
-test('thirteen minutes remain real residence time while motion integrates the shared drag',()=>{
-  const h=harness();h.advanceGame(780);
-  assert.ok(Math.abs(h.level.floorState.time-780)<1e-8);assert.ok(Math.abs(h.level.timeScale-.65)<1e-10);
-  assert.ok(Math.abs(h.level.floorState.goop-1)<1e-10);assert.ok(Math.abs(h.level.floorState.visualTime-BuergeramtGoop.motion(780))<1);
+test('eight minutes remain real residence time while motion integrates the shared drag',()=>{
+  const h=harness();h.advanceGame(480);
+  assert.ok(Math.abs(h.level.floorState.time-480)<1e-8);assert.ok(Math.abs(h.level.timeScale-.65)<1e-10);
+  assert.ok(Math.abs(h.level.floorState.goop-1)<1e-10);assert.ok(Math.abs(h.level.floorState.visualTime-BuergeramtGoop.motion(480))<1);
 });
 
 
@@ -111,6 +111,17 @@ test('restoring the room retains its pigment targets while reversing and release
  f.floor.update(null);assert.equal(f.floor.inspect().restoration,0);
 });
 
+test('temporary speed recoveries keep the same forward-moving pigment field',()=>{
+ const f=fixture();let previous=0;
+ for(const time of [0,60,120,200,280,360,420,480]){
+  const motion=BuergeramtGoop.motion(time);assert.ok(motion>=previous);previous=motion;
+  f.floor.update({visit:1,time,visualTime:motion});
+  assert.equal(f.floor.inspect().melt,BuergeramtGoop.goop(time));
+  if(time)assert.equal(f.floor.inspect().allocations,1,'a receding wave does not reseed the oils');
+ }
+ assert.equal(f.renders.filter(render=>render.seed).length,1);
+});
+
 test('inverse melt age preserves the single curve across restoration boundaries',()=>{
- for(const amount of [0,.00001,.1,.5,.99,1])assert.ok(Math.abs(BuergeramtGoop.goop(BuergeramtGoop.ageForMelt(amount))-amount)<1e-12);
+ for(const amount of [0,.00001,...Array.from({length:201},(_,i)=>i/200),1])assert.ok(Math.abs(BuergeramtGoop.goop(BuergeramtGoop.ageForMelt(amount))-amount)<1e-12);
 });

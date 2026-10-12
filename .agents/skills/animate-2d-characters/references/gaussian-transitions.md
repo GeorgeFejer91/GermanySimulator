@@ -167,6 +167,23 @@ Gaussian body advances creates a pose jump at readiness or representation
 handover. Both consumers need the same action intent and phase; fallback art
 may have fewer samples, which should be stated and inspected.
 
+Correct endpoint rectangles do not establish correct inbetween mouths. Audit
+the actual paired records: a source lip point matched to a target cheek/chin
+point moves the opening off the face despite valid registrations. Reserve a
+local oral collar in the existing matcher, compare points in each painting's
+own lip frame, and give that connected region a shared transport phase. Preserve
+explicit prop/paper ownership and taper the oral warp before upper-face paint.
+Keep the exact source positions, colours and alpha at both endpoints; inspect
+birth/death support rather than inventing a second mouth renderer.
+
+Represent orientation with two source-pixel axes, including canvas aspect when
+converting them to UV space. For a baked atlas field, transport the centre and
+both axes at the displayed cell; moving only the centre leaves width, angle and
+shear wrong. Delayed-neighbour fallback must use the registration of the
+painting actually loaded. Inspect each affected interval at multiple substeps
+in both directions, with crops covering the moving lip region and full frames
+where a crop clips it. A key/midpoint-only pass can miss the reported drift.
+
 Trace media time separately from body phase and selected paint. Render held
 closed/open/rounded/biting shapes through changing head positions, raised and
 lowered extremes, return, camera-facing changes, nonuniform transforms supported

@@ -192,7 +192,7 @@ test('the board calls continuously but scanning only opens name admission',()=>{
  h.links[0].message({type:'scan',id:'b'.repeat(24)});assert.equal(h.level.registrationTicket,'');assert.equal(h.level.assignedCounter.number,0);
 });
 test('a new scan after expiry requires a new name submission',()=>{
- const h=harness();h.wait();const first=h.level.registrationTicket;h.awaitCall();h.advanceGame(13);assert.equal(h.level.stage,'walk-sign');h.links.at(-1).message({type:'scan',id:'b'.repeat(24)});assert.equal(h.level.stage,'walk-sign');assert.equal(h.level.activated,false);h.links.at(-1).message({type:'register',name:'Erika Mustermann'});h.links.at(-1).message({type:'ticket-received',id:h.links.at(-1).scanId,number:h.level.registrationTicket});assert.equal(h.level.stage,'waiting');assert.notEqual(h.level.registrationTicket,first);
+ const h=harness();h.wait();const first=h.level.registrationTicket;h.awaitCall();const expiryScene=h.level.floorState.visualTime+13;for(let i=0;i<402&&h.level.floorState.visualTime<expiryScene;i++)h.level.update(.05);assert.equal(h.level.stage,'walk-sign');h.links.at(-1).message({type:'scan',id:'b'.repeat(24)});assert.equal(h.level.stage,'walk-sign');assert.equal(h.level.activated,false);h.links.at(-1).message({type:'register',name:'Erika Mustermann'});h.links.at(-1).message({type:'ticket-received',id:h.links.at(-1).scanId,number:h.level.registrationTicket});assert.equal(h.level.stage,'waiting');assert.notEqual(h.level.registrationTicket,first);
 });
 test('silencing completes the automatic registration and grants A38 exactly once',()=>{
  const h=harness();h.counter();h.links[0].message({type:'silence',id:'grass'});h.tick(16000);let questions=0;
@@ -266,11 +266,11 @@ test('both speakers cut off each other throughout the escalating argument',()=>{
  for(let index=-1;index<3;index++){
   link.message({type:'police-start',index,mode:'voice',readyDelayMs:20,atMs:h.now()});
   if(index>=0)assert.equal(h.level.timing.desk[index].mode,'interrupted','the officer stops the clerk at the start receipt');
-  const target=h.window.BuergeramtStory.outburst.phoneCutAfterMs[index+1];h.tick(target+40);
+  const target=Math.round(h.window.BuergeramtStory.outburst.phoneCutAfterMs[index+1]/h.level.timeScale);h.tick(target+40);
   assert.equal(h.level.timing.cues[index].interrupted,true);assert.ok(link.sent.some(m=>m.type==='police-cutoff'&&m.index===index));
   assert.equal(h.node('amt-line').textContent,h.window.BuergeramtStory.outburst.lines[index+1]);
   link.message({type:'police-done',index,mode:'voice',durationMs:target,atMs:h.now()});
-  if(index<2){h.tick(h.window.BuergeramtStory.outburst.cutAfterMs[index+1]+20);assert.equal(link.sent.filter(m=>m.type==='police-line').at(-1).index,index+1)}
+  if(index<2){h.tick(h.window.BuergeramtStory.outburst.cutAfterMs[index+1]/h.level.timeScale+20);assert.equal(link.sent.filter(m=>m.type==='police-line').at(-1).index,index+1)}
  }
  h.synth.end();h.tick(200);assert.equal(h.node('amt-line').textContent,h.window.BuergeramtStory.outburst.lines[4]);h.synth.end();h.tick(250);assert.equal(h.counts.cancel,1);assert.equal(h.counts.form,0);
 });

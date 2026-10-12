@@ -2,6 +2,21 @@
 
 ## Decision
 
+The office turning update adds no art, engine or independent frame loop. Its
+existing owner presents active office frames at display cadence; city/title
+deadlines, 20 Hz floor transport, bounded 60 Hz action-cloud generation, the
+two-job asset queue and 1.6 MP drawing-buffer cap remain unchanged. Input and
+view selection follow `BUERGERAMT.md`'s turning contract. A single extra walking
+sheet may be retained across the whole office, requested only by an actual view
+change: at most 34,078,720 decoded RGBA bytes on desktop, or 17,039,360 on compact
+screens (the existing dense mobile sheets cost 8,519,680). GPU copies are additional.
+No adjacent directions are prefetched. The renderer releases the spare on distant
+retirement, close, replay and pagehide, and keeps atlas fallback on failure.
+Both available dense walk families select their existing mobile export on a compact
+client even at high DPR. Same-role material-map swaps retain their compiled program.
+Frame distributions collected while other game tests share this host are diagnostic;
+they cannot establish a causal speedup or physical Android performance.
+
 The Bürgeramt potato mirror is code-native scenery in the existing office scene.
 `buergeramt-potato-mirror.js` adds five shared geometries (32,788 attribute/index
 bytes), twelve materials, zero textures and 77 meshes / 6,400 triangles before

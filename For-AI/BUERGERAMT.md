@@ -1,5 +1,31 @@
 # Bürgeramt interaction cast and cross-domain handoff
 
+## Turning and view stability (2026-10-13)
+
+While the office is active, its existing frame owner follows each display RAF;
+the city retains 60 Hz and the title 4 Hz. Actual elapsed time, collision
+substeps, the shared slowdown clock and hidden-tab suspension remain authoritative.
+Arrow-key turning eases into the existing 1.8 rad/s speed over a 45 ms time
+constant and releases over 25 ms; reversal brakes immediately. This is elapsed-time
+integration, not a frame-count animation. Drag look follows one captured pointer
+using CSS-pixel position deltas. Movement fingers have separate IDs; cancelled
+gestures, focus loss, scene changes and replay release ownership and momentum.
+Existing touch controls also appear on wide coarse-pointer screens.
+Their labels use the existing pinned Pretext fitter, including the E/REDEN line
+break; the nearby hint clears the measured control height at enlarged text sizes.
+
+Walking view selection retains its current painting within 0.10 radians past a
+quadrant boundary, preserving the existing gait phase and registered foot pivot.
+It adds no crossfade, pose or art. One spare walk sheet shared by the entire office
+allows repeated A/B view changes to reuse decoded paint; distant retirement,
+close, replay and pagehide release it. Existing smaller 16-frame walk sheets serve
+compact screens regardless of DPR. Subtitle DOM changes are coalesced by value.
+The deterministic gates are `tests/buergeramt-turning.test.mjs` and
+`tests/runtime-smoothness.test.mjs`; silent real-input/render diagnostics live in
+`tools/playtest-buergeramt-turning.mjs`. Route fixtures reset turn momentum when
+setting a grid heading; they do not establish release-tail or swipe behavior.
+Physical-phone smoothness and GPU/display timing require separate measurements.
+
 The secret Bürgeramt is an episode of the canonical root game. QR admission, the linked phone, the numbered queue, Frau Knick, the police interruption, A38, and the existing exit outcomes remain its required chain. Eight optional walking encounters add movement and atmosphere while the player waits; they never award a ticket or change a counter answer. E and the touch interaction choose nearby people and counters within a forgiving 120-degree cone around the office camera heading, with 2.6 m reach for people and counters. Gaze alignment and distance select the target across people and nearby exhibits; the portrait must also be faced. Visitors, including the courier and returning walkers, remain available while waiting or walking to the called counter. The interaction hint uses the same target; turning away makes that person ineligible.
 
 The clear wall beside the waiting-room entrance carries a gilded state portrait of the current
@@ -26,7 +52,7 @@ heading across the glass plane. Shoulders and hips follow actual ground travel;
 blocked or stationary feet stay planted. The physical glass/frame stays solid;
 the surrogate alone is clipped to camera rays through the glass aperture,
 including close rotated bodies that would otherwise project through the wall.
-The reflected room and potato are visual surrogates, never extra actors or solids.
+the reflected room and potato are visual surrogates, never extra actors or solids.
 Facing it nearby offers `E · SPIEGEL BETRACHTEN` through keyboard or the existing
 touch interaction. **ICH** remarks exactly “Bin ich wirklich eine deutsche
 Kartoffel?” through the selected player speech lookup and its existing browser
@@ -84,7 +110,7 @@ No new synthesis or voice profile is needed for this restoration.
 ## Waiting-room floor
 
 The room begins with .82 m black-and-white checkerboard tiles and painted grout.
-Over **780 seconds (13 minutes) of visible, unscaled residence inside the actual
+Over **480 seconds (8 minutes) of visible, unscaled residence inside the actual
 doorway**, their pigment gradually stretches into curling veins and merging oily
 pools, with progressively finer nested black-and-white ribbons along the mixed
 boundaries. Grout disappears and the surface develops shallow specular ridges and
@@ -94,21 +120,28 @@ No floor height, furniture, body clearance or collision changes; gait remains
 tied to accepted displacement.
 
 **Liquidation and deceleration must map one to one.** `buergeramt-goop.js` is the
-single immutable authority: `p = clamp(age / 780, 0, 1)`,
-`s(p) = 1 / (1 + exp(−12(p − .82)))`,
-`goop = (s(p) − s(0)) / (s(1) − s(0))`, and `speed = 1 − 0.35 × goop`.
-The late-shifted sigmoid makes early decay nearly imperceptible: speed remains
-99.79% at five minutes and 99.18% at 6.5 minutes, then falls to 94.65% at 8 minutes 40 seconds,
-82.81% at 10 minutes 24 seconds, 68.94% at 12 minutes 8 seconds and **65% at thirteen minutes**. Its steepest
-decay is near 10.66 minutes; the final approach eases into the cap.
+single immutable authority: `p = clamp(age / 480, 0, 1)`,
+`goop = p + .18 × sin(πp) × sin(6πp)`, and `speed = 1 − .35 × goop`.
+Three slow waves (160 seconds each) temporarily ease the drag while the overall
+speed trend descends. Their amplitude tapers at both ends; goop stays in [0, 1]
+and speed in [.65, 1]. Melting starts immediately: about 9.5% at 30 seconds and
+17.4% at one minute. Speed falls to 93.9% at one minute, recovers to 95.7% at two,
+falls to 79.3% at 3:20, recovers to 85.7% at 4:40, falls to 69.3% at six and
+recovers to 71.1% at seven before settling at **65% at eight minutes**. Floor and
+portrait melt recede on those same recoveries; deposited pigment keeps flowing
+forward without reseeding. Do not restore the previous late sigmoid or give the
+portrait a separate early-start clock.
 Reaching the assigned Schalter within the existing 1.9 m interaction range while
 its row shows the player's called number automatically starts **90 seconds of
 recovery**, without requiring E. A reserved ticket, wrong desk, premature approach
 or expired call cannot start it. Recovery runs through the counter conversation,
 phone interruptions and other active office states, and pauses when hidden.
 Melt decreases linearly from its value at arrival to zero, so speed rises linearly
-from its arrival value to 100%. The inverse shared sigmoid maps this restoration
-back to the floor/portrait age; integrated scene time continues forward.
+from its arrival value to 100%. A bounded bisection finds an age with the requested
+melt on the shared wave. The wave has multiple matching ages, so this is a value
+inverse rather than recovered residence history; visible consumers use the melt
+amount and continuously advancing scene time. Recovery remains smooth through
+every wave reversal, and integrated scene time continues forward.
 Lamp strengths interpolate from their arrival values to full brightness on the
 same recovery progress, so even a fully dark twenty-minute room restores smoothly.
 Floor pigment blends back into the original tiles without reallocating each
@@ -118,13 +151,13 @@ Closing or replaying resets recovery; recovery awards no ticket, stamp or A38.
 
 Keep the final floor and time scale capped there before recovery. Never add a separate melting
 delay, independent easing, second time-scale ramp, or feed slowed time back into
-the 780-second age; that would break the user's explicit coupling requirement.
+the 480-second age; that would break the user's explicit coupling requirement.
 
 `buergeramt.js` owns unscaled `floorState.time`, integrated `visualTime`, and
 attempt generation. Count age only while the player's position is inside the
 door; continue through conversations and fever/omen beats, pause age in the
 vestibule and when hidden/closed, and reset both clocks on close/replay. Its exact
-logistic integral of speed (722.437646 scene seconds over 780 real residence seconds)
+trigonometric integral of speed (396 scene seconds over 480 real residence seconds)
 drives player/NPC movement, queue and deadlines, action/fever/
 omen clocks, atlas/breath/mouth animation and liquid transport. Render and input
 dispatch stay responsive. `buergeramt-floor.js` carries one
@@ -146,7 +179,7 @@ The existing room isolation/fade owns opacity and depth-write restoration.
 Reduced motion and GPU failure retain a static spatial melting approximation
 with the same goop/speed value, without ripple animation or pigment targets.
 
-The existing Steinmeier oil portrait melts on exactly this same sigmoid and
+The existing Steinmeier oil portrait melts on exactly this same wave and
 residence clock. `buergeramt-portrait-melt.js` continuously transports the real
 painted image downward, gradually exposing the bare backing. Eight irregular
 viscous channels have moving necks, descending bulges and rounded leading drops;
@@ -178,7 +211,7 @@ changing actor depth. Captions and controls remain readable. Reduced motion
 removes flicker while retaining gradual wear and failure. Hidden time freezes;
 close/replay restores all five. There are no lamp timers, new shadow/light sources,
 or second slowdown ramp. Lamp wear continues to twenty minutes while the common
-fifteen-minute goop/time value remains capped.
+eight-minute goop/time value remains capped.
 
 Recorded host and phone voices use this same playback rate with pitch preservation
 disabled; their media clocks still own word/mouth cues. Office hum, score, FX,
@@ -199,7 +232,21 @@ both-color retention, Android-emulated views and material restoration probe is
 `tools/playtest-buergeramt-floor.mjs`. Accelerated shader captures do not prove
 natural mission flow or physical-device performance.
 
-The fifteen-minute late-decay/flowing-paint/lamp candidate passed 420 workflow
+The eight-minute wave update has bounded CPU and accelerated rendered evidence
+under ignored `output/wavy-goop/` in the task's isolated worktree. Four desktop,
+Android-emulated portrait/landscape and procedural-fallback profiles pass 13
+wave stages and 25 portrait frames, retaining one pigment field through reversals.
+Shared-checkout native media follows all eight sampled wave rates with pitch
+preservation disabled; this is silent state evidence, not listening. Fixtures
+measure authored queue/expiry budgets in scene time and face their intended
+counter instead of relying on near-full speed or a marginal interaction angle.
+The omen life/pulse clock advances once per shared simulation step, including
+unwind; a production regression covers 60/30 fps and a .1 s delayed frame.
+Combined publication checks and current bindings belong to the final integrator's
+task receipt. Natural eight/twenty-minute residence and physical Android remain
+unexercised; the earlier measurements below belong to their earlier candidates.
+
+The earlier fifteen-minute late-decay/flowing-paint/lamp candidate passed 420 workflow
 and affected checks, then 12 focused checks after Camera corrected contact
 alignment and the procedural contact clock. Independent Physics and Camera
 reviews pass. Four desktop/Android-emulated/fallback profiles show the shared

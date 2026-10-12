@@ -28,7 +28,7 @@ test('the four counter slots share one Frau Knick identity while visitors keep d
 
 function approach(h,desk){
  const x=[-5.8,-1.6,3.9,6.2][desk-1];
- h.moveTo(-2,-2.6);h.moveTo(-2,-6.4);h.moveTo(x===-5.8?-5.4:2.8,-6.4);h.moveTo(x===-5.8?-5.4:2.8,-8.15);h.moveTo(x,-8.15);
+ h.moveTo(-2,-2.6);h.moveTo(-2,-6.4);h.moveTo(x===-5.8?-5.4:2.8,-6.4);h.moveTo(x===-5.8?-5.4:2.8,-8.15);h.moveTo(x,-8.15);h.faceToward(x,-8.15);
 }
 
 test('every desk refusal requests Knick and keeps exact captions for unavailable takes',()=>{

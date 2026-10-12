@@ -31,6 +31,8 @@ jobs:
         run: node --test tests/running-hotkey.test.mjs
       - name: Check office queue call audio
         run: node --test tests/buergeramt-queue-audio.test.mjs
+      - name: Check office turning and direction texture reuse
+        run: node --test tests/buergeramt-turning.test.mjs
       - name: Check office causality and re-entry
         run: node --test tests/buergeramt-causality.test.mjs tests/buergeramt-facing-interaction.test.mjs
       - name: Check president portrait interaction

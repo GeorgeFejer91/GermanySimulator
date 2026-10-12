@@ -118,13 +118,16 @@ export function harness(kind='host',{voice=false,synthesis=true,phoneLanguage='d
  // This DOM/clock fixture has no module/network loader. Acoustic-byte and
  // pending-load lifecycle tests supply their own analysis binding explicitly.
  window.GermanyAmtLips.loadRecording=()=>null;
- vm.runInContext(kind==='host'?(hostSource??source('buergeramt.js')):source('buergeramt-phone.js'),context,{filename:kind});
+ // Grid-based route fixtures finish at a known heading without advancing the
+ // queue during a turn's release tail. Real release/drag timing has its own tests.
+ const hostCode=(hostSource??source('buergeramt.js')).replace('window.BuergeramtLevel={','window.__resetHeadingFixture=()=>{if(typeof clearOfficeInput==="function")clearOfficeInput()};window.BuergeramtLevel={');
+ vm.runInContext(kind==='host'?hostCode:source('buergeramt-phone.js'),context,{filename:kind});
  const counts={form:0,cancel:0,close:0},music=[];
  const config={voiceOn:()=>voice,subtitlesOn:()=>phoneCaptions,onForm:()=>counts.form++,onCancel:()=>counts.cancel++,onClose:()=>counts.close++,music:x=>music.push(x),cinematics,cityAudioBusy};
  const level=window.BuergeramtLevel;
  if(kind==='host')level.open(config);
  function key(code,type='keydown'){const event=new Event(type,{cancelable:true});Object.assign(event,{code,repeat:false});window.dispatchEvent(event)}
- function turnTo(yaw){let steps=0;while(true){const delta=Math.atan2(Math.sin(yaw-level.view.yaw),Math.cos(yaw-level.view.yaw));if(Math.abs(delta)<1e-7)break;if(++steps>300)throw new Error(`Cannot face yaw=${yaw} from ${JSON.stringify(level.view)}`);const code=delta>=0?'ArrowRight':'ArrowLeft';key(code);level.update(Math.min(.05,Math.abs(delta)/(1.8*level.timeScale)));key(code,'keyup')}level.update(0)}
+ function turnTo(yaw){let steps=0;while(true){const delta=Math.atan2(Math.sin(yaw-level.view.yaw),Math.cos(yaw-level.view.yaw));if(Math.abs(delta)<1e-7)break;if(++steps>300)throw new Error(`Cannot face yaw=${yaw} from ${JSON.stringify(level.view)}`);const code=delta>=0?'ArrowRight':'ArrowLeft';key(code);level.update(Math.min(.05,Math.abs(delta)/(1.8*level.timeScale)));key(code,'keyup')}window.__resetHeadingFixture?.();level.update(0)}
  function faceToward(x,z){turnTo(Math.atan2(x-level.view.x,level.view.z-z))}
  function moveTo(x,z){turnTo(0);for(const [axis,target,pos,neg] of [['x',x,'KeyD','KeyA'],['z',z,'KeyS','KeyW']]){let steps=0;while(Math.abs(level.view[axis]-target)>.07){if(++steps>300)throw new Error(`Cannot reach ${axis}=${target} from ${JSON.stringify(level.view)}`);const code=level.view[axis]<target?pos:neg;key(code);level.update(Math.min(.05,Math.abs(level.view[axis]-target)/3.6));key(code,'keyup')}}}
  function action(index=0){const button=node('amt-actions').children[index];if(button?.disabled&&!voice){for(let i=0;i<200&&button.disabled;i++)tick(100)}if(!button)throw new Error(`No action ${index} at ${level.stage}`);button.click();return button}

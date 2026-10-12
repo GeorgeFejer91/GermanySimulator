@@ -2,7 +2,7 @@ import {measureLineStats,measureNaturalWidth,prepareWithSegments} from './assets
 
 // Keep the bounded Amt labels readable as the phone, browser zoom, or German copy changes.
 const selectors=['#start','#amt-objective','#amt-nearby','#amt-title','#amt-line','#amt-status','#amt-ambient','#amt-actions button','#amt-leave','#amt-exit','#amt-direct-reset','#amt-direct-result-title','#amt-direct-result-copy','.amt-direct-result a','#amt-mix summary','#amt-mix label','#amt-compact-reset','#phone-expired-stamp','#phone-expired-copy','#phone-number','#phone-status','#phone-admission-status','.phone-brand strong','.phone-breadcrumb','.phone-title','#phone-form h2','#phone-form p','#phone-form label','#phone-submit','#phone-caller','#phone-call-state','#phone-answer-label','#phone-decline-label','#phone-swipe-label','#phone-hangup-label','.phone-keep'];
-selectors.push('.control-dock button');
+selectors.push('.control-dock button','.amt-touch-controls button');
 let queued=false;
 function schedule(){if(queued)return;queued=true;requestAnimationFrame(async()=>{queued=false;await document.fonts.ready;measure()})}
 function measure(){
@@ -27,7 +27,8 @@ function measure(){
   const label=el.matches('.control-dock button')?el.querySelector('.fraktur'):null;
   const icon=label?el.querySelector('.dock-icon'):el.matches('#phone-answer,#phone-decline')?el.querySelector('span'):null;
   // Icon and label are separate flex items, not a single mixed-font text run.
-  const text=label?label.textContent.trim():icon?Array.from(el.childNodes).filter(node=>node.nodeType===3).map(node=>node.textContent).join('').trim():el.textContent.trim();if(!text)continue;
+  const touchLabel=el.matches('.amt-touch-controls button');
+  const text=touchLabel?el.innerText.trim():label?label.textContent.trim():icon?Array.from(el.childNodes).filter(node=>node.nodeType===3).map(node=>node.textContent).join('').trim():el.textContent.trim();if(!text)continue;
   const css=getComputedStyle(label||el),boxCss=getComputedStyle(el),px=Number.parseFloat(css.fontSize),lineHeight=Number.parseFloat(css.lineHeight)||px*1.3;
   if(!Number.isFinite(px)||!Number.isFinite(lineHeight))continue;
   const x=(Number.parseFloat(boxCss.paddingLeft)||0)+(Number.parseFloat(boxCss.paddingRight)||0);
@@ -38,7 +39,7 @@ function measure(){
   const font=`${css.fontStyle} ${css.fontWeight} ${css.fontSize} ${css.fontFamily}`;
   try{
    if(label&&(typeof Intl.Segmenter!=='function'||!document.fonts.check(font)))throw Error('Text measurement unavailable');
-   const prepared=prepareWithSegments(text,font,{letterSpacing:Number.parseFloat(css.letterSpacing)||0});
+   const prepared=prepareWithSegments(text,font,{letterSpacing:Number.parseFloat(css.letterSpacing)||0,...(touchLabel?{whiteSpace:'pre-wrap'}:{})});
    const stats=measureLineStats(prepared,width);
    const oneLine=stats.lineCount===1&&measureNaturalWidth(prepared)<=width-2;
    const minimum=Math.ceil(Math.max(1,stats.lineCount)*lineHeight+y+iconHeight+4);
@@ -62,7 +63,9 @@ function measure(){
   const subtitle=document.getElementById('subtitle-toggle');
   const controls=[subtitle,document.querySelector('#amt-mix summary'),document.getElementById('amt-direct-reset')].filter(el=>el?.getClientRects().length);
   const toolbar=Math.max(0,...controls.map(el=>el.getBoundingClientRect().bottom/zoom));
-  const values={'--amt-subtitle-width':subtitle.getBoundingClientRect().width/zoom,'--amt-toolbar-bottom':toolbar,'--amt-info-bottom':toolbar};
+  const touch=document.querySelector('.amt-touch-controls');
+  const touchClearance=touch?.getClientRects().length?(innerHeight-touch.getBoundingClientRect().top)/zoom+12:140;
+  const values={'--amt-subtitle-width':subtitle.getBoundingClientRect().width/zoom,'--amt-toolbar-bottom':toolbar,'--amt-info-bottom':toolbar,'--amt-touch-clearance':touchClearance};
   for(const [key,number] of Object.entries(values)){const next=number+'px';if(document.body.style.getPropertyValue(key)!==next)document.body.style.setProperty(key,next)}
  }
 }

@@ -3,7 +3,9 @@ import assert from 'node:assert/strict';
 import {harness,source} from './amt-harness.mjs';
 
 test('missing the call returns to walking, retires the URL, and never opens a decision',()=>{
- const h=harness();h.wait();h.awaitCall();const old=h.links[0];h.advanceGame(13);
+ const h=harness();h.wait();h.awaitCall();const old=h.links[0];
+ const expiryScene=h.level.floorState.visualTime+13,limit=Math.ceil(13/(.05*h.window.BuergeramtGoop.minSpeed))+2;
+ for(let i=0;i<limit&&h.level.floorState.visualTime<expiryScene;i++)h.level.update(.05);
  assert.equal(h.level.stage,'walk-sign');assert.equal(h.level.active,true);
  assert.equal(h.node('amt-actions').children.length,0);assert.equal(h.counts.form,0);
  assert(old.sent.some(m=>m.type==='forfeit'));assert.notEqual(h.links.at(-1),old);

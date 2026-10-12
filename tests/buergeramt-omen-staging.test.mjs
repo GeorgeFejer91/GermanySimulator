@@ -3,6 +3,19 @@ import assert from 'node:assert/strict';
 import vm from 'node:vm';
 import {harness,source} from './amt-harness.mjs';
 
+test('omen life and pulse clocks advance once per shared slowed simulation step',()=>{
+ for(const dt of [1/60,1/30,.1]){
+  const h=harness('host',{cinematics:true,voice:true});h.enterUntilOmen();
+  assert.equal(h.level.omen.phase,'approach');
+  const before=h.level.omen.life,clock=h.level.floorState.visualTime;
+  h.level.update(dt);
+  const after=h.level.omen,elapsed=h.level.floorState.visualTime-clock;
+  assert.ok(Math.abs(after.life.time-before.time-elapsed)<1e-9);
+  const frequency=.65+2.1*after.strength+.35*(after.speech?.tension||0);
+  assert.ok(Math.abs(after.life.clock-before.clock-elapsed*frequency)<1e-9);
+ }
+});
+
 function retreatFixture(dt){
  const h=harness('host',{cinematics:true,voice:true});h.node('amt-exit').click();
  // Test-only access to the real controller, rather than a second movement model.
@@ -99,7 +112,9 @@ test('a late blocking prop cancels to a bounded recovery when no route exists',(
 });
 
 test('hidden-page pause and replay preserve and then clear the isolation and turn',()=>{
- const h=harness('host',{cinematics:true,voice:true});h.enterUntilOmen();h.advanceGame(12);h.tick(16);h.synth.start();h.synth.end();h.advanceGame(5.3);
+ const h=harness('host',{cinematics:true,voice:true});h.enterUntilOmen();
+ const until=phase=>{const end=h.level.floorState.visualTime+40;for(let n=0;n<1232&&h.level.omen.phase!==phase&&h.level.floorState.visualTime<end;n++)h.level.update(.05);assert.equal(h.level.omen.phase,phase)};
+ until('blackout');h.tick(16);h.synth.start();h.synth.end();until('turn');
  assert.equal(h.level.omen.phase,'turn');const before=h.level.omen;h.hide();h.advanceGame(10);
  assert.equal(h.level.omen.turnProgress,before.turnProgress);assert.equal(h.level.omen.life.isolation,1);
  h.document.hidden=false;h.level.replay(h.config);

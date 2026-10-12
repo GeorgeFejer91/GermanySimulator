@@ -92,13 +92,13 @@ try{
       assert.deepEqual(errors,[]);report.cases.push({name,captures,errors});console.log(name,'recovery PASS');await context.close();continue;
     }
     const captures=[];
-    for(const time of [0,45,225,450,675,900,1200]){
+    for(const time of [0,30,60,120,200,280,360,420,480,600,780,900,1200]){
       await page.evaluate(time=>{__floorGpu.advance(time-BuergeramtLevel.floorState.time);__floorRender()},time);
       const state=await page.evaluate(()=>({...Germany3D.amtFloor,portrait:Germany3D.amtPortraitMelt,lamps:Germany3D.amtLamps,pigment:__floorGpu.stats(),render:Germany3D.inspectAssets().render,memory:Germany3D.inspectAssets().memory}));
       assert.equal(state.failure,null);assert.equal(state.time,time);assert.equal(state.targets,time===0||name==='procedural-fallback'?0:2);assert.equal(state.speed,1-.35*state.melt);
       assert.equal(state.depthWrite,true);assert.equal(state.transparent,false);assert.equal(state.opacity,1);
       assert.equal(state.textureBytes,time===0||name==='procedural-fallback'?0:(width<=700?128*160:256*320)*32);
-      assert.equal(state.portrait.melt,state.melt);if(time>=900&&state.pigment){assert.ok(state.pigment.paint>.00002,'portrait paint enters the persistent floor');assert.ok(state.pigment.colored>.00002,'actual portrait colors mix with the tiles');}if(state.pigment){assert.ok(state.pigment.white>.02&&state.pigment.black>.02,'retain both oils through fifteen minutes');assert.ok(state.pigment.variance>.025,'do not diffuse to a featureless grey floor');}
+      assert.equal(state.portrait.melt,state.melt);if(time>=480&&state.pigment){assert.ok(state.pigment.paint>.00002,'portrait paint enters the persistent floor');assert.ok(state.pigment.colored>.00002,'actual portrait colors mix with the tiles');}if(state.pigment){assert.ok(state.pigment.white>.02&&state.pigment.black>.02,'retain both oils through the waves');assert.ok(state.pigment.variance>.025,'do not diffuse to a featureless grey floor');}
       const screenshot=await page.screenshot({path:resolve(out,`${name}-${time}s.png`)});captures.push({time,...state,screenshotHash:createHash('sha256').update(screenshot).digest('hex')});
       await page.evaluate(()=>{__floorTest.pose(BuergeramtStory.presidentPortrait.x,1.7,Math.PI);window.__floorPitch=0;__floorRender()});await page.screenshot({path:resolve(out,`${name}-portrait-${time}s.png`)});await page.evaluate(()=>{__floorTest.pose(0,4.8);window.__floorPitch=-.58;__floorRender()});
       if(time>=300){await page.evaluate(()=>{const p=BuergeramtStory.presidentPortrait;__floorTest.pose(p.x+2,p.z-3,Math.atan2(-2,-3));window.__floorPitch=-.1;__floorRender()});await page.screenshot({path:resolve(out,`${name}-portrait-contact-${time}s.png`)});await page.evaluate(()=>{__floorTest.pose(0,4.8);window.__floorPitch=-.58;__floorRender()});}
@@ -148,7 +148,7 @@ try{
     const audio=[];
     if(name==='desktop'&&process.env.FLOOR_AUDIO!=='0'){
       await page.evaluate(()=>{__floorTest.at(900);__floorTest.speech()});await page.waitForFunction(()=>__floorTest.media()?.time>0,null,{timeout:15000});
-      for(const age of [900,722.43,0]){await page.evaluate(age=>{__floorTest.at(age);__floorTest.speech()},age);await page.waitForFunction(()=>__floorTest.media()?.time>.5,null,{timeout:15000});const before=await page.evaluate(()=>({wall:performance.now(),...__floorTest.media()}));await page.waitForTimeout(2500);const after=await page.evaluate(()=>({wall:performance.now(),...__floorTest.media()}));const rate=(after.time-before.time)/((after.wall-before.wall)/1000);assert.equal(after.rate,await page.evaluate(age=>BuergeramtGoop.speed(age),age));assert.equal(after.preservesPitch,false);console.log('media rate',age,{expected:after.rate,observed:rate,before:before.time,after:after.time,paused:after.paused});assert.ok(Math.abs(rate-after.rate)<.08,'native media time must follow the shared rate');audio.push({age,before,after,observedRate:rate});}
+      for(const age of [480,60,120,200,280,360,420,0]){await page.evaluate(age=>{__floorTest.at(age);__floorTest.speech()},age);await page.waitForFunction(()=>__floorTest.media()?.time>.5,null,{timeout:15000});const before=await page.evaluate(()=>({wall:performance.now(),...__floorTest.media()}));await page.waitForTimeout(2500);const after=await page.evaluate(()=>({wall:performance.now(),...__floorTest.media()}));const rate=(after.time-before.time)/((after.wall-before.wall)/1000);assert.equal(after.rate,await page.evaluate(age=>BuergeramtGoop.speed(age),age));assert.equal(after.preservesPitch,false);console.log('media rate',age,{expected:after.rate,observed:rate,before:before.time,after:after.time,paused:after.paused});assert.ok(Math.abs(rate-after.rate)<.08,'native media time must follow the shared rate');audio.push({age,before,after,observedRate:rate});}
     }
     const lampStages=[];
     for(const age of [600,780,900,1020,1110,1200]){
@@ -159,7 +159,7 @@ try{
     }
     assert.ok(lampStages.at(-1).illumination<.01);
     const portraitFlow=[];
-    if(name==='desktop')for(let age=0;age<=900;age+=30){
+    if(name==='desktop')for(let age=0;age<=480;age+=20){
       await page.evaluate(age=>{const p=BuergeramtStory.presidentPortrait;__floorTest.at(age);__floorTest.pose(p.x+1.2,p.z-2.5,Math.atan2(-1.2,-2.5));window.__floorPitch=-.13;__floorRender()},age);
       const shot=await page.screenshot({path:resolve(out,`portrait-flow-${String(age).padStart(3,'0')}s.png`)});
       portraitFlow.push({age,...await page.evaluate(()=>Germany3D.amtPortraitMelt),hash:createHash('sha256').update(shot).digest('hex')});

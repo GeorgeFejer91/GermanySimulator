@@ -36,6 +36,15 @@ for(const hz of [60,75,90,120,144])for(const jitter of [0,.4]){
  assert.ok(dispatches>=119&&dispatches<=121,`${hz} Hz with ${jitter} ms jitter must dispatch about 60 Hz: ${dispatches}`);
  assert.ok(total>1.95&&total<2.02,"cadence must preserve elapsed simulation time");
 }
+// The active office's first-person camera follows every display callback.
+// City/title work retains its existing deadline; elapsed clocks stay bounded.
+for(const hz of [60,75,90,120,144]){
+ let dispatches=0,total=0,maxStep=0;
+ const run=new Function("update","updatePoliceChaseAudio","draw","window","requestAnimationFrame","document","state",`let last=0,nextFrameAt=0,frameInterval=1000/60;${loopSource};return loop`)(dt=>maxStep=Math.max(maxStep,dt),()=>{},()=>{},{BuergeramtLevel:{active:true,update:dt=>total+=dt},Germany3D:{sync:()=>dispatches++}},()=>{},{hidden:false},{started:true});
+ for(let i=0;i<hz*2;i++)run(i*1000/hz);
+ assert.equal(dispatches,hz*2,`${hz} Hz office turn must render on each display frame`);
+ assert.ok(total>1.95&&total<2.02);assert.ok(maxStep<=.025);
+}
 {
  let dispatches=0,movementSamples=0,held=false;
  const run=new Function("update","updatePoliceChaseAudio","draw","window","requestAnimationFrame","document","state",`let last=0,nextFrameAt=0,frameInterval=1000/60;${loopSource};return loop`)(()=>{if(held)movementSamples++},()=>{},()=>{},{Germany3D:{sync:()=>dispatches++}},()=>{},{hidden:false},{started:true});

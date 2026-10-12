@@ -47,8 +47,9 @@ test('assigned-counter arrival automatically restores melt and speed in 90 real 
  assert.ok(h.level.floorState.visualTime>visualDone,'scene clock never rewinds with residence age');
 });
 
-test('partial melt recovery starts at current speed and continues after leaving the counter',()=>{
- const h=fixture({age:600});const initial=h.level.floorState.goop,speed=h.level.timeScale;
+test('partial melt recovery starts continuously on every wave and continues after leaving the counter',()=>{
+ for(const age of [60,120,200,280,360,420]){
+ const h=fixture({age});const initial=h.level.floorState.goop,speed=h.level.timeScale;
  h.level.update(0);closeEnough(h.level.timeScale,speed);
  // Move within the office after valid arrival; eligibility can disappear
  // without cancelling the restoration that now belongs to the visit.
@@ -56,6 +57,7 @@ test('partial melt recovery starts at current speed and continues after leaving 
  advance(h,45);
  closeEnough(h.level.floorState.goop,initial*.5);closeEnough(h.level.timeScale,(speed+1)*.5);
  advance(h,45);closeEnough(h.level.floorState.goop,0);closeEnough(h.level.timeScale,1);
+ }
 });
 
 test('hidden time pauses recovery and replay removes completed recovery ownership',()=>{
