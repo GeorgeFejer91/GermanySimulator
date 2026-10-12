@@ -46,20 +46,33 @@ the exact readable captions. Phone ticket receipts retain their authority
 throughout; the portrait awards neither a ticket nor A38.
 
 The opposite, left entrance-wall corner has a tall silver-framed mirror at
-`(-5.65, 5.36)`, with reflective glass and a muted surrogate waiting hall behind
-it. A code-native, jointed 3D potato takes the player's reflected position and
-heading across the glass plane. Shoulders and hips follow actual ground travel;
-blocked or stationary feet stay planted. The physical glass/frame stays solid;
-the surrogate alone is clipped to camera rays through the glass aperture,
-including close rotated bodies that would otherwise project through the wall.
-the reflected room and potato are visual surrogates, never extra actors or solids.
+`(-5.65, 5.36)`. Its live planar reflection uses the actual room, including
+furniture, signs, floor, people and current effects, through the existing office
+render owner. Its private 3D player double has textured, indented potato skin,
+natural tuber eyes and root limbs. Shoulders and hips follow accepted ground
+travel; blocked or stationary feet stay planted. There is no distance cutoff.
+The double is framed within the visible glass, including side/partial views,
+and composites after room depth only inside the reflection target. This is the
+user-requested persistent self-image; it is not a real actor or collider. Real
+people retain their ordinary shared depth and order. The glass/frame stays solid
+and the oblique reflection camera clips the exterior and back of the installation.
+Native Gaussian paint faces the reflected camera temporarily. Packed clouds and
+the camera-local tunnel remain in the main view; the mirror shows those same
+actors through their existing painted fallback and keeps the current effect
+overlay. This avoids an edge-on courier without a second GPU generation/sort.
+Facing, visibility, opacity and packed-batch visibility restore after capture,
+including a failed draw. Ordinary main-camera representation stays unchanged.
+
 Facing it nearby offers `E · SPIEGEL BETRACHTEN` through keyboard or the existing
-touch interaction. **ICH** remarks exactly “Bin ich wirklich eine deutsche
-Kartoffel?” through the selected player speech lookup and its existing browser
-fallback, with “Am I really a German potato?” for English subtitles. This short
-optional encounter resumes the current QR/wait/counter stage automatically,
-retains phone ticket authority, and awards nothing. It adds no audio download,
-reflection camera, extra render pass or independent animation timer.
+touch interaction. **ICH** remarks “Hä, sehe ich wirklich so aus? Eine deutsche
+Kartoffel? Wow, die ganze Integration auf dem Weg hierher hat sich echt gelohnt!”
+as one continuous selected-player recording. It uses Hans-Peter Mustermann's
+allocated `spieler-hans-peter-mustermann` binding, with the matching English
+subtitle and exact captions on missing/disabled/failed audio. It never substitutes
+browser speech. The optional encounter resumes the current QR/wait/counter stage
+automatically, retains phone ticket authority, and awards nothing. The mirror
+adds no independent animation clock; `ASSET-POLICY.md` owns its bounded target,
+texture, visibility/cadence and teardown costs.
 
 Character voices follow [`VOICE-SYNTH-PROTOCOL.md`](./VOICE-SYNTH-PROTOCOL.md#fixed-voices-and-the-agent-workflow-2026-10-11). The four Schalter positions all represent **Brunhilde Knick**, with the single character/voice ID `amt-brunhilde-knick` and selected profile `b080c7d95ecd418fb428282461d7fbe7`. They are one person, as explicitly clarified by the user on 2026-10-12. The names Frau Frist, Frau Durchschlag and Frau Zuständig are retired. Counter refusals, registration, warnings, the police argument and all three staff background remarks use Knick's established recordings and tone. Render slots `clerk-desk-1` through `clerk-desk-4` remain separate so only the speaking counter animates. Eight walkers and three waiting patrons retain their own identities; they are not additional counter clerks. Missing, failed or dynamic Knick speech retains exact captions without a machine voice. The three superseded clerk profiles and ambient takes remain privately preserved, outside active game lookup. Ambient speech waits for foreground speech.
 

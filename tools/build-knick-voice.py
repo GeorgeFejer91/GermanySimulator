@@ -220,6 +220,8 @@ def processing_hash(value):
 def manifest_name(ambient=False):
     if CUSTOM_PLAN and CUSTOM_PLAN["family"] == "office-monologue":
         return VOICE + "-portrait-manifest.json"
+    if CUSTOM_PLAN and CUSTOM_PLAN["family"] == "office-mirror":
+        return VOICE + "-mirror-manifest.json"
     return VOICE + "-manifest.json" if CUSTOM_PLAN else ("ambient-manifest.json" if ambient else "manifest.json")
 
 
@@ -245,18 +247,18 @@ def configure_request(args):
     if args.request_file:
         plan = read(args.request_file)
         assert not args.ambient, "Custom families own their authored queues"
-        assert plan["family"] in ("street-wisdom", "office-replies", "office-ambient", "office-monologue")
-        if plan["family"] == "office-monologue":
-            assert not getattr(args, "sentence_rescue", False), "The portrait requires one whole-text synthesis call, never joined sentence takes"
+        assert plan["family"] in ("street-wisdom", "office-replies", "office-ambient", "office-monologue", "office-mirror")
+        if plan["family"] in ("office-monologue", "office-mirror"):
+            assert not getattr(args, "sentence_rescue", False), "The player monologue requires one whole-text synthesis call, never joined sentence takes"
         if plan["family"] == "office-ambient":
             assert VOICE.startswith("amt-")
             assert plan["publicAssetFamily"] == "assets/voices/office-ambient"
             assert plan["privateReviewFamily"] == "GermanySimulator office ambient review 2026-10-12"
             assert set(plan["sourceSha256"]) == {"buergeramt-story.js", "buergeramt.js"}
-        elif plan["family"] in ("office-replies", "office-monologue"):
+        elif plan["family"] in ("office-replies", "office-monologue", "office-mirror"):
             assert VOICE == "spieler-hans-peter-mustermann"
             assert plan["publicAssetFamily"] == "assets/voices/player-replies"
-            assert plan["privateReviewFamily"] == ("GermanySimulator president portrait review 2026-10-12" if plan["family"] == "office-monologue" else "GermanySimulator office replies review 2026-10-12")
+            assert plan["privateReviewFamily"] == {"office-monologue": "GermanySimulator president portrait review 2026-10-12", "office-mirror": "GermanySimulator potato mirror review 2026-10-13", "office-replies": "GermanySimulator office replies review 2026-10-12"}[plan["family"]]
             assert set(plan["sourceSha256"]) == {"buergeramt-story.js", "buergeramt.js"}
             SOURCE_FILES = ("buergeramt-story.js", "buergeramt.js")
         else:
@@ -444,17 +446,22 @@ def reference_license(profile_record):
 def jobs(ambient=False, music_root=None):
     if CUSTOM_PLAN:
         REUSE_EVIDENCE.clear()
-        if CUSTOM_PLAN["family"] == "office-monologue":
+        if CUSTOM_PLAN["family"] in ("office-monologue", "office-mirror"):
             js = 'global.window={};require("./buergeramt-story.js");console.log(JSON.stringify(window.BuergeramtStory));'
             story = json.loads(subprocess.check_output(["node", "-e", js], cwd=ROOT, encoding="utf-8"))
             selected = [dict(job) for job in CUSTOM_PLAN["jobs"] if job["voiceId"] == VOICE]
-            assert len(selected) == 1, "The portrait must be generated in one complete take"
+            assert len(selected) == 1, "The player monologue must be generated in one complete take"
             job = selected[0]
-            assert job["clipId"] == "player-president-portrait-1"
             assert job["voiceId"] == story["playerIdentity"]["voiceId"] and job["profileId"] == PROFILE and job["actorId"] == "player"
-            assert job["text"] == " ".join(row["line"] for row in story["presidentPortrait"]["lines"])
-            assert job["english"] == " ".join(row["english"] for row in story["presidentPortrait"]["lines"])
-            assert job["sourceLocator"] == "buergeramt-story.js presidentPortrait.lines joined in authored order"
+            if CUSTOM_PLAN["family"] == "office-mirror":
+                assert job["clipId"] == "player-potato-mirror"
+                assert job["text"] == story["potatoMirror"]["line"] and job["english"] == story["potatoMirror"]["english"]
+                assert job["sourceLocator"] == "buergeramt-story.js potatoMirror.line"
+            else:
+                assert job["clipId"] == "player-president-portrait-1"
+                assert job["text"] == " ".join(row["line"] for row in story["presidentPortrait"]["lines"])
+                assert job["english"] == " ".join(row["english"] for row in story["presidentPortrait"]["lines"])
+                assert job["sourceLocator"] == "buergeramt-story.js presidentPortrait.lines joined in authored order"
             return selected
         if CUSTOM_PLAN["family"] == "office-ambient":
             js = 'global.window={};require("./buergeramt-story.js");console.log(JSON.stringify(window.BuergeramtStory));'
@@ -656,8 +663,9 @@ def render(args, queue, private):
         # Restore the native method before installing this profile's wrapper;
         # never nest wrappers with an earlier profile's decode budget/state.
         model.t3.inference = RENDER_CACHE["nativeInference"]
+    exaggeration = .65 if CUSTOM_PLAN and CUSTOM_PLAN["family"] == "office-mirror" else .5
     with torch.inference_mode():
-        model.prepare_conditionals(str(reference), exaggeration=.5)
+        model.prepare_conditionals(str(reference), exaggeration=exaggeration)
     assert model.conds.t3.speaker_emb.dtype == torch.float32 and model.conds.t3.emotion_adv.dtype == torch.float32, "Reference conditioning must remain float32"
     if args.precision == "fp16":
         model.t3.half()
@@ -838,7 +846,7 @@ def render(args, queue, private):
         start = time.monotonic()
         print(json.dumps({"stage": "render", "n": index + 1, "total": len(queue), "clipId": job["clipId"]}), flush=True)
         with torch.inference_mode(), torch.autocast(args.device, dtype=torch.float16, enabled=args.precision == "fp16"):
-            audio = model.generate(renderer_input, language_id="de", exaggeration=.5, temperature=.65, repetition_penalty=3., cfg_weight=.6)
+            audio = model.generate(renderer_input, language_id="de", exaggeration=exaggeration, temperature=.65, repetition_penalty=3., cfg_weight=.6)
         assert torch.isfinite(audio).all(), "Non-finite synthesis output remains private"
         wav.parent.mkdir(parents=True, exist_ok=True)
         torchaudio.save(str(wav), audio.cpu(), model.sr)
@@ -859,7 +867,8 @@ def render(args, queue, private):
                         "renderer": "ResembleAI/Chatterbox Multilingual V2 0.1.7", "modelRevision": REVISION,
                         "modelLicense": "MIT", "referenceLicense": reference_license(profile_record),
                         "durationSeconds": audio.shape[-1] / model.sr, "renderSeconds": round(time.monotonic() - start, 2),
-                        "synthesis": {"temperature": .65, "repetitionPenalty": 3., "cfgWeight": .6, "languageId": "de", "device": args.device, "precision": args.precision,
+                         "synthesis": {"exaggeration": exaggeration, "exaggerationReason": "User-requested surprised mirror reaction" if exaggeration != .5 else None,
+                                       "temperature": .65, "repetitionPenalty": 3., "cfgWeight": .6, "languageId": "de", "device": args.device, "precision": args.precision,
                                       "t3WeightPrecision": str(actual_t3_parameter.dtype).removeprefix("torch."), "conditioningPrecision": "float32",
                                       "autocastPrecision": "float16" if args.precision == "fp16" else None, "conditioningCached": True,
                                       "referenceReconditionedForProfile": PROFILE, "referenceConditioningVerifiedFloat32": True,
@@ -1232,7 +1241,8 @@ def manifest(queue, private, ambient=False):
         take["asrWordExact"] = same_spoken_words(take["text"], take["asr"])
         take["asrNormalization"] = ASR_NORMALIZATION
         take["processingSha256"] = processing_hash(take["processing"])
-        if not take.get("benchmarkOnly") and take["asrWordExact"] and abs(take["integratedLufs"] + 18) <= .3 and take["truePeakDbtp"] <= -1.5 and generation_complete(take):
+        one_take = not (CUSTOM_PLAN and CUSTOM_PLAN["family"] == "office-mirror") or not (take.get("rescueParts") or take.get("deliveryEditing"))
+        if not take.get("benchmarkOnly") and one_take and take["asrWordExact"] and abs(take["integratedLufs"] + 18) <= .3 and take["truePeakDbtp"] <= -1.5 and generation_complete(take):
             prior = existing.get(take["clipId"], {})
             if prior and all(prior.get(key) == take.get(key) for key in identity_keys):
                 if "english" in prior:
@@ -1267,6 +1277,8 @@ def manifest(queue, private, ambient=False):
             failures = []
             if take.get("benchmarkOnly"):
                 failures.append("benchmark diagnostic only; no production eligibility")
+            if not one_take:
+                failures.append("mirror requires one continuous unedited synthesis take")
             if not take["asrWordExact"]:
                 failures.append("independent spoken-word equivalence")
             if abs(take["integratedLufs"] + 18) > .3 or take["truePeakDbtp"] > -1.5:
@@ -1297,6 +1309,9 @@ def check_manifest(queue, ambient=False):
         assert clip["referenceOriginalSha256"] == BINDING["originalSha256"]
         assert same_spoken_words(clip["text"], clip["asr"]) and clip["asrWordExact"]
         assert generation_complete(clip), "Missing or failed explicit native EOS evidence remains private"
+        if CUSTOM_PLAN and CUSTOM_PLAN["family"] == "office-mirror":
+            assert not clip.get("rescueParts") and not clip.get("deliveryEditing"), "Mirror requires one complete, unedited take"
+            assert clip["synthesis"]["exaggeration"] == .65
         assert abs(clip["integratedLufs"] + 18) <= .3 and clip["truePeakDbtp"] <= -1.5
         assert sha(ROOT / clip["file"]) == clip["sha256"]
         assert clip["file"] == PUBLIC_ASSET_FAMILY + "/" + clip["clipId"] + ".mp3"

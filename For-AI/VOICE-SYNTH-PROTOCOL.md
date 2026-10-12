@@ -4,6 +4,48 @@
 
 ## Fixed voices and the agent workflow (2026-10-11)
 
+### Allocating and using voice IDs (2026-10-13)
+
+Allocate a stable game `voiceId` to a speaking identity once. Resolve that ID
+through `VOICE-CAST.json.productionVoices` before writing a new speech request.
+The game ID, native profile UUID, actor/render-slot ID and clip ID have different
+owners; a new encounter or counter position does not create a new speaker.
+Reuse the selected library binding and existing exact-text recordings. A name,
+similar-sounding candidate or old provenance UUID cannot replace the allocation.
+
+For a genuinely new identity, search the cast and saved profiles first. Register
+one selected UUID, original/reference hashes, renderer/revision, processing and
+fallback policy in the cast before generation. Verify the live reference bytes;
+profile discovery alone does not authorize creating, deleting or replacing a
+profile. Changing renderer or processing with the same UUID is still a voice
+change. Refresh the derived runtime table with the existing curator; never
+maintain a second voice-ID registry in a scene or authoring script.
+
+**ICH is Hans-Peter Mustermann**, `spieler-hans-peter-mustermann`, selected UUID
+`b027d18a4fc748cabb133fbb14077500`. Every first-person reply and monologue uses
+that allocation. Missing, held or failed player recordings retain exact captions;
+they must not substitute a browser or another character's voice. Existing
+recordings continue to play before this caption fallback is considered.
+
+New recordings bind exact `(voiceId, source)` and English translation to their
+clip ID, encoded hash and production receipt. The curator checks ownership,
+profile/reference hashes, engine/revision, processing, native completion, final
+encoded words and levels. Fixed runtime entries carry those same identity fields
+and reject missing or changed fields during lookup, even when the UUID matches.
+Compact export may share identical reviewed take receipts in its encoding, but
+must expand complete fields into each entry and never alias the current cast
+binding as the recording's receipt.
+Run curator, voice-consistency and affected speech-lifecycle checks before
+publication. Record use authorization separately from perceptual listening.
+
+The mirror uses `office-mirror` in the existing authoring helper: one whole-text
+synthesis call and one `player-potato-mirror.mp3`, never sentence joins. Its
+surprised delivery uses exaggeration 0.65 with the unchanged selected player
+reference, pinned renderer and dry processing. The dedicated mirror manifest
+joins the existing player answer and portrait supplements through the same
+exact lookup. The accepted take is 8.56 seconds, independently word-checked at
+−18.18 LUFS / −2.22 dBTP. Perceptual listening remains unperformed.
+
 Read this section before using the older production history below. A character keeps one stable game `voiceId` and one selected Secret Tunnel UUID, original-audio hash, normalized-reference hash, renderer, model revision, and processing recipe in `productionVoices`. Names help people browse; UUIDs and hashes establish identity. Never generate by a loosely matched name. Historical `secretTunnel`/`secretTunnelProfileId` records in the cast preserve earlier source provenance; runtime `voices`, `castVoices` and `roleVoices` all expose the current production binding. Historical IDs are not permission to select an older voice. `productionExceptions` permits only the explicitly approved Horst omen clip to use his second official profile. His preserved first candidate remains available for review.
 
 Brunhilde Knick's selected voice is the existing approved fever profile `b080c7d95ecd418fb428282461d7fbe7`, now named `GS Brunhilde Knick (amt-brunhilde-knick)`. Reuse her approved exact lines. New questions, replies, phone warnings and arguments must use that reference, the pinned Chatterbox Multilingual V2 renderer and the same quiet undertone. Switching engine with the same UUID is a voice change requiring a deliberate whole-character review. Default, preview and fever-preview lookup must all reject her earlier primary takes. Knick uses `fallback: "captions"`: unavailable, rejected or failed recordings and dynamic ticket/name strings remain exact visible text without a different browser voice. Other characters retain their documented browser fallback; a production profile binding alone does not prove complete recorded coverage. All four desk slots are the same Knick identity and use this voice. Their render-slot IDs are placement/animation ownership, not separate people.

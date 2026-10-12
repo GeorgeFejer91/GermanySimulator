@@ -1,9 +1,9 @@
-import {createAmtGaussianScene,loadAmtSplatModule} from './buergeramt-gaussian-scene.js?v=20261012-queue-call';
+import {createAmtGaussianScene,loadAmtSplatModule} from './buergeramt-gaussian-scene.js?v=20261013-live-mirror';
 import {mouthPaintGlsl} from './buergeramt-mouth-paint.js?v=20261011-mouth-consistency';
 import {createAmtFloor} from './buergeramt-floor.js?v=20261013-wavy-decay';
 import {createAmtPortraitMelt} from './buergeramt-portrait-melt.js?v=20261012-flowing-paint-lamps';
 import {createAmtLampWear} from './buergeramt-lamps.js?v=20261012-counter-recovery';
-import {createPotatoMirror} from './buergeramt-potato-mirror.js?v=20261012-potato-mirror';
+import {createPotatoMirror} from './buergeramt-potato-mirror.js?v=20261013-live-mirror';
 import {amtWalkDirection,createAmtWalkSpare} from './buergeramt-walk-view.js?v=20261013-smooth-turning';
 import {prepareWithSegments,measureNaturalWidth,measureLineStats} from './assets/vendor/pretext/dist/layout.js';
 const THREE_URL="./assets/vendor/three/0.186.0/build/three.module.min.js";
@@ -28,7 +28,6 @@ function showRendererFailure(error){
   const bridge=await new Promise(resolve=>{let n=0;const f=()=>window.Germany3DBridge?resolve(window.Germany3DBridge):(++n>120?resolve(null):setTimeout(f,50));f()});if(!bridge){showRendererFailure(new Error("3D simulation bridge unavailable"));return}
   const S=.02,H=.038,ox=bridge.WORLD.w*S/2,oz=bridge.WORLD.h*S/2,X=x=>x*S-ox,Z=y=>y*S-oz;
   const renderer=new T.WebGLRenderer({canvas,antialias:false,powerPreference:"default"});renderer.outputColorSpace=T.SRGBColorSpace;
-  renderer.localClippingEnabled=true;
   const scene=new T.Scene();scene.background=new T.Color(0x77756f);scene.fog=new T.Fog(0x77756f,24,72);
   const camera=new T.PerspectiveCamera(48,innerWidth/innerHeight,.1,150),initialPlayerX=X(bridge.player.x),initialPlayerZ=Z(bridge.player.y);camera.position.set(initialPlayerX,11.5,initialPlayerZ+14);camera.lookAt(initialPlayerX,1,initialPlayerZ-2.7);scene.add(new T.HemisphereLight(0xe4e0d6,0x454440,2.3));const sun=new T.DirectionalLight(0xf4f1e8,1.4);sun.position.set(-20,30,18);scene.add(sun);
   const mat=(c,r=1)=>new T.MeshStandardMaterial({color:c,roughness:r});
@@ -1153,8 +1152,9 @@ function showRendererFailure(error){
   const mirrorLeft=potatoMirror.x-potatoMirror.width/2,mirrorRight=potatoMirror.x+potatoMirror.width/2;
   for(const [left,right] of [[-7.7,mirrorLeft],[mirrorRight,-1.35],[1.35,7.7]])ab(right-left,4,.16,wall,(left+right)/2,2,5.55);
   ab(potatoMirror.width,4-potatoMirror.height,.16,wall,potatoMirror.x,(4+potatoMirror.height)/2,5.55);
-  const amtPotatoMirror=createPotatoMirror({THREE:T,scene:amtScene,mirror:potatoMirror});
+  const amtPotatoMirror=createPotatoMirror({THREE:T,scene:amtScene,mirror:potatoMirror,mobile:amtMobile||matchMedia("(pointer: coarse)").matches});
   addEventListener("pagehide",event=>event.persisted?amtPotatoMirror.update(null):amtPotatoMirror.dispose());
+  addEventListener("visibilitychange",()=>{if(document.hidden)amtPotatoMirror.update(null)});
   ab(2.7,.82,.16,wall,0,3.59,5.55);
   for(const x of [-1.35,1.35])ab(.08,3.2,.18,trim,x,1.6,5.55);
   // Permanently closed double door; the retained vestibule is scenery only.
@@ -1293,6 +1293,7 @@ function showRendererFailure(error){
   const amtStationaryDetails=new Map();
   function loadAmtImages({background=false}={}){
     if(amtImagesRequested)return;amtImagesRequested=true;officePreparationBackground=background;
+    amtTexture('./assets/buergeramt/mirror/potato-skin.webp?v=20261013-live-mirror',texture=>amtPotatoMirror.setSkinTexture(texture),undefined,true);
     amtTexture("./assets/buergeramt/president-steinmeier.webp?v=20261012-portrait",texture=>{presidentMaterial.map=texture;presidentMaterial.needsUpdate=true;amtPortraitMelt.setTexture(texture);presidentFallback.texture.dispose()},undefined,true);
     officeAssetTotal++;officeAssetPending++;
     const loadDetail=()=>import("./assets/buergeramt/office-detail.js?v=20261011-published-features").then(()=>{
@@ -1519,12 +1520,12 @@ function showRendererFailure(error){
       }`
   });
   omenScene.add(new T.Mesh(new T.PlaneGeometry(2,2),omenMaterial));
-  function projectAmtFeverWindow(actor){
+  function projectAmtFeverWindow(actor,renderCamera=amtCamera){
     // Protect the visible painting, including the face at very close E distances.
     // Four authored plane corners are enough; no per-frame scene bounds traversal.
     const positions=actor.mesh.geometry.attributes.position;let x0=1,y0=1,x1=0,y1=0;
     for(let i=0;i<positions.count;i++){
-      feverCorner.fromBufferAttribute(positions,i).applyMatrix4(actor.mesh.matrixWorld).project(amtCamera);
+      feverCorner.fromBufferAttribute(positions,i).applyMatrix4(actor.mesh.matrixWorld).project(renderCamera);
       const x=T.MathUtils.clamp((feverCorner.x+1)/2,0,1),y=T.MathUtils.clamp((feverCorner.y+1)/2,0,1);
       x0=Math.min(x0,x);x1=Math.max(x1,x);y0=Math.min(y0,y);y1=Math.max(y1,y);
     }
@@ -1643,12 +1644,15 @@ function showRendererFailure(error){
       actor.mesh.userData.amtForeground=foreground;actor.mesh.renderOrder=200;actor.mesh.layers.set(1);
       actor.mesh.material.depthTest=true;
     }
-    const darkness=Math.max(level.omen.strength,amtIsolation.value);amtScene.fog.density=.46*Math.pow(darkness,1.2);amtScene.background.copy(amtDayColor).lerp(amtScene.fog.color,darkness);const view=level.view;amtCamera.position.set(view.x,1.68,view.z);amtCamera.rotation.set(view.pitch||0,-view.yaw,0,"YXZ");if(level.qrSvg)setAmtQr(level.qrSvg);const now=(level.floorState?.visualTime??performance.now()/1000)*1000;animateAmtCharacters(now,level);animateAmtMoving(now,level);amtGaussian.prepareGeneration(level.clerkPerformance.animation?.generation??0);updateAmtOmenSplat(level);amtGaussian.update(level,amtCharacters,amtMoving,amtCamera);amtGaussian.render(amtCamera);updateAmtMouth(level,now);const calls=level.queueCalls,call=JSON.stringify(calls);if(call!==lastCall){lastCall=call;callCtx.fillStyle="#152527";callCtx.fillRect(0,0,768,256);callCtx.textBaseline="middle";callCtx.fillStyle="#ef6455";calls.forEach(({number,counter},index)=>{const y=35+index*62;callCtx.textAlign="left";callCtx.font="bold 38px monospace";callCtx.fillText("SCHALTER "+counter,20,y,420);callCtx.textAlign="right";callCtx.font="bold 42px monospace";callCtx.fillText(number,748,y,220)});callTexture.needsUpdate=true}renderer.render(amtScene,amtCamera);
+    const darkness=Math.max(level.omen.strength,amtIsolation.value);amtScene.fog.density=.46*Math.pow(darkness,1.2);amtScene.background.copy(amtDayColor).lerp(amtScene.fog.color,darkness);const view=level.view;amtCamera.position.set(view.x,1.68,view.z);amtCamera.rotation.set(view.pitch||0,-view.yaw,0,"YXZ");if(level.qrSvg)setAmtQr(level.qrSvg);const now=(level.floorState?.visualTime??performance.now()/1000)*1000;animateAmtCharacters(now,level);animateAmtMoving(now,level);amtGaussian.prepareGeneration(level.clerkPerformance.animation?.generation??0);updateAmtOmenSplat(level);amtGaussian.update(level,amtCharacters,amtMoving,amtCamera);amtGaussian.render(amtCamera);updateAmtMouth(level,now);const calls=level.queueCalls,call=JSON.stringify(calls);if(call!==lastCall){lastCall=call;callCtx.fillStyle="#152527";callCtx.fillRect(0,0,768,256);callCtx.textBaseline="middle";callCtx.fillStyle="#ef6455";calls.forEach(({number,counter},index)=>{const y=35+index*62;callCtx.textAlign="left";callCtx.font="bold 38px monospace";callCtx.fillText("SCHALTER "+counter,20,y,420);callCtx.textAlign="right";callCtx.font="bold 42px monospace";callCtx.fillText(number,748,y,220)});callTexture.needsUpdate=true}
+    function drawView(renderCamera,reflection=false){
+    amtGaussian.render(renderCamera,true);renderCamera.layers.set(0);
+    renderer.render(amtScene,renderCamera);
     const omen=level.omen,themed=fever?.active&&fever.strength>0,selected=themed?[...amtCharacters,...amtMoving].find(actor=>(actor.lead?'clerk':actor.animationId??actor.id)===fever.id):null;
     if(omen.strength>0||selected){
       const uniforms=omenMaterial.uniforms;
-      if(selected)projectAmtFeverWindow(selected);
-      else{omenFocus.set(omen.x,1.04,omen.z).project(amtCamera);uniforms.focus.value.set((omenFocus.x+1)/2,(omenFocus.y+1)/2);uniforms.radius.value.set(Math.min(.43,.31/Math.max(.75,innerWidth/innerHeight)),.47)}
+      if(selected)projectAmtFeverWindow(selected,renderCamera);
+      else{omenFocus.set(omen.x,1.04,omen.z).project(renderCamera);uniforms.focus.value.set((omenFocus.x+1)/2,(omenFocus.y+1)/2);uniforms.radius.value.set(Math.min(.43,.31/Math.max(.75,innerWidth/innerHeight)),.47)}
       uniforms.strength.value=themed?fever.strength:omen.strength;uniforms.clock.value=amtReducedMotion.matches?0:themed?fever.time*fever.theme.speed:omen.life.time;
       uniforms.theme.value=themed?fever.theme.index:0;uniforms.progress.value=themed?fever.progress:0;if(themed)uniforms.tint.value.setRGB(...fever.theme.color);
       uniforms.reveal.value=themed||amtReducedMotion.matches?0:amtOmenSplat?.inspect().reveal||0;
@@ -1657,8 +1661,28 @@ function showRendererFailure(error){
     // Retain room depth; a Color background would otherwise force a clear on
     // this second pass even with autoClear disabled.
     const background=amtScene.background;amtScene.background=null;
-    renderer.autoClear=false;amtCamera.layers.set(1);
-    try{renderer.render(amtScene,amtCamera)}finally{amtCamera.layers.set(0);renderer.autoClear=true;amtScene.background=background}
+    renderer.autoClear=false;renderCamera.layers.set(1);
+    try{
+      renderer.render(amtScene,renderCamera);
+      // Only the mirror's private player double uses this final target pass.
+      // Off-axis framing must not put it behind a real shelf or room wall.
+      if(reflection){renderer.clearDepth();renderCamera.layers.set(2);renderer.render(amtScene,renderCamera)}
+    }finally{renderCamera.layers.set(0);renderer.autoClear=true;amtScene.background=background}
+    }
+    amtPotatoMirror.render(renderer,amtCamera,mirrorCamera=>{
+      const actors=[...amtCharacters,...amtMoving],poses=actors.map(actor=>[actor.mesh.quaternion.clone(),actor.mesh.visible,actor.mesh.material.opacity]);
+      const clouds=new Set(amtGaussian.inspect().actors.filter(actor=>actor.cloudVisible).map(actor=>actor.id)),omenVisible=amtOmenSplat?.inspect().visible;
+      // Packed volumes are generated for the main camera. The reflected view
+      // uses their existing paint rather than an edge-on stale GPU silhouette.
+      try{
+        for(const actor of actors){
+          actor.mesh.rotation.y=Math.atan2(mirrorCamera.position.x-actor.mesh.position.x,mirrorCamera.position.z-actor.mesh.position.z);
+          if(clouds.has(actor.lead?'clerk':actor.animationId??actor.id)||omenVisible&&actor===amtMoving[0]){actor.mesh.visible=true;actor.mesh.material.opacity=1}
+        }
+        amtGaussian.withReflectedView(mirrorCamera,()=>drawView(mirrorCamera,true));
+      }finally{actors.forEach((actor,i)=>{actor.mesh.quaternion.copy(poses[i][0]);actor.mesh.visible=poses[i][1];actor.mesh.material.opacity=poses[i][2]})}
+    });
+    drawView(amtCamera);
     amtLampWear.render(renderer);
     return true}
   function resize(){renderer.setPixelRatio(Math.min(devicePixelRatio||1,1,Math.sqrt(1600000/Math.max(1,innerWidth*innerHeight))));renderer.setSize(innerWidth,innerHeight,false);camera.aspect=innerWidth/innerHeight;camera.updateProjectionMatrix();amtCamera.aspect=innerWidth/innerHeight;amtCamera.updateProjectionMatrix();layoutMissionPointer()}resize();addEventListener("resize",resize,{passive:true});

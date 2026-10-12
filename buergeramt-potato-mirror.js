@@ -1,119 +1,162 @@
-// A wall mirror with a surrogate room and actor in the office's existing pass.
-// No reflection camera, framebuffer, downloaded model or independent clock.
+// A live planar mirror, consumed by the existing office render owner.
+// Reflection/projection follows Three.js Reflector (MIT, three.js authors).
 export function potatoReflection(view,mirror){
- return{x:view.x,z:2*mirror.z-view.z,yaw:Math.PI+view.yaw,phase:(view.walkedDistance||0)*Math.PI*2/1.35};
+ return{x:view.x,z:2*(mirror.z-.025)-view.z,yaw:Math.PI+view.yaw,phase:(view.walkedDistance||0)*Math.PI*2/1.35};
 }
-
-export function createPotatoMirror({THREE:T,scene,mirror}){
- const group=new T.Group();group.name="Kartoffelspiegel";scene.add(group);
+export function potatoMirrorAnchor(view,mirror){
+ const limit=mirror.width/2-.38,glassX=Math.max(mirror.x-limit,Math.min(mirror.x+limit,view.x));
+ return{x:2*glassX-view.x,z:view.z};
+}
+export function frameMirrorDouble({THREE:T,frustum,mirror,camera,preferred}){
+ const z=mirror.z-.025,left=mirror.x-mirror.width/2+.06,right=mirror.x+mirror.width/2-.06;
+ let polygon=[new T.Vector3(left,.08,z),new T.Vector3(right,.08,z),new T.Vector3(right,mirror.height-.08,z),new T.Vector3(left,mirror.height-.08,z)];
+ for(const plane of frustum.planes){
+  const clipped=[];
+  for(let i=0;i<polygon.length;i++){
+   const a=polygon[i],b=polygon[(i+1)%polygon.length],da=plane.distanceToPoint(a),db=plane.distanceToPoint(b);
+   if(da>=0)clipped.push(a);
+   if((da>=0)!==(db>=0))clipped.push(a.clone().lerp(b,da/(da-db)));
+  }
+  polygon=clipped;if(!polygon.length)return null;
+ }
+ const point=new T.Vector3((camera.position.x+preferred.x)/2,(camera.position.y+1.03)/2,z);
+ if(!frustum.containsPoint(point)){
+  const center=polygon.reduce((sum,p)=>sum.add(p),new T.Vector3()).multiplyScalar(1/polygon.length);
+  let nearest=null,distance=Infinity;
+  for(let i=0;i<polygon.length;i++){
+   const a=polygon[i],b=polygon[(i+1)%polygon.length],edge=b.clone().sub(a),t=Math.max(0,Math.min(1,point.clone().sub(a).dot(edge)/Math.max(1e-12,edge.lengthSq()))),candidate=a.clone().addScaledVector(edge,t);
+   const d=candidate.distanceToSquared(point);if(d<distance){distance=d;nearest=candidate;}
+  }
+  point.copy(nearest).lerp(center,.08);
+ }
+ return{x:2*point.x-camera.position.x,y:2*point.y-camera.position.y-1.03,z:preferred.z,glassPoint:point.toArray()};
+}
+export function prepareMirrorCamera({THREE:T,camera,reflected,mirror,pane,textureMatrix}){
+ camera.updateMatrixWorld();pane.updateWorldMatrix(true,false);
+ const z=mirror.z-.025,eye=camera.position;
+ const target=new T.Vector3(0,0,-1).applyQuaternion(camera.quaternion).add(eye);target.z=2*z-target.z;
+ reflected.position.set(eye.x,eye.y,2*z-eye.z);
+ reflected.up.set(0,1,0).applyQuaternion(camera.quaternion);reflected.up.z*=-1;
+ reflected.lookAt(target);reflected.fov=camera.fov;reflected.aspect=camera.aspect;
+ reflected.near=camera.near;reflected.far=camera.far+2*Math.abs(z-eye.z);
+ reflected.updateProjectionMatrix();reflected.updateMatrixWorld();
+ textureMatrix.set(.5,0,0,.5,0,.5,0,.5,0,0,.5,.5,0,0,0,1)
+  .multiply(reflected.projectionMatrix).multiply(reflected.matrixWorldInverse).multiply(pane.matrixWorld);
+ // Oblique near clipping excludes the wall/exterior behind the real glass.
+ const plane=new T.Plane(new T.Vector3(0,0,-1),z).applyMatrix4(reflected.matrixWorldInverse);
+ const clip=new T.Vector4(plane.normal.x,plane.normal.y,plane.normal.z,plane.constant),p=reflected.projectionMatrix.elements;
+ const q=new T.Vector4((Math.sign(clip.x)+p[8])/p[0],(Math.sign(clip.y)+p[9])/p[5],-1,(1+p[10])/p[14]);
+ clip.multiplyScalar(2/clip.dot(q));p[2]=clip.x;p[6]=clip.y;p[10]=clip.z+1-.0001;p[14]=clip.w;
+ reflected.projectionMatrixInverse.copy(reflected.projectionMatrix).invert();
+ return reflected;
+}
+export function createPotatoMirror({THREE:T,scene,mirror,mobile=false}){
+ const group=new T.Group();group.name='Kartoffelspiegel';scene.add(group);
  const materials=[],geometries=[];
- const mat=options=>{const material=new T.MeshStandardMaterial(options);materials.push(material);return material};
- const geometry=value=>{geometries.push(value);return value};
+ const mat=options=>{const m=new T.MeshStandardMaterial(options);materials.push(m);return m};
+ const geometry=g=>{geometries.push(g);return g};
+ const box=geometry(new T.BoxGeometry(1,1,1)),sphere=geometry(new T.SphereGeometry(1,16,12));
+ function mesh(parent,g,m,x,y,z,sx,sy,sz){const o=new T.Mesh(g,m);o.position.set(x,y,z);o.scale.set(sx,sy,sz);parent.add(o);return o}
+ const {x,z,width:w,height:h}=mirror;
  const frame=mat({color:0xc4ccca,metalness:.35,roughness:.24,emissive:0x697371,emissiveIntensity:.3});
- const back=mat({color:0xabaeaa,roughness:.94,emissive:0x656962,emissiveIntensity:.22});
- const glass=mat({color:0xc5d6d4,transparent:true,opacity:.12,roughness:.12,metalness:.2,depthWrite:false});
- glass.onBeforeCompile=shader=>{
-  shader.vertexShader="varying vec2 mirrorUv;\n"+shader.vertexShader.replace("#include <begin_vertex>","#include <begin_vertex>\nmirrorUv=uv;");
-  shader.fragmentShader="varying vec2 mirrorUv;\n"+shader.fragmentShader.replace("#include <opaque_fragment>","float mirrorEdge=pow(1.0-abs(dot(normal,normalize(vViewPosition))),3.0);float mirrorDiagonal=mirrorUv.x+mirrorUv.y*.6;float mirrorBand=(smoothstep(.22,.26,mirrorDiagonal)-smoothstep(.42,.48,mirrorDiagonal))+(smoothstep(.57,.59,mirrorDiagonal)-smoothstep(.65,.69,mirrorDiagonal));diffuseColor.a=min(.7,diffuseColor.a*(1.0+mirrorBand*1.8+mirrorEdge*3.0));outgoingLight=mix(outgoingLight,vec3(.78,.85,.84),mirrorBand*.65);\n#include <opaque_fragment>");
- };
- glass.customProgramCacheKey=()=>"potato-mirror-glass";
- const skin=mat({color:0xd0a15e,roughness:.96,vertexColors:true}),limb=mat({color:0x987043,roughness:.94});
- const white=mat({color:0xf3efda,roughness:.6}),dark=mat({color:0x32221b,roughness:.9});
- const boxGeometry=geometry(new T.BoxGeometry(1,1,1)),sphere=geometry(new T.SphereGeometry(1,12,10));
- function mesh(parent,g,m,x,y,z,sx,sy,sz){const object=new T.Mesh(g,m);object.position.set(x,y,z);object.scale.set(sx,sy,sz);parent.add(object);return object}
- const {x,z,width:w,height:h,depth:d}=mirror;
- // A shallow silver bezel, rather than a deep display-case border.
- for(const side of [-1,1])mesh(group,boxGeometry,frame,x+side*w/2,h/2,z,.1,h,.24);
- for(const y of [.08,h-.08])mesh(group,boxGeometry,frame,x,y,z,w,.16,.24);
  const polish=mat({color:0xe0e6e2,metalness:.18,roughness:.15,emissive:0xa3b5b0,emissiveIntensity:.45});
- for(const side of [-1,1])mesh(group,boxGeometry,polish,x+side*(w/2-.045),h/2,z-.13,.018,h-.12,.018);
- for(const y of [.14,h-.14])mesh(group,boxGeometry,polish,x,y,z-.13,w-.07,.018,.018);
- // Muted, reflected hall geometry behind the glass makes it read as a mirror.
- // The real wall masks this virtual room at every angle; it has no simulation.
- const reflection=new T.Group();reflection.name="Surrogate mirror room";group.add(reflection);
- mesh(reflection,boxGeometry,back,0,2,z+19.2,15.4,4,.1);
- for(const side of [-1,1])mesh(reflection,boxGeometry,back,side*7.7,2,z+9.6,.1,4,19.2);
- const reflectedFloor=mat({color:0x92958e,roughness:.92,emissive:0x555b52,emissiveIntensity:.2});
- mesh(reflection,boxGeometry,reflectedFloor,0,-.03,z+9.6,15.4,.05,19.2);
- mesh(reflection,boxGeometry,back,0,4,z+9.6,15.4,.05,19.2);
- const fluorescent=mat({color:0xe0e7dc,emissive:0xe0e7dc,emissiveIntensity:.8,roughness:.5});
- for(const lampZ of [-7.4,-3.8,0,3.8])mesh(reflection,boxGeometry,fluorescent,0,3.97,2*z-lampZ,2.8,.025,.54);
- // Reflected waiting benches retain the hall's spacing and muted green seats.
- const reflectedSeat=mat({color:0x64736c,roughness:.9,emissive:0x313c36,emissiveIntensity:.2});
- for(const benchX of [-5.9,-2.1,1.7,5.5])for(const benchZ of [1.7,-1.1]){
-  mesh(reflection,boxGeometry,reflectedSeat,benchX,.52,2*z-benchZ,.74,.07,.68);
-  mesh(reflection,boxGeometry,reflectedSeat,benchX,.92,2*z-benchZ+.31,.7,.76,.07);
-  for(const leg of [-.28,.28])mesh(reflection,boxGeometry,frame,benchX+leg,.25,2*z-benchZ,.045,.45,.045);
- }
- // The back of the installation remains an ordinary solid wall from outside.
- const rear=mesh(group,geometry(new T.PlaneGeometry(w,h)),back,x,h/2,5.64,1,1,1);
- const pane=mesh(group,geometry(new T.PlaneGeometry(w-.12,h-.16)),glass,x,h/2,z-.025,1,1,1);
- pane.rotation.y=Math.PI;pane.renderOrder=1;
- // Broad soft highlights lie on the surface, not inside the reflected room.
- const sheen=mat({color:0xd7e5dd,transparent:true,opacity:.09,depthWrite:false});
- for(const [offset,width] of [[-.94,.045],[.94,.075]]){
-  const stripe=mesh(group,boxGeometry,sheen,x+offset,h/2,z-.035,width,h-.35,.004);stripe.rotation.z=-.17;stripe.renderOrder=2;
- }
- const rig=new T.Group();rig.name="Reflected potato rig";reflection.add(rig);
- const bodyGeometry=geometry(new T.SphereGeometry(1,24,18)),positions=bodyGeometry.attributes.position,colors=[];
- for(let i=0;i<positions.count;i++){
-  const px=positions.getX(i),py=positions.getY(i),pz=positions.getZ(i);
-  const swell=1+.055*Math.sin(px*9+py*5)*Math.cos(pz*7-py*3)+.035*Math.sin(py*13+pz*6);
-  positions.setXYZ(i,px*swell,py*swell,pz*swell);
-  const tone=.8+.16*(.5+.5*Math.sin(px*33+py*41)*Math.cos(pz*29+py*17));colors.push(tone,tone,tone);
- }
- bodyGeometry.setAttribute("color",new T.Float32BufferAttribute(colors,3));bodyGeometry.computeVertexNormals();
- mesh(rig,bodyGeometry,skin,0,1.06,0,.52,.72,.36);
- // Potato eyes (the tuber's dimples), plus the player's puzzled face.
- for(const [px,py,pz] of [[-.31,1.55,-.16],[.37,1.02,-.24],[-.38,.82,-.2],[.18,.52,-.22],[.1,1.64,-.13],[-.18,1.05,.33],[.3,1.37,.25]]){
-  mesh(rig,sphere,limb,px,py,pz,.037,.025,.012);
- }
  for(const side of [-1,1]){
-  mesh(rig,sphere,white,side*.18,1.3,-.334,.112,.132,.048);
-  mesh(rig,sphere,dark,side*.18,1.29,-.376,.044,.06,.022);
-  mesh(rig,sphere,dark,side*.18,1.49,-.3,.117,.025,.026).rotation.z=side*.22;
+  mesh(group,box,frame,x+side*w/2,h/2,z,.1,h,.24);
+  mesh(group,box,polish,x+side*(w/2-.045),h/2,z-.13,.018,h-.12,.018);
  }
- mesh(rig,sphere,limb,0,1.11,-.363,.058,.075,.049);
- mesh(rig,sphere,dark,0,.93,-.345,.09,.052,.022);
+ for(const y of [.08,h-.08])mesh(group,box,frame,x,y,z,w,.16,.24);
+ for(const y of [.14,h-.14])mesh(group,box,polish,x,y,z-.13,w-.07,.018,.018);
+ const back=mat({color:0xabaeaa,roughness:.94});
+ mesh(group,geometry(new T.PlaneGeometry(w,h)),back,x,h/2,5.64,1,1,1);
+ const textureMatrix=new T.Matrix4(),reflected=new T.PerspectiveCamera();
+ const glass=new T.ShaderMaterial({name:'Live silvered mirror',uniforms:{reflection:{value:null},textureMatrix:{value:textureMatrix},glassOpacity:{value:1}},
+  vertexShader:'uniform mat4 textureMatrix; varying vec4 reflectedUv; varying vec2 glassUv; void main(){glassUv=uv;reflectedUv=textureMatrix*vec4(position,1.0);gl_Position=projectionMatrix*modelViewMatrix*vec4(position,1.0);}',
+  fragmentShader:'uniform sampler2D reflection;uniform float glassOpacity;varying vec4 reflectedUv;varying vec2 glassUv;void main(){vec3 room=texture2DProj(reflection,reflectedUv).rgb;float d=glassUv.x+glassUv.y*.6;float sheen=(smoothstep(.22,.26,d)-smoothstep(.42,.48,d))*.035;gl_FragColor=vec4(room*.97+vec3(.012,.016,.015)+sheen,glassOpacity);\n#include <colorspace_fragment>\n}',
+  depthWrite:true,toneMapped:false});materials.push(glass);
+ const pane=mesh(group,geometry(new T.PlaneGeometry(w-.12,h-.16)),glass,x,h/2,z-.025,1,1,1);pane.rotation.y=Math.PI;
+ pane.onBeforeRender=()=>{glass.uniforms.glassOpacity.value=glass.opacity};
+ const skin=mat({color:0xb59462,roughness:.94,bumpScale:.014,vertexColors:true});
+ const rootSkin=mat({color:0x886643,roughness:.98,bumpScale:.008});
+ const bodyGeometry=geometry(new T.SphereGeometry(1,64,48)),positions=bodyGeometry.attributes.position,colors=[];
+ const eyes=[[-.42,.68,-.6],[.36,.32,-.84],[-.5,-.22,-.74],[.19,-.58,-.77],[.12,.87,-.44],[-.25,.1,.94],[.6,.47,.58],[.14,-.75,.64]].map(p=>new T.Vector3(...p).normalize());
+ const n=new T.Vector3();
+ for(let i=0;i<positions.count;i++){
+  n.fromBufferAttribute(positions,i);const px=n.x,py=n.y,pz=n.z;
+  let swell=1+.055*Math.sin(px*4+py*3)*Math.cos(pz*5-py*2)+.024*Math.sin(py*11+pz*6);
+  for(const eye of eyes)swell-=.045*Math.exp(-(1-n.dot(eye))/.004);
+  positions.setXYZ(i,px*swell,py*swell,pz*swell);
+  const v=.93+.07*Math.sin(px*13+py*9)*Math.cos(pz*11);colors.push(v,v,v);
+ }
+ bodyGeometry.setAttribute('color',new T.Float32BufferAttribute(colors,3));bodyGeometry.computeVertexNormals();
+ const rig=new T.Group();rig.name='Reflected potato rig';scene.add(rig);
+ scene.traverse(o=>{if(o.isLight)o.layers.enable(2)});
+ mesh(rig,bodyGeometry,skin,0,1.03,0,.52,.78,.4);
  const arms=[],legs=[];
  for(const side of [-1,1]){
-  const arm=new T.Group();arm.name=side<0?"left shoulder":"right shoulder";arm.position.set(side*.46,1.15,0);arm.rotation.z=side*.2;rig.add(arm);arms.push(arm);
-  mesh(arm,sphere,limb,0,-.16,0,.063,.21,.064);mesh(arm,sphere,limb,0,-.36,-.015,.087,.105,.077);
-  const leg=new T.Group();leg.name=side<0?"left hip":"right hip";leg.position.set(side*.2,.39,0);rig.add(leg);legs.push(leg);
-  mesh(leg,sphere,limb,0,-.15,0,.078,.2,.078);mesh(leg,sphere,limb,0,-.31,-.065,.115,.08,.17);
+  const arm=new T.Group();arm.name=side<0?'left shoulder':'right shoulder';arm.position.set(side*.45,.98,0);rig.add(arm);arms.push(arm);
+  const a=mesh(arm,sphere,rootSkin,side*.02,-.13,0,.045,.2,.05);a.rotation.z=side*.13;
+  mesh(arm,sphere,rootSkin,side*.05,-.29,-.01,.028,.095,.028);
+  const leg=new T.Group();leg.name=side<0?'left hip':'right hip';leg.position.set(side*.2,.29,0);rig.add(leg);legs.push(leg);
+  mesh(leg,sphere,rootSkin,0,-.12,0,.057,.16,.056);mesh(leg,sphere,rootSkin,side*.015,-.25,-.028,.075,.039,.09);
  }
- // Clip only the surrogate to rays through the glass aperture. Near, rotated
- // tuber surfaces can lie ahead of the real wall and otherwise poke through it.
- const aperture=[new T.Vector3(x-w/2+.06,.08,z-.025),new T.Vector3(x+w/2-.06,.08,z-.025),new T.Vector3(x+w/2-.06,h-.08,z-.025),new T.Vector3(x-w/2+.06,h-.08,z-.025)];
- const eye=new T.Vector3(),inside=new T.Vector3(x,h/2,z+.5),clipPlanes=Array.from({length:4},()=>new T.Plane());
- clipPlanes.push(new T.Plane(new T.Vector3(0,0,1),-(z-.025)));
- for(const material of [skin,limb,white,dark])material.clippingPlanes=clipPlanes;
- let previous=null,lastPose=null;
- function update(view){
-  if(!view){rig.visible=false;reflection.visible=false;previous=null;lastPose=null;return}
-  const pose=potatoReflection(view,mirror),distance=z-view.z;
-  reflection.visible=distance>0;
-  rig.visible=distance>.3&&distance<d-.45;
-  if(rig.visible){
-   eye.set(view.x,1.68,view.z);
-   for(let i=0;i<4;i++){const plane=clipPlanes[i];plane.setFromCoplanarPoints(eye,aperture[i],aperture[(i+1)%4]);if(plane.distanceToPoint(inside)<0)plane.negate();}
-  }
-  const moved=previous&&previous.generation===view.positionGeneration&&Math.hypot(view.x-previous.x,view.z-previous.z)>1e-7;
-  const stride=moved?Math.sin(pose.phase)*.43:0;
-  rig.position.set(pose.x,0,pose.z);rig.rotation.y=pose.yaw;
-  // Forward/back/strafe reflect actual displacement into the potato's joints.
-  const forward=moved?(view.x-previous.x)*Math.sin(view.yaw)-(view.z-previous.z)*Math.cos(view.yaw):0;
-  const sideways=moved?(view.x-previous.x)*Math.cos(view.yaw)+(view.z-previous.z)*Math.sin(view.yaw):0;
+ rig.traverse(o=>o.layers.set(2));rig.visible=false;
+ const frustum=new T.Frustum(),viewMatrix=new T.Matrix4(),size=new T.Vector2();
+ let previous=null,capturedView=null,lastPose=null,view=null,target=null,skinTexture=null,disposed=false,frames=0,lastCapture=-Infinity;
+ const cap=mobile?640:1024;
+ function setSkinTexture(texture){
+  if(disposed){texture.dispose();return}
+  if(skinTexture&&skinTexture!==texture)skinTexture.dispose();skinTexture=texture;
+  texture.colorSpace=T.SRGBColorSpace;texture.wrapS=texture.wrapT=T.RepeatWrapping;
+  texture.generateMipmaps=true;texture.minFilter=T.LinearMipmapLinearFilter;texture.magFilter=T.LinearFilter;
+  texture.anisotropy=4;skin.color.setHex(0xffffff);skin.map=skin.bumpMap=texture;rootSkin.map=rootSkin.bumpMap=texture;
+  skin.needsUpdate=rootSkin.needsUpdate=true;
+ }
+ function releaseTarget(){if(target){target.dispose();target=null;glass.uniforms.reflection.value=null}lastCapture=-Infinity;capturedView=null}
+ function update(next){
+  view=next;
+  if(!view){rig.visible=false;previous=null;lastPose=null;releaseTarget();return}
+  const pose=potatoReflection(view,mirror),anchor=potatoMirrorAnchor(view,mirror);
+  // No upper-distance gate. Keep the double in the finite glass off axis.
+  rig.visible=view.z<z-.06;
+  // Sample gait between visible captures, not between faster display frames
+  // that may repeat the same accepted simulation position.
+  const before=capturedView||previous;
+  const moved=before&&before.generation===view.positionGeneration&&Math.hypot(view.x-before.x,view.z-before.z)>1e-7;
+  const stride=moved?Math.sin(pose.phase)*.3:0;
+  rig.position.set(anchor.x,0,anchor.z);rig.rotation.y=-view.yaw;
+  const forward=moved?(view.x-before.x)*Math.sin(view.yaw)-(view.z-before.z)*Math.cos(view.yaw):0;
+  const sideways=moved?(view.x-before.x)*Math.cos(view.yaw)+(view.z-before.z)*Math.sin(view.yaw):0;
   const travel=moved?Math.hypot(forward,sideways):1;
-  for(let i=0;i<2;i++){
-   const sign=i?1:-1;legs[i].rotation.x=sign*stride*forward/travel;legs[i].rotation.z=sign*stride*sideways/travel*.6;
-   arms[i].rotation.x=-legs[i].rotation.x*.7;arms[i].rotation.z=sign*(.2+Math.abs(stride)*.12);
-  }
-  previous={x:view.x,z:view.z,generation:view.positionGeneration};lastPose={...pose,moving:!!moved,stride};
+  for(let i=0;i<2;i++){const sign=i?1:-1;legs[i].rotation.x=sign*stride*forward/travel;legs[i].rotation.z=sign*stride*sideways/travel*.6;arms[i].rotation.x=-legs[i].rotation.x*.7;arms[i].rotation.z=sign*(.09+Math.abs(stride)*.08)}
+  previous={x:view.x,z:view.z,generation:view.positionGeneration};lastPose={...pose,anchor,moving:!!moved,stride};
  }
- update(null);
- const resources={geometries:geometries.length,materials:materials.length,textures:0,geometryBytes:0,meshes:0,triangles:0};
- for(const g of geometries){for(const a of Object.values(g.attributes))resources.geometryBytes+=a.array.byteLength;resources.geometryBytes+=g.index?.array.byteLength||0;}
- group.traverse(object=>{if(object.isMesh){resources.meshes++;resources.triangles+=(object.geometry.index?.count||object.geometry.attributes.position.count)/3;}});
- return{update,inspect(){return{visible:rig.visible,pose:lastPose,joints:legs.map(leg=>[leg.rotation.x,leg.rotation.z]),mirror:{...mirror},glass:{opacity:glass.opacity,depthWrite:glass.depthWrite},resources}},dispose(){scene.remove(group);for(const g of geometries)g.dispose();for(const m of materials)m.dispose();previous=null}};
+ function render(renderer,camera,drawView,now=performance.now()){
+  if(disposed||!view||!rig.visible||!group.visible||!group.parent?.visible||glass.opacity<=0||camera.position.z>=z-.06){capturedView=null;return false}
+  camera.updateMatrixWorld();pane.updateWorldMatrix(true,false);
+  viewMatrix.multiplyMatrices(camera.projectionMatrix,camera.matrixWorldInverse);frustum.setFromProjectionMatrix(viewMatrix);
+  const framed=frameMirrorDouble({THREE:T,frustum,mirror,camera,preferred:lastPose.anchor});
+  if(!framed){capturedView=null;return false}
+  rig.position.set(framed.x,framed.y,framed.z);lastPose.framing=framed;
+  if(target&&now-lastCapture<1000/60-.5)return false;
+  renderer.getDrawingBufferSize(size);const scale=Math.min(1,cap/Math.max(size.x,size.y)),width=Math.max(32,Math.round(size.x*scale)),height=Math.max(32,Math.round(size.y*scale));
+  if(!target){target=new T.WebGLRenderTarget(width,height,{type:T.HalfFloatType,depthBuffer:true});target.texture.generateMipmaps=false;glass.uniforms.reflection.value=target.texture}
+  else if(target.width!==width||target.height!==height)target.setSize(width,height);
+  prepareMirrorCamera({THREE:T,camera,reflected,mirror,pane,textureMatrix});
+  const oldTarget=renderer.getRenderTarget(),oldAuto=renderer.autoClear,oldXr=renderer.xr.enabled,oldShadow=renderer.shadowMap.autoUpdate;
+  const viewport=renderer.getViewport(new T.Vector4()),scissor=renderer.getScissor(new T.Vector4()),scissorTest=renderer.getScissorTest();
+  group.visible=false;
+  try{
+   renderer.xr.enabled=false;renderer.shadowMap.autoUpdate=false;renderer.autoClear=true;renderer.setRenderTarget(target);renderer.setScissorTest(false);
+   renderer.clear();drawView(reflected);frames++;lastCapture=now;capturedView={x:view.x,z:view.z,generation:view.positionGeneration};
+  }finally{
+   group.visible=true;renderer.setRenderTarget(oldTarget);renderer.setViewport(viewport);renderer.setScissor(scissor);renderer.setScissorTest(scissorTest);
+   renderer.autoClear=oldAuto;renderer.xr.enabled=oldXr;renderer.shadowMap.autoUpdate=oldShadow;
+  }
+  return true;
+ }
+ const resources={geometries:geometries.length,materials:materials.length,geometryBytes:0,meshes:0,triangles:0};
+ for(const g of geometries){for(const a of Object.values(g.attributes))resources.geometryBytes+=a.array.byteLength;resources.geometryBytes+=g.index?.array.byteLength||0}
+ for(const root of [group,rig])root.traverse(o=>{if(o.isMesh){resources.meshes++;resources.triangles+=(o.geometry.index?.count||o.geometry.attributes.position.count)/3}});
+ return{update,render,setSkinTexture,inspect(){return{visible:rig.visible,pose:lastPose,joints:legs.map(leg=>[leg.rotation.x,leg.rotation.z]),mirror:{...mirror},glass:{opacity:glass.opacity,depthWrite:glass.depthWrite},reflection:{frames,target:target?[target.width,target.height]:null,cap,maxHz:60,camera:reflected.position.toArray()},resources:{...resources,textures:skinTexture?1:0,textureBytes:skinTexture?(skinTexture.image?.width||0)*(skinTexture.image?.height||0)*4:0}}},
+  dispose(){disposed=true;releaseTarget();group.removeFromParent();rig.removeFromParent();for(const g of geometries)g.dispose();for(const m of materials)m.dispose();skinTexture?.dispose();skinTexture=null;previous=null;view=null;rig.visible=false}};
 }

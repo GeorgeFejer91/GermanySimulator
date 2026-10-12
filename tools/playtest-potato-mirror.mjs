@@ -18,7 +18,7 @@ try{
   const context=await browser.newContext({viewport,isMobile:name.startsWith('android'),hasTouch:name.startsWith('android'),reducedMotion:name==='reduced-motion'?'reduce':'no-preference'}),page=await context.newPage(),errors=[],requests=[];
   page.on('pageerror',error=>errors.push(error.message));page.on('request',request=>requests.push(request.url()));page.on('console',message=>{if(message.type()==='error'&&/WebGLProgram|GL_INVALID|VALIDATE_STATUS/.test(message.text()))errors.push(message.text())});
   await context.addInitScript(()=>{
-   const play=HTMLMediaElement.prototype.play;HTMLMediaElement.prototype.play=function(...args){this.muted=true;return play.apply(this,args)};
+   window.__mirrorPlays=[];const play=HTMLMediaElement.prototype.play;HTMLMediaElement.prototype.play=function(...args){this.muted=true;this.volume=0;if(this.src.includes('/player-potato-mirror.mp3')){__mirrorPlays.push(this.src);window.__mirrorAudio=this}return play.apply(this,args)};
    const connect=AudioNode.prototype.connect;AudioNode.prototype.connect=function(target,...args){if(target===this.context.destination){const gain=this.context.createGain();gain.gain.value=0;connect.call(gain,target);return connect.call(this,gain,...args)}return connect.call(this,target,...args)};
    window.__machine=[];Object.defineProperty(window,'speechSynthesis',{configurable:true,value:{speaking:false,pending:false,getVoices:()=>[],cancel(){this.speaking=false},speak(u){__machine.push(u.text);this.speaking=true;u.onstart?.();window.__mirrorUtterance=u}}});
   });
@@ -49,25 +49,26 @@ try{
    dispatchEvent(new KeyboardEvent('keydown',{code:'KeyW'}));for(let i=0;i<10;i++){__mirrorUpdate(1/60);sample()}dispatchEvent(new KeyboardEvent('keyup',{code:'KeyW'}));
    __mirrorHold('ArrowRight',6);sample();__mirrorUpdate(0);sample();return poses;
   });
-  for(const row of motion){const s=row.mirror.mirror;assert(Math.abs(row.mirror.pose.x-row.view.x)<1e-9);assert(Math.abs(row.mirror.pose.z-s.z-(s.z-row.view.z))<1e-9);assert(Math.abs(row.mirror.pose.yaw-Math.PI-row.view.yaw)<1e-9)}
+  for(const row of motion){const s=row.mirror.mirror,z=s.z-.025;assert(Math.abs(row.mirror.pose.x-row.view.x)<1e-9);assert(Math.abs(row.mirror.pose.z-z-(z-row.view.z))<1e-9);assert(Math.abs(row.mirror.pose.yaw-Math.PI-row.view.yaw)<1e-9);assert(row.mirror.reflection.frames>0)}
   assert(motion.slice(0,6).some(row=>row.mirror.joints.some(([x,z])=>Math.abs(z)>0)),'strafe articulates legs');
   if(!motion.slice(6,16).some(row=>row.mirror.joints.some(([x])=>Math.abs(x)>0)))console.log(JSON.stringify({approach:approach.view,motion:motion.map(row=>({view:row.view,pose:row.mirror.pose,joints:row.mirror.joints}))}));
   assert(motion.slice(6,16).some(row=>row.mirror.joints.some(([x])=>Math.abs(x)>0)),'forward travel articulates legs');
-  assert(motion.at(-1).mirror.joints.every(([x,z])=>x===0&&z===0),'stopped joints plant');
+  await page.waitForTimeout(40);const stopped=await page.evaluate(()=>{Germany3D.sync();return Germany3D.amtPotatoMirror});assert(stopped.joints.every(([x,z])=>x===0&&z===0),'stopped joints plant on the next captured frame');
   await page.screenshot({path:resolve(out,name+'-turned.png')});
   const blocked=await page.evaluate(()=>{__mirrorHold('ArrowLeft',6);dispatchEvent(new KeyboardEvent('keydown',{code:'KeyR'}));__mirrorHold('KeyW',80);dispatchEvent(new KeyboardEvent('keyup',{code:'KeyR'}));__mirrorUpdate(0);Germany3D.sync();Germany3D.sync();return{view:BuergeramtLevel.view,mirror:Germany3D.amtPotatoMirror}});
+  await page.waitForTimeout(40);blocked.mirror=await page.evaluate(()=>{Germany3D.sync();return Germany3D.amtPotatoMirror});
   assert(blocked.view.z+.22<=5.14+.001);assert(blocked.mirror.joints.every(([x,z])=>x===0&&z===0));
   await page.keyboard.press('e');await page.waitForFunction(()=>BuergeramtLevel.stage==='mirror');
-  await page.waitForFunction(()=>__machine.includes('Bin ich wirklich eine deutsche Kartoffel?'));
+  await page.waitForFunction(()=>window.__mirrorAudio?.currentTime>.02,null,{timeout:20000});
   await page.waitForFunction(()=>document.getElementById('english-subtitle').dataset.measurement==='pretext-0.0.9');
-  const speech=await page.evaluate(()=>({speaker:document.getElementById('amt-speaker').textContent,line:document.getElementById('amt-line').textContent,english:document.getElementById('english-subtitle').textContent,lookups:__machine.filter(line=>line==='Bin ich wirklich eine deutsche Kartoffel?').length}));
-  assert.equal(speech.speaker,'ICH');assert.equal(speech.line,'Bin ich wirklich eine deutsche Kartoffel?');assert.equal(speech.english,'Am I really a German potato?');
-  await page.keyboard.press('e');assert.equal(await page.evaluate(()=>__machine.filter(line=>line==='Bin ich wirklich eine deutsche Kartoffel?').length),1);
+  const speech=await page.evaluate(()=>{const story=BuergeramtStory,library=GermanySimulatorAudioText,path=library.recordedClip(story.playerIdentity.voiceId,story.potatoMirror.line),clip=library.recordings[path];return{speaker:document.getElementById('amt-speaker').textContent,line:document.getElementById('amt-line').textContent,english:document.getElementById('english-subtitle').textContent,expected:story.potatoMirror,voiceId:clip.voiceId,profileId:clip.profileId,sha256:clip.sha256,browserSpoke:__machine.includes(story.potatoMirror.line),plays:__mirrorPlays.length}});
+  assert.equal(speech.speaker,'ICH');assert.equal(speech.line,speech.expected.line);assert(speech.expected.english.startsWith(speech.english));assert.equal(speech.voiceId,'spieler-hans-peter-mustermann');assert.equal(speech.profileId,'b027d18a4fc748cabb133fbb14077500');assert.equal(speech.browserSpoke,false);
+  await page.keyboard.press('e');assert.equal(await page.evaluate(()=>__mirrorPlays.length),1);
   const caption=await page.locator('#english-subtitle').evaluate(el=>{const r=el.getBoundingClientRect();return{fit:el.dataset.measurement,left:r.left,right:r.right,top:r.top,bottom:r.bottom,scrollWidth:el.scrollWidth,clientWidth:el.clientWidth,scrollHeight:el.scrollHeight,clientHeight:el.clientHeight}});
   assert.notEqual(caption.fit,'unavailable');assert(caption.scrollWidth<=caption.clientWidth+1);assert(caption.scrollHeight<=caption.clientHeight+1);assert(caption.left>=0&&caption.right<=viewport.width+1&&caption.top>=0&&caption.bottom<=viewport.height+1);
   await page.screenshot({path:resolve(out,name+'-remark.png')});
-  const german=await page.evaluate(()=>{__mirrorEnglish=false;BuergeramtLevel.refreshSubtitle();const box=document.getElementById('english-subtitle');return box.hidden?document.getElementById('amt-line').textContent:box.textContent});assert.equal(german,'Bin ich wirklich eine deutsche Kartoffel?');
-  await page.evaluate(()=>{__mirrorUtterance.onend?.();__mirrorUpdate(1/60)});assert.equal(await page.evaluate(()=>BuergeramtLevel.stage),'walk-sign');
+  const german=await page.evaluate(()=>{__mirrorEnglish=false;BuergeramtLevel.refreshSubtitle();const box=document.getElementById('english-subtitle');return box.hidden?document.getElementById('amt-line').textContent:box.textContent});assert(speech.expected.line.includes(german));
+  await page.waitForFunction(()=>__mirrorAudio.ended,null,{timeout:20000});await page.evaluate(()=>__mirrorUpdate(1/60));assert.equal(await page.evaluate(()=>BuergeramtLevel.stage),'walk-sign');
   await page.evaluate(()=>{__mirrorHold('KeyA',22);__mirrorHold('ArrowRight',29);Germany3D.sync()});
   await page.screenshot({path:resolve(out,name+'-aperture-edge.png')});
   await page.evaluate(()=>{__mirrorHold('ArrowLeft',29);__mirrorHold('KeyD',22);__mirrorUpdate(0);Germany3D.sync()});

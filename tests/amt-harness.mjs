@@ -68,6 +68,8 @@ export function harness(kind='host',{voice=false,synthesis=true,phoneLanguage='d
    constructor(src){this.src=src;this.paused=false;audio.recordings.push(this)}
    play(){later(()=>this.onplaying?.(),16);return Promise.resolve()}
    pause(){this.paused=true}
+   removeAttribute(name){if(name==='src')this.src=''}
+   load(){}
    end(){this.onended?.()}
    fail(){this.onerror?.()}
   }

@@ -1,0 +1,13 @@
+{
+  "asset": "potato-skin.webp",
+  "created": "2026-10-13",
+  "source": "OpenAI imagegen, original generated seamless photorealistic potato-skin albedo",
+  "sourceSha256": "1d993e3d7801a1c71505ad21e558549f50f1157b512cbc89e5b99917ff9fd112",
+  "sha256": "ba7d1ce24459fe1a26237ea6a4d21da008faef8d85089a935c9ae1efd0a4a4e1",
+  "dimensions": [
+    768,
+    768
+  ],
+  "bytes": 178578,
+  "usage": "Shared albedo/bump map on code-native tuber and root limbs; office-only shared asset admission"
+}

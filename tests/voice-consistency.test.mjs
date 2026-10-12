@@ -9,6 +9,40 @@ import {archiveFiles,fixedRecordingsBlock,matchesProduction,runtimeBlock,spokenW
 import {harness} from './amt-harness.mjs';
 const cast=JSON.parse(readFileSync('For-AI/VOICE-CAST.json'));
 
+test('fixed runtime takes reject engine, model, reference and processing drift even with the same profile',()=>{
+ const context={};vm.runInNewContext(runtimeBlock(cast)+';this.accepts=productionClip;',context);
+ const voiceId='spieler-hans-peter-mustermann',binding=cast.productionVoices[voiceId];
+ const clip={voiceId,profileId:binding.profileId,fixedProduction:true,renderer:binding.renderer,modelRevision:binding.modelRevision,referenceSha256:binding.referenceSha256,referenceOriginalSha256:binding.originalSha256,processing:null};
+ assert(context.accepts(clip));
+ assert.equal(context.accepts({...clip,voiceId:'unallocated'}),false);
+ for(const key of ['profileId','renderer','modelRevision','referenceSha256','referenceOriginalSha256','processing']){
+  assert.equal(context.accepts({...clip,[key]:'wrong'}),false,key+' drift');
+  const incomplete={...clip};delete incomplete[key];assert.equal(context.accepts(incomplete),false,key+' absent');
+ }
+});
+
+test('compact recording exports retain complete take receipts for strict lookup',()=>{
+ const clips=JSON.parse(readFileSync('assets/voices/knick/manifest.json')).clips.slice(0,2),context={};
+ vm.runInNewContext(runtimeBlock(cast)+fixedRecordingsBlock(cast,{clips})+';this.entries=knickRecordings;this.accepts=productionClip;',context);
+ for(const clip of clips){
+  const entry=context.entries['./'+clip.file];assert(context.accepts(entry));
+  for(const field of ['voiceId','profileId','renderer','modelRevision','referenceSha256','referenceOriginalSha256','processing'])assert.equal(entry[field],clip[field]??null,field);
+  const incomplete={...entry};delete incomplete.renderer;assert.equal(context.accepts(incomplete),false);
+ }
+});
+
+test('the mirror has one exact selected-player take and no browser-voice substitution',()=>{
+ const manifest=JSON.parse(readFileSync('assets/voices/player-replies/spieler-hans-peter-mustermann-mirror-manifest.json'));
+ const context={window:{}};vm.runInNewContext(readFileSync('buergeramt-story.js','utf8'),context);const story=context.window.BuergeramtStory;
+ vm.runInNewContext(readFileSync('For-AI/AUDIO-TEXT-LIBRARY.js','utf8'),context);const catalog=context.window.GermanySimulatorAudioText;
+ assert.equal(manifest.clips.length,1);const clip=manifest.clips[0];
+ assert.equal(clip.voiceId,story.playerIdentity.voiceId);assert(matchesProduction(cast,clip));
+ assert.equal(clip.text,story.potatoMirror.line);assert.equal(clip.english,story.potatoMirror.english);
+ assert.equal(clip.rendererInputText,clip.text);assert.equal(clip.rescueParts,undefined);
+ const path=catalog.recordedClip(clip.voiceId,clip.text);assert(path?.endsWith('/player-potato-mirror.mp3'));
+ assert.equal(catalog.recordings[path].sha256,clip.sha256);assert.equal(catalog.productionVoices[clip.voiceId].fallback,'captions');
+});
+
 test('a fixed recording cannot use a script-prompted transcript as independent evidence',()=>{
  const clip=JSON.parse(readFileSync('assets/voices/knick/manifest.json')).clips[0];
  Object.assign(clip,{decode:{eosReached:true},asrScriptPrompt:null,asrLanguageId:'de',asrComputeType:'int8',asrModelSha256:'a'.repeat(64),asrCpuThreads:1});

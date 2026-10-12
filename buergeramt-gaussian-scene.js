@@ -1,7 +1,7 @@
 // Optional close-up paint interpolation. The simulation owns every action;
 // the existing render pass and two-job admission queue own preparation/update.
 // Both the encounter and ordinary action paint load this exact module identity.
-export const loadAmtSplatModule=()=>import('./buergeramt-splat.js?v=20261011-mouth-consistency');
+export const loadAmtSplatModule=()=>import('./buergeramt-splat.js?v=20261013-live-mirror');
 export const amtActorOwnsSpeech=(speech,id,actor)=>!!(speech?.active&&(speech.actor===id||speech.actor===actor.id||speech.actor===actor.lipId||actor.performance&&speech.actor==='clerk-'+actor.counter));
 export function createAmtGaussianScene({THREE,renderer,scene,actorLayer=0,queueLoad,mobile=false,reducedMotion}){
   const slots=new Map(),failedActors=new Map(),limit=mobile?1:2;
@@ -111,7 +111,8 @@ export function createAmtGaussianScene({THREE,renderer,scene,actorLayer=0,queueL
     }
   }
   return{getOwner,prepareGeneration,update,clear,
-    render(camera){owner?.update(camera,[...slots.values()].some(entry=>entry.admitted)?60:30)},
+    withReflectedView(camera,draw){return owner?owner.withReflectedView(camera,draw):draw()},
+    render(camera,viewOnly=false){owner?.update(camera,viewOnly?0:[...slots.values()].some(entry=>entry.admitted)?60:30)},
     inspect(){return{generation,limit,failure:failure||owner?.inspect().failure||'',failedActors:Object.fromEntries(failedActors),owner:owner?.inspect()??null,
       actors:[...slots.values()].map(e=>({...e.effect?.inspect(),id:e.id,manifestId:e.manifestId??e.id,loading:!e.effect&&!e.failure,admitted:e.admitted,failure:e.failure||e.effect?.inspect().failure||''}))}},
   };

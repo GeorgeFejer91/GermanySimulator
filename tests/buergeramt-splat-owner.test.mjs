@@ -1,16 +1,17 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {createAmtSplatOwner,createOmenSplat} from '../buergeramt-splat.js';
+import * as THREE from '../assets/vendor/three/0.186.0/build/three.module.min.js';
 
 function deferred(){let resolve,reject;const promise=new Promise((yes,no)=>{resolve=yes;reject=no});return{promise,resolve,reject}}
 async function fixture(actorLayer=0){
  let time=0;
  const members=new Set(),scene={add:x=>members.add(x),remove:x=>members.delete(x)};
- const jobs=[];
+ const jobs=[],cameras=[];
  class SparkRenderer{
   constructor(options){this.options=options;this.material={depthTest:options.depthTest};this.layers={set(value){this.mask=1<<value}};this.visible=false;this.activeSplats=12;this.disposals=0;this.dirty=0}
   setDirty(){this.dirty++}
-  update(){const job=deferred();jobs.push(job);return job.promise}
+  update({camera}){cameras.push(camera);const job=deferred();jobs.push(job);return job.promise}
   dispose(){this.disposals++}
  }
  class SplatMesh{
@@ -22,8 +23,31 @@ async function fixture(actorLayer=0){
  const dyno={Gsplat:'Gsplat',dynoFloat:value=>({value}),dynoVec2:value=>({value}),dynoBlock:()=>({})};
  const renderer={setTransparentSort(value){this.sort=value}};
  const owner=await createAmtSplatOwner({THREE:{},renderer,scene,actorLayer,signal:new AbortController().signal,sparkModule:{SparkRenderer,SplatMesh,dyno},nowMs:()=>time});
- return{owner,renderer,scene,members,jobs,SplatMesh,setTime:value=>time=value};
+ return{owner,renderer,scene,members,jobs,cameras,SplatMesh,setTime:value=>time=value};
 }
+
+test('secondary mirror views adapt sorting without replacing the main GPU update camera',async()=>{
+ const f=await fixture(1),main={name:'main'},mirror={name:'mirror'};f.owner.attach(new f.SplatMesh());
+ f.owner.update(mirror,0);await Promise.resolve();assert.equal(f.jobs.length,0);
+ const first=f.owner.update(main);await Promise.resolve();f.owner.update(mirror,0);assert.deepEqual(f.cameras,[main]);
+ f.jobs[0].resolve();await first;f.setTime(100);f.owner.update(mirror,0);assert.equal(f.jobs.length,1);
+ const next=f.owner.update(main);await Promise.resolve();assert.deepEqual(f.cameras,[main,main]);f.jobs[1].resolve();await next;await f.owner.dispose();
+});
+
+test('reflected native paint faces its camera, hides packed data and restores even after a draw error',async()=>{
+ const f=await fixture(1),camera=new THREE.PerspectiveCamera(69,1.6,.06,35);camera.position.set(-5.65,1.68,7.67);camera.lookAt(-5.65,1,0);
+ const paint=new THREE.Mesh();paint.visible=true;paint.userData.anchorActive=true;paint.position.set(-3,1,0);paint.rotation.y=.4;
+ f.owner.attachPaint(paint);f.owner.attach(new f.SplatMesh());f.owner.update(camera,0);
+ const quaternion=paint.quaternion.clone();assert(f.owner.spark.visible);
+ assert.throws(()=>f.owner.withReflectedView(camera,()=>{
+  f.owner.update(camera,0);assert.equal(f.owner.spark.visible,false);assert.equal(f.jobs.length,0);
+  assert(Math.abs(paint.rotation.y-Math.atan2(camera.position.x-paint.position.x,camera.position.z-paint.position.z))<1e-12);
+  throw Error('reflection draw failed');
+ }),/reflection draw failed/);
+ assert(paint.quaternion.equals(quaternion));assert(f.owner.spark.visible);
+ f.owner.update(camera,0);assert(f.owner.spark.visible);assert.equal(f.jobs.length,0);
+ f.owner.retirePaint(paint);await f.owner.dispose();
+});
 
 test('a shared Gaussian batch sorts between two paint planes without owning their depth',async()=>{
  for(const [farDepth,nearDepth,projectionScale,projectionOffset] of [[4.05,1.18,-1,-.2],[5,4,-.1,-.8]]){

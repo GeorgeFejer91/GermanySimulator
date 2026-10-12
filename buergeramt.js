@@ -435,7 +435,7 @@ function nearPotatoMirror(){return stage!=="outside"&&view.z<story.potatoMirror.
 function showPotatoMirror(){
  const scan=lastScanId,resumeStatus=status.textContent;
  setStage("mirror");setStatus("SPIEGEL · GEDANKEN");
- content(story.playerIdentity.speaker,story.potatoMirror.line,[{run:()=>{setStage(queueStage());setStatus(activated?"WARTENUMMER "+number+" · AUFRUFTAFEL":scan===lastScanId?resumeStatus:"NAME AM TELEFON EINTRAGEN")}}],null,null,null,null,{subtitle:story.potatoMirror.english});
+ content(story.playerIdentity.speaker,story.potatoMirror.line,[{run:()=>{setStage(queueStage());setStatus(activated?"WARTENUMMER "+number+" · AUFRUFTAFEL":scan===lastScanId?resumeStatus:"NAME AM TELEFON EINTRAGEN")}}],null,null,null,null,{fallback:"captions",subtitle:story.potatoMirror.english,readableMs:story.potatoMirror.line.length*55});
 }
 function showPresidentPortrait(){
  const scan=lastScanId,resumeStatus=status.textContent,rows=story.presidentPortrait.lines;

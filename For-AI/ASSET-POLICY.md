@@ -17,20 +17,31 @@ client even at high DPR. Same-role material-map swaps retain their compiled prog
 Frame distributions collected while other game tests share this host are diagnostic;
 they cannot establish a causal speedup or physical Android performance.
 
-The Bürgeramt potato mirror is code-native scenery in the existing office scene.
-`buergeramt-potato-mirror.js` adds five shared geometries (32,788 attribute/index
-bytes), twelve materials, zero textures and 77 meshes / 6,400 triangles before
-view culling. The glass, shallow silver frame and muted surrogate hall share the
-normal render pass; there is no reflection camera, target, new worker or timer.
-Five material-local planes clip only the potato to the glass opening; the
-existing camera position updates the aperture planes without a second pass.
-The existing office render consumer alone reflects the player's position/yaw
-and articulates hips/shoulders from accepted displacement. It plants the rig
-when still or re-entered, hides the surrogate from outside/after close, and
-disposes its geometry/materials on page retirement while preserving BFCache.
-No model or speech asset is fetched for this feature. Its E line uses the player
-lookup and existing fallback. The same geometry serves desktop/mobile; the
-existing drawing-buffer cap remains authoritative.
+The Bürgeramt potato mirror uses five shared geometries (186,540 attribute/index
+bytes), six materials and 19 meshes / 8,932 triangles. Its 768 × 768 generated
+potato-skin WebP is 178,578 bytes and serves both albedo and bump from one texture
+(2.25 MiB base decoded RGBA, about 3 MiB with mipmaps). The shared office admission
+queue loads it with required office art; it is not a root/title fetch. A failed
+image leaves the same shaped, indented tuber and natural brown material.
+
+The user's complete-room/persistent-self request replaces the old surrogate hall
+with one live planar camera/target, driven by the existing render owner. The
+existing room, effects and actor passes render from that camera; only the private
+potato double composites after target depth. It never appears in the real room.
+The secondary view uses existing painted actors for packed-cloud representations
+and temporarily faces native paint to its camera; main packed rendering is
+unchanged. This adds neither a second Gaussian batch nor competing GPU updates.
+The target is lazy until visible glass, bounded to a 1024px long edge desktop or
+640px on compact/coarse-pointer mobile, without supersampling. Half-float RGBA
+plus depth costs at most 12 bytes/pixel (about 7.5 MiB at 1024×640, about 2.2 MiB at
+296×640); the main drawing-buffer cap remains 1.6 MP. Capture is at most 60 Hz on
+the existing render calls, with no separate RAF, worker or timer. Exact glass
+frustum clipping prevents offscreen capture. Close, hidden-page reset and BFCache
+retire its target; page retirement disposes all owned geometry/materials/skin.
+Accepted displacement drives planted joints and the visible glass frames the
+double without a distance cutoff. The selected player's 137,900-byte mirror MP3
+loads only on E through the existing exact voice lookup. No extra model downloads,
+speech engine, asset pipeline or voice registry ship.
 
 The title's city loading set is captured once from its starting position and
 camera. Camera easing during loading or after readiness must not expand that

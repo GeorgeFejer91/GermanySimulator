@@ -15,6 +15,33 @@ spec.loader.exec_module(builder)
 
 
 class OfficeVoiceGates(unittest.TestCase):
+    def test_mirror_is_one_exact_player_request_without_sentence_rescue(self):
+        story=json.loads(subprocess.check_output(['node','-e','global.window={};require("./buergeramt-story.js");console.log(JSON.stringify(window.BuergeramtStory));'],cwd=builder.ROOT,encoding='utf-8'))
+        voice=story['playerIdentity']['voiceId']
+        profile=builder.read(builder.ROOT/'For-AI/VOICE-CAST.json')['productionVoices'][voice]['profileId']
+        job={'clipId':'player-potato-mirror','actorId':'player','voiceId':voice,'profileId':profile,
+             'text':story['potatoMirror']['line'],'english':story['potatoMirror']['english'],
+             'sourceLocator':'buergeramt-story.js potatoMirror.line'}
+        plan={'family':'office-mirror','publicAssetFamily':'assets/voices/player-replies',
+              'privateReviewFamily':'GermanySimulator potato mirror review 2026-10-13',
+              'sourceSha256':{name:builder.sha(builder.ROOT/name) for name in ('buergeramt-story.js','buergeramt.js')},'jobs':[job]}
+        try:
+            with tempfile.TemporaryDirectory() as directory:
+                file=Path(directory)/'request.json';builder.write(file,plan)
+                args=SimpleNamespace(voice_id=voice,request_file=file,ambient=False)
+                builder.configure_request(args)
+                self.assertEqual(builder.jobs(),[job])
+                self.assertEqual(builder.manifest_name(),'spieler-hans-peter-mustermann-mirror-manifest.json')
+                args.sentence_rescue=True
+                with self.assertRaises(AssertionError):builder.configure_request(args)
+                args.sentence_rescue=False
+                for key,value in [('text','Different words.'),('actorId','clerk'),('english','Different translation.')]:
+                    wrong=copy.deepcopy(plan);wrong['jobs'][0][key]=value
+                    builder.write(file,wrong);builder.configure_request(args)
+                    with self.assertRaises(AssertionError):builder.jobs()
+        finally:
+            builder.configure_request(SimpleNamespace(voice_id='amt-brunhilde-knick',request_file=None,ambient=False))
+
     def test_portrait_is_one_full_authored_synthesis_request(self):
         story=json.loads(subprocess.check_output(['node','-e','global.window={};require("./buergeramt-story.js");console.log(JSON.stringify(window.BuergeramtStory));'],cwd=builder.ROOT,encoding='utf-8'))
         voice=story['playerIdentity']['voiceId']

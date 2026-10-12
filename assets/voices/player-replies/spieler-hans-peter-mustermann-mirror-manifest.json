@@ -1,0 +1,355 @@
+{
+  "schemaVersion": 1,
+  "voiceId": "spieler-hans-peter-mustermann",
+  "profileId": "b027d18a4fc748cabb133fbb14077500",
+  "fallback": "captions",
+  "status": "same-profile technical and independent ASR audit; perceptual listening not independently verified",
+  "generatedLineCount": 1,
+  "requestedLineCount": 1,
+  "lineCount": 1,
+  "clips": [
+    {
+      "clipId": "player-potato-mirror",
+      "actorId": "player",
+      "voiceId": "spieler-hans-peter-mustermann",
+      "profileId": "b027d18a4fc748cabb133fbb14077500",
+      "text": "Hä, sehe ich wirklich so aus? Eine deutsche Kartoffel? Wow, die ganze Integration auf dem Weg hierher hat sich echt gelohnt!",
+      "english": "Huh, do I really look like that? A German potato? Wow, all that integration on the way here really paid off!",
+      "sourceLocator": "buergeramt-story.js potatoMirror.line",
+      "seed": 171000,
+      "synthesisAttempt": 2,
+      "referenceSha256": "6b6ff2c747ef11fb883fc1c9804d270c6ba34cc5614db4d132f8e6172b9f60ad",
+      "authoringHelperSha256": "de00ee31301b812dfd1267981690fbc45b6357465290a5ec26b7e8b233436032",
+      "rendererInputText": "Hä, sehe ich wirklich so aus? Eine deutsche Kartoffel? Wow, die ganze Integration auf dem Weg hierher hat sich echt gelohnt!",
+      "decode": {
+        "maxSpeechTokens": 412,
+        "attentionHooksBefore": 0,
+        "generatedSpeechTokens": 215,
+        "eosReached": true,
+        "eosKind": "analyzer-forced",
+        "eosSuppressionObservedSteps": 201,
+        "modelEosRestoredSteps": 0,
+        "alignmentFirstCompletedStep": 202,
+        "nativeAnalyzerSourceSha256": "d8430efa92aedb8e59b782c1d299fe7238570eecea9d293c0981a5ee2e82c8c7",
+        "eosPolicy": "Native analyzer unchanged; observation only",
+        "t3InferenceSeconds": 97.78,
+        "temporaryAnalyzerHooksRemoved": 6,
+        "attentionHooksAfter": 0,
+        "eosTraceSha256": "fc258de416b1024d4ac1ec9460a674d0b7c51c2b7a0f5ee3ea3e546a863e153e"
+      },
+      "rendererInputBasis": "exact authored source",
+      "requestSha256": "fe3d02fb4ba797de217275e8abd13954d2409ff8f008fc7b0195ed0415dc325e",
+      "referenceOriginalSha256": "4f4b181750c65430c68d20d742b02529f5e5db6650cb57171fe2e52ea8ee2dbf",
+      "profileJsonSha256": "7d5ce6ff22d3da1a0a062cdb4a521bdf744dccd621b64a75a58a3fd0a255abe6",
+      "rawSha256": "98255a521b6c31150dcdfc8f2243af9a380aac9558d0cb141f146559b4f7bc51",
+      "renderer": "ResembleAI/Chatterbox Multilingual V2 0.1.7",
+      "modelRevision": "5bb1f6ee58e50c3b8d408bc82a6d3740c2db6e18",
+      "modelLicense": "MIT",
+      "referenceLicense": "CC0-1.0 (Thorsten-Voice Dataset 2021.06 emotional)",
+      "durationSeconds": 8.56,
+      "renderSeconds": 142.49,
+      "synthesis": {
+        "exaggeration": 0.65,
+        "exaggerationReason": "User-requested surprised mirror reaction",
+        "temperature": 0.65,
+        "repetitionPenalty": 3,
+        "cfgWeight": 0.6,
+        "languageId": "de",
+        "device": "cpu",
+        "precision": "fp32",
+        "t3WeightPrecision": "float32",
+        "conditioningPrecision": "float32",
+        "autocastPrecision": null,
+        "conditioningCached": true,
+        "referenceReconditionedForProfile": "b027d18a4fc748cabb133fbb14077500",
+        "referenceConditioningVerifiedFloat32": true,
+        "modelSessionReused": false,
+        "cpuThreads": 4,
+        "inferenceMode": true
+      },
+      "listening": "not performed",
+      "status": "eligible exact-text recording; human listening pending",
+      "processing": null,
+      "processingSha256": null,
+      "normalization": {
+        "targetLufs": -18,
+        "targetTruePeakDbtp": -1.5,
+        "filter": "loudnorm=I=-17.47:TP=-1.8:LRA=11:linear=false",
+        "iterations": 2
+      },
+      "integratedLufs": -18.18,
+      "truePeakDbtp": -2.22,
+      "asr": "Hä, sehe ich wirklich so aus? Eine deutsche Kartoffel? Wow, die ganze Integration auf dem Weg hierher hat sich echt gelohnt.",
+      "asrWordExact": true,
+      "asrLiteralWordExact": true,
+      "asrNormalization": "case/punctuation, German numeric and A38 spoken equivalents, guarded full-hour and date-ordinal equivalents, section sign/Paragraf orthography, German compound spacing",
+      "asrModel": "independent faster-whisper, cached local model, cpu int8 (effective int8_float32), no script prompt",
+      "asrCpuThreads": 1,
+      "asrDevice": "cpu",
+      "asrEffectiveComputeType": "int8_float32",
+      "asrLanguageId": "de",
+      "asrComputeType": "int8",
+      "asrScriptPrompt": null,
+      "asrBeamSize": 1,
+      "asrReadings": [
+        {
+          "beamSize": 1,
+          "transcript": "Hä, sehe ich wirklich so aus? Eine deutsche Kartoffel? Wow, die ganze Integration auf dem Weg hierher hat sich echt gelohnt.",
+          "transcribeSeconds": 17.92,
+          "words": [
+            {
+              "word": " Hä,",
+              "start": 0,
+              "end": 0.24
+            },
+            {
+              "word": " sehe",
+              "start": 0.5,
+              "end": 0.74
+            },
+            {
+              "word": " ich",
+              "start": 0.74,
+              "end": 0.94
+            },
+            {
+              "word": " wirklich",
+              "start": 0.94,
+              "end": 1.38
+            },
+            {
+              "word": " so",
+              "start": 1.38,
+              "end": 1.64
+            },
+            {
+              "word": " aus?",
+              "start": 1.64,
+              "end": 2.08
+            },
+            {
+              "word": " Eine",
+              "start": 2.26,
+              "end": 2.52
+            },
+            {
+              "word": " deutsche",
+              "start": 2.52,
+              "end": 2.86
+            },
+            {
+              "word": " Kartoffel?",
+              "start": 2.86,
+              "end": 3.44
+            },
+            {
+              "word": " Wow,",
+              "start": 3.8,
+              "end": 4.32
+            },
+            {
+              "word": " die",
+              "start": 4.68,
+              "end": 4.84
+            },
+            {
+              "word": " ganze",
+              "start": 4.84,
+              "end": 5.18
+            },
+            {
+              "word": " Integration",
+              "start": 5.18,
+              "end": 5.78
+            },
+            {
+              "word": " auf",
+              "start": 5.78,
+              "end": 6.14
+            },
+            {
+              "word": " dem",
+              "start": 6.14,
+              "end": 6.28
+            },
+            {
+              "word": " Weg",
+              "start": 6.28,
+              "end": 6.52
+            },
+            {
+              "word": " hierher",
+              "start": 6.52,
+              "end": 7
+            },
+            {
+              "word": " hat",
+              "start": 7,
+              "end": 7.24
+            },
+            {
+              "word": " sich",
+              "start": 7.24,
+              "end": 7.42
+            },
+            {
+              "word": " echt",
+              "start": 7.42,
+              "end": 7.68
+            },
+            {
+              "word": " gelohnt.",
+              "start": 7.68,
+              "end": 8.28
+            }
+          ]
+        }
+      ],
+      "asrModelSha256": "e76620f83d5f5b69efd3d87e3dc180c1bd21df9fbebacfd4335e5e1efcc018da",
+      "asrModelDirectoryName": "voice-asr-model",
+      "wordCues": [
+        {
+          "at": 0,
+          "charIndex": 0,
+          "word": "Hä",
+          "end": 0.24
+        },
+        {
+          "at": 0.5,
+          "charIndex": 4,
+          "word": "sehe",
+          "end": 0.74
+        },
+        {
+          "at": 0.74,
+          "charIndex": 9,
+          "word": "ich",
+          "end": 0.94
+        },
+        {
+          "at": 0.94,
+          "charIndex": 13,
+          "word": "wirklich",
+          "end": 1.38
+        },
+        {
+          "at": 1.38,
+          "charIndex": 22,
+          "word": "so",
+          "end": 1.64
+        },
+        {
+          "at": 1.64,
+          "charIndex": 25,
+          "word": "aus",
+          "end": 2.08
+        },
+        {
+          "at": 2.26,
+          "charIndex": 30,
+          "word": "Eine",
+          "end": 2.52
+        },
+        {
+          "at": 2.52,
+          "charIndex": 35,
+          "word": "deutsche",
+          "end": 2.86
+        },
+        {
+          "at": 2.86,
+          "charIndex": 44,
+          "word": "Kartoffel",
+          "end": 3.44
+        },
+        {
+          "at": 3.8,
+          "charIndex": 55,
+          "word": "Wow",
+          "end": 4.32
+        },
+        {
+          "at": 4.68,
+          "charIndex": 60,
+          "word": "die",
+          "end": 4.84
+        },
+        {
+          "at": 4.84,
+          "charIndex": 64,
+          "word": "ganze",
+          "end": 5.18
+        },
+        {
+          "at": 5.18,
+          "charIndex": 70,
+          "word": "Integration",
+          "end": 5.78
+        },
+        {
+          "at": 5.78,
+          "charIndex": 82,
+          "word": "auf",
+          "end": 6.14
+        },
+        {
+          "at": 6.14,
+          "charIndex": 86,
+          "word": "dem",
+          "end": 6.28
+        },
+        {
+          "at": 6.28,
+          "charIndex": 90,
+          "word": "Weg",
+          "end": 6.52
+        },
+        {
+          "at": 6.52,
+          "charIndex": 94,
+          "word": "hierher",
+          "end": 7
+        },
+        {
+          "at": 7,
+          "charIndex": 102,
+          "word": "hat",
+          "end": 7.24
+        },
+        {
+          "at": 7.24,
+          "charIndex": 106,
+          "word": "sich",
+          "end": 7.42
+        },
+        {
+          "at": 7.42,
+          "charIndex": 111,
+          "word": "echt",
+          "end": 7.68
+        },
+        {
+          "at": 7.68,
+          "charIndex": 116,
+          "word": "gelohnt",
+          "end": 8.28
+        }
+      ],
+      "sha256": "35374b42dd8b0d0cc59674ce5a75189b9d2b90854b8f6e7a0148c04203ca79f0",
+      "bytes": 137900,
+      "sampleRateHz": 48000,
+      "channels": 1,
+      "bitrateBitsPerSecond": 128000,
+      "file": "assets/voices/player-replies/player-potato-mirror.mp3",
+      "approval": {
+        "status": "user-approved",
+        "date": "2026-10-13",
+        "instruction": "The user requested this surprised mirror monologue in the allocated first-person voice as one continuous clip.",
+        "scope": "Exact requested mirror line with selected Hans-Peter Mustermann player profile",
+        "listeningVerified": false
+      }
+    }
+  ],
+  "heldPrivate": [],
+  "approvedExistingReuse": []
+}

@@ -9,7 +9,7 @@ const clerks=Object.freeze({
 window.BuergeramtStory=Object.freeze({
  queueCall:Object.freeze({line:"Nächste bitte!",english:"Next, please!",voiceId:clerkIdentity.voiceId,speaker:"FRAU KNICK",actorId:"clerk-3"}),
  playerIdentity:{speaker:"ICH",fullName:"Hans-Peter Mustermann",voiceId:"spieler-hans-peter-mustermann"},
- potatoMirror:{x:-5.65,z:5.36,width:2.4,height:2.9,depth:3.12,line:"Bin ich wirklich eine deutsche Kartoffel?",english:"Am I really a German potato?"},
+ potatoMirror:{x:-5.65,z:5.36,width:2.4,height:2.9,line:"Hä, sehe ich wirklich so aus? Eine deutsche Kartoffel? Wow, die ganze Integration auf dem Weg hierher hat sich echt gelohnt!",english:"Huh, do I really look like that? A German potato? Wow, all that integration on the way here really paid off!"},
  presidentPortrait:{
   name:"Frank-Walter Steinmeier",title:"BUNDESPRÄSIDENT",x:3.4,z:5.43,
   lines:[

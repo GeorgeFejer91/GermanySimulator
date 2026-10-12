@@ -1,5 +1,19 @@
 # Speech catalog and subtitle authority
 
+The first-person mirror monologue is `player-potato-mirror`, one continuous
+Hans-Peter Mustermann take on `spieler-hans-peter-mustermann` and selected native
+profile `b027d18a4fc748cabb133fbb14077500`. Its separate mirror manifest supplements
+the unchanged 107 answer labels and continuous portrait recording through the
+existing player-reply lookup. Player fallback is now exact captions, never a
+different browser voice. Fixed recording entries carry and verify the selected
+profile, engine/revision, both reference hashes and processing as well as exact
+source text. The [allocation protocol](./VOICE-SYNTH-PROTOCOL.md#allocating-and-using-voice-ids-2026-10-13)
+owns future voice-ID assignment and generation; the cast remains the sole registry.
+The generated lookup encodes identical take receipts once and expands their full
+fields into each entry at initialization. These receipts come from the reviewed
+takes, independently of the current cast table, so compact delivery preserves
+engine/reference/processing drift checks.
+
 For the staged Bürgeramt telephone, police transcripts appear only in the
 desktop game's in-scene subtitle rail on phone start/done receipts. Neither the
 paired phone nor a smartphone game browser displays telephone dialogue, even
