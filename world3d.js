@@ -1266,7 +1266,8 @@ function showRendererFailure(error){
     mesh.position.set(x,y,z);mesh.rotation.y=turn;mesh.visible=false;
     amtScene.add(mesh);amtPaintedProps.push(mesh);
   }
-  amtPaintedProp(0,.95,2.5,-6.8,1.28,-6.45);
+  // Both floor piles sit beyond the archive shelves' front ends (z=-5.74).
+  amtPaintedProp(0,.95,2.5,-6.8,1.28,-5.55);
   amtPaintedProp(1,1.05,2.75,6.8,1.4,-5.55);
   amtPaintedProp(2,.65,1.45,-6.65,2.58,-10.27);
   amtPaintedProp(3,1.15,2.85,7.55,1.55,.2,-Math.PI/2);
