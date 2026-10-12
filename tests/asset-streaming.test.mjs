@@ -57,6 +57,20 @@ test("one source URL serves separately fitted instances; failed sources remain f
   assert.ok(f.context.cityAssetSlots.filter(slot=>slot.file==="broken").every(slot=>slot.fallback.visible&&!slot.model));
 });
 
+test("a settled title neighborhood stays bounded until Start then admits newly visible assets",async()=>{
+ const f=fixture(),required=city(f,"required",1),extra=city(f,"newly-visible",90);
+ f.context.bridge.preparingStart=true;f.context.startupModelJobs.add(required.job);f.context.startupModelsCaptured=true;
+ f.context.prepareNearbyAssets();await flush();
+ f.context.isCityAssetVisible=job=>job===extra.job;f.setTime(100);f.context.prepareNearbyAssets();await flush();
+ assert.equal(f.requests.length,1,"startup camera drift must not expand the selected loading set");
+ f.pending[0].resolve(source());await flush();
+ assert.equal(f.context.startupModelsReady(),true);
+ f.context.isCityAssetVisible=job=>job===extra.job;f.setTime(500);f.context.prepareNearbyAssets();await flush();
+ assert.equal(f.requests.length,1);assert.equal(f.context.startupModelJobs.size,1);assert.equal(extra.fallback.visible,true);
+ f.context.bridge.preparingStart=false;f.setTime(1000);f.context.prepareNearbyAssets();await flush();
+ assert.equal(f.requests.length,2);f.pending[1].resolve(source());await flush();assert.equal(extra.fallback.visible,false);
+});
+
 test("required startup assets still finish after a resize moves them outside the camera",async()=>{
   const f=fixture(),required=city(f,"visible-before-resize",90),unneeded=city(f,"never-visible",100);
   f.context.isCityAssetVisible=job=>job===required.job;

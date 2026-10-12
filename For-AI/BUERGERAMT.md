@@ -19,6 +19,22 @@ to the current waiting/QR/counter state. Missing or disabled player audio keeps
 the exact readable captions. Phone ticket receipts retain their authority
 throughout; the portrait awards neither a ticket nor A38.
 
+The opposite, left entrance-wall corner has a tall silver-framed mirror at
+`(-5.65, 5.36)`, with reflective glass and a muted surrogate waiting hall behind
+it. A code-native, jointed 3D potato takes the player's reflected position and
+heading across the glass plane. Shoulders and hips follow actual ground travel;
+blocked or stationary feet stay planted. The physical glass/frame stays solid;
+the surrogate alone is clipped to camera rays through the glass aperture,
+including close rotated bodies that would otherwise project through the wall.
+The reflected room and potato are visual surrogates, never extra actors or solids.
+Facing it nearby offers `E · SPIEGEL BETRACHTEN` through keyboard or the existing
+touch interaction. **ICH** remarks exactly “Bin ich wirklich eine deutsche
+Kartoffel?” through the selected player speech lookup and its existing browser
+fallback, with “Am I really a German potato?” for English subtitles. This short
+optional encounter resumes the current QR/wait/counter stage automatically,
+retains phone ticket authority, and awards nothing. It adds no audio download,
+reflection camera, extra render pass or independent animation timer.
+
 Character voices follow [`VOICE-SYNTH-PROTOCOL.md`](./VOICE-SYNTH-PROTOCOL.md#fixed-voices-and-the-agent-workflow-2026-10-11). The four Schalter positions all represent **Brunhilde Knick**, with the single character/voice ID `amt-brunhilde-knick` and selected profile `b080c7d95ecd418fb428282461d7fbe7`. They are one person, as explicitly clarified by the user on 2026-10-12. The names Frau Frist, Frau Durchschlag and Frau Zuständig are retired. Counter refusals, registration, warnings, the police argument and all three staff background remarks use Knick's established recordings and tone. Render slots `clerk-desk-1` through `clerk-desk-4` remain separate so only the speaking counter animates. Eight walkers and three waiting patrons retain their own identities; they are not additional counter clerks. Missing, failed or dynamic Knick speech retains exact captions without a machine voice. The three superseded clerk profiles and ambient takes remain privately preserved, outside active game lookup. Ambient speech waits for foreground speech.
 
 Recorded office MP3 requests include the current encoded SHA-256 in their URL,

@@ -415,6 +415,12 @@ function showCharacter(actor){
  }}],null,null,null,{id:actor.id,tone:spoken.tone,valence:spoken.valence});
 }
 function nearPresidentPortrait(){return stage!=="outside"&&distanceTo(story.presidentPortrait)<2.9}
+function nearPotatoMirror(){return stage!=="outside"&&view.z<story.potatoMirror.z&&Math.abs(view.x-story.potatoMirror.x)<story.potatoMirror.width/2&&Number.isFinite(facingInteractionScore(story.potatoMirror,2.6))}
+function showPotatoMirror(){
+ const scan=lastScanId,resumeStatus=status.textContent;
+ setStage("mirror");setStatus("SPIEGEL · GEDANKEN");
+ content(story.playerIdentity.speaker,story.potatoMirror.line,[{run:()=>{setStage(queueStage());setStatus(activated?"WARTENUMMER "+number+" · AUFRUFTAFEL":scan===lastScanId?resumeStatus:"NAME AM TELEFON EINTRAGEN")}}],null,null,null,null,{subtitle:story.potatoMirror.english});
+}
 function showPresidentPortrait(){
  const scan=lastScanId,resumeStatus=status.textContent,rows=story.presidentPortrait.lines;
  const text=rows.map(row=>row.line).join(" "),subtitle=rows.map(row=>row.english).join(" "),parts=[0,2].map(start=>rows.slice(start,start+2).map(row=>row.line).join(" "));
@@ -516,6 +522,7 @@ function nearbyTarget(){if(stage==="outside")return door;if(stage==="walk-sign")
 const officeSeats=[[-5.9,1.7],[-2.1,1.7],[1.7,1.7],[5.5,1.7],[-5.9,-1.1],[-2.1,-1.1],[1.7,-1.1],[5.5,-1.1]];
 const officeCharacterRadius=.34,officePlayerRadius=.22;
 const officeFurniture=[
+ {x:story.potatoMirror.x,z:story.potatoMirror.z,w:story.potatoMirror.width+.1,d:.44},
  {x:story.presidentPortrait.x,z:story.presidentPortrait.z,w:1.74,d:.32},
  {x:0,z:-9.03,w:14.7,d:1.21},{x:0,z:-4.22,w:2.8,d:.16},
  {x:-4.65,z:.8,w:1.5,d:.58},
@@ -739,6 +746,7 @@ function update(dt){
  const portraitPitch=stage==="portrait"?Math.atan2(.54,distanceTo(story.presidentPortrait)):0;
  view.pitch=(view.pitch||0)+(portraitPitch-(view.pitch||0))*(1-Math.exp(-4*elapsed));
  if(omen.phase)return;
+ if(stage==="mirror")return;
  if(stage==="portrait"){
   const target=Math.atan2(story.presidentPortrait.x-view.x,view.z-story.presidentPortrait.z),turn=Math.atan2(Math.sin(target-view.yaw),Math.cos(target-view.yaw));view.yaw+=turn*(1-Math.exp(-4*elapsed));return;
  }
@@ -759,11 +767,11 @@ function update(dt){
  if(held.has("ArrowRight"))view.yaw+=elapsed*1.8;
  const f=(held.has("KeyW")||held.has("ArrowUp")?1:0)-(held.has("KeyS")||held.has("ArrowDown")?1:0),s=(held.has("KeyD")?1:0)-(held.has("KeyA")?1:0);
  if(f||s){const length=Math.hypot(f,s),speed=held.has("KeyR")?7.2:held.has("ShiftLeft")?5.8:3.6,dx=(Math.sin(view.yaw)*f+Math.cos(view.yaw)*s)/length*speed*elapsed,dz=(-Math.cos(view.yaw)*f+Math.sin(view.yaw)*s)/length*speed*elapsed;const steps=Math.max(1,Math.ceil(Math.hypot(dx,dz)/.1));for(let i=0;i<steps;i++){const stepX=view.x,stepZ=view.z,x=Math.max(-7.45,Math.min(7.45,view.x+dx/steps)),z=Math.max(-10.05,Math.min(8.45,view.z+dz/steps));const crossing=view.z>=door.z&&z<door.z||view.z<door.z&&z>=door.z;if(crossing&&Math.abs(x)>1.3)break;if(!officeBlocked(x,view.z))view.x=x;if(!officeBlocked(view.x,z)){view.z=z;if(crossing&&stage==="outside"&&z<door.z){setStage(activated?"waiting":"walk-sign",true);setStatus(activated?"WARTENUMMER "+number+" · AUFRUF ABWARTEN":"QR-CODE MIT DEM TELEFON SCANNEN")}}view.walkedDistance+=Math.hypot(view.x-stepX,view.z-stepZ);}}
- const {desk,actor}=nearbyPerson(),portrait=!desk&&nearPresidentPortrait(),near=distanceTo(nearbyTarget())<1.9&&(stage!=="outside"||Math.abs(view.x)<1.3);
- const nearbyText=desk?"E · SCHALTER "+desk+" ANSPRECHEN":portrait?"E · BUNDESPRÄSIDENT BETRACHTEN":actor?"E · "+(story.characters[actor.id]||story.patrons[actor.id]).speaker+" ANSPRECHEN":near?(stage==="outside"?"DURCH DEN EINGANG GEHEN":stage==="walk-sign"?"QR-CODE MIT DEM TELEFON SCANNEN":"AUFRUFTAFEL"):(stage==="outside"?"ZUR EINGANGSTÜR":stage==="walk-sign"?"QR-SCHILD UNTER DER ANZEIGE":"AUFRUFTAFEL");
+ const {desk,actor}=nearbyPerson(),mirror=!desk&&nearPotatoMirror(),portrait=!desk&&nearPresidentPortrait(),near=distanceTo(nearbyTarget())<1.9&&(stage!=="outside"||Math.abs(view.x)<1.3);
+ const nearbyText=desk?"E · SCHALTER "+desk+" ANSPRECHEN":mirror?"E · SPIEGEL BETRACHTEN":portrait?"E · BUNDESPRÄSIDENT BETRACHTEN":actor?"E · "+(story.characters[actor.id]||story.patrons[actor.id]).speaker+" ANSPRECHEN":near?(stage==="outside"?"DURCH DEN EINGANG GEHEN":stage==="walk-sign"?"QR-CODE MIT DEM TELEFON SCANNEN":"AUFRUFTAFEL"):(stage==="outside"?"ZUR EINGANGSTÜR":stage==="walk-sign"?"QR-SCHILD UNTER DER ANZEIGE":"AUFRUFTAFEL");
  if(nearby.textContent!==nearbyText)nearby.textContent=nearbyText;
 }
-function interact(){if(!walking()||omen.phase)return;if(!document.fullscreenElement)requestFullscreen();const {desk,actor}=nearbyPerson();if(desk){if(activated&&registeredName&&deadline>0&&desk===assignedCounter&&counterCalls[desk-1]===number){interactingCounter=desk;showClerk()}else refuseCounter(desk);return}if(nearPresidentPortrait()){showPresidentPortrait();return}if(actor){showCharacter(actor);return}const near=distanceTo(nearbyTarget())<1.9;if(!near||stage==="outside"&&Math.abs(view.x)>=1.3)return;
+function interact(){if(!walking()||omen.phase)return;if(!document.fullscreenElement)requestFullscreen();const {desk,actor}=nearbyPerson();if(desk){if(activated&&registeredName&&deadline>0&&desk===assignedCounter&&counterCalls[desk-1]===number){interactingCounter=desk;showClerk()}else refuseCounter(desk);return}if(nearPotatoMirror()){showPotatoMirror();return}if(nearPresidentPortrait()){showPresidentPortrait();return}if(actor){showCharacter(actor);return}const near=distanceTo(nearbyTarget())<1.9;if(!near||stage==="outside"&&Math.abs(view.x)>=1.3)return;
  if(stage==="outside"){view.positionGeneration++;view.z=4.8;setStage(activated?"waiting":"walk-sign");setStatus(activated?"WARTENUMMER "+number+" · AUFRUF ABWARTEN":"QR-CODE MIT DEM TELEFON SCANNEN");return}
  if(stage==="walk-sign")return;
 }
@@ -790,7 +798,7 @@ function beginLink(){
    if(callArmTimer!==null)clearTimer(callArmTimer);callArmTimer=null;stopCallSignal();
    lastScanId=m.id;number="";assignedCounter=0;ticketQueueIndex=-1;registeredName="";activated=false;deadline=0;callPending=false;callTriggered=false;callCommitted=false;callOutcome="";clerkIndex=0;resetRegistration();
    if(omen.phase)omen.resume="walk-sign";
-   else if(stage!=="outside"&&stage!=="character"&&stage!=="portrait")setStage("walk-sign");
+   else if(stage!=="outside"&&stage!=="character"&&stage!=="portrait"&&stage!=="mirror")setStage("walk-sign");
    setStatus("NAME AM TELEFON EINTRAGEN");
   }else if(m.type==="register"&&m.id===lastScanId&&lastScanId&&typeof m.name==="string"&&m.name.trim().length>=2&&m.name.length<=80){
    if(number){currentLink.send("ticket",{number,counter:assignedCounter});return}
@@ -807,7 +815,7 @@ function beginLink(){
    }
    const next=deadline>0?"walk-counter":"waiting";
    if(omen.phase)omen.resume=next;
-   else if(stage!=="outside"&&stage!=="character"&&stage!=="portrait"&&stage!=="early")setStage(next);
+   else if(stage!=="outside"&&stage!=="character"&&stage!=="portrait"&&stage!=="mirror"&&stage!=="early")setStage(next);
    setStatus("WARTENUMMER "+number+" · AUFRUFTAFEL");
   }
   else if(m.type==="phone-hidden")forfeit("TELEFON NICHT SICHTBAR");

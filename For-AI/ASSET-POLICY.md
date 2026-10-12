@@ -2,6 +2,28 @@
 
 ## Decision
 
+The Bürgeramt potato mirror is code-native scenery in the existing office scene.
+`buergeramt-potato-mirror.js` adds five shared geometries (32,788 attribute/index
+bytes), twelve materials, zero textures and 77 meshes / 6,400 triangles before
+view culling. The glass, shallow silver frame and muted surrogate hall share the
+normal render pass; there is no reflection camera, target, new worker or timer.
+Five material-local planes clip only the potato to the glass opening; the
+existing camera position updates the aperture planes without a second pass.
+The existing office render consumer alone reflects the player's position/yaw
+and articulates hips/shoulders from accepted displacement. It plants the rig
+when still or re-entered, hides the surrogate from outside/after close, and
+disposes its geometry/materials on page retirement while preserving BFCache.
+No model or speech asset is fetched for this feature. Its E line uses the player
+lookup and existing fallback. The same geometry serves desktop/mobile; the
+existing drawing-buffer cap remains authoritative.
+
+The title's city loading set is captured once from its starting position and
+camera. Camera easing during loading or after readiness must not expand that
+set before Start; newly visible sources retain their existing geometry fallback.
+Start releases normal distance/visibility admission through the same two-job
+queue. `tests/asset-streaming.test.mjs` covers both pending and settled title
+states, subsequent installation, and unchanged required-source readiness.
+
 Use one asset authority at root `assets/`, with fidelity selected by the client. Desktop may use high-resolution period artwork where it is visibly valuable; mobile must prefer minimal vector or otherwise lightweight variants.
 
 The Bürgeramt interior uses code-native geometry and signs through the existing Three.js renderer. Its near characters use original caricatured painted source strips under `assets/sprite-sources/buergeramt/`; `tools/build-amt-sprites.py` produces separate 64-frame, 24-fps desktop/mobile WebP atlases under `assets/buergeramt/characters/`. No Bürgeramt GLB is a runtime input. Generated source provenance and atlas hashes live beside the sources. The rejected towel-tourist preview GLBs remain preview-only and are not runtime inputs. The phone companion shares the root static site and adds no game media. The locally pinned QR generator under `assets/vendor/qrcode/` and VDO.Ninja SDK under `assets/vendor/vdoninja/1.5.5/` are runtime code with licenses beside them. ChatDev's clone, session reports, source recordings, Voice Cloner profiles, and trial renders stay outside `assets/` and the deployable game; only reviewed, licensed, normalized exact-text speech clips may enter the existing voice catalog and `assets/voices/`.
