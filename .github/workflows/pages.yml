@@ -32,7 +32,7 @@ jobs:
       - name: Check office queue call audio
         run: node --test tests/buergeramt-queue-audio.test.mjs
       - name: Check office causality and re-entry
-        run: node --test tests/buergeramt-causality.test.mjs
+        run: node --test tests/buergeramt-causality.test.mjs tests/buergeramt-facing-interaction.test.mjs
       - name: Check president portrait interaction
         run: node --test tests/buergeramt-president-portrait.test.mjs
       - name: Check potato mirror reflection and interaction

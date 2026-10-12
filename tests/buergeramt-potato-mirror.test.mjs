@@ -54,9 +54,9 @@ test('surrogate clipping agrees with independent camera rays through the mirror 
 test('E needs front-side proximity and facing; exact player remark completes once without a reward',()=>{
  const h=harness('host',{voice:true,cinematics:false}),lookups=[];
  h.window.GermanySimulatorAudioText.recordedClip=(voiceId,text)=>{lookups.push({voiceId,text});return null};
- h.key('KeyE');h.key('KeyE','keyup');assert.notEqual(h.level.stage,'mirror');
+ h.key('KeyE');h.key('KeyE','keyup');assert.notEqual(h.level.stage,'mirror');h.level.replay(h.config);lookups.length=0;
  approach(h);assert.equal(h.node('amt-nearby').textContent,'E · SPIEGEL BETRACHTEN');
- h.faceToward(-5.65,0);h.level.interact();assert.notEqual(h.level.stage,'mirror');
+ h.faceToward(-5.65,0);h.level.interact();assert.notEqual(h.level.stage,'mirror');h.level.replay(h.config);lookups.length=0;approach(h);
  h.faceToward(-5.65,5.36);h.level.interact();assert.equal(h.level.stage,'mirror');
  assert.equal(h.node('amt-speaker').textContent,'ICH');assert.equal(h.node('amt-line').textContent,'Bin ich wirklich eine deutsche Kartoffel?');
  h.key('KeyE');h.key('KeyE','keyup');h.tick(20);assert.equal(lookups.length,1);

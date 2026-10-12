@@ -2,7 +2,7 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import {harness} from './amt-harness.mjs';
 
-function approach(h){h.moveTo(0,4.8);h.moveTo(3.4,4.8);h.moveTo(3.4,2.8);h.level.update(0)}
+function approach(h){h.moveTo(0,4.8);h.moveTo(3.4,4.8);h.moveTo(3.4,2.8);h.faceToward(3.4,5.43);h.level.update(0)}
 
 test('one native recording owns completion, hidden pause and cancellation of the full monologue',()=>{
  const h=harness('host',{voice:true,cinematics:false}),media=[];
@@ -30,7 +30,7 @@ test('one native recording owns completion, hidden pause and cancellation of the
 test('the portrait requires a nearby E and its inner monologue returns without a mission reward',()=>{
  const h=harness('host',{voice:true,cinematics:false}),lookups=[];
  h.window.GermanySimulatorAudioText.recordedClip=(voiceId,text)=>{lookups.push({voiceId,text});return null};
- h.key('KeyE');h.key('KeyE','keyup');assert.notEqual(h.level.stage,'portrait');
+ h.key('KeyE');h.key('KeyE','keyup');assert.notEqual(h.level.stage,'portrait');h.level.replay(h.config);lookups.length=0;
  approach(h);assert.equal(h.node('amt-nearby').textContent,'E · BUNDESPRÄSIDENT BETRACHTEN');
  assert.notEqual(h.level.stage,'portrait','approach alone is silent');
  h.key('KeyE');h.key('KeyE','keyup');assert.equal(h.level.stage,'portrait');
@@ -64,9 +64,9 @@ test('closing cancels the monologue and stale continuations cannot reopen it',()
 
 test('the projecting frame keeps player bodies separated at ordinary and delayed frame steps',()=>{
  for(const dt of [1/60,1/30,.1]){
-  const h=harness('host',{cinematics:false});approach(h);h.key('KeyS');
+  const h=harness('host',{cinematics:false});approach(h);h.key('KeyW');
   for(let i=0;i<180;i++){h.level.update(dt);assert(h.level.view.z+.22<=5.27+.001,'body cannot pass into the projecting gold frame')}
-  h.key('KeyS','keyup');assert(h.level.view.z>4.96,'player can approach the wall mount');
+  h.key('KeyW','keyup');assert(h.level.view.z>4.96,'player can approach the wall mount');
  }
 });
 

@@ -26,8 +26,8 @@ test('re-entry starts a fresh ambient dialogue bag',()=>{
 test('rescanning during optional encounters resumes current admission rather than the obsolete ticket',()=>{
  for(const kind of ['portrait','character']){
   const h=harness();h.wait();
-  if(kind==='portrait'){h.moveTo(0,4.8);h.moveTo(3.4,4.8);h.moveTo(3.4,2.8)}
-  else h.moveTo(3.4,1.2);{const actor=h.level.characters.find(a=>a.id==='formularsammler');h.faceToward(actor.x,actor.z)}
+  if(kind==='portrait'){h.moveTo(0,4.8);h.moveTo(3.4,4.8);h.moveTo(3.4,2.8);h.faceToward(3.4,5.43)}
+  else {h.moveTo(3.4,1.2);const actor=h.level.characters.find(a=>a.id==='formularsammler');h.faceToward(actor.x,actor.z)}
   h.level.interact();assert.equal(h.level.stage,kind);
   h.links[0].message({type:'scan',id:'b'.repeat(24)});
   for(let i=0;i<2000&&h.level.stage===kind;i++)h.elapse(.05);
