@@ -1,0 +1,41 @@
+{
+  "version": "0.186.0",
+  "license": "MIT",
+  "files": [
+    {
+      "file": "build/three.module.min.js",
+      "bytes": 392831,
+      "sha256": "6a238d5d0c711f1f008488aff06a2ab9ab478959842044d243e89c316f6a5fc2"
+    },
+    {
+      "file": "build/three.core.js",
+      "bytes": 415816,
+      "sha256": "f3556fb8c9aff8fc6f8e090b918ae5d4e6b45152afb93815002d3319d875cdec"
+    },
+    {
+      "file": "examples/jsm/loaders/GLTFLoader.js",
+      "bytes": 117570,
+      "sha256": "131c0f78c01d19368ae495caa65b3adaa10487810a36a05bb5901b769a35ac16"
+    },
+    {
+      "file": "examples/jsm/utils/BufferGeometryUtils.js",
+      "bytes": 37712,
+      "sha256": "9fb63427ce6641fa14fd0baff9cc4d1b5f9c3d85fd084bf2e90e803c44ec1797"
+    },
+    {
+      "file": "examples/jsm/utils/SkeletonUtils.js",
+      "bytes": 11535,
+      "sha256": "b1632a703206c3d830de9fcbe515696770d04b71a15ee6b50afa6d2c3298c86f"
+    },
+    {
+      "file": "LICENSE",
+      "bytes": 1081,
+      "sha256": "8b378ebe60e2fe500158cb0ac71cb5e8b7d92953c2abcc63a0eb90499653b5bc"
+    },
+    {
+      "file": "examples/jsm/postprocessing/Pass.js",
+      "bytes": 4218,
+      "sha256": "444b409c235ead986893c472e720da1b779a56985c7d10b279c7944b52bd61c5"
+    }
+  ]
+}

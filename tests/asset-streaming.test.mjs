@@ -57,6 +57,19 @@ test("one source URL serves separately fitted instances; failed sources remain f
   assert.ok(f.context.cityAssetSlots.filter(slot=>slot.file==="broken").every(slot=>slot.fallback.visible&&!slot.model));
 });
 
+test("required startup assets still finish after a resize moves them outside the camera",async()=>{
+  const f=fixture(),required=city(f,"visible-before-resize",90),unneeded=city(f,"never-visible",100);
+  f.context.isCityAssetVisible=job=>job===required.job;
+  f.context.captureStartupAssets();f.context.startupModelsCaptured=true;
+  assert.ok(f.context.startupModelJobs.has(required.job));
+  // The newly narrow view no longer sees this required source, and it is far
+  // outside the distance lead. Readiness must not strand it pending forever.
+  f.context.isCityAssetVisible=()=>false;f.context.prepareNearbyAssets();await flush();
+  assert.deepEqual(f.requests,["./assets/models/city-kit/visible-before-resize.glb"]);
+  f.pending[0].resolve(source());await flush();assert.equal(f.context.startupModelsReady(),true);
+  assert.equal(unneeded.job.state,"pending");assert.equal(unneeded.fallback.visible,true);
+});
+
 test("admission pauses while hidden or office active, including a previously queued shared task",async()=>{
   const f=fixture(),held=[];f.context.bridge.queueAssetLoad=task=>new Promise(resolve=>held.push(()=>Promise.resolve(task()).then(resolve)));
   city(f,"bench",0);f.context.startupModelsCaptured=true;f.context.document.hidden=true;
@@ -105,17 +118,27 @@ test("direct office and unavailable model loader admit no city GLB work",async()
   f.context.queueCityAsset(()=>({x:0,z:0}),1,()=>{throw new Error("direct office must not fetch city art")});f.context.amtDirectRoute=true;f.context.prepareNearbyAssets();await flush();assert.equal(f.context.cityModelActive,0);
 });
 
+test("first city level prepares the distant office in the background, after startup and only while visible",()=>{
+  const f=fixture(),calls=[];let started=false;
+  f.context.bridge.getHUDState=()=>({started});f.context.bridge.buildings=[{id:"buergeramt",doorX:9000,doorY:9000}];
+  f.context.loadAmtImages=options=>calls.push(options);
+  f.context.startupModelsCaptured=true;f.context.prepareNearbyAssets();assert.equal(calls.length,0,"title must not preload the distant office");
+  started=true;f.setTime(500);f.context.prepareNearbyAssets();assert.equal(calls.length,1);assert.equal(calls[0].background,true);
+  f.context.document.hidden=true;f.setTime(1000);f.context.prepareNearbyAssets();assert.equal(calls.length,1);
+  f.context.document.hidden=false;f.level.active=true;f.context.prepareNearbyAssets();assert.equal(calls.length,1);
+});
+
 test("office texture placeholders count settled required loads and share the asset admission queue",async()=>{
   const f=fixture(),tasks=[],images=[],callbacks=[];
   class Texture {image=null;userData={};listeners={};addEventListener(type,handler){this.listeners[type]=handler}dispose(){this.listeners.dispose?.()}}
-  Object.assign(f.context,{T:{Texture,SRGBColorSpace:"srgb",LinearFilter:"linear"},officeAssetPending:0,officeAssetFailures:0,
+  Object.assign(f.context,{T:{Texture,SRGBColorSpace:"srgb",LinearFilter:"linear"},officeAssetPending:0,officeAssetFailures:0,officeAssetTotal:0,officePreparationBackground:false,
     amtTextureLoader:{load(url,onLoad,_progress,onError){images.push({url,onLoad,onError})}}});
   f.context.bridge.queueAssetLoad=task=>{const promise=Promise.resolve().then(task);tasks.push(promise);return promise};
   const texture=f.context.amtTexture("selected-mobile.webp",loaded=>callbacks.push(loaded),undefined,true);
-  assert.equal(texture.image,null);assert.equal(f.context.officeAssetPending,1);await flush();assert.equal(images.length,1);
+  assert.equal(texture.image,null);assert.equal(f.context.officeAssetPending,1);assert.equal(f.context.officeAssetTotal,1);await flush();assert.equal(images.length,1);
   const image={width:768,height:768};images[0].onLoad({image});await tasks[0];await flush();
   assert.equal(texture.image,image);assert.equal(callbacks[0],texture);assert.equal(texture.colorSpace,"srgb");assert.equal(texture.generateMipmaps,false);assert.equal(f.context.officeAssetPending,0);
-  f.context.amtTexture("missing.webp",undefined,undefined,true);await flush();images[1].onError(new Error("missing"));await tasks[1];await flush();assert.equal(f.context.officeAssetPending,0);assert.equal(f.context.officeAssetFailures,1);
+  f.context.amtTexture("missing.webp",undefined,undefined,true);await flush();images[1].onError(new Error("missing"));await tasks[1];await flush();assert.equal(f.context.officeAssetPending,0);assert.equal(f.context.officeAssetFailures,1);assert.equal(f.context.officeAssetTotal,2);
   const cancelled=f.context.amtTexture("departed-detail.webp");cancelled.dispose();await flush();assert.equal(images.length,2,"a discarded queued close-detail image does not start another request");
 });
 

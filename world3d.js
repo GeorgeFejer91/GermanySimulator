@@ -3,14 +3,15 @@ import {mouthPaintGlsl} from './buergeramt-mouth-paint.js?v=20261011-mouth-consi
 import {createAmtFloor} from './buergeramt-floor.js?v=20261012-ten-minute-paint';
 import {createAmtPortraitMelt} from './buergeramt-portrait-melt.js?v=20261012-ten-minute-paint';
 import {prepareWithSegments,measureNaturalWidth,measureLineStats} from './assets/vendor/pretext/dist/layout.js';
-const THREE_URL="https://cdn.jsdelivr.net/npm/three@0.186.0/build/three.module.js";
-const GLTF_LOADER_URL="https://cdn.jsdelivr.net/npm/three@0.186.0/examples/jsm/loaders/GLTFLoader.js";
+const THREE_URL="./assets/vendor/three/0.186.0/build/three.module.min.js";
+const GLTF_LOADER_URL="./assets/vendor/three/0.186.0/examples/jsm/loaders/GLTFLoader.js";
 function buergeramtDoorRadiance(time,reducedMotion=false){
   if(reducedMotion)return {phase:2,next:0,blend:0,pulse:.9};
   const phase=Math.floor(time/3)%3,t=Math.max(0,time%3-2);
   return {phase,next:(phase+1)%3,blend:t*t*(3-2*t),pulse:.78+.22*Math.sin(time*Math.PI*2/2.8)};
 }
 function showRendererFailure(error){
+  window.GermanyPreload?.fail();
   const app=document.getElementById("app");if(!app)return;document.getElementById("world3d")?.remove();app.classList.add("three-failed");
   let notice=app.querySelector(".render-error");if(!notice){notice=document.createElement("section");notice.className="render-error";notice.innerHTML="<b>3D-RENDERER NICHT VERFÜGBAR</b><p>Germany Simulator benötigt WebGL und konnte die 3D-Welt nicht laden.</p><button type=\"button\">NEU LADEN</button>";notice.querySelector("button").onclick=()=>location.reload();app.append(notice)}
   console.error("3D renderer unavailable",error);
@@ -65,7 +66,7 @@ function showRendererFailure(error){
     const now=performance.now();if(startupModelsReady()&&now-lastCityAdmission<250)return;lastCityAdmission=now;updateAssetView();
     for(let i=cityModelJobs.length-1;i>=0;i--){const job=cityModelJobs[i];if(job.owner?.retired&&job.state!=="active"){job.state="settled";job.task=job.position=job.owner=null;cityModelJobs.splice(i,1)}}
     // ponytail: a fixed authored city needs one spatial scan, not a second loader loop or streaming framework.
-    const nearby=cityModelJobs.filter(job=>job.state==="pending"&&!job.owner?.retired&&(cityModelDistance(job)<=30||isCityAssetVisible(job)));
+    const nearby=cityModelJobs.filter(job=>job.state==="pending"&&!job.owner?.retired&&(startupModelJobs.has(job)||cityModelDistance(job)<=30||isCityAssetVisible(job)));
     if(bridge.preparingStart)for(const job of nearby)startupModelJobs.add(job);
     nearby.sort((a,b)=>Number(startupModelJobs.has(b))-Number(startupModelJobs.has(a))||cityModelDistance(a)-cityModelDistance(b));
     for(const job of nearby){
@@ -84,7 +85,8 @@ function showRendererFailure(error){
     }
     if(startupModelsReady()){
       const office=bridge.buildings.find(b=>b.id==="buergeramt");
-      if(office&&Math.hypot(bridge.player.x-office.doorX,bridge.player.y-office.doorY)<1500)loadAmtImages();
+      if(bridge.getHUDState?.().started)loadAmtImages({background:true});
+      else if(!bridge.getHUDState&&office&&Math.hypot(bridge.player.x-office.doorX,bridge.player.y-office.doorY)<1500)loadAmtImages();
     }
   }
 
@@ -1215,8 +1217,8 @@ function showRendererFailure(error){
     texture.addEventListener("dispose",()=>{retired=true});
     texture.colorSpace=T.SRGBColorSpace;texture.generateMipmaps=false;
     texture.minFilter=texture.magFilter=T.LinearFilter;
-    const loading=(bridge.queueAssetLoad?bridge.queueAssetLoad(load):load()).catch(error=>{onError?.(error);return null});
-    if(required){officeAssetPending++;loading.then(result=>{if(!result)officeAssetFailures++}).finally(()=>officeAssetPending--)}
+    const loading=(bridge.queueAssetLoad?bridge.queueAssetLoad(load,{background:required&&officePreparationBackground}):load()).catch(error=>{onError?.(error);return null});
+    if(required){officeAssetTotal++;officeAssetPending++;loading.then(result=>{if(!result)officeAssetFailures++}).finally(()=>officeAssetPending--)}
     return texture;
   }
   function amtUv(actor,col,row,cols,rows){
@@ -1264,12 +1266,12 @@ function showRendererFailure(error){
   amtPaintedProp(1,1.05,2.75,6.8,1.4,-5.55);
   amtPaintedProp(2,.65,1.45,-6.65,2.58,-10.27);
   amtPaintedProp(3,1.15,2.85,7.55,1.55,.2,-Math.PI/2);
-  let amtImagesRequested=false,officeDetail=null,officeAssetPending=0,officeAssetFailures=0;
+  let amtImagesRequested=false,officeDetail=null,officeAssetPending=0,officeAssetFailures=0,officeAssetTotal=0,officePreparationBackground=false;
   const amtStationaryDetails=new Map();
-  function loadAmtImages(){
-    if(amtImagesRequested)return;amtImagesRequested=true;
+  function loadAmtImages({background=false}={}){
+    if(amtImagesRequested)return;amtImagesRequested=true;officePreparationBackground=background;
     amtTexture("./assets/buergeramt/president-steinmeier.webp?v=20261012-portrait",texture=>{presidentMaterial.map=texture;presidentMaterial.needsUpdate=true;amtPortraitMelt.setTexture(texture);presidentFallback.texture.dispose()},undefined,true);
-    officeAssetPending++;
+    officeAssetTotal++;officeAssetPending++;
     const loadDetail=()=>import("./assets/buergeramt/office-detail.js?v=20261011-published-features").then(()=>{
       const detail=window.GermanyAmtOfficeDetail.create(T,{compact:amtMobile,anisotropy:renderer.capabilities.getMaxAnisotropy()});
       detail.attach(amtEnvironment);isolateAmtMaterials(amtEnvironment);
@@ -1277,7 +1279,7 @@ function showRendererFailure(error){
       for(const mesh of plainDeskSupplies)mesh.visible=false;
       window.BuergeramtLevel?.setOfficeObstacles(detail.obstacles);
     });
-    (bridge.queueAssetLoad?bridge.queueAssetLoad(loadDetail):loadDetail()).catch(error=>{officeAssetFailures++;console.warn("Bürgeramt office detail unavailable",error)}).finally(()=>officeAssetPending--);
+    (bridge.queueAssetLoad?bridge.queueAssetLoad(loadDetail,{background:officePreparationBackground}):loadDetail()).catch(error=>{officeAssetFailures++;console.warn("Bürgeramt office detail unavailable",error)}).finally(()=>officeAssetPending--);
     const textures=new Map();
     for(const actor of amtCharacters){
       let texture=textures.get(actor.url);
@@ -1688,8 +1690,8 @@ function showRendererFailure(error){
   window.Germany3D={ready:true,isWorldPointVisible,isVehicleVisible,clearAmtFloor(){amtFloorEffect.update(null);amtPortraitMelt.update(null)},get amtPortraitMelt(){return amtPortraitMelt.inspect()},get amtFloor(){return {...amtFloorEffect.inspect(),opacity:floor.opacity,transparent:floor.transparent,depthWrite:floor.depthWrite}},prepareNearbyAssets,prepareOfficeAssets:loadAmtImages,clearAmtOmenSplat,enterBuergeramt,clearAmtGaussianAnimations(){amtMouthSplat?.dispose();amtMouthSplat=null;amtGaussian.clear();restoreAmtCharacterLayers()},
   get amtEntry(){return {active:!!amtEntry,failure:entryFailure,...amtEntry?.inspect()}},
   get nearbyAssetsReady(){updateAssetView();return cityModelJobs.every(job=>job.state==="settled"||cityModelDistance(job)>30&&!isCityAssetVisible(job))},
-  get officeAssetsReady(){return amtImagesRequested&&officeAssetPending===0},get officeAssetStatus(){return {pending:officeAssetPending,failed:officeAssetFailures}},
-  get startupReady(){return startupModelsReady()},get startupStatus(){return {pending:[...startupModelJobs].filter(job=>job.state!=="settled").length,active:cityModelActive,failed:[...startupModelJobs].filter(job=>job.failed).length}},
+  get officeAssetsReady(){return amtImagesRequested&&officeAssetPending===0},get officeAssetStatus(){return {total:officeAssetTotal,pending:officeAssetPending,failed:officeAssetFailures}},
+  get startupReady(){return startupModelsReady()},get startupStatus(){return {total:startupModelJobs.size,pending:[...startupModelJobs].filter(job=>job.state!=="settled").length,active:cityModelActive,failed:[...startupModelJobs].filter(job=>job.failed).length}},
   get buildingVisibility(){return buildingSlots.map(slot=>({id:slot.building.id,opacity:slot.opacity,obstructing:!!slot.obstructing}))},sync(){
     if(amtEntry){
       if(document.hidden)return;

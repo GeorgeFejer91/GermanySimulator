@@ -247,8 +247,8 @@ const legacySpriteSources={merkel:{file:"merkel-sprite.png",cols:24,rows:5},baye
 const assetSources={merkelSprite:"./assets/characters/merkel/manifest.json?v=20261008-browser-light",bayernSprite:"./assets/characters/bayern/manifest.json?v=20261008-browser-light",aliceSprite:"./assets/characters/alice/manifest.json?v=20261008-browser-light",borderPourerSprite:"./assets/characters/borderPourer/manifest.json?v=20261008-browser-light",towelManSprite:"./assets/tourists/towelMan/manifest.json?v=20261008-browser-light",towelWomanSprite:"./assets/tourists/towelWoman/manifest.json?v=20261008-browser-light"};
 // One admission queue owns downloads, decoding and model installation across the game.
 const assetQueue=[];let assetLoadActive=0;
-function pumpAssetLoads(){while(assetLoadActive<2&&assetQueue.length){const urgent=assetQueue.findIndex(job=>job.foreground),index=urgent>=0?urgent:(document.hidden?-1:0);if(index<0)return;const [job]=assetQueue.splice(index,1);assetLoadActive++;Promise.resolve().then(job.task).then(job.resolve,job.reject).finally(()=>{assetLoadActive--;pumpAssetLoads()})}}
-function queueAssetLoad(task,{foreground=false}={}){return new Promise((resolve,reject)=>{assetQueue.push({task,resolve,reject,foreground});pumpAssetLoads()})}
+function pumpAssetLoads(){while(assetLoadActive<2&&assetQueue.length){const urgent=assetQueue.findIndex(job=>job.foreground),normal=assetQueue.findIndex(job=>!job.background),index=urgent>=0?urgent:(document.hidden?-1:normal>=0?normal:0);if(index<0)return;const [job]=assetQueue.splice(index,1);assetLoadActive++;Promise.resolve().then(job.task).then(job.resolve,job.reject).finally(()=>{assetLoadActive--;pumpAssetLoads()})}}
+function queueAssetLoad(task,{foreground=false,background=false}={}){return new Promise((resolve,reject)=>{assetQueue.push({task,resolve,reject,foreground,background});pumpAssetLoads()})}
 const assets=Object.fromEntries(Object.keys(assetSources).map(key=>[key,new Image()])),npcAssetLoads=new Map(),startupNpcKinds=new Set();
 let startupNpcsCaptured=false,lastNpcAdmission=-Infinity;
 function loadSpriteImage(img,url){return new Promise((resolve,reject)=>{img.onload=()=>resolve();img.onerror=()=>reject(new Error("Character image unavailable"));img.src=url})}
@@ -2382,13 +2382,21 @@ function refreshStartup(){
  prepareNearbyNpcAssets();window.Germany3D?.prepareNearbyAssets?.();
  if(pendingOfficeEntry)window.Germany3D?.prepareOfficeAssets?.();
  if(pendingOfficeEntry&&window.Germany3D?.officeAssetsReady){const enter=pendingOfficeEntry;pendingOfficeEntry=null;enter()}
+ const preload=window.GermanyPreload;
+ if(preload&&document.body.classList.contains("preloading")){
+  preload.prepareMenu(queueAssetLoad);
+  const direct=document.body.classList.contains("amt-direct-mode"),models=window.Germany3D?.startupStatus,characters=window.Germany3DBridge.characterAssetStatus;
+  const office=window.Germany3D?.officeAssetStatus;
+  const total=direct?(office?.total||0):(models?.total||0)+characters.required.length,settled=direct?(office?office.total-office.pending:0):(models?models.total-models.pending:0)+characters.required.filter(kind=>characters.settled.includes(kind)).length;
+  preload.update({renderer:!!window.Germany3D?.ready,total,settled,ready:direct?!!window.Germany3D?.officeAssetsReady:!!window.Germany3D?.startupReady&&startupNpcAssetsReady()});
+ }
  if(state.started||document.getElementById("intro").classList.contains("hidden"))return;
  const ready=!!window.Germany3D?.startupReady&&startupNpcAssetsReady(),button=document.getElementById("start"),label=ready?"SPIEL STARTEN":"LÄDT …";
  if(button.disabled===ready)button.disabled=!ready;if(button.textContent!==label)button.textContent=label;
  if(button.getAttribute("aria-busy")!==String(!ready))button.setAttribute("aria-busy",String(!ready));
  if(ready&&pendingStart!==null){const skip=pendingStart;pendingStart=null;startGame(skip)}
 }
-function startGame(skipHumor=false){if(!window.Germany3D?.startupReady||!startupNpcAssetsReady()){pendingStart=skipHumor;refreshStartup();return}ensureAudio();startMusic();if(!skipHumor)prepareRecording(FAX_FEED_AUDIO).catch(()=>{});state.region=regionOf(player.y);state.modal=true;document.getElementById("intro").classList.add("hidden");if(skipHumor){finishHumorCertification();return}humorModal.hidden=false;humorPageIndex=0;renderHumorPage()}
+function startGame(skipHumor=false){if(document.body.classList.contains("preloading"))return;if(!window.Germany3D?.startupReady||!startupNpcAssetsReady()){pendingStart=skipHumor;refreshStartup();return}ensureAudio();startMusic();if(!skipHumor)prepareRecording(FAX_FEED_AUDIO).catch(()=>{});state.region=regionOf(player.y);state.modal=true;document.getElementById("intro").classList.add("hidden");if(skipHumor){finishHumorCertification();return}humorModal.hidden=false;humorPageIndex=0;renderHumorPage()}
 let faxFeedCue=0;
 function beginHumorFax(done){const cue=++faxFeedCue;humorAudio.className="humor-audio processing";document.getElementById("humor-audio-status").textContent=humorFormLanguage==="en"?"SHEET IS BEING TRANSMITTED BY FAX":"BLATT WIRD PER FAX EINGEZOGEN";humorModal.classList.add("fax-processing");humorForm.classList.add("fax-feeding");playFaxFeed(()=>cue===faxFeedCue&&humorModal.classList.contains("fax-processing"));setTimeout(()=>{humorForm.classList.remove("fax-feeding");humorModal.classList.remove("fax-processing");humorSubmitting=false;done()},1120)}
 function submitHumorPage(){if(humorSubmitting)return;const premature=!humorReadComplete;humorSubmitting=true;stopSpeech();setMusicDucked(false);humorNext.disabled=true;let faxComplete=false,scoldComplete=!premature,nextPage=false,needsWelcome=false;const continueAfterScold=()=>{scoldComplete=true;if(!faxComplete)return;if(nextPage)readHumorPage();else if(needsWelcome)openHumorWelcome()};beginHumorFax(()=>{faxComplete=true;if(++humorPageIndex<humorPages.length){nextPage=premature;renderHumorPage(!premature);if(premature&&scoldComplete)readHumorPage()}else{needsWelcome=premature;finishHumorCertification(!premature);if(premature&&scoldComplete)openHumorWelcome()}});if(premature)scoldHumorFinePrint(continueAfterScold)}

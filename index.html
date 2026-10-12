@@ -27,12 +27,24 @@
   <link rel="preload" as="image" href="./assets/fire/kenney-flame-01.png" crossorigin="anonymous">
   <link rel="preload" as="image" href="./assets/fire/kenney-flame-05.png" crossorigin="anonymous">
   <link rel="preload" as="image" href="./assets/fire/kenney-smoke-05.png" crossorigin="anonymous">
-  <link rel="stylesheet" href="./styles.css?v=20261012-browser-smoothness">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Grenze:wght@500;600;700;800;900&amp;family=UnifrakturCook:wght@700&amp;display=swap" media="print" onload="this.media='all'">
+  <link rel="stylesheet" href="./styles.css?v=20261012-preload">
   <link rel="stylesheet" href="./buergeramt.css?v=20261012-office-subtitles">
   <link rel="stylesheet" href="./game-hud.css?v=20261012-browser-smoothness">
 </head>
-<body>
-<main id="app">
+<body class="preloading">
+<section id="preload" aria-label="Spiel wird geladen" aria-busy="true">
+  <div class="preload-content">
+    <b data-preload-text>GRAND THEFT AMT</b>
+    <p id="preload-status" data-preload-text role="status">SPIELWELT WIRD VORBEREITET</p>
+    <div id="preload-meter" role="progressbar" aria-label="Spielvorbereitung" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"><i id="preload-fill"></i></div>
+    <output id="preload-value" data-preload-text>0 %</output>
+    <button id="preload-retry" data-preload-text type="button" hidden>NEU LADEN</button>
+  </div>
+</section>
+<script src="./preload.js?v=20261012-preload"></script>
+<script type="module" src="./preload-fit.js?v=20261012-preload"></script>
+<main id="app" inert>
   <canvas id="game" hidden aria-hidden="true"></canvas>
   <aside id="mission-guide" class="mission-guide" hidden aria-label="Wegweiser">
     <div id="mission-pointer-space" aria-hidden="true"></div>
@@ -108,7 +120,7 @@
   <nav class="control-dock" aria-label="Touch controls"><div class="dpad"><button data-key="ArrowLeft" aria-label="Left">◀<span class="fraktur">Links</span></button><button data-key="ArrowUp" aria-label="Forward">▲<span class="fraktur">Vor</span></button><button data-key="ArrowDown" aria-label="Back">▼<span class="fraktur">Zurück</span></button><button data-key="ArrowRight" aria-label="Right">▶<span class="fraktur">Rechts</span></button></div><button id="law-action" class="law-action" data-key="KeyQ" type="button" aria-label="Quote a German law" disabled><span class="dock-icon">§</span><span class="fraktur">Gesetz</span></button><button class="action" data-key="KeyE" type="button"><span class="dock-icon">E</span><span class="fraktur">Reden</span></button></nav>
 
 </main>
-<script type="importmap">{"imports":{"three":"https://cdn.jsdelivr.net/npm/three@0.186.0/build/three.module.js","three/addons/":"https://cdn.jsdelivr.net/npm/three@0.186.0/examples/jsm/"}}</script>
+<script type="importmap">{"imports":{"three":"./assets/vendor/three/0.186.0/build/three.module.min.js","three/addons/":"./assets/vendor/three/0.186.0/examples/jsm/"}}</script>
 <script src="./For-AI/QUIZ-CHARACTER-DICTIONARY.js?v=20261012-browser-smoothness"></script>
 <script src="./For-AI/AUDIO-TEXT-LIBRARY.js?v=20261012-president-duties"></script>
 <script src="./street-wisdom.js?v=20261012-browser-smoothness"></script>
@@ -127,10 +139,10 @@
 <script type="module" src="./buergeramt-fit.js?v=20261012-queue-board"></script>
 <script src="./character-interactions.js?v=20261012-browser-smoothness"></script>
 <script src="./tourist-animation.js?v=20261012-browser-smoothness"></script>
-<script src="./game.js?v=20261012-office-subtitles"></script>
+<script src="./game.js?v=20261012-preload"></script>
 <script type="module" src="./game-hud.js?v=20261012-browser-smoothness"></script>
 <script type="module" src="./subtitle-layout.js?v=20261012-browser-smoothness"></script>
 <script type="module" src="./quiz-layout.js?v=20261012-browser-smoothness"></script>
-<script type="module" src="./world3d.js?v=20261012-ten-minute-paint"></script>
+<script type="module" src="./world3d.js?v=20261012-preload"></script>
 </body>
 </html>

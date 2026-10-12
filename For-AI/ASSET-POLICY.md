@@ -480,6 +480,20 @@ sources before adding it. Use existing installed skills and project harnesses;
 these references do not require another engine, browser stack, telemetry,
 worker pool or installation. A skill's availability is not performance evidence.
 
+- Show the dedicated `preload` screen before the main menu. Its existing
+  readiness gate counts prepared starting-neighborhood jobs and decoded menu
+  images; the flag-colored progress is monotonic and reaches 100 only at
+  readiness. Keep `#app` hidden/inert until then, including keyboard Start.
+  The direct office route counts its required office jobs instead. Missing
+  individual assets settle to existing fallbacks; fatal engine failures expose
+  a reload action. The pinned Three.js r186 engine/GLTF dependencies are shipped
+  locally under `assets/vendor/three/0.186.0/`; external decorative fonts must
+  not block startup. Distant/optional assets remain approach-only.
+- Once the player starts the first city level, prepare the required Bürgeramt
+  room/atlas/prop assets quietly through that same queue, behind ordinary city
+  loads and foreground speech. Preserve the two-job limit, hidden-tab pause,
+  cached one-time preparation and office entry readiness/fallback gate. Close
+  character details, speech and cinematics retain their existing demand triggers.
 - Preload the starting neighborhood before enabling Start, including decoded
   character images and installed models. Keyboard shortcuts obey the same
   readiness gate. Show bounded, readable loading feedback; missing individual
