@@ -3,6 +3,13 @@ import assert from 'node:assert/strict';
 import vm from 'node:vm';
 import {source} from './amt-harness.mjs';
 
+test('only the phone sends a bounded ticket receipt with the scan ID and exact code',()=>{
+ const host=transport(),phone=transport('phone'),receipt={id:'a'.repeat(24),number:'B-041'};
+ for(const bad of [{...receipt,id:'bad'},{...receipt,id:[receipt.id]},{...receipt,number:'41'},{...receipt,counter:3},{number:receipt.number}])host.channel.receive({type:'ticket-received',...bad});
+ assert.equal(host.messages.length,0);host.channel.receive({type:'ticket-received',...receipt});assert.equal(host.messages.length,1);
+ assert.equal(phone.link.send('ticket-received',receipt),true);assert.equal(host.link.send('ticket-received',receipt),false);phone.channel.receive({type:'ticket-received',...receipt});assert.equal(phone.messages.length,0);
+});
+
 function transport(role='host',linkSource=source('buergeramt-link.js')){
  const window={};vm.runInNewContext(linkSource,{window,Event,EventTarget,CustomEvent,TextEncoder,URL,URLSearchParams,console});
  const invitation={stream:'amt-ticket-unit-test'},link=new window.BuergeramtLink(role,invitation),messages=[];

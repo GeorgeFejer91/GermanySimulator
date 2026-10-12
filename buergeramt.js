@@ -6,16 +6,14 @@ const speaker=root.querySelector("#amt-speaker"),line=root.querySelector("#amt-l
 const status=root.querySelector("#amt-status");
 // Choices belong to the scene HUD; the legacy paper sheet stays hidden.
 walkHud.append(actions);actions.setAttribute?.("role","group");actions.setAttribute?.("aria-label","Antwort wählen");
-const objective=document.getElementById("amt-objective"),nearby=document.getElementById("amt-nearby"),board=document.getElementById("amt-number-board"),exit=root.querySelector("#amt-exit"),ambient=document.getElementById("amt-ambient");
+const objective=document.getElementById("amt-objective"),nearby=document.getElementById("amt-nearby"),exit=root.querySelector("#amt-exit"),ambient=document.getElementById("amt-ambient");
 const door={x:0,z:5.55},sign={x:0,z:-2.6},counter={x:4,z:-8.15},view={x:0,z:8,yaw:0};
 const held=new Set(),pendingTimers=new Set();
 const counterXs=[-5.8,-1.6,3.9,6.2];let assignedCounter=0,interactingCounter=0;
 const queueCodes=["B-041","Z-7","F-91","A-004","K-002","C-201","H-73","D-008","M-62","E-319","R-5","G-086","W-204","J-17","P-003","N-58"];
 const queueCounters=[3,1,4,2],callInterval=3.2,callWindow=callInterval*4;
 let ticketQueueIndex=-1;const counterCalls=["—","—","—","—"];
-const counterNotice=document.getElementById("amt-counter-notice"),counterCall=document.getElementById("amt-counter-call");
 function requestFullscreen(){window.GermanyFullscreen?.autoEnter()}
-function refreshCounterNotice(){counterNotice.hidden=!active||!activated||walking();document.getElementById("amt-room-counter").textContent="AUFRUF";counterCall.textContent=number?"IHRE NUMMER "+number+" · SCHALTER "+assignedCounter:""}
 // Every callback belongs to one attempt and one visible speech/action cue.
 let attempt=0,cue=0,callOutcome="",speechGateTimer=null,recordedSpeech=null,recordedCleanup=null,officeSpeechBusy=false,sceneContinuation=null;
 let phoneSilent=false,phoneWarnings=0,phoneWarningTimer=null,phoneRetryTimer=null,registrationNode="",registrationReply=null,registrationCompleted=false;
@@ -358,8 +356,8 @@ function showCharacter(actor){
  }}],null,null,null,{id:actor.id,tone:spoken.tone,valence:spoken.valence});
 }
 function walking(){return ["outside","walk-sign","waiting","walk-counter"].includes(stage)}
-function setStage(next,preserveMovement=false){if(next!==stage&&!preserveMovement)held.clear();stage=next;document.body.classList.toggle("amt-omen",next==="omen");const moving=walking(),sequence=!moving&&next!=="closed";document.body.classList.toggle("amt-sequence",sequence);if(moving){actions.replaceChildren();interactingCounter=0;encounterArmed=false;cancelSpeech();clerkAnimation?.request(null);ambient.textContent="";characterMood=null;}root.classList.toggle("walking",moving);walkHud.classList.toggle("sequence",sequence);walkHud.hidden=next==="closed";root.classList.toggle("first-person",!!window.Germany3D?.ready);refreshCounterNotice();if(moving){objective.textContent=next==="outside"?"BÜRGERAMT · EINGANG":next==="walk-sign"?"QR-SCHILD SCANNEN":"AUFRUFTAFEL";update(0)}}
-function displayNumber(value,desk){queueDisplay=value;counterCalls[desk-1]=value;board.textContent=value;board.setAttribute?.("aria-label",value+" Schalter "+desk);document.getElementById("amt-board-counter").textContent="SCHALTER "+desk}
+function setStage(next,preserveMovement=false){if(next!==stage&&!preserveMovement)held.clear();stage=next;document.body.classList.toggle("amt-omen",next==="omen");const moving=walking(),sequence=!moving&&next!=="closed";document.body.classList.toggle("amt-sequence",sequence);if(moving){actions.replaceChildren();interactingCounter=0;encounterArmed=false;cancelSpeech();clerkAnimation?.request(null);ambient.textContent="";characterMood=null;}root.classList.toggle("walking",moving);walkHud.classList.toggle("sequence",sequence);walkHud.hidden=next==="closed";root.classList.toggle("first-person",!!window.Germany3D?.ready);if(moving){objective.textContent=next==="outside"?"BÜRGERAMT · EINGANG":next==="walk-sign"?"QR-SCHILD SCANNEN":"AUFRUFTAFEL";update(0)}}
+function displayNumber(value,desk){queueDisplay=value;counterCalls[desk-1]=value}
 function nearestCounter(){let found=0,distance=1.9;for(let i=0;i<counterXs.length;i++){const d=Math.hypot(view.x-counterXs[i],view.z-counter.z);if(d<distance){found=i+1;distance=d}}return found}
 function queueStage(){return activated?(deadline>0?"walk-counter":"waiting"):"walk-sign"}
 function refuseCounter(desk){interactingCounter=desk;encounterArmed=true;setStage("early");content(story.clerks[desk].speaker+" · SCHALTER "+desk,story.clerkRefusal,[{run:()=>setStage(queueStage())}]);setStatus("FALSCHER AUFRUF · "+queueDisplay)}
@@ -577,8 +575,8 @@ function setOfficeObstacles(items){
  if(active)recoverOfficeBody(view,officePlayerRadius);
 }
 function forfeit(reason){
- if(!active||!activated||["cancelled","closed","success"].includes(stage))return;
- activated=false;deadline=0;callPending=false;callOutcome="forfeit";clearPhonePressure();
+ if(!active||(!activated&&!number)||["cancelled","closed","success"].includes(stage))return;
+ activated=false;number="";registeredName="";assignedCounter=0;ticketQueueIndex=-1;deadline=0;callPending=false;callOutcome="forfeit";clearPhonePressure();
  if(callArmTimer!==null)clearTimer(callArmTimer);callArmTimer=null;stopCallSignal();
  if(omen.phase){stopOmenTone();omen.phase="";omen.strength=0;const actor=characters[0];actor.priority=0;actor.mode="walk";actor.sequence=[];actor.omenReturn=null;applyMix()}
  const expiredLink=link;expiredLink?.send("forfeit");exit.hidden=false;actions.replaceChildren();
@@ -654,7 +652,7 @@ function update(dt){
   if(deadline<=1e-9){forfeit("AUFRUF VERPASST");return}
  }
  queueClock+=elapsed;
- if(queueClock+1e-9>=callInterval){queueClock=Math.max(0,queueClock-callInterval);queueIndex++;const desk=queueCounters[queueIndex%4];displayNumber(queueCodes[queueIndex%queueCodes.length],desk);if(activated&&queueIndex===ticketQueueIndex){deadline=callWindow;if(stage!=="early"&&stage!=="outside")setStage("walk-counter");setStatus("AUFRUF · "+number+" · SCHALTER "+assignedCounter)}reactToCall();ring()}
+ if(queueClock+1e-9>=callInterval){queueClock=Math.max(0,queueClock-callInterval);queueIndex++;const desk=queueCounters[queueIndex%4];displayNumber(queueCodes[queueIndex%queueCodes.length],desk);if(activated&&queueIndex===ticketQueueIndex){deadline=callWindow;if(stage!=="early"&&stage!=="outside")setStage("walk-counter");setStatus("AUFRUFTAFEL")}reactToCall();ring()}
  if(!walking())return;
  if(held.has("ArrowLeft"))view.yaw-=elapsed*1.8;
  if(held.has("ArrowRight"))view.yaw+=elapsed*1.8;
@@ -674,7 +672,7 @@ function beginLink(){
  const owner=attempt,currentLink=new BuergeramtLink("host",invitation);link=currentLink;
  const current=()=>active&&owner===attempt&&link===currentLink;
  const terminal=()=>["cancelled","closed","success"].includes(stage);
- currentLink.addEventListener("status",e=>{if(!current())return;if(stage==="cancelled"&&/getrennt|unterbrochen/i.test(e.detail)){policeDisconnectHandler?.();return}if(terminal())return;if(activated&&/getrennt|unterbrochen/i.test(e.detail))forfeit("TERMIN NICHT MEHR VERFÜGBAR");else if(!activated)setStatus("QR-CODE SCANNEN · WARTENUMMER ZIEHEN")});
+ currentLink.addEventListener("status",e=>{if(!current())return;if(stage==="cancelled"&&/getrennt|unterbrochen/i.test(e.detail)){policeDisconnectHandler?.();return}if(terminal())return;if(number&&/getrennt|unterbrochen/i.test(e.detail))forfeit("TERMIN NICHT MEHR VERFÜGBAR");else if(!activated)setStatus("QR-CODE SCANNEN · WARTENUMMER ZIEHEN")});
  currentLink.addEventListener("connected",()=>{if(!current()||terminal())return;setStatus("QR-CODE SCANNEN · WARTENUMMER ZIEHEN");probeLink();if(pingTimer===null)pingTimer=setInterval(()=>{if(current())probeLink()},1500)});
  currentLink.addEventListener("message",e=>{
   if(!current())return;const m=e.detail;
@@ -686,21 +684,29 @@ function beginLink(){
   if(m.type==="police-done"){if(stage==="cancelled"&&receivePoliceDone(m.index,m.mode,m.durationMs,m.atMs))policeDoneHandler?.(m.index);return}
   if(terminal())return;
   if(m.type==="scan"){
-   if(m.id===lastScanId){currentLink.send(number?(activated?"ticket":"forfeit"):"scan-ready",number&&activated?{number,counter:assignedCounter}:{});return}
+   if(m.id===lastScanId){currentLink.send(number?"ticket":"scan-ready",number?{number,counter:assignedCounter}:{});return}
    if(!currentLink.send("scan-ready"))return;
    lastScanId=m.id;number="";assignedCounter=0;ticketQueueIndex=-1;registeredName="";activated=false;deadline=0;callPending=false;callTriggered=false;callCommitted=false;callOutcome="";clerkIndex=0;resetRegistration();
    if(omen.phase)omen.resume="walk-sign";
    else if(stage!=="outside"&&stage!=="character")setStage("walk-sign");
-   refreshCounterNotice();setStatus("NAME AM TELEFON EINTRAGEN");
+   setStatus("NAME AM TELEFON EINTRAGEN");
   }else if(m.type==="register"&&m.id===lastScanId&&lastScanId&&typeof m.name==="string"&&m.name.trim().length>=2&&m.name.length<=80){
-   if(number){if(activated)currentLink.send("ticket",{number,counter:assignedCounter});return}
+   if(number){currentLink.send("ticket",{number,counter:assignedCounter});return}
    const index=queueIndex+2+Math.floor(Math.random()*3),next=queueCodes[index%queueCodes.length],desk=queueCounters[index%4];
-   if(!currentLink.send("ticket",{number:next,counter:desk}))return;
-   ticketQueueIndex=index;number=next;assignedCounter=desk;counter.x=counterXs[desk-1];registeredName=m.name.trim().replace(/\s+/g," ");activated=true;
-   if(omen.phase){omen.resume="waiting"}
-   else if(stage!=="outside"&&stage!=="character")setStage("waiting");
-   refreshCounterNotice();
-   setStatus("WARTENUMMER "+number+" · AUFRUF ABWARTEN");
+   // Reserve first so even an immediate receipt refers to committed ticket data.
+   // Only the phone's displayed-ticket receipt unlocks the appointment.
+   ticketQueueIndex=index;number=next;assignedCounter=desk;counter.x=counterXs[desk-1];registeredName=m.name.trim().replace(/\s+/g," ");
+   if(!currentLink.send("ticket",{number,counter:desk})){ticketQueueIndex=-1;number="";assignedCounter=0;registeredName="";return}
+  }else if(m.type==="ticket-received"&&!activated&&number&&registeredName&&m.id===lastScanId&&m.number===number){
+   activated=true;
+   if(queueIndex>=ticketQueueIndex){
+    deadline=callWindow-(queueIndex-ticketQueueIndex)*callInterval-queueClock;
+    if(deadline<=0||counterCalls[assignedCounter-1]!==number){forfeit("AUFRUF VERPASST");return}
+   }
+   const next=deadline>0?"walk-counter":"waiting";
+   if(omen.phase)omen.resume=next;
+   else if(stage!=="outside"&&stage!=="character"&&stage!=="early")setStage(next);
+   setStatus("WARTENUMMER "+number+" · AUFRUFTAFEL");
   }
   else if(m.type==="phone-hidden")forfeit("TELEFON NICHT SICHTBAR");
   else if(m.type==="silence"&&m.id===story.call.id&&activated&&!["expired","cancelled","closed","success"].includes(stage))silencePhone(false);
@@ -823,10 +829,10 @@ function close(notify=true){
  clerkSpeaking=false;clerkAccent=0;clerkAnimation?.reset(attempt);resetOmen();
  if(pingTimer!==null)clearInterval(pingTimer);pingTimer=null;outstandingPings.clear();
  for(const id of pendingTimers)clearTimeout(id);pendingTimers.clear();cancelSpeech();setStage("closed");
- try{officeAudio?.ctx.close()?.catch(()=>{})}catch{}officeAudio=null;held.clear();root.hidden=true;walkHud.hidden=true;counterNotice.hidden=true;mixPanel.open=false;mixPanel.hidden=true;ambient.textContent="";
+ try{officeAudio?.ctx.close()?.catch(()=>{})}catch{}officeAudio=null;held.clear();root.hidden=true;walkHud.hidden=true;mixPanel.open=false;mixPanel.hidden=true;ambient.textContent="";
  document.body.classList.remove("amt-inside");const previous=link;link=null;previous?.send(phoneComplete?"done":"forfeit");setTimeout(()=>previous?.close(),250);config.music?.(false);if(notify)config.onClose();
 }
-function open(config){if(active)return;resetRegistration();resetTiming();hostVoiceStartupMs=null;hostVoiceAttempts=0;attempt++;callOutcome="";options=config;active=true;requestFullscreen();assignedCounter=0;interactingCounter=0;counter.x=counterXs[2];resetStationaryClocks();feverClock?.clear();encounterArmed=false;clerkIndex=0;callPending=false;callTriggered=false;callCommitted=false;callArmTimer=null;clockAnchor=null;registeredName="";number="";activated=false;lastScanId="";queueClock=0;queueIndex=0;ticketQueueIndex=-1;counterCalls.fill("—");deadline=0;ambientClock=0;clerkClock=0;clerkSpeaking=false;clerkAccent=0;clerkBeat="idle";clerkPulse=0;patronEncounters={};clerkAnimation?.reset(attempt);displayNumber(queueCodes[0],queueCounters[0]);view.x=0;view.z=8;view.yaw=0;held.clear();resetCharacters();resetOmen();exit.hidden=false;root.hidden=false;mixPanel.hidden=false;document.body.classList.add("amt-inside");options.music?.(true);beginLink();setStage("outside");setStatus("EINGANG · BÜRGERAMT");const owner=attempt;window.BuergeramtClock?.sample?.().then(anchor=>{if(active&&attempt===owner)clockAnchor=anchor}).catch(()=>{})}
+function open(config){if(active)return;resetRegistration();resetTiming();hostVoiceStartupMs=null;hostVoiceAttempts=0;attempt++;callOutcome="";options=config;active=true;requestFullscreen();assignedCounter=0;interactingCounter=0;counter.x=counterXs[2];resetStationaryClocks();feverClock?.clear();encounterArmed=false;clerkIndex=0;callPending=false;callTriggered=false;callCommitted=false;callArmTimer=null;clockAnchor=null;registeredName="";number="";activated=false;lastScanId="";queueClock=0;queueIndex=0;ticketQueueIndex=-1;for(let i=-3;i<=0;i++)counterCalls[queueCounters[(i+4)%4]-1]=queueCodes[(i+queueCodes.length)%queueCodes.length];deadline=0;ambientClock=0;clerkClock=0;clerkSpeaking=false;clerkAccent=0;clerkBeat="idle";clerkPulse=0;patronEncounters={};clerkAnimation?.reset(attempt);displayNumber(queueCodes[0],queueCounters[0]);view.x=0;view.z=8;view.yaw=0;held.clear();resetCharacters();resetOmen();exit.hidden=false;root.hidden=false;mixPanel.hidden=false;document.body.classList.add("amt-inside");options.music?.(true);beginLink();setStage("outside");setStatus("EINGANG · BÜRGERAMT");const owner=attempt;window.BuergeramtClock?.sample?.().then(anchor=>{if(active&&attempt===owner)clockAnchor=anchor}).catch(()=>{})}
 function clerkPerformance(){
  const names={idle:0,review:1,raise:2,stamp:3,deny:4,talk:5};
  let mode="idle";

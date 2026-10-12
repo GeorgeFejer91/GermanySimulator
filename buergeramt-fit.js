@@ -1,7 +1,7 @@
 import {measureLineStats,measureNaturalWidth,prepareWithSegments} from './assets/vendor/pretext/dist/layout.js';
 
 // Keep the bounded Amt labels readable as the phone, browser zoom, or German copy changes.
-const selectors=['#start','#amt-counter-call','#amt-counter-notice small','#amt-objective','#amt-nearby','#amt-number-board','#amt-board-counter','#amt-title','#amt-line','#amt-status','#amt-ambient','#amt-actions button','#amt-leave','#amt-exit','#amt-direct-reset','#amt-direct-result-title','#amt-direct-result-copy','.amt-direct-result a','#amt-mix summary','#amt-mix label','#amt-compact-reset','#phone-expired-stamp','#phone-expired-copy','#phone-number','#phone-counter','#phone-status','#phone-admission-status','.phone-brand strong','.phone-breadcrumb','.phone-title','#phone-form h2','#phone-form p','#phone-form label','#phone-submit','#phone-caller','#phone-call-state','#phone-answer-label','#phone-decline-label','#phone-swipe-label','#phone-hangup-label','.phone-keep'];
+const selectors=['#start','#amt-objective','#amt-nearby','#amt-title','#amt-line','#amt-status','#amt-ambient','#amt-actions button','#amt-leave','#amt-exit','#amt-direct-reset','#amt-direct-result-title','#amt-direct-result-copy','.amt-direct-result a','#amt-mix summary','#amt-mix label','#amt-compact-reset','#phone-expired-stamp','#phone-expired-copy','#phone-number','#phone-status','#phone-admission-status','.phone-brand strong','.phone-breadcrumb','.phone-title','#phone-form h2','#phone-form p','#phone-form label','#phone-submit','#phone-caller','#phone-call-state','#phone-answer-label','#phone-decline-label','#phone-swipe-label','#phone-hangup-label','.phone-keep'];
 selectors.push('.control-dock button');
 let queued=false;
 function schedule(){if(queued)return;queued=true;requestAnimationFrame(async()=>{queued=false;await document.fonts.ready;measure()})}
@@ -59,19 +59,19 @@ function measure(){
  const value=`${clearance}px`;
  if(document.body.style.getPropertyValue('--city-control-clearance')!==value)document.body.style.setProperty('--city-control-clearance',value);
  if(document.body.classList.contains('amt-inside')){
-  const subtitle=document.getElementById('subtitle-toggle'),notice=document.getElementById('amt-counter-notice');
+  const subtitle=document.getElementById('subtitle-toggle');
   const controls=[subtitle,document.querySelector('#amt-mix summary'),document.getElementById('amt-direct-reset')].filter(el=>el?.getClientRects().length);
   const toolbar=Math.max(0,...controls.map(el=>el.getBoundingClientRect().bottom/zoom));
-  const values={'--amt-subtitle-width':subtitle.getBoundingClientRect().width/zoom,'--amt-toolbar-bottom':toolbar,'--amt-info-bottom':notice?.getClientRects().length?toolbar+8+notice.getBoundingClientRect().height/zoom:toolbar};
+  const values={'--amt-subtitle-width':subtitle.getBoundingClientRect().width/zoom,'--amt-toolbar-bottom':toolbar,'--amt-info-bottom':toolbar};
   for(const [key,number] of Object.entries(values)){const next=number+'px';if(document.body.style.getPropertyValue(key)!==next)document.body.style.setProperty(key,next)}
  }
 }
-for(const root of [document.getElementById('intro'),document.getElementById('amt-level'),document.getElementById('amt-walk-hud'),document.getElementById('amt-counter-notice'),document.getElementById('amt-mix'),document.getElementById('amt-direct-result'),document.querySelector('.phone-shell')]){
+for(const root of [document.getElementById('intro'),document.getElementById('amt-level'),document.getElementById('amt-walk-hud'),document.getElementById('amt-mix'),document.getElementById('amt-direct-result'),document.querySelector('.phone-shell')]){
  if(root)new MutationObserver(schedule).observe(root,{subtree:true,childList:true,characterData:true,attributes:true,attributeFilter:['hidden','open','class']});
 }
 addEventListener('resize',schedule,{passive:true});
 const dock=document.querySelector('.control-dock');if(dock)new ResizeObserver(schedule).observe(dock);
-const officeBounds=new ResizeObserver(schedule);for(const el of [document.getElementById('subtitle-toggle'),document.getElementById('amt-counter-notice'),document.getElementById('amt-direct-reset'),document.getElementById('amt-actions')])if(el)officeBounds.observe(el);
+const officeBounds=new ResizeObserver(schedule);for(const el of [document.getElementById('subtitle-toggle'),document.getElementById('amt-direct-reset'),document.getElementById('amt-actions')])if(el)officeBounds.observe(el);
 // The shared HUD fitter positions the subtitle control after its own measure.
 // Follow that final position without a separate animation/update loop.
 const subtitleControl=document.querySelector('.subtitle-toggle');

@@ -34,7 +34,8 @@ function resetSwipe(){drag=null;for(const button of [answer,decline]){button.sty
 function stopCall(){voiceGeneration++;voiceQueue.length=0;voiceBusy=false;activePoliceIndex=finishPoliceVoice=null;clearTimeout(cutoffTimer);cutoffTimer=null;clearTimeout(voiceTimer);voiceTimer=null;clearInterval(durationTimer);durationTimer=null;answeredAt=null;stopRecorded();stopStatic();stopRing();armedCall=false;resetSwipe();try{window.speechSynthesis?.cancel()}catch{}call.classList.remove("answered");document.body.classList.remove("amt-phone-in-call");activeControls.hidden=true;callState.textContent=copy.ringing;call.hidden=true;answer.hidden=true;decline.hidden=true;choices.hidden=true}
 function endSlot(text,completed=false){slotActive=false;finished=true;submit.disabled=true;clearInterval(scanTimer);scanTimer=null;stopCall();status.textContent=text;if(!completed)showExpired();try{wakeLock?.release()?.catch(()=>{})}catch{}wakeLock=null}
 function initAudio(){try{const Audio=window.AudioContext||window.webkitAudioContext;if(Audio&&!audioContext){audioContext=new Audio();phoneFxGain=audioContext.createGain();phoneFxGain.gain.value=1;phoneFxGain.connect(audioContext.destination)}audioContext?.resume()?.catch(()=>{})}catch{}}
-function requestTicket(){if(closed||finished||slotActive||link.channel?.readyState!=="open")return;link.send(submittedName?"register":"scan",submittedName?{id:scanId,name:submittedName}:{id:scanId})}
+function acknowledgeTicket(){if(link.send("ticket-received",{id:scanId,number:number.textContent})){clearInterval(scanTimer);scanTimer=null}}
+function requestTicket(){if(closed||finished||link.channel?.readyState!=="open")return;if(slotActive){acknowledgeTicket();return}link.send(submittedName?"register":"scan",submittedName?{id:scanId,name:submittedName}:{id:scanId})}
 function scheduleRingSound(atMs){
  if(!audioContext||phoneSilent)return;
  const start=audioContext.currentTime+Math.max(0,(atMs-performance.now())/1000);
@@ -109,7 +110,7 @@ link.addEventListener("message",e=>{
  if(m.type==="done"){if(!finished)endSlot("Dieser Termin wurde am Schalter bearbeitet.",true);else stopCall();return}
  if(finished)return;
  if(m.type==="scan-ready"){admission.hidden=true;submit.disabled=!!submittedName}
- else if(m.type==="ticket"&&submittedName&&/^[A-Z]-\d{1,3}$/.test(m.number||"")&&Number.isInteger(m.counter)&&m.counter>=1&&m.counter<=4){if(slotActive&&number.textContent===m.number)return;clearInterval(scanTimer);scanTimer=null;stopCall();phoneSilent=false;admission.hidden=true;currentCall="";resolved="";number.textContent=m.number;document.getElementById("phone-counter").textContent="SCHALTER "+m.counter;ticket.hidden=false;form.hidden=true;slotActive=!document.hidden;status.textContent="Achten Sie auf die Aufruftafel im Amt.";if(slotActive)keepAwake();else{link.send("phone-hidden");endSlot("Seite verlassen. Ihr Platz ist verfallen.");link.close()}}
+ else if(m.type==="ticket"&&submittedName&&/^[A-Z]-\d{1,3}$/.test(m.number||"")&&Number.isInteger(m.counter)&&m.counter>=1&&m.counter<=4){if(slotActive&&number.textContent===m.number){acknowledgeTicket();return}stopCall();phoneSilent=false;admission.hidden=true;currentCall="";resolved="";number.textContent=m.number;ticket.hidden=false;form.hidden=true;slotActive=!document.hidden;status.textContent="Achten Sie auf die Aufruftafel im Amt.";if(slotActive){acknowledgeTicket();keepAwake()}else{link.send("phone-hidden");endSlot("Seite verlassen. Ihr Platz ist verfallen.");link.close()}}
  else if(m.type==="forfeit")endSlot("Ihr Platz ist verfallen.");
  else if(m.type==="silence"&&slotActive&&m.id==="grass")silenceCalls();
  else if(m.type==="call-arm"&&slotActive&&!phoneSilent&&submittedName&&!currentCall&&m.id==="grass"){armedCall=true;initAudio();link.send("call-ready",{id:m.id,atMs:performance.now()})}
@@ -127,9 +128,9 @@ link.addEventListener("message",e=>{
 form.addEventListener("submit",e=>{
  e.preventDefault();if(closed||finished||submittedName)return;const value=name.value.trim().replace(/\s+/g," ");
  if(value.length<2||value.length>80)return;initAudio();
- if(!link.send("register",{id:scanId,name:value}))return;
  submittedName=value;submit.disabled=true;form.hidden=true;
  admission.hidden=false;admission.textContent="Wartenummer wird zugeteilt.";
+ if(!link.send("register",{id:scanId,name:value})){submittedName="";submit.disabled=false;form.hidden=false;admission.hidden=true;return}
  window.GermanyFullscreen?.autoEnter();
  keepAwake();
 });

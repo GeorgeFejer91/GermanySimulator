@@ -10,7 +10,7 @@ test('missing the call returns to walking, retires the URL, and never opens a de
  old.message({type:'scan',id:'c'.repeat(24)});assert.equal(h.level.stage,'walk-sign');
  h.tick(250);assert.equal(old.closed,true);
  const fresh=h.links.at(-1);fresh.message({type:'scan',id:'d'.repeat(24)});
- assert.equal(h.level.stage,'walk-sign');fresh.message({type:'register',name:'Neuer Versuch'});
+ assert.equal(h.level.stage,'walk-sign');fresh.message({type:'register',name:'Neuer Versuch'});fresh.message({type:'ticket-received',id:fresh.scanId,number:h.level.registrationTicket});
  assert.equal(h.level.stage,'waiting');assert.equal(h.level.registration.warnings,0);
 });
 

@@ -23,10 +23,10 @@ try{
   const context=await browser.newContext(contextOptions),phoneContext=await browser.newContext(contextOptions);
   const silentSetup=({n})=>{Math.random=()=>((n-1)+.1)/4;const play=HTMLMediaElement.prototype.play;HTMLMediaElement.prototype.play=function(...args){this.muted=true;this.volume=0;return play.apply(this,args)};const connect=AudioNode.prototype.connect;AudioNode.prototype.connect=function(target,...args){if(target===this.context.destination){const g=this.context.createGain();g.gain.value=0;connect.call(g,target);return connect.call(this,g,...args)}return connect.call(this,target,...args)};speechSynthesis.speak=u=>{u.onerror?.()};const request=Element.prototype.requestFullscreen;window.__fullscreenRequests=[];if(request)Element.prototype.requestFullscreen=function(...args){const record={active:navigator.userActivation.isActive,visibility:document.visibilityState};__fullscreenRequests.push(record);return request.apply(this,args).then(value=>{record.allowed=true;return value},error=>{record.error=error.name+': '+error.message;throw error})}};
   await Promise.all([context,phoneContext].map(c=>c.addInitScript(silentSetup,{n})));
-  const office=await context.newPage(),phone=await phoneContext.newPage(),errors=[],queue=[];let phoneReady=false;
+  const office=await context.newPage(),phone=await phoneContext.newPage(),errors=[],queue=[];let phoneReady=false,receipt=null;
   for(const p of [office,phone])p.on('pageerror',e=>errors.push(e.message));
   await office.exposeBinding('__amtOutbound',async(_,msg)=>{if(!phoneReady){queue.push(msg);return}await phone.evaluate(msg=>__amtChannel.dispatchEvent(new MessageEvent('message',{data:JSON.stringify(msg)})),msg)});
-  await phone.exposeBinding('__amtOutbound',async(_,msg)=>office.evaluate(msg=>__amtChannel.dispatchEvent(new MessageEvent('message',{data:JSON.stringify(msg)})),msg));
+  await phone.exposeBinding('__amtOutbound',async(_,msg)=>{if(msg.type==='ticket-received'){receipt=msg;return}await office.evaluate(msg=>__amtChannel.dispatchEvent(new MessageEvent('message',{data:JSON.stringify(msg)})),msg)});
   const started=Date.now();await office.goto(`http://127.0.0.1:${server.address().port}/?geheim=buergeramt`,{waitUntil:'domcontentloaded',timeout:120000});
   await office.waitForFunction(()=>window.BuergeramtLevel?.active&&Germany3D?.officeAssetsReady,null,{timeout:120000});
   await office.evaluate(()=>{__registrationState.voiceOn=false;window.__amtUpdate=BuergeramtLevel.update;BuergeramtLevel.update=()=>{};window.__amtRender=Germany3D.sync;Germany3D.sync=()=>{}});
@@ -34,15 +34,23 @@ try{
   for(const msg of queue)await phone.evaluate(msg=>__amtChannel.dispatchEvent(new MessageEvent('message',{data:JSON.stringify(msg)})),msg);
   await phone.locator('#phone-submit:not([disabled])').waitFor();assert.equal(await office.evaluate(()=>BuergeramtLevel.registrationTicket),'');assert.equal(await office.evaluate(()=>BuergeramtLevel.assignedCounter.number),0);assert.equal(await phone.locator('#phone-ticket').isVisible(),false);await phone.screenshot({path:resolve(out,name+'-before-name.png')});await phone.locator('#phone-name').fill('Erika Anmeldung');if(name==='desk-one')await office.evaluate(()=>{for(let i=0;i<400&&BuergeramtLevel.queueDisplay!=='F-91';i++)__amtUpdate(.05)});await phone.locator('#phone-submit').click();
   await office.waitForFunction(()=>BuergeramtLevel.registeredName==='Erika Anmeldung');
+  await phone.locator('#phone-ticket:not([hidden])').waitFor();await phone.waitForTimeout(100);
+  assert.ok(receipt);assert.equal(await phone.locator('#phone-number').textContent(),receipt.number);assert.equal(await office.evaluate(()=>BuergeramtLevel.activated),false);
+  assert.equal(await office.evaluate(()=>BuergeramtLevel.stage),'outside');
+  await office.evaluate(msg=>__amtChannel.dispatchEvent(new MessageEvent('message',{data:JSON.stringify(msg)})),receipt);await office.waitForFunction(()=>BuergeramtLevel.activated);
+  await phone.evaluate(()=>{document.documentElement.style.zoom='2';BuergeramtFit()});await phone.waitForTimeout(150);
+  const phoneZoom=await phone.evaluate(()=>({overflow:document.documentElement.scrollWidth>document.documentElement.clientWidth+1,labels:[...document.querySelectorAll('#phone-number,#phone-status,.phone-keep')].map(el=>({text:el.textContent,fit:el.dataset.pretextFit,width:el.clientWidth,scroll:el.scrollWidth}))}));
+  assert.equal(phoneZoom.overflow,false);assert.ok(phoneZoom.labels.every(el=>el.scroll<=el.width+1&&['one-line','wrapped'].includes(el.fit)));await phone.screenshot({path:resolve(out,name+'-phone-zoom-200.png')});await phone.evaluate(()=>{document.documentElement.style.zoom='';BuergeramtFit()});
   await walk(office,1,-2.6);
   await phone.locator('#phone-ticket:not([hidden])').waitFor();await phone.screenshot({path:resolve(out,name+'-ticket.png')});const assignment=await office.evaluate(()=>BuergeramtLevel.assignedCounter),x=assignment.x;n=assignment.number;if(name==='desk-one')assert.equal(n,1);else await walk(office,0,2.8);await office.evaluate(()=>{for(let i=0;i<400&&BuergeramtLevel.stage==='waiting';i++)__amtUpdate(.05);__amtRender()});await office.screenshot({path:resolve(out,name+'-anzeige.png')});if(name!=='desk-one')await walk(office,1,-2.6);
+  if(name==='android-landscape'){await walk(office,0,-.2);await office.screenshot({path:resolve(out,name+'-anzeige-near.png')});await walk(office,1,-2.6)}
   await walk(office,-2,-2.6);await walk(office,-2,-6.4);await walk(office,x===-5.8?-5.4:2.8,-6.4);await walk(office,x===-5.8?-5.4:2.8,-8.15);await walk(office,x,-8.15);
   await office.evaluate(()=>{for(let i=0;i<400&&BuergeramtLevel.stage==='waiting';i++)__amtUpdate(.05);__amtRender()});assert.equal(await office.evaluate(()=>BuergeramtLevel.stage),'walk-counter');console.log(name,'assigned');
   await office.evaluate(()=>new Promise(done=>requestAnimationFrame(()=>requestAnimationFrame(()=>requestAnimationFrame(done)))));const assignedBounds=await bounds(office);assert.deepEqual(assignedBounds.overlaps,[],'office toolbar and assignment do not overlap');await office.screenshot({path:resolve(out,name+'-assigned.png')});
   await office.keyboard.press('e');await office.waitForFunction(()=>BuergeramtLevel.stage==='counter');await office.waitForTimeout(100);const fullscreen=await office.evaluate(()=>!!document.fullscreenElement);await office.screenshot({path:resolve(out,name+'-clerk.png')});
   assert.equal(await office.evaluate(()=>BuergeramtLevel.queueCalls[BuergeramtLevel.assignedCounter.number-1].number===BuergeramtLevel.registrationTicket),true);
   assert.equal(await office.evaluate(()=>BuergeramtLevel.activeClerkCounter),n);
-  assert.equal(await office.locator('#amt-counter-call').textContent(),`IHRE NUMMER ${await office.evaluate(()=>BuergeramtLevel.registrationTicket)} · SCHALTER ${n}`);
+  assert.equal(await office.locator('#amt-counter-notice,.amt-board-hud').count(),0);assert.equal(await phone.locator('#phone-counter').count(),0);assert.doesNotMatch(await phone.locator('#phone-ticket').innerText(),/SCHALTER/);
   if(name==='desktop')for(let desk=1;desk<=4;desk++){
    await office.evaluate(()=>{__registrationConfig.cinematics=false;BuergeramtLevel.replay(__registrationConfig);__amtRender()});
    await walk(office,1,-2.6);const x=[-5.8,-1.6,3.9,6.2][desk-1];

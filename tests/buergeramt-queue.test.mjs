@@ -12,6 +12,7 @@ test('name submission reserves exactly the second, third or fourth upcoming irre
  for(const [random,offset] of [[0,2],[.5,3],[.999,4]]){
   const h=harness('host',{random:()=>random});h.register();const link=h.links[0];
   link.message({type:'register',name:'Erika Mustermann'});const ticket=link.sent.at(-1);assert.equal(ticket.type,'ticket');
+  assert.equal(h.level.activated,false);link.message({type:'ticket-received',id:link.scanId,number:ticket.number});
   link.message({type:'register',name:'Erika Mustermann'});assert.equal(link.sent.at(-1).number,ticket.number);
   const calls=[];for(let i=0;i<offset;i++){h.advanceGame(3.2);calls.push(h.level.queueDisplay)}
   assert.equal(calls.at(-1),ticket.number);assert.equal(calls.slice(0,-1).includes(ticket.number),false);assert.equal(h.level.stage,'walk-counter');
@@ -42,4 +43,35 @@ test('the called code remains valid until its Schalter replacement even while ot
 
 test('ticket and call copy contains no imperative counter directions',()=>{
  assert.doesNotMatch(source('buergeramt.js'),/JETZT HINGEHEN|BEEILEN|VORZEITIG AN SCHALTER|→ SCHALTER/);
+ assert.doesNotMatch(source('index.html'),/amt-counter-notice|amt-board-hud/);
+ assert.doesNotMatch(source('buergeramt-phone.html'),/phone-counter/);
+});
+
+test('all four board rows have distinct calls before registration, and only the newly called row changes',()=>{
+ const h=harness(),before=JSON.parse(JSON.stringify(h.level.queueCalls));
+ assert.deepEqual(before.map(c=>c.counter),[1,2,3,4]);assert.equal(new Set(before.map(c=>c.number)).size,4);assert.ok(before.every(c=>/^[A-Z]-\d{1,3}$/.test(c.number)));
+ h.advanceGame(3.2);const after=h.level.queueCalls;assert.equal(after.filter((c,i)=>c.number!==before[i].number).length,1);assert.equal(h.level.activated,false);
+});
+
+test('a reserved ticket cannot open the clerk until the matching phone receipt arrives',()=>{
+ const h=harness();h.register();const link=h.links[0];link.message({type:'register',name:'Erika Mustermann'});const ticket=link.sent.at(-1);
+ h.approachCounter();h.advanceGame(12.8);assert.equal(h.level.activated,false);assert.equal(h.level.stage,'walk-sign');
+ assert.equal(h.level.queueCalls[ticket.counter-1].number,ticket.number);
+ link.message({type:'ticket-received',id:'b'.repeat(24),number:ticket.number});link.message({type:'ticket-received',id:link.scanId,number:'Z-999'});assert.equal(h.level.activated,false);
+ link.message({type:'ticket-received',id:link.scanId,number:ticket.number});assert.equal(h.level.activated,true);assert.equal(h.level.stage,'walk-counter');
+ h.level.interact();assert.equal(h.level.stage,'counter');assert.equal(h.level.activeClerkCounter,ticket.counter);
+});
+
+test('duplicate and overdue ticket receipts cannot restart or extend the call window',()=>{
+ const h=harness();h.wait();const link=h.links[0],number=h.level.registrationTicket;h.awaitCall();h.advanceGame(10);
+ link.message({type:'ticket-received',id:link.scanId,number});h.advanceGame(3);assert.equal(h.level.activated,false);assert.equal(h.level.stage,'walk-sign');
+ link.message({type:'ticket-received',id:link.scanId,number});assert.equal(h.level.activated,false);
+ const late=harness();late.register();const pending=late.links[0];pending.message({type:'register',name:'Erika Mustermann'});late.advanceGame(30);
+ pending.message({type:'ticket-received',id:pending.scanId,number:late.level.registrationTicket});assert.equal(late.level.activated,false);assert.equal(late.level.stage,'walk-sign');assert.equal(pending.sent.at(-1).type,'forfeit');
+});
+
+test('failed ticket send rolls back the reservation and pending phone loss retires the ticket',()=>{
+ const h=harness();h.register();const link=h.links[0];link.fail=true;link.message({type:'register',name:'Erika Mustermann'});assert.equal(h.level.registrationTicket,'');assert.equal(h.level.assignedCounter.number,0);assert.equal(h.level.activated,false);
+ link.fail=false;link.message({type:'register',name:'Erika Mustermann'});const ticket=link.sent.at(-1);link.message({type:'phone-hidden'});assert.equal(h.level.activated,false);assert.notEqual(h.links.at(-1),link);
+ link.message({type:'ticket-received',id:link.scanId,number:ticket.number});assert.equal(h.level.activated,false);
 });

@@ -25,7 +25,8 @@ for(const recorded of [false,true])test(`a phone ticket during Konrad ${recorded
  if(recorded){assert.equal(utterance,null);assert(player.src.includes('amt-konrad-wohnungszettel-fever-1.mp3'));player.currentTime=1.9;player.ontimeupdate()}
  else{assert.equal(utterance.text,line);h.synth.boundary(line.indexOf('Hoffentlich'))}
  h.links[0].message({type:'scan',id:'a'.repeat(24)});h.links[0].message({type:'register',name:'Erika Mustermann'});
- assert.equal(h.links[0].sent.at(-1).type,'ticket');assert.equal(h.level.activated,true);
+ assert.equal(h.links[0].sent.at(-1).type,'ticket');assert.equal(h.level.activated,false);
+ h.links[0].message({type:'ticket-received',id:h.links[0].scanId,number:h.level.registrationTicket});assert.equal(h.level.activated,true);
  assert.equal(h.level.stage,'character');assert.equal(h.synth.current,utterance);
  if(recorded){assert.equal(player.paused,false);assert(player.src.includes('amt-konrad-wohnungszettel-fever-1.mp3'))}
  assert.equal(h.synth.cancelCount,cancellations);assert.equal(h.level.audioTextBusy,true);

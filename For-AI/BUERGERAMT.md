@@ -11,9 +11,9 @@ cues retain their canonical path and exact hash ownership.
 ## Admission, queue and outcomes
 
 The office HUD allocates a top toolbar for sound, restart in direct mode, and
-the subtitle control. The ticket number and Schalter remain on the companion;
-the duplicate host assignment notice stays hidden so the walking
-view keeps the physical Anzeige clear. Measure the toolbar's actual bottom
+the subtitle control. The companion shows only the ticket code; the host
+assignment notice and duplicate called-code HUD are removed. The physical
+Anzeige alone maps codes to desks. Measure the toolbar's actual bottom
 before placing the remaining walking cues. Pretext measures the
 bounded labels; CSS owns their placement. Keep these controls and instructions
 from covering one another at phone widths and zoom.
@@ -34,7 +34,9 @@ browser's page cache completes the preserved handoff directly. Direct office tes
 has no city snapshot and retains its ordinary entrance. `buergeramt-entry.js`
 owns the GPU projection, with `world3d.js` owning its clock and handoff.
 
-Entering the first Bürgeramt opens the existing first-person episode outside the door. WASD or touch controls lead through the open doorway into the waiting room and four service counters. Connecting through the physical QR sign only opens the phone name form; it allocates no number. Valid name submission reserves one of the next two to four entries in the private, irregular letter-code queue, together with its Schalter. The Anzeige retains a separate called code for each of the four counters; a new call appears every 3.2 seconds. The player's call stays valid for 12.8 seconds, until the next call at the same Schalter. Calls at the other counters do not invalidate it. The phone shows the code and Schalter without directional orders; no duplicate ticket banner covers the dialogue. The player must read the Anzeige and reach the right clerk during that window.
+Entering the first Bürgeramt opens the existing first-person episode outside the door. WASD or touch controls lead through the open doorway into the waiting room and four service counters. Connecting through the physical QR sign only opens the phone name form; it allocates no number. Valid name submission reserves one of the next two to four entries in the private, irregular letter-code queue. The phone must receive and display its code before sending the bounded `ticket-received` receipt with the scan ID and exact code. Only that receipt activates the host's appointment gate; missing delivery, stale receipts and repeated submissions cannot activate another ticket. Retries resend the same reservation. A late receipt receives only the remaining call window or forfeits an already replaced call.
+
+The physical Anzeige retains a separate called code for Schalter 1–4, all populated from room entry; a new call appears every 3.2 seconds. The player's call stays valid for 12.8 seconds, until the next call at the same Schalter. Calls at the other counters do not invalidate it. The phone shows only the code, and neither a host assignment banner nor a duplicate called-code HUD reveals the desk. The player must match the phone code to the Anzeige and the numbered desk signs, then reach the right clerk during that window.
 
 E near any counter starts its existing refusal encounter unless the player has that counter's active call and a submitted name. The speaking/refusing clerk is selected independently of the assigned counter. Refusal does not pause the appointment deadline; optional walking conversations and the omen retain their queue pause. The room keeps its quiet bed, occasional remarks and telephone rings. The four-row board is 3 × 1 metres with a 768 × 256 texture; it reuses the existing model/material and adds 262,144 decoded RGBA bytes, with no new download.
 

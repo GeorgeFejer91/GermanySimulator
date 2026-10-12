@@ -132,7 +132,7 @@ export function harness(kind='host',{voice=false,synthesis=true,phoneLanguage='d
  function elapse(seconds){for(let t=0;t<seconds;t+=.05){const step=Math.min(.05,seconds-t);tick(step*1000);level.update(step)}}
  function approachRegistration(){moveTo(-3.3,-2.6);moveTo(-3.3,2.5);moveTo(-4.65,2.5)}
  function register(){enter();Link.instances.at(-1).message({type:'scan',id:'a'.repeat(24)})}
- function wait(){register();Link.instances.at(-1).message({type:'register',name:'Erika Mustermann'})}
+ function wait(){register();const link=Link.instances.at(-1);link.message({type:'register',name:'Erika Mustermann'});link.message({type:'ticket-received',id:link.scanId,number:level.registrationTicket})}
  function awaitCall(){for(let i=0;i<400&&level.stage==='waiting';i++)level.update(.05);if(level.stage!=='walk-counter')throw Error('No active call: '+level.stage)}
  function approachCounter(){const x=level.assignedCounter.x;moveTo(-2,-2.6);moveTo(-2,-6.4);moveTo(x===-5.8?-5.4:2.8,-6.4);moveTo(x===-5.8?-5.4:2.8,-8.15);moveTo(x,-8.15)}
  function counter(){wait();const link=Link.instances.at(-1);link.message({type:'register',name:'Erika Mustermann'});approachCounter();awaitCall();if(level.stage!=='walk-counter')throw new Error(`Expected active call, got ${level.stage}`);level.interact();tick(16);if(!link.sent.some(message=>message.type==='call-arm'))tick(1800);if(link.sent.some(message=>message.type==='call-arm'))link.message({type:'call-ready',id:'grass',atMs:now})}
