@@ -1,6 +1,6 @@
 // Persistent pigment transport, not a pressure/velocity solver. The flat floor
 // stays solid; only its paint and shallow specular ridges melt.
-import './buergeramt-goop.js?v=20261012-flowing-paint-lamps';
+import './buergeramt-goop.js?v=20261012-counter-recovery';
 import {portraitPaintGlsl} from './buergeramt-portrait-melt.js?v=20261012-flowing-paint-lamps';
 const STEP=1/20;
 export function amtFloorMelt(time){return globalThis.BuergeramtGoop.goop(time);}
@@ -60,7 +60,7 @@ const transport=`
 const surface=`
   varying vec2 amtFloorPoint;
   uniform highp sampler2D amtFloorOil;
-  uniform float amtFloorTime,amtFloorMelt,amtFloorLive,amtFloorStill;
+  uniform float amtFloorTime,amtFloorMelt,amtFloorLive,amtFloorStill,amtFloorRestore;
   uniform float amtLampLevels[5];
   uniform vec4 footRipples[OIL_RIPPLE_COUNT];
   ${coordinates}
@@ -81,7 +81,7 @@ export function createAmtFloor({THREE:T,renderer,material,mobile=false}){
   const floatMask=!!renderer.extensions?.has('EXT_color_buffer_float')&&!!renderer.extensions?.has('OES_texture_float_linear');
   const rippleCount=mobile?4:8,footRipples={value:Array.from({length:rippleCount},()=>new T.Vector4(0,0,-100,0))},footDirections={value:Array.from({length:rippleCount},()=>new T.Vector2())};
   const amtPortraitPaint={value:null},amtPortraitInfo={value:new T.Vector4(0,0,1,0)};
-  const uniforms={amtFloorOil:{value:null},amtFloorTime:{value:0},amtFloorMelt:{value:0},amtFloorLive:{value:0},amtFloorStill:{value:0},amtLampLevels:{value:new Float32Array(5).fill(1)},footRipples,amtPortraitPaint,amtPortraitInfo};
+  const uniforms={amtFloorOil:{value:null},amtFloorTime:{value:0},amtFloorMelt:{value:0},amtFloorLive:{value:0},amtFloorStill:{value:0},amtFloorRestore:{value:0},amtLampLevels:{value:new Float32Array(5).fill(1)},footRipples,amtPortraitPaint,amtPortraitInfo};
   const bodies=new Map();let footSerial=0,playerSerial=0,footsteps=0;
   let targets=null,pass=null,quad=null,camera=null,read=0,visit=null,lastTime=0,lastMotion=0,carry=0,simTime=0,steps=0,allocations=0,failure=null,reduced=false;
   const compile=material.onBeforeCompile,key=material.customProgramCacheKey();
@@ -98,13 +98,13 @@ export function createAmtFloor({THREE:T,renderer,material,mobile=false}){
       float checkAA=max(fwidth(checkField),.0001);
       float floorPigment=smoothstep(-checkAA,checkAA,checkField);
       if(amtFloorLive>.5){float oil=texture2D(amtFloorOil,(amtFloorPoint-floorMin)/floorSize).r;
-        floorPigment=mix(floorPigment,smoothstep(.34,.66,oil),smoothstep(0.,.055,amtFloorMelt));}
+        floorPigment=mix(floorPigment,smoothstep(.34,.66,oil),smoothstep(0.,.055,amtFloorMelt)*(1.-amtFloorRestore));}
       vec2 cellEdge=min(fract(floorCell),1.-fract(floorCell))*tileSize;
       float grout=1.-smoothstep(.009,.016+max(fwidth(amtFloorPoint.x),fwidth(amtFloorPoint.y)),min(cellEdge.x,cellEdge.y));
       float ridges=1.-abs(floorPigment*2.-1.);
       vec3 floorPaint=mix(vec3(.006,.007,.009),vec3(.72,.73,.71),floorPigment);
       vec4 floorColor=amtFloorLive>.5?texture2D(amtFloorOil,(amtFloorPoint-floorMin)/floorSize):amtPaintSpill(amtFloorPoint,amtFloorMelt,amtFloorTime);
-      floorPaint=mix(floorPaint,vec3(.012)+floorColor.rgb*.72,clamp(floorColor.a*1.5,0.,1.));
+      floorPaint=mix(floorPaint,vec3(.012)+floorColor.rgb*.72,clamp(floorColor.a*1.5,0.,1.)*(1.-amtFloorRestore));
       floorPaint=mix(floorPaint,vec3(.10),grout*(1.-smoothstep(.0,.22,amtFloorMelt)));
       diffuseColor.rgb*=floorPaint;
       float oilHeight=(1.-amtFloorStill)*amtFloorMelt*(.004*ridges+.009*sin(amtFloorPoint.x*2.7+amtFloorPoint.y*.9+amtFloorTime*.08)
@@ -180,17 +180,17 @@ export function createAmtFloor({THREE:T,renderer,material,mobile=false}){
     footDirections.value[index].set(dx/distance,dz/distance);footsteps++;
   }
   function update(state,reducedMotion=false,player=null,actors=[]){
-    if(!state){release();visit=null;lastTime=lastMotion=0;uniforms.amtFloorTime.value=0;uniforms.amtFloorMelt.value=0;return;}
+    if(!state){release();visit=null;lastTime=lastMotion=0;uniforms.amtFloorTime.value=0;uniforms.amtFloorMelt.value=0;uniforms.amtFloorRestore.value=0;return;}
     if(globalThis.document?.hidden)return;
     const time=Math.max(0,Number.isFinite(state.time)?state.time:0);
     const motion=Math.max(0,Number.isFinite(state.visualTime)?state.visualTime:globalThis.BuergeramtGoop.motion(time));
-    if(visit!==state.visit||time<lastTime||motion<lastMotion){release();visit=state.visit;failure=null;lastTime=time;lastMotion=motion;}
-    reduced=!!reducedMotion;uniforms.amtFloorTime.value=reduced?0:motion;uniforms.amtFloorMelt.value=amtFloorMelt(time);uniforms.amtFloorStill.value=reduced||failure?1:0;
+    if(visit!==state.visit||time<lastTime&&!state.restoring||motion<lastMotion){release();visit=state.visit;failure=null;lastTime=time;lastMotion=motion;}
+    uniforms.amtFloorRestore.value=Math.min(1,Math.max(0,state.restoration||0));reduced=!!reducedMotion;uniforms.amtFloorTime.value=reduced?0:motion;uniforms.amtFloorMelt.value=amtFloorMelt(time);uniforms.amtFloorStill.value=reduced||failure?1:0;
     const elapsed=Math.max(0,Math.min(.1,motion-lastMotion));lastTime=time;lastMotion=motion;
     if(reduced){release();return;}
     if(failure)return;
     footstepsAt('player',player,motion,elapsed,player);for(const actor of actors)footstepsAt(actor.id,actor,motion,elapsed,player);
-    if(time<=0||!floatMask)return;
+    if(time<=0){if(targets)release();return;}if(!floatMask)return;
     try{
       if(!targets)prepare(motion-elapsed);
       carry+=elapsed;
@@ -199,7 +199,7 @@ export function createAmtFloor({THREE:T,renderer,material,mobile=false}){
     }catch(error){failure=String(error?.message||error);release();uniforms.amtFloorStill.value=1;}
   }
   renderer.domElement?.addEventListener('webglcontextlost',release);
-  return{update,setLights(levels){uniforms.amtLampLevels=levels;},setPortrait(texture,{x,z,width}){amtPortraitPaint.value=texture;amtPortraitInfo.value.set(x,z,width,texture?1:0);},dispose(){release();renderer.domElement?.removeEventListener('webglcontextlost',release);},inspect:()=>({time:lastTime,visit,melt:uniforms.amtFloorMelt.value,reducedMotion:reduced,
+  return{update,setLights(levels){uniforms.amtLampLevels=levels;},setPortrait(texture,{x,z,width}){amtPortraitPaint.value=texture;amtPortraitInfo.value.set(x,z,width,texture?1:0);},dispose(){release();renderer.domElement?.removeEventListener('webglcontextlost',release);},inspect:()=>({time:lastTime,visit,melt:uniforms.amtFloorMelt.value,restoration:uniforms.amtFloorRestore.value,reducedMotion:reduced,
     portraitSource:!!amtPortraitInfo.value.w,visualTime:lastMotion,speed:globalThis.BuergeramtGoop.speed(lastTime),simulatedTime:simTime,steps,targets:targets?2:0,resolution:[width,height],precision:floatMask?'RGBA32F':'procedural',textureBytes:targets?width*height*32:0,allocations,failure,
     footsteps,activeRipples:footRipples.value.filter(foot=>lastMotion-foot.z>=0&&lastMotion-foot.z<8).length,rippleLimit:rippleCount})};
 }

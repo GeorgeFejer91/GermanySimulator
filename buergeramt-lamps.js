@@ -22,7 +22,7 @@ export function createAmtLampWear({THREE:T,materials,floor}){
     age=state?Math.max(0,Number.isFinite(state.time)?state.time:0):0;
     motion=state?Math.max(0,Number.isFinite(state.visualTime)?state.visualTime:0):0;reduced=reduce;
     let total=0;
-    for(let i=0;i<5;i++){const level=state?amtLampLevel(age,motion,i,reduced):1;levels.value[i]=level;total+=level;materials[i].color.copy(original[i]).multiplyScalar(.012+.988*level);}
+    for(let i=0;i<5;i++){const progress=Math.min(1,Math.max(0,state?.restoration||0)),level=state?.restoring?amtLampLevel(state.restorationAge,state.restorationClock,i,reduced)*(1-progress)+progress:state?amtLampLevel(age,motion,i,reduced):1;levels.value[i]=level;total+=level;materials[i].color.copy(original[i]).multiplyScalar(.012+.988*level);}
     // Uniform illumination includes native paint, Gaussian actors and emissive
     // signs. A tiny residual keeps the exhausted room almost, not fully, black.
     dim.opacity=.992*(1-total/5);

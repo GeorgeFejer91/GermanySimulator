@@ -1,8 +1,8 @@
 import {createAmtGaussianScene,loadAmtSplatModule} from './buergeramt-gaussian-scene.js?v=20261012-queue-call';
 import {mouthPaintGlsl} from './buergeramt-mouth-paint.js?v=20261011-mouth-consistency';
-import {createAmtFloor} from './buergeramt-floor.js?v=20261012-flowing-paint-lamps';
+import {createAmtFloor} from './buergeramt-floor.js?v=20261012-counter-recovery';
 import {createAmtPortraitMelt} from './buergeramt-portrait-melt.js?v=20261012-flowing-paint-lamps';
-import {createAmtLampWear} from './buergeramt-lamps.js?v=20261012-flowing-paint-lamps';
+import {createAmtLampWear} from './buergeramt-lamps.js?v=20261012-counter-recovery';
 import {prepareWithSegments,measureNaturalWidth,measureLineStats} from './assets/vendor/pretext/dist/layout.js';
 const THREE_URL="./assets/vendor/three/0.186.0/build/three.module.min.js";
 const GLTF_LOADER_URL="./assets/vendor/three/0.186.0/examples/jsm/loaders/GLTFLoader.js";

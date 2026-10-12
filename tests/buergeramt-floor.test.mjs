@@ -29,23 +29,23 @@ test('the room clock starts inside the doorway, continues in dialogue and freeze
   const h=harness();h.advanceGame(30);assert.equal(h.level.floorState.time,0);
   h.moveTo(0,6.6);h.level.interact();h.advanceGame(2);assert.ok(Math.abs(h.level.floorState.time-2)<1e-8);
   const d=harness();d.counter();const before=d.level.floorState.time;d.advanceGame(3);
-  assert.ok(Math.abs(d.level.floorState.time-before-3)<1e-8);
+  assert.equal(d.level.floorState.restoring,true);assert.ok(d.level.floorState.time<before);
   h.hide();h.advanceGame(60);assert.ok(Math.abs(h.level.floorState.time-2)<1e-8);
   h.document.hidden=false;const visit=h.level.floorState.visit;h.level.replay(h.config);
   assert.equal(h.level.floorState.time,0);assert.ok(h.level.floorState.visit>visit);
   h.node('amt-exit').click();h.advanceGame(10);assert.equal(h.level.floorState.time,0);
 });
-test('liquidation and slowdown share a late-accelerating 900-second sigmoid, capped at 50% speed',()=>{
+test('liquidation and slowdown share a late-accelerating 780-second sigmoid, capped at 65% speed',()=>{
   for(const t of [-1,0,NaN,Infinity])assert.equal(amtFloorMelt(t),0);
   const api=globalThis.BuergeramtGoop;
-  assert.equal(api.duration,900);assert.equal(api.minSpeed,.5);assert.equal(api.speed(0),1);assert.equal(api.speed(900),.5);assert.equal(api.goop(900),1);assert.equal(api.goop(10000),1);
-  assert.ok(api.speed(300)>.998&&api.speed(450)>.988,'opening minutes remain almost unchanged');
-  assert.ok(api.speed(720)<.76&&api.speed(840)<.56,'decay becomes pronounced late in the visit');
+  assert.equal(api.duration,780);assert.equal(api.minSpeed,.65);assert.equal(api.speed(0),1);assert.equal(api.speed(780),.65);assert.equal(api.goop(780),1);assert.equal(api.goop(10000),1);
+  assert.ok(api.speed(260)>.998&&api.speed(390)>.988,'opening minutes remain almost unchanged');
+  assert.ok(api.speed(624)<.83&&api.speed(728)<.70,'decay becomes pronounced late in the visit');
   assert.ok(api.goop(720)-api.goop(600)>api.goop(600)-api.goop(480),'late decay accelerates');
-  assert.ok(Math.abs(api.motion(900)-805.1169981337422)<1e-8);
-  for(const t of [30,150,300,450,600,720,840,899,910]){const derivative=(api.motion(t+.001)-api.motion(t-.001))/.002;assert.ok(Math.abs(derivative-api.speed(t))<1e-7,'integrated scene time follows the exact shared speed');}
+  assert.ok(Math.abs(api.motion(780)-722.4376455344702)<1e-8);
+  for(const t of [30,150,260,390,520,624,728,779,790]){const derivative=(api.motion(t+.001)-api.motion(t-.001))/.002;assert.ok(Math.abs(derivative-api.speed(t))<1e-7,'integrated scene time follows the exact shared speed');}
   let previous=0;for(let t=0;t<1000;t+=.1){const value=amtFloorMelt(t);assert.ok(value>=previous&&value<=1);previous=value;}
-  for(const time of [0,1,21,60,300,160,600,900,999]){const f=fixture();f.floor.update({visit:1,time});assert.equal(f.floor.inspect().speed,1-.5*f.floor.inspect().melt);f.floor.update({visit:1,time},true);assert.equal(f.floor.inspect().speed,1-.5*f.floor.inspect().melt);}
+  for(const time of [0,1,21,60,300,160,600,900,999]){const f=fixture();f.floor.update({visit:1,time});assert.equal(f.floor.inspect().speed,1-.35*f.floor.inspect().melt);f.floor.update({visit:1,time},true);assert.equal(f.floor.inspect().speed,1-.35*f.floor.inspect().melt);}
 });
 
 test('20 Hz transport is frame-rate independent, allocates only on melting, and preserves renderer state',()=>{
@@ -97,8 +97,21 @@ test('only accepted displacement makes bounded footsteps; standing, blocked root
   for(let n=142;n<=330;n++)update(n*.05);assert.equal(f.floor.inspect().activeRipples,0);
   update(16.5);f.floor.update(null);assert.equal(f.floor.inspect().footsteps,0);
 });
-test('fifteen minutes remain real residence time while motion integrates the shared drag',()=>{
-  const h=harness();h.moveTo(0,6.6);h.level.interact();h.advanceGame(900);
-  assert.ok(Math.abs(h.level.floorState.time-900)<1e-8);assert.ok(Math.abs(h.level.timeScale-.5)<1e-10);
-  assert.ok(Math.abs(h.level.floorState.goop-1)<1e-10);assert.ok(Math.abs(h.level.floorState.visualTime-BuergeramtGoop.motion(900))<1);
+test('thirteen minutes remain real residence time while motion integrates the shared drag',()=>{
+  const h=harness();h.moveTo(0,6.6);h.level.interact();h.advanceGame(780);
+  assert.ok(Math.abs(h.level.floorState.time-780)<1e-8);assert.ok(Math.abs(h.level.timeScale-.65)<1e-10);
+  assert.ok(Math.abs(h.level.floorState.goop-1)<1e-10);assert.ok(Math.abs(h.level.floorState.visualTime-BuergeramtGoop.motion(780))<1);
+});
+
+
+test('restoring the room retains its pigment targets while reversing and releases them at zero',()=>{
+ const f=fixture();f.floor.update({visit:1,time:780,visualTime:722});const allocations=f.floor.inspect().allocations;
+ for(let n=1;n<=10;n++)f.floor.update({visit:1,time:BuergeramtGoop.ageForMelt(1-n/20),visualTime:722+n*.1,restoring:true,restoration:n/20});
+ assert.equal(f.floor.inspect().allocations,allocations);assert.equal(f.floor.inspect().targets,2);assert.equal(f.floor.inspect().restoration,.5);assert.ok(Math.abs(f.floor.inspect().speed-.825)<1e-10);
+ f.floor.update({visit:1,time:0,visualTime:800,restoring:true,restoration:1});assert.equal(f.floor.inspect().targets,0);assert.equal(f.floor.inspect().melt,0);assert.equal(f.floor.inspect().speed,1);
+ f.floor.update(null);assert.equal(f.floor.inspect().restoration,0);
+});
+
+test('inverse melt age preserves the single curve across restoration boundaries',()=>{
+ for(const amount of [0,.00001,.1,.5,.99,1])assert.ok(Math.abs(BuergeramtGoop.goop(BuergeramtGoop.ageForMelt(amount))-amount)<1e-12);
 });

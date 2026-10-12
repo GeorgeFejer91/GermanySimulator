@@ -68,7 +68,7 @@ No new synthesis or voice profile is needed for this restoration.
 ## Waiting-room floor
 
 The room begins with .82 m black-and-white checkerboard tiles and painted grout.
-Over **900 seconds (15 minutes) of visible, unscaled residence inside the actual
+Over **780 seconds (13 minutes) of visible, unscaled residence inside the actual
 doorway**, their pigment gradually stretches into curling veins and merging oily
 pools. Grout disappears and the surface develops shallow specular ridges and
 distorted analytic reflections of the five existing fluorescent ceiling strips.
@@ -77,22 +77,37 @@ No floor height, furniture, body clearance or collision changes; gait remains
 tied to accepted displacement.
 
 **Liquidation and deceleration must map one to one.** `buergeramt-goop.js` is the
-single immutable authority: `p = clamp(age / 900, 0, 1)`,
+single immutable authority: `p = clamp(age / 780, 0, 1)`,
 `s(p) = 1 / (1 + exp(−12(p − .82)))`,
-`goop = (s(p) − s(0)) / (s(1) − s(0))`, and `speed = 1 − 0.5 × goop`.
+`goop = (s(p) − s(0)) / (s(1) − s(0))`, and `speed = 1 − 0.35 × goop`.
 The late-shifted sigmoid makes early decay nearly imperceptible: speed remains
-99.84% at five minutes and 98.83% at 7.5 minutes, then falls to 92.36% at ten,
-75.45% at twelve, 55.62% at fourteen and **50% at fifteen minutes**. Its steepest
-decay is near 12.3 minutes; the final approach eases into the cap.
-Keep the final floor and time scale capped there. Never add a separate melting
+99.79% at five minutes and 99.18% at 6.5 minutes, then falls to 94.65% at 8 minutes 40 seconds,
+82.81% at 10 minutes 24 seconds, 68.94% at 12 minutes 8 seconds and **65% at thirteen minutes**. Its steepest
+decay is near 10.66 minutes; the final approach eases into the cap.
+Reaching the assigned Schalter within the existing 1.9 m interaction range while
+its row shows the player's called number automatically starts **90 seconds of
+recovery**, without requiring E. A reserved ticket, wrong desk, premature approach
+or expired call cannot start it. Recovery runs through the counter conversation,
+phone interruptions and other active office states, and pauses when hidden.
+Melt decreases linearly from its value at arrival to zero, so speed rises linearly
+from its arrival value to 100%. The inverse shared sigmoid maps this restoration
+back to the floor/portrait age; integrated scene time continues forward.
+Lamp strengths interpolate from their arrival values to full brightness on the
+same recovery progress, so even a fully dark twenty-minute room restores smoothly.
+Floor pigment blends back into the original tiles without reallocating each
+reverse frame; deposited paint, portrait drips and lamp wear restore together.
+At 90 seconds, the initial room and speed stay restored for the rest of that visit.
+Closing or replaying resets recovery; recovery awards no ticket, stamp or A38.
+
+Keep the final floor and time scale capped there before recovery. Never add a separate melting
 delay, independent easing, second time-scale ramp, or feed slowed time back into
-the 900-second age; that would break the user's explicit coupling requirement.
+the 780-second age; that would break the user's explicit coupling requirement.
 
 `buergeramt.js` owns unscaled `floorState.time`, integrated `visualTime`, and
 attempt generation. Count age only while the player's position is inside the
 door; continue through conversations and fever/omen beats, pause age in the
 vestibule and when hidden/closed, and reset both clocks on close/replay. Its exact
-logistic integral of speed (805.116998 scene seconds over 900 real residence seconds)
+logistic integral of speed (722.437646 scene seconds over 780 real residence seconds)
 drives player/NPC movement, queue and deadlines, action/fever/
 omen clocks, atlas/breath/mouth animation and liquid transport. Render and input
 dispatch stay responsive. `buergeramt-floor.js` carries one

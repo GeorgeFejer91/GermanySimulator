@@ -36,6 +36,13 @@ test('the room and floor share lamp levels; close/replay restores brightness and
   lamp.update({time:600,visualTime:450});assert.equal(lamp.inspect().clock,450);assert.equal(lamp.inspect().dead,0);
   lamp.update({time:900,visualTime:600});assert.equal(lamp.inspect().dead,2);
   lamp.update({time:1200,visualTime:750});assert.equal(lamp.inspect().dead,5);assert.ok(lamp.inspect().illumination<.01);assert.deepEqual(Array.from(binding.value),[0,0,0,0,0]);
+  for(const reduced of [false,true])for(const progress of [0,.5,1]){
+    lamp.update({time:BuergeramtGoop.ageForMelt(1-progress),visualTime:750+90*progress,restoring:true,restoration:progress,restorationAge:1200,restorationClock:750},reduced);
+    assert.deepEqual(lamp.inspect().levels,Array(5).fill(progress),'all exhausted lamps recover continuously from their arrival brightness');
+    assert.deepEqual(Array.from(binding.value),Array(5).fill(progress));
+    assert.ok(Math.abs(lamp.inspect().illumination-(.008+.992*progress))<1e-12);
+  }
+  lamp.update({time:1200,visualTime:750});
   const held=lamp.inspect();globalThis.document={hidden:true};try{lamp.update({time:1800,visualTime:1050});assert.deepEqual(lamp.inspect(),held);}finally{delete globalThis.document;}
   let rendered;const renderer={autoClear:true,render(scene){assert.equal(this.autoClear,false);rendered=scene.mesh;}};
   lamp.render(renderer);assert.equal(renderer.autoClear,true);assert.equal(rendered.material.depthTest,false);assert.equal(rendered.material.depthWrite,false);
