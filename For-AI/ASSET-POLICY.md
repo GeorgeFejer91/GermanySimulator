@@ -651,6 +651,58 @@ For risky GLB re-export/optimization, compare bytes alongside names/hierarchy, w
 
 For rendered comparisons, freeze representative game/HUD states and camera, then calibrate repeated unchanged captures before setting tolerances. Verify a known meaningful visual mutation fails. Separate normal/reduced-motion and loaded/fallback states; screenshots cannot alone establish timing, physical-device performance or correct animation.
 
+### Simulation work reuse (2026-10-12)
+
+The city retains exact collision and train rules while avoiding repeated work.
+Authored prop footprints are prepared once. Fixed props, norm objects and trees
+use one 256-simulation-unit grid, padded by each footprint plus 145 units and
+contact epsilon. Queries with larger bodies retain the exhaustive scan; moving
+people, cars and trains always use live positions and exact narrow-phase checks.
+Station activation stays a live query condition. Static positions/dimensions are
+immutable during play; any future relocation must invalidate/rebuild the grid.
+The cache belongs to the city page, has no timer, and rebuilds for replacement
+scenery arrays or changed record count. Traffic gap scans avoid temporary
+per-obstacle objects. Train-to-obstacle projections are shared once per rail loop
+within each substep, then discarded so the next substep sees moving obstacles.
+No asset, dependency, renderer, quality reduction or extra simulation clock is
+introduced. The existing physics, vehicle/lifecycle, traffic and train checks
+now run in the Pages release gate.
+
+Five alternating warmed Node pairs each execute 11,900 identical static-contact
+queries on the seeded authored city (133 NPCs, 77 props and 28 trees). Every pair
+returns the same 4,340 blocked-query checksum; the median paired time ratio is
+3.92 times faster for this CPU function workload. This is a VM/function benchmark,
+not a rendered FPS or input-latency measurement. The exhaustive-contact oracle
+and 1,200 seeded bucket-edge/recovery cases accompany the production regressions.
+
+Three cold Chromium 154.0.8037.99 / Intel Iris Xe contexts per viewport use
+local uncompressed HTTP, DPR 2, seed 4781 and no CPU throttle against e0e6668.
+All twelve before/after contexts record nine input-response samples without page errors
+and pass unchanged title, startup/deferred-resource and draw-buffer guards.
+Active sync-interval p95 medians are 277.1 → 605.1 ms desktop (ranges 149.8–541.5
+and 172.6–834.2) and 187.1 → 104.5 ms portrait emulation (85.0–545.8 and
+84.7–105.3). Input p95 medians are 724.9 → 546.0 and 178.1 → 129.9 ms.
+The shared Windows host and concurrent validation make these timings highly
+variable; desktop gets worse in these samples. They establish no stable frame
+rate or causal whole-game speedup. Candidate startup transfers are 14.36–16.73 MB.
+The earlier diagnostic/first-pass profiles and all final samples remain retained
+under output/smoothness; no guard was relaxed. The 307 release tests, voice curation
+and six exact-RGBA asset-delivery checks pass. Physical Android, displayed-frame
+GPU timing and the natural mission chain remain NOT RUN.
+
+A final sequential hardware guard pair, after this chat's long CPU checks finish,
+records active p50/p95 of 129.6/183.0 → 61.6/98.7 ms desktop and
+107.2/192.5 → 47.0/103.6 ms portrait emulation. Input p95 is
+214.9 → 137.4 ms and 1297.8 → 134.6 ms. All four contexts pass unchanged
+guards with nine response samples and no page errors. These single samples
+supplement the variable repeated comparison, not a stable-FPS certification.
+Both independent reviewers pass scoped source/CPU preservation and supplied
+browser sanity. The matching 32-check object fixture passes desktop and Android
+portrait/landscape emulation, including loaded/fallback and root/direct views.
+It uses diagnostic placements and title-paused simulation near 2 Hz; full timed
+world lifecycle/recovery sequences remain unrun. Exact reports and original
+profiles are retained under output/smoothness in the performance worktree.
+
 ## Local 3D buildings
 
 The Bürgeramt entrance radiance is original runtime geometry: one retained door

@@ -889,6 +889,23 @@ function propRadius(p){
  if(p.asset==="fahrrad")return 41;if(p.asset==="gartenzwerg")return 23;
  const w=Math.max(26,p.w||48),depth=Math.max(21,w*.55),fit=fits[p.asset];return Math.ceil(Math.max(Math.hypot(w,depth)/2,fit?Math.hypot(...fit)*25:0));
 }
+// Authored prop dimensions never change during play; active station fixtures still gate contacts at query time.
+for(const p of props)p.collisionRadius=propRadius(p);
+function groundCircleCandidates(x,y,r){
+ // ponytail: fixed authored scenery needs one 256-unit grid; moving bodies keep their live exact scans.
+ let grid=groundCircleCandidates.grid;
+ if(!grid||grid.props!==props||grid.normObjects!==normObjects||grid.trees!==trees||grid.count!==props.length+normObjects.length+trees.length){
+  const records=[...props.map(item=>({item,radius:propRadius(item),prop:true})),...normObjects.map(item=>({item,radius:normObjectRadius(item)})),...trees.map(item=>({item,radius:TREE_RADIUS}))],cells=new Map();
+  for(const record of records){const {item,radius}=record,pad=radius+145+1e-6;
+   for(let cx=Math.floor((item.x-pad)/256);cx<=Math.floor((item.x+pad)/256);cx++)for(let cy=Math.floor((item.y-pad)/256);cy<=Math.floor((item.y+pad)/256);cy++){
+    const key=cx+","+cy;let bucket=cells.get(key);if(!bucket)cells.set(key,bucket=[]);bucket.push(record);
+   }
+  }
+  grid=groundCircleCandidates.grid={props,normObjects,trees,count:records.length,records,cells,empty:[]};
+ }
+ // Positions and dimensions are immutable; station activation is checked by each consumer, never cached.
+ return r>145?grid.records:grid.cells.get(Math.floor(x/256)+","+Math.floor(y/256))||grid.empty;
+}
 function staticBlocked(x,y,r=player.r){if(x<r+9||y<r+9||x>WORLD.w-r-9||y>WORLD.h-r-9)return true;if(x>goerlitzerPark.x-r&&x<goerlitzerPark.x+goerlitzerPark.w+r&&y>goerlitzerPark.y-r&&y<goerlitzerPark.y+goerlitzerPark.h+r)return true;if(dist(x,y,wirtschaftswunderSite.x,wirtschaftswunderSite.y)<r+wirtschaftswunderSite.collisionRadius)return true;if(Math.abs(x-kiesingerMemorial.x)<r+173&&Math.abs(y-kiesingerMemorial.y)<r+147)return true;for(const b of buildings)if(x>b.x-r&&x<b.x+b.w+r&&y>b.y-r&&y<b.y+b.h+r)return true;for(const p of props)if(!p.decorative&&(!p.stationFixture||p.active)&&dist(x,y,p.x,p.y)<r+propRadius(p))return true;for(const o of normObjects)if(dist(x,y,o.x,o.y)<r+normObjectRadius(o))return true;for(const tree of trees)if(dist(x,y,tree.x,tree.y)<r+TREE_RADIUS)return true;return false}
 function trainCarDistance(x,y,car){const dx=x-car.x,dy=y-car.y,c=Math.cos(car.angle),s=Math.sin(car.angle),along=dx*c+dy*s,across=-dx*s+dy*c;return Math.hypot(Math.max(0,Math.abs(along)-TRAIN_CAR_HALF_LENGTH),Math.max(0,Math.abs(across)-TRAIN_CAR_HALF_WIDTH))}
 function trainAt(x,y,r){for(const train of trains)for(const car of train.cars)if(trainCarDistance(x,y,car)<r)return car;return null}
@@ -910,9 +927,7 @@ function vehicleMotionBlocked(x,y,car,fromX=car.x,fromY=car.y,fromAngle=car.angl
  if(y<extY+9||y>WORLD.h-extY-9||((x<extX+9||x>WORLD.w-extX-9)||car.roadBound)&&!vehicleOnRoad(x,y,car.angle))return true;
  if(rect(goerlitzerPark)||rect({x:kiesingerMemorial.x-173,y:kiesingerMemorial.y-147,w:346,h:294})||circle(wirtschaftswunderSite,wirtschaftswunderSite.collisionRadius))return true;
  for(const b of buildings)if(rect(b))return true;
- for(const p of props)if(!p.decorative&&(!p.stationFixture||p.active)&&circle(p,propRadius(p)))return true;
- for(const o of normObjects)if(circle(o,normObjectRadius(o)))return true;
- for(const tree of trees)if(circle(tree,TREE_RADIUS))return true;
+ for(const {item,radius,prop} of groundCircleCandidates(x,y,145))if((!prop||!item.decorative&&(!item.stationFixture||item.active))&&circle(item,radius))return true;
  for(const train of trains)for(const coach of train.cars)if(body(coach,TRAIN_CAR_HALF_LENGTH,TRAIN_CAR_HALF_WIDTH))return true;
  for(const other of [...trafficCars,...policeVehicles])if(other!==car&&other.vortexPhase!=="swallowed"&&body(other,94,51))return true;
  for(const officer of police)if(circle(officer,14))return true;
@@ -924,9 +939,7 @@ function groundStaticMotionBlocked(x,y,r,fromX,fromY){
  if(groundContactBlocks(x,fromX,r+9)||groundContactBlocks(y,fromY,r+9)||groundContactBlocks(WORLD.w-x,WORLD.w-fromX,r+9)||groundContactBlocks(WORLD.h-y,WORLD.h-fromY,r+9))return true;
  if(rect(goerlitzerPark)||circle(wirtschaftswunderSite.x,wirtschaftswunderSite.y,wirtschaftswunderSite.collisionRadius)||rect({x:kiesingerMemorial.x-173,y:kiesingerMemorial.y-147,w:346,h:294}))return true;
  for(const b of buildings)if(rect(b))return true;
- for(const p of props)if(!p.decorative&&(!p.stationFixture||p.active)&&circle(p.x,p.y,propRadius(p)))return true;
- for(const o of normObjects)if(circle(o.x,o.y,normObjectRadius(o)))return true;
- for(const tree of trees)if(circle(tree.x,tree.y,TREE_RADIUS))return true;
+ for(const {item,radius,prop} of groundCircleCandidates(x,y,r))if((!prop||!item.decorative&&(!item.stationFixture||item.active))&&circle(item.x,item.y,radius))return true;
  return false
 }
 function pedestrianRouteContains(n,x,y,r=13){const b=n.routeBounds;return !b||x>=b.x+r&&x<=b.x+b.w-r&&y>=b.y+r&&y<=b.y+b.h-r}
@@ -1154,8 +1167,13 @@ function updateWirtschaftswunderCar(car,dt){
 }
 function trafficGroundGap(car){
  let gap=Infinity;
- const obstacles=[...policeVehicles.map(item=>({item,r:107})),...police.map(item=>({item,r:14})),...npcs.map(item=>({item,r:13})),...props.filter(item=>!item.decorative&&(!item.stationFixture||item.active)).map(item=>({item,r:propRadius(item)})),...normObjects.map(item=>({item,r:normObjectRadius(item)})),...trees.map(item=>({item,r:TREE_RADIUS}))];
- for(const {item,r} of obstacles)if(item!==car&&Math.abs(item.y-car.y)<51+r)gap=Math.min(gap,trafficForwardGap(car,item.x)-94-r);
+ const check=(item,r)=>{if(item!==car&&Math.abs(item.y-car.y)<51+r)gap=Math.min(gap,trafficForwardGap(car,item.x)-94-r)};
+ for(const item of policeVehicles)check(item,107);
+ for(const item of police)check(item,14);
+ for(const item of npcs)check(item,13);
+ for(const item of props)if(!item.decorative&&(!item.stationFixture||item.active))check(item,propRadius(item));
+ for(const item of normObjects)check(item,normObjectRadius(item));
+ for(const item of trees)check(item,TREE_RADIUS);
  return gap
 }
 function updateTraffic(dt){
@@ -1180,11 +1198,19 @@ function startTrainBounce(a,b){
 }
 function updateBorderTrains(dt){
  const groundObstacles=[{item:player,radius:player.r,player:true},...trafficCars.filter(item=>item.vortexPhase!=="swallowed").map(item=>({item,radius:107})),...policeVehicles.map(item=>({item,radius:107})),...police.map(item=>({item,radius:14})),...npcs.map(item=>({item,radius:13})),...props.map(item=>({item,radius:propRadius(item)})),...normObjects.map(item=>({item,radius:normObjectRadius(item)})),...trees.map(item=>({item,radius:TREE_RADIUS}))].filter(({item})=>item.x<900||item.y<900||item.x>WORLD.w-900||item.y>WORLD.h-900);let playerHolding=false;
+ // Each train on a loop sees the same obstacle poses in this simulation substep.
+ // Project once per loop; discard only obstacles outside the existing exact clearance.
+ const obstaclesByLoop=new Map();
+ for(const train of trains)if(!obstaclesByLoop.has(train.loopIndex)){
+  const loop=railLoops[train.loopIndex],nearby=[];
+  for(const obstacle of groundObstacles){const rail=nearestRailLocation(loop,obstacle.item.x,obstacle.item.y);if(rail.distance<TRAIN_CAR_HALF_WIDTH+obstacle.radius+6)nearby.push({...obstacle,progress:rail.progress})}
+  obstaclesByLoop.set(train.loopIndex,nearby);
+ }
  for(const train of trains){
   const loop=railLoops[train.loopIndex];train.collisionCooldown=Math.max(0,train.collisionCooldown-dt);if(train.bouncePause>0){train.bouncePause=Math.max(0,train.bouncePause-dt);if(train.bouncePause===0&&train.reversePending){train.dir*=-1;train.reversePending=false;train.speed=0}}
   train.chaos-=dt;if(train.chaos<=0){const event=Math.random();if(event<.55){train.pause=1.4+Math.random()*4.8;train.incidentReason="pause";train.incidentUntil=performance.now()+18000;trainAnnouncementNextAt=Math.min(trainAnnouncementNextAt,performance.now()+900)}train.cruiseSpeed=train.baseSpeed*(.5+Math.random()*1.15);train.chaos=2.8+Math.random()*5.5}
   if(train.pause>0)train.pause=Math.max(0,train.pause-dt);else if(train.incidentReason&&performance.now()>train.incidentUntil)train.incidentReason="";
-   let groundGap=Infinity,groundBlocker=null;for(const obstacle of groundObstacles){const rail=nearestRailLocation(loop,obstacle.item.x,obstacle.item.y),forward=train.dir>0?wrapRailProgress(rail.progress-train.progress,loop.length):wrapRailProgress(train.progress-rail.progress,loop.length);const clearanceGap=forward-Math.max(0,obstacle.radius-player.r);if(rail.distance<TRAIN_CAR_HALF_WIDTH+obstacle.radius+6&&forward<TRAIN_PLAYER_LOOKAHEAD&&clearanceGap<groundGap){groundGap=clearanceGap;groundBlocker=obstacle}}
+   let groundGap=Infinity,groundBlocker=null;for(const obstacle of obstaclesByLoop.get(train.loopIndex)){const forward=train.dir>0?wrapRailProgress(obstacle.progress-train.progress,loop.length):wrapRailProgress(train.progress-obstacle.progress,loop.length);const clearanceGap=forward-Math.max(0,obstacle.radius-player.r);if(forward<TRAIN_PLAYER_LOOKAHEAD&&clearanceGap<groundGap){groundGap=clearanceGap;groundBlocker=obstacle}}
   const blockedByGround=!!groundBlocker;train.blockedByPlayer=!!groundBlocker?.player;train.blockedByObstacle=blockedByGround&&!train.blockedByPlayer;if(train.blockedByPlayer)playerHolding=true;
   const target=train.bouncePause>0||train.pause>0||blockedByGround?0:train.cruiseSpeed,rate=target<train.speed?train.acceleration*3.2:train.acceleration;train.speed+=clamp(target-train.speed,-rate*dt,rate*dt);const intended=Math.max(0,train.speed*dt),groundAllowed=blockedByGround?Math.max(0,groundGap-TRAIN_PLAYER_STOP_GAP):Infinity,advance=Math.min(intended,groundAllowed);train.motion=train.dir*advance;train.queued=blockedByGround&&advance+0.01<intended
  }

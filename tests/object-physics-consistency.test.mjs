@@ -13,10 +13,34 @@ function functionSource(name){
  }
  throw new Error(`Unclosed function ${name}`);
 }
-const names=["normObjectRadius","propRadius","staticBlocked","trainCarDistance","trainAt","groundContactBlocks","signedRectDistance","vehicleBodyDistance","orientedBodySeparation","vehicleMotionBlocked","vehicleOnRoad","dynamicBlocker","groundStaticMotionBlocked","pedestrianRouteContains","responderBlocked","moveGroundResponder","blocked","blockingPedestrian","movePlayerGround","pedestrianLane","pedestrianRouteStalled","initializePedestrianRoutes"];
+const names=["normObjectRadius","propRadius","groundCircleCandidates","staticBlocked","trainCarDistance","trainAt","groundContactBlocks","signedRectDistance","vehicleBodyDistance","orientedBodySeparation","vehicleMotionBlocked","vehicleOnRoad","dynamicBlocker","groundStaticMotionBlocked","pedestrianRouteContains","responderBlocked","moveGroundResponder","blocked","blockingPedestrian","movePlayerGround","pedestrianLane","pedestrianRouteStalled","initializePedestrianRoutes"];
 function harness(){
  const context={WORLD:{w:10960,h:5360},CITY:{w:9840,h:4240},RAIL_GUTTER:560,SIDEWALK_WIDTH:72,TREE_RADIUS:38,TRAFFIC_CAR_RADIUS:42,TRAIN_CAR_HALF_LENGTH:122,TRAIN_CAR_HALF_WIDTH:46,player:{x:8000,y:5000,r:16},goerlitzerPark:{x:10000,y:4000,w:100,h:100},wirtschaftswunderSite:{x:10000,y:4200,collisionRadius:142},kiesingerMemorial:{x:10000,y:4500},buildings:[],props:[],normObjects:[],trees:[],trains:[],trafficCars:[],policeVehicles:[],police:[],npcs:[],horizontalRoads:[],verticalRoads:[],sidewalkSegments:[],verticalSidewalkSegments:[],crossings:[],stations:[],stationElevation:()=>0,clamp:(n,a,b)=>Math.max(a,Math.min(b,n)),dist:(ax,ay,bx,by)=>Math.hypot(ax-bx,ay-by)};
  vm.createContext(context);vm.runInContext(names.map(functionSource).join("\n"),context);return context;
+}
+
+// The static broad phase must agree with an exhaustive exact scan, including cell edges and recovery.
+{
+ const h=harness();let seed=4781;
+ const random=()=>((seed=(Math.imul(seed,1664525)+1013904223)>>>0)/2**32);
+ h.props=Array.from({length:120},(_,i)=>({x:i%12*256,y:Math.floor(i/12)*256,collisionRadius:10+random()*180,stationFixture:i%7===0,active:i%3===0,decorative:i%11===0}));
+ h.normObjects=[{x:255.999,y:512,type:"hedge"}];h.trees=[{x:-256,y:0},{x:1024,y:512}];
+ const indexed=h.groundCircleCandidates,records=indexed(0,0,200);
+ assert.ok(indexed(2800,2400,13).length<records.length/4,"local movement excludes most distant static circles");
+ for(let i=0;i<1200;i++){
+  const record=records[i%records.length],r=[13,16,107,145,200][i%5],angle=random()*Math.PI*2,d=record.radius+r+(i%3-1)*.001;
+  const x=record.item.x+Math.cos(angle)*d,y=record.item.y+Math.sin(angle)*d,fromX=x+(random()-.5)*2,fromY=y+(random()-.5)*2;
+  const candidates=indexed(x,y,r);
+  for(const other of records)if(Math.hypot(x-other.item.x,y-other.item.y)<r+other.radius)assert.ok(candidates.includes(other),"no true contact may be omitted at a bucket boundary");
+  const actual=h.groundStaticMotionBlocked(x,y,r,fromX,fromY);
+  h.groundCircleCandidates=()=>records;const exhaustive=h.groundStaticMotionBlocked(x,y,r,fromX,fromY);h.groundCircleCandidates=indexed;
+  assert.equal(actual,exhaustive,"indexing preserves exact contact and monotonic overlap recovery");
+ }
+ const fixture=h.props[35];fixture.decorative=false;fixture.active=false;
+ assert.equal(h.groundStaticMotionBlocked(fixture.x,fixture.y,13,fixture.x,fixture.y),false,"inactive indexed fixtures stay nonsolid");
+ fixture.active=true;assert.equal(h.groundStaticMotionBlocked(fixture.x,fixture.y,13,fixture.x,fixture.y),true,"activation is never cached");
+ h.props.push({x:6000,y:3000,collisionRadius:30});
+ assert.ok(indexed(6000,3000,13).some(record=>record.item===h.props.at(-1)),"new authored records rebuild the index");
 }
 
 // Loaded n-Wagen depth 4.82 and fallback depth 4.72 use the same solid envelope.
@@ -55,6 +79,21 @@ for(const [type,radius] of [["hedge",37],["chairs",31],["bin",26]]){
  h.trains=[{progress:1000,loopIndex:0,dir:1,speed:20000,acceleration:100,cruiseSpeed:20000,baseSpeed:20000,collisionCooldown:0,bouncePause:0,pause:0,chaos:100,bump:0}];h.policeVehicles=[{x:2200,y:300,angle:0}];vm.runInContext(functionSource("updateBorderTrains"),h);h.updateBorderTrains(.025);
  assert.ok(h.trains[0].progress<=1139+1e-6,"a high-speed train cannot consume the enlarged car's extra forward clearance");
  const coach={x:h.trains[0].progress+780,y:300,angle:0,halfLength:122,halfWidth:46},car={...h.policeVehicles[0],halfLength:94,halfWidth:51};assert.ok(h.orientedBodySeparation(coach,car)>=0,"the leading coach cannot overlap the large car's full footprint");
+}
+
+// Shared-loop projections stay local to a substep: moving obstacles must be re-read.
+{
+ const h=harness();let projections=0;
+ Object.assign(h,{railLoops:[{length:30000},{length:30000}],TRAIN_PLAYER_LOOKAHEAD:2100,TRAIN_PLAYER_STOP_GAP:970,TRAIN_MIN_GAP:1820,performance:{now:()=>0},document:{getElementById:()=>({hidden:true})},railHoldTimer:0,playerHoldingLast:false,railLawNextAt:99999,updateTrainAnnouncement:()=>{},nearestRailLocation:(_loop,x,y)=>{projections++;return{progress:x,distance:Math.abs(y-300)}},wrapRailProgress:(x,length)=>(x%length+length)%length,syncTrainTransform:()=>{}});
+ h.trains=Array.from({length:12},(_,i)=>({progress:1000+i%6*4000,loopIndex:i<6?0:1,dir:i<6?1:-1,speed:120,acceleration:100,cruiseSpeed:120,baseSpeed:120,collisionCooldown:0,bouncePause:0,pause:0,chaos:100,bump:0}));
+ h.policeVehicles=[{x:2200,y:300,angle:0}];
+ vm.runInContext(functionSource("signedRailSeparation")+"\n"+functionSource("updateBorderTrains"),h);h.updateBorderTrains(.025);
+ assert.equal(projections,4,"two obstacles are projected once onto each loop, independent of train count");
+ assert.ok(h.trains[0].blockedByObstacle,"a nearby full car still stops the approaching train");
+ assert.equal(h.trains[1].blockedByObstacle,false,"the same car behind a train does not stop it");
+ const previous=h.trains[0].progress;h.policeVehicles[0].y=600;h.updateBorderTrains(.025);
+ assert.equal(projections,8,"each substep uses fresh obstacle positions");
+ assert.equal(h.trains[0].blockedByObstacle,false);assert.ok(h.trains[0].progress>previous,"moving the car clear releases the train");
 }
 
 // Full car geometry includes bonnet, boot and wheels, at every heading.

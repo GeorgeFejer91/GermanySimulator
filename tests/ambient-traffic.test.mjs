@@ -32,4 +32,18 @@ assert.deepEqual(reactions.map(([kind])=>kind),["horn","shout"],"braking must tr
 vm.runInNewContext("for(let i=0;i<90;i++)updateTraffic(.016)",trafficSandbox);
 assert.equal(reactions.filter(([kind,,aggressive])=>kind==="horn"&&aggressive).length,1,"a sustained stop must escalate to a longer horn burst");
 
+// Exercise the production gap scan against every obstacle family and activation state.
+const gapSource=game.slice(game.indexOf("function trafficGroundGap("),game.indexOf("function updateTraffic("));
+const gapScope={TRAFFIC_LANE_LENGTH:1000,TREE_RADIUS:38,policeVehicles:[],police:[],npcs:[],props:[],normObjects:[],trees:[],propRadius:p=>p.collisionRadius,normObjectRadius:()=>31};
+vm.runInNewContext(`${helper};${gapSource}`,gapScope);
+const probe={x:500,y:100,dir:1};
+assert.equal(gapScope.trafficGroundGap(probe),Infinity);
+for(const [family,r] of [["policeVehicles",107],["police",14],["npcs",13],["props",35],["normObjects",31],["trees",38]]){
+ gapScope[family]=[{x:700,y:100,collisionRadius:r}];assert.equal(gapScope.trafficGroundGap(probe),200-94-r,`${family} retains its forward clearance`);gapScope[family]=[];
+}
+gapScope.props=[{x:530,y:100,collisionRadius:35,decorative:true},{x:530,y:100,collisionRadius:35,stationFixture:true,active:false}];
+assert.equal(gapScope.trafficGroundGap(probe),Infinity,"decoration and inactive fixtures do not queue traffic");
+gapScope.props[1].active=true;assert.equal(gapScope.trafficGroundGap(probe),30-94-35,"late fixture activation takes effect immediately");
+probe.dir=-1;assert.equal(gapScope.trafficGroundGap(probe),970-94-35,"reverse lanes preserve wrapped gap semantics");
+
 console.log("ambient traffic checks passed");
