@@ -22,7 +22,7 @@ assert.deepEqual(JSON.parse(`[${game.match(/POLICE_RESPONSE_HELICOPTERS=\[([^\]]
 assert.match(game,/if\(instant\|\|gained>0\)spawnPolice/,"the first gained star must call a foot response");
 assert.match(game,/function spawnPointVisible\(x,y,padding,kind="officer"\)/,"response spawns need one renderer-aware visibility gate");
 assert.match(game,/if\(spawnPointVisible\(x,y,padding,kind\)\|\|responderBlocked\(x,y,radius,null\)\)continue/,"response candidates must be both offscreen and collision-free");
-assert.match(game,/if\(!police\.length\)\{const point=groundResponsePoint/,"law-power reinforcements must use the same offscreen spawn path");
+assert.match(game,/const car=responseSpawn\("car",0\)/,"law-power pickup uses full-body off-map car dispatch");
 assert.match(game,/getPoliceVehicles:\(\)=>policeVehicles/);
 assert.match(game,/getPoliceHelicopters:\(\)=>policeHelicopters/);
 assert.match(game,/helicopter\.spotlight&&grass/,"helicopter pressure must remain tied to forbidden grass");

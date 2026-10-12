@@ -41,7 +41,7 @@ assert.match(game,/available=Math\.max\(0,distance-TRAIN_MIN_GAP\).*a\.motion\*=
 assert.match(game,/headingX=velocity>10\?player\.vx\/velocity/,"cars must predict the player's current trajectory");
 assert.match(game,/slot=\(car\.index-\(policeVehicles\.length-1\)\/2\)\*82/,"cars must fan into blocking formation slots");
 assert.match(game,/if\(velocity<10\).*radius=175\+car\.index\*24/,"cars must orbit the player when no trajectory is available");
-assert.match(game,/cruise=d<30\?0/,"cars must brake at their blocking position");
+assert.match(game,/cruise=pickupHolding\|\|d<30\?0/,"cars must brake at their blocking position");
 assert.match(game,/steeringTarget=clamp\(turn\*1\.6,-\.62,\.62\)/,"pursuit cars must use bounded wheel steering");
 assert.match(game,/pushPlayer\(contactDx\/contactDistance\*105,contactDy\/contactDistance\*105\)/,"car impacts must use stepped player displacement");
 const pushSource=game.match(/function pushPlayer\(dx,dy\)\{[^\n]+\}/)?.[0];

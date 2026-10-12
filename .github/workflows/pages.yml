@@ -29,6 +29,8 @@ jobs:
         run: node --test tests/fullscreen.test.mjs
       - name: Check running hotkey
         run: node --test tests/running-hotkey.test.mjs
+      - name: Check law pickup and sirens
+        run: node --test tests/law-pickup.test.mjs tests/police-audio.test.mjs tests/police-escalation.test.mjs
       - name: Check fixed character voices
         run: |
           node tools/curate-voice-library.mjs --check

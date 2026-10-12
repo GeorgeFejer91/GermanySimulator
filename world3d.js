@@ -590,7 +590,7 @@ function showRendererFailure(error){
     for(const {node,radius} of slot.wheels)node.rotation.x=slot.travel/(radius*(slot.renderScale||1));
     for(const material of slot.brakes)material.emissiveIntensity=(car.queued||car.braking)?.8:0;
     const flash=Math.floor(performance.now()/125)%2;
-    for(const {material,left} of slot.beacons)material.emissiveIntensity=car.retiring?0:!!flash===left?2.6:.08;
+    for(const {material,left} of slot.beacons)material.emissiveIntensity=car.retiring&&!car.lawPickup?0:!!flash===left?2.6:.08;
     slot.lastX=car.x;slot.lastY=car.y;slot.lastAngle=car.angle;
   }
   function removeVehicleSlot(slot){slot.retired=true;world.remove(slot.group);for(const material of slot.materials)material.dispose()}
@@ -1638,7 +1638,7 @@ function showRendererFailure(error){
     }
   }
   // Only these owned roots gate updateMatrixWorld; Box3/updateWorldMatrix diagnostics remain available.
-  let parkCameraFrame=0,previousCameraTime=performance.now();
+  let parkCameraFrame=0,lawPickupCameraFrame=0,previousCameraTime=performance.now();
   let entryFactory=null,amtEntry=null,amtEntryDone=null,amtEntryResume=null,entryLastTime=0,entryFailure="";
   try{({createBuergeramtEntry:entryFactory}=await import("./buergeramt-entry.js?v=20261011-published-features"))}
   catch(error){entryFailure=error.message;console.warn("Bürgeramt entry keeps direct transition",error)}
@@ -1734,8 +1734,11 @@ function showRendererFailure(error){
     camera.lookAt(px+(memorial?(X(memorial.x)-px)*frame:0),1+playerElevation+3.6*frame,pz-2.7+(memorial?(Z(memorial.y)-(pz-2.7))*frame:0));
     const park=bridge.goerlitzerPark,parkDistance=park?Math.hypot(bridge.player.x-park.plaqueX,bridge.player.y-park.plaqueY):Infinity;
     const parkTarget=park&&bridge.player.y>park.y+park.h-30?Math.max(0,Math.min(1,(440-parkDistance)/250)):0;
-    parkCameraFrame+=(parkTarget-parkCameraFrame)*(1-Math.exp(-6*Math.min(.05,Math.max(0,(now-previousCameraTime)/1000))));previousCameraTime=now;
+    const cameraStep=Math.min(.05,Math.max(0,(now-previousCameraTime)/1000)),pickupInView=innerWidth>innerHeight&&matchMedia("(pointer:coarse)").matches&&vehicles.some(car=>car.lawPickup&&Math.hypot(car.x-bridge.player.x,car.y-bridge.player.y)<500);
+    lawPickupCameraFrame+=((pickupInView?1:0)-lawPickupCameraFrame)*(1-Math.exp(-8*cameraStep));
+    parkCameraFrame+=(parkTarget-parkCameraFrame)*(1-Math.exp(-6*cameraStep));previousCameraTime=now;
     if(parkCameraFrame>.001){const narrow=Math.max(0,Math.min(1,.95/camera.aspect-1)),cx=X(park.x+park.w/2),cz=Z(park.y+park.h/2),focus=parkCameraFrame*(1-.65*narrow);camera.position.set(px+(cx-px)*focus,11.5+(5+2*narrow)*parkCameraFrame,pz+14+2*narrow*parkCameraFrame);camera.lookAt(px+(cx-px)*focus,1+parkCameraFrame,pz-2.7+(cz-(pz-2.7))*parkCameraFrame)}
+    if(lawPickupCameraFrame>.001)camera.rotateX(-.16*lawPickupCameraFrame);
     updateGroupVisibility();updateBuergeramtDoorGlow(now);updateBuildingOcclusion();updateWirtschaftswunder(now);updateMissionPointer();renderer.render(scene,camera);
     if(missionPointer.visible){renderer.autoClear=false;renderer.clearDepth();renderer.info.autoReset=false;renderer.render(missionHudScene,missionHudCamera);renderer.info.autoReset=true;renderer.autoClear=true}
   },layoutMissionPointer,inspectAssets,setAmtQr,get amtLipSplat(){return amtMouthSplat?.inspect()||null},get amtGaussian(){return amtGaussian.inspect()},get amtCinematicReady(){const status=amtOmenSplat?.inspect();return amtOmenSkipped||!!status?.ready||!!status?.failure},get amtOmenSplat(){return {visit:amtOmenVisit,loading:!!amtOmenRequest,skipped:amtOmenSkipped,failure:amtOmenFailure,...(amtOmenSplat?.inspect()||{ready:false,visible:false})}},get amtOmenStaging(){return {isolation:amtIsolation.value,environmentVisible:amtEnvironment.visible}},get amtOffice(){return officeDetail?.inspect()||null},get amtCharacters(){return [...amtCharacters.map(actor=>({name:actor.name,id:actor.animationId??actor.id,...amtSnapshot(actor),frame:actor.frame,loaded:!!actor.mesh.material.map?.image,mapped:!!actor.mesh.material.map,visible:actor.mesh.visible,detail:actor.mesh.material.map===actor.detail,texelHeight:actor.mesh.material.map?.image?.height||0,breath:actor.mesh.material.userData.breath.value})),...amtMoving.map(actor=>({name:actor.id,...amtSnapshot(actor),frame:actor.cell,loaded:!!actor.mesh.material.map?.image,mapped:!!actor.mesh.material.map,visible:actor.mesh.visible,detail:actor.mesh.material.map===actor.detail||actor.mesh.material.map===actor.walkDetail||actor.mesh.material.map===actor.turnDetail,turnPrepared:!!actor.turnDetail,turnReady:!!actor.turnDetail?.image,texelHeight:actor.mesh.material.map?.image?.height||0,breath:actor.mesh.material.userData.breath.value,tint:actor.mesh.material.color.getHexString(),position:[actor.mesh.position.x,actor.mesh.position.z]}))]}};

@@ -71,12 +71,13 @@ used. The synthesis model is an offline production tool and is not shipped.
   trailing invented speech.
 
 These are synthesized derivatives, not original Thorsten-Voice dataset
-recordings. Each numbered file maps directly to the same one-based entry in
-`game.js`'s fixed `lawPowerLines` deck and uses that complete displayed string
-as synthesis input. The exact displayed string is also the browser-speech
-fallback.
+recordings. On 2026-10-12, the shipped numbered files were shortened to their
+spoken citation and heading for §-power. The long originals, their full German
+and English catalog text, and the complete spoken paragraphs remain recoverable
+from Git commit `3242218`. The following hashes identify those originals;
+the short assets below retain the same numbered clip IDs and Thorsten source.
 
-| Shipped file | Duration | SHA-256 |
+| Full original at `3242218` | Duration | SHA-256 |
 | --- | ---: | --- |
 | `laws/thorsten-negative-law-01.mp3` | 26.645 s | `08AFF8383CADD581EE443B050D6FFA820EBBD4CDC46D6201070E76CCF09A7A4E` |
 | `laws/thorsten-negative-law-02.mp3` | 15.935 s | `9E7D12D72A67B8FFEA87334BE48CE3EC81CD44355AE1E9BB849A25C61DC69A66` |
@@ -91,6 +92,32 @@ fallback.
 | `laws/thorsten-negative-law-11.mp3` | 23.667 s | `E463BFE83DA6972341B49404087C3AAEB5BD690D71302D62F3A92CE008AF7B50` |
 | `laws/thorsten-negative-law-12.mp3` | 24.268 s | `06FDD1B46A266CBEAEE5EAB0261E19FE3CEEC712BE1F48923FC8E8F63BF07A1B` |
 | `laws/thorsten-negative-law-13.mp3` | 23.327 s | `1529047B596C19F946F565755B9707C3032937B5BA11F71CD2997D162B2AE9E5` |
+
+The short exports were made with FFmpeg 8.0.1 from those exact original Git
+blobs using `tools/shorten-law-power-clips.py`. Whisper-small word timestamps
+and FFmpeg silence detection identified the end of each heading; the script
+records each cut point, applies a 100 ms fade, and levels each resulting MP3 to
+-18 LUFS ±0.3 with a peak no higher than -1.5 dBTP. Number 13 stops after the
+Food Irradiation Ordinance citation because its full heading is unusually long.
+The current `For-AI/AUDIO-TEXT-LIBRARY.js` source and English subtitle end at
+the same words. Encoded-file Whisper-small transcription found no paragraph
+body in any short export. Listening review has not been run.
+
+| Shipped short file | Duration | SHA-256 |
+| --- | ---: | --- |
+| `laws/thorsten-negative-law-01.mp3` | 6.750 s | `962A9B3087A088F1E4A75DC91A6AADBC5A64A07E40960B3A864BB7B0995888FC` |
+| `laws/thorsten-negative-law-02.mp3` | 4.182 s | `82EFA5BACCDAFE48AEE18BC16C3605012F7AC4D0CD50EDB1BDA46CBA6FEBC170` |
+| `laws/thorsten-negative-law-03.mp3` | 9.950 s | `DB4697D1A60CE3A2E2E519034B7954836CEC15CFB18F61710B8516E65B4CD27E` |
+| `laws/thorsten-negative-law-04.mp3` | 5.780 s | `D2AD7FEC3C61410FC4363B9DA2559672DD230F459CC836AA52BC97B875D99C48` |
+| `laws/thorsten-negative-law-05.mp3` | 3.420 s | `119EED7314F1C7CE6FE7AA84F744FDCC93DBB73E170A2C807AF4D1A3C6C3BA0C` |
+| `laws/thorsten-negative-law-06.mp3` | 7.270 s | `93A3E213CA7B0F55B27E969F6FAC0CAAE598DE8F5175A6964451C5EA62545188` |
+| `laws/thorsten-negative-law-07.mp3` | 5.080 s | `1A17A67092C78F220234793F49C4DD68B7C7D3C79217EC7E990DE6FC0904AE4F` |
+| `laws/thorsten-negative-law-08.mp3` | 4.720 s | `2F4FE30624BF199939D422729F401A25936F4E5FD84A0918A185642D8BA085FF` |
+| `laws/thorsten-negative-law-09.mp3` | 4.960 s | `72F28CB393324904E1419CDA854564D1C9FACF8AA3A00C11EBB1A91CC87836A1` |
+| `laws/thorsten-negative-law-10.mp3` | 6.150 s | `22C21BFEBB2AD0E10A927F7D8798B276E87A5ECA18547C343913EDA49144E4C4` |
+| `laws/thorsten-negative-law-11.mp3` | 5.932 s | `E7731CC24135ECAA5C42F09EF5D64E42B05EA70C1E6EF978519D84165EAB55FB` |
+| `laws/thorsten-negative-law-12.mp3` | 5.320 s | `84660214CFD4E40C524B52865DBE5DE1352F3F2FEC15B5198E9958C5ECD6DD1C` |
+| `laws/thorsten-negative-law-13.mp3` | 3.840 s | `326EEDA0019EC94C5418ADF99F299BE0C6D2FEC24AB27E5D3EC336EB3F2097F0` |
 
 ### Archived anonymous `REGEL DES AUGENBLICKS` readings
 

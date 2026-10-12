@@ -18,7 +18,7 @@ for(const [name,size,hash] of assets){
 assert.match(game,/const POLICE_CHASE_SIREN_AUDIO="\.\/assets\/audio\/police\/martinshorn-essen-loop\.mp3"/);
 assert.match(game,/POLICE_PASSBY_AUDIO="\.\/assets\/audio\/police\/german-police-passby\.mp3"/);
 assert.match(game,/source\.loop=true/,"the longer authentic Martinshorn must sustain the chase");
-assert.match(game,/state\.wanted>=2&&policeVehicles\.length/,"continuous chase audio must begin with the first police car");
+assert.match(game,/policeSirenCars\(\)\.length/,"continuous sirens serve wanted response and law pickups");
 assert.match(game,/Math\.min\(\.05,\(state\.wanted-2\)\*\.016\)/,"higher response tiers should add slight pass-by urgency");
 assert.match(game,/if\(contactDistance<190&&car\.passbyReady\)/,"a nearby police car must trigger the sourced pass-by accent only once per approach");
 assert.match(game,/\.catch\(\(\)=>\{if\(eligible\(\)\)playSiren\(\)\}\)/,"a missing pass-by recording must retain the synthesized alert fallback only while the approach is active");
@@ -42,4 +42,9 @@ await recording.catch(()=>{});
 await Promise.resolve();
 assert.equal(synthFallbacks,0,"a late failed pass-by must not sound over a modal");
 
-console.log("Local German police chase audio contract OK");
+let now=1000,retries=0;
+const retryScope=vm.createContext({document:{hidden:false},performance:{now:()=>now},policeChaseRetryAt:0,policeChaseSource:null,policeChaseLoading:false,audio:{},POLICE_CHASE_SIREN_AUDIO:'missing',prepareRecording:()=>{retries++;return Promise.reject(new Error('missing siren'))}});
+vm.runInContext(game.match(/function startPoliceChaseLoop\(\)\{[^\n]+/)[0],retryScope);retryScope.startPoliceChaseLoop();await new Promise(setImmediate);
+for(let i=0;i<60;i++)retryScope.startPoliceChaseLoop();assert.equal(retries,1,'failed sirens cannot refetch every frame');now=6000;retryScope.startPoliceChaseLoop();await new Promise(setImmediate);assert.equal(retries,2,'a failed sourced siren can retry after its bounded wait');
+const carScope=vm.createContext({policeVehicles:[{lawPickup:{},retiring:true},{retiring:false},{retiring:true}],state:{wanted:0}});vm.runInContext(game.match(/function policeSirenCars\(\)\{[^\n]+/)[0],carScope);assert.equal(carScope.policeSirenCars().length,1,'pickup sirens continue through departure with zero wanted stars');carScope.state.wanted=2;assert.equal(carScope.policeSirenCars().length,2,'wanted pursuit and pickup share the existing siren bus');
+console.log("Local German police chase audio and bounded pickup siren lifecycle OK");

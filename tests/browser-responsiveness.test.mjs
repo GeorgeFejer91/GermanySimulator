@@ -55,7 +55,7 @@ musicDoc.hidden=false;handler();assert.equal(resumes,1);handler();assert.equal(r
 
 // A decode completed after the tab is hidden cannot start a siren.
 const siren=game.match(/function startPoliceChaseLoop\(\)\{[^\n]+/)[0];let complete,sourceCreates=0;
-const sirenDoc={hidden:false},sirenScope=vm.createContext({document:sirenDoc,policeChaseSource:null,policeChaseLoading:false,audio:{},prepareRecording:()=>new Promise(resolve=>complete=resolve),POLICE_CHASE_SIREN_AUDIO:'siren',state:{started:true,modal:false,gameOver:false,wanted:2},policeVehicles:[{}],ensureAudio:()=>({createBufferSource(){sourceCreates++}})});
+const sirenDoc={hidden:false},sirenScope=vm.createContext({document:sirenDoc,performance:{now:()=>0},policeChaseRetryAt:0,policeChaseSource:null,policeChaseLoading:false,audio:{},prepareRecording:()=>new Promise(resolve=>complete=resolve),POLICE_CHASE_SIREN_AUDIO:'siren',state:{started:true,modal:false,gameOver:false,wanted:2},policeVehicles:[{}],ensureAudio:()=>({createBufferSource(){sourceCreates++}})});
 vm.runInContext(siren+';startPoliceChaseLoop()',sirenScope);sirenDoc.hidden=true;complete({});await new Promise(setImmediate);assert.equal(sourceCreates,0);assert.equal(sirenScope.policeChaseLoading,false);
 
 console.log('PASS: two-job admission, selective preloading, Start readiness, unchanged HUD and hidden background cleanup');

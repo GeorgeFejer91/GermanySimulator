@@ -11,6 +11,7 @@ const {chromium}=require(process.env.PLAYWRIGHT_MODULE||'playwright');
 const root=fileURLToPath(new URL('..',import.meta.url)).replace(/[\\/]$/,'');
 const output=resolve(process.env.PLAYTEST_OUTPUT||'output/object-consistency');mkdirSync(output,{recursive:true});
 const source=readFileSync(resolve(root,'world3d.js'),'utf8');
+const pickupCamera=process.argv.includes('--pickup-camera');
 function production(name){const start=source.indexOf(`  function ${name}(`),end=source.indexOf('\n  }',start);if(start<0||end<start)throw Error(name);return source.slice(start,end+4)}
 async function settleVisibility(page,id,obstructing){
  // Capture the actual completed state rather than assuming software-rendered
@@ -19,10 +20,10 @@ async function settleVisibility(page,id,obstructing){
  await page.waitForFunction(({id,obstructing})=>{Germany3D.sync();Germany3D.prepareNearbyAssets();const state=Germany3D.buildingVisibility.find(b=>b.id===id);return Germany3D.nearbyAssetsReady&&state.obstructing===obstructing&&(obstructing?state.opacity<=.04:state.opacity>=.99)},{id,obstructing},{polling:200,timeout:30000});
 }
 const mime={'.js':'text/javascript','.html':'text/html','.css':'text/css','.glb':'model/gltf-binary','.png':'image/png','.webp':'image/webp','.svg':'image/svg+xml','.json':'application/json','.woff2':'font/woff2','.mp3':'audio/mpeg'};
-const server=createServer((request,response)=>{try{const file=resolve(root,'.'+decodeURIComponent(new URL(request.url,'http://localhost').pathname));if(!file.startsWith(root+sep))throw Error('path');const bytes=readFileSync(file);response.writeHead(200,{'Content-Type':mime[extname(file)]||'application/octet-stream'});response.end(bytes)}catch{response.writeHead(404);response.end()}});
+const server=createServer((request,response)=>{try{const file=resolve(root,'.'+decodeURIComponent(new URL(request.url,'http://localhost').pathname));if(!file.startsWith(root+sep))throw Error('path');let bytes=readFileSync(file);if(pickupCamera&&file===resolve(root,'world3d.js'))bytes=bytes.toString().replace('vehicles.some(car=>car.lawPickup&&Math.hypot(car.x-bridge.player.x,car.y-bridge.player.y)<500)','!!window.__pickupCameraProbe');response.writeHead(200,{'Content-Type':mime[extname(file)]||'application/octet-stream'});response.end(bytes)}catch{response.writeHead(404);response.end()}});
 await new Promise(done=>server.listen(0,'127.0.0.1',done));
 let browser;
-const report={revision:Object.fromEntries(['world3d.js','game.js','3d.html'].map(file=>[file,createHash('sha256').update(readFileSync(resolve(root,file))).digest('hex')])),cases:[],limits:['Android emulation only; no physical device','City screenshots use diagnostic player placement with simulation paused at opening screen','Diagnostic animation-frame requests are limited to about 2 fps; no gameplay performance claim','External ChatDev stages were not executed']};
+const report={pickupCameraEligibilityForced:pickupCamera,revision:Object.fromEntries(['world3d.js','game.js','3d.html'].map(file=>[file,createHash('sha256').update(readFileSync(resolve(root,file))).digest('hex')])),cases:[],limits:['Android emulation only; no physical device','City screenshots use diagnostic player placement with simulation paused at opening screen','Diagnostic animation-frame requests are limited to about 2 fps; no gameplay performance claim','External ChatDev stages were not executed']};
 try{
  browser=await chromium.launch({headless:true,executablePath:process.env.CHROMIUM_PATH,args:process.env.PLAYTEST_GPU==='hardware'?['--mute-audio']:['--mute-audio','--use-gl=angle','--use-angle=swiftshader']});
  for(const [name,viewport] of [['desktop',{width:1280,height:800}],['android-emulated',{width:390,height:844}],['android-landscape-emulated',{width:844,height:390}]]){
@@ -42,6 +43,7 @@ try{
   await page.goto(`http://127.0.0.1:${server.address().port}/index.html`,{waitUntil:'domcontentloaded'});
   await page.waitForFunction(()=>window.Germany3D?.ready,null,{timeout:60000});
   await page.waitForFunction(()=>Germany3D.startupReady&&Germany3DBridge.startupAssetsReady,null,{timeout:60000});
+  if(pickupCamera)await page.evaluate(()=>window.__pickupCameraProbe=true);
   const fixture=await page.evaluate(async ({occlusion,fade,atlas,vehicleView,vehicleScale,url})=>{
    const T=await import(url),X=x=>x,Z=y=>y,S=.02;
    const bridge={player:{x:0,y:0},stationElevation:()=>0};

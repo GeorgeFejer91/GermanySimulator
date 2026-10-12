@@ -146,19 +146,19 @@ const pools=Object.freeze({
   "Railway Construction and Operating Regulations, Section 64 prohibits ‘creating obstacles to railway traffic or undertaking other actions that disrupt or endanger operations.’ This is a game notice, not legal advice."
  ]),
  lawPower:Object.freeze([
-  "Section 183a of the German Criminal Code · Causing a public nuisance: Anyone who publicly performs sexual acts and thereby intentionally or knowingly causes a nuisance is punishable by imprisonment for up to one year or a fine, unless the act is punishable under Section 183.",
-  "Section 118(1) of the Administrative Offences Act · Public nuisance: An administrative offence is committed by anyone who performs a grossly improper act capable of annoying or endangering the public and impairing public order.",
-  "Section 127(1) of the Administrative Offences Act · Making or using items capable of being used to counterfeit money or documents: An administrative offence is committed by anyone who, without written permission from the competent authority or another authorized party, produces, obtains for themselves or another, offers for sale, stores, supplies to another, imports, or exports forms for public documents or authentication marks.",
-  "Section 27(4) of the Road Traffic Regulations · Organized groups: The lateral boundary of closed groups riding or marching on foot must, where necessary under Section 17(1), be marked at least at the front by non-dazzling lamps with white light and at the rear by lamps with red light or yellow flashing light.",
-  "Section 27(6) of the Road Traffic Regulations · Organized groups: Marching in step is not permitted on bridges.",
-  "Section 30(1) of the Road Traffic Regulations · Environmental protection and Sunday and public-holiday driving ban: Needless driving back and forth within built-up areas is prohibited if it annoys others.",
-  "Section 911 of the German Civil Code · Fallen fruit: Fruit that falls from a tree or shrub onto neighboring land is deemed to be fruit of that land.",
-  "Section 919(3) of the German Civil Code · Boundary marking: The costs of marking the boundary must be borne equally by the parties unless their legal relationship provides otherwise.",
-  "Section 961 of the German Civil Code · Loss of ownership of bee swarms: If a swarm of bees flies away, it becomes ownerless unless the owner pursues it without delay or abandons the pursuit.",
-  "Section 962 of the German Civil Code · Owner's right of pursuit: The owner of the bee swarm may enter another person's land while pursuing it. If the swarm enters an unoccupied hive belonging to another, the swarm's owner may open the hive and remove or break out the combs in order to capture it. The owner must compensate for the resulting damage.",
-  "Section 963 of the German Civil Code · Merger of bee swarms: If escaped swarms belonging to several owners merge, the owners who pursued their swarms become co-owners of the captured combined swarm; their shares are determined by the number of pursued swarms.",
-  "Section 964 of the German Civil Code · Mixing of bee swarms: If a swarm enters an occupied hive belonging to another, ownership and other rights in the bees already occupying the hive extend to the incoming swarm. Ownership and other rights in the incoming swarm expire.",
-  "Section 3(2) of the Food Irradiation Ordinance · Ordinance on treating food with electron, gamma and X-rays, neutrons, or ultraviolet rays: The information required under paragraph 1 must be clearly visible, readily legible, and indelibly displayed."
+  "Section 183a of the German Criminal Code · Causing a public nuisance.",
+  "Section 118(1) of the Administrative Offences Act · Public nuisance.",
+  "Section 127(1) of the Administrative Offences Act · Making or using items capable of being used to counterfeit money or documents.",
+  "Section 27(4) of the Road Traffic Regulations · Organized groups.",
+  "Section 27(6) of the Road Traffic Regulations · Organized groups.",
+  "Section 30(1) of the Road Traffic Regulations · Environmental protection and Sunday and public-holiday driving ban.",
+  "Section 911 of the German Civil Code · Fallen fruit.",
+  "Section 919(3) of the German Civil Code · Boundary marking.",
+  "Section 961 of the German Civil Code · Loss of ownership of bee swarms.",
+  "Section 962 of the German Civil Code · Owner's right of pursuit.",
+  "Section 963 of the German Civil Code · Merger of bee swarms.",
+  "Section 964 of the German Civil Code · Mixing of bee swarms.",
+  "Section 3(2) of the Food Irradiation Ordinance."
  ])
 });
 
@@ -356,19 +356,19 @@ const lines=Object.freeze({
 });
 
 const lawPowerLines=Object.freeze([
- "§ 183a StGB · Erregung öffentlichen Ärgernisses: Wer öffentlich sexuelle Handlungen vornimmt und dadurch absichtlich oder wissentlich ein Ärgernis erregt, wird mit Freiheitsstrafe bis zu einem Jahr oder mit Geldstrafe bestraft, wenn die Tat nicht in § 183 mit Strafe bedroht ist.",
- "§ 118 Absatz 1 OWiG · Belästigung der Allgemeinheit: Ordnungswidrig handelt, wer eine grob ungehörige Handlung vornimmt, die geeignet ist, die Allgemeinheit zu belästigen oder zu gefährden und die öffentliche Ordnung zu beeinträchtigen.",
- "§ 127 Absatz 1 OWiG · Herstellen oder Verwenden von Sachen, die zur Geld- oder Urkundenfälschung benutzt werden können: Ordnungswidrig handelt, wer ohne schriftliche Erlaubnis der zuständigen Stelle oder des sonst dazu Befugten Vordrucke für öffentliche Urkunden oder Beglaubigungszeichen herstellt, sich oder einem anderen verschafft, feilhält, verwahrt, einem anderen überläßt, einführt oder ausführt.",
- "§ 27 Absatz 4 StVO · Verbände: Die seitliche Begrenzung geschlossen reitender oder zu Fuß marschierender Verbände muss, wenn nötig (§ 17 Absatz 1), mindestens nach vorn durch nicht blendende Leuchten mit weißem Licht, nach hinten durch Leuchten mit rotem Licht oder gelbem Blinklicht kenntlich gemacht werden.",
- "§ 27 Absatz 6 StVO · Verbände: Auf Brücken darf nicht im Gleichschritt marschiert werden.",
- "§ 30 Absatz 1 StVO · Umweltschutz, Sonn- und Feiertagsfahrverbot: Unnützes Hin- und Herfahren ist innerhalb geschlossener Ortschaften verboten, wenn Andere dadurch belästigt werden.",
- "§ 911 BGB · Überfall: Früchte, die von einem Baume oder einem Strauche auf ein Nachbargrundstück hinüberfallen, gelten als Früchte dieses Grundstücks.",
- "§ 919 Absatz 3 BGB · Grenzabmarkung: Die Kosten der Abmarkung sind von den Beteiligten zu gleichen Teilen zu tragen, sofern nicht aus einem zwischen ihnen bestehenden Rechtsverhältnis sich ein anderes ergibt.",
- "§ 961 BGB · Eigentumsverlust bei Bienenschwärmen: Zieht ein Bienenschwarm aus, so wird er herrenlos, wenn nicht der Eigentümer ihn unverzüglich verfolgt oder wenn der Eigentümer die Verfolgung aufgibt.",
- "§ 962 BGB · Verfolgungsrecht des Eigentümers: Der Eigentümer des Bienenschwarms darf bei der Verfolgung fremde Grundstücke betreten. Ist der Schwarm in eine fremde nicht besetzte Bienenwohnung eingezogen, so darf der Eigentümer des Schwarmes zum Zwecke des Einfangens die Wohnung öffnen und die Waben herausnehmen oder herausbrechen. Er hat den entstehenden Schaden zu ersetzen.",
- "§ 963 BGB · Vereinigung von Bienenschwärmen: Vereinigen sich ausgezogene Bienenschwärme mehrerer Eigentümer, so werden die Eigentümer, welche ihre Schwärme verfolgt haben, Miteigentümer des eingefangenen Gesamtschwarms; die Anteile bestimmen sich nach der Zahl der verfolgten Schwärme.",
- "§ 964 BGB · Vermischung von Bienenschwärmen: Ist ein Bienenschwarm in eine fremde besetzte Bienenwohnung eingezogen, so erstrecken sich das Eigentum und die sonstigen Rechte an den Bienen, mit denen die Wohnung besetzt war, auf den eingezogenen Schwarm. Das Eigentum und die sonstigen Rechte an dem eingezogenen Schwarme erlöschen.",
- "§ 3 Absatz 2 Lebensmittelbestrahlungsverordnung · Verordnung über die Behandlung von Lebensmitteln mit Elektronen-, Gamma- und Röntgenstrahlen, Neutronen oder ultravioletten Strahlen: Die Angaben nach Absatz 1 sind gut sichtbar, in leicht lesbarer Schrift und unverwischbar anzugeben."
+ "§ 183a StGB · Erregung öffentlichen Ärgernisses.",
+ "§ 118 Absatz 1 OWiG · Belästigung der Allgemeinheit.",
+ "§ 127 Absatz 1 OWiG · Herstellen oder Verwenden von Sachen, die zur Geld- oder Urkundenfälschung benutzt werden können.",
+ "§ 27 Absatz 4 StVO · Verbände.",
+ "§ 27 Absatz 6 StVO · Verbände.",
+ "§ 30 Absatz 1 StVO · Umweltschutz, Sonn- und Feiertagsfahrverbot.",
+ "§ 911 BGB · Überfall.",
+ "§ 919 Absatz 3 BGB · Grenzabmarkung.",
+ "§ 961 BGB · Eigentumsverlust bei Bienenschwärmen.",
+ "§ 962 BGB · Verfolgungsrecht des Eigentümers.",
+ "§ 963 BGB · Vereinigung von Bienenschwärmen.",
+ "§ 964 BGB · Vermischung von Bienenschwärmen.",
+ "§ 3 Absatz 2 Lebensmittelbestrahlungsverordnung."
 ]);
 const rules=Object.freeze([
 ["§17.3b","Schrebergarten-Rasen ist anzuschauen, nicht zu betreten. Zuwiderhandlung löst sofortige Gefahrenabwehr aus."],

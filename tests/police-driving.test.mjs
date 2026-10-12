@@ -38,7 +38,7 @@ for(const kind of ["wall","person","car"]){
 }
 {
  const h=harness();h.roads=[{x:100,y:300,w:1000,h:260}];h.horizontalRoads=h.roads;h.vehicleApproaches=[{x:-2400,y:300,w:2500,h:260},{x:1100,y:300,w:12400,h:260}];Object.assign(h,{state:{wanted:3},player:{x:900,y:430,r:16,vx:120,vy:0},groundResponsePoint:()=>({x:300,y:430,a:0}),spawnPointVisible:()=>false,responderBlocked:()=>false,syncPoliceResponse:()=>{},policeHelicopters:[],onGardenGrass:()=>false,performance:{now:()=>0},playPolicePassby:()=>{}});
- vm.runInContext(["responseSpawn","updatePoliceResponse"].map(functionSource).join("\n"),h);const car=h.responseSpawn("car",0);assert.ok(car);h.policeVehicles.push(car);const initialX=car.x;
+ vm.runInContext(["responseSpawn","updateLawPickup","updatePoliceResponse"].map(functionSource).join("\n"),h);const car=h.responseSpawn("car",0);assert.ok(car);h.policeVehicles.push(car);const initialX=car.x;
  for(let i=0;i<60;i++)h.updatePoliceResponse(.025);
  for(const key of ["x","y","angle","driveSpeed","steeringAngle","orbit"])assert.ok(Number.isFinite(car[key]),`actual spawn→pursuit must initialize finite ${key}`);assert.ok(car.x>initialX+10,"an actually spawned police car must accelerate and enter from beyond the map");assert.ok(h.vehicleOnRoad(car.x,car.y,car.angle));
 }
