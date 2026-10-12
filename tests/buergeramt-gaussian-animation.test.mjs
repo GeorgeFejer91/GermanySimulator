@@ -76,7 +76,7 @@ test('moving regulars hold work and freeze background actions during dialogue',(
 });
 
 for(const seconds of [1,3])test(`dialogue actor returns to the nearest work anchor after ${seconds}s`,()=>{
- const h=harness('host',{voice:true});h.enter();h.moveTo(3.4,1.2);h.level.interact();h.tick(16);
+ const h=harness('host',{voice:true});h.enter();h.moveTo(3.4,1.2);const target=h.level.characters.find(actor=>actor.id==='formularsammler');h.faceToward(target.x,target.z);h.level.interact();h.tick(16);
  assert.equal(h.level.stage,'character');const id=h.level.characterMood.id;
  h.advanceGame(seconds);
  const spoken=h.level.characters.find(actor=>actor.id===id);
@@ -96,7 +96,7 @@ for(const seconds of [1,3])test(`dialogue actor returns to the nearest work anch
 });
 
 test('a regular speech boundary leaves the four-second body arc in place',()=>{
- const h=harness('host',{voice:true});h.enter();h.moveTo(3.4,1.2);h.level.interact();
+ const h=harness('host',{voice:true});h.enter();h.moveTo(3.4,1.2);const target=h.level.characters.find(actor=>actor.id==='formularsammler');h.faceToward(target.x,target.z);h.level.interact();
  assert.equal(h.level.stage,'character');const id=h.level.characterMood.id;
  h.advanceGame(.6);const before=h.level.characters.find(actor=>actor.id===id).animation;
  h.synth.boundary(8);
