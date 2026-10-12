@@ -457,11 +457,23 @@ approximation, preserving the shared goop/speed mapping. Ripple uniforms are
 bounded to eight desktop or four compact-screen events; the existing controller
 supplies accepted-walk distance and reposition generations, with no polling or
 extra animation loop.
-The portrait adds one cached two-triangle drip sheet and two composed material
+The portrait adds one cached 24-triangle curved drip sheet and two composed material
 hooks, sharing the existing portrait texture; no extra feedback pass or target.
+Its viscous channels advect native paint and rounded bulges on the shared scene
+clock, with one constant-cost analytic channel lookup per sample.
+Its static 26-vertex bend settles onto the real wall, without per-frame vertex
+updates or a new collider. Ground source position matches the bent sheet.
 Actual color deposition begins only when a visible paint thread reaches the
 floor. The floor keeps its 20 Hz scaled-time ceiling and two-pass frame limit.
 GPU readback exists only in the test server's injected measurement seam.
+Lamp exhaustion reuses the five ceiling-strip meshes with independent cached
+materials and shared floor-reflection strengths. One cached two-triangle black
+illumination pass dims the complete room after actor composition; it adds no
+render target, light, shadow, texture, download, timer or animation loop. Wear
+samples the existing visible residence clock; flicker samples its integrated
+scene clock. Hidden/closed work stops and replay restores all five. Reduced
+motion retains wear without flicker. Resource ownership stays with the cached
+office renderer; its compositor restores `autoClear` even after a render error.
 
 ### Responsiveness and selective preparation protocol
 

@@ -117,7 +117,8 @@ painted image downward, gradually exposing the bare backing. Eight irregular
 viscous channels have moving necks, descending bulges and rounded leading drops;
 both image deformation and paint colors advance on the integrated scene clock,
 instead of stretching fixed sawtooth strips. A transparent,
-depth-tested sheet continues the paint from the frame to y=.0024 m; its
+depth-tested, statically curved sheet continues the paint from the frame onto
+the wall, ending at y=.0024 m and z=5.4696 (the inner wall face is z=5.47); its
 front reaches the ground before it can feed the floor. The existing floor pass
 injects the same image colors at that contact, then transports and diffuses them
 with the black/white oils and walking wakes. RGBA stores mixed RGB plus deposited
@@ -163,6 +164,24 @@ both-color retention, Android-emulated views and material restoration probe is
 `tools/playtest-buergeramt-floor.mjs`. Accelerated shader captures do not prove
 natural mission flow or physical-device performance.
 
+The fifteen-minute late-decay/flowing-paint/lamp candidate passed 420 workflow
+and affected checks, then 12 focused checks after Camera corrected contact
+alignment and the procedural contact clock. Independent Physics and Camera
+reviews pass. Four desktop/Android-emulated/fallback profiles show the shared
+goop, RGB deposition, accepted walking, reduced motion, restoration and five
+lamp failures; repaired desktop contact and procedural fallback were captured
+again, followed by four fresh profiles after the final static wall bend.
+A 31-frame accelerated sequence samples the complete fifteen-minute
+portrait progression. Isolated native media follows .5/.75/1 without pitch
+preservation; this is silent playback-state evidence. Three cold capped-scene
+runs per desktop/portrait profile compare the previous portrait/floor shaders
+with the same current controller/loader and no lamp dim pass: median sampled
+frame p95 stays about 7.1 ms before/after on Intel Iris Xe on both profiles.
+This is a scoped regression check, not a speedup or GPU
+timer. Receipts, hashes and the causal map belong under ignored
+`output/flowing-paint-lamps/`. Natural fifteen/twenty-minute residence, physical
+Android and perceptual listening are not exercised.
+
 The earlier ten-minute, 50%-cap portrait/floor update passed 403 workflow
 checks, plus focused tests and independent Physics/Camera review after fixing
 an absent-image source flag. Desktop and Android portrait/landscape emulation
@@ -174,7 +193,7 @@ to 9.04% at 900 seconds. Three cold full-goop runs per desktop/mobile profile
 before/after passed the existing browser gates, with median sampled frame p95
 about 21 ms on Intel Iris Xe. These use controlled scenes and different authored
 end tempos; they establish scoped regression evidence, not a speedup. Root and
-`3d.html` passed all three startup viewports. Current task evidence and the causal
+`3d.html` passed all three startup viewports. That earlier task's evidence and causal
 map are under ignored `output/ten-minute-paint/`. Physical Android, perceptual
 listening, actual paired-phone delivery and natural ten-minute rendered residence
 remain untested.

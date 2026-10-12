@@ -1,7 +1,7 @@
 // Persistent pigment transport, not a pressure/velocity solver. The flat floor
 // stays solid; only its paint and shallow specular ridges melt.
-import './buergeramt-goop.js?v=20261012-ten-minute-paint';
-import {portraitPaintGlsl} from './buergeramt-portrait-melt.js?v=20261012-ten-minute-paint';
+import './buergeramt-goop.js?v=20261012-flowing-paint-lamps';
+import {portraitPaintGlsl} from './buergeramt-portrait-melt.js?v=20261012-flowing-paint-lamps';
 const STEP=1/20;
 export function amtFloorMelt(time){return globalThis.BuergeramtGoop.goop(time);}
 const coordinates=`
@@ -61,6 +61,7 @@ const surface=`
   varying vec2 amtFloorPoint;
   uniform highp sampler2D amtFloorOil;
   uniform float amtFloorTime,amtFloorMelt,amtFloorLive,amtFloorStill;
+  uniform float amtLampLevels[5];
   uniform vec4 footRipples[OIL_RIPPLE_COUNT];
   ${coordinates}
   ${portraitPaintGlsl}
@@ -80,7 +81,7 @@ export function createAmtFloor({THREE:T,renderer,material,mobile=false}){
   const floatMask=!!renderer.extensions?.has('EXT_color_buffer_float')&&!!renderer.extensions?.has('OES_texture_float_linear');
   const rippleCount=mobile?4:8,footRipples={value:Array.from({length:rippleCount},()=>new T.Vector4(0,0,-100,0))},footDirections={value:Array.from({length:rippleCount},()=>new T.Vector2())};
   const amtPortraitPaint={value:null},amtPortraitInfo={value:new T.Vector4(0,0,1,0)};
-  const uniforms={amtFloorOil:{value:null},amtFloorTime:{value:0},amtFloorMelt:{value:0},amtFloorLive:{value:0},amtFloorStill:{value:0},footRipples,amtPortraitPaint,amtPortraitInfo};
+  const uniforms={amtFloorOil:{value:null},amtFloorTime:{value:0},amtFloorMelt:{value:0},amtFloorLive:{value:0},amtFloorStill:{value:0},amtLampLevels:{value:new Float32Array(5).fill(1)},footRipples,amtPortraitPaint,amtPortraitInfo};
   const bodies=new Map();let footSerial=0,playerSerial=0,footsteps=0;
   let targets=null,pass=null,quad=null,camera=null,read=0,visit=null,lastTime=0,lastMotion=0,carry=0,simTime=0,steps=0,allocations=0,failure=null,reduced=false;
   const compile=material.onBeforeCompile,key=material.customProgramCacheKey();
@@ -102,7 +103,7 @@ export function createAmtFloor({THREE:T,renderer,material,mobile=false}){
       float grout=1.-smoothstep(.009,.016+max(fwidth(amtFloorPoint.x),fwidth(amtFloorPoint.y)),min(cellEdge.x,cellEdge.y));
       float ridges=1.-abs(floorPigment*2.-1.);
       vec3 floorPaint=mix(vec3(.006,.007,.009),vec3(.72,.73,.71),floorPigment);
-      vec4 floorColor=amtFloorLive>.5?texture2D(amtFloorOil,(amtFloorPoint-floorMin)/floorSize):amtPaintSpill(amtFloorPoint,amtFloorMelt,warpTime);
+      vec4 floorColor=amtFloorLive>.5?texture2D(amtFloorOil,(amtFloorPoint-floorMin)/floorSize):amtPaintSpill(amtFloorPoint,amtFloorMelt,amtFloorTime);
       floorPaint=mix(floorPaint,vec3(.012)+floorColor.rgb*.72,clamp(floorColor.a*1.5,0.,1.));
       floorPaint=mix(floorPaint,vec3(.10),grout*(1.-smoothstep(.0,.22,amtFloorMelt)));
       diffuseColor.rgb*=floorPaint;
@@ -123,12 +124,16 @@ export function createAmtFloor({THREE:T,renderer,material,mobile=false}){
       vec3 floorWorld=vec3(amtFloorPoint.x,0.,amtFloorPoint.y);
       vec3 reflected=reflect(normalize(floorWorld-cameraPosition),inverseTransformDirection(normal,viewMatrix));
       vec2 ceiling=amtFloorPoint+reflected.xz*(3.97/max(.12,reflected.y));
-      float lampDistance=min(min(abs(ceiling.y+7.4),abs(ceiling.y+3.8)),min(abs(ceiling.y),min(abs(ceiling.y-3.8),abs(ceiling.y-7.4))));
-      float lampReflection=(1.-smoothstep(1.12,1.65,abs(ceiling.x)))*(1.-smoothstep(.13,.43,lampDistance));
+      float lampReflection=amtLampLevels[0]*(1.-smoothstep(.13,.43,abs(ceiling.y+7.4)));
+      lampReflection=max(lampReflection,amtLampLevels[1]*(1.-smoothstep(.13,.43,abs(ceiling.y+3.8))));
+      lampReflection=max(lampReflection,amtLampLevels[2]*(1.-smoothstep(.13,.43,abs(ceiling.y))));
+      lampReflection=max(lampReflection,amtLampLevels[3]*(1.-smoothstep(.13,.43,abs(ceiling.y-3.8))));
+      lampReflection=max(lampReflection,amtLampLevels[4]*(1.-smoothstep(.13,.43,abs(ceiling.y-7.4))));
+      lampReflection*=1.-smoothstep(1.12,1.65,abs(ceiling.x));
       totalEmissiveRadiance+=vec3(.48,.46,.40)*lampReflection*amtFloorMelt;
     `);
   };
-  material.customProgramCacheKey=()=>key+':amt-oil-floor-v3:'+rippleCount;material.color.set(0xffffff);material.needsUpdate=true;
+  material.customProgramCacheKey=()=>key+':amt-oil-floor-v4:'+rippleCount;material.color.set(0xffffff);material.needsUpdate=true;
 
   function release(){
     if(targets){for(const target of targets)target.dispose();targets=null;}
@@ -194,7 +199,7 @@ export function createAmtFloor({THREE:T,renderer,material,mobile=false}){
     }catch(error){failure=String(error?.message||error);release();uniforms.amtFloorStill.value=1;}
   }
   renderer.domElement?.addEventListener('webglcontextlost',release);
-  return{update,setPortrait(texture,{x,z,width}){amtPortraitPaint.value=texture;amtPortraitInfo.value.set(x,z,width,texture?1:0);},dispose(){release();renderer.domElement?.removeEventListener('webglcontextlost',release);},inspect:()=>({time:lastTime,visit,melt:uniforms.amtFloorMelt.value,reducedMotion:reduced,
+  return{update,setLights(levels){uniforms.amtLampLevels=levels;},setPortrait(texture,{x,z,width}){amtPortraitPaint.value=texture;amtPortraitInfo.value.set(x,z,width,texture?1:0);},dispose(){release();renderer.domElement?.removeEventListener('webglcontextlost',release);},inspect:()=>({time:lastTime,visit,melt:uniforms.amtFloorMelt.value,reducedMotion:reduced,
     portraitSource:!!amtPortraitInfo.value.w,visualTime:lastMotion,speed:globalThis.BuergeramtGoop.speed(lastTime),simulatedTime:simTime,steps,targets:targets?2:0,resolution:[width,height],precision:floatMask?'RGBA32F':'procedural',textureBytes:targets?width*height*32:0,allocations,failure,
     footsteps,activeRipples:footRipples.value.filter(foot=>lastMotion-foot.z>=0&&lastMotion-foot.z<8).length,rippleLimit:rippleCount})};
 }

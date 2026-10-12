@@ -9,7 +9,7 @@ import assert from 'node:assert/strict';
 const {chromium}=createRequire(import.meta.url)(process.env.PLAYWRIGHT_MODULE||'playwright');
 const root=resolve('.'),out=resolve(process.env.FLOOR_OUTPUT||'output/oil-floor/browser');mkdirSync(out,{recursive:true});
 const mime={'.html':'text/html','.js':'text/javascript','.css':'text/css','.webp':'image/webp','.png':'image/png','.svg':'image/svg+xml','.json':'application/json','.mp3':'audio/mpeg','.glb':'model/gltf-binary'};
-const files=['world3d.js','buergeramt.js','buergeramt-goop.js','buergeramt-floor.js','buergeramt-portrait-melt.js','index.html','3d.html'];
+const files=['world3d.js','buergeramt.js','buergeramt-goop.js','buergeramt-floor.js','buergeramt-portrait-melt.js','buergeramt-lamps.js','index.html','3d.html'];
 const sources=new Map(files.map(file=>[resolve(file),readFileSync(file)]));
 const server=createServer((req,res)=>{
   try{
@@ -17,10 +17,10 @@ const server=createServer((req,res)=>{
     if(!file.startsWith(root+sep))throw Error('path');let data=sources.get(file)||readFileSync(file);
     if(file===resolve('game.js'))data=data.toString().replace('const directConfig={','const directConfig={cinematics:false,');
     if(file===resolve('buergeramt.js'))data=data.toString().replace('window.BuergeramtLevel={',
-      `window.__floorTest={pose(x,z,yaw=0){Object.assign(view,{x,z,yaw})},at(time){floorClock=time;visualClock=goop.motion(time);applyOfficeTempo()},close(){close(false)},reopen(){open(options)},dialogue(){setStage('character')},stage:setStage,speech(){const row=Object.values(window.GermanySimulatorAudioText.recordings).find(r=>r.voiceId==='amt-brunhilde-knick'&&r.source);if(!row)throw Error('Missing native Knick sample');options.voiceOn=()=>true;content(story.clerkIdentity.speaker,row.source)},media(){return recordedSpeech?{rate:recordedSpeech.playbackRate,preservesPitch:recordedSpeech.preservesPitch,time:recordedSpeech.currentTime,duration:recordedSpeech.duration,paused:recordedSpeech.paused}:null}};window.BuergeramtLevel={`);
-    if(file===resolve('buergeramt-floor.js'))data=data.toString().replace('const floatMask=','const floatMask=!globalThis.__forceByteFloor&&').replace('return{update,setPortrait',`return{update,stats(){if(!targets)return null;const pixels=new Float32Array(width*height*4);renderer.readRenderTargetPixels(targets[read],0,0,width,height,pixels);let sum=0,squares=0,white=0,black=0,paint=0,colored=0;for(let i=0;i<pixels.length;i+=4){const v=pixels[i];sum+=v;squares+=v*v;paint+=pixels[i+3];if(v>.8)white++;if(v<.2)black++;if(Math.abs(pixels[i]-pixels[i+1])+Math.abs(pixels[i+1]-pixels[i+2])>.012)colored++}const count=width*height;return{mean:sum/count,variance:squares/count-(sum/count)**2,white:white/count,black:black/count,paint:paint/count,colored:colored/count}},setPortrait`);
+      `window.__floorTest={pose(x,z,yaw=0){Object.assign(view,{x,z,yaw})},at(time){floorClock=time;visualClock=goop.motion(time);applyOfficeTempo()},close(){close(false)},reopen(){open(options)},dialogue(){setStage('character')},stage:setStage,speech(){const row=Object.values(window.GermanySimulatorAudioText.recordings).filter(r=>r.voiceId==='amt-brunhilde-knick'&&r.source).sort((a,b)=>b.source.length-a.source.length)[0];if(!row)throw Error('Missing native Knick sample');options.voiceOn=()=>true;content(story.clerkIdentity.speaker,row.source)},media(){return recordedSpeech?{rate:recordedSpeech.playbackRate,preservesPitch:recordedSpeech.preservesPitch,time:recordedSpeech.currentTime,duration:recordedSpeech.duration,paused:recordedSpeech.paused}:null}};window.BuergeramtLevel={`);
+    if(file===resolve('buergeramt-floor.js'))data=data.toString().replace('const floatMask=','const floatMask=!globalThis.__forceByteFloor&&').replace('return{update,setLights',`return{update,stats(){if(!targets)return null;const pixels=new Float32Array(width*height*4);renderer.readRenderTargetPixels(targets[read],0,0,width,height,pixels);let sum=0,squares=0,white=0,black=0,paint=0,colored=0;for(let i=0;i<pixels.length;i+=4){const v=pixels[i];sum+=v;squares+=v*v;paint+=pixels[i+3];if(v>.8)white++;if(v<.2)black++;if(Math.abs(pixels[i]-pixels[i+1])+Math.abs(pixels[i+1]-pixels[i+2])>.012)colored++}const count=width*height;return{mean:sum/count,variance:squares/count-(sum/count)**2,white:white/count,black:black/count,paint:paint/count,colored:colored/count}},setLights`);
     if(file===resolve('world3d.js'))data=data.toString().replace('amtCamera.rotation.set(view.pitch||0,-view.yaw,0,"YXZ")','amtCamera.rotation.set(window.__floorPitch??view.pitch??0,-view.yaw,0,"YXZ")')
-      .replace('  app.classList.add("three-ready");',`window.__floorGpu={stats:()=>amtFloorEffect.stats(),advance(seconds){const start=BuergeramtLevel.floorState.time;for(let n=1;n<=Math.round(seconds*20);n++){__floorTest.at(start+n/20);amtFloorEffect.update(BuergeramtLevel.floorState,amtReducedMotion.matches,BuergeramtLevel.view,BuergeramtLevel.characters);amtPortraitMelt.update(BuergeramtLevel.floorState,amtReducedMotion.matches)}},fade(strength){fadeAmtStructure(strength)},render(){renderer.render(amtScene,amtCamera)},backend(){const gl=renderer.getContext(),ext=gl.getExtension('WEBGL_debug_renderer_info');return ext?gl.getParameter(ext.UNMASKED_RENDERER_WEBGL):gl.getParameter(gl.RENDERER)}};app.classList.add("three-ready");`);
+      .replace('  app.classList.add("three-ready");',`window.__floorGpu={stats:()=>amtFloorEffect.stats(),advance(seconds){const start=BuergeramtLevel.floorState.time;for(let n=1;n<=Math.round(seconds*20);n++){__floorTest.at(start+n/20);amtFloorEffect.update(BuergeramtLevel.floorState,amtReducedMotion.matches,BuergeramtLevel.view,BuergeramtLevel.characters);amtPortraitMelt.update(BuergeramtLevel.floorState,amtReducedMotion.matches);amtLampWear.update(BuergeramtLevel.floorState,amtReducedMotion.matches)}},fade(strength){fadeAmtStructure(strength)},render(){renderer.render(amtScene,amtCamera)},backend(){const gl=renderer.getContext(),ext=gl.getExtension('WEBGL_debug_renderer_info');return ext?gl.getParameter(ext.UNMASKED_RENDERER_WEBGL):gl.getParameter(gl.RENDERER)}};app.classList.add("three-ready");`);
     res.writeHead(200,{'Content-Type':mime[extname(file)]||'application/octet-stream','Cache-Control':'no-store'});res.end(data);
   }catch{res.writeHead(404);res.end();}
 });
@@ -47,17 +47,17 @@ try{
     await page.waitForFunction(()=>window.BuergeramtLevel?.active&&window.Germany3D?.officeAssetsReady,null,{timeout:120000});
     await page.evaluate(()=>{window.__floorStep=BuergeramtLevel.update;BuergeramtLevel.update=()=>{};window.__floorRender=Germany3D.sync;Germany3D.sync=()=>{};window.__floorPitch=-.58;__floorTest.pose(0,4.8);__floorTest.stage('walk-sign');__floorTest.at(0);__floorRender()});
     const captures=[];
-    for(const time of [0,30,150,300,450,600,900]){
+    for(const time of [0,45,225,450,675,900,1200]){
       await page.evaluate(time=>{__floorGpu.advance(time-BuergeramtLevel.floorState.time);__floorRender()},time);
-      const state=await page.evaluate(()=>({...Germany3D.amtFloor,portrait:Germany3D.amtPortraitMelt,pigment:__floorGpu.stats(),render:Germany3D.inspectAssets().render,memory:Germany3D.inspectAssets().memory}));
+      const state=await page.evaluate(()=>({...Germany3D.amtFloor,portrait:Germany3D.amtPortraitMelt,lamps:Germany3D.amtLamps,pigment:__floorGpu.stats(),render:Germany3D.inspectAssets().render,memory:Germany3D.inspectAssets().memory}));
       assert.equal(state.failure,null);assert.equal(state.time,time);assert.equal(state.targets,time===0||name==='procedural-fallback'?0:2);assert.equal(state.speed,1-.5*state.melt);
       assert.equal(state.depthWrite,true);assert.equal(state.transparent,false);assert.equal(state.opacity,1);
       assert.equal(state.textureBytes,time===0||name==='procedural-fallback'?0:(width<=700?128*160:256*320)*32);
-      assert.equal(state.portrait.melt,state.melt);if(time>=600&&state.pigment){assert.ok(state.pigment.paint>.00002,'portrait paint enters the persistent floor');assert.ok(state.pigment.colored>.00002,'actual portrait colors mix with the tiles');}if(state.pigment){assert.ok(state.pigment.white>.02&&state.pigment.black>.02,'retain both oils through fifteen minutes');assert.ok(state.pigment.variance>.025,'do not diffuse to a featureless grey floor');}
+      assert.equal(state.portrait.melt,state.melt);if(time>=900&&state.pigment){assert.ok(state.pigment.paint>.00002,'portrait paint enters the persistent floor');assert.ok(state.pigment.colored>.00002,'actual portrait colors mix with the tiles');}if(state.pigment){assert.ok(state.pigment.white>.02&&state.pigment.black>.02,'retain both oils through fifteen minutes');assert.ok(state.pigment.variance>.025,'do not diffuse to a featureless grey floor');}
       const screenshot=await page.screenshot({path:resolve(out,`${name}-${time}s.png`)});captures.push({time,...state,screenshotHash:createHash('sha256').update(screenshot).digest('hex')});
       await page.evaluate(()=>{__floorTest.pose(BuergeramtStory.presidentPortrait.x,1.7,Math.PI);window.__floorPitch=0;__floorRender()});await page.screenshot({path:resolve(out,`${name}-portrait-${time}s.png`)});await page.evaluate(()=>{__floorTest.pose(0,4.8);window.__floorPitch=-.58;__floorRender()});
       if(time>=300){await page.evaluate(()=>{const p=BuergeramtStory.presidentPortrait;__floorTest.pose(p.x+2,p.z-3,Math.atan2(-2,-3));window.__floorPitch=-.1;__floorRender()});await page.screenshot({path:resolve(out,`${name}-portrait-contact-${time}s.png`)});await page.evaluate(()=>{__floorTest.pose(0,4.8);window.__floorPitch=-.58;__floorRender()});}
-      if(time===600){await page.evaluate(()=>{window.__floorPitch=0;__floorRender()});await page.screenshot({path:resolve(out,name+'-eye-level.png')});await page.evaluate(()=>{window.__floorPitch=-.58;__floorRender()});}
+      if(time===900){await page.evaluate(()=>{window.__floorPitch=0;__floorRender()});await page.screenshot({path:resolve(out,name+'-eye-level.png')});await page.evaluate(()=>{window.__floorPitch=-.58;__floorRender()});}
       console.log(name,time,'seconds',state.steps,'steps',state.pigment);
     }
     // A held frame is identical: no paint re-seeding, unrelated global-time wave
@@ -89,12 +89,26 @@ try{
     }
     assert.ok(visits.at(-1).memory.textures<=visits[0].memory.textures+2,'no rising floor texture cache across visits');
     const audio=[];
-    if(name==='desktop'){
-      await page.evaluate(()=>{__floorTest.at(600);__floorTest.speech()});await page.waitForFunction(()=>__floorTest.media()?.time>0,null,{timeout:15000});
-      for(const age of [600,300,0]){await page.evaluate(age=>__floorTest.at(age),age);const before=await page.evaluate(()=>({wall:performance.now(),...__floorTest.media()}));await page.waitForTimeout(800);const after=await page.evaluate(()=>({wall:performance.now(),...__floorTest.media()}));const rate=(after.time-before.time)/((after.wall-before.wall)/1000);assert.equal(after.rate,age===600?.5:age===300?.75:1);assert.equal(after.preservesPitch,false);assert.ok(Math.abs(rate-after.rate)<.08,'native media time must follow the shared rate');audio.push({age,before,after,observedRate:rate});}
+    if(name==='desktop'&&process.env.FLOOR_AUDIO!=='0'){
+      await page.evaluate(()=>{__floorTest.at(900);__floorTest.speech()});await page.waitForFunction(()=>__floorTest.media()?.time>0,null,{timeout:15000});
+      for(const age of [900,722.43,0]){await page.evaluate(age=>{__floorTest.at(age);__floorTest.speech()},age);await page.waitForFunction(()=>__floorTest.media()?.time>.5,null,{timeout:15000});const before=await page.evaluate(()=>({wall:performance.now(),...__floorTest.media()}));await page.waitForTimeout(2500);const after=await page.evaluate(()=>({wall:performance.now(),...__floorTest.media()}));const rate=(after.time-before.time)/((after.wall-before.wall)/1000);assert.equal(after.rate,await page.evaluate(age=>BuergeramtGoop.speed(age),age));assert.equal(after.preservesPitch,false);console.log('media rate',age,{expected:after.rate,observed:rate,before:before.time,after:after.time,paused:after.paused});assert.ok(Math.abs(rate-after.rate)<.08,'native media time must follow the shared rate');audio.push({age,before,after,observedRate:rate});}
+    }
+    const lampStages=[];
+    for(const age of [600,780,900,1020,1110,1200]){
+      await page.evaluate(age=>{__floorTest.at(age);__floorTest.pose(0,4.8);window.__floorPitch=.35;__floorRender()},age);
+      const lamps=await page.evaluate(()=>Germany3D.amtLamps);assert.equal(lamps.age,age);assert.equal(lamps.clock,await page.evaluate(()=>BuergeramtLevel.floorState.visualTime));
+      assert.equal(lamps.dead,[600,780,900,1020,1110,1200].indexOf(age));assert.equal(await page.evaluate(()=>BuergeramtLevel.timeScale),await page.evaluate(age=>BuergeramtGoop.speed(age),age));
+      await page.screenshot({path:resolve(out,`${name}-lamps-${age}s.png`)});lampStages.push(lamps);
+    }
+    assert.ok(lampStages.at(-1).illumination<.01);
+    const portraitFlow=[];
+    if(name==='desktop')for(let age=0;age<=900;age+=30){
+      await page.evaluate(age=>{const p=BuergeramtStory.presidentPortrait;__floorTest.at(age);__floorTest.pose(p.x+1.2,p.z-2.5,Math.atan2(-1.2,-2.5));window.__floorPitch=-.13;__floorRender()},age);
+      const shot=await page.screenshot({path:resolve(out,`portrait-flow-${String(age).padStart(3,'0')}s.png`)});
+      portraitFlow.push({age,...await page.evaluate(()=>Germany3D.amtPortraitMelt),hash:createHash('sha256').update(shot).digest('hex')});
     }
     const backend=await page.evaluate(()=>__floorGpu.backend());assert.deepEqual(errors,[]);
-    report.cases.push({name,verdict:'PASS',backend,captures,walking,fade,reduced,visits,audio,errors});console.log(name,'PASS');await context.close();
+    report.cases.push({name,verdict:'PASS',backend,captures,walking,fade,reduced,visits,audio,lampStages,portraitFlow,errors});console.log(name,'PASS');await context.close();
   }
   report.complete=true;
 }finally{writeFileSync(resolve(out,'report.json'),JSON.stringify(report,null,2));await browser.close();await new Promise(done=>server.close(done));}

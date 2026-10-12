@@ -35,16 +35,19 @@ test('the room clock starts inside the doorway, continues in dialogue and freeze
   assert.equal(h.level.floorState.time,0);assert.ok(h.level.floorState.visit>visit);
   h.node('amt-exit').click();h.advanceGame(10);assert.equal(h.level.floorState.time,0);
 });
-test('liquidation and slowdown share one smooth 600-second sigmoid, capped at 50% speed',()=>{
+test('liquidation and slowdown share a late-accelerating 900-second sigmoid, capped at 50% speed',()=>{
   for(const t of [-1,0,NaN,Infinity])assert.equal(amtFloorMelt(t),0);
-  assert.equal(amtFloorMelt(300),.5);assert.equal(amtFloorMelt(600),1);assert.equal(amtFloorMelt(10000),1);
-  const api=globalThis.BuergeramtGoop;assert.equal(api.speed(0),1);assert.equal(api.speed(300),.75);assert.equal(api.speed(600),.5);assert.equal(api.motion(600),450);
-  assert.equal(api.duration,600);assert.equal(api.minSpeed,.5);
-  assert.ok(api.goop(150)<.12&&api.goop(450)>.88,'sigmoid has slow tails and a faster middle');
-  for(const t of [30,150,300,450,570,610]){const derivative=(api.motion(t+.001)-api.motion(t-.001))/.002;assert.ok(Math.abs(derivative-api.speed(t))<1e-7,'integrated scene time follows the exact shared speed');}
-  let previous=0;for(let t=0;t<700;t+=.1){const value=amtFloorMelt(t);assert.ok(value>=previous&&value<=1);previous=value;}
-  for(const time of [0,1,21,60,300,160,600,999]){const f=fixture();f.floor.update({visit:1,time});assert.equal(f.floor.inspect().speed,1-.5*f.floor.inspect().melt);f.floor.update({visit:1,time},true);assert.equal(f.floor.inspect().speed,1-.5*f.floor.inspect().melt);}
+  const api=globalThis.BuergeramtGoop;
+  assert.equal(api.duration,900);assert.equal(api.minSpeed,.5);assert.equal(api.speed(0),1);assert.equal(api.speed(900),.5);assert.equal(api.goop(900),1);assert.equal(api.goop(10000),1);
+  assert.ok(api.speed(300)>.998&&api.speed(450)>.988,'opening minutes remain almost unchanged');
+  assert.ok(api.speed(720)<.76&&api.speed(840)<.56,'decay becomes pronounced late in the visit');
+  assert.ok(api.goop(720)-api.goop(600)>api.goop(600)-api.goop(480),'late decay accelerates');
+  assert.ok(Math.abs(api.motion(900)-805.1169981337422)<1e-8);
+  for(const t of [30,150,300,450,600,720,840,899,910]){const derivative=(api.motion(t+.001)-api.motion(t-.001))/.002;assert.ok(Math.abs(derivative-api.speed(t))<1e-7,'integrated scene time follows the exact shared speed');}
+  let previous=0;for(let t=0;t<1000;t+=.1){const value=amtFloorMelt(t);assert.ok(value>=previous&&value<=1);previous=value;}
+  for(const time of [0,1,21,60,300,160,600,900,999]){const f=fixture();f.floor.update({visit:1,time});assert.equal(f.floor.inspect().speed,1-.5*f.floor.inspect().melt);f.floor.update({visit:1,time},true);assert.equal(f.floor.inspect().speed,1-.5*f.floor.inspect().melt);}
 });
+
 test('20 Hz transport is frame-rate independent, allocates only on melting, and preserves renderer state',()=>{
   for(const fps of [30,60]){
     const f=fixture();f.floor.update({visit:1,time:0,visualTime:0});
@@ -94,8 +97,8 @@ test('only accepted displacement makes bounded footsteps; standing, blocked root
   for(let n=142;n<=330;n++)update(n*.05);assert.equal(f.floor.inspect().activeRipples,0);
   update(16.5);f.floor.update(null);assert.equal(f.floor.inspect().footsteps,0);
 });
-test('ten minutes remain real residence time while motion integrates the shared drag',()=>{
-  const h=harness();h.moveTo(0,6.6);h.level.interact();h.advanceGame(600);
-  assert.ok(Math.abs(h.level.floorState.time-600)<1e-8);assert.equal(h.level.timeScale,.5);
-  assert.equal(h.level.floorState.goop,1);assert.ok(h.level.floorState.visualTime>=450&&h.level.floorState.visualTime<451);
+test('fifteen minutes remain real residence time while motion integrates the shared drag',()=>{
+  const h=harness();h.moveTo(0,6.6);h.level.interact();h.advanceGame(900);
+  assert.ok(Math.abs(h.level.floorState.time-900)<1e-8);assert.ok(Math.abs(h.level.timeScale-.5)<1e-10);
+  assert.ok(Math.abs(h.level.floorState.goop-1)<1e-10);assert.ok(Math.abs(h.level.floorState.visualTime-BuergeramtGoop.motion(900))<1);
 });

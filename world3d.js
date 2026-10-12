@@ -1,7 +1,8 @@
 import {createAmtGaussianScene,loadAmtSplatModule} from './buergeramt-gaussian-scene.js?v=20261012-queue-call';
 import {mouthPaintGlsl} from './buergeramt-mouth-paint.js?v=20261011-mouth-consistency';
-import {createAmtFloor} from './buergeramt-floor.js?v=20261012-ten-minute-paint';
-import {createAmtPortraitMelt} from './buergeramt-portrait-melt.js?v=20261012-ten-minute-paint';
+import {createAmtFloor} from './buergeramt-floor.js?v=20261012-flowing-paint-lamps';
+import {createAmtPortraitMelt} from './buergeramt-portrait-melt.js?v=20261012-flowing-paint-lamps';
+import {createAmtLampWear} from './buergeramt-lamps.js?v=20261012-flowing-paint-lamps';
 import {prepareWithSegments,measureNaturalWidth,measureLineStats} from './assets/vendor/pretext/dist/layout.js';
 const THREE_URL="./assets/vendor/three/0.186.0/build/three.module.min.js";
 const GLTF_LOADER_URL="./assets/vendor/three/0.186.0/examples/jsm/loaders/GLTFLoader.js";
@@ -1136,7 +1137,10 @@ function showRendererFailure(error){
   ab(15.4,.12,19.2,floor,0,-.06,-.85);ab(15.4,4,.16,wall,0,2,-10.45);
   for(const x of [-7.7,7.7])ab(.16,4,19.2,wall,x,2,-.85);
   ab(15.4,.12,19.2,paper,0,4.05,-.85);
-  for(const z of [-7.4,-3.8,0,3.8,7.4]){ab(2.8,.025,.54,lamp,0,3.97,z);ab(2.95,.04,.62,trim,0,4,z)}
+  const amtLampMaterials=[];
+  for(const z of [-7.4,-3.8,0,3.8,7.4]){const material=lamp.clone();amtLampMaterials.push(material);ab(2.8,.025,.54,material,0,3.97,z);ab(2.95,.04,.62,trim,0,4,z)}
+  const amtLampWear=createAmtLampWear({THREE:T,materials:amtLampMaterials,floor:amtFloorEffect});
+  addEventListener("pagehide",()=>amtLampWear.update(null),{once:true});
   for(const z of [-7.3,-2.9,2,6.7]){ab(.035,.05,15.1,trim,0,3.84,z);ab(15.1,.05,.035,trim,0,3.84,z)}
   for(const x of [-7.57,7.57]){ab(.035,.11,19,trim,x,.26,-.85);ab(.035,.11,19,trim,x,2.15,-.85)}
   // The actual doorway matches the simulation threshold at z=5.55.
@@ -1583,7 +1587,7 @@ function showRendererFailure(error){
   }
   function renderAmt(){const level=window.BuergeramtLevel;
     if(!level||!level.active&&!document.body.classList.contains("amt-direct-mode")){
-      amtFloorEffect.update(null);amtPortraitMelt.update(null);
+      amtFloorEffect.update(null);amtPortraitMelt.update(null);amtLampWear.update(null);
       clearAmtTurnPaint();
       if(amtOmenSplat||amtOmenRequest)clearAmtOmenSplat();
       amtMouthSplat?.dispose();amtMouthSplat=null;
@@ -1594,6 +1598,7 @@ function showRendererFailure(error){
       return false;
     }
     if(!amtHiDpi){amtHiDpi=true;resize()}
+    amtLampWear.update(level.floorState,amtReducedMotion.matches);
     amtFloorEffect.update(level.floorState,amtReducedMotion.matches,level.view,level.characters);amtPortraitMelt.update(level.floorState,amtReducedMotion.matches);
     loadAmtImages();
     for(const actor of amtCharacters)if(actor.performance){actor.lead=actor.counter===level.activeClerkCounter;actor.lipId=actor.lead?"clerk":"clerk-"+actor.counter}
@@ -1623,6 +1628,7 @@ function showRendererFailure(error){
     const background=amtScene.background;amtScene.background=null;
     renderer.autoClear=false;amtCamera.layers.set(1);
     try{renderer.render(amtScene,amtCamera)}finally{amtCamera.layers.set(0);renderer.autoClear=true;amtScene.background=background}
+    amtLampWear.render(renderer);
     return true}
   function resize(){renderer.setPixelRatio(Math.min(devicePixelRatio||1,1,Math.sqrt(1600000/Math.max(1,innerWidth*innerHeight))));renderer.setSize(innerWidth,innerHeight,false);camera.aspect=innerWidth/innerHeight;camera.updateProjectionMatrix();amtCamera.aspect=innerWidth/innerHeight;amtCamera.updateProjectionMatrix();layoutMissionPointer()}resize();addEventListener("resize",resize,{passive:true});
   const spawnProbe=new T.Vector3();
@@ -1687,7 +1693,7 @@ function showRendererFailure(error){
   addEventListener("pageshow",()=>{const done=amtEntryResume;amtEntryResume=null;bridge.clearInput?.();done?.()});
   captureStartupAssets();
   startupModelsCaptured=true;
-  window.Germany3D={ready:true,isWorldPointVisible,isVehicleVisible,clearAmtFloor(){amtFloorEffect.update(null);amtPortraitMelt.update(null)},get amtPortraitMelt(){return amtPortraitMelt.inspect()},get amtFloor(){return {...amtFloorEffect.inspect(),opacity:floor.opacity,transparent:floor.transparent,depthWrite:floor.depthWrite}},prepareNearbyAssets,prepareOfficeAssets:loadAmtImages,clearAmtOmenSplat,enterBuergeramt,clearAmtGaussianAnimations(){amtMouthSplat?.dispose();amtMouthSplat=null;amtGaussian.clear();restoreAmtCharacterLayers()},
+  window.Germany3D={ready:true,isWorldPointVisible,isVehicleVisible,clearAmtFloor(){amtFloorEffect.update(null);amtPortraitMelt.update(null);amtLampWear.update(null)},get amtLamps(){return amtLampWear.inspect()},get amtPortraitMelt(){return amtPortraitMelt.inspect()},get amtFloor(){return {...amtFloorEffect.inspect(),opacity:floor.opacity,transparent:floor.transparent,depthWrite:floor.depthWrite}},prepareNearbyAssets,prepareOfficeAssets:loadAmtImages,clearAmtOmenSplat,enterBuergeramt,clearAmtGaussianAnimations(){amtMouthSplat?.dispose();amtMouthSplat=null;amtGaussian.clear();restoreAmtCharacterLayers()},
   get amtEntry(){return {active:!!amtEntry,failure:entryFailure,...amtEntry?.inspect()}},
   get nearbyAssetsReady(){updateAssetView();return cityModelJobs.every(job=>job.state==="settled"||cityModelDistance(job)>30&&!isCityAssetVisible(job))},
   get officeAssetsReady(){return amtImagesRequested&&officeAssetPending===0},get officeAssetStatus(){return {total:officeAssetTotal,pending:officeAssetPending,failed:officeAssetFailures}},
