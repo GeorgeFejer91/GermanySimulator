@@ -63,7 +63,7 @@ test('replay and hidden-page calls cannot leak an old encounter or sound graph',
  const h=harness('host',{cinematics:true,voice:true,fakeAudio:true});approachPatron(h);h.synth.start();h.advanceGame(1.2);
  const old=h.synth.current,time=h.level.fever.time;h.hide();h.advanceGame(5);assert.equal(h.level.fever.time,time);
  h.document.hidden=false;h.level.replay(h.config);old.onend?.();old.onboundary?.({charIndex:20});old.onresume?.();
- assert.equal(h.level.fever.active,false);assert.equal(h.level.stage,'outside');
+ assert.equal(h.level.fever.active,false);assert.equal(h.level.stage,'walk-sign');
  const started=h.audio.nodes.filter(n=>n.kind==='oscillator'&&n.started.length);assert(started.length>=4);assert(started.slice(1).every(n=>n.stopped.length),'all encounter nodes have bounded stops; room hum belongs to its closed context');
 });
 test('continuous envelope is monotonic at entry and exit without boundary or fallback jumps',()=>{

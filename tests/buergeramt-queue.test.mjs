@@ -50,7 +50,8 @@ test('ticket and call copy contains no imperative counter directions',()=>{
 test('all four board rows have distinct calls before registration, and only the newly called row changes',()=>{
  const h=harness(),before=JSON.parse(JSON.stringify(h.level.queueCalls));
  assert.deepEqual(before.map(c=>c.counter),[1,2,3,4]);assert.equal(new Set(before.map(c=>c.number)).size,4);assert.ok(before.every(c=>/^[A-Z]-\d{1,3}$/.test(c.number)));
- h.advanceGame(3.2);const after=h.level.queueCalls;assert.equal(after.filter((c,i)=>c.number!==before[i].number).length,1);assert.equal(h.level.activated,false);
+ // Queue calls use scene time, which begins decelerating immediately inside.
+ h.advanceGame(3.2);h.level.update(.001);const after=h.level.queueCalls;assert.equal(after.filter((c,i)=>c.number!==before[i].number).length,1);assert.equal(h.level.activated,false);
 });
 
 test('a reserved ticket cannot open the clerk until the matching phone receipt arrives',()=>{

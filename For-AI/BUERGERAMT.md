@@ -263,17 +263,17 @@ captions and manual return to a fresh QR invitation.
 On the first city-to-office entry, the visible city dissolves into source-colored
 Gaussian particles and spirals into the fitted Bürgeramt door over 3.4 seconds.
 The existing city renderer captures color and depth once, projects sampled
-surfaces toward that doorway, and opens the ordinary outside stage only after
+surfaces toward that doorway, and opens the waiting-room stage only after
 the collapse completes. City simulation and held input pause during the effect;
 the office queue, phone and omen begin through their normal owners afterward.
 Reduced motion uses a 0.24-second fade. A missing effect module or renderer
 failure enters directly. Hidden time does not advance the effect; completion
 and page exit dispose its capture and particle buffers. Returning through the
 browser's page cache completes the preserved handoff directly. Direct office testing
-has no city snapshot and retains its ordinary entrance. `buergeramt-entry.js`
+has no city snapshot and starts at the same interior arrival point. `buergeramt-entry.js`
 owns the GPU projection, with `world3d.js` owning its clock and handoff.
 
-Entering the first Bürgeramt opens the existing first-person episode outside the door. WASD or touch controls lead through the open doorway into the waiting room and four service counters. Connecting through the physical QR sign only opens the phone name form; it allocates no number. Valid name submission reserves one of the next two to four entries in the private, irregular letter-code queue. The phone must receive and display its code before sending the bounded `ticket-received` receipt with the scan ID and exact code. Only that receipt activates the host's appointment gate; missing delivery, stale receipts and repeated submissions cannot activate another ticket. Retries resend the same reservation. A late receipt receives only the remaining call window or forfeits an already replaced call.
+Entering the first Bürgeramt opens the existing first-person episode inside the waiting room at `(0, 4.8)`, with the QR route immediately active. A permanently closed double door fills the entrance at `z = 5.55`; its frame, leaves and handles remain solid. The hallway behind it remains scenery and cannot be entered or opened with E. Replay and the direct-office route use the same interior arrival. WASD and touch controls reach the QR sign and four service counters from there. Connecting through the physical QR sign only opens the phone name form; it allocates no number. Valid name submission reserves one of the next two to four entries in the private, irregular letter-code queue. The phone must receive and display its code before sending the bounded `ticket-received` receipt with the scan ID and exact code. Only that receipt activates the host's appointment gate; missing delivery, stale receipts and repeated submissions cannot activate another ticket. Retries resend the same reservation. A late receipt receives only the remaining call window or forfeits an already replaced call.
 
 The physical Anzeige retains a separate called code for Schalter 1–4, all populated from room entry; a new call appears every 3.2 seconds. The player's call stays valid for 12.8 seconds, until the next call at the same Schalter. Calls at the other counters do not invalidate it. The phone shows only the code, and neither a host assignment banner nor a duplicate called-code HUD reveals the desk. The player must match the phone code to the Anzeige and the numbered desk signs, then reach the right clerk during that window.
 

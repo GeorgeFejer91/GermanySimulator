@@ -26,8 +26,7 @@ function fixture(mobile=false){
   return{floor,resources,renders,renderer,previous,listeners,material};
 }
 test('the room clock starts inside the doorway, continues in dialogue and freezes while hidden/closed',()=>{
-  const h=harness();h.advanceGame(30);assert.equal(h.level.floorState.time,0);
-  h.moveTo(0,6.6);h.level.interact();h.advanceGame(2);assert.ok(Math.abs(h.level.floorState.time-2)<1e-8);
+  const h=harness();assert.equal(h.level.floorState.time,0);h.advanceGame(2);assert.ok(Math.abs(h.level.floorState.time-2)<1e-8);
   const d=harness();d.counter();const before=d.level.floorState.time;d.advanceGame(3);
   assert.equal(d.level.floorState.restoring,true);assert.ok(d.level.floorState.time<before);
   h.hide();h.advanceGame(60);assert.ok(Math.abs(h.level.floorState.time-2)<1e-8);
@@ -98,7 +97,7 @@ test('only accepted displacement makes bounded footsteps; standing, blocked root
   update(16.5);f.floor.update(null);assert.equal(f.floor.inspect().footsteps,0);
 });
 test('thirteen minutes remain real residence time while motion integrates the shared drag',()=>{
-  const h=harness();h.moveTo(0,6.6);h.level.interact();h.advanceGame(780);
+  const h=harness();h.advanceGame(780);
   assert.ok(Math.abs(h.level.floorState.time-780)<1e-8);assert.ok(Math.abs(h.level.timeScale-.65)<1e-10);
   assert.ok(Math.abs(h.level.floorState.goop-1)<1e-10);assert.ok(Math.abs(h.level.floorState.visualTime-BuergeramtGoop.motion(780))<1);
 });

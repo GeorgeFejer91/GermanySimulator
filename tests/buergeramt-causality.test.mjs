@@ -54,7 +54,7 @@ test('exiting at each consequential stage isolates the next visit from old event
    {type:'answer',id:'grass'},{type:'police-start',index:-1,mode:'voice',readyDelayMs:0,atMs:h.now()},
    {type:'police-done',index:-1,mode:'voice',durationMs:0,atMs:h.now()},{type:'phone-hidden'}])old.message(message);
   old.emit('status','Telefon getrennt');h.tick(180000);
-  assert.equal(h.level.stage,'outside',name);assert.equal(h.level.activated,false,name);
+  assert.equal(h.level.stage,'walk-sign',name);assert.equal(h.level.activated,false,name);
   assert.equal(h.level.registrationTicket,'',name);assert.equal(h.level.registeredName,'',name);
   assert.equal(h.level.assignedCounter.number,0,name);assert.equal(h.level.registration.node,'',name);
   assert.equal(h.level.registration.completed,false,name);assert.equal(h.level.registration.phoneSilent,false,name);

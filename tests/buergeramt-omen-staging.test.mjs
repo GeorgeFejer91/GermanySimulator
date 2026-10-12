@@ -9,7 +9,7 @@ function retreatFixture(dt){
  vm.runInContext(source('buergeramt.js').replace(/\}\)\(\);\s*$/,
   'window.retreatProbe={characters,view,officeBlocked};})();'),h.context);
  const level=h.window.BuergeramtLevel,probe=h.window.retreatProbe,actor=probe.characters[0];
- level.open(h.config);h.key('KeyW');for(let i=0;i<300&&level.view.z> -2.6;i++)level.update(.05);h.key('KeyW','keyup');h.key('KeyE');h.key('KeyE','keyup');
+ level.open(h.config);h.key('KeyW');for(let i=0;i<300&&level.omen.phase!=='approach';i++)level.update(.05);h.key('KeyW','keyup');
  for(let i=0;i<40/dt&&level.omen.phase==='approach';i++)level.update(dt);
  assert.equal(level.omen.phase,'blackout');h.tick(16);h.synth.start();h.synth.end();
  function until(phase){for(let i=0;i<40/dt&&level.omen.phase!==phase;i++)level.update(dt);assert.equal(level.omen.phase,phase)}
@@ -66,7 +66,7 @@ for(const dt of [1/60,1/30,.1]){
 
 for(const dt of [1/60,1/30,.1])test(`the staged route clears a blocking prop and paused people at dt=${dt}`,()=>{
  const h=harness('host',{cinematics:true,voice:true});
- const prop={x:-2.7,z:-3.8,w:1.5,d:1.2};h.level.setOfficeObstacles([prop]);h.enterUntilOmen();
+ const prop={x:-2.7,z:-5.1,w:1.5,d:1.2};h.level.setOfficeObstacles([prop]);h.enterUntilOmen();
  const initial=h.level.omen,player=h.level.view,board=h.level.queueDisplay;
  let prior=initial,travel=0,minPlayer=Infinity,minOther=Infinity;
  for(let i=0;i<2000&&h.level.omen.phase==='approach';i++){

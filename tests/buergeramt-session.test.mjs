@@ -41,12 +41,22 @@ test('pending city approval gates office speech and office exit cannot cancel it
  pending=false;
 });
 
-test('walking through the open doorway continues into the room',()=>{
+test('office admission starts inside with the QR route immediately available',()=>{
+ const initial=harness();assert.equal(initial.level.stage,'walk-sign');assert.equal(initial.level.view.z,4.8);
  const h=harness();h.key('KeyW');h.advanceGame(1.5);h.key('KeyW','keyup');
  assert.equal(h.level.stage,'walk-sign');assert.ok(h.level.view.z<5.55);
 });
-test('the entrance action cannot pass through the facade wing',()=>{
- const h=harness();h.moveTo(1.65,6.3);h.level.interact();assert.equal(h.level.stage,'outside');
+test('the closed entrance stops sprinting and E cannot enter the retained hallway',()=>{
+ for(const dt of [1/60,1/30,.1]){
+  const h=harness();h.key('KeyS');h.key('KeyR');
+  for(let n=0;n<Math.ceil(2/dt);n++)h.level.update(dt);
+  h.key('KeyS','keyup');h.key('KeyR','keyup');
+  assert(h.level.view.z<=5.12+1e-9,'door and handle clearance includes the player body');
+  assert(h.level.view.z>4.8,'the player can approach the closed door');
+  const before=h.level.view;h.level.interact();assert.deepEqual(h.level.view,before);
+  assert.equal(h.level.stage,'walk-sign');
+  h.level.replay(h.config);assert.equal(h.level.view.z,4.8);assert.equal(h.level.stage,'walk-sign');
+ }
 });
 test('the clerk encounter remains on the public side of the desk',()=>{
  const h=harness();h.counter();assert.ok(h.level.view.z>=-8.32);
@@ -168,7 +178,7 @@ test('replay and voice-off release deferred city-to-office speech safely',()=>{
  let cityBusy=true;const h=harness('host',{voice:true,cinematics:false,cityAudioBusy:()=>cityBusy});
  h.enter();h.moveTo(3.4,1.2);{const actor=h.level.characters.find(a=>a.id==='formularsammler');h.faceToward(actor.x,actor.z)}h.level.interact();const before=h.synth.spoken.length;
  h.level.replay(h.config);cityBusy=false;h.tick(1000);
- assert.equal(h.level.stage,'outside');assert.equal(h.synth.spoken.length,before);
+ assert.equal(h.level.stage,'walk-sign');assert.equal(h.synth.spoken.length,before);
  cityBusy=true;h.enter();h.moveTo(3.4,1.2);{const actor=h.level.characters.find(a=>a.id==='formularsammler');h.faceToward(actor.x,actor.z)}h.level.interact();h.config.voiceOn=()=>false;
  cityBusy=false;h.tick(40);assert.equal(h.synth.spoken.length,before);
  assert.equal(h.node('amt-line').textContent,h.window.BuergeramtStory.characters.formularsammler.lines[0].line);
@@ -249,7 +259,7 @@ test('starting a clerk cue does not cancel an already idle speech engine',()=>{
  const h=harness('host',{voice:true});h.counter();h.tick(20);h.synth.end();const before=h.synth.cancelCount;h.links[0].message({type:'answer',id:'grass'});assert.equal(h.synth.cancelCount,before);
 });
 test('the host remains playable without a browser speech implementation',()=>{
- const h=harness('host',{synthesis:false});h.enter();assert.equal(h.level.stage,'walk-sign');h.level.replay(h.config);assert.equal(h.level.stage,'outside');
+ const h=harness('host',{synthesis:false});h.enter();assert.equal(h.level.stage,'walk-sign');h.level.replay(h.config);assert.equal(h.level.stage,'walk-sign');
 });
 test('both speakers cut off each other throughout the escalating argument',()=>{
  const h=harness('host',{voice:true}),link=h.links[0];h.counter();link.message({type:'answer',id:'grass'});

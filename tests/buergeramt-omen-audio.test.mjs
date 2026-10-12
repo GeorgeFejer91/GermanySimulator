@@ -88,9 +88,9 @@ test('exit and replay cancel pending omen callbacks',()=>{
   const h=harness('host',{cinematics:true});h.enterUntilOmen();
   if(phase==='blackout')stepToBlackout(h);
   if(exit==='close')h.node('amt-exit').click();else h.level.replay(h.config);
-  assert.equal(h.level.stage,exit==='close'?'closed':'outside');
+  assert.equal(h.level.stage,exit==='close'?'closed':'walk-sign');
   assert.equal(h.level.omen.phase,'');assert.equal(h.level.omen.strength,0);
-  h.tick(10000);h.advanceGame(.5);assert.equal(h.level.stage,exit==='close'?'closed':'outside');
+  h.tick(10000);h.advanceGame(.5);assert.equal(h.level.stage,exit==='close'?'closed':'walk-sign');
  }
 });
 

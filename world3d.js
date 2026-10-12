@@ -1156,6 +1156,14 @@ function showRendererFailure(error){
   addEventListener("pagehide",event=>event.persisted?amtPotatoMirror.update(null):amtPotatoMirror.dispose());
   ab(2.7,.82,.16,wall,0,3.59,5.55);
   for(const x of [-1.35,1.35])ab(.08,3.2,.18,trim,x,1.6,5.55);
+  // Permanently closed double door; the retained vestibule is scenery only.
+  for(const x of [-.655,.655])ab(1.3,3.16,.12,paperGrey,x,1.58,5.55);
+  ab(.025,3.16,.145,trim,0,1.58,5.55);
+  for(const x of [-.16,.16]){
+    ab(.055,.22,.035,steel,x,1.17,5.454);
+    ab(.03,.03,.07,steel,x,1.17,5.412);
+    ab(.14,.035,.025,steel,x+Math.sign(x)*.055,1.17,5.377);
+  }
   amtPlate("EINGANG / AUSGANG",0,3.35,5.66,2.7,.35);
   ab(1.5,1.57,.58,screen,-4.65,.78,.8);ab(1.14,.72,.025,amber,-4.65,1.18,1.11);
   amtPlate("ANMELDUNG",-4.65,1.68,1.13,1.56,.34);

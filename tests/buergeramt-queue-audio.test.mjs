@@ -46,7 +46,7 @@ test('35–75 second quiet gaps yield to speech and never build a queue of annou
 test('voice-off uses a short exact caption without fetching speech, and replay clears queued/active calls',()=>{
  const h=harness('host',{fakeAudio:true}),clips=recording(h);h.enter();for(let i=0;i<6000&&h.node('amt-ambient').textContent!=='FRAU KNICK: Nächste bitte!';i++)h.elapse(.05);
  assert.equal(clips.length,0);assert.equal(h.node('amt-ambient').textContent,'FRAU KNICK: Nächste bitte!');h.tick(Math.ceil(1200/h.level.timeScale));assert.equal(h.node('amt-ambient').textContent,'');
- h.advanceGame(3.2);h.level.replay(h.config);h.tick(5000);h.level.update(0);assert.equal(h.node('amt-ambient').textContent,'');assert.equal(h.level.stage,'outside');assert.ok(h.audio.contexts[0].state==='closed');
+ h.advanceGame(3.2);h.level.replay(h.config);h.tick(5000);h.level.update(0);assert.equal(h.node('amt-ambient').textContent,'');assert.equal(h.level.stage,'walk-sign');assert.ok(h.audio.contexts[0].state==='closed');
 });
 
 test('effects mute does not create an audio context for the queue beep',()=>{

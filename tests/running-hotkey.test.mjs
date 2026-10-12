@@ -36,8 +36,8 @@ test('R doubles diagnostic movement and still stops at a building',()=>{
 
 test('R doubles office movement and releases on keyup, blur, and hidden tab',()=>{
  const h=harness();
- const step=()=>{const before=h.level.view;h.level.update(.05);const after=h.level.view;return Math.hypot(after.x-before.x,after.z-before.z)};
- // The initial approach to the entrance is clear; do not force a mission stage.
+ const step=()=>{const before=h.level.view,clock=h.level.floorState.visualTime;h.level.update(.05);const after=h.level.view;return Math.hypot(after.x-before.x,after.z-before.z)/(h.level.floorState.visualTime-clock)};
+ // Interior arrival starts the shared drag clock; compare speed per scene second.
  h.key('KeyW');const walk=step();assert.ok(walk>0);
  h.key('KeyR');assert.ok(Math.abs(step()-walk*2)<1e-10);
  h.key('ShiftLeft');assert.ok(Math.abs(step()-walk*2)<1e-10);h.key('ShiftLeft','keyup');
