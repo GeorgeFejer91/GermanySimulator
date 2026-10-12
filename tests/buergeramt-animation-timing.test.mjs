@@ -37,7 +37,7 @@ for(const dt of [1/60,1/30,.1])test(`queue reactions play once from their own st
 });
 
 test('dialogue freezes other actor clips and replay clears action phase',()=>{
- const h=harness();h.enter();h.moveTo(3.4,1.2);h.level.interact();
+ const h=harness();h.enter();h.moveTo(3.4,1.2);{const actor=h.level.characters.find(a=>a.id==='formularsammler');h.faceToward(actor.x,actor.z)}h.level.interact();
  assert.equal(h.level.stage,'character');
  const speaker=h.level.characterMood.id;
  const before=h.level.characters.filter(actor=>actor.id!==speaker);

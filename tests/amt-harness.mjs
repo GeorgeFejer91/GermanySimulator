@@ -124,13 +124,15 @@ export function harness(kind='host',{voice=false,synthesis=true,phoneLanguage='d
  const level=window.BuergeramtLevel;
  if(kind==='host')level.open(config);
  function key(code,type='keydown'){const event=new Event(type,{cancelable:true});Object.assign(event,{code,repeat:false});window.dispatchEvent(event)}
- function moveTo(x,z){for(const [axis,target,pos,neg] of [['x',x,'KeyD','KeyA'],['z',z,'KeyS','KeyW']]){let steps=0;while(Math.abs(level.view[axis]-target)>.07){if(++steps>300)throw new Error(`Cannot reach ${axis}=${target} from ${JSON.stringify(level.view)}`);const code=level.view[axis]<target?pos:neg;key(code);level.update(Math.min(.05,Math.abs(level.view[axis]-target)/3.6));key(code,'keyup')}}}
+ function turnTo(yaw){let steps=0;while(true){const delta=Math.atan2(Math.sin(yaw-level.view.yaw),Math.cos(yaw-level.view.yaw));if(Math.abs(delta)<1e-7)break;if(++steps>300)throw new Error(`Cannot face yaw=${yaw} from ${JSON.stringify(level.view)}`);const code=delta>=0?'ArrowRight':'ArrowLeft';key(code);level.update(Math.min(.05,Math.abs(delta)/(1.8*level.timeScale)));key(code,'keyup')}level.update(0)}
+ function faceToward(x,z){turnTo(Math.atan2(x-level.view.x,level.view.z-z))}
+ function moveTo(x,z){turnTo(0);for(const [axis,target,pos,neg] of [['x',x,'KeyD','KeyA'],['z',z,'KeyS','KeyW']]){let steps=0;while(Math.abs(level.view[axis]-target)>.07){if(++steps>300)throw new Error(`Cannot reach ${axis}=${target} from ${JSON.stringify(level.view)}`);const code=level.view[axis]<target?pos:neg;key(code);level.update(Math.min(.05,Math.abs(level.view[axis]-target)/3.6));key(code,'keyup')}}}
  function action(index=0){const button=node('amt-actions').children[index];if(button?.disabled&&!voice){for(let i=0;i<200&&button.disabled;i++)tick(100)}if(!button)throw new Error(`No action ${index} at ${level.stage}`);button.click();return button}
  function advanceGame(seconds){for(let t=0;t<seconds;t+=.05)level.update(Math.min(.05,seconds-t))}
  function enter(){moveTo(0,-2.6)}
  function enterUntilOmen(){key('KeyW');try{for(let i=0;i<300;i++){if(level.stage==='omen')return;level.update(.05)}throw new Error(`Automatic omen did not begin; ${JSON.stringify(level.view)}`)}finally{key('KeyW','keyup')}}
  function elapse(seconds){for(let t=0;t<seconds;t+=.05){const step=Math.min(.05,seconds-t);tick(step*1000);level.update(step)}}
- function approachRegistration(){moveTo(-3.3,-2.6);moveTo(-3.3,2.5);moveTo(-4.65,2.5)}
+ function approachRegistration(){moveTo(-3.3,-2.6);moveTo(-3.3,2.5);moveTo(-4.65,2.5);faceToward(-5.9,1.39)}
  function register(){enter();Link.instances.at(-1).message({type:'scan',id:'a'.repeat(24)})}
  function wait(){register();const link=Link.instances.at(-1);link.message({type:'register',name:'Erika Mustermann'});link.message({type:'ticket-received',id:link.scanId,number:level.registrationTicket})}
  function awaitCall(){for(let i=0;i<400&&level.stage==='waiting';i++)level.update(.05);if(level.stage!=='walk-counter')throw Error('No active call: '+level.stage)}
@@ -139,5 +141,5 @@ export function harness(kind='host',{voice=false,synthesis=true,phoneLanguage='d
  function phoneReady(){const link=Link.instances.at(-1);link.emit('connected',{});link.message({type:'scan-ready'});return link}
  function incoming(){const link=phoneReady();node('phone-name').value='Erika Mustermann';node('phone-form').dispatchEvent(new Event('submit',{cancelable:true}));link.message({type:'ticket',number:'B-223',counter:3});link.message({type:'call-arm',id:'grass'});link.message({type:'call',id:'grass',line:window.BuergeramtStory.call.line,ringAtPhoneMs:now,ringAtUtcMs:null,leadMs:2200});return link}
  function hide(){document.hidden=true;document.dispatchEvent(new Event('visibilitychange'))}
- return{window,document,node,tick,now:()=>now,timers,key,moveTo,action,advanceGame,elapse,enter,enterUntilOmen,approachRegistration,approachCounter,register,wait,awaitCall,counter,phoneReady,incoming,hide,synth,audio,vibrations,fullscreenRequests,counts,music,config,level,links:Link.instances,context};
+ return{window,document,node,tick,now:()=>now,timers,key,moveTo,faceToward,action,advanceGame,elapse,enter,enterUntilOmen,approachRegistration,approachCounter,register,wait,awaitCall,counter,phoneReady,incoming,hide,synth,audio,vibrations,fullscreenRequests,counts,music,config,level,links:Link.instances,context};
 }

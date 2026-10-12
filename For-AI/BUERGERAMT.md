@@ -1,6 +1,6 @@
 # Bürgeramt interaction cast and cross-domain handoff
 
-The secret Bürgeramt is an episode of the canonical root game. QR admission, the linked phone, the numbered queue, Frau Knick, the police interruption, A38, and the existing exit outcomes remain its required chain. Eight optional walking encounters add movement and atmosphere while the player waits; they never award a ticket or change a counter answer.
+The secret Bürgeramt is an episode of the canonical root game. QR admission, the linked phone, the numbered queue, Frau Knick, the police interruption, A38, and the existing exit outcomes remain its required chain. Eight optional walking encounters add movement and atmosphere while the player waits; they never award a ticket or change a counter answer. E and the touch interaction choose nearby people and counters within a 90-degree cone around the office camera heading, favoring gaze alignment. The interaction hint uses the same target; turning away makes that person ineligible.
 
 The clear wall beside the waiting-room entrance carries a gilded state portrait of the current
 Bundespräsident, Frank-Walter Steinmeier (verified 2026-10-12). Approaching it
@@ -68,7 +68,7 @@ No new synthesis or voice profile is needed for this restoration.
 ## Waiting-room floor
 
 The room begins with .82 m black-and-white checkerboard tiles and painted grout.
-Over **600 seconds (10 minutes) of visible, unscaled residence inside the actual
+Over **900 seconds (15 minutes) of visible, unscaled residence inside the actual
 doorway**, their pigment gradually stretches into curling veins and merging oily
 pools. Grout disappears and the surface develops shallow specular ridges and
 distorted analytic reflections of the five existing fluorescent ceiling strips.
@@ -77,19 +77,22 @@ No floor height, furniture, body clearance or collision changes; gait remains
 tied to accepted displacement.
 
 **Liquidation and deceleration must map one to one.** `buergeramt-goop.js` is the
-single immutable authority: `p = clamp(age / 600, 0, 1)`,
-`s(p) = 1 / (1 + exp(−8(p − .5)))`,
-`goop = (s(p) − s(0)) / (s(1) − s(0))`, and `speed = 1 − 0.5 × goop`. Thus the start is 100% speed,
-300 seconds is 50% goop / 75% speed, and 600 seconds is full goop / **50% speed**.
+single immutable authority: `p = clamp(age / 900, 0, 1)`,
+`s(p) = 1 / (1 + exp(−12(p − .82)))`,
+`goop = (s(p) − s(0)) / (s(1) − s(0))`, and `speed = 1 − 0.5 × goop`.
+The late-shifted sigmoid makes early decay nearly imperceptible: speed remains
+99.84% at five minutes and 98.83% at 7.5 minutes, then falls to 92.36% at ten,
+75.45% at twelve, 55.62% at fourteen and **50% at fifteen minutes**. Its steepest
+decay is near 12.3 minutes; the final approach eases into the cap.
 Keep the final floor and time scale capped there. Never add a separate melting
 delay, independent easing, second time-scale ramp, or feed slowed time back into
-the 600-second age; that would break the user's explicit coupling requirement.
+the 900-second age; that would break the user's explicit coupling requirement.
 
 `buergeramt.js` owns unscaled `floorState.time`, integrated `visualTime`, and
 attempt generation. Count age only while the player's position is inside the
 door; continue through conversations and fever/omen beats, pause age in the
 vestibule and when hidden/closed, and reset both clocks on close/replay. Its exact
-logistic integral of speed (450 scene seconds over 600 real residence seconds)
+logistic integral of speed (805.116998 scene seconds over 900 real residence seconds)
 drives player/NPC movement, queue and deadlines, action/fever/
 omen clocks, atlas/breath/mouth animation and liquid transport. Render and input
 dispatch stay responsive. `buergeramt-floor.js` carries one
@@ -109,9 +112,12 @@ Reduced motion and GPU failure retain a static spatial melting approximation
 with the same goop/speed value, without ripple animation or pigment targets.
 
 The existing Steinmeier oil portrait melts on exactly this same sigmoid and
-residence clock. `buergeramt-portrait-melt.js` stretches the real painted image
-into downward threads, gradually exposing the bare backing. A transparent,
-depth-tested sheet continues those threads from the frame to y=.0024 m; its
+residence clock. `buergeramt-portrait-melt.js` continuously transports the real
+painted image downward, gradually exposing the bare backing. Eight irregular
+viscous channels have moving necks, descending bulges and rounded leading drops;
+both image deformation and paint colors advance on the integrated scene clock,
+instead of stretching fixed sawtooth strips. A transparent,
+depth-tested sheet continues the paint from the frame to y=.0024 m; its
 front reaches the ground before it can feed the floor. The existing floor pass
 injects the same image colors at that contact, then transports and diffuses them
 with the black/white oils and walking wakes. RGBA stores mixed RGB plus deposited
@@ -122,6 +128,21 @@ colored spill; reduced motion uses a static spatial melt/spill approximation.
 Close/replay restores the picture and clears the paint field; the shared source
 texture remains in the existing office asset cache. Do not create a second
 portrait clock, floor decal disconnected from deposition, or particle timer.
+
+**Twenty-minute lamp exhaustion.** `buergeramt-lamps.js` uses the same unscaled
+visible residence age for wear and the same integrated scene time for flicker.
+Early flicker is faint and rare; wear increases its depth and occurrence as the
+scene slows. The five existing ceiling strips fail permanently for the visit at
+13, 15, 17, 18.5 and 20 minutes, with a 50-second final fade per strip. Their
+individual film/reflection strengths feed the floor material; dead lamps cannot
+leave lit reflections. After all five fail, residual scene illumination is 0.8%.
+A shared two-triangle black illumination pass dims room surfaces, native paint,
+Gaussian people and signs together after composition, without hiding geometry or
+changing actor depth. Captions and controls remain readable. Reduced motion
+removes flicker while retaining gradual wear and failure. Hidden time freezes;
+close/replay restores all five. There are no lamp timers, new shadow/light sources,
+or second slowdown ramp. Lamp wear continues to twenty minutes while the common
+fifteen-minute goop/time value remains capped.
 
 Recorded host and phone voices use this same playback rate with pitch preservation
 disabled; their media clocks still own word/mouth cues. Office hum, score, FX,
@@ -142,7 +163,7 @@ both-color retention, Android-emulated views and material restoration probe is
 `tools/playtest-buergeramt-floor.mjs`. Accelerated shader captures do not prove
 natural mission flow or physical-device performance.
 
-The current ten-minute, 50%-cap portrait/floor update passed 403 workflow
+The earlier ten-minute, 50%-cap portrait/floor update passed 403 workflow
 checks, plus focused tests and independent Physics/Camera review after fixing
 an absent-image source flag. Desktop and Android portrait/landscape emulation
 passed RGB transport, native .5/.75/1 rates, accepted walking, fade/reduced-motion

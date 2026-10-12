@@ -386,7 +386,10 @@ function updateCharacters(dt){
   if(actor.attention===0&&Math.hypot(actor.x-view.x,actor.z-view.z)<2.5){actor.attention=7.5;action(actor,[["look",.72],["work",.4]],1)}
  }
 }
-function nearestCharacter(){if(!["walk-sign","waiting"].includes(stage))return null;let found=null,distance=1.65;for(const actor of characters){if(actor.id==="aktenkurier"||actor.returning)continue;const d=Math.hypot(view.x-actor.x,view.z-actor.z);if(d<distance){found=actor;distance=d}}for(const [id,patron] of Object.entries(story.patrons)){const d=Math.hypot(view.x-patron.x,view.z-patron.z);if(d<distance){found={id,x:patron.x,z:patron.z,static:true};distance=d}}return found}
+// A 90-degree interaction cone follows the actual office camera heading.
+function facingInteractionScore(target,range){const dx=target.x-view.x,dz=target.z-view.z,d=Math.hypot(dx,dz);if(d>=range)return Infinity;if(d<.05)return 0;const alignment=(dx*Math.sin(view.yaw)-dz*Math.cos(view.yaw))/d;return alignment>=Math.SQRT1_2?1-alignment+d*.05:Infinity}
+function nearestCharacter(){if(!["walk-sign","waiting"].includes(stage))return null;let found=null,best=Infinity;for(const actor of characters){if(actor.id==="aktenkurier"||actor.returning)continue;const score=facingInteractionScore(actor,1.65);if(score<best){found=actor;best=score}}for(const [id,patron] of Object.entries(story.patrons)){const score=facingInteractionScore(patron,1.65);if(score<best){found={id,x:patron.x,z:patron.z,static:true};best=score}}return found}
+function nearbyPerson(){const actor=nearestCharacter(),desk=nearestCounter();if(actor&&(!desk||facingInteractionScore(actor,1.65)<facingInteractionScore({x:counterXs[desk-1],z:counter.z},1.9)))return{actor,desk:0};return{actor:null,desk}}
 
 function showCharacter(actor){
  encounterArmed=true;
@@ -408,7 +411,7 @@ function showPresidentPortrait(){
 function walking(){return ["outside","walk-sign","waiting","walk-counter"].includes(stage)}
 function setStage(next,preserveMovement=false){if(next!==stage&&!preserveMovement)held.clear();stage=next;document.body.classList.toggle("amt-omen",next==="omen");const moving=walking(),sequence=!moving&&next!=="closed";if(!moving)queueCallPending=-1;document.body.classList.toggle("amt-sequence",sequence);if(moving){actions.replaceChildren();interactingCounter=0;encounterArmed=false;cancelSpeech();clerkAnimation?.request(null);ambient.textContent="";characterMood=null;}root.classList.toggle("walking",moving);walkHud.classList.toggle("sequence",sequence);walkHud.hidden=next==="closed";root.classList.toggle("first-person",!!window.Germany3D?.ready);if(moving){objective.textContent=next==="outside"?"BÜRGERAMT · EINGANG":next==="walk-sign"?"QR-SCHILD SCANNEN":"AUFRUFTAFEL";update(0)}}
 function displayNumber(value,desk){queueDisplay=value;counterCalls[desk-1]=value}
-function nearestCounter(){let found=0,distance=1.9;for(let i=0;i<counterXs.length;i++){const d=Math.hypot(view.x-counterXs[i],view.z-counter.z);if(d<distance){found=i+1;distance=d}}return found}
+function nearestCounter(){let found=0,best=Infinity;for(let i=0;i<counterXs.length;i++){const score=facingInteractionScore({x:counterXs[i],z:counter.z},1.9);if(score<best){found=i+1;best=score}}return found}
 function queueStage(){return activated?(deadline>0?"walk-counter":"waiting"):"walk-sign"}
 function refuseCounter(desk){interactingCounter=desk;encounterArmed=true;setStage("early");content(story.clerks[desk].speaker+" · SCHALTER "+desk,story.clerkRefusal,[{run:()=>setStage(queueStage())}]);setStatus("FALSCHER AUFRUF · "+queueDisplay)}
 function speechReadableMs(text,delivery){return delivery?.readableMs??Math.max(3500,Math.min(14000,text.length*55*.96/(delivery?.rate??.96)))}
@@ -748,11 +751,11 @@ function update(dt){
  if(held.has("ArrowRight"))view.yaw+=elapsed*1.8;
  const f=(held.has("KeyW")||held.has("ArrowUp")?1:0)-(held.has("KeyS")||held.has("ArrowDown")?1:0),s=(held.has("KeyD")?1:0)-(held.has("KeyA")?1:0);
  if(f||s){const length=Math.hypot(f,s),speed=held.has("KeyR")?7.2:held.has("ShiftLeft")?5.8:3.6,dx=(Math.sin(view.yaw)*f+Math.cos(view.yaw)*s)/length*speed*elapsed,dz=(-Math.cos(view.yaw)*f+Math.sin(view.yaw)*s)/length*speed*elapsed;const steps=Math.max(1,Math.ceil(Math.hypot(dx,dz)/.1));for(let i=0;i<steps;i++){const stepX=view.x,stepZ=view.z,x=Math.max(-7.45,Math.min(7.45,view.x+dx/steps)),z=Math.max(-10.05,Math.min(8.45,view.z+dz/steps));const crossing=view.z>=door.z&&z<door.z||view.z<door.z&&z>=door.z;if(crossing&&Math.abs(x)>1.3)break;if(!officeBlocked(x,view.z))view.x=x;if(!officeBlocked(view.x,z)){view.z=z;if(crossing&&stage==="outside"&&z<door.z){setStage(activated?"waiting":"walk-sign",true);setStatus(activated?"WARTENUMMER "+number+" · AUFRUF ABWARTEN":"QR-CODE MIT DEM TELEFON SCANNEN")}}view.walkedDistance+=Math.hypot(view.x-stepX,view.z-stepZ);}}
- const desk=nearestCounter(),portrait=nearPresidentPortrait(),near=distanceTo(nearbyTarget())<1.9&&(stage!=="outside"||Math.abs(view.x)<1.3),actor=desk||portrait?null:nearestCharacter();
+ const {desk,actor}=nearbyPerson(),portrait=!desk&&nearPresidentPortrait(),near=distanceTo(nearbyTarget())<1.9&&(stage!=="outside"||Math.abs(view.x)<1.3);
  const nearbyText=desk?"E · SCHALTER "+desk+" ANSPRECHEN":portrait?"E · BUNDESPRÄSIDENT BETRACHTEN":actor?"E · "+(story.characters[actor.id]||story.patrons[actor.id]).speaker+" ANSPRECHEN":near?(stage==="outside"?"DURCH DEN EINGANG GEHEN":stage==="walk-sign"?"QR-CODE MIT DEM TELEFON SCANNEN":"AUFRUFTAFEL"):(stage==="outside"?"ZUR EINGANGSTÜR":stage==="walk-sign"?"QR-SCHILD UNTER DER ANZEIGE":"AUFRUFTAFEL");
  if(nearby.textContent!==nearbyText)nearby.textContent=nearbyText;
 }
-function interact(){if(!walking()||omen.phase)return;if(!document.fullscreenElement)requestFullscreen();const desk=nearestCounter();if(desk){if(activated&&registeredName&&deadline>0&&desk===assignedCounter&&counterCalls[desk-1]===number){interactingCounter=desk;showClerk()}else refuseCounter(desk);return}if(nearPresidentPortrait()){showPresidentPortrait();return}const near=distanceTo(nearbyTarget())<1.9,actor=nearestCharacter();if(actor){showCharacter(actor);return}if(!near||stage==="outside"&&Math.abs(view.x)>=1.3)return;
+function interact(){if(!walking()||omen.phase)return;if(!document.fullscreenElement)requestFullscreen();const {desk,actor}=nearbyPerson();if(desk){if(activated&&registeredName&&deadline>0&&desk===assignedCounter&&counterCalls[desk-1]===number){interactingCounter=desk;showClerk()}else refuseCounter(desk);return}if(nearPresidentPortrait()){showPresidentPortrait();return}if(actor){showCharacter(actor);return}const near=distanceTo(nearbyTarget())<1.9;if(!near||stage==="outside"&&Math.abs(view.x)>=1.3)return;
  if(stage==="outside"){view.positionGeneration++;view.z=4.8;setStage(activated?"waiting":"walk-sign");setStatus(activated?"WARTENUMMER "+number+" · AUFRUF ABWARTEN":"QR-CODE MIT DEM TELEFON SCANNEN");return}
  if(stage==="walk-sign")return;
 }

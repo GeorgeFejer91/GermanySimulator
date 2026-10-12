@@ -106,7 +106,7 @@ test('the Aktenkurier approaches, delivers the dark verse in a spotlight, and re
  assert.notEqual(h.level.characters[0].mode,'gesture');
 });
 test('a nearby regular owns the visible dialogue mood and releases the queue on return',()=>{
- const h=harness();h.enter();h.moveTo(3.4,1.2);const actor=h.level.characters.find(a=>a.id==='formularsammler');
+ const h=harness();h.enter();h.moveTo(3.4,1.2);{const actor=h.level.characters.find(a=>a.id==='formularsammler');h.faceToward(actor.x,actor.z)}const actor=h.level.characters.find(a=>a.id==='formularsammler');
  assert.ok(Math.hypot(h.level.view.x-actor.x,h.level.view.z-actor.z)<1.65);
  const board=h.level.queueDisplay;h.level.interact();assert.equal(h.level.stage,'character');
  assert.equal(h.level.characterMood.id,'formularsammler');assert.equal(h.level.characterMood.tone,'dread');
@@ -117,10 +117,10 @@ test('a nearby regular owns the visible dialogue mood and releases the queue on 
 
 test('city audio gates optional actor speech and a replaced cue never starts later',()=>{
  let cityBusy=true;const h=harness('host',{voice:true,cinematics:false,cityAudioBusy:()=>cityBusy,random:()=>0});
- h.enter();h.moveTo(3.4,1.2);const before=h.synth.spoken.length;h.level.interact();
+ h.enter();h.moveTo(3.4,1.2);{const actor=h.level.characters.find(a=>a.id==='formularsammler');h.faceToward(actor.x,actor.z)}const before=h.synth.spoken.length;h.level.interact();
  assert.equal(h.level.stage,'character');h.tick(2500);assert.equal(h.synth.spoken.length,before);
  h.level.replay(h.config);cityBusy=false;h.tick(500);assert.equal(h.synth.spoken.length,before);
- h.enter();h.moveTo(3.4,1.2);h.level.interact();assert.equal(h.level.stage,'character');h.tick(20);
+ h.enter();h.moveTo(3.4,1.2);{const actor=h.level.characters.find(a=>a.id==='formularsammler');h.faceToward(actor.x,actor.z)}h.level.interact();assert.equal(h.level.stage,'character');h.tick(20);
  assert.equal(h.synth.spoken.length,before+1);
 });
 
@@ -165,10 +165,10 @@ test('a failed clerk voice releases the handoff after city audio clears',()=>{
 
 test('replay and voice-off release deferred city-to-office speech safely',()=>{
  let cityBusy=true;const h=harness('host',{voice:true,cinematics:false,cityAudioBusy:()=>cityBusy});
- h.enter();h.moveTo(3.4,1.2);h.level.interact();const before=h.synth.spoken.length;
+ h.enter();h.moveTo(3.4,1.2);{const actor=h.level.characters.find(a=>a.id==='formularsammler');h.faceToward(actor.x,actor.z)}h.level.interact();const before=h.synth.spoken.length;
  h.level.replay(h.config);cityBusy=false;h.tick(1000);
  assert.equal(h.level.stage,'outside');assert.equal(h.synth.spoken.length,before);
- cityBusy=true;h.enter();h.moveTo(3.4,1.2);h.level.interact();h.config.voiceOn=()=>false;
+ cityBusy=true;h.enter();h.moveTo(3.4,1.2);{const actor=h.level.characters.find(a=>a.id==='formularsammler');h.faceToward(actor.x,actor.z)}h.level.interact();h.config.voiceOn=()=>false;
  cityBusy=false;h.tick(40);assert.equal(h.synth.spoken.length,before);
  assert.equal(h.node('amt-line').textContent,h.window.BuergeramtStory.characters.formularsammler.lines[0].line);
 });
