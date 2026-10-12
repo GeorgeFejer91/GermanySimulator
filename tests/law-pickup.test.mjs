@@ -22,7 +22,7 @@ for(const dt of [1/60,1/30,.1]){
  const x=car.x;for(let i=0;i<60;i++)h.updatePoliceResponse(dt);assert(car.x!==x,'loaded car departs through production driving');assert(h.vehicleOnRoad(car.x,car.y,car.angle));
 }
 assert.match(source,/speakRecorded\(quote,recording,\{[^\n]+hideCaption:true/,'law power is audio-only');
-assert.match(source,/if\(item.hideCaption\|\|/,'recorded and browser fallback captions honor the law exception');
+assert.match(source,/if\(item.hideCaption\)return/,'recorded and browser fallback captions honor the law exception');
 assert.doesNotMatch(fn('useLawPower'),/showWorldBark/,'law power cannot open the obstructing text paper');
 for(const dt of [1/60,1/30,.1])for(const wall of [{x:840,y:575,w:70,h:32},{x:900,y:575,w:70,h:32},{x:900,y:555,w:90,h:52}]){
  const h=pickupHarness(),n={x:875,y:640,crowd:true,name:'Blocked person',lawPending:true},car={x:wall.x===840?875:965,y:480,angle:0,speed:205,driveSpeed:0,steeringAngle:0,roadBound:true,roadIndex:0,lifecycle:'active',index:0,orbit:0,avoid:1,hitCooldown:1,lawPickup:{target:n,parking:{x:wall.x===840?875:965,y:480},phase:'approach',officer:null}};h.player.x=h.player.y=700;h.buildings=[wall];h.npcs=[n];h.policeVehicles=[car];

@@ -35,6 +35,7 @@ vm.runInContext(`
  const voiceHash=()=>0;
  const startSubtitle=item=>{item.subtitleParts=["Welcome","to","Berlin"]};
  const finishStimulus=()=>finished();
+ ${sourceOf("playCaptionStimulus")}
  ${sourceOf("playSyntheticStimulus")}
  playSyntheticStimulus(item,1);
 `,context,{filename:"game.js"});
@@ -57,7 +58,9 @@ assert.ok(startupWatchdog,"synthetic speech must have a bounded startup watchdog
 startupWatchdog.callback();
 assert.equal(cancelled,1,"a stalled browser voice must be cancelled");
 assert.equal(shown,2,"a failed voice must still reveal its readable text once");
-assert.equal(finished,2,"a stalled browser voice must release the modal dialogue queue");
+assert.equal(finished,1,"the readable fallback owns the caption until its bounded reading finishes");
+const captionReading=timers.filter(timer=>timer.delay===3200).at(-1);assert.ok(captionReading);captionReading.callback();
+assert.equal(finished,2,"the bounded caption reading releases the modal dialogue queue");
 
 browserVoices=[{lang:"de-DE",name:"Remote German",localService:false}];
 const failedVoice={text:"A third line",family:"dialogue",start:()=>shown++};

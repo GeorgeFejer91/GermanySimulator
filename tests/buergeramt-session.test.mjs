@@ -14,6 +14,7 @@ test('phone playback receipts own desktop police captions and stale receipts can
  assert.equal(h.node('amt-ambient').textContent,'');
  link.message({type:'police-start',index:-1,mode:'recording',readyDelayMs:20,atMs:h.now()});
  assert.equal(h.node('amt-ambient').textContent,'KRIMINALPOLIZEI · '+h.window.BuergeramtStory.call.line);
+ assert.equal(h.node('english-subtitle').hidden,false);assert.equal(h.node('english-subtitle').lang,'de');assert.equal(h.node('english-subtitle').textContent,h.window.BuergeramtStory.call.line);
  link.message({type:'police-done',index:-1,mode:'recording',durationMs:100,atMs:h.now()+100});h.tick(20);
  const clerk=h.node('amt-ambient').textContent;assert.ok(clerk.includes(h.window.BuergeramtStory.outburst.lines[0]));
  link.message({type:'police-start',index:-1,mode:'recording',readyDelayMs:20,atMs:h.now()});assert.equal(h.node('amt-ambient').textContent,clerk);

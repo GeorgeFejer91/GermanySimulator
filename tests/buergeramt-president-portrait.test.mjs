@@ -70,13 +70,15 @@ test('the projecting frame keeps player bodies separated at ordinary and delayed
  }
 });
 
-test('office English subtitles require opt-in and refresh during the continuous monologue',()=>{
+test('office subtitles stay on in German or English during the continuous monologue',()=>{
  const h=harness('host',{cinematics:false});let enabled=false;
  h.config.subtitlesOn=()=>enabled;h.level.replay(h.config);approach(h);h.level.interact();
- const box=h.node('english-subtitle');assert.equal(box.hidden,true);
+ const box=h.node('english-subtitle');assert.equal(box.hidden,false);assert.equal(box.lang,'de');
+ assert.equal(box.textContent,h.window.BuergeramtStory.presidentPortrait.lines.map(row=>row.line).join(' '));
  enabled=true;h.level.refreshSubtitle();assert.equal(box.hidden,false);
  assert.equal(box.textContent,h.window.BuergeramtStory.presidentPortrait.lines.map(row=>row.english).join(' '));
- enabled=false;h.level.refreshSubtitle();assert.equal(box.hidden,true);assert.equal(box.textContent,'');
+ enabled=false;h.level.refreshSubtitle();assert.equal(box.hidden,false);assert.equal(box.lang,'de');
+ assert.equal(box.textContent,h.window.BuergeramtStory.presidentPortrait.lines.map(row=>row.line).join(' '));
  enabled=true;h.elapse(5);h.level.refreshSubtitle();assert.equal(box.hidden,false);
  h.node('amt-leave').click();assert.equal(box.hidden,true);assert.equal(box.textContent,'');
 });

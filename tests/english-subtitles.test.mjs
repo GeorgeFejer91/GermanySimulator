@@ -103,7 +103,7 @@ assert.match(game,/const time=item\.subtitleElapsed\?\.\(\)\?\?elapsed[\s\S]*req
 assert.match(game,/function finishStimulus\([^)]*\)\{[^}]*clearSubtitle\(\)/,"broker completion must clear subtitles");
 assert.match(game,/function stopSpeech\([^)]*\)[\s\S]*clearSubtitle\(\)/,"broker cancellation must clear subtitles");
 assert.match(game,/localStorage\.setItem\("germany-simulator-english-subtitles"/,"subtitle preference must persist locally");
-// Exercise the shipped preference handler, including its OFF -> ON audio trigger.
+// The preference switches German -> English, with subtitles always enabled.
 function subtitlePreference(saved){
  const button={textContent:'',attributes:{},setAttribute(name,value){this.attributes[name]=value}},requests=[],storage=new Map(saved===undefined?[]:[['germany-simulator-english-subtitles',saved]]);
  let clears=0,pending=false;
@@ -113,19 +113,46 @@ function subtitlePreference(saved){
  return {button,requests,storage,set pending(value){pending=value},get clears(){return clears}};
 }
 const preference=subtitlePreference();
-assert.equal(preference.button.attributes['aria-pressed'],'false','fresh preferences default OFF');
+assert.equal(preference.button.attributes['aria-pressed'],'false','fresh preferences default to German');
+assert.equal(preference.button.textContent,'UNTERTITEL: DEUTSCH');
 assert.equal(preference.requests.length,0,'loading the game must not chastise the player');
 preference.button.onclick();
 assert.equal(preference.button.attributes['aria-pressed'],'true');
+assert.equal(preference.button.textContent,'SUBTITLES: ENGLISH');
 assert.equal(preference.storage.get('germany-simulator-english-subtitles'),'on');
 assert.equal(preference.requests.length,3,'enabling queues all three authored chastising lines');
 assert.ok(preference.requests.every(request=>request.speaker==='UNTERTITELSTELLE'&&request.options.voiceKey==='SUBTITLE AUTHORITY'&&request.options.family==='subtitle-approval'&&request.options.isEligible()));
 preference.button.onclick();
-assert.equal(preference.clears,1);assert.equal(preference.requests.length,3);
-assert.ok(preference.requests.every(request=>!request.options.isEligible()),'disable removes queued approval eligibility');
+assert.equal(preference.clears,0,'returning to German must not disable captions');assert.equal(preference.requests.length,3);
+assert.ok(preference.requests.every(request=>!request.options.isEligible()),'German mode removes queued English approval eligibility');
 preference.button.onclick();assert.equal(preference.requests.length,6,'a later enable triggers the cue again');
 preference.pending=true;preference.button.onclick();preference.button.onclick();assert.equal(preference.requests.length,6,'an in-flight approval must not stack duplicate speech');
 const restored=subtitlePreference('on');assert.equal(restored.button.attributes['aria-pressed'],'true');assert.equal(restored.requests.length,0,'restoring an opt-in is not a new enable action');
+// Exercise the production caption path for ordinary speech and recording-only
+// events, so German mode cannot silently fall back to hidden source dialogue.
+const captionBox={hidden:true,textContent:'',lang:''},captionApp={classList:{remove(){},toggle(){}}};
+const captions={state:{subtitlesOn:false},document:{getElementById:id=>id==='app'?captionApp:captionBox},window:{},audioTextLibrary:library,subtitleFrame:0,cancelAnimationFrame(){},requestAnimationFrame:()=>1,englishSubtitle:item=>item.subtitle||library.recordings[item.recording]?.english||'',activeStimulus:null,textOnlyBark:null};
+for(const name of ['clearSubtitle','setSubtitle'])vm.runInNewContext(game.match(new RegExp(`function ${name}\\([^\\n]+`))[0],captions);
+vm.runInNewContext(game.slice(game.indexOf('function startSubtitle('),game.indexOf('function ensureAudio(')),captions);
+const normal={text:'Nächste bitte!',subtitle:'Next, please!'};captions.activeStimulus=normal;captions.startSubtitle(normal);
+assert.equal(captionBox.hidden,false);assert.equal(captionBox.lang,'de');assert.equal(captionBox.textContent,normal.text);
+captions.state.subtitlesOn=true;captions.startSubtitle(normal);assert.equal(captionBox.lang,'en');assert.equal(captionBox.textContent,normal.subtitle);
+captions.state.subtitlesOn=false;captions.startSubtitle(normal);assert.equal(captionBox.hidden,false);assert.equal(captionBox.textContent,normal.text);
+const recording=Object.keys(library.recordings).find(path=>library.recordings[path].cues?.length),recorded={recording,subtitleMode:'recorded',subtitleDuration:60,subtitleElapsed:()=>0};captions.activeStimulus=recorded;captions.startSubtitle(recorded);
+assert.equal(captionBox.textContent,library.recordings[recording].source,'German recording-only events use their exact catalogue transcript');
+captions.state.subtitlesOn=true;captions.startSubtitle(recorded);assert.equal(captionBox.textContent,library.recordings[recording].cues[0][2]);
+captions.startSubtitle({...normal,hideCaption:true});assert.equal(captionBox.hidden,true,'explicit audio-only law quotations retain their exemption');
+let silentCompletion=null;
+Object.assign(captions,{speechCatalog:{productionVoices:{}},stimulusGeneration:1,performance:{now:()=>0},stimulusEligible:()=>true,setTimeout:callback=>{silentCompletion=callback;return 1},finishStimulus:()=>captions.clearSubtitle()});
+vm.runInNewContext(game.slice(game.indexOf('function playCaptionStimulus('),game.indexOf('function playRecordedStimulus(')),captions);
+captions.state.subtitlesOn=false;captions.activeStimulus=normal;captions.playSyntheticStimulus(normal,1);
+assert.equal(captionBox.hidden,false,'unavailable browser speech retains readable captions');assert.equal(captionBox.textContent,normal.text);assert.equal(typeof silentCompletion,'function');
+silentCompletion();assert.equal(captionBox.hidden,true,'the silent reading has bounded completion');
+let failedUtterance;
+captions.window.speechSynthesis=captions.speechSynthesis={getVoices:()=>[],speak:utterance=>failedUtterance=utterance,cancel(){}};
+Object.assign(captions,{SpeechSynthesisUtterance:class{constructor(text){this.text=text}},clearTimeout(){},clearInterval(){},voiceHash:()=>0});
+captions.playSyntheticStimulus(normal,1);failedUtterance.onerror({error:'synthesis-failed'});
+assert.equal(captionBox.hidden,false,'failed speech retains captions instead of losing the line');assert.equal(captionBox.textContent,normal.text);silentCompletion();
 // The final line releases its item before the broker releases foreground ownership.
 // Office admission must wait through that required completion gap as well.
 const finalLine={family:'subtitle-approval'},timers=[];
@@ -136,6 +163,11 @@ admission.finishStimulus(finalLine,1);
 assert.equal(admission.activeStimulus,null);assert.equal(admission.stimulusQueue.length,0);
 assert.equal(timers[0].delay,250);assert.equal(admission.stimulusBusy(),true,'city retains admission during the final gap');
 timers[0].callback();assert.equal(admission.stimulusBusy(),false,'office admission resumes after the gap');
+// A caption-only office fallback owns the rail until its bounded reading ends.
+const officeAdmission={state:{voiceOn:true},activeStimulus:null,stimulusQueue:[{family:'subtitle-approval',priority:3}],stimulusTimer:0,stimulusGeneration:1,stimulusSequence:0,stimulusLastServed:new Map(),window:{BuergeramtLevel:{active:true,audioTextBusy:false,subtitleBusy:true}},clearTimeout(){},setTimeout(callback,delay){officeAdmission.resume=callback;officeAdmission.delay=delay;return 1},stimulusEligible:()=>true,chooseStimulusIndex:()=>0,setAudioText(){},playSyntheticStimulus:()=>officeAdmission.started=true};
+vm.runInNewContext(game.match(/function pumpStimuli\([^\n]+/)[0],officeAdmission);officeAdmission.pumpStimuli();
+assert.equal(officeAdmission.started,undefined,'approval cannot overwrite a silent office reading');assert.equal(officeAdmission.delay,40);
+officeAdmission.window.BuergeramtLevel.subtitleBusy=false;officeAdmission.resume();assert.equal(officeAdmission.started,true,'caption completion releases the queued announcement');
 assert.deepEqual(["Englische Untertitel sind äußerst wichtig, insbesondere wenn Sie Deutsch lernen möchten.","Aufgrund Ihres bemerkenswerten Lerneifers wird die Verwendung von Untertiteln hiermit genehmigt.","Wir gratulieren Ihnen zu dieser verwaltungstechnisch ausgezeichneten Entscheidung."].map(text=>library.lines[text]),["English subtitles are extremely important, especially when you want to learn German.","In recognition of your remarkable eagerness to learn, the use of subtitles is hereby approved.","We congratulate you on this administratively excellent decision."]);
 assert.match(game,/if\(state\.subtitlesOn&&!hasStimulusFamily\("subtitle-approval"\)\)for\(const text of SUBTITLE_APPROVAL_LINES\)showWorldBark\("UNTERTITELSTELLE",text/ ,"subtitle approval must show the exact spoken line");
 assert.match(game,/subtitleAuthority=\/\^SUBTITLE AUTHORITY\/[\s\S]*u\.rate=subtitleAuthority\?\.72[\s\S]*u\.pitch=subtitleAuthority\?\.55/,"subtitle approval needs a deterministic low, measured robotic delivery");

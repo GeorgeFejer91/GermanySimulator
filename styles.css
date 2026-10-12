@@ -237,3 +237,7 @@ footer{bottom:calc(var(--subtitle-height) + 8px)}
   .dialogue,.dialogue.memorial{bottom:calc(var(--city-control-clearance,153px) + 7px);max-height:calc(100dvh - var(--city-control-clearance,153px) - 14px)}
   .interact-hint{bottom:calc(var(--city-control-clearance,153px) + 7px)}
 }
+/* Spoken names and dialogue belong to subtitles; retain only the actions. */
+.dialogue .dialogue-copy,.dialogue .portrait{display:none}
+.dialogue:not([hidden]){width:auto;height:auto;min-height:0;grid-template-columns:auto;grid-template-rows:auto}
+.dialogue .dialogue-actions{grid-row:auto}

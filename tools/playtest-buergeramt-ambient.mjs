@@ -46,8 +46,8 @@ try{
    await page.evaluate(()=>__ambientTest.hold());
    const state=await page.evaluate(()=>__ambientCapture);
    assert(state.src.split('?')[0]===cue.path);assert.equal(state.caption,cue.caption);assert.equal(state.mouth.actor,cue.actor);assert.equal(state.mouth.mode,'recorded');assert.equal(state.mouth.timing,'audio-cues');assert(state.muted);assert.equal(state.machine,0);assert(Math.abs(state.volume-.176)<1e-6);
-   await page.waitForFunction(()=>document.getElementById('amt-ambient').dataset.pretextFit);
-   const bounds=await page.locator('#amt-ambient').evaluate(el=>{const r=el.getBoundingClientRect();return{fit:el.dataset.pretextFit,width:r.width,height:r.height,left:r.left,right:r.right,top:r.top,bottom:r.bottom,scrollWidth:el.scrollWidth,clientWidth:el.clientWidth,scrollHeight:el.scrollHeight,clientHeight:el.clientHeight}});
+   await page.waitForFunction(()=>document.getElementById('english-subtitle').dataset.fit);
+   const bounds=await page.locator('#english-subtitle').evaluate(el=>{const r=el.getBoundingClientRect();return{fit:el.dataset.fit,width:r.width,height:r.height,left:r.left,right:r.right,top:r.top,bottom:r.bottom,scrollWidth:el.scrollWidth,clientWidth:el.clientWidth,scrollHeight:el.scrollHeight,clientHeight:el.clientHeight}});
    assert.notEqual(bounds.fit,'unavailable');assert(bounds.scrollWidth<=bounds.clientWidth+1);assert(bounds.scrollHeight<=bounds.clientHeight+1);assert(bounds.left>=0&&bounds.right<=viewport.width+1&&bounds.top>=0&&bounds.bottom<=viewport.height+1);
    if([0,1,9,14,20].includes(index))await page.screenshot({path:resolve(out,`${name}-${cue.id}.png`)});
    await page.evaluate(()=>__ambientTest.cancel());assert.equal(await page.evaluate(()=>__players.at(-1).getAttribute('src')),null);
@@ -87,10 +87,10 @@ try{
   await page.evaluate(()=>__ambientTest.cancel());assert.deepEqual(errors,[]);
   const reflow=[];
   if(name==='desktop')for(const [label,width,zoom,spacing] of [['320px',320,1,false],['200-percent',640,2,false],['text-spacing',320,1,true]]){
-   await page.setViewportSize({width,height:900});await page.evaluate(({zoom,spacing})=>{document.documentElement.style.zoom=String(zoom);if(spacing){const style=document.createElement('style');style.textContent='#amt-ambient{line-height:1.5!important;letter-spacing:.12em!important;word-spacing:.16em!important}';document.head.append(style)}},{zoom,spacing});
+   await page.setViewportSize({width,height:900});await page.evaluate(({zoom,spacing})=>{document.documentElement.style.zoom=String(zoom);if(spacing){const style=document.createElement('style');style.textContent='#english-subtitle{line-height:1.5!important;letter-spacing:.12em!important;word-spacing:.16em!important}';document.head.append(style)}},{zoom,spacing});
    for(const index of [1,9,10,17]){
     await page.evaluate(i=>__ambientTest.cue(i,false),index);await page.waitForTimeout(100);
-    const b=await page.locator('#amt-ambient').evaluate(el=>{const r=el.getBoundingClientRect();return{fit:el.dataset.pretextFit,width:r.width,top:r.top,bottom:r.bottom,right:r.right,scrollWidth:el.scrollWidth,clientWidth:el.clientWidth,scrollHeight:el.scrollHeight,clientHeight:el.clientHeight}});
+    const b=await page.locator('#english-subtitle').evaluate(el=>{const r=el.getBoundingClientRect();return{fit:el.dataset.fit,width:r.width,top:r.top,bottom:r.bottom,right:r.right,scrollWidth:el.scrollWidth,clientWidth:el.clientWidth,scrollHeight:el.scrollHeight,clientHeight:el.clientHeight}});
     assert(b.scrollWidth<=b.clientWidth+1);assert(b.scrollHeight<=b.clientHeight+1);assert(b.top>=0&&b.bottom<=900&&b.right<=width+1);reflow.push({label,index,...b});
     if(index===17)await page.screenshot({path:resolve(out,`${name}-${label}.png`)});
     await page.evaluate(()=>__ambientTest.cancel());

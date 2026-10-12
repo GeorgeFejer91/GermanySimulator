@@ -76,6 +76,6 @@ test('missing fixed street recordings keep the broker and captions without brows
  let starts=0,captions=0,finished=0,timeout;
  const item={text:'An exact street rule.',candidateVoiceId:'crowd-waltraud-wartemarke',start:()=>starts++};
  const h=vm.createContext({item,stimulusEligible:()=>true,performance:{now:()=>1000},setTimeout:(callback)=>{timeout=callback;return 1},startSubtitle:()=>captions++,finishStimulus:()=>finished++});
- vm.runInContext(`const speechCatalog={productionVoices:{'crowd-waltraud-wartemarke':{fallback:'captions'}}};let activeStimulus=item,stimulusGeneration=3,stimulusTimer;${sourceOf('playSyntheticStimulus')};playSyntheticStimulus(item,3);`,h);
+ vm.runInContext(`const speechCatalog={productionVoices:{'crowd-waltraud-wartemarke':{fallback:'captions'}}};let activeStimulus=item,stimulusGeneration=3,stimulusTimer;${sourceOf('playCaptionStimulus')};${sourceOf('playSyntheticStimulus')};playSyntheticStimulus(item,3);`,h);
  assert.equal(starts,1);assert.equal(captions,1);assert.equal(finished,0);assert.equal(item.subtitleMode,'silent');assert(item.subtitleDuration>0);timeout();assert.equal(finished,1);
 });

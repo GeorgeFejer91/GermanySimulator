@@ -18,14 +18,17 @@ function requestFullscreen(){window.GermanyFullscreen?.autoEnter()}
 // Every callback belongs to one attempt and one visible speech/action cue.
 let attempt=0,cue=0,callOutcome="",speechGateTimer=null,recordedSpeech=null,recordedCleanup=null,officeSpeechBusy=false,sceneContinuation=null;
 let officeSubtitle=null;
+function startOfficeSubtitle(text,english,duration){officeSubtitle={source:text,english:english||window.GermanySimulatorAudioText?.lines?.[text]||Object.values(window.GermanySimulatorAudioText?.recordings||{}).find(clip=>clip.source===text)?.english||text,at:performance.now(),duration};refreshSubtitle();return officeSubtitle}
 function refreshSubtitle(){
  const box=document.getElementById("english-subtitle");if(!box)return;
- const layout=window.GermanySubtitleLayout,visible=active&&options?.subtitlesOn?.()&&officeSubtitle;
- if(visible&&!officeSubtitle.parts)officeSubtitle.parts=layout?.paginate(officeSubtitle.text)||[officeSubtitle.text];
+ if(!officeSubtitle&&options?.cityAudioActive?.())return;
+ const layout=window.GermanySubtitleLayout,visible=active&&officeSubtitle,language=options?.subtitlesOn?.()?"en":"de";
+ box.lang=language;
+ if(visible&&(!officeSubtitle.parts||officeSubtitle.language!==language)){const text=language==="en"?officeSubtitle.english:officeSubtitle.source;officeSubtitle.parts=layout?.paginate(text)||[text];officeSubtitle.language=language;}
  const parts=visible?officeSubtitle.parts:[];
  const progress=visible?Math.min(.999,recordedSpeech?.duration>0?recordedSpeech.currentTime/recordedSpeech.duration:(performance.now()-officeSubtitle.at)/officeSubtitle.duration):0;
  const text=visible?(layout?.captionAtProgress(parts,progress)||parts[0]):"";
- if(box.textContent!==text)box.textContent=text;box.hidden=!visible;box.lang="en";
+ if(box.textContent!==text)box.textContent=text;box.hidden=!visible;
  document.getElementById("app")?.classList.toggle("subtitles-visible",!!visible);
 }
 window.addEventListener("caption-layout-change",()=>{if(officeSubtitle)officeSubtitle.parts=null;if(active)refreshSubtitle()});
@@ -431,7 +434,7 @@ function say(text,onComplete,onStart,onBoundary,delivery=null,voiceId="",allowCa
  const owner=attempt,visibleCue=cue,readableMs=speechReadableMs(text,delivery)/timeScale();
  const current=()=>active&&owner===attempt&&visibleCue===cue&&(delivery.isCurrent?delivery.isCurrent():line.textContent===text);
  const originalStart=onStart,originalComplete=onComplete;
- onStart=(mode,receipt)=>{officeSubtitle={text:delivery.subtitle||window.GermanySimulatorAudioText?.lines?.[text]||Object.values(window.GermanySimulatorAudioText?.recordings||{}).find(clip=>clip.source===text)?.english||text,at:performance.now(),duration:receipt?.durationMs||readableMs};refreshSubtitle();originalStart?.(mode,receipt)};
+ onStart=(mode,receipt)=>{startOfficeSubtitle(text,delivery.subtitle,receipt?.durationMs||readableMs);originalStart?.(mode,receipt)};
  onComplete=mode=>{officeSubtitle=null;refreshSubtitle();originalComplete?.(mode)};
  const begin=()=>{
   if(!current())return;
@@ -868,8 +871,8 @@ function showClerk(){
 function showOutburst(){
  const upset={...story.outburst,speaker:"FRAU KNICK · SCHALTER "+assignedCounter};exit.hidden=true;cancelSpeech();ambient.textContent="";
  const phoneBrowser=navigator.userAgentData?.mobile??/iPhone|iPod|Android.*Mobile/i.test(navigator.userAgent||"");
- let waiting=null,deskIndex=null,deskTimer=null,disconnected=false,phoneCaption="";
- function clearPhoneCaption(){if(phoneCaption&&ambient.textContent===phoneCaption)ambient.textContent="";phoneCaption=""}
+ let waiting=null,deskIndex=null,deskTimer=null,disconnected=false,phoneCaption="",phoneSubtitle=null;
+ function clearPhoneCaption(){if(phoneCaption&&ambient.textContent===phoneCaption)ambient.textContent="";if(phoneSubtitle&&officeSubtitle===phoneSubtitle){officeSubtitle=null;refreshSubtitle()}phoneCaption="";phoneSubtitle=null}
  function stopDesk(){
   if(deskTimer!==null)clearTimer(deskTimer);deskTimer=null;
   const record=timing.desk[deskIndex];if(record&&record.endAt===null){record.endAt=performance.now();record.mode="interrupted";cancelSpeech()}
@@ -886,6 +889,7 @@ function showOutburst(){
   clearPhoneCaption();
   if(!phoneBrowser){phoneCaption="KRIMINALPOLIZEI · "+(index===-1?story.call.line:story.police[index]);ambient.textContent=phoneCaption}
   const pending=waiting,record=timing.cues[index],budget=Math.round(upset.phoneCutAfterMs[index+1]/timeScale()),target=record.estimatedStartAt+budget;
+  if(!phoneBrowser)phoneSubtitle=startOfficeSubtitle(index===-1?story.call.line:story.police[index],null,budget);
   const service=window.BuergeramtClock;
   const stopAtUtcMs=Number.isSafeInteger(record.phoneStartedAtUtcMs)?record.phoneStartedAtUtcMs+budget:service?.usable?.(clockAnchor)?Math.round(service.utcAt(clockAnchor,target)):null;
   const payload={index,stopAtPhoneMs:record.phoneStartedAtMs+budget,stopAtUtcMs};
@@ -949,7 +953,7 @@ document.addEventListener("visibilitychange",()=>{if(document.hidden)held.clear(
 document.addEventListener("pointermove",event=>{if(active&&walking()&&!omen.phase&&event.buttons===1&&!event.target.closest("button"))view.yaw+=event.movementX*.004*timeScale()});
 document.querySelectorAll("[data-amt-key]").forEach(button=>{const key=button.dataset.amtKey;button.addEventListener("pointerdown",e=>{if(!active||!walking()||omen.phase)return;e.preventDefault();button.setPointerCapture(e.pointerId);held.add(key)});for(const type of ["pointerup","pointercancel","lostpointercapture"])button.addEventListener(type,()=>held.delete(key))});
 document.getElementById("amt-touch-e").addEventListener("click",interact);document.getElementById("amt-leave").addEventListener("click",()=>close());exit.addEventListener("click",()=>close());
-window.BuergeramtLevel={open,requestFullscreen,refreshSubtitle,get registrationTicket(){return number},get activeClerkCounter(){return interactingCounter||assignedCounter||3},get queueCalls(){return counterCalls.map((number,index)=>({number,counter:index+1}))},get assignedCounter(){return{number:assignedCounter,x:counter.x,z:counter.z}},get registration(){return{node:registrationNode,completed:registrationCompleted,phoneSilent,warnings:phoneWarnings,stamps:[...registrationStamps]}},get lipSpeech(){return lips.sample()},replay(config){close(false);open(config)},update,interact,setOfficeObstacles,get active(){return active},get timeScale(){return timeScale()},get floorState(){return{time:floorClock,visualTime:visualClock,goop:goop.goop(floorClock),speed:timeScale(),visit:attempt,restoring:!!restoration,restoration:restoration?Math.min(1,restoration.elapsed/restorationDuration):0,restorationAge:restoration?.age,restorationClock:restoration?.clock}},get audioTextBusy(){return officeSpeechBusy},get stage(){return stage},get queueDisplay(){return queueDisplay},get qrSvg(){return qrSvg},get phoneUrl(){return link?BuergeramtLink.phoneUrl(link.invitation,options.subtitlesOn?.()):""},get timing(){return JSON.parse(JSON.stringify(timing))},get view(){return{x:view.x,z:view.z,yaw:view.yaw,pitch:view.pitch||0,walkedDistance:view.walkedDistance,positionGeneration:view.positionGeneration}},get characters(){return characters.map(actor=>({id:actor.id,x:actor.x,z:actor.z,walkedDistance:actor.walkedDistance,positionGeneration:actor.positionGeneration,direction:actor.direction,heading:actor.heading??Math.PI,mode:actor.mode,phase:characterPhase(actor),frame:Math.min(7,Math.floor(characterPhase(actor)*8)),animation:characterAnimation(actor)}))},get stationaryAnimations(){return{
+window.BuergeramtLevel={open,requestFullscreen,refreshSubtitle,get registrationTicket(){return number},get activeClerkCounter(){return interactingCounter||assignedCounter||3},get queueCalls(){return counterCalls.map((number,index)=>({number,counter:index+1}))},get assignedCounter(){return{number:assignedCounter,x:counter.x,z:counter.z}},get registration(){return{node:registrationNode,completed:registrationCompleted,phoneSilent,warnings:phoneWarnings,stamps:[...registrationStamps]}},get lipSpeech(){return lips.sample()},replay(config){close(false);open(config)},update,interact,setOfficeObstacles,get active(){return active},get timeScale(){return timeScale()},get floorState(){return{time:floorClock,visualTime:visualClock,goop:goop.goop(floorClock),speed:timeScale(),visit:attempt,restoring:!!restoration,restoration:restoration?Math.min(1,restoration.elapsed/restorationDuration):0,restorationAge:restoration?.age,restorationClock:restoration?.clock}},get subtitleBusy(){return !!officeSubtitle},get audioTextBusy(){return officeSpeechBusy},get stage(){return stage},get queueDisplay(){return queueDisplay},get qrSvg(){return qrSvg},get phoneUrl(){return link?BuergeramtLink.phoneUrl(link.invitation,options.subtitlesOn?.()):""},get timing(){return JSON.parse(JSON.stringify(timing))},get view(){return{x:view.x,z:view.z,yaw:view.yaw,pitch:view.pitch||0,walkedDistance:view.walkedDistance,positionGeneration:view.positionGeneration}},get characters(){return characters.map(actor=>({id:actor.id,x:actor.x,z:actor.z,walkedDistance:actor.walkedDistance,positionGeneration:actor.positionGeneration,direction:actor.direction,heading:actor.heading??Math.PI,mode:actor.mode,phase:characterPhase(actor),frame:Math.min(7,Math.floor(characterPhase(actor)*8)),animation:characterAnimation(actor)}))},get stationaryAnimations(){return{
  "clerk-desk-1":window.BuergeramtAnimationClock?.ambientClerk(stationaryClocks["clerk-desk-1"],attempt),
  "clerk-desk-2":window.BuergeramtAnimationClock?.ambientClerk(stationaryClocks["clerk-desk-2"],attempt),
  "clerk-desk-3":window.BuergeramtAnimationClock?.ambientClerk(stationaryClocks["clerk-desk-3"],attempt),

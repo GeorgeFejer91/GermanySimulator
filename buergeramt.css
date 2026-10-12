@@ -1,5 +1,7 @@
 .amt-level[hidden],.amt-ticket[hidden],.phone-call[hidden]{display:none!important}
 .amt-level .amt-sheet{display:none!important}
+/* Dialogue and speaker names are shown only in the shared subtitle rail. */
+#amt-ambient{display:none!important}
 .amt-sequence #amt-direct-reset{visibility:hidden}
 .amt-sequence #amt-counter-notice{display:none}
 .amt-inside #english-subtitle{z-index:232}

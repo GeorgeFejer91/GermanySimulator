@@ -48,9 +48,9 @@ try{
     try{await page.waitForFunction(i=>__media.some(media=>media.src.includes('player-president-portrait-'+(i+1)+'.mp3')&&media.currentTime>.12),index,{timeout:15000})}catch(error){console.log(JSON.stringify(await page.evaluate(()=>({stage:BuergeramtLevel.stage,line:document.getElementById('amt-line').textContent,media:__media.map(m=>({src:m.src,time:m.currentTime,paused:m.paused,error:m.error?.code})),machine:__machine}))));throw error}
     const media=await page.evaluate(i=>{const player=__media.find(media=>media.src.includes('player-president-portrait-'+(i+1)+'.mp3'));return{src:player.src,time:player.currentTime,muted:player.muted}},index);assert(media.muted);observed.push(media);
    }
-   await page.waitForFunction(()=>document.getElementById('amt-ambient').dataset.pretextFit);
+   await page.waitForFunction(()=>document.getElementById('english-subtitle').dataset.fit);
    const subtitle=await page.locator('#english-subtitle').evaluate(el=>({hidden:el.hidden,text:el.textContent,display:getComputedStyle(el).display,visibility:getComputedStyle(el).visibility}));assert.equal(subtitle.hidden,false);assert.notEqual(subtitle.display,'none');assert.notEqual(subtitle.visibility,'hidden');assert(subtitle.text.trim());
-   const bounds=await page.locator('#amt-ambient').evaluate(el=>{const r=el.getBoundingClientRect();return{fit:el.dataset.pretextFit,left:r.left,right:r.right,top:r.top,bottom:r.bottom,scrollWidth:el.scrollWidth,clientWidth:el.clientWidth,scrollHeight:el.scrollHeight,clientHeight:el.clientHeight}});
+   const bounds=await page.locator('#english-subtitle').evaluate(el=>{const r=el.getBoundingClientRect();return{fit:el.dataset.fit,left:r.left,right:r.right,top:r.top,bottom:r.bottom,scrollWidth:el.scrollWidth,clientWidth:el.clientWidth,scrollHeight:el.scrollHeight,clientHeight:el.clientHeight}});
    assert.notEqual(bounds.fit,'unavailable');assert(bounds.scrollWidth<=bounds.clientWidth+1);assert(bounds.scrollHeight<=bounds.clientHeight+1);assert(bounds.left>=0&&bounds.right<=viewport.width+1&&bounds.top>=0&&bounds.bottom<=viewport.height+1);
    await page.screenshot({path:resolve(out,name+'-portrait.png')});
   }
