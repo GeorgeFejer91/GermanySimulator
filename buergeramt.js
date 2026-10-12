@@ -377,18 +377,18 @@ function updateCharacters(dt){
 function nearestCharacter(){if(!["walk-sign","waiting"].includes(stage))return null;let found=null,distance=1.65;for(const actor of characters){if(actor.id==="aktenkurier"||actor.returning)continue;const d=Math.hypot(view.x-actor.x,view.z-actor.z);if(d<distance){found=actor;distance=d}}for(const [id,patron] of Object.entries(story.patrons)){const d=Math.hypot(view.x-patron.x,view.z-patron.z);if(d<distance){found={id,x:patron.x,z:patron.z,static:true};distance=d}}return found}
 function showCharacter(actor){
  encounterArmed=true;
- const entry=actor.static?story.patrons[actor.id]:story.characters[actor.id],index=actor.static?(patronEncounters[actor.id]||0):actor.encounters++,spoken=entry.lines[index%entry.lines.length],resume=stage;
- if(actor.static){patronEncounters[actor.id]=index+1;setStage("character");content(entry.speaker,spoken.line,[{run:()=>setStage(activated?"waiting":resume)}],null,null,null,{id:actor.id,tone:spoken.tone,valence:spoken.valence});return}
+ const entry=actor.static?story.patrons[actor.id]:story.characters[actor.id],index=actor.static?(patronEncounters[actor.id]||0):actor.encounters++,spoken=entry.lines[index%entry.lines.length];
+ if(actor.static){patronEncounters[actor.id]=index+1;setStage("character");content(entry.speaker,spoken.line,[{run:()=>setStage(queueStage())}],null,null,null,{id:actor.id,tone:spoken.tone,valence:spoken.valence});return}
  actor.pending=false;actor.sequence=[];actor.priority=3;actor.mode="gesture";actor.workClock=0;actor.animationClock=0;actor.returning=null;setStage("character");content(entry.speaker,spoken.line,[{run:()=>{
   const phase=(actor.animationClock%4)/4;actor.returning={phase,direction:phase<.5?-1:1};actor.sequence=[{mode:"look",duration:.45},{mode:"work",duration:.7}];actor.pending=false;
-  setStage(activated?"waiting":resume);
+  setStage(queueStage());
  }}],null,null,null,{id:actor.id,tone:spoken.tone,valence:spoken.valence});
 }
 function nearPresidentPortrait(){return stage!=="outside"&&distanceTo(story.presidentPortrait)<2.9}
 function showPresidentPortrait(){
- const resume=stage,resumeStatus=status.textContent;let index=0;
+ const scan=lastScanId,resumeStatus=status.textContent;let index=0;
  setStage("portrait");setStatus("BUNDESPRÄSIDENT · GEDANKEN");
- const next=()=>{if(index>=story.presidentPortrait.lines.length){setStage(activated?(deadline>0?"walk-counter":"waiting"):resume);setStatus(activated?"WARTENUMMER "+number+" · AUFRUFTAFEL":resumeStatus);return}content(story.playerIdentity.speaker,story.presidentPortrait.lines[index++].line,[{run:next}],null,null,null,null,{fallback:"captions"})};
+ const next=()=>{if(index>=story.presidentPortrait.lines.length){setStage(queueStage());setStatus(activated?"WARTENUMMER "+number+" · AUFRUFTAFEL":scan===lastScanId?resumeStatus:"NAME AM TELEFON EINTRAGEN");return}content(story.playerIdentity.speaker,story.presidentPortrait.lines[index++].line,[{run:next}],null,null,null,null,{fallback:"captions"})};
  next();
 }
 function walking(){return ["outside","walk-sign","waiting","walk-counter"].includes(stage)}
@@ -752,6 +752,7 @@ function beginLink(){
   if(m.type==="scan"){
    if(m.id===lastScanId){currentLink.send(number?"ticket":"scan-ready",number?{number,counter:assignedCounter}:{});return}
    if(!currentLink.send("scan-ready"))return;
+   if(callArmTimer!==null)clearTimer(callArmTimer);callArmTimer=null;stopCallSignal();
    lastScanId=m.id;number="";assignedCounter=0;ticketQueueIndex=-1;registeredName="";activated=false;deadline=0;callPending=false;callTriggered=false;callCommitted=false;callOutcome="";clerkIndex=0;resetRegistration();
    if(omen.phase)omen.resume="walk-sign";
    else if(stage!=="outside"&&stage!=="character"&&stage!=="portrait")setStage("walk-sign");
@@ -900,7 +901,7 @@ function close(notify=true){
  try{officeAudio?.ctx.close()?.catch(()=>{})}catch{}officeAudio=null;held.clear();root.hidden=true;walkHud.hidden=true;mixPanel.open=false;mixPanel.hidden=true;ambient.textContent="";
  document.body.classList.remove("amt-inside");const previous=link;link=null;previous?.send(phoneComplete?"done":"forfeit");setTimeout(()=>previous?.close(),250);config.music?.(false);if(notify)config.onClose();
 }
-function open(config){if(active)return;resetRegistration();resetTiming();hostVoiceStartupMs=null;hostVoiceAttempts=0;attempt++;callOutcome="";options=config;active=true;requestFullscreen();assignedCounter=0;interactingCounter=0;counter.x=counterXs[2];resetStationaryClocks();feverClock?.clear();encounterArmed=false;clerkIndex=0;callPending=false;callTriggered=false;callCommitted=false;callArmTimer=null;clockAnchor=null;registeredName="";number="";activated=false;lastScanId="";queueClock=0;queueIndex=0;queueCallPending=-1;queueCallReadyAt=0;queueCallSpeaking=false;queueCallCooldown=35+Math.random()*40;ambientKindBag.length=0;ambientLastKind="";ticketQueueIndex=-1;for(let i=-3;i<=0;i++)counterCalls[queueCounters[(i+4)%4]-1]=queueCodes[(i+queueCodes.length)%queueCodes.length];deadline=0;ambientClock=0;clerkClock=0;floorClock=0;visualClock=0;tempoSentAt=-Infinity;tempoSentRate=null;clerkSpeaking=false;clerkAccent=0;clerkBeat="idle";clerkPulse=0;patronEncounters={};clerkAnimation?.reset(attempt);displayNumber(queueCodes[0],queueCounters[0]);view.x=0;view.z=8;view.yaw=0;view.pitch=0;view.walkedDistance=0;held.clear();resetCharacters();resetOmen();exit.hidden=false;root.hidden=false;mixPanel.hidden=false;document.body.classList.add("amt-inside");options.music?.(true);beginLink();setStage("outside");setStatus("EINGANG · BÜRGERAMT");const owner=attempt;window.BuergeramtClock?.sample?.().then(anchor=>{if(active&&attempt===owner)clockAnchor=anchor}).catch(()=>{})}
+function open(config){if(active)return;resetRegistration();resetTiming();hostVoiceStartupMs=null;hostVoiceAttempts=0;attempt++;callOutcome="";options=config;active=true;requestFullscreen();assignedCounter=0;interactingCounter=0;counter.x=counterXs[2];resetStationaryClocks();feverClock?.clear();encounterArmed=false;clerkIndex=0;callPending=false;callTriggered=false;callCommitted=false;callArmTimer=null;clockAnchor=null;registeredName="";number="";activated=false;lastScanId="";queueClock=0;queueIndex=0;queueCallPending=-1;queueCallReadyAt=0;queueCallSpeaking=false;queueCallCooldown=35+Math.random()*40;ambientKindBag.length=0;ambientLastKind="";ambientBag.length=0;ambientLastVoice="";ambientLastText="";ambientIndex=0;ticketQueueIndex=-1;for(let i=-3;i<=0;i++)counterCalls[queueCounters[(i+4)%4]-1]=queueCodes[(i+queueCodes.length)%queueCodes.length];deadline=0;ambientClock=0;clerkClock=0;floorClock=0;visualClock=0;tempoSentAt=-Infinity;tempoSentRate=null;clerkSpeaking=false;clerkAccent=0;clerkBeat="idle";clerkPulse=0;patronEncounters={};clerkAnimation?.reset(attempt);displayNumber(queueCodes[0],queueCounters[0]);view.x=0;view.z=8;view.yaw=0;view.pitch=0;view.walkedDistance=0;held.clear();resetCharacters();resetOmen();exit.hidden=false;root.hidden=false;mixPanel.hidden=false;document.body.classList.add("amt-inside");options.music?.(true);beginLink();setStage("outside");setStatus("EINGANG · BÜRGERAMT");const owner=attempt;window.BuergeramtClock?.sample?.().then(anchor=>{if(active&&attempt===owner)clockAnchor=anchor}).catch(()=>{})}
 function clerkPerformance(){
  const names={idle:0,review:1,raise:2,stamp:3,deny:4,talk:5};
  let mode="idle";

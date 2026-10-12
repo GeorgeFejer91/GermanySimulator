@@ -235,6 +235,15 @@ A missed call, hidden/disconnected companion or final telephone warning forfeits
 
 The unlisted `?geheim=buergeramt` URL opens directly at the office entrance for repeated level testing. Its fixed restart link reloads only this episode; the normal city entry remains the canonical story route. Direct entry skips unrelated city GLB downloads; normal entry keeps the city asset path. The shortcut is a convenience link, not authentication or a separate game deployment.
 
+Every fresh visit resets ticket admission, board/deadline state, registration
+choices and stamps, phone warnings and repeat calls, actor encounters, omen,
+gaze, floor clocks and both ambient bags. Old links, media callbacks and timers
+cannot act on the new visit. Saved sound preferences and an earned Anmeldung
+badge remain persistent. Rescanning within a visit cancels the previous call's
+arming and interference; optional encounters resume from current admission,
+without restoring an obsolete ticket or waiting state. The production-path
+regressions are in `tests/buergeramt-causality.test.mjs`.
+
 The QR sign sits directly beneath the red ceiling number display and asks
 visitors to scan it to receive a number. Submitting the phone's ordinary
 "Name eintragen" form silently unlocks browser audio and requests wake lock
