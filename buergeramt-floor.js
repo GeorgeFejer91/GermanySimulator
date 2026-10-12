@@ -25,7 +25,12 @@ const transport=`
     float a=sin(p.x*.63+.18*sin(clock*.09))*sin(p.y*.57+.21*cos(clock*.07));
     float b=.42*sin(p.x*.91+p.y*.38+clock*.031)*sin(p.y*.83-p.x*.31-clock*.027);
     float c=.17*cos(p.x*1.43-p.y*.72-clock*.019);
-    return (a+b+c)*rim.x*rim.y;
+    // Successively smaller, slowly changing eddies stretch and fold the same
+    // pigment into nested lamellae rather than replacing it with noise.
+    float d=.08*sin(p.x*2.7+p.y*.8+clock*.043)*sin(p.y*2.4-p.x*.7-clock*.037);
+    float f=.025*sin(p.x*6.9-p.y*2.1-clock*.051)*sin(p.y*6.3+p.x*1.8+clock*.047);
+    float g=.006*sin(p.x*14.3+p.y*4.7+clock*.063)*sin(p.y*13.1-p.x*4.1-clock*.059);
+    return (a+b+c+d+f+g)*rim.x*rim.y;
   }
   void main(){
     vec2 p=floorMin+oilUv*floorSize;
@@ -41,7 +46,7 @@ const transport=`
         flow+=footDirections[i]*wake*.10+delta/max(.15,distance)*sin(distance*7.-age*1.8)*wake*.035;stirred+=wake;}
     }
     flow+=vec2(.035*sin(p.y*2.),-.25)*readOil(oilUv).a;
-    vec2 back=clamp(oilUv-flow*(.055+.14*melt*melt)*melt*.05/floorSize,texel*.5,1.-texel*.5);
+    vec2 back=clamp(oilUv-flow*(.055+.18*melt*melt)*melt*.05/floorSize,texel*.5,1.-texel*.5);
     vec4 pigment=readOil(back);
     vec4 neighbors=(readOil(back+vec2(texel.x,0.))+readOil(back-vec2(texel.x,0.))+
                      readOil(back+vec2(0.,texel.y))+readOil(back-vec2(0.,texel.y)))*.25;
@@ -65,6 +70,11 @@ const surface=`
   uniform vec4 footRipples[OIL_RIPPLE_COUNT];
   ${coordinates}
   ${portraitPaintGlsl}
+  float layeredOil(float oil,float amount){
+    float phase=3.14159265*oil+28.*amount*amount*sin(6.2831853*oil);
+    float footprint=fwidth(phase),ribbonAA=clamp(footprint,.025,1.);
+    return mix(.5,smoothstep(-ribbonAA,ribbonAA,-cos(phase)),1.-smoothstep(1.5,3.14159265,footprint));
+  }
   vec3 oilNormal(vec3 position,vec3 n,float height){
     vec3 sx=dFdx(position),sy=dFdy(position),rx=cross(sy,n),ry=cross(n,sx);
     float det=dot(sx,rx);
@@ -92,13 +102,26 @@ export function createAmtFloor({THREE:T,renderer,material,mobile=false}){
     shader.fragmentShader='#define OIL_RIPPLE_COUNT '+rippleCount+'\n'+surface+shader.fragmentShader.replace('#include <map_fragment>',`#include <map_fragment>
       vec2 floorPaintPoint=amtFloorPoint;
       float warpTime=amtFloorStill>.5?0.:amtFloorTime*.008;
-      if(amtFloorLive<.5)floorPaintPoint+=amtFloorMelt*vec2(.8*sin(amtFloorPoint.y*.72+warpTime)+.35*sin(amtFloorPoint.x+amtFloorPoint.y*.23-warpTime),.8*cos(amtFloorPoint.x*.62-warpTime)-.25*sin(amtFloorPoint.y-amtFloorPoint.x*.34+warpTime));
+      if(amtFloorLive<.5){
+        floorPaintPoint+=amtFloorMelt*vec2(.8*sin(amtFloorPoint.y*.72+warpTime)+.35*sin(amtFloorPoint.x+amtFloorPoint.y*.23-warpTime),.8*cos(amtFloorPoint.x*.62-warpTime)-.25*sin(amtFloorPoint.y-amtFloorPoint.x*.34+warpTime));
+        // Bounded successive shears keep the same layered tile paint on devices
+        // without float feedback, including a still reduced-motion view.
+        float folding=amtFloorMelt*amtFloorMelt;
+        floorPaintPoint.x+=folding*.46*sin(floorPaintPoint.y*2.7+warpTime);
+        floorPaintPoint.y+=folding*.38*sin(floorPaintPoint.x*3.1-warpTime);
+        floorPaintPoint.x+=folding*.21*sin(floorPaintPoint.y*6.9-warpTime);
+        floorPaintPoint.y+=folding*.17*sin(floorPaintPoint.x*6.3+warpTime);
+      }
       vec2 floorCell=(floorPaintPoint-floorMin)/tileSize;
       float checkField=sin(floorCell.x*3.14159265)*sin(floorCell.y*3.14159265);
       float checkAA=max(fwidth(checkField),.0001);
       float floorPigment=smoothstep(-checkAA,checkAA,checkField);
+      if(amtFloorLive<.5)floorPigment=mix(floorPigment,layeredOil(.5+.5*checkField,amtFloorMelt),smoothstep(.08,.65,amtFloorMelt));
       if(amtFloorLive>.5){float oil=texture2D(amtFloorOil,(amtFloorPoint-floorMin)/floorSize).r;
-        floorPigment=mix(floorPigment,smoothstep(.34,.66,oil),smoothstep(0.,.055,amtFloorMelt)*(1.-amtFloorRestore));}
+        // Reconstruct fine lamellae from the transported diffusion field. Pure
+        // oils retain their endpoints; mixed contours fold into more layers as
+        // melt grows, with screen derivatives filtering subpixel ribbons.
+        floorPigment=mix(floorPigment,layeredOil(oil,amtFloorMelt),smoothstep(0.,.055,amtFloorMelt)*(1.-amtFloorRestore));}
       vec2 cellEdge=min(fract(floorCell),1.-fract(floorCell))*tileSize;
       float grout=1.-smoothstep(.009,.016+max(fwidth(amtFloorPoint.x),fwidth(amtFloorPoint.y)),min(cellEdge.x,cellEdge.y));
       float ridges=1.-abs(floorPigment*2.-1.);
@@ -133,7 +156,7 @@ export function createAmtFloor({THREE:T,renderer,material,mobile=false}){
       totalEmissiveRadiance+=vec3(.48,.46,.40)*lampReflection*amtFloorMelt;
     `);
   };
-  material.customProgramCacheKey=()=>key+':amt-oil-floor-v4:'+rippleCount;material.color.set(0xffffff);material.needsUpdate=true;
+  material.customProgramCacheKey=()=>key+':amt-oil-floor-v5:'+rippleCount;material.color.set(0xffffff);material.needsUpdate=true;
 
   function release(){
     if(targets){for(const target of targets)target.dispose();targets=null;}

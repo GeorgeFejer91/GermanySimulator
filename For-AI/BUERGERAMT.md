@@ -70,7 +70,8 @@ No new synthesis or voice profile is needed for this restoration.
 The room begins with .82 m black-and-white checkerboard tiles and painted grout.
 Over **780 seconds (13 minutes) of visible, unscaled residence inside the actual
 doorway**, their pigment gradually stretches into curling veins and merging oily
-pools. Grout disappears and the surface develops shallow specular ridges and
+pools, with progressively finer nested black-and-white ribbons along the mixed
+boundaries. Grout disappears and the surface develops shallow specular ridges and
 distorted analytic reflections of the five existing fluorescent ceiling strips.
 These are authored fixture reflections, not mirrors of people or the whole room.
 No floor height, furniture, body clearance or collision changes; gait remains
@@ -111,8 +112,11 @@ logistic integral of speed (722.437646 scene seconds over 780 real residence sec
 drives player/NPC movement, queue and deadlines, action/fever/
 omen clocks, atlas/breath/mouth animation and liquid transport. Render and input
 dispatch stay responsive. `buergeramt-floor.js` carries one
-RGBA paint field forward with prescribed curl flow, mild diffusion and an artistic contrast
-retention term. It is a texture transport effect, not a Navier–Stokes or physical
+RGBA paint field forward with prescribed curl flow at several scales, mild
+diffusion and an artistic contrast retention term. The surface reconstructs fine
+alternating lamellae from the transported concentration contours, preserving
+pure black/white endpoints and filtering unresolved ribbons with screen
+derivatives. This is an authored oil-marbling effect, not a Navier–Stokes or physical
 two-fluid solver. It never replaces the evolving pigment with unrelated noise.
 Without renderable, linearly sampled floating targets, a bounded procedural
 flow approximation retains the checkerboard, goop mapping and foot ripples.

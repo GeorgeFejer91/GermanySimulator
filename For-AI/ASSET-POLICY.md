@@ -448,6 +448,10 @@ white disappearing during repeated tiny transport steps.
 Transport runs through the existing render owner at at most 20 Hz of scaled
 scene time, at most two tiny
 offscreen passes per frame, with bounded elapsed time and no hidden catch-up.
+Three smaller eddy scales fold the persistent field; screen-filtered concentration
+contours supply finer nested black-and-white layers without larger textures or
+additional passes. The float-free fallback uses bounded successive shears and
+the same contour reconstruction, with a still version for reduced motion.
 There is no idle timer, download, CPU pixel readback or per-frame shader compile.
 The visible floor retains ordinary depth and the room's existing fade hooks.
 Analytic ceiling-strip highlights need no reflective scene capture. Close,
