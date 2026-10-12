@@ -4,50 +4,50 @@
   "profileId": "b027d18a4fc748cabb133fbb14077500",
   "fallback": "captions",
   "status": "same-profile technical and independent ASR audit; perceptual listening not independently verified",
-  "generatedLineCount": 4,
-  "requestedLineCount": 4,
-  "lineCount": 4,
+  "generatedLineCount": 1,
+  "requestedLineCount": 1,
+  "lineCount": 1,
   "clips": [
     {
       "clipId": "player-president-portrait-1",
       "actorId": "player",
       "voiceId": "spieler-hans-peter-mustermann",
       "profileId": "b027d18a4fc748cabb133fbb14077500",
-      "text": "Der Bundespräsident. Ein unglaublich wichtiges Amt.",
-      "english": "The Federal President. An incredibly important office.",
-      "sourceLocator": "buergeramt-story.js presidentPortrait.lines[0].line",
+      "text": "Der Bundespräsident. Ein unglaublich wichtiges Amt. Als Staatsoberhaupt vertritt er Deutschland, unterschreibt Gesetze und ernennt den gewählten Kanzler. Die Tagespolitik macht die Regierung. Er hält Reden und schüttelt bedeutungsvoll Hände. Also ehrlich: Diesen Job hätte ich wirklich gern.",
+      "english": "The Federal President. An incredibly important office. As head of state, he represents Germany, signs laws and appoints the elected chancellor. The government handles day-to-day politics. He gives speeches and shakes hands with great significance. Honestly, I would really love to have that job.",
+      "sourceLocator": "buergeramt-story.js presidentPortrait.lines joined in authored order",
       "seed": 71000,
       "synthesisAttempt": 1,
       "referenceSha256": "6b6ff2c747ef11fb883fc1c9804d270c6ba34cc5614db4d132f8e6172b9f60ad",
       "authoringHelperSha256": "6a473856c0791c7102a4798f84ac126451db00acdf5683ff76d2fab855ef4298",
-      "rendererInputText": "Der Bundespräsident. Ein unglaublich wichtiges Amt.",
+      "rendererInputText": "Der Bundespräsident. Ein unglaublich wichtiges Amt. Als Staatsoberhaupt vertritt er Deutschland, unterschreibt Gesetze und ernennt den gewählten Kanzler. Die Tagespolitik macht die Regierung. Er hält Reden und schüttelt bedeutungsvoll Hände. Also ehrlich: Diesen Job hätte ich wirklich gern.",
       "decode": {
-        "maxSpeechTokens": 250,
+        "maxSpeechTokens": 616,
         "attentionHooksBefore": 0,
-        "generatedSpeechTokens": 113,
+        "generatedSpeechTokens": 404,
         "eosReached": true,
         "eosKind": "model-sampled",
-        "eosSuppressionObservedSteps": 83,
+        "eosSuppressionObservedSteps": 386,
         "modelEosRestoredSteps": 0,
-        "alignmentFirstCompletedStep": 84,
+        "alignmentFirstCompletedStep": 387,
         "nativeAnalyzerSourceSha256": "d8430efa92aedb8e59b782c1d299fe7238570eecea9d293c0981a5ee2e82c8c7",
         "eosPolicy": "Native analyzer unchanged; observation only",
-        "t3InferenceSeconds": 28.31,
+        "t3InferenceSeconds": 148.44,
         "temporaryAnalyzerHooksRemoved": 6,
         "attentionHooksAfter": 0,
-        "eosTraceSha256": "c0dedb99822c208b1ecfb6c08a080e3f358544366b5a17dbcdeb5d79d9fe1052"
+        "eosTraceSha256": "7bff6c8af00654e8a39d6d8b2412e1153b90f9e56879766c73ce6f18924d3210"
       },
       "rendererInputBasis": "exact authored source",
-      "requestSha256": "528938058799e82d907bac309c400b4aa4e2459e83dbda991e94ce9e3b9e9e25",
+      "requestSha256": "95aeb952aa0ca1bdb8318421242c8a6f4b704ea37ff65ef44cf2aab472530438",
       "referenceOriginalSha256": "4f4b181750c65430c68d20d742b02529f5e5db6650cb57171fe2e52ea8ee2dbf",
       "profileJsonSha256": "7d5ce6ff22d3da1a0a062cdb4a521bdf744dccd621b64a75a58a3fd0a255abe6",
-      "rawSha256": "28d1889fa2fa44a7d63dadeb76b3856ed1423c76afa6dc58571c804c46ea7c32",
+      "rawSha256": "b27d2c1ab3a5da6a5378afc17364bb04995bc9d19b17e442a80a19c48cd3adcc",
       "renderer": "ResembleAI/Chatterbox Multilingual V2 0.1.7",
       "modelRevision": "5bb1f6ee58e50c3b8d408bc82a6d3740c2db6e18",
       "modelLicense": "MIT",
       "referenceLicense": "CC0-1.0 (Thorsten-Voice Dataset 2021.06 emotional)",
-      "durationSeconds": 4.48,
-      "renderSeconds": 42.38,
+      "durationSeconds": 16.12,
+      "renderSeconds": 206.31,
       "synthesis": {
         "temperature": 0.65,
         "repetitionPenalty": 3,
@@ -62,7 +62,7 @@
         "referenceReconditionedForProfile": "b027d18a4fc748cabb133fbb14077500",
         "referenceConditioningVerifiedFloat32": true,
         "modelSessionReused": false,
-        "cpuThreads": 2,
+        "cpuThreads": 4,
         "inferenceMode": true
       },
       "listening": "pending",
@@ -72,17 +72,17 @@
       "normalization": {
         "targetLufs": -18,
         "targetTruePeakDbtp": -1.5,
-        "filter": "loudnorm=I=-12.810000000000002:TP=-1.8:LRA=11:linear=false",
-        "iterations": 5
+        "filter": "loudnorm=I=-16.56:TP=-1.8:LRA=11:linear=false",
+        "iterations": 3
       },
-      "integratedLufs": -18.14,
-      "truePeakDbtp": -2.21,
-      "asr": "Der Bundespräsident, ein unglaublich wichtiges Amt.",
+      "integratedLufs": -18.21,
+      "truePeakDbtp": -2.12,
+      "asr": "Der Bundespräsident. Ein unglaublich wichtiges Amt. Als Staatsoberhaupt vertritt er Deutschland, unterschreibt Gesetze und ernennt den gewählten Kanzler. Die Tagespolitik macht die Regierung. Er hält Reden und schüttelt bedeutungsvoll Hände. Also ehrlich, diesen Job hätte ich wirklich gern.",
       "asrWordExact": true,
       "asrLiteralWordExact": true,
       "asrNormalization": "case/punctuation, German numeric and A38 spoken equivalents, guarded full-hour and date-ordinal equivalents, section sign/Paragraf orthography, German compound spacing",
       "asrModel": "independent faster-whisper, cached local model, cpu int8 (effective int8_float32), no script prompt",
-      "asrCpuThreads": 2,
+      "asrCpuThreads": 4,
       "asrDevice": "cpu",
       "asrEffectiveComputeType": "int8_float32",
       "asrLanguageId": "de",
@@ -92,8 +92,8 @@
       "asrReadings": [
         {
           "beamSize": 1,
-          "transcript": "Der Bundespräsident, ein unglaublich wichtiges Amt.",
-          "transcribeSeconds": 14.53,
+          "transcript": "Der Bundespräsident. Ein unglaublich wichtiges Amt. Als Staatsoberhaupt vertritt er Deutschland, unterschreibt Gesetze und ernennt den gewählten Kanzler. Die Tagespolitik macht die Regierung. Er hält Reden und schüttelt bedeutungsvoll Hände. Also ehrlich, diesen Job hätte ich wirklich gern.",
+          "transcribeSeconds": 13.45,
           "words": [
             {
               "word": " Der",
@@ -101,29 +101,189 @@
               "end": 0.16
             },
             {
-              "word": " Bundespräsident,",
+              "word": " Bundespräsident.",
               "start": 0.16,
-              "end": 1.24
+              "end": 1.02
             },
             {
-              "word": " ein",
-              "start": 1.5,
-              "end": 1.76
+              "word": " Ein",
+              "start": 1.24,
+              "end": 1.5
             },
             {
               "word": " unglaublich",
-              "start": 1.76,
-              "end": 2.62
+              "start": 1.5,
+              "end": 2.36
             },
             {
               "word": " wichtiges",
-              "start": 2.62,
-              "end": 3.2
+              "start": 2.36,
+              "end": 2.92
             },
             {
               "word": " Amt.",
-              "start": 3.2,
-              "end": 3.58
+              "start": 2.92,
+              "end": 3.26
+            },
+            {
+              "word": " Als",
+              "start": 3.44,
+              "end": 3.78
+            },
+            {
+              "word": " Staatsoberhaupt",
+              "start": 3.78,
+              "end": 4.58
+            },
+            {
+              "word": " vertritt",
+              "start": 4.58,
+              "end": 4.94
+            },
+            {
+              "word": " er",
+              "start": 4.94,
+              "end": 5.04
+            },
+            {
+              "word": " Deutschland,",
+              "start": 5.04,
+              "end": 5.42
+            },
+            {
+              "word": " unterschreibt",
+              "start": 5.82,
+              "end": 6.4
+            },
+            {
+              "word": " Gesetze",
+              "start": 6.4,
+              "end": 6.86
+            },
+            {
+              "word": " und",
+              "start": 6.86,
+              "end": 7.02
+            },
+            {
+              "word": " ernennt",
+              "start": 7.02,
+              "end": 7.38
+            },
+            {
+              "word": " den",
+              "start": 7.38,
+              "end": 7.5
+            },
+            {
+              "word": " gewählten",
+              "start": 7.5,
+              "end": 7.98
+            },
+            {
+              "word": " Kanzler.",
+              "start": 7.98,
+              "end": 8.48
+            },
+            {
+              "word": " Die",
+              "start": 8.66,
+              "end": 8.84
+            },
+            {
+              "word": " Tagespolitik",
+              "start": 8.84,
+              "end": 9.66
+            },
+            {
+              "word": " macht",
+              "start": 9.66,
+              "end": 9.94
+            },
+            {
+              "word": " die",
+              "start": 9.94,
+              "end": 10.1
+            },
+            {
+              "word": " Regierung.",
+              "start": 10.1,
+              "end": 10.52
+            },
+            {
+              "word": " Er",
+              "start": 10.84,
+              "end": 10.98
+            },
+            {
+              "word": " hält",
+              "start": 10.98,
+              "end": 11.18
+            },
+            {
+              "word": " Reden",
+              "start": 11.18,
+              "end": 11.54
+            },
+            {
+              "word": " und",
+              "start": 11.54,
+              "end": 11.68
+            },
+            {
+              "word": " schüttelt",
+              "start": 11.68,
+              "end": 11.98
+            },
+            {
+              "word": " bedeutungsvoll",
+              "start": 11.98,
+              "end": 12.68
+            },
+            {
+              "word": " Hände.",
+              "start": 12.68,
+              "end": 13
+            },
+            {
+              "word": " Also",
+              "start": 13.26,
+              "end": 13.52
+            },
+            {
+              "word": " ehrlich,",
+              "start": 13.52,
+              "end": 13.94
+            },
+            {
+              "word": " diesen",
+              "start": 14.16,
+              "end": 14.48
+            },
+            {
+              "word": " Job",
+              "start": 14.48,
+              "end": 14.74
+            },
+            {
+              "word": " hätte",
+              "start": 14.74,
+              "end": 14.94
+            },
+            {
+              "word": " ich",
+              "start": 14.94,
+              "end": 15.04
+            },
+            {
+              "word": " wirklich",
+              "start": 15.04,
+              "end": 15.28
+            },
+            {
+              "word": " gern.",
+              "start": 15.28,
+              "end": 15.66
             }
           ]
         }
@@ -141,35 +301,227 @@
           "at": 0.16,
           "charIndex": 4,
           "word": "Bundespräsident",
-          "end": 1.24
+          "end": 1.02
+        },
+        {
+          "at": 1.24,
+          "charIndex": 21,
+          "word": "Ein",
+          "end": 1.5
         },
         {
           "at": 1.5,
-          "charIndex": 21,
-          "word": "Ein",
-          "end": 1.76
-        },
-        {
-          "at": 1.76,
           "charIndex": 25,
           "word": "unglaublich",
-          "end": 2.62
+          "end": 2.36
         },
         {
-          "at": 2.62,
+          "at": 2.36,
           "charIndex": 37,
           "word": "wichtiges",
-          "end": 3.2
+          "end": 2.92
         },
         {
-          "at": 3.2,
+          "at": 2.92,
           "charIndex": 47,
           "word": "Amt",
-          "end": 3.58
+          "end": 3.26
+        },
+        {
+          "at": 3.44,
+          "charIndex": 52,
+          "word": "Als",
+          "end": 3.78
+        },
+        {
+          "at": 3.78,
+          "charIndex": 56,
+          "word": "Staatsoberhaupt",
+          "end": 4.58
+        },
+        {
+          "at": 4.58,
+          "charIndex": 72,
+          "word": "vertritt",
+          "end": 4.94
+        },
+        {
+          "at": 4.94,
+          "charIndex": 81,
+          "word": "er",
+          "end": 5.04
+        },
+        {
+          "at": 5.04,
+          "charIndex": 84,
+          "word": "Deutschland",
+          "end": 5.42
+        },
+        {
+          "at": 5.82,
+          "charIndex": 97,
+          "word": "unterschreibt",
+          "end": 6.4
+        },
+        {
+          "at": 6.4,
+          "charIndex": 111,
+          "word": "Gesetze",
+          "end": 6.86
+        },
+        {
+          "at": 6.86,
+          "charIndex": 119,
+          "word": "und",
+          "end": 7.02
+        },
+        {
+          "at": 7.02,
+          "charIndex": 123,
+          "word": "ernennt",
+          "end": 7.38
+        },
+        {
+          "at": 7.38,
+          "charIndex": 131,
+          "word": "den",
+          "end": 7.5
+        },
+        {
+          "at": 7.5,
+          "charIndex": 135,
+          "word": "gewählten",
+          "end": 7.98
+        },
+        {
+          "at": 7.98,
+          "charIndex": 145,
+          "word": "Kanzler",
+          "end": 8.48
+        },
+        {
+          "at": 8.66,
+          "charIndex": 154,
+          "word": "Die",
+          "end": 8.84
+        },
+        {
+          "at": 8.84,
+          "charIndex": 158,
+          "word": "Tagespolitik",
+          "end": 9.66
+        },
+        {
+          "at": 9.66,
+          "charIndex": 171,
+          "word": "macht",
+          "end": 9.94
+        },
+        {
+          "at": 9.94,
+          "charIndex": 177,
+          "word": "die",
+          "end": 10.1
+        },
+        {
+          "at": 10.1,
+          "charIndex": 181,
+          "word": "Regierung",
+          "end": 10.52
+        },
+        {
+          "at": 10.84,
+          "charIndex": 192,
+          "word": "Er",
+          "end": 10.98
+        },
+        {
+          "at": 10.98,
+          "charIndex": 195,
+          "word": "hält",
+          "end": 11.18
+        },
+        {
+          "at": 11.18,
+          "charIndex": 200,
+          "word": "Reden",
+          "end": 11.54
+        },
+        {
+          "at": 11.54,
+          "charIndex": 206,
+          "word": "und",
+          "end": 11.68
+        },
+        {
+          "at": 11.68,
+          "charIndex": 210,
+          "word": "schüttelt",
+          "end": 11.98
+        },
+        {
+          "at": 11.98,
+          "charIndex": 220,
+          "word": "bedeutungsvoll",
+          "end": 12.68
+        },
+        {
+          "at": 12.68,
+          "charIndex": 235,
+          "word": "Hände",
+          "end": 13
+        },
+        {
+          "at": 13.26,
+          "charIndex": 242,
+          "word": "Also",
+          "end": 13.52
+        },
+        {
+          "at": 13.52,
+          "charIndex": 247,
+          "word": "ehrlich",
+          "end": 13.94
+        },
+        {
+          "at": 14.16,
+          "charIndex": 256,
+          "word": "Diesen",
+          "end": 14.48
+        },
+        {
+          "at": 14.48,
+          "charIndex": 263,
+          "word": "Job",
+          "end": 14.74
+        },
+        {
+          "at": 14.74,
+          "charIndex": 267,
+          "word": "hätte",
+          "end": 14.94
+        },
+        {
+          "at": 14.94,
+          "charIndex": 273,
+          "word": "ich",
+          "end": 15.04
+        },
+        {
+          "at": 15.04,
+          "charIndex": 277,
+          "word": "wirklich",
+          "end": 15.28
+        },
+        {
+          "at": 15.28,
+          "charIndex": 286,
+          "word": "gern",
+          "end": 15.66
         }
       ],
-      "sha256": "9da8b695c773ef21b94c47984c9e335b833a83bc36f4c57e3e49e7d41d26ace3",
-      "bytes": 72620,
+      "sha256": "33c2f50fdd75400e377d3fbedb3411fcfde0e2f7747d15a3c5d284ca5760518c",
+      "bytes": 258860,
       "sampleRateHz": 48000,
       "channels": 1,
       "bitrateBitsPerSecond": 128000,
@@ -177,608 +529,12 @@
       "approval": {
         "status": "user-approved",
         "date": "2026-10-12",
-        "instruction": "Use the first-person player voice for the sarcastic Bundespräsident portrait interaction, ending with wanting the job.",
-        "scope": "User-requested portrait inner monologue in the existing selected player voice",
-        "listeningVerified": false
-      }
-    },
-    {
-      "clipId": "player-president-portrait-2",
-      "actorId": "player",
-      "voiceId": "spieler-hans-peter-mustermann",
-      "profileId": "b027d18a4fc748cabb133fbb14077500",
-      "text": "Als Staatsoberhaupt vertritt er Deutschland, unterschreibt Gesetze und ernennt den gewählten Kanzler.",
-      "english": "As head of state, he represents Germany, signs laws and appoints the elected chancellor.",
-      "sourceLocator": "buergeramt-story.js presidentPortrait.lines[1].line",
-      "seed": 71001,
-      "synthesisAttempt": 1,
-      "referenceSha256": "6b6ff2c747ef11fb883fc1c9804d270c6ba34cc5614db4d132f8e6172b9f60ad",
-      "authoringHelperSha256": "6a473856c0791c7102a4798f84ac126451db00acdf5683ff76d2fab855ef4298",
-      "rendererInputText": "Als Staatsoberhaupt vertritt er Deutschland, unterschreibt Gesetze und ernennt den gewählten Kanzler.",
-      "decode": {
-        "maxSpeechTokens": 304,
-        "attentionHooksBefore": 0,
-        "generatedSpeechTokens": 188,
-        "eosReached": true,
-        "eosKind": "analyzer-forced",
-        "eosSuppressionObservedSteps": 161,
-        "modelEosRestoredSteps": 0,
-        "alignmentFirstCompletedStep": 162,
-        "nativeAnalyzerSourceSha256": "d8430efa92aedb8e59b782c1d299fe7238570eecea9d293c0981a5ee2e82c8c7",
-        "eosPolicy": "Native analyzer unchanged; observation only",
-        "t3InferenceSeconds": 24.86,
-        "temporaryAnalyzerHooksRemoved": 6,
-        "attentionHooksAfter": 0,
-        "eosTraceSha256": "d0b7d2474dce0cfd1dd121141a626da7b07a2bc33ea73555dd91ccb74e80afcf"
+        "instruction": "generate the audio for th steinmeier self monolog in one go so it is a singl audio file that is triggrd and th audio sounds like a singl coherent audio text being read out!",
+        "scope": "Complete portrait inner monologue, synthesized in one call in the existing selected player voice",
+        "listeningConfirmed": false
       },
-      "rendererInputBasis": "exact authored source",
-      "requestSha256": "0ef91220dd80bca50ecc3f86448fd9490afcaad01c3b607ec0e134b725c544a2",
-      "referenceOriginalSha256": "4f4b181750c65430c68d20d742b02529f5e5db6650cb57171fe2e52ea8ee2dbf",
-      "profileJsonSha256": "7d5ce6ff22d3da1a0a062cdb4a521bdf744dccd621b64a75a58a3fd0a255abe6",
-      "rawSha256": "8d3fe137c53ebeafbd536d10ca547adb7de7c185083b61fe1170f1404b71ba34",
-      "renderer": "ResembleAI/Chatterbox Multilingual V2 0.1.7",
-      "modelRevision": "5bb1f6ee58e50c3b8d408bc82a6d3740c2db6e18",
-      "modelLicense": "MIT",
-      "referenceLicense": "CC0-1.0 (Thorsten-Voice Dataset 2021.06 emotional)",
-      "durationSeconds": 7.48,
-      "renderSeconds": 47.2,
-      "synthesis": {
-        "temperature": 0.65,
-        "repetitionPenalty": 3,
-        "cfgWeight": 0.6,
-        "languageId": "de",
-        "device": "cpu",
-        "precision": "fp32",
-        "t3WeightPrecision": "float32",
-        "conditioningPrecision": "float32",
-        "autocastPrecision": null,
-        "conditioningCached": true,
-        "referenceReconditionedForProfile": "b027d18a4fc748cabb133fbb14077500",
-        "referenceConditioningVerifiedFloat32": true,
-        "modelSessionReused": false,
-        "cpuThreads": 2,
-        "inferenceMode": true
-      },
-      "listening": "pending",
-      "status": "eligible exact-text recording; human listening pending",
-      "processing": null,
-      "processingSha256": null,
-      "normalization": {
-        "targetLufs": -18,
-        "targetTruePeakDbtp": -1.5,
-        "filter": "loudnorm=I=-14.680000000000003:TP=-1.8:LRA=11:linear=false",
-        "iterations": 3
-      },
-      "integratedLufs": -18.27,
-      "truePeakDbtp": -2.2,
-      "asr": "Als Staatsoberhaupt vertritt er Deutschland, unterschreibt Gesetze und ernennt den gewählten Kanzler.",
-      "asrWordExact": true,
-      "asrLiteralWordExact": true,
-      "asrNormalization": "case/punctuation, German numeric and A38 spoken equivalents, guarded full-hour and date-ordinal equivalents, section sign/Paragraf orthography, German compound spacing",
-      "asrModel": "independent faster-whisper, cached local model, cpu int8 (effective int8_float32), no script prompt",
-      "asrCpuThreads": 2,
-      "asrDevice": "cpu",
-      "asrEffectiveComputeType": "int8_float32",
-      "asrLanguageId": "de",
-      "asrComputeType": "int8",
-      "asrScriptPrompt": null,
-      "asrBeamSize": 1,
-      "asrReadings": [
-        {
-          "beamSize": 1,
-          "transcript": "Als Staatsoberhaupt vertritt er Deutschland, unterschreibt Gesetze und ernennt den gewählten Kanzler.",
-          "transcribeSeconds": 12.99,
-          "words": [
-            {
-              "word": " Als",
-              "start": 0,
-              "end": 0.3
-            },
-            {
-              "word": " Staatsoberhaupt",
-              "start": 0.3,
-              "end": 1.44
-            },
-            {
-              "word": " vertritt",
-              "start": 1.44,
-              "end": 1.92
-            },
-            {
-              "word": " er",
-              "start": 1.92,
-              "end": 2.04
-            },
-            {
-              "word": " Deutschland,",
-              "start": 2.04,
-              "end": 2.48
-            },
-            {
-              "word": " unterschreibt",
-              "start": 2.88,
-              "end": 3.72
-            },
-            {
-              "word": " Gesetze",
-              "start": 3.72,
-              "end": 4.26
-            },
-            {
-              "word": " und",
-              "start": 4.26,
-              "end": 4.68
-            },
-            {
-              "word": " ernennt",
-              "start": 4.68,
-              "end": 5.2
-            },
-            {
-              "word": " den",
-              "start": 5.2,
-              "end": 5.4
-            },
-            {
-              "word": " gewählten",
-              "start": 5.4,
-              "end": 5.96
-            },
-            {
-              "word": " Kanzler.",
-              "start": 5.96,
-              "end": 6.5
-            }
-          ]
-        }
-      ],
-      "asrModelSha256": "e76620f83d5f5b69efd3d87e3dc180c1bd21df9fbebacfd4335e5e1efcc018da",
-      "asrModelDirectoryName": "voice-asr-model",
-      "wordCues": [
-        {
-          "at": 0,
-          "charIndex": 0,
-          "word": "Als",
-          "end": 0.3
-        },
-        {
-          "at": 0.3,
-          "charIndex": 4,
-          "word": "Staatsoberhaupt",
-          "end": 1.44
-        },
-        {
-          "at": 1.44,
-          "charIndex": 20,
-          "word": "vertritt",
-          "end": 1.92
-        },
-        {
-          "at": 1.92,
-          "charIndex": 29,
-          "word": "er",
-          "end": 2.04
-        },
-        {
-          "at": 2.04,
-          "charIndex": 32,
-          "word": "Deutschland",
-          "end": 2.48
-        },
-        {
-          "at": 2.88,
-          "charIndex": 45,
-          "word": "unterschreibt",
-          "end": 3.72
-        },
-        {
-          "at": 3.72,
-          "charIndex": 59,
-          "word": "Gesetze",
-          "end": 4.26
-        },
-        {
-          "at": 4.26,
-          "charIndex": 67,
-          "word": "und",
-          "end": 4.68
-        },
-        {
-          "at": 4.68,
-          "charIndex": 71,
-          "word": "ernennt",
-          "end": 5.2
-        },
-        {
-          "at": 5.2,
-          "charIndex": 79,
-          "word": "den",
-          "end": 5.4
-        },
-        {
-          "at": 5.4,
-          "charIndex": 83,
-          "word": "gewählten",
-          "end": 5.96
-        },
-        {
-          "at": 5.96,
-          "charIndex": 93,
-          "word": "Kanzler",
-          "end": 6.5
-        }
-      ],
-      "sha256": "438c97ba651da311721e9f2a43ebce5a3044ec42c15703bfbc00fe4eb6028cd3",
-      "bytes": 120620,
-      "sampleRateHz": 48000,
-      "channels": 1,
-      "bitrateBitsPerSecond": 128000,
-      "file": "assets/voices/player-replies/player-president-portrait-2.mp3",
-      "approval": {
-        "status": "user-approved",
-        "date": "2026-10-12",
-        "instruction": "The dialogue should briefly explain what this person’s job is.",
-        "scope": "Revised portrait duties explanation in the existing selected player voice",
-        "listeningVerified": false
-      }
-    },
-    {
-      "clipId": "player-president-portrait-3",
-      "actorId": "player",
-      "voiceId": "spieler-hans-peter-mustermann",
-      "profileId": "b027d18a4fc748cabb133fbb14077500",
-      "text": "Die Tagespolitik macht die Regierung. Er hält Reden und schüttelt bedeutungsvoll Hände.",
-      "english": "The government handles day-to-day politics. He gives speeches and shakes hands with great significance.",
-      "sourceLocator": "buergeramt-story.js presidentPortrait.lines[2].line",
-      "seed": 71002,
-      "synthesisAttempt": 1,
-      "referenceSha256": "6b6ff2c747ef11fb883fc1c9804d270c6ba34cc5614db4d132f8e6172b9f60ad",
-      "authoringHelperSha256": "6a473856c0791c7102a4798f84ac126451db00acdf5683ff76d2fab855ef4298",
-      "rendererInputText": "Die Tagespolitik macht die Regierung. Er hält Reden und schüttelt bedeutungsvoll Hände.",
-      "decode": {
-        "maxSpeechTokens": 304,
-        "attentionHooksBefore": 0,
-        "generatedSpeechTokens": 151,
-        "eosReached": true,
-        "eosKind": "analyzer-forced",
-        "eosSuppressionObservedSteps": 125,
-        "modelEosRestoredSteps": 0,
-        "alignmentFirstCompletedStep": 126,
-        "nativeAnalyzerSourceSha256": "d8430efa92aedb8e59b782c1d299fe7238570eecea9d293c0981a5ee2e82c8c7",
-        "eosPolicy": "Native analyzer unchanged; observation only",
-        "t3InferenceSeconds": 21.09,
-        "temporaryAnalyzerHooksRemoved": 3,
-        "attentionHooksAfter": 0,
-        "eosTraceSha256": "66ec3eba299207085a465552092541d93bf00078a27573e7ee3db709bf92b96b"
-      },
-      "rendererInputBasis": "exact authored source",
-      "requestSha256": "0ef91220dd80bca50ecc3f86448fd9490afcaad01c3b607ec0e134b725c544a2",
-      "referenceOriginalSha256": "4f4b181750c65430c68d20d742b02529f5e5db6650cb57171fe2e52ea8ee2dbf",
-      "profileJsonSha256": "7d5ce6ff22d3da1a0a062cdb4a521bdf744dccd621b64a75a58a3fd0a255abe6",
-      "rawSha256": "604d2fab6c1d57f4a595e756aad476cbc4f39a18d5636b043b0cc0ac5d92d36f",
-      "renderer": "ResembleAI/Chatterbox Multilingual V2 0.1.7",
-      "modelRevision": "5bb1f6ee58e50c3b8d408bc82a6d3740c2db6e18",
-      "modelLicense": "MIT",
-      "referenceLicense": "CC0-1.0 (Thorsten-Voice Dataset 2021.06 emotional)",
-      "durationSeconds": 6,
-      "renderSeconds": 36,
-      "synthesis": {
-        "temperature": 0.65,
-        "repetitionPenalty": 3,
-        "cfgWeight": 0.6,
-        "languageId": "de",
-        "device": "cpu",
-        "precision": "fp32",
-        "t3WeightPrecision": "float32",
-        "conditioningPrecision": "float32",
-        "autocastPrecision": null,
-        "conditioningCached": true,
-        "referenceReconditionedForProfile": "b027d18a4fc748cabb133fbb14077500",
-        "referenceConditioningVerifiedFloat32": true,
-        "modelSessionReused": false,
-        "cpuThreads": 2,
-        "inferenceMode": true
-      },
-      "listening": "pending",
-      "status": "eligible exact-text recording; human listening pending",
-      "processing": null,
-      "processingSha256": null,
-      "normalization": {
-        "targetLufs": -18,
-        "targetTruePeakDbtp": -1.5,
-        "filter": "loudnorm=I=-17.68:TP=-1.8:LRA=11:linear=false",
-        "iterations": 2
-      },
-      "integratedLufs": -18.14,
-      "truePeakDbtp": -2.22,
-      "asr": "Die Tagespolitik macht die Regierung, erhält Reden und schüttelt bedeutungsvoll Hände.",
-      "asrWordExact": true,
-      "asrLiteralWordExact": false,
-      "asrNormalization": "case/punctuation, German numeric and A38 spoken equivalents, guarded full-hour and date-ordinal equivalents, section sign/Paragraf orthography, German compound spacing",
-      "asrModel": "independent faster-whisper, cached local model, cpu int8 (effective int8_float32), no script prompt",
-      "asrCpuThreads": 2,
-      "asrDevice": "cpu",
-      "asrEffectiveComputeType": "int8_float32",
-      "asrLanguageId": "de",
-      "asrComputeType": "int8",
-      "asrScriptPrompt": null,
-      "asrBeamSize": 1,
-      "asrReadings": [
-        {
-          "beamSize": 1,
-          "transcript": "Die Tagespolitik macht die Regierung, erhält Reden und schüttelt bedeutungsvoll Hände.",
-          "transcribeSeconds": 9.2,
-          "words": [
-            {
-              "word": " Die",
-              "start": 0,
-              "end": 0.14
-            },
-            {
-              "word": " Tagespolitik",
-              "start": 0.14,
-              "end": 1.22
-            },
-            {
-              "word": " macht",
-              "start": 1.22,
-              "end": 1.64
-            },
-            {
-              "word": " die",
-              "start": 1.64,
-              "end": 1.82
-            },
-            {
-              "word": " Regierung,",
-              "start": 1.82,
-              "end": 2.48
-            },
-            {
-              "word": " erhält",
-              "start": 2.92,
-              "end": 3.2
-            },
-            {
-              "word": " Reden",
-              "start": 3.2,
-              "end": 3.64
-            },
-            {
-              "word": " und",
-              "start": 3.64,
-              "end": 3.78
-            },
-            {
-              "word": " schüttelt",
-              "start": 3.78,
-              "end": 4.1
-            },
-            {
-              "word": " bedeutungsvoll",
-              "start": 4.1,
-              "end": 4.94
-            },
-            {
-              "word": " Hände.",
-              "start": 4.94,
-              "end": 5.28
-            }
-          ]
-        }
-      ],
-      "asrModelSha256": "e76620f83d5f5b69efd3d87e3dc180c1bd21df9fbebacfd4335e5e1efcc018da",
-      "asrModelDirectoryName": "voice-asr-model",
-      "wordCues": [],
-      "sha256": "992edba877d76a987f58d7e64ca5fafb19959c891803ad7f47d5f7f2ee5a7197",
-      "bytes": 96812,
-      "sampleRateHz": 48000,
-      "channels": 1,
-      "bitrateBitsPerSecond": 128000,
-      "file": "assets/voices/player-replies/player-president-portrait-3.mp3",
-      "approval": {
-        "status": "user-approved",
-        "date": "2026-10-12",
-        "instruction": "The dialogue should briefly explain what this person’s job is.",
-        "scope": "Revised portrait duties explanation in the existing selected player voice",
-        "listeningVerified": false
-      }
-    },
-    {
-      "clipId": "player-president-portrait-4",
-      "actorId": "player",
-      "voiceId": "spieler-hans-peter-mustermann",
-      "profileId": "b027d18a4fc748cabb133fbb14077500",
-      "text": "Also ehrlich: Diesen Job hätte ich wirklich gern.",
-      "english": "Honestly, I would really love to have that job.",
-      "sourceLocator": "buergeramt-story.js presidentPortrait.lines[3].line",
-      "seed": 71003,
-      "synthesisAttempt": 1,
-      "referenceSha256": "6b6ff2c747ef11fb883fc1c9804d270c6ba34cc5614db4d132f8e6172b9f60ad",
-      "authoringHelperSha256": "6a473856c0791c7102a4798f84ac126451db00acdf5683ff76d2fab855ef4298",
-      "rendererInputText": "Also ehrlich: Diesen Job hätte ich wirklich gern.",
-      "decode": {
-        "maxSpeechTokens": 256,
-        "attentionHooksBefore": 0,
-        "generatedSpeechTokens": 99,
-        "eosReached": true,
-        "eosKind": "model-sampled",
-        "eosSuppressionObservedSteps": 70,
-        "modelEosRestoredSteps": 0,
-        "alignmentFirstCompletedStep": 71,
-        "nativeAnalyzerSourceSha256": "d8430efa92aedb8e59b782c1d299fe7238570eecea9d293c0981a5ee2e82c8c7",
-        "eosPolicy": "Native analyzer unchanged; observation only",
-        "t3InferenceSeconds": 14.03,
-        "temporaryAnalyzerHooksRemoved": 3,
-        "attentionHooksAfter": 0,
-        "eosTraceSha256": "fb46d69b62e191a0927f9b10538e1c210134f0d7bbd5e718a364bb494836cc03"
-      },
-      "rendererInputBasis": "exact authored source",
-      "requestSha256": "528938058799e82d907bac309c400b4aa4e2459e83dbda991e94ce9e3b9e9e25",
-      "referenceOriginalSha256": "4f4b181750c65430c68d20d742b02529f5e5db6650cb57171fe2e52ea8ee2dbf",
-      "profileJsonSha256": "7d5ce6ff22d3da1a0a062cdb4a521bdf744dccd621b64a75a58a3fd0a255abe6",
-      "rawSha256": "5486f55e49672122b60a77dc07c2f94d38d077de1e87a2265d2e2eb2735bf100",
-      "renderer": "ResembleAI/Chatterbox Multilingual V2 0.1.7",
-      "modelRevision": "5bb1f6ee58e50c3b8d408bc82a6d3740c2db6e18",
-      "modelLicense": "MIT",
-      "referenceLicense": "CC0-1.0 (Thorsten-Voice Dataset 2021.06 emotional)",
-      "durationSeconds": 3.92,
-      "renderSeconds": 29.94,
-      "synthesis": {
-        "temperature": 0.65,
-        "repetitionPenalty": 3,
-        "cfgWeight": 0.6,
-        "languageId": "de",
-        "device": "cpu",
-        "precision": "fp32",
-        "t3WeightPrecision": "float32",
-        "conditioningPrecision": "float32",
-        "autocastPrecision": null,
-        "conditioningCached": true,
-        "referenceReconditionedForProfile": "b027d18a4fc748cabb133fbb14077500",
-        "referenceConditioningVerifiedFloat32": true,
-        "modelSessionReused": false,
-        "cpuThreads": 2,
-        "inferenceMode": true
-      },
-      "listening": "pending",
-      "status": "eligible exact-text recording; human listening pending",
-      "processing": null,
-      "processingSha256": null,
-      "normalization": {
-        "targetLufs": -18,
-        "targetTruePeakDbtp": -1.5,
-        "filter": "loudnorm=I=-13.009999999999998:TP=-1.8:LRA=11:linear=false",
-        "iterations": 4
-      },
-      "integratedLufs": -18.27,
-      "truePeakDbtp": -2.21,
-      "asr": "Also ehrlich, diesen Job hätte ich wirklich gern.",
-      "asrWordExact": true,
-      "asrLiteralWordExact": true,
-      "asrNormalization": "case/punctuation, German numeric and A38 spoken equivalents, guarded full-hour and date-ordinal equivalents, section sign/Paragraf orthography, German compound spacing",
-      "asrModel": "independent faster-whisper, cached local model, cpu int8 (effective int8_float32), no script prompt",
-      "asrCpuThreads": 2,
-      "asrDevice": "cpu",
-      "asrEffectiveComputeType": "int8_float32",
-      "asrLanguageId": "de",
-      "asrComputeType": "int8",
-      "asrScriptPrompt": null,
-      "asrBeamSize": 1,
-      "asrReadings": [
-        {
-          "beamSize": 1,
-          "transcript": "Also ehrlich, diesen Job hätte ich wirklich gern.",
-          "transcribeSeconds": 10.08,
-          "words": [
-            {
-              "word": " Also",
-              "start": 0,
-              "end": 0.38
-            },
-            {
-              "word": " ehrlich,",
-              "start": 0.38,
-              "end": 0.82
-            },
-            {
-              "word": " diesen",
-              "start": 1.14,
-              "end": 1.6
-            },
-            {
-              "word": " Job",
-              "start": 1.6,
-              "end": 1.88
-            },
-            {
-              "word": " hätte",
-              "start": 1.88,
-              "end": 2.12
-            },
-            {
-              "word": " ich",
-              "start": 2.12,
-              "end": 2.28
-            },
-            {
-              "word": " wirklich",
-              "start": 2.28,
-              "end": 2.64
-            },
-            {
-              "word": " gern.",
-              "start": 2.64,
-              "end": 3
-            }
-          ]
-        }
-      ],
-      "asrModelSha256": "e76620f83d5f5b69efd3d87e3dc180c1bd21df9fbebacfd4335e5e1efcc018da",
-      "asrModelDirectoryName": "voice-asr-model",
-      "wordCues": [
-        {
-          "at": 0,
-          "charIndex": 0,
-          "word": "Also",
-          "end": 0.38
-        },
-        {
-          "at": 0.38,
-          "charIndex": 5,
-          "word": "ehrlich",
-          "end": 0.82
-        },
-        {
-          "at": 1.14,
-          "charIndex": 14,
-          "word": "Diesen",
-          "end": 1.6
-        },
-        {
-          "at": 1.6,
-          "charIndex": 21,
-          "word": "Job",
-          "end": 1.88
-        },
-        {
-          "at": 1.88,
-          "charIndex": 25,
-          "word": "hätte",
-          "end": 2.12
-        },
-        {
-          "at": 2.12,
-          "charIndex": 31,
-          "word": "ich",
-          "end": 2.28
-        },
-        {
-          "at": 2.28,
-          "charIndex": 35,
-          "word": "wirklich",
-          "end": 2.64
-        },
-        {
-          "at": 2.64,
-          "charIndex": 44,
-          "word": "gern",
-          "end": 3
-        }
-      ],
-      "sha256": "094e8530d0835b2b3bd48f12634eb9dfeadb791e9fa0547569984029840b5c3b",
-      "bytes": 63788,
-      "sampleRateHz": 48000,
-      "channels": 1,
-      "bitrateBitsPerSecond": 128000,
-      "file": "assets/voices/player-replies/player-president-portrait-4.mp3",
-      "approval": {
-        "status": "user-approved",
-        "date": "2026-10-12",
-        "instruction": "Use the first-person player voice for the sarcastic Bundespräsident portrait interaction, ending with wanting the job.",
-        "scope": "User-requested portrait inner monologue in the existing selected player voice",
-        "listeningVerified": false
-      }
+      "sourceLocatorAtRender": "buergeramt-story.js presidentPortrait.lines[0].line",
+      "continuousSynthesis": true
     }
   ],
   "heldPrivate": [],

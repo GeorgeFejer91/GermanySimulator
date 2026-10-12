@@ -4,6 +4,29 @@ import {harness} from './amt-harness.mjs';
 
 function approach(h){h.moveTo(0,4.8);h.moveTo(3.4,4.8);h.moveTo(3.4,2.8);h.level.update(0)}
 
+test('one native recording owns completion, hidden pause and cancellation of the full monologue',()=>{
+ const h=harness('host',{voice:true,cinematics:false}),media=[];
+ h.context.Audio=class{
+  constructor(src){this.src=src;this.currentTime=0;this.duration=24;this.paused=true;media.push(this)}
+  play(){this.paused=false;this.onplaying?.();return Promise.resolve()}
+  pause(){this.paused=true;this.onpause?.()}
+  removeAttribute(){this.src=''}
+  load(){}
+ };
+ const rows=h.window.BuergeramtStory.presidentPortrait.lines,first=rows.slice(0,2).map(row=>row.line).join(' '),second=rows.slice(2).map(row=>row.line).join(' '),path='./assets/voices/player-replies/player-president-portrait-1.mp3';
+ h.window.GermanySimulatorAudioText.recordedClip=()=>path;
+ h.window.GermanySimulatorAudioText.recordings={[path]:{wordCues:[{at:10,charIndex:first.length+1}]}};
+ approach(h);h.level.interact();assert.equal(media.length,1);assert.equal(h.level.stage,'portrait');
+ assert.equal(h.node('amt-ambient').textContent,'ICH · '+first);
+ media[0].currentTime=10;media[0].ontimeupdate();assert.equal(h.node('amt-ambient').textContent,'ICH · '+second);assert.equal(media.length,1);
+ h.level.interact();assert.equal(media.length,1);
+ h.hide();assert.equal(media[0].paused,true);h.elapse(45);assert.equal(h.level.stage,'portrait');
+ h.document.hidden=false;h.document.dispatchEvent(new Event('visibilitychange'));assert.equal(media[0].paused,false);
+ media[0].currentTime=24;media[0].onended();h.elapse(.1);assert.equal(h.level.stage,'walk-sign');assert.equal(media.length,1);
+ h.level.interact();assert.equal(media.length,2);h.node('amt-leave').click();assert.equal(media[1].paused,true);assert.equal(media[1].src,'');
+ media[1].onended();h.elapse(45);assert.equal(h.level.stage,'closed');assert.equal(h.counts.form,0);
+});
+
 test('the portrait requires a nearby E and its inner monologue returns without a mission reward',()=>{
  const h=harness('host',{voice:true,cinematics:false}),lookups=[];
  h.window.GermanySimulatorAudioText.recordedClip=(voiceId,text)=>{lookups.push({voiceId,text});return null};
@@ -16,8 +39,8 @@ test('the portrait requires a nearby E and its inner monologue returns without a
  const seen=[];for(let i=0;i<1600&&h.level.stage==='portrait';i++){const line=h.node('amt-line').textContent;if(seen.at(-1)!==line)seen.push(line);h.elapse(.05)}
  assert.equal(h.level.stage,'walk-sign');
  const authored=Array.from(h.window.BuergeramtStory.presidentPortrait.lines,row=>row.line);
- assert.equal(seen.length,2);assert.equal(seen.join(" "),authored.join(" "));
- assert.deepEqual(lookups.map(row=>row.text),authored);
+ assert.equal(seen.length,1);assert.equal(seen.join(" "),authored.join(" "));
+ assert.deepEqual(lookups.map(row=>row.text),[authored.join(' ')]);
  assert(lookups.every(row=>row.voiceId==='spieler-hans-peter-mustermann'));
  assert.equal(h.synth.spoken.length,0,'missing player audio preserves internal captions');
  assert.equal(h.counts.form,0);assert.equal(h.level.registrationTicket,'');
@@ -47,12 +70,12 @@ test('the projecting frame keeps player bodies separated at ordinary and delayed
  }
 });
 
-test('office English subtitles require opt-in and refresh during a portrait part',()=>{
+test('office English subtitles require opt-in and refresh during the continuous monologue',()=>{
  const h=harness('host',{cinematics:false});let enabled=false;
  h.config.subtitlesOn=()=>enabled;h.level.replay(h.config);approach(h);h.level.interact();
  const box=h.node('english-subtitle');assert.equal(box.hidden,true);
  enabled=true;h.level.refreshSubtitle();assert.equal(box.hidden,false);
- assert.equal(box.textContent,h.window.BuergeramtStory.presidentPortrait.lines[0].english);
+ assert.equal(box.textContent,h.window.BuergeramtStory.presidentPortrait.lines.map(row=>row.english).join(' '));
  enabled=false;h.level.refreshSubtitle();assert.equal(box.hidden,true);assert.equal(box.textContent,'');
  enabled=true;h.elapse(5);h.level.refreshSubtitle();assert.equal(box.hidden,false);
  h.node('amt-leave').click();assert.equal(box.hidden,true);assert.equal(box.textContent,'');

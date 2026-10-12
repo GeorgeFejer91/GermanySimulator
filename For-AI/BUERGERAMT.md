@@ -5,7 +5,7 @@ The secret Bürgeramt is an episode of the canonical root game. QR admission, th
 The clear wall beside the waiting-room entrance carries a gilded state portrait of the current
 Bundespräsident, Frank-Walter Steinmeier (verified 2026-10-12). Approaching it
 offers `E · BUNDESPRÄSIDENT BETRACHTEN`; E or the existing touch interaction
-starts four short thoughts spoken by **ICH**, using the selected
+starts one continuous monologue spoken by **ICH**, using the selected
 `spieler-hans-peter-mustermann` Nachschub voice. The monologue briefly explains
 his head-of-state role: representing Germany, signing laws and appointing the
 elected chancellor; day-to-day policy belongs to the government. Its factual
@@ -13,7 +13,7 @@ outline follows the [Bundestag's role description](https://www.bundestag.de/parl
 The ceremonial-importance joke
 ends with “Also ehrlich: Diesen Job hätte ich wirklich gern.” The portrait
 never speaks and no visible actor mouth is assigned. This optional sequence
-keeps the room visible, follows the existing serialized speech lifecycle,
+keeps the room visible, plays one complete newly synthesized MP3 through the existing speech lifecycle,
 pauses office queue progression like other encounters, and returns automatically
 to the current waiting/QR/counter state. Missing or disabled player audio keeps
 the exact readable captions. Phone ticket receipts retain their authority

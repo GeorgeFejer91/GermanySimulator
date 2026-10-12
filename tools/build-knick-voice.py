@@ -246,6 +246,8 @@ def configure_request(args):
         plan = read(args.request_file)
         assert not args.ambient, "Custom families own their authored queues"
         assert plan["family"] in ("street-wisdom", "office-replies", "office-ambient", "office-monologue")
+        if plan["family"] == "office-monologue":
+            assert not getattr(args, "sentence_rescue", False), "The portrait requires one whole-text synthesis call, never joined sentence takes"
         if plan["family"] == "office-ambient":
             assert VOICE.startswith("amt-")
             assert plan["publicAssetFamily"] == "assets/voices/office-ambient"
@@ -446,12 +448,13 @@ def jobs(ambient=False, music_root=None):
             js = 'global.window={};require("./buergeramt-story.js");console.log(JSON.stringify(window.BuergeramtStory));'
             story = json.loads(subprocess.check_output(["node", "-e", js], cwd=ROOT, encoding="utf-8"))
             selected = [dict(job) for job in CUSTOM_PLAN["jobs"] if job["voiceId"] == VOICE]
-            assert len(selected) == len(story["presidentPortrait"]["lines"])
-            for index, (job, row) in enumerate(zip(selected, story["presidentPortrait"]["lines"])):
-                assert job["clipId"] == "player-president-portrait-" + str(index + 1)
-                assert job["voiceId"] == story["playerIdentity"]["voiceId"] and job["profileId"] == PROFILE and job["actorId"] == "player"
-                assert job["text"] == row["line"] and job["english"] == row["english"]
-                assert job["sourceLocator"] == f"buergeramt-story.js presidentPortrait.lines[{index}].line"
+            assert len(selected) == 1, "The portrait must be generated in one complete take"
+            job = selected[0]
+            assert job["clipId"] == "player-president-portrait-1"
+            assert job["voiceId"] == story["playerIdentity"]["voiceId"] and job["profileId"] == PROFILE and job["actorId"] == "player"
+            assert job["text"] == " ".join(row["line"] for row in story["presidentPortrait"]["lines"])
+            assert job["english"] == " ".join(row["english"] for row in story["presidentPortrait"]["lines"])
+            assert job["sourceLocator"] == "buergeramt-story.js presidentPortrait.lines joined in authored order"
             return selected
         if CUSTOM_PLAN["family"] == "office-ambient":
             js = 'global.window={};require("./buergeramt-story.js");console.log(JSON.stringify(window.BuergeramtStory));'

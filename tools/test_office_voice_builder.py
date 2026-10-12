@@ -15,6 +15,30 @@ spec.loader.exec_module(builder)
 
 
 class OfficeVoiceGates(unittest.TestCase):
+    def test_portrait_is_one_full_authored_synthesis_request(self):
+        story=json.loads(subprocess.check_output(['node','-e','global.window={};require("./buergeramt-story.js");console.log(JSON.stringify(window.BuergeramtStory));'],cwd=builder.ROOT,encoding='utf-8'))
+        voice=story['playerIdentity']['voiceId']
+        profile=builder.read(builder.ROOT/'For-AI/VOICE-CAST.json')['productionVoices'][voice]['profileId']
+        rows=story['presidentPortrait']['lines']
+        job={'clipId':'player-president-portrait-1','actorId':'player','voiceId':voice,'profileId':profile,
+             'text':' '.join(row['line'] for row in rows),'english':' '.join(row['english'] for row in rows),
+             'sourceLocator':'buergeramt-story.js presidentPortrait.lines joined in authored order'}
+        plan={'family':'office-monologue','publicAssetFamily':'assets/voices/player-replies','privateReviewFamily':'GermanySimulator president portrait review 2026-10-12',
+              'sourceSha256':{name:builder.sha(builder.ROOT/name) for name in ('buergeramt-story.js','buergeramt.js')},'jobs':[job]}
+        try:
+            with tempfile.TemporaryDirectory() as directory:
+                file=Path(directory)/'request.json';builder.write(file,plan)
+                args=SimpleNamespace(voice_id=voice,request_file=file,ambient=False)
+                builder.configure_request(args);self.assertEqual(builder.jobs(),[job])
+                args.sentence_rescue=True
+                with self.assertRaises(AssertionError):builder.configure_request(args)
+                args.sentence_rescue=False
+                plan['jobs']=[{**job,'text':row['line'],'english':row['english']} for row in rows]
+                builder.write(file,plan);builder.configure_request(args)
+                with self.assertRaises(AssertionError):builder.jobs()
+        finally:
+            builder.configure_request(SimpleNamespace(voice_id='amt-brunhilde-knick',request_file=None,ambient=False))
+
     def test_join_failure_authority_preserves_successful_part_truth_and_cap2(self):
         with tempfile.TemporaryDirectory() as directory:
             parent_root=Path(directory)

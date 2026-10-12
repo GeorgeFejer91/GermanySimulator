@@ -413,11 +413,11 @@ function showCharacter(actor){
 }
 function nearPresidentPortrait(){return stage!=="outside"&&distanceTo(story.presidentPortrait)<2.9}
 function showPresidentPortrait(){
- const scan=lastScanId,resumeStatus=status.textContent;let index=0;
+ const scan=lastScanId,resumeStatus=status.textContent,rows=story.presidentPortrait.lines;
+ const text=rows.map(row=>row.line).join(" "),subtitle=rows.map(row=>row.english).join(" "),parts=[0,2].map(start=>rows.slice(start,start+2).map(row=>row.line).join(" "));
  setStage("portrait");setStatus("BUNDESPRÄSIDENT · GEDANKEN");
- const parts=[0,2].map(start=>story.presidentPortrait.lines.slice(start,start+2));
- const next=()=>{if(index>=parts.length){setStage(queueStage());setStatus(activated?"WARTENUMMER "+number+" · AUFRUFTAFEL":scan===lastScanId?resumeStatus:"NAME AM TELEFON EINTRAGEN");return}const segments=parts[index++];content(story.playerIdentity.speaker,segments.map(row=>row.line).join(" "),[{run:next}],null,null,null,null,{fallback:"captions",segments})};
- next();
+ const showPart=index=>{ambient.textContent=story.playerIdentity.speaker+" · "+parts[index]};
+ content(story.playerIdentity.speaker,text,[{run:()=>{setStage(queueStage());setStatus(activated?"WARTENUMMER "+number+" · AUFRUFTAFEL":scan===lastScanId?resumeStatus:"NAME AM TELEFON EINTRAGEN")}}],null,mode=>{showPart(0);if(mode!=="voice"){const owner=attempt,visibleCue=cue;defer(()=>{if(active&&owner===attempt&&visibleCue===cue)showPart(1)},parts[0].length*55/timeScale())}},charIndex=>{if(charIndex>parts[0].length)showPart(1)},null,{fallback:"captions",subtitle,readableMs:text.length*55});
 }
 function walking(){return ["outside","walk-sign","waiting","walk-counter"].includes(stage)}
 function setStage(next,preserveMovement=false){if(next!==stage&&!preserveMovement)held.clear();stage=next;document.body.classList.toggle("amt-omen",next==="omen");const moving=walking(),sequence=!moving&&next!=="closed";if(!moving)queueCallPending=-1;document.body.classList.toggle("amt-sequence",sequence);if(moving){actions.replaceChildren();interactingCounter=0;encounterArmed=false;cancelSpeech();clerkAnimation?.request(null);ambient.textContent="";characterMood=null;}root.classList.toggle("walking",moving);walkHud.classList.toggle("sequence",sequence);walkHud.hidden=next==="closed";root.classList.toggle("first-person",!!window.Germany3D?.ready);if(moving){objective.textContent=next==="outside"?"BÜRGERAMT · EINGANG":next==="walk-sign"?"QR-SCHILD SCANNEN":"AUFRUFTAFEL";update(0)}}
@@ -427,12 +427,6 @@ function queueStage(){return activated?(deadline>0?"walk-counter":"waiting"):"wa
 function refuseCounter(desk){interactingCounter=desk;encounterArmed=true;setStage("early");content(story.clerks[desk].speaker+" · SCHALTER "+desk,story.clerkRefusal,[{run:()=>setStage(queueStage())}]);setStatus("FALSCHER AUFRUF · "+queueDisplay)}
 function speechReadableMs(text,delivery){return delivery?.readableMs??Math.max(3500,Math.min(14000,text.length*55*.96/(delivery?.rate??.96)))}
 function say(text,onComplete,onStart,onBoundary,delivery=null,voiceId="",allowCatalogClip=true){
- if(delivery?.segments?.length){
-  const owner=attempt,visibleCue=cue,segments=delivery.segments;let index=0;
-  const current=()=>active&&owner===attempt&&visibleCue===cue&&line.textContent===text;
-  const next=()=>{if(!current())return;if(index===segments.length){onComplete?.("voice");return}const segment=segments[index++];say(segment.line,next,onStart,onBoundary,{...delivery,segments:null,isCurrent:current,subtitle:segment.english},voiceId,allowCatalogClip)};
-  next();return;
- }
  delivery={...window.BuergeramtVoiceProfiles?.deliveryFor(voiceId),...delivery};
  const owner=attempt,visibleCue=cue,readableMs=speechReadableMs(text,delivery)/timeScale();
  const current=()=>active&&owner===attempt&&visibleCue===cue&&(delivery.isCurrent?delivery.isCurrent():line.textContent===text);

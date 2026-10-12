@@ -18,7 +18,7 @@ try{
   page.on('pageerror',error=>errors.push(error.message));page.on('request',request=>requests.push(request.url()));
   await context.addInitScript(()=>{
    window.__media=[];window.__machine=[];
-   const NativeAudio=window.Audio;window.Audio=function(src){const media=new NativeAudio(src);media.muted=true;__media.push(media);return media};
+   const NativeAudio=window.Audio;window.Audio=function(src){const media=new NativeAudio(src);media.__requestedSrc=src;media.muted=true;__media.push(media);return media};
    const play=HTMLMediaElement.prototype.play;HTMLMediaElement.prototype.play=function(...args){this.muted=true;return play.apply(this,args)};
    const connect=AudioNode.prototype.connect;AudioNode.prototype.connect=function(target,...args){if(target===this.context.destination){const gain=this.context.createGain();gain.gain.value=0;connect.call(gain,target);return connect.call(this,gain,...args)}return connect.call(this,target,...args)};
    Object.defineProperty(window,'speechSynthesis',{configurable:true,value:{speaking:false,pending:false,getVoices:()=>[],cancel(){},speak(u){__machine.push(u.text);u.onstart?.();u.onend?.()}}});
@@ -40,7 +40,7 @@ try{
   });
   assert.equal(approach.stage,'walk-sign');assert.equal(approach.prompt,'E · BUNDESPRÄSIDENT BETRACHTEN');
   await page.keyboard.press('e');await page.waitForFunction(()=>BuergeramtLevel.stage==='portrait');
-  const lines=await page.evaluate(()=>BuergeramtStory.presidentPortrait.lines.map(row=>row.line)),observed=[];
+  const lines=await page.evaluate(()=>[BuergeramtStory.presidentPortrait.lines.map(row=>row.line).join(' ')]),observed=[];
   for(let index=0;index<lines.length;index++){
    await page.waitForFunction(text=>document.getElementById('amt-line').textContent===text,lines.slice(index<2?0:2,index<2?2:4).join(" "),{timeout:25000});
    assert.equal(await page.locator('#amt-speaker').textContent(),'ICH');
@@ -52,9 +52,11 @@ try{
    const subtitle=await page.locator('#english-subtitle').evaluate(el=>({hidden:el.hidden,text:el.textContent,display:getComputedStyle(el).display,visibility:getComputedStyle(el).visibility}));assert.equal(subtitle.hidden,false);assert.notEqual(subtitle.display,'none');assert.notEqual(subtitle.visibility,'hidden');assert(subtitle.text.trim());
    const bounds=await page.locator('#amt-ambient').evaluate(el=>{const r=el.getBoundingClientRect();return{fit:el.dataset.pretextFit,left:r.left,right:r.right,top:r.top,bottom:r.bottom,scrollWidth:el.scrollWidth,clientWidth:el.clientWidth,scrollHeight:el.scrollHeight,clientHeight:el.clientHeight}});
    assert.notEqual(bounds.fit,'unavailable');assert(bounds.scrollWidth<=bounds.clientWidth+1);assert(bounds.scrollHeight<=bounds.clientHeight+1);assert(bounds.left>=0&&bounds.right<=viewport.width+1&&bounds.top>=0&&bounds.bottom<=viewport.height+1);
-   if(index===2)await page.screenshot({path:resolve(out,name+'-portrait.png')});
+   await page.screenshot({path:resolve(out,name+'-portrait.png')});
   }
   await page.waitForFunction(()=>BuergeramtLevel.stage==='walk-sign',null,{timeout:25000});
+  assert.equal(await page.evaluate(()=>__media.filter(media=>media.__requestedSrc?.includes('player-president-portrait-')).length),1,'one continuous media source for the whole monologue, including released failed sources');
+  assert.equal(lines.length,1,'one complete authored monologue');
   assert.deepEqual(errors,[]);assert.equal(await page.evaluate(()=>__machine.length),3,'only the subtitle opt-in authority uses browser speech');
   report.cases.push({name,approach,observed,errors});
   await context.close();console.log(JSON.stringify({name,passed:true}));
