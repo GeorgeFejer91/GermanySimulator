@@ -27,7 +27,7 @@ try{
    GermanySimulatorAudioText={...mouthCatalog,candidateClip:()=>path};
    __mouthProbe.content('FRAU KNICK',text);
   },{path,text:track.source});
-  await page.waitForFunction(path=>{const media=mouthPlayers.findLast(media=>media.getAttribute('src')===path);if(BuergeramtLevel.lipSpeech.timing==='audio-cues'&&BuergeramtLevel.lipSpeech.recording===path&&media&&!media.paused){window.mouthMedia=media;return true}},path,{timeout:10000});
+  await page.waitForFunction(path=>{const media=mouthPlayers.findLast(media=>media.getAttribute('src')?.split('?')[0]===path);if(BuergeramtLevel.lipSpeech.timing==='audio-cues'&&BuergeramtLevel.lipSpeech.recording===path&&media&&!media.paused){window.mouthMedia=media;return true}},path,{timeout:10000});
   const traces=[];
   for(let n=0;n<5;n++){
    const receipt=await page.evaluate(()=>{const pose=BuergeramtLevel.lipSpeech;return{pose,mediaTime:mouthMedia.currentTime,rate:mouthMedia.playbackRate}});

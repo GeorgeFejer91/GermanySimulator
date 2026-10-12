@@ -1,5 +1,13 @@
 (function(){"use strict";
+const clerkIdentity=Object.freeze({speaker:"SACHBEARBEITERIN FRAU KNICK",fullName:"Brunhilde Knick",voiceId:"amt-brunhilde-knick"});
+const clerks=Object.freeze({
+ 1:Object.freeze({speaker:"FRAU FRIST",fullName:"Erna Frist",voiceId:"amt-erna-frist"}),
+ 2:Object.freeze({speaker:"FRAU DURCHSCHLAG",fullName:"Ottilie Durchschlag",voiceId:"amt-ottilie-durchschlag"}),
+ 3:clerkIdentity,
+ 4:Object.freeze({speaker:"FRAU ZUSTÄNDIG",fullName:"Hedwig Zuständig",voiceId:"amt-hedwig-zustaendig"})
+});
 window.BuergeramtStory=Object.freeze({
+ playerIdentity:{speaker:"ICH",fullName:"Hans-Peter Mustermann",voiceId:"spieler-hans-peter-mustermann"},
  characters:{
   aktenkurier:{speaker:"DER AKTENKURIER",fullName:"Horst Stempelmann",voiceId:"amt-horst-stempelmann",lines:[
    {line:"Stopp. Sie haben den Aktenlauf ohne Laufzettel gekreuzt. Das gilt als Abkürzung und muss gestempelt werden.",tone:"warning",valence:-.55},
@@ -39,7 +47,8 @@ window.BuergeramtStory=Object.freeze({
   "amt-mechthild-elternbogen":{speaker:"MECHTHILD ELTERNBOGEN",fullName:"Mechthild Elternbogen",voiceId:"amt-mechthild-elternbogen",x:5.5,z:1.39,lines:[{line:"Ich warte auf die Bestätigung für mein Kind.",tone:"procedural",valence:0}]},
   "amt-wolfram-rentenbescheid":{speaker:"WOLFRAM RENTENBESCHEID",fullName:"Wolfram Rentenbescheid",voiceId:"amt-wolfram-rentenbescheid",x:1.7,z:-1.39,lines:[{line:"Mein Bescheid ist seit drei Wochen unterwegs.",tone:"warning",valence:-.45}]}
  },
- clerkIdentity:{speaker:"SACHBEARBEITERIN FRAU KNICK",fullName:"Brunhilde Knick",voiceId:"amt-brunhilde-knick"},
+ clerkIdentity,clerks,
+ clerkRefusal:"Steht Ihre Nummer auf der Tafel? Nein? Dann treten Sie zurück! Dass ich hier gerade nichts tue, ist eine dienstliche Tätigkeit.",
  omen:{speaker:"DER AKTENKURIER",line:"Wer die Finsternis sieht, hat sie selbst gewählt!",delivery:{rate:.82,pitch:.72,contour:[
   {word:"Wer",tension:.12,semitones:1},{word:"Finsternis",tension:.55,semitones:.5},
   {word:"sieht",tension:.4,semitones:-.3},{word:"hat",tension:.58,semitones:-1},

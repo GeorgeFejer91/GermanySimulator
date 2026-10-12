@@ -92,7 +92,7 @@ test('fixed production voices reject old identities, renderer changes and live r
  assert(!matchesProduction(cast,{voiceId:'amt-brunhilde-knick',...binding,processing:'unreviewed-processing'}));
  for(const field of ['renderer','modelRevision','referenceSha256','processing']){const incomplete={voiceId:'amt-brunhilde-knick',...binding};delete incomplete[field];assert(!matchesProduction(cast,incomplete),field);}
  const profiles=[...Object.values(cast.productionVoices),...cast.productionExceptions].map(p=>({id:p.profileId,name:p.profileName,saved:true,original_sha256:p.originalSha256,reference_sha256:p.referenceSha256}));
- assert.equal(verifyProfiles(cast,profiles),62);
+ assert.equal(verifyProfiles(cast,profiles),profiles.length);
  profiles.find(p=>p.id===binding.profileId).reference_sha256='changed';
  assert.throws(()=>verifyProfiles(cast,profiles),/Profile drift/);
 });
@@ -114,11 +114,11 @@ test('Knick remains caption-only if the catalogue is unavailable',()=>{
  assert.equal(h.synth.current,null);assert(h.node('amt-line').textContent.length>0);
 });
 
-test('counter forfeiture notices cannot revive a generic browser clerk voice',()=>{
+test('counter forfeiture returns to the room without reviving a generic browser clerk voice',()=>{
  const h=harness('host',{voice:true});vm.runInContext(readFileSync('For-AI/AUDIO-TEXT-LIBRARY.js','utf8'),h.context);
  h.counter();h.links[0].emit('status','Telefon getrennt');h.tick(16);
- assert.equal(h.level.stage,'expired');assert.equal(h.node('amt-speaker').textContent,'ANMELDESCHALTER');
- assert.match(h.node('amt-line').textContent,/Ihre Nummer ist gestrichen/);assert.equal(h.synth.current,null);
+ assert.equal(h.level.stage,'walk-sign');assert.equal(h.node('amt-actions').children.length,0);
+ assert.equal(h.level.activated,false);assert.equal(h.synth.current,null);
 });
 
 test('profile archival verifies copies and rejects an alias back into live data',()=>{

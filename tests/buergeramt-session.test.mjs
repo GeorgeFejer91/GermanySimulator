@@ -143,7 +143,7 @@ test('city audio defers the optional omen and its tone until the city clears',()
 test('the clerk speech watchdog starts after city audio clears, not while waiting',()=>{
  let cityBusy=true;const h=harness('host',{voice:true,cinematics:false,cityAudioBusy:()=>cityBusy});
  h.wait();const link=h.links[0];link.message({type:'register',name:'Erika Mustermann'});
- h.approachCounter();h.advanceGame(16);assert.equal(h.level.stage,'walk-counter');
+ h.approachCounter();h.awaitCall();assert.equal(h.level.stage,'walk-counter');
  cityBusy=true;h.synth.speak=()=>{};h.level.interact();h.tick(3000);
  assert.equal(h.level.clerkPerformance.speaking,false);
  assert.equal(link.sent.filter(message=>message.type==='call-arm').length,0);
@@ -155,7 +155,7 @@ test('the clerk speech watchdog starts after city audio clears, not while waitin
 test('a failed clerk voice releases the handoff after city audio clears',()=>{
  let cityBusy=false;const h=harness('host',{voice:true,cinematics:false,cityAudioBusy:()=>cityBusy});
  h.wait();const link=h.links[0];link.message({type:'register',name:'Erika Mustermann'});
- h.approachCounter();h.advanceGame(16);cityBusy=true;
+ h.approachCounter();h.awaitCall();cityBusy=true;
  h.synth.speak=utterance=>utterance.onerror?.();h.level.interact();h.tick(3000);
  assert.equal(link.sent.filter(message=>message.type==='call-arm').length,0);
  cityBusy=false;h.tick(40);h.tick(16);
@@ -173,56 +173,55 @@ test('replay and voice-off release deferred city-to-office speech safely',()=>{
  assert.equal(h.node('amt-line').textContent,h.window.BuergeramtStory.characters.formularsammler.lines[0].line);
 });
 
-test('the board calls continuously and each scan issues a fresh active ticket without a popup',()=>{
- const h=harness();assert.equal(h.level.queueDisplay,'B-041');h.enter();h.advanceGame(4);const firstCall=h.level.queueDisplay;assert.match(firstCall,/^[A-Z]-\d+/);h.advanceGame(4);assert.notEqual(h.level.queueDisplay,firstCall);assert.equal(h.level.stage,'walk-sign');
- h.links[0].message({type:'scan',id:'a'.repeat(24)});const first=h.links[0].sent.at(-1);assert.equal(first.type,'ticket');assert.equal(h.level.activated,true);assert.equal(h.level.stage,'waiting');assert.equal(h.node('amt-level').classList.contains('walking'),true);
- h.links[0].message({type:'scan',id:'a'.repeat(24)});assert.equal(h.links[0].sent.at(-1).number,first.number);
- h.links[0].message({type:'scan',id:'b'.repeat(24)});const second=h.links[0].sent.at(-1);assert.equal(second.type,'ticket');assert.notEqual(second.number,first.number);
- h.links[0].message({type:'register',name:'  Erika   Mustermann '});assert.equal(h.level.registeredName,'Erika Mustermann');
+test('the board calls continuously but scanning only opens name admission',()=>{
+ const h=harness();assert.equal(h.level.queueDisplay,'B-041');h.enter();h.advanceGame(4);const first=h.level.queueDisplay;h.advanceGame(4);assert.notEqual(h.level.queueDisplay,first);
+ h.links[0].message({type:'scan',id:'a'.repeat(24)});assert.equal(h.links[0].sent.at(-1).type,'scan-ready');assert.equal(h.level.registrationTicket,'');assert.equal(h.level.assignedCounter.number,0);assert.equal(h.level.activated,false);
+ h.links[0].message({type:'register',name:'  Erika   Mustermann '});const ticket=h.links[0].sent.at(-1);assert.equal(ticket.type,'ticket');assert.equal(h.level.registeredName,'Erika Mustermann');assert.equal(h.level.stage,'waiting');
+ h.links[0].message({type:'scan',id:'a'.repeat(24)});assert.equal(h.links[0].sent.at(-1).number,ticket.number);
+ h.links[0].message({type:'scan',id:'b'.repeat(24)});assert.equal(h.level.registrationTicket,'');assert.equal(h.level.assignedCounter.number,0);
 });
-test('a new scan after a missed appointment starts another counter opportunity',()=>{
- const h=harness();h.wait();const first=h.links[0].sent.at(-1).number;h.advanceGame(17);assert.equal(h.level.stage,'walk-counter');h.advanceGame(20);assert.equal(h.level.stage,'expired');h.links[0].message({type:'scan',id:'b'.repeat(24)});assert.equal(h.level.stage,'waiting');assert.equal(h.level.activated,true);assert.notEqual(h.links[0].sent.at(-1).number,first);
+test('a new scan after expiry requires a new name submission',()=>{
+ const h=harness();h.wait();const first=h.level.registrationTicket;h.awaitCall();h.advanceGame(13);assert.equal(h.level.stage,'walk-sign');h.links.at(-1).message({type:'scan',id:'b'.repeat(24)});assert.equal(h.level.stage,'walk-sign');assert.equal(h.level.activated,false);h.links.at(-1).message({type:'register',name:'Erika Mustermann'});assert.equal(h.level.stage,'waiting');assert.notEqual(h.level.registrationTicket,first);
 });
-test('silencing completes the registration and grants A38 exactly once',()=>{
- const h=harness();h.counter();h.links[0].message({type:'silence',id:'grass'});h.action();
- let questions=0;while(h.level.stage!=='success'){assert.equal(h.node('amt-actions').children.length,2);h.action();h.action();if(++questions>60)throw Error('Registration did not end')}
- assert.equal(questions,24);assert.equal(h.level.registration.completed,true);const finalButton=h.action();assert.deepEqual(h.counts,{form:1,cancel:0,close:0});finalButton.click();assert.equal(h.counts.form,1);assert.deepEqual(h.music,[true,false]);
+test('silencing completes the automatic registration and grants A38 exactly once',()=>{
+ const h=harness();h.counter();h.links[0].message({type:'silence',id:'grass'});h.tick(16000);let questions=0;
+ while(h.level.stage!=='success'){assert.equal(h.node('amt-actions').children.length,2);h.action();h.tick(30000);if(++questions>60)throw Error('Registration did not end')}
+ assert.equal(questions,24);assert.equal(h.level.registration.completed,true);const button=h.action();h.tick(16000);assert.equal(h.counts.form,1);button.click();assert.equal(h.counts.form,1);
 });
+
 test('answer automatically cancels without ever issuing A38',()=>{
  const h=harness();h.counter();h.links[0].message({type:'answer',id:'grass'});assert.equal(h.level.stage,'cancelled');assert.equal(h.node('amt-actions').children.length,0);
  h.tick(150000);assert.deepEqual(h.counts,{form:0,cancel:1,close:0});assert.equal(h.level.active,false);
+ assert.equal(h.links[0].sent.at(-1).type,'forfeit','a cancelled appointment must stamp the companion');
  assert.equal(h.links[0].sent.filter(m=>m.type==='police-line').length,3);
 });
-test('early approach reprimands; late arrival expires without A38',()=>{
- const h=harness();h.wait();h.approachCounter();h.level.interact();assert.equal(h.level.stage,'early');assert.match(h.node('amt-line').textContent,/dienstliche Tätigkeit/);assert.equal(h.node('amt-actions').children.length,0);h.elapse(14);
- h.advanceGame(16);assert.equal(h.level.stage,'walk-counter');h.advanceGame(20);assert.equal(h.level.stage,'expired');assert.equal(h.level.activated,false);h.action();assert.equal(h.level.stage,'walk-sign');assert.equal(h.counts.form,0);
+test('early approach reprimands and its dialogue does not extend the appointment',()=>{
+ const h=harness();h.wait();h.approachCounter();h.level.interact();assert.equal(h.level.stage,'early');assert.match(h.node('amt-line').textContent,/dienstliche Tätigkeit/);assert.equal(h.node('amt-actions').children.length,0);h.elapse(25);assert.equal(h.level.stage,'walk-sign');assert.equal(h.level.activated,false);assert.equal(h.node('amt-actions').children.length,0);assert.equal(h.level.stage,'walk-sign');assert.equal(h.counts.form,0);
 });
 test('a delayed decline cannot resurrect a forfeited appointment',()=>{
- const h=harness();h.counter();h.links[0].message({type:'phone-hidden'});assert.equal(h.level.stage,'expired');h.links[0].message({type:'decline',id:'grass'});assert.equal(h.level.stage,'expired');assert.equal(h.counts.form,0);
+ const h=harness();h.counter();h.links[0].message({type:'phone-hidden'});assert.equal(h.level.stage,'walk-sign');h.links[0].message({type:'decline',id:'grass'});assert.equal(h.level.stage,'walk-sign');assert.equal(h.counts.form,0);
 });
 test('a delayed answer cannot resurrect a forfeited appointment',()=>{
- const h=harness();h.counter();h.links[0].emit('status','Telefon getrennt');h.links[0].message({type:'answer',id:'grass'});assert.equal(h.level.stage,'expired');h.tick(90000);assert.equal(h.counts.form,0);assert.equal(h.counts.cancel,0);
+ const h=harness();h.counter();h.links[0].emit('status','Telefon getrennt');h.links[0].message({type:'answer',id:'grass'});assert.equal(h.level.stage,'walk-sign');h.tick(90000);assert.equal(h.counts.form,0);assert.equal(h.counts.cancel,0);
 });
 test('a failed ticket delivery does not start a queue slot',()=>{
  const h=harness();h.enter();h.links[0].fail=true;h.links[0].message({type:'scan',id:'a'.repeat(24)});assert.equal(h.level.stage,'walk-sign');assert.equal(h.level.activated,false);
 });
 test('failed police-call delivery cannot trap the player at the counter',()=>{
- const h=harness();h.wait();h.links[0].message({type:'register',name:'Erika Mustermann'});h.approachCounter();h.advanceGame(16);h.links[0].fail=true;h.level.interact();assert.equal(h.level.stage,'expired');assert.equal(h.node('amt-actions').children.length,2);
+ const h=harness();h.wait();h.links[0].message({type:'register',name:'Erika Mustermann'});h.approachCounter();h.awaitCall();h.links[0].fail=true;h.level.interact();assert.equal(h.level.stage,'walk-sign');assert.equal(h.node('amt-actions').children.length,0);
 });
-test('the name button is required before the host arms a call, then readiness schedules its lead-in',()=>{
- const h=harness();h.wait();h.approachCounter();h.advanceGame(16);h.level.interact();assert.equal(h.level.stage,'walk-counter');assert.equal(h.links[0].sent.filter(m=>m.type==='call-arm').length,0);
- h.links[0].message({type:'register',name:'Erika Mustermann'});h.level.interact();assert.equal(h.links[0].sent.at(-1).type,'call-arm');assert.equal(h.links[0].sent.filter(m=>m.type==='call').length,0);
- h.links[0].message({type:'answer',id:'grass'});assert.equal(h.level.stage,'counter');
- h.links[0].message({type:'call-ready',id:'grass',atMs:h.now()});const plan=h.links[0].sent.at(-1);assert.equal(plan.type,'call');assert.equal(plan.leadMs,2200);assert.equal(plan.ringAtPhoneMs,null);assert.equal(plan.ringAtUtcMs,null);assert.equal(h.level.timing.call.ringAtMs-h.level.timing.call.signalAtMs,900);
+test('the name button is required before any ticket or host call',()=>{
+ const h=harness();h.register();h.approachCounter();h.advanceGame(16);h.level.interact();assert.equal(h.level.stage,'early');assert.equal(h.level.registrationTicket,'');assert.equal(h.links[0].sent.filter(m=>m.type==='call-arm').length,0);
+ const ready=harness();ready.counter();assert.equal(ready.level.stage,'counter');assert.equal(ready.links[0].sent.filter(m=>m.type==='call').length,1);
 });
 test('the phone keeps the call hidden until its scheduled ring and cancels later vibration on decline',()=>{
- const h=harness('phone'),link=h.phoneReady();h.node('phone-name').value='Erika Mustermann';h.node('phone-form').dispatchEvent(new Event('submit',{cancelable:true}));link.message({type:'call-arm',id:'grass'});assert.equal(link.sent.at(-1).type,'call-ready');
+ const h=harness('phone'),link=h.phoneReady();h.node('phone-name').value='Erika Mustermann';h.node('phone-form').dispatchEvent(new Event('submit',{cancelable:true}));link.message({type:'ticket',number:'B-223',counter:3});link.message({type:'call-arm',id:'grass'});assert.equal(link.sent.at(-1).type,'call-ready');
  const baseline=h.vibrations.length;link.message({type:'call',id:'grass',line:'Anruf.',ringAtPhoneMs:1500,ringAtUtcMs:null,leadMs:2200});assert.equal(h.node('phone-call').hidden,true);assert.equal(link.sent.at(-1).type,'call-scheduled');assert.equal(link.sent.at(-1).mode,'peer');h.tick(1499);assert.equal(h.vibrations.length,baseline);h.tick(1);assert.equal(h.node('phone-call').hidden,false);assert.ok(h.vibrations.length>baseline);h.node('phone-decline').click();const count=h.vibrations.length;h.tick(6000);assert.equal(h.vibrations.length,count);assert.equal(h.vibrations.at(-1),0);
 });
 test('a qualified UTC anchor schedules the phone when the direct peer offset is unavailable',async()=>{
  const anchor={utcOffsetMs:100000,sampledAtMs:0,uncertaintyMs:20};
  const phoneClock={sample:async()=>anchor,usable:a=>!!a,utcAt:(a,mono)=>a.utcOffsetMs+mono,monoAt:(a,utc)=>utc-a.utcOffsetMs};
- const h=harness('phone',{phoneClock});await Promise.resolve();const link=h.phoneReady();h.node('phone-name').value='Erika Mustermann';h.node('phone-form').dispatchEvent(new Event('submit',{cancelable:true}));link.message({type:'call-arm',id:'grass'});
+ const h=harness('phone',{phoneClock});await Promise.resolve();const link=h.phoneReady();h.node('phone-name').value='Erika Mustermann';h.node('phone-form').dispatchEvent(new Event('submit',{cancelable:true}));link.message({type:'ticket',number:'B-223',counter:3});link.message({type:'call-arm',id:'grass'});
  link.message({type:'call',id:'grass',line:'Anruf.',ringAtPhoneMs:null,ringAtUtcMs:101000,leadMs:2200});assert.equal(link.sent.at(-1).mode,'utc');assert.equal(link.sent.at(-1).atMs,1000);h.tick(999);assert.equal(h.node('phone-call').hidden,true);h.tick(1);assert.equal(h.node('phone-call').hidden,false);
 });
 test('replay ignores old link messages and status events',()=>{
@@ -311,14 +310,16 @@ test('a measured quick phone voice start shortens the next stalled-line watchdog
 test('a failed first phone voice also shortens the next stalled-line watchdog',()=>{
  const h=harness('phone');h.incoming();const link=h.links[0];h.node('phone-answer').click();h.tick(20);h.synth.current.onerror();h.tick(10000);h.synth.speak=()=>{};link.message({type:'police-line',index:0,line:'Können Sie mich hören?'});h.tick(1199);assert.equal(link.sent.filter(m=>m.type==='police-start'&&m.index===0).length,0);h.tick(1);const start=link.sent.at(-1);assert.equal(start.type,'police-start');assert.equal(start.index,0);assert.equal(start.mode,'fallback');
 });
-test('phone scan asks for a ticket immediately; the name can be added afterwards',()=>{
- const h=harness('phone');assert.equal(h.node('phone-ticket').hidden,true);h.phoneReady();assert.equal(h.links[0].sent[0].type,'scan');assert.equal(h.node('phone-form').hidden,false);assert.equal(h.node('phone-number').textContent,'B-223');h.node('phone-name').value='Erika Mustermann';h.node('phone-form').dispatchEvent(new Event('submit',{cancelable:true}));assert.equal(h.links[0].sent.at(-1).type,'register');assert.equal(h.node('phone-form').hidden,true);
+test('phone scan opens the form and only its submission reveals the ticket',()=>{
+ const h=harness('phone'),link=h.phoneReady();assert.equal(link.sent[0].type,'scan');assert.equal(h.node('phone-ticket').hidden,true);assert.equal(h.node('phone-form').hidden,false);
+ link.message({type:'ticket',number:'Z-7',counter:1});assert.equal(h.node('phone-ticket').hidden,true);
+ h.node('phone-name').value='Erika Mustermann';h.node('phone-form').dispatchEvent(new Event('submit',{cancelable:true}));assert.equal(link.sent.at(-1).type,'register');link.message({type:'ticket',number:'Z-7',counter:1});assert.equal(h.node('phone-number').textContent,'Z-7');assert.equal(h.node('phone-counter').textContent,'SCHALTER 1');assert.equal(h.node('phone-ticket').hidden,false);
 });
-test('phone retries the same scan until a ticket arrives',()=>{
- const h=harness('phone'),link=h.links[0];link.emit('connected',{});const first=link.sent.at(-1);h.tick(3001);const scans=link.sent.filter(message=>message.type==='scan');assert.equal(scans.length,3);assert.ok(scans.every(message=>message.id===first.id));link.message({type:'ticket',number:'B-223'});h.tick(3001);assert.equal(link.sent.filter(message=>message.type==='scan').length,3);
+test('phone retries name submission until its allocated ticket arrives',()=>{
+ const h=harness('phone'),link=h.phoneReady();h.node('phone-name').value='Erika Mustermann';h.node('phone-form').dispatchEvent(new Event('submit',{cancelable:true}));h.tick(3001);const submitted=link.sent.filter(m=>m.type==='register');assert.equal(submitted.length,3);assert.ok(submitted.every(m=>m.id===link.sent[0].id));link.message({type:'ticket',number:'B-223',counter:3});h.tick(3001);assert.equal(link.sent.filter(m=>m.type==='register').length,3);
 });
-test('name submission silently unlocks audio after the ticket',()=>{
- const h=harness('phone');let resumes=0;h.window.AudioContext=class{createGain(){return{gain:{value:0},connect(){}}}resume(){resumes++;return Promise.resolve()}};h.phoneReady();h.node('phone-name').value='Erika Mustermann';h.node('phone-form').dispatchEvent(new Event('submit',{cancelable:true}));assert.equal(resumes,1);assert.ok(h.vibrations.every(pattern=>pattern===0));assert.equal(h.fullscreenRequests.length,1);h.links[0].message({type:'ticket',number:'B-224'});assert.equal(h.node('phone-number').textContent,'B-224');assert.equal(h.node('phone-ticket').hidden,false);
+test('name submission silently unlocks audio before ticket delivery',()=>{
+ const h=harness('phone');let resumes=0;h.window.AudioContext=class{createGain(){return{gain:{value:0},connect(){}}}resume(){resumes++;return Promise.resolve()}};h.phoneReady();h.node('phone-name').value='Erika Mustermann';h.node('phone-form').dispatchEvent(new Event('submit',{cancelable:true}));assert.equal(resumes,1);assert.ok(h.vibrations.every(pattern=>pattern===0));assert.equal(h.fullscreenRequests.length,1);h.links[0].message({type:'ticket',number:'B-224',counter:3});assert.equal(h.node('phone-number').textContent,'B-224');assert.equal(h.node('phone-ticket').hidden,false);
 });
 test('incoming call repeats vibration and stops it after decline',()=>{
  const h=harness('phone');h.incoming();const first=h.vibrations.length;assert.ok(first>=1);h.tick(3000);assert.ok(h.vibrations.length>first);h.node('phone-decline').click();assert.equal(h.vibrations.at(-1),0);
@@ -368,7 +369,7 @@ test('backgrounding an active phone forfeits it and stops call audio',()=>{
  const h=harness('phone');h.incoming();h.node('phone-answer').click();h.tick(20);h.hide();assert.equal(h.node('phone-call').hidden,true);assert.equal(h.synth.speaking,false);assert.equal(h.links[0].closed,true);assert.equal(h.links[0].sent.at(-1).type,'phone-hidden');
 });
 test('ticket delivered to an already hidden phone is forfeited',()=>{
- const h=harness('phone');h.document.hidden=true;h.phoneReady();assert.equal(h.links[0].sent.at(-1).type,'phone-hidden');assert.match(h.node('phone-status').textContent,/verfallen/);
+ const h=harness('phone');h.incoming();h.hide();assert.equal(h.links[0].sent.at(-1).type,'phone-hidden');assert.match(h.node('phone-status').textContent,/verfallen/);
 });
 test('police lines queue without revealing transcripts on the phone',()=>{
  const h=harness('phone');h.incoming();h.node('phone-answer').click();h.tick(20);const first=h.synth.spoken[0].text;h.links[0].message({type:'police-line',index:0,line:'Die nächste polizeiliche Zeile.'});h.tick(20);assert.equal(h.synth.spoken.length,1);assert.equal(h.synth.spoken[0].text,first);h.synth.end();assert.equal(h.links[0].sent.at(-1).index,-1);h.tick(300);assert.equal(h.synth.spoken.length,2);assert.equal(h.synth.spoken[1].text,'Die nächste polizeiliche Zeile.');assert.equal(h.node('phone-call-line').hidden,true);h.synth.end();assert.equal(h.links[0].sent.at(-1).index,0);

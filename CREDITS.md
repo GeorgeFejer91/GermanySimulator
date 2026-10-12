@@ -17,6 +17,18 @@ The QR code renderer is [Kazuhiko Arase's qrcode-generator](https://github.com/k
 
 Frau Knick and one waiting-room visitor use static office derivatives of the pinned CC0 MakeHuman older female and male body/skin sources. `assets/models/buergeramt/PROVENANCE.md` records their source chain, deterministic builder, and hashes. The rejected towel-tourist preview GLBs are not loaded by the game. Other office visitors use original procedural Three.js geometry.
 
+The Bürgeramt first-person reply voice is cloned locally from the user's
+selected Thorsten Müller “Endlich wieder Nachschub!” recording, extended only
+with a verified recording by the same speaker to meet the profile tool's
+minimum duration. Both recordings are from the CC0 Thorsten-Voice emotional
+dataset. The existing MIT Chatterbox Multilingual V2 authoring pipeline creates
+the exact reply clips; source/profile hashes and encoded receipts are in
+`For-AI/VOICE-CAST.json` and `assets/voices/LICENSES.md`.
+The final Bürgeramt pack contains 107 exact player replies and covers all 168
+current Knick dialogue strings with her existing selected voice. Native EOS,
+encoded-word, level and hash receipts are retained; perceptual listening was
+not performed.
+
 ## Walking-motion reference
 
 The preview-only Merkel left-walk pilot uses subject 69, trial 01 (“walk

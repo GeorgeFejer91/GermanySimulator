@@ -37,7 +37,7 @@ test('the accepted second profile retains candidate one and supplies default exa
  assert(clip.wordCues.every((cue,i)=>cue.at>=0&&cue.at<clip.durationSeconds&&(!i||cue.at>=clip.wordCues[i-1].at)&&text.slice(cue.charIndex).startsWith(cue.word)));
 });
 test('recording playback owns the word contour and only its real end starts the stare',()=>{
- const {h,player}=recorded();assert.equal(h.synth.current,null);assert.equal(player.src,path);
+ const {h,player}=recorded();assert.equal(h.synth.current,null);assert.equal(player.src,path+'?v='+h.level.omen.speech.recordingSha256);
  assert.equal(h.level.omen.speech.recording,path);assert.equal(h.level.omen.speech.durationMs,4760);
  player.at(1.6);assert.equal(h.level.omen.speech.charIndex,text.indexOf('Finsternis'));assert.equal(h.level.omen.speech.timing,'recording-cues');
  player.currentTime=1.71;h.level.update(.016);assert.equal(h.level.omen.speech.mediaTime,1.71,'mouth clock reads native playback between timeupdate events');

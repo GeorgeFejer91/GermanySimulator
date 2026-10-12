@@ -17,10 +17,11 @@ const library=context.window.GermanySimulatorAudioText;
 assert.equal(library.version,8);
 const knickCount=['manifest.json','ambient-manifest.json'].reduce((n,file)=>n+(existsSync(join(root,'assets/voices/knick',file))?JSON.parse(readFileSync(join(root,'assets/voices/knick',file),'utf8')).clips.length:0),0);
 const streetDirectory=join(root,'assets/voices/street-wisdom'),streetCount=existsSync(streetDirectory)?readdirSync(streetDirectory).filter(file=>file.endsWith('-manifest.json')).reduce((n,file)=>n+JSON.parse(readFileSync(join(streetDirectory,file),'utf8')).clips.length,0):0;
-assert.equal(Object.keys(library.clips).length,113+knickCount,"recorded and text-only dialogue need stable IDs");
+const playerManifest=join(root,'assets/voices/player-replies/spieler-hans-peter-mustermann-manifest.json'),playerCount=existsSync(playerManifest)?JSON.parse(readFileSync(playerManifest,'utf8')).clips.length:0;
+assert.equal(Object.keys(library.clips).length,113+knickCount+playerCount,"recorded and text-only dialogue need stable IDs");
 const recordedClips=Object.values(library.clips).filter(clip=>clip.recording);
-assert.equal(recordedClips.length,98+knickCount+streetCount,"retired clerk, traffic and anonymous rule takes must not ship");
-assert.equal(new Set(recordedClips.map(clip=>clip.path)).size,98+knickCount+streetCount,"recorded clip paths must be unique");
+assert.equal(recordedClips.length,98+knickCount+streetCount+playerCount,"retired clerk, traffic and anonymous rule takes must not ship");
+assert.equal(new Set(recordedClips.map(clip=>clip.path)).size,98+knickCount+streetCount+playerCount,"recorded clip paths must be unique");
 for(const clip of Object.values(library.clips)){
  assert.ok(library.voices[clip.voiceId],`${clip.id} needs a registered voice ID`);
  if(clip.targetVoiceId)assert.ok(library.voices[clip.targetVoiceId]?.profileId,`${clip.id} needs a saved replacement profile`);
@@ -30,7 +31,7 @@ for(const clip of Object.values(library.clips)){
  if(clip.recording)assert.ok(existsSync(join(root,clip.path.slice(2))),`${clip.id} points to a missing recording`);
 }
 const cast=JSON.parse(readFileSync(join(root,'For-AI/VOICE-CAST.json'),'utf8'));
-assert.equal(new Set(Object.values(cast.productionVoices).map(voice=>voice.profileId)).size,61,"selected production roles need distinct saved profiles");
+assert.equal(new Set(Object.values(cast.productionVoices).map(voice=>voice.profileId)).size,Object.keys(cast.productionVoices).length,"selected production roles need distinct saved profiles");
 assert.equal(library.voices.narrator.profileId,undefined,"the official computer voice uses browser speech");
 assert.equal(library.clips["rule-01"].targetVoiceId,undefined,"recorded rules must not target a retired narrator clone");
 for(const family of ['bayern','alice'])assert.equal(library.speechFamilies[family].profileVoiceId,undefined,"source recordings must not retain removed generation profiles");

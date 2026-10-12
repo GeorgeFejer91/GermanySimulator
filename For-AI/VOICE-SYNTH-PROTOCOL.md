@@ -6,12 +6,23 @@
 
 Read this section before using the older production history below. A character keeps one stable game `voiceId` and one selected Secret Tunnel UUID, original-audio hash, normalized-reference hash, renderer, model revision, and processing recipe in `productionVoices`. Names help people browse; UUIDs and hashes establish identity. Never generate by a loosely matched name. Historical `secretTunnel`/`secretTunnelProfileId` records in the cast preserve earlier source provenance; runtime `voices`, `castVoices` and `roleVoices` all expose the current production binding. Historical IDs are not permission to select an older voice. `productionExceptions` permits only the explicitly approved Horst omen clip to use his second official profile. His preserved first candidate remains available for review.
 
-Brunhilde Knick's selected voice is the existing approved fever profile `b080c7d95ecd418fb428282461d7fbe7`, now named `GS Brunhilde Knick (amt-brunhilde-knick)`. Reuse her approved exact lines. New questions, replies, phone warnings and arguments must use that reference, the pinned Chatterbox Multilingual V2 renderer and the same quiet undertone. Switching engine with the same UUID is a voice change requiring a deliberate whole-character review. Default, preview and fever-preview lookup must all reject her earlier primary takes. Knick uses `fallback: "captions"`: unavailable, rejected or failed recordings and dynamic ticket/name strings remain exact visible text without a different browser voice. Other characters retain their documented browser fallback; a production profile binding alone does not prove complete recorded coverage. Her three decorative counter remarks use the existing speech lifecycle with a 0.22 volume scale.
+Brunhilde Knick's selected voice is the existing approved fever profile `b080c7d95ecd418fb428282461d7fbe7`, now named `GS Brunhilde Knick (amt-brunhilde-knick)`. Reuse her approved exact lines. New questions, replies, phone warnings and arguments must use that reference, the pinned Chatterbox Multilingual V2 renderer and the same quiet undertone. Switching engine with the same UUID is a voice change requiring a deliberate whole-character review. Default, preview and fever-preview lookup must all reject her earlier primary takes. Knick uses `fallback: "captions"`: unavailable, rejected or failed recordings and dynamic ticket/name strings remain exact visible text without a different browser voice. Other characters retain their documented browser fallback; a production profile binding alone does not prove complete recorded coverage. Registration uses her selected voice; the other desk actors have separate selected profiles under the counter audit below.
 
 Named pedestrian barks pass a direct MP3 only when its recorded `voiceId`
 matches the actual person's `voiceId`. Other authored pool bodies resolve
 through that person's selected lookup and documented fallback. A legacy
 Thorsten recording cannot borrow a named passerby's identity.
+
+The 2026-10-12 counter audit gives all fifteen in-room Bürgeramt people distinct
+selected UUIDs and normalized reference hashes. Erna Frist (Schalter 1), Ottilie
+Durchschlag (2) and Hedwig Zuständig (4) now have dedicated saved CC0 EmoDB
+profiles. Their references and native creation receipts remain in Music's
+`GermanySimulator counter clerk references 2026-10-12/`; `VOICE-CAST.json`
+owns their exact source-file hashes and selected bindings. Refusals and ambient
+remarks route through those identities; absent recordings retain captions.
+Knick remains the owner of the existing registration and police argument.
+No new dialogue recording or listening acceptance is claimed. Run
+`tests/buergeramt-clerk-voices.test.mjs` alongside the live curator check.
 
 The unlisted `character-review.html` uses the same eleven rule IDs for its
 three adviser profiles, retaining their existing `crowd-*` deep links. It
@@ -36,15 +47,209 @@ the 68-recording cleanup above: 85 archived recordings in total.
 `fixed-voice-retirements-index.json` retains each old path/hash, its immutable
 private copy and the exact snapshotted manifest row; it is separate from
 `asset-index.json` because an eligible new take can reuse an old public path.
-The final bounded request accounts for 182 slots: 150 playable recordings and
-32 caption holds (30 independent word mismatches and two failed native EOS).
-Main Knick is 141/27, her ambient supplement 3/0, and the three advisers 6/5.
+The 2026-10-11 bounded request accounted for 182 slots: 150 playable recordings
+and 32 caption holds (30 independent word mismatches and two failed native EOS).
+At that point main Knick was 141/27, her ambient supplement 3/0, and the three advisers 6/5.
 Guarded date normalization equates `am 5.` with `am Fünften`; it cannot equate
 a different day, a cardinal number or a decimal. This changes no audio or
 independent transcript. Historical crowd auditions remain private provenance
 after the three advisers acquire exact rule decks; they do not become new
 playable rules. The private-take audit permits only these explicit ownership
 changes and retired future-profile targets, retaining script/hash checks.
+
+## Bürgeramt player replies and complete Knick dialogue (2026-10-12)
+
+The user selected the actual shipped `thorsten-amused-nachschub.mp3` recording
+as the player's voice: “the one that sed to say, endlich wieder nachschub, just
+clone this voice as our own”. The distinct saved player profile is
+`b027d18a4fc748cabb133fbb14077500`, named `GS Hans-Peter Mustermann (Nachschub player)`.
+The stable game ID remains `spieler-hans-peter-mustermann`. Its original WAV
+hash is `4f4b181750c65430c68d20d742b02529f5e5db6650cb57171fe2e52ea8ee2dbf`;
+its normalized reference hash is
+`6b6ff2c747ef11fb883fc1c9804d270c6ba34cc5614db4d132f8e6172b9f60ad`.
+The selected clip is 1.44 seconds; the installed native profile API requires
+three seconds of clear speech. The reference therefore starts with that clip
+and appends the same speaker's shipped CC0 “Nein, ich gehe hier nicht weg!”
+recording, producing 3.570 seconds. Exact source hashes and transcript are in
+`productionVoices` and the private office-reply provenance receipt. The former
+EmoDB player profile remains preserved historical provenance, and its candidate
+takes are excluded from selected-profile lookup.
+
+Use the existing `build-knick-voice.py --request-file` pipeline with family
+`office-replies`, an exact frozen story/runtime request and explicit player
+voice ID. The authored family has 104 registration choices, two phone-warning
+choices and the final document-taking choice. Each recording reads the exact
+visible label. Player takes use the pinned Chatterbox renderer without Knick's
+undertone; Knick keeps her selected profile and processing. Profile hashes,
+explicit native EOS, independent final-MP3 ASR without a script prompt, levels
+and encoded hashes remain required. There is no synthesis model in the browser.
+
+The integrator authorized a bounded rescue for held reachable Knick lines:
+`--sentence-rescue --plan`, `--render` and `--process` reuse the same authoring
+pipeline. Freeze exact sentence/phrase boundaries, retain failed whole-line
+receipts, allow at most one retake per part, and concatenate the dry parts.
+Apply the selected undertone and normalization once to the joined full line.
+Every part records its text, voice/profile/reference, raw and encoded hashes,
+native EOS and independent ASR. The joined encoded MP3 must independently match
+the complete authored text before promotion. Word mismatches or mixed profiles
+remain private. Use authorization and technical checks establish no perceptual
+listening result.
+
+The bounded office audit also supports `--device cpu --precision fp32` in the
+same cached renderer; CUDA remains the default. Device enters the renderer
+cache key and receipts. Conditioning stays FP32 on either device. Never load
+the renderer and independent ASR concurrently on this laptop. The two initial
+CUDA player samples reached EOS but added words and remain rejected privately.
+One first-answer delivery edit preserves the full rejected source and records
+its sample-exact endpoint inside a measured silent interval; this limited
+experiment is not permission for automatic speech cropping. The second answer's
+single CPU retake passed whole-file independent ASR without editing.
+
+`--observe-eos` records native EOS suppression and analyzer-forced stops.
+`--eos-after-alignment` is an explicit bounded diagnostic, off by default: it may
+restore only the original model EOS logit when completion was already true and
+the native analyzer would suppress EOS after attention regresses. Every other
+native guard remains active, and the installed package is unchanged. Record the
+native analyzer source hash, per-step private trace, exact policy and restoration
+count. Distinguish `model-sampled`, `analyzer-forced` and `budget-exhausted` in
+receipts. The accepted second-answer diagnostic restored zero logits; this does
+not establish that the experimental policy caused its success. Final encoded
+words and levels remain decisive before any production batch.
+
+The authoring helper releases only native attention hooks added during the
+completed T3 call, using each module's prior hook keys as its baseline. Cleanup
+runs after inference and preserves existing hooks and decoder guards. The
+private `hook-cleanup-benchmark.json` compares one selected Knick line at seed
+71019 in CUDA FP16: cleanup off/on produced the identical raw-array SHA
+`ad21dec2e7681eabac142c1357c50ea9ccce73fb2205c145cd84bfcecd16bab0`.
+The preserved benchmark receipt hash is
+`4682093a82d299765d0c0c87b845f59e0b0230f2ad5e6f2916b2dadc911144d2`.
+Current production receipts record zero hooks before and after the completed
+call. This comparison verifies that lifecycle repair for the tested take; it
+does not establish a cause for later word errors or CPU allocator growth.
+The current unchanged native T3 source hash is
+`6d8be2af8fa203e755d5316d817b73ca8e2a385204b8e4efe92c6446595c71b1`;
+the analyzer hash is
+`d8430efa92aedb8e59b782c1d299fe7238570eecea9d293c0981a5ee2e82c8c7`.
+
+Long failed-part archive filenames use native extended absolute paths on
+Windows, preserving names and hashes without a system-setting change. The
+archive move refuses overwrite and checks bytes after moving. The authoring
+regression exercises an actual destination longer than 260 characters inside
+the verified workspace output directory and checks rejection of an overwrite.
+
+A private fixed-input CPU benchmark compared two and four threads at seed
+71000 for the selected player's “Den Fünften eintragen.” reference and pinned
+renderer. Both independent encoded-file audits matched every word, with native
+model-sampled EOS, 57 speech tokens, restoration off, -18.15 LUFS and about
+-2.6 dBTP. Raw hashes differed and both benchmark takes remain private. Render
+time was 14.25 versus 12.24 seconds; T3 inference was 6.14 versus 5.75 seconds.
+The four-thread take reused the loaded model, so this single result does not
+establish a general 14% speedup. The minimum reported available RAM was 3.347
+GiB. Subsequent bounded CPU cohorts may use four threads under the integrator's
+authorization; `--cpu-threads` defaults to two and receipts record the actual
+count. FP32 conditioning, the native decoder guards, profile and word gates
+remain the same. The private `cpu-thread-benchmark` folder retains both full
+raw/encoded recordings, per-step EOS traces and render/audit comparisons.
+
+Named exceptions permit actual synthesis attempt 3 only for player phrases
+`player-registration-provider-2-part-01`, “Nur die Eigentümerin”,
+`player-registration-dossierfix-2-part-02`, “getrennt vorlegen.”, and
+`player-registration-printer-2-part-02`, “wenn er sich beruhigt.”. Each pair of
+failed whole-phrase takes and their traces remains archived. The private driver supplies
+the integrator's exact receipt SHA
+`3d6b24b172b12df48d8c014233643c392e194f8d3f4634fdb529b6fa31fc29eb`,
+`78d4964b64adfced9d7dd9e909e50505562877367b4d1625eb39d5febee6a212`, or
+`8271c9687f68ff55039ff4708efe77f2502e3cd9d4a99d6a81a878a05216412e`, respectively;
+the helper verifies the named text/profile, previous actual attempt and raw/MP3
+hashes before archiving attempt 2 and recording attempt 3 with that authority.
+The default cap remains two, with no implicit retry after a crashed third call.
+The reference, renderer, punctuation, dry recipe and native guards stay fixed;
+fresh native EOS, complete encoded independent exact ASR and levels still decide
+eligibility. These named exceptions permit no delivery edit or bulk retry.
+
+A fourth narrowly reviewed exception permits actual take 3 only for
+`knick-registration-residencefix-segment-01`, the unchanged word “Hauptwohnung”,
+under authority SHA
+`38d5b2f9852ca3727dc292bca86ccf4c2d147790a6f3b44315f5a807c3ea6733`.
+Both failed native takes and all four no-prompt source recognition readings
+remain preserved. The extra call changes no words, reference, model, processing,
+precision or decoder guards; it records its actual call count and fresh seed.
+The isolated encoded word and complete joined line still need exact ASR and
+levels. This exception grants no crop or general third-take allowance.
+
+Phone warning 1's first dry join failed four independent full-file ASR readings
+despite all five part recordings matching their scripts. A separate named
+authority, SHA `1bbd6efbfb5a6d0c630e256101ba9203de775e44bc7c8567d1f982b1835a30c4`,
+permits only ordinary actual take 2 of `knick-phone-warning-1-part-04`.
+The successful first part audit stays truthful. The helper checks that part's
+raw/MP3 hashes, the failed complete join and its independent localization
+receipts, then bypasses only the named successful-part skip. The ordinary cap
+stays two. A rebuilt join must retain every other part byte-identically and
+archive the failed join before applying the selected undertone once and auditing
+the whole new encoded MP3. ASR timestamps selected a section to repair; they do
+not establish listening or prove an extra spoken word.
+
+Some separately reviewed office deliveries retain an exact complete opening
+utterance from a failed full take. Each named review binds the original raw,
+encoded file, full native EOS trace and a sample-exact endpoint within at least
+0.2 seconds of measured silence at -38 dB. Originals and conflicting readings
+remain immutable. The native EOS belongs to the complete source generation;
+there is no EOS claim at the delivery cut. Final encoded parts and complete
+joined answers need fresh independent exact-word and level checks.
+`complete-prefix-extra-tail` requires the original ASR to contain the complete
+exact prefix followed by unwanted words. The distinct
+`post-speech-silence-boundary` kind requires an exact isolated source reading,
+a 50 ms word-end margin and measured quiet before unclassified later activity.
+It does not reinterpret that activity as speech or invent a next-word bound.
+The reviewed dossier boundary additionally requires both independent beams 1
+and 5 to match its final encoded phrase. Unknown proof kinds fail in both the
+Python builder and JavaScript curator; these named edits do not authorize
+general speech cropping or editing a source without native EOS.
+
+Only `knick-registration-identityfix`, `knick-registration-movein` and
+`knick-registration-residencefix` have
+explicit complete-file segmented recognition authorities. Their unchanged
+final MP3s use `asrVerificationMode: "full-encoded-contiguous-chunks"` rather
+than a fabricated successful continuous reading. FFmpeg 8.0.1 decodes mono
+16 kHz IEEE754 little-endian float32 with no filters; every positive sample
+interval covers `[0,N)` exactly once, including the final decoded padding.
+The builder and curator pin each authority, original failed receipt,
+diagnostic, current MP3, complete PCM, every chunk PCM, selected owner/reference,
+source-part ID/text/raw/encoded hash and the reviewed matching reading.
+Null prompts, exact chronological combined words and complete contiguous
+coverage are mandatory. Original continuous readings and all chunk conflicts
+remain available; movein's final chunk selects matching beam 5 while retaining
+the differing beam 1. This changes recognition context, not audio, processing
+or native EOS, and grants no automatic override for another clip. Regression
+cases reject unknown modes, hash/owner/text/prompt drift, gaps, overlap,
+truncation, missing preserved failures and wrong chunk words or source order.
+Residencefix's exact real source IDs are `part-01`, `context-01`, `segment-03`
+and `part-03` in that order; the registry binds them without renaming parts.
+Its accepted context phrase reads “Hauptwohnung bestimmen wir anhand der
+maßgeblichen tatsächlichen Nutzung”; all four continuous full-line readings
+instead recognize the plural “Hauptwohnungen” and remain preserved. Named
+authority SHA
+`106ecd1bf77ca16865610edf4f21c4e89fe153b2d1105256c4f4939e5147a86f`
+binds its unchanged final MP3 and complete contiguous PCM evidence.
+Word-exact metadata here means the complete encoded file passed this documented
+recognition mode; it does not claim consensus, single-pass agreement or listening.
+
+The final 2026-10-12 public pack covers all **107 player labels** and all
+**168 current Knick strings**. `player-replies/spieler-hans-peter-mustermann-manifest.json`
+has 107 eligible takes and no holds. `knick/manifest.json` has 167 eligible
+takes and one held unused historical `knick-counter-3` slot; the current refusal
+reuses approved `amt-fever/amt-brunhilde-knick-fever-22.mp3` under the same selected
+Knick profile. The three eligible ambient takes remain in the separate unchanged
+manifest. Current target coverage has no missing recording. The 107 labels have
+107 distinct exact texts. Player audio is 6,036,580 bytes / 370.899 seconds;
+main Knick audio is 21,739,060 bytes / 1348.966 seconds. All new shipping MP3s are
+mono 48 kHz / 128 kbit/s and pass -18 LUFS ±0.3 with true peak at most -1.5 dBTP.
+Failed raw/encoded takes, source snapshots, native traces and removed expiry/name
+recordings remain privately hash-verifiable. Models and reference WAVs never
+enter the shipped game. The catalogue admits only the chosen exact text on the
+existing speech lifecycle; answer audio finishes before Knick continues.
+Use authorization remains separate from perceptual listening, which was not performed.
 
 ## Nearby street-rule speakers (2026-10-11)
 
@@ -90,7 +295,7 @@ catalogue entries with the actual user approval, as the individually approved
 omen does. Do not pass their queue to the primary promoter as though alternate
 profile bindings or seven listening decisions had been verified.
 
-`buergeramt-voice-profiles.js` defines distinct, intelligible Kafkaesque fever-dream delivery for the eight moving regulars, Brunhilde Knick, and three named patrons. Its `window.BuergeramtVoiceProfiles.byVoiceId` entries hold demeanor, rhythm, texture, an exact existing sample line, a **non-spoken** synthesis brief, the saved `candidateProfileId` with `candidateStatus: "private-unlistened"`, and immutable browser `rate`/`pitch` hints; `deliveryFor(voiceId)` returns those two browser hints or `null`. Horst's omen fallback remains `0.82`/`0.72`, and its user-approved candidate-2 recording remains the default at that exact cue. The two decorative desk figures share Brunhilde's identity and receive no extra speaker profile.
+`buergeramt-voice-profiles.js` defines distinct, intelligible Kafkaesque fever-dream delivery for the eight moving regulars, four named clerks, and three named patrons. Its `window.BuergeramtVoiceProfiles.byVoiceId` entries hold demeanor, rhythm, texture, an exact existing sample line, a **non-spoken** synthesis brief, the saved `candidateProfileId` with `candidateStatus: "private-unlistened"`, and immutable browser `rate`/`pitch` hints; `deliveryFor(voiceId)` returns those two browser hints or `null`. Horst's omen fallback remains `0.82`/`0.72`, and its user-approved candidate-2 recording remains the default at that exact cue. The former decorative desk copies have separate named identities and selected profiles under the 2026-10-12 counter audit above.
 
 The installed Secret Tunnel v6 native CLI saved the following **private alternate profile candidates** from lightly pitch-shifted and band-limited copies of each speaker's existing EmoDB reference. These are additional profile UUIDs, not replacements for the primary UUIDs in `VOICE-CAST.json` or for Horst's official candidate 2:
 
@@ -139,13 +344,13 @@ Runtime lookup now gives a reviewed exact voice/text recording precedence even w
 
 After changing the release lookup, run `node tools/playtest-reviewed-voice-route.mjs` with Playwright available (`PLAYWRIGHT_MODULE` can name the installed package path). It serves a temporary approved police grass line only inside the test browser and checks default, opt-in preview, and approved precedence over a legacy recording. `node tools/playtest-amt-audio-handoff.mjs` separately checks city/Bürgeramt speech handoff on desktop and mobile with a stubbed 3D renderer; neither browser test approves the sound of a candidate.
 
-Run `node tools/audit-modeled-voice-coverage.mjs --check` when changing modeled characters or speaker bindings. [`VOICE-MODEL-COVERAGE-AUDIT.json`](./VOICE-MODEL-COVERAGE-AUDIT.json) checks 56 new nonpolitical profile UUIDs, the named city and crowd speaker IDs, player/police/towel bindings, and the six static Bürgeramt figures against the current cast and model source. Two clerk figures are explicitly decorative clones, not additional speakers. The optional eight-model street pack is a set of visual templates applied to existing NPC state: its asset titles are not separate displayed game identities and do not justify eight duplicate voice profiles. [`persona-map.js`](../assets/models/street-characters/persona-map.js) now assigns the 19 city and twelve crowd speaker IDs to explicit meshes with matching declared gender presentation and a documented demeanor rationale; an unknown named speaker keeps the existing sprite. A forced visual-debug URL can override the mesh only for inspection. Rendered persona fit still needs review before accepting this opt-in pack. If a template becomes a distinct speaking character, give it a stable named `voiceId`, a cast entry, and its own Secret Tunnel profile before authoring audio. This source audit does not replace rendered or audible review.
+Run `node tools/audit-modeled-voice-coverage.mjs --check` when changing modeled characters or speaker bindings. [`VOICE-MODEL-COVERAGE-AUDIT.json`](./VOICE-MODEL-COVERAGE-AUDIT.json) checks 56 new nonpolitical profile UUIDs, the named city and crowd speaker IDs, player/police/towel bindings, and the six static Bürgeramt figures against the current cast and model source. The earlier visual audit describes shared clerk artwork; the current four named desk speakers have separate selected profiles under the 2026-10-12 counter audit. The optional eight-model street pack is a set of visual templates applied to existing NPC state: its asset titles are not separate displayed game identities and do not justify eight duplicate voice profiles. [`persona-map.js`](../assets/models/street-characters/persona-map.js) now assigns the 19 city and twelve crowd speaker IDs to explicit meshes with matching declared gender presentation and a documented demeanor rationale; an unknown named speaker keeps the existing sprite. A forced visual-debug URL can override the mesh only for inspection. Rendered persona fit still needs review before accepting this opt-in pack. If a template becomes a distinct speaking character, give it a stable named `voiceId`, a cast entry, and its own Secret Tunnel profile before authoring audio. This source audit does not replace rendered or audible review.
 
-To verify the installed Secret Tunnel against the game cast, run `python tools/audit-live-secret-tunnel-profiles.py --music-root "<German emotional voice databases>" --secret-tunnel-exe "<installed secret-tunnel-v6.exe>" --voice-resources "<installed resources/voice>"`; add `--check` to compare with the saved Music report. It checks the configured shared root and all 61 selected UUIDs, names, uploaded-original hashes, normalized-reference hashes and saved audio bytes. The exact Horst scene exception and preserved first candidate are protected; unrelated profiles stay outside game cleanup. Live profile integrity establishes identity binding, not audible performance or game release approval.
+To verify the installed Secret Tunnel against the game cast, run `python tools/audit-live-secret-tunnel-profiles.py --music-root "<German emotional voice databases>" --secret-tunnel-exe "<installed secret-tunnel-v6.exe>" --voice-resources "<installed resources/voice>"`; add `--check` to compare with the saved Music report. It checks the configured shared root and all 64 selected character UUIDs and the exact scene exception, names, uploaded-original hashes, normalized-reference hashes and saved audio bytes. The exact Horst scene exception and preserved first candidate are protected; unrelated profiles stay outside game cleanup. Live profile integrity establishes identity binding, not audible performance or game release approval.
 
 For the first Bürgeramt episode, keep two separate speaker pipelines: the user-selected `GS Kriminalpolizei` profile (`kriminalpolizei`) on the phone and Brunhilde Knick (`amt-brunhilde-knick`) at Schalter 3. Heinrich Wachtmeister (`polizei-heinrich-wachtmeister`) retains the city police role. The phone replacement was explicitly requested on 2026-10-10; its exact saved UUID, original/reference hashes, newly authored text, selected takes, final MP3 hashes and encoded-word checks are in `assets/voices/kriminalpolizei/manifest.json`. It plays by default for this family, with exact-text browser speech on failure. Full listening review remains unperformed and must not be claimed. Brunhilde uses her selected fever reference and processing for all newly recorded lines; her old primary profile is archived. A YouTube URL alone does not grant reuse or cloning permission. Render each exact visible line, inspect a short sample, then verify the entire recording by listening and transcription before general catalog approval. A quiet radio layer on the phone must stop with its speech.
 
-Knick’s authored recording batch covers 156 registration graph lines and twelve fixed counter/outburst/warning/status lines, plus three separate ambient remarks. The manifests record every attempted line, eligible take and held failure. Dynamic ticket and name sentences and the exact `ANMELDESCHALTER` forfeiture notice retain Knick’s caption fallback. Never substitute a generic browser voice for an unavailable Knick take.
+The current Knick target covers 156 registration graph lines and twelve fixed refusal/outburst/warning/status lines, all recorded, plus three eligible separate ambient remarks. Her introduction and completion now have fixed authored words. The only held main-manifest slot is an unused historical A38 exchange outside the current target. Future dynamic or unavailable speech retains her caption fallback; the expired appointment is a companion-page stamp followed by a manual fresh QR scan. Never substitute a generic browser voice for Knick.
 
 Heinrich also speaks four exact region-specific lines while his visible police model arrests and escorts a crowd character. [`VOICE-POLICE-ESCORT-QUEUE.csv`](./VOICE-POLICE-ESCORT-QUEUE.csv) binds those lines to Heinrich's existing profile and records their triggers. All four now have private native MP3s with `take.json` receipts under the Music library's `GermanySimulator Whisper-scored private candidates 2026-10-08/`; row-order Whisper scores are 100%, 100%, 67%, and 78%. The two lower scores include `Spiel-Knast`/`Spielknast` orthography, and the Berlin completion transcript also hears `ist` for scripted English `is`. Preserve those raw scores and inspect the audible words; none of the four has passed human listening review or entered the game catalogue. The runtime passes the speaking officer's `voiceId` to candidate lookup, so an accepted clip can replace browser speech without changing the character identity. The police car and helicopter announcements are institution/vehicle speech without a modeled human speaker; keep them separately attributed.
 
@@ -175,9 +380,9 @@ For the 236 opt-in Chatterbox preview lines, `tools/audit-voice-candidate-audio.
 
 For level-matched auditioning, `tools/prepare-voice-listening-copies.py --game-root <checkout> --ffmpeg <absolute ffmpeg.exe> --output-dir <private Music folder>` creates separate MP3s and a source/output hash manifest without editing game assets. Its `--verify-only` pass independently measures the encoded outputs, hashes, duration, loudness, and true peak. The current `GermanySimulator normalized voice review 2026-10-09/` folder has 236 verified copies between -18.29 and -17.77 LUFS and no true peak above -1.58 dBTP. One high-crest Brunhilde copy needed the recorded compressor fallback; compare it with its original before judging emotion or texture. `tools/review-normalized-listening-words.py` independently transcribes these re-encoded MP3s with the German-pinned Secret Tunnel Whisper helper and saves a resumable `word-review.json`/`.csv` in that folder. Of 236 encoded copies, 168 reach diagnostic 100% and 68 need word listening. The tool also compared the 18 normalized nonliteral clips whose original manifest had been literal using the same Whisper helper on the original MP3s; three scored 100% only on the original. The queue puts those three first for side-by-side listening, then the other 65 encoded word checks, one original-word comparison, one compressed-delivery check, and 166 full listening checks. A changed ASR transcript does not prove changed audible words. These are private listening aids; passing levels or ASR does not promote an MP3 to gameplay. If a take is accepted, recheck the actual chosen output and update its provenance/hash in the game catalogue.
 
-Read `castVoices`, `roleVoices`, `voices`, and `speechFamilies` in the catalog before making a new profile. The 56 name-bearing v6 cast and role profiles in `VOICE-CAST.json` include 45 nonpolitical modeled speaking identities (three are static Bürgeramt patrons with authored browser-speech interactions), nine separately displayed quiz-portrait speakers, and two towel-archetype review voices. The current production projection adds the selected asset-source and user-directed phone/Merz/Merkel profiles, for 61 fixed bindings. A previously saved `GS narrator` profile is retired and has no game binding; official documents and mission guidance use browser speech.
+Read `castVoices`, `roleVoices`, `voices`, and `speechFamilies` in the catalog before making a new profile. The 56 name-bearing v6 cast and role profiles in `VOICE-CAST.json` include 45 nonpolitical modeled speaking identities (three are static Bürgeramt patrons with authored browser-speech interactions), nine separately displayed quiz-portrait speakers, and two towel-archetype review voices. The 2026-10-11 projection had 61 fixed bindings; the current counter-clerk extension brings the production character count to 64, with the exact Horst scene exception retained. A previously saved `GS narrator` profile is retired and has no game binding; official documents and mission guidance use browser speech.
 
-The modeled speaking 45 are the 19 named city pedestrians, eight Bürgeramt walkers, twelve named moving crowd identities, Hans-Peter Mustermann, Heinrich Wachtmeister, Brunhilde Knick, and three static Bürgeramt patrons: Konrad Wohnungszettel (`renter`), Mechthild Elternbogen (`parent`), and Wolfram Rentenbescheid (`pensioner`). The patrons now have exact named interactions; browser speech remains their fallback until reviewed cloned takes are available. Their demeanor directions are supported by artwork and those short authored lines, with perceptual casting review still pending. Two additional desk sprites reuse Brunhilde's artwork as decorative copies, not separate speaking identities. Günther Liegestuhl and Walburga Handtuch label the towel sprite archetypes used by the moving crowd; they have separate audition profiles but are not additional spawned NPC identities. The nine quiz people have their own portraits and spoken quiz identities, while a moving crowd NPC supplies the encounter's world sprite. Thus 56 saved profiles must not be reported as 56 separately modeled actors. The four special city sprites (`borderPourer`, `merkel`, `bayern`, `alice`) depict political figures outside this nonpolitical casting goal; vehicle and helicopter announcements and the unmodeled `PFÖRTNERIN` text are not new modeled human identities.
+The modeled speaking 45 are the 19 named city pedestrians, eight Bürgeramt walkers, twelve named moving crowd identities, Hans-Peter Mustermann, Heinrich Wachtmeister, Brunhilde Knick, and three static Bürgeramt patrons: Konrad Wohnungszettel (`renter`), Mechthild Elternbogen (`parent`), and Wolfram Rentenbescheid (`pensioner`). The patrons now have exact named interactions; browser speech remains their fallback until reviewed cloned takes are available. Their demeanor directions are supported by artwork and those short authored lines, with perceptual casting review still pending. Erna Frist, Ottilie Durchschlag and Hedwig Zuständig are distinct named desk speakers with separate selected profiles; shared source artwork does not merge their voice identities. Günther Liegestuhl and Walburga Handtuch label the towel sprite archetypes used by the moving crowd; they have separate audition profiles but are not additional spawned NPC identities. The nine quiz people have their own portraits and spoken quiz identities, while a moving crowd NPC supplies the encounter's world sprite. Thus 56 saved profiles must not be reported as 56 separately modeled actors. The four special city sprites (`borderPourer`, `merkel`, `bayern`, `alice`) depict political figures outside this nonpolitical casting goal; vehicle and helicopter announcements and the unmodeled `PFÖRTNERIN` text are not new modeled human identities.
 
 Brunhilde’s current UUID is `b080c7d95ecd418fb428282461d7fbe7`. Her EmoDB source provenance remains in the cast, while `productionVoices` records the selected original/reference hashes, renderer and undertone.
 

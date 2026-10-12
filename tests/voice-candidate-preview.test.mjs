@@ -89,7 +89,8 @@ for(const clip of originalCandidates){
  assert.equal(clip.profileId,owners.get(clip.voiceId)?.profileId,`profile binding ${clip.clipId}`);
  assert.equal(clip.referenceSha256,owners.get(clip.voiceId)?.referenceSha256,`reference binding ${clip.clipId}`);
  const official=off.candidateClip(clip.voiceId,clip.text);
- assert.equal(on.candidateClip(clip.voiceId,clip.text),official||(clip.retiredReason?null:clip.path));
+ const selected=cast.productionVoices[clip.voiceId],oldProfile=selected&&clip.profileId!==selected.profileId;
+ assert.equal(on.candidateClip(clip.voiceId,clip.text),official||(clip.retiredReason||oldProfile?null:clip.path));
  const fever=JSON.parse(source('./assets/voices/amt-fever/manifest.json')).clips.find(c=>c.voiceId===clip.voiceId&&c.text===clip.text);
  const knick=JSON.parse(source('./assets/voices/knick/manifest.json')).clips.find(c=>c.voiceId===clip.voiceId&&c.text===clip.text);
  assert.equal(official,clip.clipId==='amt-horst-stempelmann-03'?'./assets/voices/horst-stempelmann/omen-candidate-02.mp3':knick?'./'+knick.file:fever?'./'+fever.path:null);
@@ -122,6 +123,6 @@ assert.ok(game.includes("speechCatalog.candidateSequence?.(id,candidateSegments)
 assert.ok(game.includes("n.voiceId"));
 assert.ok(game.includes("candidateVoiceId:n.voiceId"));
 assert.ok(game.includes('candidateVoiceId:"polizei-heinrich-wachtmeister"'));
-assert.ok(amt.includes("story.clerkIdentity.voiceId"));
+assert.ok(amt.includes("clerk?.voiceId"),"each selected counter clerk must request her own voice");
 assert.ok(amt.includes("candidateClip?.(voiceId,text)"));
 assert.ok(phone.includes('catalog?.recordedClip?.(voiceId,text)||catalog?.candidateClip?.(voiceId,text)'));

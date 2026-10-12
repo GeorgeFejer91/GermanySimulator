@@ -1,5 +1,7 @@
 (function(){"use strict";
 const invitation=BuergeramtLink.fromHash(),number=document.getElementById("phone-number"),status=document.getElementById("phone-status"),admission=document.getElementById("phone-admission-status"),form=document.getElementById("phone-form"),name=document.getElementById("phone-name"),submit=document.getElementById("phone-submit"),ticket=document.getElementById("phone-ticket"),call=document.getElementById("phone-call"),choices=document.getElementById("phone-choices"),answer=document.getElementById("phone-answer"),decline=document.getElementById("phone-decline"),track=document.getElementById("phone-answer-track"),callState=document.getElementById("phone-call-state"),activeControls=document.getElementById("phone-active-controls"),hangup=document.getElementById("phone-hangup");
+// Scanning a fresh QR into this tab is a hash navigation, not always a page load.
+window.addEventListener("hashchange",()=>window.location.reload());
 const platform=navigator.userAgentData?.platform||"",agent=navigator.userAgent||"",mobile=navigator.userAgentData?.mobile??/iPhone|iPod|Android.*Mobile/i.test(agent);
 const phoneOs=mobile&&(/Android/i.test(platform)||/Android/i.test(agent))?"android":mobile&&/iPhone|iPod|iOS/i.test(platform+" "+agent)?"ios":"generic";
 document.documentElement.dataset.phoneOs=phoneOs;
@@ -16,6 +18,9 @@ call.lang=callLanguage;callState.textContent=copy.ringing;document.getElementByI
 const clockService=window.BuergeramtClock;let clockAnchor=null;
 const clock=document.getElementById("phone-time");function updateClock(){const utc=clockService?.usable?.(clockAnchor)?clockService.utcAt(clockAnchor,performance.now()):Date.now();clock.textContent=new Intl.DateTimeFormat(callLanguage,{hour:"2-digit",minute:"2-digit",hour12:false}).format(new Date(utc))}updateClock();const clockTimer=setInterval(updateClock,30000);window.addEventListener("pagehide",()=>clearInterval(clockTimer));
 if(!invitation){admission.textContent="Bitte scannen Sie den QR-Code im Amt, um eine Wartenummer zu ziehen.";form.hidden=true;return}
+const expired=document.getElementById("phone-expired"),expiryKey="amt-expired:"+invitation.stream;
+function showExpired(){expired.hidden=false;form.hidden=true;clearInterval(clockTimer);document.body.classList.add("amt-phone-expired");try{sessionStorage.setItem(expiryKey,"1")}catch{}}
+try{if(sessionStorage.getItem(expiryKey)==="1"){showExpired();return}}catch{}
 clockService?.sample?.().then(anchor=>{clockAnchor=anchor;updateClock()}).catch(()=>{});
 const link=new BuergeramtLink("phone",invitation),scanId=Array.from(crypto.getRandomValues(new Uint8Array(12)),n=>n.toString(16).padStart(2,"0")).join("");let currentCall="",resolved="",policeIndex=-1,audioContext=null,phoneFxGain=null,staticSource=null,recordedSpeech=null,voiceGeneration=0,submittedName="",slotActive=false,finished=false,closed=false,voiceBusy=false,voiceTimer=null,ringTimer=null,callStartTimer=null,armedCall=false,scanTimer=null,voiceStartupMs=null,voiceAttempts=0,drag=null,ignoreClickTarget=null;
 let phoneSilent=false,openingPoliceLine="",answeredAt=null,durationTimer=null;
@@ -27,9 +32,9 @@ function stopRing(){clearTimeout(ringTimer);clearTimeout(callStartTimer);ringTim
 function stopRecorded(){const clip=recordedSpeech;recordedSpeech=null;if(clip){clip.onplaying=clip.onended=clip.onerror=null;try{clip.pause()}catch{}}}
 function resetSwipe(){drag=null;for(const button of [answer,decline]){button.style?.removeProperty("--amt-swipe-x");button.style?.removeProperty("--amt-swipe-y");button.classList.remove("dragging")}}
 function stopCall(){voiceGeneration++;voiceQueue.length=0;voiceBusy=false;activePoliceIndex=finishPoliceVoice=null;clearTimeout(cutoffTimer);cutoffTimer=null;clearTimeout(voiceTimer);voiceTimer=null;clearInterval(durationTimer);durationTimer=null;answeredAt=null;stopRecorded();stopStatic();stopRing();armedCall=false;resetSwipe();try{window.speechSynthesis?.cancel()}catch{}call.classList.remove("answered");document.body.classList.remove("amt-phone-in-call");activeControls.hidden=true;callState.textContent=copy.ringing;call.hidden=true;answer.hidden=true;decline.hidden=true;choices.hidden=true}
-function endSlot(text){slotActive=false;finished=true;submit.disabled=true;clearInterval(scanTimer);scanTimer=null;stopCall();status.textContent=text;try{wakeLock?.release()?.catch(()=>{})}catch{}wakeLock=null}
+function endSlot(text,completed=false){slotActive=false;finished=true;submit.disabled=true;clearInterval(scanTimer);scanTimer=null;stopCall();status.textContent=text;if(!completed)showExpired();try{wakeLock?.release()?.catch(()=>{})}catch{}wakeLock=null}
 function initAudio(){try{const Audio=window.AudioContext||window.webkitAudioContext;if(Audio&&!audioContext){audioContext=new Audio();phoneFxGain=audioContext.createGain();phoneFxGain.gain.value=1;phoneFxGain.connect(audioContext.destination)}audioContext?.resume()?.catch(()=>{})}catch{}}
-function requestTicket(){if(closed||finished||slotActive||link.channel?.readyState!=="open")return;if(!link.send("scan",{id:scanId}))admission.textContent="Wartenummer wird erneut angefordert."}
+function requestTicket(){if(closed||finished||slotActive||link.channel?.readyState!=="open")return;link.send(submittedName?"register":"scan",submittedName?{id:scanId,name:submittedName}:{id:scanId})}
 function scheduleRingSound(atMs){
  if(!audioContext||phoneSilent)return;
  const start=audioContext.currentTime+Math.max(0,(atMs-performance.now())/1000);
@@ -101,9 +106,10 @@ link.addEventListener("connected",()=>{if(closed||finished)return;submit.disable
 link.addEventListener("message",e=>{
  if(closed)return;const m=e.detail;
  if(m.type==="sync-ping"){const receivedAtMs=performance.now();link.send("sync-pong",{id:m.id,receivedAtMs,sentAtMs:performance.now()});return}
- if(m.type==="done"){if(!finished)endSlot("Dieser Termin wurde am Schalter bearbeitet.");else stopCall();return}
+ if(m.type==="done"){if(!finished)endSlot("Dieser Termin wurde am Schalter bearbeitet.",true);else stopCall();return}
  if(finished)return;
- if(m.type==="ticket"&&/^B-\d{3}$/.test(m.number||"")){if(slotActive&&number.textContent===m.number)return;clearInterval(scanTimer);scanTimer=null;stopCall();phoneSilent=false;admission.hidden=true;currentCall="";resolved="";number.textContent=m.number;ticket.hidden=false;form.hidden=!!submittedName;slotActive=!document.hidden;status.textContent="Wartenummer zugeteilt. Achten Sie auf die rote Aufruftafel im Amt.";if(slotActive)keepAwake();else{link.send("phone-hidden");endSlot("Seite verlassen. Ihr Platz ist verfallen.");link.close()}}
+ if(m.type==="scan-ready"){admission.hidden=true;submit.disabled=!!submittedName}
+ else if(m.type==="ticket"&&submittedName&&/^[A-Z]-\d{1,3}$/.test(m.number||"")&&Number.isInteger(m.counter)&&m.counter>=1&&m.counter<=4){if(slotActive&&number.textContent===m.number)return;clearInterval(scanTimer);scanTimer=null;stopCall();phoneSilent=false;admission.hidden=true;currentCall="";resolved="";number.textContent=m.number;document.getElementById("phone-counter").textContent="SCHALTER "+m.counter;ticket.hidden=false;form.hidden=true;slotActive=!document.hidden;status.textContent="Achten Sie auf die Aufruftafel im Amt.";if(slotActive)keepAwake();else{link.send("phone-hidden");endSlot("Seite verlassen. Ihr Platz ist verfallen.");link.close()}}
  else if(m.type==="forfeit")endSlot("Ihr Platz ist verfallen.");
  else if(m.type==="silence"&&slotActive&&m.id==="grass")silenceCalls();
  else if(m.type==="call-arm"&&slotActive&&!phoneSilent&&submittedName&&!currentCall&&m.id==="grass"){armedCall=true;initAudio();link.send("call-ready",{id:m.id,atMs:performance.now()})}
@@ -121,8 +127,9 @@ link.addEventListener("message",e=>{
 form.addEventListener("submit",e=>{
  e.preventDefault();if(closed||finished||submittedName)return;const value=name.value.trim().replace(/\s+/g," ");
  if(value.length<2||value.length>80)return;initAudio();
- if(!link.send("register",{name:value}))return;
+ if(!link.send("register",{id:scanId,name:value}))return;
  submittedName=value;submit.disabled=true;form.hidden=true;
+ admission.hidden=false;admission.textContent="Wartenummer wird zugeteilt.";
  window.GermanyFullscreen?.autoEnter();
  keepAwake();
 });
@@ -161,7 +168,7 @@ document.addEventListener("visibilitychange",()=>{
  else if(!document.hidden&&!finished&&!closed&&submittedName)keepAwake();
 });
 window.addEventListener("pagehide",()=>{
- if(slotActive)link.send("phone-hidden");closed=true;slotActive=false;stopCall();
+ if(slotActive){link.send("phone-hidden");showExpired()}closed=true;slotActive=false;stopCall();
  clearInterval(scanTimer);try{audioContext?.close()?.catch(()=>{})}catch{}try{wakeLock?.release()?.catch(()=>{})}catch{}link.close();
 });
 })();

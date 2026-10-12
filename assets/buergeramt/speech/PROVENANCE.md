@@ -51,7 +51,7 @@ word-checked selected-profile Knick MP3s. The added analysis used the same
 FFmpeg/Rhubarb pipeline; no additional Whisper pass, synthesis, listening or
 artwork edit occurred. Exact source and encoded hashes remain mandatory.
 
-The final fixed-voice pack contains 180 tracks (395,693 UTF-8 bytes with LF
+The 2026-10-11 fixed-voice pack contained 180 tracks (395,693 UTF-8 bytes with LF
 line endings): 36 unchanged tracks and 144 eligible selected-profile Knick
 recordings. Superseded first-pass tracks are replaced only after audio hash
 changes; street rules are outside this office pack. Every current
@@ -59,3 +59,13 @@ catalogue path/hash is checked. Acoustic bin counts recover the integer 16 kHz
 sample count before division by 160, avoiding an extra bin from floating-point
 rounding while retaining a genuinely partial last bin. The full reuse check
 passes without another phonetic analysis or ASR model load.
+
+The 2026-10-12 in-scene dialogue pack contains 206 tracks, 476,626 UTF-8
+bytes with LF line endings. The initial build reused 178 matching tracks and
+analyzed 28 final encoded recordings with the same FFmpeg/Rhubarb recipe.
+The complete reuse check passes. All 107 player answers use their own voice
+and deliberately have no visible clerk mouth; the 168 current Knick lines
+select exact recordings, including the already approved fever refusal.
+No new synthesis, independent Whisper pass, listening or artwork edit occurs
+in this cue builder. The authoring manifests retain the selected voices and
+their separate word-verification evidence.

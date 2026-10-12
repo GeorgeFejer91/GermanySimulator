@@ -77,5 +77,5 @@ if args.check:
     assert dest.read_text(encoding='utf-8') == rendered, 'Office cue data is stale'
 else:
     dest.parent.mkdir(parents=True, exist_ok=True)
-    dest.write_text(rendered, encoding='utf-8')
+    dest.write_text(rendered, encoding='utf-8', newline='\n')
 print(f"{len(tracks)} tracks, {len(rendered.encode())} bytes; no audio changed", flush=True)

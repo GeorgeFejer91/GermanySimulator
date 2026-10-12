@@ -247,6 +247,27 @@
         "character-review.js frau-sandale preview",
         "game.js crowdArchetypes[towel-woman].barks[region] as archetype audition text; not the runtime crowd actor identity"
       ]
+    },
+    {
+      "voiceId": "amt-erna-frist",
+      "sourcePools": [
+        "buergeramt-story.js clerks[1] / clerkRefusal",
+        "buergeramt.js ambientLines[1][1]"
+      ]
+    },
+    {
+      "voiceId": "amt-ottilie-durchschlag",
+      "sourcePools": [
+        "buergeramt-story.js clerks[2] / clerkRefusal",
+        "buergeramt.js ambientLines[2][1]"
+      ]
+    },
+    {
+      "voiceId": "amt-hedwig-zustaendig",
+      "sourcePools": [
+        "buergeramt-story.js clerks[4] / clerkRefusal",
+        "buergeramt.js ambientLines[4][1]"
+      ]
     }
   ],
   "pools": {
@@ -2081,6 +2102,31 @@
         ]
       }
     },
+    "buergeramtCounterClerks": {
+      "identities": {
+        "1": {
+          "speaker": "FRAU FRIST",
+          "fullName": "Erna Frist",
+          "voiceId": "amt-erna-frist"
+        },
+        "2": {
+          "speaker": "FRAU DURCHSCHLAG",
+          "fullName": "Ottilie Durchschlag",
+          "voiceId": "amt-ottilie-durchschlag"
+        },
+        "3": {
+          "speaker": "SACHBEARBEITERIN FRAU KNICK",
+          "fullName": "Brunhilde Knick",
+          "voiceId": "amt-brunhilde-knick"
+        },
+        "4": {
+          "speaker": "FRAU ZUSTÄNDIG",
+          "fullName": "Hedwig Zuständig",
+          "voiceId": "amt-hedwig-zustaendig"
+        }
+      },
+      "refusal": "Steht Ihre Nummer auf der Tafel? Nein? Dann treten Sie zurück! Dass ich hier gerade nichts tue, ist eine dienstliche Tätigkeit."
+    },
     "buergeramtAmbient": [
       {
         "speaker": "WARTERAUM",
@@ -2090,12 +2136,12 @@
       {
         "speaker": "SCHALTER 1",
         "text": "Für die Kopie des Originals benötigen Sie das Original der Kopie.",
-        "voiceId": "amt-brunhilde-knick"
+        "voiceId": "amt-erna-frist"
       },
       {
         "speaker": "TELEFON AM SCHALTER 2",
         "text": "Nein, die Warteschleife ist persönlich zu nehmen.",
-        "voiceId": "amt-brunhilde-knick"
+        "voiceId": "amt-ottilie-durchschlag"
       },
       {
         "speaker": "WARTERAUM",
@@ -2105,7 +2151,7 @@
       {
         "speaker": "SCHALTER 4",
         "text": "Einen Moment. Ich verbinde Sie mit Ihrem Moment.",
-        "voiceId": "amt-brunhilde-knick"
+        "voiceId": "amt-hedwig-zustaendig"
       }
     ]
   }

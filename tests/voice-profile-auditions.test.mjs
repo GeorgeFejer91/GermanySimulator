@@ -38,5 +38,5 @@ for(const person of patrons){
  assert.deepEqual(person.dialogueSources,[`buergeramt-story.js patrons.${person.voiceId}.lines[0]`]);
  assert.ok(!auditioned.has(person.voiceId),`private patron ${person.voiceId} must not be promoted into the shipped audition catalog`);
 }
-const pending=new Set(patrons.map(person=>person.voiceId));
+const pending=new Set([...patrons,...cast.roleProfiles.filter(person=>person.gameRole.startsWith('buergeramt-counter-'))].map(person=>person.voiceId));
 for(const voiceId of owners.keys())if(!pending.has(voiceId))assert.ok(auditioned.has(voiceId),`missing audition for ${voiceId}`);

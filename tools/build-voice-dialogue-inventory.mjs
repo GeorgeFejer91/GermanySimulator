@@ -43,7 +43,8 @@ const pools={
  buergeramtPolicePhone:{voiceId:office.call.voiceId,call:office.call.line,replies:office.police},
  buergeramtClerk:{identity:office.clerkIdentity,counter:office.clerk.map(({line,choices})=>({line,replies:choices.map(({reply})=>reply)})),outburst:office.outburst.lines,phoneWarnings:office.phoneWarnings,registration:office.registration},
  buergeramtPatrons:office.patrons,
- buergeramtAmbient:declaration("ambientLines",officeRuntime).map(([speaker,text],index)=>({speaker,text,voiceId:index===0?office.patrons["amt-konrad-wohnungszettel"].voiceId:index===3?office.patrons["amt-wolfram-rentenbescheid"].voiceId:office.clerkIdentity.voiceId})),
+ buergeramtCounterClerks:{identities:office.clerks,refusal:office.clerkRefusal},
+ buergeramtAmbient:declaration("ambientLines",officeRuntime).map(([speaker,text],index)=>({speaker,text,voiceId:index===0?office.patrons["amt-konrad-wohnungszettel"].voiceId:index===3?office.patrons["amt-wolfram-rentenbescheid"].voiceId:office.clerks[{1:1,2:2,4:4}[index]].voiceId})),
 };
 const inventory={
  schemaVersion:1,

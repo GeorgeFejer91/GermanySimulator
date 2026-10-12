@@ -3,6 +3,19 @@ import assert from 'node:assert/strict';
 import {harness} from './amt-harness.mjs';
 import {createAmtGaussianScene} from '../buergeramt-gaussian-scene.js';
 
+test('changing the speaking Schalter retires the old clerk paint slot before rebinding',()=>{
+ const previous=globalThis.document;globalThis.document={hidden:false};
+ try{
+  const actor=(counter,lead)=>({name:'clerk',performance:true,lead,animationId:'clerk-desk-'+counter,mesh:{position:{x:counter,z:-2},material:{opacity:1}}});
+  const a=actor(3,true),b=actor(1,false),ready={generation:1,arc:null,pose:'ready',phase:1},jobs=[];
+  const level={active:true,clerkPerformance:{animation:ready},omen:{phase:''},characters:[],fever:{active:true,id:'clerk'},stationaryAnimations:{'clerk-desk-3':ready,'clerk-desk-1':ready}};
+  const manager=createAmtGaussianScene({THREE:{},renderer:{},scene:{},queueLoad:job=>{jobs.push(job);return new Promise(()=>{})},mobile:true,reducedMotion:{matches:false}});
+  const camera={position:{x:2,z:0}};manager.update(level,[a,b],[],camera);assert.equal(jobs.length,1);
+  a.mesh.material.opacity=.2;a.lead=false;b.lead=true;manager.update(level,[a,b],[],camera);
+  assert.equal(jobs.length,2);assert.equal(a.mesh.material.opacity,1);assert.equal(manager.inspect().actors.length,1);assert.equal(manager.inspect().actors[0].id,'clerk');manager.clear();
+ }finally{globalThis.document=previous}
+});
+
 test('all seven stationary performances use simulation time and freeze hidden/dialogue backgrounds',()=>{
  const h=harness(),before=JSON.parse(JSON.stringify(h.level.stationaryAnimations));
  assert.equal(Object.keys(before).length,7);h.level.update(.1);

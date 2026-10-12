@@ -16,7 +16,7 @@ function transport(role='host',linkSource=source('buergeramt-link.js')){
  link.addEventListener('message',e=>messages.push(e.detail));const channel=new Channel();link.attach('peer-1',channel);
  return{link,channel,Channel,messages};
 }
-test('only valid phone registration reaches the host',()=>{const h=transport();h.channel.receive({type:'register',name:'Erika Mustermann'});assert.equal(h.messages.length,1);assert.equal(h.messages[0].name,'Erika Mustermann')});
+test('only valid phone registration reaches the host',()=>{const h=transport();h.channel.receive({type:'register',id:'a'.repeat(24),name:'Erika Mustermann'});assert.equal(h.messages.length,1);assert.equal(h.messages[0].name,'Erika Mustermann')});
 test('the QR invitation can carry the host subtitle preference without changing pairing credentials',()=>{
  const window={},location={href:'https://example.test/index.html',hash:''};vm.runInNewContext(source('buergeramt-link.js'),{window,location,Event,EventTarget,CustomEvent,TextEncoder,URL,URLSearchParams});
  const invitation={room:'amt-test',secret:'a'.repeat(32),stream:'amt-ticket-test'},Link=window.BuergeramtLink;
@@ -42,7 +42,7 @@ test('call targets and scheduling receipts reject malformed clock modes and lead
  assert.equal(host.messages.length,0);assert.equal(phone.messages.length,0);
  host.channel.receive({type:'call-scheduled',id:'grass',atMs:2200,mode:'peer',lateMs:0});phone.channel.receive({type:'call',id:'grass',line:'Anruf.',ringAtPhoneMs:2200,ringAtUtcMs:null,leadMs:2200});assert.equal(host.messages.length,1);assert.equal(phone.messages.length,1);
 });
-test('unrecognized types cannot consume the valid sequence',()=>{const h=transport();h.channel.receive({seq:100,type:'unknown'});h.channel.receive({seq:2,type:'register',name:'Erika Mustermann'});assert.equal(h.messages.length,1);assert.equal(h.messages[0].seq,2)});
+test('unrecognized types cannot consume the valid sequence',()=>{const h=transport();h.channel.receive({seq:100,type:'unknown'});h.channel.receive({seq:2,type:'register',id:'a'.repeat(24),name:'Erika Mustermann'});assert.equal(h.messages.length,1);assert.equal(h.messages[0].seq,2)});
 test('wrong-direction messages cannot consume the sequence',()=>{const h=transport();h.channel.receive({seq:100,type:'done'});h.channel.receive({seq:2,type:'phone-hidden'});assert.equal(h.messages.length,1);assert.equal(h.messages[0].type,'phone-hidden')});
 test('session, version and sequence checks reject replay or invalid envelopes',()=>{
  const h=transport();for(const bad of [{session:'other'},{v:1},{v:2},{seq:0},{seq:-1},{seq:1.5},{seq:Number.MAX_SAFE_INTEGER+1}])h.channel.receive({type:'phone-hidden',...bad});
@@ -50,14 +50,14 @@ test('session, version and sequence checks reject replay or invalid envelopes',(
 });
 test('malformed JSON and non-string data are ignored',()=>{const h=transport();for(const data of ['{','null','[]','42',new Uint8Array(4)])h.channel.raw(data);assert.equal(h.messages.length,0)});
 test('payloads reject missing or extra fields, controls and excessive lengths',()=>{
- const h=transport();for(const bad of [{type:'register'},{type:'register',name:' '},{type:'register',name:'X'},{type:'register',name:'x'.repeat(81)},{type:'register',name:'Good\u0000Name'},{type:'register',name:'Erika Mustermann',admin:true},{type:'phone-hidden',extra:1},{type:'answer',id:'wrong'}])h.channel.receive(bad);assert.equal(h.messages.length,0);
+ const h=transport();for(const bad of [{type:'register'},{type:'register',id:'a'.repeat(24),name:' '},{type:'register',id:'a'.repeat(24),name:'X'},{type:'register',id:'a'.repeat(24),name:'x'.repeat(81)},{type:'register',id:'a'.repeat(24),name:'Good\u0000Name'},{type:'register',id:'a'.repeat(24),name:'Erika Mustermann',admin:true},{type:'phone-hidden',extra:1},{type:'answer',id:'wrong'}])h.channel.receive(bad);assert.equal(h.messages.length,0);
 });
 test('phone accepts tickets, calls and bounded police lines only from the host',()=>{
- const h=transport('phone');h.channel.receive({type:'ticket',number:'B-223'});h.channel.receive({seq:2,type:'call-arm',id:'grass'});h.channel.receive({seq:3,type:'call',id:'grass',line:'Polizei.',ringAtPhoneMs:500,ringAtUtcMs:null,leadMs:2200});h.channel.receive({seq:4,type:'police-line',index:0,line:'Bitte antworten.'});assert.equal(h.messages.length,4);
- for(const bad of [{type:'register',name:'Erika Mustermann'},{type:'ticket',number:'Z-223'},{type:'police-line',index:-1,line:'Nein'},{type:'police-line',index:3,line:'Nein'},{type:'police-line',index:1,line:' '},{type:'call',id:'grass',line:'x'.repeat(350),ringAtPhoneMs:500,ringAtUtcMs:null,leadMs:2200}])h.channel.receive({seq:100,...bad});assert.equal(h.messages.length,4);
+ const h=transport('phone');h.channel.receive({type:'ticket',counter:3,number:'B-223'});h.channel.receive({seq:2,type:'call-arm',id:'grass'});h.channel.receive({seq:3,type:'call',id:'grass',line:'Polizei.',ringAtPhoneMs:500,ringAtUtcMs:null,leadMs:2200});h.channel.receive({seq:4,type:'police-line',index:0,line:'Bitte antworten.'});assert.equal(h.messages.length,4);
+ for(const bad of [{type:'register',id:'a'.repeat(24),name:'Erika Mustermann'},{type:'ticket',number:'Z-223'},{type:'police-line',index:-1,line:'Nein'},{type:'police-line',index:3,line:'Nein'},{type:'police-line',index:1,line:' '},{type:'call',id:'grass',line:'x'.repeat(350),ringAtPhoneMs:500,ringAtUtcMs:null,leadMs:2200}])h.channel.receive({seq:100,...bad});assert.equal(h.messages.length,4);
 });
 test('a refreshed channel may restart sequence numbers, but the old channel stays inert',()=>{
- const h=transport();h.channel.receive({seq:20,type:'phone-hidden'});h.channel.close();const next=new h.Channel();h.link.attach('peer-2',next);next.receive({type:'register',name:'New Name'});h.channel.raw(JSON.stringify({v:3,session:'amt-ticket-unit-test',seq:999,type:'register',name:'Old Name'}));assert.equal(h.messages.length,2);assert.equal(h.messages[1].name,'New Name');
+ const h=transport();h.channel.receive({seq:20,type:'phone-hidden'});h.channel.close();const next=new h.Channel();h.link.attach('peer-2',next);next.receive({type:'register',id:'a'.repeat(24),name:'New Name'});h.channel.raw(JSON.stringify({v:3,session:'amt-ticket-unit-test',seq:999,type:'register',id:'a'.repeat(24),name:'Old Name'}));assert.equal(h.messages.length,2);assert.equal(h.messages[1].name,'New Name');
 });
 test('messages arriving after close never reach consumers',()=>{const h=transport();h.link.close();h.channel.readyState='open';h.channel.receive({type:'phone-hidden'});assert.equal(h.messages.length,0)});
 test('closed links never attach a new channel',()=>{const h=transport();h.link.close();const next=new h.Channel();h.link.attach('peer-2',next);assert.equal(h.link.channel,null)});
@@ -65,14 +65,14 @@ test('payloads cannot override the outbound envelope',()=>{
  const h=transport();for(const payload of [{number:'B-223',type:'done'},{number:'B-223',seq:999},{number:'B-223',session:'other'},{number:'B-223',v:0}])assert.equal(h.link.send('ticket',payload),false);assert.equal(h.channel.sent.length,0);
 });
 test('outbound roles, fields and bounded values are validated',()=>{
- const h=transport();assert.equal(h.link.send('answer',{id:'grass'}),false);assert.equal(h.link.send('activated',{unexpected:true}),false);assert.equal(h.link.send('police-line',{index:9,line:'Nein'}),false);assert.equal(h.link.send('ticket',{number:'B-223'}),true);assert.equal(h.channel.sent[0].type,'ticket');assert.equal(h.channel.sent[0].seq,1);
+ const h=transport();assert.equal(h.link.send('answer',{id:'grass'}),false);assert.equal(h.link.send('activated',{unexpected:true}),false);assert.equal(h.link.send('police-line',{index:9,line:'Nein'}),false);assert.equal(h.link.send('ticket',{number:'B-223',counter:3}),true);assert.equal(h.channel.sent[0].type,'ticket');assert.equal(h.channel.sent[0].seq,1);
 });
 test('channel send races are returned as failure rather than uncaught exceptions',()=>{const h=transport();h.channel.fail=true;assert.doesNotThrow(()=>assert.equal(h.link.send('activated'),false))});
 test('congested, closed and oversized sends fail without publishing',()=>{
  const h=transport();h.channel.bufferedAmount=65537;assert.equal(h.link.send('activated'),false);h.channel.bufferedAmount=0;assert.equal(h.link.send('call',{id:'grass',line:'界'.repeat(349),ringAtPhoneMs:500,ringAtUtcMs:null,leadMs:2200}),false);assert.equal(h.channel.sent.length,0);h.link.close();assert.equal(h.link.send('done'),false);
 });
 test('the incoming payload limit is measured in UTF-8 bytes, not just JS characters',()=>{const h=transport('phone');h.channel.receive({type:'call',id:'grass',line:'界'.repeat(349),ringAtPhoneMs:500,ringAtUtcMs:null,leadMs:2200});assert.equal(h.messages.length,0)});
-test('ordinary failed payload validation does not advance outbound sequence numbers',()=>{const h=transport();assert.equal(h.link.send('nonsense'),false);assert.equal(h.link.send('ticket',{number:'B-223'}),true);assert.equal(h.channel.sent[0].seq,1)});
+test('ordinary failed payload validation does not advance outbound sequence numbers',()=>{const h=transport();assert.equal(h.link.send('nonsense'),false);assert.equal(h.link.send('ticket',{number:'B-223',counter:3}),true);assert.equal(h.channel.sent[0].seq,1)});
 
 function generatedProtocol(linkSource=source('buergeramt-link.js')){
  let valid=0,rejected=0;
@@ -88,10 +88,10 @@ function generatedProtocol(linkSource=source('buergeramt-link.js')){
    const name=choose(['Erika','界界','Name '+integer(1000),'x'.repeat(80)]);
    const line=choose(['Bitte antworten.','界'.repeat(90),'x'.repeat(349)]);
    const [type,data]=choose(role==='host'?[
-    ['register',{name}],['sync-pong',{id:choose([1,2147483647,integer(2147483647)+1]),receivedAtMs:at,sentAtMs:at+duration}],
+    ['register',{id:'a'.repeat(24),name}],['sync-pong',{id:choose([1,2147483647,integer(2147483647)+1]),receivedAtMs:at,sentAtMs:at+duration}],
     ['police-start',receipt],['phone-hidden',{}]
    ]:[
-    ['ticket',{number:'B-'+String(integer(1000)).padStart(3,'0')}],['police-line',{index:integer(3),line}],
+    ['ticket',{counter:1+integer(4),number:'B-'+String(integer(1000)).padStart(3,'0')}],['police-line',{index:integer(3),line}],
     ['call',{id:'grass',line,ringAtPhoneMs:choose([null,at]),ringAtUtcMs:choose([null,at]),leadMs:choose([600,5000,integer(4401)+600])}],['done',{}]
    ]);
    coverage.types.add(type);

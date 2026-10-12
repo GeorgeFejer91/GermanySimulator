@@ -42,9 +42,15 @@ for(const voiceId of [...crowdVoiceIds,"spieler-hans-peter-mustermann","polizei-
 const silentPatrons=[...world.matchAll(/amtCharacter\("(renter|parent|pensioner)",[^{\n]+\{id:"([^"]+)",fullName:"([^"]+)",voiceId:"([^"]+)"\}\)/g)].map(([,visualRole,id,fullName,voiceId])=>({visualRole,id,fullName,voiceId}));
 assert.equal(silentPatrons.length,3,"all three static Bürgeramt patrons need readable identities");
 for(const person of silentPatrons){assert.equal(person.id,person.voiceId);modeledVoiceIds.add(person.voiceId)}
+const clerks=Object.entries(officeContext.window.BuergeramtStory.clerks);
+assert.equal(clerks.length,4,'all four counter figures have separate identities');
+for(const [counter,person] of clerks){
+ modeledVoiceIds.add(person.voiceId);
+ assert.ok(world.includes(`id:"${person.voiceId}",fullName:"${person.fullName}",voiceId:"${person.voiceId}",animationId:"clerk-desk-${counter}",counter:${counter}`),'visual counter identity '+counter);
+}
 const portraitVoiceIds=new Set(quizPeople.map(person=>person.voiceId));
 const archetypeVoiceIds=new Set(["tourist-guenther-liegestuhl","touristin-walburga-handtuch"]);
-assert.equal(modeledVoiceIds.size,45,"42 speaking and three silent modeled nonpolitical identities");
+assert.equal(modeledVoiceIds.size,48,"every modeled nonpolitical identity has its own profile");
 assert.equal(portraitVoiceIds.size,9,"separate quiz portrait speaker identities");
 assert.equal(archetypeVoiceIds.size,2,"towel archetypes are review voices, not extra spawned NPCs");
 const allVoiceIds=new Set([...cast.characters,...cast.roleProfiles].map(person=>person.voiceId));
@@ -108,7 +114,10 @@ for(const role of cast.roleProfiles){
    assert.deepEqual(Array.from(role.dialogueSources),Array.from(adviser.ruleIndices,index=>`For-AI/AUDIO-TEXT-LIBRARY.js rules[${index}][1]`));
   }
  }else if(role.voiceId==="amt-brunhilde-knick"){
-  assert.ok(story.includes(`clerkIdentity:{speaker:"SACHBEARBEITERIN FRAU KNICK",fullName:"${role.fullName}",voiceId:"${role.voiceId}"}`),"modeled Bürgeramt clerk identity");
+  assert.equal(officeContext.window.BuergeramtStory.clerkIdentity.voiceId,role.voiceId,"modeled Bürgeramt clerk identity");
+ }else if(role.gameRole.startsWith("buergeramt-counter-")){
+  const person=officeContext.window.BuergeramtStory.clerks[role.gameRole.split('-').at(-1)];
+  assert.equal(person.voiceId,role.voiceId);assert.equal(person.fullName,role.fullName);
  }else if(role.gameRole.startsWith("buergeramt-background-")){
   assert.ok(silentPatrons.some(person=>person.fullName===role.fullName&&person.voiceId===role.voiceId&&role.gameRole.endsWith(person.visualRole)),`static Bürgeramt identity ${role.voiceId}`);
  }else{

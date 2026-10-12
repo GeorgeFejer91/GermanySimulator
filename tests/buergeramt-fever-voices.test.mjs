@@ -8,6 +8,7 @@ test('approved default fever dialogue preserves alternate identities and exact s
  for(const s of story.clerk)for(const text of [s.line,...s.choices.map(c=>c.reply)])authored.add(story.clerkIdentity.voiceId+'\0'+text);
  for(const text of story.outburst.lines)authored.add(story.clerkIdentity.voiceId+'\0'+text);
  authored.add(story.clerkIdentity.voiceId+'\0'+story.call.declined);
+ authored.add(story.clerkIdentity.voiceId+'\0'+story.clerkRefusal);
  const history=new Set(JSON.parse(fs.readFileSync('assets/voices/candidate-dialogue/manifest.json','utf8')).clips.filter(c=>c.previousCandidate).map(c=>c.voiceId+'\0'+c.previousCandidate.text));
  const runtime=fs.readFileSync('buergeramt.js','utf8');assert.equal(new Set(manifest.clips.map(c=>c.voiceId)).size,12);
  assert.equal(manifest.clips.filter(c=>c.retiredReason).length,5);assert.equal(manifest.activeLineCount,35);

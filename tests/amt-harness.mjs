@@ -26,7 +26,7 @@ export function harness(kind='host',{voice=false,synthesis=true,phoneLanguage='d
  function node(id){if(!nodes.has(id))nodes.set(id,new Element(id));return nodes.get(id)}
  document.getElementById=node;document.querySelector=selector=>node(selector.slice(1));document.querySelectorAll=()=>[];document.createElement=tag=>Object.assign(new Element(),{tagName:tag.toUpperCase()});document.hidden=false;
  const fullscreenRequests=[];document.body=new Element('body');document.documentElement=new Element('html');document.documentElement.requestFullscreen=()=>{fullscreenRequests.push(true);return Promise.resolve()};
- for(const id of ['amt-level','amt-ticket','amt-walk-hud','phone-ticket','phone-call','phone-call-line'])node(id).hidden=true;
+ for(const id of ['amt-level','amt-ticket','amt-walk-hud','phone-ticket','phone-call','phone-call-line','phone-expired'])node(id).hidden=true;
  node('phone-submit').disabled=true;
  node('phone-answer-track').clientWidth=280;node('phone-answer').offsetWidth=64;
  class Link extends EventTarget{
@@ -39,7 +39,7 @@ export function harness(kind='host',{voice=false,synthesis=true,phoneLanguage='d
   send(type,data={}){if(this.fail||this.closed)return false;this.sent.push({type,...data});return true}
   close(){this.closed=true;this.channel=null}
   emit(type,detail){this.dispatchEvent(new CustomEvent(type,{detail}))}
-  message(detail){this.emit('message',detail)}
+  message(detail){if(detail.type==='scan')this.scanId=detail.id;if(detail.type==='register'&&!Object.hasOwn(detail,'id'))detail={id:this.scanId,...detail};this.emit('message',detail)}
  }
  const synth={speaking:false,pending:false,paused:false,spoken:[],cancelCount:0,current:null,
   getVoices:()=>[{name:'German Test',lang:'de-DE'}],
@@ -114,7 +114,7 @@ export function harness(kind='host',{voice=false,synthesis=true,phoneLanguage='d
  vm.runInContext(source('buergeramt-lips.js'),context,{filename:'buergeramt-lips.js'});
  // Most legacy lifecycle fixtures deliberately exercise the browser engine.
  // Fixed-profile tests replace this synthetic policy with the real catalogue.
- if(kind==='host'&&!window.GermanySimulatorAudioText)window.GermanySimulatorAudioText={productionVoices:{[window.BuergeramtStory.clerkIdentity.voiceId]:{fallback:'browser'}}};
+ if(kind==='host'&&!window.GermanySimulatorAudioText)window.GermanySimulatorAudioText={productionVoices:Object.fromEntries(Object.values(window.BuergeramtStory.clerks).map(clerk=>[clerk.voiceId,{fallback:'browser'}]))};
  // This DOM/clock fixture has no module/network loader. Acoustic-byte and
  // pending-load lifecycle tests supply their own analysis binding explicitly.
  window.GermanyAmtLips.loadRecording=()=>null;
@@ -125,18 +125,19 @@ export function harness(kind='host',{voice=false,synthesis=true,phoneLanguage='d
  if(kind==='host')level.open(config);
  function key(code,type='keydown'){const event=new Event(type,{cancelable:true});Object.assign(event,{code,repeat:false});window.dispatchEvent(event)}
  function moveTo(x,z){for(const [axis,target,pos,neg] of [['x',x,'KeyD','KeyA'],['z',z,'KeyS','KeyW']]){let steps=0;while(Math.abs(level.view[axis]-target)>.07){if(++steps>300)throw new Error(`Cannot reach ${axis}=${target} from ${JSON.stringify(level.view)}`);const code=level.view[axis]<target?pos:neg;key(code);level.update(Math.min(.05,Math.abs(level.view[axis]-target)/3.6));key(code,'keyup')}}}
- function action(index=0){const button=node('amt-actions').children[index];if(!button)throw new Error(`No action ${index} at ${level.stage}`);button.click();return button}
+ function action(index=0){const button=node('amt-actions').children[index];if(button?.disabled&&!voice){for(let i=0;i<200&&button.disabled;i++)tick(100)}if(!button)throw new Error(`No action ${index} at ${level.stage}`);button.click();return button}
  function advanceGame(seconds){for(let t=0;t<seconds;t+=.05)level.update(Math.min(.05,seconds-t))}
  function enter(){moveTo(0,-2.6)}
  function enterUntilOmen(){key('KeyW');try{for(let i=0;i<300;i++){if(level.stage==='omen')return;level.update(.05)}throw new Error(`Automatic omen did not begin; ${JSON.stringify(level.view)}`)}finally{key('KeyW','keyup')}}
  function elapse(seconds){for(let t=0;t<seconds;t+=.05){const step=Math.min(.05,seconds-t);tick(step*1000);level.update(step)}}
  function approachRegistration(){moveTo(-3.3,-2.6);moveTo(-3.3,2.5);moveTo(-4.65,2.5)}
  function register(){enter();Link.instances.at(-1).message({type:'scan',id:'a'.repeat(24)})}
- function wait(){register()}
- function approachCounter(){const x=level.assignedCounter.x;if(x===-5.8){moveTo(-2,-2.6);moveTo(-2,-6.4);moveTo(-5.4,-6.4);moveTo(-5.4,-8.15);moveTo(x,-8.15)}else{moveTo(x===-1.6?-2:3.9,-2.6);moveTo(x===-1.6?-2:3.9,-8.15);moveTo(x,-8.15)}}
- function counter(){wait();const link=Link.instances.at(-1);link.message({type:'register',name:'Erika Mustermann'});approachCounter();advanceGame(16);if(level.stage!=='walk-counter')throw new Error(`Expected active call, got ${level.stage}`);level.interact();tick(16);if(!link.sent.some(message=>message.type==='call-arm'))tick(1800);if(link.sent.some(message=>message.type==='call-arm'))link.message({type:'call-ready',id:'grass',atMs:now})}
- function phoneReady(){const link=Link.instances.at(-1);link.emit('connected',{});link.message({type:'ticket',number:'B-223'});return link}
- function incoming(){const link=phoneReady();node('phone-name').value='Erika Mustermann';node('phone-form').dispatchEvent(new Event('submit',{cancelable:true}));link.message({type:'call-arm',id:'grass'});link.message({type:'call',id:'grass',line:window.BuergeramtStory.call.line,ringAtPhoneMs:now,ringAtUtcMs:null,leadMs:2200});return link}
+ function wait(){register();Link.instances.at(-1).message({type:'register',name:'Erika Mustermann'})}
+ function awaitCall(){for(let i=0;i<400&&level.stage==='waiting';i++)level.update(.05);if(level.stage!=='walk-counter')throw Error('No active call: '+level.stage)}
+ function approachCounter(){const x=level.assignedCounter.x;moveTo(-2,-2.6);moveTo(-2,-6.4);moveTo(x===-5.8?-5.4:2.8,-6.4);moveTo(x===-5.8?-5.4:2.8,-8.15);moveTo(x,-8.15)}
+ function counter(){wait();const link=Link.instances.at(-1);link.message({type:'register',name:'Erika Mustermann'});approachCounter();awaitCall();if(level.stage!=='walk-counter')throw new Error(`Expected active call, got ${level.stage}`);level.interact();tick(16);if(!link.sent.some(message=>message.type==='call-arm'))tick(1800);if(link.sent.some(message=>message.type==='call-arm'))link.message({type:'call-ready',id:'grass',atMs:now})}
+ function phoneReady(){const link=Link.instances.at(-1);link.emit('connected',{});link.message({type:'scan-ready'});return link}
+ function incoming(){const link=phoneReady();node('phone-name').value='Erika Mustermann';node('phone-form').dispatchEvent(new Event('submit',{cancelable:true}));link.message({type:'ticket',number:'B-223',counter:3});link.message({type:'call-arm',id:'grass'});link.message({type:'call',id:'grass',line:window.BuergeramtStory.call.line,ringAtPhoneMs:now,ringAtUtcMs:null,leadMs:2200});return link}
  function hide(){document.hidden=true;document.dispatchEvent(new Event('visibilitychange'))}
- return{window,document,node,tick,now:()=>now,timers,key,moveTo,action,advanceGame,elapse,enter,enterUntilOmen,approachRegistration,approachCounter,register,wait,counter,phoneReady,incoming,hide,synth,audio,vibrations,fullscreenRequests,counts,music,config,level,links:Link.instances,context};
+ return{window,document,node,tick,now:()=>now,timers,key,moveTo,action,advanceGame,elapse,enter,enterUntilOmen,approachRegistration,approachCounter,register,wait,awaitCall,counter,phoneReady,incoming,hide,synth,audio,vibrations,fullscreenRequests,counts,music,config,level,links:Link.instances,context};
 }

@@ -1,20 +1,26 @@
 import {measureLineStats,measureNaturalWidth,prepareWithSegments} from './assets/vendor/pretext/dist/layout.js';
 
 // Keep the bounded Amt labels readable as the phone, browser zoom, or German copy changes.
-const selectors=['#start','#amt-counter-call','#amt-counter-notice small','#amt-objective','#amt-nearby','#amt-number-board','#amt-title','#amt-line','#amt-status','#amt-ambient','#amt-actions button','#amt-leave','#amt-exit','#amt-direct-reset','#amt-direct-result-title','#amt-direct-result-copy','.amt-direct-result a','#amt-mix summary','#amt-mix label','#amt-compact-reset','#phone-status','#phone-admission-status','.phone-brand strong','.phone-breadcrumb','.phone-title','#phone-form h2','#phone-form p','#phone-form label','#phone-submit','#phone-caller','#phone-call-state','#phone-answer-label','#phone-decline-label','#phone-swipe-label','#phone-hangup-label','.phone-keep'];
+const selectors=['#start','#amt-counter-call','#amt-counter-notice small','#amt-objective','#amt-nearby','#amt-number-board','#amt-board-counter','#amt-title','#amt-line','#amt-status','#amt-ambient','#amt-actions button','#amt-leave','#amt-exit','#amt-direct-reset','#amt-direct-result-title','#amt-direct-result-copy','.amt-direct-result a','#amt-mix summary','#amt-mix label','#amt-compact-reset','#phone-expired-stamp','#phone-expired-copy','#phone-number','#phone-counter','#phone-status','#phone-admission-status','.phone-brand strong','.phone-breadcrumb','.phone-title','#phone-form h2','#phone-form p','#phone-form label','#phone-submit','#phone-caller','#phone-call-state','#phone-answer-label','#phone-decline-label','#phone-swipe-label','#phone-hangup-label','.phone-keep'];
 selectors.push('.control-dock button');
 let queued=false;
 function schedule(){if(queued)return;queued=true;requestAnimationFrame(async()=>{queued=false;await document.fonts.ready;measure()})}
 function measure(){
  const zoom=Number.parseFloat(getComputedStyle(document.documentElement).zoom)||1;
  document.body.classList.toggle('amt-compact',innerWidth/zoom<260);
+ document.body.classList.toggle('amt-replies-low',innerWidth/zoom<420);
  const phoneCall=document.getElementById('phone-call');if(phoneCall){const height=(innerHeight/zoom)+'px';if(phoneCall.style.getPropertyValue('--phone-height')!==height)phoneCall.style.setProperty('--phone-height',height)}
  const sequence=document.querySelector('#amt-walk-hud.sequence');
  if(sequence){
   const top=sequence.getBoundingClientRect().top;
   const controls=[...document.querySelectorAll('#amt-mix,.subtitle-toggle')].filter(el=>el.getClientRects().length&&getComputedStyle(el).visibility!=='hidden');
-  const clearance=Math.max(0,...controls.map(el=>(el.getBoundingClientRect().bottom-top)/zoom))+12;
+  const replies=document.getElementById('amt-actions');
+  const lowered=document.body.classList.contains('amt-replies-low');
+  const sideReplies=replies.children.length&&replies.classList.contains('side-choices')&&!lowered;
+  const clearance=Math.max(0,...controls.map(el=>(el.getBoundingClientRect().bottom-top)/zoom),sideReplies?(replies.getBoundingClientRect().bottom-top)/zoom:0)+12;
   sequence.style.setProperty('--amt-caption-top',`${Math.ceil(clearance)}px`);
+  sequence.style.setProperty('--amt-scene-height',`${sequence.getBoundingClientRect().height/zoom}px`);
+  sequence.style.setProperty('--amt-actions-height',`${replies.children.length&&(!replies.classList.contains('side-choices')||lowered)?Math.ceil(replies.getBoundingClientRect().height/zoom)+12:0}px`);
  }
  for(const el of document.querySelectorAll(selectors.join(','))){
   if(el.hidden||!el.getClientRects().length)continue;
@@ -43,9 +49,9 @@ function measure(){
    }
    const reflow=label&&(!oneLine||minimum>el.offsetHeight);
    // Flex and grid regions can grow; the subtitle rail and phone page scroll when needed.
-   if(document.body.classList.contains('amt-compact')&&el.matches('#amt-actions button'))el.style.removeProperty('min-height');
+   if(document.body.classList.contains('amt-replies-low')&&el.matches('#amt-actions button'))el.style.removeProperty('min-height');
    else if(el.matches('button,#amt-objective,#amt-nearby,#phone-status,#phone-admission-status,#amt-ambient'))el.style.minHeight=`${minimum}px`;
-   el.dataset.pretextFit=reflow?'reflow':oneLine?'one-line':stats.lineCount>0?'wrapped':'empty';
+   el.dataset.pretextFit=el.matches('#amt-actions button')&&minimum>el.offsetHeight+4?'scroll':reflow?'reflow':oneLine?'one-line':stats.lineCount>0?'wrapped':'empty';
   }catch{el.dataset.pretextFit='unavailable'}
  }
  const dock=document.querySelector('.control-dock');
@@ -65,11 +71,18 @@ for(const root of [document.getElementById('intro'),document.getElementById('amt
 }
 addEventListener('resize',schedule,{passive:true});
 const dock=document.querySelector('.control-dock');if(dock)new ResizeObserver(schedule).observe(dock);
-const officeBounds=new ResizeObserver(schedule);for(const el of [document.getElementById('subtitle-toggle'),document.getElementById('amt-counter-notice'),document.getElementById('amt-direct-reset')])if(el)officeBounds.observe(el);
+const officeBounds=new ResizeObserver(schedule);for(const el of [document.getElementById('subtitle-toggle'),document.getElementById('amt-counter-notice'),document.getElementById('amt-direct-reset'),document.getElementById('amt-actions')])if(el)officeBounds.observe(el);
 // The shared HUD fitter positions the subtitle control after its own measure.
 // Follow that final position without a separate animation/update loop.
 const subtitleControl=document.querySelector('.subtitle-toggle');
 if(subtitleControl)new MutationObserver(schedule).observe(subtitleControl,{attributes:true,attributeFilter:['style','hidden','class']});
 new MutationObserver(schedule).observe(document.documentElement,{attributes:true,attributeFilter:['style']});
 window.BuergeramtFit=schedule;
+// Focused scene text can scroll with keys without activating an answer.
+for(const region of [document.getElementById('amt-actions'),document.getElementById('amt-ambient')])region?.addEventListener('keydown',event=>{
+ const target=event.target.closest('button')||event.currentTarget;
+ if(target.scrollHeight<=target.clientHeight||!['ArrowUp','ArrowDown','PageUp','PageDown','Home','End'].includes(event.key))return;
+ event.preventDefault();const step=event.key.startsWith('Page')?target.clientHeight*.8:32;
+ target.scrollTop=event.key==='Home'?0:event.key==='End'?target.scrollHeight:target.scrollTop+(['ArrowUp','PageUp'].includes(event.key)?-step:step);
+});
 schedule();

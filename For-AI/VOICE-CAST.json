@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "scope": "Eight optional Bürgeramt walkers and 19 named city NPCs with exact fixed dialogue; the modeled Brunhilde Knick clerk, player, police, twelve named crowd identities, and three named static Bürgeramt patrons have voice bindings and authored interactions. Nine quiz portraits and two towel-archetype review voices are separate profiles. An additional traffic-driver profile is imported from shipped CC0 source clips. DistinctReferenceCount covers all new EmoDB profiles.",
+  "scope": "Eight optional Bürgeramt walkers and 19 named city NPCs with exact fixed dialogue; four individually named counter clerks including Brunhilde Knick, player, police, twelve named crowd identities, and three named static Bürgeramt patrons have voice bindings and authored interactions. Nine quiz portraits and two towel-archetype review voices are separate profiles. An additional traffic-driver profile is imported from shipped CC0 source clips. DistinctReferenceCount covers all new EmoDB profiles.",
   "source": [
     "game.js",
     "buergeramt-story.js",
@@ -8,9 +8,9 @@
   ],
   "characterCount": 27,
   "dialogueCount": 93,
-  "roleProfileCount": 29,
-  "totalNewProfileCount": 56,
-  "distinctReferenceCount": 31,
+  "roleProfileCount": 32,
+  "totalNewProfileCount": 59,
+  "distinctReferenceCount": 34,
   "distinctSourceSpeakerCount": 10,
   "liveSecretTunnelVerification": {
     "date": "2026-10-08",
@@ -3357,6 +3357,129 @@
         "game.js crowdArchetypes[towel-woman].barks[region] as archetype audition text; not the runtime crowd actor identity"
       ],
       "runtimeBinding": "character-review.js archetype profile; moving game crowd instances use their own named crowd voiceIds."
+    },
+    {
+      "gameRole": "buergeramt-counter-1",
+      "fullName": "Erna Frist",
+      "voiceId": "amt-erna-frist",
+      "secretTunnelProfileName": "GS Erna Frist (amt-erna-frist)",
+      "secretTunnelProfileId": "88c9f2638a954f59b33a74dc6ec48f10",
+      "gender": "female",
+      "genderEvidence": "Existing female-presenting clerk artwork; distinct fictional counter identity.",
+      "generalDemeanor": "Slow, bored deadline keeper; every sentence sounds overdue.",
+      "demeanorEvidence": "Authored counter refusal and numbered-counter ambient remarks.",
+      "targetValence": "negative",
+      "targetArousal": "low",
+      "reference": {
+        "dataset": "EmoDB original",
+        "license": "CC0-1.0",
+        "speakerId": "13",
+        "speakerGender": "female",
+        "emotionLabel": "boredom",
+        "sourceFiles": [
+          {
+            "path": "EmoDB_original/data/emodb/wav/13a01Lb.wav",
+            "sha256": "12de8097a22ff41527f35e0c43696fb9c2971fc88b1cf36a6a24b4a000f6b4fc"
+          },
+          {
+            "path": "EmoDB_original/data/emodb/wav/13a02Lc.wav",
+            "sha256": "c5fba8dca03cfee2e24ca064c6a6548886ec97e5ce2fac1f018f6a567693f42d"
+          },
+          {
+            "path": "EmoDB_original/data/emodb/wav/13a04Lb.wav",
+            "sha256": "815443791d144a2e2c639a0f0e1191badbcd8f308cbea5c78e1776a649453895"
+          }
+        ],
+        "workingReferenceSha256": "d3f58ce0272f05be4bd9c57c5dbc689920e72d8e58717098b8c33c46384c5ee8",
+        "referenceDurationSeconds": 6.036083333333333
+      },
+      "status": "profile-verified; exact counter dialogue; recordings and listening review pending; captions fallback",
+      "dialogueSources": [
+        "buergeramt-story.js clerks[1] / clerkRefusal",
+        "buergeramt.js ambientLines[1][1]"
+      ]
+    },
+    {
+      "gameRole": "buergeramt-counter-2",
+      "fullName": "Ottilie Durchschlag",
+      "voiceId": "amt-ottilie-durchschlag",
+      "secretTunnelProfileName": "GS Ottilie Durchschlag (amt-ottilie-durchschlag)",
+      "secretTunnelProfileId": "1ec70124423e4b9c985866dc0b978a28",
+      "gender": "female",
+      "genderEvidence": "Existing female-presenting clerk artwork; distinct fictional counter identity.",
+      "generalDemeanor": "Brisk, precise keeper of originals and copies; bright diction and clipped pauses.",
+      "demeanorEvidence": "Authored counter refusal and numbered-counter ambient remarks.",
+      "targetValence": "neutral",
+      "targetArousal": "medium",
+      "reference": {
+        "dataset": "EmoDB original",
+        "license": "CC0-1.0",
+        "speakerId": "14",
+        "speakerGender": "female",
+        "emotionLabel": "neutral",
+        "sourceFiles": [
+          {
+            "path": "EmoDB_original/data/emodb/wav/14a01Na.wav",
+            "sha256": "520f468fc9a28ee4c6d5a766c9067ffac8cf85ca62909d423d6a20f57fc7bd59"
+          },
+          {
+            "path": "EmoDB_original/data/emodb/wav/14a02Nc.wav",
+            "sha256": "4322426634cac43b632935d4db3745bc4a34bd1ab77775aac88e0387ed463a7f"
+          },
+          {
+            "path": "EmoDB_original/data/emodb/wav/14a05Na.wav",
+            "sha256": "c315a618321355e3043cf849c616b953f354f5bd5b0913c1ec10340c00967898"
+          }
+        ],
+        "workingReferenceSha256": "065d42680db2defc5ccb6425d4bcf62334a72980b42cb9076e3ba9156e150473",
+        "referenceDurationSeconds": 6.109458333333333
+      },
+      "status": "profile-verified; exact counter dialogue; recordings and listening review pending; captions fallback",
+      "dialogueSources": [
+        "buergeramt-story.js clerks[2] / clerkRefusal",
+        "buergeramt.js ambientLines[2][1]"
+      ]
+    },
+    {
+      "gameRole": "buergeramt-counter-4",
+      "fullName": "Hedwig Zuständig",
+      "voiceId": "amt-hedwig-zustaendig",
+      "secretTunnelProfileName": "GS Hedwig Zuständig (amt-hedwig-zustaendig)",
+      "secretTunnelProfileId": "5dfbf1a66def407fa5ec2a700c1fd311",
+      "gender": "female",
+      "genderEvidence": "Existing female-presenting clerk artwork; distinct fictional counter identity.",
+      "generalDemeanor": "Guarded, uneasy telephone clerk who treats responsibility as a contagion.",
+      "demeanorEvidence": "Authored counter refusal and numbered-counter ambient remarks.",
+      "targetValence": "negative",
+      "targetArousal": "medium",
+      "reference": {
+        "dataset": "EmoDB original",
+        "license": "CC0-1.0",
+        "speakerId": "16",
+        "speakerGender": "female",
+        "emotionLabel": "fear",
+        "sourceFiles": [
+          {
+            "path": "EmoDB_original/data/emodb/wav/16a04Ab.wav",
+            "sha256": "e2aea37544c445bc66e6621f00b7c71b9822202832188502b12243522c07b1ac"
+          },
+          {
+            "path": "EmoDB_original/data/emodb/wav/16a05Ab.wav",
+            "sha256": "a8ca41d0733adfd2e92a325c46cb8cc595381198f86ff5d8e4e7d068511100f6"
+          },
+          {
+            "path": "EmoDB_original/data/emodb/wav/16b01Aa.wav",
+            "sha256": "fcb37db5130dc1f1a2884a9db5c10f49f29a8a6192f4cf540e7970181cdec122"
+          }
+        ],
+        "workingReferenceSha256": "50607612db993ccbb0fcf2c07db080c0427315762fa9f2043dc3bbb033bf41ed",
+        "referenceDurationSeconds": 6.462625
+      },
+      "status": "profile-verified; exact counter dialogue; recordings and listening review pending; captions fallback",
+      "dialogueSources": [
+        "buergeramt-story.js clerks[4] / clerkRefusal",
+        "buergeramt.js ambientLines[4][1]"
+      ]
     }
   ],
   "existingAssetProfiles": [
@@ -3861,12 +3984,45 @@
       "fallback": "captions"
     },
     "spieler-hans-peter-mustermann": {
-      "profileId": "85b9afebb99f40eebad651bcd2e55a1d",
-      "profileName": "GS Hans-Peter Mustermann (player-default)",
-      "originalSha256": "558259e7e4eaec780eeda7b547232ec8bb09075385c2ba9483bfef617339ff21",
-      "referenceSha256": "47dd74c26e45ff92294a9204bdb83957f4f8b2f11bad511d87e2ea5462ef14d1",
+      "profileId": "b027d18a4fc748cabb133fbb14077500",
+      "profileName": "GS Hans-Peter Mustermann (Nachschub player)",
+      "originalSha256": "4f4b181750c65430c68d20d742b02529f5e5db6650cb57171fe2e52ea8ee2dbf",
+      "referenceSha256": "6b6ff2c747ef11fb883fc1c9804d270c6ba34cc5614db4d132f8e6172b9f60ad",
       "renderer": "ResembleAI/Chatterbox Multilingual V2 0.1.7",
-      "modelRevision": "5bb1f6ee58e50c3b8d408bc82a6d3740c2db6e18"
+      "modelRevision": "5bb1f6ee58e50c3b8d408bc82a6d3740c2db6e18",
+      "processing": null,
+      "referenceLicense": "CC0-1.0 (Thorsten-Voice Dataset 2021.06 emotional)",
+      "sourceSelection": "User: the one that sed to say, endlich wieder nachschub, just clone this voice as our own",
+      "sourceClips": [
+        {
+          "path": "assets/voices/thorsten-amused-nachschub.mp3",
+          "sha256": "ae493487da4390e2f0d850f4bcaa30cb9887e5052eebce0bffcf24bf5c225452",
+          "text": "Endlich wieder Nachschub!",
+          "decodedSha256": "069be8c1972b1d6c960c3624a6a2e08916c665318cd17681ec1f6ad9cb81a9bd",
+          "speaker": "Thorsten Müller",
+          "license": "CC0-1.0"
+        },
+        {
+          "path": "assets/voices/thorsten-angry-nicht-weg.mp3",
+          "sha256": "61a7d884aef5d3029384f0bff3d0b78ae75464cdbdd9e848ac9020d48e94ebbf",
+          "text": "Nein, ich gehe hier nicht weg!",
+          "decodedSha256": "e03b0ad49be8938d59e79cf70529b8d6878a08528cd4c88110aa185d8f564c7f",
+          "speaker": "Thorsten Müller",
+          "license": "CC0-1.0"
+        }
+      ],
+      "referenceTranscript": "Endlich wieder Nachschub! Nein, ich gehe hier nicht weg!",
+      "referenceDurationSeconds": 3.5700416666666666,
+      "referenceExtensionReason": "Selected shipped clip is1.44s; installed native profile API requires at least3.0s clear speech. The same-speaker shipped CC0 Nicht-weg clip extends the reference without a new dataset or speaker.",
+      "previousProductionBinding": {
+        "profileId": "85b9afebb99f40eebad651bcd2e55a1d",
+        "profileName": "GS Hans-Peter Mustermann (player-default)",
+        "originalSha256": "558259e7e4eaec780eeda7b547232ec8bb09075385c2ba9483bfef617339ff21",
+        "referenceSha256": "47dd74c26e45ff92294a9204bdb83957f4f8b2f11bad511d87e2ea5462ef14d1",
+        "renderer": "ResembleAI/Chatterbox Multilingual V2 0.1.7",
+        "modelRevision": "5bb1f6ee58e50c3b8d408bc82a6d3740c2db6e18"
+      },
+      "listening": "not performed"
     },
     "polizei-heinrich-wachtmeister": {
       "profileId": "24b741bbe55d4f3a843aa481c3459a96",
@@ -4003,6 +4159,42 @@
       "referenceSha256": "9a43f754972aa8a5dfa491d4c97f0eac417b0725731aaa417617d82bc43b3f6c",
       "renderer": "Secret Tunnel 6 bundled OmniVoice Rust via installed --voice-cli",
       "modelRevision": "c5fdb5ccb189668d56333f77ba2629f4cd7535f4"
+    },
+    "amt-erna-frist": {
+      "profileId": "88c9f2638a954f59b33a74dc6ec48f10",
+      "profileName": "GS Erna Frist (amt-erna-frist)",
+      "originalSha256": "4ad9fbc1c4c4b32a6a1464766628b1f59578c070532ad86baaaf5e66ccca3230",
+      "referenceSha256": "d3f58ce0272f05be4bd9c57c5dbc689920e72d8e58717098b8c33c46384c5ee8",
+      "renderer": "ResembleAI/Chatterbox Multilingual V2 0.1.7",
+      "modelRevision": "5bb1f6ee58e50c3b8d408bc82a6d3740c2db6e18",
+      "referenceLicense": "CC0-1.0 (EmoDB original)",
+      "selection": "Dedicated counter clerk profile created at user request on 2026-10-12",
+      "fallback": "captions",
+      "listening": "not performed"
+    },
+    "amt-ottilie-durchschlag": {
+      "profileId": "1ec70124423e4b9c985866dc0b978a28",
+      "profileName": "GS Ottilie Durchschlag (amt-ottilie-durchschlag)",
+      "originalSha256": "dff2d1e63c056302166c50eb043e4c32e602ab6991763e7cf6d885d0e1fa9ea4",
+      "referenceSha256": "065d42680db2defc5ccb6425d4bcf62334a72980b42cb9076e3ba9156e150473",
+      "renderer": "ResembleAI/Chatterbox Multilingual V2 0.1.7",
+      "modelRevision": "5bb1f6ee58e50c3b8d408bc82a6d3740c2db6e18",
+      "referenceLicense": "CC0-1.0 (EmoDB original)",
+      "selection": "Dedicated counter clerk profile created at user request on 2026-10-12",
+      "fallback": "captions",
+      "listening": "not performed"
+    },
+    "amt-hedwig-zustaendig": {
+      "profileId": "5dfbf1a66def407fa5ec2a700c1fd311",
+      "profileName": "GS Hedwig Zuständig (amt-hedwig-zustaendig)",
+      "originalSha256": "5a1b0f42391c8829143c737ff6630dea596a9ecec8539e90435272dd27fccb4a",
+      "referenceSha256": "50607612db993ccbb0fcf2c07db080c0427315762fa9f2043dc3bbb033bf41ed",
+      "renderer": "ResembleAI/Chatterbox Multilingual V2 0.1.7",
+      "modelRevision": "5bb1f6ee58e50c3b8d408bc82a6d3740c2db6e18",
+      "referenceLicense": "CC0-1.0 (EmoDB original)",
+      "selection": "Dedicated counter clerk profile created at user request on 2026-10-12",
+      "fallback": "captions",
+      "listening": "not performed"
     }
   },
   "productionExceptions": [
@@ -4019,7 +4211,8 @@
     }
   ],
   "preservedProfileIds": [
-    "c4c533edd860444e9e02ce0d22a78e8d"
+    "c4c533edd860444e9e02ce0d22a78e8d",
+    "85b9afebb99f40eebad651bcd2e55a1d"
   ],
   "retiredProfiles": [
     {

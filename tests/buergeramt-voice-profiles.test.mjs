@@ -6,6 +6,7 @@ import { runInNewContext } from 'node:vm';
 const root = new URL('../', import.meta.url);
 const window = {};
 const savedPrivateIds = new Set([
+  '88c9f2638a954f59b33a74dc6ec48f10', '1ec70124423e4b9c985866dc0b978a28', '5dfbf1a66def407fa5ec2a700c1fd311',
   '833480652ccf455f8184cbe752861420', '44d0f901322e403fa5ad8140c68ae426',
   'eb4aab1842eb450eacbdd5d4ccc38ab6', 'e2b59f89c1a84259aaa8f7006741fae2',
   'b456ded2b16d4bc38f6751bfe52266e8', 'fd76c3fc053c4932b910fa504f376edc',
@@ -23,14 +24,14 @@ test('each named office speaker has one immutable, exact-text browser delivery',
   const expected = [
     ...Object.values(story.characters).map(character => character.voiceId),
     ...Object.values(story.patrons).map(character => character.voiceId),
-    story.clerkIdentity.voiceId
+    ...Object.values(story.clerks).map(character => character.voiceId)
   ];
-  assert.equal(expected.length, 12);
-  assert.equal(new Set(expected).size, 12);
+  assert.equal(expected.length, 15);
+  assert.equal(new Set(expected).size, 15);
   assert.deepEqual(Object.keys(registry.byVoiceId).sort(), expected.sort());
   assert.equal(Object.isFrozen(registry), true);
   assert.equal(Object.isFrozen(registry.byVoiceId), true);
-  assert.equal(savedPrivateIds.size, 12);
+  assert.equal(savedPrivateIds.size, 15);
   const boundPrivateIds = new Set();
   for (const [voiceId, profile] of Object.entries(registry.byVoiceId)) {
     assert.equal(Object.isFrozen(profile), true, voiceId);
@@ -45,7 +46,7 @@ test('each named office speaker has one immutable, exact-text browser delivery',
     assert.equal(profile.candidateStatus, 'private-unlistened', voiceId);
     boundPrivateIds.add(profile.candidateProfileId);
   }
-  assert.equal(boundPrivateIds.size, 12);
+  assert.equal(boundPrivateIds.size, 15);
   assert.equal(registry.deliveryFor('desk-clone'), null);
   assert.deepEqual({ ...registry.deliveryFor('amt-horst-stempelmann') }, { rate: .82, pitch: .72 });
 });

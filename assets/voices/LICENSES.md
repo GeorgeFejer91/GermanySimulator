@@ -33,6 +33,25 @@ remark; the disgusted take is the player's Germanness-loss reaction.
 Attribution is not required by CC0, but the source and recording IDs are kept
 here for durable provenance and reproducible replacement.
 
+## Bürgeramt first-person reply voice (2026-10-12)
+
+The user selected Thorsten Müller's shipped “Endlich wieder Nachschub!” voice
+for Hans-Peter Mustermann's first-person replies. The separate saved player
+profile uses that exact CC0 recording first, followed by the same speaker's
+shipped “Nein, ich gehe hier nicht weg!” clip solely to meet the installed
+profile tool's three-second minimum. The source MP3 hashes are respectively
+`ae493487da4390e2f0d850f4bcaa30cb9887e5052eebce0bffcf24bf5c225452` and
+`61a7d884aef5d3029384f0bff3d0b78ae75464cdbdd9e848ac9020d48e94ebbf`.
+The 3.570-second private reference reads “Endlich wieder Nachschub! Nein, ich
+gehe hier nicht weg!” No other speaker, dataset or Knick undertone is used.
+
+`For-AI/VOICE-CAST.json` pins saved UUID
+`b027d18a4fc748cabb133fbb14077500`, source/normalized hashes and the existing
+MIT Chatterbox Multilingual V2 0.1.7 revision. All 107 exact authored reply labels now have eligible recordings. Their receipts
+belong to `player-replies/spieler-hans-peter-mustermann-manifest.json`. The original
+and normalized reference WAVs remain in the private Music library and are not
+shipped. Independent ASR/level checks are separate from listening review.
+
 ## Generated §-power law readings
 
 The 13 files under `laws/` are AI-generated readings created locally on
@@ -252,9 +271,14 @@ raw and encoded hashes, fixed undertone, measured levels, independent German
 ASR and estimated word cues. Only eligible exact-text takes ship. The user
 requested implementation with this voice; this use authorization does not
 establish listening acceptance. Rejected takes and all source/model files stay
-in Music. The main request accounts for 168 generated lines: 141 eligible
-recordings and 27 held captions; the ambient supplement adds three eligible
-recordings. Every new shipped take has explicit successful native EOS.
+in Music. The final 2026-10-12 main request has 167 eligible recordings and one
+held unused historical A38 slot; one already-approved same-profile fever refusal
+completes all 168 current Knick strings. The ambient supplement retains three
+eligible recordings. Every new shipped take has explicit native EOS evidence.
+Three unchanged joined MP3s use reviewed complete-file contiguous recognition
+with all earlier whole-line conflicts retained; named delivery edits preserve
+complete original native-EOS takes and sample-exact quiet-boundary proofs.
+No listening acceptance is claimed.
 Seventeen superseded first-pass public files retain exact old hashes and
 manifest provenance in the private archive, including the two now held
 lines. Earlier Knick and unused profile candidates are archived.

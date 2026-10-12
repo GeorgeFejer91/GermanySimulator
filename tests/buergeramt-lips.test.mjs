@@ -108,7 +108,7 @@ test('every authored clerk and roaming line owns lips; late completion cannot ca
 
 test('ambient clerks and waiting voices share ownership; voice-off stays neutral',()=>{
  const {h,p,level}=probe();p.setStage('waiting');
- h.window.GermanySimulatorAudioText.productionVoices[h.window.BuergeramtStory.clerkIdentity.voiceId].fallback='captions';
+ for(const clerk of Object.values(h.window.BuergeramtStory.clerks))h.window.GermanySimulatorAudioText.productionVoices[clerk.voiceId].fallback='captions';
  for(const actor of ['renter','clerk-1','clerk-2','pensioner','clerk-4']){
   const before=h.synth.spoken.length;
   p.ambientStep(9);h.tick(20);assert.equal(level.lipSpeech.actor,actor);
@@ -118,6 +118,16 @@ test('ambient clerks and waiting voices share ownership; voice-off stays neutral
  }
  const quiet=probe({voice:false});quiet.p.content('FRAU KNICK','Mama');assert.equal(quiet.level.lipSpeech.active,false);
  assert(Object.values(mouths).every(rect=>rect.length===4&&rect.every(v=>Number.isFinite(v)&&v>0&&v<1)));
+});
+
+test('replacement recordings use new cache URLs while retaining canonical mouth ownership',()=>{
+ const {h,p}=probe(),path='./selected-knick.mp3',players=[],bindings=[],sha='a'.repeat(64);
+ h.window.GermanySimulatorAudioText={productionVoices:{'amt-brunhilde-knick':{fallback:'captions'}},recordedClip:()=>path,recordings:{[path]:{sha256:sha}}};
+ h.window.GermanyAmtLips.loadRecording=(path,hash)=>{bindings.push({path,hash});return null};
+ h.context.Audio=class{constructor(src){this.src=src;players.push(this)}play(){return Promise.resolve()}pause(){}removeAttribute(){}load(){}};
+ p.content('FRAU KNICK','Die genaue Zeile.');assert.equal(players.at(-1).src,path+'?v='+sha);assert.deepEqual(bindings.at(-1),{path,hash:sha});
+ const replacement='b'.repeat(64);h.window.GermanySimulatorAudioText.recordings[path].sha256=replacement;
+ p.content('FRAU KNICK','Die genaue Zeile.');assert.equal(players.at(-1).src,path+'?v='+replacement);assert.deepEqual(bindings.at(-1),{path,hash:replacement});
 });
 
 test('Knick waits for a slow native start, keeps hidden startup alive and still bounds failure',()=>{

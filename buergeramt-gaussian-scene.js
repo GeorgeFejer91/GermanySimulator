@@ -70,7 +70,7 @@ export function createAmtGaussianScene({THREE,renderer,scene,actorLayer=0,queueL
       // Isolation already hides background Gaussian paint. Its action clock
       // can freeze between anchors, so it must release the speaker's slot now.
       const background=fever?.active&&fever.id!==entry.id;
-      if(background||!current||current.distance>7||preferred&&!slots.has(preferred.id)&&entry.id!==preferred.id&&(atMain||!current.inView)&&slots.size>=limit)retire(entry);
+      if(background||!current||current.actor!==entry.actor||current.distance>7||preferred&&!slots.has(preferred.id)&&entry.id!==preferred.id&&(atMain||!current.inView)&&slots.size>=limit)retire(entry);
     }
     if(!blocked&&!document.hidden&&!reducedMotion.matches&&!failure){
       for(const item of candidates){

@@ -65,10 +65,10 @@ test('a scan and name registration survive approach, blackout, glare, and camera
   for(let i=0;i<500&&h.level.omen.phase!==phase;i++)h.level.update(.025);
   assert.equal(h.level.omen.phase,phase);
   const link=h.links[0];link.message({type:'scan',id:'a'.repeat(24)});
-  assert.equal(h.level.activated,true);assert.equal(link.sent.at(-1).type,'ticket');
+  assert.equal(h.level.activated,false);assert.equal(link.sent.at(-1).type,'scan-ready');
   assert.equal(h.level.stage,'omen');
   link.message({type:'register',name:'Erika Mustermann'});
-  assert.equal(h.level.registeredName,'Erika Mustermann');
+  assert.equal(h.level.registeredName,'Erika Mustermann');assert.equal(h.level.activated,true);assert.equal(link.sent.at(-1).type,'ticket');
   finishOmen(h);assert.equal(h.level.stage,'waiting');assert.equal(h.level.activated,true);
   assert.equal(h.level.registeredName,'Erika Mustermann');
  }
@@ -76,10 +76,10 @@ test('a scan and name registration survive approach, blackout, glare, and camera
 
 test('phone forfeiture during the omen cancels it and cannot return to waiting',()=>{
  const h=harness('host',{cinematics:true});h.enterUntilOmen();
- const link=h.links[0];link.message({type:'scan',id:'a'.repeat(24)});link.message({type:'phone-hidden'});
- assert.equal(h.level.stage,'expired');assert.equal(h.level.activated,false);
+ const link=h.links[0];link.message({type:'scan',id:'a'.repeat(24)});link.message({type:'register',name:'Erika Mustermann'});link.message({type:'phone-hidden'});
+ assert.equal(h.level.stage,'walk-sign');assert.equal(h.level.activated,false);
  assert.equal(h.level.omen.phase,'');assert.equal(h.level.omen.strength,0);
- h.elapse(20);assert.equal(h.level.stage,'expired');h.action();assert.equal(h.level.stage,'walk-sign');assert.equal(h.level.activated,false);assert.equal(h.level.omen.phase,'');
+ h.elapse(20);assert.equal(h.level.stage,'walk-sign');assert.equal(h.node('amt-actions').children.length,0);assert.equal(h.level.stage,'walk-sign');assert.equal(h.level.activated,false);assert.equal(h.level.omen.phase,'');
 });
 
 test('exit and replay cancel pending omen callbacks',()=>{
