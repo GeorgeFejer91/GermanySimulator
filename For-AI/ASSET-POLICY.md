@@ -1018,7 +1018,7 @@ existing admission queue loads it on approach; one retained office texture is
 reused on replay and return. A readable named plate remains on image failure.
 The gilded frame uses bounded procedural geometry and a shared material; its
 complete wall projection is included in the office collision solids. Speech
-uses four request-only MP3s, 316,976 bytes and 19.56 seconds total, with the
+uses four request-only MP3s, 353,840 bytes and 21.88 seconds total, with the
 existing single-media cancellation and caption fallback. No idle work, model
 download, second asset pipeline or new scheduler is added. Exact text/profile,
 encoded hashes, native EOS, ASR and levels are in the existing player-replies

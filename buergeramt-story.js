@@ -13,8 +13,8 @@ window.BuergeramtStory=Object.freeze({
   name:"Frank-Walter Steinmeier",title:"BUNDESPRÄSIDENT",x:3.4,z:5.43,
   lines:[
    {line:"Der Bundespräsident. Ein unglaublich wichtiges Amt.",english:"The Federal President. An incredibly important office."},
-   {line:"Reden halten, Hände schütteln, sehr ernst in die Kamera schauen.",english:"Give speeches, shake hands, look very serious for the camera."},
-   {line:"Und wenn hier das Amt stillsteht, steht er wenigstens würdevoll im Bilderrahmen.",english:"And when this office grinds to a halt, at least he stands there with dignity in his picture frame."},
+   {line:"Als Staatsoberhaupt vertritt er Deutschland, unterschreibt Gesetze und ernennt den gewählten Kanzler.",english:"As head of state, he represents Germany, signs laws and appoints the elected chancellor."},
+   {line:"Die Tagespolitik macht die Regierung. Er hält Reden und schüttelt bedeutungsvoll Hände.",english:"The government handles day-to-day politics. He gives speeches and shakes hands with great significance."},
    {line:"Also ehrlich: Diesen Job hätte ich wirklich gern.",english:"Honestly, I would really love to have that job."}
   ]
  },

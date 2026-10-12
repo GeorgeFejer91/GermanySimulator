@@ -9,6 +9,8 @@ bulletin](https://www.bundesregierung.de/breg-de/service/newsletter-und-abos/bul
 The game ships a 600 × 800 WebP and constructs its gilded frame in Three.js.
 The portrait's internal monologue uses Hans-Peter Mustermann's existing selected
 Nachschub player voice, with exact German captions and English translations.
+Its brief explanation of the office follows the [Bundestag's description of
+the federal presidency](https://www.bundestag.de/parlament/grundgesetz/gg-serie-07-bundespraesident-634572).
 
 Six painted Aktenkurier turn bridges were generated with OpenAI ImageGen from
 the existing character reference. Original anchors and new source art retain

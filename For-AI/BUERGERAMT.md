@@ -6,7 +6,11 @@ The clear wall beside the waiting-room entrance carries a gilded state portrait 
 Bundespräsident, Frank-Walter Steinmeier (verified 2026-10-12). Approaching it
 offers `E · BUNDESPRÄSIDENT BETRACHTEN`; E or the existing touch interaction
 starts four short thoughts spoken by **ICH**, using the selected
-`spieler-hans-peter-mustermann` Nachschub voice. The ceremonial-importance joke
+`spieler-hans-peter-mustermann` Nachschub voice. The monologue briefly explains
+his head-of-state role: representing Germany, signing laws and appointing the
+elected chancellor; day-to-day policy belongs to the government. Its factual
+outline follows the [Bundestag's role description](https://www.bundestag.de/parlament/grundgesetz/gg-serie-07-bundespraesident-634572).
+The ceremonial-importance joke
 ends with “Also ehrlich: Diesen Job hätte ich wirklich gern.” The portrait
 never speaks and no visible actor mouth is assigned. This optional sequence
 keeps the room visible, follows the existing serialized speech lifecycle,

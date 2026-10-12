@@ -187,41 +187,41 @@
       "actorId": "player",
       "voiceId": "spieler-hans-peter-mustermann",
       "profileId": "b027d18a4fc748cabb133fbb14077500",
-      "text": "Reden halten, Hände schütteln, sehr ernst in die Kamera schauen.",
-      "english": "Give speeches, shake hands, look very serious for the camera.",
+      "text": "Als Staatsoberhaupt vertritt er Deutschland, unterschreibt Gesetze und ernennt den gewählten Kanzler.",
+      "english": "As head of state, he represents Germany, signs laws and appoints the elected chancellor.",
       "sourceLocator": "buergeramt-story.js presidentPortrait.lines[1].line",
-      "seed": 171001,
-      "synthesisAttempt": 2,
+      "seed": 71001,
+      "synthesisAttempt": 1,
       "referenceSha256": "6b6ff2c747ef11fb883fc1c9804d270c6ba34cc5614db4d132f8e6172b9f60ad",
       "authoringHelperSha256": "6a473856c0791c7102a4798f84ac126451db00acdf5683ff76d2fab855ef4298",
-      "rendererInputText": "Reden halten, Hände schütteln, sehr ernst in die Kamera schauen.",
+      "rendererInputText": "Als Staatsoberhaupt vertritt er Deutschland, unterschreibt Gesetze und ernennt den gewählten Kanzler.",
       "decode": {
-        "maxSpeechTokens": 280,
+        "maxSpeechTokens": 304,
         "attentionHooksBefore": 0,
-        "generatedSpeechTokens": 137,
+        "generatedSpeechTokens": 188,
         "eosReached": true,
         "eosKind": "analyzer-forced",
-        "eosSuppressionObservedSteps": 94,
+        "eosSuppressionObservedSteps": 161,
         "modelEosRestoredSteps": 0,
-        "alignmentFirstCompletedStep": 95,
+        "alignmentFirstCompletedStep": 162,
         "nativeAnalyzerSourceSha256": "d8430efa92aedb8e59b782c1d299fe7238570eecea9d293c0981a5ee2e82c8c7",
         "eosPolicy": "Native analyzer unchanged; observation only",
-        "t3InferenceSeconds": 14.09,
+        "t3InferenceSeconds": 24.86,
         "temporaryAnalyzerHooksRemoved": 6,
         "attentionHooksAfter": 0,
-        "eosTraceSha256": "5f9f54df735d08762f48517b8395803c925b4cfcc630e4e47b8cc0b21ce053bd"
+        "eosTraceSha256": "d0b7d2474dce0cfd1dd121141a626da7b07a2bc33ea73555dd91ccb74e80afcf"
       },
       "rendererInputBasis": "exact authored source",
-      "requestSha256": "528938058799e82d907bac309c400b4aa4e2459e83dbda991e94ce9e3b9e9e25",
+      "requestSha256": "0ef91220dd80bca50ecc3f86448fd9490afcaad01c3b607ec0e134b725c544a2",
       "referenceOriginalSha256": "4f4b181750c65430c68d20d742b02529f5e5db6650cb57171fe2e52ea8ee2dbf",
       "profileJsonSha256": "7d5ce6ff22d3da1a0a062cdb4a521bdf744dccd621b64a75a58a3fd0a255abe6",
-      "rawSha256": "ece3de9ecc64bdad0c8a72d87021d39178d758a7ed6f9ecab401eb4f6953eb94",
+      "rawSha256": "8d3fe137c53ebeafbd536d10ca547adb7de7c185083b61fe1170f1404b71ba34",
       "renderer": "ResembleAI/Chatterbox Multilingual V2 0.1.7",
       "modelRevision": "5bb1f6ee58e50c3b8d408bc82a6d3740c2db6e18",
       "modelLicense": "MIT",
       "referenceLicense": "CC0-1.0 (Thorsten-Voice Dataset 2021.06 emotional)",
-      "durationSeconds": 5.44,
-      "renderSeconds": 27.16,
+      "durationSeconds": 7.48,
+      "renderSeconds": 47.2,
       "synthesis": {
         "temperature": 0.65,
         "repetitionPenalty": 3,
@@ -246,12 +246,12 @@
       "normalization": {
         "targetLufs": -18,
         "targetTruePeakDbtp": -1.5,
-        "filter": "loudnorm=I=-16.490000000000002:TP=-1.8:LRA=11:linear=false",
+        "filter": "loudnorm=I=-14.680000000000003:TP=-1.8:LRA=11:linear=false",
         "iterations": 3
       },
-      "integratedLufs": -18.22,
-      "truePeakDbtp": -2.23,
-      "asr": "Reden halten, Hände schütteln, sehr ernst in die Kamera schauen.",
+      "integratedLufs": -18.27,
+      "truePeakDbtp": -2.2,
+      "asr": "Als Staatsoberhaupt vertritt er Deutschland, unterschreibt Gesetze und ernennt den gewählten Kanzler.",
       "asrWordExact": true,
       "asrLiteralWordExact": true,
       "asrNormalization": "case/punctuation, German numeric and A38 spoken equivalents, guarded full-hour and date-ordinal equivalents, section sign/Paragraf orthography, German compound spacing",
@@ -266,58 +266,68 @@
       "asrReadings": [
         {
           "beamSize": 1,
-          "transcript": "Reden halten, Hände schütteln, sehr ernst in die Kamera schauen.",
-          "transcribeSeconds": 7.91,
+          "transcript": "Als Staatsoberhaupt vertritt er Deutschland, unterschreibt Gesetze und ernennt den gewählten Kanzler.",
+          "transcribeSeconds": 12.99,
           "words": [
             {
-              "word": " Reden",
+              "word": " Als",
               "start": 0,
-              "end": 0.6
+              "end": 0.3
             },
             {
-              "word": " halten,",
-              "start": 0.6,
-              "end": 0.92
+              "word": " Staatsoberhaupt",
+              "start": 0.3,
+              "end": 1.44
             },
             {
-              "word": " Hände",
-              "start": 1.24,
-              "end": 1.6
+              "word": " vertritt",
+              "start": 1.44,
+              "end": 1.92
             },
             {
-              "word": " schütteln,",
-              "start": 1.6,
-              "end": 2.06
+              "word": " er",
+              "start": 1.92,
+              "end": 2.04
             },
             {
-              "word": " sehr",
-              "start": 2.5,
-              "end": 2.62
+              "word": " Deutschland,",
+              "start": 2.04,
+              "end": 2.48
             },
             {
-              "word": " ernst",
-              "start": 2.62,
-              "end": 3.06
+              "word": " unterschreibt",
+              "start": 2.88,
+              "end": 3.72
             },
             {
-              "word": " in",
-              "start": 3.06,
-              "end": 3.22
+              "word": " Gesetze",
+              "start": 3.72,
+              "end": 4.26
             },
             {
-              "word": " die",
-              "start": 3.22,
-              "end": 3.28
+              "word": " und",
+              "start": 4.26,
+              "end": 4.68
             },
             {
-              "word": " Kamera",
-              "start": 3.28,
-              "end": 3.56
+              "word": " ernennt",
+              "start": 4.68,
+              "end": 5.2
             },
             {
-              "word": " schauen.",
-              "start": 3.56,
-              "end": 3.92
+              "word": " den",
+              "start": 5.2,
+              "end": 5.4
+            },
+            {
+              "word": " gewählten",
+              "start": 5.4,
+              "end": 5.96
+            },
+            {
+              "word": " Kanzler.",
+              "start": 5.96,
+              "end": 6.5
             }
           ]
         }
@@ -328,66 +338,78 @@
         {
           "at": 0,
           "charIndex": 0,
-          "word": "Reden",
-          "end": 0.6
+          "word": "Als",
+          "end": 0.3
         },
         {
-          "at": 0.6,
-          "charIndex": 6,
-          "word": "halten",
-          "end": 0.92
+          "at": 0.3,
+          "charIndex": 4,
+          "word": "Staatsoberhaupt",
+          "end": 1.44
         },
         {
-          "at": 1.24,
-          "charIndex": 14,
-          "word": "Hände",
-          "end": 1.6
-        },
-        {
-          "at": 1.6,
+          "at": 1.44,
           "charIndex": 20,
-          "word": "schütteln",
-          "end": 2.06
+          "word": "vertritt",
+          "end": 1.92
         },
         {
-          "at": 2.5,
-          "charIndex": 31,
-          "word": "sehr",
-          "end": 2.62
+          "at": 1.92,
+          "charIndex": 29,
+          "word": "er",
+          "end": 2.04
         },
         {
-          "at": 2.62,
-          "charIndex": 36,
-          "word": "ernst",
-          "end": 3.06
+          "at": 2.04,
+          "charIndex": 32,
+          "word": "Deutschland",
+          "end": 2.48
         },
         {
-          "at": 3.06,
-          "charIndex": 42,
-          "word": "in",
-          "end": 3.22
-        },
-        {
-          "at": 3.22,
+          "at": 2.88,
           "charIndex": 45,
-          "word": "die",
-          "end": 3.28
+          "word": "unterschreibt",
+          "end": 3.72
         },
         {
-          "at": 3.28,
-          "charIndex": 49,
-          "word": "Kamera",
-          "end": 3.56
+          "at": 3.72,
+          "charIndex": 59,
+          "word": "Gesetze",
+          "end": 4.26
         },
         {
-          "at": 3.56,
-          "charIndex": 56,
-          "word": "schauen",
-          "end": 3.92
+          "at": 4.26,
+          "charIndex": 67,
+          "word": "und",
+          "end": 4.68
+        },
+        {
+          "at": 4.68,
+          "charIndex": 71,
+          "word": "ernennt",
+          "end": 5.2
+        },
+        {
+          "at": 5.2,
+          "charIndex": 79,
+          "word": "den",
+          "end": 5.4
+        },
+        {
+          "at": 5.4,
+          "charIndex": 83,
+          "word": "gewählten",
+          "end": 5.96
+        },
+        {
+          "at": 5.96,
+          "charIndex": 93,
+          "word": "Kanzler",
+          "end": 6.5
         }
       ],
-      "sha256": "122315aa27672ab4e78c6a4fcc3976cab18d7deeee3d1693483dc23571fd6b59",
-      "bytes": 87980,
+      "sha256": "438c97ba651da311721e9f2a43ebce5a3044ec42c15703bfbc00fe4eb6028cd3",
+      "bytes": 120620,
       "sampleRateHz": 48000,
       "channels": 1,
       "bitrateBitsPerSecond": 128000,
@@ -395,8 +417,8 @@
       "approval": {
         "status": "user-approved",
         "date": "2026-10-12",
-        "instruction": "Use the first-person player voice for the sarcastic Bundespräsident portrait interaction, ending with wanting the job.",
-        "scope": "User-requested portrait inner monologue in the existing selected player voice",
+        "instruction": "The dialogue should briefly explain what this person’s job is.",
+        "scope": "Revised portrait duties explanation in the existing selected player voice",
         "listeningVerified": false
       }
     },
@@ -405,41 +427,41 @@
       "actorId": "player",
       "voiceId": "spieler-hans-peter-mustermann",
       "profileId": "b027d18a4fc748cabb133fbb14077500",
-      "text": "Und wenn hier das Amt stillsteht, steht er wenigstens würdevoll im Bilderrahmen.",
-      "english": "And when this office grinds to a halt, at least he stands there with dignity in his picture frame.",
+      "text": "Die Tagespolitik macht die Regierung. Er hält Reden und schüttelt bedeutungsvoll Hände.",
+      "english": "The government handles day-to-day politics. He gives speeches and shakes hands with great significance.",
       "sourceLocator": "buergeramt-story.js presidentPortrait.lines[2].line",
       "seed": 71002,
       "synthesisAttempt": 1,
       "referenceSha256": "6b6ff2c747ef11fb883fc1c9804d270c6ba34cc5614db4d132f8e6172b9f60ad",
       "authoringHelperSha256": "6a473856c0791c7102a4798f84ac126451db00acdf5683ff76d2fab855ef4298",
-      "rendererInputText": "Und wenn hier das Amt stillsteht, steht er wenigstens würdevoll im Bilderrahmen.",
+      "rendererInputText": "Die Tagespolitik macht die Regierung. Er hält Reden und schüttelt bedeutungsvoll Hände.",
       "decode": {
         "maxSpeechTokens": 304,
         "attentionHooksBefore": 0,
-        "generatedSpeechTokens": 144,
+        "generatedSpeechTokens": 151,
         "eosReached": true,
         "eosKind": "analyzer-forced",
-        "eosSuppressionObservedSteps": 109,
+        "eosSuppressionObservedSteps": 125,
         "modelEosRestoredSteps": 0,
-        "alignmentFirstCompletedStep": 110,
+        "alignmentFirstCompletedStep": 126,
         "nativeAnalyzerSourceSha256": "d8430efa92aedb8e59b782c1d299fe7238570eecea9d293c0981a5ee2e82c8c7",
         "eosPolicy": "Native analyzer unchanged; observation only",
-        "t3InferenceSeconds": 22.2,
+        "t3InferenceSeconds": 21.09,
         "temporaryAnalyzerHooksRemoved": 3,
         "attentionHooksAfter": 0,
-        "eosTraceSha256": "c5441ad9dde78a4fe4c5975c98589da2b1fe44d2ce80888d882d15b06f8a04ed"
+        "eosTraceSha256": "66ec3eba299207085a465552092541d93bf00078a27573e7ee3db709bf92b96b"
       },
       "rendererInputBasis": "exact authored source",
-      "requestSha256": "528938058799e82d907bac309c400b4aa4e2459e83dbda991e94ce9e3b9e9e25",
+      "requestSha256": "0ef91220dd80bca50ecc3f86448fd9490afcaad01c3b607ec0e134b725c544a2",
       "referenceOriginalSha256": "4f4b181750c65430c68d20d742b02529f5e5db6650cb57171fe2e52ea8ee2dbf",
       "profileJsonSha256": "7d5ce6ff22d3da1a0a062cdb4a521bdf744dccd621b64a75a58a3fd0a255abe6",
-      "rawSha256": "cdaf849fc413729748cb11012582d458e09560049211b7062b91153d13bdea3b",
+      "rawSha256": "604d2fab6c1d57f4a595e756aad476cbc4f39a18d5636b043b0cc0ac5d92d36f",
       "renderer": "ResembleAI/Chatterbox Multilingual V2 0.1.7",
       "modelRevision": "5bb1f6ee58e50c3b8d408bc82a6d3740c2db6e18",
       "modelLicense": "MIT",
       "referenceLicense": "CC0-1.0 (Thorsten-Voice Dataset 2021.06 emotional)",
-      "durationSeconds": 5.72,
-      "renderSeconds": 45.12,
+      "durationSeconds": 6,
+      "renderSeconds": 36,
       "synthesis": {
         "temperature": 0.65,
         "repetitionPenalty": 3,
@@ -464,14 +486,14 @@
       "normalization": {
         "targetLufs": -18,
         "targetTruePeakDbtp": -1.5,
-        "filter": "loudnorm=I=-16.759999999999998:TP=-1.8:LRA=11:linear=false",
-        "iterations": 3
+        "filter": "loudnorm=I=-17.68:TP=-1.8:LRA=11:linear=false",
+        "iterations": 2
       },
-      "integratedLufs": -18.16,
-      "truePeakDbtp": -2.21,
-      "asr": "Und wenn hier das Amt stillsteht, steht er wenigstens würdevoll im Bilderrahmen.",
+      "integratedLufs": -18.14,
+      "truePeakDbtp": -2.22,
+      "asr": "Die Tagespolitik macht die Regierung, erhält Reden und schüttelt bedeutungsvoll Hände.",
       "asrWordExact": true,
-      "asrLiteralWordExact": true,
+      "asrLiteralWordExact": false,
       "asrNormalization": "case/punctuation, German numeric and A38 spoken equivalents, guarded full-hour and date-ordinal equivalents, section sign/Paragraf orthography, German compound spacing",
       "asrModel": "independent faster-whisper, cached local model, cpu int8 (effective int8_float32), no script prompt",
       "asrCpuThreads": 2,
@@ -484,150 +506,72 @@
       "asrReadings": [
         {
           "beamSize": 1,
-          "transcript": "Und wenn hier das Amt stillsteht, steht er wenigstens würdevoll im Bilderrahmen.",
-          "transcribeSeconds": 11.58,
+          "transcript": "Die Tagespolitik macht die Regierung, erhält Reden und schüttelt bedeutungsvoll Hände.",
+          "transcribeSeconds": 9.2,
           "words": [
             {
-              "word": " Und",
+              "word": " Die",
               "start": 0,
               "end": 0.14
             },
             {
-              "word": " wenn",
+              "word": " Tagespolitik",
               "start": 0.14,
-              "end": 0.36
+              "end": 1.22
             },
             {
-              "word": " hier",
-              "start": 0.36,
-              "end": 0.76
+              "word": " macht",
+              "start": 1.22,
+              "end": 1.64
             },
             {
-              "word": " das",
-              "start": 0.76,
-              "end": 1.04
+              "word": " die",
+              "start": 1.64,
+              "end": 1.82
             },
             {
-              "word": " Amt",
-              "start": 1.04,
-              "end": 1.46
+              "word": " Regierung,",
+              "start": 1.82,
+              "end": 2.48
             },
             {
-              "word": " stillsteht,",
-              "start": 1.46,
-              "end": 2.16
+              "word": " erhält",
+              "start": 2.92,
+              "end": 3.2
             },
             {
-              "word": " steht",
-              "start": 2.28,
-              "end": 2.54
+              "word": " Reden",
+              "start": 3.2,
+              "end": 3.64
             },
             {
-              "word": " er",
-              "start": 2.54,
-              "end": 2.7
+              "word": " und",
+              "start": 3.64,
+              "end": 3.78
             },
             {
-              "word": " wenigstens",
-              "start": 2.7,
-              "end": 3.26
+              "word": " schüttelt",
+              "start": 3.78,
+              "end": 4.1
             },
             {
-              "word": " würdevoll",
-              "start": 3.26,
-              "end": 3.76
+              "word": " bedeutungsvoll",
+              "start": 4.1,
+              "end": 4.94
             },
             {
-              "word": " im",
-              "start": 3.76,
-              "end": 3.88
-            },
-            {
-              "word": " Bilderrahmen.",
-              "start": 3.88,
-              "end": 4.58
+              "word": " Hände.",
+              "start": 4.94,
+              "end": 5.28
             }
           ]
         }
       ],
       "asrModelSha256": "e76620f83d5f5b69efd3d87e3dc180c1bd21df9fbebacfd4335e5e1efcc018da",
       "asrModelDirectoryName": "voice-asr-model",
-      "wordCues": [
-        {
-          "at": 0,
-          "charIndex": 0,
-          "word": "Und",
-          "end": 0.14
-        },
-        {
-          "at": 0.14,
-          "charIndex": 4,
-          "word": "wenn",
-          "end": 0.36
-        },
-        {
-          "at": 0.36,
-          "charIndex": 9,
-          "word": "hier",
-          "end": 0.76
-        },
-        {
-          "at": 0.76,
-          "charIndex": 14,
-          "word": "das",
-          "end": 1.04
-        },
-        {
-          "at": 1.04,
-          "charIndex": 18,
-          "word": "Amt",
-          "end": 1.46
-        },
-        {
-          "at": 1.46,
-          "charIndex": 22,
-          "word": "stillsteht",
-          "end": 2.16
-        },
-        {
-          "at": 2.28,
-          "charIndex": 34,
-          "word": "steht",
-          "end": 2.54
-        },
-        {
-          "at": 2.54,
-          "charIndex": 40,
-          "word": "er",
-          "end": 2.7
-        },
-        {
-          "at": 2.7,
-          "charIndex": 43,
-          "word": "wenigstens",
-          "end": 3.26
-        },
-        {
-          "at": 3.26,
-          "charIndex": 54,
-          "word": "würdevoll",
-          "end": 3.76
-        },
-        {
-          "at": 3.76,
-          "charIndex": 64,
-          "word": "im",
-          "end": 3.88
-        },
-        {
-          "at": 3.88,
-          "charIndex": 67,
-          "word": "Bilderrahmen",
-          "end": 4.58
-        }
-      ],
-      "sha256": "097403e3307813bb6a4735f86b79d855693ec7b893e9ffee2231f3dede72a111",
-      "bytes": 92588,
+      "wordCues": [],
+      "sha256": "992edba877d76a987f58d7e64ca5fafb19959c891803ad7f47d5f7f2ee5a7197",
+      "bytes": 96812,
       "sampleRateHz": 48000,
       "channels": 1,
       "bitrateBitsPerSecond": 128000,
@@ -635,8 +579,8 @@
       "approval": {
         "status": "user-approved",
         "date": "2026-10-12",
-        "instruction": "Use the first-person player voice for the sarcastic Bundespräsident portrait interaction, ending with wanting the job.",
-        "scope": "User-requested portrait inner monologue in the existing selected player voice",
+        "instruction": "The dialogue should briefly explain what this person’s job is.",
+        "scope": "Revised portrait duties explanation in the existing selected player voice",
         "listeningVerified": false
       }
     },
