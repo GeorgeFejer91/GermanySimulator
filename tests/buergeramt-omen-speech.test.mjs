@@ -17,12 +17,12 @@ function speaking(options={}){
 
 test('the authored omen delivery overrides profile hints; clerk speech uses her profile',()=>{
  const h=speaking(),delivery=h.window.BuergeramtStory.omen.delivery,utterance=h.synth.current;
- assert.equal(utterance.text,line);assert.equal(utterance.rate,delivery.rate);assert.equal(utterance.pitch,delivery.pitch);
+ assert.equal(utterance.text,line);assert.equal(utterance.rate,delivery.rate*h.level.timeScale);assert.equal(utterance.pitch,delivery.pitch*h.level.timeScale);
  assert.equal(delivery.rate,.82);assert.equal(delivery.pitch,.72);
  assert.ok(delivery.contour.every(mark=>line.includes(mark.word)&&mark.tension>=0&&mark.tension<=1&&mark.semitones>=-6&&mark.semitones<=3));
  assert.equal(h.level.omen.speech.mode,'voice');assert.equal(h.level.omen.speech.rate,delivery.rate);assert.equal(h.level.omen.speech.pitch,delivery.pitch);
  const desk=harness('host',{voice:true});desk.counter();
- assert.equal(desk.synth.current.rate,.89);assert.equal(desk.synth.current.pitch,.77);
+ assert.equal(desk.synth.current.rate,.89*desk.level.timeScale);assert.equal(desk.synth.current.pitch,.77*desk.level.timeScale);
 });
 
 test('arrival waits for an observed voice start before speech progress or ducking',()=>{

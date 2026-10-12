@@ -21,7 +21,7 @@ test('ambient selection varies voices and text while a failed or absent catalogu
   if(mode==='unrecorded')h.window.GermanySimulatorAudioText={recordedClip:(voiceId,text)=>{if(text!==story.queueCall.line)seen.push({voiceId,text});return null}};
   else delete h.window.GermanySimulatorAudioText;
   const captions=[];let previous='';
-  for(let i=0;i<8600;i++){h.elapse(.05);const caption=h.node('amt-ambient').textContent;if(caption&&caption!==previous&&caption!=='FRAU KNICK: '+story.queueCall.line)captions.push(caption);previous=caption;}
+  for(let i=0;i<18000&&new Set(captions).size<21;i++){h.elapse(.1);const caption=h.node('amt-ambient').textContent;if(caption&&caption!==previous&&caption!=='FRAU KNICK: '+story.queueCall.line)captions.push(caption);previous=caption;}
   assert.equal(h.synth.spoken.length,0);assert(new Set(captions).size>=17);
   for(const caption of captions){const row=story.ambient.find(row=>caption===people[row.actor].speaker+': '+row.text);assert(row,caption);}
   for(let i=1;i<seen.length;i++){assert.notEqual(seen[i].voiceId,seen[i-1].voiceId);assert.notEqual(seen[i].text,seen[i-1].text);}
@@ -29,7 +29,8 @@ test('ambient selection varies voices and text while a failed or absent catalogu
 });
 
 test('background lines keep caption and mouth ownership, honor voices off, and cancel on counter entry',()=>{
- const h=harness('host',{voice:false});h.register();h.advanceGame(8.6);
+ const h=harness('host',{voice:false});h.register();
+ for(let i=0;i<1600&&!story.ambient.some(row=>h.node('amt-ambient').textContent===people[row.actor].speaker+': '+row.text);i++)h.elapse(.05);
  const caption=h.node('amt-ambient').textContent,row=story.ambient.find(row=>caption===people[row.actor].speaker+': '+row.text);
  assert(row);assert.equal(h.level.lipSpeech.actor,row.actor);assert.equal(h.level.lipSpeech.active,false);assert.equal(h.synth.spoken.length,0);
  h.approachCounter();h.level.interact();h.tick(20);assert(!h.node('amt-ambient').textContent.includes(row.text));

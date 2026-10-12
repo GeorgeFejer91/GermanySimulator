@@ -22,14 +22,14 @@ for(const dt of [1/60,1/30,.1]){
   const origin=[actor.x,actor.z],frames=new Set();let turnTime=0;
   while(level.omen.phase==='turn'){
    frames.add(Math.min(8,Math.floor(level.omen.turnProgress*9)));
-   level.update(dt);turnTime+=dt;
+   const beforeTime=level.floorState.visualTime;level.update(dt);turnTime+=level.floorState.visualTime-beforeTime;
    if(level.omen.phase==='turn'){assert.equal(actor.x,origin[0]);assert.equal(actor.z,origin[1])}
   }
   assert.equal(frames.size,9,'every individual turn view receives playback time');
   assert(Math.abs(turnTime-1.8)<=dt+1e-8,'turn ends in 1.8 seconds');
   let departTime=0,travel=0;
   while(level.omen.phase==='depart'){
-   const before=[actor.x,actor.z];level.update(dt);departTime+=dt;
+   const before=[actor.x,actor.z],beforeTime=level.floorState.visualTime;level.update(dt);departTime+=level.floorState.visualTime-beforeTime;
    const move=Math.hypot(actor.x-before[0],actor.z-before[1]);travel+=move;
    assert(move<=(level.omen.phase==='depart'?.60:.75)*dt+1e-8,'faster exit retains swept movement bounds');
   }

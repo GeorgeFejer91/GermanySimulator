@@ -111,7 +111,7 @@ test('ambient clerks and waiting voices share ownership; voice-off stays neutral
  for(const clerk of Object.values(h.window.BuergeramtStory.clerks))h.window.GermanySimulatorAudioText.productionVoices[clerk.voiceId].fallback='captions';
  for(let index=0;index<21;index++){
   const before=h.synth.spoken.length;
-  p.ambientStep(9);h.tick(20);const actor=level.lipSpeech.actor;
+  for(let turn=0;turn<6;turn++){p.ambientStep(9);h.tick(20);if(level.lipSpeech.actor)break;}const actor=level.lipSpeech.actor;
   assert(h.window.BuergeramtStory.ambient.some(row=>row.actor===actor&&h.node('amt-ambient').textContent.endsWith(row.text)));
   assert.equal(level.lipSpeech.active,false);assert.equal(h.synth.spoken.length,before);h.tick(15000);
   assert.equal(level.lipSpeech.actor,null);

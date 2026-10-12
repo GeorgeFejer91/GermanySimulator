@@ -116,7 +116,7 @@ test('a nearby regular owns the visible dialogue mood and releases the queue on 
 });
 
 test('city audio gates optional actor speech and a replaced cue never starts later',()=>{
- let cityBusy=true;const h=harness('host',{voice:true,cinematics:false,cityAudioBusy:()=>cityBusy});
+ let cityBusy=true;const h=harness('host',{voice:true,cinematics:false,cityAudioBusy:()=>cityBusy,random:()=>0});
  h.enter();h.moveTo(3.4,1.2);const before=h.synth.spoken.length;h.level.interact();
  assert.equal(h.level.stage,'character');h.tick(2500);assert.equal(h.synth.spoken.length,before);
  h.level.replay(h.config);cityBusy=false;h.tick(500);assert.equal(h.synth.spoken.length,before);
@@ -125,7 +125,7 @@ test('city audio gates optional actor speech and a replaced cue never starts lat
 });
 
 test('city audio gates waiting-room speech and releases it when the city clears',()=>{
- let cityBusy=true;const h=harness('host',{voice:true,cinematics:false,cityAudioBusy:()=>cityBusy});
+ let cityBusy=true;const h=harness('host',{voice:true,cinematics:false,cityAudioBusy:()=>cityBusy,random:()=>0});
  h.enter();h.advanceGame(9);const before=h.synth.spoken.length;
  assert.equal(before,0);assert.equal(h.node('amt-ambient').textContent,'');
  cityBusy=false;h.level.update(.1);h.tick(20);assert.equal(h.synth.spoken.length,0);
