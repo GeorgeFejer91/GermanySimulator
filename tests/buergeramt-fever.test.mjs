@@ -77,7 +77,7 @@ test('continuous envelope is monotonic at entry and exit without boundary or fal
 
 test('a long paused encounter rebuilds its bounded sound bed only on visible resume',()=>{
  const h=harness('host',{cinematics:true,voice:true,fakeAudio:true});approachPatron(h);h.synth.start();h.advanceGame(1.2);
- h.synth.pause();h.tick(113000);h.audio.flushEnded();h.advanceGame(.05);
+ h.synth.pause();h.tick(91000);h.audio.flushEnded();h.advanceGame(.05);
  const before=h.audio.nodes.filter(n=>n.kind==='oscillator'&&n.started.length).length;
  h.advanceGame(3);assert.equal(h.audio.nodes.filter(n=>n.kind==='oscillator'&&n.started.length).length,before);
  h.synth.resume();h.advanceGame(.1);assert.equal(h.audio.nodes.filter(n=>n.kind==='oscillator'&&n.started.length).length,before+3);

@@ -34,7 +34,7 @@ function rateRecording(clip){if(!clip)return;clip.defaultPlaybackRate=clip.playb
 // Peer deadlines and receipts stay monotonic. Only authored audio and repeat/read
 // durations consume the host's one office tempo; this page has no goop clock.
 function officeRate(rate){
- if(!Number.isFinite(rate)||rate<.4||rate>1||rate===officeTempo)return;
+ if(!Number.isFinite(rate)||rate<.5||rate>1||rate===officeTempo)return;
  const now=performance.now(),previous=officeTempo;
  for(const phase of [ringCadence,readableFallback])if(phase){phase.remainingMs=Math.max(0,phase.remainingMs-Math.max(0,now-phase.atMs)*previous);phase.atMs=now}
  officeTempo=rate;rateRecording(recordedSpeech);
@@ -61,8 +61,8 @@ function repeatRing(atMs){ringTimer=null;ringCadence=null;if(closed||finished||c
 function incomingCall(message){
  if(!armedCall||!slotActive||currentCall||phoneSilent||finished||closed)return;
  const receivedAt=performance.now(),leadMs=message.leadMs;let target=null,mode="receipt";
- if(Number.isFinite(message.ringAtPhoneMs)&&message.ringAtPhoneMs>=receivedAt-12000&&message.ringAtPhoneMs<=receivedAt+5500){target=message.ringAtPhoneMs;mode="peer"}
- else if(Number.isSafeInteger(message.ringAtUtcMs)&&clockService?.usable?.(clockAnchor,receivedAt)){const proposed=clockService.monoAt(clockAnchor,message.ringAtUtcMs);if(proposed>=receivedAt-12000&&proposed<=receivedAt+5500){target=proposed;mode="utc"}}
+ if(Number.isFinite(message.ringAtPhoneMs)&&message.ringAtPhoneMs>=receivedAt-12000&&message.ringAtPhoneMs<=receivedAt+4400){target=message.ringAtPhoneMs;mode="peer"}
+ else if(Number.isSafeInteger(message.ringAtUtcMs)&&clockService?.usable?.(clockAnchor,receivedAt)){const proposed=clockService.monoAt(clockAnchor,message.ringAtUtcMs);if(proposed>=receivedAt-12000&&proposed<=receivedAt+4400){target=proposed;mode="utc"}}
  if(target===null)target=receivedAt+leadMs;
  const lateMs=Math.min(12000,Math.max(0,Math.round(receivedAt-target))),ringAtMs=Math.max(receivedAt,target);
  currentCall=message.id;armedCall=false;resolved="";policeIndex=-1;openingPoliceLine=message.line;callState.textContent=copy.ringing;
@@ -90,8 +90,8 @@ function playNextPolice(){
  finishPoliceVoice=finish;
  const fallback=()=>{if(!current()||startedAt!==null&&mode==="fallback")return;clearTimeout(voiceTimer);mode="fallback";started("fallback");readableFallback={remainingMs:Math.max(3500,text.length*55),atMs:performance.now()};voiceTimer=setTimeout(finish,readableFallback.remainingMs/officeTempo)};
  // Live recordings can slow down after onset. Reserve the bounded slowest
- // playback lifetime rather than cutting a valid 0.4x line at the old timeout.
- const playbackLimit=Math.max(20000,text.length*140)/.4;
+ // playback lifetime rather than cutting a valid 0.5x line at the old timeout.
+ const playbackLimit=Math.max(20000,text.length*140 )/.5;
  const browserSpeech=()=>{
   if(!window.speechSynthesis||typeof window.SpeechSynthesisUtterance!=="function"){fallback();return}
   const utterance=new SpeechSynthesisUtterance(text);utterance.lang="de-DE";utterance.volume=1;
@@ -138,7 +138,7 @@ link.addEventListener("message",e=>{
  else if(m.type==="police-cutoff"&&resolved==="answer"&&slotActive&&Number.isInteger(m.index)&&m.index===activePoliceIndex&&finishPoliceVoice){
   const now=performance.now();let target=Number.isFinite(m.stopAtPhoneMs)?m.stopAtPhoneMs:null;
   if(target===null&&Number.isSafeInteger(m.stopAtUtcMs)&&clockService?.usable?.(clockAnchor,now))target=clockService.monoAt(clockAnchor,m.stopAtUtcMs);
-  if(target!==null&&(target<now-12000||target>now+20000))return;
+  if(target!==null&&(target<now-12000||target>now+16000))return;
   const generation=voiceGeneration,finish=finishPoliceVoice;clearTimeout(cutoffTimer);
   const cut=()=>{cutoffTimer=null;if(generation!==voiceGeneration||m.index!==activePoliceIndex)return;finish();try{window.speechSynthesis?.cancel()}catch{}};
   if(target===null||target<=now)cut();else cutoffTimer=setTimeout(cut,target-now);

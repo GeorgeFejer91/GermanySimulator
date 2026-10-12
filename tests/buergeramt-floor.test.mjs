@@ -20,8 +20,8 @@ function fixture(mobile=false){
       assert.notEqual(scene.mesh.material.uniforms.previousOil.value,this.target.texture,'never read the write target');
       if(this.fail)throw Error('GPU unavailable');renders.push({target:this.target,seed:scene.mesh.material.uniforms.seed.value});}}
   class Vector2{constructor(x=0,y=0){this.set(x,y);}set(x,y){Object.assign(this,{x,y});return this;}}
-  class Vector4{constructor(x=0,y=0,z=0,w=0){this.set(x,y,z,w);}set(x,y,z,w){Object.assign(this,{x,y,z,w});return this;}}
-  const T={WebGLRenderTarget:Target,PlaneGeometry:Geometry,ShaderMaterial:Material,Scene,Mesh,OrthographicCamera:class{},Vector2,Vector4,FloatType:1,RedFormat:2,LinearFilter:3};
+  class Vector4{constructor(x=0,y=0,z=0,w=1){this.set(x,y,z,w);}set(x,y,z,w){Object.assign(this,{x,y,z,w});return this;}}
+  const T={WebGLRenderTarget:Target,PlaneGeometry:Geometry,ShaderMaterial:Material,Scene,Mesh,OrthographicCamera:class{},Vector2,Vector4,FloatType:1,RGBAFormat:2,LinearFilter:3};
   const floor=createAmtFloor({THREE:T,renderer,material,mobile});
   return{floor,resources,renders,renderer,previous,listeners,material};
 }
@@ -35,19 +35,22 @@ test('the room clock starts inside the doorway, continues in dialogue and freeze
   assert.equal(h.level.floorState.time,0);assert.ok(h.level.floorState.visit>visit);
   h.node('amt-exit').click();h.advanceGame(10);assert.equal(h.level.floorState.time,0);
 });
-test('liquidation and slowdown share one smooth 210-second ramp, capped at 40% speed',()=>{
+test('liquidation and slowdown share one smooth 600-second sigmoid, capped at 50% speed',()=>{
   for(const t of [-1,0,NaN,Infinity])assert.equal(amtFloorMelt(t),0);
-  assert.equal(amtFloorMelt(105),.5);assert.equal(amtFloorMelt(210),1);assert.equal(amtFloorMelt(10000),1);
-  const api=globalThis.BuergeramtGoop;assert.equal(api.speed(0),1);assert.equal(api.speed(105),.7);assert.equal(api.speed(210),.4);assert.equal(api.motion(210),147);
-  let previous=0;for(let t=0;t<300;t+=.1){const value=amtFloorMelt(t);assert.ok(value>=previous&&value<=1);previous=value;}
-  for(const time of [0,1,21,60,105,160,210,999]){const f=fixture();f.floor.update({visit:1,time});assert.equal(f.floor.inspect().speed,1-.6*f.floor.inspect().melt);f.floor.update({visit:1,time},true);assert.equal(f.floor.inspect().speed,1-.6*f.floor.inspect().melt);}
+  assert.equal(amtFloorMelt(300),.5);assert.equal(amtFloorMelt(600),1);assert.equal(amtFloorMelt(10000),1);
+  const api=globalThis.BuergeramtGoop;assert.equal(api.speed(0),1);assert.equal(api.speed(300),.75);assert.equal(api.speed(600),.5);assert.equal(api.motion(600),450);
+  assert.equal(api.duration,600);assert.equal(api.minSpeed,.5);
+  assert.ok(api.goop(150)<.12&&api.goop(450)>.88,'sigmoid has slow tails and a faster middle');
+  for(const t of [30,150,300,450,570,610]){const derivative=(api.motion(t+.001)-api.motion(t-.001))/.002;assert.ok(Math.abs(derivative-api.speed(t))<1e-7,'integrated scene time follows the exact shared speed');}
+  let previous=0;for(let t=0;t<700;t+=.1){const value=amtFloorMelt(t);assert.ok(value>=previous&&value<=1);previous=value;}
+  for(const time of [0,1,21,60,300,160,600,999]){const f=fixture();f.floor.update({visit:1,time});assert.equal(f.floor.inspect().speed,1-.5*f.floor.inspect().melt);f.floor.update({visit:1,time},true);assert.equal(f.floor.inspect().speed,1-.5*f.floor.inspect().melt);}
 });
 test('20 Hz transport is frame-rate independent, allocates only on melting, and preserves renderer state',()=>{
   for(const fps of [30,60]){
     const f=fixture();f.floor.update({visit:1,time:0,visualTime:0});
-    assert.equal(f.resources.length,0);
+    assert.equal(f.resources.length,0);assert.equal(f.floor.inspect().portraitSource,false,'missing source is inactive with real Three.js vector defaults');
     for(let i=1;i<=fps*4;i++)f.floor.update({visit:1,time:i/fps,visualTime:i/fps});
-    const s=f.floor.inspect();assert.equal(s.steps,80);assert.equal(s.allocations,1);assert.equal(s.textureBytes,655360);
+    const s=f.floor.inspect();assert.equal(s.steps,80);assert.equal(s.allocations,1);assert.equal(s.textureBytes,2621440);
     assert.equal(f.renders.length,81);assert.equal(f.renders[0].seed,1);
     assert.equal(f.renderer.target,f.previous);assert.equal(f.renderer.autoClear,false);assert.equal(f.renderer.xr.enabled,true);
     for(let i=0;i<100;i++)f.floor.update({visit:1,time:4,visualTime:4});assert.equal(f.renders.length,81);
@@ -60,7 +63,7 @@ test('20 Hz transport is frame-rate independent, allocates only on melting, and 
 test('hidden time does no transport; reduced motion, replay and close release all owned surfaces',()=>{
   const f=fixture(true),old=globalThis.document;globalThis.document={hidden:false};
   try{
-    f.floor.update({visit:1,time:20});f.floor.update({visit:1,time:20.1});assert.equal(f.floor.inspect().textureBytes,163840);
+    f.floor.update({visit:1,time:20});f.floor.update({visit:1,time:20.1});assert.equal(f.floor.inspect().textureBytes,655360);
     const count=f.renders.length;globalThis.document.hidden=true;f.floor.update({visit:1,time:50});assert.equal(f.renders.length,count);
     globalThis.document.hidden=false;f.floor.update({visit:1,time:20.1},true);
     assert.equal(f.floor.inspect().targets,0);assert.equal(f.floor.inspect().melt,amtFloorMelt(20.1));assert.ok(f.resources.every(r=>r.disposed===1));
@@ -91,8 +94,8 @@ test('only accepted displacement makes bounded footsteps; standing, blocked root
   for(let n=142;n<=330;n++)update(n*.05);assert.equal(f.floor.inspect().activeRipples,0);
   update(16.5);f.floor.update(null);assert.equal(f.floor.inspect().footsteps,0);
 });
-test('three-and-a-half minutes remain real residence time while motion integrates the shared drag',()=>{
-  const h=harness();h.moveTo(0,6.6);h.level.interact();h.advanceGame(210);
-  assert.ok(Math.abs(h.level.floorState.time-210)<1e-8);assert.equal(h.level.timeScale,.4);
-  assert.equal(h.level.floorState.goop,1);assert.ok(h.level.floorState.visualTime>=147&&h.level.floorState.visualTime<148);
+test('ten minutes remain real residence time while motion integrates the shared drag',()=>{
+  const h=harness();h.moveTo(0,6.6);h.level.interact();h.advanceGame(600);
+  assert.ok(Math.abs(h.level.floorState.time-600)<1e-8);assert.equal(h.level.timeScale,.5);
+  assert.equal(h.level.floorState.goop,1);assert.ok(h.level.floorState.visualTime>=450&&h.level.floorState.visualTime<451);
 });

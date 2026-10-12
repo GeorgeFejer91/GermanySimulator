@@ -1,6 +1,7 @@
 // Persistent pigment transport, not a pressure/velocity solver. The flat floor
 // stays solid; only its paint and shallow specular ridges melt.
-import './buergeramt-goop.js?v=20261012-goop-time';
+import './buergeramt-goop.js?v=20261012-ten-minute-paint';
+import {portraitPaintGlsl} from './buergeramt-portrait-melt.js?v=20261012-ten-minute-paint';
 const STEP=1/20;
 export function amtFloorMelt(time){return globalThis.BuergeramtGoop.goop(time);}
 const coordinates=`
@@ -16,7 +17,8 @@ const transport=`
   uniform vec4 footRipples[OIL_RIPPLE_COUNT];
   uniform vec2 footDirections[OIL_RIPPLE_COUNT];
   ${coordinates}
-  float readOil(vec2 uv){return texture2D(previousOil,uv).r;}
+  ${portraitPaintGlsl}
+  vec4 readOil(vec2 uv){return texture2D(previousOil,uv);}
   float potential(vec2 p){
     vec2 edge=min(p-floorMin,floorMin+floorSize-p);
     vec2 rim=smoothstep(vec2(0.),vec2(.85),edge);
@@ -27,7 +29,7 @@ const transport=`
   }
   void main(){
     vec2 p=floorMin+oilUv*floorSize;
-    if(seed>.5){gl_FragColor=vec4(vec3(floorCheck(p)),1.);return;}
+    if(seed>.5){gl_FragColor=vec4(vec3(floorCheck(p)),0.);return;}
     const float e=.035;
     vec2 flow=vec2(potential(p+vec2(0.,e))-potential(p-vec2(0.,e)),
                  potential(p-vec2(e,0.))-potential(p+vec2(e,0.)))/(2.*e);
@@ -38,16 +40,21 @@ const transport=`
         float wake=foot.w*exp(-age*.6)*exp(-dot(delta,delta)/.36);
         flow+=footDirections[i]*wake*.10+delta/max(.15,distance)*sin(distance*7.-age*1.8)*wake*.035;stirred+=wake;}
     }
+    flow+=vec2(.035*sin(p.y*2.),-.25)*readOil(oilUv).a;
     vec2 back=clamp(oilUv-flow*(.055+.14*melt*melt)*melt*.05/floorSize,texel*.5,1.-texel*.5);
-    float pigment=readOil(back);
-    float neighbors=(readOil(back+vec2(texel.x,0.))+readOil(back-vec2(texel.x,0.))+
+    vec4 pigment=readOil(back);
+    vec4 neighbors=(readOil(back+vec2(texel.x,0.))+readOil(back-vec2(texel.x,0.))+
                      readOil(back+vec2(0.,texel.y))+readOil(back-vec2(0.,texel.y)))*.25;
     pigment=mix(pigment,neighbors,melt*(.009+.018*min(1.,stirred)));
     // ponytail: an artistic segregation term retains oily islands during long
     // waits; use a phase-field solver only if physical two-fluid behavior matters.
-    pigment+=.05*.18*melt*pigment*(1.-pigment)*(2.*pigment-1.);
+    pigment.rgb+=.05*.18*melt*pigment.rgb*(1.-pigment.rgb)*(2.*pigment.rgb-1.)*(1.-pigment.a);
+    vec4 spill=amtPaintSpill(p,melt,clock);
+    float atWall=1.-smoothstep(.035,.13,abs(p.y-amtPortraitInfo.y));
+    float feed=.05*.95*spill.a*atWall;
+    pigment.rgb=mix(pigment.rgb,spill.rgb,feed);pigment.a=mix(pigment.a,1.,feed);
     pigment=clamp(pigment,0.,1.);
-    gl_FragColor=vec4(vec3(pigment),1.);
+    gl_FragColor=pigment;
   }
 `;
 const surface=`
@@ -56,6 +63,7 @@ const surface=`
   uniform float amtFloorTime,amtFloorMelt,amtFloorLive,amtFloorStill;
   uniform vec4 footRipples[OIL_RIPPLE_COUNT];
   ${coordinates}
+  ${portraitPaintGlsl}
   vec3 oilNormal(vec3 position,vec3 n,float height){
     vec3 sx=dFdx(position),sy=dFdy(position),rx=cross(sy,n),ry=cross(n,sx);
     float det=dot(sx,rx);
@@ -68,10 +76,11 @@ const surface=`
 export function createAmtFloor({THREE:T,renderer,material,mobile=false}){
   const width=mobile?128:256,height=mobile?160:320;
   // Lower-precision feedback visibly loses white through repeated tiny steps.
-  // R32F retains it; unsupported hardware uses procedural flow and foot ripples.
+  // RGBA32F retains it; unsupported hardware uses procedural flow and foot ripples.
   const floatMask=!!renderer.extensions?.has('EXT_color_buffer_float')&&!!renderer.extensions?.has('OES_texture_float_linear');
   const rippleCount=mobile?4:8,footRipples={value:Array.from({length:rippleCount},()=>new T.Vector4(0,0,-100,0))},footDirections={value:Array.from({length:rippleCount},()=>new T.Vector2())};
-  const uniforms={amtFloorOil:{value:null},amtFloorTime:{value:0},amtFloorMelt:{value:0},amtFloorLive:{value:0},amtFloorStill:{value:0},footRipples};
+  const amtPortraitPaint={value:null},amtPortraitInfo={value:new T.Vector4(0,0,1,0)};
+  const uniforms={amtFloorOil:{value:null},amtFloorTime:{value:0},amtFloorMelt:{value:0},amtFloorLive:{value:0},amtFloorStill:{value:0},footRipples,amtPortraitPaint,amtPortraitInfo};
   const bodies=new Map();let footSerial=0,playerSerial=0,footsteps=0;
   let targets=null,pass=null,quad=null,camera=null,read=0,visit=null,lastTime=0,lastMotion=0,carry=0,simTime=0,steps=0,allocations=0,failure=null,reduced=false;
   const compile=material.onBeforeCompile,key=material.customProgramCacheKey();
@@ -93,6 +102,8 @@ export function createAmtFloor({THREE:T,renderer,material,mobile=false}){
       float grout=1.-smoothstep(.009,.016+max(fwidth(amtFloorPoint.x),fwidth(amtFloorPoint.y)),min(cellEdge.x,cellEdge.y));
       float ridges=1.-abs(floorPigment*2.-1.);
       vec3 floorPaint=mix(vec3(.006,.007,.009),vec3(.72,.73,.71),floorPigment);
+      vec4 floorColor=amtFloorLive>.5?texture2D(amtFloorOil,(amtFloorPoint-floorMin)/floorSize):amtPaintSpill(amtFloorPoint,amtFloorMelt,warpTime);
+      floorPaint=mix(floorPaint,vec3(.012)+floorColor.rgb*.72,clamp(floorColor.a*1.5,0.,1.));
       floorPaint=mix(floorPaint,vec3(.10),grout*(1.-smoothstep(.0,.22,amtFloorMelt)));
       diffuseColor.rgb*=floorPaint;
       float oilHeight=(1.-amtFloorStill)*amtFloorMelt*(.004*ridges+.009*sin(amtFloorPoint.x*2.7+amtFloorPoint.y*.9+amtFloorTime*.08)
@@ -117,7 +128,7 @@ export function createAmtFloor({THREE:T,renderer,material,mobile=false}){
       totalEmissiveRadiance+=vec3(.48,.46,.40)*lampReflection*amtFloorMelt;
     `);
   };
-  material.customProgramCacheKey=()=>key+':amt-oil-floor-v2:'+rippleCount;material.color.set(0xffffff);material.needsUpdate=true;
+  material.customProgramCacheKey=()=>key+':amt-oil-floor-v3:'+rippleCount;material.color.set(0xffffff);material.needsUpdate=true;
 
   function release(){
     if(targets){for(const target of targets)target.dispose();targets=null;}
@@ -138,11 +149,11 @@ export function createAmtFloor({THREE:T,renderer,material,mobile=false}){
     }finally{renderer.setRenderTarget(before);renderer.autoClear=auto;renderer.xr.enabled=xr;}
   }
   function prepare(time){
-    targets=[0,1].map(()=>new T.WebGLRenderTarget(width,height,{type:T.FloatType,format:T.RedFormat,
+    targets=[0,1].map(()=>new T.WebGLRenderTarget(width,height,{type:T.FloatType,format:T.RGBAFormat,
       minFilter:T.LinearFilter,magFilter:T.LinearFilter,depthBuffer:false,stencilBuffer:false,generateMipmaps:false}));
     pass=new T.Scene();camera=new T.OrthographicCamera(-1,1,1,-1,0,1);
     quad=new T.Mesh(new T.PlaneGeometry(2,2),new T.ShaderMaterial({depthTest:false,depthWrite:false,toneMapped:false,
-      uniforms:{previousOil:{value:null},texel:{value:new T.Vector2(1/width,1/height)},clock:{value:0},melt:{value:0},seed:{value:1},footRipples,footDirections},
+      uniforms:{previousOil:{value:null},texel:{value:new T.Vector2(1/width,1/height)},clock:{value:0},melt:{value:0},seed:{value:1},footRipples,footDirections,amtPortraitPaint,amtPortraitInfo},
       vertexShader:'varying vec2 oilUv;void main(){oilUv=uv;gl_Position=vec4(position.xy,0.,1.);}',fragmentShader:'#define OIL_RIPPLE_COUNT '+rippleCount+'\n'+transport}));
     pass.add(quad);read=0;simTime=time;draw(true);allocations++;uniforms.amtFloorLive.value=1;
   }
@@ -183,7 +194,7 @@ export function createAmtFloor({THREE:T,renderer,material,mobile=false}){
     }catch(error){failure=String(error?.message||error);release();uniforms.amtFloorStill.value=1;}
   }
   renderer.domElement?.addEventListener('webglcontextlost',release);
-  return{update,dispose(){release();renderer.domElement?.removeEventListener('webglcontextlost',release);},inspect:()=>({time:lastTime,visit,melt:uniforms.amtFloorMelt.value,reducedMotion:reduced,
-    visualTime:lastMotion,speed:globalThis.BuergeramtGoop.speed(lastTime),simulatedTime:simTime,steps,targets:targets?2:0,resolution:[width,height],precision:floatMask?'R32F':'procedural',textureBytes:targets?width*height*8:0,allocations,failure,
+  return{update,setPortrait(texture,{x,z,width}){amtPortraitPaint.value=texture;amtPortraitInfo.value.set(x,z,width,texture?1:0);},dispose(){release();renderer.domElement?.removeEventListener('webglcontextlost',release);},inspect:()=>({time:lastTime,visit,melt:uniforms.amtFloorMelt.value,reducedMotion:reduced,
+    portraitSource:!!amtPortraitInfo.value.w,visualTime:lastMotion,speed:globalThis.BuergeramtGoop.speed(lastTime),simulatedTime:simTime,steps,targets:targets?2:0,resolution:[width,height],precision:floatMask?'RGBA32F':'procedural',textureBytes:targets?width*height*32:0,allocations,failure,
     footsteps,activeRipples:footRipples.value.filter(foot=>lastMotion-foot.z>=0&&lastMotion-foot.z<8).length,rippleLimit:rippleCount})};
 }

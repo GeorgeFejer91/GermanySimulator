@@ -68,7 +68,7 @@ No new synthesis or voice profile is needed for this restoration.
 ## Waiting-room floor
 
 The room begins with .82 m black-and-white checkerboard tiles and painted grout.
-Over **210 seconds (3.5 minutes) of visible, unscaled residence inside the actual
+Over **600 seconds (10 minutes) of visible, unscaled residence inside the actual
 doorway**, their pigment gradually stretches into curling veins and merging oily
 pools. Grout disappears and the surface develops shallow specular ridges and
 distorted analytic reflections of the five existing fluorescent ceiling strips.
@@ -77,21 +77,23 @@ No floor height, furniture, body clearance or collision changes; gait remains
 tied to accepted displacement.
 
 **Liquidation and deceleration must map one to one.** `buergeramt-goop.js` is the
-single immutable authority: `p = clamp(age / 210, 0, 1)`,
-`goop = p²(3 − 2p)`, and `speed = 1 − 0.6 × goop`. Thus the start is 100% speed,
-105 seconds is 50% goop / 70% speed, and 210 seconds is full goop / **40% speed**.
+single immutable authority: `p = clamp(age / 600, 0, 1)`,
+`s(p) = 1 / (1 + exp(−8(p − .5)))`,
+`goop = (s(p) − s(0)) / (s(1) − s(0))`, and `speed = 1 − 0.5 × goop`. Thus the start is 100% speed,
+300 seconds is 50% goop / 75% speed, and 600 seconds is full goop / **50% speed**.
 Keep the final floor and time scale capped there. Never add a separate melting
 delay, independent easing, second time-scale ramp, or feed slowed time back into
-the 210-second age; that would break the user's explicit coupling requirement.
+the 600-second age; that would break the user's explicit coupling requirement.
 
 `buergeramt.js` owns unscaled `floorState.time`, integrated `visualTime`, and
 attempt generation. Count age only while the player's position is inside the
 door; continue through conversations and fever/omen beats, pause age in the
 vestibule and when hidden/closed, and reset both clocks on close/replay. Its exact
-integral of speed drives player/NPC movement, queue and deadlines, action/fever/
+logistic integral of speed (450 scene seconds over 600 real residence seconds)
+drives player/NPC movement, queue and deadlines, action/fever/
 omen clocks, atlas/breath/mouth animation and liquid transport. Render and input
-dispatch stay responsive. `buergeramt-floor.js` carries one pigment
-field forward with prescribed curl flow, mild diffusion and an artistic contrast
+dispatch stay responsive. `buergeramt-floor.js` carries one
+RGBA paint field forward with prescribed curl flow, mild diffusion and an artistic contrast
 retention term. It is a texture transport effect, not a Navier–Stokes or physical
 two-fluid solver. It never replaces the evolving pigment with unrelated noise.
 Without renderable, linearly sampled floating targets, a bounded procedural
@@ -105,6 +107,21 @@ total on desktop and four on compact screens; nearby NPCs share the remainder.
 The existing room isolation/fade owns opacity and depth-write restoration.
 Reduced motion and GPU failure retain a static spatial melting approximation
 with the same goop/speed value, without ripple animation or pigment targets.
+
+The existing Steinmeier oil portrait melts on exactly this same sigmoid and
+residence clock. `buergeramt-portrait-melt.js` stretches the real painted image
+into downward threads, gradually exposing the bare backing. A transparent,
+depth-tested sheet continues those threads from the frame to y=.0024 m; its
+front reaches the ground before it can feed the floor. The existing floor pass
+injects the same image colors at that contact, then transports and diffuses them
+with the black/white oils and walking wakes. RGBA stores mixed RGB plus deposited
+paint coverage. The gilded frame, nameplate, original photo, collision envelope
+and optional ICH monologue retain their existing ownership. No picture speaks.
+Missing portrait paint keeps the labeled fallback intact without fictional
+colored spill; reduced motion uses a static spatial melt/spill approximation.
+Close/replay restores the picture and clears the paint field; the shared source
+texture remains in the existing office asset cache. Do not create a second
+portrait clock, floor decal disconnected from deposition, or particle timer.
 
 Recorded host and phone voices use this same playback rate with pitch preservation
 disabled; their media clocks still own word/mouth cues. Office hum, score, FX,
@@ -125,7 +142,23 @@ both-color retention, Android-emulated views and material restoration probe is
 `tools/playtest-buergeramt-floor.mjs`. Accelerated shader captures do not prove
 natural mission flow or physical-device performance.
 
-The 2026-10-12 floor candidate passed 396 workflow-selected Node checks, separate
+The current ten-minute, 50%-cap portrait/floor update passed 403 workflow
+checks, plus focused tests and independent Physics/Camera review after fixing
+an absent-image source flag. Desktop and Android portrait/landscape emulation
+passed RGB transport, native .5/.75/1 rates, accepted walking, fade/reduced-motion
+and replay checks. An independently aborted portrait image retains zero paint
+and colored pixels through 900 seconds. Clear side views show continuous frame
+to-ground threads; desktop colored floor coverage grows from 3.36% at 600 seconds
+to 9.04% at 900 seconds. Three cold full-goop runs per desktop/mobile profile
+before/after passed the existing browser gates, with median sampled frame p95
+about 21 ms on Intel Iris Xe. These use controlled scenes and different authored
+end tempos; they establish scoped regression evidence, not a speedup. Root and
+`3d.html` passed all three startup viewports. Current task evidence and the causal
+map are under ignored `output/ten-minute-paint/`. Physical Android, perceptual
+listening, actual paired-phone delivery and natural ten-minute rendered residence
+remain untested.
+
+The earlier 3.5-minute, 40%-cap floor candidate passed 396 workflow-selected Node checks, separate
 Physics and Camera reviews, and silent desktop/Android portrait/landscape GPU
 checks. Six-minute accelerated captures retain both pigments; native host media
 playheads follow .4/.7/1 rates. Collision recovery, including recovery plus a

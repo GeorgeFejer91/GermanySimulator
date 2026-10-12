@@ -436,11 +436,12 @@ The office checkerboard uses the existing floor mesh and lit material. Its
 painted grout replaces the former individual grout boxes. `buergeramt-floor.js`
 adds no image, video, runtime package or extra WebGL context. When visible
 inside-room progression begins it allocates two 256 × 320 desktop or
-128 × 160 compact-screen pigment targets. R32F requires renderable float and
+128 × 160 compact-screen pigment targets. RGBA32F requires renderable float and
 linear float sampling; unsupported devices use bounded procedural flow and
-foot ripples without feedback targets. R32F uses four bytes per texel:
-the pair totals 655,360 bytes
-(0.625 MiB) on desktop or 163,840 bytes (0.15625 MiB) on compact screens, without
+foot ripples without feedback targets. RGBA32F uses sixteen bytes per texel for mixed RGB and portrait paint
+coverage:
+the pair totals 2,621,440 bytes
+(2.5 MiB) on desktop or 655,360 bytes (0.625 MiB) on compact screens, without
 depth/stencil or mipmaps. Half-float was rejected after actual GPU tests showed
 white disappearing during repeated tiny transport steps.
 
@@ -456,6 +457,10 @@ approximation, preserving the shared goop/speed mapping. Ripple uniforms are
 bounded to eight desktop or four compact-screen events; the existing controller
 supplies accepted-walk distance and reposition generations, with no polling or
 extra animation loop.
+The portrait adds one cached two-triangle drip sheet and two composed material
+hooks, sharing the existing portrait texture; no extra feedback pass or target.
+Actual color deposition begins only when a visible paint thread reaches the
+floor. The floor keeps its 20 Hz scaled-time ceiling and two-pass frame limit.
 GPU readback exists only in the test server's injected measurement seam.
 
 ### Responsiveness and selective preparation protocol

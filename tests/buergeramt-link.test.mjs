@@ -99,7 +99,7 @@ function generatedProtocol(linkSource=source('buergeramt-link.js')){
     ['police-start',receipt],['phone-hidden',{}]
    ]:[
     ['ticket',{counter:1+integer(4),number:'B-'+String(integer(1000)).padStart(3,'0')}],['police-line',{index:integer(3),line}],
-    ['call',{id:'grass',line,ringAtPhoneMs:choose([null,at]),ringAtUtcMs:choose([null,at]),leadMs:choose([600,5000,integer(4401)+600])}],['done',{}]
+    ['call',{id:'grass',line,ringAtPhoneMs:choose([null,at]),ringAtUtcMs:choose([null,at]),leadMs:choose([600,4400,integer(3801)+600])}],['done',{}]
    ]);
    coverage.types.add(type);
    if(type==='register')coverage.nameLengths.add(data.name.length);

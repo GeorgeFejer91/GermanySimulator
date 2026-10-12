@@ -119,7 +119,7 @@ test('decoded stems and fallback oscillators stop after the shared gradual unwin
  const h=harness('host',{cinematics:true,fakeAudio:true});h.enterUntilOmen();await flushPromises();
  assert.equal(h.audio.pendingDecodes.length,2);h.audio.resolveDecodes();await flushPromises();
  const stems=h.audio.nodes.filter(node=>node.kind==='buffer-source'&&node.loop&&node.started.length);
- assert.equal(stems.length,2);assert.ok(stems.every(node=>node.stopped[0]<=60));
+ assert.equal(stems.length,2);assert.ok(stems.every(node=>node.stopped[0]<=48));
  const fallback=h.audio.nodes.filter(node=>node.kind==='oscillator'&&[63.7,64.4,95.35,191.1].includes(node.amtFrequency));
  assert.equal(fallback.length,4);assert.ok(fallback.every(node=>node.started.length===1));
  stepToGlare(h);h.advanceGame(5.3);
@@ -141,6 +141,6 @@ test('the bounded fallback frees its graph if the scene never advances',async()=
  h.audio.resolveDecodes();await flushPromises();
  const fallback=h.audio.nodes.filter(node=>node.kind==='oscillator'&&[63.7,64.4,95.35,191.1].includes(node.amtFrequency));
  const output=fallback[0].connections[0].connections[0];
- h.tick(60010);h.audio.flushEnded();
+ h.tick(48010);h.audio.flushEnded();
  assert.ok(fallback.every(node=>node.ended));assert.equal(output.disconnected,true);
 });

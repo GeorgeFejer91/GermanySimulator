@@ -1,6 +1,7 @@
 import {createAmtGaussianScene,loadAmtSplatModule} from './buergeramt-gaussian-scene.js?v=20261012-queue-call';
 import {mouthPaintGlsl} from './buergeramt-mouth-paint.js?v=20261011-mouth-consistency';
-import {createAmtFloor} from './buergeramt-floor.js?v=20261012-oil-floor';
+import {createAmtFloor} from './buergeramt-floor.js?v=20261012-ten-minute-paint';
+import {createAmtPortraitMelt} from './buergeramt-portrait-melt.js?v=20261012-ten-minute-paint';
 import {prepareWithSegments,measureNaturalWidth,measureLineStats} from './assets/vendor/pretext/dist/layout.js';
 const THREE_URL="https://cdn.jsdelivr.net/npm/three@0.186.0/build/three.module.js";
 const GLTF_LOADER_URL="https://cdn.jsdelivr.net/npm/three@0.186.0/examples/jsm/loaders/GLTFLoader.js";
@@ -1188,6 +1189,8 @@ function showRendererFailure(error){
   const presidentFallback=amtLabel("BUNDESPRÄSIDENT",512,256,"#443b2c","#ead39a");
   const presidentMaterial=new T.MeshBasicMaterial({map:presidentFallback.texture});
   const presidentCanvas=new T.Mesh(new T.PlaneGeometry(1.45,1.94),presidentMaterial);presidentCanvas.position.z=.125;presidentFrame.add(presidentCanvas);
+  const amtPortraitMelt=createAmtPortraitMelt({THREE:T,material:presidentMaterial,frame:presidentFrame,floor:amtFloorEffect,position:president,width:1.45*.88});
+  addEventListener("pagehide",()=>amtPortraitMelt.update(null),{once:true});
   const presidentName=amtLabel("FRANK-WALTER STEINMEIER",768,128,"#e1c174","#17130c",.75),presidentNameplate=new T.Mesh(new T.PlaneGeometry(1.55,.16),new T.MeshBasicMaterial({map:presidentName.texture}));
   presidentNameplate.position.set(0,-1.06,.14);presidentFrame.add(presidentNameplate);
   function amtPaintMaterial(height){
@@ -1264,7 +1267,7 @@ function showRendererFailure(error){
   const amtStationaryDetails=new Map();
   function loadAmtImages(){
     if(amtImagesRequested)return;amtImagesRequested=true;
-    amtTexture("./assets/buergeramt/president-steinmeier.webp?v=20261012-portrait",texture=>{presidentMaterial.map=texture;presidentMaterial.needsUpdate=true;presidentFallback.texture.dispose()},undefined,true);
+    amtTexture("./assets/buergeramt/president-steinmeier.webp?v=20261012-portrait",texture=>{presidentMaterial.map=texture;presidentMaterial.needsUpdate=true;amtPortraitMelt.setTexture(texture);presidentFallback.texture.dispose()},undefined,true);
     officeAssetPending++;
     const loadDetail=()=>import("./assets/buergeramt/office-detail.js?v=20261011-published-features").then(()=>{
       const detail=window.GermanyAmtOfficeDetail.create(T,{compact:amtMobile,anisotropy:renderer.capabilities.getMaxAnisotropy()});
@@ -1577,7 +1580,7 @@ function showRendererFailure(error){
   }
   function renderAmt(){const level=window.BuergeramtLevel;
     if(!level||!level.active&&!document.body.classList.contains("amt-direct-mode")){
-      amtFloorEffect.update(null);
+      amtFloorEffect.update(null);amtPortraitMelt.update(null);
       clearAmtTurnPaint();
       if(amtOmenSplat||amtOmenRequest)clearAmtOmenSplat();
       amtMouthSplat?.dispose();amtMouthSplat=null;
@@ -1588,7 +1591,7 @@ function showRendererFailure(error){
       return false;
     }
     if(!amtHiDpi){amtHiDpi=true;resize()}
-    amtFloorEffect.update(level.floorState,amtReducedMotion.matches,level.view,level.characters);
+    amtFloorEffect.update(level.floorState,amtReducedMotion.matches,level.view,level.characters);amtPortraitMelt.update(level.floorState,amtReducedMotion.matches);
     loadAmtImages();
     for(const actor of amtCharacters)if(actor.performance){actor.lead=actor.counter===level.activeClerkCounter;actor.lipId=actor.lead?"clerk":"clerk-"+actor.counter}
     const fever=level.fever;
@@ -1681,7 +1684,7 @@ function showRendererFailure(error){
   addEventListener("pageshow",()=>{const done=amtEntryResume;amtEntryResume=null;bridge.clearInput?.();done?.()});
   captureStartupAssets();
   startupModelsCaptured=true;
-  window.Germany3D={ready:true,isWorldPointVisible,isVehicleVisible,clearAmtFloor(){amtFloorEffect.update(null)},get amtFloor(){return {...amtFloorEffect.inspect(),opacity:floor.opacity,transparent:floor.transparent,depthWrite:floor.depthWrite}},prepareNearbyAssets,prepareOfficeAssets:loadAmtImages,clearAmtOmenSplat,enterBuergeramt,clearAmtGaussianAnimations(){amtMouthSplat?.dispose();amtMouthSplat=null;amtGaussian.clear();restoreAmtCharacterLayers()},
+  window.Germany3D={ready:true,isWorldPointVisible,isVehicleVisible,clearAmtFloor(){amtFloorEffect.update(null);amtPortraitMelt.update(null)},get amtPortraitMelt(){return amtPortraitMelt.inspect()},get amtFloor(){return {...amtFloorEffect.inspect(),opacity:floor.opacity,transparent:floor.transparent,depthWrite:floor.depthWrite}},prepareNearbyAssets,prepareOfficeAssets:loadAmtImages,clearAmtOmenSplat,enterBuergeramt,clearAmtGaussianAnimations(){amtMouthSplat?.dispose();amtMouthSplat=null;amtGaussian.clear();restoreAmtCharacterLayers()},
   get amtEntry(){return {active:!!amtEntry,failure:entryFailure,...amtEntry?.inspect()}},
   get nearbyAssetsReady(){updateAssetView();return cityModelJobs.every(job=>job.state==="settled"||cityModelDistance(job)>30&&!isCityAssetVisible(job))},
   get officeAssetsReady(){return amtImagesRequested&&officeAssetPending===0},get officeAssetStatus(){return {pending:officeAssetPending,failed:officeAssetFailures}},

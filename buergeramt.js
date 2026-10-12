@@ -92,7 +92,7 @@ function startOmenTone(){
  const audio=initOfficeAudio();if(!audio||omenTone)return;
  const {ctx,fx}=audio,now=ctx.currentTime,output=ctx.createGain(),filter=ctx.createBiquadFilter();
  output.gain.setValueAtTime(0,now);filter.type="lowpass";filter.frequency.value=280;output.connect(filter).connect(fx);
- const tone={ctx,output,filter,voices:[],stems:[],endAt:now+60,rendered:false},owner=attempt;
+ const tone={ctx,output,filter,voices:[],stems:[],endAt:now+48,rendered:false},owner=attempt;
  const attach=(source,gain)=>{const voice={source,gain,ended:false};tone.voices.push(voice);source.onended=()=>{if(voice.ended)return;voice.ended=true;source.disconnect();gain.disconnect();if(tone.voices.every(item=>item.ended)){output.disconnect();filter.disconnect()}}};
  // The small oscillator bed is also the no-network/no-codec fallback.
  for(const [index,frequency] of [63.7,64.4,95.35,191.1].entries()){
@@ -139,7 +139,7 @@ function startFeverTone(){
   const source=ctx.createOscillator(),gain=ctx.createGain();source.type=index===2?"triangle":"sine";source.frequency.value=register*ratio;gain.gain.value=index===2?.035:.06;
   source.connect(gain).connect(output);const voice={source,gain,frequency:register*ratio,ended:false};tone.voices.push(voice);
   source.onended=()=>{voice.ended=true;source.disconnect();gain.disconnect();if(tone.voices.every(v=>v.ended)){output.disconnect();filter.disconnect()}};
-  source.start(now);source.stop(now+112.5);
+  source.start(now);source.stop(now+90);
  }
  updateFeverTone();
 }
@@ -443,7 +443,7 @@ function say(text,onComplete,onStart,onBoundary,delivery=null,voiceId="",allowCa
  if(!voiced){start("fallback");return}
  officeSpeechBusy=true;
  const utterance=new SpeechSynthesisUtterance(text);utterance.lang="de-DE";utterance.rate=(delivery?.rate??.96)*timeScale();utterance.pitch=(delivery?.pitch??1)*timeScale();utterance.volume=mix.voice*(delivery.volumeScale??1);
- utterance.onstart=()=>{if(!current()||settled||failed)return;start("voice");if(onComplete||onStart){const lag=Math.max(0,performance.now()-requestedAt);hostVoiceStartupMs=hostVoiceStartupMs===null?lag:Math.round(hostVoiceStartupMs*.6+lag*.4)}if(fallback!==null)clearTimer(fallback);if(onComplete){completionRemaining=Math.max(20000,text.length*120)/.4;completionDue=performance.now()+completionRemaining;fallback=defer(complete,completionRemaining)}};
+ utterance.onstart=()=>{if(!current()||settled||failed)return;start("voice");if(onComplete||onStart){const lag=Math.max(0,performance.now()-requestedAt);hostVoiceStartupMs=hostVoiceStartupMs===null?lag:Math.round(hostVoiceStartupMs*.6+lag*.4)}if(fallback!==null)clearTimer(fallback);if(onComplete){completionRemaining=Math.max(20000,text.length*120)/.5;completionDue=performance.now()+completionRemaining;fallback=defer(complete,completionRemaining)}};
  utterance.onboundary=event=>{if(current()&&started&&!settled&&!failed&&Number.isInteger(event.charIndex)){lips.boundary(event.charIndex);onBoundary?.(event.charIndex,event)}};
  utterance.onpause=()=>{if(!current()||!started||settled||failed||paused)return;paused=true;lips.pause();if(onComplete&&fallback!==null){completionRemaining=Math.max(0,completionDue-performance.now());clearTimer(fallback);fallback=null}delivery?.onPause?.()};
  utterance.onresume=()=>{if(!current()||!started||settled||failed||!paused)return;paused=false;lips.resume();if(onComplete){completionDue=performance.now()+completionRemaining;fallback=defer(complete,completionRemaining)}delivery?.onResume?.()};

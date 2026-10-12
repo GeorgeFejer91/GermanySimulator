@@ -22,7 +22,7 @@ function awaitShout(h,clips){const before=clips.length;for(let i=0;i<6000&&clips
 test('each new board call schedules exactly one bounded abrasive double beep',()=>{
  const h=harness('host',{fakeAudio:true});h.enter();h.advanceGame(3.2);
  assert.equal(h.level.queueDisplay,'Z-7');assert.deepEqual(beeps(h).map(n=>n.amtFrequency),[1480,1960]);assert.ok(beeps(h).every(n=>Math.abs(n.frequency.value-n.amtFrequency*h.level.timeScale)<1e-8));
- const [a,b]=beeps(h);assert.ok(Math.abs((b.started[0]-a.started[0])/(a.stopped[0]-a.started[0])-.18/.17)<1e-8,'both scheduled spans use the same onset tempo');assert.ok(beeps(h).every(n=>n.stopped[0]-n.started[0]<=.17/.4+1e-8));
+ const [a,b]=beeps(h);assert.ok(Math.abs((b.started[0]-a.started[0])/(a.stopped[0]-a.started[0])-.18/.17)<1e-8,'both scheduled spans use the same onset tempo');assert.ok(beeps(h).every(n=>n.stopped[0]-n.started[0]<=.17/.5+1e-8));
  assert(beeps(h).every(osc=>osc.connections[0].gain.events.some(([kind,value])=>kind==='linear'&&value===.012)));
  h.level.update(0);h.level.update(0);assert.equal(beeps(h).length,2);h.advanceGame(3.2);assert.equal(beeps(h).length,4);
  h.hide();h.advanceGame(10);assert.equal(beeps(h).length,4);
@@ -40,7 +40,7 @@ test('35–75 second quiet gaps yield to speech and never build a queue of annou
  let cityBusy=true;const h=harness('host',{voice:true,cityAudioBusy:()=>cityBusy}),clips=recording(h);h.enter();h.elapse(120);assert.equal(clips.length,0);
  cityBusy=false;h.level.update(0);h.tick(16);assert.equal(clips.length,1);assert.equal(h.node('amt-ambient').textContent,'FRAU KNICK: Nächste bitte!');
  h.elapse(20);assert.equal(clips.length,1);clips[0].end();const ended=h.level.floorState.visualTime;h.elapse(34);assert.equal(clips.length,1);awaitShout(h,clips);h.tick(16);assert(h.level.floorState.visualTime-ended>=35);assert(h.level.floorState.visualTime-ended<100);
- cityBusy=true;clips[1].end();h.elapse(180);assert.equal(clips.length,2);cityBusy=false;h.level.update(0);h.tick(16);assert.equal(clips.length,3);h.elapse(10);assert.equal(clips.length,3);
+ cityBusy=true;clips[1].end();h.elapse(180);assert.equal(clips.length,2);h.tick(Math.ceil(360/h.level.timeScale));assert.equal(clips.length,2);cityBusy=false;h.level.update(0);h.tick(16);assert.equal(clips.length,3);h.elapse(10);assert.equal(clips.length,3);
 });
 
 test('voice-off uses a short exact caption without fetching speech, and replay clears queued/active calls',()=>{
