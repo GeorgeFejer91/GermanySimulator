@@ -51,7 +51,13 @@ for (const skill of manifest.skills) {
   assert(!names.has(skill.name), 'Duplicate skill: ' + skill.name);
   names.add(skill.name);
   assert(/^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(skill.name), 'Invalid skill name');
-  assert(/^[0-9a-f]{40}$/.test(skill.source.commit), 'Source must be an immutable commit');
+  if (skill.source.kind === 'project-authored') {
+    assert(skill.source.repository && /^\d{4}-\d{2}-\d{2}$/.test(skill.source.createdAt), 'Missing original project provenance');
+    assert(skill.source.path === skill.installedPath, 'Original source must name its tracked bundle');
+    assert(!skill.source.commit && skill.files.every(file => !file.upstreamPath && !file.upstreamSha256), 'Original provenance cannot replace upstream pinning');
+  } else {
+    assert(/^[0-9a-f]{40}$/.test(skill.source.commit), 'Source must be an immutable commit');
+  }
   assert(skill.installedPath === '.agents/skills/' + skill.name, 'Unexpected destination');
   assert(skill.license.id && skill.license.attribution && skill.adaptations.length, 'Missing license/attribution/adaptations');
   assert(routes.includes('$' + skill.name), 'Skill missing from task routing: ' + skill.name);
@@ -79,7 +85,7 @@ for (const skill of manifest.skills) {
   }
   exactFile(path.join(bundle, skill.license.installedPath));
   const source = fs.readFileSync(path.join(bundle, 'SOURCE.md'), 'utf8');
-  assert(source.includes(skill.source.commit) && source.includes(skill.license.id), 'Incomplete source record');
+  assert(source.includes(skill.source.kind === 'project-authored' ? 'project-authored' : skill.source.commit) && source.includes(skill.license.id), 'Incomplete source record');
   const entry = fs.readFileSync(path.join(bundle, 'SKILL.md'), 'utf8');
   const header = entry.match(/^---\r?\n([\s\S]*?)\r?\n---(?:\r?\n|$)/);
   assert(header, 'Missing frontmatter: ' + skill.name);
@@ -94,5 +100,5 @@ for (const skill of manifest.skills) {
     }
   }
 }
-console.log('PASS: ' + names.size + ' pinned skill bundles, ' + fileCount + ' hashed files, ' + referenceCount + ' local references.');
+console.log('PASS: ' + names.size + ' verified skill bundles, ' + fileCount + ' hashed files, ' + referenceCount + ' local references.');
 console.log('Checks cover integrity, basic discovery fields, notices and local references; workflow effectiveness remains NOT RUN.');

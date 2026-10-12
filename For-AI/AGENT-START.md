@@ -12,6 +12,7 @@ This is the standalone 3D “Grand Theft Amt” game, with keyboard and touch co
 
 - Gameplay, mission, or player-facing copy: read the applicable section of [`GAMEPLAY.md`](./GAMEPLAY.md), using its existing headings such as `Core loop`, `First Bürgeramt visit`, `Systems`, `World identity`, `Satirical voice and dialogue`, or `In-world copy: no explanatory disclaimers`.
 - Bürgeramt episode: also read the relevant beat or audio section in [`BUERGERAMT.md`](./BUERGERAMT.md).
+- Gameplay event chains, mission gates or story progression: use [`game-event-logic`](../.agents/skills/game-event-logic/SKILL.md) and the causal review route in [`SKILLS.md`](./SKILLS.md). Map intended content to actual triggers, mediators, guards and consequences; verify consequential dependencies before acceptance.
 - Art, models, asset loading, performance, or hosting: read the applicable rules in [`ASSET-POLICY.md`](./ASSET-POLICY.md). For 2D character motion or atlases, also read [`SPRITE-GENERATION-PROTOCOL.md`](./SPRITE-GENERATION-PROTOCOL.md) and the relevant animation skill route in [`SKILLS.md`](./SKILLS.md).
 - Asset, loader, rendering, input, UI or background-work changes: apply the [browser playability gate](./ASSET-POLICY.md#browser-playability-gate) and its [maintenance procedure](./ASSET-POLICY.md#maintaining-browser-playability) before acceptance. Include the applicable responsiveness/starting-and-approach contract in affected handoffs. Run the relevant executable checks and record comparable browser evidence; source checks alone cannot establish device playability.
 - World objects, placement, collision, pedestrian routes, movement, animation, camera, sprite depth or scale: read [`OBJECT-CONSISTENCY.md`](./OBJECT-CONSISTENCY.md). Assign its two independent read-only specialist subagents to the same integrated candidate before acceptance; a general QA reviewer does not replace them.
@@ -36,6 +37,8 @@ Prefer standard deterministic checks first. For browser-visible changes, the exp
 World-affecting candidates also need the physics and camera/scale gates in [`OBJECT-CONSISTENCY.md`](./OBJECT-CONSISTENCY.md), with source checks and actual rendered evidence reported separately. Keep any required `FAIL` or `NOT RUN` check outstanding. A task unrelated to world behavior may omit those reviewers only with a recorded scope reason.
 
 Use the [shared review format and evidence modes](./chatdev/README.md#shared-contracts-and-convergence). A forced scene does not prove the natural mission chain; packaging checks establish neither game performance nor skill effectiveness.
+
+For changed action/reaction dependencies, include the scoped causal map and verdict from `$game-event-logic`. Distinguish intended story requirements, source reasoning and executed gameplay evidence; leave required unproved links outstanding. Keep this evidence with the task, rather than adding a second event ledger to `For-AI/`.
 
 ### Silent background browser tests
 

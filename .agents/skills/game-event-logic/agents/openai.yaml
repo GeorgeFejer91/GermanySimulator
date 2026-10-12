@@ -1,0 +1,4 @@
+interface:
+  display_name: "Game Event Logic"
+  short_description: "Prove gameplay causes and story consequences"
+  default_prompt: "Use $game-event-logic to audit this gameplay sequence and prove that its runtime events support the intended story progression."

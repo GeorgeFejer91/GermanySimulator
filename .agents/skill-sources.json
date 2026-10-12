@@ -731,17 +731,77 @@
         "validatedAt": "2026-10-08",
         "workflowEffectiveness": "NOT RUN"
       }
+    },
+    {
+      "name": "game-event-logic",
+      "installedPath": ".agents/skills/game-event-logic",
+      "source": {
+        "kind": "project-authored",
+        "repository": "GeorgeFejer91/GermanySimulator",
+        "path": ".agents/skills/game-event-logic",
+        "createdAt": "2026-10-12"
+      },
+      "license": {
+        "id": "NOASSERTION",
+        "installedPath": "SOURCE.md",
+        "attribution": "Original skill authored with Codex for George Fejer at his request"
+      },
+      "adaptations": [
+        "Original causal review workflow; no upstream skill text incorporated"
+      ],
+      "projectApplicability": "Map the existing static game controllers, phone protocol and cue lifecycles to accepted story/gameplay contracts. Reuse existing tests and evidence; no new backend or event service.",
+      "files": [
+        {
+          "path": "SKILL.md",
+          "upstreamPath": null,
+          "upstreamSha256": null,
+          "installedSha256": "c9a70afb06b68a5cedeea22cd8475bfb2532055cd03639dc17682e6171eafb11"
+        },
+        {
+          "path": "SOURCE.md",
+          "upstreamPath": null,
+          "upstreamSha256": null,
+          "installedSha256": "2ad37d90d1da4230bc7dbced9b0b52ba38d8e257000015e4e7eea35ed0ef351e"
+        },
+        {
+          "path": "agents/openai.yaml",
+          "upstreamPath": null,
+          "upstreamSha256": null,
+          "installedSha256": "fc270b3d55dd22c29ac9385758c4e9e5b7d0ea11a4c8563f851a6d57aa8c5926"
+        },
+        {
+          "path": "references/mediation-probes.md",
+          "upstreamPath": null,
+          "upstreamSha256": null,
+          "installedSha256": "0f17f7d6ba5f6cf752f043c79dc87c5d30e25ee410189b38ab9cbfa84c345c8d"
+        }
+      ],
+      "validation": {
+        "packaging": "PASS",
+        "codexFrontmatter": "PASS",
+        "workflowEffectiveness": "NOT RUN",
+        "controlledProductivity": "NOT RUN",
+        "validatedAt": "2026-10-12",
+        "functionalPilot": {
+          "date": "2026-10-12",
+          "result": "PASS: independent scoped causal audit retained the valid bridge chain and reproduced courier mediation/cancellation/reward failures",
+          "deterministicCases": 8,
+          "evidence": "Ignored task evidence under output/game-event-logic/forward-test/results/",
+          "scope": "Standalone controller fixtures; no whole-game, physical-device, observed-player or formal-proof claim"
+        }
+      }
     }
   ],
   "validation": {
     "command": "node tools/validate-game-skills.mjs",
     "result": "PASS",
-    "bundles": 11,
-    "hashedFiles": 64,
-    "localReferences": 47,
-    "codexFrontmatterChecks": 11,
+    "bundles": 12,
+    "hashedFiles": 68,
+    "localReferences": 48,
+    "codexFrontmatterChecks": 12,
     "readabilityCheckerSelfTest": "PASS",
     "workflowEffectiveness": "NOT RUN",
-    "readabilityCliCases": 8
+    "readabilityCliCases": 8,
+    "validatedAt": "2026-10-12"
   }
 }
