@@ -1,0 +1,646 @@
+{
+  "schemaVersion": 1,
+  "voiceId": "amt-konrad-wohnungszettel",
+  "profileId": "a1fd2081df674fba90118c4e6be303da",
+  "fallback": "browser",
+  "status": "same-profile technical and independent ASR audit; perceptual listening not independently verified",
+  "generatedLineCount": 3,
+  "requestedLineCount": 3,
+  "lineCount": 3,
+  "clips": [
+    {
+      "clipId": "amt-ambient-termin-renter",
+      "actorId": "renter",
+      "text": "Mein Termin war gestern. Ich war heute pünktlich.",
+      "english": "My appointment was yesterday. I was on time today.",
+      "voiceId": "amt-konrad-wohnungszettel",
+      "profileId": "a1fd2081df674fba90118c4e6be303da",
+      "sourceLocator": "buergeramt-story.js ambient.amt-ambient-termin-renter",
+      "approval": {
+        "status": "user-approved",
+        "date": "2026-10-12",
+        "instruction": "add in more random kafkaesque dialog snippets in the background to give the game also a richer burocratic texture of random surreal german-burocratic la guage audio dialogue snippets that are background texture for the game",
+        "scope": "Existing Bürgeramt cast voices for varied background remarks; no browser machine voice",
+        "listeningConfirmed": false
+      },
+      "seed": 71000,
+      "synthesisAttempt": 1,
+      "referenceSha256": "cacffb09242b3ee90b340daafbf81740b9134cfe36efbd234776674f21071efa",
+      "authoringHelperSha256": "d7fcf55d1ba660e04eaec73938a81e0b2ab7a398be7bd247d513c25a85e04adf",
+      "rendererInputText": "Mein Termin war gestern. Ich war heute pünktlich.",
+      "decode": {
+        "maxSpeechTokens": 256,
+        "attentionHooksBefore": 0,
+        "generatedSpeechTokens": 77,
+        "eosReached": true,
+        "eosKind": "model-sampled",
+        "eosSuppressionObservedSteps": 58,
+        "modelEosRestoredSteps": 0,
+        "alignmentFirstCompletedStep": 59,
+        "nativeAnalyzerSourceSha256": "d8430efa92aedb8e59b782c1d299fe7238570eecea9d293c0981a5ee2e82c8c7",
+        "eosPolicy": "Native analyzer unchanged; observation only",
+        "t3InferenceSeconds": 17.42,
+        "temporaryAnalyzerHooksRemoved": 6,
+        "attentionHooksAfter": 0,
+        "eosTraceSha256": "a32e8140360e3057194f77af6a3722fd5a8e328d21c1b341f7636d16a94a7990"
+      },
+      "rendererInputBasis": "exact authored source",
+      "requestSha256": "445e428d1b36eaba1e21b9226e28578c8c5ac24fad060b9624bc18a97ff9963d",
+      "referenceOriginalSha256": "7728f4601410d2d539215e641c92cf8cafec45f177fcab479add6c4488f9e523",
+      "profileJsonSha256": "82178752a0a7e1eda5340b105edad76bc73c60b7bd63fbe70b9edc4b90e9b60c",
+      "rawSha256": "3a9ecfdfb0a042c9b99b5b751ebe3b5e0028698525c4b89e053496b6a7fa290d",
+      "renderer": "ResembleAI/Chatterbox Multilingual V2 0.1.7",
+      "modelRevision": "5bb1f6ee58e50c3b8d408bc82a6d3740c2db6e18",
+      "modelLicense": "MIT",
+      "referenceLicense": "unknown; selected profile does not record reference license",
+      "durationSeconds": 3.02,
+      "renderSeconds": 45.97,
+      "synthesis": {
+        "temperature": 0.65,
+        "repetitionPenalty": 3.0,
+        "cfgWeight": 0.6,
+        "languageId": "de",
+        "device": "cpu",
+        "precision": "fp32",
+        "t3WeightPrecision": "float32",
+        "conditioningPrecision": "float32",
+        "autocastPrecision": null,
+        "conditioningCached": true,
+        "referenceReconditionedForProfile": "a1fd2081df674fba90118c4e6be303da",
+        "referenceConditioningVerifiedFloat32": true,
+        "modelSessionReused": false,
+        "cpuThreads": 2,
+        "inferenceMode": true
+      },
+      "listening": "pending",
+      "status": "eligible exact-text recording; human listening pending",
+      "processing": "[0:a]highpass=f=65,lowpass=f=7600,asplit[clean][wet];[wet]rubberband=pitch=0.92,lowpass=f=1450,volume=0.16[shadow];[clean][shadow]amix=inputs=2:duration=first:normalize=0[a]",
+      "processingSha256": "5f7846edc5dd6f1ebfaba168e966e8562e9d91326be2fd3fb9441103be4ae398",
+      "normalization": {
+        "targetLufs": -18,
+        "targetTruePeakDbtp": -1.5,
+        "filter": "loudnorm=I=-16.419999999999998:TP=-1.8:LRA=11:linear=false",
+        "iterations": 4
+      },
+      "integratedLufs": -18.24,
+      "truePeakDbtp": -1.98,
+      "asr": "Mein Termin war gestern. Ich war heute pünktlich.",
+      "asrWordExact": true,
+      "asrLiteralWordExact": true,
+      "asrNormalization": "case/punctuation, German numeric and A38 spoken equivalents, guarded full-hour and date-ordinal equivalents, section sign/Paragraf orthography, German compound spacing",
+      "asrModel": "independent faster-whisper, cached local model, cpu int8 (effective int8_float32), no script prompt",
+      "asrCpuThreads": 4,
+      "asrDevice": "cpu",
+      "asrEffectiveComputeType": "int8_float32",
+      "asrLanguageId": "de",
+      "asrComputeType": "int8",
+      "asrScriptPrompt": null,
+      "asrBeamSize": 1,
+      "asrReadings": [
+        {
+          "beamSize": 1,
+          "transcript": "Mein Termin war gestern. Ich war heute pünktlich.",
+          "transcribeSeconds": 6.58,
+          "words": [
+            {
+              "word": " Mein",
+              "start": 0.0,
+              "end": 0.18
+            },
+            {
+              "word": " Termin",
+              "start": 0.18,
+              "end": 0.54
+            },
+            {
+              "word": " war",
+              "start": 0.54,
+              "end": 0.66
+            },
+            {
+              "word": " gestern.",
+              "start": 0.66,
+              "end": 1.08
+            },
+            {
+              "word": " Ich",
+              "start": 1.26,
+              "end": 1.52
+            },
+            {
+              "word": " war",
+              "start": 1.52,
+              "end": 1.66
+            },
+            {
+              "word": " heute",
+              "start": 1.66,
+              "end": 1.86
+            },
+            {
+              "word": " pünktlich.",
+              "start": 1.86,
+              "end": 2.4
+            }
+          ]
+        }
+      ],
+      "asrModelSha256": "e76620f83d5f5b69efd3d87e3dc180c1bd21df9fbebacfd4335e5e1efcc018da",
+      "asrModelDirectoryName": "voice-asr-model",
+      "wordCues": [
+        {
+          "at": 0.0,
+          "charIndex": 0,
+          "word": "Mein",
+          "end": 0.18
+        },
+        {
+          "at": 0.18,
+          "charIndex": 5,
+          "word": "Termin",
+          "end": 0.54
+        },
+        {
+          "at": 0.54,
+          "charIndex": 12,
+          "word": "war",
+          "end": 0.66
+        },
+        {
+          "at": 0.66,
+          "charIndex": 16,
+          "word": "gestern",
+          "end": 1.08
+        },
+        {
+          "at": 1.26,
+          "charIndex": 25,
+          "word": "Ich",
+          "end": 1.52
+        },
+        {
+          "at": 1.52,
+          "charIndex": 29,
+          "word": "war",
+          "end": 1.66
+        },
+        {
+          "at": 1.66,
+          "charIndex": 33,
+          "word": "heute",
+          "end": 1.86
+        },
+        {
+          "at": 1.86,
+          "charIndex": 39,
+          "word": "pünktlich",
+          "end": 2.4
+        }
+      ],
+      "sha256": "d84bb90d52778ed21f94de8ecde3134e87bb376ebf0aeff24be9d8bc28b965db",
+      "bytes": 49196,
+      "sampleRateHz": 48000,
+      "channels": 1,
+      "bitrateBitsPerSecond": 128000,
+      "file": "assets/voices/office-ambient/amt-ambient-termin-renter.mp3"
+    },
+    {
+      "clipId": "amt-ambient-nummer-renter",
+      "actorId": "renter",
+      "text": "Mein Buchstabe wurde aufgerufen, aber die Zahl gehört jemand anderem.",
+      "english": "My letter was called, but the number belongs to someone else.",
+      "voiceId": "amt-konrad-wohnungszettel",
+      "profileId": "a1fd2081df674fba90118c4e6be303da",
+      "sourceLocator": "buergeramt-story.js ambient.amt-ambient-nummer-renter",
+      "approval": {
+        "status": "user-approved",
+        "date": "2026-10-12",
+        "instruction": "add in more random kafkaesque dialog snippets in the background to give the game also a richer burocratic texture of random surreal german-burocratic la guage audio dialogue snippets that are background texture for the game",
+        "scope": "Existing Bürgeramt cast voices for varied background remarks; no browser machine voice",
+        "listeningConfirmed": false
+      },
+      "seed": 71001,
+      "synthesisAttempt": 1,
+      "referenceSha256": "cacffb09242b3ee90b340daafbf81740b9134cfe36efbd234776674f21071efa",
+      "authoringHelperSha256": "d7fcf55d1ba660e04eaec73938a81e0b2ab7a398be7bd247d513c25a85e04adf",
+      "rendererInputText": "Mein Buchstabe wurde aufgerufen, aber die Zahl gehört jemand anderem.",
+      "decode": {
+        "maxSpeechTokens": 280,
+        "attentionHooksBefore": 0,
+        "generatedSpeechTokens": 103,
+        "eosReached": true,
+        "eosKind": "analyzer-forced",
+        "eosSuppressionObservedSteps": 80,
+        "modelEosRestoredSteps": 0,
+        "alignmentFirstCompletedStep": 81,
+        "nativeAnalyzerSourceSha256": "d8430efa92aedb8e59b782c1d299fe7238570eecea9d293c0981a5ee2e82c8c7",
+        "eosPolicy": "Native analyzer unchanged; observation only",
+        "t3InferenceSeconds": 14.42,
+        "temporaryAnalyzerHooksRemoved": 3,
+        "attentionHooksAfter": 0,
+        "eosTraceSha256": "e3cd3da8ba0a21a3836556c4b89448b033cd01b5547d4624ad5be2a55338e075"
+      },
+      "rendererInputBasis": "exact authored source",
+      "requestSha256": "445e428d1b36eaba1e21b9226e28578c8c5ac24fad060b9624bc18a97ff9963d",
+      "referenceOriginalSha256": "7728f4601410d2d539215e641c92cf8cafec45f177fcab479add6c4488f9e523",
+      "profileJsonSha256": "82178752a0a7e1eda5340b105edad76bc73c60b7bd63fbe70b9edc4b90e9b60c",
+      "rawSha256": "a5d763b296b1f1416b10762b8061c7fc317b93a2c22aef9d4cd10afe64e4ce16",
+      "renderer": "ResembleAI/Chatterbox Multilingual V2 0.1.7",
+      "modelRevision": "5bb1f6ee58e50c3b8d408bc82a6d3740c2db6e18",
+      "modelLicense": "MIT",
+      "referenceLicense": "unknown; selected profile does not record reference license",
+      "durationSeconds": 4.06,
+      "renderSeconds": 40.12,
+      "synthesis": {
+        "temperature": 0.65,
+        "repetitionPenalty": 3.0,
+        "cfgWeight": 0.6,
+        "languageId": "de",
+        "device": "cpu",
+        "precision": "fp32",
+        "t3WeightPrecision": "float32",
+        "conditioningPrecision": "float32",
+        "autocastPrecision": null,
+        "conditioningCached": true,
+        "referenceReconditionedForProfile": "a1fd2081df674fba90118c4e6be303da",
+        "referenceConditioningVerifiedFloat32": true,
+        "modelSessionReused": false,
+        "cpuThreads": 2,
+        "inferenceMode": true
+      },
+      "listening": "pending",
+      "status": "eligible exact-text recording; human listening pending",
+      "processing": "[0:a]highpass=f=65,lowpass=f=7600,asplit[clean][wet];[wet]rubberband=pitch=0.92,lowpass=f=1450,volume=0.16[shadow];[clean][shadow]amix=inputs=2:duration=first:normalize=0[a]",
+      "processingSha256": "5f7846edc5dd6f1ebfaba168e966e8562e9d91326be2fd3fb9441103be4ae398",
+      "normalization": {
+        "targetLufs": -18,
+        "targetTruePeakDbtp": -1.5,
+        "filter": "loudnorm=I=-16.07:TP=-1.8:LRA=11:linear=false",
+        "iterations": 4
+      },
+      "integratedLufs": -18.19,
+      "truePeakDbtp": -2.17,
+      "asr": "Mein Buchstabe wurde aufgerufen, aber die Zahl gehört jemand anderem.",
+      "asrWordExact": true,
+      "asrLiteralWordExact": true,
+      "asrNormalization": "case/punctuation, German numeric and A38 spoken equivalents, guarded full-hour and date-ordinal equivalents, section sign/Paragraf orthography, German compound spacing",
+      "asrModel": "independent faster-whisper, cached local model, cpu int8 (effective int8_float32), no script prompt",
+      "asrCpuThreads": 4,
+      "asrDevice": "cpu",
+      "asrEffectiveComputeType": "int8_float32",
+      "asrLanguageId": "de",
+      "asrComputeType": "int8",
+      "asrScriptPrompt": null,
+      "asrBeamSize": 1,
+      "asrReadings": [
+        {
+          "beamSize": 1,
+          "transcript": "Mein Buchstabe wurde aufgerufen, aber die Zahl gehört jemand anderem.",
+          "transcribeSeconds": 6.03,
+          "words": [
+            {
+              "word": " Mein",
+              "start": 0.0,
+              "end": 0.2
+            },
+            {
+              "word": " Buchstabe",
+              "start": 0.2,
+              "end": 0.68
+            },
+            {
+              "word": " wurde",
+              "start": 0.68,
+              "end": 0.88
+            },
+            {
+              "word": " aufgerufen,",
+              "start": 0.88,
+              "end": 1.46
+            },
+            {
+              "word": " aber",
+              "start": 1.7,
+              "end": 2.02
+            },
+            {
+              "word": " die",
+              "start": 2.02,
+              "end": 2.16
+            },
+            {
+              "word": " Zahl",
+              "start": 2.16,
+              "end": 2.42
+            },
+            {
+              "word": " gehört",
+              "start": 2.42,
+              "end": 2.7
+            },
+            {
+              "word": " jemand",
+              "start": 2.7,
+              "end": 2.88
+            },
+            {
+              "word": " anderem.",
+              "start": 2.88,
+              "end": 3.3
+            }
+          ]
+        }
+      ],
+      "asrModelSha256": "e76620f83d5f5b69efd3d87e3dc180c1bd21df9fbebacfd4335e5e1efcc018da",
+      "asrModelDirectoryName": "voice-asr-model",
+      "wordCues": [
+        {
+          "at": 0.0,
+          "charIndex": 0,
+          "word": "Mein",
+          "end": 0.2
+        },
+        {
+          "at": 0.2,
+          "charIndex": 5,
+          "word": "Buchstabe",
+          "end": 0.68
+        },
+        {
+          "at": 0.68,
+          "charIndex": 15,
+          "word": "wurde",
+          "end": 0.88
+        },
+        {
+          "at": 0.88,
+          "charIndex": 21,
+          "word": "aufgerufen",
+          "end": 1.46
+        },
+        {
+          "at": 1.7,
+          "charIndex": 33,
+          "word": "aber",
+          "end": 2.02
+        },
+        {
+          "at": 2.02,
+          "charIndex": 38,
+          "word": "die",
+          "end": 2.16
+        },
+        {
+          "at": 2.16,
+          "charIndex": 42,
+          "word": "Zahl",
+          "end": 2.42
+        },
+        {
+          "at": 2.42,
+          "charIndex": 47,
+          "word": "gehört",
+          "end": 2.7
+        },
+        {
+          "at": 2.7,
+          "charIndex": 54,
+          "word": "jemand",
+          "end": 2.88
+        },
+        {
+          "at": 2.88,
+          "charIndex": 61,
+          "word": "anderem",
+          "end": 3.3
+        }
+      ],
+      "sha256": "93b6d5639f2dde3488598c88082c80e331b9895560069c347147b57f94f0bb88",
+      "bytes": 66092,
+      "sampleRateHz": 48000,
+      "channels": 1,
+      "bitrateBitsPerSecond": 128000,
+      "file": "assets/voices/office-ambient/amt-ambient-nummer-renter.mp3"
+    },
+    {
+      "clipId": "amt-ambient-wohnung",
+      "actorId": "renter",
+      "text": "Meine Wohnung ist angemeldet. Ich selbst stehe noch im Flur.",
+      "english": "My apartment is registered. I myself am still in the corridor.",
+      "voiceId": "amt-konrad-wohnungszettel",
+      "profileId": "a1fd2081df674fba90118c4e6be303da",
+      "sourceLocator": "buergeramt-story.js ambient.amt-ambient-wohnung",
+      "approval": {
+        "status": "user-approved",
+        "date": "2026-10-12",
+        "instruction": "add in more random kafkaesque dialog snippets in the background to give the game also a richer burocratic texture of random surreal german-burocratic la guage audio dialogue snippets that are background texture for the game",
+        "scope": "Existing Bürgeramt cast voices for varied background remarks; no browser machine voice",
+        "listeningConfirmed": false
+      },
+      "seed": 71002,
+      "synthesisAttempt": 1,
+      "referenceSha256": "cacffb09242b3ee90b340daafbf81740b9134cfe36efbd234776674f21071efa",
+      "authoringHelperSha256": "d7fcf55d1ba660e04eaec73938a81e0b2ab7a398be7bd247d513c25a85e04adf",
+      "rendererInputText": "Meine Wohnung ist angemeldet. Ich selbst stehe noch im Flur.",
+      "decode": {
+        "maxSpeechTokens": 280,
+        "attentionHooksBefore": 0,
+        "generatedSpeechTokens": 109,
+        "eosReached": true,
+        "eosKind": "analyzer-forced",
+        "eosSuppressionObservedSteps": 79,
+        "modelEosRestoredSteps": 0,
+        "alignmentFirstCompletedStep": 80,
+        "nativeAnalyzerSourceSha256": "d8430efa92aedb8e59b782c1d299fe7238570eecea9d293c0981a5ee2e82c8c7",
+        "eosPolicy": "Native analyzer unchanged; observation only",
+        "t3InferenceSeconds": 11.89,
+        "temporaryAnalyzerHooksRemoved": 3,
+        "attentionHooksAfter": 0,
+        "eosTraceSha256": "59deea597e77b174eb87c6ea3770088064a7f96bad44f7c9a4ccec07b067d565"
+      },
+      "rendererInputBasis": "exact authored source",
+      "requestSha256": "445e428d1b36eaba1e21b9226e28578c8c5ac24fad060b9624bc18a97ff9963d",
+      "referenceOriginalSha256": "7728f4601410d2d539215e641c92cf8cafec45f177fcab479add6c4488f9e523",
+      "profileJsonSha256": "82178752a0a7e1eda5340b105edad76bc73c60b7bd63fbe70b9edc4b90e9b60c",
+      "rawSha256": "18e9c6a6d9397ec8aa1ccf80d4303a26faca6bb32451217265c240140fd7a406",
+      "renderer": "ResembleAI/Chatterbox Multilingual V2 0.1.7",
+      "modelRevision": "5bb1f6ee58e50c3b8d408bc82a6d3740c2db6e18",
+      "modelLicense": "MIT",
+      "referenceLicense": "unknown; selected profile does not record reference license",
+      "durationSeconds": 4.3,
+      "renderSeconds": 36.38,
+      "synthesis": {
+        "temperature": 0.65,
+        "repetitionPenalty": 3.0,
+        "cfgWeight": 0.6,
+        "languageId": "de",
+        "device": "cpu",
+        "precision": "fp32",
+        "t3WeightPrecision": "float32",
+        "conditioningPrecision": "float32",
+        "autocastPrecision": null,
+        "conditioningCached": true,
+        "referenceReconditionedForProfile": "a1fd2081df674fba90118c4e6be303da",
+        "referenceConditioningVerifiedFloat32": true,
+        "modelSessionReused": false,
+        "cpuThreads": 2,
+        "inferenceMode": true
+      },
+      "listening": "pending",
+      "status": "eligible exact-text recording; human listening pending",
+      "processing": "[0:a]highpass=f=65,lowpass=f=7600,asplit[clean][wet];[wet]rubberband=pitch=0.92,lowpass=f=1450,volume=0.16[shadow];[clean][shadow]amix=inputs=2:duration=first:normalize=0[a]",
+      "processingSha256": "5f7846edc5dd6f1ebfaba168e966e8562e9d91326be2fd3fb9441103be4ae398",
+      "normalization": {
+        "targetLufs": -18,
+        "targetTruePeakDbtp": -1.5,
+        "filter": "loudnorm=I=-15.790000000000003:TP=-1.8:LRA=11:linear=false",
+        "iterations": 3
+      },
+      "integratedLufs": -18.19,
+      "truePeakDbtp": -2.19,
+      "asr": "Meine Wohnung ist angemeldet. Ich selbst stehe noch im Flur.",
+      "asrWordExact": true,
+      "asrLiteralWordExact": true,
+      "asrNormalization": "case/punctuation, German numeric and A38 spoken equivalents, guarded full-hour and date-ordinal equivalents, section sign/Paragraf orthography, German compound spacing",
+      "asrModel": "independent faster-whisper, cached local model, cpu int8 (effective int8_float32), no script prompt",
+      "asrCpuThreads": 4,
+      "asrDevice": "cpu",
+      "asrEffectiveComputeType": "int8_float32",
+      "asrLanguageId": "de",
+      "asrComputeType": "int8",
+      "asrScriptPrompt": null,
+      "asrBeamSize": 1,
+      "asrReadings": [
+        {
+          "beamSize": 1,
+          "transcript": "Meine Wohnung ist angemeldet. Ich selbst stehe noch im Flur.",
+          "transcribeSeconds": 6.3,
+          "words": [
+            {
+              "word": " Meine",
+              "start": 0.0,
+              "end": 0.24
+            },
+            {
+              "word": " Wohnung",
+              "start": 0.24,
+              "end": 0.58
+            },
+            {
+              "word": " ist",
+              "start": 0.58,
+              "end": 0.82
+            },
+            {
+              "word": " angemeldet.",
+              "start": 0.82,
+              "end": 1.5
+            },
+            {
+              "word": " Ich",
+              "start": 1.68,
+              "end": 2.0
+            },
+            {
+              "word": " selbst",
+              "start": 2.0,
+              "end": 2.36
+            },
+            {
+              "word": " stehe",
+              "start": 2.36,
+              "end": 2.7
+            },
+            {
+              "word": " noch",
+              "start": 2.7,
+              "end": 2.84
+            },
+            {
+              "word": " im",
+              "start": 2.84,
+              "end": 2.98
+            },
+            {
+              "word": " Flur.",
+              "start": 2.98,
+              "end": 3.32
+            }
+          ]
+        }
+      ],
+      "asrModelSha256": "e76620f83d5f5b69efd3d87e3dc180c1bd21df9fbebacfd4335e5e1efcc018da",
+      "asrModelDirectoryName": "voice-asr-model",
+      "wordCues": [
+        {
+          "at": 0.0,
+          "charIndex": 0,
+          "word": "Meine",
+          "end": 0.24
+        },
+        {
+          "at": 0.24,
+          "charIndex": 6,
+          "word": "Wohnung",
+          "end": 0.58
+        },
+        {
+          "at": 0.58,
+          "charIndex": 14,
+          "word": "ist",
+          "end": 0.82
+        },
+        {
+          "at": 0.82,
+          "charIndex": 18,
+          "word": "angemeldet",
+          "end": 1.5
+        },
+        {
+          "at": 1.68,
+          "charIndex": 30,
+          "word": "Ich",
+          "end": 2.0
+        },
+        {
+          "at": 2.0,
+          "charIndex": 34,
+          "word": "selbst",
+          "end": 2.36
+        },
+        {
+          "at": 2.36,
+          "charIndex": 41,
+          "word": "stehe",
+          "end": 2.7
+        },
+        {
+          "at": 2.7,
+          "charIndex": 47,
+          "word": "noch",
+          "end": 2.84
+        },
+        {
+          "at": 2.84,
+          "charIndex": 52,
+          "word": "im",
+          "end": 2.98
+        },
+        {
+          "at": 2.98,
+          "charIndex": 55,
+          "word": "Flur",
+          "end": 3.32
+        }
+      ],
+      "sha256": "bb192b70ec7af5d3e5e3aed7aeeadd49a3260f6e5cedbf7a02a600d2e6f52ac0",
+      "bytes": 69932,
+      "sampleRateHz": 48000,
+      "channels": 1,
+      "bitrateBitsPerSecond": 128000,
+      "file": "assets/voices/office-ambient/amt-ambient-wohnung.mp3"
+    }
+  ],
+  "heldPrivate": [],
+  "approvedExistingReuse": []
+}

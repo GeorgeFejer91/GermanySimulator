@@ -53,5 +53,6 @@ test('clerk ownership survives a missing catalogue and ambient remarks use the r
  h.window.GermanySimulatorAudioText={productionVoices:catalog.productionVoices,recordedClip:(voiceId,text)=>{seen.push({voiceId,text});return null}};
  h.register();
  for(let i=0;i<12&&seen.length<5;i++){h.advanceGame(8.6);h.synth.end();h.tick(20000)}
- assert.deepEqual(seen.slice(0,5).map(row=>row.voiceId),['amt-konrad-wohnungszettel','amt-erna-frist','amt-ottilie-durchschlag','amt-wolfram-rentenbescheid','amt-hedwig-zustaendig']);
+ for(const row of seen){assert(story.ambient.some(line=>line.text===row.text));assert(cast.productionVoices[row.voiceId]);}
+ assert.equal(h.synth.spoken.length,0,'ambient recordings never fall back to machine speech');
 });

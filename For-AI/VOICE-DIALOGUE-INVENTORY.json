@@ -252,21 +252,21 @@
       "voiceId": "amt-erna-frist",
       "sourcePools": [
         "buergeramt-story.js clerks[1] / clerkRefusal",
-        "buergeramt.js ambientLines[1][1]"
+        "buergeramt-story.js ambient.amt-ambient-original"
       ]
     },
     {
       "voiceId": "amt-ottilie-durchschlag",
       "sourcePools": [
         "buergeramt-story.js clerks[2] / clerkRefusal",
-        "buergeramt.js ambientLines[2][1]"
+        "buergeramt-story.js ambient.amt-ambient-warteschleife"
       ]
     },
     {
       "voiceId": "amt-hedwig-zustaendig",
       "sourcePools": [
         "buergeramt-story.js clerks[4] / clerkRefusal",
-        "buergeramt.js ambientLines[4][1]"
+        "buergeramt-story.js ambient.amt-ambient-moment"
       ]
     }
   ],
@@ -2129,29 +2129,172 @@
     },
     "buergeramtAmbient": [
       {
-        "speaker": "WARTERAUM",
+        "id": "amt-ambient-termin-renter",
+        "actor": "renter",
         "text": "Mein Termin war gestern. Ich war heute pünktlich.",
+        "english": "My appointment was yesterday. I was on time today.",
+        "speaker": "KONRAD WOHNUNGSZETTEL",
         "voiceId": "amt-konrad-wohnungszettel"
       },
       {
-        "speaker": "SCHALTER 1",
-        "text": "Für die Kopie des Originals benötigen Sie das Original der Kopie.",
-        "voiceId": "amt-erna-frist"
-      },
-      {
-        "speaker": "TELEFON AM SCHALTER 2",
-        "text": "Nein, die Warteschleife ist persönlich zu nehmen.",
-        "voiceId": "amt-ottilie-durchschlag"
-      },
-      {
-        "speaker": "WARTERAUM",
+        "id": "amt-ambient-nummer-renter",
+        "actor": "renter",
         "text": "Mein Buchstabe wurde aufgerufen, aber die Zahl gehört jemand anderem.",
+        "english": "My letter was called, but the number belongs to someone else.",
+        "speaker": "KONRAD WOHNUNGSZETTEL",
+        "voiceId": "amt-konrad-wohnungszettel"
+      },
+      {
+        "id": "amt-ambient-termin-parent",
+        "actor": "parent",
+        "text": "Mein Termin war gestern. Ich war heute pünktlich.",
+        "english": "My appointment was yesterday. I was on time today.",
+        "speaker": "MECHTHILD ELTERNBOGEN",
+        "voiceId": "amt-mechthild-elternbogen"
+      },
+      {
+        "id": "amt-ambient-nummer-parent",
+        "actor": "parent",
+        "text": "Mein Buchstabe wurde aufgerufen, aber die Zahl gehört jemand anderem.",
+        "english": "My letter was called, but the number belongs to someone else.",
+        "speaker": "MECHTHILD ELTERNBOGEN",
+        "voiceId": "amt-mechthild-elternbogen"
+      },
+      {
+        "id": "amt-ambient-termin-pensioner",
+        "actor": "pensioner",
+        "text": "Mein Termin war gestern. Ich war heute pünktlich.",
+        "english": "My appointment was yesterday. I was on time today.",
+        "speaker": "WOLFRAM RENTENBESCHEID",
         "voiceId": "amt-wolfram-rentenbescheid"
       },
       {
-        "speaker": "SCHALTER 4",
+        "id": "amt-ambient-nummer-pensioner",
+        "actor": "pensioner",
+        "text": "Mein Buchstabe wurde aufgerufen, aber die Zahl gehört jemand anderem.",
+        "english": "My letter was called, but the number belongs to someone else.",
+        "speaker": "WOLFRAM RENTENBESCHEID",
+        "voiceId": "amt-wolfram-rentenbescheid"
+      },
+      {
+        "id": "amt-ambient-original",
+        "actor": "clerk-1",
+        "text": "Für die Kopie des Originals benötigen Sie das Original der Kopie.",
+        "english": "For a copy of the original, you need the original of the copy.",
+        "speaker": "FRAU FRIST",
+        "voiceId": "amt-erna-frist"
+      },
+      {
+        "id": "amt-ambient-warteschleife",
+        "actor": "clerk-2",
+        "text": "Nein, die Warteschleife ist persönlich zu nehmen.",
+        "english": "No, the hold queue must be taken personally.",
+        "speaker": "FRAU DURCHSCHLAG",
+        "voiceId": "amt-ottilie-durchschlag"
+      },
+      {
+        "id": "amt-ambient-moment",
+        "actor": "clerk-4",
         "text": "Einen Moment. Ich verbinde Sie mit Ihrem Moment.",
+        "english": "One moment. I will connect you to your moment.",
+        "speaker": "FRAU ZUSTÄNDIG",
         "voiceId": "amt-hedwig-zustaendig"
+      },
+      {
+        "id": "amt-ambient-abwesenheit",
+        "actor": "archivbotin",
+        "text": "Ihre Akte ist verschwunden. Bitte bestätigen Sie den Eingang Ihrer Abwesenheit.",
+        "english": "Your file has disappeared. Please acknowledge receipt of your absence.",
+        "speaker": "DIE ARCHIVBOTIN",
+        "voiceId": "amt-gisela-aktenberg"
+      },
+      {
+        "id": "amt-ambient-leerblatt",
+        "actor": "formularsammler",
+        "text": "Das leere Blatt ist unvollständig. Es fehlt der Nachweis, dass nichts fehlt.",
+        "english": "The blank page is incomplete. Proof that nothing is missing is missing.",
+        "speaker": "DER FORMULARSAMMLER",
+        "voiceId": "amt-dieter-papiermann"
+      },
+      {
+        "id": "amt-ambient-nullzettel",
+        "actor": "nummernfluesterer",
+        "text": "Die Null auf meinem Zettel wartet schon länger als ich.",
+        "english": "The zero on my ticket has been waiting longer than I have.",
+        "speaker": "DER NUMMERNFLÜSTERER",
+        "voiceId": "amt-ruediger-nummermann"
+      },
+      {
+        "id": "amt-ambient-feierabend",
+        "actor": "nachtschichtmelderin",
+        "text": "Der Feierabend wurde verlängert. Die Öffnungszeiten bleiben geschlossen.",
+        "english": "Closing time has been extended. Opening hours remain closed.",
+        "speaker": "DIE NACHTSCHICHT-MELDERIN",
+        "voiceId": "amt-ingrid-feierabend"
+      },
+      {
+        "id": "amt-ambient-quittung",
+        "actor": "pfandarchitektin",
+        "text": "Die Quittung bestätigt nur, dass ich eine Bestätigung beantragt habe.",
+        "english": "The receipt only confirms that I applied for a confirmation.",
+        "speaker": "DIE PFANDARCHITEKTIN",
+        "voiceId": "amt-baerbel-pfennig"
+      },
+      {
+        "id": "amt-ambient-schatten",
+        "actor": "kopiependler",
+        "text": "Mein Schatten gilt als Zweitschrift. Jetzt muss er beglaubigt werden.",
+        "english": "My shadow counts as a duplicate. Now it has to be certified.",
+        "speaker": "DER KOPIEPENDLER",
+        "voiceId": "amt-uwe-kopitz"
+      },
+      {
+        "id": "amt-ambient-ende",
+        "actor": "warteschlangenpoetin",
+        "text": "Das Ende der Warteschlange ist heute nur nach Termin erreichbar.",
+        "english": "Today the end of the queue is accessible by appointment only.",
+        "speaker": "DIE WARTESCHLANGENPOETIN",
+        "voiceId": "amt-hilde-wartenscheidt"
+      },
+      {
+        "id": "amt-ambient-wohnung",
+        "actor": "renter",
+        "text": "Meine Wohnung ist angemeldet. Ich selbst stehe noch im Flur.",
+        "english": "My apartment is registered. I myself am still in the corridor.",
+        "speaker": "KONRAD WOHNUNGSZETTEL",
+        "voiceId": "amt-konrad-wohnungszettel"
+      },
+      {
+        "id": "amt-ambient-zukunft",
+        "actor": "parent",
+        "text": "Für die Zukunft meines Kindes fehlt eine Kopie der Vergangenheit.",
+        "english": "My child's future is missing a copy of the past.",
+        "speaker": "MECHTHILD ELTERNBOGEN",
+        "voiceId": "amt-mechthild-elternbogen"
+      },
+      {
+        "id": "amt-ambient-lebenszeichen",
+        "actor": "pensioner",
+        "text": "Mein Lebenszeichen wurde abgelehnt. Es war nicht mehr aktuell.",
+        "english": "My sign of life was rejected. It was no longer up to date.",
+        "speaker": "WOLFRAM RENTENBESCHEID",
+        "voiceId": "amt-wolfram-rentenbescheid"
+      },
+      {
+        "id": "amt-ambient-stempel",
+        "actor": "archivbotin",
+        "text": "Der Stempel ist ungültig. Seine Gültigkeit wurde noch nicht gestempelt.",
+        "english": "The stamp is invalid. Its validity has not been stamped yet.",
+        "speaker": "DIE ARCHIVBOTIN",
+        "voiceId": "amt-gisela-aktenberg"
+      },
+      {
+        "id": "amt-ambient-weiterwarten",
+        "actor": "warteschlangenpoetin",
+        "text": "Ich warte auf die Erlaubnis, weiter warten zu dürfen.",
+        "english": "I am waiting for permission to keep waiting.",
+        "speaker": "DIE WARTESCHLANGENPOETIN",
+        "voiceId": "amt-hilde-wartenscheidt"
       }
     ]
   }

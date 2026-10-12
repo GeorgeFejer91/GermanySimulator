@@ -1,0 +1,635 @@
+{
+  "schemaVersion": 1,
+  "voiceId": "amt-wolfram-rentenbescheid",
+  "profileId": "65ebfa45e9394ccb9b4f4f5075ab672c",
+  "fallback": "browser",
+  "status": "same-profile technical and independent ASR audit; perceptual listening not independently verified",
+  "generatedLineCount": 3,
+  "requestedLineCount": 3,
+  "lineCount": 3,
+  "clips": [
+    {
+      "clipId": "amt-ambient-termin-pensioner",
+      "actorId": "pensioner",
+      "text": "Mein Termin war gestern. Ich war heute pünktlich.",
+      "english": "My appointment was yesterday. I was on time today.",
+      "voiceId": "amt-wolfram-rentenbescheid",
+      "profileId": "65ebfa45e9394ccb9b4f4f5075ab672c",
+      "sourceLocator": "buergeramt-story.js ambient.amt-ambient-termin-pensioner",
+      "approval": {
+        "status": "user-approved",
+        "date": "2026-10-12",
+        "instruction": "add in more random kafkaesque dialog snippets in the background to give the game also a richer burocratic texture of random surreal german-burocratic la guage audio dialogue snippets that are background texture for the game",
+        "scope": "Existing Bürgeramt cast voices for varied background remarks; no browser machine voice",
+        "listeningConfirmed": false
+      },
+      "seed": 71000,
+      "synthesisAttempt": 1,
+      "referenceSha256": "93811e803ba4467524fb6ca043cca90b403fb0b68515cfaccbbb5b34bc59104e",
+      "authoringHelperSha256": "d7fcf55d1ba660e04eaec73938a81e0b2ab7a398be7bd247d513c25a85e04adf",
+      "rendererInputText": "Mein Termin war gestern. Ich war heute pünktlich.",
+      "decode": {
+        "maxSpeechTokens": 256,
+        "attentionHooksBefore": 0,
+        "generatedSpeechTokens": 132,
+        "eosReached": true,
+        "eosKind": "analyzer-forced",
+        "eosSuppressionObservedSteps": 70,
+        "modelEosRestoredSteps": 0,
+        "alignmentFirstCompletedStep": 70,
+        "nativeAnalyzerSourceSha256": "d8430efa92aedb8e59b782c1d299fe7238570eecea9d293c0981a5ee2e82c8c7",
+        "eosPolicy": "Native analyzer unchanged; observation only",
+        "t3InferenceSeconds": 15.44,
+        "temporaryAnalyzerHooksRemoved": 3,
+        "attentionHooksAfter": 0,
+        "eosTraceSha256": "2213eb84b43ed70e5c16f5f151ff58100730715dd75366b84af79d34b8b581ca"
+      },
+      "rendererInputBasis": "exact authored source",
+      "requestSha256": "21ff2adbf76a107058f13998e60713d496d69bad4274226946e7cbc404e0079d",
+      "referenceOriginalSha256": "6de8e6edce82955ec7170dcd3de46a772e65c92c9c4d59be10cf2e7e1c2866d8",
+      "profileJsonSha256": "c37ec9108e2dd1713654294b52e2c0868e5a6b8d7a5482e815940c231dff6144",
+      "rawSha256": "30d87126b527fa146dd3bea4960e818bbbd997db3c6ff5b3e9bb8c98eb0d74f0",
+      "renderer": "ResembleAI/Chatterbox Multilingual V2 0.1.7",
+      "modelRevision": "5bb1f6ee58e50c3b8d408bc82a6d3740c2db6e18",
+      "modelLicense": "MIT",
+      "referenceLicense": "unknown; selected profile does not record reference license",
+      "durationSeconds": 5.24,
+      "renderSeconds": 45.02,
+      "synthesis": {
+        "temperature": 0.65,
+        "repetitionPenalty": 3.0,
+        "cfgWeight": 0.6,
+        "languageId": "de",
+        "device": "cpu",
+        "precision": "fp32",
+        "t3WeightPrecision": "float32",
+        "conditioningPrecision": "float32",
+        "autocastPrecision": null,
+        "conditioningCached": true,
+        "referenceReconditionedForProfile": "65ebfa45e9394ccb9b4f4f5075ab672c",
+        "referenceConditioningVerifiedFloat32": true,
+        "modelSessionReused": true,
+        "cpuThreads": 2,
+        "inferenceMode": true
+      },
+      "listening": "pending",
+      "status": "eligible exact-text recording; human listening pending",
+      "processing": "[0:a]highpass=f=65,lowpass=f=7600,asplit[clean][wet];[wet]rubberband=pitch=0.82,lowpass=f=1450,volume=0.16[shadow];[clean][shadow]amix=inputs=2:duration=first:normalize=0[a]",
+      "processingSha256": "2a50ce4e72c14964d316fbf1dea864d82a2049e24a45d6122991b4aee0f7f517",
+      "normalization": {
+        "targetLufs": -18,
+        "targetTruePeakDbtp": -1.5,
+        "filter": "volume=5.565446342582577,alimiter=limit=0.78:attack=1:release=80:level=false:latency=true",
+        "iterations": 6
+      },
+      "integratedLufs": -18.2,
+      "truePeakDbtp": -2.57,
+      "asr": "Mein Termin war gestern. Ich war heute pünktlich.",
+      "asrWordExact": true,
+      "asrLiteralWordExact": true,
+      "asrNormalization": "case/punctuation, German numeric and A38 spoken equivalents, guarded full-hour and date-ordinal equivalents, section sign/Paragraf orthography, German compound spacing",
+      "asrModel": "independent faster-whisper, cached local model, cpu int8 (effective int8_float32), no script prompt",
+      "asrCpuThreads": 4,
+      "asrDevice": "cpu",
+      "asrEffectiveComputeType": "int8_float32",
+      "asrLanguageId": "de",
+      "asrComputeType": "int8",
+      "asrScriptPrompt": null,
+      "asrBeamSize": 1,
+      "asrReadings": [
+        {
+          "beamSize": 1,
+          "transcript": "Mein Termin war gestern. Ich war heute pünktlich.",
+          "transcribeSeconds": 6.06,
+          "words": [
+            {
+              "word": " Mein",
+              "start": 0.0,
+              "end": 0.24
+            },
+            {
+              "word": " Termin",
+              "start": 0.24,
+              "end": 0.6
+            },
+            {
+              "word": " war",
+              "start": 0.6,
+              "end": 0.76
+            },
+            {
+              "word": " gestern.",
+              "start": 0.76,
+              "end": 1.2
+            },
+            {
+              "word": " Ich",
+              "start": 1.38,
+              "end": 1.74
+            },
+            {
+              "word": " war",
+              "start": 1.74,
+              "end": 1.9
+            },
+            {
+              "word": " heute",
+              "start": 1.9,
+              "end": 2.18
+            },
+            {
+              "word": " pünktlich.",
+              "start": 2.18,
+              "end": 2.92
+            }
+          ]
+        }
+      ],
+      "asrModelSha256": "e76620f83d5f5b69efd3d87e3dc180c1bd21df9fbebacfd4335e5e1efcc018da",
+      "asrModelDirectoryName": "voice-asr-model",
+      "wordCues": [
+        {
+          "at": 0.0,
+          "charIndex": 0,
+          "word": "Mein",
+          "end": 0.24
+        },
+        {
+          "at": 0.24,
+          "charIndex": 5,
+          "word": "Termin",
+          "end": 0.6
+        },
+        {
+          "at": 0.6,
+          "charIndex": 12,
+          "word": "war",
+          "end": 0.76
+        },
+        {
+          "at": 0.76,
+          "charIndex": 16,
+          "word": "gestern",
+          "end": 1.2
+        },
+        {
+          "at": 1.38,
+          "charIndex": 25,
+          "word": "Ich",
+          "end": 1.74
+        },
+        {
+          "at": 1.74,
+          "charIndex": 29,
+          "word": "war",
+          "end": 1.9
+        },
+        {
+          "at": 1.9,
+          "charIndex": 33,
+          "word": "heute",
+          "end": 2.18
+        },
+        {
+          "at": 2.18,
+          "charIndex": 39,
+          "word": "pünktlich",
+          "end": 2.92
+        }
+      ],
+      "sha256": "eb34e9f458d2535fd09fecf14040e9eec347b04396597891be3a6932df0252b9",
+      "bytes": 84908,
+      "sampleRateHz": 48000,
+      "channels": 1,
+      "bitrateBitsPerSecond": 128000,
+      "file": "assets/voices/office-ambient/amt-ambient-termin-pensioner.mp3"
+    },
+    {
+      "clipId": "amt-ambient-nummer-pensioner",
+      "actorId": "pensioner",
+      "text": "Mein Buchstabe wurde aufgerufen, aber die Zahl gehört jemand anderem.",
+      "english": "My letter was called, but the number belongs to someone else.",
+      "voiceId": "amt-wolfram-rentenbescheid",
+      "profileId": "65ebfa45e9394ccb9b4f4f5075ab672c",
+      "sourceLocator": "buergeramt-story.js ambient.amt-ambient-nummer-pensioner",
+      "approval": {
+        "status": "user-approved",
+        "date": "2026-10-12",
+        "instruction": "add in more random kafkaesque dialog snippets in the background to give the game also a richer burocratic texture of random surreal german-burocratic la guage audio dialogue snippets that are background texture for the game",
+        "scope": "Existing Bürgeramt cast voices for varied background remarks; no browser machine voice",
+        "listeningConfirmed": false
+      },
+      "seed": 71001,
+      "synthesisAttempt": 1,
+      "referenceSha256": "93811e803ba4467524fb6ca043cca90b403fb0b68515cfaccbbb5b34bc59104e",
+      "authoringHelperSha256": "d7fcf55d1ba660e04eaec73938a81e0b2ab7a398be7bd247d513c25a85e04adf",
+      "rendererInputText": "Mein Buchstabe wurde aufgerufen, aber die Zahl gehört jemand anderem.",
+      "decode": {
+        "maxSpeechTokens": 280,
+        "attentionHooksBefore": 0,
+        "generatedSpeechTokens": 116,
+        "eosReached": true,
+        "eosKind": "analyzer-forced",
+        "eosSuppressionObservedSteps": 94,
+        "modelEosRestoredSteps": 0,
+        "alignmentFirstCompletedStep": 95,
+        "nativeAnalyzerSourceSha256": "d8430efa92aedb8e59b782c1d299fe7238570eecea9d293c0981a5ee2e82c8c7",
+        "eosPolicy": "Native analyzer unchanged; observation only",
+        "t3InferenceSeconds": 14.98,
+        "temporaryAnalyzerHooksRemoved": 3,
+        "attentionHooksAfter": 0,
+        "eosTraceSha256": "ce1849485346a7ded800a50fd2b9e62f9029f4799f2d85608c09252abe09065b"
+      },
+      "rendererInputBasis": "exact authored source",
+      "requestSha256": "21ff2adbf76a107058f13998e60713d496d69bad4274226946e7cbc404e0079d",
+      "referenceOriginalSha256": "6de8e6edce82955ec7170dcd3de46a772e65c92c9c4d59be10cf2e7e1c2866d8",
+      "profileJsonSha256": "c37ec9108e2dd1713654294b52e2c0868e5a6b8d7a5482e815940c231dff6144",
+      "rawSha256": "f0ae08ac07b2c2aa8b77f3b9227782228f600f0e9c17bade8bf97693074427d7",
+      "renderer": "ResembleAI/Chatterbox Multilingual V2 0.1.7",
+      "modelRevision": "5bb1f6ee58e50c3b8d408bc82a6d3740c2db6e18",
+      "modelLicense": "MIT",
+      "referenceLicense": "unknown; selected profile does not record reference license",
+      "durationSeconds": 4.6,
+      "renderSeconds": 40.83,
+      "synthesis": {
+        "temperature": 0.65,
+        "repetitionPenalty": 3.0,
+        "cfgWeight": 0.6,
+        "languageId": "de",
+        "device": "cpu",
+        "precision": "fp32",
+        "t3WeightPrecision": "float32",
+        "conditioningPrecision": "float32",
+        "autocastPrecision": null,
+        "conditioningCached": true,
+        "referenceReconditionedForProfile": "65ebfa45e9394ccb9b4f4f5075ab672c",
+        "referenceConditioningVerifiedFloat32": true,
+        "modelSessionReused": true,
+        "cpuThreads": 2,
+        "inferenceMode": true
+      },
+      "listening": "pending",
+      "status": "eligible exact-text recording; human listening pending",
+      "processing": "[0:a]highpass=f=65,lowpass=f=7600,asplit[clean][wet];[wet]rubberband=pitch=0.82,lowpass=f=1450,volume=0.16[shadow];[clean][shadow]amix=inputs=2:duration=first:normalize=0[a]",
+      "processingSha256": "2a50ce4e72c14964d316fbf1dea864d82a2049e24a45d6122991b4aee0f7f517",
+      "normalization": {
+        "targetLufs": -18,
+        "targetTruePeakDbtp": -1.5,
+        "filter": "loudnorm=I=-12.55:TP=-1.8:LRA=11:linear=false",
+        "iterations": 6
+      },
+      "integratedLufs": -18.17,
+      "truePeakDbtp": -2.2,
+      "asr": "Mein Buchstabe wurde aufgerufen, aber die Zahl gehört jemand anderem.",
+      "asrWordExact": true,
+      "asrLiteralWordExact": true,
+      "asrNormalization": "case/punctuation, German numeric and A38 spoken equivalents, guarded full-hour and date-ordinal equivalents, section sign/Paragraf orthography, German compound spacing",
+      "asrModel": "independent faster-whisper, cached local model, cpu int8 (effective int8_float32), no script prompt",
+      "asrCpuThreads": 4,
+      "asrDevice": "cpu",
+      "asrEffectiveComputeType": "int8_float32",
+      "asrLanguageId": "de",
+      "asrComputeType": "int8",
+      "asrScriptPrompt": null,
+      "asrBeamSize": 1,
+      "asrReadings": [
+        {
+          "beamSize": 1,
+          "transcript": "Mein Buchstabe wurde aufgerufen, aber die Zahl gehört jemand anderem.",
+          "transcribeSeconds": 6.69,
+          "words": [
+            {
+              "word": " Mein",
+              "start": 0.0,
+              "end": 0.2
+            },
+            {
+              "word": " Buchstabe",
+              "start": 0.2,
+              "end": 0.8
+            },
+            {
+              "word": " wurde",
+              "start": 0.8,
+              "end": 1.02
+            },
+            {
+              "word": " aufgerufen,",
+              "start": 1.02,
+              "end": 1.64
+            },
+            {
+              "word": " aber",
+              "start": 1.86,
+              "end": 2.28
+            },
+            {
+              "word": " die",
+              "start": 2.28,
+              "end": 2.44
+            },
+            {
+              "word": " Zahl",
+              "start": 2.44,
+              "end": 2.8
+            },
+            {
+              "word": " gehört",
+              "start": 2.8,
+              "end": 3.2
+            },
+            {
+              "word": " jemand",
+              "start": 3.2,
+              "end": 3.42
+            },
+            {
+              "word": " anderem.",
+              "start": 3.42,
+              "end": 3.88
+            }
+          ]
+        }
+      ],
+      "asrModelSha256": "e76620f83d5f5b69efd3d87e3dc180c1bd21df9fbebacfd4335e5e1efcc018da",
+      "asrModelDirectoryName": "voice-asr-model",
+      "wordCues": [
+        {
+          "at": 0.0,
+          "charIndex": 0,
+          "word": "Mein",
+          "end": 0.2
+        },
+        {
+          "at": 0.2,
+          "charIndex": 5,
+          "word": "Buchstabe",
+          "end": 0.8
+        },
+        {
+          "at": 0.8,
+          "charIndex": 15,
+          "word": "wurde",
+          "end": 1.02
+        },
+        {
+          "at": 1.02,
+          "charIndex": 21,
+          "word": "aufgerufen",
+          "end": 1.64
+        },
+        {
+          "at": 1.86,
+          "charIndex": 33,
+          "word": "aber",
+          "end": 2.28
+        },
+        {
+          "at": 2.28,
+          "charIndex": 38,
+          "word": "die",
+          "end": 2.44
+        },
+        {
+          "at": 2.44,
+          "charIndex": 42,
+          "word": "Zahl",
+          "end": 2.8
+        },
+        {
+          "at": 2.8,
+          "charIndex": 47,
+          "word": "gehört",
+          "end": 3.2
+        },
+        {
+          "at": 3.2,
+          "charIndex": 54,
+          "word": "jemand",
+          "end": 3.42
+        },
+        {
+          "at": 3.42,
+          "charIndex": 61,
+          "word": "anderem",
+          "end": 3.88
+        }
+      ],
+      "sha256": "856568ffbdf2999da3624450bf7946b4d1c052d40119e75f73e0fed385ab835d",
+      "bytes": 74540,
+      "sampleRateHz": 48000,
+      "channels": 1,
+      "bitrateBitsPerSecond": 128000,
+      "file": "assets/voices/office-ambient/amt-ambient-nummer-pensioner.mp3"
+    },
+    {
+      "clipId": "amt-ambient-lebenszeichen",
+      "actorId": "pensioner",
+      "text": "Mein Lebenszeichen wurde abgelehnt. Es war nicht mehr aktuell.",
+      "english": "My sign of life was rejected. It was no longer up to date.",
+      "voiceId": "amt-wolfram-rentenbescheid",
+      "profileId": "65ebfa45e9394ccb9b4f4f5075ab672c",
+      "sourceLocator": "buergeramt-story.js ambient.amt-ambient-lebenszeichen",
+      "approval": {
+        "status": "user-approved",
+        "date": "2026-10-12",
+        "instruction": "add in more random kafkaesque dialog snippets in the background to give the game also a richer burocratic texture of random surreal german-burocratic la guage audio dialogue snippets that are background texture for the game",
+        "scope": "Existing Bürgeramt cast voices for varied background remarks; no browser machine voice",
+        "listeningConfirmed": false
+      },
+      "seed": 71002,
+      "synthesisAttempt": 1,
+      "referenceSha256": "93811e803ba4467524fb6ca043cca90b403fb0b68515cfaccbbb5b34bc59104e",
+      "authoringHelperSha256": "d7fcf55d1ba660e04eaec73938a81e0b2ab7a398be7bd247d513c25a85e04adf",
+      "rendererInputText": "Mein Lebenszeichen wurde abgelehnt. Es war nicht mehr aktuell.",
+      "decode": {
+        "maxSpeechTokens": 268,
+        "attentionHooksBefore": 0,
+        "generatedSpeechTokens": 108,
+        "eosReached": true,
+        "eosKind": "analyzer-forced",
+        "eosSuppressionObservedSteps": 83,
+        "modelEosRestoredSteps": 0,
+        "alignmentFirstCompletedStep": 84,
+        "nativeAnalyzerSourceSha256": "d8430efa92aedb8e59b782c1d299fe7238570eecea9d293c0981a5ee2e82c8c7",
+        "eosPolicy": "Native analyzer unchanged; observation only",
+        "t3InferenceSeconds": 11.73,
+        "temporaryAnalyzerHooksRemoved": 3,
+        "attentionHooksAfter": 0,
+        "eosTraceSha256": "7fa6c947ad729b94b94a5a6bccd681fee5d31587eda3b3530321007e35c93609"
+      },
+      "rendererInputBasis": "exact authored source",
+      "requestSha256": "21ff2adbf76a107058f13998e60713d496d69bad4274226946e7cbc404e0079d",
+      "referenceOriginalSha256": "6de8e6edce82955ec7170dcd3de46a772e65c92c9c4d59be10cf2e7e1c2866d8",
+      "profileJsonSha256": "c37ec9108e2dd1713654294b52e2c0868e5a6b8d7a5482e815940c231dff6144",
+      "rawSha256": "74f8cfe36b0b40c54c43a6c9d178c3dd1bf565be1ce2103faf67f7692a423537",
+      "renderer": "ResembleAI/Chatterbox Multilingual V2 0.1.7",
+      "modelRevision": "5bb1f6ee58e50c3b8d408bc82a6d3740c2db6e18",
+      "modelLicense": "MIT",
+      "referenceLicense": "unknown; selected profile does not record reference license",
+      "durationSeconds": 4.28,
+      "renderSeconds": 37.06,
+      "synthesis": {
+        "temperature": 0.65,
+        "repetitionPenalty": 3.0,
+        "cfgWeight": 0.6,
+        "languageId": "de",
+        "device": "cpu",
+        "precision": "fp32",
+        "t3WeightPrecision": "float32",
+        "conditioningPrecision": "float32",
+        "autocastPrecision": null,
+        "conditioningCached": true,
+        "referenceReconditionedForProfile": "65ebfa45e9394ccb9b4f4f5075ab672c",
+        "referenceConditioningVerifiedFloat32": true,
+        "modelSessionReused": true,
+        "cpuThreads": 2,
+        "inferenceMode": true
+      },
+      "listening": "pending",
+      "status": "eligible exact-text recording; human listening pending",
+      "processing": "[0:a]highpass=f=65,lowpass=f=7600,asplit[clean][wet];[wet]rubberband=pitch=0.82,lowpass=f=1450,volume=0.16[shadow];[clean][shadow]amix=inputs=2:duration=first:normalize=0[a]",
+      "processingSha256": "2a50ce4e72c14964d316fbf1dea864d82a2049e24a45d6122991b4aee0f7f517",
+      "normalization": {
+        "targetLufs": -18,
+        "targetTruePeakDbtp": -1.5,
+        "filter": "loudnorm=I=-17.15:TP=-1.8:LRA=11:linear=false",
+        "iterations": 3
+      },
+      "integratedLufs": -18.21,
+      "truePeakDbtp": -2.23,
+      "asr": "Mein Lebenszeichen wurde abgelehnt. Es war nicht mehr aktuell.",
+      "asrWordExact": true,
+      "asrLiteralWordExact": true,
+      "asrNormalization": "case/punctuation, German numeric and A38 spoken equivalents, guarded full-hour and date-ordinal equivalents, section sign/Paragraf orthography, German compound spacing",
+      "asrModel": "independent faster-whisper, cached local model, cpu int8 (effective int8_float32), no script prompt",
+      "asrCpuThreads": 4,
+      "asrDevice": "cpu",
+      "asrEffectiveComputeType": "int8_float32",
+      "asrLanguageId": "de",
+      "asrComputeType": "int8",
+      "asrScriptPrompt": null,
+      "asrBeamSize": 1,
+      "asrReadings": [
+        {
+          "beamSize": 1,
+          "transcript": "Mein Lebenszeichen wurde abgelehnt. Es war nicht mehr aktuell.",
+          "transcribeSeconds": 6.55,
+          "words": [
+            {
+              "word": " Mein",
+              "start": 0.0,
+              "end": 0.24
+            },
+            {
+              "word": " Lebenszeichen",
+              "start": 0.24,
+              "end": 0.98
+            },
+            {
+              "word": " wurde",
+              "start": 0.98,
+              "end": 1.22
+            },
+            {
+              "word": " abgelehnt.",
+              "start": 1.22,
+              "end": 1.78
+            },
+            {
+              "word": " Es",
+              "start": 1.98,
+              "end": 2.44
+            },
+            {
+              "word": " war",
+              "start": 2.44,
+              "end": 2.62
+            },
+            {
+              "word": " nicht",
+              "start": 2.62,
+              "end": 2.82
+            },
+            {
+              "word": " mehr",
+              "start": 2.82,
+              "end": 3.04
+            },
+            {
+              "word": " aktuell.",
+              "start": 3.04,
+              "end": 3.42
+            }
+          ]
+        }
+      ],
+      "asrModelSha256": "e76620f83d5f5b69efd3d87e3dc180c1bd21df9fbebacfd4335e5e1efcc018da",
+      "asrModelDirectoryName": "voice-asr-model",
+      "wordCues": [
+        {
+          "at": 0.0,
+          "charIndex": 0,
+          "word": "Mein",
+          "end": 0.24
+        },
+        {
+          "at": 0.24,
+          "charIndex": 5,
+          "word": "Lebenszeichen",
+          "end": 0.98
+        },
+        {
+          "at": 0.98,
+          "charIndex": 19,
+          "word": "wurde",
+          "end": 1.22
+        },
+        {
+          "at": 1.22,
+          "charIndex": 25,
+          "word": "abgelehnt",
+          "end": 1.78
+        },
+        {
+          "at": 1.98,
+          "charIndex": 36,
+          "word": "Es",
+          "end": 2.44
+        },
+        {
+          "at": 2.44,
+          "charIndex": 39,
+          "word": "war",
+          "end": 2.62
+        },
+        {
+          "at": 2.62,
+          "charIndex": 43,
+          "word": "nicht",
+          "end": 2.82
+        },
+        {
+          "at": 2.82,
+          "charIndex": 49,
+          "word": "mehr",
+          "end": 3.04
+        },
+        {
+          "at": 3.04,
+          "charIndex": 54,
+          "word": "aktuell",
+          "end": 3.42
+        }
+      ],
+      "sha256": "1ae9c299ad27b9baacc60f6b3c8954958278de28ba01a545b8759d55781ca006",
+      "bytes": 69548,
+      "sampleRateHz": 48000,
+      "channels": 1,
+      "bitrateBitsPerSecond": 128000,
+      "file": "assets/voices/office-ambient/amt-ambient-lebenszeichen.mp3"
+    }
+  ],
+  "heldPrivate": [],
+  "approvedExistingReuse": []
+}

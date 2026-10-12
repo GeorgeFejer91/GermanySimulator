@@ -343,6 +343,19 @@ The opening and shouted final phone reply use direct seeded retakes from that sa
 
 The five earlier Frau Knick escalation clips (`candidate-dialogue/amt-brunhilde-knick-17-escalation.mp3` through `-21-escalation.mp3`) used her retired primary profile `1a28fb7903d344518617d755a7f5cbb0`. They and the four former Heinrich phone candidates now live in the private Music archive and have no active preview lookup. The CC0 EmoDB original input hash was `903884eae81731486a3d4e8f04c69bf86f69a35002d7674f1d709225b7d2934f`; normalized native input hash `7844b1c83d829fa08c2fe1d5474697d81868bec0334dadf4642fae7591125cbf` remains separately recorded. The manifest preserves the previous candidates and their provenance. Historical retakes corrected “Grashalm” and “annulliert”; numeric/compound-only transcript equivalence is marked separately from literal agreement. These archived outputs passed the loudness checks; no complete listening acceptance is claimed.
 
+## Bürgeramt background cast (2026-10-12)
+
+`office-ambient/` contains exact short background remarks synthesized with the
+existing selected character profiles in `For-AI/VOICE-CAST.json`, using the
+pinned ResembleAI Chatterbox Multilingual V2 0.1.7 revision. No new voice profile
+or source recording was created. Each per-voice manifest retains the CC0 EmoDB
+reference provenance, original/reference hashes, exact German and English text,
+native completion receipt, independent final-MP3 transcription, encoded hash,
+duration and delivery levels. User authorization covers background use of these
+voices; perceptual listening remains unperformed. Full private generation and
+failed-take receipts remain in the Music library. Runtime selection never
+substitutes browser speech for a missing ambient recording.
+
 ## User-selected GS Merz speech (2026-10-10, extended 2026-10-11)
 
 The user requested all authored Friedrich Merz lines and nine short source-verified controversial quotations with the saved `GS Merz` profile (`cb7f3cee85f648c186355329316c6b3b`). Its source note is https://www.youtube.com/watch?v=TtO9A8t3AaA, original SHA-256 `b5579f4d31d4f138353232cd0708fc9ad62b8a4683dc35f6830d5557d9b87d8e`, and normalized reference SHA-256 `9c28278551a4a68180ca410306ebf322f94bb8034b7a1c2222d635ee014a178e`. This is a user-selected reference, without an established CC0 license; the private source and reference recording are not shipped. All eleven game lines use Secret Tunnel 6's bundled OmniVoice Rust runtime and model revision `c5fdb5ccb189668d56333f77ba2629f4cd7535f4`, under the model's noncommercial, Boson and Meta tokenizer terms. No synthesis model ships. Previous source MP3s were preserved privately in the Music voice library's `GermanySimulator GS Merz resynthesis 2026-10-10/` folder.

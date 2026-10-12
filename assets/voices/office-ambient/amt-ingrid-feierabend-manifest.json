@@ -1,0 +1,210 @@
+{
+  "schemaVersion": 1,
+  "voiceId": "amt-ingrid-feierabend",
+  "profileId": "b456ded2b16d4bc38f6751bfe52266e8",
+  "fallback": "browser",
+  "status": "same-profile technical and independent ASR audit; perceptual listening not independently verified",
+  "generatedLineCount": 1,
+  "requestedLineCount": 1,
+  "lineCount": 1,
+  "clips": [
+    {
+      "clipId": "amt-ambient-feierabend",
+      "actorId": "nachtschichtmelderin",
+      "text": "Der Feierabend wurde verlängert. Die Öffnungszeiten bleiben geschlossen.",
+      "english": "Closing time has been extended. Opening hours remain closed.",
+      "voiceId": "amt-ingrid-feierabend",
+      "profileId": "b456ded2b16d4bc38f6751bfe52266e8",
+      "sourceLocator": "buergeramt-story.js ambient.amt-ambient-feierabend",
+      "approval": {
+        "status": "user-approved",
+        "date": "2026-10-12",
+        "instruction": "add in more random kafkaesque dialog snippets in the background to give the game also a richer burocratic texture of random surreal german-burocratic la guage audio dialogue snippets that are background texture for the game",
+        "scope": "Existing Bürgeramt cast voices for varied background remarks; no browser machine voice",
+        "listeningConfirmed": false
+      },
+      "seed": 71000,
+      "synthesisAttempt": 1,
+      "referenceSha256": "bdbab9a001e15f222d47699ab12616a02740cf50993d2b841a9fe77bdd78d67c",
+      "authoringHelperSha256": "d7fcf55d1ba660e04eaec73938a81e0b2ab7a398be7bd247d513c25a85e04adf",
+      "rendererInputText": "Der Feierabend wurde verlängert. Die Öffnungszeiten bleiben geschlossen.",
+      "decode": {
+        "maxSpeechTokens": 256,
+        "attentionHooksBefore": 0,
+        "generatedSpeechTokens": 127,
+        "eosReached": true,
+        "eosKind": "analyzer-forced",
+        "eosSuppressionObservedSteps": 101,
+        "modelEosRestoredSteps": 0,
+        "alignmentFirstCompletedStep": 102,
+        "nativeAnalyzerSourceSha256": "d8430efa92aedb8e59b782c1d299fe7238570eecea9d293c0981a5ee2e82c8c7",
+        "eosPolicy": "Native analyzer unchanged; observation only",
+        "t3InferenceSeconds": 16.72,
+        "temporaryAnalyzerHooksRemoved": 3,
+        "attentionHooksAfter": 0,
+        "eosTraceSha256": "3fde359a54d99d6b7efb42a1645916f8d596cdcd6c8968254b050feb552d9a7f"
+      },
+      "rendererInputBasis": "exact authored source",
+      "requestSha256": "fd4afb40258c7717d6c4c5eae56ca501991391f294a94c5aea4a789922a82408",
+      "referenceOriginalSha256": "7a9fda66b3692cbb3981212937d81dd68b121851e35cea345fcd58056d613789",
+      "profileJsonSha256": "cea01113d93857b535650f293db929879fc133e985868651bc299983b055df29",
+      "rawSha256": "f4cca334ecdad2b6223610699786802fdbb531bcfec9dfa284dd3d3f7175fac4",
+      "renderer": "ResembleAI/Chatterbox Multilingual V2 0.1.7",
+      "modelRevision": "5bb1f6ee58e50c3b8d408bc82a6d3740c2db6e18",
+      "modelLicense": "MIT",
+      "referenceLicense": "unknown; selected profile does not record reference license",
+      "durationSeconds": 5.02,
+      "renderSeconds": 40.89,
+      "synthesis": {
+        "temperature": 0.65,
+        "repetitionPenalty": 3.0,
+        "cfgWeight": 0.6,
+        "languageId": "de",
+        "device": "cpu",
+        "precision": "fp32",
+        "t3WeightPrecision": "float32",
+        "conditioningPrecision": "float32",
+        "autocastPrecision": null,
+        "conditioningCached": true,
+        "referenceReconditionedForProfile": "b456ded2b16d4bc38f6751bfe52266e8",
+        "referenceConditioningVerifiedFloat32": true,
+        "modelSessionReused": true,
+        "cpuThreads": 2,
+        "inferenceMode": true
+      },
+      "listening": "pending",
+      "status": "eligible exact-text recording; human listening pending",
+      "processing": "[0:a]highpass=f=65,lowpass=f=7600,asplit[clean][wet];[wet]rubberband=pitch=0.96,lowpass=f=1450,volume=0.16[shadow];[clean][shadow]amix=inputs=2:duration=first:normalize=0[a]",
+      "processingSha256": "1fedc67b29e93f34d6d4dab9daad19ef5298e743ab760dbdbeabdf9c27c9f3b5",
+      "normalization": {
+        "targetLufs": -18,
+        "targetTruePeakDbtp": -1.5,
+        "filter": "loudnorm=I=-18.48:TP=-1.8:LRA=11:linear=false",
+        "iterations": 2
+      },
+      "integratedLufs": -17.86,
+      "truePeakDbtp": -2.24,
+      "asr": "Der Feierabend wurde verlängert. Die Öffnungszeiten bleiben geschlossen.",
+      "asrWordExact": true,
+      "asrLiteralWordExact": true,
+      "asrNormalization": "case/punctuation, German numeric and A38 spoken equivalents, guarded full-hour and date-ordinal equivalents, section sign/Paragraf orthography, German compound spacing",
+      "asrModel": "independent faster-whisper, cached local model, cpu int8 (effective int8_float32), no script prompt",
+      "asrCpuThreads": 4,
+      "asrDevice": "cpu",
+      "asrEffectiveComputeType": "int8_float32",
+      "asrLanguageId": "de",
+      "asrComputeType": "int8",
+      "asrScriptPrompt": null,
+      "asrBeamSize": 1,
+      "asrReadings": [
+        {
+          "beamSize": 1,
+          "transcript": "Der Feierabend wurde verlängert. Die Öffnungszeiten bleiben geschlossen.",
+          "transcribeSeconds": 7.62,
+          "words": [
+            {
+              "word": " Der",
+              "start": 0.0,
+              "end": 0.18
+            },
+            {
+              "word": " Feierabend",
+              "start": 0.18,
+              "end": 0.84
+            },
+            {
+              "word": " wurde",
+              "start": 0.84,
+              "end": 1.08
+            },
+            {
+              "word": " verlängert.",
+              "start": 1.08,
+              "end": 1.66
+            },
+            {
+              "word": " Die",
+              "start": 1.94,
+              "end": 2.54
+            },
+            {
+              "word": " Öffnungszeiten",
+              "start": 2.54,
+              "end": 3.38
+            },
+            {
+              "word": " bleiben",
+              "start": 3.38,
+              "end": 3.7
+            },
+            {
+              "word": " geschlossen.",
+              "start": 3.7,
+              "end": 4.18
+            }
+          ]
+        }
+      ],
+      "asrModelSha256": "e76620f83d5f5b69efd3d87e3dc180c1bd21df9fbebacfd4335e5e1efcc018da",
+      "asrModelDirectoryName": "voice-asr-model",
+      "wordCues": [
+        {
+          "at": 0.0,
+          "charIndex": 0,
+          "word": "Der",
+          "end": 0.18
+        },
+        {
+          "at": 0.18,
+          "charIndex": 4,
+          "word": "Feierabend",
+          "end": 0.84
+        },
+        {
+          "at": 0.84,
+          "charIndex": 15,
+          "word": "wurde",
+          "end": 1.08
+        },
+        {
+          "at": 1.08,
+          "charIndex": 21,
+          "word": "verlängert",
+          "end": 1.66
+        },
+        {
+          "at": 1.94,
+          "charIndex": 33,
+          "word": "Die",
+          "end": 2.54
+        },
+        {
+          "at": 2.54,
+          "charIndex": 37,
+          "word": "Öffnungszeiten",
+          "end": 3.38
+        },
+        {
+          "at": 3.38,
+          "charIndex": 52,
+          "word": "bleiben",
+          "end": 3.7
+        },
+        {
+          "at": 3.7,
+          "charIndex": 60,
+          "word": "geschlossen",
+          "end": 4.18
+        }
+      ],
+      "sha256": "6c8df7d4ec16da30d8081e3fc27481ab9b766aa22a92689f2fc674bf43200380",
+      "bytes": 81452,
+      "sampleRateHz": 48000,
+      "channels": 1,
+      "bitrateBitsPerSecond": 128000,
+      "file": "assets/voices/office-ambient/amt-ambient-feierabend.mp3"
+    }
+  ],
+  "heldPrivate": [],
+  "approvedExistingReuse": []
+}

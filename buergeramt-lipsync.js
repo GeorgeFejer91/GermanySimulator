@@ -1,4 +1,4 @@
-import {speechMouthTracks} from './assets/buergeramt/speech/mouth-cues.js?v=20261012-office-dialogue';
+import {speechMouthTracks} from './assets/buergeramt/speech/mouth-cues.js?v=20261012-amt-ambient';
 const shapes={X:[0,0,0,0],A:[0,0,0,0],B:[.32,.45,0,.15],C:[.85,.35,0,0],D:[1,.12,0,0],E:[.72,0,.55,0],F:[.70,0,1,0],G:[.16,.12,0,1],H:[.70,.2,0,.5]};
 const neutral=()=>({open:0,spread:0,round:0,bite:0,viseme:'X',time:0});
 const energies=new WeakMap(),smooth=t=>t*t*(3-2*t);

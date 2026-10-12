@@ -48,6 +48,27 @@ window.BuergeramtStory=Object.freeze({
   "amt-wolfram-rentenbescheid":{speaker:"WOLFRAM RENTENBESCHEID",fullName:"Wolfram Rentenbescheid",voiceId:"amt-wolfram-rentenbescheid",x:1.7,z:-1.39,lines:[{line:"Mein Bescheid ist seit drei Wochen unterwegs.",tone:"warning",valence:-.45}]}
  },
  clerkIdentity,clerks,
+ ambient:[
+  ...["renter","parent","pensioner"].flatMap(actor=>[
+   {id:"amt-ambient-termin-"+actor,actor,text:"Mein Termin war gestern. Ich war heute pünktlich.",english:"My appointment was yesterday. I was on time today."},
+   {id:"amt-ambient-nummer-"+actor,actor,text:"Mein Buchstabe wurde aufgerufen, aber die Zahl gehört jemand anderem.",english:"My letter was called, but the number belongs to someone else."}
+  ]),
+  {id:"amt-ambient-original",actor:"clerk-1",text:"Für die Kopie des Originals benötigen Sie das Original der Kopie.",english:"For a copy of the original, you need the original of the copy."},
+  {id:"amt-ambient-warteschleife",actor:"clerk-2",text:"Nein, die Warteschleife ist persönlich zu nehmen.",english:"No, the hold queue must be taken personally."},
+  {id:"amt-ambient-moment",actor:"clerk-4",text:"Einen Moment. Ich verbinde Sie mit Ihrem Moment.",english:"One moment. I will connect you to your moment."},
+  {id:"amt-ambient-abwesenheit",actor:"archivbotin",text:"Ihre Akte ist verschwunden. Bitte bestätigen Sie den Eingang Ihrer Abwesenheit.",english:"Your file has disappeared. Please acknowledge receipt of your absence."},
+  {id:"amt-ambient-leerblatt",actor:"formularsammler",text:"Das leere Blatt ist unvollständig. Es fehlt der Nachweis, dass nichts fehlt.",english:"The blank page is incomplete. Proof that nothing is missing is missing."},
+  {id:"amt-ambient-nullzettel",actor:"nummernfluesterer",text:"Die Null auf meinem Zettel wartet schon länger als ich.",english:"The zero on my ticket has been waiting longer than I have."},
+  {id:"amt-ambient-feierabend",actor:"nachtschichtmelderin",text:"Der Feierabend wurde verlängert. Die Öffnungszeiten bleiben geschlossen.",english:"Closing time has been extended. Opening hours remain closed."},
+  {id:"amt-ambient-quittung",actor:"pfandarchitektin",text:"Die Quittung bestätigt nur, dass ich eine Bestätigung beantragt habe.",english:"The receipt only confirms that I applied for a confirmation."},
+  {id:"amt-ambient-schatten",actor:"kopiependler",text:"Mein Schatten gilt als Zweitschrift. Jetzt muss er beglaubigt werden.",english:"My shadow counts as a duplicate. Now it has to be certified."},
+  {id:"amt-ambient-ende",actor:"warteschlangenpoetin",text:"Das Ende der Warteschlange ist heute nur nach Termin erreichbar.",english:"Today the end of the queue is accessible by appointment only."},
+  {id:"amt-ambient-wohnung",actor:"renter",text:"Meine Wohnung ist angemeldet. Ich selbst stehe noch im Flur.",english:"My apartment is registered. I myself am still in the corridor."},
+  {id:"amt-ambient-zukunft",actor:"parent",text:"Für die Zukunft meines Kindes fehlt eine Kopie der Vergangenheit.",english:"My child's future is missing a copy of the past."},
+  {id:"amt-ambient-lebenszeichen",actor:"pensioner",text:"Mein Lebenszeichen wurde abgelehnt. Es war nicht mehr aktuell.",english:"My sign of life was rejected. It was no longer up to date."},
+  {id:"amt-ambient-stempel",actor:"archivbotin",text:"Der Stempel ist ungültig. Seine Gültigkeit wurde noch nicht gestempelt.",english:"The stamp is invalid. Its validity has not been stamped yet."},
+  {id:"amt-ambient-weiterwarten",actor:"warteschlangenpoetin",text:"Ich warte auf die Erlaubnis, weiter warten zu dürfen.",english:"I am waiting for permission to keep waiting."}
+ ],
  clerkRefusal:"Steht Ihre Nummer auf der Tafel? Nein? Dann treten Sie zurück! Dass ich hier gerade nichts tue, ist eine dienstliche Tätigkeit.",
  omen:{speaker:"DER AKTENKURIER",line:"Wer die Finsternis sieht, hat sie selbst gewählt!",delivery:{rate:.82,pitch:.72,contour:[
   {word:"Wer",tension:.12,semitones:1},{word:"Finsternis",tension:.55,semitones:.5},

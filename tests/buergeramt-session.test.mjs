@@ -128,8 +128,8 @@ test('city audio gates waiting-room speech and releases it when the city clears'
  let cityBusy=true;const h=harness('host',{voice:true,cinematics:false,cityAudioBusy:()=>cityBusy});
  h.enter();h.advanceGame(9);const before=h.synth.spoken.length;
  assert.equal(before,0);assert.equal(h.node('amt-ambient').textContent,'');
- cityBusy=false;h.level.update(.1);h.tick(20);assert.equal(h.synth.spoken.length,1);
- assert.match(h.node('amt-ambient').textContent,/WARTERAUM/);
+ cityBusy=false;h.level.update(.1);h.tick(20);assert.equal(h.synth.spoken.length,0);
+ assert(h.window.BuergeramtStory.ambient.some(row=>h.node('amt-ambient').textContent.endsWith(row.text)));
 });
 
 test('city audio defers the optional omen and its tone until the city clears',()=>{

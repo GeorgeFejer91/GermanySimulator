@@ -243,8 +243,13 @@ def configure_request(args):
     if args.request_file:
         plan = read(args.request_file)
         assert not args.ambient, "Custom families own their authored queues"
-        assert plan["family"] in ("street-wisdom", "office-replies")
-        if plan["family"] == "office-replies":
+        assert plan["family"] in ("street-wisdom", "office-replies", "office-ambient")
+        if plan["family"] == "office-ambient":
+            assert VOICE.startswith("amt-")
+            assert plan["publicAssetFamily"] == "assets/voices/office-ambient"
+            assert plan["privateReviewFamily"] == "GermanySimulator office ambient review 2026-10-12"
+            assert set(plan["sourceSha256"]) == {"buergeramt-story.js", "buergeramt.js"}
+        elif plan["family"] == "office-replies":
             assert VOICE == "spieler-hans-peter-mustermann"
             assert plan["publicAssetFamily"] == "assets/voices/player-replies"
             assert plan["privateReviewFamily"] == "GermanySimulator office replies review 2026-10-12"
@@ -435,6 +440,21 @@ def reference_license(profile_record):
 def jobs(ambient=False, music_root=None):
     if CUSTOM_PLAN:
         REUSE_EVIDENCE.clear()
+        if CUSTOM_PLAN["family"] == "office-ambient":
+            js = 'global.window={};require("./buergeramt-story.js");console.log(JSON.stringify(window.BuergeramtStory));'
+            story = json.loads(subprocess.check_output(["node", "-e", js], cwd=ROOT, encoding="utf-8"))
+            people = {**story["characters"], **dict(zip(("renter", "parent", "pensioner"), story["patrons"].values())),
+                      **{"clerk-" + desk: person for desk, person in story["clerks"].items()}}
+            authored = [row for row in story["ambient"] if people[row["actor"]]["voiceId"] == VOICE]
+            selected = [dict(job) for job in CUSTOM_PLAN["jobs"] if job["voiceId"] == VOICE]
+            assert len(selected) == len(authored) and len({job["clipId"] for job in selected}) == len(selected)
+            for job, row in zip(selected, authored):
+                assert job["clipId"] == row["id"] and job["actorId"] == row["actor"]
+                assert re.fullmatch(r"[a-z0-9-]+", job["clipId"])
+                assert job["text"] == row["text"] and job["english"] == row["english"]
+                assert job["profileId"] == PROFILE and job["voiceId"] == people[row["actor"]]["voiceId"]
+                assert job["sourceLocator"] == "buergeramt-story.js ambient." + row["id"]
+            return selected
         if CUSTOM_PLAN["family"] == "office-replies":
             js = 'global.window={};require("./buergeramt-story.js");console.log(JSON.stringify(window.BuergeramtStory));'
             story = json.loads(subprocess.check_output(["node", "-e", js], cwd=ROOT, encoding="utf-8"))

@@ -109,11 +109,11 @@ test('every authored clerk and roaming line owns lips; late completion cannot ca
 test('ambient clerks and waiting voices share ownership; voice-off stays neutral',()=>{
  const {h,p,level}=probe();p.setStage('waiting');
  for(const clerk of Object.values(h.window.BuergeramtStory.clerks))h.window.GermanySimulatorAudioText.productionVoices[clerk.voiceId].fallback='captions';
- for(const actor of ['renter','clerk-1','clerk-2','pensioner','clerk-4']){
+ for(let index=0;index<21;index++){
   const before=h.synth.spoken.length;
-  p.ambientStep(9);h.tick(20);assert.equal(level.lipSpeech.actor,actor);
-  if(actor.startsWith('clerk-')){assert.equal(level.lipSpeech.active,false);assert.equal(h.synth.spoken.length,before);h.tick(15000)}
-  else{assert.equal(level.lipSpeech.active,true);h.synth.end()}
+  p.ambientStep(9);h.tick(20);const actor=level.lipSpeech.actor;
+  assert(h.window.BuergeramtStory.ambient.some(row=>row.actor===actor&&h.node('amt-ambient').textContent.endsWith(row.text)));
+  assert.equal(level.lipSpeech.active,false);assert.equal(h.synth.spoken.length,before);h.tick(15000);
   assert.equal(level.lipSpeech.actor,null);
  }
  const quiet=probe({voice:false});quiet.p.content('FRAU KNICK','Mama');assert.equal(quiet.level.lipSpeech.active,false);

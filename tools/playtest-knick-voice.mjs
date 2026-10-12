@@ -13,7 +13,7 @@ assert(source.includes(marker));
 const instrumented=source.replace(marker,`window.__knickVoiceTest={
  cue(text,voice=true,argument=false){active=true;options={voiceOn:()=>voice,cinematics:false};root.hidden=false;setStage(argument?"cancelled":"counter");content(argument?"FRAU KNICK · SCHALTER 3":story.clerkIdentity.speaker,text,[])},
  cancel(){cancelSpeech()},
- ambient(){active=true;options={voiceOn:()=>true,cinematics:false};setStage("walk-sign");ambientIndex=1;ambientClock=9;ambientStep(0)}
+ ambient(){active=true;options={voiceOn:()=>true,cinematics:false};setStage("walk-sign");ambientLastVoice=ambientLastText="";ambientBag.splice(0,ambientBag.length,story.ambient.find(row=>row.actor==="clerk-1"));ambientClock=9;ambientStep(0)}
 };\n`+marker);
 const mime={'.html':'text/html','.js':'text/javascript','.css':'text/css','.json':'application/json','.mp3':'audio/mpeg','.webp':'image/webp','.png':'image/png','.svg':'image/svg+xml','.woff2':'font/woff2'};
 const server=createServer((request,response)=>{
@@ -50,10 +50,10 @@ try{
    const cue=await page.evaluate(()=>{const c=window.GermanySimulatorAudioText,clip=Object.values(c.recordings).find(r=>r.voiceId==='amt-brunhilde-knick'&&r.id.startsWith('knick-registration-'));if(!clip)throw Error('No eligible fixed-profile registration recording');window.__knickVoiceTest.cue(clip.source);return{source:clip.source,profileId:clip.profileId,path:c.recordedClip(clip.voiceId,clip.source)}});
    assert(cue.path.startsWith('./assets/voices/knick/'));
    await page.waitForFunction(()=>window.__players.at(-1)?.currentTime>0,null,{timeout:8000});
-   const playing=await page.evaluate(()=>({src:window.__players.at(-1).getAttribute('src'),muted:window.__players.at(-1).muted,caption:document.getElementById('amt-line').textContent,browser:window.__browserSpeech.length}));
+   const playing=await page.evaluate(()=>({src:window.__players.at(-1).getAttribute('src').split('?')[0],muted:window.__players.at(-1).muted,caption:document.getElementById('amt-line').textContent,browser:window.__browserSpeech.length}));
    assert.equal(cue.profileId,'b080c7d95ecd418fb428282461d7fbe7');assert.equal(playing.src,cue.path);assert.equal(playing.caption,cue.source);assert(playing.muted);assert.equal(playing.browser,0);
    await page.evaluate(()=>window.__knickVoiceTest.cancel());
-   const missing='**/'+cue.path.slice(2);await page.route(missing,route=>route.fulfill({status:404,body:''}));
+   const missing='**/'+cue.path.slice(2)+'*';await page.route(missing,route=>route.fulfill({status:404,body:''}));
    await page.evaluate(text=>window.__knickVoiceTest.cue(text),cue.source);
    await page.waitForFunction(()=>window.__players.at(-1)?.getAttribute('src')===null,null,{timeout:8000});
    assert.deepEqual(await page.evaluate(()=>({src:window.__players.at(-1).getAttribute('src'),browser:window.__browserSpeech.length})),{src:null,browser:0});
@@ -70,11 +70,11 @@ try{
   }
   assert.equal(await page.evaluate(()=>window.__browserSpeech.length),0,'a held argument take cannot borrow a browser voice');
   await page.evaluate(()=>window.__knickVoiceTest.cancel());
-  const ambientPath=await page.evaluate(()=>window.GermanySimulatorAudioText.recordedClip('amt-brunhilde-knick','Für die Kopie des Originals benötigen Sie das Original der Kopie.'));
+  const ambientPath=await page.evaluate(()=>window.GermanySimulatorAudioText.recordedClip('amt-erna-frist','Für die Kopie des Originals benötigen Sie das Original der Kopie.'));
   await page.evaluate(()=>window.__knickVoiceTest.ambient());
   await page.waitForFunction(()=>document.getElementById('amt-ambient').textContent.includes('Original der Kopie'),null,{timeout:8000});
   const ambient=await page.evaluate(()=>({caption:document.getElementById('amt-ambient').textContent,browser:window.__browserSpeech.length}));assert(ambient.caption.includes('Original der Kopie'));assert.equal(ambient.browser,0);
-  if(ambientPath){const media=await page.evaluate(()=>({src:window.__players.at(-1).getAttribute('src'),volume:window.__players.at(-1).volume}));assert.equal(media.src,ambientPath);assert(Math.abs(media.volume-.176)<1e-6);}
+  if(ambientPath){const media=await page.evaluate(()=>({src:window.__players.at(-1).getAttribute('src').split('?')[0],volume:window.__players.at(-1).volume}));assert.equal(media.src,ambientPath);assert(Math.abs(media.volume-.176)<1e-6);}
   await page.evaluate(()=>window.__knickVoiceTest.cancel());assert.deepEqual(errors,[]);
   console.log(JSON.stringify({name,startupVoiceRequests:0,recorded:'new registration take from selected profile',preview:'checked',failedAudio:'HTTP404 retains captions',voiceOff:'no media',ambient:ambientPath?'selected recording and reduced gain':'caption fallback',browserSpeech:0,evidence:'silent forced DOM/media lifecycle; Android emulation'}));
   await context.close();

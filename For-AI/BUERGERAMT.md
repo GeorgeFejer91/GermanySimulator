@@ -2,11 +2,44 @@
 
 The secret Bürgeramt is an episode of the canonical root game. QR admission, the linked phone, the numbered queue, Frau Knick, the police interruption, A38, and the existing exit outcomes remain its required chain. Eight optional walking encounters add movement and atmosphere while the player waits; they never award a ticket or change a counter answer.
 
-Character voices follow [`VOICE-SYNTH-PROTOCOL.md`](./VOICE-SYNTH-PROTOCOL.md#fixed-voices-and-the-agent-workflow-2026-10-11). `VOICE-CAST.json`'s `productionVoices` pins the selected Secret Tunnel profile, reference hashes, renderer and processing. All fifteen in-room people have distinct game voice IDs, selected profile UUIDs and normalized reference hashes: eight walkers, three patrons and four clerks. Schalter 1 is Erna Frist, 2 Ottilie Durchschlag, 3 Brunhilde Knick and 4 Hedwig Zuständig. Each clerk owns her refusal and ambient remarks. Knick keeps profile `b080c7d95ecd418fb428282461d7fbe7` for the existing registration, warnings and police argument. All clerks retain exact captions for missing, failed or dynamic recordings, including when the catalogue is unavailable. New clerk recordings and listening review remain pending; profile creation does not establish recorded coverage. Ambient remarks do not interrupt active office speech. Earlier profile IDs in historical notes below are provenance.
+Character voices follow [`VOICE-SYNTH-PROTOCOL.md`](./VOICE-SYNTH-PROTOCOL.md#fixed-voices-and-the-agent-workflow-2026-10-11). `VOICE-CAST.json`'s `productionVoices` pins the selected Secret Tunnel profile, reference hashes, renderer and processing. All fifteen in-room people have distinct game voice IDs, selected profile UUIDs and normalized reference hashes: eight walkers, three patrons and four clerks. Schalter 1 is Erna Frist, 2 Ottilie Durchschlag, 3 Brunhilde Knick and 4 Hedwig Zuständig. Each clerk owns her refusal and ambient remarks. Knick keeps profile `b080c7d95ecd418fb428282461d7fbe7` for the existing registration, warnings and police argument. All clerks retain exact captions for missing, failed or dynamic recordings, including when the catalogue is unavailable. Clerk refusal recordings and listening review remain pending; ambient recording coverage is described below. Ambient remarks do not interrupt active office speech. Earlier profile IDs in historical notes below are provenance.
 
 Recorded office MP3 requests include the current encoded SHA-256 in their URL,
 so a replacement at the same asset path gets a new browser cache entry. Mouth
 cues retain their canonical path and exact hash ownership.
+
+Background speech uses the `buergeramt-story.js` ambient pool: 12 new short
+Kafkaesque remarks, the three existing counter remarks, and both original
+waiting-room complaints recorded separately for Konrad, Mechthild and Wolfram.
+The room chooses among its existing character voices in a bounded random bag,
+avoiding consecutive identical text or speakers. Speaker captions and the mouth
+track belong to the selected person. These remarks use fixed exact-text recordings
+or silent readable captions; they never use browser speech, even without the
+catalogue. The existing 8.5-second opportunity and 22% voice gain remain, with
+foreground office/city speech taking priority and counter entry/exit cancelling
+the background cue. Assets load only when selected, one native media element
+at a time; cancellation removes its source. No full-library preload or new
+scheduler is introduced. `tests/buergeramt-ambient.test.mjs` owns this contract.
+
+The final ambient pack has 21 checked MP3s, 1,509,660 encoded bytes in total;
+one selected file is at most 91,052 bytes and 5.64 seconds. All native completion,
+selected-profile, independent encoded-word and level gates pass. Delivery is
+−18.24 to −17.83 LUFS, with maximum −1.98 dBTP. The revised number-prefix snippet
+replaces two privately held word-mismatch takes; neither enters playback.
+Silent Chromium checked every recording on desktop and Android portrait and
+landscape emulation, including absent/failed audio, catalogue failure, voice-off,
+foreground cancellation and simulated visibility. Active captions passed actual
+Pretext/DOM and screenshot checks at 320 px, 200% zoom and increased text spacing.
+All 546 Node checks and nine authoring-gate checks pass. Independent Physics and
+Camera reviews passed the affected ownership/animation integration scope;
+unchanged geometry, scale and vehicle rules were outside this change. Three cold
+office runs per profile before/after passed the existing browser gates on Intel
+Iris Xe Chromium; median sampled frame p95 stayed about 21 ms. Startup and input
+results varied, so this is regression evidence, not a speedup claim. No ambient
+MP3 preloads were observed. Direct `3d.html` passed silent startup smoke at all
+three viewports. Physical Android, perceptual listening and natural mission
+traversal were not exercised for this speech-only change. Private receipts and
+the ignored `output/amt-ambient/` reports retain the exact frozen candidate.
 
 ## Admission, queue and outcomes
 

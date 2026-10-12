@@ -41,7 +41,16 @@ function phoneFastLag(){return Math.min(1200,oneWay()+(timing.phoneFastReadyMs??
 function sentPolice(index){timing.cues[index]={sentAt:performance.now(),startedAt:null,doneAt:null,status:"waiting"}}
 function receivePoliceStart(index,mode,readyDelayMs,atMs,atUtcMs=null){const record=timing.cues[index];if(!record||record.status!=="waiting"||record.startedAt!==null||record.doneAt!==null)return false;record.startedAt=performance.now();record.phoneStartedAtMs=atMs;record.clockOffsetMs=timing.lastPongAt!==null&&record.startedAt-timing.lastPongAt<6000?timing.clockOffsetMs:null;record.estimatedStartAt=phoneTime(atMs,record.startedAt,record.clockOffsetMs);record.phoneStartedAtUtcMs=atUtcMs;record.clockDomain=record.clockOffsetMs!==null?"peer":"receipt";if(record.clockOffsetMs===null&&Number.isSafeInteger(atUtcMs)&&window.BuergeramtClock?.usable?.(clockAnchor,record.startedAt)){record.estimatedStartAt=window.BuergeramtClock.monoAt(clockAnchor,atUtcMs);record.clockDomain="utc"}record.startMode=mode;record.readyDelayMs=readyDelayMs;record.startTransportMs=Math.round(record.startedAt-record.sentAt-readyDelayMs);if(readyDelayMs<5000)timing.phoneFastReadyMs=timing.phoneFastReadyMs===null?readyDelayMs:Math.min(timing.phoneFastReadyMs,readyDelayMs);if(index>=0&&index<2&&readyDelayMs<5000)timing.phoneReadyMs=timing.phoneReadyMs===null?readyDelayMs:Math.round(timing.phoneReadyMs*.6+readyDelayMs*.4);timing.startLagMs=phoneStartLag();return true}
 function receivePoliceDone(index,mode,durationMs,atMs){const record=timing.cues[index];if(!record||record.doneAt!==null)return false;if(record.status==="timeout"||record.status==="disconnected"){record.lateDoneAt=performance.now();return false}record.doneAt=performance.now();record.phoneEndedAtMs=atMs;if(record.clockOffsetMs===null&&timing.lastPongAt!==null&&record.doneAt-timing.lastPongAt<6000){record.clockOffsetMs=timing.clockOffsetMs;if(record.phoneStartedAtMs!==undefined)record.estimatedStartAt=phoneTime(record.phoneStartedAtMs,record.startedAt,record.clockOffsetMs)}record.estimatedEndAt=phoneTime(atMs,record.doneAt,record.clockOffsetMs);record.durationMs=durationMs;record.mode=mode;const span=record.startedAt===null?null:record.doneAt-record.startedAt;record.errorMs=span===null?null:Math.round(span-durationMs);record.localErrorMs=record.phoneStartedAtMs===undefined?null:Math.round(atMs-record.phoneStartedAtMs-durationMs);record.uncertaintyMs=timing.clockUncertaintyMs;record.receiptJitter=span!==null&&Math.abs(record.errorMs)>Math.max(250,(timing.rttMs??0)+timing.jitterMs+100);record.status=span===null?"missing-start":record.startMode!==mode?"mode-changed":Math.abs(record.localErrorMs)>25?"drift":record.clockOffsetMs===null?"unsynced":"verified";return true}
-const ambientLines=[["WARTERAUM","Mein Termin war gestern. Ich war heute pünktlich."],["SCHALTER 1","Für die Kopie des Originals benötigen Sie das Original der Kopie."],["TELEFON AM SCHALTER 2","Nein, die Warteschleife ist persönlich zu nehmen."],["WARTERAUM","Mein Buchstabe wurde aufgerufen, aber die Zahl gehört jemand anderem."],["SCHALTER 4","Einen Moment. Ich verbinde Sie mit Ihrem Moment."]];
+const ambientLines=story.ambient,ambientBag=[];
+const ambientPeople={...story.characters,renter:story.patrons["amt-konrad-wohnungszettel"],parent:story.patrons["amt-mechthild-elternbogen"],pensioner:story.patrons["amt-wolfram-rentenbescheid"],...Object.fromEntries(Object.entries(story.clerks).map(([desk,person])=>["clerk-"+desk,person]))};
+let ambientLastVoice="",ambientLastText="";
+function nextAmbientLine(){
+ if(!ambientBag.length)ambientBag.push(...ambientLines);
+ let pool=ambientBag.filter(row=>ambientPeople[row.actor].voiceId!==ambientLastVoice&&row.text!==ambientLastText);
+ if(!pool.length){ambientBag.splice(0,ambientBag.length,...ambientLines);pool=ambientBag.filter(row=>ambientPeople[row.actor].voiceId!==ambientLastVoice&&row.text!==ambientLastText)}
+ const row=pool[Math.floor(Math.random()*pool.length)];ambientBag.splice(ambientBag.indexOf(row),1);
+ ambientLastVoice=ambientPeople[row.actor].voiceId;ambientLastText=row.text;return row;
+}
 const mix={ambience:.35,voice:.8,fx:.6},mixPanel=document.getElementById("amt-mix");
 try{const saved=JSON.parse(localStorage.getItem("amt-mix-v1")||"null");for(const key of Object.keys(mix))if(Number.isFinite(saved?.[key]))mix[key]=Math.max(0,Math.min(1,saved[key]))}catch{}
 function applyMix(){if(recordedSpeech)recordedSpeech.volume=mix.voice*(recordedSpeech.amtVolumeScale??1);if(officeAudio){officeAudio.ambience.gain.value=.006*mix.ambience*(1-.92*omen.strength);officeAudio.fx.gain.value=mix.fx;officeAudio.signal.gain.value=mix.fx}}
@@ -400,7 +409,7 @@ function say(text,onComplete,onStart,onBoundary,delivery=null,voiceId="",allowCa
   const requestedAt=performance.now();let settled=false,fallback=null,started=false,failed=false,paused=false,completionDue=0,completionRemaining=0,mode="fallback";
  const start=kind=>{if(!started&&current()){started=true;mode=kind;lips.start(kind);onStart?.(kind)}};
  const complete=()=>{if(settled||!current())return;start("fallback");settled=true;lips.finish();clerkSpeaking=false;clerkAnimation?.setSpeech(false);officeSpeechBusy=false;if(fallback!==null)clearTimer(fallback);onComplete?.(mode)};
- const fallbackPolicy=window.GermanySimulatorAudioText?.productionVoices?.[voiceId]?.fallback??(Object.values(story.clerks).some(person=>person.voiceId===voiceId)?"captions":"browser");
+ const fallbackPolicy=delivery.fallback??window.GermanySimulatorAudioText?.productionVoices?.[voiceId]?.fallback??(Object.values(story.clerks).some(person=>person.voiceId===voiceId)?"captions":"browser");
  const voiced=fallbackPolicy!=="captions"&&options?.voiceOn?.()&&window.speechSynthesis&&typeof window.SpeechSynthesisUtterance==="function";
  const beginFallback=()=>{if(settled||failed||!current())return;failed=true;officeSpeechBusy=false;mode="fallback";lips.start("fallback");if(fallback!==null)clearTimer(fallback);try{if(speechSynthesis.speaking||speechSynthesis.pending)speechSynthesis.cancel()}catch{}start("fallback");delivery?.onFallback?.();if(onComplete)fallback=defer(complete,readableMs)};
  if(onComplete||onStart){if(voiced){const limit=hostVoiceStartupMs===null?(hostVoiceAttempts===0?1800:1200):Math.max(900,Math.min(1800,Math.round(hostVoiceStartupMs*2+250)));hostVoiceAttempts++;fallback=defer(beginFallback,limit)}else if(onComplete)fallback=defer(complete,readableMs)}
@@ -621,14 +630,12 @@ function armCall(){if(!active||phoneSilent||!callPending||callCommitted||callArm
 function ambientStep(dt){
  if(!walking()||stage==="outside")return;ambientClock+=dt;
  if(ambientClock<8.5||officeSpeechBusy||options?.cityAudioBusy?.()||window.speechSynthesis?.speaking||window.speechSynthesis?.pending)return;
- ambientClock=0;cancelSpeech();const ambientVoice=ambientIndex++%ambientLines.length,[who,text]=ambientLines[ambientVoice];
- lips.prepare(["renter","clerk-1","clerk-2","pensioner","clerk-4"][ambientVoice],text,1.1);
- const clerk=story.clerks[{1:1,2:2,4:4}[ambientVoice]],owner=attempt,visibleCue=++cue,caption=(clerk?clerk.speaker+" · "+who:who)+": "+text;
+ ambientClock=0;cancelSpeech();ambientIndex++;const {actor,text}=nextAmbientLine(),person=ambientPeople[actor];
+ lips.prepare(actor,text,1.1);
+ const owner=attempt,visibleCue=++cue,caption=person.speaker+": "+text;
  const current=()=>active&&owner===attempt&&visibleCue===cue&&walking();
  const show=()=>{if(current())ambient.textContent=caption};
- const actor=["renter","clerk-1","clerk-2","pensioner","clerk-4"][ambientVoice];
- const voiceId=clerk?.voiceId||story.patrons[actor==="renter"?"amt-konrad-wohnungszettel":"amt-wolfram-rentenbescheid"]?.voiceId||"";
- say(text,()=>{if(current())ambient.textContent=""},show,null,{rate:1.1,volumeScale:.22,isCurrent:walking},voiceId);
+ say(text,()=>{if(current())ambient.textContent=""},show,null,{rate:1.1,volumeScale:.22,isCurrent:walking,fallback:"captions"},person.voiceId);
  if(ambientIndex%2===0)ring();
 }
 function update(dt){

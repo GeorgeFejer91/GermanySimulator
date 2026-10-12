@@ -130,8 +130,10 @@ export function streetRulesBlock(source){
  return 'const streetRuleClips=Object.freeze('+JSON.stringify(entries)+');\n';
 }
 export function fixedRecordingsBlock(cast,manifest,family='knick'){
- requireMatch(['knick','street-wisdom','player-replies'].includes(family),'Unknown fixed recording family');
- const entries={},seen=new Set(),street=family==='street-wisdom'?streetAuthority():null;
+ requireMatch(['knick','street-wisdom','player-replies','office-ambient'].includes(family),'Unknown fixed recording family');
+ const entries={},seen=new Set(),street=family==='street-wisdom'?streetAuthority():null,ambient=family==='office-ambient';
+ let ambientRows=null,ambientPeople=null;
+ if(ambient){const window={};vm.runInNewContext(readFileSync(resolve(root,'buergeramt-story.js'),'utf8'),{window});const story=window.BuergeramtStory;ambientRows=story.ambient;ambientPeople={...story.characters,...Object.fromEntries(['renter','parent','pensioner'].map((actor,i)=>[actor,Object.values(story.patrons)[i]])),...Object.fromEntries(Object.entries(story.clerks).map(([desk,person])=>['clerk-'+desk,person]))};}
  let replies=null;
  if(family==='player-replies'){
   const window={};vm.runInNewContext(readFileSync(resolve(root,'buergeramt-story.js'),'utf8'),{window});
@@ -151,15 +153,16 @@ export function fixedRecordingsBlock(cast,manifest,family='knick'){
   requireMatch(hash(resolve(root,clip.file))===clip.sha256,`Knick audio hash drift: ${clip.clipId}`);
   const key=clip.voiceId+'\0'+clip.text;requireMatch(!seen.has(key),`Duplicate Knick line: ${clip.clipId}`);seen.add(key);
   let id=clip.clipId;
+  if(ambient){const row=ambientRows.find(row=>row.id===id);requireMatch(row&&row.actor===clip.actorId&&row.text===clip.text&&row.english===clip.english&&ambientPeople[row.actor].voiceId===clip.voiceId,`Wrong ambient speaker/text: ${id}`);}
   if(replies)requireMatch(clip.voiceId==='spieler-hans-peter-mustermann'&&clip.actorId==='player'&&replies[clip.clipId]===clip.text,`Wrong player choice ownership/text: ${clip.clipId}`);
   if(street){
    const index=clip.ruleIndex,person=street.definitions.find(person=>person.ruleIndices.includes(index));
    requireMatch(Number.isInteger(index)&&person&&clip.actorId===person.id&&clip.voiceId===person.voiceId&&clip.clipId===`${person.id}-rule-${String(index+1).padStart(2,'0')}`&&clip.text===street.catalog.rules[index][1]&&clip.english===street.catalog.ruleEnglish[index],`Wrong street rule ownership/text: ${clip.clipId}`);
    id=`rule-${String(index+1).padStart(2,'0')}`;
   }
-  entries['./'+clip.file]={id,...(street||replies?{clipId:clip.clipId,actorId:clip.actorId}:{}),voiceId:clip.voiceId,profileId:clip.profileId,source:clip.text,english:clip.english,trigger:family==='knick'?'buergeramt-exact-dialogue':replies?'buergeramt-player-reply':'nearby-street-rule',durationMs:Math.round(clip.durationSeconds*1000),wordCues:clip.wordCues,sha256:clip.sha256,approval:clip.approval,provenanceManifest:clip.provenanceManifest};
+  entries['./'+clip.file]={id,...(street||replies||ambient?{clipId:clip.clipId,actorId:clip.actorId}:{}),voiceId:clip.voiceId,profileId:clip.profileId,source:clip.text,english:clip.english,trigger:family==='knick'?'buergeramt-exact-dialogue':replies?'buergeramt-player-reply':ambient?'buergeramt-ambient':'nearby-street-rule',durationMs:Math.round(clip.durationSeconds*1000),wordCues:clip.wordCues,sha256:clip.sha256,approval:clip.approval,provenanceManifest:clip.provenanceManifest};
  }
- return `const ${family==='knick'?'knick':replies?'playerReply':'streetWisdom'}Recordings=Object.freeze(`+JSON.stringify(entries)+');\n';
+ return `const ${family==='knick'?'knick':replies?'playerReply':ambient?'officeAmbient':'streetWisdom'}Recordings=Object.freeze(`+JSON.stringify(entries)+');\n';
 }
 export function main(args=process.argv.slice(2)){
  requireMatch(!(args.includes('--sync')&&args.includes('--rename-production')),'Rename production profiles first, then sync their verified bindings');
@@ -205,6 +208,21 @@ export function main(args=process.argv.slice(2)){
    source=source.replace(pattern,'').replace('const recordings=Object.freeze({',()=>block+'const recordings=Object.freeze({');
    if(!source.includes(' ...streetWisdomRecordings,'))source=source.replace(' ...feverRecordings,',' ...feverRecordings,\n ...streetWisdomRecordings,');
   }else requireMatch(source.match(pattern)?.[0]===block,'Street rule recording lookup stale; run --sync');
+ }
+ const ambientDir=resolve(root,'assets/voices/office-ambient');
+ if(existsSync(ambientDir)){
+  const clips=[];
+  for(const filename of readdirSync(ambientDir).filter(name=>name.endsWith('-manifest.json')).sort()){
+   const path=`assets/voices/office-ambient/${filename}`,manifest=json(resolve(root,path));
+   requireMatch(manifest.clips.length+manifest.heldPrivate.length===manifest.requestedLineCount,`Unaccounted ambient lines: ${path}`);
+   clips.push(...manifest.clips.map(clip=>({...clip,provenanceManifest:path})));
+  }
+  const block=fixedRecordingsBlock(cast,{clips},'office-ambient'),pattern=/const officeAmbientRecordings=Object\.freeze\(\{[^\n]*\}\);\n/;
+  fixedAssetInventory('office-ambient',clips);
+  if(args.includes('--sync')){
+   source=source.replace(pattern,'').replace('const recordings=Object.freeze({',()=>block+'const recordings=Object.freeze({');
+   if(!source.includes(' ...officeAmbientRecordings,'))source=source.replace(' ...feverRecordings,',' ...feverRecordings,\n ...officeAmbientRecordings,');
+  }else requireMatch(source.match(pattern)?.[0]===block,'Office ambient recording lookup stale; run --sync');
  }
  const repliesPath=resolve(root,'assets/voices/player-replies/spieler-hans-peter-mustermann-manifest.json');
  if(existsSync(repliesPath)&&!args.includes('--archive-assets')&&!args.includes('--archive-profiles')){

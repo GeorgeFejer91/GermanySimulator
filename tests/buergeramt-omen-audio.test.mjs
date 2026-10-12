@@ -68,7 +68,8 @@ test('a scan and name registration survive approach, blackout, glare, and camera
   assert.equal(h.level.activated,false);assert.equal(link.sent.at(-1).type,'scan-ready');
   assert.equal(h.level.stage,'omen');
   link.message({type:'register',name:'Erika Mustermann'});
-  assert.equal(h.level.registeredName,'Erika Mustermann');assert.equal(h.level.activated,true);assert.equal(link.sent.at(-1).type,'ticket');
+  assert.equal(h.level.registeredName,'Erika Mustermann');assert.equal(h.level.activated,false);assert.equal(link.sent.at(-1).type,'ticket');
+  link.message({type:'ticket-received',id:link.scanId,number:h.level.registrationTicket});assert.equal(h.level.activated,true);
   finishOmen(h);assert.equal(h.level.stage,'waiting');assert.equal(h.level.activated,true);
   assert.equal(h.level.registeredName,'Erika Mustermann');
  }

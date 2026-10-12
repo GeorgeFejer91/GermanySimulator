@@ -1,0 +1,254 @@
+{
+  "schemaVersion": 1,
+  "voiceId": "amt-dieter-papiermann",
+  "profileId": "eb4aab1842eb450eacbdd5d4ccc38ab6",
+  "fallback": "browser",
+  "status": "same-profile technical and independent ASR audit; perceptual listening not independently verified",
+  "generatedLineCount": 1,
+  "requestedLineCount": 1,
+  "lineCount": 1,
+  "clips": [
+    {
+      "clipId": "amt-ambient-leerblatt",
+      "actorId": "formularsammler",
+      "text": "Das leere Blatt ist unvollständig. Es fehlt der Nachweis, dass nichts fehlt.",
+      "english": "The blank page is incomplete. Proof that nothing is missing is missing.",
+      "voiceId": "amt-dieter-papiermann",
+      "profileId": "eb4aab1842eb450eacbdd5d4ccc38ab6",
+      "sourceLocator": "buergeramt-story.js ambient.amt-ambient-leerblatt",
+      "approval": {
+        "status": "user-approved",
+        "date": "2026-10-12",
+        "instruction": "add in more random kafkaesque dialog snippets in the background to give the game also a richer burocratic texture of random surreal german-burocratic la guage audio dialogue snippets that are background texture for the game",
+        "scope": "Existing Bürgeramt cast voices for varied background remarks; no browser machine voice",
+        "listeningConfirmed": false
+      },
+      "seed": 71000,
+      "synthesisAttempt": 1,
+      "referenceSha256": "299dc1e9eef10ded8821becc7f198700e20d446ca902744d53dfa0c22988da91",
+      "authoringHelperSha256": "d7fcf55d1ba660e04eaec73938a81e0b2ab7a398be7bd247d513c25a85e04adf",
+      "rendererInputText": "Das leere Blatt ist unvollständig. Es fehlt der Nachweis, dass nichts fehlt.",
+      "decode": {
+        "maxSpeechTokens": 304,
+        "attentionHooksBefore": 0,
+        "generatedSpeechTokens": 142,
+        "eosReached": true,
+        "eosKind": "analyzer-forced",
+        "eosSuppressionObservedSteps": 104,
+        "modelEosRestoredSteps": 0,
+        "alignmentFirstCompletedStep": 105,
+        "nativeAnalyzerSourceSha256": "d8430efa92aedb8e59b782c1d299fe7238570eecea9d293c0981a5ee2e82c8c7",
+        "eosPolicy": "Native analyzer unchanged; observation only",
+        "t3InferenceSeconds": 14.95,
+        "temporaryAnalyzerHooksRemoved": 3,
+        "attentionHooksAfter": 0,
+        "eosTraceSha256": "086232dc7f6c2019d7e628b2e6466fe255d8b8c3d9c14b86c6a9ec298531f8c2"
+      },
+      "rendererInputBasis": "exact authored source",
+      "requestSha256": "fe4a7d7be1ddc4ef1f663a527fa2d49ab8e3f7539aba62223774d1780cc2b7fa",
+      "referenceOriginalSha256": "b7e36a834e5ff578cf735e9f2b440e1b05a4338ffdc81cc8f66632d0e71845c6",
+      "profileJsonSha256": "6b607803f3ef14bf52513bf94ec30f66767317c7f7c60261366504ea72530e39",
+      "rawSha256": "e793fc49783d4ddcb4af32f91490e075f72553e7adecc8503098c9e5f1e8840a",
+      "renderer": "ResembleAI/Chatterbox Multilingual V2 0.1.7",
+      "modelRevision": "5bb1f6ee58e50c3b8d408bc82a6d3740c2db6e18",
+      "modelLicense": "MIT",
+      "referenceLicense": "unknown; selected profile does not record reference license",
+      "durationSeconds": 5.64,
+      "renderSeconds": 42.97,
+      "synthesis": {
+        "temperature": 0.65,
+        "repetitionPenalty": 3.0,
+        "cfgWeight": 0.6,
+        "languageId": "de",
+        "device": "cpu",
+        "precision": "fp32",
+        "t3WeightPrecision": "float32",
+        "conditioningPrecision": "float32",
+        "autocastPrecision": null,
+        "conditioningCached": true,
+        "referenceReconditionedForProfile": "eb4aab1842eb450eacbdd5d4ccc38ab6",
+        "referenceConditioningVerifiedFloat32": true,
+        "modelSessionReused": true,
+        "cpuThreads": 2,
+        "inferenceMode": true
+      },
+      "listening": "pending",
+      "status": "eligible exact-text recording; human listening pending",
+      "processing": "[0:a]highpass=f=65,lowpass=f=7600,asplit[clean][wet];[wet]rubberband=pitch=0.89,lowpass=f=1450,volume=0.16[shadow];[clean][shadow]amix=inputs=2:duration=first:normalize=0[a]",
+      "processingSha256": "de274e3839a3c1c982912dcba3872f39f12e098a081b33244aa95445673bc165",
+      "normalization": {
+        "targetLufs": -18,
+        "targetTruePeakDbtp": -1.5,
+        "filter": "loudnorm=I=-14.829999999999998:TP=-1.8:LRA=11:linear=false",
+        "iterations": 4
+      },
+      "integratedLufs": -18.19,
+      "truePeakDbtp": -2.22,
+      "asr": "Das leere Blatt ist unvollständig. Es fehlt der Nachweis, dass nichts fehlt.",
+      "asrWordExact": true,
+      "asrLiteralWordExact": true,
+      "asrNormalization": "case/punctuation, German numeric and A38 spoken equivalents, guarded full-hour and date-ordinal equivalents, section sign/Paragraf orthography, German compound spacing",
+      "asrModel": "independent faster-whisper, cached local model, cpu int8 (effective int8_float32), no script prompt",
+      "asrCpuThreads": 4,
+      "asrDevice": "cpu",
+      "asrEffectiveComputeType": "int8_float32",
+      "asrLanguageId": "de",
+      "asrComputeType": "int8",
+      "asrScriptPrompt": null,
+      "asrBeamSize": 1,
+      "asrReadings": [
+        {
+          "beamSize": 1,
+          "transcript": "Das leere Blatt ist unvollständig. Es fehlt der Nachweis, dass nichts fehlt.",
+          "transcribeSeconds": 10.74,
+          "words": [
+            {
+              "word": " Das",
+              "start": 0.0,
+              "end": 0.22
+            },
+            {
+              "word": " leere",
+              "start": 0.22,
+              "end": 0.58
+            },
+            {
+              "word": " Blatt",
+              "start": 0.58,
+              "end": 0.9
+            },
+            {
+              "word": " ist",
+              "start": 0.9,
+              "end": 1.12
+            },
+            {
+              "word": " unvollständig.",
+              "start": 1.12,
+              "end": 1.98
+            },
+            {
+              "word": " Es",
+              "start": 2.18,
+              "end": 2.58
+            },
+            {
+              "word": " fehlt",
+              "start": 2.58,
+              "end": 2.84
+            },
+            {
+              "word": " der",
+              "start": 2.84,
+              "end": 2.98
+            },
+            {
+              "word": " Nachweis,",
+              "start": 2.98,
+              "end": 3.48
+            },
+            {
+              "word": " dass",
+              "start": 3.64,
+              "end": 3.74
+            },
+            {
+              "word": " nichts",
+              "start": 3.74,
+              "end": 3.98
+            },
+            {
+              "word": " fehlt.",
+              "start": 3.98,
+              "end": 4.32
+            }
+          ]
+        }
+      ],
+      "asrModelSha256": "e76620f83d5f5b69efd3d87e3dc180c1bd21df9fbebacfd4335e5e1efcc018da",
+      "asrModelDirectoryName": "voice-asr-model",
+      "wordCues": [
+        {
+          "at": 0.0,
+          "charIndex": 0,
+          "word": "Das",
+          "end": 0.22
+        },
+        {
+          "at": 0.22,
+          "charIndex": 4,
+          "word": "leere",
+          "end": 0.58
+        },
+        {
+          "at": 0.58,
+          "charIndex": 10,
+          "word": "Blatt",
+          "end": 0.9
+        },
+        {
+          "at": 0.9,
+          "charIndex": 16,
+          "word": "ist",
+          "end": 1.12
+        },
+        {
+          "at": 1.12,
+          "charIndex": 20,
+          "word": "unvollständig",
+          "end": 1.98
+        },
+        {
+          "at": 2.18,
+          "charIndex": 35,
+          "word": "Es",
+          "end": 2.58
+        },
+        {
+          "at": 2.58,
+          "charIndex": 38,
+          "word": "fehlt",
+          "end": 2.84
+        },
+        {
+          "at": 2.84,
+          "charIndex": 44,
+          "word": "der",
+          "end": 2.98
+        },
+        {
+          "at": 2.98,
+          "charIndex": 48,
+          "word": "Nachweis",
+          "end": 3.48
+        },
+        {
+          "at": 3.64,
+          "charIndex": 58,
+          "word": "dass",
+          "end": 3.74
+        },
+        {
+          "at": 3.74,
+          "charIndex": 63,
+          "word": "nichts",
+          "end": 3.98
+        },
+        {
+          "at": 3.98,
+          "charIndex": 70,
+          "word": "fehlt",
+          "end": 4.32
+        }
+      ],
+      "sha256": "f5be83cbf461a4a7c3cad1daa8dd52b8e55b32f0863b894db3322c2b390ed21f",
+      "bytes": 91052,
+      "sampleRateHz": 48000,
+      "channels": 1,
+      "bitrateBitsPerSecond": 128000,
+      "file": "assets/voices/office-ambient/amt-ambient-leerblatt.mp3"
+    }
+  ],
+  "heldPrivate": [],
+  "approvedExistingReuse": []
+}

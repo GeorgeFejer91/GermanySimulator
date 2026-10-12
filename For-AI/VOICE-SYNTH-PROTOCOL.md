@@ -57,6 +57,22 @@ after the three advisers acquire exact rule decks; they do not become new
 playable rules. The private-take audit permits only these explicit ownership
 changes and retired future-profile targets, retaining script/hash checks.
 
+## Bürgeramt background character speech (2026-10-12)
+
+The user requested random existing level voices for the two waiting-room
+complaints and a richer pool of short Kafkaesque German background snippets.
+`buergeramt-story.js` owns 21 exact speaker/text requests across 13 selected
+profiles: both original waiting-room lines for each of the three patrons,
+three counter remarks, and 12 new remarks. The `office-ambient` request family
+in `build-knick-voice.py` reuses the fixed Chatterbox/native-EOS/final-encoding
+ASR and level gates. Private requests and raw/encoded audit receipts stay in
+Music's `GermanySimulator office ambient review 2026-10-12/`; only eligible
+MP3s and per-voice manifests enter `assets/voices/office-ambient/`. The curator
+checks each exact story actor, voice/profile/reference, text and translation.
+Use approval comes from the current request; perceptual listening remains
+unperformed. The ambient delivery explicitly retains captions on failed or
+unavailable audio, regardless of the character's ordinary E-dialogue fallback.
+
 ## Bürgeramt player replies and complete Knick dialogue (2026-10-12)
 
 The user selected the actual shipped `thorsten-amused-nachschub.mp3` recording

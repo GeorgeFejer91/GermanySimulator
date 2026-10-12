@@ -3396,7 +3396,7 @@
       "status": "profile-verified; exact counter dialogue; recordings and listening review pending; captions fallback",
       "dialogueSources": [
         "buergeramt-story.js clerks[1] / clerkRefusal",
-        "buergeramt.js ambientLines[1][1]"
+        "buergeramt-story.js ambient.amt-ambient-original"
       ]
     },
     {
@@ -3437,7 +3437,7 @@
       "status": "profile-verified; exact counter dialogue; recordings and listening review pending; captions fallback",
       "dialogueSources": [
         "buergeramt-story.js clerks[2] / clerkRefusal",
-        "buergeramt.js ambientLines[2][1]"
+        "buergeramt-story.js ambient.amt-ambient-warteschleife"
       ]
     },
     {
@@ -3478,7 +3478,7 @@
       "status": "profile-verified; exact counter dialogue; recordings and listening review pending; captions fallback",
       "dialogueSources": [
         "buergeramt-story.js clerks[4] / clerkRefusal",
-        "buergeramt.js ambientLines[4][1]"
+        "buergeramt-story.js ambient.amt-ambient-moment"
       ]
     }
   ],

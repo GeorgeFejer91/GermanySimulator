@@ -44,7 +44,7 @@ const pools={
  buergeramtClerk:{identity:office.clerkIdentity,counter:office.clerk.map(({line,choices})=>({line,replies:choices.map(({reply})=>reply)})),outburst:office.outburst.lines,phoneWarnings:office.phoneWarnings,registration:office.registration},
  buergeramtPatrons:office.patrons,
  buergeramtCounterClerks:{identities:office.clerks,refusal:office.clerkRefusal},
- buergeramtAmbient:declaration("ambientLines",officeRuntime).map(([speaker,text],index)=>({speaker,text,voiceId:index===0?office.patrons["amt-konrad-wohnungszettel"].voiceId:index===3?office.patrons["amt-wolfram-rentenbescheid"].voiceId:office.clerks[{1:1,2:2,4:4}[index]].voiceId})),
+ buergeramtAmbient:office.ambient.map(row=>{const person=office.characters[row.actor]||office.patrons[{renter:"amt-konrad-wohnungszettel",parent:"amt-mechthild-elternbogen",pensioner:"amt-wolfram-rentenbescheid"}[row.actor]]||office.clerks[row.actor.replace("clerk-","")];return {...row,speaker:person.speaker,voiceId:person.voiceId}}),
 };
 const inventory={
  schemaVersion:1,

@@ -1,0 +1,232 @@
+{
+  "schemaVersion": 1,
+  "voiceId": "amt-ruediger-nummermann",
+  "profileId": "e2b59f89c1a84259aaa8f7006741fae2",
+  "fallback": "browser",
+  "status": "same-profile technical and independent ASR audit; perceptual listening not independently verified",
+  "generatedLineCount": 1,
+  "requestedLineCount": 1,
+  "lineCount": 1,
+  "clips": [
+    {
+      "clipId": "amt-ambient-nullzettel",
+      "actorId": "nummernfluesterer",
+      "text": "Die Null auf meinem Zettel wartet schon länger als ich.",
+      "english": "The zero on my ticket has been waiting longer than I have.",
+      "voiceId": "amt-ruediger-nummermann",
+      "profileId": "e2b59f89c1a84259aaa8f7006741fae2",
+      "sourceLocator": "buergeramt-story.js ambient.amt-ambient-nullzettel",
+      "approval": {
+        "status": "user-approved",
+        "date": "2026-10-12",
+        "instruction": "add in more random kafkaesque dialog snippets in the background to give the game also a richer burocratic texture of random surreal german-burocratic la guage audio dialogue snippets that are background texture for the game",
+        "scope": "Existing Bürgeramt cast voices for varied background remarks; no browser machine voice",
+        "listeningConfirmed": false
+      },
+      "seed": 71000,
+      "synthesisAttempt": 1,
+      "referenceSha256": "36384c38f7ef08283c5cf6a6d7158e92c2bbd503063885b3c27a532e7a0a0302",
+      "authoringHelperSha256": "d7fcf55d1ba660e04eaec73938a81e0b2ab7a398be7bd247d513c25a85e04adf",
+      "rendererInputText": "Die Null auf meinem Zettel wartet schon länger als ich.",
+      "decode": {
+        "maxSpeechTokens": 280,
+        "attentionHooksBefore": 0,
+        "generatedSpeechTokens": 68,
+        "eosReached": true,
+        "eosKind": "analyzer-forced",
+        "eosSuppressionObservedSteps": 52,
+        "modelEosRestoredSteps": 0,
+        "alignmentFirstCompletedStep": 53,
+        "nativeAnalyzerSourceSha256": "d8430efa92aedb8e59b782c1d299fe7238570eecea9d293c0981a5ee2e82c8c7",
+        "eosPolicy": "Native analyzer unchanged; observation only",
+        "t3InferenceSeconds": 7.36,
+        "temporaryAnalyzerHooksRemoved": 6,
+        "attentionHooksAfter": 0,
+        "eosTraceSha256": "00cdd29994fc51477ab3fc379800018c2aa85035741e230525db6b34cf1d5ff0"
+      },
+      "rendererInputBasis": "exact authored source",
+      "requestSha256": "685c430048bdce698b8a29d9387919707dab0fd46078edde5e83d89a0fc4282f",
+      "referenceOriginalSha256": "feabba171025c33f7fce1d3e7381d98a6271e3993c9c42905592f94925db6129",
+      "profileJsonSha256": "de40c1cb759e1bd31fa3e6320bcf5741ec89c9e8dcbfc2bb7b394fa4f5a1ff61",
+      "rawSha256": "d4de64199f8cefccab843f4c0523386f54b317f37ba2b5eaa7cbb8795f62a96d",
+      "renderer": "ResembleAI/Chatterbox Multilingual V2 0.1.7",
+      "modelRevision": "5bb1f6ee58e50c3b8d408bc82a6d3740c2db6e18",
+      "modelLicense": "MIT",
+      "referenceLicense": "unknown; selected profile does not record reference license",
+      "durationSeconds": 2.66,
+      "renderSeconds": 25.67,
+      "synthesis": {
+        "temperature": 0.65,
+        "repetitionPenalty": 3.0,
+        "cfgWeight": 0.6,
+        "languageId": "de",
+        "device": "cpu",
+        "precision": "fp32",
+        "t3WeightPrecision": "float32",
+        "conditioningPrecision": "float32",
+        "autocastPrecision": null,
+        "conditioningCached": true,
+        "referenceReconditionedForProfile": "e2b59f89c1a84259aaa8f7006741fae2",
+        "referenceConditioningVerifiedFloat32": true,
+        "modelSessionReused": false,
+        "cpuThreads": 2,
+        "inferenceMode": true
+      },
+      "listening": "pending",
+      "status": "eligible exact-text recording; human listening pending",
+      "processing": "[0:a]highpass=f=65,lowpass=f=7600,asplit[clean][wet];[wet]rubberband=pitch=0.8,lowpass=f=1450,volume=0.16[shadow];[clean][shadow]amix=inputs=2:duration=first:normalize=0[a]",
+      "processingSha256": "945bdd15a5c047dfbba7d213827006d1160a28e59b8f49ac223e13bf9b1f5121",
+      "normalization": {
+        "targetLufs": -18,
+        "targetTruePeakDbtp": -1.5,
+        "filter": "volume=1.0592537251772889,alimiter=limit=0.78:attack=1:release=80:level=false:latency=true",
+        "iterations": 3
+      },
+      "integratedLufs": -18.16,
+      "truePeakDbtp": -2.48,
+      "asr": "Die 0 auf meinem Zettel wartet schon länger als ich.",
+      "asrWordExact": true,
+      "asrLiteralWordExact": true,
+      "asrNormalization": "case/punctuation, German numeric and A38 spoken equivalents, guarded full-hour and date-ordinal equivalents, section sign/Paragraf orthography, German compound spacing",
+      "asrModel": "independent faster-whisper, cached local model, cpu int8 (effective int8_float32), no script prompt",
+      "asrCpuThreads": 4,
+      "asrDevice": "cpu",
+      "asrEffectiveComputeType": "int8_float32",
+      "asrLanguageId": "de",
+      "asrComputeType": "int8",
+      "asrScriptPrompt": null,
+      "asrBeamSize": 1,
+      "asrReadings": [
+        {
+          "beamSize": 1,
+          "transcript": "Die 0 auf meinem Zettel wartet schon länger als ich.",
+          "transcribeSeconds": 6.83,
+          "words": [
+            {
+              "word": " Die",
+              "start": 0.0,
+              "end": 0.18
+            },
+            {
+              "word": " 0",
+              "start": 0.18,
+              "end": 0.36
+            },
+            {
+              "word": " auf",
+              "start": 0.36,
+              "end": 0.58
+            },
+            {
+              "word": " meinem",
+              "start": 0.58,
+              "end": 0.78
+            },
+            {
+              "word": " Zettel",
+              "start": 0.78,
+              "end": 1.16
+            },
+            {
+              "word": " wartet",
+              "start": 1.16,
+              "end": 1.4
+            },
+            {
+              "word": " schon",
+              "start": 1.4,
+              "end": 1.58
+            },
+            {
+              "word": " länger",
+              "start": 1.58,
+              "end": 1.84
+            },
+            {
+              "word": " als",
+              "start": 1.84,
+              "end": 2.06
+            },
+            {
+              "word": " ich.",
+              "start": 2.06,
+              "end": 2.32
+            }
+          ]
+        }
+      ],
+      "asrModelSha256": "e76620f83d5f5b69efd3d87e3dc180c1bd21df9fbebacfd4335e5e1efcc018da",
+      "asrModelDirectoryName": "voice-asr-model",
+      "wordCues": [
+        {
+          "at": 0.0,
+          "charIndex": 0,
+          "word": "Die",
+          "end": 0.18
+        },
+        {
+          "at": 0.18,
+          "charIndex": 4,
+          "word": "Null",
+          "end": 0.36
+        },
+        {
+          "at": 0.36,
+          "charIndex": 9,
+          "word": "auf",
+          "end": 0.58
+        },
+        {
+          "at": 0.58,
+          "charIndex": 13,
+          "word": "meinem",
+          "end": 0.78
+        },
+        {
+          "at": 0.78,
+          "charIndex": 20,
+          "word": "Zettel",
+          "end": 1.16
+        },
+        {
+          "at": 1.16,
+          "charIndex": 27,
+          "word": "wartet",
+          "end": 1.4
+        },
+        {
+          "at": 1.4,
+          "charIndex": 34,
+          "word": "schon",
+          "end": 1.58
+        },
+        {
+          "at": 1.58,
+          "charIndex": 40,
+          "word": "länger",
+          "end": 1.84
+        },
+        {
+          "at": 1.84,
+          "charIndex": 47,
+          "word": "als",
+          "end": 2.06
+        },
+        {
+          "at": 2.06,
+          "charIndex": 51,
+          "word": "ich",
+          "end": 2.32
+        }
+      ],
+      "sha256": "d77c76ef891768a4279b3893b33a5a65929b1ef532b19aea2068ec4f3c9c7aa7",
+      "bytes": 43436,
+      "sampleRateHz": 48000,
+      "channels": 1,
+      "bitrateBitsPerSecond": 128000,
+      "file": "assets/voices/office-ambient/amt-ambient-nullzettel.mp3"
+    }
+  ],
+  "heldPrivate": [],
+  "approvedExistingReuse": []
+}

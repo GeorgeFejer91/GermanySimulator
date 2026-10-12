@@ -1,0 +1,199 @@
+{
+  "schemaVersion": 1,
+  "voiceId": "amt-ottilie-durchschlag",
+  "profileId": "1ec70124423e4b9c985866dc0b978a28",
+  "fallback": "captions",
+  "status": "same-profile technical and independent ASR audit; perceptual listening not independently verified",
+  "generatedLineCount": 1,
+  "requestedLineCount": 1,
+  "lineCount": 1,
+  "clips": [
+    {
+      "clipId": "amt-ambient-warteschleife",
+      "actorId": "clerk-2",
+      "text": "Nein, die Warteschleife ist persönlich zu nehmen.",
+      "english": "No, the hold queue must be taken personally.",
+      "voiceId": "amt-ottilie-durchschlag",
+      "profileId": "1ec70124423e4b9c985866dc0b978a28",
+      "sourceLocator": "buergeramt-story.js ambient.amt-ambient-warteschleife",
+      "approval": {
+        "status": "user-approved",
+        "date": "2026-10-12",
+        "instruction": "add in more random kafkaesque dialog snippets in the background to give the game also a richer burocratic texture of random surreal german-burocratic la guage audio dialogue snippets that are background texture for the game",
+        "scope": "Existing Bürgeramt cast voices for varied background remarks; no browser machine voice",
+        "listeningConfirmed": false
+      },
+      "seed": 71000,
+      "synthesisAttempt": 1,
+      "referenceSha256": "065d42680db2defc5ccb6425d4bcf62334a72980b42cb9076e3ba9156e150473",
+      "authoringHelperSha256": "d7fcf55d1ba660e04eaec73938a81e0b2ab7a398be7bd247d513c25a85e04adf",
+      "rendererInputText": "Nein, die Warteschleife ist persönlich zu nehmen.",
+      "decode": {
+        "maxSpeechTokens": 250,
+        "attentionHooksBefore": 0,
+        "generatedSpeechTokens": 85,
+        "eosReached": true,
+        "eosKind": "model-sampled",
+        "eosSuppressionObservedSteps": 62,
+        "modelEosRestoredSteps": 0,
+        "alignmentFirstCompletedStep": 63,
+        "nativeAnalyzerSourceSha256": "d8430efa92aedb8e59b782c1d299fe7238570eecea9d293c0981a5ee2e82c8c7",
+        "eosPolicy": "Native analyzer unchanged; observation only",
+        "t3InferenceSeconds": 9.11,
+        "temporaryAnalyzerHooksRemoved": 3,
+        "attentionHooksAfter": 0,
+        "eosTraceSha256": "3bf62ebce6dd294df37131b00bdc3b94ca64b7ea1e2d3726b4617dfcb022f42b"
+      },
+      "rendererInputBasis": "exact authored source",
+      "requestSha256": "0e19b8da1870dec6860ee6c63d2b5cd5e5d7bf755930dd93d8c14c93485279fb",
+      "referenceOriginalSha256": "dff2d1e63c056302166c50eb043e4c32e602ab6991763e7cf6d885d0e1fa9ea4",
+      "profileJsonSha256": "a3ce96c236f0ce1dfbd5ffc34fe8ac7e8f956c269579fc49062a5d64eb64953e",
+      "rawSha256": "6f01959b955bab11eb039b21c40ed60f01d47cfd24bef066e25a7e511bb32e8f",
+      "renderer": "ResembleAI/Chatterbox Multilingual V2 0.1.7",
+      "modelRevision": "5bb1f6ee58e50c3b8d408bc82a6d3740c2db6e18",
+      "modelLicense": "MIT",
+      "referenceLicense": "CC0-1.0 (EmoDB original)",
+      "durationSeconds": 3.34,
+      "renderSeconds": 23.58,
+      "synthesis": {
+        "temperature": 0.65,
+        "repetitionPenalty": 3.0,
+        "cfgWeight": 0.6,
+        "languageId": "de",
+        "device": "cpu",
+        "precision": "fp32",
+        "t3WeightPrecision": "float32",
+        "conditioningPrecision": "float32",
+        "autocastPrecision": null,
+        "conditioningCached": true,
+        "referenceReconditionedForProfile": "1ec70124423e4b9c985866dc0b978a28",
+        "referenceConditioningVerifiedFloat32": true,
+        "modelSessionReused": true,
+        "cpuThreads": 2,
+        "inferenceMode": true
+      },
+      "listening": "pending",
+      "status": "eligible exact-text recording; human listening pending",
+      "processing": null,
+      "processingSha256": null,
+      "normalization": {
+        "targetLufs": -18,
+        "targetTruePeakDbtp": -1.5,
+        "filter": "loudnorm=I=-18.0:TP=-1.8:LRA=11:linear=false",
+        "iterations": 1
+      },
+      "integratedLufs": -18.02,
+      "truePeakDbtp": -2.22,
+      "asr": "Nein, die Warteschleife ist persönlich zu nehmen.",
+      "asrWordExact": true,
+      "asrLiteralWordExact": true,
+      "asrNormalization": "case/punctuation, German numeric and A38 spoken equivalents, guarded full-hour and date-ordinal equivalents, section sign/Paragraf orthography, German compound spacing",
+      "asrModel": "independent faster-whisper, cached local model, cpu int8 (effective int8_float32), no script prompt",
+      "asrCpuThreads": 4,
+      "asrDevice": "cpu",
+      "asrEffectiveComputeType": "int8_float32",
+      "asrLanguageId": "de",
+      "asrComputeType": "int8",
+      "asrScriptPrompt": null,
+      "asrBeamSize": 1,
+      "asrReadings": [
+        {
+          "beamSize": 1,
+          "transcript": "Nein, die Warteschleife ist persönlich zu nehmen.",
+          "transcribeSeconds": 6.67,
+          "words": [
+            {
+              "word": " Nein,",
+              "start": 0.0,
+              "end": 0.28
+            },
+            {
+              "word": " die",
+              "start": 0.68,
+              "end": 0.78
+            },
+            {
+              "word": " Warteschleife",
+              "start": 0.78,
+              "end": 1.46
+            },
+            {
+              "word": " ist",
+              "start": 1.46,
+              "end": 1.6
+            },
+            {
+              "word": " persönlich",
+              "start": 1.6,
+              "end": 2.1
+            },
+            {
+              "word": " zu",
+              "start": 2.1,
+              "end": 2.38
+            },
+            {
+              "word": " nehmen.",
+              "start": 2.38,
+              "end": 2.68
+            }
+          ]
+        }
+      ],
+      "asrModelSha256": "e76620f83d5f5b69efd3d87e3dc180c1bd21df9fbebacfd4335e5e1efcc018da",
+      "asrModelDirectoryName": "voice-asr-model",
+      "wordCues": [
+        {
+          "at": 0.0,
+          "charIndex": 0,
+          "word": "Nein",
+          "end": 0.28
+        },
+        {
+          "at": 0.68,
+          "charIndex": 6,
+          "word": "die",
+          "end": 0.78
+        },
+        {
+          "at": 0.78,
+          "charIndex": 10,
+          "word": "Warteschleife",
+          "end": 1.46
+        },
+        {
+          "at": 1.46,
+          "charIndex": 24,
+          "word": "ist",
+          "end": 1.6
+        },
+        {
+          "at": 1.6,
+          "charIndex": 28,
+          "word": "persönlich",
+          "end": 2.1
+        },
+        {
+          "at": 2.1,
+          "charIndex": 39,
+          "word": "zu",
+          "end": 2.38
+        },
+        {
+          "at": 2.38,
+          "charIndex": 42,
+          "word": "nehmen",
+          "end": 2.68
+        }
+      ],
+      "sha256": "1258107cd7c84ff1d38db339b2d528114329fa727f276f030d0eb205c10050ae",
+      "bytes": 54572,
+      "sampleRateHz": 48000,
+      "channels": 1,
+      "bitrateBitsPerSecond": 128000,
+      "file": "assets/voices/office-ambient/amt-ambient-warteschleife.mp3"
+    }
+  ],
+  "heldPrivate": [],
+  "approvedExistingReuse": []
+}

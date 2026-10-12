@@ -1,0 +1,232 @@
+{
+  "schemaVersion": 1,
+  "voiceId": "amt-uwe-kopitz",
+  "profileId": "e7a5a74103884c308730d7effa496ce2",
+  "fallback": "browser",
+  "status": "same-profile technical and independent ASR audit; perceptual listening not independently verified",
+  "generatedLineCount": 1,
+  "requestedLineCount": 1,
+  "lineCount": 1,
+  "clips": [
+    {
+      "clipId": "amt-ambient-schatten",
+      "actorId": "kopiependler",
+      "text": "Mein Schatten gilt als Zweitschrift. Jetzt muss er beglaubigt werden.",
+      "english": "My shadow counts as a duplicate. Now it has to be certified.",
+      "voiceId": "amt-uwe-kopitz",
+      "profileId": "e7a5a74103884c308730d7effa496ce2",
+      "sourceLocator": "buergeramt-story.js ambient.amt-ambient-schatten",
+      "approval": {
+        "status": "user-approved",
+        "date": "2026-10-12",
+        "instruction": "add in more random kafkaesque dialog snippets in the background to give the game also a richer burocratic texture of random surreal german-burocratic la guage audio dialogue snippets that are background texture for the game",
+        "scope": "Existing Bürgeramt cast voices for varied background remarks; no browser machine voice",
+        "listeningConfirmed": false
+      },
+      "seed": 71000,
+      "synthesisAttempt": 1,
+      "referenceSha256": "ab193397a1f9a143cacd700fc2234b4ac9f72366ad2c799cf84ef509dd4c2df0",
+      "authoringHelperSha256": "d7fcf55d1ba660e04eaec73938a81e0b2ab7a398be7bd247d513c25a85e04adf",
+      "rendererInputText": "Mein Schatten gilt als Zweitschrift. Jetzt muss er beglaubigt werden.",
+      "decode": {
+        "maxSpeechTokens": 280,
+        "attentionHooksBefore": 0,
+        "generatedSpeechTokens": 119,
+        "eosReached": true,
+        "eosKind": "model-sampled",
+        "eosSuppressionObservedSteps": 88,
+        "modelEosRestoredSteps": 0,
+        "alignmentFirstCompletedStep": 88,
+        "nativeAnalyzerSourceSha256": "d8430efa92aedb8e59b782c1d299fe7238570eecea9d293c0981a5ee2e82c8c7",
+        "eosPolicy": "Native analyzer unchanged; observation only",
+        "t3InferenceSeconds": 13.0,
+        "temporaryAnalyzerHooksRemoved": 3,
+        "attentionHooksAfter": 0,
+        "eosTraceSha256": "49b012082b6bc02e926be95dfc3fb9ae483dbe8bf1fc87e18ca5acfab6253718"
+      },
+      "rendererInputBasis": "exact authored source",
+      "requestSha256": "c5eaef34e44fa51f84645d3a0969675136703c11bfc4922f8a4e6574f219686e",
+      "referenceOriginalSha256": "09fa3a6a8940b40a79c9961bf0fc1ccca6a4826b2189c6e2317cbcbe15bb309d",
+      "profileJsonSha256": "5ab58fe2b244b27994319e65d1478db0475d5a17376a91124294d0defbc7ad88",
+      "rawSha256": "df6cfc4dc4701dd9d44f035a04fbe991ba2893f9e52b30a66e7cf25519ed9065",
+      "renderer": "ResembleAI/Chatterbox Multilingual V2 0.1.7",
+      "modelRevision": "5bb1f6ee58e50c3b8d408bc82a6d3740c2db6e18",
+      "modelLicense": "MIT",
+      "referenceLicense": "unknown; selected profile does not record reference license",
+      "durationSeconds": 4.72,
+      "renderSeconds": 35.11,
+      "synthesis": {
+        "temperature": 0.65,
+        "repetitionPenalty": 3.0,
+        "cfgWeight": 0.6,
+        "languageId": "de",
+        "device": "cpu",
+        "precision": "fp32",
+        "t3WeightPrecision": "float32",
+        "conditioningPrecision": "float32",
+        "autocastPrecision": null,
+        "conditioningCached": true,
+        "referenceReconditionedForProfile": "e7a5a74103884c308730d7effa496ce2",
+        "referenceConditioningVerifiedFloat32": true,
+        "modelSessionReused": true,
+        "cpuThreads": 2,
+        "inferenceMode": true
+      },
+      "listening": "pending",
+      "status": "eligible exact-text recording; human listening pending",
+      "processing": "[0:a]highpass=f=65,lowpass=f=7600,asplit[clean][wet];[wet]rubberband=pitch=0.9,lowpass=f=1450,volume=0.16[shadow];[clean][shadow]amix=inputs=2:duration=first:normalize=0[a]",
+      "processingSha256": "75fb3b9fe81cfd955729fa55021b68a3744b18bcd2fd92365237c0cc2f49b6f3",
+      "normalization": {
+        "targetLufs": -18,
+        "targetTruePeakDbtp": -1.5,
+        "filter": "loudnorm=I=-17.13:TP=-1.8:LRA=11:linear=false",
+        "iterations": 3
+      },
+      "integratedLufs": -18.17,
+      "truePeakDbtp": -2.23,
+      "asr": "Mein Schatten gilt als Zweitschrift. Jetzt muss er beglaubigt werden.",
+      "asrWordExact": true,
+      "asrLiteralWordExact": true,
+      "asrNormalization": "case/punctuation, German numeric and A38 spoken equivalents, guarded full-hour and date-ordinal equivalents, section sign/Paragraf orthography, German compound spacing",
+      "asrModel": "independent faster-whisper, cached local model, cpu int8 (effective int8_float32), no script prompt",
+      "asrCpuThreads": 4,
+      "asrDevice": "cpu",
+      "asrEffectiveComputeType": "int8_float32",
+      "asrLanguageId": "de",
+      "asrComputeType": "int8",
+      "asrScriptPrompt": null,
+      "asrBeamSize": 1,
+      "asrReadings": [
+        {
+          "beamSize": 1,
+          "transcript": "Mein Schatten gilt als Zweitschrift. Jetzt muss er beglaubigt werden.",
+          "transcribeSeconds": 7.41,
+          "words": [
+            {
+              "word": " Mein",
+              "start": 0.0,
+              "end": 0.22
+            },
+            {
+              "word": " Schatten",
+              "start": 0.22,
+              "end": 0.54
+            },
+            {
+              "word": " gilt",
+              "start": 0.54,
+              "end": 0.8
+            },
+            {
+              "word": " als",
+              "start": 0.8,
+              "end": 1.06
+            },
+            {
+              "word": " Zweitschrift.",
+              "start": 1.06,
+              "end": 1.78
+            },
+            {
+              "word": " Jetzt",
+              "start": 2.1,
+              "end": 2.54
+            },
+            {
+              "word": " muss",
+              "start": 2.54,
+              "end": 2.74
+            },
+            {
+              "word": " er",
+              "start": 2.74,
+              "end": 2.9
+            },
+            {
+              "word": " beglaubigt",
+              "start": 2.9,
+              "end": 3.38
+            },
+            {
+              "word": " werden.",
+              "start": 3.38,
+              "end": 3.7
+            }
+          ]
+        }
+      ],
+      "asrModelSha256": "e76620f83d5f5b69efd3d87e3dc180c1bd21df9fbebacfd4335e5e1efcc018da",
+      "asrModelDirectoryName": "voice-asr-model",
+      "wordCues": [
+        {
+          "at": 0.0,
+          "charIndex": 0,
+          "word": "Mein",
+          "end": 0.22
+        },
+        {
+          "at": 0.22,
+          "charIndex": 5,
+          "word": "Schatten",
+          "end": 0.54
+        },
+        {
+          "at": 0.54,
+          "charIndex": 14,
+          "word": "gilt",
+          "end": 0.8
+        },
+        {
+          "at": 0.8,
+          "charIndex": 19,
+          "word": "als",
+          "end": 1.06
+        },
+        {
+          "at": 1.06,
+          "charIndex": 23,
+          "word": "Zweitschrift",
+          "end": 1.78
+        },
+        {
+          "at": 2.1,
+          "charIndex": 37,
+          "word": "Jetzt",
+          "end": 2.54
+        },
+        {
+          "at": 2.54,
+          "charIndex": 43,
+          "word": "muss",
+          "end": 2.74
+        },
+        {
+          "at": 2.74,
+          "charIndex": 48,
+          "word": "er",
+          "end": 2.9
+        },
+        {
+          "at": 2.9,
+          "charIndex": 51,
+          "word": "beglaubigt",
+          "end": 3.38
+        },
+        {
+          "at": 3.38,
+          "charIndex": 62,
+          "word": "werden",
+          "end": 3.7
+        }
+      ],
+      "sha256": "93a7b5eb451ec7cb260cb01a004be571e6ebabd5e5445d36f47ca8f47fd70bdb",
+      "bytes": 76460,
+      "sampleRateHz": 48000,
+      "channels": 1,
+      "bitrateBitsPerSecond": 128000,
+      "file": "assets/voices/office-ambient/amt-ambient-schatten.mp3"
+    }
+  ],
+  "heldPrivate": [],
+  "approvedExistingReuse": []
+}

@@ -1,0 +1,439 @@
+{
+  "schemaVersion": 1,
+  "voiceId": "amt-hilde-wartenscheidt",
+  "profileId": "f55b40ca02e84ae696c396f211f880d6",
+  "fallback": "browser",
+  "status": "same-profile technical and independent ASR audit; perceptual listening not independently verified",
+  "generatedLineCount": 2,
+  "requestedLineCount": 2,
+  "lineCount": 2,
+  "clips": [
+    {
+      "clipId": "amt-ambient-ende",
+      "actorId": "warteschlangenpoetin",
+      "text": "Das Ende der Warteschlange ist heute nur nach Termin erreichbar.",
+      "english": "Today the end of the queue is accessible by appointment only.",
+      "voiceId": "amt-hilde-wartenscheidt",
+      "profileId": "f55b40ca02e84ae696c396f211f880d6",
+      "sourceLocator": "buergeramt-story.js ambient.amt-ambient-ende",
+      "approval": {
+        "status": "user-approved",
+        "date": "2026-10-12",
+        "instruction": "add in more random kafkaesque dialog snippets in the background to give the game also a richer burocratic texture of random surreal german-burocratic la guage audio dialogue snippets that are background texture for the game",
+        "scope": "Existing Bürgeramt cast voices for varied background remarks; no browser machine voice",
+        "listeningConfirmed": false
+      },
+      "seed": 71000,
+      "synthesisAttempt": 1,
+      "referenceSha256": "d7bc37151dbe6b06f47ef7a65e2a6ec6e3cfa3a49cb5ccd90049165a445dfb27",
+      "authoringHelperSha256": "d7fcf55d1ba660e04eaec73938a81e0b2ab7a398be7bd247d513c25a85e04adf",
+      "rendererInputText": "Das Ende der Warteschlange ist heute nur nach Termin erreichbar.",
+      "decode": {
+        "maxSpeechTokens": 280,
+        "attentionHooksBefore": 0,
+        "generatedSpeechTokens": 122,
+        "eosReached": true,
+        "eosKind": "analyzer-forced",
+        "eosSuppressionObservedSteps": 89,
+        "modelEosRestoredSteps": 0,
+        "alignmentFirstCompletedStep": 90,
+        "nativeAnalyzerSourceSha256": "d8430efa92aedb8e59b782c1d299fe7238570eecea9d293c0981a5ee2e82c8c7",
+        "eosPolicy": "Native analyzer unchanged; observation only",
+        "t3InferenceSeconds": 14.47,
+        "temporaryAnalyzerHooksRemoved": 3,
+        "attentionHooksAfter": 0,
+        "eosTraceSha256": "c6ca437c9ddb0b821ed174df2f75f071652301fb7b3ff46389d835b8657acfc0"
+      },
+      "rendererInputBasis": "exact authored source",
+      "requestSha256": "da220e220feb081bd0be96711eaf58b7cd0f6346e24ccafb081d39a0e8cc7b7d",
+      "referenceOriginalSha256": "381fd10071ee0da66e8e1c6a11de79f7e56fe333fd6304469f2600d113bbfd77",
+      "profileJsonSha256": "f00a195156cbc46b9c778d87a4d68b74cd4eb687b470a8415a1034ebd2c86b72",
+      "rawSha256": "fc3cbb32f1ca442e32dcf33e6bf7bb1286da7c9a7070f4de5286abf49e2130d9",
+      "renderer": "ResembleAI/Chatterbox Multilingual V2 0.1.7",
+      "modelRevision": "5bb1f6ee58e50c3b8d408bc82a6d3740c2db6e18",
+      "modelLicense": "MIT",
+      "referenceLicense": "unknown; selected profile does not record reference license",
+      "durationSeconds": 4.84,
+      "renderSeconds": 41.05,
+      "synthesis": {
+        "temperature": 0.65,
+        "repetitionPenalty": 3.0,
+        "cfgWeight": 0.6,
+        "languageId": "de",
+        "device": "cpu",
+        "precision": "fp32",
+        "t3WeightPrecision": "float32",
+        "conditioningPrecision": "float32",
+        "autocastPrecision": null,
+        "conditioningCached": true,
+        "referenceReconditionedForProfile": "f55b40ca02e84ae696c396f211f880d6",
+        "referenceConditioningVerifiedFloat32": true,
+        "modelSessionReused": true,
+        "cpuThreads": 2,
+        "inferenceMode": true
+      },
+      "listening": "pending",
+      "status": "eligible exact-text recording; human listening pending",
+      "processing": "[0:a]highpass=f=65,lowpass=f=7600,asplit[clean][wet];[wet]rubberband=pitch=0.87,lowpass=f=1450,volume=0.16[shadow];[clean][shadow]amix=inputs=2:duration=first:normalize=0[a]",
+      "processingSha256": "909eefcdcc32ee610f98b34021cfd02f31367dce5745ba05cebafa32f41de178",
+      "normalization": {
+        "targetLufs": -18,
+        "targetTruePeakDbtp": -1.5,
+        "filter": "loudnorm=I=-17.53:TP=-1.8:LRA=11:linear=false",
+        "iterations": 2
+      },
+      "integratedLufs": -18.01,
+      "truePeakDbtp": -5.97,
+      "asr": "Das Ende der Warteschlange ist heute nur nach Termin erreichbar.",
+      "asrWordExact": true,
+      "asrLiteralWordExact": true,
+      "asrNormalization": "case/punctuation, German numeric and A38 spoken equivalents, guarded full-hour and date-ordinal equivalents, section sign/Paragraf orthography, German compound spacing",
+      "asrModel": "independent faster-whisper, cached local model, cpu int8 (effective int8_float32), no script prompt",
+      "asrCpuThreads": 4,
+      "asrDevice": "cpu",
+      "asrEffectiveComputeType": "int8_float32",
+      "asrLanguageId": "de",
+      "asrComputeType": "int8",
+      "asrScriptPrompt": null,
+      "asrBeamSize": 1,
+      "asrReadings": [
+        {
+          "beamSize": 1,
+          "transcript": "Das Ende der Warteschlange ist heute nur nach Termin erreichbar.",
+          "transcribeSeconds": 6.81,
+          "words": [
+            {
+              "word": " Das",
+              "start": 0.0,
+              "end": 0.26
+            },
+            {
+              "word": " Ende",
+              "start": 0.26,
+              "end": 0.58
+            },
+            {
+              "word": " der",
+              "start": 0.58,
+              "end": 0.76
+            },
+            {
+              "word": " Warteschlange",
+              "start": 0.76,
+              "end": 1.48
+            },
+            {
+              "word": " ist",
+              "start": 1.48,
+              "end": 1.7
+            },
+            {
+              "word": " heute",
+              "start": 1.7,
+              "end": 2.0
+            },
+            {
+              "word": " nur",
+              "start": 2.0,
+              "end": 2.36
+            },
+            {
+              "word": " nach",
+              "start": 2.36,
+              "end": 2.6
+            },
+            {
+              "word": " Termin",
+              "start": 2.6,
+              "end": 3.06
+            },
+            {
+              "word": " erreichbar.",
+              "start": 3.06,
+              "end": 3.74
+            }
+          ]
+        }
+      ],
+      "asrModelSha256": "e76620f83d5f5b69efd3d87e3dc180c1bd21df9fbebacfd4335e5e1efcc018da",
+      "asrModelDirectoryName": "voice-asr-model",
+      "wordCues": [
+        {
+          "at": 0.0,
+          "charIndex": 0,
+          "word": "Das",
+          "end": 0.26
+        },
+        {
+          "at": 0.26,
+          "charIndex": 4,
+          "word": "Ende",
+          "end": 0.58
+        },
+        {
+          "at": 0.58,
+          "charIndex": 9,
+          "word": "der",
+          "end": 0.76
+        },
+        {
+          "at": 0.76,
+          "charIndex": 13,
+          "word": "Warteschlange",
+          "end": 1.48
+        },
+        {
+          "at": 1.48,
+          "charIndex": 27,
+          "word": "ist",
+          "end": 1.7
+        },
+        {
+          "at": 1.7,
+          "charIndex": 31,
+          "word": "heute",
+          "end": 2.0
+        },
+        {
+          "at": 2.0,
+          "charIndex": 37,
+          "word": "nur",
+          "end": 2.36
+        },
+        {
+          "at": 2.36,
+          "charIndex": 41,
+          "word": "nach",
+          "end": 2.6
+        },
+        {
+          "at": 2.6,
+          "charIndex": 46,
+          "word": "Termin",
+          "end": 3.06
+        },
+        {
+          "at": 3.06,
+          "charIndex": 53,
+          "word": "erreichbar",
+          "end": 3.74
+        }
+      ],
+      "sha256": "a6f16ebe6d8a48ac53eff9f3746cec40e64dec7be8a4c077ed96a77c5361627a",
+      "bytes": 78380,
+      "sampleRateHz": 48000,
+      "channels": 1,
+      "bitrateBitsPerSecond": 128000,
+      "file": "assets/voices/office-ambient/amt-ambient-ende.mp3"
+    },
+    {
+      "clipId": "amt-ambient-weiterwarten",
+      "actorId": "warteschlangenpoetin",
+      "text": "Ich warte auf die Erlaubnis, weiter warten zu dürfen.",
+      "english": "I am waiting for permission to keep waiting.",
+      "voiceId": "amt-hilde-wartenscheidt",
+      "profileId": "f55b40ca02e84ae696c396f211f880d6",
+      "sourceLocator": "buergeramt-story.js ambient.amt-ambient-weiterwarten",
+      "approval": {
+        "status": "user-approved",
+        "date": "2026-10-12",
+        "instruction": "add in more random kafkaesque dialog snippets in the background to give the game also a richer burocratic texture of random surreal german-burocratic la guage audio dialogue snippets that are background texture for the game",
+        "scope": "Existing Bürgeramt cast voices for varied background remarks; no browser machine voice",
+        "listeningConfirmed": false
+      },
+      "seed": 71001,
+      "synthesisAttempt": 1,
+      "referenceSha256": "d7bc37151dbe6b06f47ef7a65e2a6ec6e3cfa3a49cb5ccd90049165a445dfb27",
+      "authoringHelperSha256": "d7fcf55d1ba660e04eaec73938a81e0b2ab7a398be7bd247d513c25a85e04adf",
+      "rendererInputText": "Ich warte auf die Erlaubnis, weiter warten zu dürfen.",
+      "decode": {
+        "maxSpeechTokens": 268,
+        "attentionHooksBefore": 0,
+        "generatedSpeechTokens": 113,
+        "eosReached": true,
+        "eosKind": "analyzer-forced",
+        "eosSuppressionObservedSteps": 80,
+        "modelEosRestoredSteps": 0,
+        "alignmentFirstCompletedStep": 80,
+        "nativeAnalyzerSourceSha256": "d8430efa92aedb8e59b782c1d299fe7238570eecea9d293c0981a5ee2e82c8c7",
+        "eosPolicy": "Native analyzer unchanged; observation only",
+        "t3InferenceSeconds": 14.77,
+        "temporaryAnalyzerHooksRemoved": 3,
+        "attentionHooksAfter": 0,
+        "eosTraceSha256": "ac139e0c875cf15c2a5f4b1abdeacfdc61b8f9a9c75e987915820727c6925050"
+      },
+      "rendererInputBasis": "exact authored source",
+      "requestSha256": "da220e220feb081bd0be96711eaf58b7cd0f6346e24ccafb081d39a0e8cc7b7d",
+      "referenceOriginalSha256": "381fd10071ee0da66e8e1c6a11de79f7e56fe333fd6304469f2600d113bbfd77",
+      "profileJsonSha256": "f00a195156cbc46b9c778d87a4d68b74cd4eb687b470a8415a1034ebd2c86b72",
+      "rawSha256": "c86151390393d5f84b46b09b02917f872f88f35aafe1312e8bf8a910514a1813",
+      "renderer": "ResembleAI/Chatterbox Multilingual V2 0.1.7",
+      "modelRevision": "5bb1f6ee58e50c3b8d408bc82a6d3740c2db6e18",
+      "modelLicense": "MIT",
+      "referenceLicense": "unknown; selected profile does not record reference license",
+      "durationSeconds": 4.48,
+      "renderSeconds": 38.38,
+      "synthesis": {
+        "temperature": 0.65,
+        "repetitionPenalty": 3.0,
+        "cfgWeight": 0.6,
+        "languageId": "de",
+        "device": "cpu",
+        "precision": "fp32",
+        "t3WeightPrecision": "float32",
+        "conditioningPrecision": "float32",
+        "autocastPrecision": null,
+        "conditioningCached": true,
+        "referenceReconditionedForProfile": "f55b40ca02e84ae696c396f211f880d6",
+        "referenceConditioningVerifiedFloat32": true,
+        "modelSessionReused": true,
+        "cpuThreads": 2,
+        "inferenceMode": true
+      },
+      "listening": "pending",
+      "status": "eligible exact-text recording; human listening pending",
+      "processing": "[0:a]highpass=f=65,lowpass=f=7600,asplit[clean][wet];[wet]rubberband=pitch=0.87,lowpass=f=1450,volume=0.16[shadow];[clean][shadow]amix=inputs=2:duration=first:normalize=0[a]",
+      "processingSha256": "909eefcdcc32ee610f98b34021cfd02f31367dce5745ba05cebafa32f41de178",
+      "normalization": {
+        "targetLufs": -18,
+        "targetTruePeakDbtp": -1.5,
+        "filter": "loudnorm=I=-17.6:TP=-1.8:LRA=11:linear=false",
+        "iterations": 2
+      },
+      "integratedLufs": -18.07,
+      "truePeakDbtp": -2.24,
+      "asr": "Ich warte auf die Erlaubnis, weiter warten zu dürfen.",
+      "asrWordExact": true,
+      "asrLiteralWordExact": true,
+      "asrNormalization": "case/punctuation, German numeric and A38 spoken equivalents, guarded full-hour and date-ordinal equivalents, section sign/Paragraf orthography, German compound spacing",
+      "asrModel": "independent faster-whisper, cached local model, cpu int8 (effective int8_float32), no script prompt",
+      "asrCpuThreads": 4,
+      "asrDevice": "cpu",
+      "asrEffectiveComputeType": "int8_float32",
+      "asrLanguageId": "de",
+      "asrComputeType": "int8",
+      "asrScriptPrompt": null,
+      "asrBeamSize": 1,
+      "asrReadings": [
+        {
+          "beamSize": 1,
+          "transcript": "Ich warte auf die Erlaubnis, weiter warten zu dürfen.",
+          "transcribeSeconds": 6.64,
+          "words": [
+            {
+              "word": " Ich",
+              "start": 0.0,
+              "end": 0.24
+            },
+            {
+              "word": " warte",
+              "start": 0.24,
+              "end": 0.66
+            },
+            {
+              "word": " auf",
+              "start": 0.66,
+              "end": 0.86
+            },
+            {
+              "word": " die",
+              "start": 0.86,
+              "end": 0.98
+            },
+            {
+              "word": " Erlaubnis,",
+              "start": 0.98,
+              "end": 1.64
+            },
+            {
+              "word": " weiter",
+              "start": 2.16,
+              "end": 2.5
+            },
+            {
+              "word": " warten",
+              "start": 2.5,
+              "end": 2.82
+            },
+            {
+              "word": " zu",
+              "start": 2.82,
+              "end": 3.04
+            },
+            {
+              "word": " dürfen.",
+              "start": 3.04,
+              "end": 3.4
+            }
+          ]
+        }
+      ],
+      "asrModelSha256": "e76620f83d5f5b69efd3d87e3dc180c1bd21df9fbebacfd4335e5e1efcc018da",
+      "asrModelDirectoryName": "voice-asr-model",
+      "wordCues": [
+        {
+          "at": 0.0,
+          "charIndex": 0,
+          "word": "Ich",
+          "end": 0.24
+        },
+        {
+          "at": 0.24,
+          "charIndex": 4,
+          "word": "warte",
+          "end": 0.66
+        },
+        {
+          "at": 0.66,
+          "charIndex": 10,
+          "word": "auf",
+          "end": 0.86
+        },
+        {
+          "at": 0.86,
+          "charIndex": 14,
+          "word": "die",
+          "end": 0.98
+        },
+        {
+          "at": 0.98,
+          "charIndex": 18,
+          "word": "Erlaubnis",
+          "end": 1.64
+        },
+        {
+          "at": 2.16,
+          "charIndex": 29,
+          "word": "weiter",
+          "end": 2.5
+        },
+        {
+          "at": 2.5,
+          "charIndex": 36,
+          "word": "warten",
+          "end": 2.82
+        },
+        {
+          "at": 2.82,
+          "charIndex": 43,
+          "word": "zu",
+          "end": 3.04
+        },
+        {
+          "at": 3.04,
+          "charIndex": 46,
+          "word": "dürfen",
+          "end": 3.4
+        }
+      ],
+      "sha256": "e0372bb476da57c8c7edf9569a145160987c72141cdc4fddbe4833c73cd7e35e",
+      "bytes": 72620,
+      "sampleRateHz": 48000,
+      "channels": 1,
+      "bitrateBitsPerSecond": 128000,
+      "file": "assets/voices/office-ambient/amt-ambient-weiterwarten.mp3"
+    }
+  ],
+  "heldPrivate": [],
+  "approvedExistingReuse": []
+}
