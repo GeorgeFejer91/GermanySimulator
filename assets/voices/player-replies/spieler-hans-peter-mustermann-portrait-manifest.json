@@ -1,0 +1,842 @@
+{
+  "schemaVersion": 1,
+  "voiceId": "spieler-hans-peter-mustermann",
+  "profileId": "b027d18a4fc748cabb133fbb14077500",
+  "fallback": "captions",
+  "status": "same-profile technical and independent ASR audit; perceptual listening not independently verified",
+  "generatedLineCount": 4,
+  "requestedLineCount": 4,
+  "lineCount": 4,
+  "clips": [
+    {
+      "clipId": "player-president-portrait-1",
+      "actorId": "player",
+      "voiceId": "spieler-hans-peter-mustermann",
+      "profileId": "b027d18a4fc748cabb133fbb14077500",
+      "text": "Der Bundespräsident. Ein unglaublich wichtiges Amt.",
+      "english": "The Federal President. An incredibly important office.",
+      "sourceLocator": "buergeramt-story.js presidentPortrait.lines[0].line",
+      "seed": 71000,
+      "synthesisAttempt": 1,
+      "referenceSha256": "6b6ff2c747ef11fb883fc1c9804d270c6ba34cc5614db4d132f8e6172b9f60ad",
+      "authoringHelperSha256": "6a473856c0791c7102a4798f84ac126451db00acdf5683ff76d2fab855ef4298",
+      "rendererInputText": "Der Bundespräsident. Ein unglaublich wichtiges Amt.",
+      "decode": {
+        "maxSpeechTokens": 250,
+        "attentionHooksBefore": 0,
+        "generatedSpeechTokens": 113,
+        "eosReached": true,
+        "eosKind": "model-sampled",
+        "eosSuppressionObservedSteps": 83,
+        "modelEosRestoredSteps": 0,
+        "alignmentFirstCompletedStep": 84,
+        "nativeAnalyzerSourceSha256": "d8430efa92aedb8e59b782c1d299fe7238570eecea9d293c0981a5ee2e82c8c7",
+        "eosPolicy": "Native analyzer unchanged; observation only",
+        "t3InferenceSeconds": 28.31,
+        "temporaryAnalyzerHooksRemoved": 6,
+        "attentionHooksAfter": 0,
+        "eosTraceSha256": "c0dedb99822c208b1ecfb6c08a080e3f358544366b5a17dbcdeb5d79d9fe1052"
+      },
+      "rendererInputBasis": "exact authored source",
+      "requestSha256": "528938058799e82d907bac309c400b4aa4e2459e83dbda991e94ce9e3b9e9e25",
+      "referenceOriginalSha256": "4f4b181750c65430c68d20d742b02529f5e5db6650cb57171fe2e52ea8ee2dbf",
+      "profileJsonSha256": "7d5ce6ff22d3da1a0a062cdb4a521bdf744dccd621b64a75a58a3fd0a255abe6",
+      "rawSha256": "28d1889fa2fa44a7d63dadeb76b3856ed1423c76afa6dc58571c804c46ea7c32",
+      "renderer": "ResembleAI/Chatterbox Multilingual V2 0.1.7",
+      "modelRevision": "5bb1f6ee58e50c3b8d408bc82a6d3740c2db6e18",
+      "modelLicense": "MIT",
+      "referenceLicense": "CC0-1.0 (Thorsten-Voice Dataset 2021.06 emotional)",
+      "durationSeconds": 4.48,
+      "renderSeconds": 42.38,
+      "synthesis": {
+        "temperature": 0.65,
+        "repetitionPenalty": 3,
+        "cfgWeight": 0.6,
+        "languageId": "de",
+        "device": "cpu",
+        "precision": "fp32",
+        "t3WeightPrecision": "float32",
+        "conditioningPrecision": "float32",
+        "autocastPrecision": null,
+        "conditioningCached": true,
+        "referenceReconditionedForProfile": "b027d18a4fc748cabb133fbb14077500",
+        "referenceConditioningVerifiedFloat32": true,
+        "modelSessionReused": false,
+        "cpuThreads": 2,
+        "inferenceMode": true
+      },
+      "listening": "pending",
+      "status": "eligible exact-text recording; human listening pending",
+      "processing": null,
+      "processingSha256": null,
+      "normalization": {
+        "targetLufs": -18,
+        "targetTruePeakDbtp": -1.5,
+        "filter": "loudnorm=I=-12.810000000000002:TP=-1.8:LRA=11:linear=false",
+        "iterations": 5
+      },
+      "integratedLufs": -18.14,
+      "truePeakDbtp": -2.21,
+      "asr": "Der Bundespräsident, ein unglaublich wichtiges Amt.",
+      "asrWordExact": true,
+      "asrLiteralWordExact": true,
+      "asrNormalization": "case/punctuation, German numeric and A38 spoken equivalents, guarded full-hour and date-ordinal equivalents, section sign/Paragraf orthography, German compound spacing",
+      "asrModel": "independent faster-whisper, cached local model, cpu int8 (effective int8_float32), no script prompt",
+      "asrCpuThreads": 2,
+      "asrDevice": "cpu",
+      "asrEffectiveComputeType": "int8_float32",
+      "asrLanguageId": "de",
+      "asrComputeType": "int8",
+      "asrScriptPrompt": null,
+      "asrBeamSize": 1,
+      "asrReadings": [
+        {
+          "beamSize": 1,
+          "transcript": "Der Bundespräsident, ein unglaublich wichtiges Amt.",
+          "transcribeSeconds": 14.53,
+          "words": [
+            {
+              "word": " Der",
+              "start": 0,
+              "end": 0.16
+            },
+            {
+              "word": " Bundespräsident,",
+              "start": 0.16,
+              "end": 1.24
+            },
+            {
+              "word": " ein",
+              "start": 1.5,
+              "end": 1.76
+            },
+            {
+              "word": " unglaublich",
+              "start": 1.76,
+              "end": 2.62
+            },
+            {
+              "word": " wichtiges",
+              "start": 2.62,
+              "end": 3.2
+            },
+            {
+              "word": " Amt.",
+              "start": 3.2,
+              "end": 3.58
+            }
+          ]
+        }
+      ],
+      "asrModelSha256": "e76620f83d5f5b69efd3d87e3dc180c1bd21df9fbebacfd4335e5e1efcc018da",
+      "asrModelDirectoryName": "voice-asr-model",
+      "wordCues": [
+        {
+          "at": 0,
+          "charIndex": 0,
+          "word": "Der",
+          "end": 0.16
+        },
+        {
+          "at": 0.16,
+          "charIndex": 4,
+          "word": "Bundespräsident",
+          "end": 1.24
+        },
+        {
+          "at": 1.5,
+          "charIndex": 21,
+          "word": "Ein",
+          "end": 1.76
+        },
+        {
+          "at": 1.76,
+          "charIndex": 25,
+          "word": "unglaublich",
+          "end": 2.62
+        },
+        {
+          "at": 2.62,
+          "charIndex": 37,
+          "word": "wichtiges",
+          "end": 3.2
+        },
+        {
+          "at": 3.2,
+          "charIndex": 47,
+          "word": "Amt",
+          "end": 3.58
+        }
+      ],
+      "sha256": "9da8b695c773ef21b94c47984c9e335b833a83bc36f4c57e3e49e7d41d26ace3",
+      "bytes": 72620,
+      "sampleRateHz": 48000,
+      "channels": 1,
+      "bitrateBitsPerSecond": 128000,
+      "file": "assets/voices/player-replies/player-president-portrait-1.mp3",
+      "approval": {
+        "status": "user-approved",
+        "date": "2026-10-12",
+        "instruction": "Use the first-person player voice for the sarcastic Bundespräsident portrait interaction, ending with wanting the job.",
+        "scope": "User-requested portrait inner monologue in the existing selected player voice",
+        "listeningVerified": false
+      }
+    },
+    {
+      "clipId": "player-president-portrait-2",
+      "actorId": "player",
+      "voiceId": "spieler-hans-peter-mustermann",
+      "profileId": "b027d18a4fc748cabb133fbb14077500",
+      "text": "Reden halten, Hände schütteln, sehr ernst in die Kamera schauen.",
+      "english": "Give speeches, shake hands, look very serious for the camera.",
+      "sourceLocator": "buergeramt-story.js presidentPortrait.lines[1].line",
+      "seed": 171001,
+      "synthesisAttempt": 2,
+      "referenceSha256": "6b6ff2c747ef11fb883fc1c9804d270c6ba34cc5614db4d132f8e6172b9f60ad",
+      "authoringHelperSha256": "6a473856c0791c7102a4798f84ac126451db00acdf5683ff76d2fab855ef4298",
+      "rendererInputText": "Reden halten, Hände schütteln, sehr ernst in die Kamera schauen.",
+      "decode": {
+        "maxSpeechTokens": 280,
+        "attentionHooksBefore": 0,
+        "generatedSpeechTokens": 137,
+        "eosReached": true,
+        "eosKind": "analyzer-forced",
+        "eosSuppressionObservedSteps": 94,
+        "modelEosRestoredSteps": 0,
+        "alignmentFirstCompletedStep": 95,
+        "nativeAnalyzerSourceSha256": "d8430efa92aedb8e59b782c1d299fe7238570eecea9d293c0981a5ee2e82c8c7",
+        "eosPolicy": "Native analyzer unchanged; observation only",
+        "t3InferenceSeconds": 14.09,
+        "temporaryAnalyzerHooksRemoved": 6,
+        "attentionHooksAfter": 0,
+        "eosTraceSha256": "5f9f54df735d08762f48517b8395803c925b4cfcc630e4e47b8cc0b21ce053bd"
+      },
+      "rendererInputBasis": "exact authored source",
+      "requestSha256": "528938058799e82d907bac309c400b4aa4e2459e83dbda991e94ce9e3b9e9e25",
+      "referenceOriginalSha256": "4f4b181750c65430c68d20d742b02529f5e5db6650cb57171fe2e52ea8ee2dbf",
+      "profileJsonSha256": "7d5ce6ff22d3da1a0a062cdb4a521bdf744dccd621b64a75a58a3fd0a255abe6",
+      "rawSha256": "ece3de9ecc64bdad0c8a72d87021d39178d758a7ed6f9ecab401eb4f6953eb94",
+      "renderer": "ResembleAI/Chatterbox Multilingual V2 0.1.7",
+      "modelRevision": "5bb1f6ee58e50c3b8d408bc82a6d3740c2db6e18",
+      "modelLicense": "MIT",
+      "referenceLicense": "CC0-1.0 (Thorsten-Voice Dataset 2021.06 emotional)",
+      "durationSeconds": 5.44,
+      "renderSeconds": 27.16,
+      "synthesis": {
+        "temperature": 0.65,
+        "repetitionPenalty": 3,
+        "cfgWeight": 0.6,
+        "languageId": "de",
+        "device": "cpu",
+        "precision": "fp32",
+        "t3WeightPrecision": "float32",
+        "conditioningPrecision": "float32",
+        "autocastPrecision": null,
+        "conditioningCached": true,
+        "referenceReconditionedForProfile": "b027d18a4fc748cabb133fbb14077500",
+        "referenceConditioningVerifiedFloat32": true,
+        "modelSessionReused": false,
+        "cpuThreads": 2,
+        "inferenceMode": true
+      },
+      "listening": "pending",
+      "status": "eligible exact-text recording; human listening pending",
+      "processing": null,
+      "processingSha256": null,
+      "normalization": {
+        "targetLufs": -18,
+        "targetTruePeakDbtp": -1.5,
+        "filter": "loudnorm=I=-16.490000000000002:TP=-1.8:LRA=11:linear=false",
+        "iterations": 3
+      },
+      "integratedLufs": -18.22,
+      "truePeakDbtp": -2.23,
+      "asr": "Reden halten, Hände schütteln, sehr ernst in die Kamera schauen.",
+      "asrWordExact": true,
+      "asrLiteralWordExact": true,
+      "asrNormalization": "case/punctuation, German numeric and A38 spoken equivalents, guarded full-hour and date-ordinal equivalents, section sign/Paragraf orthography, German compound spacing",
+      "asrModel": "independent faster-whisper, cached local model, cpu int8 (effective int8_float32), no script prompt",
+      "asrCpuThreads": 2,
+      "asrDevice": "cpu",
+      "asrEffectiveComputeType": "int8_float32",
+      "asrLanguageId": "de",
+      "asrComputeType": "int8",
+      "asrScriptPrompt": null,
+      "asrBeamSize": 1,
+      "asrReadings": [
+        {
+          "beamSize": 1,
+          "transcript": "Reden halten, Hände schütteln, sehr ernst in die Kamera schauen.",
+          "transcribeSeconds": 7.91,
+          "words": [
+            {
+              "word": " Reden",
+              "start": 0,
+              "end": 0.6
+            },
+            {
+              "word": " halten,",
+              "start": 0.6,
+              "end": 0.92
+            },
+            {
+              "word": " Hände",
+              "start": 1.24,
+              "end": 1.6
+            },
+            {
+              "word": " schütteln,",
+              "start": 1.6,
+              "end": 2.06
+            },
+            {
+              "word": " sehr",
+              "start": 2.5,
+              "end": 2.62
+            },
+            {
+              "word": " ernst",
+              "start": 2.62,
+              "end": 3.06
+            },
+            {
+              "word": " in",
+              "start": 3.06,
+              "end": 3.22
+            },
+            {
+              "word": " die",
+              "start": 3.22,
+              "end": 3.28
+            },
+            {
+              "word": " Kamera",
+              "start": 3.28,
+              "end": 3.56
+            },
+            {
+              "word": " schauen.",
+              "start": 3.56,
+              "end": 3.92
+            }
+          ]
+        }
+      ],
+      "asrModelSha256": "e76620f83d5f5b69efd3d87e3dc180c1bd21df9fbebacfd4335e5e1efcc018da",
+      "asrModelDirectoryName": "voice-asr-model",
+      "wordCues": [
+        {
+          "at": 0,
+          "charIndex": 0,
+          "word": "Reden",
+          "end": 0.6
+        },
+        {
+          "at": 0.6,
+          "charIndex": 6,
+          "word": "halten",
+          "end": 0.92
+        },
+        {
+          "at": 1.24,
+          "charIndex": 14,
+          "word": "Hände",
+          "end": 1.6
+        },
+        {
+          "at": 1.6,
+          "charIndex": 20,
+          "word": "schütteln",
+          "end": 2.06
+        },
+        {
+          "at": 2.5,
+          "charIndex": 31,
+          "word": "sehr",
+          "end": 2.62
+        },
+        {
+          "at": 2.62,
+          "charIndex": 36,
+          "word": "ernst",
+          "end": 3.06
+        },
+        {
+          "at": 3.06,
+          "charIndex": 42,
+          "word": "in",
+          "end": 3.22
+        },
+        {
+          "at": 3.22,
+          "charIndex": 45,
+          "word": "die",
+          "end": 3.28
+        },
+        {
+          "at": 3.28,
+          "charIndex": 49,
+          "word": "Kamera",
+          "end": 3.56
+        },
+        {
+          "at": 3.56,
+          "charIndex": 56,
+          "word": "schauen",
+          "end": 3.92
+        }
+      ],
+      "sha256": "122315aa27672ab4e78c6a4fcc3976cab18d7deeee3d1693483dc23571fd6b59",
+      "bytes": 87980,
+      "sampleRateHz": 48000,
+      "channels": 1,
+      "bitrateBitsPerSecond": 128000,
+      "file": "assets/voices/player-replies/player-president-portrait-2.mp3",
+      "approval": {
+        "status": "user-approved",
+        "date": "2026-10-12",
+        "instruction": "Use the first-person player voice for the sarcastic Bundespräsident portrait interaction, ending with wanting the job.",
+        "scope": "User-requested portrait inner monologue in the existing selected player voice",
+        "listeningVerified": false
+      }
+    },
+    {
+      "clipId": "player-president-portrait-3",
+      "actorId": "player",
+      "voiceId": "spieler-hans-peter-mustermann",
+      "profileId": "b027d18a4fc748cabb133fbb14077500",
+      "text": "Und wenn hier das Amt stillsteht, steht er wenigstens würdevoll im Bilderrahmen.",
+      "english": "And when this office grinds to a halt, at least he stands there with dignity in his picture frame.",
+      "sourceLocator": "buergeramt-story.js presidentPortrait.lines[2].line",
+      "seed": 71002,
+      "synthesisAttempt": 1,
+      "referenceSha256": "6b6ff2c747ef11fb883fc1c9804d270c6ba34cc5614db4d132f8e6172b9f60ad",
+      "authoringHelperSha256": "6a473856c0791c7102a4798f84ac126451db00acdf5683ff76d2fab855ef4298",
+      "rendererInputText": "Und wenn hier das Amt stillsteht, steht er wenigstens würdevoll im Bilderrahmen.",
+      "decode": {
+        "maxSpeechTokens": 304,
+        "attentionHooksBefore": 0,
+        "generatedSpeechTokens": 144,
+        "eosReached": true,
+        "eosKind": "analyzer-forced",
+        "eosSuppressionObservedSteps": 109,
+        "modelEosRestoredSteps": 0,
+        "alignmentFirstCompletedStep": 110,
+        "nativeAnalyzerSourceSha256": "d8430efa92aedb8e59b782c1d299fe7238570eecea9d293c0981a5ee2e82c8c7",
+        "eosPolicy": "Native analyzer unchanged; observation only",
+        "t3InferenceSeconds": 22.2,
+        "temporaryAnalyzerHooksRemoved": 3,
+        "attentionHooksAfter": 0,
+        "eosTraceSha256": "c5441ad9dde78a4fe4c5975c98589da2b1fe44d2ce80888d882d15b06f8a04ed"
+      },
+      "rendererInputBasis": "exact authored source",
+      "requestSha256": "528938058799e82d907bac309c400b4aa4e2459e83dbda991e94ce9e3b9e9e25",
+      "referenceOriginalSha256": "4f4b181750c65430c68d20d742b02529f5e5db6650cb57171fe2e52ea8ee2dbf",
+      "profileJsonSha256": "7d5ce6ff22d3da1a0a062cdb4a521bdf744dccd621b64a75a58a3fd0a255abe6",
+      "rawSha256": "cdaf849fc413729748cb11012582d458e09560049211b7062b91153d13bdea3b",
+      "renderer": "ResembleAI/Chatterbox Multilingual V2 0.1.7",
+      "modelRevision": "5bb1f6ee58e50c3b8d408bc82a6d3740c2db6e18",
+      "modelLicense": "MIT",
+      "referenceLicense": "CC0-1.0 (Thorsten-Voice Dataset 2021.06 emotional)",
+      "durationSeconds": 5.72,
+      "renderSeconds": 45.12,
+      "synthesis": {
+        "temperature": 0.65,
+        "repetitionPenalty": 3,
+        "cfgWeight": 0.6,
+        "languageId": "de",
+        "device": "cpu",
+        "precision": "fp32",
+        "t3WeightPrecision": "float32",
+        "conditioningPrecision": "float32",
+        "autocastPrecision": null,
+        "conditioningCached": true,
+        "referenceReconditionedForProfile": "b027d18a4fc748cabb133fbb14077500",
+        "referenceConditioningVerifiedFloat32": true,
+        "modelSessionReused": false,
+        "cpuThreads": 2,
+        "inferenceMode": true
+      },
+      "listening": "pending",
+      "status": "eligible exact-text recording; human listening pending",
+      "processing": null,
+      "processingSha256": null,
+      "normalization": {
+        "targetLufs": -18,
+        "targetTruePeakDbtp": -1.5,
+        "filter": "loudnorm=I=-16.759999999999998:TP=-1.8:LRA=11:linear=false",
+        "iterations": 3
+      },
+      "integratedLufs": -18.16,
+      "truePeakDbtp": -2.21,
+      "asr": "Und wenn hier das Amt stillsteht, steht er wenigstens würdevoll im Bilderrahmen.",
+      "asrWordExact": true,
+      "asrLiteralWordExact": true,
+      "asrNormalization": "case/punctuation, German numeric and A38 spoken equivalents, guarded full-hour and date-ordinal equivalents, section sign/Paragraf orthography, German compound spacing",
+      "asrModel": "independent faster-whisper, cached local model, cpu int8 (effective int8_float32), no script prompt",
+      "asrCpuThreads": 2,
+      "asrDevice": "cpu",
+      "asrEffectiveComputeType": "int8_float32",
+      "asrLanguageId": "de",
+      "asrComputeType": "int8",
+      "asrScriptPrompt": null,
+      "asrBeamSize": 1,
+      "asrReadings": [
+        {
+          "beamSize": 1,
+          "transcript": "Und wenn hier das Amt stillsteht, steht er wenigstens würdevoll im Bilderrahmen.",
+          "transcribeSeconds": 11.58,
+          "words": [
+            {
+              "word": " Und",
+              "start": 0,
+              "end": 0.14
+            },
+            {
+              "word": " wenn",
+              "start": 0.14,
+              "end": 0.36
+            },
+            {
+              "word": " hier",
+              "start": 0.36,
+              "end": 0.76
+            },
+            {
+              "word": " das",
+              "start": 0.76,
+              "end": 1.04
+            },
+            {
+              "word": " Amt",
+              "start": 1.04,
+              "end": 1.46
+            },
+            {
+              "word": " stillsteht,",
+              "start": 1.46,
+              "end": 2.16
+            },
+            {
+              "word": " steht",
+              "start": 2.28,
+              "end": 2.54
+            },
+            {
+              "word": " er",
+              "start": 2.54,
+              "end": 2.7
+            },
+            {
+              "word": " wenigstens",
+              "start": 2.7,
+              "end": 3.26
+            },
+            {
+              "word": " würdevoll",
+              "start": 3.26,
+              "end": 3.76
+            },
+            {
+              "word": " im",
+              "start": 3.76,
+              "end": 3.88
+            },
+            {
+              "word": " Bilderrahmen.",
+              "start": 3.88,
+              "end": 4.58
+            }
+          ]
+        }
+      ],
+      "asrModelSha256": "e76620f83d5f5b69efd3d87e3dc180c1bd21df9fbebacfd4335e5e1efcc018da",
+      "asrModelDirectoryName": "voice-asr-model",
+      "wordCues": [
+        {
+          "at": 0,
+          "charIndex": 0,
+          "word": "Und",
+          "end": 0.14
+        },
+        {
+          "at": 0.14,
+          "charIndex": 4,
+          "word": "wenn",
+          "end": 0.36
+        },
+        {
+          "at": 0.36,
+          "charIndex": 9,
+          "word": "hier",
+          "end": 0.76
+        },
+        {
+          "at": 0.76,
+          "charIndex": 14,
+          "word": "das",
+          "end": 1.04
+        },
+        {
+          "at": 1.04,
+          "charIndex": 18,
+          "word": "Amt",
+          "end": 1.46
+        },
+        {
+          "at": 1.46,
+          "charIndex": 22,
+          "word": "stillsteht",
+          "end": 2.16
+        },
+        {
+          "at": 2.28,
+          "charIndex": 34,
+          "word": "steht",
+          "end": 2.54
+        },
+        {
+          "at": 2.54,
+          "charIndex": 40,
+          "word": "er",
+          "end": 2.7
+        },
+        {
+          "at": 2.7,
+          "charIndex": 43,
+          "word": "wenigstens",
+          "end": 3.26
+        },
+        {
+          "at": 3.26,
+          "charIndex": 54,
+          "word": "würdevoll",
+          "end": 3.76
+        },
+        {
+          "at": 3.76,
+          "charIndex": 64,
+          "word": "im",
+          "end": 3.88
+        },
+        {
+          "at": 3.88,
+          "charIndex": 67,
+          "word": "Bilderrahmen",
+          "end": 4.58
+        }
+      ],
+      "sha256": "097403e3307813bb6a4735f86b79d855693ec7b893e9ffee2231f3dede72a111",
+      "bytes": 92588,
+      "sampleRateHz": 48000,
+      "channels": 1,
+      "bitrateBitsPerSecond": 128000,
+      "file": "assets/voices/player-replies/player-president-portrait-3.mp3",
+      "approval": {
+        "status": "user-approved",
+        "date": "2026-10-12",
+        "instruction": "Use the first-person player voice for the sarcastic Bundespräsident portrait interaction, ending with wanting the job.",
+        "scope": "User-requested portrait inner monologue in the existing selected player voice",
+        "listeningVerified": false
+      }
+    },
+    {
+      "clipId": "player-president-portrait-4",
+      "actorId": "player",
+      "voiceId": "spieler-hans-peter-mustermann",
+      "profileId": "b027d18a4fc748cabb133fbb14077500",
+      "text": "Also ehrlich: Diesen Job hätte ich wirklich gern.",
+      "english": "Honestly, I would really love to have that job.",
+      "sourceLocator": "buergeramt-story.js presidentPortrait.lines[3].line",
+      "seed": 71003,
+      "synthesisAttempt": 1,
+      "referenceSha256": "6b6ff2c747ef11fb883fc1c9804d270c6ba34cc5614db4d132f8e6172b9f60ad",
+      "authoringHelperSha256": "6a473856c0791c7102a4798f84ac126451db00acdf5683ff76d2fab855ef4298",
+      "rendererInputText": "Also ehrlich: Diesen Job hätte ich wirklich gern.",
+      "decode": {
+        "maxSpeechTokens": 256,
+        "attentionHooksBefore": 0,
+        "generatedSpeechTokens": 99,
+        "eosReached": true,
+        "eosKind": "model-sampled",
+        "eosSuppressionObservedSteps": 70,
+        "modelEosRestoredSteps": 0,
+        "alignmentFirstCompletedStep": 71,
+        "nativeAnalyzerSourceSha256": "d8430efa92aedb8e59b782c1d299fe7238570eecea9d293c0981a5ee2e82c8c7",
+        "eosPolicy": "Native analyzer unchanged; observation only",
+        "t3InferenceSeconds": 14.03,
+        "temporaryAnalyzerHooksRemoved": 3,
+        "attentionHooksAfter": 0,
+        "eosTraceSha256": "fb46d69b62e191a0927f9b10538e1c210134f0d7bbd5e718a364bb494836cc03"
+      },
+      "rendererInputBasis": "exact authored source",
+      "requestSha256": "528938058799e82d907bac309c400b4aa4e2459e83dbda991e94ce9e3b9e9e25",
+      "referenceOriginalSha256": "4f4b181750c65430c68d20d742b02529f5e5db6650cb57171fe2e52ea8ee2dbf",
+      "profileJsonSha256": "7d5ce6ff22d3da1a0a062cdb4a521bdf744dccd621b64a75a58a3fd0a255abe6",
+      "rawSha256": "5486f55e49672122b60a77dc07c2f94d38d077de1e87a2265d2e2eb2735bf100",
+      "renderer": "ResembleAI/Chatterbox Multilingual V2 0.1.7",
+      "modelRevision": "5bb1f6ee58e50c3b8d408bc82a6d3740c2db6e18",
+      "modelLicense": "MIT",
+      "referenceLicense": "CC0-1.0 (Thorsten-Voice Dataset 2021.06 emotional)",
+      "durationSeconds": 3.92,
+      "renderSeconds": 29.94,
+      "synthesis": {
+        "temperature": 0.65,
+        "repetitionPenalty": 3,
+        "cfgWeight": 0.6,
+        "languageId": "de",
+        "device": "cpu",
+        "precision": "fp32",
+        "t3WeightPrecision": "float32",
+        "conditioningPrecision": "float32",
+        "autocastPrecision": null,
+        "conditioningCached": true,
+        "referenceReconditionedForProfile": "b027d18a4fc748cabb133fbb14077500",
+        "referenceConditioningVerifiedFloat32": true,
+        "modelSessionReused": false,
+        "cpuThreads": 2,
+        "inferenceMode": true
+      },
+      "listening": "pending",
+      "status": "eligible exact-text recording; human listening pending",
+      "processing": null,
+      "processingSha256": null,
+      "normalization": {
+        "targetLufs": -18,
+        "targetTruePeakDbtp": -1.5,
+        "filter": "loudnorm=I=-13.009999999999998:TP=-1.8:LRA=11:linear=false",
+        "iterations": 4
+      },
+      "integratedLufs": -18.27,
+      "truePeakDbtp": -2.21,
+      "asr": "Also ehrlich, diesen Job hätte ich wirklich gern.",
+      "asrWordExact": true,
+      "asrLiteralWordExact": true,
+      "asrNormalization": "case/punctuation, German numeric and A38 spoken equivalents, guarded full-hour and date-ordinal equivalents, section sign/Paragraf orthography, German compound spacing",
+      "asrModel": "independent faster-whisper, cached local model, cpu int8 (effective int8_float32), no script prompt",
+      "asrCpuThreads": 2,
+      "asrDevice": "cpu",
+      "asrEffectiveComputeType": "int8_float32",
+      "asrLanguageId": "de",
+      "asrComputeType": "int8",
+      "asrScriptPrompt": null,
+      "asrBeamSize": 1,
+      "asrReadings": [
+        {
+          "beamSize": 1,
+          "transcript": "Also ehrlich, diesen Job hätte ich wirklich gern.",
+          "transcribeSeconds": 10.08,
+          "words": [
+            {
+              "word": " Also",
+              "start": 0,
+              "end": 0.38
+            },
+            {
+              "word": " ehrlich,",
+              "start": 0.38,
+              "end": 0.82
+            },
+            {
+              "word": " diesen",
+              "start": 1.14,
+              "end": 1.6
+            },
+            {
+              "word": " Job",
+              "start": 1.6,
+              "end": 1.88
+            },
+            {
+              "word": " hätte",
+              "start": 1.88,
+              "end": 2.12
+            },
+            {
+              "word": " ich",
+              "start": 2.12,
+              "end": 2.28
+            },
+            {
+              "word": " wirklich",
+              "start": 2.28,
+              "end": 2.64
+            },
+            {
+              "word": " gern.",
+              "start": 2.64,
+              "end": 3
+            }
+          ]
+        }
+      ],
+      "asrModelSha256": "e76620f83d5f5b69efd3d87e3dc180c1bd21df9fbebacfd4335e5e1efcc018da",
+      "asrModelDirectoryName": "voice-asr-model",
+      "wordCues": [
+        {
+          "at": 0,
+          "charIndex": 0,
+          "word": "Also",
+          "end": 0.38
+        },
+        {
+          "at": 0.38,
+          "charIndex": 5,
+          "word": "ehrlich",
+          "end": 0.82
+        },
+        {
+          "at": 1.14,
+          "charIndex": 14,
+          "word": "Diesen",
+          "end": 1.6
+        },
+        {
+          "at": 1.6,
+          "charIndex": 21,
+          "word": "Job",
+          "end": 1.88
+        },
+        {
+          "at": 1.88,
+          "charIndex": 25,
+          "word": "hätte",
+          "end": 2.12
+        },
+        {
+          "at": 2.12,
+          "charIndex": 31,
+          "word": "ich",
+          "end": 2.28
+        },
+        {
+          "at": 2.28,
+          "charIndex": 35,
+          "word": "wirklich",
+          "end": 2.64
+        },
+        {
+          "at": 2.64,
+          "charIndex": 44,
+          "word": "gern",
+          "end": 3
+        }
+      ],
+      "sha256": "094e8530d0835b2b3bd48f12634eb9dfeadb791e9fa0547569984029840b5c3b",
+      "bytes": 63788,
+      "sampleRateHz": 48000,
+      "channels": 1,
+      "bitrateBitsPerSecond": 128000,
+      "file": "assets/voices/player-replies/player-president-portrait-4.mp3",
+      "approval": {
+        "status": "user-approved",
+        "date": "2026-10-12",
+        "instruction": "Use the first-person player voice for the sarcastic Bundespräsident portrait interaction, ending with wanting the job.",
+        "scope": "User-requested portrait inner monologue in the existing selected player voice",
+        "listeningVerified": false
+      }
+    }
+  ],
+  "heldPrivate": [],
+  "approvedExistingReuse": []
+}

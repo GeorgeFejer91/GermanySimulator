@@ -138,6 +138,7 @@ export function fixedRecordingsBlock(cast,manifest,family='knick'){
  if(family==='player-replies'){
   const window={};vm.runInNewContext(readFileSync(resolve(root,'buergeramt-story.js'),'utf8'),{window});
   replies=Object.fromEntries(Object.entries(window.BuergeramtStory.registration.nodes).flatMap(([key,node])=>node.choices.map((choice,index)=>[`player-registration-${key.toLowerCase()}-${index+1}`,choice.label])));
+  window.BuergeramtStory.presidentPortrait.lines.forEach((row,index)=>replies['player-president-portrait-'+(index+1)]=row.line);
   const runtime=readFileSync(resolve(root,'buergeramt.js'),'utf8');
   for(const [key,text] of [['phone-silent','Telefon auf lautlos schalten.'],['phone-ignore','Nicht rangehen. Telefon weglegen.'],['complete','Meldebestätigung und A38 mitnehmen.']]){requireMatch(runtime.includes('label:'+JSON.stringify(text)),'Player runtime choice changed');replies['player-'+key]=text;}
  }
@@ -228,6 +229,8 @@ export function main(args=process.argv.slice(2)){
  if(existsSync(repliesPath)&&!args.includes('--archive-assets')&&!args.includes('--archive-profiles')){
   const manifest=json(repliesPath),clips=manifest.clips.map(clip=>({...clip,provenanceManifest:'assets/voices/player-replies/spieler-hans-peter-mustermann-manifest.json'}));
   requireMatch(Number.isInteger(manifest.generatedLineCount)&&manifest.generatedLineCount>=clips.length&&manifest.generatedLineCount<=manifest.requestedLineCount&&clips.length+manifest.heldPrivate.length===manifest.requestedLineCount,'Unaccounted player choices');
+  const portraitPath='assets/voices/player-replies/spieler-hans-peter-mustermann-portrait-manifest.json';
+  if(existsSync(resolve(root,portraitPath))){const portrait=json(resolve(root,portraitPath));requireMatch(portrait.clips.length===4&&portrait.heldPrivate.length===0,'Incomplete president monologue');clips.push(...portrait.clips.map(clip=>({...clip,provenanceManifest:portraitPath})));}
   const block=fixedRecordingsBlock(cast,{clips},'player-replies'),pattern=/const playerReplyRecordings=Object\.freeze\(\{[^\n]*\}\);\n/;
   fixedAssetInventory('player-replies',clips);
   if(args.includes('--sync')){

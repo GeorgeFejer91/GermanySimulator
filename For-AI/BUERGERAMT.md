@@ -2,6 +2,19 @@
 
 The secret Bürgeramt is an episode of the canonical root game. QR admission, the linked phone, the numbered queue, Frau Knick, the police interruption, A38, and the existing exit outcomes remain its required chain. Eight optional walking encounters add movement and atmosphere while the player waits; they never award a ticket or change a counter answer.
 
+The clear wall beside the waiting-room entrance carries a gilded state portrait of the current
+Bundespräsident, Frank-Walter Steinmeier (verified 2026-10-12). Approaching it
+offers `E · BUNDESPRÄSIDENT BETRACHTEN`; E or the existing touch interaction
+starts four short thoughts spoken by **ICH**, using the selected
+`spieler-hans-peter-mustermann` Nachschub voice. The ceremonial-importance joke
+ends with “Also ehrlich: Diesen Job hätte ich wirklich gern.” The portrait
+never speaks and no visible actor mouth is assigned. This optional sequence
+keeps the room visible, follows the existing serialized speech lifecycle,
+pauses office queue progression like other encounters, and returns automatically
+to the current waiting/QR/counter state. Missing or disabled player audio keeps
+the exact readable captions. Phone ticket receipts retain their authority
+throughout; the portrait awards neither a ticket nor A38.
+
 Character voices follow [`VOICE-SYNTH-PROTOCOL.md`](./VOICE-SYNTH-PROTOCOL.md#fixed-voices-and-the-agent-workflow-2026-10-11). The four Schalter positions all represent **Brunhilde Knick**, with the single character/voice ID `amt-brunhilde-knick` and selected profile `b080c7d95ecd418fb428282461d7fbe7`. They are one person, as explicitly clarified by the user on 2026-10-12. The names Frau Frist, Frau Durchschlag and Frau Zuständig are retired. Counter refusals, registration, warnings, the police argument and all three staff background remarks use Knick's established recordings and tone. Render slots `clerk-desk-1` through `clerk-desk-4` remain separate so only the speaking counter animates. Eight walkers and three waiting patrons retain their own identities; they are not additional counter clerks. Missing, failed or dynamic Knick speech retains exact captions without a machine voice. The three superseded clerk profiles and ambient takes remain privately preserved, outside active game lookup. Ambient speech waits for foreground speech.
 
 Recorded office MP3 requests include the current encoded SHA-256 in their URL,

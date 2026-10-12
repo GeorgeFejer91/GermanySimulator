@@ -1012,6 +1012,20 @@ unchanged.
 
 ## Shared speech mouth layer (2026-10-11)
 
+The optional Bürgeramt Bundespräsident portrait ships one 600 × 800 WebP
+(63,000 transferred bytes, 1,920,000 decoded RGBA bytes, no mipmaps). The office's
+existing admission queue loads it on approach; one retained office texture is
+reused on replay and return. A readable named plate remains on image failure.
+The gilded frame uses bounded procedural geometry and a shared material; its
+complete wall projection is included in the office collision solids. Speech
+uses four request-only MP3s, 316,976 bytes and 19.56 seconds total, with the
+existing single-media cancellation and caption fallback. No idle work, model
+download, second asset pipeline or new scheduler is added. Exact text/profile,
+encoded hashes, native EOS, ASR and levels are in the existing player-replies
+portrait supplement. `tools/playtest-president-portrait.mjs` and
+`tests/buergeramt-president-portrait.test.mjs` cover its rendered interaction,
+fallback and lifecycle; physical-device and listening evidence remain separate.
+
 `buergeramt-lips.js` owns one cue track and one lazy 425-kernel instanced native-paint patch for the currently speaking atlas actor. It borrows the actor texture and shares its registration, breathing, tint, fog and depth policy; cancellation, exit and pagehide release ownership. Whole-body Gaussian paint consumes the same continuous cue shape in its existing shader and suppresses the atlas patch. `buergeramt-mouth-paint.js` separates painted lips and lower jaw around a visible, bounded oral cavity, retaining original closed paint at rest. All 15 office actor instances share this rig and retain their body bounds and floor pivots.
 
 Recorded speech lazily loads `assets/buergeramt/speech/mouth-cues.js` when the office requests a clip or its existing Gaussian owner. All eligible office recordings, including the omen, have exact path/hash bindings, phonetic intervals and 100 Hz compact acoustic envelopes. The shared builder replaces the former omen-only data/pipeline. It uses local FFmpeg/Rhubarb and reuses analysis only when the exact recording hash, source and complete cue data match; optional installed Whisper diagnostics remain offline. The module is cached once, with decoded envelopes in a weak cache; existing cue cancellation/watchdogs own async preparation and disposal. Audio playhead sampling replaces both text-length timing and the additional 35 ms visual filter. Browser speech and optional unanalyzed preview recordings retain estimated articulation. See `assets/buergeramt/speech/PROVENANCE.md` for reproduction and precision limits.

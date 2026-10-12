@@ -2,6 +2,14 @@
 
 ## Bürgeramt episode
 
+The waiting-room portrait of Frank-Walter Steinmeier is original OpenAI
+ImageGen artwork produced on 12 October 2026 for this game's political satire.
+His current office was checked against the [Federal Government's October 2026
+bulletin](https://www.bundesregierung.de/breg-de/service/newsletter-und-abos/bulletin/bpr-ordensverleihung-2455948).
+The game ships a 600 × 800 WebP and constructs its gilded frame in Three.js.
+The portrait's internal monologue uses Hans-Peter Mustermann's existing selected
+Nachschub player voice, with exact German captions and English translations.
+
 Six painted Aktenkurier turn bridges were generated with OpenAI ImageGen from
 the existing character reference. Original anchors and new source art retain
 the character's prop hands and painterly costume. The reproducible turn atlas

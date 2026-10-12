@@ -1121,8 +1121,8 @@ function showRendererFailure(error){
   amtPatina(desk,"#666154",27,[2,1]);amtPatina(seat,"#586b68",77,[1,1]);
   function ab(w,h,d,material,x,y,z){const mesh=new T.Mesh(new T.BoxGeometry(w,h,d),material);mesh.position.set(x,y,z);amtScene.add(mesh);return mesh}
   function ac(rTop,rBottom,h,material,x,y,z){const mesh=new T.Mesh(new T.CylinderGeometry(rTop,rBottom,h,12),material);mesh.position.set(x,y,z);amtScene.add(mesh);return mesh}
-  function amtLabel(words,width=512,height=160,background="#263539",foreground="#e9dfbf"){
-    const c=document.createElement("canvas");c.width=width;c.height=height;const ctx=c.getContext("2d");ctx.fillStyle=background;ctx.fillRect(0,0,width,height);ctx.fillStyle=foreground;ctx.font=`bold ${Math.floor(height*.38)}px Arial`;ctx.textAlign="center";ctx.textBaseline="middle";ctx.fillText(words,width/2,height/2,width-22);const texture=new T.CanvasTexture(c);texture.colorSpace=T.SRGBColorSpace;return{canvas:c,ctx,texture};
+  function amtLabel(words,width=512,height=160,background="#263539",foreground="#e9dfbf",fontRatio=.38){
+    const c=document.createElement("canvas");c.width=width;c.height=height;const ctx=c.getContext("2d");ctx.fillStyle=background;ctx.fillRect(0,0,width,height);ctx.fillStyle=foreground;ctx.font=`bold ${Math.floor(height*fontRatio)}px Arial`;ctx.textAlign="center";ctx.textBaseline="middle";ctx.fillText(words,width/2,height/2,width-22);const texture=new T.CanvasTexture(c);texture.colorSpace=T.SRGBColorSpace;return{canvas:c,ctx,texture};
   }
   function amtPlate(words,x,y,z,w,h){const label=amtLabel(words);const mesh=new T.Mesh(new T.PlaneGeometry(w,h),new T.MeshBasicMaterial({map:label.texture}));mesh.position.set(x,y,z);amtScene.add(mesh);return mesh}
   // Wide, worn waiting hall. Registration is at the left wall; Schalter 3 is to the right.
@@ -1174,6 +1174,22 @@ function showRendererFailure(error){
   let amtQrSource="";
   function setAmtQr(svg){if(!svg||svg===amtQrSource)return;amtQrSource=svg;const picture=new Image();picture.onload=()=>{qrCtx.fillStyle="#f6f3e9";qrCtx.fillRect(0,0,256,256);qrCtx.drawImage(picture,0,0,256,256);qrTexture.needsUpdate=true};picture.src="data:image/svg+xml;charset=utf-8,"+encodeURIComponent(svg)}
   const amtCharacters=[],amtTextureLoader=new T.TextureLoader(),amtMobile=matchMedia("(max-width: 700px)").matches;
+  // The simulation includes the complete frame's shallow wall projection.
+  const president=window.BuergeramtStory.presidentPortrait,presidentFrame=new T.Group();
+  presidentFrame.name="Bundespräsident · Frank-Walter Steinmeier";
+  presidentFrame.position.set(president.x,2.22,president.z);presidentFrame.rotation.y=Math.PI;presidentFrame.scale.setScalar(.88);amtScene.add(presidentFrame);
+  const frameGold=new T.MeshStandardMaterial({color:0xe2b853,metalness:.05,roughness:.4,emissive:0x7a541e,emissiveIntensity:.4}),frameDark=am(0x51402a);
+  function portraitBox(w,h,d,material,x,y,z){const mesh=new T.Mesh(new T.BoxGeometry(w,h,d),material);mesh.position.set(x,y,z);presidentFrame.add(mesh);return mesh}
+  portraitBox(1.72,2.25,.09,frameDark,0,0,0);
+  for(const [w,h,x,y] of [[.13,2.25,-.795,0],[.13,2.25,.795,0],[1.72,.13,0,1.06],[1.72,.13,0,-1.06]])portraitBox(w,h,.12,frameGold,x,y,.065);
+  for(const [w,h,x,y] of [[.028,2,-.733,0],[.028,2,.733,0],[1.49,.028,0,.99],[1.49,.028,0,-.99]])portraitBox(w,h,.04,frameGold,x,y,.14);
+  const rosetteGeometry=new T.SphereGeometry(.075,8,6);
+  for(const x of [-.795,.795])for(const y of [-1.06,1.06]){const rosette=new T.Mesh(rosetteGeometry,frameGold);rosette.position.set(x,y,.11);rosette.scale.z=.4;presidentFrame.add(rosette)}
+  const presidentFallback=amtLabel("BUNDESPRÄSIDENT",512,256,"#443b2c","#ead39a");
+  const presidentMaterial=new T.MeshBasicMaterial({map:presidentFallback.texture});
+  const presidentCanvas=new T.Mesh(new T.PlaneGeometry(1.45,1.94),presidentMaterial);presidentCanvas.position.z=.125;presidentFrame.add(presidentCanvas);
+  const presidentName=amtLabel("FRANK-WALTER STEINMEIER",768,128,"#e1c174","#17130c",.75),presidentNameplate=new T.Mesh(new T.PlaneGeometry(1.55,.16),new T.MeshBasicMaterial({map:presidentName.texture}));
+  presidentNameplate.position.set(0,-1.06,.14);presidentFrame.add(presidentNameplate);
   function amtPaintMaterial(height){
     const material=new T.MeshBasicMaterial({transparent:true,alphaTest:.035,depthWrite:false,side:T.DoubleSide});
     const breath={value:0};material.userData.breath=breath;
@@ -1248,6 +1264,7 @@ function showRendererFailure(error){
   const amtStationaryDetails=new Map();
   function loadAmtImages(){
     if(amtImagesRequested)return;amtImagesRequested=true;
+    amtTexture("./assets/buergeramt/president-steinmeier.webp?v=20261012-portrait",texture=>{presidentMaterial.map=texture;presidentMaterial.needsUpdate=true;presidentFallback.texture.dispose()},undefined,true);
     officeAssetPending++;
     const loadDetail=()=>import("./assets/buergeramt/office-detail.js?v=20261011-published-features").then(()=>{
       const detail=window.GermanyAmtOfficeDetail.create(T,{compact:amtMobile,anisotropy:renderer.capabilities.getMaxAnisotropy()});
@@ -1584,7 +1601,7 @@ function showRendererFailure(error){
       actor.mesh.userData.amtForeground=foreground;actor.mesh.renderOrder=200;actor.mesh.layers.set(1);
       actor.mesh.material.depthTest=true;
     }
-    const darkness=Math.max(level.omen.strength,amtIsolation.value);amtScene.fog.density=.46*Math.pow(darkness,1.2);amtScene.background.copy(amtDayColor).lerp(amtScene.fog.color,darkness);const view=level.view;amtCamera.position.set(view.x,1.68,view.z);amtCamera.rotation.set(0,-view.yaw,0);if(level.qrSvg)setAmtQr(level.qrSvg);const now=(level.floorState?.visualTime??performance.now()/1000)*1000;animateAmtCharacters(now,level);animateAmtMoving(now,level);amtGaussian.prepareGeneration(level.clerkPerformance.animation?.generation??0);updateAmtOmenSplat(level);amtGaussian.update(level,amtCharacters,amtMoving,amtCamera);amtGaussian.render(amtCamera);updateAmtMouth(level,now);const calls=level.queueCalls,call=JSON.stringify(calls);if(call!==lastCall){lastCall=call;callCtx.fillStyle="#152527";callCtx.fillRect(0,0,768,256);callCtx.textBaseline="middle";callCtx.fillStyle="#ef6455";calls.forEach(({number,counter},index)=>{const y=35+index*62;callCtx.textAlign="left";callCtx.font="bold 38px monospace";callCtx.fillText("SCHALTER "+counter,20,y,420);callCtx.textAlign="right";callCtx.font="bold 42px monospace";callCtx.fillText(number,748,y,220)});callTexture.needsUpdate=true}renderer.render(amtScene,amtCamera);
+    const darkness=Math.max(level.omen.strength,amtIsolation.value);amtScene.fog.density=.46*Math.pow(darkness,1.2);amtScene.background.copy(amtDayColor).lerp(amtScene.fog.color,darkness);const view=level.view;amtCamera.position.set(view.x,1.68,view.z);amtCamera.rotation.set(view.pitch||0,-view.yaw,0,"YXZ");if(level.qrSvg)setAmtQr(level.qrSvg);const now=(level.floorState?.visualTime??performance.now()/1000)*1000;animateAmtCharacters(now,level);animateAmtMoving(now,level);amtGaussian.prepareGeneration(level.clerkPerformance.animation?.generation??0);updateAmtOmenSplat(level);amtGaussian.update(level,amtCharacters,amtMoving,amtCamera);amtGaussian.render(amtCamera);updateAmtMouth(level,now);const calls=level.queueCalls,call=JSON.stringify(calls);if(call!==lastCall){lastCall=call;callCtx.fillStyle="#152527";callCtx.fillRect(0,0,768,256);callCtx.textBaseline="middle";callCtx.fillStyle="#ef6455";calls.forEach(({number,counter},index)=>{const y=35+index*62;callCtx.textAlign="left";callCtx.font="bold 38px monospace";callCtx.fillText("SCHALTER "+counter,20,y,420);callCtx.textAlign="right";callCtx.font="bold 42px monospace";callCtx.fillText(number,748,y,220)});callTexture.needsUpdate=true}renderer.render(amtScene,amtCamera);
     const omen=level.omen,themed=fever?.active&&fever.strength>0,selected=themed?[...amtCharacters,...amtMoving].find(actor=>(actor.lead?'clerk':actor.animationId??actor.id)===fever.id):null;
     if(omen.strength>0||selected){
       const uniforms=omenMaterial.uniforms;

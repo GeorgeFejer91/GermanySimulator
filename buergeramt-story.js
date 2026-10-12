@@ -9,6 +9,15 @@ const clerks=Object.freeze({
 window.BuergeramtStory=Object.freeze({
  queueCall:Object.freeze({line:"Nächste bitte!",english:"Next, please!",voiceId:clerkIdentity.voiceId,speaker:"FRAU KNICK",actorId:"clerk-3"}),
  playerIdentity:{speaker:"ICH",fullName:"Hans-Peter Mustermann",voiceId:"spieler-hans-peter-mustermann"},
+ presidentPortrait:{
+  name:"Frank-Walter Steinmeier",title:"BUNDESPRÄSIDENT",x:3.4,z:5.43,
+  lines:[
+   {line:"Der Bundespräsident. Ein unglaublich wichtiges Amt.",english:"The Federal President. An incredibly important office."},
+   {line:"Reden halten, Hände schütteln, sehr ernst in die Kamera schauen.",english:"Give speeches, shake hands, look very serious for the camera."},
+   {line:"Und wenn hier das Amt stillsteht, steht er wenigstens würdevoll im Bilderrahmen.",english:"And when this office grinds to a halt, at least he stands there with dignity in his picture frame."},
+   {line:"Also ehrlich: Diesen Job hätte ich wirklich gern.",english:"Honestly, I would really love to have that job."}
+  ]
+ },
  characters:{
   aktenkurier:{speaker:"DER AKTENKURIER",fullName:"Horst Stempelmann",voiceId:"amt-horst-stempelmann",lines:[
    {line:"Stopp. Sie haben den Aktenlauf ohne Laufzettel gekreuzt. Das gilt als Abkürzung und muss gestempelt werden.",tone:"warning",valence:-.55},

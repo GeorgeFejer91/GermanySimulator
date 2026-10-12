@@ -17,7 +17,7 @@ const library=context.window.GermanySimulatorAudioText;
 assert.equal(library.version,8);
 const knickCount=['manifest.json','ambient-manifest.json','queue-call-manifest.json'].reduce((n,file)=>n+(existsSync(join(root,'assets/voices/knick',file))?JSON.parse(readFileSync(join(root,'assets/voices/knick',file),'utf8')).clips.length:0),0);
 const streetDirectory=join(root,'assets/voices/street-wisdom'),streetCount=existsSync(streetDirectory)?readdirSync(streetDirectory).filter(file=>file.endsWith('-manifest.json')).reduce((n,file)=>n+JSON.parse(readFileSync(join(streetDirectory,file),'utf8')).clips.length,0):0;
-const playerManifest=join(root,'assets/voices/player-replies/spieler-hans-peter-mustermann-manifest.json'),playerCount=existsSync(playerManifest)?JSON.parse(readFileSync(playerManifest,'utf8')).clips.length:0;
+const playerDirectory=join(root,'assets/voices/player-replies'),playerCount=existsSync(playerDirectory)?readdirSync(playerDirectory).filter(file=>file.endsWith('-manifest.json')).reduce((n,file)=>n+JSON.parse(readFileSync(join(playerDirectory,file),'utf8')).clips.length,0):0;
 const ambientDirectory=join(root,'assets/voices/office-ambient'),ambientCount=existsSync(ambientDirectory)?readdirSync(ambientDirectory).filter(file=>file.endsWith('-manifest.json')).reduce((n,file)=>n+JSON.parse(readFileSync(join(ambientDirectory,file),'utf8')).clips.length,0):0;
 assert.equal(Object.keys(library.clips).length,113+knickCount+playerCount+ambientCount,"recorded and text-only dialogue need stable IDs");
 const recordedClips=Object.values(library.clips).filter(clip=>clip.recording);

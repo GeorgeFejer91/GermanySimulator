@@ -76,6 +76,15 @@ unavailable audio, regardless of the character's ordinary E-dialogue fallback.
 
 ## Bürgeramt player replies and complete Knick dialogue (2026-10-12)
 
+The portrait's four optional player thoughts reuse the same selected player
+profile and dry processing. The existing builder's `office-monologue` request
+route freezes `presidentPortrait.lines` and checks exact player ownership;
+its separate `spieler-hans-peter-mustermann-portrait-manifest.json` supplement
+shares `assets/voices/player-replies/` and the curator's exact lookup. It leaves
+the 107 answer-label recordings unchanged. Native EOS, independent encoded ASR,
+levels, hashes and the original user's voice-use request govern eligibility.
+Failed takes remain private; perceptual listening is a separate unperformed check.
+
 The queue call “Nächste bitte!” is a separate selected-Knick supplement in
 `assets/voices/knick/queue-call-manifest.json`. It retains her profile, pinned
 renderer, native EOS guards and undertone. The user requested a shouted call;

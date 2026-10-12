@@ -31,6 +31,8 @@ jobs:
         run: node --test tests/running-hotkey.test.mjs
       - name: Check office queue call audio
         run: node --test tests/buergeramt-queue-audio.test.mjs
+      - name: Check president portrait interaction
+        run: node --test tests/buergeramt-president-portrait.test.mjs
       - name: Check law pickup and sirens
         run: node --test tests/law-pickup.test.mjs tests/police-audio.test.mjs tests/police-escalation.test.mjs
       - name: Check fixed character voices

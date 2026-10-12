@@ -218,6 +218,8 @@ def processing_hash(value):
 
 
 def manifest_name(ambient=False):
+    if CUSTOM_PLAN and CUSTOM_PLAN["family"] == "office-monologue":
+        return VOICE + "-portrait-manifest.json"
     return VOICE + "-manifest.json" if CUSTOM_PLAN else ("ambient-manifest.json" if ambient else "manifest.json")
 
 
@@ -243,16 +245,16 @@ def configure_request(args):
     if args.request_file:
         plan = read(args.request_file)
         assert not args.ambient, "Custom families own their authored queues"
-        assert plan["family"] in ("street-wisdom", "office-replies", "office-ambient")
+        assert plan["family"] in ("street-wisdom", "office-replies", "office-ambient", "office-monologue")
         if plan["family"] == "office-ambient":
             assert VOICE.startswith("amt-")
             assert plan["publicAssetFamily"] == "assets/voices/office-ambient"
             assert plan["privateReviewFamily"] == "GermanySimulator office ambient review 2026-10-12"
             assert set(plan["sourceSha256"]) == {"buergeramt-story.js", "buergeramt.js"}
-        elif plan["family"] == "office-replies":
+        elif plan["family"] in ("office-replies", "office-monologue"):
             assert VOICE == "spieler-hans-peter-mustermann"
             assert plan["publicAssetFamily"] == "assets/voices/player-replies"
-            assert plan["privateReviewFamily"] == "GermanySimulator office replies review 2026-10-12"
+            assert plan["privateReviewFamily"] == ("GermanySimulator president portrait review 2026-10-12" if plan["family"] == "office-monologue" else "GermanySimulator office replies review 2026-10-12")
             assert set(plan["sourceSha256"]) == {"buergeramt-story.js", "buergeramt.js"}
             SOURCE_FILES = ("buergeramt-story.js", "buergeramt.js")
         else:
@@ -440,6 +442,17 @@ def reference_license(profile_record):
 def jobs(ambient=False, music_root=None):
     if CUSTOM_PLAN:
         REUSE_EVIDENCE.clear()
+        if CUSTOM_PLAN["family"] == "office-monologue":
+            js = 'global.window={};require("./buergeramt-story.js");console.log(JSON.stringify(window.BuergeramtStory));'
+            story = json.loads(subprocess.check_output(["node", "-e", js], cwd=ROOT, encoding="utf-8"))
+            selected = [dict(job) for job in CUSTOM_PLAN["jobs"] if job["voiceId"] == VOICE]
+            assert len(selected) == len(story["presidentPortrait"]["lines"])
+            for index, (job, row) in enumerate(zip(selected, story["presidentPortrait"]["lines"])):
+                assert job["clipId"] == "player-president-portrait-" + str(index + 1)
+                assert job["voiceId"] == story["playerIdentity"]["voiceId"] and job["profileId"] == PROFILE and job["actorId"] == "player"
+                assert job["text"] == row["line"] and job["english"] == row["english"]
+                assert job["sourceLocator"] == f"buergeramt-story.js presidentPortrait.lines[{index}].line"
+            return selected
         if CUSTOM_PLAN["family"] == "office-ambient":
             js = 'global.window={};require("./buergeramt-story.js");console.log(JSON.stringify(window.BuergeramtStory));'
             story = json.loads(subprocess.check_output(["node", "-e", js], cwd=ROOT, encoding="utf-8"))
