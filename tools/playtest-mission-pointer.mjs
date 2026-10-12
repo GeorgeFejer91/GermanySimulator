@@ -87,7 +87,7 @@ try{
   if(['desktop','android-portrait','fallback'].includes(name)){
    for(const [direction,dx,dz] of [['north',0,-500],['northeast',350,-350],['east',500,0],['southeast',350,350],['south',0,500],['southwest',-350,350],['west',-500,0],['northwest',-350,-350]]){
     await page.evaluate(([dx,dz])=>{window.__originalWaypoint??=Germany3DBridge.getMissionWaypoint;Germany3DBridge.getMissionWaypoint=()=>({id:'visual-bearing',x:Germany3DBridge.player.x+dx,y:Germany3DBridge.player.y+dz});Germany3D.sync()},[dx,dz]);
-    const state=(await checkClearance(page)).pointer;assert.equal(state.pivot.sourceZ,-.42);for(let k=0;k<3;k++)assert.ok(Math.abs(state.pivot.position[k]-state.position[k])<1e-6,'the non-pointer pivot stays at the fixed HUD anchor');assert.ok(Math.hypot(state.pivot.centre[0]-state.position[0],state.pivot.centre[1]-state.position[1])>state.screen.size*.13,'body centre orbits the pivot');bearings.push({direction,pointer:state});await page.screenshot({timeout:120000,path:resolve(out,name+'-'+direction+'.png')});
+    const state=(await checkClearance(page)).pointer;assert.equal(state.pivot.sourceZ,-.42);for(let k=0;k<3;k++)assert.ok(Math.abs(state.pivot.position[k]-state.position[k])<1e-6,'the non-pointer pivot stays at the fixed HUD anchor');assert.ok(Math.hypot(...state.pivot.centre.map((v,k)=>v-state.position[k]))>state.screen.size*.13,'body centre orbits the pivot');bearings.push({direction,pointer:state});await page.screenshot({timeout:120000,path:resolve(out,name+'-'+direction+'.png')});
    }
    await page.evaluate(()=>{Germany3DBridge.getMissionWaypoint=__originalWaypoint;Germany3D.sync()});
   }

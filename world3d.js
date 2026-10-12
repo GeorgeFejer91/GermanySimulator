@@ -395,8 +395,9 @@ function showRendererFailure(error){
     },slot);
   }
   // Screen-space navigation cue, drawn by the same renderer after the city.
-  const missionHudScene=new T.Scene(),missionHudCamera=new T.OrthographicCamera(-1,1,1,-1,.1,100);
-  missionHudCamera.position.z=50;missionHudScene.add(new T.HemisphereLight(0xe4e0d6,0x454440,2.3));
+  const missionHudScene=new T.Scene(),missionHudCamera=new T.OrthographicCamera(-1,1,1,-1,.1,400);
+  // Leave depth room for the tilted body and glow on both sides of the HUD plane.
+  missionHudCamera.position.z=200;missionHudScene.add(new T.HemisphereLight(0xe4e0d6,0x454440,2.3));
   const missionHudLight=new T.DirectionalLight(0xf4f1e8,1.4);missionHudLight.position.set(-3,5,7);missionHudScene.add(missionHudLight);
   const missionDirection=new T.Vector3();
   const missionPointer=new T.Group();missionPointer.name="Mission sausage pointer";missionPointer.visible=false;
@@ -461,10 +462,10 @@ function showRendererFailure(error){
     missionPointer.userData.target=target?.id||null;
     if(!target)return;
     const dx=target.x-bridge.player.x,dz=target.y-bridge.player.y;
-    // Project the ground bearing through the current city camera into HUD XY.
+    // Retain camera-relative depth as well as the screen bearing: +Z is the red end.
     camera.updateMatrixWorld(true);missionDirection.set(dx,0,dz).transformDirection(camera.matrixWorldInverse);
     missionPointer.userData.heading=Math.atan2(dx,dz);
-    missionPointer.rotation.set(-Math.PI/2,0,Math.atan2(-missionDirection.x,missionDirection.y),'ZXY');
+    missionPointer.rotation.set(-Math.atan2(Math.hypot(missionDirection.x,missionDirection.y),missionDirection.z),0,Math.atan2(-missionDirection.x,missionDirection.y),'ZXY');
     wurstPrintFlip.value=missionPointer.rotation.z<0?1:0;
   }
   if(pointerSpace)new ResizeObserver(layoutMissionPointer).observe(pointerSpace);

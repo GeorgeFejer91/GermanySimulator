@@ -25,11 +25,18 @@ test('mission compass follows every office entrance and nearest unfinished Stadt
 test('HUD sausage stays at the upper edge and points along the camera-projected bearing',()=>{
  const extract=name=>{const a=render.indexOf('  function '+name+'(){'),b=render.indexOf('\n  }',a);return render.slice(a,b+4)};
  let target=null;const player={x:560,y:560,facing:2.5},position={set(x,y,z){Object.assign(this,{x,y,z})}},pointer={rotation:{set(x,y,z,order){Object.assign(this,{x,y,z,order})}},position,scale:{setScalar(x){this.value=x}},userData:{}};
- const direction={set(x,y,z){Object.assign(this,{x,y,z});return this},transformDirection(){this.y=-this.z*.6;return this}};
+ const direction={set(x,y,z){Object.assign(this,{x,y,z});return this},transformDirection(){const length=Math.hypot(this.x,this.z);this.y=-this.z*.6/length;this.z=this.z*.8/length;this.x/=length;return this}};
  let rect={left:576,right:704,top:60,width:128,height:128};
  const scope=vm.createContext({bridge:{player,getMissionWaypoint:()=>target},missionGuide:{dataset:{}},wurstPrintFlip:{value:0},showMissionPointer:visible=>{pointer.visible=visible},pointerSpace:{getBoundingClientRect:()=>rect},missionPointer:pointer,missionDirection:direction,camera:{updateMatrixWorld(){},matrixWorldInverse:{}},missionHudCamera:{updateProjectionMatrix(){}},innerWidth:1280,innerHeight:800,document:{querySelector:()=>null}});
  vm.runInContext(extract('layoutMissionPointer')+extract('updateMissionPointer'),scope);scope.layoutMissionPointer();
  for(const [dx,dz] of [[0,500],[500,0],[0,-500],[-500,0],[350,-280]]){target={id:'entrance',x:player.x+dx,y:player.y+dz};scope.updateMissionPointer();assert.equal(pointer.visible,true);const length=Math.hypot(dx,dz);assert.ok(Math.abs(Math.sin(pointer.userData.heading)-dx/length)<1e-9);const screenLength=Math.hypot(dx,dz*.6);assert.ok(Math.abs(-Math.sin(pointer.rotation.z)-dx/screenLength)<1e-9);assert.ok(Math.abs(Math.cos(pointer.rotation.z)+dz*.6/screenLength)<1e-9);assert.equal(pointer.rotation.order,'ZXY');assert.equal(position.z,0)}
+ // Transform the model's actual +Z axis through the Euler rotation. Flattening
+ // it into HUD XY passes a compass-heading check but fails this 3D tip contract.
+ for(let i=0;i<360;i++){
+  const angle=i*Math.PI/180;target={id:'entrance',x:player.x+500*Math.sin(angle),y:player.y+500*Math.cos(angle)};scope.updateMissionPointer();
+  const {x,z}=pointer.rotation,axis=[Math.sin(z)*Math.sin(x),Math.cos(z)*-Math.sin(x),Math.cos(x)];
+  for(const [k,key] of ['x','y','z'].entries())assert.ok(Math.abs(axis[k]-direction[key])<1e-9,`red tip follows camera-relative ${key} at bearing ${i}`);
+ }
  for(const [width,height] of [[1280,800],[390,844],[844,390],[320,568]]){scope.innerWidth=width;scope.innerHeight=height;const size=width<=1000?88:128;rect={left:width<=1000?36:(width-size)/2,right:width<=1000?36+size:(width+size)/2,top:44,width:size,height:size};scope.layoutMissionPointer();const {x,y}=pointer.userData.screen;assert.equal(y-size/2,44);assert(x-size/2>=8);assert(x+size/2<=width-8);assert.equal(position.x,x-width/2);assert.equal(position.y,height/2-y)}
  target={id:'entrance',x:player.x+35,y:player.y};scope.updateMissionPointer();assert.equal(pointer.visible,false);
  target=null;scope.updateMissionPointer();assert.equal(pointer.visible,false);assert.equal(pointer.userData.target,null);

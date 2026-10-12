@@ -45,7 +45,7 @@ centre between the status controls on wide screens and below the shared top rail
 procedural fallback share the shape and glowing end. The surface print flips
 its orientation when needed to keep the word readable while the pointer turns. Measured print and notice/file-rail clearance follow font loading, resizing and enlarged text.
 Its 3D rotation pivots about one quarter of the way in from the non-glowing end,
-so the body centre and red tip swing around a fixed HUD anchor. Its bearing follows the current camera projection. It is a
+so the body centre and red tip swing around a fixed HUD anchor. Its bearing follows the full camera-relative ground direction, including depth: it tilts toward/away from the viewer as well as turning across the screen, without an unrelated axial spin. It is a
 compass bearing, with existing streets, crossings and interaction rules
 still governing travel. It hides during title, dialogue, file/modal, office and
 end states, and within 36 units of its target. It has no collision footprint.
