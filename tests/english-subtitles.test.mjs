@@ -107,7 +107,7 @@ assert.match(game,/localStorage\.setItem\("germany-simulator-english-subtitles"/
 function subtitlePreference(saved){
  const button={textContent:'',attributes:{},setAttribute(name,value){this.attributes[name]=value}},requests=[],storage=new Map(saved===undefined?[]:[['germany-simulator-english-subtitles',saved]]);
  let clears=0,pending=false;
- const scope={state:{subtitlesOn:false},document:{getElementById:()=>button},localStorage:{getItem:key=>storage.get(key),setItem:(key,value)=>storage.set(key,value)},activeStimulus:null,textOnlyBark:null,hasStimulusFamily:()=>pending,clearSubtitle:()=>clears++,startSubtitle(){},STIMULUS_PRIORITY:{CRITICAL:3},showWorldBark:(speaker,text,urgent,recording,placement,options)=>requests.push({speaker,text,options})};
+ const scope={window:{},state:{subtitlesOn:false},document:{getElementById:()=>button},localStorage:{getItem:key=>storage.get(key),setItem:(key,value)=>storage.set(key,value)},activeStimulus:null,textOnlyBark:null,hasStimulusFamily:()=>pending,clearSubtitle:()=>clears++,startSubtitle(){},STIMULUS_PRIORITY:{CRITICAL:3},showWorldBark:(speaker,text,urgent,recording,placement,options)=>requests.push({speaker,text,options})};
  const start=game.indexOf('const SUBTITLE_APPROVAL_LINES='),end=game.indexOf('\nwindow.addEventListener("resize"',start);
  vm.runInNewContext(game.slice(start,end),scope);
  return {button,requests,storage,set pending(value){pending=value},get clears(){return clears}};

@@ -17,6 +17,18 @@ let queueCallPending=-1,queueCallReadyAt=0,queueCallSpeaking=false,queueCallCool
 function requestFullscreen(){window.GermanyFullscreen?.autoEnter()}
 // Every callback belongs to one attempt and one visible speech/action cue.
 let attempt=0,cue=0,callOutcome="",speechGateTimer=null,recordedSpeech=null,recordedCleanup=null,officeSpeechBusy=false,sceneContinuation=null;
+let officeSubtitle=null;
+function refreshSubtitle(){
+ const box=document.getElementById("english-subtitle");if(!box)return;
+ const layout=window.GermanySubtitleLayout,visible=active&&options?.subtitlesOn?.()&&officeSubtitle;
+ if(visible&&!officeSubtitle.parts)officeSubtitle.parts=layout?.paginate(officeSubtitle.text)||[officeSubtitle.text];
+ const parts=visible?officeSubtitle.parts:[];
+ const progress=visible?Math.min(.999,recordedSpeech?.duration>0?recordedSpeech.currentTime/recordedSpeech.duration:(performance.now()-officeSubtitle.at)/officeSubtitle.duration):0;
+ const text=visible?(layout?.captionAtProgress(parts,progress)||parts[0]):"";
+ if(box.textContent!==text)box.textContent=text;box.hidden=!visible;box.lang="en";
+ document.getElementById("app")?.classList.toggle("subtitles-visible",!!visible);
+}
+window.addEventListener("caption-layout-change",()=>{if(officeSubtitle)officeSubtitle.parts=null;if(active)refreshSubtitle()});
 let phoneSilent=false,phoneWarnings=0,phoneWarningTimer=null,phoneRetryTimer=null,registrationNode="",registrationReply=null,registrationCompleted=false;
 const registrationStamps=new Set();
 function clearPhonePressure(){if(phoneWarningTimer!==null)clearTimer(phoneWarningTimer);if(phoneRetryTimer!==null)clearTimer(phoneRetryTimer);phoneWarningTimer=phoneRetryTimer=null}
@@ -39,7 +51,7 @@ const stationaryClocks={"clerk-desk-1":1.4,"clerk-desk-2":2.2,"clerk-desk-3":.25
 function resetStationaryClocks(){Object.assign(stationaryClocks,{"clerk-desk-1":1.4,"clerk-desk-2":2.2,"clerk-desk-3":.25,"clerk-desk-4":2.8,"amt-konrad-wohnungszettel":0,"amt-mechthild-elternbogen":3.7,"amt-wolfram-rentenbescheid":7.1})}
 function defer(callback,delay){const owner=attempt;const id=setTimeout(()=>{pendingTimers.delete(id);if(active&&owner===attempt)callback()},delay);pendingTimers.add(id);return id}
 function clearTimer(id){clearTimeout(id);pendingTimers.delete(id)}
-function cancelSpeech(){sceneContinuation=null;queueCallSpeaking=false;lips.finish();feverClock?.release();cue++;officeSpeechBusy=false;clerkSpeaking=false;clerkAnimation?.setSpeech(false);if(speechGateTimer!==null)clearTimer(speechGateTimer);speechGateTimer=null;recordedCleanup?.();if(recordedSpeech){recordedSpeech.pause();recordedSpeech.removeAttribute("src");recordedSpeech.load();recordedSpeech=null}try{const engine=window.speechSynthesis;if(!options?.cityAudioActive?.()&&(engine?.speaking||engine?.pending))engine.cancel()}catch{}}
+function cancelSpeech(){officeSubtitle=null;refreshSubtitle();sceneContinuation=null;queueCallSpeaking=false;lips.finish();feverClock?.release();cue++;officeSpeechBusy=false;clerkSpeaking=false;clerkAnimation?.setSpeech(false);if(speechGateTimer!==null)clearTimer(speechGateTimer);speechGateTimer=null;recordedCleanup?.();if(recordedSpeech){recordedSpeech.pause();recordedSpeech.removeAttribute("src");recordedSpeech.load();recordedSpeech=null}try{const engine=window.speechSynthesis;if(!options?.cityAudioActive?.()&&(engine?.speaking||engine?.pending))engine.cancel()}catch{}}
 let active=false,stage="closed",link=null,number="",registeredName="",activated=false,qrSvg="",queueDisplay="—",queueIndex=0,queueClock=0,lastScanId="",deadline=0,clerkIndex=0,callPending=false,callTriggered=false,callCommitted=false,callArmTimer=null,clockAnchor=null,policeDoneHandler=null,policeStartHandler=null,policeDisconnectHandler=null,options=null,ambientClock=0,ambientIndex=0,officeAudio=null;
 let timing={rttMs:null,oneWayMs:0,jitterMs:0,lastPongAt:null,clockOffsetMs:null,clockUncertaintyMs:null,startLagMs:null,phoneReadyMs:null,phoneFastReadyMs:null,deskStartLagMs:0,deskMsPerChar:55,call:null,cues:{},desk:{}};
 let pingSerial=0,pingTimer=null,hostVoiceStartupMs=null,hostVoiceAttempts=0;const outstandingPings=new Map(),rttSamples=[];
@@ -375,6 +387,7 @@ function updateCharacters(dt){
  }
 }
 function nearestCharacter(){if(!["walk-sign","waiting"].includes(stage))return null;let found=null,distance=1.65;for(const actor of characters){if(actor.id==="aktenkurier"||actor.returning)continue;const d=Math.hypot(view.x-actor.x,view.z-actor.z);if(d<distance){found=actor;distance=d}}for(const [id,patron] of Object.entries(story.patrons)){const d=Math.hypot(view.x-patron.x,view.z-patron.z);if(d<distance){found={id,x:patron.x,z:patron.z,static:true};distance=d}}return found}
+
 function showCharacter(actor){
  encounterArmed=true;
  const entry=actor.static?story.patrons[actor.id]:story.characters[actor.id],index=actor.static?(patronEncounters[actor.id]||0):actor.encounters++,spoken=entry.lines[index%entry.lines.length];
@@ -388,7 +401,8 @@ function nearPresidentPortrait(){return stage!=="outside"&&distanceTo(story.pres
 function showPresidentPortrait(){
  const scan=lastScanId,resumeStatus=status.textContent;let index=0;
  setStage("portrait");setStatus("BUNDESPRÄSIDENT · GEDANKEN");
- const next=()=>{if(index>=story.presidentPortrait.lines.length){setStage(queueStage());setStatus(activated?"WARTENUMMER "+number+" · AUFRUFTAFEL":scan===lastScanId?resumeStatus:"NAME AM TELEFON EINTRAGEN");return}content(story.playerIdentity.speaker,story.presidentPortrait.lines[index++].line,[{run:next}],null,null,null,null,{fallback:"captions"})};
+ const parts=[0,2].map(start=>story.presidentPortrait.lines.slice(start,start+2));
+ const next=()=>{if(index>=parts.length){setStage(queueStage());setStatus(activated?"WARTENUMMER "+number+" · AUFRUFTAFEL":scan===lastScanId?resumeStatus:"NAME AM TELEFON EINTRAGEN");return}const segments=parts[index++];content(story.playerIdentity.speaker,segments.map(row=>row.line).join(" "),[{run:next}],null,null,null,null,{fallback:"captions",segments})};
  next();
 }
 function walking(){return ["outside","walk-sign","waiting","walk-counter"].includes(stage)}
@@ -399,9 +413,18 @@ function queueStage(){return activated?(deadline>0?"walk-counter":"waiting"):"wa
 function refuseCounter(desk){interactingCounter=desk;encounterArmed=true;setStage("early");content(story.clerks[desk].speaker+" · SCHALTER "+desk,story.clerkRefusal,[{run:()=>setStage(queueStage())}]);setStatus("FALSCHER AUFRUF · "+queueDisplay)}
 function speechReadableMs(text,delivery){return delivery?.readableMs??Math.max(3500,Math.min(14000,text.length*55*.96/(delivery?.rate??.96)))}
 function say(text,onComplete,onStart,onBoundary,delivery=null,voiceId="",allowCatalogClip=true){
+ if(delivery?.segments?.length){
+  const owner=attempt,visibleCue=cue,segments=delivery.segments;let index=0;
+  const current=()=>active&&owner===attempt&&visibleCue===cue&&line.textContent===text;
+  const next=()=>{if(!current())return;if(index===segments.length){onComplete?.("voice");return}const segment=segments[index++];say(segment.line,next,onStart,onBoundary,{...delivery,segments:null,isCurrent:current,subtitle:segment.english},voiceId,allowCatalogClip)};
+  next();return;
+ }
  delivery={...window.BuergeramtVoiceProfiles?.deliveryFor(voiceId),...delivery};
  const owner=attempt,visibleCue=cue,readableMs=speechReadableMs(text,delivery)/timeScale();
  const current=()=>active&&owner===attempt&&visibleCue===cue&&(delivery.isCurrent?delivery.isCurrent():line.textContent===text);
+ const originalStart=onStart,originalComplete=onComplete;
+ onStart=(mode,receipt)=>{officeSubtitle={text:delivery.subtitle||window.GermanySimulatorAudioText?.lines?.[text]||Object.values(window.GermanySimulatorAudioText?.recordings||{}).find(clip=>clip.source===text)?.english||text,at:performance.now(),duration:receipt?.durationMs||readableMs};refreshSubtitle();originalStart?.(mode,receipt)};
+ onComplete=mode=>{officeSubtitle=null;refreshSubtitle();originalComplete?.(mode)};
  const begin=()=>{
   if(!current())return;
   const catalog=window.GermanySimulatorAudioText;
@@ -691,6 +714,7 @@ function ambientStep(dt){
 }
 function update(dt){
  if(!active||document.hidden)return;
+ refreshSubtitle();
  if(window.Germany3D?.ready&&!root.classList.contains("first-person"))root.classList.add("first-person");
  const realElapsed=Number.isFinite(dt)?Math.min(.1,Math.max(0,dt)):0,previousFloor=floorClock,inside=view.z<door.z;
  if(inside)floorClock+=realElapsed;
@@ -917,7 +941,7 @@ document.addEventListener("visibilitychange",()=>{if(document.hidden)held.clear(
 document.addEventListener("pointermove",event=>{if(active&&walking()&&!omen.phase&&event.buttons===1&&!event.target.closest("button"))view.yaw+=event.movementX*.004*timeScale()});
 document.querySelectorAll("[data-amt-key]").forEach(button=>{const key=button.dataset.amtKey;button.addEventListener("pointerdown",e=>{if(!active||!walking()||omen.phase)return;e.preventDefault();button.setPointerCapture(e.pointerId);held.add(key)});for(const type of ["pointerup","pointercancel","lostpointercapture"])button.addEventListener(type,()=>held.delete(key))});
 document.getElementById("amt-touch-e").addEventListener("click",interact);document.getElementById("amt-leave").addEventListener("click",()=>close());exit.addEventListener("click",()=>close());
-window.BuergeramtLevel={open,requestFullscreen,get registrationTicket(){return number},get activeClerkCounter(){return interactingCounter||assignedCounter||3},get queueCalls(){return counterCalls.map((number,index)=>({number,counter:index+1}))},get assignedCounter(){return{number:assignedCounter,x:counter.x,z:counter.z}},get registration(){return{node:registrationNode,completed:registrationCompleted,phoneSilent,warnings:phoneWarnings,stamps:[...registrationStamps]}},get lipSpeech(){return lips.sample()},replay(config){close(false);open(config)},update,interact,setOfficeObstacles,get active(){return active},get timeScale(){return timeScale()},get floorState(){return{time:floorClock,visualTime:visualClock,goop:goop.goop(floorClock),speed:timeScale(),visit:attempt}},get audioTextBusy(){return officeSpeechBusy},get stage(){return stage},get queueDisplay(){return queueDisplay},get qrSvg(){return qrSvg},get phoneUrl(){return link?BuergeramtLink.phoneUrl(link.invitation,options.subtitlesOn?.()):""},get timing(){return JSON.parse(JSON.stringify(timing))},get view(){return{x:view.x,z:view.z,yaw:view.yaw,pitch:view.pitch||0,walkedDistance:view.walkedDistance,positionGeneration:view.positionGeneration}},get characters(){return characters.map(actor=>({id:actor.id,x:actor.x,z:actor.z,walkedDistance:actor.walkedDistance,positionGeneration:actor.positionGeneration,direction:actor.direction,heading:actor.heading??Math.PI,mode:actor.mode,phase:characterPhase(actor),frame:Math.min(7,Math.floor(characterPhase(actor)*8)),animation:characterAnimation(actor)}))},get stationaryAnimations(){return{
+window.BuergeramtLevel={open,requestFullscreen,refreshSubtitle,get registrationTicket(){return number},get activeClerkCounter(){return interactingCounter||assignedCounter||3},get queueCalls(){return counterCalls.map((number,index)=>({number,counter:index+1}))},get assignedCounter(){return{number:assignedCounter,x:counter.x,z:counter.z}},get registration(){return{node:registrationNode,completed:registrationCompleted,phoneSilent,warnings:phoneWarnings,stamps:[...registrationStamps]}},get lipSpeech(){return lips.sample()},replay(config){close(false);open(config)},update,interact,setOfficeObstacles,get active(){return active},get timeScale(){return timeScale()},get floorState(){return{time:floorClock,visualTime:visualClock,goop:goop.goop(floorClock),speed:timeScale(),visit:attempt}},get audioTextBusy(){return officeSpeechBusy},get stage(){return stage},get queueDisplay(){return queueDisplay},get qrSvg(){return qrSvg},get phoneUrl(){return link?BuergeramtLink.phoneUrl(link.invitation,options.subtitlesOn?.()):""},get timing(){return JSON.parse(JSON.stringify(timing))},get view(){return{x:view.x,z:view.z,yaw:view.yaw,pitch:view.pitch||0,walkedDistance:view.walkedDistance,positionGeneration:view.positionGeneration}},get characters(){return characters.map(actor=>({id:actor.id,x:actor.x,z:actor.z,walkedDistance:actor.walkedDistance,positionGeneration:actor.positionGeneration,direction:actor.direction,heading:actor.heading??Math.PI,mode:actor.mode,phase:characterPhase(actor),frame:Math.min(7,Math.floor(characterPhase(actor)*8)),animation:characterAnimation(actor)}))},get stationaryAnimations(){return{
  "clerk-desk-1":window.BuergeramtAnimationClock?.ambientClerk(stationaryClocks["clerk-desk-1"],attempt),
  "clerk-desk-2":window.BuergeramtAnimationClock?.ambientClerk(stationaryClocks["clerk-desk-2"],attempt),
  "clerk-desk-3":window.BuergeramtAnimationClock?.ambientClerk(stationaryClocks["clerk-desk-3"],attempt),

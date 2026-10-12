@@ -121,3 +121,7 @@ the former 1.8-second deadline. Cancellation still clears the media and rejects
 stale events; a missing or unstarted recording retains her caption fallback.
 
 Native recorded playback uses actual currentTime advances to renew a finite 20-second no-progress timeout. Repeated events with an unchanged playhead do not renew it; hidden or explicit pauses preserve the remaining interval, and cancellation keeps cue ownership. A slowly advancing recording can finish naturally instead of being cut off at its wall-clock duration.
+
+### Office subtitle opt-in and portrait continuity (2026-10-12)
+
+English subtitles default off until the player enables the shared control; an explicit saved opt-in persists. Bürgeramt speech uses that same preference and rail, with recording-playhead pagination, immediate toggle refresh, and cancellation cleanup. German in-scene source dialogue remains available. The Steinmeier portrait displays exactly two parts (original passages 1–2 and 3–4), retaining every authored word and playing all four existing player recordings consecutively. Each segment belongs to the current visit and visible combined part; only both segment completions advance the part. No movement, collision, camera, scale or painted animation behavior changes in this scope.

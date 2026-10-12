@@ -15,7 +15,9 @@ test('the portrait requires a nearby E and its inner monologue returns without a
  h.key('KeyE');h.key('KeyE','keyup');assert.equal(lookups.length,1,'duplicate E cannot skip or stack speech');
  const seen=[];for(let i=0;i<1600&&h.level.stage==='portrait';i++){const line=h.node('amt-line').textContent;if(seen.at(-1)!==line)seen.push(line);h.elapse(.05)}
  assert.equal(h.level.stage,'walk-sign');
- assert.deepEqual(seen,Array.from(h.window.BuergeramtStory.presidentPortrait.lines,row=>row.line));
+ const authored=Array.from(h.window.BuergeramtStory.presidentPortrait.lines,row=>row.line);
+ assert.equal(seen.length,2);assert.equal(seen.join(" "),authored.join(" "));
+ assert.deepEqual(lookups.map(row=>row.text),authored);
  assert(lookups.every(row=>row.voiceId==='spieler-hans-peter-mustermann'));
  assert.equal(h.synth.spoken.length,0,'missing player audio preserves internal captions');
  assert.equal(h.counts.form,0);assert.equal(h.level.registrationTicket,'');
@@ -43,4 +45,15 @@ test('the projecting frame keeps player bodies separated at ordinary and delayed
   for(let i=0;i<180;i++){h.level.update(dt);assert(h.level.view.z+.22<=5.27+.001,'body cannot pass into the projecting gold frame')}
   h.key('KeyS','keyup');assert(h.level.view.z>4.96,'player can approach the wall mount');
  }
+});
+
+test('office English subtitles require opt-in and refresh during a portrait part',()=>{
+ const h=harness('host',{cinematics:false});let enabled=false;
+ h.config.subtitlesOn=()=>enabled;h.level.replay(h.config);approach(h);h.level.interact();
+ const box=h.node('english-subtitle');assert.equal(box.hidden,true);
+ enabled=true;h.level.refreshSubtitle();assert.equal(box.hidden,false);
+ assert.equal(box.textContent,h.window.BuergeramtStory.presidentPortrait.lines[0].english);
+ enabled=false;h.level.refreshSubtitle();assert.equal(box.hidden,true);assert.equal(box.textContent,'');
+ enabled=true;h.elapse(5);h.level.refreshSubtitle();assert.equal(box.hidden,false);
+ h.node('amt-leave').click();assert.equal(box.hidden,true);assert.equal(box.textContent,'');
 });

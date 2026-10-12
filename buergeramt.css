@@ -2,8 +2,9 @@
 .amt-level .amt-sheet{display:none!important}
 .amt-sequence #amt-direct-reset{visibility:hidden}
 .amt-sequence #amt-counter-notice{display:none}
-.amt-inside #english-subtitle{display:none}
+.amt-inside #english-subtitle{z-index:232}
 #amt-walk-hud{--subtitle-height:0px}
+.amt-inside #app.subtitles-visible #amt-walk-hud{--subtitle-height:69px}
 .amt-walk-hud.sequence :is(.amt-walk-top,.amt-reticle,.amt-walk-bottom,.amt-touch-controls){display:none}
 #amt-walk-hud.sequence #amt-ambient{bottom:calc(max(18px,env(safe-area-inset-bottom)) + var(--subtitle-height,0px));max-height:calc(100% - var(--amt-caption-top,12px) - max(18px,env(safe-area-inset-bottom)) - var(--subtitle-height,0px));box-sizing:border-box;padding:6px 3px;overflow:auto;pointer-events:auto;background:linear-gradient(transparent,#10191bcc 16%,#10191bcc 84%,transparent)}
 .amt-inside.amt-sequence #amt-mix{top:12px;left:12px}
