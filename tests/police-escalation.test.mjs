@@ -4,7 +4,7 @@ import {readFileSync,statSync} from "node:fs";
 import {join} from "node:path";
 import vm from "node:vm";
 
-const game=readFileSync("game.js","utf8"),world3d=readFileSync("world3d.js","utf8"),assetRoot=join("assets","models","police-response");
+const game=readFileSync("game.js","utf8"),world3d=readFileSync("world3d.js","utf8").replace(/\r\n/g,"\n"),assetRoot=join("assets","models","police-response");
 const assets=[
  ["black-helicopter.glb","fc2285de51397b639c3c974318fdd4ecf8ec295275bb216febc6bbc4788e0832"]
 ];

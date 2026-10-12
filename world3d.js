@@ -1213,9 +1213,9 @@ function showRendererFailure(error){
     window.GermanyAmtLips.installMask(T,actor);amtCharacters.push(actor);
   }
   amtCharacter("clerk",3.9,-9.77,.25,1.82,{id:"amt-brunhilde-knick",fullName:"Brunhilde Knick",voiceId:"amt-brunhilde-knick",animationId:"clerk-desk-3",counter:3});
-  amtCharacter("clerk",-5.8,-9.77,1.4,1.76,{id:"amt-erna-frist",fullName:"Erna Frist",voiceId:"amt-erna-frist",animationId:"clerk-desk-1",counter:1});
-  amtCharacter("clerk",-1.6,-9.77,2.2,1.76,{id:"amt-ottilie-durchschlag",fullName:"Ottilie Durchschlag",voiceId:"amt-ottilie-durchschlag",animationId:"clerk-desk-2",counter:2});
-  amtCharacter("clerk",6.2,-9.77,2.8,1.82,{id:"amt-hedwig-zustaendig",fullName:"Hedwig Zuständig",voiceId:"amt-hedwig-zustaendig",animationId:"clerk-desk-4",counter:4});
+  amtCharacter("clerk",-5.8,-9.77,1.4,1.76,{id:"amt-brunhilde-knick",fullName:"Brunhilde Knick",voiceId:"amt-brunhilde-knick",animationId:"clerk-desk-1",counter:1});
+  amtCharacter("clerk",-1.6,-9.77,2.2,1.76,{id:"amt-brunhilde-knick",fullName:"Brunhilde Knick",voiceId:"amt-brunhilde-knick",animationId:"clerk-desk-2",counter:2});
+  amtCharacter("clerk",6.2,-9.77,2.8,1.82,{id:"amt-brunhilde-knick",fullName:"Brunhilde Knick",voiceId:"amt-brunhilde-knick",animationId:"clerk-desk-4",counter:4});
   amtCharacter("renter",-5.9,1.39,0,1.83,{id:"amt-konrad-wohnungszettel",fullName:"Konrad Wohnungszettel",voiceId:"amt-konrad-wohnungszettel"});
   amtCharacter("parent",5.5,1.39,1.1,1.9,{id:"amt-mechthild-elternbogen",fullName:"Mechthild Elternbogen",voiceId:"amt-mechthild-elternbogen"});
   amtCharacter("pensioner",1.7,-1.39,2.0,1.82,{id:"amt-wolfram-rentenbescheid",fullName:"Wolfram Rentenbescheid",voiceId:"amt-wolfram-rentenbescheid"});

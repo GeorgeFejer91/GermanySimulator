@@ -27,8 +27,8 @@ test('each named office speaker has one immutable, exact-text browser delivery',
     ...Object.values(story.clerks).map(character => character.voiceId)
   ];
   assert.equal(expected.length, 15);
-  assert.equal(new Set(expected).size, 15);
-  assert.deepEqual(Object.keys(registry.byVoiceId).sort(), expected.sort());
+  assert.equal(new Set(expected).size, 12);
+  assert.deepEqual(Object.keys(registry.byVoiceId).sort(), [...new Set(expected)].sort());
   assert.equal(Object.isFrozen(registry), true);
   assert.equal(Object.isFrozen(registry.byVoiceId), true);
   assert.equal(savedPrivateIds.size, 15);
@@ -46,7 +46,8 @@ test('each named office speaker has one immutable, exact-text browser delivery',
     assert.equal(profile.candidateStatus, 'private-unlistened', voiceId);
     boundPrivateIds.add(profile.candidateProfileId);
   }
-  assert.equal(boundPrivateIds.size, 15);
+  assert.equal(boundPrivateIds.size, 12);
+  for(const id of ['amt-erna-frist','amt-ottilie-durchschlag','amt-hedwig-zustaendig'])assert.equal(registry.deliveryFor(id),null);
   assert.equal(registry.deliveryFor('desk-clone'), null);
   assert.deepEqual({ ...registry.deliveryFor('amt-horst-stempelmann') }, { rate: .82, pitch: .72 });
 });

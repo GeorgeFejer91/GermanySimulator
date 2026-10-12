@@ -43,14 +43,14 @@ const silentPatrons=[...world.matchAll(/amtCharacter\("(renter|parent|pensioner)
 assert.equal(silentPatrons.length,3,"all three static Bürgeramt patrons need readable identities");
 for(const person of silentPatrons){assert.equal(person.id,person.voiceId);modeledVoiceIds.add(person.voiceId)}
 const clerks=Object.entries(officeContext.window.BuergeramtStory.clerks);
-assert.equal(clerks.length,4,'all four counter figures have separate identities');
+assert.equal(clerks.length,4,'all four counter slots use the same Frau Knick identity');
 for(const [counter,person] of clerks){
  modeledVoiceIds.add(person.voiceId);
  assert.ok(world.includes(`id:"${person.voiceId}",fullName:"${person.fullName}",voiceId:"${person.voiceId}",animationId:"clerk-desk-${counter}",counter:${counter}`),'visual counter identity '+counter);
 }
 const portraitVoiceIds=new Set(quizPeople.map(person=>person.voiceId));
 const archetypeVoiceIds=new Set(["tourist-guenther-liegestuhl","touristin-walburga-handtuch"]);
-assert.equal(modeledVoiceIds.size,48,"every modeled nonpolitical identity has its own profile");
+assert.equal(modeledVoiceIds.size,45,"every modeled nonpolitical identity has its own profile; four desks share Knick");
 assert.equal(portraitVoiceIds.size,9,"separate quiz portrait speaker identities");
 assert.equal(archetypeVoiceIds.size,2,"towel archetypes are review voices, not extra spawned NPCs");
 const allVoiceIds=new Set([...cast.characters,...cast.roleProfiles].map(person=>person.voiceId));

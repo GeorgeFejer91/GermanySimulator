@@ -11,7 +11,7 @@ const people={...story.characters,...Object.fromEntries(['renter','parent','pens
 
 test('every ambient remark has exact recorded words from its actual selected character',()=>{
  assert.equal(story.ambient.length,21);assert.equal(new Set(story.ambient.map(row=>row.id)).size,21);
- for(const row of story.ambient){const person=people[row.actor],path=catalog.recordedClip(person.voiceId,row.text),clip=catalog.recordings[path];assert(path,row.id);assert.equal(clip.profileId,catalog.productionVoices[person.voiceId].profileId);assert.equal(clip.source,row.text);assert.equal(clip.english,row.english);assert.equal(clip.actorId,row.actor);}
+ for(const row of story.ambient){const person=people[row.actor],path=catalog.recordedClip(person.voiceId,row.text),clip=catalog.recordings[path];assert(path,row.id);assert.equal(clip.profileId,catalog.productionVoices[person.voiceId].profileId);assert.equal(clip.source,row.text);assert.equal(clip.english,row.english);if(row.actor.startsWith('clerk-')){assert.equal(person,story.clerkIdentity);assert(path.startsWith('./assets/voices/knick/'),'restore the exact original angry counter take')}else assert.equal(clip.actorId,row.actor);}
 });
 
 test('ambient selection varies voices and text while a failed or absent catalogue stays silent',()=>{

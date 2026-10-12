@@ -247,27 +247,6 @@
         "character-review.js frau-sandale preview",
         "game.js crowdArchetypes[towel-woman].barks[region] as archetype audition text; not the runtime crowd actor identity"
       ]
-    },
-    {
-      "voiceId": "amt-erna-frist",
-      "sourcePools": [
-        "buergeramt-story.js clerks[1] / clerkRefusal",
-        "buergeramt-story.js ambient.amt-ambient-original"
-      ]
-    },
-    {
-      "voiceId": "amt-ottilie-durchschlag",
-      "sourcePools": [
-        "buergeramt-story.js clerks[2] / clerkRefusal",
-        "buergeramt-story.js ambient.amt-ambient-warteschleife"
-      ]
-    },
-    {
-      "voiceId": "amt-hedwig-zustaendig",
-      "sourcePools": [
-        "buergeramt-story.js clerks[4] / clerkRefusal",
-        "buergeramt-story.js ambient.amt-ambient-moment"
-      ]
     }
   ],
   "pools": {
@@ -2112,14 +2091,14 @@
     "buergeramtCounterClerks": {
       "identities": {
         "1": {
-          "speaker": "FRAU FRIST",
-          "fullName": "Erna Frist",
-          "voiceId": "amt-erna-frist"
+          "speaker": "SACHBEARBEITERIN FRAU KNICK",
+          "fullName": "Brunhilde Knick",
+          "voiceId": "amt-brunhilde-knick"
         },
         "2": {
-          "speaker": "FRAU DURCHSCHLAG",
-          "fullName": "Ottilie Durchschlag",
-          "voiceId": "amt-ottilie-durchschlag"
+          "speaker": "SACHBEARBEITERIN FRAU KNICK",
+          "fullName": "Brunhilde Knick",
+          "voiceId": "amt-brunhilde-knick"
         },
         "3": {
           "speaker": "SACHBEARBEITERIN FRAU KNICK",
@@ -2127,9 +2106,9 @@
           "voiceId": "amt-brunhilde-knick"
         },
         "4": {
-          "speaker": "FRAU ZUSTÄNDIG",
-          "fullName": "Hedwig Zuständig",
-          "voiceId": "amt-hedwig-zustaendig"
+          "speaker": "SACHBEARBEITERIN FRAU KNICK",
+          "fullName": "Brunhilde Knick",
+          "voiceId": "amt-brunhilde-knick"
         }
       },
       "refusal": "Steht Ihre Nummer auf der Tafel? Nein? Dann treten Sie zurück! Dass ich hier gerade nichts tue, ist eine dienstliche Tätigkeit."
@@ -2188,24 +2167,24 @@
         "actor": "clerk-1",
         "text": "Für die Kopie des Originals benötigen Sie das Original der Kopie.",
         "english": "For a copy of the original, you need the original of the copy.",
-        "speaker": "FRAU FRIST",
-        "voiceId": "amt-erna-frist"
+        "speaker": "SACHBEARBEITERIN FRAU KNICK",
+        "voiceId": "amt-brunhilde-knick"
       },
       {
         "id": "amt-ambient-warteschleife",
         "actor": "clerk-2",
         "text": "Nein, die Warteschleife ist persönlich zu nehmen.",
-        "english": "No, the hold queue must be taken personally.",
-        "speaker": "FRAU DURCHSCHLAG",
-        "voiceId": "amt-ottilie-durchschlag"
+        "english": "No, being put on hold is to be taken personally.",
+        "speaker": "SACHBEARBEITERIN FRAU KNICK",
+        "voiceId": "amt-brunhilde-knick"
       },
       {
         "id": "amt-ambient-moment",
         "actor": "clerk-4",
         "text": "Einen Moment. Ich verbinde Sie mit Ihrem Moment.",
-        "english": "One moment. I will connect you to your moment.",
-        "speaker": "FRAU ZUSTÄNDIG",
-        "voiceId": "amt-hedwig-zustaendig"
+        "english": "One moment. I'll connect you to your moment.",
+        "speaker": "SACHBEARBEITERIN FRAU KNICK",
+        "voiceId": "amt-brunhilde-knick"
       },
       {
         "id": "amt-ambient-abwesenheit",

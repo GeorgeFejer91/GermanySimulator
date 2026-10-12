@@ -70,7 +70,7 @@ try{
   }
   assert.equal(await page.evaluate(()=>window.__browserSpeech.length),0,'a held argument take cannot borrow a browser voice');
   await page.evaluate(()=>window.__knickVoiceTest.cancel());
-  const ambientPath=await page.evaluate(()=>window.GermanySimulatorAudioText.recordedClip('amt-erna-frist','Für die Kopie des Originals benötigen Sie das Original der Kopie.'));
+  const ambientPath=await page.evaluate(()=>window.GermanySimulatorAudioText.recordedClip('amt-brunhilde-knick','Für die Kopie des Originals benötigen Sie das Original der Kopie.'));
   await page.evaluate(()=>window.__knickVoiceTest.ambient());
   await page.waitForFunction(()=>document.getElementById('amt-ambient').textContent.includes('Original der Kopie'),null,{timeout:8000});
   const ambient=await page.evaluate(()=>({caption:document.getElementById('amt-ambient').textContent,browser:window.__browserSpeech.length}));assert(ambient.caption.includes('Original der Kopie'));assert.equal(ambient.browser,0);

@@ -1,10 +1,10 @@
 (function(){"use strict";
 const clerkIdentity=Object.freeze({speaker:"SACHBEARBEITERIN FRAU KNICK",fullName:"Brunhilde Knick",voiceId:"amt-brunhilde-knick"});
 const clerks=Object.freeze({
- 1:Object.freeze({speaker:"FRAU FRIST",fullName:"Erna Frist",voiceId:"amt-erna-frist"}),
- 2:Object.freeze({speaker:"FRAU DURCHSCHLAG",fullName:"Ottilie Durchschlag",voiceId:"amt-ottilie-durchschlag"}),
+ 1:clerkIdentity,
+ 2:clerkIdentity,
  3:clerkIdentity,
- 4:Object.freeze({speaker:"FRAU ZUSTÄNDIG",fullName:"Hedwig Zuständig",voiceId:"amt-hedwig-zustaendig"})
+ 4:clerkIdentity
 });
 window.BuergeramtStory=Object.freeze({
  queueCall:Object.freeze({line:"Nächste bitte!",english:"Next, please!",voiceId:clerkIdentity.voiceId,speaker:"FRAU KNICK",actorId:"clerk-3"}),
@@ -55,8 +55,8 @@ window.BuergeramtStory=Object.freeze({
    {id:"amt-ambient-nummer-"+actor,actor,text:"Mein Buchstabe wurde aufgerufen, aber die Zahl gehört jemand anderem.",english:"My letter was called, but the number belongs to someone else."}
   ]),
   {id:"amt-ambient-original",actor:"clerk-1",text:"Für die Kopie des Originals benötigen Sie das Original der Kopie.",english:"For a copy of the original, you need the original of the copy."},
-  {id:"amt-ambient-warteschleife",actor:"clerk-2",text:"Nein, die Warteschleife ist persönlich zu nehmen.",english:"No, the hold queue must be taken personally."},
-  {id:"amt-ambient-moment",actor:"clerk-4",text:"Einen Moment. Ich verbinde Sie mit Ihrem Moment.",english:"One moment. I will connect you to your moment."},
+  {id:"amt-ambient-warteschleife",actor:"clerk-2",text:"Nein, die Warteschleife ist persönlich zu nehmen.",english:"No, being put on hold is to be taken personally."},
+  {id:"amt-ambient-moment",actor:"clerk-4",text:"Einen Moment. Ich verbinde Sie mit Ihrem Moment.",english:"One moment. I'll connect you to your moment."},
   {id:"amt-ambient-abwesenheit",actor:"archivbotin",text:"Ihre Akte ist verschwunden. Bitte bestätigen Sie den Eingang Ihrer Abwesenheit.",english:"Your file has disappeared. Please acknowledge receipt of your absence."},
   {id:"amt-ambient-leerblatt",actor:"formularsammler",text:"Das leere Blatt ist unvollständig. Es fehlt der Nachweis, dass nichts fehlt.",english:"The blank page is incomplete. Proof that nothing is missing is missing."},
   {id:"amt-ambient-nullzettel",actor:"nummernfluesterer",text:"Die Null auf meinem Zettel wartet schon länger als ich.",english:"The zero on my ticket has been waiting longer than I have."},

@@ -10,19 +10,20 @@ runInNewContext(readFileSync('buergeramt-story.js','utf8'),{window});
 runInNewContext(readFileSync('For-AI/AUDIO-TEXT-LIBRARY.js','utf8'),{window});
 const story=window.BuergeramtStory,catalog=window.GermanySimulatorAudioText;
 
-test('all fifteen in-room people have distinct selected profiles and normalized references',()=>{
+test('the four counter slots share one Frau Knick identity while visitors keep distinct voices',()=>{
  const people=[...Object.values(story.characters),...Object.values(story.patrons),...Object.values(story.clerks)];
  assert.equal(people.length,15);
  const bindings=people.map(person=>cast.productionVoices[person.voiceId]);
- assert.equal(new Set(people.map(person=>person.voiceId)).size,15);
- assert.equal(new Set(bindings.map(binding=>binding.profileId)).size,15);
- assert.equal(new Set(bindings.map(binding=>binding.referenceSha256)).size,15);
+ assert.equal(new Set(people.map(person=>person.voiceId)).size,12);
+ assert.equal(new Set(bindings.map(binding=>binding.profileId)).size,12);
+ assert.equal(new Set(bindings.map(binding=>binding.referenceSha256)).size,12);
  for(const person of people){
   const binding=cast.productionVoices[person.voiceId];assert(binding?.profileId,person.fullName);
   assert.equal(catalog.voices[person.voiceId].name,person.fullName);
   assert.equal(catalog.voices[person.voiceId].profileId,binding.profileId);
  }
- assert.equal(story.clerks[3],story.clerkIdentity);
+ for(const clerk of Object.values(story.clerks))assert.equal(clerk,story.clerkIdentity);
+ for(const retired of ['amt-erna-frist','amt-ottilie-durchschlag','amt-hedwig-zustaendig']){assert.equal(catalog.voices[retired],undefined);assert.equal(cast.productionVoices[retired],undefined)}
 });
 
 function approach(h,desk){
@@ -30,7 +31,7 @@ function approach(h,desk){
  h.moveTo(-2,-2.6);h.moveTo(-2,-6.4);h.moveTo(x===-5.8?-5.4:2.8,-6.4);h.moveTo(x===-5.8?-5.4:2.8,-8.15);h.moveTo(x,-8.15);
 }
 
-test('each refusal requests its own profile and keeps exact captions for unavailable takes',()=>{
+test('every desk refusal requests Knick and keeps exact captions for unavailable takes',()=>{
  for(let desk=1;desk<=4;desk++){
   const h=harness('host',{voice:true}),seen=[];
   h.window.GermanySimulatorAudioText={productionVoices:catalog.productionVoices,recordedClip:(voiceId,text)=>{if(text!==story.queueCall.line)seen.push({voiceId,text});return null}};
@@ -38,7 +39,7 @@ test('each refusal requests its own profile and keeps exact captions for unavail
   assert.equal(h.level.stage,'early');assert.equal(h.level.activeClerkCounter,desk);
   assert.equal(h.node('amt-speaker').textContent,story.clerks[desk].speaker+' · SCHALTER '+desk);
   assert.equal(h.node('amt-line').textContent,story.clerkRefusal);
-  assert.deepEqual(seen,[{voiceId:story.clerks[desk].voiceId,text:story.clerkRefusal}]);
+  assert.deepEqual(seen,[{voiceId:story.clerkIdentity.voiceId,text:story.clerkRefusal}]);
   assert.equal(h.synth.current,null,'an unavailable clone must not borrow a browser voice');
  }
 });

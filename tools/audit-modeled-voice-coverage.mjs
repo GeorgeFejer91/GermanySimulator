@@ -60,20 +60,24 @@ const office = [...world.matchAll(/amtCharacter\("([^"]+)"[^\n]*?\{([^{}]+)\}\);
   .map(([, modelKind, identity]) => {
     const value = key => identity.match(new RegExp(`${key}:"([^"]+)"`))?.[1] ?? null;
     return {modelKind, gameCharacterId: value('id'), fullName: value('fullName'),
-      voiceId: value('voiceId'), decorativeCloneOf: value('decorativeCloneOf')};
+      voiceId: value('voiceId'), animationId: value('animationId'),
+      counter: Number(identity.match(/counter:(\d+)/)?.[1]) || null};
   });
 requireMatch(office.length === 7, `Expected seven static Bürgeramt figures; found ${office.length}`);
-const officeSpeakers = office.filter(person => person.gameCharacterId);
-const officeClones = office.filter(person => person.decorativeCloneOf);
-requireMatch(officeSpeakers.length === 4 && officeClones.length === 3,
-  'Bürgeramt identity/clone distinction changed');
-for (const person of officeSpeakers) requireMatch(person.gameCharacterId === person.voiceId &&
+const officeSpeakers = [...new Map(office.map(person => [person.voiceId, person])).values()];
+const counterSlots = office.filter(person => person.modelKind === 'clerk');
+requireMatch(officeSpeakers.length === 4 && counterSlots.length === 4 &&
+  new Set(counterSlots.map(person => person.animationId)).size === 4,
+  'Expected one Knick identity and four independent counter render slots');
+for (const person of office) requireMatch(person.gameCharacterId === person.voiceId &&
   byVoice.get(person.voiceId)?.fullName === person.fullName,
   `Bürgeramt model/speaker mismatch for ${person.gameCharacterId}`);
-for (const person of officeClones) requireMatch(byVoice.has(person.decorativeCloneOf) &&
-  !person.voiceId && !person.gameCharacterId, 'A decorative clerk clone gained a speech identity');
 const storyContext = {window: {}};
 vm.runInNewContext(source('buergeramt-story.js'), storyContext);
+for (const person of counterSlots) requireMatch(person.voiceId === 'amt-brunhilde-knick' &&
+  person.animationId === `clerk-desk-${person.counter}` &&
+  storyContext.window.BuergeramtStory.clerks[person.counter] === storyContext.window.BuergeramtStory.clerkIdentity,
+  `Counter ${person.counter} must share Knick's single identity`);
 const patronDialogue = storyContext.window.BuergeramtStory.patrons;
 for (const person of institutions) {
   requireMatch(/^[0-9a-f]{32}$/.test(person.secretTunnelProfileId) &&
@@ -136,7 +140,7 @@ const report = {
   counts: {newNonpoliticalProfiles: newProfiles.length, existingPoliticalProfiles: political.length,
     institutionPhoneProfiles: institutions.length,
     namedCityNpcBindings: city.length, namedCrowdIdentities: crowd.length, dedicatedStreetAdvisers: streetAdvisers.length,
-    staticBuergeramtSpeakers: officeSpeakers.length, authoredStaticPatrons: patronModels.length, decorativeClerkClones: officeClones.length,
+    staticBuergeramtSpeakers: officeSpeakers.length, authoredStaticPatrons: patronModels.length, clerkRenderSlots: counterSlots.length,
     optionalStreetVisualTemplates: STREET_CATALOG.length,
     mappedStreetSpeakers: streetPersonaMapping.length},
   staticBuergeramt: office,

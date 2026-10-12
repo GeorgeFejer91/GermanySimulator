@@ -2,7 +2,7 @@
 
 The secret Bürgeramt is an episode of the canonical root game. QR admission, the linked phone, the numbered queue, Frau Knick, the police interruption, A38, and the existing exit outcomes remain its required chain. Eight optional walking encounters add movement and atmosphere while the player waits; they never award a ticket or change a counter answer.
 
-Character voices follow [`VOICE-SYNTH-PROTOCOL.md`](./VOICE-SYNTH-PROTOCOL.md#fixed-voices-and-the-agent-workflow-2026-10-11). `VOICE-CAST.json`'s `productionVoices` pins the selected Secret Tunnel profile, reference hashes, renderer and processing. All fifteen in-room people have distinct game voice IDs, selected profile UUIDs and normalized reference hashes: eight walkers, three patrons and four clerks. Schalter 1 is Erna Frist, 2 Ottilie Durchschlag, 3 Brunhilde Knick and 4 Hedwig Zuständig. Each clerk owns her refusal and ambient remarks. Knick keeps profile `b080c7d95ecd418fb428282461d7fbe7` for the existing registration, warnings and police argument. All clerks retain exact captions for missing, failed or dynamic recordings, including when the catalogue is unavailable. Clerk refusal recordings and listening review remain pending; ambient recording coverage is described below. Ambient remarks do not interrupt active office speech. Earlier profile IDs in historical notes below are provenance.
+Character voices follow [`VOICE-SYNTH-PROTOCOL.md`](./VOICE-SYNTH-PROTOCOL.md#fixed-voices-and-the-agent-workflow-2026-10-11). The four Schalter positions all represent **Brunhilde Knick**, with the single character/voice ID `amt-brunhilde-knick` and selected profile `b080c7d95ecd418fb428282461d7fbe7`. They are one person, as explicitly clarified by the user on 2026-10-12. The names Frau Frist, Frau Durchschlag and Frau Zuständig are retired. Counter refusals, registration, warnings, the police argument and all three staff background remarks use Knick's established recordings and tone. Render slots `clerk-desk-1` through `clerk-desk-4` remain separate so only the speaking counter animates. Eight walkers and three waiting patrons retain their own identities; they are not additional counter clerks. Missing, failed or dynamic Knick speech retains exact captions without a machine voice. The three superseded clerk profiles and ambient takes remain privately preserved, outside active game lookup. Ambient speech waits for foreground speech.
 
 Recorded office MP3 requests include the current encoded SHA-256 in their URL,
 so a replacement at the same asset path gets a new browser cache entry. Mouth
@@ -21,7 +21,7 @@ the background cue. Assets load only when selected, one native media element
 at a time; cancellation removes its source. No full-library preload or new
 scheduler is introduced. `tests/buergeramt-ambient.test.mjs` owns this contract.
 
-The final ambient pack has 21 checked MP3s, 1,509,660 encoded bytes in total;
+The initial ambient build had 21 checked MP3s, 1,509,660 encoded bytes in total;
 one selected file is at most 91,052 bytes and 5.64 seconds. All native completion,
 selected-profile, independent encoded-word and level gates pass. Delivery is
 −18.24 to −17.83 LUFS, with maximum −1.98 dBTP. The revised number-prefix snippet
@@ -40,6 +40,13 @@ MP3 preloads were observed. Direct `3d.html` passed silent startup smoke at all
 three viewports. Physical Android, perceptual listening and natural mission
 traversal were not exercised for this speech-only change. Private receipts and
 the ignored `output/amt-ambient/` reports retain the exact frozen candidate.
+
+The current ambient pool keeps all 21 entries and 17 distinct remarks. Its
+three counter entries reuse `knick-ambient-clerk-1`, `-2` and `-4` unchanged;
+18 newer visitor recordings remain in `office-ambient/`. Every counter has the
+same name and selected voice, while visible mouth ownership stays local to its
+desk. The original refusal also reuses Knick's approved fever recording.
+No new synthesis or voice profile is needed for this restoration.
 
 ## Admission, queue and outcomes
 
@@ -655,9 +662,8 @@ Kafkaesque performance briefs and browser rate/pitch hints. Explicit story
 delivery and approved exact-speaker recordings retain priority. Twelve actual
 alternate profiles were saved in Secret Tunnel's local Voice Cloner from the
 documented CC0 emotional references, with private transformed WAVs. These are
-unlistened alternatives, not accepted cloned game recordings. The current
-four-clerk cast and its distinct selected profiles supersede the earlier
-shared clerk identity. IDs, provenance and the separate listening gate are
+unlistened alternatives, not accepted cloned game recordings. The 2026-10-12 restoration keeps one Knick identity and selected profile
+across all four counter slots. IDs, provenance and the separate listening gate are
 owned by `VOICE-SYNTH-PROTOCOL.md`.
 
 Author checks passed 235 affected Node regressions and normal-speed full cycles
