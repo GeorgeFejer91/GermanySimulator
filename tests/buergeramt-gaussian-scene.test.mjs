@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import {createAmtGaussianScene} from '../buergeramt-gaussian-scene.js';
+import {createAmtGaussianScene,amtActorOwnsSpeech} from '../buergeramt-gaussian-scene.js';
 import {harness} from './amt-harness.mjs';
 function fixture(mobile=false){
  const tasks=[],actor=(id,x,z)=>({id,mesh:{position:{x,z},material:{opacity:1}}}),clerk=actor('clerk',0,-2),regular=actor('archivbotin',1,-2);
@@ -9,6 +9,16 @@ function fixture(mobile=false){
  const manager=createAmtGaussianScene({THREE:{},renderer:{},scene:{},queueLoad:task=>new Promise((resolve,reject)=>tasks.push(()=>Promise.resolve().then(task).then(resolve,reject))),mobile,reducedMotion:{matches:false}});
  return{tasks,manager,level,clerk,regular,update:()=>manager.update(level,[clerk],[regular],{position:{x:0,z:0}})};
 }
+
+test('desk-addressed queue speech stays on Knick when any counter is the lead',()=>{
+ for(const assigned of [0,1,2,3,4])for(let counter=1;counter<=4;counter++){
+  const lead=counter===(assigned||3),actor={id:'amt-brunhilde-knick',performance:true,counter,lipId:lead?'clerk':'clerk-'+counter};
+  const id=lead?'clerk':'clerk-'+counter,speech={active:true,actor:'clerk-3'};
+  assert.equal(amtActorOwnsSpeech(speech,id,actor),counter===3,`assigned ${assigned}, counter ${counter}`);
+  assert.equal(amtActorOwnsSpeech({...speech,active:false},id,actor),false);
+ }
+ assert.equal(amtActorOwnsSpeech({active:true,actor:'archivbotin'},'archivbotin',{id:'archivbotin'}),true);
+});
 test('nearby consumers retain admitted slots without preparation churn',()=>{
  const old=globalThis.document;globalThis.document={hidden:false};
  try{const f=fixture();for(let n=0;n<20;n++)f.update();assert.equal(f.tasks.length,2);assert.equal(f.manager.inspect().actors.length,2);f.manager.clear()}

@@ -73,6 +73,21 @@ The physical Anzeige retains a separate called code for Schalter 1–4, all popu
 
 E near any counter starts its existing refusal encounter unless the player has that counter's active call and a submitted name. The speaking/refusing clerk is selected independently of the assigned counter. Refusal does not pause the appointment deadline; optional walking conversations and the omen retain their queue pause. The room keeps its quiet bed, occasional remarks and telephone rings. The four-row board is 3 × 1 metres with a 768 × 256 texture; it reuses the existing model/material and adds 262,144 decoded RGBA bytes, with no new download.
 
+Each committed new board call plays one deliberately abrasive double beep on
+the existing effects bus: 1480/1960 Hz square pulses, 180 ms apart, ending after
+350 ms, with a 0.035 peak envelope. After at least 360 ms, Frau Knick calls
+“Nächste bitte!” in her selected recorded voice; her exact caption and existing
+mouth track belong to Schalter 3, regardless of the ticket's assigned desk.
+`buergeramt-story.js.queueCall` owns the words and speaker. The existing update
+loop holds only the latest pending announcement while other speech owns the
+room; there is no backlog, queue pause, camera move or new scheduler. Counter
+dialogue, optional encounters, outside walking, close and replay discard pending
+calls. EFFEKTE and STIMMEN retain separate mute behavior; missing/disabled speech
+keeps the exact caption for 1.2 seconds. The existing attempt/cue and media
+start/end lifecycle owns captions, lips, cancellation and failure fallback.
+The 2.2-second MP3 adds 36,140 transferred bytes and about 0.40 MiB decoded mono
+PCM, requested only when announced and reused through the normal browser cache.
+
 A missed call, hidden/disconnected companion or final telephone warning forfeits the appointment without a decision window or mission progress. The game returns directly to walking at the QR-sign stage. The old companion page keeps a large red “Termin Verfallen” stamp and stops registration, call and ticket retry work. The host retires that invitation and updates the physical QR sign. The old page remains expired after refresh; the player must manually scan the new QR code and submit the name again. The game never opens or redirects a replacement phone page. Leaving before completion or finishing the police cancellation sends the same forfeiture outcome to the companion. Completed registration alone sends the successful completion outcome; the host allows 250 ms for the final message before closing the retired link.
 
 The unlisted `?geheim=buergeramt` URL opens directly at the office entrance for repeated level testing. Its fixed restart link reloads only this episode; the normal city entry remains the canonical story route. Direct entry skips unrelated city GLB downloads; normal entry keeps the city asset path. The shortcut is a convenience link, not authentication or a separate game deployment.

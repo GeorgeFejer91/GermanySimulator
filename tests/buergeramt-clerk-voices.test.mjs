@@ -33,7 +33,7 @@ function approach(h,desk){
 test('each refusal requests its own profile and keeps exact captions for unavailable takes',()=>{
  for(let desk=1;desk<=4;desk++){
   const h=harness('host',{voice:true}),seen=[];
-  h.window.GermanySimulatorAudioText={productionVoices:catalog.productionVoices,recordedClip:(voiceId,text)=>{seen.push({voiceId,text});return null}};
+  h.window.GermanySimulatorAudioText={productionVoices:catalog.productionVoices,recordedClip:(voiceId,text)=>{if(text!==story.queueCall.line)seen.push({voiceId,text});return null}};
   h.register();approach(h,desk);h.level.interact();h.tick(20);
   assert.equal(h.level.stage,'early');assert.equal(h.level.activeClerkCounter,desk);
   assert.equal(h.node('amt-speaker').textContent,story.clerks[desk].speaker+' · SCHALTER '+desk);
@@ -50,9 +50,9 @@ test('clerk ownership survives a missing catalogue and ambient remarks use the r
   assert.equal(h.synth.current,null);assert.equal(h.node('amt-line').textContent,story.clerkRefusal);
  }
  const h=harness('host',{voice:true}),seen=[];
- h.window.GermanySimulatorAudioText={productionVoices:catalog.productionVoices,recordedClip:(voiceId,text)=>{seen.push({voiceId,text});return null}};
+ h.window.GermanySimulatorAudioText={productionVoices:catalog.productionVoices,recordedClip:(voiceId,text)=>{if(text!==story.queueCall.line)seen.push({voiceId,text});return null}};
  h.register();
- for(let i=0;i<12&&seen.length<5;i++){h.advanceGame(8.6);h.synth.end();h.tick(20000)}
+ for(let i=0;i<12&&seen.length<5;i++){h.elapse(8.6);h.synth.end();h.tick(20000)}
  for(const row of seen){assert(story.ambient.some(line=>line.text===row.text));assert(cast.productionVoices[row.voiceId]);}
  assert.equal(h.synth.spoken.length,0,'ambient recordings never fall back to machine speech');
 });

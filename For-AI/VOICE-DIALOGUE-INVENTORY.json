@@ -1091,6 +1091,13 @@
         "NEIN, SIE HÖREN JETZT ZU! Ein Grashalm fehlt, und Sie behindern meine Befragung! Noch ein Wort, und ich lasse Ihren ganzen Schalter..."
       ]
     },
+    "buergeramtQueueCall": {
+      "line": "Nächste bitte!",
+      "english": "Next, please!",
+      "voiceId": "amt-brunhilde-knick",
+      "speaker": "FRAU KNICK",
+      "actorId": "clerk-3"
+    },
     "buergeramtClerk": {
       "identity": {
         "speaker": "SACHBEARBEITERIN FRAU KNICK",

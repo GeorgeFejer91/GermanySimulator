@@ -41,6 +41,7 @@ const pools={
  quizContexts:declaration("quizContexts"),
  quizQuestions:Object.fromEntries(questions.map(q=>[String(q.source),{germany:q.question,berlin:berlinQuestions[q.source]?.question??q.question,type:q.type??"civic",level:q.level??null}])),
  buergeramtPolicePhone:{voiceId:office.call.voiceId,call:office.call.line,replies:office.police},
+ buergeramtQueueCall:office.queueCall,
  buergeramtClerk:{identity:office.clerkIdentity,counter:office.clerk.map(({line,choices})=>({line,replies:choices.map(({reply})=>reply)})),outburst:office.outburst.lines,phoneWarnings:office.phoneWarnings,registration:office.registration},
  buergeramtPatrons:office.patrons,
  buergeramtCounterClerks:{identities:office.clerks,refusal:office.clerkRefusal},

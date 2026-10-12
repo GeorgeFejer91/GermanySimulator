@@ -2,6 +2,7 @@
 // the existing render pass and two-job admission queue own preparation/update.
 // Both the encounter and ordinary action paint load this exact module identity.
 export const loadAmtSplatModule=()=>import('./buergeramt-splat.js?v=20261011-mouth-consistency');
+export const amtActorOwnsSpeech=(speech,id,actor)=>!!(speech?.active&&(speech.actor===id||speech.actor===actor.id||speech.actor===actor.lipId||actor.performance&&speech.actor==='clerk-'+actor.counter));
 export function createAmtGaussianScene({THREE,renderer,scene,actorLayer=0,queueLoad,mobile=false,reducedMotion}){
   const slots=new Map(),failedActors=new Map(),limit=mobile?1:2;
   let generation=null,controller=new AbortController(),owner=null,ownerPromise=null,failure='';
@@ -103,7 +104,7 @@ export function createAmtGaussianScene({THREE,renderer,scene,actorLayer=0,queueL
       const atMain=state&&safeAnchor(item);
       if(eligible&&atMain)entry.admitted=true;
       const isolation=fever?.active&&fever.id!==item.id?fever.strength:0;
-      const speech=level.lipSpeech,matches=speech?.active&&(speech.actor===item.id||speech.actor===item.actor.id||speech.actor===item.actor.lipId);
+      const speech=level.lipSpeech,matches=amtActorOwnsSpeech(speech,item.id,item.actor);
       const voicedState={...state,speaking:!!matches,lipShape:matches?speech.shape:[0,0,0,0]};
       entry.effect.update(voicedState,item.actor.mesh,{visible:eligible&&entry.admitted,reducedMotion:reducedMotion.matches,isolation});
       if(entry.effect.inspect().visible){item.actor.mesh.material.opacity=0}

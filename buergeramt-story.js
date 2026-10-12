@@ -7,6 +7,7 @@ const clerks=Object.freeze({
  4:Object.freeze({speaker:"FRAU ZUSTÄNDIG",fullName:"Hedwig Zuständig",voiceId:"amt-hedwig-zustaendig"})
 });
 window.BuergeramtStory=Object.freeze({
+ queueCall:Object.freeze({line:"Nächste bitte!",english:"Next, please!",voiceId:clerkIdentity.voiceId,speaker:"FRAU KNICK",actorId:"clerk-3"}),
  playerIdentity:{speaker:"ICH",fullName:"Hans-Peter Mustermann",voiceId:"spieler-hans-peter-mustermann"},
  characters:{
   aktenkurier:{speaker:"DER AKTENKURIER",fullName:"Horst Stempelmann",voiceId:"amt-horst-stempelmann",lines:[

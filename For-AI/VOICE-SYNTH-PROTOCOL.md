@@ -75,6 +75,15 @@ unavailable audio, regardless of the character's ordinary E-dialogue fallback.
 
 ## Bürgeramt player replies and complete Knick dialogue (2026-10-12)
 
+The queue call “Nächste bitte!” is a separate selected-Knick supplement in
+`assets/voices/knick/queue-call-manifest.json`. It retains her profile, pinned
+renderer, native EOS guards and undertone. The user requested a shouted call;
+only this cue changes generation exaggeration from 0.5 to 0.8. Its first take
+passed independent final-MP3 word and level gates (2.2 s, −18.14 LUFS,
+−2.48 dBTP). Use approval is the queue-sound request; perceptual listening remains
+unperformed. The existing curator merges the supplement with Knick's other
+exact recordings, and failed/disabled playback retains the exact caption.
+
 The user selected the actual shipped `thorsten-amused-nachschub.mp3` recording
 as the player's voice: “the one that sed to say, endlich wieder nachschub, just
 clone this voice as our own”. The distinct saved player profile is

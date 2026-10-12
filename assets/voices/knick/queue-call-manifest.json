@@ -1,0 +1,159 @@
+{
+  "schemaVersion": 1,
+  "voiceId": "amt-brunhilde-knick",
+  "profileId": "b080c7d95ecd418fb428282461d7fbe7",
+  "fallback": "captions",
+  "status": "same-profile technical and independent ASR audit; perceptual listening not independently verified",
+  "generatedLineCount": 1,
+  "requestedLineCount": 1,
+  "lineCount": 1,
+  "clips": [
+    {
+      "clipId": "knick-queue-call",
+      "actorId": "clerk-3",
+      "voiceId": "amt-brunhilde-knick",
+      "profileId": "b080c7d95ecd418fb428282461d7fbe7",
+      "text": "Nächste bitte!",
+      "english": "Next, please!",
+      "sourceLocator": "buergeramt-story.js queueCall.line",
+      "trigger": "buergeramt-queue-call",
+      "intendedDelivery": "short, impatient projected shout; exact two words; same selected Knick reference and quiet undertone",
+      "deliveryAdjustment": {
+        "parameter": "exaggeration",
+        "ordinaryValue": 0.5,
+        "queueCallValue": 0.8,
+        "scope": "only knick-queue-call; no broad character recipe change",
+        "authority": "Integrator explicitly authorized exaggeration 0.8 on 2026-10-12 for the user-requested projected impatient queue shout; keep selected reference/renderer, all native guards, sampling/CFG, undertone and encoded level gates"
+      },
+      "deliveryListening": "NOT RUN (silent authoring policy)",
+      "approval": {
+        "status": "user-approved",
+        "date": "2026-10-12",
+        "instruction": "make an annoying beep sound when a new number is up and Frau Knick shouting Nächste Bitte!",
+        "scope": "one exact queue call at a new board number; selected Knick profile and processing",
+        "listeningConfirmed": false
+      },
+      "seed": 71000,
+      "synthesisAttempt": 1,
+      "referenceSha256": "901e9ad60eda5cbb36337b12864b6a2b0d133570acb90941b9eabd9888c16351",
+      "authoringHelperSha256": "e405e6b96dcea827ce2149baf129b3d594fd8f086fe1be6b2a24608cbb622d88",
+      "rendererInputText": "Nächste bitte!",
+      "decode": {
+        "maxSpeechTokens": 250,
+        "attentionHooksBefore": 0,
+        "generatedSpeechTokens": 56,
+        "eosReached": true,
+        "eosKind": "analyzer-forced",
+        "eosSuppressionObservedSteps": 17,
+        "modelEosRestoredSteps": 0,
+        "alignmentFirstCompletedStep": 18,
+        "nativeAnalyzerSourceSha256": "d8430efa92aedb8e59b782c1d299fe7238570eecea9d293c0981a5ee2e82c8c7",
+        "eosPolicy": "Native analyzer unchanged; observation only",
+        "t3InferenceSeconds": 4.92,
+        "temporaryAnalyzerHooksRemoved": 6,
+        "attentionHooksAfter": 0,
+        "eosTraceSha256": "6590096dfa9bd31599ef6dd7d52ecd9e529595162813ef1359d01c0aeaaddb8c"
+      },
+      "rendererInputBasis": "exact authored source",
+      "requestSha256": "239742c09680cef1c066187fd9c59888b4d81be229e41af4922f7c78b0ec701c",
+      "referenceOriginalSha256": "f87daaf53e9e3183065dbe38a65097f5c8df3ae11454ea56676a8298800683c2",
+      "profileJsonSha256": "4071c9052ebb393358d9957cc5f2271d93c52f13b747fad9f5253bd81b00ce66",
+      "rawSha256": "e9f21b0f657876c68cfd38b515a1fddaf193a8018dab312977eaa3ee05f24837",
+      "renderer": "ResembleAI/Chatterbox Multilingual V2 0.1.7",
+      "modelRevision": "5bb1f6ee58e50c3b8d408bc82a6d3740c2db6e18",
+      "modelLicense": "MIT",
+      "referenceLicense": "CC0-1.0 (EmoDB original, transformed reference)",
+      "durationSeconds": 2.2,
+      "renderSeconds": 7.0,
+      "synthesis": {
+        "temperature": 0.65,
+        "repetitionPenalty": 3.0,
+        "cfgWeight": 0.6,
+        "languageId": "de",
+        "device": "cuda",
+        "precision": "fp16",
+        "t3WeightPrecision": "float16",
+        "conditioningPrecision": "float32",
+        "autocastPrecision": "float16",
+        "conditioningCached": true,
+        "referenceReconditionedForProfile": "b080c7d95ecd418fb428282461d7fbe7",
+        "referenceConditioningVerifiedFloat32": true,
+        "modelSessionReused": false,
+        "cpuThreads": 2,
+        "inferenceMode": true,
+        "exaggeration": 0.8,
+        "minP": 0.05,
+        "topP": 1.0,
+        "nativeDecoderGuards": "unchanged; native EOS observation only"
+      },
+      "listening": "pending",
+      "status": "eligible exact-text recording; human listening pending",
+      "privateWrapperSha256": "f20d9947f873d4ca4d4658944d00d538234d1920d22cf1e6e239ef9db3587bdb",
+      "processing": "[0:a]highpass=f=65,lowpass=f=7600,asplit[clean][wet];[wet]rubberband=pitch=0.78,lowpass=f=1450,volume=0.16[shadow];[clean][shadow]amix=inputs=2:duration=first:normalize=0[a]",
+      "processingSha256": "1c7968d73192bfbf5d2b759fce5dc07b092badbd133718ae05d67dbdda72ccb2",
+      "normalization": {
+        "targetLufs": -18,
+        "targetTruePeakDbtp": -1.5,
+        "filter": "volume=1.2345253151706903,alimiter=limit=0.78:attack=1:release=80:level=false:latency=true",
+        "iterations": 2
+      },
+      "integratedLufs": -18.14,
+      "truePeakDbtp": -2.48,
+      "asr": "Nächste bitte!",
+      "asrWordExact": true,
+      "asrLiteralWordExact": true,
+      "asrNormalization": "case/punctuation, German numeric and A38 spoken equivalents, guarded full-hour and date-ordinal equivalents, section sign/Paragraf orthography, German compound spacing",
+      "asrModel": "independent faster-whisper, cached local model, cpu int8 (effective int8_float32), no script prompt",
+      "asrCpuThreads": 2,
+      "asrDevice": "cpu",
+      "asrEffectiveComputeType": "int8_float32",
+      "asrLanguageId": "de",
+      "asrComputeType": "int8",
+      "asrScriptPrompt": null,
+      "asrBeamSize": 1,
+      "asrReadings": [
+        {
+          "beamSize": 1,
+          "transcript": "Nächste bitte!",
+          "transcribeSeconds": 10.62,
+          "words": [
+            {
+              "word": " Nächste",
+              "start": 0.0,
+              "end": 0.56
+            },
+            {
+              "word": " bitte!",
+              "start": 0.56,
+              "end": 0.82
+            }
+          ]
+        }
+      ],
+      "asrModelSha256": "e76620f83d5f5b69efd3d87e3dc180c1bd21df9fbebacfd4335e5e1efcc018da",
+      "asrModelDirectoryName": "voice-asr-model",
+      "wordCues": [
+        {
+          "at": 0.0,
+          "charIndex": 0,
+          "word": "Nächste",
+          "end": 0.56
+        },
+        {
+          "at": 0.56,
+          "charIndex": 8,
+          "word": "bitte",
+          "end": 0.82
+        }
+      ],
+      "sha256": "790721d5ab97973c0d152c1c6fcd28ef1b0c02459a0c9fdb4b7f76b134d32dce",
+      "bytes": 36140,
+      "sampleRateHz": 48000,
+      "channels": 1,
+      "bitrateBitsPerSecond": 128000,
+      "file": "assets/voices/knick/knick-queue-call.mp3"
+    }
+  ],
+  "heldPrivate": [],
+  "approvedExistingReuse": []
+}

@@ -1,4 +1,4 @@
-import {createAmtGaussianScene,loadAmtSplatModule} from './buergeramt-gaussian-scene.js?v=20261012-office-dialogue';
+import {createAmtGaussianScene,loadAmtSplatModule} from './buergeramt-gaussian-scene.js?v=20261012-queue-call';
 import {mouthPaintGlsl} from './buergeramt-mouth-paint.js?v=20261011-mouth-consistency';
 import {prepareWithSegments,measureNaturalWidth,measureLineStats} from './assets/vendor/pretext/dist/layout.js';
 const THREE_URL="https://cdn.jsdelivr.net/npm/three@0.186.0/build/three.module.js";
