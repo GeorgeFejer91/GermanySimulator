@@ -13,11 +13,16 @@ const transforms=process.env.PLAYTEST_TRANSFORMS==='1';
 const poseOnly=process.env.PLAYTEST_POSE_ONLY==='1';
 if(motionOnly&&sources)throw new Error('Motion capture requires the current production source');
 const nativeIds=['clerk','aktenkurier','archivbotin','formularsammler','nummernfluesterer','nachtschichtmelderin','pfandarchitektin','kopiependler','warteschlangenpoetin','renter','parent','pensioner'];
-const readRevision=()=>Object.fromEntries(['buergeramt.js','world3d.js','buergeramt-lips.js','buergeramt-lipsync.js','buergeramt-mouth-paint.js','buergeramt-splat.js','buergeramt-gaussian-scene.js','buergeramt-painted-anchor.js','assets/buergeramt/speech/mouth-cues.js','assets/buergeramt/characters/mouth-profiles.json',...nativeIds.map(id=>'assets/buergeramt/animation/'+id+'.json')].map(f=>[f,createHash('sha256').update(fixtureSource(f)).digest('hex')]));
+const readRevision=()=>Object.fromEntries(['buergeramt.js','world3d.js','buergeramt-lips.js','buergeramt-lipsync.js','buergeramt-mouth-paint.js','buergeramt-splat.js','buergeramt-gaussian-scene.js','buergeramt-painted-anchor.js','assets/buergeramt/speech/mouth-cues.js','assets/buergeramt/characters/mouth-profiles.json',...(nativePaint?nativeIds.map(id=>'assets/buergeramt/animation/'+id+'.json'):[])].map(f=>[f,createHash('sha256').update(fixtureSource(f)).digest('hex')]));
 const {chromium}=createRequire(import.meta.url)(process.env.PLAYWRIGHT_MODULE||'playwright');
 const output=process.env.PLAYTEST_OUTPUT||'output/lip-motion/review';mkdirSync(output,{recursive:true});
 const browser=await chromium.launch({headless:true,executablePath:process.env.CHROMIUM_PATH,args:['--mute-audio']});
 const reports=[];
+async function poseCue(page,id,index){
+ await page.evaluate(id=>{window.lipFixtureTime=0;window.lipTestSpeech=null;__lipProbe.content(id==='clerk'?'FRAU KNICK':id,'Mama fünf Omi schöne Euro!',[],null,null,null,{id,tone:'procedural',valence:0})},id);
+ await page.waitForFunction(()=>!!window.lipTestSpeech);
+ await page.evaluate(index=>{lipTestSpeech.onresume?.();lipTestSpeech.onboundary({charIndex:index});window.lipFixtureTime=35;window.lipFixtureRenderTime+=100;Germany3D.sync();lipTestSpeech.onpause?.();Germany3D.sync()},index);await page.waitForTimeout(150);
+}
 async function faceClip(page,id){
  return page.evaluate(async({id,nativePaint})=>{
   const T=await import('https://cdn.jsdelivr.net/npm/three@0.186.0/build/three.module.js');
@@ -56,12 +61,12 @@ try{
    const connect=AudioNode.prototype.connect;AudioNode.prototype.connect=function(target,...args){if(target===this.context.destination){const mute=this.context.createGain();mute.gain.value=0;connect.call(mute,target);return connect.call(this,mute,...args)}return connect.call(this,target,...args)};
    speechSynthesis.speak=u=>{u.volume=0;window.lipTestSpeech=u;u.onstart?.();u.onpause?.()};speechSynthesis.cancel=()=>{};
   });
-  const page=await context.newPage(),errors=[],warnings=[];
+  const page=await context.newPage(),errors=[],warnings=[];page.setDefaultTimeout(60000);
   if(sources)await page.route('**/*.js?*',route=>{const file=new URL(route.request().url()).pathname.split('/').at(-1);return sources.has(file)?route.fulfill({contentType:'text/javascript',body:sources.get(file)}):route.continue()});
   page.on('pageerror',e=>{errors.push(e.message);console.log('pageerror',e.message)});page.on('console',m=>{if(m.type()==='error'){warnings.push(m.text());console.log('browser',m.text().slice(0,500))}});
   await page.route('**/buergeramt-lips.js?*',route=>route.fulfill({contentType:'text/javascript',body:fixtureSource('buergeramt-lips.js').replace('createTrack(now=()=>performance.now())','createTrack(now=()=>window.lipFixtureTime??performance.now())').replace(/(const poseGaps=\{[^\n]+\};)/,'$1window.__lipGapTable=poseGaps;')}));
   await page.route('**/buergeramt.js?*',route=>route.fulfill({contentType:'text/javascript',body:fixtureSource('buergeramt.js').replace('createTrack(()=>visualClock*1000)','createTrack(()=>window.lipFixtureTime??visualClock*1000)').replace('requestAnimationFrame(()=>{if(current()&&!settled)','queueMicrotask(()=>{if(current()&&!settled)').replace(/\}\)\(\);\s*$/,'window.__lipProbe={content,view,setStage,characters,cancelSpeech,showCharacter,beginOmen,resetOmen,omen,get options(){return options}};})();')}));
-  await page.route('**/world3d.js?*',route=>route.fulfill({contentType:'text/javascript',body:fixtureSource('world3d.js').replace('updateAmtMouth(level,now);','updateAmtMouth(level,window.lipFixtureRenderTime??now);').replace('window.Germany3D={ready:true,','window.__lipRender={scene:amtScene,camera:amtCamera,renderer,amtMoving,amtCharacters};window.Germany3D={ready:true,')}));
+  await page.route('**/world3d.js?*',route=>route.fulfill({contentType:'text/javascript',body:fixtureSource('world3d.js').replace('mobile:amtMobile,reducedMotion:amtReducedMotion});',nativePaint?'mobile:amtMobile,reducedMotion:amtReducedMotion});':'mobile:amtMobile,reducedMotion:{matches:true}});').replace('updateAmtMouth(level,now);','updateAmtMouth(level,window.lipFixtureRenderTime??now);').replace('window.Germany3D={ready:true,','window.__lipRender={scene:amtScene,camera:amtCamera,renderer,amtMoving,amtCharacters};window.Germany3D={ready:true,')}));
   if(name==='profile-failure')await page.route('**/characters/mouth-profiles.json*',route=>route.abort('failed'));
   if(name==='asset-failure')await page.route('**/omen/aktenkurier.splat*',route=>route.abort('failed'));
   await page.goto((process.env.GAME_URL||'http://127.0.0.1:8876/index.html')+'?geheim=buergeramt&voicePreview=1',{waitUntil:'commit',timeout:45000});
@@ -241,7 +246,7 @@ try{
     const metadata=await page.evaluate(id=>{const a=[...__lipRender.amtMoving,...__lipRender.amtCharacters].find(a=>a.id===id||a.lipId===id),moving=__lipRender.amtMoving.includes(a);return{key:a.performance&&a.lead?'clerk':a.animationId??a.id,manifestId:a.performance?'clerk':moving?a.id:a.name,performance:!!a.performance,moving}},id);
     let steps=nativePaint?metadata.performance?
      ['raise','stamp','refuse','return'].flatMap(arc=>[0,.5,1].map(phase=>({arc,phase}))):[0,.25,.5,.75,1].map(phase=>({arc:'work-gesture-work',phase})):
-     metadata.performance?[0,1,2,3,4].map(row=>({row})):metadata.moving?['work','gesture','look','flinch'].map(mode=>({mode})):[];
+     metadata.performance?[0,1,2,3,4,5].map(row=>({row})):metadata.moving?['work','gesture','look','flinch'].map(mode=>({mode})):[];
     if(nativePaint&&process.env.PLAYTEST_ALL_KEYS==='1'){
      const manifest=JSON.parse(readFileSync('assets/buergeramt/animation/'+metadata.manifestId+'.json'));
      steps=manifest.arcs.flatMap(arc=>[0,...arc.segments.flatMap(s=>[(s.start+s.end)/2,s.end])].map(time=>({arc:metadata.performance?arc.id:'work-gesture-work',phase:time/arc.duration*(metadata.performance?1:.5)})));
@@ -253,11 +258,25 @@ try{
      const target=await page.evaluate(()=>Germany3D.amtGaussian.owner?.activeSplats>0?Germany3D.amtGaussian.owner.startedUpdates+2:NaN);
      if(Number.isFinite(target))await page.waitForFunction(target=>{Germany3D.sync();return Germany3D.amtGaussian.owner.completedUpdates>=target},target,{timeout:45000});
      else await page.evaluate(()=>new Promise(resolve=>requestAnimationFrame(()=>{Germany3D.sync();requestAnimationFrame(()=>{Germany3D.sync();resolve()})})));
+     if(!nativePaint)assert.equal(await page.evaluate(()=>Germany3D.amtGaussian.actors.length),0,'atlas fixture must disable native admission at every pose');
      const frame=await page.evaluate(id=>{const a=[...__lipRender.amtMoving,...__lipRender.amtCharacters].find(a=>a.id===id||a.lipId===id);return{speech:BuergeramtLevel.lipSpeech,registration:GermanyAmtLips.displayedMouth(a),crop:a.renderKey,foot:a.mesh.position.y-a.mesh.geometry.parameters.height*a.mesh.scale.y/2,gaussian:Germany3D.amtGaussian}},id);
      assert.equal(frame.foot,0);assert(frame.speech.shape[0]>.75);assert(frame.registration?.every(Number.isFinite));
      await page.screenshot({path:`${output}/${name}-${id}-transform-${number}.png`});
      const crop=await faceClip(page,id);await page.screenshot({path:`${output}/${name}-${id}-transform-face-${number}.png`,clip:crop});
      transformationFrames.push({step,frame});
+     if(!nativePaint&&process.env.PLAYTEST_POSE_CLOSURES==='1'){
+      await poseCue(page,id,0);
+      const closure=await page.evaluate(id=>{const a=[...__lipRender.amtMoving,...__lipRender.amtCharacters].find(a=>a.id===id||a.lipId===id);return{speech:BuergeramtLevel.lipSpeech,profile:GermanyAmtLips.displayedMouthProfile(a),pose:a.mouthPose,key:a.renderKey,opacity:a.mesh.material.opacity,mapped:!!a.mesh.material.map?.image,hole:a.mesh.material.userData.lipHole.value,paint:Germany3D.amtLipSplat}},id);
+      assert.equal(closure.speech.actor,id);assert(closure.speech.active);assert.deepEqual(closure.speech.shape,[0,0,0,0]);
+      writeFileSync(output+'/'+name+'-'+id+'-pose-closure-'+number+'.json',JSON.stringify(closure,null,2));
+      const preOpen=closure.profile.source_upper.some((v,i)=>Math.abs(v-closure.profile.source_lower[i])>.001);assert.equal(closure.paint.visible,preOpen);assert.equal(closure.hole,preOpen?1:0);
+      await page.screenshot({path:output+'/'+name+'-'+id+'-pose-closed-'+number+'.png',clip:await faceClip(page,id)});
+      await page.evaluate(()=>{__lipProbe.cancelSpeech();Germany3D.sync()});await page.waitForTimeout(100);
+      await page.screenshot({path:output+'/'+name+'-'+id+'-pose-inactive-'+number+'.png',clip:await faceClip(page,id)});
+      transformationFrames[transformationFrames.length-1].closure=closure;
+      await poseCue(page,id,1);
+     }
+
     }
     await page.evaluate(key=>{delete lipTransformOverrides[key];Germany3D.sync()},metadata.key);
     await page.waitForTimeout(200);
@@ -306,7 +325,7 @@ try{
   if(nativePaint||poseOnly){
    await page.evaluate(()=>{BuergeramtLevel.update=lipOriginalUpdate;document.getElementById('amt-leave').click();Germany3D.sync()});
    assert.equal(await page.evaluate(()=>Germany3D.amtGaussian.actors.length),0);assert.deepEqual(errors,[]);
-   reports.push({name,nativePaint,poseOnly,silent:true,physicalAndroid:false,forcedDialogue:true,stationaryWorkAnchors:true,revision,snapshots,errors,warnings});
+   reports.push({name,nativePaint,atlasAdmissionDisabled:!nativePaint,poseOnly,silent:true,physicalAndroid:false,forcedDialogue:true,stationaryWorkAnchors:true,revision,snapshots,errors,warnings});
    await context.close();writeFileSync(`${output}/results.json`,JSON.stringify(reports,null,2));console.log(JSON.stringify({name,result:'PASS',nativePaint,actors:actors.length,errors}));continue;
   }
   // Native MP3 plays normally: do not seek or substitute a wall clock.
@@ -378,7 +397,7 @@ try{
   await page.waitForFunction(()=>{if(BuergeramtLevel.active)return false;Germany3D.sync();return Germany3D.amtLipSplat===null},null,{timeout:15000});
   assert.equal(await page.evaluate(()=>Germany3D.amtLipSplat),null);
   assert.deepEqual(errors,[]);assert.deepEqual(warnings.filter(w=>/Shader Error|VALIDATE_STATUS|GL_INVALID/.test(w)),[]);
-  reports.push({name,silent:true,physicalAndroid:false,forcedDialogue:true,revision,snapshots,mediaTrace,nativeWindow,occlusion,omenFrames,renderCost,errors,warnings});
+  reports.push({name,nativePaint,atlasAdmissionDisabled:!nativePaint,silent:true,physicalAndroid:false,forcedDialogue:true,revision,snapshots,mediaTrace,nativeWindow,occlusion,omenFrames,renderCost,errors,warnings});
   const video=page.video();await context.close();if(video)await video.saveAs(`${output}/${name}-motion.webm`);
   writeFileSync(`${output}/results.json`,JSON.stringify(reports,null,2));console.log(JSON.stringify({name,result:'PASS',actors:actors.length,errors}));
  }

@@ -1181,7 +1181,9 @@ The connected-lip revision fits the individual crease, corners, source cavity,
 opening contours, rounding and teeth for all 67 native paintings and 41 atlas
 source poses. Inactive speech returns the exact source; an owned closed cue
 compresses an existing opening. Both native endpoints and the atlas fallback
-use the shared bounded paint field. One lazy office-only metadata request joins
+use the shared bounded paint field. Against `c62de48`, the twelve runtime manifests add 75,268 uncompressed bytes,
+the three mouth modules add 11,214, and the atlas profiles occupy 32,414 bytes.
+One lazy office-only metadata request joins
 the existing asset queue; invalid/missing atlas profiles retain original paint
 and no mouth hole. No new texture, geometry, clock or dependency is introduced.
 Native image residency remains at most three textures per admitted actor; the
