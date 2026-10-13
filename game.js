@@ -942,6 +942,7 @@ function updateJwd(dt){
  const thief=jwd.burglar;if(!thief||distance>1200)return false;
  const target=thief.phase==="approach"?home:buildings.find(b=>b.id==="jwd-kranz"),tx=target.doorX,ty=target.doorY+35,dx=tx-thief.x,dy=ty-thief.y,d=Math.hypot(dx,dy),beforeX=thief.x,beforeY=thief.y;
  if(d>(thief.phase==="approach"?54:28)){
+  if(thief.phase==="retreat"&&d<75&&responderBlocked(tx,ty,13,thief,tx,ty)){thief.jwdMoving=0;thief.progress=null;thief.detour=null;thief.waiting=false;return false}
   const progress=thief.progress||(thief.progress={time:0,x:thief.x,y:thief.y});progress.time+=dt;
   if(progress.time>=.75){if(Math.hypot(thief.x-progress.x,thief.y-progress.y)<8){thief.detour=jwdBurglarDetour(thief,tx,ty);thief.waiting=!thief.detour}Object.assign(progress,{time:0,x:thief.x,y:thief.y})}
   while(thief.detour?.length&&dist(thief.x,thief.y,thief.detour[0].x,thief.detour[0].y)<2)thief.detour.shift();

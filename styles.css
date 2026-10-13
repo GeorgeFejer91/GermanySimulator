@@ -241,3 +241,6 @@ footer{bottom:calc(var(--subtitle-height) + 8px)}
 .dialogue .dialogue-copy,.dialogue .portrait{display:none}
 .dialogue:not([hidden]){width:auto;height:auto;min-height:0;grid-template-columns:auto;grid-template-rows:auto}
 .dialogue .dialogue-actions{grid-row:auto}
+.dialogue:not([hidden]){max-width:calc(100% - 16px)}
+.dialogue .dialogue-actions{display:flex;flex-wrap:wrap;min-width:0}
+.dialogue .dialogue-actions button{flex:1 1 auto;min-width:0;max-width:100%;white-space:normal;overflow-wrap:anywhere}

@@ -97,6 +97,17 @@ test('diagnostic renderer retains the same residential plots, residents and pave
  assert.ok(diagnostic.includes('offsetWorldPoint({x:40,y:3970,w:1010,h:150})'));
 });
 
+test('burglar plants his feet at an occupied retreat doorway and leaves when it clears',()=>{
+ for(const dt of [1/60,1/30,.1]){
+  const h=harness();h.awardAnmeldung();h.visitJwdHome();h.finish();h.jwdState.exitPending=false;h.jwdState.visit=2;Object.assign(h.player,{x:h.home.doorX,y:h.home.doorY+95});
+  for(let i=0;i<20/dt&&!h.state.dialogue;i++)h.updateJwd(dt);assert.ok(h.state.dialogue);h.finish();
+  const rich=h.homes.find(b=>b.id==='jwd-kranz');Object.assign(h.player,{x:rich.doorX,y:rich.doorY+35});
+  for(let i=0;i<15/dt;i++)h.updateJwd(dt);const thief=h.jwdState.burglar;assert.ok(thief);const position=[thief.x,thief.y];
+  for(let i=0;i<3/dt;i++)h.updateJwd(dt);assert.deepEqual([thief.x,thief.y],position);assert.equal(thief.jwdMoving,0);
+  h.player.y+=90;for(let i=0;i<10/dt&&h.jwdState.burglar;i++)h.updateJwd(dt);assert.equal(h.jwdState.burglar,null);
+ }
+});
+
 test('paved home lane connects with full body clearance to the existing north/south pavement',()=>{
  const h=harness(),r=h.player.r;
  for(const b of h.homes.filter(b=>b.residential))assert.equal(h.staticBlocked(b.doorX,b.doorY+35,r),false);
