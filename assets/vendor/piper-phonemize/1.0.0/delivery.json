@@ -1,0 +1,27 @@
+{
+  "source": "https://www.npmjs.com/package/@diffusionstudio/piper-wasm/v/1.0.0",
+  "version": "1.0.0",
+  "languages": [
+    "de",
+    "en"
+  ],
+  "original": {
+    "piper_phonemize.js": "fef0c2fc442d24fdef5c7c7cc37d5da2314407640fe11ab1bfe347c723dff19b",
+    "piper_phonemize.data": "29f1025eb23a5b5c192cd14a6efbce4509402ff265405072ee6f7d1a09b78f8c",
+    "piper_phonemize.wasm": "b777cd107a91d2bcc6a1ea46f2c26a662a7407394fe84589198aeaa83dd7a9d6"
+  },
+  "delivery": {
+    "piper_phonemize.js": {
+      "sha256": "14d778a8c369fcbabcf720ab73d50a006278104b5cac6c8efcb750df1066b035",
+      "bytes": 83757
+    },
+    "piper_phonemize.data": {
+      "sha256": "edcd1e283a980cb9bd76f7e83c78b81ab4d258d0af59547e27bb538c6cb56984",
+      "bytes": 904814
+    },
+    "piper_phonemize.wasm": {
+      "sha256": "b777cd107a91d2bcc6a1ea46f2c26a662a7407394fe84589198aeaa83dd7a9d6",
+      "bytes": 635212
+    }
+  }
+}

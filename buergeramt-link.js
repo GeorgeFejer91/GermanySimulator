@@ -7,7 +7,7 @@ function sourceOf(value){return typeof value==="string"?value:value?.streamID||v
 // The sender role owns both the message type and its bounded payload.
 function validPayload(type,data,sender){
  const shapes=sender==="phone"?{scan:["id"],register:["id","name"],"ticket-received":["id","number"],"phone-hidden":[],"phone-visible":[],answer:["id","round"],decline:["id","round"],hangup:["id","round"],"call-ended":["id","round","mode"],"call-ringing":["id","round","atMs"],"call-missed":["id","round"],"sync-pong":["id","receivedAtMs","sentAtMs"],"call-ready":["id","round","atMs"],"call-scheduled":["id","round","atMs","mode","lateMs"],"police-start":["index","mode","readyDelayMs","atMs"],"police-done":["index","mode","durationMs","atMs"]}:
-  sender==="host"?{"scan-ready":[],ticket:["number","counter"],"queue-call":["number","counter"],forfeit:[],silence:["id"],"counter-start":[],"call-arm":["id","round"],call:["id","round","line","ringAtPhoneMs","ringAtUtcMs","leadMs"],"call-end":["id","round"],"police-line":["index","line"],"police-cutoff":["index","stopAtPhoneMs","stopAtUtcMs"],"sync-ping":["id"],"office-tempo":["rate"],done:[]}:{};
+  sender==="host"?{"scan-ready":[],"known-name":["id","name"],ticket:["number","counter"],"queue-call":["number","counter"],forfeit:[],silence:["id"],"counter-start":[],"call-arm":["id","round"],call:["id","round","line","ringAtPhoneMs","ringAtUtcMs","leadMs"],"call-end":["id","round"],"police-line":["index","line"],"police-cutoff":["index","stopAtPhoneMs","stopAtUtcMs"],"sync-ping":["id"],"office-tempo":["rate"],done:[]}:{};
  if(!Object.hasOwn(shapes,type)||!data||typeof data!=="object"||Array.isArray(data))return false;
  if(type==="call"&&Object.hasOwn(data,"greeting")){
   if(typeof data.greeting!=="string"||!data.greeting.trim()||data.greeting.length>170||/[\u0000-\u001f\u007f]/.test(data.greeting))return false;
@@ -21,7 +21,7 @@ function validPayload(type,data,sender){
  if(keys.length!==fields.length||keys.some(key=>!fields.includes(key)))return false;
  if(type==="office-tempo")return Number.isFinite(data.rate)&&data.rate>=.5&&data.rate<=1;
  if(type==="ticket-received")return typeof data.id==="string"&&/^[a-f0-9]{24}$/.test(data.id)&&typeof data.number==="string"&&/^[A-Z]{1,2}-\d{1,12}$/.test(data.number);
- if(type==="scan"||type==="register"){if(typeof data.id!=="string"||!/^[a-f0-9]{24}$/.test(data.id))return false;if(type==="scan")return true}
+ if(type==="scan"||type==="register"||type==="known-name"){if(typeof data.id!=="string"||!/^[a-f0-9]{24}$/.test(data.id))return false;if(type==="scan")return true}
  const clock=value=>Number.isFinite(value)&&value>=0&&value<=1e12;
  if(type==="sync-ping"||type==="sync-pong")return Number.isSafeInteger(data.id)&&data.id>0&&data.id<=2147483647&&
   (type==="sync-ping"||clock(data.receivedAtMs)&&clock(data.sentAtMs)&&data.sentAtMs>=data.receivedAtMs&&data.sentAtMs-data.receivedAtMs<=12000);
@@ -30,7 +30,7 @@ function validPayload(type,data,sender){
  if(type==="call-scheduled")return data.id==="grass"&&round(data.round)&&clock(data.atMs)&&["peer","utc","receipt"].includes(data.mode)&&Number.isInteger(data.lateMs)&&data.lateMs>=0&&data.lateMs<=12000;
  if(type==="police-start"||type==="police-done")return Number.isInteger(data.index)&&data.index>=-1&&data.index<4&&["voice","recording","fallback"].includes(data.mode)&&
   clock(data.atMs)&&(type==="police-start"?Number.isInteger(data.readyDelayMs)&&data.readyDelayMs>=0&&data.readyDelayMs<=60000:Number.isInteger(data.durationMs)&&data.durationMs>=0&&data.durationMs<=60000);
- if(type==="register")return typeof data.name==="string"&&data.name.trim().length>=2&&data.name.length<=80&&!/[\u0000-\u001f\u007f]/.test(data.name);
+ if(type==="register"||type==="known-name")return typeof data.name==="string"&&data.name.trim().length>=2&&data.name.length<=80&&!/[\u0000-\u001f\u007f-\u009f]/.test(data.name);
  if(type==="ticket"||type==="queue-call")return typeof data.number==="string"&&/^[A-Z]{1,2}-\d{1,12}$/.test(data.number)&&Number.isInteger(data.counter)&&data.counter>=1&&data.counter<=4;
  if(type==="call-ended")return data.id==="grass"&&round(data.round)&&["sound","fallback"].includes(data.mode);
  if(type==="call-end")return data.id==="grass"&&round(data.round);

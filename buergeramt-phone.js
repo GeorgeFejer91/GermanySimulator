@@ -148,6 +148,7 @@ link.addEventListener("message",e=>{
  if(m.type==="done"){if(!finished)endSlot("Dieser Termin wurde am Schalter bearbeitet.",true);else stopCall();return}
  if(finished)return;
  if(m.type==="office-tempo")officeRate(m.rate);
+ else if(m.type==="known-name"&&m.id===scanId&&!submittedName&&!name.value){name.value=m.name}
  else if(m.type==="scan-ready"){scanReady=true;admission.hidden=!submittedName;submit.disabled=!!submittedName;requestTicket()}
   else if(m.type==="ticket"&&submittedName&&/^[A-Z]{1,2}-\d{1,12}$/.test(m.number||"")&&Number.isInteger(m.counter)&&m.counter>=1&&m.counter<=4){if(slotActive&&number.textContent===m.number){acknowledgeTicket();return}stopCall();phoneSilent=false;atCounter=false;lastRound=0;admission.hidden=true;currentCall="";resolved="";number.textContent=m.number;ticket.hidden=false;form.hidden=true;slotActive=!document.hidden;status.textContent="Achten Sie auf die Aufruftafel im Amt.";if(slotActive){acknowledgeTicket();keepAwake()}else{link.send("phone-hidden");endSlot("Seite verlassen. Ihr Platz ist verfallen.");link.close()}}
  else if(m.type==="queue-call"&&slotActive&&m.number===number.textContent&&Number.isInteger(m.counter)&&m.counter>=1&&m.counter<=4)status.textContent="Ihre Nummer ist aufgerufen. Achten Sie auf die Aufruftafel im Amt.";
