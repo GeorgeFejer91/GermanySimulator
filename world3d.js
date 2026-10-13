@@ -7,7 +7,7 @@ import {createAmtLampWear} from './buergeramt-lamps.js?v=20261012-counter-recove
 import {createPotatoMirror} from './buergeramt-potato-mirror.js?v=20261013-physical-mirror';
 import {amtWalkDirection,createAmtWalkSpare} from './buergeramt-walk-view.js?v=20261013-smooth-turning';
 import {prepareWithSegments,measureNaturalWidth,measureLineStats} from './assets/vendor/pretext/dist/layout.js';
-import {createJobcenterBuilding,createJobcenterEncounter} from './jobcenter.js?v=20261013-overlord-fury';
+import {createJobcenterBuilding,createJobcenterEncounter} from './jobcenter.js?v=20261013-first-person-look';
 const THREE_URL="./assets/vendor/three/0.186.0/build/three.module.min.js";
 const GLTF_LOADER_URL="./assets/vendor/three/0.186.0/examples/jsm/loaders/GLTFLoader.js";
 function buergeramtDoorRadiance(time,reducedMotion=false){
@@ -2142,3 +2142,4 @@ function showRendererFailure(error){
   },layoutMissionPointer,inspectAssets,setAmtQr,get amtLipSplat(){return amtMouthSplat?.inspect()||null},get amtGaussian(){return amtGaussian.inspect()},get amtCinematicReady(){const status=amtOmenSplat?.inspect();return amtOmenSkipped||!!status?.ready||!!status?.failure},get amtOmenSplat(){return {visit:amtOmenVisit,loading:!!amtOmenRequest,skipped:amtOmenSkipped,failure:amtOmenFailure,...(amtOmenSplat?.inspect()||{ready:false,visible:false})}},get amtOmenStaging(){return {isolation:amtIsolation.value,environmentVisible:amtEnvironment.visible}},get amtOffice(){return officeDetail?.inspect()||null},get amtCharacters(){return [...amtCharacters.map(actor=>({name:actor.name,id:actor.animationId??actor.id,...amtSnapshot(actor),frame:actor.frame,loaded:!!actor.mesh.material.map?.image,mapped:!!actor.mesh.material.map,visible:actor.mesh.visible,detail:actor.mesh.material.map===actor.detail,texelHeight:actor.mesh.material.map?.image?.height||0,breath:actor.mesh.material.userData.breath.value})),...amtMoving.map(actor=>({name:actor.id,...amtSnapshot(actor),frame:actor.cell,loaded:!!actor.mesh.material.map?.image,mapped:!!actor.mesh.material.map,visible:actor.mesh.visible,detail:actor.mesh.material.map===actor.detail||actor.mesh.material.map===actor.walkDetail||actor.mesh.material.map===actor.turnDetail,turnPrepared:!!actor.turnDetail,turnReady:!!actor.turnDetail?.image,texelHeight:actor.mesh.material.map?.image?.height||0,breath:actor.mesh.material.userData.breath.value,tint:actor.mesh.material.color.getHexString(),position:[actor.mesh.position.x,actor.mesh.position.z]}))]}};
   app.classList.add("three-ready");
 })().catch(showRendererFailure);
+

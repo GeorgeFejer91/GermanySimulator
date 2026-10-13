@@ -19,6 +19,39 @@ function pointer(target,type,id,x,y,eventTarget=target,pointerType='touch'){
 function walk(h,seconds=1){for(let i=0;i<Math.round(seconds*60);i++)h.level.update(1/60)}
 function hold(h,dx,dy,id=1){pointer(h.stick,'pointerdown',id,64,64);pointer(h.stick,'pointermove',id,64+dx,64+dy)}
 
+test('up/down arrows look without walking, preserve WASD movement and clamp pitch',()=>{
+ for(const hz of [30,60,120]){
+  const h=office(),before=h.level.view;
+  h.key('ArrowUp');for(let i=0;i<hz;i++)h.level.update(1/hz);
+  assert.equal(h.level.view.pitch,.9);assert.equal(h.level.view.z,before.z);assert.equal(h.level.view.x,before.x);
+  h.key('ArrowUp','keyup');h.key('ArrowDown');for(let i=0;i<hz*2;i++)h.level.update(1/hz);
+  assert.equal(h.level.view.pitch,-.9);assert.equal(h.level.view.walkedDistance,before.walkedDistance);
+  h.key('ArrowDown','keyup');h.key('KeyW');walk(h,.1);assert.ok(h.level.view.z<before.z);
+ }
+});
+
+function hover(h,x,y,target=h.look){
+ const e=new Event('pointermove');Object.assign(e,{pointerId:7,pointerType:'mouse',buttons:0,clientX:x,clientY:y});
+ Object.defineProperty(e,'target',{value:target});h.document.dispatchEvent(e);
+}
+test('mouse hover looks both ways and resets across controls, focus, hidden and scripted scenes',()=>{
+ const h=office();hover(h,200,300);hover(h,250,250);
+ assert.equal(h.level.view.yaw,.2);assert.equal(h.level.view.pitch,.2);
+ hover(h,200,300);assert.equal(h.level.view.yaw,0);assert.equal(h.level.view.pitch,0);
+ for(const reset of ['control','blur','hidden','scene','paused','mixer','leave']){
+  hover(h,250,250);const before=h.level.view;
+  if(reset==='control'){const button=h.node('amt-leave');button.closest=()=>button;hover(h,500,600,button)}
+  else if(reset==='blur')h.window.dispatchEvent(new Event('blur'));
+  else if(reset==='hidden'){h.hide();hover(h,500,600);h.document.hidden=false}
+  else if(reset==='scene'){h.window.__navigationProbe.setStage('character');hover(h,500,600);h.window.__navigationProbe.setStage('walk-sign')}
+  else if(reset==='paused'){h.window.GermanyHUD={paused:true};hover(h,500,600);h.window.GermanyHUD.paused=false}
+  else if(reset==='mixer'){h.node('amt-mix').open=true;hover(h,500,600);h.node('amt-mix').open=false}
+  else h.document.dispatchEvent(new Event('pointerout'));
+  hover(h,700,700);assert.equal(h.level.view.yaw,before.yaw,reset);assert.equal(h.level.view.pitch,before.pitch,reset);
+  hover(h,720,680);assert.ok(h.level.view.yaw>before.yaw,reset);
+ }
+});
+
 test('thumb stick has a quiet center, gradual speed and a bounded full-speed diagonal',()=>{
  const still=office();hold(still,2,-2);walk(still);assert.equal(still.level.view.z,4.8);assert.equal(still.level.view.x,0);
  const half=office();hold(half,0,-128*.32*.57);walk(half);assert.ok(Math.abs(half.level.view.z-3)<1e-8,'half stick should walk 1.8 m, rather than normalize to full speed');
@@ -120,3 +153,4 @@ test('double taps use screen selection only and retain counter ticket prerequisi
  const desk=pickedOffice({desk:3});tap(desk);tap(desk);assert.equal(desk.level.stage,'early');assert.equal(desk.level.activated,false);
  const h=pickedOffice();tap(h);h.tick(400);tap(h);assert.equal(h.picks.length,0,'expired first tap cannot pair');
 });
+

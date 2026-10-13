@@ -23,8 +23,14 @@ remain authoritative. The scene outside the joystick and toolbar accepts a
 separate captured finger for horizontal and vertical look; walking retains its pitch, bounded to
 ±.9 radians. Touch sensitivity follows the viewport's shorter dimension, with
 the same time-scale multiplier as desktop drag. Mouse drag also supports pitch;
-Page Up/Down give keyboard pitch control, while arrow turning/WASD retain their
-existing behavior. Scripted speakers, the portrait and mirror retain their own
+Arrow Up/Down control pitch, with Page Up/Down retained as aliases. Left/right
+arrows turn; WASD and the touch stick walk. Mouse and trackpad movement over the
+scene also changes yaw/pitch without a held button, using the same sensitivity
+and slowdown as drag look. Controls, the open mixer, scripted sequences and
+paused/hidden scenes do not take mouse look. Focus loss and scene transitions
+reset the mouse baseline. The centered reticle remains an invisible HUD object;
+nearby facing interactions retain their existing selection.
+Scripted speakers, the portrait and mirror retain their own
 camera framing. Desktop E retains its nearby facing target. A single mouse click also selects a visible interactive target, while mouse drags retain camera control. Mobile double
 taps select the closest visible person, counter, portrait or mirror within 64–112 CSS pixels
 of the tap, ranked by screen distance and then visible depth. Selection uses
@@ -1429,3 +1435,4 @@ Six release cold-start lab runs pass the 18 MB transfer, 4 Hz title dispatch, 1.
 A valid name captured in the opening form is prepared before arrival; if absent, preparation starts at the companion registration. The local inference contract, intercom-only listening acceptance and training identity are owned by `VOICE-SYNTH-PROTOCOL.md`'s browser-local appointment-name section. Reservation code, assigned counter, exact ticket receipt and independent visitor ownership stay authoritative.
 
 A reservation whose audio is still preparing moves to a later turn at the same counter. Its board call and ordinary call-window deadline begin only after preparation succeeds or reaches a terminal caption fallback. A received personal call gets its own allocated clerk, exact visible name/counter and English translation; it bypasses only the ordinary rare anonymous-call cooldown and shares the existing foreground speech owner. A valid late ticket receipt can still announce within the remaining call window. Retirement, replay and superseding cues stop/release their exact media; stale synthesis cannot attach to a replacement ticket. Muting/unavailable synthesis retains the caption and board call without substituting another voice.
+

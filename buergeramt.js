@@ -9,7 +9,7 @@ walkHud.append(actions);walkHud.append(status);actions.setAttribute?.("role","gr
 const objective=document.getElementById("amt-objective"),nearby=document.getElementById("amt-nearby"),exit=root.querySelector("#amt-exit"),ambient=document.getElementById("amt-ambient");
 const door={x:0,z:5.55},sign={x:0,z:-2.6},counter={x:4,z:-8.15},view={x:0,z:4.8,yaw:0,walkedDistance:0,positionGeneration:0};
 const held=new Set(),pendingTimers=new Set();
-const pointerKeys=new Map();let turnVelocity=0,lookPointer=null,lastTap=null;
+const pointerKeys=new Map();let turnVelocity=0,lookPointer=null,mouseLook=null,lastTap=null;
 const moveStick=document.getElementById("amt-move-stick"),lookZone=document.getElementById("amt-look-zone");
 let movePointer=null,moveX=0,moveY=0;
 function releaseMoveStick(){
@@ -19,7 +19,7 @@ function releaseMoveStick(){
 }
 function officeKeyHeld(key){if(held.has(key))return true;for(const value of pointerKeys.values())if(value.key===key)return true;return false}
 function clearOfficeInput(){
- held.clear();turnVelocity=0;lastTap=null;const look=lookPointer;lookPointer=null;
+ held.clear();turnVelocity=0;lastTap=null;mouseLook=null;const look=lookPointer;lookPointer=null;
  releaseMoveStick();lookZone?.classList.remove("is-active");
  const release=(target,id)=>{if(target?.hasPointerCapture?.(id))target.releasePointerCapture(id)};
  for(const [id,value]of pointerKeys)release(value.target,id);pointerKeys.clear();
@@ -918,8 +918,8 @@ function update(dt){
  if(queueClock+1e-9>=callInterval){queueClock=Math.max(0,queueClock-callInterval);nextQueueCall()}
  if(!walking())return;
  turnOfficeView(elapsed);
- view.pitch=Math.max(-.9,Math.min(.9,(view.pitch||0)+((officeKeyHeld("PageUp")?1:0)-(officeKeyHeld("PageDown")?1:0))*1.2*elapsed));
- const f=(officeKeyHeld("KeyW")||officeKeyHeld("ArrowUp")?1:0)-(officeKeyHeld("KeyS")||officeKeyHeld("ArrowDown")?1:0)+moveY,s=(officeKeyHeld("KeyD")?1:0)-(officeKeyHeld("KeyA")?1:0)+moveX;
+ view.pitch=Math.max(-.9,Math.min(.9,(view.pitch||0)+((officeKeyHeld("ArrowUp")||officeKeyHeld("PageUp")?1:0)-(officeKeyHeld("ArrowDown")||officeKeyHeld("PageDown")?1:0))*1.2*elapsed));
+ const f=(officeKeyHeld("KeyW")?1:0)-(officeKeyHeld("KeyS")?1:0)+moveY,s=(officeKeyHeld("KeyD")?1:0)-(officeKeyHeld("KeyA")?1:0)+moveX;
  if(f||s){const length=Math.max(1,Math.hypot(f,s)),speed=officeKeyHeld("KeyR")?7.2:officeKeyHeld("ShiftLeft")?5.8:3.6,dx=(Math.sin(view.yaw)*f+Math.cos(view.yaw)*s)/length*speed*elapsed,dz=(-Math.cos(view.yaw)*f+Math.sin(view.yaw)*s)/length*speed*elapsed;const steps=Math.max(1,Math.ceil(Math.hypot(dx,dz)/.1));for(let i=0;i<steps;i++){const stepX=view.x,stepZ=view.z,x=Math.max(-7.45,Math.min(7.45,view.x+dx/steps)),z=Math.max(-10.05,Math.min(8.45,view.z+dz/steps));const crossing=view.z>=door.z&&z<door.z||view.z<door.z&&z>=door.z;if(crossing&&Math.abs(x)>1.3)break;if(!officeBlocked(x,view.z))view.x=x;if(!officeBlocked(view.x,z)){view.z=z;if(crossing&&stage==="outside"&&z<door.z){setStage(activated?"waiting":"walk-sign",true);setStatus(activated?"WARTENUMMER "+number+" · AUFRUF ABWARTEN":"QR-CODE MIT DEM TELEFON SCANNEN")}}view.walkedDistance+=Math.hypot(view.x-stepX,view.z-stepZ);}}
  const {desk,actor,mirror,portrait}=nearbyInteraction(),near=distanceTo(nearbyTarget())<1.9&&(stage!=="outside"||Math.abs(view.x)<1.3);
  const nearbyText=desk?"E · SCHALTER "+desk+" ANSPRECHEN":mirror?"E · SPIEGEL BETRACHTEN":portrait?"E · BUNDESPRÄSIDENT BETRACHTEN":actor?"E · "+(story.characters[actor.id]||story.patrons[actor.id]).speaker+" ANSPRECHEN":near?(stage==="outside"?"DURCH DEN EINGANG GEHEN":stage==="walk-sign"?"QR-CODE MIT DEM TELEFON SCANNEN":"AUFRUFTAFEL"):(stage==="outside"?"ZUR EINGANGSTÜR":stage==="walk-sign"?"QR-SCHILD UNTER DER ANZEIGE":"AUFRUFTAFEL");
@@ -1135,6 +1135,7 @@ function interactAt(x,y){
  interact({...picked,actor});
 }
 document.addEventListener("pointerdown",event=>{
+ mouseLook=null;
  if(active&&event.target.closest("#amt-mix"))clearOfficeInput();
  if(event.target.closest("button,input,select,textarea,a,summary,.amt-touch-controls,#amt-mix")){lastTap=null;return}
  if(!active||!walking()||omen.phase||document.hidden||event.buttons!==1||lookPointer)return;
@@ -1142,6 +1143,13 @@ document.addEventListener("pointerdown",event=>{
  event.target.setPointerCapture?.(event.pointerId);if(lookPointer.touch)lookZone?.classList.add("is-active");
 });
 document.addEventListener("pointermove",event=>{
+ if(!active||!walking()||omen.phase||document.hidden||window.GermanyHUD?.paused||mixPanel.open){mouseLook=null;return}
+ if(!lookPointer){
+  if(event.pointerType!=="mouse"||event.buttons!==0||event.target.closest("button,input,select,textarea,a,summary,.amt-touch-controls,#amt-mix")){mouseLook=null;return}
+  const previous=mouseLook;mouseLook={x:event.clientX,y:event.clientY};
+  if(previous){view.yaw+=(event.clientX-previous.x)*.004*timeScale();view.pitch=Math.max(-.9,Math.min(.9,(view.pitch||0)-(event.clientY-previous.y)*.004*timeScale()))}
+  return;
+ }
  if(!lookPointer||event.pointerId!==lookPointer.id)return;
  if(lookPointer.touch&&!lookPointer.moved&&Math.hypot(event.clientX-lookPointer.startX,event.clientY-lookPointer.startY)<=12)return;
  lookPointer.moved=true;lastTap=null;
@@ -1151,6 +1159,7 @@ document.addEventListener("pointermove",event=>{
   view.yaw+=dx*sensitivity*timeScale();view.pitch=Math.max(-.9,Math.min(.9,(view.pitch||0)-dy*sensitivity*timeScale()));
  }
 });
+document.addEventListener("pointerout",event=>{if(!event.relatedTarget)mouseLook=null});
 for(const type of ["pointerup","pointercancel","lostpointercapture"])document.addEventListener(type,event=>{
  if(lookPointer?.id!==event.pointerId)return;
  const pointer=lookPointer;lookPointer=null;lookZone?.classList.remove("is-active");
@@ -1173,3 +1182,4 @@ window.BuergeramtLevel={cancelNameAnnouncement,get tickets(){return [...phoneTic
  "amt-wolfram-rentenbescheid":window.BuergeramtAnimationClock?.ambientPatron(stationaryClocks["amt-wolfram-rentenbescheid"],attempt)
 }},get characterMood(){return characterMood},get fever(){return feverClock?.inspect()||{active:false,strength:0}},get clerkPerformance(){return clerkPerformance()},get omen(){return{turnProgress:omen.phase==="turn"?1-omen.hold/omenTurnSeconds:0,phase:omen.phase,strength:omen.strength,visit:omen.visit,revealTime:omen.revealTime,life:omenLife(),enabled:options?.cinematics!==false,x:characters[0].x,z:characters[0].z,speech:omen.speech?{...omen.speech}:null}},get registeredName(){return registeredName},get activated(){return activated}};
 })();
+

@@ -181,3 +181,24 @@ pass on ANGLE/Intel Iris Xe: candidate maximum transfer 17,911,376 bytes, all ni
 inputs accepted and zero errors per run. No performance speedup is claimed.
 Physical Android, natural-duration mission play and perceptual listening are
 NOT RUN. Captured reports and screenshots remain ignored local evidence.
+
+# First-person looking controls — 2026-10-13
+
+Integrator-owned. Arrow Up/Down control pitch in the office and Jobcenter;
+WASD and independent touch movement remain authoritative. Mouse/trackpad hover
+and existing drag/touch look share bounded pitch. The office reticle remains
+an invisible HUD object. Scripted framing, clicking, collision, missions,
+audio ownership and scene teardown retain their existing authority.
+No new assets, dependencies, timers, loading or per-frame render work.
+
+Publish only the thirteen scoped input/style/test/document paths. Preserve
+the latest published intro, portrait, flame, cavern rumble and JWD changes.
+A GitHub commit/tree/ref transaction with an expected parent protects those
+changes after local Git metadata became unavailable. Independent Physics
+and Camera source reviews, silent native keyboard/mouse/touch browser checks,
+Pages-selected Node gates and existing browser budgets own acceptance.
+Physical Android and perceptual listening remain separate NOT RUN checks.
+Two exploratory assertions also fail against the original e3b2ba3 baseline:
+the park harness lacks clearInput and the Kripo source regex assumes an
+outdated export order. They are outside this feature and its Pages gates.
+
