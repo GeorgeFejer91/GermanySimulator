@@ -12,11 +12,11 @@ function fixture(){
   const effect=createAmtPortraitMelt({THREE:{MeshBasicMaterial:Material,PlaneGeometry:Geometry,Mesh,Vector4:class{}},material,frame,floor,position:{x:3.4,z:5.43},width:1.276});
   return{effect,material,frame,bindings};
 }
-test('loaded portrait, drips and floor share one source and the authoritative sigmoid; missing paint stays legible',()=>{
+test('loaded portrait and floor share the delayed wave; missing paint stays legible',()=>{
   const f=fixture();f.effect.update({time:900,visualTime:BuergeramtGoop.motion(900)});assert.equal(f.effect.inspect().melt,0);assert.equal(f.effect.inspect().dripsVisible,false);
   const texture={actualPaint:true};f.effect.setTexture(texture);assert.equal(f.bindings.length,1);assert.equal(f.bindings[0].texture,texture);
   assert.equal(f.bindings[0].info.x,3.4);assert.ok(Math.abs(f.bindings[0].info.z-5.4696)<1e-10);
-  for(const time of [0,150,300,450,600,750,900,1200]){f.effect.update({time,visualTime:BuergeramtGoop.motion(time)});assert.equal(f.effect.inspect().melt,BuergeramtGoop.goop(time));assert.equal(f.effect.inspect().dripsVisible,time>0);}
+  for(const time of [0,30,60,89.999,90,90.1,150,300,450,570,600,900,1200]){f.effect.update({time,visualTime:BuergeramtGoop.motion(time)});assert.equal(f.effect.inspect().melt,BuergeramtGoop.goop(time));assert.equal(f.effect.inspect().dripsVisible,time>90);}
   f.effect.update({time:900,visualTime:BuergeramtGoop.motion(900)},true);assert.equal(f.effect.inspect().melt,1);assert.equal(f.effect.inspect().clock,0);
   f.effect.update(null);assert.equal(f.effect.inspect().melt,0);assert.equal(f.effect.inspect().dripsVisible,false);
   f.effect.update({time:0,visualTime:0});assert.equal(f.effect.inspect().melt,0,'next visit is an intact portrait');

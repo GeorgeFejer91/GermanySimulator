@@ -484,7 +484,8 @@ object reviewers; rendered HUD and independent timing/lifecycle review apply.
 The office checkerboard uses the existing floor mesh and lit material. Its
 painted grout replaces the former individual grout boxes. `buergeramt-floor.js`
 adds no image, video, runtime package or extra WebGL context. When visible
-inside-room progression begins it allocates two 256 × 320 desktop or
+inside-room melt becomes positive after the shared 90-second grace period, it
+allocates two 256 × 320 desktop or
 128 × 160 compact-screen pigment targets. RGBA32F requires renderable float and
 linear float sampling; unsupported devices use bounded procedural flow and
 foot ripples without feedback targets. RGBA32F uses sixteen bytes per texel for mixed RGB and portrait paint
@@ -497,6 +498,11 @@ white disappearing during repeated tiny transport steps.
 Transport runs through the existing render owner at at most 20 Hz of scaled
 scene time, at most two tiny
 offscreen passes per frame, with bounded elapsed time and no hidden catch-up.
+The grace period allocates no pigment targets and does no liquid transport or
+walking-ripple emission; accepted-walk baselines still track positions so onset
+cannot replay earlier walking or catch up the ninety seconds.
+Only the eddy potential's phase subtracts the grace period; ripple ages and
+portrait-paint contact sampling retain absolute integrated scene time.
 Three smaller eddy scales fold the persistent field; screen-filtered concentration
 contours supply finer nested black-and-white layers without larger textures or
 additional passes. The float-free fallback uses bounded successive shears and

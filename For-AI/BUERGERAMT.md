@@ -131,8 +131,10 @@ No new synthesis or voice profile is needed for this restoration.
 ## Waiting-room floor
 
 The room begins with .82 m black-and-white checkerboard tiles and painted grout.
-Over **480 seconds (8 minutes) of visible, unscaled residence inside the actual
-doorway**, their pigment gradually stretches into curling veins and merging oily
+The first **90 seconds of visible, unscaled residence inside the actual doorway**
+are a grace period: intact floor and portrait, full-speed movement and audio, no
+liquid targets or walking ripples. Then, over **480 seconds (8 minutes)**, their
+pigment gradually stretches into curling veins and merging oily
 pools, with progressively finer nested black-and-white ribbons along the mixed
 boundaries. Grout disappears and the surface develops shallow specular ridges and
 distorted analytic reflections of the five existing fluorescent ceiling strips.
@@ -141,17 +143,26 @@ No floor height, furniture, body clearance or collision changes; gait remains
 tied to accepted displacement.
 
 **Liquidation and deceleration must map one to one.** `buergeramt-goop.js` is the
-single immutable authority: `p = clamp(age / 480, 0, 1)`,
+single immutable authority: `p = clamp((age − 90) / 480, 0, 1)`,
 `goop = p + .18 × sin(πp) × sin(6πp)`, and `speed = 1 − .35 × goop`.
 Three slow waves (160 seconds each) temporarily ease the drag while the overall
 speed trend descends. Their amplitude tapers at both ends; goop stays in [0, 1]
-and speed in [.65, 1]. Melting starts immediately: about 9.5% at 30 seconds and
-17.4% at one minute. Speed falls to 93.9% at one minute, recovers to 95.7% at two,
+and speed in [.65, 1]. After the shared grace period, melting reaches about 9.5%
+at 30 seconds and 17.4% at one minute into the ramp. Speed falls to 93.9% at one minute, recovers to 95.7% at two,
 falls to 79.3% at 3:20, recovers to 85.7% at 4:40, falls to 69.3% at six and
-recovers to 71.1% at seven before settling at **65% at eight minutes**. Floor and
+recovers to 71.1% at seven before settling at **65% eight minutes into the ramp
+(9½ minutes of total residence)**. Floor and
 portrait melt recede on those same recoveries; deposited pigment keeps flowing
 forward without reseeding. Do not restore the previous late sigmoid or give the
 portrait a separate early-start clock.
+
+The eddy potential starts at zero phase when liquid begins, using integrated
+scene time minus the 90-second grace period. Footstep ages, portrait sampling
+and paint contact keep absolute scene time; shifting those clocks would delay
+walking wakes and desynchronize the wall paint. The grace candidate passes 455
+release regressions, four accelerated GPU profiles, a lit movement sequence and
+nine muted native-media rate samples. These are desktop/Android-emulated,
+accelerated checks, not natural-duration, physical-device or listening evidence.
 Reaching the assigned Schalter within the existing 1.9 m interaction range while
 its row shows the player's called number automatically starts **90 seconds of
 recovery**, without requiring E. A reserved ticket, wrong desk, premature approach
@@ -178,7 +189,8 @@ the 480-second age; that would break the user's explicit coupling requirement.
 attempt generation. Count age only while the player's position is inside the
 door; continue through conversations and fever/omen beats, pause age in the
 vestibule and when hidden/closed, and reset both clocks on close/replay. Its exact
-trigonometric integral of speed (396 scene seconds over 480 real residence seconds)
+trigonometric integral of speed (90 full-speed seconds, then 396 scene seconds
+over the 480-second ramp; 486 scene seconds after 570 real residence seconds)
 drives player/NPC movement, queue and deadlines, action/fever/
 omen clocks, atlas/breath/mouth animation and liquid transport. Render and input
 dispatch stay responsive. `buergeramt-floor.js` carries one
@@ -255,7 +267,7 @@ both-color retention, Android-emulated views and material restoration probe is
 `tools/playtest-buergeramt-floor.mjs`. Accelerated shader captures do not prove
 natural mission flow or physical-device performance.
 
-The eight-minute wave update has bounded CPU and accelerated rendered evidence
+The earlier eight-minute wave update has bounded CPU and accelerated rendered evidence
 under ignored `output/wavy-goop/` in the task's isolated worktree. Four desktop,
 Android-emulated portrait/landscape and procedural-fallback profiles pass 13
 wave stages and 25 portrait frames, retaining one pigment field through reversals.
