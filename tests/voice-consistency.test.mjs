@@ -150,7 +150,7 @@ test('Knick remains caption-only if the catalogue is unavailable',()=>{
 
 test('pre-counter forfeiture returns to the room without reviving a generic browser clerk voice',()=>{
  const h=harness('host',{voice:true});vm.runInContext(readFileSync('For-AI/AUDIO-TEXT-LIBRARY.js','utf8'),h.context);
- h.wait();h.links[0].emit('status','Telefon getrennt');h.tick(16);
+ h.wait();h.links[0].emit('disconnected',{peer:''});h.tick(16);
  assert.equal(h.level.stage,'walk-sign');assert.equal(h.node('amt-actions').children.length,0);
  assert.equal(h.level.activated,false);assert.equal(h.synth.current,null);
 });

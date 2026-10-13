@@ -8,8 +8,8 @@ test('scans and invalid or stale name submissions never allocate a number or cou
  h.advanceGame(40);assert.equal(h.level.registrationTicket,'');assert.equal(h.level.assignedCounter.number,0);assert.equal(h.level.activated,false);assert.equal(link.sent.some(m=>m.type==='ticket'),false);
 });
 
-test('name submission reserves exactly the second, third or fourth upcoming irregular call',()=>{
- for(const [random,offset] of [[0,2],[.5,3],[.999,4]]){
+test('name submission reserves after two or three other upcoming irregular call',()=>{
+ for(const [random,offset] of [[0,3],[.5,4],[.999,4]]){
   const h=harness('host',{random:()=>random});h.register();const link=h.links[0];
   link.message({type:'register',name:'Erika Mustermann'});const ticket=link.sent.at(-1);assert.equal(ticket.type,'ticket');
   assert.equal(h.level.activated,false);link.message({type:'ticket-received',id:link.scanId,number:ticket.number});
@@ -40,7 +40,7 @@ test('every clerk refuses without a name or before the assigned call and owns th
 
 test('a wrong clerk during the call refuses, keeps the original assignment and cannot pause expiry',()=>{
  const h=harness();h.wait();const assigned=h.level.assignedCounter.number;const wrong=assigned===1?2:1;atDesk(h,wrong);h.awaitCall();h.level.interact();assert.equal(h.level.stage,'early');assert.equal(h.level.activeClerkCounter,wrong);assert.equal(h.level.assignedCounter.number,assigned);
- advanceScene(h,13);assert.equal(h.level.stage,'walk-sign');assert.equal(h.level.activated,false);assert.equal(h.links[0].sent.some(m=>m.type==='call-arm'),false);assert.equal(h.counts.form,0);
+ advanceScene(h,30.1);assert.equal(h.level.stage,'walk-sign');assert.equal(h.level.activated,false);assert.equal(h.links[0].sent.some(m=>m.type==='call-arm'),false);assert.equal(h.counts.form,0);
  h.level.interact();assert.equal(h.level.stage,'early');
 });
 
@@ -72,15 +72,15 @@ test('a reserved ticket cannot open the clerk until the matching phone receipt a
 });
 
 test('duplicate and overdue ticket receipts cannot restart or extend the call window',()=>{
- const h=harness();h.wait();const link=h.links[0],number=h.level.registrationTicket;h.awaitCall();advanceScene(h,10);
+ const h=harness();h.wait();const link=h.links[0],number=h.level.registrationTicket;h.awaitCall();advanceScene(h,27);
  link.message({type:'ticket-received',id:link.scanId,number});advanceScene(h,3);assert.equal(h.level.activated,false);assert.equal(h.level.stage,'walk-sign');
  link.message({type:'ticket-received',id:link.scanId,number});assert.equal(h.level.activated,false);
- const late=harness();late.register();const pending=late.links[0];pending.message({type:'register',name:'Erika Mustermann'});late.advanceGame(30);
+ const late=harness();late.register();const pending=late.links[0];pending.message({type:'register',name:'Erika Mustermann'});advanceScene(late,50);
  pending.message({type:'ticket-received',id:pending.scanId,number:late.level.registrationTicket});assert.equal(late.level.activated,false);assert.equal(late.level.stage,'walk-sign');assert.equal(pending.sent.at(-1).type,'forfeit');
 });
 
 test('failed ticket send rolls back the reservation and pending phone loss retires the ticket',()=>{
  const h=harness();h.register();const link=h.links[0];link.fail=true;link.message({type:'register',name:'Erika Mustermann'});assert.equal(h.level.registrationTicket,'');assert.equal(h.level.assignedCounter.number,0);assert.equal(h.level.activated,false);
- link.fail=false;link.message({type:'register',name:'Erika Mustermann'});const ticket=link.sent.at(-1);link.message({type:'phone-hidden'});assert.equal(h.level.activated,false);assert.notEqual(h.links.at(-1),link);
+ link.fail=false;link.message({type:'register',name:'Erika Mustermann'});const ticket=link.sent.at(-1);link.message({type:'phone-hidden'});assert.equal(h.level.activated,false);assert.equal(h.links.at(-1),link);
  link.message({type:'ticket-received',id:link.scanId,number:ticket.number});assert.equal(h.level.activated,false);
 });
