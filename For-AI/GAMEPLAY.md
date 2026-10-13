@@ -185,6 +185,17 @@ Review relevant access barriers using the [Xbox Accessibility Guidelines](https:
 
 ## Systems
 
+The spoken welcome after the humor declaration (including the `S` skip) has
+exactly two popups: goal/forms, then street/crossing/Brandmauer rules. The full
+regional text is readable immediately and each page starts its matching browser
+narration automatically when voices are enabled. Only `WEITER` / `NEXT` appears
+in the popup; advancing cancels unfinished narration, and the second advance
+returns to play and announces the Bürgeramt objective. Preserve authored English
+subtitles for the combined sentences. This opening is an explicit exception to
+the ordinary speech-start text reveal; muted or stalled narration never hides
+its instructions. On narrow/enlarged layouts, keep Next anchored and allow
+vertical reading of the complete copy. Other dialogues retain their presentation.
+
 - The Jobcenter occupies the eastern Berlin parcel beyond the Fundbüro, with a south-facing entrance and a pedestrian path to the middle road. Its original procedural facade adapts the official photograph of Jobcenter Berlin Mitte, Müllerstraße 16: light square tiles, a glass-block stairwell bay, flat canopy, red-framed customer doors and the Jobcenter sign. E at the door starts an optional first-person encounter without changing mission, wanted level, energy or inventory. The city and its music pause for the visit.
 - Inside the Jobcenter, a distant flame appears within a faint amber-red tunnel of emissive haze against black; there is no visible floor, horizon, wall or movement boundary. WASD moves relative to the view, arrows turn/move, dragging looks, and R/Shift runs. On touch, dragging the left part of the screen moves and dragging the right part looks. Escape provides an early exit. Approaching within 13 world metres starts the supplied overlord recording once per visit. Proximity enlarges the flame, while the final MP3's measured energy and attack envelopes, sampled at native media time, animate its mouth, brightness and flame tongues. Its scorched skull mask has dark sockets, sharply slanted gold eyes, white-hot fangs inside a red furnace mouth and rising horn-like flame tips. The tunnel haze stays anchored to the flame, recedes with distance, softens on approach and has no collision. A synthesized bass rumble swells in measured speech pauses and stays low under the final dismissal; its native-media cues also drive a slight camera shudder and brighter fire. The dismissal adds a final growth surge, without delaying native-ended ejection. Retreat remains possible throughout speech. Reduced motion retains growth and speech brightness but removes turbulent cycling, attack pulses and camera shudder. Pause, blur, hidden-page, failure and exit synchronously dispose the rumble source; resume recreates it against the current voice time.
 - The recording's natural `ended` event ejects immediately to a body-clear point outside the door; an occupied point retains the valid entrance position. The exact existing subtitle rail accompanies the speech. Voice-off, failed playback or eight seconds without media progress uses a bounded silent caption path for the clip's duration. Hidden, blurred or paused visits suspend media and input. Every exit invalidates old callbacks, stops/releases media, aborts pending metadata, disposes scene geometry/materials and restores city controls/music. This is a scene on the existing renderer and loop, with no second runtime or scheduler.
