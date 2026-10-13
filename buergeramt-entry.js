@@ -118,6 +118,8 @@ export function createBuergeramtEntry({THREE:T,renderer,scene,camera,door,mobile
 
 // A captured Jobcenter frame gives way to the live street beneath it. The caller
 // owns the outside render and clock; this overlay never clears the framebuffer.
+// Jobcenter shaders author screen colors directly, so replay the capture without
+// another output color conversion (including the Gaussian fragments).
 export function createJobcenterRelease({THREE:T,renderer,scene,camera,mobile=false,reducedMotion=false}){
   const drawing=renderer.getDrawingBufferSize(new T.Vector2());
   const screenWidth=Math.max(1,drawing.x),screenHeight=Math.max(1,drawing.y);
@@ -146,12 +148,12 @@ export function createJobcenterRelease({THREE:T,renderer,scene,camera,mobile=fal
       uniform vec2 uGrid,uDoorUv;${dissolveGLSL}
       void main(){
         vec3 color=texture2D(uImage,vUv).rgb;
-        vec2 cell=floor(vUv*uGrid)+.5;
-        vec2 within=fract(vUv*uGrid)*2.-1.;
-        float peel=released(cell)*exp(-dot(within,within)*1.6);
-        float alpha=uReduced>.5?1.-uProgress:(1.-peel)*(1.-smoothstep(.38,.88,uProgress));
+        vec2 offset=(vUv-uDoorUv)*vec2(uAspect,1.);
+        float inward=1.-clamp(length(offset)/1.7,0.,1.);
+        float ripple=.025*sin(offset.x*11.+offset.y*7.)+.018*sin(offset.y*19.-offset.x*5.);
+        float withdraw=smoothstep(.06+.12*inward+ripple,.62+.22*inward+ripple,uProgress);
+        float alpha=uReduced>.5?1.-uProgress:1.-withdraw;
         gl_FragColor=vec4(color,clamp(alpha,0.,1.));
-        #include <colorspace_fragment>
       }`});
   const sheet=new T.Mesh(sheetGeometry,sheetMaterial);sheet.frustumCulled=false;sheet.renderOrder=0;effectScene.add(sheet);
   let particleGeometry=null,particleMaterial=null;
@@ -166,7 +168,8 @@ export function createJobcenterRelease({THREE:T,renderer,scene,camera,mobile=fal
         uniform sampler2D uImage;uniform vec2 uGrid,uDoorUv;uniform float uProgress,uAspect,uReduced;
         ${dissolveGLSL}
         void main(){
-          vec2 sourceUv=aCell/uGrid;
+          vec2 jitter=vec2(hash(aCell+17.3),hash(aCell+51.7))-.5;
+          vec2 sourceUv=(aCell+jitter*.7)/uGrid;
           vec2 sourceNdc=sourceUv*2.-1.,doorNdc=uDoorUv*2.-1.;
           float seed=hash(aCell),release=released(aCell);
           float delay=.04+.14*min(length((sourceUv-uDoorUv)*vec2(uAspect,1.)),2.)+.13*seed;
@@ -178,12 +181,12 @@ export function createJobcenterRelease({THREE:T,renderer,scene,camera,mobile=fal
           float radius=1.65/uGrid.y*mix(1.,.18,collapse);
           gl_Position=vec4(center+position.xy*radius,0.,1.);
           vGaussian=position.xy;vColor=texture2D(uImage,sourceUv).rgb;
-          vAlpha=release*(1.-smoothstep(.84,1.,travel))*(1.-uReduced);
+          float ember=smoothstep(.015,.12,max(vColor.r,max(vColor.g,vColor.b)));
+          vAlpha=release*(1.-smoothstep(.84,1.,travel))*(1.-uReduced)*ember;
         }`,
       fragmentShader:`varying vec2 vGaussian;varying vec3 vColor;varying float vAlpha;
         void main(){float gaussian=exp(-dot(vGaussian,vGaussian)*4.5);
           gl_FragColor=vec4(vColor,gaussian*vAlpha*.68);
-          #include <colorspace_fragment>
         }`});
     const particles=new T.Mesh(particleGeometry,particleMaterial);particles.frustumCulled=false;particles.renderOrder=1;effectScene.add(particles);
   }

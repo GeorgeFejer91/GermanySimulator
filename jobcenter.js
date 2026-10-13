@@ -152,7 +152,7 @@ export function createJobcenterEncounter(T,renderer,bridge){
  function close(reason='escape'){
   clearRelease();const v=visit;if(!v)return;visit=null;++serial;
   if(reason==='ended'||reason==='fallback-ended'){
-   try{release=createJobcenterRelease({THREE:T,renderer,scene:v.scene,camera:v.camera,mobile:innerWidth<700,reducedMotion:reduced.matches});releaseLast=performance.now();releaseBlurred=false;window.addEventListener('blur',releaseBlur);window.addEventListener('focus',releaseFocus);document.addEventListener('visibilitychange',releaseVisibility);window.addEventListener('keydown',releaseEscape)}catch{clearRelease()}
+   try{release=createJobcenterRelease({THREE:T,renderer,scene:v.scene,camera:v.camera,mobile:Math.min(innerWidth,innerHeight)<700,reducedMotion:reduced.matches});releaseLast=performance.now();releaseBlurred=false;window.addEventListener('blur',releaseBlur);window.addEventListener('focus',releaseFocus);document.addEventListener('visibilitychange',releaseVisibility);window.addEventListener('keydown',releaseEscape)}catch{clearRelease()}
   }
   v.abort.abort();v.rumbleSource?.dispose();v.audio.onended=v.audio.onerror=v.audio.onplaying=null;v.audio.pause();v.audio.removeAttribute('src');v.audio.load();
   v.surface.remove();v.style.remove();document.body.classList.remove('jobcenter-inside');
