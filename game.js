@@ -85,7 +85,7 @@ const STATION_RISE=.3;
 const stations=Object.freeze([
  ...verticalRoads.flatMap((road,i)=>["nord","sued"].map(side=>{
   const center=road.x+road.w/2,w=i===0||i===verticalRoads.length-1?1200:700,north=side==="nord",name=i===0?"WEST":i===verticalRoads.length-1?"OST":String(i+1).padStart(2,"0");
-  return{id:side+name.toLowerCase(),name:(north?"NORD":"SÜD")+(w===1200?"":" ")+name,side:north?"north":"south",x:center-w/2,y:north?310:4905,w,h:145,accessX:center-70,accessY:north?455:4800,accessW:140,accessH:105};
+  return{id:side+name.toLowerCase(),name:!north&&i===0?"JWD":(north?"NORD":"SÜD")+(w===1200?"":" ")+name,side:north?"north":"south",x:center-w/2,y:north?310:4905,w,h:145,accessX:center-70,accessY:north?455:4800,accessW:140,accessH:105};
  })),
  ...horizontalRoads.flatMap((road,i)=>["west","east"].map(side=>{
   const center=road.y+road.h/2,west=side==="west";
@@ -711,7 +711,7 @@ const jwdLane=offsetWorldPoint({x:40,y:3890,w:1010,h:340});
 const jwdNeighborhood={name:"WALDSIEDLUNG · JWD",street:"AM FISCHTAL",signX:960+RAIL_GUTTER,signY:3920+RAIL_GUTTER};
 walkways.push(...jwdGardens.paths);grassAreas.push(...jwdGardens.lots);props.push(...jwdGardens.props);
 grassAreas.push(...[{x:40,y:3280,w:1010,h:90},{x:40,y:3370,w:70,h:200},{x:310,y:3370,w:120,h:200},{x:670,y:3370,w:120,h:200},{x:960,y:3370,w:18,h:200},{x:100,y:3710,w:878,h:20},{x:340,y:3730,w:70,h:160},{x:650,y:3730,w:70,h:160}].map(offsetWorldPoint));
-props.push({id:"jwd-street-sign",asset:"jwd-street-sign",x:jwdNeighborhood.signX,y:jwdNeighborhood.signY,collisionRadius:10});
+props.push({id:"jwd-street-sign",asset:"jwd-street-sign",x:jwdNeighborhood.signX,y:jwdNeighborhood.signY,collisionRadius:10,interactive:false});
 for(const b of buildings){
  if(b.residential)continue;
  const road=horizontalRoads.find(r=>r.y>b.y+b.h),top=b.y+b.h+6,bottom=road?.y-SIDEWALK_WIDTH;

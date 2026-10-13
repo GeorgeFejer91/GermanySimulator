@@ -50,7 +50,12 @@ garden suburb inspired by Schlachtensee and Zehlendorf. A second villa/landhouse
 row, garden strips, a tree-lined northern edge, two paved residential lanes and a
 western connecting path fill the existing southwest block; the eastern exits join
 the existing sidewalk. The map boundary and railways stay in place. The AM FISCHTAL
-street sign has its own solid post. This is a compressed fictional neighborhood,
+street plate sits below a yellow, black-bordered **JWD** Ortsschild reading
+“Janz weit draußen · Berlin”. Both sides read correctly, and its post is solid.
+The nearby southwest AMT-BAHN stop is named **JWD**, on the main board and both
+platform-end signs; its stable simulation ID remains `suedwest`. The diagnostic
+page includes the same JWD platform and entrance steps. The named procedural
+station is also retained in the optional satire-kit mode. This is a compressed fictional neighborhood,
 not a reproduction of actual addresses. Its villa/landhouse and leafy-garden
 references come from the [district's Schlachtensee account](https://www.berlin.de/ba-steglitz-zehlendorf/bezirk-erleben/ortsteile/schlachtensee/schlachtensee-1344335.php)
 and [Berlin's neighborhood portrait](https://www.berlin.de/special/stadtteile/zehlendorf/8265200-5170854-schlachtensee.html).

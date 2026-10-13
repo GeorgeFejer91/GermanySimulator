@@ -34,6 +34,11 @@ assert.ok(roadsDeclaration&&stationDeclaration.includes("const stations=Object.f
 const stationWorld=vm.createContext({RAIL_GUTTER:560,CITY:{w:9840,h:4240},crossings:[]});
 vm.runInContext(`${roadsDeclaration[0]}\n${stationDeclaration}\nglobalThis.layout={horizontalRoads,verticalRoads,stations,stationElevation,STATION_RISE}`,stationWorld);
 const {horizontalRoads,verticalRoads,stations,stationElevation,STATION_RISE}=stationWorld.layout;
+const jwdStop=stations.find(s=>s.id==='suedwest'),diagnosticStation=vm.runInNewContext(diagnostic.match(/const stations=([^;]+);/)[1]);
+assert.equal(jwdStop.name,'JWD','the neighborhood station must use its current locality name');
+assert.deepEqual(JSON.parse(JSON.stringify(diagnosticStation)),[JSON.parse(JSON.stringify(jwdStop))],'the diagnostic JWD platform must match the canonical stop and access geometry');
+const diagnosticElevation=vm.runInNewContext(`const stations=${JSON.stringify(diagnosticStation)};${diagnostic.match(/function stationElevation\(x,y\)\{[^\n]+/)[0]};stationElevation`);
+for(let y=4780;y<=5060;y+=5)for(const x of [1140,1669,1670,1740,1810,1811,2340])assert.equal(diagnosticElevation(x,y),stationElevation(x,y),'JWD preview feet must follow the same platform and entrance steps');
 assert.equal(stations.length,2*(horizontalRoads.length+verticalRoads.length),"every road end needs its own station");
 assert.deepEqual(Array.from(stations.filter(s=>s.side==="north"||s.side==="south"),s=>s.id).filter(id=>["nordwest","nordost","suedwest","suedost"].includes(id)).sort(),["nordost","nordwest","suedost","suedwest"]);
 for(const road of verticalRoads)for(const side of ["north","south"]){const center=road.x+road.w/2,matches=stations.filter(s=>s.side===side&&s.accessX+s.accessW/2===center);assert.equal(matches.length,1,`${side} end of vertical road ${center} needs one station`);const s=matches[0];assert.ok(s.accessX>=s.x&&s.accessX+s.accessW<=s.x+s.w);assert.ok(side==="north"?s.accessY+s.accessH===560&&s.y-232>46:s.accessY===4800&&5128-s.y-s.h>46)}

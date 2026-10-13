@@ -838,9 +838,13 @@ doors are unchanged. Heiko has procedural blond hair, stubble and a ribbed brown
 zip-neck sweater; his instance buffers retire with his owned actor geometry.
 The private reference photo is not a runtime asset. The neighborhood requests
 no municipal GLBs, placard images or character atlases. Six small canvas
-nameplates and one street sign use 1,048,576 decoded
+nameplates and one combined locality/street sign use 1,441,792 decoded
 RGBA bytes, no mipmaps. The house/four-character/garden/street-sign diagnostic
-has 294 meshes, 13,242 triangles, 245,724 geometry bytes and 30,528 instance bytes.
+has 295 meshes, 13,244 triangles, 245,724 geometry bytes and 30,528 instance bytes.
+The yellow JWD sign uses a 512 × 320 canvas shared by separate front/back planes;
+its unchanged solid post stays below overhead signage with 2.025 units of clear
+height. Station nameplates reuse the existing station canvases and add no root
+asset requests. The diagnostic page now includes the matching JWD platform.
 The garden extension adds three fitted car silhouettes, clipped/ragged hedges,
 upright/fallen gnomes and instanced grass details with no asset requests or new
 textures. Shared authored rectangles bound every solid, including car wheels
@@ -881,6 +885,17 @@ candidate startup peaked at 17,982,616 local uncompressed bytes. No new texture
 or asset request was added. Independent geometry/camera reviews and actual A38
 form-submission/neighbor-introduction playtests passed; physical Android remains
 unavailable. Evidence is under `output/jwd-floors-heiko/`.
+
+The locality/station signage update compared one cold seed-42 run per viewport
+against `40bd396`, with the same JWD position, Chrome 155 and Iris Xe renderer.
+Desktop active p95 was 21.5→30.2 ms and portrait emulation 29.7→34.8 ms;
+input p95 was 33.9→28.6 ms and 25.5→36.1 ms. These small samples do not
+establish a performance improvement. All nine inputs responded in each run,
+with zero page errors; startup peaked at 17,579,415 local uncompressed bytes
+and the existing startup/title/buffer guards passed. Independent physics and
+camera reviews passed, including root/diagnostic portrait and landscape and
+the optional satire kit. Physical Android remains untested. Evidence is under
+`output/jwd-signs/`.
 
 The Bürgeramt entrance radiance is original runtime geometry: one retained door
 plane, one 5 × 5 ray/halo shader plane, and one short-range shadow-free point
