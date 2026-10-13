@@ -304,3 +304,53 @@ and perceptual listening remain NOT RUN.
 ## Jobcenter paired eyes and furnace mouth — 2026-10-13
 
 Integrator on clean published b6b37e5. Scope: procedural flame face in jobcenter.js, forward pinch speed through the existing step, focused controller expectations, shared module cache identities and owning gameplay guidance. Restore the former paired slanted gold eyes and move the burning almond/fissure effect into a speech-driven black mouth. Keep teeth absent and retain the recording, heat rise, Gaussian ejection, direct route and pinch cancellation. Forward pinch uses existing7m/s running pace; ordinary controls and retreat retain their existing speeds. No new texture, geometry, uniform, scheduler or audio. Independent Physics/Camera reviews bind the final source; rendered desktop/phone/reduced-motion evidence remains silent and device scope is emulation.
+
+# Steinmeier oil dissolution — 2026-10-13
+
+Integrator-owned on published `961f46a`, integrated with `16f574f`, in the same isolated healthy checkout.
+The user's phone capture shows a recognisable image hanging below a blank
+frame: the continuous surface fixed the seam, but its uniform image translation
+still looks like a falling poster. Replace that transport with paint softening
+and eroding in place, uneven downward smears, and thick merging runs below the
+frame that carry pigment rather than a readable copy of the whole portrait.
+Scope: portrait GLSL, its cache identities, the existing GPU/CPU regression
+fixtures and owning episode guidance. Preserve rate 2.2, immediate interaction,
+shared clocks, restoration, fallback, floor contact, depth and resource ownership.
+No new assets, passes, dependencies, particles or simulation loop. Validate
+retained upper-image paint plus interior erosion at intermediate melt, full
+drainage, irregular thick floor-bound runs, loaded/fallback/reduced/missing art
+and recovery. The previous broad-sheet coverage assertion is superseded by this
+in-place dissolution contract; keep a failing old-sheet control. Independent
+Physics and Camera review must judge the same frozen candidate, including the
+user's requested distinction between oil and a descending picture.
+
+The final runtime/test candidate `fbe9401` on `16f574f` passes both independent
+scoped Physics and Camera reviews (portrait SHA-256 `44519012`, world `1079bf98`).
+Local final Pages selection passes 664/664, the focused integration checks 19/19,
+voice curator and six exact-RGBA delivery checks. Integrated GPU coverage passes
+six profiles: desktop, Android portrait/landscape emulation, procedural floor,
+reduced motion and missing art. Upper paint remains in the frame at intermediate
+melt; interior loss and thick runs are visible, with actual floor RGB at150s.
+Full melt leaves uniform backing. Missing art remains static and deposits no
+pigment. Actual counter recovery passes five profiles and restores the image
+while releasing floor targets at90s. The old published sheet fails the retained
+upper-paint assertion. The previous rail-density step was corrected by carrying
+the same wet-run coverage through the lower framed paint. Stronger local upper
+sag makes the face soften before it erodes. A supplemental upward mobile view
+matches the user's framing. Dark runoff retains long ribbons, an aesthetic
+limit; the recognizable hanging portrait and actionable seam are gone.
+
+Twelve sequential active-effect lab runs compare `16f574f` with this candidate
+using the existing benchmark plus an ignored test-only age150/camera seed and
+both paint modules in baseline overrides. Chrome155/Intel Iris Xe, DPR2, seeds
+4781–4783, local HTTP, no throttle; each run accepts nine rendered input changes
+with zero page errors. Candidate office input p95 median/range: desktop
+8.2/5.8–31.1ms, Android17.4/6.2–58.7ms; baseline7.8/4.7–12.9ms and
+18.6/6.9–57.8ms. These are application response/sync-start observations, not GPU
+or displayed-frame timing and not a speedup claim. Private floor passes make
+renderer-info counters partial. Six additional root runs pass transfer/title/
+buffer/input/error guards; maximum startup17,856,997 bytes. Runtime, tests and
+assets are unchanged by this final evidence-only amendment. Logs and frames
+remain under ignored `output/portrait-oil/`. Forced residence/camera/registration
+fixtures do not establish natural mission play. Physical Android and perceptual
+listening remain NOT RUN.

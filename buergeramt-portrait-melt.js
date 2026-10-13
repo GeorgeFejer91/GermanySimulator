@@ -1,27 +1,41 @@
-// One paint source shared by the framed portrait, its liquid sheet and the
+// One paint source shared by the dissolving portrait, its viscous runs and the
 // existing floor transport. No particles, scene capture or separate clock.
 const MELT_RATE=2.2;
 export const portraitPaintGlsl=`
   uniform sampler2D amtPortraitPaint;
   uniform vec4 amtPortraitInfo;
   float amtPortraitPaintMelt(float goop){return min(1.,goop*${MELT_RATE});}
-  vec4 amtPaintSheet(vec2 point,float goop,float clock){
+  float amtPaintNoise(vec2 p){
+    vec2 cell=floor(p),f=fract(p);f=f*f*(3.-2.*f);
+    vec4 corners=fract(sin(vec4(dot(cell,vec2(127.1,311.7)),dot(cell+vec2(1.,0.),vec2(127.1,311.7)),dot(cell+vec2(0.,1.),vec2(127.1,311.7)),dot(cell+vec2(1.),vec2(127.1,311.7))))*43758.5453);
+    return mix(mix(corners.x,corners.y,f.x),mix(corners.z,corners.w,f.x),f.y);
+  }
+  vec4 amtPaintLiquid(vec2 point,float goop,float clock){
     float melted=amtPortraitPaintMelt(goop),u=point.x,down=point.y;
-    float fall=melted*(2.15+.16*sin(u*7.5+.7)+.08*sin(u*17.-clock*.025));
-    float stretch=1.+melted*(.35+.9*(.5+.5*sin(u*7.+.8)));
-    float fold=.11*melted*sin((down-fall)*9.-clock*.035+u*7.)*sin(u*3.14159265);
-    float sourceDown=(down-fall+fold)/stretch;
-    float gather=1.-.20*melted*smoothstep(.3,1.8,down);
-    float sourceU=.5+(u-.5)/gather+.10*melted*sin(sourceDown*7.+clock*.03+u*3.)+.04*melted*sin(sourceDown*18.-clock*.02);
+    float below=max(0.,down-1.),wall=smoothstep(.985,1.025,down);
+    float bend=.04*melted*sin(down*5.-clock*.045);
+    float flow=.28+.72*amtPaintNoise(vec2((u+bend)*8.5,2.4));
+    float soften=.08+.55*amtPaintNoise(vec2(u*9.5,down*2.6))+.12*(1.-clamp(down,0.,1.));
+    float remaining=1.-smoothstep(soften,soften+.12,melted);
+    float reach=melted*(.75+2.35*flow);
+    float tip=1.-smoothstep(reach-.025,reach+.025,below);
+    float runs=smoothstep(.26,.50,flow-.19*below/max(reach,.03));
+    float draining=runs*tip*smoothstep(0.,.08,melted)*(1.-smoothstep(.6,1.,melted));
+    remaining=max(remaining,draining*smoothstep(.35,1.,down));
+    float sourceDown=down-melted*flow*(.10+.65*down*down)*smoothstep(0.,.12,down);
+    float contactSource=1.-melted*flow*.75+.04*sin(below*16.-clock*.06)*smoothstep(0.,.2,below);
+    sourceDown=mix(sourceDown,contactSource,wall);
+    float sourceU=u+.055*melted*sin(down*9.-clock*.05+u*8.)+.09*melted*wall*sin(below*7.-clock*.08);
     float edges=smoothstep(-.008,.008,sourceU)*(1.-smoothstep(.992,1.008,sourceU));
-    float body=smoothstep(-.01,.01,sourceDown)*(1.-smoothstep(.985,1.015,sourceDown));
     vec3 paint=texture2D(amtPortraitPaint,clamp(vec2(sourceU,1.-sourceDown),vec2(.001),vec2(.999))).rgb;
-    float ridge=.5+.5*cos(sourceDown*11.+u*6.-clock*.035);
-    paint*=1.+.09*melted*ridge;
-    return vec4(paint,edges*body);
+    vec3 smear=texture2D(amtPortraitPaint,clamp(vec2(sourceU+.035*melted,1.-sourceDown+melted*(.15+.3*wall)),vec2(.001),vec2(.999))).rgb;
+    paint=mix(paint,smear,melted*(.2+.5*wall));
+    float sheen=.09*melted*pow(.5+.5*sin(u*38.+down*5.-clock*.08),12.);
+    paint=paint*(1.-.12*melted*flow)+vec3(sheen);
+    return vec4(paint,edges*mix(remaining,draining,wall)*smoothstep(-.01,.005,down));
   }
   vec4 amtPaintFilm(vec2 uv,float goop,float clock){
-    vec4 film=amtPaintSheet(vec2(uv.x,1.+(uv.y*1.56-.01)/1.94),goop,clock);
+    vec4 film=amtPaintLiquid(vec2(uv.x,1.+(uv.y*1.56-.01)/1.94),goop,clock);
     film.a*=smoothstep(0.,.025,amtPortraitPaintMelt(goop));
     return film;
   }
@@ -48,17 +62,17 @@ export function createAmtPortraitMelt({THREE:T,material,frame,floor,position,wid
       }
     `);
   };
-  material.customProgramCacheKey=()=>key+':amt-portrait-melt-v4';material.needsUpdate=true;
+  material.customProgramCacheKey=()=>key+':amt-portrait-melt-v5';material.needsUpdate=true;
   const dripMaterial=new T.MeshBasicMaterial({map:material.map,transparent:true,alphaTest:.025,depthWrite:false});
   dripMaterial.onBeforeCompile=shader=>{
     Object.assign(shader.uniforms,{amtPortraitMelt:melt,amtPortraitClock:clock,amtPortraitPaint:paint,amtPortraitInfo:{value:new T.Vector4(0,0,1,0)}});
     shader.fragmentShader='uniform float amtPortraitMelt,amtPortraitClock;\n'+portraitPaintGlsl+shader.fragmentShader.replace('#include <map_fragment>',`#include <map_fragment>
-      vec4 film=amtPaintSheet(vec2(.5+(vMapUv.x-.5)*1.75/1.45,(1.-vMapUv.y)*3.49/1.94),amtPortraitMelt,amtPortraitClock);
+      vec4 film=amtPaintLiquid(vec2(.5+(vMapUv.x-.5)*1.75/1.45,(1.-vMapUv.y)*3.49/1.94),amtPortraitMelt,amtPortraitClock);
       diffuseColor.rgb=film.rgb;
       diffuseColor.a*=film.a;
     `);
   };
-  dripMaterial.customProgramCacheKey=()=>':amt-portrait-drips-v4';
+  dripMaterial.customProgramCacheKey=()=>':amt-portrait-drips-v5';
   // One unbroken paint surface spans the image and wall: separate panels leave
   // a visible cut in a moving face. Extra width lets its liquid edges meander.
   // Static curvature, 24 triangles; it settles onto the inner wall at z=5.47.

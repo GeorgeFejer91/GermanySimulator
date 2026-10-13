@@ -268,19 +268,21 @@ with the same goop/speed value, without ripple animation or pigment targets.
 The existing Steinmeier oil portrait uses this same wave and residence clock,
 with paint progress `min(1, 2.20 × goop)`. This faster progression applies together to
 the framed image, wall drips and floor deposition; the floor's own melt and
-slowdown retain their shared value. `buergeramt-portrait-melt.js` transports the real
-painted image downward as one broad liquid body, progressively exposing the bare
-backing until the entire framed image has drained. Continuous, unequal stretch,
-merging folds and curved edges deform the face and background together; they do
-not separate the painting into narrow strands. One continuous paint mesh spans
-the image and wall film, preserving source colors across the frame edge. Its
-extra masked width leaves room for curved liquid edges; its bend starts below
-the gold frame, so a moving face is never cut by a panel join or the lower rail. Both
-deformation and paint colors advance on the integrated scene clock. A transparent,
-depth-tested, statically curved sheet continues the paint from the frame onto
+slowdown retain their shared value. `buergeramt-portrait-melt.js` softens the real
+oil paint in place. Unequal local sag, vertical color smearing and patchwise loss
+expose the backing throughout the image; upper paint remains near its original
+position while lower regions liquefy. Never translate the whole recognizable
+portrait down the wall as a falling poster. Thick, merging runs have curved
+edges, unequal rounded fronts and wet highlights; below the frame they carry
+mixed pigment sampled from the image, rather than a readable second portrait.
+The whole image eventually drains, and the runs thin out as their paint supply
+ends. One masked paint mesh spans image and wall without a panel seam. Its bend
+starts below the gold frame, and its extra width allows the oil contours to curve.
+Deformation and pigment motion use the integrated scene clock. A transparent,
+depth-tested, statically curved surface continues the paint from the frame onto
 the wall, ending at y=.0024 m and z=5.4696 (the inner wall face is z=5.47); its
 front reaches the ground before it can feed the floor. The existing floor pass
-samples the same broad film at its ground contact, so the whole liquid image
+samples the same viscous runs at their ground contact, so the painting's pigment
 begins mixing sooner without depositing before the visible paint arrives. The pass
 injects the same image colors at that contact, then transports and diffuses them
 with the black/white oils and walking wakes. RGBA stores mixed RGB plus deposited

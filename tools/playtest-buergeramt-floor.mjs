@@ -13,14 +13,14 @@ const files=['world3d.js','buergeramt.js','buergeramt-goop.js','buergeramt-floor
 const sources=new Map(files.map(file=>[resolve(file),readFileSync(file)]));
 if(process.env.FLOOR_SOURCE_FILE)sources.set(resolve('buergeramt-floor.js'),readFileSync(process.env.FLOOR_SOURCE_FILE));
 if(process.env.PORTRAIT_SOURCE_FILE)sources.set(resolve('buergeramt-portrait-melt.js'),readFileSync(process.env.PORTRAIT_SOURCE_FILE));
-function samplePortraitPaint(which,amount,clock){
+function samplePortraitPaint(which,amount,clock,bareRgb=[54,43,25]){
   const width=128,height=160,target=new T.WebGLRenderTarget(width,height),scene=new T.Scene();
   const camera=new T.OrthographicCamera(-.725,.725,.97,-.97,.01,3);camera.position.z=1;
   const geometry=which==='frame'?presidentCanvas.geometry:new T.PlaneGeometry(1.45,1.94);
   const material=which==='frame'?presidentMaterial:new T.ShaderMaterial({
     uniforms:{amtPortraitPaint:{value:presidentMaterial.map},amtPortraitInfo:{value:new T.Vector4(0,0,1,1)},probeMelt:{value:amount},probeClock:{value:clock}},
     vertexShader:'varying vec2 paintUv;void main(){paintUv=uv;gl_Position=projectionMatrix*modelViewMatrix*vec4(position,1.);}',
-    fragmentShader:'varying vec2 paintUv;uniform float probeMelt,probeClock;'+portraitPaintGlsl+'void main(){float coverage=amtPaintFilm(vec2(paintUv.x,.45),probeMelt,probeClock).a;gl_FragColor=vec4(vec3(coverage),1.);}'
+    fragmentShader:'varying vec2 paintUv;uniform float probeMelt,probeClock;'+portraitPaintGlsl+'void main(){float coverage=amtPaintFilm(vec2(paintUv.x,1.-paintUv.y),probeMelt,probeClock).a;gl_FragColor=vec4(vec3(coverage),1.);}'
   });
   scene.add(new T.Mesh(geometry,material));
   if(which==='frame'){
@@ -30,10 +30,14 @@ function samplePortraitPaint(which,amount,clock){
   const previousTarget=renderer.getRenderTarget(),previousClear=renderer.autoClear,pixels=new Uint8Array(width*height*4);
   try{renderer.autoClear=true;renderer.setRenderTarget(target);renderer.render(scene,camera);renderer.readRenderTargetPixels(target,0,0,width,height,pixels);}
   finally{renderer.setRenderTarget(previousTarget);renderer.autoClear=previousClear;target.dispose();if(which!=='frame'){geometry.dispose();material.dispose();}}
-  const low=[255,255,255],high=[0,0,0],sum=[0,0,0];let covered=0,run=0,longest=0;
+  const low=[255,255,255],high=[0,0,0],sum=[0,0,0],bands=Array(8).fill(0);let covered=0,run=0,longest=0;
   for(let i=0;i<pixels.length;i+=4)for(let channel=0;channel<3;channel++){const value=pixels[i+channel];low[channel]=Math.min(low[channel],value);high[channel]=Math.max(high[channel],value);sum[channel]+=value;}
   for(let x=0;x<width;x++){const painted=pixels[(Math.floor(height/2)*width+x)*4]>127;if(painted){covered++;run++;longest=Math.max(longest,run)}else run=0;}
-  return{low,high,sum,range:high.map((value,index)=>value-low[index]),coverage:covered/width,connected:longest/width};
+  for(let y=0;y<height;y++)for(let x=0;x<width;x++){
+    const i=(y*width+x)*4,painted=which==='film'?pixels[i]>127:bareRgb.some((value,channel)=>Math.abs(pixels[i+channel]-value)>4);
+    if(painted)bands[7-Math.floor(y*8/height)]++;
+  }
+  return{low,high,sum,range:high.map((value,index)=>value-low[index]),coverage:covered/width,connected:longest/width,bands:bands.map(count=>count/(width*height/8))};
 }
 const server=createServer((req,res)=>{
   try{
@@ -52,7 +56,7 @@ await new Promise(done=>server.listen(0,'127.0.0.1',done));
 const browser=await chromium.launch({headless:true,executablePath:process.env.CHROMIUM_PATH,args:['--mute-audio']});
 const report={complete:false,revision:Object.fromEntries(files.map(file=>[file,createHash('sha256').update(sources.get(resolve(file))).digest('hex')])),cases:[],
   limits:['Forced camera/accelerated pigment state, not natural mission-chain evidence','Desktop Chromium and Android emulation; no physical Android','Media, Web Audio and speech muted; no listening review']};
-const cases=[['desktop',1280,800],['android-portrait',390,844],['android-landscape',844,390],['procedural-fallback',1280,800],...(process.env.FLOOR_RECOVERY||process.env.PORTRAIT_LIQUID?[['reduced-motion',1280,800]]:[]),...(process.env.PORTRAIT_LIQUID?[['missing-portrait',1280,800]]:[])];
+const cases=[['desktop',1280,800],['android-portrait',390,844],['android-landscape',844,390],['procedural-fallback',1280,800],...(process.env.FLOOR_RECOVERY||process.env.PORTRAIT_LIQUID||process.env.PORTRAIT_OIL?[['reduced-motion',1280,800]]:[]),...(process.env.PORTRAIT_LIQUID||process.env.PORTRAIT_OIL?[['missing-portrait',1280,800]]:[])];
 try{
   for(const [name,width,height]of cases){
     if(process.env.FLOOR_CASE&&!process.env.FLOOR_CASE.split(',').includes(name))continue;
@@ -71,7 +75,7 @@ try{
     await page.goto(`http://127.0.0.1:${server.address().port}/?geheim=buergeramt`,{waitUntil:'domcontentloaded',timeout:120000});
     console.log(name,'DOM ready');await page.waitForFunction(()=>window.BuergeramtLevel?.active&&window.Germany3D?.officeAssetsReady,null,{timeout:120000});
     await page.evaluate(()=>{window.__floorStep=BuergeramtLevel.update;BuergeramtLevel.update=()=>{};window.__floorRender=Germany3D.sync;Germany3D.sync=()=>{};window.__floorPitch=-.58;__floorTest.pose(0,4.8);__floorTest.stage('walk-sign');__floorTest.at(0);__floorRender()});
-    if(process.env.PORTRAIT_LIQUID){
+    if(process.env.PORTRAIT_LIQUID||process.env.PORTRAIT_OIL){
       if(name==='reduced-motion')await page.emulateMedia({reducedMotion:'reduce'});
       const intact=await page.evaluate(()=>__floorGpu.samplePortraitPaint('frame',0,0));
       await page.evaluate(()=>{__floorTest.at(570);__floorRender()});
@@ -80,7 +84,13 @@ try{
       else{assert(Math.max(...intact.range)>40,'actual paint is present before melting');assert(drained.range.every(range=>range<=1),'the entire picture leaves the frame at full melt');}
       await page.evaluate(()=>{__floorTest.at(BuergeramtGoop.ageForMelt(.25));__floorRender()});
       const film=name==='missing-portrait'?null:await page.evaluate(()=>__floorGpu.samplePortraitPaint('film',.25,BuergeramtLevel.floorState.visualTime));
-      if(film){assert(film.coverage>.7,'paint flows across most of the picture width');assert(film.connected>.65,'the liquid body stays connected rather than separated strands');}
+      const softened=name==='missing-portrait'?null:await page.evaluate(bare=>__floorGpu.samplePortraitPaint('frame',.25,BuergeramtLevel.floorState.visualTime,bare),drained.low);
+      if(softened){
+        assert((softened.bands[0]+softened.bands[1])/2>.2,'paint remains near its original top while dissolving instead of the whole image falling');
+        const middle=softened.bands.slice(2,7).reduce((sum,value)=>sum+value,0)/5;
+        assert(middle<.95&&middle>.02,'interior paint erodes in place with some pigment remaining');
+      }
+      if(film){assert(film.coverage>.2,'thick runs carry substantial paint');assert(film.connected>.12,'oil includes broad merging runs');assert(film.bands.at(-1)<film.bands[0],'unequal liquid fronts leave gaps toward the floor');}
       await page.evaluate(()=>{__floorTest.at(0);__floorRender()});
       const captures=[];
       for(const age of [0,90,105,120,150,180,210,240,270,300,370,420,570]){
@@ -91,7 +101,7 @@ try{
         if(name==='missing-portrait'&&state.pigment){assert.equal(state.pigment.paint,0);assert.equal(state.pigment.colored,0);}
         await page.screenshot({path:resolve(out,`${name}-liquid-${age}s.png`)});captures.push({age,...state});
       }
-      assert.deepEqual(errors,[]);report.cases.push({name,verdict:'PASS',intact,drained,film,captures,errors});console.log(name,'liquid PASS');await context.close();continue;
+      assert.deepEqual(errors,[]);report.cases.push({name,verdict:'PASS',intact,drained,softened,film,captures,errors});console.log(name,'oil PASS');await context.close();continue;
     }
     if(process.env.FLOOR_MOTION){
       await page.evaluate(()=>{__floorGpu.advance(675);__floorRender()});
