@@ -38,6 +38,17 @@ binding as the recording's receipt.
 Run curator, voice-consistency and affected speech-lifecycle checks before
 publication. Record use authorization separately from perceptual listening.
 
+The Jobcenter overlord uses stable game `voiceId` `jobcenter-overlord` and the
+user-supplied `GS Evil` native profile `1ea9044d630b43c9928956a501b90ded`.
+The selected Secret Tunnel OmniVoice Rust take is the exact text in
+`assets/audio/jobcenter/overlord.json`; `tools/build-jobcenter-audio.py` renders
+its four-semitone-lowered, lightly reinforced MP3 offline. The source profile
+receipt pins original/reference hashes and the source URL in `VOICE-CAST.json`.
+The final encoded take is 26.783 s, −18.01 LUFS, −2.88 dBTP, with independent
+German ASR matching every authored word under compound-word normalization.
+The user authorized this processed game recording; perceptual listening remains
+NOT RUN. The encounter loads the asset on demand through its one media owner.
+
 The mirror uses `office-mirror` in the existing authoring helper: one whole-text
 synthesis call and one `player-potato-mirror.mp3`, never sentence joins. Its
 surprised delivery uses exaggeration 0.65 with the unchanged selected player

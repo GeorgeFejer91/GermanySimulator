@@ -1,5 +1,17 @@
 # Speech catalog and subtitle authority
 
+`jobcenter-overlord` is the Jobcenter encounter's one recorded speaker and
+stable game voice ID. Its catalog `source` exactly matches the German text in
+`assets/audio/jobcenter/overlord.json`; the paired English subtitle stays with
+that one recording. `speechClip("jobcenter-overlord")` exposes `text`,
+`recording`, `english` and `durationMs` (26,783). The 40 Hz energy and attack
+arrays in the sidecar are measured from the final encoded MP3 and serve the
+flame animation, not speech timing authority. The 214,892-byte MP3 is requested
+on Jobcenter entry through one visit-owned media element, with no startup
+preload or overlapping city speech. Its SHA-256, profile receipt, render recipe, source
+attribution and encoded levels are pinned with the asset and cast. Use
+authorization and automated word matching are recorded; listening is NOT RUN.
+
 The first-person mirror monologue is `player-potato-mirror`, one continuous
 Hans-Peter Mustermann take on `spieler-hans-peter-mustermann` and selected native
 profile `b027d18a4fc748cabb133fbb14077500`. Its separate mirror manifest supplements

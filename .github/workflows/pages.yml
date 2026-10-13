@@ -30,7 +30,7 @@ jobs:
       - name: Check JWD home and neighbors
         run: node --test tests/jwd-home.test.mjs tests/character-review.test.mjs tests/building-placards.test.mjs
       - name: Check running hotkey
-        run: node --test tests/running-hotkey.test.mjs
+        run: node --test tests/running-hotkey.test.mjs tests/jobcenter.test.mjs
       - name: Check office queue call audio
         run: node --test tests/buergeramt-queue-audio.test.mjs tests/buergeramt-multiple-tickets.test.mjs
       - name: Check office touch navigation, turning and direction texture reuse
