@@ -707,7 +707,7 @@ const buildings=[
 const grassAreas=[],walkways=[];
 // A broad shared residential lane joins the western pavement, clear of the railway.
 const jwdLane=offsetWorldPoint({x:40,y:3970,w:1010,h:150});walkways.push(jwdLane);
-const jwdNeighborhood={name:"WALDSIEDLUNG · JWD",street:"AM FISCHTAL",signX:960+RAIL_GUTTER,signY:3734+RAIL_GUTTER};
+const jwdNeighborhood={name:"WALDSIEDLUNG · JWD",street:"AM FISCHTAL",signX:960+RAIL_GUTTER,signY:4150+RAIL_GUTTER};
 // A small garden suburb fits in the existing southwest block without moving railways.
 walkways.push(...[{x:40,y:3580,w:1010,h:130},{x:40,y:3580,w:60,h:540}].map(offsetWorldPoint));
 grassAreas.push(...[{x:40,y:3280,w:1010,h:90},{x:40,y:3370,w:70,h:200},{x:310,y:3370,w:120,h:200},{x:670,y:3370,w:120,h:200},{x:960,y:3370,w:18,h:200},{x:100,y:3710,w:878,h:50},{x:340,y:3760,w:70,h:210},{x:650,y:3760,w:70,h:210},{x:100,y:4120,w:878,h:80}].map(offsetWorldPoint));
