@@ -47,8 +47,8 @@ test('assigned-counter arrival automatically restores melt and speed in 90 real 
  assert.ok(h.level.floorState.visualTime>visualDone,'scene clock never rewinds with residence age');
 });
 
-test('partial melt recovery starts continuously on every wave and continues after leaving the counter',()=>{
- for(const age of [60,120,200,280,360,420]){
+test('partial recovery is continuous during grace and on every wave, including after leaving the counter',()=>{
+ for(const age of [60,150,210,290,370,450,510]){
  const h=fixture({age});const initial=h.level.floorState.goop,speed=h.level.timeScale;
  h.level.update(0);closeEnough(h.level.timeScale,speed);
  // Move within the office after valid arrival; eligibility can disappear
