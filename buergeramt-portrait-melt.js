@@ -1,12 +1,15 @@
 // One paint source shared by the framed portrait, its downward threads and the
 // existing floor transport. No particles, scene capture or separate clock.
+const MELT_RATE=1.15;
 export const portraitPaintGlsl=`
   uniform sampler2D amtPortraitPaint;
   uniform vec4 amtPortraitInfo;
+  float amtPortraitPaintMelt(float goop){return min(1.,goop*${MELT_RATE});}
   float amtPaintColumn(float u,float clock){return .5+.22*sin(u*11.+.5)+.15*sin(u*23.-clock*.012);}
   // Eight irregular viscous channels. Bulges advect downward on the same
   // slowed clock as the floor; their leading drops keep rounded liquid tips.
   vec4 amtPaintFilm(vec2 uv,float goop,float clock){
+    goop=amtPortraitPaintMelt(goop);
     float lane=floor(clamp(uv.x,.001,.999)*8.);
     float seed=fract(sin(lane*91.7+13.1)*1451.17);
     float center=(lane+.5+.22*sin(lane*2.9+1.))/8.;
@@ -27,11 +30,12 @@ export const portraitPaintGlsl=`
   }
   vec4 amtPaintSpill(vec2 p,float goop,float clock){
     if(amtPortraitInfo.w<.5||goop<=0.)return vec4(0.);
+    float paintGoop=amtPortraitPaintMelt(goop);
     vec2 q=(p-amtPortraitInfo.xy)/amtPortraitInfo.z;
-    float travel=max(0.,-q.y),u=.5-q.x+.055*sin(travel*8.+clock*.012)*goop*smoothstep(0.,.5,travel);
+    float travel=max(0.,-q.y),u=.5-q.x+.055*sin(travel*8.+clock*.012)*paintGoop*smoothstep(0.,.5,travel);
     vec4 contact=amtPaintFilm(vec2(u,1.),goop,clock);
     float edge=smoothstep(-.08,.05,u)*(1.-smoothstep(.95,1.08,u));
-    float spread=exp(-travel/(.07+goop*.8))*(1.-smoothstep(.01,.06,q.y));
+    float spread=exp(-travel/(.07+paintGoop*.8))*(1.-smoothstep(.01,.06,q.y));
     return vec4(contact.rgb,contact.a*edge*spread);
   }
 `;
@@ -42,14 +46,15 @@ export function createAmtPortraitMelt({THREE:T,material,frame,floor,position,wid
   material.onBeforeCompile=function(shader,renderer){
     compile.call(this,shader,renderer);Object.assign(shader.uniforms,{amtPortraitMelt:melt,amtPortraitClock:clock,amtPortraitPaint:paint,amtPortraitInfo:{value:new T.Vector4(0,0,1,0)}});
     shader.fragmentShader='uniform float amtPortraitMelt,amtPortraitClock;\n'+portraitPaintGlsl+shader.fragmentShader.replace('#include <map_fragment>',`#include <map_fragment>
-      float column=amtPaintColumn(vMapUv.x,amtPortraitClock),fall=amtPortraitMelt*(.14+.40*column);
-      vec2 paintUv=vec2(vMapUv.x+.006*amtPortraitMelt*sin(vMapUv.y*5.-amtPortraitClock*.009+column*2.),vMapUv.y+fall*(1.-vMapUv.y));
+      float paintGoop=amtPortraitPaintMelt(amtPortraitMelt);
+      float column=amtPaintColumn(vMapUv.x,amtPortraitClock),fall=paintGoop*(.14+.40*column);
+      vec2 paintUv=vec2(vMapUv.x+.006*paintGoop*sin(vMapUv.y*5.-amtPortraitClock*.009+column*2.),vMapUv.y+fall*(1.-vMapUv.y));
       vec3 wetPaint=texture2D(map,clamp(paintUv,vec2(.001),vec2(.999))).rgb;
-      float bare=smoothstep(1.-fall-.018,1.-fall+.018,vMapUv.y)*amtPortraitMelt;
+      float bare=smoothstep(1.-fall-.018,1.-fall+.018,vMapUv.y)*paintGoop;
       diffuseColor.rgb=mix(wetPaint,vec3(.21,.17,.10),bare);
     `);
   };
-  material.customProgramCacheKey=()=>key+':amt-portrait-melt-v2';material.needsUpdate=true;
+  material.customProgramCacheKey=()=>key+':amt-portrait-melt-v3';material.needsUpdate=true;
   const dripMaterial=new T.MeshBasicMaterial({map:material.map,transparent:true,alphaTest:.025,depthWrite:false});
   dripMaterial.onBeforeCompile=shader=>{
     Object.assign(shader.uniforms,{amtPortraitMelt:melt,amtPortraitClock:clock,amtPortraitPaint:paint,amtPortraitInfo:{value:new T.Vector4(0,0,1,0)}});
@@ -59,7 +64,7 @@ export function createAmtPortraitMelt({THREE:T,material,frame,floor,position,wid
       diffuseColor.a*=film.a;
     `);
   };
-  dripMaterial.customProgramCacheKey=()=>':amt-portrait-drips-v2';
+  dripMaterial.customProgramCacheKey=()=>':amt-portrait-drips-v3';
   // Paint leaves the frame, then settles onto the actual inner wall at z=5.47.
   // Static curvature, 24 triangles; alpha/depth still own the liquid outline.
   const geometry=new T.PlaneGeometry(1.45,1.56,1,12),vertices=geometry.attributes.position;
@@ -73,7 +78,7 @@ export function createAmtPortraitMelt({THREE:T,material,frame,floor,position,wid
   return{
     setTexture(texture){ready=true;paint.value=texture;dripMaterial.map=texture;dripMaterial.needsUpdate=true;floor.setPortrait(texture,{x:position.x,z:position.z+(.21-.165)*.88,width});},
     update(state,reduced=false){if(globalThis.document?.hidden&&state)return;melt.value=ready&&state?globalThis.BuergeramtGoop.goop(state.time):0;clock.value=reduced?0:state?.visualTime||0;drips.visible=ready&&melt.value>0;},
-    inspect:()=>({ready,melt:melt.value,clock:clock.value,dripsVisible:drips.visible,depthTest:dripMaterial.depthTest,depthWrite:dripMaterial.depthWrite}),
+    inspect:()=>({ready,melt:melt.value,paintMelt:Math.min(1,melt.value*MELT_RATE),clock:clock.value,dripsVisible:drips.visible,depthTest:dripMaterial.depthTest,depthWrite:dripMaterial.depthWrite}),
     dispose(){drips.visible=false;frame.remove(drips);drips.geometry.dispose();dripMaterial.dispose();}
   };
 }

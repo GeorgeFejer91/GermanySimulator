@@ -21,6 +21,15 @@ test('loaded portrait, drips and floor share one source and the authoritative si
   f.effect.update(null);assert.equal(f.effect.inspect().melt,0);assert.equal(f.effect.inspect().dripsVisible,false);
   f.effect.update({time:0,visualTime:0});assert.equal(f.effect.inspect().melt,0,'next visit is an intact portrait');
 });
+test('portrait paint advances fifteen percent faster while retaining the room clock and full-melt cap',()=>{
+  const f=fixture();f.effect.setTexture({actualPaint:true});
+  for(const [amount,expected] of [[0,0],[.25,.2875],[.5,.575],[.8,.92],[1,1]]){
+    f.effect.update({time:BuergeramtGoop.ageForMelt(amount),visualTime:123});
+    assert.ok(Math.abs(f.effect.inspect().paintMelt-expected)<1e-10);
+    assert.equal(f.effect.inspect().clock,123);
+  }
+  f.effect.update(null);assert.equal(f.effect.inspect().paintMelt,0);
+});
 test('drips meet the ground with real depth and transparent gaps; owned mesh disposal leaves the shared image alone',()=>{
   const f=fixture(),drips=f.frame.children[0];
   assert.ok(Math.abs(2.22+.88*(drips.position.y-drips.geometry.h/2)-.0024)<1e-10);

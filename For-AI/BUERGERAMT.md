@@ -200,8 +200,10 @@ The existing room isolation/fade owns opacity and depth-write restoration.
 Reduced motion and GPU failure retain a static spatial melting approximation
 with the same goop/speed value, without ripple animation or pigment targets.
 
-The existing Steinmeier oil portrait melts on exactly this same wave and
-residence clock. `buergeramt-portrait-melt.js` continuously transports the real
+The existing Steinmeier oil portrait uses this same wave and residence clock,
+with paint progress `min(1, 1.15 × goop)`. This 15% increase applies together to
+the framed image, wall drips and floor deposition; the floor's own melt and
+slowdown retain their shared value. `buergeramt-portrait-melt.js` transports the real
 painted image downward, gradually exposing the bare backing. Eight irregular
 viscous channels have moving necks, descending bulges and rounded leading drops;
 both image deformation and paint colors advance on the integrated scene clock,
