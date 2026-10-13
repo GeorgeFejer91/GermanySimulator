@@ -1,0 +1,137 @@
+{
+  "voiceId": "kriminalpolizei",
+  "profileId": "f700170f840543bca7413d3ccf6ac028",
+  "referenceSha256": "ef452114430b47167239cdb065b1e01d502c0148f1492ac1b66098a03c0ea82e",
+  "originalSha256": "0a1f98a15137640d3913ac3e0bc28811d5304dd16119ffab5aa8ad6653df0acf",
+  "teacher": "OpenVoice V2 tone conversion of stock German Piper speech",
+  "teacherRevision": "f36e7edfe1684461a8343844af60babc2efbb727",
+  "schemaVersion": 1,
+  "model": "kripo-cd670e745a7e.onnx.bin",
+  "sha256": "cd670e745a7e023eff1a4d28bf81ef63b0712e39820494f2b2747bd91229c2f8",
+  "bytes": 18849196,
+  "compression": "gzip",
+  "downloadBytes": 16033482,
+  "downloadSha256": "3a34dcffbf734fb0d18954834298e790d6204ba3089d0f634fc28b86c70e89eb",
+  "sampleRate": 22050,
+  "format": "VITS ONNX opset 15; per-channel int8 stored weights",
+  "runtime": "onnxruntime-web 1.18.0 WASM SIMD single thread",
+  "quantizedParameters": 14942336,
+  "trainingTakes": 187,
+  "trainingMinutes": 21.689179138321997,
+  "trainingGlobalStep": 2000,
+  "seed": 20261013,
+  "trainingSourcesSha256": "397503491ed4bb31ef001184f64552a8f911604b973cb46a08ed6a9ddb3b403c",
+  "baseRevision": "37d1bea250e21ca0d617818d2bef1db724edb80c",
+  "baseCheckpointSha256": "063f96fd905b9f57bd077bdbca0aa39876a29103c2cc8688fb4d39e2876a0de2",
+  "checkpointSha256": "06010649f4dd19b64bc55dbeae636084263e2e1002dd25fdea0df950d1edd903",
+  "trainingStages": [
+    {
+      "globalSteps": 2000,
+      "phonemizer": "shipped WASM",
+      "optimizer": "fresh AdamW (pinned Piper implementation)",
+      "generatorRate": 0.0001,
+      "discriminatorRate": 2e-05,
+      "restoredFrozenPrefixes": [
+        "model_g.enc_p.",
+        "model_g.dp.",
+        "model_g.flow."
+      ],
+      "baseCheckpointSha256": "063f96fd905b9f57bd077bdbca0aa39876a29103c2cc8688fb4d39e2876a0de2",
+      "resumedFromCheckpointSha256": null
+    }
+  ],
+  "trainingRunSha256": "bc38170c24973b6ffefb3cb3c2770920d500ef6c3603e152a84ae40983e740a8",
+  "inferenceScales": [
+    0,
+    1.2,
+    0
+  ],
+  "durationWeights": "float32",
+  "phonemeInputWeights": "float32",
+  "browserPhonemizer": {
+    "piper_phonemize.js": {
+      "sha256": "14d778a8c369fcbabcf720ab73d50a006278104b5cac6c8efcb750df1066b035",
+      "bytes": 83757
+    },
+    "piper_phonemize.data": {
+      "sha256": "edcd1e283a980cb9bd76f7e83c78b81ab4d258d0af59547e27bb538c6cb56984",
+      "bytes": 904814
+    },
+    "piper_phonemize.wasm": {
+      "sha256": "b777cd107a91d2bcc6a1ea46f2c26a662a7407394fe84589198aeaa83dd7a9d6",
+      "bytes": 635212
+    }
+  },
+  "browserMetadataSha256": "95f2822b825229a1872813b4e63d39a1da315f3c9c77c9af3fa98bb8f34a44b3",
+  "sourceModelSha256": "4292174ca38305bab796cfa7ffc6d275bb245b12e6cee95abd06c8cf781817a3",
+  "fallback": "captions",
+  "listening": "User listened to actual browser-generated George Fejer greeting on 2026-10-13 and accepted it as good enough.",
+  "teacherSourceRevision": "74a1d147b17a8c3092dd5430504bd83ef6c7eb23",
+  "teacherCheckpointSha256": "9652c27e92b6b2a91632590ac9962ef7ae2b712e5c5b7f4c34ec55ee2b37ab9e",
+  "teacherSourceFileSha256": {
+    "models.py": "54f9e8284a0e9a89c75cb3163d2694cf34d90a5d05cfbcbf12ccd4f0b1ba2dc8",
+    "modules.py": "b2376049141934eb63bb4d905920c486a286bec65f0735b78ba52b2fb54564d0",
+    "commons.py": "046943d265635c3d9c99195562e703564a26300981a7db5b87d4cd3fd180ae0d",
+    "attentions.py": "6a392057838e6051afc8beed43c2d1279d75de8c8b600552e7232ad930b356c3",
+    "mel_processing.py": "b8fd9924f8fb4c5b31031e04464c4a8145104e4bdfc3c29ecb6c485fa3b5c049"
+  },
+  "teacherSourceModelSha256": "7e64762d8e5118bb578f2eea6207e1a35a8e0c30595010b666f983fc87bb7819",
+  "sourceEmbeddingSha256": "3f12a89ac8b29d31472fbdbb74ef82f43cde553f4281f41ac5a05e3bad1a7c04",
+  "targetEmbeddingSha256": "abe146a2f2be701204e3af678e3d2d71519a6fe1b4db0c0abcfa4864fd61eb39",
+  "targetEmbeddingInputSha256": "2ac486e5b558dc909d96f6afce7767def77a891f81076b0b6f5e33274da20e24",
+  "packingScriptSha256": "676712e7a6c3d2c50685ee15ba46ddf0bbb54b4f30e5bbe12d1307db13787eca",
+  "synthesis": "sentence priors; name-only vocoder; prerecorded Kripo greeting prefix and suffix",
+  "nameContextFrames": 16,
+  "contextSuffix": ", hier ist die Kriminalpolizei am Apparat!",
+  "speechParts": [
+    {
+      "role": "prefix",
+      "text": "Spricht hier",
+      "file": "prefix.wav",
+      "bytes": 31276,
+      "sha256": "db03a4a29ea52cfc9dcde78c1249aa224c0d7a319415fe6984efd42bd9f0d563",
+      "startSample": 0,
+      "endSample": 15616,
+      "sampleRate": 22050,
+      "channels": 1,
+      "voiceId": "kriminalpolizei",
+      "profileId": "f700170f840543bca7413d3ccf6ac028",
+      "referenceSha256": "ef452114430b47167239cdb065b1e01d502c0148f1492ac1b66098a03c0ea82e",
+      "sourceFile": "kripo-game-recording-01.wav",
+      "sourceSha256": "11b927b809c9d40a0431a117cbda5915391a1b798aabf55c81227a932ccb7d20",
+      "teacher": "OpenVoiceV2",
+      "modelRevision": "f36e7edfe1684461a8343844af60babc2efbb727",
+      "sourceRevision": "74a1d147b17a8c3092dd5430504bd83ef6c7eb23",
+      "targetEmbeddingInputSha256": "2ac486e5b558dc909d96f6afce7767def77a891f81076b0b6f5e33274da20e24"
+    },
+    {
+      "role": "suffix",
+      "text": "Hier ist die Kriminalpolizei am Apparat!",
+      "file": "suffix.wav",
+      "bytes": 108588,
+      "sha256": "5239886a49888b43e83c53bcdfbe2df0f8b8dc9fdec1c9aa2dd51a78a3db8861",
+      "startSample": 34048,
+      "endSample": 88320,
+      "sampleRate": 22050,
+      "channels": 1,
+      "voiceId": "kriminalpolizei",
+      "profileId": "f700170f840543bca7413d3ccf6ac028",
+      "referenceSha256": "ef452114430b47167239cdb065b1e01d502c0148f1492ac1b66098a03c0ea82e",
+      "sourceFile": "kripo-game-recording-01.wav",
+      "sourceSha256": "11b927b809c9d40a0431a117cbda5915391a1b798aabf55c81227a932ccb7d20",
+      "teacher": "OpenVoiceV2",
+      "modelRevision": "f36e7edfe1684461a8343844af60babc2efbb727",
+      "sourceRevision": "74a1d147b17a8c3092dd5430504bd83ef6c7eb23",
+      "targetEmbeddingInputSha256": "2ac486e5b558dc909d96f6afce7767def77a891f81076b0b6f5e33274da20e24"
+    }
+  ],
+  "qualityStatus": "accepted-caller-name-derivative",
+  "voiceUse": "Only visitor name in opening Kripo greeting; rest of caller conversation uses selected original recordings.",
+  "wordReview": "All eight disjoint heldout names and Erika Mustermann/Anna Mueller in actual packed name-only joins matched unprompted large-v3 ASR; George Fejer was transcribed George Fehr. The user listened to the browser George greeting and accepted it. No universal pronunciation claim.",
+  "listeningSampleSha256": "4c05873c4eb0d1a4591eaa51b86776e7f5bc6164e4ec1262d80c3a16521a848a",
+  "frozenStateVerification": {
+    "unchangedPriorFlowTensors": 507,
+    "adaptedPosteriorDecoderTensors": 166,
+    "trainableGeneratorParameters": 8902784
+  }
+}

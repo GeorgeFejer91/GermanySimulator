@@ -1,9 +1,17 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import {harness} from './amt-harness.mjs';
+import vm from 'node:vm';
+import {harness,source} from './amt-harness.mjs';
+
+function phoneRuntime(options={}){
+ const h=harness('phone',{candidatePhone:true,fakeAudio:true,...options}),played=[],Audio=h.window.Audio;
+ vm.runInContext(source('For-AI/AUDIO-TEXT-LIBRARY.js'),h.context);
+ h.window.Audio=h.context.Audio=class extends Audio{play(){played.push(this);return super.play()}};
+ h.played=played;return h;
+}
 
 function phoneCall(options={}){
- const h=harness('phone',{candidatePhone:true,fakeAudio:true,...options}),link=h.phoneReady(),story=h.window.BuergeramtStory;
+ const h=phoneRuntime(options),link=h.phoneReady(),story=h.window.BuergeramtStory;
  h.node('phone-name').value='Erika Mustermann';h.node('phone-form').dispatchEvent(new Event('submit',{cancelable:true}));
  link.message({type:'ticket',number:'B-223',counter:3});link.message({type:'counter-start'});link.message({type:'call-arm',id:'grass',round:1});
  link.message({type:'call',id:'grass',round:1,line:story.call.body,greeting:story.call.greeting('Erika Mustermann'),ringAtPhoneMs:h.now(),ringAtUtcMs:null,leadMs:2200});
@@ -18,7 +26,7 @@ const staticNoise=h=>h.audio.nodes.find(n=>n.kind==='buffer-source'&&n.loop);
 // in-memory message queue. Counter admission is supplied by the existing harness;
 // this does not test QR/WebRTC delivery, real audio onset or physical devices.
 function paired(){
- const host=harness('host',{voice:true}),phone=harness('phone',{candidatePhone:true,fakeAudio:true});
+ const host=harness('host',{voice:true}),phone=phoneRuntime();
  const cancellations=[];host.config.onCancel=result=>cancellations.push(result);host.counter();
  const hostLink=host.links[0],phoneLink=phone.phoneReady(),call=hostLink.sent.findLast(m=>m.type==='call');
  phone.tick(host.now());phone.node('phone-name').value='Erika Mustermann';phone.node('phone-form').dispatchEvent(new Event('submit',{cancelable:true}));
@@ -35,21 +43,24 @@ function paired(){
  return{host,phone,hostLink,phoneLink,cancellations,trace,pump,tick,until,setDrop:fn=>{drop=fn}};
 }
 
-test('the greeting starts in Answer and static spans greeting, fixed recording and inter-line gaps',()=>{
- const h=phoneCall(),noise=staticNoise(h),greeting=h.synth.current;
- assert.equal(h.synth.spoken.length,1);assert.equal(greeting.text,h.window.BuergeramtStory.call.greeting('Erika Mustermann'));assert.equal(greeting.lang,'de-DE');assert.equal(h.now(),0);
- assert(noise);assert.equal(noise.stopped.length,0);h.tick(200);h.synth.end();h.tick(20);
+test('the full recorded opening starts in Answer and static spans recordings and inter-line gaps',()=>{
+ const h=phoneCall(),noise=staticNoise(h),opening=h.played[0];
+ assert.equal(h.synth.spoken.length,0);assert.equal(opening.src,'./assets/voices/kriminalpolizei/kriminalpolizei-phone-01.mp3');assert.equal(h.now(),0);
+ assert(noise);assert.equal(noise.stopped.length,0);h.tick(20);
  assert.equal(receipts(h,'police-start').length,1);assert.equal(receipts(h,'police-done').length,0);
- h.audio.recordings[0].end();assert.equal(receipts(h,'police-done').length,1);assert.equal(noise.stopped.length,0);
+ opening.end();assert.equal(receipts(h,'police-done').length,1);assert.equal(noise.stopped.length,0);
  h.tick(5000);assert.equal(noise.stopped.length,0);h.links[0].message({type:'police-line',index:0,line:h.window.BuergeramtStory.police[0]});h.tick(20);
- assert.equal(h.synth.spoken.length,1,'fixed dialogue never re-enters WebSpeech');assert.equal(staticNoise(h),noise);assert.equal(h.audio.nodes.filter(n=>n.kind==='buffer-source'&&n.loop).length,1);
+ assert.equal(h.synth.spoken.length,0);assert.equal(staticNoise(h),noise);assert.equal(h.audio.nodes.filter(n=>n.kind==='buffer-source'&&n.loop).length,1);
  h.links[0].message(endRequest);assert(noise.stopped.length);assert.equal(h.synth.current,null);assert.equal(h.node('phone-call').hidden,true);
 });
 
-test('the fixed opening body uses the catalogue exact text after the name greeting',()=>{
- const h=phoneCall(),lookups=[];h.window.GermanySimulatorAudioText.recordedClip=(voiceId,text)=>{lookups.push({voiceId,text});return './assets/voices/kriminalpolizei/kriminalpolizei-opening-body.mp3'};
- assert.equal(lookups.length,0);h.synth.end();assert.deepEqual(lookups,[{voiceId:'kriminalpolizei',text:h.window.BuergeramtStory.call.body}]);h.tick(20);h.audio.recordings[0].end();
- assert.equal(receipts(h,'police-start').length,1);assert.equal(receipts(h,'police-done').length,1);assert.equal(h.synth.spoken.length,1);
+test('the backup uses the catalogue full identity and question rather than the cropped body',()=>{
+ const h=phoneCall(),catalog=h.window.GermanySimulatorAudioText;
+ assert.equal(catalog.clips['kriminalpolizei-phone-01'].source,h.window.BuergeramtStory.call.line);
+ assert.equal(h.played[0].src,catalog.recordedClip('kriminalpolizei',h.window.BuergeramtStory.call.line));
+ assert.notEqual(h.played[0].src,catalog.recordedClip('kriminalpolizei',h.window.BuergeramtStory.call.body));
+ h.tick(20);h.played[0].end();
+ assert.equal(receipts(h,'police-start').length,1);assert.equal(receipts(h,'police-done').length,1);assert.equal(h.synth.spoken.length,0);
 });
 
 test('correct call-end owns clunk and 425 Hz line tone, and emits one sound receipt on actual ending',()=>{
@@ -79,21 +90,21 @@ for(const interruption of ['hidden','pagehide','forfeit','done','disconnect'])te
 test('user hang-up uses the same audible ending and never restarts queued police speech',()=>{
  const h=phoneCall(),link=h.links[0];h.node('phone-hangup').click();assert.equal(receipts(h,'hangup').length,1);assert(endingTone(h));assert.equal(receipts(h,'call-ended').length,0);
  h.node('phone-hangup').click();link.message({type:'police-line',index:0,line:h.window.BuergeramtStory.police[0]});h.tick(1860);h.audio.flushEnded();
- assert.equal(receipts(h,'hangup').length,1);assert.equal(receipts(h,'call-ended').length,1);assert.equal(receipts(h,'call-ended')[0].mode,'sound');assert.equal(h.audio.recordings.length,0);assert.equal(h.synth.spoken.length,1);
+ assert.equal(receipts(h,'hangup').length,1);assert.equal(receipts(h,'call-ended').length,1);assert.equal(receipts(h,'call-ended')[0].mode,'sound');assert.equal(h.played.length,1);assert.equal(h.synth.spoken.length,0);
 });
 
 test('paired complete conversation ends phone audio before exact dismissal and kripo ejection',()=>{
  const p=paired(),{host,phone}=p,story=host.window.BuergeramtStory;
- phone.node('phone-answer').click();p.pump();assert.equal(host.level.stage,'cancelled');assert.equal(host.node('amt-ambient').textContent,'KRIMINALPOLIZEI · '+story.call.opening('Erika Mustermann'));
- const noise=staticNoise(phone);p.tick(200);phone.synth.end();p.tick(20);phone.audio.recordings[0].end();p.pump();
+ phone.node('phone-answer').click();p.pump();assert.equal(host.level.stage,'cancelled');
+ const noise=staticNoise(phone);p.tick(20);assert.equal(host.node('amt-ambient').textContent,'KRIMINALPOLIZEI · '+story.call.line);phone.played[0].end();p.pump();
  for(let i=0;i<3;i++){
-  p.until(()=>phone.audio.recordings.length===i+2);p.tick(20);assert.equal(noise.stopped.length,0);phone.audio.recordings[i+1].end();p.pump();
+  p.until(()=>phone.played.length===i+2);p.tick(20);assert.equal(noise.stopped.length,0);phone.played[i+1].end();p.pump();
  }
- p.tick(20);host.synth.end();p.pump();p.until(()=>phone.audio.recordings.length===5);p.tick(20);assert.equal(noise.stopped.length,0);
- phone.audio.recordings[4].end();p.pump();assert(endingTone(phone));assert(noise.stopped.length);assert.equal(p.cancellations.length,0);assert.notEqual(host.node('amt-line').textContent,story.phoneDismissal.line);
+ p.tick(20);host.synth.end();p.pump();p.until(()=>phone.played.length===5);p.tick(20);assert.equal(noise.stopped.length,0);
+ phone.played[4].end();p.pump();assert(endingTone(phone));assert(noise.stopped.length);assert.equal(p.cancellations.length,0);assert.notEqual(host.node('amt-line').textContent,story.phoneDismissal.line);
  const remaining=endingTone(phone).stopped[0]*1000-phone.now();p.tick(remaining-1);assert.notEqual(host.node('amt-line').textContent,story.phoneDismissal.line);p.tick(1);
  assert.equal(host.node('amt-line').textContent,story.phoneDismissal.line);assert.equal(p.cancellations.length,0);p.tick(20);host.synth.end();p.tick(20);
- assert.equal(p.cancellations.length,1);assert.equal(p.cancellations[0].reason,'kripo');assert.equal(host.counts.form,0);assert.equal(host.level.active,false);assert.equal(phone.synth.spoken.length,1);
+ assert.equal(p.cancellations.length,1);assert.equal(p.cancellations[0].reason,'kripo');assert.equal(host.counts.form,0);assert.equal(host.level.active,false);assert.equal(phone.synth.spoken.length,0);
  assert.equal(p.trace.filter(m=>m.type==='police-start'&&m.index===-1).length,1);assert.equal(p.trace.filter(m=>m.type==='police-done'&&m.index===-1).length,1);assert.equal(p.trace.filter(m=>m.type==='call-ended').length,1);
 });
 

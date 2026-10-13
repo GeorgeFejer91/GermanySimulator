@@ -7,7 +7,7 @@
   "referenceSha256": "ef452114430b47167239cdb065b1e01d502c0148f1492ac1b66098a03c0ea82e",
   "source": "https://www.youtube.com/watch?v=egBl1QgsdXQ",
   "authorization": "User requested the saved GS Kriminalpolizei profile for this phone call on 2026-10-10.",
-  "loadTrigger": "Each exact phone line, beginning only after Answer; no preload at page entry",
+  "loadTrigger": "Warm the six selected call recordings after the first valid companion name; playback begins only after Answer, with the complete original opening as synthesis backup. No preload at page entry.",
   "clips": [
     {
       "clipId": "kriminalpolizei-phone-01",

@@ -116,7 +116,7 @@ function phoneTime(atMs,receiptAt,offset=timing.clockOffsetMs){return offset!==n
 function phoneStartLag(){return Math.min(1200,oneWay()+(timing.phoneReadyMs??180))}
 function phoneFastLag(){return Math.min(1200,oneWay()+(timing.phoneFastReadyMs??180))}
 function sentPolice(index){timing.cues[index]={sentAt:performance.now(),startedAt:null,doneAt:null,status:"waiting"}}
-function receivePoliceStart(index,mode,readyDelayMs,atMs,atUtcMs=null){const record=timing.cues[index];if(!record||record.status!=="waiting"||record.startedAt!==null||record.doneAt!==null)return false;record.startedAt=performance.now();record.phoneStartedAtMs=atMs;record.clockOffsetMs=timing.lastPongAt!==null&&record.startedAt-timing.lastPongAt<6000?timing.clockOffsetMs:null;record.estimatedStartAt=phoneTime(atMs,record.startedAt,record.clockOffsetMs);record.phoneStartedAtUtcMs=atUtcMs;record.clockDomain=record.clockOffsetMs!==null?"peer":"receipt";if(record.clockOffsetMs===null&&Number.isSafeInteger(atUtcMs)&&window.BuergeramtClock?.usable?.(clockAnchor,record.startedAt)){record.estimatedStartAt=window.BuergeramtClock.monoAt(clockAnchor,atUtcMs);record.clockDomain="utc"}record.startMode=mode;record.readyDelayMs=readyDelayMs;record.startTransportMs=Math.round(record.startedAt-record.sentAt-readyDelayMs);if(readyDelayMs<5000)timing.phoneFastReadyMs=timing.phoneFastReadyMs===null?readyDelayMs:Math.min(timing.phoneFastReadyMs,readyDelayMs);if(index>=0&&index<2&&readyDelayMs<5000)timing.phoneReadyMs=timing.phoneReadyMs===null?readyDelayMs:Math.round(timing.phoneReadyMs*.6+readyDelayMs*.4);timing.startLagMs=phoneStartLag();return true}
+function receivePoliceStart(index,mode,readyDelayMs,atMs,atUtcMs=null){const record=timing.cues[index];if(!record||record.status!=="waiting"||record.doneAt!==null)return false;if(record.startedAt!==null){if(index!==-1||record.startMode!=="voice"||mode!=="recording"||atMs<record.phoneStartedAtMs)return false;record.startMode=mode;record.openingBackupAtMs=atMs;return true}record.startedAt=performance.now();record.phoneStartedAtMs=atMs;record.clockOffsetMs=timing.lastPongAt!==null&&record.startedAt-timing.lastPongAt<6000?timing.clockOffsetMs:null;record.estimatedStartAt=phoneTime(atMs,record.startedAt,record.clockOffsetMs);record.phoneStartedAtUtcMs=atUtcMs;record.clockDomain=record.clockOffsetMs!==null?"peer":"receipt";if(record.clockOffsetMs===null&&Number.isSafeInteger(atUtcMs)&&window.BuergeramtClock?.usable?.(clockAnchor,record.startedAt)){record.estimatedStartAt=window.BuergeramtClock.monoAt(clockAnchor,atUtcMs);record.clockDomain="utc"}record.startMode=mode;record.readyDelayMs=readyDelayMs;record.startTransportMs=Math.round(record.startedAt-record.sentAt-readyDelayMs);if(readyDelayMs<5000)timing.phoneFastReadyMs=timing.phoneFastReadyMs===null?readyDelayMs:Math.min(timing.phoneFastReadyMs,readyDelayMs);if(index>=0&&index<2&&readyDelayMs<5000)timing.phoneReadyMs=timing.phoneReadyMs===null?readyDelayMs:Math.round(timing.phoneReadyMs*.6+readyDelayMs*.4);timing.startLagMs=phoneStartLag();return true}
 function receivePoliceDone(index,mode,durationMs,atMs){const record=timing.cues[index];if(!record||record.doneAt!==null)return false;if(record.status==="timeout"||record.status==="disconnected"){record.lateDoneAt=performance.now();return false}record.doneAt=performance.now();record.phoneEndedAtMs=atMs;if(record.clockOffsetMs===null&&timing.lastPongAt!==null&&record.doneAt-timing.lastPongAt<6000){record.clockOffsetMs=timing.clockOffsetMs;if(record.phoneStartedAtMs!==undefined)record.estimatedStartAt=phoneTime(record.phoneStartedAtMs,record.startedAt,record.clockOffsetMs)}record.estimatedEndAt=phoneTime(atMs,record.doneAt,record.clockOffsetMs);record.durationMs=durationMs;record.mode=mode;const span=record.startedAt===null?null:record.doneAt-record.startedAt;record.errorMs=span===null?null:Math.round(span-durationMs);record.localErrorMs=record.phoneStartedAtMs===undefined?null:Math.round(atMs-record.phoneStartedAtMs-durationMs);record.uncertaintyMs=timing.clockUncertaintyMs;record.receiptJitter=span!==null&&Math.abs(record.errorMs)>Math.max(250,(timing.rttMs??0)+timing.jitterMs+100);record.status=span===null?"missing-start":record.startMode!==mode?"mode-changed":Math.abs(record.localErrorMs)>25?"drift":record.clockOffsetMs===null?"unsynced":"verified";return true}
 const ambientLines=story.ambient,ambientBag=[];
 const ambientPeople={...story.characters,renter:story.patrons["amt-konrad-wohnungszettel"],parent:story.patrons["amt-mechthild-elternbogen"],pensioner:story.patrons["amt-wolfram-rentenbescheid"],...Object.fromEntries(Object.entries(story.clerks).map(([desk,person])=>["clerk-"+desk,person]))};
@@ -819,13 +819,17 @@ function playQueueCall(){
  if(!named&&queueCallCooldown>0||performance.now()<queueCallReadyAt||queueCallSpeaking||officeSpeechBusy||options?.cityAudioBusy?.()||window.speechSynthesis?.speaking||window.speechSynthesis?.pending)return;
  const prepared=queueNamedClip;queueCallPending=-1;queueNamedTicket=null;queueNamedClip=null;cancelSpeech();queueCallSpeaking=true;
  const owner=attempt,visibleCue=cue,quietGap=35+Math.random()*40;
- const request=named?{line:window.GermanyKnickSpeech.textFor(named.name,named.counter),speaker:"FRAU KNICK",voiceId:story.clerkIdentity.voiceId,actorId:"clerk-"+named.counter}:story.queueCall;
+ const namedText=named?window.GermanyKnickSpeech.textFor(named.name,named.counter):null;
+ const binding=window.GermanySimulatorAudioText?.productionVoices?.[story.clerkIdentity.voiceId];
+ let localRecording=named&&options?.voiceOn?.()?window.GermanyKnickSpeech.lease(prepared):null;
+ if(localRecording&&(localRecording.text!==namedText||localRecording.profileId!==binding?.profileId||localRecording.referenceSha256!==binding?.referenceSha256)){localRecording.release();localRecording=null}
+ const backup=!!named&&!!options?.voiceOn?.()&&!localRecording;
+ const request=named?{line:backup?story.queueCall.line:namedText,speaker:"FRAU KNICK",voiceId:story.clerkIdentity.voiceId,actorId:"clerk-"+named.counter}:story.queueCall;
  const {line:text,speaker:who,voiceId,actorId}=request;
  queueSpeakingTicket=named;
  const current=()=>active&&owner===attempt&&visibleCue===cue&&walking()&&(!named||phoneTickets.get(named.peer)===named);
- const localRecording=named&&options?.voiceOn?.()?window.GermanyKnickSpeech.lease(prepared):null;
  lips.prepare(actorId,text,1.15);
- say(text,()=>{if(current()){ambient.textContent="";queueSpeakingTicket=null;queueCallSpeaking=false;queueCallCooldown=quietGap}},()=>{if(current()){ambient.textContent=who+": "+text;queueCallCooldown=quietGap}},null,{fallback:named?"captions":undefined,rate:named?1:1.15,volumeScale:named?1:.22,readableMs:named?Math.max(3500,text.length*55):1200,isCurrent:current,localRecording,subtitle:named?`${named.name.normalize("NFC")}, please go to counter ${named.counter}!`:localRecording?.english},voiceId);
+ say(text,()=>{if(current()){ambient.textContent="";queueSpeakingTicket=null;queueCallSpeaking=false;queueCallCooldown=quietGap}},()=>{if(current()){ambient.textContent=who+": "+text;queueCallCooldown=quietGap}},null,{fallback:named?"captions":undefined,rate:named?1:1.15,volumeScale:named?1:.22,readableMs:named?Math.max(3500,text.length*55):1200,isCurrent:current,localRecording,subtitle:named&&!backup?`${named.name.normalize("NFC")}, please go to counter ${named.counter}!`:localRecording?.english},voiceId);
 }
 const callSignalSources=new Set();let signalPauseTimer=null,signalEndTimer=null,signalPaused=false;
 function stopCallSignal(){
@@ -1032,12 +1036,15 @@ function showOutburst(){
  }
  policeDoneHandler=index=>nextDesk(index);
  policeStartHandler=index=>{
-  if(waiting?.index!==index)return;stopDesk();clearTimer(waiting.timer);ambient.textContent="";
+  if(waiting?.index!==index)return;const variantUpdate=timing.cues[index]?.openingBackupAtMs!==undefined;if(!variantUpdate){stopDesk();clearTimer(waiting.timer)}ambient.textContent="";
   clearPhoneCaption();
-  if(!phoneBrowser){phoneCaption="KRIMINALPOLIZEI · "+(index===-1?story.call.opening(registeredName):story.police[index]);ambient.textContent=phoneCaption}
-  const fullOpening=index===-1&&!!registeredName,text=index===-1?story.call.opening(registeredName):story.police[index];
+   const named=index===-1&&timing.cues[index]?.startMode==='voice';
+   const text=index===-1?(named?story.call.opening(registeredName):story.call.line):story.police[index];
+   if(!phoneBrowser){phoneCaption="KRIMINALPOLIZEI · "+text;ambient.textContent=phoneCaption}
+   const fullOpening=index===-1;
   const pending=waiting,record=timing.cues[index],budget=Math.min(55000,Math.round((fullOpening?Math.max(18000,text.length*140):index===3?Math.max(18000,text.length*80):upset.phoneCutAfterMs[index+1])/timeScale())),target=record.estimatedStartAt+budget;
-  if(!phoneBrowser)phoneSubtitle=startOfficeSubtitle(text,index===-1?story.call.openingEnglish(registeredName):null,budget);
+   if(!phoneBrowser)phoneSubtitle=startOfficeSubtitle(text,named?story.call.openingEnglish(registeredName):null,budget);
+  if(variantUpdate)return; // Keep the original opening clock and completion bound.
   // The personal introduction and final demand finish before Knick responds.
   if(fullOpening||index===3){pending.timer=defer(()=>nextDesk(index,true),budget+5000);return}
   const service=window.BuergeramtClock;

@@ -117,6 +117,6 @@ test('direct renderer exit creates the skipped city buildings exactly once and e
  vm.runInContext(fn('leaveAmtDirectMode',renderer),h);h.leaveAmtDirectMode();
  assert.equal(h.amtDirectRoute,false);assert.deepEqual(built,['buergeramt','spaeti']);
  h.leaveAmtDirectMode();assert.equal(built.length,2,'repeated ejections cannot duplicate city geometry');
- assert.match(renderer,/leaveAmtDirectMode,get amtEntry/,'the renderer exports its direct-route exit seam');
+ assert.match(renderer.slice(renderer.indexOf('window.Germany3D={')),/\bleaveAmtDirectMode\s*,/,'the renderer exports its direct-route exit seam');
  assert.match(renderer,/if\(amtDirectRoute&&!window\.BuergeramtLevel\?\.active\)/,'disabling direct-only state releases the existing city sync path');
 });

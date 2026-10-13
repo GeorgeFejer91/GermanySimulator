@@ -497,17 +497,24 @@ The desktop exposes visible/hidden/unknown through the current status and
 browser-page visibility, not detection of the physical ringer switch, device
 volume, or the person looking at the display.
 
-The opening uses the accepted ticket name in one German utterance:
+The named opening uses the accepted ticket name in one German utterance:
 “Spricht hier [Name]? Hier ist die Kriminalpolizei am Apparat!” followed by the
 existing grass allegation. It finishes naturally before Knick's argument;
-missing playback still uses the bounded speech fallback. Its exact dynamic
-source and English translation supply the desktop caption on playback receipts.
-Coordination with the Knick local-speech owner confirmed that
-`GermanyKnickSpeech.prepare(name, counter)` and its leases are Knick-only:
-the Kripo must not reuse that model/profile. This dynamic opening uses Kripo's
-existing German male browser fallback; subsequent exact recordings keep the
-selected `kriminalpolizei` identity. Names stay in the current ticket/session,
-with no new model, service, persistence or remote synthesis request.
+its exact source and English translation supply the desktop caption on playback
+receipts. `GermanyKripoSpeech` prepares one name with the user-approved compact
+caller derivative and prerecorded surrounding words; it retains the selected
+`kriminalpolizei` profile. The intercom has its own model/profile and leases.
+The first valid name warms the six fixed call recordings without playing them.
+An unsupported browser or unfinished greeting immediately plays the complete
+original Kripo introduction and question, with matching captions. A pre-onset
+greeting failure also selects that backup, and a failed cropped body retries
+the full opening once. Both paths finish before Knick's first interruption.
+Continuous phone static covers transitions; Answer never waits for synthesis.
+If the intercom model is unavailable, its recorded “Nächste bitte!” still calls
+the allocated counter. Names, model data and generated clips stay in browser
+buffers; slot/episode completion and pagehide release them. There is no remote
+synthesis request or file save. Voice provenance and pronunciation limitations
+are owned by [the voice protocol](./VOICE-SYNTH-PROTOCOL.md).
 
 The telephone is a staged incoming-call screen, with decorative SVG cellular,
 Wi-Fi and battery indicators beside the measured clock. These do not query
@@ -1434,5 +1441,5 @@ Six release cold-start lab runs pass the 18 MB transfer, 4 Hz title dispatch, 1.
 
 A valid name captured in the opening form is prepared before arrival; if absent, preparation starts at the companion registration. The local inference contract, intercom-only listening acceptance and training identity are owned by `VOICE-SYNTH-PROTOCOL.md`'s browser-local appointment-name section. Reservation code, assigned counter, exact ticket receipt and independent visitor ownership stay authoritative.
 
-A reservation whose audio is still preparing moves to a later turn at the same counter. Its board call and ordinary call-window deadline begin only after preparation succeeds or reaches a terminal caption fallback. A received personal call gets its own allocated clerk, exact visible name/counter and English translation; it bypasses only the ordinary rare anonymous-call cooldown and shares the existing foreground speech owner. A valid late ticket receipt can still announce within the remaining call window. Retirement, replay and superseding cues stop/release their exact media; stale synthesis cannot attach to a replacement ticket. Muting/unavailable synthesis retains the caption and board call without substituting another voice.
+A reservation whose audio is still preparing moves to a later turn at the same counter. Its board call and ordinary call-window deadline begin only after preparation succeeds or reaches a terminal fallback. A received personal call gets its own allocated clerk, exact visible name/counter and English translation; it bypasses only the ordinary rare anonymous-call cooldown and shares the existing foreground speech owner. A valid late ticket receipt can still announce within the remaining call window. Retirement, replay and superseding cues stop/release their exact media; stale synthesis cannot attach to a replacement ticket. Muting retains the personalized caption and board call. Unavailable synthesis plays the existing recorded “Nächste bitte!” with matching text at the allocated counter.
 

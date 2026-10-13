@@ -7,7 +7,7 @@ import {harness,source} from './amt-harness.mjs';
 const cue=JSON.parse(readFileSync(new URL('../assets/voices/knick/queue-call-manifest.json',import.meta.url))).clips[0];
 function recording(h){
  const clips=[];h.window.GermanySimulatorAudioText.recordedClip=(id,text)=>id===cue.voiceId&&text===cue.text?'./'+cue.file:null;
- h.window.GermanySimulatorAudioText.recordings={['./'+cue.file]:cue};
+ h.window.GermanySimulatorAudioText.recordings={['./'+cue.file]:{...cue,source:cue.text}};
  h.context.Audio=class{
   constructor(src){this.src=src;this.duration=cue.durationSeconds;this.currentTime=0;this.paused=true;clips.push(this)}
   play(){this.paused=false;h.context.setTimeout(()=>{this.startedAt=h.now();this.onplaying?.()},16);return Promise.resolve()}
@@ -70,4 +70,19 @@ test('a seeded five-minute room gives every office texture turns and keeps speec
 test('the shipped queue shout retains exact selected-profile and encoded audit ownership',()=>{
  const cast=JSON.parse(readFileSync(new URL('../For-AI/VOICE-CAST.json',import.meta.url))),binding=cast.productionVoices['amt-brunhilde-knick'];
  assert.equal(cue.text,'Nächste bitte!');assert.equal(cue.actorId,'clerk-3');assert.equal(cue.profileId,binding.profileId);assert.equal(cue.referenceSha256,binding.referenceSha256);assert.equal(cue.processing,binding.processing);assert.equal(cue.asrScriptPrompt,null);assert.equal(cue.asrWordExact,true);assert.ok(Math.abs(cue.integratedLufs+18)<=.3);assert.ok(cue.truePeakDbtp<=-1.5);
+});
+
+test('an unavailable personal name uses the selected next-person recording after the board call and keeps ticket ownership',async()=>{
+ const h=harness('host',{fakeAudio:true,voice:true,phoneCaptions:true}),clips=recording(h),words=['','eins','zwei','drei','vier'];
+ let preparations=0,disposed=0;
+ h.window.GermanyKnickSpeech={initialName:'',prepare(){preparations++;return Promise.resolve({status:'failed',reason:'unsupported'})},
+  peek:()=>null,lease:()=>null,textFor:(name,counter)=>`${name}, bitte zu Schalter ${words[counter]}!`,dispose(){disposed++}};
+ h.wait();await Promise.resolve();await Promise.resolve();assert.equal(preparations,1);assert.equal(clips.length,0);
+ h.elapse(14);const ticket=h.level.tickets[0];assert.equal(ticket.called,true);assert(ticket.deadline>0);
+ assert.equal(clips.length,1);assert.equal(clips[0].src,'./'+cue.file+'?v='+cue.sha256);assert.equal(h.level.registrationTicket,ticket.number);
+ assert.equal(h.node('amt-ambient').textContent,'FRAU KNICK: Nächste bitte!');assert.equal(h.node('english-subtitle').textContent,cue.english);
+ assert.equal(h.level.lipSpeech.actor,`clerk-${ticket.counter}`);assert.equal(h.synth.spoken.length,0);
+ const clip=clips[0],late=clip.onended;h.level.replay(h.config);assert.equal(disposed,1);assert.equal(clip.paused,true);assert.equal(clip.src,'');
+ late?.();h.tick(3000);assert.equal(h.level.stage,'walk-sign');assert.equal(h.node('amt-ambient').textContent,'');
+ assert.equal(h.level.lipSpeech.active,false);assert.equal(h.level.tickets.length,0);
 });

@@ -125,4 +125,4 @@ assert.ok(game.includes("candidateVoiceId:n.voiceId"));
 assert.ok(game.includes('candidateVoiceId:"polizei-heinrich-wachtmeister"'));
 assert.ok(amt.includes("clerk?.voiceId"),"each selected counter clerk must request her own voice");
 assert.ok(amt.includes("candidateClip?.(voiceId,text)"));
-assert.ok(phone.includes('catalog?.recordedClip?.(voiceId,text)||catalog?.candidateClip?.(voiceId,text)'));
+assert.ok(phone.includes('catalog?.recordedClip?.(voiceId,source)||catalog?.candidateClip?.(voiceId,source)'));
