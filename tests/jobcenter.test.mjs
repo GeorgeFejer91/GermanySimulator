@@ -41,7 +41,7 @@ test('city entry/exit preserves missions and rejects an occupied ejection point'
 });
 test('root and diagnostic reserve the same clear roadside parcel and usable entrance',()=>{
  const diagnostic=readFileSync(new URL('../3d.html',import.meta.url),'utf8');
- const line=s=>s.split('\n').find(l=>l.startsWith('{id:"jobcenter"'));
+ const line=s=>s.split(/\r?\n/).find(l=>l.startsWith('{id:"jobcenter"'));
  assert.equal(line(game),line(diagnostic));
  const b=vm.runInNewContext('('+line(game).trim().replace(/,$/,'')+')');
  assert.ok(b.x>=9180+72,'east sidewalk has full body clearance');assert.ok(b.x+b.w<9840);
