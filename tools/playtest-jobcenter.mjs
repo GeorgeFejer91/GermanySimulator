@@ -50,6 +50,7 @@ try{
   await page.waitForFunction(()=>Germany3D.jobcenter.mediaStarted&&Germany3D.jobcenter.playback>1);
   await page.screenshot({path:resolve(out,name+'-speaking.png')});
   const speaking=await page.evaluate(()=>Germany3D.jobcenter);assert.ok(speaking.energy>0);assert.ok(speaking.pressure>initial.pressure);
+  await page.evaluate(()=>{window.__jobCueSamples=[];window.__jobCueTimer=setInterval(()=>{const j=Germany3D.jobcenter;if(j.active)window.__jobCueSamples.push({time:j.playback,level:j.rumbleLevel,dismissal:j.dismissal,active:j.rumbleActive})},100)});
   const samples=await page.evaluate(async()=>{const rows=[];for(let i=0;i<12;i++){await new Promise(r=>setTimeout(r,90));rows.push({time:Germany3D.jobcenter.playback,energy:Germany3D.jobcenter.energy})}return rows});
   assert.ok(new Set(samples.map(s=>Math.round(s.energy*100))).size>2,'fire responds to changing media energy');
   if(name==='desktop'){
@@ -57,6 +58,7 @@ try{
    await page.screenshot({path:resolve(out,name+'-furious.png')});
    // Hidden-page boundary is injected; real media pause/resume is observed.
    await page.evaluate(()=>{Object.defineProperty(document,'hidden',{configurable:true,value:true});document.dispatchEvent(new Event('visibilitychange'))});
+   assert.equal(await page.evaluate(()=>Germany3D.jobcenter.rumbleActive),false,'hidden visit releases rumble source');
    const paused=await page.evaluate(()=>window.__jobMedia.at(-1).currentTime);await page.waitForTimeout(650);
    assert.ok(Math.abs((await page.evaluate(()=>window.__jobMedia.at(-1).currentTime))-paused)<.03);
    await page.evaluate(()=>{Object.defineProperty(document,'hidden',{configurable:true,value:false});document.dispatchEvent(new Event('visibilitychange'))});
@@ -64,13 +66,17 @@ try{
    await page.setViewportSize({width:844,height:390});await page.waitForTimeout(300);await page.screenshot({path:resolve(out,name+'-landscape.png')});
   }
   await page.waitForFunction(()=>!Germany3D.jobcenter.active,null,{timeout:45000});
+  const cueSamples=await page.evaluate(()=>{clearInterval(window.__jobCueTimer);return window.__jobCueSamples});
+  assert.ok(cueSamples.some(s=>s.active&&s.level>.4),'long speech pauses produce rumble');
+  assert.ok(cueSamples.some(s=>s.dismissal>.7),'final dismissal builds the threat');
+  assert.ok(cueSamples.some(s=>s.active&&s.level<.1),'speech ducks the rumble');
   const exit=await page.evaluate(()=>({player:{...Germany3DBridge.player},class:document.body.classList.contains('jobcenter-inside'),media:window.__jobMedia.map(m=>({src:m.getAttribute('src'),paused:m.paused})),surface:!!document.getElementById('jobcenter-input')}));
   assert.equal(exit.class,false);assert.equal(exit.surface,false);assert.ok(exit.media.every(m=>m.paused&&!m.src));
   await page.screenshot({path:resolve(out,name+'-ejected.png')});
   // Re-entry and explicit recovery never keep the old audio or controls.
   await page.keyboard.press('KeyE');await page.waitForFunction(()=>Germany3D.jobcenter.active);await page.keyboard.press('Escape');
   assert.equal(await page.evaluate(()=>Germany3D.jobcenter.active),false);
-  assert.deepEqual(errors,[]);report.cases.push({name,initial,speaking,samples,exit,errors});
+  assert.deepEqual(errors,[]);report.cases.push({name,initial,speaking,samples,cueSamples,exit,errors});
   console.log(JSON.stringify({name,result:'PASS'}));await context.close();
  }
  // Shared diagnostic uses the identical facade and encounter renderer.

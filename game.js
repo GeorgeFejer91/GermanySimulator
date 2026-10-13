@@ -1796,7 +1796,7 @@ function enterJobcenter(b){
  if(!window.Germany3D?.enterJobcenter)return;
  const clip=speechClip("jobcenter-overlord"),entry={x:player.x,y:player.y},record=speechCatalog.recordings?.[clip.recording];
  stopSpeech();stopPoliceChaseLoop();state.modal=true;clearInput();player.vx=player.vy=0;setAmtMusicMuted(true);
- const opened=window.Germany3D.enterJobcenter({recording:clip.recording,text:clip.text,english:record?.english,duration:26.783,voiceOn:()=>state.voiceOn,subtitlesOn:()=>state.subtitlesOn,onClose:()=>{
+ const opened=window.Germany3D.enterJobcenter({recording:clip.recording,text:clip.text,english:record?.english,duration:26.783,effects:()=>({context:ensureAudio(),output:soundEffectOutput()}),voiceOn:()=>state.voiceOn,subtitlesOn:()=>state.subtitlesOn,onClose:()=>{
   const x=b.doorX,y=b.doorY+65,clear=!responderBlocked(x,y,player.r,player,null,null);
   player.x=clear?x:entry.x;player.y=clear?y:entry.y;player.facing=0;player.vx=player.vy=0;
   clearInput();clearSubtitle();state.modal=false;setAmtMusicMuted(false);updateHud();
