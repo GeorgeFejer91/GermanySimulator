@@ -90,12 +90,37 @@ const flameFragment=`
   vec3 color=mix(vec3(1.,.07,.002),vec3(1.,.56,.018),clamp(core+n*.25,0.,1.));
   color=mix(color,vec3(1.,.94,.57),pow(clamp(core,0.,1.),2.));
   float glow=exp(-length(vec2(p.x*3.,(p.y-.3)*1.6))*5.)*.14;
-  // Charred eye slits and an opening furnace mouth deform with the actual speech energy.
+  // White-hot eyes and a curled furnace mouth share the same emissive gold.
   vec2 eye=vec2(abs(p.x)-.13,p.y-(.49+abs(p.x)*.28));
   float eyes=exp(-pow(eye.x/.073,4.)-pow(eye.y/.017,2.))*uAnger;
-  float mouth=1.-smoothstep(.75,1.,length(vec2(p.x/(.10+.045*uEnergy),(p.y-.29)/(.025+.10*uEnergy))));
-  color*=1.-mouth*.94*uAnger; color=mix(color,vec3(1.,.96,.66),eyes);
+  float mouthWidth=.115+.035*uEnergy;
+  float mouthCurve=.29+.055*pow(abs(p.x)/mouthWidth,1.7);
+  float mouthDistance=length(vec2(p.x/mouthWidth,(p.y-mouthCurve)/(.016+.078*uEnergy)));
+  float mouth=1.-smoothstep(.72,1.,mouthDistance);
+  float lip=(1.-smoothstep(.95,1.5,mouthDistance))-mouth;
+  color*=1.-lip*.65*uAnger;
+  vec3 hellfire=vec3(1.5,1.3,.72);
+  color=mix(color,hellfire,eyes);
+  color=mix(color,hellfire*(.9+uEnergy*.25),mouth*uAnger);
   gl_FragColor=vec4(color*(.8+uEnergy*.65+uAttack*.12),clamp(fire+glow,0.,1.));
+ }
+`;
+
+// A luminous haze funnel at the flame, not a room surface or movement boundary.
+const tunnelFragment=`
+ varying vec2 vUv;uniform float uTime,uStrength;
+ void main(){
+  vec2 p=(vUv-.5)*2.;float r=length(p*vec2(.82,1.));
+  float angle=atan(p.y,p.x),t=uTime*.12;
+  float warp=sin(angle*3.+t)*.022+sin(angle*7.-t*.7)*.012;
+  float depth=-log(max(.025,r+warp));
+  float folds=pow(.5+.5*sin(depth*10.+sin(angle*4.+t)*.55),5.);
+  float shafts=pow(.5+.5*sin(angle*11.+sin(depth*2.-t)),8.);
+  float envelope=smoothstep(.015,.12,r)*(1.-smoothstep(.32,.96,r));
+  float haze=envelope*(.07+folds*.19+shafts*.045);
+  float heart=exp(-r*12.)*.17;
+  vec3 ember=mix(vec3(.46,.07,.018),vec3(1.,.35,.065),exp(-r*4.));
+  gl_FragColor=vec4(ember,(haze+heart)*uStrength);
  }
 `;
 
@@ -117,6 +142,8 @@ export function createJobcenterEncounter(T,renderer,bridge){
   const camera=new T.PerspectiveCamera(68,innerWidth/innerHeight,.03,100000);
   const material=new T.ShaderMaterial({transparent:true,depthWrite:false,side:T.DoubleSide,uniforms:{uTime:{value:0},uEnergy:{value:0},uAttack:{value:0},uAnger:{value:0}},vertexShader:'varying vec2 vUv;void main(){vUv=uv;gl_Position=projectionMatrix*modelViewMatrix*vec4(position,1.);}',fragmentShader:flameFragment});
   const flame=new T.Mesh(new T.PlaneGeometry(1,1),material);scene.add(flame);
+  const tunnelMaterial=new T.ShaderMaterial({transparent:true,depthWrite:false,depthTest:false,blending:T.AdditiveBlending,side:T.DoubleSide,uniforms:{uTime:{value:0},uStrength:{value:1}},vertexShader:'varying vec2 vUv;void main(){vUv=uv;gl_Position=projectionMatrix*modelViewMatrix*vec4(position,1.);}',fragmentShader:tunnelFragment});
+  const tunnel=new T.Mesh(new T.PlaneGeometry(1,1),tunnelMaterial);tunnel.renderOrder=-1;scene.add(tunnel);
   const audio=new Audio(config.recording||'./assets/audio/jobcenter/overlord.mp3');audio.preload='auto';audio.playsInline=true;audio.volume=0;
   const surface=document.createElement('div');surface.id='jobcenter-input';surface.tabIndex=0;surface.setAttribute('role','application');surface.setAttribute('aria-label','Jobcenter. WASD: gehen. Pfeile oder Ziehen: Blick. Auf Touch links ziehen: gehen; rechts ziehen: Blick. Escape: verlassen.');
   const style=document.createElement('style');style.textContent=`
@@ -128,7 +155,7 @@ export function createJobcenterEncounter(T,renderer,bridge){
    .jobcenter-inside #english-subtitle[data-fit="scroll"]{pointer-events:auto}
   `;
   document.head.append(style);document.getElementById('app').append(surface);document.body.classList.add('jobcenter-inside');
-  const v=visit={id,scene,camera,material,flame,audio,surface,style,config,abort:new AbortController(),events:[],x:0,z:34,yaw:0,pitch:-.015,time:0,distance:34,pressure:0,phase:'approach',mediaStarted:false,mediaPending:false,playSerial:0,failed:false,playback:0,lastMedia:0,stalled:0,energy:0,attack:0,data:null,captionKey:'',captionCues:[],touch:{forward:0,side:0},pointers:new Map()};last=performance.now();
+  const v=visit={id,scene,camera,material,flame,tunnel,audio,surface,style,config,abort:new AbortController(),events:[],x:0,z:34,yaw:0,pitch:-.015,time:0,distance:34,pressure:0,phase:'approach',mediaStarted:false,mediaPending:false,playSerial:0,failed:false,playback:0,lastMedia:0,stalled:0,energy:0,attack:0,data:null,captionKey:'',captionCues:[],touch:{forward:0,side:0},pointers:new Map()};last=performance.now();
   const on=(target,name,fn)=>{target.addEventListener(name,fn);v.events.push([target,name,fn])};
   const current=()=>visit===v&&serial===id;
   function fail(){if(!current())return;++v.playSerial;v.failed=true;v.mediaPending=false;audio.pause();v.playback=Math.max(v.playback,audio.currentTime||0)}
@@ -181,6 +208,9 @@ export function createJobcenterEncounter(T,renderer,bridge){
   v.camera.aspect=innerWidth/innerHeight;v.camera.updateProjectionMatrix();v.camera.position.set(0,1.65,0);v.camera.rotation.order='YXZ';v.camera.rotation.set(v.pitch,v.yaw,0);
   // Camera-relative origin keeps a limitless plane numerically stable in ordinary play.
   v.flame.position.set(-v.x,growth*.50,-v.z);v.flame.scale.set(growth*.9+pulse,growth+pulse*1.8,1);v.flame.quaternion.copy(v.camera.quaternion);
+  v.tunnel.position.copy(v.flame.position);v.tunnel.scale.set(40,27,1);v.tunnel.quaternion.copy(v.camera.quaternion);
+  v.tunnel.material.uniforms.uTime.value=reduced.matches?0:v.time;
+  v.tunnel.material.uniforms.uStrength.value=(1-v.pressure*.85)*(.9+v.energy*.1);
   const u=v.material.uniforms;u.uTime.value=reduced.matches?0:v.time;u.uEnergy.value=v.energy;u.uAttack.value=reduced.matches?0:v.attack;u.uAnger.value=anger;
   renderer.render(v.scene,v.camera);return true;
  }
@@ -193,5 +223,5 @@ export function createJobcenterEncounter(T,renderer,bridge){
   const next=layout?.captionAt(v.captionCues,v.playback)||v.captionCues.find(c=>c[0]<=v.playback&&v.playback<c[1])?.[2]||'';
   if(box.textContent!==next)box.textContent=next;box.hidden=!next;
  }
- return {open,close,render,get active(){return !!visit},inspect(){return visit?{active:true,phase:visit.phase,x:visit.x,z:visit.z,yaw:visit.yaw,pitch:visit.pitch,distance:visit.distance,pressure:visit.pressure,energy:visit.energy,attack:visit.attack,playback:visit.playback,mediaStarted:visit.mediaStarted,mediaPaused:visit.audio.paused,failed:visit.failed,captionCues:visit.captionCues.length,resources:{geometries:1,textures:0,media:1},duration:visit.data?.duration||0}:{active:false}}};
+ return {open,close,render,get active(){return !!visit},inspect(){return visit?{active:true,phase:visit.phase,x:visit.x,z:visit.z,yaw:visit.yaw,pitch:visit.pitch,distance:visit.distance,pressure:visit.pressure,energy:visit.energy,attack:visit.attack,playback:visit.playback,mediaStarted:visit.mediaStarted,mediaPaused:visit.audio.paused,failed:visit.failed,captionCues:visit.captionCues.length,resources:{geometries:2,textures:0,media:1},duration:visit.data?.duration||0}:{active:false}}};
 }
