@@ -176,7 +176,9 @@
         155,
         11,
         8
-      ]
+      ],
+      "mouth_angle": 0,
+      "mouth_gap": [0, 0]
     },
     {
       "id": "bridge1",
@@ -308,7 +310,9 @@
         140,
         11,
         8
-      ]
+      ],
+      "mouth_angle": -0.14,
+      "mouth_gap": [-0.3, 0.5]
     },
     {
       "id": "bridge1b",
@@ -449,7 +453,9 @@
         145,
         11,
         8
-      ]
+      ],
+      "mouth_angle": -0.1,
+      "mouth_gap": [-0.3, 0.5]
     },
     {
       "id": "bridge2",
@@ -585,7 +591,9 @@
         143,
         11,
         8
-      ]
+      ],
+      "mouth_angle": -0.05,
+      "mouth_gap": [-0.3, 0.5]
     },
     {
       "id": "gesture",
@@ -720,7 +728,9 @@
         183,
         11,
         8
-      ]
+      ],
+      "mouth_angle": 0.06,
+      "mouth_gap": [-0.3, 0.5]
     }
   ],
   "compatibility": "Ticket remains in right hand while the left arm pulls loose papers to chest and the knees bend in recoil. Matched Gaussian correspondence must be reviewed through ordered playback; no unconstrained whole-body TPS. Bridge1b is a real painted behind-torso bag occlusion checkpoint; transport the visible bag through its occluded edge with body depth masking.",

@@ -1,7 +1,7 @@
 import test from 'node:test';import assert from 'node:assert/strict';
 import {readFileSync} from 'node:fs';
 import {anchorBlend,createPaintedAnchor,gaussianFlowPhase} from '../buergeramt-painted-anchor.js';
-import {nativeMouthRect} from '../buergeramt-mouth-paint.js';
+import {nativeMouthRect,nativeMouthAngle,nativeMouthGap} from '../buergeramt-mouth-paint.js';
 const manifest=JSON.parse(readFileSync(new URL('../assets/buergeramt/animation/clerk.json',import.meta.url)));
 
 test('mouth registrations belong to each encoded painting, independently of names and arc timing',()=>{
@@ -12,6 +12,9 @@ test('mouth registrations belong to each encoded painting, independently of name
   for(const arc of copy.arcs)arc.duration*=2;
   for(const state of original.states){const a=nativeMouthRect(original,state.id),b=nativeMouthRect(copy,renames.get(state.id)??state.id);assert.deepEqual(a,b);assert(a.every(Number.isFinite));assert(a[0]>0&&a[0]<1&&a[1]>0&&a[1]<1);assert.deepEqual(a,[state.mouth_xywh[0]/original.canvas_xy[0],1-state.mouth_xywh[1]/original.canvas_xy[1],state.mouth_xywh[2]/original.canvas_xy[0],state.mouth_xywh[3]/original.canvas_xy[1]])}
   delete copy.states[1].mouth_xywh;assert.throws(()=>nativeMouthRect(copy,copy.states[1].id),/Unregistered native mouth pose/);
+  for(const state of original.states){assert.equal(nativeMouthAngle(original,state.id),state.mouth_angle);assert.deepEqual(nativeMouthGap(original,state.id),state.mouth_gap)}
+  delete copy.states[0].mouth_angle;assert.throws(()=>nativeMouthAngle(copy,copy.states[0].id),/Unregistered native lip angle/);
+  copy.states[0].mouth_angle=NaN;assert.throws(()=>nativeMouthAngle(copy,copy.states[0].id),/Unregistered native lip angle/);
  }
 });
 
@@ -19,9 +22,9 @@ test('native mouth coordinates survive the existing source-to-manifest build con
  const load=path=>JSON.parse(readFileSync(new URL('../'+path,import.meta.url))),base='assets/sprite-sources/buergeramt/gaussian-arcs/';
  for(const name of ['aktenkurier','archivbotin','formularsammler','nummernfluesterer','nachtschichtmelderin','pfandarchitektin','kopiependler','warteschlangenpoetin','renter','parent','pensioner']){
   const spec=load(base+name+(['renter','parent','pensioner'].includes(name)?'':'-work-gesture')+'.json'),compiled=load('assets/buergeramt/animation/'+name+'.json');
-  for(const state of spec.states)assert.deepEqual(compiled.states.find(s=>s.id===state.id).mouth_xywh,state.mouth_xywh);
+  for(const state of spec.states){const key=compiled.states.find(s=>s.id===state.id);assert.deepEqual(key.mouth_xywh,state.mouth_xywh);assert.equal(key.mouth_angle,state.mouth_angle);assert.deepEqual(key.mouth_gap,state.mouth_gap)}
  }
- for(const state of [...load('assets/previews/knick-splats/manifest.json').anchors,...load(base+'knick-stamp-handoff.json').frames])assert.deepEqual(manifest.states.find(s=>s.id===state.id).mouth_xywh,state.mouth_xywh);
+ for(const state of [...load('assets/previews/knick-splats/manifest.json').anchors,...load(base+'knick-stamp-handoff.json').frames]){const key=manifest.states.find(s=>s.id===state.id);assert.deepEqual(key.mouth_xywh,state.mouth_xywh);assert.equal(key.mouth_angle,state.mouth_angle)}
 });
 test('liquid phase lag stays monotonic, recovers keys and does not stop at inbetweens',()=>{
  // The closed-form derivative is bounded by 1 ± .085π; numerical sampling
@@ -75,6 +78,10 @@ test('paint keeps registered canvas aspect/floor, bounds residency and cancels l
   const mesh=[...r.members][0];assert.equal(mesh.geometry.parameters.width,1024/832);
   paint.update({segment:0,u:0,arc:'raise'},r.source,true);assert.equal(paint.inspect().opacity,1);assert.equal(mesh.position.y,r.source.position.y);assert.equal(mesh.size,1.9*1.2);assert.equal(mesh.material.depthWrite,false);
   const shader={uniforms:{},vertexShader:'#include <begin_vertex>',fragmentShader:'#include <map_fragment>'};mesh.material.onBeforeCompile(shader);
+  assert.equal(shader.uniforms.anchorLipAngleA.value,manifest.states.find(s=>s.id===manifest.segments[0].from).mouth_angle);
+  assert.equal(shader.uniforms.anchorLipAngleB.value,manifest.states.find(s=>s.id===manifest.segments[0].to).mouth_angle);
+  paint.update({segment:0,u:0,arc:'raise'},r.source,true,{speaking:false,lipShape:[1,1,1,1]});
+  assert.deepEqual(['x','y','z','w'].map(key=>shader.uniforms.anchorLipShape.value[key]),[0,0,0,0],'inactive speech cannot retain a rounded or biting deformation');
   assert.match(shader.vertexShader,/vec2 p=mix\(endpoints.xy,endpoints.zw,u\)/,'the complete native painting still moves along paired paths');
   assert.doesNotMatch(shader.vertexShader,/gaussianFlowWave|p\+=anchorEffect|radius=.*anchorEffect/,'no added spatial wave or pulsing patch support');
   assert.match(shader.fragmentShader,/float mass=6\.20;/,'constant optical kernel mass preserves edge coverage');

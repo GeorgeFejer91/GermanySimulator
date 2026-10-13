@@ -24,6 +24,18 @@ test('nearby consumers retain admitted slots without preparation churn',()=>{
  try{const f=fixture();for(let n=0;n<20;n++)f.update();assert.equal(f.tasks.length,2);assert.equal(f.manager.inspect().actors.length,2);f.manager.clear()}
  finally{globalThis.document=old}
 });
+
+test('a speaking non-lead counter owns the bounded mobile paint slot',()=>{
+ const old=globalThis.document;globalThis.document={hidden:false};
+ try{
+  const f=fixture(true),desk={...f.clerk,id:'amt-brunhilde-knick',animationId:'clerk-desk-4',performance:true,counter:4,lead:false,lipId:'clerk-4'};
+  f.level.stationaryAnimations={'clerk-desk-4':{generation:1,arc:null,pose:'ready',phase:1}};
+  f.level.lipSpeech={active:true,actor:'clerk-4',shape:[1,.25,0,0]};
+  f.manager.update(f.level,[f.clerk,desk],[f.regular],{position:{x:0,z:0}});
+  assert.deepEqual(f.manager.inspect().actors.map(actor=>actor.id),['clerk-desk-4']);
+  assert.equal(f.manager.inspect().actors.length,1);f.manager.clear();
+ }finally{globalThis.document=old}
+});
 test('a queued job skipped while hidden releases its slot and can retry on return',async()=>{
  const old=globalThis.document;globalThis.document={hidden:false};
  try{const f=fixture(true);f.update();assert.equal(f.tasks.length,1);document.hidden=true;await f.tasks[0]();await new Promise(r=>setImmediate(r));assert.equal(f.manager.inspect().actors.length,0);document.hidden=false;f.update();assert.equal(f.tasks.length,2);f.manager.clear()}

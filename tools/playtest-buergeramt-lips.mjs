@@ -3,11 +3,15 @@ import {createRequire} from 'node:module';
 import {readFileSync,mkdirSync,writeFileSync} from 'node:fs';
 import assert from 'node:assert/strict';
 import {createHash} from 'node:crypto';
+import {execFileSync} from 'node:child_process';
+const baselineFiles=['buergeramt.js','world3d.js','buergeramt-lips.js','buergeramt-mouth-paint.js','buergeramt-painted-anchor.js','buergeramt-gaussian-scene.js','buergeramt-gaussian-animation.js'];
+const sources=process.env.PLAYTEST_BASE_REF?new Map(baselineFiles.map(file=>[file,execFileSync('git',['show',process.env.PLAYTEST_BASE_REF+':'+file],{encoding:'utf8',maxBuffer:8_000_000})])):null;
+const fixtureSource=file=>sources?.get(file)??readFileSync(file,'utf8');
 const nativePaint=process.env.PLAYTEST_NATIVE_PAINT==='1';
 const transforms=process.env.PLAYTEST_TRANSFORMS==='1';
 const poseOnly=process.env.PLAYTEST_POSE_ONLY==='1';
 const nativeIds=['clerk','aktenkurier','archivbotin','formularsammler','nummernfluesterer','nachtschichtmelderin','pfandarchitektin','kopiependler','warteschlangenpoetin','renter','parent','pensioner'];
-const readRevision=()=>Object.fromEntries(['buergeramt.js','world3d.js','buergeramt-lips.js','buergeramt-lipsync.js','buergeramt-mouth-paint.js','buergeramt-splat.js','buergeramt-gaussian-scene.js','buergeramt-painted-anchor.js','assets/buergeramt/speech/mouth-cues.js',...nativeIds.map(id=>'assets/buergeramt/animation/'+id+'.json')].map(f=>[f,createHash('sha256').update(readFileSync(f)).digest('hex')]));
+const readRevision=()=>Object.fromEntries(['buergeramt.js','world3d.js','buergeramt-lips.js','buergeramt-lipsync.js','buergeramt-mouth-paint.js','buergeramt-splat.js','buergeramt-gaussian-scene.js','buergeramt-painted-anchor.js','assets/buergeramt/speech/mouth-cues.js',...nativeIds.map(id=>'assets/buergeramt/animation/'+id+'.json')].map(f=>[f,createHash('sha256').update(fixtureSource(f)).digest('hex')]));
 const {chromium}=createRequire(import.meta.url)(process.env.PLAYWRIGHT_MODULE||'playwright');
 const output=process.env.PLAYTEST_OUTPUT||'output/lip-motion/review';mkdirSync(output,{recursive:true});
 const browser=await chromium.launch({headless:true,executablePath:process.env.CHROMIUM_PATH,args:['--mute-audio']});
@@ -20,7 +24,11 @@ async function faceClip(page,id){
   if(nativePaint){
    const entry=Germany3D.amtGaussian.actors.find(a=>a.anchor?.visible&&(a.id===id||a.id===actor.id||id===actor.lipId));
    const manifest=await(await fetch('./assets/buergeramt/animation/'+entry.manifestId+'.json')).json();
-   const {nativeMouthRect}=await import('./buergeramt-mouth-paint.js?v=20261011-mouth-consistency');rect=nativeMouthRect(manifest,entry.anchor.state);aspect=manifest.canvas_xy[0]/manifest.canvas_xy[1];
+   const {nativeMouthRect}=await import('./buergeramt-mouth-paint.js?v=20261013-connected-lips');
+   const pair=entry.anchor.pair,a=nativeMouthRect(manifest,pair.from),b=nativeMouthRect(manifest,pair.to);
+   const left=Math.min(a[0]-3*a[2],b[0]-3*b[2]),right=Math.max(a[0]+3*a[2],b[0]+3*b[2]);
+   const bottom=Math.min(a[1]-3*a[3],b[1]-3*b[3]),top=Math.max(a[1]+3*a[3],b[1]+3*b[3]);
+   rect=[(left+right)/2,(bottom+top)/2,(right-left)/6,(top-bottom)/6];aspect=manifest.canvas_xy[0]/manifest.canvas_xy[1];
   }else rect=GermanyAmtLips.displayedMouth(actor);
   const points=[];
   for(const x of [-3,3])for(const y of [-3,3]){
@@ -41,10 +49,11 @@ try{
    speechSynthesis.speak=u=>{u.volume=0;window.lipTestSpeech=u;u.onstart?.();u.onpause?.()};speechSynthesis.cancel=()=>{};
   });
   const page=await context.newPage(),errors=[],warnings=[];
+  if(sources)await page.route('**/*.js?*',route=>{const file=new URL(route.request().url()).pathname.split('/').at(-1);return sources.has(file)?route.fulfill({contentType:'text/javascript',body:sources.get(file)}):route.continue()});
   page.on('pageerror',e=>{errors.push(e.message);console.log('pageerror',e.message)});page.on('console',m=>{if(m.type()==='error'){warnings.push(m.text());console.log('browser',m.text().slice(0,500))}});
-  await page.route('**/buergeramt-lips.js?*',route=>route.fulfill({contentType:'text/javascript',body:readFileSync('buergeramt-lips.js','utf8').replace('createTrack(now=()=>performance.now())','createTrack(now=()=>window.lipFixtureTime??performance.now())')}));
-  await page.route('**/buergeramt.js?*',route=>route.fulfill({contentType:'text/javascript',body:readFileSync('buergeramt.js','utf8').replace('requestAnimationFrame(()=>{if(current()&&!settled)','queueMicrotask(()=>{if(current()&&!settled)').replace(/\}\)\(\);\s*$/,'window.__lipProbe={content,view,setStage,characters,cancelSpeech,showCharacter,beginOmen,resetOmen,omen,get options(){return options}};})();')}));
-  await page.route('**/world3d.js?*',route=>route.fulfill({contentType:'text/javascript',body:readFileSync('world3d.js','utf8').replace('updateAmtMouth(level,now);','updateAmtMouth(level,window.lipFixtureRenderTime??now);').replace('window.Germany3D={ready:true,','window.__lipRender={scene:amtScene,camera:amtCamera,renderer,amtMoving,amtCharacters};window.Germany3D={ready:true,')}));
+  await page.route('**/buergeramt-lips.js?*',route=>route.fulfill({contentType:'text/javascript',body:fixtureSource('buergeramt-lips.js').replace('createTrack(now=()=>performance.now())','createTrack(now=()=>window.lipFixtureTime??performance.now())')}));
+  await page.route('**/buergeramt.js?*',route=>route.fulfill({contentType:'text/javascript',body:fixtureSource('buergeramt.js').replace('createTrack(()=>visualClock*1000)','createTrack(()=>window.lipFixtureTime??visualClock*1000)').replace('requestAnimationFrame(()=>{if(current()&&!settled)','queueMicrotask(()=>{if(current()&&!settled)').replace(/\}\)\(\);\s*$/,'window.__lipProbe={content,view,setStage,characters,cancelSpeech,showCharacter,beginOmen,resetOmen,omen,get options(){return options}};})();')}));
+  await page.route('**/world3d.js?*',route=>route.fulfill({contentType:'text/javascript',body:fixtureSource('world3d.js').replace('updateAmtMouth(level,now);','updateAmtMouth(level,window.lipFixtureRenderTime??now);').replace('window.Germany3D={ready:true,','window.__lipRender={scene:amtScene,camera:amtCamera,renderer,amtMoving,amtCharacters};window.Germany3D={ready:true,')}));
   if(name==='asset-failure')await page.route('**/omen/aktenkurier.splat*',route=>route.abort('failed'));
   await page.goto((process.env.GAME_URL||'http://127.0.0.1:8876/index.html')+'?geheim=buergeramt&voicePreview=1',{waitUntil:'commit',timeout:45000});
   try{await page.waitForFunction(()=>window.Germany3D?.ready&&window.BuergeramtLevel?.active&&Germany3D.officeAssetsReady,null,{timeout:90000})}
@@ -132,6 +141,7 @@ try{
     if(nativePaint&&process.env.PLAYTEST_ALL_KEYS==='1'){
      const manifest=JSON.parse(readFileSync('assets/buergeramt/animation/'+metadata.manifestId+'.json'));
      steps=manifest.arcs.flatMap(arc=>[0,...arc.segments.flatMap(s=>[(s.start+s.end)/2,s.end])].map(time=>({arc:metadata.performance?arc.id:'work-gesture-work',phase:time/arc.duration*(metadata.performance?1:.5)})));
+     if(!metadata.performance)steps.push(...steps.slice().reverse().map(step=>({...step,phase:1-step.phase})));
     }
     for(const [number,step] of steps.entries()){
      await page.evaluate(({key,step})=>{lipTransformOverrides[key]={generation:BuergeramtLevel.clerkPerformance.animation?.generation??0,actionId:1,pose:key.startsWith('clerk')?'ready':'work',...step};Germany3D.sync()}, {key:metadata.key,step});

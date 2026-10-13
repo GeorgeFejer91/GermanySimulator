@@ -84,7 +84,9 @@
         169,
         16,
         16
-      ]
+      ],
+      "mouth_angle": -0.15,
+      "mouth_gap": [0, 0]
     },
     {
       "id": "raise-1",
@@ -162,7 +164,9 @@
         186,
         16,
         16
-      ]
+      ],
+      "mouth_angle": -0.12,
+      "mouth_gap": [0, 0]
     },
     {
       "id": "raise-2",
@@ -240,7 +244,9 @@
         190,
         16,
         16
-      ]
+      ],
+      "mouth_angle": -0.1,
+      "mouth_gap": [0, 0]
     },
     {
       "id": "raised",
@@ -318,7 +324,9 @@
         201,
         16,
         16
-      ]
+      ],
+      "mouth_angle": 0.05,
+      "mouth_gap": [0, 0]
     },
     {
       "id": "stamp-1",
@@ -436,7 +444,9 @@
         189,
         16,
         16
-      ]
+      ],
+      "mouth_angle": -0.08,
+      "mouth_gap": [0, 0]
     },
     {
       "id": "knick-stamp-handoff1",
@@ -643,7 +653,9 @@
         190,
         16,
         16
-      ]
+      ],
+      "mouth_angle": 0.1,
+      "mouth_gap": [0, 0]
     },
     {
       "id": "knick-stamp-handoff2",
@@ -850,7 +862,9 @@
         187,
         16,
         16
-      ]
+      ],
+      "mouth_angle": 0.08,
+      "mouth_gap": [0, 0]
     },
     {
       "id": "stamp-2",
@@ -968,7 +982,9 @@
         208,
         16,
         16
-      ]
+      ],
+      "mouth_angle": 0.12,
+      "mouth_gap": [0, 0]
     },
     {
       "id": "stamp-3",
@@ -1086,7 +1102,9 @@
         223,
         16,
         16
-      ]
+      ],
+      "mouth_angle": 0.2,
+      "mouth_gap": [0, 0]
     },
     {
       "id": "contact",
@@ -1204,7 +1222,9 @@
         230,
         16,
         16
-      ]
+      ],
+      "mouth_angle": 0.2,
+      "mouth_gap": [0, 0]
     },
     {
       "id": "fold-1",
@@ -1322,7 +1342,9 @@
         173,
         16,
         16
-      ]
+      ],
+      "mouth_angle": -0.12,
+      "mouth_gap": [0, 0]
     },
     {
       "id": "fold-2",
@@ -1440,7 +1462,9 @@
         165,
         16,
         16
-      ]
+      ],
+      "mouth_angle": -0.1,
+      "mouth_gap": [0, 0]
     },
     {
       "id": "fold-3",
@@ -1518,7 +1542,9 @@
         165,
         16,
         16
-      ]
+      ],
+      "mouth_angle": -0.12,
+      "mouth_gap": [0, 0]
     },
     {
       "id": "refusal",
@@ -1596,7 +1622,9 @@
         165,
         16,
         16
-      ]
+      ],
+      "mouth_angle": -0.06,
+      "mouth_gap": [0, 0]
     },
     {
       "id": "return-1",
@@ -1674,7 +1702,9 @@
         160,
         16,
         16
-      ]
+      ],
+      "mouth_angle": -0.08,
+      "mouth_gap": [0, 0]
     },
     {
       "id": "return-2",
@@ -1752,7 +1782,9 @@
         158,
         16,
         16
-      ]
+      ],
+      "mouth_angle": -0.1,
+      "mouth_gap": [0, 0]
     }
   ],
   "arcs": [

@@ -124,7 +124,9 @@
         144,
         13,
         9
-      ]
+      ],
+      "mouth_angle": 0,
+      "mouth_gap": [0, 0]
     },
     {
       "id": "bridge1",
@@ -208,7 +210,9 @@
         131,
         13,
         9
-      ]
+      ],
+      "mouth_angle": -0.35,
+      "mouth_gap": [0, 0]
     },
     {
       "id": "bridge2",
@@ -292,7 +296,9 @@
         128,
         13,
         9
-      ]
+      ],
+      "mouth_angle": -0.28,
+      "mouth_gap": [0, 0]
     },
     {
       "id": "gesture",
@@ -375,7 +381,9 @@
         165,
         13,
         9
-      ]
+      ],
+      "mouth_angle": -0.3,
+      "mouth_gap": [0, 0]
     }
   ],
   "compatibility": "Receipt stays in anatomical right hand and hangs as one continuous strip; tied binder remains hugged by left arm as torso turns. Matched Gaussian correspondence must be reviewed through ordered playback; no unconstrained whole-body TPS."

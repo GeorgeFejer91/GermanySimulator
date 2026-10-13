@@ -114,7 +114,9 @@
         165,
         13,
         8
-      ]
+      ],
+      "mouth_angle": 0.03,
+      "mouth_gap": [0, 0]
     },
     {
       "id": "bridge-1",
@@ -223,7 +225,9 @@
         168,
         13,
         8
-      ]
+      ],
+      "mouth_angle": 0.05,
+      "mouth_gap": [0, 0]
     },
     {
       "id": "bridge-2",
@@ -332,7 +336,9 @@
         169,
         13,
         8
-      ]
+      ],
+      "mouth_angle": -0.1,
+      "mouth_gap": [0, 0]
     },
     {
       "id": "gesture",
@@ -441,7 +447,9 @@
         173,
         13,
         8
-      ]
+      ],
+      "mouth_angle": 0,
+      "mouth_gap": [0, 0]
     }
   ],
   "arcs": [

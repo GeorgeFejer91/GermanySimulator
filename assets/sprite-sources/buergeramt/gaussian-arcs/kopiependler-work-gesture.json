@@ -231,7 +231,9 @@
         148,
         12,
         8
-      ]
+      ],
+      "mouth_angle": 0,
+      "mouth_gap": [0, 0]
     },
     {
       "id": "bridge1",
@@ -415,7 +417,9 @@
         146,
         12,
         8
-      ]
+      ],
+      "mouth_angle": 0.05,
+      "mouth_gap": [0, 0]
     },
     {
       "id": "bridge2",
@@ -607,7 +611,9 @@
         132,
         12,
         8
-      ]
+      ],
+      "mouth_angle": -0.45,
+      "mouth_gap": [-0.25, 0.55]
     },
     {
       "id": "bridge3",
@@ -795,7 +801,9 @@
         141,
         12,
         8
-      ]
+      ],
+      "mouth_angle": -0.3,
+      "mouth_gap": [-0.25, 0.55]
     },
     {
       "id": "gesture",
@@ -982,7 +990,9 @@
         183,
         12,
         8
-      ]
+      ],
+      "mouth_angle": -0.1,
+      "mouth_gap": [-0.25, 0.55]
     }
   ],
   "compatibility": "One helmet moves from belt at screen-right through center into right-hand grip at screen-left, while left arm retains papers. Exact source endpoint depicts a larger foreground helmet than work; inspect gradual apparent-size growth. Matched Gaussian correspondence must be reviewed through ordered playback; no unconstrained whole-body TPS.",

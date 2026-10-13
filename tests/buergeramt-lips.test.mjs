@@ -28,6 +28,17 @@ test('German lip shapes close consonants and blend continuously at every boundar
  for(let i=0;i<24;i+=.01)assert(poseAt(keys,i).every(v=>v>=0&&v<=1));
 });
 
+test('lip orientation follows the displayed source and baked atlas field',()=>{
+ const {displayedMouthAngle}=globalThis.GermanyAmtLips;
+ const actor={id:'kopiependler',mouthPose:2,renderKey:'detail:6'};
+ assert(Math.abs(displayedMouthAngle(actor)+.45)<1e-10);
+ actor.renderKey='atlas:80';actor.mouthSample=0;const first=displayedMouthAngle(actor);
+ actor.mouthSample=2;assert.notEqual(displayedMouthAngle(actor),first);
+ actor.mouthSample=0;assert.equal(displayedMouthAngle(actor),first);
+ for(const name of ['renter','parent','pensioner'])assert(Number.isFinite(displayedMouthAngle({name,lipId:name,renderKey:'atlas:0',frame:0})));
+ assert.throws(()=>displayedMouthAngle({id:'unknown'}),/Unregistered atlas lip angle/);
+});
+
 test('an unanalyzed preview recording retains the explicitly estimated fallback',()=>{
  let now=0;const track=createTrack(()=>now),media={duration:4,currentTime:.3,paused:false,ended:false};
  track.prepare('clerk','Mama');track.start('voice',media);

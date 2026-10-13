@@ -1,5 +1,5 @@
 // Native-image Gaussian patches transport the whole painting on the paired paths.
-import {mouthPaintGlsl,nativeMouthRect} from './buergeramt-mouth-paint.js?v=20261011-mouth-consistency';
+import {mouthPaintGlsl,nativeMouthRect,nativeMouthAngle,nativeMouthGap} from './buergeramt-mouth-paint.js?v=20261013-connected-lips';
 const smooth=value=>{const t=Math.max(0,Math.min(1,value));return t*t*(3-2*t)};
 // A bounded spatial delay gives liquid motion, using only the existing phase.
 // Its slope stays positive and returns to one at both authored endpoints.
@@ -19,6 +19,8 @@ export async function createPaintedAnchor({THREE,owner,manifest,manifestUrl,sign
   signal?.throwIfAborted?.();
   const states=manifest.states.map(state=>state.id),frames=spec.frames;
   const mouthRects=new Map(states.map(id=>[id,nativeMouthRect(manifest,id)]));
+  const mouthAngles=new Map(states.map(id=>[id,nativeMouthAngle(manifest,id)]));
+  const mouthGaps=new Map(states.map(id=>[id,nativeMouthGap(manifest,id)]));
   if(spec.maximum_resident!==3||!(spec.fade_seconds>0&&spec.fade_seconds<=.15)||!frames||Object.keys(frames).length!==states.length)throw new Error('Invalid painted anchor manifest');
   for(const id of states){const frame=frames[id];if(!frame||!/^[\w.-]+\.webp$/.test(frame.file)||!(frame.bytes>0&&frame.bytes<=8_000_000)||frame.width!==manifest.canvas_xy[0]||frame.height!==manifest.canvas_xy[1])throw new Error('Invalid painted anchor frame')}
   if(!owner.attachPaint||!owner.retirePaint)throw new Error('Painted anchor owner unavailable');
@@ -42,6 +44,7 @@ export async function createPaintedAnchor({THREE,owner,manifest,manifestUrl,sign
   }
   const material=new THREE.MeshBasicMaterial({transparent:true,alphaTest:.0001,depthWrite:false,side:THREE.DoubleSide});
   const breath={value:0},mouth={value:0},lipShape={value:new THREE.Vector4()},mouthA={value:new THREE.Vector4()},mouthB={value:new THREE.Vector4()},mapB={value:null},mix={value:0},phase={value:0},segment={value:0},mode={value:0},effect={value:0};material.userData.breath=breath;
+  const mouthAngleA={value:0},mouthAngleB={value:0},mouthGapA={value:new THREE.Vector2()},mouthGapB={value:new THREE.Vector2()};
   const number=value=>Number(value).toPrecision(9),aspect=number(manifest.canvas_xy[1]/manifest.canvas_xy[0]);
   const ownedPaths=(paired?.trajectories??[]).map(item=>`
     if(int(anchorSegment)==${item.segment}&&slot>=${item.start_slot}&&slot<${item.end_slot}){
@@ -57,9 +60,11 @@ export async function createPaintedAnchor({THREE,owner,manifest,manifestUrl,sign
   `).join('\n');
   // Three's default key sees the closure's source, not its embedded constants.
   // A shared owner must not reuse the clerk's aspect/record rows for a regular.
-  const programKey=JSON.stringify(['native-gaussian-paint-v4-mouth',manifest.canvas_xy,paired?.rows,paired?.stride,ownedPaths]);
+  const programKey=JSON.stringify(['native-gaussian-paint-v5-connected-lips',manifest.canvas_xy,paired?.rows,paired?.stride,ownedPaths]);
   material.customProgramCacheKey=()=>programKey;
   material.onBeforeCompile=shader=>{
+    shader.uniforms.anchorLipGapA=mouthGapA;shader.uniforms.anchorLipGapB=mouthGapB;
+    shader.uniforms.anchorLipAngleA=mouthAngleA;shader.uniforms.anchorLipAngleB=mouthAngleB;
     shader.uniforms.anchorBreath=breath;shader.uniforms.anchorMouth=mouth;shader.uniforms.anchorLipShape=lipShape;shader.uniforms.anchorMouthA=mouthA;shader.uniforms.anchorMouthB=mouthB;shader.uniforms.anchorMapB=mapB;shader.uniforms.anchorMix=mix;shader.uniforms.anchorPhase=phase;
     shader.uniforms.anchorSegment=segment;shader.uniforms.anchorMode=mode;shader.uniforms.anchorEffect=effect;
     shader.uniforms.anchorXY={value:paired?.textures[0]??null};shader.uniforms.anchorStart={value:paired?.textures[1]??null};shader.uniforms.anchorEnd={value:paired?.textures[2]??null};
@@ -87,10 +92,10 @@ export async function createPaintedAnchor({THREE,owner,manifest,manifestUrl,sign
         anchorKernel=position.xy*2.7;
       }
     `);
-    shader.fragmentShader='uniform float anchorBreath;uniform float anchorMouth;uniform vec4 anchorLipShape;uniform vec4 anchorMouthA;uniform vec4 anchorMouthB;uniform sampler2D anchorMapB;uniform float anchorMix;uniform float anchorMode;uniform float anchorEffect;varying vec2 anchorUvA;varying vec2 anchorUvB;varying vec2 anchorKernel;varying vec2 anchorPresent;varying float anchorPaintMix;\n'+mouthPaintGlsl+shader.fragmentShader.replace('#include <map_fragment>',`
+    shader.fragmentShader='uniform vec2 anchorLipGapA;uniform vec2 anchorLipGapB;uniform float anchorLipAngleA;uniform float anchorLipAngleB;uniform float anchorBreath;uniform float anchorMouth;uniform vec4 anchorLipShape;uniform vec4 anchorMouthA;uniform vec4 anchorMouthB;uniform sampler2D anchorMapB;uniform float anchorMix;uniform float anchorMode;uniform float anchorEffect;varying vec2 anchorUvA;varying vec2 anchorUvB;varying vec2 anchorKernel;varying vec2 anchorPresent;varying float anchorPaintMix;\n'+mouthPaintGlsl+shader.fragmentShader.replace('#include <map_fragment>',`
       vec2 uvA=anchorUvA,uvB=anchorUvB;
       vec4 oralShape=anchorLipShape;oralShape.x=anchorMouth;
-      vec4 a=amtMouthPaint(map,uvA,anchorMouthA,oralShape),b=amtMouthPaint(anchorMapB,uvB,anchorMouthB,oralShape);
+      vec4 a=amtMouthPaint(map,uvA,anchorMouthA,oralShape,anchorLipAngleA,anchorLipGapA),b=amtMouthPaint(anchorMapB,uvB,anchorMouthB,oralShape,anchorLipAngleB,anchorLipGapB);
       a*=step(0.,uvA.x)*step(uvA.x,1.)*step(0.,uvA.y)*step(uvA.y,1.);
       b*=step(0.,uvB.x)*step(uvB.x,1.)*step(0.,uvB.y)*step(uvB.y,1.);
       a*=anchorPresent.x;b*=anchorPresent.y;
@@ -142,7 +147,9 @@ export async function createPaintedAnchor({THREE,owner,manifest,manifestUrl,sign
       wanted=[...new Set([pair.from,pair.to,next].filter(Boolean))];selected=blend.state;opacity=blend.opacity;
       phase.value=sample.u;segment.value=sample.segment;effect.value=animation.reducedMotion?0:.75*blend.effect;
       for(const [id,center] of [[pair.from,mouthA],[pair.to,mouthB]])center.value.fromArray(mouthRects.get(id));
-      lipShape.value.fromArray(animation.lipShape||[0,0,0,0]);
+      mouthGapA.value.set(...mouthGaps.get(pair.from));mouthGapB.value.set(...mouthGaps.get(pair.to));
+      mouthAngleA.value=mouthAngles.get(pair.from);mouthAngleB.value=mouthAngles.get(pair.to);
+      lipShape.value.fromArray(animation.speaking?animation.lipShape||[0,0,0,0]:[0,0,0,0]);
       mouth.value=animation.speaking?(animation.lipShape?.[0]??0):0;
       pump();
       const height=source.geometry.parameters.height*source.scale.y;

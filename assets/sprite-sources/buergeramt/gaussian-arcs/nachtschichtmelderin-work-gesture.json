@@ -271,7 +271,9 @@
         146,
         11,
         8
-      ]
+      ],
+      "mouth_angle": 0,
+      "mouth_gap": [0, 0]
     },
     {
       "id": "bridge1",
@@ -499,7 +501,9 @@
         161,
         11,
         8
-      ]
+      ],
+      "mouth_angle": 0.14,
+      "mouth_gap": [-0.1, 0.3]
     },
     {
       "id": "bridge2",
@@ -715,7 +719,9 @@
         122,
         11,
         8
-      ]
+      ],
+      "mouth_angle": -0.2,
+      "mouth_gap": [-0.25, 0.5]
     },
     {
       "id": "bridge3",
@@ -935,7 +941,9 @@
         123,
         11,
         8
-      ]
+      ],
+      "mouth_angle": -0.15,
+      "mouth_gap": [-0.25, 0.5]
     },
     {
       "id": "gesture",
@@ -1154,7 +1162,9 @@
         174,
         11,
         8
-      ]
+      ],
+      "mouth_angle": -0.16,
+      "mouth_gap": [-0.25, 0.5]
     }
   ],
   "compatibility": "Phone descends from face through chest and waist to thigh in the same right hand; documents stay hugged in anatomical left arm. Matched Gaussian correspondence must be reviewed through ordered playback; no unconstrained whole-body TPS.",

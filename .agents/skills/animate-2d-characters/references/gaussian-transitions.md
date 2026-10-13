@@ -142,6 +142,52 @@ behind one lip edge can appear off-centre despite correct XY registration. Scale
 its height with opening rather than leaving a dark oval under every consonant.
 Keep the jaw connected and the original painted crease visible at closure.
 
+### Deform a connected painted lip surface
+
+When a painted mouth opening splits the cheek or cuts a transparent gap, first
+register the original visible lip line and, if the source is already open, its
+painted upper and lower boundaries. Describe a local lip frame with centre,
+tangent and normal in source pixels; carry both axes through source-to-UV
+conversion with the canvas aspect accounted for. Record source boundaries along
+the local normal relative to the registered rect height. Centre and angle alone
+cannot locate an existing cavity. Evaluate speech in this frame rather than
+assuming a horizontal atlas mouth.
+
+Transport nearby source paint through one compact, smooth width field. Invert
+its horizontal map when sampling the painting so stretched lips still sample
+continuous source colour; keep the field invertible over the chosen shape range.
+Derive upper and lower boundaries from the canonical crease and an aperture
+that tapers to zero at attached mouth corners. Protect upper-face paint with a
+smooth spatial falloff. Give the lower lip and jaw bounded support, and provide
+a distinct lip-to-teeth contact shape for biting consonants. Fit field extent,
+opening and falloffs to each approved painting; example shader constants are
+not portable anatomical settings.
+
+For a pre-open source, map paint outside the target aperture from its own
+upper/lower source boundaries to the target boundaries, with the same
+corner-attached taper. Replace the original interior within the target aperture
+so the opening reads as one cavity; sampling from an assumed closed crease can
+leave original teeth or darkness as a second mouth. Register these boundaries
+on every affected source pose, including bridges.
+
+At neutral, sample the exact original source. During speech, preserve original
+alpha and guard samples whose remapped alpha falls below the original, so paint
+cannot pull transparent background into cheeks. Diagnose cheek folding as a
+noninvertible or overly broad width map; diagnose alpha gaps at the remap edge
+before increasing the dark oral fill. Inspect the source crease, attached
+corners, lower-jaw connection and protected eyes on light and dark backgrounds.
+
+For paired painted endpoints, evaluate the same media cue in each endpoint's
+own registered lip frame *before* the existing body transport mixes them. The
+body phase remains owned by that transport; speech adds no body clock. Inspect
+every character, encoded pose and affected interval through changing-pose
+playback. A successful fixed-painting trial establishes only that painting's
+articulation, not general pose registration or a face rig. This approach borrows
+canonical appearance and coherent deformation ideas from 4D Gaussian
+Splatting; a deterministic painted-image shader does not train or implement its
+neural scene reconstruction. Reuse the existing visual acceptance gate and
+record instead of creating another approval ledger.
+
 ### Keep the mouth attached through transformations
 
 Bind face registration to the painting actually being displayed: source identity,

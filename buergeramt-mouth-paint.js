@@ -1,30 +1,59 @@
-// One bounded oral opening, sampled inside the existing native-paint Gaussians.
-// Rectangles are source-pixel registrations, independent of body pivots/bounds.
 export const mouthPaintGlsl = `
-vec4 amtMouthPaint(sampler2D image,vec2 uv,vec4 rect,vec4 shape){
-  float opening=clamp(shape.x*(1.-.65*shape.w),0.,1.);
-  if(opening<.001)return texture2D(image,uv);
-  vec2 q=(uv-rect.xy)/rect.zw;
-  if(max(abs(q.x),abs(q.y))>3.)return texture2D(image,uv);
-  float support=exp(-.65*dot(q,q));
-  float lower=1.-smoothstep(-.15,.15,q.y);
-  vec2 source=uv;
-  source.y+=rect.w*opening*(1.28*lower-.18*(1.-lower))*support;
-  source.x-=(uv.x-rect.x)*support*(shape.y*.13-shape.z*.25);
+float amtLipCrease(float x){return .064*x*x-.03125-.05*exp(-pow((x+.4375)/.4375,2.));}
+vec4 amtMouthPaintFrame(sampler2D image,vec2 uv,vec4 rect,vec4 shape,vec4 axes,vec2 gap){
+  shape=clamp(shape,0.,1.);
+  float opening=max(shape.x*(1.-.88*shape.w),.16*shape.w);
+  float widthFactor=1.+.13*shape.y-.38*shape.z;
+  vec4 original=texture2D(image,uv);
+  if(opening<.001&&abs(widthFactor-1.)<.001)return original;
+  vec2 pixels=vec2(textureSize(image,0)),extent=vec2(length(axes.xy),length(axes.zw));
+  vec2 delta=(uv-rect.xy)*pixels*vec2(1.,-1.);
+  if(max(abs(delta.x),abs(delta.y))>4.*max(extent.x,extent.y))return original;
+  mat2 frame=mat2(axes.xy,axes.zw);
+  vec2 q=inverse(frame)*delta;
+  if(max(abs(q.x),abs(q.y))>3.||q.y< -1.6)return original;
+  float vertical=exp(-pow(abs(q.y)/.9375,4.))*smoothstep(-1.,-.4375,q.y);
+  float sourceX=q.x;
+  for(int iteration=0;iteration<5;iteration++){
+    float z=sourceX/1.5625,z4=z*z*z*z;
+    float weight=exp(-z4)*vertical,amount=1.-widthFactor;
+    float error=sourceX*(1.-amount*weight)-q.x;
+    float derivative=1.-amount*weight*(1.-4.*z4);
+    sourceX-=error/derivative;
+  }
+  float crease=amtLipCrease(sourceX),r=q.x/(1.3125*widthFactor);
+  float taper=pow(max(0.,1.-r*r),.65);
+  float aperture=1.0625*opening*(1.+.2*shape.z)*taper;
+  float upperFraction=.25+.53*shape.w,lowerFraction=1.-upperFraction;
+  float top=crease-upperFraction*aperture,bottom=crease+lowerFraction*aperture;
+  float sourceY=q.y;
+  if(q.y<top)sourceY+=(crease+gap.x*taper-top)*(1.-smoothstep(.5,1.,top-q.y));
+  else if(q.y>bottom)sourceY+=(crease+gap.y*taper-bottom)*exp(-pow((q.y-bottom)/.875,2.));
+  else sourceY=crease;
+  sourceY+=.125*shape.w*taper*exp(-pow((q.y-crease-.125)/.5625,2.));
+  vec2 source=uv+(frame*vec2(sourceX,sourceY)-delta)*vec2(1.,-1.)/pixels;
   vec4 paint=texture2D(image,source);
-  // Upper and lower painted lips separate around this warm, recessed cavity.
-  vec2 inside=vec2(q.x/(.94*(1.+.13*shape.y-.33*shape.z)),
-                   (q.y+.45*opening)/max(.001,.80*opening));
-  float distance=length(inside);
-  float cavity=(1.-smoothstep(.87,1.03,distance))*smoothstep(.005,.07,opening);
-  float tongue=(1.-smoothstep(-.8,-.05,inside.y))*(1.-smoothstep(.4,.95,abs(inside.x)));
-  vec3 oral=mix(vec3(.065,.012,.022),vec3(.29,.065,.075),tongue*.7);
-  // Small upper tooth band follows the aperture; it never covers closed paint.
-  float teeth=smoothstep(.45,.66,inside.y)*(1.-smoothstep(.76,.9,inside.y));
-  teeth*=1.-smoothstep(.5,.85,abs(inside.x));
-  oral=mix(oral,vec3(.68,.58,.43),teeth*(.35+.45*shape.y)*(1.-.6*shape.z));
-  paint.rgb=mix(paint.rgb,oral,cavity);
+  if(paint.a<original.a*.95)paint.rgb=original.rgb;
+  paint.a=original.a;
+  float edge=.65/extent.y;
+  float inside=smoothstep(top-edge,top+edge,q.y)*(1.-smoothstep(bottom-edge,bottom+edge,q.y));
+  inside*=1.-smoothstep(.92,1.01,abs(r));
+  inside*=smoothstep(.05/extent.y,.8/extent.y,aperture);
+  float v=clamp((q.y-top)/max(.0001,aperture),0.,1.);
+  vec3 oral=vec3(.035,.007,.011)*(1.+.3*abs(r));
+  float tongue=smoothstep(.5,.85,v)*(1.-smoothstep(.6,.95,abs(r)));
+  oral=mix(oral,vec3(.17,.035,.04),tongue*.6);
+  float teeth=(1.-smoothstep(.16,.30,v))*smoothstep(.015,.09,v);
+  teeth*=1.-smoothstep(.62,.85,abs(r));
+  teeth*=max(smoothstep(2.8/extent.y,5.5/extent.y,aperture),shape.w*.8)*(1.-.8*shape.z);
+  oral=mix(oral,vec3(.60,.49,.34),teeth*.8);
+  paint.rgb=mix(paint.rgb,oral,inside);
   return paint;
+}
+vec4 amtMouthPaint(sampler2D image,vec2 uv,vec4 rect,vec4 shape,float angle,vec2 gap){
+  if(dot(abs(shape),vec4(1.))<.001)return texture2D(image,uv);
+  vec2 extent=rect.zw*vec2(textureSize(image,0)),tangent=vec2(cos(angle),sin(angle));
+  return amtMouthPaintFrame(image,uv,rect,shape,vec4(tangent*extent.x,vec2(-tangent.y,tangent.x)*extent.y),gap);
 }`;
 
 // Every key owns an oral registration measured on its encoded source painting.
@@ -33,4 +62,16 @@ export function nativeMouthRect(manifest,id){
  const state=manifest.states.find(s=>s.id===id),rect=state?.mouth_xywh;
  if(!rect||rect.length!==4||!rect.every(Number.isFinite)||rect[2]<=0||rect[3]<=0)throw new Error('Unregistered native mouth pose: '+manifest.id+'/'+id);
  const [w,h]=manifest.canvas_xy;return[rect[0]/w,1-rect[1]/h,rect[2]/w,rect[3]/h];
+}
+
+export function nativeMouthAngle(manifest,id){
+ const angle=manifest.states.find(state=>state.id===id)?.mouth_angle;
+ if(!Number.isFinite(angle)||Math.abs(angle)>Math.PI)throw new Error('Unregistered native lip angle: '+manifest.id+'/'+id);
+ return angle;
+}
+
+export function nativeMouthGap(manifest,id){
+ const gap=manifest.states.find(state=>state.id===id)?.mouth_gap;
+ if(!Array.isArray(gap)||gap.length!==2||!gap.every(Number.isFinite)||gap[0]>0||gap[1]<0||gap[1]-gap[0]>3)throw new Error('Unregistered native lip boundaries: '+manifest.id+'/'+id);
+ return gap;
 }

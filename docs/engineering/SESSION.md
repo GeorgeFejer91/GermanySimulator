@@ -60,3 +60,22 @@ after desktop transfer17,963,226bytes and emulation17,598,135bytes; worst
 input p9535.2ms, no page errors. These are lab observations, not physical
 Android performance or perceptual listening. Source/property order and
 whitespace-only refinements do not change the supplied rendered behavior.
+
+## Connected speech lips — 2026-10-13
+
+Integrator-owned isolated `connected-lips` worktree, integrated on published `74fbcf8`.
+The user approved the connected-lip prototype and requested applying its method
+across animated characters, then updating the animation skill. Scope: shared
+mouth-paint shader, per-source lip orientation/registration, its native/atlas
+consumers and cache identities, focused renderer/registration tests, existing
+browser fixtures, and owning speech/animation guidance. Preserve recorded bytes,
+cue/media clocks, body phases, paired Gaussian paths, collision, pivots, actor
+scale, background work and disposal. Reuse the existing renderer and assets.
+Keep the shared checkout's pre-existing phone/CSS/world/document work intact.
+
+The fixed-portrait prototype demonstrated attached corners and improved lip
+contours. It did not establish multi-pose or other-character acceptance. Inspect
+every registered native key and affected action interval, atlas fallback, closed
+paint and alpha, plus real media playback, mobile emulation and unchanged browser
+budgets. Physics and Camera reviews must bind the final same candidate. Source
+and emulated checks do not imply physical-device or perceptual listening evidence.

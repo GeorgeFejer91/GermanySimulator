@@ -212,7 +212,9 @@
         190,
         16,
         16
-      ]
+      ],
+      "mouth_angle": 0.1,
+      "mouth_gap": [0, 0]
     },
     {
       "id": "knick-stamp-handoff2",
@@ -418,7 +420,9 @@
         187,
         16,
         16
-      ]
+      ],
+      "mouth_angle": 0.08,
+      "mouth_gap": [0, 0]
     }
   ],
   "existing_states": {

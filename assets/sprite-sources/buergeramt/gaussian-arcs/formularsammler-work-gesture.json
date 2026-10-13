@@ -202,7 +202,9 @@
         160,
         13,
         9
-      ]
+      ],
+      "mouth_angle": 0.1,
+      "mouth_gap": [0, 0]
     },
     {
       "id": "bridge1",
@@ -362,7 +364,9 @@
         151,
         13,
         9
-      ]
+      ],
+      "mouth_angle": 0.2,
+      "mouth_gap": [-0.1, 0.25]
     },
     {
       "id": "bridge2",
@@ -522,7 +526,9 @@
         157,
         13,
         9
-      ]
+      ],
+      "mouth_angle": 0.15,
+      "mouth_gap": [-0.3, 0.5]
     },
     {
       "id": "bridge3",
@@ -674,7 +680,9 @@
         180,
         13,
         9
-      ]
+      ],
+      "mouth_angle": 0.15,
+      "mouth_gap": [-0.3, 0.5]
     },
     {
       "id": "gesture",
@@ -825,7 +833,9 @@
         159,
         13,
         9
-      ]
+      ],
+      "mouth_angle": 0.12,
+      "mouth_gap": [-0.3, 0.5]
     }
   ],
   "compatibility": "Anatomical right hand moves a top form toward the chest while the left arm keeps the long accordion stack; no detached/repeated paper segments. Matched Gaussian correspondence must be reviewed through ordered playback; no unconstrained whole-body TPS.",
