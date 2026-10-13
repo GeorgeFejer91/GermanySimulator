@@ -90,6 +90,12 @@ function tap(h,x=250,y=400,id=9){pointer(h.document,'pointerdown',id,x,y,h.look)
 function pickedOffice(selection={actorId:'amt-konrad-wohnungszettel'}){
  const h=office();h.picks=[];h.window.Germany3D={pickAmtInteraction:(x,y)=>{h.picks.push([x,y]);return selection}};return h;
 }
+
+test('one mouse click starts a visible target, while a camera drag does not',()=>{
+ const h=pickedOffice();pointer(h.document,'pointerdown',1,250,400,h.look,'mouse');h.tick(50);pointer(h.document,'pointerup',1,250,400,h.look,'mouse');
+ assert.equal(h.level.stage,'character');assert.deepEqual(h.picks,[[250,400]]);
+ const drag=pickedOffice();pointer(drag.document,'pointerdown',1,250,400,drag.look,'mouse');pointer(drag.document,'pointermove',1,300,400,drag.look,'mouse');pointer(drag.document,'pointerup',1,300,400,drag.look,'mouse');assert.equal(drag.picks.length,0);
+});
 test('double tap selects the tapped visible person beyond desktop reach, once per pair',()=>{
  const h=pickedOffice();tap(h);assert.equal(h.level.stage,'walk-sign');tap(h,258,405,10);
  assert.equal(h.level.stage,'character');assert.equal(h.node('amt-speaker').textContent,'KONRAD WOHNUNGSZETTEL');assert.deepEqual(h.picks,[[258,405]]);

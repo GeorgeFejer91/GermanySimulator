@@ -2,15 +2,15 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import {harness,source} from './amt-harness.mjs';
 
-test('missing the call returns to walking, retires the URL, and never opens a decision',()=>{
+test('missing the call returns to walking, preserves the shared URL, and never opens a decision',()=>{
  const h=harness();h.wait();h.awaitCall();const old=h.links[0];
- const expiryScene=h.level.floorState.visualTime+13,limit=Math.ceil(13/(.05*h.window.BuergeramtGoop.minSpeed))+2;
+ const expiryScene=h.level.floorState.visualTime+30.1,limit=Math.ceil(30.1/(.05*h.window.BuergeramtGoop.minSpeed))+2;
  for(let i=0;i<limit&&h.level.floorState.visualTime<expiryScene;i++)h.level.update(.05);
  assert.equal(h.level.stage,'walk-sign');assert.equal(h.level.active,true);
  assert.equal(h.node('amt-actions').children.length,0);assert.equal(h.counts.form,0);
- assert(old.sent.some(m=>m.type==='forfeit'));assert.notEqual(h.links.at(-1),old);
+ assert(old.sent.some(m=>m.type==='forfeit'));assert.equal(h.links.at(-1),old);
  old.message({type:'scan',id:'c'.repeat(24)});assert.equal(h.level.stage,'walk-sign');
- h.tick(250);assert.equal(old.closed,true);
+ h.tick(250);assert.equal(old.closed,false);
  const fresh=h.links.at(-1);fresh.message({type:'scan',id:'d'.repeat(24)});
  assert.equal(h.level.stage,'walk-sign');fresh.message({type:'register',name:'Neuer Versuch'});fresh.message({type:'ticket-received',id:fresh.scanId,number:h.level.registrationTicket});
  assert.equal(h.level.stage,'waiting');assert.equal(h.level.registration.warnings,0);
