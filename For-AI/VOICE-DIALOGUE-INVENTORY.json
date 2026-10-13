@@ -1122,14 +1122,16 @@
         "Ach, wie schön. Für private Telefonate haben Sie Zeit. Für Ihr Formular offenbar nicht. Ich sitze hier ja nur...",
         "Die Dame hat einen Namen. Frau Knick. Und die Dame bearbeitet hier einen Antrag, während Sie einem Grashalm hinterhertelefonieren. Wenn Sie jetzt bitte...",
         "Sie zeigen meinen Schalter an? Ich bin vierundsiebzig und seit fünfzig Jahren hier! Mein Schalter deckt keinen Rasen. Er deckt Anträge! Jetzt halten Sie doch endlich...",
-        "SIE DROHEN MEINEM SCHALTER? DANN VERHAFTEN SIE DOCH DEN LOCHER! Ich lasse mich von Ihnen nicht anschreien!",
-        "UND SIE STEHEN HIER NICHT SO UNSCHULDIG! Der Stempel bleibt oben! Ihr Termin ist ANNULLIERT! Raus! Für einen neuen Versuch ziehen Sie draußen eine neue Nummer."
+        "SIE DROHEN MEINEM SCHALTER? DANN VERHAFTEN SIE DOCH DEN LOCHER! Ich lasse mich von Ihnen nicht anschreien!"
       ],
+      "phoneDismissal": {
+        "line": "Was stehen Sie so tadellos da?! Raus!!"
+      },
       "phoneWarnings": [
         "Entschuldigen Sie. Ihr Telefon klingelt. Wir sind hier beim Bürgeramt. Stellen Sie es bitte ruhig, damit wir mit Ihrer Anmeldung weitermachen können.",
         "Zum zweiten Mal! Ihr Telefon hat hier keinen Termin. Ich schon. Und zwar mit Ihnen. Sorgen Sie jetzt für Ruhe!",
-        "Das ist das dritte Mal! Noch ein einziger Anruf, und ich breche Ihre Anmeldung ab. Mein Stempel wartet nicht auf Ihre Mailbox!",
-        "VIER ANRUFE! Das reicht. Ich breche Ihre Anmeldung ab. Ihr Termin ist annulliert. Raus! Ziehen Sie eine neue Nummer, wenn Ihr Telefon Feierabend hat!"
+        "Meine letzte Warnung! Stellen Sie das Telefon jetzt aus, oder ich beende Ihren Termin!",
+        "Jetzt Reichsadler! Raus!"
       ],
       "registration": {
         "speaker": "SACHBEARBEITERIN FRAU KNICK",

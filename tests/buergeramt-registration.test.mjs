@@ -48,6 +48,25 @@ test('confirmed browser hide permits silence; disconnect and timeout cannot clai
  }
 });
 
+test('one continuously ringing call provokes all four warnings and immediate committed expulsion',()=>{
+ const h=harness('host',{voice:true});let outcome;h.config.onCancel=value=>{outcome=value;h.counts.cancel++};h.counter();const link=h.links[0],round=h.level.registration.callRound;
+ arrived(h);const reactions=[h.node('amt-line').textContent];
+ for(let warning=2;warning<=4;warning++){
+  for(let t=0;t<12;t++){link.message({type:'phone-visible'});h.tick(1000)}
+  assert.equal(h.level.registration.warnings,warning);reactions.push(h.node('amt-line').textContent);
+ }
+ assert.deepEqual(reactions,[...h.window.BuergeramtStory.phoneWarnings]);assert.equal(h.level.registration.callRound,round);
+ assert.equal(link.sent.filter(m=>m.type==='call').length,1);assert.equal(h.level.stage,'cancelled');assert.equal(h.counts.cancel,0);
+ link.message({type:'answer',id:'grass',round});h.tick(16);assert.equal(h.synth.current.text,'Jetzt Reichsadler! Raus!');h.synth.end();
+ assert.equal(h.level.active,false);assert.equal(h.counts.cancel,1);assert.equal(outcome.reason,'ringing');assert.equal(h.counts.form,0);
+});
+
+test('a returned visible page starts fresh ringing pressure after earlier silence',()=>{
+ const h=harness();h.counter();const link=h.links[0];link.message({type:'phone-hidden'});assert.equal(h.level.registration.phoneSilent,true);
+ link.message({type:'phone-visible'});link.message({type:'call-ready',id:'grass',round:h.level.registration.callRound,atMs:h.now()});arrived(h);
+ assert.equal(h.level.registration.warnings,1);for(let second=0;second<12;second++){link.message({type:'phone-visible'});h.tick(1000)}assert.equal(h.level.registration.warnings,2);
+});
+
 test('live traffic prevents silence; retired links cannot satisfy a new appointment',()=>{
  const h=harness();h.counter();const old=h.links[0];old.emit('connected',{});for(let n=0;n<10;n++){h.tick(1400);old.message({type:'sync-pong',id:999,receivedAtMs:h.now(),sentAtMs:h.now()})}assert.equal(h.level.registration.phoneSilent,false);h.level.replay(h.config);old.message({type:'phone-hidden'});assert.equal(h.level.registration.phoneSilent,false);assert.equal(h.level.registration.points,0);
 });

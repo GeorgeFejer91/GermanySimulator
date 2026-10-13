@@ -104,7 +104,7 @@ function resetStationaryClocks(){Object.assign(stationaryClocks,{"clerk-desk-1":
 function defer(callback,delay){const owner=attempt;const id=setTimeout(()=>{pendingTimers.delete(id);if(active&&owner===attempt)callback()},delay);pendingTimers.add(id);return id}
 function clearTimer(id){clearTimeout(id);pendingTimers.delete(id)}
 function cancelSpeech(){officeSubtitle=null;refreshSubtitle();sceneContinuation=null;queueCallSpeaking=false;lips.finish();feverClock?.release();cue++;officeSpeechBusy=false;clerkSpeaking=false;clerkAnimation?.setSpeech(false);if(speechGateTimer!==null)clearTimer(speechGateTimer);speechGateTimer=null;recordedCleanup?.();if(recordedSpeech){recordedSpeech.pause();recordedSpeech.removeAttribute("src");recordedSpeech.load();recordedSpeech=null}try{const engine=window.speechSynthesis;if(!options?.cityAudioActive?.()&&(engine?.speaking||engine?.pending))engine.cancel()}catch{}}
-let active=false,stage="closed",link=null,number="",registeredName="",activated=false,qrSvg="",queueDisplay="—",queueIndex=0,queueClock=0,lastScanId="",deadline=0,clerkIndex=0,callPending=false,callTriggered=false,callCommitted=false,callArmTimer=null,clockAnchor=null,policeDoneHandler=null,policeStartHandler=null,policeDisconnectHandler=null,options=null,ambientClock=0,ambientIndex=0,officeAudio=null;
+let active=false,stage="closed",link=null,number="",registeredName="",activated=false,qrSvg="",queueDisplay="—",queueIndex=0,queueClock=0,lastScanId="",deadline=0,clerkIndex=0,callPending=false,callTriggered=false,callCommitted=false,callArmTimer=null,clockAnchor=null,policeDoneHandler=null,policeStartHandler=null,policeDisconnectHandler=null,policeHangupHandler=null,policeEndHandler=null,options=null,ambientClock=0,ambientIndex=0,officeAudio=null;
 let timing={rttMs:null,oneWayMs:0,jitterMs:0,lastPongAt:null,clockOffsetMs:null,clockUncertaintyMs:null,startLagMs:null,phoneReadyMs:null,phoneFastReadyMs:null,deskStartLagMs:0,deskMsPerChar:55,call:null,cues:{},desk:{}};
 let pingSerial=0,pingTimer=null,hostVoiceStartupMs=null,hostVoiceAttempts=0;const outstandingPings=new Map(),rttSamples=[];
 function resetTiming(){if(pingTimer!==null)clearInterval(pingTimer);pingTimer=null;outstandingPings.clear();rttSamples.length=0;pingSerial=0;timing={rttMs:null,oneWayMs:0,jitterMs:0,lastPongAt:null,clockOffsetMs:null,clockUncertaintyMs:null,startLagMs:null,phoneReadyMs:null,phoneFastReadyMs:null,deskStartLagMs:0,deskMsPerChar:55,call:null,cues:{},desk:{}}}
@@ -804,13 +804,13 @@ function playCallSignal(signalAtMs,ringAtMs){
 }
 function commitCall(reason){
  if(!active||!activated||!callPending||callCommitted||phoneSilent||!["counter","reply","phone-warning"].includes(stage))return;
- callCommitted=true;if(callArmTimer!==null)clearTimer(callArmTimer);callArmTimer=null;
+ callCommitted=true;callOutcome="";if(callArmTimer!==null)clearTimer(callArmTimer);callArmTimer=null;
  const now=performance.now(),leadMs=Math.round(2200/timeScale()),signalMs=Math.round(900/timeScale()),ringAtMs=now+leadMs;
  const peerFresh=timing.lastPongAt!==null&&now-timing.lastPongAt<6000&&timing.clockUncertaintyMs<=250;
  const ringAtPhoneMs=peerFresh?ringAtMs+timing.clockOffsetMs:null;
  const ringAtUtcMs=window.BuergeramtClock?.usable?.(clockAnchor,now)?Math.round(window.BuergeramtClock.utcAt(clockAnchor,ringAtMs)):null;
  timing.call={round:phoneCallRound,reason,armedAtMs:now,ringAtMs,signalAtMs:ringAtMs-signalMs,ringAtPhoneMs,ringAtUtcMs,peerUncertaintyMs:peerFresh?timing.clockUncertaintyMs:null,utcUncertaintyMs:ringAtUtcMs!==null?clockAnchor.uncertaintyMs:null,phoneScheduledAtMs:null,phoneMode:null,lateMs:null,ringingAt:null};
- if(!link.send("call",{id:story.call.id,round:phoneCallRound,line:story.call.opening(registeredName),ringAtPhoneMs,ringAtUtcMs,leadMs})){callCommitted=false;callArmTimer=defer(()=>{callArmTimer=null;armCall()},1000);return}
+ if(!link.send("call",{id:story.call.id,round:phoneCallRound,line:story.call.body,greeting:story.call.greeting(registeredName),ringAtPhoneMs,ringAtUtcMs,leadMs})){callCommitted=false;callArmTimer=defer(()=>{callArmTimer=null;armCall()},1000);return}
  sentPolice(-1);playCallSignal(ringAtMs-signalMs,ringAtMs);setStatus("TELEFON · RÜCKRUF");
  // Sending or scheduling is not arrival. Missing display receipts never annoy Knick.
  phoneRetryTimer=defer(()=>{phoneRetryTimer=null;if(atCounter()&&!phoneSilent&&callPending)scheduleRepeatCall()},leadMs+20000/timeScale());
@@ -819,7 +819,7 @@ function armCall(){if(!active||phoneSilent||!callPending||callCommitted||callArm
 function scheduleRepeatCall(){
  if(phoneRetryTimer!==null)clearTimer(phoneRetryTimer);phoneRetryTimer=null;
  if(!atCounter()||phoneSilent)return;
- callPending=false;stopCallSignal();phoneRetryTimer=defer(()=>{phoneRetryTimer=null;if(!atCounter()||phoneSilent)return;callPending=true;callCommitted=false;armCall()},24000/timeScale());
+ callPending=false;stopCallSignal();phoneRetryTimer=defer(()=>{phoneRetryTimer=null;if(!atCounter()||phoneSilent)return;callPending=true;callOutcome="";callCommitted=false;armCall()},24000/timeScale());
 }
 function ambientStep(dt){
  if(!walking()||stage==="outside")return;ambientClock+=dt;queueCallCooldown=Math.max(0,queueCallCooldown-dt);
@@ -890,15 +890,16 @@ function beginLink(){
  const current=()=>active&&owner===attempt&&link===currentLink;
  const terminal=()=>["cancelled","closed","success"].includes(stage);
  currentLink.addEventListener("status",e=>{if(!current())return;if(stage==="cancelled"&&/getrennt|unterbrochen/i.test(e.detail)){policeDisconnectHandler?.();return}if(terminal())return;if(!activated)setStatus("QR-CODE SCANNEN · WARTENUMMER ZIEHEN")});
- currentLink.addEventListener("disconnected",e=>{if(!current())return;const peer=e.detail?.peer??"",ticket=phoneTickets.get(peer);if(peer===activePhonePeer)phoneAway("disconnected");else if(ticket)retirePhoneTicket(ticket)});
+ currentLink.addEventListener("disconnected",e=>{if(!current())return;const peer=e.detail?.peer??"",ticket=phoneTickets.get(peer);if(peer===activePhonePeer){if(stage==="cancelled"&&callOutcome==="answer")policeDisconnectHandler?.();else phoneAway("disconnected")}else if(ticket)retirePhoneTicket(ticket)});
  currentLink.addEventListener("connected",e=>{if(activePhonePeer&&(e.detail?.peer??"")!==activePhonePeer)return;if(!current()||terminal())return;phoneLastSeen=performance.now();if(!activated)setStatus("QR-CODE SCANNEN · WARTENUMMER ZIEHEN");if(atCounter())currentLink.send("counter-start");watchPhoneLink()});
  currentLink.addEventListener("message",e=>{
   if(!current())return;const m=e.detail,peer=m.peer??"";if(!terminal()&&receiveAdmission(m,peer,currentLink))return;if(peer!==activePhonePeer){if(m.type==="phone-hidden"){const ticket=phoneTickets.get(peer);if(ticket)retirePhoneTicket(ticket)}return}phoneLastSeen=performance.now();
   if(m.type==="sync-pong"){receivePong(m.id,m.receivedAtMs,m.sentAtMs);return}
   if(m.type==="call-ready"){if(atCounter()&&callPending&&m.id===story.call.id&&m.round===phoneCallRound)commitCall("phone-ready");return}
   if(m.type==="call-scheduled"){if(timing.call&&m.id===story.call.id&&m.round===phoneCallRound&&timing.call.phoneScheduledAtMs===null){timing.call.phoneScheduledAtMs=m.atMs;timing.call.phoneMode=m.mode;timing.call.lateMs=m.lateMs}return}
-  if(m.type==="call-ringing"){if(atCounter()&&!phoneSilent&&callPending&&callCommitted&&m.id===story.call.id&&m.round===phoneCallRound&&timing.call?.ringingAt===null){timing.call.ringingAt=m.atMs;if(phoneWarnings===3)warnPhone();else schedulePhoneWarning(600/timeScale())}return}
-  if(m.type==="hangup"){if(stage==="cancelled"&&callOutcome==="answer"&&m.id===story.call.id&&m.round===phoneCallRound)policeDisconnectHandler?.();return}
+  if(m.type==="call-ringing"){if(atCounter()&&!phoneSilent&&callPending&&callCommitted&&m.id===story.call.id&&m.round===phoneCallRound&&timing.call?.ringingAt===null){timing.call.ringingAt=m.atMs;if(phoneRetryTimer!==null)clearTimer(phoneRetryTimer);phoneRetryTimer=null;if(phoneWarnings===3)warnPhone();else schedulePhoneWarning(600/timeScale())}return}
+  if(m.type==="hangup"){if(stage==="cancelled"&&callOutcome==="answer"&&m.id===story.call.id&&m.round===phoneCallRound)policeHangupHandler?.();return}
+  if(m.type==="call-ended"){if(stage==="cancelled"&&callOutcome==="answer"&&m.id===story.call.id&&m.round===phoneCallRound)policeEndHandler?.(m.mode);return}
   if(m.type==="police-start"){if(stage==="cancelled"&&receivePoliceStart(m.index,m.mode,m.readyDelayMs,m.atMs,m.atUtcMs))policeStartHandler?.(m.index);return}
   if(m.type==="police-done"){if(stage==="cancelled"&&(m.index!==3||timing.cues[3]?.startedAt!=null)&&receivePoliceDone(m.index,m.mode,m.durationMs,m.atMs))policeDoneHandler?.(m.index);return}
   if(terminal())return;
@@ -913,7 +914,7 @@ function beginLink(){
  });
  currentLink.start().catch(()=>{if(current()&&!terminal())setStatus("WARTENUMMER DERZEIT NICHT VERFÜGBAR")});
 }
-function schedulePhoneWarning(delay){if(phoneWarningTimer!==null)clearTimer(phoneWarningTimer);phoneWarningTimer=defer(()=>{phoneWarningTimer=null;if(!phoneSilent)warnPhone()},delay)}
+function schedulePhoneWarning(delay,ongoing=false){if(phoneWarningTimer!==null)clearTimer(phoneWarningTimer);phoneWarningTimer=defer(()=>{phoneWarningTimer=null;if(!phoneSilent&&(!ongoing||callPending&&callCommitted&&!callOutcome&&phoneVisibility==="visible"))warnPhone()},delay)}
 function warnPhone(){
  if(!active||!activated||phoneSilent||registrationCompleted||["cancelled","expired","closed"].includes(stage))return;
  phoneWarnings++;
@@ -921,10 +922,12 @@ function warnPhone(){
   callPending=false;callOutcome="repeated-calls";clearPhonePressure();stopCallSignal();
   if(callArmTimer!==null)clearTimer(callArmTimer);callArmTimer=null;
   link?.send("forfeit");setStage("cancelled");exit.hidden=true;setStatus("VIERTER ANRUF · TERMIN ANNULLIERT");
-  content(story.clerkIdentity.speaker,story.phoneWarnings[3],[],()=>{const callback=options.onCancel;close(false);callback()},null,null,null,{rate:1.12,pitch:1.08});return;
+  content(story.clerkIdentity.speaker,story.phoneWarnings[3],[],()=>{const callback=options.onCancel;close(false);callback({reason:"ringing"})},null,null,null,{rate:1.12,pitch:1.08});return;
  }
  setStage("phone-warning");setStatus("ANRUF "+phoneWarnings+"/4 · TELEFONSEITE SICHTBAR");
  content(story.clerkIdentity.speaker,story.phoneWarnings[phoneWarnings-1],[],showRegistration,null,null,null,{rate:.96+(phoneWarnings-1)*.08,pitch:1+(phoneWarnings-1)*.04});
+ // The same unanswered, visible call keeps ringing. It never expires itself.
+ if(callPending&&callCommitted&&!callOutcome&&phoneVisibility==="visible")schedulePhoneWarning(12000/timeScale(),true);
 }
 function readPlayerReply(text,next){content(story.playerIdentity.speaker,text,[],next)}
 function silencePhone(){
@@ -967,7 +970,7 @@ function showClerk(){
 function showOutburst(){
  const upset={...story.outburst,speaker:"FRAU KNICK · SCHALTER "+assignedCounter};exit.hidden=true;cancelSpeech();actions.replaceChildren();ambient.textContent="";
  const phoneBrowser=navigator.userAgentData?.mobile??/iPhone|iPod|Android.*Mobile/i.test(navigator.userAgent||"");
- let waiting=null,deskIndex=null,deskTimer=null,disconnected=false,phoneCaption="",phoneSubtitle=null;
+ let waiting=null,deskIndex=null,deskTimer=null,disconnected=false,phoneCaption="",phoneSubtitle=null,ending=false,endingTimer=null,dismissed=false;
  function clearPhoneCaption(){if(phoneCaption&&ambient.textContent===phoneCaption)ambient.textContent="";if(phoneSubtitle&&officeSubtitle===phoneSubtitle){officeSubtitle=null;refreshSubtitle()}phoneCaption="";phoneSubtitle=null}
  function stopDesk(){
   if(deskTimer!==null)clearTimer(deskTimer);deskTimer=null;
@@ -977,7 +980,7 @@ function showOutburst(){
   if(waiting?.index!==index)return;const pending=waiting;waiting=null;clearTimer(pending.timer);
   clearPhoneCaption();
   if(missing&&timing.cues[index]?.doneAt===null)timing.cues[index].status=disconnected?"disconnected":"timeout";
-  desk(index===3?4:index+1);
+  if(index===3)beginEnding();else desk(index+1);
  }
  policeDoneHandler=index=>nextDesk(index);
  policeStartHandler=index=>{
@@ -1004,7 +1007,20 @@ function showOutburst(){
   };
   schedule();
  };
- policeDisconnectHandler=()=>{disconnected=true;if(waiting)nextDesk(waiting.index,true)};
+ policeDisconnectHandler=()=>{disconnected=true;beginEnding(false)};
+ policeHangupHandler=()=>beginEnding(false);
+ policeEndHandler=()=>{if(ending)dismiss()};
+ function beginEnding(requestPhone=true){
+  if(ending)return;ending=true;stopDesk();cancelSpeech();clearPhoneCaption();
+  if(waiting){clearTimer(waiting.timer);waiting=null}
+  policeStartHandler=policeDoneHandler=null;
+  endingTimer=defer(dismiss,6000);
+  if(requestPhone&&!disconnected)link?.send("call-end",{id:story.call.id,round:phoneCallRound});
+ }
+ function dismiss(){
+  if(dismissed)return;dismissed=true;if(endingTimer!==null)clearTimer(endingTimer);endingTimer=null;
+  content(upset.speaker,story.phoneDismissal.line,[],()=>{const callback=options.onCancel;close(false);callback({reason:"kripo"})},null,null,null,{rate:1.12,pitch:1.08});
+ }
  function police(index){
   if(waiting)return;
   waiting={index,timer:defer(()=>nextDesk(index,true),index===3?45000/timeScale():18000)};
@@ -1013,19 +1029,18 @@ function showOutburst(){
  function desk(index){
   stopDesk();deskIndex=index;let advanced=false;
   const text=upset.lines[index],record={requestedAt:performance.now(),startAt:null,endAt:null,mode:"waiting"};timing.desk[index]=record;
-  const advance=()=>{if(advanced)return;advanced=true;if(deskTimer!==null)clearTimer(deskTimer);deskTimer=null;if(index<=3)police(index);else defer(finishArgument,200)};
+  const advance=()=>{if(advanced||ending)return;advanced=true;if(deskTimer!==null)clearTimer(deskTimer);deskTimer=null;police(index)};
   content(upset.speaker,text,[],mode=>{record.endAt=performance.now();record.mode=mode;advance()},mode=>{
    record.startAt=performance.now();record.startMode=mode;if(mode==="voice")timing.deskStartLagMs=Math.round(timing.deskStartLagMs*.6+(record.startAt-record.requestedAt)*.4);
    if(index<3)deskTimer=defer(advance,Math.max(300,upset.cutAfterMs[index]/timeScale()-phoneFastLag()));
   },null,null,upset.delivery[index]);
  }
- function finishArgument(){const callback=options.onCancel;close(false);callback()}
  police(-1);
 }
 function finish(){if(!active||!activated||callPending||!phoneSilent||!registrationCompleted||stage!=="success")return;const callback=options.onForm;close(false);callback()}
 function close(notify=true){
  feverClock?.clear();stopFeverTone();
- if(!active)return;const config=options,phoneComplete=stage==="success"&&registrationCompleted;clearPhonePressure();stopCallSignal();active=false;attempt++;callPending=false;activated=false;callOutcome="";policeDoneHandler=null;policeStartHandler=null;policeDisconnectHandler=null;characterMood=null;
+ if(!active)return;const config=options,phoneComplete=stage==="success"&&registrationCompleted;clearPhonePressure();stopCallSignal();active=false;attempt++;callPending=false;activated=false;callOutcome="";policeDoneHandler=null;policeStartHandler=null;policeDisconnectHandler=null;policeHangupHandler=null;policeEndHandler=null;characterMood=null;
  window.Germany3D?.clearAmtOmenSplat?.();
  window.Germany3D?.clearAmtFloor?.();
  floorClock=visualClock=0;restoration=null;

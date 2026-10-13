@@ -147,13 +147,7 @@ Subtitles are always enabled. The shared language control defaults to German and
 is `assets/voices/knick/phone-reactions-manifest.json`, merged through the existing
 curator and exact speaker/text lookup. The fourth arrival commits cancellation
 before its complete dismissal. Receipt and attempt guards own all continuations.
-The Kripo opening interpolates the current registered name and uses one German
-browser-speech utterance with an exact desktop caption and translated English
-caption. Unlike the subsequent interrupted argument, the introduction finishes
-naturally; it retains the existing bounded missing-start/playback fallback.
-Its dynamic source cannot select the old unnamed opening MP3. Knick's separate
-local name model is not a Kripo voice; this integration shares local-name,
-source/receipt/cancellation conventions without borrowing her model or voice.
+The Kripo opening interpolates the registered name only in the short German greeting. It then plays the exact fixed body from `kriminalpolizei-opening-body.mp3`, derived at a verified sentence pause from the original selected Kripo take. One composite cue owns the complete desktop/English caption and completion; synthesis failure continues to the recording. Knick's local name model remains separate. `phone-dismissal-manifest.json` supplies the new last warning, short Reichsadler expulsion and post-Kripo dismissal, using her unchanged selected profile. These three clips plus the Kripo excerpt total 240,752 bytes / 19.02 seconds; largest mono 48 kHz Float32 decode 1,608,960 bytes. Exact encoded ASR, native EOS for new synthesis, levels and hashes pass. Listening remains NOT RUN.
 
 The four accepted clips total 555,056 bytes / 34.44 seconds; the largest
 single decoded mono 48 kHz Float32 clip is 2,618,880 bytes. They use the

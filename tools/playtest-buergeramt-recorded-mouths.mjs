@@ -25,7 +25,7 @@ try{
  await page.evaluate(()=>{BuergeramtLevel.update=()=>{};__mouthProbe.prepare();__mouthProbe.options.voiceOn=()=>true;window.mouthCatalog=GermanySimulatorAudioText});
  const reports=[];
  for(const [path,track] of Object.entries(speechMouthTracks)){
-  if(process.env.MOUTH_CLIP&&!track.clipId.includes(process.env.MOUTH_CLIP))continue;
+  if(process.env.MOUTH_CLIP&&!process.env.MOUTH_CLIP.split(',').some(filter=>track.clipId.includes(filter)))continue;
   await page.evaluate(({path,text})=>{
    GermanySimulatorAudioText={...mouthCatalog,candidateClip:()=>path};
    __mouthProbe.content('FRAU KNICK',text);

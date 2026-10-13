@@ -95,7 +95,7 @@ test('visible heartbeat recovers a host liveness timeout without a visibility ev
  assert.deepEqual(sent(link,'call-ringing').map(m=>m.round),[1,2]);
 });
 
-test('ring receipt starts at visible reveal once, and unanswered ring misses after office tempo',()=>{
+test('ring receipt starts at visible reveal once and unanswered ringing persists until a decision',()=>{
  const {h,link}=ticketed();link.message({type:'counter-start'});arm(h,link,1);call(h,link,1,1000);
  assert.equal(sent(link,'call-scheduled').length,1);assert.equal(sent(link,'call-ringing').length,0);
  h.node('phone-answer').click();assert.equal(sent(link,'answer').length,0,'a pending call cannot be answered before reveal');
@@ -103,14 +103,15 @@ test('ring receipt starts at visible reveal once, and unanswered ring misses aft
  h.tick(1);assert.equal(sent(link,'call-ringing').length,1);
  assert.equal(sent(link,'call-ringing')[0].round,1);
  h.tick(2800);assert.equal(sent(link,'call-ringing').length,1,'ring bursts cannot repeat reveal receipt');
- h.tick(9199);assert.equal(sent(link,'call-missed').length,0);
- h.tick(1);assert.deepEqual(sent(link,'call-missed').map(m=>m.round),[1]);
+ h.tick(60000);assert.equal(sent(link,'call-missed').length,0);assert.equal(h.node('phone-call').hidden,false);
+ assert.equal(arm(h,link,2).length,1,'a live ringing call cannot be replaced by another round');
+ h.node('phone-decline').click();assert.deepEqual(sent(link,'decline').map(m=>m.round),[1]);
  assert.equal(h.node('phone-call').hidden,true);
  assert.equal(arm(h,link,1).length,1,'replayed round must not rearm');
  assert.equal(arm(h,link,2).length,2,'next round is available');
 });
 
-test('stale call payloads cannot ring a later arm and answer cancels missed deadline',()=>{
+test('stale call payloads cannot ring a later arm and answering cannot produce a missed event',()=>{
  const {h,link}=ticketed();link.message({type:'counter-start'});arm(h,link,4);call(h,link,3);
  assert.equal(sent(link,'call-scheduled').length,0);
  call(h,link,4);assert.equal(sent(link,'call-ringing').length,1);
@@ -118,11 +119,13 @@ test('stale call payloads cannot ring a later arm and answer cancels missed dead
  h.tick(25000);assert.equal(sent(link,'call-missed').length,0);
 });
 
-test('office tempo adjusts the remaining unanswered window',()=>{
+test('office tempo adjusts the remaining ring cadence without expiring the call',()=>{
  const {h,link}=ticketed();link.message({type:'counter-start'});arm(h,link,1);call(h,link,1);
- h.tick(2000);link.message({type:'office-tempo',rate:.5});
- h.tick(19999);assert.equal(sent(link,'call-missed').length,0);
- h.tick(1);assert.equal(sent(link,'call-missed').length,1);
+ const rings=()=>h.vibrations.filter(Array.isArray);assert.equal(rings().length,1);
+ h.tick(2000);link.message({type:'office-tempo',rate:.5});h.tick(1599);assert.equal(rings().length,1);
+ h.tick(1);assert.equal(rings().length,2);assert.deepEqual(Array.from(rings().at(-1)),[480,300,480,300,480]);
+ h.tick(5599);assert.equal(rings().length,2);h.tick(1);assert.equal(rings().length,3);
+ h.tick(60000);assert.equal(sent(link,'call-missed').length,0);assert.equal(h.node('phone-call').hidden,false);
 });
 
 test('name submission is available on load and waits for connection plus scan readiness',()=>{

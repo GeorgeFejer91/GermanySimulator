@@ -1742,11 +1742,40 @@ function renderAnmeldungBadge(){const badge=document.getElementById("anmeldung-b
 function awardAnmeldung(){allocateJwdHome();anmeldungAwarded=true;try{localStorage.setItem("germany-anmeldung-v1","1")}catch{}renderAnmeldungBadge();toast(state.lang==="en"?"ANMELDUNG COMPLETED · HOME ALLOCATED IN JWD":"ANMELDUNG ABGESCHLOSSEN · HAUS IN JWD ZUGEWIESEN")}
 renderAnmeldungBadge();
 function showAmtDirectResult(title,copy){const card=document.getElementById("amt-direct-result");document.getElementById("amt-direct-result-title").textContent=title;document.getElementById("amt-direct-result-copy").textContent=copy;document.getElementById("amt-direct-reset").hidden=true;card.hidden=false;state.modal=true}
+function amtExitPosition(){
+ const office=buildings.find(b=>b.id==="buergeramt"),r=player.r+2;
+ const path=walkways.find(p=>office.doorX>=p.x+r&&office.doorX<=p.x+p.w-r&&office.doorY>=p.y&&office.doorY<=p.y+p.h);
+ if(!path)return null;
+ const road=horizontalRoads.find(p=>p.y>office.y+office.h),areas=[path];
+ if(road)areas.push({x:office.x,y:road.y-SIDEWALK_WIDTH,w:office.w,h:SIDEWALK_WIDTH});
+ // One bounded arrival scan uses strict body clearance, not movement's overlap-recovery exception.
+ for(const area of areas)for(let y=Math.max(area.y+r,area===path?office.doorY+player.r:0);y<=area.y+area.h-r;y+=8)for(let offset=0;offset<=area.w/2-r;offset+=8)for(const side of offset?[1,-1]:[1]){
+  const x=office.doorX+offset*side;if(x<area.x+r||x>area.x+area.w-r||responderBlocked(x,y,r,player,null,null))continue;
+  return{x,y};
+ }
+ return null;
+}
+function cancelAmtAppointment(outcome){
+ if(outcome?.reason!=="kripo"&&outcome?.reason!=="ringing"){
+  if(document.body.classList.contains("amt-direct-mode"))showAmtDirectResult("TERMIN ANNULLIERT","Ihre Nummer ist ungültig. Ziehen Sie für einen neuen Versuch eine neue Nummer.");
+  else{state.modal=false;toast("TERMIN ANNULLIERT · NEUE NUMMER ZIEHEN")}
+  return;
+ }
+ const exit=amtExitPosition();
+ if(exit){player.x=exit.x;player.y=exit.y}
+ player.vx=player.vy=0;player.facing=Math.PI;clearInput();pendingOfficeEntry=null;
+ document.body.classList.remove("amt-direct-mode");
+ for(const id of ["amt-direct-result","amt-direct-reset","amt-compact-reset","form-modal"])document.getElementById(id).hidden=true;
+ state.started=true;state.modal=false;state.dialogue=false;state.region=regionOf(player.y);
+ state.policeContactCooldown=OFFENSE_TIMING.policeContactCooldown;
+ window.Germany3D?.leaveAmtDirectMode?.();
+ wanted(5,outcome.reason==="kripo"?"KRIMINALPOLIZEI · VORGANG ESKALIERT":"BÜRGERAMT · TELEFONISCHE RUHESTÖRUNG");
+}
 document.getElementById("bureaucracy-form").onsubmit=e=>{e.preventDefault();if(!e.currentTarget.reportValidity()){document.getElementById("form-error").textContent=state.lang==="en"?"PROCEDURE INCOMPLETE. NATURALLY.":"VORGANG UNVOLLSTÄNDIG. NATÜRLICH.";uiTone(130,.14,"square",.04);return}const type=e.currentTarget.dataset.type;document.getElementById("form-modal").hidden=true;state.modal=false;state.forms++;state.mission++;uiTone(95,.08,"square",.05);setTimeout(()=>uiTone(70,.1,"square",.045),70);toast(state.lang==="en"?"FORM "+forms[type].code+" SUCCESSFULLY MOVED TO ANOTHER PILE":"FORMULAR "+forms[type].code+" ERFOLGREICH IN EINEN ANDEREN STAPEL GELEGT");if(type==="citizenship"){state.citizen=true;endGame(true)}if(type==="a38"&&document.body.classList.contains("amt-direct-mode"))showAmtDirectResult("ANMELDUNG ABGESCHLOSSEN","Meldebestätigung erhalten. Ihr Abzeichen ist in der Spielakte gespeichert. Formular A38 ist ebenfalls entgegengenommen.");updateHud()};
 function bureaucrat(b,m){
  if(b.id==="buergeramt"&&state.mission===0)window.BuergeramtLevel.requestFullscreen();
  if(b.id==="buergeramt"&&state.mission===0&&window.Germany3D?.officeAssetsReady===false){window.Germany3D.prepareOfficeAssets();pendingOfficeEntry=()=>bureaucrat(b,m);state.modal=true;toast("AMT WIRD VORBEREITET …");return}
- if(b.id==="buergeramt"&&state.mission===0){stopSpeech(false,true);state.modal=true;clearInput();const enter=()=>window.BuergeramtLevel.open({voiceOn:()=>state.voiceOn,subtitlesOn:()=>state.subtitlesOn,cityAudioBusy:stimulusBusy,cityAudioActive:audioTextActive,music:setAmtMusicMuted,onClose:()=>{state.modal=false},onCancel:()=>{state.modal=false;toast("TERMIN ANNULLIERT · NEUE NUMMER ZIEHEN")},onRegistration:awardAnmeldung,onForm:()=>showForm(m.form)});if(window.Germany3D?.enterBuergeramt)window.Germany3D.enterBuergeramt(enter);else enter();return}
+ if(b.id==="buergeramt"&&state.mission===0){stopSpeech(false,true);state.modal=true;clearInput();const enter=()=>window.BuergeramtLevel.open({voiceOn:()=>state.voiceOn,subtitlesOn:()=>state.subtitlesOn,cityAudioBusy:stimulusBusy,cityAudioActive:audioTextActive,music:setAmtMusicMuted,onClose:()=>{state.modal=false},onCancel:cancelAmtAppointment,onRegistration:awardAnmeldung,onForm:()=>showForm(m.form)});if(window.Germany3D?.enterBuergeramt)window.Germany3D.enterBuergeramt(enter);else enter();return}
  const lines=state.region==="berlin"?["Guten Tag, hello. Bitte waiten Sie, bis Ihr Warten systemseitig confirmed wurde.","Für "+m.title+" brauchen Sie Formular "+forms[m.form].code+". Very important.","Bitte every field ausfüllen. Auch die Felder, die später erst relevant werden."]:[ "Guten Tag. Bitte warten Sie, bis Ihr Warten verwaltungsintern erfasst wurde.","Für "+m.title+" benötigen Sie Formular "+forms[m.form].code+".","Füllen Sie jedes Feld aus. Auch die Felder, deren Zweck sich erst nach der Abgabe ergibt."];
  openDialogue(b.name,lines,"§",()=>showForm(m.form));
 }
@@ -2595,7 +2624,7 @@ appSurface.addEventListener("dragstart",event=>{if(!editableTarget(event.target)
 
 function loop(now){if(document.hidden){last=now;nextFrameAt=now;requestAnimationFrame(loop);return}const interval=state.started?(window.BuergeramtLevel?.active?0:1000/60):250;if(interval!==frameInterval){frameInterval=interval;last=now;nextFrameAt=now+(state.started?0:interval)}if(now<nextFrameAt-.5){requestAnimationFrame(loop);return}if(interval)nextFrameAt+=Math.max(1,Math.floor((now+.5-nextFrameAt)/interval)+1)*interval;const dt=state.started?Math.min(.12,Math.max(0,(now-last)/1000)):0;last=now;if(dt){const steps=Math.ceil(dt/.025);for(let i=0;i<steps;i++)update(dt/steps)}window.Germany3DBridge?.refreshStartup?.();window.BuergeramtLevel?.update(dt);updatePoliceChaseAudio();if(!window.BuergeramtLevel?.active&&!window.Germany3D?.amtEntry?.active)draw();window.Germany3D?.sync();requestAnimationFrame(loop)}updateHud();
 if(new URLSearchParams(location.search).get("geheim")==="buergeramt"){
- const directConfig={voiceOn:()=>state.voiceOn,subtitlesOn:()=>state.subtitlesOn,cityAudioBusy:stimulusBusy,cityAudioActive:audioTextActive,music:setAmtMusicMuted,onClose:()=>showAmtDirectResult("VORGANG UNTERBROCHEN","Sie haben das Amt verlassen. Eine neue Nummer beginnt einen neuen Versuch."),onCancel:()=>showAmtDirectResult("TERMIN ANNULLIERT","Ihre Nummer ist ungültig. Ziehen Sie für einen neuen Versuch eine neue Nummer."),onRegistration:awardAnmeldung,onForm:()=>showForm("a38")};
+ const directConfig={voiceOn:()=>state.voiceOn,subtitlesOn:()=>state.subtitlesOn,cityAudioBusy:stimulusBusy,cityAudioActive:audioTextActive,music:setAmtMusicMuted,onClose:()=>showAmtDirectResult("VORGANG UNTERBROCHEN","Sie haben das Amt verlassen. Eine neue Nummer beginnt einen neuen Versuch."),onCancel:cancelAmtAppointment,onRegistration:awardAnmeldung,onForm:()=>showForm("a38")};
  function restartAmt(){state.started=true;state.modal=true;state.mission=0;state.forms=0;document.getElementById("intro").classList.add("hidden");document.getElementById("form-modal").hidden=true;document.getElementById("amt-direct-result").hidden=true;document.getElementById("amt-direct-reset").hidden=false;document.body.classList.add("amt-direct-mode");if(window.Germany3D?.officeAssetsReady)window.BuergeramtLevel.replay(directConfig);else{pendingOfficeEntry=()=>window.BuergeramtLevel.replay(directConfig);toast("AMT WIRD VORBEREITET …")}updateHud()}
  for(const link of document.querySelectorAll("#amt-direct-reset,#amt-compact-reset,#amt-direct-result a"))link.addEventListener("click",e=>{e.preventDefault();restartAmt()});
  restartAmt();

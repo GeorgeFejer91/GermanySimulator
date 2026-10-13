@@ -22,7 +22,7 @@ function showRendererFailure(error){
 }
 (async()=>{
   const app=document.getElementById("app");if(!app)return;
-  const amtDirectRoute=new URLSearchParams(location.search).get("geheim")==="buergeramt";
+  let amtDirectRoute=new URLSearchParams(location.search).get("geheim")==="buergeramt";
   const canvas=document.createElement("canvas");canvas.id="world3d";Object.assign(canvas.style,{position:"fixed",inset:"0",width:"100%",height:"100%",zIndex:"3",pointerEvents:"none",background:"#77756f"});app.prepend(canvas);
   let T;try{T=await import(THREE_URL)}catch(e){showRendererFailure(e);return}
   let GLTFLoader=null;if(!amtDirectRoute)try{({GLTFLoader}=await import(GLTF_LOADER_URL))}catch(e){console.warn("GLB models unavailable; procedural 3D stand-ins remain active",e)}
@@ -2042,8 +2042,14 @@ function showRendererFailure(error){
   addEventListener("pageshow",()=>{const done=amtEntryResume;amtEntryResume=null;bridge.clearInput?.();done?.()});
   captureStartupAssets();
   startupModelsCaptured=true;
+  function leaveAmtDirectMode(){
+    if(!amtDirectRoute)return;
+    amtDirectRoute=false;
+    // Direct office entry skipped city GLBs; its existing procedural buildings make the exit playable immediately.
+    bridge.buildings.forEach(building);
+  }
   window.Germany3D={ready:true,isWorldPointVisible,isVehicleVisible,pickAmtInteraction,get amtPotatoMirror(){return amtPotatoMirror.inspect()},clearAmtFloor(){clearAmtWalkDetails();amtFloorEffect.update(null);amtPortraitMelt.update(null);amtLampWear.update(null);amtPotatoMirror.update(null);if(amtDirectRoute&&!window.BuergeramtLevel?.active)renderer.clear()},get amtLamps(){return amtLampWear.inspect()},get amtPortraitMelt(){return amtPortraitMelt.inspect()},get amtFloor(){return {...amtFloorEffect.inspect(),opacity:floor.opacity,transparent:floor.transparent,depthWrite:floor.depthWrite}},prepareNearbyAssets,prepareOfficeAssets:loadAmtImages,clearAmtOmenSplat,enterBuergeramt,clearAmtGaussianAnimations(){amtMouthSplat?.dispose();amtMouthSplat=null;amtGaussian.clear();restoreAmtCharacterLayers()},
-  get amtEntry(){return {active:!!amtEntry,failure:entryFailure,...amtEntry?.inspect()}},
+  leaveAmtDirectMode,get amtEntry(){return {active:!!amtEntry,failure:entryFailure,...amtEntry?.inspect()}},
   get nearbyAssetsReady(){updateAssetView();return cityModelJobs.every(job=>job.state==="settled"||cityModelDistance(job)>30&&!isCityAssetVisible(job))},
   get officeAssetsReady(){return amtImagesRequested&&officeAssetPending===0},get officeAssetStatus(){return {total:officeAssetTotal,pending:officeAssetPending,failed:officeAssetFailures}},
   get startupReady(){return startupModelsReady()},get startupStatus(){return {total:startupModelJobs.size,pending:[...startupModelJobs].filter(job=>job.state!=="settled").length,active:cityModelActive,failed:[...startupModelJobs].filter(job=>job.failed).length}},

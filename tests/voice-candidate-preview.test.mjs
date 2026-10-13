@@ -104,7 +104,7 @@ const officeContext=vm.createContext({window:{}});
 vm.runInContext(officeStory,officeContext);
 const office=officeContext.window.BuergeramtStory;
 const clerkLines=[...office.clerk.flatMap(counter=>[counter.line,...counter.choices.map(choice=>choice.reply)]),...office.outburst.lines];
-assert.equal(clerkLines.length,21);
+assert.equal(clerkLines.length,20); // The current final dismissal uses its fixed production recording.
 for(const line of clerkLines)assert.ok(keys.has("amt-brunhilde-knick\0"+line),`missing clerk audition ${line}`);
 const policeLines=Object.values(inventory.pools.policeBarks).flat();
 assert.equal(new Set(policeLines).size,12);
