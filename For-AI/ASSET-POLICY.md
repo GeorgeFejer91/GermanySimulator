@@ -828,10 +828,17 @@ profiles are retained under output/smoothness in the performance worktree.
 The JWD garden suburb uses six procedural buildings in the canonical building
 list and four small procedural character costumes (three residents plus one
 visiting burglar). Villas have bays and dormers; the landhouse has shutters and
-timber details. It requests no municipal GLBs, placard images or character
-atlases. Six small canvas nameplates and one street sign use 1,048,576 decoded
+timber details. Fink has two full storeys and Kranz three, with 2.4-unit floor
+spacing, aligned windows, shutter boxes, tile courses and rainwater pipes. The
+player keeps one storey. Upper floors use existing per-material box instances;
+roof height is bounded separately from wall height. Ground solids and 1.97-unit
+doors are unchanged. Heiko has procedural blond hair, stubble and a ribbed brown
+zip-neck sweater; his instance buffers retire with his owned actor geometry.
+The private reference photo is not a runtime asset. The neighborhood requests
+no municipal GLBs, placard images or character atlases. Six small canvas
+nameplates and one street sign use 1,048,576 decoded
 RGBA bytes, no mipmaps. The house/four-character/garden/street-sign diagnostic
-has 298 meshes, 11,922 triangles, 251,412 geometry bytes and 22,720 instance bytes.
+has 294 meshes, 13,242 triangles, 245,724 geometry bytes and 30,528 instance bytes.
 The garden extension adds three fitted car silhouettes, clipped/ragged hedges,
 upright/fallen gnomes and instanced grass details with no asset requests or new
 textures. Shared authored rectangles bound every solid, including car wheels
@@ -859,6 +866,19 @@ title-cadence, deferred-resource and buffer guards. Desktop median draw calls
 rose 1,104→1,235; frame variation does not establish an optimization. The
 standard starting-scene comparison also passed its guards. Physical Android
 and perceptual audio listening remain untested.
+
+The subsequent storey/Heiko update compared three cold runs per viewport with
+`4792b23`, at the same JWD position and Chrome 155 / Iris Xe settings. Desktop
+active p95 medians were 39.7→35.5 ms (ranges 31.8–40.8 / 33.3–35.9); portrait
+emulation medians were 49.3→29.9 ms (37.5–55.6 / 28.1–162.8). The single slow
+candidate phone sample was retained; a matched seed-42 repeat measured
+63.0→25.5 ms. Scheduling variation prevents a causal speedup claim. Median
+input p95 was 38.1→37.4 ms desktop and 77.9→32.8 ms emulation. All runs accepted
+nine inputs with zero page errors and passed the startup/title/buffer guards;
+candidate startup peaked at 17,982,616 local uncompressed bytes. No new texture
+or asset request was added. Independent geometry/camera reviews and actual A38
+form-submission/neighbor-introduction playtests passed; physical Android remains
+unavailable. Evidence is under `output/jwd-floors-heiko/`.
 
 The Bürgeramt entrance radiance is original runtime geometry: one retained door
 plane, one 5 × 5 ray/halo shader plane, and one short-range shadow-free point

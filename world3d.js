@@ -724,12 +724,12 @@ function showRendererFailure(error){
     glow.light.color.copy(glow.raysMaterial.uniforms.uColor.value);glow.light.intensity=(.3+2.7*(1-dark))*pulse;
   }
   function residentialBuilding(b){
-    const g=new T.Group(),fallback=new T.Group(),w=b.w*S,d=b.h*S,home=b.id==="jwd-home",villa=b.variant==="villa",landhaus=b.variant==="landhaus",wallHeight=villa?Math.min(4.4,Math.max(3.35,b.hgt*H*.67)):landhaus?2.75:2.65,roofHeight=Math.max(.9,b.hgt*H-wallHeight);
+    const g=new T.Group(),fallback=new T.Group(),w=b.w*S,d=b.h*S,home=b.id==="jwd-home",villa=b.variant==="villa",landhaus=b.variant==="landhaus",storeys=Math.max(1,Math.min(3,b.storeys||(villa?2:1))),wallHeight=b.storeys?2.65+(storeys-1)*2.4:villa?Math.min(4.4,Math.max(3.35,b.hgt*H*.67)):landhaus?2.75:2.65,roofHeight=b.storeys?Math.min(w*.44,Math.max(.9,b.hgt*H-wallHeight)):Math.max(.9,b.hgt*H-wallHeight);
     const stucco={"jwd-fink":0xd9c8a0,"jwd-kranz":0xb2c4ba,"jwd-villa-linde":0xd6cdb7,"jwd-villa-wald":0xbdc9bb,"jwd-landhaus":0xcbad91};
     const plaster=mat(home?0xaaa18b:b.wallColor??stucco[b.id]??0xd2c5ae),roof=mat(home?0x514d42:b.roofColor??(b.id==="jwd-villa-linde"?0x62646a:landhaus?0x705444:0x884f3c)),trim=mat(home?0x655e4e:0xe7dfc9),hedge=mat(0x455b38),wood=mat(landhaus?0x526350:0x75604b),glass=mat(0x526967,.6),linen=mat(0xc7baa2);
     const owned=[plaster,roof,trim,hedge,wood,glass,linen],unit=new T.BoxGeometry(1,1,1);
     const part=(name,x,y,z,sx,sy,sz,material)=>{const mesh=new T.Mesh(unit,material);mesh.name=name;mesh.position.set(x,y,z);mesh.scale.set(sx,sy,sz);fallback.add(mesh);return mesh};
-    g.name=b.name||b.id;g.add(fallback);
+    g.name=b.name||b.id;g.userData.jwdArchitecture={storeys,wallHeight,roofHeight};g.add(fallback);
     // Grounded structure/props stay within the simulation's solid rectangle.
     // The covered porch is overhead only; its open lane has no invisible posts.
     part("Foundation",0,.07,0,w,.14,d,trim);
@@ -745,9 +745,22 @@ function showRendererFailure(error){
       part("Window glass",x,y,z+.055,.75,.8,.018,glass);
       part("Window mullion",x,y,z+.075,.045,.8,.025,trim);
       if(home){part("Shabby closed blind",x,y+.15,z+.09,.78,.52,.03,wood);for(let i=0;i<3;i++)part("Blind slat",x,y-.05+i*.15,z+.11,.78,.025,.015,trim)}
-      else{part("Curtains",x-.24,y,z+.08,.17,.79,.03,linen);part("Curtains",x+.24,y,z+.08,.17,.79,.03,linen)}
+      else{part("Curtains",x-.24,y,z+.08,.17,.79,.03,linen);part("Curtains",x+.24,y,z+.08,.17,.79,.03,linen);part("Roller shutter box",x,y+.57,z+.07,.99,.15,.14,trim);part("Window sill",x,y-.53,z+.095,1.01,.09,.19,trim)}
     }
     for(const x of [-w*.29,w*.29])windowAt(x,1.68,front);
+    if(b.storeys&&storeys>1){
+      for(let floor=1;floor<storeys;floor++){
+        for(const x of [-w*.29,w*.29])windowAt(x,1.68+floor*2.4,front);
+        part("Floor cornice",0,2.65+(floor-1)*2.4,front+.07,w,.12,.14,trim);
+      }
+      for(const side of [-1,1]){
+        part("Eaves gutter",side*(w/2-.05),wallHeight-.04,0,.09,.10,d,wood);
+        part("Downpipe",side*(w/2-.09),wallHeight/2,front+.13,.065,wallHeight,.065,wood);
+        for(let row=1;row<=6;row++)part("Roof tile course",side*w/2*row/7,wallHeight+roofHeight*(1-row/7)+.022,0,.055,.035,d-.04,roof).rotation.z=-side*Math.atan2(roofHeight,w/2);
+      }
+      part("Ridge tiles",0,wallHeight+roofHeight+.035,0,.15,.10,d,roof);
+      part("Eaves cornice",0,wallHeight-.06,front+.07,w,.14,.14,trim);
+    }
     if(villa){
       part("Stucco floor cornice",0,2.64,front+.075,w,.13,.15,trim);
       for(const x of [-w*.29,w*.29])windowAt(x,wallHeight-.68,front);
@@ -1179,7 +1192,7 @@ function showRendererFailure(error){
     const target=travel>.01?Math.sin(q.userData.walkPhase)*.38:0,s=q.userData.walkSwing=(q.userData.walkSwing||0)+(target-(q.userData.walkSwing||0))*(travel>.01?1:.28);q.userData.ll.rotation.x=s;q.userData.rl.rotation.x=-s;q.userData.la.rotation.x=-s*.7;q.userData.ra.rotation.x=s*.7
   }
   function jwdCharacter(n){
-    const q=character("npc"),role=n.jwdRole,coat=mat(role==="swabian"?0x6b5976:role==="parent"?0x78664c:role==="watcher"?0x465363:0x363a40),cream=mat(0xd7ccaf),dark=mat(0x35312f),accent=mat(role==="swabian"?0x9b6971:role==="parent"?0x814334:0x9a7752);
+    const q=character("npc"),role=n.jwdRole,coat=mat(role==="swabian"?0x6b5976:role==="parent"?0x4b3528:role==="watcher"?0x465363:0x363a40),cream=mat(0xd7ccaf),dark=mat(role==="parent"?0x39281f:0x35312f),accent=mat(role==="swabian"?0x9b6971:role==="parent"?0xb09a70:0x9a7752);
     q.name=n.id;q.userData.jwdRole=role;q.userData.ownedMaterials=new Set([coat,cream,dark,accent]);
     q.traverse(node=>{if(node.material===M.npc)node.material=coat});
     const piece=(name,w,h,d,material,x,y,z)=>{const mesh=box(w,h,d,material,x,y,z,q);mesh.name=name;return mesh};
@@ -1192,18 +1205,16 @@ function showRendererFailure(error){
       piece("Broom handle",.032,1.43,.032,accent,.35,.79,.14).rotation.z=-.08;
       piece("Broom bristles",.27,.19,.12,cream,.4,.16,.14);
     }else if(role==="parent"){
-      const hair=new T.Mesh(new T.SphereGeometry(.215,10,6,0,Math.PI*2,0,Math.PI*.48),dark);hair.position.set(0,1.4,-.016);q.add(hair);
-      piece("Professor waistcoat",.23,.51,.035,dark,0,.71,.17);
-      piece("Stiff shirt collar",.2,.15,.045,cream,0,1.01,.18);
+      const hair=new T.Mesh(new T.SphereGeometry(.232,10,7,0,Math.PI*2,0,Math.PI*.57),accent);hair.name="Shaggy sandy blond hair";hair.position.set(0,1.395,-.025);q.add(hair);
       for(const side of [-1,1]){
-        piece("Bow tie",.105,.075,.035,accent,side*.061,.99,.214).rotation.z=side*.18;
-        piece("Tweed lapel",.095,.44,.04,coat,side*.14,.84,.194).rotation.z=side*.18;
-        const lens=new T.Mesh(new T.TorusGeometry(.064,.009,5,10),dark);lens.position.set(side*.08,1.36,.203);lens.name="Professor spectacles";q.add(lens);
+        const lock=new T.Mesh(new T.ConeGeometry(.083,.32,5),accent);lock.name="Shaggy side lock";lock.position.set(side*.19,1.32,-.016);lock.rotation.z=Math.PI+side*.14;q.add(lock);
       }
-      piece("Spectacle bridge",.04,.016,.022,dark,0,1.36,.203);
-      for(const y of [.59,.73,.86])piece("Waistcoat button",.023,.023,.016,cream,0,y,.199);
-      piece("Academic monograph",.22,.31,.12,accent,-.32,.53,.05);
-      piece("Book pages",.17,.265,.127,cream,-.32,.53,.054);
+      for(let i=0;i<3;i++)piece("Side-swept fringe",.084,.21,.065,accent,-.13+i*.095,1.47+i*.016,.168).rotation.z=-.36;
+      const stubble=mat(0xb18d69),beard=new T.Mesh(new T.SphereGeometry(.204,10,5,0,Math.PI*2,Math.PI*.53,Math.PI*.4),stubble);q.userData.ownedMaterials.add(stubble);beard.name="Light reddish blond stubble";beard.position.y=1.3;q.add(beard);
+      piece("Mouth",.075,.018,.024,dark,0,1.226,.199);
+      piece("High zip-neck sweater collar",.3,.17,.3,coat,0,1.08,0);
+      const ribs=jwdBoxParts(q);for(let i=-5;i<=5;i++)ribs("Sweater rib",dark,i*.034,.76,.156,.009,.60,.013);ribs("Sweater zipper",cream,0,.84,.18,.012,.56,.018);ribs("Zipper pull",cream,.014,1.083,.193,.028,.052,.023);ribs.finish();
+      q.userData.ll.material=q.userData.rl.material=dark;
     }else if(role==="watcher"){
       const hair=new T.Mesh(new T.SphereGeometry(.219,10,6,0,Math.PI*2,0,Math.PI*.56),accent);hair.position.set(0,1.4,-.024);q.add(hair);
       const bun=new T.Mesh(new T.SphereGeometry(.09,8,6),accent);bun.position.set(0,1.39,-.23);q.add(bun);
@@ -1298,7 +1309,7 @@ function showRendererFailure(error){
     if(q.userData.streetCharacter){streetCharacters?.remove(q);return}
     scene.remove(q);
     // Atlas materials/textures are shared. Only retire per-actor geometry.
-    const geometries=new Set();q.traverse(node=>{if(node.geometry)geometries.add(node.geometry)});
+    const geometries=new Set();q.traverse(node=>{if(node.geometry)geometries.add(node.geometry);if(node.isInstancedMesh)node.dispose()});
     for(const geometry of geometries)geometry.dispose();
     for(const material of q.userData.ownedMaterials||[])material.dispose();
   }
@@ -1975,7 +1986,7 @@ function showRendererFailure(error){
       });
       return {min:bounds.min.toArray(),max:bounds.max.toArray(),width:size.x,height:size.y,depth:size.z,ground:bounds.min.y};
     }
-    const houses=buildingSlots.filter(slot=>slot.building.residential).map(slot=>({id:slot.building.id,variant:slot.building.variant||"house",bounds:inspect(slot.group),solid:[slot.building.x,slot.building.y,slot.building.w,slot.building.h],visible:slot.group.visible,opacity:slot.opacity,doorHeight:1.97,sign:slot.label.userData.jwdText}));
+    const houses=buildingSlots.filter(slot=>slot.building.residential).map(slot=>({id:slot.building.id,variant:slot.building.variant||"house",...slot.group.userData.jwdArchitecture,bounds:inspect(slot.group),solid:[slot.building.x,slot.building.y,slot.building.w,slot.building.h],visible:slot.group.visible,opacity:slot.opacity,doorHeight:1.97,sign:slot.label.userData.jwdText}));
     const actors=[...npcMeshes].filter(([state])=>state.jwdRole).map(([state,root])=>({id:state.id,role:state.jwdRole,position:[state.x,state.y],worldPosition:root.position.toArray(),bounds:inspect(root),facing:root.rotation.y,walkPhase:root.userData.walkPhase||0,swing:root.userData.walkSwing||0,activity:state.jwdActivity||null,working:!!state.jwdWorking,activityPhase:root.userData.jwdWorkPhase??0,workVisible:!!root.userData.jwdWork?.work.visible}));
     const scenery=jwdScenery.map(root=>({...root.userData.jwdSign,...root.userData.jwdProp,bounds:inspect(root)}));
     let geometryBytes=0;for(const geometry of geometries){for(const attribute of Object.values(geometry.attributes))geometryBytes+=attribute.array.byteLength;geometryBytes+=geometry.index?.array.byteLength||0}

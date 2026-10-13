@@ -35,8 +35,9 @@ test('registration is the allocation cause; a stored badge or premature visit gr
  assert.equal(h.currentMission().target,'buergeramt','A38 handoff still comes first');h.state.mission=1;assert.equal(h.currentMission().target,'jwd-home');
 });
 
-test('real registration completion delivers allocation once, while withholding phone silence prevents it',()=>{
+test('registration, certificate handoff and valid A38 submission lead straight to home and neighbors',()=>{
  const city=harness(),office=officeHarness();office.config.onRegistration=city.awardAnmeldung;
+ let formOpened=false;office.config.onForm=()=>{formOpened=true};
  office.counter();assert.equal(city.jwdState.allocated,false);
  const settle=()=>{for(let i=0;i<600&&!office.node('amt-actions').children.some(b=>!b.disabled);i++)office.tick(100)};
  settle();for(let i=0;office.level.registration.node!=='final'&&i<60;i++){office.action(0);settle()}
@@ -44,6 +45,15 @@ test('real registration completion delivers allocation once, while withholding p
  assert.equal(office.level.stage,'phone-warning');assert.equal(city.jwdState.allocated,false,'final approval requires actual phone-away evidence');
  office.links[0].message({type:'phone-hidden'});settle();
  assert.equal(office.level.stage,'success');assert.equal(city.jwdState.allocated,true);assert.equal(city.jwdState.visited,false);
+ office.action(0);office.tick(10000);assert.ok(formOpened,'the certificate handoff opens A38');
+ city.forms={a38:{code:'A38'}};city.state.forms=0;city.setTimeout=fn=>fn();city.document.body={classList:{contains:()=>false}};
+ vm.runInContext(source.split('\n').find(line=>line.startsWith('document.getElementById("bureaucracy-form").onsubmit=')),city);
+ const submit=valid=>city.document.getElementById('bureaucracy-form').onsubmit({preventDefault(){},currentTarget:{reportValidity:()=>valid,dataset:{type:'a38'}}});
+ submit(false);assert.equal(city.currentMission().target,'buergeramt');
+ submit(true);assert.equal(city.state.forms,1);assert.equal(city.currentMission().target,'jwd-home');assert.equal(city.getMissionWaypoint().id,'jwd-home');
+ city.visitJwdHome();city.finish();assert.equal(city.currentMission().target,'jwd-neighbors');
+ for(const neighbor of city.actors){city.talkJwdNeighbor(neighbor);city.finish()}
+ assert.equal(city.currentMission().target,'hausverwaltung','the old chain resumes only after the introductions');
 });
 
 test('home visit and all three completed introductions gate the detour without shifting eight procedures',()=>{

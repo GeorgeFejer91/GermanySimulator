@@ -55,6 +55,13 @@ not a reproduction of actual addresses. Its villa/landhouse and leafy-garden
 references come from the [district's Schlachtensee account](https://www.berlin.de/ba-steglitz-zehlendorf/bezirk-erleben/ortsteile/schlachtensee/schlachtensee-1344335.php)
 and [Berlin's neighborhood portrait](https://www.berlin.de/special/stadtteile/zehlendorf/8265200-5170854-schlachtensee.html).
 Every house has a body-clear paved approach; reaching home needs no grass offence.
+The player's home has one storey, Fink's house two and the Kranz house three.
+Their aligned upper windows, roller shutters, stucco cornices, steep roofs and
+rainwater pipes make the wealth contrast visible without moving the entrances
+or narrowing the garden paths. The architecture remains a fictional Berlin
+villa suburb; the [district's history of Schlachtensee's landhouses](https://www.berlin.de/ba-steglitz-zehlendorf/aktuelles/pressemitteilungen/2020/pressemitteilung.1024262.php)
+and [Reddit residents' suburban descriptions](https://www.reddit.com/r/berlin/comments/yzbc0y/)
+are references, not a claim that every Berlin suburb looks alike.
 Frau Fink is a Swabian
 Kehrwoche enthusiast. Professor Dr. Dr. **Heiko Kranz** and his diplomat wife are
 upper-class, literal, socially awkward and obsessively concerned with status and
@@ -62,6 +69,10 @@ their child's achievements. Eight-year-old Theodor speaks six languages; his
 parents worry that his Latin and genius milestones are falling behind. Their
 dialogue also covers parking, hedges and closed blinds. They speak Berlin
 Denglisch, with matching English subtitles through the existing speech broker.
+Heiko's procedural costume follows the user's visual reference: shaggy sandy
+blond hair, light stubble and a brown ribbed zip-neck sweater. His previous
+spectacles, bow tie and waistcoat are removed. The private reference photo is
+not shipped; the character remains fictional.
 
 The southern houses face three semi-connected gardens. Fink and Kranz have
 clipped hedges, upright gnomes, striped lawns and polished VW-style SUV,

@@ -60,9 +60,9 @@ const buildings=[
 {id:"jwd-villa-linde",residential:true,variant:"villa",name:"VILLA LINDENHOF",x:110,y:3380,w:200,h:190,hgt:170,doorX:210,doorY:3600,sign:"PRIVATWEG · BITTE GRÜSSEN"},
 {id:"jwd-villa-wald",residential:true,variant:"villa",name:"HAUS WALDFRIEDEN",x:430,y:3380,w:240,h:190,hgt:150,doorX:550,doorY:3600,sign:"SEIT 1928 IN GUTER NACHBARSCHAFT"},
 {id:"jwd-landhaus",residential:true,variant:"landhaus",name:"LANDHAUS NR. 34",x:790,y:3400,w:170,h:170,hgt:115,doorX:875,doorY:3600,sign:"KEINE WERBUNG · AUCH KEINE IDEEN"},
-{id:"jwd-fink",residential:true,name:"FAMILIE FINK",x:100,y:3730,w:240,h:140,hgt:110,doorX:220,doorY:3900,sign:"KEHRWOCHE IST IMMER"},
-{id:"jwd-home",residential:true,name:"DEIN ZUHAUSE · JWD",x:410,y:3730,w:240,h:140,hgt:95,doorX:530,doorY:3900,sign:"JANZ WEIT DRAUSSEN · NR. 38"},
-{id:"jwd-kranz",residential:true,name:"FAMILIE KRANZ",x:720,y:3730,w:240,h:140,hgt:125,doorX:840,doorY:3900,sign:"EIGENHEIM · FREMDE SORGEN"},
+{id:"jwd-fink",residential:true,storeys:2,name:"FAMILIE FINK",x:100,y:3730,w:240,h:140,hgt:195,doorX:220,doorY:3900,sign:"KEHRWOCHE IST IMMER"},
+{id:"jwd-home",residential:true,storeys:1,name:"DEIN ZUHAUSE · JWD",x:410,y:3730,w:240,h:140,hgt:95,doorX:530,doorY:3900,sign:"JANZ WEIT DRAUSSEN · NR. 38"},
+{id:"jwd-kranz",residential:true,storeys:3,name:"FAMILIE KRANZ",x:720,y:3730,w:240,h:140,hgt:265,doorX:840,doorY:3900,sign:"EIGENHEIM · FREMDE SORGEN"},
 {id:"buergeramt",name:"BÜRGERAMT",x:150,y:220,w:350,h:250,hgt:115,doorX:325,doorY:500,sign:"TERMIN NUR MIT TERMIN"},
 {id:"hausverwaltung",name:"HAUSVERWALTUNG",x:590,y:210,w:330,h:255,hgt:95,doorX:755,doorY:495,sign:"WOHNUNGSGEBERBESTÄTIGUNG"},
 {id:"stadtbild",name:"AMT FÜR STADTBILD",x:1390,y:220,w:360,h:245,hgt:105,doorX:1570,doorY:495,sign:"OPTISCHE ORDNUNG · DIN 0815"},
@@ -137,5 +137,5 @@ function clearInput(){for(const code in keys)keys[code]=false}addEventListener("
 <script type="importmap">{"imports":{"three":"./assets/vendor/three/0.186.0/build/three.module.min.js","three/addons/":"./assets/vendor/three/0.186.0/examples/jsm/"}}</script>
 <script src="./buergeramt-lips.js?v=20261012-one-knick"></script>
 <script src="./buergeramt-story.js?v=20261013-schalter-calls"></script>
-<script type="module" src="./world3d.js?v=20261013-jwd-gardens"></script>
+<script type="module" src="./world3d.js?v=20261013-jwd-houses"></script>
 </body></html>
