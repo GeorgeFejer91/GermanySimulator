@@ -51,7 +51,7 @@ test('offline and channel loss stop output after counter without premature expir
   if(loss==='offline')h.window.dispatchEvent(new Event('offline'));else link.emit('status','Telefon getrennt');
   assert.equal(h.node('phone-call').hidden,true);
   assert.equal(h.node('phone-expired').hidden,true);
-  if(loss==='offline')assert.equal(sent(link,'phone-hidden').length,1);
+  if(loss==='offline'){assert.equal(sent(link,'phone-hidden').length,0,'network loss is not a visibility event');link.message({type:'sync-ping',id:13});assert.equal(sent(link,'phone-hidden').length,0);}
   h.tick(15000);assert.equal(sent(link,'call-missed').length,0);
  }
 });
@@ -83,7 +83,7 @@ test('a visible heartbeat repeats recovery metadata after a failed visible notic
 
 test('offline before the counter expires the ticket',()=>{
  const {h,link}=ticketed();h.window.dispatchEvent(new Event('offline'));
- assert.equal(sent(link,'phone-hidden').length,1);assert.equal(link.closed,true);
+ assert.equal(sent(link,'phone-hidden').length,0);assert.equal(link.closed,true);
  assert.equal(h.node('phone-expired').hidden,false);
 });
 

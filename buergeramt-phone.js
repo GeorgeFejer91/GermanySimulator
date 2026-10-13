@@ -124,10 +124,10 @@ function endCall(kind){
 }
 hangup.onclick=()=>{if(resolved!=="answer"||!currentCall||!slotActive||finished||closed||call.hidden)return;if(!link.send("hangup",{id:currentCall,round:currentRound})){if(!atCounter)endSlot("Ihr Platz ist verfallen. Bitte ziehen Sie eine neue Nummer.");else stopCall();link.close();return}stopCall();currentCall="";resolved="hangup"};
 link.addEventListener("status",e=>{if(closed)return;if(/getrennt|unterbrochen/i.test(e.detail)){connected=scanReady=false;submit.disabled=!!submittedName;if(slotActive){if(atCounter){phoneSilent=true;stopCall();currentCall=""}else endSlot("Ihr Platz ist verfallen. Bitte ziehen Sie eine neue Nummer.")}}});
-link.addEventListener("connected",()=>{if(closed||finished)return;connected=true;scanReady=false;submit.disabled=!!submittedName;if(atCounter){if(document.hidden||offlineState)link.send("phone-hidden");else{phoneSilent=false;link.send("phone-visible")}}requestTicket();clearInterval(scanTimer);scanTimer=setInterval(requestTicket,1500)});
+link.addEventListener("connected",()=>{if(closed||finished)return;connected=true;scanReady=false;submit.disabled=!!submittedName;if(atCounter){if(document.hidden)link.send("phone-hidden");else if(!offlineState){phoneSilent=false;link.send("phone-visible")}}requestTicket();clearInterval(scanTimer);scanTimer=setInterval(requestTicket,1500)});
 link.addEventListener("message",e=>{
  if(closed)return;const m=e.detail;
-  if(m.type==="sync-ping"){if(atCounter){if(document.hidden||offlineState){link.send("phone-hidden");return}phoneSilent=false;link.send("phone-visible")}const receivedAtMs=performance.now();link.send("sync-pong",{id:m.id,receivedAtMs,sentAtMs:performance.now()});return}
+  if(m.type==="sync-ping"){if(atCounter){if(document.hidden){link.send("phone-hidden");return}if(offlineState)return;phoneSilent=false;link.send("phone-visible")}const receivedAtMs=performance.now();link.send("sync-pong",{id:m.id,receivedAtMs,sentAtMs:performance.now()});return}
  if(m.type==="done"){if(!finished)endSlot("Dieser Termin wurde am Schalter bearbeitet.",true);else stopCall();return}
  if(finished)return;
  if(m.type==="office-tempo")officeRate(m.rate);
@@ -192,7 +192,7 @@ document.addEventListener("visibilitychange",()=>{
   if(document.hidden&&slotActive){link.send("phone-hidden");if(atCounter){phoneSilent=true;stopCall();currentCall="";try{wakeLock?.release()?.catch(()=>{})}catch{}wakeLock=null}else{endSlot("Seite verlassen. Ihr Platz ist verfallen.");link.close()}}
   else if(!document.hidden&&!finished&&!closed&&submittedName&&!offlineState){if(atCounter){phoneSilent=false;link.send("phone-visible")}keepAwake()}
 });
-window.addEventListener("offline",()=>{offlineState=true;if(!slotActive||closed||finished)return;link.send("phone-hidden");phoneSilent=true;stopCall();currentCall="";if(!atCounter){endSlot("Ihr Platz ist verfallen. Bitte ziehen Sie eine neue Nummer.");link.close()}});
+window.addEventListener("offline",()=>{offlineState=true;if(!slotActive||closed||finished)return;if(document.hidden)link.send("phone-hidden");phoneSilent=true;stopCall();currentCall="";if(!atCounter){endSlot("Ihr Platz ist verfallen. Bitte ziehen Sie eine neue Nummer.");link.close()}});
 window.addEventListener("online",()=>{offlineState=false;if(atCounter&&slotActive&&!closed&&!finished&&!document.hidden){phoneSilent=false;link.send("phone-visible");keepAwake()}});
 window.addEventListener("pagehide",()=>{
   if(slotActive){link.send("phone-hidden");if(!atCounter)showExpired()}closed=true;slotActive=false;stopCall();

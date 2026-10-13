@@ -1,4 +1,6 @@
 import assert from 'node:assert/strict';
+import test from 'node:test';
+import {harness} from './amt-harness.mjs';
 import {readFileSync} from 'node:fs';
 import {createHash} from 'node:crypto';
 import vm from 'node:vm';
@@ -22,3 +24,21 @@ for(const search of ['', '?voicePreview=1']){
  assert.equal(library.recordedClip('kriminalpolizei',story.call.line+' other words'),null,'mismatched speech must use the browser fallback');
 }
 console.log('PASS: default Kriminalpolizei recordings, exact speaker/text ownership, asset hashes and encoded speech targets');
+
+
+test('the accepted ticket name reaches one complete German Kripo utterance and its exact caption',()=>{
+ const host=harness('host',{voice:true,phoneCaptions:true});host.counter();const hostLink=host.links[0],message=hostLink.sent.find(m=>m.type==='call');
+ assert.match(message.line,/^Spricht hier Erika Mustermann\? Hier ist die Kriminalpolizei am Apparat!/);
+ assert(message.line.length<350);
+ const phone=harness('phone'),phoneLink=phone.phoneReady();phone.node('phone-name').value='Erika Mustermann';phone.node('phone-form').dispatchEvent(new Event('submit',{cancelable:true}));
+ phoneLink.message({type:'ticket',number:'B-223',counter:3});phoneLink.message({type:'counter-start'});phoneLink.message({type:'call-arm',id:message.id,round:message.round});
+ phoneLink.message({...message,ringAtPhoneMs:0});phone.node('phone-answer').click();phone.tick(20);
+ assert.equal(phone.synth.spoken.length,1);assert.equal(phone.synth.spoken[0].text,message.line);assert.equal(phone.synth.spoken[0].lang,'de-DE');
+ hostLink.message(phoneLink.sent.find(m=>m.type==='answer'));hostLink.message(phoneLink.sent.find(m=>m.type==='police-start'));
+ assert.equal(host.node('amt-ambient').textContent,'KRIMINALPOLIZEI · '+message.line);
+ assert.equal(host.node('english-subtitle').textContent,host.window.BuergeramtStory.call.openingEnglish('Erika Mustermann'));
+ assert.equal(phone.node('phone-call-line').textContent,'');
+ phoneLink.message({type:'forfeit'});assert.equal(phone.synth.current,null);assert.equal(phone.node('phone-call').hidden,true);
+ const story=host.window.BuergeramtStory;
+ for(const name of ['Jürgen Müller','Anne-Marie O’Neill','A'.repeat(80)]){assert(story.call.opening(name).includes(name));assert(story.call.opening(name).length<350)}
+});

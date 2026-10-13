@@ -60,13 +60,20 @@ function refreshSubtitle(){
  document.getElementById("app")?.classList.toggle("subtitles-visible",!!visible);
 }
 window.addEventListener("caption-layout-change",()=>{if(officeSubtitle)officeSubtitle.parts=null;if(active)refreshSubtitle()});
-let phoneSilent=false,phoneWarnings=0,phoneWarningTimer=null,phoneRetryTimer=null,phoneCallRound=0,phoneLastSeen=0,phoneSilenceEvidence="",registrationNode="",registrationReply=null,registrationCompleted=false,registrationPoints=0,registrationDetours=0;
+let phoneVisibility="unknown",phoneSilent=false,phoneWarnings=0,phoneWarningTimer=null,phoneRetryTimer=null,phoneCallRound=0,phoneLastSeen=0,phoneSilenceEvidence="",registrationNode="",registrationReply=null,registrationCompleted=false,registrationPoints=0,registrationDetours=0;
 const registrationStamps=new Set(),registrationAnswered=new Set();
 function clearPhonePressure(){if(phoneWarningTimer!==null)clearTimer(phoneWarningTimer);if(phoneRetryTimer!==null)clearTimer(phoneRetryTimer);phoneWarningTimer=phoneRetryTimer=null}
-function resetRegistration(){clearPhonePressure();phoneSilent=false;phoneWarnings=0;phoneCallRound=0;phoneLastSeen=performance.now();phoneSilenceEvidence="";registrationNode="";registrationReply=null;registrationCompleted=false;registrationPoints=0;registrationDetours=0;registrationStamps.clear();registrationAnswered.clear()}
+function resetRegistration(){clearPhonePressure();phoneVisibility="unknown";phoneSilent=false;phoneWarnings=0;phoneCallRound=0;phoneLastSeen=performance.now();phoneSilenceEvidence="";registrationNode="";registrationReply=null;registrationCompleted=false;registrationPoints=0;registrationDetours=0;registrationStamps.clear();registrationAnswered.clear()}
 function atCounter(){return active&&activated&&callTriggered&&!registrationCompleted&&["counter","reply","phone-warning"].includes(stage)}
-function phoneAway(evidence){if(atCounter()){phoneSilenceEvidence=evidence;silencePhone()}else if(!registrationCompleted)forfeit("TELEFON NICHT SICHTBAR")}
-function phoneReturned(){if(!atCounter()||!phoneSilent)return;phoneSilent=false;phoneSilenceEvidence="";callPending=true;callCommitted=false;armCall()}
+function phoneAway(evidence){
+ if(!atCounter()){if(!registrationCompleted)forfeit("TELEFON NICHT SICHTBAR");return}
+ if(evidence==="hidden"){phoneVisibility="hidden";phoneSilenceEvidence=evidence;silencePhone();return}
+ if(phoneVisibility==="hidden")return;
+ phoneVisibility="unknown";phoneSilent=false;phoneSilenceEvidence="";callPending=false;callCommitted=false;
+ clearPhonePressure();if(callArmTimer!==null)clearTimer(callArmTimer);callArmTimer=null;stopCallSignal();
+ setStatus("TELEFONSTATUS UNBEKANNT · DER STEMPEL WARTET");
+}
+function phoneReturned(){if(!atCounter())return;const returned=phoneVisibility!=="visible";phoneVisibility="visible";if(!returned)return;phoneSilent=false;phoneSilenceEvidence="";callPending=true;callCommitted=false;armCall();setStatus("TELEFONSEITE SICHTBAR")}
 // Resuming the game tab grants the peer a fresh reply window; host suspension is not phone-away evidence.
 document.addEventListener("visibilitychange",()=>{if(active&&!document.hidden)phoneLastSeen=performance.now()});
 const lips=window.GermanyAmtLips.createTrack(()=>visualClock*1000);
@@ -796,7 +803,7 @@ function commitCall(reason){
  const ringAtPhoneMs=peerFresh?ringAtMs+timing.clockOffsetMs:null;
  const ringAtUtcMs=window.BuergeramtClock?.usable?.(clockAnchor,now)?Math.round(window.BuergeramtClock.utcAt(clockAnchor,ringAtMs)):null;
  timing.call={round:phoneCallRound,reason,armedAtMs:now,ringAtMs,signalAtMs:ringAtMs-signalMs,ringAtPhoneMs,ringAtUtcMs,peerUncertaintyMs:peerFresh?timing.clockUncertaintyMs:null,utcUncertaintyMs:ringAtUtcMs!==null?clockAnchor.uncertaintyMs:null,phoneScheduledAtMs:null,phoneMode:null,lateMs:null,ringingAt:null};
- if(!link.send("call",{id:story.call.id,round:phoneCallRound,line:story.call.line,ringAtPhoneMs,ringAtUtcMs,leadMs})){callCommitted=false;callArmTimer=defer(()=>{callArmTimer=null;armCall()},1000);return}
+ if(!link.send("call",{id:story.call.id,round:phoneCallRound,line:story.call.opening(registeredName),ringAtPhoneMs,ringAtUtcMs,leadMs})){callCommitted=false;callArmTimer=defer(()=>{callArmTimer=null;armCall()},1000);return}
  sentPolice(-1);playCallSignal(ringAtMs-signalMs,ringAtMs);setStatus("TELEFON · RÜCKRUF");
  // Sending or scheduling is not arrival. Missing display receipts never annoy Knick.
  phoneRetryTimer=defer(()=>{phoneRetryTimer=null;if(atCounter()&&!phoneSilent&&callPending)scheduleRepeatCall()},leadMs+20000/timeScale());
@@ -883,7 +890,7 @@ function beginLink(){
   if(m.type==="sync-pong"){receivePong(m.id,m.receivedAtMs,m.sentAtMs);return}
   if(m.type==="call-ready"){if(atCounter()&&callPending&&m.id===story.call.id&&m.round===phoneCallRound)commitCall("phone-ready");return}
   if(m.type==="call-scheduled"){if(timing.call&&m.id===story.call.id&&m.round===phoneCallRound&&timing.call.phoneScheduledAtMs===null){timing.call.phoneScheduledAtMs=m.atMs;timing.call.phoneMode=m.mode;timing.call.lateMs=m.lateMs}return}
-  if(m.type==="call-ringing"){if(atCounter()&&!phoneSilent&&callPending&&callCommitted&&m.id===story.call.id&&m.round===phoneCallRound&&timing.call?.ringingAt===null){timing.call.ringingAt=m.atMs;schedulePhoneWarning(600/timeScale())}return}
+  if(m.type==="call-ringing"){if(atCounter()&&!phoneSilent&&callPending&&callCommitted&&m.id===story.call.id&&m.round===phoneCallRound&&timing.call?.ringingAt===null){timing.call.ringingAt=m.atMs;if(phoneWarnings===3)warnPhone();else schedulePhoneWarning(600/timeScale())}return}
   if(m.type==="hangup"){if(stage==="cancelled"&&callOutcome==="answer"&&m.id===story.call.id&&m.round===phoneCallRound)policeDisconnectHandler?.();return}
   if(m.type==="police-start"){if(stage==="cancelled"&&receivePoliceStart(m.index,m.mode,m.readyDelayMs,m.atMs,m.atUtcMs))policeStartHandler?.(m.index);return}
   if(m.type==="police-done"){if(stage==="cancelled"&&(m.index!==3||timing.cues[3]?.startedAt!=null)&&receivePoliceDone(m.index,m.mode,m.durationMs,m.atMs))policeDoneHandler?.(m.index);return}
@@ -903,17 +910,22 @@ function schedulePhoneWarning(delay){if(phoneWarningTimer!==null)clearTimer(phon
 function warnPhone(){
  if(!active||!activated||phoneSilent||registrationCompleted||["cancelled","expired","closed"].includes(stage))return;
  phoneWarnings++;
- if(phoneWarnings>3){forfeit("TELEFON NICHT LAUTLOS");return}
- setStage("phone-warning");setStatus("TELEFON-VERSTOSS "+phoneWarnings+"/3 · LAUTLOS SCHALTEN");
- content(story.clerkIdentity.speaker,story.phoneWarnings[phoneWarnings-1],[],showRegistration,null,null,null,{rate:1.12,pitch:1.08});
+ if(phoneWarnings===4){
+  callPending=false;callOutcome="repeated-calls";clearPhonePressure();stopCallSignal();
+  if(callArmTimer!==null)clearTimer(callArmTimer);callArmTimer=null;
+  link?.send("forfeit");setStage("cancelled");exit.hidden=true;setStatus("VIERTER ANRUF · TERMIN ANNULLIERT");
+  content(story.clerkIdentity.speaker,story.phoneWarnings[3],[],()=>{const callback=options.onCancel;close(false);callback()},null,null,null,{rate:1.12,pitch:1.08});return;
+ }
+ setStage("phone-warning");setStatus("ANRUF "+phoneWarnings+"/4 · TELEFONSEITE SICHTBAR");
+ content(story.clerkIdentity.speaker,story.phoneWarnings[phoneWarnings-1],[],showRegistration,null,null,null,{rate:.96+(phoneWarnings-1)*.08,pitch:1+(phoneWarnings-1)*.04});
 }
 function readPlayerReply(text,next){content(story.playerIdentity.speaker,text,[],next)}
 function silencePhone(){
- if(!atCounter()||phoneSilent||!phoneSilenceEvidence)return;
+ if(!atCounter()||phoneSilent||phoneSilenceEvidence!=="hidden")return;
  link?.send("silence",{id:story.call.id});
  phoneSilent=true;callPending=false;callOutcome="silent";clearPhonePressure();if(callArmTimer!==null)clearTimer(callArmTimer);callArmTimer=null;stopCallSignal();
  if(["counter","reply","phone-warning"].includes(stage)){
-  setStage("reply");setStatus("TELEFON RUHIG · VORGANG WIRD FORTGESETZT");content(story.clerkIdentity.speaker,"Endlich! Das Telefon bleibt lautlos. Und jetzt hören Sie MIR zu. Eine Anmeldung ist kein Plausch mit Ihrem Vermieter!",[],showRegistration);
+  setStage("reply");setStatus("TELEFONSEITE AUSGEBLENDET · VORGANG WIRD FORTGESETZT");content(story.clerkIdentity.speaker,"Endlich! Das Telefon bleibt lautlos. Und jetzt hören Sie MIR zu. Eine Anmeldung ist kein Plausch mit Ihrem Vermieter!",[],showRegistration);
  }
 }
 function showRegistration(onStart){
@@ -925,7 +937,7 @@ function showRegistration(onStart){
  content(story.registration.speaker,node.line,node.choices.map(choice=>({label:choice.label,run:()=>{registrationReply=choice;setStage("reply");readPlayerReply(choice.label,showRegistrationReply)}})),null,typeof onStart==="function"?onStart:null);
 }
 function showRegistrationReply(){
- if(registrationReply?.next==="complete"&&!phoneSilent){setStage("phone-warning");setStatus("TELEFON NOCH ERREICHBAR · DER STEMPEL WARTET");return}
+ if(registrationReply?.next==="complete"&&!phoneSilent){setStage("phone-warning");setStatus((phoneVisibility==="visible"?"TELEFONSEITE NOCH SICHTBAR":"TELEFONSTATUS UNBEKANNT")+" · DER STEMPEL WARTET");return}
  const choice=registrationReply;setStage("reply");content(story.registration.speaker,choice.reply,[],()=>{
   if(!registrationAnswered.has(registrationNode)){registrationAnswered.add(registrationNode);registrationPoints+=choice.points||0;if(choice.detour)registrationDetours++}
   if(choice.stamp)registrationStamps.add(choice.stamp);registrationReply=null;registrationNode=choice.next;if(choice.next==="complete")completeRegistration();else showRegistration();
@@ -933,7 +945,7 @@ function showRegistrationReply(){
 }
 function completeRegistration(){
  if(!active||!activated||registrationCompleted)return;
- if(!phoneSilent){registrationNode="complete";setStage("phone-warning");setStatus("TELEFON NOCH ERREICHBAR · DER STEMPEL WARTET");return}
+ if(!phoneSilent){registrationNode="complete";setStage("phone-warning");setStatus((phoneVisibility==="visible"?"TELEFONSEITE NOCH SICHTBAR":"TELEFONSTATUS UNBEKANNT")+" · DER STEMPEL WARTET");return}
  registrationCompleted=true;clearPhonePressure();callPending=false;setStage("success");setStatus("ANGEMELDET · "+registrationPoints+"/"+story.registration.totalSteps+" AKTENPUNKTE · "+registrationDetours+" RÜCKFRAGEN");
  options.onRegistration?.({name:registeredName,number,points:registrationPoints,detours:registrationDetours});
  content(story.registration.speaker,"ANMELDUNG ABGESCHLOSSEN. Sie sind jetzt amtlich hier. Ihre Meldebestätigung ist gestempelt und das Abzeichen steht in Ihrer Spielakte. Formular A38 nehmen Sie ebenfalls mit. Verlieren Sie es, dann verlieren Sie bitte auch meine Zuständigkeit.",[{label:"Meldebestätigung und A38 mitnehmen.",run:()=>readPlayerReply("Meldebestätigung und A38 mitnehmen.",finish)}]);
@@ -942,7 +954,7 @@ function showClerk(){
  if(!active||!activated||["cancelled","expired","closed","success"].includes(stage))return;
  if(!registeredName){setStatus("VOR- UND NACHNAME AM TELEFON EINTRAGEN");return}
  beginRestoration();view.positionGeneration++;view.x=counter.x;view.z=-8.15;view.yaw=0;view.pitch=0;setStage("counter");
- if(!callTriggered){callTriggered=true;phoneLastSeen=performance.now();link.send("counter-start");callPending=!phoneSilent;showRegistration(phoneSilent?null:armCall);return}
+ if(!callTriggered){callTriggered=true;phoneVisibility="visible";phoneLastSeen=performance.now();link.send("counter-start");callPending=!phoneSilent;showRegistration(phoneSilent?null:armCall);return}
  if(!callPending||phoneSilent)showRegistration();
 }
 function showOutburst(){
@@ -964,11 +976,12 @@ function showOutburst(){
  policeStartHandler=index=>{
   if(waiting?.index!==index)return;stopDesk();clearTimer(waiting.timer);ambient.textContent="";
   clearPhoneCaption();
-  if(!phoneBrowser){phoneCaption="KRIMINALPOLIZEI · "+(index===-1?story.call.line:story.police[index]);ambient.textContent=phoneCaption}
-  const pending=waiting,record=timing.cues[index],budget=Math.round((index===3?Math.max(18000,story.police[index].length*80):upset.phoneCutAfterMs[index+1])/timeScale()),target=record.estimatedStartAt+budget;
-  if(!phoneBrowser)phoneSubtitle=startOfficeSubtitle(index===-1?story.call.line:story.police[index],null,budget);
-  // The final demand is a complete instruction, unlike the cut-off argument.
-  if(index===3){pending.timer=defer(()=>nextDesk(index,true),budget+5000);return}
+  if(!phoneBrowser){phoneCaption="KRIMINALPOLIZEI · "+(index===-1?story.call.opening(registeredName):story.police[index]);ambient.textContent=phoneCaption}
+  const fullOpening=index===-1&&!!registeredName,text=index===-1?story.call.opening(registeredName):story.police[index];
+  const pending=waiting,record=timing.cues[index],budget=Math.min(55000,Math.round((fullOpening?Math.max(18000,text.length*140):index===3?Math.max(18000,text.length*80):upset.phoneCutAfterMs[index+1])/timeScale())),target=record.estimatedStartAt+budget;
+  if(!phoneBrowser)phoneSubtitle=startOfficeSubtitle(text,index===-1?story.call.openingEnglish(registeredName):null,budget);
+  // The personal introduction and final demand finish before Knick responds.
+  if(fullOpening||index===3){pending.timer=defer(()=>nextDesk(index,true),budget+5000);return}
   const service=window.BuergeramtClock;
   const stopAtUtcMs=Number.isSafeInteger(record.phoneStartedAtUtcMs)?record.phoneStartedAtUtcMs+budget:service?.usable?.(clockAnchor)?Math.round(service.utcAt(clockAnchor,target)):null;
   const payload={index,stopAtPhoneMs:record.phoneStartedAtMs+budget,stopAtUtcMs};
@@ -1080,7 +1093,7 @@ for(const type of ["pointerup","pointercancel","lostpointercapture"])document.ad
 });
 document.querySelectorAll("[data-amt-key]").forEach(button=>{const key=button.dataset.amtKey;button.addEventListener("pointerdown",e=>{if(!active||!walking()||omen.phase)return;e.preventDefault();button.setPointerCapture(e.pointerId);pointerKeys.set(e.pointerId,{key,target:button})});for(const type of ["pointerup","pointercancel","lostpointercapture"])button.addEventListener(type,e=>{if(!pointerKeys.delete(e.pointerId))return;if(type!=="pointerup"&&!officeKeyHeld("ArrowLeft")&&!officeKeyHeld("ArrowRight"))turnVelocity=0})});
 document.getElementById("amt-leave").addEventListener("click",()=>close());exit.addEventListener("click",()=>close());
-window.BuergeramtLevel={get tickets(){return [...phoneTickets.values()].filter(ticket=>ticket.number).map(ticket=>({...ticket}))},open,requestFullscreen,refreshSubtitle,get registrationTicket(){return number},get activeClerkCounter(){return interactingCounter||assignedCounter||3},get queueCalls(){return counterCalls.map((number,index)=>({number,counter:index+1}))},get assignedCounter(){return{number:assignedCounter,x:counter.x,z:counter.z}},get registration(){return{node:registrationNode,completed:registrationCompleted,phoneSilent,silenceEvidence:phoneSilenceEvidence,callRound:phoneCallRound,warnings:phoneWarnings,points:registrationPoints,detours:registrationDetours,stamps:[...registrationStamps]}},get lipSpeech(){return lips.sample()},replay(config){close(false);open(config)},update,interact,setOfficeObstacles,get active(){return active},get timeScale(){return timeScale()},get floorState(){return{time:floorClock,visualTime:visualClock,goop:goop.goop(floorClock),speed:timeScale(),visit:attempt,restoring:!!restoration,restoration:restoration?Math.min(1,restoration.elapsed/restorationDuration):0,restorationAge:restoration?.age,restorationClock:restoration?.clock}},get subtitleBusy(){return !!officeSubtitle},get audioTextBusy(){return officeSpeechBusy},get stage(){return stage},get queueDisplay(){return queueDisplay},get qrSvg(){return qrSvg},get phoneUrl(){return link?BuergeramtLink.phoneUrl(link.invitation,options.subtitlesOn?.()):""},get timing(){return JSON.parse(JSON.stringify(timing))},get view(){return{x:view.x,z:view.z,yaw:view.yaw,pitch:view.pitch||0,walkedDistance:view.walkedDistance,positionGeneration:view.positionGeneration}},get characters(){return characters.map(actor=>({id:actor.id,x:actor.x,z:actor.z,walkedDistance:actor.walkedDistance,positionGeneration:actor.positionGeneration,direction:actor.direction,heading:actor.heading??Math.PI,mode:actor.mode,phase:characterPhase(actor),frame:Math.min(7,Math.floor(characterPhase(actor)*8)),animation:characterAnimation(actor)}))},get stationaryAnimations(){return{
+window.BuergeramtLevel={get tickets(){return [...phoneTickets.values()].filter(ticket=>ticket.number).map(ticket=>({...ticket}))},open,requestFullscreen,refreshSubtitle,get registrationTicket(){return number},get activeClerkCounter(){return interactingCounter||assignedCounter||3},get queueCalls(){return counterCalls.map((number,index)=>({number,counter:index+1}))},get assignedCounter(){return{number:assignedCounter,x:counter.x,z:counter.z}},get registration(){return{node:registrationNode,completed:registrationCompleted,phoneVisible:phoneVisibility==="unknown"?null:phoneVisibility==="visible",phoneSilent,silenceEvidence:phoneSilenceEvidence,callRound:phoneCallRound,warnings:phoneWarnings,points:registrationPoints,detours:registrationDetours,stamps:[...registrationStamps]}},get lipSpeech(){return lips.sample()},replay(config){close(false);open(config)},update,interact,setOfficeObstacles,get active(){return active},get timeScale(){return timeScale()},get floorState(){return{time:floorClock,visualTime:visualClock,goop:goop.goop(floorClock),speed:timeScale(),visit:attempt,restoring:!!restoration,restoration:restoration?Math.min(1,restoration.elapsed/restorationDuration):0,restorationAge:restoration?.age,restorationClock:restoration?.clock}},get subtitleBusy(){return !!officeSubtitle},get audioTextBusy(){return officeSpeechBusy},get stage(){return stage},get queueDisplay(){return queueDisplay},get qrSvg(){return qrSvg},get phoneUrl(){return link?BuergeramtLink.phoneUrl(link.invitation,options.subtitlesOn?.()):""},get timing(){return JSON.parse(JSON.stringify(timing))},get view(){return{x:view.x,z:view.z,yaw:view.yaw,pitch:view.pitch||0,walkedDistance:view.walkedDistance,positionGeneration:view.positionGeneration}},get characters(){return characters.map(actor=>({id:actor.id,x:actor.x,z:actor.z,walkedDistance:actor.walkedDistance,positionGeneration:actor.positionGeneration,direction:actor.direction,heading:actor.heading??Math.PI,mode:actor.mode,phase:characterPhase(actor),frame:Math.min(7,Math.floor(characterPhase(actor)*8)),animation:characterAnimation(actor)}))},get stationaryAnimations(){return{
  "clerk-desk-1":window.BuergeramtAnimationClock?.ambientClerk(stationaryClocks["clerk-desk-1"],attempt),
  "clerk-desk-2":window.BuergeramtAnimationClock?.ambientClerk(stationaryClocks["clerk-desk-2"],attempt),
  "clerk-desk-3":window.BuergeramtAnimationClock?.ambientClerk(stationaryClocks["clerk-desk-3"],attempt),

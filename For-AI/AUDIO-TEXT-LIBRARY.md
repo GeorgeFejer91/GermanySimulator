@@ -139,3 +139,28 @@ Native recorded playback uses actual currentTime advances to renew a finite 20-s
 ### Always-on office subtitles and portrait continuity (2026-10-12)
 
 Subtitles are always enabled. The shared language control defaults to German and preserves an explicitly saved English selection; switching to English queues the existing three-line subtitle approval audio. Bürgeramt speech uses that same rail, with recording-playhead pagination, immediate language refresh, and cancellation cleanup. Speaker names and source dialogue are not duplicated in the office overlay. Voices retain their authored German/Denglisch. Desktop police captions use the same rail on phone playback receipts; the paired phone keeps its call controls. The Steinmeier portrait retains every authored word in one newly synthesized full-text recording. The subtitle parts follow the native recording playhead; caption-only fallback uses the same bounded reading clock. One media completion returns to the current waiting state. The existing visit/cue owner handles hidden pause, cancellation and stale receipts. No movement, collision, camera, scale or painted animation behavior changes in this scope.
+
+
+### Repeated calls and personalized Kripo opening (2026-10-13)
+
+`phoneWarnings` owns four escalating selected-Knick reactions. Their supplement
+is `assets/voices/knick/phone-reactions-manifest.json`, merged through the existing
+curator and exact speaker/text lookup. The fourth arrival commits cancellation
+before its complete dismissal. Receipt and attempt guards own all continuations.
+The Kripo opening interpolates the current registered name and uses one German
+browser-speech utterance with an exact desktop caption and translated English
+caption. Unlike the subsequent interrupted argument, the introduction finishes
+naturally; it retains the existing bounded missing-start/playback fallback.
+Its dynamic source cannot select the old unnamed opening MP3. Knick's separate
+local name model is not a Kripo voice; this integration shares local-name,
+source/receipt/cancellation conventions without borrowing her model or voice.
+
+The four accepted clips total 555,056 bytes / 34.44 seconds; the largest
+single decoded mono 48 kHz Float32 clip is 2,618,880 bytes. They use the
+existing lazy media owner and selected Knick profile. The fourth uses an
+approved five-part contextual rescue with exact independent recognition of
+the final joined MP3; failed takes remain private. Native EOS, encoded ASR,
+levels and hashes pass; perceptual listening remains NOT RUN. The existing
+curator now shares repeated approval, provenance and trigger metadata along
+with production receipts, saving 128,252 bytes while preserving every complete
+runtime recording entry. No new model, service or background polling is added.

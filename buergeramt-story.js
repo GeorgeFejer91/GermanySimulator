@@ -87,7 +87,10 @@ window.BuergeramtStory=Object.freeze({
   {word:"selbst",tension:.85,semitones:-2},{word:"gewählt",tension:1,semitones:-3.2}
  ]}},
  entrance:{speaker:"PFÖRTNERIN",line:"Halt. Sie haben das Bürgeramt betreten, ohne nachzuweisen, dass Sie vorher draußen waren. Ziehen Sie bitte eine Nummer für den Übergang."},
- call:{id:"grass",voiceId:"kriminalpolizei",line:"Hier ist die Kriminalpolizei. Gegen Sie wird wegen unerlaubten Betretens einer Grünfläche ermittelt. Welcher Schuh hat den Rasen zuerst berührt: der linke, der rechte oder beide?",declined:"Sehr gut. In diesem Schalterbereich sind private Anrufe nicht zuständig."},
+ call:{id:"grass",voiceId:"kriminalpolizei",line:"Hier ist die Kriminalpolizei. Gegen Sie wird wegen unerlaubten Betretens einer Grünfläche ermittelt. Welcher Schuh hat den Rasen zuerst berührt: der linke, der rechte oder beide?",declined:"Sehr gut. In diesem Schalterbereich sind private Anrufe nicht zuständig.",
+  opening(name){return name?`Spricht hier ${name}? Hier ist die Kriminalpolizei am Apparat! ${this.line.slice("Hier ist die Kriminalpolizei. ".length)}`:this.line},
+  openingEnglish(name){return name?`Is this ${name}? This is the criminal police speaking! You are under investigation for trespassing on a green space. Which shoe touched the grass first: the left, the right, or both?`:null}
+ },
  police:[
   "Hallo? Das ist kein Kaffeekränzchen. Die Dame am Schalter hält sich bitte heraus. Ich brauche jetzt Ihre Aussage, und zwar...",
   "Frau Knick, wie reizend. Vielleicht bearbeiten Sie gleich Ihre eigene Anzeige. Wer einen Beschuldigten deckt, der...",
@@ -102,9 +105,10 @@ window.BuergeramtStory=Object.freeze({
   "UND SIE STEHEN HIER NICHT SO UNSCHULDIG! Der Stempel bleibt oben! Ihr Termin ist ANNULLIERT! Raus! Für einen neuen Versuch ziehen Sie draußen eine neue Nummer."
  ],cutAfterMs:[3900,5200,6100],phoneCutAfterMs:[7200,4500,4700,5000],delivery:[{rate:.94,pitch:1},{rate:1.02,pitch:1.04},{rate:1.08,pitch:1.08},{rate:1.15,pitch:1.1},{rate:1.1,pitch:1.08}]},
  phoneWarnings:[
-  "Nicht rangehen reicht Ihnen, ja? MIR REICHT ES NICHT! Ihr Telefon klingelt an meinem Schalter! Stellen Sie es LAUTLOS oder schalten Sie es AUS, wenn Sie eine Anmeldung wollen! Wegstecken ist keine Einstellung!",
-  "SCHON WIEDER! Habe ich mich undeutlich ausgedrückt? Sie stecken das Telefon weg und lassen es weiterklingeln! LAUTLOS. ODER AUS. Ich bearbeite Ihren Wohnsitz, keine Klingeltonsammlung!",
-  "JETZT IST SCHLUSS MIT DEM GEKLINGEL! Solange dieses Ding an meinem Schalter Lärm macht, bleibt mein Stempel oben! Schalten Sie das Telefon aus oder stellen Sie es lautlos. DANN sprechen wir weiter!"
+  "Entschuldigen Sie. Ihr Telefon klingelt. Wir sind hier beim Bürgeramt. Stellen Sie es bitte ruhig, damit wir mit Ihrer Anmeldung weitermachen können.",
+  "Zum zweiten Mal! Ihr Telefon hat hier keinen Termin. Ich schon. Und zwar mit Ihnen. Sorgen Sie jetzt für Ruhe!",
+  "Das ist das dritte Mal! Noch ein einziger Anruf, und ich breche Ihre Anmeldung ab. Mein Stempel wartet nicht auf Ihre Mailbox!",
+  "VIER ANRUFE! Das reicht. Ich breche Ihre Anmeldung ab. Ihr Termin ist annulliert. Raus! Ziehen Sie eine neue Nummer, wenn Ihr Telefon Feierabend hat!"
  ],
  registration:{speaker:"SACHBEARBEITERIN FRAU KNICK",first:"presence",totalSteps:10,nodes:{
   presence:{step:1,line:"So. Sie wollen eine Anmeldung. Dann bleiben Sie geistig hier, körperlich hier und telefonisch STILL. Ihre Nummer liegt links, Sie stehen rechts. Was soll ich Ihrer Akte als Beweis der Anwesenheit glauben?",choices:[

@@ -100,3 +100,13 @@ Intent: make the browser speakers plausibly pick up an incoming handset before i
 The existing effects bus and sourced distance-scaled Martinshorn serve pickup cars even with zero wanted stars and continue through departure. Blue lights use the same car lifetime. The existing bounded synthesized siren bridges loading/failure at most once per 1.3 s; no new recording, bus, timer loop or scheduler is introduced. The speech broker retains its usual ducking and cancellation. Silent desktop/mobile emulation checks establish state and timing; perceptual listening and physical Android remain separate.
 
 The 2026-10-13 Schalter audit decoded all 283 original interaction MP3s: no samples at absolute amplitude 0.999 or above and no repeated near-peak flat tops; the highest measured true peak was -1.78 dBTP. Two obsolete telephone-button replies are excluded from the runtime catalog, preserving their historical files. The new `kriminalpolizei-phone-05.mp3` is 14.36 s, -18 LUFS and -2.29 dBTP; its final encoded transcript independently matched all 40 words. The catalogued interaction set is now 282 recordings; the obsolete opening that complained before an arrival is no longer invoked. These measurements establish numerical headroom, not a listening verdict or a guarantee about the device output or summed audio bus.
+
+
+The 2026-10-13 repeated-call beat counts only accepted current-round ringing
+receipts. Reactions 1–3 have no response controls and resume the existing
+registration after speech; reaction 4 commits cancellation immediately, stops
+phone output, then ends the visit on the complete dismissal receipt/fallback.
+The dynamic Kripo introduction is a complete name-bearing utterance. The other
+three interrupted police turns and the final full demand retain their previous
+cutoff and completion contracts. No new bus, scheduler or background poll is
+introduced; the status icons are static SVG.

@@ -138,7 +138,14 @@ html[data-phone-os="android"] .phone-call{background:radial-gradient(circle at 4
 /* Call app families: iPhone full-screen, Google Phone swipe, Samsung Phone drag. */
 .phone-call{background:#202733;overflow-x:hidden;isolation:isolate}
 .phone-call:before{display:none}
-.call-status{justify-content:flex-start;margin-bottom:clamp(32px,10dvh,100px)}
+.call-status{justify-content:space-between;gap:16px;margin-bottom:clamp(32px,10dvh,100px)}
+.call-status time{min-width:5ch;line-height:1.3;font-variant-numeric:tabular-nums}
+.call-indicators{display:flex;align-items:center;gap:7px;flex:none;color:inherit}
+.call-indicators svg{display:block;width:22px;height:18px;fill:currentColor}
+.call-indicators .call-wifi{fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round}
+.call-indicators .call-wifi circle{fill:currentColor;stroke:none}
+.call-indicators .call-battery{width:28px;height:16px}
+.call-battery rect{fill:none;stroke:currentColor;stroke-width:1.5}
 #phone-call-state{font:400 14px/1.3 Arial,sans-serif;letter-spacing:.02em}
 .phone-call .call-symbol{width:96px;height:96px;border-radius:50%;background:#586572;box-shadow:none;overflow:hidden}
 .call-symbol svg{width:60%;height:60%;fill:#e7e9ea}
