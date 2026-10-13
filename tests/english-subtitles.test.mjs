@@ -19,10 +19,11 @@ const knickCount=['manifest.json','ambient-manifest.json','queue-call-manifest.j
 const streetDirectory=join(root,'assets/voices/street-wisdom'),streetCount=existsSync(streetDirectory)?readdirSync(streetDirectory).filter(file=>file.endsWith('-manifest.json')).reduce((n,file)=>n+JSON.parse(readFileSync(join(streetDirectory,file),'utf8')).clips.length,0):0;
 const playerDirectory=join(root,'assets/voices/player-replies'),playerCount=existsSync(playerDirectory)?readdirSync(playerDirectory).filter(file=>file.endsWith('-manifest.json')).reduce((n,file)=>n+JSON.parse(readFileSync(join(playerDirectory,file),'utf8')).clips.length,0):0;
 const ambientDirectory=join(root,'assets/voices/office-ambient'),ambientCount=existsSync(ambientDirectory)?readdirSync(ambientDirectory).filter(file=>file.endsWith('-manifest.json')).reduce((n,file)=>n+JSON.parse(readFileSync(join(ambientDirectory,file),'utf8')).clips.length,0):0;
-assert.equal(Object.keys(library.clips).length,113+knickCount+playerCount+ambientCount,"recorded and text-only dialogue need stable IDs");
+// Two retired phone-button replies remain archived on disk; the fifth police line is new.
+assert.equal(Object.keys(library.clips).length,112+knickCount+playerCount+ambientCount,"recorded and text-only dialogue need stable IDs");
 const recordedClips=Object.values(library.clips).filter(clip=>clip.recording);
-assert.equal(recordedClips.length,98+knickCount+streetCount+playerCount+ambientCount,"retired clerk, traffic and anonymous rule takes must not ship");
-assert.equal(new Set(recordedClips.map(clip=>clip.path)).size,98+knickCount+streetCount+playerCount+ambientCount,"recorded clip paths must be unique");
+assert.equal(recordedClips.length,97+knickCount+streetCount+playerCount+ambientCount,"retired clerk, traffic and phone-button takes must not enter the runtime catalog");
+assert.equal(new Set(recordedClips.map(clip=>clip.path)).size,97+knickCount+streetCount+playerCount+ambientCount,"recorded clip paths must be unique");
 for(const clip of Object.values(library.clips)){
  assert.ok(library.voices[clip.voiceId],`${clip.id} needs a registered voice ID`);
  if(clip.targetVoiceId)assert.ok(library.voices[clip.targetVoiceId]?.profileId,`${clip.id} needs a saved replacement profile`);
@@ -59,6 +60,7 @@ const voiceFiles=walk(join(root,"assets/voices")).filter(path=>path.endsWith(".m
 
 for(const path of voiceFiles){
  const url="./"+relative(root,path).split(sep).join("/");
+ if(/\/player-phone-(silent|ignore)\.mp3$/.test(url)){assert.equal(library.recordings[url],undefined);continue}
  assert.ok(library.recordings[url],`${url} is missing from the audio-text library`);
  assert.ok(library.recordings[url].source,`${url} needs an exact source transcript`);
  assert.ok(library.recordings[url].english,`${url} needs an English subtitle`);

@@ -141,7 +141,10 @@ export function fixedRecordingsBlock(cast,manifest,family='knick'){
   replies['player-president-portrait-1']=window.BuergeramtStory.presidentPortrait.lines.map(row=>row.line).join(' ');
   replies['player-potato-mirror']=window.BuergeramtStory.potatoMirror.line;
   const runtime=readFileSync(resolve(root,'buergeramt.js'),'utf8');
-  for(const [key,text] of [['phone-silent','Telefon auf lautlos schalten.'],['phone-ignore','Nicht rangehen. Telefon weglegen.'],['complete','Meldebestätigung und A38 mitnehmen.']]){requireMatch(runtime.includes('label:'+JSON.stringify(text)),'Player runtime choice changed');replies['player-'+key]=text;}
+  for(const [key,text] of [['complete','Meldebestätigung und A38 mitnehmen.']]){requireMatch(runtime.includes('label:'+JSON.stringify(text)),'Player runtime choice changed');replies['player-'+key]=text;}
+  // Preserve validated historical takes, but never expose the retired phone buttons.
+  replies['player-phone-silent']='Telefon auf lautlos schalten.';
+  replies['player-phone-ignore']='Nicht rangehen. Telefon weglegen.';
  }
  for(const clip of manifest.clips){
   requireMatch((family!=='knick'||clip.voiceId==='amt-brunhilde-knick')&&matchesProduction(cast,clip),'Fixed profile/reference/renderer drift');
@@ -161,6 +164,7 @@ export function fixedRecordingsBlock(cast,manifest,family='knick'){
    const window={};vm.runInNewContext(readFileSync(resolve(root,'buergeramt-story.js'),'utf8'),{window});
    requireMatch(clip.english===window.BuergeramtStory.potatoMirror.english&&!clip.rescueParts&&clip.rendererInputText===clip.text,'Mirror requires exact source/translation in one continuous selected-player take');
   }
+  if(replies&&['player-phone-silent','player-phone-ignore'].includes(clip.clipId))continue;
   if(street){
    const index=clip.ruleIndex,person=street.definitions.find(person=>person.ruleIndices.includes(index));
    requireMatch(Number.isInteger(index)&&person&&clip.actorId===person.id&&clip.voiceId===person.voiceId&&clip.clipId===`${person.id}-rule-${String(index+1).padStart(2,'0')}`&&clip.text===street.catalog.rules[index][1]&&clip.english===street.catalog.ruleEnglish[index],`Wrong street rule ownership/text: ${clip.clipId}`);

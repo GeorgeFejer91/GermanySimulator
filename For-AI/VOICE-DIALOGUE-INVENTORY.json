@@ -1067,7 +1067,8 @@
       "replies": [
         "Hallo? Das ist kein Kaffeekränzchen. Die Dame am Schalter hält sich bitte heraus. Ich brauche jetzt Ihre Aussage, und zwar...",
         "Frau Knick, wie reizend. Vielleicht bearbeiten Sie gleich Ihre eigene Anzeige. Wer einen Beschuldigten deckt, der...",
-        "NEIN, SIE HÖREN JETZT ZU! Ein Grashalm fehlt, und Sie behindern meine Befragung! Noch ein Wort, und ich lasse Ihren ganzen Schalter..."
+        "NEIN, SIE HÖREN JETZT ZU! Ein Grashalm fehlt, und Sie behindern meine Befragung! Noch ein Wort, und ich lasse Ihren ganzen Schalter...",
+        "Na gut. Die Kollegen warten draußen. Geben Sie der Polizei einen ausführlichen Bericht über sämtliche Stellen, an denen Sie heute über den Rasen gelaufen sind. Jeden Weg, jeden Umweg, jeden Grashalm! Sonst gibt es auf der Wache noch mehr Papierkram."
       ]
     },
     "buergeramtQueueCall": {
@@ -1132,13 +1133,14 @@
       "registration": {
         "speaker": "SACHBEARBEITERIN FRAU KNICK",
         "first": "presence",
-        "totalSteps": 24,
+        "totalSteps": 10,
         "nodes": {
           "presence": {
             "step": 1,
             "line": "So. Sie wollen eine Anmeldung. Dann bleiben Sie geistig hier, körperlich hier und telefonisch STILL. Ihre Nummer liegt links, Sie stehen rechts. Was soll ich Ihrer Akte als Beweis der Anwesenheit glauben?",
             "choices": [
               {
+                "points": 1,
                 "label": "Die aufgerufene Nummer vorlegen.",
                 "reply": "Endlich etwas mit Rand und Ziffern. Ihre Nummer kommt oben auf die Akte. Sie bleiben darunter.",
                 "next": "identity",
@@ -1147,7 +1149,8 @@
               {
                 "label": "Ich stehe doch direkt vor Ihnen.",
                 "reply": "Und morgen stehen Sie irgendwo anders. Ihr Gesicht ist kein Ordnungsmerkmal. Legen Sie die Nummer hin!",
-                "next": "presenceFix"
+                "next": "presenceFix",
+                "detour": true
               }
             ]
           },
@@ -1174,15 +1177,17 @@
             "line": "Identitätsnachweis. Gültiger Pass oder Ausweis, im Original. Nicht Ihr Profilbild, nicht die Erinnerung an einen Pass. Ich will feststellen, wer hier wohnt, bevor ich feststelle, wo dieser Jemand wohnt. Was haben Sie?",
             "choices": [
               {
+                "points": 1,
                 "label": "Den gültigen Reisepass im Original.",
                 "reply": "Der Pass wird geprüft. Sie sind vorläufig dieselbe Person wie auf der letzten Seite.",
-                "next": "name",
+                "next": "movein",
                 "stamp": "Identität geprüft"
               },
               {
                 "label": "Ein Foto vom Pass auf dem Telefon.",
                 "reply": "Ein Foto vom Pass! Soll ich Ihre Anmeldung dann an ein Foto von einer Wohnung schicken? Original her!",
-                "next": "identityFix"
+                "next": "identityFix",
+                "detour": true
               }
             ]
           },
@@ -1217,7 +1222,8 @@
               {
                 "label": "Nur den Namen, auf den ich höre.",
                 "reply": "Das Register ruft Sie nicht zum Abendessen. Übernehmen Sie die amtlichen Namen vollständig!",
-                "next": "nameFix"
+                "next": "nameFix",
+                "detour": true
               }
             ]
           },
@@ -1244,15 +1250,17 @@
             "line": "Einzugsdatum. Ihr Mietvertrag begann am Ersten. Den Schlüssel bekamen Sie am Dritten. Eingezogen sind Sie am Fünften. Drei Daten, aber nur eins wohnt in diesem Feld. Welches?",
             "choices": [
               {
+                "points": 1,
                 "label": "Der Fünfte: mein tatsächlicher Einzug.",
                 "reply": "Richtig. Gemeldet wird der Einzug. Der Mietvertrag darf sein Datum behalten, aber nicht dieses Feld besetzen.",
-                "next": "deadline",
+                "next": "provider",
                 "stamp": "Einzug festgestellt"
               },
               {
                 "label": "Der Erste: das Datum im Mietvertrag.",
                 "reply": "Ihr Vertrag hat am Ersten gewohnt? Mit eigenem Bett? Nein! Wir brauchen den tatsächlichen Einzug!",
-                "next": "moveinFix"
+                "next": "moveinFix",
+                "detour": true
               }
             ]
           },
@@ -1287,7 +1295,8 @@
               {
                 "label": "Sobald der Vermieter das Papier schickt.",
                 "reply": "NEIN. Der Vermieter verwaltet keine Zeit! Seine Verzögerung müssen Sie melden, nicht in einen neuen Einzug umbenennen!",
-                "next": "deadlineFix"
+                "next": "deadlineFix",
+                "detour": true
               }
             ]
           },
@@ -1322,7 +1331,8 @@
               {
                 "label": "Den Einzug auf heute verschieben.",
                 "reply": "Sie sind bereits eingezogen! Wenn Sie Ihr Datum ändern, damit es hübscher aussieht, mache ich es Ihnen SOFORT wieder hässlich!",
-                "next": "appointmentFix"
+                "next": "appointmentFix",
+                "detour": true
               }
             ]
           },
@@ -1357,7 +1367,8 @@
               {
                 "label": "Er sagte, Anmeldung sei hier nicht möglich.",
                 "reply": "Ach. Und die Wohnung ist zufällig möglich? Eine Anzeige ohne Anmeldung hebt keine Meldepflicht auf! Wir klären, wer Ihnen den Raum gibt.",
-                "next": "landlordFix"
+                "next": "landlordFix",
+                "detour": true
               }
             ]
           },
@@ -1384,6 +1395,7 @@
             "line": "Untermiete. Sie zahlen an den Hauptmieter, der Ihnen das Zimmer überlassen hat. Die Eigentümerin besitzt das Haus und erklärt sich für alles unzuständig. Wer ist hier Ihr Wohnungsgeber?",
             "choices": [
               {
+                "points": 1,
                 "label": "Der Hauptmieter, der mir das Zimmer gibt.",
                 "reply": "Richtig. Wohnungsgeber und Eigentümer können verschieden sein. Das ist kein Fehler. Das sind zwei Felder.",
                 "next": "confirmation",
@@ -1392,7 +1404,8 @@
               {
                 "label": "Nur die Eigentümerin darf das bestätigen.",
                 "reply": "Sie haben das Wort Eigentümerin gefunden und den Rest der Wohnsituation verloren! Bei Ihrer Untermiete ist der Hauptmieter der Wohnungsgeber!",
-                "next": "providerFix"
+                "next": "providerFix",
+                "detour": true
               }
             ]
           },
@@ -1419,12 +1432,14 @@
             "line": "Wohnungsgeberbestätigung, § 19. Haben Sie die Bestätigung des tatsächlichen Einzugs? Oder schickt Ihr Wohnungsgeber Sie seit Wochen zwischen Hauptmieter, Verwaltung und dem Begriff nächste Woche im Kreis?",
             "choices": [
               {
+                "points": 1,
                 "label": "Die unterschriebene Bestätigung vorlegen.",
                 "reply": "Dann endet der Kreis hier. Ich werde prüfen, ob das Blatt innen ebenfalls eine Bestätigung enthält.",
-                "next": "dossier",
+                "next": "address",
                 "stamp": "Einzugsbestätigung vorgelegt"
               },
               {
+                "points": 1,
                 "label": "Sie wird verweigert oder kommt nicht.",
                 "reply": "Dann MELDEN Sie mir das! § 19 Absatz 2: Die fehlende oder verweigerte Bestätigung ist unverzüglich der Meldebehörde mitzuteilen. Sie stehen gerade vor einer!",
                 "next": "withheldReport"
@@ -1444,7 +1459,8 @@
               {
                 "label": "Ich warte lieber, bis er Zeit hat.",
                 "reply": "NEIN! Nicht warten und heimlich verschwinden. Fehlende Bestätigung melden. Namen, Anschrift, Einzug und bisherige Anfragen. Jetzt!",
-                "next": "withheldReportFix"
+                "next": "withheldReportFix",
+                "detour": true
               }
             ]
           },
@@ -1529,7 +1545,8 @@
               {
                 "label": "Der Mietvertrag, weil er dicker ist.",
                 "reply": "Dicke ist keine Rechtsgrundlage! Einen Telefonkatalog würde ich Ihnen auch nicht als Reisepass stempeln!",
-                "next": "dossierFix"
+                "next": "dossierFix",
+                "detour": true
               }
             ]
           },
@@ -1556,15 +1573,17 @@
             "line": "Wohnanschrift. Straße, Hausnummer, Postleitzahl, Ort. Sie haben Hinterhof, die kaputte Klingel geschrieben. Der Hinterhof hat heute leider keine eigene Meldestelle. Welche Anschrift wird eingetragen?",
             "choices": [
               {
+                "points": 1,
                 "label": "Die vollständige Anschrift meiner Wohnung.",
                 "reply": "Und die Wohnlage nur ergänzend, damit wir die Wohnung zuordnen können. Die kaputte Klingel bleibt Bauzustand.",
-                "next": "owner",
+                "next": "registrationSignature",
                 "stamp": "Wohnanschrift geprüft"
               },
               {
                 "label": "Die Postadresse eines hilfsbereiten Freundes.",
                 "reply": "Sie wohnen nicht beim Briefkasten Ihres Freundes! Eine freundliche Adresse ersetzt keinen tatsächlichen Einzug!",
-                "next": "addressFix"
+                "next": "addressFix",
+                "detour": true
               }
             ]
           },
@@ -1599,7 +1618,8 @@
               {
                 "label": "Nur der Spitzname des Hauptmieters.",
                 "reply": "Ein Spitzname ersetzt weder Namen noch Eigentümerin! Das Eigentümerfeld ist leer. Lassen Sie es vervollständigen!",
-                "next": "ownerFix"
+                "next": "ownerFix",
+                "detour": true
               }
             ]
           },
@@ -1634,7 +1654,8 @@
               {
                 "label": "Nur mich, die anderen sind Nebensache.",
                 "reply": "NEBENWOHNUNG ist ein Begriff. Nebenmensch ist keiner! Auf die Bestätigung gehören die meldepflichtigen Eingezogenen!",
-                "next": "residentsFix"
+                "next": "residentsFix",
+                "detour": true
               }
             ]
           },
@@ -1669,7 +1690,8 @@
               {
                 "label": "Ich unterschreibe für ihn, das geht schneller.",
                 "reply": "SIE UNTERSCHREIBEN NICHT FÜR IHN! Das Blatt darf nur der Wohnungsgeber oder seine beauftragte Person ausstellen!",
-                "next": "providerSignatureFix"
+                "next": "providerSignatureFix",
+                "detour": true
               }
             ]
           },
@@ -1704,7 +1726,8 @@
               {
                 "label": "Die alte, sie hat schon einen schönen Knick.",
                 "reply": "MEIN NAME IST KNICK, NICHT MEIN PRÜFKRITERIUM! Das falsche Datum wird nicht durch Falten richtig!",
-                "next": "datesFix"
+                "next": "datesFix",
+                "detour": true
               }
             ]
           },
@@ -1731,6 +1754,7 @@
             "line": "Nun IHRE Unterschrift auf IHREM Anmeldeformular. Der Vermieter unterschreibt seine Bestätigung, Sie Ihre Anmeldung. Ich habe zwei Linien vorgedruckt, damit niemand dafür ein Gutachten bestellen muss. Was unterschreiben Sie?",
             "choices": [
               {
+                "points": 1,
                 "label": "Mein ausgefülltes Anmeldeformular.",
                 "reply": "In Ihrem Namen, auf Ihrem Antrag. Der Kugelschreiber hat seine Zuständigkeit verstanden.",
                 "next": "residence",
@@ -1739,7 +1763,8 @@
               {
                 "label": "Der Vermieter soll alles unterschreiben.",
                 "reply": "Er ist nicht Sie! Es sei denn, Ihr Pass hat mir gerade einen vollständigen Identitätswechsel verschwiegen!",
-                "next": "registrationSignatureFix"
+                "next": "registrationSignatureFix",
+                "detour": true
               }
             ]
           },
@@ -1766,12 +1791,14 @@
             "line": "Alleinige Wohnung oder mehrere Wohnungen in Deutschland? Antworten Sie nach Ihrer Wohnsituation, nicht nach der Anzahl der Schlüssel an Ihrem Bund. Ein Fahrradschlüssel zählt mir hier nicht als Nebenwohnung!",
             "choices": [
               {
+                "points": 1,
                 "label": "Das ist meine einzige Wohnung in Deutschland.",
                 "reply": "Dann erfasse ich sie als alleinige Wohnung. Ein Feld weniger. Ich sehe Ihre unangebrachte Erleichterung.",
-                "next": "previous",
+                "next": "review",
                 "stamp": "Wohnungsart bestimmt"
               },
               {
+                "points": 1,
                 "label": "Ich habe weitere Wohnungen in Deutschland.",
                 "reply": "Dann benennen Sie alle und bestimmen die Hauptwohnung. Dafür gibt es das Beiblatt, das Sie gerade wegschieben wollten.",
                 "next": "residenceDetails"
@@ -1791,7 +1818,8 @@
               {
                 "label": "Die anderen Wohnungen einfach verschweigen.",
                 "reply": "NEIN! § 21 verlangt die Angaben zu weiteren Wohnungen im Inland. Eine weggelassene Wohnung wird nicht abgerissen!",
-                "next": "residenceFix"
+                "next": "residenceFix",
+                "detour": true
               }
             ]
           },
@@ -1826,7 +1854,8 @@
               {
                 "label": "Erst zur alten Meldestelle zurückfahren.",
                 "reply": "Sie können gern spazieren fahren. Für diesen Umzug ist eine gesonderte Abmeldung dort aber nicht nötig! Bleiben Sie bei Ihrer Anmeldung hier!",
-                "next": "previousFix"
+                "next": "previousFix",
+                "detour": true
               }
             ]
           },
@@ -1861,7 +1890,8 @@
               {
                 "label": "Der Pass müsste doch alle Fragen erledigen.",
                 "reply": "Der Pass erledigt Identität. Wenn Personendaten geklärt werden müssen, klären wir sie. Ihre Mappe hat die Urkunde bereits dabei!",
-                "next": "civilStatusFix"
+                "next": "civilStatusFix",
+                "detour": true
               }
             ]
           },
@@ -1896,7 +1926,8 @@
               {
                 "label": "Nur die Kopien, die Originale sind kostbar.",
                 "reply": "Kostbar ist hier auch meine Zeit! Bringen Sie die vorhandenen Originale nach vorne, ich prüfe sie und gebe sie zurück!",
-                "next": "originalsFix"
+                "next": "originalsFix",
+                "detour": true
               }
             ]
           },
@@ -1931,7 +1962,8 @@
               {
                 "label": "Alles auf heute, dann sind die Daten gleich.",
                 "reply": "Ordentlich FALSCH bleibt falsch! Einzug, Anfrage, Termin und Nachreichung haben ihre tatsächlichen Daten!",
-                "next": "chronologyFix"
+                "next": "chronologyFix",
+                "detour": true
               }
             ]
           },
@@ -1966,7 +1998,8 @@
               {
                 "label": "Morgen wiederkommen, wenn er sich beruhigt.",
                 "reply": "DER DRUCKER HAT KEINEN TERMIN! Sie bleiben hier. Ich öffne das Ersatzfach. Ihre Anmeldung wartet nicht auf seine Gemütslage!",
-                "next": "printerFix"
+                "next": "printerFix",
+                "detour": true
               }
             ]
           },
@@ -1993,6 +2026,7 @@
             "line": "Letzte Prüfung: Name, tatsächliches Einzugsdatum, Anschrift und Wohnungsart. Prüfen Sie die Angaben, bevor ich den Vorgang abschließe. Wenn Sie jetzt nur auf den Stempel starren, starrt er zurück. Was tun Sie?",
             "choices": [
               {
+                "points": 1,
                 "label": "Alle Angaben mit den Unterlagen abgleichen.",
                 "reply": "Angaben stimmen. Die Identität ist geprüft, der Einzug bestätigt und das Formular unterschrieben. Mein Stempel hat keine offene Ausrede mehr.",
                 "next": "final",
@@ -2001,7 +2035,8 @@
               {
                 "label": "Einfach stempeln, ich halte es nicht mehr aus.",
                 "reply": "ICH HALTE ES AUCH NICHT MEHR AUS! Trotzdem prüfen Sie die Angaben. Ein falsches Register wird nicht durch Eile richtig!",
-                "next": "reviewFix"
+                "next": "reviewFix",
+                "detour": true
               }
             ]
           },
@@ -2028,12 +2063,14 @@
             "line": "So. Die Anmeldung wird jetzt abgeschlossen. Gleich bekommen Sie Ihre Meldebestätigung. Nicht noch einen Antrag, keinen Rückweg, keine neue Nummer. Sind die geprüften Angaben richtig und nehmen Sie die Bestätigung entgegen?",
             "choices": [
               {
+                "points": 1,
                 "label": "Ja. Anmeldung abschließen und entgegennehmen.",
                 "reply": "ANGEMELDET. Hier ist Ihre Meldebestätigung. Anmeldung abgeschlossen, Abzeichen auf Ihrer Akte. Sie existieren jetzt auch schriftlich. Gehen Sie, bevor der Drucker eine Rückfrage hat!",
                 "next": "complete",
                 "stamp": "Anmeldung abgeschlossen"
               },
               {
+                "points": 1,
                 "label": "Ja, und den vollständigen Ausdruck mitnehmen.",
                 "reply": "VOLLSTÄNDIG ANGEMELDET. Die Meldebestätigung gehört Ihnen. Ihr Abzeichen lautet Anmeldung abgeschlossen. Ich unterschreibe nichts über Ihre Begeisterung. Die fehlt hier auch nicht!",
                 "next": "complete",

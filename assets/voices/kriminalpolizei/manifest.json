@@ -174,6 +174,44 @@
       "integratedLufs": -18.25,
       "truePeakDbtp": -4.57,
       "listeningReview": "not performed; user requested this saved profile"
+    },
+    {
+      "clipId": "kriminalpolizei-phone-05",
+      "voiceId": "kriminalpolizei",
+      "profileId": "f700170f840543bca7413d3ccf6ac028",
+      "profileName": "GS Kriminalpolizei",
+      "text": "Na gut. Die Kollegen warten draußen. Geben Sie der Polizei einen ausführlichen Bericht über sämtliche Stellen, an denen Sie heute über den Rasen gelaufen sind. Jeden Weg, jeden Umweg, jeden Grashalm! Sonst gibt es auf der Wache noch mehr Papierkram.",
+      "referenceSha256": "ef452114430b47167239cdb065b1e01d502c0148f1492ac1b66098a03c0ea82e",
+      "synthesisReferenceSha256": "ef452114430b47167239cdb065b1e01d502c0148f1492ac1b66098a03c0ea82e",
+      "renderer": "Secret Tunnel 6 bundled OmniVoice Rust",
+      "model": "k2-fsa/OmniVoice",
+      "modelRevision": "c5fdb5ccb189668d56333f77ba2629f4cd7535f4",
+      "modelLicense": "OmniVoice noncommercial; Boson and Meta tokenizer terms",
+      "inferenceRevision": "wide-rank-v2-prompt-preprocess",
+      "sourceClipId": "2026-10-13_01-14-58",
+      "sourceFile": "2026-10-13_01-14-58__wf100.mp3",
+      "sourceSha256": "4b6edb9ffa8aa0ce82452f53aa2604c4b06f1c591b512de1fa8e020d1ee432a7",
+      "sourceWordFidelity": {
+        "model": "oxide-lab/whisper-large-v3-turbo-GGUF-q4_0",
+        "percent": 100,
+        "recognized_words": 40,
+        "reference_words": 40,
+        "transcript": "Na gut, die Kollegen warten draußen. Geben Sie der Polizei einen ausführlichen Bericht über sämtliche Stellen, an denen Sie heute über den Rasen gelaufen sind. Jeden Weg, jeden Umweg, jeden Grashalm. Sonst gibt es auf der Wache noch mehr Papierkram.",
+        "word_edits": 0
+      },
+      "processing": "Stereo source downmixed to mono; loudness matched and re-encoded to 24 kHz 128 kbit/s MP3; final encoded file independently transcribed",
+      "durationSeconds": 14.36,
+      "bytes": 231212,
+      "sampleRate": 24000,
+      "channels": 1,
+      "asr": "Na gut, die Kollegen warten draußen. Geben Sie der Polizei einen ausführlichen Bericht über sämtliche Stellen, an denen Sie heute über den Rasen gelaufen sind. Jeden Weg, jeden Umweg, jeden Grashalm. Sonst gibt es auf der Wache noch mehr Papierkram.",
+      "asrWordExact": true,
+      "asrModel": "independent faster-whisper CPU int8, cached model e76620f83d5f5b69efd3d87e3dc180c1bd21df9fbebacfd4335e5e1efcc018da, beam 1 and 3",
+      "path": "assets/voices/kriminalpolizei/kriminalpolizei-phone-05.mp3",
+      "sha256": "e6f47c6c3ed982c7755b7c2b631167e3dcd4028183f4f9e90c59469d834b667f",
+      "integratedLufs": -18.0,
+      "truePeakDbtp": -2.29,
+      "listeningReview": "not performed; exact new ending requested by user"
     }
   ]
 }

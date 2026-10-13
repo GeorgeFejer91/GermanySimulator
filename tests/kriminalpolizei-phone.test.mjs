@@ -11,7 +11,7 @@ for(const search of ['', '?voicePreview=1']){
  const library=context.window.GermanySimulatorAudioText,story=context.window.BuergeramtStory;
  assert.equal(manifest.profileName,'GS Kriminalpolizei');assert.equal(manifest.profileId,'f700170f840543bca7413d3ccf6ac028');
  assert.equal(story.call.voiceId,library.speechFamilies.amtPolice.voiceId);assert.equal(library.voices.kriminalpolizei.profileId,manifest.profileId);
- assert.equal(manifest.clips.length,4);assert.match(story.call.line,/^Hier ist die Kriminalpolizei\./);assert.match(story.outburst.lines[1],/Die Dame hat einen Namen/);assert.ok(!story.outburst.lines[1].includes('Wachtmeister'));
+ assert.equal(manifest.clips.length,5);assert.match(story.call.line,/^Hier ist die Kriminalpolizei\./);assert.match(story.outburst.lines[1],/Die Dame hat einen Namen/);assert.ok(!story.outburst.lines[1].includes('Wachtmeister'));
  for(const [index,text] of [story.call.line,...story.police].entries()){
   const clip=manifest.clips[index];assert.equal(clip.text,text);assert.equal(clip.voiceId,story.call.voiceId);assert.equal(clip.profileId,manifest.profileId);
   assert.equal(library.recordedClip(story.call.voiceId,text),'./'+clip.path);

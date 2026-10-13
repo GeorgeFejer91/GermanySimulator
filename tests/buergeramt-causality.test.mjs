@@ -41,7 +41,7 @@ test('exiting at each consequential stage isolates the next visit from old event
  const setups={
   entrance:()=>{},waiting:h=>h.wait(),called:h=>{h.wait();h.approachCounter();h.awaitCall()},
   ringing:h=>h.counter(),warning:h=>{h.counter();h.links[0].message({type:'decline',id:'grass'})},
-  registration:h=>{h.counter();h.links[0].message({type:'silence',id:'grass'});h.tick(30000)},
+  registration:h=>{h.counter();h.links[0].message({type:'phone-hidden'});h.tick(30000)},
   argument:h=>{h.counter();h.links[0].message({type:'answer',id:'grass'})},
   omen:h=>h.enterUntilOmen()
  };

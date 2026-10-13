@@ -85,7 +85,7 @@ test('tempo changes preserve the absolute committed first-ring deadline',()=>{
 });
 
 test('the slowest authored call lead stays a bounded 4400 ms peer deadline',()=>{
- const host=transport('host'),payload={id:'grass',line:'Anruf.',ringAtPhoneMs:4400,ringAtUtcMs:null,leadMs:4400};
+ const host=transport('host'),payload={id:'grass',round:1,line:'Anruf.',ringAtPhoneMs:4400,ringAtUtcMs:null,leadMs:4400};
  assert.equal(host.link.send('call',payload),true);assert.equal(host.link.send('call',{...payload,leadMs:4401}),false);
  const h=harness('phone'),link=h.phoneReady();h.node('phone-name').value='Erika Mustermann';h.node('phone-form').dispatchEvent(new Event('submit',{cancelable:true}));
  link.message({type:'ticket',number:'B-223',counter:3});link.message({type:'office-tempo',rate:.5});link.message({type:'call-arm',id:'grass'});link.message({type:'call',...payload});
@@ -133,6 +133,6 @@ test('expired or hidden phone attempts cancel media and cannot absorb later temp
   const h=harness('phone',{candidatePhone:true,fakeAudio:true}),link=h.incoming();h.node('phone-answer').click();h.tick(20);const clip=h.audio.recordings[0];
   if(exit==='hidden')h.hide();else link.message({type:'forfeit'});
   link.message({type:'office-tempo',rate:.5});assert.equal(clip.paused,true);assert.equal(clip.playbackRate,1);h.tick(150000);
-  assert.equal(link.sent.filter(message=>message.type==='police-done').length,0);assert.equal(h.node('phone-expired').hidden,false);
+  assert.equal(link.sent.filter(message=>message.type==='police-done').length,0);assert.equal(h.node('phone-expired').hidden,exit==='hidden');
  }
 });
