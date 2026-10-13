@@ -1199,6 +1199,12 @@ Source boundaries include the complete painted teeth/corner cavity; the skin
 sampling map reaches identity continuously at its protected guards. The existing
 whole-face/body blend can still soften or double between anchors.
 
+Independent Physics and Camera reviewers accept the affected mouth/attachment
+and scripted C4/X1 scope on the same frozen runtime hashes. They freshly inspect
+source, pixels and traces; browser execution is supplied. No remaining mouth-fit
+finding is reported. Physical Android, listening, natural mission progression,
+full-video watching and perceptual phoneme accuracy remain outside this evidence.
+
 Twenty-four quiet hardware-ANGLE cold contexts compare six root and six office
 runs on each side against `2406224`, using the same final asset tree, DPR 2 and
 seed 424242. All transfer/title/drawing-buffer/input/error gates pass. Candidate
