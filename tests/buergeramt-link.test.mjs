@@ -3,6 +3,21 @@ import assert from 'node:assert/strict';
 import vm from 'node:vm';
 import {source} from './amt-harness.mjs';
 
+test('one- and two-letter tickets, calls and receipts pass transport validation, malformed codes do not',()=>{
+ for(const number of ['A-004','ZA-731','XB-018']){
+  const host=transport(),phone=transport('phone'),receipt={id:'a'.repeat(24),number};
+  assert.equal(host.link.send('ticket',{number,counter:2}),true);assert.equal(host.link.send('queue-call',{number,counter:2}),true);
+  phone.channel.receive({type:'ticket',number,counter:2});phone.channel.receive({type:'queue-call',number,counter:2,seq:2});
+  assert.equal(phone.messages.length,2);assert.equal(phone.link.send('ticket-received',receipt),true);
+  host.channel.receive({type:'ticket-received',...receipt});assert.equal(host.messages.length,1);
+ }
+ for(const number of ['ABC-123','za-123','A--123','-123','ZA-','ZA-1234567890123']){
+  const host=transport(),phone=transport('phone');
+  assert.equal(host.link.send('ticket',{number,counter:2}),false);assert.equal(host.link.send('queue-call',{number,counter:2}),false);
+  assert.equal(phone.link.send('ticket-received',{id:'a'.repeat(24),number}),false);
+ }
+});
+
 test('only the phone sends a bounded ticket receipt with the scan ID and exact code',()=>{
  const host=transport(),phone=transport('phone'),receipt={id:'a'.repeat(24),number:'B-041'};
  for(const bad of [{...receipt,id:'bad'},{...receipt,id:[receipt.id]},{...receipt,number:'41'},{...receipt,counter:3},{number:receipt.number}])host.channel.receive({type:'ticket-received',...bad});
@@ -260,7 +275,7 @@ test('long queue codes remain bounded and survive ticket, receipt and queue-call
  assert.equal(phone.link.send('ticket-received',receipt),true);
  phone.channel.receive({type:'ticket',...payload});phone.channel.receive({type:'queue-call',...payload,seq:2});host.channel.receive({type:'ticket-received',...receipt});
  assert.equal(phone.messages.length,2);assert.equal(host.messages.length,1);
- for(const invalid of ['Z-1234567890123','ZZ-1000','z-1000','Z-','Z-1.5']){
+ for(const invalid of ['Z-1234567890123','ZZZ-1000','z-1000','Z-','Z-1.5']){
   assert.equal(host.link.send('ticket',{...payload,number:invalid}),false);
   assert.equal(host.link.send('queue-call',{...payload,number:invalid}),false);
   assert.equal(phone.link.send('ticket-received',{...receipt,number:invalid}),false);

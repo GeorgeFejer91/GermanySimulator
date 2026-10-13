@@ -35,9 +35,7 @@ function turnOfficeView(elapsed){
  if(!target&&Math.abs(turnVelocity)<1e-8)turnVelocity=0;
 }
 const counterXs=[-5.8,-1.6,3.9,6.2];let assignedCounter=0,interactingCounter=0;
-const queueCodes=["B-041","Z-7","F-91","A-004","K-002","C-201","H-73","D-008","M-62","E-319","R-5","G-086","W-204","J-17","P-003","N-58"];
-const initialQueueCodes=new Set(queueCodes);
-for(let i=0;i<2600;i++){const code=String.fromCharCode(65+Math.floor(i/100))+"-"+String(i%100).padStart(3,"0");if(!initialQueueCodes.has(code))queueCodes.push(code)}
+const queueCodes=new Map(),queueCodePools=[new Map(),new Map()],queueCodeCounts=[0,0];
 const queueCounters=[3,1,4,2],callInterval=3.2,callWindow=30;
 const phoneTickets=new Map();let activePhonePeer="";
 let ticketQueueIndex=-1;const counterCalls=["—","—","—","—"];
@@ -480,7 +478,16 @@ function selectPhoneTicket(ticket){
 function retirePhoneTicket(ticket){
  link?.send("forfeit",{},ticket.peer);phoneTickets.delete(ticket.peer);
 }
-function queueCode(index){if(index<queueCodes.length)return queueCodes[(index+queueCodes.length)%queueCodes.length];const offset=index-queueCodes.length;return String.fromCharCode(65+offset%26)+"-"+(1000+Math.floor(offset/26))}
+function queueCode(index){
+ if(queueCodes.has(index))return queueCodes.get(index);
+ // Draw without replacement from single- and double-letter codes, without building the whole pool.
+ const group=Math.random()<.5?0:1,size=(group?676:26)*1000,count=queueCodeCounts[group]++,remaining=size-count%size,pool=queueCodePools[group];
+ const pick=Math.floor(Math.random()*remaining),value=pool.get(pick)??pick,last=remaining-1;
+ pool.set(pick,pool.get(last)??last);pool.delete(last);
+ const letters=Math.floor(value/1000),prefix=group?String.fromCharCode(65+Math.floor(letters/26),65+letters%26):String.fromCharCode(65+letters);
+ const code=prefix+"-"+String(Math.floor(count/size)*1000+value%1000).padStart(3,"0");
+ queueCodes.set(index,code);return code;
+}
 function reservedQueueIndex(start){let index=start;while([...phoneTickets.values()].some(ticket=>ticket.number&&(ticket.index===index||ticket.number===queueCode(index))))index++;return index}
 function receiveAdmission(message,peer,currentLink){
  let ticket=phoneTickets.get(peer);
@@ -1029,7 +1036,7 @@ function close(notify=true){
  try{officeAudio?.ctx.close()?.catch(()=>{})}catch{}officeAudio=null;clearOfficeInput();root.hidden=true;walkHud.hidden=true;mixPanel.open=false;mixPanel.hidden=true;ambient.textContent="";
  document.body.classList.remove("amt-inside");const previous=link;link=null;for(const ticket of phoneTickets.values())previous?.send(phoneComplete&&ticket.peer===activePhonePeer?"done":"forfeit",{},ticket.peer);phoneTickets.clear();setTimeout(()=>previous?.close(),250);config.music?.(false);if(notify)config.onClose();
 }
-function open(config){if(active)return;phoneTickets.clear();activePhonePeer="";resetRegistration();resetTiming();hostVoiceStartupMs=null;hostVoiceAttempts=0;attempt++;callOutcome="";options=config;active=true;requestFullscreen();assignedCounter=0;interactingCounter=0;counter.x=counterXs[2];resetStationaryClocks();feverClock?.clear();encounterArmed=false;clerkIndex=0;callPending=false;callTriggered=false;callCommitted=false;callArmTimer=null;clockAnchor=null;registeredName="";number="";activated=false;lastScanId="";queueClock=0;queueIndex=0;queueCallPending=-1;queueCallReadyAt=0;queueCallSpeaking=false;queueCallCooldown=35+Math.random()*40;ambientKindBag.length=0;ambientLastKind="";ambientBag.length=0;ambientLastVoice="";ambientLastText="";ambientIndex=0;ticketQueueIndex=-1;for(let i=-3;i<=0;i++)counterCalls[queueCounters[(i+4)%4]-1]=queueCodes[(i+queueCodes.length)%queueCodes.length];deadline=0;ambientClock=0;clerkClock=0;floorClock=0;visualClock=0;restoration=null;tempoSentAt=-Infinity;tempoSentRate=null;clerkSpeaking=false;clerkAccent=0;clerkBeat="idle";clerkPulse=0;patronEncounters={};clerkAnimation?.reset(attempt);displayNumber(queueCodes[0],queueCounters[0]);view.x=0;view.z=4.8;view.yaw=0;view.pitch=0;view.walkedDistance=0;clearOfficeInput();resetCharacters();resetOmen();exit.hidden=false;root.hidden=false;mixPanel.hidden=false;document.body.classList.add("amt-inside");options.music?.(true);beginLink();setStage("walk-sign");setStatus("QR-CODE MIT DEM TELEFON SCANNEN");const owner=attempt;window.BuergeramtClock?.sample?.().then(anchor=>{if(active&&attempt===owner)clockAnchor=anchor}).catch(()=>{})}
+function open(config){if(active)return;phoneTickets.clear();activePhonePeer="";resetRegistration();resetTiming();hostVoiceStartupMs=null;hostVoiceAttempts=0;attempt++;callOutcome="";options=config;active=true;requestFullscreen();assignedCounter=0;interactingCounter=0;counter.x=counterXs[2];resetStationaryClocks();feverClock?.clear();encounterArmed=false;clerkIndex=0;callPending=false;callTriggered=false;callCommitted=false;callArmTimer=null;clockAnchor=null;registeredName="";number="";activated=false;lastScanId="";queueClock=0;queueIndex=0;queueCodes.clear();queueCodePools.forEach(pool=>pool.clear());queueCodeCounts.fill(0);queueCallPending=-1;queueCallReadyAt=0;queueCallSpeaking=false;queueCallCooldown=35+Math.random()*40;ambientKindBag.length=0;ambientLastKind="";ambientBag.length=0;ambientLastVoice="";ambientLastText="";ambientIndex=0;ticketQueueIndex=-1;for(let i=-3;i<=0;i++)counterCalls[queueCounters[(i+4)%4]-1]=queueCode(i);deadline=0;ambientClock=0;clerkClock=0;floorClock=0;visualClock=0;restoration=null;tempoSentAt=-Infinity;tempoSentRate=null;clerkSpeaking=false;clerkAccent=0;clerkBeat="idle";clerkPulse=0;patronEncounters={};clerkAnimation?.reset(attempt);displayNumber(queueCode(0),queueCounters[0]);view.x=0;view.z=4.8;view.yaw=0;view.pitch=0;view.walkedDistance=0;clearOfficeInput();resetCharacters();resetOmen();exit.hidden=false;root.hidden=false;mixPanel.hidden=false;document.body.classList.add("amt-inside");options.music?.(true);beginLink();setStage("walk-sign");setStatus("QR-CODE MIT DEM TELEFON SCANNEN");const owner=attempt;window.BuergeramtClock?.sample?.().then(anchor=>{if(active&&attempt===owner)clockAnchor=anchor}).catch(()=>{})}
 function clerkPerformance(){
  const names={idle:0,review:1,raise:2,stamp:3,deny:4,talk:5};
  let mode="idle";

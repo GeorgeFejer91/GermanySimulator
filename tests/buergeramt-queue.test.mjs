@@ -2,6 +2,30 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import {harness,source} from './amt-harness.mjs';
 
+test('queue slots keep unique random one- and two-letter codes beyond the old ordered list',()=>{
+ let seed=57,draws=0;
+ const random=()=>{draws++;seed=(Math.imul(seed,1664525)+1013904223)>>>0;return seed/2**32};
+ const hostSource=source('buergeramt.js').replace('window.BuergeramtLevel={','window.__queueCode=queueCode;window.BuergeramtLevel={');
+ const h=harness('host',{random,hostSource}),codes=Array.from({length:3000},(_,i)=>h.window.__queueCode(i));
+ assert.equal(new Set(codes).size,codes.length);assert(codes.every(code=>/^[A-Z]{1,2}-\d{3}$/.test(code)));
+ assert(codes.filter(code=>code.indexOf('-')===1).length>1000);assert(codes.filter(code=>code.indexOf('-')===2).length>1000);
+ assert.equal(new Set(codes.map(code=>code[0])).size,26);
+ const numbers=codes.map(code=>Number(code.split('-')[1]));
+ assert(numbers.filter((n,i)=>i&&n>numbers[i-1]).length>1000);assert(numbers.filter((n,i)=>i&&n<numbers[i-1]).length>1000);
+ const before=draws;codes.forEach((code,i)=>assert.equal(h.window.__queueCode(i),code));assert.equal(draws,before,'lookup must not redraw a reserved slot');
+ h.level.replay(h.config);assert.notEqual(h.window.__queueCode(0),codes[0],'a new visit draws fresh codes');
+});
+
+test('ZA and XB prefixes are reachable and exhausted pools extend without collisions or retry loops',()=>{
+ let draws=[];
+ const hostSource=source('buergeramt.js').replace('window.BuergeramtLevel={','window.__queueCode=queueCode;window.BuergeramtLevel={');
+ const h=harness('host',{random:()=>draws.shift()??0,hostSource});
+ draws=[.9,650731.5/676000];assert.equal(h.window.__queueCode(100),'ZA-731');
+ draws=[.9,599018.5/675999];assert.equal(h.window.__queueCode(101),'XB-018');
+ const codes=Array.from({length:26010},(_,i)=>h.window.__queueCode(i+200));
+ assert.equal(new Set(codes).size,codes.length);assert(codes.some(code=>/^[A-Z]-\d{4}$/.test(code)));
+});
+
 test('scans and invalid or stale name submissions never allocate a number or counter',()=>{
  const h=harness();h.register();const link=h.links[0];
  for(const message of [{type:'register',name:' '},{type:'register',name:'X'},{type:'register',id:'b'.repeat(24),name:'Erika Mustermann'}])link.message(message);
@@ -57,7 +81,7 @@ test('ticket and call copy contains no imperative counter directions',()=>{
 
 test('all four board rows have distinct calls before registration, and only the newly called row changes',()=>{
  const h=harness(),before=JSON.parse(JSON.stringify(h.level.queueCalls));
- assert.deepEqual(before.map(c=>c.counter),[1,2,3,4]);assert.equal(new Set(before.map(c=>c.number)).size,4);assert.ok(before.every(c=>/^[A-Z]-\d{1,3}$/.test(c.number)));
+ assert.deepEqual(before.map(c=>c.counter),[1,2,3,4]);assert.equal(new Set(before.map(c=>c.number)).size,4);assert.ok(before.every(c=>/^[A-Z]{1,2}-\d{1,3}$/.test(c.number)));
  // Queue calls use scene time, which begins decelerating immediately inside.
  advanceScene(h,3.2);h.level.update(.001);const after=h.level.queueCalls;assert.equal(after.filter((c,i)=>c.number!==before[i].number).length,1);assert.equal(h.level.activated,false);
 });

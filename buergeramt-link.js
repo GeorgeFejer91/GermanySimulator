@@ -16,7 +16,7 @@ function validPayload(type,data,sender){
  const fields=shapes[type],keys=Object.keys(data);
  if(keys.length!==fields.length||keys.some(key=>!fields.includes(key)))return false;
  if(type==="office-tempo")return Number.isFinite(data.rate)&&data.rate>=.5&&data.rate<=1;
- if(type==="ticket-received")return typeof data.id==="string"&&/^[a-f0-9]{24}$/.test(data.id)&&typeof data.number==="string"&&/^[A-Z]-\d{1,12}$/.test(data.number);
+ if(type==="ticket-received")return typeof data.id==="string"&&/^[a-f0-9]{24}$/.test(data.id)&&typeof data.number==="string"&&/^[A-Z]{1,2}-\d{1,12}$/.test(data.number);
  if(type==="scan"||type==="register"){if(typeof data.id!=="string"||!/^[a-f0-9]{24}$/.test(data.id))return false;if(type==="scan")return true}
  const clock=value=>Number.isFinite(value)&&value>=0&&value<=1e12;
  if(type==="sync-ping"||type==="sync-pong")return Number.isSafeInteger(data.id)&&data.id>0&&data.id<=2147483647&&
@@ -27,7 +27,7 @@ function validPayload(type,data,sender){
  if(type==="police-start"||type==="police-done")return Number.isInteger(data.index)&&data.index>=-1&&data.index<4&&["voice","recording","fallback"].includes(data.mode)&&
   clock(data.atMs)&&(type==="police-start"?Number.isInteger(data.readyDelayMs)&&data.readyDelayMs>=0&&data.readyDelayMs<=60000:Number.isInteger(data.durationMs)&&data.durationMs>=0&&data.durationMs<=60000);
  if(type==="register")return typeof data.name==="string"&&data.name.trim().length>=2&&data.name.length<=80&&!/[\u0000-\u001f\u007f]/.test(data.name);
- if(type==="ticket"||type==="queue-call")return typeof data.number==="string"&&/^[A-Z]-\d{1,12}$/.test(data.number)&&Number.isInteger(data.counter)&&data.counter>=1&&data.counter<=4;
+ if(type==="ticket"||type==="queue-call")return typeof data.number==="string"&&/^[A-Z]{1,2}-\d{1,12}$/.test(data.number)&&Number.isInteger(data.counter)&&data.counter>=1&&data.counter<=4;
  if(type==="answer"||type==="decline"||type==="hangup"||type==="call-missed"||type==="call-arm")return data.id==="grass"&&round(data.round);
  if(type==="silence")return data.id==="grass";
  if(type==="call")return data.id==="grass"&&round(data.round)&&typeof data.line==="string"&&data.line.trim().length>0&&data.line.length<350&&

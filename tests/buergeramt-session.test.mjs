@@ -190,7 +190,7 @@ test('replay and voice-off release deferred city-to-office speech safely',()=>{
 });
 
 test('the board calls continuously but scanning only opens name admission',()=>{
- const h=harness();assert.equal(h.level.queueDisplay,'B-041');h.enter();h.advanceGame(4);const first=h.level.queueDisplay;h.advanceGame(4);assert.notEqual(h.level.queueDisplay,first);
+ const h=harness();assert.match(h.level.queueDisplay,/^[A-Z]{1,2}-\d{3}$/);h.enter();h.advanceGame(4);const first=h.level.queueDisplay;h.advanceGame(4);assert.notEqual(h.level.queueDisplay,first);
  h.links[0].message({type:'scan',id:'a'.repeat(24)});assert.equal(h.links[0].sent.at(-1).type,'scan-ready');assert.equal(h.level.registrationTicket,'');assert.equal(h.level.assignedCounter.number,0);assert.equal(h.level.activated,false);
  h.links[0].message({type:'register',name:'  Erika   Mustermann '});const ticket=h.links[0].sent.at(-1);assert.equal(ticket.type,'ticket');assert.equal(h.level.registeredName,'Erika Mustermann');h.links.at(-1).message({type:'ticket-received',id:h.links.at(-1).scanId,number:h.level.registrationTicket});assert.equal(h.level.stage,'waiting');
  h.links[0].message({type:'scan',id:'a'.repeat(24)});assert.equal(h.links[0].sent.at(-1).number,ticket.number);
@@ -334,8 +334,8 @@ test('a failed first phone voice also shortens the next stalled-line watchdog',(
 });
 test('phone scan opens the form and only its submission reveals the ticket',()=>{
  const h=harness('phone'),link=h.phoneReady();assert.equal(link.sent[0].type,'scan');assert.equal(h.node('phone-ticket').hidden,true);assert.equal(h.node('phone-form').hidden,false);
- link.message({type:'ticket',number:'Z-7',counter:1});assert.equal(h.node('phone-ticket').hidden,true);
- h.node('phone-name').value='Erika Mustermann';h.node('phone-form').dispatchEvent(new Event('submit',{cancelable:true}));assert.equal(link.sent.at(-1).type,'register');link.message({type:'ticket',number:'Z-7',counter:1});assert.equal(h.node('phone-number').textContent,'Z-7');assert.equal(link.sent.at(-1).type,'ticket-received');assert.equal(link.sent.at(-1).number,'Z-7');assert.equal(h.node('phone-ticket').hidden,false);
+ link.message({type:'ticket',number:'ZA-731',counter:1});assert.equal(h.node('phone-ticket').hidden,true);
+ h.node('phone-name').value='Erika Mustermann';h.node('phone-form').dispatchEvent(new Event('submit',{cancelable:true}));assert.equal(link.sent.at(-1).type,'register');link.message({type:'ticket',number:'ZA-731',counter:1});assert.equal(h.node('phone-number').textContent,'ZA-731');assert.equal(link.sent.at(-1).type,'ticket-received');assert.equal(link.sent.at(-1).number,'ZA-731');assert.equal(h.node('phone-ticket').hidden,false);
 });
 test('phone retries name submission until its allocated ticket arrives',()=>{
  const h=harness('phone'),link=h.phoneReady();h.node('phone-name').value='Erika Mustermann';h.node('phone-form').dispatchEvent(new Event('submit',{cancelable:true}));h.tick(3001);const submitted=link.sent.filter(m=>m.type==='register');assert.equal(submitted.length,3);assert.ok(submitted.every(m=>m.id===link.sent[0].id));link.message({type:'ticket',number:'B-223',counter:3});h.tick(3001);assert.equal(link.sent.filter(m=>m.type==='register').length,3);
@@ -350,9 +350,9 @@ test('the phone displays its code before confirming it and retries a failed rece
 
 test('an immediate ticket response cannot be lost or leave the phone allocation pending',()=>{
  const h=harness('phone'),link=h.phoneReady(),original=link.send.bind(link);
- link.send=(type,payload)=>{const sent=original(type,payload);if(type==='register'&&sent)link.message({type:'ticket',number:'Z-7',counter:1});return sent};
+ link.send=(type,payload)=>{const sent=original(type,payload);if(type==='register'&&sent)link.message({type:'ticket',number:'ZA-731',counter:1});return sent};
  h.node('phone-name').value='Erika Mustermann';h.node('phone-form').dispatchEvent(new Event('submit',{cancelable:true}));
- assert.equal(h.node('phone-number').textContent,'Z-7');assert.equal(h.node('phone-ticket').hidden,false);assert.equal(h.node('phone-admission-status').hidden,true);assert.equal(link.sent.at(-1).type,'ticket-received');
+ assert.equal(h.node('phone-number').textContent,'ZA-731');assert.equal(h.node('phone-ticket').hidden,false);assert.equal(h.node('phone-admission-status').hidden,true);assert.equal(link.sent.at(-1).type,'ticket-received');
 });
 test('name submission silently unlocks audio before ticket delivery',()=>{
  const h=harness('phone');let resumes=0;h.window.AudioContext=class{createGain(){return{gain:{value:0},connect(){}}}resume(){resumes++;return Promise.resolve()}};h.phoneReady();h.node('phone-name').value='Erika Mustermann';h.node('phone-form').dispatchEvent(new Event('submit',{cancelable:true}));assert.equal(resumes,1);assert.ok(h.vibrations.every(pattern=>pattern===0));assert.equal(h.fullscreenRequests.length,1);h.links[0].message({type:'ticket',number:'B-224',counter:3});assert.equal(h.node('phone-number').textContent,'B-224');assert.equal(h.node('phone-ticket').hidden,false);
