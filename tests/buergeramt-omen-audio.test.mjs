@@ -96,7 +96,7 @@ test('exit and replay cancel pending omen callbacks',()=>{
 
 test('city foreground audio defers the omen until it clears',()=>{
  let cityBusy=true;const h=harness('host',{cinematics:true,cityAudioBusy:()=>cityBusy,fakeAudio:true});
- h.enter();h.key('KeyE');h.advanceGame(9);assert.equal(h.level.stage,'walk-sign');assert.equal(h.level.omen.phase,'');
+ h.enter();h.advanceGame(9);assert.equal(h.level.stage,'walk-sign');assert.equal(h.level.omen.phase,'');
  assert.equal(h.audio.contexts.length,0);
  cityBusy=false;
  for(let i=0;i<100&&h.level.stage!=='omen';i++)h.level.update(.05);

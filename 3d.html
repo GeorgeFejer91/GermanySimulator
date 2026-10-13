@@ -37,6 +37,7 @@ html,body,#app{margin:0;width:100%;height:100%;overflow:hidden;background:#77756
   </nav>
 </main>
 <script src="./goerlitzer-park.js?v=20261012-browser-smoothness"></script>
+<script src="./jwd-gardens.js?v=20261013-jwd-gardens"></script>
 <script>
 (()=>{"use strict";
 const goerlitzerPark=window.GoerlitzerPark;
@@ -59,9 +60,9 @@ const buildings=[
 {id:"jwd-villa-linde",residential:true,variant:"villa",name:"VILLA LINDENHOF",x:110,y:3380,w:200,h:190,hgt:170,doorX:210,doorY:3600,sign:"PRIVATWEG · BITTE GRÜSSEN"},
 {id:"jwd-villa-wald",residential:true,variant:"villa",name:"HAUS WALDFRIEDEN",x:430,y:3380,w:240,h:190,hgt:150,doorX:550,doorY:3600,sign:"SEIT 1928 IN GUTER NACHBARSCHAFT"},
 {id:"jwd-landhaus",residential:true,variant:"landhaus",name:"LANDHAUS NR. 34",x:790,y:3400,w:170,h:170,hgt:115,doorX:875,doorY:3600,sign:"KEINE WERBUNG · AUCH KEINE IDEEN"},
-{id:"jwd-fink",residential:true,name:"FAMILIE FINK",x:100,y:3760,w:240,h:190,hgt:110,doorX:220,doorY:3980,sign:"KEHRWOCHE IST IMMER"},
-{id:"jwd-home",residential:true,name:"DEIN ZUHAUSE · JWD",x:410,y:3760,w:240,h:190,hgt:95,doorX:530,doorY:3980,sign:"JANZ WEIT DRAUSSEN · NR. 38"},
-{id:"jwd-kranz",residential:true,name:"FAMILIE KRANZ",x:720,y:3760,w:240,h:190,hgt:125,doorX:840,doorY:3980,sign:"EIGENHEIM · FREMDE SORGEN"},
+{id:"jwd-fink",residential:true,name:"FAMILIE FINK",x:100,y:3730,w:240,h:140,hgt:110,doorX:220,doorY:3900,sign:"KEHRWOCHE IST IMMER"},
+{id:"jwd-home",residential:true,name:"DEIN ZUHAUSE · JWD",x:410,y:3730,w:240,h:140,hgt:95,doorX:530,doorY:3900,sign:"JANZ WEIT DRAUSSEN · NR. 38"},
+{id:"jwd-kranz",residential:true,name:"FAMILIE KRANZ",x:720,y:3730,w:240,h:140,hgt:125,doorX:840,doorY:3900,sign:"EIGENHEIM · FREMDE SORGEN"},
 {id:"buergeramt",name:"BÜRGERAMT",x:150,y:220,w:350,h:250,hgt:115,doorX:325,doorY:500,sign:"TERMIN NUR MIT TERMIN"},
 {id:"hausverwaltung",name:"HAUSVERWALTUNG",x:590,y:210,w:330,h:255,hgt:95,doorX:755,doorY:495,sign:"WOHNUNGSGEBERBESTÄTIGUNG"},
 {id:"stadtbild",name:"AMT FÜR STADTBILD",x:1390,y:220,w:360,h:245,hgt:105,doorX:1570,doorY:495,sign:"OPTISCHE ORDNUNG · DIN 0815"},
@@ -108,23 +109,24 @@ const npcs=[
 {x:4620,y:3270,special:"merkel",route:[[4620,3270],[5750,3270],[6150,3270],[7200,3270],[7200,3880],[6120,3880],[5750,3880],[4620,3880]],target:1,facingX:1,facingY:0,animTime:0,spriteRow:2,spriteFrame:1,line:0}
 ].map(n=>({...offsetWorldPoint(n),min:n.min==null?n.min:n.min+RAIL_GUTTER,max:n.max==null?n.max:n.max+RAIL_GUTTER,route:n.route?.map(([x,y])=>[x+RAIL_GUTTER,y+RAIL_GUTTER])}));
 const pickups=[{x:1980,y:870,type:"bratwurst",taken:false},{x:2110,y:880,type:"currywurst",taken:false},{x:4100,y:900,type:"brezel",taken:false},{x:3000,y:1910,type:"pfand",taken:false}].map(offsetWorldPoint);
-const walkways=[offsetWorldPoint({x:40,y:3970,w:1010,h:150})];
-const grassAreas=[];
-const jwdNeighborhood={name:"WALDSIEDLUNG · JWD",street:"AM FISCHTAL",signX:960+RAIL_GUTTER,signY:4150+RAIL_GUTTER};
-// A small garden suburb fits in the existing southwest block without moving railways.
-walkways.push(...[{x:40,y:3580,w:1010,h:130},{x:40,y:3580,w:60,h:540}].map(offsetWorldPoint));
-grassAreas.push(...[{x:40,y:3280,w:1010,h:90},{x:40,y:3370,w:70,h:200},{x:310,y:3370,w:120,h:200},{x:670,y:3370,w:120,h:200},{x:960,y:3370,w:18,h:200},{x:100,y:3710,w:878,h:50},{x:340,y:3760,w:70,h:210},{x:650,y:3760,w:70,h:210},{x:100,y:4120,w:878,h:80}].map(offsetWorldPoint));
+const walkways=[],grassAreas=[];
+const jwdGardens=window.JwdGardens||{paths:[],lots:[],props:[],stations:{}};
+const jwdLane=offsetWorldPoint({x:40,y:3890,w:1010,h:340});
+const jwdNeighborhood={name:"WALDSIEDLUNG · JWD",street:"AM FISCHTAL",signX:960+RAIL_GUTTER,signY:3920+RAIL_GUTTER};
+walkways.push(...jwdGardens.paths);grassAreas.push(...jwdGardens.lots);props.push(...jwdGardens.props);
+grassAreas.push(...[{x:40,y:3280,w:1010,h:90},{x:40,y:3370,w:70,h:200},{x:310,y:3370,w:120,h:200},{x:670,y:3370,w:120,h:200},{x:960,y:3370,w:18,h:200},{x:100,y:3710,w:878,h:20},{x:340,y:3730,w:70,h:160},{x:650,y:3730,w:70,h:160}].map(offsetWorldPoint));
 props.push({id:"jwd-street-sign",asset:"jwd-street-sign",x:jwdNeighborhood.signX,y:jwdNeighborhood.signY,collisionRadius:10});
-window.Germany3DBridge={jwdNeighborhood,grassAreas,walkways,getMissionWaypoint:()=>{const office=buildings.find(b=>b.id==="buergeramt");return office?{id:office.id,x:office.doorX,y:office.doorY}:null},WORLD,player,SIDEWALK_WIDTH:72,VEHICLE_RENDER_SCALE:1.4,vehicleApproaches,roads,crossings,crossingSigns,trafficLights,buildings,trees,schreber,policeGarden,policePath,goerlitzerPark,kiesingerMemorial:offsetWorldPoint({x:9490,y:4000}),BORDER_Y,BORDER_BAND,borderGates,borderSegments,railLoops,railTracks,trains,fireSources,props,pickups,getNPCs:()=>npcs,getPolice:()=>police,stationElevation:()=>0};
+for(const n of npcs){const station=jwdGardens.stations[n.id];if(station){const target=jwdGardens.props.find(p=>p.id===station.target);Object.assign(n,{x:station.x,y:station.y,facing:Math.atan2(target.x-station.x,target.y-station.y),jwdActivity:station.activity,jwdWorking:true,activityPhase:0})}}
+window.Germany3DBridge={jwdGardens,jwdNeighborhood,grassAreas,walkways,getMissionWaypoint:()=>{const office=buildings.find(b=>b.id==="buergeramt");return office?{id:office.id,x:office.doorX,y:office.doorY}:null},WORLD,player,SIDEWALK_WIDTH:72,VEHICLE_RENDER_SCALE:1.4,vehicleApproaches,roads,crossings,crossingSigns,trafficLights,buildings,trees,schreber,policeGarden,policePath,goerlitzerPark,kiesingerMemorial:offsetWorldPoint({x:9490,y:4000}),BORDER_Y,BORDER_BAND,borderGates,borderSegments,railLoops,railTracks,trains,fireSources,props,pickups,getNPCs:()=>npcs,getPolice:()=>police,stationElevation:()=>0};
 const dist=(a,b,c,d)=>Math.hypot(a-c,b-d);
 const MERKEL_AUDIO_LINE="Wir schaffen das.",merkelRecording=new Audio("./assets/voices/merkel/merkel-wir-schaffen-das.mp3");merkelRecording.preload="auto";
 const merkelLines=[MERKEL_AUDIO_LINE,"Wir brauchen kein Abschaltgesetz, sondern einen Ausstieg mit Augenmaß.","Ich habe eine neue Bewertung vorgenommen.","Die Risiken der Kernenergie sind nicht beherrschbar.","Wer das erkennt, muss eine neue Bewertung vornehmen.","Wir müssen uns darauf einstellen, dass wir schneller aussteigen.","Wir wollen das schaffen."];
 function merkelBehind(n){return(player.x-n.x)*(n.facingX||1)+(player.y-n.y)*(n.facingY||0)<-24}
 function updateMerkel(n,dt){const t=n.route[n.target],dx=t[0]-n.x,dy=t[1]-n.y,d=Math.hypot(dx,dy)||1,bx=n.x,by=n.y;n.facingX=dx/d;n.facingY=dy/d;n.x+=n.facingX*38*dt;n.y+=n.facingY*38*dt;if(Math.abs(dx)>Math.abs(dy))n.spriteRow=dx<0?1:2;else n.spriteRow=dy<0?3:4;const moved=Math.hypot(n.x-bx,n.y-by);if(moved>.001){n.gaitDistance=(n.gaitDistance||0)+moved;n.spriteFrame=Math.floor((n.gaitDistance%41.6)/41.6*32)}if(d<10)n.target=(n.target+1)%n.route.length}
-function blocked(x,y){if(x>goerlitzerPark.x-16&&x<goerlitzerPark.x+goerlitzerPark.w+16&&y>goerlitzerPark.y-16&&y<goerlitzerPark.y+goerlitzerPark.h+16)return true;if(x<25||y<25||x>WORLD.w-25||y>WORLD.h-25)return true;return buildings.some(b=>x>b.x-16&&x<b.x+b.w+16&&y>b.y-16&&y<b.y+b.h+16)}
+function blocked(x,y){if(x>goerlitzerPark.x-16&&x<goerlitzerPark.x+goerlitzerPark.w+16&&y>goerlitzerPark.y-16&&y<goerlitzerPark.y+goerlitzerPark.h+16)return true;if(x<25||y<25||x>WORLD.w-25||y>WORLD.h-25)return true;return buildings.some(b=>x>b.x-16&&x<b.x+b.w+16&&y>b.y-16&&y<b.y+b.h+16)||jwdGardens.props.some(p=>{const b=p.collisionRect;return x>b.x-16&&x<b.x+b.w+16&&y>b.y-16&&y<b.y+b.h+16})}
 function say(s,l){document.getElementById("speaker").textContent=s;document.getElementById("line").textContent=l;const d=document.getElementById("dialogue");d.classList.add("show");clearTimeout(say.t);say.t=setTimeout(()=>d.classList.remove("show"),4500);if(s.startsWith("ANGELA MERKEL")&&l===MERKEL_AUDIO_LINE){merkelRecording.currentTime=0;merkelRecording.play().catch(()=>{})}}
 function interact(){const m=npcs.find(n=>n.special==="merkel"&&dist(player.x,player.y,n.x,n.y)<150);if(m){say("ANGELA MERKEL · SATIRE",merkelBehind(m)?"Sie stehen hinter mir.":merkelLines[m.line++%merkelLines.length]);return}const f=props.find(p=>dist(player.x,player.y,p.x,p.y)<150);if(f)say("FAX 3000 PRO","2,75× schneller beim Versand ausgedruckter Dokumente. Die Zukunft der Digitalisierung ist Papier.")}
-function update(dt){let dx=(keys.ArrowRight?1:0)-(keys.ArrowLeft?1:0),dy=(keys.ArrowDown?1:0)-(keys.ArrowUp?1:0);const l=Math.hypot(dx,dy)||1;dx/=l;dy/=l;if(dx||dy)player.facing=Math.atan2(dx,dy);const speed=190*(keys.KeyR?2:1),nx=player.x+dx*speed*dt,ny=player.y+dy*speed*dt;if(!blocked(nx,player.y))player.x=nx;if(!blocked(player.x,ny))player.y=ny;const signalClock=performance.now()/1000;for(const light of trafficLights)light.green=Math.floor((signalClock+light.phaseOffset)/6)%2===1;updateDiagnosticTrains(dt);npcs.forEach(n=>{if(n.special==="merkel")updateMerkel(n,dt);else{if(n.vx){n.x+=n.vx*dt;if(n.x<n.min||n.x>n.max)n.vx*=-1}if(n.vy){n.y+=n.vy*dt;if(n.y<n.min||n.y>n.max)n.vy*=-1}}});document.getElementById("coords").textContent=Math.round(player.x)+" / "+Math.round(player.y);document.getElementById("district").textContent=player.x>2400?"DEUTSCHLAND OST":"BERLIN"}
+function update(dt){let dx=(keys.ArrowRight?1:0)-(keys.ArrowLeft?1:0),dy=(keys.ArrowDown?1:0)-(keys.ArrowUp?1:0);const l=Math.hypot(dx,dy)||1;dx/=l;dy/=l;if(dx||dy)player.facing=Math.atan2(dx,dy);const speed=190*(keys.KeyR?2:1),nx=player.x+dx*speed*dt,ny=player.y+dy*speed*dt;if(!blocked(nx,player.y))player.x=nx;if(!blocked(player.x,ny))player.y=ny;const signalClock=performance.now()/1000;for(const light of trafficLights)light.green=Math.floor((signalClock+light.phaseOffset)/6)%2===1;updateDiagnosticTrains(dt);npcs.forEach(n=>{if(n.jwdWorking)n.activityPhase=(n.activityPhase||0)+dt;if(n.special==="merkel")updateMerkel(n,dt);else{if(n.vx){n.x+=n.vx*dt;if(n.x<n.min||n.x>n.max)n.vx*=-1}if(n.vy){n.y+=n.vy*dt;if(n.y<n.min||n.y>n.max)n.vy*=-1}}});document.getElementById("coords").textContent=Math.round(player.x)+" / "+Math.round(player.y);document.getElementById("district").textContent=player.x>2400?"DEUTSCHLAND OST":"BERLIN"}
 addEventListener("keydown",e=>{if(["ArrowUp","ArrowDown","ArrowLeft","ArrowRight"].includes(e.code))e.preventDefault();keys[e.code]=true;if(e.code==="KeyE")interact()});addEventListener("keyup",e=>keys[e.code]=false);
 document.querySelectorAll("[data-key]").forEach(b=>{const k=b.dataset.key;b.addEventListener("pointerdown",e=>{e.preventDefault();keys[k]=true;if(k==="KeyE")interact()});["pointerup","pointercancel","pointerleave"].forEach(t=>b.addEventListener(t,e=>{e.preventDefault();keys[k]=false}))});
 document.getElementById("home").onclick=()=>{player.x=5960+RAIL_GUTTER;player.y=3900+RAIL_GUTTER};

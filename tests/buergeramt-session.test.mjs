@@ -54,7 +54,7 @@ test('the closed entrance stops sprinting and E cannot enter the retained hallwa
   assert(h.level.view.z<=5.12+1e-9,'door and handle clearance includes the player body');
   assert(h.level.view.z>4.8,'the player can approach the closed door');
   const before=h.level.view;h.level.interact();assert.deepEqual(h.level.view,before);
-  assert.equal(h.level.stage,'walk-sign');
+  assert.notEqual(h.level.stage,'outside','E may address a visible nearby visitor but cannot open the hallway');
   h.level.replay(h.config);assert.equal(h.level.view.z,4.8);assert.equal(h.level.stage,'walk-sign');
  }
 });
@@ -192,7 +192,7 @@ test('the board calls continuously but scanning only opens name admission',()=>{
  h.links[0].message({type:'scan',id:'b'.repeat(24)});assert.equal(h.level.registrationTicket,'');assert.equal(h.level.assignedCounter.number,0);
 });
 test('a new scan after expiry requires a new name submission',()=>{
- const h=harness();h.wait();const first=h.level.registrationTicket;h.awaitCall();const expiryScene=h.level.floorState.visualTime+13;for(let i=0;i<402&&h.level.floorState.visualTime<expiryScene;i++)h.level.update(.05);assert.equal(h.level.stage,'walk-sign');h.links.at(-1).message({type:'scan',id:'b'.repeat(24)});assert.equal(h.level.stage,'walk-sign');assert.equal(h.level.activated,false);h.links.at(-1).message({type:'register',name:'Erika Mustermann'});h.links.at(-1).message({type:'ticket-received',id:h.links.at(-1).scanId,number:h.level.registrationTicket});assert.equal(h.level.stage,'waiting');assert.notEqual(h.level.registrationTicket,first);
+ const h=harness();h.wait();const first=h.level.registrationTicket;h.awaitCall();const expiryScene=h.level.floorState.visualTime+30.1;for(let i=0;i<1002&&h.level.floorState.visualTime<expiryScene;i++)h.level.update(.05);assert.equal(h.level.stage,'walk-sign');h.links.at(-1).message({type:'scan',id:'b'.repeat(24)});assert.equal(h.level.stage,'walk-sign');assert.equal(h.level.activated,false);h.links.at(-1).message({type:'register',name:'Erika Mustermann'});h.links.at(-1).message({type:'ticket-received',id:h.links.at(-1).scanId,number:h.level.registrationTicket});assert.equal(h.level.stage,'waiting');assert.notEqual(h.level.registrationTicket,first);
 });
 test('silencing completes the automatic registration and grants A38 exactly once',()=>{
  const h=harness();h.counter();h.links[0].message({type:'phone-hidden'});h.tick(16000);let questions=0;
@@ -207,13 +207,13 @@ test('answer automatically cancels without ever issuing A38',()=>{
  assert.equal(h.links[0].sent.filter(m=>m.type==='police-line').length,4);
 });
 test('early approach reprimands and its dialogue does not extend the appointment',()=>{
- const h=harness();h.wait();h.approachCounter();h.level.interact();assert.equal(h.level.stage,'early');assert.match(h.node('amt-line').textContent,/dienstliche Tätigkeit/);assert.equal(h.node('amt-actions').children.length,0);h.elapse(25);assert.equal(h.level.stage,'walk-sign');assert.equal(h.level.activated,false);assert.equal(h.node('amt-actions').children.length,0);assert.equal(h.level.stage,'walk-sign');assert.equal(h.counts.form,0);
+ const h=harness();h.wait();h.approachCounter();h.level.interact();assert.equal(h.level.stage,'early');assert.match(h.node('amt-line').textContent,/dienstliche Tätigkeit/);assert.equal(h.node('amt-actions').children.length,0);h.elapse(60);assert.equal(h.level.stage,'walk-sign');assert.equal(h.level.activated,false);assert.equal(h.node('amt-actions').children.length,0);assert.equal(h.level.stage,'walk-sign');assert.equal(h.counts.form,0);
 });
 test('a delayed decline cannot resurrect a forfeited appointment',()=>{
  const h=harness();h.wait();h.links[0].message({type:'phone-hidden'});assert.equal(h.level.stage,'walk-sign');h.links[0].message({type:'decline',id:'grass'});assert.equal(h.level.stage,'walk-sign');assert.equal(h.counts.form,0);
 });
 test('a delayed answer cannot resurrect a forfeited appointment',()=>{
- const h=harness();h.wait();h.links[0].emit('status','Telefon getrennt');h.links[0].message({type:'answer',id:'grass'});assert.equal(h.level.stage,'walk-sign');h.tick(90000);assert.equal(h.counts.form,0);assert.equal(h.counts.cancel,0);
+ const h=harness();h.wait();h.links[0].emit('disconnected',{peer:''});h.links[0].message({type:'answer',id:'grass'});assert.equal(h.level.stage,'walk-sign');h.tick(90000);assert.equal(h.counts.form,0);assert.equal(h.counts.cancel,0);
 });
 test('a failed ticket delivery does not start a queue slot',()=>{
  const h=harness();h.enter();h.links[0].fail=true;h.links[0].message({type:'scan',id:'a'.repeat(24)});assert.equal(h.level.stage,'walk-sign');assert.equal(h.level.activated,false);

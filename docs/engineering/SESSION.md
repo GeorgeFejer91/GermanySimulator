@@ -60,10 +60,42 @@ after desktop transfer17,963,226bytes and emulation17,598,135bytes; worst
 input p9535.2ms, no page errors. These are lab observations, not physical
 Android performance or perceptual listening. Source/property order and
 whitespace-only refinements do not change the supplied rendered behavior.
+## Forgiving E targeting and shared-phone queue (2026-10-13)
+
+Integrator-owned on clean base `74fbcf8`. Scope: `buergeramt.js` targeting,
+queue admission, ticket lifetime and committed-call beeps; transport/phone
+sources and their focused tests have one delegated writer. Expected companion
+changes: focused queue/interaction regressions, browser fixture, cache identities,
+Pages checks and owning gameplay/episode/audio guidance. Preserve root world,
+movement/collision, exact voices, interview/rewards, QR credentials and existing
+touch selection. No new backend, dependency, asset, frame loop or scheduler.
+Initial Git status is clean; no known initial failing checks. The same frozen
+candidate will receive independent Physics and Camera review. Silent desktop
+and Android emulation use existing Chromium tooling; physical Android and
+perceptual listening remain unavailable.
+
+Validation of the final shared-phone candidate:706/706 Node checks pass;
+36/36 cache-refined transport checks and the focused119/119 ticket/session/
+registration/causality/queue matrix pass. Independent Physics and Camera
+reviews pass the final hashes, including fresh scoped CPU checks and supplied
+rendered evidence inspected independently. Six silent Chromium desktop/Android
+portrait cases exercise3 peers each, real E/mouse input, held board rows,
+private call routing and independent retirement. Seven phone form/retry layout
+cases cover320px, landscape, enlarged text and actual pinned Pretext.
+The existing cold benchmark passes6 root and6 office final runs, compared
+with6 office baseline runs on hardware ANGLE/Intel Iris Xe. Root maximum
+transfer is17967701 bytes, below18MB; every run accepted9 inputs
+and had no page errors. These are lab observations, with forced legal poses,
+accelerated queue time and simulated signaling. Live WebRTC/QR pairing,
+physical Android, natural city traversal and perceptual listening remain
+NOT RUN. Existing authored counter staging retains its public-side endpoint;
+its camera/player snap is not a swept walking route. Evidence and causal
+review remain in ignored output/shared-tickets/ and output/playwright/.
+
 
 ## Connected speech lips — 2026-10-13
 
-Integrator-owned isolated `connected-lips` worktree, integrated on published `74fbcf8`.
+Integrator-owned isolated `connected-lips` worktree, integrated on published `4792b23`.
 The user approved the connected-lip prototype and requested applying its method
 across animated characters, then updating the animation skill. Scope: shared
 mouth-paint shader, per-source lip orientation/registration, its native/atlas

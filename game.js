@@ -670,9 +670,9 @@ const buildings=[
 {id:"jwd-villa-linde",residential:true,variant:"villa",name:"VILLA LINDENHOF",x:110,y:3380,w:200,h:190,hgt:170,doorX:210,doorY:3600,sign:"PRIVATWEG · BITTE GRÜSSEN"},
 {id:"jwd-villa-wald",residential:true,variant:"villa",name:"HAUS WALDFRIEDEN",x:430,y:3380,w:240,h:190,hgt:150,doorX:550,doorY:3600,sign:"SEIT 1928 IN GUTER NACHBARSCHAFT"},
 {id:"jwd-landhaus",residential:true,variant:"landhaus",name:"LANDHAUS NR. 34",x:790,y:3400,w:170,h:170,hgt:115,doorX:875,doorY:3600,sign:"KEINE WERBUNG · AUCH KEINE IDEEN"},
-{id:"jwd-fink",residential:true,name:"FAMILIE FINK",x:100,y:3760,w:240,h:190,hgt:110,doorX:220,doorY:3980,sign:"KEHRWOCHE IST IMMER"},
-{id:"jwd-home",residential:true,name:"DEIN ZUHAUSE · JWD",x:410,y:3760,w:240,h:190,hgt:95,doorX:530,doorY:3980,sign:"JANZ WEIT DRAUSSEN · NR. 38"},
-{id:"jwd-kranz",residential:true,name:"FAMILIE KRANZ",x:720,y:3760,w:240,h:190,hgt:125,doorX:840,doorY:3980,sign:"EIGENHEIM · FREMDE SORGEN"},
+{id:"jwd-fink",residential:true,name:"FAMILIE FINK",x:100,y:3730,w:240,h:140,hgt:110,doorX:220,doorY:3900,sign:"KEHRWOCHE IST IMMER"},
+{id:"jwd-home",residential:true,name:"DEIN ZUHAUSE · JWD",x:410,y:3730,w:240,h:140,hgt:95,doorX:530,doorY:3900,sign:"JANZ WEIT DRAUSSEN · NR. 38"},
+{id:"jwd-kranz",residential:true,name:"FAMILIE KRANZ",x:720,y:3730,w:240,h:140,hgt:125,doorX:840,doorY:3900,sign:"EIGENHEIM · FREMDE SORGEN"},
 {id:"buergeramt",name:"BÜRGERAMT",x:150,y:220,w:350,h:250,hgt:115,doorX:325,doorY:500,sign:"TERMIN NUR MIT TERMIN"},
 {id:"hausverwaltung",name:"HAUSVERWALTUNG",x:590,y:210,w:330,h:255,hgt:95,doorX:755,doorY:495,sign:"WOHNUNGSGEBERBESTÄTIGUNG"},
 {id:"stadtbild",name:"AMT FÜR STADTBILD",x:1390,y:220,w:360,h:245,hgt:105,doorX:1570,doorY:495,sign:"OPTISCHE ORDNUNG · DIN 0815"},
@@ -705,14 +705,14 @@ const buildings=[
 {id:"bundestag",name:"DEUTSCHER BUNDESTAG",x:7680,y:3320,w:1200,h:876,hgt:220,doorX:8280,doorY:4226,sign:"REICHSTAGSGEBÄUDE · PLENARBEREICH"}
 ].map(building=>({...offsetWorldPoint(building),doorX:building.doorX+RAIL_GUTTER,doorY:building.doorY+RAIL_GUTTER}));
 const grassAreas=[],walkways=[];
-// A broad shared residential lane joins the western pavement, clear of the railway.
-const jwdLane=offsetWorldPoint({x:40,y:3970,w:1010,h:150});walkways.push(jwdLane);
-const jwdNeighborhood={name:"WALDSIEDLUNG · JWD",street:"AM FISCHTAL",signX:960+RAIL_GUTTER,signY:4150+RAIL_GUTTER};
-// A small garden suburb fits in the existing southwest block without moving railways.
-walkways.push(...[{x:40,y:3580,w:1010,h:130},{x:40,y:3580,w:60,h:540}].map(offsetWorldPoint));
-grassAreas.push(...[{x:40,y:3280,w:1010,h:90},{x:40,y:3370,w:70,h:200},{x:310,y:3370,w:120,h:200},{x:670,y:3370,w:120,h:200},{x:960,y:3370,w:18,h:200},{x:100,y:3710,w:878,h:50},{x:340,y:3760,w:70,h:210},{x:650,y:3760,w:70,h:210},{x:100,y:4120,w:878,h:80}].map(offsetWorldPoint));
+const jwdGardens=window.JwdGardens||{paths:[],lots:[],props:[],stations:{}};
+const jwdLane=offsetWorldPoint({x:40,y:3890,w:1010,h:340});
+const jwdNeighborhood={name:"WALDSIEDLUNG · JWD",street:"AM FISCHTAL",signX:960+RAIL_GUTTER,signY:3920+RAIL_GUTTER};
+walkways.push(...jwdGardens.paths);grassAreas.push(...jwdGardens.lots);props.push(...jwdGardens.props);
+grassAreas.push(...[{x:40,y:3280,w:1010,h:90},{x:40,y:3370,w:70,h:200},{x:310,y:3370,w:120,h:200},{x:670,y:3370,w:120,h:200},{x:960,y:3370,w:18,h:200},{x:100,y:3710,w:878,h:20},{x:340,y:3730,w:70,h:160},{x:650,y:3730,w:70,h:160}].map(offsetWorldPoint));
 props.push({id:"jwd-street-sign",asset:"jwd-street-sign",x:jwdNeighborhood.signX,y:jwdNeighborhood.signY,collisionRadius:10});
 for(const b of buildings){
+ if(b.residential)continue;
  const road=horizontalRoads.find(r=>r.y>b.y+b.h),top=b.y+b.h+6,bottom=road?.y-SIDEWALK_WIDTH;
  if(!bottom||bottom-top<36)continue;
  const left=b.doorX-WALKWAY_WIDTH/2,right=b.doorX+WALKWAY_WIDTH/2,h=bottom-top;
@@ -874,22 +874,30 @@ const pickups=[
  ...wurstPickups
 ].map(item=>item.type==="wurst"?item:offsetWorldPoint(item));
 const normObjects=[{x:2210,y:1190,type:"bin",fixed:false,label:"MÜLLTONNE 4,6° SCHIEF"},{x:1650,y:650,type:"chairs",fixed:false,label:"STÜHLE NICHT FLUCHTGERECHT"},{x:570,y:1140,type:"hedge",fixed:false,label:"HECKE 3 CM ZU INDIVIDUELL"}].map(offsetWorldPoint);
-const jwd={allocated:false,visited:false,met:new Set(),visit:0,atHome:false,exitPending:false,complaint:0,burglarVisit:0,burglar:null};
+const jwd={allocated:false,visited:false,met:new Set(),visit:0,atHome:false,exitPending:false,complaint:0,burglarVisit:0,burglar:null,visitor:null,gardenCooldown:0};
 const jwdCopy={
+ carNote:{de:["LAMINIERTER HINWEIS: Kinder sind uns jederzeit willkommen. Hände, Reißverschlüsse, Fahrräder und spontane Zuneigungsbekundungen bitte vom Lack fernhalten.","Vielen Dank für Ihr Verständnis. Wir gehen davon aus, dass Sie diesen Hinweis mit Ihrer Kenntnisnahme akzeptiert haben."],en:["LAMINATED NOTICE: Children are always welcome. Please keep hands, zippers, bicycles and spontaneous displays of affection away from the paintwork.","Thank you for your understanding. We assume that by reading this notice you have accepted it."]},
  villa:{de:["Aus dem Vorgarten: Sie suchen Ihre neuen Nachbarn? Familie Fink und Familie Kranz wohnen am nächsten Weg. Das kleine Haus dazwischen ist Ihres.","Und bleiben Sie bitte auf den Platten. Dieser Rasen hat eine längere Familiengeschichte als wir."],en:["From the front garden: looking for your new neighbors? The Finks and the Kranz family live on the next lane. The little house between them is yours.","And please stay on the paving stones. This lawn has a longer family history than we do."]},
  locked:{de:["Ohne Meldebestätigung kein Schlüssel. First Anmeldung, then home."],en:["No registration certificate, no keys. First registration, then a home."]},
  premature:{de:["Sie ziehen hier ein? Erst die Meldebestätigung, dann die Schlüssel. Dann reden wir. Ausführlich."],en:["Moving in? First the registration certificate, then the keys. Then we'll talk. At length."]},
  home:{de:["Meldebestätigung, Schlüssel, Endstation: JWD. Janz weit draußen. Your new home, mit überdachter Schlafveranda.","Eine Matratze, zwei Kisten, null Kaution zurück. Meet die Nachbarschaft: Frau Fink und Familie Kranz. Die haben bereits Fragen."],en:["Registration certificate, keys, end of the line: JWD. Way out in the sticks. Your new home comes with a covered sleeping porch.","One mattress, two crates, no deposit refund. Meet Mrs Fink and the Kranz family. They already have questions."]},
  swabian:{de:["Grüß Gott, i bin die Frau Fink. Willkommen im family neighborhood. Die Kehrwoche isch hier kein optional feature.","Haben Sie Ihre Kehrwoche gemacht? I hab den Besen schon ausgerichtet. Jetzt lernen Sie erst mal die anderen kennen."],en:["Hello, I'm Mrs Fink. Welcome to the family neighborhood. The weekly sweeping rota is not an optional feature.","Have you done your sweeping duty? I've already aligned the broom. Go and meet the others first."]},
- parent:{de:["Professor Doktor Doktor Heiko Kranz. Guten Tag. War das eine Begrüßung oder bereits ein Gespräch? Für Letzteres hätte ich gern eine Agenda.","Unser Theodor ist acht. Deutsch, Englisch, Französisch, Italienisch, Spanisch, Mandarin. Aber sein Latein! Beim Ablativus absolutus sind wir bereits behind schedule.","Meine Frau ist Diplomatin. Wir erwarten kein Wunderkind. Nur ein Genie, das seine milestones einhält. Wissen Sie übrigens, wer so weit vom Bordstein parkt?"],en:["Professor Doctor Doctor Heiko Kranz. Good afternoon. Was that a greeting or already a conversation? For the latter, I would appreciate an agenda.","Our Theodor is eight. German, English, French, Italian, Spanish, Mandarin. But his Latin! We're already behind schedule on the ablative absolute.","My wife is a diplomat. We don't expect a child prodigy. Just a genius who meets his milestones. Incidentally, who parks so far from the curb?"]},
+ parent:{de:["Sehr geehrter Herr Nachbar, Professor Doktor Doktor Heiko Kranz. Es freut uns, dass Sie hier eine Unterkunft gefunden haben. Gerade unter Ihren Umständen ist das ja keineswegs selbstverständlich.","Meine Frau ist Diplomatin. Unser Theodor ist acht und spricht sechs Sprachen. Nur beim Latein sind wir etwas in Sorge. Wir üben keinen Druck aus; wir erinnern ihn lediglich an seine vereinbarten milestones.","Die Erwartungen an Ihren Garten hatte ich Ihnen bereits erläutert. Sollten Sie das als unverbindliche Begrüßung verstanden haben, liegt da offenbar ein Missverständnis vor. Wie auch immer: herzlich willkommen."],en:["Dear neighbor, Professor Doctor Doctor Heiko Kranz. We're pleased you have found accommodation here. Particularly in your circumstances, that is hardly something to take for granted.","My wife is a diplomat. Our Theodor is eight and speaks six languages. Only his Latin concerns us slightly. We exert no pressure; we merely remind him of his agreed milestones.","I already explained the expectations for your garden. If you understood that as a casual greeting, there is evidently a misunderstanding. In any event: a very warm welcome."]},
  watcher:{de:["Botschafterin Doktor Kranz. Small talk ist nicht mein Ressort. Bitte formulieren Sie Ihr Anliegen als bilaterales Gesprächsziel.","Theodor hat sechs Sprachen. Trotzdem schwächelt er in Latein. Mit acht! Wir haben das Wochenende vorsorglich zum Bildungsgipfel erklärt.","Warum sind Ihre Rollos unten? Haben Sie etwas zu hide? Und diese Hecke: Unser Sohn hat eine ungerade Linie gesehen. Jetzt fragt er nach Freizeit."],en:["Ambassador Doctor Kranz. Small talk is outside my portfolio. Please phrase your request as an objective for bilateral talks.","Theodor speaks six languages. Yet his Latin is slipping. At eight! As a precaution, we've declared this weekend an education summit.","Why are your blinds down? Do you have something to hide? And that hedge: our son saw an uneven line. Now he's asking about free time."]},
- latin:{de:["Heiko Kranz, noch einmal. Ganz kurz: Hätten Sie jemanden für Latein? Theodor hat Cicero heute als cringe bezeichnet.","Wir sorgen uns, dass er kein Genie wird. Acht Jahre alt, und noch keine eigene Monografie. Sie müssen los? Ich hatte erst die Einleitung."],en:["Heiko Kranz again. Very briefly: do you know a Latin tutor? Theodor called Cicero cringe today.","We're worried he won't become a genius. Eight years old and still no monograph of his own. You have to go? That was only my introduction."]},
+ latin:{de:["Es tut mir leid, dass Theodor Ihnen gegenüber von Überforderung gesprochen hat. Beim Frühstück konnte er noch ausgesprochen lebhaft über Dinosaurier referieren. Insofern hat uns seine Darstellung etwas überrascht.","Sechs Sprachen sind mit acht nun wirklich kein Grund, Latein schleifen zu lassen. Seine freie Zeit darf er selbstverständlich selbst gestalten, sofern die Übungen fertig sind. Das ist ja auch logisch."],en:["I'm sorry Theodor told you he was overwhelmed. At breakfast he was still able to speak at considerable length about dinosaurs. In that respect, his account came as something of a surprise.","Speaking six languages at eight is hardly a reason to neglect Latin. Naturally, he is free to arrange his own leisure time, provided the exercises are finished. That is only logical."]},
  schedule:{de:["Einen Moment. Unser Sohn hat zwischen Mandarin und Altgriechisch elf Minuten unverplante Zeit. Das ist ein Entwicklungsrisiko.","Wir haben Spielen jetzt als interkulturelles Kompetenztraining eingetragen. Bitte lachen Sie leiser. Heiko wertet das sonst als Rückmeldung."],en:["One moment. Our son has eleven unscheduled minutes between Mandarin and Ancient Greek. That's a developmental risk.","We've now scheduled play as intercultural competence training. Please laugh more quietly. Heiko will otherwise treat it as feedback."]},
- smalltalk:{de:["Heiko Kranz. Sie sagten neulich: Wie geht's? Ich habe eine Antwort vorbereitet. Sie hat drei Anhänge.","Ach, das war nur höflich gemeint. Dann kennzeichnen Sie solche Aussagen künftig bitte als nicht prüfungsrelevant. Auf Wiedersehen."],en:["Heiko Kranz. The other day you asked: how are you? I've prepared an answer. It has three appendices.","Oh, you were just being polite. Then please mark such statements as not subject to examination in future. Goodbye."]},
+ smalltalk:{de:["Es tut mir leid zu hören, dass Sie unsere Gespräche als belastend empfinden. Gestern wirkten Sie beim Nicken durchaus aufgeschlossen. Zumindest konnte ich da keine grundsätzliche Ablehnung erkennen.","Natürlich können Sie jederzeit gehen. Ich möchte lediglich die Gelegenheit bekommen, die noch offenen Punkte abschließend einzuordnen. Für alle anderen Nachbarn war das übrigens genauso."],en:["I'm sorry to hear that you find our conversations burdensome. Yesterday, while nodding, you seemed quite receptive. At least, I could detect no fundamental objection.","Of course you are free to leave at any time. I would merely like the opportunity to put the outstanding points into their proper context. Incidentally, it was exactly the same for all the other neighbors."]},
  sweeping:{de:["Halt, nur ganz kurz! Haben Sie schon Kehrwoche gemacht? Der Staub liegt noch quer zur Laufrichtung.","I will jetzt net lang schwätze. Nur: Montag fegen, Dienstag nachfegen. So. Jetzt dürfen Sie los."],en:["Stop, just a moment! Have you done your sweeping? The dust is still lying across the direction of travel.","I won't keep you long. Just sweep on Monday, sweep again on Tuesday. There. You may go now."]},
- parking:{de:["Eine quick question: Wem gehört das Auto da? So weit vom Bordstein! Das macht man doch nicht.","Nein, Sie dürfen gehen. Aber falls Sie den Fahrer sehen: Ich hätte nur ganz kurz eine Frage."],en:["A quick question: whose car is that? So far from the curb! You just don't do that.","Yes, you may go. But if you see the driver, tell them I only have a quick question."]},
+ parking:{de:["Bezüglich des Fahrzeugs müssen Sie mich falsch verstanden haben. Ich habe Sie nicht überwacht. Ich habe lediglich Uhrzeit, Kennzeichen und Bordsteinabstand festgehalten, um Ihnen eine sachliche Rückmeldung zu ermöglichen.","Dass Sie meinen Zettel als Beschwerde bezeichnen, bedauere ich. Es war ein Hilfsangebot. Mit Durchschrift, damit später keine unterschiedlichen Erinnerungen entstehen."],en:["Regarding the vehicle, you must have misunderstood me. I was not monitoring you. I merely recorded the time, registration and distance from the curb so that I could offer you factual feedback.","I regret that you describe my note as a complaint. It was an offer of assistance. With a duplicate, so that our recollections cannot diverge later."]},
  hedge:{de:["Moment! Ihre Hecke wächst außerhalb unserer gemeinsamen expectations. Wann schneiden Sie endlich?", "Gut, dann reden wir später über die Schnittzeiten. Und die Höhe. Und das Grün. Gehen Sie ruhig."],en:["One moment! Your hedge is growing beyond our shared expectations. When will you finally trim it?","Fine, we'll discuss trimming times later. And the height. And the shade of green. Off you go."]},
  blinds:{de:["Nur noch eins: Warum haben Sie die Rollos unten? Haben Sie etwas zu hide?", "Ach, schlafen. Dafür gibt es die Nachtruhe. Ich beobachte das. Bis später!"],en:["Just one more thing: why are your blinds down? Do you have something to hide?","Oh, sleeping. That's what quiet hours are for. I'll be keeping an eye on this. See you later!"]},
+ lawn:{de:["Für Ihre Verhältnisse sieht der Garten ja schon ordentlich aus. Also, wenn man das Unkraut als Gestaltung zählt.","Die Bienen? Bei mir summen die auch. Aber innerhalb der Grundstücksgrenze. I hab Ihnen die beanstandeten Halme markiert."],en:["The garden looks quite respectable, by your standards. If we count the weeds as landscaping.","The bees? Mine buzz too. But within the property boundary. I've marked the offending blades of grass for you."]},
+ letter:{de:["I steh hier net privat vor Ihrem Rasen. I vertrete die Hausordnung. Das macht einen Unterschied.","Mein Brief lag in Ihrem Briefkasten. Keine Antwort. Deshalb noch ein Brief, dass Sie auf den ersten Brief antworten sollen. Ganz zwanglos."],en:["I'm not standing in front of your lawn in a personal capacity. I represent the house rules. There is a difference.","My letter was in your letterbox. No reply. So another letter asking you to answer the first letter. No pressure."]},
+ paint:{de:["Theodor, bitte die Hände hinter den Rücken. Es tut mir leid, wenn du das als Einschränkung empfindest. Den Abstand zwischen Reißverschluss und Metalliclack hatten wir vorhin doch gemeinsam besprochen.","Selbstverständlich ist unser Kind das Wichtigste. Gerade deshalb soll er lernen, dass Zuneigung keinen Anspruch auf Berührung des Dienstwagens begründet. Spielen darf er gern hinter der Garage. Dort ist es mittlerweile wieder viel entspannter."],en:["Theodor, hands behind your back, please. I'm sorry if you experience that as a restriction. We did discuss the distance between zippers and metallic paint together earlier.","Naturally, our child matters most. Precisely for that reason, he must learn that affection does not confer an entitlement to touch the executive car. He is very welcome to play behind the garage. Things have become much more relaxed there again."]},
+ polish:{de:["Dass Sie die Geräusche meiner Fahrzeugpflege stören, bedaure ich. Ich hatte Sie beim letzten Gespräch ausdrücklich darauf hingewiesen. Ihr Schweigen habe ich, wie bei allen anderen Nachbarn, als Einverständnis gewertet.","Für Ihre Verhältnisse sieht Ihr Garten übrigens schon ordentlich aus. Das war ausdrücklich positiv gemeint. Sollten Sie darin eine Wertung hören, kann ich das leider nicht nachvollziehen."],en:["I regret that the sounds of my car care disturb you. I expressly mentioned them in our last conversation. As with all the other neighbors, I took your silence to indicate agreement.","Incidentally, your garden looks quite respectable by your standards. That was expressly intended as a positive remark. If you hear a judgment in it, I'm afraid I cannot follow your reasoning."]},
+ concern:{de:["Sie hatten offenbar den Eindruck, ich sei ungefragt auf Ihren Rasen gekommen. Tatsächlich wollte ich Ihnen lediglich zeigen, welche Pflanzen wir hier normalerweise entfernen. Dass Sie nicht zu Hause waren, konnte ich ja nicht wissen.","Ich habe mir die Freiheit genommen, die betreffenden Stellen schon einmal zu markieren. Sie müssen sich dafür nicht bedanken. Ein kurzer Hinweis, bis wann Sie das erledigen, genügt völlig."],en:["You apparently had the impression that I entered your lawn uninvited. In fact, I merely wanted to show you which plants we normally remove here. I could hardly have known that you weren't home.","I took the liberty of marking the relevant spots already. There is no need to thank me. A brief indication of when you will deal with them will be quite sufficient."]},
+ electric:{de:["Unser Elektroauto steht für Verantwortung. Deshalb darf Theodor nur mit sauberen Händen daran vorbeigehen. Spielen kann er hinter der Garage.","Ihr wilder Garten ist sicher gut gemeint. Unser Gärtner nennt so etwas unterlassenes Engagement. Ich gebe Ihnen gern seine Rechnung als Orientierung."],en:["Our electric car stands for responsibility. That's why Theodor may only walk past with clean hands. He can play behind the garage.","Your wild garden is surely well intentioned. Our gardener calls it neglected engagement. I'd be happy to give you his invoice as a guide."]},
+ gardenRules:{de:["Der Weg ist gemeinschaftlich. Die Entscheidung, wer darauf stehen darf, treffe ich vorläufig kommissarisch.","Sie möchten durch? Selbstverständlich. Erst noch die Hecke: individuell, sehr mutig. In unserer Straße sagen wir dazu Handlungsbedarf."],en:["The path is shared. For now, I am acting head of deciding who may stand on it.","You'd like to get through? Of course. First, the hedge: individual, very brave. In this street, we call that a need for action."]},
  burglar:{de:["Dit soll der neue Haushalt sein? Eine feuchte Matratze und ein leerer Pfandbeutel. Negative Beute, wa.","Komm, wir brechen nebenan bei Kranz ein. Da gibt's wenigstens was zu holen. Hier müssten wir noch Möbel dalassen."],en:["This is the new household? A damp mattress and an empty bottle bag. Negative loot.","Come on, let's break into the Kranz place next door. At least there's something worth taking. Here we'd have to leave furniture behind."]}
 };
 function currentMission(){
@@ -897,15 +905,58 @@ function currentMission(){
  return missions[Math.min(state.mission,missions.length-1)];
 }
 function allocateJwdHome(){if(jwd.allocated)return;jwd.allocated=true;updateHud()}
-function beginJwdVisit(){if(jwd.atHome)return;jwd.atHome=true;jwd.visit++;jwd.exitPending=true}
+function beginJwdVisit(){if(jwd.atHome)return;jwd.atHome=true;jwd.visit++;jwd.exitPending=true;jwd.gardenCooldown=0}
 function visitJwdHome(){
  if(!jwd.allocated){openDialogue("WOHNUNGSZUWEISUNG",jwdCopy.locked.de,"38");return}
  beginJwdVisit();jwd.visited=true;openDialogue("DEIN ZUHAUSE · JWD",jwdCopy.home.de,"38",updateHud);updateHud();
 }
 function talkJwdNeighbor(n,departure=false){
  if(!jwd.allocated||!jwd.visited){openDialogue(n.name,jwdCopy.premature.de,"!");return}
- const introducing=!jwd.met.has(n.id),topics={swabian:["sweeping","hedge"],parent:["parking","latin","smalltalk"],watcher:["blinds","schedule"]},pool=topics[n.jwdRole],topic=introducing?n.jwdRole:pool[Math.floor(jwd.complaint++/3)%pool.length];
- clearInput();state.characterSpeaker=n;openDialogue(n.name,jwdCopy[topic].de,"!",()=>{jwd.met.add(n.id);if(departure)jwd.exitPending=false;updateHud()});
+ const introducing=!jwd.met.has(n.id),topics={swabian:["lawn","sweeping","hedge","letter"],parent:["paint","concern","polish","parking","latin","smalltalk"],watcher:["electric","gardenRules","blinds","schedule"]},pool=topics[n.jwdRole],topic=introducing?n.jwdRole:pool[(n.complaint||0)%pool.length];
+ if(!introducing){n.complaint=(n.complaint||0)+1;jwd.complaint++}n.jwdWorking=false;n.jwdMoving=0;
+ clearInput();state.characterSpeaker=n;openDialogue(n.name,jwdCopy[topic].de,"!",()=>{jwd.met.add(n.id);if(departure||jwd.visitor===n){jwd.exitPending=false;jwd.visitor=null;jwd.gardenCooldown=38}returnJwdNeighbor(n);updateHud()});
+}
+function jwdCrossRoute(n){const s=jwdGardens.stations[n.id];return s&&n.x>s.x+30&&n.y>jwdGardens.crossY+100&&s.alternate?[{x:s.x,y:n.y},{x:s.x,y:jwdGardens.crossY}]:[{x:n.x,y:jwdGardens.crossY}]}
+function returnJwdNeighbor(n){const s=jwdGardens.stations[n.id];if(!s)return;n.jwdWorking=false;n.jwdRoute=dist(n.x,n.y,s.x,s.y)<2?[]:[...jwdCrossRoute(n),{x:s.x,y:jwdGardens.crossY},{x:s.x,y:s.y}];n.jwdActivity='wash'}
+function walkJwdRoute(n,dt){
+ const beforeX=n.x,beforeY=n.y;while(n.jwdRoute?.length&&dist(n.x,n.y,n.jwdRoute[0].x,n.jwdRoute[0].y)<2)n.jwdRoute.shift();
+ const aim=n.jwdRoute?.[0];if(aim){
+  const d=dist(n.x,n.y,aim.x,aim.y);if(n.jwdProgress?.aim!==aim)n.jwdProgress={aim,d,time:0,waiting:false,retry:0};const progress=n.jwdProgress;
+  if(progress.waiting){
+   progress.retry-=dt;if(progress.retry<=0){progress.retry=.5;let clear=true,px=n.x,py=n.y;const steps=Math.max(1,Math.ceil(Math.min(d,80)/4));
+    for(let i=1;i<=steps;i++){const length=Math.min(d,80)*i/steps,x=n.x+(aim.x-n.x)/d*length,y=n.y+(aim.y-n.y)/d*length;if(responderBlocked(x,y,13,n,px,py)){clear=false;break}px=x;py=y}
+    if(clear){progress.waiting=false;progress.time=0;progress.d=d}
+    else if(Math.abs(n.y-jwdGardens.crossY)<30){const passing=jwdLaneDetour(n,aim.x,aim.y);if(passing){n.jwdRoute=[...passing,...n.jwdRoute];n.jwdProgress=null;n.jwdMoving=0;return false}}
+   }
+  }
+  if(!progress.waiting){
+   if(d&&!(d<55&&responderBlocked(aim.x,aim.y,13,n,aim.x,aim.y)))moveGroundResponder(n,(aim.x-n.x)/d*Math.min(d,62*dt),(aim.y-n.y)/d*Math.min(d,62*dt),13);
+   progress.time+=dt;if(progress.time>=.75){progress.waiting=progress.d-d<6;progress.d=d;progress.time=0;progress.retry=.5}
+  }
+ }else n.jwdProgress=null;
+ n.jwdMoving=dist(beforeX,beforeY,n.x,n.y);if(n.jwdMoving>.001)n.facing=Math.atan2(n.x-beforeX,n.y-beforeY);
+ return !n.jwdRoute?.length;
+}
+function updateJwdNeighbors(dt,distance){
+ if(distance>650){jwd.atHome=false;jwd.exitPending=false;if(jwd.visitor){returnJwdNeighbor(jwd.visitor);jwd.visitor=null}}
+ if(distance>1000)return false;const residents=npcs.filter(n=>jwdGardens.stations[n.id]);
+ jwd.gardenCooldown=Math.max(0,jwd.gardenCooldown-dt);
+ if(jwd.visited&&jwd.atHome&&!jwd.visitor&&distance<420&&(jwd.exitPending||jwd.gardenCooldown===0)){
+  const n=residents.find(n=>!jwd.met.has(n.id))||residents[jwd.complaint%residents.length];
+  if(n){jwd.visitor=n;n.jwdWorking=false;n.jwdRoute=[...jwdCrossRoute(n),{x:jwdGardens.gate.x,y:jwdGardens.crossY},jwdGardens.gate]}
+ }
+ for(const n of residents){
+  if(n===jwd.visitor){
+   n.jwdWorking=false;walkJwdRoute(n,dt);
+   if(dist(player.x,player.y,n.x,n.y)<90&&distance>75){talkJwdNeighbor(n,true);return true}
+   continue;
+  }
+  if(n.jwdRoute?.length){n.jwdWorking=false;if(!walkJwdRoute(n,dt))continue;n.activityPhase=0}
+  n.jwdWorking=true;n.jwdMoving=0;n.activityPhase=(n.activityPhase||0)+dt;
+  const s=jwdGardens.stations[n.id],target=jwdGardens.props.find(p=>p.id===(n.jwdActivity==='trim'?s.alternate:s.target));if(target)n.facing=Math.atan2(target.x-n.x,target.y-n.y);
+  if(s.alternate&&n.activityPhase>24){n.activityPhase=0;n.jwdWorking=false;if(n.jwdActivity==='trim'){n.jwdActivity='wash';n.jwdRoute=[{x:s.x,y:s.trimY},{x:s.x,y:s.y}]}else{n.jwdActivity='trim';n.jwdRoute=[{x:s.x,y:s.trimY},{x:s.trimX,y:s.trimY}]}}
+ }
+ return false;
 }
 function arrestPlayer(){
  state.policeContactCooldown=OFFENSE_TIMING.policeContactCooldown;player.energy=Math.max(36,player.energy-12);player.vx=player.vy=0;clearInput();
@@ -921,11 +972,11 @@ function arrestPlayer(){
  }else{player.x=policePath.x1;player.y=policePath.y1;state.wanted=Math.max(0,state.wanted-1);state.offence="PERSONALIEN FESTGESTELLT · HINWEIS ERTEILT";toast(state.lang==="en"?"POLICE ACTION · ESCORTED TO THE STATION GARDEN":"POLIZEILICHE MASSNAHME · IN DEN WACHEN-SCHREBERGARTEN BEGLEITET")}
  syncPoliceResponse();uiTone(180,.18,"sawtooth",.05);updateHud();
 }
-function jwdBurglarDetour(thief,tx,ty){
+function jwdLaneDetour(thief,tx,ty){
  // One short lane has two passing edges. Check every segment before committing;
  // if both are occupied, wait and retry instead of circling a blocked doorway.
- const direction=Math.sign(tx-thief.x)||1,goal={x:tx-direction*(thief.phase==="approach"?50:24),y:ty};
- for(const y of [jwdLane.y+14,jwdLane.y+jwdLane.h-14])for(const back of [0,65,100]){
+ const direction=Math.sign(tx-thief.x)||1,goal={x:tx,y:jwdGardens.crossY};
+ for(const y of [jwdGardens.crossY-30,jwdGardens.crossY+24])for(const back of [0,65,100]){
   const x=thief.x-direction*back,points=[{x,y:thief.y},{x,y},{x:goal.x,y},goal];let from=thief,clear=true;
   for(const to of points){const length=Math.hypot(to.x-from.x,to.y-from.y),steps=Math.max(1,Math.ceil(length));let px=from.x,py=from.y;
    for(let i=1;i<=steps;i++){const nx=from.x+(to.x-from.x)*i/steps,ny=from.y+(to.y-from.y)*i/steps;if(responderBlocked(nx,ny,13,thief,px,py)){clear=false;break}px=nx;py=ny}
@@ -936,32 +987,31 @@ function jwdBurglarDetour(thief,tx,ty){
  return null;
 }
 function updateJwd(dt){
- if(!jwd.allocated)return false;
  const home=buildings.find(b=>b.id==="jwd-home"),distance=dist(player.x,player.y,home.doorX,home.doorY);
+ if(updateJwdNeighbors(dt,distance))return true;
+ if(!jwd.allocated)return false;
  if(!jwd.atHome&&jwd.visited&&distance<85)beginJwdVisit();
  if(jwd.atHome&&jwd.exitPending&&distance>125){
-  const residents=npcs.filter(n=>n.jwdRole&&n.jwdRole!=="burglar"),n=residents.find(n=>!jwd.met.has(n.id))||residents[jwd.complaint%residents.length];
   if(!jwd.visited){visitJwdHome();return true}
-  if(n){talkJwdNeighbor(n,true);return true}
  }
  if(jwd.atHome&&!jwd.exitPending&&distance>600)jwd.atHome=false;
  if(jwd.visited&&jwd.visit>=2&&jwd.burglarVisit!==jwd.visit&&!jwd.burglar&&distance<550){
-  const rich=buildings.find(b=>b.id==="jwd-kranz"),n={id:"jwd-burglar",name:"EDE · EINBRUCH MIT ANSPRUCH",jwdRole:"burglar",x:rich.doorX,y:rich.doorY+35,vx:0,vy:0,phase:"approach",routeBounds:jwdLane};
+  const rich=buildings.find(b=>b.id==="jwd-kranz"),n={id:"jwd-burglar",name:"EDE · EINBRUCH MIT ANSPRUCH",jwdRole:"burglar",x:rich.doorX,y:rich.doorY+35,vx:0,vy:0,phase:"approach",routeBounds:jwdLane,gardenPaths:jwdGardens.paths,detour:[{x:rich.doorX,y:jwdGardens.crossY},{x:home.doorX,y:jwdGardens.crossY}]};
   if(!responderBlocked(n.x,n.y,13,n)){jwd.burglar=n;jwd.burglarVisit=jwd.visit;npcs.push(n)}
  }
  const thief=jwd.burglar;if(!thief||distance>1200)return false;
  const target=thief.phase==="approach"?home:buildings.find(b=>b.id==="jwd-kranz"),tx=target.doorX,ty=target.doorY+35,dx=tx-thief.x,dy=ty-thief.y,d=Math.hypot(dx,dy),beforeX=thief.x,beforeY=thief.y;
- if(d>(thief.phase==="approach"?54:28)){
+ if(d>(thief.phase==="approach"?68:28)){
   if(thief.phase==="retreat"&&d<75&&responderBlocked(tx,ty,13,thief,tx,ty)){thief.jwdMoving=0;thief.progress=null;thief.detour=null;thief.waiting=false;return false}
   const progress=thief.progress||(thief.progress={time:0,x:thief.x,y:thief.y});progress.time+=dt;
-  if(progress.time>=.75){if(Math.hypot(thief.x-progress.x,thief.y-progress.y)<8){thief.detour=jwdBurglarDetour(thief,tx,ty);thief.waiting=!thief.detour}Object.assign(progress,{time:0,x:thief.x,y:thief.y})}
+  if(progress.time>=.75){if(Math.hypot(thief.x-progress.x,thief.y-progress.y)<8){thief.detour=jwdLaneDetour(thief,tx,ty);thief.waiting=!thief.detour}Object.assign(progress,{time:0,x:thief.x,y:thief.y})}
   while(thief.detour?.length&&dist(thief.x,thief.y,thief.detour[0].x,thief.detour[0].y)<2)thief.detour.shift();
   const aim=thief.detour?.[0]||{x:tx,y:ty},ax=aim.x-thief.x,ay=aim.y-thief.y,ad=Math.hypot(ax,ay);
   if(!thief.waiting&&ad)moveGroundResponder(thief,ax/ad*Math.min(ad,52*dt),ay/ad*Math.min(ad,52*dt),13);
   thief.jwdMoving=Math.hypot(thief.x-beforeX,thief.y-beforeY);if(thief.jwdMoving>.001)thief.facing=Math.atan2(thief.x-beforeX,thief.y-beforeY);
  }
  else if(thief.phase==="approach"&&dist(player.x,player.y,thief.x,thief.y)<300){
-  thief.jwdMoving=0;thief.phase="inspect";clearInput();openDialogue(thief.name,jwdCopy.burglar.de,"!",()=>{thief.phase="retreat";thief.progress=null;thief.detour=null;thief.waiting=false});return true;
+  thief.jwdMoving=0;thief.phase="inspect";clearInput();openDialogue(thief.name,jwdCopy.burglar.de,"!",()=>{thief.phase="retreat";thief.progress=null;thief.detour=[{x:home.doorX,y:jwdGardens.crossY},{x:buildings.find(b=>b.id==="jwd-kranz").doorX,y:jwdGardens.crossY}];thief.waiting=false});return true;
  }else if(thief.phase==="retreat"){npcs.splice(npcs.indexOf(thief),1);jwd.burglar=null}
  return false;
 }
@@ -976,7 +1026,7 @@ function getMissionWaypoint(){
  const office=buildings.find(b=>b.id===mission.target);
  return office?{id:office.id,x:office.doorX,y:office.doorY}:null;
 }
-window.Germany3DBridge={jwdNeighborhood,getMissionWaypoint,playFaxTransition:()=>playSynthFaxFeed(),getHUDState:()=>({started:state.started,busy:state.modal||state.gameOver,lang:state.lang,energy:Math.round(player.energy),wanted:state.wanted}),clearInput,get preparingStart(){return !state.started&&!document.getElementById("intro").classList.contains("hidden")},queueAssetLoad,prepareNearbyAssets:prepareNearbyNpcAssets,get assetLoadStatus(){return {active:assetLoadActive,pending:assetQueue.length}},refreshStartup,get startupAssetsReady(){return startupNpcAssetsReady()},get characterAssetStatus(){return {required:[...startupNpcKinds],settled:[...npcAssetLoads].filter(([,e])=>e.settled).map(([k])=>k),failed:[...npcAssetLoads].filter(([,e])=>e.failed).map(([k])=>k)}},WORLD,player,roads,vehicleApproaches,vehicleElevation,crossings,crossingSigns,trafficLights,buildings,grassAreas,walkways,stations,stationElevation,trees,TREE_RADIUS,TREE_ROAD_CLEARANCE,SIDEWALK_WIDTH,schreber,policeGarden,policePath,kiesingerMemorial,goerlitzerPark,wirtschaftswunderSite,BORDER_Y,BORDER_BAND,borderGates,borderSegments,railLoops,railTracks,trains,fireSources,props,pickups,normObjects,getNPCs:()=>npcs,getPolice:()=>police,getTrafficCars:()=>trafficCars,getPoliceVehicles:()=>policeVehicles,VEHICLE_RENDER_SCALE,getPoliceHelicopters:()=>policeHelicopters,getNpcSpriteCanvas:key=>npcSpriteAtlases[key]?.canvas||null,npcSpriteGrids:Object.fromEntries(Object.entries(npcSpriteAtlases).map(([key,{cols,rows,frameWidth,frameHeight,pivot}])=>[key,{cols,rows,frameWidth,frameHeight,pivot}]))};
+window.Germany3DBridge={jwdGardens,jwdNeighborhood,getMissionWaypoint,playFaxTransition:()=>playSynthFaxFeed(),getHUDState:()=>({started:state.started,busy:state.modal||state.gameOver,lang:state.lang,energy:Math.round(player.energy),wanted:state.wanted}),clearInput,get preparingStart(){return !state.started&&!document.getElementById("intro").classList.contains("hidden")},queueAssetLoad,prepareNearbyAssets:prepareNearbyNpcAssets,get assetLoadStatus(){return {active:assetLoadActive,pending:assetQueue.length}},refreshStartup,get startupAssetsReady(){return startupNpcAssetsReady()},get characterAssetStatus(){return {required:[...startupNpcKinds],settled:[...npcAssetLoads].filter(([,e])=>e.settled).map(([k])=>k),failed:[...npcAssetLoads].filter(([,e])=>e.failed).map(([k])=>k)}},WORLD,player,roads,vehicleApproaches,vehicleElevation,crossings,crossingSigns,trafficLights,buildings,grassAreas,walkways,stations,stationElevation,trees,TREE_RADIUS,TREE_ROAD_CLEARANCE,SIDEWALK_WIDTH,schreber,policeGarden,policePath,kiesingerMemorial,goerlitzerPark,wirtschaftswunderSite,BORDER_Y,BORDER_BAND,borderGates,borderSegments,railLoops,railTracks,trains,fireSources,props,pickups,normObjects,getNPCs:()=>npcs,getPolice:()=>police,getTrafficCars:()=>trafficCars,getPoliceVehicles:()=>policeVehicles,VEHICLE_RENDER_SCALE,getPoliceHelicopters:()=>policeHelicopters,getNpcSpriteCanvas:key=>npcSpriteAtlases[key]?.canvas||null,npcSpriteGrids:Object.fromEntries(Object.entries(npcSpriteAtlases).map(([key,{cols,rows,frameWidth,frameHeight,pivot}])=>[key,{cols,rows,frameWidth,frameHeight,pivot}]))};
 const forms={
 a38:{code:"A38/1",title:"Passierschein A38 zur Beantragung eines weiteren Antrags",subtitle:"Bitte vollständig ausfüllen. Unvollständige Vollständigkeit gilt als unvollständig.",fields:[["text","VOLLSTÄNDIGER NAME"],["text","GEBURTSORT IN HEUTIGEN GEMEINDEGRENZEN"],["select","MELDESTATUS",["gemeldet","noch nicht gemeldet","gefühltermaßen gemeldet"]],["text","AKTENZEICHEN, FALLS BEREITS VORHANDEN"],["check","Ich bestätige, dass ich dieses Formular freiwillig unfreiwillig ausfülle."]]},
 wohnung:{code:"WGB-88",title:"Wohnungsgeberbestätigung zur Bestätigung einer Wohnung",subtitle:"Bestätigen Sie, dass Ihre Wohnung tatsächlich eine Wohnung ist.",fields:[["text","ANSCHRIFT"],["text","WOHNUNGSGEBENDER WOHNUNGSGEBER"],["select","ART DER ÜBERLASSUNG",["vermietet","untervermietet","mysteriös überlassen"]],["text","TATSÄCHLICHES DATUM DER TATSACHE DES EINZUGS"],["check","Ich bestätige das Vorhandensein von Wänden und mindestens einer Tür."]]},
@@ -987,7 +1037,7 @@ aufenthalt:{code:"ABH-404",title:"Antrag auf Fortsetzung der Anwesenheit",subtit
 citizenship:{code:"DE-1A",title:"Fiktiver Antrag auf deutsche Staatsangehörigkeit",subtitle:"Reines Spielverfahren. Keine echte Rechtslage oder Voraussetzung.",fields:[["text","NAME"],["select","KENNTNIS DER HAUSORDNUNG",["ausreichend","übertrieben","laminiert"]],["select","VERHÄLTNIS ZUR MÜLLTRENNUNG",["ambitioniert","akademisch","existenziell"]],["text","WARUM IST DIESES FORMULAR NICHT GEHEFTET?"],["check","Ich erkenne an, dass alle dargestellten Fristen und Regeln frei erfunden sind."]]}}
 function resize(){dpr=Math.min(devicePixelRatio||1,2);width=innerWidth;height=innerHeight;canvas.width=Math.round(width*dpr);canvas.height=Math.round(height*dpr);ctx.setTransform(dpr,0,0,dpr,0,0)}addEventListener("resize",resize);resize();
 const clamp=(v,a,b)=>Math.max(a,Math.min(b,v)),dist=(ax,ay,bx,by)=>Math.hypot(ax-bx,ay-by),inRect=(x,y,r)=>x>=r.x&&x<=r.x+r.w&&y>=r.y&&y<=r.y+r.h,pick=list=>list[Math.floor(Math.random()*list.length)];
-const onRoad=(x,y)=>[...roads,...vehicleApproaches].some(r=>inRect(x,y,r)),onCrossing=(x,y)=>crossings.some(r=>inRect(x,y,r)),onGardenGrass=(x,y)=>grassAreas.some(r=>inRect(x,y,r))||(x>schreber.x+20&&x<schreber.x+schreber.w-20&&y>schreber.y+20&&y<schreber.y+schreber.h-20)||onPoliceGardenGrass(x,y);
+const onRoad=(x,y)=>[...roads,...vehicleApproaches].some(r=>inRect(x,y,r)),onCrossing=(x,y)=>crossings.some(r=>inRect(x,y,r)),onGardenGrass=(x,y)=>grassAreas.some(r=>!r.privateGarden&&inRect(x,y,r))||(x>schreber.x+20&&x<schreber.x+schreber.w-20&&y>schreber.y+20&&y<schreber.y+schreber.h-20)||onPoliceGardenGrass(x,y);
 function normObjectRadius(object){return object.type==="hedge"?37:object.type==="chairs"?31:26}
 function propRadius(p){
  if(p.collisionRadius>0)return p.collisionRadius;if(p.asset==="dumpster-fire")return 98;
@@ -1015,7 +1065,7 @@ function groundCircleCandidates(x,y,r){
  // Positions and dimensions are immutable; station activation is checked by each consumer, never cached.
  return r>145?grid.records:grid.cells.get(Math.floor(x/256)+","+Math.floor(y/256))||grid.empty;
 }
-function staticBlocked(x,y,r=player.r){if(x<r+9||y<r+9||x>WORLD.w-r-9||y>WORLD.h-r-9)return true;if(x>goerlitzerPark.x-r&&x<goerlitzerPark.x+goerlitzerPark.w+r&&y>goerlitzerPark.y-r&&y<goerlitzerPark.y+goerlitzerPark.h+r)return true;if(dist(x,y,wirtschaftswunderSite.x,wirtschaftswunderSite.y)<r+wirtschaftswunderSite.collisionRadius)return true;if(Math.abs(x-kiesingerMemorial.x)<r+173&&Math.abs(y-kiesingerMemorial.y)<r+147)return true;for(const b of buildings)if(x>b.x-r&&x<b.x+b.w+r&&y>b.y-r&&y<b.y+b.h+r)return true;for(const p of props)if(!p.decorative&&(!p.stationFixture||p.active)&&dist(x,y,p.x,p.y)<r+propRadius(p))return true;for(const o of normObjects)if(dist(x,y,o.x,o.y)<r+normObjectRadius(o))return true;for(const tree of trees)if(dist(x,y,tree.x,tree.y)<r+TREE_RADIUS)return true;return false}
+function staticBlocked(x,y,r=player.r){if(x<r+9||y<r+9||x>WORLD.w-r-9||y>WORLD.h-r-9)return true;if(x>goerlitzerPark.x-r&&x<goerlitzerPark.x+goerlitzerPark.w+r&&y>goerlitzerPark.y-r&&y<goerlitzerPark.y+goerlitzerPark.h+r)return true;if(dist(x,y,wirtschaftswunderSite.x,wirtschaftswunderSite.y)<r+wirtschaftswunderSite.collisionRadius)return true;if(Math.abs(x-kiesingerMemorial.x)<r+173&&Math.abs(y-kiesingerMemorial.y)<r+147)return true;for(const b of buildings)if(x>b.x-r&&x<b.x+b.w+r&&y>b.y-r&&y<b.y+b.h+r)return true;for(const p of props)if(!p.decorative&&(!p.stationFixture||p.active)&&(p.collisionRect?signedRectDistance(x,y,p.collisionRect)<r:dist(x,y,p.x,p.y)<r+propRadius(p)))return true;for(const o of normObjects)if(dist(x,y,o.x,o.y)<r+normObjectRadius(o))return true;for(const tree of trees)if(dist(x,y,tree.x,tree.y)<r+TREE_RADIUS)return true;return false}
 function trainCarDistance(x,y,car){const dx=x-car.x,dy=y-car.y,c=Math.cos(car.angle),s=Math.sin(car.angle),along=dx*c+dy*s,across=-dx*s+dy*c;return Math.hypot(Math.max(0,Math.abs(along)-TRAIN_CAR_HALF_LENGTH),Math.max(0,Math.abs(across)-TRAIN_CAR_HALF_WIDTH))}
 function trainAt(x,y,r){for(const train of trains)for(const car of train.cars)if(trainCarDistance(x,y,car)<r)return car;return null}
 function dynamicBlocker(x,y,fromX,fromY){for(const train of trains)for(const item of train.cars){const next=trainCarDistance(x,y,item),previous=trainCarDistance(fromX,fromY,item);if(groundContactBlocks(next,previous,player.r))return item}for(const item of [...trafficCars,...policeVehicles]){if(item.vortexPhase==="swallowed")continue;if(groundContactBlocks(vehicleBodyDistance(x,y,item),vehicleBodyDistance(fromX,fromY,item),player.r))return item}for(const item of police)if(groundContactBlocks(dist(x,y,item.x,item.y),dist(fromX,fromY,item.x,item.y),player.r+14))return item;return null}
@@ -1036,7 +1086,7 @@ function vehicleMotionBlocked(x,y,car,fromX=car.x,fromY=car.y,fromAngle=car.angl
  if(y<extY+9||y>WORLD.h-extY-9||((x<extX+9||x>WORLD.w-extX-9)||car.roadBound)&&!vehicleOnRoad(x,y,car.angle))return true;
  if(rect(goerlitzerPark)||rect({x:kiesingerMemorial.x-173,y:kiesingerMemorial.y-147,w:346,h:294})||circle(wirtschaftswunderSite,wirtschaftswunderSite.collisionRadius))return true;
  for(const b of buildings)if(rect(b))return true;
- for(const {item,radius,prop} of groundCircleCandidates(x,y,145))if((!prop||!item.decorative&&(!item.stationFixture||item.active))&&circle(item,radius))return true;
+ for(const {item,radius,prop} of groundCircleCandidates(x,y,145))if((!prop||!item.decorative&&(!item.stationFixture||item.active))&&(item.collisionRect?rect(item.collisionRect):circle(item,radius)))return true;
  for(const train of trains)for(const coach of train.cars)if(body(coach,TRAIN_CAR_HALF_LENGTH,TRAIN_CAR_HALF_WIDTH))return true;
  for(const other of [...trafficCars,...policeVehicles])if(other!==car&&other.vortexPhase!=="swallowed"&&body(other,94,51))return true;
  for(const officer of police)if(circle(officer,14))return true;
@@ -1048,10 +1098,10 @@ function groundStaticMotionBlocked(x,y,r,fromX,fromY){
  if(groundContactBlocks(x,fromX,r+9)||groundContactBlocks(y,fromY,r+9)||groundContactBlocks(WORLD.w-x,WORLD.w-fromX,r+9)||groundContactBlocks(WORLD.h-y,WORLD.h-fromY,r+9))return true;
  if(rect(goerlitzerPark)||circle(wirtschaftswunderSite.x,wirtschaftswunderSite.y,wirtschaftswunderSite.collisionRadius)||rect({x:kiesingerMemorial.x-173,y:kiesingerMemorial.y-147,w:346,h:294}))return true;
  for(const b of buildings)if(rect(b))return true;
- for(const {item,radius,prop} of groundCircleCandidates(x,y,r))if((!prop||!item.decorative&&(!item.stationFixture||item.active))&&circle(item.x,item.y,radius))return true;
+ for(const {item,radius,prop} of groundCircleCandidates(x,y,r))if((!prop||!item.decorative&&(!item.stationFixture||item.active))&&(item.collisionRect?rect(item.collisionRect):circle(item.x,item.y,radius)))return true;
  return false
 }
-function pedestrianRouteContains(n,x,y,r=13){const b=n.routeBounds;return !b||x>=b.x+r&&x<=b.x+b.w-r&&y>=b.y+r&&y<=b.y+b.h-r}
+function pedestrianRouteContains(n,x,y,r=13){if(n.gardenPaths?.length)return n.gardenPaths.some(b=>x>=b.x+r&&x<=b.x+b.w-r&&y>=b.y+r&&y<=b.y+b.h-r);const b=n.routeBounds;return !b||x>=b.x+r&&x<=b.x+b.w-r&&y>=b.y+r&&y<=b.y+b.h-r}
 function responderBlocked(x,y,r,self,fromX=self?.x,fromY=self?.y){
  if(self&&(trafficCars.includes(self)||policeVehicles.includes(self)))return vehicleMotionBlocked(x,y,self,fromX,fromY);
  const origin=Number.isFinite(fromX)&&Number.isFinite(fromY),circle=(item,radius)=>Math.abs(x-item.x)<=r+radius+1e-6&&Math.abs(y-item.y)<=r+radius+1e-6&&(origin?groundContactBlocks(dist(x,y,item.x,item.y),dist(fromX,fromY,item.x,item.y),r+radius):dist(x,y,item.x,item.y)<r+radius);
@@ -1104,7 +1154,7 @@ function streetWisdomCanMove(n){
 function initializePedestrianRoutes(){
  const horizontal=horizontalRoads.flatMap(road=>sidewalkSegments.flatMap(segment=>[{x:segment.min,y:road.y-SIDEWALK_WIDTH,w:segment.max-segment.min,h:SIDEWALK_WIDTH},{x:segment.min,y:road.y+road.h,w:segment.max-segment.min,h:SIDEWALK_WIDTH}])),vertical=verticalRoads.flatMap(road=>verticalSidewalkSegments.flatMap(segment=>[{x:road.x-SIDEWALK_WIDTH,y:segment.min,w:SIDEWALK_WIDTH,h:segment.max-segment.min},{x:road.x+road.w,y:segment.min,w:SIDEWALK_WIDTH,h:segment.max-segment.min}]));
  for(const n of npcs){
-  if(n.jwdRole){n.routeBounds=jwdLane;continue}
+  if(n.jwdRole){n.routeBounds=jwdLane;n.gardenPaths=jwdGardens.paths;const station=jwdGardens.stations[n.id];if(station)Object.assign(n,{x:station.x,y:station.y,jwdActivity:station.activity,jwdWorking:true,activityPhase:0});continue}
   if(n.special)continue;
   const choices=(n.vx?horizontal:vertical).concat(stations.filter(s=>(s.w>s.h)===!!n.vx));let best=null,bestDistance=Infinity;
   for(const b of choices){const x=clamp(n.x,b.x+13,b.x+b.w-13),y=clamp(n.y,b.y+13,b.y+b.h-13),distance=dist(n.x,n.y,x,y);if(distance<bestDistance){best=b;bestDistance=distance}}
@@ -1701,6 +1751,7 @@ function bureaucrat(b,m){
  openDialogue(b.name,lines,"§",()=>showForm(m.form));
 }
 function microInteract(p){
+ if(p.asset==="jwd-car"){openDialogue("LAMINIERTER HINWEIS · "+p.owner,jwdCopy.carNote.de,"!");return}
  if(p.id==="db"){openDialogue("DEUTSCHE BAHN",state.region==="berlin"?["Your train nach Deutschland is currently thirty-five Minuten delayed.","Reason: ein previous Vorgang. Thank you for your understanding, maybe."]:["Der Regionalexpress verspätet sich heute um voraussichtlich 35 Minuten.","Grund: vorausgegangener Vorgang. Wir bitten um Verständnis."],"DB",()=>innerMonologue("train"));return}
  if(p.id&&p.id.startsWith("baustelle")){openDialogue("BAUSTELLENLEITUNG",state.region==="berlin"?["This Baustelle is temporary permanent.","Completion is planned for Q4, year currently under review."]:["Diese Baustelle ist vorübergehend dauerhaft eingerichtet.","Die Fertigstellung ist für das vierte Quartal eines noch zu prüfenden Jahres vorgesehen."],"🚧");return}
  if(p.id&&p.id.startsWith("fahrrad")){uiTone(1450,.06,"square",.03);setTimeout(()=>uiTone(1620,.05,"square",.025),55);openDialogue("FAHRRAD",state.region==="berlin"?["Klingeling. You are standing maybe slightly in the Radweg.","Please optimize your body position immediately."]:["Klingeling. Sie stehen geringfügig im Radweg.","Bitte korrigieren Sie Ihre Körperposition unverzüglich."],"🚲",()=>innerMonologue("bicycle",.75));return}
@@ -1726,7 +1777,7 @@ function interact(){if(state.dialogue){nextDialogue();return}if(state.modal)retu
    aliceBark(n,true);
  }else openDialogue(n.name,[worldNpcLine(n.line),worldNpcLine((n.line+3)%npcLines.length)],"!",()=>innerMonologue("lost",.55),n.voiceId);
  return
-}for(const p of props)if(p.id&&dist(player.x,player.y,p.x,p.y)<96){microInteract(p);return}for(const o of normObjects)if(!o.fixed&&dist(player.x,player.y,o.x,o.y)<92){if(state.mission===5){o.fixed=true;state.stadtbild++;toast("STADTBILD NORMIERT · "+o.label);updateHud()}else{toast("DAS IST NOCH NICHT IHR VORGANG");innerMonologue("wrongTask")};return}toast("HIER IST NIEMAND ZUSTÄNDIG");innerMonologue("lost")}
+}for(const p of props)if(p.id&&p.interactive!==false&&dist(player.x,player.y,p.x,p.y)<96){microInteract(p);return}for(const o of normObjects)if(!o.fixed&&dist(player.x,player.y,o.x,o.y)<92){if(state.mission===5){o.fixed=true;state.stadtbild++;toast("STADTBILD NORMIERT · "+o.label);updateHud()}else{toast("DAS IST NOCH NICHT IHR VORGANG");innerMonologue("wrongTask")};return}toast("HIER IST NIEMAND ZUSTÄNDIG");innerMonologue("lost")}
 function collect(){for(const p of pickups){if(p.taken||dist(player.x,player.y,p.x,p.y)>34)continue;p.taken=true;uiTone(p.type==="pfand"?660:880,.1,"square",.04);if(p.type==="pfand"){state.pfand++;addGermanness(1,"PFAND +1 · VERMÖGEN WIEDER LIQUID")}else if(p.wurstType&&!state.wurstBadges.has(p.wurstType)){state.wurstBadges.add(p.wurstType);if(state.wurstBadges.size===Math.ceil(WURST_IDS.length/2))queueWurstSong();player.energy=clamp(player.energy+p.value,0,100);announceWurst(WURST_TYPES[p.wurstType]);addGermanness(1,"EXTRA WURST · "+p.short);particles.push({x:p.x,y:p.y,t:1.4,text:"EXTRA WURST! + "+p.short})}else{player.energy=clamp(player.energy+p.value,0,100);toast(p.label+" +"+p.value+" ENERGIE");particles.push({x:p.x,y:p.y,t:1,text:"+ "+p.label})}updateHud()}}
 function endGame(win){state.gameOver=true;state.modal=true;document.getElementById("end-modal").hidden=false;document.getElementById("end-kicker").textContent=win?"VERWALTUNGSVORGANG ABGESCHLOSSEN":"FIKTIVE SPIELFRIST ABGELAUFEN";document.getElementById("end-title").textContent=win?"EINBÜRGERUNG: VORLÄUFIG ERFOLGREICH":"AUSWEISUNG AUS DEM SPIEL";document.getElementById("end-copy").textContent=win?"Sie haben genügend Formulare ausgefüllt, Regeln überlebt und verdächtig viel Geduld nachgewiesen. Dieses Spiel bildet keine echte Einbürgerung ab.":"Die absichtlich absurde Drei-Tage-Frist ist abgelaufen. Reale Gesetze, Verfahren und Rechte sind anders. Hier müssen Sie leider noch einmal von vorne anfangen."}document.getElementById("restart").onclick=()=>location.reload();
 function update(dt){
@@ -2127,7 +2178,7 @@ function drawPlayer(){
  ctx.fillStyle="#d3cbbb";ctx.beginPath();ctx.arc(0,-39,8,0,Math.PI*2);ctx.fill();
  ctx.fillStyle="#eee9dd";ctx.font="900 8px Arial";ctx.textAlign="center";ctx.fillText(state.lang==="en"?"YOU":"SIE",0,18);ctx.restore();
 }
-function nearestInteract(){let label="",best=122;const parkDistance=dist(player.x,player.y,goerlitzerPark.plaqueX,goerlitzerPark.plaqueY);if(parkDistance<96){best=-1;label="GÖRLI · KOSTENTAFEL LESEN"}const memorialDistance=dist(player.x,player.y,kiesingerMemorial.x,kiesingerMemorial.y+195);if(memorialDistance<best){best=memorialDistance;label="KIESINGER-DENKMAL LESEN"}for(const b of buildings){const d=dist(player.x,player.y,b.doorX,b.doorY);if(d<best){best=d;label=b.name}}for(const n of npcs){if(n.arrested||n.lawPending)continue;const d=dist(player.x,player.y,n.x,n.y);if(d<best){best=d;label=n.jwdRole?n.name:n.special==="borderPourer"||n.special==="alice"?(state.region==="berlin"?"SATIRE STATEMENT LISTENING":"SATIRISCHE ERKLÄRUNG ANHÖREN"):(state.region==="berlin"?"COMPLAINT LISTENING":"BESCHWERDE ANHÖREN")}}for(const p of props){if(!p.id)continue;const d=dist(player.x,player.y,p.x,p.y);if(d<best){best=d;label=p.label}}for(const o of normObjects){if(o.fixed)continue;const d=dist(player.x,player.y,o.x,o.y);if(d<best){best=d;label="AUSRICHTEN"}}const e=document.getElementById("interact-hint");if(e.hidden!==!label)e.hidden=!label;const text=label?"E · "+label:"";if(e.textContent!==text)e.textContent=text}
+function nearestInteract(){let label="",best=122;const parkDistance=dist(player.x,player.y,goerlitzerPark.plaqueX,goerlitzerPark.plaqueY);if(parkDistance<96){best=-1;label="GÖRLI · KOSTENTAFEL LESEN"}const memorialDistance=dist(player.x,player.y,kiesingerMemorial.x,kiesingerMemorial.y+195);if(memorialDistance<best){best=memorialDistance;label="KIESINGER-DENKMAL LESEN"}for(const b of buildings){const d=dist(player.x,player.y,b.doorX,b.doorY);if(d<best){best=d;label=b.name}}for(const n of npcs){if(n.arrested||n.lawPending)continue;const d=dist(player.x,player.y,n.x,n.y);if(d<best){best=d;label=n.jwdRole?n.name:n.special==="borderPourer"||n.special==="alice"?(state.region==="berlin"?"SATIRE STATEMENT LISTENING":"SATIRISCHE ERKLÄRUNG ANHÖREN"):(state.region==="berlin"?"COMPLAINT LISTENING":"BESCHWERDE ANHÖREN")}}for(const p of props){if(!p.id||p.interactive===false)continue;const d=dist(player.x,player.y,p.x,p.y);if(d<best){best=d;label=p.label}}for(const o of normObjects){if(o.fixed)continue;const d=dist(player.x,player.y,o.x,o.y);if(d<best){best=d;label="AUSRICHTEN"}}const e=document.getElementById("interact-hint");if(e.hidden!==!label)e.hidden=!label;const text=label?"E · "+label:"";if(e.textContent!==text)e.textContent=text}
 function draw(){nearestInteract()}
 // Public-domain and traditional melodies arranged as local WebAudio chiptunes.
 // Notes are MIDI numbers, durations are quarter-note units, and null is a rest.

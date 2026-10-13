@@ -10,7 +10,8 @@ function turn(h,yaw){const delta=yaw-h.level.view.yaw,code=delta>=0?'ArrowRight'
 test('E and its hint follow facing for seated patrons; turning away does not start dialogue',()=>{
  const h=fixture();assert.match(h.node('amt-nearby').textContent,/KONRAD/);
  turn(h,Math.PI);assert.doesNotMatch(h.node('amt-nearby').textContent,/ANSPRECHEN/);
- h.key('KeyE');h.key('KeyE','keyup');assert.equal(h.level.stage,'walk-sign');
+ h.key('KeyE');h.key('KeyE','keyup');assert.notEqual(h.level.stage,'character');
+ h.level.replay(h.config);h.enter();h.approachRegistration();
  turn(h,-.85);h.key('KeyE');assert.equal(h.level.stage,'character');assert.equal(h.node('amt-speaker').textContent,'KONRAD WOHNUNGSZETTEL');assert.equal(h.counts.form,0);
 });
 test('the forward cone rejects side and rear actors and selects the person closest to gaze',()=>{
@@ -45,6 +46,12 @@ test('E reaches a seated person from 2.25 metres, including the active-counter w
 test('the wider facing tolerance accepts a nearby person at 55 degrees, but excludes the rear',()=>{
  const h=seededInteraction({yaw:55*Math.PI/180});assert.match(h.node('amt-nearby').textContent,/KONRAD/);h.key('KeyE');assert.equal(h.level.stage,'character');
  const away=seededInteraction({yaw:Math.PI});away.key('KeyE');assert.notEqual(away.level.stage,'character');
+});
+
+test('E reaches a person four metres away and near the edge of the forward field',()=>{
+ const marker='window.BuergeramtLevel=',hostSource=source('buergeramt.js').replace(marker,'window.seedWide=(distance)=>{for(const actor of characters){actor.x=100;actor.z=100}for(const patron of Object.values(story.patrons)){patron.x=100;patron.z=100}Object.assign(view,{x:0,z:0,yaw:80*Math.PI/180});Object.assign(story.patrons["amt-konrad-wohnungszettel"],{x:0,z:-distance});setStage("walk-sign")};'+marker);
+ const h=harness('host',{voice:false,cinematics:false,hostSource});h.window.seedWide(3.8);h.key('KeyE');assert.equal(h.level.stage,'character');assert.equal(h.node('amt-speaker').textContent,'KONRAD WOHNUNGSZETTEL');
+ const far=harness('host',{voice:false,cinematics:false,hostSource});far.window.seedWide(4.1);far.key('KeyE');assert.notEqual(far.level.stage,'character');
 });
 
 test('returning walkers can immediately respond to another deliberate E press',()=>{

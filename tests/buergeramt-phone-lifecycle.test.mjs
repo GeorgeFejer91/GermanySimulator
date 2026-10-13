@@ -1,6 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import {harness} from './amt-harness.mjs';
+import vm from 'node:vm';
+import {harness,source} from './amt-harness.mjs';
 
 function ticketed(options={}){
  const h=harness('phone',options),link=h.phoneReady();
@@ -122,4 +123,52 @@ test('office tempo adjusts the remaining unanswered window',()=>{
  h.tick(2000);link.message({type:'office-tempo',rate:.5});
  h.tick(19999);assert.equal(sent(link,'call-missed').length,0);
  h.tick(1);assert.equal(sent(link,'call-missed').length,1);
+});
+
+test('name submission is available on load and waits for connection plus scan readiness',()=>{
+ const h=harness('phone'),link=h.links[0];
+ assert.equal(h.node('phone-submit').disabled,false);assert.equal(h.node('phone-form').hidden,false);
+ h.node('phone-name').value='  Erika   Mustermann  ';h.node('phone-form').dispatchEvent(new Event('submit',{cancelable:true}));
+ assert.equal(link.sent.length,0);assert.equal(h.node('phone-form').hidden,true);
+ assert.equal(h.fullscreenRequests.length,1);
+ link.emit('connected',{});assert.equal(sent(link,'scan').length,1);assert.equal(sent(link,'register').length,0);
+ h.tick(1500);assert.equal(sent(link,'scan').length,2);assert.equal(sent(link,'register').length,0);
+ link.message({type:'scan-ready'});assert.equal(sent(link,'register').length,1);
+ assert.equal(sent(link,'register')[0].name,'Erika Mustermann');
+ link.message({type:'ticket',number:'D-082',counter:2});assert.equal(h.node('phone-number').textContent,'D-082');
+ assert.equal(sent(link,'ticket-received').length,1);
+});
+
+test('a failed registration send retains the submitted name and retries after readiness',()=>{
+ const h=harness('phone'),link=h.phoneReady();link.fail=true;
+ h.node('phone-name').value='Erika Mustermann';h.node('phone-form').dispatchEvent(new Event('submit',{cancelable:true}));
+ assert.equal(sent(link,'register').length,0);assert.equal(h.node('phone-form').hidden,true);
+ link.emit('status','Telefon getrennt');link.fail=false;link.emit('connected',{});
+ assert.equal(sent(link,'register').length,0);link.message({type:'scan-ready'});
+ assert.equal(sent(link,'register').length,1);assert.equal(sent(link,'register')[0].name,'Erika Mustermann');
+});
+
+test('queue-call status updates only the received ticket and does not reveal the counter',()=>{
+ const {h,link}=ticketed(),before=h.node('phone-status').textContent;
+ link.message({type:'queue-call',number:'Z-999',counter:1});assert.equal(h.node('phone-status').textContent,before);
+ link.message({type:'queue-call',number:'B-223',counter:3});assert.match(h.node('phone-status').textContent,/aufgerufen/);
+ assert.doesNotMatch(h.node('phone-status').textContent,/Schalter|3/);
+});
+
+test('extended queue codes are displayed and acknowledged without shortening their identity',()=>{
+ const h=harness('phone'),link=h.phoneReady(),number='Z-123456789012';
+ h.node('phone-name').value='Erika Muster';h.node('phone-form').dispatchEvent(new Event('submit',{cancelable:true}));
+ link.message({type:'ticket',number,counter:4});assert.equal(h.node('phone-number').textContent,number);
+ assert.equal(sent(link,'ticket-received').at(-1).number,number);
+ link.message({type:'queue-call',number,counter:4});assert.match(h.node('phone-status').textContent,/aufgerufen/);
+});
+
+test('a forfeited ticket offers retry on the same URL and expired session storage cannot block a fresh form',()=>{
+ const {h,link}=ticketed();link.message({type:'forfeit'});let reloads=0;
+ h.window.location.reload=()=>reloads++;h.node('phone-expired-copy').click();assert.equal(reloads,1);
+ let reads=0;h.context.sessionStorage={getItem(){reads++;return '1'},setItem(){}};
+ h.node('phone-form').hidden=false;h.node('phone-expired').hidden=true;
+ vm.runInContext(source('buergeramt-phone.js'),h.context);
+ assert.equal(reads,0);assert.equal(h.links.length,2);assert.equal(h.node('phone-submit').disabled,false);
+ assert.equal(h.node('phone-form').hidden,false);assert.equal(h.node('phone-expired').hidden,true);
 });

@@ -74,7 +74,7 @@ test('payloads cannot override the outbound envelope',()=>{
 test('outbound roles, fields and bounded values are validated',()=>{
  const h=transport();assert.equal(h.link.send('answer',{id:'grass'}),false);assert.equal(h.link.send('activated',{unexpected:true}),false);assert.equal(h.link.send('police-line',{index:9,line:'Nein'}),false);assert.equal(h.link.send('ticket',{number:'B-223',counter:3}),true);assert.equal(h.channel.sent[0].type,'ticket');assert.equal(h.channel.sent[0].seq,1);
 });
-test('channel send races are returned as failure rather than uncaught exceptions',()=>{const h=transport();h.channel.fail=true;assert.doesNotThrow(()=>assert.equal(h.link.send('activated'),false))});
+test('channel send races are returned as failure without consuming a sequence',()=>{const h=transport(),ticket={number:'B-223',counter:3};h.channel.fail=true;assert.doesNotThrow(()=>assert.equal(h.link.send('ticket',ticket),false));h.channel.fail=false;assert.equal(h.link.send('ticket',ticket),true);assert.equal(h.channel.sent[0].seq,1)});
 test('congested, closed and oversized sends fail without publishing',()=>{
  const h=transport();h.channel.bufferedAmount=65537;assert.equal(h.link.send('activated'),false);h.channel.bufferedAmount=0;assert.equal(h.link.send('call',{id:'grass',round:1,line:'界'.repeat(349),ringAtPhoneMs:500,ringAtUtcMs:null,leadMs:2200}),false);assert.equal(h.channel.sent.length,0);h.link.close();assert.equal(h.link.send('done'),false);
 });
@@ -121,7 +121,7 @@ function generatedProtocol(linkSource=source('buergeramt-link.js')){
    assert.equal(receiver.messages.length,count,'unexpected field consumed sequence');rejected++;
    receiver.channel.raw(JSON.stringify(message));
    assert.equal(receiver.messages.length,count+1,`valid sequence lost: seed ${seed}, ${role}, step ${step}`);
-   assert.deepEqual(JSON.parse(JSON.stringify(receiver.messages.at(-1))),message,'accepted payload changed');valid++;
+   assert.deepEqual(JSON.parse(JSON.stringify(receiver.messages.at(-1))),{...message,peer:'peer-1'},'accepted payload changed');valid++;
    receiver.channel.raw(JSON.stringify(message));
    assert.equal(receiver.messages.length,count+1,'replay reached a consumer');rejected++;
   }
@@ -192,4 +192,77 @@ test('fourth police line permits natural receipts but no cutoff',()=>{
  assert.equal(phone.link.send('police-start',{index:3,mode:'voice',readyDelayMs:0,atMs:20}),true);
  assert.equal(phone.link.send('police-done',{index:3,mode:'voice',durationMs:40,atMs:60}),true);
  assert.equal(host.link.send('police-cutoff',{index:3,stopAtPhoneMs:null,stopAtUtcMs:null}),false);
+});
+
+test('shared invitations keep peer sequences independent and send each ticket only to its owner',()=>{
+ const h=transport(),second=new h.Channel();h.link.attach('peer-2',second);
+ h.channel.receive({type:'register',id:'a'.repeat(24),name:'Erika Mustermann',seq:12});
+ second.receive({type:'register',id:'a'.repeat(24),name:'Otto Mustermann'});
+ second.receive({type:'register',id:'a'.repeat(24),name:'Duplicate'});
+ assert.deepEqual(h.messages.map(m=>[m.peer,m.name]),[['peer-1','Erika Mustermann'],['peer-2','Otto Mustermann']]);
+ assert.equal(h.link.peer,'peer-1');
+ assert.equal(h.link.send('ticket',{number:'B-223',counter:3},'peer-2'),true);
+ assert.equal(h.link.send('ticket',{number:'C-014',counter:1}),true);
+ assert.equal(h.link.send('queue-call',{number:'B-223',counter:3},'peer-2'),true);
+ assert.deepEqual(h.channel.sent.map(m=>[m.seq,m.number]),[[1,'C-014']]);
+ assert.deepEqual(second.sent.map(m=>[m.seq,m.number]),[[1,'B-223'],[2,'B-223']]);
+ assert.equal(h.link.send('ticket',{number:'Z-999',counter:4},'unknown'),false);
+ assert.equal(h.link.selectPeer('peer-2'),true);assert.equal(h.link.channel,second);
+ assert.equal(h.link.lastSeq,1);assert.equal(h.link.seq,2);
+ assert.equal(h.link.send('counter-start'),true);assert.equal(second.sent.at(-1).seq,3);
+ assert.equal(h.link.selectPeer('unknown'),false);assert.equal(h.link.peer,'peer-2');
+});
+
+test('peer identity comes from its channel and a spoof cannot consume its valid sequence',()=>{
+ const h=transport(),second=new h.Channel();h.link.attach('peer-2',second);
+ second.receive({type:'phone-hidden',peer:'peer-1',seq:100});
+ assert.equal(h.messages.length,0);
+ second.receive({type:'phone-visible',seq:1});
+ assert.equal(h.messages.length,1);assert.equal(h.messages[0].peer,'peer-2');
+});
+
+test('closing one phone leaves other phones connected and global close tears down every channel',()=>{
+ const h=transport(),second=new h.Channel(),third=new h.Channel(),connected=[],disconnected=[],statuses=[];
+ h.link.addEventListener('connected',e=>connected.push(e.detail.peer));
+ h.link.addEventListener('disconnected',e=>disconnected.push(e.detail.peer));
+ h.link.addEventListener('status',e=>statuses.push(e.detail));
+ h.link.attach('peer-2',second);h.link.attach('peer-3',third);
+ h.link.attach('peer-2',second);assert.deepEqual(connected,['peer-2','peer-3']);
+ h.channel.close();assert.deepEqual(disconnected,['peer-1']);assert.equal(h.link.peer,'peer-2');
+ assert.equal(statuses.includes('Telefon getrennt'),false);
+ second.receive({type:'phone-visible'});assert.equal(h.messages.at(-1).peer,'peer-2');
+ h.link.close();assert.equal(second.readyState,'closed');assert.equal(third.readyState,'closed');
+ assert.equal(h.link.peers.size,0);assert.equal(h.link.send('done',{},'peer-3'),false);
+ second.readyState='open';second.receive({type:'phone-hidden',seq:2});
+ assert.equal(h.messages.length,1);assert.deepEqual(disconnected,['peer-1']);
+});
+
+test('duplicate host channel-open notifications share one pending channel request',async()=>{
+ const h=transport();let opens=0,resolve;
+ h.link.sdk={openChannel:()=>{opens++;return new Promise(done=>{resolve=done})}};
+ const opening=h.link.openHostChannel('peer-2');
+ await h.link.openHostChannel('peer-2');assert.equal(opens,1);
+ const second=new h.Channel();resolve(second);await opening;
+ await h.link.openHostChannel('peer-2');assert.equal(opens,1);
+ assert.equal(h.link.peers.get('peer-2').channel,second);
+});
+
+test('queue calls have host ownership and the same bounded code and counter as tickets',()=>{
+ const host=transport(),phone=transport('phone'),payload={number:'A-001',counter:2};
+ assert.equal(host.link.send('queue-call',payload),true);assert.equal(phone.link.send('queue-call',payload),false);
+ for(const bad of [{...payload,number:'bad'},{...payload,counter:0},{...payload,counter:5},{...payload,peer:'spoof'}])phone.channel.receive({type:'queue-call',...bad});
+ assert.equal(phone.messages.length,0);phone.channel.receive({type:'queue-call',...payload});assert.equal(phone.messages.length,1);
+});
+
+test('long queue codes remain bounded and survive ticket, receipt and queue-call delivery',()=>{
+ const host=transport(),phone=transport('phone'),number='Z-123456789012',payload={number,counter:4},receipt={number,id:'a'.repeat(24)};
+ assert.equal(host.link.send('ticket',payload),true);assert.equal(host.link.send('queue-call',payload),true);
+ assert.equal(phone.link.send('ticket-received',receipt),true);
+ phone.channel.receive({type:'ticket',...payload});phone.channel.receive({type:'queue-call',...payload,seq:2});host.channel.receive({type:'ticket-received',...receipt});
+ assert.equal(phone.messages.length,2);assert.equal(host.messages.length,1);
+ for(const invalid of ['Z-1234567890123','ZZ-1000','z-1000','Z-','Z-1.5']){
+  assert.equal(host.link.send('ticket',{...payload,number:invalid}),false);
+  assert.equal(host.link.send('queue-call',{...payload,number:invalid}),false);
+  assert.equal(phone.link.send('ticket-received',{...receipt,number:invalid}),false);
+ }
 });

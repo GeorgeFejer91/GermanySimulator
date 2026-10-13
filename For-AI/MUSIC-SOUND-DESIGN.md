@@ -46,7 +46,7 @@ When a visual transformation and a score are one dramatic process, define their 
 ## Bürgeramt example and boundary
 
 The `amt-queue-call` beat belongs to the episode's committed board update, not
-the render loop or phone receipt. Its quiet double beep remains tied to each board update. Knick's exact
+the render loop or phone receipt. Its quiet double beep follows only a committed new code at a free Schalter. Occupied rows retain their protected 30-scene-second calls, so skipped replacements, ticket registration and rendering stay silent. Knick's exact
 recorded “Nächste bitte!” has a random 35–75 second quiet cooldown and consumes
 the same ambient turn and background voice level as other remarks. Paper,
 stamping, copier and phone textures share the shuffled turn bag. The latest

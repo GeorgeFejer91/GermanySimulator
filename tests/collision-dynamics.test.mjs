@@ -4,7 +4,7 @@ import {readFileSync} from "node:fs";
 const game=readFileSync("game.js","utf8");
 
 assert.match(game,/function staticBlocked\(x,y,r=player\.r\)/);
-assert.match(game,/for\(const p of props\)if\(!p\.decorative&&\(!p\.stationFixture\|\|p\.active\)&&dist\(x,y,p\.x,p\.y\)<r\+propRadius\(p\)\)/,"solid street props block; decorative and failed station fixtures do not");
+assert.match(game,/for\(const p of props\)if\(!p\.decorative&&\(!p\.stationFixture\|\|p\.active\)&&\(p\.collisionRect\?signedRectDistance\(x,y,p\.collisionRect\)<r:dist\(x,y,p\.x,p\.y\)<r\+propRadius\(p\)\)\)/,"solid street props block; decorative and failed station fixtures do not");
 assert.match(game,/for\(const o of normObjects\)if\(dist\(x,y,o\.x,o\.y\)<r\+normObjectRadius\(o\)\)/,"mission objects must share their typed ground clearance");
 assert.match(game,/function responderBlocked\(x,y,r,self,/);
 assert.match(game,/trainAt\(x,y,r\)/,"ground actors must not pass through trains");
