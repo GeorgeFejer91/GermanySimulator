@@ -71,7 +71,7 @@ try{
    const check=await page.evaluate(()=>{const box=document.getElementById('english-subtitle'),dialogue=document.getElementById('dialogue');return {actionsWidth:dialogue.clientWidth,actionsScroll:dialogue.scrollWidth,scrollWidth:box.scrollWidth,width:box.clientWidth,height:box.clientHeight,scrollHeight:box.scrollHeight,fit:box.dataset.fit,measurement:box.dataset.measurement,lang:box.lang,text:box.textContent}});assert.ok(check.scrollWidth<=check.width+2,'caption must reflow without horizontal clipping');assert.ok(check.actionsScroll<=check.actionsWidth+2,'dialogue actions stay inside the enlarged viewport');assert.equal(check.lang,lang);textChecks.push({lang,zoom,...check});await page.screenshot({path:resolve(out,`narrow-${lang}-${zoom}.png`)});await finish();
 
   }
-  const assets=await page.evaluate(()=>Germany3D.inspectAssets().jwd);assert.equal(assets.houses.length,3);assert.equal(assets.actors.length,3);assert.deepEqual(errors,[]);
+  const assets=await page.evaluate(()=>Germany3D.inspectAssets().jwd);assert.equal(assets.houses.length,6);assert.equal(assets.actors.length,3);assert.deepEqual(errors,[]);
   report.cases.push({name,entry,departure,assets,occupiedDoor,sweeps,textChecks,errors});await context.close();console.log(JSON.stringify({name,verdict:'PASS'}));
  }
  report.complete=true;

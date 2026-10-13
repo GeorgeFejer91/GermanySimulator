@@ -13,16 +13,17 @@ function fn(name){
 function harness(){
  const nodes=new Map(),node=id=>{if(!nodes.has(id))nodes.set(id,{textContent:'',hidden:false});return nodes.get(id)};
  const h={WORLD:{w:10960,h:5360},RAIL_GUTTER:560,TREE_RADIUS:38,player:{x:2360,y:2320,r:16,energy:100},state:{started:true,mission:0,lang:'de',wanted:3},window:{},document:{getElementById:node},localStorage:{setItem(){}},anmeldungAwarded:false,
-  goerlitzerPark:{x:10000,y:4000,w:100,h:100},wirtschaftswunderSite:{x:10000,y:4200,collisionRadius:142},kiesingerMemorial:{x:10000,y:4500},props:[],normObjects:[],trees:[],trains:[],trafficCars:[],policeVehicles:[],police:[],stationElevation:()=>0,
+  goerlitzerPark:{x:10000,y:4000,w:100,h:100},wirtschaftswunderSite:{x:10000,y:4200,collisionRadius:142},kiesingerMemorial:{x:10000,y:4500},props:[],normObjects:[],trees:[],walkways:[],grassAreas:[],trains:[],trafficCars:[],policeVehicles:[],police:[],stationElevation:()=>0,
   policePath:{x1:4810,y1:4410},OFFENSE_TIMING:{policeContactCooldown:5.8},dist:(ax,ay,bx,by)=>Math.hypot(ax-bx,ay-by),clamp:(n,a,b)=>Math.max(a,Math.min(b,n)),offsetWorldPoint:b=>({...b,x:b.x+560,y:b.y+560}),updateHud(){},clearInput(){},syncPoliceResponse(){},uiTone(){},toast(){},renderAnmeldungBadge(){}};
  h.openDialogue=(speaker,lines,portrait,done)=>{h.state.modal=h.state.dialogue=true;h.dialogue={speaker,lines,done}};
  h.finish=()=>{const done=h.dialogue?.done;h.dialogue=null;h.state.modal=h.state.dialogue=false;done?.()};
  vm.createContext(h);
  const between=(a,b)=>source.slice(source.indexOf(a),source.indexOf(b,source.indexOf(a)+a.length));
  vm.runInContext(between('const buildings=','const grassAreas=')+between('const missions=','const rules=')+source.split('\n').find(l=>l.startsWith('const jwdLane=')).replace('walkways.push(jwdLane);','')+
-  between('const npcs=',' {x:520,y:720')+'].map(offsetWorldPoint);'+between('const jwd=','window.Germany3DBridge=')+
+  between('const jwdNeighborhood=','for(const b of buildings)')+between('const npcs=',' {x:520,y:720')+'].map(offsetWorldPoint);'+between('const jwd=','window.Germany3DBridge=')+
   ['groundCircleCandidates','propRadius','normObjectRadius','staticBlocked','groundContactBlocks','signedRectDistance','groundStaticMotionBlocked','pedestrianRouteContains','responderBlocked','moveGroundResponder','awardAnmeldung'].map(fn).join('\n')+';globalThis.jwdState=jwd;globalThis.actors=npcs;globalThis.homes=buildings;globalThis.lane=jwdLane;',h);
  for(const n of h.actors)n.routeBounds=h.lane;
+ const treeCoordinates=JSON.parse('['+source.split('trees=Object.freeze([')[1].split('].map(')[0]+']');h.trees.push(...treeCoordinates.map(([x,y])=>h.offsetWorldPoint({x,y})));
  h.home=h.homes.find(b=>b.id==='jwd-home');
  return h;
 }
@@ -114,4 +115,14 @@ test('paved home lane connects with full body clearance to the existing north/so
  for(let x=h.home.doorX;x<=1574;x+=4)assert.equal(h.staticBlocked(x,4600,r),false);
  assert.ok(1574-r>=h.lane.x&&1574+r<=h.lane.x+h.lane.w);assert.ok(h.lane.y+13<4600&&4600<h.lane.y+h.lane.h-13);
  assert.ok(h.home.x<1200&&h.home.y>4200,'home lies at the southwest city edge');
+});
+
+test('six garden-suburb plots connect around the block without crossing lawns or solids',()=>{
+ const h=harness(),lanes=[h.lane,...h.walkways],homes=h.homes.filter(b=>b.residential);assert.equal(homes.length,6);
+ for(const b of homes.filter(b=>b.variant)){
+  const route=[{x:b.doorX,y:b.doorY},{x:b.doorX,y:4220},{x:630,y:4220},{x:630,y:4660},{x:h.home.doorX,y:4660},{x:h.home.doorX,y:h.home.doorY+30}];
+  for(let segment=1;segment<route.length;segment++){const a=route[segment-1],z=route[segment],steps=Math.ceil(h.dist(a.x,a.y,z.x,z.y)/2);
+   for(let i=0;i<=steps;i++){const x=a.x+(z.x-a.x)*i/steps,y=a.y+(z.y-a.y)*i/steps;assert.ok(lanes.some(r=>x-16>=r.x&&x+16<=r.x+r.w&&y-16>=r.y&&y+16<=r.y+r.h),'body-clear connected paving');assert.equal(h.responderBlocked(x,y,16,h.player,x,y),false,b.id+' approach');assert.ok(!h.grassAreas.some(r=>x>=r.x&&x<=r.x+r.w&&y>=r.y&&y<=r.y+r.h),'walking route never needs a lawn offence')}
+  }
+ }
 });

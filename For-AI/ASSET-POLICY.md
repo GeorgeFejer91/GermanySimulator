@@ -821,17 +821,21 @@ profiles are retained under output/smoothness in the performance worktree.
 
 ## Local 3D buildings
 
-The JWD residential cluster uses three procedural buildings in the canonical
-building list and four small procedural character costumes (three residents plus
-one visiting burglar). It requests no municipal GLBs, placard images or character
-atlases. Three 768 × 150 canvas signs use 1,382,400 decoded RGBA bytes, no mipmaps;
-the full house/four-person diagnostic has 3,478 triangles and 108,140 geometry
-bytes. Houses use the ordinary building culling, actual-mesh obstruction and
-per-instance material restoration; the open porch canopy is overhead, with all
-ground furniture inside its solid parcel. Characters retain ordinary depth and
-actual-displacement gait. The shared page teardown owns these procedural
-resources; burglar removal disposes its private geometry/materials. This is
-rendered diagnostic cost, not a physical-device performance claim.
+The JWD garden suburb uses six procedural buildings in the canonical building
+list and four small procedural character costumes (three residents plus one
+visiting burglar). Villas have bays and dormers; the landhouse has shutters and
+timber details. It requests no municipal GLBs, placard images or character
+atlases. Six small canvas nameplates and one street sign use 1,048,576 decoded
+RGBA bytes, no mipmaps. The full house/four-person/street-sign diagnostic has
+151 meshes, 5,414 triangles, 118,352 geometry bytes and 14,016 instance bytes.
+Repeated house details share native per-house/material instance batches, with
+actual instance bounds and ordinary mesh obstruction. Houses retain building
+culling and private material restoration; the open porch canopy is overhead,
+with all ground furniture inside its solid parcel. The street-sign post has a
+matching collision prop outside the paved routes. Characters retain ordinary
+depth and actual-displacement gait. The shared page teardown owns these
+procedural resources; burglar removal disposes its private geometry/materials.
+This is rendered diagnostic cost, not a physical-device performance claim.
 
 The Bürgeramt entrance radiance is original runtime geometry: one retained door
 plane, one 5 × 5 ray/halo shader plane, and one short-range shadow-free point

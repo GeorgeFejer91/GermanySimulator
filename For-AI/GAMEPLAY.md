@@ -45,8 +45,17 @@ neighbors. This detour resumes Anmeldung II without renumbering the eight
 procedures. A previously saved registration badge alone does not allocate a
 house in a new run.
 
-The patched, sparsely furnished home sits between tidy family houses on a broad
-paved lane connected to the existing western sidewalk. Frau Fink is a Swabian
+The patched, sparsely furnished home sits between tidy family houses in a six-house
+garden suburb inspired by Schlachtensee and Zehlendorf. A second villa/landhouse
+row, garden strips, a tree-lined northern edge, two paved residential lanes and a
+western connecting path fill the existing southwest block; the eastern exits join
+the existing sidewalk. The map boundary and railways stay in place. The AM FISCHTAL
+street sign has its own solid post. This is a compressed fictional neighborhood,
+not a reproduction of actual addresses. Its villa/landhouse and leafy-garden
+references come from the [district's Schlachtensee account](https://www.berlin.de/ba-steglitz-zehlendorf/bezirk-erleben/ortsteile/schlachtensee/schlachtensee-1344335.php)
+and [Berlin's neighborhood portrait](https://www.berlin.de/special/stadtteile/zehlendorf/8265200-5170854-schlachtensee.html).
+Every house has a body-clear paved approach; reaching home needs no grass offence.
+Frau Fink is a Swabian
 Kehrwoche enthusiast. Professor Dr. Dr. **Heiko Kranz** and his diplomat wife are
 upper-class, literal, socially awkward and obsessively concerned with status and
 their child's achievements. Eight-year-old Theodor speaks six languages; his

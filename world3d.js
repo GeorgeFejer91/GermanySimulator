@@ -723,27 +723,49 @@ function showRendererFailure(error){
     glow.light.color.copy(glow.raysMaterial.uniforms.uColor.value);glow.light.intensity=(.3+2.7*(1-dark))*pulse;
   }
   function residentialBuilding(b){
-    const g=new T.Group(),fallback=new T.Group(),w=b.w*S,d=b.h*S,home=b.id==="jwd-home",wallHeight=2.65,roofHeight=Math.max(.9,b.hgt*H-wallHeight);
-    const plaster=mat(home?0xaaa18b:b.id==="jwd-fink"?0xd9c8a0:0xb2c4ba),roof=mat(home?0x514d42:0x884f3c),trim=mat(home?0x655e4e:0xe7dfc9),hedge=mat(0x455b38),wood=mat(0x75604b),glass=mat(0x526967,.6),linen=mat(0xc7baa2);
+    const g=new T.Group(),fallback=new T.Group(),w=b.w*S,d=b.h*S,home=b.id==="jwd-home",villa=b.variant==="villa",landhaus=b.variant==="landhaus",wallHeight=villa?Math.min(4.4,Math.max(3.35,b.hgt*H*.67)):landhaus?2.75:2.65,roofHeight=Math.max(.9,b.hgt*H-wallHeight);
+    const stucco={"jwd-fink":0xd9c8a0,"jwd-kranz":0xb2c4ba,"jwd-villa-linde":0xd6cdb7,"jwd-villa-wald":0xbdc9bb,"jwd-landhaus":0xcbad91};
+    const plaster=mat(home?0xaaa18b:b.wallColor??stucco[b.id]??0xd2c5ae),roof=mat(home?0x514d42:b.roofColor??(b.id==="jwd-villa-linde"?0x62646a:landhaus?0x705444:0x884f3c)),trim=mat(home?0x655e4e:0xe7dfc9),hedge=mat(0x455b38),wood=mat(landhaus?0x526350:0x75604b),glass=mat(0x526967,.6),linen=mat(0xc7baa2);
     const owned=[plaster,roof,trim,hedge,wood,glass,linen],unit=new T.BoxGeometry(1,1,1);
     const part=(name,x,y,z,sx,sy,sz,material)=>{const mesh=new T.Mesh(unit,material);mesh.name=name;mesh.position.set(x,y,z);mesh.scale.set(sx,sy,sz);fallback.add(mesh);return mesh};
     g.name=b.name||b.id;g.add(fallback);
     // Grounded structure/props stay within the simulation's solid rectangle.
     // The covered porch is overhead only; its open lane has no invisible posts.
     part("Foundation",0,.07,0,w,.14,d,trim);
-    const recess=home?.6:.36;part("House walls",0,wallHeight/2,-recess/2,w,wallHeight,d-recess,plaster);
+    const recess=home?.6:villa?.76:landhaus?.53:.36;part("House walls",0,wallHeight/2,-recess/2,w,wallHeight,d-recess,plaster);
     const shape=new T.Shape();shape.moveTo(-w/2,0);shape.lineTo(w/2,0);shape.lineTo(0,roofHeight);shape.closePath();
     const pitched=new T.Mesh(new T.ExtrudeGeometry(shape,{depth:d,bevelEnabled:false,steps:1}),roof);pitched.name="Pitched roof";pitched.position.set(0,wallHeight,-d/2);fallback.add(pitched);
     part("Chimney",w*.29,wallHeight+roofHeight*.67,-d*.2,.32,.92,.37,trim);
     const front=d/2-recess;
     part("Front door",0,.985,front+.018,.82,1.97,.035,wood);
     part("Door handle",.27,.92,front+.06,.045,.12,.04,trim);
-    for(const x of [-w*.29,w*.29]){
-      part("Window frame",x,1.68,front+.028,.91,.97,.04,trim);
-      part("Window glass",x,1.68,front+.055,.75,.8,.018,glass);
-      part("Window mullion",x,1.68,front+.075,.045,.8,.025,trim);
-      if(home){part("Shabby closed blind",x,1.83,front+.09,.78,.52,.03,wood);for(let i=0;i<3;i++)part("Blind slat",x,1.63+i*.15,front+.11,.78,.025,.015,trim)}
-      else{part("Curtains",x-.24,1.68,front+.08,.17,.79,.03,linen);part("Curtains",x+.24,1.68,front+.08,.17,.79,.03,linen)}
+    function windowAt(x,y,z){
+      part("Window frame",x,y,z+.028,.91,.97,.04,trim);
+      part("Window glass",x,y,z+.055,.75,.8,.018,glass);
+      part("Window mullion",x,y,z+.075,.045,.8,.025,trim);
+      if(home){part("Shabby closed blind",x,y+.15,z+.09,.78,.52,.03,wood);for(let i=0;i<3;i++)part("Blind slat",x,y-.05+i*.15,z+.11,.78,.025,.015,trim)}
+      else{part("Curtains",x-.24,y,z+.08,.17,.79,.03,linen);part("Curtains",x+.24,y,z+.08,.17,.79,.03,linen)}
+    }
+    for(const x of [-w*.29,w*.29])windowAt(x,1.68,front);
+    if(villa){
+      part("Stucco floor cornice",0,2.64,front+.075,w,.13,.15,trim);
+      for(const x of [-w*.29,w*.29])windowAt(x,wallHeight-.68,front);
+      const bayX=b.id==="jwd-villa-wald"?w*.29:-w*.29;
+      part("Garden bay",bayX,.69,front+.27,1.04,1.38,.54,plaster);
+      part("Bay window frame",bayX,1.68,front+.48,1.04,1.0,.12,trim);
+      part("Bay window",bayX,1.68,front+.549,.87,.81,.02,glass);
+      part("Bay mullion",bayX,1.68,front+.567,.045,.82,.015,trim);
+      part("Bay ledge",bayX,1.12,front+.3,1.1,.11,.62,trim);
+      const dormerY=wallHeight+roofHeight*.45,dormerX=-bayX;
+      part("Dormer cheek",dormerX,dormerY+.31,front+.1,.86,.62,.77,plaster);
+      part("Dormer window",dormerX,dormerY+.33,front+.494,.57,.4,.022,glass);
+      part("Dormer mullion",dormerX,dormerY+.33,front+.511,.037,.42,.015,trim);
+      const dormerShape=new T.Shape();dormerShape.moveTo(-.5,0);dormerShape.lineTo(.5,0);dormerShape.lineTo(0,.38);dormerShape.closePath();
+      const dormerRoof=new T.Mesh(new T.ExtrudeGeometry(dormerShape,{depth:.83,bevelEnabled:false,steps:1}),roof);dormerRoof.name="Dormer roof";dormerRoof.position.set(dormerX,dormerY+.62,front-.3);fallback.add(dormerRoof);
+    }else if(landhaus){
+      for(const x of [-w*.29,w*.29])for(const side of [-1,1])part("Timber shutter",x+side*.48,1.68,front+.065,.13,.99,.045,wood);
+      part("Landhouse gable timber",0,wallHeight+roofHeight*.34,d/2-.026,.105,roofHeight*.7,.044,wood);
+      part("Landhouse eaves timber",0,wallHeight-.06,front+.06,w,.13,.08,wood);
     }
     if(home){
       part("Porch canopy",0,2.5,d/2+.75,w*.68,.14,1.95,roof);
@@ -760,9 +782,23 @@ function showRendererFailure(error){
         part("Flower box",side*w*.29,1.12,front+.07,.93,.19,.16,wood);
         for(const offset of [-.27,0,.27])part("Geranium",side*w*.29+offset,1.27,front+.07,.15,.15,.12,roof);
       }
+      if(villa||landhaus){
+        for(const side of [-1,1])part("Garden gate pillar",side*.54,.49,d/2-.13,.14,.98,.22,trim);
+        for(const x of [-.32,-.16,0,.16,.32])part("Garden gate rail",x,.43,d/2-.13,.025,.72,.025,wood);
+        for(const y of [.19,.72])part("Garden gate crossbar",0,y,d/2-.13,.91,.03,.035,wood);
+        part("Mailbox",w*.405,.9,d/2-.155,.23,.26,.18,wood);
+        part("Mailbox slot",w*.405,.946,d/2-.058,.14,.025,.014,M.dark);
+      }
     }
-    const l=label(home?"JWD · DEIN ZUHAUSE":b.id==="jwd-fink"?"FAMILIE FINK":"FAMILIE KRANZ",home?"JANZ WEIT DRAUSSEN":"BITTE DIE RUHEZEITEN BEACHTEN",home?"#d1c3a5":"#e4dfcf","#222",home?36:27);
-    l.material.map.generateMipmaps=false;l.material.map.minFilter=T.LinearFilter;l.scale.set(home?4.4:3.5,home?.86:.68,1);l.position.set(0,home?3.05:2.55,d/2+.12);l.userData.occlusionDecoration=true;l.userData.jwdText=home?"JWD · DEIN ZUHAUSE / JANZ WEIT DRAUSSEN":b.id==="jwd-fink"?"FAMILIE FINK":"FAMILIE KRANZ";l.raycast=()=>{};g.add(l);
+    const title=home?"JWD · DEIN ZUHAUSE":b.name||b.id,l=label(title,home?"JANZ WEIT DRAUSSEN":"",home?"#d1c3a5":"#e4dfcf"),signCanvas=l.material.map.image;
+    signCanvas.width=384;signCanvas.height=home?112:80;const ink=signCanvas.getContext("2d");ink.fillStyle=home?"#d1c3a5":"#e4dfcf";ink.fillRect(0,0,signCanvas.width,signCanvas.height);ink.strokeStyle="#655e51";ink.lineWidth=3;ink.strokeRect(3,3,378,signCanvas.height-6);ink.fillStyle="#222";ink.textAlign="center";ink.textBaseline="middle";
+    let titleSize=home?31:35;for(;titleSize>16;titleSize--){ink.font=`900 ${titleSize}px Arial`;if(ink.measureText(title).width<=356)break}ink.fillText(title,192,home?39:40);
+    if(home){ink.font="700 26px Arial";ink.fillText("JANZ WEIT DRAUSSEN",192,81)}
+    l.material.map.needsUpdate=true;l.material.map.generateMipmaps=false;l.material.map.minFilter=T.LinearFilter;l.scale.set(home?3.45:Math.min(2.45,w*.66),home?1.006:.51,1);l.position.set(0,home?3.02:2.31,home?d/2+.12:front+.095);l.userData.occlusionDecoration=true;l.userData.jwdText=home?"JWD · DEIN ZUHAUSE / JANZ WEIT DRAUSSEN":title;l.raycast=()=>{};g.add(l);
+    // One native instance batch per house/material keeps the six-house street
+    // inexpensive while preserving exact geometry for the normal sightline ray.
+    const batches=new Map();for(const mesh of fallback.children)if(mesh.geometry===unit){if(!batches.has(mesh.material))batches.set(mesh.material,[]);batches.get(mesh.material).push(mesh)}
+    for(const [material,parts] of batches)if(parts.length>1){const batch=new T.InstancedMesh(unit,material,parts.length);batch.name="Residential details";batch.userData.jwdParts=parts.map(part=>part.name);parts.forEach((part,i)=>{part.updateMatrix();batch.setMatrixAt(i,part.matrix);fallback.remove(part)});batch.computeBoundingBox();batch.computeBoundingSphere();fallback.add(batch)}
     g.position.set(X(b.x+b.w/2),0,Z(b.y+b.h/2));world.add(g);
     const sourceSign=l.material,slot={building:b,group:g,fallback,label:l,model:null,materials:new Set(),opacity:1};buildingSlots.push(slot);registerMaterials(g,slot);sourceSign.dispose();
     // registerMaterials owns per-building copies; the temporary palette can retire.
@@ -1003,7 +1039,7 @@ function showRendererFailure(error){
     "zwerg-giesskanne":[germanPropUrl("garden-gnome-watering"),1.04,1.26,.57],"zwerg-schild":[germanPropUrl("garden-gnome-placard"),.95,1.26,.51],
     bierkasten:[germanPropUrl("beer-crate"),.75,.58,.54],schubkarre:[germanPropUrl("allotment-wheelbarrow"),1.56,.75,.65],
     wertstoffcontainer:[germanPropUrl("recycling-containers"),1.87,1.21,.68],picknicktisch:[germanPropUrl("allotment-picnic-table"),2.3,.83,1.98]};
-  const warnedScenery=new Set(),dumpsterFlames=[];
+  const warnedScenery=new Set(),dumpsterFlames=[],jwdScenery=[];
   function prop(p){
     const g=new T.Group();
     if(p.satireId){
@@ -1013,6 +1049,14 @@ function showRendererFailure(error){
         const module=await detailPropLoader,asset=await module?.loadSatireModel(p.satireId,modelLoader);
         if(!asset)return false;const model=asset.scene.clone(true);fitResponseModel(model,{x:p.w*S,y:p.h*S,z:Math.max(.35,p.w*S)});g.add(model);fallback.visible=false;return true;
       }catch(error){if(!warnedScenery.has(p.satireId)){warnedScenery.add(p.satireId);console.warn('Keeping procedural scenery for '+p.satireId,error)}return false}});
+    }else if(p.asset==="jwd-street-sign"){
+      const neighborhood=bridge.jwdNeighborhood||{},canvas=document.createElement("canvas");canvas.width=512;canvas.height=128;
+      const ink=canvas.getContext("2d");ink.fillStyle="#eeeee9";ink.fillRect(0,0,512,128);ink.strokeStyle="#242727";ink.lineWidth=5;ink.strokeRect(4,4,504,120);ink.fillStyle="#151a1a";ink.textAlign="center";ink.textBaseline="middle";ink.font="700 50px Arial";ink.fillText(neighborhood.street||"AM FISCHTAL",256,47);ink.font="700 27px Arial";ink.fillText(neighborhood.name||"WALDSIEDLUNG · JWD",256,98);
+      const texture=new T.CanvasTexture(canvas);texture.colorSpace=T.SRGBColorSpace;texture.generateMipmaps=false;texture.minFilter=T.LinearFilter;
+      const steel=mat(0x424b4b),board=new T.Mesh(new T.PlaneGeometry(2.95,.7375),new T.MeshBasicMaterial({map:texture,side:T.DoubleSide}));board.name="Berlin-style neighborhood street sign";board.position.set(0,2.32,.055);g.add(board);
+      const pole=new T.Mesh(new T.CylinderGeometry(.047,.047,2.34,8),steel);pole.name="Street sign post";pole.position.y=1.17;g.add(pole);
+      const base=new T.Mesh(new T.CylinderGeometry(.09,.09,.1,8),steel);base.name="Street sign foot";base.position.y=.05;g.add(base);
+      g.name=p.id;g.userData.jwdSign={text:(neighborhood.street||"AM FISCHTAL")+" / "+(neighborhood.name||"WALDSIEDLUNG · JWD"),x:p.x,y:p.y,collisionRadius:p.collisionRadius};jwdScenery.push(g);
     }else if(p.asset==="faxbillboard"){
       const art=desktopBillboards.matches&&p.billboard,bw=art?4.4:4.8,bh=art?3.3:1.65,tx=faxFallbackTexture(),material=new T.MeshStandardMaterial({map:tx,roughness:.9}),board=new T.Mesh(new T.BoxGeometry(bw,bh,.12),material);
       board.position.y=art?3.5:2.8;g.add(board);[-bw*.35,bw*.35].forEach(v=>box(.1,art?2.3:2.2,.1,M.metal,v,art?1.15:1.1,0,g));
@@ -1166,10 +1210,14 @@ function showRendererFailure(error){
     streetCharacters?.dispose();
     for(const [state,mesh] of npcMeshes)if(state.jwdRole)retireNpcMesh(mesh);
     for(const slot of buildingSlots)if(slot.building.residential){
-      const geometries=new Set();slot.group.traverse(node=>{if(node.geometry)geometries.add(node.geometry)});
+      const geometries=new Set();slot.group.traverse(node=>{if(node.geometry)geometries.add(node.geometry);if(node.isInstancedMesh)node.dispose()});
       for(const geometry of geometries)geometry.dispose();
       for(const material of slot.materials)material.dispose();
       slot.label.material.map.dispose();
+    }
+    for(const root of jwdScenery){
+      const geometries=new Set(),materials=new Set(),textures=new Set();root.traverse(node=>{if(node.geometry)geometries.add(node.geometry);if(node.material){materials.add(node.material);if(node.material.map)textures.add(node.material.map)}});
+      for(const geometry of geometries)geometry.dispose();for(const material of materials)material.dispose();for(const texture of textures)texture.dispose();
     }
   });
 
@@ -1814,21 +1862,22 @@ function showRendererFailure(error){
   }
   function isWorldPointVisible(x,y,padding=0,kind="officer"){const height=kind==="helicopter"?6.8:kind==="car"?.7:1;spawnProbe.set(X(x),height,Z(y)).project(camera);const padX=padding/Math.max(1,innerWidth)*2,padY=padding/Math.max(1,innerHeight)*2;return spawnProbe.z>=-1&&spawnProbe.z<=1&&spawnProbe.x>=-1-padX&&spawnProbe.x<=1+padX&&spawnProbe.y>=-1-padY&&spawnProbe.y<=1+padY}
   function inspectJwdAssets(){
-    const geometries=new Set(),materials=new Set(),textures=new Set();let meshes=0,triangles=0;
+    const geometries=new Set(),materials=new Set(),textures=new Set();let meshes=0,triangles=0,instanceBytes=0;
     function inspect(root){
       root.updateWorldMatrix(true,true);
       const bounds=new T.Box3().setFromObject(root),size=bounds.getSize(new T.Vector3());
       root.traverse(node=>{
-        if(node.geometry){meshes++;geometries.add(node.geometry);triangles+=(node.geometry.index?.count||node.geometry.attributes.position?.count||0)/3}
+        if(node.geometry){meshes++;geometries.add(node.geometry);triangles+=(node.geometry.index?.count||node.geometry.attributes.position?.count||0)/3*(node.isInstancedMesh?node.count:1);instanceBytes+=node.instanceMatrix?.array.byteLength||0}
         for(const material of node.material?(Array.isArray(node.material)?node.material:[node.material]):[]){materials.add(material);if(material.map)textures.add(material.map)}
       });
       return {min:bounds.min.toArray(),max:bounds.max.toArray(),width:size.x,height:size.y,depth:size.z,ground:bounds.min.y};
     }
-    const houses=buildingSlots.filter(slot=>slot.building.residential).map(slot=>({id:slot.building.id,bounds:inspect(slot.group),solid:[slot.building.x,slot.building.y,slot.building.w,slot.building.h],visible:slot.group.visible,opacity:slot.opacity,doorHeight:1.97,sign:slot.label.userData.jwdText}));
+    const houses=buildingSlots.filter(slot=>slot.building.residential).map(slot=>({id:slot.building.id,variant:slot.building.variant||"house",bounds:inspect(slot.group),solid:[slot.building.x,slot.building.y,slot.building.w,slot.building.h],visible:slot.group.visible,opacity:slot.opacity,doorHeight:1.97,sign:slot.label.userData.jwdText}));
     const actors=[...npcMeshes].filter(([state])=>state.jwdRole).map(([state,root])=>({id:state.id,role:state.jwdRole,position:[state.x,state.y],worldPosition:root.position.toArray(),bounds:inspect(root),facing:root.rotation.y,walkPhase:root.userData.walkPhase||0,swing:root.userData.walkSwing||0}));
+    const scenery=jwdScenery.map(root=>({...root.userData.jwdSign,bounds:inspect(root)}));
     let geometryBytes=0;for(const geometry of geometries){for(const attribute of Object.values(geometry.attributes))geometryBytes+=attribute.array.byteLength;geometryBytes+=geometry.index?.array.byteLength||0}
     const textureBytes=[...textures].reduce((sum,texture)=>sum+(texture.image?.width||0)*(texture.image?.height||0)*4,0);
-    return {houses,actors,cost:{meshes,triangles,geometries:geometries.size,geometryBytes,materials:materials.size,textures:textures.size,textureBytes,assetRequests:0}};
+    return {houses,actors,scenery,cost:{meshes,triangles,geometries:geometries.size,geometryBytes,instanceBytes,materials:materials.size,textures:textures.size,textureBytes,assetRequests:0}};
   }
   function inspectAssets(){
     const pointerBounds=new T.Box3().setFromObject(missionPointer);

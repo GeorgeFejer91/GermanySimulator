@@ -48,6 +48,7 @@ const roads=[...horizontalRoads,...verticalRoads],crossings=[],trees=[
 [260,1750],[680,1840],[2700,650],[3400,680],[4300,650],[5000,680],[6500,650],[8100,680],
 [2700,1800],[4200,1800],[5200,1800],[6800,1800],[8400,1800],[2800,2860],[4200,2860],[5200,2860],
 [6800,2860],[8400,2860],[700,3500],[1800,3500],[4650,3500],[6180,3500],[9380,3345],[9300,3500]
+,[75,3330],[215,3330],[370,3330],[550,3330],[720,3330],[910,3330]
 ].map(([x,y])=>offsetWorldPoint({x,y})).concat(goerlitzerPark.trees);
 for(const h of horizontalRoads)for(const v of verticalRoads){crossings.push({x:v.x,y:h.y-80,w:v.w,h:80});crossings.push({x:v.x-90,y:h.y,w:90,h:h.h})}
 crossings.push(...[{x:3590,y:2985,w:120,h:270},{x:6550,y:2985,w:120,h:270},{x:8200,y:2985,w:120,h:270}].map(offsetWorldPoint));
@@ -55,6 +56,9 @@ const trafficLights=[];
 function addTrafficLight(crossingId,x,y,waitX,waitY,turn,phaseOffset,sign=false){trafficLights.push({id:trafficLights.length,crossingId,x,y,waitX,waitY,turn,phaseOffset,sign,green:false})}
 for(let crossingId=0;crossingId<crossings.length;crossingId++){const c=crossings[crossingId],phaseOffset=(crossingId%6)*1.15;if(c.w>c.h){const y=c.y+c.h/2;addTrafficLight(crossingId,c.x+c.w+24,y,c.x-24,y,3,phaseOffset,true);addTrafficLight(crossingId,c.x-24,y,c.x+c.w+24,y,1,phaseOffset)}else{const x=c.x+c.w/2;addTrafficLight(crossingId,x,c.y+c.h+24,x,c.y-24,2,phaseOffset,true);addTrafficLight(crossingId,x,c.y-24,x,c.y+c.h+24,0,phaseOffset)}}
 const buildings=[
+{id:"jwd-villa-linde",residential:true,variant:"villa",name:"VILLA LINDENHOF",x:110,y:3380,w:200,h:190,hgt:170,doorX:210,doorY:3600,sign:"PRIVATWEG · BITTE GRÜSSEN"},
+{id:"jwd-villa-wald",residential:true,variant:"villa",name:"HAUS WALDFRIEDEN",x:430,y:3380,w:240,h:190,hgt:150,doorX:550,doorY:3600,sign:"SEIT 1928 IN GUTER NACHBARSCHAFT"},
+{id:"jwd-landhaus",residential:true,variant:"landhaus",name:"LANDHAUS NR. 34",x:790,y:3400,w:170,h:170,hgt:115,doorX:875,doorY:3600,sign:"KEINE WERBUNG · AUCH KEINE IDEEN"},
 {id:"jwd-fink",residential:true,name:"FAMILIE FINK",x:100,y:3760,w:240,h:190,hgt:110,doorX:220,doorY:3980,sign:"KEHRWOCHE IST IMMER"},
 {id:"jwd-home",residential:true,name:"DEIN ZUHAUSE · JWD",x:410,y:3760,w:240,h:190,hgt:95,doorX:530,doorY:3980,sign:"JANZ WEIT DRAUSSEN · NR. 38"},
 {id:"jwd-kranz",residential:true,name:"FAMILIE KRANZ",x:720,y:3760,w:240,h:190,hgt:125,doorX:840,doorY:3980,sign:"EIGENHEIM · FREMDE SORGEN"},
@@ -105,7 +109,13 @@ const npcs=[
 ].map(n=>({...offsetWorldPoint(n),min:n.min==null?n.min:n.min+RAIL_GUTTER,max:n.max==null?n.max:n.max+RAIL_GUTTER,route:n.route?.map(([x,y])=>[x+RAIL_GUTTER,y+RAIL_GUTTER])}));
 const pickups=[{x:1980,y:870,type:"bratwurst",taken:false},{x:2110,y:880,type:"currywurst",taken:false},{x:4100,y:900,type:"brezel",taken:false},{x:3000,y:1910,type:"pfand",taken:false}].map(offsetWorldPoint);
 const walkways=[offsetWorldPoint({x:40,y:3970,w:1010,h:150})];
-window.Germany3DBridge={walkways,getMissionWaypoint:()=>{const office=buildings.find(b=>b.id==="buergeramt");return office?{id:office.id,x:office.doorX,y:office.doorY}:null},WORLD,player,SIDEWALK_WIDTH:72,VEHICLE_RENDER_SCALE:1.4,vehicleApproaches,roads,crossings,crossingSigns,trafficLights,buildings,trees,schreber,policeGarden,policePath,goerlitzerPark,kiesingerMemorial:offsetWorldPoint({x:9490,y:4000}),BORDER_Y,BORDER_BAND,borderGates,borderSegments,railLoops,railTracks,trains,fireSources,props,pickups,getNPCs:()=>npcs,getPolice:()=>police,stationElevation:()=>0};
+const grassAreas=[];
+const jwdNeighborhood={name:"WALDSIEDLUNG · JWD",street:"AM FISCHTAL",signX:960+RAIL_GUTTER,signY:3734+RAIL_GUTTER};
+// A small garden suburb fits in the existing southwest block without moving railways.
+walkways.push(...[{x:40,y:3580,w:1010,h:130},{x:40,y:3580,w:60,h:540}].map(offsetWorldPoint));
+grassAreas.push(...[{x:40,y:3280,w:1010,h:90},{x:40,y:3370,w:70,h:200},{x:310,y:3370,w:120,h:200},{x:670,y:3370,w:120,h:200},{x:960,y:3370,w:18,h:200},{x:100,y:3710,w:878,h:50},{x:340,y:3760,w:70,h:210},{x:650,y:3760,w:70,h:210},{x:100,y:4120,w:878,h:80}].map(offsetWorldPoint));
+props.push({id:"jwd-street-sign",asset:"jwd-street-sign",x:jwdNeighborhood.signX,y:jwdNeighborhood.signY,collisionRadius:10});
+window.Germany3DBridge={jwdNeighborhood,grassAreas,walkways,getMissionWaypoint:()=>{const office=buildings.find(b=>b.id==="buergeramt");return office?{id:office.id,x:office.doorX,y:office.doorY}:null},WORLD,player,SIDEWALK_WIDTH:72,VEHICLE_RENDER_SCALE:1.4,vehicleApproaches,roads,crossings,crossingSigns,trafficLights,buildings,trees,schreber,policeGarden,policePath,goerlitzerPark,kiesingerMemorial:offsetWorldPoint({x:9490,y:4000}),BORDER_Y,BORDER_BAND,borderGates,borderSegments,railLoops,railTracks,trains,fireSources,props,pickups,getNPCs:()=>npcs,getPolice:()=>police,stationElevation:()=>0};
 const dist=(a,b,c,d)=>Math.hypot(a-c,b-d);
 const MERKEL_AUDIO_LINE="Wir schaffen das.",merkelRecording=new Audio("./assets/voices/merkel/merkel-wir-schaffen-das.mp3");merkelRecording.preload="auto";
 const merkelLines=[MERKEL_AUDIO_LINE,"Wir brauchen kein Abschaltgesetz, sondern einen Ausstieg mit Augenmaß.","Ich habe eine neue Bewertung vorgenommen.","Die Risiken der Kernenergie sind nicht beherrschbar.","Wer das erkennt, muss eine neue Bewertung vornehmen.","Wir müssen uns darauf einstellen, dass wir schneller aussteigen.","Wir wollen das schaffen."];
