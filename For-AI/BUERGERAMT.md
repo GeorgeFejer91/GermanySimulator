@@ -14,6 +14,27 @@ Existing touch controls also appear on wide coarse-pointer screens.
 Their labels use the existing pinned Pretext fitter, including the E/REDEN line
 break; the nearby hint clears the measured control height at enlarged text sizes.
 
+**Smartphone first-person navigation.** The left thumb stick walks and strafes
+relative to the current view, with a 14% center deadzone and gradual speed up to
+the existing 3.6 m/s walking limit. Normalize only inputs above unit magnitude;
+partial stick input must remain slower and diagonals must not outrun forward
+walking. Accepted collision substeps, gait, floor wakes and the shared slowdown
+remain authoritative. The right-hand scene area accepts a separate captured
+finger for horizontal and vertical look; walking retains its pitch, bounded to
+±.9 radians. Touch sensitivity follows the viewport's shorter dimension, with
+the same time-scale multiplier as desktop drag. Mouse drag also supports pitch;
+Page Up/Down give keyboard pitch control, while arrow turning/WASD retain their
+existing behavior. Scripted speakers, the portrait and mirror retain their own
+camera framing. The E/REDEN action uses the existing interaction target.
+
+Each finger releases independently on cancellation/capture loss. Blur, hidden
+pages, resize/orientation, scene transitions and replay clear both gestures and
+held input; reopening a mixer gives its widgets input ownership. The stick,
+action and look hint stay above subtitles and respect safe-area insets. The
+existing Pretext fitter measures their text and rendered clearance, using logical
+viewport dimensions at zoom; short viewports hide optional hints and shrink the
+stick. No gesture timer, extra animation loop, dependency or new renderer.
+
 Walking view selection retains its current painting within 0.10 radians past a
 quadrant boundary, preserving the existing gait phase and registered foot pivot.
 It adds no crossfade, pose or art. One spare walk sheet shared by the entire office

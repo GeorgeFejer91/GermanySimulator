@@ -10,9 +10,17 @@ const objective=document.getElementById("amt-objective"),nearby=document.getElem
 const door={x:0,z:5.55},sign={x:0,z:-2.6},counter={x:4,z:-8.15},view={x:0,z:4.8,yaw:0,walkedDistance:0,positionGeneration:0};
 const held=new Set(),pendingTimers=new Set();
 const pointerKeys=new Map();let turnVelocity=0,lookPointer=null;
+const moveStick=document.getElementById("amt-move-stick"),lookZone=document.getElementById("amt-look-zone");
+let movePointer=null,moveX=0,moveY=0;
+function releaseMoveStick(){
+ const pointer=movePointer;movePointer=null;moveX=moveY=0;
+ moveStick?.style.setProperty("--stick-x","0px");moveStick?.style.setProperty("--stick-y","0px");moveStick?.classList.remove("is-active");
+ if(pointer&&moveStick?.hasPointerCapture?.(pointer.id))moveStick.releasePointerCapture(pointer.id);
+}
 function officeKeyHeld(key){if(held.has(key))return true;for(const value of pointerKeys.values())if(value.key===key)return true;return false}
 function clearOfficeInput(){
  held.clear();turnVelocity=0;const look=lookPointer;lookPointer=null;
+ releaseMoveStick();lookZone?.classList.remove("is-active");
  const release=(target,id)=>{if(target?.hasPointerCapture?.(id))target.releasePointerCapture(id)};
  for(const [id,value]of pointerKeys)release(value.target,id);pointerKeys.clear();
  if(look)release(look.target,look.id);
@@ -119,6 +127,7 @@ function nextAmbientLine(){
  ambientLastVoice=ambientPeople[row.actor].voiceId;ambientLastText=row.text;return row;
 }
 const mix={ambience:.35,voice:.8,fx:.6},mixPanel=document.getElementById("amt-mix");
+mixPanel.addEventListener("toggle",()=>{if(active&&mixPanel.open)clearOfficeInput()});
 try{const saved=JSON.parse(localStorage.getItem("amt-mix-v1")||"null");for(const key of Object.keys(mix))if(Number.isFinite(saved?.[key]))mix[key]=Math.max(0,Math.min(1,saved[key]))}catch{}
 function applyMix(){if(recordedSpeech)recordedSpeech.volume=mix.voice*(recordedSpeech.amtVolumeScale??1);if(officeAudio){officeAudio.ambience.gain.value=.006*mix.ambience*(1-.92*omen.strength);officeAudio.fx.gain.value=mix.fx;officeAudio.signal.gain.value=mix.fx}}
 for(const slider of mixPanel.querySelectorAll("[data-amt-volume]")){const key=slider.dataset.amtVolume;slider.value=String(Math.round(mix[key]*100));slider.addEventListener("input",()=>{mix[key]=Number(slider.value)/100;applyMix();try{localStorage.setItem("amt-mix-v1",JSON.stringify(mix))}catch{}})}
@@ -773,7 +782,7 @@ function update(dt){
  updateOmen(elapsed);
  updateCharacters(elapsed);
  const portraitPitch=stage==="portrait"?Math.atan2(.54,distanceTo(story.presidentPortrait)):0;
- view.pitch=(view.pitch||0)+(portraitPitch-(view.pitch||0))*(1-Math.exp(-4*elapsed));
+ if(!walking()||omen.phase)view.pitch=(view.pitch||0)+(portraitPitch-(view.pitch||0))*(1-Math.exp(-4*elapsed));
  if(omen.phase)return;
  if(stage==="mirror")return;
  if(stage==="portrait"){
@@ -793,8 +802,9 @@ function update(dt){
  if(queueClock+1e-9>=callInterval){queueClock=Math.max(0,queueClock-callInterval);queueIndex++;const desk=queueCounters[queueIndex%4];displayNumber(queueCodes[queueIndex%queueCodes.length],desk);if(activated&&queueIndex===ticketQueueIndex){deadline=callWindow;if(stage!=="early"&&stage!=="outside")setStage("walk-counter");setStatus("AUFRUFTAFEL")}reactToCall();queueBeep();queueCallPending=queueIndex;queueCallReadyAt=performance.now()+360/timeScale();}
  if(!walking())return;
  turnOfficeView(elapsed);
- const f=(officeKeyHeld("KeyW")||officeKeyHeld("ArrowUp")?1:0)-(officeKeyHeld("KeyS")||officeKeyHeld("ArrowDown")?1:0),s=(officeKeyHeld("KeyD")?1:0)-(officeKeyHeld("KeyA")?1:0);
- if(f||s){const length=Math.hypot(f,s),speed=officeKeyHeld("KeyR")?7.2:officeKeyHeld("ShiftLeft")?5.8:3.6,dx=(Math.sin(view.yaw)*f+Math.cos(view.yaw)*s)/length*speed*elapsed,dz=(-Math.cos(view.yaw)*f+Math.sin(view.yaw)*s)/length*speed*elapsed;const steps=Math.max(1,Math.ceil(Math.hypot(dx,dz)/.1));for(let i=0;i<steps;i++){const stepX=view.x,stepZ=view.z,x=Math.max(-7.45,Math.min(7.45,view.x+dx/steps)),z=Math.max(-10.05,Math.min(8.45,view.z+dz/steps));const crossing=view.z>=door.z&&z<door.z||view.z<door.z&&z>=door.z;if(crossing&&Math.abs(x)>1.3)break;if(!officeBlocked(x,view.z))view.x=x;if(!officeBlocked(view.x,z)){view.z=z;if(crossing&&stage==="outside"&&z<door.z){setStage(activated?"waiting":"walk-sign",true);setStatus(activated?"WARTENUMMER "+number+" · AUFRUF ABWARTEN":"QR-CODE MIT DEM TELEFON SCANNEN")}}view.walkedDistance+=Math.hypot(view.x-stepX,view.z-stepZ);}}
+ view.pitch=Math.max(-.9,Math.min(.9,(view.pitch||0)+((officeKeyHeld("PageUp")?1:0)-(officeKeyHeld("PageDown")?1:0))*1.2*elapsed));
+ const f=(officeKeyHeld("KeyW")||officeKeyHeld("ArrowUp")?1:0)-(officeKeyHeld("KeyS")||officeKeyHeld("ArrowDown")?1:0)+moveY,s=(officeKeyHeld("KeyD")?1:0)-(officeKeyHeld("KeyA")?1:0)+moveX;
+ if(f||s){const length=Math.max(1,Math.hypot(f,s)),speed=officeKeyHeld("KeyR")?7.2:officeKeyHeld("ShiftLeft")?5.8:3.6,dx=(Math.sin(view.yaw)*f+Math.cos(view.yaw)*s)/length*speed*elapsed,dz=(-Math.cos(view.yaw)*f+Math.sin(view.yaw)*s)/length*speed*elapsed;const steps=Math.max(1,Math.ceil(Math.hypot(dx,dz)/.1));for(let i=0;i<steps;i++){const stepX=view.x,stepZ=view.z,x=Math.max(-7.45,Math.min(7.45,view.x+dx/steps)),z=Math.max(-10.05,Math.min(8.45,view.z+dz/steps));const crossing=view.z>=door.z&&z<door.z||view.z<door.z&&z>=door.z;if(crossing&&Math.abs(x)>1.3)break;if(!officeBlocked(x,view.z))view.x=x;if(!officeBlocked(view.x,z)){view.z=z;if(crossing&&stage==="outside"&&z<door.z){setStage(activated?"waiting":"walk-sign",true);setStatus(activated?"WARTENUMMER "+number+" · AUFRUF ABWARTEN":"QR-CODE MIT DEM TELEFON SCANNEN")}}view.walkedDistance+=Math.hypot(view.x-stepX,view.z-stepZ);}}
  const {desk,actor,mirror,portrait}=nearbyInteraction(),near=distanceTo(nearbyTarget())<1.9&&(stage!=="outside"||Math.abs(view.x)<1.3);
  const nearbyText=desk?"E · SCHALTER "+desk+" ANSPRECHEN":mirror?"E · SPIEGEL BETRACHTEN":portrait?"E · BUNDESPRÄSIDENT BETRACHTEN":actor?"E · "+(story.characters[actor.id]||story.patrons[actor.id]).speaker+" ANSPRECHEN":near?(stage==="outside"?"DURCH DEN EINGANG GEHEN":stage==="walk-sign"?"QR-CODE MIT DEM TELEFON SCANNEN":"AUFRUFTAFEL"):(stage==="outside"?"ZUR EINGANGSTÜR":stage==="walk-sign"?"QR-SCHILD UNTER DER ANZEIGE":"AUFRUFTAFEL");
  if(nearby.textContent!==nearbyText)nearby.textContent=nearbyText;
@@ -984,12 +994,40 @@ function clerkPerformance(){
  else{const beat=clerkClock%9.2;mode=beat<2.6?"idle":beat<4.1?"review":beat<4.6?"raise":beat<4.95?"stamp":beat<6.1?"deny":"idle"}
  return{row:names[mode],frame:Math.floor(clerkClock*4+clerkPulse)%8,speaking:clerkSpeaking,animation:clerkAnimation?.state??null};
 }
-function captureKey(event){if(event.type==="keyup")held.delete(event.code);if(!active)return;if(event.type==="keydown"&&event.code==="KeyE"&&walking()){event.preventDefault();event.stopImmediatePropagation();if(!event.repeat)interact();return}if(!walking()||omen.phase)return;if(["KeyW","KeyA","KeyS","KeyD","KeyR","ArrowUp","ArrowDown","ArrowLeft","ArrowRight","ShiftLeft"].includes(event.code)){event.preventDefault();event.stopImmediatePropagation();if(event.type==="keydown"){if(!event.repeat||held.has(event.code))held.add(event.code)}else held.delete(event.code)}}
-window.addEventListener("keydown",captureKey,true);window.addEventListener("keyup",captureKey,true);window.addEventListener("blur",clearOfficeInput);
+function captureKey(event){if(event.type==="keyup")held.delete(event.code);if(!active)return;if(event.target.closest?.("input,textarea,select,summary")){event.stopImmediatePropagation();return}if(event.type==="keydown"&&event.code==="KeyE"&&walking()){event.preventDefault();event.stopImmediatePropagation();if(!event.repeat)interact();return}if(!walking()||omen.phase)return;if(["KeyW","KeyA","KeyS","KeyD","KeyR","ArrowUp","ArrowDown","ArrowLeft","ArrowRight","ShiftLeft","PageUp","PageDown"].includes(event.code)){event.preventDefault();event.stopImmediatePropagation();if(event.type==="keydown"){if(!event.repeat||held.has(event.code))held.add(event.code)}else held.delete(event.code)}}
+window.addEventListener("keydown",captureKey,true);window.addEventListener("keyup",captureKey,true);window.addEventListener("blur",clearOfficeInput);window.addEventListener("resize",clearOfficeInput);
 document.addEventListener("visibilitychange",()=>{if(document.hidden)clearOfficeInput();updateOmenTone();updateFeverTone()});
-document.addEventListener("pointerdown",event=>{if(!active||!walking()||omen.phase||event.buttons!==1||lookPointer||event.target.closest("button,input,select,textarea,a,summary"))return;lookPointer={id:event.pointerId,x:event.clientX,target:event.target};event.target.setPointerCapture?.(event.pointerId)});
-document.addEventListener("pointermove",event=>{if(!lookPointer||event.pointerId!==lookPointer.id)return;const dx=event.clientX-lookPointer.x;lookPointer.x=event.clientX;if(active&&walking()&&!omen.phase&&event.buttons===1)view.yaw+=dx*.004*timeScale()});
-for(const type of ["pointerup","pointercancel","lostpointercapture"])document.addEventListener(type,event=>{if(lookPointer?.id===event.pointerId)lookPointer=null});
+moveStick?.addEventListener("pointerdown",event=>{
+ if(!active||!walking()||omen.phase||document.hidden||movePointer||event.buttons!==1)return;
+ event.preventDefault();const rect=moveStick.getBoundingClientRect();
+ movePointer={id:event.pointerId,x:rect.left+rect.width/2,y:rect.top+rect.height/2,radius:rect.width*.32,displayRadius:moveStick.clientWidth*.32};
+ moveStick.setPointerCapture(event.pointerId);moveStick.classList.add("is-active");
+});
+moveStick?.addEventListener("pointermove",event=>{
+ if(!movePointer||event.pointerId!==movePointer.id)return;
+ event.preventDefault();const dx=event.clientX-movePointer.x,dy=event.clientY-movePointer.y,distance=Math.hypot(dx,dy),radius=movePointer.radius;
+ const amount=Math.max(0,Math.min(1,(distance/radius-.14)/.86));
+ moveX=distance?dx/distance*amount:0;moveY=distance?-dy/distance*amount:0;
+ const travel=Math.min(1,distance/radius)*movePointer.displayRadius;
+ moveStick.style.setProperty("--stick-x",`${distance?dx/distance*travel:0}px`);moveStick.style.setProperty("--stick-y",`${distance?dy/distance*travel:0}px`);
+});
+for(const type of ["pointerup","pointercancel","lostpointercapture"])moveStick?.addEventListener(type,event=>{if(movePointer?.id===event.pointerId)releaseMoveStick()});
+document.addEventListener("pointerdown",event=>{
+ if(active&&event.target.closest("#amt-mix"))clearOfficeInput();
+ if(!active||!walking()||omen.phase||document.hidden||event.buttons!==1||lookPointer||event.target.closest("button,input,select,textarea,a,summary,.amt-touch-controls"))return;
+ if(event.pointerType==="touch"&&!event.target.closest("#amt-look-zone"))return;
+ event.preventDefault();lookPointer={id:event.pointerId,x:event.clientX,y:event.clientY,target:event.target,touch:event.pointerType==="touch"};
+ event.target.setPointerCapture?.(event.pointerId);if(lookPointer.touch)lookZone?.classList.add("is-active");
+});
+document.addEventListener("pointermove",event=>{
+ if(!lookPointer||event.pointerId!==lookPointer.id)return;
+ const dx=event.clientX-lookPointer.x,dy=event.clientY-lookPointer.y;lookPointer.x=event.clientX;lookPointer.y=event.clientY;
+ if(active&&walking()&&!omen.phase&&event.buttons===1){
+  const sensitivity=lookPointer.touch?Math.PI/Math.max(280,Math.min(window.innerWidth,window.innerHeight)):.004;
+  view.yaw+=dx*sensitivity*timeScale();view.pitch=Math.max(-.9,Math.min(.9,(view.pitch||0)-dy*sensitivity*timeScale()));
+ }
+});
+for(const type of ["pointerup","pointercancel","lostpointercapture"])document.addEventListener(type,event=>{if(lookPointer?.id===event.pointerId){lookPointer=null;lookZone?.classList.remove("is-active")}});
 document.querySelectorAll("[data-amt-key]").forEach(button=>{const key=button.dataset.amtKey;button.addEventListener("pointerdown",e=>{if(!active||!walking()||omen.phase)return;e.preventDefault();button.setPointerCapture(e.pointerId);pointerKeys.set(e.pointerId,{key,target:button})});for(const type of ["pointerup","pointercancel","lostpointercapture"])button.addEventListener(type,e=>{if(!pointerKeys.delete(e.pointerId))return;if(type!=="pointerup"&&!officeKeyHeld("ArrowLeft")&&!officeKeyHeld("ArrowRight"))turnVelocity=0})});
 document.getElementById("amt-touch-e").addEventListener("click",interact);document.getElementById("amt-leave").addEventListener("click",()=>close());exit.addEventListener("click",()=>close());
 window.BuergeramtLevel={open,requestFullscreen,refreshSubtitle,get registrationTicket(){return number},get activeClerkCounter(){return interactingCounter||assignedCounter||3},get queueCalls(){return counterCalls.map((number,index)=>({number,counter:index+1}))},get assignedCounter(){return{number:assignedCounter,x:counter.x,z:counter.z}},get registration(){return{node:registrationNode,completed:registrationCompleted,phoneSilent,silenceEvidence:phoneSilenceEvidence,callRound:phoneCallRound,warnings:phoneWarnings,points:registrationPoints,detours:registrationDetours,stamps:[...registrationStamps]}},get lipSpeech(){return lips.sample()},replay(config){close(false);open(config)},update,interact,setOfficeObstacles,get active(){return active},get timeScale(){return timeScale()},get floorState(){return{time:floorClock,visualTime:visualClock,goop:goop.goop(floorClock),speed:timeScale(),visit:attempt,restoring:!!restoration,restoration:restoration?Math.min(1,restoration.elapsed/restorationDuration):0,restorationAge:restoration?.age,restorationClock:restoration?.clock}},get subtitleBusy(){return !!officeSubtitle},get audioTextBusy(){return officeSpeechBusy},get stage(){return stage},get queueDisplay(){return queueDisplay},get qrSvg(){return qrSvg},get phoneUrl(){return link?BuergeramtLink.phoneUrl(link.invitation,options.subtitlesOn?.()):""},get timing(){return JSON.parse(JSON.stringify(timing))},get view(){return{x:view.x,z:view.z,yaw:view.yaw,pitch:view.pitch||0,walkedDistance:view.walkedDistance,positionGeneration:view.positionGeneration}},get characters(){return characters.map(actor=>({id:actor.id,x:actor.x,z:actor.z,walkedDistance:actor.walkedDistance,positionGeneration:actor.positionGeneration,direction:actor.direction,heading:actor.heading??Math.PI,mode:actor.mode,phase:characterPhase(actor),frame:Math.min(7,Math.floor(characterPhase(actor)*8)),animation:characterAnimation(actor)}))},get stationaryAnimations(){return{

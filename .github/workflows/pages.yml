@@ -33,8 +33,8 @@ jobs:
         run: node --test tests/running-hotkey.test.mjs
       - name: Check office queue call audio
         run: node --test tests/buergeramt-queue-audio.test.mjs
-      - name: Check office turning and direction texture reuse
-        run: node --test tests/buergeramt-turning.test.mjs
+      - name: Check office touch navigation, turning and direction texture reuse
+        run: node --test tests/buergeramt-touch-navigation.test.mjs tests/buergeramt-turning.test.mjs
       - name: Check office causality and re-entry
         run: node --test tests/buergeramt-causality.test.mjs tests/buergeramt-facing-interaction.test.mjs
       - name: Check phone lifecycle and registration rewards

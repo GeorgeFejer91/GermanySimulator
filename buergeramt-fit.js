@@ -2,13 +2,14 @@ import {measureLineStats,measureNaturalWidth,prepareWithSegments} from './assets
 
 // Keep the bounded Amt labels readable as the phone, browser zoom, or German copy changes.
 const selectors=['#start','#amt-objective','#amt-nearby','#amt-title','#amt-line','#amt-status','#amt-ambient','#amt-actions button','#amt-leave','#amt-exit','#amt-direct-reset','#amt-direct-result-title','#amt-direct-result-copy','.amt-direct-result a','#amt-mix summary','#amt-mix label','#amt-compact-reset','#phone-expired-stamp','#phone-expired-copy','#phone-number','#phone-status','#phone-admission-status','.phone-brand strong','.phone-breadcrumb','.phone-title','#phone-form h2','#phone-form p','#phone-form label','#phone-submit','#phone-caller','#phone-call-state','#phone-answer-label','#phone-decline-label','#phone-swipe-label','#phone-hangup-label','.phone-keep'];
-selectors.push('.control-dock button','.amt-touch-controls button');
+selectors.push('.control-dock button','.amt-touch-controls button','.amt-nav-label');
 let queued=false;
 function schedule(){if(queued)return;queued=true;requestAnimationFrame(async()=>{queued=false;await document.fonts.ready;measure()})}
 function measure(){
  const zoom=Number.parseFloat(getComputedStyle(document.documentElement).zoom)||1;
  document.body.classList.toggle('amt-compact',innerWidth/zoom<260);
  document.body.classList.toggle('amt-replies-low',innerWidth/zoom<420);
+ document.body.classList.toggle('amt-nav-short',innerHeight/zoom<320);
  const phoneCall=document.getElementById('phone-call');if(phoneCall){const height=(innerHeight/zoom)+'px';if(phoneCall.style.getPropertyValue('--phone-height')!==height)phoneCall.style.setProperty('--phone-height',height)}
  const sequence=document.querySelector('#amt-walk-hud.sequence');
  if(sequence){
@@ -54,7 +55,7 @@ function measure(){
    const reflow=label&&(!oneLine||minimum>el.offsetHeight);
    // Flex and grid regions can grow; the subtitle rail and phone page scroll when needed.
    if(document.body.classList.contains('amt-replies-low')&&el.matches('#amt-actions button'))el.style.removeProperty('min-height');
-   else if(el.matches('button,#amt-objective,#amt-nearby,#phone-status,#phone-admission-status,#amt-ambient'))el.style.minHeight=`${minimum}px`;
+   else if(el.matches('button,#amt-objective,#amt-nearby,#phone-status,#phone-admission-status,#amt-ambient,.amt-nav-label'))el.style.minHeight=`${minimum}px`;
    el.dataset.pretextFit=el.matches('#amt-actions button')&&minimum>el.offsetHeight+4?'scroll':reflow?'reflow':oneLine?'one-line':stats.lineCount>0?'wrapped':'empty';
   }catch{el.dataset.pretextFit='unavailable'}
  }
@@ -64,20 +65,21 @@ function measure(){
  if(document.body.style.getPropertyValue('--city-control-clearance')!==value)document.body.style.setProperty('--city-control-clearance',value);
  if(document.body.classList.contains('amt-inside')){
   const subtitle=document.getElementById('subtitle-toggle');
-  const controls=[subtitle,document.querySelector('#amt-mix summary'),document.getElementById('amt-direct-reset')].filter(el=>el?.getClientRects().length);
+  const controls=[subtitle,document.querySelector('#amt-mix summary'),document.getElementById('amt-direct-reset'),document.getElementById('amt-compact-reset')].filter(el=>el?.getClientRects().length);
   const toolbar=Math.max(0,...controls.map(el=>el.getBoundingClientRect().bottom/zoom));
   const touch=document.querySelector('.amt-touch-controls');
   const touchClearance=touch?.getClientRects().length?(innerHeight-touch.getBoundingClientRect().top)/zoom+12:140;
-  const values={'--amt-subtitle-width':subtitle.getBoundingClientRect().width/zoom,'--amt-toolbar-bottom':toolbar,'--amt-info-bottom':toolbar,'--amt-touch-clearance':touchClearance};
+  const caption=document.getElementById('english-subtitle');
+  const values={'--amt-subtitle-width':subtitle.getBoundingClientRect().width/zoom,'--amt-toolbar-bottom':toolbar,'--amt-info-bottom':toolbar,'--amt-touch-clearance':touchClearance,'--amt-subtitle-clearance':caption&&!caption.hidden?caption.getBoundingClientRect().height/zoom:0,'--amt-viewport-width':innerWidth/zoom,'--amt-viewport-height':innerHeight/zoom};
   for(const [key,number] of Object.entries(values)){const next=number+'px';if(document.body.style.getPropertyValue(key)!==next)document.body.style.setProperty(key,next)}
  }
 }
-for(const root of [document.getElementById('intro'),document.getElementById('amt-level'),document.getElementById('amt-walk-hud'),document.getElementById('amt-mix'),document.getElementById('amt-direct-result'),document.querySelector('.phone-shell')]){
+for(const root of [document.getElementById('intro'),document.getElementById('amt-level'),document.getElementById('amt-walk-hud'),document.getElementById('amt-mix'),document.getElementById('amt-direct-result'),document.getElementById('english-subtitle'),document.querySelector('.phone-shell')]){
  if(root)new MutationObserver(schedule).observe(root,{subtree:true,childList:true,characterData:true,attributes:true,attributeFilter:['hidden','open','class']});
 }
 addEventListener('resize',schedule,{passive:true});
 const dock=document.querySelector('.control-dock');if(dock)new ResizeObserver(schedule).observe(dock);
-const officeBounds=new ResizeObserver(schedule);for(const el of [document.getElementById('subtitle-toggle'),document.getElementById('amt-direct-reset'),document.getElementById('amt-actions')])if(el)officeBounds.observe(el);
+const officeBounds=new ResizeObserver(schedule);for(const el of [document.getElementById('subtitle-toggle'),document.getElementById('amt-direct-reset'),document.getElementById('amt-actions'),document.querySelector('.amt-touch-controls'),document.getElementById('english-subtitle')])if(el)officeBounds.observe(el);
 // The shared HUD fitter positions the subtitle control after its own measure.
 // Follow that final position without a separate animation/update loop.
 const subtitleControl=document.querySelector('.subtitle-toggle');

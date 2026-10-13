@@ -1,0 +1,87 @@
+import test from 'node:test';
+import assert from 'node:assert/strict';
+import {harness,source} from './amt-harness.mjs';
+
+function office(){
+ const h=harness('host',{hostSource:source('buergeramt.js').replace(/\}\)\(\);\s*$/,'window.__navigationProbe={view,setStage};})();')});
+ h.window.innerWidth=390;h.window.innerHeight=844;
+ const stick=h.node('amt-move-stick'),look=h.node('amt-look-zone');
+ stick.clientWidth=128;stick.getBoundingClientRect=()=>({left:0,top:0,width:128,height:128});
+ look.closest=selector=>selector==='#amt-look-zone'?look:null;
+ const captures=new Set();stick.setPointerCapture=id=>captures.add(id);stick.hasPointerCapture=id=>captures.has(id);stick.releasePointerCapture=id=>captures.delete(id);
+ return{...h,stick,look,captures};
+}
+function pointer(target,type,id,x,y,eventTarget=target,pointerType='touch'){
+ const e=new Event(type,{cancelable:true});
+ Object.assign(e,{pointerId:id,clientX:x,clientY:y,buttons:type==='pointerup'?0:1,pointerType});
+ Object.defineProperty(e,'target',{value:eventTarget});target.dispatchEvent(e);return e;
+}
+function walk(h,seconds=1){for(let i=0;i<Math.round(seconds*60);i++)h.level.update(1/60)}
+function hold(h,dx,dy,id=1){pointer(h.stick,'pointerdown',id,64,64);pointer(h.stick,'pointermove',id,64+dx,64+dy)}
+
+test('thumb stick has a quiet center, gradual speed and a bounded full-speed diagonal',()=>{
+ const still=office();hold(still,2,-2);walk(still);assert.equal(still.level.view.z,4.8);assert.equal(still.level.view.x,0);
+ const half=office();hold(half,0,-128*.32*.57);walk(half);assert.ok(Math.abs(half.level.view.z-3)<1e-8,'half stick should walk 1.8 m, rather than normalize to full speed');
+ const full=office();hold(full,0,-100);walk(full);assert.ok(Math.abs(full.level.view.z-1.2)<1e-8);
+ const diagonal=office();hold(diagonal,100,-100);walk(diagonal);assert.ok(Math.abs(Math.hypot(diagonal.level.view.x,diagonal.level.view.z-4.8)-3.6)<1e-8,'diagonal motion cannot outrun forward motion');
+});
+
+test('move and vertical/horizontal look coexist; cancellation releases only its finger',()=>{
+ const h=office();hold(h,0,-100);
+ pointer(h.document,'pointerdown',2,250,400,h.look);
+ pointer(h.document,'pointermove',2,310,340,h.look);
+ assert.ok(h.level.view.yaw>0);assert.ok(h.level.view.pitch>0);
+ walk(h,.1);assert.ok(Math.hypot(h.level.view.x,h.level.view.z-4.8)>.35);
+ const pitch=h.level.view.pitch;walk(h,.5);assert.equal(h.level.view.pitch,pitch,'walking must not continually level a manual view');
+ pointer(h.document,'pointercancel',2,310,340,h.look);
+ const before=h.level.view;walk(h,.1);assert.ok(Math.hypot(h.level.view.x-before.x,h.level.view.z-before.z)>.35,'looking cancellation preserves walking');
+ pointer(h.document,'pointerdown',3,250,400,h.look);
+ pointer(h.stick,'pointercancel',1,64,-36);assert.equal(h.captures.size,0);
+ const stopped=h.level.view;walk(h,.1);assert.equal(h.level.view.x,stopped.x);assert.equal(h.level.view.z,stopped.z);
+ pointer(h.document,'pointermove',3,280,430,h.look);assert.ok(h.level.view.yaw>stopped.yaw,'walking cancellation preserves looking');
+});
+
+test('blur, hidden, rotation, capture loss and scene changes reject stale stick input',()=>{
+ for(const reset of ['blur','hidden','resize','capture','scene']){
+  const h=office();hold(h,0,-100);walk(h,.1);
+  if(reset==='hidden'){h.hide();h.document.hidden=false}
+  else if(reset==='capture')pointer(h.stick,'lostpointercapture',1,64,-36);
+  else if(reset==='scene'){h.window.__navigationProbe.setStage('character');h.window.__navigationProbe.setStage('walk-sign')}
+  else h.window.dispatchEvent(new Event(reset));
+  const before=h.level.view;pointer(h.stick,'pointermove',1,64,-36);walk(h,.1);
+  assert.equal(h.level.view.x,before.x,reset);assert.equal(h.level.view.z,before.z,reset);
+  hold(h,0,-100,4);walk(h,.1);assert.ok(h.level.view.z<before.z,'fresh input works after reset');
+ }
+});
+
+test('look pitch stays bounded, touch outside the look zone is ignored and keyboard still moves',()=>{
+ const h=office();pointer(h.document,'pointerdown',1,200,300,h.look);pointer(h.document,'pointermove',1,200,-10000,h.look);assert.equal(h.level.view.pitch,.9);
+ pointer(h.document,'pointermove',1,200,10000,h.look);assert.equal(h.level.view.pitch,-.9);
+ pointer(h.document,'pointerup',1,200,10000,h.look);
+ const before=h.level.view;pointer(h.document,'pointerdown',2,20,300,h.stick);pointer(h.document,'pointermove',2,120,300,h.stick);assert.equal(h.level.view.yaw,before.yaw);
+ h.key('KeyW');walk(h,.1);assert.ok(h.level.view.z<before.z);
+});
+
+test('partial and full stick movement retain the shared slowdown and accepted-distance gait',()=>{
+ for(const amount of [.5,1]){
+  const h=office();h.advanceGame(570);assert.equal(h.level.timeScale,.65);
+  hold(h,128*.32*(.14+.86*amount),0);const before=h.level.view;walk(h);
+  assert.ok(Math.abs(h.level.view.x-before.x-2.34*amount)<1e-8);
+  assert.ok(Math.abs(h.level.view.walkedDistance-before.walkedDistance-2.34*amount)<1e-8);
+ }
+});
+
+test('keyboard pitch is bounded and opening the mixer releases navigation',()=>{
+ const h=office();h.key('PageUp');walk(h);assert.equal(h.level.view.pitch,.9);h.key('PageUp','keyup');
+ h.key('PageDown');walk(h,.5);assert.ok(Math.abs(h.level.view.pitch-.3)<1e-8);h.key('PageDown','keyup');
+ hold(h,0,-100);const mixer=h.node('amt-mix');mixer.closest=selector=>selector==='#amt-mix'?mixer:null;
+ pointer(h.document,'pointerdown',4,40,30,mixer);const before=h.level.view;walk(h,.1);assert.equal(h.level.view.z,before.z);assert.equal(h.captures.size,0);
+});
+
+test('opening the native mixer disclosure without a pointer releases both gestures and keys',()=>{
+ const h=office();hold(h,0,-100);h.key('KeyD');
+ pointer(h.document,'pointerdown',2,250,400,h.look);
+ const mixer=h.node('amt-mix');mixer.open=true;mixer.dispatchEvent(new Event('toggle'));
+ const before=h.level.view;walk(h,.1);assert.equal(h.level.view.x,before.x);assert.equal(h.level.view.z,before.z);assert.equal(h.captures.size,0);
+ pointer(h.document,'pointermove',2,310,340,h.look);assert.equal(h.level.view.yaw,before.yaw);assert.equal(h.level.view.pitch,before.pitch);
+});
