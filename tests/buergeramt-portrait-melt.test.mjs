@@ -21,23 +21,25 @@ test('loaded portrait and floor share the delayed wave; missing paint stays legi
   f.effect.update(null);assert.equal(f.effect.inspect().melt,0);assert.equal(f.effect.inspect().dripsVisible,false);
   f.effect.update({time:0,visualTime:0});assert.equal(f.effect.inspect().melt,0,'next visit is an intact portrait');
 });
-test('portrait paint advances thirty percent faster while retaining the room clock and full-melt cap',()=>{
+test('portrait paint drains at 2.2 times room melt while retaining its clock and full-melt cap',()=>{
   const f=fixture();f.effect.setTexture({actualPaint:true});
-  for(const [amount,expected] of [[0,0],[.25,.325],[.5,.65],[.8,1],[1,1]]){
+  for(const [amount,expected] of [[0,0],[.1,.22],[.25,.55],[.4,.88],[.5,1],[1,1]]){
     f.effect.update({time:BuergeramtGoop.ageForMelt(amount),visualTime:123});
     assert.ok(Math.abs(f.effect.inspect().paintMelt-expected)<1e-10);
     assert.equal(f.effect.inspect().clock,123);
   }
   f.effect.update(null);assert.equal(f.effect.inspect().paintMelt,0);
 });
-test('drips meet the ground with real depth and transparent gaps; owned mesh disposal leaves the shared image alone',()=>{
+test('one liquid surface spans the image and meets the ground with real depth; disposal leaves the shared image alone',()=>{
   const f=fixture(),drips=f.frame.children[0];
+  assert.ok(Math.abs(drips.position.y+drips.geometry.h/2-.97)<1e-10,'one mesh starts at the image top');
+  assert.ok(drips.geometry.w>1.45,'masked edges have room beyond the picture width');
   assert.ok(Math.abs(2.22+.88*(drips.position.y-drips.geometry.h/2)-.0024)<1e-10);
   const vertices=drips.geometry.attributes.position;
   assert.equal(Math.abs(vertices.getZ(0)),0,'paint still starts at the frame');assert.equal(vertices.getZ(25),-.21);
   assert.ok(Math.abs(5.43-.88*(drips.position.z+vertices.getZ(25))-5.4696)<1e-10,'paint ends against the inner wall');
   assert.equal(drips.material.depthTest,true);assert.equal(drips.material.depthWrite,false);assert.equal(drips.material.transparent,true);
   const shader={uniforms:{},fragmentShader:'#include <map_fragment>'};f.material.onBeforeCompile(shader,{});
-  assert.match(shader.fragmentShader,/wetPaint/);assert.match(shader.fragmentShader,/bare/);assert.equal(shader.uniforms.amtPortraitMelt.value,0);
+  assert.match(shader.fragmentShader,/diffuseColor.rgb=vec3\(.21,.17,.10\)/);assert.equal(shader.uniforms.amtPortraitMelt.value,0);
   f.effect.dispose();assert.equal(f.frame.children.length,0);assert.equal(drips.geometry.disposed,1);assert.equal(drips.material.disposed,1);assert.equal(f.material.disposed,0);
 });

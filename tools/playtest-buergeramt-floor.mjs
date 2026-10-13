@@ -13,6 +13,28 @@ const files=['world3d.js','buergeramt.js','buergeramt-goop.js','buergeramt-floor
 const sources=new Map(files.map(file=>[resolve(file),readFileSync(file)]));
 if(process.env.FLOOR_SOURCE_FILE)sources.set(resolve('buergeramt-floor.js'),readFileSync(process.env.FLOOR_SOURCE_FILE));
 if(process.env.PORTRAIT_SOURCE_FILE)sources.set(resolve('buergeramt-portrait-melt.js'),readFileSync(process.env.PORTRAIT_SOURCE_FILE));
+function samplePortraitPaint(which,amount,clock){
+  const width=128,height=160,target=new T.WebGLRenderTarget(width,height),scene=new T.Scene();
+  const camera=new T.OrthographicCamera(-.725,.725,.97,-.97,.01,3);camera.position.z=1;
+  const geometry=which==='frame'?presidentCanvas.geometry:new T.PlaneGeometry(1.45,1.94);
+  const material=which==='frame'?presidentMaterial:new T.ShaderMaterial({
+    uniforms:{amtPortraitPaint:{value:presidentMaterial.map},amtPortraitInfo:{value:new T.Vector4(0,0,1,1)},probeMelt:{value:amount},probeClock:{value:clock}},
+    vertexShader:'varying vec2 paintUv;void main(){paintUv=uv;gl_Position=projectionMatrix*modelViewMatrix*vec4(position,1.);}',
+    fragmentShader:'varying vec2 paintUv;uniform float probeMelt,probeClock;'+portraitPaintGlsl+'void main(){float coverage=amtPaintFilm(vec2(paintUv.x,.45),probeMelt,probeClock).a;gl_FragColor=vec4(vec3(coverage),1.);}'
+  });
+  scene.add(new T.Mesh(geometry,material));
+  if(which==='frame'){
+    const source=presidentFrame.children.find(mesh=>mesh.name==='Steinmeier liquid paint');
+    if(source?.visible){const sheet=new T.Mesh(source.geometry,source.material);sheet.position.copy(source.position);scene.add(sheet);}
+  }
+  const previousTarget=renderer.getRenderTarget(),previousClear=renderer.autoClear,pixels=new Uint8Array(width*height*4);
+  try{renderer.autoClear=true;renderer.setRenderTarget(target);renderer.render(scene,camera);renderer.readRenderTargetPixels(target,0,0,width,height,pixels);}
+  finally{renderer.setRenderTarget(previousTarget);renderer.autoClear=previousClear;target.dispose();if(which!=='frame'){geometry.dispose();material.dispose();}}
+  const low=[255,255,255],high=[0,0,0],sum=[0,0,0];let covered=0,run=0,longest=0;
+  for(let i=0;i<pixels.length;i+=4)for(let channel=0;channel<3;channel++){const value=pixels[i+channel];low[channel]=Math.min(low[channel],value);high[channel]=Math.max(high[channel],value);sum[channel]+=value;}
+  for(let x=0;x<width;x++){const painted=pixels[(Math.floor(height/2)*width+x)*4]>127;if(painted){covered++;run++;longest=Math.max(longest,run)}else run=0;}
+  return{low,high,sum,range:high.map((value,index)=>value-low[index]),coverage:covered/width,connected:longest/width};
+}
 const server=createServer((req,res)=>{
   try{
     const path=new URL(req.url,'http://localhost').pathname,file=resolve(root,'.'+decodeURIComponent(path==='/'?'/index.html':path));
@@ -21,8 +43,8 @@ const server=createServer((req,res)=>{
     if(file===resolve('buergeramt.js'))data=data.toString().replace('window.BuergeramtLevel={',
       `window.__floorTest={pose(x,z,yaw=0){Object.assign(view,{x,z,yaw})},at(time){floorClock=time;visualClock=goop.motion(time);applyOfficeTempo()},recover(){activated=true;registeredName='Erika Mustermann';number=counterCalls[2];assignedCounter=3;counter.x=counterXs[2];deadline=200;view.x=counter.x;view.z=counter.z+1;setStage('walk-counter');},close(){close(false)},reopen(){open(options)},dialogue(){setStage('character')},stage:setStage,speech(){const row=Object.values(window.GermanySimulatorAudioText.recordings).filter(r=>r.voiceId==='amt-brunhilde-knick'&&r.source).sort((a,b)=>b.source.length-a.source.length)[0];if(!row)throw Error('Missing native Knick sample');options.voiceOn=()=>true;content(story.clerkIdentity.speaker,row.source)},media(){return recordedSpeech?{rate:recordedSpeech.playbackRate,preservesPitch:recordedSpeech.preservesPitch,time:recordedSpeech.currentTime,duration:recordedSpeech.duration,paused:recordedSpeech.paused}:null}};window.BuergeramtLevel={`);
     if(file===resolve('buergeramt-floor.js'))data=data.toString().replace('const floatMask=','const floatMask=!globalThis.__forceByteFloor&&').replace('return{update,setLights',`return{update,stats(){if(!targets)return null;const pixels=new Float32Array(width*height*4);renderer.readRenderTargetPixels(targets[read],0,0,width,height,pixels);let sum=0,squares=0,white=0,black=0,paint=0,colored=0,interfaces=0;for(let i=0;i<pixels.length;i+=4){const v=pixels[i];sum+=v;squares+=v*v;paint+=pixels[i+3];if(v>.8)white++;if(v<.2)black++;if(Math.abs(pixels[i]-pixels[i+1])+Math.abs(pixels[i+1]-pixels[i+2])>.012)colored++;const cell=i/4,x=cell%width,y=Math.floor(cell/width);if(x<width-1&&(v>.5)!=(pixels[i+4]>.5))interfaces+=19.2/height;if(y<height-1&&(v>.5)!=(pixels[i+width*4]>.5))interfaces+=15.4/width;}const count=width*height;return{mean:sum/count,variance:squares/count-(sum/count)**2,white:white/count,black:black/count,paint:paint/count,colored:colored/count,interfaceDensity:interfaces/(15.4*19.2)}},setLights`);
-    if(file===resolve('world3d.js'))data=data.toString().replace('amtCamera.rotation.set(view.pitch||0,-view.yaw,0,"YXZ")','amtCamera.rotation.set(window.__floorPitch??view.pitch??0,-view.yaw,0,"YXZ")')
-      .replace('  app.classList.add("three-ready");',`window.__floorGpu={stats:()=>amtFloorEffect.stats(),advance(seconds){const start=BuergeramtLevel.floorState.time;for(let n=1;n<=Math.round(seconds*20);n++){__floorTest.at(start+n/20);amtFloorEffect.update(BuergeramtLevel.floorState,amtReducedMotion.matches,BuergeramtLevel.view,BuergeramtLevel.characters);amtPortraitMelt.update(BuergeramtLevel.floorState,amtReducedMotion.matches);amtLampWear.update(BuergeramtLevel.floorState,amtReducedMotion.matches)}},fade(strength){fadeAmtStructure(strength)},render(){renderer.render(amtScene,amtCamera)},backend(){const gl=renderer.getContext(),ext=gl.getExtension('WEBGL_debug_renderer_info');return ext?gl.getParameter(ext.UNMASKED_RENDERER_WEBGL):gl.getParameter(gl.RENDERER)}};app.classList.add("three-ready");`);
+    if(file===resolve('world3d.js'))data=data.toString().replace('import {createAmtPortraitMelt}','import {createAmtPortraitMelt,portraitPaintGlsl}').replace('amtCamera.rotation.set(view.pitch||0,-view.yaw,0,"YXZ")','amtCamera.rotation.set(window.__floorPitch??view.pitch??0,-view.yaw,0,"YXZ")')
+      .replace('  app.classList.add("three-ready");',`window.__floorGpu={samplePortraitPaint:${samplePortraitPaint.toString()},stats:()=>amtFloorEffect.stats(),advance(seconds){const start=BuergeramtLevel.floorState.time;for(let n=1;n<=Math.round(seconds*20);n++){__floorTest.at(start+n/20);amtFloorEffect.update(BuergeramtLevel.floorState,amtReducedMotion.matches,BuergeramtLevel.view,BuergeramtLevel.characters);amtPortraitMelt.update(BuergeramtLevel.floorState,amtReducedMotion.matches);amtLampWear.update(BuergeramtLevel.floorState,amtReducedMotion.matches)}},fade(strength){fadeAmtStructure(strength)},render(){renderer.render(amtScene,amtCamera)},backend(){const gl=renderer.getContext(),ext=gl.getExtension('WEBGL_debug_renderer_info');return ext?gl.getParameter(ext.UNMASKED_RENDERER_WEBGL):gl.getParameter(gl.RENDERER)}};app.classList.add("three-ready");`);
     res.writeHead(200,{'Content-Type':mime[extname(file)]||'application/octet-stream','Cache-Control':'no-store'});res.end(data);
   }catch{res.writeHead(404);res.end();}
 });
@@ -30,7 +52,7 @@ await new Promise(done=>server.listen(0,'127.0.0.1',done));
 const browser=await chromium.launch({headless:true,executablePath:process.env.CHROMIUM_PATH,args:['--mute-audio']});
 const report={complete:false,revision:Object.fromEntries(files.map(file=>[file,createHash('sha256').update(sources.get(resolve(file))).digest('hex')])),cases:[],
   limits:['Forced camera/accelerated pigment state, not natural mission-chain evidence','Desktop Chromium and Android emulation; no physical Android','Media, Web Audio and speech muted; no listening review']};
-const cases=[['desktop',1280,800],['android-portrait',390,844],['android-landscape',844,390],['procedural-fallback',1280,800],...(process.env.FLOOR_RECOVERY?[['reduced-motion',1280,800]]:[])];
+const cases=[['desktop',1280,800],['android-portrait',390,844],['android-landscape',844,390],['procedural-fallback',1280,800],...(process.env.FLOOR_RECOVERY||process.env.PORTRAIT_LIQUID?[['reduced-motion',1280,800]]:[]),...(process.env.PORTRAIT_LIQUID?[['missing-portrait',1280,800]]:[])];
 try{
   for(const [name,width,height]of cases){
     if(process.env.FLOOR_CASE&&!process.env.FLOOR_CASE.split(',').includes(name))continue;
@@ -44,10 +66,33 @@ try{
       const speak=speechSynthesis.speak.bind(speechSynthesis);speechSynthesis.speak=u=>{u.volume=0;speak(u)};
     });
     const page=await context.newPage(),errors=[];
+    if(name==='missing-portrait')await page.route('**/president-steinmeier.webp?*',route=>route.abort());
     page.on('pageerror',e=>{errors.push(e.message);console.log('page error:',e.message)});page.on('console',m=>{if(m.type()==='error'&&/shader|WebGL|GLSL/i.test(m.text()))errors.push(m.text())});
     await page.goto(`http://127.0.0.1:${server.address().port}/?geheim=buergeramt`,{waitUntil:'domcontentloaded',timeout:120000});
     console.log(name,'DOM ready');await page.waitForFunction(()=>window.BuergeramtLevel?.active&&window.Germany3D?.officeAssetsReady,null,{timeout:120000});
     await page.evaluate(()=>{window.__floorStep=BuergeramtLevel.update;BuergeramtLevel.update=()=>{};window.__floorRender=Germany3D.sync;Germany3D.sync=()=>{};window.__floorPitch=-.58;__floorTest.pose(0,4.8);__floorTest.stage('walk-sign');__floorTest.at(0);__floorRender()});
+    if(process.env.PORTRAIT_LIQUID){
+      if(name==='reduced-motion')await page.emulateMedia({reducedMotion:'reduce'});
+      const intact=await page.evaluate(()=>__floorGpu.samplePortraitPaint('frame',0,0));
+      await page.evaluate(()=>{__floorTest.at(570);__floorRender()});
+      const drained=await page.evaluate(()=>__floorGpu.samplePortraitPaint('frame',1,BuergeramtLevel.floorState.visualTime));
+      if(name==='missing-portrait')assert.deepEqual(drained,intact,'missing art must retain its labeled fallback');
+      else{assert(Math.max(...intact.range)>40,'actual paint is present before melting');assert(drained.range.every(range=>range<=1),'the entire picture leaves the frame at full melt');}
+      await page.evaluate(()=>{__floorTest.at(BuergeramtGoop.ageForMelt(.25));__floorRender()});
+      const film=name==='missing-portrait'?null:await page.evaluate(()=>__floorGpu.samplePortraitPaint('film',.25,BuergeramtLevel.floorState.visualTime));
+      if(film){assert(film.coverage>.7,'paint flows across most of the picture width');assert(film.connected>.65,'the liquid body stays connected rather than separated strands');}
+      await page.evaluate(()=>{__floorTest.at(0);__floorRender()});
+      const captures=[];
+      for(const age of [0,90,105,120,150,180,210,240,270,300,370,420,570]){
+        await page.evaluate(age=>{__floorGpu.advance(age-BuergeramtLevel.floorState.time);const p=BuergeramtStory.presidentPortrait;__floorTest.pose(p.x+1.2,p.z-2.5,Math.atan2(-1.2,-2.5));window.__floorPitch=-.13;__floorRender()},age);
+        const state=await page.evaluate(()=>({floor:Germany3D.amtFloor,portrait:Germany3D.amtPortraitMelt,pigment:__floorGpu.stats()}));
+        assert.equal(state.portrait.paintMelt,name==='missing-portrait'?0:Math.min(1,state.floor.melt*2.2));
+        if(age===150&&state.pigment&&name!=='missing-portrait'){assert(state.pigment.paint>.000001,'the whole sheet deposits paint soon after onset');assert(state.pigment.colored>.000001);}
+        if(name==='missing-portrait'&&state.pigment){assert.equal(state.pigment.paint,0);assert.equal(state.pigment.colored,0);}
+        await page.screenshot({path:resolve(out,`${name}-liquid-${age}s.png`)});captures.push({age,...state});
+      }
+      assert.deepEqual(errors,[]);report.cases.push({name,verdict:'PASS',intact,drained,film,captures,errors});console.log(name,'liquid PASS');await context.close();continue;
+    }
     if(process.env.FLOOR_MOTION){
       await page.evaluate(()=>{__floorGpu.advance(675);__floorRender()});
       const states=[];
@@ -82,7 +127,7 @@ try{
         const state=await page.evaluate(()=>({floor:Germany3D.amtFloor,portrait:Germany3D.amtPortraitMelt,lamps:Germany3D.amtLamps,clock:BuergeramtLevel.floorState}));
         const progress=time/90;assert.ok(Math.abs(state.clock.speed-(.65+.35*progress))<1e-8);
         assert.ok(Math.abs(state.clock.goop-(1-progress))<1e-8);assert.equal(state.portrait.melt,state.floor.melt);
-        if(!process.env.PORTRAIT_SOURCE_FILE)assert.equal(state.portrait.paintMelt,Math.min(1,state.floor.melt*1.3));
+        if(!process.env.PORTRAIT_SOURCE_FILE)assert.equal(state.portrait.paintMelt,Math.min(1,state.floor.melt*2.2));
         assert.ok(state.lamps.levels.every(level=>Math.abs(level-progress)<1e-6));assert.equal(state.floor.failure,null);
         if(time===90)assert.equal(state.floor.targets,0);
         const screenshot=await page.screenshot({path:resolve(out,`${name}-recovery-${time}s.png`)});
@@ -104,7 +149,7 @@ try{
       assert.deepEqual(state.resolution,compact?[128,160]:[256,320]);
       assert.equal(state.textureBytes,time<=90||name==='procedural-fallback'?0:(compact?128*160:256*320)*32);
       assert.equal(state.portrait.melt,state.melt);
-      if(!process.env.PORTRAIT_SOURCE_FILE)assert.equal(state.portrait.paintMelt,Math.min(1,state.melt*1.3));if(time>=570&&state.pigment){assert.ok(state.pigment.paint>.00002,'portrait paint enters the persistent floor');assert.ok(state.pigment.colored>.00002,'actual portrait colors mix with the tiles');}if(state.pigment){assert.ok(state.pigment.white>.02&&state.pigment.black>.02,'retain both oils through the waves');assert.ok(state.pigment.variance>.025,'do not diffuse to a featureless grey floor');}
+      if(!process.env.PORTRAIT_SOURCE_FILE)assert.equal(state.portrait.paintMelt,Math.min(1,state.melt*2.2));if(time>=570&&state.pigment){assert.ok(state.pigment.paint>.00002,'portrait paint enters the persistent floor');assert.ok(state.pigment.colored>.00002,'actual portrait colors mix with the tiles');}if(state.pigment){assert.ok(state.pigment.white>.02&&state.pigment.black>.02,'retain both oils through the waves');assert.ok(state.pigment.variance>.025,'do not diffuse to a featureless grey floor');}
       if(time===420&&state.pigment){assert.ok(state.pigment.paint>.000001,'portrait paint reaches the floor before the previous drip onset');assert.ok(state.pigment.colored>.000001,'early deposited portrait colors mix into the black and white oil');}
       const screenshot=await page.screenshot({path:resolve(out,`${name}-${time}s.png`)});captures.push({time,...state,screenshotHash:createHash('sha256').update(screenshot).digest('hex')});
       if(time===60){
