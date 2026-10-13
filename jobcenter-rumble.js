@@ -12,12 +12,31 @@ function loopSamples(){
  const partials=tones.map(([hz,weight])=>[hz,weight,random()*Math.PI*2]);
  // Low periodic spectral grain supplies cave texture without a second source.
  for(let i=0;i<18;i++)partials.push([Math.round((38+random()*118)*4)/4,.014,random()*Math.PI*2]);
+ const n=partials.length,sines=new Float64Array(n),previousSines=new Float64Array(n);
+ const factors=new Float64Array(n),weights=new Float64Array(n);
+ for(let j=0;j<n;j++){
+  const [hz,weight,phase]=partials[j],step=2*Math.PI*hz/SAMPLE_RATE;
+  sines[j]=Math.sin(phase);previousSines[j]=Math.sin(phase-step);
+  factors[j]=2*Math.cos(step);weights[j]=weight;
+ }
+ const slowStep=2*Math.PI*.25/SAMPLE_RATE,fastStep=2*Math.PI*.5/SAMPLE_RATE;
+ const slowSinStep=Math.sin(slowStep),slowCosStep=Math.cos(slowStep);
+ const fastSinStep=Math.sin(fastStep),fastCosStep=Math.cos(fastStep);
+ let slowSin=0,slowCos=1,fastSin=0,fastCos=1;
  let peak=0;
  for(let i=0;i<count;i++){
-  const t=i/SAMPLE_RATE,breath=.82+.12*Math.sin(2*Math.PI*.25*t)+.06*Math.sin(2*Math.PI*.5*t);
+  const breath=.82+.12*slowSin+.06*fastSin;
   let value=0;
-  for(const [hz,weight,phase] of partials)value+=weight*Math.sin(2*Math.PI*hz*t+phase);
+  for(let j=0;j<n;j++){
+   value+=weights[j]*sines[j];
+   const next=factors[j]*sines[j]-previousSines[j];
+   previousSines[j]=sines[j];sines[j]=next;
+  }
   samples[i]=value*breath;peak=Math.max(peak,Math.abs(samples[i]));
+  const nextSlow=slowSin*slowCosStep+slowCos*slowSinStep;
+  slowCos=slowCos*slowCosStep-slowSin*slowSinStep;slowSin=nextSlow;
+  const nextFast=fastSin*fastCosStep+fastCos*fastSinStep;
+  fastCos=fastCos*fastCosStep-fastSin*fastSinStep;fastSin=nextFast;
  }
  const scale=.68/peak;
  for(let i=0;i<count;i++)samples[i]*=scale;
