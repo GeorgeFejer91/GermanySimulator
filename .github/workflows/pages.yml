@@ -32,7 +32,7 @@ jobs:
       - name: Check running hotkey
         run: node --test tests/running-hotkey.test.mjs
       - name: Check office queue call audio
-        run: node --test tests/buergeramt-queue-audio.test.mjs tests/buergeramt-multiple-tickets.test.mjs
+        run: node --test tests/buergeramt-queue-audio.test.mjs tests/buergeramt-multiple-tickets.test.mjs tests/knick-name-announcement.test.mjs tests/knick-speech-cache.test.mjs tests/knick-browser-assets.test.mjs
       - name: Check office touch navigation, turning and direction texture reuse
         run: node --test tests/buergeramt-touch-navigation.test.mjs tests/buergeramt-touch-target.test.mjs tests/buergeramt-turning.test.mjs
       - name: Check office causality and re-entry

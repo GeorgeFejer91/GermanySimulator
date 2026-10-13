@@ -1235,3 +1235,11 @@ differences do not isolate the adviser cost. The functional budgets pass;
 stable timing, GPU timing, field data and the physical-device 33.3 ms target
 remain NOT RUN. Receipts are in `output/street-wisdom/performance-base/` and
 `performance-final/`; all owned browsers closed cleanly.
+
+### Personal name speech buffers (2026-10-13)
+
+The appointment intercom loads its 16.03 MB compressed name model only after the first valid name and with voices enabled. Opening-form input can prepare before arrival; skipping it uses companion registration. No speech-model request occurs at startup. ORT 1.18.0 WASM SIMD (10.60 MB) and the reduced phonemizer load lazily in one worker. Four fixed counter tails add 277,168 bytes; one inference produces four calls. INT8 stored weights expand to floating-point inference, so encoded size is not a peak-memory measure.
+
+Preparation is serial, limited to twelve pending jobs and eight complete call WAVs. A same-name batch resolves all matching counter requests without repeated inference or nested retained bundles. Idle workers terminate after five seconds; one encoded model buffer remains in page RAM for a verified worker restart. Hidden pages suspend preparation; exit/replay/pagehide clear transient speech and model buffers. Fetches use no-store; the application writes no speech data to persistent storage or user files. A 180-second terminal preparation bound retains captions and the normal appointment gate on failure.
+
+Three silent production-worker checks pass on desktop and Android portrait/landscape emulation. On this laptop, first preparation took 3.3–4.0 seconds including startup; native name-only decoding typically took 0.09–0.22 seconds. These observations do not establish physical-phone performance or universal client speed. Root cold-start budgets and name-inference input/render observations are separate release evidence.

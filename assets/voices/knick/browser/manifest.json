@@ -1,0 +1,155 @@
+{
+  "voiceId": "amt-brunhilde-knick",
+  "profileId": "b080c7d95ecd418fb428282461d7fbe7",
+  "referenceSha256": "901e9ad60eda5cbb36337b12864b6a2b0d133570acb90941b9eabd9888c16351",
+  "originalSha256": "f87daaf53e9e3183065dbe38a65097f5c8df3ae11454ea56676a8298800683c2",
+  "teacher": "ResembleAI/Chatterbox Multilingual V2 0.1.7",
+  "teacherRevision": "5bb1f6ee58e50c3b8d408bc82a6d3740c2db6e18",
+  "schemaVersion": 1,
+  "model": "knick-0670e199e247.onnx.bin",
+  "sha256": "0670e199e2479d19bda081ff4ca6c29227a45a2f4f0672563736711a616c5c29",
+  "bytes": 18849196,
+  "compression": "gzip",
+  "downloadBytes": 16033735,
+  "downloadSha256": "4222e91006b1aa3d53816c2eccbdd80c1bcad94120071bcdcd339981bb2479ba",
+  "sampleRate": 22050,
+  "format": "VITS ONNX opset 15; per-channel int8 stored weights",
+  "runtime": "onnxruntime-web 1.18.0 WASM SIMD single thread",
+  "quantizedParameters": 14942336,
+  "trainingTakes": 167,
+  "trainingMinutes": 22.482766666666667,
+  "trainingGlobalStep": 4000,
+  "seed": 20261013,
+  "trainingSourcesSha256": "c8d294ac86fb9b623ea2d01332111542d5daa026a3b4bd704eb3d4cce3285236",
+  "baseRevision": "37d1bea250e21ca0d617818d2bef1db724edb80c",
+  "baseCheckpointSha256": "063f96fd905b9f57bd077bdbca0aa39876a29103c2cc8688fb4d39e2876a0de2",
+  "checkpointSha256": "a2282f35bb2761ee7611c4bde5f45f27372e1853725633b6af9c1c29d336e11b",
+  "trainingStages": [
+    {
+      "globalSteps": 4000,
+      "phonemizer": "shipped WASM",
+      "optimizer": "fresh AdamW (pinned Piper implementation)",
+      "generatorRate": 5e-05,
+      "discriminatorRate": 2e-05,
+      "restoredFrozenPrefixes": [
+        "model_g.enc_p.",
+        "model_g.dp.",
+        "model_g.flow."
+      ],
+      "baseCheckpointSha256": "063f96fd905b9f57bd077bdbca0aa39876a29103c2cc8688fb4d39e2876a0de2",
+      "resumedFromCheckpointSha256": null,
+      "resumedAtGlobalStep": 2000,
+      "retainedResumeStateSha256": "a0bd6d1a9643f514d8a3850efc11eb76b35604c7d0b8432ba4c839667f36e428"
+    }
+  ],
+  "trainingRunSha256": "163c1160c9bafafa09eee8efaa142393a2222055424f55bd6178577449b67572",
+  "inferenceScales": [
+    0,
+    1.2,
+    0
+  ],
+  "durationWeights": "float32",
+  "phonemeInputWeights": "float32",
+  "browserPhonemizer": {
+    "piper_phonemize.js": {
+      "sha256": "14d778a8c369fcbabcf720ab73d50a006278104b5cac6c8efcb750df1066b035",
+      "bytes": 83757
+    },
+    "piper_phonemize.data": {
+      "sha256": "edcd1e283a980cb9bd76f7e83c78b81ab4d258d0af59547e27bb538c6cb56984",
+      "bytes": 904814
+    },
+    "piper_phonemize.wasm": {
+      "sha256": "b777cd107a91d2bcc6a1ea46f2c26a662a7407394fe84589198aeaa83dd7a9d6",
+      "bytes": 635212
+    }
+  },
+  "browserMetadataSha256": "db4fa673ad2d39246a46e5442a832cdd6a401f850360b8a4df6c9e3c3dc1649c",
+  "sourceModelSha256": "bad049b684b16c77369ddcfcad28ad515e53817f0c883c1eef1f240a8d04faac",
+  "fallback": "captions",
+  "listening": "User accepted Erika Mustermann and George Fejer as an intercom voice on 2026-10-13; explicitly said it does not resemble Frau Knick.",
+  "synthesis": "sentence priors; name-only vocoder; prerecorded counter tails",
+  "nameContextFrames": 16,
+  "contextSuffix": ", bitte zu Schalter eins!",
+  "counterTails": [
+    {
+      "file": "counter-1.wav",
+      "sha256": "2d00a9b90272beb2f012211c3fa167b53190f66eb3a7e88da52875556a123203",
+      "bytes": 69164,
+      "samples": 34560,
+      "counter": 1,
+      "text": "bitte zu Schalter eins!",
+      "sampleRate": 22050,
+      "channels": 1,
+      "format": "PCM16 WAV",
+      "voiceId": "amt-brunhilde-knick",
+      "profileId": "b080c7d95ecd418fb428282461d7fbe7",
+      "referenceSha256": "901e9ad60eda5cbb36337b12864b6a2b0d133570acb90941b9eabd9888c16351",
+      "sourceModelSha256": "3bd004594355bb3ebe73620cc83a9e209c05c539edda53d1912f96edd1491c01",
+      "sourceText": "Erika Mustermann, bitte zu Schalter eins!",
+      "startSample": 24320
+    },
+    {
+      "file": "counter-2.wav",
+      "sha256": "5b45f26760484582d66b61d096327938c383fc42e99054ba06c70671194b5b51",
+      "bytes": 74284,
+      "samples": 37120,
+      "counter": 2,
+      "text": "bitte zu Schalter zwei!",
+      "sampleRate": 22050,
+      "channels": 1,
+      "format": "PCM16 WAV",
+      "voiceId": "amt-brunhilde-knick",
+      "profileId": "b080c7d95ecd418fb428282461d7fbe7",
+      "referenceSha256": "901e9ad60eda5cbb36337b12864b6a2b0d133570acb90941b9eabd9888c16351",
+      "sourceModelSha256": "3bd004594355bb3ebe73620cc83a9e209c05c539edda53d1912f96edd1491c01",
+      "sourceText": "Erika Mustermann, bitte zu Schalter zwei!",
+      "startSample": 24832
+    },
+    {
+      "file": "counter-3.wav",
+      "sha256": "8627076bc00be8a0a9c454438394bc55abd4d0bb4867d0c93b4c2d66c793fe5a",
+      "bytes": 67116,
+      "samples": 33536,
+      "counter": 3,
+      "text": "bitte zu Schalter drei!",
+      "sampleRate": 22050,
+      "channels": 1,
+      "format": "PCM16 WAV",
+      "voiceId": "amt-brunhilde-knick",
+      "profileId": "b080c7d95ecd418fb428282461d7fbe7",
+      "referenceSha256": "901e9ad60eda5cbb36337b12864b6a2b0d133570acb90941b9eabd9888c16351",
+      "sourceModelSha256": "3bd004594355bb3ebe73620cc83a9e209c05c539edda53d1912f96edd1491c01",
+      "sourceText": "Erika Mustermann, bitte zu Schalter drei!",
+      "startSample": 24576
+    },
+    {
+      "file": "counter-4.wav",
+      "sha256": "ae0c58168b7893056579bd6d49d94da8e4da3875d35ee3eac8b7f17b554c0951",
+      "bytes": 66604,
+      "samples": 33280,
+      "counter": 4,
+      "text": "bitte zu Schalter vier!",
+      "sampleRate": 22050,
+      "channels": 1,
+      "format": "PCM16 WAV",
+      "voiceId": "amt-brunhilde-knick",
+      "profileId": "b080c7d95ecd418fb428282461d7fbe7",
+      "referenceSha256": "901e9ad60eda5cbb36337b12864b6a2b0d133570acb90941b9eabd9888c16351",
+      "sourceModelSha256": "3bd004594355bb3ebe73620cc83a9e209c05c539edda53d1912f96edd1491c01",
+      "sourceText": "Erika Mustermann, bitte zu Schalter vier!",
+      "startSample": 23808
+    }
+  ],
+  "nameOnlyVerification": {
+    "modelSha256": "0670e199e2479d19bda081ff4ca6c29227a45a2f4f0672563736711a616c5c29",
+    "sourceModelSha256": "3bd004594355bb3ebe73620cc83a9e209c05c539edda53d1912f96edd1491c01",
+    "nameContextFrames": 16,
+    "threads": 2,
+    "provider": "CPUExecutionProvider",
+    "maximumRetainedSampleError": 1.8477439880371094e-06
+  },
+  "qualityStatus": "accepted-intercom-derivative",
+  "wordReview": "Held-out native ASR reports some proper-name errors; this is intercom acceptance, not universal pronunciation verification.",
+  "voiceUse": "Personal appointment calls only; recorded Knick character dialogue keeps its selected voice."
+}

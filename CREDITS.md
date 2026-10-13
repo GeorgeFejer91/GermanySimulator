@@ -475,3 +475,10 @@ Source and hash: [asset provenance](assets/models/mission-sausage/LICENSES.md).
 
 
 Friedrich Merz dialogue was synthesized on 10 and 11 October 2026 with the user-selected saved “GS Merz” profile. The two existing game scripts and nine added historical quotations share this profile; they are synthetic game audio. The quotations’ source URLs, event dates, excerpt boundary, and context are recorded in `assets/voices/merz/manifest.json`, and synthesis/reference provenance and license limits are in `assets/voices/LICENSES.md`.
+
+
+# Local Knick appointment speech
+
+The user accepted the browser-local derivative as an intercom voice after listening, while explicitly saying it does not resemble Frau Knick. Its use is limited to personal appointment calls; existing character dialogue keeps its selected recordings. The Piper/VITS derivative was trained from the existing selected Frau Knick profile's verified Chatterbox dry takes. The graph manifest under `assets/voices/knick/browser/` owns actual model/reference/training hashes. The German warm-start is [Thorsten medium](https://huggingface.co/rhasspy/piper-voices/blob/main/de/de_DE/thorsten/medium/MODEL_CARD), whose training data are CC0; the source checkpoint revision and hash are recorded in the derivative manifest. Existing voice licensing and reference provenance remain in [the voice ledger](assets/voices/LICENSES.md).
+
+Inference uses [ONNX Runtime Web 1.18.0](https://github.com/microsoft/onnxruntime/tree/v1.18.0), under its bundled [MIT license](assets/vendor/onnxruntime/1.18.0/LICENSE). German/English phonemization uses the pinned Piper WASM package, with a reduced language-data bundle. Its [source and license notice](assets/vendor/piper-phonemize/1.0.0/SOURCE.md) preserves MIT Piper-phonemize and GPL-3.0-or-later eSpeak-ng attribution. The private training environment uses [Piper 1.8.0](https://github.com/OHF-Voice/piper1-gpl), licensed GPL-3.0-or-later; training/checkpoint authoring files are excluded from the shipped game.

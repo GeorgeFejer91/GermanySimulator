@@ -244,3 +244,8 @@ footer{bottom:calc(var(--subtitle-height) + 8px)}
 .dialogue:not([hidden]){max-width:calc(100% - 16px)}
 .dialogue .dialogue-actions{display:flex;flex-wrap:wrap;min-width:0}
 .dialogue .dialogue-actions button{flex:1 1 auto;min-width:0;max-width:100%;white-space:normal;overflow-wrap:anywhere}
+
+/* The optional typed-name form retains its readable bounds at page zoom. */
+.humor-paper{max-width:calc(var(--humor-viewport-width,100vw) - 36px);max-height:calc(var(--humor-viewport-height,100dvh) - 36px - var(--subtitle-height,0px))}
+.humor-requirements{grid-template-columns:repeat(2,minmax(0,1fr))}.humor-signature,.humor-signature input{min-width:0}
+@media(max-width:700px){.humor-requirements{grid-template-columns:minmax(0,1fr)}.humor-paper{max-width:calc(var(--humor-viewport-width,100vw) - 14px);max-height:calc(var(--humor-viewport-height,100dvh) - 14px - var(--subtitle-height,0px))}}

@@ -98,11 +98,13 @@ function schedule(){if(queued||document.hidden)return;queued=true;requestAnimati
 
 // Actual, bounded text measurements with the shipped Pretext version. DOM owns
 // wrapping; a long file page scrolls at zoom rather than truncating instructions.
-const fitSelectors=['.dialogue-actions button','#subtitle-toggle','#city-status button','#energy-warning','.wanted small','#fax-title','#fax-text','.fax-heading>span','#mission-fax button','.file-header h2','.file-header button','.file-tabs button','.file-page button','.mission-body small','#anmeldung-badge','#mission-title','#mission-text','.rule small','#rule-id','#rule-text','.stats span','.germanness>small','#germanness-value','#law-power','.wurst-pass>b','.file-controls dt','.file-controls dd','.file-page>a','#toast','#bark-speaker','#police-bark-text','#violation-law','#violation-title','#violation-text','#city-notices small','#city-notices strong','#city-notices b','#city-notices p','#city-notices em','#city-notices .wurst-alert-body span'];
+const fitSelectors=['#humor-requirements .humor-signature>span','.dialogue-actions button','#subtitle-toggle','#city-status button','#energy-warning','.wanted small','#fax-title','#fax-text','.fax-heading>span','#mission-fax button','.file-header h2','.file-header button','.file-tabs button','.file-page button','.mission-body small','#anmeldung-badge','#mission-title','#mission-text','.rule small','#rule-id','#rule-text','.stats span','.germanness>small','#germanness-value','#law-power','.wurst-pass>b','.file-controls dt','.file-controls dd','.file-page>a','#toast','#bark-speaker','#police-bark-text','#violation-law','#violation-title','#violation-text','#city-notices small','#city-notices strong','#city-notices b','#city-notices p','#city-notices em','#city-notices .wurst-alert-body span'];
 function measure(){
  if(typeof setLocale==='function')setLocale(language||'de');
  const pageZoom=parseFloat(getComputedStyle(document.documentElement).zoom)||1;
  const preferred=parseFloat(getComputedStyle(document.documentElement).fontSize)||16;
+ document.body.style.setProperty('--humor-viewport-width',innerWidth/pageZoom+'px');
+ document.body.style.setProperty('--humor-viewport-height',innerHeight/pageZoom+'px');
  const layout=innerWidth/pageZoom<Math.max(300,preferred*18)?'stack':'paired';
  if(document.body.dataset.hudLayout!==layout)document.body.dataset.hudLayout=layout;
  const depth=innerHeight/pageZoom<preferred*20&&innerWidth/pageZoom>700?'shallow':'normal';
