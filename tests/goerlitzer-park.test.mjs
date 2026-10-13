@@ -46,7 +46,7 @@ globalThis.layout={goerlitzerPark,player,roads,buildings,props,normObjects,picku
 `,sandbox);
 const layout=sandbox.layout;
 assert.equal(layout.goerlitzerPark,park,"canonical simulation must use the shared object directly");
-assert.equal(layout.trees.length,24+park.trees.length,"park trees must extend the established 24 trees");
+assert.equal(layout.trees.length,24+6+park.trees.length,"park trees must extend the established 24 trees and six JWD trees");
 for(const tree of park.trees){
  assert.ok(layout.trees.includes(tree),"park trees must not receive a second world offset");
  assert.ok(tree.x>park.x+layout.TREE_RADIUS&&tree.x<park.x+park.w-layout.TREE_RADIUS&&tree.y>park.y+layout.TREE_RADIUS&&tree.y<park.y+park.h-layout.TREE_RADIUS,"tree crowns must stay within the fence");

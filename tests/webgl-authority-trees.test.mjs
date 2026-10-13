@@ -25,7 +25,7 @@ const treeBlock=game.match(/const TREE_RADIUS=(\d+),TREE_ROAD_CLEARANCE=(\d+),tr
 assert.ok(treeBlock,"tree placement must be declared in canonical world data");
 const radius=Number(treeBlock[1]),clearance=Number(treeBlock[2]);
 const trees=[...treeBlock[3].matchAll(/\[(\d+),(\d+)\]/g)].map(match=>({x:Number(match[1])+560,y:Number(match[2])+560}));
-assert.equal(trees.length,24,"the established tree count must be preserved");
+assert.equal(trees.length,24+6,"six JWD trees extend the established city trees");
 assert.ok(clearance>=radius,"the road margin must clear the rendered tree crown");
 for(const tree of trees)for(const road of roadSandbox.roads){
   const overlaps=tree.x>=road.x-clearance&&tree.x<=road.x+road.w+clearance&&tree.y>=road.y-clearance&&tree.y<=road.y+road.h+clearance;
