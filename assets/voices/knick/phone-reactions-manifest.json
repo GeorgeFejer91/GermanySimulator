@@ -1,0 +1,1705 @@
+{
+  "schemaVersion": 1,
+  "voiceId": "amt-brunhilde-knick",
+  "profileId": "b080c7d95ecd418fb428282461d7fbe7",
+  "fallback": "captions",
+  "status": "same-profile technical and independent ASR audit; perceptual listening not independently verified",
+  "generatedLineCount": 4,
+  "requestedLineCount": 4,
+  "lineCount": 4,
+  "clips": [
+    {
+      "clipId": "knick-phone-reaction-1",
+      "actorId": "clerk-3",
+      "voiceId": "amt-brunhilde-knick",
+      "profileId": "b080c7d95ecd418fb428282461d7fbe7",
+      "text": "Entschuldigen Sie. Ihr Telefon klingelt. Wir sind hier beim Bürgeramt. Stellen Sie es bitte ruhig, damit wir mit Ihrer Anmeldung weitermachen können.",
+      "english": "Excuse me. Your phone is ringing. This is the citizens’ office. Please quiet it so we can continue with your registration.",
+      "sourceLocator": "buergeramt-story.js phoneWarnings[0]",
+      "trigger": "buergeramt-phone-reaction",
+      "deliveryListening": "NOT RUN (silent authoring policy)",
+      "approval": {
+        "status": "user-approved",
+        "date": "2026-10-13",
+        "instruction": "Frau Knick has different reactions for repeated telephone calls, aborting the interaction on the fourth call.",
+        "scope": "Four exact integrator-authored repeat-call reactions, selected Knick profile and unchanged production processing",
+        "listeningConfirmed": false
+      },
+      "seed": 71000,
+      "synthesisAttempt": 1,
+      "referenceSha256": "901e9ad60eda5cbb36337b12864b6a2b0d133570acb90941b9eabd9888c16351",
+      "authoringHelperSha256": "de00ee31301b812dfd1267981690fbc45b6357465290a5ec26b7e8b233436032",
+      "rendererInputText": "Entschuldigen Sie. Ihr Telefon klingelt. Wir sind hier beim Bürgeramt. Stellen Sie es bitte ruhig, damit wir mit Ihrer Anmeldung weitermachen können.",
+      "decode": {
+        "maxSpeechTokens": 424,
+        "attentionHooksBefore": 0,
+        "generatedSpeechTokens": 204,
+        "eosReached": true,
+        "eosKind": "analyzer-forced",
+        "eosSuppressionObservedSteps": 180,
+        "modelEosRestoredSteps": 0,
+        "alignmentFirstCompletedStep": 181,
+        "nativeAnalyzerSourceSha256": "d8430efa92aedb8e59b782c1d299fe7238570eecea9d293c0981a5ee2e82c8c7",
+        "eosPolicy": "Native analyzer unchanged; observation only",
+        "t3InferenceSeconds": 10.09,
+        "temporaryAnalyzerHooksRemoved": 6,
+        "attentionHooksAfter": 0,
+        "eosTraceSha256": "772dc283d027e844d553c0ae17324c9785324c4d9859e44ba79e5a2de428e0a0"
+      },
+      "rendererInputBasis": "exact authored source",
+      "requestSha256": "ac8675b45a8b8f510e74d281070621fd26846913fec6f8bd764dc3cec17586c2",
+      "referenceOriginalSha256": "f87daaf53e9e3183065dbe38a65097f5c8df3ae11454ea56676a8298800683c2",
+      "profileJsonSha256": "4071c9052ebb393358d9957cc5f2271d93c52f13b747fad9f5253bd81b00ce66",
+      "rawSha256": "824f7560d85a39f65f0e1ae303e098bcfe76c4e520fb09f7c5bed8cfa26e279b",
+      "renderer": "ResembleAI/Chatterbox Multilingual V2 0.1.7",
+      "modelRevision": "5bb1f6ee58e50c3b8d408bc82a6d3740c2db6e18",
+      "modelLicense": "MIT",
+      "referenceLicense": "CC0-1.0 (EmoDB original, transformed reference)",
+      "durationSeconds": 8.12,
+      "renderSeconds": 11.28,
+      "synthesis": {
+        "exaggeration": 0.5,
+        "exaggerationReason": null,
+        "temperature": 0.65,
+        "repetitionPenalty": 3.0,
+        "cfgWeight": 0.6,
+        "languageId": "de",
+        "device": "cuda",
+        "precision": "fp16",
+        "t3WeightPrecision": "float16",
+        "conditioningPrecision": "float32",
+        "autocastPrecision": "float16",
+        "conditioningCached": true,
+        "referenceReconditionedForProfile": "b080c7d95ecd418fb428282461d7fbe7",
+        "referenceConditioningVerifiedFloat32": true,
+        "modelSessionReused": false,
+        "cpuThreads": 2,
+        "inferenceMode": true
+      },
+      "listening": "pending",
+      "status": "eligible exact-text recording; human listening pending",
+      "processing": "[0:a]highpass=f=65,lowpass=f=7600,asplit[clean][wet];[wet]rubberband=pitch=0.78,lowpass=f=1450,volume=0.16[shadow];[clean][shadow]amix=inputs=2:duration=first:normalize=0[a]",
+      "processingSha256": "1c7968d73192bfbf5d2b759fce5dc07b092badbd133718ae05d67dbdda72ccb2",
+      "normalization": {
+        "targetLufs": -18,
+        "targetTruePeakDbtp": -1.5,
+        "filter": "loudnorm=I=-17.45:TP=-1.8:LRA=11:linear=false",
+        "iterations": 2
+      },
+      "integratedLufs": -18.28,
+      "truePeakDbtp": -2.23,
+      "asr": "Entschuldigen Sie, Ihr Telefon klingelt. Wir sind hier beim Bürgeramt. Stellen Sie es bitte ruhig, damit wir mit Ihrer Anmeldung weitermachen können.",
+      "asrWordExact": true,
+      "asrLiteralWordExact": true,
+      "asrNormalization": "case/punctuation, German numeric and A38 spoken equivalents, guarded full-hour and date-ordinal equivalents, section sign/Paragraf orthography, German compound spacing",
+      "asrModel": "independent faster-whisper, cached local model, cpu int8 (effective int8_float32), no script prompt",
+      "asrCpuThreads": 2,
+      "asrDevice": "cpu",
+      "asrEffectiveComputeType": "int8_float32",
+      "asrLanguageId": "de",
+      "asrComputeType": "int8",
+      "asrScriptPrompt": null,
+      "asrBeamSize": 1,
+      "asrReadings": [
+        {
+          "beamSize": 1,
+          "transcript": "Entschuldigen Sie, Ihr Telefon klingelt. Wir sind hier beim Bürgeramt. Stellen Sie es bitte ruhig, damit wir mit Ihrer Anmeldung weitermachen können.",
+          "transcribeSeconds": 10.16,
+          "words": [
+            {
+              "word": " Entschuldigen",
+              "start": 0.0,
+              "end": 0.7
+            },
+            {
+              "word": " Sie,",
+              "start": 0.7,
+              "end": 0.88
+            },
+            {
+              "word": " Ihr",
+              "start": 1.28,
+              "end": 1.42
+            },
+            {
+              "word": " Telefon",
+              "start": 1.42,
+              "end": 1.96
+            },
+            {
+              "word": " klingelt.",
+              "start": 1.96,
+              "end": 2.4
+            },
+            {
+              "word": " Wir",
+              "start": 2.52,
+              "end": 2.78
+            },
+            {
+              "word": " sind",
+              "start": 2.78,
+              "end": 2.96
+            },
+            {
+              "word": " hier",
+              "start": 2.96,
+              "end": 3.1
+            },
+            {
+              "word": " beim",
+              "start": 3.1,
+              "end": 3.3
+            },
+            {
+              "word": " Bürgeramt.",
+              "start": 3.3,
+              "end": 3.84
+            },
+            {
+              "word": " Stellen",
+              "start": 4.02,
+              "end": 4.32
+            },
+            {
+              "word": " Sie",
+              "start": 4.32,
+              "end": 4.46
+            },
+            {
+              "word": " es",
+              "start": 4.46,
+              "end": 4.58
+            },
+            {
+              "word": " bitte",
+              "start": 4.58,
+              "end": 4.76
+            },
+            {
+              "word": " ruhig,",
+              "start": 4.76,
+              "end": 5.22
+            },
+            {
+              "word": " damit",
+              "start": 5.3,
+              "end": 5.54
+            },
+            {
+              "word": " wir",
+              "start": 5.54,
+              "end": 5.74
+            },
+            {
+              "word": " mit",
+              "start": 5.74,
+              "end": 5.88
+            },
+            {
+              "word": " Ihrer",
+              "start": 5.88,
+              "end": 6.08
+            },
+            {
+              "word": " Anmeldung",
+              "start": 6.08,
+              "end": 6.54
+            },
+            {
+              "word": " weitermachen",
+              "start": 6.54,
+              "end": 7.06
+            },
+            {
+              "word": " können.",
+              "start": 7.06,
+              "end": 7.36
+            }
+          ]
+        }
+      ],
+      "asrModelSha256": "e76620f83d5f5b69efd3d87e3dc180c1bd21df9fbebacfd4335e5e1efcc018da",
+      "asrModelDirectoryName": "voice-asr-model",
+      "wordCues": [
+        {
+          "at": 0.0,
+          "charIndex": 0,
+          "word": "Entschuldigen",
+          "end": 0.7
+        },
+        {
+          "at": 0.7,
+          "charIndex": 14,
+          "word": "Sie",
+          "end": 0.88
+        },
+        {
+          "at": 1.28,
+          "charIndex": 19,
+          "word": "Ihr",
+          "end": 1.42
+        },
+        {
+          "at": 1.42,
+          "charIndex": 23,
+          "word": "Telefon",
+          "end": 1.96
+        },
+        {
+          "at": 1.96,
+          "charIndex": 31,
+          "word": "klingelt",
+          "end": 2.4
+        },
+        {
+          "at": 2.52,
+          "charIndex": 41,
+          "word": "Wir",
+          "end": 2.78
+        },
+        {
+          "at": 2.78,
+          "charIndex": 45,
+          "word": "sind",
+          "end": 2.96
+        },
+        {
+          "at": 2.96,
+          "charIndex": 50,
+          "word": "hier",
+          "end": 3.1
+        },
+        {
+          "at": 3.1,
+          "charIndex": 55,
+          "word": "beim",
+          "end": 3.3
+        },
+        {
+          "at": 3.3,
+          "charIndex": 60,
+          "word": "Bürgeramt",
+          "end": 3.84
+        },
+        {
+          "at": 4.02,
+          "charIndex": 71,
+          "word": "Stellen",
+          "end": 4.32
+        },
+        {
+          "at": 4.32,
+          "charIndex": 79,
+          "word": "Sie",
+          "end": 4.46
+        },
+        {
+          "at": 4.46,
+          "charIndex": 83,
+          "word": "es",
+          "end": 4.58
+        },
+        {
+          "at": 4.58,
+          "charIndex": 86,
+          "word": "bitte",
+          "end": 4.76
+        },
+        {
+          "at": 4.76,
+          "charIndex": 92,
+          "word": "ruhig",
+          "end": 5.22
+        },
+        {
+          "at": 5.3,
+          "charIndex": 99,
+          "word": "damit",
+          "end": 5.54
+        },
+        {
+          "at": 5.54,
+          "charIndex": 105,
+          "word": "wir",
+          "end": 5.74
+        },
+        {
+          "at": 5.74,
+          "charIndex": 109,
+          "word": "mit",
+          "end": 5.88
+        },
+        {
+          "at": 5.88,
+          "charIndex": 113,
+          "word": "Ihrer",
+          "end": 6.08
+        },
+        {
+          "at": 6.08,
+          "charIndex": 119,
+          "word": "Anmeldung",
+          "end": 6.54
+        },
+        {
+          "at": 6.54,
+          "charIndex": 129,
+          "word": "weitermachen",
+          "end": 7.06
+        },
+        {
+          "at": 7.06,
+          "charIndex": 142,
+          "word": "können",
+          "end": 7.36
+        }
+      ],
+      "sha256": "ca1713960852fcfc9ec54c21ba190b936c49b038d47e1304b118dc5dfeea1b5f",
+      "bytes": 130988,
+      "sampleRateHz": 48000,
+      "channels": 1,
+      "bitrateBitsPerSecond": 128000,
+      "file": "assets/voices/knick/knick-phone-reaction-1.mp3"
+    },
+    {
+      "clipId": "knick-phone-reaction-2",
+      "actorId": "clerk-3",
+      "voiceId": "amt-brunhilde-knick",
+      "profileId": "b080c7d95ecd418fb428282461d7fbe7",
+      "text": "Zum zweiten Mal! Ihr Telefon hat hier keinen Termin. Ich schon. Und zwar mit Ihnen. Sorgen Sie jetzt für Ruhe!",
+      "english": "For the second time! Your phone does not have an appointment here. I do. With you. Quiet it down now!",
+      "sourceLocator": "buergeramt-story.js phoneWarnings[1]",
+      "trigger": "buergeramt-phone-reaction",
+      "deliveryListening": "NOT RUN (silent authoring policy)",
+      "approval": {
+        "status": "user-approved",
+        "date": "2026-10-13",
+        "instruction": "Frau Knick has different reactions for repeated telephone calls, aborting the interaction on the fourth call.",
+        "scope": "Four exact integrator-authored repeat-call reactions, selected Knick profile and unchanged production processing",
+        "listeningConfirmed": false
+      },
+      "seed": 71001,
+      "synthesisAttempt": 1,
+      "referenceSha256": "901e9ad60eda5cbb36337b12864b6a2b0d133570acb90941b9eabd9888c16351",
+      "authoringHelperSha256": "de00ee31301b812dfd1267981690fbc45b6357465290a5ec26b7e8b233436032",
+      "rendererInputText": "Zum zweiten Mal! Ihr Telefon hat hier keinen Termin. Ich schon. Und zwar mit Ihnen. Sorgen Sie jetzt für Ruhe!",
+      "decode": {
+        "maxSpeechTokens": 400,
+        "attentionHooksBefore": 0,
+        "generatedSpeechTokens": 147,
+        "eosReached": true,
+        "eosKind": "analyzer-forced",
+        "eosSuppressionObservedSteps": 127,
+        "modelEosRestoredSteps": 0,
+        "alignmentFirstCompletedStep": 128,
+        "nativeAnalyzerSourceSha256": "d8430efa92aedb8e59b782c1d299fe7238570eecea9d293c0981a5ee2e82c8c7",
+        "eosPolicy": "Native analyzer unchanged; observation only",
+        "t3InferenceSeconds": 6.33,
+        "temporaryAnalyzerHooksRemoved": 3,
+        "attentionHooksAfter": 0,
+        "eosTraceSha256": "6287038dc978b85860ac3473027029b5a83dfb4216d4bc6848fa83e9ecc4258e"
+      },
+      "rendererInputBasis": "exact authored source",
+      "requestSha256": "ac8675b45a8b8f510e74d281070621fd26846913fec6f8bd764dc3cec17586c2",
+      "referenceOriginalSha256": "f87daaf53e9e3183065dbe38a65097f5c8df3ae11454ea56676a8298800683c2",
+      "profileJsonSha256": "4071c9052ebb393358d9957cc5f2271d93c52f13b747fad9f5253bd81b00ce66",
+      "rawSha256": "822295b0b15ede948d19f5ae56cef958e7564b52ae707f48d6e9b6b103fccb0a",
+      "renderer": "ResembleAI/Chatterbox Multilingual V2 0.1.7",
+      "modelRevision": "5bb1f6ee58e50c3b8d408bc82a6d3740c2db6e18",
+      "modelLicense": "MIT",
+      "referenceLicense": "CC0-1.0 (EmoDB original, transformed reference)",
+      "durationSeconds": 5.84,
+      "renderSeconds": 7.75,
+      "synthesis": {
+        "exaggeration": 0.5,
+        "exaggerationReason": null,
+        "temperature": 0.65,
+        "repetitionPenalty": 3.0,
+        "cfgWeight": 0.6,
+        "languageId": "de",
+        "device": "cuda",
+        "precision": "fp16",
+        "t3WeightPrecision": "float16",
+        "conditioningPrecision": "float32",
+        "autocastPrecision": "float16",
+        "conditioningCached": true,
+        "referenceReconditionedForProfile": "b080c7d95ecd418fb428282461d7fbe7",
+        "referenceConditioningVerifiedFloat32": true,
+        "modelSessionReused": false,
+        "cpuThreads": 2,
+        "inferenceMode": true
+      },
+      "listening": "pending",
+      "status": "eligible exact-text recording; human listening pending",
+      "processing": "[0:a]highpass=f=65,lowpass=f=7600,asplit[clean][wet];[wet]rubberband=pitch=0.78,lowpass=f=1450,volume=0.16[shadow];[clean][shadow]amix=inputs=2:duration=first:normalize=0[a]",
+      "processingSha256": "1c7968d73192bfbf5d2b759fce5dc07b092badbd133718ae05d67dbdda72ccb2",
+      "normalization": {
+        "targetLufs": -18,
+        "targetTruePeakDbtp": -1.5,
+        "filter": "loudnorm=I=-13.989999999999998:TP=-1.8:LRA=11:linear=false",
+        "iterations": 3
+      },
+      "integratedLufs": -18.24,
+      "truePeakDbtp": -2.22,
+      "asr": "Zum zweiten Mal. Ihr Telefon hat hier keinen Termin. Ich schon. Und zwar mit Ihnen sorgen Sie jetzt für Ruhe.",
+      "asrWordExact": true,
+      "asrLiteralWordExact": true,
+      "asrNormalization": "case/punctuation, German numeric and A38 spoken equivalents, guarded full-hour and date-ordinal equivalents, section sign/Paragraf orthography, German compound spacing",
+      "asrModel": "independent faster-whisper, cached local model, cpu int8 (effective int8_float32), no script prompt",
+      "asrCpuThreads": 2,
+      "asrDevice": "cpu",
+      "asrEffectiveComputeType": "int8_float32",
+      "asrLanguageId": "de",
+      "asrComputeType": "int8",
+      "asrScriptPrompt": null,
+      "asrBeamSize": 1,
+      "asrReadings": [
+        {
+          "beamSize": 1,
+          "transcript": "Zum zweiten Mal. Ihr Telefon hat hier keinen Termin. Ich schon. Und zwar mit Ihnen sorgen Sie jetzt für Ruhe.",
+          "transcribeSeconds": 12.91,
+          "words": [
+            {
+              "word": " Zum",
+              "start": 0.0,
+              "end": 0.22
+            },
+            {
+              "word": " zweiten",
+              "start": 0.22,
+              "end": 0.58
+            },
+            {
+              "word": " Mal.",
+              "start": 0.58,
+              "end": 0.84
+            },
+            {
+              "word": " Ihr",
+              "start": 1.0,
+              "end": 1.22
+            },
+            {
+              "word": " Telefon",
+              "start": 1.22,
+              "end": 1.64
+            },
+            {
+              "word": " hat",
+              "start": 1.64,
+              "end": 1.8
+            },
+            {
+              "word": " hier",
+              "start": 1.8,
+              "end": 1.94
+            },
+            {
+              "word": " keinen",
+              "start": 1.94,
+              "end": 2.22
+            },
+            {
+              "word": " Termin.",
+              "start": 2.22,
+              "end": 2.66
+            },
+            {
+              "word": " Ich",
+              "start": 2.8,
+              "end": 2.96
+            },
+            {
+              "word": " schon.",
+              "start": 2.96,
+              "end": 3.22
+            },
+            {
+              "word": " Und",
+              "start": 3.38,
+              "end": 3.62
+            },
+            {
+              "word": " zwar",
+              "start": 3.62,
+              "end": 3.78
+            },
+            {
+              "word": " mit",
+              "start": 3.78,
+              "end": 3.94
+            },
+            {
+              "word": " Ihnen",
+              "start": 3.94,
+              "end": 4.2
+            },
+            {
+              "word": " sorgen",
+              "start": 4.2,
+              "end": 4.5
+            },
+            {
+              "word": " Sie",
+              "start": 4.5,
+              "end": 4.64
+            },
+            {
+              "word": " jetzt",
+              "start": 4.64,
+              "end": 4.84
+            },
+            {
+              "word": " für",
+              "start": 4.84,
+              "end": 5.02
+            },
+            {
+              "word": " Ruhe.",
+              "start": 5.02,
+              "end": 5.34
+            }
+          ]
+        }
+      ],
+      "asrModelSha256": "e76620f83d5f5b69efd3d87e3dc180c1bd21df9fbebacfd4335e5e1efcc018da",
+      "asrModelDirectoryName": "voice-asr-model",
+      "wordCues": [
+        {
+          "at": 0.0,
+          "charIndex": 0,
+          "word": "Zum",
+          "end": 0.22
+        },
+        {
+          "at": 0.22,
+          "charIndex": 4,
+          "word": "zweiten",
+          "end": 0.58
+        },
+        {
+          "at": 0.58,
+          "charIndex": 12,
+          "word": "Mal",
+          "end": 0.84
+        },
+        {
+          "at": 1.0,
+          "charIndex": 17,
+          "word": "Ihr",
+          "end": 1.22
+        },
+        {
+          "at": 1.22,
+          "charIndex": 21,
+          "word": "Telefon",
+          "end": 1.64
+        },
+        {
+          "at": 1.64,
+          "charIndex": 29,
+          "word": "hat",
+          "end": 1.8
+        },
+        {
+          "at": 1.8,
+          "charIndex": 33,
+          "word": "hier",
+          "end": 1.94
+        },
+        {
+          "at": 1.94,
+          "charIndex": 38,
+          "word": "keinen",
+          "end": 2.22
+        },
+        {
+          "at": 2.22,
+          "charIndex": 45,
+          "word": "Termin",
+          "end": 2.66
+        },
+        {
+          "at": 2.8,
+          "charIndex": 53,
+          "word": "Ich",
+          "end": 2.96
+        },
+        {
+          "at": 2.96,
+          "charIndex": 57,
+          "word": "schon",
+          "end": 3.22
+        },
+        {
+          "at": 3.38,
+          "charIndex": 64,
+          "word": "Und",
+          "end": 3.62
+        },
+        {
+          "at": 3.62,
+          "charIndex": 68,
+          "word": "zwar",
+          "end": 3.78
+        },
+        {
+          "at": 3.78,
+          "charIndex": 73,
+          "word": "mit",
+          "end": 3.94
+        },
+        {
+          "at": 3.94,
+          "charIndex": 77,
+          "word": "Ihnen",
+          "end": 4.2
+        },
+        {
+          "at": 4.2,
+          "charIndex": 84,
+          "word": "Sorgen",
+          "end": 4.5
+        },
+        {
+          "at": 4.5,
+          "charIndex": 91,
+          "word": "Sie",
+          "end": 4.64
+        },
+        {
+          "at": 4.64,
+          "charIndex": 95,
+          "word": "jetzt",
+          "end": 4.84
+        },
+        {
+          "at": 4.84,
+          "charIndex": 101,
+          "word": "für",
+          "end": 5.02
+        },
+        {
+          "at": 5.02,
+          "charIndex": 105,
+          "word": "Ruhe",
+          "end": 5.34
+        }
+      ],
+      "sha256": "0b56ed3eafe38eb594834d42ca09566628f6ba3e466b6896cb3512d2b6f36f51",
+      "bytes": 94508,
+      "sampleRateHz": 48000,
+      "channels": 1,
+      "bitrateBitsPerSecond": 128000,
+      "file": "assets/voices/knick/knick-phone-reaction-2.mp3"
+    },
+    {
+      "clipId": "knick-phone-reaction-3",
+      "actorId": "clerk-3",
+      "voiceId": "amt-brunhilde-knick",
+      "profileId": "b080c7d95ecd418fb428282461d7fbe7",
+      "text": "Das ist das dritte Mal! Noch ein einziger Anruf, und ich breche Ihre Anmeldung ab. Mein Stempel wartet nicht auf Ihre Mailbox!",
+      "english": "That is the third time! One more call and I will cancel your registration. My stamp does not wait for your voicemail!",
+      "sourceLocator": "buergeramt-story.js phoneWarnings[2]",
+      "trigger": "buergeramt-phone-reaction",
+      "deliveryListening": "NOT RUN (silent authoring policy)",
+      "approval": {
+        "status": "user-approved",
+        "date": "2026-10-13",
+        "instruction": "Frau Knick has different reactions for repeated telephone calls, aborting the interaction on the fourth call.",
+        "scope": "Four exact integrator-authored repeat-call reactions, selected Knick profile and unchanged production processing",
+        "listeningConfirmed": false
+      },
+      "seed": 71002,
+      "synthesisAttempt": 1,
+      "referenceSha256": "901e9ad60eda5cbb36337b12864b6a2b0d133570acb90941b9eabd9888c16351",
+      "authoringHelperSha256": "de00ee31301b812dfd1267981690fbc45b6357465290a5ec26b7e8b233436032",
+      "rendererInputText": "Das ist das dritte Mal! Noch ein einziger Anruf, und ich breche Ihre Anmeldung ab. Mein Stempel wartet nicht auf Ihre Mailbox!",
+      "decode": {
+        "maxSpeechTokens": 424,
+        "attentionHooksBefore": 0,
+        "generatedSpeechTokens": 172,
+        "eosReached": true,
+        "eosKind": "analyzer-forced",
+        "eosSuppressionObservedSteps": 160,
+        "modelEosRestoredSteps": 0,
+        "alignmentFirstCompletedStep": 161,
+        "nativeAnalyzerSourceSha256": "d8430efa92aedb8e59b782c1d299fe7238570eecea9d293c0981a5ee2e82c8c7",
+        "eosPolicy": "Native analyzer unchanged; observation only",
+        "t3InferenceSeconds": 11.3,
+        "temporaryAnalyzerHooksRemoved": 3,
+        "attentionHooksAfter": 0,
+        "eosTraceSha256": "5e6248b021323aad2142260fb3986d7db54da6298b585330a67fe43ca7c89ed6"
+      },
+      "rendererInputBasis": "exact authored source",
+      "requestSha256": "ac8675b45a8b8f510e74d281070621fd26846913fec6f8bd764dc3cec17586c2",
+      "referenceOriginalSha256": "f87daaf53e9e3183065dbe38a65097f5c8df3ae11454ea56676a8298800683c2",
+      "profileJsonSha256": "4071c9052ebb393358d9957cc5f2271d93c52f13b747fad9f5253bd81b00ce66",
+      "rawSha256": "a41fe3c468760632427d83979dd78ce010e6c09ceaee2ed8d3e3e4536603ae9e",
+      "renderer": "ResembleAI/Chatterbox Multilingual V2 0.1.7",
+      "modelRevision": "5bb1f6ee58e50c3b8d408bc82a6d3740c2db6e18",
+      "modelLicense": "MIT",
+      "referenceLicense": "CC0-1.0 (EmoDB original, transformed reference)",
+      "durationSeconds": 6.84,
+      "renderSeconds": 12.41,
+      "synthesis": {
+        "exaggeration": 0.5,
+        "exaggerationReason": null,
+        "temperature": 0.65,
+        "repetitionPenalty": 3.0,
+        "cfgWeight": 0.6,
+        "languageId": "de",
+        "device": "cuda",
+        "precision": "fp16",
+        "t3WeightPrecision": "float16",
+        "conditioningPrecision": "float32",
+        "autocastPrecision": "float16",
+        "conditioningCached": true,
+        "referenceReconditionedForProfile": "b080c7d95ecd418fb428282461d7fbe7",
+        "referenceConditioningVerifiedFloat32": true,
+        "modelSessionReused": false,
+        "cpuThreads": 2,
+        "inferenceMode": true
+      },
+      "listening": "pending",
+      "status": "eligible exact-text recording; human listening pending",
+      "processing": "[0:a]highpass=f=65,lowpass=f=7600,asplit[clean][wet];[wet]rubberband=pitch=0.78,lowpass=f=1450,volume=0.16[shadow];[clean][shadow]amix=inputs=2:duration=first:normalize=0[a]",
+      "processingSha256": "1c7968d73192bfbf5d2b759fce5dc07b092badbd133718ae05d67dbdda72ccb2",
+      "normalization": {
+        "targetLufs": -18,
+        "targetTruePeakDbtp": -1.5,
+        "filter": "loudnorm=I=-15.32:TP=-1.8:LRA=11:linear=false",
+        "iterations": 4
+      },
+      "integratedLufs": -18.24,
+      "truePeakDbtp": -2.09,
+      "asr": "Das ist das dritte Mal. Noch ein einziger Anruf und ich breche Ihre Anmeldung ab. Mein Stempel wartet nicht auf Ihre Mailbox.",
+      "asrWordExact": true,
+      "asrLiteralWordExact": true,
+      "asrNormalization": "case/punctuation, German numeric and A38 spoken equivalents, guarded full-hour and date-ordinal equivalents, section sign/Paragraf orthography, German compound spacing",
+      "asrModel": "independent faster-whisper, cached local model, cpu int8 (effective int8_float32), no script prompt",
+      "asrCpuThreads": 2,
+      "asrDevice": "cpu",
+      "asrEffectiveComputeType": "int8_float32",
+      "asrLanguageId": "de",
+      "asrComputeType": "int8",
+      "asrScriptPrompt": null,
+      "asrBeamSize": 1,
+      "asrReadings": [
+        {
+          "beamSize": 1,
+          "transcript": "Das ist das dritte Mal. Noch ein einziger Anruf und ich breche Ihre Anmeldung ab. Mein Stempel wartet nicht auf Ihre Mailbox.",
+          "transcribeSeconds": 16.69,
+          "words": [
+            {
+              "word": " Das",
+              "start": 0.0,
+              "end": 0.26
+            },
+            {
+              "word": " ist",
+              "start": 0.26,
+              "end": 0.4
+            },
+            {
+              "word": " das",
+              "start": 0.4,
+              "end": 0.58
+            },
+            {
+              "word": " dritte",
+              "start": 0.58,
+              "end": 0.94
+            },
+            {
+              "word": " Mal.",
+              "start": 0.94,
+              "end": 1.24
+            },
+            {
+              "word": " Noch",
+              "start": 1.4,
+              "end": 1.62
+            },
+            {
+              "word": " ein",
+              "start": 1.62,
+              "end": 1.8
+            },
+            {
+              "word": " einziger",
+              "start": 1.8,
+              "end": 2.26
+            },
+            {
+              "word": " Anruf",
+              "start": 2.26,
+              "end": 2.76
+            },
+            {
+              "word": " und",
+              "start": 2.76,
+              "end": 2.9
+            },
+            {
+              "word": " ich",
+              "start": 2.9,
+              "end": 3.02
+            },
+            {
+              "word": " breche",
+              "start": 3.02,
+              "end": 3.32
+            },
+            {
+              "word": " Ihre",
+              "start": 3.32,
+              "end": 3.5
+            },
+            {
+              "word": " Anmeldung",
+              "start": 3.5,
+              "end": 4.04
+            },
+            {
+              "word": " ab.",
+              "start": 4.04,
+              "end": 4.28
+            },
+            {
+              "word": " Mein",
+              "start": 4.52,
+              "end": 4.72
+            },
+            {
+              "word": " Stempel",
+              "start": 4.72,
+              "end": 5.16
+            },
+            {
+              "word": " wartet",
+              "start": 5.16,
+              "end": 5.48
+            },
+            {
+              "word": " nicht",
+              "start": 5.48,
+              "end": 5.68
+            },
+            {
+              "word": " auf",
+              "start": 5.68,
+              "end": 5.86
+            },
+            {
+              "word": " Ihre",
+              "start": 5.86,
+              "end": 6.04
+            },
+            {
+              "word": " Mailbox.",
+              "start": 6.04,
+              "end": 6.6
+            }
+          ]
+        }
+      ],
+      "asrModelSha256": "e76620f83d5f5b69efd3d87e3dc180c1bd21df9fbebacfd4335e5e1efcc018da",
+      "asrModelDirectoryName": "voice-asr-model",
+      "wordCues": [
+        {
+          "at": 0.0,
+          "charIndex": 0,
+          "word": "Das",
+          "end": 0.26
+        },
+        {
+          "at": 0.26,
+          "charIndex": 4,
+          "word": "ist",
+          "end": 0.4
+        },
+        {
+          "at": 0.4,
+          "charIndex": 8,
+          "word": "das",
+          "end": 0.58
+        },
+        {
+          "at": 0.58,
+          "charIndex": 12,
+          "word": "dritte",
+          "end": 0.94
+        },
+        {
+          "at": 0.94,
+          "charIndex": 19,
+          "word": "Mal",
+          "end": 1.24
+        },
+        {
+          "at": 1.4,
+          "charIndex": 24,
+          "word": "Noch",
+          "end": 1.62
+        },
+        {
+          "at": 1.62,
+          "charIndex": 29,
+          "word": "ein",
+          "end": 1.8
+        },
+        {
+          "at": 1.8,
+          "charIndex": 33,
+          "word": "einziger",
+          "end": 2.26
+        },
+        {
+          "at": 2.26,
+          "charIndex": 42,
+          "word": "Anruf",
+          "end": 2.76
+        },
+        {
+          "at": 2.76,
+          "charIndex": 49,
+          "word": "und",
+          "end": 2.9
+        },
+        {
+          "at": 2.9,
+          "charIndex": 53,
+          "word": "ich",
+          "end": 3.02
+        },
+        {
+          "at": 3.02,
+          "charIndex": 57,
+          "word": "breche",
+          "end": 3.32
+        },
+        {
+          "at": 3.32,
+          "charIndex": 64,
+          "word": "Ihre",
+          "end": 3.5
+        },
+        {
+          "at": 3.5,
+          "charIndex": 69,
+          "word": "Anmeldung",
+          "end": 4.04
+        },
+        {
+          "at": 4.04,
+          "charIndex": 79,
+          "word": "ab",
+          "end": 4.28
+        },
+        {
+          "at": 4.52,
+          "charIndex": 83,
+          "word": "Mein",
+          "end": 4.72
+        },
+        {
+          "at": 4.72,
+          "charIndex": 88,
+          "word": "Stempel",
+          "end": 5.16
+        },
+        {
+          "at": 5.16,
+          "charIndex": 96,
+          "word": "wartet",
+          "end": 5.48
+        },
+        {
+          "at": 5.48,
+          "charIndex": 103,
+          "word": "nicht",
+          "end": 5.68
+        },
+        {
+          "at": 5.68,
+          "charIndex": 109,
+          "word": "auf",
+          "end": 5.86
+        },
+        {
+          "at": 5.86,
+          "charIndex": 113,
+          "word": "Ihre",
+          "end": 6.04
+        },
+        {
+          "at": 6.04,
+          "charIndex": 118,
+          "word": "Mailbox",
+          "end": 6.6
+        }
+      ],
+      "sha256": "2656d0976114f69ca8f17592cc11de34e86fe76ffcba58014c94985eb048f980",
+      "bytes": 110252,
+      "sampleRateHz": 48000,
+      "channels": 1,
+      "bitrateBitsPerSecond": 128000,
+      "file": "assets/voices/knick/knick-phone-reaction-3.mp3"
+    },
+    {
+      "clipId": "knick-phone-reaction-4",
+      "actorId": "clerk-3",
+      "voiceId": "amt-brunhilde-knick",
+      "profileId": "b080c7d95ecd418fb428282461d7fbe7",
+      "text": "VIER ANRUFE! Das reicht. Ich breche Ihre Anmeldung ab. Ihr Termin ist annulliert. Raus! Ziehen Sie eine neue Nummer, wenn Ihr Telefon Feierabend hat!",
+      "english": "FOUR CALLS! Enough. I am cancelling your registration. Your appointment is annulled. Out! Take a new number when your phone has clocked off!",
+      "sourceLocator": "buergeramt-story.js phoneWarnings[3]",
+      "trigger": "buergeramt-phone-reaction",
+      "deliveryListening": "NOT RUN (silent authoring policy)",
+      "approval": {
+        "status": "user-approved",
+        "date": "2026-10-13",
+        "instruction": "Frau Knick has different reactions for repeated telephone calls, aborting the interaction on the fourth call.",
+        "scope": "Four exact integrator-authored repeat-call reactions, selected Knick profile and unchanged production processing",
+        "listeningConfirmed": false
+      },
+      "parentClipId": "knick-phone-reaction-4",
+      "partIndex": 0,
+      "seed": 71000,
+      "synthesisAttempt": 3,
+      "referenceSha256": "901e9ad60eda5cbb36337b12864b6a2b0d133570acb90941b9eabd9888c16351",
+      "authoringHelperSha256": "de00ee31301b812dfd1267981690fbc45b6357465290a5ec26b7e8b233436032",
+      "rendererInputText": "VIER ANRUFE!",
+      "decode": {
+        "eosReached": true,
+        "basis": "Every complete original part generation has explicit native EOS; each part delivery has independent encoded-word audit, and any edited endpoint is separately recorded without an EOS claim at the cut"
+      },
+      "rendererInputBasis": "exact authored source",
+      "requestSha256": "ac8675b45a8b8f510e74d281070621fd26846913fec6f8bd764dc3cec17586c2",
+      "referenceOriginalSha256": "f87daaf53e9e3183065dbe38a65097f5c8df3ae11454ea56676a8298800683c2",
+      "profileJsonSha256": "4071c9052ebb393358d9957cc5f2271d93c52f13b747fad9f5253bd81b00ce66",
+      "rawSha256": "fb2804c3f8682d54048c395ed9084cf1ff1422a1dfb89318f858e8dc591dc005",
+      "renderer": "ResembleAI/Chatterbox Multilingual V2 0.1.7",
+      "modelRevision": "5bb1f6ee58e50c3b8d408bc82a6d3740c2db6e18",
+      "modelLicense": "MIT",
+      "referenceLicense": "CC0-1.0 (EmoDB original, transformed reference)",
+      "durationSeconds": 13.64,
+      "renderSeconds": 58.87,
+      "synthesis": {
+        "exaggeration": 0.5,
+        "exaggerationReason": null,
+        "temperature": 0.65,
+        "repetitionPenalty": 3.0,
+        "cfgWeight": 0.6,
+        "languageId": "de",
+        "device": "cuda",
+        "precision": "fp16",
+        "t3WeightPrecision": "float16",
+        "conditioningPrecision": "float32",
+        "autocastPrecision": "float16",
+        "conditioningCached": true,
+        "referenceReconditionedForProfile": "b080c7d95ecd418fb428282461d7fbe7",
+        "referenceConditioningVerifiedFloat32": true,
+        "modelSessionReused": false,
+        "cpuThreads": 2,
+        "inferenceMode": true
+      },
+      "listening": "pending",
+      "status": "eligible exact-text recording; human listening pending",
+      "processing": "[0:a]highpass=f=65,lowpass=f=7600,asplit[clean][wet];[wet]rubberband=pitch=0.78,lowpass=f=1450,volume=0.16[shadow];[clean][shadow]amix=inputs=2:duration=first:normalize=0[a]",
+      "processingSha256": "1c7968d73192bfbf5d2b759fce5dc07b092badbd133718ae05d67dbdda72ccb2",
+      "normalization": {
+        "targetLufs": -18,
+        "targetTruePeakDbtp": -1.5,
+        "filter": "loudnorm=I=-13.629999999999999:TP=-1.8:LRA=11:linear=false",
+        "iterations": 5
+      },
+      "asrLiteralWordExact": true,
+      "asrNormalization": "case/punctuation, German numeric and A38 spoken equivalents, guarded full-hour and date-ordinal equivalents, section sign/Paragraf orthography, German compound spacing",
+      "asrModel": "independent faster-whisper, cached local model, cpu int8 (effective int8_float32), no script prompt",
+      "asrCpuThreads": 2,
+      "asrDevice": "cpu",
+      "asrEffectiveComputeType": "int8_float32",
+      "asrLanguageId": "de",
+      "asrComputeType": "int8",
+      "asrScriptPrompt": null,
+      "asrBeamSize": 1,
+      "asrReadings": [
+        {
+          "beamSize": 1,
+          "transcript": "4. Anrufe. Das reicht. Ich breche Ihre Anmeldung ab. Ihr Termin ist annulliert. Raus! Ziehen Sie eine neue Nummer, wenn Ihr Telefon Feierabend hat.",
+          "transcribeSeconds": 14.75,
+          "words": [
+            {
+              "word": " 4.",
+              "start": 0.0,
+              "end": 0.38
+            },
+            {
+              "word": " Anrufe.",
+              "start": 0.58,
+              "end": 1.14
+            },
+            {
+              "word": " Das",
+              "start": 1.58,
+              "end": 2.3
+            },
+            {
+              "word": " reicht.",
+              "start": 2.3,
+              "end": 2.74
+            },
+            {
+              "word": " Ich",
+              "start": 3.7,
+              "end": 4.42
+            },
+            {
+              "word": " breche",
+              "start": 4.42,
+              "end": 4.9
+            },
+            {
+              "word": " Ihre",
+              "start": 4.9,
+              "end": 5.12
+            },
+            {
+              "word": " Anmeldung",
+              "start": 5.12,
+              "end": 5.74
+            },
+            {
+              "word": " ab.",
+              "start": 5.74,
+              "end": 6.0
+            },
+            {
+              "word": " Ihr",
+              "start": 6.5,
+              "end": 7.0
+            },
+            {
+              "word": " Termin",
+              "start": 7.0,
+              "end": 7.52
+            },
+            {
+              "word": " ist",
+              "start": 7.52,
+              "end": 7.74
+            },
+            {
+              "word": " annulliert.",
+              "start": 7.74,
+              "end": 8.36
+            },
+            {
+              "word": " Raus!",
+              "start": 8.54,
+              "end": 9.14
+            },
+            {
+              "word": " Ziehen",
+              "start": 9.28,
+              "end": 9.58
+            },
+            {
+              "word": " Sie",
+              "start": 9.58,
+              "end": 9.72
+            },
+            {
+              "word": " eine",
+              "start": 9.72,
+              "end": 9.96
+            },
+            {
+              "word": " neue",
+              "start": 9.96,
+              "end": 10.3
+            },
+            {
+              "word": " Nummer,",
+              "start": 10.3,
+              "end": 10.58
+            },
+            {
+              "word": " wenn",
+              "start": 10.78,
+              "end": 11.0
+            },
+            {
+              "word": " Ihr",
+              "start": 11.0,
+              "end": 11.14
+            },
+            {
+              "word": " Telefon",
+              "start": 11.14,
+              "end": 11.58
+            },
+            {
+              "word": " Feierabend",
+              "start": 11.58,
+              "end": 12.32
+            },
+            {
+              "word": " hat.",
+              "start": 12.32,
+              "end": 12.56
+            }
+          ]
+        }
+      ],
+      "asrModelSha256": "e76620f83d5f5b69efd3d87e3dc180c1bd21df9fbebacfd4335e5e1efcc018da",
+      "asrModelDirectoryName": "voice-asr-model",
+      "bytes": 219308,
+      "sampleRateHz": 48000,
+      "channels": 1,
+      "bitrateBitsPerSecond": 128000,
+      "rescueParts": [
+        {
+          "clipId": "knick-phone-reaction-4-part-01",
+          "text": "VIER ANRUFE!",
+          "voiceId": "amt-brunhilde-knick",
+          "profileId": "b080c7d95ecd418fb428282461d7fbe7",
+          "referenceSha256": "901e9ad60eda5cbb36337b12864b6a2b0d133570acb90941b9eabd9888c16351",
+          "rawSha256": "1aebc9932d6affce2eb68525eabea25b99d6e9e62aeca4fe502cea6283ff1548",
+          "encodedSha256": "6087c2d30e768af34298ddef47c1d4b80a47e491ce4c704e88d96a81bcea0653",
+          "asr": "4. Anrufe.",
+          "asrWordExact": true,
+          "eosReached": true,
+          "eosKind": "analyzer-forced",
+          "decode": {
+            "maxSpeechTokens": 250,
+            "attentionHooksBefore": 0,
+            "generatedSpeechTokens": 52,
+            "eosReached": true,
+            "eosKind": "analyzer-forced",
+            "eosSuppressionObservedSteps": 23,
+            "modelEosRestoredSteps": 0,
+            "alignmentFirstCompletedStep": 23,
+            "nativeAnalyzerSourceSha256": "d8430efa92aedb8e59b782c1d299fe7238570eecea9d293c0981a5ee2e82c8c7",
+            "eosPolicy": "Native analyzer unchanged; observation only",
+            "t3InferenceSeconds": 8.56,
+            "temporaryAnalyzerHooksRemoved": 6,
+            "attentionHooksAfter": 0,
+            "eosTraceSha256": "e51c23f28e5c445e0423b03eb9513600139b1e5595400e9ffe7dfdbed4e1cfb6"
+          },
+          "renderer": "ResembleAI/Chatterbox Multilingual V2 0.1.7",
+          "modelRevision": "5bb1f6ee58e50c3b8d408bc82a6d3740c2db6e18",
+          "asrModelSha256": "e76620f83d5f5b69efd3d87e3dc180c1bd21df9fbebacfd4335e5e1efcc018da",
+          "asrScriptPrompt": null,
+          "authoringHelperSha256": "de00ee31301b812dfd1267981690fbc45b6357465290a5ec26b7e8b233436032",
+          "deliveryEditing": null,
+          "synthesis": {
+            "exaggeration": 0.5,
+            "exaggerationReason": null,
+            "temperature": 0.65,
+            "repetitionPenalty": 3.0,
+            "cfgWeight": 0.6,
+            "languageId": "de",
+            "device": "cuda",
+            "precision": "fp16",
+            "t3WeightPrecision": "float16",
+            "conditioningPrecision": "float32",
+            "autocastPrecision": "float16",
+            "conditioningCached": true,
+            "referenceReconditionedForProfile": "b080c7d95ecd418fb428282461d7fbe7",
+            "referenceConditioningVerifiedFloat32": true,
+            "modelSessionReused": false,
+            "cpuThreads": 2,
+            "inferenceMode": true
+          },
+          "synthesisAttempt": 1,
+          "seed": 71000
+        },
+        {
+          "clipId": "knick-phone-reaction-4-part-02",
+          "text": "Das reicht.",
+          "voiceId": "amt-brunhilde-knick",
+          "profileId": "b080c7d95ecd418fb428282461d7fbe7",
+          "referenceSha256": "901e9ad60eda5cbb36337b12864b6a2b0d133570acb90941b9eabd9888c16351",
+          "rawSha256": "4ccd7e923bcba0d4e0e2393fd88fec4f54a7823d939242ae8178bbb0254e5134",
+          "encodedSha256": "4d097268767db25422688e24c920d565ab82c33ce6f5330bf9bfc7c5e27cc282",
+          "asr": "Das reicht.",
+          "asrWordExact": true,
+          "eosReached": true,
+          "eosKind": "analyzer-forced",
+          "decode": {
+            "maxSpeechTokens": 250,
+            "attentionHooksBefore": 0,
+            "generatedSpeechTokens": 54,
+            "eosReached": true,
+            "eosKind": "analyzer-forced",
+            "eosSuppressionObservedSteps": 17,
+            "modelEosRestoredSteps": 0,
+            "alignmentFirstCompletedStep": 14,
+            "nativeAnalyzerSourceSha256": "d8430efa92aedb8e59b782c1d299fe7238570eecea9d293c0981a5ee2e82c8c7",
+            "eosPolicy": "Native analyzer unchanged; observation only",
+            "t3InferenceSeconds": 4.22,
+            "temporaryAnalyzerHooksRemoved": 3,
+            "attentionHooksAfter": 0,
+            "eosTraceSha256": "d419c0cbeebc82aa48cfdab5c0a2e21d975caa96c4562ee3a80fd74f03a1612a"
+          },
+          "renderer": "ResembleAI/Chatterbox Multilingual V2 0.1.7",
+          "modelRevision": "5bb1f6ee58e50c3b8d408bc82a6d3740c2db6e18",
+          "asrModelSha256": "e76620f83d5f5b69efd3d87e3dc180c1bd21df9fbebacfd4335e5e1efcc018da",
+          "asrScriptPrompt": null,
+          "authoringHelperSha256": "de00ee31301b812dfd1267981690fbc45b6357465290a5ec26b7e8b233436032",
+          "deliveryEditing": null,
+          "synthesis": {
+            "exaggeration": 0.5,
+            "exaggerationReason": null,
+            "temperature": 0.65,
+            "repetitionPenalty": 3.0,
+            "cfgWeight": 0.6,
+            "languageId": "de",
+            "device": "cuda",
+            "precision": "fp16",
+            "t3WeightPrecision": "float16",
+            "conditioningPrecision": "float32",
+            "autocastPrecision": "float16",
+            "conditioningCached": true,
+            "referenceReconditionedForProfile": "b080c7d95ecd418fb428282461d7fbe7",
+            "referenceConditioningVerifiedFloat32": true,
+            "modelSessionReused": false,
+            "cpuThreads": 2,
+            "inferenceMode": true
+          },
+          "synthesisAttempt": 1,
+          "seed": 71001
+        },
+        {
+          "clipId": "knick-phone-reaction-4-part-03",
+          "text": "Ich breche Ihre Anmeldung ab.",
+          "voiceId": "amt-brunhilde-knick",
+          "profileId": "b080c7d95ecd418fb428282461d7fbe7",
+          "referenceSha256": "901e9ad60eda5cbb36337b12864b6a2b0d133570acb90941b9eabd9888c16351",
+          "rawSha256": "a250cafc06b227a1565f2207e2e619b208d7c60454c21255cf6103e703cc43a5",
+          "encodedSha256": "2fd3dde63e3838f174a5452382017cfeb8ee7a25334ffe81cf7909c185d6700d",
+          "asr": "Ich breche Ihre Anmeldung ab.",
+          "asrWordExact": true,
+          "eosReached": true,
+          "eosKind": "analyzer-forced",
+          "decode": {
+            "maxSpeechTokens": 250,
+            "attentionHooksBefore": 0,
+            "generatedSpeechTokens": 66,
+            "eosReached": true,
+            "eosKind": "analyzer-forced",
+            "eosSuppressionObservedSteps": 38,
+            "modelEosRestoredSteps": 0,
+            "alignmentFirstCompletedStep": 39,
+            "nativeAnalyzerSourceSha256": "d8430efa92aedb8e59b782c1d299fe7238570eecea9d293c0981a5ee2e82c8c7",
+            "eosPolicy": "Native analyzer unchanged; observation only",
+            "t3InferenceSeconds": 5.95,
+            "temporaryAnalyzerHooksRemoved": 3,
+            "attentionHooksAfter": 0,
+            "eosTraceSha256": "b2fdc9c81d15f45223adb04f22de51ec0413b472611ac698123e73534f31b2bf"
+          },
+          "renderer": "ResembleAI/Chatterbox Multilingual V2 0.1.7",
+          "modelRevision": "5bb1f6ee58e50c3b8d408bc82a6d3740c2db6e18",
+          "asrModelSha256": "e76620f83d5f5b69efd3d87e3dc180c1bd21df9fbebacfd4335e5e1efcc018da",
+          "asrScriptPrompt": null,
+          "authoringHelperSha256": "de00ee31301b812dfd1267981690fbc45b6357465290a5ec26b7e8b233436032",
+          "deliveryEditing": null,
+          "synthesis": {
+            "exaggeration": 0.5,
+            "exaggerationReason": null,
+            "temperature": 0.65,
+            "repetitionPenalty": 3.0,
+            "cfgWeight": 0.6,
+            "languageId": "de",
+            "device": "cuda",
+            "precision": "fp16",
+            "t3WeightPrecision": "float16",
+            "conditioningPrecision": "float32",
+            "autocastPrecision": "float16",
+            "conditioningCached": true,
+            "referenceReconditionedForProfile": "b080c7d95ecd418fb428282461d7fbe7",
+            "referenceConditioningVerifiedFloat32": true,
+            "modelSessionReused": false,
+            "cpuThreads": 2,
+            "inferenceMode": true
+          },
+          "synthesisAttempt": 1,
+          "seed": 71002
+        },
+        {
+          "clipId": "knick-phone-reaction-4-context-04-05",
+          "text": "Ihr Termin ist annulliert. Raus!",
+          "voiceId": "amt-brunhilde-knick",
+          "profileId": "b080c7d95ecd418fb428282461d7fbe7",
+          "referenceSha256": "901e9ad60eda5cbb36337b12864b6a2b0d133570acb90941b9eabd9888c16351",
+          "rawSha256": "ac7b211bf838bdbb9e20225d0ac570ae35374bfa0e6db37539af3dba81470fc5",
+          "encodedSha256": "1edde9230142beb210c28740a7014f16957c751ad77d71f593d850977533f159",
+          "asr": "Ihr Termin ist annulliert. Raus!",
+          "asrWordExact": true,
+          "eosReached": true,
+          "eosKind": "analyzer-forced",
+          "decode": {
+            "maxSpeechTokens": 250,
+            "attentionHooksBefore": 0,
+            "generatedSpeechTokens": 63,
+            "eosReached": true,
+            "eosKind": "analyzer-forced",
+            "eosSuppressionObservedSteps": 51,
+            "modelEosRestoredSteps": 0,
+            "alignmentFirstCompletedStep": 52,
+            "nativeAnalyzerSourceSha256": "d8430efa92aedb8e59b782c1d299fe7238570eecea9d293c0981a5ee2e82c8c7",
+            "eosPolicy": "Native analyzer unchanged; observation only",
+            "t3InferenceSeconds": 4.44,
+            "temporaryAnalyzerHooksRemoved": 6,
+            "attentionHooksAfter": 0,
+            "eosTraceSha256": "f774fe89dbd165483dab9e8a4de230e85d7dcbb97f016d957e35c6848b7f30af"
+          },
+          "renderer": "ResembleAI/Chatterbox Multilingual V2 0.1.7",
+          "modelRevision": "5bb1f6ee58e50c3b8d408bc82a6d3740c2db6e18",
+          "asrModelSha256": "e76620f83d5f5b69efd3d87e3dc180c1bd21df9fbebacfd4335e5e1efcc018da",
+          "asrScriptPrompt": null,
+          "authoringHelperSha256": "de00ee31301b812dfd1267981690fbc45b6357465290a5ec26b7e8b233436032",
+          "deliveryEditing": null,
+          "synthesis": {
+            "exaggeration": 0.5,
+            "exaggerationReason": null,
+            "temperature": 0.65,
+            "repetitionPenalty": 3.0,
+            "cfgWeight": 0.6,
+            "languageId": "de",
+            "device": "cuda",
+            "precision": "fp16",
+            "t3WeightPrecision": "float16",
+            "conditioningPrecision": "float32",
+            "autocastPrecision": "float16",
+            "conditioningCached": true,
+            "referenceReconditionedForProfile": "b080c7d95ecd418fb428282461d7fbe7",
+            "referenceConditioningVerifiedFloat32": true,
+            "modelSessionReused": false,
+            "cpuThreads": 2,
+            "inferenceMode": true
+          },
+          "synthesisAttempt": 1,
+          "seed": 71003
+        },
+        {
+          "clipId": "knick-phone-reaction-4-part-06",
+          "text": "Ziehen Sie eine neue Nummer, wenn Ihr Telefon Feierabend hat!",
+          "voiceId": "amt-brunhilde-knick",
+          "profileId": "b080c7d95ecd418fb428282461d7fbe7",
+          "referenceSha256": "901e9ad60eda5cbb36337b12864b6a2b0d133570acb90941b9eabd9888c16351",
+          "rawSha256": "44a38d8614db479c108c38a6cc8c65baef21832d472d65d9f20dc20f7f9e3136",
+          "encodedSha256": "564a21aee7704d8d911ca76681210669d6d64e4805276d133162a00d5df67276",
+          "asr": "Ziehen Sie eine neue Nummer, wenn Ihr Telefon Feierabend hat.",
+          "asrWordExact": true,
+          "eosReached": true,
+          "eosKind": "analyzer-forced",
+          "decode": {
+            "maxSpeechTokens": 280,
+            "attentionHooksBefore": 0,
+            "generatedSpeechTokens": 111,
+            "eosReached": true,
+            "eosKind": "analyzer-forced",
+            "eosSuppressionObservedSteps": 79,
+            "modelEosRestoredSteps": 0,
+            "alignmentFirstCompletedStep": 78,
+            "nativeAnalyzerSourceSha256": "d8430efa92aedb8e59b782c1d299fe7238570eecea9d293c0981a5ee2e82c8c7",
+            "eosPolicy": "Native analyzer unchanged; observation only",
+            "t3InferenceSeconds": 19.81,
+            "temporaryAnalyzerHooksRemoved": 3,
+            "attentionHooksAfter": 0,
+            "eosTraceSha256": "ff588a9e92022284d04a43340d58e925d1dde19e36c2d7b25bc7e1bb8344fb29"
+          },
+          "renderer": "ResembleAI/Chatterbox Multilingual V2 0.1.7",
+          "modelRevision": "5bb1f6ee58e50c3b8d408bc82a6d3740c2db6e18",
+          "asrModelSha256": "e76620f83d5f5b69efd3d87e3dc180c1bd21df9fbebacfd4335e5e1efcc018da",
+          "asrScriptPrompt": null,
+          "authoringHelperSha256": "de00ee31301b812dfd1267981690fbc45b6357465290a5ec26b7e8b233436032",
+          "deliveryEditing": null,
+          "synthesis": {
+            "exaggeration": 0.5,
+            "exaggerationReason": null,
+            "temperature": 0.65,
+            "repetitionPenalty": 3.0,
+            "cfgWeight": 0.6,
+            "languageId": "de",
+            "device": "cuda",
+            "precision": "fp16",
+            "t3WeightPrecision": "float16",
+            "conditioningPrecision": "float32",
+            "autocastPrecision": "float16",
+            "conditioningCached": true,
+            "referenceReconditionedForProfile": "b080c7d95ecd418fb428282461d7fbe7",
+            "referenceConditioningVerifiedFloat32": true,
+            "modelSessionReused": false,
+            "cpuThreads": 2,
+            "inferenceMode": true
+          },
+          "synthesisAttempt": 1,
+          "seed": 71005
+        }
+      ],
+      "rescuePlanSha256": "74818280f7581a116f8b61e16e37a5d9d6c19ac099dc589ae9d98849ca0fb975",
+      "rescueAuthorization": "2026-10-13 integrator explicitly authorized context replan: replace standalone parts 4 and 5 with exact Ihr Termin ist annulliert. Raus!; preserve prior six-part plan and both failed isolated Raus takes, reuse successful parts 1,2,3,6 unchanged, one retake maximum for the new contextual chunk. Same voice/reference/recipe/native guards, independent encoded words and levels for parts and final joined MP3. Listening NOT RUN.",
+      "joinProcessing": "Concatenate dry24kHz mono parts with their natural endpoint silence; apply selected undertone and encoded normalization once to the full line",
+      "integratedLufs": -18.23,
+      "truePeakDbtp": -2.2,
+      "asr": "4. Anrufe. Das reicht. Ich breche Ihre Anmeldung ab. Ihr Termin ist annulliert. Raus! Ziehen Sie eine neue Nummer, wenn Ihr Telefon Feierabend hat.",
+      "asrWordExact": true,
+      "wordCues": [
+        {
+          "at": 0.0,
+          "charIndex": 0,
+          "word": "VIER",
+          "end": 0.38
+        },
+        {
+          "at": 0.58,
+          "charIndex": 5,
+          "word": "ANRUFE",
+          "end": 1.14
+        },
+        {
+          "at": 1.58,
+          "charIndex": 13,
+          "word": "Das",
+          "end": 2.3
+        },
+        {
+          "at": 2.3,
+          "charIndex": 17,
+          "word": "reicht",
+          "end": 2.74
+        },
+        {
+          "at": 3.7,
+          "charIndex": 25,
+          "word": "Ich",
+          "end": 4.42
+        },
+        {
+          "at": 4.42,
+          "charIndex": 29,
+          "word": "breche",
+          "end": 4.9
+        },
+        {
+          "at": 4.9,
+          "charIndex": 36,
+          "word": "Ihre",
+          "end": 5.12
+        },
+        {
+          "at": 5.12,
+          "charIndex": 41,
+          "word": "Anmeldung",
+          "end": 5.74
+        },
+        {
+          "at": 5.74,
+          "charIndex": 51,
+          "word": "ab",
+          "end": 6.0
+        },
+        {
+          "at": 6.5,
+          "charIndex": 55,
+          "word": "Ihr",
+          "end": 7.0
+        },
+        {
+          "at": 7.0,
+          "charIndex": 59,
+          "word": "Termin",
+          "end": 7.52
+        },
+        {
+          "at": 7.52,
+          "charIndex": 66,
+          "word": "ist",
+          "end": 7.74
+        },
+        {
+          "at": 7.74,
+          "charIndex": 70,
+          "word": "annulliert",
+          "end": 8.36
+        },
+        {
+          "at": 8.54,
+          "charIndex": 82,
+          "word": "Raus",
+          "end": 9.14
+        },
+        {
+          "at": 9.28,
+          "charIndex": 88,
+          "word": "Ziehen",
+          "end": 9.58
+        },
+        {
+          "at": 9.58,
+          "charIndex": 95,
+          "word": "Sie",
+          "end": 9.72
+        },
+        {
+          "at": 9.72,
+          "charIndex": 99,
+          "word": "eine",
+          "end": 9.96
+        },
+        {
+          "at": 9.96,
+          "charIndex": 104,
+          "word": "neue",
+          "end": 10.3
+        },
+        {
+          "at": 10.3,
+          "charIndex": 109,
+          "word": "Nummer",
+          "end": 10.58
+        },
+        {
+          "at": 10.78,
+          "charIndex": 117,
+          "word": "wenn",
+          "end": 11.0
+        },
+        {
+          "at": 11.0,
+          "charIndex": 122,
+          "word": "Ihr",
+          "end": 11.14
+        },
+        {
+          "at": 11.14,
+          "charIndex": 126,
+          "word": "Telefon",
+          "end": 11.58
+        },
+        {
+          "at": 11.58,
+          "charIndex": 134,
+          "word": "Feierabend",
+          "end": 12.32
+        },
+        {
+          "at": 12.32,
+          "charIndex": 145,
+          "word": "hat",
+          "end": 12.56
+        }
+      ],
+      "sha256": "2b888156217fb7737b5f07bd7d891ed6878c311b60a5d9e87a754a20c16fdb3f",
+      "file": "assets/voices/knick/knick-phone-reaction-4.mp3"
+    }
+  ],
+  "heldPrivate": [],
+  "approvedExistingReuse": []
+}

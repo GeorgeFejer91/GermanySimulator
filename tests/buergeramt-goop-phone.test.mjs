@@ -121,11 +121,14 @@ test('silent readable fallback conserves its progress under a gradual tempo chan
  const done=link.sent.find(message=>message.type==='police-done');assert.equal(done.mode,'fallback');assert.equal(done.atMs,1000+remaining);
 });
 
-test('Web Speech samples tempo for each onset without pretending to retime active speech',()=>{
- const h=harness('phone'),link=h.incoming();link.message({type:'office-tempo',rate:.5});h.node('phone-answer').click();h.tick(20);
+test('only the personalized greeting samples tempo; fixed dialogue remains recorded',()=>{
+ const h=harness('phone',{candidatePhone:true}),link=h.phoneReady();h.node('phone-name').value='Erika Mustermann';h.node('phone-form').dispatchEvent(new Event('submit',{cancelable:true}));
+ link.message({type:'ticket',number:'B-223',counter:3});link.message({type:'call-arm',id:'grass'});link.message({type:'call',id:'grass',line:h.window.BuergeramtStory.call.body,greeting:h.window.BuergeramtStory.call.greeting('Erika Mustermann'),ringAtPhoneMs:0,ringAtUtcMs:null,leadMs:2200});
+ link.message({type:'office-tempo',rate:.5});h.node('phone-answer').click();
  const first=h.synth.current;assert.ok(Math.abs(first.rate-.87*.5)<1e-9);assert.ok(Math.abs(first.pitch-.66*.5)<1e-9);
- link.message({type:'office-tempo',rate:.7});assert.ok(Math.abs(first.rate-.87*.5)<1e-9);h.synth.end();h.tick(1);
- link.message({type:'police-line',index:0,line:h.window.BuergeramtStory.police[0]});h.tick(20);assert.ok(Math.abs(h.synth.current.rate-.93*.7)<1e-9);
+ link.message({type:'office-tempo',rate:.7});assert.ok(Math.abs(first.rate-.87*.5)<1e-9);h.synth.end();h.tick(20);
+ assert.equal(h.audio.recordings[0].playbackRate,.7);h.audio.recordings[0].end();h.tick(1);
+ link.message({type:'police-line',index:0,line:h.window.BuergeramtStory.police[0]});h.tick(20);assert.equal(h.audio.recordings[1].playbackRate,.7);assert.equal(h.synth.spoken.length,1);
 });
 
 test('expired or hidden phone attempts cancel media and cannot absorb later tempo',()=>{

@@ -1,5 +1,17 @@
 # Speech catalog and subtitle authority
 
+`jobcenter-overlord` is the Jobcenter encounter's one recorded speaker and
+stable game voice ID. Its catalog `source` exactly matches the German text in
+`assets/audio/jobcenter/overlord.json`; the paired English subtitle stays with
+that one recording. `speechClip("jobcenter-overlord")` exposes `text`,
+`recording`, `english` and `durationMs` (26,783). The 40 Hz energy and attack
+arrays in the sidecar are measured from the final encoded MP3 and serve the
+flame animation, not speech timing authority. The 214,892-byte MP3 is requested
+on Jobcenter entry through one visit-owned media element, with no startup
+preload or overlapping city speech. Its SHA-256, profile receipt, render recipe, source
+attribution and encoded levels are pinned with the asset and cast. Use
+authorization and automated word matching are recorded; listening is NOT RUN.
+
 The first-person mirror monologue is `player-potato-mirror`, one continuous
 Hans-Peter Mustermann take on `spieler-hans-peter-mustermann` and selected native
 profile `b027d18a4fc748cabb133fbb14077500`. Its separate mirror manifest supplements
@@ -139,3 +151,22 @@ Native recorded playback uses actual currentTime advances to renew a finite 20-s
 ### Always-on office subtitles and portrait continuity (2026-10-12)
 
 Subtitles are always enabled. The shared language control defaults to German and preserves an explicitly saved English selection; switching to English queues the existing three-line subtitle approval audio. Bürgeramt speech uses that same rail, with recording-playhead pagination, immediate language refresh, and cancellation cleanup. Speaker names and source dialogue are not duplicated in the office overlay. Voices retain their authored German/Denglisch. Desktop police captions use the same rail on phone playback receipts; the paired phone keeps its call controls. The Steinmeier portrait retains every authored word in one newly synthesized full-text recording. The subtitle parts follow the native recording playhead; caption-only fallback uses the same bounded reading clock. One media completion returns to the current waiting state. The existing visit/cue owner handles hidden pause, cancellation and stale receipts. No movement, collision, camera, scale or painted animation behavior changes in this scope.
+
+
+### Repeated calls and personalized Kripo opening (2026-10-13)
+
+`phoneWarnings` owns four escalating selected-Knick reactions. Their supplement
+is `assets/voices/knick/phone-reactions-manifest.json`, merged through the existing
+curator and exact speaker/text lookup. The fourth arrival commits cancellation
+before its complete dismissal. Receipt and attempt guards own all continuations.
+The Kripo opening interpolates the registered name only in the short German greeting. It then plays the exact fixed body from `kriminalpolizei-opening-body.mp3`, derived at a verified sentence pause from the original selected Kripo take. One composite cue owns the complete desktop/English caption and completion; synthesis failure continues to the recording. Knick's local name model remains separate. `phone-dismissal-manifest.json` supplies the new last warning, short Reichsadler expulsion and post-Kripo dismissal, using her unchanged selected profile. These three clips plus the Kripo excerpt total 240,752 bytes / 19.02 seconds; largest mono 48 kHz Float32 decode 1,608,960 bytes. Exact encoded ASR, native EOS for new synthesis, levels and hashes pass. Listening remains NOT RUN.
+
+The four accepted clips total 555,056 bytes / 34.44 seconds; the largest
+single decoded mono 48 kHz Float32 clip is 2,618,880 bytes. They use the
+existing lazy media owner and selected Knick profile. The fourth uses an
+approved five-part contextual rescue with exact independent recognition of
+the final joined MP3; failed takes remain private. Native EOS, encoded ASR,
+levels and hashes pass; perceptual listening remains NOT RUN. The existing
+curator now shares repeated approval, provenance and trigger metadata along
+with production receipts, saving 128,252 bytes while preserving every complete
+runtime recording entry. No new model, service or background polling is added.

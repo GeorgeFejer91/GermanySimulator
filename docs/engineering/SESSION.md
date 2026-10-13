@@ -111,3 +111,30 @@ every registered native key and affected action interval, atlas fallback, closed
 paint and alpha, plus real media playback, mobile emulation and unchanged browser
 budgets. Physics and Camera reviews must bind the final same candidate. Source
 and emulated checks do not imply physical-device or perceptual listening evidence.
+
+# Browser-local Knick name announcements — 2026-10-13
+
+Integrator-owned in the managed knick-local-speech worktree, now including the
+published independent-ticket and four-call changes through a852920. Scope: initial name capture, a lazy
+speech worker and selected-Knick browser model under assets/, appointment
+readiness and speech lifecycle, focused source/browser/voice checks, cache
+identities and owning voice/episode/asset documents. Authoring artifacts remain
+private in the existing Music library. Preserve selected voice/reference hashes,
+static hosting, arbitrary entered names, mute behavior, exact captions,
+independent ticket receipts, cancellation, resets and deadlines. Prepare at the
+first name source; skipping the opening form uses the phone's entry instead.
+No world geometry, placement, movement, camera, sprite depth or scale changes;
+the two world reviewers are outside this speech-only scope. Physical Android
+and perceptual listening remain separate checks. The initial voice curator passes.
+Risk-based checks cover pending readiness, failure/mute, stale result ownership,
+first/second form inputs, repeated tickets, hidden/exit/replay teardown, actual
+German inference, downloaded bytes, browser input/render budgets and captions.
+Use existing tests and ignored captured command/browser evidence, per SKILLS.md.
+
+The isolated candidate integrates committed phone/ticket changes through64f7dce. Native name-only decoding preserves full-sentence prior/flow context and removes vocoder work after the name plus16contextframes; seven retained-prefix comparisons max error1.85e-6. Four prerecorded counter tails277168bytes yield four calls in one neural pass. User listened to Erika/George and accepts this derivative as an intercom voice, explicitly not Knick resemblance; recorded character dialogue is preserved.
+
+Final silent production-worker tests pass desktop and Android portrait/landscape plus five optional-name UI cases (320pxGerman/English and200%zoom). Firstready3.3–4.0s on this laptop includingstartup; single16.03MB modelHTTPtransfer despite worker restart, RAM-onlyreuse, noapp persistentstorage; caption/lip/allocatedclerk/native-mediaend/turning/replay checks pass. Admission and queueclock are fixtures, not naturalmission/realQRproof. Independent CPUlarge-v3ASR of16joinedcalls retains exact counter1–4and namesErika/Jürgen; George/Anna have documented ASR mismatches, useracceptanceislimited, no universalpronunciationclaim.
+
+Sixbaseline64f7dce andsixcandidatecoldroot runs pass18MB/title4Hz/1.6MP/input gates; candidatemax17861164bytes,9acceptedinputsperrun,zeroerrors,inputp95max71.1ms vsbaseline59.5ms. ConcurrentprivateKripoauthoringwasactive; thereisno speedupclaim. PhysicalAndroid remainsNOTRUN. Oneindependenttechnicalreview owns the batching/cache/parser/hashmalformation checks; Physics/Camera omitted because this change adds no world geometry, placement, movement, camera, scale or animation assets and reuses existing cue/lip ownership. Kripo tone-conversion teacher samples were separately useraccepted; the compactname-modeltrial remains private until reviewed.
+
+Final combined Node run passes807/807; focused local-speech/asset run53/53. Existing fixed-voice curator passes61production/1sceneexception/45blocked/42archived; native saved-profile source/referencebytes were separately verified, liveProfileCLI not run by the curator. Review mutations and exact final source hashes remain task evidence.

@@ -22,7 +22,7 @@ assert.match(game,/policeSirenCars\(\)\.length/,"continuous sirens serve wanted 
 assert.match(game,/Math\.min\(\.05,\(state\.wanted-2\)\*\.016\)/,"higher response tiers should add slight pass-by urgency");
 assert.match(game,/if\(contactDistance<190&&car\.passbyReady\)/,"a nearby police car must trigger the sourced pass-by accent only once per approach");
 assert.match(game,/\.catch\(\(\)=>\{if\(eligible\(\)\)playSiren\(\)\}\)/,"a missing pass-by recording must retain the synthesized alert fallback only while the approach is active");
-assert.match(game,/function loop\(now\).*updatePoliceChaseAudio\(\);if\(!window\.BuergeramtLevel\?\.active&&!window\.Germany3D\?\.amtEntry\?\.active\)draw\(\)/,"chase audio must follow the latest simulated state, including modal transitions");
+assert.match(game,/function loop\(now\).*updatePoliceChaseAudio\(\);if\(!window\.BuergeramtLevel\?\.active&&!window\.Germany3D\?\.amtEntry\?\.active&&!window\.Germany3D\?\.jobcenter\?\.active\)draw\(\)/,"chase audio must follow the latest simulated state, including modal transitions");
 
 const passbySource=game.match(/function playPolicePassby\([^\n]+/)?.[0];
 assert.ok(passbySource,"the pass-by cue must exist");

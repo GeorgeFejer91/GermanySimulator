@@ -1,0 +1,614 @@
+{
+  "schemaVersion": 1,
+  "voiceId": "amt-brunhilde-knick",
+  "profileId": "b080c7d95ecd418fb428282461d7fbe7",
+  "fallback": "captions",
+  "status": "same-profile technical and independent ASR audit; perceptual listening not independently verified",
+  "generatedLineCount": 3,
+  "requestedLineCount": 3,
+  "lineCount": 3,
+  "clips": [
+    {
+      "clipId": "knick-phone-dismissal",
+      "actorId": "clerk-3",
+      "voiceId": "amt-brunhilde-knick",
+      "profileId": "b080c7d95ecd418fb428282461d7fbe7",
+      "text": "Was stehen Sie so tadellos da?! Raus!!",
+      "english": "Why are you standing there looking so blameless?! OUT!!",
+      "sourceLocator": "buergeramt-story.js phoneDismissal.line",
+      "trigger": "buergeramt-phone-dismissal",
+      "deliveryListening": "NOT RUN (silent authoring policy)",
+      "approval": {
+        "status": "user-approved",
+        "date": "2026-10-13",
+        "instruction": "Use the exact final dismissal: Was stehen Sie so tadellos da?! Raus!!",
+        "scope": "One exact user-authored final dismissal, selected Knick profile and unchanged production processing; tadellos is deliberate",
+        "listeningConfirmed": false
+      },
+      "seed": 71000,
+      "synthesisAttempt": 1,
+      "referenceSha256": "901e9ad60eda5cbb36337b12864b6a2b0d133570acb90941b9eabd9888c16351",
+      "authoringHelperSha256": "de00ee31301b812dfd1267981690fbc45b6357465290a5ec26b7e8b233436032",
+      "rendererInputText": "Was stehen Sie so tadellos da?! Raus!!",
+      "decode": {
+        "maxSpeechTokens": 250,
+        "attentionHooksBefore": 0,
+        "generatedSpeechTokens": 84,
+        "eosReached": true,
+        "eosKind": "analyzer-forced",
+        "eosSuppressionObservedSteps": 57,
+        "modelEosRestoredSteps": 0,
+        "alignmentFirstCompletedStep": 58,
+        "nativeAnalyzerSourceSha256": "d8430efa92aedb8e59b782c1d299fe7238570eecea9d293c0981a5ee2e82c8c7",
+        "eosPolicy": "Native analyzer unchanged; observation only",
+        "t3InferenceSeconds": 10.72,
+        "temporaryAnalyzerHooksRemoved": 6,
+        "attentionHooksAfter": 0,
+        "eosTraceSha256": "0354915ec9527d9c6237e48159d3878e3b7bed2e8741c7ebb918b37f8d7e6620"
+      },
+      "rendererInputBasis": "exact authored source",
+      "requestSha256": "abb2bd32f9229467644258b52d5d9ff00dfb383fa5d17d65ffe55d02ce8c644c",
+      "referenceOriginalSha256": "f87daaf53e9e3183065dbe38a65097f5c8df3ae11454ea56676a8298800683c2",
+      "profileJsonSha256": "4071c9052ebb393358d9957cc5f2271d93c52f13b747fad9f5253bd81b00ce66",
+      "rawSha256": "c39724b384628e2b7a7897b578f1be51e36c029c43ddb2479c14b969c861f6d3",
+      "renderer": "ResembleAI/Chatterbox Multilingual V2 0.1.7",
+      "modelRevision": "5bb1f6ee58e50c3b8d408bc82a6d3740c2db6e18",
+      "modelLicense": "MIT",
+      "referenceLicense": "CC0-1.0 (EmoDB original, transformed reference)",
+      "durationSeconds": 3.32,
+      "renderSeconds": 12.73,
+      "synthesis": {
+        "exaggeration": 0.5,
+        "exaggerationReason": null,
+        "temperature": 0.65,
+        "repetitionPenalty": 3.0,
+        "cfgWeight": 0.6,
+        "languageId": "de",
+        "device": "cuda",
+        "precision": "fp16",
+        "t3WeightPrecision": "float16",
+        "conditioningPrecision": "float32",
+        "autocastPrecision": "float16",
+        "conditioningCached": true,
+        "referenceReconditionedForProfile": "b080c7d95ecd418fb428282461d7fbe7",
+        "referenceConditioningVerifiedFloat32": true,
+        "modelSessionReused": false,
+        "cpuThreads": 2,
+        "inferenceMode": true
+      },
+      "listening": "pending",
+      "status": "eligible exact-text recording; human listening pending",
+      "processing": "[0:a]highpass=f=65,lowpass=f=7600,asplit[clean][wet];[wet]rubberband=pitch=0.78,lowpass=f=1450,volume=0.16[shadow];[clean][shadow]amix=inputs=2:duration=first:normalize=0[a]",
+      "processingSha256": "1c7968d73192bfbf5d2b759fce5dc07b092badbd133718ae05d67dbdda72ccb2",
+      "normalization": {
+        "targetLufs": -18,
+        "targetTruePeakDbtp": -1.5,
+        "filter": "loudnorm=I=-18.0:TP=-1.8:LRA=11:linear=false",
+        "iterations": 1
+      },
+      "integratedLufs": -18.17,
+      "truePeakDbtp": -2.24,
+      "asr": "Was stehen Sie so tadellos da? Raus!",
+      "asrWordExact": true,
+      "asrLiteralWordExact": true,
+      "asrNormalization": "case/punctuation, German numeric and A38 spoken equivalents, guarded full-hour and date-ordinal equivalents, section sign/Paragraf orthography, German compound spacing",
+      "asrModel": "independent faster-whisper, cached local model, cpu int8 (effective int8_float32), no script prompt",
+      "asrCpuThreads": 2,
+      "asrDevice": "cpu",
+      "asrEffectiveComputeType": "int8_float32",
+      "asrLanguageId": "de",
+      "asrComputeType": "int8",
+      "asrScriptPrompt": null,
+      "asrBeamSize": 1,
+      "asrReadings": [
+        {
+          "beamSize": 1,
+          "transcript": "Was stehen Sie so tadellos da? Raus!",
+          "transcribeSeconds": 16.2,
+          "words": [
+            {
+              "word": " Was",
+              "start": 0.0,
+              "end": 0.26
+            },
+            {
+              "word": " stehen",
+              "start": 0.26,
+              "end": 0.54
+            },
+            {
+              "word": " Sie",
+              "start": 0.54,
+              "end": 0.7
+            },
+            {
+              "word": " so",
+              "start": 0.7,
+              "end": 0.92
+            },
+            {
+              "word": " tadellos",
+              "start": 0.92,
+              "end": 1.48
+            },
+            {
+              "word": " da?",
+              "start": 1.48,
+              "end": 1.72
+            },
+            {
+              "word": " Raus!",
+              "start": 1.96,
+              "end": 2.48
+            }
+          ]
+        }
+      ],
+      "asrModelSha256": "e76620f83d5f5b69efd3d87e3dc180c1bd21df9fbebacfd4335e5e1efcc018da",
+      "asrModelDirectoryName": "voice-asr-model",
+      "wordCues": [
+        {
+          "at": 0.0,
+          "charIndex": 0,
+          "word": "Was",
+          "end": 0.26
+        },
+        {
+          "at": 0.26,
+          "charIndex": 4,
+          "word": "stehen",
+          "end": 0.54
+        },
+        {
+          "at": 0.54,
+          "charIndex": 11,
+          "word": "Sie",
+          "end": 0.7
+        },
+        {
+          "at": 0.7,
+          "charIndex": 15,
+          "word": "so",
+          "end": 0.92
+        },
+        {
+          "at": 0.92,
+          "charIndex": 18,
+          "word": "tadellos",
+          "end": 1.48
+        },
+        {
+          "at": 1.48,
+          "charIndex": 27,
+          "word": "da",
+          "end": 1.72
+        },
+        {
+          "at": 1.96,
+          "charIndex": 32,
+          "word": "Raus",
+          "end": 2.48
+        }
+      ],
+      "sha256": "cf4588f55858f8d7eeb4ebf655140043dab280e09f85afe6cabc3fe3f234864a",
+      "bytes": 54188,
+      "sampleRateHz": 48000,
+      "channels": 1,
+      "bitrateBitsPerSecond": 128000,
+      "file": "assets/voices/knick/knick-phone-dismissal.mp3"
+    },
+    {
+      "clipId": "knick-phone-last-warning",
+      "actorId": "clerk-3",
+      "voiceId": "amt-brunhilde-knick",
+      "profileId": "b080c7d95ecd418fb428282461d7fbe7",
+      "text": "Meine letzte Warnung! Stellen Sie das Telefon jetzt aus, oder ich beende Ihren Termin!",
+      "english": "My final warning! Turn the phone off now, or I will end your appointment!",
+      "sourceLocator": "buergeramt-story.js phoneWarnings[2]",
+      "trigger": "buergeramt-phone-reaction",
+      "deliveryListening": "NOT RUN (silent authoring policy)",
+      "approval": {
+        "status": "user-approved",
+        "date": "2026-10-13",
+        "instruction": "Give the final warning while the phone continues ringing.",
+        "scope": "Exact integrator-authored final warning; selected Knick profile/renderer/undertone unchanged",
+        "listeningConfirmed": false
+      },
+      "seed": 71001,
+      "synthesisAttempt": 1,
+      "referenceSha256": "901e9ad60eda5cbb36337b12864b6a2b0d133570acb90941b9eabd9888c16351",
+      "authoringHelperSha256": "de00ee31301b812dfd1267981690fbc45b6357465290a5ec26b7e8b233436032",
+      "rendererInputText": "Meine letzte Warnung! Stellen Sie das Telefon jetzt aus, oder ich beende Ihren Termin!",
+      "decode": {
+        "maxSpeechTokens": 328,
+        "attentionHooksBefore": 0,
+        "generatedSpeechTokens": 127,
+        "eosReached": true,
+        "eosKind": "analyzer-forced",
+        "eosSuppressionObservedSteps": 103,
+        "modelEosRestoredSteps": 0,
+        "alignmentFirstCompletedStep": 104,
+        "nativeAnalyzerSourceSha256": "d8430efa92aedb8e59b782c1d299fe7238570eecea9d293c0981a5ee2e82c8c7",
+        "eosPolicy": "Native analyzer unchanged; observation only",
+        "t3InferenceSeconds": 11.33,
+        "temporaryAnalyzerHooksRemoved": 3,
+        "attentionHooksAfter": 0,
+        "eosTraceSha256": "1a745e836427471bb8b52b893dbe8517d21a305c86fc4bbb4747b7c7d9c88f18"
+      },
+      "rendererInputBasis": "exact authored source",
+      "requestSha256": "abb2bd32f9229467644258b52d5d9ff00dfb383fa5d17d65ffe55d02ce8c644c",
+      "referenceOriginalSha256": "f87daaf53e9e3183065dbe38a65097f5c8df3ae11454ea56676a8298800683c2",
+      "profileJsonSha256": "4071c9052ebb393358d9957cc5f2271d93c52f13b747fad9f5253bd81b00ce66",
+      "rawSha256": "997825936b85170e77065e5d40c88362025b4ac514f96290e28934b923fbbcb4",
+      "renderer": "ResembleAI/Chatterbox Multilingual V2 0.1.7",
+      "modelRevision": "5bb1f6ee58e50c3b8d408bc82a6d3740c2db6e18",
+      "modelLicense": "MIT",
+      "referenceLicense": "CC0-1.0 (EmoDB original, transformed reference)",
+      "durationSeconds": 5.04,
+      "renderSeconds": 13.55,
+      "synthesis": {
+        "exaggeration": 0.5,
+        "exaggerationReason": null,
+        "temperature": 0.65,
+        "repetitionPenalty": 3.0,
+        "cfgWeight": 0.6,
+        "languageId": "de",
+        "device": "cuda",
+        "precision": "fp16",
+        "t3WeightPrecision": "float16",
+        "conditioningPrecision": "float32",
+        "autocastPrecision": "float16",
+        "conditioningCached": true,
+        "referenceReconditionedForProfile": "b080c7d95ecd418fb428282461d7fbe7",
+        "referenceConditioningVerifiedFloat32": true,
+        "modelSessionReused": false,
+        "cpuThreads": 2,
+        "inferenceMode": true
+      },
+      "listening": "pending",
+      "status": "eligible exact-text recording; human listening pending",
+      "processing": "[0:a]highpass=f=65,lowpass=f=7600,asplit[clean][wet];[wet]rubberband=pitch=0.78,lowpass=f=1450,volume=0.16[shadow];[clean][shadow]amix=inputs=2:duration=first:normalize=0[a]",
+      "processingSha256": "1c7968d73192bfbf5d2b759fce5dc07b092badbd133718ae05d67dbdda72ccb2",
+      "normalization": {
+        "targetLufs": -18,
+        "targetTruePeakDbtp": -1.5,
+        "filter": "loudnorm=I=-14.23:TP=-1.8:LRA=11:linear=false",
+        "iterations": 4
+      },
+      "integratedLufs": -18.2,
+      "truePeakDbtp": -2.22,
+      "asr": "Meine letzte Warnung. Stellen Sie das Telefon jetzt aus oder ich beende Ihren Termin.",
+      "asrWordExact": true,
+      "asrLiteralWordExact": true,
+      "asrNormalization": "case/punctuation, German numeric and A38 spoken equivalents, guarded full-hour and date-ordinal equivalents, section sign/Paragraf orthography, German compound spacing",
+      "asrModel": "independent faster-whisper, cached local model, cpu int8 (effective int8_float32), no script prompt",
+      "asrCpuThreads": 2,
+      "asrDevice": "cpu",
+      "asrEffectiveComputeType": "int8_float32",
+      "asrLanguageId": "de",
+      "asrComputeType": "int8",
+      "asrScriptPrompt": null,
+      "asrBeamSize": 1,
+      "asrReadings": [
+        {
+          "beamSize": 1,
+          "transcript": "Meine letzte Warnung. Stellen Sie das Telefon jetzt aus oder ich beende Ihren Termin.",
+          "transcribeSeconds": 19.95,
+          "words": [
+            {
+              "word": " Meine",
+              "start": 0.0,
+              "end": 0.32
+            },
+            {
+              "word": " letzte",
+              "start": 0.32,
+              "end": 0.64
+            },
+            {
+              "word": " Warnung.",
+              "start": 0.64,
+              "end": 1.02
+            },
+            {
+              "word": " Stellen",
+              "start": 1.18,
+              "end": 1.6
+            },
+            {
+              "word": " Sie",
+              "start": 1.6,
+              "end": 1.74
+            },
+            {
+              "word": " das",
+              "start": 1.74,
+              "end": 1.92
+            },
+            {
+              "word": " Telefon",
+              "start": 1.92,
+              "end": 2.34
+            },
+            {
+              "word": " jetzt",
+              "start": 2.34,
+              "end": 2.52
+            },
+            {
+              "word": " aus",
+              "start": 2.52,
+              "end": 2.9
+            },
+            {
+              "word": " oder",
+              "start": 2.9,
+              "end": 3.34
+            },
+            {
+              "word": " ich",
+              "start": 3.34,
+              "end": 3.46
+            },
+            {
+              "word": " beende",
+              "start": 3.46,
+              "end": 3.76
+            },
+            {
+              "word": " Ihren",
+              "start": 3.76,
+              "end": 4.0
+            },
+            {
+              "word": " Termin.",
+              "start": 4.0,
+              "end": 4.38
+            }
+          ]
+        }
+      ],
+      "asrModelSha256": "e76620f83d5f5b69efd3d87e3dc180c1bd21df9fbebacfd4335e5e1efcc018da",
+      "asrModelDirectoryName": "voice-asr-model",
+      "wordCues": [
+        {
+          "at": 0.0,
+          "charIndex": 0,
+          "word": "Meine",
+          "end": 0.32
+        },
+        {
+          "at": 0.32,
+          "charIndex": 6,
+          "word": "letzte",
+          "end": 0.64
+        },
+        {
+          "at": 0.64,
+          "charIndex": 13,
+          "word": "Warnung",
+          "end": 1.02
+        },
+        {
+          "at": 1.18,
+          "charIndex": 22,
+          "word": "Stellen",
+          "end": 1.6
+        },
+        {
+          "at": 1.6,
+          "charIndex": 30,
+          "word": "Sie",
+          "end": 1.74
+        },
+        {
+          "at": 1.74,
+          "charIndex": 34,
+          "word": "das",
+          "end": 1.92
+        },
+        {
+          "at": 1.92,
+          "charIndex": 38,
+          "word": "Telefon",
+          "end": 2.34
+        },
+        {
+          "at": 2.34,
+          "charIndex": 46,
+          "word": "jetzt",
+          "end": 2.52
+        },
+        {
+          "at": 2.52,
+          "charIndex": 52,
+          "word": "aus",
+          "end": 2.9
+        },
+        {
+          "at": 2.9,
+          "charIndex": 57,
+          "word": "oder",
+          "end": 3.34
+        },
+        {
+          "at": 3.34,
+          "charIndex": 62,
+          "word": "ich",
+          "end": 3.46
+        },
+        {
+          "at": 3.46,
+          "charIndex": 66,
+          "word": "beende",
+          "end": 3.76
+        },
+        {
+          "at": 3.76,
+          "charIndex": 73,
+          "word": "Ihren",
+          "end": 4.0
+        },
+        {
+          "at": 4.0,
+          "charIndex": 79,
+          "word": "Termin",
+          "end": 4.38
+        }
+      ],
+      "sha256": "b2a51cdb139461e0b015d1111ae21eef196c97ee1ae5d4a77cc78965b5eb7ebd",
+      "bytes": 81452,
+      "sampleRateHz": 48000,
+      "channels": 1,
+      "bitrateBitsPerSecond": 128000,
+      "file": "assets/voices/knick/knick-phone-last-warning.mp3"
+    },
+    {
+      "clipId": "knick-phone-ring-expulsion",
+      "actorId": "clerk-3",
+      "voiceId": "amt-brunhilde-knick",
+      "profileId": "b080c7d95ecd418fb428282461d7fbe7",
+      "text": "Jetzt Reichsadler! Raus!",
+      "english": "Now, imperial eagle! OUT!",
+      "sourceLocator": "buergeramt-story.js phoneWarnings[3]",
+      "trigger": "buergeramt-phone-reaction",
+      "deliveryListening": "NOT RUN (silent authoring policy)",
+      "approval": {
+        "status": "user-approved",
+        "date": "2026-10-13",
+        "instruction": "Unattended continuous ringing provokes immediate ejection after Jetzt Reichsadler! Raus!",
+        "scope": "Exact user-authored expulsion; Reichsadler deliberately preserved; selected Knick profile/renderer/undertone unchanged",
+        "listeningConfirmed": false
+      },
+      "seed": 71002,
+      "synthesisAttempt": 1,
+      "referenceSha256": "901e9ad60eda5cbb36337b12864b6a2b0d133570acb90941b9eabd9888c16351",
+      "authoringHelperSha256": "de00ee31301b812dfd1267981690fbc45b6357465290a5ec26b7e8b233436032",
+      "rendererInputText": "Jetzt Reichsadler! Raus!",
+      "decode": {
+        "maxSpeechTokens": 250,
+        "attentionHooksBefore": 0,
+        "generatedSpeechTokens": 58,
+        "eosReached": true,
+        "eosKind": "analyzer-forced",
+        "eosSuppressionObservedSteps": 46,
+        "modelEosRestoredSteps": 0,
+        "alignmentFirstCompletedStep": 47,
+        "nativeAnalyzerSourceSha256": "d8430efa92aedb8e59b782c1d299fe7238570eecea9d293c0981a5ee2e82c8c7",
+        "eosPolicy": "Native analyzer unchanged; observation only",
+        "t3InferenceSeconds": 4.31,
+        "temporaryAnalyzerHooksRemoved": 3,
+        "attentionHooksAfter": 0,
+        "eosTraceSha256": "a0361ef30f401e4f3053de414b142856aff2047b8af159144ec6d32746d493dc"
+      },
+      "rendererInputBasis": "exact authored source",
+      "requestSha256": "abb2bd32f9229467644258b52d5d9ff00dfb383fa5d17d65ffe55d02ce8c644c",
+      "referenceOriginalSha256": "f87daaf53e9e3183065dbe38a65097f5c8df3ae11454ea56676a8298800683c2",
+      "profileJsonSha256": "4071c9052ebb393358d9957cc5f2271d93c52f13b747fad9f5253bd81b00ce66",
+      "rawSha256": "e46808438214955bd2b3ff329625294015382f10c7ab486f313600c15f409aff",
+      "renderer": "ResembleAI/Chatterbox Multilingual V2 0.1.7",
+      "modelRevision": "5bb1f6ee58e50c3b8d408bc82a6d3740c2db6e18",
+      "modelLicense": "MIT",
+      "referenceLicense": "CC0-1.0 (EmoDB original, transformed reference)",
+      "durationSeconds": 2.28,
+      "renderSeconds": 5.66,
+      "synthesis": {
+        "exaggeration": 0.5,
+        "exaggerationReason": null,
+        "temperature": 0.65,
+        "repetitionPenalty": 3.0,
+        "cfgWeight": 0.6,
+        "languageId": "de",
+        "device": "cuda",
+        "precision": "fp16",
+        "t3WeightPrecision": "float16",
+        "conditioningPrecision": "float32",
+        "autocastPrecision": "float16",
+        "conditioningCached": true,
+        "referenceReconditionedForProfile": "b080c7d95ecd418fb428282461d7fbe7",
+        "referenceConditioningVerifiedFloat32": true,
+        "modelSessionReused": false,
+        "cpuThreads": 2,
+        "inferenceMode": true
+      },
+      "listening": "pending",
+      "status": "eligible exact-text recording; human listening pending",
+      "processing": "[0:a]highpass=f=65,lowpass=f=7600,asplit[clean][wet];[wet]rubberband=pitch=0.78,lowpass=f=1450,volume=0.16[shadow];[clean][shadow]amix=inputs=2:duration=first:normalize=0[a]",
+      "processingSha256": "1c7968d73192bfbf5d2b759fce5dc07b092badbd133718ae05d67dbdda72ccb2",
+      "normalization": {
+        "targetLufs": -18,
+        "targetTruePeakDbtp": -1.5,
+        "filter": "volume=1.5293257464187784,alimiter=limit=0.78:attack=1:release=80:level=false:latency=true",
+        "iterations": 5
+      },
+      "integratedLufs": -18.13,
+      "truePeakDbtp": -2.51,
+      "asr": "Jetzt Reichsadler raus!",
+      "asrWordExact": true,
+      "asrLiteralWordExact": true,
+      "asrNormalization": "case/punctuation, German numeric and A38 spoken equivalents, guarded full-hour and date-ordinal equivalents, section sign/Paragraf orthography, German compound spacing",
+      "asrModel": "independent faster-whisper, cached local model, cpu int8 (effective int8_float32), no script prompt",
+      "asrCpuThreads": 2,
+      "asrDevice": "cpu",
+      "asrEffectiveComputeType": "int8_float32",
+      "asrLanguageId": "de",
+      "asrComputeType": "int8",
+      "asrScriptPrompt": null,
+      "asrBeamSize": 1,
+      "asrReadings": [
+        {
+          "beamSize": 1,
+          "transcript": "Jetzt Reichsadler raus!",
+          "transcribeSeconds": 49.05,
+          "words": [
+            {
+              "word": " Jetzt",
+              "start": 0.0,
+              "end": 0.34
+            },
+            {
+              "word": " Reichsadler",
+              "start": 0.34,
+              "end": 1.36
+            },
+            {
+              "word": " raus!",
+              "start": 1.36,
+              "end": 2.0
+            }
+          ]
+        }
+      ],
+      "asrModelSha256": "e76620f83d5f5b69efd3d87e3dc180c1bd21df9fbebacfd4335e5e1efcc018da",
+      "asrModelDirectoryName": "voice-asr-model",
+      "wordCues": [
+        {
+          "at": 0.0,
+          "charIndex": 0,
+          "word": "Jetzt",
+          "end": 0.34
+        },
+        {
+          "at": 0.34,
+          "charIndex": 6,
+          "word": "Reichsadler",
+          "end": 1.36
+        },
+        {
+          "at": 1.36,
+          "charIndex": 19,
+          "word": "Raus",
+          "end": 2.0
+        }
+      ],
+      "sha256": "78ef4b9ce8789442c9c11227057805bf311ec16c0840b5817b72823c40f0da28",
+      "bytes": 37292,
+      "sampleRateHz": 48000,
+      "channels": 1,
+      "bitrateBitsPerSecond": 128000,
+      "file": "assets/voices/knick/knick-phone-ring-expulsion.mp3"
+    }
+  ],
+  "heldPrivate": [],
+  "approvedExistingReuse": []
+}

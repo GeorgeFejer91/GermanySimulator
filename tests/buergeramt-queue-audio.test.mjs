@@ -20,8 +20,8 @@ const beeps=h=>h.audio.nodes.filter(n=>n.kind==='oscillator'&&n.type==='square')
 function awaitShout(h,clips){const before=clips.length;for(let i=0;i<6000&&clips.length===before;i++)h.elapse(.05);assert.equal(clips.length,before+1);return clips.at(-1)}
 
 test('each new board call schedules exactly one bounded abrasive double beep',()=>{
- const h=harness('host',{fakeAudio:true});h.enter();h.advanceGame(3.2);
- assert.equal(h.level.queueDisplay,'Z-7');assert.deepEqual(beeps(h).map(n=>n.amtFrequency),[1480,1960]);assert.ok(beeps(h).every(n=>Math.abs(n.frequency.value-n.amtFrequency*h.level.timeScale)<1e-8));
+ const h=harness('host',{fakeAudio:true});h.enter();const before=h.level.queueDisplay;h.advanceGame(3.2);
+ assert.notEqual(h.level.queueDisplay,before);assert.deepEqual(beeps(h).map(n=>n.amtFrequency),[1480,1960]);assert.ok(beeps(h).every(n=>Math.abs(n.frequency.value-n.amtFrequency*h.level.timeScale)<1e-8));
  const [a,b]=beeps(h);assert.ok(Math.abs((b.started[0]-a.started[0])/(a.stopped[0]-a.started[0])-.18/.17)<1e-8,'both scheduled spans use the same onset tempo');assert.ok(beeps(h).every(n=>n.stopped[0]-n.started[0]<=.17/.5+1e-8));
  assert(beeps(h).every(osc=>osc.connections[0].gain.events.some(([kind,value])=>kind==='linear'&&value===.012)));
  h.level.update(0);h.level.update(0);assert.equal(beeps(h).length,2);h.advanceGame(3.2);assert.equal(beeps(h).length,4);

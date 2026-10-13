@@ -28,6 +28,7 @@ const seam=`
 window.__multipleTickets={
  pose(x,z,yaw=0,pitch=0){clearOfficeInput();if(officeBlocked(x,z))throw Error('Solid pose '+x+','+z);Object.assign(view,{x,z,yaw,pitch});view.positionGeneration++;update(0);return{view:{...view},stage,nearest:nearestCounter()};},
  advance(seconds){const start=visualClock;let steps=0;while(visualClock-start<seconds){if(++steps>Math.ceil(seconds/.025)+2)throw Error('Queue clock stalled at '+stage);update(.05)}return{steps,advanced:visualClock-start,stage};},
+ boardPose(){const x=[0,-.9,.9].find(x=>!officeBlocked(x,2.3));if(x===undefined)throw Error("No legal board viewing pose");return this.pose(x,2.3,Math.atan2(-x,6.451),.22);},
  inspect(){return{peer:activePhonePeer,stage,queueIndex,number,view:{...view},tickets:[...phoneTickets.values()].map(ticket=>({...ticket})),calls:BuergeramtLevel.queueCalls};}
 };
 window.__multipleBeeps=[];
@@ -40,7 +41,7 @@ await new Promise(done=>server.listen(0,'127.0.0.1',done));
 const browser=await chromium.launch({headless:true,executablePath:process.env.CHROMIUM_PATH||'C:/Program Files/Google/Chrome/Application/chrome.exe',args:['--mute-audio','--use-gl=angle','--use-angle='+ (process.env.MULTIPLE_GPU==='software'?'swiftshader':'d3d11')]});
 const report={complete:false,revision:Object.fromEntries([...sources].map(([file,bytes])=>[file,createHash('sha256').update(bytes).digest('hex')])),cases:[],limits:['Three separate phone browser contexts, production AmtLink validation/sequence and host queue; simulated WebRTC signaling and transport delivery','Direct-office route, legal forced approach and accelerated scene clock; no natural city mission-chain or physical-phone evidence','Real world geometry and rendering retained; desktop Chromium and Android emulation; audio logic enabled and all native outputs muted, no listening review']};
 let activePage,activeCase;
-const silent=()=>{Math.random=()=>.6;const play=HTMLMediaElement.prototype.play;HTMLMediaElement.prototype.play=function(...args){this.muted=true;this.volume=0;return play.apply(this,args)};const connect=AudioNode.prototype.connect;AudioNode.prototype.connect=function(target,...args){if(target===this.context.destination){const gain=this.context.createGain();gain.gain.value=0;connect.call(gain,target);return connect.call(this,gain,...args)}return connect.call(this,target,...args)};const speak=speechSynthesis.speak.bind(speechSynthesis);speechSynthesis.speak=utterance=>{utterance.volume=0;speak(utterance)}};
+const silent=()=>{let seed=57;Math.random=()=>{seed=(Math.imul(seed,1664525)+1013904223)>>>0;return seed/2**32};const play=HTMLMediaElement.prototype.play;HTMLMediaElement.prototype.play=function(...args){this.muted=true;this.volume=0;return play.apply(this,args)};const connect=AudioNode.prototype.connect;AudioNode.prototype.connect=function(target,...args){if(target===this.context.destination){const gain=this.context.createGain();gain.gain.value=0;connect.call(gain,target);return connect.call(this,gain,...args)}return connect.call(this,target,...args)};const speak=speechSynthesis.speak.bind(speechSynthesis);speechSynthesis.speak=utterance=>{utterance.volume=0;speak(utterance)}};
 async function rendered(page){await page.evaluate(()=>new Promise(done=>requestAnimationFrame(()=>requestAnimationFrame(done))));}
 try{
  for(const [profile,width,height,mobile] of [['desktop',1280,800,false],['android-portrait',390,844,true]]){
@@ -74,8 +75,18 @@ try{
    const calls=await office.evaluate(()=>{let steps=0;while(BuergeramtLevel.tickets.some(ticket=>!ticket.called)){if(++steps>1200)throw Error('Tickets never called');__multipleUpdate(.05)}return __multipleTickets.inspect()});result.calls=calls;assert.equal(calls.tickets.filter(ticket=>ticket.called).length,3);
    const row=allocation.tickets.find(ticket=>ticket.peer===result.selectedPeer),hold=await office.evaluate(()=>__multipleTickets.advance(13.1));result.hold=hold;
    const held=await office.evaluate(()=>__multipleTickets.inspect());assert.equal(held.tickets.length,3);for(const ticket of held.tickets){assert.equal(held.calls[ticket.counter-1].number,ticket.number);assert(ticket.deadline>0,'called ticket must survive the old 12.8s window');}
-   await office.evaluate(()=>__multipleTickets.pose(0,-.2,0,0));await rendered(office);await office.screenshot({path:resolve(out,label+'-held-anzeige.png')});
+   await office.evaluate(()=>__multipleTickets.boardPose());await rendered(office);await office.screenshot({path:resolve(out,label+'-held-anzeige.png')});
    await phones[selected].screenshot({path:resolve(out,label+'-called-ticket.png'),fullPage:true});
+   if(selected===0){
+    result.ticketLayouts=[];const phone=phones[selected],actual=await phone.locator('#phone-number').textContent();
+    for(const [width,height,zoom] of [[320,740,1],[390,844,1],[844,390,1],[390,844,2]]){
+     await phone.setViewportSize({width,height});await phone.evaluate(zoom=>{document.documentElement.style.zoom=String(zoom);document.getElementById('phone-number').textContent='WW-888';BuergeramtFit()},zoom);await rendered(phone);
+     const bounds=await phone.locator('#phone-number').evaluate(el=>({text:el.textContent,fit:el.dataset.pretextFit,width:el.clientWidth,scroll:el.scrollWidth,page:document.documentElement.scrollWidth,viewport:innerWidth}));
+     assert(bounds.fit&&bounds.fit!=='unavailable');assert(bounds.width>0&&bounds.scroll<=bounds.width+1);assert(bounds.page<=bounds.viewport+1);result.ticketLayouts.push({width,height,zoom,...bounds});
+     await phone.screenshot({path:resolve(out,label+'-ticket-'+width+'-'+zoom+'.png'),fullPage:true});
+    }
+    await phone.setViewportSize({width:390,height:844});await phone.evaluate(actual=>{document.documentElement.style.zoom='1';document.getElementById('phone-number').textContent=actual;BuergeramtFit()},actual);await rendered(phone);
+   }
    const counterXs=[-5.8,-1.6,3.9,6.2],x=counterXs[row.counter-1],approach=await office.evaluate(({x,yaw})=>__multipleTickets.pose(x,-6.2,yaw,0),{x,yaw:mobile?.14:.45});result.approach=approach;assert.equal(approach.nearest,row.counter);
    await rendered(office);await office.screenshot({path:resolve(out,label+'-approach.png')});
    const point=await office.evaluate(desk=>__multipleClerkPoint(desk),row.counter);result.target=point;assert(point&&point.x>=0&&point.x<=width&&point.y>=0&&point.y<=height,'clerk must be visible before interaction');assert.equal(point.selection?.desk,row.counter);

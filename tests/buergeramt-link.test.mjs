@@ -3,6 +3,21 @@ import assert from 'node:assert/strict';
 import vm from 'node:vm';
 import {source} from './amt-harness.mjs';
 
+test('one- and two-letter tickets, calls and receipts pass transport validation, malformed codes do not',()=>{
+ for(const number of ['A-004','ZA-731','XB-018']){
+  const host=transport(),phone=transport('phone'),receipt={id:'a'.repeat(24),number};
+  assert.equal(host.link.send('ticket',{number,counter:2}),true);assert.equal(host.link.send('queue-call',{number,counter:2}),true);
+  phone.channel.receive({type:'ticket',number,counter:2});phone.channel.receive({type:'queue-call',number,counter:2,seq:2});
+  assert.equal(phone.messages.length,2);assert.equal(phone.link.send('ticket-received',receipt),true);
+  host.channel.receive({type:'ticket-received',...receipt});assert.equal(host.messages.length,1);
+ }
+ for(const number of ['ABC-123','za-123','A--123','-123','ZA-','ZA-1234567890123']){
+  const host=transport(),phone=transport('phone');
+  assert.equal(host.link.send('ticket',{number,counter:2}),false);assert.equal(host.link.send('queue-call',{number,counter:2}),false);
+  assert.equal(phone.link.send('ticket-received',{id:'a'.repeat(24),number}),false);
+ }
+});
+
 test('only the phone sends a bounded ticket receipt with the scan ID and exact code',()=>{
  const host=transport(),phone=transport('phone'),receipt={id:'a'.repeat(24),number:'B-041'};
  for(const bad of [{...receipt,id:'bad'},{...receipt,id:[receipt.id]},{...receipt,number:'41'},{...receipt,counter:3},{number:receipt.number}])host.channel.receive({type:'ticket-received',...bad});
@@ -254,13 +269,24 @@ test('queue calls have host ownership and the same bounded code and counter as t
  assert.equal(phone.messages.length,0);phone.channel.receive({type:'queue-call',...payload});assert.equal(phone.messages.length,1);
 });
 
+test('call greeting and ending receipts retain exact role, identity and payload bounds',()=>{
+ const host=transport(),phone=transport('phone'),call={id:'grass',round:1,line:'Recorded body',greeting:'Spricht hier Erika Mustermann? Hier ist die Kriminalpolizei am Apparat!',ringAtPhoneMs:null,ringAtUtcMs:null,leadMs:2200};
+ assert.equal(host.link.send('call',call),true);
+ for(const greeting of ['', 'x'.repeat(171), 'name\nspoof', 42])assert.equal(host.link.send('call',{...call,greeting}),false);
+ assert.equal(host.link.send('call-end',{id:'grass',round:1}),true);
+ assert.equal(phone.link.send('call-end',{id:'grass',round:1}),false);
+ for(const mode of ['sound','fallback'])assert.equal(phone.link.send('call-ended',{id:'grass',round:1,mode}),true);
+ for(const bad of [{id:'other',round:1,mode:'sound'},{id:'grass',round:0,mode:'sound'},{id:'grass',round:1,mode:'voice'},{id:'grass',round:1,mode:'sound',extra:true}])assert.equal(phone.link.send('call-ended',bad),false);
+ assert.equal(host.link.send('call-ended',{id:'grass',round:1,mode:'sound'}),false);
+});
+
 test('long queue codes remain bounded and survive ticket, receipt and queue-call delivery',()=>{
  const host=transport(),phone=transport('phone'),number='Z-123456789012',payload={number,counter:4},receipt={number,id:'a'.repeat(24)};
  assert.equal(host.link.send('ticket',payload),true);assert.equal(host.link.send('queue-call',payload),true);
  assert.equal(phone.link.send('ticket-received',receipt),true);
  phone.channel.receive({type:'ticket',...payload});phone.channel.receive({type:'queue-call',...payload,seq:2});host.channel.receive({type:'ticket-received',...receipt});
  assert.equal(phone.messages.length,2);assert.equal(host.messages.length,1);
- for(const invalid of ['Z-1234567890123','ZZ-1000','z-1000','Z-','Z-1.5']){
+ for(const invalid of ['Z-1234567890123','ZZZ-1000','z-1000','Z-','Z-1.5']){
   assert.equal(host.link.send('ticket',{...payload,number:invalid}),false);
   assert.equal(host.link.send('queue-call',{...payload,number:invalid}),false);
   assert.equal(phone.link.send('ticket-received',{...receipt,number:invalid}),false);

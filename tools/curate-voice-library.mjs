@@ -176,8 +176,8 @@ export function fixedRecordingsBlock(cast,manifest,family='knick'){
  // every runtime entry. Receipts come from takes, never the current cast alias.
  const receipts=[],receiptKeys=new Map(),rows=[];
  for(const [path,entry] of Object.entries(entries)){
-  const {voiceId,profileId,fixedProduction,renderer,modelRevision,referenceSha256,referenceOriginalSha256,processing,...payload}=entry;
-  const receipt={voiceId,profileId,fixedProduction,renderer,modelRevision,referenceSha256,referenceOriginalSha256,processing},key=JSON.stringify(receipt);
+  const {voiceId,profileId,fixedProduction,renderer,modelRevision,referenceSha256,referenceOriginalSha256,processing,approval,provenanceManifest,trigger,...payload}=entry;
+  const receipt={voiceId,profileId,fixedProduction,renderer,modelRevision,referenceSha256,referenceOriginalSha256,processing,approval,provenanceManifest,trigger},key=JSON.stringify(receipt);
   if(!receiptKeys.has(key)){receiptKeys.set(key,receipts.length);receipts.push(receipt)}
   rows.push(JSON.stringify(path)+':{...r['+receiptKeys.get(key)+'],'+JSON.stringify(payload).slice(1));
  }
@@ -200,7 +200,7 @@ export function main(args=process.argv.slice(2)){
  const knickPath=resolve(root,'assets/voices/knick/manifest.json');
  if(existsSync(knickPath)&&!args.includes('--archive-assets')&&!args.includes('--archive-profiles')){
   const clips=[];
-  for(const path of ['assets/voices/knick/manifest.json','assets/voices/knick/ambient-manifest.json','assets/voices/knick/queue-call-manifest.json'].filter(path=>existsSync(resolve(root,path)))){
+  for(const path of ['assets/voices/knick/manifest.json','assets/voices/knick/ambient-manifest.json','assets/voices/knick/queue-call-manifest.json','assets/voices/knick/phone-reactions-manifest.json','assets/voices/knick/phone-dismissal-manifest.json'].filter(path=>existsSync(resolve(root,path)))){
    const manifest=json(resolve(root,path));
    // Unrendered and rejected lines have explicit selected-profile fallbacks.
    requireMatch(Number.isInteger(manifest.generatedLineCount)&&manifest.generatedLineCount>=manifest.clips.length&&manifest.generatedLineCount<=manifest.requestedLineCount&&manifest.clips.length+manifest.heldPrivate.length===manifest.requestedLineCount,`Unaccounted Knick lines: ${path}`);

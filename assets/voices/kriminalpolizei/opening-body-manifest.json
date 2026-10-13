@@ -1,0 +1,445 @@
+{
+  "schemaVersion": 1,
+  "voiceId": "kriminalpolizei",
+  "profileId": "f700170f840543bca7413d3ccf6ac028",
+  "profileName": "GS Kriminalpolizei",
+  "originalSha256": "0a1f98a15137640d3913ac3e0bc28811d5304dd16119ffab5aa8ad6653df0acf",
+  "referenceSha256": "ef452114430b47167239cdb065b1e01d502c0148f1492ac1b66098a03c0ea82e",
+  "requestedLineCount": 1,
+  "lineCount": 1,
+  "generatedLineCount": 0,
+  "derivedLineCount": 1,
+  "clips": [
+    {
+      "clipId": "kriminalpolizei-opening-body",
+      "voiceId": "kriminalpolizei",
+      "profileId": "f700170f840543bca7413d3ccf6ac028",
+      "profileName": "GS Kriminalpolizei",
+      "text": "Gegen Sie wird wegen unerlaubten Betretens einer Grünfläche ermittelt. Welcher Schuh hat den Rasen zuerst berührt: der linke, der rechte oder beide?",
+      "english": "You are under investigation for trespassing on a green space. Which shoe touched the grass first: the left, the right, or both?",
+      "sourceLocator": "buergeramt-story.js call.body",
+      "trigger": "buergeramt-police-opening-body",
+      "originalSha256": "0a1f98a15137640d3913ac3e0bc28811d5304dd16119ffab5aa8ad6653df0acf",
+      "referenceOriginalSha256": "0a1f98a15137640d3913ac3e0bc28811d5304dd16119ffab5aa8ad6653df0acf",
+      "referenceSha256": "ef452114430b47167239cdb065b1e01d502c0148f1492ac1b66098a03c0ea82e",
+      "synthesisReferenceSha256": "ef452114430b47167239cdb065b1e01d502c0148f1492ac1b66098a03c0ea82e",
+      "renderer": "Secret Tunnel 6 bundled OmniVoice Rust",
+      "model": "k2-fsa/OmniVoice",
+      "modelRevision": "c5fdb5ccb189668d56333f77ba2629f4cd7535f4",
+      "modelLicense": "OmniVoice noncommercial; Boson and Meta tokenizer terms",
+      "sourceClipId": "kriminalpolizei-phone-01",
+      "sourceGenerationProvenance": {
+        "clipId": "kriminalpolizei-phone-01",
+        "voiceId": "kriminalpolizei",
+        "profileId": "f700170f840543bca7413d3ccf6ac028",
+        "profileName": "GS Kriminalpolizei",
+        "text": "Hier ist die Kriminalpolizei. Gegen Sie wird wegen unerlaubten Betretens einer Grünfläche ermittelt. Welcher Schuh hat den Rasen zuerst berührt: der linke, der rechte oder beide?",
+        "referenceSha256": "ef452114430b47167239cdb065b1e01d502c0148f1492ac1b66098a03c0ea82e",
+        "synthesisReferenceSha256": "ef452114430b47167239cdb065b1e01d502c0148f1492ac1b66098a03c0ea82e",
+        "renderer": "Secret Tunnel 6 bundled OmniVoice Rust",
+        "model": "k2-fsa/OmniVoice",
+        "modelRevision": "c5fdb5ccb189668d56333f77ba2629f4cd7535f4",
+        "modelLicense": "OmniVoice noncommercial; Boson and Meta tokenizer terms",
+        "sourceClipId": "direct-seed-42",
+        "sourceFile": "opening-seed-42.wav",
+        "sourceSha256": "1a43cca7672bf2d726070831c206d30ce37c993d269a0f2083c376aef5187319",
+        "seed": 42,
+        "sourceRejectedWordFidelity": {
+          "asr_mode": "transcribe-auto-language-v1",
+          "hyphen_mode": "joined",
+          "method": "100 × max(0, 1 − word edit distance / reference words)",
+          "model": "oxide-lab/whisper-large-v3-turbo-GGUF-q4_0",
+          "normalization": "word-v3-hyphen-best-match",
+          "percent": 92,
+          "recognized_words": 27,
+          "reference_words": 26,
+          "status": "scored",
+          "transcript": "Hier ist die Kriminalpolizei. Gegen sie wird wegen unerlaubten Betretens einer grünen Fläche ermittelt. Welcher Schuh hat den Rasen zuerst berührt? Der linke, der rechte oder beide?",
+          "word_edits": 2
+        },
+        "durationSeconds": 10.48,
+        "bytes": 84524,
+        "sampleRate": 24000,
+        "channels": 1,
+        "asr": "Hier ist die Kriminalpolizei. Gegen sie wird wegen unerlaubten Betretens einer Grünfläche ermittelt. Welcher Schuh hat den Rasen zuerst berührt? Der linke, der rechte oder beide?",
+        "asrWordExact": true,
+        "asrModel": "Secret Tunnel bundled whisper-large-v3-turbo q4_0",
+        "path": "assets/voices/kriminalpolizei/kriminalpolizei-phone-01.mp3",
+        "sha256": "2ac486e5b558dc909d96f6afce7767def77a891f81076b0b6f5e33274da20e24",
+        "integratedLufs": -18.19,
+        "truePeakDbtp": -4.28,
+        "listeningReview": "not performed; user requested this saved profile"
+      },
+      "derivation": {
+        "kind": "authorized-sentence-boundary-crop",
+        "sourceFile": "assets/voices/kriminalpolizei/kriminalpolizei-phone-01.mp3",
+        "sourceSha256": "2ac486e5b558dc909d96f6afce7767def77a891f81076b0b6f5e33274da20e24",
+        "sourceManifestSha256": "a067e6290e8bf4f3c6945cfeb6965cd71976ef680473241e2867821954e16e77",
+        "sourceDecodedPcmSha256": "e8dcae0b32caaf6628e7b5d05e81c0c1bf1be62f175a55269f1c66b1e40a1d4d",
+        "sourceDecodedSamples": 251520,
+        "sourceSampleRateHz": 24000,
+        "sourceDecodedPcmDtype": "IEEE754 little-endian float32",
+        "cropStartSampleInclusive": 50400,
+        "cropEndSampleExclusive": 251520,
+        "cropStartSeconds": 2.1,
+        "cropEndSeconds": 10.48,
+        "retainedPcmSamples": 201120,
+        "retainedPcmSha256": "12c59bfd5727ea423f992788709e8346a392f9b8bc02a8442ed76920e85e8c21",
+        "boundarySilenceStartSeconds": 1.832958,
+        "boundarySilenceEndSeconds": 2.376167,
+        "boundarySilenceDurationSeconds": 0.543208,
+        "boundarySilenceThresholdDb": -38,
+        "boundaryCheckWindowSeconds": [
+          2.0,
+          2.2
+        ],
+        "boundaryCheckWindowPeakDbfs": -44.81885747020954,
+        "removedText": "Hier ist die Kriminalpolizei.",
+        "sourceGenerationEosClaim": null,
+        "completionEvidence": "Derivative excerpt from unchanged accepted source; no new generation and no native EOS claim at the cut.",
+        "authorization": "User explicitly requested the prerecorded remainder after the custom name-bearing greeting; integrator authorized a validated silent sentence-boundary crop on 2026-10-13.",
+        "sourceBoundaryWordTiming": {
+          "lastRemovedWord": {
+            "word": " Kriminalpolizei.",
+            "start": 0.86,
+            "end": 1.86
+          },
+          "firstRetainedWord": {
+            "word": " Gegen",
+            "start": 2.14,
+            "end": 2.48
+          },
+          "timestampsAreDiagnostic": true
+        }
+      },
+      "processing": {
+        "type": "sample-exact source excerpt and gain-only encoded normalization",
+        "cropFilter": "atrim=start_sample=50400,asetpts=PTS-STARTPTS",
+        "gainFilter": "volume=1.06291858328",
+        "targetLufs": -18,
+        "targetTruePeakDbtp": -1.5,
+        "iterations": 2,
+        "newVoiceSynthesis": false
+      },
+      "path": "assets/voices/kriminalpolizei/kriminalpolizei-opening-body.mp3",
+      "file": "assets/voices/kriminalpolizei/kriminalpolizei-opening-body.mp3",
+      "sha256": "e25ce2041359dd0c1b7ad61ec982f996e8c407eb48a97965828347ad27e5241e",
+      "durationSeconds": 8.38,
+      "containerDurationSeconds": 8.38,
+      "bytes": 67820,
+      "sampleRate": 24000,
+      "sampleRateHz": 24000,
+      "channels": 1,
+      "bitrateBitsPerSecond": 64000,
+      "integratedLufs": -17.99,
+      "truePeakDbtp": -4.24,
+      "decodedFloat32Bytes": 804480,
+      "decodedFloat32BytesAt48kHz": 1608960,
+      "sourceTextSha256": "b20ed385b7276d59855604951f2feadacc9f33ef3f6ed15beb507726e2ecc449",
+      "authoringHelperSha256": "c021c70e476df21b05e724c43424c6d17426d85ba41f0c7cf1b77779916a2765",
+      "listeningReview": "NOT RUN; silent authoring policy",
+      "approval": {
+        "status": "user-approved",
+        "date": "2026-10-13",
+        "scope": "Exact body excerpt from the accepted selected-Kripo recording following a custom greeting",
+        "listeningConfirmed": false
+      },
+      "sourceEncodedAsr": {
+        "asr": "Hier ist die Kriminalpolizei. Gegen sie wird wegen unerlaubten Betretens einer Grünfläche ermittelt. Welcher Schuh hat den Rasen zuerst berührt? Der linke, der rechte oder beide?",
+        "asrWordExact": true,
+        "asrBeamSize": 1,
+        "asrReadings": [
+          {
+            "beamSize": 1,
+            "transcript": "Hier ist die Kriminalpolizei. Gegen sie wird wegen unerlaubten Betretens einer Grünfläche ermittelt. Welcher Schuh hat den Rasen zuerst berührt? Der linke, der rechte oder beide?",
+            "transcribeSeconds": 11.12,
+            "words": [
+              {
+                "word": " Hier",
+                "start": 0.0,
+                "end": 0.62
+              },
+              {
+                "word": " ist",
+                "start": 0.62,
+                "end": 0.76
+              },
+              {
+                "word": " die",
+                "start": 0.76,
+                "end": 0.86
+              },
+              {
+                "word": " Kriminalpolizei.",
+                "start": 0.86,
+                "end": 1.86
+              },
+              {
+                "word": " Gegen",
+                "start": 2.14,
+                "end": 2.48
+              },
+              {
+                "word": " sie",
+                "start": 2.48,
+                "end": 2.68
+              },
+              {
+                "word": " wird",
+                "start": 2.68,
+                "end": 2.9
+              },
+              {
+                "word": " wegen",
+                "start": 2.9,
+                "end": 3.18
+              },
+              {
+                "word": " unerlaubten",
+                "start": 3.18,
+                "end": 4.02
+              },
+              {
+                "word": " Betretens",
+                "start": 4.02,
+                "end": 4.54
+              },
+              {
+                "word": " einer",
+                "start": 4.54,
+                "end": 4.76
+              },
+              {
+                "word": " Grünfläche",
+                "start": 4.76,
+                "end": 5.36
+              },
+              {
+                "word": " ermittelt.",
+                "start": 5.36,
+                "end": 5.84
+              },
+              {
+                "word": " Welcher",
+                "start": 6.56,
+                "end": 7.08
+              },
+              {
+                "word": " Schuh",
+                "start": 7.08,
+                "end": 7.28
+              },
+              {
+                "word": " hat",
+                "start": 7.28,
+                "end": 7.42
+              },
+              {
+                "word": " den",
+                "start": 7.42,
+                "end": 7.52
+              },
+              {
+                "word": " Rasen",
+                "start": 7.52,
+                "end": 7.82
+              },
+              {
+                "word": " zuerst",
+                "start": 7.82,
+                "end": 8.16
+              },
+              {
+                "word": " berührt?",
+                "start": 8.16,
+                "end": 8.54
+              },
+              {
+                "word": " Der",
+                "start": 8.62,
+                "end": 8.74
+              },
+              {
+                "word": " linke,",
+                "start": 8.74,
+                "end": 9.1
+              },
+              {
+                "word": " der",
+                "start": 9.28,
+                "end": 9.46
+              },
+              {
+                "word": " rechte",
+                "start": 9.46,
+                "end": 9.76
+              },
+              {
+                "word": " oder",
+                "start": 9.76,
+                "end": 9.94
+              },
+              {
+                "word": " beide?",
+                "start": 9.94,
+                "end": 10.26
+              }
+            ]
+          }
+        ],
+        "asrModel": "independent faster-whisper cached local model; no expected-script prompt",
+        "asrDevice": "cpu",
+        "asrComputeType": "int8",
+        "asrEffectiveComputeType": "int8_float32",
+        "asrCpuThreads": 2,
+        "asrLanguageId": "de",
+        "asrScriptPrompt": null,
+        "asrModelSha256": "e76620f83d5f5b69efd3d87e3dc180c1bd21df9fbebacfd4335e5e1efcc018da"
+      },
+      "asr": "Gegen sie wird wegen unerlaubten Betretens einer Grünfläche ermittelt. Welcher Schuh hat den Rasen zuerst berührt? Der linke, der rechte oder beide?",
+      "asrWordExact": true,
+      "asrBeamSize": 1,
+      "asrReadings": [
+        {
+          "beamSize": 1,
+          "transcript": "Gegen sie wird wegen unerlaubten Betretens einer Grünfläche ermittelt. Welcher Schuh hat den Rasen zuerst berührt? Der linke, der rechte oder beide?",
+          "transcribeSeconds": 12.95,
+          "words": [
+            {
+              "word": " Gegen",
+              "start": 0.0,
+              "end": 0.38
+            },
+            {
+              "word": " sie",
+              "start": 0.38,
+              "end": 0.58
+            },
+            {
+              "word": " wird",
+              "start": 0.58,
+              "end": 0.8
+            },
+            {
+              "word": " wegen",
+              "start": 0.8,
+              "end": 1.08
+            },
+            {
+              "word": " unerlaubten",
+              "start": 1.08,
+              "end": 1.92
+            },
+            {
+              "word": " Betretens",
+              "start": 1.92,
+              "end": 2.44
+            },
+            {
+              "word": " einer",
+              "start": 2.44,
+              "end": 2.66
+            },
+            {
+              "word": " Grünfläche",
+              "start": 2.66,
+              "end": 3.26
+            },
+            {
+              "word": " ermittelt.",
+              "start": 3.26,
+              "end": 3.74
+            },
+            {
+              "word": " Welcher",
+              "start": 4.4,
+              "end": 4.98
+            },
+            {
+              "word": " Schuh",
+              "start": 4.98,
+              "end": 5.18
+            },
+            {
+              "word": " hat",
+              "start": 5.18,
+              "end": 5.32
+            },
+            {
+              "word": " den",
+              "start": 5.32,
+              "end": 5.42
+            },
+            {
+              "word": " Rasen",
+              "start": 5.42,
+              "end": 5.72
+            },
+            {
+              "word": " zuerst",
+              "start": 5.72,
+              "end": 6.06
+            },
+            {
+              "word": " berührt?",
+              "start": 6.06,
+              "end": 6.44
+            },
+            {
+              "word": " Der",
+              "start": 6.5,
+              "end": 6.64
+            },
+            {
+              "word": " linke,",
+              "start": 6.64,
+              "end": 7.0
+            },
+            {
+              "word": " der",
+              "start": 7.16,
+              "end": 7.36
+            },
+            {
+              "word": " rechte",
+              "start": 7.36,
+              "end": 7.66
+            },
+            {
+              "word": " oder",
+              "start": 7.66,
+              "end": 7.84
+            },
+            {
+              "word": " beide?",
+              "start": 7.84,
+              "end": 8.16
+            }
+          ]
+        }
+      ],
+      "asrModel": "independent faster-whisper cached local model; no expected-script prompt",
+      "asrDevice": "cpu",
+      "asrComputeType": "int8",
+      "asrEffectiveComputeType": "int8_float32",
+      "asrCpuThreads": 2,
+      "asrLanguageId": "de",
+      "asrScriptPrompt": null,
+      "asrModelSha256": "e76620f83d5f5b69efd3d87e3dc180c1bd21df9fbebacfd4335e5e1efcc018da",
+      "status": "eligible exact source excerpt; listening NOT RUN",
+      "metadataCorrections": [
+        {
+          "date": "2026-10-13",
+          "field": "sourceLocator",
+          "previousValue": "buergeramt-story.js policeCall.openingBody",
+          "correctedValue": "buergeramt-story.js call.body",
+          "previousReceiptSha256": "b7eaf5ba6f274074a3a16f368c478c62580621b733bcc23cb98f83d581d59030",
+          "reason": "Match actual integrated story property; spoken text and encoded audio unchanged."
+        }
+      ]
+    }
+  ],
+  "heldPrivate": [],
+  "status": "Exact authorized excerpt of existing recording; no new synthesis; listening NOT RUN",
+  "loadTrigger": "Only after the accepted dynamic greeting; no preload at phone page entry"
+}

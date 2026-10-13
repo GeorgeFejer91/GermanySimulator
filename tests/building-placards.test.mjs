@@ -7,7 +7,10 @@ const ids=buildingSection.split(/\r?\n/).filter(line=>!line.includes("residentia
 assert.match(readFileSync(new URL("world3d.js",root),"utf8"),/if\(b\.residential\)\{residentialBuilding\(b\);return\}/,"residential houses own procedural signs rather than municipal image requests");
 const directory=new URL("assets/building-placards/",root);
 const files=readdirSync(directory).filter(name=>name.endsWith(".webp"));
-for(const id of ids)assert.ok(files.includes(`${id}.webp`),`${id} has no placard`);
+const world=readFileSync(new URL("world3d.js",root),"utf8");
+assert.match(world,/if\(b.id==="jobcenter"\)\{\s*const built=createJobcenterBuilding/,"Jobcenter owns its reference-specific procedural sign");
+assert.match(readFileSync(new URL("jobcenter.js",root),"utf8"),/ctx\.fillText\('jobcenter'/,"Jobcenter sign is painted locally");
+for(const id of ids.filter(id=>id!=="jobcenter"))assert.ok(files.includes(`${id}.webp`),`${id} has no placard`);
 assert.equal(files.length,new Set(files).size,"placard filenames must be unique");
 let bytes=0;
 for(const file of files){

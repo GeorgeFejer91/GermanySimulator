@@ -17,15 +17,64 @@ test('sending and scheduling cannot annoy Knick; confirmed arrival does exactly 
  const h=harness();h.counter();assert.equal(h.node('amt-line').textContent,h.window.BuergeramtStory.registration.nodes.presence.line);const link=h.links[0],round=h.level.registration.callRound;link.message({type:'call-scheduled',id:'grass',round,atMs:h.now()+2200,mode:'receipt',lateMs:0});h.tick(9000);assert.equal(h.level.registration.warnings,0);
  arrived(h);assert.equal(h.level.registration.warnings,1);assert.equal(h.node('amt-actions').children.length,0);arrived(h);assert.equal(h.level.registration.warnings,1);link.message({type:'silence',id:'grass'});assert.equal(h.level.registration.phoneSilent,false);link.message({type:'phone-hidden'});assert.equal(h.level.registration.phoneSilent,true);assert.equal(h.level.registration.silenceEvidence,'hidden');settle(h);assert.equal(h.level.registration.node,'presence');
 });
-test('missed and declined calls repeat and each new arrival increases annoyance',()=>{
- for(const outcome of ['decline','call-missed']){const h=harness();h.counter();const link=h.links[0];for(let n=1;n<=3;n++){arrived(h);assert.equal(h.level.registration.warnings,n);const oldRound=h.level.registration.callRound;link.message({type:outcome,id:'grass',round:oldRound});h.tick(Math.ceil(24000/h.level.timeScale)+1100);assert.equal(h.level.registration.callRound,oldRound+1);arrived(h,oldRound);assert.equal(h.level.registration.warnings,n)}arrived(h);assert.equal(h.level.stage,'walk-sign');assert.equal(h.counts.form,0)}
+test('four distinct confirmed calls end the appointment after the spoken fourth reaction',()=>{
+ for(const outcome of ['decline','call-missed']){
+  const h=harness();h.counter();const link=h.links[0],reactions=[];
+  for(let n=1;n<=3;n++){
+   arrived(h);assert.equal(h.level.registration.warnings,n);reactions.push(h.node('amt-line').textContent);
+   assert.equal(reactions.at(-1),h.window.BuergeramtStory.phoneWarnings[n-1]);assert.equal(h.node('amt-actions').children.length,0);
+   const oldRound=h.level.registration.callRound;link.message({type:outcome,id:'grass',round:oldRound});h.tick(Math.ceil(24000/h.level.timeScale)+1100);
+   assert.equal(h.level.registration.callRound,oldRound+1);arrived(h,oldRound);assert.equal(h.level.registration.warnings,n);
+  }
+  arrived(h);assert.equal(h.level.stage,'cancelled');assert.equal(h.level.registration.warnings,4);
+  reactions.push(h.node('amt-line').textContent);assert.equal(reactions[3],h.window.BuergeramtStory.phoneWarnings[3]);assert.equal(new Set(reactions).size,4);
+  assert.equal(h.node('amt-actions').children.length,0);assert(link.sent.some(m=>m.type==='forfeit'));
+  link.message({type:'answer',id:'grass',round:h.level.registration.callRound});link.message({type:'phone-hidden'});link.message({type:'phone-visible'});
+  assert.equal(h.level.stage,'cancelled');assert.equal(h.counts.cancel,0);h.tick(60000);
+  assert.equal(h.level.active,false);assert.equal(h.counts.cancel,1);assert.equal(h.counts.form,0);
+ }
 });
-test('browser hide, disconnect and timeout permit silence only at the counter; wake revokes it',()=>{
+
+test('confirmed browser hide permits silence; disconnect and timeout cannot claim a hidden screen',()=>{
  const waiting=harness();waiting.wait();waiting.links[0].message({type:'phone-hidden'});assert.equal(waiting.level.stage,'walk-sign');
- for(const loss of ['hidden','disconnected','heartbeat']){const h=harness();h.counter();const link=h.links[0];if(loss==='hidden')link.message({type:'phone-hidden'});else if(loss==='disconnected')link.emit('disconnected',{peer:''});else{link.emit('connected',{});h.tick(9001)}assert.equal(h.level.registration.phoneSilent,true,loss);assert.equal(h.level.stage,'reply');const round=h.level.registration.callRound;link.message({type:'phone-visible'});assert.equal(h.level.registration.phoneSilent,false);assert.equal(h.level.registration.callRound,round+1)}
+ for(const loss of ['hidden','disconnected','heartbeat']){
+  const h=harness();h.counter();const link=h.links[0];assert.equal(h.level.registration.phoneVisible,true);
+  if(loss==='hidden')link.message({type:'phone-hidden'});else if(loss==='disconnected')link.emit('disconnected',{peer:''});else{link.emit('connected',{});h.tick(9001)}
+  assert.equal(h.level.registration.phoneSilent,loss==='hidden',loss);
+  assert.equal(h.level.registration.phoneVisible,loss==='hidden'?false:null,loss);
+  assert.equal(h.level.registration.silenceEvidence,loss==='hidden'?'hidden':'');
+  const round=h.level.registration.callRound;link.message({type:'phone-visible'});
+  assert.equal(h.level.registration.phoneSilent,false);assert.equal(h.level.registration.phoneVisible,true);assert.equal(h.level.registration.callRound,round+1);
+ }
 });
+
+test('one continuously ringing call provokes all four warnings and immediate committed expulsion',()=>{
+ const h=harness('host',{voice:true});let outcome;h.config.onCancel=value=>{outcome=value;h.counts.cancel++};h.counter();const link=h.links[0],round=h.level.registration.callRound;
+ arrived(h);const reactions=[h.node('amt-line').textContent];
+ for(let warning=2;warning<=4;warning++){
+  for(let t=0;t<12;t++){link.message({type:'phone-visible'});h.tick(1000)}
+  assert.equal(h.level.registration.warnings,warning);reactions.push(h.node('amt-line').textContent);
+ }
+ assert.deepEqual(reactions,[...h.window.BuergeramtStory.phoneWarnings]);assert.equal(h.level.registration.callRound,round);
+ assert.equal(link.sent.filter(m=>m.type==='call').length,1);assert.equal(h.level.stage,'cancelled');assert.equal(h.counts.cancel,0);
+ link.message({type:'answer',id:'grass',round});h.tick(16);assert.equal(h.synth.current.text,'Jetzt Reichsadler! Raus!');h.synth.end();
+ assert.equal(h.level.active,false);assert.equal(h.counts.cancel,1);assert.equal(outcome.reason,'ringing');assert.equal(h.counts.form,0);
+});
+
+test('a returned visible page starts fresh ringing pressure after earlier silence',()=>{
+ const h=harness();h.counter();const link=h.links[0];link.message({type:'phone-hidden'});assert.equal(h.level.registration.phoneSilent,true);
+ link.message({type:'phone-visible'});link.message({type:'call-ready',id:'grass',round:h.level.registration.callRound,atMs:h.now()});arrived(h);
+ assert.equal(h.level.registration.warnings,1);for(let second=0;second<12;second++){link.message({type:'phone-visible'});h.tick(1000)}assert.equal(h.level.registration.warnings,2);
+});
+
 test('live traffic prevents silence; retired links cannot satisfy a new appointment',()=>{
  const h=harness();h.counter();const old=h.links[0];old.emit('connected',{});for(let n=0;n<10;n++){h.tick(1400);old.message({type:'sync-pong',id:999,receivedAtMs:h.now(),sentAtMs:h.now()})}assert.equal(h.level.registration.phoneSilent,false);h.level.replay(h.config);old.message({type:'phone-hidden'});assert.equal(h.level.registration.phoneSilent,false);assert.equal(h.level.registration.points,0);
+});
+
+test('a confirmed hidden page stays put away when the operating system later disconnects it',()=>{
+ const h=harness();h.counter();const link=h.links[0];link.message({type:'phone-hidden'});link.emit('disconnected',{peer:''});
+ assert.equal(h.level.registration.phoneVisible,false);assert.equal(h.level.registration.phoneSilent,true);
+ link.message({type:'phone-visible'});assert.equal(h.level.registration.phoneVisible,true);assert.equal(h.level.registration.phoneSilent,false);
 });
 
 test('backgrounding the game cannot stand in for putting the companion away',()=>{

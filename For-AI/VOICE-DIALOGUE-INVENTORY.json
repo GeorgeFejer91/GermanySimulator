@@ -1122,13 +1122,16 @@
         "Ach, wie schön. Für private Telefonate haben Sie Zeit. Für Ihr Formular offenbar nicht. Ich sitze hier ja nur...",
         "Die Dame hat einen Namen. Frau Knick. Und die Dame bearbeitet hier einen Antrag, während Sie einem Grashalm hinterhertelefonieren. Wenn Sie jetzt bitte...",
         "Sie zeigen meinen Schalter an? Ich bin vierundsiebzig und seit fünfzig Jahren hier! Mein Schalter deckt keinen Rasen. Er deckt Anträge! Jetzt halten Sie doch endlich...",
-        "SIE DROHEN MEINEM SCHALTER? DANN VERHAFTEN SIE DOCH DEN LOCHER! Ich lasse mich von Ihnen nicht anschreien!",
-        "UND SIE STEHEN HIER NICHT SO UNSCHULDIG! Der Stempel bleibt oben! Ihr Termin ist ANNULLIERT! Raus! Für einen neuen Versuch ziehen Sie draußen eine neue Nummer."
+        "SIE DROHEN MEINEM SCHALTER? DANN VERHAFTEN SIE DOCH DEN LOCHER! Ich lasse mich von Ihnen nicht anschreien!"
       ],
+      "phoneDismissal": {
+        "line": "Was stehen Sie so tadellos da?! Raus!!"
+      },
       "phoneWarnings": [
-        "Nicht rangehen reicht Ihnen, ja? MIR REICHT ES NICHT! Ihr Telefon klingelt an meinem Schalter! Stellen Sie es LAUTLOS oder schalten Sie es AUS, wenn Sie eine Anmeldung wollen! Wegstecken ist keine Einstellung!",
-        "SCHON WIEDER! Habe ich mich undeutlich ausgedrückt? Sie stecken das Telefon weg und lassen es weiterklingeln! LAUTLOS. ODER AUS. Ich bearbeite Ihren Wohnsitz, keine Klingeltonsammlung!",
-        "JETZT IST SCHLUSS MIT DEM GEKLINGEL! Solange dieses Ding an meinem Schalter Lärm macht, bleibt mein Stempel oben! Schalten Sie das Telefon aus oder stellen Sie es lautlos. DANN sprechen wir weiter!"
+        "Entschuldigen Sie. Ihr Telefon klingelt. Wir sind hier beim Bürgeramt. Stellen Sie es bitte ruhig, damit wir mit Ihrer Anmeldung weitermachen können.",
+        "Zum zweiten Mal! Ihr Telefon hat hier keinen Termin. Ich schon. Und zwar mit Ihnen. Sorgen Sie jetzt für Ruhe!",
+        "Meine letzte Warnung! Stellen Sie das Telefon jetzt aus, oder ich beende Ihren Termin!",
+        "Jetzt Reichsadler! Raus!"
       ],
       "registration": {
         "speaker": "SACHBEARBEITERIN FRAU KNICK",

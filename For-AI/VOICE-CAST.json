@@ -3473,9 +3473,40 @@
       "dialogueSources": [
         "buergeramt-story.js call.line and police"
       ]
+    },
+    {
+      "gameRole": "jobcenter-overlord",
+      "displayRole": "Jobcenter overlord",
+      "voiceId": "jobcenter-overlord",
+      "secretTunnelProfileName": "GS Evil",
+      "secretTunnelProfileId": "1ea9044d630b43c9928956a501b90ded",
+      "generalDemeanor": "Loud, commanding Jobcenter authority with an unnaturally deep processed voice.",
+      "targetValence": "negative",
+      "targetArousal": "high",
+      "reference": {
+        "source": "https://www.youtube.com/watch?v=VEyW8WrH6_I",
+        "originalSha256": "b7ab4005547c3f3eda6170be8ba6cb3cc561d2d6a26571820804eb8af090991b",
+        "workingReferenceSha256": "81e92468275ca43d304f65f87973f96d5557fbdca4ba766ca5447c3dce7ce3aa"
+      },
+      "status": "User-authorized processed recording; final encoded German ASR exact under compound normalization; listening review not performed",
+      "dialogueSources": [
+        "assets/audio/jobcenter/overlord.json text"
+      ]
     }
   ],
   "productionVoices": {
+    "jobcenter-overlord": {
+      "profileId": "1ea9044d630b43c9928956a501b90ded",
+      "profileName": "GS Evil",
+      "originalSha256": "b7ab4005547c3f3eda6170be8ba6cb3cc561d2d6a26571820804eb8af090991b",
+      "referenceSha256": "81e92468275ca43d304f65f87973f96d5557fbdca4ba766ca5447c3dce7ce3aa",
+      "renderer": "omnivoice-rs",
+      "modelRevision": "wide-rank-v2-prompt-preprocess",
+      "processing": "rubberband -4 semitones, octave undertone -19 dB / 190 Hz lowpass, 74/143 ms restrained echo, 2.2:1 compression, EBU R128 normalization",
+      "fallback": "captions",
+      "selectedOn": "2026-10-13",
+      "selection": "User-supplied GS Evil take selected for the Jobcenter overlord encounter"
+    },
     "amt-horst-stempelmann": {
       "profileId": "833480652ccf455f8184cbe752861420",
       "profileName": "GS Horst Stempelmann (amt-horst-stempelmann)",

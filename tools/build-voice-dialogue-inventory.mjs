@@ -42,7 +42,7 @@ const pools={
  quizQuestions:Object.fromEntries(questions.map(q=>[String(q.source),{germany:q.question,berlin:berlinQuestions[q.source]?.question??q.question,type:q.type??"civic",level:q.level??null}])),
  buergeramtPolicePhone:{voiceId:office.call.voiceId,call:office.call.line,replies:office.police},
  buergeramtQueueCall:office.queueCall,
- buergeramtClerk:{identity:office.clerkIdentity,counter:office.clerk.map(({line,choices})=>({line,replies:choices.map(({reply})=>reply)})),outburst:office.outburst.lines,phoneWarnings:office.phoneWarnings,registration:office.registration},
+ buergeramtClerk:{identity:office.clerkIdentity,counter:office.clerk.map(({line,choices})=>({line,replies:choices.map(({reply})=>reply)})),outburst:office.outburst.lines,phoneDismissal:office.phoneDismissal,phoneWarnings:office.phoneWarnings,registration:office.registration},
  buergeramtPatrons:office.patrons,
  buergeramtCounterClerks:{identities:office.clerks,refusal:office.clerkRefusal},
  buergeramtAmbient:office.ambient.map(row=>{const person=office.characters[row.actor]||office.patrons[{renter:"amt-konrad-wohnungszettel",parent:"amt-mechthild-elternbogen",pensioner:"amt-wolfram-rentenbescheid"}[row.actor]]||office.clerks[row.actor.replace("clerk-","")];return {...row,speaker:person.speaker,voiceId:person.voiceId}}),
