@@ -7,7 +7,7 @@ import {createAmtLampWear} from './buergeramt-lamps.js?v=20261012-counter-recove
 import {createPotatoMirror} from './buergeramt-potato-mirror.js?v=20261013-physical-mirror';
 import {amtWalkDirection,createAmtWalkSpare} from './buergeramt-walk-view.js?v=20261013-smooth-turning';
 import {prepareWithSegments,measureNaturalWidth,measureLineStats} from './assets/vendor/pretext/dist/layout.js';
-import {createJobcenterBuilding,createJobcenterEncounter} from './jobcenter.js?v=20261013-pinch-walk';
+import {createJobcenterBuilding,createJobcenterEncounter} from './jobcenter.js?v=20261013-furnace-mouth';
 const THREE_URL="./assets/vendor/three/0.186.0/build/three.module.min.js";
 const GLTF_LOADER_URL="./assets/vendor/three/0.186.0/examples/jsm/loaders/GLTFLoader.js";
 function buergeramtDoorRadiance(time,reducedMotion=false){

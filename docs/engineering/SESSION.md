@@ -300,3 +300,7 @@ timeout while the release CPU sweep ran; the sequential matrix is complete.
 Evidence remains under ignored `output/portrait-liquid/`. Forced camera/time and
 registration fixtures do not prove a natural-duration mission. Physical Android
 and perceptual listening remain NOT RUN.
+
+## Jobcenter paired eyes and furnace mouth — 2026-10-13
+
+Integrator on clean published b6b37e5. Scope: procedural flame face in jobcenter.js, forward pinch speed through the existing step, focused controller expectations, shared module cache identities and owning gameplay guidance. Restore the former paired slanted gold eyes and move the burning almond/fissure effect into a speech-driven black mouth. Keep teeth absent and retain the recording, heat rise, Gaussian ejection, direct route and pinch cancellation. Forward pinch uses existing7m/s running pace; ordinary controls and retreat retain their existing speeds. No new texture, geometry, uniform, scheduler or audio. Independent Physics/Camera reviews bind the final source; rendered desktop/phone/reduced-motion evidence remains silent and device scope is emulation.

@@ -61,7 +61,7 @@ export function stepJobcenter(state,input,dt){
  state.pitch=clamp(state.pitch+((input.ArrowUp||input.PageUp?1:0)-(input.ArrowDown||input.PageDown?1:0))*dt,-1.25,1.25);
  let forward=(input.KeyW?1:0)-(input.KeyS?1:0)+(input.forward||0);
  let side=(input.KeyD?1:0)-(input.KeyA?1:0)+(input.side||0);
- const length=Math.max(1,Math.hypot(forward,side)),speed=(input.KeyR||input.ShiftLeft||input.ShiftRight?7:3.6)*dt/length;
+ const length=Math.max(1,Math.hypot(forward,side)),speed=((input.pinchForward&&forward>0)||input.KeyR||input.ShiftLeft||input.ShiftRight?7:3.6)*dt/length;
  state.x+=(Math.cos(state.yaw)*side-Math.sin(state.yaw)*forward)*speed;
  state.z+=(-Math.sin(state.yaw)*side-Math.cos(state.yaw)*forward)*speed;
  state.distance=Math.hypot(state.x,state.z);
@@ -99,26 +99,23 @@ const flameFragment=`
   float glow=exp(-length(vec2(p.x*3.,(p.y-.3)*1.6))*5.)*(.14+heat*.13);
   float shadow=exp(-pow(p.x/.29,4.)-pow((p.y-.43)/.25,4.))*uAnger;
   color*=1.-shadow*.91;
-  // A single lidless furnace eye: a dark slit suspended in a burning almond.
-  vec2 eye=vec2(p.x/.28,(p.y-.59)/.081);
-  float eyeShape=pow(abs(eye.x),1.5)+pow(abs(eye.y),1.25);
-  float eyeRim=exp(-pow((eyeShape-.80)/.30,2.))*uAnger;
-  float iris=(1.-smoothstep(.48,1.1,eyeShape))*uAnger;
-  float pupil=exp(-pow(p.x/.019,4.)-pow((p.y-.59)/.072,6.))*uAnger;
-  float fissures=.78+.22*sin(atan(eye.y,eye.x)*27.+n*8.);
-  vec3 eyeFire=mix(vec3(1.15,.14,.005),whiteHeat,.14+heat*.34)*fissures;
-  color=mix(color,eyeFire,iris*.90);
-  color+=whiteHeat*eyeRim*(.37+heat*.16);
-  color=mix(color,vec3(.001,.0002,0.),pupil);
-  // The speaking mouth is a torn, depthless opening, never a grin or teeth.
-  float mouthWidth=.115+.035*uEnergy;
-  float mouthCentre=.31;
-  vec2 jaw=vec2((p.x+(n-.5)*.034)/mouthWidth,(p.y-mouthCentre)/(.047+.105*uEnergy));
-  float mouthDistance=length(jaw)+(fbm(p*29.+vec2(0.,-uTime*.55))-.5)*.29;
-  float mouth=(1.-smoothstep(.78,1.09,mouthDistance))*uAnger;
-  float lip=exp(-pow((mouthDistance-1.12)/.16,2.))*uAnger*(.4+.6*n);
-  color+=mix(vec3(.55,.055,.001),whiteHeat,heat*.28)*lip*.16;
-  color=mix(color,vec3(.0002,.0001,0.),mouth);
+  vec2 eye=vec2(abs(p.x)-.135,p.y-(.48+abs(p.x)*.43));
+  float sockets=exp(-pow(eye.x/.105,4.)-pow(eye.y/.053,2.))*uAnger;
+  color*=1.-sockets*.8;
+  float eyes=exp(-pow(eye.x/.083,4.)-pow(eye.y/(.017+abs(p.x)*.023),2.))*uAnger;
+  color=mix(color,vec3(1.8,1.35,.66),eyes);
+  float mouthWidth=.16+.028*uEnergy;
+  float mouthHeight=.014+.11*uEnergy;
+  vec2 jaw=vec2((p.x+(n-.5)*.015)/mouthWidth,(p.y-.31)/mouthHeight);
+  float mouthShape=pow(abs(jaw.x),1.5)+pow(abs(jaw.y),1.25);
+  float mouthRim=exp(-pow((mouthShape-.88)/.24,2.))*uAnger;
+  float mouthFire=(1.-smoothstep(.45,1.15,mouthShape))*uAnger;
+  float fissures=.78+.22*sin(atan(jaw.y,jaw.x)*27.+n*8.);
+  vec3 furnace=mix(vec3(1.15,.14,.005),whiteHeat,.14+heat*.34)*fissures;
+  color=mix(color,furnace,mouthFire*.85);
+  float mouthVoid=(1.-smoothstep(.28,.65,mouthShape))*uAnger;
+  color=mix(color,vec3(.0002,.0001,0.),mouthVoid);
+  color+=whiteHeat*mouthRim*(.28+heat*.2);
   gl_FragColor=vec4(color*(.8+uEnergy*.42+uAttack*.06+uRumble*.13+heat*.25),clamp(fire+glow,0.,1.));
  }
 `;
@@ -224,7 +221,7 @@ export function createJobcenterEncounter(T,renderer,bridge){
    if(v.pinch){
     p.x=e.clientX;p.y=e.clientY;const [a,b]=v.pinch.ids.map(id=>v.pointers.get(id));
     const change=Math.hypot(a.x-b.x,a.y-b.y)-v.pinch.span;
-    v.touch.forward=Math.abs(change)<=10?0:clamp((change-Math.sign(change)*10)/65,-1,1);v.touch.side=0;
+    v.touch.forward=Math.abs(change)<=10?0:clamp((change-Math.sign(change)*10)/65,-1,1);v.touch.side=0;v.touch.pinchForward=v.touch.forward>0;
     e.preventDefault();return;
    }
    if(p.move){v.touch.side=clamp((e.clientX-p.startX)/55,-1,1);v.touch.forward=clamp((p.startY-e.clientY)/55,-1,1)}else{v.yaw-=(e.clientX-p.x)*.004;v.pitch=clamp(v.pitch-(e.clientY-p.y)*.003,-1.25,1.25)}p.x=e.clientX;p.y=e.clientY;

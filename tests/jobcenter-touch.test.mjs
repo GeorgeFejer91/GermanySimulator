@@ -22,12 +22,12 @@ async function fixture(run){
  try{await run({encounter,surface:await open(),pointer,spread,tick,flush,media,doc,win:window,open})}
  finally{encounter.close();for(const k of names){if(originals[k])Object.defineProperty(globalThis,k,originals[k]);else delete globalThis[k]}}
 }
-test('spread-and-hold moves at bounded walking speed; inward pinch retreats without changing look',async()=>{
+test('spread-and-hold moves at bounded running speed; inward pinch retreats without changing look',async()=>{
  for(const dt of [1/60,1/30,.1])await fixture(({encounter,surface,pointer,spread,tick})=>{
   const initial=encounter.inspect();spread(surface);for(let i=0;i<2/dt;i++)tick(dt);
-  const forward=encounter.inspect();assert.ok(Math.abs(forward.z-(34-7.2))<1e-7);assert.equal(forward.x,0);assert.equal(forward.yaw,initial.yaw);assert.equal(forward.pitch,initial.pitch);
+  const forward=encounter.inspect();assert.ok(Math.abs(forward.z-(34-14))<1e-7);assert.equal(forward.x,0);assert.equal(forward.yaw,initial.yaw);assert.equal(forward.pitch,initial.pitch);
   pointer(surface,'pointermove',1,180,490);pointer(surface,'pointermove',2,210,490);for(let i=0;i<2/dt;i++)tick(dt);
-  assert.ok(Math.abs(encounter.inspect().z-34)<1e-7);
+  assert.ok(Math.abs(encounter.inspect().z-(34-14+7.2))<1e-7);
  });
 });
 test('neutral separation and two-finger pan do not creep or change view; one-finger controls remain available',async()=>fixture(({encounter,surface,pointer,tick})=>{
