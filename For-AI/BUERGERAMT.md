@@ -62,6 +62,14 @@ actors through their existing painted fallback and keeps the current effect
 overlay. This avoids an edge-on courier without a second GPU generation/sort.
 Facing, visibility, opacity and packed-batch visibility restore after capture,
 including a failed draw. Ordinary main-camera representation stays unchanged.
+Temporary mirror poses preserve the exact Euler rotation, including its order,
+and both main and reflected billboards set the full pure-yaw rotation. Do not
+restore these sprites through `quaternion.copy`: Three's equivalent Euler form
+can introduce x/z half-turns beyond 90 degrees, which a later y-only update
+turns into alternating sideways facings. Native paint inherits its source
+quaternion, so its temporary reflected pose must also clear x/z and restore
+the original Euler form. Repeated large-yaw frames and draw failure are covered
+with pinned Three rotations; silent rendered sequences exercise the shared path.
 
 Facing it nearby offers `E · SPIEGEL BETRACHTEN` through keyboard or the existing
 touch interaction. **ICH** remarks “Hä, sehe ich wirklich so aus? Eine deutsche

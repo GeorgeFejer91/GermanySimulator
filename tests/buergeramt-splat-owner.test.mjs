@@ -49,6 +49,23 @@ test('reflected native paint faces its camera, hides packed data and restores ev
  f.owner.retirePaint(paint);await f.owner.dispose();
 });
 
+test('repeated mirror draws preserve large-yaw paint and face both cameras without half-turns',async()=>{
+ const f=await fixture(1),paint=new THREE.Mesh(),source=new THREE.Mesh();paint.visible=true;paint.position.set(-3,1,0);f.owner.attachPaint(paint);
+ const camera=new THREE.PerspectiveCamera();camera.position.set(2,1,-5);
+ for(const yaw of [2.8,-2.8,Math.PI/2+.001,-Math.PI/2-.001,.4])for(let frame=0;frame<4;frame++){
+  source.rotation.set(0,yaw,0);paint.quaternion.copy(source.quaternion);
+  const rotation=paint.rotation.clone(),quaternion=paint.quaternion.clone();
+  const draw=()=>f.owner.withReflectedView(camera,()=>{
+   const normal=new THREE.Vector3(0,0,1).applyQuaternion(paint.quaternion),toward=new THREE.Vector3(camera.position.x-paint.position.x,0,camera.position.z-paint.position.z).normalize();
+   assert(normal.distanceTo(toward)<1e-12,'native reflected painting faces the reflected camera');if(frame===3)throw Error('draw failed');
+  });
+  if(frame===3)assert.throws(draw,/draw failed/);else draw();
+  assert.deepEqual(paint.rotation.toArray(),rotation.toArray(),'mirror preserves exact Euler representation');
+  assert(paint.quaternion.angleTo(quaternion)<1e-7);assert.equal(f.jobs.length,0);
+ }
+ f.owner.retirePaint(paint);await f.owner.dispose();
+});
+
 test('a shared Gaussian batch sorts between two paint planes without owning their depth',async()=>{
  for(const [farDepth,nearDepth,projectionScale,projectionOffset] of [[4.05,1.18,-1,-.2],[5,4,-.1,-.8]]){
   const f=await fixture(),{owner}=f;

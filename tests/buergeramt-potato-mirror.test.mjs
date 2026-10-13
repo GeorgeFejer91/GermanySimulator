@@ -8,6 +8,28 @@ import vm from 'node:vm';
 
 function approach(h){h.moveTo(0,4.8);h.moveTo(-5.65,4.8);h.faceToward(-5.65,5.36)}
 
+test('mirror rendering preserves billboard Euler state and subsequent main facing across repeated frames',()=>{
+ const source=readFileSync('world3d.js','utf8'),start=source.indexOf('    amtPotatoMirror.render(renderer,amtCamera,mirrorCamera=>{'),end=source.indexOf('    drawView(amtCamera);',start);
+ assert(start>=0&&end>start);
+ const actors=Array.from({length:3},(_,i)=>({id:'actor-'+i,mesh:new THREE.Mesh(new THREE.PlaneGeometry(1,2),new THREE.MeshBasicMaterial({opacity:.3+i*.2}))}));
+ actors.forEach((a,i)=>{a.mesh.position.set(i-1,1,0);a.mesh.visible=i!==0});
+ const camera=new THREE.PerspectiveCamera();camera.position.set(3,1,-5);
+ let fail=false,draws=0;
+ const context=vm.createContext({renderer:{},amtCamera:camera,amtCharacters:actors.slice(0,2),amtMoving:actors.slice(2),amtOmenSplat:null,
+  amtGaussian:{inspect:()=>({actors:[{id:'actor-0',cloudVisible:true}]}),withReflectedView:(_,draw)=>draw()},
+  amtPotatoMirror:{render:(_,__,draw)=>draw(camera)},drawView:()=>{
+   draws++;for(const a of actors){const toward=new THREE.Vector3(camera.position.x-a.mesh.position.x,0,camera.position.z-a.mesh.position.z).normalize();assert(new THREE.Vector3(0,0,1).applyQuaternion(a.mesh.quaternion).distanceTo(toward)<1e-12)}
+   assert.equal(actors[0].mesh.visible,true);assert.equal(actors[0].mesh.material.opacity,1);if(fail)throw Error('draw failed');
+  }});
+ for(const yaw of [2.8,-2.8,Math.PI/2+.001,-Math.PI/2-.001,.4])for(let frame=0;frame<4;frame++){
+  actors.forEach(a=>{a.mesh.rotation.y=yaw;assert(new THREE.Vector3(0,0,1).applyQuaternion(a.mesh.quaternion).distanceTo(new THREE.Vector3(Math.sin(yaw),0,Math.cos(yaw)))<1e-12,'next main frame faces its camera')});
+  const poses=actors.map(a=>[a.mesh.rotation.toArray(),a.mesh.visible,a.mesh.material.opacity]);
+  fail=frame===3;if(fail)assert.throws(()=>vm.runInContext(source.slice(start,end),context),/draw failed/);else vm.runInContext(source.slice(start,end),context);
+  actors.forEach((a,i)=>assert.deepEqual([a.mesh.rotation.toArray(),a.mesh.visible,a.mesh.material.opacity],poses[i],'mirror must restore the main pose exactly, including error path'));
+ }
+ assert.equal(draws,20);
+});
+
 test('reflection has equal plane distance, parallel lateral travel, and reflected heading',()=>{
  const mirror={x:-5.65,z:5.36};
  for(const x of [-6.2,-5.65,-4.8])for(const z of [3.2,4.2,4.8])for(const yaw of [0,.4,Math.PI,4.1]){

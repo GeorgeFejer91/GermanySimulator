@@ -1,4 +1,4 @@
-import {createAmtGaussianScene,loadAmtSplatModule} from './buergeramt-gaussian-scene.js?v=20261013-live-mirror';
+import {createAmtGaussianScene,loadAmtSplatModule} from './buergeramt-gaussian-scene.js?v=20261013-steady-reflection';
 import {mouthPaintGlsl} from './buergeramt-mouth-paint.js?v=20261011-mouth-consistency';
 import {createAmtFloor} from './buergeramt-floor.js?v=20261013-wavy-decay';
 import {createAmtPortraitMelt} from './buergeramt-portrait-melt.js?v=20261012-flowing-paint-lamps';
@@ -1343,7 +1343,7 @@ function showRendererFailure(error){
   function animateAmtCharacters(now,level){
     const speech=level.lipSpeech;
     for(const actor of amtCharacters){
-      actor.mesh.rotation.y=Math.atan2(amtCamera.position.x-actor.mesh.position.x,amtCamera.position.z-actor.mesh.position.z);
+      actor.mesh.rotation.set(0,Math.atan2(amtCamera.position.x-actor.mesh.position.x,amtCamera.position.z-actor.mesh.position.z),0);
       const speaking=speech?.active&&(speech.actor===actor.id||speech.actor===actor.lipId||actor.performance&&speech.actor==="clerk-"+actor.counter);
       const frame=actor.performance?actor.lead?level.clerkPerformance.row*8+level.clerkPerformance.frame:Math.floor(now/250+actor.phase*8)%8:Math.floor(now/1000*24+actor.phase*24)%64;
       actor.frame=frame;
@@ -1365,7 +1365,7 @@ function showRendererFailure(error){
       }
       const breath=Math.sin(now/1900+actor.phase*3)*.78+Math.sin(now/3300+actor.phase*5)*.22;
       actor.mesh.material.userData.breath.value=breath;
-      actor.mesh.rotation.y=Math.atan2(amtCamera.position.x-actor.mesh.position.x,amtCamera.position.z-actor.mesh.position.z);
+      actor.mesh.rotation.set(0,Math.atan2(amtCamera.position.x-actor.mesh.position.x,amtCamera.position.z-actor.mesh.position.z),0);
       actor.mesh.scale.set(1,1,1);actor.mesh.position.y=actor.mesh.geometry.parameters.height/2;
       const id=actor.lead?'clerk':actor.animationId??actor.id,fogExempt=level.fever?.active&&level.fever.id===id;
       if(actor.mesh.material.fog===fogExempt){actor.mesh.material.fog=!fogExempt;actor.mesh.material.needsUpdate=true}
@@ -1381,7 +1381,7 @@ function showRendererFailure(error){
       const state=states.find(item=>item.id===actor.id);
       if(!state)continue;
       actor.mesh.position.set(state.x,actor.height/2,state.z);
-      actor.mesh.rotation.y=Math.atan2(amtCamera.position.x-state.x,amtCamera.position.z-state.z);
+      actor.mesh.rotation.set(0,Math.atan2(amtCamera.position.x-state.x,amtCamera.position.z-state.z),0);
       const distance=Math.hypot(amtCamera.position.x-state.x,amtCamera.position.z-state.z),close=distance<5;
       if(close&&!actor.detail){const url=`./assets/buergeramt/characters/${actor.id}-detail.webp?v=20261011-published-features`;
         actor.detail=amtTexture(url,undefined,error=>console.warn("Bürgeramt detail unavailable",actor.id,error));}
@@ -1670,17 +1670,17 @@ function showRendererFailure(error){
     }finally{renderCamera.layers.set(0);renderer.autoClear=true;amtScene.background=background}
     }
     amtPotatoMirror.render(renderer,amtCamera,mirrorCamera=>{
-      const actors=[...amtCharacters,...amtMoving],poses=actors.map(actor=>[actor.mesh.quaternion.clone(),actor.mesh.visible,actor.mesh.material.opacity]);
+      const actors=[...amtCharacters,...amtMoving],poses=actors.map(actor=>[actor.mesh.rotation.clone(),actor.mesh.visible,actor.mesh.material.opacity]);
       const clouds=new Set(amtGaussian.inspect().actors.filter(actor=>actor.cloudVisible).map(actor=>actor.id)),omenVisible=amtOmenSplat?.inspect().visible;
       // Packed volumes are generated for the main camera. The reflected view
       // uses their existing paint rather than an edge-on stale GPU silhouette.
       try{
         for(const actor of actors){
-          actor.mesh.rotation.y=Math.atan2(mirrorCamera.position.x-actor.mesh.position.x,mirrorCamera.position.z-actor.mesh.position.z);
+          actor.mesh.rotation.set(0,Math.atan2(mirrorCamera.position.x-actor.mesh.position.x,mirrorCamera.position.z-actor.mesh.position.z),0);
           if(clouds.has(actor.lead?'clerk':actor.animationId??actor.id)||omenVisible&&actor===amtMoving[0]){actor.mesh.visible=true;actor.mesh.material.opacity=1}
         }
         amtGaussian.withReflectedView(mirrorCamera,()=>drawView(mirrorCamera,true));
-      }finally{actors.forEach((actor,i)=>{actor.mesh.quaternion.copy(poses[i][0]);actor.mesh.visible=poses[i][1];actor.mesh.material.opacity=poses[i][2]})}
+      }finally{actors.forEach((actor,i)=>{actor.mesh.rotation.copy(poses[i][0]);actor.mesh.visible=poses[i][1];actor.mesh.material.opacity=poses[i][2]})}
     });
     drawView(amtCamera);
     amtLampWear.render(renderer);

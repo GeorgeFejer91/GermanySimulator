@@ -1,0 +1,9 @@
+# Office character rotation repair — 2026-10-13
+
+Integrator-owned scope, base `5086c64`; isolated `codex/steady-office-character` worktree started clean. The shared checkout's floor/grace work is outside this change.
+
+Allowed changes: the office billboard facing and temporary mirror poses in `world3d.js`, native reflected paint in `buergeramt-splat.js`, focused regression/browser fixtures, owning `For-AI/BUERGERAMT.md` guidance and affected entry/import cache tags. Preserve character routes, displacement-driven animation clocks, floor/goop timing, collision, scale, visibility/depth policy, asynchronous GPU ownership, mirror framing and allocated player voice. No new assets, dependencies or renderer abstraction.
+
+Confirmed existing failure: quaternion restoration converts large pure yaw to Euler x/z half-turns; the next y-only update alternates character facing. Existing quaternion-only tests miss this. Risk is high likelihood across shared mirror rendering; use actual pinned Three rotations in repeated-frame component tests and fresh silent desktop/mobile rendered sequences. Verify temporary reflected facing, exact Euler restoration, next-frame main facing, hidden actors, draw failure and unchanged GPU dispatch. Source/CPU evidence alone cannot approve visible steadiness.
+
+Repository fixtures and captured command exit codes own test evidence under ignored `output/`; the generic skill's test-report script/template and quality-limit configuration are absent. Project `For-AI/SKILLS.md` requires existing fixtures rather than a new testing framework. Required independent Physics and Camera reviews use one frozen candidate. Unrelated root cold-transfer guard investigation remains with the floor/grace owner.

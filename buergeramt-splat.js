@@ -62,12 +62,12 @@ export async function createAmtSplatOwner({THREE,renderer,scene,actorLayer=0,sig
     attachPaint(mesh){if(disposed||failure)throw new Error('Bürgeramt paint owner unavailable');mesh.layers?.set(actorLayer);paints.add(mesh);scene.add(mesh)},
     retirePaint(mesh){paints.delete(mesh);mesh.visible=false;scene.remove(mesh);if(!paints.size)paintDepth=null},
     withReflectedView(camera,draw){
-      const prior=reflectedPaintOnly,visible=spark.visible,poses=[...paints].filter(mesh=>mesh.visible).map(mesh=>[mesh,mesh.quaternion.clone()]);
+      const prior=reflectedPaintOnly,visible=spark.visible,poses=[...paints].filter(mesh=>mesh.visible).map(mesh=>[mesh,mesh.rotation.clone()]);
       reflectedPaintOnly=true;spark.visible=false;
       try{
-        for(const [mesh] of poses)mesh.rotation.y=Math.atan2(camera.position.x-mesh.position.x,camera.position.z-mesh.position.z);
+        for(const [mesh] of poses)mesh.rotation.set(0,Math.atan2(camera.position.x-mesh.position.x,camera.position.z-mesh.position.z),0);
         return draw();
-      }finally{for(const [mesh,quaternion] of poses)mesh.quaternion.copy(quaternion);reflectedPaintOnly=prior;spark.visible=visible}
+      }finally{for(const [mesh,rotation] of poses)mesh.rotation.copy(rotation);reflectedPaintOnly=prior;spark.visible=visible}
     },
     attach(mesh){if(disposed||failure)throw new Error('Bürgeramt splat owner unavailable');if(retired.has(mesh)||freed.has(mesh))throw new Error('Retired splat cannot be attached');if(!meshes.has(mesh)){meshes.add(mesh);scene.add(mesh)}return mesh},
     retire(mesh,cleanup){
