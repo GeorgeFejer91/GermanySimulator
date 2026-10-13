@@ -117,3 +117,34 @@ Final silent production-worker tests pass desktop and Android portrait/landscape
 Sixbaseline64f7dce andsixcandidatecoldroot runs pass18MB/title4Hz/1.6MP/input gates; candidatemax17861164bytes,9acceptedinputsperrun,zeroerrors,inputp95max71.1ms vsbaseline59.5ms. ConcurrentprivateKripoauthoringwasactive; thereisno speedupclaim. PhysicalAndroid remainsNOTRUN. Oneindependenttechnicalreview owns the batching/cache/parser/hashmalformation checks; Physics/Camera omitted because this change adds no world geometry, placement, movement, camera, scale or animation assets and reuses existing cue/lip ownership. Kripo tone-conversion teacher samples were separately useraccepted; the compactname-modeltrial remains private until reviewed.
 
 Final combined Node run passes807/807; focused local-speech/asset run53/53. Existing fixed-voice curator passes61production/1sceneexception/45blocked/42archived; native saved-profile source/referencebytes were separately verified, liveProfileCLI not run by the curator. Review mutations and exact final source hashes remain task evidence.
+
+# Two readable welcome popups — 2026-10-13
+
+Integrator-owned on base `e3b2ba3`, published through an isolated candidate
+on `40bd396`. Scope: the opening briefing in `game.js`,
+its scoped dialogue styles, existing `game-hud.js` Pretext measurements,
+`index.html` cache identities, a focused browser regression and the owning
+`For-AI/GAMEPLAY.md` rule. Keep exactly two pages of the existing regional
+copy, visible immediately, automatically narrated, with only Next. Preserve
+all other dialogue, subtitles, voice settings, the humor forms and mission
+completion callback. No assets, dependencies, world geometry, movement,
+animation or camera changes; Physics/Camera review is outside this UI scope.
+Existing Steinmeier edits in seven files belong to another active chat and
+must be preserved. No known baseline failures. Validate real opening input,
+two-page navigation, interrupted/muted/stalled speech, desktop/Android
+emulation, 320px, enlarged text, spacing overrides and pinned Pretext.
+
+Validation: 608/608 isolated Pages-selected Node checks pass (612/612 on the
+initial combined checkout), followed by 16/16
+focused checks after the final bounds fix. Four welcome checks fail against the
+original 4/5-page implementation. The fixed-voice curator and all six exact-RGBA
+city delivery checks pass. Eleven silent Chromium profiles verify 22 popups,
+real S/Next input, narration request/start/end/cancellation, restored phone
+controls, pinned Pretext, 320px, 200% zoom/text and spacing overrides. The two
+extreme enlarged layouts retain full copy through keyboard-accessible vertical
+reading while Next stays anchored. Six cold desktop/Android-emulation budget
+runs pass on ANGLE/Intel Iris Xe with nine accepted inputs and no errors per run.
+No performance speedup is claimed. Physical Android, natural humor-form/full
+mission completion and perceptual listening are NOT RUN. Evidence is ignored
+under output/playwright/welcome/. An isolated publication candidate preserves
+the already-published Jobcenter glow and excludes other chats' unfinished work.

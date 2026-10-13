@@ -98,7 +98,7 @@ function schedule(){if(queued||document.hidden)return;queued=true;requestAnimati
 
 // Actual, bounded text measurements with the shipped Pretext version. DOM owns
 // wrapping; a long file page scrolls at zoom rather than truncating instructions.
-const fitSelectors=['#humor-requirements .humor-signature>span','.dialogue-actions button','#subtitle-toggle','#city-status button','#energy-warning','.wanted small','#fax-title','#fax-text','.fax-heading>span','#mission-fax button','.file-header h2','.file-header button','.file-tabs button','.file-page button','.mission-body small','#anmeldung-badge','#mission-title','#mission-text','.rule small','#rule-id','#rule-text','.stats span','.germanness>small','#germanness-value','#law-power','.wurst-pass>b','.file-controls dt','.file-controls dd','.file-page>a','#toast','#bark-speaker','#police-bark-text','#violation-law','#violation-title','#violation-text','#city-notices small','#city-notices strong','#city-notices b','#city-notices p','#city-notices em','#city-notices .wurst-alert-body span'];
+const fitSelectors=['.dialogue.welcome #speaker','.dialogue.welcome #dialogue-text','#humor-requirements .humor-signature>span','.dialogue-actions button','#subtitle-toggle','#city-status button','#energy-warning','.wanted small','#fax-title','#fax-text','.fax-heading>span','#mission-fax button','.file-header h2','.file-header button','.file-tabs button','.file-page button','.mission-body small','#anmeldung-badge','#mission-title','#mission-text','.rule small','#rule-id','#rule-text','.stats span','.germanness>small','#germanness-value','#law-power','.wurst-pass>b','.file-controls dt','.file-controls dd','.file-page>a','#toast','#bark-speaker','#police-bark-text','#violation-law','#violation-title','#violation-text','#city-notices small','#city-notices strong','#city-notices b','#city-notices p','#city-notices em','#city-notices .wurst-alert-body span'];
 function measure(){
  if(typeof setLocale==='function')setLocale(language||'de');
  const pageZoom=parseFloat(getComputedStyle(document.documentElement).zoom)||1;
@@ -152,6 +152,7 @@ function measure(){
  if(!manual)document.body.style.setProperty('--subtitle-toggle-bottom',subtitleBottom+'px');
  document.body.style.setProperty('--subtitle-toggle-height',subtitles.getBoundingClientRect().height/zoom+'px');
  const top=rail.hidden?12:rail.getBoundingClientRect().bottom/zoom+8,dock=document.querySelector('.control-dock');
+ document.body.style.setProperty('--welcome-top',Math.max(top,subtitleBottom+8)+'px');
  const bottom=dock.getClientRects().length?dock.getBoundingClientRect().top/zoom:innerHeight/zoom-(parseFloat(getComputedStyle(byId('app')).getPropertyValue('--subtitle-height'))||0);
  const guideBounds=guide.getBoundingClientRect(),noticeBounds=notices.getBoundingClientRect();
  if(guide.classList.contains('stacked')&&!rail.hidden){guide.style.top=top+'px';const available=Math.max(0,bottom-top-12);guide.dataset.pointerFit=available>=160?'fit':'file';guide.style.gridTemplateRows=Math.max(160,Math.min(192,available))+'px'}else{guide.dataset.pointerFit='fit';guide.style.removeProperty('top');guide.style.removeProperty('grid-template-rows')}
