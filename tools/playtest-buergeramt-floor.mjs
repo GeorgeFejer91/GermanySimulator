@@ -12,6 +12,7 @@ const mime={'.html':'text/html','.js':'text/javascript','.css':'text/css','.webp
 const files=['world3d.js','buergeramt.js','buergeramt-goop.js','buergeramt-floor.js','buergeramt-portrait-melt.js','buergeramt-lamps.js','index.html','3d.html'];
 const sources=new Map(files.map(file=>[resolve(file),readFileSync(file)]));
 if(process.env.FLOOR_SOURCE_FILE)sources.set(resolve('buergeramt-floor.js'),readFileSync(process.env.FLOOR_SOURCE_FILE));
+if(process.env.PORTRAIT_SOURCE_FILE)sources.set(resolve('buergeramt-portrait-melt.js'),readFileSync(process.env.PORTRAIT_SOURCE_FILE));
 const server=createServer((req,res)=>{
   try{
     const path=new URL(req.url,'http://localhost').pathname,file=resolve(root,'.'+decodeURIComponent(path==='/'?'/index.html':path));
@@ -81,6 +82,7 @@ try{
         const state=await page.evaluate(()=>({floor:Germany3D.amtFloor,portrait:Germany3D.amtPortraitMelt,lamps:Germany3D.amtLamps,clock:BuergeramtLevel.floorState}));
         const progress=time/90;assert.ok(Math.abs(state.clock.speed-(.65+.35*progress))<1e-8);
         assert.ok(Math.abs(state.clock.goop-(1-progress))<1e-8);assert.equal(state.portrait.melt,state.floor.melt);
+        if(!process.env.PORTRAIT_SOURCE_FILE)assert.equal(state.portrait.paintMelt,Math.min(1,state.floor.melt*1.15));
         assert.ok(state.lamps.levels.every(level=>Math.abs(level-progress)<1e-6));assert.equal(state.floor.failure,null);
         if(time===90)assert.equal(state.floor.targets,0);
         const screenshot=await page.screenshot({path:resolve(out,`${name}-recovery-${time}s.png`)});
@@ -97,8 +99,11 @@ try{
       const state=await page.evaluate(()=>({...Germany3D.amtFloor,portrait:Germany3D.amtPortraitMelt,lamps:Germany3D.amtLamps,pigment:__floorGpu.stats(),render:Germany3D.inspectAssets().render,memory:Germany3D.inspectAssets().memory}));
       assert.equal(state.failure,null);assert.equal(state.time,time);assert.equal(state.targets,time===0||name==='procedural-fallback'?0:2);assert.equal(state.speed,1-.35*state.melt);
       assert.equal(state.depthWrite,true);assert.equal(state.transparent,false);assert.equal(state.opacity,1);
-      assert.equal(state.textureBytes,time===0||name==='procedural-fallback'?0:(width<=700?128*160:256*320)*32);
-      assert.equal(state.portrait.melt,state.melt);if(time>=480&&state.pigment){assert.ok(state.pigment.paint>.00002,'portrait paint enters the persistent floor');assert.ok(state.pigment.colored>.00002,'actual portrait colors mix with the tiles');}if(state.pigment){assert.ok(state.pigment.white>.02&&state.pigment.black>.02,'retain both oils through the waves');assert.ok(state.pigment.variance>.025,'do not diffuse to a featureless grey floor');}
+      const compact=mobile||width<=700;
+      assert.deepEqual(state.resolution,compact?[128,160]:[256,320]);
+      assert.equal(state.textureBytes,time===0||name==='procedural-fallback'?0:(compact?128*160:256*320)*32);
+      assert.equal(state.portrait.melt,state.melt);
+      if(!process.env.PORTRAIT_SOURCE_FILE)assert.equal(state.portrait.paintMelt,Math.min(1,state.melt*1.15));if(time>=480&&state.pigment){assert.ok(state.pigment.paint>.00002,'portrait paint enters the persistent floor');assert.ok(state.pigment.colored>.00002,'actual portrait colors mix with the tiles');}if(state.pigment){assert.ok(state.pigment.white>.02&&state.pigment.black>.02,'retain both oils through the waves');assert.ok(state.pigment.variance>.025,'do not diffuse to a featureless grey floor');}
       const screenshot=await page.screenshot({path:resolve(out,`${name}-${time}s.png`)});captures.push({time,...state,screenshotHash:createHash('sha256').update(screenshot).digest('hex')});
       await page.evaluate(()=>{__floorTest.pose(BuergeramtStory.presidentPortrait.x,1.7,Math.PI);window.__floorPitch=0;__floorRender()});await page.screenshot({path:resolve(out,`${name}-portrait-${time}s.png`)});await page.evaluate(()=>{__floorTest.pose(0,4.8);window.__floorPitch=-.58;__floorRender()});
       if(time>=300){await page.evaluate(()=>{const p=BuergeramtStory.presidentPortrait;__floorTest.pose(p.x+2,p.z-3,Math.atan2(-2,-3));window.__floorPitch=-.1;__floorRender()});await page.screenshot({path:resolve(out,`${name}-portrait-contact-${time}s.png`)});await page.evaluate(()=>{__floorTest.pose(0,4.8);window.__floorPitch=-.58;__floorRender()});}
