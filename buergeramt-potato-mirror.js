@@ -3,11 +3,7 @@
 export function potatoReflection(view,mirror){
  return{x:view.x,z:2*(mirror.z-.025)-view.z,yaw:Math.PI+view.yaw,phase:(view.walkedDistance||0)*Math.PI*2/1.35};
 }
-export function potatoMirrorAnchor(view,mirror){
- const limit=mirror.width/2-.38,glassX=Math.max(mirror.x-limit,Math.min(mirror.x+limit,view.x));
- return{x:2*glassX-view.x,z:view.z};
-}
-export function frameMirrorDouble({THREE:T,frustum,mirror,camera,preferred}){
+export function mirrorGlassVisible({THREE:T,frustum,mirror}){
  const z=mirror.z-.025,left=mirror.x-mirror.width/2+.06,right=mirror.x+mirror.width/2-.06;
  let polygon=[new T.Vector3(left,.08,z),new T.Vector3(right,.08,z),new T.Vector3(right,mirror.height-.08,z),new T.Vector3(left,mirror.height-.08,z)];
  for(const plane of frustum.planes){
@@ -17,19 +13,9 @@ export function frameMirrorDouble({THREE:T,frustum,mirror,camera,preferred}){
    if(da>=0)clipped.push(a);
    if((da>=0)!==(db>=0))clipped.push(a.clone().lerp(b,da/(da-db)));
   }
-  polygon=clipped;if(!polygon.length)return null;
+  polygon=clipped;if(!polygon.length)return false;
  }
- const point=new T.Vector3((camera.position.x+preferred.x)/2,(camera.position.y+1.03)/2,z);
- if(!frustum.containsPoint(point)){
-  const center=polygon.reduce((sum,p)=>sum.add(p),new T.Vector3()).multiplyScalar(1/polygon.length);
-  let nearest=null,distance=Infinity;
-  for(let i=0;i<polygon.length;i++){
-   const a=polygon[i],b=polygon[(i+1)%polygon.length],edge=b.clone().sub(a),t=Math.max(0,Math.min(1,point.clone().sub(a).dot(edge)/Math.max(1e-12,edge.lengthSq()))),candidate=a.clone().addScaledVector(edge,t);
-   const d=candidate.distanceToSquared(point);if(d<distance){distance=d;nearest=candidate;}
-  }
-  point.copy(nearest).lerp(center,.08);
- }
- return{x:2*point.x-camera.position.x,y:2*point.y-camera.position.y-1.03,z:preferred.z,glassPoint:point.toArray()};
+ return true;
 }
 export function prepareMirrorCamera({THREE:T,camera,reflected,mirror,pane,textureMatrix}){
  camera.updateMatrixWorld();pane.updateWorldMatrix(true,false);
@@ -115,28 +101,25 @@ export function createPotatoMirror({THREE:T,scene,mirror,mobile=false}){
  function update(next){
   view=next;
   if(!view){rig.visible=false;previous=null;lastPose=null;releaseTarget();return}
-  const pose=potatoReflection(view,mirror),anchor=potatoMirrorAnchor(view,mirror);
-  // No upper-distance gate. Keep the double in the finite glass off axis.
+  const pose=potatoReflection(view,mirror);
   rig.visible=view.z<z-.06;
   // Sample gait between visible captures, not between faster display frames
   // that may repeat the same accepted simulation position.
   const before=capturedView||previous;
   const moved=before&&before.generation===view.positionGeneration&&Math.hypot(view.x-before.x,view.z-before.z)>1e-7;
   const stride=moved?Math.sin(pose.phase)*.3:0;
-  rig.position.set(anchor.x,0,anchor.z);rig.rotation.y=-view.yaw;
+  rig.position.set(view.x,0,view.z);rig.rotation.y=-view.yaw;
   const forward=moved?(view.x-before.x)*Math.sin(view.yaw)-(view.z-before.z)*Math.cos(view.yaw):0;
   const sideways=moved?(view.x-before.x)*Math.cos(view.yaw)+(view.z-before.z)*Math.sin(view.yaw):0;
   const travel=moved?Math.hypot(forward,sideways):1;
   for(let i=0;i<2;i++){const sign=i?1:-1;legs[i].rotation.x=sign*stride*forward/travel;legs[i].rotation.z=sign*stride*sideways/travel*.6;arms[i].rotation.x=-legs[i].rotation.x*.7;arms[i].rotation.z=sign*(.09+Math.abs(stride)*.08)}
-  previous={x:view.x,z:view.z,generation:view.positionGeneration};lastPose={...pose,anchor,moving:!!moved,stride};
+  previous={x:view.x,z:view.z,generation:view.positionGeneration};lastPose={...pose,moving:!!moved,stride};
  }
  function render(renderer,camera,drawView,now=performance.now()){
   if(disposed||!view||!rig.visible||!group.visible||!group.parent?.visible||glass.opacity<=0||camera.position.z>=z-.06){capturedView=null;return false}
   camera.updateMatrixWorld();pane.updateWorldMatrix(true,false);
   viewMatrix.multiplyMatrices(camera.projectionMatrix,camera.matrixWorldInverse);frustum.setFromProjectionMatrix(viewMatrix);
-  const framed=frameMirrorDouble({THREE:T,frustum,mirror,camera,preferred:lastPose.anchor});
-  if(!framed){capturedView=null;return false}
-  rig.position.set(framed.x,framed.y,framed.z);lastPose.framing=framed;
+  if(!mirrorGlassVisible({THREE:T,frustum,mirror})){capturedView=null;return false}
   if(target&&now-lastCapture<1000/60-.5)return false;
   renderer.getDrawingBufferSize(size);const scale=Math.min(1,cap/Math.max(size.x,size.y)),width=Math.max(32,Math.round(size.x*scale)),height=Math.max(32,Math.round(size.y*scale));
   if(!target){target=new T.WebGLRenderTarget(width,height,{type:T.HalfFloatType,depthBuffer:true});target.texture.generateMipmaps=false;glass.uniforms.reflection.value=target.texture}

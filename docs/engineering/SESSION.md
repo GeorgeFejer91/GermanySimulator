@@ -1,26 +1,11 @@
-# Office character rotation repair — 2026-10-13
+# Physical potato mirror repair — 2026-10-13
 
-Integrator-owned scope, base `5086c64`; isolated `codex/steady-office-character` worktree started clean. The shared checkout's floor/grace work is outside this change.
+Integrator-owned scope, integrated published base `1b0b3ca` (JWD, Schalter and floor grace); isolated `codex/physical-potato-reflection` worktree. Preserve the shared checkout's unrelated work.
 
-Allowed changes: the office billboard facing and temporary mirror poses in `world3d.js`, native reflected paint in `buergeramt-splat.js`, focused regression/browser fixtures, owning `For-AI/BUERGERAMT.md` guidance and affected entry/import cache tags. Preserve character routes, displacement-driven animation clocks, floor/goop timing, collision, scale, visibility/depth policy, asynchronous GPU ownership, mirror framing and allocated player voice. No new assets, dependencies or renderer abstraction.
+Allowed changes: potato placement and finite-glass capture gating in `buergeramt-potato-mirror.js`, its reflection-only layer/depth integration in `world3d.js`, focused mirror regression/browser fixtures, owning `For-AI/BUERGERAMT.md` and `ASSET-POLICY.md` guidance, and affected entry/import cache tags. Preserve character routes, displacement-driven animation clocks, floor/goop timing, collision, scale, exact Euler restoration, asynchronous GPU ownership and allocated player voice. No new assets, dependencies or renderer abstraction.
 
-Confirmed existing failure: quaternion restoration converts large pure yaw to Euler x/z half-turns; the next y-only update alternates character facing. Existing quaternion-only tests miss this. Risk is high likelihood across shared mirror rendering; use actual pinned Three rotations in repeated-frame component tests and fresh silent desktop/mobile rendered sequences. Verify temporary reflected facing, exact Euler restoration, next-frame main facing, hidden actors, draw failure and unchanged GPU dispatch. Source/CPU evidence alone cannot approve visible steadiness.
+Confirmed existing failure: `potatoMirrorAnchor` clamps the proxy sideways; `frameMirrorDouble` shifts it to a visible glass polygon, and the private draw clears room depth. These implement the superseded always-visible requirement and violate the latest physical-reflection request. The proxy must stay at the actual player's ground position for the reflected-camera pass. The finite pane, camera frustum and real opaque depth must determine what is seen. No distance cutoff, arbitrary angle threshold or center-only hiding rule. Keep the mirror reflecting the room even when self-image rays miss its aperture.
 
-Repository fixtures and captured command exit codes own test evidence under ignored `output/`; the generic skill's test-report script/template and quality-limit configuration are absent. Project `For-AI/SKILLS.md` requires existing fixtures rather than a new testing framework. Required independent Physics and Camera reviews use one frozen candidate. Unrelated root cold-transfer guard investigation remains with the floor/grace owner.
+Risk is high likelihood in off-axis and partially visible glass. Use actual pinned Three component tests for unchanged physical proxy placement, ray/aperture intersections, capture gating, reflected camera/clipping, lifecycle and failure restoration; use rendered native and diagnostic identification frames for near/far alignment, aperture edges, impossible side/partial views, opaque blockers, resize and close. The identification material changes only color, retaining production geometry, transforms, layers and depth. Source/CPU evidence alone cannot approve visibility. Required independent Physics and Camera reviews use one frozen candidate.
 
-The publication guard investigation reproduced an 18 MB failure on the existing base: the same Grenze font is fetched for both CSS and an independent placard face. Scope now also includes the coordinated two-path font-reuse patch (`world3d.js` placard preparation/family aliases, `tests/browser-performance.test.mjs`) and its owning `For-AI/ASSET-POLICY.md` contract. The worker's queued reuse/failure regression is red on the old code and green on the patch. Six hardware-browser probes preserve sampled placard widths/line counts (29 root instances, 18 diagnostic) and representative glyph raster hashes while reducing root font requests from two to one; standalone diagnostic preparation stays one. No CSS, text, layout or font asset changes. Final integrated candidate must rebind both reviewers and pass current release budgets before publication.
-
-## Shared 90-second grace — 2026-10-13
-
-The grace integrator now starts from published `bc16251`, retaining the mirror,
-pure-yaw repair, font reuse and portrait paint factor. Its original eleven
-modified files are preserved in an isolated worktree and recoverable patches.
-Scope is the shared delay/integral/inverse in `buergeramt-goop.js`, floor onset
-allocation/stirring and eddy phase, affected import/entry cache identities,
-existing floor/portrait/restoration/browser fixtures and owning For-AI context.
-Preserve the 480-second wave, .65 cap, 90-second counter recovery, twenty-minute
-lamp wear, all body geometry/routes and audio/phone ownership. No new assets,
-dependencies, timers or UI layout. The new grace test fails against old timing;
-earlier GPU, walking-probe and transfer failures remain recorded under output.
-Final combined source needs fresh release, browser budget and two-reviewer
-binding; publication and live/root synchronization belong to this integrator.
+Repository fixtures and captured command exit codes own evidence under ignored `output/`; generic skill report/config scripts are absent, and `For-AI/SKILLS.md` requires existing fixtures rather than a new framework. Respect the other chat's exclusive browser/heavy-CPU QA window; continue source work while it validates grace. Preserve its failures and all previously published rotation/font/portrait fixes.

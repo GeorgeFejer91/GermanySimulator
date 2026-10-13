@@ -51,10 +51,14 @@ furniture, signs, floor, people and current effects, through the existing office
 render owner. Its private 3D player double has textured, indented potato skin,
 natural tuber eyes and root limbs. Shoulders and hips follow accepted ground
 travel; blocked or stationary feet stay planted. There is no distance cutoff.
-The double is framed within the visible glass, including side/partial views,
-and composites after room depth only inside the reflection target. This is the
-user-requested persistent self-image; it is not a real actor or collider. Real
-people retain their ordinary shared depth and order. The glass/frame stays solid
+The proxy stays at the player's actual ground position in the reflected-camera
+pass; its virtual image has equal distance behind the glass. The finite pane,
+view frustum and real room depth determine visibility. Sideways movement can
+crop or remove the self-image even while the room remains visible in the mirror;
+partial views never move the potato into the visible sliver. It has no distance
+cutoff and shares the reflection actor pass with ordinary depth and order, so
+opaque furniture can block it. The private proxy never renders in the main room
+and is not a real actor or collider. The glass/frame stays solid
 and the oblique reflection camera clips the exterior and back of the installation.
 Native Gaussian paint faces the reflected camera temporarily. Packed clouds and
 the camera-local tunnel remain in the main view; the mirror shows those same

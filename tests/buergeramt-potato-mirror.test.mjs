@@ -1,12 +1,34 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import * as THREE from '../assets/vendor/three/0.186.0/build/three.module.min.js';
-import {potatoReflection,potatoMirrorAnchor,frameMirrorDouble,prepareMirrorCamera,createPotatoMirror} from '../buergeramt-potato-mirror.js';
+import {potatoReflection,mirrorGlassVisible,prepareMirrorCamera,createPotatoMirror} from '../buergeramt-potato-mirror.js';
 import {harness} from './amt-harness.mjs';
 import {readFileSync} from 'node:fs';
 import vm from 'node:vm';
 
 function approach(h){h.moveTo(0,4.8);h.moveTo(-5.65,4.8);h.faceToward(-5.65,5.36)}
+function mirrorRenderer(){
+ const viewport=new THREE.Vector4(0,0,1280,800),scissor=viewport.clone();
+ return{target:null,autoClear:true,xr:{enabled:false},shadowMap:{autoUpdate:true},scissorTest:false,
+  getDrawingBufferSize:v=>v.set(1280,800),getRenderTarget(){return this.target},setRenderTarget(t){this.target=t},getViewport:v=>v.copy(viewport),setViewport:v=>viewport.copy(v),getScissor:v=>v.copy(scissor),setScissor:v=>scissor.copy(v),getScissorTest(){return this.scissorTest},setScissorTest(v){this.scissorTest=v},clear(){}};
+}
+
+test('the reflected-camera proxy stays at the real player position, including impossible and partial self-image views',()=>{
+ const mirror=harness().window.BuergeramtStory.potatoMirror;
+ for(const [x,z,offset,pitch=0] of [[-5.65,3,0],[-5.65,-9,0],[0,0,0],[-7.2,0,0],[-6.8,3,0],[-5.65,3,.8],[-5.65,3,0,.72]]){
+  const scene=new THREE.Scene(),effect=createPotatoMirror({THREE,scene,mirror}),camera=new THREE.PerspectiveCamera(69,1.6,.06,35);
+  camera.position.set(x,1.68,z);camera.lookAt(mirror.x,1.68,mirror.z);camera.rotateY(offset);camera.rotateX(pitch);
+  const yaw=Math.atan2(mirror.x-x,z-mirror.z)-offset;
+  effect.update({x,z,yaw,walkedDistance:0});assert(effect.render(mirrorRenderer(),camera,()=>{},100),'visible glass still reflects the room');
+  const rig=scene.getObjectByName('Reflected potato rig');
+  assert.deepEqual(rig.position.toArray(),[x,0,z],'mirror must not move the player to fit its visible glass');
+  const reflectedEye=new THREE.Vector3(...effect.inspect().reflection.camera),body=rig.localToWorld(new THREE.Vector3(0,1.03,0));
+  const fraction=((mirror.z-.025)-reflectedEye.z)/(body.z-reflectedEye.z),glassPoint=reflectedEye.clone().lerp(body,fraction);
+  assert(Math.abs(fraction-.5)<1e-12);assert(Math.abs(glassPoint.x-x)<1e-12,'self-image ray crosses the mirror at the actual player x');
+  if(x===0||x===-7.2)assert(glassPoint.x<mirror.x-mirror.width/2||glassPoint.x>mirror.x+mirror.width/2,'side-on self-image ray misses the finite aperture');
+  effect.dispose();
+ }
+});
 
 test('mirror rendering preserves billboard Euler state and subsequent main facing across repeated frames',()=>{
  const source=readFileSync('world3d.js','utf8'),start=source.indexOf('    amtPotatoMirror.render(renderer,amtCamera,mirrorCamera=>{'),end=source.indexOf('    drawView(amtCamera);',start);
@@ -58,7 +80,7 @@ test('the jointed model plants when blocked, paused or re-entered and disposes i
  effect.dispose();assert.equal(scene.children.length,0);assert(disposed>0);
 });
 
-test('live reflection clips the exterior and keeps the double in glass at far/off-axis views',()=>{
+test('live reflection clips the exterior and retains physical eye/body depth at near and far views',()=>{
  const mirror=harness().window.BuergeramtStory.potatoMirror,scene=new THREE.Scene(),effect=createPotatoMirror({THREE,scene,mirror});
  const pane=scene.getObjectByName('Kartoffelspiegel').children.find(o=>o.material?.name==='Live silvered mirror');
  for(const x of [-7.2,-5.65,0,7.2])for(const z of [-9,-5,0,4.9]){
@@ -67,10 +89,9 @@ test('live reflection clips the exterior and keeps the double in glass at far/of
   assert(Math.abs(reflected.position.z-(2*(mirror.z-.025)-z))<1e-12);
   const exterior=new THREE.Vector4(mirror.x,1.68,mirror.z+1,1).applyMatrix4(reflected.matrixWorldInverse).applyMatrix4(reflected.projectionMatrix);
   assert(exterior.w<0||exterior.z<-exterior.w,'near clipping/camera rejects the exterior');
-  const anchor=potatoMirrorAnchor({x,z},mirror),crossX=(x+anchor.x)/2;
-  assert(crossX>=mirror.x-mirror.width/2+.379&&crossX<=mirror.x+mirror.width/2-.379);
   effect.update({x,z,yaw:Math.PI,walkedDistance:0});assert.equal(effect.inspect().visible,true,'no distance disappearance');
-  const projected=new THREE.Vector3(anchor.x,1.03,z).project(reflected);assert(projected.z>=-1&&projected.z<=1,'double remains inside reflection depth, including far view');
+  assert.deepEqual(scene.getObjectByName('Reflected potato rig').position.toArray(),[x,0,z]);
+  if(x===mirror.x){const projected=new THREE.Vector3(x,1.03,z).project(reflected);assert(projected.z>=-1&&projected.z<=1,'aligned physical body retains valid near/far reflection depth without remapping')}
  }
  effect.dispose();
 });
@@ -92,19 +113,17 @@ test('E needs front-side proximity and facing; exact player remark completes onc
  audio.end();h.level.update(.05);assert.equal(h.level.stage,'walk-sign');assert.equal(h.counts.form,0);assert.equal(h.level.registrationTicket,'');
 });
 
-test('the visible-glass framing retains a self-image in partial, side and far views',()=>{
+test('finite-glass capture includes partial views and rejects offscreen glass independently of self-image visibility',()=>{
  const mirror=harness().window.BuergeramtStory.potatoMirror;
- let partial=0;
- for(const x of [-7,-5.65,0,7])for(const z of [-9,-2,4.9])for(const offset of [-.5,0,.5]){
-  const camera=new THREE.PerspectiveCamera(69,1.6,.06,35);camera.position.set(x,1.68,z);camera.lookAt(mirror.x,1.68,mirror.z);camera.rotateY(offset);camera.updateMatrixWorld();
-  const frustum=new THREE.Frustum().setFromProjectionMatrix(new THREE.Matrix4().multiplyMatrices(camera.projectionMatrix,camera.matrixWorldInverse));
-  const framed=frameMirrorDouble({THREE,frustum,mirror,camera,preferred:potatoMirrorAnchor({x,z},mirror)});
-  if(!framed)continue;partial++;
-  assert(frustum.containsPoint(new THREE.Vector3(...framed.glassPoint)),'selected glass point is actually visible');
-  assert(Math.abs((framed.x+x)/2-framed.glassPoint[0])<1e-9);
-  assert(Math.abs((framed.y+1.03+1.68)/2-framed.glassPoint[1])<1e-9);
+ for(const aspect of [1.6,390/844,844/390]){
+  const camera=new THREE.PerspectiveCamera(69,aspect,.06,35);camera.position.set(mirror.x,1.68,3);
+  const visible=()=>{camera.updateMatrixWorld();return mirrorGlassVisible({THREE,frustum:new THREE.Frustum().setFromProjectionMatrix(new THREE.Matrix4().multiplyMatrices(camera.projectionMatrix,camera.matrixWorldInverse)),mirror})};
+  camera.lookAt(mirror.x,1.68,mirror.z);assert(visible());
+  camera.rotateY(Math.atan(Math.tan(69*Math.PI/360)*aspect)+.2);assert(visible(),'glass edge remains visible after the self-image leaves view');
+  camera.lookAt(mirror.x,1.68,mirror.z);camera.rotateY(Math.PI);assert.equal(visible(),false);
  }
- assert(partial>=24);
+ const camera=new THREE.PerspectiveCamera(69,1.6,.06,35);camera.position.set(0,1.68,0);camera.lookAt(mirror.x,1.68,mirror.z);camera.updateMatrixWorld();
+ assert(mirrorGlassVisible({THREE,frustum:new THREE.Frustum().setFromProjectionMatrix(new THREE.Matrix4().multiplyMatrices(camera.projectionMatrix,camera.matrixWorldInverse)),mirror}),'off-axis room reflection must continue when the self-image misses glass');
 });
 
 test('one capped target restores renderer state, pauses offscreen and retires on close',()=>{

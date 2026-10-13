@@ -3,7 +3,7 @@ import {mouthPaintGlsl} from './buergeramt-mouth-paint.js?v=20261011-mouth-consi
 import {createAmtFloor} from './buergeramt-floor.js?v=20261013-goop-grace';
 import {createAmtPortraitMelt} from './buergeramt-portrait-melt.js?v=20261013-portrait-melt15';
 import {createAmtLampWear} from './buergeramt-lamps.js?v=20261012-counter-recovery';
-import {createPotatoMirror} from './buergeramt-potato-mirror.js?v=20261013-live-mirror';
+import {createPotatoMirror} from './buergeramt-potato-mirror.js?v=20261013-physical-mirror';
 import {amtWalkDirection,createAmtWalkSpare} from './buergeramt-walk-view.js?v=20261013-smooth-turning';
 import {prepareWithSegments,measureNaturalWidth,measureLineStats} from './assets/vendor/pretext/dist/layout.js';
 const THREE_URL="./assets/vendor/three/0.186.0/build/three.module.min.js";
@@ -1823,11 +1823,9 @@ function showRendererFailure(error){
     // this second pass even with autoClear disabled.
     const background=amtScene.background;amtScene.background=null;
     renderer.autoClear=false;renderCamera.layers.set(1);
+    if(reflection)renderCamera.layers.enable(2);
     try{
       renderer.render(amtScene,renderCamera);
-      // Only the mirror's private player double uses this final target pass.
-      // Off-axis framing must not put it behind a real shelf or room wall.
-      if(reflection){renderer.clearDepth();renderCamera.layers.set(2);renderer.render(amtScene,renderCamera)}
     }finally{renderCamera.layers.set(0);renderer.autoClear=true;amtScene.background=background}
     }
     amtPotatoMirror.render(renderer,amtCamera,mirrorCamera=>{

@@ -26,8 +26,11 @@ image leaves the same shaped, indented tuber and natural brown material.
 
 The user's complete-room/persistent-self request replaces the old surrogate hall
 with one live planar camera/target, driven by the existing render owner. The
-existing room, effects and actor passes render from that camera; only the private
-potato double composites after target depth. It never appears in the real room.
+existing room, effects and actor passes render from that camera. The private
+potato proxy stays at the actual player position and joins only the reflected
+actor pass, retaining opaque room depth. The finite glass crops it naturally;
+do not recenter or float it into view, clear depth for it, or add an angle/distance
+visibility shortcut. It never appears in the main room.
 The secondary view uses existing painted actors for packed-cloud representations
 and temporarily faces native paint to its camera; main packed rendering is
 unchanged. This adds neither a second Gaussian batch nor competing GPU updates.
@@ -38,8 +41,9 @@ plus depth costs at most 12 bytes/pixel (about 7.5 MiB at 1024×640, about 2.2 M
 the existing render calls, with no separate RAF, worker or timer. Exact glass
 frustum clipping prevents offscreen capture. Close, hidden-page reset and BFCache
 retire its target; page retirement disposes all owned geometry/materials/skin.
-Accepted displacement drives planted joints and the visible glass frames the
-double without a distance cutoff. The selected player's 137,900-byte mirror MP3
+Accepted displacement drives planted joints; equal-distance reflection and real
+aperture/occlusion preserve physically valid distant views without a cutoff.
+The selected player's 137,900-byte mirror MP3
 loads only on E through the existing exact voice lookup. No extra model downloads,
 speech engine, asset pipeline or voice registry ship.
 
