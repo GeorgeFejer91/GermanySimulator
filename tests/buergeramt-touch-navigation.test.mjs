@@ -7,7 +7,7 @@ function office(){
  h.window.innerWidth=390;h.window.innerHeight=844;
  const stick=h.node('amt-move-stick'),look=h.node('amt-look-zone');
  stick.clientWidth=128;stick.getBoundingClientRect=()=>({left:0,top:0,width:128,height:128});
- look.closest=selector=>selector==='#amt-look-zone'?look:null;
+ look.closest=()=>null;stick.closest=selector=>selector.includes('.amt-touch-controls')?stick:null;
  const captures=new Set();stick.setPointerCapture=id=>captures.add(id);stick.hasPointerCapture=id=>captures.has(id);stick.releasePointerCapture=id=>captures.delete(id);
  return{...h,stick,look,captures};
 }
@@ -54,7 +54,7 @@ test('blur, hidden, rotation, capture loss and scene changes reject stale stick 
  }
 });
 
-test('look pitch stays bounded, touch outside the look zone is ignored and keyboard still moves',()=>{
+test('look pitch stays bounded, joystick touches stay separate and keyboard still moves',()=>{
  const h=office();pointer(h.document,'pointerdown',1,200,300,h.look);pointer(h.document,'pointermove',1,200,-10000,h.look);assert.equal(h.level.view.pitch,.9);
  pointer(h.document,'pointermove',1,200,10000,h.look);assert.equal(h.level.view.pitch,-.9);
  pointer(h.document,'pointerup',1,200,10000,h.look);
@@ -84,4 +84,33 @@ test('opening the native mixer disclosure without a pointer releases both gestur
  const mixer=h.node('amt-mix');mixer.open=true;mixer.dispatchEvent(new Event('toggle'));
  const before=h.level.view;walk(h,.1);assert.equal(h.level.view.x,before.x);assert.equal(h.level.view.z,before.z);assert.equal(h.captures.size,0);
  pointer(h.document,'pointermove',2,310,340,h.look);assert.equal(h.level.view.yaw,before.yaw);assert.equal(h.level.view.pitch,before.pitch);
+});
+
+function tap(h,x=250,y=400,id=9){pointer(h.document,'pointerdown',id,x,y,h.look);h.tick(50);pointer(h.document,'pointerup',id,x,y,h.look)}
+function pickedOffice(selection={actorId:'amt-konrad-wohnungszettel'}){
+ const h=office();h.picks=[];h.window.Germany3D={pickAmtInteraction:(x,y)=>{h.picks.push([x,y]);return selection}};return h;
+}
+test('double tap selects the tapped visible person beyond desktop reach, once per pair',()=>{
+ const h=pickedOffice();tap(h);assert.equal(h.level.stage,'walk-sign');tap(h,258,405,10);
+ assert.equal(h.level.stage,'character');assert.equal(h.node('amt-speaker').textContent,'KONRAD WOHNUNGSZETTEL');assert.deepEqual(h.picks,[[258,405]]);
+ tap(h);tap(h);assert.equal(h.picks.length,1,'scripted speech does not accept new gestures');
+});
+test('swipes, long holds, distant taps, cancellation and input resets do not activate objects',()=>{
+ for(const invalid of ['swipe','hold','distant','cancel','blur','hidden','resize','menu','scene']){
+  const h=pickedOffice();tap(h);
+  if(invalid==='swipe'){pointer(h.document,'pointerdown',11,250,400,h.look);pointer(h.document,'pointermove',11,300,400,h.look);pointer(h.document,'pointerup',11,250,400,h.look)}
+  else if(invalid==='hold'){pointer(h.document,'pointerdown',11,250,400,h.look);h.tick(300);pointer(h.document,'pointerup',11,250,400,h.look)}
+  else if(invalid==='distant')tap(h,100,300,11);
+  else if(invalid==='cancel'){pointer(h.document,'pointerdown',11,250,400,h.look);pointer(h.document,'pointercancel',11,250,400,h.look);tap(h)}
+  else if(invalid==='hidden'){h.hide();h.document.hidden=false;tap(h)}
+  else if(invalid==='menu'){const button=h.node('amt-mix');button.closest=()=>button;pointer(h.document,'pointerdown',11,50,30,button);tap(h)}
+  else if(invalid==='scene'){h.window.__navigationProbe.setStage('character');h.window.__navigationProbe.setStage('walk-sign');tap(h)}
+  else {h.window.dispatchEvent(new Event(invalid));tap(h)}
+  assert.equal(h.level.stage,'walk-sign',invalid);assert.equal(h.picks.length,0,invalid);
+ }
+});
+test('double taps use screen selection only and retain counter ticket prerequisites',()=>{
+ const empty=pickedOffice(null);tap(empty);tap(empty);assert.equal(empty.level.stage,'walk-sign');
+ const desk=pickedOffice({desk:3});tap(desk);tap(desk);assert.equal(desk.level.stage,'early');assert.equal(desk.level.activated,false);
+ const h=pickedOffice();tap(h);h.tick(400);tap(h);assert.equal(h.picks.length,0,'expired first tap cannot pair');
 });

@@ -137,7 +137,7 @@ Review relevant access barriers using the [Xbox Accessibility Guidelines](https:
 
 - Desktop: WASD or arrow keys move; hold R to run at twice the current walking speed in the city and Bürgeramt; Shift retains its existing sprint speed. E interacts; `§` or `Q` activates the law power after unlock. R uses the city's existing sprint energy and enforcement rules; combining R with Shift does not stack speed boosts.
 - On the untouched title screen, pressing `S` or clicking/tapping the unchanged `S` in `SIMULATOR` is an intentionally undisclosed shortcut that starts the game after the HUM-01/DE questionnaire.
-- Phone: the on-screen directional dock moves and the E action interacts.
+- Phone: in the Bürgeramt, the left joystick moves, swiping the scene looks around, and a double tap selects the nearest visible interactable near the tap. The city keeps its directional dock and action controls.
 - Leaving or backgrounding the browser releases held movement input; returning to the game never resumes an abandoned key press.
 - The game does not request motion permission and has no device-tilt or recalibration controls.
 

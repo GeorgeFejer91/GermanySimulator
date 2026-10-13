@@ -19,19 +19,32 @@ relative to the current view, with a 14% center deadzone and gradual speed up to
 the existing 3.6 m/s walking limit. Normalize only inputs above unit magnitude;
 partial stick input must remain slower and diagonals must not outrun forward
 walking. Accepted collision substeps, gait, floor wakes and the shared slowdown
-remain authoritative. The right-hand scene area accepts a separate captured
-finger for horizontal and vertical look; walking retains its pitch, bounded to
+remain authoritative. The scene outside the joystick and toolbar accepts a
+separate captured finger for horizontal and vertical look; walking retains its pitch, bounded to
 ±.9 radians. Touch sensitivity follows the viewport's shorter dimension, with
 the same time-scale multiplier as desktop drag. Mouse drag also supports pitch;
 Page Up/Down give keyboard pitch control, while arrow turning/WASD retain their
 existing behavior. Scripted speakers, the portrait and mirror retain their own
-camera framing. The E/REDEN action uses the existing interaction target.
+camera framing. Desktop E retains its nearby facing target. Mobile double
+taps select the closest visible person, counter, portrait or mirror within 64–112 CSS pixels
+of the tap, ranked by screen distance and then visible depth. Selection uses
+actual rendered bounds, per-hit atlas alpha and scene rays. Admitted Gaussian
+people keep their owned backing paint as the interaction proxy; the private
+mirror body layer cannot take scene taps. Selection uses one 1×1 alpha-sampling
+canvas on demand, with no full-atlas duplicate or recurring measurement.
+Off-screen, rear-facing and fully occluded objects stay ineligible. A visible optional encounter may be tapped
+across the room. Counter ticket/name/call prerequisites still own admission.
+The QR sign remains a physical phone scan and is not a double-tap shortcut.
+Two taps must end within 360 ms and 48 CSS pixels; each lasts at most 280 ms
+with no more than 12 CSS pixels of movement. Swipes and long holds do not
+interact, and each completed pair triggers at most one action.
 
 Each finger releases independently on cancellation/capture loss. Blur, hidden
 pages, resize/orientation, scene transitions and replay clear both gestures and
-held input; reopening a mixer gives its widgets input ownership. The stick,
-action and look hint stay above subtitles and respect safe-area insets. The
-existing Pretext fitter measures their text and rendered clearance, using logical
+held input; reopening a mixer gives its widgets input ownership. The left
+stick stays above subtitles and respects safe-area insets. Mobile omits E/REDEN, the look hint and both QR HUD instruction boxes; queue/counter
+information and spoken subtitles remain. The existing Pretext fitter measures
+the remaining control text and rendered clearance, using logical
 viewport dimensions at zoom; short viewports hide optional hints and shrink the
 stick. No gesture timer, extra animation loop, dependency or new renderer.
 
@@ -47,7 +60,7 @@ The deterministic gates are `tests/buergeramt-turning.test.mjs` and
 setting a grid heading; they do not establish release-tail or swipe behavior.
 Physical-phone smoothness and GPU/display timing require separate measurements.
 
-The secret Bürgeramt is an episode of the canonical root game. QR admission, the linked phone, the numbered queue, Frau Knick, the police interruption, A38, and the existing exit outcomes remain its required chain. Eight optional walking encounters add movement and atmosphere while the player waits; they never award a ticket or change a counter answer. E and the touch interaction choose nearby people and counters within a forgiving 120-degree cone around the office camera heading, with 2.6 m reach for people and counters. Gaze alignment and distance select the target across people and nearby exhibits; the portrait must also be faced. Visitors, including the courier and returning walkers, remain available while waiting or walking to the called counter. The interaction hint uses the same target; turning away makes that person ineligible.
+The secret Bürgeramt is an episode of the canonical root game. QR admission, the linked phone, the numbered queue, Frau Knick, the police interruption, A38, and the existing exit outcomes remain its required chain. Eight optional walking encounters add movement and atmosphere while the player waits; they never award a ticket or change a counter answer. Desktop E chooses nearby people and counters within a forgiving 120-degree cone around the office camera heading, with 2.6 m reach for people and counters. Gaze alignment and distance select the target across people and nearby exhibits; the portrait must also be faced. Visitors, including the courier and returning walkers, remain available while waiting or walking to the called counter. The interaction hint uses the same target; turning away makes that person ineligible.
 
 The clear wall beside the waiting-room entrance carries a gilded state portrait of the current
 Bundespräsident, Frank-Walter Steinmeier (verified 2026-10-12). Approaching it

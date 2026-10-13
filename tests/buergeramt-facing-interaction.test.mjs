@@ -51,12 +51,10 @@ test('returning walkers can immediately respond to another deliberate E press',(
  const h=seededInteraction({x:0,z:0,walker:true});assert.match(h.node('amt-nearby').textContent,/FORMULARSAMMLER/);h.key('KeyE');assert.equal(h.level.stage,'character');assert.equal(h.level.characterMood.id,'formularsammler');
 });
 
-test('nearby portrait cannot steal E from a person in front, and touch uses the same selection',()=>{
- for(const touch of [false,true]){
+test('nearby portrait cannot steal desktop E from a person in front',()=>{
   const h=seededInteraction({x:3.4,z:4.8,walker:true});assert.match(h.node('amt-nearby').textContent,/FORMULARSAMMLER/);
-  if(touch)h.node('amt-touch-e').click();else h.key('KeyE');
+  h.key('KeyE');
   assert.equal(h.level.stage,'character');assert.equal(h.level.characterMood.id,'formularsammler');
- }
 });
 
 test('facing the portrait selects its monologue and repeated E cannot stack it',()=>{

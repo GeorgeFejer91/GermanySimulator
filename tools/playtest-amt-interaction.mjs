@@ -35,6 +35,6 @@ try{for(const [name,width,height,mobile] of [['desktop',1280,800,false],['androi
   if(kind==='courier')assert.equal(result.mood,'aktenkurier');
   await page.screenshot({path:resolve(out,`${name}-${kind}-${stageName}.png`)});report.cases.push({name,kind,yaw,stageName,prompt,...result});
  }
- if(mobile){await page.evaluate(()=>{BuergeramtLevel.replay({voiceOn:()=>false,cinematics:false});__amtInteraction.seed('patron');Germany3D.sync()});await page.locator('#amt-touch-e').tap();assert.equal(await page.evaluate(()=>BuergeramtLevel.stage),'character');report.cases.push({name,kind:'touch E',stage:'character'})}
+ if(mobile){await page.evaluate(()=>{BuergeramtLevel.replay({voiceOn:()=>false,cinematics:false});__amtInteraction.seed('patron');Germany3D.sync()});await page.touchscreen.tap(width/2,height*.54);await page.touchscreen.tap(width/2,height*.54);assert.equal(await page.evaluate(()=>BuergeramtLevel.stage),'character');report.cases.push({name,kind:'double tap',stage:'character'})}
  assert.deepEqual(errors,[]);console.log(name,'PASS');await context.close();
 }}finally{writeFileSync(resolve(out,'report.json'),JSON.stringify(report,null,2));await browser.close();await new Promise(done=>server.close(done))}

@@ -1,3 +1,4 @@
+import {createAmtTouchPicker} from './buergeramt-touch-target.js?v=20261013-double-tap';
 import {createAmtGaussianScene,loadAmtSplatModule} from './buergeramt-gaussian-scene.js?v=20261013-steady-reflection';
 import {mouthPaintGlsl} from './buergeramt-mouth-paint.js?v=20261011-mouth-consistency';
 import {createAmtFloor} from './buergeramt-floor.js?v=20261013-goop-grace';
@@ -1330,10 +1331,10 @@ function showRendererFailure(error){
   ab(1.5,1.57,.58,screen,-4.65,.78,.8);ab(1.14,.72,.025,amber,-4.65,1.18,1.11);
   amtPlate("ANMELDUNG",-4.65,1.68,1.13,1.56,.34);
   ab(14.5,.94,1.12,desk,0, .49,-9.1);ab(14.7,.1,1.21,trim,0,1,-9.03);
-  const plainDeskSupplies=[];
+  const plainDeskSupplies=[],amtCounterSigns=[];
   for(const [i,x] of [-5.8,-1.6,3.9,6.2].entries()){
     ab(.055,1.65,.85,steel,x+1.15,1.83,-9.74);
-    amtPlate(`SCHALTER ${i+1}`,x,2.65,-10.31,1.82,.39);
+    amtCounterSigns.push(amtPlate(`SCHALTER ${i+1}`,x,2.65,-10.31,1.82,.39));
     plainDeskSupplies.push(ab(.6,.37,.09,screen,x-.38,1.24,-9.48));
     plainDeskSupplies.push(ab(.5,.035,.35,paperGrey,x+.36,1.08,-8.78));
     plainDeskSupplies.push(ab(.08,.055,.11,red,x+.39,1.14,-8.79));
@@ -1844,6 +1845,14 @@ function showRendererFailure(error){
     drawView(amtCamera);
     amtLampWear.render(renderer);
     return true}
+  const pickAmtTarget=createAmtTouchPicker({THREE:T,scene:amtScene,camera:amtCamera});
+  function pickAmtInteraction(x,y){
+    if(!window.BuergeramtLevel?.active)return null;
+    const gaussian=amtGaussian.inspect().actors;
+    const targets=[...amtCharacters,...amtMoving].map(actor=>({renderedProxy:gaussian.some(slot=>slot.visible&&slot.id===(actor.lead?'clerk':actor.animationId??actor.id)),objects:[actor.mesh,...(actor.counter?[amtCounterSigns[actor.counter-1]]:[])],interaction:actor.counter?{desk:actor.counter}:{actorId:actor.id}}));
+    targets.push({objects:[presidentFrame],interaction:{portrait:true}},{objects:[amtScene.getObjectByName('Kartoffelspiegel')],interaction:{mirror:true}});
+    return pickAmtTarget(x,y,innerWidth,innerHeight,targets);
+  }
   function resize(){renderer.setPixelRatio(Math.min(devicePixelRatio||1,1,Math.sqrt(1600000/Math.max(1,innerWidth*innerHeight))));renderer.setSize(innerWidth,innerHeight,false);camera.aspect=innerWidth/innerHeight;camera.updateProjectionMatrix();amtCamera.aspect=innerWidth/innerHeight;amtCamera.updateProjectionMatrix();layoutMissionPointer()}resize();addEventListener("resize",resize,{passive:true});
   const spawnProbe=new T.Vector3();
   const vehicleViewFrustum=new T.Frustum(),vehicleViewMatrix=new T.Matrix4(),vehicleViewBounds=new T.Box3();
@@ -1925,7 +1934,7 @@ function showRendererFailure(error){
   addEventListener("pageshow",()=>{const done=amtEntryResume;amtEntryResume=null;bridge.clearInput?.();done?.()});
   captureStartupAssets();
   startupModelsCaptured=true;
-  window.Germany3D={ready:true,isWorldPointVisible,isVehicleVisible,get amtPotatoMirror(){return amtPotatoMirror.inspect()},clearAmtFloor(){clearAmtWalkDetails();amtFloorEffect.update(null);amtPortraitMelt.update(null);amtLampWear.update(null);amtPotatoMirror.update(null);if(amtDirectRoute&&!window.BuergeramtLevel?.active)renderer.clear()},get amtLamps(){return amtLampWear.inspect()},get amtPortraitMelt(){return amtPortraitMelt.inspect()},get amtFloor(){return {...amtFloorEffect.inspect(),opacity:floor.opacity,transparent:floor.transparent,depthWrite:floor.depthWrite}},prepareNearbyAssets,prepareOfficeAssets:loadAmtImages,clearAmtOmenSplat,enterBuergeramt,clearAmtGaussianAnimations(){amtMouthSplat?.dispose();amtMouthSplat=null;amtGaussian.clear();restoreAmtCharacterLayers()},
+  window.Germany3D={ready:true,isWorldPointVisible,isVehicleVisible,pickAmtInteraction,get amtPotatoMirror(){return amtPotatoMirror.inspect()},clearAmtFloor(){clearAmtWalkDetails();amtFloorEffect.update(null);amtPortraitMelt.update(null);amtLampWear.update(null);amtPotatoMirror.update(null);if(amtDirectRoute&&!window.BuergeramtLevel?.active)renderer.clear()},get amtLamps(){return amtLampWear.inspect()},get amtPortraitMelt(){return amtPortraitMelt.inspect()},get amtFloor(){return {...amtFloorEffect.inspect(),opacity:floor.opacity,transparent:floor.transparent,depthWrite:floor.depthWrite}},prepareNearbyAssets,prepareOfficeAssets:loadAmtImages,clearAmtOmenSplat,enterBuergeramt,clearAmtGaussianAnimations(){amtMouthSplat?.dispose();amtMouthSplat=null;amtGaussian.clear();restoreAmtCharacterLayers()},
   get amtEntry(){return {active:!!amtEntry,failure:entryFailure,...amtEntry?.inspect()}},
   get nearbyAssetsReady(){updateAssetView();return cityModelJobs.every(job=>job.state==="settled"||cityModelDistance(job)>30&&!isCityAssetVisible(job))},
   get officeAssetsReady(){return amtImagesRequested&&officeAssetPending===0},get officeAssetStatus(){return {total:officeAssetTotal,pending:officeAssetPending,failed:officeAssetFailures}},

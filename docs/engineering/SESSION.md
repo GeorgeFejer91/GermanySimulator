@@ -26,3 +26,37 @@ after the stick/look change. Native mixer opening also clears navigation for
 keyboard and assistive activation. Required independent Physics/Camera reviews bind
 the final combined candidate; browser captures and numeric guards stay under
 ignored output. Integrate newer published work before final acceptance/push.
+
+
+## Mobile double-tap interactions — 2026-10-13
+
+Integrator-owned on published base `29aba3b`. The initial shared checkout's
+pending work is preserved in Git stash and is already included in the newer
+published base; reconciliation leaves no residual feature diff. Scope: office
+input and action dispatch, root mobile HUD, installed Pretext fitter selectors,
+renderer selection adapter and a small on-demand visible-target picker, focused
+input/geometry/browser checks, owning navigation guidance and cache identities.
+Keep the left movement joystick; use the rest of the screen for swipe-to-look
+and double taps. Remove the mobile E control, look hint and QR HUD boxes.
+Preserve desktop E, collision/movement, QR pairing, ticket/counter guards,
+scripted camera ownership, native audio and all earlier feature work. No new
+asset, dependency, timer, frame consumer or background work; selection runs
+only on a completed double tap. Required independent Physics/Camera review
+binds the frozen integrated candidate. Physical Android is unavailable.
+
+
+Validation: the full Node run passed686 of687 cases; its only failure was the
+police export-order source assertion. Restoring the original first exported
+property made that gate and the two browser-budget tests pass3/3. The new
+21 touch/target tests, desktop-facing10 and independent scoped Physics90
+checks pass. The alpha regression rejects an intentionally broken picker.
+Five silent Chromium profiles pass320px, portrait/landscape, wide touch,
+200% zoom/text-spacing and simultaneous input; real double taps select the
+visible Gaussian person despite zero native opacity. Required independent
+Physics and Camera reviews pass the final hashes. Exact delivery and voice
+catalog checks pass. Three cold root runs per profile before/after pass the
+18MB/title-cadence/input/buffer gates on hardware ANGLE/Intel Iris Xe:
+after desktop transfer17,963,226bytes and emulation17,598,135bytes; worst
+input p9535.2ms, no page errors. These are lab observations, not physical
+Android performance or perceptual listening. Source/property order and
+whitespace-only refinements do not change the supplied rendered behavior.

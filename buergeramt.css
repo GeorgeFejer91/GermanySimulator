@@ -38,9 +38,9 @@ html[data-phone-os="android"] .phone-call{background:radial-gradient(circle at 4
 #amt-direct-reset{display:none;position:fixed;top:75px;right:20px;z-index:220;padding:8px 10px;background:#253034ed;border:1px solid #c5b878;color:#f7e9bd;text-decoration:none;font:700 10px monospace;letter-spacing:.04em}.amt-direct-mode #amt-direct-reset{display:block}.amt-direct-mode:not(.amt-inside) .hud,.amt-direct-mode:not(.amt-inside) .control-dock{display:none!important}
 #amt-direct-reset[hidden]{display:none!important}
 .amt-direct-result[hidden]{display:none!important}.amt-direct-result{position:fixed;left:50%;bottom:20px;z-index:215;box-sizing:border-box;transform:translateX(-50%);width:min(620px,calc(100% - 24px));max-height:calc(100dvh - 24px);overflow-y:auto;padding:22px 26px;background:#e7dcc4;border:1px solid #b7a887;box-shadow:0 12px 35px #171b1c99;color:#241e18;font-family:Georgia,serif}.amt-direct-result small{font:700 11px monospace;letter-spacing:.1em}.amt-direct-result h2{margin:12px 0;font-size:26px}.amt-direct-result p{font-size:18px;line-height:1.4}.amt-direct-result a{display:block;padding:13px;border:1px solid #334044;color:#243438;text-align:center;text-decoration:none;font:700 13px Arial,sans-serif}
-@media(max-width:700px),(pointer:coarse){.amt-level.first-person .amt-sheet{left:0;right:0;bottom:0;transform:none;max-height:73dvh}.amt-walk-top{top:12px;left:12px;right:12px}.amt-walk-bottom{left:12px;right:12px;bottom:var(--amt-touch-clearance,140px)}.amt-walk-bottom span{display:none}.amt-walk-bottom strong{max-width:170px}.amt-touch-controls{position:absolute;left:18px;right:18px;bottom:16px;display:flex;flex-wrap:wrap;justify-content:space-between;align-items:end}.amt-touch-controls>div>div{display:flex;gap:7px}.amt-touch-controls button{width:56px;height:48px;margin:3px;border:1px solid #ddd0a3a9;background:#263136d9;color:#eee8d7;font:700 15px Arial,sans-serif;touch-action:none}.amt-touch-controls #amt-touch-e{width:max-content;min-width:56px;height:68px;margin-inline-start:auto;padding-inline:8px;border-radius:50%;line-height:1.15}}
+@media(max-width:700px),(pointer:coarse){.amt-level.first-person .amt-sheet{left:0;right:0;bottom:0;transform:none;max-height:73dvh}.amt-walk-top{top:12px;left:12px;right:12px}.amt-walk-bottom{left:12px;right:12px;bottom:var(--amt-touch-clearance,140px)}.amt-walk-bottom span{display:none}.amt-walk-bottom strong{max-width:170px}.amt-touch-controls{position:absolute;left:18px;right:18px;bottom:16px;display:flex;flex-wrap:wrap;justify-content:space-between;align-items:end}.amt-touch-controls>div>div{display:flex;gap:7px}.amt-touch-controls button{width:56px;height:48px;margin:3px;border:1px solid #ddd0a3a9;background:#263136d9;color:#eee8d7;font:700 15px Arial,sans-serif;touch-action:none}}
 @media(max-width:700px){.amt-walk-top{display:grid;grid-template-columns:minmax(0,1fr) auto;grid-template-areas:"objective leave" "board board";gap:7px}.amt-walk-top>b{grid-area:objective;min-width:0;padding:8px;font-size:10px}.amt-walk-top>button{grid-area:leave;font-size:10px}.amt-board-hud{grid-area:board;justify-self:center;min-width:102px;padding:3px 8px}.amt-board-hud small{font-size:8px}.amt-board-hud strong{font-size:22px}.amt-direct-mode .amt-walk-top>button{display:none}.amt-direct-mode #amt-direct-reset{top:130px;right:12px;font-size:9px}}
-.amt-compact .amt-walk-top{grid-template-columns:minmax(0,1fr);grid-template-areas:"objective" "board"}.amt-compact .amt-walk-top>button{display:none}.amt-compact .amt-board-hud{justify-self:start}.amt-compact #amt-direct-reset{top:142px;right:8px}.amt-compact .amt-walk-bottom{display:none}.amt-compact .amt-touch-controls{left:8px;right:8px}.amt-compact .amt-touch-controls #amt-touch-e{width:max-content;min-width:56px;height:auto;min-height:56px}.amt-compact .amt-touch-controls button[data-amt-key]{width:44px;height:42px}
+.amt-compact .amt-walk-top{grid-template-columns:minmax(0,1fr);grid-template-areas:"objective" "board"}.amt-compact .amt-walk-top>button{display:none}.amt-compact .amt-board-hud{justify-self:start}.amt-compact #amt-direct-reset{top:142px;right:8px}.amt-compact .amt-walk-bottom{display:none}.amt-compact .amt-touch-controls{left:8px;right:8px}.amt-compact .amt-touch-controls button[data-amt-key]{width:44px;height:42px}
 
 /* Separate thumb ownership keeps the first-person view usable while walking. */
 .amt-look-zone{display:none}
@@ -55,16 +55,17 @@ html[data-phone-os="android"] .phone-call{background:radial-gradient(circle at 4
  .amt-touch-controls{--amt-stick-size:clamp(72px,min(calc(var(--amt-viewport-width,100vw)*.29),calc(var(--amt-viewport-height,100dvh)*.28)),124px);left:max(12px,env(safe-area-inset-left));right:max(12px,env(safe-area-inset-right));bottom:calc(max(12px,env(safe-area-inset-bottom)) + var(--amt-subtitle-clearance,0px));flex-wrap:nowrap;pointer-events:none}
  .amt-inside #app.subtitles-visible :is(.amt-touch-controls,.amt-walk-bottom){transform:none}
  .amt-move-pad{display:grid;justify-items:center;min-width:0}.amt-touch-controls .amt-nav-label{width:var(--amt-stick-size);padding:4px 0}
- .amt-touch-controls #amt-touch-e{pointer-events:auto;min-width:64px;min-height:64px;height:auto;padding:8px;margin:0}
- .amt-look-zone{display:block;position:absolute;inset:0 0 0 42%;touch-action:none;user-select:none;pointer-events:auto}
- .amt-look-zone .amt-nav-label{position:absolute;right:max(12px,env(safe-area-inset-right));bottom:var(--amt-touch-clearance,150px);width:min(160px,45%);background:#26313680;opacity:.8}
- .amt-look-zone.is-active .amt-nav-label{opacity:1}
- .amt-touch-controls{z-index:1}.amt-walk-top,.amt-walk-bottom{z-index:1}
+
+ .amt-look-zone{display:block;position:absolute;inset:0;touch-action:none;user-select:none;pointer-events:auto}
+
+
+ .amt-touch-controls{z-index:1}.amt-walk-top{z-index:1}
+ .amt-walk-bottom,#amt-objective{display:none}
  .amt-nav-short .amt-touch-controls{--amt-stick-size:64px}
  .amt-nav-short .amt-nav-label{display:none}
  .amt-nav-short .amt-walk-bottom{display:none}
- .amt-nav-short .amt-touch-controls #amt-touch-e{min-width:56px;min-height:48px;padding:4px}
- .amt-nav-short:not(.amt-compact) .amt-walk-top{left:calc(max(12px,env(safe-area-inset-left)) + 76px);right:calc(max(12px,env(safe-area-inset-right)) + 92px)}
+
+
 }
 .amt-level[hidden],.amt-ticket[hidden],.phone-call[hidden],.phone-ticket[hidden],.phone-form[hidden]{display:none!important}
 .amt-phone{background:#edf0ec;color:#24323c}

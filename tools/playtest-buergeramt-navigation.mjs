@@ -8,7 +8,7 @@ import {createHash} from 'node:crypto';
 import assert from 'node:assert/strict';
 const {chromium}=createRequire(import.meta.url)(process.env.PLAYWRIGHT_MODULE||'playwright');
 const root=resolve('.'),out=resolve(process.env.NAV_OUTPUT||'output/phone-navigation/browser');mkdirSync(out,{recursive:true});
-const files=['index.html','buergeramt.js','buergeramt.css','buergeramt-fit.js','buergeramt-goop.js','world3d.js','tools/playtest-buergeramt-navigation.mjs'];
+const files=['index.html','buergeramt.js','buergeramt.css','buergeramt-fit.js','buergeramt-goop.js','buergeramt-touch-target.js','world3d.js','tools/playtest-buergeramt-navigation.mjs'];
 const sources=new Map(files.map(f=>[f,readFileSync(f)]));
 const mime={'.html':'text/html','.js':'text/javascript','.css':'text/css','.png':'image/png','.webp':'image/webp','.svg':'image/svg+xml','.glb':'model/gltf-binary','.json':'application/json','.mp3':'audio/mpeg','.ttf':'font/ttf'};
 const server=createServer((req,res)=>{try{
@@ -16,6 +16,7 @@ const server=createServer((req,res)=>{try{
  if(!file.startsWith(root+sep))throw Error('path');let data=readFileSync(file);
  if(file===resolve('game.js'))data=data.toString().replace('const directConfig={','const directConfig={cinematics:false,');
  if(file===resolve('buergeramt.js'))data=data.toString().replace('window.BuergeramtLevel={','window.__navigationTest={pose(x=1.8,z=4.8,yaw=0,pitch=0){clearOfficeInput();Object.assign(view,{x,z,yaw,pitch});view.positionGeneration++;setStage("walk-sign");const target=nearbyInteraction();return{stage,view:{...view},blocked:officeBlocked(x,z),target:target.mirror?"mirror":target.portrait?"portrait":target.actor?.id||target.desk}},caption(){startOfficeSubtitle("Bitte bleiben Sie in der Warteschlange. Ihre Unterlagen werden geprüft.",null,60000)}};window.BuergeramtLevel={');
+ if(file===resolve('world3d.js'))data=data.toString().replace('window.Germany3D={','window.__navigationScreenPoint=function(id){const actor=[...amtCharacters,...amtMoving].find(a=>a.id===id);const mesh=id===\"mirror\"?amtScene.getObjectByName(\"Kartoffelspiegel\"):id===\"portrait\"?presidentFrame:actor?.mesh;if(!mesh)return null;const box=new T.Box3().setFromObject(mesh),point=box.getCenter(new T.Vector3());if(actor)point.y=box.max.y-(box.max.y-box.min.y)*.2;point.project(amtCamera);return{nativeOpacity:actor?.mesh.material.opacity,gaussian:actor?amtGaussian.inspect().actors.find(slot=>slot.id===(actor.lead?"clerk":actor.animationId??actor.id)):null,x:(point.x+1)*innerWidth/2,y:(1-point.y)*innerHeight/2,selection:pickAmtInteraction((point.x+1)*innerWidth/2,(1-point.y)*innerHeight/2)}};window.Germany3D={');
  res.writeHead(200,{'Content-Type':mime[extname(file)]||'application/octet-stream','Cache-Control':'no-store'});res.end(data);
 }catch{res.writeHead(404);res.end()}});
 await new Promise(done=>server.listen(0,'127.0.0.1',done));
@@ -42,8 +43,8 @@ try{
   const layout=async(label)=>{
    await page.evaluate(()=>BuergeramtFit());await page.waitForTimeout(150);
    const data=await page.evaluate(()=>{
-    const ids=['amt-move-stick','amt-touch-e','amt-nearby','amt-objective','english-subtitle','amt-mix','subtitle-toggle'],boxes=Object.fromEntries(ids.map(id=>{const e=document.getElementById(id),r=e.getBoundingClientRect();return[id,{x:r.x,y:r.y,w:r.width,h:r.height,visible:!!e.getClientRects().length&&getComputedStyle(e).visibility!=='hidden'}]}));
-    const labels=[...document.querySelectorAll('.amt-nav-label,#amt-touch-e')].filter(e=>e.getClientRects().length).map(e=>({text:e.innerText,fit:e.dataset.pretextFit,w:e.clientWidth,h:e.clientHeight,scrollW:e.scrollWidth,scrollH:e.scrollHeight}));
+    const ids=['amt-move-stick','amt-nearby','amt-objective','english-subtitle','amt-mix','subtitle-toggle'],boxes=Object.fromEntries(ids.map(id=>{const e=document.getElementById(id),r=e.getBoundingClientRect();return[id,{x:r.x,y:r.y,w:r.width,h:r.height,visible:!!e.getClientRects().length&&getComputedStyle(e).visibility!=='hidden'}]}));
+    const labels=[...document.querySelectorAll('.amt-nav-label')].filter(e=>e.getClientRects().length).map(e=>({text:e.innerText,fit:e.dataset.pretextFit,w:e.clientWidth,h:e.clientHeight,scrollW:e.scrollWidth,scrollH:e.scrollHeight}));
     return{viewport:[innerWidth,innerHeight],boxes,labels,short:document.body.classList.contains('amt-nav-short'),overflow:document.documentElement.scrollWidth>innerWidth+1};
    });
    await page.screenshot({path:resolve(out,`${name}-${label}.png`)});result.layouts.push({label,...data});return data;
@@ -52,9 +53,11 @@ try{
    assert.equal(data.overflow,false,label);for(const e of data.labels){assert.ok(e.fit&&e.fit!=='unavailable',`${label}: actual Pretext fit ${e.text}`);assert.ok(e.scrollW<=e.w+1&&e.scrollH<=e.h+1,`${label}: clipped ${e.text}`)}
    const separate=(a,b)=>a.x+a.w<=b.x+1||b.x+b.w<=a.x+1||a.y+a.h<=b.y+1||b.y+b.h<=a.y+1;
    for(const other of ['amt-mix','subtitle-toggle']){const a=data.boxes[other],b=data.boxes['amt-nearby'];if(a.visible&&b.visible)assert.ok(separate(a,b),`${label}: nearby hint overlaps toolbar`)}
-   for(const id of ['amt-move-stick','amt-touch-e']){const b=data.boxes[id];assert.equal(b.visible,mobile);if(mobile){assert.ok(b.w>=44&&b.h>=44);assert.ok(b.x>=-1&&b.y>=-1&&b.x+b.w<=data.viewport[0]+1&&b.y+b.h<=data.viewport[1]+1,`${label}: control outside viewport`);for(const other of ['english-subtitle','amt-objective','amt-mix','subtitle-toggle']){const a=data.boxes[other];if(a.visible)assert.ok(separate(a,b),`${label}: ${id} overlaps ${other}`)}}}
-   if(mobile)assert.ok(separate(data.boxes['amt-move-stick'],data.boxes['amt-touch-e']),'thumb and action must not overlap');
+   for(const id of ['amt-move-stick']){const b=data.boxes[id];assert.equal(b.visible,mobile);if(mobile){assert.ok(b.w>=44&&b.h>=44);assert.ok(b.x>=-1&&b.y>=-1&&b.x+b.w<=data.viewport[0]+1&&b.y+b.h<=data.viewport[1]+1,`${label}: control outside viewport`);for(const other of ['english-subtitle','amt-objective','amt-mix','subtitle-toggle']){const a=data.boxes[other];if(a.visible)assert.ok(separate(a,b),`${label}: ${id} overlaps ${other}`)}}}
+   if(mobile){assert.equal(data.boxes['amt-nearby'].visible,false);assert.equal(data.boxes['amt-objective'].visible,false);assert.ok(data.boxes['amt-move-stick'].x<data.viewport[0]/2,'joystick stays left')}
+
   };
+  assert.equal(await page.locator('#amt-touch-e').count(),0);assert.equal(await page.locator('#amt-look-zone .amt-nav-label').count(),0);
   const initial=await layout('initial');
   checkLayout(initial,'initial');
   if(mobile){
@@ -100,13 +103,21 @@ try{
    await page.mouse.move(850,400);await page.mouse.down();const before=await inspect();await page.mouse.move(910,350,{steps:4});await page.mouse.up();const after=await inspect();assert.ok(after.view.yaw>before.view.yaw&&after.view.pitch>before.view.pitch);result.gestures.push({label:'desktop-drag',before,after});
    await page.keyboard.down('PageDown');await page.waitForTimeout(120);await page.keyboard.up('PageDown');assert.ok((await inspect()).view.pitch<after.view.pitch);
   }
-  if(['portrait','desktop'].includes(name)){
+  if(['portrait','landscape','desktop'].includes(name)){
    // Forced approach positions; native E/tap still owns every scene transition.
    const fixtures=[['portrait',3.4,4.9,Math.PI],['mirror',-5.65,4.6,Math.PI],['character',-5.9,2.59,0]];
    for(const [stage,x,z,yaw] of fixtures){
-    const approach=await page.evaluate(p=>__navigationTest.pose(...p),[x,z,yaw,.6]);const before=await inspect();const row={label:`native-${stage}-from-nonzero-pitch`,approach,before};result.camera.push(row);
+    const approach=await page.evaluate(p=>__navigationTest.pose(...p),[x,z,yaw,mobile?.1:.6]);const before=await inspect();const row={label:`native-${stage}-from-nonzero-pitch`,approach,before};result.camera.push(row);
     assert.equal(approach.stage,'walk-sign');assert.equal(approach.blocked,false,'camera approach must be outside solid geometry and people');if(stage!=='character')assert.equal(approach.target,stage,'forced approach must select intended E target');
-    if(mobile)await page.locator('#amt-touch-e').tap();else await page.keyboard.press('e');
+    if(mobile){
+     if(stage==='character')await page.waitForFunction(()=>Germany3D.amtGaussian.actors.some(slot=>slot.id==='amt-konrad-wohnungszettel'&&slot.visible),null,{timeout:60000});
+     await page.waitForTimeout(100);const id=stage==='character'?'amt-konrad-wohnungszettel':stage;
+     const point=await page.evaluate(id=>__navigationScreenPoint(id),id);row.tap=point;
+     assert(point&&point.x>=0&&point.x<=width&&point.y>=0&&point.y<=height,`visible ${stage} tap point`);
+     assert(point.selection,`visible ${stage} is selectable`);if(stage==='character'){assert.equal(point.nativeOpacity,0);assert.equal(point.gaussian.visible,true);assert.equal(point.selection.actorId,id)}
+     await page.touchscreen.tap(point.x,point.y);assert.equal((await inspect()).stage,'walk-sign');
+     await page.touchscreen.tap(point.x+3,point.y+2);
+    }else await page.keyboard.press('e');
     await page.waitForFunction(expected=>BuergeramtLevel.stage===expected,stage,{timeout:5000});await page.waitForTimeout(1000);const after=await inspect();
     assert.equal(after.stage,stage);assert.equal(after.stick,false);assert.equal(after.look,false);
     const target=stage==='portrait'?Math.atan2(.54,5.43-z):0;assert.ok(Math.abs(after.view.pitch-target)<.05,`${stage}: scripted pitch owns view`);
