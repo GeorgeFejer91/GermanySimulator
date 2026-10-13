@@ -70,7 +70,8 @@ test('media receipts own ejection; pause, failure and stale visits have bounded 
  const originals=Object.fromEntries(names.map(k=>[k,Object.getOwnPropertyDescriptor(globalThis,k)]));
  let now=0;const media=[],keys={},closed=[],elements=[];
  class Element extends EventTarget{append(){} remove(){this.removed=true} setAttribute(){} setPointerCapture(){} focus(){} }
- class Media{constructor(){this.currentTime=0;this.paused=true;media.push(this)}play(){this.paused=false;return Promise.resolve()}pause(){this.paused=true}removeAttribute(){this.src=''}load(){} }
+ const pendingPlays=[];let deferPlay=false;
+ class Media{constructor(){this.currentTime=0;this.paused=true;media.push(this)}play(){this.paused=false;return deferPlay?new Promise(resolve=>pendingPlays.push(resolve)):Promise.resolve()}pause(){this.paused=true}removeAttribute(){this.src=''}load(){} }
  const doc=new EventTarget();doc.hidden=false;doc.head=new Element();doc.body={classList:{add(){},remove(){}}};doc.createElement=()=>{const e=new Element();elements.push(e);return e};doc.getElementById=id=>id==='app'?new Element():null;
  const values={window:new EventTarget(),document:doc,matchMedia:()=>({matches:false}),Audio:Media,fetch:async()=>({ok:true,json:async()=>data}),performance:{now:()=>now},innerWidth:1280,innerHeight:800};
  for(const [key,value] of Object.entries(values))Object.defineProperty(globalThis,key,{value,configurable:true});
@@ -84,6 +85,15 @@ test('media receipts own ejection; pause, failure and stale visits have bounded 
   for(let i=0;i<20;i++)tick();assert.equal(encounter.active,true,'elapsed scene time cannot finish the voice');
   doc.hidden=true;doc.dispatchEvent(new Event('visibilitychange'));const before=encounter.inspect().z;keys.KeyW=true;tick();assert.equal(encounter.inspect().z,before);assert.equal(first.paused,true);
   doc.hidden=false;doc.dispatchEvent(new Event('visibilitychange'));await flush();assert.equal(first.paused,false);
+  tick();deferPlay=true;
+  window.dispatchEvent(new Event('blur'));window.dispatchEvent(new Event('focus'));
+  assert.equal(pendingPlays.length,1);
+  window.dispatchEvent(new Event('blur'));window.dispatchEvent(new Event('focus'));
+  assert.equal(pendingPlays.length,2,'new focus can resume while an invalidated play is pending');
+  pendingPlays[1]();await flush();pendingPlays[0]();await flush();tick();
+  assert.equal(first.paused,false,'stale play completion cannot pause the newer resumed voice');
+  assert.equal(pendingPlays.length,2,'a render after resume does not restart playing media');
+  deferPlay=false;
   first.currentTime=data.duration;first.onended();assert.equal(encounter.active,false);assert.deepEqual(closed,['ended']);assert.equal(first.paused,true);assert.equal(first.src,'');
   await enter();oldEnd();assert.equal(encounter.active,true,'stale completion cannot eject a new visit');
   media.at(-1).onerror();assert.equal(encounter.inspect().failed,true);

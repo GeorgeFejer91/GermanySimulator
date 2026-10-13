@@ -11,14 +11,15 @@ const server=createServer((req,res)=>{try{let file=resolve(root,'.'+new URL(req.
 await new Promise(done=>server.listen(0,'127.0.0.1',done));
 const browser=await chromium.launch({headless:true,executablePath:process.env.CHROMIUM_PATH,args:['--mute-audio']});
 const report={limits:['Silent audio state checks; no listening verdict','Android emulation, not a physical device','City placement is forced; final approach and entry use production input'],cases:[]};
-try{
- for(const [name,viewport] of [['desktop',{width:1280,height:800}],['android',{width:390,height:844}]]){
-  const context=await browser.newContext({viewport,isMobile:name==='android',hasTouch:name==='android'});context.setDefaultTimeout(90000);
-  await context.addInitScript(()=>{
+const silenceAudio=()=>{
    const play=HTMLMediaElement.prototype.play;window.__jobMedia=[];HTMLMediaElement.prototype.play=function(...args){this.muted=true;if(this.src.includes('/jobcenter/')&&!window.__jobMedia.includes(this))window.__jobMedia.push(this);return play.apply(this,args)};
    const connect=AudioNode.prototype.connect;AudioNode.prototype.connect=function(target,...args){if(target===this.context.destination){const gain=this.context.createGain();gain.gain.value=0;connect.call(gain,target);return connect.call(this,gain,...args)}return connect.call(this,target,...args)};
    const speak=speechSynthesis.speak.bind(speechSynthesis);speechSynthesis.speak=u=>{u.volume=0;speak(u)};
-  });
+};
+try{
+ for(const [name,viewport] of [['desktop',{width:1280,height:800}],['android',{width:390,height:844}]]){
+  const context=await browser.newContext({viewport,isMobile:name==='android',hasTouch:name==='android'});context.setDefaultTimeout(90000);
+  await context.addInitScript(silenceAudio);
   const page=await context.newPage(),errors=[],requests=[];page.on('pageerror',e=>{errors.push(e.message);console.log('PAGE ERROR '+e.message)});page.on('request',r=>requests.push(r.url()));
   await page.goto(`http://127.0.0.1:${server.address().port}/index.html`,{waitUntil:'domcontentloaded'});
   const cdp=await context.newCDPSession(page);await cdp.send('Emulation.setFocusEmulationEnabled',{enabled:true});
@@ -80,6 +81,6 @@ try{
   console.log(JSON.stringify({name,result:'PASS'}));await context.close();
  }
  // Shared diagnostic uses the identical facade and encounter renderer.
- const p=await browser.newPage();await p.goto(`http://127.0.0.1:${server.address().port}/3d.html`);await p.waitForFunction(()=>window.Germany3D?.ready);assert.ok(await p.evaluate(()=>Germany3DBridge.buildings.some(b=>b.id==='jobcenter')));await p.close();
+ const diagnostic=await browser.newContext();await diagnostic.addInitScript(silenceAudio);const p=await diagnostic.newPage();await p.goto(`http://127.0.0.1:${server.address().port}/3d.html`);await p.waitForFunction(()=>window.Germany3D?.ready);assert.ok(await p.evaluate(()=>Germany3DBridge.buildings.some(b=>b.id==='jobcenter')));await diagnostic.close();
  writeFileSync(resolve(out,'browser-report.json'),JSON.stringify(report,null,2));
 }finally{await browser.close();server.close()}

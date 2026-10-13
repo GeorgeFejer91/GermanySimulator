@@ -174,6 +174,8 @@ export function createJobcenterEncounter(T,renderer,bridge){
   const current=()=>visit===v&&serial===id;
   function quietRumble(){v.rumbleSource?.dispose();v.rumbleSource=null;v.rumbleAttempted=false;v.rumbleLevel=0;v.dismissal=0}
   v.quietRumble=quietRumble;
+  function suspendMedia(){++v.playSerial;v.mediaPending=false;audio.pause();quietRumble()}
+  v.suspendMedia=suspendMedia;
   function fail(){if(!current())return;++v.playSerial;v.failed=true;v.mediaPending=false;audio.pause();quietRumble();v.playback=Math.max(v.playback,audio.currentTime||0)}
   audio.onerror=fail;
   audio.onended=()=>{if(current()&&v.phase==='speaking'&&v.mediaStarted)close('ended')};
@@ -187,22 +189,23 @@ export function createJobcenterEncounter(T,renderer,bridge){
   on(surface,'pointerup',release);on(surface,'pointercancel',release);on(surface,'lostpointercapture',release);
   on(window,'keydown',e=>{if(!current())return;if(e.code==='Escape'){e.preventDefault();close();return}if(v.phase==='speaking'&&(v.mediaPending||v.failed)&&!e.repeat)resume()});
   function resetInput(){v.touch={forward:0,side:0};v.pointers.clear();bridge.clearInput?.()}
-  on(window,'blur',()=>{resetInput();audio.pause();quietRumble();v.suspended=true});
+  on(window,'blur',()=>{resetInput();v.suspended=true;suspendMedia()});
   on(window,'focus',()=>{v.suspended=false;last=performance.now();if(v.phase==='speaking'&&!paused())resume()});
-  on(document,'visibilitychange',()=>{resetInput();last=performance.now();if(document.hidden){audio.pause();quietRumble()}else if(v.phase==='speaking'&&!paused())resume()});
+  on(document,'visibilitychange',()=>{resetInput();last=performance.now();if(document.hidden)suspendMedia();else if(v.phase==='speaking'&&!paused())resume()});
   function paused(){return document.hidden||v.suspended||!!window.GermanyHUD?.paused}
   function resume(){
    if(!current()||paused()||v.mediaPending)return;
+   if(v.mediaStarted&&!audio.paused&&!v.failed)return;
    if(config.voiceOn?.()===false){v.failed=true;return}
    const playId=++v.playSerial;v.mediaPending=true;audio.volume=.9;
-   audio.play().then(()=>{if(!current()||playId!==v.playSerial){audio.pause();return}if(paused()){audio.pause();v.mediaPending=false;return}v.mediaStarted=true;v.mediaPending=false;v.failed=false;v.stalled=0}).catch(()=>{if(current()&&playId===v.playSerial)fail()});
+   audio.play().then(()=>{if(!current()){audio.pause();return}if(playId!==v.playSerial)return;if(paused()){audio.pause();v.mediaPending=false;return}v.mediaStarted=true;v.mediaPending=false;v.failed=false;v.stalled=0}).catch(()=>{if(current()&&playId===v.playSerial)fail()});
   }
   v.resume=resume;v.paused=paused;surface.focus({preventScroll:true});return true;
  }
  function render(){
   const v=visit;if(!v)return false;
   const now=performance.now(),dt=clamp((now-last)/1000,0,.12);last=now;
-  if(v.paused()){v.audio.pause();v.quietRumble();v.wasPaused=true;return true}
+  if(v.paused()){v.suspendMedia();v.wasPaused=true;return true}
   if(v.wasPaused){v.wasPaused=false;if(v.phase==='speaking'&&!v.failed)v.resume()}
   const near=stepJobcenter(v,{...bridge.getInput?.(),...v.touch},dt);
   if(near&&v.phase==='approach'){v.phase='speaking';v.resume()}
