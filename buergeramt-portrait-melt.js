@@ -26,6 +26,12 @@ export const portraitPaintGlsl=`
     float contactSource=1.-melted*flow*.75+.04*sin(below*16.-clock*.06)*smoothstep(0.,.2,below);
     sourceDown=mix(sourceDown,contactSource,wall);
     float sourceU=u+.055*melted*sin(down*9.-clock*.05+u*8.)+.09*melted*wall*sin(below*7.-clock*.08);
+    // Anchor the forehead while eyes, cheeks and jaw stretch downward at
+    // unequal rates. Inverse stretching keeps one continuous painted face.
+    float head=smoothstep(.22,.32,u)*(1.-smoothstep(.69,.79,u))*smoothstep(.07,.13,down)*(1.-smoothstep(.66,.90,down));
+    float sag=head*smoothstep(0.,.60,melted)*(.70+.70*(1.-smoothstep(.36,.64,u)));
+    sourceDown=mix(sourceDown,.08+(sourceDown-.08)/(1.+sag),head);
+    sourceU=mix(sourceU,.51+(sourceU-.51)/(1.+.18*sag*smoothstep(.28,.55,down)),head);
     float edges=smoothstep(-.008,.008,sourceU)*(1.-smoothstep(.992,1.008,sourceU));
     vec3 paint=texture2D(amtPortraitPaint,clamp(vec2(sourceU,1.-sourceDown),vec2(.001),vec2(.999))).rgb;
     vec3 smear=texture2D(amtPortraitPaint,clamp(vec2(sourceU+.035*melted,1.-sourceDown+melted*(.15+.3*wall)),vec2(.001),vec2(.999))).rgb;
@@ -62,7 +68,7 @@ export function createAmtPortraitMelt({THREE:T,material,frame,floor,position,wid
       }
     `);
   };
-  material.customProgramCacheKey=()=>key+':amt-portrait-melt-v5';material.needsUpdate=true;
+  material.customProgramCacheKey=()=>key+':amt-portrait-melt-v6';material.needsUpdate=true;
   const dripMaterial=new T.MeshBasicMaterial({map:material.map,transparent:true,alphaTest:.025,depthWrite:false});
   dripMaterial.onBeforeCompile=shader=>{
     Object.assign(shader.uniforms,{amtPortraitMelt:melt,amtPortraitClock:clock,amtPortraitPaint:paint,amtPortraitInfo:{value:new T.Vector4(0,0,1,0)}});
@@ -72,7 +78,7 @@ export function createAmtPortraitMelt({THREE:T,material,frame,floor,position,wid
       diffuseColor.a*=film.a;
     `);
   };
-  dripMaterial.customProgramCacheKey=()=>':amt-portrait-drips-v5';
+  dripMaterial.customProgramCacheKey=()=>':amt-portrait-drips-v6';
   // One unbroken paint surface spans the image and wall: separate panels leave
   // a visible cut in a moving face. Extra width lets its liquid edges meander.
   // Static curvature, 24 triangles; it settles onto the inner wall at z=5.47.

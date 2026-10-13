@@ -270,9 +270,12 @@ with paint progress `min(1, 2.20 × goop)`. This faster progression applies toge
 the framed image, wall drips and floor deposition; the floor's own melt and
 slowdown retain their shared value. `buergeramt-portrait-melt.js` softens the real
 oil paint in place. Unequal local sag, vertical color smearing and patchwise loss
-expose the backing throughout the image; upper paint remains near its original
-position while lower regions liquefy. Never translate the whole recognizable
-portrait down the wall as a falling poster. Thick, merging runs have curved
+expose the backing throughout the image. The forehead anchors an uneven elastic
+stretch: eyes and cheeks sag asymmetrically, and the mouth and chin droop farther
+before dissolving. The face deformation stays within the framed paint; wall
+runoff retains mixed pigment rather than repeating facial features. Never
+translate the whole recognizable portrait down the wall as a falling poster.
+Thick, merging runs have curved
 edges, unequal rounded fronts and wet highlights; below the frame they carry
 mixed pigment sampled from the image, rather than a readable second portrait.
 The whole image eventually drains, and the runs thin out as their paint supply

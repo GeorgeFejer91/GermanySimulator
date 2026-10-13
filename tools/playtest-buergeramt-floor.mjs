@@ -39,6 +39,38 @@ function samplePortraitPaint(which,amount,clock,bareRgb=[54,43,25]){
   }
   return{low,high,sum,range:high.map((value,index)=>value-low[index]),coverage:covered/width,connected:longest/width,bands:bands.map(count=>count/(width*height/8))};
 }
+// Track independently colored facial landmarks through the actual production
+// material. This distinguishes a drooping face from uniform portrait runoff.
+function sampleFaceDroop(){
+  const width=256,height=320,canvas=document.createElement('canvas');canvas.width=width;canvas.height=height;
+  const ctx=canvas.getContext('2d');ctx.fillStyle='#101010';ctx.fillRect(0,0,width,height);
+  const marks=[['leftEye',.44,.255,'#ff0000'],['rightEye',.60,.27,'#00ff00'],['mouth',.51,.375,'#0000ff'],['chin',.50,.46,'#ff00ff']];
+  for(const [,x,y,color]of marks){ctx.fillStyle=color;ctx.beginPath();ctx.ellipse(x*width,y*height,6,5,0,0,Math.PI*2);ctx.fill();}
+  const texture=new T.CanvasTexture(canvas);texture.colorSpace=T.SRGBColorSpace;
+  const original=presidentMaterial.map,target=new T.WebGLRenderTarget(width,height),scene=new T.Scene();
+  const camera=new T.OrthographicCamera(-.725,.725,.97,-.97,.01,3);camera.position.z=1;
+  const source=presidentFrame.children.find(mesh=>mesh.name==='Steinmeier liquid paint');
+  const mesh=new T.Mesh(source.geometry,source.material);mesh.position.copy(source.position);scene.add(mesh);
+  const previousTarget=renderer.getRenderTarget(),previousClear=renderer.autoClear;
+  const samples=[];
+  try{
+    amtPortraitMelt.setTexture(texture);
+    for(const amount of [.001,.12]){
+      __floorTest.at(BuergeramtGoop.ageForMelt(amount));__floorRender();
+      renderer.autoClear=true;renderer.setRenderTarget(target);renderer.render(scene,camera);
+      const pixels=new Uint8Array(width*height*4),found=Object.fromEntries(marks.map(([name])=>[name,{count:0,x:0,y:0}]));
+      renderer.readRenderTargetPixels(target,0,0,width,height,pixels);
+      for(let y=0;y<height;y++)for(let x=0;x<width;x++){
+        const i=(y*width+x)*4,[r,g,b]=pixels.slice(i,i+3);
+        const name=r>70&&g<40&&b<40?'leftEye':g>70&&r<40&&b<40?'rightEye':b>70&&r<40&&g<40?'mouth':r>70&&b>70&&g<40?'chin':null;
+        if(name){const mark=found[name];mark.count++;mark.x+=(x+.5)/width;mark.y+=1-(y+.5)/height;}
+      }
+      for(const mark of Object.values(found)){mark.x/=mark.count;mark.y/=mark.count;}
+      samples.push(found);renderer.setRenderTarget(previousTarget);
+    }
+  }finally{renderer.setRenderTarget(previousTarget);renderer.autoClear=previousClear;amtPortraitMelt.setTexture(original);target.dispose();texture.dispose();__floorTest.at(0);__floorRender();}
+  return Object.fromEntries(marks.map(([name])=>[name,{before:samples[0][name],after:samples[1][name],drop:samples[1][name].y-samples[0][name].y}]));
+}
 const server=createServer((req,res)=>{
   try{
     const path=new URL(req.url,'http://localhost').pathname,file=resolve(root,'.'+decodeURIComponent(path==='/'?'/index.html':path));
@@ -48,7 +80,7 @@ const server=createServer((req,res)=>{
       `window.__floorTest={pose(x,z,yaw=0){Object.assign(view,{x,z,yaw})},at(time){floorClock=time;visualClock=goop.motion(time);applyOfficeTempo()},recover(){activated=true;registeredName='Erika Mustermann';number=counterCalls[2];assignedCounter=3;counter.x=counterXs[2];deadline=200;view.x=counter.x;view.z=counter.z+1;setStage('walk-counter');},close(){close(false)},reopen(){open(options)},dialogue(){setStage('character')},stage:setStage,speech(){const row=Object.values(window.GermanySimulatorAudioText.recordings).filter(r=>r.voiceId==='amt-brunhilde-knick'&&r.source).sort((a,b)=>b.source.length-a.source.length)[0];if(!row)throw Error('Missing native Knick sample');options.voiceOn=()=>true;content(story.clerkIdentity.speaker,row.source)},media(){return recordedSpeech?{rate:recordedSpeech.playbackRate,preservesPitch:recordedSpeech.preservesPitch,time:recordedSpeech.currentTime,duration:recordedSpeech.duration,paused:recordedSpeech.paused}:null}};window.BuergeramtLevel={`);
     if(file===resolve('buergeramt-floor.js'))data=data.toString().replace('const floatMask=','const floatMask=!globalThis.__forceByteFloor&&').replace('return{update,setLights',`return{update,stats(){if(!targets)return null;const pixels=new Float32Array(width*height*4);renderer.readRenderTargetPixels(targets[read],0,0,width,height,pixels);let sum=0,squares=0,white=0,black=0,paint=0,colored=0,interfaces=0;for(let i=0;i<pixels.length;i+=4){const v=pixels[i];sum+=v;squares+=v*v;paint+=pixels[i+3];if(v>.8)white++;if(v<.2)black++;if(Math.abs(pixels[i]-pixels[i+1])+Math.abs(pixels[i+1]-pixels[i+2])>.012)colored++;const cell=i/4,x=cell%width,y=Math.floor(cell/width);if(x<width-1&&(v>.5)!=(pixels[i+4]>.5))interfaces+=19.2/height;if(y<height-1&&(v>.5)!=(pixels[i+width*4]>.5))interfaces+=15.4/width;}const count=width*height;return{mean:sum/count,variance:squares/count-(sum/count)**2,white:white/count,black:black/count,paint:paint/count,colored:colored/count,interfaceDensity:interfaces/(15.4*19.2)}},setLights`);
     if(file===resolve('world3d.js'))data=data.toString().replace('import {createAmtPortraitMelt}','import {createAmtPortraitMelt,portraitPaintGlsl}').replace('amtCamera.rotation.set(view.pitch||0,-view.yaw,0,"YXZ")','amtCamera.rotation.set(window.__floorPitch??view.pitch??0,-view.yaw,0,"YXZ")')
-      .replace('  app.classList.add("three-ready");',`window.__floorGpu={samplePortraitPaint:${samplePortraitPaint.toString()},stats:()=>amtFloorEffect.stats(),advance(seconds){const start=BuergeramtLevel.floorState.time;for(let n=1;n<=Math.round(seconds*20);n++){__floorTest.at(start+n/20);amtFloorEffect.update(BuergeramtLevel.floorState,amtReducedMotion.matches,BuergeramtLevel.view,BuergeramtLevel.characters);amtPortraitMelt.update(BuergeramtLevel.floorState,amtReducedMotion.matches);amtLampWear.update(BuergeramtLevel.floorState,amtReducedMotion.matches)}},fade(strength){fadeAmtStructure(strength)},render(){renderer.render(amtScene,amtCamera)},backend(){const gl=renderer.getContext(),ext=gl.getExtension('WEBGL_debug_renderer_info');return ext?gl.getParameter(ext.UNMASKED_RENDERER_WEBGL):gl.getParameter(gl.RENDERER)}};app.classList.add("three-ready");`);
+      .replace('  app.classList.add("three-ready");',`window.__floorGpu={samplePortraitPaint:${samplePortraitPaint.toString()},sampleFaceDroop:${sampleFaceDroop.toString()},stats:()=>amtFloorEffect.stats(),advance(seconds){const start=BuergeramtLevel.floorState.time;for(let n=1;n<=Math.round(seconds*20);n++){__floorTest.at(start+n/20);amtFloorEffect.update(BuergeramtLevel.floorState,amtReducedMotion.matches,BuergeramtLevel.view,BuergeramtLevel.characters);amtPortraitMelt.update(BuergeramtLevel.floorState,amtReducedMotion.matches);amtLampWear.update(BuergeramtLevel.floorState,amtReducedMotion.matches)}},fade(strength){fadeAmtStructure(strength)},render(){renderer.render(amtScene,amtCamera)},backend(){const gl=renderer.getContext(),ext=gl.getExtension('WEBGL_debug_renderer_info');return ext?gl.getParameter(ext.UNMASKED_RENDERER_WEBGL):gl.getParameter(gl.RENDERER)}};app.classList.add("three-ready");`);
     res.writeHead(200,{'Content-Type':mime[extname(file)]||'application/octet-stream','Cache-Control':'no-store'});res.end(data);
   }catch{res.writeHead(404);res.end();}
 });
@@ -56,7 +88,8 @@ await new Promise(done=>server.listen(0,'127.0.0.1',done));
 const browser=await chromium.launch({headless:true,executablePath:process.env.CHROMIUM_PATH,args:['--mute-audio']});
 const report={complete:false,revision:Object.fromEntries(files.map(file=>[file,createHash('sha256').update(sources.get(resolve(file))).digest('hex')])),cases:[],
   limits:['Forced camera/accelerated pigment state, not natural mission-chain evidence','Desktop Chromium and Android emulation; no physical Android','Media, Web Audio and speech muted; no listening review']};
-const cases=[['desktop',1280,800],['android-portrait',390,844],['android-landscape',844,390],['procedural-fallback',1280,800],...(process.env.FLOOR_RECOVERY||process.env.PORTRAIT_LIQUID||process.env.PORTRAIT_OIL?[['reduced-motion',1280,800]]:[]),...(process.env.PORTRAIT_LIQUID||process.env.PORTRAIT_OIL?[['missing-portrait',1280,800]]:[])];
+const portraitMode=process.env.PORTRAIT_LIQUID||process.env.PORTRAIT_OIL||process.env.PORTRAIT_DROOP;
+const cases=[['desktop',1280,800],['android-portrait',390,844],['android-landscape',844,390],['procedural-fallback',1280,800],...(process.env.FLOOR_RECOVERY||portraitMode?[['reduced-motion',1280,800]]:[]),...(portraitMode?[['missing-portrait',1280,800]]:[])];
 try{
   for(const [name,width,height]of cases){
     if(process.env.FLOOR_CASE&&!process.env.FLOOR_CASE.split(',').includes(name))continue;
@@ -75,8 +108,18 @@ try{
     await page.goto(`http://127.0.0.1:${server.address().port}/?geheim=buergeramt`,{waitUntil:'domcontentloaded',timeout:120000});
     console.log(name,'DOM ready');await page.waitForFunction(()=>window.BuergeramtLevel?.active&&window.Germany3D?.officeAssetsReady,null,{timeout:120000});
     await page.evaluate(()=>{window.__floorStep=BuergeramtLevel.update;BuergeramtLevel.update=()=>{};window.__floorRender=Germany3D.sync;Germany3D.sync=()=>{};window.__floorPitch=-.58;__floorTest.pose(0,4.8);__floorTest.stage('walk-sign');__floorTest.at(0);__floorRender()});
-    if(process.env.PORTRAIT_LIQUID||process.env.PORTRAIT_OIL){
+    if(portraitMode){
       if(name==='reduced-motion')await page.emulateMedia({reducedMotion:'reduce'});
+      const faceDroop=name==='missing-portrait'?null:await page.evaluate(()=>__floorGpu.sampleFaceDroop());
+      if(faceDroop){
+        writeFileSync(resolve(out,`${name}-face-droop.json`),JSON.stringify(faceDroop,null,2));
+        for(const [feature,mark]of Object.entries(faceDroop)){
+          assert(mark.before.count>30&&mark.after.count>30,`${feature} remains visible during early softening`);
+          assert(mark.drop>(feature==='mouth'||feature==='chin'?.07:.04),`${feature} visibly droops before dissolving (drop ${mark.drop})`);
+        }
+        assert(faceDroop.leftEye.drop-faceDroop.rightEye.drop>.025,'eyes sag unevenly');
+        assert(faceDroop.mouth.drop>faceDroop.leftEye.drop&&faceDroop.chin.drop>faceDroop.mouth.drop,'lower face stretches progressively farther');
+      }
       const intact=await page.evaluate(()=>__floorGpu.samplePortraitPaint('frame',0,0));
       await page.evaluate(()=>{__floorTest.at(570);__floorRender()});
       const drained=await page.evaluate(()=>__floorGpu.samplePortraitPaint('frame',1,BuergeramtLevel.floorState.visualTime));
@@ -101,7 +144,7 @@ try{
         if(name==='missing-portrait'&&state.pigment){assert.equal(state.pigment.paint,0);assert.equal(state.pigment.colored,0);}
         await page.screenshot({path:resolve(out,`${name}-liquid-${age}s.png`)});captures.push({age,...state});
       }
-      assert.deepEqual(errors,[]);report.cases.push({name,verdict:'PASS',intact,drained,softened,film,captures,errors});console.log(name,'oil PASS');await context.close();continue;
+      assert.deepEqual(errors,[]);report.cases.push({name,verdict:'PASS',faceDroop,intact,drained,softened,film,captures,errors});console.log(name,'oil PASS');await context.close();continue;
     }
     if(process.env.FLOOR_MOTION){
       await page.evaluate(()=>{__floorGpu.advance(675);__floorRender()});
