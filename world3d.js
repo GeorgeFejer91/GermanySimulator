@@ -235,8 +235,13 @@ function showRendererFailure(error){
   }
   const pp=bridge.policePath,ax=X(pp.x1),az=Z(pp.y1),bx=X(pp.x2),bz=Z(pp.y2),len=Math.hypot(bx-ax,bz-az),path=box(pp.width*S,.03,len,M.path,(ax+bx)/2,.04,(az+bz)/2);path.rotation.y=Math.atan2(bx-ax,bz-az);
   function label(a,b,bg="#ded9cc",fg="#222"){const c=document.createElement("canvas");c.width=768;c.height=150;const g=c.getContext("2d");g.fillStyle=bg;g.fillRect(0,0,768,150);g.fillStyle=fg;g.textAlign="center";g.font="900 42px Arial";g.fillText(a,384,65);g.font="700 20px Arial";g.fillText(b||"",384,112);const tx=new T.CanvasTexture(c);tx.colorSpace=T.SRGBColorSpace;const s=new T.Sprite(new T.SpriteMaterial({map:tx}));s.scale.set(4.6,.9,1);return s}
-  const placardFontLoad=()=>new FontFace("PlacardGrenze","url(./assets/fonts/grenze/Grenze.ttf)",{weight:"100 900"}).load();
-  const placardLayouts=[],placardFontReady=typeof FontFace==="undefined"?Promise.resolve(false):(bridge.queueAssetLoad?bridge.queueAssetLoad(placardFontLoad):placardFontLoad()).then(font=>{document.fonts.add(font);return true}).catch(()=>false);
+  const placardFontLoad=async()=>{
+    const faces=await document.fonts.load('900 70px "Grenze"').catch(()=>[]);
+    if(faces.length)return true;
+    const font=await new FontFace("Grenze","url(./assets/fonts/grenze/Grenze.ttf)",{weight:"100 900"}).load();
+    document.fonts.add(font);return true;
+  };
+  const placardLayouts=[],placardFontReady=typeof FontFace==="undefined"?Promise.resolve(false):(bridge.queueAssetLoad?bridge.queueAssetLoad(placardFontLoad):placardFontLoad()).catch(()=>false);
   function buildingPlacard(b,w,x,y,z){
     const canvas=document.createElement("canvas"),mobile=innerWidth<700;canvas.width=mobile?512:768;canvas.height=mobile?128:192;
     const ctx=canvas.getContext("2d");ctx.setTransform(canvas.width/768,0,0,canvas.height/192,0,0);
@@ -247,7 +252,7 @@ function showRendererFailure(error){
     const image=new Image(),layout={id:b.id,textureWidth:canvas.width,artReady:false,fontReady:false,titleWidth:0,titleMaxWidth:530,titleLines:0,worldWidth:width,worldHeight:width/4,x,y,z,facadeWidth:w};placardLayouts.push(layout);let artReady=false,fontReady=false;
     const titleParts={auslaender:["AUSLÄNDER","BEHÖRDE"],formulararchiv:["BUNDES","FORMULARARCHIV"],terminamt:["TERMIN","VERGABESTELLE"],querungsamt:["STRASSEN","QUERUNGSAMT"],sockenladen:["SOCKENFACH","GESCHÄFT"],laermamt:["AMT FÜR ZIMMER","LAUTSTÄRKE"]};
     function linesFor(text,weight,oneSize,twoSize,smallest,forced){
-      const family=fontReady?'"PlacardGrenze"':'"Grenze",Georgia,serif',words=text.split(/\s+/);
+      const family=fontReady?'"Grenze"':'"Grenze",Georgia,serif',words=text.split(/\s+/);
       if(!forced)for(let px=oneSize;px>=Math.max(smallest,oneSize-22);px--){ctx.font=`${weight} ${px}px ${family}`;if(ctx.measureText(text).width<=530)return {parts:[text],px}}
       const candidates=forced?[forced]:words.slice(1).map((_,i)=>[words.slice(0,i+1).join(" "),words.slice(i+1).join(" ")]);
       for(let px=twoSize;px>=smallest;px--){
@@ -267,7 +272,7 @@ function showRendererFailure(error){
       ctx.fillStyle="#4c4439";for(const bolt of [23,745]){ctx.beginPath();ctx.arc(bolt,96,4,0,Math.PI*2);ctx.fill()}
       ctx.fillStyle="#8b392d";ctx.fillRect(184,24,3,144);
       ctx.fillStyle="#231b16";ctx.textAlign="center";ctx.textBaseline="middle";
-      const family=fontReady?'"PlacardGrenze"':'"Grenze",Georgia,serif';
+      const family=fontReady?'"Grenze"':'"Grenze",Georgia,serif';
       const title=linesFor(b.name,900,70,59,29,titleParts[b.id]);
       ctx.font=`900 ${title.px}px ${family}`;
       layout.titleWidth=Math.max(...title.parts.map(part=>ctx.measureText(part).width));
@@ -423,7 +428,7 @@ function showRendererFailure(error){
   const wurstPrintFlip={value:0};
   async function paintWurstPrint(){
     await placardFontReady;
-    let family='"PlacardGrenze"';
+    let family='"Grenze"';
     try{const faces=await document.fonts.load('700 176px "UnifrakturCook"','Wegweiser');if(faces.length)family='"UnifrakturCook"'}catch{}
     const ctx=wurstPrintCanvas.getContext('2d'),font=`700 176px ${family}`,text='Wegweiser';
     ctx.clearRect(0,0,1024,256);ctx.font=font;ctx.textAlign='center';ctx.textBaseline='middle';ctx.lineJoin='round';

@@ -353,6 +353,7 @@ runtime cost; do not reskin the entire city from an unreviewed style sheet.
 - Mobile billboard direction: the existing minimalist fax-machine vector style or an equally small deterministic alternative.
 - The shipped desktop fax-ad pool is the two user-supplied, game-readable motifs under `assets/billboards/fax/`; the eagle-insignia variants from the source pack are intentionally not shipped. Three.js maps them onto 3D billboard meshes, while viewports below 700 px keep a generated lightweight fax texture and do not request the WebPs.
 - Every building in the canonical `game.js` inventory receives its own generated-art placard from `assets/building-placards/`, including the power plants, Bundestag, paired sandal/sock shops, and Krügers Kugellager. The 30 shared WebPs total about 0.84 MB. `world3d.js` crops one building-specific prop into a restrained enamel office plaque and draws only the exact building name in local Grenze lettering with measured fit. Wall-mounted signs stay above their entrances, at most 2.65 world units wide and no more than 52% of a facade; mobile uses a smaller 512 × 128 canvas. Existing satirical sign copy remains in game data. Missing art or font keeps a legible drawn plaque. `assets/building-placards/PROVENANCE.md` records the generation and font sources.
+- Placard and pointer preparation reuse the CSS `Grenze` face through `document.fonts.load` inside the existing shared admission queue. If no matching face exists, the standalone diagnostic loads the same local variable face once, with weight `100 900`. Avoid a separate `PlacardGrenze` download of identical bytes. Six cold hardware-browser font probes retain sampled placard widths/line counts (29 root instances, 18 diagnostic) and representative glyph raster hashes, reducing root font requests from two to one; diagnostic preparation remains one request. Font failure keeps the existing readable fallback.
 - Share gameplay data, placement, copy, and interaction logic. Only the visual representation should vary by capability or viewport.
 - Load a desktop-only raster only when the desktop representation is actually selected. Do not make mobile download an unused high-resolution alternative.
 - Prefer WebP/AVIF for large raster delivery when browser support and visual QA are adequate; retain SVG for simple line art and signs.
@@ -848,7 +849,7 @@ A 1024 × 256 canvas
 “Wegweiser” directly onto the skin in the existing material shader. A wider print
 area, 176 px authoring type and dark outline improve the displayed lettering's size and contrast.
 The pinned Pretext measures its exact loaded canvas font before painting;
-local PlacardGrenze remains the named font fallback. No text overlay floats
+local Grenze remains the named font fallback. No text overlay floats
 above the sausage.
 The current city camera projects its mission bearing into screen XY. Layout
 updates through resize/DOM observers and the existing coalesced HUD refresh;

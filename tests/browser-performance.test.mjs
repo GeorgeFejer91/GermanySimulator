@@ -27,6 +27,26 @@ diagnosticDocument.hidden=false;runDiagnostic(1017);runDiagnostic(1018);
 assert.equal(diagnosticUpdates,1);assert.equal(diagnosticRenders,1,'diagnostic obeys the same hidden/refresh work contract');
 assert.match(diagnostic,/addEventListener\("blur",clearInput\)/);
 const game=readFileSync('game.js','utf8'),world=readFileSync('world3d.js','utf8');
+const placardFontSource=world.slice(world.indexOf('  const placardFontLoad='),world.indexOf('  function buildingPlacard('));
+async function preparePlacardFont(existingFaces,{failed=false,cssFailed=false}={}){
+ const downloads=[],added=[],jobs=[];
+ const ready=vm.runInNewContext(placardFontSource+';placardFontReady',{
+  document:{fonts:{load:async()=>{if(cssFailed)throw new Error('CSS font unavailable');return existingFaces},add:font=>added.push(font)}},
+  FontFace:class{constructor(family,url,descriptors){Object.assign(this,{family,url,descriptors})}load(){downloads.push(this.url);return failed?Promise.reject(new Error('font unavailable')):Promise.resolve(this)}},
+  bridge:{queueAssetLoad:task=>new Promise((resolve,reject)=>jobs.push(()=>Promise.resolve().then(task).then(resolve,reject)))}
+ });
+ assert.equal(jobs.length,1,'font preparation retains shared admission');
+ assert.equal(downloads.length,0,'preparation cannot start outside the queue');
+ await jobs[0]();return {ready:await ready,downloads,added};
+}
+const sharedFont=await preparePlacardFont([{family:'Grenze',weight:'100 900'}]);
+assert.equal(sharedFont.ready,true);assert.equal(sharedFont.downloads.length,0,'reuse the CSS face without another font download');assert.equal(sharedFont.added.length,0);
+const standaloneFont=await preparePlacardFont([]);
+assert.equal(standaloneFont.ready,true);assert.equal(standaloneFont.downloads.length,1,'standalone diagnostic prepares its missing face once');assert.equal(standaloneFont.added.length,1);assert.equal(standaloneFont.added[0].family,'Grenze');assert.equal(standaloneFont.added[0].descriptors.weight,'100 900');
+const failedCssFont=await preparePlacardFont([],{cssFailed:true});
+assert.equal(failedCssFont.ready,true);assert.equal(failedCssFont.downloads.length,1);assert.equal(failedCssFont.added.length,1,'unavailable CSS face still permits the original local face');
+const failedFont=await preparePlacardFont([],{failed:true});
+assert.equal(failedFont.ready,false);assert.equal(failedFont.downloads.length,1);assert.equal(failedFont.added.length,0,'failed face keeps the existing fallback');
 assert.match(game,/if\(atlas\.tourist\)\{atlas\.canvas=img\}/,'accepted images must not be copied into a second full RGBA atlas');
 assert.match(world,/antialias:false/,'default renderer must avoid multisample buffer cost');
 const resize=world.match(/function resize\(\)\{[^\n]+?\}/)?.[0];
