@@ -38,9 +38,11 @@ test('registration is the allocation cause; a stored badge or premature visit gr
 test('real registration completion delivers allocation once, while withholding phone silence prevents it',()=>{
  const city=harness(),office=officeHarness();office.config.onRegistration=city.awardAnmeldung;
  office.counter();assert.equal(city.jwdState.allocated,false);
- office.links[0].message({type:'silence',id:'grass'});
  const settle=()=>{for(let i=0;i<600&&!office.node('amt-actions').children.some(b=>!b.disabled);i++)office.tick(100)};
- settle();for(let i=0;office.level.stage!=='success'&&i<60;i++){office.action(0);settle()}
+ settle();for(let i=0;office.level.registration.node!=='final'&&i<60;i++){office.action(0);settle()}
+ assert.equal(office.level.registration.node,'final');office.action(0);office.tick(10000);
+ assert.equal(office.level.stage,'phone-warning');assert.equal(city.jwdState.allocated,false,'final approval requires actual phone-away evidence');
+ office.links[0].message({type:'phone-hidden'});settle();
  assert.equal(office.level.stage,'success');assert.equal(city.jwdState.allocated,true);assert.equal(city.jwdState.visited,false);
 });
 
