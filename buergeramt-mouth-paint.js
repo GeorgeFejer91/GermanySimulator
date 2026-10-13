@@ -1,6 +1,10 @@
 export const mouthPaintGlsl = `
 float amtLipKnot(vec4 points,float end,int index){return index==4?end:points[clamp(index,0,3)];}
 float amtLipSlope(float a,float b){return a*b>0.?2.*a*b/(a+b):0.;}
+// Positive spans give a monotone map with unit slope at the protected edge.
+float amtLipSkinDistance(float distance,float targetSpan,float sourceSpan){
+  return distance/(1.+(targetSpan-sourceSpan)*distance/(sourceSpan*targetSpan));
+}
 // Shape-preserving Hermite interpolation cannot overshoot painted control heights.
 float amtLipCurve(float x,vec4 points,float end,vec2 corners){
   float t=clamp((x-corners.x)/(corners.y-corners.x)*4.,0.,4.);
@@ -29,7 +33,8 @@ vec4 amtMouthPaintFrame(sampler2D image,vec2 uv,vec4 rect,vec4 shape,vec4 axes,
   vec2 corners=tail.yz;
   float centerX=(corners.x+corners.y)*.5,widthSigma=(corners.y-corners.x)*.625;
   float localY=q.y-curves[0].z;
-  float vertical=exp(-pow(abs(localY)/.9375,4.))*smoothstep(-1.,-.4375,localY);
+  float guardWeight=smoothstep(-1.6,-1.1,q.y)*(1.-smoothstep(2.5,3.,q.y));
+  float vertical=exp(-pow(abs(localY)/.9375,4.))*smoothstep(-1.,-.4375,localY)*guardWeight;
   float sourceX=q.x;
   for(int iteration=0;iteration<5;iteration++){
     float localX=sourceX-centerX,z=localX/widthSigma,z4=z*z*z*z;
@@ -54,13 +59,11 @@ vec4 amtMouthPaintFrame(sampler2D image,vec2 uv,vec4 rect,vec4 shape,vec4 axes,
   float bottom=min(bottomLimit,crease+(1.-upperFraction)*fullOpening*amount);
   float aperture=bottom-top,taper=max(0.,1.-r*r);
   float sourceY=q.y;
-  float upperShift=sourceTop-top,lowerShift=sourceBottom-bottom;
-  float upperFalloff=.5+max(.5,1.6*max(0.,-upperShift));
-  float lowerFalloff=max(.875,1.6*max(0.,lowerShift));
-  if(q.y<top)sourceY+=upperShift*(1.-smoothstep(.5,upperFalloff,top-q.y));
-  else if(q.y>bottom)sourceY+=lowerShift*exp(-pow((q.y-bottom)/lowerFalloff,2.));
+  if(q.y<top)sourceY=-1.6+amtLipSkinDistance(q.y+1.6,top+1.6,sourceTop+1.6);
+  else if(q.y>bottom)sourceY=3.-amtLipSkinDistance(3.-q.y,3.-bottom,3.-sourceBottom);
   else sourceY=crease;
-  sourceY+=.125*shape.w*taper*exp(-pow((q.y-crease-.125)/.5625,2.));
+  float lowerSlope=min(1.,(3.-sourceBottom)/(3.-bottom));
+  sourceY+=.125*shape.w*taper*exp(-pow((q.y-crease-.125)/.5625,2.))*guardWeight*lowerSlope*lowerSlope;
   vec2 source=uv+(frame*vec2(sourceX,sourceY)-delta)*vec2(1.,-1.)/pixels;
   vec4 paint=texture2D(image,source);
   if(paint.a<original.a*.95)paint.rgb=original.rgb;
