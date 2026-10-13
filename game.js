@@ -2601,7 +2601,14 @@ function openHumorWelcome(){const pages=state.region==="berlin"?[
  ["Wer länger als zweieinhalb Sekunden auf Rasen oder Straße bleibt, erhält einen Polizeistern. Benutzen Sie den Zebrastreifen.","Berlin liegt hinter der Brandmauer. Sie ist frei überquerbar."]
 ],lines=pages.map(page=>page.join(" ")),subtitles=pages.map(page=>page.map(text=>subtitleEnglish.get(text)||text).join(" "));openDialogue(state.region==="berlin"?"WELCOME TO BERLIN":"WILLKOMMEN IN DEUTSCHLAND",lines,"DE",()=>{toast("ERSTER VORGANG · BÜRGERAMT");announceCurrentRule()},"",subtitles)}
 function finishHumorCertification(openWelcome=true){humorModal.hidden=true;state.started=true;state.modal=false;updateHud();if(openWelcome)openHumorWelcome()}
-let pendingStart=null,pendingOfficeEntry=null;
+let pendingStart=null,pendingOfficeEntry=null,pendingJobcenterEntry=new URLSearchParams(location.search).get("geheim")==="jobcenter";
+function startJobcenterDirect(){
+ const building=buildings.find(b=>b.id==="jobcenter");
+ const entry=[65,95,120,150].map(offset=>({x:building.doorX,y:building.doorY+offset})).find(point=>!responderBlocked(point.x,point.y,player.r,player,null,null));
+ if(entry){player.x=entry.x;player.y=entry.y}
+ player.vx=player.vy=0;state.started=true;state.region=regionOf(player.y);
+ enterJobcenter(building);updateHud();
+}
 function refreshStartup(){
  prepareNearbyNpcAssets();window.Germany3D?.prepareNearbyAssets?.();
  if(pendingOfficeEntry)window.Germany3D?.prepareOfficeAssets?.();
@@ -2612,8 +2619,9 @@ function refreshStartup(){
   const direct=document.body.classList.contains("amt-direct-mode"),models=window.Germany3D?.startupStatus,characters=window.Germany3DBridge.characterAssetStatus;
   const office=window.Germany3D?.officeAssetStatus;
   const total=direct?(office?.total||0):(models?.total||0)+characters.required.length,settled=direct?(office?office.total-office.pending:0):(models?models.total-models.pending:0)+characters.required.filter(kind=>characters.settled.includes(kind)).length;
-  preload.update({renderer:!!window.Germany3D?.ready,total,settled,ready:direct?!!window.Germany3D?.officeAssetsReady:!!window.Germany3D?.startupReady&&startupNpcAssetsReady()});
+  preload.update({renderer:!!window.Germany3D?.ready,total,settled,ready:pendingJobcenterEntry?!!window.Germany3D?.ready:direct?!!window.Germany3D?.officeAssetsReady:!!window.Germany3D?.startupReady&&startupNpcAssetsReady()});
  }
+ if(pendingJobcenterEntry&&window.Germany3D?.ready&&!document.body.classList.contains("preloading")&&!document.hidden){pendingJobcenterEntry=false;startJobcenterDirect()}
  if(state.started||document.getElementById("intro").classList.contains("hidden"))return;
  const ready=!!window.Germany3D?.startupReady&&startupNpcAssetsReady(),button=document.getElementById("start"),label=ready?"SPIEL STARTEN":"LÄDT …";
  if(button.disabled===ready)button.disabled=!ready;if(button.textContent!==label)button.textContent=label;
@@ -2652,6 +2660,7 @@ appSurface.addEventListener("selectstart",event=>{if(!editableTarget(event.targe
 appSurface.addEventListener("dragstart",event=>{if(!editableTarget(event.target))event.preventDefault()});
 
 function loop(now){if(document.hidden){last=now;nextFrameAt=now;requestAnimationFrame(loop);return}const interval=state.started?(window.BuergeramtLevel?.active?0:1000/60):250;if(interval!==frameInterval){frameInterval=interval;last=now;nextFrameAt=now+(state.started?0:interval)}if(now<nextFrameAt-.5){requestAnimationFrame(loop);return}if(interval)nextFrameAt+=Math.max(1,Math.floor((now+.5-nextFrameAt)/interval)+1)*interval;const dt=state.started?Math.min(.12,Math.max(0,(now-last)/1000)):0;last=now;if(dt){const steps=Math.ceil(dt/.025);for(let i=0;i<steps;i++)update(dt/steps)}window.Germany3DBridge?.refreshStartup?.();window.BuergeramtLevel?.update(dt);updatePoliceChaseAudio();if(!window.BuergeramtLevel?.active&&!window.Germany3D?.amtEntry?.active&&!window.Germany3D?.jobcenter?.active)draw();window.Germany3D?.sync();requestAnimationFrame(loop)}updateHud();
+if(pendingJobcenterEntry){state.modal=true;document.getElementById("intro").classList.add("hidden")}
 if(new URLSearchParams(location.search).get("geheim")==="buergeramt"){
  const directConfig={voiceOn:()=>state.voiceOn,subtitlesOn:()=>state.subtitlesOn,cityAudioBusy:stimulusBusy,cityAudioActive:audioTextActive,music:setAmtMusicMuted,onClose:()=>showAmtDirectResult("VORGANG UNTERBROCHEN","Sie haben das Amt verlassen. Eine neue Nummer beginnt einen neuen Versuch."),onCancel:cancelAmtAppointment,onRegistration:awardAnmeldung,onForm:()=>showForm("a38")};
  function restartAmt(){state.started=true;state.modal=true;state.mission=0;state.forms=0;document.getElementById("intro").classList.add("hidden");document.getElementById("form-modal").hidden=true;document.getElementById("amt-direct-result").hidden=true;document.getElementById("amt-direct-reset").hidden=false;document.body.classList.add("amt-direct-mode");if(window.Germany3D?.officeAssetsReady)window.BuergeramtLevel.replay(directConfig);else{pendingOfficeEntry=()=>window.BuergeramtLevel.replay(directConfig);toast("AMT WIRD VORBEREITET …")}updateHud()}
