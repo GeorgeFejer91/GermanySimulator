@@ -79,6 +79,14 @@ to the current waiting/QR/counter state. Missing or disabled player audio keeps
 the exact readable captions. Phone ticket receipts retain their authority
 throughout; the portrait awards neither a ticket nor A38.
 
+Initiating this interaction before melting starts ends the remaining shared
+90-second grace period immediately, before speech starts or completes. Advance
+the shared residence and integrated scene clocks to the liquid onset together,
+so the first following frame begins portrait/floor melting, flow and their
+coupled slowdown. Already-running melt waves and active or completed counter
+recovery retain their progress. Approach alone does not end the grace period;
+close/replay resets it. The portrait has no independent melting clock.
+
 The opposite, left entrance-wall corner has a tall silver-framed mirror at
 `(-5.65, 5.36)`. Its live planar reflection uses the actual room, including
 furniture, signs, floor, people and current effects, through the existing office
@@ -170,7 +178,8 @@ No new synthesis or voice profile is needed for this restoration.
 
 The room begins with .82 m black-and-white checkerboard tiles and painted grout.
 The first **90 seconds of visible, unscaled residence inside the actual doorway**
-are a grace period: intact floor and portrait, full-speed movement and audio, no
+are a grace period unless the player initiates the Steinmeier interaction early:
+intact floor and portrait, full-speed movement and audio, no
 liquid targets or walking ripples. Then, over **480 seconds (8 minutes)**, their
 pigment gradually stretches into curling veins and merging oily
 pools, with progressively finer nested black-and-white ribbons along the mixed
@@ -251,7 +260,7 @@ Reduced motion and GPU failure retain a static spatial melting approximation
 with the same goop/speed value, without ripple animation or pigment targets.
 
 The existing Steinmeier oil portrait uses this same wave and residence clock,
-with paint progress `min(1, 1.15 × goop)`. This 15% increase applies together to
+with paint progress `min(1, 1.30 × goop)`. This 30% increase applies together to
 the framed image, wall drips and floor deposition; the floor's own melt and
 slowdown retain their shared value. `buergeramt-portrait-melt.js` transports the real
 painted image downward, gradually exposing the bare backing. Eight irregular
@@ -261,6 +270,9 @@ instead of stretching fixed sawtooth strips. A transparent,
 depth-tested, statically curved sheet continues the paint from the frame onto
 the wall, ending at y=.0024 m and z=5.4696 (the inner wall face is z=5.47); its
 front reaches the ground before it can feed the floor. The existing floor pass
+uses a slightly longer shared drip reach (`1.12 + .09 × channel seed`) so paint
+contacts the ground and begins mixing sooner; wall film and floor contact use
+the same function, without depositing before the visible drip arrives. The pass
 injects the same image colors at that contact, then transports and diffuses them
 with the black/white oils and walking wakes. RGBA stores mixed RGB plus deposited
 paint coverage. The gilded frame, nameplate, original photo, collision envelope

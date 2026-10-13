@@ -148,3 +148,36 @@ No performance speedup is claimed. Physical Android, natural humor-form/full
 mission completion and perceptual listening are NOT RUN. Evidence is ignored
 under output/playwright/welcome/. An isolated publication candidate preserves
 the already-published Jobcenter glow and excludes other chats' unfinished work.
+
+# Steinmeier melting trigger and earlier floor paint — 2026-10-13
+
+Integrator-owned on clean base `e3b2ba3`, isolated in the managed Steinmeier
+worktree after concurrent welcome/look edits appeared in the shared checkout.
+The resumed candidate preserves published Jobcenter glow commit `40bd396`.
+Scope: the existing portrait trigger, shared portrait shader, imported cache
+identities, focused Node/browser regressions and owning episode guidance.
+A valid interaction ends the remaining shared grace before its monologue;
+portrait paint uses 1.30 rather than 1.15 times room melt, and slightly longer
+drip reach advances shared wall-to-floor contact. Preserve room melt/speed,
+recovery, target selection, speech, geometry, gait, assets and mission rewards.
+No new dependencies, assets, jobs or renderer passes. Risk-based checks cover
+early/absent/repeated interaction, ongoing melt, hidden/replay, recovery, actual
+GPU color deposition before the old onset, missing paint, reduced motion and
+timed moving/blocked/resumed rendering. Independent Physics and Camera review
+the same frozen candidate. Silent desktop and Android emulation use existing
+tooling; physical Android and perceptual listening remain separate. The initial
+full suite passed 815/817; two untouched legacy harness failures reproduce on
+base source (missing diagnostic clearInput fixture and a stale renderer export
+regex). Neither belongs to the Pages workflow selection. The early-trigger and
+new paint-rate regressions both fail without their production fixes.
+
+Validation on the frozen `40bd396` candidate: 607/607 Pages-selected Node checks,
+six silent portrait E/touch/fallback profiles, four GPU pigment/lifecycle profiles
+and three timed moving/blocked/reduced profiles pass. Independent Physics and
+Camera reviews approve the affected P5/C4/X1 scope; geometry and vehicle matrices
+are outside the delta. GPU paint coverage and colored pixels are positive at age
+420, with both oils retained. Six baseline and six candidate cold budget runs
+pass on ANGLE/Intel Iris Xe: candidate maximum transfer 17,911,376 bytes, all nine
+inputs accepted and zero errors per run. No performance speedup is claimed.
+Physical Android, natural-duration mission play and perceptual listening are
+NOT RUN. Captured reports and screenshots remain ignored local evidence.
