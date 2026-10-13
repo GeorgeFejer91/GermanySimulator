@@ -35,6 +35,38 @@ Mission order:
 7. Ausländerbehörde — residence evidence.
 8. Ausländerbehörde — fictional citizenship application.
 
+### JWD home and neighbors
+
+Completing the first registration interview allocates a home through the existing
+`onRegistration` reward. After the A38 form is submitted, the mission fax and
+sausage lead to the house at Berlin's southwest edge: JWD, “janz weit draußen”.
+Visit its covered sleeping porch with E, then finish conversations with all three
+neighbors. This detour resumes Anmeldung II without renumbering the eight
+procedures. A previously saved registration badge alone does not allocate a
+house in a new run.
+
+The patched, sparsely furnished home sits between tidy family houses on a broad
+paved lane connected to the existing western sidewalk. Frau Fink is a Swabian
+Kehrwoche enthusiast. Professor Dr. Dr. **Heiko Kranz** and his diplomat wife are
+upper-class, literal, socially awkward and obsessively concerned with status and
+their child's achievements. Eight-year-old Theodor speaks six languages; his
+parents worry that his Latin and genius milestones are falling behind. Their
+dialogue also covers parking, hedges and closed blinds. They speak Berlin
+Denglisch, with matching English subtitles through the existing speech broker.
+
+After allocation, police capture clears the immediate wanted response and wakes
+the player on the home porch, checking body clearance. Before allocation the
+station-garden consequence remains. Every return to the home rearms one finite
+neighbor interruption when the player tries to leave; acknowledging its lines
+releases movement for that visit. Walking away and returning, or another arrest,
+rearms it. Conversations pause the city and use existing E/touch controls.
+
+From the second home visit, one opportunistic burglar can walk along the lane to
+inspect the home. On finding only a mattress and empty crates, he complains and
+walks to the richer Kranz house, disappearing at its doorway. The event waits for
+the player to be nearby, uses ordinary body collision, and cannot remove mission
+items. No extra currency, save system, asset download or background timer is added.
+
 A plump, pale Weißwurst fixed at the top of the screen points its glowing red end toward
 the current mission's actual office entrance. It follows all eight procedures;
 during Stadtbild work it selects the nearest unfinished object, then the office.

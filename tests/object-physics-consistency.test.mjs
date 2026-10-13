@@ -213,6 +213,7 @@ for(const vertical of [false,true]){
  const citizens=h.city.npcs.filter(n=>!n.special);assert.ok(citizens.length>60,"check the whole shipped crowd rather than two synthetic actors");
  for(const n of citizens){assert.ok(h.pedestrianRouteContains(n,n.x,n.y),`${n.name} must start with full-body pavement clearance`);assert.equal(h.staticBlocked(n.x,n.y,13),false,`${n.name} spawn must clear every static footprint`);assert.equal(h.responderBlocked(n.x,n.y,13,n,n.x,n.y),false,`${n.name} spawn cannot overlap another solid body`)}
  for(let frame=0;frame<120;frame++)for(const n of citizens){
+  if(n.jwdRole)continue; // Authored residents stand on their shared lane; they do not join the commuting crowd.
   const lane=h.pedestrianLane(n),correction=h.clamp(lane-(n.vx?n.y:n.x),-.45,.45),dx=(n.vx||0)*.025+(n.vx?0:correction),dy=(n.vy||0)*.025+(n.vx?correction:0);
   if(!h.moveGroundResponder(n,dx,dy,13)||(n.vx?(n.x<=n.min+1||n.x>=n.max-1):(n.y<=n.min+1||n.y>=n.max-1))){if(n.vx)n.vx*=-1;else n.vy*=-1}
   assert.ok(h.pedestrianRouteContains(n,n.x,n.y),`${n.name} must remain on full-body legal pavement`);assert.equal(h.staticBlocked(n.x,n.y,13),false,`${n.name} cannot enter scenery`);

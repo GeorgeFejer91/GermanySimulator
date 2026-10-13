@@ -722,7 +722,54 @@ function showRendererFailure(error){
     const dark=(phase===0?1-blend:next===0?blend:0);
     glow.light.color.copy(glow.raysMaterial.uniforms.uColor.value);glow.light.intensity=(.3+2.7*(1-dark))*pulse;
   }
+  function residentialBuilding(b){
+    const g=new T.Group(),fallback=new T.Group(),w=b.w*S,d=b.h*S,home=b.id==="jwd-home",wallHeight=2.65,roofHeight=Math.max(.9,b.hgt*H-wallHeight);
+    const plaster=mat(home?0xaaa18b:b.id==="jwd-fink"?0xd9c8a0:0xb2c4ba),roof=mat(home?0x514d42:0x884f3c),trim=mat(home?0x655e4e:0xe7dfc9),hedge=mat(0x455b38),wood=mat(0x75604b),glass=mat(0x526967,.6),linen=mat(0xc7baa2);
+    const owned=[plaster,roof,trim,hedge,wood,glass,linen],unit=new T.BoxGeometry(1,1,1);
+    const part=(name,x,y,z,sx,sy,sz,material)=>{const mesh=new T.Mesh(unit,material);mesh.name=name;mesh.position.set(x,y,z);mesh.scale.set(sx,sy,sz);fallback.add(mesh);return mesh};
+    g.name=b.name||b.id;g.add(fallback);
+    // Grounded structure/props stay within the simulation's solid rectangle.
+    // The covered porch is overhead only; its open lane has no invisible posts.
+    part("Foundation",0,.07,0,w,.14,d,trim);
+    const recess=home?.6:.36;part("House walls",0,wallHeight/2,-recess/2,w,wallHeight,d-recess,plaster);
+    const shape=new T.Shape();shape.moveTo(-w/2,0);shape.lineTo(w/2,0);shape.lineTo(0,roofHeight);shape.closePath();
+    const pitched=new T.Mesh(new T.ExtrudeGeometry(shape,{depth:d,bevelEnabled:false,steps:1}),roof);pitched.name="Pitched roof";pitched.position.set(0,wallHeight,-d/2);fallback.add(pitched);
+    part("Chimney",w*.29,wallHeight+roofHeight*.67,-d*.2,.32,.92,.37,trim);
+    const front=d/2-recess;
+    part("Front door",0,.985,front+.018,.82,1.97,.035,wood);
+    part("Door handle",.27,.92,front+.06,.045,.12,.04,trim);
+    for(const x of [-w*.29,w*.29]){
+      part("Window frame",x,1.68,front+.028,.91,.97,.04,trim);
+      part("Window glass",x,1.68,front+.055,.75,.8,.018,glass);
+      part("Window mullion",x,1.68,front+.075,.045,.8,.025,trim);
+      if(home){part("Shabby closed blind",x,1.83,front+.09,.78,.52,.03,wood);for(let i=0;i<3;i++)part("Blind slat",x,1.63+i*.15,front+.11,.78,.025,.015,trim)}
+      else{part("Curtains",x-.24,1.68,front+.08,.17,.79,.03,linen);part("Curtains",x+.24,1.68,front+.08,.17,.79,.03,linen)}
+    }
+    if(home){
+      part("Porch canopy",0,2.5,d/2+.75,w*.68,.14,1.95,roof);
+      part("Roof tarpaulin patch",-w*.19,wallHeight+roofHeight*.62,-.4,1.3,.05,1.55,wood).rotation.z=Math.atan2(roofHeight,w/2);
+      part("Plaster patch",-w*.37,.62,front+.021,.66,.72,.035,trim);
+      part("Bare mattress",-1.38,.26,d/2-.23,1.35,.23,.42,linen);
+      part("Mattress stain",-1.19,.381,d/2-.23,.43,.014,.27,wood);
+      part("Empty crate",1.54,.35,d/2-.29,.62,.58,.5,wood);
+      part("Crate slit",1.54,.38,d/2-.033,.47,.08,.025,M.dark);
+      part("Crate lid",1.59,.67,d/2-.29,.68,.055,.53,trim).rotation.z=.13;
+    }else{
+      for(const side of [-1,1]){
+        part("Clipped front hedge",side*w*.32,.41,d/2-.17,w*.3,.7,.32,hedge);
+        part("Flower box",side*w*.29,1.12,front+.07,.93,.19,.16,wood);
+        for(const offset of [-.27,0,.27])part("Geranium",side*w*.29+offset,1.27,front+.07,.15,.15,.12,roof);
+      }
+    }
+    const l=label(home?"JWD · DEIN ZUHAUSE":b.id==="jwd-fink"?"FAMILIE FINK":"FAMILIE KRANZ",home?"JANZ WEIT DRAUSSEN":"BITTE DIE RUHEZEITEN BEACHTEN",home?"#d1c3a5":"#e4dfcf","#222",home?36:27);
+    l.material.map.generateMipmaps=false;l.material.map.minFilter=T.LinearFilter;l.scale.set(home?4.4:3.5,home?.86:.68,1);l.position.set(0,home?3.05:2.55,d/2+.12);l.userData.occlusionDecoration=true;l.userData.jwdText=home?"JWD · DEIN ZUHAUSE / JANZ WEIT DRAUSSEN":b.id==="jwd-fink"?"FAMILIE FINK":"FAMILIE KRANZ";l.raycast=()=>{};g.add(l);
+    g.position.set(X(b.x+b.w/2),0,Z(b.y+b.h/2));world.add(g);
+    const sourceSign=l.material,slot={building:b,group:g,fallback,label:l,model:null,materials:new Set(),opacity:1};buildingSlots.push(slot);registerMaterials(g,slot);sourceSign.dispose();
+    // registerMaterials owns per-building copies; the temporary palette can retire.
+    for(const material of owned)material.dispose();l.userData.jwdSign=true;
+  }
   function building(b,i){
+    if(b.residential){residentialBuilding(b);return}
     if(b.kind){powerPlant(b,i);return}
     const g=new T.Group(),fallback=new T.Group(),w=b.w*S,d=b.h*S,h=Math.max(2.8,b.hgt*H),shop=b.id==="krugers-kugellager",cols=[0x65645f,0x706f69,0x5c5d59,0x7a7871],bm=mat(shop?0xe8dac3:cols[i%cols.length],.98);
     g.add(fallback);box(w,h,d,bm,0,h/2,0,fallback);box(w*1.03,.16,d*1.03,mat(shop?0xf36b17:0x89877f),0,h+.08,0,fallback);
@@ -1024,6 +1071,56 @@ function showRendererFailure(error){
     if(o.wisdomId){if(travel>.01)q.rotation.y=Math.atan2(o.x-previousX,o.y-previousY);else if(o.pause>0)q.rotation.y=Math.atan2(bridge.player.x-o.x,bridge.player.y-o.y)}
     const target=travel>.01?Math.sin(q.userData.walkPhase)*.38:0,s=q.userData.walkSwing=(q.userData.walkSwing||0)+(target-(q.userData.walkSwing||0))*(travel>.01?1:.28);q.userData.ll.rotation.x=s;q.userData.rl.rotation.x=-s;q.userData.la.rotation.x=-s*.7;q.userData.ra.rotation.x=s*.7
   }
+  function jwdCharacter(n){
+    const q=character("npc"),role=n.jwdRole,coat=mat(role==="swabian"?0x6b5976:role==="parent"?0x78664c:role==="watcher"?0x465363:0x363a40),cream=mat(0xd7ccaf),dark=mat(0x35312f),accent=mat(role==="swabian"?0x9b6971:role==="parent"?0x814334:0x9a7752);
+    q.name=n.id;q.userData.jwdRole=role;q.userData.ownedMaterials=new Set([coat,cream,dark,accent]);
+    q.traverse(node=>{if(node.material===M.npc)node.material=coat});
+    const piece=(name,w,h,d,material,x,y,z)=>{const mesh=box(w,h,d,material,x,y,z,q);mesh.name=name;return mesh};
+    piece("Nose",.07,.10,.11,M.skin,0,1.3,.19);
+    for(const side of [-1,1]){piece("Eye",.035,.035,.022,dark,side*.079,1.36,.18);piece("Shoe",.14,.09,.27,dark,side*.1,.045,.045)}
+    if(role==="swabian"){
+      const scarf=new T.Mesh(new T.SphereGeometry(.228,10,6,0,Math.PI*2,0,Math.PI*.58),accent);scarf.position.set(0,1.39,-.016);q.add(scarf);
+      piece("Headscarf knot",.19,.12,.17,accent,0,1.16,-.19);
+      piece("Apron",.4,.57,.045,cream,0,.69,.176);piece("Apron pocket",.19,.14,.027,accent,0,.6,.205);
+      piece("Broom handle",.032,1.43,.032,accent,.35,.79,.14).rotation.z=-.08;
+      piece("Broom bristles",.27,.19,.12,cream,.4,.16,.14);
+    }else if(role==="parent"){
+      const hair=new T.Mesh(new T.SphereGeometry(.215,10,6,0,Math.PI*2,0,Math.PI*.48),dark);hair.position.set(0,1.4,-.016);q.add(hair);
+      piece("Professor waistcoat",.23,.51,.035,dark,0,.71,.17);
+      piece("Stiff shirt collar",.2,.15,.045,cream,0,1.01,.18);
+      for(const side of [-1,1]){
+        piece("Bow tie",.105,.075,.035,accent,side*.061,.99,.214).rotation.z=side*.18;
+        piece("Tweed lapel",.095,.44,.04,coat,side*.14,.84,.194).rotation.z=side*.18;
+        const lens=new T.Mesh(new T.TorusGeometry(.064,.009,5,10),dark);lens.position.set(side*.08,1.36,.203);lens.name="Professor spectacles";q.add(lens);
+      }
+      piece("Spectacle bridge",.04,.016,.022,dark,0,1.36,.203);
+      for(const y of [.59,.73,.86])piece("Waistcoat button",.023,.023,.016,cream,0,y,.199);
+      piece("Academic monograph",.22,.31,.12,accent,-.32,.53,.05);
+      piece("Book pages",.17,.265,.127,cream,-.32,.53,.054);
+    }else if(role==="watcher"){
+      const hair=new T.Mesh(new T.SphereGeometry(.219,10,6,0,Math.PI*2,0,Math.PI*.56),accent);hair.position.set(0,1.4,-.024);q.add(hair);
+      const bun=new T.Mesh(new T.SphereGeometry(.09,8,6),accent);bun.position.set(0,1.39,-.23);q.add(bun);
+      piece("Diplomat blouse",.18,.28,.036,cream,0,.96,.174);
+      for(const side of [-1,1])piece("Suit lapel",.09,.39,.04,coat,side*.115,.87,.199).rotation.z=side*.24;
+      for(let i=-2;i<=2;i++)piece("Pearl necklace",.034,.034,.027,cream,i*.043,1.077+Math.abs(i)*.014,.195);
+      piece("Lapel pin",.055,.055,.027,accent,.145,1.0,.224);
+      piece("Diplomatic briefcase",.29,.35,.13,dark,.34,.48,.015);
+      piece("Briefcase handle",.145,.12,.04,dark,.34,.71,.015);
+      piece("Briefcase clasp",.045,.028,.018,accent,.34,.55,.088);
+    }else{
+      for(const y of [.48,.63,.78,.93])piece("Striped jumper",.43,.063,.025,cream,0,y,.163);
+      piece("Eye mask",.34,.1,.035,dark,0,1.35,.18);
+      for(const side of [-1,1])piece("Mask eye",.043,.037,.02,cream,side*.079,1.35,.205);
+      const cap=new T.Mesh(new T.SphereGeometry(.218,10,6,0,Math.PI*2,0,Math.PI*.5),dark);cap.position.y=1.4;q.add(cap);
+      const sack=new T.Mesh(new T.SphereGeometry(.22,8,6),accent);sack.scale.set(.85,1.3,.9);sack.position.set(.13,.65,-.25);sack.name="Empty burglary sack";q.add(sack);
+      piece("Sack knot",.13,.1,.12,cream,.13,.94,-.25);
+    }
+    return q;
+  }
+  function syncJwdCharacter(q,n){
+    syncChar(q,n);
+    if(Number.isFinite(n.facing))q.rotation.y=n.facing;
+  }
   const atlasTextureCache=new Map(),atlasMaterialCache=new Map();
   function atlasSprite(kind,scale){
     const source=bridge.getNpcSpriteCanvas?.(kind),grid=bridge.npcSpriteGrids?.[kind];if(!source||!grid)return null;
@@ -1033,7 +1130,7 @@ function showRendererFailure(error){
   }
   function specialSprite(n){return n.special==="borderPourer"?atlasSprite("borderPourer",Germany3DBridge.npcSpriteGrids.borderPourer.pivot?2.62*224/208:2.62):n.special==="merkel"?atlasSprite("merkel",2.42):n.special==="bayern"?atlasSprite("bayern",2.91):n.special==="alice"?atlasSprite("alice",2.42):null}
   function npcSprite(n){return specialSprite(n)||(n.spriteKind?atlasSprite(n.spriteKind,n.spriteScale||2.42):null)}
-  function npcAppearance(n){const wisdom=globalThis.StreetWisdom,person=wisdom?.definitions.find(row=>row.id===n.wisdomId);return person?wisdom.createCharacter(T,person,M):npcSprite(n)||character("npc")}
+  function npcAppearance(n){if(n.jwdRole)return jwdCharacter(n);const wisdom=globalThis.StreetWisdom,person=wisdom?.definitions.find(row=>row.id===n.wisdomId);return person?wisdom.createCharacter(T,person,M):npcSprite(n)||character("npc")}
   function syncAtlasSprite(q,o,height){
     const grid=q.userData.grid,frame=o.spriteFrame||0,row=o.spriteRow||0,flip=!!o.spriteFlip;
     if(frame!==q.userData.spriteFrame||row!==q.userData.spriteRow||flip!==q.userData.spriteFlip){const uv=q.geometry.attributes.uv,base=q.userData.baseUv,u0=frame/grid.cols,v0=1-(row+1)/grid.rows;for(let i=0;i<uv.count;i++){const bx=base[i*2],by=base[i*2+1];uv.setXY(i,u0+(flip?1-bx:bx)/grid.cols,v0+by/grid.rows)}uv.needsUpdate=true;q.userData.spriteFrame=frame;q.userData.spriteRow=row;q.userData.spriteFlip=flip}
@@ -1062,8 +1159,19 @@ function showRendererFailure(error){
     // Atlas materials/textures are shared. Only retire per-actor geometry.
     const geometries=new Set();q.traverse(node=>{if(node.geometry)geometries.add(node.geometry)});
     for(const geometry of geometries)geometry.dispose();
+    for(const material of q.userData.ownedMaterials||[])material.dispose();
   }
-  addEventListener("pagehide",event=>{if(!event.persisted)streetCharacters?.dispose()});
+  addEventListener("pagehide",event=>{
+    if(event.persisted)return;
+    streetCharacters?.dispose();
+    for(const [state,mesh] of npcMeshes)if(state.jwdRole)retireNpcMesh(mesh);
+    for(const slot of buildingSlots)if(slot.building.residential){
+      const geometries=new Set();slot.group.traverse(node=>{if(node.geometry)geometries.add(node.geometry)});
+      for(const geometry of geometries)geometry.dispose();
+      for(const material of slot.materials)material.dispose();
+      slot.label.material.map.dispose();
+    }
+  });
 
   const playerMesh=character("player");scene.add(playerMesh);
   const npcMeshes=new Map(),policeMeshes=new Map(),trafficCarMeshes=new Map(),policeVehicleMeshes=new Map(),policeHelicopterMeshes=new Map(),pickupMeshes=new Map();
@@ -1705,11 +1813,28 @@ function showRendererFailure(error){
     return vehicleViewFrustum.intersectsBox(vehicleViewBounds);
   }
   function isWorldPointVisible(x,y,padding=0,kind="officer"){const height=kind==="helicopter"?6.8:kind==="car"?.7:1;spawnProbe.set(X(x),height,Z(y)).project(camera);const padX=padding/Math.max(1,innerWidth)*2,padY=padding/Math.max(1,innerHeight)*2;return spawnProbe.z>=-1&&spawnProbe.z<=1&&spawnProbe.x>=-1-padX&&spawnProbe.x<=1+padX&&spawnProbe.y>=-1-padY&&spawnProbe.y<=1+padY}
+  function inspectJwdAssets(){
+    const geometries=new Set(),materials=new Set(),textures=new Set();let meshes=0,triangles=0;
+    function inspect(root){
+      root.updateWorldMatrix(true,true);
+      const bounds=new T.Box3().setFromObject(root),size=bounds.getSize(new T.Vector3());
+      root.traverse(node=>{
+        if(node.geometry){meshes++;geometries.add(node.geometry);triangles+=(node.geometry.index?.count||node.geometry.attributes.position?.count||0)/3}
+        for(const material of node.material?(Array.isArray(node.material)?node.material:[node.material]):[]){materials.add(material);if(material.map)textures.add(material.map)}
+      });
+      return {min:bounds.min.toArray(),max:bounds.max.toArray(),width:size.x,height:size.y,depth:size.z,ground:bounds.min.y};
+    }
+    const houses=buildingSlots.filter(slot=>slot.building.residential).map(slot=>({id:slot.building.id,bounds:inspect(slot.group),solid:[slot.building.x,slot.building.y,slot.building.w,slot.building.h],visible:slot.group.visible,opacity:slot.opacity,doorHeight:1.97,sign:slot.label.userData.jwdText}));
+    const actors=[...npcMeshes].filter(([state])=>state.jwdRole).map(([state,root])=>({id:state.id,role:state.jwdRole,position:[state.x,state.y],worldPosition:root.position.toArray(),bounds:inspect(root),facing:root.rotation.y,walkPhase:root.userData.walkPhase||0,swing:root.userData.walkSwing||0}));
+    let geometryBytes=0;for(const geometry of geometries){for(const attribute of Object.values(geometry.attributes))geometryBytes+=attribute.array.byteLength;geometryBytes+=geometry.index?.array.byteLength||0}
+    const textureBytes=[...textures].reduce((sum,texture)=>sum+(texture.image?.width||0)*(texture.image?.height||0)*4,0);
+    return {houses,actors,cost:{meshes,triangles,geometries:geometries.size,geometryBytes,materials:materials.size,textures:textures.size,textureBytes,assetRequests:0}};
+  }
   function inspectAssets(){
     const pointerBounds=new T.Box3().setFromObject(missionPointer);
     const bounds=model=>{if(!model)return null;const b=new T.Box3().setFromObject(model),s=b.getSize(new T.Vector3());return{width:s.x,height:s.y,depth:s.z,ground:b.min.y}};
     const glow=buergeramtDoorGlow,doorRadiance=glow?{visible:glow.group.visible&&glow.slot.group.visible,loaded:!!glow.slot.model,phase:["black","red","gold"][glow.phase],time:glow.time,pulse:glow.pulse,color:glow.skin.color.getHexString(),rayTime:glow.raysMaterial.uniforms.uTime.value,rayColor:glow.raysMaterial.uniforms.uColor.value.getHexString(),lightIntensity:glow.light.intensity,position:glow.group.getWorldPosition(new T.Vector3()).toArray(),doorSize:glow.size.toArray(),depthTest:glow.raysMaterial.depthTest,depthWrite:glow.raysMaterial.depthWrite}:null;
-    return{doorRadiance,missionPointer:{visible:missionPointer.visible,target:missionPointer.userData.target,loaded:!sausageFallback.visible,heading:missionPointer.userData.heading,screenHeading:missionPointer.rotation.z,screen:missionPointer.userData.screen,pixelBounds:{left:pointerBounds.min.x+innerWidth/2,right:pointerBounds.max.x+innerWidth/2,top:innerHeight/2-pointerBounds.max.y,bottom:innerHeight/2-pointerBounds.min.y},position:missionPointer.position.toArray(),shape:sausageBody.scale.toArray(),pivot:{sourceZ:sausagePivotZ,position:sausageBody.localToWorld(new T.Vector3(0,0,sausagePivotZ)).toArray(),centre:sausageBody.getWorldPosition(new T.Vector3()).toArray()},print:missionPointer.userData.print,printFlip:wurstPrintFlip.value,tip:{position:sausageTipGlow.getWorldPosition(new T.Vector3()).toArray(),depthTest:sausageTipGlow.material.depthTest,depthWrite:sausageTipGlow.material.depthWrite},bounds:bounds(missionPointer)},brandmauerFire:{loaded:lineFire.visible,fallback:firePlaneA.visible,particles:lineParticleLayers.map(layer=>layer.geometry.attributes.position.count),...fireMaskStatus},dumpsterFire:dumpsterFlames.map(({fire,smoke,fallback,maskStatus,mask,coreMask,smokeMask})=>({loaded:fire.visible,smoke:smoke.visible,fallback:fallback.visible,...maskStatus,images:[mask.image?.width||0,coreMask.image?.width||0,smokeMask.image?.width||0]})),streetCharacters:streetCharacters?.inspect()||null,placards:placardLayouts.map(item=>({...item})),buildings:buildingSlots.filter(s=>!s.building.kind).map(s=>({id:s.building.id,loaded:!!s.model,fallback:s.fallback.visible,bounds:bounds(s.model),glass:[...s.materials].filter(m=>/glass/i.test(m.name)).map(m=>({name:m.name,opacity:m.opacity,baseOpacity:m.userData.baseOpacity}))})),city:cityAssetSlots.map(s=>({file:s.file,loaded:!!s.model,fallback:s.fallback.visible,bounds:bounds(s.model)})),monument:kiesingerMonument?{bounds:bounds(kiesingerMonument),scale:kiesingerMonument.scale.y,loaded:!!kiesingerMonument.getObjectByName("KiesingerSculpture")}:null,banners:landmarkBanners.map(({kind,mesh})=>({kind,bounds:bounds(mesh)})),vehicles:[...trafficCarMeshes.values(),...policeVehicleMeshes.values()].map(s=>({id:s.state.id,kind:s.kind,loaded:!!s.model,fallback:s.fallback.visible,bounds:bounds(s.model),wheels:s.wheels.map(w=>({name:w.node.name,angle:w.node.rotation.x,radius:w.radius})),steering:s.steering.map(o=>o.rotation.y),brakes:s.brakes.map(m=>m.emissiveIntensity),beacons:s.beacons.map(b=>b.material.emissiveIntensity)})),sources:[...localModels.keys()],render:{...renderer.info.render},memory:{...renderer.info.memory}};
+    return{doorRadiance,jwd:inspectJwdAssets(),missionPointer:{visible:missionPointer.visible,target:missionPointer.userData.target,loaded:!sausageFallback.visible,heading:missionPointer.userData.heading,screenHeading:missionPointer.rotation.z,screen:missionPointer.userData.screen,pixelBounds:{left:pointerBounds.min.x+innerWidth/2,right:pointerBounds.max.x+innerWidth/2,top:innerHeight/2-pointerBounds.max.y,bottom:innerHeight/2-pointerBounds.min.y},position:missionPointer.position.toArray(),shape:sausageBody.scale.toArray(),pivot:{sourceZ:sausagePivotZ,position:sausageBody.localToWorld(new T.Vector3(0,0,sausagePivotZ)).toArray(),centre:sausageBody.getWorldPosition(new T.Vector3()).toArray()},print:missionPointer.userData.print,printFlip:wurstPrintFlip.value,tip:{position:sausageTipGlow.getWorldPosition(new T.Vector3()).toArray(),depthTest:sausageTipGlow.material.depthTest,depthWrite:sausageTipGlow.material.depthWrite},bounds:bounds(missionPointer)},brandmauerFire:{loaded:lineFire.visible,fallback:firePlaneA.visible,particles:lineParticleLayers.map(layer=>layer.geometry.attributes.position.count),...fireMaskStatus},dumpsterFire:dumpsterFlames.map(({fire,smoke,fallback,maskStatus,mask,coreMask,smokeMask})=>({loaded:fire.visible,smoke:smoke.visible,fallback:fallback.visible,...maskStatus,images:[mask.image?.width||0,coreMask.image?.width||0,smokeMask.image?.width||0]})),streetCharacters:streetCharacters?.inspect()||null,placards:placardLayouts.map(item=>({...item})),buildings:buildingSlots.filter(s=>!s.building.kind).map(s=>({id:s.building.id,loaded:!!s.model,fallback:s.fallback.visible,bounds:bounds(s.building.residential?s.fallback:s.model),glass:[...s.materials].filter(m=>/glass/i.test(m.name)).map(m=>({name:m.name,opacity:m.opacity,baseOpacity:m.userData.baseOpacity}))})),city:cityAssetSlots.map(s=>({file:s.file,loaded:!!s.model,fallback:s.fallback.visible,bounds:bounds(s.model)})),monument:kiesingerMonument?{bounds:bounds(kiesingerMonument),scale:kiesingerMonument.scale.y,loaded:!!kiesingerMonument.getObjectByName("KiesingerSculpture")}:null,banners:landmarkBanners.map(({kind,mesh})=>({kind,bounds:bounds(mesh)})),vehicles:[...trafficCarMeshes.values(),...policeVehicleMeshes.values()].map(s=>({id:s.state.id,kind:s.kind,loaded:!!s.model,fallback:s.fallback.visible,bounds:bounds(s.model),wheels:s.wheels.map(w=>({name:w.node.name,angle:w.node.rotation.x,radius:w.radius})),steering:s.steering.map(o=>o.rotation.y),brakes:s.brakes.map(m=>m.emissiveIntensity),beacons:s.beacons.map(b=>b.material.emissiveIntensity)})),sources:[...localModels.keys()],render:{...renderer.info.render},memory:{...renderer.info.memory}};
   }
   // Prune complete off-camera groups, including the many meshes in distant stand-ins.
   const renderFrustum=new T.Frustum(),renderViewMatrix=new T.Matrix4(),trainRenderSphere=new T.Sphere();
@@ -1780,7 +1905,7 @@ function showRendererFailure(error){
     ns.forEach(n=>{
       let q=npcMeshes.get(n),kind=n.special||n.spriteKind;
       if(n.special&&q?.userData.streetCharacter){retireNpcMesh(q);npcMeshes.delete(n);q=null}
-      if(streetCharacters&&!n.special&&!n.wisdomId&&!q?.userData.streetCharacter&&!streetFailedStates.has(n)&&streetBuildBudget>0&&Math.hypot(n.x-bridge.player.x,n.y-bridge.player.y)*S<38){
+      if(streetCharacters&&!n.special&&!n.wisdomId&&!n.jwdRole&&!q?.userData.streetCharacter&&!streetFailedStates.has(n)&&streetBuildBudget>0&&Math.hypot(n.x-bridge.player.x,n.y-bridge.player.y)*S<38){
         streetBuildBudget--;
         const candidate=streetCharacters.create(n);
         if(candidate){retireNpcMesh(q);q=candidate;scene.add(q);npcMeshes.set(n,q)}else streetFailedStates.add(n);
@@ -1796,14 +1921,15 @@ function showRendererFailure(error){
       }
       if(kind&&!q?.userData[kind+"Sprite"]){const sprite=npcSprite(n);if(sprite){if(q)scene.remove(q);q=sprite;scene.add(q);npcMeshes.set(n,q)}}
       if(!q){q=npcAppearance(n);scene.add(q);npcMeshes.set(n,q)}
-      if(q.userData.borderPourerSprite)syncBorderPourer(q,n);
+      if(n.jwdRole)syncJwdCharacter(q,n);
+      else if(q.userData.borderPourerSprite)syncBorderPourer(q,n);
       else if(q.userData.merkelSprite)syncMerkel(q,n);
       else if(q.userData.bayernSprite)syncBayern(q,n);
       else if(q.userData.aliceSprite)syncAlice(q,n);
       else if(n.spriteKind&&q.userData[n.spriteKind+"Sprite"])syncAtlasSprite(q,n,1.21);
       else syncChar(q,n);
     });
-    for(const [n,q] of npcMeshes)if(!ns.includes(n)){if(q.userData.streetCharacter)streetCharacters?.remove(q);else if(n.wisdomId)retireNpcMesh(q);else scene.remove(q);npcMeshes.delete(n)}
+    for(const [n,q] of npcMeshes)if(!ns.includes(n)){if(q.userData.streetCharacter)streetCharacters?.remove(q);else if(n.wisdomId||n.jwdRole)retireNpcMesh(q);else scene.remove(q);npcMeshes.delete(n)}
     const ps=bridge.getPolice();ps.forEach(p=>{let q=policeMeshes.get(p);if(!q){q=character("police");scene.add(q);policeMeshes.set(p,q)}syncChar(q,p,.04)});for(const [p,q] of policeMeshes)if(!ps.includes(p)){scene.remove(q);policeMeshes.delete(p)}
     const traffic=bridge.getTrafficCars?.()||[];traffic.forEach(car=>{let slot=trafficCarMeshes.get(car);if(!slot){slot=makeTrafficCarSlot(car);trafficCarMeshes.set(car,slot)}const sink=car.vortexSink||0,crush=car.vortexCrush||0,scale=Math.max(.055,1-sink*.93),impact=car.vortexImpact||0;if(impact&&impact!==slot.vortexImpact){slot.vortexImpact=impact;strikeWirtschaftswunder(impact)}slot.group.visible=car.vortexPhase!=="swallowed";slot.group.position.set(X(car.x),(bridge.vehicleElevation?.(car.x,car.y)||0)+.07-sink*.72,Z(car.y));syncVehicleScale(slot,scale,crush);slot.group.rotation.order="YXZ";slot.group.rotation.set(vehicleRoadPitch(car)-sink*1.18,Math.PI/2-car.angle,Math.sin((car.vortexSpin||0)*1.7)*sink*.62);syncVehicleWheels(slot)});for(const [car,slot] of trafficCarMeshes)if(!traffic.includes(car)){removeVehicleSlot(slot);trafficCarMeshes.delete(car)}
     const vehicles=bridge.getPoliceVehicles?.()||[];vehicles.forEach(car=>{let slot=policeVehicleMeshes.get(car);if(!slot){slot=makePoliceCarSlot(car);policeVehicleMeshes.set(car,slot)}slot.group.position.set(X(car.x),(bridge.vehicleElevation?.(car.x,car.y)||0)+.07,Z(car.y));slot.group.rotation.order="YXZ";slot.group.rotation.set(vehicleRoadPitch(car),Math.PI/2-car.angle,0);syncVehicleWheels(slot)});for(const [car,slot] of policeVehicleMeshes)if(!vehicles.includes(car)){removeVehicleSlot(slot);policeVehicleMeshes.delete(car)}

@@ -49,7 +49,8 @@ gate.api.refreshStartup();assert.equal(started,1,'loading completion must consum
 const hudSource=game.slice(game.indexOf('function updateHud(){'),game.indexOf('\nfunction openDialogue'));
 let writes=0;const node=()=>new Proxy({classList:{toggle(){writes++}},style:new Proxy({setProperty(){writes++}},{set(o,k,v){writes++;o[k]=v;return true}}),parentElement:{setAttribute(){writes++}},setAttribute(){writes++},appendChild(){writes++}}, {set(o,k,v){writes++;o[k]=v;return true}});
 const nodes=new Map(),hud=vm.createContext({state:{wanted:0,offence:'clear',lang:'de',mission:0,stadtbild:0,forms:0,pfand:0,day:1,rule:0,germanness:0,lawUnlocked:false,lawCooldown:0,wurstBadges:new Set()},player:{energy:100},missions:[{title:'task',text:'text'}],rules:[['id','rule']],GERMANNESS_MAX:100,LAW_POWER_THRESHOLD:50,localize:s=>s,renderWurstBadges(){writes++},document:{getElementById:id=>{if(!nodes.has(id))nodes.set(id,node());return nodes.get(id)},querySelector:()=>node(),createElement:()=>node()}});
-vm.runInContext(hudSource+';globalThis.updateHud=updateHud',hud);hud.updateHud();const initial=writes;assert.ok(initial>0);
+hud.jwd={allocated:false,visited:false,met:new Set()};
+vm.runInContext(game.slice(game.indexOf('function currentMission(){'),game.indexOf('function allocateJwdHome(){'))+hudSource+';globalThis.updateHud=updateHud',hud);hud.updateHud();const initial=writes;assert.ok(initial>0);
 for(let i=0;i<100;i++)hud.updateHud();assert.equal(writes,initial);
 hud.player.energy=99.8;hud.updateHud();assert.equal(writes,initial,'fractional energy that displays identically must not rebuild HUD');
 hud.state.wanted=2;hud.updateHud();assert.ok(writes>initial,'a displayed change must still update immediately');

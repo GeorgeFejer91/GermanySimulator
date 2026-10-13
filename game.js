@@ -667,6 +667,9 @@ function worldNpcLine(index){return state.region==="berlin"?npcDenglisch[index]:
 
 
 const buildings=[
+{id:"jwd-fink",residential:true,name:"FAMILIE FINK",x:100,y:3760,w:240,h:190,hgt:110,doorX:220,doorY:3980,sign:"KEHRWOCHE IST IMMER"},
+{id:"jwd-home",residential:true,name:"DEIN ZUHAUSE · JWD",x:410,y:3760,w:240,h:190,hgt:95,doorX:530,doorY:3980,sign:"JANZ WEIT DRAUSSEN · NR. 38"},
+{id:"jwd-kranz",residential:true,name:"FAMILIE KRANZ",x:720,y:3760,w:240,h:190,hgt:125,doorX:840,doorY:3980,sign:"EIGENHEIM · FREMDE SORGEN"},
 {id:"buergeramt",name:"BÜRGERAMT",x:150,y:220,w:350,h:250,hgt:115,doorX:325,doorY:500,sign:"TERMIN NUR MIT TERMIN"},
 {id:"hausverwaltung",name:"HAUSVERWALTUNG",x:590,y:210,w:330,h:255,hgt:95,doorX:755,doorY:495,sign:"WOHNUNGSGEBERBESTÄTIGUNG"},
 {id:"stadtbild",name:"AMT FÜR STADTBILD",x:1390,y:220,w:360,h:245,hgt:105,doorX:1570,doorY:495,sign:"OPTISCHE ORDNUNG · DIN 0815"},
@@ -699,6 +702,8 @@ const buildings=[
 {id:"bundestag",name:"DEUTSCHER BUNDESTAG",x:7680,y:3320,w:1200,h:876,hgt:220,doorX:8280,doorY:4226,sign:"REICHSTAGSGEBÄUDE · PLENARBEREICH"}
 ].map(building=>({...offsetWorldPoint(building),doorX:building.doorX+RAIL_GUTTER,doorY:building.doorY+RAIL_GUTTER}));
 const grassAreas=[],walkways=[];
+// A broad shared residential lane joins the western pavement, clear of the railway.
+const jwdLane=offsetWorldPoint({x:40,y:3970,w:1010,h:150});walkways.push(jwdLane);
 for(const b of buildings){
  const road=horizontalRoads.find(r=>r.y>b.y+b.h),top=b.y+b.h+6,bottom=road?.y-SIDEWALK_WIDTH;
  if(!bottom||bottom-top<36)continue;
@@ -767,6 +772,9 @@ const bayernWaypoints=Object.freeze([
 ].map(offsetWorldPoint));
 const politicianLines=Object.freeze({merz:merzLines,merkel:merkelLines});
 const npcs=[
+ {x:390,y:4040,id:"jwd-swabian",name:"FRAU FINK · SCHWÄBISCHE NACHBARIN",jwdRole:"swabian",line:0,vx:0,vy:0},
+ {x:740,y:4080,id:"jwd-parent",name:"PROFESSOR DR. DR. HEIKO KRANZ",jwdRole:"parent",line:0,vx:0,vy:0},
+ {x:900,y:4030,id:"jwd-watcher",name:"BOTSCHAFTERIN DR. KRANZ",jwdRole:"watcher",line:0,vx:0,vy:0},
  {x:520,y:720,id:"city-klaus-dieter-klein",name:"HERR KLEIN",fullName:"Klaus-Dieter Klein",voiceId:"stadt-klaus-dieter-klein",line:0,vx:16,vy:0,min:470,max:900},
  {x:1470,y:670,id:"city-brigitte-mueller",name:"FRAU MÜLLER",fullName:"Brigitte Müller",voiceId:"stadt-brigitte-mueller",line:3,vx:-13,vy:0,min:1360,max:1760},
  {x:720,y:1140,id:"city-wolfgang-schulz",name:"HERR SCHULZ",fullName:"Wolfgang Schulz",voiceId:"stadt-wolfgang-schulz",line:6,vx:0,vy:12,min:1100,max:1280},
@@ -857,9 +865,99 @@ const pickups=[
  ...wurstPickups
 ].map(item=>item.type==="wurst"?item:offsetWorldPoint(item));
 const normObjects=[{x:2210,y:1190,type:"bin",fixed:false,label:"MÜLLTONNE 4,6° SCHIEF"},{x:1650,y:650,type:"chairs",fixed:false,label:"STÜHLE NICHT FLUCHTGERECHT"},{x:570,y:1140,type:"hedge",fixed:false,label:"HECKE 3 CM ZU INDIVIDUELL"}].map(offsetWorldPoint);
+const jwd={allocated:false,visited:false,met:new Set(),visit:0,atHome:false,exitPending:false,complaint:0,burglarVisit:0,burglar:null};
+const jwdCopy={
+ locked:{de:["Ohne Meldebestätigung kein Schlüssel. First Anmeldung, then home."],en:["No registration certificate, no keys. First registration, then a home."]},
+ premature:{de:["Sie ziehen hier ein? Erst die Meldebestätigung, dann die Schlüssel. Dann reden wir. Ausführlich."],en:["Moving in? First the registration certificate, then the keys. Then we'll talk. At length."]},
+ home:{de:["Meldebestätigung, Schlüssel, Endstation: JWD. Janz weit draußen. Your new home, mit überdachter Schlafveranda.","Eine Matratze, zwei Kisten, null Kaution zurück. Meet die Nachbarschaft: Frau Fink und Familie Kranz. Die haben bereits Fragen."],en:["Registration certificate, keys, end of the line: JWD. Way out in the sticks. Your new home comes with a covered sleeping porch.","One mattress, two crates, no deposit refund. Meet Mrs Fink and the Kranz family. They already have questions."]},
+ swabian:{de:["Grüß Gott, i bin die Frau Fink. Willkommen im family neighborhood. Die Kehrwoche isch hier kein optional feature.","Haben Sie Ihre Kehrwoche gemacht? I hab den Besen schon ausgerichtet. Jetzt lernen Sie erst mal die anderen kennen."],en:["Hello, I'm Mrs Fink. Welcome to the family neighborhood. The weekly sweeping rota is not an optional feature.","Have you done your sweeping duty? I've already aligned the broom. Go and meet the others first."]},
+ parent:{de:["Professor Doktor Doktor Heiko Kranz. Guten Tag. War das eine Begrüßung oder bereits ein Gespräch? Für Letzteres hätte ich gern eine Agenda.","Unser Theodor ist acht. Deutsch, Englisch, Französisch, Italienisch, Spanisch, Mandarin. Aber sein Latein! Beim Ablativus absolutus sind wir bereits behind schedule.","Meine Frau ist Diplomatin. Wir erwarten kein Wunderkind. Nur ein Genie, das seine milestones einhält. Wissen Sie übrigens, wer so weit vom Bordstein parkt?"],en:["Professor Doctor Doctor Heiko Kranz. Good afternoon. Was that a greeting or already a conversation? For the latter, I would appreciate an agenda.","Our Theodor is eight. German, English, French, Italian, Spanish, Mandarin. But his Latin! We're already behind schedule on the ablative absolute.","My wife is a diplomat. We don't expect a child prodigy. Just a genius who meets his milestones. Incidentally, who parks so far from the curb?"]},
+ watcher:{de:["Botschafterin Doktor Kranz. Small talk ist nicht mein Ressort. Bitte formulieren Sie Ihr Anliegen als bilaterales Gesprächsziel.","Theodor hat sechs Sprachen. Trotzdem schwächelt er in Latein. Mit acht! Wir haben das Wochenende vorsorglich zum Bildungsgipfel erklärt.","Warum sind Ihre Rollos unten? Haben Sie etwas zu hide? Und diese Hecke: Unser Sohn hat eine ungerade Linie gesehen. Jetzt fragt er nach Freizeit."],en:["Ambassador Doctor Kranz. Small talk is outside my portfolio. Please phrase your request as an objective for bilateral talks.","Theodor speaks six languages. Yet his Latin is slipping. At eight! As a precaution, we've declared this weekend an education summit.","Why are your blinds down? Do you have something to hide? And that hedge: our son saw an uneven line. Now he's asking about free time."]},
+ latin:{de:["Heiko Kranz, noch einmal. Ganz kurz: Hätten Sie jemanden für Latein? Theodor hat Cicero heute als cringe bezeichnet.","Wir sorgen uns, dass er kein Genie wird. Acht Jahre alt, und noch keine eigene Monografie. Sie müssen los? Ich hatte erst die Einleitung."],en:["Heiko Kranz again. Very briefly: do you know a Latin tutor? Theodor called Cicero cringe today.","We're worried he won't become a genius. Eight years old and still no monograph of his own. You have to go? That was only my introduction."]},
+ schedule:{de:["Einen Moment. Unser Sohn hat zwischen Mandarin und Altgriechisch elf Minuten unverplante Zeit. Das ist ein Entwicklungsrisiko.","Wir haben Spielen jetzt als interkulturelles Kompetenztraining eingetragen. Bitte lachen Sie leiser. Heiko wertet das sonst als Rückmeldung."],en:["One moment. Our son has eleven unscheduled minutes between Mandarin and Ancient Greek. That's a developmental risk.","We've now scheduled play as intercultural competence training. Please laugh more quietly. Heiko will otherwise treat it as feedback."]},
+ smalltalk:{de:["Heiko Kranz. Sie sagten neulich: Wie geht's? Ich habe eine Antwort vorbereitet. Sie hat drei Anhänge.","Ach, das war nur höflich gemeint. Dann kennzeichnen Sie solche Aussagen künftig bitte als nicht prüfungsrelevant. Auf Wiedersehen."],en:["Heiko Kranz. The other day you asked: how are you? I've prepared an answer. It has three appendices.","Oh, you were just being polite. Then please mark such statements as not subject to examination in future. Goodbye."]},
+ sweeping:{de:["Halt, nur ganz kurz! Haben Sie schon Kehrwoche gemacht? Der Staub liegt noch quer zur Laufrichtung.","I will jetzt net lang schwätze. Nur: Montag fegen, Dienstag nachfegen. So. Jetzt dürfen Sie los."],en:["Stop, just a moment! Have you done your sweeping? The dust is still lying across the direction of travel.","I won't keep you long. Just sweep on Monday, sweep again on Tuesday. There. You may go now."]},
+ parking:{de:["Eine quick question: Wem gehört das Auto da? So weit vom Bordstein! Das macht man doch nicht.","Nein, Sie dürfen gehen. Aber falls Sie den Fahrer sehen: Ich hätte nur ganz kurz eine Frage."],en:["A quick question: whose car is that? So far from the curb! You just don't do that.","Yes, you may go. But if you see the driver, tell them I only have a quick question."]},
+ hedge:{de:["Moment! Ihre Hecke wächst außerhalb unserer gemeinsamen expectations. Wann schneiden Sie endlich?", "Gut, dann reden wir später über die Schnittzeiten. Und die Höhe. Und das Grün. Gehen Sie ruhig."],en:["One moment! Your hedge is growing beyond our shared expectations. When will you finally trim it?","Fine, we'll discuss trimming times later. And the height. And the shade of green. Off you go."]},
+ blinds:{de:["Nur noch eins: Warum haben Sie die Rollos unten? Haben Sie etwas zu hide?", "Ach, schlafen. Dafür gibt es die Nachtruhe. Ich beobachte das. Bis später!"],en:["Just one more thing: why are your blinds down? Do you have something to hide?","Oh, sleeping. That's what quiet hours are for. I'll be keeping an eye on this. See you later!"]},
+ burglar:{de:["Dit soll der neue Haushalt sein? Eine feuchte Matratze und ein leerer Pfandbeutel. Negative Beute, wa.","Komm, wir brechen nebenan bei Kranz ein. Da gibt's wenigstens was zu holen. Hier müssten wir noch Möbel dalassen."],en:["This is the new household? A damp mattress and an empty bottle bag. Negative loot.","Come on, let's break into the Kranz place next door. At least there's something worth taking. Here we'd have to leave furniture behind."]}
+};
+function currentMission(){
+ if(jwd.allocated&&state.mission>0&&(!jwd.visited||jwd.met.size<3))return{title:state.lang==="en"?"JWD · YOUR NEW HOME":"JWD · DEIN NEUES ZUHAUSE",text:!jwd.visited?(state.lang==="en"?"Your keys are ready. Follow the sausage to your home on Berlin's southwest edge. Press E at the porch.":"Die Schlüssel sind da. Folge der Wurst zu deinem Haus am südwestlichen Berliner Kartenrand. E an der Veranda."):(state.lang==="en"?`Meet Mrs Fink and the Kranz family: ${jwd.met.size}/3 neighbors. Follow the sausage and press E.`:`Lerne Frau Fink und Familie Kranz kennen: ${jwd.met.size}/3 Nachbarn. Folge der Wurst und drücke E.`),target:jwd.visited?"jwd-neighbors":"jwd-home"};
+ return missions[Math.min(state.mission,missions.length-1)];
+}
+function allocateJwdHome(){if(jwd.allocated)return;jwd.allocated=true;updateHud()}
+function beginJwdVisit(){if(jwd.atHome)return;jwd.atHome=true;jwd.visit++;jwd.exitPending=true}
+function visitJwdHome(){
+ if(!jwd.allocated){openDialogue("WOHNUNGSZUWEISUNG",jwdCopy.locked.de,"38");return}
+ beginJwdVisit();jwd.visited=true;openDialogue("DEIN ZUHAUSE · JWD",jwdCopy.home.de,"38",updateHud);updateHud();
+}
+function talkJwdNeighbor(n,departure=false){
+ if(!jwd.allocated||!jwd.visited){openDialogue(n.name,jwdCopy.premature.de,"!");return}
+ const introducing=!jwd.met.has(n.id),topics={swabian:["sweeping","hedge"],parent:["parking","latin","smalltalk"],watcher:["blinds","schedule"]},pool=topics[n.jwdRole],topic=introducing?n.jwdRole:pool[Math.floor(jwd.complaint++/3)%pool.length];
+ clearInput();state.characterSpeaker=n;openDialogue(n.name,jwdCopy[topic].de,"!",()=>{jwd.met.add(n.id);if(departure)jwd.exitPending=false;updateHud()});
+}
+function arrestPlayer(){
+ state.policeContactCooldown=OFFENSE_TIMING.policeContactCooldown;player.energy=Math.max(36,player.energy-12);player.vx=player.vy=0;clearInput();
+ if(jwd.allocated){
+  const home=buildings.find(b=>b.id==="jwd-home");let spawn=null;
+  // Never put a waking body inside a visitor. Search the same open porch/lane.
+  for(const dy of [30,65,100])for(const dx of [0,-40,40,-80,80]){const point={x:home.doorX+dx,y:home.doorY+dy};if(!spawn&&!responderBlocked(point.x,point.y,player.r,player))spawn=point}
+  if(!spawn)for(let y=jwdLane.y+player.r;y<=jwdLane.y+jwdLane.h-player.r&&!spawn;y+=35)for(let x=jwdLane.x+player.r;x<=jwdLane.x+jwdLane.w-player.r&&!spawn;x+=35)if(!responderBlocked(x,y,player.r,player))spawn={x,y};
+  if(spawn){player.x=spawn.x;player.y=spawn.y}
+  state.wanted=0;police=[];state.region="berlin";state.runTimer=state.roadTimer=state.grassTimer=state.evasionTimer=0;state.pettyAuditTimer=24;
+  jwd.atHome=false;beginJwdVisit();state.offence="HAUSARREST · JWD";
+  toast(state.lang==="en"?"YOU WAKE UP AT HOME · THE NEIGHBORS ARE WAITING":"ZU HAUSE AUFGEWACHT · DIE NACHBARN WARTEN SCHON");
+ }else{player.x=policePath.x1;player.y=policePath.y1;state.wanted=Math.max(0,state.wanted-1);state.offence="PERSONALIEN FESTGESTELLT · HINWEIS ERTEILT";toast(state.lang==="en"?"POLICE ACTION · ESCORTED TO THE STATION GARDEN":"POLIZEILICHE MASSNAHME · IN DEN WACHEN-SCHREBERGARTEN BEGLEITET")}
+ syncPoliceResponse();uiTone(180,.18,"sawtooth",.05);updateHud();
+}
+function jwdBurglarDetour(thief,tx,ty){
+ // One short lane has two passing edges. Check every segment before committing;
+ // if both are occupied, wait and retry instead of circling a blocked doorway.
+ const direction=Math.sign(tx-thief.x)||1,goal={x:tx-direction*(thief.phase==="approach"?50:24),y:ty};
+ for(const y of [jwdLane.y+14,jwdLane.y+jwdLane.h-14])for(const back of [0,65,100]){
+  const x=thief.x-direction*back,points=[{x,y:thief.y},{x,y},{x:goal.x,y},goal];let from=thief,clear=true;
+  for(const to of points){const length=Math.hypot(to.x-from.x,to.y-from.y),steps=Math.max(1,Math.ceil(length));let px=from.x,py=from.y;
+   for(let i=1;i<=steps;i++){const nx=from.x+(to.x-from.x)*i/steps,ny=from.y+(to.y-from.y)*i/steps;if(responderBlocked(nx,ny,13,thief,px,py)){clear=false;break}px=nx;py=ny}
+   if(!clear)break;from=to;
+  }
+  if(clear)return points;
+ }
+ return null;
+}
+function updateJwd(dt){
+ if(!jwd.allocated)return false;
+ const home=buildings.find(b=>b.id==="jwd-home"),distance=dist(player.x,player.y,home.doorX,home.doorY);
+ if(!jwd.atHome&&jwd.visited&&distance<85)beginJwdVisit();
+ if(jwd.atHome&&jwd.exitPending&&distance>125){
+  const residents=npcs.filter(n=>n.jwdRole&&n.jwdRole!=="burglar"),n=residents.find(n=>!jwd.met.has(n.id))||residents[jwd.complaint%residents.length];
+  if(!jwd.visited){visitJwdHome();return true}
+  if(n){talkJwdNeighbor(n,true);return true}
+ }
+ if(jwd.atHome&&!jwd.exitPending&&distance>600)jwd.atHome=false;
+ if(jwd.visited&&jwd.visit>=2&&jwd.burglarVisit!==jwd.visit&&!jwd.burglar&&distance<550){
+  const rich=buildings.find(b=>b.id==="jwd-kranz"),n={id:"jwd-burglar",name:"EDE · EINBRUCH MIT ANSPRUCH",jwdRole:"burglar",x:rich.doorX,y:rich.doorY+35,vx:0,vy:0,phase:"approach",routeBounds:jwdLane};
+  if(!responderBlocked(n.x,n.y,13,n)){jwd.burglar=n;jwd.burglarVisit=jwd.visit;npcs.push(n)}
+ }
+ const thief=jwd.burglar;if(!thief||distance>1200)return false;
+ const target=thief.phase==="approach"?home:buildings.find(b=>b.id==="jwd-kranz"),tx=target.doorX,ty=target.doorY+35,dx=tx-thief.x,dy=ty-thief.y,d=Math.hypot(dx,dy),beforeX=thief.x,beforeY=thief.y;
+ if(d>(thief.phase==="approach"?54:28)){
+  const progress=thief.progress||(thief.progress={time:0,x:thief.x,y:thief.y});progress.time+=dt;
+  if(progress.time>=.75){if(Math.hypot(thief.x-progress.x,thief.y-progress.y)<8){thief.detour=jwdBurglarDetour(thief,tx,ty);thief.waiting=!thief.detour}Object.assign(progress,{time:0,x:thief.x,y:thief.y})}
+  while(thief.detour?.length&&dist(thief.x,thief.y,thief.detour[0].x,thief.detour[0].y)<2)thief.detour.shift();
+  const aim=thief.detour?.[0]||{x:tx,y:ty},ax=aim.x-thief.x,ay=aim.y-thief.y,ad=Math.hypot(ax,ay);
+  if(!thief.waiting&&ad)moveGroundResponder(thief,ax/ad*Math.min(ad,52*dt),ay/ad*Math.min(ad,52*dt),13);
+  thief.jwdMoving=Math.hypot(thief.x-beforeX,thief.y-beforeY);if(thief.jwdMoving>.001)thief.facing=Math.atan2(thief.x-beforeX,thief.y-beforeY);
+ }
+ else if(thief.phase==="approach"&&dist(player.x,player.y,thief.x,thief.y)<300){
+  thief.jwdMoving=0;thief.phase="inspect";clearInput();openDialogue(thief.name,jwdCopy.burglar.de,"!",()=>{thief.phase="retreat";thief.progress=null;thief.detour=null;thief.waiting=false});return true;
+ }else if(thief.phase==="retreat"){npcs.splice(npcs.indexOf(thief),1);jwd.burglar=null}
+ return false;
+}
 function getMissionWaypoint(){
  if(!state.started||state.modal||state.dialogue||state.gameOver||window.GermanyHUD?.paused||window.BuergeramtLevel?.active||state.mission>=missions.length)return null;
- const mission=missions[state.mission];
+ const mission=currentMission();
+ if(mission.target==="jwd-neighbors"){const n=npcs.find(n=>n.jwdRole&&n.jwdRole!=="burglar"&&!jwd.met.has(n.id));return n?{id:n.id,x:n.x,y:n.y}:null}
  if(mission.target==="stadtbild"){
   const remaining=normObjects.filter(o=>!o.fixed);
   if(remaining.length){const next=remaining.reduce((a,b)=>Math.hypot(a.x-player.x,a.y-player.y)<=Math.hypot(b.x-player.x,b.y-player.y)?a:b);return{id:"stadtbild-"+next.type,x:next.x,y:next.y}}
@@ -995,6 +1093,7 @@ function streetWisdomCanMove(n){
 function initializePedestrianRoutes(){
  const horizontal=horizontalRoads.flatMap(road=>sidewalkSegments.flatMap(segment=>[{x:segment.min,y:road.y-SIDEWALK_WIDTH,w:segment.max-segment.min,h:SIDEWALK_WIDTH},{x:segment.min,y:road.y+road.h,w:segment.max-segment.min,h:SIDEWALK_WIDTH}])),vertical=verticalRoads.flatMap(road=>verticalSidewalkSegments.flatMap(segment=>[{x:road.x-SIDEWALK_WIDTH,y:segment.min,w:SIDEWALK_WIDTH,h:segment.max-segment.min},{x:road.x+road.w,y:segment.min,w:SIDEWALK_WIDTH,h:segment.max-segment.min}]));
  for(const n of npcs){
+  if(n.jwdRole){n.routeBounds=jwdLane;continue}
   if(n.special)continue;
   const choices=(n.vx?horizontal:vertical).concat(stations.filter(s=>(s.w>s.h)===!!n.vx));let best=null,bestDistance=Infinity;
   for(const b of choices){const x=clamp(n.x,b.x+13,b.x+b.w-13),y=clamp(n.y,b.y+13,b.y+b.h-13),distance=dist(n.x,n.y,x,y);if(distance<bestDistance){best=b;bestDistance=distance}}
@@ -1021,6 +1120,7 @@ const AUDIO_CLASS=Object.freeze({TEXT:"audio-text",BACKGROUND:"background-music"
 const stimulusQueue=[],stimulusLastServed=new Map(),stimulusBags=new Map(),recordingPromises=new Map();
 const audioTextLibrary=speechCatalog,subtitleEnglish=new Map([...englishText,...Object.entries(audioTextLibrary.lines||{})]);
 function addSubtitlePool(source,english){if(!source||!english)return;source.forEach((item,index)=>{const text=typeof item==="string"?item:item?.text;if(text&&english[index])subtitleEnglish.set(text,english[index])})}
+for(const copy of Object.values(jwdCopy))addSubtitlePool(copy.de,copy.en);
 for(const source of [policeBarks.berlin,policeBarks.germany])addSubtitlePool(source,audioTextLibrary.pools.police);
 for(const source of [jaywalkerBarks.berlin,jaywalkerBarks.germany])addSubtitlePool(source,audioTextLibrary.pools.jaywalker);
 for(const source of [pedestrianBarks.berlin.sidewalk,pedestrianBarks.germany.sidewalk])addSubtitlePool(source.slice(0,6),audioTextLibrary.pools.sidewalk);
@@ -1236,6 +1336,7 @@ function announceCurrentRule(speaker=null,manual=false){
 function policeBark(force=false,offence=""){const now=performance.now(),region=state.region,lines=policeBarks[region]||policeBarks.germany;if(!force&&(now-(policeBark.last||0)<2300||hasStimulusFamily("police")))return;const line=offence.includes("RASEN")||offence.includes("GRÜN")||offence.includes("FUSSBODEN")?lines[1]:nextVariant("police:"+region,lines);showWorldBark("POLIZEI",line,true,"","",{family:"police",candidateVoiceId:"polizei-heinrich-wachtmeister",priority:STIMULUS_PRIORITY.REACTIVE,ambient:true,isEligible:()=>state.started&&!state.modal&&!state.gameOver&&state.region===region&&state.wanted>0&&(force||police.some(p=>dist(player.x,player.y,p.x,p.y)<400)),start:()=>policeBark.last=performance.now()})}
 function jaywalkerBark(){if(hasStimulusFamily("jaywalker"))return;const person=nearestPedestrian();if(!person||person.arrested||person.wisdomId)return;const region=state.region,lines=jaywalkerBarks[region]||jaywalkerBarks.germany;showWorldBark(person.name,nextVariant("jaywalker:"+region,lines),true,"","",{family:"jaywalker",candidateVoiceId:person.voiceId,priority:STIMULUS_PRIORITY.REACTIVE,ambient:true,isEligible:()=>state.started&&!state.modal&&!state.gameOver&&state.region===region&&playerSurface()==="road"&&!person.arrested&&!person.lawPending&&npcs.includes(person)&&dist(player.x,player.y,person.x,person.y)<360})}
 function pedestrianBark(n,surface="sidewalk"){
+ if(n?.jwdRole)return false;
  if(n?.wisdomId)return announceCurrentRule(n);
  const now=performance.now();if(!n||now<(n.barkAt||0)||(pedestrianBark.last&&now-pedestrianBark.last<3200))return false;
  const region=state.region,archetype=crowdArchetypeById[n.archetype],lines=surface==="sidewalk"&&archetype?archetype.barks[region]:pedestrianBarks[region][surface],family=archetype?`pedestrian:${archetype.id}:${region}:${surface}`:`pedestrian:${region}:${surface}`,line=nextVariant(family,lines),item=typeof line==="string"?{text:line}:line;n.barkAt=now+5600+Math.random()*2600;pedestrianBark.last=now;showWorldBark(n.name,item.text,item.urgent!==false,item.voiceId===n.voiceId?item.recording||"":"","",{family,candidateVoiceId:n.voiceId,priority:STIMULUS_PRIORITY.REACTIVE,ambient:true,isEligible:()=>state.started&&!state.modal&&!state.gameOver&&state.region===region&&dist(player.x,player.y,n.x,n.y)<Math.max(140,(n.audioRadius||NPC_COMPLAINT_DISTANCE)+48)});return true
@@ -1559,11 +1660,11 @@ function updatePoliceResponse(dt){
  }
 }
 function updateHud(){
- const signature=JSON.stringify([state.wanted,state.offence,state.lang,state.mission,state.stadtbild,Math.round(player.energy),state.forms,state.pfand,state.day,state.rule,state.germanness,state.lawUnlocked,Math.ceil(state.lawCooldown),[...state.wurstBadges]]);if(updateHud.previous===signature)return;updateHud.previous=signature;
+ const signature=JSON.stringify([state.wanted,state.offence,state.lang,state.mission,jwd.allocated,jwd.visited,jwd.met.size,state.stadtbild,Math.round(player.energy),state.forms,state.pfand,state.day,state.rule,state.germanness,state.lawUnlocked,Math.ceil(state.lawCooldown),[...state.wurstBadges]]);if(updateHud.previous===signature)return;updateHud.previous=signature;
  const stars=document.getElementById("stars"),wantedBox=document.querySelector(".wanted");stars.innerHTML="";wantedBox.classList.toggle("hot",state.wanted>0);
  for(let i=0;i<5;i++){const s=document.createElement("span");s.className="star"+(i<state.wanted?" active":"");s.textContent="★";stars.appendChild(s)}
  document.getElementById("offence").textContent=state.lang==="en"?(state.wanted?"ACTIVE VIOLATION FILE":"FILE STATUS: UNREMARKABLE"):state.offence;
- const m=missions[Math.min(state.mission,missions.length-1)],frac=state.mission/missions.length+(state.mission===5?state.stadtbild/3/missions.length:0);document.getElementById("mission-title").textContent=localize(m.title);document.getElementById("mission-text").textContent=localize(m.text);document.getElementById("mission-progress").style.width=Math.min(100,frac*100)+"%";
+ const m=currentMission(),frac=state.mission/missions.length+(state.mission===5?state.stadtbild/3/missions.length:0);document.getElementById("mission-title").textContent=localize(m.title);document.getElementById("mission-text").textContent=localize(m.text);document.getElementById("mission-progress").style.width=Math.min(100,frac*100)+"%";
  document.getElementById("energy").textContent=Math.round(player.energy);document.getElementById("forms").textContent=state.forms;document.getElementById("pfand").textContent=state.pfand;document.getElementById("day").textContent=state.day+"/3";
  const r=rules[state.rule%rules.length];document.getElementById("rule-id").textContent=r[0];document.getElementById("rule-text").textContent=localize(r[1]);
  const fill=document.getElementById("germanness-fill"),power=document.getElementById("law-power"),lawButton=document.getElementById("law-action"),germannessPercent=state.germanness/GERMANNESS_MAX*100;fill.style.height=germannessPercent+"%";fill.style.setProperty("--germanness",germannessPercent+"%");fill.style.filter="grayscale("+(100-germannessPercent)+"%) saturate("+(.25+germannessPercent*.0075)+")";fill.parentElement.setAttribute("aria-valuenow",state.germanness);document.getElementById("germanness-value").textContent=state.germanness+"/"+GERMANNESS_MAX;power.textContent=state.lawUnlocked?(state.lawCooldown>0?"§ IN BEARBEITUNG · "+Math.ceil(state.lawCooldown)+"s":"§ / Q · GESETZ ZITIEREN"):"§-MACHT AB "+LAW_POWER_THRESHOLD+"/"+GERMANNESS_MAX;lawButton.disabled=!state.lawUnlocked;lawButton.title=power.textContent;renderWurstBadges();
@@ -1577,7 +1678,7 @@ document.getElementById("dialogue-speak").onclick=()=>{if(state.dialogue&&!state
 function showForm(type){const def=forms[type],en=formEnglish[type];state.modal=true;document.getElementById("form-modal").hidden=false;document.getElementById("form-code").textContent=def.code;document.getElementById("form-title").textContent=state.lang==="en"&&en?en[0]:def.title;document.getElementById("form-subtitle").textContent=state.lang==="en"&&en?en[1]+" Official field labels remain in German, naturally.":def.subtitle;document.getElementById("form-error").textContent="";const wrap=document.getElementById("form-fields");wrap.innerHTML="";for(const f of def.fields){if(f[0]==="check"){const lab=document.createElement("label");lab.className="check";const inp=document.createElement("input");inp.type="checkbox";inp.required=true;const span=document.createElement("span");lab.append(inp,span);wrap.append(lab);continue}const lab=document.createElement("label");lab.className="field";const title=document.createElement("span");title.textContent=f[1];lab.append(title);if(f[0]==="select"){const sel=document.createElement("select");sel.required=true;const empty=document.createElement("option");empty.value="";empty.textContent=state.lang==="en"?"PLEASE SELECT / BITTE AUSWÄHLEN":"BITTE AUSWÄHLEN";sel.append(empty);for(const o of f[2]){const op=document.createElement("option");op.value=o;op.textContent=o;sel.append(op)}lab.append(sel)}else{const inp=document.createElement("input");inp.required=true;inp.autocomplete="off";lab.append(inp)}wrap.append(lab)}document.getElementById("bureaucracy-form").dataset.type=type}
 let anmeldungAwarded=false;try{anmeldungAwarded=localStorage.getItem("germany-anmeldung-v1")==="1"}catch{}
 function renderAnmeldungBadge(){const badge=document.getElementById("anmeldung-badge");badge.hidden=!anmeldungAwarded;badge.textContent=state.lang==="en"?"✓ ANMELDUNG COMPLETED":"✓ ANMELDUNG ABGESCHLOSSEN"}
-function awardAnmeldung(){anmeldungAwarded=true;try{localStorage.setItem("germany-anmeldung-v1","1")}catch{}renderAnmeldungBadge();toast(state.lang==="en"?"ANMELDUNG COMPLETED · BADGE ADDED TO YOUR FILE":"ANMELDUNG ABGESCHLOSSEN · ABZEICHEN IN DER SPIELAKTE")}
+function awardAnmeldung(){allocateJwdHome();anmeldungAwarded=true;try{localStorage.setItem("germany-anmeldung-v1","1")}catch{}renderAnmeldungBadge();toast(state.lang==="en"?"ANMELDUNG COMPLETED · HOME ALLOCATED IN JWD":"ANMELDUNG ABGESCHLOSSEN · HAUS IN JWD ZUGEWIESEN")}
 renderAnmeldungBadge();
 function showAmtDirectResult(title,copy){const card=document.getElementById("amt-direct-result");document.getElementById("amt-direct-result-title").textContent=title;document.getElementById("amt-direct-result-copy").textContent=copy;document.getElementById("amt-direct-reset").hidden=true;card.hidden=false;state.modal=true}
 document.getElementById("bureaucracy-form").onsubmit=e=>{e.preventDefault();if(!e.currentTarget.reportValidity()){document.getElementById("form-error").textContent=state.lang==="en"?"PROCEDURE INCOMPLETE. NATURALLY.":"VORGANG UNVOLLSTÄNDIG. NATÜRLICH.";uiTone(130,.14,"square",.04);return}const type=e.currentTarget.dataset.type;document.getElementById("form-modal").hidden=true;state.modal=false;state.forms++;state.mission++;uiTone(95,.08,"square",.05);setTimeout(()=>uiTone(70,.1,"square",.045),70);toast(state.lang==="en"?"FORM "+forms[type].code+" SUCCESSFULLY MOVED TO ANOTHER PILE":"FORMULAR "+forms[type].code+" ERFOLGREICH IN EINEN ANDEREN STAPEL GELEGT");if(type==="citizenship"){state.citizen=true;endGame(true)}if(type==="a38"&&document.body.classList.contains("amt-direct-mode"))showAmtDirectResult("ANMELDUNG ABGESCHLOSSEN","Meldebestätigung erhalten. Ihr Abzeichen ist in der Spielakte gespeichert. Formular A38 ist ebenfalls entgegengenommen.");updateHud()};
@@ -1599,7 +1700,8 @@ function microInteract(p){
  if(p.id&&p.id.startsWith("pfandautomat")){if(state.pfand>0){const n=state.pfand;state.pfand=0;player.energy=clamp(player.energy+n*4,0,100);uiTone(880,.05,"square",.03);setTimeout(()=>uiTone(1100,.06,"square",.03),70);toast((state.lang==="en"?"DEPOSIT RECEIPT ":"PFANDBON ")+(n*.25).toFixed(2).replace(".",",")+" € · +"+n*4+" ENERGIE");updateHud()}else openDialogue("PFANDAUTOMAT",state.region==="berlin"?["No bottle detected. Insert asset first.","Bitte nicht gegen den Automaten kick-en."]:["Keine Flasche erkannt.","Bitte führen Sie zuerst ein pfandpflichtiges Gebinde zu."],"♻",()=>innerMonologue("pfand"));return}
 }
 
-function interact(){if(state.dialogue){nextDialogue();return}if(state.modal)return;if(dist(player.x,player.y,goerlitzerPark.plaqueX,goerlitzerPark.plaqueY)<96){openDialogue("GÖRLITZER PARK · KOSTENTAFEL",goerlitzerPark.lines,"GP");return}if(dist(player.x,player.y,kiesingerMemorial.x,kiesingerMemorial.y+195)<96){openDialogue("KIESINGER (1904–1988) · ERINNERUNGSTAFEL",KIESINGER_PLAQUE_LINES,"KG");return}const m=missions[Math.min(state.mission,missions.length-1)];for(const b of buildings){if(dist(player.x,player.y,b.doorX,b.doorY)<112){if(b.id===m.target){if(state.mission===5){if(state.stadtbild>=3)openDialogue("AMT FÜR STADTBILD",["Ausgezeichnet. Die Mülltonne steht wieder parallel zur gefühlten Bordsteinkante.","Die Stadt ist nun statistisch 14 Prozent weniger individuell.","Stempel B: optische Unbedenklichkeit."],"✓",()=>{state.mission++;updateHud()});else openDialogue("AMT FÜR STADTBILD",["Gemäß der rein fiktiven Gestaltungsvorschrift ist das Stadtbild zu normieren.","Richten Sie die Mülltonne, die Stühle und die Hecke aus.","Der politische Aushang ist eine satirische Requisite und keine Tatsachenbehauptung."],"FM",()=>toast("3 STADTBILD-ABWEICHUNGEN MARKIERT"))}else bureaucrat(b,m)}else if(b.id==="imbiss")openDialogue("WURST-INSEL",["Bratwurst +35 Energie. Currywurst +50 Verwaltungsmut.","Senf ist kein gültiges Aktenzeichen."],"🌭");else if(b.id==="krugers-kugellager")openDialogue("KRÜGERS KUGELLAGER",["Kugellager zum Mitnehmen: 6202 mit Fettrand, 6304 extra tragfähig.","Unsere Express-Ausgabe läuft rund. Für Sondergrößen ziehen Sie bitte eine Nummer."],"◎");else openDialogue(b.name,state.region==="berlin"?["Sie sind hier basically richtig, aber für einen anderen process.","Try Zuständigkeit. Oder Tuesday. Tuesday ist beliebt."]:["Sie sind hier grundsätzlich richtig, aber für einen anderen Vorgang.","Versuchen Sie es mit Zuständigkeit. Oder Dienstag."],"§",()=>innerMonologue("wrongOffice"));return}}for(const n of npcs)if(!n.arrested&&!n.lawPending&&dist(player.x,player.y,n.x,n.y)<92){
+function interact(){if(state.dialogue){nextDialogue();return}if(state.modal)return;const neighbor=npcs.filter(n=>n.jwdRole&&n.jwdRole!=="burglar"&&dist(player.x,player.y,n.x,n.y)<92).sort((a,b)=>dist(player.x,player.y,a.x,a.y)-dist(player.x,player.y,b.x,b.y))[0];if(neighbor){talkJwdNeighbor(neighbor);return}if(dist(player.x,player.y,goerlitzerPark.plaqueX,goerlitzerPark.plaqueY)<96){openDialogue("GÖRLITZER PARK · KOSTENTAFEL",goerlitzerPark.lines,"GP");return}if(dist(player.x,player.y,kiesingerMemorial.x,kiesingerMemorial.y+195)<96){openDialogue("KIESINGER (1904–1988) · ERINNERUNGSTAFEL",KIESINGER_PLAQUE_LINES,"KG");return}const m=currentMission();for(const b of buildings){if(dist(player.x,player.y,b.doorX,b.doorY)<112){if(b.residential){if(b.id==="jwd-home")visitJwdHome();else talkJwdNeighbor(npcs.find(n=>n.id===(b.id==="jwd-fink"?"jwd-swabian":"jwd-parent")));return}if(b.id===m.target){if(state.mission===5){if(state.stadtbild>=3)openDialogue("AMT FÜR STADTBILD",["Ausgezeichnet. Die Mülltonne steht wieder parallel zur gefühlten Bordsteinkante.","Die Stadt ist nun statistisch 14 Prozent weniger individuell.","Stempel B: optische Unbedenklichkeit."],"✓",()=>{state.mission++;updateHud()});else openDialogue("AMT FÜR STADTBILD",["Gemäß der rein fiktiven Gestaltungsvorschrift ist das Stadtbild zu normieren.","Richten Sie die Mülltonne, die Stühle und die Hecke aus.","Der politische Aushang ist eine satirische Requisite und keine Tatsachenbehauptung."],"FM",()=>toast("3 STADTBILD-ABWEICHUNGEN MARKIERT"))}else bureaucrat(b,m)}else if(b.id==="imbiss")openDialogue("WURST-INSEL",["Bratwurst +35 Energie. Currywurst +50 Verwaltungsmut.","Senf ist kein gültiges Aktenzeichen."],"🌭");else if(b.id==="krugers-kugellager")openDialogue("KRÜGERS KUGELLAGER",["Kugellager zum Mitnehmen: 6202 mit Fettrand, 6304 extra tragfähig.","Unsere Express-Ausgabe läuft rund. Für Sondergrößen ziehen Sie bitte eine Nummer."],"◎");else openDialogue(b.name,state.region==="berlin"?["Sie sind hier basically richtig, aber für einen anderen process.","Try Zuständigkeit. Oder Tuesday. Tuesday ist beliebt."]:["Sie sind hier grundsätzlich richtig, aber für einen anderen Vorgang.","Versuchen Sie es mit Zuständigkeit. Oder Dienstag."],"§",()=>innerMonologue("wrongOffice"));return}}for(const n of npcs)if(!n.arrested&&!n.lawPending&&dist(player.x,player.y,n.x,n.y)<92){
+ if(n.jwdRole){if(n.jwdRole!=="burglar")talkJwdNeighbor(n);return}
  if(requestCharacterReaction(n,["working","waiting"]))state.characterSpeaker=n;
  if(n.special){n.dialogueNearby=true;n.barkAt=performance.now()+8000}
  if(n.wisdomId){announceCurrentRule(n,true);
@@ -1629,6 +1731,7 @@ function update(dt){
  const speed=146*(keys.KeyR?2:sprint?1.58:1)*(player.energy<25?.84:1),px=player.x,py=player.y,bumped=movePlayerGround(sx*speed*dt,-fy*speed*dt);
  if(bumped){bumped.pause=Math.max(bumped.pause||0,.48);pedestrianBark(bumped,playerSurface())}
  const frameVx=(player.x-px)/Math.max(dt,.001),frameVy=(player.y-py)/Math.max(dt,.001),velocityBlend=Math.min(1,dt*12);player.vx+=(frameVx-player.vx)*velocityBlend;player.vy+=(frameVy-player.vy)*velocityBlend;if(player.x!==px||player.y!==py)player.facing=Math.atan2(player.x-px,player.y-py);
+ if(updateJwd(dt))return;
  updateRegion();
  updateTraffic(dt);
  updateBorderTrains(dt);
@@ -1690,11 +1793,12 @@ function update(dt){
  for(let i=police.length-1;i>=0;i--){
    const p=police[i];if(p.pickupCar)continue;const target=player,rdx=target.x-p.x,rdy=target.y-p.y,d=Math.hypot(rdx,rdy)||1,step=p.speed*dt;moveGroundResponder(p,rdx/d*step,rdy/d*step,14);
    if(d<260&&performance.now()>(p.barkAt||0)){p.barkAt=performance.now()+2200+Math.random()*1800;policeBark()}
-   if(d<player.r+14+4){police.splice(i,1);if(state.policeContactCooldown>0)continue;state.policeContactCooldown=OFFENSE_TIMING.policeContactCooldown;player.energy=Math.max(36,player.energy-12);player.x=policePath.x1;player.y=policePath.y1;state.wanted=Math.max(0,state.wanted-1);state.offence="PERSONALIEN FESTGESTELLT · HINWEIS ERTEILT";syncPoliceResponse();uiTone(180,.18,"sawtooth",.05);toast(state.lang==="en"?"POLICE ACTION · ESCORTED TO THE STATION GARDEN":"POLIZEILICHE MASSNAHME · IN DEN WACHEN-SCHREBERGARTEN BEGLEITET")}
+   if(d<player.r+14+4){police.splice(i,1);if(state.policeContactCooldown>0)continue;arrestPlayer();break}
    else if(state.wanted<2&&d>520)police.splice(i,1)
  }
 
  for(const n of npcs){
+   if(n.jwdRole)continue;
    if(n.arrested||n.lawPending){if(n.lawPending&&!n.arrested&&n.spriteKind)advanceSpriteGait(n,0,npcSpriteAtlases[n.spriteKind],CROWD_GAIT_CYCLE_DISTANCE,dt);continue}
    const reactionManifest=npcSpriteAtlases[n.spriteKind]?.tourist;
    if(reactionManifest?.interactions){
@@ -2012,7 +2116,7 @@ function drawPlayer(){
  ctx.fillStyle="#d3cbbb";ctx.beginPath();ctx.arc(0,-39,8,0,Math.PI*2);ctx.fill();
  ctx.fillStyle="#eee9dd";ctx.font="900 8px Arial";ctx.textAlign="center";ctx.fillText(state.lang==="en"?"YOU":"SIE",0,18);ctx.restore();
 }
-function nearestInteract(){let label="",best=122;const parkDistance=dist(player.x,player.y,goerlitzerPark.plaqueX,goerlitzerPark.plaqueY);if(parkDistance<96){best=-1;label="GÖRLI · KOSTENTAFEL LESEN"}const memorialDistance=dist(player.x,player.y,kiesingerMemorial.x,kiesingerMemorial.y+195);if(memorialDistance<best){best=memorialDistance;label="KIESINGER-DENKMAL LESEN"}for(const b of buildings){const d=dist(player.x,player.y,b.doorX,b.doorY);if(d<best){best=d;label=b.name}}for(const n of npcs){if(n.arrested||n.lawPending)continue;const d=dist(player.x,player.y,n.x,n.y);if(d<best){best=d;label=n.special==="borderPourer"||n.special==="alice"?(state.region==="berlin"?"SATIRE STATEMENT LISTENING":"SATIRISCHE ERKLÄRUNG ANHÖREN"):(state.region==="berlin"?"COMPLAINT LISTENING":"BESCHWERDE ANHÖREN")}}for(const p of props){if(!p.id)continue;const d=dist(player.x,player.y,p.x,p.y);if(d<best){best=d;label=p.label}}for(const o of normObjects){if(o.fixed)continue;const d=dist(player.x,player.y,o.x,o.y);if(d<best){best=d;label="AUSRICHTEN"}}const e=document.getElementById("interact-hint");if(e.hidden!==!label)e.hidden=!label;const text=label?"E · "+label:"";if(e.textContent!==text)e.textContent=text}
+function nearestInteract(){let label="",best=122;const parkDistance=dist(player.x,player.y,goerlitzerPark.plaqueX,goerlitzerPark.plaqueY);if(parkDistance<96){best=-1;label="GÖRLI · KOSTENTAFEL LESEN"}const memorialDistance=dist(player.x,player.y,kiesingerMemorial.x,kiesingerMemorial.y+195);if(memorialDistance<best){best=memorialDistance;label="KIESINGER-DENKMAL LESEN"}for(const b of buildings){const d=dist(player.x,player.y,b.doorX,b.doorY);if(d<best){best=d;label=b.name}}for(const n of npcs){if(n.arrested||n.lawPending)continue;const d=dist(player.x,player.y,n.x,n.y);if(d<best){best=d;label=n.jwdRole?n.name:n.special==="borderPourer"||n.special==="alice"?(state.region==="berlin"?"SATIRE STATEMENT LISTENING":"SATIRISCHE ERKLÄRUNG ANHÖREN"):(state.region==="berlin"?"COMPLAINT LISTENING":"BESCHWERDE ANHÖREN")}}for(const p of props){if(!p.id)continue;const d=dist(player.x,player.y,p.x,p.y);if(d<best){best=d;label=p.label}}for(const o of normObjects){if(o.fixed)continue;const d=dist(player.x,player.y,o.x,o.y);if(d<best){best=d;label="AUSRICHTEN"}}const e=document.getElementById("interact-hint");if(e.hidden!==!label)e.hidden=!label;const text=label?"E · "+label:"";if(e.textContent!==text)e.textContent=text}
 function draw(){nearestInteract()}
 // Public-domain and traditional melodies arranged as local WebAudio chiptunes.
 // Notes are MIDI numbers, durations are quarter-note units, and null is a rest.

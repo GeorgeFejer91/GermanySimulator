@@ -3,7 +3,8 @@ import {readFileSync,readdirSync,statSync} from "node:fs";
 
 const root=new URL("../",import.meta.url),game=readFileSync(new URL("game.js",root),"utf8");
 const buildingSection=game.split("const buildings=[")[1].split("].map(building=>")[0];
-const ids=[...buildingSection.matchAll(/^\{id:"([^"]+)"/gm)].map(match=>match[1]);
+const ids=buildingSection.split(/\r?\n/).filter(line=>!line.includes("residential:true")).flatMap(line=>[...line.matchAll(/^\{id:"([^"]+)"/g)].map(match=>match[1]));
+assert.match(readFileSync(new URL("world3d.js",root),"utf8"),/if\(b\.residential\)\{residentialBuilding\(b\);return\}/,"residential houses own procedural signs rather than municipal image requests");
 const directory=new URL("assets/building-placards/",root);
 const files=readdirSync(directory).filter(name=>name.endsWith(".webp"));
 for(const id of ids)assert.ok(files.includes(`${id}.webp`),`${id} has no placard`);

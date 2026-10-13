@@ -815,6 +815,18 @@ profiles are retained under output/smoothness in the performance worktree.
 
 ## Local 3D buildings
 
+The JWD residential cluster uses three procedural buildings in the canonical
+building list and four small procedural character costumes (three residents plus
+one visiting burglar). It requests no municipal GLBs, placard images or character
+atlases. Three 768 × 150 canvas signs use 1,382,400 decoded RGBA bytes, no mipmaps;
+the full house/four-person diagnostic has 3,478 triangles and 108,140 geometry
+bytes. Houses use the ordinary building culling, actual-mesh obstruction and
+per-instance material restoration; the open porch canopy is overhead, with all
+ground furniture inside its solid parcel. Characters retain ordinary depth and
+actual-displacement gait. The shared page teardown owns these procedural
+resources; burglar removal disposes its private geometry/materials. This is
+rendered diagnostic cost, not a physical-device performance claim.
+
 The Bürgeramt entrance radiance is original runtime geometry: one retained door
 plane, one 5 × 5 ray/halo shader plane, and one short-range shadow-free point
 light. It follows both the authored municipal GLB glass entrance and procedural

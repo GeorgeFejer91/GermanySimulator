@@ -11,7 +11,8 @@ test('mission compass follows every office entrance and nearest unfinished Stadt
  const state={started:true,mission:0},player={x:0,y:0},window={};
  const buildings=[...new Set(missions.map(m=>m.target))].map((id,i)=>({id,x:-999,y:-999,doorX:i*100+30,doorY:900-i*80}));
  const normObjects=[{type:'bin',x:80,y:0,fixed:false},{type:'chairs',x:20,y:0,fixed:false},{type:'hedge',x:200,y:0,fixed:false}];
- const scope=vm.createContext({state,player,window,missions,buildings,normObjects});
+ const scope=vm.createContext({state,player,window,missions,buildings,normObjects,jwd:{allocated:false},npcs:[]});
+ vm.runInContext(game.slice(game.indexOf("function currentMission(){"),game.indexOf("function allocateJwdHome(){")),scope);
  vm.runInContext(game.slice(game.indexOf('function getMissionWaypoint(){'),game.indexOf('window.Germany3DBridge=')),scope);
  for(let i=0;i<missions.length;i++){state.mission=i;if(i===5)continue;const target=scope.getMissionWaypoint(),office=buildings.find(b=>b.id===missions[i].target);assert.equal(target.id,office.id);assert.equal(target.x,office.doorX);assert.equal(target.y,office.doorY)}
  state.mission=5;assert.equal(scope.getMissionWaypoint().id,'stadtbild-chairs');normObjects[1].fixed=true;assert.equal(scope.getMissionWaypoint().id,'stadtbild-bin');
