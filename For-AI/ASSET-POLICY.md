@@ -1157,6 +1157,18 @@ fallback and lifecycle; physical-device and listening evidence remain separate.
 
 `buergeramt-lips.js` owns one cue track and one lazy 425-kernel instanced native-paint patch for the currently speaking atlas actor. It borrows the actor texture and shares its registration, breathing, tint, fog and depth policy; cancellation, exit and pagehide release ownership. Whole-body Gaussian paint consumes the same continuous cue shape in its existing shader and suppresses the atlas patch. `buergeramt-mouth-paint.js` separates painted lips and lower jaw around a visible, bounded oral cavity, retaining original closed paint at rest. All 15 office actor instances share this rig and retain their body bounds and floor pivots.
 
+The connected-lip revision fits the individual crease, corners, source cavity,
+opening contours, rounding and teeth for all 67 native paintings and 41 atlas
+source poses. Inactive speech returns the exact source; an owned closed cue
+compresses an existing opening. Both native endpoints and the atlas fallback
+use the shared bounded paint field. One lazy office-only metadata request joins
+the existing asset queue; invalid/missing atlas profiles retain original paint
+and no mouth hole. No new texture, geometry, clock or dependency is introduced.
+Native image residency remains at most three textures per admitted actor; the
+existing mobile/desktop admission limits remain one/two. The active speaking
+counter receives priority within that limit. Validation and remaining art limits
+belong to BUERGERAMT.md.
+
 Recorded speech lazily loads `assets/buergeramt/speech/mouth-cues.js` when the office requests a clip or its existing Gaussian owner. All eligible office recordings, including the omen, have exact path/hash bindings, phonetic intervals and 100 Hz compact acoustic envelopes. The shared builder replaces the former omen-only data/pipeline. It uses local FFmpeg/Rhubarb and reuses analysis only when the exact recording hash, source and complete cue data match; optional installed Whisper diagnostics remain offline. The module is cached once, with decoded envelopes in a weak cache; existing cue cancellation/watchdogs own async preparation and disposal. Audio playhead sampling replaces both text-length timing and the additional 35 ms visual filter. Browser speech and optional unanalyzed preview recordings retain estimated articulation. See `assets/buergeramt/speech/PROVENANCE.md` for reproduction and precision limits.
 
 The mouth patch copies its actor's layer mask on every update so both use the final office actor pass with the existing opaque room depth. A hidden atlas replacement cannot keep a visible patch. Disposal and office exit release the patch and restore ordinary actor ownership. Final integration evidence and measured limits are in `BUERGERAMT.md`.

@@ -5,6 +5,7 @@ import assert from 'node:assert/strict';
 import {createHash} from 'node:crypto';
 import {mkdirSync,readFileSync,writeFileSync} from 'node:fs';
 import {createRequire} from 'node:module';
+import {execFileSync} from 'node:child_process';
 import {join,resolve} from 'node:path';
 
 const root=resolve(import.meta.dirname,'..');
@@ -21,6 +22,9 @@ const shapes={
   round:{shape:[.6,0,1,0],speaking:1},
   bite:{shape:[.7,0,0,1],speaking:1},
 };
+const sharedRef=process.env.PLAYTEST_SHARED_REF||'1fd2628';
+const sharedSource=execFileSync('git',['show',sharedRef+':buergeramt-mouth-paint.js'],{cwd:root,encoding:'utf8'});
+const requestedKeys=process.env.PLAYTEST_KEYS?.split(',');
 const hash=path=>createHash('sha256').update(readFileSync(join(root,path))).digest('hex');
 const manifestPath=id=>'assets/buergeramt/animation/'+id+'.json';
 const manifests=actors.map(id=>({id,path:manifestPath(id),data:JSON.parse(readFileSync(join(root,manifestPath(id)),'utf8'))}));
@@ -34,7 +38,7 @@ const revision=Object.fromEntries([
 const {chromium}=createRequire(import.meta.url)(process.env.PLAYWRIGHT_MODULE||'playwright');
 mkdirSync(output,{recursive:true});
 const report={scope:'encoded native anchor GPU mouth ROI, 96x64',gameUrl:gameUrl.href,
-  revision,shapes,keys:[],failures:[],errors:[],
+  revision,shapes,sharedRef,sharedShaderSha256:createHash('sha256').update(sharedSource).digest('hex'),keys:[],failures:[],errors:[],
   limits:['Pixel contracts do not approve anatomy, motion, audio sync, or in-game frame cost.']};
 let browser,context,page;
 try{
@@ -46,10 +50,12 @@ try{
   page.on('console',message=>{if(message.type()==='error')report.errors.push('console: '+message.text())});
   await page.route(gameUrl.href,route=>route.fulfill({status:200,contentType:'text/html',
     body:'<!doctype html><html><head><meta charset="utf-8"></head><body></body></html>'}));
+  await page.route(new URL('./shared-mouth.mjs',gameUrl).href,route=>route.fulfill({contentType:'text/javascript',body:sharedSource}));
   await page.goto(gameUrl.href,{waitUntil:'domcontentloaded',timeout:30000});
   await page.evaluate(async()=>{
     const THREE=await import('./assets/vendor/three/0.186.0/build/three.module.min.js');
-    const {mouthPaintGlsl,nativeMouthRect,nativeMouthAngle,nativeMouthGap}=await import('./buergeramt-mouth-paint.js');
+    const {mouthPaintGlsl,nativeMouthRect,nativeMouthAngle,nativeMouthGap,nativeMouthProfile,mouthProfileValues}=await import('./buergeramt-mouth-paint.js');
+    const sharedGlsl=(await import('./shared-mouth.mjs')).mouthPaintGlsl.replace(/\bamt/g,'sharedAmt');
     const width=96,height=64,canvas=document.createElement('canvas');
     canvas.width=width;canvas.height=height;document.body.append(canvas);
     const renderer=new THREE.WebGLRenderer({canvas,alpha:true,premultipliedAlpha:false,
@@ -65,13 +71,14 @@ try{
       uniforms:{sourceMap:{value:null},mouthRect:{value:new THREE.Vector4()},
         mouthShape:{value:new THREE.Vector4()},mouthAngle:{value:0},
         mouthGap:{value:new THREE.Vector2()},speaking:{value:0},
+        mouthCurves:{value:new THREE.Matrix4()},mouthLower:{value:new THREE.Vector4()},mouthEnds:{value:new THREE.Vector4()},mouthTail:{value:new THREE.Vector3()},mouthStyle:{value:new THREE.Vector3()},
         sourcePixels:{value:new THREE.Vector2()},candidate:{value:0}},
       vertexShader:'varying vec2 roiUv; void main(){roiUv=uv;gl_Position=vec4(position.xy,0.,1.);}',
       fragmentShader:'uniform sampler2D sourceMap;uniform vec4 mouthRect;uniform vec4 mouthShape;'+
-        'uniform float mouthAngle;uniform vec2 mouthGap;uniform float speaking;uniform float candidate;uniform vec2 sourcePixels;varying vec2 roiUv;\n'+
-        mouthPaintGlsl+
+        'uniform mat4 mouthCurves;uniform vec4 mouthLower,mouthEnds;uniform vec3 mouthTail,mouthStyle;uniform float mouthAngle;uniform vec2 mouthGap;uniform float speaking;uniform float candidate;uniform vec2 sourcePixels;varying vec2 roiUv;\n'+
+        mouthPaintGlsl+sharedGlsl+
         '\nvoid main(){vec2 uv=mouthRect.xy+(roiUv-.5)*vec2(96.,64.)/sourcePixels;'+
-        'gl_FragColor=candidate>.5?amtMouthPaint(sourceMap,uv,mouthRect,mouthShape,mouthAngle,mouthGap,speaking):texture2D(sourceMap,uv);}',
+        'gl_FragColor=candidate>1.5?sharedAmtMouthPaint(sourceMap,uv,mouthRect,mouthShape,mouthAngle,mouthGap,speaking):candidate>.5?amtMouthPaint(sourceMap,uv,mouthRect,mouthShape,mouthAngle,mouthCurves,mouthLower,mouthEnds,mouthTail,mouthStyle,speaking):texture2D(sourceMap,uv);\n#include <colorspace_fragment>\n}',
       transparent:false,blending:THREE.NoBlending,depthTest:false,depthWrite:false,toneMapped:false,
     });
     const geometry=new THREE.PlaneGeometry(2,2),scene=new THREE.Scene();
@@ -95,7 +102,7 @@ try{
         const frame=manifest.anchors?.frames?.[stateId];
         if(!frame)throw new Error('Encoded anchor unavailable: '+id+'/'+stateId);
         const rect=nativeMouthRect(manifest,stateId),angle=nativeMouthAngle(manifest,stateId),
-          gap=nativeMouthGap(manifest,stateId);
+          gap=nativeMouthGap(manifest,stateId),profile=nativeMouthProfile(manifest,stateId),packed=mouthProfileValues(profile);
         const url=new URL(frame.file,new URL('./assets/buergeramt/animation/'+id+'.json',location.href));
         const response=await fetch(url);
         if(!response.ok)throw new Error('Encoded frame unavailable: '+url.href);
@@ -115,10 +122,11 @@ try{
           material.uniforms.mouthRect.value.fromArray(rect);
           material.uniforms.mouthAngle.value=angle;
           material.uniforms.mouthGap.value.fromArray(gap);
+          for(const [name,value] of Object.entries(packed))material.uniforms['mouth'+name[0].toUpperCase()+name.slice(1)].value.fromArray(value);
           material.uniforms.sourcePixels.value.set(sourceWidth,sourceHeight);
           const samples={};
-          for(const [name,setting] of [['baseline',null],...shapeEntries]){
-            material.uniforms.candidate.value=name==='baseline'?0:1;
+          for(const [name,setting] of [['baseline',null],...shapeEntries,...shapeEntries.filter(([name])=>name!=='neutral').map(([name,setting])=>['shared-'+name,setting])]){
+            material.uniforms.candidate.value=name==='baseline'?0:name.startsWith('shared-')?2:1;
             material.uniforms.mouthShape.value.fromArray(setting?.shape??[0,0,0,0]);
             material.uniforms.speaking.value=setting?.speaking??0;
             renderer.render(scene,camera);
@@ -128,7 +136,7 @@ try{
             if(error!==gl.NO_ERROR)throw new Error('WebGL read failed: '+error+' '+id+'/'+stateId+'/'+name);
             samples[name]={rgba:Array.from(rgba),png:canvas.toDataURL('image/png')};
           }
-          return{rect,angle,gap,width:sourceWidth,height:sourceHeight,frame:url.pathname,
+          return{rect,angle,gap,profile,width:sourceWidth,height:sourceHeight,frame:url.pathname,
             frameSha256,manifestSha256:cached.sha256,samples};
         }finally{
           material.uniforms.sourceMap.value=null;
@@ -146,6 +154,7 @@ try{
 
   for(const {id,data} of manifests){
     for(const state of data.states){
+      if(requestedKeys&&!requestedKeys.includes(id+'/'+state.id))continue;
       const result=await page.evaluate(
         ([actor,stateId,entries])=>window.__connectedLipProbe.sample(actor,stateId,entries),
         [id,state.id,Object.entries(shapes)]);
@@ -168,7 +177,7 @@ try{
       }
       assert(protectedPixels.length>0,'upper-face ROI missing: '+id+'/'+state.id);
       const entry={actor:id,state:state.id,frame:framePath,frameSha256:result.frameSha256,
-        mouthRect:result.rect,mouthAngle:result.angle,mouthGap:result.gap,
+        mouthRect:result.rect,mouthAngle:result.angle,mouthGap:result.gap,mouthProfile:result.profile,
         protectedPixelCount:protectedPixels.length,failures:[],
         shapes:{}};
       for(const [name,sample] of Object.entries(result.samples)){
@@ -190,7 +199,8 @@ try{
           maxUpperFaceDifference=Math.max(maxUpperFaceDifference,
             Math.abs(rgba[pixel*4+c]-baseline[pixel*4+c]));
         entry.shapes[name]={maxRestDifference,maxAlphaDifference,maxUpperFaceDifference,changedPixels};
-        const preOpen=result.gap.some(value=>Math.abs(value)>1e-6);
+        if(name.startsWith('shared-'))continue;
+        const preOpen=result.profile.source_upper.some((value,index)=>Math.abs(value-result.profile.source_lower[index])>1e-6);
         if(name==='neutral'&&maxRestDifference!==0)entry.failures.push('inactive neutral differs');
         if(name==='closed'&&!preOpen&&maxRestDifference!==0)entry.failures.push('closed source differs');
         if(name==='closed'&&preOpen&&changedPixels<4)entry.failures.push('voiced closure did not change pre-open source');
@@ -204,7 +214,7 @@ try{
       for(const failure of entry.failures)report.failures.push(id+'/'+state.id+': '+failure);
     }
   }
-  assert.equal(report.keys.length,67);
+  assert.equal(report.keys.length,requestedKeys?.length??67);
   assert.deepEqual(report.errors,[]);
   assert.deepEqual(report.failures,[]);
   report.status='PASS';

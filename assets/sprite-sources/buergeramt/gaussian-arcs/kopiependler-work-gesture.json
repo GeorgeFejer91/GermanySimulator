@@ -233,7 +233,53 @@
         8
       ],
       "mouth_angle": 0,
-      "mouth_gap": [0, 0]
+      "mouth_gap": [0, 0],
+      "mouth_profile": {
+          "corners": [
+            -1.28,
+            1.28
+          ],
+          "crease": [
+            0.32,
+            0.18,
+            0.21,
+            0.2,
+            0.3
+          ],
+          "open_upper": [
+            0.32,
+            -0.05,
+            -0.24,
+            -0.08,
+            0.3
+          ],
+          "open_lower": [
+            0.32,
+            0.38,
+            0.46,
+            0.39,
+            0.3
+          ],
+          "source_upper": [
+            0.32,
+            0.18,
+            0.21,
+            0.2,
+            0.3
+          ],
+          "source_lower": [
+            0.32,
+            0.18,
+            0.21,
+            0.2,
+            0.3
+          ],
+          "width": [
+            0.07,
+            0.25
+          ],
+          "teeth": 0.04
+        }
     },
     {
       "id": "bridge1",
@@ -419,7 +465,53 @@
         8
       ],
       "mouth_angle": 0.05,
-      "mouth_gap": [0, 0]
+      "mouth_gap": [0, 0],
+      "mouth_profile": {
+          "corners": [
+            -1.27,
+            1.27
+          ],
+          "crease": [
+            0.29,
+            0.15,
+            0.19,
+            0.17,
+            0.27
+          ],
+          "open_upper": [
+            0.29,
+            -0.08,
+            -0.26,
+            -0.11,
+            0.27
+          ],
+          "open_lower": [
+            0.29,
+            0.36,
+            0.44,
+            0.36,
+            0.27
+          ],
+          "source_upper": [
+            0.29,
+            0.15,
+            0.19,
+            0.17,
+            0.27
+          ],
+          "source_lower": [
+            0.29,
+            0.15,
+            0.19,
+            0.17,
+            0.27
+          ],
+          "width": [
+            0.07,
+            0.25
+          ],
+          "teeth": 0.04
+        }
     },
     {
       "id": "bridge2",
@@ -613,7 +705,53 @@
         8
       ],
       "mouth_angle": -0.45,
-      "mouth_gap": [-0.25, 0.55]
+      "mouth_gap": [-0.34, 0.32],
+      "mouth_profile": {
+          "corners": [
+            -1.27,
+            1.3
+          ],
+          "crease": [
+            0.3,
+            0.28,
+            0.37,
+            0.32,
+            0.31
+          ],
+          "open_upper": [
+            0.3,
+            -0.19,
+            -0.45,
+            -0.26,
+            0.31
+          ],
+          "open_lower": [
+            0.3,
+            0.55,
+            0.84,
+            0.61,
+            0.31
+          ],
+          "source_upper": [
+            0.3,
+            0.09,
+            0.03,
+            0.12,
+            0.31
+          ],
+          "source_lower": [
+            0.3,
+            0.46,
+            0.69,
+            0.53,
+            0.31
+          ],
+          "width": [
+            0.05,
+            0.21
+          ],
+          "teeth": 0.19
+        }
     },
     {
       "id": "bridge3",
@@ -803,7 +941,53 @@
         8
       ],
       "mouth_angle": -0.3,
-      "mouth_gap": [-0.25, 0.55]
+      "mouth_gap": [-0.34, 0.31],
+      "mouth_profile": {
+          "corners": [
+            -1.31,
+            1.28
+          ],
+          "crease": [
+            0.31,
+            0.26,
+            0.38,
+            0.34,
+            0.34
+          ],
+          "open_upper": [
+            0.31,
+            -0.21,
+            -0.45,
+            -0.26,
+            0.34
+          ],
+          "open_lower": [
+            0.31,
+            0.56,
+            0.85,
+            0.62,
+            0.34
+          ],
+          "source_upper": [
+            0.31,
+            0.09,
+            0.04,
+            0.14,
+            0.34
+          ],
+          "source_lower": [
+            0.31,
+            0.48,
+            0.69,
+            0.53,
+            0.34
+          ],
+          "width": [
+            0.05,
+            0.22
+          ],
+          "teeth": 0.2
+        }
     },
     {
       "id": "gesture",
@@ -992,7 +1176,53 @@
         8
       ],
       "mouth_angle": -0.1,
-      "mouth_gap": [-0.25, 0.55]
+      "mouth_gap": [-0.3, 0.31],
+      "mouth_profile": {
+          "corners": [
+            -1.3,
+            1.29
+          ],
+          "crease": [
+            0.34,
+            0.25,
+            0.33,
+            0.28,
+            0.31
+          ],
+          "open_upper": [
+            0.34,
+            -0.18,
+            -0.39,
+            -0.22,
+            0.31
+          ],
+          "open_lower": [
+            0.34,
+            0.53,
+            0.78,
+            0.57,
+            0.31
+          ],
+          "source_upper": [
+            0.34,
+            0.08,
+            0.03,
+            0.1,
+            0.31
+          ],
+          "source_lower": [
+            0.34,
+            0.44,
+            0.64,
+            0.49,
+            0.31
+          ],
+          "width": [
+            0.06,
+            0.23
+          ],
+          "teeth": 0.17
+        }
     }
   ],
   "compatibility": "One helmet moves from belt at screen-right through center into right-hand grip at screen-left, while left arm retains papers. Exact source endpoint depicts a larger foreground helmet than work; inspect gradual apparent-size growth. Matched Gaussian correspondence must be reviewed through ordered playback; no unconstrained whole-body TPS.",

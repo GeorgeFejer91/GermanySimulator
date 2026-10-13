@@ -1,6 +1,6 @@
 import {createAmtTouchPicker} from './buergeramt-touch-target.js?v=20261013-double-tap';
-import {createAmtGaussianScene,loadAmtSplatModule} from './buergeramt-gaussian-scene.js?v=20261013-connected-lips';
-import {mouthPaintGlsl} from './buergeramt-mouth-paint.js?v=20261013-connected-lips';
+import {createAmtGaussianScene,loadAmtSplatModule} from './buergeramt-gaussian-scene.js?v=20261013-character-lips';
+import {mouthPaintGlsl,mouthProfileValues,validateMouthProfile} from './buergeramt-mouth-paint.js?v=20261013-character-lips';
 import {createAmtFloor} from './buergeramt-floor.js?v=20261013-goop-grace';
 import {createAmtPortraitMelt} from './buergeramt-portrait-melt.js?v=20261013-portrait-melt15';
 import {createAmtLampWear} from './buergeramt-lamps.js?v=20261012-counter-recovery';
@@ -1551,6 +1551,13 @@ function showRendererFailure(error){
   const amtStationaryDetails=new Map();
   function loadAmtImages({background=false}={}){
     if(amtImagesRequested)return;amtImagesRequested=true;officePreparationBackground=background;
+    officeAssetTotal++;officeAssetPending++;
+    const loadLipProfiles=async()=>{
+      const response=await fetch('./assets/buergeramt/characters/mouth-profiles.json?v=20261013-character-lips');
+      if(!response.ok)throw new Error('Lip profiles unavailable: '+response.status);
+      window.GermanyAmtLips.setProfiles(await response.json(),validateMouthProfile);
+    };
+    (bridge.queueAssetLoad?bridge.queueAssetLoad(loadLipProfiles,{background:officePreparationBackground}):loadLipProfiles()).catch(error=>{officeAssetFailures++;console.warn('Bürgeramt painted lip profiles unavailable',error)}).finally(()=>officeAssetPending--);
     amtTexture('./assets/buergeramt/mirror/potato-skin.webp?v=20261013-live-mirror',texture=>amtPotatoMirror.setSkinTexture(texture),undefined,true);
     amtTexture("./assets/buergeramt/president-steinmeier.webp?v=20261012-portrait",texture=>{presidentMaterial.map=texture;presidentMaterial.needsUpdate=true;amtPortraitMelt.setTexture(texture);presidentFallback.texture.dispose()},undefined,true);
     officeAssetTotal++;officeAssetPending++;
@@ -1863,7 +1870,7 @@ function showRendererFailure(error){
   addEventListener("pagehide",()=>{amtMouthSplat?.dispose();amtMouthSplat=null},{once:true});
   function updateAmtMouth(level,now){
     const speech=level.lipSpeech,actor=speech?.actor&&([...amtMoving,...amtCharacters].find(item=>item.id===speech.actor||item.lipId===speech.actor||item.performance&&speech.actor==="clerk-"+item.counter));
-    if(!amtMouthSplat&&actor&&speech.active)amtMouthSplat=window.GermanyAmtLips.createPaintSplat(T,mouthPaintGlsl);
+    if(!amtMouthSplat&&actor&&speech.active&&window.GermanyAmtLips.displayedMouthProfile(actor))amtMouthSplat=window.GermanyAmtLips.createPaintSplat(T,mouthPaintGlsl,mouthProfileValues);
     amtMouthSplat?.update(actor||null,speech,now);
   }
   let lastCall="",amtHiDpi=false;

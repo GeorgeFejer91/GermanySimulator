@@ -7,11 +7,13 @@ import {execFileSync} from 'node:child_process';
 const baselineFiles=['buergeramt.js','world3d.js','buergeramt-lips.js','buergeramt-mouth-paint.js','buergeramt-painted-anchor.js','buergeramt-gaussian-scene.js','buergeramt-gaussian-animation.js'];
 const sources=process.env.PLAYTEST_BASE_REF?new Map(baselineFiles.map(file=>[file,execFileSync('git',['show',process.env.PLAYTEST_BASE_REF+':'+file],{encoding:'utf8',maxBuffer:8_000_000})])):null;
 const fixtureSource=file=>sources?.get(file)??readFileSync(file,'utf8');
-const nativePaint=process.env.PLAYTEST_NATIVE_PAINT==='1';
+const motionOnly=process.env.PLAYTEST_MOTION_ONLY==='1';
+const nativePaint=motionOnly||process.env.PLAYTEST_NATIVE_PAINT==='1';
 const transforms=process.env.PLAYTEST_TRANSFORMS==='1';
 const poseOnly=process.env.PLAYTEST_POSE_ONLY==='1';
+if(motionOnly&&sources)throw new Error('Motion capture requires the current production source');
 const nativeIds=['clerk','aktenkurier','archivbotin','formularsammler','nummernfluesterer','nachtschichtmelderin','pfandarchitektin','kopiependler','warteschlangenpoetin','renter','parent','pensioner'];
-const readRevision=()=>Object.fromEntries(['buergeramt.js','world3d.js','buergeramt-lips.js','buergeramt-lipsync.js','buergeramt-mouth-paint.js','buergeramt-splat.js','buergeramt-gaussian-scene.js','buergeramt-painted-anchor.js','assets/buergeramt/speech/mouth-cues.js',...nativeIds.map(id=>'assets/buergeramt/animation/'+id+'.json')].map(f=>[f,createHash('sha256').update(fixtureSource(f)).digest('hex')]));
+const readRevision=()=>Object.fromEntries(['buergeramt.js','world3d.js','buergeramt-lips.js','buergeramt-lipsync.js','buergeramt-mouth-paint.js','buergeramt-splat.js','buergeramt-gaussian-scene.js','buergeramt-painted-anchor.js','assets/buergeramt/speech/mouth-cues.js','assets/buergeramt/characters/mouth-profiles.json',...nativeIds.map(id=>'assets/buergeramt/animation/'+id+'.json')].map(f=>[f,createHash('sha256').update(fixtureSource(f)).digest('hex')]));
 const {chromium}=createRequire(import.meta.url)(process.env.PLAYWRIGHT_MODULE||'playwright');
 const output=process.env.PLAYTEST_OUTPUT||'output/lip-motion/review';mkdirSync(output,{recursive:true});
 const browser=await chromium.launch({headless:true,executablePath:process.env.CHROMIUM_PATH,args:['--mute-audio']});
@@ -22,9 +24,10 @@ async function faceClip(page,id){
   const actor=[...__lipRender.amtMoving,...__lipRender.amtCharacters].find(a=>a.id===id||a.lipId===id),height=actor.mesh.geometry.parameters.height*actor.mesh.scale.y;
   let rect,aspect=actor.mesh.geometry.parameters.width/actor.mesh.geometry.parameters.height;
   if(nativePaint){
-   const entry=Germany3D.amtGaussian.actors.find(a=>a.anchor?.visible&&(a.id===id||a.id===actor.id||id===actor.lipId));
+   const gaussianId=actor.performance&&actor.lead?'clerk':actor.animationId??actor.id;
+   const entry=Germany3D.amtGaussian.actors.find(a=>a.anchor?.visible&&a.id===gaussianId);
    const manifest=await(await fetch('./assets/buergeramt/animation/'+entry.manifestId+'.json')).json();
-   const {nativeMouthRect}=await import('./buergeramt-mouth-paint.js?v=20261013-connected-lips');
+   const {nativeMouthRect}=await import('./buergeramt-mouth-paint.js?v=20261013-character-lips');
    const pair=entry.anchor.pair,a=nativeMouthRect(manifest,pair.from),b=nativeMouthRect(manifest,pair.to);
    const left=Math.min(a[0]-3*a[2],b[0]-3*b[2]),right=Math.max(a[0]+3*a[2],b[0]+3*b[2]);
    const bottom=Math.min(a[1]-3*a[3],b[1]-3*b[3]),top=Math.max(a[1]+3*a[3],b[1]+3*b[3]);
@@ -40,26 +43,32 @@ async function faceClip(page,id){
  },{id,nativePaint});
 }
 try{
- for(const [name,width,height] of [['desktop',1280,800],['android-portrait',390,844],['android-landscape',844,390],['reduced-motion',1280,800],['asset-failure',1280,800]].filter(([name])=>!process.env.PLAYTEST_VIEWPORT||process.env.PLAYTEST_VIEWPORT.split(',').includes(name))){
+ const viewports=[['desktop',1280,800],['android-portrait',390,844],['android-landscape',844,390],['reduced-motion',1280,800],['asset-failure',1280,800],['profile-failure',1280,800]]
+  .filter(([name])=>!process.env.PLAYTEST_VIEWPORT||process.env.PLAYTEST_VIEWPORT.split(',').includes(name));
+ const cases=motionOnly?viewports.filter(([name])=>name==='desktop'||name==='android-portrait')
+  .flatMap(([name,width,height])=>['clerk','aktenkurier'].filter(actor=>!process.env.PLAYTEST_MOTION_ACTOR||process.env.PLAYTEST_MOTION_ACTOR.split(',').includes(actor)).map(actor=>[name+'-'+actor,width,height,actor])):viewports;
+ if(motionOnly&&!cases.length)throw new Error('Motion capture needs desktop or android-portrait');
+ for(const [name,width,height,motionActor] of cases){
   const revision=readRevision();
-  const context=await browser.newContext({viewport:{width,height},isMobile:name.startsWith('android'),hasTouch:name.startsWith('android'),reducedMotion:name==='reduced-motion'?'reduce':'no-preference',...(process.env.PLAYTEST_VIDEO&&name==='desktop'?{recordVideo:{dir:output+'/video',size:{width,height}}}:{})});
+  const context=await browser.newContext({viewport:{width,height},isMobile:name.startsWith('android'),hasTouch:name.startsWith('android'),reducedMotion:name==='reduced-motion'?'reduce':'no-preference',...(motionOnly||process.env.PLAYTEST_VIDEO&&name==='desktop'?{recordVideo:{dir:output+'/video',size:{width,height}}}:{})});
   await context.addInitScript(()=>{
-   const play=HTMLMediaElement.prototype.play;HTMLMediaElement.prototype.play=function(...args){this.muted=true;this.volume=0;return play.apply(this,args)};
+   const play=HTMLMediaElement.prototype.play;HTMLMediaElement.prototype.play=function(...args){this.muted=true;this.volume=0;(window.__lipMediaPlayers??=[]).push(this);return play.apply(this,args)};
    const connect=AudioNode.prototype.connect;AudioNode.prototype.connect=function(target,...args){if(target===this.context.destination){const mute=this.context.createGain();mute.gain.value=0;connect.call(mute,target);return connect.call(this,mute,...args)}return connect.call(this,target,...args)};
    speechSynthesis.speak=u=>{u.volume=0;window.lipTestSpeech=u;u.onstart?.();u.onpause?.()};speechSynthesis.cancel=()=>{};
   });
   const page=await context.newPage(),errors=[],warnings=[];
   if(sources)await page.route('**/*.js?*',route=>{const file=new URL(route.request().url()).pathname.split('/').at(-1);return sources.has(file)?route.fulfill({contentType:'text/javascript',body:sources.get(file)}):route.continue()});
   page.on('pageerror',e=>{errors.push(e.message);console.log('pageerror',e.message)});page.on('console',m=>{if(m.type()==='error'){warnings.push(m.text());console.log('browser',m.text().slice(0,500))}});
-  await page.route('**/buergeramt-lips.js?*',route=>route.fulfill({contentType:'text/javascript',body:fixtureSource('buergeramt-lips.js').replace('createTrack(now=()=>performance.now())','createTrack(now=()=>window.lipFixtureTime??performance.now())')}));
+  await page.route('**/buergeramt-lips.js?*',route=>route.fulfill({contentType:'text/javascript',body:fixtureSource('buergeramt-lips.js').replace('createTrack(now=()=>performance.now())','createTrack(now=()=>window.lipFixtureTime??performance.now())').replace(/(const poseGaps=\{[^\n]+\};)/,'$1window.__lipGapTable=poseGaps;')}));
   await page.route('**/buergeramt.js?*',route=>route.fulfill({contentType:'text/javascript',body:fixtureSource('buergeramt.js').replace('createTrack(()=>visualClock*1000)','createTrack(()=>window.lipFixtureTime??visualClock*1000)').replace('requestAnimationFrame(()=>{if(current()&&!settled)','queueMicrotask(()=>{if(current()&&!settled)').replace(/\}\)\(\);\s*$/,'window.__lipProbe={content,view,setStage,characters,cancelSpeech,showCharacter,beginOmen,resetOmen,omen,get options(){return options}};})();')}));
   await page.route('**/world3d.js?*',route=>route.fulfill({contentType:'text/javascript',body:fixtureSource('world3d.js').replace('updateAmtMouth(level,now);','updateAmtMouth(level,window.lipFixtureRenderTime??now);').replace('window.Germany3D={ready:true,','window.__lipRender={scene:amtScene,camera:amtCamera,renderer,amtMoving,amtCharacters};window.Germany3D={ready:true,')}));
+  if(name==='profile-failure')await page.route('**/characters/mouth-profiles.json*',route=>route.abort('failed'));
   if(name==='asset-failure')await page.route('**/omen/aktenkurier.splat*',route=>route.abort('failed'));
   await page.goto((process.env.GAME_URL||'http://127.0.0.1:8876/index.html')+'?geheim=buergeramt&voicePreview=1',{waitUntil:'commit',timeout:45000});
   try{await page.waitForFunction(()=>window.Germany3D?.ready&&window.BuergeramtLevel?.active&&Germany3D.officeAssetsReady,null,{timeout:90000})}
   catch(error){console.log(await page.evaluate(()=>({level:!!window.BuergeramtLevel,active:window.BuergeramtLevel?.active,renderer:window.Germany3D?.ready,lips:!!window.GermanyAmtLips,status:window.Germany3D?.officeAssetStatus})));throw error}
   console.log(name,'ready');
-  await page.evaluate(({nativePaint,transforms})=>{
+  await page.evaluate(({nativePaint,transforms,motionOnly})=>{
    window.lipTransformOverrides={};
    window.lipOriginalCatalog=GermanySimulatorAudioText;
    // Synthetic shape probes explicitly bypass Knick's captions-only missing
@@ -70,7 +79,9 @@ try{
    // This fixture checks the atlas fallback; active native Gaussian paint has
    // its own production-scene fixture. Disable only admission in this context.
    const nativeCharacters=Object.getOwnPropertyDescriptor(BuergeramtLevel,'characters').get,nativeClerk=Object.getOwnPropertyDescriptor(BuergeramtLevel,'clerkPerformance').get;
-   if(!nativePaint){
+   if(motionOnly){
+    Object.defineProperty(BuergeramtLevel,'characters',{get:()=>nativeCharacters().map(a=>({...a,mode:a.id==='aktenkurier'?'gesture':a.mode,animation:lipTransformOverrides[a.id]??a.animation}))});
+   }else if(!nativePaint){
     // A work-mode actor synthesizes its own native work anchor; select the
     // frozen gesture fallback so a null animation actually prevents admission.
     Object.defineProperty(BuergeramtLevel,'characters',{get:()=>nativeCharacters().map(a=>({...a,mode:lipTransformOverrides[a.id]?.mode??'gesture',animation:null}))});
@@ -86,7 +97,100 @@ try{
    }
    window.lipOriginalUpdate=BuergeramtLevel.update;BuergeramtLevel.update=()=>{};__lipProbe.options.voiceOn=()=>true;window.lipFixtureTime=0;window.lipFixtureRenderTime=performance.now();__lipProbe.setStage('character');
    window.lipActorOrigins=__lipProbe.characters.map(a=>({id:a.id,x:a.x,z:a.z}));
-  },{nativePaint,transforms});
+  },{nativePaint,transforms,motionOnly});
+  if(motionOnly){
+   const clipPath=motionActor==='clerk'?'./assets/voices/knick/knick-registration-identityfix-reply-1.mp3':'./assets/voices/amt-fever/amt-horst-stempelmann-fever-1.mp3';
+   const setup=await page.evaluate(async({actor,clipPath})=>{
+    const clip=lipOriginalCatalog.recordings[clipPath];if(!clip?.source||!clip?.sha256)throw Error('Exact native recording missing: '+clipPath);
+    const manifest=await(await fetch('./assets/buergeramt/animation/'+actor+'.json')).json();
+    const openStates=manifest.states.filter(state=>state.mouth_gap?.some(value=>Math.abs(value)>.015)).map(state=>state.id);
+    if(actor==='aktenkurier'&&!openStates.length)throw Error('Expected a pre-open Aktenkurier source');
+    const source=__lipProbe.characters.find(a=>a.id===actor),rendered=[...__lipRender.amtMoving,...__lipRender.amtCharacters].find(a=>a.id===actor||a.lipId===actor);
+    if(source){source.x=0;source.z=1.8;rendered.mesh.position.set(0,rendered.mesh.position.y,1.8)}
+    __lipProbe.view.x=source?.x??rendered.mesh.position.x;__lipProbe.view.z=(source?.z??rendered.mesh.position.z)+1.25;__lipProbe.view.yaw=0;
+    if(actor==='aktenkurier')lipTransformOverrides.aktenkurier={generation:0,actionId:1,arc:'work-gesture-work',pose:'work',phase:0};
+    // Prime the production paired paintings while the existing body clock is
+    // fixed at its initial pose. The real clip starts only after both sources
+    // are ready; no fixture clock is used during its speech or body motion.
+    window.lipTestSpeech=null;
+    __lipProbe.content(actor==='clerk'?BuergeramtStory.clerkIdentity.speaker:BuergeramtStory.characters.aktenkurier.speaker,'Mama',[],()=>{},null,null,actor==='clerk'?null:{id:actor,tone:'procedural',valence:0});
+    Germany3D.sync();
+    return{clipPath,clipSha256:clip.sha256,source:clip.source,duration:clip.durationMs/1000,openStates,arcDuration:manifest.arcs.find(a=>a.id==='work-gesture')?.duration??null};
+   },{actor:motionActor,clipPath});
+   await page.waitForFunction(actor=>window.lipTestSpeech&&BuergeramtLevel.lipSpeech.actor===actor&&BuergeramtLevel.lipSpeech.mode==='voice',motionActor,{timeout:15000});
+   await page.evaluate(()=>lipTestSpeech.onpause?.());
+   await page.waitForFunction(actor=>{
+    Germany3D.sync();const anchor=Germany3D.amtGaussian.actors.find(a=>a.id===actor)?.anchor;
+    return anchor?.visible&&!anchor.pending&&anchor.technique==='native-texture-gaussians'&&anchor.phase<.1&&anchor.pair?.from===(actor==='clerk'?'ready':'work');
+   },motionActor,{timeout:20000}).catch(async error=>{
+    const diagnostic=await page.evaluate(actor=>({speech:BuergeramtLevel.lipSpeech,clerk:BuergeramtLevel.clerkPerformance,actor:BuergeramtLevel.characters.find(a=>a.id===actor),paint:Germany3D.amtGaussian.actors.find(a=>a.id===actor),owner:Germany3D.amtGaussian.owner}),motionActor);
+    writeFileSync(`${output}/${name}-warm-failure.json`,JSON.stringify(diagnostic,null,2));throw error;
+   });
+   const warm=await page.evaluate(({actor,clipPath})=>{
+    const anchor=Germany3D.amtGaussian.actors.find(a=>a.id===actor).anchor;
+    const ready={pair:anchor.pair,phase:anchor.phase,technique:anchor.technique,resident:anchor.resident};
+    __lipProbe.cancelSpeech();window.lipFixtureTime=null;window.lipFixtureRenderTime=null;
+    window.GermanySimulatorAudioText={...lipOriginalCatalog,recordedClip:(_voice,text)=>text===lipOriginalCatalog.recordings[clipPath].source?clipPath:null,candidateClip:()=>null};
+    const who=actor==='clerk'?BuergeramtStory.clerkIdentity.speaker:BuergeramtStory.characters.aktenkurier.speaker;
+    __lipProbe.content(who,lipOriginalCatalog.recordings[clipPath].source,[],()=>{},null,null,actor==='clerk'?null:{id:actor,tone:'procedural',valence:0});
+    return ready;
+   },{actor:motionActor,clipPath});
+   await page.waitForFunction(path=>BuergeramtLevel.lipSpeech.mode==='recorded'&&BuergeramtLevel.lipSpeech.recording===path&&!BuergeramtLevel.lipSpeech.paused,clipPath,{timeout:20000});
+   await page.evaluate(({actor,clipPath,duration,arcDuration})=>{
+    const media=window.__lipMediaPlayers?.find(item=>item.src.includes(clipPath.replace(/^\.\//,'')));if(!media)throw Error('Native media player unavailable');
+    const motion={trace:[],events:[],done:false,media,startedAt:performance.now(),lastFrame:performance.now(),paused:false,resumed:false,cancelled:false};window.__lipMotion=motion;
+    const sample=label=>{
+     const speech=BuergeramtLevel.lipSpeech,anchor=Germany3D.amtGaussian.actors.find(a=>a.id===actor)?.anchor;
+     const state={label,wallSeconds:(performance.now()-motion.startedAt)/1000,mediaSeconds:media.currentTime,mediaPaused:media.paused,cueSeconds:speech.time,owner:speech.actor,mode:speech.mode,timing:speech.timing,recording:speech.recording,shape:speech.shape,paused:speech.paused,bodyPhase:actor==='clerk'?BuergeramtLevel.clerkPerformance.animation?.phase:lipTransformOverrides.aktenkurier?.phase,bodyArc:actor==='clerk'?BuergeramtLevel.clerkPerformance.animation?.arc:lipTransformOverrides.aktenkurier?.arc,anchor:anchor?{visible:anchor.visible,pair:anchor.pair,phase:anchor.phase,state:anchor.state,lipShape:anchor.lipShape}:null};
+     motion.trace.push(state);if(label!=='sample')motion.events.push(state);return state;
+    };
+    const tick=now=>{
+     if(motion.done)return;
+     const dt=Math.min(.1,Math.max(0,(now-motion.lastFrame)/1000));motion.lastFrame=now;
+     lipOriginalUpdate(dt);
+     if(actor==='aktenkurier')lipTransformOverrides.aktenkurier.phase=((now-motion.startedAt)/1000/(2*arcDuration))%1;
+     Germany3D.sync();
+     if(media.currentTime>=1.8&&!motion.paused){motion.paused=true;media.pause();sample('pause');setTimeout(()=>{if(!motion.done)sample('pause-hold')},180);setTimeout(()=>{if(motion.done)return;sample('before-resume');motion.resumed=true;media.play();sample('resume')},260)}
+     if(motion.resumed&&media.currentTime>=duration-.2&&!motion.cancelled){sample('before-cancel');motion.cancelled=true;__lipProbe.cancelSpeech();Germany3D.sync();sample('cancel');motion.done=true;return}
+     if((now-motion.startedAt)/1000>duration+4){motion.events.push({label:'timeout',mediaSeconds:media.currentTime});motion.done=true;return}
+     requestAnimationFrame(tick);
+    };
+    sample('start');motion.timer=setInterval(()=>sample('sample'),100);requestAnimationFrame(tick);
+   },{actor:motionActor,clipPath,duration:setup.duration,arcDuration:setup.arcDuration});
+   await page.waitForTimeout(1250);await page.screenshot({path:`${output}/${name}-speaking.png`});
+   await page.waitForFunction(()=>window.__lipMotion?.done,null,{timeout:16000});
+   const motion=await page.evaluate(()=>{clearInterval(__lipMotion.timer);BuergeramtLevel.update=lipOriginalUpdate;return{trace:__lipMotion.trace,events:__lipMotion.events}});
+   writeFileSync(`${output}/${name}-trace.json`,JSON.stringify({name,actor:motionActor,forcedScene:true,silent:true,physicalAndroid:false,normalSpeed:true,clip:setup,warm,revision,...motion,errors,warnings},null,2));
+   const samples=motion.trace,owned=samples.filter(s=>s.mode==='recorded'&&s.owner===motionActor);
+   assert(owned.length>20,'native clip must own a sustained motion interval');
+   assert(owned.every(s=>s.timing==='audio-cues'&&s.recording===clipPath),'media playhead must own the unchanged cue track');
+   assert(owned.at(-1).mediaSeconds-owned[0].mediaSeconds>setup.duration-1,'native audio must progress at normal speed');
+   assert(new Set(owned.map(s=>s.shape.map(v=>v.toFixed(2)).join(','))).size>3,'real cue shapes must change');
+   assert(Math.max(...owned.map(s=>s.bodyPhase??0))-Math.min(...owned.map(s=>s.bodyPhase??0))>.15,'body phase must advance continuously');
+   const paintedMotion=owned.filter(s=>s.anchor?.visible&&s.anchor.phase>.05&&s.anchor.phase<.95);
+   assert(paintedMotion.length>=5,'native painted anchor must be visible through intermediate body phases');
+   assert(new Set(paintedMotion.map(s=>s.shape.map(value=>value.toFixed(2)).join(','))).size>2,'real cues must change on a moving painted anchor');
+   const pause=motion.events.find(s=>s.label==='pause'),hold=motion.events.find(s=>s.label==='pause-hold'),beforeResume=motion.events.find(s=>s.label==='before-resume');
+   assert(pause?.mediaPaused&&hold?.mediaPaused&&beforeResume?.mediaPaused&&motion.events.some(s=>s.label==='resume'),'pause and resume must be observed');
+   assert(beforeResume.wallSeconds-pause.wallSeconds>.2&&Math.abs(beforeResume.mediaSeconds-pause.mediaSeconds)<.03,'paused media playhead must hold');
+   assert(Math.abs(hold.cueSeconds-pause.cueSeconds)<.03&&Math.abs(beforeResume.cueSeconds-pause.cueSeconds)<.03,'paused cue time must hold');
+   assert.deepEqual(hold.shape,pause.shape);assert.deepEqual(beforeResume.shape,pause.shape);
+   const cancelled=motion.events.find(s=>s.label==='cancel');
+   assert(cancelled?.owner===null&&cancelled.mode==='idle'&&cancelled.shape.every(value=>value===0),'cancellation must restore exact resting cue');
+   if(motionActor==='aktenkurier')assert(owned.some(s=>setup.openStates.includes(s.anchor?.pair?.from)||setup.openStates.includes(s.anchor?.pair?.to)),'pre-open source must appear during speech');
+   assert.deepEqual(errors,[]);assert.deepEqual(warnings.filter(w=>/Shader Error|VALIDATE_STATUS|GL_INVALID/.test(w)),[]);
+   const video=page.video();await context.close();if(video)await video.saveAs(`${output}/${name}-motion.webm`);
+   reports.push({name,actor:motionActor,forcedScene:true,silent:true,physicalAndroid:false,normalSpeed:true,clip:setup,warm,revision,paintedMotionFrames:paintedMotion.length,trace:`${output}/${name}-trace.json`,video:`${output}/${name}-motion.webm`,errors,warnings});
+   writeFileSync(`${output}/results.json`,JSON.stringify(reports,null,2));console.log(JSON.stringify({name,result:'PASS',clip:clipPath,samples:samples.length}));continue;
+  }
+  if(name==='profile-failure'){
+   await page.evaluate(()=>{__lipProbe.content('DER AKTENKURIER','Mama fünf Omi!',[],null,null,null,{id:'aktenkurier'});Germany3D.sync()});
+   await page.waitForFunction(()=>BuergeramtLevel.lipSpeech.actor==='aktenkurier'&&window.lipTestSpeech,null,{timeout:15000});
+   await page.evaluate(()=>{lipTestSpeech.onresume?.();window.lipFixtureTime=0;lipTestSpeech.onboundary({charIndex:1});window.lipFixtureTime=35;Germany3D.sync();lipTestSpeech.onpause?.();Germany3D.sync()});
+   const fallback=await page.evaluate(()=>({speech:BuergeramtLevel.lipSpeech,splat:Germany3D.amtLipSplat,profiles:__lipRender.amtMoving.map(a=>GermanyAmtLips.displayedMouthProfile(a)),holes:__lipRender.amtMoving.map(a=>a.mesh.material.userData.lipHole.value)}));
+   assert.equal(fallback.speech.actor,'aktenkurier');assert(fallback.speech.active);assert.equal(fallback.splat?.visible??false,false);assert(fallback.profiles.every(p=>p===null));assert(fallback.holes.every(h=>h===0));assert.deepEqual(errors,[]);
+   await page.screenshot({path:output+'/'+name+'.png'});reports.push({name,silent:true,revision,fallback,errors,warnings});await context.close();writeFileSync(output+'/results.json',JSON.stringify(reports,null,2));console.log(name,'PASS');continue;
+  }
   const actors=await page.evaluate(()=>[...__lipRender.amtMoving.map(a=>a.id),...__lipRender.amtCharacters.map(a=>a.performance?a.lipId:a.id)]);
   if(process.env.PLAYTEST_ACTOR)for(let i=actors.length-1;i>=0;i--)if(!process.env.PLAYTEST_ACTOR.split(',').includes(actors[i]))actors.splice(i,1);
   if(process.env.PLAYTEST_OMEN_ONLY)actors.length=0;
@@ -175,12 +279,26 @@ try{
    await page.evaluate(id=>{window.lipFixtureTime=0;window.lipTestSpeech=null;__lipProbe.content(id==='clerk'?'FRAU KNICK':id,'Mama fünf Omi schöne Euro!',[],null,null,null,{id,tone:'procedural',valence:0})},id);
    await page.waitForFunction(()=>!!window.lipTestSpeech);
    await page.evaluate(()=>{lipTestSpeech.onresume?.();lipTestSpeech.onboundary({charIndex:0});window.lipFixtureTime=35;Germany3D.sync();lipTestSpeech.onpause?.();Germany3D.sync()});
-   const closed=await page.evaluate(()=>Germany3D.amtLipSplat);assert.equal(closed.visible,false);
-   assert.equal(await page.evaluate(()=>BuergeramtLevel.lipSpeech.shape[0]),0);
+   const closed=await page.evaluate(()=>{
+    const speech=BuergeramtLevel.lipSpeech,paint=Germany3D.amtLipSplat;
+    const actor=[...__lipRender.amtMoving,...__lipRender.amtCharacters].find(a=>a.id===speech.actor||a.lipId===speech.actor);
+    const key=actor?.performance?'clerk':actor?.lipId||actor?.id||actor?.name;
+    const profile=GermanyAmtLips.displayedMouthProfile?.(actor);
+    const gap=profile?profile.source_upper.map((value,index)=>value-profile.source_lower[index]):window.__lipGapTable?.[key]?.[actor?.mouthPose??0]??window.__lipGapTable?.[key]?.[0]??[0,0];
+    return{speech,paint,gap,pose:actor?.mouthPose??null,hole:actor?.mesh.material.userData.lipHole.value};
+   });
+   assert.equal(closed.speech.actor,id);assert.equal(closed.speech.active,true);assert.deepEqual(closed.speech.shape,[0,0,0,0]);
+   // A closed consonant still owns the source when that painted pose has an
+   // open cavity. Only the truly closed source can omit the fallback patch.
+   const needsClosure=closed.gap.some(value=>Math.abs(value)>.015);
+   assert.equal(closed.paint.visible,nativePaint?false:needsClosure);
+   if(!nativePaint)assert.equal(closed.hole,needsClosure?1:0);
    await page.screenshot({path:`${output}/${name}-${id}-closed.png`});
    await page.screenshot({path:`${output}/${name}-${id}-face-closed.png`,clip:face});
    await page.evaluate(()=>{lipTestSpeech.onend?.();Germany3D.sync()});
    assert.equal(await page.evaluate(()=>Germany3D.amtLipSplat.actor),null);
+   await page.screenshot({path:`${output}/${name}-${id}-inactive.png`});
+   await page.screenshot({path:`${output}/${name}-${id}-face-inactive.png`,clip:face});
    snapshots.push({id,open,bite,round,closed,face,transformationFrames});
    writeFileSync(`${output}/${name}-progress.json`,JSON.stringify({name,nativePaint,silent:true,complete:false,revision,snapshots,errors,warnings},null,2));
    console.log(name,id,'PASS');

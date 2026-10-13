@@ -1,7 +1,7 @@
 import test from 'node:test';import assert from 'node:assert/strict';
 import {readFileSync} from 'node:fs';
 import {anchorBlend,createPaintedAnchor,gaussianFlowPhase} from '../buergeramt-painted-anchor.js';
-import {nativeMouthRect,nativeMouthAngle,nativeMouthGap} from '../buergeramt-mouth-paint.js';
+import {nativeMouthRect,nativeMouthAngle,nativeMouthGap,nativeMouthProfile,mouthProfileValues,validateMouthProfile} from '../buergeramt-mouth-paint.js';
 const manifest=JSON.parse(readFileSync(new URL('../assets/buergeramt/animation/clerk.json',import.meta.url)));
 
 test('mouth registrations belong to each encoded painting, independently of names and arc timing',()=>{
@@ -12,7 +12,7 @@ test('mouth registrations belong to each encoded painting, independently of name
   for(const arc of copy.arcs)arc.duration*=2;
   for(const state of original.states){const a=nativeMouthRect(original,state.id),b=nativeMouthRect(copy,renames.get(state.id)??state.id);assert.deepEqual(a,b);assert(a.every(Number.isFinite));assert(a[0]>0&&a[0]<1&&a[1]>0&&a[1]<1);assert.deepEqual(a,[state.mouth_xywh[0]/original.canvas_xy[0],1-state.mouth_xywh[1]/original.canvas_xy[1],state.mouth_xywh[2]/original.canvas_xy[0],state.mouth_xywh[3]/original.canvas_xy[1]])}
   delete copy.states[1].mouth_xywh;assert.throws(()=>nativeMouthRect(copy,copy.states[1].id),/Unregistered native mouth pose/);
-  for(const state of original.states){assert.equal(nativeMouthAngle(original,state.id),state.mouth_angle);assert.deepEqual(nativeMouthGap(original,state.id),state.mouth_gap)}
+  for(const state of original.states){assert.equal(nativeMouthAngle(original,state.id),state.mouth_angle);assert.deepEqual(nativeMouthGap(original,state.id),state.mouth_gap);assert.deepEqual(nativeMouthProfile(original,state.id),nativeMouthProfile(copy,renames.get(state.id)??state.id))}
   delete copy.states[0].mouth_angle;assert.throws(()=>nativeMouthAngle(copy,copy.states[0].id),/Unregistered native lip angle/);
   copy.states[0].mouth_angle=NaN;assert.throws(()=>nativeMouthAngle(copy,copy.states[0].id),/Unregistered native lip angle/);
  }
@@ -22,9 +22,17 @@ test('native mouth coordinates survive the existing source-to-manifest build con
  const load=path=>JSON.parse(readFileSync(new URL('../'+path,import.meta.url))),base='assets/sprite-sources/buergeramt/gaussian-arcs/';
  for(const name of ['aktenkurier','archivbotin','formularsammler','nummernfluesterer','nachtschichtmelderin','pfandarchitektin','kopiependler','warteschlangenpoetin','renter','parent','pensioner']){
   const spec=load(base+name+(['renter','parent','pensioner'].includes(name)?'':'-work-gesture')+'.json'),compiled=load('assets/buergeramt/animation/'+name+'.json');
-  for(const state of spec.states){const key=compiled.states.find(s=>s.id===state.id);assert.deepEqual(key.mouth_xywh,state.mouth_xywh);assert.equal(key.mouth_angle,state.mouth_angle);assert.deepEqual(key.mouth_gap,state.mouth_gap)}
+  for(const state of spec.states){const key=compiled.states.find(s=>s.id===state.id);assert.deepEqual(key.mouth_xywh,state.mouth_xywh);assert.equal(key.mouth_angle,state.mouth_angle);assert.deepEqual(key.mouth_gap,state.mouth_gap);assert.deepEqual(key.mouth_profile,state.mouth_profile)}
  }
- for(const state of [...load('assets/previews/knick-splats/manifest.json').anchors,...load(base+'knick-stamp-handoff.json').frames]){const key=manifest.states.find(s=>s.id===state.id);assert.deepEqual(key.mouth_xywh,state.mouth_xywh);assert.equal(key.mouth_angle,state.mouth_angle)}
+ for(const state of [...load('assets/previews/knick-splats/manifest.json').anchors,...load(base+'knick-stamp-handoff.json').frames]){const key=manifest.states.find(s=>s.id===state.id);assert.deepEqual(key.mouth_xywh,state.mouth_xywh);assert.equal(key.mouth_angle,state.mouth_angle);assert.deepEqual(key.mouth_profile,state.mouth_profile)}
+});
+
+test('mouth profiles reject crossed surfaces, detached corners and non-finite controls',()=>{
+ const profile=nativeMouthProfile(manifest,'ready');
+ for(const change of [p=>p.source_upper[2]=p.crease[2]+.1,p=>p.open_lower[4]+=.1,p=>p.crease[1]=NaN,p=>p.corners.reverse(),p=>p.width[1]=1]){
+  const bad=structuredClone(profile);change(bad);assert.throws(()=>validateMouthProfile(bad,'test'),/native lip/);
+ }
+ const values=mouthProfileValues(profile);assert.equal(values.curves.length,16);assert.deepEqual(values.tail,[profile.source_lower[4],...profile.corners]);
 });
 test('liquid phase lag stays monotonic, recovers keys and does not stop at inbetweens',()=>{
  // The closed-form derivative is bounded by 1 ± .085π; numerical sampling
@@ -56,7 +64,8 @@ function rig(){
  const disposed=[],closed=[],members=new Set();
  class Vector2{set(x,y){this.x=x;this.y=y}}
  class Vector4{fromArray(a){[this.x,this.y,this.z,this.w]=a;return this}}
- class Vector3{constructor(){this.x=this.y=this.z=0}copy(other){Object.assign(this,other);return this}}
+ class Vector3{constructor(){this.x=this.y=this.z=0}copy(other){Object.assign(this,other);return this}fromArray(a){[this.x,this.y,this.z]=a;return this}}
+ class Matrix4{fromArray(a){this.elements=a.slice();return this}}
  class Color{copy(other){Object.assign(this,other);return this}}
  class Texture{constructor(bitmap){this.image=bitmap}dispose(){disposed.push(this)}}
  class Attribute{constructor(array,itemSize){this.array=array;this.itemSize=itemSize}}
@@ -64,7 +73,7 @@ function rig(){
  class InstancedBufferGeometry extends PlaneGeometry{constructor(){super();this.isInstancedBufferGeometry=true}}
  class MeshBasicMaterial{constructor(options){Object.assign(this,options);this.userData={};this.color=new Color()}dispose(){}}
  class Mesh{constructor(geometry,material){this.geometry=geometry;this.material=material;this.position=new Vector3();this.quaternion={copy(other){Object.assign(this,other)}};this.scale={set:(x,y,z)=>{this.size=y;this.stretch=[x,y,z]}};this.userData={}}}
- const THREE={Vector2,Vector3,Vector4,Color,Texture,PlaneGeometry,InstancedBufferGeometry,Float32BufferAttribute:Attribute,InstancedBufferAttribute:Attribute,MeshBasicMaterial,Mesh,ShaderChunk:{map_fragment:'texture2D(map,vMapUv)'},SRGBColorSpace:'srgb',LinearFilter:'linear',DoubleSide:'both'};
+ const THREE={Vector2,Vector3,Vector4,Matrix4,Color,Texture,PlaneGeometry,InstancedBufferGeometry,Float32BufferAttribute:Attribute,InstancedBufferAttribute:Attribute,MeshBasicMaterial,Mesh,ShaderChunk:{map_fragment:'texture2D(map,vMapUv)'},SRGBColorSpace:'srgb',LinearFilter:'linear',DoubleSide:'both'};
  const owner={attachPaint:mesh=>members.add(mesh),retirePaint:mesh=>members.delete(mesh)};
  const source={geometry:{parameters:{height:1.9}},scale:{y:1.2},position:{x:3,y:1.14,z:-7},quaternion:{},material:{color:{r:.8,g:.7,b:.6},userData:{breath:{value:.2}}}};
  return{THREE,owner,source,disposed,closed,members};
@@ -80,6 +89,8 @@ test('paint keeps registered canvas aspect/floor, bounds residency and cancels l
   const shader={uniforms:{},vertexShader:'#include <begin_vertex>',fragmentShader:'#include <map_fragment>'};mesh.material.onBeforeCompile(shader);
   assert.equal(shader.uniforms.anchorLipAngleA.value,manifest.states.find(s=>s.id===manifest.segments[0].from).mouth_angle);
   assert.equal(shader.uniforms.anchorLipAngleB.value,manifest.states.find(s=>s.id===manifest.segments[0].to).mouth_angle);
+  assert.deepEqual(shader.uniforms.anchorLipCurvesA.value.elements,mouthProfileValues(nativeMouthProfile(manifest,manifest.segments[0].from)).curves);
+  assert.deepEqual(shader.uniforms.anchorLipCurvesB.value.elements,mouthProfileValues(nativeMouthProfile(manifest,manifest.segments[0].to)).curves);
   paint.update({segment:0,u:0,arc:'raise'},r.source,true,{speaking:false,lipShape:[1,1,1,1]});
   assert.deepEqual(['x','y','z','w'].map(key=>shader.uniforms.anchorLipShape.value[key]),[0,0,0,0],'inactive speech cannot retain a rounded or biting deformation');
   assert.equal(shader.uniforms.anchorSpeaking.value,0,'inactive speech preserves pre-open source paint');

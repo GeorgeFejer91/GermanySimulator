@@ -1107,9 +1107,15 @@ Six fresh hardware-ANGLE office benchmark runs passed after depth integration, a
 
 **Connected lip surface, 2026-10-13.** The shared native/atlas mouth painter uses
 a compact invertible local paint field with attached corners, bounded lower-jaw
-support and a distinct contact shape. All 67 native keys own `mouth_angle` and
-`mouth_gap` (upper/lower source boundaries in registered rect-height units) beside
-`mouth_xywh`; their source specifications and builder preserve these fields.
+support and a distinct contact shape. All 67 native keys own `mouth_angle`,
+`mouth_gap` and `mouth_profile` beside `mouth_xywh`; their source specifications
+and builder preserve these fields. Each profile traces its own painted corners,
+five-point crease, upper/lower source cavity and maximum opening contours,
+rounding response and tooth exposure. Shape-preserving Hermite interpolation
+keeps the surfaces ordered and corners connected. The same normalized speech
+cues drive each pose within its own anatomical limits. The 41 atlas source poses
+have separate fitted profiles in `assets/buergeramt/characters/mouth-profiles.json`;
+load failure preserves original paint and does not cut a mouth hole.
 Each paired endpoint articulates before the existing body transport. Atlas
 mouths carry centre and both axes through the actual baked field and texture
 crop, including local scale/shear. The 15 office actors share this implementation;

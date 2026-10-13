@@ -106,7 +106,7 @@ def knick():
  old=json.loads((ROOT/'assets/previews/knick-splats/manifest.json').read_text())
  states=[]
  for a,l in zip(old['anchors'],old['landmarks']):
-  states.append({'id':a['id'],'file':'assets/previews/knick-splats/'+a['preview'],'landmarks':l,'mouth_xywh':a['mouth_xywh'],'mouth_angle':a['mouth_angle'],'mouth_gap':a['mouth_gap'],'role':'main' if a['id'] in ('ready','raised','contact','refusal') else 'transition'})
+  states.append({'id':a['id'],'file':'assets/previews/knick-splats/'+a['preview'],'landmarks':l,'mouth_xywh':a['mouth_xywh'],'mouth_angle':a['mouth_angle'],'mouth_gap':a['mouth_gap'],'mouth_profile':a['mouth_profile'],'role':'main' if a['id'] in ('ready','raised','contact','refusal') else 'transition'})
  times=[0,1.3,2.5,3.1,3.45,4.4,5.1,5.35,6.2,6.65,7.1,7.55,8,8.45,9.1]
  handoff=ROOT/'assets/sprite-sources/buergeramt/gaussian-arcs/knick-stamp-handoff.json'
  if handoff.exists():

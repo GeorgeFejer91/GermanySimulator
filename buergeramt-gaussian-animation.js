@@ -1,5 +1,5 @@
 // One registered Gaussian cloud per actor. The simulation supplies all action time.
-import {createPaintedAnchor,gaussianFlowGlsl} from './buergeramt-painted-anchor.js?v=20261013-connected-lips';
+import {createPaintedAnchor,gaussianFlowGlsl} from './buergeramt-painted-anchor.js?v=20261013-character-lips';
 const clamp=value=>Math.max(0,Math.min(1,Number.isFinite(value)?value:0));
 const RECORD_BYTES=24,TEXTURE_WIDTH=256,MAX_SAMPLES=20000,MAX_SEGMENTS=32;
 

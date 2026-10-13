@@ -1,6 +1,8 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import vm from 'node:vm';
+import {readFileSync} from 'node:fs';
+import {validateMouthProfile} from '../buergeramt-mouth-paint.js';
 import {harness,source} from './amt-harness.mjs';
 await import('../buergeramt-lips.js');
 const {createTrack,score,poseAt,mouths}=globalThis.GermanyAmtLips;
@@ -178,4 +180,23 @@ test('native playback survives slow media progress and bounds a true stall witho
  resumed.ended=true;resumed.onended();assert.equal(level.lipSpeech.actor,null);
  p.content('FRAU KNICK','Die neue Zeile.');const newest=players.at(-1);resumed.onended();assert.equal(newest.src,'./selected-knick.mp3');assert.equal(level.lipSpeech.mode,'recorded');
  level.replay(h.config);h.tick(23000);assert.equal(newest.src,'');assert.equal(level.lipSpeech.actor,null);
+});
+
+
+test('all 41 atlas poses own fitted profiles; failed loading and rear poses retain original paint',()=>{
+ const lips=globalThis.GermanyAmtLips;
+ const data=JSON.parse(readFileSync(new URL('../assets/buergeramt/characters/mouth-profiles.json',import.meta.url)));
+ assert.equal(Object.values(data.profiles).flat().length,41);
+ for(const [id,profiles] of Object.entries(data.profiles))for(const [pose,profile] of profiles.entries()){
+  assert.equal(validateMouthProfile(profile,id+'/'+pose),profile);
+ }
+ lips.setProfiles(data,validateMouthProfile);
+ for(const [id,profiles] of Object.entries(data.profiles))for(const [mouthPose,profile] of profiles.entries()){
+  const actor={id,lipId:id,mouthPose,performance:id==='clerk'};
+  assert.deepEqual(lips.displayedMouthProfile(actor),profile);
+  actor.mouthPose=null;assert.equal(lips.displayedMouthProfile(actor),null);
+ }
+ const bad=structuredClone(data);bad.profiles.parent[0].source_upper[2]=2;
+ assert.throws(()=>lips.setProfiles(bad,validateMouthProfile));
+ assert.deepEqual(lips.displayedMouthProfile({id:'parent'}),data.profiles.parent[0],'failed registration must not replace validated profiles');
 });
