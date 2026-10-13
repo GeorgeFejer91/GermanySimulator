@@ -1289,16 +1289,73 @@ oral patch's half extents, matching `amtMouthPaint`'s normalized source UVs.
 Native paint and clouds also retain host nonuniform
 scale without restarting their action or media clocks.
 
-Current authored lines finish before walking, rear views and the departure turn:
-E dialogue first parks a moving actor in gesture, and its completion schedules
-return only after `lips.finish`; the omen turn follows actual speech completion,
-glare and unwind. Those unregistered hidden-mouth views keep their original
-paint instead of receiving a previous frontal rectangle. New speaking walk or
-profile art would require its own registered source poses. This is coverage for
-the current office, not a general reconstructed face rig. The project and
+E dialogue parks a moving actor in gesture, and its completion schedules return
+after `lips.finish`. Spontaneous speech is different: nine ambient lines across
+seven roaming actors continue their existing walking routes. The 2026-10-13
+audit found that the former blanket walking suppression missed those mouths.
+The additive `walking` table now fits 24 individual down/right/left source
+profiles and all 240 visible displayed samples; its 80 rear/up samples remain
+explicitly null. Exact detail and actual atlas cells have their own measured
+centres and full tangent/normal bases in canonical 640 × 832 pixels. Dense
+mobile detail uses the corresponding normalized registration. The selected
+distance phase and camera-relative view remain authoritative; walking never
+uses the unrelated action-idle transport. The omen departure turn follows actual
+speech completion, glare and unwind, and keeps its unowned source paint.
+This is office coverage, not a general reconstructed face rig. The project and
 installed `animate-2d-characters` skill now describe pose registration, shared
 ownership, capture-time accuracy and native/fallback transformation checks; its
 portable synthetic speech cue is explicitly distinguished from full lip sync.
+
+**Connected surface and exhaustive audit (2026-10-13).** Each of the 67 native
+source states and 41 action/idle atlas registrations owns fitted lip corners,
+crease, existing cavity, maximum opening, width/rounding and tooth limits.
+Five-point shape-preserving interpolation and the cheek guard retain attached
+contours. Native endpoints articulate before body transport; atlas mouths use
+the source cell's transported basis. Owned closed cues compress pre-open source
+cavities. Inactive speech restores the actual painting, including an authored
+open expression; that is not a promise of a visually closed rest pose.
+
+The legacy clerk TALK row's baked fill is misplaced beside the real crease.
+`clerkPaintFrame` selects the matching unbaked READY breath column before
+connected articulation, for all eight talk samples in detail and atlas views.
+Its requested frame/cadence and source images remain unchanged. Missing or
+partially invalid metadata keeps original paint without a mouth hole. Explicit
+inactive/replaced relief ownership suppresses stale legacy omen speech; only
+clients that omit authoritative ownership may use the legacy recording fallback.
+
+The audit inventories both directions of every native arc, generated atlas
+samples, normal native-media completion and replay/replacement separately.
+Former held-Ah/forward-only captures and recordings cancelled before their end
+cannot establish those missing cases. Current evidence stays under
+`output/connected-lips/audit-all-sequences/`; its inventory also distinguishes
+unrigged city/quiz/procedural faces from the office and separate relief/flame
+mouth systems. Mouth attachment acceptance does not certify the retained
+whole-face/body correspondence softness between some authored paintings.
+
+**Audit follow-up validation (2026-10-14).** The candidate integrates published
+`432c240` without changing office art/audio or body, route and media clocks.
+The three-view source matrices cover every walking sample, actual action/idle
+atlas cell and all native arcs in both directions. Native intervals have 470
+sampled positions per viewport, each with opening, closed, wide, round and
+contact cues. All 15 instances complete their own normal-speed recording in
+native and actual-atlas modes on desktop and portrait emulation; all eight
+moving families also complete in walking detail and actual-atlas modes. These
+92 cases pass natural end, idle cleanup, held pause, replay and replacement.
+Their body lanes are forced fixtures, not natural mission traversal.
+
+Six complete omen cases pass desktop, both mobile orientations, reduced motion,
+missing audio and missing splat, including all nine departure-turn samples and
+return to idle. Its existing browser-speech failure path remains estimated.
+Missing profiles retain original paint; mobile actual clerk requests and
+native/atlas admission handoff also pass. The Jobcenter's unchanged recording
+now supplies hash-bound closed/open/round/contact cues through the same sampler;
+matched current furnace-style captures verify closure without altering its
+paired eyes or faster forward pinch. All 878 deterministic tests and 24 quiet
+cold browser contexts pass. Camera and Physics receipts and exact resource
+comparisons remain in the ignored audit output. These checks cover existing
+mouth systems; new JWD painted rigs, unrigged city/quiz faces, retained whole-face
+ghosting, physical Android, perceptual listening and exact phoneme accuracy are
+outside this acceptance.
 
 **Consistency acceptance.** Independent Physics and Camera reviews accept the
 affected office runtime on tree `bfa5efa2d94a9e1d6ea9f0ad19a7b92426648be1`

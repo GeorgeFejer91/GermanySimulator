@@ -4,13 +4,19 @@ import {readFileSync,mkdirSync,writeFileSync} from 'node:fs';
 import assert from 'node:assert/strict';
 import {createHash} from 'node:crypto';
 import {execFileSync} from 'node:child_process';
-const baselineFiles=['buergeramt.js','world3d.js','buergeramt-lips.js','buergeramt-mouth-paint.js','buergeramt-painted-anchor.js','buergeramt-gaussian-scene.js','buergeramt-gaussian-animation.js'];
+import {auditMouthCompletion,auditClerkRequests} from './audit-mouth-completion.mjs';
+import {auditMouthFrames} from './audit-mouth-frames.mjs';
+const baselineFiles=['tools/playtest-buergeramt-lips.mjs','tools/audit-mouth-completion.mjs','tools/audit-mouth-frames.mjs','speech-mouth.js','jobcenter.js','assets/audio/jobcenter/overlord.json','buergeramt.js','world3d.js','buergeramt-lips.js','buergeramt-mouth-paint.js','buergeramt-painted-anchor.js','buergeramt-gaussian-scene.js','buergeramt-gaussian-animation.js'];
 const sources=process.env.PLAYTEST_BASE_REF?new Map(baselineFiles.map(file=>[file,execFileSync('git',['show',process.env.PLAYTEST_BASE_REF+':'+file],{encoding:'utf8',maxBuffer:8_000_000})])):null;
 const fixtureSource=file=>sources?.get(file)??readFileSync(file,'utf8');
 const motionOnly=process.env.PLAYTEST_MOTION_ONLY==='1';
 const nativePaint=motionOnly||process.env.PLAYTEST_NATIVE_PAINT==='1';
 const transforms=process.env.PLAYTEST_TRANSFORMS==='1';
 const poseOnly=process.env.PLAYTEST_POSE_ONLY==='1';
+const cueMatrix=process.env.PLAYTEST_CUE_MATRIX==='1';
+const completionOnly=process.env.PLAYTEST_COMPLETION_ONLY==='1';
+const samplesOnly=process.env.PLAYTEST_SAMPLES_ONLY==='1';
+const clerkRequestsOnly=process.env.PLAYTEST_CLERK_REQUESTS_ONLY==='1';
 if(motionOnly&&sources)throw new Error('Motion capture requires the current production source');
 const nativeIds=['clerk','aktenkurier','archivbotin','formularsammler','nummernfluesterer','nachtschichtmelderin','pfandarchitektin','kopiependler','warteschlangenpoetin','renter','parent','pensioner'];
 const readRevision=()=>Object.fromEntries(['buergeramt.js','world3d.js','buergeramt-lips.js','buergeramt-lipsync.js','buergeramt-mouth-paint.js','buergeramt-splat.js','buergeramt-gaussian-scene.js','buergeramt-painted-anchor.js','assets/buergeramt/speech/mouth-cues.js','assets/buergeramt/characters/mouth-profiles.json',...(nativePaint?nativeIds.map(id=>'assets/buergeramt/animation/'+id+'.json'):[])].map(f=>[f,createHash('sha256').update(fixtureSource(f)).digest('hex')]));
@@ -18,12 +24,18 @@ const {chromium}=createRequire(import.meta.url)(process.env.PLAYWRIGHT_MODULE||'
 const output=process.env.PLAYTEST_OUTPUT||'output/lip-motion/review';mkdirSync(output,{recursive:true});
 const browser=await chromium.launch({headless:true,executablePath:process.env.CHROMIUM_PATH,args:['--mute-audio']});
 const reports=[];
-async function poseCue(page,id,index){
+async function poseCue(page,id,index,settleMs=150){
  await page.evaluate(id=>{window.lipFixtureTime=0;window.lipTestSpeech=null;__lipProbe.content(id==='clerk'?'FRAU KNICK':id,'Mama fünf Omi schöne Euro!',[],null,null,null,{id,tone:'procedural',valence:0})},id);
  await page.waitForFunction(()=>!!window.lipTestSpeech);
- await page.evaluate(index=>{lipTestSpeech.onresume?.();lipTestSpeech.onboundary({charIndex:index});window.lipFixtureTime=35;window.lipFixtureRenderTime+=100;Germany3D.sync();lipTestSpeech.onpause?.();Germany3D.sync()},index);await page.waitForTimeout(150);
+ await page.evaluate(index=>{
+  lipTestSpeech.onresume?.();lipTestSpeech.onboundary({charIndex:index});window.lipFixtureTime=35;
+  const progress=BuergeramtLevel.lipSpeech.index-index;
+  if(!(progress>0))throw Error('Controlled speech cue did not advance');
+  window.lipFixtureTime=35*.5/progress;window.lipFixtureRenderTime+=100;
+  Germany3D.sync();lipTestSpeech.onpause?.();Germany3D.sync();
+ },index);await page.waitForTimeout(settleMs);
 }
-async function faceClip(page,id){
+async function faceClip(page,id,forceAtlas=false){
  return page.evaluate(async({id,nativePaint})=>{
   const T=await import('https://cdn.jsdelivr.net/npm/three@0.186.0/build/three.module.js');
   const actor=[...__lipRender.amtMoving,...__lipRender.amtCharacters].find(a=>a.id===id||a.lipId===id),height=actor.mesh.geometry.parameters.height*actor.mesh.scale.y;
@@ -45,7 +57,7 @@ async function faceClip(page,id){
   }
   const x=Math.max(0,Math.floor(Math.min(...points.map(p=>p[0])))),y=Math.max(0,Math.floor(Math.min(...points.map(p=>p[1]))));
   return{x,y,width:Math.max(1,Math.min(innerWidth-x,Math.ceil(Math.max(...points.map(p=>p[0])))-x)),height:Math.max(1,Math.min(innerHeight-y,Math.ceil(Math.max(...points.map(p=>p[1])))-y))};
- },{id,nativePaint});
+ },{id,nativePaint:nativePaint&&!forceAtlas});
 }
 try{
  const viewports=[['desktop',1280,800],['android-portrait',390,844],['android-landscape',844,390],['reduced-motion',1280,800],['asset-failure',1280,800],['profile-failure',1280,800]]
@@ -66,8 +78,8 @@ try{
   page.on('pageerror',e=>{errors.push(e.message);console.log('pageerror',e.stack)});page.on('console',m=>{if(m.type()==='error'){warnings.push(m.text());console.log('browser',m.text().slice(0,500))}});
   page.on('requestfailed',request=>console.log('requestfailed',request.url(),request.failure()?.errorText));
   await page.route('**/buergeramt-lips.js?*',route=>route.fulfill({contentType:'text/javascript',body:fixtureSource('buergeramt-lips.js').replace('createTrack(now=()=>performance.now())','createTrack(now=()=>window.lipFixtureTime??performance.now())').replace(/(const poseGaps=\{[^\n]+\};)/,'$1window.__lipGapTable=poseGaps;')}));
-  await page.route('**/buergeramt.js?*',route=>route.fulfill({contentType:'text/javascript',body:fixtureSource('buergeramt.js').replace('createTrack(()=>visualClock*1000)','createTrack(()=>window.lipFixtureTime??visualClock*1000)').replace('requestAnimationFrame(()=>{if(current()&&!settled)','queueMicrotask(()=>{if(current()&&!settled)').replace(/\}\)\(\);\s*$/,'window.__lipProbe={content,view,setStage,characters,cancelSpeech,showCharacter,beginOmen,resetOmen,omen,get options(){return options}};})();')}));
-  await page.route('**/world3d.js?*',route=>route.fulfill({contentType:'text/javascript',body:fixtureSource('world3d.js').replace('mobile:amtMobile,reducedMotion:amtReducedMotion});',nativePaint?'mobile:amtMobile,reducedMotion:amtReducedMotion});':'mobile:amtMobile,reducedMotion:{matches:true}});').replace('updateAmtMouth(level,now);','updateAmtMouth(level,window.lipFixtureRenderTime??now);').replace('window.Germany3D={ready:true,','window.__lipRender={scene:amtScene,camera:amtCamera,renderer,amtMoving,amtCharacters};window.Germany3D={ready:true,')}));
+  await page.route('**/buergeramt.js?*',route=>route.fulfill({contentType:'text/javascript',body:fixtureSource('buergeramt.js').replace('createTrack(()=>visualClock*1000)','createTrack(()=>window.lipFixtureTime??visualClock*1000)').replace('requestAnimationFrame(()=>{if(current()&&!settled)','queueMicrotask(()=>{if(current()&&!settled)').replace(/\}\)\(\);\s*$/,'window.__lipProbe={content,view,setStage,characters,cancelSpeech,showCharacter,beginOmen,resetOmen,omen,get clerkAnimation(){return clerkAnimation},startRecorded(id,path){const clip=GermanySimulatorAudioText.recordings[path];cancelSpeech();line.textContent=clip.source;lips.prepare(id,clip.source,1);say(clip.source,()=>{},null,null,{rate:1},clip.voiceId)},get options(){return options}};})();')}));
+  await page.route('**/world3d.js?*',route=>route.fulfill({contentType:'text/javascript',body:fixtureSource('world3d.js').replace('mobile:amtMobile,reducedMotion:amtReducedMotion});',nativePaint?'mobile:amtMobile,reducedMotion:amtReducedMotion});':'mobile:amtMobile,reducedMotion:{matches:true}});').replace('animateAmtCharacters(now,level);animateAmtMoving(now,level);','animateAmtCharacters(window.lipFixtureBodyTime??now,level);animateAmtMoving(window.lipFixtureBodyTime??now,level);').replace('const actionDetail=close&&','const actionDetail=window.lipAuditAtlas!==true&&close&&').replace('const walkDetail=close&&','const walkDetail=window.lipAuditAtlas!==true&&close&&').replace('const detailed=close&&!!actor.detail?.image;','const detailed=window.lipAuditAtlas!==true&&close&&!!actor.detail?.image;').replace('updateAmtMouth(level,now);','updateAmtMouth(level,window.lipFixtureRenderTime??now);').replace('window.Germany3D={ready:true,','window.__lipRender={scene:amtScene,camera:amtCamera,renderer,amtMoving,amtCharacters};window.Germany3D={ready:true,')}));
   if(name==='profile-failure')await page.route('**/characters/mouth-profiles.json*',route=>route.abort('failed'));
   if(name==='asset-failure')await page.route('**/omen/aktenkurier.splat*',route=>route.abort('failed'));
   await page.goto((process.env.GAME_URL||'http://127.0.0.1:8876/index.html')+'?geheim=buergeramt&voicePreview=1',{waitUntil:'commit',timeout:45000});
@@ -85,25 +97,42 @@ try{
    // This fixture checks the atlas fallback; active native Gaussian paint has
    // its own production-scene fixture. Disable only admission in this context.
    const nativeCharacters=Object.getOwnPropertyDescriptor(BuergeramtLevel,'characters').get,nativeClerk=Object.getOwnPropertyDescriptor(BuergeramtLevel,'clerkPerformance').get;
+   window.lipReadClerk=nativeClerk;
    if(motionOnly){
     Object.defineProperty(BuergeramtLevel,'characters',{get:()=>nativeCharacters().map(a=>({...a,mode:a.id==='aktenkurier'?'gesture':a.mode,animation:lipTransformOverrides[a.id]??a.animation}))});
    }else if(!nativePaint){
     // A work-mode actor synthesizes its own native work anchor; select the
     // frozen gesture fallback so a null animation actually prevents admission.
-    Object.defineProperty(BuergeramtLevel,'characters',{get:()=>nativeCharacters().map(a=>({...a,mode:lipTransformOverrides[a.id]?.mode??'gesture',animation:null}))});
-    Object.defineProperty(BuergeramtLevel,'clerkPerformance',{get:()=>({...nativeClerk(),row:lipTransformOverrides.clerk?.row??nativeClerk().row,animation:null})});
+    Object.defineProperty(BuergeramtLevel,'characters',{get:()=>nativeCharacters().map(a=>({...a,mode:lipTransformOverrides[a.id]?.mode??'gesture',phase:lipTransformOverrides[a.id]?.phase??a.phase,frame:lipTransformOverrides[a.id]?.frame??a.frame,heading:lipTransformOverrides[a.id]?.heading??a.heading,animation:null}))});
+    Object.defineProperty(BuergeramtLevel,'clerkPerformance',{get:()=>({...nativeClerk(),row:lipTransformOverrides.clerk?.row??nativeClerk().row,frame:lipTransformOverrides.clerk?.frame??nativeClerk().frame,animation:null})});
     Object.defineProperty(BuergeramtLevel,'stationaryAnimations',{get:()=>({})});
    }else{
     // Hold native work anchors for this articulation fixture. Natural body
     // admission and return arcs are covered by the separate scene playtest.
     const stationary=Object.getOwnPropertyDescriptor(BuergeramtLevel,'stationaryAnimations').get;
-    Object.defineProperty(BuergeramtLevel,'characters',{get:()=>nativeCharacters().map(a=>({...a,mode:transforms?'gesture':a.mode,animation:lipTransformOverrides[a.id]??(transforms?{...a.animation,arc:null,pose:'work',phase:1}:a.animation)}))});
+    Object.defineProperty(BuergeramtLevel,'characters',{get:()=>nativeCharacters().map(a=>({...a,mode:lipTransformOverrides[a.id]?.mode??(transforms?'gesture':a.mode),phase:lipTransformOverrides[a.id]?.phase??a.phase,frame:lipTransformOverrides[a.id]?.frame??a.frame,heading:lipTransformOverrides[a.id]?.heading??a.heading,animation:lipTransformOverrides[a.id]?.mode==='walk'?null:lipTransformOverrides[a.id]??(transforms?{...a.animation,arc:null,pose:'work',phase:1}:a.animation)}))});
     Object.defineProperty(BuergeramtLevel,'stationaryAnimations',{get:()=>Object.fromEntries(Object.entries(stationary()).map(([id,state])=>[id,lipTransformOverrides[id]??{...state,arc:null,pose:id.startsWith('clerk-desk')?'ready':'work'}]))});
     Object.defineProperty(BuergeramtLevel,'clerkPerformance',{get:()=>{const state=nativeClerk();return{...state,row:lipTransformOverrides.clerk?.row??0,animation:lipTransformOverrides.clerk??{...state.animation,arc:null,pose:'ready',phase:1}}}});
    }
    window.lipOriginalUpdate=BuergeramtLevel.update;BuergeramtLevel.update=()=>{};__lipProbe.options.voiceOn=()=>true;window.lipFixtureTime=0;window.lipFixtureRenderTime=performance.now();__lipProbe.setStage('character');
    window.lipActorOrigins=__lipProbe.characters.map(a=>({id:a.id,x:a.x,z:a.z}));
   },{nativePaint,transforms,motionOnly});
+  if(clerkRequestsOnly){
+   const requests=await auditClerkRequests({page,output,name,revision});assert.deepEqual(errors,[]);
+   reports.push({name,requests,revision,silent:true,physicalAndroid:false,errors,warnings});
+   const video=page.video();await context.close();if(video)await video.saveAs(`${output}/${name}-clerk-requests.webm`);writeFileSync(`${output}/results.json`,JSON.stringify(reports,null,2));continue;
+  }
+  if(samplesOnly){
+   const samples=await auditMouthFrames({page,output,name,revision,poseCue,faceClip});
+   assert.deepEqual(errors,[]);reports.push({name,samples,revision,silent:true,physicalAndroid:false,errors,warnings});
+   const video=page.video();await context.close();if(video)await video.saveAs(`${output}/${name}-samples.webm`);writeFileSync(`${output}/results.json`,JSON.stringify(reports,null,2));continue;
+  }
+  if(completionOnly){
+   const completion=await auditMouthCompletion({page,output,name,nativePaint,revision,faceClip});
+   assert.deepEqual(errors,[]);
+   reports.push({name,nativePaint,completion,silent:true,physicalAndroid:false,revision,errors,warnings});
+   const video=page.video();await context.close();if(video)await video.saveAs(`${output}/${name}-completion.webm`);writeFileSync(`${output}/results.json`,JSON.stringify(reports,null,2));continue;
+  }
   if(motionOnly){
    const clipPath=motionActor==='clerk'?'./assets/voices/knick/knick-registration-identityfix-reply-1.mp3':'./assets/voices/amt-fever/amt-horst-stempelmann-fever-1.mp3';
    const setup=await page.evaluate(async({actor,clipPath})=>{
@@ -251,6 +280,7 @@ try{
     if(nativePaint&&process.env.PLAYTEST_ALL_KEYS==='1'){
      const manifest=JSON.parse(readFileSync('assets/buergeramt/animation/'+metadata.manifestId+'.json'));
      steps=manifest.arcs.flatMap(arc=>[0,...arc.segments.flatMap(s=>[(s.start+s.end)/2,s.end])].map(time=>({arc:metadata.performance?arc.id:'work-gesture-work',phase:time/arc.duration*(metadata.performance?1:.5)})));
+     if(metadata.performance)steps.push(...steps.slice().map(step=>({...step,arc:step.arc+'-back'})));
      if(!metadata.performance)steps.push(...steps.slice().reverse().map(step=>({...step,phase:1-step.phase})));
     }
     for(const [number,step] of steps.entries()){
@@ -265,6 +295,26 @@ try{
      await page.screenshot({path:`${output}/${name}-${id}-transform-${number}.png`});
      const crop=await faceClip(page,id);await page.screenshot({path:`${output}/${name}-${id}-transform-face-${number}.png`,clip:crop});
      transformationFrames.push({step,frame});
+     if(cueMatrix){
+      const cues=[['closed',0,[0,0,0,0]],['wide',12,[.65,1,0,0]],['round',10,[.62,0,1,0]],['bite',5,[.18,.1,0,1]]];
+      const articulated=[];
+      for(const [cue,index,expected] of cues){
+       await poseCue(page,id,index);
+       const observed=await page.evaluate(({id,key})=>{
+        Germany3D.sync();const actor=[...__lipRender.amtMoving,...__lipRender.amtCharacters].find(a=>a.id===id||a.lipId===id);
+        return{speech:BuergeramtLevel.lipSpeech,anchor:Germany3D.amtGaussian.actors.find(a=>a.id===key)?.anchor,registration:GermanyAmtLips.displayedMouth(actor),foot:actor.mesh.position.y-actor.mesh.geometry.parameters.height*actor.mesh.scale.y/2};
+       },{id,key:metadata.key});
+       assert.equal(observed.speech.actor,id);assert(observed.speech.active);
+       observed.speech.shape.forEach((value,i)=>assert(Math.abs(value-expected[i])<1e-6,`${id}/${cue}: wrong cue component ${i}`));
+       assert.equal(observed.foot,0);assert(observed.registration.every(Number.isFinite));
+       if(nativePaint){assert(observed.anchor?.visible);assert.deepEqual(observed.anchor.lipShape,observed.speech.shape)}
+       const path=`${output}/${name}-${id}-transform-${number}-${cue}.png`;
+       await page.screenshot({path,clip:await faceClip(page,id)});
+       articulated.push({cue,expected,observed,path});
+      }
+      transformationFrames.at(-1).cueMatrix=articulated;
+      await poseCue(page,id,1);
+     }
      if(!nativePaint&&process.env.PLAYTEST_POSE_CLOSURES==='1'){
       await poseCue(page,id,0);
       const closure=await page.evaluate(id=>{const a=[...__lipRender.amtMoving,...__lipRender.amtCharacters].find(a=>a.id===id||a.lipId===id);return{speech:BuergeramtLevel.lipSpeech,profile:GermanyAmtLips.displayedMouthProfile(a),pose:a.mouthPose,key:a.renderKey,opacity:a.mesh.material.opacity,mapped:!!a.mesh.material.map?.image,hole:a.mesh.material.userData.lipHole.value,paint:Germany3D.amtLipSplat}},id);

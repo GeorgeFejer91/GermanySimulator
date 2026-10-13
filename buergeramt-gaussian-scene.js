@@ -1,7 +1,7 @@
 // Optional close-up paint interpolation. The simulation owns every action;
 // the existing render pass and two-job admission queue own preparation/update.
 // Both the encounter and ordinary action paint load this exact module identity.
-export const loadAmtSplatModule=()=>import('./buergeramt-splat.js?v=20261013-steady-reflection');
+export const loadAmtSplatModule=()=>import('./buergeramt-splat.js?v=20261013-mouth-audit');
 export const amtActorOwnsSpeech=(speech,id,actor)=>!!(speech?.active&&(speech.actor===id||speech.actor===actor.id||speech.actor===actor.lipId||actor.performance&&speech.actor==='clerk-'+actor.counter));
 export function createAmtGaussianScene({THREE,renderer,scene,actorLayer=0,queueLoad,mobile=false,reducedMotion}){
   const slots=new Map(),failedActors=new Map(),limit=mobile?1:2;

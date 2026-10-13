@@ -3,7 +3,7 @@ import assert from 'node:assert/strict';
 import {readFileSync} from 'node:fs';
 import {createHash} from 'node:crypto';
 import vm from 'node:vm';
-import {stepJobcenter,sampleJobcenterEnvelope,createJobcenterEncounter,createJobcenterBuilding} from '../jobcenter.js';
+import {stepJobcenter,sampleJobcenterEnvelope,sampleJobcenterMouth,createJobcenterEncounter,createJobcenterBuilding} from '../jobcenter.js';
 import * as T from '../assets/vendor/three/0.186.0/build/three.module.min.js';
 const game=readFileSync(new URL('../game.js',import.meta.url),'utf8');
 const data=JSON.parse(readFileSync(new URL('../assets/audio/jobcenter/overlord.json',import.meta.url)));
@@ -38,6 +38,26 @@ test('encoded-media envelopes are finite, bounded and end in silence',()=>{
  assert.ok(Math.max(...observed)>.9);assert.ok(Math.min(...observed)<.01);
  assert.deepEqual(sampleJobcenterEnvelope(data,data.duration+1),{energy:0,attack:0});
  assert.equal(createHash('sha256').update(readFileSync(new URL('../assets/audio/jobcenter/overlord.mp3',import.meta.url))).digest('hex'),'ba05a622509a990deee97950c9ae99a47868a9969067c991d7c55ac1920f7379');
+});
+
+test('flame mouth closes actual consonants and silence even when the loudness envelope is high',()=>{
+ assert.equal(data.mouthCueBasis.audioSha256,data.audioSha256);
+ assert.equal(data.mouthCues[0][0],0);
+ for(let i=1;i<data.mouthCues.length;i++)assert.equal(data.mouthCues[i-1][1],data.mouthCues[i][0]);
+ let loudClosure=false,rounded=false,contact=false;
+ for(const [start,end,viseme] of data.mouthCues){
+  const time=(start+end)/2,mouth=sampleJobcenterMouth(data,time);
+  for(const key of ['open','spread','round','bite'])assert(Number.isFinite(mouth[key])&&mouth[key]>=0&&mouth[key]<=1);
+  if(['A','X'].includes(viseme)&&end-start>.08){
+   assert.equal(mouth.open,0,'closed acoustic cues override an otherwise loud flame');
+   if(sampleJobcenterEnvelope(data,time).energy>.5)loudClosure=true;
+  }
+  rounded||=mouth.round>.5;contact||=mouth.bite>.5;
+ }
+ assert(loudClosure);assert(rounded);assert(contact);
+ assert.equal(sampleJobcenterMouth(data,data.duration).open,0);
+ assert.equal(sampleJobcenterMouth({...data,mouthCueBasis:{audioSha256:'wrong'}},2).open,0);
+ assert.equal(sampleJobcenterMouth(null,2).open,0);
 });
 test('city entry/exit preserves missions and rejects an occupied ejection point',()=>{
  const start=game.indexOf('function enterJobcenter('),end=game.indexOf('\nfunction interact()',start),entry=game.slice(start,end);
@@ -92,8 +112,10 @@ test('media receipts own ejection; pause, failure and stale visits have bounded 
   const enter=async()=>{encounter.open({onClose:r=>closed.push(r)});await flush();keys.KeyW=true;for(let i=0;i<60;i++)tick();delete keys.KeyW;await flush();assert.equal(encounter.inspect().phase,'speaking')};
   await enter();const first=media.at(-1),oldEnd=first.onended;
   first.currentTime=3;tick();assert.ok(encounter.inspect().energy>0);
+  const mouth=encounter.inspect().mouth;assert(mouth.every(Number.isFinite));
   for(let i=0;i<20;i++)tick();assert.equal(encounter.active,true,'elapsed scene time cannot finish the voice');
   doc.hidden=true;doc.dispatchEvent(new Event('visibilitychange'));const before=encounter.inspect().z;keys.KeyW=true;tick();assert.equal(encounter.inspect().z,before);assert.equal(first.paused,true);
+  assert.deepEqual(encounter.inspect().mouth,mouth,'hidden native pause holds the last media-time mouth');
   doc.hidden=false;doc.dispatchEvent(new Event('visibilitychange'));await flush();assert.equal(first.paused,false);
   tick();deferPlay=true;
   window.dispatchEvent(new Event('blur'));window.dispatchEvent(new Event('focus'));

@@ -39,3 +39,19 @@ test('the Gaussian omen also consumes its owned browser speech shape through red
  assert.equal(omenSplatPose({...state,phase:'glare'}).mouth.open,0);
  assert.equal(omenSplatPose({...state,lipSpeech:{...lipSpeech,active:false}}).mouth.open,0);
 });
+
+test('authoritative speech ownership suppresses stale omen media after cancellation or speaker replacement',()=>{
+ const stale=speech(2.04);
+ assert(sampleOmenMouth(stale).open>.5,'the retained media would otherwise open the mouth');
+ const states=[
+  {active:false,actor:null,mode:'idle',shape:[0,0,0,0],time:0},
+  {active:false,actor:'aktenkurier',mode:'recorded',shape:[0,0,0,0],time:4.76},
+  {active:true,actor:'clerk',mode:'recorded',shape:[1,.25,0,0],time:2.04},
+  {active:true,actor:'aktenkurier',mode:'fallback',shape:[0,0,0,0],time:2.04},
+ ];
+ for(const lipSpeech of states)for(const reducedMotion of [false,true]){
+  const mouth=omenSplatPose({phase:'blackout',speech:stale,lipSpeech},reducedMotion).mouth;
+  assert.deepEqual([mouth.open,mouth.spread,mouth.round,mouth.bite],[0,0,0,0]);
+ }
+ assert(omenSplatPose({phase:'blackout',speech:stale}).mouth.open>.5,'legacy preview callers without a shared speech owner retain their cue binding');
+});
