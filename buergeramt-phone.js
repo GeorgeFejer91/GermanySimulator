@@ -26,11 +26,32 @@ clockService?.sample?.().then(anchor=>{clockAnchor=anchor;updateClock()}).catch(
 const link=new BuergeramtLink("phone",invitation),scanId=Array.from(crypto.getRandomValues(new Uint8Array(12)),n=>n.toString(16).padStart(2,"0")).join("");let currentCall="",resolved="",policeIndex=-1,audioContext=null,phoneFxGain=null,staticSource=null,recordedSpeech=null,voiceGeneration=0,submittedName="",connected=false,scanReady=false,slotActive=false,atCounter=false,finished=false,closed=false,voiceBusy=false,voiceTimer=null,ringTimer=null,callStartTimer=null,armedRound=0,currentRound=0,lastRound=0,scanTimer=null,voiceStartupMs=null,voiceAttempts=0,drag=null,ignoreClickTarget=null;
 let phoneSilent=false,offlineState=false,openingPoliceLine="",openingGreeting="",phoneUtterance=null,answeredAt=null,durationTimer=null,officeTempo=1,ringCadence=null,readableFallback=null,staticFilter=null,staticGain=null,committedRingAtMs=null,callEnding=null;
 const voiceQueue=[],ringSources=new Set();
+let namePrepTimer=null,greetingLease=null;
+const preparedRecordings=new Map();
+function warmPhoneRecordings(){
+ if(preparedRecordings.size||typeof window.Audio!=='function')return;
+ const catalog=window.GermanySimulatorAudioText,binding=catalog?.productionVoices?.kriminalpolizei;
+ if(!binding)return;
+ const entries=Object.values(catalog.clips||{}).filter(entry=>entry.voiceId==='kriminalpolizei'&&entry.profileId===binding.profileId)
+  .sort((a,b)=>(a.id==='kriminalpolizei-phone-01'?-1:b.id==='kriminalpolizei-phone-01'?1:0)).slice(0,8);
+ for(const entry of entries){
+  const source=catalog.recordedClip?.('kriminalpolizei',entry.source);if(!source||preparedRecordings.has(source))continue;
+  try{const clip=new window.Audio(source);clip.preload='auto';clip.load?.();preparedRecordings.set(source,clip)}catch{}
+ }
+}
+function clearPhoneRecordings(){for(const clip of preparedRecordings.values()){clip.onplaying=clip.onended=clip.onerror=null;try{clip.pause();clip.removeAttribute?.('src');clip.load?.()}catch{}}preparedRecordings.clear()}
+function preparePhoneName(value){
+ clearTimeout(namePrepTimer);namePrepTimer=null;
+ const valid=window.GermanyKripoSpeech?.validName(value)||((typeof value==='string'&&value.trim().length>=2&&value.length<=80&&!/[\u0000-\u001f\u007f-\u009f]/.test(value))?value:'');
+ if(valid)warmPhoneRecordings();window.GermanyKripoSpeech?.rememberName(value);
+}
+name.addEventListener('input',()=>{clearTimeout(namePrepTimer);namePrepTimer=setTimeout(()=>preparePhoneName(name.value),1200)});
+name.addEventListener('change',()=>preparePhoneName(name.value));
 function silenceCalls(){if(!slotActive||finished||closed)return;phoneSilent=true;stopCall();currentCall="";resolved="silent";}
 function updateDuration(){const seconds=Math.max(0,Math.floor((performance.now()-answeredAt)/1000));callState.textContent=String(Math.floor(seconds/60)).padStart(2,"0")+":"+String(seconds%60).padStart(2,"0")}
 let activePoliceIndex=null,finishPoliceVoice=null,cutoffTimer=null;
 function stopRing(){clearTimeout(ringTimer);clearTimeout(callStartTimer);ringTimer=callStartTimer=null;ringCadence=null;committedRingAtMs=null;for(const source of ringSources){try{source.stop()}catch{}}ringSources.clear();try{navigator.vibrate?.(0)}catch{}}
-function stopRecorded(){const clip=recordedSpeech;recordedSpeech=null;if(clip){clip.onplaying=clip.onended=clip.onerror=null;try{clip.pause()}catch{}}}
+function stopRecorded(){const clip=recordedSpeech;recordedSpeech=null;if(clip){clip.onplaying=clip.onended=clip.onerror=null;try{clip.pause()}catch{}}greetingLease?.release();greetingLease=null}
 function rateRecording(clip){if(!clip)return;clip.defaultPlaybackRate=clip.playbackRate=officeTempo;clip.preservesPitch=clip.mozPreservesPitch=clip.webkitPreservesPitch=false}
 // Peer deadlines and receipts stay monotonic. Only authored audio and repeat/read
 // durations consume the host's one office tempo; this page has no goop clock.
@@ -47,7 +68,7 @@ function officeRate(rate){
 }
 function resetSwipe(){drag=null;for(const button of [answer,decline]){button.style?.removeProperty("--amt-swipe-x");button.style?.removeProperty("--amt-swipe-y");button.classList.remove("dragging")}}
 function stopCall(){stopEnding();voiceGeneration++;voiceQueue.length=0;voiceBusy=false;phoneUtterance=null;activePoliceIndex=finishPoliceVoice=null;readableFallback=null;clearTimeout(cutoffTimer);cutoffTimer=null;clearTimeout(voiceTimer);voiceTimer=null;clearInterval(durationTimer);durationTimer=null;answeredAt=null;stopRecorded();stopStatic();stopRing();armedRound=currentRound=0;resetSwipe();try{window.speechSynthesis?.cancel()}catch{}call.classList.remove("answered");document.body.classList.remove("amt-phone-in-call");activeControls.hidden=true;callState.textContent=copy.ringing;call.hidden=true;answer.hidden=true;decline.hidden=true;choices.hidden=true}
-function endSlot(text,completed=false){slotActive=false;finished=true;submit.disabled=true;clearInterval(scanTimer);scanTimer=null;stopCall();status.textContent=text;if(!completed)showExpired();try{wakeLock?.release()?.catch(()=>{})}catch{}wakeLock=null}
+function endSlot(text,completed=false){slotActive=false;finished=true;submit.disabled=true;clearInterval(scanTimer);scanTimer=null;clearTimeout(namePrepTimer);namePrepTimer=null;window.GermanyKripoSpeech?.dispose();stopCall();clearPhoneRecordings();status.textContent=text;if(!completed)showExpired();try{wakeLock?.release()?.catch(()=>{})}catch{}wakeLock=null}
 function initAudio(){try{const Audio=window.AudioContext||window.webkitAudioContext;if(Audio&&!audioContext){audioContext=new Audio();phoneFxGain=audioContext.createGain();phoneFxGain.gain.value=1;phoneFxGain.connect(audioContext.destination)}audioContext?.resume()?.catch(()=>{})}catch{}}
 function acknowledgeTicket(){if(link.send("ticket-received",{id:scanId,number:number.textContent})){clearInterval(scanTimer);scanTimer=null}}
 function requestTicket(){if(closed||finished||!connected||link.channel?.readyState!=="open")return;if(slotActive){acknowledgeTicket();return}const register=submittedName&&scanReady;link.send(register?"register":"scan",register?{id:scanId,name:submittedName}:{id:scanId})}
@@ -86,35 +107,43 @@ function playNextPolice(){
  voiceBusy=true;const {text,index,receivedAt}=voiceQueue.shift(),generation=++voiceGeneration;activePoliceIndex=index;
  const current=()=>generation===voiceGeneration&&!finished&&!closed&&resolved==="answer"&&!call.hidden;
  let startedAt=null,mode="fallback";
- const started=kind=>{if(!current()||startedAt!==null)return;startedAt=performance.now();mode=kind;const readyDelayMs=Math.min(60000,Math.max(0,Math.round(startedAt-receivedAt)));if(kind==="voice")voiceStartupMs=voiceStartupMs===null?readyDelayMs:Math.round(voiceStartupMs*.6+readyDelayMs*.4);const atUtcMs=clockService?.usable?.(clockAnchor,startedAt)?Math.round(clockService.utcAt(clockAnchor,startedAt)):null;link.send("police-start",{index,mode,readyDelayMs,atMs:startedAt,atUtcMs})};
+ const started=(kind,backup=false)=>{if(!current())return;const update=startedAt!==null;if(update&&!(index===-1&&mode==='voice'&&kind==='recording'&&backup))return;const onset=performance.now();if(!update)startedAt=onset;mode=kind;const readyDelayMs=Math.min(60000,Math.max(0,Math.round(onset-receivedAt)));if(kind==="voice")voiceStartupMs=voiceStartupMs===null?readyDelayMs:Math.round(voiceStartupMs*.6+readyDelayMs*.4);const atUtcMs=clockService?.usable?.(clockAnchor,onset)?Math.round(clockService.utcAt(clockAnchor,onset)):null;link.send("police-start",{index,mode,readyDelayMs,atMs:onset,atUtcMs})};
  const finish=()=>{if(!current())return;const endedAt=performance.now();voiceGeneration++;phoneUtterance=null;clearTimeout(cutoffTimer);cutoffTimer=null;clearTimeout(voiceTimer);readableFallback=null;stopRecorded();voiceBusy=false;activePoliceIndex=finishPoliceVoice=null;link.send("police-done",{index,mode,durationMs:Math.min(60000,Math.max(0,Math.round(endedAt-(startedAt??endedAt)))),atMs:endedAt});voiceTimer=setTimeout(playNextPolice,0)};
  finishPoliceVoice=finish;
  const fallback=()=>{if(!current())return;clearTimeout(voiceTimer);started("fallback");readableFallback={remainingMs:Math.max(3500,text.length*55),atMs:performance.now()};voiceTimer=setTimeout(finish,readableFallback.remainingMs/officeTempo)};
  // Live recordings can slow down after onset. Reserve the bounded slowest
  // playback lifetime rather than cutting a valid 0.5x line at the old timeout.
  const playbackLimit=Math.max(20000,text.length*140 )/.5;
- const playRecorded=()=>{
+ const catalog=window.GermanySimulatorAudioText,backupOpening=catalog?.clips?.['kriminalpolizei-phone-01']?.source||text;
+ const playRecorded=(source=text)=>{
   if(!current())return;
-  const catalog=window.GermanySimulatorAudioText,voiceId=catalog?.speechFamilies?.amtPolice?.voiceId||"kriminalpolizei",candidate=catalog?.recordedClip?.(voiceId,text)||catalog?.candidateClip?.(voiceId,text);
+  const voiceId=catalog?.speechFamilies?.amtPolice?.voiceId||"kriminalpolizei",candidate=catalog?.recordedClip?.(voiceId,source)||catalog?.candidateClip?.(voiceId,source);
   if(!candidate||typeof window.Audio!=="function"){fallback();return}
-  const clip=new window.Audio(candidate);recordedSpeech=clip;clip.preload="auto";rateRecording(clip);
-  const recordingFailed=()=>{if(recordedSpeech!==clip||!current())return;stopRecorded();fallback()};
-  clip.onplaying=()=>{if(recordedSpeech!==clip||!current())return;clearTimeout(voiceTimer);started("recording");voiceTimer=setTimeout(finish,playbackLimit)};
+  let clip;try{clip=preparedRecordings.get(candidate)||new window.Audio(candidate);try{clip.currentTime=0}catch{}}catch{fallback();return}
+  recordedSpeech=clip;clip.preload="auto";rateRecording(clip);
+  const recordingFailed=()=>{if(recordedSpeech!==clip||!current())return;clearTimeout(voiceTimer);stopRecorded();if(index===-1&&source!==backupOpening)playRecorded(backupOpening);else fallback()};
+  clip.onplaying=()=>{if(recordedSpeech!==clip||!current())return;clearTimeout(voiceTimer);started("recording",index===-1&&source===backupOpening);voiceTimer=setTimeout(finish,playbackLimit)};
   clip.onended=()=>{if(recordedSpeech===clip)finish()};clip.onerror=recordingFailed;
   voiceTimer=setTimeout(recordingFailed,3000);
   try{Promise.resolve(clip.play()).catch(recordingFailed)}catch{recordingFailed()}
  };
- // Only the name-bearing greeting is synthesized, inside the Answer gesture.
- // Keep a strong reference until native completion; the fixed dialogue is recorded.
- if(index!==-1||!openingGreeting||!window.speechSynthesis||typeof window.SpeechSynthesisUtterance!=="function"){playRecorded();return}
- const utterance=phoneUtterance=new SpeechSynthesisUtterance(openingGreeting);utterance.lang="de-DE";utterance.volume=1;utterance.rate=.87*officeTempo;utterance.pitch=.66*officeTempo;
- const voices=speechSynthesis.getVoices();utterance.voice=voices.find(v=>/^de/i.test(v.lang)&&/male|daniel|stefan|markus|martin|thomas|tim/i.test(v.name))||voices.find(v=>/^de/i.test(v.lang))||null;
- let greetingFinished=false;
- const continueOpening=()=>{if(!current()||greetingFinished)return;greetingFinished=true;clearTimeout(voiceTimer);utterance.onstart=utterance.onend=utterance.onerror=null;phoneUtterance=null;try{speechSynthesis.cancel()}catch{}playRecorded()};
- utterance.onstart=()=>{if(!current()||greetingFinished)return;clearTimeout(voiceTimer);started("voice");voiceTimer=setTimeout(continueOpening,Math.max(20000,openingGreeting.length*140)/officeTempo)};
- utterance.onend=utterance.onerror=continueOpening;
- voiceTimer=setTimeout(continueOpening,6000);
- try{speechSynthesis.speak(utterance)}catch{continueOpening()}
+ // A name prepared at first input joins prerecorded greeting parts.
+ // Start prepared media directly in Answer; readiness never blocks the call.
+ if(index===-1&&openingGreeting&&window.GermanyKripoSpeech){
+  const speech=window.GermanyKripoSpeech,result=speech.peek(submittedName,1);
+  if(result?.text!==openingGreeting.normalize('NFC')||typeof window.Audio!=='function'){playRecorded(backupOpening);return}
+  const lease=speech.lease(result),binding=window.GermanySimulatorAudioText?.productionVoices?.kriminalpolizei;
+  if(!lease||lease.voiceId!=='kriminalpolizei'||lease.profileId!==binding?.profileId||lease.referenceSha256!==binding?.referenceSha256){lease?.release();playRecorded(backupOpening);return}
+  let clip;try{clip=new window.Audio(lease.url)}catch{lease.release();playRecorded(backupOpening);return}
+  greetingLease=lease;recordedSpeech=clip;clip.preload='auto';rateRecording(clip);
+  const continueOpening=()=>{if(recordedSpeech!==clip||!current())return;clearTimeout(voiceTimer);stopRecorded();playRecorded()};
+  const failedOpening=()=>{if(recordedSpeech!==clip||!current())return;clearTimeout(voiceTimer);stopRecorded();playRecorded(backupOpening)};
+  clip.onplaying=()=>{if(recordedSpeech!==clip||!current())return;clearTimeout(voiceTimer);started('voice');voiceTimer=setTimeout(failedOpening,playbackLimit)};
+  clip.onended=continueOpening;clip.onerror=failedOpening;voiceTimer=setTimeout(failedOpening,3000);
+  try{Promise.resolve(clip.play()).catch(failedOpening)}catch{failedOpening()}
+  return;
+ }
+ playRecorded(index===-1?backupOpening:text);
 }
 function endCall(kind){
  if(resolved||!currentCall||call.hidden||!slotActive||finished||closed)return;
@@ -148,7 +177,7 @@ link.addEventListener("message",e=>{
  if(m.type==="done"){if(!finished)endSlot("Dieser Termin wurde am Schalter bearbeitet.",true);else stopCall();return}
  if(finished)return;
  if(m.type==="office-tempo")officeRate(m.rate);
- else if(m.type==="known-name"&&m.id===scanId&&!submittedName&&!name.value){name.value=m.name}
+ else if(m.type==="known-name"&&m.id===scanId&&!submittedName&&!name.value){name.value=m.name;preparePhoneName(m.name)}
  else if(m.type==="scan-ready"){scanReady=true;admission.hidden=!submittedName;submit.disabled=!!submittedName;requestTicket()}
   else if(m.type==="ticket"&&submittedName&&/^[A-Z]{1,2}-\d{1,12}$/.test(m.number||"")&&Number.isInteger(m.counter)&&m.counter>=1&&m.counter<=4){if(slotActive&&number.textContent===m.number){acknowledgeTicket();return}stopCall();phoneSilent=false;atCounter=false;lastRound=0;admission.hidden=true;currentCall="";resolved="";number.textContent=m.number;ticket.hidden=false;form.hidden=true;slotActive=!document.hidden;status.textContent="Achten Sie auf die Aufruftafel im Amt.";if(slotActive){acknowledgeTicket();keepAwake()}else{link.send("phone-hidden");endSlot("Seite verlassen. Ihr Platz ist verfallen.");link.close()}}
  else if(m.type==="queue-call"&&slotActive&&m.number===number.textContent&&Number.isInteger(m.counter)&&m.counter>=1&&m.counter<=4)status.textContent="Ihre Nummer ist aufgerufen. Achten Sie auf die Aufruftafel im Amt.";
@@ -169,9 +198,9 @@ link.addEventListener("message",e=>{
  }
 });
 form.addEventListener("submit",e=>{
- e.preventDefault();if(closed||finished||submittedName)return;const value=name.value.trim().replace(/\s+/g," ");
- if(value.length<2||value.length>80||/[\u0000-\u001f\u007f]/.test(value))return;initAudio();
- submittedName=value;submit.disabled=true;form.hidden=true;
+ e.preventDefault();if(closed||finished||submittedName)return;const value=name.value.normalize('NFC').trim().replace(/\s+/g," ");
+ if(value.length<2||value.length>80||/[\u0000-\u001f\u007f-\u009f]/.test(value))return;initAudio();
+ submittedName=value;preparePhoneName(value);submit.disabled=true;form.hidden=true;
  admission.hidden=false;admission.textContent="Wartenummer wird zugeteilt.";
  requestTicket();
  window.GermanyFullscreen?.autoEnter();
@@ -214,7 +243,8 @@ document.addEventListener("visibilitychange",()=>{
 window.addEventListener("offline",()=>{offlineState=true;if(!slotActive||closed||finished)return;if(document.hidden)link.send("phone-hidden");phoneSilent=true;stopCall();currentCall="";if(!atCounter){endSlot("Ihr Platz ist verfallen. Bitte ziehen Sie eine neue Nummer.");link.close()}});
 window.addEventListener("online",()=>{offlineState=false;if(atCounter&&slotActive&&!closed&&!finished&&!document.hidden){phoneSilent=false;link.send("phone-visible");keepAwake()}});
 window.addEventListener("pagehide",()=>{
-  if(slotActive){link.send("phone-hidden");if(!atCounter)showExpired()}closed=true;slotActive=false;stopCall();
+ clearTimeout(namePrepTimer);namePrepTimer=null;window.GermanyKripoSpeech?.dispose();
+  if(slotActive){link.send("phone-hidden");if(!atCounter)showExpired()}closed=true;slotActive=false;stopCall();clearPhoneRecordings();
  clearInterval(scanTimer);try{audioContext?.close()?.catch(()=>{})}catch{}try{wakeLock?.release()?.catch(()=>{})}catch{}link.close();
 });
 })();

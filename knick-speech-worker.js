@@ -1,5 +1,8 @@
 "use strict";
-const root=new URL('./',self.location.href),modelRoot=new URL('assets/voices/knick/browser/',root);
+const root=new URL('./',self.location.href),police=new URL(self.location.href).searchParams.get('voice')==='kriminalpolizei';
+const modelRoot=new URL(police?'assets/voices/kriminalpolizei/browser/':'assets/voices/knick/browser/',root);
+const binding=police?{voiceId:'kriminalpolizei',profileId:'f700170f840543bca7413d3ccf6ac028',referenceSha256:'ef452114430b47167239cdb065b1e01d502c0148f1492ac1b66098a03c0ea82e'}:
+ {voiceId:'amt-brunhilde-knick',profileId:'b080c7d95ecd418fb428282461d7fbe7',referenceSha256:'901e9ad60eda5cbb36337b12864b6a2b0d133570acb90941b9eabd9888c16351'};
 const vendor=new URL('assets/vendor/piper-phonemize/1.0.0/',root);
 let engine=null,manifest=null,tails=null;
 const counterWords=['eins','zwei','drei','vier'];
@@ -12,12 +15,15 @@ async function decompress(bytes,maximum){
  const output=new Uint8Array(size);let offset=0;for(const chunk of chunks){output.set(chunk,offset);offset+=chunk.length}return output;
 }
 async function load(cachedBytes){
+ if(typeof DecompressionStream!=='function'||typeof BigInt64Array!=='function'||
+    typeof WebAssembly!=='object'||typeof crypto!=='object'||!crypto.subtle)throw Error('unsupported');
+ // The pinned ORT SIMD probe avoids downloading a graph on unsupported clients.
+ if(!WebAssembly.validate(new Uint8Array([0,97,115,109,1,0,0,0,1,4,1,96,0,0,3,2,1,0,10,30,1,28,0,65,0,253,15,253,12,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,253,186,1,26,11])))throw Error('unsupported');
  const response=await fetch(new URL('manifest.json',modelRoot),{cache:'no-store'});
  if(!response.ok)throw Error('manifest');
  manifest=await response.json();
- if(manifest.voiceId!=='amt-brunhilde-knick'||manifest.profileId!=='b080c7d95ecd418fb428282461d7fbe7'||
-    manifest.referenceSha256!=='901e9ad60eda5cbb36337b12864b6a2b0d133570acb90941b9eabd9888c16351'||
-    !/^knick-[a-f0-9]{12}\.onnx\.bin$/.test(manifest.model)||manifest.sampleRate!==22050||manifest.compression!=='gzip'||
+ if(manifest.voiceId!==binding.voiceId||manifest.profileId!==binding.profileId||manifest.referenceSha256!==binding.referenceSha256||
+    !/^(knick|kripo)-[a-f0-9]{12}\.onnx\.bin$/.test(manifest.model)||manifest.sampleRate!==22050||manifest.compression!=='gzip'||
     !Number.isSafeInteger(manifest.bytes)||manifest.bytes<1000000||manifest.bytes>20000000||
     !Number.isSafeInteger(manifest.downloadBytes)||manifest.downloadBytes<=0||manifest.downloadBytes>20000000||
     !/^[a-f0-9]{64}$/.test(manifest.sha256)||!/^[a-f0-9]{64}$/.test(manifest.downloadSha256))throw Error('voice');
@@ -36,10 +42,12 @@ async function load(cachedBytes){
  if(modelBytes.byteLength!==manifest.bytes||await sha(modelBytes)!==manifest.sha256)throw Error('model-hash');
  const session=await ort.InferenceSession.create(modelBytes,
                 {executionProviders:['wasm'],graphOptimizationLevel:'all'});
- if(manifest.nameContextFrames!==16||manifest.contextSuffix!==', bitte zu Schalter eins!'||
-    !Array.isArray(manifest.counterTails)||manifest.counterTails.length!==4)throw Error('parts');
- tails=await Promise.all(manifest.counterTails.map(async(part,index)=>{
-  if(part.counter!==index+1||part.file!==`counter-${index+1}.wav`||part.sampleRate!==22050||part.channels!==1||
+ const parts=police?manifest.speechParts:manifest.counterTails;
+ if(manifest.nameContextFrames!==16||manifest.contextSuffix!==(police?', hier ist die Kriminalpolizei am Apparat!':', bitte zu Schalter eins!')||
+    !Array.isArray(parts)||parts.length!==(police?2:4))throw Error('parts');
+ tails=await Promise.all(parts.map(async(part,index)=>{
+  if((police?part.role!==['prefix','suffix'][index]:part.counter!==index+1)||
+     part.file!==(police?`${['prefix','suffix'][index]}.wav`:`counter-${index+1}.wav`)||part.sampleRate!==22050||part.channels!==1||
      part.profileId!==manifest.profileId||part.referenceSha256!==manifest.referenceSha256||
      !Number.isSafeInteger(part.bytes)||part.bytes<44||part.bytes>400000||!/^[a-f0-9]{64}$/.test(part.sha256))throw Error('part');
   const response=await fetch(new URL(part.file,modelRoot),{cache:'no-store'});if(!response.ok)throw Error('part');
@@ -76,9 +84,10 @@ self.onmessage=async event=>{
  if(!Number.isSafeInteger(id)||typeof text!=='string'||text.length<3||text.length>160||/[\u0000-\u001f\u007f-\u009f]/.test(text))return;
  try{
   const started=performance.now();engine??=load(modelBytes);const session=await engine;
-  const counter=counterWords.findIndex(word=>text.endsWith(`, bitte zu Schalter ${word}!`));
+  const policeSuffix='? Hier ist die Kriminalpolizei am Apparat!';
+  const counter=police?(text.startsWith('Spricht hier ')&&text.endsWith(policeSuffix)?0:-1):counterWords.findIndex(word=>text.endsWith(`, bitte zu Schalter ${word}!`));
   if(counter<0)throw Error('text');
-  const name=text.slice(0,-(`, bitte zu Schalter ${counterWords[counter]}!`).length);
+  const name=police?text.slice('Spricht hier '.length,-policeSuffix.length):text.slice(0,-(`, bitte zu Schalter ${counterWords[counter]}!`).length);
   const contextText=name+manifest.contextSuffix;
   // The packaged CLI retains parser state; each invocation needs its own module.
   let printed=null;
@@ -98,11 +107,14 @@ self.onmessage=async event=>{
   for(let i=0;i<pcm.length;i++)pcm[i]=nameView.getInt16(44+i*2,true)/32768;
   const fade=Math.min(110,pcm.length);for(let i=0;i<fade;i++)pcm[pcm.length-fade+i]*=1-i/(fade-1);
   const variants=[];
-  for(let index=0;index<4;index++){
-   const tail=tails[index],joined=new Float32Array(pcm.length+tail.length);joined.set(pcm);joined.set(tail,pcm.length);
-   for(let i=0;i<Math.min(110,tail.length);i++)joined[pcm.length+i]*=i/109;
+  for(let index=0;index<(police?1:4);index++){
+   const prefix=police?tails[0]:new Float32Array(0),tail=tails[police?1:index];
+   const joined=new Float32Array(prefix.length+pcm.length+tail.length);joined.set(prefix);joined.set(pcm,prefix.length);joined.set(tail,prefix.length+pcm.length);
+   for(let i=0;i<Math.min(110,prefix.length);i++)joined[prefix.length-1-i]*=i/109;
+   if(prefix.length)for(let i=0;i<Math.min(110,pcm.length);i++)joined[prefix.length+i]*=i/109;
+   for(let i=0;i<Math.min(110,tail.length);i++)joined[prefix.length+pcm.length+i]*=i/109;
    const buffer=wav(joined);
-   variants.push({text:`${name}, bitte zu Schalter ${counterWords[index]}!`,wav:buffer,duration:joined.length/22050,sha256:await sha(buffer)});
+   variants.push({text:police?text:`${name}, bitte zu Schalter ${counterWords[index]}!`,wav:buffer,duration:joined.length/22050,sha256:await sha(buffer)});
   }
   const selected=variants[counter],buffer=selected.wav;
   self.postMessage({id,text,status:'ready',wav:buffer,duration:selected.duration,sha256:selected.sha256,variants,

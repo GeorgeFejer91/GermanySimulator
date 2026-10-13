@@ -138,3 +138,98 @@ Final silent production-worker tests pass desktop and Android portrait/landscape
 Sixbaseline64f7dce andsixcandidatecoldroot runs pass18MB/title4Hz/1.6MP/input gates; candidatemax17861164bytes,9acceptedinputsperrun,zeroerrors,inputp95max71.1ms vsbaseline59.5ms. ConcurrentprivateKripoauthoringwasactive; thereisno speedupclaim. PhysicalAndroid remainsNOTRUN. Oneindependenttechnicalreview owns the batching/cache/parser/hashmalformation checks; Physics/Camera omitted because this change adds no world geometry, placement, movement, camera, scale or animation assets and reuses existing cue/lip ownership. Kripo tone-conversion teacher samples were separately useraccepted; the compactname-modeltrial remains private until reviewed.
 
 Final combined Node run passes807/807; focused local-speech/asset run53/53. Existing fixed-voice curator passes61production/1sceneexception/45blocked/42archived; native saved-profile source/referencebytes were separately verified, liveProfileCLI not run by the curator. Review mutations and exact final source hashes remain task evidence.
+
+# Two readable welcome popups — 2026-10-13
+
+Integrator-owned on base `e3b2ba3`, published through an isolated candidate
+on `40bd396`. Scope: the opening briefing in `game.js`,
+its scoped dialogue styles, existing `game-hud.js` Pretext measurements,
+`index.html` cache identities, a focused browser regression and the owning
+`For-AI/GAMEPLAY.md` rule. Keep exactly two pages of the existing regional
+copy, visible immediately, automatically narrated, with only Next. Preserve
+all other dialogue, subtitles, voice settings, the humor forms and mission
+completion callback. No assets, dependencies, world geometry, movement,
+animation or camera changes; Physics/Camera review is outside this UI scope.
+Existing Steinmeier edits in seven files belong to another active chat and
+must be preserved. No known baseline failures. Validate real opening input,
+two-page navigation, interrupted/muted/stalled speech, desktop/Android
+emulation, 320px, enlarged text, spacing overrides and pinned Pretext.
+
+Validation: 608/608 isolated Pages-selected Node checks pass (612/612 on the
+initial combined checkout), followed by 16/16
+focused checks after the final bounds fix. Four welcome checks fail against the
+original 4/5-page implementation. The fixed-voice curator and all six exact-RGBA
+city delivery checks pass. Eleven silent Chromium profiles verify 22 popups,
+real S/Next input, narration request/start/end/cancellation, restored phone
+controls, pinned Pretext, 320px, 200% zoom/text and spacing overrides. The two
+extreme enlarged layouts retain full copy through keyboard-accessible vertical
+reading while Next stays anchored. Six cold desktop/Android-emulation budget
+runs pass on ANGLE/Intel Iris Xe with nine accepted inputs and no errors per run.
+No performance speedup is claimed. Physical Android, natural humor-form/full
+mission completion and perceptual listening are NOT RUN. Evidence is ignored
+under output/playwright/welcome/. An isolated publication candidate preserves
+the already-published Jobcenter glow and excludes other chats' unfinished work.
+
+# Steinmeier melting trigger and earlier floor paint — 2026-10-13
+
+Integrator-owned on clean base `e3b2ba3`, isolated in the managed Steinmeier
+worktree after concurrent welcome/look edits appeared in the shared checkout.
+The resumed candidate preserves published Jobcenter glow commit `40bd396`.
+Scope: the existing portrait trigger, shared portrait shader, imported cache
+identities, focused Node/browser regressions and owning episode guidance.
+A valid interaction ends the remaining shared grace before its monologue;
+portrait paint uses 1.30 rather than 1.15 times room melt, and slightly longer
+drip reach advances shared wall-to-floor contact. Preserve room melt/speed,
+recovery, target selection, speech, geometry, gait, assets and mission rewards.
+No new dependencies, assets, jobs or renderer passes. Risk-based checks cover
+early/absent/repeated interaction, ongoing melt, hidden/replay, recovery, actual
+GPU color deposition before the old onset, missing paint, reduced motion and
+timed moving/blocked/resumed rendering. Independent Physics and Camera review
+the same frozen candidate. Silent desktop and Android emulation use existing
+tooling; physical Android and perceptual listening remain separate. The initial
+full suite passed 815/817; two untouched legacy harness failures reproduce on
+base source (missing diagnostic clearInput fixture and a stale renderer export
+regex). Neither belongs to the Pages workflow selection. The early-trigger and
+new paint-rate regressions both fail without their production fixes.
+
+Validation on the frozen `40bd396` candidate: 607/607 Pages-selected Node checks,
+six silent portrait E/touch/fallback profiles, four GPU pigment/lifecycle profiles
+and three timed moving/blocked/reduced profiles pass. Independent Physics and
+Camera reviews approve the affected P5/C4/X1 scope; geometry and vehicle matrices
+are outside the delta. GPU paint coverage and colored pixels are positive at age
+420, with both oils retained. Six baseline and six candidate cold budget runs
+pass on ANGLE/Intel Iris Xe: candidate maximum transfer 17,911,376 bytes, all nine
+inputs accepted and zero errors per run. No performance speedup is claimed.
+Physical Android, natural-duration mission play and perceptual listening are
+NOT RUN. Captured reports and screenshots remain ignored local evidence.
+
+# First-person looking controls — 2026-10-13
+
+Integrator-owned. Arrow Up/Down control pitch in the office and Jobcenter;
+WASD and independent touch movement remain authoritative. Mouse/trackpad hover
+and existing drag/touch look share bounded pitch. The office reticle remains
+an invisible HUD object. Scripted framing, clicking, collision, missions,
+audio ownership and scene teardown retain their existing authority.
+No new assets, dependencies, timers, loading or per-frame render work.
+
+Publish only the thirteen scoped input/style/test/document paths. Preserve
+the latest published intro, portrait, flame, cavern rumble and JWD changes.
+A GitHub commit/tree/ref transaction with an expected parent protects those
+changes after local Git metadata became unavailable. Independent Physics
+and Camera source reviews, silent native keyboard/mouse/touch browser checks,
+Pages-selected Node gates and existing browser budgets own acceptance.
+Physical Android and perceptual listening remain separate NOT RUN checks.
+Two exploratory assertions also fail against the original e3b2ba3 baseline:
+the park harness lacks clearInput and the Kripo source regex assumes an
+outdated export order. They are outside this feature and its Pages gates.
+
+### 2026-10-13 — Compact Kripo names and complete recorded backups
+
+The browser-local caller derivative now prepares the name at the first usable companion input or opening-form prefill. One 16.03 MB compressed student uses the shared one-thread worker; the OpenVoice teacher remains private. Only the name runs through the vocoder, with two prerecorded greeting parts totaling 139,864 bytes. The user listened to the actual browser George Fejer greeting and accepted it as “good enough”. The separate intercom remains accepted only as an intercom voice, while fixed Knick dialogue keeps its recordings.
+
+Six fixed phone clips warm silently after the first valid name. Answer starts a ready greeting and fixed body, or immediately plays the complete original introduction and question when synthesis is unsupported/unready. Static spans transitions. Failed named playback can switch to the full backup once, with one scoped caption/English update and unchanged original cue clock/deadline. The intercom has its existing recorded “Nächste bitte!” backup at the allocated counter. Slot completion/pagehide drops media/model buffers; no speech data is written to user folders or app-owned persistent storage.
+
+The work preserves published changes through `d7c2389f`. Shared repository metadata had name-clash damage, so publication uses isolated Git metadata without changing primary files or discarded references. Independent technical review approves the integrated speech diff: 174/174 affected checks and 15/15 mutations pass. The full 854-check sweep exposed three stale test assumptions; the two baseline harness failures were reproduced and repaired, and the affected 18/18 reruns pass. Final controls/speech integration passes 89/89. Voice curator and exact-RGBA delivery checks pass. No world geometry, collision, camera, scale or animation assets change in this speech diff; independent world reviews for already-published features remain with their owners.
+
+Six paired silent phone profiles pass (named and unsupported desktop/Android portrait/landscape), including full desktop conversation, mobile hangup, exact captions, continuous static and zero model transfer on unsupported clients. Named readiness was 4.1–7.0 seconds; measured greeting/body gaps were 0.9–1.3 ms. Six supported/unsupported intercom profiles pass actual playback/counter ownership, with supported readiness 7.9–16.3 seconds on this shared laptop. Six baseline and six candidate root budget runs pass on `0f1d9a44`; six final shipping runs after preserving current controls also pass, maximum 17,923,041 bytes. No speedup, universal pronunciation, universal client timing or peak-memory claim is made. Physical Android is NOT RUN. Forced scene/signaling seams are not a natural-duration mission playthrough. Evidence and the scoped causal review remain under ignored `output/`.
+

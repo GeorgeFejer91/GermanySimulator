@@ -34,12 +34,28 @@ try{
    const level=BuergeramtLevel;level.replay({cinematics:false,voiceOn:()=>true,subtitlesOn:()=>document.getElementById("subtitle-toggle").getAttribute("aria-pressed")==="true"});
    const update=level.update.bind(level);level.update=()=>{};window.__portraitStep=update;
    const move=(code,reached)=>{dispatchEvent(new KeyboardEvent('keydown',{code}));let count=0;while(!reached()&&count++<600)update(1/60);dispatchEvent(new KeyboardEvent('keyup',{code}));if(!reached())throw Error('Blocked approach '+code+': '+JSON.stringify(level.view));};
-   move('KeyW',()=>level.view.z<4.8);move('KeyD',()=>level.view.x>=3.4);move('KeyW',()=>level.view.z<=2.85);update(0);
+   move('KeyW',()=>level.view.z<4.8);move('KeyD',()=>level.view.x>=3.4);move('KeyW',()=>level.view.z<=2.85);move('ArrowRight',()=>level.view.yaw>=Math.PI);update(0);
    const prompt=document.getElementById('amt-nearby').textContent,position=level.view;
-   level.update=update;return{prompt,position,stage:level.stage};
+   return{prompt,position,stage:level.stage,floor:level.floorState};
   });
   assert.equal(approach.stage,'walk-sign');assert.equal(approach.prompt,'E · BUNDESPRÄSIDENT BETRACHTEN');
-  await page.keyboard.press('e');await page.waitForFunction(()=>BuergeramtLevel.stage==='portrait');
+  assert(approach.floor.time<90);assert.equal(approach.floor.goop,0);
+  if(name.startsWith('android')){
+   await page.evaluate(()=>Germany3D.sync());
+   const point=await page.evaluate(({width,height})=>{for(let y=.2;y<.65;y+=.04)for(let x=.35;x<.65;x+=.04)if(Germany3D.pickAmtInteraction(x*width,y*height)?.portrait)return{x:x*width,y:y*height};return null},viewport);
+   assert(point,'visible portrait must be selectable by touch');
+   await page.touchscreen.tap(point.x,point.y);await page.touchscreen.tap(point.x,point.y);
+  }else await page.keyboard.press('e');
+  await page.waitForFunction(()=>BuergeramtLevel.stage==='portrait');
+  const initiated=await page.evaluate(()=>BuergeramtLevel.floorState);
+  assert.equal(initiated.time,90);assert.equal(initiated.visualTime,90);
+  const onset=await page.evaluate(()=>{__portraitStep(1/60);Germany3D.sync();return{floor:BuergeramtLevel.floorState,portrait:Germany3D.amtPortraitMelt,liquid:Germany3D.amtFloor};});
+  assert(onset.floor.goop>0);assert(onset.floor.speed<1);
+  assert.equal(onset.liquid.melt,onset.floor.goop);
+  assert.equal(onset.portrait.melt,failure?0:onset.floor.goop);
+  assert.equal(onset.portrait.dripsVisible,!failure);
+  await page.screenshot({path:resolve(out,name+'-melting-onset.png')});
+  await page.evaluate(()=>{BuergeramtLevel.update=__portraitStep});
   const lines=await page.evaluate(()=>[BuergeramtStory.presidentPortrait.lines.map(row=>row.line).join(' ')]),observed=[];
   for(let index=0;index<lines.length;index++){
    await page.waitForFunction(text=>document.getElementById('amt-line').textContent===text,lines.slice(index<2?0:2,index<2?2:4).join(" "),{timeout:25000});
@@ -58,7 +74,7 @@ try{
   assert.equal(await page.evaluate(()=>__media.filter(media=>media.__requestedSrc?.includes('player-president-portrait-')).length),1,'one continuous media source for the whole monologue, including released failed sources');
   assert.equal(lines.length,1,'one complete authored monologue');
   assert.deepEqual(errors,[]);assert.equal(await page.evaluate(()=>__machine.length),3,'only the subtitle opt-in authority uses browser speech');
-  report.cases.push({name,approach,observed,errors});
+  report.cases.push({name,approach,initiated,onset,observed,errors});
   await context.close();console.log(JSON.stringify({name,passed:true}));
  }
  // The diagnostic entry shares the renderer and can still start independently.

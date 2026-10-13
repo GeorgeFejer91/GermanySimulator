@@ -1,6 +1,6 @@
 // One paint source shared by the framed portrait, its downward threads and the
 // existing floor transport. No particles, scene capture or separate clock.
-const MELT_RATE=1.15;
+const MELT_RATE=1.3;
 export const portraitPaintGlsl=`
   uniform sampler2D amtPortraitPaint;
   uniform vec4 amtPortraitInfo;
@@ -16,7 +16,7 @@ export const portraitPaintGlsl=`
     center+=.011*goop*sin(uv.y*4.-clock*.015+seed*6.);
     float bulge=.5+.5*sin(uv.y*23.-clock*.047+seed*10.);
     float radius=(.004+.025*goop)*(.65+.55*bulge);
-    float reach=goop*(1.02+.08*seed),down=uv.y;
+    float reach=goop*(1.12+.09*seed),down=uv.y;
     float side=abs(uv.x-center);
     float neck=(1.-smoothstep(radius*.65,radius,side))*(1.-smoothstep(reach-radius*2.,reach,down));
     vec2 tip=vec2((uv.x-center)/(radius*1.4),(down-reach+radius*1.8)/(radius*1.8));

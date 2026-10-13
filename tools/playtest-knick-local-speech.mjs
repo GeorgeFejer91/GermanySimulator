@@ -5,7 +5,8 @@ import {resolve,sep,extname} from 'node:path';
 import assert from 'node:assert/strict';
 
 const {chromium}=createRequire(import.meta.url)(process.env.PLAYWRIGHT_MODULE||'playwright');
-const root=resolve('.'),out=resolve('output/playwright/knick-local-speech');mkdirSync(out,{recursive:true});
+const noModel=!!process.env.KNICK_NO_MODEL;
+const root=resolve('.'),out=resolve('output/playwright/'+(noModel?'knick-backup':'knick-local-speech'));mkdirSync(out,{recursive:true});
 let modelTransfers=0,modelTransferBytes=0;
 const mime={'.html':'text/html','.js':'text/javascript','.css':'text/css','.wasm':'application/wasm',
  '.json':'application/json','.wav':'audio/wav','.mp3':'audio/mpeg','.ogg':'audio/ogg','.webp':'image/webp',
@@ -27,6 +28,7 @@ const server=createServer((req,res)=>{try{
  if(file===resolve('buergeramt-link.js'))bytes=bytes.toString()+adapter;
  if(file===resolve('buergeramt.js'))bytes=bytes.toString().replace('window.BuergeramtLevel={',seam+'window.BuergeramtLevel={');
  if(file===resolve('game.js'))bytes=bytes.toString().replace('const directConfig={','const directConfig=window.__speechConfig={cinematics:false,');
+ if(noModel&&file===resolve('knick-speech-worker.js'))bytes='WebAssembly.validate=()=>false;\n'+bytes.toString();
  if(path.endsWith('.onnx.bin')){modelTransfers++;modelTransferBytes+=bytes.length}
  const immutable=path.endsWith('.onnx.bin')||path.startsWith('/assets/vendor/');
  res.writeHead(200,{'Content-Type':mime[extname(file)]||'application/octet-stream','Cache-Control':immutable?'public,max-age=31536000,immutable':'no-cache'});res.end(bytes);
@@ -40,10 +42,12 @@ const silent=()=>{
  const connect=AudioNode.prototype.connect;AudioNode.prototype.connect=function(target,...args){if(target instanceof AudioDestinationNode){const gain=this.context.createGain();gain.gain.value=0;connect.call(gain,target);return connect.call(this,gain,...args)}return connect.call(this,target,...args)};
  const speak=speechSynthesis.speak.bind(speechSynthesis);speechSynthesis.speak=utterance=>{utterance.volume=0;speak(utterance)};
  window.__nameMedia=[];
+ window.__recordingEvents=[];const NativeAudio=Audio;window.Audio=function(src){const media=new NativeAudio(src);media.volume=0;media.addEventListener('playing',()=>__recordingEvents.push(media.src));return media};
  document.addEventListener('playing',event=>{if(event.target instanceof HTMLMediaElement&&event.target.src.startsWith('blob:'))__nameMedia.push({event:'playing',at:performance.now()})},true);
 };
 try{
  for(const [name,width,height,mobile] of (process.env.KNICK_UI_ONLY?[]:[['desktop',1280,800,false],['android-portrait',390,844,true],['android-landscape',844,390,true]])){
+  if(process.env.KNICK_CASE&&!process.env.KNICK_CASE.split(',').includes(name))continue;
   const context=await browser.newContext({viewport:{width,height},isMobile:mobile,hasTouch:mobile});await context.addInitScript(silent);
   const page=await context.newPage(),errors=[],requests=[];page.on('pageerror',e=>errors.push(e.message));
   const transferStart=modelTransfers,byteStart=modelTransferBytes;
@@ -52,6 +56,15 @@ try{
   await page.waitForFunction(()=>BuergeramtLevel?.active&&Germany3D?.officeAssetsReady&&window.__speechFixture,null,{timeout:120000});
   assert(!requests.some(url=>url.includes('/knick/browser/')||url.includes('/onnxruntime/')),'no model before a name');
   await page.keyboard.press('KeyW');await page.evaluate(()=>{__speechFixture.pose();const sync=Germany3D.sync;window.__nameFrames=[];Germany3D.sync=function(...args){if(GermanyKnickSpeech.inspect().active)__nameFrames.push(performance.now());return sync.apply(this,args)}});const ticket=await page.evaluate(()=>__speechFixture.submit('Erika Mustermann'));
+  if(noModel){
+   await page.waitForFunction(()=>__speechFixture.inspect().tickets[0]?.speech==='failed',null,{timeout:10000});
+   await page.evaluate(()=>{__speechFixture.pose();__speechFixture.advance(12)});
+   await page.waitForFunction(()=>document.getElementById('amt-ambient').textContent==='FRAU KNICK: '+BuergeramtStory.queueCall.line,null,{timeout:20000});
+   assert.equal(await page.evaluate(()=>BuergeramtLevel.lipSpeech.actor),`clerk-${ticket.counter}`);
+   assert.equal(await page.evaluate(()=>__recordingEvents.some(src=>new URL(src).pathname===new URL(GermanySimulatorAudioText.recordedClip(BuergeramtStory.queueCall.voiceId,BuergeramtStory.queueCall.line),location.href).pathname)),true,'backup recording actually plays');
+   assert.equal(modelTransfers-transferStart,0);assert(!requests.some(url=>url.includes('/onnxruntime/')));assert.deepEqual(errors,[]);
+   await page.screenshot({path:resolve(out,name+'-announcement.png')});report.cases.push({name,backup:'accepted recorded next caller',counter:ticket.counter,modelTransfers:0,errors});await context.close();continue;
+  }
   const started=Date.now();await page.waitForFunction(()=>GermanyKnickSpeech.inspect().active);
   const before=await page.evaluate(()=>BuergeramtLevel.view.yaw),inputStart=Date.now();await page.keyboard.down('ArrowRight');
   await page.waitForFunction(yaw=>BuergeramtLevel.view.yaw!==yaw,before,{timeout:2000});await page.keyboard.up('ArrowRight');const inputMs=Date.now()-inputStart;
@@ -81,6 +94,7 @@ try{
    generationMs:wav.generationMs,modelTransfers:modelTransfers-transferStart,modelTransferBytes:modelTransferBytes-byteStart,idleWorkerReleased:true,errors});
   console.log(name+' PASS '+JSON.stringify(report.cases.at(-1)));await context.close();
  }
+ if(!noModel&&!process.env.KNICK_NAMES_ONLY){
  const context=await browser.newContext({viewport:{width:1280,height:800}});await context.addInitScript(silent);
  await context.addInitScript(value=>window.__uiOnly=value,!!process.env.KNICK_UI_ONLY);
  const page=await context.newPage(),requests=[];page.on('request',r=>requests.push(r.url()));
@@ -105,6 +119,7 @@ try{
   const geometry=await p.locator('#humor-name').evaluate(el=>{const l=el.parentElement.querySelector('span'),r=el.getBoundingClientRect(),lr=l.getBoundingClientRect(),paper=document.querySelector('.humor-paper').getBoundingClientRect();return{label:l.textContent,fit:l.dataset.pretextFit,measurement:l.dataset.measurement,optional:!el.required,verticalBounds:[r.top,r.bottom],verticalVisible:r.top>=0&&r.bottom<=Math.min(innerHeight,document.getElementById('english-subtitle').hidden?innerHeight:document.getElementById('english-subtitle').getBoundingClientRect().top),viewport:innerWidth,zoom:getComputedStyle(document.documentElement).zoom,variable:getComputedStyle(document.body).getPropertyValue('--humor-viewport-width'),paperBounds:[paper.left,paper.right],paperInside:paper.left>=0&&paper.right<=innerWidth+1,inside:r.left>=0&&r.right<=innerWidth+1,labelInside:lr.left>=0&&lr.right<=innerWidth+1,overflow:document.documentElement.scrollWidth>innerWidth+1}});
   if(!geometry.paperInside)console.log(JSON.stringify({label,geometry}));assert(geometry.optional&&geometry.inside&&geometry.labelInside&&geometry.paperInside&&geometry.verticalVisible);assert(!geometry.overflow);assert.notEqual(geometry.fit,'unavailable');assert.deepEqual(errors,[]);
   await p.screenshot({path:resolve(out,label+'.png')});report.cases.push({name:label,language,zoom,geometry,errors});await ctx.close();
+ }
  }
  report.complete=true;
 }catch(error){report.failure=error.stack;throw error}finally{

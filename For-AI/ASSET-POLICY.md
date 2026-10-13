@@ -825,7 +825,7 @@ profiles are retained under output/smoothness in the performance worktree.
 
 ## Local 3D buildings
 
-The Jobcenter uses `jobcenter.js`'s original instanced-box facade (eight material batches plus one sign), with the same building material/fade registry and solid parcel as other city offices. There is no remote texture or separate loaded/fallback model. Its 768 × 160 sign is 491,520 decoded RGBA bytes before mipmaps. The first-person void lazily allocates two planes (procedural fire and additive tunnel haze), two shader materials, no textures and one media element on entry; all are released on exit. `assets/audio/jobcenter/overlord.mp3` transfers 214,892 bytes (mono 24 kHz, 26.783 seconds; about 2.57 MB if fully decoded to float PCM). The 8,678-byte metadata carries 40 Hz byte-quantized energy/attack tracks measured from the final encoded MP3. Neither asset loads at title/startup; only the active visit fetches them. The existing game loop owns updates, and the existing renderer keeps its pixel budget. `tests/jobcenter.test.mjs` and `tools/playtest-jobcenter.mjs` cover movement, entry/exit, media timing and cleanup. Perceptual listening and physical Android coverage must be reported separately from silent emulation.
+The Jobcenter uses `jobcenter.js`'s original instanced-box facade (eight material batches plus one sign), with the same building material/fade registry and solid parcel as other city offices. There is no remote texture or separate loaded/fallback model. Its 768 × 160 sign is 491,520 decoded RGBA bytes before mipmaps. The first-person void lazily allocates two planes (procedural fire and additive tunnel haze), two shader materials, no textures and one media element on entry; all are released on exit. `assets/audio/jobcenter/overlord.mp3` transfers 214,892 bytes (mono 24 kHz, 26.783 seconds; about 2.57 MB if fully decoded to float PCM). The 9,231-byte metadata carries 40 Hz byte-quantized energy/attack tracks and measured pause/dismissal cues from the final encoded MP3. Neither asset loads at title/startup; only the active visit fetches them. `jobcenter-rumble.js` synthesizes one four-second, 12 kHz mono loop (192,000 PCM bytes), using one buffer source, low-pass filter and gain on the existing effect bus; it fetches no sound asset and creates no second root AudioContext. Sources disconnect on pause, blur, hidden-page, failure and exit, with a 60-second maximum lifetime. The diagnostic page has its own single lazy audio context. The existing game loop samples all cues at native media time, and the existing renderer keeps its pixel budget. `tests/jobcenter.test.mjs`, `tests/jobcenter-rumble.test.mjs` and `tools/playtest-jobcenter.mjs` cover movement, entry/exit, media timing, bounded synthesis and cleanup. Perceptual listening and physical Android coverage must be reported separately from silent emulation.
 
 The JWD garden suburb uses six procedural buildings in the canonical building
 list and four small procedural character costumes (three residents plus one
@@ -838,9 +838,13 @@ doors are unchanged. Heiko has procedural blond hair, stubble and a ribbed brown
 zip-neck sweater; his instance buffers retire with his owned actor geometry.
 The private reference photo is not a runtime asset. The neighborhood requests
 no municipal GLBs, placard images or character atlases. Six small canvas
-nameplates and one street sign use 1,048,576 decoded
+nameplates and one combined locality/street sign use 1,441,792 decoded
 RGBA bytes, no mipmaps. The house/four-character/garden/street-sign diagnostic
-has 294 meshes, 13,242 triangles, 245,724 geometry bytes and 30,528 instance bytes.
+has 295 meshes, 13,244 triangles, 245,724 geometry bytes and 30,528 instance bytes.
+The yellow JWD sign uses a 512 × 320 canvas shared by separate front/back planes;
+its unchanged solid post stays below overhead signage with 2.025 units of clear
+height. Station nameplates reuse the existing station canvases and add no root
+asset requests. The diagnostic page now includes the matching JWD platform.
 The garden extension adds three fitted car silhouettes, clipped/ragged hedges,
 upright/fallen gnomes and instanced grass details with no asset requests or new
 textures. Shared authored rectangles bound every solid, including car wheels
@@ -881,6 +885,17 @@ candidate startup peaked at 17,982,616 local uncompressed bytes. No new texture
 or asset request was added. Independent geometry/camera reviews and actual A38
 form-submission/neighbor-introduction playtests passed; physical Android remains
 unavailable. Evidence is under `output/jwd-floors-heiko/`.
+
+The locality/station signage update compared one cold seed-42 run per viewport
+against `40bd396`, with the same JWD position, Chrome 155 and Iris Xe renderer.
+Desktop active p95 was 21.5→30.2 ms and portrait emulation 29.7→34.8 ms;
+input p95 was 33.9→28.6 ms and 25.5→36.1 ms. These small samples do not
+establish a performance improvement. All nine inputs responded in each run,
+with zero page errors; startup peaked at 17,579,415 local uncompressed bytes
+and the existing startup/title/buffer guards passed. Independent physics and
+camera reviews passed, including root/diagnostic portrait and landscape and
+the optional satire kit. Physical Android remains untested. Evidence is under
+`output/jwd-signs/`.
 
 The Bürgeramt entrance radiance is original runtime geometry: one retained door
 plane, one 5 × 5 ray/halo shader plane, and one short-range shadow-free point
@@ -1259,3 +1274,9 @@ The appointment intercom loads its 16.03 MB compressed name model only after the
 Preparation is serial, limited to twelve pending jobs and eight complete call WAVs. A same-name batch resolves all matching counter requests without repeated inference or nested retained bundles. Idle workers terminate after five seconds; one encoded model buffer remains in page RAM for a verified worker restart. Hidden pages suspend preparation; exit/replay/pagehide clear transient speech and model buffers. Fetches use no-store; the application writes no speech data to persistent storage or user files. A 180-second terminal preparation bound retains captions and the normal appointment gate on failure.
 
 Three silent production-worker checks pass on desktop and Android portrait/landscape emulation. On this laptop, first preparation took 3.3–4.0 seconds including startup; native name-only decoding typically took 0.09–0.22 seconds. These observations do not establish physical-phone performance or universal client speed. Root cold-start budgets and name-inference input/render observations are separate release evidence.
+
+Kripo greeting names reuse the same one-thread pipeline with a separate 16.03 MB model on the companion. Two fixed parts add 139,864 bytes; no client loads the OpenVoice teacher or a second conversion model. Unsupported WASM SIMD or missing required APIs fail before model/runtime HTTP. The first usable name warms six fixed call recordings in native media buffers, with an eight-clip cap and no startup preload or playback. A ready name greeting continues into the fixed body; an unavailable greeting immediately selects the complete original introduction and question. Static spans transitions, and slot completion/pagehide releases media buffers. The intercom likewise keeps its recorded “Nächste bitte!” backup at the allocated counter.
+
+Final silent paired native-media checks pass on desktop and Android portrait/landscape emulation for both the named and complete recorded backup paths. Named greeting readiness was 4.1–7.0 seconds on this laptop; the prewarmed body followed by 0.9–1.3 ms with static active. Unsupported cases requested no model. Three final direct-office intercom checks pass with one model transfer, idle release and responsive input; observed first readiness was 7.9–16.3 seconds and input admission 17–196 ms on the shared laptop. Native name-only median 0.156 seconds is a separate CPU2 observation, not smartphone timing.
+
+Six baseline and six speech-candidate root cold runs pass on published base `0f1d9a44`. After preserving the newer published controls, another six shipping-candidate runs pass the 18 MB transfer, title cadence, drawing-buffer, input and error guards; maximum transfer is 17,923,041 bytes. These measurements do not establish a speedup. Reports remain in ignored task output. No physical Android or universal peak-memory/speed claim.

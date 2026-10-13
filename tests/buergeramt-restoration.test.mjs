@@ -72,3 +72,13 @@ test('hidden time pauses recovery and replay removes completed recovery ownershi
  assert.ok(h.level.floorState.goop>.99,'new attempt has no completed recovery latch');
  h.node('amt-exit').click();closeEnough(h.level.floorState.time,0);closeEnough(h.level.floorState.visualTime,0);
 });
+
+test('portrait interaction cannot restart melting during or after counter recovery',()=>{
+ for(const seconds of [0,45,90]){
+  const h=fixture({age:60});h.level.update(0);advance(h,seconds);
+  h.window.amtRecoveryMove(3.4,2.8);h.faceToward(3.4,5.43);
+  const before=h.level.floorState;assert(before.restoring);assert.equal(before.goop,0);
+  h.level.interact({portrait:true});assert.equal(h.level.stage,'portrait');assert.deepEqual(h.level.floorState,before);
+  h.level.update(.1);assert.equal(h.level.floorState.goop,0);assert.equal(h.level.timeScale,1);
+ }
+});

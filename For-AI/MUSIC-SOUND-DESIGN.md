@@ -64,6 +64,24 @@ The existing city soundtrack remains governed by its music toggle, foreground au
 
 Door interaction owns one visit; distance at or below 13 metres commits its single speech start. The user-supplied GS Evil recording is processed offline by `tools/build-jobcenter-audio.py`: minus four semitones, a quiet low octave, short reflections and restrained compression. The final mono MP3 is 26.783 seconds, −18.01 LUFS and −2.88 dBTP. Independent ASR retained the exact authored words after compound normalization; this is transcript evidence, not perceptual approval. Its 40 Hz final-encoded energy and attack tracks use bytes divided by 255 at runtime. Native media time drives the flame, while the scene clock owns free movement and proximity growth. Media `ended` owns immediate ejection, without a guessed playback timer or a release animation. Missing/disabled/stalled audio retains a bounded caption-only fallback, and every callback is visit-owned. City music and other speech stop on entry and resume their ordinary policies after exit; no new audio context or continuous sound bed is added. Listening and physical-device results remain separately recorded.
 
+The overlord's committed recorded-speech playback owns a low cave rumble through
+its existing AudioContext and effects output. `jobcenter-rumble.js` renders one
+seeded, 192,000-byte mono loop with 44/67 Hz body and upper bass harmonics; one
+low-pass filter and gain follow the same media playhead. The final encoded MP3's
+260–3000 Hz, 10 ms RMS analysis found pause intervals at 7.22–8.38,
+10.99–12.12, 14.79–15.49 and 24.08–24.32 seconds. Its independent German ASR
+retains the whole dismissal from a 24.30-second crop but loses the first word
+from a 24.50-second crop, so the last rise precedes the phrase near 24.32.
+`overlord.json` owns those pause/dismissal cues; rumble reaches its strongest
+level in the last gap, stays below 0.08 of its normalized control under the
+final words, and briefly swells after speech falls quiet. The existing scene
+creates the source only while the recorded speech plays, stops it on pause,
+hidden/blur, failure, exit or completion, and recreates it on valid resume.
+The source also stops after 60 seconds even if cleanup is missed. There is no
+new context, bus, player, timer, asset fetch or mission event. Seeded PCM and
+level/lifetime checks pass; silent browser behavior, physical-device output and
+perceptual listening require separate evidence.
+
 ### Mission fax beat (`mission-fax-feed`, 2026-10-08)
 
 `game-hud.js` commits one arrival or departure for the current visible mission

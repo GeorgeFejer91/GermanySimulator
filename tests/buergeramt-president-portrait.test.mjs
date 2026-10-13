@@ -4,6 +4,34 @@ import {harness} from './amt-harness.mjs';
 
 function approach(h){h.moveTo(0,4.8);h.moveTo(3.4,4.8);h.moveTo(3.4,2.8);h.faceToward(3.4,5.43);h.level.update(0)}
 
+test('initiating the portrait ends the shared grace immediately, before speech can finish',()=>{
+ for(const dt of [1/60,1/30,.1]){
+  const h=harness('host',{cinematics:false});approach(h);
+  assert(h.level.floorState.time<90);assert.equal(h.level.floorState.goop,0);
+  h.key('KeyE');h.key('KeyE','keyup');
+  assert.equal(h.level.stage,'portrait');assert.equal(h.level.floorState.time,90);
+  assert.equal(h.level.floorState.visualTime,90,'liquid flow starts at its zero-phase boundary');
+  h.key('KeyE');h.key('KeyE','keyup');assert.equal(h.level.floorState.time,90);
+  h.level.update(dt);
+  assert(h.level.floorState.goop>0,'the first frame melts during the monologue');
+  assert(h.level.timeScale<1);assert(h.level.floorState.visualTime>90);
+  const before=h.level.floorState;h.hide();h.elapse(45);assert.deepEqual(h.level.floorState,before);
+  h.level.replay(h.config);assert.equal(h.level.floorState.time,0);assert.equal(h.level.floorState.visualTime,0);
+ }
+});
+
+test('approaching or interacting away from the portrait retains the ordinary grace',()=>{
+ const h=harness('host',{cinematics:false});h.key('KeyE');h.key('KeyE','keyup');
+ assert.equal(h.level.floorState.time,0);h.level.replay(h.config);approach(h);h.elapse(10);
+ assert(h.level.floorState.time<90);assert.equal(h.level.floorState.goop,0);
+});
+
+test('a portrait interaction preserves an already running melt wave',()=>{
+ const h=harness('host',{cinematics:false});approach(h);h.elapse(120);
+ const before=h.level.floorState;assert(before.goop>0);
+ h.level.interact();assert.equal(h.level.stage,'portrait');assert.deepEqual(h.level.floorState,before);
+});
+
 test('one native recording owns completion, hidden pause and cancellation of the full monologue',()=>{
  const h=harness('host',{voice:true,cinematics:false}),media=[];
  h.context.Audio=class{

@@ -8,7 +8,7 @@ The delivered graph is about 16.03 MB compressed / 18.85 MB encoded ONNX. Per-ch
 
 Sentence priors and flow preserve pronunciation context. Only the name and sixteen additional context frames pass through the vocoder; the context is removed from the final waveform. Four prerecorded counter tails total 277,168 bytes. One name pass produces four complete WAV variants. Native retained-prefix comparisons include short, long and comma-containing names; their maximum sample difference from full decoding is 1.85e-6.
 
-Some held-out proper names are misread by independent ASR. Listening acceptance for two examples does not establish universal pronunciation or voice resemblance. Exact name/counter captions and terminal caption fallback remain authoritative. Desktop and Android browser emulation establish neither physical-phone performance nor a guarantee for every client.
+Some held-out proper names are misread by independent ASR. Listening acceptance for two examples does not establish universal pronunciation or voice resemblance. A missing named lease with voices enabled selects the existing recorded “Nächste bitte!” at the allocated counter, with matching text. Muting retains the personalized caption. Desktop and Android browser emulation establish neither physical-phone performance nor a guarantee for every client.
 
 Model bytes and generated speech remain in page/worker buffers and bounded Blob caches. Speech uses no app-owned Cache Storage, IndexedDB, filesystem or download/save action. Exit, replay and pagehide release retained speech buffers.
 

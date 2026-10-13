@@ -8,6 +8,7 @@
 #amt-walk-hud{--subtitle-height:0px}
 .amt-inside #app.subtitles-visible #amt-walk-hud{--subtitle-height:69px}
 .amt-walk-hud.sequence :is(.amt-walk-top,.amt-reticle,.amt-walk-bottom,.amt-touch-controls,.amt-look-zone){display:none}
+.amt-reticle{visibility:hidden}
 /* The existing status becomes a small, measured counter score, below controls. */
 .amt-walk-hud>#amt-status{position:absolute;top:var(--amt-status-top,54px);left:12px;right:12px;width:auto;height:auto;max-width:none;margin:0;padding:3px 0;clip-path:none;white-space:normal;overflow-wrap:break-word;text-align:center;color:#fff4df;font:700 13px/1.4 Arial,sans-serif;text-shadow:0 2px 4px #000;pointer-events:none}
 .amt-walk-hud>#amt-status[hidden]{display:none}
@@ -304,3 +305,4 @@ html[data-call-ui="google"] .amt-compact .phone-choices #phone-answer{background
 .phone-active-controls .call-icon{width:32px;height:32px;fill:currentColor}
 .phone-active-controls .call-label{font:700 11px/1.2 Arial,sans-serif}
 .phone-active-controls button:focus-visible{outline:3px solid #fff;outline-offset:4px}
+

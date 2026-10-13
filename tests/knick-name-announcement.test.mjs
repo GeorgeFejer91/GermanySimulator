@@ -5,6 +5,8 @@ import vm from 'node:vm';
 import {harness,source} from './amt-harness.mjs';
 
 const binding=JSON.parse(readFileSync('For-AI/VOICE-CAST.json')).productionVoices['amt-brunhilde-knick'];
+const queueCue=JSON.parse(readFileSync('assets/voices/knick/queue-call-manifest.json')).clips[0];
+const queuePath='./'+queueCue.file+'?v='+queueCue.sha256;
 const words=['','eins','zwei','drei','vier'];
 function monitorLink(h){
  h.link=h.links.at(-1);h.link.selectPeer=peer=>{h.link.peer=peer;return true};
@@ -14,7 +16,7 @@ function monitorLink(h){
   return send(type,data);
  };
 }
-function speech(h,{initialName=''}={}){
+function speech(h,{initialName='',backup=false}={}){
  monitorLink(h);
  const requests=[],clips=[],cache=new Map();let releases=0,disposed=0,preparationCancelled=0;
  h.window.GermanyKnickSpeech={initialName,prepare(name,counter){
@@ -26,6 +28,8 @@ function speech(h,{initialName=''}={}){
   durationSeconds:4,english:result.english,release(){releases++}}:null},
  cancelPreparation(){preparationCancelled++;for(const request of requests)request.resolve({status:'disabled',reason:'cancelled'})},dispose(){disposed++}};
  h.window.GermanySimulatorAudioText.productionVoices={'amt-brunhilde-knick':binding};
+ h.window.GermanySimulatorAudioText.recordedClip=(voiceId,text)=>backup&&voiceId===queueCue.voiceId&&text===queueCue.text?'./'+queueCue.file:null;
+ h.window.GermanySimulatorAudioText.recordings={['./'+queueCue.file]:{...queueCue,source:queueCue.text}};
  h.context.Audio=class{
   constructor(src){this.src=src;this.duration=4;this.currentTime=0;this.paused=true;clips.push(this)}
   play(){this.paused=false;h.context.setTimeout(()=>this.onplaying?.(),16);return Promise.resolve()}
@@ -63,20 +67,22 @@ test('a received ticket waits for its name audio, then its own call window begin
  const h=harness('host',{voice:true,fakeAudio:true}),s=speech(h);const ticket=register(h);
  assert.equal(s.requests.length,1);assert.equal(s.requests[0].name,'Erika Mustermann');
  h.elapse(60);assert.equal(h.level.tickets[0].called,false);assert.equal(h.level.tickets[0].deadline,0);
- assert.equal(s.clips.length,0);assert.equal(h.level.stage,'waiting');
+ assert.equal(s.clips.filter(clip=>clip.src.startsWith('blob:')).length,0);assert.equal(h.level.stage,'waiting');
  await ready(s.requests[0]);h.elapse(13);
- assert.equal(h.level.tickets[0].called,true);assert.equal(s.clips.length,1);
- assert.equal(s.clips[0].src,'blob:local/knick');
+ const namedClips=s.clips.filter(clip=>clip.src.startsWith('blob:'));
+ assert.equal(h.level.tickets[0].called,true);assert.equal(namedClips.length,1);
+ assert.equal(namedClips[0].src,'blob:local/knick');
  assert.equal(h.node('amt-ambient').textContent,`FRAU KNICK: Erika Mustermann, bitte zu Schalter ${words[ticket.counter]}!`);
  assert.equal(h.level.lipSpeech.actor,`clerk-${ticket.counter}`);assert.equal(h.synth.spoken.length,0);
- s.clips[0].end();assert.equal(s.releases,1);assert.equal(h.level.audioTextBusy,false);
+ namedClips[0].end();assert.equal(s.releases,1);assert.equal(h.level.audioTextBusy,false);
 });
 
-test('failed synthesis still calls the ticket and retains the exact name caption',async()=>{
- const h=harness('host',{voice:true}),s=speech(h);const ticket=register(h,'Jürgen Müller');
+test('failed synthesis still calls its ticket and plays the accepted next-person backup with matching caption',async()=>{
+ const h=harness('host',{voice:true}),s=speech(h,{backup:true});const ticket=register(h,'Jürgen Müller');
  s.requests[0].resolve({status:'failed',reason:'unavailable'});await Promise.resolve();h.elapse(14);
- assert.equal(h.level.tickets[0].called,true);assert.equal(s.clips.length,0);assert.equal(h.synth.spoken.length,0);
- assert.equal(h.node('amt-ambient').textContent,`FRAU KNICK: Jürgen Müller, bitte zu Schalter ${words[ticket.counter]}!`);
+ assert.equal(h.level.tickets[0].called,true);assert.equal(s.clips.length,1);assert.equal(h.synth.spoken.length,0);
+ assert.equal(s.clips[0].src,queuePath);assert.equal(h.node('amt-ambient').textContent,'FRAU KNICK: Nächste bitte!');
+ assert.equal(h.level.lipSpeech.actor,`clerk-${ticket.counter}`);assert(h.level.tickets[0].deadline>0);
 });
 
 test('muted voices do not request a model or wait for synthesis',()=>{
@@ -138,14 +144,14 @@ test('retiring an independently speaking visitor stops only her announcement',as
  s.clips[0].end();h.elapse(15);assert.equal(s.clips.length,1);assert.equal(h.level.tickets[0].called,false);
 });
 
-test('failed and muted names retain their English translation independently of a recording',async()=>{
+test('failed voiced names translate the actual backup while muted names retain their personalized translation',async()=>{
  for(const voice of [true,false]){
-  const h=harness('host',{voice,phoneCaptions:true}),s=speech(h),ticket=register(h,'Jürgen Müller');
+  const h=harness('host',{voice,phoneCaptions:true}),s=speech(h,{backup:true}),ticket=register(h,'Jürgen Müller');
   if(voice){s.requests[0].resolve({status:'failed',reason:'unavailable'});await Promise.resolve()}
   h.elapse(14);
   assert.equal(h.node('english-subtitle').lang,'en');
-  assert.equal(h.node('english-subtitle').textContent,`Jürgen Müller, please go to counter ${ticket.counter}!`);
-  assert.equal(s.clips.length,0);assert.equal(h.synth.spoken.length,0);
+  assert.equal(h.node('english-subtitle').textContent,voice?queueCue.english:`Jürgen Müller, please go to counter ${ticket.counter}!`);
+  assert.equal(s.clips.length,voice?1:0);if(voice)assert.equal(s.clips[0].src,queuePath);assert.equal(h.synth.spoken.length,0);
  }
 });
 
@@ -193,13 +199,13 @@ test('voice off preserves an unrelated mission recording and its completion gate
 });
 
 test('a recording for another counter cannot replace the current exact announcement',async()=>{
- const h=harness('host',{voice:true,fakeAudio:true,phoneCaptions:true}),s=speech(h),ticket=register(h,'Jürgen Müller');
+ const h=harness('host',{voice:true,fakeAudio:true,phoneCaptions:true}),s=speech(h,{backup:true}),ticket=register(h,'Jürgen Müller');
  const lease=h.window.GermanyKnickSpeech.lease;
  h.window.GermanyKnickSpeech.lease=result=>({...lease(result),text:`Jürgen Müller, bitte zu Schalter ${words[ticket.counter===1?2:1]}!`});
  await ready(s.requests[0]);h.elapse(13);
- assert.equal(s.clips.length,0);assert.equal(s.releases,1);assert.equal(h.synth.spoken.length,0);
- assert.equal(h.node('amt-ambient').textContent,`FRAU KNICK: Jürgen Müller, bitte zu Schalter ${words[ticket.counter]}!`);
- assert.equal(h.node('english-subtitle').textContent,`Jürgen Müller, please go to counter ${ticket.counter}!`);
+ assert.equal(s.clips.length,1);assert.equal(s.clips[0].src,queuePath);assert.equal(s.releases,1);assert.equal(h.synth.spoken.length,0);
+ assert.equal(h.node('amt-ambient').textContent,'FRAU KNICK: Nächste bitte!');
+ assert.equal(h.node('english-subtitle').textContent,queueCue.english);
 });
 
 test('completed tickets retain speech metadata without retaining the synthesized WAV',async()=>{

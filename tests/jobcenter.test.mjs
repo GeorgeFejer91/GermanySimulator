@@ -8,6 +8,16 @@ import * as T from '../assets/vendor/three/0.186.0/build/three.module.min.js';
 const game=readFileSync(new URL('../game.js',import.meta.url),'utf8');
 const data=JSON.parse(readFileSync(new URL('../assets/audio/jobcenter/overlord.json',import.meta.url)));
 const fresh=()=>({x:0,z:34,yaw:0,pitch:0,time:0,distance:34,pressure:0});
+test('arrow pitch leaves position fixed while WASD still moves and page keys remain aliases',()=>{
+ for(const dt of [1/60,1/30,.1]){
+  const s=fresh();for(let i=0;i<2/dt;i++)stepJobcenter(s,{ArrowUp:true},dt);
+  assert.equal(s.pitch,1.25);assert.equal(s.x,0);assert.equal(s.z,34);
+  for(let i=0;i<4/dt;i++)stepJobcenter(s,{ArrowDown:true},dt);
+  assert.equal(s.pitch,-1.25);assert.equal(s.z,34);
+  stepJobcenter(s,{KeyW:true},dt);assert.ok(s.z<34);
+  stepJobcenter(s,{PageUp:true},dt);assert.ok(s.pitch>-1.25);
+ }
+});
 test('approach is necessary; movement remains unbounded and frame-rate independent',()=>{
  for(const dt of [1/60,1/30,.1]){
   const s=fresh();for(let i=0;i<10/dt;i++)assert.equal(stepJobcenter(s,{KeyS:true},dt),false);
@@ -70,7 +80,8 @@ test('media receipts own ejection; pause, failure and stale visits have bounded 
  const originals=Object.fromEntries(names.map(k=>[k,Object.getOwnPropertyDescriptor(globalThis,k)]));
  let now=0;const media=[],keys={},closed=[],elements=[];
  class Element extends EventTarget{append(){} remove(){this.removed=true} setAttribute(){} setPointerCapture(){} focus(){} }
- class Media{constructor(){this.currentTime=0;this.paused=true;media.push(this)}play(){this.paused=false;return Promise.resolve()}pause(){this.paused=true}removeAttribute(){this.src=''}load(){} }
+ const pendingPlays=[];let deferPlay=false;
+ class Media{constructor(){this.currentTime=0;this.paused=true;media.push(this)}play(){this.paused=false;return deferPlay?new Promise(resolve=>pendingPlays.push(resolve)):Promise.resolve()}pause(){this.paused=true}removeAttribute(){this.src=''}load(){} }
  const doc=new EventTarget();doc.hidden=false;doc.head=new Element();doc.body={classList:{add(){},remove(){}}};doc.createElement=()=>{const e=new Element();elements.push(e);return e};doc.getElementById=id=>id==='app'?new Element():null;
  const values={window:new EventTarget(),document:doc,matchMedia:()=>({matches:false}),Audio:Media,fetch:async()=>({ok:true,json:async()=>data}),performance:{now:()=>now},innerWidth:1280,innerHeight:800};
  for(const [key,value] of Object.entries(values))Object.defineProperty(globalThis,key,{value,configurable:true});
@@ -84,6 +95,15 @@ test('media receipts own ejection; pause, failure and stale visits have bounded 
   for(let i=0;i<20;i++)tick();assert.equal(encounter.active,true,'elapsed scene time cannot finish the voice');
   doc.hidden=true;doc.dispatchEvent(new Event('visibilitychange'));const before=encounter.inspect().z;keys.KeyW=true;tick();assert.equal(encounter.inspect().z,before);assert.equal(first.paused,true);
   doc.hidden=false;doc.dispatchEvent(new Event('visibilitychange'));await flush();assert.equal(first.paused,false);
+  tick();deferPlay=true;
+  window.dispatchEvent(new Event('blur'));window.dispatchEvent(new Event('focus'));
+  assert.equal(pendingPlays.length,1);
+  window.dispatchEvent(new Event('blur'));window.dispatchEvent(new Event('focus'));
+  assert.equal(pendingPlays.length,2,'new focus can resume while an invalidated play is pending');
+  pendingPlays[1]();await flush();pendingPlays[0]();await flush();tick();
+  assert.equal(first.paused,false,'stale play completion cannot pause the newer resumed voice');
+  assert.equal(pendingPlays.length,2,'a render after resume does not restart playing media');
+  deferPlay=false;
   first.currentTime=data.duration;first.onended();assert.equal(encounter.active,false);assert.deepEqual(closed,['ended']);assert.equal(first.paused,true);assert.equal(first.src,'');
   await enter();oldEnd();assert.equal(encounter.active,true,'stale completion cannot eject a new visit');
   media.at(-1).onerror();assert.equal(encounter.inspect().failed,true);
@@ -91,3 +111,4 @@ test('media receipts own ejection; pause, failure and stale visits have bounded 
   encounter.open({onClose:r=>closed.push(r)});await flush();encounter.close();assert.equal(elements.every(e=>e.removed),true);assert.ok(media.every(m=>m.paused));
  }finally{for(const name of names){if(originals[name])Object.defineProperty(globalThis,name,originals[name]);else delete globalThis[name]}}
 });
+

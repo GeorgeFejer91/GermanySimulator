@@ -23,8 +23,14 @@ remain authoritative. The scene outside the joystick and toolbar accepts a
 separate captured finger for horizontal and vertical look; walking retains its pitch, bounded to
 ±.9 radians. Touch sensitivity follows the viewport's shorter dimension, with
 the same time-scale multiplier as desktop drag. Mouse drag also supports pitch;
-Page Up/Down give keyboard pitch control, while arrow turning/WASD retain their
-existing behavior. Scripted speakers, the portrait and mirror retain their own
+Arrow Up/Down control pitch, with Page Up/Down retained as aliases. Left/right
+arrows turn; WASD and the touch stick walk. Mouse and trackpad movement over the
+scene also changes yaw/pitch without a held button, using the same sensitivity
+and slowdown as drag look. Controls, the open mixer, scripted sequences and
+paused/hidden scenes do not take mouse look. Focus loss and scene transitions
+reset the mouse baseline. The centered reticle remains an invisible HUD object;
+nearby facing interactions retain their existing selection.
+Scripted speakers, the portrait and mirror retain their own
 camera framing. Desktop E retains its nearby facing target. A single mouse click also selects a visible interactive target, while mouse drags retain camera control. Mobile double
 taps select the closest visible person, counter, portrait or mirror within 64–112 CSS pixels
 of the tap, ranked by screen distance and then visible depth. Selection uses
@@ -78,6 +84,14 @@ pauses office queue progression like other encounters, and returns automatically
 to the current waiting/QR/counter state. Missing or disabled player audio keeps
 the exact readable captions. Phone ticket receipts retain their authority
 throughout; the portrait awards neither a ticket nor A38.
+
+Initiating this interaction before melting starts ends the remaining shared
+90-second grace period immediately, before speech starts or completes. Advance
+the shared residence and integrated scene clocks to the liquid onset together,
+so the first following frame begins portrait/floor melting, flow and their
+coupled slowdown. Already-running melt waves and active or completed counter
+recovery retain their progress. Approach alone does not end the grace period;
+close/replay resets it. The portrait has no independent melting clock.
 
 The opposite, left entrance-wall corner has a tall silver-framed mirror at
 `(-5.65, 5.36)`. Its live planar reflection uses the actual room, including
@@ -170,7 +184,8 @@ No new synthesis or voice profile is needed for this restoration.
 
 The room begins with .82 m black-and-white checkerboard tiles and painted grout.
 The first **90 seconds of visible, unscaled residence inside the actual doorway**
-are a grace period: intact floor and portrait, full-speed movement and audio, no
+are a grace period unless the player initiates the Steinmeier interaction early:
+intact floor and portrait, full-speed movement and audio, no
 liquid targets or walking ripples. Then, over **480 seconds (8 minutes)**, their
 pigment gradually stretches into curling veins and merging oily
 pools, with progressively finer nested black-and-white ribbons along the mixed
@@ -251,7 +266,7 @@ Reduced motion and GPU failure retain a static spatial melting approximation
 with the same goop/speed value, without ripple animation or pigment targets.
 
 The existing Steinmeier oil portrait uses this same wave and residence clock,
-with paint progress `min(1, 1.15 × goop)`. This 15% increase applies together to
+with paint progress `min(1, 1.30 × goop)`. This 30% increase applies together to
 the framed image, wall drips and floor deposition; the floor's own melt and
 slowdown retain their shared value. `buergeramt-portrait-melt.js` transports the real
 painted image downward, gradually exposing the bare backing. Eight irregular
@@ -261,6 +276,9 @@ instead of stretching fixed sawtooth strips. A transparent,
 depth-tested, statically curved sheet continues the paint from the frame onto
 the wall, ending at y=.0024 m and z=5.4696 (the inner wall face is z=5.47); its
 front reaches the ground before it can feed the floor. The existing floor pass
+uses a slightly longer shared drip reach (`1.12 + .09 × channel seed`) so paint
+contacts the ground and begins mixing sooner; wall film and floor contact use
+the same function, without depositing before the visible drip arrives. The pass
 injects the same image colors at that contact, then transports and diffuses them
 with the black/white oils and walking wakes. RGBA stores mixed RGB plus deposited
 paint coverage. The gilded frame, nameplate, original photo, collision envelope
@@ -479,17 +497,24 @@ The desktop exposes visible/hidden/unknown through the current status and
 browser-page visibility, not detection of the physical ringer switch, device
 volume, or the person looking at the display.
 
-The opening uses the accepted ticket name in one German utterance:
+The named opening uses the accepted ticket name in one German utterance:
 “Spricht hier [Name]? Hier ist die Kriminalpolizei am Apparat!” followed by the
 existing grass allegation. It finishes naturally before Knick's argument;
-missing playback still uses the bounded speech fallback. Its exact dynamic
-source and English translation supply the desktop caption on playback receipts.
-Coordination with the Knick local-speech owner confirmed that
-`GermanyKnickSpeech.prepare(name, counter)` and its leases are Knick-only:
-the Kripo must not reuse that model/profile. This dynamic opening uses Kripo's
-existing German male browser fallback; subsequent exact recordings keep the
-selected `kriminalpolizei` identity. Names stay in the current ticket/session,
-with no new model, service, persistence or remote synthesis request.
+its exact source and English translation supply the desktop caption on playback
+receipts. `GermanyKripoSpeech` prepares one name with the user-approved compact
+caller derivative and prerecorded surrounding words; it retains the selected
+`kriminalpolizei` profile. The intercom has its own model/profile and leases.
+The first valid name warms the six fixed call recordings without playing them.
+An unsupported browser or unfinished greeting immediately plays the complete
+original Kripo introduction and question, with matching captions. A pre-onset
+greeting failure also selects that backup, and a failed cropped body retries
+the full opening once. Both paths finish before Knick's first interruption.
+Continuous phone static covers transitions; Answer never waits for synthesis.
+If the intercom model is unavailable, its recorded “Nächste bitte!” still calls
+the allocated counter. Names, model data and generated clips stay in browser
+buffers; slot/episode completion and pagehide release them. There is no remote
+synthesis request or file save. Voice provenance and pronunciation limitations
+are owned by [the voice protocol](./VOICE-SYNTH-PROTOCOL.md).
 
 The telephone is a staged incoming-call screen, with decorative SVG cellular,
 Wi-Fi and battery indicators beside the measured clock. These do not query
@@ -1440,4 +1465,5 @@ Six release cold-start lab runs pass the 18 MB transfer, 4 Hz title dispatch, 1.
 
 A valid name captured in the opening form is prepared before arrival; if absent, preparation starts at the companion registration. The local inference contract, intercom-only listening acceptance and training identity are owned by `VOICE-SYNTH-PROTOCOL.md`'s browser-local appointment-name section. Reservation code, assigned counter, exact ticket receipt and independent visitor ownership stay authoritative.
 
-A reservation whose audio is still preparing moves to a later turn at the same counter. Its board call and ordinary call-window deadline begin only after preparation succeeds or reaches a terminal caption fallback. A received personal call gets its own allocated clerk, exact visible name/counter and English translation; it bypasses only the ordinary rare anonymous-call cooldown and shares the existing foreground speech owner. A valid late ticket receipt can still announce within the remaining call window. Retirement, replay and superseding cues stop/release their exact media; stale synthesis cannot attach to a replacement ticket. Muting/unavailable synthesis retains the caption and board call without substituting another voice.
+A reservation whose audio is still preparing moves to a later turn at the same counter. Its board call and ordinary call-window deadline begin only after preparation succeeds or reaches a terminal fallback. A received personal call gets its own allocated clerk, exact visible name/counter and English translation; it bypasses only the ordinary rare anonymous-call cooldown and shares the existing foreground speech owner. A valid late ticket receipt can still announce within the remaining call window. Retirement, replay and superseding cues stop/release their exact media; stale synthesis cannot attach to a replacement ticket. Muting retains the personalized caption and board call. Unavailable synthesis plays the existing recorded “Nächste bitte!” with matching text at the allocated counter.
+
