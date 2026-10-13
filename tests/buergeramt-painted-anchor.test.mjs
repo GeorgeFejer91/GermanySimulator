@@ -82,6 +82,9 @@ test('paint keeps registered canvas aspect/floor, bounds residency and cancels l
   assert.equal(shader.uniforms.anchorLipAngleB.value,manifest.states.find(s=>s.id===manifest.segments[0].to).mouth_angle);
   paint.update({segment:0,u:0,arc:'raise'},r.source,true,{speaking:false,lipShape:[1,1,1,1]});
   assert.deepEqual(['x','y','z','w'].map(key=>shader.uniforms.anchorLipShape.value[key]),[0,0,0,0],'inactive speech cannot retain a rounded or biting deformation');
+  assert.equal(shader.uniforms.anchorSpeaking.value,0,'inactive speech preserves pre-open source paint');
+  paint.update({segment:0,u:0,arc:'raise'},r.source,true,{speaking:true,lipShape:[0,0,0,0]});
+  assert.equal(shader.uniforms.anchorSpeaking.value,1,'an owned closed cue must still close a pre-open source');
   assert.match(shader.vertexShader,/vec2 p=mix\(endpoints.xy,endpoints.zw,u\)/,'the complete native painting still moves along paired paths');
   assert.doesNotMatch(shader.vertexShader,/gaussianFlowWave|p\+=anchorEffect|radius=.*anchorEffect/,'no added spatial wave or pulsing patch support');
   assert.match(shader.fragmentShader,/float mass=6\.20;/,'constant optical kernel mass preserves edge coverage');
@@ -89,6 +92,7 @@ test('paint keeps registered canvas aspect/floor, bounds residency and cancels l
   assert.equal(shader.uniforms.anchorXY.value,paired.textures[0]);assert.equal(paint.inspect().technique,'native-texture-gaussians');
   paint.update({segment:0,u:.25,arc:'raise'},r.source,true,{speaking:true,lipShape:[.9,.2,.1,0]});
   assert.equal(paint.inspect().opacity,1);assert.equal(shader.uniforms.anchorMouth.value,.9);
+  assert.equal(shader.uniforms.anchorSpeaking.value,1);
   assert.equal(shader.uniforms.anchorPhase.value,.25);assert.equal(shader.uniforms.anchorMix.value,.15625);assert.equal(paint.inspect().resident,2);
   assert.equal(shader.uniforms.anchorMode.value,1);assert.equal(mesh.material.opacity,1);
   r.source.scale.x=1.8;r.source.scale.z=.6;r.source.position.x=-4;r.source.quaternion.z=.2;

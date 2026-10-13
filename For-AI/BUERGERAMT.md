@@ -1105,6 +1105,24 @@ Six fresh hardware-ANGLE office benchmark runs passed after depth integration, a
 
 ## Full mouth opening and recorded timing (2026-10-11)
 
+**Connected lip surface, 2026-10-13.** The shared native/atlas mouth painter uses
+a compact invertible local paint field with attached corners, bounded lower-jaw
+support and a distinct contact shape. All 67 native keys own `mouth_angle` and
+`mouth_gap` (upper/lower source boundaries in registered rect-height units) beside
+`mouth_xywh`; their source specifications and builder preserve these fields.
+Each paired endpoint articulates before the existing body transport. Atlas
+mouths carry centre and both axes through the actual baked field and texture
+crop, including local scale/shear. The 15 office actors share this implementation;
+unregistered rear/turn cells retain their original paint. Inactive speech returns
+exactly to the source; an owned closed cue also closes a pre-open painting.
+Original alpha remains exact, upper-face paint is protected, and pre-open
+paintings map their existing interior into one target cavity. Recorded bytes,
+cue data, media clocks, body phases, pivots and draw/texture ownership stay with
+the existing controllers. The speaking desk receives the existing bounded mobile
+paint slot before background clerks. This changes lip contour/attachment; the
+existing broader Gaussian midpoint ghosting remains a separate art limitation.
+
+
 The earlier texture-shift mouth caused visible lip vibration without an oral
 opening. `buergeramt-mouth-paint.js` now separates the original painted lips
 and lower jaw around a bounded, recessed mouth cavity. Native whole-body

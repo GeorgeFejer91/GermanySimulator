@@ -135,6 +135,7 @@ function installMask(T,actor){
  };
 }
 function createPaintSplat(T,paintGlsl){
+ const speaking={value:0};
  const angle={value:0},gap={value:new T.Vector2()},frame={value:new T.Vector4()};
  const cols=25,rows=17,count=cols*rows,quad=new T.PlaneGeometry(1,1),geometry=new T.InstancedBufferGeometry();
  geometry.index=quad.index;geometry.attributes=quad.attributes;
@@ -145,7 +146,7 @@ function createPaintSplat(T,paintGlsl){
  const material=new T.MeshBasicMaterial({transparent:true,depthTest:true,depthWrite:false,side:T.DoubleSide});
  material.forceSinglePass=true; // Flat paint needs one pass; retain visibility from both sides.
  material.onBeforeCompile=shader=>{
-  Object.assign(shader.uniforms,{lipFrame:frame,lipGap:gap,lipShape:shape,lipRect:rect,lipCrop:crop,lipSize:size,lipBreath:breath});
+  Object.assign(shader.uniforms,{lipSpeaking:speaking,lipFrame:frame,lipGap:gap,lipShape:shape,lipRect:rect,lipCrop:crop,lipSize:size,lipBreath:breath});
   shader.vertexShader=`attribute vec3 lipCell;uniform vec4 lipShape,lipRect,lipCrop;uniform vec2 lipSize;uniform float lipBreath;
    varying vec2 lipUv,lipKernel,lipFace;
    `+shader.vertexShader.replace("#include <begin_vertex>",`
@@ -160,11 +161,11 @@ function createPaintSplat(T,paintGlsl){
    float upper=smoothstep(-lipSize.y*.42,lipSize.y*.1,transformed.y);
    transformed.y+=.008*lipBreath*upper;transformed.x*=1.+.006*lipBreath*upper;
    `);
-  shader.fragmentShader=`uniform vec4 lipFrame;uniform vec2 lipGap;uniform vec4 lipShape,lipRect,lipCrop;uniform float lipBreath;varying vec2 lipUv,lipKernel,lipFace;
+  shader.fragmentShader=`uniform float lipSpeaking;uniform vec4 lipFrame;uniform vec2 lipGap;uniform vec4 lipShape,lipRect,lipCrop;uniform float lipBreath;varying vec2 lipUv,lipKernel,lipFace;
    ${paintGlsl}
    `+shader.fragmentShader.replace("#include <map_fragment>",`
    float kernel=exp(-.5*dot(lipKernel,lipKernel));
-   vec4 paint=amtMouthPaintFrame(map,lipUv,vec4(lipCrop.xy+lipRect.xy*lipCrop.zw,lipRect.zw*lipCrop.zw),lipShape,lipFrame,lipGap);diffuseColor*=paint;
+   vec4 paint=amtMouthPaintFrame(map,lipUv,vec4(lipCrop.xy+lipRect.xy*lipCrop.zw,lipRect.zw*lipCrop.zw),lipShape,lipFrame,lipGap,lipSpeaking);diffuseColor*=paint;
    float lightness=dot(diffuseColor.rgb,vec3(.2126,.7152,.0722));
    diffuseColor.rgb=mix(vec3(lightness),diffuseColor.rgb,1.085+.055*lipBreath)*(1.015+.035*lipBreath);
     // Partition optical depth among overlapping native-image Gaussians.
@@ -184,12 +185,13 @@ function createPaintSplat(T,paintGlsl){
    // The cue sampler already coarticulates. Copy its playhead pose directly;
    // another temporal filter would move visible openings after the sound.
    shape.value.fromArray(target);
-   const active=shape.value.x+shape.value.y+shape.value.z+shape.value.w>.015;
-   mesh.visible=active&&actor.mesh.material.opacity>.001;actor.mesh.material.userData.lipHole.value=active?1:0;
    rect.value.fromArray(registration);actor.mesh.material.userData.lipRect.value.set(registration[0],registration[1],registration[2]*2.5,registration[3]*3);
    const uv=actor.uv;crop.value.set(uv.getX(2),uv.getY(2),uv.getX(3)-uv.getX(2),uv.getY(0)-uv.getY(2));
    const key=actor.performance?'clerk':actor.lipId||actor.id||actor.name;
    gap.value.fromArray(poseGaps[key]?.[actor.mouthPose??0]??poseGaps[key]?.[0]??[0,0]);
+   speaking.value=speech?.active?1:0;
+   const active=speaking.value&&shape.value.x+shape.value.y+shape.value.z+shape.value.w+Math.abs(gap.value.x)+Math.abs(gap.value.y)>.015;
+   mesh.visible=!!active&&actor.mesh.material.opacity>.001;actor.mesh.material.userData.lipHole.value=active?1:0;
    const image=actor.mesh.material.map.image,axes=oralFrame.axes;
    frame.value.set(axes[0]*crop.value.z*image.width,-axes[1]*crop.value.w*image.height,axes[2]*crop.value.z*image.width,-axes[3]*crop.value.w*image.height);
    angle.value=Math.atan2(frame.value.y,frame.value.x);

@@ -1,11 +1,11 @@
 export const mouthPaintGlsl = `
 float amtLipCrease(float x){return .064*x*x-.03125-.05*exp(-pow((x+.4375)/.4375,2.));}
-vec4 amtMouthPaintFrame(sampler2D image,vec2 uv,vec4 rect,vec4 shape,vec4 axes,vec2 gap){
+vec4 amtMouthPaintFrame(sampler2D image,vec2 uv,vec4 rect,vec4 shape,vec4 axes,vec2 gap,float speaking){
   shape=clamp(shape,0.,1.);
   float opening=max(shape.x*(1.-.88*shape.w),.16*shape.w);
   float widthFactor=1.+.13*shape.y-.38*shape.z;
   vec4 original=texture2D(image,uv);
-  if(opening<.001&&abs(widthFactor-1.)<.001)return original;
+  if(speaking<.5||opening<.001&&abs(widthFactor-1.)<.001&&dot(abs(gap),vec2(1.))<.001)return original;
   vec2 pixels=vec2(textureSize(image,0)),extent=vec2(length(axes.xy),length(axes.zw));
   vec2 delta=(uv-rect.xy)*pixels*vec2(1.,-1.);
   if(max(abs(delta.x),abs(delta.y))>4.*max(extent.x,extent.y))return original;
@@ -27,8 +27,11 @@ vec4 amtMouthPaintFrame(sampler2D image,vec2 uv,vec4 rect,vec4 shape,vec4 axes,v
   float upperFraction=.25+.53*shape.w,lowerFraction=1.-upperFraction;
   float top=crease-upperFraction*aperture,bottom=crease+lowerFraction*aperture;
   float sourceY=q.y;
-  if(q.y<top)sourceY+=(crease+gap.x*taper-top)*(1.-smoothstep(.5,1.,top-q.y));
-  else if(q.y>bottom)sourceY+=(crease+gap.y*taper-bottom)*exp(-pow((q.y-bottom)/.875,2.));
+  float upperShift=crease+gap.x*taper-top,lowerShift=crease+gap.y*taper-bottom;
+  float upperFalloff=.5+max(.5,1.6*max(0.,-upperShift));
+  float lowerFalloff=max(.875,1.6*max(0.,lowerShift));
+  if(q.y<top)sourceY+=upperShift*(1.-smoothstep(.5,upperFalloff,top-q.y));
+  else if(q.y>bottom)sourceY+=lowerShift*exp(-pow((q.y-bottom)/lowerFalloff,2.));
   else sourceY=crease;
   sourceY+=.125*shape.w*taper*exp(-pow((q.y-crease-.125)/.5625,2.));
   vec2 source=uv+(frame*vec2(sourceX,sourceY)-delta)*vec2(1.,-1.)/pixels;
@@ -50,10 +53,10 @@ vec4 amtMouthPaintFrame(sampler2D image,vec2 uv,vec4 rect,vec4 shape,vec4 axes,v
   paint.rgb=mix(paint.rgb,oral,inside);
   return paint;
 }
-vec4 amtMouthPaint(sampler2D image,vec2 uv,vec4 rect,vec4 shape,float angle,vec2 gap){
-  if(dot(abs(shape),vec4(1.))<.001)return texture2D(image,uv);
+vec4 amtMouthPaint(sampler2D image,vec2 uv,vec4 rect,vec4 shape,float angle,vec2 gap,float speaking){
+  if(speaking<.5||dot(abs(shape),vec4(1.))<.001&&dot(abs(gap),vec2(1.))<.001)return texture2D(image,uv);
   vec2 extent=rect.zw*vec2(textureSize(image,0)),tangent=vec2(cos(angle),sin(angle));
-  return amtMouthPaintFrame(image,uv,rect,shape,vec4(tangent*extent.x,vec2(-tangent.y,tangent.x)*extent.y),gap);
+  return amtMouthPaintFrame(image,uv,rect,shape,vec4(tangent*extent.x,vec2(-tangent.y,tangent.x)*extent.y),gap,speaking);
 }`;
 
 // Every key owns an oral registration measured on its encoded source painting.

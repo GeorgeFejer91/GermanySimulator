@@ -44,6 +44,7 @@ export async function createPaintedAnchor({THREE,owner,manifest,manifestUrl,sign
   }
   const material=new THREE.MeshBasicMaterial({transparent:true,alphaTest:.0001,depthWrite:false,side:THREE.DoubleSide});
   const breath={value:0},mouth={value:0},lipShape={value:new THREE.Vector4()},mouthA={value:new THREE.Vector4()},mouthB={value:new THREE.Vector4()},mapB={value:null},mix={value:0},phase={value:0},segment={value:0},mode={value:0},effect={value:0};material.userData.breath=breath;
+  const speaking={value:0};
   const mouthAngleA={value:0},mouthAngleB={value:0},mouthGapA={value:new THREE.Vector2()},mouthGapB={value:new THREE.Vector2()};
   const number=value=>Number(value).toPrecision(9),aspect=number(manifest.canvas_xy[1]/manifest.canvas_xy[0]);
   const ownedPaths=(paired?.trajectories??[]).map(item=>`
@@ -63,6 +64,7 @@ export async function createPaintedAnchor({THREE,owner,manifest,manifestUrl,sign
   const programKey=JSON.stringify(['native-gaussian-paint-v5-connected-lips',manifest.canvas_xy,paired?.rows,paired?.stride,ownedPaths]);
   material.customProgramCacheKey=()=>programKey;
   material.onBeforeCompile=shader=>{
+    shader.uniforms.anchorSpeaking=speaking;
     shader.uniforms.anchorLipGapA=mouthGapA;shader.uniforms.anchorLipGapB=mouthGapB;
     shader.uniforms.anchorLipAngleA=mouthAngleA;shader.uniforms.anchorLipAngleB=mouthAngleB;
     shader.uniforms.anchorBreath=breath;shader.uniforms.anchorMouth=mouth;shader.uniforms.anchorLipShape=lipShape;shader.uniforms.anchorMouthA=mouthA;shader.uniforms.anchorMouthB=mouthB;shader.uniforms.anchorMapB=mapB;shader.uniforms.anchorMix=mix;shader.uniforms.anchorPhase=phase;
@@ -92,10 +94,10 @@ export async function createPaintedAnchor({THREE,owner,manifest,manifestUrl,sign
         anchorKernel=position.xy*2.7;
       }
     `);
-    shader.fragmentShader='uniform vec2 anchorLipGapA;uniform vec2 anchorLipGapB;uniform float anchorLipAngleA;uniform float anchorLipAngleB;uniform float anchorBreath;uniform float anchorMouth;uniform vec4 anchorLipShape;uniform vec4 anchorMouthA;uniform vec4 anchorMouthB;uniform sampler2D anchorMapB;uniform float anchorMix;uniform float anchorMode;uniform float anchorEffect;varying vec2 anchorUvA;varying vec2 anchorUvB;varying vec2 anchorKernel;varying vec2 anchorPresent;varying float anchorPaintMix;\n'+mouthPaintGlsl+shader.fragmentShader.replace('#include <map_fragment>',`
+    shader.fragmentShader='uniform float anchorSpeaking;uniform vec2 anchorLipGapA;uniform vec2 anchorLipGapB;uniform float anchorLipAngleA;uniform float anchorLipAngleB;uniform float anchorBreath;uniform float anchorMouth;uniform vec4 anchorLipShape;uniform vec4 anchorMouthA;uniform vec4 anchorMouthB;uniform sampler2D anchorMapB;uniform float anchorMix;uniform float anchorMode;uniform float anchorEffect;varying vec2 anchorUvA;varying vec2 anchorUvB;varying vec2 anchorKernel;varying vec2 anchorPresent;varying float anchorPaintMix;\n'+mouthPaintGlsl+shader.fragmentShader.replace('#include <map_fragment>',`
       vec2 uvA=anchorUvA,uvB=anchorUvB;
       vec4 oralShape=anchorLipShape;oralShape.x=anchorMouth;
-      vec4 a=amtMouthPaint(map,uvA,anchorMouthA,oralShape,anchorLipAngleA,anchorLipGapA),b=amtMouthPaint(anchorMapB,uvB,anchorMouthB,oralShape,anchorLipAngleB,anchorLipGapB);
+      vec4 a=amtMouthPaint(map,uvA,anchorMouthA,oralShape,anchorLipAngleA,anchorLipGapA,anchorSpeaking),b=amtMouthPaint(anchorMapB,uvB,anchorMouthB,oralShape,anchorLipAngleB,anchorLipGapB,anchorSpeaking);
       a*=step(0.,uvA.x)*step(uvA.x,1.)*step(0.,uvA.y)*step(uvA.y,1.);
       b*=step(0.,uvB.x)*step(uvB.x,1.)*step(0.,uvB.y)*step(uvB.y,1.);
       a*=anchorPresent.x;b*=anchorPresent.y;
@@ -147,6 +149,7 @@ export async function createPaintedAnchor({THREE,owner,manifest,manifestUrl,sign
       wanted=[...new Set([pair.from,pair.to,next].filter(Boolean))];selected=blend.state;opacity=blend.opacity;
       phase.value=sample.u;segment.value=sample.segment;effect.value=animation.reducedMotion?0:.75*blend.effect;
       for(const [id,center] of [[pair.from,mouthA],[pair.to,mouthB]])center.value.fromArray(mouthRects.get(id));
+      speaking.value=animation.speaking?1:0;
       mouthGapA.value.set(...mouthGaps.get(pair.from));mouthGapB.value.set(...mouthGaps.get(pair.to));
       mouthAngleA.value=mouthAngles.get(pair.from);mouthAngleB.value=mouthAngles.get(pair.to);
       lipShape.value.fromArray(animation.speaking?animation.lipShape||[0,0,0,0]:[0,0,0,0]);

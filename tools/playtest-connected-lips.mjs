@@ -8,14 +8,18 @@ import {createRequire} from 'node:module';
 import {join,resolve} from 'node:path';
 
 const root=resolve(import.meta.dirname,'..');
-const output=resolve(process.env.PLAYTEST_OUTPUT||join(root,'output/connected-lips/gpu-shapes'));
+const output=resolve(process.env.PLAYTEST_OUTPUT||join(root,'output/connected-lips/gpu-final'));
 const gameUrl=new URL(process.env.GAME_URL||'http://127.0.0.1:8877/index.html');
 const actors=['clerk','aktenkurier','archivbotin','formularsammler',
   'nummernfluesterer','nachtschichtmelderin','pfandarchitektin',
   'kopiependler','warteschlangenpoetin','renter','parent','pensioner'];
 const shapes={
-  closed:[0,0,0,0],open:[1,0,0,0],wide:[.6,1,0,0],
-  round:[.6,0,1,0],bite:[.7,0,0,1],
+  neutral:{shape:[0,0,0,0],speaking:0},
+  closed:{shape:[0,0,0,0],speaking:1},
+  open:{shape:[1,0,0,0],speaking:1},
+  wide:{shape:[.6,1,0,0],speaking:1},
+  round:{shape:[.6,0,1,0],speaking:1},
+  bite:{shape:[.7,0,0,1],speaking:1},
 };
 const hash=path=>createHash('sha256').update(readFileSync(join(root,path))).digest('hex');
 const manifestPath=id=>'assets/buergeramt/animation/'+id+'.json';
@@ -60,14 +64,14 @@ try{
     const material=new THREE.ShaderMaterial({
       uniforms:{sourceMap:{value:null},mouthRect:{value:new THREE.Vector4()},
         mouthShape:{value:new THREE.Vector4()},mouthAngle:{value:0},
-        mouthGap:{value:new THREE.Vector2()},
+        mouthGap:{value:new THREE.Vector2()},speaking:{value:0},
         sourcePixels:{value:new THREE.Vector2()},candidate:{value:0}},
       vertexShader:'varying vec2 roiUv; void main(){roiUv=uv;gl_Position=vec4(position.xy,0.,1.);}',
       fragmentShader:'uniform sampler2D sourceMap;uniform vec4 mouthRect;uniform vec4 mouthShape;'+
-        'uniform float mouthAngle;uniform vec2 mouthGap;uniform float candidate;uniform vec2 sourcePixels;varying vec2 roiUv;\n'+
+        'uniform float mouthAngle;uniform vec2 mouthGap;uniform float speaking;uniform float candidate;uniform vec2 sourcePixels;varying vec2 roiUv;\n'+
         mouthPaintGlsl+
         '\nvoid main(){vec2 uv=mouthRect.xy+(roiUv-.5)*vec2(96.,64.)/sourcePixels;'+
-        'gl_FragColor=candidate>.5?amtMouthPaint(sourceMap,uv,mouthRect,mouthShape,mouthAngle,mouthGap):texture2D(sourceMap,uv);}',
+        'gl_FragColor=candidate>.5?amtMouthPaint(sourceMap,uv,mouthRect,mouthShape,mouthAngle,mouthGap,speaking):texture2D(sourceMap,uv);}',
       transparent:false,blending:THREE.NoBlending,depthTest:false,depthWrite:false,toneMapped:false,
     });
     const geometry=new THREE.PlaneGeometry(2,2),scene=new THREE.Scene();
@@ -113,9 +117,10 @@ try{
           material.uniforms.mouthGap.value.fromArray(gap);
           material.uniforms.sourcePixels.value.set(sourceWidth,sourceHeight);
           const samples={};
-          for(const [name,shape] of [['baseline',null],...shapeEntries]){
+          for(const [name,setting] of [['baseline',null],...shapeEntries]){
             material.uniforms.candidate.value=name==='baseline'?0:1;
-            material.uniforms.mouthShape.value.fromArray(shape??[0,0,0,0]);
+            material.uniforms.mouthShape.value.fromArray(setting?.shape??[0,0,0,0]);
+            material.uniforms.speaking.value=setting?.speaking??0;
             renderer.render(scene,camera);
             const rgba=new Uint8Array(width*height*4);
             gl.readPixels(0,0,width,height,gl.RGBA,gl.UNSIGNED_BYTE,rgba);
@@ -151,7 +156,7 @@ try{
       assert.equal(result.frameSha256,hash(framePath),'served frame differs from local source');
       assert.equal(result.frameSha256,frame.sha256,'encoded frame differs from manifest');
       assert.deepEqual(result.gap,state.mouth_gap,'served lip boundaries differ from local source');
-      const baseline=result.samples.baseline.rgba,closed=result.samples.closed.rgba;
+      const baseline=result.samples.baseline.rgba;
       const extent=[result.rect[2]*result.width,result.rect[3]*result.height];
       const cosine=Math.cos(result.angle),sine=Math.sin(result.angle);
       const protectedPixels=[];
@@ -185,11 +190,14 @@ try{
           maxUpperFaceDifference=Math.max(maxUpperFaceDifference,
             Math.abs(rgba[pixel*4+c]-baseline[pixel*4+c]));
         entry.shapes[name]={maxRestDifference,maxAlphaDifference,maxUpperFaceDifference,changedPixels};
-        if(name==='closed'&&maxRestDifference!==0)entry.failures.push('closed rest differs');
+        const preOpen=result.gap.some(value=>Math.abs(value)>1e-6);
+        if(name==='neutral'&&maxRestDifference!==0)entry.failures.push('inactive neutral differs');
+        if(name==='closed'&&!preOpen&&maxRestDifference!==0)entry.failures.push('closed source differs');
+        if(name==='closed'&&preOpen&&changedPixels<4)entry.failures.push('voiced closure did not change pre-open source');
         if(maxAlphaDifference!==0)entry.failures.push(name+' alpha differs');
-        if(name!=='closed'){
+        if(name!=='neutral'){
           if(maxUpperFaceDifference>3)entry.failures.push(name+' upper face changed');
-          if(changedPixels<4)entry.failures.push(name+' mouth did not visibly change');
+          if(name!=='closed'&&changedPixels<4)entry.failures.push(name+' mouth did not visibly change');
         }
       }
       report.keys.push(entry);
