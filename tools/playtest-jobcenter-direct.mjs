@@ -31,8 +31,19 @@ try{
   if(name==='desktop'){
    await page.keyboard.down('KeyW');await page.waitForFunction(()=>Germany3D.jobcenter.mediaStarted&&Germany3D.jobcenter.playback>.5);await page.keyboard.up('KeyW');
   }else{
-   await cdp.send('Input.dispatchTouchEvent',{type:'touchStart',touchPoints:[{x:70,y:650,id:1}]});await cdp.send('Input.dispatchTouchEvent',{type:'touchMove',touchPoints:[{x:70,y:575,id:1}]});
-   await page.waitForFunction(()=>Germany3D.jobcenter.mediaStarted&&Germany3D.jobcenter.playback>.5);await cdp.send('Input.dispatchTouchEvent',{type:'touchEnd',touchPoints:[]});
+   const touch=(type,x1=140,x2=250)=>cdp.send('Input.dispatchTouchEvent',{type,touchPoints:type==='touchEnd'?[]:[{x:x1,y:490,id:1},{x:x2,y:490,id:2}]});
+   await touch('touchStart');await touch('touchMove',80,310);await page.waitForFunction(()=>Germany3D.jobcenter.z<32);
+   const advanced=await page.evaluate(()=>Germany3D.jobcenter);
+   await touch('touchMove',180,210);await page.waitForFunction(z=>Germany3D.jobcenter.z>z+.8,advanced.z);
+   await touch('touchEnd');const stopped=await page.evaluate(()=>Germany3D.jobcenter.z);await page.waitForTimeout(300);assert.equal(await page.evaluate(()=>Germany3D.jobcenter.z),stopped);
+   assert.equal(await page.evaluate(()=>visualViewport.scale),1,'pinch moves the player without browser zoom');
+   await touch('touchStart');await touch('touchMove',80,310);await page.waitForFunction(z=>Germany3D.jobcenter.z<z-.5,stopped);
+   await page.setViewportSize({width:844,height:390});await page.waitForTimeout(100);const rotated=await page.evaluate(()=>Germany3D.jobcenter.z);
+   await touch('touchMove',30,360);await page.waitForTimeout(300);assert.equal(await page.evaluate(()=>Germany3D.jobcenter.z),rotated,'rotation cancels held thrust');await touch('touchEnd');
+   await page.setViewportSize({width:390,height:844});await touch('touchStart');await touch('touchMove',80,310);
+   await page.waitForFunction(()=>Germany3D.jobcenter.mediaStarted&&Germany3D.jobcenter.playback>.5);await touch('touchEnd');
+   const pinched=await page.evaluate(()=>Germany3D.jobcenter);assert.equal(pinched.yaw,initial.visit.yaw);assert.equal(pinched.pitch,initial.visit.pitch);
+   await page.screenshot({path:resolve(out,'direct-android-pinch-speaking.png')});
   }
   const speaking=await page.evaluate(()=>({visit:Germany3D.jobcenter,contexts:window.__contexts.map(c=>c.state)}));
   assert.equal(speaking.visit.failed,false);assert.ok(speaking.contexts.includes('running'),'first movement gesture unlocks the effect context');

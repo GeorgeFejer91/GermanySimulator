@@ -171,7 +171,7 @@ export function createJobcenterEncounter(T,renderer,bridge){
   const tunnelMaterial=new T.ShaderMaterial({transparent:true,depthWrite:false,depthTest:false,blending:T.AdditiveBlending,side:T.DoubleSide,uniforms:{uTime:{value:0},uStrength:{value:1}},vertexShader:'varying vec2 vUv;void main(){vUv=uv;gl_Position=projectionMatrix*modelViewMatrix*vec4(position,1.);}',fragmentShader:tunnelFragment});
   const tunnel=new T.Mesh(new T.PlaneGeometry(1,1),tunnelMaterial);tunnel.renderOrder=-1;scene.add(tunnel);
   const audio=new Audio(config.recording||'./assets/audio/jobcenter/overlord.mp3');audio.preload='auto';audio.playsInline=true;audio.volume=0;
-  const surface=document.createElement('div');surface.id='jobcenter-input';surface.tabIndex=0;surface.setAttribute('role','application');surface.setAttribute('aria-label','Jobcenter. WASD: gehen. Pfeile oder Ziehen: Blick. Auf Touch links ziehen: gehen; rechts ziehen: Blick. Escape: verlassen.');
+  const surface=document.createElement('div');surface.id='jobcenter-input';surface.tabIndex=0;surface.setAttribute('role','application');surface.setAttribute('aria-label','Jobcenter. WASD: gehen. Pfeile oder Ziehen: Blick. Auf Touch zwei Finger auseinanderziehen und halten: vorwärts; zusammenziehen und halten: rückwärts. Loslassen: stoppen. Links ziehen: gehen; rechts ziehen: Blick. Escape: verlassen.');
   const style=document.createElement('style');style.textContent=`
    .jobcenter-inside #app> :not(#world3d):not(#jobcenter-input):not(#english-subtitle){display:none!important}
    .jobcenter-inside #world3d{filter:none!important;background:#000!important}
@@ -182,7 +182,7 @@ export function createJobcenterEncounter(T,renderer,bridge){
   `;
   document.head.append(style);document.getElementById('app').append(surface);document.body.classList.add('jobcenter-inside');
   let effects=null;try{effects=config.effects?.()||null}catch{}
-  const v=visit={id,scene,camera,material,flame,tunnel,audio,surface,style,config,effects,rumbleSource:null,rumbleAttempted:false,rumbleLevel:0,dismissal:0,heat:0,abort:new AbortController(),events:[],x:0,z:34,yaw:0,pitch:-.015,time:0,distance:34,pressure:0,phase:'approach',mediaStarted:false,mediaPending:false,playSerial:0,failed:false,playback:0,lastMedia:0,stalled:0,energy:0,attack:0,data:null,captionKey:'',captionCues:[],touch:{forward:0,side:0},pointers:new Map()};last=performance.now();
+  const v=visit={id,scene,camera,material,flame,tunnel,audio,surface,style,config,effects,rumbleSource:null,rumbleAttempted:false,rumbleLevel:0,dismissal:0,heat:0,abort:new AbortController(),events:[],x:0,z:34,yaw:0,pitch:-.015,time:0,distance:34,pressure:0,phase:'approach',mediaStarted:false,mediaPending:false,playSerial:0,failed:false,playback:0,lastMedia:0,stalled:0,energy:0,attack:0,data:null,captionKey:'',captionCues:[],touch:{forward:0,side:0},pinch:null,pointers:new Map()};last=performance.now();
   const on=(target,name,fn)=>{target.addEventListener(name,fn);v.events.push([target,name,fn])};
   const current=()=>visit===v&&serial===id;
   function quietRumble(){v.rumbleSource?.dispose();v.rumbleSource=null;v.rumbleAttempted=false;v.rumbleLevel=0;v.dismissal=0}
@@ -197,7 +197,20 @@ export function createJobcenterEncounter(T,renderer,bridge){
   audio.play().then(()=>{if(!current())return;if(v.phase==='approach'){audio.pause();audio.currentTime=0}else if(!v.failed&&!v.paused()){v.mediaStarted=true;audio.volume=.9}else audio.pause()}).catch(()=>{});
   fetch('./assets/audio/jobcenter/overlord.json?v=20261013-overlord-fury',{signal:v.abort.signal}).then(r=>{if(!r.ok)throw Error('jobcenter envelope');return r.json()}).then(data=>{if(current())v.data=data}).catch(error=>{if(current()&&error.name!=='AbortError')v.data={text:config.text||'',duration:config.duration||60}});
   let mouseLook=null;
-  on(surface,'pointerdown',e=>{mouseLook=null;if(!current())return;surface.setPointerCapture(e.pointerId);const move=e.pointerType==='touch'&&e.clientX<innerWidth*.45;v.pointers.set(e.pointerId,{x:e.clientX,y:e.clientY,startX:e.clientX,startY:e.clientY,move});if(v.mediaPending||v.failed&&v.phase==='speaking')resume();});
+  on(surface,'pointerdown',e=>{
+   mouseLook=null;if(!current()||paused())return;
+   surface.setPointerCapture(e.pointerId);const touch=e.pointerType==='touch',move=touch&&e.clientX<innerWidth*.45;
+   v.pointers.set(e.pointerId,{x:e.clientX,y:e.clientY,startX:e.clientX,startY:e.clientY,move,touch,blocked:false});
+   if(touch){
+    const touches=[...v.pointers].filter(([,p])=>p.touch);
+    if(touches.length>1){
+     v.touch={forward:0,side:0};
+     v.pinch=touches.length===2&&!touches.some(([,p])=>p.blocked)?{ids:touches.map(([id])=>id),span:Math.hypot(touches[0][1].x-touches[1][1].x,touches[0][1].y-touches[1][1].y)}:null;
+     if(!v.pinch)for(const [,p] of touches)p.blocked=true;
+    }
+   }
+   if(v.mediaPending||v.failed&&v.phase==='speaking')resume();
+  });
   on(surface,'pointermove',e=>{
    if(!current()||paused()){mouseLook=null;return}
    const p=v.pointers.get(e.pointerId);
@@ -207,13 +220,24 @@ export function createJobcenterEncounter(T,renderer,bridge){
     if(previous){v.yaw-=(e.clientX-previous.x)*.004;v.pitch=clamp(v.pitch-(e.clientY-previous.y)*.003,-1.25,1.25)}
     return;
    }
+   if(p.blocked)return;
+   if(v.pinch){
+    p.x=e.clientX;p.y=e.clientY;const [a,b]=v.pinch.ids.map(id=>v.pointers.get(id));
+    const change=Math.hypot(a.x-b.x,a.y-b.y)-v.pinch.span;
+    v.touch.forward=Math.abs(change)<=10?0:clamp((change-Math.sign(change)*10)/65,-1,1);v.touch.side=0;
+    e.preventDefault();return;
+   }
    if(p.move){v.touch.side=clamp((e.clientX-p.startX)/55,-1,1);v.touch.forward=clamp((p.startY-e.clientY)/55,-1,1)}else{v.yaw-=(e.clientX-p.x)*.004;v.pitch=clamp(v.pitch-(e.clientY-p.y)*.003,-1.25,1.25)}p.x=e.clientX;p.y=e.clientY;
   });
   on(surface,'pointerleave',()=>{mouseLook=null});
-  const release=e=>{const p=v.pointers.get(e.pointerId);if(p?.move)v.touch={forward:0,side:0};v.pointers.delete(e.pointerId)};
+  const release=e=>{const p=v.pointers.get(e.pointerId);v.pointers.delete(e.pointerId);
+   if(v.pinch?.ids.includes(e.pointerId)){v.pinch=null;v.touch={forward:0,side:0};for(const remaining of v.pointers.values())if(remaining.touch)remaining.blocked=true}
+   else if(p?.move)v.touch={forward:0,side:0};
+  };
   on(surface,'pointerup',release);on(surface,'pointercancel',release);on(surface,'lostpointercapture',release);
   on(window,'keydown',e=>{if(!current())return;if(e.code==='Escape'){e.preventDefault();close();return}if(v.phase==='speaking'&&(v.mediaPending||v.failed)&&!e.repeat)resume()});
-  function resetInput(){mouseLook=null;v.touch={forward:0,side:0};v.pointers.clear();bridge.clearInput?.()}
+  function resetInput(){mouseLook=null;v.pinch=null;v.touch={forward:0,side:0};v.pointers.clear();bridge.clearInput?.()}
+  v.resetInput=resetInput;on(window,'resize',resetInput);
   on(window,'blur',()=>{resetInput();v.suspended=true;suspendMedia()});
   on(window,'focus',()=>{v.suspended=false;last=performance.now();if(v.phase==='speaking'&&!paused())resume()});
   on(document,'visibilitychange',()=>{resetInput();last=performance.now();if(document.hidden)suspendMedia();else if(v.phase==='speaking'&&!paused())resume()});
@@ -230,7 +254,7 @@ export function createJobcenterEncounter(T,renderer,bridge){
  function render(){
   const v=visit;if(!v)return false;
   const now=performance.now(),dt=clamp((now-last)/1000,0,.12);last=now;
-  if(v.paused()){v.suspendMedia();v.wasPaused=true;return true}
+  if(v.paused()){if(!v.wasPaused)v.resetInput();v.suspendMedia();v.wasPaused=true;return true}
   if(v.wasPaused){v.wasPaused=false;if(v.phase==='speaking'&&!v.failed)v.resume()}
   const near=stepJobcenter(v,{...bridge.getInput?.(),...v.touch},dt);
   if(near&&v.phase==='approach'){v.phase='speaking';v.resume()}
