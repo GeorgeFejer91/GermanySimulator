@@ -134,7 +134,7 @@ test('fixed production voices reject old identities, renderer changes and live r
 test('missing and failed Knick recordings retain captions without changing voice identity',()=>{
  const h=harness('host',{voice:true});
  vm.runInContext(readFileSync('For-AI/AUDIO-TEXT-LIBRARY.js','utf8'),h.context);
- h.counter();h.links[0].message({type:'silence',id:'grass'});h.tick(16);
+ h.counter();h.links[0].message({type:'phone-hidden'});h.tick(16);
  assert.equal(h.synth.current,null);
  assert(h.node('amt-line').textContent.length>0);
  const current=h.node('amt-line').textContent;h.tick(1600);
@@ -144,13 +144,13 @@ test('missing and failed Knick recordings retain captions without changing voice
 
 test('Knick remains caption-only if the catalogue is unavailable',()=>{
  const h=harness('host',{voice:true});delete h.window.GermanySimulatorAudioText;
- h.counter();h.links[0].message({type:'silence',id:'grass'});h.tick(16);
+ h.counter();h.links[0].message({type:'phone-hidden'});h.tick(16);
  assert.equal(h.synth.current,null);assert(h.node('amt-line').textContent.length>0);
 });
 
-test('counter forfeiture returns to the room without reviving a generic browser clerk voice',()=>{
+test('pre-counter forfeiture returns to the room without reviving a generic browser clerk voice',()=>{
  const h=harness('host',{voice:true});vm.runInContext(readFileSync('For-AI/AUDIO-TEXT-LIBRARY.js','utf8'),h.context);
- h.counter();h.links[0].emit('status','Telefon getrennt');h.tick(16);
+ h.wait();h.links[0].emit('status','Telefon getrennt');h.tick(16);
  assert.equal(h.level.stage,'walk-sign');assert.equal(h.node('amt-actions').children.length,0);
  assert.equal(h.level.activated,false);assert.equal(h.synth.current,null);
 });

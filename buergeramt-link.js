@@ -6,8 +6,8 @@ function event(target,type,detail){target.dispatchEvent(new CustomEvent(type,{de
 function sourceOf(value){return typeof value==="string"?value:value?.streamID||value?.streamId||value?.id||""}
 // The sender role owns both the message type and its bounded payload.
 function validPayload(type,data,sender){
- const shapes=sender==="phone"?{scan:["id"],register:["id","name"],"ticket-received":["id","number"],"phone-hidden":[],answer:["id"],decline:["id"],hangup:["id"],silence:["id"],"sync-pong":["id","receivedAtMs","sentAtMs"],"call-ready":["id","atMs"],"call-scheduled":["id","atMs","mode","lateMs"],"police-start":["index","mode","readyDelayMs","atMs"],"police-done":["index","mode","durationMs","atMs"]}:
-  sender==="host"?{"scan-ready":[],ticket:["number","counter"],forfeit:[],silence:["id"],"call-arm":["id"],call:["id","line","ringAtPhoneMs","ringAtUtcMs","leadMs"],"police-line":["index","line"],"police-cutoff":["index","stopAtPhoneMs","stopAtUtcMs"],"sync-ping":["id"],"office-tempo":["rate"],done:[]}:{};
+ const shapes=sender==="phone"?{scan:["id"],register:["id","name"],"ticket-received":["id","number"],"phone-hidden":[],"phone-visible":[],answer:["id","round"],decline:["id","round"],hangup:["id","round"],"call-ringing":["id","round","atMs"],"call-missed":["id","round"],"sync-pong":["id","receivedAtMs","sentAtMs"],"call-ready":["id","round","atMs"],"call-scheduled":["id","round","atMs","mode","lateMs"],"police-start":["index","mode","readyDelayMs","atMs"],"police-done":["index","mode","durationMs","atMs"]}:
+  sender==="host"?{"scan-ready":[],ticket:["number","counter"],forfeit:[],silence:["id"],"counter-start":[],"call-arm":["id","round"],call:["id","round","line","ringAtPhoneMs","ringAtUtcMs","leadMs"],"police-line":["index","line"],"police-cutoff":["index","stopAtPhoneMs","stopAtUtcMs"],"sync-ping":["id"],"office-tempo":["rate"],done:[]}:{};
  if(!Object.hasOwn(shapes,type)||!data||typeof data!=="object"||Array.isArray(data))return false;
  if(type==="police-start"&&Object.hasOwn(data,"atUtcMs")){
   if(data.atUtcMs!==null&&(!Number.isSafeInteger(data.atUtcMs)||data.atUtcMs<0))return false;
@@ -21,16 +21,18 @@ function validPayload(type,data,sender){
  const clock=value=>Number.isFinite(value)&&value>=0&&value<=1e12;
  if(type==="sync-ping"||type==="sync-pong")return Number.isSafeInteger(data.id)&&data.id>0&&data.id<=2147483647&&
   (type==="sync-ping"||clock(data.receivedAtMs)&&clock(data.sentAtMs)&&data.sentAtMs>=data.receivedAtMs&&data.sentAtMs-data.receivedAtMs<=12000);
- if(type==="call-ready")return data.id==="grass"&&clock(data.atMs);
- if(type==="call-scheduled")return data.id==="grass"&&clock(data.atMs)&&["peer","utc","receipt"].includes(data.mode)&&Number.isInteger(data.lateMs)&&data.lateMs>=0&&data.lateMs<=12000;
- if(type==="police-start"||type==="police-done")return Number.isInteger(data.index)&&data.index>=-1&&data.index<3&&["voice","recording","fallback"].includes(data.mode)&&
+ const round=value=>Number.isInteger(value)&&value>=1&&value<=1000000;
+ if(type==="call-ready"||type==="call-ringing")return data.id==="grass"&&round(data.round)&&clock(data.atMs);
+ if(type==="call-scheduled")return data.id==="grass"&&round(data.round)&&clock(data.atMs)&&["peer","utc","receipt"].includes(data.mode)&&Number.isInteger(data.lateMs)&&data.lateMs>=0&&data.lateMs<=12000;
+ if(type==="police-start"||type==="police-done")return Number.isInteger(data.index)&&data.index>=-1&&data.index<4&&["voice","recording","fallback"].includes(data.mode)&&
   clock(data.atMs)&&(type==="police-start"?Number.isInteger(data.readyDelayMs)&&data.readyDelayMs>=0&&data.readyDelayMs<=60000:Number.isInteger(data.durationMs)&&data.durationMs>=0&&data.durationMs<=60000);
  if(type==="register")return typeof data.name==="string"&&data.name.trim().length>=2&&data.name.length<=80&&!/[\u0000-\u001f\u007f]/.test(data.name);
  if(type==="ticket")return typeof data.number==="string"&&/^[A-Z]-\d{1,3}$/.test(data.number)&&Number.isInteger(data.counter)&&data.counter>=1&&data.counter<=4;
- if(type==="answer"||type==="decline"||type==="hangup"||type==="silence"||type==="call-arm")return data.id==="grass";
- if(type==="call")return data.id==="grass"&&typeof data.line==="string"&&data.line.trim().length>0&&data.line.length<350&&
+ if(type==="answer"||type==="decline"||type==="hangup"||type==="call-missed"||type==="call-arm")return data.id==="grass"&&round(data.round);
+ if(type==="silence")return data.id==="grass";
+ if(type==="call")return data.id==="grass"&&round(data.round)&&typeof data.line==="string"&&data.line.trim().length>0&&data.line.length<350&&
   (data.ringAtPhoneMs===null||clock(data.ringAtPhoneMs))&&(data.ringAtUtcMs===null||Number.isSafeInteger(data.ringAtUtcMs)&&data.ringAtUtcMs>=0)&&Number.isInteger(data.leadMs)&&data.leadMs>=600&&data.leadMs<=4400;
- if(type==="police-line")return typeof data.line==="string"&&data.line.trim().length>0&&data.line.length<350&&Number.isInteger(data.index)&&data.index>=0&&data.index<3;
+ if(type==="police-line")return typeof data.line==="string"&&data.line.trim().length>0&&data.line.length<350&&Number.isInteger(data.index)&&data.index>=0&&data.index<4;
  if(type==="police-cutoff")return Number.isInteger(data.index)&&data.index>=-1&&data.index<3&&
   (data.stopAtPhoneMs===null||clock(data.stopAtPhoneMs))&&(data.stopAtUtcMs===null||Number.isSafeInteger(data.stopAtUtcMs)&&data.stopAtUtcMs>=0);
  return true;
@@ -44,7 +46,7 @@ function validMessage(msg,session,lastSeq,sender){
 class AmtLink extends EventTarget{
  constructor(role,invitation){super();this.role=role;this.invitation=invitation;this.sdk=null;this.channel=null;this.peer="";this.seq=0;this.lastSeq=0;this.closed=false;this.viewing=false}
  static invitation(){return{room:`amt-${randomId(16)}`,secret:randomId(32),stream:`amt-ticket-${randomId(16)}`}}
- static phoneUrl(invitation,englishSubtitles=false){const url=new URL("./buergeramt-phone.html",location.href),params=new URLSearchParams(invitation);url.searchParams.set("v","20261012-ten-minute-paint");if(new URL(location.href).searchParams.get("voicePreview")==="1")url.searchParams.set("voicePreview","1");if(englishSubtitles)params.set("captions","en");url.hash=params.toString();return url.href}
+ static phoneUrl(invitation,englishSubtitles=false){const url=new URL("./buergeramt-phone.html",location.href),params=new URLSearchParams(invitation);url.searchParams.set("v","20261013-schalter-calls");if(new URL(location.href).searchParams.get("voicePreview")==="1")url.searchParams.set("voicePreview","1");if(englishSubtitles)params.set("captions","en");url.hash=params.toString();return url.href}
  static fromHash(){const p=new URLSearchParams(location.hash.slice(1)),room=p.get("room"),secret=p.get("secret"),stream=p.get("stream");if(!room?.startsWith("amt-")||!stream?.startsWith("amt-ticket-")||!/^[a-z0-9]{32}$/.test(secret||""))return null;return{room,secret,stream}}
  async start(){if(typeof VDONinjaSDK!=="function")throw new Error("VDO.Ninja Verbindung fehlt");
   const sdk=new VDONinjaSDK({password:this.invitation.secret,salt:"germany-simulator-amt-v1"});this.sdk=sdk;

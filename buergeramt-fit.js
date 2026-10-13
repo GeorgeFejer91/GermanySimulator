@@ -14,6 +14,9 @@ function measure(){
  if(sequence){
   const top=sequence.getBoundingClientRect().top;
   const controls=[...document.querySelectorAll('#amt-mix,.subtitle-toggle')].filter(el=>el.getClientRects().length&&getComputedStyle(el).visibility!=='hidden');
+  const status=document.getElementById('amt-status');
+  sequence.style.setProperty('--amt-status-top',`${Math.ceil(Math.max(0,...controls.map(el=>(el.getBoundingClientRect().bottom-top)/zoom))+8)}px`);
+  if(status&&!status.hidden)controls.push(status);
   const replies=document.getElementById('amt-actions');
   const lowered=document.body.classList.contains('amt-replies-low');
   const sideReplies=replies.children.length&&replies.classList.contains('side-choices')&&!lowered;

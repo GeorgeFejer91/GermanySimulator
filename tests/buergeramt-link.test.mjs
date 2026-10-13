@@ -41,13 +41,13 @@ test('only the host may schedule a bounded phone cutoff',()=>{
  assert.equal(phone.link.send('police-cutoff',{index:0,...payload}),false);assert.equal(host.link.send('police-cutoff',{index:2,...payload}),true);
 });
 test('recorded audition mode uses the existing bounded police receipt contract',()=>{const h=transport();h.channel.receive({type:'police-start',index:-1,mode:'recording',readyDelayMs:25,atMs:400});h.channel.receive({type:'police-done',index:-1,mode:'recording',durationMs:900,atMs:1300,seq:2});assert.equal(h.messages.length,2);assert.equal(h.messages[1].mode,'recording')});
-test('timing handshake rejects invalid IDs, modes and durations',()=>{const host=transport(),phone=transport('phone');for(const bad of [{type:'sync-pong',id:0,receivedAtMs:1,sentAtMs:1},{type:'sync-pong',id:1.5,receivedAtMs:1,sentAtMs:1},{type:'sync-pong',id:1,receivedAtMs:12,sentAtMs:11},{type:'sync-pong',id:1,receivedAtMs:0,sentAtMs:12001},{type:'police-start',index:3,mode:'voice',readyDelayMs:0,atMs:1},{type:'police-start',index:0,mode:'bogus',readyDelayMs:0,atMs:1},{type:'police-start',index:0,mode:'voice',readyDelayMs:-1,atMs:1},{type:'police-done',index:0,mode:'voice',durationMs:-1,atMs:1},{type:'police-done',index:0,mode:'voice',durationMs:60001,atMs:1}])host.channel.receive(bad);assert.equal(host.messages.length,0);host.channel.receive({type:'sync-pong',id:7,receivedAtMs:50,sentAtMs:55});assert.equal(host.messages.length,1);phone.channel.receive({type:'sync-ping',id:7});assert.equal(phone.messages.length,1);assert.equal(phone.link.send('sync-pong',{id:7,receivedAtMs:50,sentAtMs:55}),true);assert.equal(host.link.send('sync-ping',{id:7}),true)});
+test('timing handshake rejects invalid IDs, modes and durations',()=>{const host=transport(),phone=transport('phone');for(const bad of [{type:'sync-pong',id:0,receivedAtMs:1,sentAtMs:1},{type:'sync-pong',id:1.5,receivedAtMs:1,sentAtMs:1},{type:'sync-pong',id:1,receivedAtMs:12,sentAtMs:11},{type:'sync-pong',id:1,receivedAtMs:0,sentAtMs:12001},{type:'police-start',index:4,mode:'voice',readyDelayMs:0,atMs:1},{type:'police-start',index:0,mode:'bogus',readyDelayMs:0,atMs:1},{type:'police-start',index:0,mode:'voice',readyDelayMs:-1,atMs:1},{type:'police-done',index:0,mode:'voice',durationMs:-1,atMs:1},{type:'police-done',index:0,mode:'voice',durationMs:60001,atMs:1}])host.channel.receive(bad);assert.equal(host.messages.length,0);host.channel.receive({type:'sync-pong',id:7,receivedAtMs:50,sentAtMs:55});assert.equal(host.messages.length,1);phone.channel.receive({type:'sync-ping',id:7});assert.equal(phone.messages.length,1);assert.equal(phone.link.send('sync-pong',{id:7,receivedAtMs:50,sentAtMs:55}),true);assert.equal(host.link.send('sync-ping',{id:7}),true)});
 test('call targets and scheduling receipts reject malformed clock modes and lead times',()=>{
  const host=transport(),phone=transport('phone');
- for(const bad of [{type:'call-ready',id:'grass',atMs:-1},{type:'call-scheduled',id:'grass',atMs:10,mode:'unknown',lateMs:0},{type:'call-scheduled',id:'grass',atMs:10,mode:'peer',lateMs:-1}])host.channel.receive(bad);
- for(const bad of [{type:'call',id:'grass',line:'Anruf.',ringAtPhoneMs:10,ringAtUtcMs:null,leadMs:50},{type:'call',id:'grass',line:'Anruf.',ringAtPhoneMs:-1,ringAtUtcMs:null,leadMs:2200},{type:'call',id:'grass',line:'Anruf.',ringAtPhoneMs:null,ringAtUtcMs:'tomorrow',leadMs:2200}])phone.channel.receive(bad);
+ for(const bad of [{type:'call-ready',id:'grass',round:1,atMs:-1},{type:'call-scheduled',id:'grass',round:1,atMs:10,mode:'unknown',lateMs:0},{type:'call-scheduled',id:'grass',round:1,atMs:10,mode:'peer',lateMs:-1}])host.channel.receive(bad);
+ for(const bad of [{type:'call',id:'grass',round:1,line:'Anruf.',ringAtPhoneMs:10,ringAtUtcMs:null,leadMs:50},{type:'call',id:'grass',round:1,line:'Anruf.',ringAtPhoneMs:-1,ringAtUtcMs:null,leadMs:2200},{type:'call',id:'grass',round:1,line:'Anruf.',ringAtPhoneMs:null,ringAtUtcMs:'tomorrow',leadMs:2200}])phone.channel.receive(bad);
  assert.equal(host.messages.length,0);assert.equal(phone.messages.length,0);
- host.channel.receive({type:'call-scheduled',id:'grass',atMs:2200,mode:'peer',lateMs:0});phone.channel.receive({type:'call',id:'grass',line:'Anruf.',ringAtPhoneMs:2200,ringAtUtcMs:null,leadMs:2200});assert.equal(host.messages.length,1);assert.equal(phone.messages.length,1);
+ host.channel.receive({type:'call-scheduled',id:'grass',round:1,atMs:2200,mode:'peer',lateMs:0});phone.channel.receive({type:'call',id:'grass',round:1,line:'Anruf.',ringAtPhoneMs:2200,ringAtUtcMs:null,leadMs:2200});assert.equal(host.messages.length,1);assert.equal(phone.messages.length,1);
 });
 test('unrecognized types cannot consume the valid sequence',()=>{const h=transport();h.channel.receive({seq:100,type:'unknown'});h.channel.receive({seq:2,type:'register',id:'a'.repeat(24),name:'Erika Mustermann'});assert.equal(h.messages.length,1);assert.equal(h.messages[0].seq,2)});
 test('wrong-direction messages cannot consume the sequence',()=>{const h=transport();h.channel.receive({seq:100,type:'done'});h.channel.receive({seq:2,type:'phone-hidden'});assert.equal(h.messages.length,1);assert.equal(h.messages[0].type,'phone-hidden')});
@@ -60,8 +60,8 @@ test('payloads reject missing or extra fields, controls and excessive lengths',(
  const h=transport();for(const bad of [{type:'register'},{type:'register',id:'a'.repeat(24),name:' '},{type:'register',id:'a'.repeat(24),name:'X'},{type:'register',id:'a'.repeat(24),name:'x'.repeat(81)},{type:'register',id:'a'.repeat(24),name:'Good\u0000Name'},{type:'register',id:'a'.repeat(24),name:'Erika Mustermann',admin:true},{type:'phone-hidden',extra:1},{type:'answer',id:'wrong'}])h.channel.receive(bad);assert.equal(h.messages.length,0);
 });
 test('phone accepts tickets, calls and bounded police lines only from the host',()=>{
- const h=transport('phone');h.channel.receive({type:'ticket',counter:3,number:'B-223'});h.channel.receive({seq:2,type:'call-arm',id:'grass'});h.channel.receive({seq:3,type:'call',id:'grass',line:'Polizei.',ringAtPhoneMs:500,ringAtUtcMs:null,leadMs:2200});h.channel.receive({seq:4,type:'police-line',index:0,line:'Bitte antworten.'});assert.equal(h.messages.length,4);
- for(const bad of [{type:'register',id:'a'.repeat(24),name:'Erika Mustermann'},{type:'ticket',number:'Z-223'},{type:'police-line',index:-1,line:'Nein'},{type:'police-line',index:3,line:'Nein'},{type:'police-line',index:1,line:' '},{type:'call',id:'grass',line:'x'.repeat(350),ringAtPhoneMs:500,ringAtUtcMs:null,leadMs:2200}])h.channel.receive({seq:100,...bad});assert.equal(h.messages.length,4);
+ const h=transport('phone');h.channel.receive({type:'ticket',counter:3,number:'B-223'});h.channel.receive({seq:2,type:'call-arm',id:'grass',round:1});h.channel.receive({seq:3,type:'call',id:'grass',round:1,line:'Polizei.',ringAtPhoneMs:500,ringAtUtcMs:null,leadMs:2200});h.channel.receive({seq:4,type:'police-line',index:3,line:'Bitte antworten.'});assert.equal(h.messages.length,4);
+ for(const bad of [{type:'register',id:'a'.repeat(24),name:'Erika Mustermann'},{type:'ticket',number:'Z-223'},{type:'police-line',index:-1,line:'Nein'},{type:'police-line',index:4,line:'Nein'},{type:'police-line',index:1,line:' '},{type:'call',id:'grass',round:1,line:'x'.repeat(350),ringAtPhoneMs:500,ringAtUtcMs:null,leadMs:2200}])h.channel.receive({seq:100,...bad});assert.equal(h.messages.length,4);
 });
 test('a refreshed channel may restart sequence numbers, but the old channel stays inert',()=>{
  const h=transport();h.channel.receive({seq:20,type:'phone-hidden'});h.channel.close();const next=new h.Channel();h.link.attach('peer-2',next);next.receive({type:'register',id:'a'.repeat(24),name:'New Name'});h.channel.raw(JSON.stringify({v:3,session:'amt-ticket-unit-test',seq:999,type:'register',id:'a'.repeat(24),name:'Old Name'}));assert.equal(h.messages.length,2);assert.equal(h.messages[1].name,'New Name');
@@ -76,9 +76,9 @@ test('outbound roles, fields and bounded values are validated',()=>{
 });
 test('channel send races are returned as failure rather than uncaught exceptions',()=>{const h=transport();h.channel.fail=true;assert.doesNotThrow(()=>assert.equal(h.link.send('activated'),false))});
 test('congested, closed and oversized sends fail without publishing',()=>{
- const h=transport();h.channel.bufferedAmount=65537;assert.equal(h.link.send('activated'),false);h.channel.bufferedAmount=0;assert.equal(h.link.send('call',{id:'grass',line:'界'.repeat(349),ringAtPhoneMs:500,ringAtUtcMs:null,leadMs:2200}),false);assert.equal(h.channel.sent.length,0);h.link.close();assert.equal(h.link.send('done'),false);
+ const h=transport();h.channel.bufferedAmount=65537;assert.equal(h.link.send('activated'),false);h.channel.bufferedAmount=0;assert.equal(h.link.send('call',{id:'grass',round:1,line:'界'.repeat(349),ringAtPhoneMs:500,ringAtUtcMs:null,leadMs:2200}),false);assert.equal(h.channel.sent.length,0);h.link.close();assert.equal(h.link.send('done'),false);
 });
-test('the incoming payload limit is measured in UTF-8 bytes, not just JS characters',()=>{const h=transport('phone');h.channel.receive({type:'call',id:'grass',line:'界'.repeat(349),ringAtPhoneMs:500,ringAtUtcMs:null,leadMs:2200});assert.equal(h.messages.length,0)});
+test('the incoming payload limit is measured in UTF-8 bytes, not just JS characters',()=>{const h=transport('phone');h.channel.receive({type:'call',id:'grass',round:1,line:'界'.repeat(349),ringAtPhoneMs:500,ringAtUtcMs:null,leadMs:2200});assert.equal(h.messages.length,0)});
 test('ordinary failed payload validation does not advance outbound sequence numbers',()=>{const h=transport();assert.equal(h.link.send('nonsense'),false);assert.equal(h.link.send('ticket',{number:'B-223',counter:3}),true);assert.equal(h.channel.sent[0].seq,1)});
 
 function generatedProtocol(linkSource=source('buergeramt-link.js')){
@@ -99,7 +99,7 @@ function generatedProtocol(linkSource=source('buergeramt-link.js')){
     ['police-start',receipt],['phone-hidden',{}]
    ]:[
     ['ticket',{counter:1+integer(4),number:'B-'+String(integer(1000)).padStart(3,'0')}],['police-line',{index:integer(3),line}],
-    ['call',{id:'grass',line,ringAtPhoneMs:choose([null,at]),ringAtUtcMs:choose([null,at]),leadMs:choose([600,4400,integer(3801)+600])}],['done',{}]
+    ['call',{id:'grass',round:1+integer(1000000),line,ringAtPhoneMs:choose([null,at]),ringAtUtcMs:choose([null,at]),leadMs:choose([600,4400,integer(3801)+600])}],['done',{}]
    ]);
    coverage.types.add(type);
    if(type==='register')coverage.nameLengths.add(data.name.length);
@@ -149,8 +149,47 @@ test('generated properties fail when replay or exact-payload guards are delibera
 
 test('only the phone may hang up its exact current call',()=>{
  const host=transport(),phone=transport('phone');
- host.channel.receive({type:'hangup',id:'wrong'});host.channel.receive({type:'hangup',id:'grass',extra:true});assert.equal(host.messages.length,0);
- host.channel.receive({type:'hangup',id:'grass'});assert.equal(host.messages.length,1);
- phone.channel.receive({type:'hangup',id:'grass'});assert.equal(phone.messages.length,0);
- assert.equal(phone.link.send('hangup',{id:'grass'}),true);assert.equal(host.link.send('hangup',{id:'grass'}),false);
+ host.channel.receive({type:'hangup',id:'wrong',round:1});host.channel.receive({type:'hangup',id:'grass',round:1,extra:true});assert.equal(host.messages.length,0);
+ host.channel.receive({type:'hangup',id:'grass',round:1});assert.equal(host.messages.length,1);
+ phone.channel.receive({type:'hangup',id:'grass',round:1});assert.equal(phone.messages.length,0);
+ assert.equal(phone.link.send('hangup',{id:'grass',round:1}),true);assert.equal(host.link.send('hangup',{id:'grass',round:1}),false);
+});
+
+test('counter and visibility metadata have one owner, and phone silence cannot authorize a reply',()=>{
+ const host=transport(),phone=transport('phone');
+ for(const type of ['counter-start','silence'])assert.equal(phone.link.send(type,type==='silence'?{id:'grass'}:{}),false);
+ for(const type of ['phone-hidden','phone-visible'])assert.equal(host.link.send(type),false);
+ assert.equal(host.link.send('counter-start'),true);
+ assert.equal(phone.link.send('phone-visible'),true);
+ host.channel.receive({type:'silence',id:'grass'});
+ phone.channel.receive({type:'counter-start'});
+ assert.equal(host.messages.length,0);
+ assert.equal(phone.messages.length,1);
+});
+
+test('call round is required and bounded in both directions',()=>{
+ const host=transport(),phone=transport('phone');
+ const call={id:'grass',round:1,line:'Polizei.',ringAtPhoneMs:500,ringAtUtcMs:null,leadMs:2200};
+ for(const round of [undefined,0,1.5,1000001,'1']){
+  for(const type of ['call-ready','call-scheduled','call-ringing','call-missed','answer','decline','hangup']){
+   const fields=type==='call-ready'||type==='call-ringing'?{atMs:500}:type==='call-scheduled'?{atMs:500,mode:'peer',lateMs:0}:{};
+   assert.equal(phone.link.send(type,{id:'grass',round,...fields}),false,type+' round '+round);
+  }
+  assert.equal(host.link.send('call-arm',{id:'grass',round}),false);
+  assert.equal(host.link.send('call',{...call,round}),false);
+ }
+ for(const round of [1,1000000]){
+  assert.equal(host.link.send('call-arm',{id:'grass',round}),true);
+  assert.equal(host.link.send('call',{...call,round}),true);
+  assert.equal(phone.link.send('call-ringing',{id:'grass',round,atMs:500}),true);
+  assert.equal(phone.link.send('call-missed',{id:'grass',round}),true);
+ }
+});
+
+test('fourth police line permits natural receipts but no cutoff',()=>{
+ const host=transport(),phone=transport('phone');
+ assert.equal(host.link.send('police-line',{index:3,line:'Letzte Warnung.'}),true);
+ assert.equal(phone.link.send('police-start',{index:3,mode:'voice',readyDelayMs:0,atMs:20}),true);
+ assert.equal(phone.link.send('police-done',{index:3,mode:'voice',durationMs:40,atMs:60}),true);
+ assert.equal(host.link.send('police-cutoff',{index:3,stopAtPhoneMs:null,stopAtUtcMs:null}),false);
 });

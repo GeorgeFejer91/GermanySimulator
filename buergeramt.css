@@ -8,6 +8,9 @@
 #amt-walk-hud{--subtitle-height:0px}
 .amt-inside #app.subtitles-visible #amt-walk-hud{--subtitle-height:69px}
 .amt-walk-hud.sequence :is(.amt-walk-top,.amt-reticle,.amt-walk-bottom,.amt-touch-controls){display:none}
+/* The existing status becomes a small, measured counter score, below controls. */
+.amt-walk-hud>#amt-status{position:absolute;top:var(--amt-status-top,54px);left:12px;right:12px;width:auto;height:auto;max-width:none;margin:0;padding:3px 0;clip-path:none;white-space:normal;overflow-wrap:break-word;text-align:center;color:#fff4df;font:700 13px/1.4 Arial,sans-serif;text-shadow:0 2px 4px #000;pointer-events:none}
+.amt-walk-hud>#amt-status[hidden]{display:none}
 #amt-walk-hud.sequence #amt-ambient{bottom:calc(max(18px,env(safe-area-inset-bottom)) + var(--subtitle-height,0px));max-height:calc(100% - var(--amt-caption-top,12px) - max(18px,env(safe-area-inset-bottom)) - var(--subtitle-height,0px));box-sizing:border-box;padding:6px 3px;overflow:auto;pointer-events:auto;background:linear-gradient(transparent,#10191bcc 16%,#10191bcc 84%,transparent)}
 .amt-inside.amt-sequence #amt-mix{top:12px;left:12px}
 .amt-inside.amt-sequence .subtitle-toggle{top:12px;right:12px;bottom:auto;max-width:calc(100% - 24px)}
@@ -178,7 +181,7 @@ html[data-call-ui="samsung"] .phone-choices #phone-answer.dragging,html[data-cal
 .amt-compact .amt-sheet header{flex-shrink:0;justify-content:flex-end;padding-bottom:3px}
 .amt-compact .amt-sheet header span{display:none}
 .amt-compact .amt-sheet header button{font-size:9px}
-.amt-compact #amt-status{position:absolute;width:1px;height:1px;margin:-1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap}
+.amt-compact .amt-sheet #amt-status{position:absolute;width:1px;height:1px;margin:-1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap}
 .amt-compact .amt-sheet h2{flex-shrink:0;margin:5px 0 3px;font:700 11px/1.15 Arial,sans-serif;overflow-wrap:anywhere}
 .amt-compact .amt-sheet p{flex:1 1 auto;min-height:0!important;margin-bottom:6px;overflow-y:auto;overflow-wrap:anywhere;font:15px/1.25 Georgia,serif}
 .amt-compact .amt-actions{flex-shrink:0}

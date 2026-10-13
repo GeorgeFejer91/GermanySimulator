@@ -39,7 +39,17 @@ export function harness(kind='host',{voice=false,synthesis=true,phoneLanguage='d
   send(type,data={}){if(this.fail||this.closed)return false;this.sent.push({type,...data});return true}
   close(){this.closed=true;this.channel=null}
   emit(type,detail){this.dispatchEvent(new CustomEvent(type,{detail}))}
-  message(detail){if(detail.type==='scan')this.scanId=detail.id;if(detail.type==='register'&&!Object.hasOwn(detail,'id'))detail={id:this.scanId,...detail};this.emit('message',detail)}
+  message(detail){
+   if(detail.type==='scan')this.scanId=detail.id;
+   if(detail.type==='register'&&!Object.hasOwn(detail,'id'))detail={id:this.scanId,...detail};
+   // Legacy lifecycle fixtures use a shorthand; wire-format rejection is tested
+   // against the real transport in buergeramt-link.test.mjs.
+   if(['call-arm','call','call-ready','call-scheduled','call-ringing','call-missed','answer','decline','hangup'].includes(detail.type)&&!Object.hasOwn(detail,'round')){
+    if(this.role==='phone'&&detail.type==='call-arm'){this.emit('message',{type:'counter-start'});this.fixtureRound=(this.fixtureRound||0)+1;}
+    detail={...detail,round:this.role==='host'?this.sent.findLast(m=>m.type==='call-arm')?.round||1:this.fixtureRound||1};
+   }
+   this.emit('message',detail);
+  }
  }
  const synth={speaking:false,pending:false,paused:false,spoken:[],cancelCount:0,current:null,
   getVoices:()=>[{name:'German Test',lang:'de-DE'}],
