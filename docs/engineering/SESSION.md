@@ -95,7 +95,7 @@ review remain in ignored output/shared-tickets/ and output/playwright/.
 
 ## Connected speech lips — 2026-10-13
 
-Integrator-owned isolated `connected-lips` worktree, integrated on published `4792b23`.
+Integrator-owned isolated `connected-lips` worktree, integrated on published `2406224`.
 The user approved the connected-lip prototype and requested applying its method
 across animated characters, then updating the animation skill. Scope: shared
 mouth-paint shader, per-source lip orientation/registration, its native/atlas
@@ -111,6 +111,16 @@ every registered native key and affected action interval, atlas fallback, closed
 paint and alpha, plus real media playback, mobile emulation and unchanged browser
 budgets. Physics and Camera reviews must bind the final same candidate. Source
 and emulated checks do not imply physical-device or perceptual listening evidence.
+
+Final mouth-specific candidate fits 67 native keys and 41 atlas sources across
+15 office actor instances. All 861 Node checks, 67-key GPU pixel contracts,
+desktop deep/native mobile/atlas failure-and-closure matrices, four silent
+normal-speed recorded speech captures and 24 quiet hardware cold contexts pass.
+Exact scope, sampling limits and retained whole-face blend softness belong to
+`For-AI/BUERGERAMT.md`; resource deltas belong to `For-AI/ASSET-POLICY.md`.
+The new-character authoring guide is published at portable skill revision
+`e7ac5b0`, synced to personal/project copies and independently forward-reviewed
+on asymmetric lips, teeth, partial paper occlusion and recorded changing-pose speech.
 
 # Browser-local Knick name announcements — 2026-10-13
 

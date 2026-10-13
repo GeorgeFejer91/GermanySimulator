@@ -1163,7 +1163,7 @@ Six fresh hardware-ANGLE office benchmark runs passed after depth integration, a
 ## Full mouth opening and recorded timing (2026-10-11)
 
 **Connected lip surface, 2026-10-13.** The shared native/atlas mouth painter uses
-a compact invertible local paint field with attached corners, bounded lower-jaw
+a compact paint field with monotone skin transport, attached corners, bounded lower-jaw
 support and a distinct contact shape. All 67 native keys own `mouth_angle`,
 `mouth_gap` and `mouth_profile` beside `mouth_xywh`; their source specifications
 and builder preserve these fields. Each profile traces its own painted corners,
@@ -1184,6 +1184,32 @@ cue data, media clocks, body phases, pivots and draw/texture ownership stay with
 the existing controllers. The speaking desk receives the existing bounded mobile
 paint slot before background clerks. This changes lip contour/attachment; the
 existing broader Gaussian midpoint ghosting remains a separate art limitation.
+
+**Individual lip validation, 2026-10-13.** Integrated published `2406224` and
+passed all 861 Node checks. The exact GPU matrix covers all 67 native keys and
+804 source/inactive/articulated/comparison PNGs; inactive pixels and active alpha
+are exact. Production captures cover all 15 instances: 326 desktop native
+key/interval/return samples, 103 samples in each mobile orientation, five atlas
+scenarios plus failed metadata, and owned closure of all 41 distinct atlas
+source poses. Four normal-speed native-recording captures cover Knick and the
+Aktenkurier on desktop and portrait emulation, with changing body poses, held
+media/cues during pause and cue/owner release on cancellation. These are silent
+forced scenes, not natural mission, heard synchronization or verified phonemes.
+Source boundaries include the complete painted teeth/corner cavity; the skin
+sampling map reaches identity continuously at its protected guards. The existing
+whole-face/body blend can still soften or double between anchors.
+
+Twenty-four quiet hardware-ANGLE cold contexts compare six root and six office
+runs on each side against `2406224`, using the same final asset tree, DPR 2 and
+seed 424242. All transfer/title/drawing-buffer/input/error gates pass. Candidate
+root transfer is at most 17,933,420 bytes (18 MB gate), office transfer 33,832,114.
+Worst sampled input p95 is 28.9 ms root and 46.3 ms office, against baseline 22.5
+and 103.3 ms; warm sync CPU p95 is at most 26.5 and 7.5 ms. These local uncompressed
+HTTP samples do not establish a speedup, GPU time, listening or physical Android
+performance. The source byte additions are in `ASSET-POLICY.md`. Current evidence
+is in ignored `output/connected-lips/guard-*` and the independent review folders;
+the portable new-character protocol and its instruction-only review are in the
+animation skill route in `SKILLS.md`.
 
 
 The earlier texture-shift mouth caused visible lip vibration without an oral
