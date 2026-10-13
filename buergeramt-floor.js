@@ -45,8 +45,8 @@ const transport=`
         float wake=foot.w*exp(-age*.6)*exp(-dot(delta,delta)/.36);
         flow+=footDirections[i]*wake*.10+delta/max(.15,distance)*sin(distance*7.-age*1.8)*wake*.035;stirred+=wake;}
     }
-    flow+=vec2(.035*sin(p.y*2.),-.25)*readOil(oilUv).a;
-    vec2 back=clamp(oilUv-flow*(.055+.18*melt*melt)*melt*.05/floorSize,texel*.5,1.-texel*.5);
+    vec2 paintFlow=vec2(.14*sin(p.y*3.+flowClock*.04),-.24)*readOil(oilUv).a;
+    vec2 back=clamp(oilUv-(flow*(.055+.18*melt*melt)*melt+paintFlow)*.05/floorSize,texel*.5,1.-texel*.5);
     vec4 pigment=readOil(back);
     vec4 neighbors=(readOil(back+vec2(texel.x,0.))+readOil(back-vec2(texel.x,0.))+
                      readOil(back+vec2(0.,texel.y))+readOil(back-vec2(0.,texel.y)))*.25;
@@ -56,7 +56,7 @@ const transport=`
     pigment.rgb+=.05*.18*melt*pigment.rgb*(1.-pigment.rgb)*(2.*pigment.rgb-1.)*(1.-pigment.a);
     vec4 spill=amtPaintSpill(p,melt,clock);
     float atWall=1.-smoothstep(.035,.13,abs(p.y-amtPortraitInfo.y));
-    float feed=.05*.95*spill.a*atWall;
+    float feed=.05*3.*spill.a*atWall;
     pigment.rgb=mix(pigment.rgb,spill.rgb,feed);pigment.a=mix(pigment.a,1.,feed);
     pigment=clamp(pigment,0.,1.);
     gl_FragColor=pigment;
@@ -126,8 +126,18 @@ export function createAmtFloor({THREE:T,renderer,material,mobile=false}){
       float grout=1.-smoothstep(.009,.016+max(fwidth(amtFloorPoint.x),fwidth(amtFloorPoint.y)),min(cellEdge.x,cellEdge.y));
       float ridges=1.-abs(floorPigment*2.-1.);
       vec3 floorPaint=mix(vec3(.006,.007,.009),vec3(.72,.73,.71),floorPigment);
-      vec4 floorColor=amtFloorLive>.5?texture2D(amtFloorOil,(amtFloorPoint-floorMin)/floorSize):amtPaintSpill(amtFloorPoint,amtFloorMelt,amtFloorTime);
-      floorPaint=mix(floorPaint,vec3(.012)+floorColor.rgb*.72,clamp(floorColor.a*1.5,0.,1.)*(1.-amtFloorRestore));
+      vec2 stillPaintPoint=amtFloorPoint;
+      float paintTravel=max(0.,amtPortraitInfo.y-amtFloorPoint.y);
+      stillPaintPoint.x+=amtFloorMelt*.22*sin(paintTravel*7.)*smoothstep(0.,.25,paintTravel);
+      stillPaintPoint.y=amtPortraitInfo.y-(amtPortraitInfo.y-amtFloorPoint.y)/(1.+2.*amtFloorMelt);
+      vec4 floorColor=amtFloorLive>.5?texture2D(amtFloorOil,(amtFloorPoint-floorMin)/floorSize)
+        :amtPaintSpill(stillPaintPoint,min(amtFloorMelt,.35),amtFloorTime);
+      float paintCoverage=clamp(floorColor.a*1.5,0.,1.);
+      vec3 carriedPaint=vec3(.012)+floorColor.rgb*.72;
+      vec3 paintChroma=carriedPaint-vec3(dot(carriedPaint,vec3(.2126,.7152,.0722)));
+      // Keep transported pigment hues legible against the black/white lamellae.
+      floorPaint=max(vec3(0.),mix(floorPaint,carriedPaint-paintChroma,paintCoverage*(1.-amtFloorRestore))
+        +paintChroma*(amtFloorLive>.5?4.:paintCoverage)*(1.-amtFloorRestore));
       floorPaint=mix(floorPaint,vec3(.10),grout*(1.-smoothstep(.0,.22,amtFloorMelt)));
       diffuseColor.rgb*=floorPaint;
       float oilHeight=(1.-amtFloorStill)*amtFloorMelt*(.004*ridges+.009*sin(amtFloorPoint.x*2.7+amtFloorPoint.y*.9+amtFloorTime*.08)
@@ -156,7 +166,7 @@ export function createAmtFloor({THREE:T,renderer,material,mobile=false}){
       totalEmissiveRadiance+=vec3(.48,.46,.40)*lampReflection*amtFloorMelt;
     `);
   };
-  material.customProgramCacheKey=()=>key+':amt-oil-floor-v5:'+rippleCount;material.color.set(0xffffff);material.needsUpdate=true;
+  material.customProgramCacheKey=()=>key+':amt-oil-floor-v6:'+rippleCount;material.color.set(0xffffff);material.needsUpdate=true;
 
   function release(){
     if(targets){for(const target of targets)target.dispose();targets=null;}
