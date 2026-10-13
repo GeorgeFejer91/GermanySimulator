@@ -39,7 +39,7 @@ scope.window.Germany3D={isWorldPointVisible:()=>false};scope.window.BuergeramtLe
 // A Start shortcut during loading must not advance the game early.
 const startup=game.slice(game.indexOf('let pendingStart=null,'),game.indexOf('\nlet faxFeedCue='));
 let ready=false,started=0;const button={disabled:true,textContent:'LÄDT …',getAttribute(){return 'true'},setAttribute(){}},intro={classList:{contains:()=>false,add(){}}};
-const gate=vm.createContext({window:{Germany3D:{get startupReady(){return ready},prepareNearbyAssets(){}}},state:{started:false},document:{body:{classList:{contains:()=>false}},getElementById:id=>id==='start'?button:intro},prepareNearbyNpcAssets(){},startupNpcAssetsReady:()=>ready,ensureAudio(){},startMusic(){},prepareRecording:async()=>{},FAX_FEED_AUDIO:'fax',regionOf:()=>'',player:{y:0},finishHumorCertification:()=>started++,humorModal:{hidden:true},renderHumorPage(){}});
+const gate=vm.createContext({URLSearchParams,location:{search:''},window:{Germany3D:{get startupReady(){return ready},prepareNearbyAssets(){}}},state:{started:false},document:{hidden:false,body:{classList:{contains:()=>false}},getElementById:id=>id==='start'?button:intro},prepareNearbyNpcAssets(){},startupNpcAssetsReady:()=>ready,ensureAudio(){},startMusic(){},prepareRecording:async()=>{},FAX_FEED_AUDIO:'fax',regionOf:()=>'',player:{y:0},finishHumorCertification:()=>started++,humorModal:{hidden:true},renderHumorPage(){}});
 vm.runInContext(startup+';globalThis.api={startGame,refreshStartup}',gate);
 gate.api.startGame(true);assert.equal(started,0);assert.equal(button.disabled,true);
 ready=true;gate.api.refreshStartup();assert.equal(started,1);assert.equal(button.disabled,false);assert.equal(button.textContent,'SPIEL STARTEN');

@@ -247,3 +247,5 @@ Six paired silent phone profiles pass (named and unsupported desktop/Android por
 ## Jobcenter direct link — 2026-10-13
 
 Integrator on clean published c69dc27. Scope: existing game.js boot/preload handoff, index.html cache identity, direct-route Node/browser checks, Pages test list and owning gameplay guidance. Add ?geheim=jobcenter, skip title/forms/welcome, wait for renderer and foreground, consume entry once and retain the ordinary body-clear ejection path. Preserve the existing flame, audio, movement, missions, Bürgeramt route and rendering tree. Existing separate Git publication metadata is required because primary metadata is damaged. Browser checks remain silent and use Android emulation; independent Physics and Camera review binds the frozen candidate.
+
+The initial deployment caught an older browser-responsiveness fixture that extracts the startup block without URLSearchParams/location. Its fixture now supplies those browser globals, with all readiness/one-shot assertions retained. The runtime candidate and independent reviews are unchanged.
