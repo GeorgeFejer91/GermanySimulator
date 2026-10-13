@@ -56,7 +56,7 @@ try{
   await page.waitForFunction(()=>Germany3D.jobcenter.mediaStarted&&Germany3D.jobcenter.playback>1);
   await page.screenshot({path:resolve(out,name+'-speaking.png')});
   const speaking=await page.evaluate(()=>Germany3D.jobcenter);assert.ok(speaking.energy>0);assert.ok(speaking.pressure>initial.pressure);
-  await page.evaluate(()=>{window.__jobCueSamples=[];window.__jobCueTimer=setInterval(()=>{const j=Germany3D.jobcenter;if(j.active)window.__jobCueSamples.push({time:j.playback,level:j.rumbleLevel,dismissal:j.dismissal,active:j.rumbleActive})},100)});
+  await page.evaluate(()=>{window.__jobCueSamples=[];window.__jobCueTimer=setInterval(()=>{const j=Germany3D.jobcenter;if(j.active)window.__jobCueSamples.push({time:j.playback,level:j.rumbleLevel,dismissal:j.dismissal,heat:j.heat,active:j.rumbleActive})},100)});
   const samples=await page.evaluate(async()=>{const rows=[];for(let i=0;i<12;i++){await new Promise(r=>setTimeout(r,90));rows.push({time:Germany3D.jobcenter.playback,energy:Germany3D.jobcenter.energy})}return rows});
   assert.ok(new Set(samples.map(s=>Math.round(s.energy*100))).size>2,'fire responds to changing media energy');
   if(name==='desktop'){
@@ -71,7 +71,16 @@ try{
   }else{
    await page.setViewportSize({width:844,height:390});await page.waitForTimeout(300);await page.screenshot({path:resolve(out,name+'-landscape.png')});
   }
-  await page.waitForFunction(()=>!Germany3D.jobcenter.active,null,{timeout:45000});
+  await page.waitForFunction(()=>Germany3D.jobcenter.heat>.75,null,{timeout:45000});
+  await page.screenshot({path:resolve(out,name+'-white-heat.png')});
+  await page.waitForFunction(()=>!Germany3D.jobcenter.active&&Germany3D.jobcenter.release?.progress>.03,null,{timeout:5000});
+  const releaseStart=await page.evaluate(()=>({release:Germany3D.jobcenter.release,busy:Germany3DBridge.getHUDState().busy,player:{...Germany3DBridge.player}}));
+  assert.equal(releaseStart.busy,false,'native ended immediately returns city control beneath the visual release');
+  await page.screenshot({path:resolve(out,name+'-release-start.png')});
+  await page.waitForFunction(()=>!Germany3D.jobcenter.release||Germany3D.jobcenter.release.progress>.45);
+  await page.screenshot({path:resolve(out,name+'-release-middle.png')});
+  await page.waitForFunction(()=>!Germany3D.jobcenter.release);
+
   const cueSamples=await page.evaluate(()=>{clearInterval(window.__jobCueTimer);return window.__jobCueSamples});
   assert.ok(cueSamples.some(s=>s.active&&s.level>.4),'long speech pauses produce rumble');
   assert.ok(cueSamples.some(s=>s.dismissal>.7),'final dismissal builds the threat');
@@ -82,7 +91,7 @@ try{
   // Re-entry and explicit recovery never keep the old audio or controls.
   await page.keyboard.press('KeyE');await page.waitForFunction(()=>Germany3D.jobcenter.active);await page.keyboard.press('Escape');
   assert.equal(await page.evaluate(()=>Germany3D.jobcenter.active),false);
-  assert.deepEqual(errors,[]);report.cases.push({name,initial,speaking,samples,cueSamples,exit,errors});
+  assert.deepEqual(errors,[]);report.cases.push({name,initial,speaking,samples,cueSamples,releaseStart,exit,errors});
   console.log(JSON.stringify({name,result:'PASS'}));await context.close();
  }
  // Shared diagnostic uses the identical facade and encounter renderer.

@@ -98,25 +98,26 @@ const flameFragment=`
   vec3 color=mix(ember,whiteHeat,clamp(pow(max(0.,core),2.)*.65+heat*(.3+core*.45),0.,.96));
   float glow=exp(-length(vec2(p.x*3.,(p.y-.3)*1.6))*5.)*(.14+heat*.13);
   float shadow=exp(-pow(p.x/.29,4.)-pow((p.y-.43)/.25,4.))*uAnger;
-  color*=1.-shadow*.78;
+  color*=1.-shadow*.91;
   // A single lidless furnace eye: a dark slit suspended in a burning almond.
   vec2 eye=vec2(p.x/.28,(p.y-.59)/.081);
   float eyeShape=pow(abs(eye.x),1.5)+pow(abs(eye.y),1.25);
   float eyeRim=exp(-pow((eyeShape-.80)/.30,2.))*uAnger;
   float iris=(1.-smoothstep(.48,1.1,eyeShape))*uAnger;
   float pupil=exp(-pow(p.x/.019,4.)-pow((p.y-.59)/.072,6.))*uAnger;
-  vec3 eyeFire=mix(vec3(1.2,.19,.005),whiteHeat,.4+heat*.6);
-  color=mix(color,eyeFire,iris*.83);
-  color+=whiteHeat*eyeRim*.72;
+  float fissures=.78+.22*sin(atan(eye.y,eye.x)*27.+n*8.);
+  vec3 eyeFire=mix(vec3(1.15,.14,.005),whiteHeat,.14+heat*.34)*fissures;
+  color=mix(color,eyeFire,iris*.90);
+  color+=whiteHeat*eyeRim*(.37+heat*.16);
   color=mix(color,vec3(.001,.0002,0.),pupil);
   // The speaking mouth is a torn, depthless opening, never a grin or teeth.
-  float mouthWidth=.075+.018*uEnergy;
-  float mouthCentre=.325+sin(p.y*28.+uTime*.28)*.003;
-  vec2 jaw=vec2((p.x+(n-.5)*.013)/mouthWidth,(p.y-mouthCentre)/(.022+.068*uEnergy));
-  float mouthDistance=pow(abs(jaw.x),1.5)+pow(abs(jaw.y),1.35);
-  float mouth=(1.-smoothstep(.70,1.02,mouthDistance))*uAnger;
-  float lip=exp(-pow((mouthDistance-1.07)/.19,2.))*uAnger;
-  color+=mix(vec3(.8,.10,.004),whiteHeat,heat*.75)*lip*.38;
+  float mouthWidth=.115+.035*uEnergy;
+  float mouthCentre=.31;
+  vec2 jaw=vec2((p.x+(n-.5)*.034)/mouthWidth,(p.y-mouthCentre)/(.047+.105*uEnergy));
+  float mouthDistance=length(jaw)+(fbm(p*29.+vec2(0.,-uTime*.55))-.5)*.29;
+  float mouth=(1.-smoothstep(.78,1.09,mouthDistance))*uAnger;
+  float lip=exp(-pow((mouthDistance-1.12)/.16,2.))*uAnger*(.4+.6*n);
+  color+=mix(vec3(.55,.055,.001),whiteHeat,heat*.28)*lip*.16;
   color=mix(color,vec3(.0002,.0001,0.),mouth);
   gl_FragColor=vec4(color*(.8+uEnergy*.42+uAttack*.06+uRumble*.13+heat*.25),clamp(fire+glow,0.,1.));
  }
@@ -275,8 +276,8 @@ export function createJobcenterEncounter(T,renderer,bridge){
  }
  function renderRelease(doorUv){
   if(!release)return false;const now=performance.now(),dt=clamp((now-releaseLast)/1000,0,.1);releaseLast=now;
-  if(document.hidden||releaseBlurred||window.GermanyHUD?.paused)return true;
-  try{if(release.render(dt,reduced.matches,doorUv))clearRelease()}catch{clearRelease()}
+  const paused=document.hidden||releaseBlurred||window.GermanyHUD?.paused;
+  try{if(release.render(paused?0:dt,reduced.matches,doorUv))clearRelease()}catch{clearRelease()}
   return !!release;
  }
  return {open,close,render,renderRelease,get active(){return !!visit},get releasing(){return !!release},inspect(){return visit?{active:true,phase:visit.phase,x:visit.x,z:visit.z,yaw:visit.yaw,pitch:visit.pitch,distance:visit.distance,pressure:visit.pressure,energy:visit.energy,attack:visit.attack,rumbleLevel:visit.rumbleLevel,dismissal:visit.dismissal,heat:visit.heat,rumbleActive:!!visit.rumbleSource?.active,playback:visit.playback,mediaStarted:visit.mediaStarted,mediaPaused:visit.audio.paused,failed:visit.failed,captionCues:visit.captionCues.length,resources:{geometries:2,textures:0,media:1},duration:visit.data?.duration||0}:{active:false,release:release?.inspect()||null}}};
