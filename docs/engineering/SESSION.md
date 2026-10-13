@@ -249,3 +249,50 @@ Six paired silent phone profiles pass (named and unsupported desktop/Android por
 Integrator on clean published c69dc27. Scope: existing game.js boot/preload handoff, index.html cache identity, direct-route Node/browser checks, Pages test list and owning gameplay guidance. Add ?geheim=jobcenter, skip title/forms/welcome, wait for renderer and foreground, consume entry once and retain the ordinary body-clear ejection path. Preserve the existing flame, audio, movement, missions, Bürgeramt route and rendering tree. Existing separate Git publication metadata is required because primary metadata is damaged. Browser checks remain silent and use Android emulation; independent Physics and Camera review binds the frozen candidate.
 
 The initial deployment caught an older browser-responsiveness fixture that extracts the startup block without URLSearchParams/location. Its fixture now supplies those browser globals, with all readiness/one-shot assertions retained. The runtime candidate and independent reviews are unchanged.
+
+# Whole-surface Steinmeier liquidation — 2026-10-13
+
+Integrator-owned on published base `c69dc27`, integrated with `d6bd482`, in an isolated sparse checkout
+because conflict-renamed shared Git metadata makes its worktrees unreadable.
+Use hash-verified shipped assets for local QA; never stage them or shared local work.
+Scope: the portrait's shared image/wall/floor shader, its rate and imported cache
+identities, focused CPU/GPU regressions and owning episode contract. Replace
+eight narrow channels with one continuously warped, broad painted sheet. One
+masked mesh covers the whole image and wall, bending below the lower frame rail
+to avoid the first candidate's visible handoff seam. The
+entire source image slumps out of the frame and leaves the backing bare; its
+wall contact supplies the persistent floor colors. Raise portrait progression
+from 1.3 to 2.2 times room melt, preserving the shared clocks, early interaction,
+counter recovery, missing-image fallback, reduced motion, solid geometry and
+depth policy. Add no asset, renderer pass, simulation loop or dependency.
+Validate loaded/fallback/reduced/recovery/cleanup, full-frame drainage, broad
+connected film coverage and early RGB floor deposition on silent desktop and
+Android emulation. Two independent Physics/Camera reviewers inspect one frozen
+candidate. Physical Android and listening remain separately untested.
+
+Validation binds the runtime/test candidate `500bfcc` (portrait SHA-256
+`ca3fa152`, world `90ea3f3c`) on `d6bd482`. The Pages selection passes 659/659;
+voice curator and all six exact-RGBA delivery checks pass. The complete silent
+GPU matrix passes six profiles: desktop, Android portrait/landscape emulation,
+procedural floor, reduced motion and missing portrait. Loaded frames fully drain
+to uniform backing; sampled film width/connected coverage are both 1; actual
+floor RGB is positive at age 150 s. Missing art keeps its fallback and deposits no
+paint. Actual counter recovery passes all five applicable profiles, returning
+the image intact and releasing floor targets at 90 s. The old shader fails the
+new full-frame drainage regression. Independent Physics and scoped Camera C4/X1
+reviews pass the same runtime/test hashes; the earlier face seam is gone. The
+final amendment records this evidence without changing runtime or tests.
+
+Twelve sequential cold Chromium 155/Intel Iris Xe runs (six `d6bd482` baseline,
+six candidate, DPR 2, seeds 4781–4783, local HTTP, no throttle) pass transfer/title/
+buffer/input/error guards. Candidate maximum transfer is 17,956,483 bytes, title
+dispatch 12 calls per measured 3 s and all runs accept nine input changes. Desktop
+input p95 median/range is 33.3/23.3–138.8 ms, versus baseline 21.7/21–24.8 ms; Android
+is 21.3/18.9–22.8 ms, versus 26.8/24.2–28.2 ms. These lab observations support the
+release guards, not a performance improvement. A local benchmark copy includes
+both paint modules in the baseline source overrides; all 1691 cached asset blobs
+match the published tree. Initial incomplete GPU evidence includes a screenshot
+timeout while the release CPU sweep ran; the sequential matrix is complete.
+Evidence remains under ignored `output/portrait-liquid/`. Forced camera/time and
+registration fixtures do not prove a natural-duration mission. Physical Android
+and perceptual listening remain NOT RUN.
