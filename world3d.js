@@ -770,6 +770,7 @@ function showRendererFailure(error){
     }
     if(home){
       part("Porch canopy",0,2.5,d/2+.75,w*.68,.14,1.95,roof);
+      for(const x of [-1.3,1.3])part("Porch sign bracket",x,2.83,d/2+1.64,.065,.59,.065,trim);
       part("Roof tarpaulin patch",-w*.19,wallHeight+roofHeight*.62,-.4,1.3,.05,1.55,wood).rotation.z=Math.atan2(roofHeight,w/2);
       part("Plaster patch",-w*.37,.62,front+.021,.66,.72,.035,trim);
       part("Bare mattress",-1.38,.26,d/2-.23,1.35,.23,.42,linen);
@@ -795,7 +796,7 @@ function showRendererFailure(error){
     signCanvas.width=384;signCanvas.height=home?112:80;const ink=signCanvas.getContext("2d");ink.fillStyle=home?"#d1c3a5":"#e4dfcf";ink.fillRect(0,0,signCanvas.width,signCanvas.height);ink.strokeStyle="#655e51";ink.lineWidth=3;ink.strokeRect(3,3,378,signCanvas.height-6);ink.fillStyle="#222";ink.textAlign="center";ink.textBaseline="middle";
     let titleSize=home?31:35;for(;titleSize>16;titleSize--){ink.font=`900 ${titleSize}px Arial`;if(ink.measureText(title).width<=356)break}ink.fillText(title,192,home?39:40);
     if(home){ink.font="700 26px Arial";ink.fillText("JANZ WEIT DRAUSSEN",192,81)}
-    l.material.map.needsUpdate=true;l.material.map.generateMipmaps=false;l.material.map.minFilter=T.LinearFilter;l.scale.set(home?3.45:Math.min(2.45,w*.66),home?1.006:.51,1);l.position.set(0,home?3.02:2.31,home?d/2+.12:front+.095);l.userData.occlusionDecoration=true;l.userData.jwdText=home?"JWD · DEIN ZUHAUSE / JANZ WEIT DRAUSSEN":title;l.raycast=()=>{};g.add(l);
+    l.material.map.needsUpdate=true;l.material.map.generateMipmaps=false;l.material.map.minFilter=T.LinearFilter;l.scale.set(home?3.45:Math.min(2.45,w*.66),home?1.006:.51,1);l.position.set(0,home?3.15:2.31,home?d/2+1.77:front+.095);l.userData.occlusionDecoration=true;l.userData.jwdText=home?"JWD · DEIN ZUHAUSE / JANZ WEIT DRAUSSEN":title;l.raycast=()=>{};g.add(l);
     // One native instance batch per house/material keeps the six-house street
     // inexpensive while preserving exact geometry for the normal sightline ray.
     const batches=new Map();for(const mesh of fallback.children)if(mesh.geometry===unit){if(!batches.has(mesh.material))batches.set(mesh.material,[]);batches.get(mesh.material).push(mesh)}
@@ -1041,9 +1042,70 @@ function showRendererFailure(error){
     bierkasten:[germanPropUrl("beer-crate"),.75,.58,.54],schubkarre:[germanPropUrl("allotment-wheelbarrow"),1.56,.75,.65],
     wertstoffcontainer:[germanPropUrl("recycling-containers"),1.87,1.21,.68],picknicktisch:[germanPropUrl("allotment-picnic-table"),2.3,.83,1.98]};
   const warnedScenery=new Set(),dumpsterFlames=[],jwdScenery=[];
+  function jwdBoxParts(group){
+    const geometry=new T.BoxGeometry(1,1,1),rows=new Map();
+    const part=(name,material,x,y,z,w,h,d)=>{const matrix=new T.Matrix4().compose(new T.Vector3(x,y,z),new T.Quaternion(),new T.Vector3(w,h,d));if(!rows.has(material))rows.set(material,[]);rows.get(material).push({name,matrix})};
+    part.finish=()=>{for(const [material,parts] of rows){const batch=new T.InstancedMesh(geometry,material,parts.length);batch.name="JWD fitted details";batch.userData.jwdParts=parts.map(row=>row.name);parts.forEach((row,i)=>batch.setMatrixAt(i,row.matrix));batch.computeBoundingBox();batch.computeBoundingSphere();group.add(batch)}};
+    return part;
+  }
+  function jwdGardenProp(p,g){
+    const w=p.w*S,d=p.d*S,h=p.h*S,part=jwdBoxParts(g),green=mat(p.kept?0x385c30:0x667044),earth=mat(0x6d553b),cream=mat(0xd7cfb6),red=mat(p.kept?0xac3932:0x855042),dark=mat(0x252a29,.58);
+    const sphere=(name,material,x,y,z,sx,sy,sz)=>{const mesh=new T.Mesh(new T.SphereGeometry(1,9,6),material);mesh.name=name;mesh.position.set(x,y,z);mesh.scale.set(sx,sy,sz);g.add(mesh);return mesh};
+    if(p.asset==="jwd-car"){
+      const suv=p.style==="vw",electric=p.style==="tesla",body=mat(suv?0x354f59:electric?0xc7cbc6:0x293348,.3),glass=mat(0x223638,.23),metal=mat(0xa4aaa8,.3),lamp=mat(0xe9e7cb,.25),blue=mat(0x6b91ab,.35);
+      part("Painted body",body,0,h*.445,0,w*.85,h*.35,d*.87);part("Lower sill",dark,0,h*.245,0,w*.82,h*.11,d*.83);
+      part("Bonnet",body,0,h*.638,d*.316,w*.84,h*.045,d*.235);part("Boot",body,0,h*.63,-d*.36,w*.82,h*.04,d*.15);
+      const profile=suv?[[-.29,.62],[-.23,.98],[.12,.98],[.25,.62]]:electric?[[-.30,.61],[-.16,.91],[-.035,.995],[.10,.965],[.255,.61]]:[[-.28,.62],[-.155,.98],[.075,.98],[.225,.62]];
+      const vertices=[],indices=[];for(const side of [-1,1])for(const [z,y] of profile)vertices.push(side*w*.355,y*h,z*d);
+      for(let i=1;i<profile.length-1;i++){indices.push(0,i+1,i,profile.length,profile.length+i,profile.length+i+1)}for(let i=0;i<profile.length;i++){const j=(i+1)%profile.length;indices.push(i,j,profile.length+j,i,profile.length+j,profile.length+i)}
+      const geometry=new T.BufferGeometry();geometry.setAttribute("position",new T.Float32BufferAttribute(vertices,3));geometry.setIndex(indices);geometry.computeVertexNormals();const cabin=new T.Mesh(geometry,glass);cabin.name=electric?"EV panoramic cabin":suv?"SUV cabin":"Executive saloon cabin";g.add(cabin);
+      if(!electric)part("Painted roof",body,0,h*.986,suv?-d*.055:-d*.04,w*.715,h*.025,d*(suv?.35:.22));
+      for(const side of [-1,1]){
+        part("Cabin pillar",body,side*w*.359,h*.805,-d*.065,w*.026,h*.35,d*.027);
+        part("Wing mirror",body,side*w*.455,h*.706,d*.155,w*.08,h*.09,d*.045);
+        part("Door handle",metal,side*w*.432,h*.595,-d*.065,w*.015,h*.025,d*.06);
+        part("Headlight",lamp,side*w*.318,h*(electric?.562:.552),d*.449,w*(electric?.22:.24),h*(electric?.04:.078),d*.025);
+        part("Tail light",red,side*w*.30,h*.552,-d*.449,w*.24,h*.075,d*.025);
+      }
+      if(suv){part("SUV chrome grille",metal,0,h*.51,d*.45,w*.52,h*.12,d*.024);for(const y of [.48,.535])part("SUV grille slit",dark,0,h*y,d*.465,w*.48,h*.025,d*.008);part("SUV badge",cream,0,h*.53,d*.472,w*.062,h*.075,d*.008)}
+      else if(!electric){for(const side of [-1,1]){part("Twin grille surround",metal,side*w*.085,h*.514,d*.45,w*.15,h*.14,d*.029);part("Twin grille",dark,side*w*.085,h*.515,d*.467,w*.113,h*.107,d*.009)}part("Executive blue badge",blue,0,h*.66,d*.33,w*.045,h*.012,d*.027)}
+      else{part("EV lower intake",dark,0,h*.335,d*.446,w*.53,h*.046,d*.018);part("EV bonnet mark",metal,0,h*.664,d*.37,w*.055,h*.008,d*.032)}
+      part("Front plate",cream,0,h*.348,d*.461,w*.26,h*.065,d*.018);part("Rear plate",cream,0,h*.41,-d*.461,w*.26,h*.065,d*.018);
+      const radius=Math.min(h*.215,w*.14),wheelGeometry=new T.CylinderGeometry(radius,radius,w*.095,12),rimGeometry=new T.CylinderGeometry(radius*.64,radius*.64,w*.008,10);
+      for(const side of [-1,1])for(const z of [-d*.30,d*.30]){const wheel=new T.Mesh(wheelGeometry,dark),rim=new T.Mesh(rimGeometry,metal);wheel.name="Parked tyre";wheel.rotation.z=Math.PI/2;wheel.position.set(side*w*.44,radius,z);rim.name="Alloy wheel";rim.rotation.z=Math.PI/2;rim.position.set(side*w*.488,radius,z);g.add(wheel,rim)}
+    }else if(p.asset==="jwd-hedge"){
+      if(p.round){part("Topiary stem",earth,0,h*.19,0,w*.12,h*.38,d*.12);sphere("Clipped topiary",green,0,h*.60,0,w*.49,h*.40,d*.49)}
+      else if(p.kept){part("Clipped hedge",green,0,h*.49,0,w,h*.98,d);part("Freshly trimmed top",mat(0x4c733b),0,h*.986,0,w*.98,h*.025,d*.985)}
+      else{part("Overgrown hedge core",green,0,h*.31,0,w*.83,h*.62,d*.98);const pale=mat(0x7a804f);for(let i=0;i<7;i++){const scale=.24+((i*7)%5)*.025,center=.52+((i*3)%4)*.035;sphere("Untrimmed hedge shoot",i%3?pale:green,0,h*center,-d*.42+i*d*.14,w*.5,h*scale,d*.078)}}
+    }else if(p.kept){
+      part("Gnome shoes",dark,0,h*.07,d*.085,w*.76,h*.14,d*.70);sphere("Gnome coat",green,0,h*.35,0,w*.34,h*.26,d*.34);sphere("Gnome face",cream,0,h*.64,d*.05,w*.275,h*.17,d*.265);sphere("Gnome beard",cream,0,h*.51,d*.18,w*.23,h*.18,d*.23);
+      const hat=new T.Mesh(new T.ConeGeometry(Math.min(w*.35,d*.36),h*.31,9),red);hat.name="Pointed garden gnome hat";hat.position.set(0,h*.835,d*.015);g.add(hat);sphere("Gnome nose",red,0,h*.647,d*.325,w*.06,h*.05,d*.065);
+    }else{
+      part("Fallen gnome coat",earth,-w*.10,h*.34,0,w*.46,h*.58,d*.58);part("Broken gnome boots",dark,-w*.4,h*.22,0,w*.19,h*.4,d*.66);sphere("Fallen gnome face",cream,w*.20,h*.40,0,w*.125,h*.33,d*.22);
+      const hat=new T.Mesh(new T.ConeGeometry(Math.min(h*.35,d*.25),w*.22,8),red);hat.name="Chipped fallen gnome hat";hat.rotation.z=-Math.PI/2;hat.position.set(w*.385,h*.38,0);g.add(hat);
+    }
+    part.finish();g.userData.jwdProp={id:p.id,asset:p.asset,style:p.style,kept:p.kept,collisionRect:p.collisionRect,declared:{w,d,h}};jwdScenery.push(g);
+    // Retire unused palette entries: every live material belongs to this group.
+    const used=new Set();g.traverse(node=>{if(node.material)used.add(node.material)});for(const material of [green,earth,cream,red,dark])if(!used.has(material))material.dispose();
+  }
+  function jwdGardenLots(){
+    const gardens=bridge.jwdGardens;if(!gardens)return;
+    const contains=(r,x,y,pad=0)=>x>=r.x-pad&&x<=r.x+r.w+pad&&y>=r.y-pad&&y<=r.y+r.h+pad;
+    for(const lot of gardens.lots){
+      const g=new T.Group(),grass=mat(lot.kept?0x527046:0x77754c),stripe=mat(lot.kept?0x617e4f:0x8a7952),tuft=mat(lot.kept?0x778959:0x6c713d),w=lot.w*S,d=lot.h*S;
+      const ground=new T.Mesh(new T.PlaneGeometry(w,d),grass);ground.rotation.x=-Math.PI/2;ground.position.y=.0116;g.add(ground);
+      const parts=jwdBoxParts(g);for(let i=0;i<7;i++)if(lot.kept)parts("Garden mowing stripe",stripe,0,.0119,-d/2+(i+.5)*d/7,w,.0003,d/14);else parts("Bare neglected lawn patch",stripe,((i*.61)%1-.5)*w*.8,.0119,((i*.37)%1-.5)*d*.84,w*(.08+(i%3)*.045),.0003,d*(.04+(i%2)*.028));parts.finish();
+      const geometry=new T.BufferGeometry();geometry.setAttribute("position",new T.Float32BufferAttribute([-.08,0,0,0,.3,0,.08,0,0,0,0,-.07,0,.26,0,0,0,.07],3));geometry.computeVertexNormals();tuft.side=T.DoubleSide;
+      const points=[],count=lot.kept?18:110;
+      for(let i=0;i<count;i++){const x=lot.x+8+(lot.w-16)*((i*.6180339887+.13)%1),y=lot.y+8+(lot.h-16)*((i*.754877666+.31)%1);if(gardens.paths.some(path=>contains(path,x,y,6))||gardens.props.some(p=>contains(p.collisionRect,x,y,5)))continue;points.push({x:(x-lot.x-lot.w/2)*S,z:(y-lot.y-lot.h/2)*S,scale:lot.kept?.3:.6+(i%5)*.16})}
+      if(points.length){const plants=new T.InstancedMesh(geometry,tuft,points.length),dummy=new T.Object3D();plants.name=lot.kept?"Low tidy garden planting":"Shaggy uncut lawn";for(const [i,p] of points.entries()){dummy.position.set(p.x,.013,p.z);dummy.rotation.y=i*2.39996;dummy.scale.setScalar(p.scale);dummy.updateMatrix();plants.setMatrixAt(i,dummy.matrix)}plants.computeBoundingBox();plants.computeBoundingSphere();g.add(plants)}else{geometry.dispose();tuft.dispose()}
+      g.position.set(X(lot.x+lot.w/2),0,Z(lot.y+lot.h/2));g.name="JWD garden / "+lot.id;g.userData.jwdProp={id:lot.id,asset:"jwd-garden",kept:lot.kept,nonSolidDecoration:true,lot};world.add(g);jwdScenery.push(g);
+    }
+  }
   function prop(p){
     const g=new T.Group();
-    if(p.satireId){
+    if(["jwd-car","jwd-hedge","jwd-gnome"].includes(p.asset))jwdGardenProp(p,g);
+    else if(p.satireId){
       const fallback=new T.Group();g.add(fallback);
       box(Math.max(.25,p.w*S),Math.max(.25,p.h*S),Math.max(.25,p.w*S*.6),M.metal,0,Math.max(.25,p.h*S)/2,0,fallback);
       if(detailPropLoader)queueCityModel(()=>({x:g.position.x,z:g.position.z}),Math.hypot(p.w*S,Math.max(.35,p.w*S))/2,async()=>{try{
@@ -1107,7 +1169,7 @@ function showRendererFailure(error){
     const asset=propModels[p.asset];if(asset){const fallback=new T.Group();for(const child of [...g.children])if(!child.isSprite)fallback.add(child);g.add(fallback);installCityModel(g,fallback,asset[0],{x:asset[1],y:asset[2],z:asset[3]});for(const child of g.children)if(child.isSprite)child.position.y=asset[2]+.22}
     g.position.set(X(p.x),p.heightOffset||0,Z(p.y));g.rotation.y=(p.turn||0)*Math.PI/2;world.add(g);
   }
-  bridge.props.filter(p=>!p.stationFixture).forEach(prop);
+  jwdGardenLots();bridge.props.filter(p=>!p.stationFixture).forEach(prop);for(const root of jwdScenery)root.userData.jwdBounds=new T.Box3().setFromObject(root);
   function normObject(o){const g=new T.Group(),material=mat(0x6c3d37);if(o.type==="hedge")box(1.35,.72,.55,material,0,.36,0,g);else if(o.type==="chairs"){for(const x of [-.32,.32]){box(.48,.08,.48,material,x,.48,0,g);box(.48,.68,.08,material,x,.78,-.2,g);box(.06,.48,.06,material,x-.16,.24,0,g);box(.06,.48,.06,material,x+.16,.24,0,g)}}else{box(.58,.8,.58,material,0,.4,0,g);box(.66,.09,.66,M.dark,0,.85,0,g)}propLabel(g,o.label,1.18,1.65);g.position.set(X(o.x),0,Z(o.y));g.rotation.y=.08;world.add(g);return{state:o,group:g,material}}
   const normObjectSlots=(bridge.normObjects||[]).map(normObject);
   function character(kind){const g=new T.Group(),m=kind==="player"?M.player:kind==="police"?M.police:kind==="merkel"?M.merkel:M.npc;box(.42,.72,.3,m,0,.72,0,g);const head=new T.Mesh(new T.SphereGeometry(.2,10,7),M.skin);head.position.y=1.3;g.add(head);const lg=new T.CylinderGeometry(.06,.07,.5,8),ag=new T.CylinderGeometry(.05,.06,.48,8),ll=new T.Mesh(lg,m),rl=ll.clone(),la=new T.Mesh(ag,m),ra=la.clone();ll.position.set(-.1,.27,0);rl.position.set(.1,.27,0);la.position.set(-.27,.76,0);ra.position.set(.27,.76,0);g.add(ll,rl,la,ra);g.userData={ll,rl,la,ra};if(kind==="merkel"){const hair=new T.Mesh(new T.SphereGeometry(.22,10,7,0,Math.PI*2,0,Math.PI*.58),mat(0x5d5953));hair.position.y=1.39;g.add(hair)}if(kind==="police"){const cap=new T.Mesh(new T.CylinderGeometry(.21,.21,.08,10),M.dark);cap.position.y=1.52;g.add(cap)}return g}
@@ -1160,11 +1222,45 @@ function showRendererFailure(error){
       const sack=new T.Mesh(new T.SphereGeometry(.22,8,6),accent);sack.scale.set(.85,1.3,.9);sack.position.set(.13,.65,-.25);sack.name="Empty burglary sack";q.add(sack);
       piece("Sack knot",.13,.1,.12,cream,.13,.94,-.25);
     }
+    if(role!=="burglar"){
+      const work=new T.Group(),wash=new T.Group(),shears=new T.Group(),spongeMaterial=mat(0xd8bd58),waterMaterial=new T.MeshBasicMaterial({color:0xbcdbe4,transparent:true,opacity:.55,depthWrite:false});q.userData.ownedMaterials.add(spongeMaterial);q.userData.ownedMaterials.add(waterMaterial);q.add(work);work.add(wash,shears);
+      const sponge=box(.18,.11,.12,spongeMaterial,-.23,.75,.46,wash);sponge.name="Car-wash sponge";
+      const forearmGeometry=new T.CylinderGeometry(.045,.05,1,8),handGeometry=new T.SphereGeometry(.062,8,6),arms=[q.userData.la,q.userData.ra].map(upper=>{const forearm=new T.Mesh(forearmGeometry,coat),hand=new T.Mesh(handGeometry,M.skin);forearm.name="Washing forearm";hand.name="Washing hand";wash.add(forearm,hand);return{upper,forearm,hand,shoulder:new T.Vector3(),elbow:new T.Vector3()}});
+      const soap=new T.Group(),drops=new T.Group(),bubbleGeometry=new T.SphereGeometry(.032,7,5),dropGeometry=new T.CylinderGeometry(.008,.014,.072,5);
+      for(let i=0;i<5;i++){const bubble=new T.Mesh(bubbleGeometry,waterMaterial),drop=new T.Mesh(dropGeometry,waterMaterial);bubble.name="Soap bubble";drop.name="Wash drip";soap.add(bubble);drops.add(drop)}wash.add(soap,drops);
+      const blades=[];for(const side of [-1,1]){const blade=new T.Group();box(.027,.028,.34,cream,0,0,.15,blade);box(.057,.045,.14,accent,0,0,-.095,blade);blade.position.x=side*.04;shears.add(blade);blades.push(blade)}shears.position.set(0,.81,.38);shears.name="Hedge shears";
+      const carried=[];q.traverse(node=>{if(["Broom handle","Broom bristles","Academic monograph","Book pages","Diplomatic briefcase","Briefcase handle","Briefcase clasp"].includes(node.name))carried.push(node)});
+      const station=bridge.jwdGardens?.stations[n.id],car=bridge.jwdGardens?.props.find(p=>p.id===station?.target&&p.asset==="jwd-car");
+      work.visible=false;q.userData.jwdWork={work,wash,shears,sponge,soap,drops,blades,carried,arms,car,station,up:new T.Vector3(0,1,0),direction:new T.Vector3()};
+    }
     return q;
+  }
+  function poseJwdLimb(mesh,from,to,tools,length=1){
+    tools.direction.subVectors(to,from);mesh.position.copy(from).add(to).multiplyScalar(.5);mesh.scale.y=tools.direction.length()/length;mesh.quaternion.setFromUnitVectors(tools.up,tools.direction.normalize());
   }
   function syncJwdCharacter(q,n){
     syncChar(q,n);
     if(Number.isFinite(n.facing))q.rotation.y=n.facing;
+    const tools=q.userData.jwdWork;if(!tools)return;
+    const washing=n.jwdActivity==="wash",station=tools.station,atStation=Math.hypot(n.x-(washing?station?.x:station?.trimX),n.y-(washing?station?.y:station?.trimY))<=3;
+    const active=!n.jwdMoving&&atStation&&(washing||n.jwdActivity==="trim");
+    tools.work.visible=!!active;tools.wash.visible=washing;tools.shears.visible=!washing;for(const prop of tools.carried)prop.visible=!active;
+    q.userData.la.position.set(-.27,.76,0);q.userData.ra.position.set(.27,.76,0);for(const arm of [q.userData.la,q.userData.ra]){arm.rotation.y=arm.rotation.z=0;arm.scale.set(1,1,1)}if(!active)return;
+    const phase=Number(n.jwdWorking?n.activityPhase:(q.userData.jwdWorkPhase??n.activityPhase))||0;
+    q.userData.jwdWorkPhase=phase;const stroke=Math.sin(phase*3.2);
+    q.userData.la.position.set(-.24,.89+stroke*.035,.19);q.userData.ra.position.set(.24,.88,.17);
+    q.userData.la.rotation.x=-.9+stroke*.16;q.userData.ra.rotation.x=-1.05+(washing?0:-stroke*.11);
+    if(washing&&tools.car){
+      // Target the rendered side panel, not the wider collision envelope. The
+      // projected sponge half-width places its nearest corner on the paint.
+      const car=tools.car,c=Math.cos(q.rotation.y),s=Math.sin(q.rotation.y),side=n.x>=car.x?1:-1,pad=Math.abs(c)*.09+Math.abs(s)*.06;
+      const dx=X(car.x)+side*(car.w*S*.425+pad)-q.position.x,z=Math.max(Z(car.y)-car.d*S*.35,Math.min(Z(car.y)+car.d*S*.35,q.position.z+s*.2+Math.cos(phase*3.2)*.1)),dz=z-q.position.z;
+      tools.sponge.position.set(c*dx-s*dz,car.h*S*.47+stroke*.055-q.position.y,s*dx+c*dz);
+      tools.arms.forEach((arm,i)=>{const side=i?1:-1;arm.shoulder.set(side*.27,1.0,-.02);arm.hand.position.copy(tools.sponge.position);arm.hand.position.x+=i?.1:0;arm.hand.position.y+=i?.06:.005;arm.hand.position.z-=i?.16:.105;arm.elbow.copy(arm.shoulder).lerp(arm.hand.position,.5);arm.elbow.x+=side*.04;arm.elbow.y-=.1;poseJwdLimb(arm.upper,arm.shoulder,arm.elbow,tools,.48);poseJwdLimb(arm.forearm,arm.elbow,arm.hand.position,tools)});
+    }
+    tools.soap.visible=tools.drops.visible=!!n.jwdWorking;
+    for(let i=0;i<tools.soap.children.length;i++){const rise=(phase*.6+i*.21)%1,fall=(phase*1.1+i*.19)%1,p=tools.sponge.position;tools.soap.children[i].position.set(p.x-.07+(i%3)*.065,p.y+.03+rise*.27,p.z+(i%2)*.04);tools.drops.children[i].position.set(p.x-.08+i*.041,p.y-.02-fall*.54,p.z+.03)}
+    tools.blades.forEach((blade,i)=>blade.rotation.y=(i?1:-1)*(.15+.16*(stroke*.5+.5)));
   }
   const atlasTextureCache=new Map(),atlasMaterialCache=new Map();
   function atlasSprite(kind,scale){
@@ -1217,7 +1313,7 @@ function showRendererFailure(error){
       slot.label.material.map.dispose();
     }
     for(const root of jwdScenery){
-      const geometries=new Set(),materials=new Set(),textures=new Set();root.traverse(node=>{if(node.geometry)geometries.add(node.geometry);if(node.material){materials.add(node.material);if(node.material.map)textures.add(node.material.map)}});
+      const geometries=new Set(),materials=new Set(),textures=new Set();root.traverse(node=>{if(node.geometry)geometries.add(node.geometry);if(node.isInstancedMesh)node.dispose();if(node.material){materials.add(node.material);if(node.material.map)textures.add(node.material.map)}});
       for(const geometry of geometries)geometry.dispose();for(const material of materials)material.dispose();for(const texture of textures)texture.dispose();
     }
   });
@@ -1880,11 +1976,11 @@ function showRendererFailure(error){
       return {min:bounds.min.toArray(),max:bounds.max.toArray(),width:size.x,height:size.y,depth:size.z,ground:bounds.min.y};
     }
     const houses=buildingSlots.filter(slot=>slot.building.residential).map(slot=>({id:slot.building.id,variant:slot.building.variant||"house",bounds:inspect(slot.group),solid:[slot.building.x,slot.building.y,slot.building.w,slot.building.h],visible:slot.group.visible,opacity:slot.opacity,doorHeight:1.97,sign:slot.label.userData.jwdText}));
-    const actors=[...npcMeshes].filter(([state])=>state.jwdRole).map(([state,root])=>({id:state.id,role:state.jwdRole,position:[state.x,state.y],worldPosition:root.position.toArray(),bounds:inspect(root),facing:root.rotation.y,walkPhase:root.userData.walkPhase||0,swing:root.userData.walkSwing||0}));
-    const scenery=jwdScenery.map(root=>({...root.userData.jwdSign,bounds:inspect(root)}));
+    const actors=[...npcMeshes].filter(([state])=>state.jwdRole).map(([state,root])=>({id:state.id,role:state.jwdRole,position:[state.x,state.y],worldPosition:root.position.toArray(),bounds:inspect(root),facing:root.rotation.y,walkPhase:root.userData.walkPhase||0,swing:root.userData.walkSwing||0,activity:state.jwdActivity||null,working:!!state.jwdWorking,activityPhase:root.userData.jwdWorkPhase??0,workVisible:!!root.userData.jwdWork?.work.visible}));
+    const scenery=jwdScenery.map(root=>({...root.userData.jwdSign,...root.userData.jwdProp,bounds:inspect(root)}));
     let geometryBytes=0;for(const geometry of geometries){for(const attribute of Object.values(geometry.attributes))geometryBytes+=attribute.array.byteLength;geometryBytes+=geometry.index?.array.byteLength||0}
     const textureBytes=[...textures].reduce((sum,texture)=>sum+(texture.image?.width||0)*(texture.image?.height||0)*4,0);
-    return {houses,actors,scenery,cost:{meshes,triangles,geometries:geometries.size,geometryBytes,instanceBytes,materials:materials.size,textures:textures.size,textureBytes,assetRequests:0}};
+    return {houses,actors,scenery,gardens:scenery.filter(p=>p.asset==="jwd-garden"),vehicles:scenery.filter(p=>p.asset==="jwd-car"),cost:{meshes,triangles,geometries:geometries.size,geometryBytes,instanceBytes,materials:materials.size,textures:textures.size,textureBytes,assetRequests:0}};
   }
   function inspectAssets(){
     const pointerBounds=new T.Box3().setFromObject(missionPointer);
@@ -1897,6 +1993,7 @@ function showRendererFailure(error){
   function visibleGroupMatrixUpdate(force){if(this.visible)T.Object3D.prototype.updateMatrixWorld.call(this,force)}
   function updateGroupVisibility(){
     camera.updateMatrixWorld();renderViewMatrix.multiplyMatrices(camera.projectionMatrix,camera.matrixWorldInverse);renderFrustum.setFromProjectionMatrix(renderViewMatrix);
+    for(const root of jwdScenery){root.updateMatrixWorld=visibleGroupMatrixUpdate;const wasVisible=root.visible;root.visible=renderFrustum.intersectsBox(root.userData.jwdBounds);if(root.visible&&!wasVisible)root.updateMatrixWorld(true)}
     for(const slot of buildingSlots){
       if(slot.building.kind)continue; // Plant smoke/belts need their full motion envelope.
       slot.group.updateMatrixWorld=visibleGroupMatrixUpdate;

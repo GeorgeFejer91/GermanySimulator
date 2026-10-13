@@ -63,12 +63,43 @@ parents worry that his Latin and genius milestones are falling behind. Their
 dialogue also covers parking, hedges and closed blinds. They speak Berlin
 Denglisch, with matching English subtitles through the existing speech broker.
 
+The southern houses face three semi-connected gardens. Fink and Kranz have
+clipped hedges, upright gnomes, striped lawns and polished VW-style SUV,
+BMW-style saloon and Tesla-style EV silhouettes. The player's parcel has weeds,
+ragged hedges, bare patches and a fallen gnome. `jwd-gardens.js` owns the shared
+parcels, paved approaches, solid prop rectangles and work stations for both pages.
+Private garden grass carries no public-lawn offence. Residents wash/polish their
+cars; Fink also walks to her hedge and trims it. Their animation clock advances
+only in the nearby running simulation. Work pauses for conversations, and gait
+comes from accepted physical movement.
+
+The satire targets the fictional residents' status anxiety, unsolicited lectures,
+selective rule enforcement and backhanded compliments. Heiko frames intrusions
+as assistance: formal concern, a selective account of earlier conversations,
+claimed agreement through silence, then responsibility shifted to the listener.
+His original fictional dialogue never reproduces private correspondence or its
+identifying details. Heiko values Theodor's
+six languages but orders his zipper away from the paintwork; the ambassador
+defends the car's moral standing while relocating play behind the garage.
+The parked cars offer a readable laminated notice; decorative hedges and gnomes
+do not advertise an interaction with no response.
+Garden complaints draw on anecdotal Reddit accounts of
+[long flowering lawns](https://www.reddit.com/r/germany/comments/1cx27c8/do_you_think_a_lawn_like_this_is_acceptable/),
+[letters about unfinished gardens](https://www.reddit.com/r/wohnen/comments/1t0tmdd/nachbarin_nervt_wegen_garten_was_tun/),
+[hedge demands](https://www.reddit.com/r/wohnen/comments/1od7h3y/nachbar_will_das_ich_die_hecke_schneide/)
+and [arguments about wiping a parked car](https://www.reddit.com/r/germany/comments/16f0gad/is_it_illegal_to_wipe_my_car_with_moist_cloth/).
+These inspire original fictional exchanges, not representative national claims
+or legal advice. No diagnosis supplies the punchline.
+
 After allocation, police capture clears the immediate wanted response and wakes
 the player on the home porch, checking body clearance. Before allocation the
 station-garden consequence remains. Every return to the home rearms one finite
-neighbor interruption when the player tries to leave; acknowledging its lines
-releases movement for that visit. Walking away and returning, or another arrest,
-rearms it. Conversations pause the city and use existing E/touch controls.
+neighbor visit when the player tries to leave. One resident physically follows
+the shared paths to the front lawn and speaks only within conversational range.
+Acknowledge the finite exchange and they return to their drive. Lingering in the
+garden can invite another complaint after 38 simulation seconds; leaving the
+neighborhood cancels the approach. Returning home or another arrest rearms it.
+Conversations pause the city and use existing E/touch controls.
 
 From the second home visit, one opportunistic burglar can walk along the lane to
 inspect the home. On finding only a mattress and empty crates, he complains and

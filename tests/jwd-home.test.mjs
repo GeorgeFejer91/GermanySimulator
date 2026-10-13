@@ -17,12 +17,12 @@ function harness(){
   policePath:{x1:4810,y1:4410},OFFENSE_TIMING:{policeContactCooldown:5.8},dist:(ax,ay,bx,by)=>Math.hypot(ax-bx,ay-by),clamp:(n,a,b)=>Math.max(a,Math.min(b,n)),offsetWorldPoint:b=>({...b,x:b.x+560,y:b.y+560}),updateHud(){},clearInput(){},syncPoliceResponse(){},uiTone(){},toast(){},renderAnmeldungBadge(){}};
  h.openDialogue=(speaker,lines,portrait,done)=>{h.state.modal=h.state.dialogue=true;h.dialogue={speaker,lines,done}};
  h.finish=()=>{const done=h.dialogue?.done;h.dialogue=null;h.state.modal=h.state.dialogue=false;done?.()};
- vm.createContext(h);
+ vm.createContext(h);vm.runInContext(readFileSync(new URL('../jwd-gardens.js',import.meta.url),'utf8'),h);
  const between=(a,b)=>source.slice(source.indexOf(a),source.indexOf(b,source.indexOf(a)+a.length));
- vm.runInContext(between('const buildings=','const grassAreas=')+between('const missions=','const rules=')+source.split('\n').find(l=>l.startsWith('const jwdLane=')).replace('walkways.push(jwdLane);','')+
+ vm.runInContext(between('const buildings=','const grassAreas=')+between('const missions=','const rules=')+source.split('\n').find(l=>l.startsWith('const jwdGardens='))+source.split('\n').find(l=>l.startsWith('const jwdLane=')).replace('walkways.push(jwdLane);','')+
   between('const jwdNeighborhood=','for(const b of buildings)')+between('const npcs=',' {x:520,y:720')+'].map(offsetWorldPoint);'+between('const jwd=','window.Germany3DBridge=')+
-  ['groundCircleCandidates','propRadius','normObjectRadius','staticBlocked','groundContactBlocks','signedRectDistance','groundStaticMotionBlocked','pedestrianRouteContains','responderBlocked','moveGroundResponder','awardAnmeldung'].map(fn).join('\n')+';globalThis.jwdState=jwd;globalThis.actors=npcs;globalThis.homes=buildings;globalThis.lane=jwdLane;',h);
- for(const n of h.actors)n.routeBounds=h.lane;
+  ['groundCircleCandidates','propRadius','normObjectRadius','staticBlocked','groundContactBlocks','signedRectDistance','groundStaticMotionBlocked','pedestrianRouteContains','responderBlocked','moveGroundResponder','awardAnmeldung','microInteract'].map(fn).join('\n')+';globalThis.jwdState=jwd;globalThis.actors=npcs;globalThis.homes=buildings;globalThis.lane=jwdLane;globalThis.gardens=jwdGardens;',h);
+ for(const n of h.actors){n.routeBounds=h.lane;n.gardenPaths=h.gardens.paths;Object.assign(n,h.gardens.stations[n.id],{jwdActivity:"wash",jwdWorking:true,activityPhase:0})}
  const treeCoordinates=JSON.parse('['+source.split('trees=Object.freeze([')[1].split('].map(')[0]+']');h.trees.push(...treeCoordinates.map(([x,y])=>h.offsetWorldPoint({x,y})));
  h.home=h.homes.find(b=>b.id==='jwd-home');
  return h;
@@ -53,18 +53,22 @@ test('home visit and all three completed introductions gate the detour without s
  assert.equal(h.jwdState.met.size,3);assert.equal(h.currentMission().target,'hausverwaltung');assert.equal(h.state.mission,1);
 });
 
-test('each arrest wakes at a body-clear porch and buys exactly one finite departure interruption',()=>{
- const h=harness();h.awardAnmeldung();h.state.mission=1;h.visitJwdHome();h.finish();h.actors.forEach(n=>h.jwdState.met.add(n.id));
- for(let visit=0;visit<5;visit++){
-  h.arrestPlayer();assert.equal(h.state.wanted,0);assert.ok(h.dist(h.player.x,h.player.y,h.home.doorX,h.home.doorY)<150);assert.equal(h.responderBlocked(h.player.x,h.player.y,16,h.player),false);
-  h.player.x=h.home.doorX+160;h.player.y=h.home.doorY+70;assert.equal(h.updateJwd(1/60),true);assert.equal(h.state.dialogue,true);assert.equal(h.dialogue.lines.length,2);h.finish();assert.equal(h.jwdState.exitPending,false);
-  h.updateJwd(1/60);assert.equal(h.state.dialogue,false,'no repeating trap once the interruption is acknowledged');
+test('arrest wakes at a clear porch; neighbors physically approach and release the player',()=>{
+ for(const dt of [1/60,1/30,.1]){
+  const h=harness();h.awardAnmeldung();h.state.mission=1;h.visitJwdHome();h.finish();h.actors.forEach(n=>h.jwdState.met.add(n.id));
+  h.arrestPlayer();h.jwdState.burglarVisit=h.jwdState.visit;
+  assert.equal(h.state.wanted,0);assert.equal(h.responderBlocked(h.player.x,h.player.y,16,h.player),false);
+  Object.assign(h.player,{x:h.home.doorX,y:h.gardens.crossY+48});
+  h.updateJwd(dt);assert.equal(h.state.dialogue,false,'no remote speech from a driveway');const visitor=h.jwdState.visitor,start={x:visitor.x,y:visitor.y};
+  for(let t=0;t<20&&!h.state.dialogue;t+=dt){h.updateJwd(dt);assert.equal(h.pedestrianRouteContains(visitor,visitor.x,visitor.y),true);assert.equal(h.staticBlocked(visitor.x,visitor.y,13),false)}
+  assert.ok(h.state.dialogue);assert.ok(h.dist(visitor.x,visitor.y,start.x,start.y)>100);assert.ok(h.dist(visitor.x,visitor.y,h.player.x,h.player.y)<90);
+  h.finish();assert.equal(h.jwdState.exitPending,false);assert.equal(h.jwdState.visitor,null);
+  for(let t=0;t<18;t+=dt)h.updateJwd(dt);assert.equal(h.state.dialogue,false);assert.ok(visitor.jwdWorking,'returns to washing');
  }
- assert.ok(h.jwdState.complaint>=5);
 });
 
 test('burglar checks the poor home, then actually walks to the richer house with collision and pause ownership',()=>{
- const h=harness();h.awardAnmeldung();h.visitJwdHome();h.finish();h.jwdState.exitPending=false;h.jwdState.visit=2;
+ const h=harness();h.awardAnmeldung();h.visitJwdHome();h.finish();h.jwdState.exitPending=false;h.jwdState.gardenCooldown=10000;h.jwdState.visit=2;
  Object.assign(h.player,{x:h.home.doorX,y:h.home.doorY+90});let sawInspection=false,retreatX=null,minClearance=Infinity;
  for(let step=0;step<1800;step++){
   h.updateJwd(step%3===0?.1:1/60);const n=h.jwdState.burglar;
@@ -83,9 +87,9 @@ test('occupied porch recovers to the adjacent paved lane instead of overlapping 
 
 test('burglar gets around a blocked lane at 60/30/10 Hz and can inspect an occupied doorstep',()=>{
  for(const dt of [1/60,1/30,.1])for(const avoid of [-1,1])for(const obstacle of ['prop','player']){
-  const h=harness();h.awardAnmeldung();h.visitJwdHome();h.finish();h.jwdState.exitPending=false;h.jwdState.visit=2;
+  const h=harness();h.awardAnmeldung();h.visitJwdHome();h.finish();h.jwdState.exitPending=false;h.jwdState.gardenCooldown=10000;h.jwdState.visit=2;
   Object.assign(h.player,{x:h.home.doorX,y:h.home.doorY+(obstacle==='player'?35:95)});
-  if(obstacle==='prop')h.props.push({x:1245,y:4575,collisionRadius:35});let inspected=false;
+  if(obstacle==='prop')h.props.push({x:1245,y:4540,collisionRadius:10});let inspected=false;
   for(let elapsed=0;elapsed<25;elapsed+=dt){h.updateJwd(dt);const thief=h.jwdState.burglar;
    if(thief){thief.avoid=avoid;assert.equal(h.staticBlocked(thief.x,thief.y,13),false);assert.equal(h.pedestrianRouteContains(thief,thief.x,thief.y),true)}
    if(h.state.dialogue){inspected=true;h.finish()}if(inspected&&!thief)break;
@@ -97,12 +101,12 @@ test('burglar gets around a blocked lane at 60/30/10 Hz and can inspect an occup
 test('diagnostic renderer retains the same residential plots, residents and paved lane',()=>{
  const diagnostic=readFileSync(new URL('../3d.html',import.meta.url),'utf8');
  for(const line of source.split('\n').filter(l=>l.includes('residential:true')||/jwdRole:"(swabian|parent|watcher)"/.test(l)))assert.ok(diagnostic.includes(line.trim()));
- assert.ok(diagnostic.includes('offsetWorldPoint({x:40,y:3970,w:1010,h:150})'));
+ assert.ok(diagnostic.includes('offsetWorldPoint({x:40,y:3890,w:1010,h:340})'));
 });
 
 test('burglar plants his feet at an occupied retreat doorway and leaves when it clears',()=>{
  for(const dt of [1/60,1/30,.1]){
-  const h=harness();h.awardAnmeldung();h.visitJwdHome();h.finish();h.jwdState.exitPending=false;h.jwdState.visit=2;Object.assign(h.player,{x:h.home.doorX,y:h.home.doorY+95});
+  const h=harness();h.awardAnmeldung();h.visitJwdHome();h.finish();h.jwdState.exitPending=false;h.jwdState.gardenCooldown=10000;h.jwdState.visit=2;Object.assign(h.player,{x:h.home.doorX,y:h.home.doorY+95});
   for(let i=0;i<20/dt&&!h.state.dialogue;i++)h.updateJwd(dt);assert.ok(h.state.dialogue);h.finish();
   const rich=h.homes.find(b=>b.id==='jwd-kranz');Object.assign(h.player,{x:rich.doorX,y:rich.doorY+35});
   for(let i=0;i<15/dt;i++)h.updateJwd(dt);const thief=h.jwdState.burglar;assert.ok(thief);const position=[thief.x,thief.y];
@@ -114,17 +118,61 @@ test('burglar plants his feet at an occupied retreat doorway and leaves when it 
 test('paved home lane connects with full body clearance to the existing north/south pavement',()=>{
  const h=harness(),r=h.player.r;
  for(const b of h.homes.filter(b=>b.residential))assert.equal(h.staticBlocked(b.doorX,b.doorY+35,r),false);
- for(let x=h.home.doorX;x<=1574;x+=4)assert.equal(h.staticBlocked(x,4600,r),false);
- assert.ok(1574-r>=h.lane.x&&1574+r<=h.lane.x+h.lane.w);assert.ok(h.lane.y+13<4600&&4600<h.lane.y+h.lane.h-13);
+ for(let x=h.home.doorX;x<=1574;x+=4)assert.equal(h.staticBlocked(x,h.gardens.crossY,r),false);
+ assert.ok(1574-r>=h.lane.x&&1574+r<=h.lane.x+h.lane.w);assert.ok(h.lane.y+13<h.gardens.crossY&&h.gardens.crossY<h.lane.y+h.lane.h-13);
  assert.ok(h.home.x<1200&&h.home.y>4200,'home lies at the southwest city edge');
 });
 
 test('six garden-suburb plots connect around the block without crossing lawns or solids',()=>{
- const h=harness(),lanes=[h.lane,...h.walkways],homes=h.homes.filter(b=>b.residential);assert.equal(homes.length,6);
+ const h=harness(),lanes=h.walkways,homes=h.homes.filter(b=>b.residential);assert.equal(homes.length,6);
  for(const b of homes.filter(b=>b.variant)){
-  const route=[{x:b.doorX,y:b.doorY},{x:b.doorX,y:4220},{x:630,y:4220},{x:630,y:4660},{x:h.home.doorX,y:4660},{x:h.home.doorX,y:h.home.doorY+30}];
+  const route=[{x:b.doorX,y:b.doorY},{x:b.doorX,y:4220},{x:630,y:4220},{x:630,y:h.gardens.crossY},{x:h.home.doorX,y:h.gardens.crossY},{x:h.home.doorX,y:h.home.doorY+30}];
   for(let segment=1;segment<route.length;segment++){const a=route[segment-1],z=route[segment],steps=Math.ceil(h.dist(a.x,a.y,z.x,z.y)/2);
-   for(let i=0;i<=steps;i++){const x=a.x+(z.x-a.x)*i/steps,y=a.y+(z.y-a.y)*i/steps;assert.ok(lanes.some(r=>x-16>=r.x&&x+16<=r.x+r.w&&y-16>=r.y&&y+16<=r.y+r.h),'body-clear connected paving');assert.equal(h.responderBlocked(x,y,16,h.player,x,y),false,b.id+' approach');assert.ok(!h.grassAreas.some(r=>x>=r.x&&x<=r.x+r.w&&y>=r.y&&y<=r.y+r.h),'walking route never needs a lawn offence')}
+   for(let i=0;i<=steps;i++){const x=a.x+(z.x-a.x)*i/steps,y=a.y+(z.y-a.y)*i/steps;assert.ok(lanes.some(r=>x-16>=r.x&&x+16<=r.x+r.w&&y-16>=r.y&&y+16<=r.y+r.h),'body-clear connected paving');assert.equal(h.responderBlocked(x,y,16,h.player,x,y),false,b.id+' approach');assert.ok(!h.grassAreas.some(r=>!r.privateGarden&&x>=r.x&&x<=r.x+r.w&&y>=r.y&&y<=r.y+r.h),'walking route never needs a lawn offence')}
   }
  }
+});
+
+test('working neighbors alternate washing and trimming, with solid cars and private lawns',()=>{
+ const h=harness();Object.assign(h.player,{x:h.home.doorX,y:h.home.doorY+30});
+ for(let t=0;t<28;t+=1/30)h.updateJwd(1/30);
+ const fink=h.actors.find(n=>n.id==='jwd-swabian');assert.equal(fink.jwdActivity,'trim');assert.ok(fink.jwdWorking);assert.ok(h.pedestrianRouteContains(fink,fink.x,fink.y));
+ for(const p of h.gardens.props){assert.equal(h.staticBlocked(p.x,p.y,13),true,p.id);assert.ok(p.collisionRect)}
+ assert.equal(h.gardens.lots.filter(l=>!l.kept).length,1);assert.ok(h.gardens.lots.every(l=>l.privateGarden));
+ assert.match(source,/!r.privateGarden&&inRect/);
+});
+
+test('far-away departure cancels lawn interception, and another home visit rearms it',()=>{
+ const h=harness();h.awardAnmeldung();h.visitJwdHome();h.finish();Object.assign(h.player,{x:h.home.doorX,y:h.gardens.crossY});h.updateJwd(.1);assert.ok(h.jwdState.visitor);
+ h.player.x+=1500;h.updateJwd(.1);assert.equal(h.jwdState.visitor,null);assert.equal(h.jwdState.atHome,false);assert.equal(h.state.dialogue,false);
+ Object.assign(h.player,{x:h.home.doorX,y:h.home.doorY+30});h.updateJwd(.1);assert.equal(h.jwdState.exitPending,true);
+});
+
+test('lingering invites a different complaint after a respite, never a continuous conversation trap',()=>{
+ const h=harness();h.awardAnmeldung();h.visitJwdHome();h.finish();h.actors.forEach(n=>h.jwdState.met.add(n.id));Object.assign(h.player,{x:h.home.doorX,y:h.gardens.crossY+48});
+ for(let i=0;i<600&&!h.state.dialogue;i++)h.updateJwd(1/30);assert.ok(h.state.dialogue);const first=h.dialogue.speaker;h.finish();
+ for(let i=0;i<30*30;i++)h.updateJwd(1/30);assert.equal(h.state.dialogue,false);
+ for(let i=0;i<30*30&&!h.state.dialogue;i++)h.updateJwd(1/30);assert.ok(h.state.dialogue);assert.notEqual(h.dialogue.speaker,first);h.finish();assert.equal(h.jwdState.visitor,null);
+});
+
+test('a neighbor blocked on a driveway plants their feet and resumes when it clears',()=>{
+ for(const dt of [1/60,1/30,.1])for(const avoid of [-1,1]){
+  const h=harness(),n=h.actors.find(n=>n.id==='jwd-swabian');n.avoid=avoid;n.jwdRoute=[{x:n.x,y:h.gardens.crossY}];Object.assign(h.player,{x:n.x,y:n.y-60});
+  for(let t=0;t<5;t+=dt)h.updateJwd(dt);const stopped=[n.x,n.y];
+  for(let t=0;t<3;t+=dt)h.updateJwd(dt);assert.deepEqual([n.x,n.y],stopped);assert.equal(n.jwdMoving,0);assert.equal(n.jwdWorking,false);
+  h.player.x=h.home.doorX;for(let t=0;t<8;t+=dt)h.updateJwd(dt);assert.ok(n.jwdWorking);assert.ok(h.dist(n.x,n.y,...stopped)>20);
+ }
+});
+
+test('neighbors use the free passing side of the shared garden path',()=>{
+ for(const dt of [1/60,1/30,.1])for(const avoid of [-1,1]){
+  const h=harness(),n=h.actors.find(n=>n.id==='jwd-swabian');Object.assign(n,{x:850,y:h.gardens.crossY,avoid,jwdRoute:[{x:1120,y:h.gardens.crossY}]});Object.assign(h.player,{x:980,y:h.gardens.crossY});
+  for(let t=0;t<20&&n.jwdRoute.length;t+=dt){h.updateJwd(dt);assert.ok(h.pedestrianRouteContains(n,n.x,n.y));assert.equal(h.staticBlocked(n.x,n.y,13),false);assert.ok(h.dist(n.x,n.y,h.player.x,h.player.y)>=29-.001)}
+  assert.equal(n.jwdRoute.length,0,`${dt}/${avoid}: uses clear side`);
+ }
+});
+
+test('parked-car prompts read the laminated note without a remote neighbor or mission reward',()=>{
+ const h=harness();for(const car of h.gardens.props.filter(p=>p.asset==='jwd-car')){h.microInteract(car);assert.match(h.dialogue.speaker,/LAMINIERTER HINWEIS/);assert.match(h.dialogue.lines[0],/Reißverschlüsse/);assert.equal(h.state.characterSpeaker,undefined);h.finish();assert.equal(h.jwdState.allocated,false)}
+ assert.ok(h.gardens.props.filter(p=>p.asset!=='jwd-car').every(p=>p.interactive===false));
 });

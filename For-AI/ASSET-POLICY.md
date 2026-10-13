@@ -830,8 +830,15 @@ list and four small procedural character costumes (three residents plus one
 visiting burglar). Villas have bays and dormers; the landhouse has shutters and
 timber details. It requests no municipal GLBs, placard images or character
 atlases. Six small canvas nameplates and one street sign use 1,048,576 decoded
-RGBA bytes, no mipmaps. The full house/four-person/street-sign diagnostic has
-151 meshes, 5,414 triangles, 118,352 geometry bytes and 14,016 instance bytes.
+RGBA bytes, no mipmaps. The house/four-character/garden/street-sign diagnostic
+has 298 meshes, 11,922 triangles, 251,412 geometry bytes and 22,720 instance bytes.
+The garden extension adds three fitted car silhouettes, clipped/ragged hedges,
+upright/fallen gnomes and instanced grass details with no asset requests or new
+textures. Shared authored rectangles bound every solid, including car wheels
+and mirrors; decorative grass avoids the body-clear paths. Cars are stationary
+props rather than additions to the driving simulation. Garden groups share the
+existing frustum and teardown ownership. Washing and trimming use supplied
+simulation activity/phase values, with no renderer timer or particle system.
 Repeated house details share native per-house/material instance batches, with
 actual instance bounds and ordinary mesh obstruction. Houses retain building
 culling and private material restoration; the open porch canopy is overhead,
@@ -840,6 +847,18 @@ matching collision prop outside the paved routes. Characters retain ordinary
 depth and actual-displacement gait. The shared page teardown owns these
 procedural resources; burglar removal disposes its private geometry/materials.
 This is rendered diagnostic cost, not a physical-device performance claim.
+
+The garden release compared three cold Chromium 155 runs per viewport against
+`74fbcf8`, at the same JWD position, requested DPR 2 and Intel Iris Xe ANGLE.
+Desktop active p95 medians/ranges were 33.3 / 29.4–36.1 ms before and
+30.4 / 27.0–31.4 ms after; Android emulation was 22.2 / 22.1–27.1 ms before
+and 21.8 / 21.6–21.9 ms after. Input p95 medians were 32.9→33.5 ms and
+24.0→21.6 ms. All nine input attempts per run responded; no page errors occurred.
+Final startup peaked at 17,976,693 bytes and passed the unchanged 18 MB,
+title-cadence, deferred-resource and buffer guards. Desktop median draw calls
+rose 1,104→1,235; frame variation does not establish an optimization. The
+standard starting-scene comparison also passed its guards. Physical Android
+and perceptual audio listening remain untested.
 
 The Bürgeramt entrance radiance is original runtime geometry: one retained door
 plane, one 5 × 5 ray/halo shader plane, and one short-range shadow-free point
