@@ -1,6 +1,8 @@
 (function(){
 "use strict";
-const base=new URL('./',document.currentScript?.src||location.href),cache=new Map(),pending=new Map(),queue=[];
+const script=document.currentScript,police=script?.dataset?.voice==='kriminalpolizei';
+const voiceId=police?'kriminalpolizei':'amt-brunhilde-knick',counterCount=police?1:4;
+const base=new URL('./',script?.src||location.href),cache=new Map(),pending=new Map(),queue=[];
 let worker=null,current=null,serial=0,startTimer=null,idleTimer=null,deadlineTimer=null,initialName='',modelBytes=null;
 const counters=['','eins','zwei','drei','vier'];
 function validName(value){
@@ -8,7 +10,8 @@ function validName(value){
  const name=value.normalize('NFC').trim().replace(/\s+/g,' ');
  return name.length>=2&&name.length<=80&&!/[\u0000-\u001f\u007f-\u009f]/.test(name)?name:'';
 }
-function textFor(name,counter){return `${name.normalize('NFC')}, bitte zu Schalter ${counters[counter]}!`}
+function textFor(name,counter){return police?`Spricht hier ${name.normalize('NFC')}? Hier ist die Kriminalpolizei am Apparat!`:`${name.normalize('NFC')}, bitte zu Schalter ${counters[counter]}!`}
+function englishFor(name,counter){return police?`Is this ${name}? This is the criminal police speaking!`:`${name}, please go to counter ${counter}!`}
 function stopWorker(){worker?.terminate();worker=null;clearTimeout(idleTimer);idleTimer=null;clearTimeout(deadlineTimer);deadlineTimer=null}
 function finish(result){
  const job=current;if(!job)return;
@@ -35,19 +38,19 @@ function start(){
  try{
   const freshWorker=!worker;
   if(!worker){
-   worker=new Worker(new URL('knick-speech-worker.js?v=20261013-local-knick',base));
+   worker=new Worker(new URL('knick-speech-worker.js?v=20261013-local-name'+(police?'&voice=kriminalpolizei':''),base));
    const instance=worker;
    worker.onmessage=event=>{
     const result=event.data,job=current;
     if(result.kind==='model-buffer'){
-     const binding=window.GermanySimulatorAudioText?.productionVoices?.['amt-brunhilde-knick'];
+     const binding=window.GermanySimulatorAudioText?.productionVoices?.[voiceId];
      if(worker===instance&&binding&&result.profileId===binding.profileId&&result.referenceSha256===binding.referenceSha256&&
         result.bytes instanceof ArrayBuffer&&result.bytes.byteLength>0&&result.bytes.byteLength<=20000000)modelBytes=result.bytes;
      return;
     }
     if(!job||result.id!==job.id||result.text!==job.text)return;
     if(result.status!=='ready'){finish({status:'failed',reason:result.reason||'synthesis'});return}
-    const binding=window.GermanySimulatorAudioText?.productionVoices?.['amt-brunhilde-knick'];
+    const binding=window.GermanySimulatorAudioText?.productionVoices?.[voiceId];
     if(!binding||result.profileId!==binding.profileId||result.referenceSha256!==binding.referenceSha256||
        !(result.wav instanceof ArrayBuffer)||result.wav.byteLength<44||result.wav.byteLength>2*1024*1024||
        !Number.isFinite(result.duration)||result.duration<=0||result.duration>20){
@@ -55,14 +58,14 @@ function start(){
     }
     const variants=[];
     if(result.variants!==undefined){
-     if(!Array.isArray(result.variants)||result.variants.length!==4){finish({status:'failed',reason:'variants'});return}
-     for(let counter=1;counter<=4;counter++){
+     if(!Array.isArray(result.variants)||result.variants.length!==counterCount){finish({status:'failed',reason:'variants'});return}
+     for(let counter=1;counter<=counterCount;counter++){
       const part=result.variants[counter-1],text=textFor(job.name,counter);
       if(!part||typeof part!=='object'||part.text!==text||!(part.wav instanceof ArrayBuffer)||part.wav.byteLength<44||part.wav.byteLength>2*1024*1024||
          !Number.isFinite(part.duration)||part.duration<=0||part.duration>20||!/^[a-f0-9]{64}$/.test(part.sha256)){
        finish({status:'failed',reason:'variants'});return;
       }
-      variants.push({status:'ready',text,english:`${job.name}, please go to counter ${counter}!`,
+      variants.push({status:'ready',text,english:englishFor(job.name,counter),
         profileId:result.profileId,referenceSha256:result.referenceSha256,duration:part.duration,sha256:part.sha256,
         blob:new Blob([part.wav],{type:'audio/wav'})});
      }
@@ -83,7 +86,7 @@ function schedule(){
 }
 function prepare(name,counter,priority=true){
  name=validName(name);
- if(!name||!Number.isInteger(counter)||counter<1||counter>4||typeof Worker!=='function')return Promise.resolve({status:'failed',reason:'unavailable'});
+ if(!name||!Number.isInteger(counter)||counter<1||counter>counterCount||typeof Worker!=='function')return Promise.resolve({status:'failed',reason:'unavailable'});
  const text=textFor(name,counter),cached=cache.get(text);
  if(cached){cache.delete(text);cache.set(text,cached);return Promise.resolve(cached)}
  if(pending.has(text)){
@@ -92,7 +95,7 @@ function prepare(name,counter,priority=true){
   return job.promise;
  }
  if(pending.size>=12)return Promise.resolve({status:'deferred',reason:'busy'});
- const job={id:++serial,text,name,warm:!priority,english:`${name}, please go to counter ${counter}!`};job.promise=new Promise(resolve=>job.resolve=resolve);pending.set(text,job);
+ const job={id:++serial,text,name,warm:!priority,english:englishFor(name,counter)};job.promise=new Promise(resolve=>job.resolve=resolve);pending.set(text,job);
  priority?queue.unshift(job):queue.push(job);schedule();return job.promise;
 }
 function peek(name,counter){return cache.get(textFor(validName(name),counter))||null}
@@ -105,12 +108,12 @@ function rememberName(value,{warm=true}={}){
  if(name!==initialName&&current?.warm){stopWorker();finish({status:'disabled',reason:'replaced'})}
  initialName=name;
  if(!warm||!name)return;
- for(let counter=1;counter<=4;counter++)prepare(name,counter,false);
+ for(let counter=1;counter<=counterCount;counter++)prepare(name,counter,false);
 }
 function lease(result){
  if(result?.status!=='ready'||!(result.blob instanceof Blob))return null;
  const url=URL.createObjectURL(result.blob);let released=false;
- return {url,text:result.text,voiceId:'amt-brunhilde-knick',profileId:result.profileId,
+ return {url,text:result.text,voiceId,profileId:result.profileId,
          referenceSha256:result.referenceSha256,durationSeconds:result.duration,sha256:result.sha256,
          english:result.english,
          release(){if(!released){released=true;URL.revokeObjectURL(url)}}};
@@ -129,7 +132,7 @@ document.addEventListener('visibilitychange',()=>{
  }else schedule();
 });
 window.addEventListener('pagehide',dispose);
-window.GermanyKnickSpeech={prepare,peek,rememberName,validName,textFor,lease,cancelPreparation,dispose,
+window[police?'GermanyKripoSpeech':'GermanyKnickSpeech']={prepare,peek,rememberName,validName,textFor,lease,cancelPreparation,dispose,
  get initialName(){return initialName},
  inspect(){return{active:!!current,worker:!!worker,pending:pending.size,cached:cache.size}}
 };

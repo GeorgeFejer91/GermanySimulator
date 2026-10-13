@@ -58,8 +58,8 @@ export function createJobcenterBuilding(T,w,d,h){
 export function stepJobcenter(state,input,dt){
  dt=clamp(dt,0,.12);state.time+=dt;
  state.yaw+=((input.ArrowLeft?1:0)-(input.ArrowRight?1:0))*dt*1.55;
- state.pitch=clamp(state.pitch+((input.PageUp?1:0)-(input.PageDown?1:0))*dt,-1.25,1.25);
- let forward=(input.KeyW||input.ArrowUp?1:0)-(input.KeyS||input.ArrowDown?1:0)+(input.forward||0);
+ state.pitch=clamp(state.pitch+((input.ArrowUp||input.PageUp?1:0)-(input.ArrowDown||input.PageDown?1:0))*dt,-1.25,1.25);
+ let forward=(input.KeyW?1:0)-(input.KeyS?1:0)+(input.forward||0);
  let side=(input.KeyD?1:0)-(input.KeyA?1:0)+(input.side||0);
  const length=Math.max(1,Math.hypot(forward,side)),speed=(input.KeyR||input.ShiftLeft||input.ShiftRight?7:3.6)*dt/length;
  state.x+=(Math.cos(state.yaw)*side-Math.sin(state.yaw)*forward)*speed;
@@ -174,7 +174,7 @@ export function createJobcenterEncounter(T,renderer,bridge){
   const style=document.createElement('style');style.textContent=`
    .jobcenter-inside #app> :not(#world3d):not(#jobcenter-input):not(#english-subtitle){display:none!important}
    .jobcenter-inside #world3d{filter:none!important;background:#000!important}
-   #jobcenter-input{position:fixed;inset:0;z-index:140;touch-action:none;cursor:crosshair;outline:none}
+   #jobcenter-input{position:fixed;inset:0;z-index:140;touch-action:none;cursor:none;outline:none}
    #jobcenter-input:focus-visible{outline:1px solid #5a3020;outline-offset:-2px}
    .jobcenter-inside #english-subtitle{z-index:242;pointer-events:none}
    .jobcenter-inside #english-subtitle[data-fit="scroll"]{pointer-events:auto}
@@ -195,12 +195,24 @@ export function createJobcenterEncounter(T,renderer,bridge){
   // Silent priming stops at time zero; speech is still gated by approach.
   audio.play().then(()=>{if(!current())return;if(v.phase==='approach'){audio.pause();audio.currentTime=0}else if(!v.failed&&!v.paused()){v.mediaStarted=true;audio.volume=.9}else audio.pause()}).catch(()=>{});
   fetch('./assets/audio/jobcenter/overlord.json?v=20261013-overlord-fury',{signal:v.abort.signal}).then(r=>{if(!r.ok)throw Error('jobcenter envelope');return r.json()}).then(data=>{if(current())v.data=data}).catch(error=>{if(current()&&error.name!=='AbortError')v.data={text:config.text||'',duration:config.duration||60}});
-  on(surface,'pointerdown',e=>{if(!current())return;surface.setPointerCapture(e.pointerId);const move=e.pointerType==='touch'&&e.clientX<innerWidth*.45;v.pointers.set(e.pointerId,{x:e.clientX,y:e.clientY,startX:e.clientX,startY:e.clientY,move});if(v.mediaPending||v.failed&&v.phase==='speaking')resume();});
-  on(surface,'pointermove',e=>{const p=v.pointers.get(e.pointerId);if(!p||!current()||paused())return;if(p.move){v.touch.side=clamp((e.clientX-p.startX)/55,-1,1);v.touch.forward=clamp((p.startY-e.clientY)/55,-1,1)}else{v.yaw-=(e.clientX-p.x)*.004;v.pitch=clamp(v.pitch-(e.clientY-p.y)*.003,-1.25,1.25)}p.x=e.clientX;p.y=e.clientY});
+  let mouseLook=null;
+  on(surface,'pointerdown',e=>{mouseLook=null;if(!current())return;surface.setPointerCapture(e.pointerId);const move=e.pointerType==='touch'&&e.clientX<innerWidth*.45;v.pointers.set(e.pointerId,{x:e.clientX,y:e.clientY,startX:e.clientX,startY:e.clientY,move});if(v.mediaPending||v.failed&&v.phase==='speaking')resume();});
+  on(surface,'pointermove',e=>{
+   if(!current()||paused()){mouseLook=null;return}
+   const p=v.pointers.get(e.pointerId);
+   if(!p){
+    if(e.pointerType!=='mouse'||e.buttons!==0){mouseLook=null;return}
+    const previous=mouseLook;mouseLook={x:e.clientX,y:e.clientY};
+    if(previous){v.yaw-=(e.clientX-previous.x)*.004;v.pitch=clamp(v.pitch-(e.clientY-previous.y)*.003,-1.25,1.25)}
+    return;
+   }
+   if(p.move){v.touch.side=clamp((e.clientX-p.startX)/55,-1,1);v.touch.forward=clamp((p.startY-e.clientY)/55,-1,1)}else{v.yaw-=(e.clientX-p.x)*.004;v.pitch=clamp(v.pitch-(e.clientY-p.y)*.003,-1.25,1.25)}p.x=e.clientX;p.y=e.clientY;
+  });
+  on(surface,'pointerleave',()=>{mouseLook=null});
   const release=e=>{const p=v.pointers.get(e.pointerId);if(p?.move)v.touch={forward:0,side:0};v.pointers.delete(e.pointerId)};
   on(surface,'pointerup',release);on(surface,'pointercancel',release);on(surface,'lostpointercapture',release);
   on(window,'keydown',e=>{if(!current())return;if(e.code==='Escape'){e.preventDefault();close();return}if(v.phase==='speaking'&&(v.mediaPending||v.failed)&&!e.repeat)resume()});
-  function resetInput(){v.touch={forward:0,side:0};v.pointers.clear();bridge.clearInput?.()}
+  function resetInput(){mouseLook=null;v.touch={forward:0,side:0};v.pointers.clear();bridge.clearInput?.()}
   on(window,'blur',()=>{resetInput();v.suspended=true;suspendMedia()});
   on(window,'focus',()=>{v.suspended=false;last=performance.now();if(v.phase==='speaking'&&!paused())resume()});
   on(document,'visibilitychange',()=>{resetInput();last=performance.now();if(document.hidden)suspendMedia();else if(v.phase==='speaking'&&!paused())resume()});
@@ -269,3 +281,4 @@ export function createJobcenterEncounter(T,renderer,bridge){
  }
  return {open,close,render,renderRelease,get active(){return !!visit},get releasing(){return !!release},inspect(){return visit?{active:true,phase:visit.phase,x:visit.x,z:visit.z,yaw:visit.yaw,pitch:visit.pitch,distance:visit.distance,pressure:visit.pressure,energy:visit.energy,attack:visit.attack,rumbleLevel:visit.rumbleLevel,dismissal:visit.dismissal,heat:visit.heat,rumbleActive:!!visit.rumbleSource?.active,playback:visit.playback,mediaStarted:visit.mediaStarted,mediaPaused:visit.audio.paused,failed:visit.failed,captionCues:visit.captionCues.length,resources:{geometries:2,textures:0,media:1},duration:visit.data?.duration||0}:{active:false,release:release?.inspect()||null}}};
 }
+

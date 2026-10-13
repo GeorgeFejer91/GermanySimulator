@@ -129,10 +129,12 @@ Read the native media playhead in the existing render/update pass. Blend closure
 vowel opening, spreading, rounding and lower-lip biting across short boundaries;
 energy can modulate opening but cannot replace articulation. Select recorded-word
 receipt mode before the first word event, so a wall-clock estimate cannot advance
-past and reject that receipt. Freeze the pose during pause; close on actual end,
-exit and replay. Unowned or failed audio should retain a neutral mouth unless a
-separate fallback rig has been validated. Reduced motion can retain these small
-semantic movements while removing decorative waves.
+past and reject that receipt. Hold the sampled mouth cue during media pause;
+preserve the existing body's motion owner and phase. On actual end, cancellation,
+exit or replay, reset and release the speech cue and restore inactive source
+paint, including deliberate open rest art. Unowned or failed audio retains that
+source paint unless a separate fallback rig has been validated. Reduced motion
+can retain these small semantic movements while removing decorative waves.
 
 Register the lips against the exact source crop and its world-coordinate mapping.
 Use a bounded lip/lower-jaw mask that preserves eyes, scalp, props and floor pivot.
@@ -141,6 +143,90 @@ at rest. Inspect actual face relief before choosing its depth: an opening placed
 behind one lip edge can appear off-centre despite correct XY registration. Scale
 its height with opening rather than leaving a dark oval under every consonant.
 Keep the jaw connected and the original painted crease visible at closure.
+
+### Deform a connected painted lip surface
+
+When a painted mouth opening splits the cheek or cuts a transparent gap, first
+register the original visible lip line and, if the source is already open, its
+painted upper and lower boundaries. Describe a local lip frame with centre,
+tangent and normal in source pixels; carry both axes through source-to-UV
+conversion with the canvas aspect accounted for. Record source boundaries along
+the local normal relative to the registered rect height. Centre and angle alone
+cannot locate an existing cavity. Evaluate speech in this frame rather than
+assuming a horizontal atlas mouth.
+
+Transport nearby source paint through one compact, smooth width field. Invert
+its horizontal map when sampling the painting so stretched lips still sample
+continuous source colour; keep the field invertible over the chosen shape range.
+Derive upper and lower boundaries from that painting's fitted crease and an
+aperture that returns to its attached mouth corners. Protect upper-face paint with a
+smooth spatial falloff. Give the lower lip and jaw bounded support, and provide
+a distinct lip-to-teeth contact shape for biting consonants. Fit field extent,
+opening and falloffs to each approved painting; example shader constants are
+not portable anatomical settings.
+
+Fit each character and interaction pose to its actual painted mouth. Record
+both corners, the closed lip curve, the existing upper/lower cavity edges, and
+the allowed upper/lower opening contours in the oriented source frame. A few
+control heights between the measured corners usually suffice; use interpolation
+that cannot overshoot them. Check the curves over enlarged source pixels before
+rendering. A black lip crease is not automatically an open cavity, and a red
+upper-lip ridge is not the cavity's upper edge. Preserve asymmetry, downturn,
+visible profile width, restrained jaw range and the source's tooth exposure.
+
+Cover the complete source opening, including teeth, its high upper edge and dark
+corner wings. Compare inactive, owned closed and open samples on the actual
+native painting and each atlas fallback cell. A valid profile can still leave a
+black pocket outside its measured corner or an upper tooth row above its source
+boundary. Recenter or enlarge a registration whose true cavity exceeds its
+coordinate bounds, then refit the controls; do not truncate it to fit the schema.
+
+The audio rig supplies normalized opening, spread, rounding and contact cues;
+the pose's mouth profile converts those cues into its own contours and limits.
+Clamp articulation inside those limits. Do not give every face the same slit,
+rounding gain, synthetic teeth or maximum aperture. During a paired interaction,
+evaluate each endpoint's own profile with the same media cue before transporting
+and mixing its painted pixels. Validate any atlas fallback against its own
+source cell; an unrelated native bridge is not its facial geometry.
+
+For a pre-open source, map paint outside the target aperture from its own
+upper/lower source boundaries to the target boundaries, with the same
+corner-attached taper. Replace the original interior within the target aperture
+so the opening reads as one cavity; sampling from an assumed closed crease can
+leave original teeth or darkness as a second mouth. Register these boundaries
+on every affected source pose, including bridges.
+
+When speech is inactive, sample the exact source, including any painted opening.
+When an active closed consonant owns the mouth, compress a pre-open source's
+upper and lower boundaries to the closed line. Keep the outside-paint remap
+bounded and monotonic through this inward compression; adapt its falloff to
+the displacement so it does not fold the cheek or jaw. During speech, preserve
+original alpha and guard samples whose remapped alpha falls below the original,
+so paint cannot pull transparent background into cheeks. Diagnose cheek
+folding as a noninvertible or overly broad map; diagnose alpha gaps at the
+remap edge before increasing the dark oral fill. Inspect inactive source,
+owned closure, attached corners, lower-jaw connection and protected eyes on
+light and dark backgrounds.
+
+At the protected-face or collar guard, make displacement return smoothly to
+zero with the sampling map's first derivative returning to identity. A hard
+outside return can still create a visible seam when the adjacent inside sample
+has moved several source pixels. Bound width and biting-contact fields at the
+same guard. Verify positive outside-lip transport through the permitted shape
+range, including owned closure of the largest pre-open source; also inspect the
+skin gradient at the guard. A positive derivative alone cannot approve a bright
+stretched philtrum or a retained cavity.
+
+For paired painted endpoints, evaluate the same media cue in each endpoint's
+own registered lip frame *before* the existing body transport mixes them. The
+body phase remains owned by that transport; speech adds no body clock. Inspect
+every character, encoded pose and affected interval through changing-pose
+playback. A successful fixed-painting trial establishes only that painting's
+articulation, not general pose registration or a face rig. This approach borrows
+canonical appearance and coherent deformation ideas from 4D Gaussian
+Splatting; a deterministic painted-image shader does not train or implement its
+neural scene reconstruction. Reuse the existing visual acceptance gate and
+record instead of creating another approval ledger.
 
 ### Keep the mouth attached through transformations
 
@@ -156,8 +242,9 @@ frontal mouth must not be projected onto a rear view without visible lips.
 For paired native-image Gaussians, articulate each source painting in its own
 registered UV space before the existing paired transport mixes it. Carry its
 head/jaw landmarks, local size and orientation through the same body paths.
-Register the actual lip crease on every encoded key, including bridges, in its
-existing source specification and compiled manifest. Nose/chin interpolation
+Register the actual lip line and any open-source boundaries on every encoded
+key, including bridges, in its existing source specification and compiled
+manifest. Nose/chin interpolation
 does not locate mouths reliably in separately painted keys. Authored key times
 own transport timing, not oral coordinates; filenames such as `bridge1` specify
 neither. Check registrations against enlarged source pixels and full-aperture

@@ -1,6 +1,6 @@
 import {createAmtTouchPicker} from './buergeramt-touch-target.js?v=20261013-double-tap';
-import {createAmtGaussianScene,loadAmtSplatModule} from './buergeramt-gaussian-scene.js?v=20261013-steady-reflection';
-import {mouthPaintGlsl} from './buergeramt-mouth-paint.js?v=20261011-mouth-consistency';
+import {createAmtGaussianScene,loadAmtSplatModule} from './buergeramt-gaussian-scene.js?v=20261013-character-lips';
+import {mouthPaintGlsl,mouthProfileValues,validateMouthProfile} from './buergeramt-mouth-paint.js?v=20261013-character-lips';
 import {createAmtFloor} from './buergeramt-floor.js?v=20261013-portrait-melt30';
 import {createAmtPortraitMelt} from './buergeramt-portrait-melt.js?v=20261013-portrait-melt30';
 import {createAmtLampWear} from './buergeramt-lamps.js?v=20261012-counter-recovery';
@@ -321,8 +321,8 @@ function showRendererFailure(error){
     for(const side of [-1,1]){const x=side*(canopy/2-.18);box(.06,1.36,1.08,glass,x,1.55,back,g);box(.07,.07,1.08,M.metal,x,2.23,back,g)}
     const benches=passHalf?bridge.props.filter(p=>p.stationId===s.id&&p.fallbackOnly&&p.type==="bench").map(p=>({x:(p.y-s.y-s.h/2)*S*(s.side==="west"?-1:1),z:(p.x-s.x-s.w/2)*S*(s.side==="west"?1:-1)})):[{x:-canopy*.28,z:back},{x:canopy*.28,z:back}];
     for(const {x:dx,z} of benches){box(1.13,.08,.38,M.metal,dx,.66,z,g);box(1.13,.45,.07,M.metal,dx,.92,z+.2,g);for(const leg of [-.42,.42])box(.06,.36,.06,M.metal,dx+leg,.44,z,g)}
-    const board=label("ZUGVERSPÄTUNG",`BAHNHOF ${s.name} · GLEIS 1`,"#16558b","#f6f6f3");board.scale.set(Math.min(4,length*.3),.72,1);board.position.set(0,3.14,back);g.add(board);
-    for(const side of [-1,1]){const x=side*(length/2-1);box(.07,1.9,.07,M.metal,x,1.25,back,g);const sign=label("AMT-BAHN",side<0?"GLEIS 1 · +35 MIN":"ABFAHRT UNBESTIMMT","#16558b","#f6f6f3");sign.scale.set(2.45,.54,1);sign.position.set(x,2.45,back);g.add(sign)}
+    const jwd=s.name==="JWD",board=label(jwd?"JWD":"ZUGVERSPÄTUNG",jwd?"AMT-BAHN · JANZ WEIT DRAUSSEN":`BAHNHOF ${s.name} · GLEIS 1`,"#16558b","#f6f6f3");board.name="Station name / "+s.name;board.scale.set(Math.min(4,length*.3),.72,1);board.position.set(0,3.14,back);g.add(board);
+    for(const side of [-1,1]){const x=side*(length/2-1);box(.07,1.9,.07,M.metal,x,1.25,back,g);const sign=label(jwd?"JWD":"AMT-BAHN",side<0?"GLEIS 1 · +35 MIN":"ABFAHRT UNBESTIMMT","#16558b","#f6f6f3");sign.name="Platform sign / "+s.name;sign.scale.set(2.45,.54,1);sign.position.set(x,2.45,back);g.add(sign)}
     const clockFace=new T.Mesh(new T.CircleGeometry(.26,24),M.cross);clockFace.position.set(-canopy*.58,2.47,back+.58);g.add(clockFace);const clockRim=new T.Mesh(new T.TorusGeometry(.27,.03,6,24),M.dark);clockRim.position.copy(clockFace.position);g.add(clockRim);box(.02,.17,.02,M.dark,clockFace.position.x,2.51,clockFace.position.z+.02,g);
     box(.48,1.18,.4,M.metal,canopy*.61,.9,back,g);box(.32,.43,.025,M.dark,canopy*.61,1.16,back+.22,g);
   }
@@ -390,7 +390,7 @@ function showRendererFailure(error){
     :new URLSearchParams(location.search).get("propDetails")==="1"
       ?import("./assets/models/prop-details/loader.js?v=20260930-prop-details1").catch(error=>{console.warn("Prop detail study unavailable; using originals",error);return null})
       :null;
-  if(satireKitEnabled)for(const slot of stationSlots)queueCityModel(()=>({x:X(slot.state.x+slot.state.w/2),z:Z(slot.state.y+slot.state.h/2)}),Math.hypot(slot.state.w*S,slot.state.h*S)/2,async()=>{try{
+  if(satireKitEnabled)for(const slot of stationSlots.filter(slot=>slot.state.name!=="JWD"))queueCityModel(()=>({x:X(slot.state.x+slot.state.w/2),z:Z(slot.state.y+slot.state.h/2)}),Math.hypot(slot.state.w*S,slot.state.h*S)/2,async()=>{try{
     const module=await detailPropLoader;if(!module)return false;await module.installStationKit(T,world,[slot],modelLoader,{S,X,Z});return true;
   }catch(error){console.warn("Original stations retained",error);return false}},slot);
   function loadLocalModel(url){
@@ -1135,13 +1135,14 @@ function showRendererFailure(error){
         if(!asset)return false;const model=asset.scene.clone(true);fitResponseModel(model,{x:p.w*S,y:p.h*S,z:Math.max(.35,p.w*S)});g.add(model);fallback.visible=false;return true;
       }catch(error){if(!warnedScenery.has(p.satireId)){warnedScenery.add(p.satireId);console.warn('Keeping procedural scenery for '+p.satireId,error)}return false}});
     }else if(p.asset==="jwd-street-sign"){
-      const neighborhood=bridge.jwdNeighborhood||{},canvas=document.createElement("canvas");canvas.width=512;canvas.height=128;
-      const ink=canvas.getContext("2d");ink.fillStyle="#eeeee9";ink.fillRect(0,0,512,128);ink.strokeStyle="#242727";ink.lineWidth=5;ink.strokeRect(4,4,504,120);ink.fillStyle="#151a1a";ink.textAlign="center";ink.textBaseline="middle";ink.font="700 50px Arial";ink.fillText(neighborhood.street||"AM FISCHTAL",256,47);ink.font="700 27px Arial";ink.fillText(neighborhood.name||"WALDSIEDLUNG · JWD",256,98);
+      const neighborhood=bridge.jwdNeighborhood||{},canvas=document.createElement("canvas");canvas.width=512;canvas.height=320;
+      const ink=canvas.getContext("2d");ink.fillStyle="#f4ca38";ink.fillRect(0,0,512,260);ink.strokeStyle="#171717";ink.lineWidth=9;ink.beginPath();ink.roundRect(9,9,494,242,12);ink.stroke();ink.fillStyle="#171717";ink.textAlign="center";ink.textBaseline="middle";ink.font="900 104px Arial";ink.fillText("JWD",256,82);ink.font="700 37px Arial";ink.fillText("Janz weit draußen",256,159);ink.font="700 31px Arial";ink.fillText("Berlin",256,214);
+      ink.fillStyle="#eeeee9";ink.fillRect(0,268,512,52);ink.lineWidth=4;ink.strokeRect(3,271,506,46);ink.fillStyle="#171717";ink.font="700 32px Arial";ink.fillText(neighborhood.street||"AM FISCHTAL",256,295);
       const texture=new T.CanvasTexture(canvas);texture.colorSpace=T.SRGBColorSpace;texture.generateMipmaps=false;texture.minFilter=T.LinearFilter;
-      const steel=mat(0x424b4b),board=new T.Mesh(new T.PlaneGeometry(2.95,.7375),new T.MeshBasicMaterial({map:texture,side:T.DoubleSide}));board.name="Berlin-style neighborhood street sign";board.position.set(0,2.32,.055);g.add(board);
-      const pole=new T.Mesh(new T.CylinderGeometry(.047,.047,2.34,8),steel);pole.name="Street sign post";pole.position.y=1.17;g.add(pole);
+      const steel=mat(0x424b4b),board=new T.Mesh(new T.PlaneGeometry(2.8,1.75),new T.MeshBasicMaterial({map:texture}));board.name="JWD Ortsschild";board.position.set(0,2.9,.055);g.add(board);const reverse=board.clone();reverse.name="JWD Ortsschild reverse";reverse.position.z=-.055;reverse.rotation.y=Math.PI;g.add(reverse);
+      const pole=new T.Mesh(new T.CylinderGeometry(.047,.047,3.5,8),steel);pole.name="Street sign post";pole.position.y=1.75;g.add(pole);
       const base=new T.Mesh(new T.CylinderGeometry(.09,.09,.1,8),steel);base.name="Street sign foot";base.position.y=.05;g.add(base);
-      g.name=p.id;g.userData.jwdSign={text:(neighborhood.street||"AM FISCHTAL")+" / "+(neighborhood.name||"WALDSIEDLUNG · JWD"),x:p.x,y:p.y,collisionRadius:p.collisionRadius};jwdScenery.push(g);
+      g.name=p.id;g.userData.jwdSign={text:"JWD / Janz weit draußen / Berlin / "+(neighborhood.street||"AM FISCHTAL"),x:p.x,y:p.y,collisionRadius:p.collisionRadius};jwdScenery.push(g);
     }else if(p.asset==="faxbillboard"){
       const art=desktopBillboards.matches&&p.billboard,bw=art?4.4:4.8,bh=art?3.3:1.65,tx=faxFallbackTexture(),material=new T.MeshStandardMaterial({map:tx,roughness:.9}),board=new T.Mesh(new T.BoxGeometry(bw,bh,.12),material);
       board.position.y=art?3.5:2.8;g.add(board);[-bw*.35,bw*.35].forEach(v=>box(.1,art?2.3:2.2,.1,M.metal,v,art?1.15:1.1,0,g));
@@ -1571,6 +1572,13 @@ function showRendererFailure(error){
   const amtStationaryDetails=new Map();
   function loadAmtImages({background=false}={}){
     if(amtImagesRequested)return;amtImagesRequested=true;officePreparationBackground=background;
+    officeAssetTotal++;officeAssetPending++;
+    const loadLipProfiles=async()=>{
+      const response=await fetch('./assets/buergeramt/characters/mouth-profiles.json?v=20261013-character-lips');
+      if(!response.ok)throw new Error('Lip profiles unavailable: '+response.status);
+      window.GermanyAmtLips.setProfiles(await response.json(),validateMouthProfile);
+    };
+    (bridge.queueAssetLoad?bridge.queueAssetLoad(loadLipProfiles,{background:officePreparationBackground}):loadLipProfiles()).catch(error=>{officeAssetFailures++;console.warn('Bürgeramt painted lip profiles unavailable',error)}).finally(()=>officeAssetPending--);
     amtTexture('./assets/buergeramt/mirror/potato-skin.webp?v=20261013-live-mirror',texture=>amtPotatoMirror.setSkinTexture(texture),undefined,true);
     amtTexture("./assets/buergeramt/president-steinmeier.webp?v=20261012-portrait",texture=>{presidentMaterial.map=texture;presidentMaterial.needsUpdate=true;amtPortraitMelt.setTexture(texture);presidentFallback.texture.dispose()},undefined,true);
     officeAssetTotal++;officeAssetPending++;
@@ -1883,7 +1891,7 @@ function showRendererFailure(error){
   addEventListener("pagehide",()=>{amtMouthSplat?.dispose();amtMouthSplat=null},{once:true});
   function updateAmtMouth(level,now){
     const speech=level.lipSpeech,actor=speech?.actor&&([...amtMoving,...amtCharacters].find(item=>item.id===speech.actor||item.lipId===speech.actor||item.performance&&speech.actor==="clerk-"+item.counter));
-    if(!amtMouthSplat&&actor&&speech.active)amtMouthSplat=window.GermanyAmtLips.createPaintSplat(T,mouthPaintGlsl);
+    if(!amtMouthSplat&&actor&&speech.active&&window.GermanyAmtLips.displayedMouthProfile(actor))amtMouthSplat=window.GermanyAmtLips.createPaintSplat(T,mouthPaintGlsl,mouthProfileValues);
     amtMouthSplat?.update(actor||null,speech,now);
   }
   let lastCall="",amtHiDpi=false;
@@ -2143,3 +2151,4 @@ function showRendererFailure(error){
   },layoutMissionPointer,inspectAssets,setAmtQr,get amtLipSplat(){return amtMouthSplat?.inspect()||null},get amtGaussian(){return amtGaussian.inspect()},get amtCinematicReady(){const status=amtOmenSplat?.inspect();return amtOmenSkipped||!!status?.ready||!!status?.failure},get amtOmenSplat(){return {visit:amtOmenVisit,loading:!!amtOmenRequest,skipped:amtOmenSkipped,failure:amtOmenFailure,...(amtOmenSplat?.inspect()||{ready:false,visible:false})}},get amtOmenStaging(){return {isolation:amtIsolation.value,environmentVisible:amtEnvironment.visible}},get amtOffice(){return officeDetail?.inspect()||null},get amtCharacters(){return [...amtCharacters.map(actor=>({name:actor.name,id:actor.animationId??actor.id,...amtSnapshot(actor),frame:actor.frame,loaded:!!actor.mesh.material.map?.image,mapped:!!actor.mesh.material.map,visible:actor.mesh.visible,detail:actor.mesh.material.map===actor.detail,texelHeight:actor.mesh.material.map?.image?.height||0,breath:actor.mesh.material.userData.breath.value})),...amtMoving.map(actor=>({name:actor.id,...amtSnapshot(actor),frame:actor.cell,loaded:!!actor.mesh.material.map?.image,mapped:!!actor.mesh.material.map,visible:actor.mesh.visible,detail:actor.mesh.material.map===actor.detail||actor.mesh.material.map===actor.walkDetail||actor.mesh.material.map===actor.turnDetail,turnPrepared:!!actor.turnDetail,turnReady:!!actor.turnDetail?.image,texelHeight:actor.mesh.material.map?.image?.height||0,breath:actor.mesh.material.userData.breath.value,tint:actor.mesh.material.color.getHexString(),position:[actor.mesh.position.x,actor.mesh.position.z]}))]}};
   app.classList.add("three-ready");
 })().catch(showRendererFailure);
+

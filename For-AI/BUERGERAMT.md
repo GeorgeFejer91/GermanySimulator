@@ -23,8 +23,14 @@ remain authoritative. The scene outside the joystick and toolbar accepts a
 separate captured finger for horizontal and vertical look; walking retains its pitch, bounded to
 ±.9 radians. Touch sensitivity follows the viewport's shorter dimension, with
 the same time-scale multiplier as desktop drag. Mouse drag also supports pitch;
-Page Up/Down give keyboard pitch control, while arrow turning/WASD retain their
-existing behavior. Scripted speakers, the portrait and mirror retain their own
+Arrow Up/Down control pitch, with Page Up/Down retained as aliases. Left/right
+arrows turn; WASD and the touch stick walk. Mouse and trackpad movement over the
+scene also changes yaw/pitch without a held button, using the same sensitivity
+and slowdown as drag look. Controls, the open mixer, scripted sequences and
+paused/hidden scenes do not take mouse look. Focus loss and scene transitions
+reset the mouse baseline. The centered reticle remains an invisible HUD object;
+nearby facing interactions retain their existing selection.
+Scripted speakers, the portrait and mirror retain their own
 camera framing. Desktop E retains its nearby facing target. A single mouse click also selects a visible interactive target, while mouse drags retain camera control. Mobile double
 taps select the closest visible person, counter, portrait or mirror within 64–112 CSS pixels
 of the tap, ranked by screen distance and then visible depth. Selection uses
@@ -491,17 +497,24 @@ The desktop exposes visible/hidden/unknown through the current status and
 browser-page visibility, not detection of the physical ringer switch, device
 volume, or the person looking at the display.
 
-The opening uses the accepted ticket name in one German utterance:
+The named opening uses the accepted ticket name in one German utterance:
 “Spricht hier [Name]? Hier ist die Kriminalpolizei am Apparat!” followed by the
 existing grass allegation. It finishes naturally before Knick's argument;
-missing playback still uses the bounded speech fallback. Its exact dynamic
-source and English translation supply the desktop caption on playback receipts.
-Coordination with the Knick local-speech owner confirmed that
-`GermanyKnickSpeech.prepare(name, counter)` and its leases are Knick-only:
-the Kripo must not reuse that model/profile. This dynamic opening uses Kripo's
-existing German male browser fallback; subsequent exact recordings keep the
-selected `kriminalpolizei` identity. Names stay in the current ticket/session,
-with no new model, service, persistence or remote synthesis request.
+its exact source and English translation supply the desktop caption on playback
+receipts. `GermanyKripoSpeech` prepares one name with the user-approved compact
+caller derivative and prerecorded surrounding words; it retains the selected
+`kriminalpolizei` profile. The intercom has its own model/profile and leases.
+The first valid name warms the six fixed call recordings without playing them.
+An unsupported browser or unfinished greeting immediately plays the complete
+original Kripo introduction and question, with matching captions. A pre-onset
+greeting failure also selects that backup, and a failed cropped body retries
+the full opening once. Both paths finish before Knick's first interruption.
+Continuous phone static covers transitions; Answer never waits for synthesis.
+If the intercom model is unavailable, its recorded “Nächste bitte!” still calls
+the allocated counter. Names, model data and generated clips stay in browser
+buffers; slot/episode completion and pagehide release them. There is no remote
+synthesis request or file save. Voice provenance and pronunciation limitations
+are owned by [the voice protocol](./VOICE-SYNTH-PROTOCOL.md).
 
 The telephone is a staged incoming-call screen, with decorative SVG cellular,
 Wi-Fi and battery indicators beside the measured clock. These do not query
@@ -1149,6 +1162,62 @@ Six fresh hardware-ANGLE office benchmark runs passed after depth integration, a
 
 ## Full mouth opening and recorded timing (2026-10-11)
 
+**Connected lip surface, 2026-10-13.** The shared native/atlas mouth painter uses
+a compact paint field with monotone skin transport, attached corners, bounded lower-jaw
+support and a distinct contact shape. All 67 native keys own `mouth_angle`,
+`mouth_gap` and `mouth_profile` beside `mouth_xywh`; their source specifications
+and builder preserve these fields. Each profile traces its own painted corners,
+five-point crease, upper/lower source cavity and maximum opening contours,
+rounding response and tooth exposure. Shape-preserving Hermite interpolation
+keeps the surfaces ordered and corners connected. The same normalized speech
+cues drive each pose within its own anatomical limits. The 41 atlas source poses
+have separate fitted profiles in `assets/buergeramt/characters/mouth-profiles.json`;
+load failure preserves original paint and does not cut a mouth hole.
+Each paired endpoint articulates before the existing body transport. Atlas
+mouths carry centre and both axes through the actual baked field and texture
+crop, including local scale/shear. The 15 office actors share this implementation;
+unregistered rear/turn cells retain their original paint. Inactive speech returns
+exactly to the source; an owned closed cue also closes a pre-open painting.
+Original alpha remains exact, upper-face paint is protected, and pre-open
+paintings map their existing interior into one target cavity. Recorded bytes,
+cue data, media clocks, body phases, pivots and draw/texture ownership stay with
+the existing controllers. The speaking desk receives the existing bounded mobile
+paint slot before background clerks. This changes lip contour/attachment; the
+existing broader Gaussian midpoint ghosting remains a separate art limitation.
+
+**Individual lip validation, 2026-10-13.** Integrated published `2406224` and
+passed all 861 Node checks. The exact GPU matrix covers all 67 native keys and
+804 source/inactive/articulated/comparison PNGs; inactive pixels and active alpha
+are exact. Production captures cover all 15 instances: 326 desktop native
+key/interval/return samples, 103 samples in each mobile orientation, five atlas
+scenarios plus failed metadata, and owned closure of all 41 distinct atlas
+source poses. Four normal-speed native-recording captures cover Knick and the
+Aktenkurier on desktop and portrait emulation, with changing body poses, held
+media/cues during pause and cue/owner release on cancellation. These are silent
+forced scenes, not natural mission, heard synchronization or verified phonemes.
+Source boundaries include the complete painted teeth/corner cavity; the skin
+sampling map reaches identity continuously at its protected guards. The existing
+whole-face/body blend can still soften or double between anchors.
+
+Independent Physics and Camera reviewers accept the affected mouth/attachment
+and scripted C4/X1 scope on the same frozen runtime hashes. They freshly inspect
+source, pixels and traces; browser execution is supplied. No remaining mouth-fit
+finding is reported. Physical Android, listening, natural mission progression,
+full-video watching and perceptual phoneme accuracy remain outside this evidence.
+
+Twenty-four quiet hardware-ANGLE cold contexts compare six root and six office
+runs on each side against `2406224`, using the same final asset tree, DPR 2 and
+seed 424242. All transfer/title/drawing-buffer/input/error gates pass. Candidate
+root transfer is at most 17,933,420 bytes (18 MB gate), office transfer 33,832,114.
+Worst sampled input p95 is 28.9 ms root and 46.3 ms office, against baseline 22.5
+and 103.3 ms; warm sync CPU p95 is at most 26.5 and 7.5 ms. These local uncompressed
+HTTP samples do not establish a speedup, GPU time, listening or physical Android
+performance. The source byte additions are in `ASSET-POLICY.md`. Current evidence
+is in ignored `output/connected-lips/guard-*` and the independent review folders;
+the portable new-character protocol and its instruction-only review are in the
+animation skill route in `SKILLS.md`.
+
+
 The earlier texture-shift mouth caused visible lip vibration without an oral
 opening. `buergeramt-mouth-paint.js` now separates the original painted lips
 and lower jaw around a bounded, recessed mouth cavity. Native whole-body
@@ -1428,4 +1497,5 @@ Six release cold-start lab runs pass the 18 MB transfer, 4 Hz title dispatch, 1.
 
 A valid name captured in the opening form is prepared before arrival; if absent, preparation starts at the companion registration. The local inference contract, intercom-only listening acceptance and training identity are owned by `VOICE-SYNTH-PROTOCOL.md`'s browser-local appointment-name section. Reservation code, assigned counter, exact ticket receipt and independent visitor ownership stay authoritative.
 
-A reservation whose audio is still preparing moves to a later turn at the same counter. Its board call and ordinary call-window deadline begin only after preparation succeeds or reaches a terminal caption fallback. A received personal call gets its own allocated clerk, exact visible name/counter and English translation; it bypasses only the ordinary rare anonymous-call cooldown and shares the existing foreground speech owner. A valid late ticket receipt can still announce within the remaining call window. Retirement, replay and superseding cues stop/release their exact media; stale synthesis cannot attach to a replacement ticket. Muting/unavailable synthesis retains the caption and board call without substituting another voice.
+A reservation whose audio is still preparing moves to a later turn at the same counter. Its board call and ordinary call-window deadline begin only after preparation succeeds or reaches a terminal fallback. A received personal call gets its own allocated clerk, exact visible name/counter and English translation; it bypasses only the ordinary rare anonymous-call cooldown and shares the existing foreground speech owner. A valid late ticket receipt can still announce within the remaining call window. Retirement, replay and superseding cues stop/release their exact media; stale synthesis cannot attach to a replacement ticket. Muting retains the personalized caption and board call. Unavailable synthesis plays the existing recorded “Nächste bitte!” with matching text at the allocated counter.
+

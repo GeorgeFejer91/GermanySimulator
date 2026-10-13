@@ -377,3 +377,7 @@ The first native take passed the bundled word check. The first Großvater take w
 | `merz/merz-nichts-zurueckzunehmen.mp3` | 2.120 s | `46d528683e4cac9d8e70a756d1e89d9404904bef199e72404daf86d52e8c6077` |
 
 The added quote texts are documented in `merz/manifest.json` with dates, publication sources, original-video links, and context. The “Spinner” line retains only the original closing clause and marks the omitted lead-in with an ellipsis. These MP3s are synthetic game renditions, not historical recordings. No listening review or popularity ranking is claimed.
+
+## Browser-local personal names (2026-10-13)
+
+Two scoped Piper/VITS name derivatives reuse the existing German Thorsten pretrained source and selected production reference allocations. Appointment calls use the user-accepted intercom derivative; it is explicitly not accepted as Frau Knick resemblance. Kripo caller names use the compact derivative distilled from pinned OpenVoice V2 tone conversion, and the user accepted the actual browser greeting. Exact model, original/reference, teacher/checkpoint and fixed-part hashes and limitations belong to their owning [intercom model card](knick/browser/MODEL_CARD.md) and [Kripo model card](kriminalpolizei/browser/MODEL_CARD.md). Fixed character dialogue and selected phone-body files retain their existing source/licensing notices. The OpenVoice upstream MIT notice is bundled with the caller model. Training data, conversion weights and large checkpoints stay private; browser clients load neither authoring pipeline nor teacher model.

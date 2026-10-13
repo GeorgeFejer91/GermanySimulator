@@ -65,7 +65,7 @@ const posePixels={
  clerk:[[256,169,16,16],[213,168,16,16],[273,201,16,16],[215,230,16,16],[213,168,16,16],[256,169,16,16]],
  aktenkurier:[[350,123,11,8],[346,134,11,7],[290,112,10,7],[293,145,11,8]],
  archivbotin:[[335,157,14,9],[264,125,14,8],[321,106,10,7],[312,137,13,8]],
- formularsammler:[[346,160,13,9],[327,159,13,8],[303,148,12,8],[352,160,13,8]],
+ formularsammler:[[346,160,13,9],[327,159,13,8],[303,148,12,8],[355,160,13,8]],
  nummernfluesterer:[[303,135,12,8],[311,115,13,9],[337,96,10,7],[311,148,12,8]],
  nachtschichtmelderin:[[320,145,11,8],[291,129,11,8],[342,115,10,7],[311,170,11,8]],
  pfandarchitektin:[[312,144,13,9],[289,137,14,9],[315,111,11,8],[294,165,13,9]],
@@ -75,13 +75,31 @@ const posePixels={
 for(const [id,poses] of Object.entries(posePixels))if(id!=='clerk'){
  const [x,y,w,h]=poses[1];mouths[id]=[x/640,1-y/832,w/640,h/832];
 }
-function displayedMouth(actor){
+const poseAngles={clerk:[-.15,.05,.2,-.06,.05,-.15],aktenkurier:[0,.3,.35,.2],archivbotin:[.15,-.1,-.25,-.2],formularsammler:[.1,.12,.15,.15],nummernfluesterer:[-.1,.05,.25,.15],nachtschichtmelderin:[0,-.16,-.2,-.15],pfandarchitektin:[0,-.3,-.28,-.3],kopiependler:[0,-.1,-.45,-.3],warteschlangenpoetin:[0,.06,-.1,-.05],renter:[.03],parent:[-.3],pensioner:[.05]};
+let poseProfiles=null;
+function setProfiles(data,validate){
+ if(data?.schema_version!==1||!data.profiles)throw new Error('Invalid painted lip profiles');
+ for(const [key,angles] of Object.entries(poseAngles)){
+  const profiles=data.profiles[key];
+  if(!Array.isArray(profiles)||profiles.length!==angles.length)throw new Error('Incomplete painted lip profiles: '+key);
+  profiles.forEach((profile,index)=>validate(profile,key+'/'+index));
+ }
+ poseProfiles=data.profiles;
+}
+function displayedMouthProfile(actor){
+ const source=sourceMouth(actor);return source?poseProfiles?.[source.key]?.[actor.mouthPose??0]??null:null;
+}
+function sourceMouth(actor){
  const id=actor.lipId||actor.id||actor.name,key=actor.performance?'clerk':id;
- // Unregistered rear/turn/walk paintings have no frontal oral patch. Restore
- // the original mouth rather than projecting another pose's face onto them.
  if(actor.mouthPose===null)return null;
- const p=posePixels[key]?.[actor.mouthPose],w=actor.performance?384:640;
- let rect=p?[p[0]/w,1-p[1]/832,p[2]/w,p[3]/832]:mouths[id]?.slice();
+ const p=posePixels[key]?.[actor.mouthPose],w=actor.performance||['renter','parent','pensioner'].includes(key)?384:640;
+ const rect=p?[p[0]/w,1-p[1]/832,p[2]/w,p[3]/832]:mouths[id]?.slice();
+ return rect?{key,p,w,rect}:null;
+}
+function displayedMouth(actor){
+ const source=sourceMouth(actor);return source?transportMouthRect(actor,source.rect,source.key,source.p):null;
+}
+function transportMouthRect(actor,rect,key,p){
  if(!rect||!actor.renderKey?.startsWith('atlas:'))return rect;
  // Follow the same source-pixel fields used by the existing offline builders.
  // Their phase is the displayed cell; no elapsed speech/body clock is added.
@@ -103,6 +121,19 @@ function displayedMouth(actor){
  }
  return rect;
 }
+function displayedMouthFrame(actor){
+ const source=sourceMouth(actor);if(!source)return null;
+ const {key,p,w,rect}=source,angle=poseAngles[key]?.[actor.mouthPose??0]??poseAngles[key]?.[0];
+ if(!Number.isFinite(angle))throw new Error('Unregistered atlas lip angle: '+key);
+ const center=transportMouthRect(actor,rect.slice(),key,p);
+ const sample=(x,y)=>transportMouthRect(actor,[rect[0]+x/w,rect[1]-y/832,...rect.slice(2)],key,p);
+ const t=sample(Math.cos(angle),Math.sin(angle)),n=sample(-Math.sin(angle),Math.cos(angle));
+ return{rect:center,axes:[(t[0]-center[0])*rect[2]*w,(t[1]-center[1])*rect[2]*w,(n[0]-center[0])*rect[3]*832,(n[1]-center[1])*rect[3]*832],sourceWidth:w};
+}
+function displayedMouthAngle(actor){
+ const frame=displayedMouthFrame(actor);if(!frame)throw new Error('Unregistered atlas lip angle: '+(actor.lipId||actor.id||actor.name));
+ return Math.atan2(-frame.axes[1]*832,frame.axes[0]*frame.sourceWidth);
+}
 function installMask(T,actor){
  const material=actor.mesh.material,hole={value:0},rect={value:new T.Vector4()},compile=material.onBeforeCompile;
  material.userData.lipHole=hole;material.userData.lipRect=rect;
@@ -115,7 +146,10 @@ function installMask(T,actor){
    "vec2 lipPatch=(amtFace-amtLipRect.xy)/amtLipRect.zw;\nfloat lipCover=1.-smoothstep(.48,.64,max(abs(lipPatch.x),abs(lipPatch.y)));\ndiffuseColor.a*=1.-amtLipHole*lipCover;\n#include <alphatest_fragment>");
  };
 }
-function createPaintSplat(T,paintGlsl){
+function createPaintSplat(T,paintGlsl,profileValues){
+ const speaking={value:0};
+ const angle={value:0},frame={value:new T.Vector4()},profileCache=new WeakMap();
+ const curves={value:new T.Matrix4()},lower={value:new T.Vector4()},ends={value:new T.Vector4()},tail={value:new T.Vector3()},style={value:new T.Vector3()};
  const cols=25,rows=17,count=cols*rows,quad=new T.PlaneGeometry(1,1),geometry=new T.InstancedBufferGeometry();
  geometry.index=quad.index;geometry.attributes=quad.attributes;
  const points=new Float32Array(count*3);
@@ -125,7 +159,7 @@ function createPaintSplat(T,paintGlsl){
  const material=new T.MeshBasicMaterial({transparent:true,depthTest:true,depthWrite:false,side:T.DoubleSide});
  material.forceSinglePass=true; // Flat paint needs one pass; retain visibility from both sides.
  material.onBeforeCompile=shader=>{
-  Object.assign(shader.uniforms,{lipShape:shape,lipRect:rect,lipCrop:crop,lipSize:size,lipBreath:breath});
+  Object.assign(shader.uniforms,{lipSpeaking:speaking,lipCurves:curves,lipLower:lower,lipEnds:ends,lipTail:tail,lipStyle:style,lipFrame:frame,lipShape:shape,lipRect:rect,lipCrop:crop,lipSize:size,lipBreath:breath});
   shader.vertexShader=`attribute vec3 lipCell;uniform vec4 lipShape,lipRect,lipCrop;uniform vec2 lipSize;uniform float lipBreath;
    varying vec2 lipUv,lipKernel,lipFace;
    `+shader.vertexShader.replace("#include <begin_vertex>",`
@@ -140,11 +174,11 @@ function createPaintSplat(T,paintGlsl){
    float upper=smoothstep(-lipSize.y*.42,lipSize.y*.1,transformed.y);
    transformed.y+=.008*lipBreath*upper;transformed.x*=1.+.006*lipBreath*upper;
    `);
-  shader.fragmentShader=`uniform vec4 lipShape,lipRect,lipCrop;uniform float lipBreath;varying vec2 lipUv,lipKernel,lipFace;
+  shader.fragmentShader=`uniform float lipSpeaking;uniform mat4 lipCurves;uniform vec4 lipLower,lipEnds,lipFrame;uniform vec3 lipTail,lipStyle;uniform vec4 lipShape,lipRect,lipCrop;uniform float lipBreath;varying vec2 lipUv,lipKernel,lipFace;
    ${paintGlsl}
    `+shader.fragmentShader.replace("#include <map_fragment>",`
    float kernel=exp(-.5*dot(lipKernel,lipKernel));
-   vec4 paint=amtMouthPaint(map,lipUv,vec4(lipCrop.xy+lipRect.xy*lipCrop.zw,lipRect.zw*lipCrop.zw),lipShape);diffuseColor*=paint;
+   vec4 paint=amtMouthPaintFrame(map,lipUv,vec4(lipCrop.xy+lipRect.xy*lipCrop.zw,lipRect.zw*lipCrop.zw),lipShape,lipFrame,lipCurves,lipLower,lipEnds,lipTail,lipStyle,lipSpeaking);diffuseColor*=paint;
    float lightness=dot(diffuseColor.rgb,vec3(.2126,.7152,.0722));
    diffuseColor.rgb=mix(vec3(lightness),diffuseColor.rgb,1.085+.055*lipBreath)*(1.015+.035*lipBreath);
     // Partition optical depth among overlapping native-image Gaussians.
@@ -158,16 +192,24 @@ function createPaintSplat(T,paintGlsl){
    if(disposed)return;
    if(source!==actor){if(actor)actor.mesh.material.userData.lipHole.value=0;mesh.removeFromParent();shape.value.set(0,0,0,0);actor=source;if(actor)actor.mesh.add(mesh)}
    if(!actor){mesh.visible=false;return}
-   const registration=displayedMouth(actor);
-   if(!registration||!actor.mesh.material.map?.image){mesh.visible=false;actor.mesh.material.userData.lipHole.value=0;return}
+   const oralFrame=displayedMouthFrame(actor),registration=oralFrame?.rect,profile=displayedMouthProfile(actor);
+   if(!registration||!profile||!actor.mesh.material.map?.image){mesh.visible=false;actor.mesh.material.userData.lipHole.value=0;return}
    const target=speech?.active?speech.shape:rest;
    // The cue sampler already coarticulates. Copy its playhead pose directly;
    // another temporal filter would move visible openings after the sound.
    shape.value.fromArray(target);
-   const active=shape.value.x+shape.value.y+shape.value.z+shape.value.w>.015;
-   mesh.visible=active&&actor.mesh.material.opacity>.001;actor.mesh.material.userData.lipHole.value=active?1:0;
    rect.value.fromArray(registration);actor.mesh.material.userData.lipRect.value.set(registration[0],registration[1],registration[2]*2.5,registration[3]*3);
    const uv=actor.uv;crop.value.set(uv.getX(2),uv.getY(2),uv.getX(3)-uv.getX(2),uv.getY(0)-uv.getY(2));
+   let packed=profileCache.get(profile);
+   if(!packed){packed=profileValues(profile);profileCache.set(profile,packed)}
+   for(const [name,uniform] of Object.entries({curves,lower,ends,tail,style}))uniform.value.fromArray(packed[name]);
+   speaking.value=speech?.active?1:0;
+   const preOpen=profile.source_upper.some((value,index)=>Math.abs(value-profile.source_lower[index])>.001);
+   const active=speaking.value&&(shape.value.x+shape.value.y+shape.value.z+shape.value.w>.015||preOpen);
+   mesh.visible=!!active&&actor.mesh.material.opacity>.001;actor.mesh.material.userData.lipHole.value=active?1:0;
+   const image=actor.mesh.material.map.image,axes=oralFrame.axes;
+   frame.value.set(axes[0]*crop.value.z*image.width,-axes[1]*crop.value.w*image.height,axes[2]*crop.value.z*image.width,-axes[3]*crop.value.w*image.height);
+   angle.value=Math.atan2(frame.value.y,frame.value.x);
    size.value.set(actor.mesh.geometry.parameters.width,actor.mesh.geometry.parameters.height);
    breath.value=actor.mesh.material.userData.breath.value;
    if(material.map!==actor.mesh.material.map){material.map=actor.mesh.material.map;material.needsUpdate=true}
@@ -175,11 +217,11 @@ function createPaintSplat(T,paintGlsl){
    material.color.copy(actor.mesh.material.color);material.opacity=actor.mesh.material.opacity;material.depthTest=actor.mesh.material.depthTest;mesh.renderOrder=actor.mesh.renderOrder;
    mesh.layers.mask=actor.mesh.layers.mask;
   },
-  inspect(){return{actor:actor?.lipId||actor?.id||actor?.name||null,pose:actor?.mouthPose??null,rect:rect.value.toArray(),visible:mesh.visible,shape:shape.value.toArray(),kernels:count,layer:mesh.layers.mask,depthTest:material.depthTest,depthWrite:material.depthWrite}},
+  inspect(){return{actor:actor?.lipId||actor?.id||actor?.name||null,pose:actor?.mouthPose??null,angle:angle.value,rect:rect.value.toArray(),visible:mesh.visible,shape:shape.value.toArray(),kernels:count,layer:mesh.layers.mask,depthTest:material.depthTest,depthWrite:material.depthWrite}},
   dispose(){if(disposed)return;disposed=true;if(actor)actor.mesh.material.userData.lipHole.value=0;mesh.removeFromParent();geometry.dispose();material.dispose()},
  };
 }
 let recordingModule;
 const loadRecording=(path,sha)=>{recordingModule??=import('./buergeramt-lipsync.js?v=20261013-kripo-ending');return recordingModule.then(m=>m.resolveMouthTrack(path,sha))};
-global.GermanyAmtLips={createTrack,score,poseAt,mouths,displayedMouth,installMask,createPaintSplat,loadRecording};
+global.GermanyAmtLips={createTrack,score,poseAt,mouths,displayedMouth,displayedMouthFrame,displayedMouthAngle,displayedMouthProfile,setProfiles,installMask,createPaintSplat,loadRecording};
 })(typeof window!=="undefined"?window:globalThis);

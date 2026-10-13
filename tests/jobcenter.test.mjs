@@ -8,6 +8,16 @@ import * as T from '../assets/vendor/three/0.186.0/build/three.module.min.js';
 const game=readFileSync(new URL('../game.js',import.meta.url),'utf8');
 const data=JSON.parse(readFileSync(new URL('../assets/audio/jobcenter/overlord.json',import.meta.url)));
 const fresh=()=>({x:0,z:34,yaw:0,pitch:0,time:0,distance:34,pressure:0});
+test('arrow pitch leaves position fixed while WASD still moves and page keys remain aliases',()=>{
+ for(const dt of [1/60,1/30,.1]){
+  const s=fresh();for(let i=0;i<2/dt;i++)stepJobcenter(s,{ArrowUp:true},dt);
+  assert.equal(s.pitch,1.25);assert.equal(s.x,0);assert.equal(s.z,34);
+  for(let i=0;i<4/dt;i++)stepJobcenter(s,{ArrowDown:true},dt);
+  assert.equal(s.pitch,-1.25);assert.equal(s.z,34);
+  stepJobcenter(s,{KeyW:true},dt);assert.ok(s.z<34);
+  stepJobcenter(s,{PageUp:true},dt);assert.ok(s.pitch>-1.25);
+ }
+});
 test('approach is necessary; movement remains unbounded and frame-rate independent',()=>{
  for(const dt of [1/60,1/30,.1]){
   const s=fresh();for(let i=0;i<10/dt;i++)assert.equal(stepJobcenter(s,{KeyS:true},dt),false);
@@ -101,3 +111,4 @@ test('media receipts own ejection; pause, failure and stale visits have bounded 
   encounter.open({onClose:r=>closed.push(r)});await flush();encounter.close();assert.equal(elements.every(e=>e.removed),true);assert.ok(media.every(m=>m.paused));
  }finally{for(const name of names){if(originals[name])Object.defineProperty(globalThis,name,originals[name]);else delete globalThis[name]}}
 });
+

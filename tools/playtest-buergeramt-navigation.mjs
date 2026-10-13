@@ -41,7 +41,7 @@ try{
   await page.evaluate(()=>{__navigationTest.pose();BuergeramtFit()});await page.waitForTimeout(200);
   const inspect=()=>page.evaluate(()=>({view:BuergeramtLevel.view,stage:BuergeramtLevel.stage,stick:document.getElementById('amt-move-stick').classList.contains('is-active'),look:document.getElementById('amt-look-zone').classList.contains('is-active')}));
   const layout=async(label)=>{
-   await page.evaluate(()=>BuergeramtFit());await page.waitForTimeout(150);
+   await page.evaluate(async()=>{await document.fonts.ready;BuergeramtFit();await new Promise(requestAnimationFrame);await new Promise(requestAnimationFrame)});
    const data=await page.evaluate(()=>{
     const ids=['amt-move-stick','amt-nearby','amt-objective','english-subtitle','amt-mix','subtitle-toggle'],boxes=Object.fromEntries(ids.map(id=>{const e=document.getElementById(id),r=e.getBoundingClientRect();return[id,{x:r.x,y:r.y,w:r.width,h:r.height,visible:!!e.getClientRects().length&&getComputedStyle(e).visibility!=='hidden'}]}));
     const labels=[...document.querySelectorAll('.amt-nav-label')].filter(e=>e.getClientRects().length).map(e=>({text:e.innerText,fit:e.dataset.pretextFit,w:e.clientWidth,h:e.clientHeight,scrollW:e.scrollWidth,scrollH:e.scrollHeight}));
@@ -100,6 +100,12 @@ try{
     await touch('touchMove',7,rx,ry+delta);await page.waitForFunction(()=>BuergeramtLevel.view.pitch===-.9);result.camera.push({label:'pitch-down',state:await inspect()});await page.screenshot({path:resolve(out,`${name}-pitch-down.png`)});await touch('touchCancel');
    }
   }else{
+   const initial=await inspect();await page.mouse.move(850,400);await page.mouse.move(890,360,{steps:4});const hover=await inspect();
+   assert.ok(hover.view.yaw>initial.view.yaw&&hover.view.pitch>initial.view.pitch);assert.equal(hover.view.walkedDistance,initial.view.walkedDistance);result.gestures.push({label:'desktop-hover-look',before:initial,after:hover});
+   await page.mouse.move(850,400,{steps:4});const reverse=await inspect();assert.ok(reverse.view.yaw<hover.view.yaw&&reverse.view.pitch<hover.view.pitch);
+   await page.keyboard.down('ArrowUp');await page.waitForFunction(p=>BuergeramtLevel.view.pitch>p+.12,reverse.view.pitch);await page.keyboard.up('ArrowUp');const up=await inspect();assert.equal(up.view.walkedDistance,reverse.view.walkedDistance);
+   assert.equal(await page.locator('.amt-reticle').evaluate(e=>getComputedStyle(e).visibility),'hidden');await page.screenshot({path:resolve(out,`${name}-arrow-up.png`)});
+   await page.keyboard.down('ArrowDown');await page.waitForFunction(p=>BuergeramtLevel.view.pitch<p-.12,up.view.pitch);await page.keyboard.up('ArrowDown');const down=await inspect();assert.equal(down.view.walkedDistance,up.view.walkedDistance);result.camera.push({label:'arrow-pitch-without-walking',before:reverse,up,down});await page.screenshot({path:resolve(out,`${name}-arrow-down.png`)});
    await page.mouse.move(850,400);await page.mouse.down();const before=await inspect();await page.mouse.move(910,350,{steps:4});await page.mouse.up();const after=await inspect();assert.ok(after.view.yaw>before.view.yaw&&after.view.pitch>before.view.pitch);result.gestures.push({label:'desktop-drag',before,after});
    await page.keyboard.down('PageDown');await page.waitForTimeout(120);await page.keyboard.up('PageDown');assert.ok((await inspect()).view.pitch<after.view.pitch);
   }
@@ -118,9 +124,11 @@ try{
      await page.touchscreen.tap(point.x,point.y);assert.equal((await inspect()).stage,'walk-sign');
      await page.touchscreen.tap(point.x+3,point.y+2);
     }else await page.keyboard.press('e');
-    await page.waitForFunction(expected=>BuergeramtLevel.stage===expected,stage,{timeout:5000});await page.waitForTimeout(1000);const after=await inspect();
+    await page.waitForFunction(expected=>BuergeramtLevel.stage===expected,stage,{timeout:5000});
+    const target=stage==='portrait'?Math.atan2(.54,5.43-z):0;
+    await page.waitForFunction(target=>Math.abs(BuergeramtLevel.view.pitch-target)<.05,target,{timeout:5000});const after=await inspect();
     assert.equal(after.stage,stage);assert.equal(after.stick,false);assert.equal(after.look,false);
-    const target=stage==='portrait'?Math.atan2(.54,5.43-z):0;assert.ok(Math.abs(after.view.pitch-target)<.05,`${stage}: scripted pitch owns view`);
+    assert.ok(Math.abs(after.view.pitch-target)<.05,`${stage}: scripted pitch owns view`);
     assert.equal(await page.locator('#amt-look-zone').evaluate(e=>getComputedStyle(e).display),'none');
     row.after=after;await page.screenshot({path:resolve(out,`${name}-scripted-${stage}.png`)});
    }
@@ -130,3 +138,4 @@ try{
  report.complete=true;
 }catch(error){report.failure=error.stack;if(activePage){activeResult.verdict='FAIL';activeResult.failureState=await activePage.evaluate(()=>({view:BuergeramtLevel?.view,stage:BuergeramtLevel?.stage,character:BuergeramtLevel?.characterMood,omen:BuergeramtLevel?.omen,focus:document.activeElement.id,events:__navigationEvents,stick:document.getElementById('amt-move-stick')?.classList.contains('is-active'),look:document.getElementById('amt-look-zone')?.classList.contains('is-active')})).catch(()=>null);await activePage.screenshot({path:resolve(out,`${activeResult.name}-failure.png`)}).catch(()=>{})}throw error}
 finally{writeFileSync(resolve(out,'report.json'),JSON.stringify(report,null,2));await browser.close();await new Promise(done=>server.close(done));}
+

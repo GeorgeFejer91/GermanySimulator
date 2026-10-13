@@ -61,7 +61,7 @@ export function createAmtGaussianScene({THREE,renderer,scene,actorLayer=0,queueL
       ...moving.map(actor=>{const source=states.find(s=>s.id===actor.id);return{id:actor.id,actor,state:source?.mode==='work'?{...source.animation,arc:null,pose:'work'}:source?.animation}})]
       .map(item=>({...item,inView:inView(item.actor,camera),distance:Math.hypot(camera.position.x-item.actor.mesh.position.x,camera.position.z-item.actor.mesh.position.z)}))
       .sort((a,b)=>{
-        const priority=item=>level.characterMood?.id===item.id?-2:item.id==='clerk'&&item.distance<5?-1:0;
+        const priority=item=>amtActorOwnsSpeech(level.lipSpeech,item.id,item.actor)?-3:level.characterMood?.id===item.id?-2:item.id==='clerk'&&item.distance<5?-1:0;
         return priority(a)-priority(b)||Number(b.inView)-Number(a.inView)||a.distance-b.distance;
       });
     const preferred=candidates.find(item=>item.inView&&item.state&&item.distance<5);
@@ -81,9 +81,9 @@ export function createAmtGaussianScene({THREE,renderer,scene,actorLayer=0,queueL
         slots.set(item.id,entry);
         const prepare=async()=>{
           if(request.signal.aborted||controller.signal.aborted||document.hidden)return null;
-          const [module,shared]=await Promise.all([import('./buergeramt-gaussian-animation.js?v=20261011-mouth-consistency'),getOwner()]);
+          const [module,shared]=await Promise.all([import('./buergeramt-gaussian-animation.js?v=20261013-character-lips'),getOwner()]);
           request.signal.throwIfAborted();
-          return module.createGaussianActor({THREE,owner:shared,manifestUrl:`./assets/buergeramt/animation/${item.manifestId??item.id}.json?v=20261011-mouth-consistency`,variant:mobile?'mobile':'desktop',signal:request.signal,queueLoad:enqueue});
+          return module.createGaussianActor({THREE,owner:shared,manifestUrl:`./assets/buergeramt/animation/${item.manifestId??item.id}.json?v=20261013-character-lips`,variant:mobile?'mobile':'desktop',signal:request.signal,queueLoad:enqueue});
         };
         enqueue(prepare).then(effect=>{
           if(request.signal.aborted||slots.get(item.id)!==entry){effect?.dispose();return}

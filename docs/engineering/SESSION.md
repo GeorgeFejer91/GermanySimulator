@@ -91,6 +91,37 @@ physical Android, natural city traversal and perceptual listening remain
 NOT RUN. Existing authored counter staging retains its public-side endpoint;
 its camera/player snap is not a swept walking route. Evidence and causal
 review remain in ignored output/shared-tickets/ and output/playwright/.
+
+
+## Connected speech lips — 2026-10-13
+
+Integrator-owned isolated `connected-lips` worktree, integrated on published `2406224`.
+The user approved the connected-lip prototype and requested applying its method
+across animated characters, then updating the animation skill. Scope: shared
+mouth-paint shader, per-source lip orientation/registration, its native/atlas
+consumers and cache identities, focused renderer/registration tests, existing
+browser fixtures, and owning speech/animation guidance. Preserve recorded bytes,
+cue/media clocks, body phases, paired Gaussian paths, collision, pivots, actor
+scale, background work and disposal. Reuse the existing renderer and assets.
+Keep the shared checkout's pre-existing phone/CSS/world/document work intact.
+
+The fixed-portrait prototype demonstrated attached corners and improved lip
+contours. It did not establish multi-pose or other-character acceptance. Inspect
+every registered native key and affected action interval, atlas fallback, closed
+paint and alpha, plus real media playback, mobile emulation and unchanged browser
+budgets. Physics and Camera reviews must bind the final same candidate. Source
+and emulated checks do not imply physical-device or perceptual listening evidence.
+
+Final mouth-specific candidate fits 67 native keys and 41 atlas sources across
+15 office actor instances. All 861 Node checks, 67-key GPU pixel contracts,
+desktop deep/native mobile/atlas failure-and-closure matrices, four silent
+normal-speed recorded speech captures and 24 quiet hardware cold contexts pass.
+Exact scope, sampling limits and retained whole-face blend softness belong to
+`For-AI/BUERGERAMT.md`; resource deltas belong to `For-AI/ASSET-POLICY.md`.
+The new-character authoring guide is published at portable skill revision
+`e7ac5b0`, synced to personal/project copies and independently forward-reviewed
+on asymmetric lips, teeth, partial paper occlusion and recorded changing-pose speech.
+
 # Browser-local Knick name announcements — 2026-10-13
 
 Integrator-owned in the managed knick-local-speech worktree, now including the
@@ -181,3 +212,34 @@ pass on ANGLE/Intel Iris Xe: candidate maximum transfer 17,911,376 bytes, all ni
 inputs accepted and zero errors per run. No performance speedup is claimed.
 Physical Android, natural-duration mission play and perceptual listening are
 NOT RUN. Captured reports and screenshots remain ignored local evidence.
+
+# First-person looking controls — 2026-10-13
+
+Integrator-owned. Arrow Up/Down control pitch in the office and Jobcenter;
+WASD and independent touch movement remain authoritative. Mouse/trackpad hover
+and existing drag/touch look share bounded pitch. The office reticle remains
+an invisible HUD object. Scripted framing, clicking, collision, missions,
+audio ownership and scene teardown retain their existing authority.
+No new assets, dependencies, timers, loading or per-frame render work.
+
+Publish only the thirteen scoped input/style/test/document paths. Preserve
+the latest published intro, portrait, flame, cavern rumble and JWD changes.
+A GitHub commit/tree/ref transaction with an expected parent protects those
+changes after local Git metadata became unavailable. Independent Physics
+and Camera source reviews, silent native keyboard/mouse/touch browser checks,
+Pages-selected Node gates and existing browser budgets own acceptance.
+Physical Android and perceptual listening remain separate NOT RUN checks.
+Two exploratory assertions also fail against the original e3b2ba3 baseline:
+the park harness lacks clearInput and the Kripo source regex assumes an
+outdated export order. They are outside this feature and its Pages gates.
+
+### 2026-10-13 — Compact Kripo names and complete recorded backups
+
+The browser-local caller derivative now prepares the name at the first usable companion input or opening-form prefill. One 16.03 MB compressed student uses the shared one-thread worker; the OpenVoice teacher remains private. Only the name runs through the vocoder, with two prerecorded greeting parts totaling 139,864 bytes. The user listened to the actual browser George Fejer greeting and accepted it as “good enough”. The separate intercom remains accepted only as an intercom voice, while fixed Knick dialogue keeps its recordings.
+
+Six fixed phone clips warm silently after the first valid name. Answer starts a ready greeting and fixed body, or immediately plays the complete original introduction and question when synthesis is unsupported/unready. Static spans transitions. Failed named playback can switch to the full backup once, with one scoped caption/English update and unchanged original cue clock/deadline. The intercom has its existing recorded “Nächste bitte!” backup at the allocated counter. Slot completion/pagehide drops media/model buffers; no speech data is written to user folders or app-owned persistent storage.
+
+The work preserves published changes through `d7c2389f`. Shared repository metadata had name-clash damage, so publication uses isolated Git metadata without changing primary files or discarded references. Independent technical review approves the integrated speech diff: 174/174 affected checks and 15/15 mutations pass. The full 854-check sweep exposed three stale test assumptions; the two baseline harness failures were reproduced and repaired, and the affected 18/18 reruns pass. Final controls/speech integration passes 89/89. Voice curator and exact-RGBA delivery checks pass. No world geometry, collision, camera, scale or animation assets change in this speech diff; independent world reviews for already-published features remain with their owners.
+
+Six paired silent phone profiles pass (named and unsupported desktop/Android portrait/landscape), including full desktop conversation, mobile hangup, exact captions, continuous static and zero model transfer on unsupported clients. Named readiness was 4.1–7.0 seconds; measured greeting/body gaps were 0.9–1.3 ms. Six supported/unsupported intercom profiles pass actual playback/counter ownership, with supported readiness 7.9–16.3 seconds on this shared laptop. Six baseline and six candidate root budget runs pass on `0f1d9a44`; six final shipping runs after preserving current controls also pass, maximum 17,923,041 bytes. No speedup, universal pronunciation, universal client timing or peak-memory claim is made. Physical Android is NOT RUN. Forced scene/signaling seams are not a natural-duration mission playthrough. Evidence and the scoped causal review remain under ignored `output/`.
+

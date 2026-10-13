@@ -29,7 +29,7 @@
   <link rel="preload" as="image" href="./assets/fire/kenney-smoke-05.png" crossorigin="anonymous">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Grenze:wght@500;600;700;800;900&amp;family=UnifrakturCook:wght@700&amp;display=swap" media="print" onload="this.media='all'">
   <link rel="stylesheet" href="./styles.css?v=20261013-welcome">
-  <link rel="stylesheet" href="./buergeramt.css?v=20261013-four-calls">
+  <link rel="stylesheet" href="./buergeramt.css?v=20261013-first-person-look">
   <link rel="stylesheet" href="./game-hud.css?v=20261012-browser-smoothness">
 </head>
 <body class="preloading">
@@ -93,7 +93,7 @@
   <section id="form-modal" class="modal" hidden><form id="bureaucracy-form" class="paper"><div class="paper-head"><span>BUNDESREPUBLIK · SPIELFORMULAR</span><span id="form-code">A38</span></div><h2 id="form-title">Antrag auf Antragstellung</h2><p id="form-subtitle"></p><div id="form-fields" class="form-fields"></div><div class="paper-actions"><span id="form-error"></span><button type="submit">EINREICHEN</button></div></form></section>
   <section id="amt-level" class="amt-level" hidden role="region" aria-labelledby="amt-title"><div class="amt-room" aria-hidden="true"><div class="amt-back-wall"><div class="amt-clock">12:00</div><div class="amt-sign">BÜRGERAMT <span id="amt-room-counter">AUFRUF</span></div><div class="amt-window"><div class="amt-clerk">§</div></div><div class="amt-floor"></div></div></div><div class="amt-sheet"><header><span>ANMELDUNG · VORGANG 1/8</span><button id="amt-exit" type="button">AMT VERLASSEN</button></header><small id="amt-status" role="status"></small><h2 id="amt-title"><span id="amt-speaker"></span></h2><p id="amt-line"></p><div id="amt-actions" class="amt-actions"></div></div></section>
   <div id="amt-walk-hud" class="amt-walk-hud" hidden><div class="amt-walk-top"><b id="amt-objective">BÜRGERAMT · EINGANG</b><button id="amt-leave" type="button">AMT VERLASSEN</button><a id="amt-compact-reset" href="?geheim=buergeramt">NEU STARTEN</a></div><div class="amt-reticle" aria-hidden="true">+</div><div class="amt-walk-bottom"><span>WASD · GEHEN &nbsp; MAUS / PFEILE · BLICK &nbsp; E · INTERAGIEREN</span><strong id="amt-nearby">ZUR EINGANGSTÜR</strong></div><div id="amt-ambient" class="amt-ambient" aria-live="polite" tabindex="0"></div>
-    <div id="amt-look-zone" class="amt-look-zone" role="group" tabindex="0" aria-label="Blick: ziehen. Aktionen: doppelt tippen. Pfeile links/rechts oder Bild auf/ab" aria-keyshortcuts="ArrowLeft ArrowRight PageUp PageDown"></div>
+    <div id="amt-look-zone" class="amt-look-zone" role="group" tabindex="0" aria-label="Blick: Maus bewegen, ziehen oder Pfeiltasten drücken. Aktionen: doppelt tippen." aria-keyshortcuts="ArrowLeft ArrowRight ArrowUp ArrowDown PageUp PageDown"></div>
     <div class="amt-touch-controls"><div class="amt-move-pad"><div id="amt-move-stick" class="amt-move-stick" role="group" tabindex="0" aria-label="Gehen: ziehen oder WASD drücken">
       <svg viewBox="0 0 128 128" aria-hidden="true"><path d="M64 12v14m-5-9 5-5 5 5M64 116v-14m-5 9 5 5 5-5M12 64h14m-9-5-5 5 5 5M116 64h-14m9-5 5 5-5 5"/></svg><span class="amt-stick-thumb" aria-hidden="true"></span>
     </div><span class="amt-nav-label">GEHEN</span></div></div>
@@ -133,23 +133,24 @@
 <script src="./assets/vendor/qrcode/qrcode.js"></script>
 <script src="./assets/vendor/vdoninja/1.5.5/vdoninja-sdk.min.js"></script>
 <script src="./buergeramt-time.js?v=20261012-browser-smoothness"></script>
-<script src="./buergeramt-link.js?v=20261013-local-knick"></script>
+<script src="./buergeramt-link.js?v=20261013-local-name"></script>
 <script src="./buergeramt-story.js?v=20261013-kripo-ending"></script>
 <script src="./buergeramt-voice-profiles.js?v=20261012-one-knick"></script>
 <script src="./buergeramt-fever.js?v=20261012-browser-smoothness"></script>
 <script src="./buergeramt-animation-clock.js?v=20261012-browser-smoothness"></script>
-<script src="./buergeramt-lips.js?v=20261013-kripo-ending"></script>
+<script src="./buergeramt-lips.js?v=20261013-character-lips"></script>
 <script src="./buergeramt-goop.js?v=20261013-goop-grace"></script>
-<script src="./knick-speech.js?v=20261013-local-knick"></script>
-<script src="./buergeramt.js?v=20261013-portrait-trigger"></script>
+<script src="./knick-speech.js?v=20261013-local-name"></script>
+<script src="./buergeramt.js?v=20261013-local-name"></script>
 <script type="module" src="./buergeramt-fit.js?v=20261013-four-calls"></script>
 <script src="./character-interactions.js?v=20261012-browser-smoothness"></script>
 <script src="./tourist-animation.js?v=20261012-browser-smoothness"></script>
 <script src="./jwd-gardens.js?v=20261013-jwd-gardens"></script>
-<script src="./game.js?v=20261013-overlord-fury-welcome"></script>
+<script src="./game.js?v=20261013-jwd-signs"></script>
 <script type="module" src="./game-hud.js?v=20261013-welcome"></script>
 <script type="module" src="./subtitle-layout.js?v=20261012-browser-smoothness"></script>
 <script type="module" src="./quiz-layout.js?v=20261012-browser-smoothness"></script>
 <script type="module" src="./world3d.js?v=20261013-void-release"></script>
 </body>
 </html>
+

@@ -79,10 +79,12 @@ for(const [html,next] of [[index,"game.js"],[diagnostic,"const goerlitzerPark="]
  const position=html.indexOf('src="./goerlitzer-park.js');
  assert.ok(position>=0&&position<html.indexOf(next),"shared data must load before its entry-point consumer");
 }
-const debugSandbox={window:{}};
+const debugSandbox={window:{},clearInput:()=>{}};
 vm.runInNewContext(shared,debugSandbox);
-vm.runInNewContext(`${between(diagnostic,"const goerlitzerPark=","const dist=")}\n${line(diagnostic,"function blocked(")}\nglobalThis.blocked=blocked;`,debugSandbox);
+vm.runInNewContext(`${between(diagnostic,"const goerlitzerPark=","const dist=")}\n${between(diagnostic,"function clearInput(){",'addEventListener("blur"')}\n${line(diagnostic,"function blocked(")}\nglobalThis.blocked=blocked;`,debugSandbox);
 const debugBridge=debugSandbox.window.Germany3DBridge;
+debugBridge.getInput().KeyW=true;debugBridge.clearInput();
+assert.equal(debugBridge.getInput().KeyW,false,"diagnostic bridge must release held movement input");
 assert.equal(debugBridge.goerlitzerPark,debugSandbox.window.GoerlitzerPark,"diagnostic must use the same data authority");
 for(const tree of debugBridge.goerlitzerPark.trees)assert.ok(debugBridge.trees.includes(tree),"diagnostic must not offset park trees twice");
 assert.equal(debugSandbox.blocked(park.x+park.w/2,park.y+park.h/2),true,"diagnostic must also close the interior");

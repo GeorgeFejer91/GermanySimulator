@@ -38,6 +38,11 @@ try{
   await page.waitForTimeout(500);const initial=await page.evaluate(()=>Germany3D.jobcenter);assert.equal(initial.phase,'approach');
   await page.screenshot({path:resolve(out,name+'-distant.png')});
   if(name==='desktop'){
+   await page.keyboard.down('ArrowUp');await page.waitForFunction(p=>Germany3D.jobcenter.pitch>p+.12,initial.pitch);await page.keyboard.up('ArrowUp');const up=await page.evaluate(()=>Germany3D.jobcenter);assert.equal(up.x,initial.x);assert.equal(up.z,initial.z);
+   await page.screenshot({path:resolve(out,name+'-arrow-up.png')});
+   await page.keyboard.down('ArrowDown');await page.waitForFunction(p=>Germany3D.jobcenter.pitch<=p,initial.pitch);await page.keyboard.up('ArrowDown');
+   await page.mouse.move(850,400);const beforeHover=await page.evaluate(()=>Germany3D.jobcenter);await page.mouse.move(890,360,{steps:4});const hover=await page.evaluate(()=>Germany3D.jobcenter);assert.ok(hover.yaw<beforeHover.yaw&&hover.pitch>beforeHover.pitch);assert.equal(hover.z,beforeHover.z);
+   await page.mouse.move(850,400,{steps:4});assert.equal(await page.locator('#jobcenter-input').evaluate(e=>getComputedStyle(e).cursor),'none');
    await page.keyboard.down('KeyS');await page.waitForTimeout(600);await page.keyboard.up('KeyS');
    assert.ok((await page.evaluate(()=>Germany3D.jobcenter.distance))>initial.distance,'walking away is unrestricted');
    await page.keyboard.down('KeyW');await page.waitForFunction(()=>Germany3D.jobcenter.phase==='speaking');await page.keyboard.up('KeyW');
@@ -84,3 +89,4 @@ try{
  const diagnostic=await browser.newContext();await diagnostic.addInitScript(silenceAudio);const p=await diagnostic.newPage();await p.goto(`http://127.0.0.1:${server.address().port}/3d.html`);await p.waitForFunction(()=>window.Germany3D?.ready);assert.ok(await p.evaluate(()=>Germany3DBridge.buildings.some(b=>b.id==='jobcenter')));await diagnostic.close();
  writeFileSync(resolve(out,'browser-report.json'),JSON.stringify(report,null,2));
 }finally{await browser.close();server.close()}
+

@@ -121,14 +121,20 @@ test('silent readable fallback conserves its progress under a gradual tempo chan
  const done=link.sent.find(message=>message.type==='police-done');assert.equal(done.mode,'fallback');assert.equal(done.atMs,1000+remaining);
 });
 
-test('only the personalized greeting samples tempo; fixed dialogue remains recorded',()=>{
- const h=harness('phone',{candidatePhone:true}),link=h.phoneReady();h.node('phone-name').value='Erika Mustermann';h.node('phone-form').dispatchEvent(new Event('submit',{cancelable:true}));
+test('personalized greeting media and fixed dialogue follow the same live office tempo',()=>{
+ const h=harness('phone',{candidatePhone:true}),played=[],Audio=h.window.Audio;
+ vm.runInContext(source('For-AI/AUDIO-TEXT-LIBRARY.js'),h.context);
+ h.window.Audio=h.context.Audio=class extends Audio{play(){played.push(this);return super.play()}};
+ const binding=h.window.GermanySimulatorAudioText.productionVoices.kriminalpolizei;
+ h.window.GermanyKripoSpeech={validName:value=>value,rememberName(){},dispose(){},peek:()=>({status:'ready',text:h.window.BuergeramtStory.call.greeting('Erika Mustermann')}),
+  lease:()=>({url:'blob:prepared-kripo',voiceId:'kriminalpolizei',profileId:binding.profileId,referenceSha256:binding.referenceSha256,release(){}})};
+ const link=h.phoneReady();h.node('phone-name').value='Erika Mustermann';h.node('phone-form').dispatchEvent(new Event('submit',{cancelable:true}));
  link.message({type:'ticket',number:'B-223',counter:3});link.message({type:'call-arm',id:'grass'});link.message({type:'call',id:'grass',line:h.window.BuergeramtStory.call.body,greeting:h.window.BuergeramtStory.call.greeting('Erika Mustermann'),ringAtPhoneMs:0,ringAtUtcMs:null,leadMs:2200});
  link.message({type:'office-tempo',rate:.5});h.node('phone-answer').click();
- const first=h.synth.current;assert.ok(Math.abs(first.rate-.87*.5)<1e-9);assert.ok(Math.abs(first.pitch-.66*.5)<1e-9);
- link.message({type:'office-tempo',rate:.7});assert.ok(Math.abs(first.rate-.87*.5)<1e-9);h.synth.end();h.tick(20);
- assert.equal(h.audio.recordings[0].playbackRate,.7);h.audio.recordings[0].end();h.tick(1);
- link.message({type:'police-line',index:0,line:h.window.BuergeramtStory.police[0]});h.tick(20);assert.equal(h.audio.recordings[1].playbackRate,.7);assert.equal(h.synth.spoken.length,1);
+ const first=played[0];assert.equal(first.src,'blob:prepared-kripo');assert.equal(first.playbackRate,.5);assert.equal(first.preservesPitch,false);
+ link.message({type:'office-tempo',rate:.7});assert.equal(first.playbackRate,.7);h.tick(20);first.end();
+ assert.equal(played[1].playbackRate,.7);assert.match(played[1].src,/kriminalpolizei-opening-body\.mp3$/);played[1].end();h.tick(1);
+ link.message({type:'police-line',index:0,line:h.window.BuergeramtStory.police[0]});h.tick(20);assert.equal(played[2].playbackRate,.7);assert.equal(h.synth.spoken.length,0);
 });
 
 test('expired or hidden phone attempts cancel media and cannot absorb later tempo',()=>{

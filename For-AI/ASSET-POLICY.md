@@ -838,9 +838,13 @@ doors are unchanged. Heiko has procedural blond hair, stubble and a ribbed brown
 zip-neck sweater; his instance buffers retire with his owned actor geometry.
 The private reference photo is not a runtime asset. The neighborhood requests
 no municipal GLBs, placard images or character atlases. Six small canvas
-nameplates and one street sign use 1,048,576 decoded
+nameplates and one combined locality/street sign use 1,441,792 decoded
 RGBA bytes, no mipmaps. The house/four-character/garden/street-sign diagnostic
-has 294 meshes, 13,242 triangles, 245,724 geometry bytes and 30,528 instance bytes.
+has 295 meshes, 13,244 triangles, 245,724 geometry bytes and 30,528 instance bytes.
+The yellow JWD sign uses a 512 × 320 canvas shared by separate front/back planes;
+its unchanged solid post stays below overhead signage with 2.025 units of clear
+height. Station nameplates reuse the existing station canvases and add no root
+asset requests. The diagnostic page now includes the matching JWD platform.
 The garden extension adds three fitted car silhouettes, clipped/ragged hedges,
 upright/fallen gnomes and instanced grass details with no asset requests or new
 textures. Shared authored rectangles bound every solid, including car wheels
@@ -881,6 +885,17 @@ candidate startup peaked at 17,982,616 local uncompressed bytes. No new texture
 or asset request was added. Independent geometry/camera reviews and actual A38
 form-submission/neighbor-introduction playtests passed; physical Android remains
 unavailable. Evidence is under `output/jwd-floors-heiko/`.
+
+The locality/station signage update compared one cold seed-42 run per viewport
+against `40bd396`, with the same JWD position, Chrome 155 and Iris Xe renderer.
+Desktop active p95 was 21.5→30.2 ms and portrait emulation 29.7→34.8 ms;
+input p95 was 33.9→28.6 ms and 25.5→36.1 ms. These small samples do not
+establish a performance improvement. All nine inputs responded in each run,
+with zero page errors; startup peaked at 17,579,415 local uncompressed bytes
+and the existing startup/title/buffer guards passed. Independent physics and
+camera reviews passed, including root/diagnostic portrait and landscape and
+the optional satire kit. Physical Android remains untested. Evidence is under
+`output/jwd-signs/`.
 
 The Bürgeramt entrance radiance is original runtime geometry: one retained door
 plane, one 5 × 5 ray/halo shader plane, and one short-range shadow-free point
@@ -1179,6 +1194,21 @@ fallback and lifecycle; physical-device and listening evidence remain separate.
 
 `buergeramt-lips.js` owns one cue track and one lazy 425-kernel instanced native-paint patch for the currently speaking atlas actor. It borrows the actor texture and shares its registration, breathing, tint, fog and depth policy; cancellation, exit and pagehide release ownership. Whole-body Gaussian paint consumes the same continuous cue shape in its existing shader and suppresses the atlas patch. `buergeramt-mouth-paint.js` separates painted lips and lower jaw around a visible, bounded oral cavity, retaining original closed paint at rest. All 15 office actor instances share this rig and retain their body bounds and floor pivots.
 
+The connected-lip revision fits the individual crease, corners, source cavity,
+opening contours, rounding and teeth for all 67 native paintings and 41 atlas
+source poses. Inactive speech returns the exact source; an owned closed cue
+compresses an existing opening. Both native endpoints and the atlas fallback
+use the shared bounded paint field. Against published `2406224`, the twelve runtime
+manifests add 60,207 uncompressed LF bytes, the three mouth modules add 11,458,
+and the atlas profiles occupy 30,514 served bytes.
+One lazy office-only metadata request joins
+the existing asset queue; invalid/missing atlas profiles retain original paint
+and no mouth hole. No new texture, geometry, clock or dependency is introduced.
+Native image residency remains at most three textures per admitted actor; the
+existing mobile/desktop admission limits remain one/two. The active speaking
+counter receives priority within that limit. Validation and remaining art limits
+belong to BUERGERAMT.md.
+
 Recorded speech lazily loads `assets/buergeramt/speech/mouth-cues.js` when the office requests a clip or its existing Gaussian owner. All eligible office recordings, including the omen, have exact path/hash bindings, phonetic intervals and 100 Hz compact acoustic envelopes. The shared builder replaces the former omen-only data/pipeline. It uses local FFmpeg/Rhubarb and reuses analysis only when the exact recording hash, source and complete cue data match; optional installed Whisper diagnostics remain offline. The module is cached once, with decoded envelopes in a weak cache; existing cue cancellation/watchdogs own async preparation and disposal. Audio playhead sampling replaces both text-length timing and the additional 35 ms visual filter. Browser speech and optional unanalyzed preview recordings retain estimated articulation. See `assets/buergeramt/speech/PROVENANCE.md` for reproduction and precision limits.
 
 The mouth patch copies its actor's layer mask on every update so both use the final office actor pass with the existing opaque room depth. A hidden atlas replacement cannot keep a visible patch. Disposal and office exit release the patch and restore ordinary actor ownership. Final integration evidence and measured limits are in `BUERGERAMT.md`.
@@ -1245,3 +1275,9 @@ The appointment intercom loads its 16.03 MB compressed name model only after the
 Preparation is serial, limited to twelve pending jobs and eight complete call WAVs. A same-name batch resolves all matching counter requests without repeated inference or nested retained bundles. Idle workers terminate after five seconds; one encoded model buffer remains in page RAM for a verified worker restart. Hidden pages suspend preparation; exit/replay/pagehide clear transient speech and model buffers. Fetches use no-store; the application writes no speech data to persistent storage or user files. A 180-second terminal preparation bound retains captions and the normal appointment gate on failure.
 
 Three silent production-worker checks pass on desktop and Android portrait/landscape emulation. On this laptop, first preparation took 3.3–4.0 seconds including startup; native name-only decoding typically took 0.09–0.22 seconds. These observations do not establish physical-phone performance or universal client speed. Root cold-start budgets and name-inference input/render observations are separate release evidence.
+
+Kripo greeting names reuse the same one-thread pipeline with a separate 16.03 MB model on the companion. Two fixed parts add 139,864 bytes; no client loads the OpenVoice teacher or a second conversion model. Unsupported WASM SIMD or missing required APIs fail before model/runtime HTTP. The first usable name warms six fixed call recordings in native media buffers, with an eight-clip cap and no startup preload or playback. A ready name greeting continues into the fixed body; an unavailable greeting immediately selects the complete original introduction and question. Static spans transitions, and slot completion/pagehide releases media buffers. The intercom likewise keeps its recorded “Nächste bitte!” backup at the allocated counter.
+
+Final silent paired native-media checks pass on desktop and Android portrait/landscape emulation for both the named and complete recorded backup paths. Named greeting readiness was 4.1–7.0 seconds on this laptop; the prewarmed body followed by 0.9–1.3 ms with static active. Unsupported cases requested no model. Three final direct-office intercom checks pass with one model transfer, idle release and responsive input; observed first readiness was 7.9–16.3 seconds and input admission 17–196 ms on the shared laptop. Native name-only median 0.156 seconds is a separate CPU2 observation, not smartphone timing.
+
+Six baseline and six speech-candidate root cold runs pass on published base `0f1d9a44`. After preserving the newer published controls, another six shipping-candidate runs pass the 18 MB transfer, title cadence, drawing-buffer, input and error guards; maximum transfer is 17,923,041 bytes. These measurements do not establish a speedup. Reports remain in ignored task output. No physical Android or universal peak-memory/speed claim.
