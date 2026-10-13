@@ -82,7 +82,7 @@ try{
         const state=await page.evaluate(()=>({floor:Germany3D.amtFloor,portrait:Germany3D.amtPortraitMelt,lamps:Germany3D.amtLamps,clock:BuergeramtLevel.floorState}));
         const progress=time/90;assert.ok(Math.abs(state.clock.speed-(.65+.35*progress))<1e-8);
         assert.ok(Math.abs(state.clock.goop-(1-progress))<1e-8);assert.equal(state.portrait.melt,state.floor.melt);
-        if(!process.env.PORTRAIT_SOURCE_FILE)assert.equal(state.portrait.paintMelt,Math.min(1,state.floor.melt*1.15));
+        if(!process.env.PORTRAIT_SOURCE_FILE)assert.equal(state.portrait.paintMelt,Math.min(1,state.floor.melt*1.3));
         assert.ok(state.lamps.levels.every(level=>Math.abs(level-progress)<1e-6));assert.equal(state.floor.failure,null);
         if(time===90)assert.equal(state.floor.targets,0);
         const screenshot=await page.screenshot({path:resolve(out,`${name}-recovery-${time}s.png`)});
@@ -94,7 +94,7 @@ try{
       assert.deepEqual(errors,[]);report.cases.push({name,captures,errors});console.log(name,'recovery PASS');await context.close();continue;
     }
     const captures=[];
-    for(const time of [0,30,60,89.9,90,90.1,120,150,210,290,370,450,510,570,600,780,900,1200]){
+    for(const time of [0,30,60,89.9,90,90.1,120,150,210,290,370,420,450,510,570,600,780,900,1200]){
       await page.evaluate(time=>{__floorGpu.advance(time-BuergeramtLevel.floorState.time);__floorRender()},time);
       const state=await page.evaluate(()=>({...Germany3D.amtFloor,portrait:Germany3D.amtPortraitMelt,lamps:Germany3D.amtLamps,pigment:__floorGpu.stats(),render:Germany3D.inspectAssets().render,memory:Germany3D.inspectAssets().memory}));
       assert.equal(state.failure,null);assert.equal(state.time,time);assert.equal(state.targets,time<=90||name==='procedural-fallback'?0:2);assert.equal(state.speed,1-.35*state.melt);
@@ -104,7 +104,8 @@ try{
       assert.deepEqual(state.resolution,compact?[128,160]:[256,320]);
       assert.equal(state.textureBytes,time<=90||name==='procedural-fallback'?0:(compact?128*160:256*320)*32);
       assert.equal(state.portrait.melt,state.melt);
-      if(!process.env.PORTRAIT_SOURCE_FILE)assert.equal(state.portrait.paintMelt,Math.min(1,state.melt*1.15));if(time>=570&&state.pigment){assert.ok(state.pigment.paint>.00002,'portrait paint enters the persistent floor');assert.ok(state.pigment.colored>.00002,'actual portrait colors mix with the tiles');}if(state.pigment){assert.ok(state.pigment.white>.02&&state.pigment.black>.02,'retain both oils through the waves');assert.ok(state.pigment.variance>.025,'do not diffuse to a featureless grey floor');}
+      if(!process.env.PORTRAIT_SOURCE_FILE)assert.equal(state.portrait.paintMelt,Math.min(1,state.melt*1.3));if(time>=570&&state.pigment){assert.ok(state.pigment.paint>.00002,'portrait paint enters the persistent floor');assert.ok(state.pigment.colored>.00002,'actual portrait colors mix with the tiles');}if(state.pigment){assert.ok(state.pigment.white>.02&&state.pigment.black>.02,'retain both oils through the waves');assert.ok(state.pigment.variance>.025,'do not diffuse to a featureless grey floor');}
+      if(time===420&&state.pigment){assert.ok(state.pigment.paint>.000001,'portrait paint reaches the floor before the previous drip onset');assert.ok(state.pigment.colored>.000001,'early deposited portrait colors mix into the black and white oil');}
       const screenshot=await page.screenshot({path:resolve(out,`${name}-${time}s.png`)});captures.push({time,...state,screenshotHash:createHash('sha256').update(screenshot).digest('hex')});
       if(time===60){
         // The central aisle avoids the Nummernflüsterer's x=-3.25..-2.65

@@ -21,9 +21,9 @@ test('loaded portrait and floor share the delayed wave; missing paint stays legi
   f.effect.update(null);assert.equal(f.effect.inspect().melt,0);assert.equal(f.effect.inspect().dripsVisible,false);
   f.effect.update({time:0,visualTime:0});assert.equal(f.effect.inspect().melt,0,'next visit is an intact portrait');
 });
-test('portrait paint advances fifteen percent faster while retaining the room clock and full-melt cap',()=>{
+test('portrait paint advances thirty percent faster while retaining the room clock and full-melt cap',()=>{
   const f=fixture();f.effect.setTexture({actualPaint:true});
-  for(const [amount,expected] of [[0,0],[.25,.2875],[.5,.575],[.8,.92],[1,1]]){
+  for(const [amount,expected] of [[0,0],[.25,.325],[.5,.65],[.8,1],[1,1]]){
     f.effect.update({time:BuergeramtGoop.ageForMelt(amount),visualTime:123});
     assert.ok(Math.abs(f.effect.inspect().paintMelt-expected)<1e-10);
     assert.equal(f.effect.inspect().clock,123);

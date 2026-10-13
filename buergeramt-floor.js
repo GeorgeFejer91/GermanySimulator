@@ -1,7 +1,7 @@
 // Persistent pigment transport, not a pressure/velocity solver. The flat floor
 // stays solid; only its paint and shallow specular ridges melt.
 import './buergeramt-goop.js?v=20261013-goop-grace';
-import {portraitPaintGlsl} from './buergeramt-portrait-melt.js?v=20261013-portrait-melt15';
+import {portraitPaintGlsl} from './buergeramt-portrait-melt.js?v=20261013-portrait-melt30';
 const STEP=1/20;
 export function amtFloorMelt(time){return globalThis.BuergeramtGoop.goop(time);}
 const coordinates=`

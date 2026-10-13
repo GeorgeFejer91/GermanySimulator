@@ -461,6 +461,7 @@ function showPotatoMirror(){
  content(story.playerIdentity.speaker,story.potatoMirror.line,[{run:()=>{setStage(queueStage());setStatus(activated?"WARTENUMMER "+number+" · AUFRUFTAFEL":scan===lastScanId?resumeStatus:"NAME AM TELEFON EINTRAGEN")}}],null,null,null,null,{fallback:"captions",subtitle:story.potatoMirror.english,readableMs:story.potatoMirror.line.length*55});
 }
 function showPresidentPortrait(){
+ if(!restoration&&floorClock<goop.delay){visualClock+=goop.delay-floorClock;floorClock=goop.delay;}
  const scan=lastScanId,resumeStatus=status.textContent,rows=story.presidentPortrait.lines;
  const text=rows.map(row=>row.line).join(" "),subtitle=rows.map(row=>row.english).join(" "),parts=[0,2].map(start=>rows.slice(start,start+2).map(row=>row.line).join(" "));
  setStage("portrait");setStatus("BUNDESPRÄSIDENT · GEDANKEN");
