@@ -1,4 +1,5 @@
 // One scene on the city's renderer and frame clock. No room edges, floor texture or horizon.
+import {createJobcenterRelease} from './buergeramt-entry.js?v=20261013-void-release';
 import {createJobcenterRumble,sampleJobcenterRumble} from './jobcenter-rumble.js?v=20261013-overlord-fury';
 const clamp=(n,a=0,b=1)=>Math.max(a,Math.min(b,n));
 
@@ -80,42 +81,44 @@ const flameFragment=`
  float noise(vec2 p){vec2 i=floor(p),f=fract(p);f=f*f*(3.-2.*f);return mix(mix(hash(i),hash(i+vec2(1,0)),f.x),mix(hash(i+vec2(0,1)),hash(i+vec2(1,1)),f.x),f.y);}
  float fbm(vec2 p){return noise(p)*.54+noise(p*2.03)*.28+noise(p*4.07)*.13+noise(p*8.01)*.05;}
  void main(){
-  vec2 p=vec2((vUv.x-.5)*2.,vUv.y);float t=uTime*(1.3+uAnger*.9);
+  vec2 p=vec2((vUv.x-.5)*2.,vUv.y);float t=uTime*(1.3+uAnger*.9+uDismissal*.7);
   float n=fbm(vec2(p.x*5.,p.y*6.-t*2.));
   float tongues=sin(p.x*19.+n*7.+t)*.07+sin(p.x*31.-t*1.6)*.04;
   float bend=sin(p.y*8.-t*2.)*.07*p.y*(.3+uAnger);
   float width=.37*pow(max(.001,1.-p.y),.68)+.07*n+uEnergy*.035;
   float shape=width-abs(p.x+bend)+(n-.5)*(.22+.09*uAttack)+tongues*p.y;
   float fire=smoothstep(-.09,.12,shape)*smoothstep(0.,.09,p.y)*(1.-smoothstep(.72+n*.19,1.,p.y));
-  float hornCentre=.16+.24*smoothstep(.42,.97,p.y);
-  float horns=(1.-smoothstep(.015,.07*(1.-p.y)+.022,abs(abs(p.x)-hornCentre)+(n-.5)*.028))*smoothstep(.4,.59,p.y)*(1.-smoothstep(.88,.99,p.y));
-  fire=max(fire,horns*uAnger);
+  // Broad rising fire with a serrated crown; the face is negative space inside it.
+  float crown=sin(p.x*36.+n*4.+uTime*.8)*.055*uAnger*p.y;
+  fire=max(fire,smoothstep(-.05,.07,shape+crown)*smoothstep(.45,.68,p.y)*(1.-smoothstep(.86,.98,p.y))*.8);
+  float heat=smoothstep(0.,1.,uDismissal);
   float core=clamp(shape*3.8,0.,1.)*(1.-p.y)*1.6;
-  vec3 color=mix(vec3(1.,.07,.002),vec3(1.,.56,.018),clamp(core+n*.25,0.,1.));
-  color=mix(color,vec3(1.,.94,.57),pow(clamp(core,0.,1.),2.));
-  float glow=exp(-length(vec2(p.x*3.,(p.y-.3)*1.6))*5.)*.14;
-  // A scorched skull, sharply canted eyes and incandescent fangs retain speech motion.
-  float skull=exp(-pow(p.x/.265,4.)-pow((p.y-.39)/.22,4.))*uAnger;
-  color=mix(color,vec3(.16,.011,.002)*(1.+n),skull*.83);
-  vec2 eye=vec2(abs(p.x)-.135,p.y-(.48+abs(p.x)*.43));
-  float sockets=exp(-pow(eye.x/.105,4.)-pow(eye.y/.053,2.))*uAnger;
-  color*=1.-sockets*.8;
-  float eyes=exp(-pow(eye.x/.083,4.)-pow(eye.y/(.017+abs(p.x)*.023),2.))*uAnger;
-  float mouthWidth=.145+.025*uEnergy;
-  float mouthCurve=.265+.03*pow(abs(p.x)/mouthWidth,1.7);
-  vec2 jaw=vec2(p.x/mouthWidth,(p.y-mouthCurve)/(.022+.081*uEnergy));
-  float mouthDistance=length(jaw);
-  float mouth=1.-smoothstep(.72,1.,mouthDistance);
-  float lip=(1.-smoothstep(.95,1.5,mouthDistance))-mouth;
-  color*=1.-lip*.65*uAnger;
-  vec3 hellfire=vec3(1.8,1.35,.66);
-  color=mix(color,hellfire,eyes);
-  float upperFangs=smoothstep(-.4,-.22,jaw.y)*(1.-smoothstep(max(0.,jaw.y+.35)*.19,max(0.,jaw.y+.35)*.19+.035,abs(abs(jaw.x)-.48)));
-  float lowerFangs=(1.-smoothstep(.08,.2,jaw.y))*(1.-smoothstep(max(0.,.16-jaw.y)*.13,max(0.,.16-jaw.y)*.13+.025,abs(abs(jaw.x)-.22)));
-  vec3 furnace=mix(vec3(.95,.055,.005)*(1.+n*.8),hellfire,clamp(upperFangs+lowerFangs,0.,1.));
-  color=mix(color,furnace,mouth*uAnger);
-  color+=hellfire*lip*.34*uAnger;
-  gl_FragColor=vec4(color*(.8+uEnergy*.65+uAttack*.12+uRumble*.13+uDismissal*.12),clamp(fire+glow,0.,1.));
+  vec3 ember=mix(vec3(1.,.045,.001),vec3(1.,.35,.008),clamp(core+n*.25,0.,1.));
+  vec3 whiteHeat=vec3(1.75,1.48,.85);
+  vec3 color=mix(ember,whiteHeat,clamp(pow(max(0.,core),2.)*.65+heat*(.3+core*.45),0.,.96));
+  float glow=exp(-length(vec2(p.x*3.,(p.y-.3)*1.6))*5.)*(.14+heat*.13);
+  float shadow=exp(-pow(p.x/.29,4.)-pow((p.y-.43)/.25,4.))*uAnger;
+  color*=1.-shadow*.78;
+  // A single lidless furnace eye: a dark slit suspended in a burning almond.
+  vec2 eye=vec2(p.x/.28,(p.y-.59)/.081);
+  float eyeShape=pow(abs(eye.x),1.5)+pow(abs(eye.y),1.25);
+  float eyeRim=exp(-pow((eyeShape-.80)/.30,2.))*uAnger;
+  float iris=(1.-smoothstep(.48,1.1,eyeShape))*uAnger;
+  float pupil=exp(-pow(p.x/.019,4.)-pow((p.y-.59)/.072,6.))*uAnger;
+  vec3 eyeFire=mix(vec3(1.2,.19,.005),whiteHeat,.4+heat*.6);
+  color=mix(color,eyeFire,iris*.83);
+  color+=whiteHeat*eyeRim*.72;
+  color=mix(color,vec3(.001,.0002,0.),pupil);
+  // The speaking mouth is a torn, depthless opening, never a grin or teeth.
+  float mouthWidth=.075+.018*uEnergy;
+  float mouthCentre=.325+sin(p.y*28.+uTime*.28)*.003;
+  vec2 jaw=vec2((p.x+(n-.5)*.013)/mouthWidth,(p.y-mouthCentre)/(.022+.068*uEnergy));
+  float mouthDistance=pow(abs(jaw.x),1.5)+pow(abs(jaw.y),1.35);
+  float mouth=(1.-smoothstep(.70,1.02,mouthDistance))*uAnger;
+  float lip=exp(-pow((mouthDistance-1.07)/.19,2.))*uAnger;
+  color+=mix(vec3(.8,.10,.004),whiteHeat,heat*.75)*lip*.38;
+  color=mix(color,vec3(.0002,.0001,0.),mouth);
+  gl_FragColor=vec4(color*(.8+uEnergy*.42+uAttack*.06+uRumble*.13+heat*.25),clamp(fire+glow,0.,1.));
  }
 `;
 
@@ -138,10 +141,18 @@ const tunnelFragment=`
 `;
 
 export function createJobcenterEncounter(T,renderer,bridge){
- let visit=null,serial=0,last=0;
+ let visit=null,serial=0,last=0,release=null,releaseLast=0,releaseBlurred=false;
  const reduced=matchMedia('(prefers-reduced-motion: reduce)');
+ function clearRelease(){release?.dispose();release=null;window.removeEventListener('blur',releaseBlur);window.removeEventListener('focus',releaseFocus);document.removeEventListener('visibilitychange',releaseVisibility);window.removeEventListener('keydown',releaseEscape)}
+ function releaseBlur(){releaseBlurred=true;releaseLast=performance.now()}
+ function releaseFocus(){releaseBlurred=false;releaseLast=performance.now()}
+ function releaseVisibility(){releaseLast=performance.now()}
+ function releaseEscape(e){if(e.code==='Escape')clearRelease()}
  function close(reason='escape'){
-  const v=visit;if(!v)return;visit=null;++serial;
+  clearRelease();const v=visit;if(!v)return;visit=null;++serial;
+  if(reason==='ended'||reason==='fallback-ended'){
+   try{release=createJobcenterRelease({THREE:T,renderer,scene:v.scene,camera:v.camera,mobile:innerWidth<700,reducedMotion:reduced.matches});releaseLast=performance.now();releaseBlurred=false;window.addEventListener('blur',releaseBlur);window.addEventListener('focus',releaseFocus);document.addEventListener('visibilitychange',releaseVisibility);window.addEventListener('keydown',releaseEscape)}catch{clearRelease()}
+  }
   v.abort.abort();v.rumbleSource?.dispose();v.audio.onended=v.audio.onerror=v.audio.onplaying=null;v.audio.pause();v.audio.removeAttribute('src');v.audio.load();
   v.surface.remove();v.style.remove();document.body.classList.remove('jobcenter-inside');
   for(const event of v.events)event[0].removeEventListener(event[1],event[2]);
@@ -151,6 +162,7 @@ export function createJobcenterEncounter(T,renderer,bridge){
  }
  function open(config={}){
   if(visit)return false;
+  clearRelease();
   const id=++serial,scene=new T.Scene();scene.background=new T.Color(0);
   const camera=new T.PerspectiveCamera(68,innerWidth/innerHeight,.03,100000);
   const material=new T.ShaderMaterial({transparent:true,depthWrite:false,side:T.DoubleSide,uniforms:{uTime:{value:0},uEnergy:{value:0},uAttack:{value:0},uAnger:{value:0},uRumble:{value:0},uDismissal:{value:0}},vertexShader:'varying vec2 vUv;void main(){vUv=uv;gl_Position=projectionMatrix*modelViewMatrix*vec4(position,1.);}',fragmentShader:flameFragment});
@@ -169,7 +181,7 @@ export function createJobcenterEncounter(T,renderer,bridge){
   `;
   document.head.append(style);document.getElementById('app').append(surface);document.body.classList.add('jobcenter-inside');
   let effects=null;try{effects=config.effects?.()||null}catch{}
-  const v=visit={id,scene,camera,material,flame,tunnel,audio,surface,style,config,effects,rumbleSource:null,rumbleAttempted:false,rumbleLevel:0,dismissal:0,abort:new AbortController(),events:[],x:0,z:34,yaw:0,pitch:-.015,time:0,distance:34,pressure:0,phase:'approach',mediaStarted:false,mediaPending:false,playSerial:0,failed:false,playback:0,lastMedia:0,stalled:0,energy:0,attack:0,data:null,captionKey:'',captionCues:[],touch:{forward:0,side:0},pointers:new Map()};last=performance.now();
+  const v=visit={id,scene,camera,material,flame,tunnel,audio,surface,style,config,effects,rumbleSource:null,rumbleAttempted:false,rumbleLevel:0,dismissal:0,heat:0,abort:new AbortController(),events:[],x:0,z:34,yaw:0,pitch:-.015,time:0,distance:34,pressure:0,phase:'approach',mediaStarted:false,mediaPending:false,playSerial:0,failed:false,playback:0,lastMedia:0,stalled:0,energy:0,attack:0,data:null,captionKey:'',captionCues:[],touch:{forward:0,side:0},pointers:new Map()};last=performance.now();
   const on=(target,name,fn)=>{target.addEventListener(name,fn);v.events.push([target,name,fn])};
   const current=()=>visit===v&&serial===id;
   function quietRumble(){v.rumbleSource?.dispose();v.rumbleSource=null;v.rumbleAttempted=false;v.rumbleLevel=0;v.dismissal=0}
@@ -228,15 +240,16 @@ export function createJobcenterEncounter(T,renderer,bridge){
    }else v.quietRumble();
    caption(v,duration);
   }
-  const anger=Math.max(v.pressure,v.phase==='speaking'?.85:0),growth=1+v.pressure*5+(v.phase==='speaking'?2:0)+v.dismissal*.9,pulse=reduced.matches?0:v.energy*.42+v.attack*.13+v.rumbleLevel*.12;
+  v.heat+=(v.dismissal-v.heat)*(1-Math.exp(-dt*5));
+  const anger=Math.max(v.pressure,v.phase==='speaking'?.85:0),growth=1+v.pressure*5+(v.phase==='speaking'?2:0)+v.heat*2.4,pulse=reduced.matches?0:v.energy*.30+v.attack*.08+v.rumbleLevel*.12;
   const shudder=reduced.matches?0:v.rumbleLevel*.0025;
   v.camera.aspect=innerWidth/innerHeight;v.camera.updateProjectionMatrix();v.camera.position.set(0,1.65,0);v.camera.rotation.order='YXZ';v.camera.rotation.set(v.pitch+Math.sin(v.time*23)*shudder,v.yaw,Math.sin(v.time*17)*shudder*.6);
   // Camera-relative origin keeps a limitless plane numerically stable in ordinary play.
-  v.flame.position.set(-v.x,growth*.50,-v.z);v.flame.scale.set(growth*.9+pulse,growth+pulse*1.8,1);v.flame.quaternion.copy(v.camera.quaternion);
+  v.flame.position.set(-v.x,growth*.50,-v.z);v.flame.scale.set(growth*(.9+v.heat*.1)+pulse,growth+pulse*1.8,1);v.flame.quaternion.copy(v.camera.quaternion);
   v.tunnel.position.copy(v.flame.position);v.tunnel.scale.set(40,27,1);v.tunnel.quaternion.copy(v.camera.quaternion);
   v.tunnel.material.uniforms.uTime.value=reduced.matches?0:v.time;
-  v.tunnel.material.uniforms.uStrength.value=(1-v.pressure*.85)*(.9+v.energy*.1+v.rumbleLevel*.35);
-  const u=v.material.uniforms;u.uTime.value=reduced.matches?0:v.time;u.uEnergy.value=v.energy;u.uAttack.value=reduced.matches?0:v.attack;u.uAnger.value=anger;u.uRumble.value=v.rumbleLevel;u.uDismissal.value=v.dismissal;
+  v.tunnel.material.uniforms.uStrength.value=(1-v.pressure*.85)*(.9+v.energy*.1+v.rumbleLevel*.35+v.heat*.7);
+  const u=v.material.uniforms;u.uTime.value=reduced.matches?0:v.time;u.uEnergy.value=v.energy;u.uAttack.value=reduced.matches?0:v.attack;u.uAnger.value=anger;u.uRumble.value=v.rumbleLevel;u.uDismissal.value=v.heat;
   renderer.render(v.scene,v.camera);return true;
  }
  function caption(v,duration){
@@ -248,5 +261,11 @@ export function createJobcenterEncounter(T,renderer,bridge){
   const next=layout?.captionAt(v.captionCues,v.playback)||v.captionCues.find(c=>c[0]<=v.playback&&v.playback<c[1])?.[2]||'';
   if(box.textContent!==next)box.textContent=next;box.hidden=!next;
  }
- return {open,close,render,get active(){return !!visit},inspect(){return visit?{active:true,phase:visit.phase,x:visit.x,z:visit.z,yaw:visit.yaw,pitch:visit.pitch,distance:visit.distance,pressure:visit.pressure,energy:visit.energy,attack:visit.attack,rumbleLevel:visit.rumbleLevel,dismissal:visit.dismissal,rumbleActive:!!visit.rumbleSource?.active,playback:visit.playback,mediaStarted:visit.mediaStarted,mediaPaused:visit.audio.paused,failed:visit.failed,captionCues:visit.captionCues.length,resources:{geometries:2,textures:0,media:1},duration:visit.data?.duration||0}:{active:false}}};
+ function renderRelease(doorUv){
+  if(!release)return false;const now=performance.now(),dt=clamp((now-releaseLast)/1000,0,.1);releaseLast=now;
+  if(document.hidden||releaseBlurred||window.GermanyHUD?.paused)return true;
+  try{if(release.render(dt,reduced.matches,doorUv))clearRelease()}catch{clearRelease()}
+  return !!release;
+ }
+ return {open,close,render,renderRelease,get active(){return !!visit},get releasing(){return !!release},inspect(){return visit?{active:true,phase:visit.phase,x:visit.x,z:visit.z,yaw:visit.yaw,pitch:visit.pitch,distance:visit.distance,pressure:visit.pressure,energy:visit.energy,attack:visit.attack,rumbleLevel:visit.rumbleLevel,dismissal:visit.dismissal,heat:visit.heat,rumbleActive:!!visit.rumbleSource?.active,playback:visit.playback,mediaStarted:visit.mediaStarted,mediaPaused:visit.audio.paused,failed:visit.failed,captionCues:visit.captionCues.length,resources:{geometries:2,textures:0,media:1},duration:visit.data?.duration||0}:{active:false,release:release?.inspect()||null}}};
 }

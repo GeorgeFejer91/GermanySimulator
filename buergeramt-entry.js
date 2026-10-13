@@ -115,3 +115,98 @@ export function createBuergeramtEntry({THREE:T,renderer,scene,camera,door,mobile
     dispose(){if(disposed)return;disposed=true;sheetGeometry.dispose();sheetMaterial.dispose();particleGeometry?.dispose();particleMaterial?.dispose();target.dispose();effectScene.clear()},
   };
 }
+
+// A captured Jobcenter frame gives way to the live street beneath it. The caller
+// owns the outside render and clock; this overlay never clears the framebuffer.
+export function createJobcenterRelease({THREE:T,renderer,scene,camera,mobile=false,reducedMotion=false}){
+  const drawing=renderer.getDrawingBufferSize(new T.Vector2());
+  const screenWidth=Math.max(1,drawing.x),screenHeight=Math.max(1,drawing.y);
+  const factor=Math.min(1,(mobile?640:960)/Math.max(screenWidth,screenHeight));
+  const width=Math.max(1,Math.round(screenWidth*factor)),height=Math.max(1,Math.round(screenHeight*factor));
+  const target=new T.WebGLRenderTarget(width,height,{depthBuffer:false,stencilBuffer:false});
+  const previousTarget=renderer.getRenderTarget(),previousAutoClear=renderer.autoClear;
+  try{
+    renderer.setRenderTarget(target);
+    renderer.autoClear=true;
+    renderer.render(scene,camera);
+  }catch(error){target.dispose();throw error}
+  finally{renderer.setRenderTarget(previousTarget);renderer.autoClear=previousAutoClear}
+
+  const aspect=screenWidth/screenHeight;
+  const cols=Math.max(32,Math.round(Math.sqrt((mobile?7000:18000)*aspect)));
+  const rows=Math.max(24,Math.round(cols/aspect));
+  const uniforms={uImage:{value:target.texture},uProgress:{value:0},uReduced:{value:reducedMotion?1:0},
+    uGrid:{value:new T.Vector2(cols,rows)},uDoorUv:{value:new T.Vector2(.5,.5)},uAspect:{value:aspect}};
+  const effectScene=new T.Scene();
+  const effectCamera=new T.OrthographicCamera(-1,1,1,-1,0,1);
+  const sheetGeometry=new T.PlaneGeometry(2,2);
+  const sheetMaterial=new T.ShaderMaterial({uniforms,transparent:true,depthTest:false,depthWrite:false,
+    vertexShader:'varying vec2 vUv;void main(){vUv=uv;gl_Position=vec4(position.xy,0.,1.);}',
+    fragmentShader:`varying vec2 vUv;uniform sampler2D uImage;uniform float uProgress,uReduced,uAspect;
+      uniform vec2 uGrid,uDoorUv;${dissolveGLSL}
+      void main(){
+        vec3 color=texture2D(uImage,vUv).rgb;
+        vec2 cell=floor(vUv*uGrid)+.5;
+        vec2 within=fract(vUv*uGrid)*2.-1.;
+        float peel=released(cell)*exp(-dot(within,within)*1.6);
+        float alpha=uReduced>.5?1.-uProgress:(1.-peel)*(1.-smoothstep(.38,.88,uProgress));
+        gl_FragColor=vec4(color,clamp(alpha,0.,1.));
+        #include <colorspace_fragment>
+      }`});
+  const sheet=new T.Mesh(sheetGeometry,sheetMaterial);sheet.frustumCulled=false;sheet.renderOrder=0;effectScene.add(sheet);
+  let particleGeometry=null,particleMaterial=null;
+  if(!reducedMotion){
+    const quad=new T.PlaneGeometry(2,2);particleGeometry=new T.InstancedBufferGeometry();
+    particleGeometry.index=quad.index;particleGeometry.attributes=quad.attributes;
+    const cells=new Float32Array(cols*rows*2);
+    for(let y=0;y<rows;y++)for(let x=0;x<cols;x++){const i=(y*cols+x)*2;cells[i]=x+.5;cells[i+1]=y+.5}
+    particleGeometry.setAttribute('aCell',new T.InstancedBufferAttribute(cells,2));particleGeometry.instanceCount=cols*rows;
+    particleMaterial=new T.ShaderMaterial({uniforms,transparent:true,depthTest:false,depthWrite:false,
+      vertexShader:`attribute vec2 aCell;varying vec2 vGaussian;varying vec3 vColor;varying float vAlpha;
+        uniform sampler2D uImage;uniform vec2 uGrid,uDoorUv;uniform float uProgress,uAspect,uReduced;
+        ${dissolveGLSL}
+        void main(){
+          vec2 sourceUv=aCell/uGrid;
+          vec2 sourceNdc=sourceUv*2.-1.,doorNdc=uDoorUv*2.-1.;
+          float seed=hash(aCell),release=released(aCell);
+          float delay=.04+.14*min(length((sourceUv-uDoorUv)*vec2(uAspect,1.)),2.)+.13*seed;
+          float travel=clamp((uProgress-delay)/max(.01,.94-delay),0.,1.);
+          float collapse=travel*travel*(3.-2.*travel);
+          vec2 radial=sourceNdc-doorNdc;
+          vec2 arc=vec2(-radial.y,radial.x)*sin(travel*3.14159265)*(.025+.018*seed);
+          vec2 center=mix(sourceNdc,doorNdc,collapse)+arc;
+          float radius=1.65/uGrid.y*mix(1.,.18,collapse);
+          gl_Position=vec4(center+position.xy*radius,0.,1.);
+          vGaussian=position.xy;vColor=texture2D(uImage,sourceUv).rgb;
+          vAlpha=release*(1.-smoothstep(.84,1.,travel))*(1.-uReduced);
+        }`,
+      fragmentShader:`varying vec2 vGaussian;varying vec3 vColor;varying float vAlpha;
+        void main(){float gaussian=exp(-dot(vGaussian,vGaussian)*4.5);
+          gl_FragColor=vec4(vColor,gaussian*vAlpha*.68);
+          #include <colorspace_fragment>
+        }`});
+    const particles=new T.Mesh(particleGeometry,particleMaterial);particles.frustumCulled=false;particles.renderOrder=1;effectScene.add(particles);
+  }
+  let elapsed=0,disposed=false;
+  const frame=()=>{const duration=reducedMotion?.24:1.15;const progress=clamp(elapsed/duration);
+    return {progress,duration,done:progress===1,reducedMotion}};
+  return {
+    render(dt,reduce=reducedMotion,doorUv){
+      if(disposed)return true;
+      if(reduce&&!reducedMotion){elapsed=frame().progress*.24;reducedMotion=true;uniforms.uReduced.value=1}
+      if(doorUv&&Number.isFinite(doorUv.x)&&Number.isFinite(doorUv.y))
+        uniforms.uDoorUv.value.set(clamp(doorUv.x),clamp(doorUv.y));
+      elapsed+=Math.max(0,Math.min(.1,Number.isFinite(dt)?dt:0));
+      const current=frame();uniforms.uProgress.value=current.progress;
+      const oldAutoClear=renderer.autoClear;
+      try{renderer.autoClear=false;renderer.render(effectScene,effectCamera)}
+      finally{renderer.autoClear=oldAutoClear}
+      return current.done;
+    },
+    inspect(){return {...frame(),elapsed,disposed,splats:particleGeometry?.instanceCount||0,
+      capture:[width,height],captureBytes:width*height*4,doorUv:uniforms.uDoorUv.value.toArray(),
+      drawCalls:particleGeometry?2:1,sourceScreenSpace:true}},
+    dispose(){if(disposed)return;disposed=true;sheetGeometry.dispose();sheetMaterial.dispose();
+      particleGeometry?.dispose();particleMaterial?.dispose();target.dispose();effectScene.clear()},
+  };
+}
