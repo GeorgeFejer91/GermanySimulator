@@ -71,7 +71,7 @@ export function runtimeBlock(cast){
 }
 export const neighborSpokenWords=text=>text.normalize('NFKC').toLocaleLowerCase('de').replace(/people\s*(?:&|and)\s*culture/g,'people and culture').replace(/\bmaslos\b/g,'maaslos').replace(/[-‐‑–—]/g,' ').replace(/[^\p{L}\p{N}]+/gu,' ').trim().replace(/\s+/g,' ').replace(/nachbarschafts offside\b/g,'nachbarschafts offsite');
 export function neighborRecordingsBlock(cast,manifests){
- const entries={},seen=new Set();
+ const entries={},bindings=[],bindingIndices=new Map(),seen=new Set();
  for(const manifest of manifests){
   const person=cast.existingAssetProfiles.find(p=>p.voiceId===manifest.voiceId&&p.gameRole==='jwd-neighbor');
   requireMatch(person&&manifest.clips.length+manifest.heldPrivate.length===manifest.requestedLineCount,'Unaccounted neighbor lines');
@@ -84,10 +84,14 @@ export function neighborRecordingsBlock(cast,manifests){
    requireMatch(clip.mouthHz===40&&clip.mouthEnergy.length===Math.ceil(clip.durationSeconds*40)&&clip.mouthEnergy.every(value=>Number.isInteger(value)&&value>=0&&value<=255),'Invalid encoded-media mouth cue');
    const key=clip.voiceId+'\0'+clip.text;requireMatch(!seen.has(key),'Duplicate neighbor recording');seen.add(key);
    const {clipId,voiceId,actorId,profileId,renderer,modelRevision,referenceSha256,referenceOriginalSha256,processing,sha256,mouthHz,mouthEnergy}=clip;
-   entries['./'+clip.file]={id:clipId,voiceId,actorId,profileId,renderer,modelRevision,referenceSha256,referenceOriginalSha256,processing,sha256,mouthHz,mouthEnergy,fixedProduction:true,source:clip.text,english:clip.english,durationMs:Math.round(clip.durationSeconds*1000),trigger:'jwd-neighbor-exact-dialogue',approval:clip.approval,provenanceManifest:manifest.provenanceManifest};
+   const receipt={profileId,renderer,modelRevision,referenceSha256,referenceOriginalSha256,processing,trigger:'jwd-neighbor-exact-dialogue',approval:clip.approval,provenanceManifest:manifest.provenanceManifest},receiptKey=JSON.stringify(receipt);
+   if(!bindingIndices.has(receiptKey)){bindingIndices.set(receiptKey,bindings.length);bindings.push(receipt)}
+   entries['./'+clip.file]={binding:bindingIndices.get(receiptKey),id:clipId,voiceId,actorId,sha256,mouthHz,mouthEnergy,fixedProduction:true,source:clip.text,english:clip.english,durationMs:Math.round(clip.durationSeconds*1000)};
   }
  }
- return 'const neighborRecordings=Object.freeze('+JSON.stringify(entries)+');\n';
+ // Snapshot the verified manifest receipts once; do not inherit the current
+ // production binding, which must still reject a stale recording.
+ return 'const neighborRecordings=Object.freeze((()=>{const bindings='+JSON.stringify(bindings)+',entries='+JSON.stringify(entries)+';return Object.fromEntries(Object.entries(entries).map(([path,{binding,...clip}])=>[path,{...bindings[binding],...clip}]))})());\n';
 }
 export function editedDeliveryComplete(clip){
  const e=clip.deliveryEditing;if(e===undefined||e===null)return true;

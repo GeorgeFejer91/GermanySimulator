@@ -1321,4 +1321,10 @@ Six baseline and six speech-candidate root cold runs pass on published base `0f1
 
 ### Neighborhood miniature paint
 
+The generated voice catalogue serializes identical verified neighbor receipts
+once and reconstructs the same per-take fields on load, saving 6,259 startup
+bytes. Its shared receipts are snapshots of the accepted manifests, separate
+from current production selections, so stale profile bindings still fail.
+Exact text, translations, MP3 hashes, mouth-energy samples and approval remain intact.
+
 Three fictional neighbor atlases are admitted on neighborhood approach through the existing city asset queue. They add no animation loop or decoding dependency. Each 16 x 9 desktop atlas has 128 x 192 cells (2048 x 1728, 13.5 MiB decoded RGBA); the half-resolution mobile variant is 3.375 MiB. All three desktop WebPs total 3,075,008 bytes; all mobile WebPs total 1,056,306 bytes. The new planted listen/greet/look and source-specific speech rows increase decoded residency from 27 to 40.5 MiB for three desktop actors (mobile 6.75 to 10.125 MiB), before GPU copies. The renderer chooses one variant per actor and retains articulated work/load-failure fallback. Both variants have final cleared transparent gutters and source-calibrated ground-distance clocks. Recorded neighbor dialogue loads one exact requested MP3 through the existing foreground asset admission and 16 MiB decoded-audio LRU; final-MP3 mouth energy adds only compact catalog data, with no extra decoder, recognizer or RAF. Final source/recipe ownership is in SPRITE-GENERATION-PROTOCOL.md; source photographs, private clone references and rejected authoring trials do not ship.

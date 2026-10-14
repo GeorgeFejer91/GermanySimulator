@@ -33,6 +33,18 @@ test('fixed runtime takes reject engine, model, reference and processing drift e
  }
 });
 
+test('shared neighbor receipts retain each take and reject a later production selection',()=>{
+ const manifest=JSON.parse(readFileSync('assets/voices/neighbors/inga-manifest.json')),context={};
+ vm.runInNewContext(runtimeBlock(cast)+neighborRecordingsBlock(cast,[manifest])+';this.entries=neighborRecordings;this.selected=productionVoices;this.accepts=productionClip;',context);
+ for(const clip of manifest.clips){
+  const entry=context.entries['./'+clip.file];assert(context.accepts(entry));assert.equal(entry.binding,undefined);
+  for(const field of ['profileId','renderer','modelRevision','referenceSha256','referenceOriginalSha256','processing','sha256'])assert.equal(entry[field],clip[field],field);
+  assert.deepEqual(Array.from(entry.mouthEnergy),clip.mouthEnergy);assert.deepEqual(JSON.parse(JSON.stringify(entry.approval)),clip.approval);
+ }
+ context.selected[manifest.voiceId].profileId='unselected';
+ assert.ok(Object.values(context.entries).every(entry=>!context.accepts(entry)),'recorded receipts must not inherit the current selected profile');
+});
+
 test('compact recording exports retain complete take receipts for strict lookup',()=>{
  const clips=JSON.parse(readFileSync('assets/voices/knick/manifest.json')).clips.slice(0,2),context={};
  vm.runInNewContext(runtimeBlock(cast)+fixedRecordingsBlock(cast,{clips})+';this.entries=knickRecordings;this.accepts=productionClip;',context);
