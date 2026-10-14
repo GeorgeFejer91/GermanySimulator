@@ -1344,7 +1344,9 @@ mouth systems. Mouth attachment acceptance does not certify the retained
 whole-face/body correspondence softness between some authored paintings.
 
 **Audit follow-up validation (2026-10-14).** The candidate integrates published
-`432c240` without changing office art/audio or body, route and media clocks.
+`337a3e7` without changing office art/audio or body, route and media clocks.
+The intervening portrait/floor updates are retained; an exact source comparison
+carries the earlier walking-render evidence through their two import tags.
 The three-view source matrices cover every walking sample, actual action/idle
 atlas cell and all native arcs in both directions. Native intervals have 470
 sampled positions per viewport, each with opening, closed, wide, round and
@@ -1361,12 +1363,26 @@ Missing profiles retain original paint; mobile actual clerk requests and
 native/atlas admission handoff also pass. The Jobcenter's unchanged recording
 now supplies hash-bound closed/open/round/contact cues through the same sampler;
 matched current furnace-style captures verify closure without altering its
-paired eyes or faster forward pinch. All 878 deterministic tests and 24 quiet
-cold browser contexts pass. Camera and Physics receipts and exact resource
+paired eyes or faster forward pinch. All 878 deterministic tests pass on
+`eb22354`; 105 affected checks pass after the final floor integration. The 24
+cold comparison contexts on `432c240` and two later six-context root integration
+runs pass existing guards. Camera and Physics receipts and exact resource
 comparisons remain in the ignored audit output. These checks cover existing
 mouth systems; new JWD painted rigs, unrigged city/quiz faces, retained whole-face
 ghosting, physical Android, perceptual listening and exact phoneme accuracy are
 outside this acceptance.
+
+The current inventory references 22,170 source/cue PNGs, 69 ordered native
+boards and 184 speaking/end PNGs for the 92 lifecycle cases. Four aggregate
+videos exist, with only partial continuous playback review; these do not
+establish full-video, perceptual listening or natural-mission acceptance.
+Admission handoff captures are neutral, not speech during a handoff.
+Replacement-owner checks use a synthetic paused state, not a natural speaker
+exchange. Inactive authored expressions can restore pre-open source paint after
+speech; released mouth parameters do not certify a closed painted expression.
+Independent Physics and Camera reviews pass the scoped mouth repair at the
+final integrated source hashes. Whole-face correspondence softness remains
+outside that local mouth verdict.
 
 **Consistency acceptance.** Independent Physics and Camera reviews accept the
 affected office runtime on tree `bfa5efa2d94a9e1d6ea9f0ad19a7b92426648be1`

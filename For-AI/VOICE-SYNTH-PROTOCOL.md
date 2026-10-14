@@ -4,6 +4,64 @@
 
 ## Fixed voices and the agent workflow (2026-10-11)
 
+### JWD neighbor speech production (2026-10-13)
+
+The user identifies the married neighbors as Professor Dr. Dr. Heiko Maaslos and
+Botschafterin Dr. Inga Maaslos; Frau Fink is the third neighbor. Keep actor IDs
+`jwd-parent`, `jwd-watcher` and `jwd-swabian`: these own movement and the mission's
+three introduction receipts. They are residents encountered during “Nachbarn
+kennen lernen”, not members of a following party. Character names, actor IDs,
+game voice IDs, native profile UUIDs and clip IDs have separate meanings.
+Planned game voice IDs are `jwd-fink`, `jwd-heiko-maaslos` and
+`jwd-inga-maaslos`. Allocate them only through the existing cast authority;
+this protocol is not a second registry or a claim that allocation is complete.
+
+Inga uses the existing saved **GS Inga Maaslos** profile,
+`04e241f5e0734684ba3626aa669a70c1`. Native listing and both live files were
+verified: original SHA-256
+`83d49bbef3995346b6ba352d92c6535b9c97e2d73928ab4c50f592eb0cbb36b7`,
+normalized-reference SHA-256
+`18d6bde7a384e6c58a383155664aee9be36516d48e4bc1eb4c5087b38935dd53`.
+Reuse that UUID without renaming or replacing the profile; keep its original
+audio private. Allocate `jwd-inga-maaslos` through the cast's existing
+`productionVoices` before generation. Heiko and Fink require explicit production
+selections in that same authority; an unrelated similar name is not a binding.
+This protocol records production inputs, not completed recordings or listening.
+
+Use the exact authored `jwdCopy` introductory and repeat-topic pools selected by
+`talkJwdNeighbor`, retaining Berlin Denglisch and each line's existing English
+translation. Inga owns watcher/electric/gardenRules/blinds/schedule; Heiko owns
+parent/paint/concern/polish/parking/latin/smalltalk; Fink owns
+swabian/lawn/sweeping/hedge/letter. A premature greeting belongs to the actual
+addressed resident. Home narration and the burglar are outside these three voice
+allocations. Freeze the final names and exact source text before rendering.
+
+The production addition carries the stable visual actor ID, selected game
+voice ID, exact line/recording identity and current attempt through the
+existing dialogue and stimulus broker, including premature greetings.
+These actor-bound playback fields and renderer getter are not present in the
+inspected baseline. Bind `activeStimulus` to the concrete resident plus its
+existing stimulus generation and `dialogueVoiceToken`, and expose the current
+owner, playback state and native playhead through the existing renderer bridge.
+The renderer samples that current snapshot in its existing pass; a display
+label, `state.characterSpeaker` alone or a queued request is not proof that
+this actor's audio has started. Resolve exact `(voiceId, source)` recordings;
+bind mouth cues to the final encoded identity/hash and its actual buffer/media
+time. Pause holds the sampled cue, while completion, cancellation or replacement
+releases oral ownership. Caption-only/missing media retains exact text and
+inactive source paint. Body release, settle and recovery use the finite
+resident phase specified in the sprite protocol, without another timer or
+media clock.
+
+Validate each final recording's whole text, numbers/negation, native generation
+completion, encoded duration/levels, profile and reference identity. Then exercise
+all three introductions, every repeat-topic pool, pause/resume, cancellation,
+replay, hidden-page and missing-media paths. An introduction receipt still comes
+from completed production dialogue, never from a mouth animation or elapsed cue
+estimate. Silent browser timing, independent ASR, estimated acoustic articulation
+and perceptual listening are different evidence. The fixed-voice workflow below,
+sprite protocol and existing project acceptance gates apply before publication.
+
 ### Allocating and using voice IDs (2026-10-13)
 
 Allocate a stable game `voiceId` to a speaking identity once. Resolve that ID

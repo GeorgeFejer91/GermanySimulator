@@ -1237,6 +1237,15 @@ are not runtime inputs. Logs remain under ignored
 not tested. Keep new character assets lazy: current root startup has little
 remaining transfer headroom.
 
+After retaining the later portrait/floor updates through `337a3e7`, six fresh
+root contexts pass the same guards and 54/54 inputs respond without page errors.
+Maximum startup transfer is 17,965,235 bytes. Input p95 ranges are 22.1–24.1 ms
+desktop / 20.3–28.0 ms portrait emulation; sync dispatch p95 is 28.1–31.2 /
+21.6–22.0 ms, with 12 title calls in about three seconds. These are a separate
+integration check, not a replacement comparison or a claimed speedup. The
+unchanged mouth consumer is bound by exact source equivalence; newer floor
+appearance has its own upstream acceptance.
+
 Recorded speech lazily loads `assets/buergeramt/speech/mouth-cues.js` when the office requests a clip or its existing Gaussian owner. All eligible office recordings, including the omen, have exact path/hash bindings, phonetic intervals and 100 Hz compact acoustic envelopes. The shared builder replaces the former omen-only data/pipeline. It uses local FFmpeg/Rhubarb and reuses analysis only when the exact recording hash, source and complete cue data match; optional installed Whisper diagnostics remain offline. The module is cached once, with decoded envelopes in a weak cache; existing cue cancellation/watchdogs own async preparation and disposal. Audio playhead sampling replaces both text-length timing and the additional 35 ms visual filter. Browser speech and optional unanalyzed preview recordings retain estimated articulation. See `assets/buergeramt/speech/PROVENANCE.md` for reproduction and precision limits.
 
 The mouth patch copies its actor's layer mask on every update so both use the final office actor pass with the existing opaque room depth. A hidden atlas replacement cannot keep a visible patch. Disposal and office exit release the patch and restore ordinary actor ownership. Final integration evidence and measured limits are in `BUERGERAMT.md`.
