@@ -128,7 +128,7 @@ Acknowledge the finite exchange and they return to their drive. An active tour
 excludes a competing home interception. Lingering in the
 garden can invite another complaint after 38 simulation seconds; leaving the
 neighborhood cancels the approach. Returning home or another arrest rearms it.
-Neighbor invitations and stop dialogue leave movement active and advance automatically after the current speech completion receipt, or readable caption time with voice off. A small black/red/gold halo marks the body-clear paved standing spot. Standing inside it briefly starts the stop; no E, Weiter or Verstanden is required. The halo also leads to home and the next unmet adult.
+Neighbor invitations and stop dialogue leave movement active and advance automatically after the current speech completion receipt, or readable caption time with voice off. A small black/red/gold halo marks the body-clear paved standing spot. Standing inside it briefly starts the stop; no E, Weiter or Verstanden is required. The halo also leads to home and the next unmet adult. Its translucent flag bands and soft glow breathe in size, opacity and brightness on a 3.2-second sinusoid; reduced motion keeps them steady. During tours its center continuously tracks the current guide at a fixed 65-unit radius through the actual movement arc. At dialogue stops it eases along that radius to a body-clear checkpoint; only after settling and the existing player dwell can the next line start.
 
 `neighbor-story.js` owns the coordinated stop, subject, gesture and exact DE/EN
 speech data. Each adult has a full introductory route and three shorter repeat

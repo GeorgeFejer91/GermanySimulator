@@ -935,6 +935,23 @@ function getNeighborStandingSpot(){
  const anchor=actor||{x:home.doorX,y:home.doorY+32},radius=player.r;
  const valid=p=>pedestrianRouteContains({gardenPaths:jwdGardens.paths},p.x,p.y,radius)&&!responderBlocked(p.x,p.y,radius,player)&&dist(p.x,p.y,anchor.x,anchor.y)<=84;
  const owner=t||jwd;
+ if(actor){
+  if(owner.haloActorId!==actor.id){owner.haloActorId=actor.id;owner.haloAngle=t&&jwd.haloActorId===actor.id?jwd.haloAngle:Math.PI/2}
+  const point=angle=>({x:actor.x+65*Math.cos(angle),y:actor.y+65*Math.sin(angle),radius:24,actorId:actor.id});
+  if(!valid(point(owner.haloAngle))){
+   const alternatives=[];
+   for(const sign of [1,-1])for(let i=1;i<=36;i++){
+    const turn=sign*i*Math.PI/36;
+    if(!valid(point(owner.haloAngle+turn)))continue;
+    let low=(i-1)*Math.PI/36,high=i*Math.PI/36;
+    for(let step=0;step<10;step++){const mid=(low+high)/2;if(valid(point(owner.haloAngle+sign*mid)))high=mid;else low=mid}
+    alternatives.push(sign*high);break;
+   }
+   if(!alternatives.length)return null;
+   owner.haloAngle+=alternatives.sort((a,b)=>Math.abs(a)-Math.abs(b))[0];
+  }
+  return point(owner.haloAngle);
+ }
  if(owner.standingSpot?.actorId===(actor?.id||'jwd-home')&&valid(owner.standingSpot))return owner.standingSpot;
  const candidates=[];
  for(let dx=-90;dx<=90;dx+=10)for(let dy=-90;dy<=90;dy+=10){const p={x:anchor.x+dx,y:anchor.y+dy};if(valid(p))candidates.push(p)}

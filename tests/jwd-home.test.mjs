@@ -345,6 +345,34 @@ test('all introductions require arrival at the standing halo; Heiko summons the 
  }
 });
 
+test('travel halos keep a fixed guide offset through turns and settle on a safe dialogue checkpoint',()=>{
+ for(const dt of [1/60,1/30,.1])for(const actorId of ['jwd-watcher','jwd-swabian','jwd-parent']){
+  const h=harness(true);h.awardAnmeldung();h.state.mission=1;h.jwdState.visited=true;
+  const actor=h.actors.find(n=>n.id===actorId);h.talkJwdNeighbor(actor);h.finish();
+  let movingFrames=0,turns=0,checkpoints=0,lastHeading=null;
+  for(let frame=0;frame<180/dt&&h.jwdState.tour;frame++){
+   const t=h.jwdState.tour;
+   if(h.state.dialogue){h.finish();continue}
+   followGuide(h,t);
+   const before=h.getNeighborStandingSpot(),position={x:t.leader.x,y:t.leader.y},phase=t.phase;
+   h.updateJwd(dt);
+   if(h.jwdState.tour!==t||h.state.dialogue)continue;
+   const after=h.getNeighborStandingSpot();assert.ok(after);
+   const guide=h.actors.find(n=>n.id===after.actorId);
+   assert.ok(Math.abs(Math.hypot((after.visualX??after.x)-guide.x,(after.visualY??after.y)-guide.y)-65)<1e-7,'visual center stays exactly 65 units from its guide');
+   if(phase==='walk'&&t.phase==='walk'&&after.actorId===before.actorId&&Math.hypot(t.leader.x-position.x,t.leader.y-position.y)>.01){
+    movingFrames++;
+    assert.ok(Math.hypot(after.x-before.x,after.y-before.y)<=Math.hypot(t.leader.x-position.x,t.leader.y-position.y)+8,'the halo tracks motion continuously around paving edges');
+    const heading=Math.atan2(t.leader.y-position.y,t.leader.x-position.x);if(lastHeading!==null&&Math.abs(heading-lastHeading)>.1)turns++;lastHeading=heading;
+   }
+   assert.ok(h.pedestrianRouteContains({gardenPaths:h.gardens.paths},after.x,after.y,h.player.r),'the entire player body fits on paving during travel as well as at checkpoints');
+   assert.equal(h.responderBlocked(after.x,after.y,h.player.r,h.player),false);
+   if(t.phase==='ready')checkpoints++;
+  }
+  assert.equal(h.jwdState.tour,null);assert.ok(movingFrames>10);assert.ok(turns>0,'the authored route actually turns');assert.ok(checkpoints>0);assert.ok(h.jwdState.met.has(actor.id));
+ }
+});
+
 test('tours wait for the follower, reject premature E and stale receipts, cancel without credit, and replay varied routes',()=>{
  const h=harness(true);h.awardAnmeldung();h.state.mission=1;h.jwdState.visited=true;
  const actor=h.actors.find(n=>n.id==='jwd-parent');h.talkJwdNeighbor(actor);const stale=h.dialogue.done;h.finish();const t=h.jwdState.tour;

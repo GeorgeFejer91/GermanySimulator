@@ -51,13 +51,23 @@ function showRendererFailure(error){
   M.walk.map=M.path.map=streetTexture(true);M.walk.userData.tileSize=M.path.userData.tileSize=1.6;
   const world=new T.Group();scene.add(world);
   const neighborHalo=new T.Group();neighborHalo.name="Neighbor standing halo";neighborHalo.visible=false;world.add(neighborHalo);
-  for(const [inner,outer,color,opacity] of [[.48,.61,0xffcf33,.17],[.31,.39,0x151515,1],[.39,.47,0xe32b30,1],[.47,.55,0xffcf33,1]]){
+  for(const [inner,outer,color,opacity] of [[.26,.82,0xffcf33,.17],[.31,.39,0x151515,.58],[.39,.47,0xe32b30,.58],[.47,.55,0xffcf33,.58]]){
     const ring=new T.Mesh(new T.RingGeometry(inner,outer,48),new T.MeshBasicMaterial({color,transparent:true,opacity,depthWrite:false,side:T.DoubleSide}));ring.rotation.x=-Math.PI/2;neighborHalo.add(ring);
+    ring.userData.baseColor=ring.material.color.clone();
   }
+  neighborHalo.children[0].material.dispose();
+  neighborHalo.children[0].material=new T.ShaderMaterial({transparent:true,depthWrite:false,side:T.DoubleSide,blending:T.AdditiveBlending,
+    uniforms:{strength:{value:.3}},vertexShader:'varying vec2 ground;void main(){ground=position.xy;gl_Position=projectionMatrix*modelViewMatrix*vec4(position,1.);}',
+    fragmentShader:'uniform float strength;varying vec2 ground;void main(){float r=length(ground);float red=exp(-pow((r-.43)/.12,2.));float gold=exp(-pow((r-.53)/.15,2.));gl_FragColor=vec4(vec3(1.,.025,.035)*red+vec3(1.,.65,.04)*gold,(red+gold)*strength*.45);}'
+  });
+  let neighborHaloTime=0;
   function syncNeighborHalo(){
     const spot=bridge.getNeighborStandingSpot?.();neighborHalo.visible=!!spot;if(!spot)return;
     neighborHalo.position.set(X(spot.x),.09+bridge.stationElevation(spot.x,spot.y),Z(spot.y));neighborHalo.userData.spot=spot;
-    neighborHalo.children[0].material.opacity=amtReducedMotion.matches?.22:.15+.09*(.5+.5*Math.sin(performance.now()*.003));
+    const breathing=amtReducedMotion.matches?.5:.5+.5*Math.sin(neighborHaloTime*2*Math.PI/3.2);
+    neighborHalo.scale.setScalar(.92+.16*breathing);
+    neighborHalo.children[0].material.uniforms.strength.value=.24+.28*breathing;
+    for(const ring of neighborHalo.children.slice(1)){ring.material.opacity=.42+.24*breathing;ring.material.color.copy(ring.userData.baseColor).multiplyScalar(.82+.32*breathing)}
   }
   const modelLoader=GLTFLoader?new GLTFLoader():null;
   const cityModelJobs=[],startupModelJobs=new Set();
@@ -2064,6 +2074,7 @@ function showRendererFailure(error){
     if(amtDirectRoute&&!window.BuergeramtLevel?.active){clearAmtOmenSplat();amtMouthSplat?.dispose();amtMouthSplat=null;amtGaussian.clear();loadAmtImages();return}
     if(renderAmt()){showMissionPointer(false);if(buergeramtDoorGlow){buergeramtDoorGlow.light.intensity=0;buergeramtDoorGlow.lastTime=performance.now()}previousOcclusionTime=performance.now();return}
     prepareNearbyAssets();
+    if(!document.hidden&&!bridge.getHUDState?.().paused)neighborHaloTime+=Math.min(.1,Math.max(0,levelDt));
     syncNeighborHalo();
     updateMissionPointer();
     syncChar(playerMesh,bridge.player,0);
