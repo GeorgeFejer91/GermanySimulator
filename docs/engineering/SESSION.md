@@ -963,3 +963,5 @@ output/paint-rivulets/{root-final,office-final-before,office-final-after,
 office-confirm-after,office-profile-before,office-profile-after}; no production
 change was made to mask timings. Earlier interrupted/overlapping benchmark sets
 remain diagnostic only. Publication and live route/source verification follow.
+
+Final integration: merged reviewed paint release da79bab unchanged in portrait, floor, world and its visual probe;187 merged phone/arrow checks PASS. Fresh merged Android portrait native-media ending/Pretext/hangup/return check PASS with browser closed. Previous six-case common speech/UI evidence and exceptional-prefix checks remain recorded above. Shared paint live smoke and route/hash verifier completed before the publication lease was released.
