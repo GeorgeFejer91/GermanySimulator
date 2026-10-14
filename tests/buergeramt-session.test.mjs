@@ -289,10 +289,14 @@ test('both speakers cut off each other throughout the escalating argument',()=>{
  completeOpening(h);
  for(let index=0;index<3;index++){
   link.message({type:'police-start',index,mode:'voice',readyDelayMs:20,atMs:h.now()});
-  if(index>=0)assert.equal(h.level.timing.desk[index].mode,'interrupted','the officer stops the clerk at the start receipt');
-  const target=Math.round(h.window.BuergeramtStory.outburst.phoneCutAfterMs[index+1]/h.level.timeScale);h.tick(target+40);
+  const start=h.now();assert.equal(h.level.timing.desk[index].endAt,null,'the clerk keeps speaking over the officer');
+  h.tick(999);assert.equal(h.level.timing.desk[index].endAt,null);h.tick(1);
+  assert.equal(h.level.timing.desk[index].mode,'interrupted');assert.equal(h.level.timing.desk[index].endAt,start+1000);
+  const target=Math.round(h.window.BuergeramtStory.outburst.phoneCutAfterMs[index+1]/h.level.timeScale);h.tick(target-1000+40);
   assert.equal(h.level.timing.cues[index].interrupted,true);assert.ok(link.sent.some(m=>m.type==='police-cutoff'&&m.index===index));
   assert.equal(h.node('amt-line').textContent,h.window.BuergeramtStory.outburst.lines[index+1]);
+  const cut=link.sent.find(m=>m.type==='police-cutoff'&&m.index===index);
+  assert.equal(cut.stopAtPhoneMs-h.level.timing.desk[index+1].startAt,984,'desk audio starts one second before the cutoff, allowing its 16 ms startup');
   link.message({type:'police-done',index,mode:'voice',durationMs:target,atMs:h.now()});
   if(index<2){h.tick(h.window.BuergeramtStory.outburst.cutAfterMs[index+1]/h.level.timeScale+20);assert.equal(link.sent.filter(m=>m.type==='police-line').at(-1).index,index+1)}
  }
@@ -301,6 +305,27 @@ test('both speakers cut off each other throughout the escalating argument',()=>{
  link.message({type:'call-ended',id:'grass',round:h.level.registration.callRound,mode:'sound'});h.tick(20);
  assert.equal(h.node('amt-line').textContent,h.window.BuergeramtStory.phoneDismissal.line);h.synth.end();h.tick(250);assert.equal(h.counts.cancel,1);assert.equal(h.counts.form,0);
 });
+test('a late mapped phone onset keeps clerk overlap within one wall-clock second',async()=>{
+ const service={sample:async()=>({utcOffsetMs:100000}),usable:a=>!!a,utcAt:(a,t)=>a.utcOffsetMs+t,monoAt:(a,t)=>t-a.utcOffsetMs};
+ const h=harness('host',{voice:true,phoneClock:service}),link=h.links[0];await Promise.resolve();h.counter();link.message({type:'answer',id:'grass'});completeOpening(h);
+ const start=h.now();h.tick(600);link.message({type:'police-start',index:0,mode:'recording',readyDelayMs:20,atMs:5000,atUtcMs:100000+start});
+ const caption=h.node('english-subtitle').textContent;assert.equal(caption,h.window.BuergeramtStory.police[0]);
+ h.tick(399);assert.equal(h.level.timing.desk[0].endAt,null);h.tick(1);assert.equal(h.level.timing.desk[0].endAt,start+1000);
+ assert.equal(h.node('english-subtitle').textContent,caption,'stopping the outgoing clerk preserves the current police caption');
+});
+
+test('closing during overlap cancels the old clerk stop before a new visit',()=>{
+ const h=harness('host',{voice:true}),link=h.links[0];h.counter();link.message({type:'answer',id:'grass'});completeOpening(h);
+ link.message({type:'police-start',index:0,mode:'voice',readyDelayMs:20,atMs:h.now()});h.tick(400);h.level.replay(h.config);
+ const before=h.synth.cancelCount;h.tick(2000);assert.equal(h.synth.cancelCount,before);assert.equal(h.level.stage,'walk-sign');assert.equal(Object.keys(h.level.timing.desk).length,0);
+});
+
+test('a naturally short officer turn clears the pending stop before the next clerk',()=>{
+ const h=harness('host',{voice:true}),link=h.links[0];h.counter();link.message({type:'answer',id:'grass'});completeOpening(h);
+ link.message({type:'police-start',index:0,mode:'voice',readyDelayMs:20,atMs:h.now()});h.tick(200);link.message({type:'police-done',index:0,mode:'voice',durationMs:200,atMs:h.now()});
+ h.tick(20);const current=h.synth.current;h.tick(1000);assert.equal(h.synth.current,current);assert.equal(h.level.timing.desk[1].endAt,null);
+});
+
 test('the host measures round trip delay on its own clock and ignores stale pongs',()=>{
  const h=harness(),link=h.links[0];link.emit('connected',{});assert.deepEqual(link.sent.filter(m=>m.type==='sync-ping').at(-1),{type:'sync-ping',id:1});h.tick(120);link.message({type:'sync-pong',id:1,receivedAtMs:50,sentAtMs:70});assert.equal(h.level.timing.rttMs,100);assert.equal(h.level.timing.oneWayMs,50);assert.equal(h.level.timing.clockOffsetMs,0);assert.equal(h.level.timing.clockUncertaintyMs,50);
  h.tick(1380);assert.equal(link.sent.at(-1).id,2);h.tick(260);link.message({type:'sync-pong',id:2,receivedAtMs:1600,sentAtMs:1610});assert.equal(h.level.timing.rttMs,250);assert.equal(h.level.timing.oneWayMs,125);assert.equal(h.level.timing.jitterMs,150);assert.equal(h.level.timing.clockUncertaintyMs,125);
@@ -491,7 +516,7 @@ test('the host maps a TimeAPI speech timestamp rather than adding delivery delay
  const h=harness('host',{phoneClock:service}),link=h.links[0];await Promise.resolve();h.counter();link.message({type:'answer',id:'grass'});completeOpening(h);const start=h.now();h.tick(600);
  link.message({type:'police-start',index:0,mode:'recording',readyDelayMs:20,atMs:5000,atUtcMs:100000+start});
  const budget=Math.round(4500/h.level.timeScale),cut=link.sent.find(m=>m.type==='police-cutoff');assert.equal(cut.stopAtPhoneMs,5000+budget);assert.equal(cut.stopAtUtcMs,100000+start+budget);assert.equal(h.level.timing.cues[0].clockDomain,'utc');
- h.tick(budget-601);assert.equal(h.level.timing.desk[1],undefined);h.tick(1);assert.equal(h.level.timing.desk[1].startAt,start+budget);
+ h.tick(budget-1601);assert.equal(h.level.timing.desk[1],undefined);h.tick(1);assert.equal(h.level.timing.desk[1].startAt,start+budget-1000);
 });
 
 test('cutoff send failure retries and waits for natural completion without false interruption',()=>{
@@ -504,7 +529,7 @@ test('cutoff send failure retries and waits for natural completion without false
 test('a transient cutoff send failure recovers before the shared deadline',()=>{
  const h=harness(),link=h.links[0];h.counter();link.message({type:'answer',id:'grass'});completeOpening(h);link.fail=true;
  link.message({type:'police-start',index:0,mode:'recording',readyDelayMs:20,atMs:h.now()});h.tick(50);link.fail=false;h.tick(50);
- assert.equal(link.sent.filter(m=>m.type==='police-cutoff').length,1);assert.equal(h.level.timing.cues[0].interrupted,true);h.tick(link.sent.find(m=>m.type==='police-cutoff').stopAtPhoneMs-h.now());assert.equal(h.level.timing.desk[1].startAt,h.now());
+ assert.equal(link.sent.filter(m=>m.type==='police-cutoff').length,1);assert.equal(h.level.timing.cues[0].interrupted,true);h.tick(link.sent.find(m=>m.type==='police-cutoff').stopAtPhoneMs-h.now()-1000);assert.equal(h.level.timing.desk[1].startAt,h.now());
 });
 
 test('active spoof calls show elapsed time and native hang-up, never police text',()=>{
