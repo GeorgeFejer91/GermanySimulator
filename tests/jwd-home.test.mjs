@@ -51,7 +51,7 @@ test('registration, certificate handoff and valid A38 submission lead straight t
  vm.runInContext(source.split('\n').find(line=>line.startsWith('document.getElementById("bureaucracy-form").onsubmit=')),city);
  const submit=valid=>city.document.getElementById('bureaucracy-form').onsubmit({preventDefault(){},currentTarget:{reportValidity:()=>valid,dataset:{type:'a38'}}});
  submit(false);assert.equal(city.currentMission().target,'buergeramt');
- submit(true);assert.equal(city.state.forms,1);assert.equal(city.currentMission().target,'jwd-home');assert.equal(city.getMissionWaypoint(),null,'monologue owns attention before guidance');assert.match(city.dialogue.lines[0],/officially gemeldet/);city.finish();assert.equal(city.getMissionWaypoint().id,'jwd-home');
+ city.state.lang='en';submit(true);assert.equal(city.state.forms,1);assert.equal(city.currentMission().target,'jwd-home');assert.equal(city.getMissionWaypoint(),null,'monologue owns attention before guidance');assert.match(city.dialogue.lines[0],/officially gemeldet/);assert.match(city.dialogue.subtitles[0],/officially registered.*Maybe my neighbors are nice/);city.finish();assert.equal(city.getMissionWaypoint().id,'jwd-home');
  city.visitJwdHome();city.finish();assert.equal(city.currentMission().target,'jwd-neighbors');
  for(const neighbor of city.actors){city.talkJwdNeighbor(neighbor);city.finish()}
  assert.equal(city.currentMission().target,'hausverwaltung','the old chain resumes only after the introductions');
