@@ -1209,6 +1209,43 @@ existing mobile/desktop admission limits remain one/two. The active speaking
 counter receives priority within that limit. Validation and remaining art limits
 belong to BUERGERAMT.md.
 
+The 2026-10-14 mouth audit adds 24 walking-source profiles and 240 visible frame
+registrations, with 80 explicit rear nulls, to the same office metadata request.
+Against published `432c240`, the affected modules add 3,805 normalized LF bytes;
+the walking table adds 174,467 bytes (204,981 total profiles) and the Jobcenter
+phonetic metadata adds 2,362 bytes (11,592 total). `speech-mouth.js` is the shared
+1,625-byte sampler extracted from the existing office implementation; Jobcenter
+uses it with one Vec4 uniform in its existing pass. No audio/image bytes,
+textures, kernels, body geometry, renderer, clock, recognizer or dependency are
+added. Invalid profiles retain original paint. Existing texture residency and
+one/two mobile/desktop native admission limits remain unchanged.
+
+Twenty-four sequential Chrome 155 / Intel Iris Xe ANGLE cold-context lab runs
+compare that base and the candidate: three desktop and three portrait-emulation
+samples for each root/office entry, DPR 2, seeds 424242–424244, local uncompressed
+HTTP, no CPU throttle. All pass existing startup/title/buffer/input/error checks.
+Candidate root startup peaks at 17,964,019 bytes below the 18 MB limit; title
+dispatch remains 12 calls in about three seconds. Candidate input p95 ranges are
+19.8–27.5 ms desktop / 20.7–37.9 ms emulation at root, and 5.1–7.7 / 5.8–7.2 ms
+in the office. Sync dispatch p95 remains about 21.1–21.7 ms root and 7.1–7.2 ms
+office. Office startup ranges are 31,050,059–33,265,210 bytes desktop and
+21,104,415–21,874,942 emulation. Variation and baseline outliers prevent a speedup
+claim. Private floor passes make renderer-info counters partial; these are not
+whole-scene draw counts or GPU/display timings. New neighbor authoring images
+are not runtime inputs. Logs remain under ignored
+`output/connected-lips/audit-all-sequences/`; physical Android and listening were
+not tested. Keep new character assets lazy: current root startup has little
+remaining transfer headroom.
+
+After retaining the later portrait/floor updates through `337a3e7`, six fresh
+root contexts pass the same guards and 54/54 inputs respond without page errors.
+Maximum startup transfer is 17,965,235 bytes. Input p95 ranges are 22.1–24.1 ms
+desktop / 20.3–28.0 ms portrait emulation; sync dispatch p95 is 28.1–31.2 /
+21.6–22.0 ms, with 12 title calls in about three seconds. These are a separate
+integration check, not a replacement comparison or a claimed speedup. The
+unchanged mouth consumer is bound by exact source equivalence; newer floor
+appearance has its own upstream acceptance.
+
 Recorded speech lazily loads `assets/buergeramt/speech/mouth-cues.js` when the office requests a clip or its existing Gaussian owner. All eligible office recordings, including the omen, have exact path/hash bindings, phonetic intervals and 100 Hz compact acoustic envelopes. The shared builder replaces the former omen-only data/pipeline. It uses local FFmpeg/Rhubarb and reuses analysis only when the exact recording hash, source and complete cue data match; optional installed Whisper diagnostics remain offline. The module is cached once, with decoded envelopes in a weak cache; existing cue cancellation/watchdogs own async preparation and disposal. Audio playhead sampling replaces both text-length timing and the additional 35 ms visual filter. Browser speech and optional unanalyzed preview recordings retain estimated articulation. See `assets/buergeramt/speech/PROVENANCE.md` for reproduction and precision limits.
 
 The mouth patch copies its actor's layer mask on every update so both use the final office actor pass with the existing opaque room depth. A hidden atlas replacement cannot keep a visible patch. Disposal and office exit release the patch and restore ordinary actor ownership. Final integration evidence and measured limits are in `BUERGERAMT.md`.

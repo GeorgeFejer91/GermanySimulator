@@ -1,5 +1,11 @@
 # Germany Simulator credits
 
+The historical, unselected fictional Frau Fink (now Frau Schwabingen), Prof. Heiko Maaslos and Inga Maaslos four-view
+authoring candidates were generated with OpenAI ImageGen on 13 October 2026.
+Their source hashes, generation receipts and pending visual/motion acceptance
+are recorded in [the source provenance](assets/sprite-sources/jwd-neighbors/PROVENANCE.md).
+They are authoring examples; the game does not load these source sheets. Current accepted miniature paint and eleven Inga recordings are credited in [Fictional neighborhood sprites](#fictional-neighborhood-sprites), with `assets/sprite-sources/neighbors/directions.png` as the accepted source authority.
+
 ## Bürgeramt episode
 
 The waiting-room portrait of Frank-Walter Steinmeier is original OpenAI

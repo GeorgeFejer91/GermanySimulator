@@ -1,5 +1,5 @@
 // Gaussian rendering shares the existing scene clock and render pass.
-import {sampleOmenMouth} from './buergeramt-lipsync.js?v=20261011-mouth-consistency';
+import {sampleOmenMouth} from './buergeramt-lipsync.js?v=20261013-mouth-audit';
 const clamp=value=>Math.max(0,Math.min(1,value));
 const TUNNEL_RINGS=32,TUNNEL_AROUND=96;
 const MOUTH_SPLATS=96;
@@ -15,7 +15,7 @@ export function omenReliefGain(camera={}){
 export function omenSplatPose(omen,reducedMotion=false){
   const live=['approach','blackout','glare','unwind'].includes(omen.phase),life=omen.life||{};
   const speech=omen.lipSpeech,owned=omen.phase==='blackout'&&speech?.active&&speech.actor==='aktenkurier'&&['recorded','voice'].includes(speech.mode);
-  const mouth=owned?{open:speech.shape[0],spread:speech.shape[1],round:speech.shape[2],bite:speech.shape[3],time:speech.time,viseme:speech.viseme||'estimated'}:sampleOmenMouth(omen.phase==='blackout'?omen.speech:null);
+  const mouth=owned?{open:speech.shape[0],spread:speech.shape[1],round:speech.shape[2],bite:speech.shape[3],time:speech.time,viseme:speech.viseme||'estimated'}:sampleOmenMouth(!speech&&omen.phase==='blackout'?omen.speech:null);
   const reveal=live?clamp(life.depth||0):0;
   return {
     live,reveal,

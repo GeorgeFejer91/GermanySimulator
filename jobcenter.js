@@ -1,6 +1,7 @@
 // One scene on the city's renderer and frame clock. No room edges, floor texture or horizon.
 import {createJobcenterRelease} from './buergeramt-entry.js?v=20261013-void-release';
 import {createJobcenterRumble,sampleJobcenterRumble} from './jobcenter-rumble.js?v=20261013-overlord-fury';
+import {sampleTimedMouth,neutralMouth} from './speech-mouth.js?v=20261013-mouth-audit';
 const clamp=(n,a=0,b=1)=>Math.max(a,Math.min(b,n));
 
 // Original geometry, based on the official Wedding entrance photograph; no photo texture.
@@ -75,8 +76,13 @@ export function sampleJobcenterEnvelope(data,time){
  return {energy:((values[i]||0)*(1-mix)+(values[i+1]||0)*mix)/255,attack:(attacks[i]||0)/255};
 }
 
+export function sampleJobcenterMouth(data,time){
+ if(!data?.mouthCues||data.mouthCueBasis?.audioSha256!==data.audioSha256)return neutralMouth();
+ return sampleTimedMouth(data,time);
+}
+
 const flameFragment=`
- varying vec2 vUv;uniform float uTime,uEnergy,uAttack,uAnger,uRumble,uDismissal;
+ varying vec2 vUv;uniform float uTime,uEnergy,uAttack,uAnger,uRumble,uDismissal;uniform vec4 uMouth;
  float hash(vec2 p){return fract(sin(dot(p,vec2(127.1,311.7)))*43758.5453);}
  float noise(vec2 p){vec2 i=floor(p),f=fract(p);f=f*f*(3.-2.*f);return mix(mix(hash(i),hash(i+vec2(1,0)),f.x),mix(hash(i+vec2(0,1)),hash(i+vec2(1,1)),f.x),f.y);}
  float fbm(vec2 p){return noise(p)*.54+noise(p*2.03)*.28+noise(p*4.07)*.13+noise(p*8.01)*.05;}
@@ -104,16 +110,17 @@ const flameFragment=`
   color*=1.-sockets*.8;
   float eyes=exp(-pow(eye.x/.083,4.)-pow(eye.y/(.017+abs(p.x)*.023),2.))*uAnger;
   color=mix(color,vec3(1.8,1.35,.66),eyes);
-  float mouthWidth=.16+.028*uEnergy;
-  float mouthHeight=.014+.11*uEnergy;
-  vec2 jaw=vec2((p.x+(n-.5)*.015)/mouthWidth,(p.y-.31)/mouthHeight);
+  float mouthWidth=.16*(1.+.175*uMouth.y)*(1.-.32*uMouth.z);
+  float aperture=smoothstep(0.,.045,uMouth.x);
+  float mouthHeight=mix(.006,.124,uMouth.x)*(1.-.55*uMouth.w);
+  vec2 jaw=vec2((p.x+(n-.5)*.015)/mouthWidth,(p.y-.31+uMouth.w*.012)/mouthHeight);
   float mouthShape=pow(abs(jaw.x),1.5)+pow(abs(jaw.y),1.25);
-  float mouthRim=exp(-pow((mouthShape-.88)/.24,2.))*uAnger;
-  float mouthFire=(1.-smoothstep(.45,1.15,mouthShape))*uAnger;
+  float mouthRim=exp(-pow((mouthShape-.88)/.24,2.))*uAnger*aperture;
+  float mouthFire=(1.-smoothstep(.45,1.15,mouthShape))*uAnger*aperture;
   float fissures=.78+.22*sin(atan(jaw.y,jaw.x)*27.+n*8.);
   vec3 furnace=mix(vec3(1.15,.14,.005),whiteHeat,.14+heat*.34)*fissures;
   color=mix(color,furnace,mouthFire*.85);
-  float mouthVoid=(1.-smoothstep(.28,.65,mouthShape))*uAnger;
+  float mouthVoid=(1.-smoothstep(.28,.65,mouthShape))*uAnger*aperture;
   color=mix(color,vec3(.0002,.0001,0.),mouthVoid);
   color+=whiteHeat*mouthRim*(.28+heat*.2);
   gl_FragColor=vec4(color*(.8+uEnergy*.42+uAttack*.06+uRumble*.13+heat*.25),clamp(fire+glow,0.,1.));
@@ -163,7 +170,7 @@ export function createJobcenterEncounter(T,renderer,bridge){
   clearRelease();
   const id=++serial,scene=new T.Scene();scene.background=new T.Color(0);
   const camera=new T.PerspectiveCamera(68,innerWidth/innerHeight,.03,100000);
-  const material=new T.ShaderMaterial({transparent:true,depthWrite:false,side:T.DoubleSide,uniforms:{uTime:{value:0},uEnergy:{value:0},uAttack:{value:0},uAnger:{value:0},uRumble:{value:0},uDismissal:{value:0}},vertexShader:'varying vec2 vUv;void main(){vUv=uv;gl_Position=projectionMatrix*modelViewMatrix*vec4(position,1.);}',fragmentShader:flameFragment});
+  const material=new T.ShaderMaterial({transparent:true,depthWrite:false,side:T.DoubleSide,uniforms:{uTime:{value:0},uEnergy:{value:0},uAttack:{value:0},uAnger:{value:0},uRumble:{value:0},uDismissal:{value:0},uMouth:{value:new T.Vector4()}},vertexShader:'varying vec2 vUv;void main(){vUv=uv;gl_Position=projectionMatrix*modelViewMatrix*vec4(position,1.);}',fragmentShader:flameFragment});
   const flame=new T.Mesh(new T.PlaneGeometry(1,1),material);scene.add(flame);
   const tunnelMaterial=new T.ShaderMaterial({transparent:true,depthWrite:false,depthTest:false,blending:T.AdditiveBlending,side:T.DoubleSide,uniforms:{uTime:{value:0},uStrength:{value:1}},vertexShader:'varying vec2 vUv;void main(){vUv=uv;gl_Position=projectionMatrix*modelViewMatrix*vec4(position,1.);}',fragmentShader:tunnelFragment});
   const tunnel=new T.Mesh(new T.PlaneGeometry(1,1),tunnelMaterial);tunnel.renderOrder=-1;scene.add(tunnel);
@@ -192,7 +199,7 @@ export function createJobcenterEncounter(T,renderer,bridge){
   // Unlock this single media element in the entrance's trusted E/touch gesture.
   // Silent priming stops at time zero; speech is still gated by approach.
   audio.play().then(()=>{if(!current())return;if(v.phase==='approach'){audio.pause();audio.currentTime=0}else if(!v.failed&&!v.paused()){v.mediaStarted=true;audio.volume=.9}else audio.pause()}).catch(()=>{});
-  fetch('./assets/audio/jobcenter/overlord.json?v=20261013-overlord-fury',{signal:v.abort.signal}).then(r=>{if(!r.ok)throw Error('jobcenter envelope');return r.json()}).then(data=>{if(current())v.data=data}).catch(error=>{if(current()&&error.name!=='AbortError')v.data={text:config.text||'',duration:config.duration||60}});
+  fetch('./assets/audio/jobcenter/overlord.json?v=20261013-mouth-audit',{signal:v.abort.signal}).then(r=>{if(!r.ok)throw Error('jobcenter envelope');return r.json()}).then(data=>{if(current())v.data=data}).catch(error=>{if(current()&&error.name!=='AbortError')v.data={text:config.text||'',duration:config.duration||60}});
   let mouseLook=null;
   on(surface,'pointerdown',e=>{
    mouseLook=null;if(!current()||paused())return;
@@ -284,6 +291,8 @@ export function createJobcenterEncounter(T,renderer,bridge){
   v.tunnel.material.uniforms.uTime.value=reduced.matches?0:v.time;
   v.tunnel.material.uniforms.uStrength.value=(1-v.pressure*.85)*(.9+v.energy*.1+v.rumbleLevel*.35+v.heat*.7);
   const u=v.material.uniforms;u.uTime.value=reduced.matches?0:v.time;u.uEnergy.value=v.energy;u.uAttack.value=reduced.matches?0:v.attack;u.uAnger.value=anger;u.uRumble.value=v.rumbleLevel;u.uDismissal.value=v.heat;
+  const mouth=!v.failed&&v.mediaStarted?sampleJobcenterMouth(v.data,v.playback):neutralMouth();
+  u.uMouth.value.set(mouth.open,mouth.spread,mouth.round,mouth.bite);
   renderer.render(v.scene,v.camera);return true;
  }
  function caption(v,duration){
@@ -301,6 +310,6 @@ export function createJobcenterEncounter(T,renderer,bridge){
   try{if(release.render(paused?0:dt,reduced.matches,doorUv))clearRelease()}catch{clearRelease()}
   return !!release;
  }
- return {open,close,render,renderRelease,get active(){return !!visit},get releasing(){return !!release},inspect(){return visit?{active:true,phase:visit.phase,x:visit.x,z:visit.z,yaw:visit.yaw,pitch:visit.pitch,distance:visit.distance,pressure:visit.pressure,energy:visit.energy,attack:visit.attack,rumbleLevel:visit.rumbleLevel,dismissal:visit.dismissal,heat:visit.heat,rumbleActive:!!visit.rumbleSource?.active,playback:visit.playback,mediaStarted:visit.mediaStarted,mediaPaused:visit.audio.paused,failed:visit.failed,captionCues:visit.captionCues.length,resources:{geometries:2,textures:0,media:1},duration:visit.data?.duration||0}:{active:false,release:release?.inspect()||null}}};
+ return {open,close,render,renderRelease,get active(){return !!visit},get releasing(){return !!release},inspect(){return visit?{active:true,phase:visit.phase,x:visit.x,z:visit.z,yaw:visit.yaw,pitch:visit.pitch,distance:visit.distance,pressure:visit.pressure,energy:visit.energy,attack:visit.attack,rumbleLevel:visit.rumbleLevel,dismissal:visit.dismissal,heat:visit.heat,rumbleActive:!!visit.rumbleSource?.active,playback:visit.playback,mouth:visit.material.uniforms.uMouth.value.toArray(),mediaStarted:visit.mediaStarted,mediaPaused:visit.audio.paused,failed:visit.failed,captionCues:visit.captionCues.length,resources:{geometries:2,textures:0,media:1},duration:visit.data?.duration||0}:{active:false,release:release?.inspect()||null}}};
 }
 

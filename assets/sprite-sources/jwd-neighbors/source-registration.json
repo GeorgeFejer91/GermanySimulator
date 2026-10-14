@@ -1,0 +1,2953 @@
+{
+  "schema_version": 1,
+  "status": "candidate authoring registration; source and live speech/motion acceptance pending",
+  "coordinates": {
+    "space": "original 1536x1024 source sheet pixels",
+    "image_y": "positive down",
+    "rect": "[centreX,centreY,tangentExtent,normalExtent], NOT top-left xywh",
+    "axes": "[tangentX,tangentY,normalX,normalY] in source pixels; extent already included",
+    "crops": "xyxy with exclusive right/bottom; sheet coordinates retained for every measurement",
+    "profile": "buergeramt-mouth-paint validateMouthProfile five-curve schema; fixed knots evenly spaced between corners. Runtime consumer must convert its own UV/Y convention once.",
+    "mouth_trace_precision_pixels": "manual enlarged-pixel estimate approximately 0.5–1.5; rebind on exact eventual encoded crop",
+    "body_landmark_precision_pixels": "visible source feature estimate approximately 2–8; clothed/occluded anatomy separately labelled; no hidden knees invented"
+  },
+  "acceptance": {
+    "sourceDesign": "pending existing Camera/Physics gate",
+    "openingContours": "candidate conservative limits, not observed phonemes or approved open-mouth keys",
+    "changingPoseSpeech": "NOT RUN",
+    "encodedWalkActionTurn": "NOT RUN",
+    "nativeMediaAndListening": "NOT RUN",
+    "desktopMobileMotion": "NOT RUN",
+    "physicalDevices": "NOT RUN"
+  },
+  "method": {
+    "source_scale": "One source pixel is one raw unit per family; no per-view/frame bbox scaling. Optional working512 transform uses ONE front-derived scale per family and translates measured body ground pivot to [256,480].",
+    "prop_rule": "Rigid props/hand ownership use precise source masks. Preserve original alpha; broad prop rectangles below are measured diagnostic bounds, not shipping masks.",
+    "knee_rule": "Null hidden knee is intentional. Source-pixel deformation cannot supply unseen thigh/knee/prop paint.",
+    "source_closed": "All nine visible sources show closed crease/ink, no source cavity or teeth. source_upper==source_lower==crease deliberately; teeth=0. No fabricated source teeth bar.",
+    "sheet_isolation": "Diagnostic raw crops include generous own fringe. Fink rear/left alpha<4 residues overlap and a raw rectangular crop may include a thin neighbour strip. Isolate the measured own silhouette with its source-aligned matte before encoding; preserve all own painted support and original alpha. Do not use nominal columns or silently alter sources."
+  },
+  "families": {
+    "inga-maaslos": {
+      "actor_id": "jwd-watcher",
+      "source": {
+        "file": "assets/sprite-sources/jwd-neighbors/inga-maaslos-source-v2.png",
+        "sha256": "0da6e5529ef32019d1435fff579fae2cc0025a24e7c8bd8b944cd0376cf0bc26",
+        "bytes": 1932622,
+        "dimensions": [
+          1536,
+          1024
+        ]
+      },
+      "source_scale": 1,
+      "reference_body_height_pixels": 976,
+      "optional_working512": {
+        "uniform_scale": 0.4426229508196721,
+        "pivot_xy": [
+          256,
+          480
+        ],
+        "reference_view": "front",
+        "scope": "authoring transform only; world actor height stays integrator-owned"
+      },
+      "views": {
+        "front": {
+          "view": "front",
+          "direction": "down",
+          "crop_xyxy": [
+            56,
+            0,
+            397,
+            1012
+          ],
+          "painted_alpha16_bounds_xyxy": [
+            74,
+            9,
+            384,
+            987
+          ],
+          "measured_body_ground_pivot_xy": [
+            225.5,
+            985
+          ],
+          "pivot_in_crop_xy": [
+            169.5,
+            985
+          ],
+          "working512_from_sheet": {
+            "scale": 0.4426229508196721,
+            "translation_xy": [
+              156.18852459016392,
+              44.016393442622984
+            ]
+          },
+          "body": {
+            "waist_xy": [
+              224,
+              392
+            ],
+            "hip_xy": [
+              226,
+              533
+            ],
+            "garment_hem_y": [
+              705,
+              707
+            ],
+            "legs_viewer_left_right": [
+              {
+                "paint_root_xy": [
+                  164,
+                  704
+                ],
+                "knee_xy": [
+                  166,
+                  750
+                ],
+                "ankle_xy": [
+                  168,
+                  906
+                ],
+                "sole_contact_xy": [
+                  156,
+                  984
+                ],
+                "visibility": "visible"
+              },
+              {
+                "paint_root_xy": [
+                  283,
+                  704
+                ],
+                "knee_xy": [
+                  282,
+                  751
+                ],
+                "ankle_xy": [
+                  283,
+                  908
+                ],
+                "sole_contact_xy": [
+                  299,
+                  984
+                ],
+                "visibility": "visible"
+              }
+            ],
+            "foreground": null,
+            "helper_support_nodes_sheet_pixels": {
+              "waist": 420,
+              "hip": 520,
+              "mid": 226,
+              "hem": [
+                705,
+                707
+              ],
+              "knee": [
+                750,
+                751
+              ],
+              "ankle": [
+                906,
+                908
+              ],
+              "centres": [
+                166,
+                282
+              ],
+              "foot_centres": [
+                156,
+                299
+              ]
+            },
+            "helper_support_status": "candidate connected-support nodes; requires actual phase pilot",
+            "props": {
+              "briefcase": {
+                "hand": "anatomical-left",
+                "visibility": "visible",
+                "bounds_xyxy": [
+                  324,
+                  569,
+                  384,
+                  731
+                ],
+                "grip_xy": [
+                  351,
+                  576
+                ]
+              }
+            },
+            "issues": [
+              "Skirt hides upper thighs; keep roots under the actual hem and preserve the jacket/skirt join.",
+              "Briefcase extends below waist and alongside thigh; needs precise owned rigid mask, not the rough auto-hand heuristic."
+            ],
+            "hip_basis": "projected clothed pelvis estimate, sometimes occluded by sleeve/hand; not exposed anatomy",
+            "protected_visible_hand_bounds_xyxy": [
+              [
+                74,
+                506,
+                121,
+                600
+              ],
+              [
+                328,
+                507,
+                375,
+                600
+              ]
+            ],
+            "knee_basis": "visible leg-feature estimate; side far knee absent when null",
+            "paint_root_basis": "paint at hidden skirt/thigh overlap; do not expose absent upper thighs"
+          },
+          "mouth_visibility": "front full visible lip crease",
+          "mouth": {
+            "rect_cxcy_extentxy": [
+              223.7,
+              117.65,
+              16.500681804095247,
+              5.999999999999999
+            ],
+            "axes_pixels": [
+              16.5,
+              0.14999999999999858,
+              -0.054543200740749004,
+              5.9997520814824465
+            ],
+            "image_angle_radians": 0.009090658665059731,
+            "source_trace_xy": [
+              [
+                207.2,
+                117.5
+              ],
+              [
+                215.45,
+                115.2
+              ],
+              [
+                223.7,
+                116.3
+              ],
+              [
+                231.95,
+                115.4
+              ],
+              [
+                240.2,
+                117.8
+              ]
+            ],
+            "visible_endpoint_semantics": [
+              "true joined left crease corner",
+              "true joined right crease corner"
+            ],
+            "source_cavity": {
+              "type": "closed crease; no pre-open oral paint",
+              "has_teeth": false,
+              "source_upper_lower": "same measured crease; shadow/ridge/stubble are tissue, not an aperture"
+            },
+            "lip_ridge_bounds_xyxy": [
+              206,
+              110,
+              241,
+              124
+            ],
+            "max_upper_displacement_pixels": [
+              0,
+              2,
+              3,
+              2.3,
+              0
+            ],
+            "max_lower_displacement_pixels": [
+              0,
+              5.3,
+              6.6,
+              5,
+              0
+            ],
+            "opening_limit_basis": "conservative local candidate inside observed lip/jaw support; no generated opening art or rendered acceptance",
+            "protected_face_bounds_xyxy": {
+              "eyes": [
+                184,
+                57,
+                264,
+                87
+              ],
+              "nose": [
+                201,
+                82,
+                249,
+                109
+              ],
+              "scalp": [
+                162,
+                9,
+                288,
+                74
+              ]
+            },
+            "profile": {
+              "corners": [
+                -1,
+                1
+              ],
+              "crease": [
+                0.0,
+                -0.39537045283218597,
+                -0.22523266857013016,
+                -0.38649387949201003,
+                0.0
+              ],
+              "open_upper": [
+                0.0,
+                -0.7287037861655192,
+                -0.7252326685701301,
+                -0.7698272128253434,
+                0.0
+              ],
+              "open_lower": [
+                0.0,
+                0.48796288050114733,
+                0.8747673314298697,
+                0.44683945384132334,
+                0.0
+              ],
+              "source_upper": [
+                0.0,
+                -0.39537045283218597,
+                -0.22523266857013016,
+                -0.38649387949201003,
+                0.0
+              ],
+              "source_lower": [
+                0.0,
+                -0.39537045283218597,
+                -0.22523266857013016,
+                -0.38649387949201003,
+                0.0
+              ],
+              "width": [
+                0.06,
+                0.16
+              ],
+              "teeth": 0
+            },
+            "shape_observation": "restrained asymmetric red upper ridge and lower lip; own cupid curve",
+            "bite_contact_limit": {
+              "max_normal_offset_pixels": 0.75,
+              "basis": "existing schema bite term at normalized cue 1; no source teeth; candidate must pass rendered contact review"
+            },
+            "width_factors": {
+              "max_spread": 1.06,
+              "min_round": 0.84
+            }
+          }
+        },
+        "right": {
+          "view": "right",
+          "direction": "right",
+          "crop_xyxy": [
+            472,
+            0,
+            681,
+            1008
+          ],
+          "painted_alpha16_bounds_xyxy": [
+            489,
+            9,
+            668,
+            983
+          ],
+          "measured_body_ground_pivot_xy": [
+            550,
+            980
+          ],
+          "pivot_in_crop_xy": [
+            78,
+            980
+          ],
+          "working512_from_sheet": {
+            "scale": 0.4426229508196721,
+            "translation_xy": [
+              12.557377049180332,
+              46.229508196721326
+            ]
+          },
+          "body": {
+            "waist_xy": [
+              590,
+              394
+            ],
+            "hip_xy": [
+              576,
+              530
+            ],
+            "garment_hem_y": [
+              706,
+              708
+            ],
+            "legs_near_far": [
+              {
+                "paint_root_xy": [
+                  540,
+                  705
+                ],
+                "knee_xy": [
+                  536,
+                  751
+                ],
+                "ankle_xy": [
+                  546,
+                  911
+                ],
+                "sole_contact_xy": [
+                  577,
+                  980
+                ],
+                "visibility": "visible"
+              },
+              {
+                "paint_root_xy": [
+                  573,
+                  706
+                ],
+                "knee_xy": null,
+                "ankle_xy": [
+                  571,
+                  921
+                ],
+                "sole_contact_xy": [
+                  623,
+                  962
+                ],
+                "visibility": "far thigh/knee hidden; narrow far calf/second shoe partly visible"
+              }
+            ],
+            "foreground": "near anatomical-right",
+            "helper_support_nodes_sheet_pixels": null,
+            "helper_support_status": "not directly safe for current two-leg helper; missing/occluded knees or far leg",
+            "props": {
+              "briefcase": {
+                "hand": "anatomical-left",
+                "visibility": "fully hidden behind far body; do not invent paint",
+                "bounds_xyxy": null,
+                "grip_xy": null
+              }
+            },
+            "issues": [
+              "A single visible calf dominates the profile; no complete independent far thigh/knee paint for an unrestricted two-leg split.",
+              "Get opposite contacts/passing and a leg-occlusion bridge before revealing the far leg or case."
+            ],
+            "hip_basis": "projected clothed pelvis estimate, sometimes occluded by sleeve/hand; not exposed anatomy",
+            "protected_visible_hand_bounds_xyxy": [
+              [
+                565,
+                513,
+                615,
+                598
+              ]
+            ],
+            "knee_basis": "visible leg-feature estimate; side far knee absent when null",
+            "paint_root_basis": "paint at hidden skirt/thigh overlap; do not expose absent upper thighs"
+          },
+          "mouth_visibility": "visible profile lip segment; hidden far anatomical corner not supplied",
+          "mouth": {
+            "rect_cxcy_extentxy": [
+              627.15,
+              113.55,
+              8.853530369293393,
+              3.5
+            ],
+            "axes_pixels": [
+              8.850000000000023,
+              -0.25,
+              0.0988306317934768,
+              3.4986043654890877
+            ],
+            "image_angle_radians": -0.028241077204787694,
+            "source_trace_xy": [
+              [
+                618.3,
+                113.8
+              ],
+              [
+                622.725,
+                112.7
+              ],
+              [
+                627.15,
+                112.9
+              ],
+              [
+                631.575,
+                113.1
+              ],
+              [
+                636,
+                113.3
+              ]
+            ],
+            "visible_endpoint_semantics": [
+              "near joined cheek corner",
+              "forward visible lip silhouette endpoint"
+            ],
+            "source_cavity": {
+              "type": "closed crease; no pre-open oral paint",
+              "has_teeth": false,
+              "source_upper_lower": "same measured crease; shadow/ridge/stubble are tissue, not an aperture"
+            },
+            "lip_ridge_bounds_xyxy": [
+              615,
+              108,
+              639,
+              121
+            ],
+            "max_upper_displacement_pixels": [
+              0,
+              0.8,
+              1.2,
+              0.9,
+              0
+            ],
+            "max_lower_displacement_pixels": [
+              0,
+              2.2,
+              3.1,
+              2.4,
+              0
+            ],
+            "opening_limit_basis": "conservative local candidate inside observed lip/jaw support; no generated opening art or rendered acceptance",
+            "protected_face_bounds_xyxy": {
+              "eye": [
+                593,
+                54,
+                635,
+                83
+              ],
+              "nose": [
+                621,
+                81,
+                650,
+                107
+              ],
+              "ear_and_bun": [
+                489,
+                73,
+                582,
+                139
+              ]
+            },
+            "profile": {
+              "corners": [
+                -1,
+                1
+              ],
+              "crease": [
+                0.0,
+                -0.2767392226116784,
+                -0.18602588202831466,
+                -0.09301294101416006,
+                0.0
+              ],
+              "open_upper": [
+                0.0,
+                -0.5053106511831069,
+                -0.5288830248854575,
+                -0.35015579815701725,
+                0.0
+              ],
+              "open_lower": [
+                0.0,
+                0.3518322059597503,
+                0.6996884036859712,
+                0.5927013447001257,
+                0.0
+              ],
+              "source_upper": [
+                0.0,
+                -0.2767392226116784,
+                -0.18602588202831466,
+                -0.09301294101416006,
+                0.0
+              ],
+              "source_lower": [
+                0.0,
+                -0.2767392226116784,
+                -0.18602588202831466,
+                -0.09301294101416006,
+                0.0
+              ],
+              "width": [
+                0.025,
+                0.08
+              ],
+              "teeth": 0
+            },
+            "shape_observation": "near corner to visible forward lip silhouette; hidden far corner unpainted",
+            "bite_contact_limit": {
+              "max_normal_offset_pixels": 0.4375,
+              "basis": "existing schema bite term at normalized cue 1; no source teeth; candidate must pass rendered contact review"
+            },
+            "width_factors": {
+              "max_spread": 1.025,
+              "min_round": 0.92
+            }
+          }
+        },
+        "rear": {
+          "view": "rear",
+          "direction": "up",
+          "crop_xyxy": [
+            787,
+            0,
+            1130,
+            1010
+          ],
+          "painted_alpha16_bounds_xyxy": [
+            801,
+            10,
+            1113,
+            984
+          ],
+          "measured_body_ground_pivot_xy": [
+            960,
+            982
+          ],
+          "pivot_in_crop_xy": [
+            173,
+            982
+          ],
+          "working512_from_sheet": {
+            "scale": 0.4426229508196721,
+            "translation_xy": [
+              -168.91803278688525,
+              45.34426229508199
+            ]
+          },
+          "body": {
+            "waist_xy": [
+              961,
+              398
+            ],
+            "hip_xy": [
+              961,
+              531
+            ],
+            "garment_hem_y": [
+              702,
+              703
+            ],
+            "legs_viewer_left_right": [
+              {
+                "paint_root_xy": [
+                  905,
+                  702
+                ],
+                "knee_xy": [
+                  906,
+                  748
+                ],
+                "ankle_xy": [
+                  909,
+                  917
+                ],
+                "sole_contact_xy": [
+                  914,
+                  981
+                ],
+                "visibility": "visible"
+              },
+              {
+                "paint_root_xy": [
+                  1010,
+                  703
+                ],
+                "knee_xy": [
+                  1011,
+                  748
+                ],
+                "ankle_xy": [
+                  1011,
+                  917
+                ],
+                "sole_contact_xy": [
+                  1007,
+                  981
+                ],
+                "visibility": "visible"
+              }
+            ],
+            "foreground": null,
+            "helper_support_nodes_sheet_pixels": {
+              "waist": 420,
+              "hip": 520,
+              "mid": 960,
+              "hem": [
+                702,
+                703
+              ],
+              "knee": [
+                748,
+                748
+              ],
+              "ankle": [
+                917,
+                917
+              ],
+              "centres": [
+                906,
+                1011
+              ],
+              "foot_centres": [
+                914,
+                1007
+              ]
+            },
+            "helper_support_status": "candidate connected-support nodes; requires actual phase pilot",
+            "props": {
+              "briefcase": {
+                "hand": "anatomical-left",
+                "visibility": "visible viewer-left",
+                "bounds_xyxy": [
+                  801,
+                  570,
+                  864,
+                  732
+                ],
+                "grip_xy": [
+                  836,
+                  576
+                ]
+              }
+            },
+            "issues": [
+              "Back-of-knee/leg axes are source feature estimates, not exposed joint anatomy.",
+              "Protect the briefcase and hand with a source-aligned mask."
+            ],
+            "hip_basis": "projected clothed pelvis estimate, sometimes occluded by sleeve/hand; not exposed anatomy",
+            "protected_visible_hand_bounds_xyxy": [
+              [
+                815,
+                512,
+                855,
+                600
+              ],
+              [
+                1072,
+                513,
+                1112,
+                598
+              ]
+            ],
+            "knee_basis": "visible leg-feature estimate; side far knee absent when null",
+            "paint_root_basis": "paint at hidden skirt/thigh overlap; do not expose absent upper thighs"
+          },
+          "mouth": null,
+          "mouth_visibility": "rear no-mouth"
+        },
+        "left": {
+          "view": "left",
+          "direction": "left",
+          "crop_xyxy": [
+            1240,
+            0,
+            1452,
+            1008
+          ],
+          "painted_alpha16_bounds_xyxy": [
+            1255,
+            8,
+            1439,
+            983
+          ],
+          "measured_body_ground_pivot_xy": [
+            1366,
+            979
+          ],
+          "pivot_in_crop_xy": [
+            126,
+            979
+          ],
+          "working512_from_sheet": {
+            "scale": 0.4426229508196721,
+            "translation_xy": [
+              -348.62295081967216,
+              46.672131147540995
+            ]
+          },
+          "body": {
+            "waist_xy": [
+              1324,
+              393
+            ],
+            "hip_xy": [
+              1346,
+              535
+            ],
+            "garment_hem_y": [
+              703,
+              703
+            ],
+            "legs_near_far": [
+              {
+                "paint_root_xy": [
+                  1373,
+                  704
+                ],
+                "knee_xy": [
+                  1378,
+                  753
+                ],
+                "ankle_xy": [
+                  1373,
+                  912
+                ],
+                "sole_contact_xy": [
+                  1323,
+                  978
+                ],
+                "visibility": "visible"
+              },
+              {
+                "paint_root_xy": [
+                  1358,
+                  704
+                ],
+                "knee_xy": null,
+                "ankle_xy": [
+                  1357,
+                  923
+                ],
+                "sole_contact_xy": [
+                  1302,
+                  963
+                ],
+                "visibility": "far thigh/knee hidden; shoe partly visible"
+              }
+            ],
+            "foreground": "near anatomical-left",
+            "helper_support_nodes_sheet_pixels": null,
+            "helper_support_status": "not directly safe for current two-leg helper; missing/occluded knees or far leg",
+            "props": {
+              "briefcase": {
+                "hand": "anatomical-left",
+                "visibility": "visible near hand; overlaps skirt and upper calf",
+                "bounds_xyxy": [
+                  1286,
+                  565,
+                  1395,
+                  732
+                ],
+                "grip_xy": [
+                  1345,
+                  574
+                ]
+              }
+            },
+            "issues": [
+              "Case masks the front/side skirt and top of the calf. Rigid-mask transport must not expose absent skirt/leg pixels.",
+              "Hidden far thigh/knee needs accepted motion keys; do not slice the one visible calf into two generated legs."
+            ],
+            "hip_basis": "projected clothed pelvis estimate, sometimes occluded by sleeve/hand; not exposed anatomy",
+            "protected_visible_hand_bounds_xyxy": [
+              [
+                1316,
+                509,
+                1367,
+                598
+              ]
+            ],
+            "knee_basis": "visible leg-feature estimate; side far knee absent when null",
+            "paint_root_basis": "paint at hidden skirt/thigh overlap; do not expose absent upper thighs"
+          },
+          "mouth_visibility": "visible profile lip segment; hidden far anatomical corner not supplied",
+          "mouth": {
+            "rect_cxcy_extentxy": [
+              1296.5,
+              114.80000000000001,
+              8.649277426467485,
+              3.5000000000000004
+            ],
+            "axes_pixels": [
+              8.5,
+              1.6000000000000014,
+              -0.6474529285953476,
+              3.439593683162782
+            ],
+            "image_angle_radians": 0.18605817714900397,
+            "source_trace_xy": [
+              [
+                1288,
+                113.2
+              ],
+              [
+                1292.25,
+                113.1
+              ],
+              [
+                1296.5,
+                114.2
+              ],
+              [
+                1300.75,
+                115
+              ],
+              [
+                1305,
+                116.4
+              ]
+            ],
+            "visible_endpoint_semantics": [
+              "forward visible lip silhouette endpoint",
+              "near joined cheek corner"
+            ],
+            "source_cavity": {
+              "type": "closed crease; no pre-open oral paint",
+              "has_teeth": false,
+              "source_upper_lower": "same measured crease; shadow/ridge/stubble are tissue, not an aperture"
+            },
+            "lip_ridge_bounds_xyxy": [
+              1286,
+              108,
+              1308,
+              123
+            ],
+            "max_upper_displacement_pixels": [
+              0,
+              1,
+              1.4,
+              1,
+              0
+            ],
+            "max_lower_displacement_pixels": [
+              0,
+              2.5,
+              3.2,
+              2.2,
+              0
+            ],
+            "opening_limit_basis": "conservative local candidate inside observed lip/jaw support; no generated opening art or rendered acceptance",
+            "protected_face_bounds_xyxy": {
+              "eye": [
+                1285,
+                54,
+                1327,
+                83
+              ],
+              "nose": [
+                1278,
+                79,
+                1301,
+                107
+              ],
+              "ear_and_bun": [
+                1355,
+                78,
+                1436,
+                139
+              ]
+            },
+            "profile": {
+              "corners": [
+                -1,
+                1
+              ],
+              "crease": [
+                0.0,
+                -0.24950309135721802,
+                -0.16846989468552637,
+                -0.1642543049840258,
+                0.0
+              ],
+              "open_upper": [
+                0.0,
+                -0.5352173770715037,
+                -0.5684698946855263,
+                -0.4499685906983115,
+                0.0
+              ],
+              "open_lower": [
+                0.0,
+                0.46478262292849626,
+                0.7458158196001881,
+                0.46431712358740285,
+                0.0
+              ],
+              "source_upper": [
+                0.0,
+                -0.24950309135721802,
+                -0.16846989468552637,
+                -0.1642543049840258,
+                0.0
+              ],
+              "source_lower": [
+                0.0,
+                -0.24950309135721802,
+                -0.16846989468552637,
+                -0.1642543049840258,
+                0.0
+              ],
+              "width": [
+                0.02,
+                0.085
+              ],
+              "teeth": 0
+            },
+            "shape_observation": "visible forward lip silhouette to near corner; asymmetry measured separately",
+            "bite_contact_limit": {
+              "max_normal_offset_pixels": 0.4375,
+              "basis": "existing schema bite term at normalized cue 1; no source teeth; candidate must pass rendered contact review"
+            },
+            "width_factors": {
+              "max_spread": 1.02,
+              "min_round": 0.915
+            }
+          }
+        }
+      }
+    },
+    "heiko-maaslos": {
+      "actor_id": "jwd-parent",
+      "source": {
+        "file": "assets/sprite-sources/jwd-neighbors/heiko-maaslos-source-v2.png",
+        "sha256": "87e8d5f27d63daab2c54e07a5ebfe1381bf8d679e5f6caf747b27929ac6102b2",
+        "bytes": 2281841,
+        "dimensions": [
+          1536,
+          1024
+        ]
+      },
+      "source_scale": 1,
+      "reference_body_height_pixels": 984,
+      "optional_working512": {
+        "uniform_scale": 0.43902439024390244,
+        "pivot_xy": [
+          256,
+          480
+        ],
+        "reference_view": "front",
+        "scope": "authoring transform only; world actor height stays integrator-owned"
+      },
+      "views": {
+        "front": {
+          "view": "front",
+          "direction": "down",
+          "crop_xyxy": [
+            52,
+            0,
+            434,
+            1020
+          ],
+          "painted_alpha16_bounds_xyxy": [
+            77,
+            14,
+            417,
+            1001
+          ],
+          "measured_body_ground_pivot_xy": [
+            247,
+            998
+          ],
+          "pivot_in_crop_xy": [
+            195,
+            998
+          ],
+          "working512_from_sheet": {
+            "scale": 0.43902439024390244,
+            "translation_xy": [
+              147.5609756097561,
+              41.853658536585385
+            ]
+          },
+          "body": {
+            "waist_xy": [
+              247,
+              500
+            ],
+            "hip_xy": [
+              248,
+              553
+            ],
+            "garment_hem_y": [
+              502,
+              501
+            ],
+            "legs_viewer_left_right": [
+              {
+                "paint_root_xy": [
+                  195,
+                  504
+                ],
+                "knee_xy": [
+                  181,
+                  744
+                ],
+                "ankle_xy": [
+                  175,
+                  937
+                ],
+                "sole_contact_xy": [
+                  159,
+                  997
+                ],
+                "visibility": "visible"
+              },
+              {
+                "paint_root_xy": [
+                  301,
+                  504
+                ],
+                "knee_xy": [
+                  311,
+                  744
+                ],
+                "ankle_xy": [
+                  320,
+                  937
+                ],
+                "sole_contact_xy": [
+                  332,
+                  998
+                ],
+                "visibility": "visible"
+              }
+            ],
+            "foreground": null,
+            "helper_support_nodes_sheet_pixels": {
+              "waist": 450,
+              "hip": 480,
+              "mid": 248,
+              "hem": [
+                502,
+                501
+              ],
+              "knee": [
+                744,
+                744
+              ],
+              "ankle": [
+                937,
+                937
+              ],
+              "centres": [
+                181,
+                311
+              ],
+              "foot_centres": [
+                159,
+                332
+              ]
+            },
+            "helper_support_status": "candidate connected-support nodes; requires actual phase pilot",
+            "props": {},
+            "issues": [
+              "Measured sweater hem is above anatomical hip; helper hip=480 is an overlap/support node inside paint, not anatomical hip=553.",
+              "Actual trouser cuffs are near y937; do not feed those as helper hem, which must remain above the knee.",
+              "Knees are inferred beneath trouser folds; approved gait keys must prove their bend."
+            ],
+            "hip_basis": "projected clothed pelvis estimate, sometimes occluded by sleeve/hand; not exposed anatomy",
+            "protected_visible_hand_bounds_xyxy": [
+              [
+                85,
+                524,
+                144,
+                608
+              ],
+              [
+                351,
+                524,
+                406,
+                608
+              ]
+            ],
+            "knee_basis": "clothed fold/axis estimate, not exposed knee anatomy",
+            "paint_root_basis": "connected upper trouser paint beneath sweater overlap"
+          },
+          "mouth_visibility": "front full visible lip crease",
+          "mouth": {
+            "rect_cxcy_extentxy": [
+              248.5,
+              142.64999999999998,
+              16.206248794832185,
+              5.5
+            ],
+            "axes_pixels": [
+              16.19999999999999,
+              0.45000000000000284,
+              -0.15271886982194416,
+              5.497879313589951
+            ],
+            "image_angle_radians": 0.02777063659342123,
+            "source_trace_xy": [
+              [
+                232.3,
+                142.2
+              ],
+              [
+                240.4,
+                141
+              ],
+              [
+                248.5,
+                141.7
+              ],
+              [
+                256.6,
+                141
+              ],
+              [
+                264.7,
+                143.1
+              ]
+            ],
+            "visible_endpoint_semantics": [
+              "true joined left crease corner",
+              "true joined right crease corner"
+            ],
+            "source_cavity": {
+              "type": "closed crease; no pre-open oral paint",
+              "has_teeth": false,
+              "source_upper_lower": "same measured crease; shadow/ridge/stubble are tissue, not an aperture"
+            },
+            "lip_ridge_bounds_xyxy": [
+              230,
+              137,
+              266,
+              150
+            ],
+            "max_upper_displacement_pixels": [
+              0,
+              1.5,
+              2.4,
+              1.5,
+              0
+            ],
+            "max_lower_displacement_pixels": [
+              0,
+              3.7,
+              5.4,
+              3.6,
+              0
+            ],
+            "opening_limit_basis": "conservative local candidate inside observed lip/jaw support; no generated opening art or rendered acceptance",
+            "protected_face_bounds_xyxy": {
+              "eyes": [
+                204,
+                78,
+                286,
+                105
+              ],
+              "nose": [
+                224,
+                104,
+                270,
+                133
+              ],
+              "scalp": [
+                178,
+                14,
+                320,
+                81
+              ],
+              "moustache_outside_lip_support": [
+                217,
+                128,
+                278,
+                135
+              ]
+            },
+            "profile": {
+              "corners": [
+                -1,
+                1
+              ],
+              "crease": [
+                0.0,
+                -0.2585701375221216,
+                -0.17320969679779194,
+                -0.3386020966512412,
+                0.0
+              ],
+              "open_upper": [
+                0.0,
+                -0.5312974102493944,
+                -0.6095733331614283,
+                -0.6113293693785139,
+                0.0
+              ],
+              "open_lower": [
+                0.0,
+                0.41415713520515113,
+                0.80860848502039,
+                0.31594335789421335,
+                0.0
+              ],
+              "source_upper": [
+                0.0,
+                -0.2585701375221216,
+                -0.17320969679779194,
+                -0.3386020966512412,
+                0.0
+              ],
+              "source_lower": [
+                0.0,
+                -0.2585701375221216,
+                -0.17320969679779194,
+                -0.3386020966512412,
+                0.0
+              ],
+              "width": [
+                0.045,
+                0.12
+              ],
+              "teeth": 0
+            },
+            "shape_observation": "thin compressed crease under light moustache; lower pink ridge remains distinct from stubble",
+            "bite_contact_limit": {
+              "max_normal_offset_pixels": 0.6875,
+              "basis": "existing schema bite term at normalized cue 1; no source teeth; candidate must pass rendered contact review"
+            },
+            "width_factors": {
+              "max_spread": 1.045,
+              "min_round": 0.88
+            }
+          }
+        },
+        "right": {
+          "view": "right",
+          "direction": "right",
+          "crop_xyxy": [
+            502,
+            0,
+            713,
+            1020
+          ],
+          "painted_alpha16_bounds_xyxy": [
+            514,
+            18,
+            699,
+            1000
+          ],
+          "measured_body_ground_pivot_xy": [
+            574,
+            994
+          ],
+          "pivot_in_crop_xy": [
+            72,
+            994
+          ],
+          "working512_from_sheet": {
+            "scale": 0.43902439024390244,
+            "translation_xy": [
+              4.0,
+              43.60975609756099
+            ]
+          },
+          "body": {
+            "waist_xy": [
+              599,
+              500
+            ],
+            "hip_xy": [
+              592,
+              552
+            ],
+            "garment_hem_y": [
+              500,
+              498
+            ],
+            "legs_near_far": [
+              {
+                "paint_root_xy": [
+                  566,
+                  502
+                ],
+                "knee_xy": [
+                  573,
+                  737
+                ],
+                "ankle_xy": [
+                  571,
+                  947
+                ],
+                "sole_contact_xy": [
+                  604,
+                  994
+                ],
+                "visibility": "visible"
+              },
+              {
+                "paint_root_xy": [
+                  625,
+                  503
+                ],
+                "knee_xy": [
+                  616,
+                  738
+                ],
+                "ankle_xy": [
+                  618,
+                  923
+                ],
+                "sole_contact_xy": [
+                  652,
+                  969
+                ],
+                "visibility": "far trouser leg partly hidden; separate second shoe visible"
+              }
+            ],
+            "foreground": "near anatomical-right",
+            "helper_support_nodes_sheet_pixels": {
+              "waist": 452,
+              "hip": 480,
+              "mid": 597,
+              "hem": [
+                500,
+                498
+              ],
+              "knee": [
+                737,
+                738
+              ],
+              "ankle": [
+                947,
+                923
+              ],
+              "centres": [
+                573,
+                616
+              ],
+              "foot_centres": [
+                604,
+                652
+              ]
+            },
+            "helper_support_status": "candidate connected-support nodes; requires actual phase pilot",
+            "props": {},
+            "issues": [
+              "Side trousers overlap; the cloth seam and fixed near/far ownership need explicit split_path_xy and native-size pilot.",
+              "Both shoes are intact, but far upper-leg paint remains occluded; constrain deformation or author missing motion keys.",
+              "Helper root/hem nodes describe connected sweater/trouser support, not pant cuffs or anatomical hip."
+            ],
+            "hip_basis": "projected clothed pelvis estimate, sometimes occluded by sleeve/hand; not exposed anatomy",
+            "protected_visible_hand_bounds_xyxy": [
+              [
+                592,
+                539,
+                652,
+                613
+              ]
+            ],
+            "knee_basis": "clothed fold/axis estimate, not exposed knee anatomy",
+            "paint_root_basis": "connected upper trouser paint beneath sweater overlap"
+          },
+          "mouth_visibility": "visible profile lip segment; hidden far anatomical corner not supplied",
+          "mouth": {
+            "rect_cxcy_extentxy": [
+              662.0,
+              143.75,
+              10.10457817031468,
+              3.3000000000000003
+            ],
+            "axes_pixels": [
+              10.0,
+              -1.4499999999999886,
+              0.4735477245410777,
+              3.265846376145389
+            ],
+            "image_angle_radians": -0.1439964217088909,
+            "source_trace_xy": [
+              [
+                652,
+                145.2
+              ],
+              [
+                657,
+                143.4
+              ],
+              [
+                662,
+                142.8
+              ],
+              [
+                667,
+                142.4
+              ],
+              [
+                672,
+                142.3
+              ]
+            ],
+            "visible_endpoint_semantics": [
+              "near joined cheek corner",
+              "forward visible lip silhouette endpoint"
+            ],
+            "source_cavity": {
+              "type": "closed crease; no pre-open oral paint",
+              "has_teeth": false,
+              "source_upper_lower": "same measured crease; shadow/ridge/stubble are tissue, not an aperture"
+            },
+            "lip_ridge_bounds_xyxy": [
+              648,
+              139,
+              675,
+              151
+            ],
+            "max_upper_displacement_pixels": [
+              0,
+              0.7,
+              1.1,
+              0.7,
+              0
+            ],
+            "max_lower_displacement_pixels": [
+              0,
+              2,
+              2.8,
+              2,
+              0
+            ],
+            "opening_limit_basis": "conservative local candidate inside observed lip/jaw support; no generated opening art or rendered acceptance",
+            "protected_face_bounds_xyxy": {
+              "eye": [
+                640,
+                80,
+                677,
+                106
+              ],
+              "nose": [
+                661,
+                109,
+                692,
+                134
+              ],
+              "ear": [
+                586,
+                94,
+                622,
+                138
+              ],
+              "collar": [
+                548,
+                155,
+                638,
+                192
+              ]
+            },
+            "profile": {
+              "corners": [
+                -1,
+                1
+              ],
+              "crease": [
+                0.0,
+                -0.31283433651535825,
+                -0.28591445996624887,
+                -0.18918009742881584,
+                0.0
+              ],
+              "open_upper": [
+                0.0,
+                -0.5249555486365703,
+                -0.6192477932995822,
+                -0.40130130955002796,
+                0.0
+              ],
+              "open_lower": [
+                0.0,
+                0.29322626954524783,
+                0.5625703885185996,
+                0.41688050863179027,
+                0.0
+              ],
+              "source_upper": [
+                0.0,
+                -0.31283433651535825,
+                -0.28591445996624887,
+                -0.18918009742881584,
+                0.0
+              ],
+              "source_lower": [
+                0.0,
+                -0.31283433651535825,
+                -0.28591445996624887,
+                -0.18918009742881584,
+                0.0
+              ],
+              "width": [
+                0.02,
+                0.075
+              ],
+              "teeth": 0
+            },
+            "shape_observation": "thin rising visible lip crease within stubble; far corner absent",
+            "bite_contact_limit": {
+              "max_normal_offset_pixels": 0.4125,
+              "basis": "existing schema bite term at normalized cue 1; no source teeth; candidate must pass rendered contact review"
+            },
+            "width_factors": {
+              "max_spread": 1.02,
+              "min_round": 0.925
+            }
+          }
+        },
+        "rear": {
+          "view": "rear",
+          "direction": "up",
+          "crop_xyxy": [
+            782,
+            0,
+            1163,
+            1018
+          ],
+          "painted_alpha16_bounds_xyxy": [
+            798,
+            15,
+            1146,
+            998
+          ],
+          "measured_body_ground_pivot_xy": [
+            965,
+            996
+          ],
+          "pivot_in_crop_xy": [
+            183,
+            996
+          ],
+          "working512_from_sheet": {
+            "scale": 0.43902439024390244,
+            "translation_xy": [
+              -167.65853658536588,
+              42.73170731707319
+            ]
+          },
+          "body": {
+            "waist_xy": [
+              970,
+              500
+            ],
+            "hip_xy": [
+              970,
+              553
+            ],
+            "garment_hem_y": [
+              501,
+              501
+            ],
+            "legs_viewer_left_right": [
+              {
+                "paint_root_xy": [
+                  890,
+                  504
+                ],
+                "knee_xy": [
+                  894,
+                  745
+                ],
+                "ankle_xy": [
+                  892,
+                  954
+                ],
+                "sole_contact_xy": [
+                  885,
+                  995
+                ],
+                "visibility": "visible"
+              },
+              {
+                "paint_root_xy": [
+                  1040,
+                  504
+                ],
+                "knee_xy": [
+                  1040,
+                  745
+                ],
+                "ankle_xy": [
+                  1036,
+                  954
+                ],
+                "sole_contact_xy": [
+                  1051,
+                  995
+                ],
+                "visibility": "visible"
+              }
+            ],
+            "foreground": null,
+            "helper_support_nodes_sheet_pixels": {
+              "waist": 450,
+              "hip": 480,
+              "mid": 970,
+              "hem": [
+                501,
+                501
+              ],
+              "knee": [
+                745,
+                745
+              ],
+              "ankle": [
+                954,
+                954
+              ],
+              "centres": [
+                894,
+                1040
+              ],
+              "foot_centres": [
+                885,
+                1051
+              ]
+            },
+            "helper_support_status": "candidate connected-support nodes; requires actual phase pilot",
+            "props": {},
+            "issues": [
+              "Use the true trouser crotch/gap for split; waistband and sweater remain connected.",
+              "Clothed knee estimates must be checked against opposite gait contacts."
+            ],
+            "hip_basis": "projected clothed pelvis estimate, sometimes occluded by sleeve/hand; not exposed anatomy",
+            "protected_visible_hand_bounds_xyxy": [
+              [
+                808,
+                534,
+                865,
+                609
+              ],
+              [
+                1080,
+                533,
+                1137,
+                609
+              ]
+            ],
+            "knee_basis": "clothed fold/axis estimate, not exposed knee anatomy",
+            "paint_root_basis": "connected upper trouser paint beneath sweater overlap"
+          },
+          "mouth": null,
+          "mouth_visibility": "rear no-mouth"
+        },
+        "left": {
+          "view": "left",
+          "direction": "left",
+          "crop_xyxy": [
+            1253,
+            0,
+            1467,
+            1020
+          ],
+          "painted_alpha16_bounds_xyxy": [
+            1263,
+            21,
+            1453,
+            1000
+          ],
+          "measured_body_ground_pivot_xy": [
+            1402,
+            997
+          ],
+          "pivot_in_crop_xy": [
+            149,
+            997
+          ],
+          "working512_from_sheet": {
+            "scale": 0.43902439024390244,
+            "translation_xy": [
+              -359.5121951219512,
+              42.292682926829286
+            ]
+          },
+          "body": {
+            "waist_xy": [
+              1369,
+              500
+            ],
+            "hip_xy": [
+              1365,
+              552
+            ],
+            "garment_hem_y": [
+              502,
+              501
+            ],
+            "legs_near_far": [
+              {
+                "paint_root_xy": [
+                  1396,
+                  504
+                ],
+                "knee_xy": [
+                  1388,
+                  740
+                ],
+                "ankle_xy": [
+                  1409,
+                  949
+                ],
+                "sole_contact_xy": [
+                  1371,
+                  997
+                ],
+                "visibility": "visible"
+              },
+              {
+                "paint_root_xy": [
+                  1338,
+                  504
+                ],
+                "knee_xy": [
+                  1344,
+                  733
+                ],
+                "ankle_xy": [
+                  1363,
+                  923
+                ],
+                "sole_contact_xy": [
+                  1316,
+                  973
+                ],
+                "visibility": "far trouser leg partly hidden; second shoe visible"
+              }
+            ],
+            "foreground": "near anatomical-left",
+            "helper_support_nodes_sheet_pixels": {
+              "waist": 452,
+              "hip": 480,
+              "mid": 1364,
+              "hem": [
+                501,
+                502
+              ],
+              "knee": [
+                733,
+                740
+              ],
+              "ankle": [
+                923,
+                949
+              ],
+              "centres": [
+                1344,
+                1388
+              ],
+              "foot_centres": [
+                1316,
+                1371
+              ]
+            },
+            "helper_support_status": "candidate connected-support nodes; requires actual phase pilot",
+            "props": {},
+            "issues": [
+              "Keep anatomical-left near leg fixed; viewer-left/right helper arrays are different from near/far ordering.",
+              "Own measured cloth seam and shoe masks; do not mirror the right-profile split.",
+              "Occluded far thigh is not new paint that the helper may reveal."
+            ],
+            "hip_basis": "projected clothed pelvis estimate, sometimes occluded by sleeve/hand; not exposed anatomy",
+            "protected_visible_hand_bounds_xyxy": [
+              [
+                1310,
+                537,
+                1367,
+                615
+              ]
+            ],
+            "knee_basis": "clothed fold/axis estimate, not exposed knee anatomy",
+            "paint_root_basis": "connected upper trouser paint beneath sweater overlap"
+          },
+          "mouth_visibility": "visible profile lip segment; hidden far anatomical corner not supplied",
+          "mouth": {
+            "rect_cxcy_extentxy": [
+              1295.9,
+              144.8,
+              7.102816342831928,
+              3.3000000000000003
+            ],
+            "axes_pixels": [
+              7.100000000000023,
+              0.20000000000000284,
+              -0.09292088773576034,
+              3.2986915146194558
+            ],
+            "image_angle_radians": 0.028161566987892732,
+            "source_trace_xy": [
+              [
+                1288.8,
+                144.6
+              ],
+              [
+                1292.35,
+                144.2
+              ],
+              [
+                1295.9,
+                144.3
+              ],
+              [
+                1299.45,
+                144.5
+              ],
+              [
+                1303,
+                145
+              ]
+            ],
+            "visible_endpoint_semantics": [
+              "forward visible lip silhouette endpoint",
+              "near joined cheek corner"
+            ],
+            "source_cavity": {
+              "type": "closed crease; no pre-open oral paint",
+              "has_teeth": false,
+              "source_upper_lower": "same measured crease; shadow/ridge/stubble are tissue, not an aperture"
+            },
+            "lip_ridge_bounds_xyxy": [
+              1287,
+              140,
+              1307,
+              152
+            ],
+            "max_upper_displacement_pixels": [
+              0,
+              0.7,
+              1,
+              0.6,
+              0
+            ],
+            "max_lower_displacement_pixels": [
+              0,
+              1.9,
+              2.5,
+              1.8,
+              0
+            ],
+            "opening_limit_basis": "conservative local candidate inside observed lip/jaw support; no generated opening art or rendered acceptance",
+            "protected_face_bounds_xyxy": {
+              "eye": [
+                1285,
+                81,
+                1323,
+                107
+              ],
+              "nose": [
+                1271,
+                109,
+                1302,
+                135
+              ],
+              "ear": [
+                1353,
+                95,
+                1391,
+                140
+              ],
+              "collar": [
+                1325,
+                157,
+                1414,
+                194
+              ]
+            },
+            "profile": {
+              "corners": [
+                -1,
+                1
+              ],
+              "crease": [
+                0.0,
+                -0.15145507413312964,
+                -0.15133508595793504,
+                -0.12078100754817202,
+                0.0
+              ],
+              "open_upper": [
+                0.0,
+                -0.3635762862543418,
+                -0.4543653889882381,
+                -0.3025991893663538,
+                0.0
+              ],
+              "open_lower": [
+                0.0,
+                0.42430250162444616,
+                0.6062406716178226,
+                0.4246735379063735,
+                0.0
+              ],
+              "source_upper": [
+                0.0,
+                -0.15145507413312964,
+                -0.15133508595793504,
+                -0.12078100754817202,
+                0.0
+              ],
+              "source_lower": [
+                0.0,
+                -0.15145507413312964,
+                -0.15133508595793504,
+                -0.12078100754817202,
+                0.0
+              ],
+              "width": [
+                0.018,
+                0.07
+              ],
+              "teeth": 0
+            },
+            "shape_observation": "own slightly downward inner join; do not mirror the right source",
+            "bite_contact_limit": {
+              "max_normal_offset_pixels": 0.4125,
+              "basis": "existing schema bite term at normalized cue 1; no source teeth; candidate must pass rendered contact review"
+            },
+            "width_factors": {
+              "max_spread": 1.018,
+              "min_round": 0.9299999999999999
+            }
+          }
+        }
+      }
+    },
+    "fink": {
+      "actor_id": "jwd-swabian",
+      "source": {
+        "file": "assets/sprite-sources/jwd-neighbors/fink-source-v2.png",
+        "sha256": "9aa831293f8833605274dea8afb842c32718f08af82949a7f49e6d78b3d9ccfb",
+        "bytes": 2548712,
+        "dimensions": [
+          1536,
+          1024
+        ]
+      },
+      "source_scale": 1,
+      "reference_body_height_pixels": 861,
+      "optional_working512": {
+        "uniform_scale": 0.5017421602787456,
+        "pivot_xy": [
+          256,
+          480
+        ],
+        "reference_view": "front",
+        "scope": "authoring transform only; world actor height stays integrator-owned"
+      },
+      "views": {
+        "front": {
+          "view": "front",
+          "direction": "down",
+          "crop_xyxy": [
+            0,
+            48,
+            416,
+            952
+          ],
+          "painted_alpha16_bounds_xyxy": [
+            10,
+            69,
+            403,
+            932
+          ],
+          "measured_body_ground_pivot_xy": [
+            217,
+            930
+          ],
+          "pivot_in_crop_xy": [
+            217,
+            882
+          ],
+          "working512_from_sheet": {
+            "scale": 0.5017421602787456,
+            "translation_xy": [
+              147.1219512195122,
+              13.379790940766554
+            ]
+          },
+          "body": {
+            "waist_xy": [
+              215,
+              416
+            ],
+            "hip_xy": [
+              215,
+              547
+            ],
+            "garment_hem_y": [
+              776,
+              779
+            ],
+            "legs_viewer_left_right": [
+              {
+                "paint_root_xy": [
+                  151,
+                  779
+                ],
+                "knee_xy": null,
+                "ankle_xy": [
+                  151,
+                  867
+                ],
+                "sole_contact_xy": [
+                  154,
+                  929
+                ],
+                "visibility": "visible"
+              },
+              {
+                "paint_root_xy": [
+                  279,
+                  780
+                ],
+                "knee_xy": null,
+                "ankle_xy": [
+                  279,
+                  872
+                ],
+                "sole_contact_xy": [
+                  292,
+                  930
+                ],
+                "visibility": "visible"
+              }
+            ],
+            "foreground": null,
+            "helper_support_nodes_sheet_pixels": null,
+            "helper_support_status": "not directly safe for current two-leg helper; missing/occluded knees or far leg",
+            "props": {
+              "broom": {
+                "hand": "anatomical-right",
+                "visibility": "visible viewer-left",
+                "bounds_xyxy": [
+                  10,
+                  188,
+                  118,
+                  931
+                ],
+                "grip_xy": [
+                  70,
+                  334
+                ]
+              }
+            },
+            "issues": [
+              "Both anatomical knees are covered by the long dress; exposed skin is calf, not a measurable knee.",
+              "Literal painted_walk ordering hem<knee fails here. Need own contact/passing art or a supported bounded skirt/calf method before gait expansion.",
+              "Broom bristles overlap the viewer-left shoe at the floor; use precise owned source mask and the body/ankle pivot, not prop-centred bbox."
+            ],
+            "hip_basis": "projected clothed pelvis estimate, sometimes occluded by sleeve/hand; not exposed anatomy",
+            "protected_visible_hand_bounds_xyxy": [
+              [
+                38,
+                301,
+                100,
+                385
+              ],
+              [
+                342,
+                466,
+                401,
+                601
+              ]
+            ],
+            "knee_basis": "covered by long dress: absent source pixels",
+            "paint_root_basis": "first usable exposed calf paint below long hem, not a thigh root"
+          },
+          "mouth_visibility": "front full visible lip crease",
+          "mouth": {
+            "rect_cxcy_extentxy": [
+              211.8,
+              199.1,
+              19.804039991880444,
+              5.999999999999999
+            ],
+            "axes_pixels": [
+              19.799999999999997,
+              0.4000000000000057,
+              -0.12118739413695498,
+              5.998776009779186
+            ],
+            "image_angle_radians": 0.020199272581068215,
+            "source_trace_xy": [
+              [
+                192,
+                198.7
+              ],
+              [
+                201.9,
+                195.1
+              ],
+              [
+                211.8,
+                194.4
+              ],
+              [
+                221.7,
+                196
+              ],
+              [
+                231.6,
+                199.5
+              ]
+            ],
+            "visible_endpoint_semantics": [
+              "true joined left crease corner",
+              "true joined right crease corner"
+            ],
+            "source_cavity": {
+              "type": "closed crease; no pre-open oral paint",
+              "has_teeth": false,
+              "source_upper_lower": "same measured crease; shadow/ridge/stubble are tissue, not an aperture"
+            },
+            "lip_ridge_bounds_xyxy": [
+              190,
+              189,
+              234,
+              205
+            ],
+            "max_upper_displacement_pixels": [
+              0,
+              1.5,
+              2.1,
+              1.4,
+              0
+            ],
+            "max_lower_displacement_pixels": [
+              0,
+              4,
+              5.5,
+              3.8,
+              0
+            ],
+            "opening_limit_basis": "conservative local candidate inside observed lip/jaw support; no generated opening art or rendered acceptance",
+            "protected_face_bounds_xyxy": {
+              "eyes": [
+                160,
+                129,
+                256,
+                161
+              ],
+              "nose": [
+                187,
+                161,
+                234,
+                185
+              ],
+              "headscarf": [
+                120,
+                69,
+                303,
+                150
+              ],
+              "collar": [
+                152,
+                226,
+                267,
+                274
+              ]
+            },
+            "profile": {
+              "corners": [
+                -1,
+                1
+              ],
+              "crease": [
+                0.0,
+                -0.6343687072090033,
+                -0.7809434055579806,
+                -0.5462111121253604,
+                0.0
+              ],
+              "open_upper": [
+                0.0,
+                -0.8843687072090033,
+                -1.1309434055579806,
+                -0.7795444454586937,
+                0.0
+              ],
+              "open_lower": [
+                0.0,
+                0.03229795945766334,
+                0.13572326110868604,
+                0.08712222120797286,
+                0.0
+              ],
+              "source_upper": [
+                0.0,
+                -0.6343687072090033,
+                -0.7809434055579806,
+                -0.5462111121253604,
+                0.0
+              ],
+              "source_lower": [
+                0.0,
+                -0.6343687072090033,
+                -0.7809434055579806,
+                -0.5462111121253604,
+                0.0
+              ],
+              "width": [
+                0.035,
+                0.1
+              ],
+              "teeth": 0
+            },
+            "shape_observation": "wide downturned crease; corners lower than central lip, no red lipstick clone",
+            "bite_contact_limit": {
+              "max_normal_offset_pixels": 0.75,
+              "basis": "existing schema bite term at normalized cue 1; no source teeth; candidate must pass rendered contact review"
+            },
+            "width_factors": {
+              "max_spread": 1.035,
+              "min_round": 0.9
+            }
+          }
+        },
+        "right": {
+          "view": "right",
+          "direction": "right",
+          "crop_xyxy": [
+            413,
+            48,
+            774,
+            954
+          ],
+          "painted_alpha16_bounds_xyxy": [
+            424,
+            72,
+            766,
+            934
+          ],
+          "measured_body_ground_pivot_xy": [
+            544,
+            932
+          ],
+          "pivot_in_crop_xy": [
+            131,
+            884
+          ],
+          "working512_from_sheet": {
+            "scale": 0.5017421602787456,
+            "translation_xy": [
+              -16.947735191637605,
+              12.37630662020905
+            ]
+          },
+          "body": {
+            "waist_xy": [
+              571,
+              414
+            ],
+            "hip_xy": [
+              579,
+              551
+            ],
+            "garment_hem_y": [
+              768,
+              781
+            ],
+            "legs_near_far": [
+              {
+                "paint_root_xy": [
+                  534,
+                  779
+                ],
+                "knee_xy": null,
+                "ankle_xy": [
+                  540,
+                  861
+                ],
+                "sole_contact_xy": [
+                  578,
+                  931
+                ],
+                "visibility": "visible"
+              },
+              {
+                "paint_root_xy": [
+                  550,
+                  780
+                ],
+                "knee_xy": null,
+                "ankle_xy": [
+                  535,
+                  874
+                ],
+                "sole_contact_xy": [
+                  521,
+                  916
+                ],
+                "visibility": "far calf/root mostly hidden; partial second shoe"
+              }
+            ],
+            "foreground": "near anatomical-right",
+            "helper_support_nodes_sheet_pixels": null,
+            "helper_support_status": "not directly safe for current two-leg helper; missing/occluded knees or far leg",
+            "props": {
+              "broom": {
+                "hand": "anatomical-right",
+                "visibility": "visible near-hand shaft/bristles",
+                "bounds_xyxy": [
+                  648,
+                  254,
+                  766,
+                  931
+                ],
+                "grip_xy": [
+                  698,
+                  376
+                ]
+              }
+            },
+            "issues": [
+              "No painted knees and no full far calf. Do not invent the knee below the hem to pass helper validation.",
+              "Forearm and hand project horizontally to the broom; preserve real grip and rigid prop ownership."
+            ],
+            "hip_basis": "projected clothed pelvis estimate, sometimes occluded by sleeve/hand; not exposed anatomy",
+            "protected_visible_hand_bounds_xyxy": [
+              [
+                630,
+                346,
+                722,
+                408
+              ]
+            ],
+            "knee_basis": "covered by long dress: absent source pixels",
+            "paint_root_basis": "first usable exposed calf paint below long hem, not a thigh root"
+          },
+          "mouth_visibility": "visible profile lip segment; hidden far anatomical corner not supplied",
+          "mouth": {
+            "rect_cxcy_extentxy": [
+              636.5,
+              198.4,
+              6.592419889539803,
+              3.1999999999999997
+            ],
+            "axes_pixels": [
+              6.5,
+              -1.0999999999999943,
+              0.5339465718173031,
+              3.155138833465898
+            ],
+            "image_angle_radians": -0.16764243783121485,
+            "source_trace_xy": [
+              [
+                630,
+                199.5
+              ],
+              [
+                633.25,
+                197.6
+              ],
+              [
+                636.5,
+                197.3
+              ],
+              [
+                639.75,
+                197.4
+              ],
+              [
+                643,
+                197.3
+              ]
+            ],
+            "visible_endpoint_semantics": [
+              "near joined cheek corner",
+              "forward visible lip silhouette endpoint"
+            ],
+            "source_cavity": {
+              "type": "closed crease; no pre-open oral paint",
+              "has_teeth": false,
+              "source_upper_lower": "same measured crease; shadow/ridge/stubble are tissue, not an aperture"
+            },
+            "lip_ridge_bounds_xyxy": [
+              627,
+              193,
+              646,
+              204
+            ],
+            "max_upper_displacement_pixels": [
+              0,
+              0.5,
+              0.85,
+              0.55,
+              0
+            ],
+            "max_lower_displacement_pixels": [
+              0,
+              1.6,
+              2.2,
+              1.6,
+              0
+            ],
+            "opening_limit_basis": "conservative local candidate inside observed lip/jaw support; no generated opening art or rendered acceptance",
+            "protected_face_bounds_xyxy": {
+              "eye": [
+                610,
+                137,
+                646,
+                162
+              ],
+              "nose": [
+                637,
+                158,
+                659,
+                185
+              ],
+              "headscarf": [
+                460,
+                71,
+                626,
+                243
+              ],
+              "collar": [
+                532,
+                230,
+                622,
+                279
+              ]
+            },
+            "profile": {
+              "corners": [
+                -1,
+                1
+              ],
+              "crease": [
+                0.0,
+                -0.38935281963918916,
+                -0.3432751850545429,
+                -0.14337101606667887,
+                0.0
+              ],
+              "open_upper": [
+                0.0,
+                -0.5456028196391891,
+                -0.6089001850545429,
+                -0.3152460160666789,
+                0.0
+              ],
+              "open_lower": [
+                0.0,
+                0.11064718036081084,
+                0.3442248149454571,
+                0.3566289839333211,
+                0.0
+              ],
+              "source_upper": [
+                0.0,
+                -0.38935281963918916,
+                -0.3432751850545429,
+                -0.14337101606667887,
+                0.0
+              ],
+              "source_lower": [
+                0.0,
+                -0.38935281963918916,
+                -0.3432751850545429,
+                -0.14337101606667887,
+                0.0
+              ],
+              "width": [
+                0.018,
+                0.065
+              ],
+              "teeth": 0
+            },
+            "shape_observation": "actual joined lip corner, excluding the long downward cheek fold, rises to profile endpoint",
+            "bite_contact_limit": {
+              "max_normal_offset_pixels": 0.4,
+              "basis": "existing schema bite term at normalized cue 1; no source teeth; candidate must pass rendered contact review"
+            },
+            "width_factors": {
+              "max_spread": 1.018,
+              "min_round": 0.935
+            }
+          }
+        },
+        "rear": {
+          "view": "rear",
+          "direction": "up",
+          "crop_xyxy": [
+            765,
+            48,
+            1217,
+            954
+          ],
+          "painted_alpha16_bounds_xyxy": [
+            774,
+            71,
+            1206,
+            936
+          ],
+          "measured_body_ground_pivot_xy": [
+            964,
+            934
+          ],
+          "pivot_in_crop_xy": [
+            199,
+            886
+          ],
+          "working512_from_sheet": {
+            "scale": 0.5017421602787456,
+            "translation_xy": [
+              -227.6794425087108,
+              11.372822299651602
+            ]
+          },
+          "body": {
+            "waist_xy": [
+              963,
+              414
+            ],
+            "hip_xy": [
+              963,
+              547
+            ],
+            "garment_hem_y": [
+              777,
+              777
+            ],
+            "legs_viewer_left_right": [
+              {
+                "paint_root_xy": [
+                  903,
+                  779
+                ],
+                "knee_xy": null,
+                "ankle_xy": [
+                  901,
+                  875
+                ],
+                "sole_contact_xy": [
+                  895,
+                  933
+                ],
+                "visibility": "visible"
+              },
+              {
+                "paint_root_xy": [
+                  1023,
+                  779
+                ],
+                "knee_xy": null,
+                "ankle_xy": [
+                  1024,
+                  877
+                ],
+                "sole_contact_xy": [
+                  1027,
+                  933
+                ],
+                "visibility": "visible"
+              }
+            ],
+            "foreground": null,
+            "helper_support_nodes_sheet_pixels": null,
+            "helper_support_status": "not directly safe for current two-leg helper; missing/occluded knees or far leg",
+            "props": {
+              "broom": {
+                "hand": "anatomical-right",
+                "visibility": "visible viewer-right",
+                "bounds_xyxy": [
+                  1091,
+                  207,
+                  1207,
+                  934
+                ],
+                "grip_xy": [
+                  1138,
+                  360
+                ]
+              }
+            },
+            "issues": [
+              "Knees remain fully hidden. The apron ties are upper owned paint and must not become a leg split.",
+              "Rear broom extends into the nominal fourth sheet column; preserve it in the whole-figure crop."
+            ],
+            "hip_basis": "projected clothed pelvis estimate, sometimes occluded by sleeve/hand; not exposed anatomy",
+            "protected_visible_hand_bounds_xyxy": [
+              [
+                778,
+                456,
+                836,
+                586
+              ],
+              [
+                1110,
+                323,
+                1169,
+                397
+              ]
+            ],
+            "knee_basis": "covered by long dress: absent source pixels",
+            "paint_root_basis": "first usable exposed calf paint below long hem, not a thigh root"
+          },
+          "mouth": null,
+          "mouth_visibility": "rear no-mouth"
+        },
+        "left": {
+          "view": "left",
+          "direction": "left",
+          "crop_xyxy": [
+            1201,
+            48,
+            1520,
+            954
+          ],
+          "painted_alpha16_bounds_xyxy": [
+            1210,
+            71,
+            1510,
+            936
+          ],
+          "measured_body_ground_pivot_xy": [
+            1390,
+            933
+          ],
+          "pivot_in_crop_xy": [
+            189,
+            885
+          ],
+          "working512_from_sheet": {
+            "scale": 0.5017421602787456,
+            "translation_xy": [
+              -441.42160278745644,
+              11.874564459930355
+            ]
+          },
+          "body": {
+            "waist_xy": [
+              1402,
+              416
+            ],
+            "hip_xy": [
+              1405,
+              548
+            ],
+            "garment_hem_y": [
+              780,
+              775
+            ],
+            "legs_near_far": [
+              {
+                "paint_root_xy": [
+                  1403,
+                  779
+                ],
+                "knee_xy": null,
+                "ankle_xy": [
+                  1403,
+                  874
+                ],
+                "sole_contact_xy": [
+                  1350,
+                  932
+                ],
+                "visibility": "visible"
+              },
+              {
+                "paint_root_xy": [
+                  1386,
+                  779
+                ],
+                "knee_xy": null,
+                "ankle_xy": [
+                  1381,
+                  866
+                ],
+                "sole_contact_xy": [
+                  1320,
+                  915
+                ],
+                "visibility": "far calf/root mostly hidden; partial second shoe"
+              }
+            ],
+            "foreground": "near anatomical-left",
+            "helper_support_nodes_sheet_pixels": null,
+            "helper_support_status": "not directly safe for current two-leg helper; missing/occluded knees or far leg",
+            "props": {
+              "broom": {
+                "hand": "anatomical-right",
+                "visibility": "fully hidden behind far body; source has no broom paint",
+                "bounds_xyxy": null,
+                "grip_xy": null
+              }
+            },
+            "issues": [
+              "Hidden right broom remains an occlusion state, not permission to drop the prop identity or manufacture a visible shaft.",
+              "Source has one dominant stocking/calf and no knees; needs approved contact/passing and occlusion keys."
+            ],
+            "hip_basis": "projected clothed pelvis estimate, sometimes occluded by sleeve/hand; not exposed anatomy",
+            "protected_visible_hand_bounds_xyxy": [
+              [
+                1313,
+                455,
+                1374,
+                610
+              ]
+            ],
+            "knee_basis": "covered by long dress: absent source pixels",
+            "paint_root_basis": "first usable exposed calf paint below long hem, not a thigh root"
+          },
+          "mouth_visibility": "visible profile lip segment; hidden far anatomical corner not supplied",
+          "mouth": {
+            "rect_cxcy_extentxy": [
+              1286.65,
+              200.2,
+              6.9442422192777595,
+              3.2
+            ],
+            "axes_pixels": [
+              6.649999999999977,
+              2.0,
+              -0.9216268381642996,
+              3.0644092368962856
+            ],
+            "image_angle_radians": 0.29214644954094293,
+            "source_trace_xy": [
+              [
+                1280,
+                198.2
+              ],
+              [
+                1283.325,
+                199.6
+              ],
+              [
+                1286.65,
+                200.4
+              ],
+              [
+                1289.975,
+                201.2
+              ],
+              [
+                1293.3,
+                202.2
+              ]
+            ],
+            "visible_endpoint_semantics": [
+              "forward visible lip silhouette endpoint",
+              "near joined cheek corner"
+            ],
+            "source_cavity": {
+              "type": "closed crease; no pre-open oral paint",
+              "has_teeth": false,
+              "source_upper_lower": "same measured crease; shadow/ridge/stubble are tissue, not an aperture"
+            },
+            "lip_ridge_bounds_xyxy": [
+              1278,
+              194,
+              1296,
+              205
+            ],
+            "max_upper_displacement_pixels": [
+              0,
+              0.5,
+              0.85,
+              0.5,
+              0
+            ],
+            "max_lower_displacement_pixels": [
+              0,
+              1.7,
+              2.1,
+              1.4,
+              0
+            ],
+            "opening_limit_basis": "conservative local candidate inside observed lip/jaw support; no generated opening art or rendered acceptance",
+            "protected_face_bounds_xyxy": {
+              "eye": [
+                1280,
+                136,
+                1316,
+                162
+              ],
+              "nose": [
+                1266,
+                160,
+                1297,
+                187
+              ],
+              "headscarf": [
+                1296,
+                71,
+                1466,
+                250
+              ],
+              "collar": [
+                1295,
+                229,
+                1390,
+                281
+              ]
+            },
+            "profile": {
+              "corners": [
+                -1,
+                1
+              ],
+              "crease": [
+                0.0,
+                0.11585932750815572,
+                0.060861419629660476,
+                1.532107773982692e-14,
+                0.0
+              ],
+              "open_upper": [
+                0.0,
+                -0.040390672491844276,
+                -0.20476358037033954,
+                -0.15624999999998468,
+                0.0
+              ],
+              "open_lower": [
+                0.0,
+                0.6471093275081558,
+                0.7171114196296605,
+                0.43750000000001527,
+                0.0
+              ],
+              "source_upper": [
+                0.0,
+                0.11585932750815572,
+                0.060861419629660476,
+                1.532107773982692e-14,
+                0.0
+              ],
+              "source_lower": [
+                0.0,
+                0.11585932750815572,
+                0.060861419629660476,
+                1.532107773982692e-14,
+                0.0
+              ],
+              "width": [
+                0.02,
+                0.06
+              ],
+              "teeth": 0
+            },
+            "shape_observation": "own forward edge and downward joined lip corner; following cheek fold is protected tissue",
+            "bite_contact_limit": {
+              "max_normal_offset_pixels": 0.4,
+              "basis": "existing schema bite term at normalized cue 1; no source teeth; candidate must pass rendered contact review"
+            },
+            "width_factors": {
+              "max_spread": 1.02,
+              "min_round": 0.94
+            }
+          }
+        }
+      }
+    }
+  },
+  "dependencies": {
+    "buergeramt-mouth-paint.js": {
+      "sha256": "b7c140943debe80e23e81007b8adee0b83ba0f6a35e9335fb77c72a86eb315af"
+    },
+    ".agents/skills/animate-2d-characters/scripts/painted_walk.py": {
+      "sha256": "b62101945d9601a2e910982d3dfb5a1684206efe18389bb11bb04b08fd8718fd"
+    },
+    "output/jwd-neighbors/source-qa/report.json": {
+      "sha256": "1aefb1cc4d80785580da3e86619958f5412c4aade6d607c269c69da383fd80fb"
+    }
+  }
+}

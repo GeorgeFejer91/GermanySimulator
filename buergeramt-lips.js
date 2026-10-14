@@ -76,7 +76,21 @@ for(const [id,poses] of Object.entries(posePixels))if(id!=='clerk'){
  const [x,y,w,h]=poses[1];mouths[id]=[x/640,1-y/832,w/640,h/832];
 }
 const poseAngles={clerk:[-.15,.05,.2,-.06,.05,-.15],aktenkurier:[0,.3,.35,.2],archivbotin:[.15,-.1,-.25,-.2],formularsammler:[.1,.12,.15,.15],nummernfluesterer:[-.1,.05,.25,.15],nachtschichtmelderin:[0,-.16,-.2,-.15],pfandarchitektin:[0,-.3,-.28,-.3],kopiependler:[0,-.1,-.45,-.3],warteschlangenpoetin:[0,.06,-.1,-.05],renter:[.03],parent:[-.3],pensioner:[.05]};
-let poseProfiles=null;
+// The legacy TALK cells contain a misplaced baked opening. Their body/breath
+// samples are the READY cells; cue-owned speech articulates that clean painting.
+const clerkPaintFrame=frame=>frame>=40&&frame<48?frame-40:frame;
+let poseProfiles=null,walkingProfiles=null;
+function validateMouthFrame(frame,width,label){
+ const rect=frame?.rect;
+ if(!Array.isArray(rect)||rect.length!==4||!rect.every(Number.isFinite)||rect[2]<=0||rect[3]<=0||rect[0]<0||rect[0]>width||rect[1]<0||rect[1]>832||!Number.isFinite(frame.angle))throw new Error('Invalid painted mouth frame: '+label);
+ for(const name of ['atlasRect','axes','atlasAxes'])if(frame[name]!==undefined){
+  const values=frame[name];
+  if(!Array.isArray(values)||values.length!==4||!values.every(Number.isFinite))throw new Error('Invalid painted mouth '+name+': '+label);
+  if(name==='atlasRect'&&(values[2]<=0||values[3]<=0||values[0]<0||values[0]>width||values[1]<0||values[1]>832))throw new Error('Invalid painted atlas mouth frame: '+label);
+  if(name!=='atlasRect'&&values[0]*values[3]-values[1]*values[2]<=0)throw new Error('Inverted painted mouth axes: '+label);
+ }
+ if(frame.atlasAngle!==undefined&&!Number.isFinite(frame.atlasAngle))throw new Error('Invalid painted atlas mouth angle: '+label);
+}
 function setProfiles(data,validate){
  if(data?.schema_version!==1||!data.profiles)throw new Error('Invalid painted lip profiles');
  for(const [key,angles] of Object.entries(poseAngles)){
@@ -84,20 +98,37 @@ function setProfiles(data,validate){
   if(!Array.isArray(profiles)||profiles.length!==angles.length)throw new Error('Incomplete painted lip profiles: '+key);
   profiles.forEach((profile,index)=>validate(profile,key+'/'+index));
  }
+ for(const key of Object.keys(posePixels).filter(key=>key!=='clerk')){
+  const directions=data.walking?.[key],count=['aktenkurier','archivbotin'].includes(key)?16:8;
+  if(!directions||directions.up!==null)throw new Error('Unregistered rear walking paint: '+key);
+  for(const direction of ['down','right','left']){
+   const registration=directions[direction];
+   if(!Array.isArray(registration?.frames)||registration.frames.length!==count)throw new Error('Incomplete painted walking mouths: '+key+'/'+direction);
+   validate(registration.profile,key+'/walk/'+direction);
+   registration.frames.forEach((frame,index)=>validateMouthFrame(frame,640,key+'/'+direction+'/'+index));
+  }
+ }
  poseProfiles=data.profiles;
+ walkingProfiles=data.walking;
 }
 function displayedMouthProfile(actor){
- const source=sourceMouth(actor);return source?poseProfiles?.[source.key]?.[actor.mouthPose??0]??null:null;
+ const source=sourceMouth(actor);return source?source.profile??poseProfiles?.[source.key]?.[actor.mouthPose??0]??null:null;
 }
 function sourceMouth(actor){
  const id=actor.lipId||actor.id||actor.name,key=actor.performance?'clerk':id;
+ if(actor.mouthWalk){
+  const {direction,sample}=actor.mouthWalk,registration=walkingProfiles?.[key]?.[direction],frame=registration?.frames[sample];
+  if(!frame)return null;
+  const atlas=actor.renderKey?.startsWith('atlas:'),p=atlas?frame.atlasRect??frame.rect:frame.rect,angle=atlas?frame.atlasAngle??frame.angle:frame.angle;
+  return{key,p,w:640,rect:[p[0]/640,1-p[1]/832,p[2]/640,p[3]/832],profile:registration.profile,angle,axes:atlas?frame.atlasAxes??frame.axes:frame.axes,transported:true};
+ }
  if(actor.mouthPose===null)return null;
  const p=posePixels[key]?.[actor.mouthPose],w=actor.performance||['renter','parent','pensioner'].includes(key)?384:640;
  const rect=p?[p[0]/w,1-p[1]/832,p[2]/w,p[3]/832]:mouths[id]?.slice();
  return rect?{key,p,w,rect}:null;
 }
 function displayedMouth(actor){
- const source=sourceMouth(actor);return source?transportMouthRect(actor,source.rect,source.key,source.p):null;
+ const source=sourceMouth(actor);return source?source.transported?source.rect:transportMouthRect(actor,source.rect,source.key,source.p):null;
 }
 function transportMouthRect(actor,rect,key,p){
  if(!rect||!actor.renderKey?.startsWith('atlas:'))return rect;
@@ -123,10 +154,11 @@ function transportMouthRect(actor,rect,key,p){
 }
 function displayedMouthFrame(actor){
  const source=sourceMouth(actor);if(!source)return null;
- const {key,p,w,rect}=source,angle=poseAngles[key]?.[actor.mouthPose??0]??poseAngles[key]?.[0];
+ const {key,p,w,rect}=source,angle=source.angle??poseAngles[key]?.[actor.mouthPose??0]??poseAngles[key]?.[0];
  if(!Number.isFinite(angle))throw new Error('Unregistered atlas lip angle: '+key);
- const center=transportMouthRect(actor,rect.slice(),key,p);
- const sample=(x,y)=>transportMouthRect(actor,[rect[0]+x/w,rect[1]-y/832,...rect.slice(2)],key,p);
+ const transport=rect=>source.transported?rect:transportMouthRect(actor,rect,key,p),center=transport(rect.slice());
+ const sample=(x,y)=>transport([rect[0]+x/w,rect[1]-y/832,...rect.slice(2)]);
+ if(source.axes){const t=sample(source.axes[0],source.axes[1]),n=sample(source.axes[2],source.axes[3]);return{rect:center,axes:[t[0]-center[0],t[1]-center[1],n[0]-center[0],n[1]-center[1]],sourceWidth:w}}
  const t=sample(Math.cos(angle),Math.sin(angle)),n=sample(-Math.sin(angle),Math.cos(angle));
  return{rect:center,axes:[(t[0]-center[0])*rect[2]*w,(t[1]-center[1])*rect[2]*w,(n[0]-center[0])*rect[3]*832,(n[1]-center[1])*rect[3]*832],sourceWidth:w};
 }
@@ -222,6 +254,6 @@ function createPaintSplat(T,paintGlsl,profileValues){
  };
 }
 let recordingModule;
-const loadRecording=(path,sha)=>{recordingModule??=import('./buergeramt-lipsync.js?v=20261013-kripo-ending');return recordingModule.then(m=>m.resolveMouthTrack(path,sha))};
-global.GermanyAmtLips={createTrack,score,poseAt,mouths,displayedMouth,displayedMouthFrame,displayedMouthAngle,displayedMouthProfile,setProfiles,installMask,createPaintSplat,loadRecording};
+const loadRecording=(path,sha)=>{recordingModule??=import('./buergeramt-lipsync.js?v=20261013-mouth-audit');return recordingModule.then(m=>m.resolveMouthTrack(path,sha))};
+global.GermanyAmtLips={createTrack,score,poseAt,mouths,clerkPaintFrame,displayedMouth,displayedMouthFrame,displayedMouthAngle,displayedMouthProfile,setProfiles,installMask,createPaintSplat,loadRecording};
 })(typeof window!=="undefined"?window:globalThis);

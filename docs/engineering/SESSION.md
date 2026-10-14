@@ -95,6 +95,43 @@ review remain in ignored output/shared-tickets/ and output/playwright/.
 
 ## Connected speech lips — 2026-10-13
 
+**Exhaustive mouth audit follow-up.** On published base `c69dc27`, audit every
+current mouth consumer and authored sequence, including completion, replacement,
+turns, native/atlas handoffs, omen relief and the Jobcenter flame. Expand existing
+fixtures where prior held-open or two-speaker media captures leave gaps. Allowed
+changes are the implicated mouth consumers, registrations, existing test tools
+and focused regressions; preserve audio/art bytes, body timing, pivots, camera,
+collision and unrelated shared-root work. Initial isolated Git status is clean.
+Source inventory and separate Physics/Camera reviewers determine missing scope;
+do not infer all-character coverage from the prior 15-office-actor receipt.
+
+The follow-up integrates published `337a3e7`; unrelated portrait oil/floor and
+Jobcenter paired-eye/furnace/pinch behavior is retained. Repair scope is ambient
+walking registration (24 source profiles, 240 visible samples, 80 rear nulls),
+clean same-column clerk TALK paint, authoritative omen ownership and Jobcenter
+phonetic shape sampling. Existing office sampler extraction is bit-for-bit
+equivalent over 34,764 samples from 232 tracks. Source/art/audio hashes and body
+movement/phase contracts are unchanged. The full deterministic suite passes
+878 tests on `eb22354`; 105 affected checks pass after final floor integration.
+Native/atlas/walking normal-media fixtures pass all 92 completion,
+pause, replay and replacement cases. Three-view source/cue matrices, complete
+omen recovery/failure paths, mobile clerk requests and three-view native
+handoff pass. Twenty-four quiet cold comparison contexts and two later six-run
+root integration checks pass the existing gates; final startup peaks at
+17,965,235 bytes. Exact source equivalence carries the unchanged mouth consumer
+through the latest unrelated import tags. Performance/resource details live in
+ASSET-POLICY.md, coverage and retained face softness in BUERGERAMT.md. Evidence
+is under ignored `output/connected-lips/audit-all-sequences/`. Portable skill
+revision `b45769a` adds the reusable walking/clean-source/true-end protocol and
+is synchronized to personal/project copies. New JWD art/recordings, unrigged
+city faces, natural mission traversal, listening and physical devices are not
+accepted by this audit.
+Final independent Physics and Camera receipts pass the scoped mouth repair at
+the integrated hashes. Continuous video viewing is partial; replacement-owner
+checks use a synthetic paused state, and admission handoff is neutral. Inactive
+authored expressions may restore pre-open source paint after speech. These
+limits and retained whole-face softness remain explicit in BUERGERAMT.md.
+
 Integrator-owned isolated `connected-lips` worktree, integrated on published `2406224`.
 The user approved the connected-lip prototype and requested applying its method
 across animated characters, then updating the animation skill. Scope: shared
@@ -253,6 +290,62 @@ The initial deployment caught an older browser-responsiveness fixture that extra
 ## Jobcenter smartphone pinch movement — 2026-10-13
 
 Integrator on clean published d6bd482. Scope: Jobcenter touch-event ownership in jobcenter.js; focused touch-controller tests; existing direct-entry browser probe; root/diagnostic runtime cache identities; Pages test list and owning gameplay guidance. Two-finger span controls bounded forward/backward movement on the existing plane; lifting/canceling, third touch, pause, blur, hide and rotation stop it and require a new gesture. One-finger left movement/right look and desktop controls remain available. No new controls panel, camera zoom, audio, asset, loop or input service. Both independent world reviewers bind the frozen candidate; browser evidence stays silent and labels Android emulation separately from physical devices.
+
+# JWD neighbors: painted animation and recorded interaction — 2026-10-13
+
+The user's animation/audio protocol goal covers “Nachbarn kennen lernen”;
+they are residents, not player companions. Frau Fink retains `jwd-swabian`.
+Professor Dr. Dr. Heiko Maaslos retains `jwd-parent`; his wife, Botschafterin
+Dr. Inga Maaslos, retains `jwd-watcher`. Their names change without replacing
+mission receipt IDs, homes, garden work stations or routes. Preserve allocation
+through Anmeldung, A38 submission, the completed three introductions, subsequent
+complaints, home-return visits, obstacle clearance and the remaining mission chain.
+
+Scope: the existing JWD character appearance/animation consumers, exact dialogue
+and voice ownership, character source/runtime assets and their manifests,
+focused JWD/speech checks, and the existing sprite/voice/gameplay authorities.
+Use the shared city renderer, displacement-driven movement, stimulus broker,
+recording catalog and normalized mouth sampler. No party/follower system,
+second render loop, voice registry, service, or eager character/audio library load.
+Each visible source needs its own mouth profile; rear/occluded sources explicitly
+omit the mouth. Recorded speech samples the actual native media time. Work,
+walk, dialogue and recovery retain distinct existing simulation/media owners.
+
+The installed native voice list and source bytes verify “GS Inga Maaslos”:
+UUID `04e241f5e0734684ba3626aa669a70c1`, original SHA-256
+`83d49bbef3995346b6ba352d92c6535b9c97e2d73928ab4c50f592eb0cbb36b7`,
+normalized reference SHA-256
+`18d6bde7a384e6c58a383155664aee9be36516d48e4bc1eb4c5087b38935dd53`.
+No Heiko/Fink named profile was found in that store; production selection and
+encoded recordings remain outstanding. Source audio stays private. Profile
+verification is not listening acceptance or word-alignment evidence.
+
+Finish and publish the frozen existing-mouth audit separately before introducing
+new JWD character assets. The new cast then requires source-pose acceptance,
+every encoded frame and directed transition, actual recorded completion and
+interruption, real mission gates, silent desktop/Android-emulation renders,
+comparable load/input budgets, and independent Physics/Camera review on the
+integrated candidate. Physical-device and perceptual listening coverage remain
+separate. Do not treat the office mouth audit as acceptance for these new faces.
+
+Protocol delivery (2026-10-14): the owning sprite and voice protocols now specify
+all three residents, their individual mouth registrations, work/route/dialogue
+phases, native audio ownership, exact 37-line/39-actor-binding source inventory,
+fallbacks, recovery, lazy budgets and production acceptance checks. Independent
+practical and source reviews pass, including the repaired actor/playhead bridge
+and modal resident-phase requirements. Inga's existing profile is verified;
+Heiko/Fink production voice selections remain open. The v2 source examples and
+registration checker pass metadata checks for 12 views, nine distinct mouths
+and three rear nulls, with six views explicitly requiring missing walking or
+occlusion keys. Artwork provenance is beside the authoring inputs.
+
+This completes the protocol package, not a live-character replacement. The
+current procedural residents and Kranz display names remain migration points;
+new artwork, walking/work exports, production voice allocations/recordings,
+changing-pose audio and natural mission acceptance remain outstanding. No new
+neighbor source file is requested by the runtime. Physical-device and listening
+acceptance are also unrun. These limits prevent source metadata or the repaired
+office mouth system from standing in for new-character acceptance.
 
 # Whole-surface Steinmeier liquidation — 2026-10-13
 

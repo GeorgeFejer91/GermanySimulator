@@ -144,6 +144,360 @@ This office-specific lane uses the project's
 `$animate-2d-characters` skill for movement review. The general city
 biomechanical candidate and acceptance gates continue below.
 
+## JWD mission-neighbour 2D production (2026-10-13)
+
+**Historical, unselected authoring study.** This section preserves the 13 October v2 source-registration evidence and proposed work/prop/quarter-view acceptance plan. It is not the current runtime contract or a second source registry. The accepted delivery is [Miniature neighborhood residents](#miniature-neighborhood-residents): `assets/sprite-sources/neighbors/directions.png`, six desktop/mobile atlases, Frau Schwabingen, Professor Heiko Maaslos (Systemtechnik) and Inga Maaslos (fictional People & Culture). The study's Fink and diplomat titles are legacy briefs; neither the v2 candidate sheets nor those superseded character roles were selected for delivery. [Implemented neighborhood speech](./VOICE-SYNTH-PROTOCOL.md#implemented-neighborhood-speech-2026-10-14) owns the eleven accepted Inga takes and the other residents' browser fallbacks. Proposed work-release/prop/turn keys below remain proposals unless independently admitted by that current delivery.
+
+
+This was the study authoring contract for the three existing residents in **Nachbarn
+kennen lernen**: Frau Fink, Professor Dr. Dr. Heiko Maaslos and Botschafterin
+Dr. Inga Maaslos. Heiko and Inga are a married couple; each keeps an independent
+actor, work station, speech owner and introduction receipt. Preserve stable ids
+`jwd-swabian`, `jwd-parent` and `jwd-watcher`, the existing garden/collision data,
+E/touch dialogue flow and three-neighbour mission count. These are resident
+performances, not a following-party feature. The baseline Kranz names were
+migration points in visible copy and labels; existing technical house/lot keys
+may remain stable.
+
+At the inspected 13 October study baseline there was **no approved painted source family or 2D animation export**
+for these three in this candidate lane. That baseline is superseded by the accepted miniature delivery below; these particular v2 candidates remain unselected. The repaired four-view closed-rest production inputs are
+`assets/sprite-sources/jwd-neighbors/inga-maaslos-source-v2.png`,
+`heiko-maaslos-source-v2.png` and `fink-source-v2.png`: each is a 1536×1024
+transparent sheet, with front/right/rear/left figures. Their source inspection
+and light/dark composites are in ignored `output/jwd-neighbors/source-qa/`;
+the v1 variants are rejected working inputs. These v2 sheets establish concrete
+candidate anatomy and props, not approved walks, action extremes, quarter
+bridges or turns. Figures are not confined to nominal 384-pixel columns:
+measure separated silhouettes and whole-figure crops, especially Heiko's front
+arm and Fink's broom. A column crop must not cut off source paint.
+
+The [candidate registration](../assets/sprite-sources/jwd-neighbors/source-registration.json)
+stores nine distinct painted-mouth profiles, three rear nulls, protected paint,
+whole-figure crops and shared family pivots. Run
+`node tools/check-jwd-source-registration.mjs` for its hash, structure and basis
+checks. This authoring table must be rebound to the exact eventual exports;
+its numeric PASS does not approve source design or motion.
+
+The historical study game baseline, `world3d.js jwdCharacter`, supplies procedural costumes,
+heads and work tools. Only Heiko's `parent` role has a static named `Mouth` mesh;
+Fink and Inga have no explicit mouth geometry. Existing costume/mission facts
+are source references, not acceptance of new painted faces. For these unselected v2 candidates, source approval and encoded-motion review remained outstanding. This does not describe the accepted miniature source family or Inga recordings; perceptual listening evidence remains separately qualified in the current voice section. The installed native voice service reports runtime
+and ASR ready; that readiness is not game-side mouth integration, a generated
+take, verified alignment or listening acceptance.
+
+Read the skill's [speech-ready authoring guide](../.agents/skills/animate-2d-characters/references/speech-ready-character-authoring.md)
+and [narrative action rigging](../.agents/skills/animate-2d-characters/references/narrative-action-rigging.md)
+before commissioning keys. [GAMEPLAY.md](./GAMEPLAY.md#jwd-home-and-neighbors)
+owns the mission and satire; [JWD speech production](./VOICE-SYNTH-PROTOCOL.md#jwd-neighbor-speech-production-2026-10-13)
+owns profile selection and exact recorded text. Keep one existing visual gate
+at source and final export; this section adds no parallel approval ledger.
+
+### Character-specific source locks
+
+Approve all three at a shared game figure scale before expanding a family.
+Use the root's painted caricature treatment, visible brushwork and restrained
+municipal colour; give each face its own proportions, asymmetry, crease,
+attached corners, jaw support and oral limits. Preserve one ground pivot and
+figure scale through every view, prop grip and work/action key. A common render
+method does not authorize cloning another character's anatomy or a generic
+smile/slit. Inspect source eyes, nose, lips, hands, garment joins and shoes at
+native close-up resolution and the intended game projection.
+
+| Resident / source key | Identity and costume to retain | Own performance and prop contract |
+| --- | --- | --- |
+| Frau Fink (legacy study label; current Frau Schwabingen) / `jwd-swabian` | Swabian Kehrwoche enthusiast; v2 headscarf/knot, apron/pocket, practical plum dress and round face with her own downturned closed crease. Source approval remains pending. | Wash her VW-style SUV; change to hedge trimming; settle with her own broom and a practical, concise admonishing gesture. V2 holds the broom in her anatomical **right** hand; preserve that grip through all views. Work sponge/shears and carried broom have explicit handoff/contact keys. Lawn, sweeping, hedge and letter beats point to existing objects or use a free hand; they do not require a new resident or floating document. |
+| Professor Dr. Dr. Heiko Maaslos (legacy study title; current Systemtechnik professor) / `jwd-parent` | V2 has shaggy sandy blond hair, light reddish blond stubble, a brown ribbed high zip-neck sweater and a thin closed lip within the stubble. Compare privately with the user's reference; the private photo is not shipped. Preserve the removed spectacles/bow tie/waistcoat decision. | Wash/polish the BMW-style car; release the sponge; a formal restrained open palm, a controlled explanatory finger and a small self-justifying head change serve his own lines. Keep the zipper/ribbed collar and protected stubble outside the lip support. V2 has **empty hands**; do not reintroduce the old unused monograph prop from a generic carry-name list. |
+| Botschafterin Dr. Inga Maaslos (superseded study role; current People & Culture) / `jwd-watcher` | Historical diplomat brief, Heiko's wife and Theodor's mother; v2 bun, suit/blouse/lapels, pearls, pin and angular oval face with restrained asymmetric lips. Her individual source lock is still subject to approval. A saved voice profile is not accepted portrait evidence. | Wash the Tesla-style car; release the sponge; restore the briefcase and a precise free-hand enumerating gesture. V2 holds the briefcase in her anatomical **left** hand; retain actual near/far occlusion, including its hidden right-profile view. Electric-car, garden-rule, blind and schedule beats use restrained gaze/hand changes while maintaining complete suit, elbow and grip joins. |
+
+The couple's source sheets must retain their distinct identities while reading
+as residents of the same scene. Theodor remains the already-mentioned
+eight-year-old child in dialogue, with six languages and Latin/milestone
+pressure; this brief does not introduce a fourth animated child. Keep the
+satire on status anxiety, unsolicited lectures and selective rule enforcement.
+Heiko's formal concern/backhanded assistance and Inga's diplomatic literalness
+need their own gestures and mouth correspondence. No diagnosis or exaggerated
+facial defect supplies the joke.
+
+### Existing paths, clocks and receipts
+
+`jwd-gardens.js` owns world positions, paved approaches, car/hedge rectangles
+and work targets. Coordinates below already include the existing 560-unit rail
+gutter. Do not reposition a work station to accommodate an illustration.
+
+| Resident | Wash station `(x,y)` / target | Existing additional route |
+| --- | --- | --- |
+| Fink | `(780,4670)` / `jwd-vw` at `(705,4680)` | Trim at `(876,4700)` toward `jwd-fink-hedge`; wash→trim passes `(780,4700)`, then the trim point. Return passes `(780,4700)`, then wash station. |
+| Heiko | `(1400,4690)` / `jwd-bmw` at `(1315,4680)` | No authored trimming routine. Gate approach and return use his station column. |
+| Inga | `(1567,4660)` / `jwd-tesla` at `(1482,4680)` | No authored trimming routine. Gate approach and return use her station column. |
+
+The shared cross path is `y=4540`; gate is `(1090,4550)` and gate-aside
+`(1175,4540)`. `jwdCrossRoute` first reaches the actor's cross-path column;
+for Fink on the hedge side it first returns to her station's X before crossing.
+The approach then takes `(gate.x,crossY)` and the gate. Return uses
+`jwdCrossRoute`, `(station.x,crossY)` and the station. Preserve those exact
+helpers and body clearance, rather than drawing an apparent approach in place.
+
+`walkJwdRoute` moves at 62 game units/second with radius 13, removes waypoints
+within two units, waits at obstruction and uses the existing detour/retry
+logic. The 0.75-second progress check requires six units of progress; waiting
+retries every 0.5 seconds. A blocked or waiting actor has stationary feet.
+Current primitive gait is distance-owned in `syncChar`; a painted walk's
+manifest must likewise consume actual displacement and a contact-calibrated
+cycle distance, preserving route speed. Start with 16 genuine visual samples
+per walk cycle; approve opposite contacts/passing and the loop seam before
+expansion. More repeated holds do not count as more distinct samples.
+
+Work reads `n.activityPhase` only in the nearby running simulation. The current
+stroke is `sin(activityPhase*3.2)`, a roughly 1.96-second cycle. Fink changes
+between washing and trimming after 24 simulation seconds, following her
+authored path; Heiko and Inga wash their separate cars. Preserve pause and
+phase ownership. Soap/drips stop with work, and tool/hand contact follows the
+rendered car surface rather than its larger collision rectangle.
+
+Manual E/touch interaction chooses a non-burglar neighbour within 92 units.
+An automatic visitor is the first unmet resident, otherwise the existing
+complaint-index selection. Home return rearms one finite visit; the visitor
+approaches while home distance is below 420 and speaks only within 90 units
+of the player with home distance above 75. Completing the finite dialogue
+clears the visit and sets the existing 38 simulation-second garden cooldown.
+Leaving beyond 650 cancels the approach/returns its owner; beyond 1000 nearby
+work stops updating. Keep the existing rearm, collision and cancellation rules.
+
+Both the premature and ordinary `talkJwdNeighbor` branches retain the concrete
+resident, assign the selected stable game `voiceId` to `openDialogue`, and
+establish that resident's finite interaction owner before requesting speech.
+The premature greeting releases back to the prior work/idle state and creates
+no `jwd.met` receipt or repeat-topic increment. Ordinary dialogue preserves the
+existing final-acknowledgement callback: it adds `n.id` to `jwd.met`, clears
+the pending visit and sets the existing 38-second cooldown on the departure/
+visitor branch. Audio completion only unlocks the current line;
+neither its start/end nor a body cue creates an introduction receipt.
+`nextDialogue` may stop an active line before advancing. Preserve the three
+receipts and subsequent Anmeldung II progression; home narration, allocation,
+arrest and the burglar retain their separate owners.
+
+### Source/state and view plan
+
+Build the readable verbs before filling a sheet. This table is a production
+plan derived from existing state, not a new gameplay state-machine framework.
+The renderer consumes the current route/activity/dialogue owner and its phase.
+
+Add one finite resident interaction phase in `game.js`, retained on the
+current resident/dialogue owner (for example `n.jwdInteraction`): held work →
+release → settle → ready/speak → recover. Advance its authored body progress
+through the existing `update(dt)` lane, including the modal reaction branch
+before the city-simulation return. Only the owned resident advances there;
+ordinary routes/work stay paused under the existing modal, hidden-page and
+HUD-pause rules. Capture the held work/source phase on entry, and gate audio
+submission until release/settle reaches the approved planted speech anchor or
+the declared missing-art fallback. Consecutive lines/replay retain that ready
+body owner, while lips sample only the current actual media attempt. At normal
+dialogue close, commit the existing mission receipt/cooldown on acknowledgement
+and retain a return intent; activate the existing return route only after
+recovery reaches its planted anchor. Cancellation/replacement releases the
+old oral attempt and recovers its own resident; stale callbacks cannot start
+another resident's audio or route. Use the same frame update and existing
+attempt guards, with no new RAF, independent timer, media clock or dialogue
+framework. This extended phase and pre-speech audio gate were study proposals, not evidence of current runtime behavior. The accepted miniature delivery implements its bounded planted interaction protocol separately.
+
+| Verb / source family | Trigger and phase authority | Required source/action proof |
+| --- | --- | --- |
+| Planted ready, look and blocked wait | Arrival, existing route wait or idle; existing facing | Separate own front/right/rear/left anchors and needed quarter bridges; stable soles, subdued breathing, a clear no-mouth rear. Wait does not advance gait. |
+| Walk / stop→turn→start | Actual route displacement and facing; existing turn/arrival | Four directional contact/passing/opposite-contact sources and genuine inbetweens; plant before the whole-body turn. Register visible front/side mouths even if current foreground speech is planted. Preserve source prop hand through outward and return arcs. |
+| Car wash/polish | `jwdActivity='wash'`, target/facing, `activityPhase` | Four stroke extremes with wrist/elbow/shoulder correspondence in each needed view; sponge fixed to the real car side, complete forearms and hands. Pair compatible source keys continuously and approve the return-to-first seam. Broom/briefcase is owned stowed paint or an owned part, not a second unconnected prop. |
+| Hedge trim / tool handoff — Fink only | Existing 24-second activity switch, route arrival and work phase | Wash-release, travel with safe tools, shears grip/open/close and connected return keys. Blade motion follows the existing stroke; preserve both hands, headscarf, apron and hedge contact. The broom→sponge→shears handoff needs real source bridges when occlusion changes. |
+| Work hold→release→face player→settle | Finite resident interaction phase, captured held work source and approved planted speech anchor | Select a safe held source, release tool contact and restore the carried prop before the planted line. Current `syncJwdCharacter` can keep the sponge/arms frozen at a work station even when `jwdWorking=false`; this is a known transition gap to repair, not approved speech posing. Use the finite resident phase above; held `activityPhase` is an entry source sample, not the clock that advances release while the city is modal. |
+| Hear / own speaking pose / topic gesture | Actual current line, speech owner, bounded cue progress | Own crease and mouth limits in the planted front/profile and approved quarter poses; modest resident-specific gaze/gesture extremes. Deform each paired source's lips before body transport. A breathing/gesture loop may continue while lips hold on a media pause, respecting the established body owner. |
+| Release→recover→return to work | Current dialogue close/cancel and finite resident recovery phase; retain the existing return intent and activate its route after the planted anchor | Stop oral ownership and restore inactive paint, lower the free hand, retain carried prop, plant/turn/walk and restore tool contact at the original station. Inspect the return arc, not merely the forward speaking transition. |
+
+Use approved source keys or a source-pixel rig for bounded paint transport;
+the [paired Gaussian action method](../.agents/skills/animate-2d-characters/references/paired-gaussian-actions.md)
+can serve compatible work/gesture intervals. It supplies interpolation, not
+missing hands, jaw shapes or hidden views. Crossing sponge/broom/briefcase,
+changing sleeve occlusion or a newly exposed cheek can require approved bridge
+art before more deformation. Keep opacity and source correspondence stable;
+whole-body crossfades that double hands/face corners or smear the collar fail.
+
+For every displayed source/cell, record actual crop/dimensions/hash, pivot,
+view, semantic lip centre and full tangent/normal. Front and profiles use their
+own painted anatomy. Rear views have an explicit null mouth. Front quarter
+views need their own approved visible contours; rear quarters or props that
+hide the lips remain null, rather than projecting a frontal aperture onto them.
+Partial visibility uses a transported mouth/occluder mask or existing owned
+part depth so neither oral fill nor skin transport covers the prop. If the
+remaining region cannot articulate safely, suppress it for that pose.
+
+Fit true joined corners, a plausible closed crease, the complete source cavity
+including teeth/high upper opening/dark corner wings, upper/lower aperture,
+width, rounding, lower-lip contact and tooth exposure. A five-knot curve is a
+compact example, not a prescribed universal face. Recenter/enlarge a local
+registration if real paint exceeds allowed controls; never truncate a cavity
+to make validation pass. Heiko's stubble, Fink's scarf/nose and Inga's pearls,
+lapel and eyes have explicit protected paint. Do not manufacture tooth bars
+where source design provides none.
+
+An owned closed cue removes a deliberate pre-open cavity; inactive speech
+returns the exact approved source. Transport both mouth axes through the
+source field's Jacobian, including shear and pixel aspect, then inherit actor
+transforms and the actual loaded variant. Source endpoints articulate with the
+same normalized cue **before** paired body transport/mixing. The skin remap
+has a positive Jacobian and returns to identity with zero displacement and
+identity derivative at protected/support guards. Width/contact displacement
+uses the same guard. This prevents the observed hard-cutoff sampling jump and
+bright central stretch. Use the existing connected surface math; check actual
+pixels as well as finite/monotone controls.
+
+### Exact dialogue and audio interaction
+
+The source inventory is **37 unique German/Denglisch lines with 37 paired
+English translations, 39 actor/line bindings**. The one premature greeting
+is spoken by each addressed resident in that resident's own voice. Do not
+deduplicate its ownership to one shared narrator.
+
+| Actor | Introduction | Repeat pool, in existing cyclic order | Line bindings including preliminary |
+| --- | --- | --- | ---: |
+| Fink / `jwd-swabian` | `swabian`: 2 lines | `lawn`, `sweeping`, `hedge`, `letter`: 2 each | 11 |
+| Heiko / `jwd-parent` | `parent`: 3 lines | `paint`, `concern`, `polish`, `parking`, `latin`, `smalltalk`: 2 each | 16 |
+| Inga / `jwd-watcher` | `watcher`: 3 lines | `electric`, `gardenRules`, `blinds`, `schedule`: 2 each | 12 |
+
+`game.js jwdCopy` remains the exact narrative authority. Freeze the Maaslos
+names and couple identity in German/English source, mission text, house/car
+labels and cast before generating takes. Preserve the rest of the authored
+lines, negations, Theodor's age/languages, humour and corresponding translation.
+Home narration, laminated car notice, generic villa remarks and Ede's dialogue
+are adjacent content, not extra allocations to these three actor voices.
+`VOICE-CAST.json productionVoices` owns the stable game voice-id mapping;
+actor ids, native UUIDs and clip ids are distinct fields.
+
+Inga's selected live `GS Inga Maaslos` UUID and both confirmed reference hashes
+are pinned in the [voice protocol](./VOICE-SYNTH-PROTOCOL.md#jwd-neighbor-speech-production-2026-10-13).
+Reuse it; keep original/reference audio private. Heiko and Fink selections
+remain unresolved until the audio owner binds explicit profiles in the same
+cast authority. No similar-sounding profile, default family voice or saved
+profile name alone substitutes for those choices. This authoring contract
+does not claim completed recordings, human listening or accepted new art.
+
+The minimal runtime addition retains the concrete resident and fixed voice-id
+on the existing `activeStimulus` generation plus `dialogueVoiceToken`.
+This was a proposed broker/bridge addition at the study baseline. The current miniature delivery now exposes cue-token-owned actor playback through the existing bridge; the broader candidate prop/release sequence is not implied. Both
+`talkJwdNeighbor` branches bind actor and fixed voice before the request; the
+renderer reads the actual active attempt/playhead rather than inferring speech
+from the dialogue label or selected resident. Resolve
+exact `(voiceId,source)` recordings, use that actual native buffer/media
+playhead for clip-bound mouth cues and retain the resident through start,
+pause/resume, end, error/fallback, replay and cancellation. In the current city
+broker, recorded `item.subtitleElapsed` already derives from
+`audioContext.currentTime - startTime`; a composite take preserves each segment
+offset and gap. Use the actual playback clock, not subtitle pagination or an
+audio-level oscillator, for lip sampling. No runtime recognizer, new model,
+audio player, RAF or recurring mouth timer is needed.
+
+Pause holds the sampled mouth cue; actual end/cancel restores inactive source
+paint. Body/work pause follows the existing mission/dialogue owner. Old receipts
+from a stopped line cannot release or move the next resident. Keep cleanup in
+central cancellation as well as completion: `stopSpeech` clears the active
+stimulus without invoking its old caller's `done`. Captions/source paint remain
+usable on missing profile/audio/registration or late variant preparation.
+An explicitly tested bounded estimated rig may serve authored fallback, with
+its coverage labelled estimated; loudness or recognizer/grapheme estimates do
+not establish verified phoneme alignment. Fixed-voice missing media follows the
+selected caption fallback instead of changing to an unrelated voice.
+
+Dialogue holds only one foreground resident. Decode the current line and,
+if needed, one selected next line; release caches on scene departure/disposal.
+Measure actual full-text PCM cost (`sampleRate × channels × 4 × seconds`) and
+compressed transfer. Preserve natural endings of long lines; do not truncate
+or accelerate a take to meet an animation or loading budget. Exact script,
+native EOS, encoded ASR/levels, reference/renderer identity and explicit
+listening status use the established voice production checks.
+
+### Initial delivery and device budget
+
+These are **proposed JWD ceilings**, not measured results or approved asset
+dimensions. Preflight source detail against actual projected CSS size × DPR at
+near/ordinary/far view, using the skill's
+[resolution assessment](../.agents/skills/animate-2d-characters/references/resolution-and-upscaling.md).
+Lock source masters at a sufficient original resolution before baking; a
+512 × 768 master is a starting layout only when native face/prop detail meets
+that measured demand. Protect alpha, zero hidden RGB and leave a transparent
+cell gutter after encoding. No independent generative upscaling per frame.
+
+| Variant / lifetime | Proposed layout ceiling | Maximum base RGBA8 cost |
+| --- | --- | ---: |
+| Desktop compact, one per family | 128 × 192 cells, at most 144 cells in 16 × 9 grid; 2048 × 1728 texture | 13.5 MiB/family; 40.5 MiB for all three |
+| Mobile compact, selected instead of desktop | 96 × 144 cells, same index/phase, 1536 × 1296 texture | 7.594 MiB/family; 22.781 MiB for all three |
+| Desktop close walk, one foreground actor/direction | Two 8-sample pages at 384 × 576, each 4 × 2 / 1536 × 1152 | 6.75 MiB/page; 13.5 MiB for the active direction |
+| Mobile close walk, one foreground actor/direction | 256 × 384 cells, 16 samples in 4 × 4 / 1024 × 1536 | 6 MiB |
+| Close action endpoints, current interval only | Two 384 × 576 desktop images, or two 256 × 384 mobile images | 1.688 MiB desktop / 0.75 MiB mobile |
+
+This reserve accommodates 64 walking samples plus up to 80 compact turn/work/
+gesture samples; it does not require 144 cells or certify that one master can
+supply all poses. Derive the real action count from the approved source plan.
+If needed bridges exceed the ceiling, revise lazy packages/admission or the
+far representation after rendered review; do not omit a required transition
+or compress the anatomy merely to fill this table. A continuous paired-source
+work/action can use approved sparse keys and the existing transport instead
+of a resident high-resolution all-action sheet.
+
+Target incremental JWD resident texture memory below 64 MiB desktop and
+32 MiB mobile; report decoded image copies and GPU buffers separately. The
+table's three compact textures plus active close walk/two endpoints cost about
+55.69 MiB desktop or 29.53 MiB mobile before such extra copies. Aim for at most
+2048 pixels per texture dimension and 16 MiB per texture as required by
+[ASSET-POLICY.md](./ASSET-POLICY.md#asset-and-loader-contract). A high-DPR mobile
+near view that exceeds its selected source must choose adequate prepared detail
+or report no-fit; screen width alone does not justify enlargement.
+
+Target compact encoded transfer at most 3 MiB total desktop / 1 MiB mobile;
+near files are bounded, selected on approach and measured separately. Add zero
+JWD art/audio/model transfer to title/startup before the player approaches the
+neighbourhood. Reuse the existing two-job asset queue, shared renderer and
+1.6 MP drawing-buffer cap. Keep only one close direction/foreground actor
+resident, use the matching compact source at the same phase during preparation,
+and release detail on departure/cancel. Do not request both resolutions or
+all 37 recordings. Measure frame/input p95, cold approach readiness and memory
+against the current accepted game in the existing browser harness; source
+dimensions and compressed byte counts alone cannot pass playability.
+
+### Checkpoints and smallest implementation route
+
+1. **Freeze identity and script.** Keep ids/stations/collision/mission callbacks;
+   migrate the couple's visible names, capture exact line/translation inventory
+   and explicit voice selections. Approve three individual source designs at
+   shared scale, then front/profile/rear, contact/passing, wash extremes and
+   planted speech extremes. Fink additionally proves trim/tool handoff; Inga
+   proves briefcase grip; Heiko proves sweater/stubble and no source-reference
+   identity drift. No new sheet is accepted merely because a profile UUID exists.
+2. **Prove one complete existing beat.** After designs pass, Inga's confirmed
+   voice makes her wash→release→planted line→recover→return pilot a concrete
+   first lifecycle. Reuse `jwdCharacter` as missing-art fallback and the existing
+   atlas/player/paired-source tools for the painted representation. Add only
+   exact JWD selectors and speech-owner data to the current game/renderer;
+   preserve station contact, relative camera view, physics bounds and body phase.
+3. **Expand the other two and all states.** Carry the validated method to each
+   actor's own approved sources, mouth shapes and work/gesture keys. Test Fink's
+   full wash→walk→trim→walk loop, all three blocked routes/turns, dialogue entry
+   from a station or visitor route, every introductory/repeat line and the
+   three receipt mission flow. A copied profile or a single standing clip does
+   not establish another resident's source or changing-pose speech.
+4. **Apply the existing final gate.** Inspect every affected encoded source,
+   endpoint, view, interval substeps, outward/return arc and loop seam at native
+   and game size on light/dark backgrounds. Render inactive, owned closed,
+   opening/rounding/contact extremes and ordinary actual-media speech while
+   body/head/props change. Validate desktop and Android portrait/landscape,
+   reduced motion, audio-off/caption fallback, hidden pause, natural end,
+   interruption, stale receipts, replay, missing/slow assets and renderer/scene
+   disposal. Independent Physics verifies soles, path/collision/car contact;
+   Camera/Scale verifies identity, framing, depth/occlusion and attached lips on
+   the same frozen candidate, then the integrator applies the browser gate.
+
+Bind observations to source/manifest/profile/cue/runtime/recording hashes in
+the existing record. Silent timing versus perceptual listening, forced clips
+versus natural mission traversal, estimated versus verified alignment, browser
+emulation versus physical device and covered versus untested poses remain
+explicit. Required failures or NOT RUN evidence stay outstanding. This section
+is preserved as a historical proposed production study; it does not admit its candidate families or extended actions. Current implemented source, interaction and audio status is defined by the miniature residents and implemented neighborhood speech sections.
+
 ## Accepted city walking atlases
 
 For exact asset locations and examples using the existing game controllers, see [City character animation assets](../assets/characters/README.md). Reuse these manifests and approved PNG files for the six city actors.
@@ -596,6 +950,6 @@ not a claimed smooth whole-body turn or ambient talking while walking. Source
 paint, final encodings, all transition/loop cells and real muted speech clocks
 must pass their scoped visual and lifecycle gates.
 
-Fictional neighbor direction sources live in assets/sprite-sources/neighbors/. tools/build-neighbor-sprites.py derives the four direction walks plus planted idle, talk, listen, greet and look rows, with shared figure scale and foot pivot. The city admits only the selected desktop/mobile WebP on neighborhood approach through its existing bounded asset queue. neighbor-sprites.js reads accepted displacement and dialogue ownership; collision and routes remain in game.js. Existing articulated work poses remain the fallback and chore renderer. Failed or late paint never blocks neighbor interaction. Keep private likeness references and authoring trials outside shipped assets. Match the compact proportions and restrained detail of the existing mini sprite cast; preserve complete shoes and review every encoded phase and loop seam.
+The accepted fictional neighbor direction source authority is `assets/sprite-sources/neighbors/directions.png`. The six shipped atlases are one desktop and one mobile variant for each of Frau Schwabingen, Professor Heiko Maaslos (Systemtechnik) and Inga Maaslos (fictional People & Culture). The historical `jwd-neighbors/*-source-v2.png` study sheets and their registration remain unselected authoring evidence, not alternative loader inputs. tools/build-neighbor-sprites.py derives the four direction walks plus planted idle, talk, listen, greet and look rows, with shared figure scale and foot pivot. The city admits only the selected desktop/mobile WebP on neighborhood approach through its existing bounded asset queue. neighbor-sprites.js reads accepted displacement and dialogue ownership; collision and routes remain in game.js. Existing articulated work poses remain the fallback and chore renderer. Failed or late paint never blocks neighbor interaction. Keep private likeness references and authoring trials outside shipped assets. Match the compact proportions and restrained detail of the existing mini sprite cast; preserve complete shoes and review every encoded phase and loop seam.
 
 For expression repairs, retain the internal registration of the whole facial painting. The Inga repair replaces complete front/profile facial skin regions from coherent generated paint and preserves the original alpha, hair, body and back view. Do not translate individual eyes or lips into separate patches: this introduced visibly distorted eye/cheek/lip relationships in the rejected revision. Compare the complete face with its authoring source at native detail and the exact desktop/mobile cell before acceptance. tools/build-neighbor-sprites.py accepts a character selection through build(names=...) so a single resident repair preserves other atlas bytes and manifest entries.

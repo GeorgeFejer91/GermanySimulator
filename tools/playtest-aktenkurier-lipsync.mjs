@@ -3,10 +3,12 @@ import {createRequire} from 'node:module';
 import {mkdirSync,writeFileSync,readFileSync} from 'node:fs';
 import {execFileSync} from 'node:child_process';
 import assert from 'node:assert/strict';
+import {createHash} from 'node:crypto';
 const {chromium}=createRequire(import.meta.url)(process.env.PLAYWRIGHT_MODULE||'playwright');
 const output=process.env.PLAYTEST_OUTPUT||'output/omen-mouth/browser';mkdirSync(output,{recursive:true});
 let browser;
 const rows=[];
+const revision=Object.fromEntries(['buergeramt.js','world3d.js','buergeramt-splat.js','buergeramt-lipsync.js','speech-mouth.js','buergeramt-gaussian-scene.js','buergeramt-painted-anchor.js','assets/buergeramt/speech/mouth-cues.js'].map(file=>[file,createHash('sha256').update(readFileSync(file)).digest('hex')]));
 try{
  for(const [name,width,height] of [['baseline',1280,800],['desktop',1280,800],['android-portrait',390,844],['android-landscape',844,390],['reduced-motion',1280,800],['missing-audio',1280,800],['splat-failure',1280,800]].filter(([n])=>!process.env.PLAYTEST_VIEWPORT||n===process.env.PLAYTEST_VIEWPORT)){
   // Release the GPU process between cases, as well as the visit-owned resources.
@@ -26,7 +28,7 @@ try{
   page.on('pageerror',e=>errors.push(e.message));page.on('console',m=>{if(['warning','error'].includes(m.type()))warnings.push(m.text())});
   page.on('request',r=>{if(/lipsync|mouth-cues|omen-candidate|buergeramt-splat\.js/.test(r.url()))requests.push(r.url())});
   if(name==='baseline')await page.route('**/buergeramt-splat.js*',r=>r.fulfill({status:200,contentType:'text/javascript',body:execFileSync('git',['show',(process.env.BASELINE_COMMIT||'7ca04eff3f9205d726de55429a73676d2b41b992')+':buergeramt-splat.js'],{encoding:'utf8'})}));
-  if(name==='missing-audio')await page.route('**/omen-candidate-02.mp3',r=>r.abort());
+  if(name==='missing-audio')await page.route('**/omen-candidate-02.mp3*',r=>r.abort());
   if(name==='splat-failure')await page.route('**/omen/aktenkurier.splat*',r=>r.abort());
   let releaseSplat,preparation;
   if(process.env.PLAYTEST_CONSISTENCY){
@@ -54,10 +56,22 @@ try{
   }
   await page.waitForFunction(()=>Germany3D.amtOmenSplat.ready||Germany3D.amtOmenSplat.skipped,null,{timeout:90000});
   await page.keyboard.press('ArrowUp');await page.evaluate(()=>{dispatchEvent(new KeyboardEvent('keydown',{code:'KeyW'}));for(let i=0;i<150&&BuergeramtLevel.stage!=='omen';i++)omenStep(.05);dispatchEvent(new KeyboardEvent('keyup',{code:'KeyW'}));for(let i=0;i<300&&BuergeramtLevel.omen.phase==='approach';i++)omenStep(.025)});
-  const inspect=()=>page.evaluate(()=>({phase:BuergeramtLevel.omen.phase,speech:BuergeramtLevel.omen.speech,lipSpeech:BuergeramtLevel.lipSpeech,splat:Germany3D.amtOmenSplat,life:BuergeramtLevel.omen.life,actor:Germany3D.amtCharacters.find(a=>a.name==='aktenkurier'),players:omenPlayers.map(p=>({src:p.getAttribute('src'),time:p.currentTime,paused:p.paused,ended:p.ended,muted:p.muted}))}));
+  const inspect=()=>page.evaluate(()=>({phase:BuergeramtLevel.omen.phase,turnProgress:BuergeramtLevel.omen.turnProgress,speech:BuergeramtLevel.omen.speech,lipSpeech:BuergeramtLevel.lipSpeech,splat:Germany3D.amtOmenSplat,life:BuergeramtLevel.omen.life,actor:Germany3D.amtCharacters.find(a=>a.name==='aktenkurier'),players:omenPlayers.map(p=>({src:p.getAttribute('src'),time:p.currentTime,paused:p.paused,ended:p.ended,muted:p.muted}))}));
   const samples=[];
   if(name==='missing-audio'){
-   await page.waitForFunction(()=>!!window.omenFallback);await page.evaluate(()=>{omenStep(.1);omenFallback.onboundary?.({charIndex:5});Germany3D.sync()});assert((await inspect()).splat.mouth.open>0,'owned browser fallback visibly articulates with estimated timing');await page.evaluate(()=>omenFallback.onend());
+   try{await page.waitForFunction(()=>!!window.omenFallback)}catch(error){
+    const failure={state:await inspect(),caption:await page.locator('#amt-line').textContent(),requests,warnings};
+    writeFileSync(`${output}/${name}-failure.json`,JSON.stringify(failure,null,2));console.log(JSON.stringify(failure));throw error;
+   }
+   await page.evaluate(()=>{omenStep(.1);omenFallback.onboundary?.({charIndex:5});Germany3D.sync()});
+   const fallback=await inspect();
+   assert.equal(await page.locator('#amt-line').textContent(),await page.evaluate(()=>BuergeramtStory.omen.line));
+   assert.equal(fallback.lipSpeech.mode,'voice');
+   assert.equal(fallback.lipSpeech.timing,'estimated');
+   assert(fallback.splat.mouth.open>0,'owned browser fallback articulates with estimated timing');
+   await page.screenshot({path:`${output}/${name}-browser-fallback.png`});
+   await page.evaluate(()=>omenFallback.onend());
+   rows.push({name,fallback,end:await inspect(),fallbackPolicy:'existing browser speech'});
   }else{
    try{await page.waitForFunction(()=>omenPlayers.at(-1)?.currentTime>.1,null,{timeout:30000})}catch(error){console.log(JSON.stringify(await inspect()));throw error}
    // Real playback trace, from native currentTime at render cadence, no seek.
@@ -91,12 +105,24 @@ try{
    await page.waitForFunction(()=>BuergeramtLevel.omen.phase==='glare',null,{timeout:8000});
    await page.evaluate(()=>{BuergeramtLevel.update=()=>{};omenStep(.05)});const end=await inspect();assert(end.players.at(-1).ended);
    if(name!=='baseline'&&name!=='splat-failure')assert.equal(end.splat.mouth.open,0);
-   const trace=await page.evaluate(()=>mouthTrace);rows.push({name,frameTiming,held,paused,trace});
+   const trace=await page.evaluate(()=>mouthTrace);rows.push({name,frameTiming,held,paused,trace,end});
   }
-  await page.screenshot({path:`${output}/${name}-glare.png`});await page.evaluate(()=>{for(let i=0;i<500&&BuergeramtLevel.omen.phase;i++)omenStep(.025)});await page.waitForTimeout(100);
+  await page.screenshot({path:`${output}/${name}-glare.png`});
+  const recovery=[];let previous='';
+  for(let step=0;step<220;step++){
+   await page.evaluate(()=>omenStep(BuergeramtLevel.omen.phase==='turn'?.025:.1));const state=await inspect();
+   const selector=state.phase==='turn'?`turn-${Math.min(8,Math.floor(state.turnProgress*9))}`:state.phase||'idle';
+   if(selector!==previous){
+    const path=`${output}/${name}-recovery-${selector}.png`;await page.screenshot({path});recovery.push({state,path});previous=selector;
+   }
+   assert.equal(state.lipSpeech.active,false,'ended recording cannot reopen during recovery');
+   if(name!=='baseline'&&name!=='splat-failure')assert.equal(state.splat.mouth?.open??0,0);
+   if(!state.phase)break;
+  }
+  await page.waitForTimeout(100);
   assert.equal((await inspect()).phase,'');await page.locator('#amt-direct-reset').evaluate(n=>n.click());await page.locator('#amt-leave').evaluate(n=>n.click());await page.waitForTimeout(80);
   assert((await inspect()).players.every(p=>p.paused));assert.deepEqual(errors,[]);assert(!warnings.some(w=>/Shader Error|VALIDATE_STATUS|GL_INVALID/.test(w)));
-  const row=rows.find(r=>r.name===name)||{name};Object.assign(row,{result:'PASS',silent:true,physicalAndroid:false,preparation,samples,errors,warnings,requests});if(!rows.includes(row))rows.push(row);
+  const row=rows.find(r=>r.name===name)||{name};Object.assign(row,{result:'PASS',silent:true,physicalAndroid:false,revision,preparation,samples,recovery,errors,warnings,requests});if(!rows.includes(row))rows.push(row);
   if(name!=='baseline')assert.equal(new Set(requests.filter(r=>r.includes('buergeramt-splat.js'))).size,1,'one current splat module identity for all office owners');
   writeFileSync(`${output}/results.json`,JSON.stringify(rows,null,2));console.log(JSON.stringify({name,result:'PASS',frameTiming:row.frameTiming,errors}));await context.close();await browser.close();browser=null;
  }

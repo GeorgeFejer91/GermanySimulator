@@ -4,13 +4,17 @@ import {createServer} from 'node:http';
 import {readFileSync,writeFileSync,mkdirSync} from 'node:fs';
 import {resolve,extname,sep} from 'node:path';
 import assert from 'node:assert/strict';
+import {createHash} from 'node:crypto';
+import {execFileSync} from 'node:child_process';
 const require=createRequire(import.meta.url),{chromium}=require(process.env.PLAYWRIGHT_MODULE||'playwright');
-const root=resolve('.'),out=resolve('output/jobcenter');mkdirSync(out,{recursive:true});
+const root=resolve('.'),out=resolve(process.env.PLAYTEST_OUTPUT||'output/jobcenter');mkdirSync(out,{recursive:true});
+const baselineJob=process.env.PLAYTEST_BASE_REF?execFileSync('git',['show',process.env.PLAYTEST_BASE_REF+':jobcenter.js'],{encoding:'utf8'}):null;
 const mime={'.js':'text/javascript','.html':'text/html','.css':'text/css','.json':'application/json','.mp3':'audio/mpeg','.glb':'model/gltf-binary','.webp':'image/webp','.png':'image/png','.svg':'image/svg+xml','.ttf':'font/ttf'};
 const server=createServer((req,res)=>{try{let file=resolve(root,'.'+new URL(req.url,'http://localhost').pathname);if(!file.startsWith(root+sep))throw Error('path');const body=readFileSync(file);res.writeHead(200,{'Content-Type':mime[extname(file)]||'application/octet-stream'});res.end(body)}catch{res.writeHead(404);res.end()}});
 await new Promise(done=>server.listen(0,'127.0.0.1',done));
 const browser=await chromium.launch({headless:true,executablePath:process.env.CHROMIUM_PATH,args:['--mute-audio']});
-const report={limits:['Silent audio state checks; no listening verdict','Android emulation, not a physical device','City placement is forced; final approach and entry use production input'],cases:[]};
+const report={revision:Object.fromEntries(['jobcenter.js','speech-mouth.js','buergeramt-entry.js','assets/audio/jobcenter/overlord.json','assets/audio/jobcenter/overlord.mp3','world3d.js'].map(f=>[f,createHash('sha256').update(f==='jobcenter.js'&&baselineJob?baselineJob:readFileSync(f)).digest('hex')])),baselineRef:process.env.PLAYTEST_BASE_REF??null,limits:['Silent audio state checks; no listening verdict','Android emulation, not a physical device','City placement is forced; final approach and entry use production input'],cases:[]};
+const mouthTargets=[['closed',1.465],['open',1.95],['round',3.645],['bite',4.13],['wide-open',6.105],['quiet',26.635]];
 const silenceAudio=()=>{
    const play=HTMLMediaElement.prototype.play;window.__jobMedia=[];HTMLMediaElement.prototype.play=function(...args){this.muted=true;if(this.src.includes('/jobcenter/')&&!window.__jobMedia.includes(this))window.__jobMedia.push(this);return play.apply(this,args)};
    const connect=AudioNode.prototype.connect;AudioNode.prototype.connect=function(target,...args){if(target===this.context.destination){const gain=this.context.createGain();gain.gain.value=0;connect.call(gain,target);return connect.call(this,gain,...args)}return connect.call(this,target,...args)};
@@ -20,7 +24,17 @@ try{
  for(const [name,viewport] of [['desktop',{width:1280,height:800}],['android',{width:390,height:844}]]){
   const context=await browser.newContext({viewport,isMobile:name==='android',hasTouch:name==='android'});context.setDefaultTimeout(90000);
   await context.addInitScript(silenceAudio);
+  if(process.env.PLAYTEST_MOUTH_CUES==='1')await context.addInitScript(targets=>{
+   window.__jobMouthCapture={targets,index:0,ready:-1};const seen=new WeakSet(),play=HTMLMediaElement.prototype.play;
+   HTMLMediaElement.prototype.play=function(...args){
+    if(this.src.includes('/jobcenter/')&&!seen.has(this)){
+     seen.add(this);const player=this;window.__jobMouthTimer=setInterval(()=>{const c=__jobMouthCapture,t=c.targets[c.index];if(t&&!player.paused&&player.currentTime>=t[1]){player.pause();c.ready=c.index}},5);
+    }
+    return play.apply(this,args);
+   };
+  },mouthTargets);
   const page=await context.newPage(),errors=[],requests=[];page.on('pageerror',e=>{errors.push(e.message);console.log('PAGE ERROR '+e.message)});page.on('request',r=>requests.push(r.url()));
+  if(baselineJob)await page.route('**/jobcenter.js?*',route=>route.fulfill({contentType:'text/javascript',body:baselineJob}));
   await page.goto(`http://127.0.0.1:${server.address().port}/index.html`,{waitUntil:'domcontentloaded'});
   const cdp=await context.newCDPSession(page);await cdp.send('Emulation.setFocusEmulationEnabled',{enabled:true});
   try{await page.waitForFunction(()=>window.Germany3D?.startupReady&&window.Germany3DBridge?.startupAssetsReady)}catch(error){console.log(await page.evaluate(()=>({ready:window.Germany3D?.ready,startup:window.Germany3D?.startupStatus,characters:window.Germany3DBridge?.characterAssetStatus,hidden:document.hidden})));throw error}
@@ -58,7 +72,23 @@ try{
   const speaking=await page.evaluate(()=>Germany3D.jobcenter);assert.ok(speaking.energy>0);assert.ok(speaking.pressure>initial.pressure);
   await page.evaluate(()=>{window.__jobCueSamples=[];window.__jobCueTimer=setInterval(()=>{const j=Germany3D.jobcenter;if(j.active)window.__jobCueSamples.push({time:j.playback,level:j.rumbleLevel,dismissal:j.dismissal,heat:j.heat,active:j.rumbleActive})},100)});
   const samples=await page.evaluate(async()=>{const rows=[];for(let i=0;i<12;i++){await new Promise(r=>setTimeout(r,90));rows.push({time:Germany3D.jobcenter.playback,energy:Germany3D.jobcenter.energy})}return rows});
-  assert.ok(new Set(samples.map(s=>Math.round(s.energy*100))).size>2,'fire responds to changing media energy');
+  if(process.env.PLAYTEST_MOUTH_CUES!=='1')assert.ok(new Set(samples.map(s=>Math.round(s.energy*100))).size>2,'fire responds to changing media energy');
+  const mouthCaptures=[];
+  const captureMouth=async index=>{
+   await page.waitForFunction(index=>__jobMouthCapture.ready===index,index);await page.evaluate(()=>Germany3D.sync());
+   const state=await page.evaluate(()=>({scene:Germany3D.jobcenter,mediaTime:__jobMedia.at(-1).currentTime,paused:__jobMedia.at(-1).paused}));
+   const [label,target]=mouthTargets[index],path=resolve(out,name+'-mouth-'+label+'.png');
+   assert(state.paused);assert(Math.abs(state.mediaTime-target)<.04,'native pause should remain inside its acoustic cue');
+   await page.screenshot({path});
+   if(!baselineJob){
+    if(['closed','quiet'].includes(label))assert.equal(state.scene.mouth[0],0);
+    if(label==='round')assert(state.scene.mouth[2]>.5);
+    if(label==='bite')assert(state.scene.mouth[3]>.5);
+   }
+   mouthCaptures.push({label,target,path,state});
+   await page.evaluate(()=>{__jobMouthCapture.index++;__jobMouthCapture.ready=-1;__jobMedia.at(-1).play()});
+  };
+  if(process.env.PLAYTEST_MOUTH_CUES==='1')for(let i=0;i<5;i++)await captureMouth(i);
   if(name==='desktop'){
    await page.keyboard.down('KeyW');await page.waitForTimeout(1700);await page.keyboard.up('KeyW');
    await page.screenshot({path:resolve(out,name+'-furious.png')});
@@ -73,6 +103,7 @@ try{
   }
   await page.waitForFunction(()=>Germany3D.jobcenter.heat>.75,null,{timeout:45000});
   await page.screenshot({path:resolve(out,name+'-white-heat.png')});
+  if(process.env.PLAYTEST_MOUTH_CUES==='1'){await captureMouth(5);await page.evaluate(()=>clearInterval(__jobMouthTimer))}
   await page.waitForFunction(()=>!Germany3D.jobcenter.active&&Germany3D.jobcenter.release?.progress>.03,null,{timeout:5000});
   const releaseStart=await page.evaluate(()=>({release:Germany3D.jobcenter.release,busy:Germany3DBridge.getHUDState().busy,player:{...Germany3DBridge.player}}));
   assert.equal(releaseStart.busy,false,'native ended immediately returns city control beneath the visual release');
@@ -91,7 +122,7 @@ try{
   // Re-entry and explicit recovery never keep the old audio or controls.
   await page.keyboard.press('KeyE');await page.waitForFunction(()=>Germany3D.jobcenter.active);await page.keyboard.press('Escape');
   assert.equal(await page.evaluate(()=>Germany3D.jobcenter.active),false);
-  assert.deepEqual(errors,[]);report.cases.push({name,initial,speaking,samples,cueSamples,releaseStart,exit,errors});
+  assert.deepEqual(errors,[]);report.cases.push({name,initial,speaking,samples,mouthCaptures,cueSamples,releaseStart,exit,errors});
   console.log(JSON.stringify({name,result:'PASS'}));await context.close();
  }
  // Shared diagnostic uses the identical facade and encounter renderer.

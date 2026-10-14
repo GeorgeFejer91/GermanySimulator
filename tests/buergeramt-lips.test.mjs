@@ -200,3 +200,30 @@ test('all 41 atlas poses own fitted profiles; failed loading and rear poses reta
  assert.throws(()=>lips.setProfiles(bad,validateMouthProfile));
  assert.deepEqual(lips.displayedMouthProfile({id:'parent'}),data.profiles.parent[0],'failed registration must not replace validated profiles');
 });
+
+test('walking speech follows every displayed front/side sample and leaves rear paint intact',()=>{
+ const lips=globalThis.GermanyAmtLips,data=JSON.parse(readFileSync(new URL('../assets/buergeramt/characters/mouth-profiles.json',import.meta.url)));
+ lips.setProfiles(data,validateMouthProfile);let samples=0;
+ for(const [id,directions] of Object.entries(data.walking)){
+  for(const direction of ['down','right','left'])for(const [sample,frame] of directions[direction].frames.entries()){
+   const actor={id,mouthPose:null,mouthWalk:{direction,sample},renderKey:`walk:0:${sample}`};
+   assert.deepEqual(lips.displayedMouthProfile(actor),directions[direction].profile);
+   const rect=lips.displayedMouth(actor);assert.deepEqual(rect,[frame.rect[0]/640,1-frame.rect[1]/832,frame.rect[2]/640,frame.rect[3]/832]);
+   const detail=lips.displayedMouthFrame(actor);assert(detail.axes.every(Number.isFinite));assert(detail.axes[0]*detail.axes[3]-detail.axes[1]*detail.axes[2]<0);
+   actor.renderKey='atlas:0';const expected=frame.atlasRect??frame.rect;
+   assert.deepEqual(lips.displayedMouth(actor),[expected[0]/640,1-expected[1]/832,expected[2]/640,expected[3]/832]);
+   actor.mouthWalk.direction='up';assert.equal(lips.displayedMouthProfile(actor),null);assert.equal(lips.displayedMouthFrame(actor),null);
+   samples++;
+  }
+ }
+ assert.equal(samples,240,'all encoded front/side walking samples require registrations');
+ const bad=structuredClone(data);bad.walking.archivbotin.right.frames.pop();assert.throws(()=>lips.setProfiles(bad,validateMouthProfile),/Incomplete painted walking/);
+ assert.deepEqual(lips.displayedMouthProfile({id:'archivbotin',mouthPose:null,mouthWalk:{direction:'right',sample:15}}),data.walking.archivbotin.right.profile,'a rejected partial load cannot replace the validated walking table');
+});
+
+test('legacy talk selects clean ready paint at the same breath phase',()=>{
+ const {clerkPaintFrame}=globalThis.GermanyAmtLips;
+ for(let frame=0;frame<40;frame++)assert.equal(clerkPaintFrame(frame),frame,'authored action source stays unchanged');
+ for(let col=0;col<8;col++)assert.equal(clerkPaintFrame(40+col),col,'all legacy talk columns use unbaked ready paint');
+ assert.equal(clerkPaintFrame(48),48,'only the legacy talk range is remapped');
+});

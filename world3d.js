@@ -1,5 +1,5 @@
 import {createAmtTouchPicker} from './buergeramt-touch-target.js?v=20261013-double-tap';
-import {createAmtGaussianScene,loadAmtSplatModule} from './buergeramt-gaussian-scene.js?v=20261013-character-lips';
+import {createAmtGaussianScene,loadAmtSplatModule} from './buergeramt-gaussian-scene.js?v=20261013-mouth-audit';
 import {mouthPaintGlsl,mouthProfileValues,validateMouthProfile} from './buergeramt-mouth-paint.js?v=20261013-character-lips';
 import {createAmtFloor} from './buergeramt-floor.js?v=20261014-floor-pigment1';
 import {createAmtPortraitMelt} from './buergeramt-portrait-melt.js?v=20261014-portrait-droop1';
@@ -7,7 +7,7 @@ import {createAmtLampWear} from './buergeramt-lamps.js?v=20261012-counter-recove
 import {createPotatoMirror} from './buergeramt-potato-mirror.js?v=20261013-physical-mirror';
 import {amtWalkDirection,createAmtWalkSpare} from './buergeramt-walk-view.js?v=20261013-smooth-turning';
 import {prepareWithSegments,measureNaturalWidth,measureLineStats} from './assets/vendor/pretext/dist/layout.js';
-import {createJobcenterBuilding,createJobcenterEncounter} from './jobcenter.js?v=20261013-furnace-mouth';
+import {createJobcenterBuilding,createJobcenterEncounter} from './jobcenter.js?v=20261013-mouth-audit';
 import {createNeighborSprite} from './neighbor-sprites.js?v=20261014-neighbor-performance';
 const THREE_URL="./assets/vendor/three/0.186.0/build/three.module.min.js";
 const GLTF_LOADER_URL="./assets/vendor/three/0.186.0/examples/jsm/loaders/GLTFLoader.js";
@@ -1577,7 +1577,7 @@ function showRendererFailure(error){
     if(amtImagesRequested)return;amtImagesRequested=true;officePreparationBackground=background;
     officeAssetTotal++;officeAssetPending++;
     const loadLipProfiles=async()=>{
-      const response=await fetch('./assets/buergeramt/characters/mouth-profiles.json?v=20261013-character-lips');
+      const response=await fetch('./assets/buergeramt/characters/mouth-profiles.json?v=20261013-mouth-audit');
       if(!response.ok)throw new Error('Lip profiles unavailable: '+response.status);
       window.GermanyAmtLips.setProfiles(await response.json(),validateMouthProfile);
     };
@@ -1644,9 +1644,10 @@ function showRendererFailure(error){
       const detailed=close&&!!actor.detail?.image;
       const texture=detailed?actor.detail:actor.atlas;
       if(texture&&actor.mesh.material.map!==texture){actor.mesh.material.map=texture;actor.mesh.material.needsUpdate=true}
-      const row=Math.floor(frame/8),col=frame%8;
+      const paintedFrame=actor.performance?(window.GermanyAmtLips?.clerkPaintFrame?.(frame)??frame):frame;
+      const row=Math.floor(paintedFrame/8),col=paintedFrame%8;
       actor.mouthPose=actor.performance?row:undefined;
-      const key=detailed?actor.performance?`detail:${row===5?8+col:row}`:"detail":"atlas:"+frame;
+      const key=detailed?actor.performance?`detail:${row===5?8+col:row}`:"detail":"atlas:"+paintedFrame;
       if(key!==actor.renderKey){actor.renderKey=key;
         if(detailed&&actor.performance)amtUv(actor,row===5?col:row,row===5?1:0,8,2);
         else if(detailed)amtUv(actor,0,0,1,1);
@@ -1713,6 +1714,7 @@ function showRendererFailure(error){
       const walkDetail=close&&row<4&&actor.walkDirection===direction&&!!actor.walkDetail?.image;
       const turnDetail=turning&&!!actor.turnDetail?.image,turnFrame=Math.min(8,Math.floor(omen.turnProgress*9));
       actor.mouthPose=turnDetail||row<4?null:row-4;
+      actor.mouthWalk=row<4&&!turning?{direction,sample}:null;
       actor.mouthSample=sample;
       const texture=turnDetail?actor.turnDetail:actionDetail?actor.detail:walkDetail?actor.walkDetail:actor.atlas;
       if(texture&&actor.mesh.material.map!==texture){const hadMap=!!actor.mesh.material.map;actor.mesh.material.map=texture;if(!hadMap)actor.mesh.material.needsUpdate=true}
