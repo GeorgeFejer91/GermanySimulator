@@ -1022,11 +1022,13 @@ function showClerk(){
 function showOutburst(){
  const upset={...story.outburst,speaker:"FRAU KNICK · SCHALTER "+assignedCounter};exit.hidden=true;cancelSpeech();actions.replaceChildren();ambient.textContent="";
  const phoneBrowser=navigator.userAgentData?.mobile??/iPhone|iPod|Android.*Mobile/i.test(navigator.userAgent||"");
- let waiting=null,deskIndex=null,deskTimer=null,disconnected=false,phoneCaption="",phoneSubtitle=null,ending=false,endingTimer=null,dismissed=false;
+ const overlapMs=1000;
+ let waiting=null,deskIndex=null,deskTimer=null,deskStopTimer=null,disconnected=false,phoneCaption="",phoneSubtitle=null,ending=false,endingTimer=null,dismissed=false;
  function clearPhoneCaption(){if(phoneCaption&&ambient.textContent===phoneCaption)ambient.textContent="";if(phoneSubtitle&&officeSubtitle===phoneSubtitle){officeSubtitle=null;refreshSubtitle()}phoneCaption="";phoneSubtitle=null}
  function stopDesk(){
+  if(deskStopTimer!==null)clearTimer(deskStopTimer);deskStopTimer=null;
   if(deskTimer!==null)clearTimer(deskTimer);deskTimer=null;
-  const record=timing.desk[deskIndex];if(record&&record.endAt===null){record.endAt=performance.now();record.mode="interrupted";cancelSpeech()}
+  const record=timing.desk[deskIndex];if(record&&record.endAt===null){record.endAt=performance.now();record.mode="interrupted";const subtitle=officeSubtitle===phoneSubtitle?phoneSubtitle:null;cancelSpeech();if(subtitle){officeSubtitle=subtitle;refreshSubtitle()}}
  }
  function nextDesk(index,missing=false){
   if(waiting?.index!==index)return;const pending=waiting;waiting=null;clearTimer(pending.timer);
@@ -1036,7 +1038,8 @@ function showOutburst(){
  }
  policeDoneHandler=index=>nextDesk(index);
  policeStartHandler=index=>{
-  if(waiting?.index!==index)return;const variantUpdate=timing.cues[index]?.openingBackupAtMs!==undefined;if(!variantUpdate){stopDesk();clearTimer(waiting.timer)}ambient.textContent="";
+  if(waiting?.index!==index)return;const variantUpdate=timing.cues[index]?.openingBackupAtMs!==undefined;
+  if(!variantUpdate){clearTimer(waiting.timer);if(index>=0&&index<3)deskStopTimer=defer(stopDesk,Math.max(0,timing.cues[index].estimatedStartAt+overlapMs-performance.now()));else stopDesk()}ambient.textContent="";
   clearPhoneCaption();
    const named=index===-1&&timing.cues[index]?.startMode==='voice';
    const text=index===-1?(named?story.call.opening(registeredName):story.call.line):story.police[index];
@@ -1056,7 +1059,7 @@ function showOutburst(){
    if(waiting!==pending||record.doneAt!==null)return;
    if(!disconnected&&link?.send("police-cutoff",payload)){
     record.interrupted=true;record.cutoffSentAt=performance.now();
-    pending.timer=defer(()=>nextDesk(index),Math.max(0,target-performance.now()-timing.deskStartLagMs));
+    pending.timer=defer(()=>nextDesk(index),Math.max(0,target-performance.now()-overlapMs));
    }else if(++tries<3)pending.timer=defer(schedule,100);
    else{record.cutoffSendFailed=true;pending.timer=defer(()=>nextDesk(index,true),60000)}
   };
