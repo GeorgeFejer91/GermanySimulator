@@ -1,10 +1,11 @@
 import {readFileSync,writeFileSync,mkdirSync} from 'node:fs';
 import {createHash} from 'node:crypto';
-import {levelLinks} from './build-level-pages.mjs';
+import {levelLinks,levelPage} from './build-level-pages.mjs';
 
 const base=new URL(process.env.LEVEL_BASE_URL||'https://germanysimulator.de/');
 const levels=levelLinks(readFileSync('game.js','utf8'));
-const report={base:base.href,verifiedAt:new Date().toISOString(),complete:false,levels:[],limits:['HTTP, static metadata and PNG verification; browser playability is separate','Sharing-platform cache rendering and physical Android are not established by this check']};
+const template=readFileSync('index.html','utf8'),normalize=text=>text.replaceAll('\r\n','\n');
+const report={base:base.href,verifiedAt:new Date().toISOString(),complete:false,levels:[],runtime:[],limits:['HTTP, deployed HTML/runtime, static metadata and PNG verification; browser playability is separate','Sharing-platform cache rendering and physical Android are not established by this check']};
 const meta=(html,name)=>html.match(new RegExp(`<meta (?:property|name)="${name}" content="([^"]+)"`))?.[1];
 async function get(url){const response=await fetch(url,{signal:AbortSignal.timeout(30000)});if(!response.ok)throw Error(`${response.status} ${url}`);return response}
 try{
@@ -14,6 +15,7 @@ try{
       const url=new URL(encodeURIComponent(path),base);
       const response=await get(url),html=await response.text();
       if(!response.headers.get('content-type')?.includes('text/html'))throw Error('Not HTML: '+url);
+      if(normalize(html)!==normalize(levelPage(template,level)))throw Error('Stale/different deployed level HTML: '+url);
       if(!html.includes(`data-direct-level="${level.id}"`))throw Error('Wrong direct destination: '+url);
       if(meta(html,'og:url')!==`https://germanysimulator.de/${level.path}/`)throw Error('Wrong canonical share URL: '+url);
       if(meta(html,'og:image')!==`https://germanysimulator.de/${level.image}`)throw Error('Wrong share image: '+url);
@@ -27,7 +29,11 @@ try{
     report.levels.push({...level,checks,imageCheck:{status:image.status,width:1200,height:630,bytes:bytes.length,sha256}});
     console.log(`PASS ${level.id}: routes, static share metadata, PNG`);
   }
-  for(const path of ['','3d.html'])await get(new URL(path,base));
+  for(const path of ['index.html','3d.html','game.js','world3d.js','tourist-animation.js','buergeramt-link.js','buergeramt-fit.js','buergeramt.css','buergeramt-floor.js','buergeramt-portrait-melt.js']){
+    const response=await get(new URL(path==='index.html'?'':path,base)),source=normalize(await response.text());
+    if(source!==normalize(readFileSync(path,'utf8')))throw Error('Stale/different deployed runtime: '+path);
+    report.runtime.push({path,status:response.status,sha256:createHash('sha256').update(source).digest('hex')});
+  }
   report.complete=true;
   if(process.argv.includes('--update-catalogue')){
     const path='For-AI/LEVEL-URLS.md',text=readFileSync(path,'utf8');

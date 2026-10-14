@@ -894,3 +894,72 @@ Local acceptance: 31 desktop + 31 Android portrait routes, 3 Bürgeramt edge-siz
 2026-10-14 police player-name return and phone ending (integrator-owned): reuse the already synthesized Kripo name PCM before final player-directed demand; keep native call ending visible as Anruf beendet/Call ended through clunk/tone completion. Scope: knick-speech manager/worker, phone/host/story, phone HTML cache/live label, existing tests/browser probe and owning voice/episode/sound documentation. Preserve recordings, selected voice/model, reciprocal overlap, call receipt identity, ending/ejection and all other features. No world/render/art/physics/camera delta; these specialist gates are outside this speech/UI scope. Reuse locked Pretext and existing call-state measurement. Validate profile/text/PCM ownership, fallback/late callbacks/cleanup, all six UI cases and native desktop/Android playback; physical device/listening remain separate.
 
 Validation:245 focused speech/cache/phone/lifecycle checks PASS; final ending checks19/19 PASS after restricting live announcements to the ending status. Independent technical reviewer PASS after limiting the final name prefix to5native seconds; boundaries5/5.001/19s and full-demand fallback PASS. Mutation test rejects the original immediate-hidden ending handler. Six silent native browser contexts PASS:desktop and Android portrait complete the named final demand and original reciprocal overlap; landscape,320px,200%zoom and text-spacing hangup cases retain legible ending chrome and return after tone completion. One generated1.1726s name PCM and one model transfer/inference serve opening and final demand. Browser captures precede the added long-prefix guard; deterministic checks cover that exceptional branch and the final ARIA-only change. No perceived-audio or physical-device claim. Evidence under ignored output/police-address-ending/ and output/playwright/phone-illusion/. George approved mutual coordination among current Germany Simulator tasks in this conversation; GPU/browser lease was released to the paint task and publication is held for its reviewed release.
+Live acceptance for the direct-link release: Pages 38606482822 succeeded; all 31 destinations/33 primary-alias paths, 31 preview PNGs and 10 runtime/entry files matched validated source. Production browser smoke passed 10/10 desktop/Android cases across city, neighbors, Jobcenter, Bürgeramt and Finanzamt. Root and 3d.html health passed on both domains. Live URLs and dated results are recorded in For-AI/LEVEL-URLS.md.
+2026-10-14 scoped Bürgeramt arrow controls release: based on origin/main 0e105e4. Restore smooth left/right yaw, keep up/down forward/back and optional pointer look; remove keyboard pitch. Only controller, control hint/metadata/cache, existing focused checks/probe and owning controls documentation. Preserve latest live portrait/name/speech work; no assets, loads, cadence or dependencies change.
+
+Arrow-controls validation: 137 focused tests PASS (movement, turning, touch, session, preload and responsiveness). Restored turn-onset regression fails against release-base controller, passes candidate. Silent Chromium desktop, Android portrait/landscape emulation and 320px profile PASS with actual Pretext hint fitting, enlarged text/zoom and pointer lifecycle checks. Existing level-page build PASS (31 direct pages). Independent Physics scoped PASS: 6 turn-in-place and 36 simultaneous walk/turn collision cases; minimum inflated-axis clearance .005364, max substep .096667. Physical Android/touchpad and natural full mission NOT RUN. Browser evidence stored outside Git at primary checkout output/arrow-turning/browser/.
+
+Independent Camera scoped PASS: 17/17 fresh turn/touch checks, exact-source four-profile browser evidence and independent screenshots; hint readable and actual Pretext fit passes. Both reviewers approve this controls candidate; C1-C5 geometry/material/scale rows are outside scope. Source SHA-256 b81fe09c17064634041ff7e408bc76bbbf10477cb709ba3c82f6c64c135f1532. Scoped release preserves newer origin portrait/name/speech work and excludes unrelated shared-checkout changes.
+
+## Slower paint pearls joining into rivulets — 2026-10-14
+
+User accepts the sweat-like beads and requests more, much slower droplets that
+increasingly merge into streams at the bottom. Integrator-owned implementation
+starts from 1350c55; scoped Git status is clean. Allowed files: portrait shader,
+floor/world/entry cache tokens, existing floor GPU probe, this log and the owning
+Bürgeramt contract. No asset, controller, collision, audio, UI layout or clock
+changes. Preserve full framed image, uneven face sag, early interaction onset,
+real lower-image pigment, shared floor contact, reduced-motion/missing-art
+fallbacks, depth policy and cleanup. Use the existing bounded analytic shader;
+no new resources or dependencies. Output: ignored output/paint-rivulets.
+Acceptance: rendered early/late bead and rivulet sequences, slower motion and
+greater density against 1350c55, desktop/Android emulation, fallback/recovery,
+comparable office/root budgets, scoped Physics/Camera review, deployment smoke.
+The direct-link chat owns the current GPU/publication lease; implementation is
+CPU-only until its release and published integration. Physical Android and
+perceptual listening remain unavailable. No known production failure in scope.
+
+Integrated published direct-link main 0e105e4 before final validation; shared scene and entry changes are retained. New shader uses 24 staggered beads at .05 cycles per scene second (previously eight at .15), four progressive merging channels, and separate inter-channel droplets. The initial pixel probe was corrected to exclude the shared framed-image seam when classifying individual streams. Desktop prototype passes all visual/floor checks; final integrated evidence follows.
+
+Final candidate integrates published main 7f1ea81, including direct links and
+accepted arrow controls. Production changes remain confined to the portrait
+shader and matching cache tokens. Three redundant comment blocks were shortened
+after an initial combined-root transfer exceeded the existing 18 MB gate by
+222 bytes; no executable behavior or budget was changed.
+
+Integrated visual acceptance: 6/6 desktop, Android portrait/landscape emulation,
+procedural fallback, reduced-motion and missing-art profiles PASS; 5/5 recovery
+profiles PASS with zero errors and matching frozen runtime hashes. The 80-frame
+pixel oracle sees mean 4.9125 early detached beads versus 1.5875 before, median
+matched downward motion 32.05 versus 88.77 px/s, four late connected rivulets,
+loose beads in 75/80 late frames and floor contact in all 80. The old shader
+fails the new density oracle. The full framed face persists, lower paint never
+repeats facial features, pigment joins the floor oils, missing art feeds no
+paint, and recovery restores the picture and releases transport targets.
+Pages-selected 727 Node tests, voice curator and six exact-RGBA delivery checks
+PASS. Independent Physics P1/X1 and Camera C4/X1 reviews PASS the integrated
+candidate; supplied images and runtime hashes were independently inspected.
+Evidence: output/paint-rivulets/integrated-final, integrated-recovery and
+freeze-integrated.json. Physical Android, natural mission traversal and
+perceptual listening remain NOT RUN.
+
+Performance: six cold-root and six before/six after active-office runs pass the
+existing transfer/input-admission/cadence/buffer/error gates. Root maximum local
+transfer is 17,683,553 bytes; every run accepts nine controls without errors.
+Office uses the corrected active-controller fixture at age570/full melt,
+Chrome155/Intel Iris Xe, DPR2, seeds4782-4784, local HTTP, no CPU throttling.
+Before input-p95 median/range is 7.3/7.1-8.2ms desktop and 6.6/6.2-7.5ms Android
+emulation. Candidate is 303.8/8.1-5183ms and 6.7/6.5-46.6ms; six repeat candidate
+runs give 128.6/14.8-226.3ms and 6.5/6.4-9.3ms. Preserve these startup/input
+outliers: they do not certify stable latency or a speedup. Active sync-dispatch
+p95 medians/ranges remain 7.6/7.5-7.9ms before versus 7.3/7.2-9.7ms after desktop,
+and 7.6/7.5-7.8 versus 7.1/7.1-7.4ms emulation; repeats are 8.0/7.3-10.4 and
+8.0/7.9-8.1ms. These are dispatch intervals, not GPU timings. A separate startup
+CPU diagnostic reproduces large driver waits in the old shader too: desktop
+shader-link/log waits total about 29.5s before versus 5.4s after, texture uploads
+3.6s versus 3.0s. This identifies shared startup compilation/upload variability,
+not a proven paint-loop regression or improvement. Retain all reports under
+output/paint-rivulets/{root-final,office-final-before,office-final-after,
+office-confirm-after,office-profile-before,office-profile-after}; no production
+change was made to mask timings. Earlier interrupted/overlapping benchmark sets
+remain diagnostic only. Publication and live route/source verification follow.

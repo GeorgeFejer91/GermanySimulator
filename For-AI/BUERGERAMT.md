@@ -5,7 +5,7 @@
 While the office is active, its existing frame owner follows each display RAF;
 the city retains 60 Hz and the title 4 Hz. Actual elapsed time, collision
 substeps, the shared slowdown clock and hidden-tab suspension remain authoritative.
-WASD and arrow keys walk and strafe relative to the view. Drag look follows one captured pointer
+WASD walks and strafes relative to the view; Up/Down walks forward/backward and Left/Right smoothly rotates yaw. Drag look follows one captured pointer
 using CSS-pixel position deltas. Movement fingers have separate IDs; cancelled
 gestures, focus loss, scene changes and replay release ownership.
 Existing touch controls also appear on wide coarse-pointer screens.
@@ -21,7 +21,7 @@ remain authoritative. The scene outside the joystick and toolbar accepts a
 separate captured finger for horizontal and vertical look; walking retains its pitch, bounded to
 ±.9 radians. Touch sensitivity follows the viewport's shorter dimension, with
 the same time-scale multiplier as desktop drag. Mouse drag also supports pitch;
-Page Up/Down adjust pitch. WASD, arrow keys and the touch stick walk. Mouse and trackpad movement over the
+Manual pitch uses mouse, trackpad or touch. Up/Down walk forward/backward; Left/Right rotate so the arrow keys alone can navigate. A/D and the touch stick retain strafing. Mouse and trackpad movement over the
 scene also changes yaw/pitch without a held button, using the same sensitivity
 and slowdown as drag look. Controls, the open mixer, scripted sequences and
 paused/hidden scenes do not take mouse look. Focus loss and scene transitions
@@ -274,9 +274,12 @@ as the liquid flows. The face deformation stays within the framed paint; wall
 runoff retains mixed pigment rather than repeating facial features. Never
 translate the whole recognizable portrait down the wall as a falling poster.
 Sweat-like paint pearls swell on the image, slide downward, cling briefly to the
-bottom lip and pinch off their short necks into rounded falling drops. Eight
-staggered analytic beads repeat continuously, including after progress caps;
-there is no permanently connected curtain. Local lens distortion and tinted
+bottom lip and pinch off their short necks into rounded falling drops. Twenty-four
+staggered analytic beads repeat at one-third of the previous cycle speed,
+including after progress caps. As melting increases, half the beads converge
+into four uneven lower-edge rivulets that thicken and lengthen toward the floor;
+the others keep dropping between them. Open wall remains between the streams.
+Local lens distortion and tinted
 dome shading give each bead volume without white wavy highlights. The wall
 pearls mix real lower suit, tie and flag pigment without repeating facial
 features. The original image supplies all colors. The existing scene clock drives this flow,

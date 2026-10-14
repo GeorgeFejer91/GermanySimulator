@@ -1,5 +1,3 @@
-// One paint source shared by the dissolving portrait, its viscous runs and the
-// existing floor transport. No particles, scene capture or separate clock.
 const MELT_RATE=2.2;
 export const portraitPaintGlsl=`
   uniform sampler2D amtPortraitPaint;
@@ -15,13 +13,27 @@ export const portraitPaintGlsl=`
   }
   vec4 amtPaintBeads(vec2 point,float melted,float clock){
     vec4 bead=vec4(0.);
-    for(int i=0;i<8;i++){
+    float lane=floor(clamp(point.x,0.,.999)*4.),gather=smoothstep(.25,.95,melted);
+    float stream=smoothstep(.25+lane*.07,.90+lane*.02,melted);
+    float front=1.+.84*stream,along=max(0.,point.y-.85);
+    float path=(lane+.5)/4.+.018*sin(along*7.+lane*2.-clock*.025)*along;
+    float width=(.009+.018*stream)*(1.+.30*sin(along*18.-clock*.35+lane));
+    float side=(point.x-path)/width,tip=(point.y-front)/width;
+    float roundness=side*side+pow(max(0.,tip),2.);
+    float mask=(1.-smoothstep(.75,1.10,roundness))*stream*smoothstep(.88,1.,point.y);
+    float dome=sqrt(max(0.,1.-roundness));
+    bead=vec4(side*dome,0.,dome,mask);
+    for(int i=0;i<24;i++){
       float seed=fract(sin(float(i)*41.7+3.2)*43758.5453);
-      float phase=fract(clock*.15+(float(i)+.7)/8.+.025*sin(clock*.07+seed*6.));
+      float phase=fract(clock*.05+float(i)*.381966+.029+.025*sin(clock*.025+seed*6.));
       float fall=max(0.,(phase-.60)/.40),growth=smoothstep(0.,.18,phase);
       float head=mix(.12+.50*seed,1.,smoothstep(.20,.50,phase))+min(1.15,melted*3.4)*fall*fall;
-      float center=(float(i)+.5)/8.+.025*sin(head*5.+seed*9.);
-      float radius=(.038+.022*seed)*sqrt(melted)*growth;
+      float center=(float(i)+.5)/24.+.018*sin(head*5.+seed*9.);
+      float group=floor(float(i)/6.),distance=max(0.,head-.85);
+      float channel=(group+.5)/4.+.018*sin(distance*7.+group*2.-clock*.025)*distance;
+      channel+=.095*step(3.,mod(float(i),6.));
+      center=mix(center,channel,gather*smoothstep(.65,1.4,head));
+      float radius=(.026+.018*seed)*sqrt(melted)*growth;
       float impact=smoothstep(1.76,1.92,head);
       vec2 extent=vec2(radius*(1.+.7*impact),radius*.75*(1.+fall)*(1.-.65*impact));
       vec2 q=(point-vec2(center,min(1.80,head)))/max(vec2(.001),extent);
@@ -44,13 +56,11 @@ export const portraitPaintGlsl=`
     float flow=.28+.72*amtPaintNoise(vec2((u+bend)*8.5,2.4));
     vec4 bead=amtPaintBeads(point,melted,clock);
     float sourceDown=down-melted*flow*(.10+.65*down*down)*smoothstep(0.,.12,down);
-    // Feed the wall with lower suit/tie/flag pigment, keeping facial features
-    // inside the frame even after the inexhaustible flow reaches full melt.
+    // Keep facial features inside the frame.
     float contactSource=max(.70,1.-melted*flow*.75+.10*sin(below*11.-clock*.65)*smoothstep(0.,.2,below));
     sourceDown=mix(sourceDown,contactSource,wall);
     float sourceU=u+.055*melted*sin(down*9.-clock*.05+u*8.)+.09*melted*wall*sin(below*7.-clock*.08);
-    // Anchor the forehead while eyes, cheeks and jaw stretch downward at
-    // unequal rates. Inverse stretching keeps one continuous painted face.
+    // Inverse stretching anchors one continuous face at the forehead.
     float head=smoothstep(.22,.32,u)*(1.-smoothstep(.69,.79,u))*smoothstep(.07,.13,down)*(1.-smoothstep(.66,.90,down));
     float sag=head*smoothstep(0.,.60,melted)*(.70+.70*(1.-smoothstep(.36,.64,u)));
     sourceDown=mix(sourceDown,.08+(sourceDown-.08)/(1.+sag),head);
@@ -97,10 +107,8 @@ export function createAmtPortraitMelt({THREE:T,material,frame,floor,position,wid
       diffuseColor.a*=film.a;
     `);
   };
-  dripMaterial.customProgramCacheKey=()=>':amt-portrait-drips-v9';
-  // One unbroken paint surface spans the image and wall: separate panels leave
-  // a visible cut in a moving face. Extra width lets its liquid edges meander.
-  // Static curvature, 24 triangles; it settles onto the inner wall at z=5.47.
+  dripMaterial.customProgramCacheKey=()=>':amt-portrait-drips-v10';
+  // A continuous surface avoids a seam across the face and meets the inner wall.
   const geometry=new T.PlaneGeometry(1.75,3.49,1,12),vertices=geometry.attributes.position;
   for(let i=0;i<vertices.count;i++){
     const down=1.745-vertices.getY(i),t=Math.max(0,Math.min(1,(down-2.35)/.40));

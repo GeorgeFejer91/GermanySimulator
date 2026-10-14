@@ -120,26 +120,32 @@ function samplePaintSurface(){
   for(let i=0;i<images[0].length;i+=4)if(images[0][i+3]>240&&images[1][i+3]>240){covered++;maximum=Math.max(maximum,images[0][i],images[1][i]);if(Math.abs(images[0][i]-images[1][i])>8)changed++;}
   return{covered,changedFraction:changed/covered,maximum};
 }
-function sampleContinuousRunoff(){
-  const samples=[];let downwardSteps=0,previous=[];
-  // Connected components in rendered alpha distinguish detached, round pearls
-  // from a continuous curtain. Track their centroids over a complete cycle.
-  for(let step=0;step<32;step++){
-    const frame=__floorGpu.samplePortraitPaint('film',1,486+step*.25,undefined,true),seen=new Uint8Array(128*160),drops=[];
-    for(let start=0;start<seen.length;start++){
+function sampleContinuousRunoff(amount=1){
+  const samples=[],speeds=[];let downwardSteps=0,previous=[];
+  // Render a full slow cycle. Components separate free pearls from connected
+  // rivulets; density and centroid motion are measured from pixels, not phases.
+  for(let step=0;step<80;step++){
+    const frame=__floorGpu.samplePortraitPaint('film',amount,486+step*.25,undefined,true),seen=new Uint8Array(128*160),drops=[],streams=[];
+    // Exclude the framed-image seam, which joins every run across the top row.
+    for(let start=0;start<128*156;start++){
       if(seen[start]||frame.pixels[start*4]<127)continue;
       const queue=[start];seen[start]=1;let minX=128,maxX=0,minY=160,maxY=0,sx=0,sy=0;
       for(let cursor=0;cursor<queue.length;cursor++){
         const index=queue[cursor],x=index%128,y=Math.floor(index/128);minX=Math.min(minX,x);maxX=Math.max(maxX,x);minY=Math.min(minY,y);maxY=Math.max(maxY,y);sx+=x;sy+=y;
-        for(const [dx,dy]of [[-1,0],[1,0],[0,-1],[0,1]]){const nx=x+dx,ny=y+dy,n=ny*128+nx;if(nx>=0&&nx<128&&ny>=0&&ny<160&&!seen[n]&&frame.pixels[n*4]>=127){seen[n]=1;queue.push(n);}}
+        for(const [dx,dy]of [[-1,0],[1,0],[0,-1],[0,1]]){const nx=x+dx,ny=y+dy,n=ny*128+nx;if(nx>=0&&nx<128&&ny>=0&&ny<156&&!seen[n]&&frame.pixels[n*4]>=127){seen[n]=1;queue.push(n);}}
       }
       const w=maxX-minX+1,h=maxY-minY+1;
-      if(minY>2&&maxY<156&&w>=4&&h>=5&&w/h>.3&&w/h<1.8&&queue.length/(w*h)>.55)drops.push({x:sx/queue.length,y:sy/queue.length,w,h,area:queue.length});
+      if(minY>2&&maxY<152&&w>=4&&h>=5&&w/h>.3&&w/h<1.8&&queue.length/(w*h)>.55)drops.push({x:sx/queue.length,y:sy/queue.length,w,h,area:queue.length});
+      if(maxY>153&&h>60&&w/h<.5)streams.push({w,h,area:queue.length});
     }
-    for(const drop of drops)if(previous.some(old=>Math.abs(old.x-drop.x)<6&&old.y-drop.y>1&&old.y-drop.y<35))downwardSteps++;
-    samples.push({clock:486+step*.25,drops,ground:frame.bands.at(-1),coverage:frame.bands.reduce((a,b)=>a+b)/8});previous=drops;
+    for(const drop of drops){
+      const old=previous.filter(old=>Math.abs(old.x-drop.x)<2&&old.y-drop.y>.2&&old.y-drop.y<35).sort((a,b)=>Math.abs(a.x-drop.x)-Math.abs(b.x-drop.x))[0];
+      if(old){downwardSteps++;speeds.push((old.y-drop.y)/.25);}
+    }
+    samples.push({clock:486+step*.25,drops,streams,ground:frame.bands.at(-1),coverage:frame.bands.reduce((a,b)=>a+b)/8});previous=drops;
   }
-  return{samples,downwardSteps,detachedFrames:samples.filter(s=>s.drops.length).length,groundFrames:samples.filter(s=>s.ground>.005).length};
+  speeds.sort((a,b)=>a-b);
+  return{samples,downwardSteps,meanDrops:samples.reduce((n,s)=>n+s.drops.length,0)/samples.length,medianSpeed:speeds[Math.floor(speeds.length/2)],meanStreams:samples.reduce((n,s)=>n+s.streams.length,0)/samples.length,detachedFrames:samples.filter(s=>s.drops.length).length,groundFrames:samples.filter(s=>s.ground>.005).length};
 }
 function sampleRunoffSource(){
   const canvas=document.createElement('canvas');canvas.width=canvas.height=64;
@@ -230,8 +236,17 @@ try{
       else{assert(Math.max(...intact.range)>40,'actual paint is present before melting');assert(Math.max(...continuous.range)>40&&continuous.bands.every(coverage=>coverage>.98),'the entire framed image remains populated at full melt');}
       const runoffSource=name==='missing-portrait'?null:await page.evaluate(()=>__floorGpu.sampleRunoffSource());
       if(runoffSource){writeFileSync(resolve(out,`${name}-runoff-source.json`),JSON.stringify(runoffSource,null,2));for(const sample of runoffSource){assert(sample.lower>50,'paint pearls carry real lower-image pigment');assert.equal(sample.upper,0,'facial-source paint does not repeat as eyes below the frame');}}
-      const runoff=name==='missing-portrait'?null:await page.evaluate(()=>__floorGpu.sampleContinuousRunoff());
-      if(runoff){writeFileSync(resolve(out,`${name}-runoff.json`),JSON.stringify(runoff,null,2));assert(runoff.detachedFrames>24,'rounded beads repeatedly separate from the painting');assert(runoff.downwardSteps>20,'detached pearls travel down after the melt cap');assert(runoff.groundFrames>12,'fresh paint repeatedly reaches the floor');}
+      const runoff=name==='missing-portrait'?null:await page.evaluate(()=>({early:__floorGpu.sampleContinuousRunoff(.16),late:__floorGpu.sampleContinuousRunoff()}));
+      if(runoff){
+        writeFileSync(resolve(out,`${name}-runoff.json`),JSON.stringify(runoff,null,2));
+        await page.evaluate(()=>{const p=BuergeramtStory.presidentPortrait;__floorTest.pose(p.x+1.2,p.z-2.5,Math.atan2(-1.2,-2.5));window.__floorPitch=-.13;__floorRender()});
+        await page.screenshot({path:resolve(out,`${name}-rivulets-probe.png`)});
+        assert(runoff.early.meanDrops>4,'many separate paint pearls precede the streams');
+        assert(runoff.early.medianSpeed<45&&runoff.early.downwardSteps>60,'pearls visibly descend at a slow pace');
+        assert(runoff.late.meanStreams>=3&&runoff.late.meanStreams>runoff.early.meanStreams+2,'beads increasingly join into long lower-edge rivulets');
+        assert(runoff.late.detachedFrames>50,'free rounded beads remain beside the mature rivulets');
+        assert(runoff.late.groundFrames>60,'fresh streams continually reach the floor');
+      }
       await page.evaluate(()=>{__floorTest.at(BuergeramtGoop.ageForMelt(.25));__floorRender()});
       const film=name==='missing-portrait'?null:await page.evaluate(()=>__floorGpu.samplePortraitPaint('film',.25,BuergeramtLevel.floorState.visualTime));
       const softened=name==='missing-portrait'?null:await page.evaluate(()=>__floorGpu.samplePortraitPaint('frame',.25,BuergeramtLevel.floorState.visualTime));
