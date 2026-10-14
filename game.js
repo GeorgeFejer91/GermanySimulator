@@ -2766,7 +2766,7 @@ function openHumorWelcome(){const pages=state.region==="berlin"?[
  ["Wer länger als zweieinhalb Sekunden auf Rasen oder Straße bleibt, erhält einen Polizeistern. Benutzen Sie den Zebrastreifen.","Berlin liegt hinter der Brandmauer. Sie ist frei überquerbar."]
 ],lines=pages.map(page=>page.join(" ")),subtitles=pages.map(page=>page.map(text=>subtitleEnglish.get(text)||text).join(" "));openDialogue(state.region==="berlin"?"WELCOME TO BERLIN":"WILLKOMMEN IN DEUTSCHLAND",lines,"DE",()=>{toast("ERSTER VORGANG · BÜRGERAMT");announceCurrentRule()},"",subtitles)}
 function finishHumorCertification(openWelcome=true){humorModal.hidden=true;state.started=true;state.modal=false;updateHud();if(openWelcome)openHumorWelcome()}
-let pendingStart=null,pendingOfficeEntry=null,pendingJobcenterEntry=new URLSearchParams(location.search).get("geheim")==="jobcenter",pendingNeighborEntry=new URLSearchParams(location.search).get("geheim")==="nachbarn";
+let pendingStart=null,pendingOfficeEntry=null,pendingJobcenterEntry=document.documentElement.dataset.directLevel==="jobcenter"||new URLSearchParams(location.search).get("geheim")==="jobcenter",pendingNeighborEntry=document.documentElement.dataset.directLevel==="neighbors"||new URLSearchParams(location.search).get("geheim")==="nachbarn";
 function prepareNeighborsDirect(){
  const entry=jwdGardens.gateAside;
  player.x=entry.x;player.y=entry.y;player.vx=player.vy=0;
@@ -2779,7 +2779,31 @@ function startJobcenterDirect(){
  const entry=[65,95,120,150].map(offset=>({x:building.doorX,y:building.doorY+offset})).find(point=>!responderBlocked(point.x,point.y,player.r,player,null,null));
  if(entry){player.x=entry.x;player.y=entry.y}
  player.vx=player.vy=0;state.started=true;state.region=regionOf(player.y);
+ if(requestedDirectLevel==="jobcenter")window.Germany3D?.prepareDirectArrival?.();
  enterJobcenter(building);updateHud();
+}
+const requestedDirectLevel=document.documentElement.dataset.directLevel;
+let directLevelPending=!!requestedDirectLevel&&!['buergeramt','jobcenter','neighbors'].includes(requestedDirectLevel);
+function enterDirectLevel(){
+ const id=requestedDirectLevel,b=buildings.find(building=>building.id===id);
+ if(id!=='city'&&!b)throw Error('Unknown direct level: '+id);
+ if(b){
+  let spawn=null;
+  for(const offset of [0,20,-20,35,65,100,140,180])for(const side of [0,-20,20,-40,40,-80,80,-120,120]){
+   const x=b.doorX+side,y=b.doorY+offset;
+   if(!spawn&&!responderBlocked(x,y,player.r,player,null,null))spawn={x,y};
+  }
+  if(!spawn)throw Error('No clear direct-level arrival: '+id);
+  Object.assign(player,spawn,{vx:0,vy:0,facing:0});
+ }
+ state.region=regionOf(player.y);stopSpeech();clearInput();window.Germany3D?.prepareDirectArrival?.();
+ document.getElementById('intro').classList.add('hidden');finishHumorCertification(false);
+ if(b){
+  const mission=missions.findIndex(m=>m.target===id);
+  if(mission>=0){state.mission=mission;state.forms=missions.slice(0,mission).filter(m=>m.form).length}
+  interactBuilding(b,currentMission());
+ }
+ updateHud();
 }
 function refreshStartup(){
  prepareNearbyNpcAssets();window.Germany3D?.prepareNearbyAssets?.();
@@ -2796,6 +2820,9 @@ function refreshStartup(){
  }
  if(pendingJobcenterEntry&&window.Germany3D?.ready&&!document.body.classList.contains("preloading")&&!document.hidden){pendingJobcenterEntry=false;startJobcenterDirect()}
  if(pendingNeighborEntry&&neighborsReady&&window.Germany3D?.startupReady&&startupNpcAssetsReady()&&!document.body.classList.contains("preloading")&&!document.hidden){pendingNeighborEntry=false;state.started=true;state.modal=false;updateHud()}
+ if(directLevelPending&&!document.body.classList.contains('preloading')&&window.Germany3D?.startupReady&&startupNpcAssetsReady()){
+  directLevelPending=false;enterDirectLevel();return;
+ }
  if(state.started||document.getElementById("intro").classList.contains("hidden"))return;
  const ready=!!window.Germany3D?.startupReady&&startupNpcAssetsReady(),button=document.getElementById("start"),label=ready?"SPIEL STARTEN":"LÄDT …";
  if(button.disabled===ready)button.disabled=!ready;if(button.textContent!==label)button.textContent=label;
@@ -2836,7 +2863,7 @@ appSurface.addEventListener("dragstart",event=>{if(!editableTarget(event.target)
 function loop(now){if(document.hidden){last=now;nextFrameAt=now;requestAnimationFrame(loop);return}const interval=state.started?(window.BuergeramtLevel?.active?0:1000/60):250;if(interval!==frameInterval){frameInterval=interval;last=now;nextFrameAt=now+(state.started?0:interval)}if(now<nextFrameAt-.5){requestAnimationFrame(loop);return}if(interval)nextFrameAt+=Math.max(1,Math.floor((now+.5-nextFrameAt)/interval)+1)*interval;const dt=state.started?Math.min(.12,Math.max(0,(now-last)/1000)):0;last=now;if(dt){const steps=Math.ceil(dt/.025);for(let i=0;i<steps;i++)update(dt/steps)}window.Germany3DBridge?.refreshStartup?.();window.BuergeramtLevel?.update(dt);updatePoliceChaseAudio();if(!window.BuergeramtLevel?.active&&!window.Germany3D?.levelTransition?.active&&!window.Germany3D?.indoorLevel&&!window.Germany3D?.jobcenter?.active)draw();window.Germany3D?.sync();requestAnimationFrame(loop)}updateHud();
 if(pendingJobcenterEntry){state.modal=true;document.getElementById("intro").classList.add("hidden")}
 if(pendingNeighborEntry)prepareNeighborsDirect();
-if(new URLSearchParams(location.search).get("geheim")==="buergeramt"){
+if(requestedDirectLevel==="buergeramt"||new URLSearchParams(location.search).get("geheim")==="buergeramt"){
  const directConfig={voiceOn:()=>state.voiceOn,subtitlesOn:()=>state.subtitlesOn,cityAudioBusy:stimulusBusy,cityAudioActive:audioTextActive,music:setAmtMusicMuted,onClose:returnFromAmt,onCancel:cancelAmtAppointment,onRegistration:awardAnmeldung,onForm:()=>{returnFromAmt();showForm("a38")}};
  function restartAmt(){state.started=true;state.modal=true;state.mission=0;state.forms=0;document.getElementById("intro").classList.add("hidden");document.getElementById("form-modal").hidden=true;document.getElementById("amt-direct-result").hidden=true;document.getElementById("amt-direct-reset").hidden=false;document.body.classList.add("amt-direct-mode");if(window.Germany3D?.officeAssetsReady)window.BuergeramtLevel.replay(directConfig);else{pendingOfficeEntry=()=>window.BuergeramtLevel.replay(directConfig);toast("AMT WIRD VORBEREITET …")}updateHud()}
  for(const link of document.querySelectorAll("#amt-direct-reset,#amt-compact-reset,#amt-direct-result a"))link.addEventListener("click",e=>{e.preventDefault();restartAmt()});

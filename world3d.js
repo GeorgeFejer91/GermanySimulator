@@ -26,7 +26,7 @@ function showRendererFailure(error){
 }
 (async()=>{
   const app=document.getElementById("app");if(!app)return;
-  let amtDirectRoute=new URLSearchParams(location.search).get("geheim")==="buergeramt";
+  let amtDirectRoute=document.documentElement.dataset.directLevel==="buergeramt"||new URLSearchParams(location.search).get("geheim")==="buergeramt";
   const canvas=document.createElement("canvas");canvas.id="world3d";Object.assign(canvas.style,{position:"fixed",inset:"0",width:"100%",height:"100%",zIndex:"3",pointerEvents:"none",background:"#77756f"});app.prepend(canvas);
   let T;try{T=await import(THREE_URL)}catch(e){showRendererFailure(e);return}
   let GLTFLoader=null;if(!amtDirectRoute)try{({GLTFLoader}=await import(GLTF_LOADER_URL))}catch(e){console.warn("GLB models unavailable; procedural 3D stand-ins remain active",e)}
@@ -2112,6 +2112,7 @@ function showRendererFailure(error){
   get officeAssetsReady(){return amtImagesRequested&&officeAssetPending===0},get officeAssetStatus(){return {total:officeAssetTotal,pending:officeAssetPending,failed:officeAssetFailures}},
   get neighborAssetStatus(){const paint=[...npcMeshes.values()].map(q=>q.userData.neighborPaint).filter(Boolean).map(p=>p.inspect());return {total:paint.length,settled:paint.filter(p=>p.settled).length,failed:paint.filter(p=>p.failed).length}},
   get startupReady(){return startupModelsReady()},get startupStatus(){return {total:startupModelJobs.size,pending:[...startupModelJobs].filter(job=>job.state!=="settled").length,active:cityModelActive,failed:[...startupModelJobs].filter(job=>job.failed).length}},
+  prepareDirectArrival:prepareLevelExterior,
   get buildingVisibility(){return buildingSlots.map(slot=>({id:slot.building.id,opacity:slot.opacity,obstructing:!!slot.obstructing}))},sync(){
     const levelNow=performance.now(),levelDt=(levelNow-previousLevelTime)/1000;previousLevelTime=levelNow;
     if(buildingLevels.render(levelDt)){showMissionPointer(false);previousOcclusionTime=levelNow;return}

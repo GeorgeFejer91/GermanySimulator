@@ -8,7 +8,7 @@ globalThis.TouristAnimations = (() => {
       const response=await fetch(url); if(!response.ok) throw Error('Tourist manifest '+response.status);
       const manifest=await response.json();
       async function artwork(spec) {
-      const art=await fetch(new URL(spec.image,new URL(url,location.href)));
+      const art=await fetch(new URL(spec.image,new URL(url,globalThis.document?.baseURI||location.href)));
       if(!art.ok) throw Error('Character artwork '+art.status);
       const bytes=new Uint8Array(await art.arrayBuffer());
       if(globalThis.crypto?.subtle) {

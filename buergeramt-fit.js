@@ -14,7 +14,7 @@ function measure(){
  const sequence=document.querySelector('#amt-walk-hud.sequence');
  if(sequence){
   const top=sequence.getBoundingClientRect().top;
-  const controls=[...document.querySelectorAll('#amt-mix,.subtitle-toggle')].filter(el=>el.getClientRects().length&&getComputedStyle(el).visibility!=='hidden');
+  const controls=[...document.querySelectorAll('#amt-mix,.subtitle-toggle,#amt-leave')].filter(el=>el.getClientRects().length&&getComputedStyle(el).visibility!=='hidden');
   const status=document.getElementById('amt-status');
   sequence.style.setProperty('--amt-status-top',`${Math.ceil(Math.max(0,...controls.map(el=>(el.getBoundingClientRect().bottom-top)/zoom))+8)}px`);
   if(status&&!status.hidden)controls.push(status);

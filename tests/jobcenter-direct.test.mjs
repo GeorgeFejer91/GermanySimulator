@@ -11,7 +11,7 @@ function fixture(query='?geheim=jobcenter',blocked=()=>false){
  const opens=[];
  const h={URLSearchParams,location:{search:query},player:{x:40,y:50,r:16,vx:9,vy:5},state:{started:false,modal:true,mission:0,forms:0},
   buildings:[{id:'jobcenter',doorX:9545,doorY:1720}],responderBlocked:blocked,regionOf:()=> 'berlin',updateHud(){},queueAssetLoad(){},prepareNearbyNpcAssets(){},startupNpcAssetsReady:()=>false,
-  document:{hidden:false,body:{classList:{contains:value=>classes.has(value)}},getElementById:id=>nodes[id]},
+  document:{documentElement:{dataset:{}},hidden:false,body:{classList:{contains:value=>classes.has(value)}},getElementById:id=>nodes[id]},
   window:{Germany3D:{ready:false,startupReady:false,prepareNearbyAssets(){}},Germany3DBridge:{characterAssetStatus:{required:[],settled:[]}},GermanyPreload:{prepareMenu(){},update({ready}){if(ready)classes.delete('preloading')}}},
   enterJobcenter(building){opens.push({building,x:h.player.x,y:h.player.y,started:h.state.started});h.state.modal=true}};
  vm.createContext(h);vm.runInContext(source,h);return{h,opens,classes};

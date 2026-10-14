@@ -1,0 +1,66 @@
+import {readFileSync, writeFileSync, mkdirSync, cpSync, readdirSync, existsSync} from 'node:fs';
+import {resolve, join} from 'node:path';
+import {pathToFileURL} from 'node:url';
+
+export function levelLinks(source) {
+  const buildings = source.match(/const buildings=\[([\s\S]*?)\]\.map\(building/);
+  if (!buildings) throw Error('Canonical building catalogue not found');
+  const links = [{id:'city', path:'city', aliases:[], title:'Grand Theft Amt', description:'Die Straßen sind grau. Die Formulare beige. Der Rasen ist verboten.', image:'assets/social-preview.png'},
+    {id:'neighbors', path:'neighbors', aliases:['nachbarn'], title:'JWD · Die Nachbarn', description:'Kehrwoche ist immer. Auch wenn Sie gerade erst eingezogen sind.', image:'assets/social/neighbors.png'}];
+  for (const row of buildings[1].split('\n')) {
+    if (/residential:true|kind:/.test(row)) continue;
+    const id = row.match(/id:"([^"]+)"/)?.[1];
+    if (!id) continue;
+    const title = row.match(/name:"([^"]+)"/)?.[1];
+    const description = row.match(/sign:"([^"]+)"/)?.[1];
+    if (!title || !description) throw Error('Missing level copy: '+id);
+    links.push({id, path:id==='buergeramt'?'bürgeramt':id, aliases:id==='buergeramt'?['buergeramt']:[], title, description, image:`assets/social/${id}.png`});
+  }
+  return links;
+}
+
+const escape = text => text.replaceAll('&','&amp;').replaceAll('"','&quot;').replaceAll('<','&lt;').replaceAll('>','&gt;');
+
+export function levelPage(template, level) {
+  const title = `${level.title} · Grand Theft Amt`;
+  const url = `https://germanysimulator.de/${level.path}/`;
+  const image = `https://germanysimulator.de/${level.image}`;
+  const metadata = [
+    ['property','og:title',title], ['property','og:description',level.description],
+    ['property','og:type','website'], ['property','og:url',url], ['property','og:site_name','Germany Simulator'],
+    ['property','og:image',image], ['property','og:image:secure_url',image], ['property','og:image:type','image/png'],
+    ['property','og:image:width','1200'], ['property','og:image:height','630'], ['property','og:image:alt',level.title+' · satirische Levelvorschau'],
+    ['name','description',level.description], ['name','twitter:card','summary_large_image'],
+    ['name','twitter:title',title], ['name','twitter:description',level.description], ['name','twitter:image',image],
+    ['name','twitter:image:alt',level.title+' · satirische Levelvorschau']
+  ].map(([attribute, key, value])=>`  <meta ${attribute}="${key}" content="${escape(value)}">`).join('\n');
+  return template.replace(/<html\b/, `<html data-direct-level="${level.id}"`)
+    .replace(/\s*<meta (?:property="og:[^"]+"|name="(?:twitter:[^"]+|description)")[^>]*>/g,'')
+    .replace(/<title>[^<]*<\/title>/,`<title>${escape(title)}</title>`)
+    .replace('<head>',`<head>\n  <base href="../">\n  <link rel="canonical" href="${escape(url)}">\n${metadata}`);
+}
+
+export function buildLevelPages(root, output) {
+  if (resolve(root)===resolve(output)) throw Error('Build output must be separate from source');
+  mkdirSync(output,{recursive:true});
+  for (const entry of readdirSync(root,{withFileTypes:true})) {
+    if (entry.name.startsWith('.') || ['output','node_modules','tests','tools'].includes(entry.name)) continue;
+    cpSync(join(root,entry.name),join(output,entry.name),{recursive:true});
+  }
+  const levels = levelLinks(readFileSync(join(root,'game.js'),'utf8'));
+  const template = readFileSync(join(root,'index.html'),'utf8');
+  for (const level of levels) {
+    if (!existsSync(join(root,level.image))) throw Error('Missing share preview: '+level.image);
+    for (const path of [level.path,...level.aliases]) {
+      mkdirSync(join(output,path),{recursive:true});
+      writeFileSync(join(output,path,'index.html'),levelPage(template,level));
+    }
+  }
+  writeFileSync(join(output,'level-links.json'),JSON.stringify(levels,null,2)+'\n');
+  return levels;
+}
+
+if (process.argv[1] && import.meta.url===pathToFileURL(resolve(process.argv[1])).href) {
+  const levels=buildLevelPages(resolve('.'),resolve(process.argv[2]||'output/site'));
+  console.log(`Built ${levels.length} direct level pages and their aliases.`);
+}

@@ -288,7 +288,11 @@ html[data-call-ui="google"] .amt-compact .phone-choices #phone-answer{background
 .amt-inside.amt-compact #subtitle-toggle{top:calc(env(safe-area-inset-top,0px) + 60px);max-width:calc(100% - 16px)}
 .amt-inside.amt-compact .amt-walk-top{grid-template-columns:minmax(0,1fr);grid-template-areas:"objective" "board"}
 .amt-inside.amt-compact.amt-direct-mode #amt-compact-reset{position:fixed;top:calc(env(safe-area-inset-top,0px) + 8px);left:calc(env(safe-area-inset-left,0px) + 60px);right:calc(env(safe-area-inset-right,0px) + 8px);box-sizing:border-box;min-height:44px;display:flex;align-items:center;justify-content:center}
-.amt-inside.amt-direct-mode #amt-leave{display:none}
+html:not([data-direct-level="buergeramt"]) .amt-inside.amt-direct-mode #amt-leave{display:none}
+html[data-direct-level="buergeramt"] #amt-leave{display:inline-flex;align-items:center;justify-content:center;min-height:44px}
+html[data-direct-level="buergeramt"] .amt-compact .amt-walk-top{grid-template-columns:minmax(0,1fr) auto;grid-template-areas:"objective leave" "board board"}
+html[data-direct-level="buergeramt"] .amt-walk-hud.sequence .amt-walk-top{display:flex;justify-content:flex-end}
+html[data-direct-level="buergeramt"] .amt-walk-hud.sequence .amt-walk-top>:not(#amt-leave){display:none}
 .amt-inside:has(#amt-counter-notice:not([hidden])) #amt-objective,.amt-inside:has(#amt-counter-notice:not([hidden])) .amt-board-hud{display:none}
 
 /* The spoof call contains ordinary phone chrome and fits its visible viewport. */
