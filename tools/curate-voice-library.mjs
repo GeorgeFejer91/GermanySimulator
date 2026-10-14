@@ -78,7 +78,9 @@ export function neighborRecordingsBlock(cast,manifests){
   for(const clip of manifest.clips){
    requireMatch(matchesProduction(cast,clip)&&clip.renderer==='omnivoice-rs','Wrong fixed neighbor production receipt');
    requireMatch(person.gameCharacterId===clip.actorId&&person.dialogue.some(line=>line.text===clip.text&&line.english===clip.english),`Wrong neighbor source/speaker: ${clip.clipId}`);
-   requireMatch(clip.nativeCompletion?.completed===true&&clip.asrWordExact&&clip.asrScriptPrompt===null&&/^[a-f0-9]{64}$/.test(clip.asrModelSha256)&&typeof clip.asr==='string'&&neighborSpokenWords(clip.asr)===neighborSpokenWords(clip.text),'Missing independent final-encoding neighbor ASR');
+   const exact=typeof clip.asr==='string'&&neighborSpokenWords(clip.asr)===neighborSpokenWords(clip.text);
+   const dialectAdvisory=clip.voiceId==='jwd-frau-schwabingen'&&cast.productionVoices[clip.voiceId]?.asrPolicy==='dialect-advisory'&&clip.asrVerificationMode==='dialect-advisory';
+   requireMatch(clip.nativeCompletion?.completed===true&&clip.asrWordExact===exact&&clip.asrScriptPrompt===null&&/^[a-f0-9]{64}$/.test(clip.asrModelSha256)&&typeof clip.asr==='string'&&clip.asr.trim().length>0&&(exact||dialectAdvisory),'Missing independent final-encoding neighbor ASR or authorized dialect-advisory receipt');
    requireMatch(Math.abs(clip.integratedLufs+18)<=.3&&clip.truePeakDbtp<=-1.5&&clip.approval?.status==='user-approved','Unverified neighbor take');
    requireMatch(clip.file===`assets/voices/neighbors/${clip.clipId}.mp3`&&hash(resolve(root,clip.file))===clip.sha256,'Neighbor audio hash/path drift');
    requireMatch(clip.mouthHz===40&&clip.mouthEnergy.length===Math.ceil(clip.durationSeconds*40)&&clip.mouthEnergy.every(value=>Number.isInteger(value)&&value>=0&&value<=255),'Invalid encoded-media mouth cue');
@@ -204,9 +206,15 @@ export function fixedRecordingsBlock(cast,manifest,family='knick'){
   const {voiceId,profileId,fixedProduction,renderer,modelRevision,referenceSha256,referenceOriginalSha256,processing,approval,provenanceManifest,trigger,...payload}=entry;
   const receipt={voiceId,profileId,fixedProduction,renderer,modelRevision,referenceSha256,referenceOriginalSha256,processing,approval,provenanceManifest,trigger},key=JSON.stringify(receipt);
   if(!receiptKeys.has(key)){receiptKeys.set(key,receipts.length);receipts.push(receipt)}
-  rows.push(JSON.stringify(path)+':{...r['+receiptKeys.get(key)+'],'+JSON.stringify(payload).slice(1));
+  const {wordCues,...fields}=payload;
+  requireMatch(wordCues===undefined||Array.isArray(wordCues),'Invalid fixed-caption cue array');
+  if(wordCues)requireMatch(wordCues.every(cue=>Object.keys(cue).length===4&&['at','end','charIndex','word'].every(key=>Object.hasOwn(cue,key))),'Unknown fixed-caption cue fields');
+  const compactCues=wordCues?JSON.stringify(wordCues.map(cue=>[cue.at,cue.end,cue.charIndex,cue.word])):null;
+  rows.push(JSON.stringify(path)+':{...r['+receiptKeys.get(key)+'],'+JSON.stringify(fields).slice(1,-1)+(compactCues?',wordCues:w('+compactCues+')':'')+'}');
  }
- return `const ${family==='knick'?'knick':replies?'playerReply':ambient?'officeAmbient':'streetWisdom'}Recordings=Object.freeze((()=>{const r=`+JSON.stringify(receipts)+';return{'+rows.join(',')+'}})());\n';
+ // Tuples remove repeated field names in delivery, without rounding cue times
+ // or changing the objects consumed by caption scheduling.
+ return `const ${family==='knick'?'knick':replies?'playerReply':ambient?'officeAmbient':'streetWisdom'}Recordings=Object.freeze((()=>{const r=`+JSON.stringify(receipts)+';const w=cues=>cues.map(([at,end,charIndex,word])=>({at,end,charIndex,word}));return{'+rows.join(',')+'}})());\n';
 }
 export function main(args=process.argv.slice(2)){
  requireMatch(!(args.includes('--sync')&&args.includes('--rename-production')),'Rename production profiles first, then sync their verified bindings');

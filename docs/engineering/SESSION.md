@@ -1,3 +1,88 @@
+# Frau Schwabingen dialect and selected voice — 2026-10-14
+
+Scope starts from clean published `6d07df6` in the attached integration worktree.
+The original checkout contains unrelated pending work and is not edited here.
+Update only Schwabingen's German dialogue, matching English translations and
+cast locators, her selected production binding and generated MP3 manifest,
+the existing neighbor voice builder/curator, affected voice checks, and their
+owning documentation. Preserve other voices, tours, routes, rewards and artwork.
+The user selected the `GS Frau Schwabingen (2)` asset folder: native profile
+`e556ceff3dbb4091989d0f32da52d811`, distinct from the older identically named voice.
+The user explicitly authorized treating Whisper's dialect transcription as
+advisory; retain its actual transcript and do not claim exact-word verification
+when it differs. Keep profile/reference hashes, request identity, sound levels,
+finite audio/mouth cues and subtitle ownership enforced. This is speech/copy
+work, with no world geometry, movement, camera or scale changes requiring a
+new Physics/Camera audit. Browser speech lifetime and caption checks still apply.
+The gallery intro/voice description and entry-page cache tokens are also in
+scope so previously cached standard-German text cannot select old dialogue.
+Initial focused tests exposed the gallery's previous browser-only assumption;
+its replacement requires all 33 dialect recordings. A subtitle-count failure
+during active generation came from a newer manifest than the just-synced
+catalogue; final consistency checks wait for the frozen completed batch.
+The first 13.06-second take required 150.14 seconds of native inference. A later
+take exceeded the previous 180-second process cap. Preserved takes are reused;
+the bounded authoring timeout now allows 90 seconds plus six seconds per word,
+up to ten minutes. This changes generation scheduling, not any audio or test
+quality criterion. Whisper mismatches remain visible and honestly flagged.
+An exploratory partial-catalogue root benchmark ran concurrently with native
+CUDA synthesis and timed out before readiness. Its incomplete report remains
+under `output/schwabingen-dialect/partial-transfer-diagnostic`; it is discarded
+as acceptance evidence. Stop that isolated diagnostic and run the final
+browser checks against the complete catalogue after synthesis is idle.
+The existing fixed-caption payload repeats four field names across 3,982 word
+cues (119,460 bytes before tuple-call overhead). The curator now delivers
+lossless tuples and reconstructs the original cue objects. It preserves all
+timestamps, words and character offsets; a corpus-wide contract test checks
+those against the authored manifests. This small delivery change creates room
+for Schwabingen's new metadata without increasing the 18 MB startup ceiling.
+The completed first full batch admitted 31 takes. Short linking take 27 did
+not converge on the existing encoded loudness target; take 30 timed out after
+writing its 3.87-second native WAV and benchmark. Preserve both attempts and
+retake only those two with a new seed, rather than accepting failed receipts.
+Measured take-30 inference plus loading was 131.58 seconds before teardown;
+the authoring timeout initially gained a 210-second minimum. That retake also
+expired while another native voice job was active. The final 300-second minimum
+retains the ten-minute maximum. After checking NVIDIA availability, seed 71418
+completed the remaining take at -18.03 LUFS / -3.84 dBTP; all 33 are accepted,
+with none held. Loudness, peak, completion and source criteria are unchanged.
+Accepted manifests are now snapshotted privately before each incremental batch.
+
+Final validation: 33 selected-profile takes total 376.96 seconds / 3,038,700
+bytes, -18.29 to -18.02 LUFS, maximum -2.67 dBTP. All 33 retain honest advisory
+ASR mismatches. Curator sync/check and live verification passed (64 production
+voices, 84 local profiles); all 430 previous clip entries remain unchanged.
+The corpus test preserves all 3,982 caption cues; corrupting an onset made it
+fail. All six exact-RGBA atlas checks and the 31-page static build passed.
+The full 94-file regression selection passed 736 checks and exposed duplicate
+gallery tour rows (53 recorded rows instead of 33). The gallery now prefers
+authored tour labels over duplicate recording rows; the 22 affected gallery,
+voice and English-caption checks then passed without changing their limits.
+
+Silent Chromium desktop, Android portrait/landscape emulation and deliberately
+missing-MP3 probes passed in `output/schwabingen-dialect/browser-final/`: all 33
+selected receipts, initial/repeat/follow/early greetings, actual media time and
+energy, suspend/resume, cancellation, voice-off, no borrowed browser voice, and
+full German/English caption-page reconstruction and bounded rendering. Forced
+actor placement/handlers and caption geometry probes are diagnostic evidence,
+not a natural mission replay. The visible subtitle rail was inspected in saved
+screenshots. Earlier navigation under concurrent regression load timed out;
+the first isolated probe incorrectly measured the hidden legacy textbox.
+Both failed reports remain preserved; the corrected probe measures the visible
+rail and keeps the original timeouts. Perceptual listening and physical Android
+remain NOT RUN.
+
+All six final hardware benchmark contexts passed the unchanged startup/input,
+18 MB, title cadence, deferred-resource and buffer gates. Maximum startup was
+17,959,193 bytes; the runtime catalogue is 579,204 bytes. The queried renderer
+was Intel Iris Xe / ANGLE D3D11. Three-run medians/ranges are saved beside the
+full report in `output/schwabingen-dialect/benchmark-summary.json`. One cold
+desktop input p95 was 2,223.3 ms; the other five were 17.7–25.6 ms. A subsequent
+published-6d07df6 comparison also recorded cold long tasks up to 2,500 ms, with
+desktop input p95 28.7 ms and mobile 20.2 ms. This suggests existing cold-load
+work rather than establishing a new caption regression; exact stall causation
+remains unproved. Do not describe these lab results as uniformly low latency.
+
 # Combined neighborhood and indoor release — 2026-10-14
 
 This candidate combines published `29643c5` with snapshot `e09837b`. One

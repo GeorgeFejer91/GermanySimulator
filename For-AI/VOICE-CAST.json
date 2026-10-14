@@ -3821,173 +3821,178 @@
       "voiceId": "jwd-frau-schwabingen",
       "fullName": "Frau Schwabingen",
       "gender": "female",
-      "generalDemeanor": "Prim Swabian house-rule enforcer; economical disapproving delivery and self-satisfied courtesy.",
+      "generalDemeanor": "Exaggerated written and spoken Swabian dialect: indignant Kehrwoche monitor, intrusive helpfulness, tidy diminutives, emphatic Ha noi and gell.",
       "targetValence": "restrained disapproval",
       "targetArousal": "low to medium",
       "dialogue": [
         {
           "locator": "game.js jwdCopy.swabian.de[0]",
-          "text": "Grüß Gott, i bin die Frau Schwabingen. Willkommen im family neighborhood. Die Kehrwoche isch hier kein optional feature.",
-          "english": "Hello, I'm Mrs Schwabingen. Welcome to the family neighborhood. The weekly sweeping rota is not an optional feature."
+          "text": "Grüß Gott, i ben d’Frau Schwabingen! Ha, do send Se jo endlich. Bei ons em Viertel isch d’Kehrwoch koi Wunschkonzert. Erst wird g’kehrt, noch wird g’schwätzt. Ond dr Besa steht scho parat!",
+          "english": "Hello, I’m Mrs Schwabingen! Ah, there you finally are. In our neighborhood the sweeping rota is not a request show. First we sweep, then we chat. And the broom is ready!"
         },
         {
           "locator": "game.js jwdCopy.swabian.de[1]",
-          "text": "Haben Sie Ihre Kehrwoche gemacht? I hab den Besen schon ausgerichtet. Jetzt lernen Sie erst mal die anderen kennen.",
-          "english": "Have you done your sweeping duty? I've already aligned the broom. Go and meet the others first."
+          "text": "Hend Se Ihr Kehrwoch scho g’macht? I hab dr Besa scho ausg’richtet. Jetzt lernad Se erscht mol d’andre Nochbern kenna. Dr Dreck lauft Ihne derweil net davo, des Lumpazeig!",
+          "english": "Have you done your sweeping duty yet? I have already aligned the broom. Go and meet the other neighbors first. The dirt won’t run away in the meantime, the wretched stuff!"
         },
         {
           "locator": "game.js jwdCopy.lawn.de[0]",
-          "text": "Für Ihre Verhältnisse sieht der Garten ja schon ordentlich aus. Also, wenn man das Unkraut als Gestaltung zählt.",
-          "english": "The garden looks quite respectable, by your standards. If we count the weeds as landscaping."
+          "text": "Für Ihre Verhältniss sieht des Gärtle jo scho ganz manierlich aus. Also, wenn mer s’Onkraut als Gartag’schtaltong mitzählt. Ha noi, i sag jo bloß!",
+          "english": "The garden looks quite respectable, by your standards. If we count the weeds as landscaping. Oh no, I’m only saying!"
         },
         {
           "locator": "game.js jwdCopy.lawn.de[1]",
-          "text": "Die Bienen? Bei mir summen die auch. Aber innerhalb der Grundstücksgrenze. I hab Ihnen die beanstandeten Halme markiert.",
-          "english": "The bees? Mine buzz too. But within the property boundary. I've marked the offending blades of grass for you."
+          "text": "D’Bienle? Bei mir sommad se au. Aber innerhalb von dr Grondschtücksgrenz, gell! I hab Ihne d’beanstandete Hälmle scho markiert. Jetzt wisset Se wenigstens, wo Se a’fanga müssad.",
+          "english": "The little bees? Mine buzz too. But within the property boundary, you know! I’ve marked the offending blades for you. Now at least you know where to start."
         },
         {
           "locator": "game.js jwdCopy.sweeping.de[0]",
-          "text": "Halt, nur ganz kurz! Haben Sie schon Kehrwoche gemacht? Der Staub liegt noch quer zur Laufrichtung.",
-          "english": "Stop, just a moment! Have you done your sweeping? The dust is still lying across the direction of travel."
+          "text": "Ha noi, des gibt’s doch net! D’Kehrwoch macht sich au net von alloi! Ond wenn dr Nochber sei Dreck net wegkehrt, no gibt’s a Donnerwetter, aber a gscheids!",
+          "english": "Oh no, this cannot be happening! The sweeping duty won’t do itself! And if the neighbor doesn’t sweep away his dirt, there’ll be a telling-off, and a proper one!"
         },
         {
           "locator": "game.js jwdCopy.sweeping.de[1]",
-          "text": "I will jetzt net lang schwätze. Nur: Montag fegen, Dienstag nachfegen. So. Jetzt dürfen Sie los.",
-          "english": "I won't keep you long. Just sweep on Monday, sweep again on Tuesday. There. You may go now."
+          "text": "I will jetzt net lang schwätza. Bloß: Mändig kehra, Dienschtig nochkehra. So, jetzt derfad Se ganga. Aber net wieder dr Dreck mit de Schuah rei’traga, gell!",
+          "english": "I won’t chat for long. Just sweep on Monday, sweep again on Tuesday. There, you may go now. But don’t bring the dirt back in on your shoes!"
         },
         {
           "locator": "game.js jwdCopy.hedge.de[0]",
-          "text": "Moment! Ihre Hecke wächst außerhalb unserer gemeinsamen expectations. Wann schneiden Sie endlich?",
-          "english": "One moment! Your hedge is growing beyond our shared expectations. When will you finally trim it?"
+          "text": "Halt, a Wengle! Ihr Heck wächst jo über onsre g’meinsame Erwartonga naus. Wann schneidad Se des G’strüpp endlich? I krieg vom bloßa Hieschaua scho an onordentlicha Puls!",
+          "english": "Wait a little! Your hedge is growing beyond our shared expectations. When will you finally trim that shrubbery? Just looking at it gives me a disorderly pulse!"
         },
         {
           "locator": "game.js jwdCopy.hedge.de[1]",
-          "text": "Gut, dann reden wir später über die Schnittzeiten. Und die Höhe. Und das Grün. Gehen Sie ruhig.",
-          "english": "Fine, we'll discuss trimming times later. And the height. And the shade of green. Off you go."
+          "text": "Ha gut, no schwätzad mir später über d’Schnittzeita. Ond d’Höh. Ond des Grüa. Gangad Se ruhig, i hab jo Zeit. I schreib’s solang scho mol auf.",
+          "english": "All right, then we’ll talk about trimming times later. And the height. And the green. Off you go, I have time. I’ll start writing it down."
         },
         {
           "locator": "game.js jwdCopy.letter.de[0]",
-          "text": "I steh hier net privat vor Ihrem Rasen. I vertrete die Hausordnung. Das macht einen Unterschied.",
-          "english": "I'm not standing in front of your lawn in a personal capacity. I represent the house rules. There is a difference."
+          "text": "I steh do net als Privatmensch vor Ihrem Rasa. I vertret d’Hausordnong! Des isch a Onterschied, ond zwar a gscheider. Des könnet Se sich ruhig hinter d’Ohra schreiba.",
+          "english": "I’m not standing in front of your lawn in a private capacity. I represent the house rules! That is a difference, a proper one. You can make a note of that."
         },
         {
           "locator": "game.js jwdCopy.letter.de[1]",
-          "text": "Mein Brief lag in Ihrem Briefkasten. Keine Antwort. Deshalb noch ein Brief, dass Sie auf den ersten Brief antworten sollen. Ganz zwanglos.",
-          "english": "My letter was in your letterbox. No reply. So another letter asking you to answer the first letter. No pressure."
+          "text": "Mei Brief isch en Ihrem Briefkäschtle g’lega. Koi Antwort! Drum jetzt no a Brief, dass Se auf dr erschta Brief antworte sollet. Ganz zwanglos, gell. I will jo bloß wissa, ob Se’s kapierad.",
+          "english": "My letter was in your letterbox. No answer! So now another letter asking you to answer the first one. No pressure, of course. I only want to know whether you understand."
         },
         {
           "locator": "neighbor-story.js schwabingen-introduction/schwabingen-broom/schwabingen-broom-welcome",
-          "text": "Grüß Gott, i bin Frau Schwabingen. Willkommen im family neighborhood. I mach grad den Gehweg, weil der Dreck sich ja net selber schämt. Kommen Sie mit. Erst der Besen, dann können wir uns persönlich mögen.",
-          "english": "Hello, I am Mrs Schwabingen. Welcome to the family neighborhood. I am doing the path because the dirt will not feel ashamed of itself. Come along. First the broom, then we can like each other personally."
+          "text": "Grüß Gott, i ben d’Frau Schwabingen! Do wird grad dr Gehweg g’kehrt, weil sich dr Dreck net von alloi schämt. Kommad Se mit! Erscht dr Besa, noch könnet mir ons persönlich möga.",
+          "english": "Hello, I’m Mrs Schwabingen! I’m sweeping the path, because the dirt won’t feel ashamed of itself. Come along! First the broom, then we can like each other personally."
         },
         {
           "locator": "neighbor-story.js schwabingen-introduction/schwabingen-broom/schwabingen-broom-rota",
-          "text": "Meine Kehrwoche isch ein privater Plan. Kein Berliner Gesetz, das weiß i schon. Aber wenn etwas laminiert ist und neben meiner Haustür hängt, hat es wenigstens moralische Bindungswirkung.",
-          "english": "My sweeping rota is a private plan. It is not a Berlin law, I know that. But if something is laminated and hangs beside my front door, it has at least moral binding force."
+          "text": "Mei Kehrwoch isch mei privater Plan. Koi Berliner G’setz, des woaß i scho! Aber wenn ebbes laminiert neba meim Haustürle hängt, no hat’s wenigstens moralische Bindongswirkong. Ond des langt mir fürs Erschte.",
+          "english": "My sweeping rota is my private plan. Not a Berlin law, I know that! But when something laminated hangs beside my front door, it has at least moral binding force. And that will do for now."
         },
         {
           "locator": "neighbor-story.js schwabingen-introduction/schwabingen-street/schwabingen-street-jurisdiction",
-          "text": "Hier der öffentliche Weg. In Berlin reinigen die BSR die Straßen in den Verzeichnissen A und B. Bei C sind die Anlieger dran, vor ihrem Grundstück bis zur Straßenmitte. Erst Zuständigkeit prüfen, dann empören.",
-          "english": "Here is the public path. In Berlin, the BSR clean streets in registers A and B. For C, the adjoining property owners are responsible, in front of their property as far as the middle of the road. Check who is responsible first, then be outraged."
+          "text": "Do isch dr öffentliche Weg. En Berlin kehrad d’BSR d’Stroßa em Verzeichnis A ond B. Bei C send d’A’lieger dra: vorm eigana Grondschtück bis en d’Stroßamitt. Erscht d’Zuständigkeit prüfa, noch uffrega!",
+          "english": "Here is the public path. In Berlin, the BSR clean streets in registers A and B. For C, the adjoining property owners are responsible: in front of their own property to the middle of the road. Check responsibility first, then be outraged!"
         },
         {
           "locator": "neighbor-story.js schwabingen-introduction/schwabingen-street/schwabingen-street-extra",
-          "text": "Winterdienst auf dem Gehweg ist wieder eine eigene Pflicht. Mein Samstagsplan fürs Vorgärtle kommt zusätzlich von mir. I trenne das sauber: Das Amt hat sein Verzeichnis, und i hab Ihre freie Zeit.",
-          "english": "Winter service on the pavement is a separate duty again. My Saturday plan for the front garden comes additionally from me. I keep those neatly separate: the authority has its register, and I have your free time."
+          "text": "Dr Winterdienscht auf em Gehweg isch wieder a eigene Pflicht. Mei Samschtigsplan fürs Vorgärtle kommt von mir obendrauf. I trenn des sauber: S’Amt hat sei Verzeichnis, ond i hab Ihr freie Zeit. Ha, so funktioniert des!",
+          "english": "Winter service on the pavement is a separate duty again. My Saturday plan for the front garden comes on top, from me. I keep that neatly separate: the authority has its register, and I have your free time. That’s how it works!"
         },
         {
           "locator": "neighbor-story.js schwabingen-introduction/schwabingen-street/schwabingen-street-walk",
-          "text": "Immer auf den Platten bleiben. I führe, Sie lernen.",
-          "english": "Stay on the paving stones. I lead, you learn."
+          "text": "Bleibad Se auf de Platta, gell! I lauf vorna, Se lernad hinta.",
+          "english": "Stay on the paving stones! I walk in front, you learn behind."
         },
         {
           "locator": "neighbor-story.js schwabingen-introduction/schwabingen-weeds/schwabingen-weeds-law",
-          "text": "Sehen Sie diese Fuge? Für Unkraut auf befestigten Außenflächen gilt: Pflanzenschutzmittel sind dort ohne behördliche Ausnahmegenehmigung tabu. Steht in Paragraf zwölf Pflanzenschutzgesetz. Auch wenn auf der Flasche ein glückliches Blättle drauf ist.",
-          "english": "See this joint? For weeds on paved outdoor surfaces, plant protection products are forbidden there without an exemption from the authority. Section twelve of the Plant Protection Act. Even if the bottle has a happy little leaf on it."
+          "text": "Sehad Se die Fug do? Auf befestigte Außenflächa send Pflanzaschutzmittel ohne behördliche Ausnahmegenehmigong tabu. Paragraf zwölf Pflanzaschutzg’setz, gell! Au wenn auf dr Flasch so a glückseligs Blättle drauf isch. Des Blättle erteilt koi Genehmigong!",
+          "english": "See that joint there? Plant protection products on paved outdoor surfaces are forbidden without an exemption from the authority. Section twelve of the Plant Protection Act! Even if the bottle has a blissfully happy leaf on it. The leaf doesn’t grant permission!"
         },
         {
           "locator": "neighbor-story.js schwabingen-introduction/schwabingen-weeds/schwabingen-weeds-method",
-          "text": "I nehm den Fugenkratzer. Das ist Handarbeit, keine Nachbarschafts-Chemie. Für jedes Hälmle in Ihrem Garten gibt es deswegen noch lang keine allgemeine Ausreißpflicht. I kann es trotzdem enttäuscht anschauen.",
-          "english": "I use a joint scraper. That is manual work, not neighborhood chemistry. That does not create a general duty to pull out every blade in your garden. I can still look at it with disappointment."
+          "text": "I nehm dr Fugakratzer. Handarbeit, koi Nochberschafts-Chemie! Für jedes Hälmle en Ihrem Gärtle gibt’s drum no lang koi allgemeine Ausreißpflicht. Aber enttäuscht a’gucka darf i’s. Ond des mach i gründlich!",
+          "english": "I use the joint scraper. Manual work, no neighborhood chemistry! That still creates no general duty to pull out every blade in your garden. But I’m allowed to look at it with disappointment. And I do that thoroughly!"
         },
         {
           "locator": "neighbor-story.js schwabingen-introduction/schwabingen-weeds/schwabingen-weeds-walk",
-          "text": "Kommen Sie, hier wächst eine Rückfrage aus der Fuge.",
-          "english": "Come along, a follow-up question is growing out of this joint."
+          "text": "Kommad Se! Do wächst scho wieder a Rückfrog aus dr Fuge. Des freche Hälmle!",
+          "english": "Come along! Another follow-up question is growing out of that joint. The cheeky little blade!"
         },
         {
           "locator": "neighbor-story.js schwabingen-introduction/schwabingen-hedge/schwabingen-hedge-season",
-          "text": "Und jetzt meine Hecke. Vom ersten März bis dreißigsten September ist der radikale Rückschnitt grundsätzlich gesperrt. Schonende Form- und Pflegeschnitte gehen, soweit der Artenschutz mitspielt. Vorher nach Nestern schauen; geschützte Niststätten bleiben auch im Oktober geschützt.",
-          "english": "And now my hedge. From March first through September thirtieth, drastic cutting back is generally prohibited. Gentle shaping and maintenance cuts are possible, subject to species protection. Look for nests first; protected nesting sites remain protected in October too."
+          "text": "Ond jetzt mei Heck! Vom erschta März bis zom dreißigschta September isch dr radikale Rückschnitt grundsätzlich g’sperrt. Schonende Form- ond Pflegeschnitte gangad, soweit dr Artaschutz mitspielt. Erscht nach Neschter gucka! G’schützte Niststätta bleibad au em Oktober g’schützt.",
+          "english": "And now my hedge! From March first through September thirtieth, drastic cutting back is generally prohibited. Gentle shaping and maintenance cuts are possible, subject to species protection. Look for nests first! Protected nesting sites remain protected in October too."
         },
         {
           "locator": "neighbor-story.js schwabingen-introduction/schwabingen-hedge/schwabingen-hedge-release",
-          "text": "Die Amsel hat hier deshalb Vorrang. Sie hat keinen Kehrplan, keinen Termin und scheißt auf meinen Gartenzwerg. Rechtlich deutlich besser aufgestellt als wir beide. So. Jetzt kennen Sie mich. Besen zurück, Freundschaft auf Probe.",
-          "english": "That is why the blackbird takes priority here. It has no sweeping rota, no appointment, and shits on my garden gnome. Legally in a much better position than either of us. There. Now you know me. Broom returned, friendship on probation."
+          "text": "D’Amsl hat drum Vorrang. Koi Kehrplan, koin Termin, ond scheißt mir auf dr Gartazwerg! Rechtlich steht des Viechle besser do als mir zwoi. So, jetzt kennad Se mi. Besa zrück, Freindschaft auf Probe!",
+          "english": "That’s why the blackbird takes priority. No sweeping rota, no appointment, and it shits on my garden gnome! Legally, the little creature is better placed than the two of us. There, now you know me. Broom returned, friendship on probation!"
         },
         {
           "locator": "neighbor-story.js schwabingen-introduction/schwabingen-hedge/schwabingen-hedge-walk",
-          "text": "Zur Hecke geht es hier lang. Die hat wenigstens Kontur.",
-          "english": "This way to the hedge. At least it has a clear outline."
+          "text": "Zur Heck geht’s do lang. Die hat wenigstens a Kontur, gell!",
+          "english": "This way to the hedge. At least it has an outline!"
         },
         {
           "locator": "neighbor-story.js schwabingen-attendance/schwabingen-attendance-lane/schwabingen-attendance-leaf",
-          "text": "Da liegt schon wieder ein Blatt. Die BSR haben ihre Zuständigkeit, der Baum hat seine Jahreszeit. Und i soll jetzt zwischen beiden den emotionalen Ausgleich machen. Kommen Sie, i zeig Ihnen die Eskalationsstufe.",
-          "english": "Another leaf has landed there. The BSR have their responsibility, the tree has its season. And now I am supposed to manage the emotional balance between them. Come on, I will show you the escalation stage."
+          "text": "Ha noi, do liegt scho wieder a Blättle! D’BSR henn ihr Zuständigkeit, dr Baum hat sei Jahreszeit, ond i soll dr emotionale Ausgleich macha. Kommad Se! I zeig Ihne jetzt d’Eskalationsstuf. Die isch frisch laminiert.",
+          "english": "Oh no, another leaf has landed there! The BSR have their responsibility, the tree has its season, and I’m supposed to manage the emotional balance. Come along! I’ll show you the escalation stage. It’s freshly laminated."
         },
         {
           "locator": "neighbor-story.js schwabingen-attendance/schwabingen-attendance-broom/schwabingen-attendance-initials",
-          "text": "Hier. Der Besen. Meine private Liste hat noch ein Feld für Ihre Initialen. Sie müssen net unterschreiben. I würde dann nur jeden Samstag persönlich nachfragen, ob Ihre Entscheidung noch aktuell ist. Sehr serviceorientiert.",
-          "english": "Here. The broom. My private list still has a space for your initials. You do not have to sign. I would simply ask you personally every Saturday whether your decision is still current. Very service-oriented."
+          "text": "Do, dr Besa! Auf meim private Zettel isch no a Käschtle für Ihre Initiala frei. Onterschreiba müssad Se net. I frog no bloß jeden Samschtig persönlich, ob Ihr Entscheidong no gilt. Ha, des nenn i Service!",
+          "english": "Here, the broom! My private sheet still has a little box free for your initials. You don’t have to sign. I’ll simply ask you personally every Saturday whether your decision still stands. That’s what I call service!"
         },
         {
           "locator": "neighbor-story.js schwabingen-attendance/schwabingen-attendance-broom/schwabingen-attendance-walk",
-          "text": "Kleiner Umweg zum Besen. Ordnung will erlaufen sein.",
-          "english": "A small detour to the broom. Order must be earned on foot."
+          "text": "A kloiner Omweg zom Besa. Ordnong will erlaufa sei, net bloß beschwätzt!",
+          "english": "A small detour to the broom. Order must be earned on foot, not just talked about!"
         },
         {
           "locator": "neighbor-story.js schwabingen-wild-garden/schwabingen-wild-joint/schwabingen-wild-scraper",
-          "text": "Des Hälmle sitzt wieder in der Fuge. Kein Spritzmittel auf dem Pflaster, also wieder der Kratzer. I hab es jetzt zweimal entfernt. Langsam fühlt sich das wie eine persönliche Rückmeldung an.",
-          "english": "That blade is in the joint again. No herbicide on the paving, so out comes the scraper again. I have removed it twice now. It is beginning to feel like personal feedback."
+          "text": "Des Hälmle hockt scho wieder en dr Fuge! Koi Spritzmittel auf em Pflaschter, also dr Kratzer. Zwoimol hab i’s scho rausg’macht. Langsam kommt mir des vor wie a persönliche Frechheit. So a kloins Ding ond so a Dickschädel!",
+          "english": "That blade is sitting in the joint again! No herbicide on the paving, so out comes the scraper. I’ve removed it twice already. It’s starting to feel like personal insolence. Such a little thing, such a thick head!"
         },
         {
           "locator": "neighbor-story.js schwabingen-wild-garden/schwabingen-wild-home/schwabingen-wild-tolerance",
-          "text": "Und hier Ihr Garten. Für Wildwuchs allein gibt es keine bundesweite Pflicht zum englischen Rasen. Des weiß i. I brauch kein Verbot, um beim Vorbeigehen jedes Mal tief durchzuatmen. Das ist mein privater Naturschutzbeitrag.",
-          "english": "And here is your garden. Wild growth alone creates no nationwide duty to maintain an English lawn. I know that. I do not need a ban to take a deep breath every time I pass. That is my personal contribution to nature conservation."
+          "text": "Ond do Ihr Gärtle! Bloß wegen Wildwuchs gibt’s koi bundesweite Pflicht zom englische Rasa. Des woaß i! Aber i brauch koi Verbot, dass i beim Vorbeilaufa jedes Mol tief durchschnauf. Mei privater Naturschutzbeitrag, gell!",
+          "english": "And here is your garden! Wild growth alone creates no nationwide duty to keep an English lawn. I know that! But I don’t need a ban to take a deep breath every time I walk past. My personal contribution to nature conservation!"
         },
         {
           "locator": "neighbor-story.js schwabingen-wild-garden/schwabingen-wild-home/schwabingen-wild-walk",
-          "text": "Jetzt zu Ihrem Garten. I atme schon mal vor.",
-          "english": "Now to your garden. I will start breathing deeply in advance."
+          "text": "Jetzt zu Ihrem Gärtle. I schnauf vorsichtshalber scho mol vor.",
+          "english": "Now to your garden. I’ll start taking deep breaths in advance, just in case."
         },
         {
           "locator": "neighbor-story.js schwabingen-bird-calendar/schwabingen-bird-hedge/schwabingen-bird-listen",
-          "text": "Hören Sie? I prüfe vor dem Schneiden die Hecke. Ein Pflegeschnitt ist kein Freibrief, ein geschütztes Nest zu zerstören. Die Amsel ist leider net in unserer WhatsApp-Gruppe. Sonst könnte sie ihre Brutzeiten wenigstens eintragen.",
-          "english": "Listen. I check the hedge before cutting. A maintenance cut is not permission to destroy a protected nest. Unfortunately the blackbird is not in our WhatsApp group. Otherwise it could at least enter its nesting dates."
+          "text": "Höred Se? I guck vor em Schneida en d’Heck. A Pflegeschnitt isch koi Freibrief, a g’schützts Nescht kaputtzumacha! D’Amsl isch leider net en onsrer WhatsApp-Grupp. Sonscht könnt se wenigstens ihr Brutzeita ei’traga. Des wär jo wohl s’Mindeschte!",
+          "english": "Listen! I look inside the hedge before cutting. A maintenance cut isn’t permission to destroy a protected nest! Unfortunately, the blackbird isn’t in our WhatsApp group. Otherwise it could at least enter its nesting dates. That would be the least it could do!"
         },
         {
           "locator": "neighbor-story.js schwabingen-bird-calendar/schwabingen-bird-door/schwabingen-bird-calendar-note",
-          "text": "An meiner Tür hängt jetzt ein Kalender: Hecke, Besen, Amsel. Nur die Amsel hält sich net dran. I hab sie mit Bleistift eingetragen. Man muss als Nachbarin schließlich flexibel bleiben.",
-          "english": "There is a calendar by my door now: hedge, broom, blackbird. Only the blackbird ignores it. I entered it in pencil. A neighbor must stay flexible, after all."
+          "text": "An meim Türle hängt jetzt a Kalender: Heck, Besa, Amsl. Bloß d’Amsl hält sich net dra! I hab se mit Bleistift ei’traga. Als Nochberin muss mer jo flexibel bleiba. Aber bloß bis Mittwoch!",
+          "english": "There’s a calendar by my front door now: hedge, broom, blackbird. Only the blackbird ignores it! I entered it in pencil. A neighbor has to stay flexible, after all. But only until Wednesday!"
         },
         {
           "locator": "neighbor-story.js schwabingen-bird-calendar/schwabingen-bird-door/schwabingen-bird-walk",
-          "text": "Leise weiter. Die Amsel hat hier kein Feedback angefordert.",
-          "english": "Move on quietly. The blackbird has not requested any feedback."
+          "text": "Leis weiter, gell! D’Amsl hat koi Feedback a’g’fordert.",
+          "english": "Move on quietly! The blackbird hasn’t requested any feedback."
         },
         {
-          "locator": "game.js guided tour repeat invitation",
-          "text": "Ach, Sie wieder! Sehr gut. Wir haben noch nicht alles besichtigt.",
-          "english": "Ah, you again! Excellent. We have not inspected everything yet."
+          "locator": "game.js jwdCopy.swabianTour.de[0]",
+          "text": "Ha, Se scho wieder! Des isch g’schickt. Mir henn no lang net älles a’guckt, ond i hab no a ganze List voll Sache!",
+          "english": "Ah, you again! How convenient. We haven’t looked at everything yet, and I still have a whole list of things!"
         },
         {
-          "locator": "game.js guided tour follow invitation",
-          "text": "Kommen Sie mit. Ich zeige Ihnen das vor Ort. Bleiben Sie ruhig in meiner Nähe.",
-          "english": "Come along. I will show you on site. Stay close to me."
+          "locator": "game.js jwdCopy.swabianTour.de[1]",
+          "text": "Kommad Se mit! I zeig Ihne des glei vor Ort. Bleibad Se schee bei mir, sonscht muss i älles nommol erklära!",
+          "english": "Come along! I’ll show you right here. Stay nice and close, or I’ll have to explain everything again!"
+        },
+        {
+          "locator": "game.js jwdCopy.swabianPremature.de[0]",
+          "text": "Ha, wer send denn Se? Erscht mol s’Häusle bezieha, noch wird g’schwätzt! Ond stellad Se sich net auf mein frisch g’kehrte Weg. I seh des, gell!",
+          "english": "Well, who are you? Move into your home first, then we’ll chat! And don’t stand on my freshly swept path. I can see that!"
         }
       ],
-      "status": "Existing browser dialogue fallback; dedicated saved-profile selection pending",
-      "fallback": "browser-name"
+      "status": "All 33 authored German lines regenerated with the selected GS Frau Schwabingen (2) profile in exaggerated written Swabian; Whisper feedback is advisory, with genuine transcripts retained. Recorded media time and measured mouth energy drive articulation; unavailable audio retains captions. Perceptual listening NOT RUN.",
+      "fallback": "captions"
     },
     {
       "gameCharacterId": "jwd-theodore",
@@ -4671,6 +4676,19 @@
       "fallback": "captions",
       "selectedOn": "2026-10-14",
       "selection": "User supplied saved GS Inga Maaslos profile for the fictional neighbor; use authorized, perceptual listening NOT RUN"
+    },
+    "jwd-frau-schwabingen": {
+      "profileId": "e556ceff3dbb4091989d0f32da52d811",
+      "profileName": "GS Frau Schwabingen",
+      "originalSha256": "8fe924c46dba6ca112c582742c0dd9938ba927ebe43e95e7273a24a6cd7fe82a",
+      "referenceSha256": "b144379b6d90019208c98b1310933c6d76b9102635061c133aafbd40d0ad39ad",
+      "renderer": "omnivoice-rs",
+      "modelRevision": "wide-rank-v2-prompt-preprocess",
+      "processing": "dry mono 24 kHz / 64 kbps MP3; two-pass EBU R128 -18 LUFS, -2.5 dBTP target; metadata removed",
+      "fallback": "captions",
+      "selectedOn": "2026-10-14",
+      "asrPolicy": "dialect-advisory",
+      "selection": "User explicitly selected the new GS Frau Schwabingen (2) profile and requested exaggerated written Swabian across all her dialogue. User authorized advisory Whisper feedback for dialect; use authorized, perceptual listening NOT RUN"
     }
   },
   "productionExceptions": [

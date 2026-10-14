@@ -112,14 +112,30 @@ NOT RUN. The encounter loads the asset on demand through its one media owner.
 
 ### Implemented neighborhood speech (2026-10-14)
 
+Frau Schwabingen's current user selection is the new saved `GS Frau Schwabingen`
+UUID `e556ceff3dbb4091989d0f32da52d811`, identified by the native audio-assets
+folder `GS Frau Schwabingen (2)`. The older identically named profile remains
+preserved. All her owned source lines, including early greeting, invitations,
+chore complaints and guided tours, use exaggerated written Swabian and paired
+English translations. Exact profile/reference hashes remain the authority.
+On 2026-10-14 the user explicitly made Whisper feedback advisory for dialect:
+`productionVoices.jwd-frau-schwabingen.asrPolicy` is `dialect-advisory`.
+Record the real final-MP3 transcript and real `asrWordExact` value; a mismatch
+may be accepted only for this selected character with an explicit advisory
+receipt. It is not evidence of exact lexical fidelity or perceptual listening.
+Native completion, request/speaker ownership, encoded hashes, duration, levels,
+finite media-derived mouth cues and caption-only failure still apply. Other
+characters keep their existing word-verification rules.
+
 The neighborhood identities are `jwd-heiko-maaslos`, `jwd-inga-maaslos` and
 `jwd-frau-schwabingen`; their actor IDs remain `jwd-parent`, `jwd-watcher` and
 `jwd-swabian`. Their exact introductions and complaint pools live in `game.js`
 `jwdCopy`, with source/translation ownership in the cast. Inga uses the
 user-selected saved `GS Inga Maaslos` UUID `04e241f5e0734684ba3626aa669a70c1`.
-The other two retain the existing browser dialogue policy while dedicated
-saved-profile selection is pending. Do not silently assign another NPC's clone.
-Missing or rejected Inga takes use captions, without changing her voice.
+Heiko retains the existing browser dialogue policy while dedicated profile
+selection is pending in this published scope. Frau Schwabingen uses the explicit
+new selection above. Missing or rejected selected-neighbor takes use captions,
+without changing their voice.
 
 `tools/build-neighbor-voices.mjs --plan --character inga` freezes the exact
 requests; rendering verifies the live reference bytes and reuses compatible

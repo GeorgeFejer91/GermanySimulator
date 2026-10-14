@@ -507,4 +507,13 @@ neighbor rights and nature protection from the residents' invented expectations.
 
 Original generated game artwork for Heiko Maaslos, Inga Maaslos and Frau Schwabingen, with source-pixel animation baked by tools/build-neighbor-sprites.py. These original fictional characters use the existing game sprite style. Only final generated direction paint and derived runtime atlases ship.
 
-Inga Maaslos's fictional game dialogue uses the user-supplied saved GS Inga Maaslos voice profile. The installed OmniVoice Rust renderer produces the exact authored German lines; the eleven final dry mono encodings are independently word-checked and normalized for the game. Profile/reference audio and rejected takes remain private. Runtime receipts and source/English subtitle ownership live in For-AI/VOICE-CAST.json and assets/voices/neighbors/inga-manifest.json. Heiko Maaslos, Frau Schwabingen and Theodore retain browser-generated speech pending dedicated profile selection. New Inga tour lines use captions until matching recordings exist. Technical checks do not establish perceptual listening approval.
+Inga Maaslos's fictional game dialogue uses the user-supplied saved GS Inga Maaslos voice profile. The installed OmniVoice Rust renderer produces the exact authored German lines; the eleven final dry mono encodings are independently word-checked and normalized for the game. Profile/reference audio and rejected takes remain private. Runtime receipts and source/English subtitle ownership live in For-AI/VOICE-CAST.json and assets/voices/neighbors/inga-manifest.json. Heiko Maaslos and Theodore retain browser-generated speech pending dedicated profile selection. New Inga tour lines use captions until matching recordings exist. Technical checks do not establish perceptual listening approval.
+
+Frau Schwabingen uses the user-selected new GS Frau Schwabingen profile from the
+native `GS Frau Schwabingen (2)` folder. Her original fictional dialogue uses
+exaggerated written Swabian and matching English translations. The installed
+OmniVoice Rust renderer creates dry mono game recordings; the source reference
+audio stays private. Profile identity and encoded-take receipts are in
+For-AI/VOICE-CAST.json and assets/voices/neighbors/schwabingen-manifest.json.
+The user explicitly authorized advisory Whisper feedback for dialect; differing
+transcripts are retained without an exact-word or perceptual-listening claim.

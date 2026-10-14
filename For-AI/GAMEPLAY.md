@@ -79,6 +79,13 @@ villa suburb; the [district's history of Schlachtensee's landhouses](https://www
 and [Reddit residents' suburban descriptions](https://www.reddit.com/r/berlin/comments/yzbc0y/)
 are references, not a claim that every Berlin suburb looks alike.
 Frau Schwabingen is a house-proud Swabian Kehrwoche enthusiast. Heiko Maaslos is a professor of systems engineering (Systemtechnik). His awkwardly assembled clauses and supposedly helpful explanations presume he is right: selective measurements, engineering vocabulary and assumed agreement justify his intrusions. His wife Inga Maaslos works in fictional People & Culture and recasts imposed chores as positive opportunities chosen by the newcomer. Their arrogant, half-lidded expressions and status anxiety underline their demands. Eight-year-old Theodore speaks six languages; his parents worry about his Latin milestones. Theodore has a visibly smaller child sprite and his own preference for playing on the paving stones. These are fictional identities and authored personalities. Dialogue retains Berlin Denglisch and the existing English subtitle path.
+Frau Schwabingen's written and spoken German is deliberately exaggerated
+Swabian: “Ha noi”, “des”, “ond”, “net”, “dr”, “gell” and house/garden diminutives.
+Her early greeting, tour invitations, walking remarks, stop explanations and
+complaints all keep this dialect, with faithful English subtitles. Her selected
+saved voice and advisory dialect-transcription policy are owned by
+[`VOICE-SYNTH-PROTOCOL.md`](./VOICE-SYNTH-PROTOCOL.md#implemented-neighborhood-speech-2026-10-14).
+
 Heiko's procedural costume follows the user's visual reference: shaggy sandy
 blond hair, light stubble and a brown ribbed zip-neck sweater. His previous
 spectacles, bow tie and waistcoat are removed. The private reference photo is

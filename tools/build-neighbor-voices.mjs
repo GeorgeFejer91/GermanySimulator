@@ -29,12 +29,23 @@ const family=option('--character','inga');if(!families[family])throw Error('Unkn
 const seed=Number(option('--seed','71407'));
 const identity=families[family],binding=cast.productionVoices[identity.voiceId];
 const lines=identity.topics.flatMap(topic=>copy[topic].de.map((text,index)=>({clipId:`${family}-${topic}-${String(index+1).padStart(2,'0')}`,voiceId:identity.voiceId,actorId:identity.actorId,topic,index,text,english:copy[topic].en[index],sourceSha256:sha(text)})));
+const person=cast.existingAssetProfiles.find(person=>person.voiceId===identity.voiceId);
+if(!person||person.gameCharacterId!==identity.actorId)throw Error('Neighbor identity missing from cast');
+for(const [index,line] of person.dialogue.entries()){
+ if(lines.some(previous=>previous.text===line.text))continue;
+ lines.push({clipId:`${family}-story-${String(index+1).padStart(2,'0')}`,voiceId:identity.voiceId,actorId:identity.actorId,topic:'story',index,text:line.text,english:line.english,sourceSha256:sha(line.text)});
+}
+if(lines.length!==person.dialogue.length||new Set(lines.map(line=>line.clipId)).size!==lines.length||!lines.every(line=>person.dialogue.some(source=>source.text===line.text&&source.english===line.english)))throw Error('Neighbor plan must cover every cast-owned bilingual source exactly once');
+const dialectAdvisory=identity.voiceId==='jwd-frau-schwabingen'&&binding?.asrPolicy==='dialect-advisory';
 if(args.includes('--plan')){console.log(JSON.stringify({family,binding:binding??null,lines},null,2));process.exit(0)}
 if(!binding)throw Error(`No selected profile for ${identity.voiceId}`);
 const live=call('list');verifyProfiles({productionVoices:{[identity.voiceId]:binding},productionExceptions:[]},live.profiles,data);
 const runtime=read(resolve(dirname(exe),'resources/voice/voice-runtime.json'));
 if(binding.renderer!=='omnivoice-rs'||binding.modelRevision!=='wide-rank-v2-prompt-preprocess'||sha(readFileSync(resolve(dirname(exe),'resources/voice/omnivoice-cli.exe')))!==runtime.binarySha256||sha(readFileSync(resolve(dirname(exe),'resources/voice/secret-tunnel-asr.exe')))!==runtime.asrBinarySha256)throw Error('Installed native renderer/ASR revision drift');
-const dest=resolve(root,'assets/voices/neighbors'),privateDir=resolve(root,'output/neighbors/voice-authoring',family);mkdirSync(dest,{recursive:true});mkdirSync(privateDir,{recursive:true});
+const dest=resolve(root,'assets/voices/neighbors'),privateDir=resolve(root,'output/neighbors/voice-authoring',family,binding.profileId);mkdirSync(dest,{recursive:true});mkdirSync(privateDir,{recursive:true});
+const frozenPath=resolve(privateDir,`frozen-requests-${seed}.json`),frozen={family,binding,lines};
+if(existsSync(frozenPath)){const previous=read(frozenPath);if(JSON.stringify(previous)!==JSON.stringify(frozen))throw Error('Frozen voice requests changed; preserve takes and choose a new seed')}
+else writeFileSync(frozenPath,JSON.stringify(frozen,null,2)+'\n');
 const modelRoot=resolve(process.env.LOCALAPPDATA,'VoiceCloner/models/OmniVoice'),asrBinary=resolve(dirname(exe),'resources/voice/secret-tunnel-asr.exe'),referenceTranscriptPath=resolve(privateDir,'reference-transcript.json');
 let referenceTranscript=existsSync(referenceTranscriptPath)?read(referenceTranscriptPath):null;
 if(referenceTranscript?.referenceSha256!==binding.referenceSha256){
@@ -43,35 +54,38 @@ if(referenceTranscript?.referenceSha256!==binding.referenceSha256){
 }
 function render(line){
  const previousPath=resolve(privateDir,line.clipId+'-take.json'),previousAsr=resolve(privateDir,line.clipId+'-asr.json');
- if(existsSync(previousPath)&&(!existsSync(previousAsr)||spokenWords(read(previousAsr).transcript??'')===spokenWords(line.text))){
+ if(existsSync(previousPath)&&(dialectAdvisory||!existsSync(previousAsr)||spokenWords(read(previousAsr).transcript??'')===spokenWords(line.text))){
   const previous=read(previousPath);if(existsSync(previous.path)&&existsSync(previous.metadata_path)&&read(previous.metadata_path).text===line.text)return previous;
  }
  const nativeDir=resolve(dirname(exe),'audio-assets',binding.profileName),annotations=resolve(nativeDir,'annotations');
  if(existsSync(annotations))for(const name of readdirSync(annotations).filter(name=>name.endsWith('.speech.json'))){
   const note=read(resolve(annotations,name));
-  if(note.voice_id===binding.profileId&&note.text===line.text&&spokenWords(note.word_fidelity?.transcript??'')===spokenWords(line.text))return{path:resolve(nativeDir,'mp3s',note.audio_file),metadata_path:resolve(annotations,name),cached:true};
+  if(note.voice_id===binding.profileId&&note.text===line.text&&(dialectAdvisory||spokenWords(note.word_fidelity?.transcript??'')===spokenWords(line.text)))return{path:resolve(nativeDir,'mp3s',note.audio_file),metadata_path:resolve(annotations,name),cached:true};
  }
  // Native automatic retries cannot converge on proper-name/& orthography.
  // Use its same installed inference binary for a bounded take, then audit words.
  const output=resolve(privateDir,line.clipId+`-${seed}-native.wav`),bench=resolve(privateDir,line.clipId+`-${seed}-inference.json`);
+ if(existsSync(output)||existsSync(bench))throw Error('Native take already exists; choose a new seed to preserve it');
  const model=resolve(process.env.LOCALAPPDATA,'VoiceCloner/models/OmniVoice');
- const result=spawnSync(resolve(dirname(exe),'resources/voice/omnivoice-cli.exe'),['infer','--model',model,'--text',line.text,'--output',output,'--language','German','--ref-audio',resolve(data,'profiles',binding.profileId,'reference.wav'),'--ref-text',referenceTranscript.transcript,'--num-step','32','--preprocess-prompt','true','--device','cuda','--dtype','f16','--seed',String(seed),'--bench-json',bench],{encoding:'utf8',windowsHide:true,timeout:180000,maxBuffer:8*1024*1024});
+ const result=spawnSync(resolve(dirname(exe),'resources/voice/omnivoice-cli.exe'),['infer','--model',model,'--text',line.text,'--output',output,'--language','German','--ref-audio',resolve(data,'profiles',binding.profileId,'reference.wav'),'--ref-text',referenceTranscript.transcript,'--num-step','32',...(dialectAdvisory?['--guidance-scale','2','--speed','1']:[]),'--preprocess-prompt','true','--device','cuda','--dtype','f16','--seed',String(seed),'--bench-json',bench],{encoding:'utf8',windowsHide:true,timeout:Math.min(600000,Math.max(300000,90000+line.text.trim().split(/\s+/).length*6000)),maxBuffer:8*1024*1024});
  if(result.error||result.status!==0)throw Error(`Native render: ${result.error||result.stderr.slice(-1200)}`);
  const metadata_path=resolve(privateDir,line.clipId+`-${seed}-native.speech.json`);writeFileSync(metadata_path,JSON.stringify({clip_id:line.clipId,text:line.text,voice_id:binding.profileId,reference_sha256:binding.referenceSha256,engine:binding.renderer,inference_revision:binding.modelRevision,nativeCompletion:{completed:true,inferenceSha256:sha(readFileSync(bench)),binarySha256:sha(readFileSync(resolve(dirname(exe),'resources/voice/omnivoice-cli.exe')))}}));
  return{path:output,metadata_path,cached:false};
 }
 const path=resolve(dest,`${family}-manifest.json`),old=existsSync(path)?read(path):null,clips=[],failed=new Map();
+const snapshot=resolve(privateDir,`accepted-before-${seed}.json`);
+if(old&&!existsSync(snapshot))writeFileSync(snapshot,readFileSync(path));
 const save=()=>writeFileSync(path,JSON.stringify({schemaVersion:1,voiceId:identity.voiceId,requestedLineCount:lines.length,clips,heldPrivate:lines.filter(x=>!clips.some(c=>c.clipId===x.clipId)).map(x=>({...x,reason:failed.get(x.clipId)??'not yet generated'}))},null,2)+'\n');
 for(const line of lines){
  try{
- const found=old?.clips.find(c=>c.clipId===line.clipId&&c.text===line.text&&matchesProduction(cast,c));
+ const found=old?.clips.find(c=>c.clipId===line.clipId&&c.text===line.text&&c.english===line.english&&matchesProduction(cast,c));
  if(found&&existsSync(resolve(root,found.file))&&sha(readFileSync(resolve(root,found.file)))===found.sha256){clips.push(found);console.log(JSON.stringify({clipId:line.clipId,cached:true}));continue}
  console.log(JSON.stringify({clipId:line.clipId,stage:'generate',characters:line.text.length}));
  const take=render(line);
  writeFileSync(resolve(privateDir,line.clipId+'-take.json'),JSON.stringify(take,null,2)+'\n');
  const note=read(take.metadata_path);
  if(note.voice_id!==binding.profileId||note.reference_sha256!==binding.referenceSha256||note.engine!==binding.renderer||note.inference_revision!==binding.modelRevision||note.text!==line.text)throw Error('Native receipt drift');
- if(note.word_fidelity&&spokenWords(note.word_fidelity.transcript)!==spokenWords(line.text))throw Error('Native word verification failed');
+ if(!dialectAdvisory&&note.word_fidelity&&spokenWords(note.word_fidelity.transcript)!==spokenWords(line.text))throw Error('Native word verification failed');
  const stats=levels(take.path),file=`assets/voices/neighbors/${line.clipId}.mp3`,final=resolve(root,file);let measured,gain=0;
  for(let attempt=0;attempt<6;attempt++){
   ffmpeg(['-hide_banner','-loglevel','error','-y','-i',take.path,'-af',`loudnorm=I=-18:TP=-2.5:LRA=11:measured_I=${stats.input_i}:measured_TP=${stats.input_tp}:measured_LRA=${stats.input_lra}:measured_thresh=${stats.input_thresh}:offset=${stats.target_offset}:linear=true,aresample=24000,volume=${gain}dB,alimiter=limit=0.62:attack=5:release=60:level=false`,'-ar','24000','-ac','1','-c:a','libmp3lame','-b:a','64k','-map_metadata','-1',final]);
@@ -84,8 +98,11 @@ for(const line of lines){
  const result=spawnSync(asrExe,[model,wav,'de'],{encoding:'utf8',windowsHide:true,timeout:120000,maxBuffer:8*1024*1024});if(result.error||result.status!==0)throw Error(`Encoded ASR: ${result.error||result.stderr.slice(-500)}`);
  const audit=JSON.parse(result.stdout);
  writeFileSync(resolve(privateDir,line.clipId+'-asr.json'),JSON.stringify(audit,null,2)+'\n');
- const transcript=audit.text??audit.transcript;if(typeof transcript!=='string'||spokenWords(transcript)!==spokenWords(line.text))throw Error(`Final words differ for ${line.clipId}: ${transcript}`);
- const clip={...line,file,profileId:binding.profileId,referenceSha256:binding.referenceSha256,referenceOriginalSha256:binding.originalSha256,renderer:binding.renderer,modelRevision:binding.modelRevision,processing:binding.processing,...energy(final),sha256:sha(readFileSync(final)),nativeClipId:note.clip_id,nativeAnnotationSha256:sha(readFileSync(take.metadata_path)),nativeAudioSha256:sha(readFileSync(take.path)),nativeWordFidelity:note.word_fidelity??null,nativeCompletion:note.nativeCompletion??{completed:true,basis:'Completed native voice-cloner generation; source MP3 and scored transcript preserved'},asr:transcript,asrWordExact:true,asrNormalization:'NFKC/case/punctuation/hyphen spacing; People & Culture = People and Culture; Maslos = Maaslos (proper-name vowel spelling); Nachbarschafts-Offside = Nachbarschafts-offsite (German final devoicing)',asrScriptPrompt:null,asrModelSha256:sha(readFileSync(resolve(model,'whisper-large-v3-turbo-q4_0.gguf'))),asrRenderer:'secret-tunnel-asr / whisper-large-v3-turbo GGUF q4_0',asrLanguageId:'de',integratedLufs:Number(measured.input_i),truePeakDbtp:Number(measured.input_tp),approval:{status:'user-approved',scope:'User requested this saved profile for fictional neighbor interactions',listening:'NOT RUN'}};
+ const transcript=audit.text??audit.transcript,asrWordExact=typeof transcript==='string'&&spokenWords(transcript)===spokenWords(line.text);
+ if(typeof transcript!=='string'||!dialectAdvisory&&!asrWordExact)throw Error(`Final words differ for ${line.clipId}: ${transcript}`);
+ const motion=energy(final),words=line.text.split(/\s+/).length;
+ if(!Number.isFinite(motion.durationSeconds)||motion.durationSeconds<Math.max(.6,words/9)||motion.durationSeconds>words*2.5+5||!motion.mouthEnergy.some(value=>value>0))throw Error('Empty or implausibly truncated/extended encoded speech');
+ const clip={...line,file,profileId:binding.profileId,referenceSha256:binding.referenceSha256,referenceOriginalSha256:binding.originalSha256,renderer:binding.renderer,modelRevision:binding.modelRevision,processing:binding.processing,...motion,sha256:sha(readFileSync(final)),nativeClipId:note.clip_id,nativeAnnotationSha256:sha(readFileSync(take.metadata_path)),nativeAudioSha256:sha(readFileSync(take.path)),nativeWordFidelity:note.word_fidelity??null,nativeCompletion:note.nativeCompletion??{completed:true,basis:'Completed native voice-cloner generation; source MP3 and scored transcript preserved'},asr:transcript,asrWordExact,asrVerificationMode:dialectAdvisory?'dialect-advisory':'word-exact',asrNormalization:'NFKC/case/punctuation/hyphen spacing; People & Culture = People and Culture; Maslos = Maaslos (proper-name vowel spelling); Nachbarschafts-Offside = Nachbarschafts-offsite (German final devoicing)',asrScriptPrompt:null,asrModelSha256:sha(readFileSync(resolve(model,'whisper-large-v3-turbo-q4_0.gguf'))),asrRenderer:'secret-tunnel-asr / whisper-large-v3-turbo GGUF q4_0',asrLanguageId:'de',integratedLufs:Number(measured.input_i),truePeakDbtp:Number(measured.input_tp),approval:{status:'user-approved',scope:dialectAdvisory?'User selected GS Frau Schwabingen (2) and explicitly authorized advisory Whisper transcription for exaggerated Swabian dialect':'User requested this saved profile for fictional neighbor interactions',listening:'NOT RUN'}};
  clips.push(clip);save();
  console.log(JSON.stringify({clipId:clip.clipId,duration:clip.durationSeconds,lufs:clip.integratedLufs,dbtp:clip.truePeakDbtp,stage:'complete'}));
  }catch(error){

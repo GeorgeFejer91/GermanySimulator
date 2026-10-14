@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import {linkSync,mkdtempSync,mkdirSync,readFileSync,rmSync,symlinkSync,writeFileSync} from 'node:fs';
+import {linkSync,mkdtempSync,mkdirSync,readdirSync,readFileSync,rmSync,symlinkSync,writeFileSync} from 'node:fs';
 import {tmpdir} from 'node:os';
 import {join} from 'node:path';
 import {execFileSync} from 'node:child_process';
@@ -8,6 +8,20 @@ import vm from 'node:vm';
 import {archiveFiles,fixedRecordingsBlock,matchesProduction,neighborRecordingsBlock,neighborSpokenWords,runtimeBlock,spokenWords,streetRulesBlock,verifyProfiles,writeArchiveMetadata} from '../tools/curate-voice-library.mjs';
 import {harness} from './amt-harness.mjs';
 const cast=JSON.parse(readFileSync('For-AI/VOICE-CAST.json'));
+
+test('compact caption delivery preserves every authored word, timestamp and character offset',()=>{
+ let total=0;
+ for(const [family,name] of [['knick','knick'],['player-replies','playerReply'],['office-ambient','officeAmbient'],['street-wisdom','streetWisdom']]){
+  const folder=`assets/voices/${family}`,clips=readdirSync(folder).filter(name=>name==='manifest.json'||name.endsWith('-manifest.json')).flatMap(name=>JSON.parse(readFileSync(`${folder}/${name}`)).clips);
+  const block=fixedRecordingsBlock(cast,{clips},family),context={};
+  vm.runInNewContext(block+`;this.entries=${name}Recordings;`,context);
+  for(const [path,clip] of Object.entries(context.entries)){
+   const authored=clips.find(source=>'./'+source.file===path);assert.ok(authored,path);
+   assert.deepEqual(JSON.parse(JSON.stringify(clip.wordCues)),authored.wordCues,path);total+=clip.wordCues.length;
+  }
+ }
+ assert.ok(total>3900,'the full existing caption corpus must survive delivery');
+});
 
 test('neighbor takes bind exact speaker/text, unprompted encoded words and measured mouth energy',()=>{
  const manifest=JSON.parse(readFileSync('assets/voices/neighbors/inga-manifest.json'));
@@ -31,6 +45,22 @@ test('fixed runtime takes reject engine, model, reference and processing drift e
   assert.equal(context.accepts({...clip,[key]:'wrong'}),false,key+' drift');
   const incomplete={...clip};delete incomplete[key];assert.equal(context.accepts(incomplete),false,key+' absent');
  }
+});
+
+test('only the selected Schwabingen dialect permits explicitly advisory ASR with an honest mismatch receipt',()=>{
+ const inga=JSON.parse(readFileSync('assets/voices/neighbors/inga-manifest.json')),fixture=structuredClone(cast);
+ const voiceId='jwd-frau-schwabingen',binding=fixture.productionVoices[voiceId];
+ assert.equal(binding.profileId,'e556ceff3dbb4091989d0f32da52d811');assert.equal(binding.asrPolicy,'dialect-advisory');
+ const person=fixture.existingAssetProfiles.find(p=>p.voiceId===voiceId),clip={...inga.clips[0],voiceId,actorId:person.gameCharacterId,profileId:binding.profileId,referenceSha256:binding.referenceSha256,referenceOriginalSha256:binding.originalSha256,renderer:binding.renderer,modelRevision:binding.modelRevision,processing:binding.processing,asr:'Whisper normalizes a dialect phrase differently',asrWordExact:false,asrVerificationMode:'dialect-advisory'};
+ person.dialogue=[{text:clip.text,english:clip.english}];
+ const manifest={...inga,voiceId,requestedLineCount:1,clips:[clip],heldPrivate:[]};
+ assert.doesNotThrow(()=>neighborRecordingsBlock(fixture,[manifest]));
+ for(const change of [{asrWordExact:true},{asrVerificationMode:'word-exact'},{asr:''},{profileId:'92ca1e419cd84a0092aafb6eed32ac8d'},{nativeCompletion:{completed:false}}])assert.throws(()=>neighborRecordingsBlock(fixture,[{...manifest,clips:[{...clip,...change}]}]));
+ const unapproved=structuredClone(fixture);delete unapproved.productionVoices[voiceId].asrPolicy;
+ assert.throws(()=>neighborRecordingsBlock(unapproved,[manifest]));
+ const other={...inga,requestedLineCount:1,clips:[{...inga.clips[0],asr:clip.asr,asrWordExact:false,asrVerificationMode:'dialect-advisory'}],heldPrivate:[]};
+ fixture.productionVoices[other.voiceId].asrPolicy='dialect-advisory';
+ assert.throws(()=>neighborRecordingsBlock(fixture,[other]),'another voice cannot use the Swabian exception');
 });
 
 test('shared neighbor receipts retain each take and reject a later production selection',()=>{

@@ -67,6 +67,22 @@ test('registration is the allocation cause; a stored badge or premature visit gr
  assert.equal(h.currentMission().target,'buergeramt','A38 handoff still comes first');h.state.mission=1;assert.equal(h.currentMission().target,'jwd-home');
 });
 
+test('Schwabingen owns her dialect early greeting and both tour invitations without awarding introductions',()=>{
+ const h=harness(true),swabian=h.actors.find(n=>n.id==='jwd-swabian');
+ h.talkJwdNeighbor(swabian);
+ assert.equal(h.dialogue.voiceId,'jwd-frau-schwabingen');assert.equal(h.state.characterSpeaker,swabian);
+ assert.match(h.dialogue.lines[0],/Ha, wer send denn Se/);assert.match(h.dialogue.subtitles[0],/Move into your home first/);
+ h.finish();assert.equal(h.jwdState.allocated,false);assert.equal(h.jwdState.met.size,0);assert.equal(h.jwdState.tour,null);
+ for(const repeat of [false,true]){
+  const tour=harness(true),guide=tour.actors.find(n=>n.id==='jwd-swabian');tour.awardAnmeldung();tour.jwdState.visited=true;
+  if(repeat)tour.jwdState.met.add(guide.id);tour.startJwdTour(guide,false);
+  assert.match(tour.dialogue.lines[0],repeat?/^Ha, Se scho wieder/:/i ben d’Frau Schwabingen/);assert.match(tour.dialogue.lines[1],/^Kommad Se mit/);
+  assert.equal(tour.jwdState.met.size,Number(repeat),'invitation cannot grant another introduction');
+ }
+ const parent=harness(true);parent.awardAnmeldung();parent.jwdState.visited=true;parent.startJwdTour(parent.actors.find(n=>n.id==='jwd-parent'),false);
+ assert.match(parent.dialogue.lines[1],/^Kommen Sie mit/,'another neighbor retains their own speech');
+});
+
 test('registration, certificate handoff and valid A38 submission lead straight to home and neighbors',()=>{
  const city=harness(true),office=officeHarness();office.config.onRegistration=city.awardAnmeldung;
  let formOpened=false;office.config.onForm=()=>{formOpened=true};

@@ -14,9 +14,12 @@ The three neighborhood residents use stable IDs `jwd-heiko-maaslos`,
 `jwd-inga-maaslos` and `jwd-frau-schwabingen`, paired with their exact `jwdCopy`
 German sources and English subtitles. The cast derives their runtime identity
 rows; `assets/voices/neighbors/*-manifest.json` derives eligible exact-text
-recordings through the existing curator. Inga's selected clone has caption-only
-failure fallback; Heiko and Frau Schwabingen retain the existing browser voices
-pending dedicated profile selection. Recorded entries include per-take identity,
+recordings through the existing curator. Inga and Frau Schwabingen use their
+selected saved profiles with caption-only failure fallback. Schwabingen's whole
+dialogue is exaggerated written Swabian using the user's new `(2)` profile;
+Whisper transcripts remain advisory under her explicit cast policy. Heiko
+retains the existing browser voice pending dedicated profile selection.
+Recorded entries include per-take identity,
 source/encoded hashes and 40 Hz final-MP3 energy. The energy estimates mouth
 opening; media time and broker start/end receipts own playback. Letter-derived
 round/spread shapes remain phonetic estimates. A queued, caption-only or stale
@@ -47,6 +50,9 @@ The generated lookup encodes identical take receipts once and expands their full
 fields into each entry at initialization. These receipts come from the reviewed
 takes, independently of the current cast table, so compact delivery preserves
 engine/reference/processing drift checks.
+Fixed-caption word cues use compact delivery tuples that reconstruct the same
+`at`, `end`, `charIndex` and `word` objects on initialization. Preserve the exact
+authored numbers and text; do not round timing to reduce catalogue size.
 
 For the staged Bürgeramt telephone, police transcripts appear only in the
 desktop game's in-scene subtitle rail on phone start/done receipts. Neither the
