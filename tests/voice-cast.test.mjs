@@ -83,11 +83,19 @@ for(const person of cast.characters){
   assert.ok(story.includes(`fullName:"${fullName}",voiceId:"${voiceId}"`),`Amt binding for ${voiceId}`);
  }
 }
+const neighborContext=vm.createContext({});
+vm.runInContext(game.slice(game.indexOf('const jwdCopy='),game.indexOf('function currentMission('))+';globalThis.copy=jwdCopy;',neighborContext);
 for(const asset of cast.existingAssetProfiles){
+ if(asset.gameRole==='jwd-neighbor'){
+  assert.ok(namedNpcs.includes(`id:"${asset.gameCharacterId}"`));assert.ok(game.includes(`:"${asset.voiceId}"`));assert.equal(voices[asset.voiceId].name,asset.fullName);assert.equal(voices[asset.voiceId].gender,asset.gender);
+  for(const line of asset.dialogue){const locator=line.locator.match(/^game\.js jwdCopy\.([a-zA-Z]+)\.de\[(\d+)\]$/);assert.ok(locator);assert.equal(neighborContext.copy[locator[1]].de[+locator[2]],line.text);assert.equal(neighborContext.copy[locator[1]].en[+locator[2]],line.english)}
+  if(asset.fallback==='browser-name'){assert.ok(['jwd-heiko-maaslos','jwd-frau-schwabingen'].includes(asset.voiceId));assert.equal(cast.productionVoices[asset.voiceId],undefined,'unselected neighbor profiles must not masquerade as approved production voices');assert.equal(voices[asset.voiceId].profileId,undefined);continue}
+  assert.equal(asset.voiceId,'jwd-inga-maaslos');assert.equal(asset.fallback,'captions');assert.ok(cast.productionVoices[asset.voiceId],'Inga has a selected fixed production profile');
+ }
  assert.equal(voices[asset.voiceId].profileId,cast.productionVoices[asset.voiceId].profileId);
  assert.equal(voices[asset.voiceId].profileName,cast.productionVoices[asset.voiceId].profileName);
  assert.equal(voices[asset.voiceId].referenceSha256,cast.productionVoices[asset.voiceId].referenceSha256);
- assert.ok(asset.source.every(item=>item.path&&item.sha256&&item.text));
+ if(asset.gameRole!=='jwd-neighbor')assert.ok(asset.source.every(item=>item.path&&item.sha256&&item.text));
 }
 assert.equal(Object.keys(roleVoices).length,cast.roleProfiles.length);
 for(const clip of Object.values(recordings)){

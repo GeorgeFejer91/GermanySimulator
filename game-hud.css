@@ -127,3 +127,8 @@
 .anmeldung-medal[hidden]{display:none}
 .anmeldung-medal i{position:absolute;top:.3rem;left:.4rem;width:2.9rem;border-top:3px double #7c641e}
 #germanness-hud .anmeldung-medal-label{display:block;width:100%;font:700 .625rem/1.35 "Courier New",monospace;text-align:center;white-space:normal;overflow-wrap:normal;word-break:normal}
+
+#app:has(.dialogue.neighbor:not([hidden])) .interact-hint{display:none}
+@media(orientation:landscape) and (max-height:500px){
+ .dialogue.neighbor:not([hidden]){left:auto;right:8px;transform:none;max-width:calc(50vw - 16px)}
+}

@@ -35,6 +35,7 @@ function briefing(region, voiceOn, lang) {
     announceCurrentRule: () => objectives.push('rule'), updateHud() {},
     humorModal: element('humor-modal')});
   vm.runInContext(catalog, context);
+  context.speechCatalog = context.window.GermanySimulatorAudioText;
   context.subtitleEnglish = new Map(Object.entries(context.window.GermanySimulatorAudioText.lines));
   vm.runInContext(['openDialogue', 'setDialogueVoiceBusy', 'speakDialogueLine', 'renderDialogue',
     'nextDialogue', 'openHumorWelcome', 'finishHumorCertification'].map(sourceOf).join('\n'), context);

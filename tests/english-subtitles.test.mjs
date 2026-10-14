@@ -19,11 +19,13 @@ const knickCount=['manifest.json','ambient-manifest.json','queue-call-manifest.j
 const streetDirectory=join(root,'assets/voices/street-wisdom'),streetCount=existsSync(streetDirectory)?readdirSync(streetDirectory).filter(file=>file.endsWith('-manifest.json')).reduce((n,file)=>n+JSON.parse(readFileSync(join(streetDirectory,file),'utf8')).clips.length,0):0;
 const playerDirectory=join(root,'assets/voices/player-replies'),playerCount=existsSync(playerDirectory)?readdirSync(playerDirectory).filter(file=>file.endsWith('-manifest.json')).reduce((n,file)=>n+JSON.parse(readFileSync(join(playerDirectory,file),'utf8')).clips.length,0):0;
 const ambientDirectory=join(root,'assets/voices/office-ambient'),ambientCount=existsSync(ambientDirectory)?readdirSync(ambientDirectory).filter(file=>file.endsWith('-manifest.json')).reduce((n,file)=>n+JSON.parse(readFileSync(join(ambientDirectory,file),'utf8')).clips.length,0):0;
+const neighborCount=JSON.parse(readFileSync(join(root,'assets/voices/neighbors/inga-manifest.json'),'utf8')).clips.length;
+assert.equal(neighborCount,11,'Inga has eleven exact authored neighbor takes');
 // Two retired phone-button replies remain archived on disk; the fifth police line is new.
-assert.equal(Object.keys(library.clips).length,114+knickCount+playerCount+ambientCount,"recorded and text-only dialogue need stable IDs, including the Jobcenter overlord");
+assert.equal(Object.keys(library.clips).length,114+knickCount+playerCount+ambientCount+neighborCount,"recorded and text-only dialogue need stable IDs, including the Jobcenter overlord");
 const recordedClips=Object.values(library.clips).filter(clip=>clip.recording);
-assert.equal(recordedClips.length,99+knickCount+streetCount+playerCount+ambientCount,"retired clerk, traffic and phone-button takes must not enter the runtime catalog");
-assert.equal(new Set(recordedClips.map(clip=>clip.path)).size,99+knickCount+streetCount+playerCount+ambientCount,"recorded clip paths must be unique");
+assert.equal(recordedClips.length,99+knickCount+streetCount+playerCount+ambientCount+neighborCount,"retired clerk, traffic and phone-button takes must not enter the runtime catalog");
+assert.equal(new Set(recordedClips.map(clip=>clip.path)).size,99+knickCount+streetCount+playerCount+ambientCount+neighborCount,"recorded clip paths must be unique");
 for(const clip of Object.values(library.clips)){
  assert.ok(library.voices[clip.voiceId],`${clip.id} needs a registered voice ID`);
  if(clip.targetVoiceId)assert.ok(library.voices[clip.targetVoiceId]?.profileId,`${clip.id} needs a saved replacement profile`);
@@ -100,7 +102,7 @@ assert.match(subtitleLayout,/const height=box\.getBoundingClientRect\(\)\.height
 assert.match(subtitleLayout,/prepareWithSegments[\s\S]*measureLineStats/,"subtitle layout must measure text with Pretext");
 assert.match(game,/u\.onstart=\(\)=>\{[^\n]*startSubtitle\(item\)/,"browser-speech subtitles must start on the utterance start event");
 assert.match(game,/item\.subtitleElapsed=\(\)=>a\.currentTime-t;sources\.at\(-1\)\.onended=\(\)=>finishStimulus/,"recorded subtitles must use the audio clock and complete after the final segment");
-assert.match(game,/buffers\.forEach\(\(buffer,index\)=>\{sources\[index\]\.start\(t\+offset\);offset\+=buffer\.duration\+gap\}\);item\.start\?\.\(\);startSubtitle\(item\)/,"recorded dialogue and subtitles must reveal when the scheduled sources start");
+assert.match(game,/buffers\.forEach\(\(buffer,index\)=>\{sources\[index\]\.start\(t\+offset\);offset\+=buffer\.duration\+gap\}\);item\.start\?\.\(item\);startSubtitle\(item\)/,"recorded dialogue and subtitles must reveal when the scheduled sources start");
 assert.match(game,/const time=item\.subtitleElapsed\?\.\(\)\?\?elapsed[\s\S]*requestAnimationFrame\(update\)/,"long cues must continuously follow the audio clock instead of accumulating timer drift");
 assert.match(game,/function finishStimulus\([^)]*\)\{[^}]*clearSubtitle\(\)/,"broker completion must clear subtitles");
 assert.match(game,/function stopSpeech\([^)]*\)[\s\S]*clearSubtitle\(\)/,"broker cancellation must clear subtitles");

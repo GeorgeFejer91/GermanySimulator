@@ -123,6 +123,8 @@ resident to the distinct introductions; duplicate/stale completion cannot add
 another resident. The four painted walking views retain accepted displacement
 and the established family scale. Direction changes do not claim unauthored
 whole-body turn animation, and chore poses retain the articulated work renderer.
+In short landscape viewports, neighbor dialogue actions sit at the screen edge
+and the redundant E hint disappears during the exchange, keeping the speaker visible.
 
 From the second home visit, one opportunistic burglar can walk along the lane to
 inspect the home. On finding only a mattress and empty crates, he complains and

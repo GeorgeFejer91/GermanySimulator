@@ -46,7 +46,11 @@ try{
     for(const id of ['jwd-parent','jwd-watcher','jwd-swabian']){
       await page.evaluate(id=>{const h=__neighborTest,n=h.npcs.find(n=>n.id===id);h.jwd.atHome=false;h.jwd.exitPending=false;Object.assign(h.player,{x:n.x,y:n.y+42});h.talkJwdNeighbor(n);Germany3D.sync()},id);
       const frames=[];
-      for(let sample=0;sample<6;sample++){await page.waitForTimeout(125);frames.push(await page.evaluate(id=>Germany3D.inspectAssets().jwd.actors.find(n=>n.id===id).paint,id))}
+      for(let sample=0;sample<32;sample++){
+        await page.waitForTimeout(125);
+        frames.push(await page.evaluate(id=>Germany3D.inspectAssets().jwd.actors.find(n=>n.id===id).paint,id));
+        if(name==='failed-paint'||frames.at(-1).state==='listen')break;
+      }
       if(name!=='failed-paint'){
         assert.ok(frames.every(f=>f.loaded&&f.visible&&f.row!==5),'caption-only conversation keeps the mouth closed');
         assert.ok(frames.some(f=>['look','greet','listen'].includes(f.state)),'owned conversation has planted interaction states');
