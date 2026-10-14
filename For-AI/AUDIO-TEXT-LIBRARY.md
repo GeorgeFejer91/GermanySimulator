@@ -1,5 +1,17 @@
 # Speech catalog and subtitle authority
 
+The three neighborhood residents use stable IDs `jwd-heiko-maaslos`,
+`jwd-inga-maaslos` and `jwd-frau-schwabingen`, paired with their exact `jwdCopy`
+German sources and English subtitles. The cast derives their runtime identity
+rows; `assets/voices/neighbors/*-manifest.json` derives eligible exact-text
+recordings through the existing curator. Inga's selected clone has caption-only
+failure fallback; Heiko and Frau Schwabingen retain the existing browser voices
+pending dedicated profile selection. Recorded entries include per-take identity,
+source/encoded hashes and 40 Hz final-MP3 energy. The energy estimates mouth
+opening; media time and broker start/end receipts own playback. Letter-derived
+round/spread shapes remain phonetic estimates. A queued, caption-only or stale
+cue cannot make a neighbor talk. No recordings preload at city startup.
+
 `jobcenter-overlord` is the Jobcenter encounter's one recorded speaker and
 stable game voice ID. Its catalog `source` exactly matches the German text in
 `assets/audio/jobcenter/overlord.json`; the paired English subtitle stays with

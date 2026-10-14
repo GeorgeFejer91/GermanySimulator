@@ -16,7 +16,7 @@ try{
   if(process.env.HUD_CASE&&name!==process.env.HUD_CASE)continue;
   const context=await browser.newContext({viewport,isMobile:name.startsWith('android'),hasTouch:name.startsWith('android'),reducedMotion:'reduce'});
   await context.addInitScript(()=>{
-   localStorage.setItem('germany-simulator-english-subtitles','on');
+   localStorage.setItem('germany-simulator-english-subtitles','on');localStorage.setItem('germany-anmeldung-v1','1');
    const play=HTMLMediaElement.prototype.play;HTMLMediaElement.prototype.play=function(...args){this.muted=true;this.volume=0;return play.apply(this,args)};
    const connect=AudioNode.prototype.connect;AudioNode.prototype.connect=function(target,...args){if(target===this.context.destination){const gain=this.context.createGain();gain.gain.value=0;connect.call(gain,target);return connect.call(this,gain,...args)}return connect.call(this,target,...args)};
    const speak=speechSynthesis.speak.bind(speechSynthesis);speechSynthesis.speak=u=>{u.volume=0;speak(u)};
@@ -24,7 +24,7 @@ try{
   const page=await context.newPage(),errors=[];page.on('pageerror',e=>errors.push(e.message));
   await page.goto(`http://127.0.0.1:${server.address().port}/`,{waitUntil:'domcontentloaded'});
   await page.waitForFunction(()=>window.Germany3D?.startupReady&&window.Germany3DBridge?.startupAssetsReady,null,{timeout:120000});
-  await page.keyboard.press('s');await page.evaluate(()=>{for(let i=0;i<8;i++)document.getElementById('dialogue-next').click();__hudTest.stopSpeech();__hudTest.state.voiceOn=false;__hudTest.state.ruleTimer=-10000});
+  await page.waitForFunction(()=>document.getElementById('preload').hidden);await page.keyboard.press('s');await page.evaluate(()=>{for(let i=0;i<8;i++)document.getElementById('dialogue-next').click();__hudTest.stopSpeech();__hudTest.state.started=true;__hudTest.state.modal=false;__hudTest.state.dialogue=false;document.getElementById('intro').classList.add('hidden');document.getElementById('dialogue').hidden=true;__hudTest.state.voiceOn=false;__hudTest.state.ruleTimer=-10000;__hudTest.updateHud()});
   await page.evaluate(()=>{document.getElementById('toast').classList.remove('show');GermanyHUD.refresh()});
   await page.waitForFunction(()=>!document.getElementById('city-status').hidden);
   const snapshot=()=>page.evaluate(()=>{
@@ -34,7 +34,7 @@ try{
    const boxes=Object.fromEntries(ids.filter(id=>shown(document.getElementById(id))).map(id=>[id,rect(document.getElementById(id))]));
    const dock=document.querySelector('.control-dock');if(shown(dock))boxes.dock=rect(dock);
    const noticeIds=[...document.getElementById('city-notices').children].filter(shown).map(el=>el.id);
-   const overflow=[...document.querySelectorAll('#germanness-hud,#subtitle-toggle,#file-toggle,#city-notices button,#city-notices b,#city-notices p,#city-notices strong,#fax-title,#fax-text')].filter(shown).filter(el=>el.scrollWidth>el.clientWidth+2).map(el=>el.id||el.tagName);
+   const overflow=[...document.querySelectorAll('#anmeldung-medal,.anmeldung-medal-label,#germanness-hud,#subtitle-toggle,#file-toggle,#city-notices button,#city-notices b,#city-notices p,#city-notices strong,#fax-title,#fax-text')].filter(shown).filter(el=>el.scrollWidth>el.clientWidth+2).map(el=>el.id||el.tagName);
    return{boxes,noticeIds,overflow,hudLayout:document.body.dataset.hudLayout,hudFit:document.body.dataset.hudFit,caption:document.getElementById('english-subtitle').textContent,captionFit:document.getElementById('english-subtitle').dataset.fit,measurements:[...document.querySelectorAll('[data-measurement]')].filter(shown).map(el=>[el.id||el.tagName,el.dataset.measurement,el.dataset.pretextFit]),pageOverflow:document.documentElement.scrollWidth>document.documentElement.clientWidth+1};
   });
   const check=async phase=>{await page.evaluate(()=>new Promise(done=>requestAnimationFrame(()=>requestAnimationFrame(()=>requestAnimationFrame(done)))));const data=await snapshot();assert.deepEqual(data.overflow,[],name+' '+phase+' horizontal text overflow');assert.equal(data.pageOverflow,false);if(data.hudLayout==='paired'){assert.ok(Math.abs(data.boxes['germanness-hud'].y-data.boxes['subtitle-toggle'].y)<1,'matching top anchors');assert.ok(data.boxes['germanness-hud'].right+5<=data.boxes['subtitle-toggle'].x,'separated top controls')}else{assert.ok(data.boxes['germanness-hud'].bottom+5<=data.boxes['subtitle-toggle'].y,'enlarged text reflows below the meter')};assert.ok(data.noticeIds.length<=1,'only one temporary notice');for(const id of data.noticeIds){const bounds=await page.locator('#'+id).boundingBox();assert.ok(bounds.y>=data.boxes['file-toggle'].bottom+5,'notice below controls')}
@@ -46,6 +46,15 @@ try{
    await page.screenshot({path:resolve(out,name+'-'+phase+'.png')});report.cases.push({name,phase,...data});return data;
   };
   await check('mission');
+  if(process.env.HUD_REWARD_ONLY){
+   for(const [phase,css] of [['text-200','html{font-size:32px!important}'],['spacing','#city-status *{line-height:1.5!important;letter-spacing:.12em!important;word-spacing:.16em!important}'],['zoom-200','html{zoom:2!important}']]){
+    if(phase==='zoom-200')await page.setViewportSize({width:viewport.width*2,height:viewport.height*2});
+    const style=await page.addStyleTag({content:css});await page.evaluate(()=>GermanyHUD.refresh());await page.waitForTimeout(200);
+    const data=await page.locator('#anmeldung-medal').evaluate(el=>{const label=el.querySelector('.anmeldung-medal-label'),box=document.getElementById('germanness-hud');return {width:el.clientWidth,scroll:el.scrollWidth,labelWidth:label.clientWidth,labelScroll:label.scrollWidth,meterWidth:box.clientWidth,meterScroll:box.scrollWidth,fit:label.dataset.pretextFit,measurement:label.dataset.measurement}});
+    assert.ok(data.scroll<=data.width+2&&data.labelScroll<=data.labelWidth+2&&data.meterScroll<=data.meterWidth+2,name+' '+phase+' medal remains readable');assert.equal(data.measurement,'pretext-0.0.9');report.cases.push({name,phase,medal:data});await page.screenshot({path:resolve(out,name+'-reward-'+phase+'.png')});await style.evaluate(el=>el.remove());await page.setViewportSize(viewport);
+   }
+   assert.deepEqual(errors,[]);await context.close();console.log(name,'reward PASS');continue;
+  }
   if(name==='desktop'){
    await page.evaluate(()=>{__hudTest.state.voiceOn=true;__hudTest.announceCurrentRule()});
    await page.waitForFunction(()=>document.getElementById('police-bark').classList.contains('caption-only')&&!document.getElementById('english-subtitle').hidden,null,{timeout:15000});

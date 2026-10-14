@@ -38,7 +38,7 @@ Mission order:
 ### JWD home and neighbors
 
 Completing the first registration interview allocates a home through the existing
-`onRegistration` reward. After the A38 form is submitted, the mission fax and
+`onRegistration` reward. The first receipt in each playthrough grants +3 Germanness and reveals a persistent gold form-shaped A38 medal beside the left HUD. Duplicate receipts grant no extra points. After the A38 form is submitted, a hopeful inner monologue introduces the three-neighbor mission; the mission fax and
 sausage lead to the house at Berlin's southwest edge: JWD, “janz weit draußen”.
 Visit its covered sleeping porch with E, then finish conversations with all three
 neighbors. This detour resumes Anmeldung II without renumbering the eight
@@ -60,32 +60,26 @@ not a reproduction of actual addresses. Its villa/landhouse and leafy-garden
 references come from the [district's Schlachtensee account](https://www.berlin.de/ba-steglitz-zehlendorf/bezirk-erleben/ortsteile/schlachtensee/schlachtensee-1344335.php)
 and [Berlin's neighborhood portrait](https://www.berlin.de/special/stadtteile/zehlendorf/8265200-5170854-schlachtensee.html).
 Every house has a body-clear paved approach; reaching home needs no grass offence.
-The player's home has one storey, Fink's house two and the Kranz house three.
+The player's home has one storey, Schwabingen's house two and the Maaslos house three.
 Their aligned upper windows, roller shutters, stucco cornices, steep roofs and
 rainwater pipes make the wealth contrast visible without moving the entrances
 or narrowing the garden paths. The architecture remains a fictional Berlin
 villa suburb; the [district's history of Schlachtensee's landhouses](https://www.berlin.de/ba-steglitz-zehlendorf/aktuelles/pressemitteilungen/2020/pressemitteilung.1024262.php)
 and [Reddit residents' suburban descriptions](https://www.reddit.com/r/berlin/comments/yzbc0y/)
 are references, not a claim that every Berlin suburb looks alike.
-Frau Fink is a Swabian
-Kehrwoche enthusiast. Professor Dr. Dr. **Heiko Kranz** and his diplomat wife are
-upper-class, literal, socially awkward and obsessively concerned with status and
-their child's achievements. Eight-year-old Theodor speaks six languages; his
-parents worry that his Latin and genius milestones are falling behind. Their
-dialogue also covers parking, hedges and closed blinds. They speak Berlin
-Denglisch, with matching English subtitles through the existing speech broker.
+Frau Schwabingen is a house-proud Swabian Kehrwoche enthusiast. Heiko Maaslos is a professor of systems engineering (Systemtechnik). His awkwardly assembled clauses and supposedly helpful explanations presume he is right: selective measurements, engineering vocabulary and assumed agreement justify his intrusions. His wife Inga Maaslos works in fictional People & Culture and recasts imposed chores as positive opportunities chosen by the newcomer. Their arrogant, half-lidded expressions and status anxiety underline their demands. Eight-year-old Theodor speaks six languages; his parents worry about his Latin milestones. These are fictional identities and authored personalities. Dialogue retains Berlin Denglisch and the existing English subtitle path.
 Heiko's procedural costume follows the user's visual reference: shaggy sandy
 blond hair, light stubble and a brown ribbed zip-neck sweater. His previous
 spectacles, bow tie and waistcoat are removed. The private reference photo is
 not shipped; the character remains fictional.
 
-The southern houses face three semi-connected gardens. Fink and Kranz have
+The southern houses face three semi-connected gardens. Schwabingen and Maaslos have
 clipped hedges, upright gnomes, striped lawns and polished VW-style SUV,
 BMW-style saloon and Tesla-style EV silhouettes. The player's parcel has weeds,
 ragged hedges, bare patches and a fallen gnome. `jwd-gardens.js` owns the shared
 parcels, paved approaches, solid prop rectangles and work stations for both pages.
 Private garden grass carries no public-lawn offence. Residents wash/polish their
-cars; Fink also walks to her hedge and trims it. Their animation clock advances
+cars; Schwabingen also walks to her hedge and trims it. Their animation clock advances
 only in the nearby running simulation. Work pauses for conversations, and gait
 comes from accepted physical movement.
 
@@ -95,7 +89,7 @@ as assistance: formal concern, a selective account of earlier conversations,
 claimed agreement through silence, then responsibility shifted to the listener.
 His original fictional dialogue never reproduces private correspondence or its
 identifying details. Heiko values Theodor's
-six languages but orders his zipper away from the paintwork; the ambassador
+six languages but orders his zipper away from the paintwork; Inga
 defends the car's moral standing while relocating play behind the garage.
 The parked cars offer a readable laminated notice; decorative hedges and gnomes
 do not advertise an interaction with no response.
@@ -117,9 +111,22 @@ garden can invite another complaint after 38 simulation seconds; leaving the
 neighborhood cancels the approach. Returning home or another arrest rearms it.
 Conversations pause the city and use existing E/touch controls.
 
+Each resident owns one planted interaction: stop, look, a brief greeting nod,
+listen, speak, then release to the existing return route. Actual speech start
+may preempt the short greeting. Queued, disabled or caption-only speech keeps
+the lips closed; a current audible cue alone selects talking. Recorded playback
+time and its measured energy drive the mouth. Browser speech uses its observed
+start clock and estimated articulation. Pause freezes both; advancing a line,
+replacing a conversation or leaving cancels its cue. The renderer grants no
+mission credit. Only the current conversation's final acknowledgement adds its
+resident to the distinct introductions; duplicate/stale completion cannot add
+another resident. The four painted walking views retain accepted displacement
+and the established family scale. Direction changes do not claim unauthored
+whole-body turn animation, and chore poses retain the articulated work renderer.
+
 From the second home visit, one opportunistic burglar can walk along the lane to
 inspect the home. On finding only a mattress and empty crates, he complains and
-walks to the richer Kranz house, disappearing at its doorway. The event waits for
+walks to the richer Maaslos house, disappearing at its doorway. The event waits for
 the player to be nearby, uses ordinary body collision, and cannot remove mission
 items. No extra currency, save system, asset download or background timer is added.
 

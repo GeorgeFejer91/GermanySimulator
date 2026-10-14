@@ -49,6 +49,34 @@ German ASR matching every authored word under compound-word normalization.
 The user authorized this processed game recording; perceptual listening remains
 NOT RUN. The encounter loads the asset on demand through its one media owner.
 
+The neighborhood identities are `jwd-heiko-maaslos`, `jwd-inga-maaslos` and
+`jwd-frau-schwabingen`; their actor IDs remain `jwd-parent`, `jwd-watcher` and
+`jwd-swabian`. Their exact introductions and complaint pools live in `game.js`
+`jwdCopy`, with source/translation ownership in the cast. Inga uses the
+user-selected saved `GS Inga Maaslos` UUID `04e241f5e0734684ba3626aa669a70c1`.
+The other two retain the existing browser dialogue policy while dedicated
+saved-profile selection is pending. Do not silently assign another NPC's clone.
+Missing or rejected Inga takes use captions, without changing her voice.
+
+`tools/build-neighbor-voices.mjs --plan --character inga` freezes the exact
+requests; rendering verifies the live reference bytes and reuses compatible
+saved takes. The installed native OmniVoice/Whisper binaries and cached models
+perform bounded offline takes and independent final-MP3 transcription. Preserve
+raw and rejected takes privately; only word-checked normalized encodings enter
+`assets/voices/neighbors/`. The manifest accounts for every line as accepted or
+held, keeps source hashes and original ASR results, and separates user-directed
+use from unperformed listening. Explicit German/English orthographic equivalents
+are limited to punctuation/hyphen spacing, People & Culture/People and Culture,
+the long-vowel spelling Maslos/Maaslos, and German final devoicing in the fixed
+Nachbarschafts-offsite phrase. They must never erase extra words or negation.
+The curator derives the existing catalog's strict exact-text entries and 40 Hz
+final-encoded RMS mouth cues from this manifest. No runtime synthesis service,
+source reference audio or authoring model ships.
+All eleven Inga lines are accepted: 615,460 encoded bytes / 75.96 seconds,
+−18.28 to −18.11 LUFS and a maximum −3.95 dBTP. Both reference hashes and all
+63 production bindings were verified against the live native profile catalog.
+Perceptual listening remains NOT RUN.
+
 The mirror uses `office-mirror` in the existing authoring helper: one whole-text
 synthesis call and one `player-potato-mirror.mp3`, never sentence joins. Its
 surprised delivery uses exaggeration 0.65 with the unchanged selected player

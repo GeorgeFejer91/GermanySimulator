@@ -8,6 +8,7 @@ import {createPotatoMirror} from './buergeramt-potato-mirror.js?v=20261013-physi
 import {amtWalkDirection,createAmtWalkSpare} from './buergeramt-walk-view.js?v=20261013-smooth-turning';
 import {prepareWithSegments,measureNaturalWidth,measureLineStats} from './assets/vendor/pretext/dist/layout.js';
 import {createJobcenterBuilding,createJobcenterEncounter} from './jobcenter.js?v=20261013-furnace-mouth';
+import {createNeighborSprite} from './neighbor-sprites.js?v=20261014-neighbor-performance';
 const THREE_URL="./assets/vendor/three/0.186.0/build/three.module.min.js";
 const GLTF_LOADER_URL="./assets/vendor/three/0.186.0/examples/jsm/loaders/GLTFLoader.js";
 function buergeramtDoorRadiance(time,reducedMotion=false){
@@ -1254,6 +1255,7 @@ function showRendererFailure(error){
       const station=bridge.jwdGardens?.stations[n.id],car=bridge.jwdGardens?.props.find(p=>p.id===station?.target&&p.asset==="jwd-car");
       work.visible=false;q.userData.jwdWork={work,wash,shears,sponge,soap,drops,blades,carried,arms,car,station,up:new T.Vector3(0,1,0),direction:new T.Vector3()};
     }
+    q.userData.neighborPaint=createNeighborSprite(T,n,q,queueCityAsset,camera);
     return q;
   }
   function poseJwdLimb(mesh,from,to,tools,length=1){
@@ -1316,6 +1318,7 @@ function showRendererFailure(error){
   }
   function retireNpcMesh(q){
     if(!q)return;
+    q.userData.neighborPaint?.dispose();
     if(q.userData.streetCharacter){streetCharacters?.remove(q);return}
     scene.remove(q);
     // Atlas materials/textures are shared. Only retire per-actor geometry.
@@ -2004,7 +2007,7 @@ function showRendererFailure(error){
       return {min:bounds.min.toArray(),max:bounds.max.toArray(),width:size.x,height:size.y,depth:size.z,ground:bounds.min.y};
     }
     const houses=buildingSlots.filter(slot=>slot.building.residential).map(slot=>({id:slot.building.id,variant:slot.building.variant||"house",...slot.group.userData.jwdArchitecture,bounds:inspect(slot.group),solid:[slot.building.x,slot.building.y,slot.building.w,slot.building.h],visible:slot.group.visible,opacity:slot.opacity,doorHeight:1.97,sign:slot.label.userData.jwdText}));
-    const actors=[...npcMeshes].filter(([state])=>state.jwdRole).map(([state,root])=>({id:state.id,role:state.jwdRole,position:[state.x,state.y],worldPosition:root.position.toArray(),bounds:inspect(root),facing:root.rotation.y,walkPhase:root.userData.walkPhase||0,swing:root.userData.walkSwing||0,activity:state.jwdActivity||null,working:!!state.jwdWorking,activityPhase:root.userData.jwdWorkPhase??0,workVisible:!!root.userData.jwdWork?.work.visible}));
+    const actors=[...npcMeshes].filter(([state])=>state.jwdRole).map(([state,root])=>({id:state.id,role:state.jwdRole,position:[state.x,state.y],worldPosition:root.position.toArray(),bounds:inspect(root),facing:root.rotation.y,walkPhase:root.userData.walkPhase||0,swing:root.userData.walkSwing||0,activity:state.jwdActivity||null,working:!!state.jwdWorking,activityPhase:root.userData.jwdWorkPhase??0,paint:root.userData.neighborPaint?.inspect()||null,workVisible:!!root.userData.jwdWork?.work.visible}));
     const scenery=jwdScenery.map(root=>({...root.userData.jwdSign,...root.userData.jwdProp,bounds:inspect(root)}));
     let geometryBytes=0;for(const geometry of geometries){for(const attribute of Object.values(geometry.attributes))geometryBytes+=attribute.array.byteLength;geometryBytes+=geometry.index?.array.byteLength||0}
     const textureBytes=[...textures].reduce((sum,texture)=>sum+(texture.image?.width||0)*(texture.image?.height||0)*4,0);
@@ -2109,7 +2112,7 @@ function showRendererFailure(error){
       }
       if(kind&&!q?.userData[kind+"Sprite"]){const sprite=npcSprite(n);if(sprite){if(q)scene.remove(q);q=sprite;scene.add(q);npcMeshes.set(n,q)}}
       if(!q){q=npcAppearance(n);scene.add(q);npcMeshes.set(n,q)}
-      if(n.jwdRole)syncJwdCharacter(q,n);
+      if(n.jwdRole){q.userData.neighborPaint?.restore();syncJwdCharacter(q,n);q.userData.neighborPaint?.sync(streetNow,bridge.getHUDState?.(),bridge.getNeighborDialogue?.(),amtReducedMotion.matches)}
       else if(q.userData.borderPourerSprite)syncBorderPourer(q,n);
       else if(q.userData.merkelSprite)syncMerkel(q,n);
       else if(q.userData.bayernSprite)syncBayern(q,n);

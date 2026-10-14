@@ -5,9 +5,9 @@
  const lots=[{id:'fink',x:100,y:3896,w:280,h:330,kept:true},{id:'home',x:395,y:3896,w:300,h:330,kept:false},{id:'kranz',x:706,y:3896,w:270,h:330,kept:true}].map(p=>({...point(p),privateGarden:true}));
  const props=[];
  const solid=(id,asset,x,y,w,d,h,extra={})=>{const p=point({id,asset,x,y,w,d,h,interactive:asset==='jwd-car',...extra});p.collisionRect={x:p.x-w/2,y:p.y-d/2,w,h:d};p.collisionRadius=Math.hypot(w,d)/2;props.push(p)};
- solid('jwd-vw','jwd-car',145,4120,96,210,78,{style:'vw',owner:'FRAU FINK',label:'FINKS SUV · FRISCH GEWASCHEN'});
- solid('jwd-bmw','jwd-car',755,4120,96,210,65,{style:'bmw',owner:'HEIKO KRANZ',label:'HEIKOS DIENSTWAGEN · NICHT BERÜHREN'});
- solid('jwd-tesla','jwd-car',922,4120,96,210,68,{style:'tesla',owner:'DR. KRANZ',label:'ELEKTROAUTO · MORALISCHE VORFAHRT'});
+ solid('jwd-vw','jwd-car',145,4120,96,210,78,{style:'vw',owner:'FRAU SCHWABINGEN',label:'SCHWABINGENS SUV · FRISCH GEWASCHEN'});
+ solid('jwd-bmw','jwd-car',755,4120,96,210,65,{style:'bmw',owner:'HEIKO MAASLOS',label:'HEIKOS DIENSTWAGEN · NICHT BERÜHREN'});
+ solid('jwd-tesla','jwd-car',922,4120,96,210,68,{style:'tesla',owner:'INGA MAASLOS',label:'ELEKTROAUTO · MORALISCHE VORFAHRT'});
  solid('jwd-fink-hedge','jwd-hedge',350,4140,18,156,38,{kept:true});
  solid('jwd-home-hedge-west','jwd-hedge',409,4140,23,150,58,{kept:false});
  solid('jwd-home-hedge-east','jwd-hedge',668,4140,23,150,65,{kept:false});

@@ -121,3 +121,9 @@
 #app.subtitles-visible .amt-ambient{bottom:calc(76px + var(--subtitle-height))}
 #app.subtitles-visible .amt-level.first-person .amt-sheet{bottom:calc(12px + var(--subtitle-height));max-height:calc(100dvh - var(--subtitle-height) - 24px)}
 #app.subtitles-visible .amt-direct-result{bottom:calc(20px + var(--subtitle-height))}
+
+#germanness-hud:has(.anmeldung-medal:not([hidden])){grid-template-columns:5.7rem minmax(0,1fr);grid-template-areas:"label label" "medal value" "medal meter" "medal law"}
+#germanness-hud .anmeldung-medal{grid-area:medal;white-space:normal;overflow:visible;text-overflow:clip;margin:0;position:relative;align-self:center;display:grid;place-items:center;width:5.7rem;min-height:4.7rem;padding:.8rem .25rem .4rem;border:1px solid #947119;background:linear-gradient(125deg,#b88c2b,#fff7c8 28%,#d6b050 48%,#fff0ad 74%,#ae7a1e);box-shadow:1px 2px 0 #51431c55;color:#332b17;clip-path:polygon(0 0,78% 0,100% 23%,100% 100%,0 100%)}
+.anmeldung-medal[hidden]{display:none}
+.anmeldung-medal i{position:absolute;top:.3rem;left:.4rem;width:2.9rem;border-top:3px double #7c641e}
+#germanness-hud .anmeldung-medal-label{display:block;width:100%;font:700 .625rem/1.35 "Courier New",monospace;text-align:center;white-space:normal;overflow-wrap:normal;word-break:normal}

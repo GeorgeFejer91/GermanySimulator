@@ -37,7 +37,7 @@ html,body,#app{margin:0;width:100%;height:100%;overflow:hidden;background:#77756
   </nav>
 </main>
 <script src="./goerlitzer-park.js?v=20261012-browser-smoothness"></script>
-<script src="./jwd-gardens.js?v=20261013-jwd-gardens"></script>
+<script src="./jwd-gardens.js?v=20261013-anmeldung-neighbors"></script>
 <script>
 (()=>{"use strict";
 const goerlitzerPark=window.GoerlitzerPark;
@@ -63,9 +63,9 @@ const buildings=[
 {id:"jwd-villa-linde",residential:true,variant:"villa",name:"VILLA LINDENHOF",x:110,y:3380,w:200,h:190,hgt:170,doorX:210,doorY:3600,sign:"PRIVATWEG · BITTE GRÜSSEN"},
 {id:"jwd-villa-wald",residential:true,variant:"villa",name:"HAUS WALDFRIEDEN",x:430,y:3380,w:240,h:190,hgt:150,doorX:550,doorY:3600,sign:"SEIT 1928 IN GUTER NACHBARSCHAFT"},
 {id:"jwd-landhaus",residential:true,variant:"landhaus",name:"LANDHAUS NR. 34",x:790,y:3400,w:170,h:170,hgt:115,doorX:875,doorY:3600,sign:"KEINE WERBUNG · AUCH KEINE IDEEN"},
-{id:"jwd-fink",residential:true,storeys:2,name:"FAMILIE FINK",x:100,y:3730,w:240,h:140,hgt:195,doorX:220,doorY:3900,sign:"KEHRWOCHE IST IMMER"},
+{id:"jwd-fink",residential:true,storeys:2,name:"FAMILIE SCHWABINGEN",x:100,y:3730,w:240,h:140,hgt:195,doorX:220,doorY:3900,sign:"KEHRWOCHE IST IMMER"},
 {id:"jwd-home",residential:true,storeys:1,name:"DEIN ZUHAUSE · JWD",x:410,y:3730,w:240,h:140,hgt:95,doorX:530,doorY:3900,sign:"JANZ WEIT DRAUSSEN · NR. 38"},
-{id:"jwd-kranz",residential:true,storeys:3,name:"FAMILIE KRANZ",x:720,y:3730,w:240,h:140,hgt:265,doorX:840,doorY:3900,sign:"EIGENHEIM · FREMDE SORGEN"},
+{id:"jwd-kranz",residential:true,storeys:3,name:"FAMILIE MAASLOS",x:720,y:3730,w:240,h:140,hgt:265,doorX:840,doorY:3900,sign:"EIGENHEIM · FREMDE SORGEN"},
 {id:"buergeramt",name:"BÜRGERAMT",x:150,y:220,w:350,h:250,hgt:115,doorX:325,doorY:500,sign:"TERMIN NUR MIT TERMIN"},
 {id:"hausverwaltung",name:"HAUSVERWALTUNG",x:590,y:210,w:330,h:255,hgt:95,doorX:755,doorY:495,sign:"WOHNUNGSGEBERBESTÄTIGUNG"},
 {id:"stadtbild",name:"AMT FÜR STADTBILD",x:1390,y:220,w:360,h:245,hgt:105,doorX:1570,doorY:495,sign:"OPTISCHE ORDNUNG · DIN 0815"},
@@ -105,9 +105,9 @@ const props=[
 {x:2860,y:760,asset:"faxbillboard",billboard:faxBillboardPool[0],id:"fax1"},{x:3500,y:1880,asset:"faxbillboard",billboard:faxBillboardPool[1],id:"fax2"},{x:3980,y:2890,asset:"faxbillboard",billboard:faxBillboardPool[0],id:"fax3"}
 ].map(offsetWorldPoint);
 const npcs=[
- {x:390,y:4040,id:"jwd-swabian",name:"FRAU FINK · SCHWÄBISCHE NACHBARIN",jwdRole:"swabian",line:0,vx:0,vy:0},
- {x:740,y:4080,id:"jwd-parent",name:"PROFESSOR DR. DR. HEIKO KRANZ",jwdRole:"parent",line:0,vx:0,vy:0},
- {x:900,y:4030,id:"jwd-watcher",name:"BOTSCHAFTERIN DR. KRANZ",jwdRole:"watcher",line:0,vx:0,vy:0},
+ {x:390,y:4040,id:"jwd-swabian",name:"FRAU SCHWABINGEN · SCHWÄBISCHE NACHBARIN",jwdRole:"swabian",line:0,vx:0,vy:0},
+ {x:740,y:4080,id:"jwd-parent",name:"HEIKO MAASLOS",jwdRole:"parent",line:0,vx:0,vy:0},
+ {x:900,y:4030,id:"jwd-watcher",name:"INGA MAASLOS · PEOPLE & CULTURE",jwdRole:"watcher",line:0,vx:0,vy:0},
 {x:520,y:720,vx:16,vy:0,min:470,max:900},{x:1470,y:670,vx:-13,vy:0,min:1360,max:1760},
 {x:4620,y:3270,special:"merkel",route:[[4620,3270],[5750,3270],[6150,3270],[7200,3270],[7200,3880],[6120,3880],[5750,3880],[4620,3880]],target:1,facingX:1,facingY:0,animTime:0,spriteRow:2,spriteFrame:1,line:0}
 ].map(n=>({...offsetWorldPoint(n),min:n.min==null?n.min:n.min+RAIL_GUTTER,max:n.max==null?n.max:n.max+RAIL_GUTTER,route:n.route?.map(([x,y])=>[x+RAIL_GUTTER,y+RAIL_GUTTER])}));
@@ -141,6 +141,6 @@ function clearInput(){for(const code in keys)keys[code]=false}addEventListener("
 <script type="importmap">{"imports":{"three":"./assets/vendor/three/0.186.0/build/three.module.min.js","three/addons/":"./assets/vendor/three/0.186.0/examples/jsm/"}}</script>
 <script src="./buergeramt-lips.js?v=20261013-character-lips"></script>
 <script src="./buergeramt-story.js?v=20261013-kripo-ending"></script>
-<script type="module" src="./world3d.js?v=20261014-floor-pigment1"></script>
+<script type="module" src="./world3d.js?v=20261014-neighbor-performance"></script>
 </body></html>
 

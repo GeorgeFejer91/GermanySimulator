@@ -26,14 +26,14 @@ try{
   const page=await context.newPage(),errors=[];page.on('pageerror',e=>errors.push(e.message));
   await page.goto(`http://127.0.0.1:${server.address().port}/${entry}`,{waitUntil:'domcontentloaded'});
   await page.waitForFunction(()=>window.__jwdTest&&window.Germany3D?.startupReady&&Germany3DBridge.startupAssetsReady&&document.getElementById('preload').hidden);
-  await page.evaluate(()=>{const h=__jwdTest;h.state.started=true;h.state.modal=false;h.state.voiceOn=false;h.state.mission=0;h.state.pettyAuditTimer=10000;h.awardAnmeldung();h.showForm("a38");document.getElementById('intro').classList.add('hidden');document.body.classList.remove('preloading');Object.assign(h.player,{x:h.home.doorX,y:h.home.doorY+30});Germany3D.sync()});
-  assert.equal(await page.evaluate(()=>__jwdTest.currentMission().target),'buergeramt');
+  await page.evaluate(()=>{const h=__jwdTest;h.state.started=true;h.state.modal=false;h.state.voiceOn=false;h.state.mission=0;h.state.pettyAuditTimer=10000;h.awardAnmeldung();h.awardAnmeldung();h.showForm("a38");document.getElementById('intro').classList.add('hidden');document.body.classList.remove('preloading');Object.assign(h.player,{x:h.home.doorX,y:h.home.doorY+30});Germany3D.sync()});
+  assert.equal(await page.evaluate(()=>__jwdTest.currentMission().target),'buergeramt');assert.equal(await page.evaluate(()=>__jwdTest.state.germanness),3,'reward is immediate and duplicate-safe');assert.equal(await page.evaluate(()=>localStorage.getItem('germany-anmeldung-v1')),'1');
   const fields=page.locator('#form-fields input:not([type="checkbox"])');
   for(let i=0;i<await fields.count();i++)await fields.nth(i).fill(['Testperson','Berlin','JWD-38'][i]);
   await page.locator('#form-fields select').selectOption('gemeldet');await page.locator('#form-fields input[type="checkbox"]').check();
   await page.locator('#bureaucracy-form button[type="submit"]').click();
   assert.equal(await page.evaluate(()=>__jwdTest.currentMission().target),'jwd-home');
-  await page.screenshot({path:resolve(out,`${name}-after-anmeldung.png`)});
+  assert.match(await page.locator('#dialogue-text').innerText(),/officially gemeldet/);await page.screenshot({path:resolve(out,`${name}-anmeldung-monologue.png`)});await page.locator('#dialogue-next').click();await page.waitForFunction(()=>!__jwdTest.state.dialogue&&!document.getElementById('city-status').hidden);await page.evaluate(()=>GermanyHUD.refresh());await page.waitForTimeout(200);const medal=await page.locator('#anmeldung-medal').evaluate(el=>({hidden:el.hidden,width:el.clientWidth,scrollWidth:el.scrollWidth,label:el.querySelector('.anmeldung-medal-label').dataset.measurement,fit:el.querySelector('.anmeldung-medal-label').dataset.pretextFit}));assert.equal(medal.hidden,false);assert.ok(medal.scrollWidth<=medal.width+2,'medal fits');assert.equal(medal.label,'pretext-0.0.9');await page.screenshot({path:resolve(out,`${name}-after-anmeldung.png`)});
   const interact=async()=>name==='desktop'?page.keyboard.press('e'):page.locator('[data-key="KeyE"]').count()?page.locator('[data-key="KeyE"]').click():page.keyboard.press('e');
   const finish=async()=>{for(let i=0;i<8&&await page.evaluate(()=>__jwdTest.state.dialogue);i++)await page.locator('#dialogue-next').click()};
   await interact();assert.equal(await page.evaluate(()=>__jwdTest.jwd.visited),true);await finish();
@@ -79,7 +79,7 @@ try{
 
   }
   const assets=await page.evaluate(()=>Germany3D.inspectAssets().jwd);assert.equal(assets.houses.length,6);assert.equal(assets.actors.length,3);assert.equal(assets.vehicles.length,3);assert.equal(assets.gardens.length,3);assert.deepEqual(errors,[]);
-  report.cases.push({name,entry,departure,assets,occupiedDoor,sweeps,textChecks,errors});await context.close();console.log(JSON.stringify({name,verdict:'PASS'}));
+  report.cases.push({name,entry,medal,departure,assets,occupiedDoor,sweeps,textChecks,errors});await context.close();console.log(JSON.stringify({name,verdict:'PASS'}));
  }
  report.complete=true;
 }finally{writeFileSync(resolve(out,'report.json'),JSON.stringify(report,null,2));server.closeAllConnections();await browser?.close();await new Promise(done=>server.close(done))}

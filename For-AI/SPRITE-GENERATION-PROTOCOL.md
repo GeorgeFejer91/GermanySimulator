@@ -580,3 +580,22 @@ must not call it Merkel. Focus mode provides the actual bone/heel/toe overlay
 and closure inspection. Older sources remain selectable; no game sprite changes.
 Only after this appearance direction is accepted should a character-specific,
 fixed-appearance binding be built and evaluated through a whole walking cycle.
+
+## Miniature neighborhood residents
+
+The current atlas has nine 16-cell rows: down, right, up, left, idle, talk,
+listen, greet and look. Talk is a source-fitted palette of closed plus five
+opening levels in three mouth shapes; it is selected from the owning speech
+cue rather than cycled as a generic animation. Each face has its own lip crease,
+attached corners and 1.6–1.9 pixel maximum aperture. Preserve the coherent
+approved faces and original alpha. Greet/look are finite connected microposes,
+with settle/listen/release states; actual speech may preempt entry. Walking
+retains calibrated distance phase and all sixteen distinct samples. The supplied
+four views support planted front conversation and ordinary direction selection,
+not a claimed smooth whole-body turn or ambient talking while walking. Source
+paint, final encodings, all transition/loop cells and real muted speech clocks
+must pass their scoped visual and lifecycle gates.
+
+Fictional neighbor direction sources live in assets/sprite-sources/neighbors/. tools/build-neighbor-sprites.py derives the four direction walks plus planted idle, talk, listen, greet and look rows, with shared figure scale and foot pivot. The city admits only the selected desktop/mobile WebP on neighborhood approach through its existing bounded asset queue. neighbor-sprites.js reads accepted displacement and dialogue ownership; collision and routes remain in game.js. Existing articulated work poses remain the fallback and chore renderer. Failed or late paint never blocks neighbor interaction. Keep private likeness references and authoring trials outside shipped assets. Match the compact proportions and restrained detail of the existing mini sprite cast; preserve complete shoes and review every encoded phase and loop seam.
+
+For expression repairs, retain the internal registration of the whole facial painting. The Inga repair replaces complete front/profile facial skin regions from coherent generated paint and preserves the original alpha, hair, body and back view. Do not translate individual eyes or lips into separate patches: this introduced visibly distorted eye/cheek/lip relationships in the rejected revision. Compare the complete face with its authoring source at native detail and the exact desktop/mobile cell before acceptance. tools/build-neighbor-sprites.py accepts a character selection through build(names=...) so a single resident repair preserves other atlas bytes and manifest entries.

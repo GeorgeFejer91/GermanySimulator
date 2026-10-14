@@ -2,19 +2,20 @@
   "schemaVersion": 2,
   "status": "explicit_runtime_speakers_verified; optional_visual_template_mapping_curated; rendered_review_pending",
   "sourceSha256": {
-    "For-AI/VOICE-CAST.json": "40d6ecc1987de11b5182ca5b4a617f1d8f559a0191f17741556d28e387588c86",
-    "game.js": "25b3ca17e11cf6d0ac433ceb87dcfe86408d25ef3ca66d56a836e1d838b9ef06",
-    "world3d.js": "c3b779866f33c412dbb5df884086071b3c634da5000ead46a982a879661f344b",
-    "buergeramt-story.js": "d567e3cbe3bd6766bce1e739c150ad006ca7c01dd773cd8d48601d25851343b5",
+    "For-AI/VOICE-CAST.json": "119cad66ca6fe2d1d3257353f325f1e8550caa983566b7c9de42a0efc85a3a16",
+    "game.js": "799653d01cc9da7513784048170b6d3719b69e88e118374490323fb1540a9ab8",
+    "world3d.js": "f6cc8497d477091e24768d5534d24e39f94715e517edb56494f2e1c6ea5dd2fe",
+    "buergeramt-story.js": "c87706d2169c5aa4be0eb33351827a9e4c91212a5c7967666e042e44af2f0cf3",
     "street-wisdom.js": "63697e599c58c27f0acb259e60ee092eda4472673c1bfc2907ac6e1d14a07ae2",
+    "neighbor-sprites.js": "3dfd3c49edc5b0cb747343ef76cdc8dab9cf68f5f7b3fd2a8eae978ae68ee20a",
     "assets/models/street-characters/models.js": "f221585150735d365e007f2eadfe58d1461f704824f8bd18f356f6bacfe5a4a8",
     "assets/models/street-characters/runtime.js": "d4c25e1d37762571a0aeedc4e15c456e137fa9be21abfccb20829a1f58d16f62",
     "assets/models/street-characters/persona-map.js": "77fd249de275c7e12debd0af4f14f30826158e0207c6920c5b01633d2aaee652"
   },
   "counts": {
     "newNonpoliticalProfiles": 56,
-    "existingPoliticalProfiles": 2,
-    "institutionPhoneProfiles": 1,
+    "existingPoliticalProfiles": 5,
+    "institutionPhoneProfiles": 2,
     "namedCityNpcBindings": 19,
     "namedCrowdIdentities": 12,
     "dedicatedStreetAdvisers": 3,
@@ -90,6 +91,14 @@
       "profileId": "f700170f840543bca7413d3ccf6ac028",
       "profileName": "GS Kriminalpolizei",
       "referenceSha256": "ef452114430b47167239cdb065b1e01d502c0148f1492ac1b66098a03c0ea82e"
+    },
+    {
+      "gameRole": "jobcenter-overlord",
+      "voiceId": "jobcenter-overlord",
+      "displayRole": "Jobcenter overlord",
+      "profileId": "1ea9044d630b43c9928956a501b90ded",
+      "profileName": "GS Evil",
+      "referenceSha256": "81e92468275ca43d304f65f87973f96d5557fbdca4ba766ca5447c3dce7ce3aa"
     }
   ],
   "staticPatronDialogue": [
@@ -267,6 +276,35 @@
         5,
         8
       ]
+    }
+  ],
+  "neighborSpeakers": [
+    {
+      "actorId": "jwd-parent",
+      "role": "parent",
+      "voiceId": "jwd-heiko-maaslos",
+      "fullName": "Heiko Maaslos",
+      "lineCount": 15,
+      "profileId": null,
+      "fallback": "browser-name"
+    },
+    {
+      "actorId": "jwd-watcher",
+      "role": "watcher",
+      "voiceId": "jwd-inga-maaslos",
+      "fullName": "Inga Maaslos",
+      "lineCount": 11,
+      "profileId": "04e241f5e0734684ba3626aa669a70c1",
+      "fallback": "captions"
+    },
+    {
+      "actorId": "jwd-swabian",
+      "role": "swabian",
+      "voiceId": "jwd-frau-schwabingen",
+      "fullName": "Frau Schwabingen",
+      "lineCount": 10,
+      "profileId": null,
+      "fallback": "browser-name"
     }
   ],
   "optionalStreetVisualTemplates": [

@@ -31,13 +31,21 @@ for (const person of [...fixed, ...roles]) {
   `Missing identity or demeanor audit for ${person.voiceId}`);
 }
 
-const runtimeFiles = ['game.js', 'world3d.js', 'buergeramt-story.js', 'street-wisdom.js'];
+const runtimeFiles = ['game.js', 'world3d.js', 'buergeramt-story.js', 'street-wisdom.js','neighbor-sprites.js'];
 const explicit = runtimeFiles.flatMap(file => [...source(file).matchAll(/\bvoiceId\s*:\s*["']([^"']+)["']/g)]
   .map(match => ({file, voiceId: match[1]})));
 for (const entry of explicit) requireMatch(byVoice.has(entry.voiceId),
   `Uncatalogued explicit ${entry.voiceId} in ${entry.file}`);
 
 const game = source('game.js');
+const neighborSource=game.match(/const voiceId=(\{swabian:[^\n;]+\})\[n\.jwdRole\]/)?.[1];
+requireMatch(neighborSource,'Missing explicit neighbor speech allocation');
+const neighborMap=vm.runInNewContext('('+neighborSource+')'),neighborSpeakers=[];
+for(const [role,actorId] of Object.entries({parent:'jwd-parent',watcher:'jwd-watcher',swabian:'jwd-swabian'})){
+ const voiceId=neighborMap[role],person=byVoice.get(voiceId),binding=cast.productionVoices[voiceId];
+ requireMatch(person?.gameRole==='jwd-neighbor'&&person.gameCharacterId===actorId&&person.dialogue?.length&&game.includes(`id:"${actorId}"`),`Neighbor model/dialogue/cast mismatch: ${actorId}`);
+ neighborSpeakers.push({actorId,role,voiceId,fullName:person.fullName,lineCount:person.dialogue.length,profileId:binding?.profileId??null,fallback:binding?.fallback??person.fallback});
+}
 const city = [...game.matchAll(/\{[^\n{}]*id:"(city-[^"]+)"[^\n{}]*fullName:"([^"]+)"[^\n{}]*voiceId:"([^"]+)"/g)]
   .map(([, gameCharacterId, fullName, voiceId]) => ({gameCharacterId, fullName, voiceId}));
 requireMatch(city.length === 19, `Expected 19 named city NPCs; found ${city.length}`);
@@ -83,9 +91,10 @@ for (const person of institutions) {
   requireMatch(/^[0-9a-f]{32}$/.test(person.secretTunnelProfileId) &&
     person.secretTunnelProfileName && person.reference?.workingReferenceSha256,
   `Missing saved institution profile binding for ${person.voiceId}`);
-  requireMatch(person.gameRole === 'buergeramt-phone' &&
-    storyContext.window.BuergeramtStory.call.voiceId === person.voiceId,
-  `Institution phone/dialogue mismatch for ${person.voiceId}`);
+  if(person.gameRole==='buergeramt-phone')requireMatch(storyContext.window.BuergeramtStory.call.voiceId===person.voiceId,
+    `Institution phone/dialogue mismatch for ${person.voiceId}`);
+  else requireMatch(person.gameRole==='jobcenter-overlord'&&game.includes('speechClip("jobcenter-overlord")'),
+    `Institution encounter/dialogue mismatch for ${person.voiceId}`);
 }
 const patronModels = [...world.matchAll(/amtCharacter\("([^"]+)",(-?[\d.]+),(-?[\d.]+),[^\n]*?\{id:"([^"]+)"/g)]
   .filter(([, kind]) => ['renter', 'parent', 'pensioner'].includes(kind))
@@ -152,6 +161,7 @@ const report = {
   city,
   crowdVoiceIds: crowd,
   dedicatedStreetAdvisers: streetAdvisers,
+  neighborSpeakers,
   optionalStreetVisualTemplates: STREET_CATALOG.map(({id, title, role}) =>
     ({id, title, role, genderPresentation: STREET_TEMPLATE_GENDER[id]})),
   optionalStreetPersonaMapping: streetPersonaMapping,

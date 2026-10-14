@@ -5,9 +5,21 @@ import {tmpdir} from 'node:os';
 import {join} from 'node:path';
 import {execFileSync} from 'node:child_process';
 import vm from 'node:vm';
-import {archiveFiles,fixedRecordingsBlock,matchesProduction,runtimeBlock,spokenWords,streetRulesBlock,verifyProfiles,writeArchiveMetadata} from '../tools/curate-voice-library.mjs';
+import {archiveFiles,fixedRecordingsBlock,matchesProduction,neighborRecordingsBlock,neighborSpokenWords,runtimeBlock,spokenWords,streetRulesBlock,verifyProfiles,writeArchiveMetadata} from '../tools/curate-voice-library.mjs';
 import {harness} from './amt-harness.mjs';
 const cast=JSON.parse(readFileSync('For-AI/VOICE-CAST.json'));
+
+test('neighbor takes bind exact speaker/text, unprompted encoded words and measured mouth energy',()=>{
+ const manifest=JSON.parse(readFileSync('assets/voices/neighbors/inga-manifest.json'));
+ assert.doesNotThrow(()=>neighborRecordingsBlock(cast,[manifest]));
+ const context={window:{}};vm.runInNewContext(readFileSync('For-AI/AUDIO-TEXT-LIBRARY.js','utf8'),context);const catalog=context.window.GermanySimulatorAudioText;
+ for(const clip of manifest.clips){assert.equal(catalog.recordedClip(clip.voiceId,clip.text),'./'+clip.file);assert.equal(catalog.candidateClip(clip.voiceId,clip.text),'./'+clip.file,'the production speech producer must resolve approved neighbor audio without a preview flag')}
+ const clip=manifest.clips[0],one={...manifest,requestedLineCount:1,clips:[clip],heldPrivate:[]};
+ for(const change of [{actorId:'jwd-parent'},{asr:clip.asr+' nicht'},{asrScriptPrompt:clip.text},{mouthHz:20},{mouthEnergy:[256]}])assert.throws(()=>neighborRecordingsBlock(cast,[{...one,clips:[{...clip,...change}]}]));
+ assert.equal(neighborSpokenWords('Inga Maaslos, People & Culture.'),neighborSpokenWords('Inga Maslos, People and Culture.'));
+ assert.notEqual(neighborSpokenWords('Inga Maaslos'),neighborSpokenWords('Inga Maslow'));
+ assert.notEqual(neighborSpokenWords('Sie möchten dazugehören'),neighborSpokenWords('Sie möchten nicht dazugehören'));
+});
 
 test('fixed runtime takes reject engine, model, reference and processing drift even with the same profile',()=>{
  const context={};vm.runInNewContext(runtimeBlock(cast)+';this.accepts=productionClip;',context);

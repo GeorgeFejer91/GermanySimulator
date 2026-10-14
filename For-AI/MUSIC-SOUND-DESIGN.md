@@ -60,6 +60,27 @@ The existing city soundtrack remains governed by its music toggle, foreground au
 
 ## Review evidence
 
+### Neighborhood walk-and-talk (`jwd-neighbor-exact-dialogue`)
+
+E/touch contact after registration and the home visit commits one current
+resident conversation; the existing visitor route can also produce contact
+within range. `game.js` owns its revision and final acknowledgement. The named
+resident owns its exact German `jwdCopy` lines and paired English subtitles;
+the cast owns the three stable voice IDs. Critical dialogue priority uses the
+existing foreground speech bus, queue, ducking and cancellation guards.
+There is no new music or scheduler. Physical travel uses simulation displacement;
+planted entry has a nominal 0.69-second duration plus terminal-frame display and can be preempted by observed speech
+start. Recorded Web Audio time owns speech/subtitles and measured mouth energy;
+observed synthesis start owns the estimated browser mouth clock. Caption-only
+fallback never supplies an audible receipt. Pause freezes the owned pose.
+Completion closes the mouth and leaves a listener until E/touch advances; only
+the current final acknowledgement credits an introduction. Replaced/duplicate
+completion, cancellation or late decoding cannot recover ownership. Return
+travel preempts the brief planted release. Every dialogue line and media source
+uses the existing bounded speech lifecycle; leaving/restarting clears it.
+Use authorization, automated word/level checks, muted browser timing, physical
+device results and perceptual listening remain distinct evidence.
+
 ### Jobcenter overlord (`jobcenter-overlord`, 2026-10-13)
 
 Door interaction owns one visit; distance at or below 13 metres commits its single speech start. The user-supplied GS Evil recording is processed offline by `tools/build-jobcenter-audio.py`: minus four semitones, a quiet low octave, short reflections and restrained compression. The final mono MP3 is 26.783 seconds, −18.01 LUFS and −2.88 dBTP. Independent ASR retained the exact authored words after compound normalization; this is transcript evidence, not perceptual approval. Its 40 Hz final-encoded energy and attack tracks use bytes divided by 255 at runtime. Native media time drives the flame, while the scene clock owns free movement and proximity growth. Media `ended` owns immediate city ejection, without a guessed playback timer. The encounter can then composite its short, owned Gaussian release over the live street; this visual continuation does not hold or restart the recording. The final command drives the smoothed heat rise described in `GAMEPLAY.md`. Missing/disabled/stalled audio retains a bounded caption-only fallback, and every callback is visit-owned. City music and other speech stop on entry and resume their ordinary policies after exit; no new audio context or continuous sound bed is added. Listening and physical-device results remain separately recorded.

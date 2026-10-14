@@ -30,7 +30,7 @@
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Grenze:wght@500;600;700;800;900&amp;family=UnifrakturCook:wght@700&amp;display=swap" media="print" onload="this.media='all'">
   <link rel="stylesheet" href="./styles.css?v=20261013-welcome">
   <link rel="stylesheet" href="./buergeramt.css?v=20261013-first-person-look">
-  <link rel="stylesheet" href="./game-hud.css?v=20261012-browser-smoothness">
+  <link rel="stylesheet" href="./game-hud.css?v=20261013-anmeldung-neighbors">
 </head>
 <body class="preloading">
 <section id="preload" aria-label="Spiel wird geladen" aria-busy="true">
@@ -50,7 +50,7 @@
     <div id="mission-pointer-space" aria-hidden="true"></div>
   </aside>
   <nav id="city-status" class="city-status" aria-label="Spielakte" hidden>
-    <aside id="germanness-hud" class="hud germanness" aria-label="Germanness"><small>GERMANNESS</small><div class="germanness-meter" role="progressbar" aria-label="Germanness" aria-valuemin="0" aria-valuemax="15" aria-valuenow="0"><i id="germanness-fill"></i></div><output id="germanness-value">0/15</output><span id="law-power">§-MACHT AB 9/15</span></aside>
+    <aside id="germanness-hud" class="hud germanness" aria-label="Germanness"><span id="anmeldung-medal" class="anmeldung-medal" hidden role="img" aria-label="Form A38 Auszeichnung · Anmeldung"><i aria-hidden="true"></i><span class="anmeldung-medal-label" aria-hidden="true">A38<br>AUSZEICHNUNG</span></span><small>GERMANNESS</small><div class="germanness-meter" role="progressbar" aria-label="Germanness" aria-valuemin="0" aria-valuemax="15" aria-valuenow="0"><i id="germanness-fill"></i></div><output id="germanness-value">0/15</output><span id="law-power">§-MACHT AB 9/15</span></aside>
     <button id="file-toggle" type="button" aria-haspopup="dialog" aria-controls="case-file" aria-expanded="false"><span data-de="AKTE" data-en="FILE">AKTE</span> <kbd>M</kbd> <span class="file-day"><span data-de="TAG" data-en="DAY">TAG</span> <b id="day">1/3</b></span></button>
     <span id="energy-warning" hidden></span>
     <div class="wanted"><small>POLIZEI</small><div id="stars"></div><em id="offence" hidden></em></div>
@@ -127,7 +127,7 @@
 </main>
 <script type="importmap">{"imports":{"three":"./assets/vendor/three/0.186.0/build/three.module.min.js","three/addons/":"./assets/vendor/three/0.186.0/examples/jsm/"}}</script>
 <script src="./For-AI/QUIZ-CHARACTER-DICTIONARY.js?v=20261012-browser-smoothness"></script>
-<script src="./For-AI/AUDIO-TEXT-LIBRARY.js?v=20261013-jobcenter1"></script>
+<script src="./For-AI/AUDIO-TEXT-LIBRARY.js?v=20261014-neighbor-voices"></script>
 <script src="./street-wisdom.js?v=20261012-browser-smoothness"></script>
 <script src="./goerlitzer-park.js?v=20261012-browser-smoothness"></script>
 <script src="./assets/vendor/qrcode/qrcode.js"></script>
@@ -145,12 +145,12 @@
 <script type="module" src="./buergeramt-fit.js?v=20261013-four-calls"></script>
 <script src="./character-interactions.js?v=20261012-browser-smoothness"></script>
 <script src="./tourist-animation.js?v=20261012-browser-smoothness"></script>
-<script src="./jwd-gardens.js?v=20261013-jwd-gardens"></script>
-<script src="./game.js?v=20261013-jobcenter-direct"></script>
-<script type="module" src="./game-hud.js?v=20261013-welcome"></script>
+<script src="./jwd-gardens.js?v=20261014-neighbor-performance"></script>
+<script src="./game.js?v=20261014-neighbor-performance"></script>
+<script type="module" src="./game-hud.js?v=20261014-neighbor-performance"></script>
 <script type="module" src="./subtitle-layout.js?v=20261012-browser-smoothness"></script>
 <script type="module" src="./quiz-layout.js?v=20261012-browser-smoothness"></script>
-<script type="module" src="./world3d.js?v=20261014-floor-pigment1"></script>
+<script type="module" src="./world3d.js?v=20261014-neighbor-performance"></script>
 </body>
 </html>
 

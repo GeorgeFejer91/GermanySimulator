@@ -3446,6 +3446,228 @@
         "asrWordExact": true,
         "status": "private candidate; not release-cleared"
       }
+    },
+    {
+      "gameCharacterId": "jwd-parent",
+      "gameRole": "jwd-neighbor",
+      "voiceId": "jwd-heiko-maaslos",
+      "fullName": "Heiko Maaslos",
+      "gender": "male",
+      "generalDemeanor": "Fictional professor of systems engineering: awkwardly assembled sentences and smug, supposedly helpful explanations for why he is right. Formal status, selective data and assumed consent justify his intrusions.",
+      "targetValence": "restrained disapproval",
+      "targetArousal": "low to medium",
+      "dialogue": [
+        {
+          "locator": "game.js jwdCopy.parent.de[0]",
+          "text": "Sehr geehrter Herr Nachbar, Professor Heiko Maaslos, Systemtechnik. Dass Sie hier jetzt wohnen, freut uns, gerade unter Ihren Umständen, wo das ja nicht selbstverständlich. Ich erkläre Ihnen die Straße gern. Dann haben Sie es gleich richtig.",
+          "english": "Dear neighbor, Professor Heiko Maaslos, systems engineering. That you now live here pleases us, especially in your circumstances, where that is hardly a given. I am happy to explain the street to you. Then you will have it right from the start."
+        },
+        {
+          "locator": "game.js jwdCopy.parent.de[1]",
+          "text": "Meine Frau macht People & Culture. Unser Theodor, acht, sechs Sprachen. Nur Latein, da fehlt noch, also die Konsequenz seinerseits. Wir machen keinen Druck. Was er sich vorgenommen haben sollte, daran erinnern wir ihn freundlich.",
+          "english": "My wife works in People & Culture. Our Theodor, eight, six languages. Only Latin, there is still a lack of, well, consistency on his part. We apply no pressure. What he should have resolved to do, we remind him of that kindly."
+        },
+        {
+          "locator": "game.js jwdCopy.parent.de[2]",
+          "text": "Ihr Garten, was ich Ihnen vorhin erklären wollte, weil das als Begrüßung: Die Vorgaben gelten trotzdem. Verstehen Sie mich bitte richtig, ich meine es hilfreich. Wenn Sie das so machen wie ich sage, ist ja Ihr Problem schon gelöst. Herzlich willkommen.",
+          "english": "Your garden, what I meant to explain earlier, because that was a greeting: the requirements still apply. Please understand me correctly, I mean this helpfully. If you do it the way I say, your problem is already solved. A very warm welcome."
+        },
+        {
+          "locator": "game.js jwdCopy.paint.de[0]",
+          "text": "Theodor, Hände hinter den Rücken, bitte. Dein Reißverschluss, wenn der an den Metalliclack, dann haben wir eine irreversible Oberfläche. Das hatten wir doch gemeinsam besprochen. Ich erkläre es dir nur, damit du nicht wieder falsch verstehst.",
+          "english": "Theodor, hands behind your back, please. Your zipper, if that goes against the metallic paint, then we have an irreversible surface. We did discuss that together. I am only explaining it so you do not misunderstand again."
+        },
+        {
+          "locator": "game.js jwdCopy.paint.de[1]",
+          "text": "Unser Kind ist selbstverständlich das Wichtigste. Gerade weil ich ihn liebe, muss er ja, das Dienstfahrzeug ist kein Kuscheltier. Hinter der Garage kann er frei spielen, wo er nichts berührt. Sie sehen: Die Lösung habe ich für ihn schon gefunden.",
+          "english": "Our child is naturally what matters most. Precisely because I love him, he must, well, the executive car is not a cuddly toy. He can play freely behind the garage, where he touches nothing. You see: I have already found the solution for him."
+        },
+        {
+          "locator": "game.js jwdCopy.concern.de[0]",
+          "text": "Ihr Rasen, Sie hatten wohl den Eindruck, dass ich ungefragt. Nein, ich wollte Ihnen die Pflanzen erklären, die hier raus müssen. Als Systemtechniker erkenne ich solche Fehlentwicklungen früh. Dass Sie nicht zu Hause, dafür kann ich ja nun nichts.",
+          "english": "Your lawn, you apparently had the impression that I, uninvited. No, I wanted to explain the plants to you that need to come out here. As a systems engineer, I recognize such faulty developments early. That you were not at home, I can hardly be responsible for that."
+        },
+        {
+          "locator": "game.js jwdCopy.concern.de[1]",
+          "text": "Die Stellen habe ich schon markiert, Ihnen zuliebe. Ein Dank ist gar nicht nötig. Bis wann Sie es erledigen, das reicht mir als Antwort. Dann wissen wir beide, dass Sie meine Hilfe auch verstanden haben.",
+          "english": "I have marked the spots already, for your benefit. Thanks are quite unnecessary. When you will have it done, that is all I need as an answer. Then we both know you have understood my help as well."
+        },
+        {
+          "locator": "game.js jwdCopy.polish.de[0]",
+          "text": "Die Geräusche meiner Fahrzeugpflege, dass Sie die jetzt stören. Dabei hatte ich Ihnen erklärt, wann ich poliere. Sie haben nichts gesagt, also Zustimmung. Das ist die logische Folge, die ich Ihnen gern noch einmal freundlich herleite.",
+          "english": "The sounds of my car care, that they now bother you. Yet I explained when I polish. You said nothing, therefore agreement. That is the logical consequence, which I am happy to derive for you kindly once more."
+        },
+        {
+          "locator": "game.js jwdCopy.polish.de[1]",
+          "text": "Für Ihre Verhältnisse ist der Garten schon ordentlich. Das war positiv, damit Sie sich, also eine Ermutigung. Wenn Sie darin eine Wertung hören, dann haben Sie meinen Satz nicht in seinem richtigen Sinne verstanden. Kein Vorwurf! Ich erkläre Ihnen das gern.",
+          "english": "By your standards the garden is quite respectable already. That was positive, so that you feel, well, an encouragement. If you hear a judgment in it, then you have not understood my sentence in its correct sense. No accusation! I am happy to explain it."
+        },
+        {
+          "locator": "game.js jwdCopy.parking.de[0]",
+          "text": "Ihr Fahrzeug, was Sie da Überwachung nennen, ist ja, dass ich Ihnen sachlich helfen kann. Uhrzeit, Kennzeichen, Bordsteinabstand. Drei Messgrößen. Als Professor für Systemtechnik weiß ich, ohne Daten bleibt Ihre Meinung eben nur eine Meinung.",
+          "english": "Your vehicle, what you call surveillance there is, well, so that I can help you objectively. Time, registration, distance from the curb. Three measurements. As a professor of systems engineering I know that without data your opinion remains merely an opinion."
+        },
+        {
+          "locator": "game.js jwdCopy.parking.de[1]",
+          "text": "Mein Zettel war ein Hilfsangebot, keine Beschwerde. Die Durchschrift, damit Sie später nicht, also unterschiedliche Erinnerungen vermeiden wir damit. Sehen Sie, ich denke für Sie gleich mit. Das ist doch nett.",
+          "english": "My note was an offer of help, no complaint. The duplicate, so that you do not later, well, we avoid divergent memories that way. You see, I am thinking ahead for you as well. That is nice, surely."
+        },
+        {
+          "locator": "game.js jwdCopy.latin.de[0]",
+          "text": "Theodor hat Ihnen gesagt, er sei überfordert? Beim Frühstück hat er über Dinosaurier, sehr ausführlich sogar. Wer dafür Ressourcen hat, kann ja Latein. Ich möchte ihm nur erklären, warum seine Schlussfolgerung so nicht stimmt.",
+          "english": "Theodor told you he was overwhelmed? At breakfast he spoke about dinosaurs, at considerable length even. Anyone with resources for that can do Latin. I only want to explain to him why his conclusion is incorrect in that form."
+        },
+        {
+          "locator": "game.js jwdCopy.latin.de[1]",
+          "text": "Acht Jahre, sechs Sprachen, das ist doch kein Grund, dass Latein jetzt liegen bleibt. Seine Freizeit darf er selbst, wenn die Übungen fertig. Ganz frei! Ich habe ihm die Bedingung extra erklärt, damit er merkt, dass ich recht habe und es gut meine.",
+          "english": "Eight years old, six languages, that is hardly a reason for Latin to be neglected now. His leisure time he may arrange himself, once the exercises are done. Entirely freely! I explained the condition especially so he realizes I am right and mean well."
+        },
+        {
+          "locator": "game.js jwdCopy.smalltalk.de[0]",
+          "text": "Unsere Gespräche sind Ihnen zu viel? Gestern haben Sie genickt, also dass Sie aufgeschlossen waren, davon durfte ich ausgehen. Ich möchte Ihnen nur helfen, die Dinge richtig einzuordnen. Dass Sie das anders empfinden, ändert ja die Sachlage nicht.",
+          "english": "Our conversations are too much for you? Yesterday you nodded, so that you were receptive, I was entitled to assume that. I only want to help you put things in their correct context. That you feel differently hardly changes the facts."
+        },
+        {
+          "locator": "game.js jwdCopy.smalltalk.de[1]",
+          "text": "Sie können selbstverständlich jederzeit gehen. Nur bevor Sie, die offenen Punkte muss ich Ihnen noch erklären. Sonst nehmen Sie ein Missverständnis mit, und das möchte ich Ihnen ersparen. Sie sehen, ich halte Sie aus Rücksicht noch kurz hier.",
+          "english": "Of course you can leave at any time. Only before you, I still have to explain the outstanding points. Otherwise you take a misunderstanding away, and I want to spare you that. You see, I am keeping you here briefly out of consideration."
+        }
+      ],
+      "status": "Existing browser dialogue fallback; dedicated saved-profile selection pending",
+      "fallback": "browser-name"
+    },
+    {
+      "gameCharacterId": "jwd-watcher",
+      "gameRole": "jwd-neighbor",
+      "voiceId": "jwd-inga-maaslos",
+      "fullName": "Inga Maaslos",
+      "gender": "female",
+      "generalDemeanor": "Fictional corporate HR neighbor: polished positivity, presumptive commitment and controlling politeness.",
+      "targetValence": "restrained disapproval",
+      "targetArousal": "low to medium",
+      "dialogue": [
+        {
+          "locator": "game.js jwdCopy.watcher.de[0]",
+          "text": "Inga Maaslos, People & Culture. Wie schön, dass Sie da sind! Wir machen hier gleich ein kleines neighborhood onboarding. Sie möchten doch bestimmt dazugehören?",
+          "english": "Inga Maaslos, People & Culture. So lovely to have you here! Let us do a little neighborhood onboarding. You do want to feel included, don't you?"
+        },
+        {
+          "locator": "game.js jwdCopy.watcher.de[1]",
+          "text": "Beim nächsten Nachbarschafts-offsite verbinden wir uns als Team. Sie bringen den Kuchen, räumen auf und protokollieren. Ihre Idee, ganz toll! Ich halte Ihr commitment schon mal fest.",
+          "english": "At our next neighborhood offsite we connect as a team. You bring the cake, clear up and take minutes. Your idea, wonderful! I'll record your commitment."
+        },
+        {
+          "locator": "game.js jwdCopy.watcher.de[2]",
+          "text": "Warum sind Ihre Rollos unten? Was verstecken Sie denn da? Und diese Hecke: Unser Sohn hat eine ungerade Linie gesehen. Jetzt fragt er nach Freizeit.",
+          "english": "Why are your blinds down? What are you hiding there? And that hedge: our son saw an uneven line. Now he's asking about free time."
+        },
+        {
+          "locator": "game.js jwdCopy.electric.de[0]",
+          "text": "Unser Elektroauto steht für Verantwortung. Deshalb darf Theodor nur mit sauberen Händen daran vorbeigehen. Spielen kann er hinter der Garage.",
+          "english": "Our electric car stands for responsibility. That's why Theodor may only walk past with clean hands. He can play behind the garage."
+        },
+        {
+          "locator": "game.js jwdCopy.electric.de[1]",
+          "text": "Ihr wilder Garten ist sicher gut gemeint. Unser Gärtner nennt so etwas unterlassenes Engagement. Ich gebe Ihnen gern seine Rechnung als Orientierung.",
+          "english": "Your wild garden is surely well intentioned. Our gardener calls it neglected engagement. I'd be happy to give you his invoice as a guide."
+        },
+        {
+          "locator": "game.js jwdCopy.gardenRules.de[0]",
+          "text": "Der Weg ist gemeinschaftlich. Die Entscheidung, wer darauf stehen darf, treffe ich vorläufig kommissarisch.",
+          "english": "The path is shared. For now, I am acting head of deciding who may stand on it."
+        },
+        {
+          "locator": "game.js jwdCopy.gardenRules.de[1]",
+          "text": "Sie möchten durch? Selbstverständlich. Erst noch die Hecke: individuell, sehr mutig. In unserer Straße sagen wir dazu Handlungsbedarf.",
+          "english": "You'd like to get through? Of course. First, the hedge: individual, very brave. In this street, we call that a need for action."
+        },
+        {
+          "locator": "game.js jwdCopy.blinds.de[0]",
+          "text": "Noch eins: Warum haben Sie die Rollos unten? Was verstecken Sie denn da?",
+          "english": "One more thing: why are your blinds down? What are you hiding there?"
+        },
+        {
+          "locator": "game.js jwdCopy.blinds.de[1]",
+          "text": "Ach, schlafen. Dafür gibt es die Nachtruhe. Ich beobachte das. Bis später!",
+          "english": "Oh, sleeping. That's what quiet hours are for. I'll be keeping an eye on this. See you later!"
+        },
+        {
+          "locator": "game.js jwdCopy.schedule.de[0]",
+          "text": "Moment bitte. Unser Sohn hat zwischen Mandarin und Altgriechisch elf Minuten unverplante Zeit. Das ist ein Entwicklungsrisiko.",
+          "english": "One moment, please. Our son has eleven unscheduled minutes between Mandarin and Ancient Greek. That's a developmental risk."
+        },
+        {
+          "locator": "game.js jwdCopy.schedule.de[1]",
+          "text": "Wir haben Spielen jetzt als interkulturelles Kompetenztraining eingetragen. Bitte lachen Sie leiser. Heiko wertet das sonst als Rückmeldung.",
+          "english": "We've now scheduled play as intercultural competence training. Please laugh more quietly. Heiko will otherwise treat it as feedback."
+        }
+      ],
+      "status": "User-selected GS Inga Maaslos profile verified; all 11 exact interaction lines independently encoded-word/level checked; user-directed use authorized; listening NOT RUN",
+      "fallback": "captions"
+    },
+    {
+      "gameCharacterId": "jwd-swabian",
+      "gameRole": "jwd-neighbor",
+      "voiceId": "jwd-frau-schwabingen",
+      "fullName": "Frau Schwabingen",
+      "gender": "female",
+      "generalDemeanor": "Prim Swabian house-rule enforcer; economical disapproving delivery and self-satisfied courtesy.",
+      "targetValence": "restrained disapproval",
+      "targetArousal": "low to medium",
+      "dialogue": [
+        {
+          "locator": "game.js jwdCopy.swabian.de[0]",
+          "text": "Grüß Gott, i bin die Frau Schwabingen. Willkommen im family neighborhood. Die Kehrwoche isch hier kein optional feature.",
+          "english": "Hello, I'm Mrs Schwabingen. Welcome to the family neighborhood. The weekly sweeping rota is not an optional feature."
+        },
+        {
+          "locator": "game.js jwdCopy.swabian.de[1]",
+          "text": "Haben Sie Ihre Kehrwoche gemacht? I hab den Besen schon ausgerichtet. Jetzt lernen Sie erst mal die anderen kennen.",
+          "english": "Have you done your sweeping duty? I've already aligned the broom. Go and meet the others first."
+        },
+        {
+          "locator": "game.js jwdCopy.lawn.de[0]",
+          "text": "Für Ihre Verhältnisse sieht der Garten ja schon ordentlich aus. Also, wenn man das Unkraut als Gestaltung zählt.",
+          "english": "The garden looks quite respectable, by your standards. If we count the weeds as landscaping."
+        },
+        {
+          "locator": "game.js jwdCopy.lawn.de[1]",
+          "text": "Die Bienen? Bei mir summen die auch. Aber innerhalb der Grundstücksgrenze. I hab Ihnen die beanstandeten Halme markiert.",
+          "english": "The bees? Mine buzz too. But within the property boundary. I've marked the offending blades of grass for you."
+        },
+        {
+          "locator": "game.js jwdCopy.sweeping.de[0]",
+          "text": "Halt, nur ganz kurz! Haben Sie schon Kehrwoche gemacht? Der Staub liegt noch quer zur Laufrichtung.",
+          "english": "Stop, just a moment! Have you done your sweeping? The dust is still lying across the direction of travel."
+        },
+        {
+          "locator": "game.js jwdCopy.sweeping.de[1]",
+          "text": "I will jetzt net lang schwätze. Nur: Montag fegen, Dienstag nachfegen. So. Jetzt dürfen Sie los.",
+          "english": "I won't keep you long. Just sweep on Monday, sweep again on Tuesday. There. You may go now."
+        },
+        {
+          "locator": "game.js jwdCopy.hedge.de[0]",
+          "text": "Moment! Ihre Hecke wächst außerhalb unserer gemeinsamen expectations. Wann schneiden Sie endlich?",
+          "english": "One moment! Your hedge is growing beyond our shared expectations. When will you finally trim it?"
+        },
+        {
+          "locator": "game.js jwdCopy.hedge.de[1]",
+          "text": "Gut, dann reden wir später über die Schnittzeiten. Und die Höhe. Und das Grün. Gehen Sie ruhig.",
+          "english": "Fine, we'll discuss trimming times later. And the height. And the shade of green. Off you go."
+        },
+        {
+          "locator": "game.js jwdCopy.letter.de[0]",
+          "text": "I steh hier net privat vor Ihrem Rasen. I vertrete die Hausordnung. Das macht einen Unterschied.",
+          "english": "I'm not standing in front of your lawn in a personal capacity. I represent the house rules. There is a difference."
+        },
+        {
+          "locator": "game.js jwdCopy.letter.de[1]",
+          "text": "Mein Brief lag in Ihrem Briefkasten. Keine Antwort. Deshalb noch ein Brief, dass Sie auf den ersten Brief antworten sollen. Ganz zwanglos.",
+          "english": "My letter was in your letterbox. No reply. So another letter asking you to answer the first letter. No pressure."
+        }
+      ],
+      "status": "Existing browser dialogue fallback; dedicated saved-profile selection pending",
+      "fallback": "browser-name"
     }
   ],
   "additionalVisualProfileVerification": {
@@ -4068,6 +4290,18 @@
       "referenceSha256": "9a43f754972aa8a5dfa491d4c97f0eac417b0725731aaa417617d82bc43b3f6c",
       "renderer": "Secret Tunnel 6 bundled OmniVoice Rust via installed --voice-cli",
       "modelRevision": "c5fdb5ccb189668d56333f77ba2629f4cd7535f4"
+    },
+    "jwd-inga-maaslos": {
+      "profileId": "04e241f5e0734684ba3626aa669a70c1",
+      "profileName": "GS Inga Maaslos",
+      "originalSha256": "83d49bbef3995346b6ba352d92c6535b9c97e2d73928ab4c50f592eb0cbb36b7",
+      "referenceSha256": "18d6bde7a384e6c58a383155664aee9be36516d48e4bc1eb4c5087b38935dd53",
+      "renderer": "omnivoice-rs",
+      "modelRevision": "wide-rank-v2-prompt-preprocess",
+      "processing": "dry mono 24 kHz / 64 kbps MP3; two-pass EBU R128 -18 LUFS, -2.5 dBTP target; metadata removed",
+      "fallback": "captions",
+      "selectedOn": "2026-10-14",
+      "selection": "User supplied saved GS Inga Maaslos profile for the fictional neighbor; use authorized, perceptual listening NOT RUN"
     }
   },
   "productionExceptions": [

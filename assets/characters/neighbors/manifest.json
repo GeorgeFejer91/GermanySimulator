@@ -1,0 +1,260 @@
+{
+  "heiko": {
+    "sha256": "dddede10ccd05c380d2768e3d3b553f7a7c6e7a5fb780b0d4d0ea82e28552b9f",
+    "rows": [
+      "down",
+      "right",
+      "up",
+      "left",
+      "idle",
+      "talk",
+      "listen",
+      "greet",
+      "look"
+    ],
+    "frames": 16,
+    "mouthProfile": {
+      "corners": [
+        57,
+        79
+      ],
+      "crease": [
+        73.2,
+        72.8,
+        72.5,
+        72.8,
+        73.1
+      ],
+      "aperture": 1.9,
+      "sourceSha256": "c6957ccdc8c5483e1e4fa149d3bef08323e85d7b661ac5b428d5ffc1093dfad2",
+      "facing": "front",
+      "modes": [
+        "open",
+        "round",
+        "spread"
+      ],
+      "closedFrame": 0
+    },
+    "cell": [
+      128,
+      192
+    ],
+    "pivot": [
+      64,
+      180
+    ],
+    "distancePerCycle": 16.941176470588236,
+    "groundSpeedCalibration": "rig stance; encoded sole assessment in output/neighbors",
+    "bytes": 1014042,
+    "encodedFrameChecks": [
+      {
+        "row": 0,
+        "distinctDecodedFrames": 16
+      },
+      {
+        "row": 1,
+        "distinctDecodedFrames": 16
+      },
+      {
+        "row": 2,
+        "distinctDecodedFrames": 16
+      },
+      {
+        "row": 3,
+        "distinctDecodedFrames": 16
+      },
+      {
+        "row": 4,
+        "distinctDecodedFrames": 16
+      },
+      {
+        "row": 5,
+        "distinctDecodedFrames": 16
+      },
+      {
+        "row": 6,
+        "distinctDecodedFrames": 16
+      },
+      {
+        "row": 7,
+        "distinctDecodedFrames": 16
+      },
+      {
+        "row": 8,
+        "distinctDecodedFrames": 16
+      }
+    ]
+  },
+  "inga": {
+    "sha256": "561379ca5b72671631049486926c5787bd907baa8a14b892a132c6c25a735cd0",
+    "rows": [
+      "down",
+      "right",
+      "up",
+      "left",
+      "idle",
+      "talk",
+      "listen",
+      "greet",
+      "look"
+    ],
+    "frames": 16,
+    "mouthProfile": {
+      "corners": [
+        60,
+        81
+      ],
+      "crease": [
+        71.2,
+        71,
+        70.6,
+        70,
+        69.6
+      ],
+      "aperture": 1.8,
+      "sourceSha256": "c6957ccdc8c5483e1e4fa149d3bef08323e85d7b661ac5b428d5ffc1093dfad2",
+      "facing": "front",
+      "modes": [
+        "open",
+        "round",
+        "spread"
+      ],
+      "closedFrame": 0
+    },
+    "cell": [
+      128,
+      192
+    ],
+    "pivot": [
+      64,
+      180
+    ],
+    "distancePerCycle": 16.941176470588236,
+    "groundSpeedCalibration": "rig stance; encoded sole assessment in output/neighbors",
+    "bytes": 1096680,
+    "encodedFrameChecks": [
+      {
+        "row": 0,
+        "distinctDecodedFrames": 16
+      },
+      {
+        "row": 1,
+        "distinctDecodedFrames": 16
+      },
+      {
+        "row": 2,
+        "distinctDecodedFrames": 16
+      },
+      {
+        "row": 3,
+        "distinctDecodedFrames": 16
+      },
+      {
+        "row": 4,
+        "distinctDecodedFrames": 16
+      },
+      {
+        "row": 5,
+        "distinctDecodedFrames": 16
+      },
+      {
+        "row": 6,
+        "distinctDecodedFrames": 16
+      },
+      {
+        "row": 7,
+        "distinctDecodedFrames": 16
+      },
+      {
+        "row": 8,
+        "distinctDecodedFrames": 16
+      }
+    ]
+  },
+  "schwabingen": {
+    "sha256": "e16c72fb067e2ca140cd23450b528377ee0fb5b217b0e3986b08ad413c90ae7e",
+    "rows": [
+      "down",
+      "right",
+      "up",
+      "left",
+      "idle",
+      "talk",
+      "listen",
+      "greet",
+      "look"
+    ],
+    "frames": 16,
+    "mouthProfile": {
+      "corners": [
+        60,
+        83
+      ],
+      "crease": [
+        55.5,
+        54.8,
+        54.4,
+        54.6,
+        55
+      ],
+      "aperture": 1.6,
+      "sourceSha256": "c6957ccdc8c5483e1e4fa149d3bef08323e85d7b661ac5b428d5ffc1093dfad2",
+      "facing": "front",
+      "modes": [
+        "open",
+        "round",
+        "spread"
+      ],
+      "closedFrame": 0
+    },
+    "cell": [
+      128,
+      192
+    ],
+    "pivot": [
+      64,
+      180
+    ],
+    "distancePerCycle": 7.529411764705883,
+    "groundSpeedCalibration": "rig stance; encoded sole assessment in output/neighbors",
+    "bytes": 964286,
+    "encodedFrameChecks": [
+      {
+        "row": 0,
+        "distinctDecodedFrames": 16
+      },
+      {
+        "row": 1,
+        "distinctDecodedFrames": 16
+      },
+      {
+        "row": 2,
+        "distinctDecodedFrames": 16
+      },
+      {
+        "row": 3,
+        "distinctDecodedFrames": 16
+      },
+      {
+        "row": 4,
+        "distinctDecodedFrames": 16
+      },
+      {
+        "row": 5,
+        "distinctDecodedFrames": 16
+      },
+      {
+        "row": 6,
+        "distinctDecodedFrames": 16
+      },
+      {
+        "row": 7,
+        "distinctDecodedFrames": 16
+      },
+      {
+        "row": 8,
+        "distinctDecodedFrames": 16
+      }
+    ]
+  }
+}
