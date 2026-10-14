@@ -884,3 +884,9 @@ controls without errors. Root maximum transfer17,996,847 bytes stays below18MB.
 No production change resulted from the benchmark correction. Physical Android,
 natural mission traversal and perceptual listening remain NOT RUN. Evidence is
 in ignored output/sweat-pearls; runtime source remains the reviewed v2 candidate.
+
+## 2026-10-14 · Permanent direct level links
+
+Added 31 direct destinations and compatibility aliases through static Pages output, with unique 1200 × 630 share PNGs and initial HTML social metadata. Canonical gameplay controllers, mission entry and shared assets remain authoritative. The owning maintained catalogue and new-level requirements are in For-AI/LEVEL-URLS.md.
+
+Local acceptance: 31 desktop + 31 Android portrait routes, 3 Bürgeramt edge-size/zoom cases, and 6 cold root benchmark runs passed. Independent Physics/Camera scoped reviews cover arrival, return, camera handover and visible exit geometry. Published portrait sources from 1350c55 are preserved. Physical Android, new natural mission traversal and audio listening are NOT RUN. Live route/metadata/image checks follow deployment and update the catalogue.
