@@ -628,3 +628,97 @@ establish a speedup, displayed-frame or GPU timing. Office fixtures seed age150
 before real controls; full pigment evolution is covered separately above.
 All seven frozen hashes remain unchanged after verification; only this evidence
 record was appended. Runtime assets and geometry counts are unchanged.
+
+# Continuous portrait drooling — 2026-10-14
+
+Integrator-owned on published ee3606f in the healthy isolated checkout; scoped
+source diff initially empty. Resolved Bürgeramt via original root's updated
+For-AI/LEVELS.md, levels/buergeramt/AGENTS.md and its For-AI/README.md; no level
+handoff. Existing global episode owner remains For-AI/BUERGERAMT.md. Scope:
+portrait shader, shared floor/world/entry cache URLs, existing Node/GPU checks,
+episode owner and this record. User now explicitly requires an inexhaustible
+painting: keep framed image populated, distort it progressively, continuously
+feed rounded downward goops into the existing oils, and remove white wavy
+reflections. This supersedes prior full-drain/bare-backing and view-glint goals;
+replace only those obsolete assertions with nonempty/continuous-flow/no-glint
+checks. Preserve face droop, early E onset, shared clocks/2.2 progress, contact
+before floor deposit, missing art, reduced motion, restoration, depth and geometry.
+No extra assets, targets, timers, passes or particles. Shape connected rounded
+bulbs and traveling thickening in the existing paint mask. Required independent
+Physics/Camera C4/X1 review; unrelated city/scale/gait outside scope. Use silent
+existing browser matrix, scoped causal checks and release/benchmark gates.
+
+Implemented continuous coverage over the original picture, four smooth joined
+neck/bulb contours and downward traveling width/pigment pulses. Removed the
+added reflection lighting and the full-drain/bare-backing path. No new assets,
+geometry, targets, passes or timer. Lower suit/tie/flag samples feed runoff;
+source chroma is retained in both live floor transport and static fallback.
+The latest frozen eight-file candidate is output/paint-goops/freeze.json;
+portrait SHA-256 68a679a6f6bcb9665d9e9481625f0960cc5f79ff0560fd9101cef2bd38f5c960,
+floor a9a9cc23d693701d83d32edb0c8b314df0f308630525460570318f68c310b08d.
+
+Review caught a repeated eye below the frame at late full melt: bounded wall-only
+source sampling fixes it while preserving in-frame face droop. A labeled-source
+GPU check now samples twelve progress/clock pairs, requiring substantial lower
+pigment and zero upper-face pigment in runoff. Earlier broad-remap attempts
+weakened early pigment and were rejected; preserving early samples with lower
+bounds fixed that. Narrower streams also exposed weak fallback source color;
+the floor retains actual source hue more visibly without adding fictional paint.
+Failed candidates remain in output/paint-goops; no acceptance threshold lowered.
+
+Causal contract: existing showPresidentPortrait owns the early-E floor-clock
+advance, idempotent within a visit. Shared goop(time) gives paint min(1,2.2*goop)
+and integrated visualTime advances the same portrait and floor flow. Removing
+the supply fade keeps both framed paint and contact feed after the cap; the
+clock still moves downward pulses. Floor deposition samples actual ground
+contact and remains absent before contact or without ready portrait art.
+Reduced motion freezes the flow clock and uses the static floor approximation;
+hidden pages, recovery, close, replay and texture ownership remain unchanged.
+Executed focused production state tests and forced GPU fixtures are the evidence;
+natural mission traversal, physical Android and perceptual listening are NOT RUN.
+Full Pages-selected Node release passed 687/687, curator passed, and all six
+Pillow delivery checks passed before the final wall-color refinement; focused
+production checks are repeated on the final candidate. No configured additional
+engineering-quality limit file/script is present.
+
+Final frozen GPU evidence: output/paint-goops/shipping completes six profiles
+(desktop, Android portrait/landscape emulation, procedural fallback, reduced
+motion, missing portrait), and shipping-recovery completes five recovery
+profiles, all without console/page errors. Final focused Node checks pass23/23.
+All eight frozen hashes and report runtime hashes match. Neutral paint changes
+0% with view and peaks at16 raw output codes, so no extra white overlay remains.
+At capped progress the runoff retains55.5% coverage,48.3% bottom-band coverage;
+11.35% of pixels change over1.2 clock seconds with downward best shift13px.
+The framed picture remains populated at570 and900 seconds. All12 labeled-source
+samples contain zero upper-image pixels in the wall streams. Negative old-shader
+controls fail no-glint/nonempty checks; removing only the lower-pigment bounds
+fails the new runoff-source check with7,076 upper-image pixels.
+
+Rendered floor-color sidecars compare the actual floor with the same field
+without paint. Colored area beyond0.3m at240/570 seconds is0.278/2.668m² desktop,
+0.152/1.083m² mobile portrait,0.111/0.430m² procedural fallback and0.195/0.631m²
+reduced motion; missing portrait remains exactly zero. These are accelerated
+production shader/transport fixtures, not natural mission or device evidence.
+
+Independent read-only Physics and Camera reviews PASS the final frozen candidate.
+Both verified all eight hashes and inspected final supplied six-profile/five-
+recovery evidence. Physics ran23 focused tests and checked shared clocks,
+contact, body separation, depth and resources; Camera ran14 focused checks and
+inspected120/240/570/900-second views, fallback, missing art and restoration.
+They carried those fresh state checks over the final fallback-color-only change,
+which received source/rendered review; the integrator separately repeated23.
+Camera's repeated-eye finding is resolved. C4/X1 and the projecting-frame P1
+subset are covered; unrelated city routes/gait/scale/fades remain outside scope.
+Reviewers did not run concurrent browser/performance workloads.
+
+Sequential six-run baseline/candidate active-office comparisons and six cold
+root runs pass existing transfer, input, startup-cadence, buffer and error gates.
+Chrome155/Intel Iris Xe, DPR2, seeds4781–4783, local HTTP, no CPU throttling.
+Office input-p95 median/range: before6.1/5.8–6.5ms desktop and23.8/5.7–32ms mobile;
+after5.6/4.6–6.3ms desktop and19.8/5.6–45.9ms mobile. Sync-start p95 medians are
+7.2→7.4ms desktop and8.3→7.2ms mobile. Each run accepted nine controls with no
+errors. Root maximum transfer17,999,419 bytes remains within18MB. These varying
+application measurements do not establish a speedup, GPU timing or physical-phone
+frame delivery. Benchmarks seed office age150 before real controls; full paint
+evolution is measured separately. Candidate benchmark/runtime hashes and all
+eight frozen hashes still match; only this evidence record changed afterward.

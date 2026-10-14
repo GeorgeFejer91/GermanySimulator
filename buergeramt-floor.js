@@ -1,7 +1,7 @@
 // Persistent pigment transport, not a pressure/velocity solver. The flat floor
 // stays solid; only its paint and shallow specular ridges melt.
 import './buergeramt-goop.js?v=20261013-goop-grace';
-import {portraitPaintGlsl} from './buergeramt-portrait-melt.js?v=20261014-liquid-surface1';
+import {portraitPaintGlsl} from './buergeramt-portrait-melt.js?v=20261014-paint-goops1';
 const STEP=1/20;
 export function amtFloorMelt(time){return globalThis.BuergeramtGoop.goop(time);}
 const coordinates=`
@@ -137,7 +137,7 @@ export function createAmtFloor({THREE:T,renderer,material,mobile=false}){
       vec3 paintChroma=carriedPaint-vec3(dot(carriedPaint,vec3(.2126,.7152,.0722)));
       // Keep transported pigment hues legible against the black/white lamellae.
       floorPaint=max(vec3(0.),mix(floorPaint,carriedPaint-paintChroma,paintCoverage*(1.-amtFloorRestore))
-        +paintChroma*(amtFloorLive>.5?4.:paintCoverage)*(1.-amtFloorRestore));
+        +paintChroma*5.*(amtFloorLive>.5?1.:paintCoverage)*(1.-amtFloorRestore));
       floorPaint=mix(floorPaint,vec3(.10),grout*(1.-smoothstep(.0,.22,amtFloorMelt)));
       diffuseColor.rgb*=floorPaint;
       float oilHeight=(1.-amtFloorStill)*amtFloorMelt*(.004*ridges+.009*sin(amtFloorPoint.x*2.7+amtFloorPoint.y*.9+amtFloorTime*.08)

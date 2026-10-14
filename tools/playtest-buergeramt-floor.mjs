@@ -41,14 +41,14 @@ function withoutPaintProbe(render){
     amtPortraitInfo.value.w=0;render();
   }finally{uniforms.amtFloorOil.value=original;amtPortraitInfo.value.w=ready;gray?.dispose();}
 }
-function samplePortraitPaint(which,amount,clock,bareRgb=[54,43,25]){
+function samplePortraitPaint(which,amount,clock,bareRgb=[54,43,25],raw=false){
   const width=128,height=160,target=new T.WebGLRenderTarget(width,height),scene=new T.Scene();
   const camera=new T.OrthographicCamera(-.725,.725,.97,-.97,.01,3);camera.position.z=1;
   const geometry=which==='frame'?presidentCanvas.geometry:new T.PlaneGeometry(1.45,1.94);
   const material=which==='frame'?presidentMaterial:new T.ShaderMaterial({
     uniforms:{amtPortraitPaint:{value:presidentMaterial.map},amtPortraitInfo:{value:new T.Vector4(0,0,1,1)},probeMelt:{value:amount},probeClock:{value:clock}},
     vertexShader:'varying vec2 paintUv;void main(){paintUv=uv;gl_Position=projectionMatrix*modelViewMatrix*vec4(position,1.);}',
-    fragmentShader:'varying vec2 paintUv;uniform float probeMelt,probeClock;'+portraitPaintGlsl+'void main(){float coverage=amtPaintFilm(vec2(paintUv.x,1.-paintUv.y),probeMelt,probeClock).a;gl_FragColor=vec4(vec3(coverage),1.);}'
+    fragmentShader:'varying vec2 paintUv;uniform float probeMelt,probeClock;'+portraitPaintGlsl+'void main(){vec4 film=amtPaintFilm(vec2(paintUv.x,1.-paintUv.y),probeMelt,probeClock);gl_FragColor=vec4('+(which==='pigment'?'film.rgb*film.a':'vec3(film.a)')+',1.);}'
   });
   scene.add(new T.Mesh(geometry,material));
   if(which==='frame'){
@@ -65,7 +65,7 @@ function samplePortraitPaint(which,amount,clock,bareRgb=[54,43,25]){
     const i=(y*width+x)*4,painted=which==='film'?pixels[i]>127:bareRgb.some((value,channel)=>Math.abs(pixels[i+channel]-value)>4);
     if(painted)bands[7-Math.floor(y*8/height)]++;
   }
-  return{low,high,sum,range:high.map((value,index)=>value-low[index]),coverage:covered/width,connected:longest/width,bands:bands.map(count=>count/(width*height/8))};
+  return{low,high,sum,range:high.map((value,index)=>value-low[index]),coverage:covered/width,connected:longest/width,bands:bands.map(count=>count/(width*height/8)),pixels:raw?pixels:undefined};
 }
 // Track independently colored facial landmarks through the actual production
 // material. This distinguishes a drooping face from uniform portrait runoff.
@@ -99,13 +99,13 @@ function sampleFaceDroop(){
   }finally{renderer.setRenderTarget(previousTarget);renderer.autoClear=previousClear;amtPortraitMelt.setTexture(original);target.dispose();texture.dispose();__floorTest.at(0);__floorRender();}
   return Object.fromEntries(marks.map(([name])=>[name,{before:samples[0][name],after:samples[1][name],drop:samples[1][name].y-samples[0][name].y}]));
 }
-// Hold UV coverage and neutral pigment fixed while moving the real material's
-// view direction. A baked bright stripe cannot pass this wet-reflection probe.
-function sampleWetSurface(){
+// Neutral pigment must remain neutral at both view directions: the user removed
+// the previous white reflection overlay, including its strongest close-up view.
+function samplePaintSurface(){
   const size=160,target=new T.WebGLRenderTarget(size,size),scene=new T.Scene(),camera=new T.PerspectiveCamera(50,1,.01,10);
   const source=presidentFrame.children.find(mesh=>mesh.name==='Steinmeier liquid paint'),material=source.material.clone();
   material.onBeforeCompile=shader=>{source.material.onBeforeCompile(shader);shader.vertexShader=shader.vertexShader.replace('#include <project_vertex>','#include <project_vertex>\ngl_Position=vec4(uv*2.-1.,0.,1.);');};
-  material.customProgramCacheKey=()=>source.material.customProgramCacheKey()+':wet-probe';
+  material.customProgramCacheKey=()=>source.material.customProgramCacheKey()+':paint-probe';
   scene.add(new T.Mesh(source.geometry,material));
   const neutral=new T.DataTexture(new Uint8Array([72,72,72,255]),1,1);neutral.colorSpace=T.SRGBColorSpace;neutral.needsUpdate=true;
   const original=presidentMaterial.map,previous=renderer.getRenderTarget(),auto=renderer.autoClear,clear=renderer.getClearColor(new T.Color()),alpha=renderer.getClearAlpha(),images=[];
@@ -116,9 +116,34 @@ function sampleWetSurface(){
       const pixels=new Uint8Array(size*size*4);renderer.readRenderTargetPixels(target,0,0,size,size,pixels);images.push(pixels);
     }
   }finally{renderer.setRenderTarget(previous);renderer.autoClear=auto;renderer.setClearColor(clear,alpha);amtPortraitMelt.setTexture(original);material.dispose();neutral.dispose();target.dispose();__floorTest.at(0);__floorRender();}
-  let covered=0,changed=0,delta=0;
-  for(let i=0;i<images[0].length;i+=4)if(images[0][i+3]>240&&images[1][i+3]>240){covered++;const difference=Math.abs(images[0][i]-images[1][i]);delta+=difference;if(difference>8)changed++;}
-  return{covered,changedFraction:changed/covered,meanDifference:delta/covered};
+  let covered=0,changed=0,maximum=0;
+  for(let i=0;i<images[0].length;i+=4)if(images[0][i+3]>240&&images[1][i+3]>240){covered++;maximum=Math.max(maximum,images[0][i],images[1][i]);if(Math.abs(images[0][i]-images[1][i])>8)changed++;}
+  return{covered,changedFraction:changed/covered,maximum};
+}
+function sampleContinuousRunoff(){
+  const before=__floorGpu.samplePortraitPaint('film',1,486,undefined,true),after=__floorGpu.samplePortraitPaint('film',1,487.2,undefined,true);
+  let changed=0;for(let i=0;i<before.pixels.length;i+=4)if(Math.abs(before.pixels[i]-after.pixels[i])>32)changed++;
+  const scores=[];
+  for(let shift=-22;shift<=22;shift++){
+    let error=0,count=0;
+    for(let y=24;y<136;y++)for(let x=0;x<128;x++){const a=before.pixels[(y*128+x)*4],b=after.pixels[((y+shift)*128+x)*4];error+=Math.abs(a-b);count++;}
+    scores.push({shift,error:error/count});
+  }
+  scores.sort((a,b)=>a.error-b.error);
+  return{coverage:before.coverage,bottom:before.bands.at(-1),changedFraction:changed/(128*160),bestShift:scores[0].shift};
+}
+function sampleRunoffSource(){
+  const canvas=document.createElement('canvas');canvas.width=canvas.height=64;
+  const ctx=canvas.getContext('2d');ctx.fillStyle='#0000ff';ctx.fillRect(0,0,64,64);ctx.fillStyle='#ff0000';ctx.fillRect(0,0,64,38);
+  const texture=new T.CanvasTexture(canvas);texture.colorSpace=T.SRGBColorSpace;
+  const original=presidentMaterial.map,samples=[];
+  try{presidentMaterial.map=texture;for(const amount of [.25,.55,1])for(const clock of [0,233,486,700]){
+    const {pixels}=__floorGpu.samplePortraitPaint('pigment',amount,clock,undefined,true);let upper=0,lower=0;
+    // Ignore the first contact row where the framed image blends into runoff.
+    for(let y=0;y<144;y++)for(let x=0;x<128;x++){const i=(y*128+x)*4;if(pixels[i]>32)upper++;if(pixels[i+2]>32)lower++;}
+    samples.push({amount,clock,upper,lower});
+  }}finally{presidentMaterial.map=original;texture.dispose();}
+  return samples;
 }
 function sampleFloorColor(){
   const width=256,height=224,target=new T.WebGLRenderTarget(width,height),scene=new T.Scene();
@@ -147,7 +172,7 @@ const server=createServer((req,res)=>{
       `window.__floorTest={pose(x,z,yaw=0){Object.assign(view,{x,z,yaw})},at(time){floorClock=time;visualClock=goop.motion(time);applyOfficeTempo()},recover(){activated=true;registeredName='Erika Mustermann';number=counterCalls[2];assignedCounter=3;counter.x=counterXs[2];deadline=200;view.x=counter.x;view.z=counter.z+1;setStage('walk-counter');},close(){close(false)},reopen(){open(options)},dialogue(){setStage('character')},stage:setStage,speech(){const row=Object.values(window.GermanySimulatorAudioText.recordings).filter(r=>r.voiceId==='amt-brunhilde-knick'&&r.source).sort((a,b)=>b.source.length-a.source.length)[0];if(!row)throw Error('Missing native Knick sample');options.voiceOn=()=>true;content(story.clerkIdentity.speaker,row.source)},media(){return recordedSpeech?{rate:recordedSpeech.playbackRate,preservesPitch:recordedSpeech.preservesPitch,time:recordedSpeech.currentTime,duration:recordedSpeech.duration,paused:recordedSpeech.paused}:null}};window.BuergeramtLevel={`);
     if(file===resolve('buergeramt-floor.js'))data=data.toString().replace('const floatMask=','const floatMask=!globalThis.__forceByteFloor&&').replace('return{update,setLights',`return{update,samplePigmentRegion:${samplePigmentRegion.toString()},withoutPaintProbe:${withoutPaintProbe.toString()},stats(){if(!targets)return null;const pixels=new Float32Array(width*height*4);renderer.readRenderTargetPixels(targets[read],0,0,width,height,pixels);let sum=0,squares=0,white=0,black=0,paint=0,colored=0,interfaces=0;for(let i=0;i<pixels.length;i+=4){const v=pixels[i];sum+=v;squares+=v*v;paint+=pixels[i+3];if(v>.8)white++;if(v<.2)black++;if(Math.abs(pixels[i]-pixels[i+1])+Math.abs(pixels[i+1]-pixels[i+2])>.012)colored++;const cell=i/4,x=cell%width,y=Math.floor(cell/width);if(x<width-1&&(v>.5)!=(pixels[i+4]>.5))interfaces+=19.2/height;if(y<height-1&&(v>.5)!=(pixels[i+width*4]>.5))interfaces+=15.4/width;}const count=width*height;return{mean:sum/count,variance:squares/count-(sum/count)**2,white:white/count,black:black/count,paint:paint/count,colored:colored/count,interfaceDensity:interfaces/(15.4*19.2)}},setLights`);
     if(file===resolve('world3d.js'))data=data.toString().replace('import {createAmtPortraitMelt}','import {createAmtPortraitMelt,portraitPaintGlsl}').replace('amtCamera.rotation.set(view.pitch||0,-view.yaw,0,"YXZ")','amtCamera.rotation.set(window.__floorPitch??view.pitch??0,-view.yaw,0,"YXZ")')
-      .replace('  app.classList.add("three-ready");',`window.__floorGpu={sampleWetSurface:${sampleWetSurface.toString()},samplePortraitPaint:${samplePortraitPaint.toString()},sampleFaceDroop:${sampleFaceDroop.toString()},floorColor:${sampleFloorColor.toString()},region:()=>amtFloorEffect.samplePigmentRegion(),stats:()=>amtFloorEffect.stats(),advance(seconds){const start=BuergeramtLevel.floorState.time;for(let n=1;n<=Math.round(seconds*20);n++){__floorTest.at(start+n/20);amtFloorEffect.update(BuergeramtLevel.floorState,amtReducedMotion.matches,BuergeramtLevel.view,BuergeramtLevel.characters);amtPortraitMelt.update(BuergeramtLevel.floorState,amtReducedMotion.matches);amtLampWear.update(BuergeramtLevel.floorState,amtReducedMotion.matches)}},fade(strength){fadeAmtStructure(strength)},render(){renderer.render(amtScene,amtCamera)},backend(){const gl=renderer.getContext(),ext=gl.getExtension('WEBGL_debug_renderer_info');return ext?gl.getParameter(ext.UNMASKED_RENDERER_WEBGL):gl.getParameter(gl.RENDERER)}};app.classList.add("three-ready");`);
+      .replace('  app.classList.add("three-ready");',`window.__floorGpu={sampleRunoffSource:${sampleRunoffSource.toString()},samplePaintSurface:${samplePaintSurface.toString()},sampleContinuousRunoff:${sampleContinuousRunoff.toString()},samplePortraitPaint:${samplePortraitPaint.toString()},sampleFaceDroop:${sampleFaceDroop.toString()},floorColor:${sampleFloorColor.toString()},region:()=>amtFloorEffect.samplePigmentRegion(),stats:()=>amtFloorEffect.stats(),advance(seconds){const start=BuergeramtLevel.floorState.time;for(let n=1;n<=Math.round(seconds*20);n++){__floorTest.at(start+n/20);amtFloorEffect.update(BuergeramtLevel.floorState,amtReducedMotion.matches,BuergeramtLevel.view,BuergeramtLevel.characters);amtPortraitMelt.update(BuergeramtLevel.floorState,amtReducedMotion.matches);amtLampWear.update(BuergeramtLevel.floorState,amtReducedMotion.matches)}},fade(strength){fadeAmtStructure(strength)},render(){renderer.render(amtScene,amtCamera)},backend(){const gl=renderer.getContext(),ext=gl.getExtension('WEBGL_debug_renderer_info');return ext?gl.getParameter(ext.UNMASKED_RENDERER_WEBGL):gl.getParameter(gl.RENDERER)}};app.classList.add("three-ready");`);
     res.writeHead(200,{'Content-Type':mime[extname(file)]||'application/octet-stream','Cache-Control':'no-store'});res.end(data);
   }catch{res.writeHead(404);res.end();}
 });
@@ -187,34 +212,40 @@ try{
         assert(faceDroop.leftEye.drop-faceDroop.rightEye.drop>.025,'eyes sag unevenly');
         assert(faceDroop.mouth.drop>faceDroop.leftEye.drop&&faceDroop.chin.drop>faceDroop.mouth.drop,'lower face stretches progressively farther');
       }
-      const wetSurface=name==='missing-portrait'?null:await page.evaluate(()=>__floorGpu.sampleWetSurface());
-      if(wetSurface){writeFileSync(resolve(out,`${name}-wet-probe.json`),JSON.stringify(wetSurface,null,2));assert(wetSurface.covered>1000,'wet probe has substantial opaque paint');assert(wetSurface.changedFraction>.04,'liquid reflections follow the view rather than remaining painted stripes');}
+      const paintSurface=name==='missing-portrait'?null:await page.evaluate(()=>__floorGpu.samplePaintSurface());
+      if(paintSurface){writeFileSync(resolve(out,`${name}-paint-probe.json`),JSON.stringify(paintSurface,null,2));assert(paintSurface.covered>1000,'paint probe has substantial opaque paint');assert(paintSurface.maximum<=20&&paintSurface.changedFraction<.001,'neutral paint has no added white wavy highlights');}
       const intact=await page.evaluate(()=>__floorGpu.samplePortraitPaint('frame',0,0));
       await page.evaluate(()=>{__floorTest.at(570);__floorRender()});
-      const drained=await page.evaluate(()=>__floorGpu.samplePortraitPaint('frame',1,BuergeramtLevel.floorState.visualTime));
-      if(name==='missing-portrait')assert.deepEqual(drained,intact,'missing art must retain its labeled fallback');
-      else{assert(Math.max(...intact.range)>40,'actual paint is present before melting');assert(drained.range.every(range=>range<=1),'the entire picture leaves the frame at full melt');}
+      const continuous=await page.evaluate(()=>__floorGpu.samplePortraitPaint('frame',1,BuergeramtLevel.floorState.visualTime));
+      if(name==='missing-portrait')assert.deepEqual(continuous,intact,'missing art must retain its labeled fallback');
+      else{assert(Math.max(...intact.range)>40,'actual paint is present before melting');assert(Math.max(...continuous.range)>40&&continuous.bands.every(coverage=>coverage>.98),'the entire framed image remains populated at full melt');}
+      const runoffSource=name==='missing-portrait'?null:await page.evaluate(()=>__floorGpu.sampleRunoffSource());
+      if(runoffSource){writeFileSync(resolve(out,`${name}-runoff-source.json`),JSON.stringify(runoffSource,null,2));for(const sample of runoffSource){assert(sample.lower>1000,'wall flow carries real lower-image pigment');assert.equal(sample.upper,0,'facial-source paint does not repeat as eyes below the frame');}}
+      const runoff=name==='missing-portrait'?null:await page.evaluate(()=>__floorGpu.sampleContinuousRunoff());
+      if(runoff){writeFileSync(resolve(out,`${name}-runoff.json`),JSON.stringify(runoff,null,2));assert(runoff.coverage>.2&&runoff.bottom>.2,'paint keeps reaching the floor after full liquefaction');assert(runoff.changedFraction>.025&&runoff.bestShift< -3,'thickening goops keep traveling downward after the melt cap');}
       await page.evaluate(()=>{__floorTest.at(BuergeramtGoop.ageForMelt(.25));__floorRender()});
       const film=name==='missing-portrait'?null:await page.evaluate(()=>__floorGpu.samplePortraitPaint('film',.25,BuergeramtLevel.floorState.visualTime));
-      const softened=name==='missing-portrait'?null:await page.evaluate(bare=>__floorGpu.samplePortraitPaint('frame',.25,BuergeramtLevel.floorState.visualTime,bare),drained.low);
+      const softened=name==='missing-portrait'?null:await page.evaluate(()=>__floorGpu.samplePortraitPaint('frame',.25,BuergeramtLevel.floorState.visualTime));
       if(softened){
-        assert((softened.bands[0]+softened.bands[1])/2>.2,'paint remains near its original top while dissolving instead of the whole image falling');
-        const middle=softened.bands.slice(2,7).reduce((sum,value)=>sum+value,0)/5;
-        assert(middle<.95&&middle>.02,'interior paint erodes in place with some pigment remaining');
+        assert(softened.bands.every(coverage=>coverage>.98),'the image stays full while its features distort');
       }
       if(film){assert(film.coverage>.2,'thick runs carry substantial paint');assert(film.connected>.12,'oil includes broad merging runs');assert(film.bands.at(-1)<film.bands[0],'unequal liquid fronts leave gaps toward the floor');}
       await page.evaluate(()=>{__floorTest.at(0);__floorRender()});
       const captures=[];
-      for(const age of [0,90,105,120,150,180,210,240,270,300,370,420,570]){
+      for(const age of [0,90,105,120,150,180,210,240,270,300,370,420,570,900]){
         await page.evaluate(age=>{__floorGpu.advance(age-BuergeramtLevel.floorState.time);const p=BuergeramtStory.presidentPortrait;__floorTest.pose(p.x+1.2,p.z-2.5,Math.atan2(-1.2,-2.5));window.__floorPitch=-.13;__floorRender()},age);
         const state=await page.evaluate(()=>({floor:Germany3D.amtFloor,portrait:Germany3D.amtPortraitMelt,pigment:__floorGpu.stats(),region:__floorGpu.region()}));
         assert.equal(state.portrait.paintMelt,name==='missing-portrait'?0:Math.min(1,state.floor.melt*2.2));
-        if(age===150&&state.pigment&&name!=='missing-portrait'){assert(state.pigment.paint>.000001,'the whole sheet deposits paint soon after onset');assert(state.pigment.colored>.000001);}
+        if(age===150&&state.pigment&&name!=='missing-portrait'){assert(state.pigment.paint>.000001,'runoff deposits paint soon after onset');assert(state.pigment.colored>.000001);}
         if(name==='missing-portrait'&&state.pigment){assert.equal(state.pigment.paint,0);assert.equal(state.pigment.colored,0);}
+        if(age===900&&name!=='missing-portrait'){
+          state.continuous=await page.evaluate(()=>__floorGpu.samplePortraitPaint('frame',1,BuergeramtLevel.floorState.visualTime));
+          assert(Math.max(...state.continuous.range)>40&&state.continuous.bands.every(coverage=>coverage>.98),'the painting remains filled fifteen minutes into the visit');
+        }
         await page.screenshot({path:resolve(out,`${name}-liquid-${age}s.png`)});captures.push({age,...state});
-        if([150,180,240].includes(age)){
+        if([120,150,180,240,570,900].includes(age)){
           await page.evaluate(()=>{const p=BuergeramtStory.presidentPortrait;__floorTest.pose(p.x+1.2,p.z-4,Math.atan2(-1.2,-4));window.__floorPitch=0;__floorRender()});
-          await page.screenshot({path:resolve(out,`${name}-wet-surface-${age}s.png`)});
+          await page.screenshot({path:resolve(out,`${name}-paint-flow-${age}s.png`)});
         }
         if(process.env.FLOOR_PAINT_MIX&&[150,180,240,370,570].includes(age)){
           state.floorColor=await page.evaluate(()=>__floorGpu.floorColor());
@@ -233,7 +264,7 @@ try{
           }
         }
       }
-      assert.deepEqual(errors,[]);report.cases.push({name,verdict:'PASS',faceDroop,wetSurface,intact,drained,softened,film,captures,errors});console.log(name,'oil PASS');await context.close();continue;
+      assert.deepEqual(errors,[]);report.cases.push({name,verdict:'PASS',faceDroop,paintSurface,runoff,intact,continuous,softened,film,captures,errors});console.log(name,'oil PASS');await context.close();continue;
     }
     if(process.env.FLOOR_MOTION){
       await page.evaluate(()=>{__floorGpu.advance(675);__floorRender()});

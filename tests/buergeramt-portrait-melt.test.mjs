@@ -21,7 +21,7 @@ test('loaded portrait and floor share the delayed wave; missing paint stays legi
   f.effect.update(null);assert.equal(f.effect.inspect().melt,0);assert.equal(f.effect.inspect().dripsVisible,false);
   f.effect.update({time:0,visualTime:0});assert.equal(f.effect.inspect().melt,0,'next visit is an intact portrait');
 });
-test('portrait paint drains at 2.2 times room melt while retaining its clock and full-melt cap',()=>{
+test('portrait paint liquefies at 2.2 times room melt while retaining its clock and full-melt cap',()=>{
   const f=fixture();f.effect.setTexture({actualPaint:true});
   for(const [amount,expected] of [[0,0],[.1,.22],[.25,.55],[.4,.88],[.5,1],[1,1]]){
     f.effect.update({time:BuergeramtGoop.ageForMelt(amount),visualTime:123});
@@ -40,6 +40,7 @@ test('one liquid surface spans the image and meets the ground with real depth; d
   assert.ok(Math.abs(5.43-.88*(drips.position.z+vertices.getZ(25))-5.4696)<1e-10,'paint ends against the inner wall');
   assert.equal(drips.material.depthTest,true);assert.equal(drips.material.depthWrite,false);assert.equal(drips.material.transparent,true);
   const shader={uniforms:{},fragmentShader:'#include <map_fragment>'};f.material.onBeforeCompile(shader,{});
-  assert.match(shader.fragmentShader,/diffuseColor.rgb=vec3\(.21,.17,.10\)/);assert.equal(shader.uniforms.amtPortraitMelt.value,0);
+  assert.equal(shader.fragmentShader,'#include <map_fragment>','the original painting stays underneath the moving paint');
+  assert.deepEqual(shader.uniforms,{});
   f.effect.dispose();assert.equal(f.frame.children.length,0);assert.equal(drips.geometry.disposed,1);assert.equal(drips.material.disposed,1);assert.equal(f.material.disposed,0);
 });

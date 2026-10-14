@@ -269,23 +269,23 @@ The existing Steinmeier oil portrait uses this same wave and residence clock,
 with paint progress `min(1, 2.20 × goop)`. This faster progression applies together to
 the framed image, wall drips and floor deposition; the floor's own melt and
 slowdown retain their shared value. `buergeramt-portrait-melt.js` softens the real
-oil paint in place. Unequal local sag, vertical color smearing and patchwise loss
-expose the backing throughout the image. The forehead anchors an uneven elastic
+oil paint in place. The painting is an inexhaustible source: its framed image
+never empties while unequal local sag and color smearing increasingly distort
+it. The forehead anchors an uneven elastic
 stretch: eyes and cheeks sag asymmetrically, and the mouth and chin droop farther
-before dissolving. The face deformation stays within the framed paint; wall
+as the liquid flows. The face deformation stays within the framed paint; wall
 runoff retains mixed pigment rather than repeating facial features. Never
 translate the whole recognizable portrait down the wall as a falling poster.
-Thick, merging runs have curved
-edges, unequal rounded fronts and wet highlights; below the frame they carry
+Thick, merging runs have narrow necks, smooth bulbous ends and moving bulges;
+below the frame they carry
 mixed pigment sampled from the image, rather than a readable second portrait.
-The liquid's shared traveling ripples warp the pigment and perturb its surface
-normal, producing view-dependent glossy reflections instead of baked bright
-stripes. Interpolated normals keep the wall bend smooth. These reflections are
-surface lighting only; the floor receives pigment without reflected highlights.
-The existing scene clock drives ripples and winding flow contours, freezing in
-reduced motion. This adds no geometry, texture, lighting pass or render target.
-The whole image eventually drains, and the runs thin out as their paint supply
-ends. One masked paint mesh spans image and wall without a panel seam. Its bend
+There is no white wavy reflection overlay. Only the original image's
+pigment supplies the surface colors; wall streams sample lower suit, tie and flag
+paint so facial features cannot repeat below the frame. Shared ripples warp that pigment;
+rounded bulges advance downward along continuously connected streams, including
+after paint progress reaches its cap. The existing scene clock drives this flow,
+freezing in reduced motion. No geometry, texture, lighting pass, render target or
+separate clock is added. One masked paint mesh spans image and wall without a panel seam. Its bend
 starts below the gold frame, and its extra width allows the oil contours to curve.
 Deformation and pigment motion use the integrated scene clock. A transparent,
 depth-tested, statically curved surface continues the paint from the frame onto
@@ -305,8 +305,9 @@ and optional ICH monologue retain their existing ownership. No picture speaks.
 Missing portrait paint keeps the labeled fallback intact without fictional
 colored spill; reduced motion uses a static spatial melt/spill approximation.
 That approximation widens the contact-fed swirls with melt and retains their
-deposited color after the framed image finishes draining, without animated
-feedback or another clock.
+deposited color while the framed image stays filled, without animated
+feedback or another clock. Source chroma remains visible against the black and
+white oils in both the live transport and this simpler approximation.
 Close/replay restores the picture and clears the paint field; the shared source
 texture remains in the existing office asset cache. Do not create a second
 portrait clock, floor decal disconnected from deposition, or particle timer.
