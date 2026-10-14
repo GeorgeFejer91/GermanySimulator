@@ -1,14 +1,17 @@
 # For AI
 
-This directory owns concise, durable project rules and routes. Product source, shipped assets, user documentation, and final deliverables stay outside it. The user’s current request and nearest `AGENTS.md` define authority; subject documents below own their named details. Link to those authorities instead of duplicating their rules.
+This directory owns shared project rules and routes; `levels/<id>/For-AI/` owns scoped level context. Start with [`AGENT-START.md`](./AGENT-START.md), then load only the affected level and subject sections. The user's current request and applicable `AGENTS.md` instructions define authority. Link to owning documents instead of duplicating their rules.
 
-Codex leads work in this repository. It selects only affected domains, assigns bounded work where parallelism helps, integrates proposals, and remains accountable for review and publication. Always publish all completed new features and fixes, including a validated combined set when pending features overlap; the standing policy is in [`AGENT-START.md`](./AGENT-START.md#validation-and-publication). ChatDev is an optional inspiration and pinned legacy runner for the Bürgeramt episode; it is not the default coordinator. See [`SKILLS.md`](./SKILLS.md) and [`chatdev/README.md`](./chatdev/README.md).
+[`SKILLS.md`](./SKILLS.md) owns Codex domain routing and delegation. [`AGENT-START.md`](./AGENT-START.md#validation-and-publication) owns validation and the standing publication policy. [`chatdev/README.md`](./chatdev/README.md) owns the optional legacy Bürgeramt runner.
 
-Use the smallest coherent change. Prefer existing code, tools, and skills. Update an owning durable document when a lasting rule or decision changes. Do not keep chat logs, duplicate ledgers, generated evidence, or speculative backlogs here. Report checks and evidence precisely; distinguish browser emulation from device results and silent audio-state checks from listening review.
+Use the smallest coherent change. Update the owning document when a lasting rule changes. Keep chat logs, generated evidence and speculative backlogs out of instruction folders. New product source and shipped assets stay outside them. The existing `AUDIO-TEXT-LIBRARY.js` and `QUIZ-CHARACTER-DICTIONARY.js` are also runtime catalogs: preserve their entry-page/tool references until a separately validated relocation.
 
 ## Read by task
 
+- [`LEVEL-URLS.md`](./LEVEL-URLS.md): maintained public direct-level URL catalogue, production status, unique comical share previews, and mandatory checks for every new level.
 - [`AGENT-START.md`](./AGENT-START.md): task-scoped reading routes, canonical-game invariants, and validation policy.
+- [`LEVELS.md`](./LEVELS.md): level lookup, nested instructions, shared ownership, and when to extract level source or documentation.
+- [`LEVEL-TRANSITIONS.md`](./LEVEL-TRANSITIONS.md): shared building doors, entry vortex, forced ejection and immediate voluntary leaving; indoor/outdoor boundaries and lifecycle.
 - [`GAMEPLAY.md`](./GAMEPLAY.md): current gameplay, mission, dialogue, and in-world copy rules. Read only the sections relevant to the change.
 - [`BUERGERAMT.md`](./BUERGERAMT.md): current episode beats, cast ownership, audio, and domain handoff.
 - [`ASSET-POLICY.md`](./ASSET-POLICY.md): current asset, performance, hosting, and YAGNI policy, including [browser playability maintenance](./ASSET-POLICY.md#maintaining-browser-playability).

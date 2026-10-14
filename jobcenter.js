@@ -1,5 +1,5 @@
 // One scene on the city's renderer and frame clock. No room edges, floor texture or horizon.
-import {createJobcenterRelease} from './buergeramt-entry.js?v=20261013-void-release';
+import {createLevelDoor} from './level-transitions.js?v=20261014-building-levels';
 import {createJobcenterRumble,sampleJobcenterRumble} from './jobcenter-rumble.js?v=20261013-overlord-fury';
 import {sampleTimedMouth,neutralMouth} from './speech-mouth.js?v=20261013-mouth-audit';
 const clamp=(n,a=0,b=1)=>Math.max(a,Math.min(b,n));
@@ -58,10 +58,9 @@ export function createJobcenterBuilding(T,w,d,h){
 
 export function stepJobcenter(state,input,dt){
  dt=clamp(dt,0,.12);state.time+=dt;
- state.yaw+=((input.ArrowLeft?1:0)-(input.ArrowRight?1:0))*dt*1.55;
- state.pitch=clamp(state.pitch+((input.ArrowUp||input.PageUp?1:0)-(input.ArrowDown||input.PageDown?1:0))*dt,-1.25,1.25);
- let forward=(input.KeyW?1:0)-(input.KeyS?1:0)+(input.forward||0);
- let side=(input.KeyD?1:0)-(input.KeyA?1:0)+(input.side||0);
+ state.pitch=clamp(state.pitch+((input.PageUp?1:0)-(input.PageDown?1:0))*dt,-1.25,1.25);
+ let forward=(input.KeyW||input.ArrowUp?1:0)-(input.KeyS||input.ArrowDown?1:0)+(input.forward||0);
+ let side=(input.KeyD||input.ArrowRight?1:0)-(input.KeyA||input.ArrowLeft?1:0)+(input.side||0);
  const length=Math.max(1,Math.hypot(forward,side)),speed=((input.pinchForward&&forward>0)||input.KeyR||input.ShiftLeft||input.ShiftRight?7:3.6)*dt/length;
  state.x+=(Math.cos(state.yaw)*side-Math.sin(state.yaw)*forward)*speed;
  state.z+=(-Math.sin(state.yaw)*side-Math.cos(state.yaw)*forward)*speed;
@@ -146,36 +145,36 @@ const tunnelFragment=`
 `;
 
 export function createJobcenterEncounter(T,renderer,bridge){
- let visit=null,serial=0,last=0,release=null,releaseLast=0,releaseBlurred=false;
+ let visit=null,serial=0,last=0;
  const reduced=matchMedia('(prefers-reduced-motion: reduce)');
- function clearRelease(){release?.dispose();release=null;window.removeEventListener('blur',releaseBlur);window.removeEventListener('focus',releaseFocus);document.removeEventListener('visibilitychange',releaseVisibility);window.removeEventListener('keydown',releaseEscape)}
- function releaseBlur(){releaseBlurred=true;releaseLast=performance.now()}
- function releaseFocus(){releaseBlurred=false;releaseLast=performance.now()}
- function releaseVisibility(){releaseLast=performance.now()}
- function releaseEscape(e){if(e.code==='Escape')clearRelease()}
  function close(reason='escape'){
-  clearRelease();const v=visit;if(!v)return;visit=null;++serial;
-  if(reason==='ended'||reason==='fallback-ended'){
-   try{release=createJobcenterRelease({THREE:T,renderer,scene:v.scene,camera:v.camera,mobile:Math.min(innerWidth,innerHeight)<700,reducedMotion:reduced.matches});releaseLast=performance.now();releaseBlurred=false;window.addEventListener('blur',releaseBlur);window.addEventListener('focus',releaseFocus);document.addEventListener('visibilitychange',releaseVisibility);window.addEventListener('keydown',releaseEscape)}catch{clearRelease()}
-  }
-  v.abort.abort();v.rumbleSource?.dispose();v.audio.onended=v.audio.onerror=v.audio.onplaying=null;v.audio.pause();v.audio.removeAttribute('src');v.audio.load();
+  const v=visit;if(!v||v.leaving)return;
+  v.leaving=true;v.suspendMedia();v.resetInput();
+  const mode=reason==='ended'||reason==='fallback-ended'?'eject':'voluntary';
+  if(v.config.transitionOut?.({mode,fire:mode==='eject',onReturn:()=>{if(visit===v)release(reason)}}))return;
+  release(reason);
+ }
+ function release(reason){
+  const v=visit;if(!v)return;visit=null;++serial;
+  v.abort.abort();v.quietRumble();v.audio.onended=v.audio.onerror=v.audio.onplaying=null;v.audio.pause();v.audio.removeAttribute('src');v.audio.load();
   v.surface.remove();v.style.remove();document.body.classList.remove('jobcenter-inside');
   for(const event of v.events)event[0].removeEventListener(event[1],event[2]);
+  v.door.dispose();
   v.scene.traverse(o=>{o.geometry?.dispose();o.material?.dispose()});
   const box=document.getElementById('english-subtitle');if(box){box.hidden=true;box.textContent=''}
   bridge.clearInput?.();v.config.onClose?.(reason);
  }
  function open(config={}){
   if(visit)return false;
-  clearRelease();
   const id=++serial,scene=new T.Scene();scene.background=new T.Color(0);
   const camera=new T.PerspectiveCamera(68,innerWidth/innerHeight,.03,100000);
   const material=new T.ShaderMaterial({transparent:true,depthWrite:false,side:T.DoubleSide,uniforms:{uTime:{value:0},uEnergy:{value:0},uAttack:{value:0},uAnger:{value:0},uRumble:{value:0},uDismissal:{value:0},uMouth:{value:new T.Vector4()}},vertexShader:'varying vec2 vUv;void main(){vUv=uv;gl_Position=projectionMatrix*modelViewMatrix*vec4(position,1.);}',fragmentShader:flameFragment});
   const flame=new T.Mesh(new T.PlaneGeometry(1,1),material);scene.add(flame);
   const tunnelMaterial=new T.ShaderMaterial({transparent:true,depthWrite:false,depthTest:false,blending:T.AdditiveBlending,side:T.DoubleSide,uniforms:{uTime:{value:0},uStrength:{value:1}},vertexShader:'varying vec2 vUv;void main(){vUv=uv;gl_Position=projectionMatrix*modelViewMatrix*vec4(position,1.);}',fragmentShader:tunnelFragment});
   const tunnel=new T.Mesh(new T.PlaneGeometry(1,1),tunnelMaterial);tunnel.renderOrder=-1;scene.add(tunnel);
+  const door=createLevelDoor(T,{width:1.6,height:2.6,color:0x111115});door.group.position.set(0,0,36);door.group.rotation.y=Math.PI;scene.add(door.group);
   const audio=new Audio(config.recording||'./assets/audio/jobcenter/overlord.mp3');audio.preload='auto';audio.playsInline=true;audio.volume=0;
-  const surface=document.createElement('div');surface.id='jobcenter-input';surface.tabIndex=0;surface.setAttribute('role','application');surface.setAttribute('aria-label','Jobcenter. WASD: gehen. Pfeile oder Ziehen: Blick. Auf Touch zwei Finger auseinanderziehen und halten: vorwärts; zusammenziehen und halten: rückwärts. Loslassen: stoppen. Links ziehen: gehen; rechts ziehen: Blick. Escape: verlassen.');
+  const surface=document.createElement('div');surface.id='jobcenter-input';surface.tabIndex=0;surface.setAttribute('role','application');surface.setAttribute('aria-label','Jobcenter. WASD oder Pfeile: gehen. Maus oder Ziehen: Blick. Auf Touch zwei Finger auseinanderziehen und halten: vorwärts; zusammenziehen und halten: rückwärts. Loslassen: stoppen. Links ziehen: gehen; rechts ziehen: Blick. E an der Tür oder Escape: verlassen. Tür auf Touch antippen.');
   const style=document.createElement('style');style.textContent=`
    .jobcenter-inside #app> :not(#world3d):not(#jobcenter-input):not(#english-subtitle){display:none!important}
    .jobcenter-inside #world3d{filter:none!important;background:#000!important}
@@ -186,9 +185,9 @@ export function createJobcenterEncounter(T,renderer,bridge){
   `;
   document.head.append(style);document.getElementById('app').append(surface);document.body.classList.add('jobcenter-inside');
   let effects=null;try{effects=config.effects?.()||null}catch{}
-  const v=visit={id,scene,camera,material,flame,tunnel,audio,surface,style,config,effects,rumbleSource:null,rumbleAttempted:false,rumbleLevel:0,dismissal:0,heat:0,abort:new AbortController(),events:[],x:0,z:34,yaw:0,pitch:-.015,time:0,distance:34,pressure:0,phase:'approach',mediaStarted:false,mediaPending:false,playSerial:0,failed:false,playback:0,lastMedia:0,stalled:0,energy:0,attack:0,data:null,captionKey:'',captionCues:[],touch:{forward:0,side:0},pinch:null,pointers:new Map()};last=performance.now();
+  const v=visit={id,scene,camera,material,flame,tunnel,door,audio,surface,style,config,effects,rumbleSource:null,rumbleAttempted:false,rumbleLevel:0,dismissal:0,heat:0,abort:new AbortController(),events:[],x:0,z:34,yaw:0,pitch:-.015,time:0,distance:34,pressure:0,phase:'approach',leaving:false,mediaStarted:false,mediaPending:false,playSerial:0,failed:false,playback:0,lastMedia:0,stalled:0,energy:0,attack:0,data:null,captionKey:'',captionCues:[],touch:{forward:0,side:0},pinch:null,pointers:new Map()};last=performance.now();
   const on=(target,name,fn)=>{target.addEventListener(name,fn);v.events.push([target,name,fn])};
-  const current=()=>visit===v&&serial===id;
+  const current=()=>visit===v&&serial===id&&!v.leaving;
   function quietRumble(){v.rumbleSource?.dispose();v.rumbleSource=null;v.rumbleAttempted=false;v.rumbleLevel=0;v.dismissal=0}
   v.quietRumble=quietRumble;
   function suspendMedia(){++v.playSerial;v.mediaPending=false;audio.pause();quietRumble()}
@@ -198,7 +197,7 @@ export function createJobcenterEncounter(T,renderer,bridge){
   audio.onended=()=>{if(current()&&v.phase==='speaking'&&v.mediaStarted)close('ended')};
   // Unlock this single media element in the entrance's trusted E/touch gesture.
   // Silent priming stops at time zero; speech is still gated by approach.
-  audio.play().then(()=>{if(!current())return;if(v.phase==='approach'){audio.pause();audio.currentTime=0}else if(!v.failed&&!v.paused()){v.mediaStarted=true;audio.volume=.9}else audio.pause()}).catch(()=>{});
+  audio.play().then(()=>{if(!current()){audio.pause();return}if(v.phase==='approach'){audio.pause();audio.currentTime=0}else if(!v.failed&&!v.paused()){v.mediaStarted=true;audio.volume=.9}else audio.pause()}).catch(()=>{});
   fetch('./assets/audio/jobcenter/overlord.json?v=20261013-mouth-audit',{signal:v.abort.signal}).then(r=>{if(!r.ok)throw Error('jobcenter envelope');return r.json()}).then(data=>{if(current())v.data=data}).catch(error=>{if(current()&&error.name!=='AbortError')v.data={text:config.text||'',duration:config.duration||60}});
   let mouseLook=null;
   on(surface,'pointerdown',e=>{
@@ -234,18 +233,21 @@ export function createJobcenterEncounter(T,renderer,bridge){
    if(p.move){v.touch.side=clamp((e.clientX-p.startX)/55,-1,1);v.touch.forward=clamp((p.startY-e.clientY)/55,-1,1)}else{v.yaw-=(e.clientX-p.x)*.004;v.pitch=clamp(v.pitch-(e.clientY-p.y)*.003,-1.25,1.25)}p.x=e.clientX;p.y=e.clientY;
   });
   on(surface,'pointerleave',()=>{mouseLook=null});
-  const release=e=>{const p=v.pointers.get(e.pointerId);v.pointers.delete(e.pointerId);
+  const release=e=>{const p=v.pointers.get(e.pointerId),wasPinch=!!v.pinch;v.pointers.delete(e.pointerId);
    if(v.pinch?.ids.includes(e.pointerId)){v.pinch=null;v.touch={forward:0,side:0};for(const remaining of v.pointers.values())if(remaining.touch)remaining.blocked=true}
    else if(p?.move)v.touch={forward:0,side:0};
+   if(e.type!=='pointerup'||!current()||paused()||!p||p.blocked||wasPinch||Math.hypot(e.clientX-p.startX,e.clientY-p.startY)>=9||Math.hypot(v.x,v.z-36)>=3)return;
+   const ray=new T.Raycaster();ray.setFromCamera(new T.Vector2(e.clientX/innerWidth*2-1,1-e.clientY/innerHeight*2),v.camera);
+   if(ray.intersectObject(v.door.group,true).length)close();
   };
   on(surface,'pointerup',release);on(surface,'pointercancel',release);on(surface,'lostpointercapture',release);
-  on(window,'keydown',e=>{if(!current())return;if(e.code==='Escape'){e.preventDefault();close();return}if(v.phase==='speaking'&&(v.mediaPending||v.failed)&&!e.repeat)resume()});
+  on(window,'keydown',e=>{if(!current()||window.Germany3D?.levelTransition?.active)return;if(e.code==='Escape'||e.code==='KeyE'&&Math.hypot(v.x,v.z-36)<3){e.preventDefault();close();return}if(v.phase==='speaking'&&(v.mediaPending||v.failed)&&!e.repeat)resume()});
   function resetInput(){mouseLook=null;v.pinch=null;v.touch={forward:0,side:0};v.pointers.clear();bridge.clearInput?.()}
   v.resetInput=resetInput;on(window,'resize',resetInput);
   on(window,'blur',()=>{resetInput();v.suspended=true;suspendMedia()});
   on(window,'focus',()=>{v.suspended=false;last=performance.now();if(v.phase==='speaking'&&!paused())resume()});
   on(document,'visibilitychange',()=>{resetInput();last=performance.now();if(document.hidden)suspendMedia();else if(v.phase==='speaking'&&!paused())resume()});
-  function paused(){return document.hidden||v.suspended||!!window.GermanyHUD?.paused}
+  function paused(){return document.hidden||v.leaving||v.suspended||!!window.GermanyHUD?.paused||!!window.Germany3D?.levelTransition?.active}
   function resume(){
    if(!current()||paused()||v.mediaPending)return;
    if(v.mediaStarted&&!audio.paused&&!v.failed)return;
@@ -287,6 +289,7 @@ export function createJobcenterEncounter(T,renderer,bridge){
   v.camera.aspect=innerWidth/innerHeight;v.camera.updateProjectionMatrix();v.camera.position.set(0,1.65,0);v.camera.rotation.order='YXZ';v.camera.rotation.set(v.pitch+Math.sin(v.time*23)*shudder,v.yaw,Math.sin(v.time*17)*shudder*.6);
   // Camera-relative origin keeps a limitless plane numerically stable in ordinary play.
   v.flame.position.set(-v.x,growth*.50,-v.z);v.flame.scale.set(growth*(.9+v.heat*.1)+pulse,growth+pulse*1.8,1);v.flame.quaternion.copy(v.camera.quaternion);
+  v.door.group.position.set(-v.x,0,36-v.z);
   v.tunnel.position.copy(v.flame.position);v.tunnel.scale.set(40,27,1);v.tunnel.quaternion.copy(v.camera.quaternion);
   v.tunnel.material.uniforms.uTime.value=reduced.matches?0:v.time;
   v.tunnel.material.uniforms.uStrength.value=(1-v.pressure*.85)*(.9+v.energy*.1+v.rumbleLevel*.35+v.heat*.7);
@@ -304,12 +307,6 @@ export function createJobcenterEncounter(T,renderer,bridge){
   const next=layout?.captionAt(v.captionCues,v.playback)||v.captionCues.find(c=>c[0]<=v.playback&&v.playback<c[1])?.[2]||'';
   if(box.textContent!==next)box.textContent=next;box.hidden=!next;
  }
- function renderRelease(doorUv){
-  if(!release)return false;const now=performance.now(),dt=clamp((now-releaseLast)/1000,0,.1);releaseLast=now;
-  const paused=document.hidden||releaseBlurred||window.GermanyHUD?.paused;
-  try{if(release.render(paused?0:dt,reduced.matches,doorUv))clearRelease()}catch{clearRelease()}
-  return !!release;
- }
- return {open,close,render,renderRelease,get active(){return !!visit},get releasing(){return !!release},inspect(){return visit?{active:true,phase:visit.phase,x:visit.x,z:visit.z,yaw:visit.yaw,pitch:visit.pitch,distance:visit.distance,pressure:visit.pressure,energy:visit.energy,attack:visit.attack,rumbleLevel:visit.rumbleLevel,dismissal:visit.dismissal,heat:visit.heat,rumbleActive:!!visit.rumbleSource?.active,playback:visit.playback,mouth:visit.material.uniforms.uMouth.value.toArray(),mediaStarted:visit.mediaStarted,mediaPaused:visit.audio.paused,failed:visit.failed,captionCues:visit.captionCues.length,resources:{geometries:2,textures:0,media:1},duration:visit.data?.duration||0}:{active:false,release:release?.inspect()||null}}};
+ return {open,close,render,get active(){return !!visit},exitView(){const v=visit;return v?{camera:v.camera,door:v.door,render:camera=>renderer.render(v.scene,camera)}:null},inspect(){return visit?{active:true,leaving:visit.leaving,door:visit.door.inspect(),phase:visit.phase,x:visit.x,z:visit.z,yaw:visit.yaw,pitch:visit.pitch,distance:visit.distance,pressure:visit.pressure,energy:visit.energy,attack:visit.attack,rumbleLevel:visit.rumbleLevel,dismissal:visit.dismissal,heat:visit.heat,rumbleActive:!!visit.rumbleSource?.active,playback:visit.playback,mouth:visit.material.uniforms.uMouth.value.toArray(),mediaStarted:visit.mediaStarted,mediaPaused:visit.audio.paused,failed:visit.failed,captionCues:visit.captionCues.length,resources:{geometries:10,textures:0,media:1},duration:visit.data?.duration||0}:{active:false}}};
 }
 

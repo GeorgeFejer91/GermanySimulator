@@ -40,8 +40,8 @@ Mission order:
 Completing the first registration interview allocates a home through the existing
 `onRegistration` reward. The first receipt in each playthrough grants +3 Germanness and reveals a persistent gold form-shaped A38 medal beside the left HUD. Duplicate receipts grant no extra points. After the A38 form is submitted, a hopeful inner monologue introduces the three-neighbor mission; the mission fax and
 sausage lead to the house at Berlin's southwest edge: JWD, “janz weit draußen”.
-Visit its covered sleeping porch with E, then finish conversations with all three
-neighbors. This detour resumes Anmeldung II without renumbering the eight
+Visit its covered sleeping porch with E, then follow and finish the introductory
+walking tours with all three adult neighbors. This detour resumes Anmeldung II without renumbering the eight
 procedures. A previously saved registration badge alone does not allocate a
 house in a new run.
 
@@ -53,7 +53,8 @@ It skips the title, registration interview and monologue. City readiness and
 all three selected sprite loads must settle before play starts; failed images
 use the existing procedural fallback. Hidden-page startup waits for foreground.
 The shortcut is consumed once, and normal URLs retain their original entry.
-All three final conversation acknowledgements resume Anmeldung II as usual.
+Completing all three introductory tours and their final acknowledgements resumes
+Anmeldung II as usual.
 
 The patched, sparsely furnished home sits between tidy family houses in a six-house
 garden suburb inspired by Schlachtensee and Zehlendorf. A second villa/landhouse
@@ -77,7 +78,7 @@ or narrowing the garden paths. The architecture remains a fictional Berlin
 villa suburb; the [district's history of Schlachtensee's landhouses](https://www.berlin.de/ba-steglitz-zehlendorf/aktuelles/pressemitteilungen/2020/pressemitteilung.1024262.php)
 and [Reddit residents' suburban descriptions](https://www.reddit.com/r/berlin/comments/yzbc0y/)
 are references, not a claim that every Berlin suburb looks alike.
-Frau Schwabingen is a house-proud Swabian Kehrwoche enthusiast. Heiko Maaslos is a professor of systems engineering (Systemtechnik). His awkwardly assembled clauses and supposedly helpful explanations presume he is right: selective measurements, engineering vocabulary and assumed agreement justify his intrusions. His wife Inga Maaslos works in fictional People & Culture and recasts imposed chores as positive opportunities chosen by the newcomer. Their arrogant, half-lidded expressions and status anxiety underline their demands. Eight-year-old Theodor speaks six languages; his parents worry about his Latin milestones. These are fictional identities and authored personalities. Dialogue retains Berlin Denglisch and the existing English subtitle path.
+Frau Schwabingen is a house-proud Swabian Kehrwoche enthusiast. Heiko Maaslos is a professor of systems engineering (Systemtechnik). His awkwardly assembled clauses and supposedly helpful explanations presume he is right: selective measurements, engineering vocabulary and assumed agreement justify his intrusions. His wife Inga Maaslos works in fictional People & Culture and recasts imposed chores as positive opportunities chosen by the newcomer. Their arrogant, half-lidded expressions and status anxiety underline their demands. Eight-year-old Theodore speaks six languages; his parents worry about his Latin milestones. Theodore has a visibly smaller child sprite and his own preference for playing on the paving stones. These are fictional identities and authored personalities. Dialogue retains Berlin Denglisch and the existing English subtitle path.
 Heiko's procedural costume follows the user's visual reference: shaggy sandy
 blond hair, light stubble and a brown ribbed zip-neck sweater. His previous
 spectacles, bow tie and waistcoat are removed. The private reference photo is
@@ -88,11 +89,9 @@ clipped hedges, upright gnomes, striped lawns and polished VW-style SUV,
 BMW-style saloon and Tesla-style EV silhouettes. The player's parcel has weeds,
 ragged hedges, bare patches and a fallen gnome. `jwd-gardens.js` owns the shared
 parcels, paved approaches, solid prop rectangles and work stations for both pages.
-Private garden grass carries no public-lawn offence. Residents wash/polish their
-cars; Schwabingen also walks to her hedge and trims it. Their animation clock advances
-only in the nearby running simulation. Loaded painted residents use their
-planted idle row at work stations; articulated chores and tools remain visible
-only when their paint is unavailable. Work pauses for conversations, and gait
+Private garden grass carries no public-lawn offence. Residents polish their
+cars with a cloth; Schwabingen also walks to her hedge and tends it. Their animation clock advances
+only in the nearby running simulation. Work pauses for conversations, and gait
 comes from accepted physical movement.
 
 The satire targets the fictional residents' status anxiety, unsolicited lectures,
@@ -100,7 +99,7 @@ selective rule enforcement and backhanded compliments. Heiko frames intrusions
 as assistance: formal concern, a selective account of earlier conversations,
 claimed agreement through silence, then responsibility shifted to the listener.
 His original fictional dialogue never reproduces private correspondence or its
-identifying details. Heiko values Theodor's
+identifying details. Heiko values Theodore's
 six languages but orders his zipper away from the paintwork; Inga
 defends the car's moral standing while relocating play behind the garage.
 The parked cars offer a readable laminated notice; decorative hedges and gnomes
@@ -118,32 +117,70 @@ the player on the home porch, checking body clearance. Before allocation the
 station-garden consequence remains. Every return to the home rearms one finite
 neighbor visit when the player tries to leave. One resident physically follows
 the shared paths to the front lawn and speaks only within conversational range.
-Acknowledge the finite exchange and they return to their drive. Lingering in the
+Acknowledge the finite exchange and they return to their drive. An active tour
+excludes a competing home interception. Lingering in the
 garden can invite another complaint after 38 simulation seconds; leaving the
 neighborhood cancels the approach. Returning home or another arrest rearms it.
-Conversations pause the city and use existing E/touch controls.
+Arrival conversations pause the city and use existing E/touch controls; travel
+legs leave player movement active.
 
-Each resident owns one planted interaction: stop, look, a brief greeting nod,
-listen, speak, then release to the existing return route. Actual speech start
-may preempt the short greeting. Queued, disabled or caption-only speech keeps
-the lips closed; a current audible cue alone selects talking. Recorded playback
-time and its measured energy drive the mouth. Browser speech uses its observed
-start clock and estimated articulation. Pause freezes both; advancing a line,
-replacing a conversation or leaving cancels its cue. The renderer grants no
-mission credit. Only the current conversation's final acknowledgement adds its
-resident to the distinct introductions; duplicate/stale completion cannot add
-another resident. The four painted walking views retain accepted displacement
-and the established family scale. Direction changes do not claim unauthored
-whole-body turn animation. Loaded sprites remain visible during idle, walking
-and interaction states; missing paint retains the articulated work fallback.
-In short landscape viewports, neighbor dialogue actions sit at the screen edge
-and the redundant E hint disappears during the exchange, keeping the speaker visible.
+`neighbor-story.js` owns the coordinated stop, subject, gesture and exact DE/EN
+speech data. Each adult has a full introductory route and three shorter repeat
+routes: twelve tours, thirty-one stops and sixty-four utterances in total.
+Schwabingen demonstrates sweeping, street responsibilities, manual weed
+removal and hedge/bird protection. Heiko moves from his car to winter service,
+the overhanging hedge, his doorway and Theodore's play route. Inga leads from
+her EV to the player's shutters and garden, then her own front door, converting
+environmental concern and voluntary chores into personal status tests. The
+verified federal and Berlin rules, their limitations and the characters' private
+inventions are documented in [the source notes](../docs/neighborhood-rules.md).
+They stay distinguishable within the joke; no blanket nationwide Kehrwoche,
+lawn-manicuring, open-blind or private-car-washing rule is invented.
+
+The guide walks the shared paved paths, waits when the player falls behind and
+speaks the stop's lines only after arrival within conversational range. A short
+owned travel line may accompany a leg. At the stop, arrival, facing the subject,
+gesture anticipation, action and release form one arc; gait follows accepted
+ground displacement rather than a timer on a stationary body. The player follows
+the route instead of receiving a remote sequence of completed stops.
+If another body blocks a leg, the guide plants their feet and the hint asks the
+player to make room. Cross-lane recovery includes the full body-clear paved
+width and a short backtrack, so Theodore can pass a waiting burglar without
+walking through Heiko. Every candidate segment still uses the ordinary collision
+checks; an occupied escape route waits until it is clear.
+Within the guide's 185-unit follow range, the sausage pointer yields to the
+character and the follow hint; it returns if the player falls behind. Shallow
+phone landscape tours lift the scene and place the hint and dialogue actions
+at the side edges so gestures remain visible above the touch controls.
+
+Heiko calls Theodore through the Maaslos doorway before the child's first reply.
+The smaller child walks out, contradicts his father's productivity schedule and
+leads both adults to the paving-stone islands beside the player's fallen gnome.
+Theodore owns his replies and travel cue; Heiko retains his own lines even when
+the child leads. The child-led leg and its final exchange are required before
+Heiko's introduction can finish. Theodore briefly remains by the play area and
+returns to the doorway; he does not become a fourth adult mission requirement.
+Heiko's third repeat route recalls him for another short game.
+
+Queued, disabled or caption-only speech keeps the lips closed; a current audible
+cue alone selects talking. Recorded playback time and its measured energy drive
+the mouth. Browser speech uses its observed start clock and estimated articulation.
+Pause freezes both; advancing a line, replacing a conversation or leaving cancels
+its cue. Travel captions and stop dialogue share one speaker-owned stream.
+The renderer and story data grant no mission credit. Only the current tour's final
+acknowledgement adds its adult to the distinct introductions; duplicate or stale
+completion cannot skip a route, credit another resident or replay a child summon.
+The four painted walking directions retain accepted displacement and family scale;
+authored gestures map to the current stop and release before walking resumes.
 
 From the second home visit, one opportunistic burglar can walk along the lane to
 inspect the home. On finding only a mattress and empty crates, he complains and
 walks to the richer Maaslos house, disappearing at its doorway. The event waits for
 the player to be nearby, uses ordinary body collision, and cannot remove mission
-items. No extra currency, save system, asset download or background timer is added.
+items. While a tour owns attention, an already approaching burglar waits before
+inspection instead of interrupting the guide; inspection can resume after the tour
+releases ownership. No extra currency, save system, asset download or background
+timer is added.
 
 A plump, pale Weißwurst fixed at the top of the screen points its glowing red end toward
 the current mission's actual office entrance. It follows all eight procedures;
@@ -169,6 +206,15 @@ mark the actual fitted entrance; black keeps a charcoal door and pale luminous
 edge. Pause/dialogue freezes the effect; reduced motion keeps steady gold.
 
 ### Gameplay paperwork
+
+Building interiors follow the shared [intro/outro protocol](./LEVEL-TRANSITIONS.md):
+open the destination door, consume the surroundings as a Gaussian vortex, then
+dissolve the destination last. Forced ejections pull the actual first-person view
+back through its original entrance, with flames on punitive office/flame exits,
+then reverse that vortex to rebuild the city. Voluntary leaving returns immediately
+to a body-clear point outside. Ordinary office dialogue and forms use a shared
+indoor room; outdoor JWD, street conversations and Stadtbild work keep their city
+flow. Every structure has a visible door, including procedural fallbacks.
 
 Keep the **Germanness** gauge, numeric 0–15 score and law-power threshold salient and continuously visible during city play. Hide the city rail throughout the Bürgeramt episode, including direct entry, and restore it on returning to the city without changing progression. It is the player's ongoing progression goal. Use a compact horizontal Schwarz-Rot-Gold rail at the top-left and the subtitle language control at the top-right, with matching safe-area margins and top alignment. The **Akte / M** tab and current day sit below. At extreme text enlargement, reflow the toggle beside the file tab below the full-width meter; preserve readable type. Move that same gauge into the opened file header so every file page retains it. Police status appears only while wanted; energy becomes an edge warning at 35 or below. Full energy, forms, Pfand, the sausage collection, the current rule, controls and audio/subtitle settings belong in the opened file. Its Mission, Status, Collection and Controls pages keep the ordinary small-screen view readable; long documents and enlarged text have a vertical reading fallback rather than ellipses. Opening the file pauses city simulation and releases held movement input; M, Escape or Back returns to play. A committed speech notice remains visible inside the file.
 
@@ -224,8 +270,8 @@ its instructions. On narrow/enlarged layouts, keep Next anchored and allow
 vertical reading of the complete copy. Other dialogues retain their presentation.
 
 - The Jobcenter occupies the eastern Berlin parcel beyond the Fundbüro, with a south-facing entrance and a pedestrian path to the middle road. Its original procedural facade adapts the official photograph of Jobcenter Berlin Mitte, Müllerstraße 16: light square tiles, a glass-block stairwell bay, flat canopy, red-framed customer doors and the Jobcenter sign. E at the door starts an optional first-person encounter without changing mission, wanted level, energy or inventory. The unlisted `?geheim=jobcenter` URL opens directly inside that same encounter after renderer readiness, skipping the title, humor forms and welcome. It records a body-clear exterior doorstep for normal ejection, waits while the page is hidden, and consumes the direct entry once; leaving does not reopen the encounter. The city and its music pause for the visit.
-- Inside the Jobcenter, a distant flame appears within a faint amber-red tunnel of emissive haze against black; there is no visible floor, horizon, wall or movement boundary. WASD moves relative to the view; left/right arrows turn, up/down arrows look up/down (Page Up/Down remain aliases), mouse/trackpad movement or dragging looks, and R/Shift runs. The cursor is hidden over the scene. On touch, dragging the left part of the screen moves and dragging the right part looks. Two fingers take priority over single-finger controls: spreading and holding them moves forward, pinching and holding moves backward, and returning to their initial separation stops. A 10 CSS-pixel neutral band filters jitter; another 65 pixels reaches 7 m/s running pace forward or 3.6 m/s walking pace backward. The gesture moves the player on the plane rather than changing camera FOV. Lifting/canceling either finger, adding a third, pausing, blurring, hiding or rotating stops touch movement; remaining fingers must be lifted before a new gesture. Escape provides an early exit. Approaching within 13 world metres starts the supplied overlord recording once per visit. Proximity enlarges the flame, while the final MP3's hash-bound acoustic cues, sampled at native media time, drive closed, open, rounded and contact mouth shapes; its measured energy and attack envelopes drive brightness and flame tongues. Its face has the paired slanted gold eyes above a burning almond-shaped mouth. Radial fire fissures and an incandescent rim surround a black cavity that opens and closes with the existing native-media speech energy; there are no teeth or rigid horns. The tunnel haze stays anchored to the flame, recedes with distance, softens on approach and has no collision. A synthesized bass rumble swells in measured speech pauses and stays low under the final dismissal; its native-media cues also drive a slight camera shudder and brighter fire. The last spoken command drives a smoothed red-to-white heat rise, faster fire and a larger final growth surge, without delaying native-ended ejection. Retreat remains possible throughout speech. Reduced motion retains growth and speech brightness but removes turbulent cycling, attack pulses and camera shudder. Pause, blur, hidden-page, failure and exit synchronously dispose the rumble source; resume recreates it against the current voice time.
-- The recording's natural `ended` event ejects immediately to a body-clear point outside the door; an occupied point retains the valid entrance position. The exact existing subtitle rail accompanies the speech. Voice-off, failed playback or eight seconds without media progress uses a bounded silent caption path for the clip's duration. Hidden, blurred or paused visits suspend media and input. Every exit invalidates old callbacks, stops/releases media, aborts pending metadata, disposes scene geometry/materials and restores city controls/music. On natural or fallback completion, the final void frame is captured once: darkness withdraws smoothly while source-colored Gaussian fire fragments collapse toward the actual exterior Jobcenter doorway over the live street for 1.15 seconds. City position and controls return at media end; the visual overlay does not delay or duplicate ejection. Escape/re-entry cancels it, hidden/blur/HUD pause freezes its clock, and capture/render failure falls back to the direct cut. Reduced motion uses a 240 ms fade. This remains on the existing renderer and loop, with no second runtime or scheduler.
+- Inside the Jobcenter, a distant flame appears within a faint amber-red tunnel of emissive haze against black, with the original black entrance door available as an exit; there is no visible floor, horizon, wall or movement boundary. WASD and arrow keys move relative to the view; Page Up/Down adjust pitch, mouse/trackpad movement or dragging looks, and R/Shift runs. The cursor is hidden over the scene. On touch, dragging the left part of the screen moves and dragging the right part looks. Two fingers take priority over single-finger controls: spreading and holding them moves forward, pinching and holding moves backward, and returning to their initial separation stops. A 10 CSS-pixel neutral band filters jitter; another 65 pixels reaches 7 m/s running pace forward or 3.6 m/s walking pace backward. The gesture moves the player on the plane rather than changing camera FOV. Lifting/canceling either finger, adding a third, pausing, blurring, hiding or rotating stops touch movement; remaining fingers must be lifted before a new gesture. E beside the entrance, touching that door, or Escape provides an immediate voluntary exit. Approaching within 13 world metres starts the supplied overlord recording once per visit. Proximity enlarges the flame, while the final MP3's hash-bound acoustic cues, sampled at native media time, drive closed, open, rounded and contact mouth shapes; its measured energy and attack envelopes drive brightness and flame tongues. Its face has the paired slanted gold eyes above a burning almond-shaped mouth. Radial fire fissures and an incandescent rim surround a black cavity that opens and closes with the existing native-media speech energy; there are no teeth or rigid horns. The tunnel haze stays anchored to the flame, recedes with distance, softens on approach and has no collision. A synthesized bass rumble swells in measured speech pauses and stays low under the final dismissal; its native-media cues also drive a slight camera shudder and brighter fire. The last spoken command drives a smoothed red-to-white heat rise, faster fire and a larger final growth surge, without delaying native-ended ejection. Retreat remains possible throughout speech. Reduced motion retains growth and speech brightness but removes turbulent cycling, attack pulses and camera shudder. Pause, blur, hidden-page, failure and exit synchronously dispose the rumble source; resume recreates it against the current voice time.
+- The recording's natural `ended` event starts the shared fiery forced ejection and reverse vortex, returning to a body-clear point outside the door; an occupied point retains the valid entrance position. The exact existing subtitle rail accompanies the speech. Voice-off, failed playback or eight seconds without media progress uses a bounded silent caption path for the clip's duration. Hidden, blurred or paused visits suspend media and input. Every exit invalidates old callbacks, stops/releases media and synchronously disposes the rumble. The shared owner retains the actual interior view for the pull, then performs scene teardown and restores city controls/music through its single return receipt. Voluntary leaving has no pull or vortex. The [building transition protocol](./LEVEL-TRANSITIONS.md) owns timing, reduced motion, failure and cleanup; there is no separate Jobcenter outro renderer or scheduler.
 
 - Krügers Kugellager is a Germany-side takeaway storefront on the street near the Späti. Its bearing-marked 3D facade and counter dialogue advertise Kugellager to go; interacting opens a German-only two-line menu exchange without adding a purchase currency or altering the mission chain.
 - A civilian car honks as soon as it brakes because the player steps into its lane. Its driver shouts one short angry line through the shared speech/text broker; only that directly obstructed car reacts, while a prolonged stop brings longer, repeated horn blasts. Berlin drivers use Denglisch and Deutschland drivers use German only. The horn remains audible beside the shout, and the driver interrupts lower-priority ambient speech while leaving train and critical dialogue intact.

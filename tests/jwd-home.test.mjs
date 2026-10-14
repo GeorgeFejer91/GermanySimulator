@@ -10,15 +10,15 @@ function fn(name){
  for(let i=open+1;i<source.length;i++){const c=source[i];if(quote){if(escape)escape=false;else if(c==='\\')escape=true;else if(c===quote)quote=null;continue}if(c==='"'||c==="'"||c==='`'){quote=c;continue}if(c==='{')depth++;else if(c==='}'&&!--depth)return source.slice(start,i+1)}
  throw Error(name);
 }
-function harness(){
+function harness(tours=false){
  const nodes=new Map(),node=id=>{if(!nodes.has(id))nodes.set(id,{textContent:'',hidden:false});return nodes.get(id)};
  const h={WORLD:{w:10960,h:5360},RAIL_GUTTER:560,TREE_RADIUS:38,player:{x:2360,y:2320,r:16,energy:100},state:{started:true,mission:0,lang:'de',wanted:3,germanness:0},window:{},document:{getElementById:node},localStorage:{setItem(){}},anmeldungAwarded:false,
   goerlitzerPark:{x:10000,y:4000,w:100,h:100},wirtschaftswunderSite:{x:10000,y:4200,collisionRadius:142},kiesingerMemorial:{x:10000,y:4500},props:[],normObjects:[],trees:[],walkways:[],grassAreas:[],trains:[],trafficCars:[],policeVehicles:[],police:[],stationElevation:()=>0,
   policePath:{x1:4810,y1:4410},OFFENSE_TIMING:{policeContactCooldown:5.8},dist:(ax,ay,bx,by)=>Math.hypot(ax-bx,ay-by),clamp:(n,a,b)=>Math.max(a,Math.min(b,n)),offsetWorldPoint:b=>({...b,x:b.x+560,y:b.y+560}),updateHud(){},clearInput(){},syncPoliceResponse(){},uiTone(){},toast(){},renderAnmeldungBadge(){}};
  h.addGermanness=amount=>{h.state.germanness=Math.min(15,h.state.germanness+amount)};
- h.openDialogue=(speaker,lines,portrait,done,voiceId,subtitles)=>{h.state.modal=h.state.dialogue=true;h.dialogue=h.state.dialogueData={speaker,lines,done,voiceId,subtitles}};
+ h.openDialogue=(speaker,lines,portrait,done,voiceId,subtitles,roaming=false)=>{h.state.modal=!roaming;h.state.dialogue=true;h.dialogue=h.state.dialogueData={speaker,lines,done,voiceId,subtitles,roaming,i:0}};
  h.finish=()=>{const done=h.dialogue?.done;h.dialogue=null;h.state.modal=h.state.dialogue=false;done?.()};
- vm.createContext(h);vm.runInContext(readFileSync(new URL('../jwd-gardens.js',import.meta.url),'utf8'),h);
+ vm.createContext(h);vm.runInContext(readFileSync(new URL('../jwd-gardens.js',import.meta.url),'utf8'),h);if(tours)vm.runInContext(readFileSync(new URL('../neighbor-story.js',import.meta.url),'utf8'),h);
  const between=(a,b)=>source.slice(source.indexOf(a),source.indexOf(b,source.indexOf(a)+a.length));
  vm.runInContext(between('const buildings=','const grassAreas=')+between('const missions=','const rules=')+source.split('\n').find(l=>l.startsWith('const jwdGardens='))+source.split('\n').find(l=>l.startsWith('const jwdLane=')).replace('walkways.push(jwdLane);','')+
   between('const jwdNeighborhood=','for(const b of buildings)')+between('const npcs=',' {x:520,y:720')+'].map(offsetWorldPoint);'+between('const jwd=','window.Germany3DBridge=')+
@@ -29,6 +29,35 @@ function harness(){
  return h;
 }
 
+// Place only the test follower on legal nearby paving; the guide and child must
+// traverse every production movement substep. Browser tests cover actual input.
+function followGuide(h,t){
+ const leader=t.leader||t.actor,stop=t.script.stops[t.stop],speaker=t.phase==='ready'&&stop?.lines[t.line]?.speaker==='child'?h.jwdState.child:t.actor;
+ const aim=leader.jwdRoute?.[0],dx=aim?aim.x-leader.x:0,dy=aim?aim.y-leader.y:0,len=Math.hypot(dx,dy)||1;
+ const desired=t.phase==='child-arrive'?{x:leader.x,y:leader.y+80}:t.waitingForGuide?{x:leader.x,y:leader.y+45}:t.phase==='walk'?{x:leader.x-dx/len*70,y:leader.y-dy/len*70}:speaker;
+ const candidates=[];
+ for(let x=leader.x-100;x<=leader.x+100;x+=10)for(let y=leader.y-100;y<=leader.y+100;y+=10){
+  if(!h.pedestrianRouteContains({gardenPaths:h.gardens.paths},x,y,16)||h.staticBlocked(x,y,16)||h.actors.some(n=>h.dist(x,y,n.x,n.y)<30))continue;
+  if(h.dist(x,y,leader.x,leader.y)>130||t.phase==='ready'&&h.dist(x,y,speaker.x,speaker.y)>100)continue;
+  candidates.push({x,y,score:h.dist(x,y,desired.x,desired.y)});
+ }
+ const selected=candidates.sort((a,b)=>a.score-b.score)[0];assert.ok(selected,'a body-clear follower position exists');Object.assign(h.player,selected);
+}
+function completeTour(h,dt=1/30){
+ const tour=h.jwdState.tour;assert.ok(tour);const reached=new Set(),speakers=new Set();
+ for(let step=0;step<180/dt&&h.jwdState.tour===tour;step++){
+  if(h.state.dialogue){speakers.add(h.dialogue.speaker);h.finish();continue}
+  followGuide(h,tour);
+  if(tour.phase==='ready'){reached.add(tour.script.stops[tour.stop].id);h.speakJwdTourLine(tour)}else h.updateJwd(dt);
+  for(const n of h.actors.filter(n=>n.jwdTouring)){
+   assert.ok(h.pedestrianRouteContains(n,n.x,n.y),`${n.id} remains on paving`);assert.equal(h.staticBlocked(n.x,n.y,13),false,`${n.id} clears solids`);
+   for(const other of [...h.actors,h.player])if(other!==n)assert.ok(h.dist(n.x,n.y,other.x,other.y)>=(other===h.player?29:26)-.01,`${n.id} clears ${other.id||'player'}`);
+  }
+ }
+ assert.notEqual(h.jwdState.tour,tour,`tour finishes: ${tour.script.id}/${tour.stop}/${tour.phase}/${JSON.stringify(tour.leader?.jwdRoute)}`);
+ assert.equal(reached.size,tour.script.stops.length);return{reached,speakers};
+}
+
 test('registration is the allocation cause; a stored badge or premature visit grants no house',()=>{
  const h=harness();h.anmeldungAwarded=true;h.visitJwdHome();h.finish();assert.equal(h.jwdState.allocated,false);assert.equal(h.jwdState.visited,false);
  h.arrestPlayer();assert.equal(h.player.x,h.policePath.x1);
@@ -37,7 +66,7 @@ test('registration is the allocation cause; a stored badge or premature visit gr
 });
 
 test('registration, certificate handoff and valid A38 submission lead straight to home and neighbors',()=>{
- const city=harness(),office=officeHarness();office.config.onRegistration=city.awardAnmeldung;
+ const city=harness(true),office=officeHarness();office.config.onRegistration=city.awardAnmeldung;
  let formOpened=false;office.config.onForm=()=>{formOpened=true};
  office.counter();assert.equal(city.jwdState.allocated,false);
  const settle=()=>{for(let i=0;i<600&&!office.node('amt-actions').children.some(b=>!b.disabled);i++)office.tick(100)};
@@ -48,12 +77,13 @@ test('registration, certificate handoff and valid A38 submission lead straight t
  assert.equal(office.level.stage,'success');assert.equal(city.jwdState.allocated,true);assert.equal(city.jwdState.visited,false);
  office.action(0);office.tick(10000);assert.ok(formOpened,'the certificate handoff opens A38');
  city.forms={a38:{code:'A38'}};city.state.forms=0;city.setTimeout=fn=>fn();city.document.body={classList:{contains:()=>false}};
+ city.indoorVisit=null;vm.runInContext(fn('leaveIndoorBuilding'),city);
  vm.runInContext(source.split('\n').find(line=>line.startsWith('document.getElementById("bureaucracy-form").onsubmit=')),city);
  const submit=valid=>city.document.getElementById('bureaucracy-form').onsubmit({preventDefault(){},currentTarget:{reportValidity:()=>valid,dataset:{type:'a38'}}});
  submit(false);assert.equal(city.currentMission().target,'buergeramt');
  city.state.lang='en';submit(true);assert.equal(city.state.forms,1);assert.equal(city.currentMission().target,'jwd-home');assert.equal(city.getMissionWaypoint(),null,'monologue owns attention before guidance');assert.match(city.dialogue.lines[0],/officially gemeldet/);assert.match(city.dialogue.subtitles[0],/officially registered.*Maybe my neighbors are nice/);city.finish();assert.equal(city.getMissionWaypoint().id,'jwd-home');
  city.visitJwdHome();city.finish();assert.equal(city.currentMission().target,'jwd-neighbors');
- for(const neighbor of city.actors){city.talkJwdNeighbor(neighbor);city.finish()}
+ for(const neighbor of city.actors.slice()){city.talkJwdNeighbor(neighbor);completeTour(city)}
  assert.equal(city.currentMission().target,'hausverwaltung','the old chain resumes only after the introductions');
 });
 
@@ -94,6 +124,17 @@ test('burglar checks the poor home, then actually walks to the richer house with
 test('occupied porch recovers to the adjacent paved lane instead of overlapping a visitor',()=>{
  const h=harness();h.awardAnmeldung();for(const dy of [30,65,100])for(const dx of [0,-40,40,-80,80])h.actors.push({x:h.home.doorX+dx,y:h.home.doorY+dy});
  h.arrestPlayer();assert.ok(h.player.x>=h.lane.x&&h.player.x<=h.lane.x+h.lane.w);assert.ok(h.player.y>=h.lane.y&&h.player.y<=h.lane.y+h.lane.h);assert.equal(h.responderBlocked(h.player.x,h.player.y,16,h.player),false);
+});
+
+test('an already approaching burglar waits for the tour and plants his feet until conversation is available',()=>{
+ const h=harness(true);h.awardAnmeldung();h.state.mission=1;h.jwdState.visited=true;h.jwdState.visit=2;
+ Object.assign(h.player,{x:h.home.doorX,y:h.home.doorY+110});
+ const thief={id:'jwd-burglar',name:'EDE',jwdRole:'burglar',x:h.home.doorX,y:h.home.doorY+68,phase:'approach',routeBounds:h.lane,gardenPaths:h.gardens.paths,jwdMoving:1};
+ h.jwdState.burglar=thief;h.jwdState.burglarVisit=2;h.actors.push(thief);
+ const guide=h.actors.find(n=>n.id==='jwd-watcher');h.talkJwdNeighbor(guide);h.finish();const tour=h.jwdState.tour;
+ for(let i=0;i<600;i++)h.updateJwd(1/30);
+ assert.equal(h.jwdState.tour,tour,'ambient encounter cannot replace an active guided tour');assert.equal(h.state.dialogue,false);assert.equal(thief.phase,'approach');assert.equal(thief.jwdMoving,0,'deferred burglar stays planted');assert.equal(h.jwdState.met.size,0);
+ h.cancelJwdTour();h.updateJwd(1/30);assert.equal(thief.phase,'inspect');assert.equal(h.dialogue.speaker,'EDE');h.finish();assert.equal(thief.phase,'retreat','the deferred encounter retains its normal consequence');
 });
 
 test('burglar gets around a blocked lane at 60/30/10 Hz and can inspect an occupied doorstep',()=>{
@@ -153,6 +194,25 @@ test('working neighbors alternate washing and trimming, with solid cars and priv
  assert.match(source,/!r.privateGarden&&inRect/);
 });
 
+test('nearby car-care stops use a short body-clear driveway route without crossing a garden',()=>{
+ const h=harness(true);
+ for(const [id,from,target] of [
+  ['jwd-parent',{x:1400,y:4710},{x:1380,y:4660}],
+  ['jwd-watcher',{x:1567,y:4660},{x:1552,y:4620}]
+ ]){
+  const actor=h.actors.find(n=>n.id===id),route=h.jwdPath({...actor,...from},target);
+  let previous=from,length=0;
+  for(const point of route){const distance=h.dist(previous.x,previous.y,point.x,point.y);length+=distance;
+   for(let step=0;step<=Math.ceil(distance);step++){const t=step/Math.max(1,Math.ceil(distance)),x=previous.x+(point.x-previous.x)*t,y=previous.y+(point.y-previous.y)*t;
+    assert.ok(h.pedestrianRouteContains(actor,x,y,13));assert.equal(h.staticBlocked(x,y,13),false);
+   }previous=point;
+  }
+  assert.ok(length<75,'a short driveway leg must not detour via the distant cross-lane');
+ }
+ const across=h.jwdPath(h.actors.find(n=>n.id==='jwd-swabian'),{x:1380,y:4660});
+ assert.ok(across.some(point=>point.y===h.gardens.crossY),'separate driveways still connect through the shared lane');
+});
+
 test('far-away departure cancels lawn interception, and another home visit rearms it',()=>{
  const h=harness();h.awardAnmeldung();h.visitJwdHome();h.finish();Object.assign(h.player,{x:h.home.doorX,y:h.gardens.crossY});h.updateJwd(.1);assert.ok(h.jwdState.visitor);
  h.player.x+=1500;h.updateJwd(.1);assert.equal(h.jwdState.visitor,null);assert.equal(h.jwdState.atHome,false);assert.equal(h.state.dialogue,false);
@@ -180,6 +240,34 @@ test('neighbors use the free passing side of the shared garden path',()=>{
   const h=harness(),n=h.actors.find(n=>n.id==='jwd-swabian');Object.assign(n,{x:850,y:h.gardens.crossY,avoid,jwdRoute:[{x:1120,y:h.gardens.crossY}]});Object.assign(h.player,{x:980,y:h.gardens.crossY});
   for(let t=0;t<20&&n.jwdRoute.length;t+=dt){h.updateJwd(dt);assert.ok(h.pedestrianRouteContains(n,n.x,n.y));assert.equal(h.staticBlocked(n.x,n.y,13),false);assert.ok(h.dist(n.x,n.y,h.player.x,h.player.y)>=29-.001)}
   assert.equal(n.jwdRoute.length,0,`${dt}/${avoid}: uses clear side`);
+ }
+});
+
+test('Theodore recovers from the paved lane edge when the follower yields to a waiting burglar',()=>{
+ for(const dt of [1/60,1/30,.1])for(const avoid of [-1,1]){
+  const h=harness(true),parent=h.actors.find(n=>n.id==='jwd-parent');
+  // Exact public-entry touch-run obstruction; both other characters stay put.
+  Object.assign(parent,{x:1212.581758717176,y:4514.045738483013});
+  Object.assign(h.player,{x:1182.9502102878585,y:4502.591475659747});
+  const thief={id:'jwd-burglar',x:1144.7947500170494,y:4534.583956767816};
+  const child={id:'jwd-theodore',x:1149.8197455382428,y:4509.070191837551,avoid,routeBounds:h.lane,gardenPaths:h.gardens.paths,jwdRoute:[{x:1090,y:4540}]};
+  h.actors.push(thief,child);
+  child.jwdProgress={aim:child.jwdRoute[0],d:h.dist(child.x,child.y,1090,4540),time:0,waiting:true,retry:0};
+  const initial=[child.x,child.y];
+  for(let t=0;t<2;t+=dt)h.walkJwdRoute(child,dt);
+  assert.deepEqual([child.x,child.y],initial,'a genuinely occupied escape route waits without overlap');
+  assert.equal(child.jwdMoving,0,'waiting plants the feet');
+  // The player obeys the existing make-room prompt; browser QA owns real input.
+  Object.assign(h.player,{x:1260,y:4564});
+  for(let t=0;t<15&&child.jwdRoute.length;t+=dt){
+   const before={x:child.x,y:child.y};h.walkJwdRoute(child,dt);
+   assert.ok(h.pedestrianRouteContains(child,child.x,child.y,13),'full body stays on paving');
+   assert.equal(h.staticBlocked(child.x,child.y,13),false);
+   for(const other of [...h.actors,h.player])if(other!==child)assert.ok(h.dist(child.x,child.y,other.x,other.y)>=13+(other.r||13)-.001,'full body clears every stationary person');
+   assert.ok(Math.abs(child.jwdMoving-h.dist(before.x,before.y,child.x,child.y))<1e-9,'gait uses accepted displacement');
+  }
+  assert.equal(child.jwdRoute.length,0,`${dt}/${avoid}: takes a clear short backtrack around burglar and father`);
+  assert.ok(h.dist(child.x,child.y,1090,4540)<2);
  }
 });
 
@@ -224,4 +312,32 @@ test('recorded neighbor cue starts after decoding and its real audio clock owns 
  const neighbor=h.actors.find(n=>n.id==='jwd-watcher');h.talkJwdNeighbor(neighbor);h.state.dialogueData.i=0;const item=h.activeStimulus={cueToken:7,family:'dialogue',recording:'test.mp3',clip:{mouthHz:4,mouthEnergy:[0,255,0,0]},start:()=>{}};
  h.playRecordedStimulus(item,1);assert.equal(h.getNeighborDialogue().speaking,false,'decode wait is not an audible start');decode({duration:2});await new Promise(resolve=>setImmediate(resolve));assert.equal(sourceNode.started,true);assert.equal(h.getNeighborDialogue().speaking,true);h.audio.currentTime=3.25;assert.equal(h.getNeighborDialogue().mediaTime,.25);assert.equal(h.getNeighborDialogue().mediaDuration,2);assert.equal(h.getNeighborDialogue().mouthOpen,1);
  h.audio.state='suspended';h.audio.currentTime=4;assert.equal(h.getNeighborDialogue().mediaTime,.25);assert.equal(h.getNeighborDialogue().paused,true);h.activeStimulus=null;sourceNode.onended();assert.equal(h.getNeighborDialogue().speaking,false,'cancelled old source cannot recover ownership');assert.equal(h.jwdState.met.size,0);
+});
+
+test('all introductions require real arrival and acknowledgement; Heiko summons the child before child-led play',()=>{
+ for(const dt of [1/60,1/30,.1]){
+  const h=harness(true);h.awardAnmeldung();h.state.mission=1;h.visitJwdHome();h.finish();
+  for(const id of ['jwd-swabian','jwd-parent','jwd-watcher']){
+   const actor=h.actors.find(n=>n.id===id);h.talkJwdNeighbor(actor);assert.equal(h.jwdState.met.has(id),false);
+   h.finish();assert.equal(h.jwdState.met.has(id),false,'invitation is not mission credit');
+   const result=completeTour(h,dt);assert.equal(h.jwdState.met.has(id),true);
+   if(id==='jwd-parent')assert.ok(result.speakers.has('THEODORE MAASLOS'));
+  }
+  assert.equal(h.currentMission().target,'hausverwaltung');assert.equal(h.jwdState.met.size,3);
+ }
+});
+
+test('tours wait for the follower, reject premature E and stale receipts, cancel without credit, and replay varied routes',()=>{
+ const h=harness(true);h.awardAnmeldung();h.state.mission=1;h.jwdState.visited=true;
+ const actor=h.actors.find(n=>n.id==='jwd-parent');h.talkJwdNeighbor(actor);const stale=h.dialogue.done;h.finish();const t=h.jwdState.tour;
+ Object.assign(h.player,{x:1090,y:4540});const before=[actor.x,actor.y];for(let i=0;i<30;i++)h.updateJwd(.1);assert.deepEqual([actor.x,actor.y],before);assert.equal(t.waiting,true);assert.equal(actor.jwdMoving,0);assert.equal(h.jwdState.met.size,0);
+ h.speakJwdTourLine(t);assert.equal(h.state.dialogue,false,'cannot speak before arrival');
+ h.cancelJwdTour();stale();assert.equal(h.jwdState.tour,null);assert.equal(h.jwdState.met.size,0);
+ h.talkJwdNeighbor(actor);completeTour(h);assert.equal(h.jwdState.met.size,1);
+ for(const neighbor of h.actors.filter(n=>n.jwdRole!=='child')){
+  if(!h.jwdState.met.has(neighbor.id)){h.talkJwdNeighbor(neighbor);completeTour(h)}
+  const introductions=h.jwdState.met.size,seen=new Set();
+  for(let i=0;i<3;i++){h.talkJwdNeighbor(neighbor);seen.add(h.jwdState.tour.script.id);completeTour(h)}
+  assert.equal(seen.size,3,neighbor.id+' has three reachable repeat tours');assert.equal(h.jwdState.met.size,introductions,'repeats never increase introduction count');
+ }
 });

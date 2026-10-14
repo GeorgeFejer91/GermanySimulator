@@ -1,5 +1,15 @@
 # Speech catalog and subtitle authority
 
+The guided neighborhood story in `neighbor-story.js` pairs every stop and travel
+line with its exact English caption and stable speaker. `VOICE-CAST.json` also
+indexes these authored lines. Theodore Maaslos is `jwd-theodore-maaslos`, actor
+`jwd-theodore`; he uses the existing browser speech path with a lighter pitch
+pending any dedicated recorded profile. His voice never borrows a parent's clone.
+New Inga tour lines retain her selected voice's caption fallback when no exact
+recording exists. A roaming line keeps player controls active, uses the existing
+foreground broker, and ends before a stop's dialogue can begin. Cancellation,
+pause and stale completion remain scoped to the current tour and cue.
+
 The three neighborhood residents use stable IDs `jwd-heiko-maaslos`,
 `jwd-inga-maaslos` and `jwd-frau-schwabingen`, paired with their exact `jwdCopy`
 German sources and English subtitles. The cast derives their runtime identity

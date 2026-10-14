@@ -17,8 +17,8 @@
  solid('jwd-home-gnome','jwd-gnome',597,4187,34,25,16,{kept:false});
  const stations={
   'jwd-swabian':point({x:220,y:4110,activity:'wash',target:'jwd-vw',alternate:'jwd-fink-hedge',trimX:316,trimY:4140}),
-  'jwd-parent':point({x:840,y:4130,activity:'wash',target:'jwd-bmw'}),
-  'jwd-watcher':point({x:1007,y:4100,activity:'wash',target:'jwd-tesla'})
+  'jwd-parent':point({x:820,y:4130,activity:'wash',target:'jwd-bmw'}),
+  'jwd-watcher':point({x:992,y:4100,activity:'wash',target:'jwd-tesla'})
  };
  stations['jwd-swabian'].trimX+=offset;stations['jwd-swabian'].trimY+=offset;
  window.JwdGardens=Object.freeze({paths,lots,props,stations,crossY:3980+offset,gate:point({x:530,y:3990}),gateAside:point({x:615,y:3980}),corridor:point({x:40,y:3890,w:1010,h:340})});

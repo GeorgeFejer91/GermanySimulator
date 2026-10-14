@@ -7,7 +7,7 @@ import vm from "node:vm";
 const root=resolve(import.meta.dirname,"..");
 const source=file=>readFileSync(resolve(root,file),"utf8");
 const context=vm.createContext({window:{}});
-for(const file of ["For-AI/AUDIO-TEXT-LIBRARY.js","For-AI/QUIZ-CHARACTER-DICTIONARY.js","character-review.js"])vm.runInContext(source(file),context,{filename:file});
+for(const file of ["For-AI/AUDIO-TEXT-LIBRARY.js","For-AI/QUIZ-CHARACTER-DICTIONARY.js","neighbor-story.js","character-review.js"])vm.runInContext(source(file),context,{filename:file});
 const {profiles,atlases,previewCell}=context.window.GermanySimulatorCharacterReview;
 const {clips}=context.window.GermanySimulatorAudioText;
 const cast=JSON.parse(source('For-AI/VOICE-CAST.json'));
@@ -16,11 +16,12 @@ const namedBlock=game.slice(game.indexOf("const npcs=["),game.indexOf("].map(n=>
 const physicalNames=[...namedBlock.matchAll(/name:"([^"]+)"/g)].map(match=>match[1].split(" · ")[0]);
 vm.runInContext(game.slice(game.indexOf('const jwdCopy='),game.indexOf('function currentMission('))+';globalThis.neighborCopy=jwdCopy;',context);
 const neighborRoles=cast.existingAssetProfiles.filter(person=>person.gameRole==='jwd-neighbor');
-assert.equal(neighborRoles.length,3,'the separate neighborhood sprite/dialogue cast is complete');
+assert.equal(neighborRoles.length,4,'the neighborhood sprite/dialogue cast includes Theodore');
 for(const person of neighborRoles){
- const entry=profiles.find(profile=>profile.id===person.gameCharacterId);assert.ok(entry,`missing neighbor gallery ${person.voiceId}`);assert.equal(entry.voiceId,person.voiceId);const name=namedBlock.match(new RegExp(`id:"${person.gameCharacterId}",name:"([^\"]+)"`))[1];assert.equal(entry.name,name);assert.equal(context.window.GermanySimulatorAudioText.voices[person.voiceId].name,person.fullName);
- const introduction=person.dialogue[0],topic=introduction.locator.match(/jwdCopy\.([a-zA-Z]+)\.de/)[1];assert.equal(introduction.text,context.neighborCopy[topic].de[0]);for(const region of ['berlin','germany'])assert.equal(entry.lines(region)[0].text,introduction.text,'gallery intro matches exact current authored text');assert.match(entry.movement,/procedural silhouette, not the runtime painted atlas/);
- if(person.voiceId==='jwd-inga-maaslos'){assert.equal(entry.lines('berlin').length,11);assert.ok(entry.lines('berlin').every(row=>row.clip));assert.match(entry.voice,/Eleven exact authored German takes/)}else{assert.equal(entry.lines('berlin')[0].clip,'');assert.match(entry.voice,/Browser-generated speech/)}
+ const entry=profiles.find(profile=>profile.id===person.gameCharacterId);assert.ok(entry,`missing neighbor gallery ${person.voiceId}`);assert.equal(entry.voiceId,person.voiceId);const name=person.gameCharacterId==='jwd-theodore'?game.match(/id:'jwd-theodore',name:'([^']+)'/)[1]:namedBlock.match(new RegExp(`id:"${person.gameCharacterId}",name:"([^\"]+)"`))[1];assert.equal(entry.name,name);assert.equal(context.window.GermanySimulatorAudioText.voices[person.voiceId].name,person.fullName);
+ const introduction=person.dialogue[0],topic=introduction.locator.match(/jwdCopy\.([a-zA-Z]+)\.de/);if(topic)assert.equal(introduction.text,context.neighborCopy[topic[1]].de[0]);for(const region of ['berlin','germany'])assert.equal(entry.lines(region)[0].text,introduction.text,'gallery intro matches exact current authored text');assert.match(entry.movement,/procedural silhouette, not the runtime painted atlas/);
+ const tourText=person.dialogue.filter(item=>item.locator.startsWith('neighbor-story.js ')).map(item=>item.text);for(const text of tourText)assert.ok(entry.lines('germany').some(row=>row.text===text),'every owned tour utterance has a review entry');
+ if(person.voiceId==='jwd-inga-maaslos'){assert.equal(entry.lines('berlin').filter(row=>row.clip).length,11);assert.match(entry.voice,/Eleven exact authored German takes/)}else{assert.equal(entry.lines('berlin')[0].clip,'');assert.match(entry.voice,/Browser-generated speech/)}
 }
 const listed=profiles.map(person=>person.name.toLocaleUpperCase());
 for(const name of physicalNames)assert.ok(listed.some(label=>label.includes(name)),`missing physical NPC ${name}`);

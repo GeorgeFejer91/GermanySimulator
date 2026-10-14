@@ -1,6 +1,97 @@
-# Direct neighbor chapter — 2026-10-14
+# Combined neighborhood and indoor release — 2026-10-14
 
-Integrator-owned scope on published 85d884d: game.js checkpoint/readiness, neighbor-sprites.js loaded visibility and settled status, world3d.js lightweight neighbor readiness and initial resident placement, bounded checkpoint startup admission, entry cache keys, focused mission/animation/browser checks and owning For-AI gameplay/asset notes. Preserve normal intro/registration, existing collision/routes/gait, three final-acknowledgement receipts, exact voices, artwork bytes and office/Jobcenter behavior. The clean attached release checkout is reused; unrelated primary edits are preserved. Existing loaded paint currently disappears during chores; this task keeps painted idle visible, retaining procedural bodies only for missing paint. No new art, dependency, renderer or audio scheduler.
+This candidate combines published `ee3606f` with snapshot `e09837b`. One
+integrator owns review, commit, push and deployment verification. It preserves
+published connected-mouth, browser-local name, Jobcenter rumble/tunnel/pinch,
+portrait/floor, phone and direct-entry behavior. WASD and arrow keys retain
+movement parity in both interiors; Page Up/Down and mouse/trackpad control view.
+Final public-entry touch completion and the six-context R10 release benchmark pass.
+
+Meet the Neighbors adds twelve authored tours, thirty-one stops and sixty-four
+utterances, with four-direction walks, stop-specific gestures, painted chores and
+Theodore's doorway, leading and return sequence. Each of the four actors has 256
+packed cells in desktop/mobile variants. The frozen encoded files total 4,747,776
+desktop bytes and 1,665,762 mobile bytes. All 2,048 encoded cells pass the required
+frame-by-frame art review. Actual rendered point/call arcs select all 24 frames
+on desktop and corrected mobile DPR1/DPR3 profiles; pause, fallback, work
+handedness and disposal checks pass. The narrow DPR3 case verifies atlas
+selection at the fixture's fixed renderer pixel ratio, not physical-phone GPU
+performance. Walks retain a compact shuffle; no separate painted turn clip is
+claimed. Registered front mouths articulate; unregistered views retain paint.
+Official-source distinctions and stop locations live in `docs/neighborhood-rules.md`;
+current behavior and asset ownership live in `For-AI/GAMEPLAY.md`,
+`For-AI/ASSET-POLICY.md` and `For-AI/SPRITE-GENERATION-PROTOCOL.md`.
+
+The integrated Node sweep executed 927 tests: 926 passed, with one outdated
+three-neighbor gallery expectation. The gallery was repaired while retaining its
+published clips; its three affected checks then passed. After the final lane
+recovery fix, 46 focused gameplay/sprite/gallery/voice/subtitle checks pass, and
+the independent Physics run passes 47 gameplay/sprite/direct-entry checks.
+The exact touch-run obstruction is now a regression: a player can box Theodore
+against a waiting burglar; the child plants his feet until the player yields,
+then uses the legal lane edge and shorter body-checked backtrack around Heiko.
+Independent replay passes six cases at 60/30/10 Hz and both avoidance sides,
+with 15,507 accepted substeps and 41,730 swept samples, no overlap or off-paving
+body. All 36 tour traversals, 18 passing, 30 corner and 12 station cases pass.
+
+Camera C1–C5 and affected rendering/layout X1 pass on candidate R10. Twelve
+integrated composition cases plus the corrected enlarged follow hint close the
+200%-text and whole-root-zoom overlaps. The final public-entry sequence has
+30 clear overlay checks. Prior R7 desktop fallback and landscape touch runs
+complete all three introductions; earlier desktop/portrait/landscape runs cover
+the first repeats. Those older progression receipts are labeled separately.
+The final integrated public-entry Android landscape run completes natural preload
+and all three introductions with real touch input, including Theodore's emergence,
+leading, return and the Hausverwaltung unlock. Pause/resume, held-touch release,
+lag waiting and touch cancellation pass with zero page/console/request errors and
+no source drift. The separate departure-cancellation probe alone forces distance.
+An earlier Inga failure was a test-planner omission of ordinary pedestrians; the
+driver now checks the full production blocker query. Final evidence is
+`browser/integrated-direct-landscape-final3/report.json`. Repeat coverage retains
+the earlier stated scope. Evidence remains under ignored `output/neighborhood-tours/`
+and `output/neighbors/`; `candidate-final.json` binds the 36 reviewed source files.
+
+All building interiors now use one door/vortex owner for entry, current-view
+forced ejection with its fiery variant, and immediate voluntary return. Ordinary office dialogue
+and forms use its shared room; JWD porch and tours remain outdoors. The shared
+owner supersedes the former separate Jobcenter release overlay while preserving
+its media cues and rumble cleanup. `For-AI/LEVEL-TRANSITIONS.md` owns the protocol.
+Indoor-only factories load on first use; cancellation, import failure and BFCache
+resume retain exactly-once travel and consequences.
+
+Fresh integrated transition browser checks pass for root desktop, Android and
+reduced motion, native Jobcenter ending and early pull, and diagnostic desktop,
+portrait and landscape. A separate settled landscape capture verifies the
+generic office after two rendered frames and its voluntary return. Source hashes
+remain stable; scoped independent Physics and Camera reviews pass. Prior
+hidden/resume/BFCache and injected-capture-failure receipts retain their stated
+scope. Evidence is under ignored `output/level-transitions/`.
+
+The duplicate Google Grenze download was removed; bundled-font widths matched
+across five weights and German/English/umlaut samples. The R10 six-context root
+benchmark passes the existing 18 MB/title/input/buffer/deferred-resource guards:
+17,996,946 bytes desktop and 17,631,855 emulation, with nine inputs accepted in
+every run and zero errors. Chrome 155 / Intel Iris Xe, local uncompressed HTTP,
+requested DPR 2, seed 91 and no throttling were used. No other Node test job was
+present at admission. Desktop active p95 median/range is 21.3/21.2–26.4 ms and
+input p95 22.8/17.9–24.9 ms; emulation is 21.6/21.3–21.8 and 20.9/19.7–33.6 ms.
+Evidence: `output/neighborhood-tours/bench-final/report.json`. These short lab
+samples establish regression guards, not a speedup or physical-device timing.
+
+Physical Android and perceptual listening remain NOT RUN. After
+release, verify root, `3d.html` and the neighborhood checkpoint against the
+committed bytes. The history below records earlier scoped work; its test counts
+and old pending states are not current release acceptance.
+
+## Published direct neighbor entry — 2026-10-14
+
+The published checkpoint on base `85d884d` opens `?geheim=nachbarn` at the paved
+home entrance, with only that chapter's in-memory prerequisites. Three adult
+image jobs settle before controls unlock; failed paint retains its procedural
+fallback. Initial placement precedes startup selection, and unrelated distant
+NPC art remains deferred. The combined tour candidate preserves that admission
+contract and replaces the earlier idle-only work-station paint with authored
+chore clips. Normal registration and mission prerequisites remain unchanged.
 
 # Physical potato mirror repair — 2026-10-13
 

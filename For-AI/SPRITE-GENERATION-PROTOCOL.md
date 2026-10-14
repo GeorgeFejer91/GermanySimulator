@@ -937,19 +937,44 @@ fixed-appearance binding be built and evaluated through a whole walking cycle.
 
 ## Miniature neighborhood residents
 
-The current atlas has nine 16-cell rows: down, right, up, left, idle, talk,
-listen, greet and look. Talk is a source-fitted palette of closed plus five
-opening levels in three mouth shapes; it is selected from the owning speech
-cue rather than cycled as a generic animation. Each face has its own lip crease,
-attached corners and 1.6–1.9 pixel maximum aperture. Preserve the coherent
-approved faces and original alpha. Greet/look are finite connected microposes,
-with settle/listen/release states; actual speech may preempt entry. Walking
-retains calibrated distance phase and all sixteen distinct samples. The supplied
-four views support planted front conversation and ordinary direction selection,
-not a claimed smooth whole-body turn or ambient talking while walking. Source
-paint, final encodings, all transition/loop cells and real muted speech clocks
-must pass their scoped visual and lifecycle gates.
+Heiko, Inga, Frau Schwabingen and Theodore each use one packed 16×16 atlas.
+The first 128 cells contain four 32-sample directional walks; the remainder
+contains idle (8), talk (16), listen (8), greet (16), look (8), point (24),
+call (24), and role-specific work (24). The manifest owns the packed offsets.
+Point/call/work use anticipation, an action arc and recovery; gait phase comes
+from accepted ground displacement. A blocked actor plants their feet. Walking
+retains priority during a roaming line instead of freezing the speaker.
 
-The accepted fictional neighbor direction source authority is `assets/sprite-sources/neighbors/directions.png`. The six shipped atlases are one desktop and one mobile variant for each of Frau Schwabingen, Professor Heiko Maaslos (Systemtechnik) and Inga Maaslos (fictional People & Culture). The historical `jwd-neighbors/*-source-v2.png` study sheets and their registration remain unselected authoring evidence, not alternative loader inputs. tools/build-neighbor-sprites.py derives the four direction walks plus planted idle, talk, listen, greet and look rows, with shared figure scale and foot pivot. The city admits only the selected desktop/mobile WebP on neighborhood approach through its existing bounded asset queue. The direct `?geheim=nachbarn` entry begins in that area and waits for all three loads to settle. neighbor-sprites.js reads accepted displacement and dialogue ownership; collision and routes remain in game.js. Loaded paint stays visible at work stations using the planted idle row, with no claim of painted washing or trimming actions. Existing articulated work poses and tools remain the missing-paint fallback. Failed or late paint never blocks neighbor interaction. Keep private likeness references and authoring trials outside shipped assets. Match the compact proportions and restrained detail of the existing mini sprite cast; preserve complete shoes and review every encoded phase and loop seam.
+Talk is a source-fitted palette of closed plus five opening levels in three
+mouth shapes, selected from the owning speech cue. Each face has its own lip
+crease and attached corners. Registered front walk/gesture paint also supports
+a bounded connected-lip shader; side/back views and unregistered chore faces
+keep their painted mouth closed. This is directional animation, not a claimed
+smooth whole-body turn or complete profile lip-sync. Preserve coherent faces
+and original alpha. Caption-only fallback does not pretend to be audible speech.
+Theodore has his own front/right/rear source with a mirrored left view, a shorter
+calibrated stride, and a
+1.088-unit figure height (68% of the adults' 1.6 units).
+
+The adult direction source is `assets/sprite-sources/neighbors/directions.png`;
+`theodore-directions.png` supplies the child and `chore-poses.png` supplies the
+role-specific work paint in that same directory. Historical
+`jwd-neighbors/*-source-v2.png` study sheets remain unselected authoring evidence,
+not alternative loader inputs. The eight shipped atlases are one desktop and one
+mobile variant per actor.
+`tools/build-neighbor-sprites.py` builds the packed clips with registered figure
+scale and foot pivots. The city admits the selected desktop/mobile WebP through
+its existing bounded queue: the adults on neighborhood approach and Theodore
+when summoned. The direct `?geheim=nachbarn` checkpoint waits for the three adult
+loads to settle; missing paint retains interaction through its fallback.
+`neighbor-sprites.js` reads accepted displacement,
+gesture age and dialogue ownership; `neighbor-story.js` owns the authored stops
+and lines; collision and progression remain in `game.js`. Heiko's work paint
+polishes his car, Schwabingen sweeps, Inga inspects, and Theodore plays. Ordinary
+hedge trimming retains the articulated shears fallback. Failed or late paint
+never blocks interaction. Keep private likeness references and rejected trials
+outside shipped assets. Review every encoded phase, transparent gutter and
+loop seam at desktop and mobile scale, plus actual shader/UV output and silent
+speech clocks before accepting a new bake.
 
 For expression repairs, retain the internal registration of the whole facial painting. The Inga repair replaces complete front/profile facial skin regions from coherent generated paint and preserves the original alpha, hair, body and back view. Do not translate individual eyes or lips into separate patches: this introduced visibly distorted eye/cheek/lip relationships in the rejected revision. Compare the complete face with its authoring source at native detail and the exact desktop/mobile cell before acceptance. tools/build-neighbor-sprites.py accepts a character selection through build(names=...) so a single resident repair preserves other atlas bytes and manifest entries.

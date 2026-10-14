@@ -80,12 +80,13 @@ function sync(){
  const state=window.Germany3DBridge?.getHUDState();if(!state)return;
  setHidden(rail,!state.started||document.body.classList.contains('amt-inside'));rail.classList.toggle('city-busy',!active());
  if(!manual){if(!rail.hidden){if(subtitles.parentElement!==rail)rail.append(subtitles)}else if(subtitles.parentElement===rail)subtitleAnchor.after(subtitles)}
+ byId('app').classList.toggle('neighbor-tour',!!state.missionKey?.startsWith('jwd-tour-'));
  const lang=state.lang==='en'?'en':'de';
  if(language!==lang){language=lang;if(typeof setLocale==='function')setLocale(lang);cache.clear();for(const el of document.querySelectorAll('[data-de]'))setText(el,el.dataset[lang]);byId('fax-dismiss').setAttribute('aria-label',lang==='en'?'Hide mission':'Auftrag ausblenden')}
  const notice=noticeOrder.find(id=>visible(byId(id))&&!byId(id).classList.contains('caption-only'));
  for(const id of noticeOrder)byId(id).classList.toggle('notice-deferred',id!==notice);
  setHidden(byId('energy-warning'),state.energy>35);setText(byId('energy-warning'),(lang==='en'?'ENERGY ':'ENERGIE ')+state.energy);
- const next=byId('mission-title').textContent+'\n'+byId('mission-text').textContent;
+ const next=state.missionKey||byId('mission-title').textContent+'\n'+byId('mission-text').textContent;
  if(next!==mission){mission=next;pending=true;hideFax()}
  if(!active()||!quiet()||manual){if(!fax.hidden||motion||motionTimer){hideFax();if(!pending)reminder(true)}if(!active()){clearTimeout(timer);timer=0}}
  else if(pending)showFax();
@@ -98,11 +99,14 @@ function schedule(){if(queued||document.hidden)return;queued=true;requestAnimati
 
 // Actual, bounded text measurements with the shipped Pretext version. DOM owns
 // wrapping; a long file page scrolls at zoom rather than truncating instructions.
-const fitSelectors=['.dialogue.welcome #speaker','.dialogue.welcome #dialogue-text','#humor-requirements .humor-signature>span','.dialogue-actions button','#subtitle-toggle','#city-status button','#energy-warning','.wanted small','#fax-title','#fax-text','.fax-heading>span','#mission-fax button','.file-header h2','.file-header button','.file-tabs button','.file-page button','.mission-body small','#anmeldung-badge','.anmeldung-medal-label','#mission-title','#mission-text','.rule small','#rule-id','#rule-text','.stats span','.germanness>small','#germanness-value','#law-power','.wurst-pass>b','.file-controls dt','.file-controls dd','.file-page>a','#toast','#bark-speaker','#police-bark-text','#violation-law','#violation-title','#violation-text','#city-notices small','#city-notices strong','#city-notices b','#city-notices p','#city-notices em','#city-notices .wurst-alert-body span'];
+const fitSelectors=['#interact-hint','.dialogue.welcome #speaker','.dialogue.welcome #dialogue-text','#humor-requirements .humor-signature>span','.dialogue-actions button','#subtitle-toggle','#city-status button','#energy-warning','.wanted small','#fax-title','#fax-text','.fax-heading>span','#mission-fax button','.file-header h2','.file-header button','.file-tabs button','.file-page button','.mission-body small','#anmeldung-badge','.anmeldung-medal-label','#mission-title','#mission-text','.rule small','#rule-id','#rule-text','.stats span','.germanness>small','#germanness-value','#law-power','.wurst-pass>b','.file-controls dt','.file-controls dd','.file-page>a','#toast','#bark-speaker','#police-bark-text','#violation-law','#violation-title','#violation-text','#city-notices small','#city-notices strong','#city-notices b','#city-notices p','#city-notices em','#city-notices .wurst-alert-body span'];
 function measure(){
  if(typeof setLocale==='function')setLocale(language||'de');
  const pageZoom=parseFloat(getComputedStyle(document.documentElement).zoom)||1;
  const preferred=parseFloat(getComputedStyle(document.documentElement).fontSize)||16;
+ const hintFont=parseFloat(getComputedStyle(byId('interact-hint')).fontSize)||0;
+ const compactTour=byId('app').classList.contains('neighbor-tour')&&matchMedia('(pointer:coarse)').matches&&innerWidth>innerHeight&&(innerHeight/pageZoom<260||hintFont>14);
+ byId('app').dataset.tourLayout=compactTour?'compact':'normal';
  document.body.style.setProperty('--humor-viewport-width',innerWidth/pageZoom+'px');
  document.body.style.setProperty('--humor-viewport-height',innerHeight/pageZoom+'px');
  const layout=innerWidth/pageZoom<Math.max(300,preferred*18)?'stack':'paired';
@@ -165,7 +169,7 @@ function measure(){
  if(!fax.hidden){fax.style.top=noticeTop+'px';fax.style.maxHeight=Math.max(44,bottom-noticeTop-12)+'px'}
 }
 const observer=new MutationObserver(schedule);
-for(const id of [...alerts,'mission-guide','subtitle-toggle','mission-title','mission-text','energy','stars','day','germanness-value','law-power','wurst-badges','anmeldung-badge','intro'])observer.observe(byId(id),{subtree:true,childList:true,characterData:true,attributes:true,attributeFilter:['hidden','class']});
+for(const id of [...alerts,'interact-hint','mission-guide','subtitle-toggle','mission-title','mission-text','energy','stars','day','germanness-value','law-power','wurst-badges','anmeldung-badge','intro'])observer.observe(byId(id),{subtree:true,childList:true,characterData:true,attributes:true,attributeFilter:['hidden','class']});
 observer.observe(document.body,{attributes:true,attributeFilter:['class']});
 observer.observe(document.documentElement,{attributes:true,attributeFilter:['style','lang']});
 const bounds=new ResizeObserver(schedule);for(const el of [byId('mission-guide'),subtitles,file,rail,document.querySelector('.control-dock')])bounds.observe(el);

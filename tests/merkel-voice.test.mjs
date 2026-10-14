@@ -10,6 +10,7 @@ const catalog=context.window.GermanySimulatorAudioText,manifest=JSON.parse(readF
 const calls=[],elements=new Map();
 const sandbox=vm.createContext({speechCatalog:catalog,textOnlyBark:null,performance:{now:()=>0},startSubtitle(){},clearSubtitle(){},speechClip:id=>catalog.clips[id],state:{voiceOn:true,dialogueData:{speaker:'ANGELA MERKEL · SATIRE'}},STIMULUS_PRIORITY:{CRITICAL:0,REACTIVE:2,AMBIENT:3},document:{getElementById:id=>{if(!elements.has(id))elements.set(id,{textContent:'',hidden:true,dataset:{},classList:{toggle(){},remove(){}}});return elements.get(id)}},setTimeout:()=>1,clearTimeout(){},uiTone(){},setDialogueVoiceBusy(){},queueStimulus:item=>calls.push({mode:'recording',...item}),speak:(text,options)=>calls.push({mode:'browser',text,...options}),speakMerzLine:(text,options)=>calls.push({mode:'merz',text,...options})});
 vm.runInContext(game.match(/const MERKEL_AUDIO_LINE=[\s\S]*?\nconst bayernClips=/)[0].replace(/\nconst bayernClips=$/,''),sandbox);
+sandbox.speechCatalog=catalog;
 const lines=vm.runInContext('[...merkelLines,MERKEL_BEHIND_LINE]',sandbox);
 assert.deepEqual(manifest.clips.map(clip=>clip.text),Array.from(lines),'all authored lines, including the behind-player response, need replacement clips');
 assert.equal(manifest.clips.length,9);

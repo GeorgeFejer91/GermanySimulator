@@ -7,8 +7,10 @@ import {createAmtLampWear} from './buergeramt-lamps.js?v=20261012-counter-recove
 import {createPotatoMirror} from './buergeramt-potato-mirror.js?v=20261013-physical-mirror';
 import {amtWalkDirection,createAmtWalkSpare} from './buergeramt-walk-view.js?v=20261013-smooth-turning';
 import {prepareWithSegments,measureNaturalWidth,measureLineStats} from './assets/vendor/pretext/dist/layout.js';
-import {createJobcenterBuilding,createJobcenterEncounter} from './jobcenter.js?v=20261013-mouth-audit';
-import {createNeighborSprite} from './neighbor-sprites.js?v=20261014-neighbor-direct';
+import {createJobcenterBuilding,createJobcenterEncounter} from './jobcenter.js?v=20261014-building-levels';
+import {createLevelDoor} from './level-transitions.js?v=20261014-building-levels';
+import {createBuildingLevels} from './building-levels.js?v=20261014-building-levels';
+import {createNeighborSprite} from './neighbor-sprites.js?v=20261014-neighbors-complete';
 const THREE_URL="./assets/vendor/three/0.186.0/build/three.module.min.js";
 const GLTF_LOADER_URL="./assets/vendor/three/0.186.0/examples/jsm/loaders/GLTFLoader.js";
 function buergeramtDoorRadiance(time,reducedMotion=false){
@@ -32,7 +34,6 @@ function showRendererFailure(error){
   const S=.02,H=.038,ox=bridge.WORLD.w*S/2,oz=bridge.WORLD.h*S/2,X=x=>x*S-ox,Z=y=>y*S-oz;
   const renderer=new T.WebGLRenderer({canvas,antialias:false,powerPreference:"default"});renderer.outputColorSpace=T.SRGBColorSpace;
   const jobcenter=createJobcenterEncounter(T,renderer,bridge);
-  const jobcenterReleaseDoor=new T.Vector3(),jobcenterReleaseUv=new T.Vector2();
   const scene=new T.Scene();scene.background=new T.Color(0x77756f);scene.fog=new T.Fog(0x77756f,24,72);
   const camera=new T.PerspectiveCamera(48,innerWidth/innerHeight,.1,150),initialPlayerX=X(bridge.player.x),initialPlayerZ=Z(bridge.player.y);camera.position.set(initialPlayerX,11.5,initialPlayerZ+14);camera.lookAt(initialPlayerX,1,initialPlayerZ-2.7);scene.add(new T.HemisphereLight(0xe4e0d6,0x454440,2.3));const sun=new T.DirectionalLight(0xf4f1e8,1.4);sun.position.set(-20,30,18);scene.add(sun);
   const mat=(c,r=1)=>new T.MeshStandardMaterial({color:c,roughness:r});
@@ -474,7 +475,10 @@ function showRendererFailure(error){
     Object.assign(missionHudCamera,{left:-innerWidth/2,right:innerWidth/2,top:innerHeight/2,bottom:-innerHeight/2});missionHudCamera.updateProjectionMatrix();
   }
   function updateMissionPointer(){
-    const target=bridge.getMissionWaypoint?.();showMissionPointer(!!target&&Math.hypot(target.x-bridge.player.x,target.y-bridge.player.y)>36);
+    const target=bridge.getMissionWaypoint?.();
+    // A nearby guide and the follow hint already give the destination. Keep
+    // the screen-space pointer from covering their face and gestures.
+    showMissionPointer(!!target&&Math.hypot(target.x-bridge.player.x,target.y-bridge.player.y)>(target.guide?185:36));
     missionPointer.userData.target=target?.id||null;
     if(!target)return;
     const dx=target.x-bridge.player.x,dz=target.y-bridge.player.y;
@@ -630,6 +634,9 @@ function showRendererFailure(error){
       if(!size.x||!size.y||!size.z)throw new Error("empty building bounds");
       const landmark=slot.building.id==="bundestag",s=Math.min(w/size.x,h/size.y,d/size.z),sx=landmark?s:w/size.x,sy=landmark?s:cityBuildingYScale(url,h,size.y),sz=landmark?s:d/size.z;
       model.scale.set(sx,sy,sz);model.position.set(-center.x*sx,-bounds.min.y*sy,-center.z*sz);
+      const fronts={"municipal-office":4.17,"berlin-block":4.17,"brick-utility":3.67,"neighborhood-shop":2.67},family=Object.keys(fronts).find(name=>url.includes('/city-kit/'+name+'.glb'));
+      const entranceZ=family?fronts[family]:landmark?40.9:url.includes('/german-props/')?2.71:size.z/2;
+      slot.entrance={x:model.position.x,y:model.position.y+(landmark?5.4*sy:0),z:model.position.z+entranceZ*sz+.10};
       if(landmark){const apron=box(w,.07,d,M.walk,0,.035,0,slot.group);apron.userData.occlusionDecoration=true}
       slot.group.add(model);slot.model=model;slot.fallback.visible=false;registerMaterials(model,slot);
       if(slot.building.id==="buergeramt"&&buergeramtDoorGlow){
@@ -639,8 +646,22 @@ function showRendererFailure(error){
         buergeramtDoorGlow.face.scale.set(buergeramtDoorGlow.size.x,buergeramtDoorGlow.size.y,1);
         buergeramtDoorGlow.group.position.y=model.position.y+1.05*sy;
       }
-      if(landmark)matchKiesingerHeight();return true;
+      if(slot.door)mountBuildingDoor(slot);if(landmark)matchKiesingerHeight();return true;
     }catch(e){console.warn("Keeping procedural building for "+slot.building.id,e);return false}},slot);
+  }
+  function mountBuildingDoor(slot){
+    const b=slot.building,home=b.id==='jwd-home',villa=b.variant==='villa',landhaus=b.variant==='landhaus';
+    if(!slot.door){
+      const width=b.residential?.82:b.id==='jobcenter'?2.5:1.4,height=b.residential?1.97:b.id==='jobcenter'?2.3:2.1;
+      slot.door=createLevelDoor(T,{width,height,color:b.id==='jobcenter'?0xa92327:b.residential?0x75604b:0x343b3e});slot.group.add(slot.door.group);
+      slot.door.group.traverse(node=>{if(!node.material)return;const m=node.material;m.userData.baseOpacity=m.opacity;m.userData.baseTransparent=m.transparent;m.userData.baseDepthWrite=m.depthWrite;slot.materials.add(m)});
+    }
+    let x=(b.doorX-b.x-b.w/2)*S,z=b.h*S/2+.22;
+    if(b.residential)z=b.h*S/2-(home?.6:villa?.76:landhaus?.53:.36)+.15;
+    if(b.kind){x=3.1;z=b.kind==='nuclear'?2.35:1.98;}
+    if(slot.entrance){x=slot.entrance.x;z=slot.entrance.z;}
+    if(b.id==='buergeramt'&&slot.model&&buergeramtDoorGlow){x=buergeramtDoorGlow.group.position.x;z=buergeramtDoorGlow.group.position.z+.14;}
+    slot.door.group.position.set(x,slot.entrance?.y||0,z);slot.viewBounds=new T.Box3().setFromObject(slot.group);
   }
   const coalSmoke=[],coalBelt=[];
   function installPlantModel(slot,url,fit,placements,keepColors=false,fallback=null){
@@ -722,6 +743,7 @@ function showRendererFailure(error){
     const state=buergeramtDoorRadiance(glow.time,reduced),{phase,next,blend,pulse}=state;
     glow.phase=phase;glow.pulse=pulse;
     glow.skin.color.copy(glow.flagColors[phase]).lerp(glow.flagColors[next],blend);glow.skin.emissive.copy(glow.skin.color);glow.skin.emissiveIntensity=1.2+pulse*1.6;
+    const doorSkin=glow.slot.door?.skin;if(doorSkin){doorSkin.color.copy(glow.skin.color);doorSkin.emissive.copy(glow.skin.emissive);doorSkin.emissiveIntensity=glow.skin.emissiveIntensity;}
     glow.raysMaterial.uniforms.uColor.value.copy(glow.glowColors[phase]).lerp(glow.glowColors[next],blend);
     glow.raysMaterial.uniforms.uPulse.value=pulse;glow.raysMaterial.uniforms.uTime.value=reduced?0:glow.time;
     const dark=(phase===0?1-blend:next===0?blend:0);
@@ -844,7 +866,7 @@ function showRendererFailure(error){
     if(b.id==="buergeramt")makeBuergeramtDoorGlow(slot,dx,d/2+.12,Math.min(1.3,w*.18));
     const url=buildingModels[b.id]||cityModelUrl("municipal-office");installBuildingModel(slot,b.id==="bundestag"?url+"?v=20260926-city1":url,w,h,d);
   }
-  if(!amtDirectRoute)bridge.buildings.forEach(building);
+  if(!amtDirectRoute){bridge.buildings.forEach(building);buildingSlots.forEach(mountBuildingDoor);}
 
   const bannerMaterials=new Map(),landmarkBanners=[];
   function landmarkBanner(kind,parent,w,h,x,y,z,turn=0){
@@ -1236,6 +1258,10 @@ function showRendererFailure(error){
       piece("Diplomatic briefcase",.29,.35,.13,dark,.34,.48,.015);
       piece("Briefcase handle",.145,.12,.04,dark,.34,.71,.015);
       piece("Briefcase clasp",.045,.028,.018,accent,.34,.55,.088);
+    }else if(role==="child"){
+      const hair=new T.Mesh(new T.SphereGeometry(.22,10,6,0,Math.PI*2,0,Math.PI*.55),accent);hair.position.set(0,1.4,-.02);q.add(hair);
+      piece("Theodore's school jumper",.42,.51,.32,coat,0,.78,0);
+      piece("Unscheduled-play badge",.1,.1,.025,cream,.1,.87,.17);
     }else{
       for(const y of [.48,.63,.78,.93])piece("Striped jumper",.43,.063,.025,cream,0,y,.163);
       piece("Eye mask",.34,.1,.035,dark,0,1.35,.18);
@@ -1244,17 +1270,16 @@ function showRendererFailure(error){
       const sack=new T.Mesh(new T.SphereGeometry(.22,8,6),accent);sack.scale.set(.85,1.3,.9);sack.position.set(.13,.65,-.25);sack.name="Empty burglary sack";q.add(sack);
       piece("Sack knot",.13,.1,.12,cream,.13,.94,-.25);
     }
-    if(role!=="burglar"){
-      const work=new T.Group(),wash=new T.Group(),shears=new T.Group(),spongeMaterial=mat(0xd8bd58),waterMaterial=new T.MeshBasicMaterial({color:0xbcdbe4,transparent:true,opacity:.55,depthWrite:false});q.userData.ownedMaterials.add(spongeMaterial);q.userData.ownedMaterials.add(waterMaterial);q.add(work);work.add(wash,shears);
-      const sponge=box(.18,.11,.12,spongeMaterial,-.23,.75,.46,wash);sponge.name="Car-wash sponge";
+    if(role!=="burglar"&&role!=="child"){
+      const work=new T.Group(),wash=new T.Group(),shears=new T.Group(),spongeMaterial=mat(0xd8bd58);q.userData.ownedMaterials.add(spongeMaterial);q.add(work);work.add(wash,shears);
+      const sponge=box(.18,.11,.12,spongeMaterial,-.23,.75,.46,wash);sponge.name="Polishing cloth";
       const forearmGeometry=new T.CylinderGeometry(.045,.05,1,8),handGeometry=new T.SphereGeometry(.062,8,6),arms=[q.userData.la,q.userData.ra].map(upper=>{const forearm=new T.Mesh(forearmGeometry,coat),hand=new T.Mesh(handGeometry,M.skin);forearm.name="Washing forearm";hand.name="Washing hand";wash.add(forearm,hand);return{upper,forearm,hand,shoulder:new T.Vector3(),elbow:new T.Vector3()}});
-      const soap=new T.Group(),drops=new T.Group(),bubbleGeometry=new T.SphereGeometry(.032,7,5),dropGeometry=new T.CylinderGeometry(.008,.014,.072,5);
-      for(let i=0;i<5;i++){const bubble=new T.Mesh(bubbleGeometry,waterMaterial),drop=new T.Mesh(dropGeometry,waterMaterial);bubble.name="Soap bubble";drop.name="Wash drip";soap.add(bubble);drops.add(drop)}wash.add(soap,drops);
       const blades=[];for(const side of [-1,1]){const blade=new T.Group();box(.027,.028,.34,cream,0,0,.15,blade);box(.057,.045,.14,accent,0,0,-.095,blade);blade.position.x=side*.04;shears.add(blade);blades.push(blade)}shears.position.set(0,.81,.38);shears.name="Hedge shears";
       const carried=[];q.traverse(node=>{if(["Broom handle","Broom bristles","Academic monograph","Book pages","Diplomatic briefcase","Briefcase handle","Briefcase clasp"].includes(node.name))carried.push(node)});
       const station=bridge.jwdGardens?.stations[n.id],car=bridge.jwdGardens?.props.find(p=>p.id===station?.target&&p.asset==="jwd-car");
-      work.visible=false;q.userData.jwdWork={work,wash,shears,sponge,soap,drops,blades,carried,arms,car,station,up:new T.Vector3(0,1,0),direction:new T.Vector3()};
+      work.visible=false;q.userData.jwdWork={work,wash,shears,sponge,blades,carried,arms,car,station,up:new T.Vector3(0,1,0),direction:new T.Vector3()};
     }
+    if(role==="child")for(const part of q.children){part.position.multiplyScalar(.68);part.scale.multiplyScalar(.68)}
     q.position.set(X(n.x),bridge.stationElevation(n.x,n.y),Z(n.y));
     q.userData.neighborPaint=createNeighborSprite(T,n,q,queueCityAsset,camera);
     return q;
@@ -1265,11 +1290,16 @@ function showRendererFailure(error){
   function syncJwdCharacter(q,n){
     syncChar(q,n);
     if(Number.isFinite(n.facing))q.rotation.y=n.facing;
+    if(n.jwdTouring&&!n.jwdMoving&&n.jwdGesture){
+      const phase=Math.min(1,(n.jwdGestureAge||0)/(n.jwdGestureDuration||1.6)),arc=Math.sin(Math.PI*phase)**2;
+      q.userData.la.rotation.x=n.jwdGesture==='call'?-.9*arc:-.2*arc;
+      q.userData.ra.rotation.x=-1.1*arc;q.userData.ra.rotation.z=-(n.jwdGesture==='wave'?.6:.3)*arc;
+    }else q.userData.ra.rotation.z=0;
     const tools=q.userData.jwdWork;if(!tools)return;
     const washing=n.jwdActivity==="wash",station=tools.station,atStation=Math.hypot(n.x-(washing?station?.x:station?.trimX),n.y-(washing?station?.y:station?.trimY))<=3;
-    const active=!n.jwdMoving&&atStation&&(washing||n.jwdActivity==="trim");
+    const active=!n.jwdTouring&&!n.jwdMoving&&atStation&&(washing||n.jwdActivity==="trim");
     tools.work.visible=!!active;tools.wash.visible=washing;tools.shears.visible=!washing;for(const prop of tools.carried)prop.visible=!active;
-    q.userData.la.position.set(-.27,.76,0);q.userData.ra.position.set(.27,.76,0);for(const arm of [q.userData.la,q.userData.ra]){arm.rotation.y=arm.rotation.z=0;arm.scale.set(1,1,1)}if(!active)return;
+    q.userData.la.position.set(-.27,.76,0);q.userData.ra.position.set(.27,.76,0);for(const arm of [q.userData.la,q.userData.ra]){arm.rotation.y=0;if(!n.jwdTouring)arm.rotation.z=0;arm.scale.set(1,1,1)}if(!active)return;
     const phase=Number(n.jwdWorking?n.activityPhase:(q.userData.jwdWorkPhase??n.activityPhase))||0;
     q.userData.jwdWorkPhase=phase;const stroke=Math.sin(phase*3.2);
     q.userData.la.position.set(-.24,.89+stroke*.035,.19);q.userData.ra.position.set(.24,.88,.17);
@@ -1282,8 +1312,6 @@ function showRendererFailure(error){
       tools.sponge.position.set(c*dx-s*dz,car.h*S*.47+stroke*.055-q.position.y,s*dx+c*dz);
       tools.arms.forEach((arm,i)=>{const side=i?1:-1;arm.shoulder.set(side*.27,1.0,-.02);arm.hand.position.copy(tools.sponge.position);arm.hand.position.x+=i?.1:0;arm.hand.position.y+=i?.06:.005;arm.hand.position.z-=i?.16:.105;arm.elbow.copy(arm.shoulder).lerp(arm.hand.position,.5);arm.elbow.x+=side*.04;arm.elbow.y-=.1;poseJwdLimb(arm.upper,arm.shoulder,arm.elbow,tools,.48);poseJwdLimb(arm.forearm,arm.elbow,arm.hand.position,tools)});
     }
-    tools.soap.visible=tools.drops.visible=!!n.jwdWorking;
-    for(let i=0;i<tools.soap.children.length;i++){const rise=(phase*.6+i*.21)%1,fall=(phase*1.1+i*.19)%1,p=tools.sponge.position;tools.soap.children[i].position.set(p.x-.07+(i%3)*.065,p.y+.03+rise*.27,p.z+(i%2)*.04);tools.drops.children[i].position.set(p.x-.08+i*.041,p.y-.02-fall*.54,p.z+.03)}
     tools.blades.forEach((blade,i)=>blade.rotation.y=(i?1:-1)*(.15+.16*(stroke*.5+.5)));
   }
   const atlasTextureCache=new Map(),atlasMaterialCache=new Map();
@@ -1440,14 +1468,7 @@ function showRendererFailure(error){
   addEventListener("visibilitychange",()=>{if(document.hidden)amtPotatoMirror.update(null)});
   ab(2.7,.82,.16,wall,0,3.59,5.55);
   for(const x of [-1.35,1.35])ab(.08,3.2,.18,trim,x,1.6,5.55);
-  // Permanently closed double door; the retained vestibule is scenery only.
-  for(const x of [-.655,.655])ab(1.3,3.16,.12,paperGrey,x,1.58,5.55);
-  ab(.025,3.16,.145,trim,0,1.58,5.55);
-  for(const x of [-.16,.16]){
-    ab(.055,.22,.035,steel,x,1.17,5.454);
-    ab(.03,.03,.07,steel,x,1.17,5.412);
-    ab(.14,.035,.025,steel,x+Math.sign(x)*.055,1.17,5.377);
-  }
+  const amtLevelDoor=createLevelDoor(T,{width:2.6,height:3.16,color:0xa7aaa1});amtLevelDoor.group.position.z=5.55;amtLevelDoor.group.rotation.y=Math.PI;amtScene.add(amtLevelDoor.group);
   amtPlate("EINGANG / AUSGANG",0,3.35,5.66,2.7,.35);
   ab(1.5,1.57,.58,screen,-4.65,.78,.8);ab(1.14,.72,.025,amber,-4.65,1.18,1.11);
   amtPlate("ANMELDUNG",-4.65,1.68,1.13,1.56,.34);
@@ -1907,7 +1928,7 @@ function showRendererFailure(error){
       const keep=actor.mesh.material.userData.amtKeep;if(keep)keep.value=0;
     }
   }
-  function renderAmt(){const level=window.BuergeramtLevel;
+  function renderAmt(pullCamera=null){const level=window.BuergeramtLevel;
     if(!level||!level.active&&!document.body.classList.contains("amt-direct-mode")){
       amtFloorEffect.update(null);amtPortraitMelt.update(null);amtLampWear.update(null);amtPotatoMirror.update(null);
       clearAmtTurnPaint();
@@ -1936,7 +1957,7 @@ function showRendererFailure(error){
       actor.mesh.userData.amtForeground=foreground;actor.mesh.renderOrder=200;actor.mesh.layers.set(1);
       actor.mesh.material.depthTest=true;
     }
-    const darkness=Math.max(level.omen.strength,amtIsolation.value);amtScene.fog.density=.46*Math.pow(darkness,1.2);amtScene.background.copy(amtDayColor).lerp(amtScene.fog.color,darkness);const view=level.view;amtCamera.position.set(view.x,1.68,view.z);amtCamera.rotation.set(view.pitch||0,-view.yaw,0,"YXZ");if(level.qrSvg)setAmtQr(level.qrSvg);const now=(level.floorState?.visualTime??performance.now()/1000)*1000;animateAmtCharacters(now,level);animateAmtMoving(now,level);amtGaussian.prepareGeneration(level.clerkPerformance.animation?.generation??0);updateAmtOmenSplat(level);amtGaussian.update(level,amtCharacters,amtMoving,amtCamera);amtGaussian.render(amtCamera);updateAmtMouth(level,now);const calls=level.queueCalls,call=JSON.stringify(calls);if(call!==lastCall){lastCall=call;callCtx.fillStyle="#152527";callCtx.fillRect(0,0,768,256);callCtx.textBaseline="middle";callCtx.fillStyle="#ef6455";calls.forEach(({number,counter},index)=>{const y=35+index*62;callCtx.textAlign="left";callCtx.font="bold 38px monospace";callCtx.fillText("SCHALTER "+counter,20,y,420);callCtx.textAlign="right";callCtx.font="bold 42px monospace";callCtx.fillText(number,748,y,220)});callTexture.needsUpdate=true}
+    const darkness=Math.max(level.omen.strength,amtIsolation.value);amtScene.fog.density=.46*Math.pow(darkness,1.2);amtScene.background.copy(amtDayColor).lerp(amtScene.fog.color,darkness);const view=level.view;amtCamera.position.set(view.x,1.68,view.z);amtCamera.rotation.set(view.pitch||0,-view.yaw,0,"YXZ");if(pullCamera){amtCamera.position.copy(pullCamera.position);amtCamera.quaternion.copy(pullCamera.quaternion);amtCamera.fov=pullCamera.fov;amtCamera.updateProjectionMatrix()}else if(amtCamera.fov!==69){amtCamera.fov=69;amtCamera.updateProjectionMatrix()}if(level.qrSvg)setAmtQr(level.qrSvg);const now=(level.floorState?.visualTime??performance.now()/1000)*1000;animateAmtCharacters(now,level);animateAmtMoving(now,level);amtGaussian.prepareGeneration(level.clerkPerformance.animation?.generation??0);updateAmtOmenSplat(level);amtGaussian.update(level,amtCharacters,amtMoving,amtCamera);amtGaussian.render(amtCamera);updateAmtMouth(level,now);const calls=level.queueCalls,call=JSON.stringify(calls);if(call!==lastCall){lastCall=call;callCtx.fillStyle="#152527";callCtx.fillRect(0,0,768,256);callCtx.textBaseline="middle";callCtx.fillStyle="#ef6455";calls.forEach(({number,counter},index)=>{const y=35+index*62;callCtx.textAlign="left";callCtx.font="bold 38px monospace";callCtx.fillText("SCHALTER "+counter,20,y,420);callCtx.textAlign="right";callCtx.font="bold 42px monospace";callCtx.fillText(number,748,y,220)});callTexture.needsUpdate=true}
     function drawView(renderCamera,reflection=false){
     amtGaussian.render(renderCamera,true);renderCamera.layers.set(0);
     renderer.render(amtScene,renderCamera);
@@ -1980,7 +2001,7 @@ function showRendererFailure(error){
     if(!window.BuergeramtLevel?.active)return null;
     const gaussian=amtGaussian.inspect().actors;
     const targets=[...amtCharacters,...amtMoving].map(actor=>({renderedProxy:gaussian.some(slot=>slot.visible&&slot.id===(actor.lead?'clerk':actor.animationId??actor.id)),objects:[actor.mesh,...(actor.counter?[amtCounterSigns[actor.counter-1]]:[])],interaction:actor.counter?{desk:actor.counter}:{actorId:actor.id}}));
-    targets.push({objects:[presidentFrame],interaction:{portrait:true}},{objects:[amtScene.getObjectByName('Kartoffelspiegel')],interaction:{mirror:true}});
+    targets.push({objects:[amtLevelDoor.group],interaction:{exit:true}},{objects:[presidentFrame],interaction:{portrait:true}},{objects:[amtScene.getObjectByName('Kartoffelspiegel')],interaction:{mirror:true}});
     return pickAmtTarget(x,y,innerWidth,innerHeight,targets);
   }
   function resize(){renderer.setPixelRatio(Math.min(devicePixelRatio||1,1,Math.sqrt(1600000/Math.max(1,innerWidth*innerHeight))));renderer.setSize(innerWidth,innerHeight,false);camera.aspect=innerWidth/innerHeight;camera.updateProjectionMatrix();amtCamera.aspect=innerWidth/innerHeight;amtCamera.updateProjectionMatrix();layoutMissionPointer()}resize();addEventListener("resize",resize,{passive:true});
@@ -2042,52 +2063,60 @@ function showRendererFailure(error){
     }
   }
   // Only these owned roots gate updateMatrixWorld; Box3/updateWorldMatrix diagnostics remain available.
-  let parkCameraFrame=0,lawPickupCameraFrame=0,previousCameraTime=performance.now();
-  let entryFactory=null,amtEntry=null,amtEntryDone=null,amtEntryResume=null,entryLastTime=0,entryFailure="";
-  try{({createBuergeramtEntry:entryFactory}=await import("./buergeramt-entry.js?v=20261011-published-features"))}
-  catch(error){entryFailure=error.message;console.warn("Bürgeramt entry keeps direct transition",error)}
-  function clearAmtEntry(){amtEntry?.dispose();amtEntry=null;amtEntryDone=null;entryLastTime=0;if(!window.BuergeramtLevel?.active)document.body.classList.remove("amt-inside")}
-  function enterBuergeramt(done){
-    if(amtEntry)return;
-    if(!entryFactory){done();return}
-    try{
-      const building=bridge.buildings.find(b=>b.id==="buergeramt");
-      const slot=buildingSlots.find(s=>s.building===building);
-      const door=slot?.model?slot.model.localToWorld(new T.Vector3(0,1.05,4.17)):new T.Vector3(X(building.doorX),.85,Z(building.y+building.h)+.12);
-      showMissionPointer(false);bridge.clearInput?.();
-      amtEntry=entryFactory({THREE:T,renderer,scene,camera,door,mobile:amtMobile,reducedMotion:amtReducedMotion.matches});
-      document.body.classList.add("amt-inside");const hint=document.getElementById("interact-hint");if(hint)hint.hidden=true;
-      amtEntryDone=done;entryLastTime=performance.now();entryFailure="";
-    }catch(error){clearAmtEntry();entryFailure=error.message;console.warn("Bürgeramt entry keeps direct transition",error);done()}
+  let parkCameraFrame=0,lawPickupCameraFrame=0,neighborTourCameraFrame=0,previousCameraTime=performance.now();
+  function prepareLevelExterior(){
+    leaveAmtDirectMode();syncChar(playerMesh,bridge.player,0);playerMesh.rotation.y=bridge.player.facing;
+    const px=X(bridge.player.x),pz=Z(bridge.player.y),elevation=bridge.stationElevation(bridge.player.x,bridge.player.y);
+    camera.position.set(px,11.5+elevation,pz+14);camera.lookAt(px,1+elevation,pz-2.7);
+    updateGroupVisibility();updateBuildingOcclusion();
   }
-  document.addEventListener("visibilitychange",()=>{entryLastTime=performance.now()});
-  addEventListener("pagehide",()=>{amtEntryResume=amtEntryDone;clearAmtEntry()});
-  addEventListener("pageshow",()=>{const done=amtEntryResume;amtEntryResume=null;bridge.clearInput?.();done?.()});
+  const buildingLevels=createBuildingLevels({THREE:T,renderer,scene,camera,bridge,mobile:amtMobile,reducedMotion:amtReducedMotion,
+    getDoor:id=>buildingSlots.find(slot=>slot.building.id===id)?.door,
+    getBounds:id=>{const root=buildingSlots.find(slot=>slot.building.id===id)?.group;return root?new T.Box3().setFromObject(root):null},
+    prepareExterior:prepareLevelExterior,
+    getInterior:id=>{
+      if(id==='jobcenter')return jobcenter.exitView();
+      if(id!=='buergeramt'||!window.BuergeramtLevel?.active)return null;
+      const view=window.BuergeramtLevel.view;amtCamera.position.set(view.x,1.68,view.z);amtCamera.rotation.set(view.pitch||0,-view.yaw,0,'YXZ');
+      return {camera:amtCamera,door:amtLevelDoor,render:pullCamera=>renderAmt(pullCamera)};
+    }});
+  const enterBuergeramt=done=>buildingLevels.enter('buergeramt',done);
+  function enterJobcenter(config={}){
+    if(buildingLevels.active||jobcenter.active)return false;
+    const opened=jobcenter.open({...config,transitionOut:exit=>buildingLevels.leave('jobcenter',exit)});
+    if(opened)buildingLevels.enter('jobcenter',()=>bridge.clearInput?.());
+    return opened;
+  }
+  let previousLevelTime=performance.now();
+  document.addEventListener('visibilitychange',()=>{previousLevelTime=performance.now()});
+  addEventListener('pagehide',()=>buildingLevels.suspend());
+  addEventListener('pageshow',()=>{previousLevelTime=performance.now();buildingLevels.resume()});
+  canvas.addEventListener('webglcontextlost',()=>buildingLevels.suspend());
+  canvas.addEventListener('webglcontextrestored',()=>buildingLevels.resume());
   captureStartupAssets();
   startupModelsCaptured=true;
   function leaveAmtDirectMode(){
     if(!amtDirectRoute)return;
     amtDirectRoute=false;
     // Direct office entry skipped city GLBs; its existing procedural buildings make the exit playable immediately.
-    bridge.buildings.forEach(building);
+    bridge.buildings.forEach(building);buildingSlots.forEach(mountBuildingDoor);
   }
   window.Germany3D={ready:true,isWorldPointVisible,isVehicleVisible,pickAmtInteraction,get amtPotatoMirror(){return amtPotatoMirror.inspect()},clearAmtFloor(){clearAmtWalkDetails();amtFloorEffect.update(null);amtPortraitMelt.update(null);amtLampWear.update(null);amtPotatoMirror.update(null);if(amtDirectRoute&&!window.BuergeramtLevel?.active)renderer.clear()},get amtLamps(){return amtLampWear.inspect()},get amtPortraitMelt(){return amtPortraitMelt.inspect()},get amtFloor(){return {...amtFloorEffect.inspect(),opacity:floor.opacity,transparent:floor.transparent,depthWrite:floor.depthWrite}},prepareNearbyAssets,prepareOfficeAssets:loadAmtImages,clearAmtOmenSplat,enterBuergeramt,clearAmtGaussianAnimations(){amtMouthSplat?.dispose();amtMouthSplat=null;amtGaussian.clear();restoreAmtCharacterLayers()},
-  leaveAmtDirectMode,enterJobcenter:config=>jobcenter.open(config),leaveJobcenter:()=>jobcenter.close(),get jobcenter(){return jobcenter.inspect()},get amtEntry(){return {active:!!amtEntry,failure:entryFailure,...amtEntry?.inspect()}},
+  leaveAmtDirectMode,enterJobcenter,leaveJobcenter:()=>jobcenter.close(),get jobcenter(){return jobcenter.inspect()},
+  enterBuilding:(id,done)=>buildingLevels.enter(id,done,true),leaveBuilding:(id,config)=>buildingLevels.leave(id,config),
+  cancelLevelTransition:id=>buildingLevels.cancel(id),
+  get indoorLevel(){return buildingLevels.office},get levelTransition(){return buildingLevels.inspect()},
+  get amtEntry(){const s=buildingLevels.inspect();return {...s,...s.vortex,active:s.active&&s.kind==='enter'&&s.id==='buergeramt'}},
+  get levelDoors(){return buildingSlots.map(slot=>({id:slot.building.id,...slot.door?.inspect()}))},
   get nearbyAssetsReady(){updateAssetView();return cityModelJobs.every(job=>job.state==="settled"||cityModelDistance(job)>30&&!isCityAssetVisible(job))},
   get officeAssetsReady(){return amtImagesRequested&&officeAssetPending===0},get officeAssetStatus(){return {total:officeAssetTotal,pending:officeAssetPending,failed:officeAssetFailures}},
   get neighborAssetStatus(){const paint=[...npcMeshes.values()].map(q=>q.userData.neighborPaint).filter(Boolean).map(p=>p.inspect());return {total:paint.length,settled:paint.filter(p=>p.settled).length,failed:paint.filter(p=>p.failed).length}},
   get startupReady(){return startupModelsReady()},get startupStatus(){return {total:startupModelJobs.size,pending:[...startupModelJobs].filter(job=>job.state!=="settled").length,active:cityModelActive,failed:[...startupModelJobs].filter(job=>job.failed).length}},
   get buildingVisibility(){return buildingSlots.map(slot=>({id:slot.building.id,opacity:slot.opacity,obstructing:!!slot.obstructing}))},sync(){
+    const levelNow=performance.now(),levelDt=(levelNow-previousLevelTime)/1000;previousLevelTime=levelNow;
+    if(buildingLevels.render(levelDt)){showMissionPointer(false);previousOcclusionTime=levelNow;return}
     if(jobcenter.render()){showMissionPointer(false);previousOcclusionTime=performance.now();return}
-    if(amtEntry){
-      if(document.hidden)return;
-      const now=performance.now(),dt=(now-entryLastTime)/1000;entryLastTime=now;
-      let finished=false;
-      try{finished=amtEntry.render(dt,amtReducedMotion.matches)}
-      catch(error){entryFailure=error.message;finished=true;console.warn("Bürgeramt entry rendering unavailable",error)}
-      if(!finished)return;
-      const done=amtEntryDone;clearAmtEntry();bridge.clearInput?.();done?.();
-    }
+    if(buildingLevels.active)return;
     if(amtDirectRoute&&!window.BuergeramtLevel?.active){clearAmtOmenSplat();amtMouthSplat?.dispose();amtMouthSplat=null;amtGaussian.clear();loadAmtImages();return}
     if(renderAmt()){showMissionPointer(false);if(buergeramtDoorGlow){buergeramtDoorGlow.light.intensity=0;buergeramtDoorGlow.lastTime=performance.now()}previousOcclusionTime=performance.now();return}
     prepareNearbyAssets();
@@ -2149,11 +2178,13 @@ function showRendererFailure(error){
     const parkTarget=park&&bridge.player.y>park.y+park.h-30?Math.max(0,Math.min(1,(440-parkDistance)/250)):0;
     const cameraStep=Math.min(.05,Math.max(0,(now-previousCameraTime)/1000)),pickupInView=innerWidth>innerHeight&&matchMedia("(pointer:coarse)").matches&&vehicles.some(car=>car.lawPickup&&Math.hypot(car.x-bridge.player.x,car.y-bridge.player.y)<500);
     lawPickupCameraFrame+=((pickupInView?1:0)-lawPickupCameraFrame)*(1-Math.exp(-8*cameraStep));
+    const shallowTour=innerWidth>innerHeight&&innerHeight<=500&&matchMedia('(pointer:coarse)').matches&&bridge.getHUDState?.().missionKey?.startsWith('jwd-tour-');
+    const tourLift=shallowTour?(document.getElementById('app')?.dataset.tourLayout==='compact'?1.875:1):0;
+    neighborTourCameraFrame+=(tourLift-neighborTourCameraFrame)*(1-Math.exp(-8*cameraStep));
     parkCameraFrame+=(parkTarget-parkCameraFrame)*(1-Math.exp(-6*cameraStep));previousCameraTime=now;
     if(parkCameraFrame>.001){const narrow=Math.max(0,Math.min(1,.95/camera.aspect-1)),cx=X(park.x+park.w/2),cz=Z(park.y+park.h/2),focus=parkCameraFrame*(1-.65*narrow);camera.position.set(px+(cx-px)*focus,11.5+(5+2*narrow)*parkCameraFrame,pz+14+2*narrow*parkCameraFrame);camera.lookAt(px+(cx-px)*focus,1+parkCameraFrame,pz-2.7+(cz-(pz-2.7))*parkCameraFrame)}
-    if(lawPickupCameraFrame>.001)camera.rotateX(-.16*lawPickupCameraFrame);
+    if(Math.max(lawPickupCameraFrame,neighborTourCameraFrame)>.001)camera.rotateX(-.16*Math.max(lawPickupCameraFrame,neighborTourCameraFrame));
     updateGroupVisibility();updateBuergeramtDoorGlow(now);updateBuildingOcclusion();updateWirtschaftswunder(now);updateMissionPointer();renderer.render(scene,camera);
-    if(jobcenter.releasing){const door=bridge.buildings.find(b=>b.id==='jobcenter');if(door){jobcenterReleaseDoor.set(X(door.doorX),1.15,Z(door.doorY)).project(camera);jobcenterReleaseUv.set((jobcenterReleaseDoor.x+1)/2,(jobcenterReleaseDoor.y+1)/2)}else jobcenterReleaseUv.set(.5,.5);jobcenter.renderRelease(jobcenterReleaseUv)}
     if(missionPointer.visible){renderer.autoClear=false;renderer.clearDepth();renderer.info.autoReset=false;renderer.render(missionHudScene,missionHudCamera);renderer.info.autoReset=true;renderer.autoClear=true}
   },layoutMissionPointer,inspectAssets,setAmtQr,get amtLipSplat(){return amtMouthSplat?.inspect()||null},get amtGaussian(){return amtGaussian.inspect()},get amtCinematicReady(){const status=amtOmenSplat?.inspect();return amtOmenSkipped||!!status?.ready||!!status?.failure},get amtOmenSplat(){return {visit:amtOmenVisit,loading:!!amtOmenRequest,skipped:amtOmenSkipped,failure:amtOmenFailure,...(amtOmenSplat?.inspect()||{ready:false,visible:false})}},get amtOmenStaging(){return {isolation:amtIsolation.value,environmentVisible:amtEnvironment.visible}},get amtOffice(){return officeDetail?.inspect()||null},get amtCharacters(){return [...amtCharacters.map(actor=>({name:actor.name,id:actor.animationId??actor.id,...amtSnapshot(actor),frame:actor.frame,loaded:!!actor.mesh.material.map?.image,mapped:!!actor.mesh.material.map,visible:actor.mesh.visible,detail:actor.mesh.material.map===actor.detail,texelHeight:actor.mesh.material.map?.image?.height||0,breath:actor.mesh.material.userData.breath.value})),...amtMoving.map(actor=>({name:actor.id,...amtSnapshot(actor),frame:actor.cell,loaded:!!actor.mesh.material.map?.image,mapped:!!actor.mesh.material.map,visible:actor.mesh.visible,detail:actor.mesh.material.map===actor.detail||actor.mesh.material.map===actor.walkDetail||actor.mesh.material.map===actor.turnDetail,turnPrepared:!!actor.turnDetail,turnReady:!!actor.turnDetail?.image,texelHeight:actor.mesh.material.map?.image?.height||0,breath:actor.mesh.material.userData.breath.value,tint:actor.mesh.material.color.getHexString(),position:[actor.mesh.position.x,actor.mesh.position.z]}))]}};
   app.classList.add("three-ready");

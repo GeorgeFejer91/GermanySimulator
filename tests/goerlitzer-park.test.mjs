@@ -81,7 +81,7 @@ for(const [html,next] of [[index,"game.js"],[diagnostic,"const goerlitzerPark="]
 }
 const debugSandbox={window:{},clearInput:()=>{}};
 vm.runInNewContext(shared,debugSandbox);
-vm.runInNewContext(`${between(diagnostic,"const goerlitzerPark=","const dist=")}\n${between(diagnostic,"function clearInput(){",'addEventListener("blur"')}\n${line(diagnostic,"function blocked(")}\nglobalThis.blocked=blocked;`,debugSandbox);
+vm.runInNewContext(`${line(diagnostic,"function clearInput(").split('addEventListener(')[0]}\n${between(diagnostic,"const goerlitzerPark=","const dist=")}\n${line(diagnostic,"function blocked(")}\nglobalThis.blocked=blocked;`,debugSandbox);
 const debugBridge=debugSandbox.window.Germany3DBridge;
 debugBridge.getInput().KeyW=true;debugBridge.clearInput();
 assert.equal(debugBridge.getInput().KeyW,false,"diagnostic bridge must release held movement input");

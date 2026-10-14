@@ -357,7 +357,7 @@ runtime cost; do not reskin the entire city from an unreviewed style sheet.
 - Mobile billboard direction: the existing minimalist fax-machine vector style or an equally small deterministic alternative.
 - The shipped desktop fax-ad pool is the two user-supplied, game-readable motifs under `assets/billboards/fax/`; the eagle-insignia variants from the source pack are intentionally not shipped. Three.js maps them onto 3D billboard meshes, while viewports below 700 px keep a generated lightweight fax texture and do not request the WebPs.
 - Every building in the canonical `game.js` inventory receives its own generated-art placard from `assets/building-placards/`, including the power plants, Bundestag, paired sandal/sock shops, and Krügers Kugellager. The 30 shared WebPs total about 0.84 MB. `world3d.js` crops one building-specific prop into a restrained enamel office plaque and draws only the exact building name in local Grenze lettering with measured fit. Wall-mounted signs stay above their entrances, at most 2.65 world units wide and no more than 52% of a facade; mobile uses a smaller 512 × 128 canvas. Existing satirical sign copy remains in game data. Missing art or font keeps a legible drawn plaque. `assets/building-placards/PROVENANCE.md` records the generation and font sources.
-- Placard and pointer preparation reuse the CSS `Grenze` face through `document.fonts.load` inside the existing shared admission queue. If no matching face exists, the standalone diagnostic loads the same local variable face once, with weight `100 900`. Avoid a separate `PlacardGrenze` download of identical bytes. Six cold hardware-browser font probes retain sampled placard widths/line counts (29 root instances, 18 diagnostic) and representative glyph raster hashes, reducing root font requests from two to one; diagnostic preparation remains one request. Font failure keeps the existing readable fallback.
+- Placard and pointer preparation reuse the CSS `Grenze` face through `document.fonts.load` inside the existing shared admission queue. If no matching face exists, the standalone diagnostic loads the same local variable face once, with weight `100 900`. The root uses that bundled face and must not request a duplicate Google `Grenze`; the separate decorative Fraktur face remains unchanged. Avoid a separate `PlacardGrenze` download of identical bytes. Six cold hardware-browser font probes retain sampled placard widths/line counts (29 root instances, 18 diagnostic) and representative glyph raster hashes, reducing root font requests from two to one; diagnostic preparation remains one request. Font failure keeps the existing readable fallback.
 - Share gameplay data, placement, copy, and interaction logic. Only the visual representation should vary by capability or viewport.
 - Load a desktop-only raster only when the desktop representation is actually selected. Do not make mobile download an unused high-resolution alternative.
 - Prefer WebP/AVIF for large raster delivery when browser support and visual QA are adequate; retain SVG for simple line art and signs.
@@ -441,20 +441,34 @@ evidence. Physical Android and GPU/displayed-frame timing remain NOT RUN.
 
 ### Frame, background work and lifetime contract
 
-The first city Bürgeramt entry uses `buergeramt-entry.js` and the existing WebGL
-renderer. One on-demand GPU color/depth capture has a longest edge of at most
+All indoor transitions share `building-levels.js` / `level-transitions.js` and
+the existing WebGL renderer; `buergeramt-entry.js` is a compatibility adapter.
+Indoor-only camera/room/vortex/fire factories in `level-transition-effects.js`
+load on the first transition, with its owned clock and input held until ready.
+They add no title-screen request; import failure keeps direct travel once.
+The [transition protocol](./LEVEL-TRANSITIONS.md) owns the three arcs and timing.
+One on-demand GPU color/depth capture has a longest edge of at most
 960 px on desktop or 640 px on compact screens (at most 7.04 MiB for its two
 four-byte surfaces). One instanced Gaussian draw samples about 18,000 city pixels
 on desktop or 7,000 on compact screens; grid rounding is bounded below 18,500
 instances on supported portrait/landscape profiles. A second draw dissolves
-the frozen image and marks the door's vortex. This is a depth-assisted visible
+the frozen image and marks the door's vortex. Actual destination bounds delay
+its decomposition until after the surroundings. Forced exits reuse this exact
+field in reverse after a live interior camera pull; the optional fire overlay
+adds one procedural shader draw with no texture or download. This is a depth-assisted visible
 surface effect, not a reconstructed splat asset. No CPU pixel readback, extra
 renderer, Spark import, downloaded art, worker or independent animation loop
-is needed. Capture occurs at committed entry; drawing lasts at most 3.4 seconds
-of active frame time. Reduced motion allocates only the color surface and uses
+is needed. Capture occurs only at committed entry or exterior reconstruction;
+only one target resides per attempt. The vortex lasts 3.4 seconds in either
+direction, inside the shared 3.82-second entry / 4.73-second forced exit.
+Reduced motion allocates only the color surface and uses
 one draw for a 0.24-second fade. Hidden pages stop its clock; completion/pagehide
-release both textures, materials and geometry. Module/render failure keeps
-direct entry. The existing office readiness gate runs before the transition.
+release both textures, materials and geometry. Capture/render failure keeps
+direct travel with the same single consequence. The existing office readiness
+gate runs before its entry. Real hinged doors use owned code-native geometry
+on each building/fallback, with no additional asset request or idle update loop.
+One small shared office room is allocated only for an active ordinary-office
+consumer and reused for later dialogue/form visits. It adds no downloadable art.
 
 The mission-fax HUD transition uses native Canvas 2D Gaussian alpha kernels as a
 CSS mask over the actual DOM paper. One reusable 192 × 256 mask and 32 × 32 kernel
@@ -825,7 +839,7 @@ profiles are retained under output/smoothness in the performance worktree.
 
 ## Local 3D buildings
 
-The Jobcenter uses `jobcenter.js`'s original instanced-box facade (eight material batches plus one sign), with the same building material/fade registry and solid parcel as other city offices. There is no remote texture or separate loaded/fallback model. Its 768 × 160 sign is 491,520 decoded RGBA bytes before mipmaps. The first-person void lazily allocates two planes (procedural fire and additive tunnel haze), two shader materials, no textures and one media element on entry; all are released on exit. `assets/audio/jobcenter/overlord.mp3` transfers 214,892 bytes (mono 24 kHz, 26.783 seconds; about 2.57 MB if fully decoded to float PCM). The 9,231-byte metadata carries 40 Hz byte-quantized energy/attack tracks and measured pause/dismissal cues from the final encoded MP3. Neither asset loads at title/startup; only the active visit fetches them. `jobcenter-rumble.js` synthesizes one four-second, 12 kHz mono loop (192,000 PCM bytes), using one buffer source, low-pass filter and gain on the existing effect bus; it fetches no sound asset and creates no second root AudioContext. Sources disconnect on pause, blur, hidden-page, failure and exit, with a 60-second maximum lifetime. The diagnostic page has its own single lazy audio context. The existing game loop samples all cues at native media time, and the existing renderer keeps its pixel budget. The exit reuses the screenshot/Gaussian method in `buergeramt-entry.js`: one color-only capture with a maximum 960-pixel desktop or 640-pixel mobile edge, two overlay draws and about 18,000/7,000 screen-space Gaussian patches. At 1280 × 800 the capture is 960 × 600 (2,304,000 RGBA bytes); at 390 × 844 it is 296 × 640 (757,760 bytes). The small-screen budget uses the shorter viewport edge, preserving it in handset landscape. Capture happens once on completion, with no depth reconstruction, pixel readback, sorting worker or new asset. Captured Jobcenter shaders already author screen colors, so both release shaders replay those colors without another output conversion. The darkness withdraws as a smooth field; only lit, jittered Gaussian samples travel into the door, avoiding a regular grid over the street. The 1.15-second overlay uses the existing city render pass and disposes its target, two geometries/materials and listeners on completion, Escape, re-entry or failure; reduced motion uses one 240 ms fade draw. The existing Bürgeramt entry defaults are unchanged. `tests/jobcenter.test.mjs`, `tests/jobcenter-rumble.test.mjs`, `tests/jobcenter-release.test.mjs` and `tools/playtest-jobcenter.mjs` cover movement, entry/exit, media timing, bounded synthesis and cleanup. Perceptual listening and physical Android coverage must be reported separately from silent emulation.
+The Jobcenter uses `jobcenter.js`'s original instanced-box facade (eight material batches plus one sign), with the same building material/fade registry and solid parcel as other city offices. There is no remote texture or separate loaded/fallback model. Its 768 × 160 sign is 491,520 decoded RGBA bytes before mipmaps. The first-person void lazily allocates two planes (procedural fire and additive tunnel haze), two shader materials, no textures and one media element on entry, alongside its shared hinged entrance door; visit teardown releases them. `assets/audio/jobcenter/overlord.mp3` transfers 214,892 bytes (mono 24 kHz, 26.783 seconds; about 2.57 MB if fully decoded to float PCM). The 9,231-byte metadata carries 40 Hz byte-quantized energy/attack tracks and measured pause/dismissal cues from the final encoded MP3. Neither asset loads at title/startup; only the active visit fetches them. `jobcenter-rumble.js` synthesizes one four-second, 12 kHz mono loop (192,000 PCM bytes), using one buffer source, low-pass filter and gain on the existing effect bus; it fetches no sound asset and creates no second root AudioContext. Sources disconnect on pause, blur, hidden-page, failure and exit, with a 60-second maximum lifetime. The diagnostic page has its own single lazy audio context. The existing game loop samples all cues at native media time, and the existing renderer keeps its pixel budget. Native or bounded fallback completion uses the shared fiery ejection and reverse vortex in [the building transition protocol](./LEVEL-TRANSITIONS.md), with the capture and draw budgets owned by [the common resource contract](#frame-background-work-and-lifetime-contract). Stop the rumble and invalidate media callbacks before the pull; retain the interior view until the shared return receipt performs teardown. E/touch at the exit or Escape uses the immediate voluntary return. There is no separate Jobcenter release overlay or second render loop. Relevant checks include `tests/jobcenter.test.mjs`, `tests/jobcenter-rumble.test.mjs`, `tests/level-transitions.test.mjs`, `tests/building-levels.test.mjs` and the existing silent Jobcenter/building browser fixtures. Perceptual listening and physical Android coverage must be reported separately from silent emulation.
 
 The JWD garden suburb uses six procedural buildings in the canonical building
 list and four small procedural character costumes (three residents plus one
@@ -1327,4 +1341,36 @@ bytes. Its shared receipts are snapshots of the accepted manifests, separate
 from current production selections, so stale profile bindings still fail.
 Exact text, translations, MP3 hashes, mouth-energy samples and approval remain intact.
 
-Three fictional neighbor atlases are admitted on neighborhood approach through the existing city asset queue. The direct `?geheim=nachbarn` checkpoint starts inside that area, counts their three settled image jobs in readiness, and waits for them before enabling play; failures settle to the existing fallback. Each resident is placed before startup job selection. This checkpoint retains the selected model gate and holds unselected city NPC art until play starts, keeping distant visible residents out of its cold loading phase. Ordinary startup still defers these distant neighbor atlases. They add no animation loop or decoding dependency. Each 16 x 9 desktop atlas has 128 x 192 cells (2048 x 1728, 13.5 MiB decoded RGBA); the half-resolution mobile variant is 3.375 MiB. All three desktop WebPs total 3,075,008 bytes; all mobile WebPs total 1,056,306 bytes. The new planted listen/greet/look and source-specific speech rows increase decoded residency from 27 to 40.5 MiB for three desktop actors (mobile 6.75 to 10.125 MiB), before GPU copies. The renderer chooses one variant per actor, keeps loaded sprites visible with the idle row at work stations, and retains articulated chores/tools only as the missing-paint fallback. Both variants have final cleared transparent gutters and source-calibrated ground-distance clocks. Recorded neighbor dialogue loads one exact requested MP3 through the existing foreground asset admission and 16 MiB decoded-audio LRU; final-MP3 mouth energy adds only compact catalog data, with no extra decoder, recognizer or RAF. Final source/recipe ownership is in SPRITE-GENERATION-PROTOCOL.md; source photographs, private clone references and rejected authoring trials do not ship.
+Four fictional neighbor atlases are admitted through the existing city asset
+queue: the three adults on neighborhood approach, Theodore when he emerges.
+The direct `?geheim=nachbarn` checkpoint begins in that area and waits for the
+three adult image jobs to settle before enabling play; failures use the existing
+fallback. Each resident is placed before startup job selection. The checkpoint
+retains the selected model gate and holds unselected city NPC art until play
+starts. Ordinary startup still defers the distant neighbor atlases.
+They add no animation loop or decoding dependency. Each packed 16×16 desktop
+atlas has 128×192 cells (2048×3072, 24 MiB decoded RGBA); its half-resolution
+variant is 6 MiB. All four desktop WebPs total **4,747,776 bytes**; all four
+mobile WebPs total **1,665,762 bytes**. Adult residency is 72/18 MiB, rising to
+96/24 MiB while Theodore is present, before GPU copies. These replace the
+former three 16×9 atlases (40.5/10.125 MiB decoded). One variant is selected per
+actor; narrow screens with DPR below 2 use the smaller files, while higher-DPR
+screens retain the desktop variant. Child retirement disposes his texture,
+material and geometry through the existing NPC owner. The expanded desktop
+family exceeds the preferred 16 MiB-per-texture target; its rendered-scale,
+residency and browser-budget review is specific to this task, not a new default
+for future exports.
+
+The 32-sample walks and 24-sample gesture arcs retain calibrated ground-distance
+clocks, cleared transparent gutters and the ordinary depth buffer. Painted car
+polishing/sweeping supplement the existing articulated hedge-trimming and
+load-failure fallback. Source and recipe ownership remains in
+`SPRITE-GENERATION-PROTOCOL.md`. Exact export checks cover all 2,048 packed cells
+across eight encoded files; rendered/device acceptance remains separate.
+
+Recorded neighbor dialogue loads one exact requested MP3 through existing
+foreground admission and the 16 MiB decoded-audio LRU. Final-MP3 mouth energy
+adds compact catalog data, with no extra decoder, recognizer or RAF. New Inga
+tour lines retain her selected voice's caption fallback until exact recordings
+exist; other neighbors retain their documented browser voices. Source
+photographs, private clone references and rejected authoring trials do not ship.

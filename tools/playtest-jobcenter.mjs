@@ -9,11 +9,12 @@ import {execFileSync} from 'node:child_process';
 const require=createRequire(import.meta.url),{chromium}=require(process.env.PLAYWRIGHT_MODULE||'playwright');
 const root=resolve('.'),out=resolve(process.env.PLAYTEST_OUTPUT||'output/jobcenter');mkdirSync(out,{recursive:true});
 const baselineJob=process.env.PLAYTEST_BASE_REF?execFileSync('git',['show',process.env.PLAYTEST_BASE_REF+':jobcenter.js'],{encoding:'utf8'}):null;
+const baselineEntry=baselineJob?execFileSync('git',['show',process.env.PLAYTEST_BASE_REF+':buergeramt-entry.js'],{encoding:'utf8'}):null;
 const mime={'.js':'text/javascript','.html':'text/html','.css':'text/css','.json':'application/json','.mp3':'audio/mpeg','.glb':'model/gltf-binary','.webp':'image/webp','.png':'image/png','.svg':'image/svg+xml','.ttf':'font/ttf'};
 const server=createServer((req,res)=>{try{let file=resolve(root,'.'+new URL(req.url,'http://localhost').pathname);if(!file.startsWith(root+sep))throw Error('path');const body=readFileSync(file);res.writeHead(200,{'Content-Type':mime[extname(file)]||'application/octet-stream'});res.end(body)}catch{res.writeHead(404);res.end()}});
 await new Promise(done=>server.listen(0,'127.0.0.1',done));
 const browser=await chromium.launch({headless:true,executablePath:process.env.CHROMIUM_PATH,args:['--mute-audio']});
-const report={revision:Object.fromEntries(['jobcenter.js','speech-mouth.js','buergeramt-entry.js','assets/audio/jobcenter/overlord.json','assets/audio/jobcenter/overlord.mp3','world3d.js'].map(f=>[f,createHash('sha256').update(f==='jobcenter.js'&&baselineJob?baselineJob:readFileSync(f)).digest('hex')])),baselineRef:process.env.PLAYTEST_BASE_REF??null,limits:['Silent audio state checks; no listening verdict','Android emulation, not a physical device','City placement is forced; final approach and entry use production input'],cases:[]};
+const report={revision:Object.fromEntries(['jobcenter.js','speech-mouth.js','buergeramt-entry.js','level-transitions.js','building-levels.js','level-transition-effects.js','assets/audio/jobcenter/overlord.json','assets/audio/jobcenter/overlord.mp3','world3d.js','game.js','tools/playtest-jobcenter.mjs'].map(f=>[f,createHash('sha256').update(f==='jobcenter.js'&&baselineJob?baselineJob:f==='buergeramt-entry.js'&&baselineEntry?baselineEntry:readFileSync(f)).digest('hex')])),baselineRef:process.env.PLAYTEST_BASE_REF??null,limits:['Silent audio state checks; no listening verdict','Android emulation, not a physical device','City placement is forced; final approach and entry use production input','An early pull frame holds only the fixture render clock for its screenshot'],cases:[]};
 const mouthTargets=[['closed',1.465],['open',1.95],['round',3.645],['bite',4.13],['wide-open',6.105],['quiet',26.635]];
 const silenceAudio=()=>{
    const play=HTMLMediaElement.prototype.play;window.__jobMedia=[];HTMLMediaElement.prototype.play=function(...args){this.muted=true;if(this.src.includes('/jobcenter/')&&!window.__jobMedia.includes(this))window.__jobMedia.push(this);return play.apply(this,args)};
@@ -35,6 +36,7 @@ try{
   },mouthTargets);
   const page=await context.newPage(),errors=[],requests=[];page.on('pageerror',e=>{errors.push(e.message);console.log('PAGE ERROR '+e.message)});page.on('request',r=>requests.push(r.url()));
   if(baselineJob)await page.route('**/jobcenter.js?*',route=>route.fulfill({contentType:'text/javascript',body:baselineJob}));
+  if(baselineEntry)await page.route('**/buergeramt-entry.js?*',route=>route.fulfill({contentType:'text/javascript',body:baselineEntry}));
   await page.goto(`http://127.0.0.1:${server.address().port}/index.html`,{waitUntil:'domcontentloaded'});
   const cdp=await context.newCDPSession(page);await cdp.send('Emulation.setFocusEmulationEnabled',{enabled:true});
   try{await page.waitForFunction(()=>window.Germany3D?.startupReady&&window.Germany3DBridge?.startupAssetsReady)}catch(error){console.log(await page.evaluate(()=>({ready:window.Germany3D?.ready,startup:window.Germany3D?.startupStatus,characters:window.Germany3DBridge?.characterAssetStatus,hidden:document.hidden})));throw error}
@@ -48,13 +50,13 @@ try{
   await page.waitForTimeout(600);await page.screenshot({path:resolve(out,name+'-exterior.png')});
   await page.keyboard.down('KeyW');await page.waitForTimeout(330);await page.keyboard.up('KeyW');
   console.log(await page.evaluate(()=>({stage:'at-door',player:Germany3DBridge.player,hud:Germany3DBridge.getHUDState(),dialogue:document.getElementById('dialogue').hidden})));
-  await page.keyboard.press('KeyE');await page.waitForFunction(()=>Germany3D.jobcenter.active);
+  await page.keyboard.press('KeyE');await page.waitForFunction(()=>Germany3D.jobcenter.active&&!Germany3D.levelTransition.active);
   await page.waitForTimeout(500);const initial=await page.evaluate(()=>Germany3D.jobcenter);assert.equal(initial.phase,'approach');
   await page.screenshot({path:resolve(out,name+'-distant.png')});
   if(name==='desktop'){
-   await page.keyboard.down('ArrowUp');await page.waitForFunction(p=>Germany3D.jobcenter.pitch>p+.12,initial.pitch);await page.keyboard.up('ArrowUp');const up=await page.evaluate(()=>Germany3D.jobcenter);assert.equal(up.x,initial.x);assert.equal(up.z,initial.z);
+   await page.keyboard.down('PageUp');await page.waitForFunction(p=>Germany3D.jobcenter.pitch>p+.12,initial.pitch);await page.keyboard.up('PageUp');const up=await page.evaluate(()=>Germany3D.jobcenter);assert.equal(up.x,initial.x);assert.equal(up.z,initial.z);
    await page.screenshot({path:resolve(out,name+'-arrow-up.png')});
-   await page.keyboard.down('ArrowDown');await page.waitForFunction(p=>Germany3D.jobcenter.pitch<=p,initial.pitch);await page.keyboard.up('ArrowDown');
+   await page.keyboard.down('PageDown');await page.waitForFunction(p=>Germany3D.jobcenter.pitch<=p,initial.pitch);await page.keyboard.up('PageDown');
    await page.mouse.move(850,400);const beforeHover=await page.evaluate(()=>Germany3D.jobcenter);await page.mouse.move(890,360,{steps:4});const hover=await page.evaluate(()=>Germany3D.jobcenter);assert.ok(hover.yaw<beforeHover.yaw&&hover.pitch>beforeHover.pitch);assert.equal(hover.z,beforeHover.z);
    await page.mouse.move(850,400,{steps:4});assert.equal(await page.locator('#jobcenter-input').evaluate(e=>getComputedStyle(e).cursor),'none');
    await page.keyboard.down('KeyS');await page.waitForTimeout(600);await page.keyboard.up('KeyS');
@@ -70,6 +72,12 @@ try{
   await page.waitForFunction(()=>Germany3D.jobcenter.mediaStarted&&Germany3D.jobcenter.playback>1);
   await page.screenshot({path:resolve(out,name+'-speaking.png')});
   const speaking=await page.evaluate(()=>Germany3D.jobcenter);assert.ok(speaking.energy>0);assert.ok(speaking.pressure>initial.pressure);
+  if(!baselineJob)await page.evaluate(()=>{
+   window.__jobEarlyPullHeld=false;window.__jobEarlyPullArmed=true;const sync=Germany3D.sync;
+   Germany3D.sync=function(){if(__jobEarlyPullHeld)return;sync();const transition=Germany3D.levelTransition;
+    if(__jobEarlyPullArmed&&transition.kind==='eject'&&transition.stage==='pull'&&transition.stageProgress>=.025)__jobEarlyPullHeld=true;
+   };
+  });
   await page.evaluate(()=>{window.__jobCueSamples=[];window.__jobCueTimer=setInterval(()=>{const j=Germany3D.jobcenter;if(j.active)window.__jobCueSamples.push({time:j.playback,level:j.rumbleLevel,dismissal:j.dismissal,heat:j.heat,active:j.rumbleActive})},100)});
   const samples=await page.evaluate(async()=>{const rows=[];for(let i=0;i<12;i++){await new Promise(r=>setTimeout(r,90));rows.push({time:Germany3D.jobcenter.playback,energy:Germany3D.jobcenter.energy})}return rows});
   if(process.env.PLAYTEST_MOUTH_CUES!=='1')assert.ok(new Set(samples.map(s=>Math.round(s.energy*100))).size>2,'fire responds to changing media energy');
@@ -104,13 +112,24 @@ try{
   await page.waitForFunction(()=>Germany3D.jobcenter.heat>.75,null,{timeout:45000});
   await page.screenshot({path:resolve(out,name+'-white-heat.png')});
   if(process.env.PLAYTEST_MOUTH_CUES==='1'){await captureMouth(5);await page.evaluate(()=>clearInterval(__jobMouthTimer))}
-  await page.waitForFunction(()=>!Germany3D.jobcenter.active&&Germany3D.jobcenter.release?.progress>.03,null,{timeout:5000});
-  const releaseStart=await page.evaluate(()=>({release:Germany3D.jobcenter.release,busy:Germany3DBridge.getHUDState().busy,player:{...Germany3DBridge.player}}));
-  assert.equal(releaseStart.busy,false,'native ended immediately returns city control beneath the visual release');
-  await page.screenshot({path:resolve(out,name+'-release-start.png')});
-  await page.waitForFunction(()=>!Germany3D.jobcenter.release||Germany3D.jobcenter.release.progress>.45);
-  await page.screenshot({path:resolve(out,name+'-release-middle.png')});
-  await page.waitForFunction(()=>!Germany3D.jobcenter.release);
+  let releaseStart;
+  if(baselineJob){
+   await page.waitForFunction(()=>!Germany3D.jobcenter.active,null,{timeout:5000});
+   releaseStart=await page.evaluate(()=>({release:Germany3D.jobcenter.release,busy:Germany3DBridge.getHUDState().busy,player:{...Germany3DBridge.player}}));
+   await page.screenshot({path:resolve(out,name+'-release-start.png')});
+   await page.waitForFunction(()=>!Germany3D.jobcenter.release);
+  }else{
+   await page.waitForFunction(()=>__jobEarlyPullHeld,null,{timeout:5000});
+   releaseStart=await page.evaluate(()=>({transition:Germany3D.levelTransition,scene:Germany3D.jobcenter,busy:Germany3DBridge.getHUDState().busy,player:{...Germany3DBridge.player}}));
+   assert.equal(releaseStart.busy,true,'native ended retains visit ownership until the original door is crossed');
+   assert.equal(releaseStart.scene.rumbleActive,false,'the recorded voice and rumble stop before the pull');
+   assert.equal(releaseStart.transition.stage,'pull');assert.ok(releaseStart.transition.stageProgress<.2,'capture precedes fire engulfment');
+   await page.screenshot({path:resolve(out,name+'-release-start.png')});
+   await page.evaluate(()=>{__jobEarlyPullHeld=false;__jobEarlyPullArmed=false});
+   await page.waitForFunction(()=>Germany3D.levelTransition.stage==='rebuild');
+   await page.screenshot({path:resolve(out,name+'-release-middle.png')});
+   await page.waitForFunction(()=>!Germany3D.jobcenter.active&&!Germany3D.levelTransition.active);
+  }
 
   const cueSamples=await page.evaluate(()=>{clearInterval(window.__jobCueTimer);return window.__jobCueSamples});
   assert.ok(cueSamples.some(s=>s.active&&s.level>.4),'long speech pauses produce rumble');
@@ -120,7 +139,7 @@ try{
   assert.equal(exit.class,false);assert.equal(exit.surface,false);assert.ok(exit.media.every(m=>m.paused&&!m.src));
   await page.screenshot({path:resolve(out,name+'-ejected.png')});
   // Re-entry and explicit recovery never keep the old audio or controls.
-  await page.keyboard.press('KeyE');await page.waitForFunction(()=>Germany3D.jobcenter.active);await page.keyboard.press('Escape');
+  await page.keyboard.press('KeyE');await page.waitForFunction(()=>Germany3D.jobcenter.active&&!Germany3D.levelTransition.active);await page.keyboard.press('Escape');
   assert.equal(await page.evaluate(()=>Germany3D.jobcenter.active),false);
   assert.deepEqual(errors,[]);report.cases.push({name,initial,speaking,samples,mouthCaptures,cueSamples,releaseStart,exit,errors});
   console.log(JSON.stringify({name,result:'PASS'}));await context.close();

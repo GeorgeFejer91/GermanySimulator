@@ -1,6 +1,6 @@
 # Codex workflow and skill routing
 
-Codex is the task lead and integrator. Select only affected production domains, read only matching skills and project sections, and do the work directly when it is small or sequential. World-affecting candidates always require the two independent specialist review subagents below. The existing game and documented project decisions remain authoritative over generic skill suggestions.
+Codex is the task lead and integrator. For level work, resolve the affected scope through [`LEVELS.md`](./LEVELS.md) before selecting production domains. Read only matching skills and project sections, and do the work directly when it is small or sequential. World-affecting candidates always require the two independent specialist review subagents below. The existing game and documented project decisions remain authoritative over generic skill suggestions.
 
 ## Domain routing
 
@@ -58,7 +58,7 @@ Delegate only separable work that benefits from parallel effort. Keep one integr
 
 For every world/object/placement/movement/animation/camera/scale candidate, dispatch the **Physics consistency reviewer** and **Camera and scale consistency reviewer** as two independent read-only subagents, even when implementation was small or integrator-owned. Their scopes and executable gates are in [`OBJECT-CONSISTENCY.md`](./OBJECT-CONSISTENCY.md). Reserve/reuse agent slots after writers finish if needed. Give both one frozen revision, root source/test/asset read paths, no writable source paths, and fresh-vs-supplied evidence requirements. The author is never the sole approver. Omit these reviewers only for unrelated nonworld work with an explicit reason; unavailable tools produce `NOT RUN` and outstanding acceptance.
 
-Every delegated brief states: **base commit; working directory/worktree; one goal and expected result; exact read paths; exclusive write paths; dependencies/contracts; relevant skills; acceptance checks; and required return evidence**. Ask workers to return changed paths, concise decisions, checks actually run and results, screenshots/log references where applicable, unresolved issues, and any deviation from the brief. Workers do not commit, push, or publish.
+Every delegated brief states: **base commit; working directory/worktree; one goal and expected result; affected level IDs and instruction paths (or global-only); exact read paths; exclusive write paths; dependencies/contracts; relevant skills; acceptance checks; and required return evidence**. Use the source map in each level guide; a folder or level name grants no write ownership over shared root files. Ask workers to return changed paths, concise decisions, checks actually run and results, screenshots/log references where applicable, unresolved issues, and any deviation from the brief. Workers do not commit, push, or publish.
 
 For a timing-sensitive dialogue or sound beat, use the shared [`MUSIC-SOUND-DESIGN.md`](./MUSIC-SOUND-DESIGN.md) beat card before parallel work: trigger and guard; committed event and revision owner; owning speaker/system and exact visible/spoken text; clock domain; start/done receipts; priority, ducking, pauses and overlaps; bounded duration/retrigger; timeout/fallback; and cancellation/cleanup. Reuse the existing audio-text and cue catalogs and scheduler.
 

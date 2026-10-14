@@ -8,15 +8,12 @@ import * as T from '../assets/vendor/three/0.186.0/build/three.module.min.js';
 const game=readFileSync(new URL('../game.js',import.meta.url),'utf8');
 const data=JSON.parse(readFileSync(new URL('../assets/audio/jobcenter/overlord.json',import.meta.url)));
 const fresh=()=>({x:0,z:34,yaw:0,pitch:0,time:0,distance:34,pressure:0});
-test('arrow pitch leaves position fixed while WASD still moves and page keys remain aliases',()=>{
- for(const dt of [1/60,1/30,.1]){
-  const s=fresh();for(let i=0;i<2/dt;i++)stepJobcenter(s,{ArrowUp:true},dt);
-  assert.equal(s.pitch,1.25);assert.equal(s.x,0);assert.equal(s.z,34);
-  for(let i=0;i<4/dt;i++)stepJobcenter(s,{ArrowDown:true},dt);
-  assert.equal(s.pitch,-1.25);assert.equal(s.z,34);
-  stepJobcenter(s,{KeyW:true},dt);assert.ok(s.z<34);
-  stepJobcenter(s,{PageUp:true},dt);assert.ok(s.pitch>-1.25);
+test('arrows match WASD movement without changing yaw or pitch or stacking speed',()=>{
+ for(const dt of [1/60,1/30,.1])for(const [arrow,letter] of [['ArrowUp','KeyW'],['ArrowDown','KeyS'],['ArrowLeft','KeyA'],['ArrowRight','KeyD']]){
+  const a=fresh(),b=fresh(),c=fresh();stepJobcenter(a,{[arrow]:true},dt);stepJobcenter(b,{[letter]:true},dt);stepJobcenter(c,{[arrow]:true,[letter]:true},dt);
+  assert.deepEqual(a,b);assert.deepEqual(c,b);assert.equal(a.yaw,0);assert.equal(a.pitch,0);
  }
+ const s=fresh();stepJobcenter(s,{PageUp:true},.1);assert.ok(s.pitch>0);assert.equal(s.z,34);
 });
 test('approach is necessary; movement remains unbounded and frame-rate independent',()=>{
  for(const dt of [1/60,1/30,.1]){
@@ -130,7 +127,25 @@ test('media receipts own ejection; pause, failure and stale visits have bounded 
   await enter();oldEnd();assert.equal(encounter.active,true,'stale completion cannot eject a new visit');
   media.at(-1).onerror();assert.equal(encounter.inspect().failed,true);
   for(let i=0;i<270;i++)tick();assert.equal(encounter.active,false);assert.deepEqual(closed,['ended','fallback-ended']);
-  encounter.open({onClose:r=>closed.push(r)});await flush();encounter.close();assert.equal(elements.every(e=>e.removed),true);assert.ok(media.every(m=>m.paused));
+  encounter.open({onClose:r=>closed.push(r)});await flush();
+  values.window.Germany3D={levelTransition:{active:true}};const escape=new Event('keydown',{cancelable:true});Object.assign(escape,{code:'Escape'});values.window.dispatchEvent(escape);
+  assert.equal(encounter.active,true,'a second exit cannot interrupt an owned entry transition');values.window.Germany3D.levelTransition.active=false;
+  encounter.close();assert.equal(elements.every(e=>e.removed),true);assert.ok(media.every(m=>m.paused));
+  let outro,returned=0,disconnected=0;
+  const param=()=>({value:0,cancelScheduledValues(){},setValueAtTime(value){this.value=value},linearRampToValueAtTime(value){this.value=value}});
+  const node=()=>({connect(){},disconnect(){disconnected++}});
+  const context={currentTime:0,createBuffer:(_channels,length)=>({getChannelData:()=>new Float32Array(length)}),
+   createBufferSource:()=>({...node(),start(){},stop(){}}),createBiquadFilter:()=>({...node(),frequency:param(),Q:param()}),createGain:()=>({...node(),gain:param()})};
+  encounter.open({effects:()=>({context,output:{}}),transitionOut:request=>(outro=request,true),onClose:()=>returned++});
+  await flush();keys.KeyW=true;for(let i=0;i<60;i++)tick();delete keys.KeyW;await flush();
+  const ending=media.at(-1);ending.currentTime=7.7;tick();assert.equal(encounter.inspect().rumbleActive,true);
+  ending.onended();assert.equal(outro.mode,'eject');assert.equal(outro.fire,true);assert.equal(returned,0);
+  assert.equal(encounter.active,true);assert.equal(encounter.inspect().leaving,true);assert.equal(encounter.inspect().rumbleActive,false);
+  assert.equal(disconnected,3,'voice completion releases the rumble graph before camera travel');
+  const atExit=encounter.inspect();keys.KeyW=true;tick();assert.equal(encounter.inspect().z,atExit.z);assert.equal(ending.paused,true);
+  outro.onReturn();assert.equal(returned,1);assert.equal(encounter.active,false);
+  encounter.open();await flush();outro.onReturn();assert.equal(encounter.active,true,'an old portal receipt cannot close a replayed visit');
+  encounter.close();assert.equal(returned,1);assert.ok(media.every(m=>m.paused));
  }finally{for(const name of names){if(originals[name])Object.defineProperty(globalThis,name,originals[name]);else delete globalThis[name]}}
 });
 

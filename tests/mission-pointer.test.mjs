@@ -40,6 +40,10 @@ test('HUD sausage stays at the upper edge and points along the camera-projected 
  }
  for(const [width,height] of [[1280,800],[390,844],[844,390],[320,568]]){scope.innerWidth=width;scope.innerHeight=height;const size=width<=1000?88:128;rect={left:width<=1000?36:(width-size)/2,right:width<=1000?36+size:(width+size)/2,top:44,width:size,height:size};scope.layoutMissionPointer();const {x,y}=pointer.userData.screen;assert.equal(y-size/2,44);assert(x-size/2>=8);assert(x+size/2<=width-8);assert.equal(position.x,x-width/2);assert.equal(position.y,height/2-y)}
  target={id:'entrance',x:player.x+35,y:player.y};scope.updateMissionPointer();assert.equal(pointer.visible,false);
+ // Close follow targets remain readable without the large HUD model over
+ // their performance; a player who falls behind still gets navigation.
+ for(const distance of [60,185,186]){target={id:'jwd-child',x:player.x,y:player.y+distance,guide:true};scope.updateMissionPointer();assert.equal(pointer.visible,distance>185)}
+ target={id:'entrance',x:player.x+60,y:player.y};scope.updateMissionPointer();assert.equal(pointer.visible,true);
  target=null;scope.updateMissionPointer();assert.equal(pointer.visible,false);assert.equal(pointer.userData.target,null);
  pointer.visible=true;scope.missionGuide.dataset.pointerFit='file';scope.layoutMissionPointer();assert.equal(pointer.visible,false);assert.equal(pointer.userData.screen.fit,'file');
 });

@@ -19,10 +19,9 @@ const knickCount=['manifest.json','ambient-manifest.json','queue-call-manifest.j
 const streetDirectory=join(root,'assets/voices/street-wisdom'),streetCount=existsSync(streetDirectory)?readdirSync(streetDirectory).filter(file=>file.endsWith('-manifest.json')).reduce((n,file)=>n+JSON.parse(readFileSync(join(streetDirectory,file),'utf8')).clips.length,0):0;
 const playerDirectory=join(root,'assets/voices/player-replies'),playerCount=existsSync(playerDirectory)?readdirSync(playerDirectory).filter(file=>file.endsWith('-manifest.json')).reduce((n,file)=>n+JSON.parse(readFileSync(join(playerDirectory,file),'utf8')).clips.length,0):0;
 const ambientDirectory=join(root,'assets/voices/office-ambient'),ambientCount=existsSync(ambientDirectory)?readdirSync(ambientDirectory).filter(file=>file.endsWith('-manifest.json')).reduce((n,file)=>n+JSON.parse(readFileSync(join(ambientDirectory,file),'utf8')).clips.length,0):0;
-const neighborCount=JSON.parse(readFileSync(join(root,'assets/voices/neighbors/inga-manifest.json'),'utf8')).clips.length;
-assert.equal(neighborCount,11,'Inga has eleven exact authored neighbor takes');
+const neighborDirectory=join(root,'assets/voices/neighbors'),neighborCount=existsSync(neighborDirectory)?readdirSync(neighborDirectory).filter(file=>file.endsWith('-manifest.json')).reduce((n,file)=>n+JSON.parse(readFileSync(join(neighborDirectory,file),'utf8')).clips.length,0):0;
 // Two retired phone-button replies remain archived on disk; the fifth police line is new.
-assert.equal(Object.keys(library.clips).length,114+knickCount+playerCount+ambientCount+neighborCount,"recorded and text-only dialogue need stable IDs, including the Jobcenter overlord");
+assert.equal(Object.keys(library.clips).length,114+knickCount+playerCount+ambientCount+neighborCount,"recorded and text-only dialogue need stable IDs, including the Jobcenter overlord and neighbors");
 const recordedClips=Object.values(library.clips).filter(clip=>clip.recording);
 assert.equal(recordedClips.length,99+knickCount+streetCount+playerCount+ambientCount+neighborCount,"retired clerk, traffic and phone-button takes must not enter the runtime catalog");
 assert.equal(new Set(recordedClips.map(clip=>clip.path)).size,99+knickCount+streetCount+playerCount+ambientCount+neighborCount,"recorded clip paths must be unique");

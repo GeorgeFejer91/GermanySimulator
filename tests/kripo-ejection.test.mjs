@@ -23,7 +23,7 @@ function harness(direct=false){
   horizontalRoads:[{x:560,y:1380,w:9840,h:260},{x:560,y:2560,w:9840,h:240},{x:560,y:3560,w:9840,h:220}],
   offsetWorldPoint:p=>({...p,x:p.x+560,y:p.y+560}),props:[],normObjects:[],trees:[],trains:[],trafficCars:[],policeVehicles:[],police:[],npcs:[],grassAreas:[],walkways:[],
   goerlitzerPark:{x:10000,y:4000,w:100,h:100,plaqueX:10000,plaqueY:4000},wirtschaftswunderSite:{x:10000,y:4200,collisionRadius:142},kiesingerMemorial:{x:10000,y:4500},
-  player:{x:1800,y:1700,r:16,energy:81,vx:30,vy:-20,facing:0},state:{started:true,modal:true,dialogue:false,mission:0,forms:0,wanted:2,germanness:7,pfand:3,day:2,voiceOn:false,subtitlesOn:true,region:'berlin'},
+  player:{x:1800,y:1700,r:16,energy:81,vx:30,vy:-20,facing:0},jwd:{tour:null},state:{started:true,modal:true,dialogue:false,mission:0,forms:0,wanted:2,germanness:7,pfand:3,day:2,voiceOn:false,subtitlesOn:true,region:'berlin'},
   OFFENSE_TIMING:{policeContactCooldown:5.8},keys,pendingOfficeEntry:null,stationElevation:()=>0,regionOf:y=>y>1680?'berlin':'germany',clamp:(n,a,b)=>Math.max(a,Math.min(b,n)),dist:(ax,ay,bx,by)=>Math.hypot(ax-bx,ay-by),
   document:{body:{classList:{contains:k=>classes.has(k),remove:k=>classes.delete(k)}},getElementById:element},
   clearInput(){for(const code in keys)keys[code]=false},toast:text=>events.push(['toast',text]),updateHud:()=>events.push(['hud']),
@@ -34,7 +34,7 @@ function harness(direct=false){
  vm.createContext(h);
  const buildings=source.slice(source.indexOf('const buildings='),source.indexOf('const grassAreas='));
  const paths=source.slice(source.indexOf('for(const b of buildings){'),source.indexOf('walkways.push({x:goerlitzerPark'));
- const names=['normObjectRadius','propRadius','staticBlocked','signedRectDistance','trainCarDistance','vehicleBodyDistance','responderBlocked','amtExitPosition','wanted','showAmtDirectResult','cancelAmtAppointment','bureaucrat','interact'];
+ const names=['normObjectRadius','propRadius','staticBlocked','signedRectDistance','trainCarDistance','vehicleBodyDistance','responderBlocked','amtExitPosition','returnFromAmt','wanted','showAmtDirectResult','cancelAmtAppointment','bureaucrat','interactBuilding','interact'];
  vm.runInContext(`${buildings}\n${paths}\n${names.map(name=>fn(name)).join('\n')}\nglobalThis.office=buildings.find(b=>b.id==='buergeramt');`,h);
  if(direct){const start=source.indexOf(' const directConfig=');vm.runInContext(source.slice(start,source.indexOf('\n function restartAmt',start))+'\nglobalThis.directConfig=directConfig;',h)}
  return Object.assign(h,{events,visits,classes,elements});
@@ -112,12 +112,14 @@ test('re-entry keeps the existing office readiness gate',()=>{
 });
 
 test('direct renderer exit creates the skipped city buildings exactly once and enables the normal sync path',()=>{
- const renderer=readFileSync(new URL('../world3d.js',import.meta.url),'utf8'),built=[],buildings=[{id:'buergeramt'},{id:'spaeti'}];
- const h=vm.createContext({amtDirectRoute:true,bridge:{buildings},building:b=>built.push(b.id)});
+ const renderer=readFileSync(new URL('../world3d.js',import.meta.url),'utf8'),built=[],mounted=[],buildingSlots=[],buildings=[{id:'buergeramt'},{id:'spaeti'}];
+ const h=vm.createContext({amtDirectRoute:true,bridge:{buildings},buildingSlots,building:b=>{built.push(b.id);buildingSlots.push({building:b})},mountBuildingDoor:slot=>mounted.push(slot.building.id)});
  vm.runInContext(fn('leaveAmtDirectMode',renderer),h);h.leaveAmtDirectMode();
  assert.equal(h.amtDirectRoute,false);assert.deepEqual(built,['buergeramt','spaeti']);
+ assert.deepEqual(mounted,built,'direct-route fallback buildings receive their common doors');
  h.leaveAmtDirectMode();assert.equal(built.length,2,'repeated ejections cannot duplicate city geometry');
  assert.match(renderer.slice(renderer.indexOf('window.Germany3D={')),/\bleaveAmtDirectMode\s*,/,'the renderer exports its direct-route exit seam');
  assert.match(renderer,/get amtEntry\(\)/,'office entry inspection remains available alongside other renderer APIs');
+ assert.equal(mounted.length,2,'repeated ejections cannot duplicate doors');
  assert.match(renderer,/if\(amtDirectRoute&&!window\.BuergeramtLevel\?\.active\)/,'disabling direct-only state releases the existing city sync path');
 });

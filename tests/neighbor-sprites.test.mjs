@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import {neighborFrame,createNeighborSprite} from '../neighbor-sprites.js';
+import {neighborFrame,createNeighborSprite,neighborWorkMirrored} from '../neighbor-sprites.js';
 
 test('neighbor gait follows accepted displacement and plants when blocked',()=>{
   const actor={id:'jwd-parent',x:100,y:100,jwdWorking:false},playback={};
@@ -14,21 +14,23 @@ test('neighbor gait follows accepted displacement and plants when blocked',()=>{
   assert.equal(playback.distance,distance);
 });
 
-test('only actual owned speech uses the talk row; cancellation returns to painted idle',()=>{
+test('only actual owned speech uses the talk row; cancellation releases to work',()=>{
   const actor={id:'jwd-watcher',x:100,y:100,jwdWorking:true},playback={};
-  const idle=neighborFrame(actor,playback,{id:'other'},.1,true);assert.equal(idle.visible,true);assert.equal(idle.row,4);assert.equal(idle.mouthOpen,0);
+  const chore=neighborFrame(actor,playback,{id:'other'},.1,true);
+  assert.equal(chore.visible,true);assert.equal(chore.row,11);assert.equal(chore.mouthOpen,0);
   const owned=neighborFrame(actor,playback,{id:actor.id,active:true,speaking:true,cueToken:'one',mediaTime:.2,mouthOpen:.8},.1,true);
   assert.equal(owned.row,5);assert.equal(owned.visible,true);
   assert.equal(neighborFrame(actor,playback,null,.1,true).state,'release');
   assert.equal(neighborFrame(actor,playback,null,.3,true).frame,0);
-  const returned=neighborFrame(actor,playback,null,.01,true);assert.equal(returned.visible,true);assert.equal(returned.state,'idle');assert.equal(returned.mouthOpen,0);
+  const recovered=neighborFrame(actor,playback,null,.01,true);assert.equal(recovered.visible,true);assert.equal(recovered.state,'idle');assert.equal(recovered.mouthOpen,0);
+  const returned=neighborFrame(actor,playback,null,.01,true);assert.equal(returned.state,'work');assert.equal(returned.row,11);assert.equal(returned.mouthOpen,0);
 });
 
-test('all three working residents retain animated painted idle without phantom walking',()=>{
+test('all three working residents retain their chore without phantom walking',()=>{
  for(const [id,jwdRole] of [['jwd-parent','parent'],['jwd-watcher','watcher'],['jwd-swabian','swabian']]){
   const actor={id,jwdRole,x:0,y:0,jwdWorking:true},playback={};
   const first=neighborFrame(actor,playback,null,0,true),next=neighborFrame(actor,playback,null,.25,true);
-  assert.equal(next.visible,true);assert.equal(next.row,4);assert.notEqual(next.frame,first.frame);assert.equal(next.moving,false);assert.equal(playback.distance,0);
+  assert.equal(next.visible,true);assert.equal(next.row,11);assert.notEqual(next.frame,first.frame);assert.equal(next.moving,false);assert.equal(playback.distance,0);
  }
 });
 
@@ -36,7 +38,7 @@ test('queued speech performs entry then listens; actual start preempts greeting'
   const actor={id:'neighbor',x:0,y:0},playback={},dialogue={id:'neighbor',active:true,speaking:false};
   assert.equal(neighborFrame(actor,playback,dialogue,0,true).state,'settle');
   assert.equal(neighborFrame(actor,playback,dialogue,.15,true).state,'look');
-  assert.equal(neighborFrame(actor,playback,dialogue,.21,true).frame,15);
+  assert.equal(neighborFrame(actor,playback,dialogue,.21,true).frame,7);
   assert.equal(neighborFrame(actor,playback,dialogue,.01,true).state,'greet');
   assert.equal(neighborFrame(actor,playback,dialogue,.36,true).frame,15);
   assert.equal(neighborFrame(actor,playback,dialogue,.01,true).state,'listen');
@@ -123,5 +125,119 @@ test('actual sprite sync respects case-file pause across idle, walk, entry and r
     sprite.dispose();
   }finally{
     if(previousDocument===undefined)delete globalThis.document;else globalThis.document=previousDocument;
+  }
+});
+
+test('roaming dialogue keeps accepted four-direction gait instead of planting the speaker',()=>{
+  const actor={id:'jwd-parent',jwdRole:'parent',x:0,y:0,jwdTouring:true},playback={};
+  const dialogue={id:actor.id,active:true,speaking:true,cueToken:'tour',mediaTime:.4,mouthOpen:.8};
+  neighborFrame(actor,playback,dialogue,0,true);
+  for(const [x,y,row] of [[4,0,1],[4,4,0],[0,4,3],[0,0,2]]){
+    Object.assign(actor,{x,y});
+    const pose=neighborFrame(actor,playback,dialogue,.1,true);
+    assert.equal(pose.state,'walk');assert.equal(pose.row,row);assert.ok(pose.mouthOpen>0);
+  }
+  const distance=playback.distance;
+  const waiting=neighborFrame(actor,playback,dialogue,.1,true);
+  assert.equal(waiting.moving,false);assert.equal(playback.distance,distance);
+});
+
+test('story gesture survives owned speech, follows the simulation age, and returns after recovery',()=>{
+  const actor={id:'jwd-parent',jwdRole:'parent',x:0,y:0,jwdGesture:'point',jwdGestureAge:0,jwdGestureDuration:1.4},playback={};
+  const dialogue={id:actor.id,active:true,speaking:true,cueToken:'point',mediaTime:.3,mouthOpen:.8};
+  const first=neighborFrame(actor,playback,dialogue,.1,true);
+  assert.equal(first.row,9);assert.equal(first.frame,0);assert.ok(first.mouthOpen>0);
+  actor.jwdGestureAge=.7;
+  const middle=neighborFrame(actor,playback,dialogue,.1,true);
+  assert.equal(middle.row,9);assert.equal(middle.frame,11);
+  assert.deepEqual(neighborFrame(actor,playback,{...dialogue,paused:true},5,true),middle);
+  actor.jwdGestureAge=1.4;
+  assert.equal(neighborFrame(actor,playback,dialogue,.1,true).frame,23);
+  actor.jwdGestureAge=1.5;
+  assert.equal(neighborFrame(actor,playback,dialogue,.1,true).row,5);
+  actor.jwdGesture='call';actor.jwdGestureAge=0;
+  assert.equal(neighborFrame(actor,playback,dialogue,.1,true).row,10);
+  actor.x=2;
+  assert.equal(neighborFrame(actor,playback,dialogue,.1,true).row,1);
+});
+
+test('dense gait preserves distance per cycle and visits all 32 distinct samples including closure',()=>{
+  const actor={id:'jwd-parent',jwdRole:'parent',x:0,y:0},playback={};
+  neighborFrame(actor,playback,null,0,true);
+  const frames=[];
+  for(let i=0;i<33;i++){
+    actor.x=(i+.1)*16.941176470588236/32;
+    frames.push(neighborFrame(actor,playback,null,1/60,true).frame);
+  }
+  assert.deepEqual(frames.slice(0,32),Array.from({length:32},(_,i)=>i));
+  assert.equal(frames.at(-1),0);
+});
+
+test('Theodore has a distinct smaller paint family and matching shorter stride',()=>{
+  const actor={id:'jwd-theodore',jwdRole:'child',x:0,y:0},playback={};
+  neighborFrame(actor,playback,null,0,true);actor.x=5.76;
+  assert.equal(neighborFrame(actor,playback,null,.1,true).frame,16);
+  const host={children:[],position:{x:0,z:0}};
+  const paint=createNeighborSprite({},actor,host,()=>{},{});
+  assert.equal(paint.inspect().height,1.088);paint.dispose();
+});
+
+test('hedge trimming retains articulated shears instead of displaying a car sponge',()=>{
+  const actor={id:'jwd-parent',jwdRole:'parent',x:0,y:0,jwdWorking:true,jwdActivity:'trim'},playback={};
+  assert.equal(neighborFrame(actor,playback,null,.1,true).visible,false);
+  actor.jwdActivity='wash';
+  assert.equal(neighborFrame(actor,playback,null,.1,true).visible,true);
+  actor.jwdActivity='trim';actor.jwdTouring=true;actor.jwdGesture='inspect';actor.jwdGestureAge=.3;
+  const story=neighborFrame(actor,playback,{id:actor.id,active:true,speaking:false},.1,true);
+  assert.equal(story.visible,true);assert.equal(story.row,8);
+});
+
+test('work props face their subject in camera space while child lips and walk direction stay unchanged',()=>{
+  const actor={jwdRole:'parent',facing:-Math.PI/2};
+  assert.equal(neighborWorkMirrored(actor,11,{x:1,z:0}),true,'car west of Heiko needs a left-facing sponge');
+  actor.facing=Math.PI/2;
+  assert.equal(neighborWorkMirrored(actor,11,{x:1,z:0}),false);
+  assert.equal(neighborWorkMirrored(actor,11,{x:-1,z:0}),true,'camera reversal changes projected direction');
+  actor.facing=Math.PI;assert.equal(neighborWorkMirrored(actor,11,{x:0,z:1}),true);
+  assert.equal(neighborWorkMirrored(actor,1,{x:0,z:1}),false,'walking uses the selected direction sheet');
+  actor.jwdRole='child';assert.equal(neighborWorkMirrored(actor,11,{x:0,z:1}),false,'registered front fidget keeps lip coordinates');
+});
+
+test('failed paint loading settles readiness and preserves the articulated resident',async()=>{
+  const previousWidth=globalThis.innerWidth,previousDpr=globalThis.devicePixelRatio,previousWarn=console.warn;
+  globalThis.innerWidth=1200;globalThis.devicePixelRatio=1;console.warn=()=>{};
+  try{
+    let begin,onError;
+    const T={TextureLoader:class{load(_url,_loaded,_progress,error){onError=error}}};
+    const fallback={visible:true},host={children:[fallback],position:{x:0,z:0}};
+    const paint=createNeighborSprite(T,{id:'jwd-parent',jwdRole:'parent',x:0,y:0},host,(_position,_priority,load)=>{begin=load},{});
+    assert.equal(paint.inspect().settled,false);assert.equal(paint.inspect().failed,false);
+    const pending=begin();assert.equal(paint.inspect().settled,false);
+    onError(new Error('fixture texture unavailable'));assert.equal(await pending,false);
+    assert.equal(paint.inspect().settled,true);assert.equal(paint.inspect().failed,true);
+    assert.equal(paint.inspect().loaded,false);assert.equal(fallback.visible,true);assert.equal(host.children.length,1);
+    paint.dispose();
+  }finally{
+    if(previousWidth===undefined)delete globalThis.innerWidth;else globalThis.innerWidth=previousWidth;
+    if(previousDpr===undefined)delete globalThis.devicePixelRatio;else globalThis.devicePixelRatio=previousDpr;
+    console.warn=previousWarn;
+  }
+});
+
+test('retired paint disposes a late texture without attaching a resident mesh',async()=>{
+  const previousWidth=globalThis.innerWidth,previousDpr=globalThis.devicePixelRatio;
+  globalThis.innerWidth=390;globalThis.devicePixelRatio=1;
+  try{
+    let begin,onLoad,owner,url,disposed=0;
+    const T={TextureLoader:class{load(request,loaded){url=request;onLoad=loaded}}};
+    const host={children:[{visible:true}],position:{x:0,z:0},add(){assert.fail('retired sprite must never attach')}};
+    const paint=createNeighborSprite(T,{id:'jwd-theodore',jwdRole:'child',x:0,y:0},host,(_position,_priority,load,token)=>{begin=load;owner=token},{});
+    const pending=begin();assert.match(url,/theodore-mobile\.webp/);
+    paint.dispose();assert.equal(owner.retired,true);
+    onLoad({dispose(){disposed++}});assert.equal(await pending,false);
+    assert.equal(disposed,1);assert.equal(paint.inspect().settled,true);assert.equal(paint.inspect().failed,false);assert.equal(paint.inspect().loaded,false);
+  }finally{
+    if(previousWidth===undefined)delete globalThis.innerWidth;else globalThis.innerWidth=previousWidth;
+    if(previousDpr===undefined)delete globalThis.devicePixelRatio;else globalThis.devicePixelRatio=previousDpr;
   }
 });

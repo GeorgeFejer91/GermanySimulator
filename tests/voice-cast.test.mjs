@@ -87,9 +87,9 @@ const neighborContext=vm.createContext({});
 vm.runInContext(game.slice(game.indexOf('const jwdCopy='),game.indexOf('function currentMission('))+';globalThis.copy=jwdCopy;',neighborContext);
 for(const asset of cast.existingAssetProfiles){
  if(asset.gameRole==='jwd-neighbor'){
-  assert.ok(namedNpcs.includes(`id:"${asset.gameCharacterId}"`));assert.ok(game.includes(`:"${asset.voiceId}"`));assert.equal(voices[asset.voiceId].name,asset.fullName);assert.equal(voices[asset.voiceId].gender,asset.gender);
-  for(const line of asset.dialogue){const locator=line.locator.match(/^game\.js jwdCopy\.([a-zA-Z]+)\.de\[(\d+)\]$/);assert.ok(locator);assert.equal(neighborContext.copy[locator[1]].de[+locator[2]],line.text);assert.equal(neighborContext.copy[locator[1]].en[+locator[2]],line.english)}
-  if(asset.fallback==='browser-name'){assert.ok(['jwd-heiko-maaslos','jwd-frau-schwabingen'].includes(asset.voiceId));assert.equal(cast.productionVoices[asset.voiceId],undefined,'unselected neighbor profiles must not masquerade as approved production voices');assert.equal(voices[asset.voiceId].profileId,undefined);continue}
+  assert.ok(namedNpcs.includes(`id:"${asset.gameCharacterId}"`)||asset.gameCharacterId==='jwd-theodore'&&game.includes("id:'jwd-theodore'"));assert.ok(game.includes(`:"${asset.voiceId}"`)||game.includes(`:'${asset.voiceId}'`));assert.equal(voices[asset.voiceId].name,asset.fullName);assert.equal(voices[asset.voiceId].gender,asset.gender);
+  for(const line of asset.dialogue){const locator=line.locator.match(/^game\.js jwdCopy\.([a-zA-Z]+)\.de\[(\d+)\]$/);if(locator){assert.equal(neighborContext.copy[locator[1]].de[+locator[2]],line.text);assert.equal(neighborContext.copy[locator[1]].en[+locator[2]],line.english)}else if(line.locator.startsWith('neighbor-story.js ')){assert.ok(line.text&&line.english,'exact tour lines and owners are checked below')}else{assert.match(line.locator,/^game\.js guided tour (repeat invitation|follow invitation|free play)$/);assert.ok(game.includes(line.text)&&game.includes(line.english),line.locator+' matches runtime')}}
+  if(asset.fallback==='browser-name'){assert.ok(['jwd-heiko-maaslos','jwd-frau-schwabingen','jwd-theodore-maaslos'].includes(asset.voiceId));assert.equal(cast.productionVoices[asset.voiceId],undefined,'unselected neighbor profiles must not masquerade as approved production voices');assert.equal(voices[asset.voiceId].profileId,undefined);continue}
   assert.equal(asset.voiceId,'jwd-inga-maaslos');assert.equal(asset.fallback,'captions');assert.ok(cast.productionVoices[asset.voiceId],'Inga has a selected fixed production profile');
  }
  assert.equal(voices[asset.voiceId].profileId,cast.productionVoices[asset.voiceId].profileId);
@@ -98,6 +98,13 @@ for(const asset of cast.existingAssetProfiles){
  if(asset.gameRole!=='jwd-neighbor')assert.ok(asset.source.every(item=>item.path&&item.sha256&&item.text));
 }
 assert.equal(Object.keys(roleVoices).length,cast.roleProfiles.length);
+vm.runInContext(source('neighbor-story.js'),context);
+const neighborVoiceIds={parent:'jwd-heiko-maaslos',watcher:'jwd-inga-maaslos',swabian:'jwd-frau-schwabingen',child:'jwd-theodore-maaslos'};
+for(const [role,tours] of Object.entries(context.window.JwdStory.tours))for(const tour of tours)for(const stop of tour.stops)for(const line of [...stop.lines,...stop.walkLines||[]]){
+ const voiceId=neighborVoiceIds[line.speaker==='child'?'child':role],locator=`neighbor-story.js ${tour.id}/${stop.id}/${line.id}`;
+ const matches=cast.existingAssetProfiles.flatMap(profile=>profile.dialogue?.filter(item=>item.locator===locator).map(item=>({voiceId:profile.voiceId,...item}))||[]);
+ assert.equal(matches.length,1,locator+' has exactly one speech owner');assert.equal(matches[0].voiceId,voiceId,locator+' speaker');assert.equal(matches[0].text,line.de,locator+' exact German');assert.equal(matches[0].english,line.en,locator+' exact English');
+}
 for(const clip of Object.values(recordings)){
  if(clip.trigger?.startsWith("player.")&&clip.targetVoiceId)assert.equal(clip.targetVoiceId,"spieler-hans-peter-mustermann",`replacement identity for ${clip.id}`);
 }

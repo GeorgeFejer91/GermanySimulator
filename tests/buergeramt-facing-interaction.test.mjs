@@ -6,7 +6,7 @@ import {harness,source} from './amt-harness.mjs';
 function fixture(){const h=harness('host',{voice:false,cinematics:false});h.enter();h.approachRegistration();turn(h,-.85);return h}
 function selectionFixture(){const context=vm.createContext({Math,view:{x:-5.9,z:2.6,yaw:0},stage:'walk-sign',characters:[],story:{patrons:{}},counterXs:[-5.8,-1.6,3.9,6.2],counter:{z:-8.15}});const s=source('buergeramt.js');for(const name of ['facingInteractionScore','nearestCharacter','nearbyPerson','nearestCounter']){const start=s.indexOf('function '+name+'('),end=s.indexOf('\n',start);vm.runInContext(s.slice(start,end),context)}return {context}}
 
-function turn(h,yaw){const delta=yaw-h.level.view.yaw,code=delta>=0?'ArrowRight':'ArrowLeft';h.key(code);h.advanceGame(Math.abs(delta)/1.8);h.key(code,'keyup');h.level.update(0)}
+function turn(h,yaw){h.turnTo(yaw)}
 test('E and its hint follow facing for seated patrons; turning away does not start dialogue',()=>{
  const h=fixture();assert.match(h.node('amt-nearby').textContent,/KONRAD/);
  turn(h,Math.PI);assert.doesNotMatch(h.node('amt-nearby').textContent,/ANSPRECHEN/);

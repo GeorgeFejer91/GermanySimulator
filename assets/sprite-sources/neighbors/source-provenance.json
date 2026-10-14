@@ -1,0 +1,17 @@
+{
+  "note": "Authoring briefs summarize the generation requests; they are not verbatim prompts. Original adult source directions.png is preserved.",
+  "sources": {
+    "theodore-directions.png": {
+      "sha256": "63c67a13627211609483c3e132c147815f1e0fe541b0491da3ed60fbee10a613",
+      "source": "OpenAI built-in image generation",
+      "generatedFile": "exec-44f6b7b1-e177-413f-b0ba-c93246f56e3a.png",
+      "authoringBrief": "Original fictional eight-year-old son of Heiko, matching the miniature painted adult cast; front, right profile and rear on transparent background; youthful rounded face, blond floppy hair, blue-grey hoodie, green shorts, white socks, brown shoes, naturally closed single mouth."
+    },
+    "chore-poses.png": {
+      "sha256": "2add4f604bb25a35d44ba8ea80eed591eb4ec69f30d7ec8fbe7dc24e56b76cb4",
+      "source": "OpenAI built-in image generation",
+      "generatedFile": "exec-fe71b8c1-a761-48e0-a29e-87d88e3aa2c2.png",
+      "authoringBrief": "Preserve the established three fictional miniature identities and clothing; Heiko in a lateral car-polishing pose gripping one sponge, Inga presenting with a pointed hand, Schwabingen gripping a single broom with both hands; separate transparent panels, full planted shoes and closed mouths."
+    }
+  }
+}

@@ -100,12 +100,16 @@ try{
     await touch('touchMove',7,rx,ry+delta);await page.waitForFunction(()=>BuergeramtLevel.view.pitch===-.9);result.camera.push({label:'pitch-down',state:await inspect()});await page.screenshot({path:resolve(out,`${name}-pitch-down.png`)});await touch('touchCancel');
    }
   }else{
+   for(const [key,axis,sign] of [['ArrowUp','z',-1],['ArrowDown','z',1],['ArrowLeft','x',-1],['ArrowRight','x',1]]){
+    await page.evaluate(()=>__navigationTest.pose(0,3));const before=await inspect();await page.keyboard.down(key);await page.waitForFunction(({axis,sign,start})=>(BuergeramtLevel.view[axis]-start)*sign>.1,{axis,sign,start:before.view[axis]},{timeout:10000});await page.keyboard.up(key);const after=await inspect();assert.ok((after.view[axis]-before.view[axis])*sign>.05);assert.equal(after.view.yaw,before.view.yaw);assert.equal(after.view.pitch,before.view.pitch);result.gestures.push({label:key+'-movement',before,after});
+   }
+   const hint=page.locator('.amt-walk-bottom > span');assert.ok((await hint.textContent()).includes('WASD / PFEILE · GEHEN'));await page.evaluate(()=>BuergeramtFit());assert.ok(await hint.evaluate(el=>el.dataset.pretextFit&&el.dataset.pretextFit!=='unavailable'&&el.scrollWidth<=el.clientWidth+1&&el.scrollHeight<=el.clientHeight+1));
    const initial=await inspect();await page.mouse.move(850,400);await page.mouse.move(890,360,{steps:4});const hover=await inspect();
    assert.ok(hover.view.yaw>initial.view.yaw&&hover.view.pitch>initial.view.pitch);assert.equal(hover.view.walkedDistance,initial.view.walkedDistance);result.gestures.push({label:'desktop-hover-look',before:initial,after:hover});
    await page.mouse.move(850,400,{steps:4});const reverse=await inspect();assert.ok(reverse.view.yaw<hover.view.yaw&&reverse.view.pitch<hover.view.pitch);
-   await page.keyboard.down('ArrowUp');await page.waitForFunction(p=>BuergeramtLevel.view.pitch>p+.12,reverse.view.pitch);await page.keyboard.up('ArrowUp');const up=await inspect();assert.equal(up.view.walkedDistance,reverse.view.walkedDistance);
-   assert.equal(await page.locator('.amt-reticle').evaluate(e=>getComputedStyle(e).visibility),'hidden');await page.screenshot({path:resolve(out,`${name}-arrow-up.png`)});
-   await page.keyboard.down('ArrowDown');await page.waitForFunction(p=>BuergeramtLevel.view.pitch<p-.12,up.view.pitch);await page.keyboard.up('ArrowDown');const down=await inspect();assert.equal(down.view.walkedDistance,up.view.walkedDistance);result.camera.push({label:'arrow-pitch-without-walking',before:reverse,up,down});await page.screenshot({path:resolve(out,`${name}-arrow-down.png`)});
+   await page.keyboard.down('PageUp');await page.waitForFunction(p=>BuergeramtLevel.view.pitch>p+.12,reverse.view.pitch);await page.keyboard.up('PageUp');const up=await inspect();assert.equal(up.view.walkedDistance,reverse.view.walkedDistance);
+   assert.equal(await page.locator('.amt-reticle').evaluate(e=>getComputedStyle(e).visibility),'hidden');await page.screenshot({path:resolve(out,`${name}-page-up.png`)});
+   await page.keyboard.down('PageDown');await page.waitForFunction(p=>BuergeramtLevel.view.pitch<p-.12,up.view.pitch);await page.keyboard.up('PageDown');const down=await inspect();assert.equal(down.view.walkedDistance,up.view.walkedDistance);result.camera.push({label:'page-pitch-without-walking',before:reverse,up,down});await page.screenshot({path:resolve(out,`${name}-page-down.png`)});
    await page.mouse.move(850,400);await page.mouse.down();const before=await inspect();await page.mouse.move(910,350,{steps:4});await page.mouse.up();const after=await inspect();assert.ok(after.view.yaw>before.view.yaw&&after.view.pitch>before.view.pitch);result.gestures.push({label:'desktop-drag',before,after});
    await page.keyboard.down('PageDown');await page.waitForTimeout(120);await page.keyboard.up('PageDown');assert.ok((await inspect()).view.pitch<after.view.pitch);
   }

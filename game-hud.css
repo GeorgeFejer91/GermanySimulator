@@ -125,6 +125,24 @@
 #germanness-hud:has(.anmeldung-medal:not([hidden])){grid-template-columns:5.7rem minmax(0,1fr);grid-template-areas:"label label" "medal value" "medal meter" "medal law"}
 #germanness-hud .anmeldung-medal{grid-area:medal;white-space:normal;overflow:visible;text-overflow:clip;margin:0;position:relative;align-self:center;display:grid;place-items:center;width:5.7rem;min-height:4.7rem;padding:.8rem .25rem .4rem;border:1px solid #947119;background:linear-gradient(125deg,#b88c2b,#fff7c8 28%,#d6b050 48%,#fff0ad 74%,#ae7a1e);box-shadow:1px 2px 0 #51431c55;color:#332b17;clip-path:polygon(0 0,78% 0,100% 23%,100% 100%,0 100%)}
 .anmeldung-medal[hidden]{display:none}
+/* Keep the shallow phone's centre clear for the guide's visible performance. */
+@media (orientation:landscape) and (max-height:500px) and (pointer:coarse){
+ #app.neighbor-tour .interact-hint{left:8px;right:auto;transform:none;max-width:min(280px,calc(var(--humor-viewport-width,100vw)*.35));text-align:left}
+ #app.neighbor-tour .dialogue:not([hidden]){left:auto;right:8px;transform:none;max-width:min(350px,calc(var(--humor-viewport-width,100vw)*.42));padding:8px}
+ #app.neighbor-tour:has(.dialogue:not([hidden])) #city-status #germanness-hud{display:none}
+ #app.neighbor-tour:has(.dialogue:not([hidden])) #city-status #subtitle-toggle{grid-column:1;justify-self:start}
+ #app.neighbor-tour[data-tour-layout="compact"] #city-status :is(#germanness-hud,.wanted,#energy-warning){display:none}
+ #app.neighbor-tour[data-tour-layout="compact"] #city-status #file-toggle{grid-column:1;grid-row:1;width:52px;padding:4px;min-height:44px}
+ #app.neighbor-tour[data-tour-layout="compact"] #file-toggle :is(kbd,.file-day){display:none}
+ #app.neighbor-tour[data-tour-layout="compact"] #city-status #subtitle-toggle{grid-row:1}
+ #app.neighbor-tour[data-tour-layout="compact"] .interact-hint{left:68px;max-width:calc(var(--humor-viewport-width,100vw)*.28)}
+ #app.neighbor-tour[data-tour-layout="compact"] .control-dock{min-height:52px;padding:3px 4px;gap:3px}
+ #app.neighbor-tour[data-tour-layout="compact"] .control-dock button{min-height:44px}
+ #app.neighbor-tour[data-tour-layout="compact"]:has(.dialogue:not([hidden])) .control-dock{display:none}
+ #app.neighbor-tour[data-tour-layout="compact"] .dialogue:not([hidden]){bottom:calc(var(--subtitle-height) + 8px);max-height:calc(var(--humor-viewport-height,100dvh) - var(--subtitle-height) - 24px)}
+ #app.neighbor-tour[data-tour-layout="compact"] .dialogue .dialogue-actions{flex-direction:column;gap:4px}
+ #app.neighbor-tour[data-tour-layout="compact"] .dialogue .dialogue-actions button{min-height:44px;padding:4px}
+}
 .anmeldung-medal i{position:absolute;top:.3rem;left:.4rem;width:2.9rem;border-top:3px double #7c641e}
 #germanness-hud .anmeldung-medal-label{display:block;width:100%;font:700 .625rem/1.35 "Courier New",monospace;text-align:center;white-space:normal;overflow-wrap:normal;word-break:normal}
 

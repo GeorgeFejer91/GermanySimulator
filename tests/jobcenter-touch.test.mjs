@@ -66,3 +66,14 @@ test('pinch crosses the real approach gate once, and retired surfaces cannot mov
  encounter.close();const next=await open();pointer(surface,'pointermove',2,380,490);tick();assert.equal(encounter.inspect().z,34);
  spread(next);tick();assert.ok(encounter.inspect().z<34);
 }));
+
+test('only a completed tap on the real entrance can leave; cancellation and lost capture remain inside',async()=>fixture(({encounter,surface,pointer,tick})=>{
+ tick();const exit=encounter.exitView();
+ exit.camera.lookAt(exit.door.center());exit.camera.updateMatrixWorld(true);exit.door.group.updateWorldMatrix(true,true);
+ for(const type of ['pointercancel','lostpointercapture']){
+  pointer(surface,'pointerdown',10,195,422);pointer(surface,type,10,195,422);
+  assert.equal(encounter.active,true,type+' must not activate the door');
+ }
+ pointer(surface,'pointerdown',11,195,422);pointer(surface,'pointerup',11,195,422);
+ assert.equal(encounter.active,false,'a completed raycast hit still returns voluntarily');
+}));

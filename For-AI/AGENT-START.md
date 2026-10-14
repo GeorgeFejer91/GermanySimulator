@@ -1,17 +1,20 @@
 # Agent start
 
-Read this routing page before repository work. Read only the sections and subject documents relevant to the request; do not read whole historical logs by default. The user’s current request has priority.
+Read this routing page before repository work. Use [`README.md`](./README.md) only when you need its subject index. Read only sections relevant to the request; do not read whole historical logs by default. The user's current request has priority.
 
 ## Authority and product
 
-Root [`AGENTS.md`](../AGENTS.md) defines repository-wide rules. This directory owns durable project context. Runtime authority is the canonical root game: `index.html`, `game.js`, `styles.css`, `3d.html`, `world3d.js`, and `assets/`.
+Root [`AGENTS.md`](../AGENTS.md) defines repository-wide rules. This directory owns shared context; [`LEVELS.md`](./LEVELS.md) routes scoped level context. Runtime authority remains the canonical root game: `index.html`, `game.js`, `styles.css`, `3d.html`, `world3d.js`, and `assets/`. Level directories belong to this same tree; their presence does not mean existing source has moved.
 
 This is the standalone 3D “Grand Theft Amt” game, with keyboard and touch controls, a fictional three-day administration deadline, regional Berlin Denglisch, forms, wanted levels, and police. Extend it in place. Do not replace it with the retired flat Canvas prototype or a different game direction. `world3d.js` is the renderer; registered character sprites remain intentional 3D assets. Device-tilt control was removed.
 
 ## Task reading routes
 
+- New levels, named-area direct links, entry URLs, share previews or hosting changes: read [`LEVEL-URLS.md`](./LEVEL-URLS.md). Every level requires a maintained permanent direct URL and unique comical share image; update and verify the catalogue before release.
+- Building intros/outros or indoor scene handoffs: read [`LEVEL-TRANSITIONS.md`](./LEVEL-TRANSITIONS.md), both affected level guides and the applicable performance/object gates. Every indoor level uses its three shared transition types; outdoor scenes keep their existing flow.
+- Named level, interior or area, including work in root modules: resolve [`LEVELS.md`](./LEVELS.md), read the selected level's `AGENTS.md` and `For-AI/README.md`, then only their matching subject sections. City-to-interior changes read both scopes. Global-only tooling/documentation work can skip level context.
 - Gameplay, mission, or player-facing copy: read the applicable section of [`GAMEPLAY.md`](./GAMEPLAY.md), using its existing headings such as `Core loop`, `First Bürgeramt visit`, `Systems`, `World identity`, `Satirical voice and dialogue`, or `In-world copy: no explanatory disclaimers`.
-- Bürgeramt episode: also read the relevant beat or audio section in [`BUERGERAMT.md`](./BUERGERAMT.md).
+- Bürgeramt episode: its [level guide](../levels/buergeramt/For-AI/README.md) selects the relevant `BUERGERAMT.md` beat, source owners and focused checks.
 - Gameplay event chains, mission gates or story progression: use [`game-event-logic`](../.agents/skills/game-event-logic/SKILL.md) and the causal review route in [`SKILLS.md`](./SKILLS.md). Map intended content to actual triggers, mediators, guards and consequences; verify consequential dependencies before acceptance.
 - Art, models, asset loading, performance, or hosting: read the applicable rules in [`ASSET-POLICY.md`](./ASSET-POLICY.md). For 2D character motion or atlases, also read [`SPRITE-GENERATION-PROTOCOL.md`](./SPRITE-GENERATION-PROTOCOL.md) and the relevant animation skill route in [`SKILLS.md`](./SKILLS.md).
 - Asset, loader, rendering, input, UI or background-work changes: apply the [browser playability gate](./ASSET-POLICY.md#browser-playability-gate) and its [maintenance procedure](./ASSET-POLICY.md#maintaining-browser-playability) before acceptance. Include the applicable responsiveness/starting-and-approach contract in affected handoffs. Run the relevant executable checks and record comparable browser evidence; source checks alone cannot establish device playability.

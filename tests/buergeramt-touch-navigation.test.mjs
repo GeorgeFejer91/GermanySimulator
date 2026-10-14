@@ -19,14 +19,12 @@ function pointer(target,type,id,x,y,eventTarget=target,pointerType='touch'){
 function walk(h,seconds=1){for(let i=0;i<Math.round(seconds*60);i++)h.level.update(1/60)}
 function hold(h,dx,dy,id=1){pointer(h.stick,'pointerdown',id,64,64);pointer(h.stick,'pointermove',id,64+dx,64+dy)}
 
-test('up/down arrows look without walking, preserve WASD movement and clamp pitch',()=>{
- for(const hz of [30,60,120]){
-  const h=office(),before=h.level.view;
-  h.key('ArrowUp');for(let i=0;i<hz;i++)h.level.update(1/hz);
-  assert.equal(h.level.view.pitch,.9);assert.equal(h.level.view.z,before.z);assert.equal(h.level.view.x,before.x);
-  h.key('ArrowUp','keyup');h.key('ArrowDown');for(let i=0;i<hz*2;i++)h.level.update(1/hz);
-  assert.equal(h.level.view.pitch,-.9);assert.equal(h.level.view.walkedDistance,before.walkedDistance);
-  h.key('ArrowDown','keyup');h.key('KeyW');walk(h,.1);assert.ok(h.level.view.z<before.z);
+test('arrow movement matches WASD without changing view or stacking aliases',()=>{
+ for(const hz of [30,60,120])for(const [arrow,letter] of [['ArrowUp','KeyW'],['ArrowDown','KeyS'],['ArrowLeft','KeyA'],['ArrowRight','KeyD']]){
+  const a=office(),b=office(),c=office();a.key(arrow);b.key(letter);c.key(arrow);c.key(letter);
+  for(let i=0;i<hz/10;i++){a.level.update(1/hz);b.level.update(1/hz);c.level.update(1/hz)}
+  assert.deepEqual({...a.level.view},{...b.level.view});assert.deepEqual({...c.level.view},{...b.level.view});assert.equal(a.level.view.yaw,0);assert.equal(a.level.view.pitch,0);
+  a.key(arrow,'keyup');const before=a.level.view;a.level.update(.1);assert.deepEqual(a.level.view,before);
  }
 });
 

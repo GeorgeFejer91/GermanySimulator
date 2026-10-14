@@ -499,6 +499,12 @@ The Kripo opening greeting uses a separate compact Piper/VITS name derivative, d
 
 ### Fictional neighborhood sprites
 
-Original generated game artwork for Heiko Maaslos, Inga Maaslos and Frau Schwabingen, with source-pixel animation baked by tools/build-neighbor-sprites.py. These original fictional characters use the existing game sprite style. Only final generated direction paint and derived nine-row runtime atlases ship.
+Theodore Maaslos and the painted chore props are original generated game artwork.
+The guided neighborhood script is original fiction grounded in the official
+Berlin and federal sources listed in [the neighborhood source notes](docs/neighborhood-rules.md),
+checked on 14 October 2026. Those notes distinguish local maintenance duties,
+neighbor rights and nature protection from the residents' invented expectations.
 
-Inga Maaslos's fictional game dialogue uses the user-supplied saved GS Inga Maaslos voice profile. The installed OmniVoice Rust renderer produces the exact authored German lines; the eleven final dry mono encodings are independently word-checked and normalized for the game. Profile/reference audio and rejected takes remain private. Runtime receipts and source/English subtitle ownership live in For-AI/VOICE-CAST.json and assets/voices/neighbors/inga-manifest.json. Heiko Maaslos and Frau Schwabingen retain browser-generated speech pending dedicated profile selection. Technical checks do not establish perceptual listening approval.
+Original generated game artwork for Heiko Maaslos, Inga Maaslos and Frau Schwabingen, with source-pixel animation baked by tools/build-neighbor-sprites.py. These original fictional characters use the existing game sprite style. Only final generated direction paint and derived runtime atlases ship.
+
+Inga Maaslos's fictional game dialogue uses the user-supplied saved GS Inga Maaslos voice profile. The installed OmniVoice Rust renderer produces the exact authored German lines; the eleven final dry mono encodings are independently word-checked and normalized for the game. Profile/reference audio and rejected takes remain private. Runtime receipts and source/English subtitle ownership live in For-AI/VOICE-CAST.json and assets/voices/neighbors/inga-manifest.json. Heiko Maaslos, Frau Schwabingen and Theodore retain browser-generated speech pending dedicated profile selection. New Inga tour lines use captions until matching recordings exist. Technical checks do not establish perceptual listening approval.
