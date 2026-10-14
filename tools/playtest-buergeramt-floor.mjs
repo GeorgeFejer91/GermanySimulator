@@ -121,16 +121,25 @@ function samplePaintSurface(){
   return{covered,changedFraction:changed/covered,maximum};
 }
 function sampleContinuousRunoff(){
-  const before=__floorGpu.samplePortraitPaint('film',1,486,undefined,true),after=__floorGpu.samplePortraitPaint('film',1,487.2,undefined,true);
-  let changed=0;for(let i=0;i<before.pixels.length;i+=4)if(Math.abs(before.pixels[i]-after.pixels[i])>32)changed++;
-  const scores=[];
-  for(let shift=-22;shift<=22;shift++){
-    let error=0,count=0;
-    for(let y=24;y<136;y++)for(let x=0;x<128;x++){const a=before.pixels[(y*128+x)*4],b=after.pixels[((y+shift)*128+x)*4];error+=Math.abs(a-b);count++;}
-    scores.push({shift,error:error/count});
+  const samples=[];let downwardSteps=0,previous=[];
+  // Connected components in rendered alpha distinguish detached, round pearls
+  // from a continuous curtain. Track their centroids over a complete cycle.
+  for(let step=0;step<32;step++){
+    const frame=__floorGpu.samplePortraitPaint('film',1,486+step*.25,undefined,true),seen=new Uint8Array(128*160),drops=[];
+    for(let start=0;start<seen.length;start++){
+      if(seen[start]||frame.pixels[start*4]<127)continue;
+      const queue=[start];seen[start]=1;let minX=128,maxX=0,minY=160,maxY=0,sx=0,sy=0;
+      for(let cursor=0;cursor<queue.length;cursor++){
+        const index=queue[cursor],x=index%128,y=Math.floor(index/128);minX=Math.min(minX,x);maxX=Math.max(maxX,x);minY=Math.min(minY,y);maxY=Math.max(maxY,y);sx+=x;sy+=y;
+        for(const [dx,dy]of [[-1,0],[1,0],[0,-1],[0,1]]){const nx=x+dx,ny=y+dy,n=ny*128+nx;if(nx>=0&&nx<128&&ny>=0&&ny<160&&!seen[n]&&frame.pixels[n*4]>=127){seen[n]=1;queue.push(n);}}
+      }
+      const w=maxX-minX+1,h=maxY-minY+1;
+      if(minY>2&&maxY<156&&w>=4&&h>=5&&w/h>.3&&w/h<1.8&&queue.length/(w*h)>.55)drops.push({x:sx/queue.length,y:sy/queue.length,w,h,area:queue.length});
+    }
+    for(const drop of drops)if(previous.some(old=>Math.abs(old.x-drop.x)<6&&old.y-drop.y>1&&old.y-drop.y<35))downwardSteps++;
+    samples.push({clock:486+step*.25,drops,ground:frame.bands.at(-1),coverage:frame.bands.reduce((a,b)=>a+b)/8});previous=drops;
   }
-  scores.sort((a,b)=>a.error-b.error);
-  return{coverage:before.coverage,bottom:before.bands.at(-1),changedFraction:changed/(128*160),bestShift:scores[0].shift};
+  return{samples,downwardSteps,detachedFrames:samples.filter(s=>s.drops.length).length,groundFrames:samples.filter(s=>s.ground>.005).length};
 }
 function sampleRunoffSource(){
   const canvas=document.createElement('canvas');canvas.width=canvas.height=64;
@@ -220,16 +229,16 @@ try{
       if(name==='missing-portrait')assert.deepEqual(continuous,intact,'missing art must retain its labeled fallback');
       else{assert(Math.max(...intact.range)>40,'actual paint is present before melting');assert(Math.max(...continuous.range)>40&&continuous.bands.every(coverage=>coverage>.98),'the entire framed image remains populated at full melt');}
       const runoffSource=name==='missing-portrait'?null:await page.evaluate(()=>__floorGpu.sampleRunoffSource());
-      if(runoffSource){writeFileSync(resolve(out,`${name}-runoff-source.json`),JSON.stringify(runoffSource,null,2));for(const sample of runoffSource){assert(sample.lower>1000,'wall flow carries real lower-image pigment');assert.equal(sample.upper,0,'facial-source paint does not repeat as eyes below the frame');}}
+      if(runoffSource){writeFileSync(resolve(out,`${name}-runoff-source.json`),JSON.stringify(runoffSource,null,2));for(const sample of runoffSource){assert(sample.lower>50,'paint pearls carry real lower-image pigment');assert.equal(sample.upper,0,'facial-source paint does not repeat as eyes below the frame');}}
       const runoff=name==='missing-portrait'?null:await page.evaluate(()=>__floorGpu.sampleContinuousRunoff());
-      if(runoff){writeFileSync(resolve(out,`${name}-runoff.json`),JSON.stringify(runoff,null,2));assert(runoff.coverage>.2&&runoff.bottom>.2,'paint keeps reaching the floor after full liquefaction');assert(runoff.changedFraction>.025&&runoff.bestShift< -3,'thickening goops keep traveling downward after the melt cap');}
+      if(runoff){writeFileSync(resolve(out,`${name}-runoff.json`),JSON.stringify(runoff,null,2));assert(runoff.detachedFrames>24,'rounded beads repeatedly separate from the painting');assert(runoff.downwardSteps>20,'detached pearls travel down after the melt cap');assert(runoff.groundFrames>12,'fresh paint repeatedly reaches the floor');}
       await page.evaluate(()=>{__floorTest.at(BuergeramtGoop.ageForMelt(.25));__floorRender()});
       const film=name==='missing-portrait'?null:await page.evaluate(()=>__floorGpu.samplePortraitPaint('film',.25,BuergeramtLevel.floorState.visualTime));
       const softened=name==='missing-portrait'?null:await page.evaluate(()=>__floorGpu.samplePortraitPaint('frame',.25,BuergeramtLevel.floorState.visualTime));
       if(softened){
         assert(softened.bands.every(coverage=>coverage>.98),'the image stays full while its features distort');
       }
-      if(film){assert(film.coverage>.2,'thick runs carry substantial paint');assert(film.connected>.12,'oil includes broad merging runs');assert(film.bands.at(-1)<film.bands[0],'unequal liquid fronts leave gaps toward the floor');}
+      if(film)assert(film.bands.some(coverage=>coverage>.01)&&film.bands.every(coverage=>coverage<.7),'separate paint pearls leave open wall between them');
       await page.evaluate(()=>{__floorTest.at(0);__floorRender()});
       const captures=[];
       for(const age of [0,90,105,120,150,180,210,240,270,300,370,420,570,900]){

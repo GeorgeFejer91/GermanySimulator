@@ -273,14 +273,13 @@ stretch: eyes and cheeks sag asymmetrically, and the mouth and chin droop farthe
 as the liquid flows. The face deformation stays within the framed paint; wall
 runoff retains mixed pigment rather than repeating facial features. Never
 translate the whole recognizable portrait down the wall as a falling poster.
-Thick, merging runs have narrow necks, smooth bulbous ends and moving bulges;
-below the frame they carry
-mixed pigment sampled from the image, rather than a readable second portrait.
-There is no white wavy reflection overlay. Only the original image's
-pigment supplies the surface colors; wall streams sample lower suit, tie and flag
-paint so facial features cannot repeat below the frame. Shared ripples warp that pigment;
-rounded bulges advance downward along continuously connected streams, including
-after paint progress reaches its cap. The existing scene clock drives this flow,
+Sweat-like paint pearls swell on the image, slide downward, cling briefly to the
+bottom lip and pinch off their short necks into rounded falling drops. Eight
+staggered analytic beads repeat continuously, including after progress caps;
+there is no permanently connected curtain. Local lens distortion and tinted
+dome shading give each bead volume without white wavy highlights. The wall
+pearls mix real lower suit, tie and flag pigment without repeating facial
+features. The original image supplies all colors. The existing scene clock drives this flow,
 freezing in reduced motion. No geometry, texture, lighting pass, render target or
 separate clock is added. One masked paint mesh spans image and wall without a panel seam. Its bend
 starts below the gold frame, and its extra width allows the oil contours to curve.
@@ -288,10 +287,11 @@ Deformation and pigment motion use the integrated scene clock. A transparent,
 depth-tested, statically curved surface continues the paint from the frame onto
 the wall, ending at y=.0024 m and z=5.4696 (the inner wall face is z=5.47); its
 front reaches the ground before it can feed the floor. The existing floor pass
-samples the same viscous runs at their ground contact, so the painting's pigment
+samples the same pearls at their ground contact, so the painting's pigment
 begins mixing sooner without depositing before the visible paint arrives. The pass
 injects the same image colors at that contact, then transports and diffuses them
-with the black/white oils and walking wakes. Deposited paint has a stronger
+with the black/white oils and walking wakes. A stronger contact impulse retains
+color from the smaller intermittent drops. Deposited paint has a stronger
 floorward flow and contact feed so its brown, red and ochre pigment spreads
 visibly into the room. Surface composition retains the already diluted RGB
 chroma once, with stronger color contrast so it remains visible while the floor
@@ -303,7 +303,9 @@ Missing portrait paint keeps the labeled fallback intact without fictional
 colored spill; reduced motion uses a static spatial melt/spill approximation.
 That approximation widens the contact-fed swirls with melt and retains their
 deposited color while the framed image stays filled, without animated
-feedback or another clock. Source chroma remains visible against the black and
+feedback or another clock. Its floor contact uses a fixed impact pose so
+deposited color cannot blink between falling beads; reduced motion freezes the
+painting to that same coherent phase. Source chroma remains visible against the black and
 white oils in both the live transport and this simpler approximation.
 Close/replay restores the picture and clears the paint field; the shared source
 texture remains in the existing office asset cache. Do not create a second
