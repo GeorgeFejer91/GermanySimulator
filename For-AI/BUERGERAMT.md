@@ -274,9 +274,12 @@ as the liquid flows. The face deformation stays within the framed paint; wall
 runoff retains mixed pigment rather than repeating facial features. Never
 translate the whole recognizable portrait down the wall as a falling poster.
 Sweat-like paint pearls swell on the image, slide downward, cling briefly to the
-bottom lip and pinch off their short necks into rounded falling drops. Eight
-staggered analytic beads repeat continuously, including after progress caps;
-there is no permanently connected curtain. Local lens distortion and tinted
+bottom lip and pinch off their short necks into rounded falling drops. Twenty-four
+staggered analytic beads repeat at one-third of the previous cycle speed,
+including after progress caps. As melting increases, half the beads converge
+into four uneven lower-edge rivulets that thicken and lengthen toward the floor;
+the others keep dropping between them. Open wall remains between the streams.
+Local lens distortion and tinted
 dome shading give each bead volume without white wavy highlights. The wall
 pearls mix real lower suit, tie and flag pigment without repeating facial
 features. The original image supplies all colors. The existing scene clock drives this flow,

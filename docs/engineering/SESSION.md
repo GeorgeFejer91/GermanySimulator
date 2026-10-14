@@ -897,3 +897,66 @@ Live acceptance for the direct-link release: Pages 38606482822 succeeded; all 31
 Arrow-controls validation: 137 focused tests PASS (movement, turning, touch, session, preload and responsiveness). Restored turn-onset regression fails against release-base controller, passes candidate. Silent Chromium desktop, Android portrait/landscape emulation and 320px profile PASS with actual Pretext hint fitting, enlarged text/zoom and pointer lifecycle checks. Existing level-page build PASS (31 direct pages). Independent Physics scoped PASS: 6 turn-in-place and 36 simultaneous walk/turn collision cases; minimum inflated-axis clearance .005364, max substep .096667. Physical Android/touchpad and natural full mission NOT RUN. Browser evidence stored outside Git at primary checkout output/arrow-turning/browser/.
 
 Independent Camera scoped PASS: 17/17 fresh turn/touch checks, exact-source four-profile browser evidence and independent screenshots; hint readable and actual Pretext fit passes. Both reviewers approve this controls candidate; C1-C5 geometry/material/scale rows are outside scope. Source SHA-256 b81fe09c17064634041ff7e408bc76bbbf10477cb709ba3c82f6c64c135f1532. Scoped release preserves newer origin portrait/name/speech work and excludes unrelated shared-checkout changes.
+
+## Slower paint pearls joining into rivulets — 2026-10-14
+
+User accepts the sweat-like beads and requests more, much slower droplets that
+increasingly merge into streams at the bottom. Integrator-owned implementation
+starts from 1350c55; scoped Git status is clean. Allowed files: portrait shader,
+floor/world/entry cache tokens, existing floor GPU probe, this log and the owning
+Bürgeramt contract. No asset, controller, collision, audio, UI layout or clock
+changes. Preserve full framed image, uneven face sag, early interaction onset,
+real lower-image pigment, shared floor contact, reduced-motion/missing-art
+fallbacks, depth policy and cleanup. Use the existing bounded analytic shader;
+no new resources or dependencies. Output: ignored output/paint-rivulets.
+Acceptance: rendered early/late bead and rivulet sequences, slower motion and
+greater density against 1350c55, desktop/Android emulation, fallback/recovery,
+comparable office/root budgets, scoped Physics/Camera review, deployment smoke.
+The direct-link chat owns the current GPU/publication lease; implementation is
+CPU-only until its release and published integration. Physical Android and
+perceptual listening remain unavailable. No known production failure in scope.
+
+Integrated published direct-link main 0e105e4 before final validation; shared scene and entry changes are retained. New shader uses 24 staggered beads at .05 cycles per scene second (previously eight at .15), four progressive merging channels, and separate inter-channel droplets. The initial pixel probe was corrected to exclude the shared framed-image seam when classifying individual streams. Desktop prototype passes all visual/floor checks; final integrated evidence follows.
+
+Final candidate integrates published main 7f1ea81, including direct links and
+accepted arrow controls. Production changes remain confined to the portrait
+shader and matching cache tokens. Three redundant comment blocks were shortened
+after an initial combined-root transfer exceeded the existing 18 MB gate by
+222 bytes; no executable behavior or budget was changed.
+
+Integrated visual acceptance: 6/6 desktop, Android portrait/landscape emulation,
+procedural fallback, reduced-motion and missing-art profiles PASS; 5/5 recovery
+profiles PASS with zero errors and matching frozen runtime hashes. The 80-frame
+pixel oracle sees mean 4.9125 early detached beads versus 1.5875 before, median
+matched downward motion 32.05 versus 88.77 px/s, four late connected rivulets,
+loose beads in 75/80 late frames and floor contact in all 80. The old shader
+fails the new density oracle. The full framed face persists, lower paint never
+repeats facial features, pigment joins the floor oils, missing art feeds no
+paint, and recovery restores the picture and releases transport targets.
+Pages-selected 727 Node tests, voice curator and six exact-RGBA delivery checks
+PASS. Independent Physics P1/X1 and Camera C4/X1 reviews PASS the integrated
+candidate; supplied images and runtime hashes were independently inspected.
+Evidence: output/paint-rivulets/integrated-final, integrated-recovery and
+freeze-integrated.json. Physical Android, natural mission traversal and
+perceptual listening remain NOT RUN.
+
+Performance: six cold-root and six before/six after active-office runs pass the
+existing transfer/input-admission/cadence/buffer/error gates. Root maximum local
+transfer is 17,683,553 bytes; every run accepts nine controls without errors.
+Office uses the corrected active-controller fixture at age570/full melt,
+Chrome155/Intel Iris Xe, DPR2, seeds4782-4784, local HTTP, no CPU throttling.
+Before input-p95 median/range is 7.3/7.1-8.2ms desktop and 6.6/6.2-7.5ms Android
+emulation. Candidate is 303.8/8.1-5183ms and 6.7/6.5-46.6ms; six repeat candidate
+runs give 128.6/14.8-226.3ms and 6.5/6.4-9.3ms. Preserve these startup/input
+outliers: they do not certify stable latency or a speedup. Active sync-dispatch
+p95 medians/ranges remain 7.6/7.5-7.9ms before versus 7.3/7.2-9.7ms after desktop,
+and 7.6/7.5-7.8 versus 7.1/7.1-7.4ms emulation; repeats are 8.0/7.3-10.4 and
+8.0/7.9-8.1ms. These are dispatch intervals, not GPU timings. A separate startup
+CPU diagnostic reproduces large driver waits in the old shader too: desktop
+shader-link/log waits total about 29.5s before versus 5.4s after, texture uploads
+3.6s versus 3.0s. This identifies shared startup compilation/upload variability,
+not a proven paint-loop regression or improvement. Retain all reports under
+output/paint-rivulets/{root-final,office-final-before,office-final-after,
+office-confirm-after,office-profile-before,office-profile-after}; no production
+change was made to mask timings. Earlier interrupted/overlapping benchmark sets
+remain diagnostic only. Publication and live route/source verification follow.
