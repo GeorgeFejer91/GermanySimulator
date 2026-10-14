@@ -11,7 +11,7 @@ const door={x:0,z:5.55},sign={x:0,z:-2.6},counter={x:4,z:-8.15},view={x:0,z:4.8,
 let leaving=false;
 const atExitDoor=()=>Math.abs(view.x)<1.3&&Math.abs(view.z-door.z)<1.65;
 const held=new Set(),pendingTimers=new Set();
-const pointerKeys=new Map();let lookPointer=null,mouseLook=null,lastTap=null;
+const pointerKeys=new Map();let turnVelocity=0,lookPointer=null,mouseLook=null,lastTap=null;
 const moveStick=document.getElementById("amt-move-stick"),lookZone=document.getElementById("amt-look-zone");
 let movePointer=null,moveX=0,moveY=0;
 function releaseMoveStick(){
@@ -21,11 +21,19 @@ function releaseMoveStick(){
 }
 function officeKeyHeld(key){if(held.has(key))return true;for(const value of pointerKeys.values())if(value.key===key)return true;return false}
 function clearOfficeInput(){
- held.clear();lastTap=null;mouseLook=null;const look=lookPointer;lookPointer=null;
+ held.clear();turnVelocity=0;lastTap=null;mouseLook=null;const look=lookPointer;lookPointer=null;
  releaseMoveStick();lookZone?.classList.remove("is-active");
  const release=(target,id)=>{if(target?.hasPointerCapture?.(id))target.releasePointerCapture(id)};
  for(const [id,value]of pointerKeys)release(value.target,id);pointerKeys.clear();
  if(look)release(look.target,look.id);
+}
+function turnOfficeView(elapsed){
+ const target=((officeKeyHeld("ArrowRight")?1:0)-(officeKeyHeld("ArrowLeft")?1:0))*1.8;
+ if(target&&turnVelocity*target<0)turnVelocity=0;
+ const tau=target?.045:.025,decay=Math.exp(-elapsed/tau);
+ view.yaw+=target*elapsed+(turnVelocity-target)*tau*(1-decay);
+ turnVelocity=target+(turnVelocity-target)*decay;
+ if(!target&&Math.abs(turnVelocity)<1e-8)turnVelocity=0;
 }
 const counterXs=[-5.8,-1.6,3.9,6.2];let assignedCounter=0,interactingCounter=0;
 const queueCodes=new Map(),queueCodePools=[new Map(),new Map()],queueCodeCounts=[0,0];
@@ -914,8 +922,8 @@ function update(dt){
  queueClock+=elapsed;
  if(queueClock+1e-9>=callInterval){queueClock=Math.max(0,queueClock-callInterval);nextQueueCall()}
  if(!walking())return;
- view.pitch=Math.max(-.9,Math.min(.9,(view.pitch||0)+((officeKeyHeld("PageUp")?1:0)-(officeKeyHeld("PageDown")?1:0))*1.2*elapsed));
- const f=(officeKeyHeld("KeyW")||officeKeyHeld("ArrowUp")?1:0)-(officeKeyHeld("KeyS")||officeKeyHeld("ArrowDown")?1:0)+moveY,s=(officeKeyHeld("KeyD")||officeKeyHeld("ArrowRight")?1:0)-(officeKeyHeld("KeyA")||officeKeyHeld("ArrowLeft")?1:0)+moveX;
+ turnOfficeView(elapsed);
+ const f=(officeKeyHeld("KeyW")||officeKeyHeld("ArrowUp")?1:0)-(officeKeyHeld("KeyS")||officeKeyHeld("ArrowDown")?1:0)+moveY,s=(officeKeyHeld("KeyD")?1:0)-(officeKeyHeld("KeyA")?1:0)+moveX;
  if(f||s){const length=Math.max(1,Math.hypot(f,s)),speed=officeKeyHeld("KeyR")?7.2:officeKeyHeld("ShiftLeft")?5.8:3.6,dx=(Math.sin(view.yaw)*f+Math.cos(view.yaw)*s)/length*speed*elapsed,dz=(-Math.cos(view.yaw)*f+Math.sin(view.yaw)*s)/length*speed*elapsed;const steps=Math.max(1,Math.ceil(Math.hypot(dx,dz)/.1));for(let i=0;i<steps;i++){const stepX=view.x,stepZ=view.z,x=Math.max(-7.45,Math.min(7.45,view.x+dx/steps)),z=Math.max(-10.05,Math.min(8.45,view.z+dz/steps));const crossing=view.z>=door.z&&z<door.z||view.z<door.z&&z>=door.z;if(crossing&&Math.abs(x)>1.3)break;if(!officeBlocked(x,view.z))view.x=x;if(!officeBlocked(view.x,z)){view.z=z;if(crossing&&stage==="outside"&&z<door.z){setStage(activated?"waiting":"walk-sign",true);setStatus(activated?"WARTENUMMER "+number+" · AUFRUF ABWARTEN":"QR-CODE MIT DEM TELEFON SCANNEN")}}view.walkedDistance+=Math.hypot(view.x-stepX,view.z-stepZ);}}
  const {desk,actor,mirror,portrait}=nearbyInteraction(),near=distanceTo(nearbyTarget())<1.9&&(stage!=="outside"||Math.abs(view.x)<1.3);
  const nearbyText=atExitDoor()?"E · AMT VERLASSEN":desk?"E · SCHALTER "+desk+" ANSPRECHEN":mirror?"E · SPIEGEL BETRACHTEN":portrait?"E · BUNDESPRÄSIDENT BETRACHTEN":actor?"E · "+(story.characters[actor.id]||story.patrons[actor.id]).speaker+" ANSPRECHEN":near?(stage==="outside"?"DURCH DEN EINGANG GEHEN":stage==="walk-sign"?"QR-CODE MIT DEM TELEFON SCANNEN":"AUFRUFTAFEL"):(stage==="outside"?"ZUR EINGANGSTÜR":stage==="walk-sign"?"QR-SCHILD UNTER DER ANZEIGE":"AUFRUFTAFEL");
@@ -1120,7 +1128,7 @@ function clerkPerformance(){
  else{const beat=clerkClock%9.2;mode=beat<2.6?"idle":beat<4.1?"review":beat<4.6?"raise":beat<4.95?"stamp":beat<6.1?"deny":"idle"}
  return{row:names[mode],frame:Math.floor(clerkClock*4+clerkPulse)%8,speaking:clerkSpeaking,animation:clerkAnimation?.state??null};
 }
-function captureKey(event){if(event.type==="keyup")held.delete(event.code);if(!active)return;if(event.target.closest?.("input,textarea,select,summary")){event.stopImmediatePropagation();return}if(event.type==="keydown"&&event.code==="KeyE"&&walking()){event.preventDefault();event.stopImmediatePropagation();if(!event.repeat)interact();return}if(!walking()||omen.phase)return;if(["KeyW","KeyA","KeyS","KeyD","KeyR","ArrowUp","ArrowDown","ArrowLeft","ArrowRight","ShiftLeft","PageUp","PageDown"].includes(event.code)){event.preventDefault();event.stopImmediatePropagation();if(event.type==="keydown"){if(!event.repeat||held.has(event.code))held.add(event.code)}else held.delete(event.code)}}
+function captureKey(event){if(event.type==="keyup")held.delete(event.code);if(!active)return;if(event.target.closest?.("input,textarea,select,summary")){event.stopImmediatePropagation();return}if(event.type==="keydown"&&event.code==="KeyE"&&walking()){event.preventDefault();event.stopImmediatePropagation();if(!event.repeat)interact();return}if(!walking()||omen.phase)return;if(["KeyW","KeyA","KeyS","KeyD","KeyR","ArrowUp","ArrowDown","ArrowLeft","ArrowRight","ShiftLeft"].includes(event.code)){event.preventDefault();event.stopImmediatePropagation();if(event.type==="keydown"){if(!event.repeat||held.has(event.code))held.add(event.code)}else held.delete(event.code)}}
 window.addEventListener("keydown",captureKey,true);window.addEventListener("keyup",captureKey,true);window.addEventListener("blur",clearOfficeInput);window.addEventListener("resize",clearOfficeInput);
 document.addEventListener("visibilitychange",()=>{if(document.hidden)clearOfficeInput();updateOmenTone();updateFeverTone()});
 moveStick?.addEventListener("pointerdown",event=>{
@@ -1181,7 +1189,7 @@ for(const type of ["pointerup","pointercancel","lostpointercapture"])document.ad
  if(lastTap&&now-lastTap.at<=360&&Math.hypot(event.clientX-lastTap.x,event.clientY-lastTap.y)<=48){lastTap=null;interactAt(event.clientX,event.clientY)}
  else lastTap={x:event.clientX,y:event.clientY,at:now};
 });
-document.querySelectorAll("[data-amt-key]").forEach(button=>{const key=button.dataset.amtKey;button.addEventListener("pointerdown",e=>{if(!active||!walking()||omen.phase)return;e.preventDefault();button.setPointerCapture(e.pointerId);pointerKeys.set(e.pointerId,{key,target:button})});for(const type of ["pointerup","pointercancel","lostpointercapture"])button.addEventListener(type,e=>{if(!pointerKeys.delete(e.pointerId))return;})});
+document.querySelectorAll("[data-amt-key]").forEach(button=>{const key=button.dataset.amtKey;button.addEventListener("pointerdown",e=>{if(!active||!walking()||omen.phase)return;e.preventDefault();button.setPointerCapture(e.pointerId);pointerKeys.set(e.pointerId,{key,target:button})});for(const type of ["pointerup","pointercancel","lostpointercapture"])button.addEventListener(type,e=>{if(!pointerKeys.delete(e.pointerId))return;if(type!=="pointerup"&&!officeKeyHeld("ArrowLeft")&&!officeKeyHeld("ArrowRight"))turnVelocity=0})});
 document.getElementById("amt-leave").addEventListener("click",()=>leaveOffice());exit.addEventListener("click",()=>leaveOffice());
 window.BuergeramtLevel={cancelNameAnnouncement,get tickets(){return [...phoneTickets.values()].filter(ticket=>ticket.number).map(ticket=>({...ticket}))},open,requestFullscreen,refreshSubtitle,get registrationTicket(){return number},get activeClerkCounter(){return interactingCounter||assignedCounter||3},get queueCalls(){return counterCalls.map((number,index)=>({number,counter:index+1}))},get assignedCounter(){return{number:assignedCounter,x:counter.x,z:counter.z}},get registration(){return{node:registrationNode,completed:registrationCompleted,phoneVisible:phoneVisibility==="unknown"?null:phoneVisibility==="visible",phoneSilent,silenceEvidence:phoneSilenceEvidence,callRound:phoneCallRound,warnings:phoneWarnings,points:registrationPoints,detours:registrationDetours,stamps:[...registrationStamps]}},get lipSpeech(){return lips.sample()},replay(config){window.Germany3D?.cancelLevelTransition?.("buergeramt");close(false);open(config)},update,interact,setOfficeObstacles,get active(){return active},get leaving(){return leaving},get timeScale(){return timeScale()},get floorState(){return{time:floorClock,visualTime:visualClock,goop:goop.goop(floorClock),speed:timeScale(),visit:attempt,restoring:!!restoration,restoration:restoration?Math.min(1,restoration.elapsed/restorationDuration):0,restorationAge:restoration?.age,restorationClock:restoration?.clock}},get subtitleBusy(){return !!officeSubtitle},get audioTextBusy(){return officeSpeechBusy},get stage(){return stage},get queueDisplay(){return queueDisplay},get qrSvg(){return qrSvg},get phoneUrl(){return link?BuergeramtLink.phoneUrl(link.invitation,options.subtitlesOn?.()):""},get timing(){return JSON.parse(JSON.stringify(timing))},get view(){return{x:view.x,z:view.z,yaw:view.yaw,pitch:view.pitch||0,walkedDistance:view.walkedDistance,positionGeneration:view.positionGeneration}},get characters(){return characters.map(actor=>({id:actor.id,x:actor.x,z:actor.z,walkedDistance:actor.walkedDistance,positionGeneration:actor.positionGeneration,direction:actor.direction,heading:actor.heading??Math.PI,mode:actor.mode,phase:characterPhase(actor),frame:Math.min(7,Math.floor(characterPhase(actor)*8)),animation:characterAnimation(actor)}))},get stationaryAnimations(){return{
  "clerk-desk-1":window.BuergeramtAnimationClock?.ambientClerk(stationaryClocks["clerk-desk-1"],attempt),

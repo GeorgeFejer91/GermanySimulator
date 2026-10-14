@@ -20,7 +20,7 @@ function walk(h,seconds=1){for(let i=0;i<Math.round(seconds*60);i++)h.level.upda
 function hold(h,dx,dy,id=1){pointer(h.stick,'pointerdown',id,64,64);pointer(h.stick,'pointermove',id,64+dx,64+dy)}
 
 test('arrow movement matches WASD without changing view or stacking aliases',()=>{
- for(const hz of [30,60,120])for(const [arrow,letter] of [['ArrowUp','KeyW'],['ArrowDown','KeyS'],['ArrowLeft','KeyA'],['ArrowRight','KeyD']]){
+ for(const hz of [30,60,120])for(const [arrow,letter] of [['ArrowUp','KeyW'],['ArrowDown','KeyS']]){
   const a=office(),b=office(),c=office();a.key(arrow);b.key(letter);c.key(arrow);c.key(letter);
   for(let i=0;i<hz/10;i++){a.level.update(1/hz);b.level.update(1/hz);c.level.update(1/hz)}
   assert.deepEqual({...a.level.view},{...b.level.view});assert.deepEqual({...c.level.view},{...b.level.view});assert.equal(a.level.view.yaw,0);assert.equal(a.level.view.pitch,0);
@@ -102,9 +102,13 @@ test('partial and full stick movement retain the shared slowdown and accepted-di
  }
 });
 
-test('keyboard pitch is bounded and opening the mixer releases navigation',()=>{
- const h=office();h.key('PageUp');walk(h);assert.equal(h.level.view.pitch,.9);h.key('PageUp','keyup');
- h.key('PageDown');walk(h,.5);assert.ok(Math.abs(h.level.view.pitch-.3)<1e-8);h.key('PageDown','keyup');
+test('keyboard navigation preserves a mouse-selected view and opening the mixer releases navigation',()=>{
+ const h=office();hover(h,200,300);hover(h,250,250);const selected=h.level.view;
+ for(const key of ['PageUp','PageDown']){h.key(key);walk(h,.1);h.key(key,'keyup');assert.deepEqual(h.level.view,selected)}
+ h.key('ArrowUp');walk(h,.1);h.key('ArrowUp','keyup');const forward=h.level.view;
+ assert.ok(forward.x>selected.x&&forward.z<selected.z);assert.equal(forward.yaw,selected.yaw);assert.equal(forward.pitch,selected.pitch);
+ h.key('ArrowDown');walk(h,.1);h.key('ArrowDown','keyup');const backward=h.level.view;
+ assert.ok(backward.x<forward.x&&backward.z>forward.z);assert.equal(backward.yaw,selected.yaw);assert.equal(backward.pitch,selected.pitch);
  hold(h,0,-100);const mixer=h.node('amt-mix');mixer.closest=selector=>selector==='#amt-mix'?mixer:null;
  pointer(h.document,'pointerdown',4,40,30,mixer);const before=h.level.view;walk(h,.1);assert.equal(h.level.view.z,before.z);assert.equal(h.captures.size,0);
 });
@@ -151,4 +155,3 @@ test('double taps use screen selection only and retain counter ticket prerequisi
  const desk=pickedOffice({desk:3});tap(desk);tap(desk);assert.equal(desk.level.stage,'early');assert.equal(desk.level.activated,false);
  const h=pickedOffice();tap(h);h.tick(400);tap(h);assert.equal(h.picks.length,0,'expired first tap cannot pair');
 });
-
