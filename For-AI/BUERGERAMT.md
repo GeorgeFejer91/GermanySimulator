@@ -278,6 +278,12 @@ translate the whole recognizable portrait down the wall as a falling poster.
 Thick, merging runs have curved
 edges, unequal rounded fronts and wet highlights; below the frame they carry
 mixed pigment sampled from the image, rather than a readable second portrait.
+The liquid's shared traveling ripples warp the pigment and perturb its surface
+normal, producing view-dependent glossy reflections instead of baked bright
+stripes. Interpolated normals keep the wall bend smooth. These reflections are
+surface lighting only; the floor receives pigment without reflected highlights.
+The existing scene clock drives ripples and winding flow contours, freezing in
+reduced motion. This adds no geometry, texture, lighting pass or render target.
 The whole image eventually drains, and the runs thin out as their paint supply
 ends. One masked paint mesh spans image and wall without a panel seam. Its bend
 starts below the gold frame, and its extra width allows the oil contours to curve.

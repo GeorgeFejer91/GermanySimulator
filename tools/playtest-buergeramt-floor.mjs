@@ -99,6 +99,27 @@ function sampleFaceDroop(){
   }finally{renderer.setRenderTarget(previousTarget);renderer.autoClear=previousClear;amtPortraitMelt.setTexture(original);target.dispose();texture.dispose();__floorTest.at(0);__floorRender();}
   return Object.fromEntries(marks.map(([name])=>[name,{before:samples[0][name],after:samples[1][name],drop:samples[1][name].y-samples[0][name].y}]));
 }
+// Hold UV coverage and neutral pigment fixed while moving the real material's
+// view direction. A baked bright stripe cannot pass this wet-reflection probe.
+function sampleWetSurface(){
+  const size=160,target=new T.WebGLRenderTarget(size,size),scene=new T.Scene(),camera=new T.PerspectiveCamera(50,1,.01,10);
+  const source=presidentFrame.children.find(mesh=>mesh.name==='Steinmeier liquid paint'),material=source.material.clone();
+  material.onBeforeCompile=shader=>{source.material.onBeforeCompile(shader);shader.vertexShader=shader.vertexShader.replace('#include <project_vertex>','#include <project_vertex>\ngl_Position=vec4(uv*2.-1.,0.,1.);');};
+  material.customProgramCacheKey=()=>source.material.customProgramCacheKey()+':wet-probe';
+  scene.add(new T.Mesh(source.geometry,material));
+  const neutral=new T.DataTexture(new Uint8Array([72,72,72,255]),1,1);neutral.colorSpace=T.SRGBColorSpace;neutral.needsUpdate=true;
+  const original=presidentMaterial.map,previous=renderer.getRenderTarget(),auto=renderer.autoClear,clear=renderer.getClearColor(new T.Color()),alpha=renderer.getClearAlpha(),images=[];
+  try{
+    amtPortraitMelt.setTexture(neutral);__floorTest.at(BuergeramtGoop.ageForMelt(.25));__floorRender();renderer.setClearColor(0,0);
+    for(const x of [-1.2,1.2]){
+      camera.position.set(x,0,3);camera.lookAt(0,0,0);renderer.autoClear=true;renderer.setRenderTarget(target);renderer.render(scene,camera);
+      const pixels=new Uint8Array(size*size*4);renderer.readRenderTargetPixels(target,0,0,size,size,pixels);images.push(pixels);
+    }
+  }finally{renderer.setRenderTarget(previous);renderer.autoClear=auto;renderer.setClearColor(clear,alpha);amtPortraitMelt.setTexture(original);material.dispose();neutral.dispose();target.dispose();__floorTest.at(0);__floorRender();}
+  let covered=0,changed=0,delta=0;
+  for(let i=0;i<images[0].length;i+=4)if(images[0][i+3]>240&&images[1][i+3]>240){covered++;const difference=Math.abs(images[0][i]-images[1][i]);delta+=difference;if(difference>8)changed++;}
+  return{covered,changedFraction:changed/covered,meanDifference:delta/covered};
+}
 function sampleFloorColor(){
   const width=256,height=224,target=new T.WebGLRenderTarget(width,height),scene=new T.Scene();
   target.texture.colorSpace=T.SRGBColorSpace;
@@ -126,7 +147,7 @@ const server=createServer((req,res)=>{
       `window.__floorTest={pose(x,z,yaw=0){Object.assign(view,{x,z,yaw})},at(time){floorClock=time;visualClock=goop.motion(time);applyOfficeTempo()},recover(){activated=true;registeredName='Erika Mustermann';number=counterCalls[2];assignedCounter=3;counter.x=counterXs[2];deadline=200;view.x=counter.x;view.z=counter.z+1;setStage('walk-counter');},close(){close(false)},reopen(){open(options)},dialogue(){setStage('character')},stage:setStage,speech(){const row=Object.values(window.GermanySimulatorAudioText.recordings).filter(r=>r.voiceId==='amt-brunhilde-knick'&&r.source).sort((a,b)=>b.source.length-a.source.length)[0];if(!row)throw Error('Missing native Knick sample');options.voiceOn=()=>true;content(story.clerkIdentity.speaker,row.source)},media(){return recordedSpeech?{rate:recordedSpeech.playbackRate,preservesPitch:recordedSpeech.preservesPitch,time:recordedSpeech.currentTime,duration:recordedSpeech.duration,paused:recordedSpeech.paused}:null}};window.BuergeramtLevel={`);
     if(file===resolve('buergeramt-floor.js'))data=data.toString().replace('const floatMask=','const floatMask=!globalThis.__forceByteFloor&&').replace('return{update,setLights',`return{update,samplePigmentRegion:${samplePigmentRegion.toString()},withoutPaintProbe:${withoutPaintProbe.toString()},stats(){if(!targets)return null;const pixels=new Float32Array(width*height*4);renderer.readRenderTargetPixels(targets[read],0,0,width,height,pixels);let sum=0,squares=0,white=0,black=0,paint=0,colored=0,interfaces=0;for(let i=0;i<pixels.length;i+=4){const v=pixels[i];sum+=v;squares+=v*v;paint+=pixels[i+3];if(v>.8)white++;if(v<.2)black++;if(Math.abs(pixels[i]-pixels[i+1])+Math.abs(pixels[i+1]-pixels[i+2])>.012)colored++;const cell=i/4,x=cell%width,y=Math.floor(cell/width);if(x<width-1&&(v>.5)!=(pixels[i+4]>.5))interfaces+=19.2/height;if(y<height-1&&(v>.5)!=(pixels[i+width*4]>.5))interfaces+=15.4/width;}const count=width*height;return{mean:sum/count,variance:squares/count-(sum/count)**2,white:white/count,black:black/count,paint:paint/count,colored:colored/count,interfaceDensity:interfaces/(15.4*19.2)}},setLights`);
     if(file===resolve('world3d.js'))data=data.toString().replace('import {createAmtPortraitMelt}','import {createAmtPortraitMelt,portraitPaintGlsl}').replace('amtCamera.rotation.set(view.pitch||0,-view.yaw,0,"YXZ")','amtCamera.rotation.set(window.__floorPitch??view.pitch??0,-view.yaw,0,"YXZ")')
-      .replace('  app.classList.add("three-ready");',`window.__floorGpu={samplePortraitPaint:${samplePortraitPaint.toString()},sampleFaceDroop:${sampleFaceDroop.toString()},floorColor:${sampleFloorColor.toString()},region:()=>amtFloorEffect.samplePigmentRegion(),stats:()=>amtFloorEffect.stats(),advance(seconds){const start=BuergeramtLevel.floorState.time;for(let n=1;n<=Math.round(seconds*20);n++){__floorTest.at(start+n/20);amtFloorEffect.update(BuergeramtLevel.floorState,amtReducedMotion.matches,BuergeramtLevel.view,BuergeramtLevel.characters);amtPortraitMelt.update(BuergeramtLevel.floorState,amtReducedMotion.matches);amtLampWear.update(BuergeramtLevel.floorState,amtReducedMotion.matches)}},fade(strength){fadeAmtStructure(strength)},render(){renderer.render(amtScene,amtCamera)},backend(){const gl=renderer.getContext(),ext=gl.getExtension('WEBGL_debug_renderer_info');return ext?gl.getParameter(ext.UNMASKED_RENDERER_WEBGL):gl.getParameter(gl.RENDERER)}};app.classList.add("three-ready");`);
+      .replace('  app.classList.add("three-ready");',`window.__floorGpu={sampleWetSurface:${sampleWetSurface.toString()},samplePortraitPaint:${samplePortraitPaint.toString()},sampleFaceDroop:${sampleFaceDroop.toString()},floorColor:${sampleFloorColor.toString()},region:()=>amtFloorEffect.samplePigmentRegion(),stats:()=>amtFloorEffect.stats(),advance(seconds){const start=BuergeramtLevel.floorState.time;for(let n=1;n<=Math.round(seconds*20);n++){__floorTest.at(start+n/20);amtFloorEffect.update(BuergeramtLevel.floorState,amtReducedMotion.matches,BuergeramtLevel.view,BuergeramtLevel.characters);amtPortraitMelt.update(BuergeramtLevel.floorState,amtReducedMotion.matches);amtLampWear.update(BuergeramtLevel.floorState,amtReducedMotion.matches)}},fade(strength){fadeAmtStructure(strength)},render(){renderer.render(amtScene,amtCamera)},backend(){const gl=renderer.getContext(),ext=gl.getExtension('WEBGL_debug_renderer_info');return ext?gl.getParameter(ext.UNMASKED_RENDERER_WEBGL):gl.getParameter(gl.RENDERER)}};app.classList.add("three-ready");`);
     res.writeHead(200,{'Content-Type':mime[extname(file)]||'application/octet-stream','Cache-Control':'no-store'});res.end(data);
   }catch{res.writeHead(404);res.end();}
 });
@@ -166,6 +187,8 @@ try{
         assert(faceDroop.leftEye.drop-faceDroop.rightEye.drop>.025,'eyes sag unevenly');
         assert(faceDroop.mouth.drop>faceDroop.leftEye.drop&&faceDroop.chin.drop>faceDroop.mouth.drop,'lower face stretches progressively farther');
       }
+      const wetSurface=name==='missing-portrait'?null:await page.evaluate(()=>__floorGpu.sampleWetSurface());
+      if(wetSurface){writeFileSync(resolve(out,`${name}-wet-probe.json`),JSON.stringify(wetSurface,null,2));assert(wetSurface.covered>1000,'wet probe has substantial opaque paint');assert(wetSurface.changedFraction>.04,'liquid reflections follow the view rather than remaining painted stripes');}
       const intact=await page.evaluate(()=>__floorGpu.samplePortraitPaint('frame',0,0));
       await page.evaluate(()=>{__floorTest.at(570);__floorRender()});
       const drained=await page.evaluate(()=>__floorGpu.samplePortraitPaint('frame',1,BuergeramtLevel.floorState.visualTime));
@@ -189,6 +212,10 @@ try{
         if(age===150&&state.pigment&&name!=='missing-portrait'){assert(state.pigment.paint>.000001,'the whole sheet deposits paint soon after onset');assert(state.pigment.colored>.000001);}
         if(name==='missing-portrait'&&state.pigment){assert.equal(state.pigment.paint,0);assert.equal(state.pigment.colored,0);}
         await page.screenshot({path:resolve(out,`${name}-liquid-${age}s.png`)});captures.push({age,...state});
+        if([150,180,240].includes(age)){
+          await page.evaluate(()=>{const p=BuergeramtStory.presidentPortrait;__floorTest.pose(p.x+1.2,p.z-4,Math.atan2(-1.2,-4));window.__floorPitch=0;__floorRender()});
+          await page.screenshot({path:resolve(out,`${name}-wet-surface-${age}s.png`)});
+        }
         if(process.env.FLOOR_PAINT_MIX&&[150,180,240,370,570].includes(age)){
           state.floorColor=await page.evaluate(()=>__floorGpu.floorColor());
           await page.evaluate(()=>{const p=BuergeramtStory.presidentPortrait;__floorTest.pose(p.x+1.6,p.z-2.6,Math.atan2(-1.6,-2.6));window.__floorPitch=-.62;__floorRender()});
@@ -206,7 +233,7 @@ try{
           }
         }
       }
-      assert.deepEqual(errors,[]);report.cases.push({name,verdict:'PASS',faceDroop,intact,drained,softened,film,captures,errors});console.log(name,'oil PASS');await context.close();continue;
+      assert.deepEqual(errors,[]);report.cases.push({name,verdict:'PASS',faceDroop,wetSurface,intact,drained,softened,film,captures,errors});console.log(name,'oil PASS');await context.close();continue;
     }
     if(process.env.FLOOR_MOTION){
       await page.evaluate(()=>{__floorGpu.advance(675);__floorRender()});

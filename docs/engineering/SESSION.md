@@ -565,3 +565,62 @@ including final desktop/mobile240/370s contact plumes and570s downstream
 red-brown marbling, fallback/missing-art and restoration frames. This resolves
 its earlier gray-color finding. Both specialists pass the same8CC0 floor;
 broader city/scale/gait and physical-device scope remain NOT RUN.
+
+# Wet portrait surface — 2026-10-14
+
+Integrator-owned on published 85d884d, after fast-forwarding the healthy isolated
+checkout and refreshing its 28 changed assets from Git. Initial scoped source
+diff is empty; avoid global status because this sparse clone has large assets.
+Scope: buergeramt-portrait-melt.js liquid texture/relief, matching import/cache
+URLs in floor/world/root/direct entry, existing GPU fixture, owning episode doc
+and this record. Preserve face sag, in-place erosion, contact-fed floor pigment,
+shared clocks/rates, 24-triangle depth-tested surface, missing art, reduced motion,
+restoration and all existing budgets. No new assets, passes, targets or loaders.
+Use view-dependent wet highlights and softly changing flow contours instead of
+flat vertical texture bands. Existing six-profile GPU checks and five-profile
+recovery, rendered inspection and repeated browser budgets apply. Required
+read-only Physics and Camera reviewers cover affected contact/material C4/X1;
+city obstruction/scale/gait are outside this texture-only change. Physical Android
+and listening are not available. Use the existing silent Playwright harness;
+CLI npx is absent, but the installed bundled Playwright runtime is available.
+
+Frozen runtime portrait BE6E97CB/floor6F6EFA20/world84DC8755 passes six loaded,
+Android-emulated, fallback, reduced and missing-image GPU profiles plus five
+counter-recovery profiles, with zero errors. Existing facial-landmark, interior
+erosion, runoff, full-drain and floor-color assertions remain enabled. A neutral
+pigment probe renders the production shader at fixed UV coverage with two view
+directions: 25.6% of covered pixels change by more than8 codes (30.3% reduced).
+The published old shader fails with0%. Earlier excessive early glints reduced
+landmark visibility; wet onset was tuned and all original checks now pass.
+Interpolated normals remove visible facets at the static wall bend. The probe
+restores borrowed render state/textures and disposes its temporary resources.
+
+The true floor-color oracle ran in FLOOR_PAINT_MIX mode; its results live in
+*-mix-*.json sidecars (the existing main report copies state before floorColor
+is assigned). Colored area beyond .3m at240/570s is .382/.558m² desktop and
+.267/1.190m² Android portrait; missing art stays0. No pigment appears at105/120s,
+and contact deposition is positive by150s. Recovery restores the image/floor,
+ordinary speed and zero pigment targets by90s. Independent read-only Camera
+passes affected C4/X1 after inspecting early/mid/late, fallback and restoration
+captures; Physics passes contact/ownership and23 fresh production checks,
+including immediate interaction onset and frame collision at30/60fps and .1s.
+Both verified all frozen hashes. Their supplied browser evidence is distinct
+from fresh source/Node checks. Detailed evidence stays in ignored
+output/liquid-surface/. No natural mission, physical Android or listening claim.
+
+Pages-selected checks pass682/682, voice curation passes, and all six exact-RGBA
+delivery checks pass. No configured engineering-quality limits file/script is
+present. The change adds shader arithmetic only, no assets, passes or targets.
+
+Six baseline and six candidate active-office runs, then six cold root runs,
+pass all existing input/error/buffer/startup/title guards. Chrome155/Intel Iris
+Xe, DPR2, seeds4781–4783, local HTTP and no throttle; runs were sequential.
+Root maximum transfer is17,999,126 bytes, with nine accepted inputs and no errors
+per run. Office application input-p95 median/range: baseline6.8/4.8–7.3ms desktop
+and5.9/5.9–59.7ms mobile; candidate52.2/37.8–117.4ms desktop and7.9/5.1–59.3ms
+mobile. Sampled sync-start p95 median is7.2ms before/after on desktop and7.2/7.4ms
+mobile. These variable lab measurements pass the existing bounds; they do not
+establish a speedup, displayed-frame or GPU timing. Office fixtures seed age150
+before real controls; full pigment evolution is covered separately above.
+All seven frozen hashes remain unchanged after verification; only this evidence
+record was appended. Runtime assets and geometry counts are unchanged.
