@@ -722,3 +722,16 @@ application measurements do not establish a speedup, GPU timing or physical-phon
 frame delivery. Benchmarks seed office age150 before real controls; full paint
 evolution is measured separately. Candidate benchmark/runtime hashes and all
 eight frozen hashes still match; only this evidence record changed afterward.
+
+2026-10-14 Kripo/Knick interruption overlap: showOutburst requests the clerk one second before the existing phone cutoff and releases the outgoing clerk at mapped incoming onset plus one wall-clock second. Original recordings, full opening/final demand, call ending, exact captions and attempt cleanup remain authoritative. Both directions, delayed UTC onset, natural short endings and replay cancellation pass deterministic checks; native recordings pass muted paired-context desktop and Android portrait emulation (simulated signaling), measuring 0.86–0.96 s police overlap and approximately 1 s clerk overlap on the final latest-main candidate. All 169 focused release checks pass, including the preserved compact greeting and opening-backup path. Mutation rejects the original immediate cutoff; voice library check passes. Physics/Camera omitted for speech scheduling only. Physical devices and perceptual listening NOT RUN. This scoped release preserves other active unfinished work in the shared checkout.
+
+Publication integration: paint commit51d4af2 raced incoming8f584e2 and its first
+push was rejected. Merged the incoming phone-overlap update, preserving both
+append-only session records and both independent entry cache versions. No paint,
+floor, renderer, geometry, test-fixture or asset bytes changed. Merged115 focused
+paint/session checks pass. Both independent reviewers verified all12 hashes in
+output/paint-goops/freeze-merged.json and rebound their scoped PASS after source
+review; prior six/five rendered evidence is reused explicitly. Six fresh merged
+cold-root checks pass, with nine accepted inputs and no errors each and maximum
+17,999,780 bytes. Incoming audio behavior remains owned by its accepted release;
+this integration adds no new audio implementation or listening claim.
