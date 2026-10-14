@@ -29,7 +29,7 @@ priorityDoc.hidden=false;priority.api.pumpAssetLoads();await Promise.all(queued)
 const selection=game.slice(game.indexOf('function prepareNearbyNpcAssets()'),game.indexOf('\nconst npcSpriteAtlases='));
 const requests=[],entries=new Map(),selectionDoc={hidden:false,body:{classList:{contains:()=>false}}};let clock=0;
 const scope=vm.createContext({document:selectionDoc,window:{},performance:{now:()=>clock},player:{x:0,y:0},npcs:[{x:100,y:0,spriteKind:'near'},{x:4000,y:0,special:'far'}],npcSpriteAtlases:{near:{},far:{}},requestNpcSprite:kind=>{requests.push(kind);if(!entries.has(kind))entries.set(kind,{settled:false})},npcAssetLoads:entries});
-vm.runInContext('const startupNpcKinds=new Set();let startupNpcsCaptured=false,lastNpcAdmission=-Infinity;'+selection+';globalThis.api={prepareNearbyNpcAssets,startupNpcAssetsReady}',scope);
+vm.runInContext('const startupNpcKinds=new Set();let startupNpcsCaptured=false,lastNpcAdmission=-Infinity,pendingNeighborEntry=false;'+selection+';globalThis.api={prepareNearbyNpcAssets,startupNpcAssetsReady}',scope);
 scope.api.prepareNearbyNpcAssets();assert.deepEqual(requests,['near']);assert.equal(scope.api.startupNpcAssetsReady(),false);
 entries.get('near').settled=true;assert.equal(scope.api.startupNpcAssetsReady(),true);
 scope.player.x=3500;clock=100;scope.api.prepareNearbyNpcAssets();assert.deepEqual(requests,['near'],'spatial scans must be bounded to 4 Hz');

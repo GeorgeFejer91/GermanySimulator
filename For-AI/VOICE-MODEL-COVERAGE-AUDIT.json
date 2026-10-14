@@ -3,11 +3,11 @@
   "status": "explicit_runtime_speakers_verified; optional_visual_template_mapping_curated; rendered_review_pending",
   "sourceSha256": {
     "For-AI/VOICE-CAST.json": "119cad66ca6fe2d1d3257353f325f1e8550caa983566b7c9de42a0efc85a3a16",
-    "game.js": "b50fdd4564e10dfafd019dda928ec9e7157d9591e4b887468f14ad56dcd2f587",
-    "world3d.js": "f1d248e90d19c717c07a7a512cf5727cb2fbae834ea59d2c07f8b51f9208bf97",
+    "game.js": "3ab414be72663898dcd16e4a1eaa14cae667e097947e86899a2925eb1bfe7d42",
+    "world3d.js": "34e2e79698a841c60d8f2cea4587b5ec2c6ad7f0e7a280b54075703c1b1196e6",
     "buergeramt-story.js": "c87706d2169c5aa4be0eb33351827a9e4c91212a5c7967666e042e44af2f0cf3",
     "street-wisdom.js": "63697e599c58c27f0acb259e60ee092eda4472673c1bfc2907ac6e1d14a07ae2",
-    "neighbor-sprites.js": "3dfd3c49edc5b0cb747343ef76cdc8dab9cf68f5f7b3fd2a8eae978ae68ee20a",
+    "neighbor-sprites.js": "1e9e5099b6c236d1bc4c395ce45b5d7855f7f7f21a99672fc9d046f9e621cce4",
     "assets/models/street-characters/models.js": "f221585150735d365e007f2eadfe58d1461f704824f8bd18f356f6bacfe5a4a8",
     "assets/models/street-characters/runtime.js": "d4c25e1d37762571a0aeedc4e15c456e137fa9be21abfccb20829a1f58d16f62",
     "assets/models/street-characters/persona-map.js": "77fd249de275c7e12debd0af4f14f30826158e0207c6920c5b01633d2aaee652"

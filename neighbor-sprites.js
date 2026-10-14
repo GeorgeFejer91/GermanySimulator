@@ -59,17 +59,18 @@ export function neighborFrame(actor,playback,dialogue,dt,running,reducedMotion=f
   else if(state==='settle'){row=4;frame=0}
   if(ENTRY[state]&&state!=='settle'&&playback.age>=ENTRY[state])playback.terminalShown=true;
   const pose={row,frame,state,moving,talking,cueToken:playback.cueToken,mouthOpen:talking?playback.mouthOpen||0:0,
-    visible:active||state==='release'||moving||!actor.jwdWorking};
+    visible:true};
   playback.pose=pose;return pose;
 }
 
 export function createNeighborSprite(T,actor,host,queueAsset,camera){
   const name=NEIGHBOR_PAINT[actor.jwdRole];if(!name)return null;
   const owner={retired:false},playback={},fallback=host.children.slice();
-  let sprite=null,texture=null,lastTime=null,lastPose=null;
+  let sprite=null,texture=null,lastTime=null,lastPose=null,settled=false,failed=false;
   queueAsset(()=>({x:host.position.x,z:host.position.z}),2,()=>new Promise(resolve=>{
     const version='20261014-neighbor-performance';
     new T.TextureLoader().load(`./assets/characters/neighbors/${name}${innerWidth<=600&&devicePixelRatio<2?'-mobile':''}.webp?v=${version}`,loaded=>{
+      settled=true;
       if(owner.retired){loaded.dispose();resolve(false);return}
       texture=loaded;texture.colorSpace=T.SRGBColorSpace;texture.generateMipmaps=false;
       texture.minFilter=texture.magFilter=T.LinearFilter;texture.premultiplyAlpha=true;
@@ -79,7 +80,7 @@ export function createNeighborSprite(T,actor,host,queueAsset,camera){
         depthWrite:true,premultipliedAlpha:true,side:T.DoubleSide});
       sprite=new T.Mesh(geometry,material);sprite.name=`${name} painted neighbor`;
       sprite.userData.neighborPaint=true;sprite.visible=false;host.add(sprite);resolve(true);
-    },undefined,error=>{console.warn('Neighbor paint unavailable; keeping articulated neighbor',error);resolve(false)});
+    },undefined,error=>{settled=true;failed=true;console.warn('Neighbor paint unavailable; keeping articulated neighbor',error);resolve(false)});
   }),owner);
   return {
     sync(now,hud,dialogue,reducedMotion){
@@ -98,7 +99,7 @@ export function createNeighborSprite(T,actor,host,queueAsset,camera){
       sprite.position.set(0,pivot,0).applyQuaternion(sprite.quaternion);
     },
     restore(){for(const mesh of fallback)mesh.visible=true;if(sprite)sprite.visible=false},
-    inspect(){return {loaded:!!sprite,visible:!!sprite?.visible,row:lastPose?.row??0,frame:lastPose?.frame??0,
+    inspect(){return {loaded:!!sprite,settled,failed,visible:!!sprite?.visible,row:lastPose?.row??0,frame:lastPose?.frame??0,
       state:lastPose?.state,cueToken:lastPose?.cueToken,mouthOpen:lastPose?.mouthOpen||0,distance:playback.distance||0}},
     dispose(){owner.retired=true;texture?.dispose();sprite?.material.dispose()}
   };

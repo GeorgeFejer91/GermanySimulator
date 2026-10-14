@@ -28,7 +28,7 @@ jobs:
       - name: Check fullscreen lifecycle
         run: node --test tests/fullscreen.test.mjs
       - name: Check JWD home and neighbors
-        run: node --test tests/jwd-home.test.mjs tests/neighbor-sprites.test.mjs tests/character-review.test.mjs tests/building-placards.test.mjs
+        run: node --test tests/jwd-home.test.mjs tests/neighbors-direct.test.mjs tests/neighbor-sprites.test.mjs tests/character-review.test.mjs tests/building-placards.test.mjs
       - name: Check running hotkey
         run: node --test tests/running-hotkey.test.mjs tests/jobcenter.test.mjs tests/jobcenter-rumble.test.mjs tests/jobcenter-release.test.mjs tests/jobcenter-direct.test.mjs tests/jobcenter-touch.test.mjs tests/welcome-dialogue.test.mjs
       - name: Check office queue call audio

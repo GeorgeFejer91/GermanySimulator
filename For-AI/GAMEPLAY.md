@@ -45,6 +45,16 @@ neighbors. This detour resumes Anmeldung II without renumbering the eight
 procedures. A previously saved registration badge alone does not allocate a
 house in a new run.
 
+The unlisted `?geheim=nachbarn` URL opens directly at the body-clear paved home
+entrance with the three introductions pending. It supplies this chapter's
+registration prerequisites (+3 Germanness, one form, allocated and visited home,
+and the A38 medal) in memory, without saving an earned registration receipt.
+It skips the title, registration interview and monologue. City readiness and
+all three selected sprite loads must settle before play starts; failed images
+use the existing procedural fallback. Hidden-page startup waits for foreground.
+The shortcut is consumed once, and normal URLs retain their original entry.
+All three final conversation acknowledgements resume Anmeldung II as usual.
+
 The patched, sparsely furnished home sits between tidy family houses in a six-house
 garden suburb inspired by Schlachtensee and Zehlendorf. A second villa/landhouse
 row, garden strips, a tree-lined northern edge, two paved residential lanes and a
@@ -80,7 +90,9 @@ ragged hedges, bare patches and a fallen gnome. `jwd-gardens.js` owns the shared
 parcels, paved approaches, solid prop rectangles and work stations for both pages.
 Private garden grass carries no public-lawn offence. Residents wash/polish their
 cars; Schwabingen also walks to her hedge and trims it. Their animation clock advances
-only in the nearby running simulation. Work pauses for conversations, and gait
+only in the nearby running simulation. Loaded painted residents use their
+planted idle row at work stations; articulated chores and tools remain visible
+only when their paint is unavailable. Work pauses for conversations, and gait
 comes from accepted physical movement.
 
 The satire targets the fictional residents' status anxiety, unsolicited lectures,
@@ -122,7 +134,8 @@ mission credit. Only the current conversation's final acknowledgement adds its
 resident to the distinct introductions; duplicate/stale completion cannot add
 another resident. The four painted walking views retain accepted displacement
 and the established family scale. Direction changes do not claim unauthored
-whole-body turn animation, and chore poses retain the articulated work renderer.
+whole-body turn animation. Loaded sprites remain visible during idle, walking
+and interaction states; missing paint retains the articulated work fallback.
 In short landscape viewports, neighbor dialogue actions sit at the screen edge
 and the redundant E hint disappears during the exchange, keeping the speaker visible.
 

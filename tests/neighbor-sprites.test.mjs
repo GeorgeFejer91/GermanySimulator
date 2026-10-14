@@ -14,14 +14,22 @@ test('neighbor gait follows accepted displacement and plants when blocked',()=>{
   assert.equal(playback.distance,distance);
 });
 
-test('only actual owned speech uses the talk row; cancellation releases to work',()=>{
+test('only actual owned speech uses the talk row; cancellation returns to painted idle',()=>{
   const actor={id:'jwd-watcher',x:100,y:100,jwdWorking:true},playback={};
-  assert.equal(neighborFrame(actor,playback,{id:'other'},.1,true).visible,false);
+  const idle=neighborFrame(actor,playback,{id:'other'},.1,true);assert.equal(idle.visible,true);assert.equal(idle.row,4);assert.equal(idle.mouthOpen,0);
   const owned=neighborFrame(actor,playback,{id:actor.id,active:true,speaking:true,cueToken:'one',mediaTime:.2,mouthOpen:.8},.1,true);
   assert.equal(owned.row,5);assert.equal(owned.visible,true);
   assert.equal(neighborFrame(actor,playback,null,.1,true).state,'release');
   assert.equal(neighborFrame(actor,playback,null,.3,true).frame,0);
-  assert.equal(neighborFrame(actor,playback,null,.01,true).visible,false);
+  const returned=neighborFrame(actor,playback,null,.01,true);assert.equal(returned.visible,true);assert.equal(returned.state,'idle');assert.equal(returned.mouthOpen,0);
+});
+
+test('all three working residents retain animated painted idle without phantom walking',()=>{
+ for(const [id,jwdRole] of [['jwd-parent','parent'],['jwd-watcher','watcher'],['jwd-swabian','swabian']]){
+  const actor={id,jwdRole,x:0,y:0,jwdWorking:true},playback={};
+  const first=neighborFrame(actor,playback,null,0,true),next=neighborFrame(actor,playback,null,.25,true);
+  assert.equal(next.visible,true);assert.equal(next.row,4);assert.notEqual(next.frame,first.frame);assert.equal(next.moving,false);assert.equal(playback.distance,0);
+ }
 });
 
 test('queued speech performs entry then listens; actual start preempts greeting',()=>{

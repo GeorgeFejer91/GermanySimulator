@@ -1,3 +1,7 @@
+# Direct neighbor chapter — 2026-10-14
+
+Integrator-owned scope on published 85d884d: game.js checkpoint/readiness, neighbor-sprites.js loaded visibility and settled status, world3d.js lightweight neighbor readiness and initial resident placement, bounded checkpoint startup admission, entry cache keys, focused mission/animation/browser checks and owning For-AI gameplay/asset notes. Preserve normal intro/registration, existing collision/routes/gait, three final-acknowledgement receipts, exact voices, artwork bytes and office/Jobcenter behavior. The clean attached release checkout is reused; unrelated primary edits are preserved. Existing loaded paint currently disappears during chores; this task keeps painted idle visible, retaining procedural bodies only for missing paint. No new art, dependency, renderer or audio scheduler.
+
 # Physical potato mirror repair — 2026-10-13
 
 Integrator-owned scope, integrated published base `1b0b3ca` (JWD, Schalter and floor grace); isolated `codex/physical-potato-reflection` worktree. Preserve the shared checkout's unrelated work.

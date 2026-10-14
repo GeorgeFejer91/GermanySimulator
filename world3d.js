@@ -8,7 +8,7 @@ import {createPotatoMirror} from './buergeramt-potato-mirror.js?v=20261013-physi
 import {amtWalkDirection,createAmtWalkSpare} from './buergeramt-walk-view.js?v=20261013-smooth-turning';
 import {prepareWithSegments,measureNaturalWidth,measureLineStats} from './assets/vendor/pretext/dist/layout.js';
 import {createJobcenterBuilding,createJobcenterEncounter} from './jobcenter.js?v=20261013-mouth-audit';
-import {createNeighborSprite} from './neighbor-sprites.js?v=20261014-neighbor-performance';
+import {createNeighborSprite} from './neighbor-sprites.js?v=20261014-neighbor-direct';
 const THREE_URL="./assets/vendor/three/0.186.0/build/three.module.min.js";
 const GLTF_LOADER_URL="./assets/vendor/three/0.186.0/examples/jsm/loaders/GLTFLoader.js";
 function buergeramtDoorRadiance(time,reducedMotion=false){
@@ -1255,6 +1255,7 @@ function showRendererFailure(error){
       const station=bridge.jwdGardens?.stations[n.id],car=bridge.jwdGardens?.props.find(p=>p.id===station?.target&&p.asset==="jwd-car");
       work.visible=false;q.userData.jwdWork={work,wash,shears,sponge,soap,drops,blades,carried,arms,car,station,up:new T.Vector3(0,1,0),direction:new T.Vector3()};
     }
+    q.position.set(X(n.x),bridge.stationElevation(n.x,n.y),Z(n.y));
     q.userData.neighborPaint=createNeighborSprite(T,n,q,queueCityAsset,camera);
     return q;
   }
@@ -2074,6 +2075,7 @@ function showRendererFailure(error){
   leaveAmtDirectMode,enterJobcenter:config=>jobcenter.open(config),leaveJobcenter:()=>jobcenter.close(),get jobcenter(){return jobcenter.inspect()},get amtEntry(){return {active:!!amtEntry,failure:entryFailure,...amtEntry?.inspect()}},
   get nearbyAssetsReady(){updateAssetView();return cityModelJobs.every(job=>job.state==="settled"||cityModelDistance(job)>30&&!isCityAssetVisible(job))},
   get officeAssetsReady(){return amtImagesRequested&&officeAssetPending===0},get officeAssetStatus(){return {total:officeAssetTotal,pending:officeAssetPending,failed:officeAssetFailures}},
+  get neighborAssetStatus(){const paint=[...npcMeshes.values()].map(q=>q.userData.neighborPaint).filter(Boolean).map(p=>p.inspect());return {total:paint.length,settled:paint.filter(p=>p.settled).length,failed:paint.filter(p=>p.failed).length}},
   get startupReady(){return startupModelsReady()},get startupStatus(){return {total:startupModelJobs.size,pending:[...startupModelJobs].filter(job=>job.state!=="settled").length,active:cityModelActive,failed:[...startupModelJobs].filter(job=>job.failed).length}},
   get buildingVisibility(){return buildingSlots.map(slot=>({id:slot.building.id,opacity:slot.opacity,obstructing:!!slot.obstructing}))},sync(){
     if(jobcenter.render()){showMissionPointer(false);previousOcclusionTime=performance.now();return}
