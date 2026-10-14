@@ -420,3 +420,51 @@ assets are unchanged by this final evidence-only amendment. Logs and frames
 remain under ignored `output/portrait-oil/`. Forced residence/camera/registration
 fixtures do not establish natural mission play. Physical Android and perceptual
 listening remain NOT RUN.
+
+# Drooping Steinmeier features — 2026-10-14
+
+Integrator-owned on published `432c240`, using the healthy isolated checkout.
+Scope: a face-local UV stretch in the existing portrait shader, its cache URLs,
+the existing GPU fixture and owning episode guidance. Make eyes, cheeks, mouth
+and chin visibly sag at different rates before dissolving. Preserve the accepted
+in-place oil erosion/runoff, shared 2.2 melt progress and clock, immediate
+interaction, wall/floor contact, restoration, missing-art fallback, reduced
+motion, geometry and depth. No new art, targets, particles, passes or clocks.
+Validate actual production shader deformation with diagnostic colored facial
+landmarks, compare rendered photo sequences on desktop and Android emulation,
+and retain an old-shader negative control. Independent Physics and Camera
+reviews bind the final candidate; unrelated gait/collision/city rows are outside
+this texture-only scope. Publish after the applicable release/browser gates.
+
+The face-local inverse stretch anchors the forehead and gives the two sides
+unequal sag, with increasing displacement toward mouth and chin. Production
+portrait SHA-256 `1961e992` adds no texture lookups, geometry, passes or targets.
+The actual production material carries temporary colored facial landmarks in
+the GPU fixture. At shared goop .12, normalized image-height drops are .128/.081
+for eyes, .181 for mouth and .220 for chin; all remain visibly sampled. The old
+published shader fails the new minimum-eye-drop oracle at .029. This new check
+adds to the existing in-place erosion/runoff assertions without weakening them.
+Six integrated profiles and five counter-recovery profiles pass with matching
+runtime hashes and no errors. Android portrait/landscape are emulated; reduced
+motion and missing art retain their existing behavior. Early/intermediate photo
+frames show the drooping face within the frame and mixed pigment below it.
+Restoration returns the intact portrait and releases the floor targets. Local
+Pages-selected checks pass 664/664, voice curation and six exact-RGBA delivery
+checks. Silent accelerated residence/camera fixtures do not establish natural
+mission completion, physical Android or perceptual listening.
+
+Six cold root hardware-browser runs pass the existing transfer/title-cadence/
+buffer/input/error guards (Chrome155, Intel Iris Xe, DPR2, seeds4781–4783,
+local HTTP, no throttle). Maximum startup transfer is17,959,095 bytes; all runs
+accept nine input changes with zero errors. Application input p95 is14–23.2ms;
+these observations do not establish GPU/display timing or a speed improvement.
+Independent scoped Physics review passes C4/X1 source/contact/clock/depth/
+cleanup, with fresh 14/14 portrait/floor tests and hash-matched supplied GPU
+reports. Full evidence remains in ignored `output/portrait-droop/`.
+
+Independent Camera review passes affected C4/X1 on the same hashes after
+viewing desktop105–240s, Android portrait120–180s, landscape150s, all fallback
+profiles and restored90s frames. Unequal eye/cheek sag and longer mouth/chin
+droop are visible; no wall-face repetition, panel seam or depth defect found.
+Its fresh portrait checks pass3/3. Broader city/scale/gait rows are NOT RUN for
+this texture-only change. Neither reviewer writes or publishes source.
