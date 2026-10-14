@@ -725,6 +725,19 @@ Held-out proper names still produce some native ASR mismatches. Keep exact visib
 
 The user accepted both native OpenVoice teacher samples, then listened to the actual browser-generated compact George Fejer greeting and approved it as “good enough”. This scoped caller-name derivative retains selected kriminalpolizei UUID f700170f840543bca7413d3ccf6ac028 and its original/reference hashes; it does not change the fixed conversation recordings or their production renderer. The manifest and MODEL_CARD under assets/voices/kriminalpolizei/browser own the binding, teacher, frozen-state, checkpoint, encoded/decoded and listening-sample hashes. Proper-name ASR limitations remain explicit.
 
+The final player-directed demand now begins with the accepted appointment name,
+reusing the same name-only PCM produced for the opening greeting. One inference
+returns the complete greeting and a separately hashed name WAV under its same
+name/profile/reference receipt; both belong to one existing cache entry and
+remain in RAM. The brief final prefix admits at most five native seconds, so the
+unchanged 14.36-second demand fits the existing final-turn deadline even at
+0.5 office tempo. Longer, missing, mismatched or failed prefixes use the complete
+fixed demand. One cue owns name plus demand; only natural completion of both
+permits the call ending. A failed prefix after onset can update the existing
+caption receipt from `voice` to `recording` once, preserving its original clock.
+No additional model, download, voice profile, inference pass or saved name file
+is introduced. This extension is user-requested; listening remains unperformed.
+
 The same lazy RAM-only manager/worker has two explicit voice modes. The host uses the intercom; the companion selects `kriminalpolizei` with its script data attribute. Cross-mode profile/reference receipts are rejected. The companion prepares at the first usable name: supplied opening-form prefill, deferred typing/change, or submission. It keeps one complete greeting per name and runs one name-only neural pass. Two fixed greeting parts total 139,864 bytes. The 16.03 MB student is distilled from 187 OpenVoice-converted German base examples; 507 pronunciation/flow tensors remain byte-identical to the base. The larger teacher/converter stays in private authoring and is never loaded on clients. Unsupported WASM SIMD or missing required APIs fail before any model/runtime transfer.
 
 The first valid name also warms the six selected fixed call recordings in native media buffers, capped at eight and without playback. Answer starts a ready, exact-text/profile-bound Blob recording synchronously. Its completion releases the lease and begins the accepted fixed opening body; one index-1 cue owns the composite and its completion. An unavailable or unready greeting immediately selects the complete original introduction and question. A pre-onset named failure selects that backup too; a failed cropped body gets one bounded full-opening retry. The host caption follows `voice` receipts for the named opening and `recording` receipts for the complete original opening. If the backup starts after a named onset, one bounded `voice`→`recording` start update refreshes the caption and English translation; it preserves the original cue clock, deadline and single completion. Both paths finish before Knick's first interruption. Answer never waits for model work or uses generic browser speech for this greeting. Call-owned static spans clip transitions; office tempo, cutoff, clunk/tone, warning and ending receipts retain their authority. Slot completion/pagehide releases media, caches and model buffers; visibility suspends preparation. A missing recording retains the bounded readable fallback and continuous static. Network loss, muted output or OS suspension cannot guarantee audible speech.

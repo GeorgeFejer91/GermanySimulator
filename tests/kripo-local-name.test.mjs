@@ -5,7 +5,7 @@ import {harness,source} from './amt-harness.mjs';
 
 // Production phone, catalogue and name manager; only DOM, time, transport,
 // Worker delivery and acoustic playback are synthetic. No listening evidence.
-function phone({local=true,greetingPlay='normal'}={}){
+function phone({local=true,greetingPlay='normal',addressDuration=1}={}){
  const h=harness('phone',{candidatePhone:true,fakeAudio:true}),workers=[],leases=[],revoked=[],played=[];
  vm.runInContext(source('For-AI/AUDIO-TEXT-LIBRARY.js'),h.context);
  const binding=h.window.GermanySimulatorAudioText.productionVoices.kriminalpolizei;
@@ -19,7 +19,8 @@ function phone({local=true,greetingPlay='normal'}={}){
   terminate(){this.terminated=true}
   ready(extra={}){
    const {id,text}=this.posts.at(-1),wav=new ArrayBuffer(64),part={text,wav,duration:2,sha256:'a'.repeat(64)};
-   this.onmessage({data:{id,text,status:'ready',...part,variants:[part],profileId:binding.profileId,referenceSha256:binding.referenceSha256,...extra}});
+   const address={text:text.slice('Spricht hier '.length,-'? Hier ist die Kriminalpolizei am Apparat!'.length),wav:new ArrayBuffer(64),duration:addressDuration,sha256:'b'.repeat(64)};
+   this.onmessage({data:{id,text,status:'ready',...part,variants:[part],address,profileId:binding.profileId,referenceSha256:binding.referenceSha256,...extra}});
   }
  }
  const OriginalAudio=h.window.Audio;
@@ -49,6 +50,33 @@ function phone({local=true,greetingPlay='normal'}={}){
 const staticNoise=h=>h.audio.nodes.find(node=>node.kind==='buffer-source'&&node.loop);
 const bodyPath='./assets/voices/kriminalpolizei/kriminalpolizei-opening-body.mp3';
 const backupPath='./assets/voices/kriminalpolizei/kriminalpolizei-phone-01.mp3';
+
+test('the final player-directed demand reuses the name alone before its fixed recording',()=>{
+ const h=phone();h.submit();h.ready();h.incoming();h.node('phone-answer').click();h.tick(16);h.played[0].end();h.tick(16);h.played[1].end();h.tick(20);
+ const posts=h.workers[0].posts.length;h.link.message({type:'police-line',index:3,line:h.window.BuergeramtStory.police[3]});h.tick(16);
+ const address=h.played.at(-1);assert(address.src.startsWith('blob:'));assert.equal(h.speech.peek('Erika Mustermann',1).address.text,'Erika Mustermann');
+ assert.equal(h.sent('police-start').at(-1).index,3);assert.equal(h.sent('police-start').at(-1).mode,'voice');
+ const completed=h.sent('police-done').length;address.end();h.tick(16);
+ const demand=h.played.at(-1);assert.match(demand.src,/kriminalpolizei-phone-05\.mp3$/);assert.equal(h.sent('police-done').length,completed);
+ demand.end();assert.equal(h.sent('police-done').at(-1).index,3);assert.equal(h.sent('police-done').at(-1).mode,'voice');
+ assert.equal(h.workers[0].posts.length,posts);assert.equal(h.synth.spoken.length,0);assert.equal(h.revoked.length,2);
+});
+
+test('an after-onset final name failure refreshes to the fixed demand once and rejects stale continuations',()=>{
+ const h=phone();h.submit();h.ready();h.incoming();h.node('phone-answer').click();h.tick(16);h.played[0].end();h.tick(16);h.played[1].end();h.tick(20);
+ h.link.message({type:'police-line',index:3,line:h.window.BuergeramtStory.police[3]});h.tick(16);const address=h.played.at(-1),late=address.onended;
+ address.fail();h.tick(16);assert.deepEqual(h.sent('police-start').filter(m=>m.index===3).map(m=>m.mode),['voice','recording']);
+ const demand=h.played.at(-1),count=h.played.length;late();assert.equal(h.played.length,count);demand.end();assert.equal(h.sent('police-done').filter(m=>m.index===3).length,1);
+});
+
+test('a brief final name is capped at five seconds so the full demand keeps its existing lifetime',()=>{
+ for(const addressDuration of [5,5.001,19]){
+  const h=phone({addressDuration});h.submit();h.ready();h.incoming();h.node('phone-answer').click();h.tick(16);h.played[0].end();h.tick(16);h.played[1].end();h.tick(20);
+  h.link.message({type:'police-line',index:3,line:h.window.BuergeramtStory.police[3]});h.tick(16);
+  assert.equal(h.played.at(-1).src.startsWith('blob:'),addressDuration<=5);
+  if(addressDuration>5){assert.match(h.played.at(-1).src,/kriminalpolizei-phone-05\.mp3$/);assert.equal(h.sent('police-start').at(-1).mode,'recording')}
+ }
+});
 
 test('first phone input debounces preparation, replacement discards old work, and change prepares immediately',()=>{
  const h=phone(),name=h.node('phone-name');h.tick(3000);assert.equal(h.workers.length,0);

@@ -64,7 +64,7 @@ test('boot, invalid input and a muted initial name download no model',async()=>{
 test('a prepared name reuses its clip, owns its blob lease and releases the idle worker',async()=>{
  const h=fixture(),first=h.api.prepare('Jürgen Müller',3),again=h.api.prepare('Jürgen Müller',3);
  assert.equal(first,again);h.tick(50);assert.equal(h.workers.length,1);
- assert.equal(h.workers[0].url,'https://example.test/game/knick-speech-worker.js?v=20261013-local-name');
+ assert.equal(h.workers[0].url,'https://example.test/game/knick-speech-worker.js?v=20261014-player-address');
  assert.equal(h.workers[0].posts.length,1);h.workers[0].ready();const ready=await first;
  assert.equal(ready.status,'ready');assert.equal(ready.text,'Jürgen Müller, bitte zu Schalter drei!');
  assert.equal(await h.api.prepare('Jürgen Müller',3),ready);assert.equal(h.workers[0].posts.length,1);
@@ -418,7 +418,7 @@ test('invalid RAM is refetched and failed hash verification cannot return a mode
 test('police mode warms exactly one complete greeting and leases the selected police identity',async()=>{
  const h=fixture({police:true});h.api.rememberName('Ju\u0308rgen Müller');h.tick(50);
  assert.equal(h.window.GermanyKnickSpeech,undefined);assert.equal(h.api.initialName,'Jürgen Müller');
- assert.equal(h.workers[0].url,'https://example.test/game/knick-speech-worker.js?v=20261013-local-name&voice=kriminalpolizei');
+ assert.equal(h.workers[0].url,'https://example.test/game/knick-speech-worker.js?v=20261014-player-address&voice=kriminalpolizei');
  assert.equal(h.workers[0].posts.length,1);assert.equal(h.api.inspect().pending,1);
  const promise=h.api.prepare('Jürgen Müller',1);h.workers[0].batch();const ready=await promise;h.tick(50);
  assert.equal(ready.text,'Spricht hier Jürgen Müller? Hier ist die Kriminalpolizei am Apparat!');
@@ -428,6 +428,22 @@ test('police mode warms exactly one complete greeting and leases the selected po
  assert.equal((await h.api.prepare('Jürgen Müller',2)).status,'failed');assert.equal(h.workers[0].posts.length,1);
  const lease=h.api.lease(ready);assert.equal(lease.voiceId,'kriminalpolizei');assert.equal(lease.text,ready.text);
  lease.release();lease.release();assert.equal(h.revoked.length,1);
+});
+
+test('police address audio shares one cache entry and the selected name/profile receipt',async()=>{
+ const h=fixture({police:true}),pending=h.api.prepare('Jürgen Müller',1);h.tick(50);
+ h.workers[0].batch(reply=>{const wav=pcmWav();reply.address={text:'Jürgen Müller',wav,duration:.2,sha256:createHash('sha256').update(new Uint8Array(wav)).digest('hex')}});
+ const ready=await pending,address=ready.address;assert.equal(address.text,'Jürgen Müller');assert.equal(address.profileId,policeBinding.profileId);assert.equal(address.referenceSha256,policeBinding.referenceSha256);
+ assert.equal(address.wav,undefined);assert.equal(address.status,'ready');assert.equal(h.api.peek('Jürgen Müller',1).address,address);assert.equal(h.api.inspect().cached,1);assert.equal(h.workers[0].posts.length,1);
+ const lease=h.api.lease(address);assert.equal(lease.voiceId,'kriminalpolizei');assert.equal(lease.text,'Jürgen Müller');lease.release();lease.release();assert.equal(h.revoked.length,1);
+});
+
+test('police address audio rejects foreign names, invalid buffers and unbounded durations',async()=>{
+ for(const bad of [{text:'Other Person'},{wav:new ArrayBuffer(43)},{duration:21},{sha256:'invalid'}]){
+  const h=fixture({police:true}),pending=h.api.prepare('Jürgen Müller',1);h.tick(50);
+  h.workers[0].batch(reply=>{reply.address={text:'Jürgen Müller',wav:pcmWav(),duration:.2,sha256:'a'.repeat(64),...bad}});
+  assert.equal((await pending).status,'failed');assert.equal(h.api.inspect().cached,0);
+ }
 });
 
 test('police mode rejects Knick model receipts and greeting variants without cross-caching',async()=>{
@@ -450,6 +466,8 @@ test('police worker joins one prefix, one name inference and one suffix with sel
  assert.equal(result.text,text);assert.equal(result.variants[0].text,text);assert.equal(result.wav,result.variants[0].wav);
  assert.equal(result.profileId,policeBinding.profileId);assert.equal(result.referenceSha256,policeBinding.referenceSha256);
  assert.equal(result.duration,(2205+4410+3307)/22050);
+ assert.equal(result.address.text,name);assert.equal(result.address.duration,4410/22050);
+ assert.equal(result.address.wav.byteLength,44+4410*2);assert.equal(result.address.sha256,createHash('sha256').update(new Uint8Array(result.address.wav)).digest('hex'));
  assert.equal(result.sha256,createHash('sha256').update(new Uint8Array(result.wav)).digest('hex'));
  const view=new DataView(result.wav);assert.equal(view.getUint32(40,true),result.wav.byteLength-44);
  assert(view.getInt16(44+200*2,true)>0);assert(view.getInt16(44+(2205+200)*2,true)>0);assert(view.getInt16(44+(2205+4410+200)*2,true)>0);

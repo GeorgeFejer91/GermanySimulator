@@ -536,7 +536,7 @@ test('active spoof calls show elapsed time and native hang-up, never police text
  const h=harness('phone',{candidatePhone:true,fakeAudio:true});h.incoming();assert.equal(h.node('phone-active-controls').hidden,true);
  h.node('phone-answer').click();h.tick(20);assert.equal(h.node('phone-call-state').textContent,'00:00');assert.equal(h.node('phone-active-controls').hidden,false);assert.equal(h.node('phone-choices').hidden,true);
  h.tick(61000);assert.equal(h.node('phone-call-state').textContent,'01:01');const caption=h.node('phone-call-state').textContent,clip=h.audio.recordings[0];
- h.node('phone-hangup').click();assert.equal(h.links[0].sent.at(-1).type,'hangup');assert.equal(h.node('phone-call').hidden,true);assert.equal(h.node('phone-active-controls').hidden,true);assert.equal(clip.paused,true);assert(h.audio.nodes.filter(n=>n.kind==='buffer-source').every(n=>n.stopped.length));
+ h.node('phone-hangup').click();assert.equal(h.links[0].sent.at(-1).type,'hangup');assert.equal(h.node('phone-call').hidden,false);assert.equal(h.node('phone-call-state').textContent,'Anruf beendet');assert.equal(h.node('phone-active-controls').hidden,true);assert.equal(clip.paused,true);assert(h.audio.nodes.filter(n=>n.kind==='buffer-source').every(n=>n.stopped.length));
  const sent=h.links[0].sent.length;h.node('phone-hangup').click();h.links[0].message({type:'police-line',index:0,line:'This must never appear or start.'});h.tick(2000);assert.equal(h.links[0].sent.length,sent);assert.equal(h.audio.recordings.length,1);assert.notEqual(h.node('phone-call-state').textContent,caption);
 });
 test('hanging up releases an answered police wait once and keeps the cancelled appointment outcome',()=>{

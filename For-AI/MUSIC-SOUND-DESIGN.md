@@ -27,6 +27,15 @@ separately in `VOICE-SYNTH-PROTOCOL.md`.
 
 ## Start with the beat
 
+For the final answered Bürgeramt phone turn, accepted current-call cue 3 owns
+the existing prepared name PCM followed by the complete fixed demand. Its single
+start/end receipt and attempt guards retain subtitle ownership and the original
+cut-in choreography. The [voice protocol](./VOICE-SYNTH-PROTOCOL.md#browser-local-kripo-greeting-names-2026-10-13)
+owns prefix admission and fallback. Call ending stops static and speech, keeps
+the ending smartphone chrome visible through the existing clunk/tone, then hides
+it on native completion or its bounded fallback before reporting `call-ended`.
+No new recording, sound bus, scheduler or production voice is required.
+
 State the player action, story purpose, emotional turn, and desired silence before choosing a timbre or tool. Keep four decisions distinct: **brief** (intent and constraints), **source** (licensed recording, synthesis patch, or score sketch), **render** (reviewed asset or browser synthesis), and **playback** (the runtime event that starts and stops it). Prefer the game's existing Web Audio paths. Strudel can sketch a pattern and SuperCollider can render an offline source when useful; neither is a runtime dependency. No paid API, model, or DAW is required. Only accepted, licensed and attributed renders enter `assets/`; existing source/provenance rules remain in [`ASSET-POLICY.md`](./ASSET-POLICY.md).
 
 For each changed beat, the integrator records one compact beat card shared by content, storyboard/animation, gameplay, soundscape/mix, phone/voice and QA. It identifies:

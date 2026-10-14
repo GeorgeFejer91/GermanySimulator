@@ -99,6 +99,7 @@ window.BuergeramtStory=Object.freeze({
   "NEIN, SIE HÖREN JETZT ZU! Ein Grashalm fehlt, und Sie behindern meine Befragung! Noch ein Wort, und ich lasse Ihren ganzen Schalter...",
   "Na gut. Die Kollegen warten draußen. Geben Sie der Polizei einen ausführlichen Bericht über sämtliche Stellen, an denen Sie heute über den Rasen gelaufen sind. Jeden Weg, jeden Umweg, jeden Grashalm! Sonst gibt es auf der Wache noch mehr Papierkram."
  ],
+ policeAddress(name){return name?`${name}, ${this.police[3]}`:this.police[3]},
  outburst:{speaker:"FRAU KNICK · SCHALTER 3",lines:[
   "Ach, wie schön. Für private Telefonate haben Sie Zeit. Für Ihr Formular offenbar nicht. Ich sitze hier ja nur...",
   "Die Dame hat einen Namen. Frau Knick. Und die Dame bearbeitet hier einen Antrag, während Sie einem Grashalm hinterhertelefonieren. Wenn Sie jetzt bitte...",

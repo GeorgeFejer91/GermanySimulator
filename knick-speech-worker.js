@@ -117,9 +117,12 @@ self.onmessage=async event=>{
    variants.push({text:police?text:`${name}, bitte zu Schalter ${counterWords[index]}!`,wav:buffer,duration:joined.length/22050,sha256:await sha(buffer)});
   }
   const selected=variants[counter],buffer=selected.wav;
+  const addressWav=police?wav(pcm):null;
+  const address=police?{text:name,wav:addressWav,duration,sha256:await sha(addressWav)}:undefined;
   self.postMessage({id,text,status:'ready',wav:buffer,duration:selected.duration,sha256:selected.sha256,variants,
+     ...(address?{address}:{}),
      generationMs:performance.now()-started,profileId:manifest.profileId,
-     referenceSha256:manifest.referenceSha256},variants.map(part=>part.wav));
+     referenceSha256:manifest.referenceSha256},[...variants.map(part=>part.wav),...(address?[addressWav]:[])]);
  }catch{
   self.postMessage({id,text,status:'failed',reason:'synthesis'});
  }

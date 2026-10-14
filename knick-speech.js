@@ -38,7 +38,7 @@ function start(){
  try{
   const freshWorker=!worker;
   if(!worker){
-   worker=new Worker(new URL('knick-speech-worker.js?v=20261013-local-name'+(police?'&voice=kriminalpolizei':''),base));
+   worker=new Worker(new URL('knick-speech-worker.js?v=20261014-player-address'+(police?'&voice=kriminalpolizei':''),base));
    const instance=worker;
    worker.onmessage=event=>{
     const result=event.data,job=current;
@@ -71,7 +71,16 @@ function start(){
      }
     }
     const selected=variants.find(part=>part.text===job.text);
-    finish({...result,...selected,variants,english:job.english,
+    const {address,...receipt}=result;let preparedAddress=null;
+    if(police&&address!==undefined){
+     if(address?.text!==job.name||!(address.wav instanceof ArrayBuffer)||address.wav.byteLength<44||address.wav.byteLength>2*1024*1024||
+        !Number.isFinite(address.duration)||address.duration<=0||address.duration>20||!/^[a-f0-9]{64}$/.test(address.sha256)){
+      finish({status:'failed',reason:'address'});return;
+     }
+     preparedAddress={status:'ready',text:job.name,english:job.name,profileId:result.profileId,referenceSha256:result.referenceSha256,
+      duration:address.duration,sha256:address.sha256,blob:new Blob([address.wav],{type:'audio/wav'})};
+    }
+    finish({...receipt,...selected,variants,...(preparedAddress?{address:preparedAddress}:{}),english:job.english,
       blob:selected?.blob||new Blob([result.wav],{type:'audio/wav'}),wav:undefined});
    };
    worker.onerror=()=>{if(worker!==instance)return;stopWorker();finish({status:'failed',reason:'worker'})};

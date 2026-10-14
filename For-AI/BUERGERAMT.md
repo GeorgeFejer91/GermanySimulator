@@ -1120,6 +1120,23 @@ For admission/call changes, use `gameplay-validation` and meaningful state prope
 
 ## Episode boundary and clock ownership
 
+When the officer turns back to the player for the final report instruction, a
+ready brief name recording precedes the unchanged full demand. Desktop captions
+include the accepted name only when that personalized media actually starts;
+the fixed-recording fallback retains its exact original text. The [voice
+protocol](./VOICE-SYNTH-PROTOCOL.md#browser-local-kripo-greeting-names-2026-10-13)
+owns name preparation, profile binding and the five-second prefix admission.
+
+Natural call ending and player Hang Up retain the smartphone call screen with
+`Anruf beendet` or `Call ended`, its caller and smartphone chrome, while controls
+and the elapsed timer stop. The native clunk/425 Hz tone completion hides that
+screen and restores the Anmeldung website before emitting the current-call
+`call-ended` receipt. Missing audio keeps the ending label for 1.86 seconds;
+stalled audio retains the four-second bound. Retirement, hiding, disconnect and
+replay clear the exact ending; a later call cannot replace it mid-tone. Existing
+Pretext measurement fits the status label; only the final status is announced
+politely to assistive technology, without announcing the elapsed clock each second.
+
 All building handoffs obey [LEVEL-TRANSITIONS.md](./LEVEL-TRANSITIONS.md). Entry activation waits for the surroundings-first/building-last vortex. A punitive dismissal freezes this visit and invalidates its asynchronous callbacks before the camera pull; its city cancellation commits once at the portal boundary. Voluntary Leave/E and successful completion return immediately. The city remains gated through forced exterior reconstruction.
 
 The city owns mission progress, A38, its main update loop and entry/exit callbacks. The episode owns its queue, movement, dialogue and attempt/cue cancellation; the existing renderer projects that state. Office-detail collision footprints become active only after their visible assembly attaches. Phone messages remain bounded and ordered under the existing host-authoritative protocol. Shared CSS and renderer changes have one assigned writer.

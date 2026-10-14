@@ -51,7 +51,7 @@ test('the full recorded opening starts in Answer and static spans recordings and
  opening.end();assert.equal(receipts(h,'police-done').length,1);assert.equal(noise.stopped.length,0);
  h.tick(5000);assert.equal(noise.stopped.length,0);h.links[0].message({type:'police-line',index:0,line:h.window.BuergeramtStory.police[0]});h.tick(20);
  assert.equal(h.synth.spoken.length,0);assert.equal(staticNoise(h),noise);assert.equal(h.audio.nodes.filter(n=>n.kind==='buffer-source'&&n.loop).length,1);
- h.links[0].message(endRequest);assert(noise.stopped.length);assert.equal(h.synth.current,null);assert.equal(h.node('phone-call').hidden,true);
+ h.links[0].message(endRequest);assert(noise.stopped.length);assert.equal(h.synth.current,null);assert.equal(h.node('phone-call').hidden,false);assert.equal(h.node('phone-call-state').textContent,'Anruf beendet');
 });
 
 test('the backup uses the catalogue full identity and question rather than the cropped body',()=>{
@@ -67,9 +67,18 @@ test('correct call-end owns clunk and 425 Hz line tone, and emits one sound rece
  const h=phoneCall(),link=h.links[0];link.message({...endRequest,round:2});link.message({...endRequest,id:'other'});assert.equal(endingTone(h),undefined);assert.equal(h.node('phone-call').hidden,false);
  link.message(endRequest);const tone=endingTone(h),nodeCount=h.audio.nodes.length;
  assert(tone);assert.equal(tone.started[0],.22);assert.equal(tone.stopped[0],1.86);assert.equal(receipts(h,'call-ended').length,0);
+ assert.equal(h.node('phone-call').hidden,false);assert.equal(h.node('phone-call-state').textContent,'Anruf beendet');assert.equal(h.node('phone-active-controls').hidden,true);
  const clunk=h.audio.nodes.find(n=>n.kind==='buffer-source'&&!n.loop);assert.equal(clunk.buffer.length,5760);assert.equal(clunk.started[0],0);assert.equal(clunk.stopped[0],.12);
- link.message(endRequest);assert.equal(h.audio.nodes.length,nodeCount);h.tick(1859);h.audio.flushEnded();assert.equal(receipts(h,'call-ended').length,0);
+ link.message(endRequest);assert.equal(h.audio.nodes.length,nodeCount);h.tick(1859);h.audio.flushEnded();assert.equal(receipts(h,'call-ended').length,0);assert.equal(h.node('phone-call').hidden,false);assert.equal(h.node('phone-call-state').textContent,'Anruf beendet');
  h.tick(1);h.audio.flushEnded();assert.deepEqual(receipts(h,'call-ended'),[{type:'call-ended',id:'grass',round:1,mode:'sound'}]);h.tick(10000);h.audio.flushEnded();assert.equal(receipts(h,'call-ended').length,1);
+ assert.equal(h.node('phone-call').hidden,true);assert.equal(h.document.body.classList.contains('amt-phone-in-call'),false);
+});
+
+test('the English ending label stays visible and a new call cannot replace the ending',()=>{
+ const h=phoneCall({phoneLanguage:'en-US'}),link=h.links[0];link.message(endRequest);
+ assert.equal(h.node('phone-call-state').textContent,'Call ended');const count=receipts(h,'call-ready').length;
+ link.message({type:'call-arm',id:'grass',round:2});assert.equal(receipts(h,'call-ready').length,count);assert.equal(h.node('phone-call-state').textContent,'Call ended');
+ h.tick(1860);h.audio.flushEnded();assert.equal(h.node('phone-call').hidden,true);
 });
 
 test('phone ending has a four-second fallback if its audio completion disappears',()=>{
@@ -78,7 +87,7 @@ test('phone ending has a four-second fallback if its audio completion disappears
 });
 
 test('unavailable audio reports an ending fallback without inventing a sound completion',()=>{
- const h=phoneCall({fakeAudio:false});h.links[0].message(endRequest);assert.deepEqual(receipts(h,'call-ended'),[{type:'call-ended',id:'grass',round:1,mode:'fallback'}]);h.tick(6000);assert.equal(receipts(h,'call-ended').length,1);
+ const h=phoneCall({fakeAudio:false});h.links[0].message(endRequest);assert.equal(h.node('phone-call').hidden,false);assert.equal(h.node('phone-call-state').textContent,'Anruf beendet');h.tick(1859);assert.equal(receipts(h,'call-ended').length,0);h.tick(1);assert.deepEqual(receipts(h,'call-ended'),[{type:'call-ended',id:'grass',round:1,mode:'fallback'}]);assert.equal(h.node('phone-call').hidden,true);h.tick(6000);assert.equal(receipts(h,'call-ended').length,1);
 });
 
 for(const interruption of ['hidden','pagehide','forfeit','done','disconnect'])test(`${interruption} during phone ending disposes sources and rejects late completion`,()=>{
