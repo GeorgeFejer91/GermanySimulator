@@ -288,11 +288,19 @@ front reaches the ground before it can feed the floor. The existing floor pass
 samples the same viscous runs at their ground contact, so the painting's pigment
 begins mixing sooner without depositing before the visible paint arrives. The pass
 injects the same image colors at that contact, then transports and diffuses them
-with the black/white oils and walking wakes. RGBA stores mixed RGB plus deposited
-paint coverage. The gilded frame, nameplate, original photo, collision envelope
+with the black/white oils and walking wakes. Deposited paint has a stronger
+floorward flow and contact feed so its brown, red and ochre pigment spreads
+visibly into the room. Surface composition retains the already diluted RGB
+chroma once, with stronger color contrast so it remains visible while the floor
+oils fold around it. RGBA stores mixed RGB plus
+deposited paint coverage. The gilded frame, nameplate, original photo, collision
+envelope
 and optional ICH monologue retain their existing ownership. No picture speaks.
 Missing portrait paint keeps the labeled fallback intact without fictional
 colored spill; reduced motion uses a static spatial melt/spill approximation.
+That approximation widens the contact-fed swirls with melt and retains their
+deposited color after the framed image finishes draining, without animated
+feedback or another clock.
 Close/replay restores the picture and clears the paint field; the shared source
 texture remains in the existing office asset cache. Do not create a second
 portrait clock, floor decal disconnected from deposition, or particle timer.

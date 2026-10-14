@@ -468,3 +468,73 @@ profiles and restored90s frames. Unequal eye/cheek sag and longer mouth/chin
 droop are visible; no wall-face repetition, panel seam or depth defect found.
 Its fresh portrait checks pass3/3. Broader city/scale/gait rows are NOT RUN for
 this texture-only change. Neither reviewer writes or publishes source.
+
+# Portrait pigment mixing — 2026-10-14
+
+Integrator-owned on published `eb22354`, clean scoped source diff, using the
+healthy isolated checkout. Scope: existing floor pigment advection, deposition
+and color composition; source/cache URLs and existing GPU fixture plus owning
+episode guidance. Make the portrait paint visibly spread and mix into the
+black/white oils after actual wall contact, with retained color and shared wakes.
+Preserve drooping face, liquid runoff/contact timing, one residence/motion clock,
+20 Hz/two-pass budget, existing targets, restoration, missing art, static reduced
+motion and fallback. No assets, particles, new passes or dependencies. Actual
+transported RGB/coverage and floor screenshots must show colored mixed paint
+away from the narrow wall strip, with an old-source negative control. Independent
+Physics/Camera review binds the final candidate; unrelated city/gait scope is
+NOT RUN. Publish after affected checks and live root/direct entry verification.
+
+The reproduced defect is weak advection from the wall strip plus a second
+coverage multiplication on already mixed RGB chroma. Floor-only paint flow and
+contact feed now carry pigment into the existing oils; surface composition keeps
+its chroma once with stronger artistic color contrast. Static fallback spreads
+the same contact-fed pigment and keeps
+its sampled deposition phase after the picture drains. No portrait shader or
+clock change. Frozen floor SHA-256 `8cc0c0cd`, world `2292f477`, portrait remains
+`1961e992`. Six GPU profiles and five counter-recovery profiles pass with matching
+hashes and no errors. At240s, actual colored area past .3m from the wall is
+.354m² desktop and .419m² Android portrait/landscape; old source fails the new
+oracle at .018m². Partial-coverage colored pixels prove mixing into the existing
+RGB field, with .361m² desktop/.462m² mobile in the .25–.75m band. Pre-contact
+105/120s and missing-art frames have zero deposited pigment. Reduced/fallback
+remain target-free and retain static colored swirls after full portrait drain.
+The existing face-droop, interior erosion, wall-run and complete drainage checks
+remain enabled. Counter restoration clears the field and returns the picture.
+Independent Physics review passes scoped contact/clock/depth/ownership with fresh
+syntax and14/14 Node checks, separately inspecting the supplied GPU reports.
+Accelerated camera/age fixtures are not natural mission-play evidence; physical
+Android and listening remain NOT RUN.
+
+Camera review rejected the first color composition as too gray on mobile even
+though raw RGB transport passed. Final acceptance also renders the actual floor
+geometry/material and real lights against the same transported scalar field
+with paint chroma/coverage withheld. More than24 output-code differential chroma
+must cover .10m² beyond .3m from the wall at240/570s; missing art must measure0.
+The rejected source fails at .00073m² at240s. Final rendered area is .328m²
+desktop/.323m² mobile at240s and .816/.502m² at570s. Follow views show the late
+red-brown bands farther into the room, after they move away from the empty
+frame. The camera fixture and neutral field are test-only, with all borrowed
+uniforms/targets restored and diagnostic textures disposed. A too-weak first
+pixel probe counted lamp color; the withheld-paint comparison removes that
+confound. Interrupted/pre-final runs are preserved separately from release
+evidence in ignored `output/floor-paint-mix/`.
+
+Final local Pages selection passes664/664, voice curation and six exact-RGBA
+delivery checks. Six baseline and six candidate active-office runs, followed
+sequentially by six root cold runs, pass existing guards with nine accepted
+inputs per run and no page errors (Chrome155/Intel Iris Xe, DPR2, seeds4781–4783,
+local HTTP, no throttle). Maximum root startup transfer is17,959,797 bytes.
+Office input-p95 median/range is6.9/6.7–46.9ms desktop and32.2/6.2–58.1ms
+Android emulation; baseline57.6/10.5–147.5ms and6.6/6.6–7.5ms respectively.
+These variable application-response/sync observations do not establish GPU or
+display timing or a speed improvement. Office benchmarks seed age150 before
+real controls; they do not pre-evolve the full pigment field. The complete
+time-series GPU fixture establishes the mature color behavior separately.
+Renderer counters can reflect a final private floor pass rather than total
+scene work. No runtime changes follow the frozen source checks.
+
+Final independent Camera review passes affected C4/X1 on the frozen source,
+including final desktop/mobile240/370s contact plumes and570s downstream
+red-brown marbling, fallback/missing-art and restoration frames. This resolves
+its earlier gray-color finding. Both specialists pass the same8CC0 floor;
+broader city/scale/gait and physical-device scope remain NOT RUN.
