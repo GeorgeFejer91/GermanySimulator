@@ -1,7 +1,7 @@
 // Persistent pigment transport, not a pressure/velocity solver. The flat floor
 // stays solid; only its paint and shallow specular ridges melt.
 import './buergeramt-goop.js?v=20261013-goop-grace';
-import {portraitPaintGlsl} from './buergeramt-portrait-melt.js?v=20261014-paint-goops1';
+import {portraitPaintGlsl} from './buergeramt-portrait-melt.js?v=20261014-paint-pearls1';
 const STEP=1/20;
 export function amtFloorMelt(time){return globalThis.BuergeramtGoop.goop(time);}
 const coordinates=`
@@ -56,7 +56,7 @@ const transport=`
     pigment.rgb+=.05*.18*melt*pigment.rgb*(1.-pigment.rgb)*(2.*pigment.rgb-1.)*(1.-pigment.a);
     vec4 spill=amtPaintSpill(p,melt,clock);
     float atWall=1.-smoothstep(.035,.13,abs(p.y-amtPortraitInfo.y));
-    float feed=.05*3.*spill.a*atWall;
+    float feed=.05*12.*spill.a*atWall;
     pigment.rgb=mix(pigment.rgb,spill.rgb,feed);pigment.a=mix(pigment.a,1.,feed);
     pigment=clamp(pigment,0.,1.);
     gl_FragColor=pigment;
@@ -131,7 +131,7 @@ export function createAmtFloor({THREE:T,renderer,material,mobile=false}){
       stillPaintPoint.x+=amtFloorMelt*.22*sin(paintTravel*7.)*smoothstep(0.,.25,paintTravel);
       stillPaintPoint.y=amtPortraitInfo.y-(amtPortraitInfo.y-amtFloorPoint.y)/(1.+2.*amtFloorMelt);
       vec4 floorColor=amtFloorLive>.5?texture2D(amtFloorOil,(amtFloorPoint-floorMin)/floorSize)
-        :amtPaintSpill(stillPaintPoint,min(amtFloorMelt,.35),amtFloorTime);
+        :amtPaintSpill(stillPaintPoint,min(amtFloorMelt,.35),0.);
       float paintCoverage=clamp(floorColor.a*1.5,0.,1.);
       vec3 carriedPaint=vec3(.012)+floorColor.rgb*.72;
       vec3 paintChroma=carriedPaint-vec3(dot(carriedPaint,vec3(.2126,.7152,.0722)));

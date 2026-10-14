@@ -13,28 +13,36 @@ export const portraitPaintGlsl=`
     vec4 corners=fract(sin(vec4(dot(cell,vec2(127.1,311.7)),dot(cell+vec2(1.,0.),vec2(127.1,311.7)),dot(cell+vec2(0.,1.),vec2(127.1,311.7)),dot(cell+vec2(1.),vec2(127.1,311.7))))*43758.5453);
     return mix(mix(corners.x,corners.y,f.x),mix(corners.z,corners.w,f.x),f.y);
   }
-  float amtPaintRunoff(vec2 point,float melted,float clock){
-    float coverage=0.;
-    for(int i=0;i<4;i++){
+  vec4 amtPaintBeads(vec2 point,float melted,float clock){
+    vec4 bead=vec4(0.);
+    for(int i=0;i<8;i++){
       float seed=fract(sin(float(i)*41.7+3.2)*43758.5453);
-      float center=(i==0?.10:i==1?.33:i==2?.52:.88)+.015*sin(point.y*7.-clock*.18+seed*6.);
-      float reach=melted*(2.2+.55*seed+(i==2?.65:0.)),head=reach-.12;
-      float surge=pow(.5+.5*cos(point.y*11.-clock*.65+seed*6.),4.);
-      float neck=.04+.025*seed+.055*surge+.05*(1.-smoothstep(0.,.2,point.y));
-      float stem=length(vec2((point.x-center)/neck,max(0.,point.y-head+.06)/.12))-1.;
-      float bulb=length(vec2((point.x-center)/(.085+.04*seed),(point.y-head)/.12))-1.;
-      float join=clamp(.5+.5*(bulb-stem)/.45,0.,1.);
-      float contour=mix(bulb,stem,join)-.45*join*(1.-join);
-      coverage=max(coverage,1.-smoothstep(-.035,.035,contour));
+      float phase=fract(clock*.15+(float(i)+.7)/8.+.025*sin(clock*.07+seed*6.));
+      float fall=max(0.,(phase-.60)/.40),growth=smoothstep(0.,.18,phase);
+      float head=mix(.12+.50*seed,1.,smoothstep(.20,.50,phase))+min(1.15,melted*3.4)*fall*fall;
+      float center=(float(i)+.5)/8.+.025*sin(head*5.+seed*9.);
+      float radius=(.038+.022*seed)*sqrt(melted)*growth;
+      float impact=smoothstep(1.76,1.92,head);
+      vec2 extent=vec2(radius*(1.+.7*impact),radius*.75*(1.+fall)*(1.-.65*impact));
+      vec2 q=(point-vec2(center,min(1.80,head)))/max(vec2(.001),extent);
+      q.x/=1.+.20*clamp(q.y,-1.,1.);
+      float roundness=dot(q,q),height=sqrt(max(0.,1.-roundness));
+      float mask=1.-smoothstep(.90,1.06,roundness);
+      // Adhesion holds a short neck at the lip; it pinches off as the bead falls.
+      float neck=.014*sqrt(melted)*(1.-smoothstep(.63,.76,phase));
+      float thread=(1.-smoothstep(neck*.6,neck+.001,abs(point.x-center)))*step(1.,point.y)*(1.-step(head,point.y))*step(.50,phase)*(1.-step(.76,phase));
+      mask=max(mask,thread);
+      if(height>bead.z)bead.xyz=vec3(q*height,height);
+      bead.a=max(bead.a,mask);
     }
-    return coverage*smoothstep(0.,.08,melted);
+    bead.a*=smoothstep(0.,.08,melted);return bead;
   }
   vec4 amtPaintLiquid(vec2 point,float goop,float clock){
     float melted=amtPortraitPaintMelt(goop),u=point.x,down=point.y;
     float below=max(0.,down-1.),wall=smoothstep(.985,1.025,down);
     float bend=melted*(.055*sin(down*7.-clock*.24)+.025*sin(down*17.-clock*.39+u*9.));
     float flow=.28+.72*amtPaintNoise(vec2((u+bend)*8.5,2.4));
-    float draining=amtPaintRunoff(vec2(u,below),melted,clock);
+    vec4 bead=amtPaintBeads(point,melted,clock);
     float sourceDown=down-melted*flow*(.10+.65*down*down)*smoothstep(0.,.12,down);
     // Feed the wall with lower suit/tie/flag pigment, keeping facial features
     // inside the frame even after the inexhaustible flow reaches full melt.
@@ -48,14 +56,17 @@ export const portraitPaintGlsl=`
     sourceDown=mix(sourceDown,.08+(sourceDown-.08)/(1.+sag),head);
     sourceU=mix(sourceU,.51+(sourceU-.51)/(1.+.18*sag*smoothstep(.28,.55,down)),head);
     vec2 ripple=sin(amtPaintRipples(point,clock))*melted*.012;
-    sourceU+=ripple.x;sourceDown+=ripple.y;
+    sourceU+=ripple.x+bead.x*.018;sourceDown+=ripple.y+bead.y*.012;
     float edges=mix(smoothstep(-.008,.008,u)*(1.-smoothstep(.992,1.008,u)),1.,wall);
     vec3 paint=texture2D(amtPortraitPaint,clamp(vec2(sourceU,1.-sourceDown),vec2(.001),vec2(.999))).rgb;
-    float smearDown=mix(sourceDown-melted*.15,max(.62,sourceDown-melted*.45),wall);
-    vec3 smear=texture2D(amtPortraitPaint,clamp(vec2(sourceU+.035*melted,1.-smearDown),vec2(.001),vec2(.999))).rgb;
-    paint=mix(paint,smear,melted*(.2+.5*wall));
+    float smearDown=mix(sourceDown-melted*.15,.62+.04*flow,wall);
+    float pigmentU=mix(.56+.06*sin(u*15.),.95,smoothstep(.45,.75,u));
+    vec3 smear=texture2D(amtPortraitPaint,clamp(vec2(mix(sourceU+.035*melted,pigmentU,wall),1.-smearDown),vec2(.001),vec2(.999))).rgb;
+    paint=mix(paint,smear,mix(melted*.2,.7,wall));
     paint*=1.-.12*melted*flow;
-    return vec4(paint,edges*mix(1.,draining,wall)*smoothstep(-.01,.005,down));
+    // A local pigment-colored dome, never a white stripe or reflection layer.
+    paint*=mix(1.,.60+.38*bead.z-.25*bead.x-.18*bead.y,bead.a);
+    return vec4(paint,edges*mix(1.,bead.a,wall)*smoothstep(-.01,.005,down));
   }
   vec4 amtPaintFilm(vec2 uv,float goop,float clock){
     vec4 film=amtPaintLiquid(vec2(uv.x,1.+(uv.y*1.56-.01)/1.94),goop,clock);
@@ -86,7 +97,7 @@ export function createAmtPortraitMelt({THREE:T,material,frame,floor,position,wid
       diffuseColor.a*=film.a;
     `);
   };
-  dripMaterial.customProgramCacheKey=()=>':amt-portrait-drips-v8';
+  dripMaterial.customProgramCacheKey=()=>':amt-portrait-drips-v9';
   // One unbroken paint surface spans the image and wall: separate panels leave
   // a visible cut in a moving face. Extra width lets its liquid edges meander.
   // Static curvature, 24 triangles; it settles onto the inner wall at z=5.47.

@@ -833,3 +833,54 @@ review; prior six/five rendered evidence is reused explicitly. Six fresh merged
 cold-root checks pass, with nine accepted inputs and no errors each and maximum
 17,999,780 bytes. Incoming audio behavior remains owned by its accepted release;
 this integration adds no new audio implementation or listening claim.
+
+## 2026-10-14 — Sweat-like paint pearls (in progress)
+
+Integrator-owned follow-up on f8ecc5ea4b9915668c6292557f6420d36e7c38b4.
+User requests researched human-sweat motion: rounded paint beads gather, cling,
+slide and detach, with inexhaustible portrait supply and continued face sag/floor
+mixing. Scope: portrait shader and floor contact feed; version-only world/entry edits; existing
+GPU fixture and owning episode/session documentation. No new assets, timers,
+physics library or render targets. Existing shared clock, reduced-motion and
+texture lifetime remain authoritative. Research: Tisserand et al., IVA2020
+(https://archive-ouverte.unige.ch/unige:153738) uses gravity/friction-driven sweat
+droplets and local smoothness; SideFX's Drip Fluid and MPM surface-tension guides
+explain rounded drops, adhesion and release. Adaptation is analytic animation,
+not a fluid simulation. Independent Physics and Camera reviews plus silent
+rendered desktop/Android-emulation and existing performance gates remain required.
+
+Initial GPU checks rejected insufficient floor color and the empty reduced-motion
+contact pose. The final candidate samples real lower tie/flag pigment, raises
+the bounded contact impulse to .6 per20Hz step, and retains a static impact
+pose for no-feedback floor fallback. Desktop/portrait/landscape and fallback
+passed before the static-phase correction; fresh corrected fallback and reduced
+motion pass. Final full-profile/recovery and repeated performance evidence follow.
+
+Final v2 acceptance: six production GPU profiles and five recovery profiles PASS,
+with no page/console errors and matching frozen runtime hashes. Each32-frame
+bead probe finds32 detached-bead frames,36 downward centroid matches and25
+contact frames. The former continuous-ribbon shader fails that new oracle.
+The full image stays populated at570/900s, white-wave probe remains clean, and
+lower-image pigment never repeats facial features below the frame. Live paint
+is absent at105/120s, present at150s, and absent for missing art. Rendered color
+beyond0.3m at240/570s is0.598/1.332m² desktop,0.327/0.761m² Android emulation,
+and approximately0.242/0.483m² static/reduced. Recovery restores the original
+picture and releases both transport targets. Final focused23 tests PASS;
+Pages-selected721 tests, voice curator and six exact-RGBA delivery checks PASS.
+Independent Physics and Camera reviews PASS the affected P1/contact and C4/X1
+scope, with fresh42/28 state checks and independently inspected supplied images.
+
+Final performance evidence uses six before/six after active-office runs and six
+cold-root runs, all passing transfer/input/cadence/buffer/error gates. Initial
+experimental office timings were discarded: the forced pose could precede
+controller activation and be reset by entry. The ignored wrapper now waits for
+active office, disables optional cinematics consistently, then seeds age150;
+final candidate clock observations remain157–158s with paint progress~0.389.
+Chrome155/Intel Iris Xe, DPR2, seeds4781–4783, local HTTP, no CPU throttling.
+Office input-p95 median/range is6.3/5.7–9.2→5.9/5.0–6.7ms desktop and
+5.4/4.5–6.8→5.5/5.0–6.6ms mobile emulation. Sync-dispatch p95 medians remain
+about7.2ms; these are not GPU timings or proof of speedup. All runs accept nine
+controls without errors. Root maximum transfer17,996,847 bytes stays below18MB.
+No production change resulted from the benchmark correction. Physical Android,
+natural mission traversal and perceptual listening remain NOT RUN. Evidence is
+in ignored output/sweat-pearls; runtime source remains the reviewed v2 candidate.
