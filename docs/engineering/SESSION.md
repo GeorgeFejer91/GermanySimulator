@@ -1,11 +1,16 @@
 # Combined neighborhood and indoor release — 2026-10-14
 
-This candidate combines published `ee3606f` with snapshot `e09837b`. One
+This candidate combines published `29643c5` with snapshot `e09837b`. One
 integrator owns review, commit, push and deployment verification. It preserves
 published connected-mouth, browser-local name, Jobcenter rumble/tunnel/pinch,
 portrait/floor, phone and direct-entry behavior. WASD and arrow keys retain
 movement parity in both interiors; Page Up/Down and mouse/trackpad control view.
-Final public-entry touch completion and the six-context R10 release benchmark pass.
+Final public-entry touch completion and the six-context R12 release benchmark pass.
+R12 preserves the newer published phone-interruption and portrait-pigment fixes;
+175 phone/transition and 28 portrait/floor checks pass after integration. The
+neighborhood routes, script, HUD and atlases remain byte-identical to R10;
+`world3d.js` changes only the two upstream interior import version tokens.
+Independent Physics/Camera delta reviews bind that inherited evidence separately.
 
 Meet the Neighbors adds twelve authored tours, thirty-one stops and sixty-four
 utterances, with four-direction walks, stop-specific gestures, painted chores and
@@ -49,7 +54,7 @@ An earlier Inga failure was a test-planner omission of ordinary pedestrians; the
 driver now checks the full production blocker query. Final evidence is
 `browser/integrated-direct-landscape-final3/report.json`. Repeat coverage retains
 the earlier stated scope. Evidence remains under ignored `output/neighborhood-tours/`
-and `output/neighbors/`; `candidate-final.json` binds the 36 reviewed source files.
+and `output/neighbors/`; R12 `candidate-final.json` binds 42 reviewed source files.
 
 All building interiors now use one door/vortex owner for entry, current-view
 forced ejection with its fiery variant, and immediate voluntary return. Ordinary office dialogue
@@ -68,14 +73,16 @@ hidden/resume/BFCache and injected-capture-failure receipts retain their stated
 scope. Evidence is under ignored `output/level-transitions/`.
 
 The duplicate Google Grenze download was removed; bundled-font widths matched
-across five weights and German/English/umlaut samples. The R10 six-context root
+across five weights and German/English/umlaut samples. The R12 six-context root
 benchmark passes the existing 18 MB/title/input/buffer/deferred-resource guards:
-17,996,946 bytes desktop and 17,631,855 emulation, with nine inputs accepted in
-every run and zero errors. Chrome 155 / Intel Iris Xe, local uncompressed HTTP,
+desktop startup median/range 17,996,146 / 17,674,507–17,996,254 bytes, emulation
+17,631,055 / 16,985,909–17,631,055, with nine inputs accepted in every run and
+zero errors. Chrome 155 / Intel Iris Xe, local uncompressed HTTP,
 requested DPR 2, seed 91 and no throttling were used. No other Node test job was
-present at admission. Desktop active p95 median/range is 21.3/21.2–26.4 ms and
-input p95 22.8/17.9–24.9 ms; emulation is 21.6/21.3–21.8 and 20.9/19.7–33.6 ms.
-Evidence: `output/neighborhood-tours/bench-final/report.json`. These short lab
+present at admission. Desktop active p95 median/range is 21.9/21.4–31.5 ms and
+input p95 22.1/18.8–25.4 ms; emulation is 21.6/21.4–21.6 and 20.1/18.1–33.7 ms.
+Evidence: `output/neighborhood-tours/bench-integrated-r12/report.json`; the earlier
+R10 run remains in `bench-final/`. These short lab
 samples establish regression guards, not a speedup or physical-device timing.
 
 Physical Android and perceptual listening remain NOT RUN. After
@@ -720,4 +727,109 @@ before real controls; full pigment evolution is covered separately above.
 All seven frozen hashes remain unchanged after verification; only this evidence
 record was appended. Runtime assets and geometry counts are unchanged.
 
+# Continuous portrait drooling — 2026-10-14
+
+Integrator-owned on published ee3606f in the healthy isolated checkout; scoped
+source diff initially empty. Resolved Bürgeramt via original root's updated
+For-AI/LEVELS.md, levels/buergeramt/AGENTS.md and its For-AI/README.md; no level
+handoff. Existing global episode owner remains For-AI/BUERGERAMT.md. Scope:
+portrait shader, shared floor/world/entry cache URLs, existing Node/GPU checks,
+episode owner and this record. User now explicitly requires an inexhaustible
+painting: keep framed image populated, distort it progressively, continuously
+feed rounded downward goops into the existing oils, and remove white wavy
+reflections. This supersedes prior full-drain/bare-backing and view-glint goals;
+replace only those obsolete assertions with nonempty/continuous-flow/no-glint
+checks. Preserve face droop, early E onset, shared clocks/2.2 progress, contact
+before floor deposit, missing art, reduced motion, restoration, depth and geometry.
+No extra assets, targets, timers, passes or particles. Shape connected rounded
+bulbs and traveling thickening in the existing paint mask. Required independent
+Physics/Camera C4/X1 review; unrelated city/scale/gait outside scope. Use silent
+existing browser matrix, scoped causal checks and release/benchmark gates.
+
+Implemented continuous coverage over the original picture, four smooth joined
+neck/bulb contours and downward traveling width/pigment pulses. Removed the
+added reflection lighting and the full-drain/bare-backing path. No new assets,
+geometry, targets, passes or timer. Lower suit/tie/flag samples feed runoff;
+source chroma is retained in both live floor transport and static fallback.
+The latest frozen eight-file candidate is output/paint-goops/freeze.json;
+portrait SHA-256 68a679a6f6bcb9665d9e9481625f0960cc5f79ff0560fd9101cef2bd38f5c960,
+floor a9a9cc23d693701d83d32edb0c8b314df0f308630525460570318f68c310b08d.
+
+Review caught a repeated eye below the frame at late full melt: bounded wall-only
+source sampling fixes it while preserving in-frame face droop. A labeled-source
+GPU check now samples twelve progress/clock pairs, requiring substantial lower
+pigment and zero upper-face pigment in runoff. Earlier broad-remap attempts
+weakened early pigment and were rejected; preserving early samples with lower
+bounds fixed that. Narrower streams also exposed weak fallback source color;
+the floor retains actual source hue more visibly without adding fictional paint.
+Failed candidates remain in output/paint-goops; no acceptance threshold lowered.
+
+Causal contract: existing showPresidentPortrait owns the early-E floor-clock
+advance, idempotent within a visit. Shared goop(time) gives paint min(1,2.2*goop)
+and integrated visualTime advances the same portrait and floor flow. Removing
+the supply fade keeps both framed paint and contact feed after the cap; the
+clock still moves downward pulses. Floor deposition samples actual ground
+contact and remains absent before contact or without ready portrait art.
+Reduced motion freezes the flow clock and uses the static floor approximation;
+hidden pages, recovery, close, replay and texture ownership remain unchanged.
+Executed focused production state tests and forced GPU fixtures are the evidence;
+natural mission traversal, physical Android and perceptual listening are NOT RUN.
+Full Pages-selected Node release passed 687/687, curator passed, and all six
+Pillow delivery checks passed before the final wall-color refinement; focused
+production checks are repeated on the final candidate. No configured additional
+engineering-quality limit file/script is present.
+
+Final frozen GPU evidence: output/paint-goops/shipping completes six profiles
+(desktop, Android portrait/landscape emulation, procedural fallback, reduced
+motion, missing portrait), and shipping-recovery completes five recovery
+profiles, all without console/page errors. Final focused Node checks pass23/23.
+All eight frozen hashes and report runtime hashes match. Neutral paint changes
+0% with view and peaks at16 raw output codes, so no extra white overlay remains.
+At capped progress the runoff retains55.5% coverage,48.3% bottom-band coverage;
+11.35% of pixels change over1.2 clock seconds with downward best shift13px.
+The framed picture remains populated at570 and900 seconds. All12 labeled-source
+samples contain zero upper-image pixels in the wall streams. Negative old-shader
+controls fail no-glint/nonempty checks; removing only the lower-pigment bounds
+fails the new runoff-source check with7,076 upper-image pixels.
+
+Rendered floor-color sidecars compare the actual floor with the same field
+without paint. Colored area beyond0.3m at240/570 seconds is0.278/2.668m² desktop,
+0.152/1.083m² mobile portrait,0.111/0.430m² procedural fallback and0.195/0.631m²
+reduced motion; missing portrait remains exactly zero. These are accelerated
+production shader/transport fixtures, not natural mission or device evidence.
+
+Independent read-only Physics and Camera reviews PASS the final frozen candidate.
+Both verified all eight hashes and inspected final supplied six-profile/five-
+recovery evidence. Physics ran23 focused tests and checked shared clocks,
+contact, body separation, depth and resources; Camera ran14 focused checks and
+inspected120/240/570/900-second views, fallback, missing art and restoration.
+They carried those fresh state checks over the final fallback-color-only change,
+which received source/rendered review; the integrator separately repeated23.
+Camera's repeated-eye finding is resolved. C4/X1 and the projecting-frame P1
+subset are covered; unrelated city routes/gait/scale/fades remain outside scope.
+Reviewers did not run concurrent browser/performance workloads.
+
+Sequential six-run baseline/candidate active-office comparisons and six cold
+root runs pass existing transfer, input, startup-cadence, buffer and error gates.
+Chrome155/Intel Iris Xe, DPR2, seeds4781–4783, local HTTP, no CPU throttling.
+Office input-p95 median/range: before6.1/5.8–6.5ms desktop and23.8/5.7–32ms mobile;
+after5.6/4.6–6.3ms desktop and19.8/5.6–45.9ms mobile. Sync-start p95 medians are
+7.2→7.4ms desktop and8.3→7.2ms mobile. Each run accepted nine controls with no
+errors. Root maximum transfer17,999,419 bytes remains within18MB. These varying
+application measurements do not establish a speedup, GPU timing or physical-phone
+frame delivery. Benchmarks seed office age150 before real controls; full paint
+evolution is measured separately. Candidate benchmark/runtime hashes and all
+eight frozen hashes still match; only this evidence record changed afterward.
+
 2026-10-14 Kripo/Knick interruption overlap: showOutburst requests the clerk one second before the existing phone cutoff and releases the outgoing clerk at mapped incoming onset plus one wall-clock second. Original recordings, full opening/final demand, call ending, exact captions and attempt cleanup remain authoritative. Both directions, delayed UTC onset, natural short endings and replay cancellation pass deterministic checks; native recordings pass muted paired-context desktop and Android portrait emulation (simulated signaling), measuring 0.86–0.96 s police overlap and approximately 1 s clerk overlap on the final latest-main candidate. All 169 focused release checks pass, including the preserved compact greeting and opening-backup path. Mutation rejects the original immediate cutoff; voice library check passes. Physics/Camera omitted for speech scheduling only. Physical devices and perceptual listening NOT RUN. This scoped release preserves other active unfinished work in the shared checkout.
+
+Publication integration: paint commit51d4af2 raced incoming8f584e2 and its first
+push was rejected. Merged the incoming phone-overlap update, preserving both
+append-only session records and both independent entry cache versions. No paint,
+floor, renderer, geometry, test-fixture or asset bytes changed. Merged115 focused
+paint/session checks pass. Both independent reviewers verified all12 hashes in
+output/paint-goops/freeze-merged.json and rebound their scoped PASS after source
+review; prior six/five rendered evidence is reused explicitly. Six fresh merged
+cold-root checks pass, with nine accepted inputs and no errors each and maximum
+17,999,780 bytes. Incoming audio behavior remains owned by its accepted release;
+this integration adds no new audio implementation or listening claim.
