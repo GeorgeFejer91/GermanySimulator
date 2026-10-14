@@ -10,7 +10,7 @@ import {prepareWithSegments,measureNaturalWidth,measureLineStats} from './assets
 import {createJobcenterBuilding,createJobcenterEncounter} from './jobcenter.js?v=20261014-building-levels';
 import {createLevelDoor} from './level-transitions.js?v=20261014-building-levels';
 import {createBuildingLevels} from './building-levels.js?v=20261014-building-levels';
-import {createNeighborSprite} from './neighbor-sprites.js?v=20261014-neighbors-complete';
+import {createNeighborSprite} from './neighbor-sprites.js?v=20261014-neighbor-halo';
 const THREE_URL="./assets/vendor/three/0.186.0/build/three.module.min.js";
 const GLTF_LOADER_URL="./assets/vendor/three/0.186.0/examples/jsm/loaders/GLTFLoader.js";
 function buergeramtDoorRadiance(time,reducedMotion=false){
@@ -50,6 +50,15 @@ function showRendererFailure(error){
   M.road.map=streetTexture(false);M.road.userData.tileSize=2;
   M.walk.map=M.path.map=streetTexture(true);M.walk.userData.tileSize=M.path.userData.tileSize=1.6;
   const world=new T.Group();scene.add(world);
+  const neighborHalo=new T.Group();neighborHalo.name="Neighbor standing halo";neighborHalo.visible=false;world.add(neighborHalo);
+  for(const [inner,outer,color,opacity] of [[.48,.61,0xffcf33,.17],[.31,.39,0x151515,1],[.39,.47,0xe32b30,1],[.47,.55,0xffcf33,1]]){
+    const ring=new T.Mesh(new T.RingGeometry(inner,outer,48),new T.MeshBasicMaterial({color,transparent:true,opacity,depthWrite:false,side:T.DoubleSide}));ring.rotation.x=-Math.PI/2;neighborHalo.add(ring);
+  }
+  function syncNeighborHalo(){
+    const spot=bridge.getNeighborStandingSpot?.();neighborHalo.visible=!!spot;if(!spot)return;
+    neighborHalo.position.set(X(spot.x),.09+bridge.stationElevation(spot.x,spot.y),Z(spot.y));neighborHalo.userData.spot=spot;
+    neighborHalo.children[0].material.opacity=amtReducedMotion.matches?.22:.15+.09*(.5+.5*Math.sin(performance.now()*.003));
+  }
   const modelLoader=GLTFLoader?new GLTFLoader():null;
   const cityModelJobs=[],startupModelJobs=new Set();
   let cityModelActive=0,startupModelsCaptured=false,lastCityAdmission=-Infinity;
@@ -1225,94 +1234,28 @@ function showRendererFailure(error){
     const target=travel>.01?Math.sin(q.userData.walkPhase)*.38:0,s=q.userData.walkSwing=(q.userData.walkSwing||0)+(target-(q.userData.walkSwing||0))*(travel>.01?1:.28);q.userData.ll.rotation.x=s;q.userData.rl.rotation.x=-s;q.userData.la.rotation.x=-s*.7;q.userData.ra.rotation.x=s*.7
   }
   function jwdCharacter(n){
-    const q=character("npc"),role=n.jwdRole,coat=mat(role==="swabian"?0x6b5976:role==="parent"?0x4b3528:role==="watcher"?0x465363:0x363a40),cream=mat(0xd7ccaf),dark=mat(role==="parent"?0x39281f:0x35312f),accent=mat(role==="swabian"?0x9b6971:role==="parent"?0xb09a70:0x9a7752);
-    q.name=n.id;q.userData.jwdRole=role;q.userData.ownedMaterials=new Set([coat,cream,dark,accent]);
-    q.traverse(node=>{if(node.material===M.npc)node.material=coat});
+    const role=n.jwdRole;
+    if(role!=='burglar'){
+      const q=new T.Group();q.name=n.id;q.userData.jwdRole=role;
+      q.position.set(X(n.x),bridge.stationElevation(n.x,n.y),Z(n.y));
+      q.userData.neighborPaint=createNeighborSprite(T,n,q,queueCityAsset,camera);return q;
+    }
+    const q=character("npc"),coat=mat(0x363a40),cream=mat(0xd7ccaf),dark=mat(0x35312f),accent=mat(0x9a7752);
+    q.name=n.id;q.userData.ownedMaterials=new Set([coat,cream,dark,accent]);q.traverse(node=>{if(node.material===M.npc)node.material=coat});
     const piece=(name,w,h,d,material,x,y,z)=>{const mesh=box(w,h,d,material,x,y,z,q);mesh.name=name;return mesh};
     piece("Nose",.07,.10,.11,M.skin,0,1.3,.19);
     for(const side of [-1,1]){piece("Eye",.035,.035,.022,dark,side*.079,1.36,.18);piece("Shoe",.14,.09,.27,dark,side*.1,.045,.045)}
-    if(role==="swabian"){
-      const scarf=new T.Mesh(new T.SphereGeometry(.228,10,6,0,Math.PI*2,0,Math.PI*.58),accent);scarf.position.set(0,1.39,-.016);q.add(scarf);
-      piece("Headscarf knot",.19,.12,.17,accent,0,1.16,-.19);
-      piece("Apron",.4,.57,.045,cream,0,.69,.176);piece("Apron pocket",.19,.14,.027,accent,0,.6,.205);
-      piece("Broom handle",.032,1.43,.032,accent,.35,.79,.14).rotation.z=-.08;
-      piece("Broom bristles",.27,.19,.12,cream,.4,.16,.14);
-    }else if(role==="parent"){
-      const hair=new T.Mesh(new T.SphereGeometry(.232,10,7,0,Math.PI*2,0,Math.PI*.57),accent);hair.name="Shaggy sandy blond hair";hair.position.set(0,1.395,-.025);q.add(hair);
-      for(const side of [-1,1]){
-        const lock=new T.Mesh(new T.ConeGeometry(.083,.32,5),accent);lock.name="Shaggy side lock";lock.position.set(side*.19,1.32,-.016);lock.rotation.z=Math.PI+side*.14;q.add(lock);
-      }
-      for(let i=0;i<3;i++)piece("Side-swept fringe",.084,.21,.065,accent,-.13+i*.095,1.47+i*.016,.168).rotation.z=-.36;
-      const stubble=mat(0xb18d69),beard=new T.Mesh(new T.SphereGeometry(.204,10,5,0,Math.PI*2,Math.PI*.53,Math.PI*.4),stubble);q.userData.ownedMaterials.add(stubble);beard.name="Light reddish blond stubble";beard.position.y=1.3;q.add(beard);
-      piece("Mouth",.075,.018,.024,dark,0,1.226,.199);
-      piece("High zip-neck sweater collar",.3,.17,.3,coat,0,1.08,0);
-      const ribs=jwdBoxParts(q);for(let i=-5;i<=5;i++)ribs("Sweater rib",dark,i*.034,.76,.156,.009,.60,.013);ribs("Sweater zipper",cream,0,.84,.18,.012,.56,.018);ribs("Zipper pull",cream,.014,1.083,.193,.028,.052,.023);ribs.finish();
-      q.userData.ll.material=q.userData.rl.material=dark;
-    }else if(role==="watcher"){
-      const hair=new T.Mesh(new T.SphereGeometry(.219,10,6,0,Math.PI*2,0,Math.PI*.56),accent);hair.position.set(0,1.4,-.024);q.add(hair);
-      const bun=new T.Mesh(new T.SphereGeometry(.09,8,6),accent);bun.position.set(0,1.39,-.23);q.add(bun);
-      piece("Diplomat blouse",.18,.28,.036,cream,0,.96,.174);
-      for(const side of [-1,1])piece("Suit lapel",.09,.39,.04,coat,side*.115,.87,.199).rotation.z=side*.24;
-      for(let i=-2;i<=2;i++)piece("Pearl necklace",.034,.034,.027,cream,i*.043,1.077+Math.abs(i)*.014,.195);
-      piece("Lapel pin",.055,.055,.027,accent,.145,1.0,.224);
-      piece("Diplomatic briefcase",.29,.35,.13,dark,.34,.48,.015);
-      piece("Briefcase handle",.145,.12,.04,dark,.34,.71,.015);
-      piece("Briefcase clasp",.045,.028,.018,accent,.34,.55,.088);
-    }else if(role==="child"){
-      const hair=new T.Mesh(new T.SphereGeometry(.22,10,6,0,Math.PI*2,0,Math.PI*.55),accent);hair.position.set(0,1.4,-.02);q.add(hair);
-      piece("Theodore's school jumper",.42,.51,.32,coat,0,.78,0);
-      piece("Unscheduled-play badge",.1,.1,.025,cream,.1,.87,.17);
-    }else{
       for(const y of [.48,.63,.78,.93])piece("Striped jumper",.43,.063,.025,cream,0,y,.163);
       piece("Eye mask",.34,.1,.035,dark,0,1.35,.18);
       for(const side of [-1,1])piece("Mask eye",.043,.037,.02,cream,side*.079,1.35,.205);
       const cap=new T.Mesh(new T.SphereGeometry(.218,10,6,0,Math.PI*2,0,Math.PI*.5),dark);cap.position.y=1.4;q.add(cap);
       const sack=new T.Mesh(new T.SphereGeometry(.22,8,6),accent);sack.scale.set(.85,1.3,.9);sack.position.set(.13,.65,-.25);sack.name="Empty burglary sack";q.add(sack);
       piece("Sack knot",.13,.1,.12,cream,.13,.94,-.25);
-    }
-    if(role!=="burglar"&&role!=="child"){
-      const work=new T.Group(),wash=new T.Group(),shears=new T.Group(),spongeMaterial=mat(0xd8bd58);q.userData.ownedMaterials.add(spongeMaterial);q.add(work);work.add(wash,shears);
-      const sponge=box(.18,.11,.12,spongeMaterial,-.23,.75,.46,wash);sponge.name="Polishing cloth";
-      const forearmGeometry=new T.CylinderGeometry(.045,.05,1,8),handGeometry=new T.SphereGeometry(.062,8,6),arms=[q.userData.la,q.userData.ra].map(upper=>{const forearm=new T.Mesh(forearmGeometry,coat),hand=new T.Mesh(handGeometry,M.skin);forearm.name="Washing forearm";hand.name="Washing hand";wash.add(forearm,hand);return{upper,forearm,hand,shoulder:new T.Vector3(),elbow:new T.Vector3()}});
-      const blades=[];for(const side of [-1,1]){const blade=new T.Group();box(.027,.028,.34,cream,0,0,.15,blade);box(.057,.045,.14,accent,0,0,-.095,blade);blade.position.x=side*.04;shears.add(blade);blades.push(blade)}shears.position.set(0,.81,.38);shears.name="Hedge shears";
-      const carried=[];q.traverse(node=>{if(["Broom handle","Broom bristles","Academic monograph","Book pages","Diplomatic briefcase","Briefcase handle","Briefcase clasp"].includes(node.name))carried.push(node)});
-      const station=bridge.jwdGardens?.stations[n.id],car=bridge.jwdGardens?.props.find(p=>p.id===station?.target&&p.asset==="jwd-car");
-      work.visible=false;q.userData.jwdWork={work,wash,shears,sponge,blades,carried,arms,car,station,up:new T.Vector3(0,1,0),direction:new T.Vector3()};
-    }
-    if(role==="child")for(const part of q.children){part.position.multiplyScalar(.68);part.scale.multiplyScalar(.68)}
-    q.position.set(X(n.x),bridge.stationElevation(n.x,n.y),Z(n.y));
-    q.userData.neighborPaint=createNeighborSprite(T,n,q,queueCityAsset,camera);
     return q;
   }
-  function poseJwdLimb(mesh,from,to,tools,length=1){
-    tools.direction.subVectors(to,from);mesh.position.copy(from).add(to).multiplyScalar(.5);mesh.scale.y=tools.direction.length()/length;mesh.quaternion.setFromUnitVectors(tools.up,tools.direction.normalize());
-  }
   function syncJwdCharacter(q,n){
-    syncChar(q,n);
-    if(Number.isFinite(n.facing))q.rotation.y=n.facing;
-    if(n.jwdTouring&&!n.jwdMoving&&n.jwdGesture){
-      const phase=Math.min(1,(n.jwdGestureAge||0)/(n.jwdGestureDuration||1.6)),arc=Math.sin(Math.PI*phase)**2;
-      q.userData.la.rotation.x=n.jwdGesture==='call'?-.9*arc:-.2*arc;
-      q.userData.ra.rotation.x=-1.1*arc;q.userData.ra.rotation.z=-(n.jwdGesture==='wave'?.6:.3)*arc;
-    }else q.userData.ra.rotation.z=0;
-    const tools=q.userData.jwdWork;if(!tools)return;
-    const washing=n.jwdActivity==="wash",station=tools.station,atStation=Math.hypot(n.x-(washing?station?.x:station?.trimX),n.y-(washing?station?.y:station?.trimY))<=3;
-    const active=!n.jwdTouring&&!n.jwdMoving&&atStation&&(washing||n.jwdActivity==="trim");
-    tools.work.visible=!!active;tools.wash.visible=washing;tools.shears.visible=!washing;for(const prop of tools.carried)prop.visible=!active;
-    q.userData.la.position.set(-.27,.76,0);q.userData.ra.position.set(.27,.76,0);for(const arm of [q.userData.la,q.userData.ra]){arm.rotation.y=0;if(!n.jwdTouring)arm.rotation.z=0;arm.scale.set(1,1,1)}if(!active)return;
-    const phase=Number(n.jwdWorking?n.activityPhase:(q.userData.jwdWorkPhase??n.activityPhase))||0;
-    q.userData.jwdWorkPhase=phase;const stroke=Math.sin(phase*3.2);
-    q.userData.la.position.set(-.24,.89+stroke*.035,.19);q.userData.ra.position.set(.24,.88,.17);
-    q.userData.la.rotation.x=-.9+stroke*.16;q.userData.ra.rotation.x=-1.05+(washing?0:-stroke*.11);
-    if(washing&&tools.car){
-      // Target the rendered side panel, not the wider collision envelope. The
-      // projected sponge half-width places its nearest corner on the paint.
-      const car=tools.car,c=Math.cos(q.rotation.y),s=Math.sin(q.rotation.y),side=n.x>=car.x?1:-1,pad=Math.abs(c)*.09+Math.abs(s)*.06;
-      const dx=X(car.x)+side*(car.w*S*.425+pad)-q.position.x,z=Math.max(Z(car.y)-car.d*S*.35,Math.min(Z(car.y)+car.d*S*.35,q.position.z+s*.2+Math.cos(phase*3.2)*.1)),dz=z-q.position.z;
-      tools.sponge.position.set(c*dx-s*dz,car.h*S*.47+stroke*.055-q.position.y,s*dx+c*dz);
-      tools.arms.forEach((arm,i)=>{const side=i?1:-1;arm.shoulder.set(side*.27,1.0,-.02);arm.hand.position.copy(tools.sponge.position);arm.hand.position.x+=i?.1:0;arm.hand.position.y+=i?.06:.005;arm.hand.position.z-=i?.16:.105;arm.elbow.copy(arm.shoulder).lerp(arm.hand.position,.5);arm.elbow.x+=side*.04;arm.elbow.y-=.1;poseJwdLimb(arm.upper,arm.shoulder,arm.elbow,tools,.48);poseJwdLimb(arm.forearm,arm.elbow,arm.hand.position,tools)});
-    }
-    tools.blades.forEach((blade,i)=>blade.rotation.y=(i?1:-1)*(.15+.16*(stroke*.5+.5)));
+    if(q.userData.neighborPaint){q.position.set(X(n.x),bridge.stationElevation(n.x,n.y),Z(n.y));if(Number.isFinite(n.facing))q.rotation.y=n.facing;return}
+    syncChar(q,n);if(Number.isFinite(n.facing))q.rotation.y=n.facing;
   }
   const atlasTextureCache=new Map(),atlasMaterialCache=new Map();
   function atlasSprite(kind,scale){
@@ -2121,6 +2064,7 @@ function showRendererFailure(error){
     if(amtDirectRoute&&!window.BuergeramtLevel?.active){clearAmtOmenSplat();amtMouthSplat?.dispose();amtMouthSplat=null;amtGaussian.clear();loadAmtImages();return}
     if(renderAmt()){showMissionPointer(false);if(buergeramtDoorGlow){buergeramtDoorGlow.light.intensity=0;buergeramtDoorGlow.lastTime=performance.now()}previousOcclusionTime=performance.now();return}
     prepareNearbyAssets();
+    syncNeighborHalo();
     updateMissionPointer();
     syncChar(playerMesh,bridge.player,0);
     playerMesh.rotation.y=bridge.player.facing;

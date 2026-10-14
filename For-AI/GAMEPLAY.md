@@ -121,8 +121,7 @@ Acknowledge the finite exchange and they return to their drive. An active tour
 excludes a competing home interception. Lingering in the
 garden can invite another complaint after 38 simulation seconds; leaving the
 neighborhood cancels the approach. Returning home or another arrest rearms it.
-Arrival conversations pause the city and use existing E/touch controls; travel
-legs leave player movement active.
+Neighbor invitations and stop dialogue leave movement active and advance automatically after the current speech completion receipt, or readable caption time with voice off. A small black/red/gold halo marks the body-clear paved standing spot. Standing inside it briefly starts the stop; no E, Weiter or Verstanden is required. The halo also leads to home and the next unmet adult.
 
 `neighbor-story.js` owns the coordinated stop, subject, gesture and exact DE/EN
 speech data. Each adult has a full introductory route and three shorter repeat
@@ -168,7 +167,7 @@ the mouth. Browser speech uses its observed start clock and estimated articulati
 Pause freezes both; advancing a line, replacing a conversation or leaving cancels
 its cue. Travel captions and stop dialogue share one speaker-owned stream.
 The renderer and story data grant no mission credit. Only the current tour's final
-acknowledgement adds its adult to the distinct introductions; duplicate or stale
+completed speech/caption adds its adult to the distinct introductions; duplicate or stale
 completion cannot skip a route, credit another resident or replay a child summon.
 The four painted walking directions retain accepted displacement and family scale;
 authored gestures map to the current stop and release before walking resumes.
@@ -375,3 +374,5 @@ All deadlines, rules, procedures, penalties, immigration mechanics, and enforcem
 
 `BUERGERAMT.md` owns the first Anmeldung’s dialogue, queue timing, companion expiry and registration badge details. Other character encounters retain automatic in-scene completion.
 
+
+The four named neighbors use their approved painted sprites throughout walking, speech and chores. Hedge work uses the painted inspection row instead of substituting an articulated 3D person. Small standing PNGs cropped from the accepted idle cells preserve identity while animation loads or fails; the existing admission queue and actor disposal own both textures. No new character art is generated.

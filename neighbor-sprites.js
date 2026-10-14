@@ -67,7 +67,7 @@ export function neighborFrame(actor,playback,dialogue,dt,running,reducedMotion=f
     if(advancing&&playback.state==='settle'&&playback.age>=ENTRY.settle)enterState(playback,'look');
     else if(advancing&&playback.state==='look'&&playback.age>=ENTRY.look&&playback.terminalShown)enterState(playback,'greet');
     else if(advancing&&playback.state==='greet'&&playback.age>=ENTRY.greet&&playback.terminalShown)enterState(playback,'listen');
-  }else if(actor.jwdWorking&&playback.state!=='release')enterState(playback,'work');
+  }else if(actor.jwdWorking&&playback.state!=='release')enterState(playback,actor.jwdActivity==='trim'?'inspect':'work');
   else if(playback.state!=='release'||advancing&&playback.age>=ENTRY.release&&playback.terminalShown)enterState(playback,'idle');
   playback.active=active;
   const state=playback.state;
@@ -79,27 +79,36 @@ export function neighborFrame(actor,playback,dialogue,dt,running,reducedMotion=f
     frame=reducedMotion?Math.floor((CLIP_COUNTS[row]-1)*.5):Math.min(CLIP_COUNTS[row]-1,Math.floor(gestureAge/gestureDuration*(CLIP_COUNTS[row]-1)));
   }
   else if(state==='work'){row=11;frame=reducedMotion?0:Math.floor((playback.time||0)*16)%24}
+  else if(state==='inspect'){row=8;frame=reducedMotion?0:Math.floor((playback.time||0)*5)%8}
   else if(state==='listen'){row=6;frame=reducedMotion?0:Math.floor((playback.age||0)*4)%8}
   else if(state==='greet'||state==='release'){row=7;frame=reducedMotion?0:Math.min(15,Math.floor((playback.age||0)/ENTRY[state]*15));if(state==='release')frame=15-frame}
   else if(state==='look'){row=8;frame=reducedMotion?0:Math.min(7,Math.floor((playback.age||0)/ENTRY.look*7))}
   else if(state==='settle'){row=4;frame=0}
   if(ENTRY[state]&&state!=='settle'&&playback.age>=ENTRY[state])playback.terminalShown=true;
-  const articulatedTrim=actor.jwdWorking&&!actor.jwdTouring&&!active&&!moving&&actor.jwdActivity==='trim';
   const pose={row,frame,state,moving,talking,cueToken:playback.cueToken,mouthOpen:talking?playback.mouthOpen||0:0,
-    visible:!articulatedTrim};
+    visible:true};
   playback.pose=pose;return pose;
 }
 
 export function createNeighborSprite(T,actor,host,queueAsset,camera){
   const name=NEIGHBOR_PAINT[actor.jwdRole];if(!name)return null;
   const owner={retired:false},playback={},fallback=host.children.slice();
-  let sprite=null,texture=null,lastTime=null,lastPose=null,settled=false,failed=false,mouthUniforms=null,lastMirrored=false;
+  let sprite=null,texture=null,standing=null,lastTime=null,lastPose=null,mouthUniforms=null,lastMirrored=false,settled=false,failed=false;
+  for(const mesh of fallback)mesh.visible=false;
   const cameraRight=T.Vector3?new T.Vector3(1,0,0):null;
+  queueAsset(()=>({x:host.position.x,z:host.position.z}),2,()=>new Promise(resolve=>{
+    new T.TextureLoader().load(`./assets/characters/neighbors/${name}-standing.png`,loaded=>{
+      if(owner.retired||sprite){loaded.dispose();resolve(false);return}
+      loaded.colorSpace=T.SRGBColorSpace;loaded.generateMipmaps=false;loaded.minFilter=loaded.magFilter=T.LinearFilter;loaded.premultiplyAlpha=true;
+      const height=1.6*(actor.jwdRole==='child'?.68:1)*CELL_HEIGHT/170;
+      standing=new T.Mesh(new T.PlaneGeometry(height*CELL_WIDTH/CELL_HEIGHT,height),new T.MeshBasicMaterial({map:loaded,transparent:true,alphaTest:.08,depthWrite:true,premultipliedAlpha:true,side:T.DoubleSide}));
+      standing.name=`${name} standing paint`;standing.userData.neighborPaint=true;host.add(standing);resolve(true);
+    },undefined,error=>{console.warn('Neighbor standing paint unavailable',error);resolve(false)});
+  }),owner);
   queueAsset(()=>({x:host.position.x,z:host.position.z}),2,()=>new Promise(resolve=>{
     const version='20261014-neighbor-tours-32-torso';
     new T.TextureLoader().load(`./assets/characters/neighbors/${name}${innerWidth<=600&&devicePixelRatio<2?'-mobile':''}.webp?v=${version}`,loaded=>{
-      settled=true;
-      if(owner.retired){loaded.dispose();resolve(false);return}
+      if(owner.retired){settled=true;loaded.dispose();resolve(false);return}
       texture=loaded;texture.colorSpace=T.SRGBColorSpace;texture.generateMipmaps=false;
       texture.minFilter=texture.magFilter=T.LinearFilter;texture.premultiplyAlpha=true;
       const height=1.6*(actor.jwdRole==='child'?.68:1)*CELL_HEIGHT/170;
@@ -130,14 +139,16 @@ export function createNeighborSprite(T,actor,host,queueAsset,camera){
       };
       material.customProgramCacheKey=()=> 'neighbor-connected-front-lips-v1';
       sprite=new T.Mesh(geometry,material);sprite.name=`${name} painted neighbor`;
-      sprite.userData.neighborPaint=true;sprite.visible=false;host.add(sprite);resolve(true);
-    },undefined,error=>{settled=true;failed=true;console.warn('Neighbor paint unavailable; keeping articulated neighbor',error);resolve(false)});
+      sprite.userData.neighborPaint=true;sprite.visible=false;host.add(sprite);settled=true;resolve(true);
+    },undefined,error=>{settled=true;failed=true;console.warn('Neighbor animation unavailable; keeping standing paint',error);resolve(false)});
   }),owner);
   return {
     sync(now,hud,dialogue,reducedMotion){
       const dt=lastTime==null?0:Math.min(.1,Math.max(0,now-lastTime));lastTime=now;
       const running=!!hud?.started&&!hud.paused&&!document.hidden&&(!hud.busy||dialogue?.id===actor.id);
       const pose=neighborFrame(actor,playback,dialogue,dt,running,reducedMotion);lastPose=pose;
+      for(const mesh of fallback)mesh.visible=false;
+      if(standing){standing.visible=!sprite;standing.quaternion.copy(host.quaternion).invert().multiply(camera.quaternion);const pivot=standing.geometry.parameters.height*(PIVOT/CELL_HEIGHT-.5);standing.position.set(0,pivot,0).applyQuaternion(standing.quaternion)}
       if(!sprite)return;
       sprite.visible=pose.visible;
       if(!pose.visible)return;
@@ -157,10 +168,10 @@ export function createNeighborSprite(T,actor,host,queueAsset,camera){
       const pivot=sprite.geometry.parameters.height*(PIVOT/CELL_HEIGHT-.5);
       sprite.position.set(0,pivot,0).applyQuaternion(sprite.quaternion);
     },
-    restore(){for(const mesh of fallback)mesh.visible=true;if(sprite)sprite.visible=false},
-    inspect(){return {loaded:!!sprite,settled,failed,visible:!!sprite?.visible,row:lastPose?.row??0,frame:lastPose?.frame??0,
+    restore(){for(const mesh of fallback)mesh.visible=false},
+    inspect(){return {loaded:!!sprite,settled,failed,standing:!!standing?.visible,visible:!!sprite?.visible||!!standing?.visible,row:lastPose?.row??0,frame:lastPose?.frame??0,
       state:lastPose?.state,cueToken:lastPose?.cueToken,mouthOpen:lastPose?.mouthOpen||0,distance:playback.distance||0,
       frames:CLIP_COUNTS[lastPose?.row??4],height:actor.jwdRole==='child'?1.088:1.6,mirrored:lastMirrored}},
-    dispose(){owner.retired=true;texture?.dispose();sprite?.material.dispose();sprite?.geometry.dispose();if(sprite)host.remove(sprite);sprite=null;texture=null}
+    dispose(){owner.retired=true;texture?.dispose();sprite?.material.dispose();sprite?.geometry.dispose();if(sprite)host.remove(sprite);standing?.material.map.dispose();standing?.material.dispose();standing?.geometry.dispose();if(standing)host.remove(standing);sprite=null;texture=null;standing=null}
   };
 }

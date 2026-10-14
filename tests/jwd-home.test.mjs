@@ -32,6 +32,7 @@ function harness(tours=false){
 // Place only the test follower on legal nearby paving; the guide and child must
 // traverse every production movement substep. Browser tests cover actual input.
 function followGuide(h,t){
+ if(t.phase==='ready'){const spot=h.getNeighborStandingSpot();assert.ok(spot,'a clear standing halo exists');Object.assign(h.player,spot);return}
  const leader=t.leader||t.actor,stop=t.script.stops[t.stop],speaker=t.phase==='ready'&&stop?.lines[t.line]?.speaker==='child'?h.jwdState.child:t.actor;
  const aim=leader.jwdRoute?.[0],dx=aim?aim.x-leader.x:0,dy=aim?aim.y-leader.y:0,len=Math.hypot(dx,dy)||1;
  const desired=t.phase==='child-arrive'?{x:leader.x,y:leader.y+80}:t.waitingForGuide?{x:leader.x,y:leader.y+45}:t.phase==='walk'?{x:leader.x-dx/len*70,y:leader.y-dy/len*70}:speaker;
@@ -48,7 +49,8 @@ function completeTour(h,dt=1/30){
  for(let step=0;step<180/dt&&h.jwdState.tour===tour;step++){
   if(h.state.dialogue){speakers.add(h.dialogue.speaker);h.finish();continue}
   followGuide(h,tour);
-  if(tour.phase==='ready'){reached.add(tour.script.stops[tour.stop].id);h.speakJwdTourLine(tour)}else h.updateJwd(dt);
+  if(tour.phase==='ready')reached.add(tour.script.stops[tour.stop].id);
+  h.updateJwd(dt);
   for(const n of h.actors.filter(n=>n.jwdTouring)){
    assert.ok(h.pedestrianRouteContains(n,n.x,n.y),`${n.id} remains on paving`);assert.equal(h.staticBlocked(n.x,n.y,13),false,`${n.id} clears solids`);
    for(const other of [...h.actors,h.player])if(other!==n)assert.ok(h.dist(n.x,n.y,other.x,other.y)>=(other===h.player?29:26)-.01,`${n.id} clears ${other.id||'player'}`);
@@ -314,7 +316,7 @@ test('recorded neighbor cue starts after decoding and its real audio clock owns 
  h.audio.state='suspended';h.audio.currentTime=4;assert.equal(h.getNeighborDialogue().mediaTime,.25);assert.equal(h.getNeighborDialogue().paused,true);h.activeStimulus=null;sourceNode.onended();assert.equal(h.getNeighborDialogue().speaking,false,'cancelled old source cannot recover ownership');assert.equal(h.jwdState.met.size,0);
 });
 
-test('all introductions require real arrival and acknowledgement; Heiko summons the child before child-led play',()=>{
+test('all introductions require arrival at the standing halo; Heiko summons the child before child-led play',()=>{
  for(const dt of [1/60,1/30,.1]){
   const h=harness(true);h.awardAnmeldung();h.state.mission=1;h.visitJwdHome();h.finish();
   for(const id of ['jwd-swabian','jwd-parent','jwd-watcher']){
@@ -340,4 +342,43 @@ test('tours wait for the follower, reject premature E and stale receipts, cancel
   for(let i=0;i<3;i++){h.talkJwdNeighbor(neighbor);seen.add(h.jwdState.tour.script.id);completeTour(h)}
   assert.equal(seen.size,3,neighbor.id+' has three reachable repeat tours');assert.equal(h.jwdState.met.size,introductions,'repeats never increase introduction count');
  }
+});
+
+test('automatic tour lines wait for their own completion receipt and caption time, without acknowledgment',()=>{
+ const h=harness(true);h.awardAnmeldung();h.state.mission=1;h.jwdState.visited=true;h.state.voiceOn=true;
+ h.speechCatalog={voices:{}};h.STIMULUS_PRIORITY={CRITICAL:1};h.stopSpeech=()=>{};h.requestCharacterReaction=()=>{};
+ for(const id of ['dialogue','dialogue-next','dialogue-speak'])h.document.getElementById(id).classList={toggle(){}};
+ const receipts=[];h.speak=(text,options)=>{options.start?.();receipts.push(options.done)};
+ vm.runInContext(['openDialogue','renderDialogue','speakDialogueLine','setDialogueVoiceBusy','nextDialogue'].map(fn).join('\n'),h);
+ const actor=h.actors.find(n=>n.id==='jwd-parent');h.talkJwdNeighbor(actor);
+ assert.equal(h.state.modal,false);assert.equal(h.document.getElementById('dialogue-next').hidden,true);
+ for(let i=0;i<200;i++)h.updateJwdPerformance(.1);
+ assert.equal(h.jwdState.tour.phase,'invite','time alone cannot replace a speech/caption receipt');
+ receipts.shift()();h.updateJwdPerformance(.1);assert.equal(h.state.dialogueData.i,1);
+ const oldDone=receipts[0];h.state.voiceOn=false;h.updateJwdPerformance(.1);assert.equal(h.state.dialogueData.lineComplete,false);
+ oldDone();for(let i=0;i<160&&h.jwdState.tour.phase==='invite';i++)h.updateJwdPerformance(.1);
+ assert.equal(h.jwdState.tour.phase,'walk');assert.equal(h.jwdState.met.size,0);
+ assert.equal(h.state.dialogue,false,'invitation finishes without Next or Understood');
+ const t=h.jwdState.tour;while(t.phase!=='ready'){followGuide(h,t);h.updateJwd(.1)}
+ Object.assign(h.player,{x:t.actor.x,y:t.actor.y+105});for(let i=0;i<10;i++)h.updateJwd(.1);
+ assert.equal(t.phase,'ready','proximity outside the marked standing spot cannot start the line');
+ Object.assign(h.player,h.getNeighborStandingSpot());for(let i=0;i<3;i++)h.updateJwd(.1);
+ assert.equal(t.phase,'dialogue');assert.equal(h.state.modal,false);
+ const pending=receipts.at(-1);h.cancelJwdTour();pending();h.updateJwdPerformance(20);assert.equal(h.jwdState.met.size,0);
+});
+
+test('interrupting automatic speech reveals a readable caption and recovers without a button',()=>{
+ const h=harness(true);h.awardAnmeldung();h.state.mission=1;h.jwdState.visited=true;h.state.voiceOn=true;
+ h.speechCatalog={voices:{}};h.STIMULUS_PRIORITY={CRITICAL:1};h.requestCharacterReaction=()=>{};
+ h.activeStimulus=null;h.stimulusQueue=[];h.stimulusTimer=null;h.stimulusGeneration=0;h.clearTimeout=()=>{};
+ for(const name of ['stopRecordedSpeech','setAudioText','clearSubtitle','hideWorldBark','cancelHumorScold'])h[name]=()=>{};
+ for(const id of ['dialogue','dialogue-next','dialogue-speak'])h.document.getElementById(id).classList={toggle(){}};
+ h.speak=(text,options)=>options.start?.();
+ vm.runInContext(['openDialogue','renderDialogue','speakDialogueLine','setDialogueVoiceBusy','nextDialogue','stopSpeech'].map(fn).join('\n'),h);
+ h.talkJwdNeighbor(h.actors.find(n=>n.id==='jwd-parent'));h.stopSpeech();
+ assert.equal(h.state.dialogueData.captionFallback,true);assert.equal(h.document.getElementById('dialogue').hidden,false);
+ h.updateJwdPerformance(1);assert.equal(h.state.dialogueData.i,0,'interruption preserves readable caption time');
+ h.updateJwdPerformance(16);assert.equal(h.state.dialogueData.i,1,'caption advances without user acknowledgment');
+ assert.equal(h.state.dialogueData.captionFallback,false,'the next line owns a fresh speech attempt');
+ assert.equal(h.jwdState.met.size,0);
 });

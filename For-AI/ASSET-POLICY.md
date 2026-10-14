@@ -1363,8 +1363,13 @@ for future exports.
 
 The 32-sample walks and 24-sample gesture arcs retain calibrated ground-distance
 clocks, cleared transparent gutters and the ordinary depth buffer. Painted car
-polishing/sweeping supplement the existing articulated hedge-trimming and
-load-failure fallback. Source and recipe ownership remains in
+polishing/sweeping and painted hedge inspection retain the same sprite identity.
+Four 128×192 standing PNGs extracted from the accepted idle cells replace the
+3D loading/failure fallback: 163,936 transferred bytes total and 393,216 decoded
+RGBA bytes total, without mipmaps. They use the existing admission queue, render
+dispatch and actor disposal; atlas failure keeps this exact painted idle pose.
+The procedural ground halo adds four small ring meshes and no image, light,
+timer, decoder or separate animation loop. Source and recipe ownership remains in
 `SPRITE-GENERATION-PROTOCOL.md`. Exact export checks cover all 2,048 packed cells
 across eight encoded files; rendered/device acceptance remains separate.
 
