@@ -9,7 +9,8 @@ import {encodeVoice,voiceFilter} from './neighbor-voice-processing.mjs';
 
 const root=resolve(import.meta.dirname,'..'),args=process.argv.slice(2);
 const option=(name,fallback)=>args.includes(name)?args[args.indexOf(name)+1]:fallback;
-const exe=option('--voice-exe',resolve(process.env.LOCALAPPDATA,'Secret Tunnel 6/secret-tunnel-v6.exe'));
+const exe=option('--voice-exe')||(process.env.LOCALAPPDATA?resolve(process.env.LOCALAPPDATA,'Secret Tunnel 6/secret-tunnel-v6.exe'):null);
+if(!exe)throw Error('Pass --voice-exe when LOCALAPPDATA is unavailable');
 const data=readFileSync(resolve(dirname(exe),'voice-data-root.txt'),'utf8').trim();
 const sha=bytes=>createHash('sha256').update(bytes).digest('hex');
 const read=path=>JSON.parse(readFileSync(path,'utf8').replace(/^\uFEFF/,''));

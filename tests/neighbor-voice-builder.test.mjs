@@ -137,3 +137,12 @@ test('raw admission accepts only truthful approved render normalization',async t
   ,['unlabelled falsely unchanged request',f=>{delete f.note.renderNormalizationPolicy;delete f.candidate.renderNormalizationPolicy;f.note.text=f.candidate.text;}]
  ])await t.test(name,t=>{const f=fixture(t),save=addRenderReceipt(f);change(f);save();const result=f.run();assert.notEqual(result.status,0);assert.match(result.stderr,/native completion receipt drift|actual render input receipt drift/);});
 });
+
+
+test('explicit voice executable works without Windows environment and missing defaults fail clearly',t=>{
+ const f=fixture(t),env={...process.env};delete env.LOCALAPPDATA;
+ const explicit=spawnSync(process.execPath,[builder,'--voice-exe',resolve(f.dir,'voice-tool.exe'),'--character','heiko','--plan'],{cwd:root,encoding:'utf8',env});
+ assert.equal(explicit.status,0,explicit.stderr);assert.equal(JSON.parse(explicit.stdout).family,'heiko');
+ const absent=spawnSync(process.execPath,[builder,'--plan'],{cwd:root,encoding:'utf8',env});
+ assert.notEqual(absent.status,0);assert.match(absent.stderr,/Pass --voice-exe when LOCALAPPDATA is unavailable/);
+});
