@@ -11,6 +11,7 @@ import {createJobcenterBuilding,createJobcenterEncounter} from './jobcenter.js?v
 import {createLevelDoor} from './level-transitions.js?v=20261014-building-levels';
 import {createBuildingLevels} from './building-levels.js?v=20261014-building-levels';
 import {createNeighborSprite} from './neighbor-sprites.js?v=20261014-neighbor-halo';
+import {loadStreetCharacterManifest,resolveStreetCharacter,createStreetCharacterSprite,advanceStreetAnimation,requestStreetReaction as requestPaintedStreetReaction,hasStreetReaction as hasPaintedStreetReaction,cancelStreetReaction as cancelPaintedStreetReaction} from './street-character-sprites.js?v=20261015-street-standing-30-r2';
 const THREE_URL="./assets/vendor/three/0.186.0/build/three.module.min.js";
 const GLTF_LOADER_URL="./assets/vendor/three/0.186.0/examples/jsm/loaders/GLTFLoader.js";
 function buergeramtDoorRadiance(time,reducedMotion=false){
@@ -89,9 +90,9 @@ function showRendererFailure(error){
   function queueCityModel(...args){if(modelLoader)return queueCityAsset(...args)}
   function captureStartupAssets(){updateAssetView();if(!amtDirectRoute)for(const job of cityModelJobs)if(cityModelDistance(job,initialPlayerX,initialPlayerZ)<=30||isCityAssetVisible(job))startupModelJobs.add(job)}
   function startupModelsReady(){return startupModelsCaptured&&[...startupModelJobs].every(job=>job.state==="settled")}
-  function prepareNearbyAssets(){
+  function prepareNearbyAssets(freshStreetBodies=false){
     if(!cityModelsEnabled())return;
-    const now=performance.now();if(startupModelsReady()&&now-lastCityAdmission<250)return;lastCityAdmission=now;updateAssetView();
+    const now=performance.now();if(startupModelsReady()&&!freshStreetBodies&&now-lastCityAdmission<250)return;lastCityAdmission=now;updateAssetView();prepareStreetPaint();
     for(let i=cityModelJobs.length-1;i>=0;i--){const job=cityModelJobs[i];if(job.owner?.retired&&job.state!=="active"){job.state="settled";job.task=job.position=job.owner=null;cityModelJobs.splice(i,1)}}
     // ponytail: a fixed authored city needs one spatial scan, not a second loader loop or streaming framework.
     const awaitingStart=bridge.preparingStart;
@@ -1289,6 +1290,122 @@ function showRendererFailure(error){
   function syncBorderPourer(q,o){syncAtlasSprite(q,o,1.31)}
   function pickup(item){const type=item.type,g=new T.Group();if(type==="pfand"){const m=new T.Mesh(new T.CylinderGeometry(.07,.09,.5,9),mat(0x566153)),fallback=new T.Group();m.position.y=.25;fallback.add(m);g.add(fallback);installCityModel(g,fallback,"pfand-bottle",{x:.18,y:.55,z:.18},item)}else if(item.wurstType){const m=mat(item.color),pieces=item.pieces||1;for(let i=0;i<pieces;i++){const q=new T.Mesh(new T.CapsuleGeometry(.065,.32,4,8),m);q.rotation.z=Math.PI/2;q.position.set(pieces===4?(i-1.5)*.18:0,.2+(i-(pieces-1)/2)*.13,0);g.add(q)}const seal=new T.Mesh(new T.TorusGeometry(.15,.035,8,18),mat(0xe4ddce));seal.rotation.x=Math.PI/2;seal.position.y=.6;g.add(seal)}else{const col=type==="currywurst"?0x805143:type==="bratwurst"?0x9a7653:0x8a694b,m=mat(col),q=new T.Mesh(type==="brezel"?new T.TorusGeometry(.18,.055,8,18):new T.CapsuleGeometry(.08,.4,4,8),m);q.rotation.z=type==="brezel"?0:Math.PI/2;q.position.y=.2;g.add(q)}return g}
 
+  let streetPaintManifest=null,streetPaintManifestError=null;
+  const streetPaintOwner={retired:false};
+  function registeredStreetPaint(actor){
+    if(actor.special||actor.jwdRole&&actor.jwdRole!=='burglar'||['tourist-guenther-liegestuhl','touristin-walburga-handtuch'].includes(actor.voiceId))return null;
+    const id=resolveStreetCharacter(actor);
+    return id&&Object.hasOwn(streetPaintManifest||{},id)&&streetPaintManifest[id].standing?id:null;
+  }
+  function readyStreetReactionView(actor){
+    const root=actor===bridge.player?playerMesh:npcMeshes.get(actor)||policeMeshes.get(actor);
+    if(!root)return null;
+    const id=registeredStreetPaint(actor),view=root.userData.streetPaintView;
+    if(!id||!view||view.actor!==actor||view.id!==id||!view.host.visible||view.host.parent!==scene||root.visible)return null;
+    const status=view.paint.inspect();
+    return status.loaded===true&&status.motionLoaded===true&&!status.failed&&!status.retired?view:null;
+  }
+  function requestStreetReaction(actor,names,options={}){
+    const view=readyStreetReactionView(actor);
+    if(!view||!view.paint.canPlayReaction(names))return false;
+    const accepted=requestPaintedStreetReaction(actor,names,options);
+    if(accepted)view.bodyReactionOwned=true;
+    return accepted;
+  }
+  function hasStreetReaction(actor){
+    return !!readyStreetReactionView(actor)&&hasPaintedStreetReaction(actor);
+  }
+  function releaseStreetPaint(root){
+    const view=root.userData.streetPaintView;if(!view)return;
+    if(view.bodyReactionOwned&&(view.actor===bridge.player&&root===playerMesh||npcMeshes.get(view.actor)===root||policeMeshes.get(view.actor)===root))cancelPaintedStreetReaction(view.actor,{bodyOnly:true});
+    view.paint.dispose();scene.remove(view.host);root.visible=view.fallbackVisible;
+    delete root.userData.streetPaintView;
+  }
+  function forEachStreetBody(visit){
+    visit(bridge.player,playerMesh);
+    for(const [actor,root] of npcMeshes)visit(actor,root);
+    for(const [actor,root] of policeMeshes)visit(actor,root);
+  }
+  function releaseStreetPaintViews(){forEachStreetBody((actor,root)=>releaseStreetPaint(root))}
+  function prepareStreetPaint(){
+    if(!streetPaintManifest||streetPaintOwner.retired||!cityModelsEnabled()||jobcenter.active||buildingLevels.office)return;
+    const motionAllowed=startupModelsReady()&&!bridge.preparingStart&&bridge.getHUDState?.().started;
+    forEachStreetBody((actor,root)=>{
+      const id=registeredStreetPaint(actor),view=root.userData.streetPaintView;
+      const demand={position:()=>({x:X(actor.x),z:Z(actor.y)}),radius:2};
+      const distance=cityModelDistance(demand),visible=isCityAssetVisible(demand);
+      if(view&&(!id||id!==view.id||distance>46&&!visible))releaseStreetPaint(root);
+      if(!id||root.userData.streetCharacter||distance>30&&!visible)return;
+      if(!root.userData.streetPaintView){
+        const host=new T.Group();host.name='Street paint / '+(actor.id||id);host.visible=false;
+        host.position.set(X(actor.x),bridge.stationElevation(actor.x,actor.y),Z(actor.y));
+        const paint=createStreetCharacterSprite(T,actor,host,queueCityAsset,camera);
+        if(!paint)return;
+        root.userData.streetPaintView={actor,id,host,paint,x:actor.x,y:actor.y,fallbackVisible:root.visible,startupRequired:!startupModelsReady()||!!bridge.preparingStart,presented:false};
+        scene.add(host);
+      }
+      const current=root.userData.streetPaintView;
+      if(motionAllowed&&streetPaintManifest[id].standingOnly!==true&&current.paint.inspect().loaded)current.paint.prepareMotion();
+    });
+  }
+  function syncStreetPaint(root,actor,dt){
+    const view=root.userData.streetPaintView;if(!view)return false;
+    const hud=bridge.getHUDState?.(),paused=document.hidden||!!hud?.paused||hud?.started===false;
+    const dx=actor.x-view.x,dy=actor.y-view.y;
+    view.x=actor.x;view.y=actor.y;
+    const options={dx,dy,paused,reducedMotion:amtReducedMotion.matches,waiting:actor.pause>0,working:!!actor.jwdWorking,speaking:false};
+    const speech=bridge.getStreetSpeech?.(actor);
+    if(speech){
+      options.speechStatus=speech.speechStatus;options.cueToken=speech.cueToken;
+      options.mediaTime=speech.mediaTime;options.mediaDuration=speech.mediaDuration;
+      options.mouthOpen=speech.mouthOpen;options.paused=paused||speech.paused===true;
+    }
+    advanceStreetAnimation(actor,paused||dt<=0?0:Math.hypot(dx,dy),Math.max(0,Math.min(.1,dt)),options);
+    view.host.position.set(X(actor.x),bridge.stationElevation(actor.x,actor.y),Z(actor.y));
+    view.paint.sync();
+    const loaded=view.paint.inspect().loaded;
+    if(loaded){root.userData.worldX=actor.x;root.userData.worldY=actor.y;}
+    view.host.visible=loaded&&view.fallbackVisible;root.visible=loaded?false:view.fallbackVisible;
+    if(loaded)view.presented=true;
+    return loaded;
+  }
+  // The existing preload checks startupReady before sync. Require one presentation
+  // of successful required standing paint before allowing that preload to clear.
+  // Failed assets retain the existing playable fallback and remain visible in diagnostics.
+  function streetStartupPresented(){
+    let ready=true;
+    forEachStreetBody((actor,root)=>{
+      const view=root.userData.streetPaintView;
+      if(view?.startupRequired&&view.paint.inspect().loaded&&!view.presented)ready=false;
+    });
+    return ready;
+  }
+  function displayedStreetRoot(root){const view=root.userData.streetPaintView;return view?.host.visible?view.host:root}
+  function streetPlayerSightlineTargets(){
+    const view=playerMesh.userData.streetPaintView;
+    return view?.host.visible?view.paint.occlusionTargets?.()||null:null;
+  }
+  function inspectStreetPaint(){
+    const actors=[];
+    forEachStreetBody((actor,root)=>{
+      const view=root.userData.streetPaintView,displayed=displayedStreetRoot(root);
+      if(!registeredStreetPaint(actor)&&!view)return;
+      const bounds=new T.Box3().setFromObject(displayed),size=bounds.getSize(new T.Vector3());
+      actors.push({actorId:actor.id||null,voiceId:actor.voiceId||null,characterId:view?.id||registeredStreetPaint(actor),
+        displayed:displayed===root?'fallback':'paint',fallbackVisible:root.visible,displayedRoot:displayed.name||displayed.type,
+        position:displayed.position.toArray(),bounds:bounds.isEmpty()?null:{min:bounds.min.toArray(),max:bounds.max.toArray(),height:size.y},paint:view?.paint.inspect()||null,startupRequired:!!view?.startupRequired,presented:!!view?.presented,standingOnly:streetPaintManifest?.[view?.id]?.standingOnly===true});
+    });
+    return {manifestLoaded:!!streetPaintManifest,manifestError:streetPaintManifestError,actors};
+  }
+  const streetManifestJob=queueCityAsset(()=>({x:X(bridge.player.x),z:Z(bridge.player.y)}),0,async()=>{
+    try{
+      const manifest=await loadStreetCharacterManifest();if(streetPaintOwner.retired)return false;
+      streetPaintManifest=manifest;prepareStreetPaint();
+      if(!startupModelsReady()||bridge.preparingStart)captureStartupAssets();
+      return true;
+    }catch(error){streetPaintManifestError=String(error?.message||error);console.warn('Street paint manifest unavailable; keeping existing bodies',error);return false}
+  },streetPaintOwner);
+
   // Original street-character candidates are opt-in; ordinary play does not
   // request their modules. Simulation and dialogue remain owned by game.js.
   let streetCharacters=null;
@@ -1300,6 +1417,7 @@ function showRendererFailure(error){
   }
   function retireNpcMesh(q){
     if(!q)return;
+    releaseStreetPaint(q);
     q.userData.neighborPaint?.dispose();
     if(q.userData.streetCharacter){streetCharacters?.remove(q);return}
     scene.remove(q);
@@ -1309,7 +1427,9 @@ function showRendererFailure(error){
     for(const material of q.userData.ownedMaterials||[])material.dispose();
   }
   addEventListener("pagehide",event=>{
+    releaseStreetPaintViews();
     if(event.persisted)return;
+    streetPaintOwner.retired=true;
     streetCharacters?.dispose();
     for(const [state,mesh] of npcMeshes)if(state.jwdRole)retireNpcMesh(mesh);
     for(const slot of buildingSlots)if(slot.building.residential){
@@ -1331,11 +1451,12 @@ function showRendererFailure(error){
   bridge.pickups.forEach(p=>{const q=pickup(p);scene.add(q);pickupMeshes.set(p,q)});
   const buildingSightline=new T.Raycaster(),sightlineTarget=new T.Vector3(),sightlineDirection=new T.Vector3();
   let previousOcclusionTime=performance.now();
-  function buildingObstructsPlayer(slot){
+  function buildingObstructsPlayer(slot,paintTargets=null){
     const px=X(bridge.player.x),pz=Z(bridge.player.y),ground=bridge.stationElevation(bridge.player.x,bridge.player.y);
     // Sample the actual player's silhouette, never an expanded contact footprint.
-    for(const [side,height] of [[0,.2],[0,.65],[0,.9],[-.12,.9],[.12,.9],[0,1.4]]){
-      sightlineTarget.set(px+side,ground+height,pz);
+    for(const point of paintTargets||[[0,.2],[0,.65],[0,.9],[-.12,.9],[.12,.9],[0,1.4]]){
+      if(paintTargets)sightlineTarget.copy(point);
+      else sightlineTarget.set(px+point[0],ground+point[1],pz);
       sightlineDirection.subVectors(sightlineTarget,camera.position);
       const distance=sightlineDirection.length();
       buildingSightline.set(camera.position,sightlineDirection.normalize());buildingSightline.near=0;buildingSightline.far=distance-.02;
@@ -1350,10 +1471,10 @@ function showRendererFailure(error){
     }
     return false;
   }
-  function updateBuildingOcclusion(now=performance.now()){
+  function updateBuildingOcclusion(now=performance.now(),paintTargets=null){
     const dt=Math.max(0,(now-previousOcclusionTime)/1000);previousOcclusionTime=now;
     for(const slot of buildingSlots){
-      slot.obstructing=buildingObstructsPlayer(slot);
+      slot.obstructing=buildingObstructsPlayer(slot,paintTargets);
       const target=slot.obstructing?.03:1;
       slot.opacity+=(target-slot.opacity)*(1-Math.exp(-(target<slot.opacity?12:8)*dt));
       if(Math.abs(slot.opacity-target)<.001)slot.opacity=target;
@@ -1984,7 +2105,7 @@ function showRendererFailure(error){
       return {min:bounds.min.toArray(),max:bounds.max.toArray(),width:size.x,height:size.y,depth:size.z,ground:bounds.min.y};
     }
     const houses=buildingSlots.filter(slot=>slot.building.residential).map(slot=>({id:slot.building.id,variant:slot.building.variant||"house",...slot.group.userData.jwdArchitecture,bounds:inspect(slot.group),solid:[slot.building.x,slot.building.y,slot.building.w,slot.building.h],visible:slot.group.visible,opacity:slot.opacity,doorHeight:1.97,sign:slot.label.userData.jwdText}));
-    const actors=[...npcMeshes].filter(([state])=>state.jwdRole).map(([state,root])=>({id:state.id,role:state.jwdRole,position:[state.x,state.y],worldPosition:root.position.toArray(),bounds:inspect(root),facing:root.rotation.y,walkPhase:root.userData.walkPhase||0,swing:root.userData.walkSwing||0,activity:state.jwdActivity||null,working:!!state.jwdWorking,activityPhase:root.userData.jwdWorkPhase??0,paint:root.userData.neighborPaint?.inspect()||null,workVisible:!!root.userData.jwdWork?.work.visible}));
+    const actors=[...npcMeshes].filter(([state])=>state.jwdRole).map(([state,root])=>({id:state.id,role:state.jwdRole,position:[state.x,state.y],worldPosition:displayedStreetRoot(root).position.toArray(),bounds:inspect(displayedStreetRoot(root)),facing:root.rotation.y,walkPhase:root.userData.walkPhase||0,swing:root.userData.walkSwing||0,activity:state.jwdActivity||null,working:!!state.jwdWorking,activityPhase:root.userData.jwdWorkPhase??0,paint:root.userData.streetPaintView?.paint.inspect()||root.userData.neighborPaint?.inspect()||null,workVisible:!!root.userData.jwdWork?.work.visible}));
     const scenery=jwdScenery.map(root=>({...root.userData.jwdSign,...root.userData.jwdProp,bounds:inspect(root)}));
     let geometryBytes=0;for(const geometry of geometries){for(const attribute of Object.values(geometry.attributes))geometryBytes+=attribute.array.byteLength;geometryBytes+=geometry.index?.array.byteLength||0}
     const textureBytes=[...textures].reduce((sum,texture)=>sum+(texture.image?.width||0)*(texture.image?.height||0)*4,0);
@@ -1994,7 +2115,7 @@ function showRendererFailure(error){
     const pointerBounds=new T.Box3().setFromObject(missionPointer);
     const bounds=model=>{if(!model)return null;const b=new T.Box3().setFromObject(model),s=b.getSize(new T.Vector3());return{width:s.x,height:s.y,depth:s.z,ground:b.min.y}};
     const glow=buergeramtDoorGlow,doorRadiance=glow?{visible:glow.group.visible&&glow.slot.group.visible,loaded:!!glow.slot.model,phase:["black","red","gold"][glow.phase],time:glow.time,pulse:glow.pulse,color:glow.skin.color.getHexString(),rayTime:glow.raysMaterial.uniforms.uTime.value,rayColor:glow.raysMaterial.uniforms.uColor.value.getHexString(),lightIntensity:glow.light.intensity,position:glow.group.getWorldPosition(new T.Vector3()).toArray(),doorSize:glow.size.toArray(),depthTest:glow.raysMaterial.depthTest,depthWrite:glow.raysMaterial.depthWrite}:null;
-    return{doorRadiance,jwd:inspectJwdAssets(),missionPointer:{visible:missionPointer.visible,target:missionPointer.userData.target,loaded:!sausageFallback.visible,heading:missionPointer.userData.heading,screenHeading:missionPointer.rotation.z,screen:missionPointer.userData.screen,pixelBounds:{left:pointerBounds.min.x+innerWidth/2,right:pointerBounds.max.x+innerWidth/2,top:innerHeight/2-pointerBounds.max.y,bottom:innerHeight/2-pointerBounds.min.y},position:missionPointer.position.toArray(),shape:sausageBody.scale.toArray(),pivot:{sourceZ:sausagePivotZ,position:sausageBody.localToWorld(new T.Vector3(0,0,sausagePivotZ)).toArray(),centre:sausageBody.getWorldPosition(new T.Vector3()).toArray()},print:missionPointer.userData.print,printFlip:wurstPrintFlip.value,tip:{position:sausageTipGlow.getWorldPosition(new T.Vector3()).toArray(),depthTest:sausageTipGlow.material.depthTest,depthWrite:sausageTipGlow.material.depthWrite},bounds:bounds(missionPointer)},brandmauerFire:{loaded:lineFire.visible,fallback:firePlaneA.visible,particles:lineParticleLayers.map(layer=>layer.geometry.attributes.position.count),...fireMaskStatus},dumpsterFire:dumpsterFlames.map(({fire,smoke,fallback,maskStatus,mask,coreMask,smokeMask})=>({loaded:fire.visible,smoke:smoke.visible,fallback:fallback.visible,...maskStatus,images:[mask.image?.width||0,coreMask.image?.width||0,smokeMask.image?.width||0]})),streetCharacters:streetCharacters?.inspect()||null,placards:placardLayouts.map(item=>({...item})),buildings:buildingSlots.filter(s=>!s.building.kind).map(s=>({id:s.building.id,loaded:!!s.model,fallback:s.fallback.visible,bounds:bounds(s.building.residential||s.building.id==="jobcenter"?s.fallback:s.model),glass:[...s.materials].filter(m=>/glass/i.test(m.name)).map(m=>({name:m.name,opacity:m.opacity,baseOpacity:m.userData.baseOpacity}))})),city:cityAssetSlots.map(s=>({file:s.file,loaded:!!s.model,fallback:s.fallback.visible,bounds:bounds(s.model)})),monument:kiesingerMonument?{bounds:bounds(kiesingerMonument),scale:kiesingerMonument.scale.y,loaded:!!kiesingerMonument.getObjectByName("KiesingerSculpture")}:null,banners:landmarkBanners.map(({kind,mesh})=>({kind,bounds:bounds(mesh)})),vehicles:[...trafficCarMeshes.values(),...policeVehicleMeshes.values()].map(s=>({id:s.state.id,kind:s.kind,loaded:!!s.model,fallback:s.fallback.visible,bounds:bounds(s.model),wheels:s.wheels.map(w=>({name:w.node.name,angle:w.node.rotation.x,radius:w.radius})),steering:s.steering.map(o=>o.rotation.y),brakes:s.brakes.map(m=>m.emissiveIntensity),beacons:s.beacons.map(b=>b.material.emissiveIntensity)})),sources:[...localModels.keys()],render:{...renderer.info.render},memory:{...renderer.info.memory}};
+    return{doorRadiance,jwd:inspectJwdAssets(),missionPointer:{visible:missionPointer.visible,target:missionPointer.userData.target,loaded:!sausageFallback.visible,heading:missionPointer.userData.heading,screenHeading:missionPointer.rotation.z,screen:missionPointer.userData.screen,pixelBounds:{left:pointerBounds.min.x+innerWidth/2,right:pointerBounds.max.x+innerWidth/2,top:innerHeight/2-pointerBounds.max.y,bottom:innerHeight/2-pointerBounds.min.y},position:missionPointer.position.toArray(),shape:sausageBody.scale.toArray(),pivot:{sourceZ:sausagePivotZ,position:sausageBody.localToWorld(new T.Vector3(0,0,sausagePivotZ)).toArray(),centre:sausageBody.getWorldPosition(new T.Vector3()).toArray()},print:missionPointer.userData.print,printFlip:wurstPrintFlip.value,tip:{position:sausageTipGlow.getWorldPosition(new T.Vector3()).toArray(),depthTest:sausageTipGlow.material.depthTest,depthWrite:sausageTipGlow.material.depthWrite},bounds:bounds(missionPointer)},brandmauerFire:{loaded:lineFire.visible,fallback:firePlaneA.visible,particles:lineParticleLayers.map(layer=>layer.geometry.attributes.position.count),...fireMaskStatus},dumpsterFire:dumpsterFlames.map(({fire,smoke,fallback,maskStatus,mask,coreMask,smokeMask})=>({loaded:fire.visible,smoke:smoke.visible,fallback:fallback.visible,...maskStatus,images:[mask.image?.width||0,coreMask.image?.width||0,smokeMask.image?.width||0]})),streetCharacters:streetCharacters?.inspect()||null,streetPaint:inspectStreetPaint(),placards:placardLayouts.map(item=>({...item})),buildings:buildingSlots.filter(s=>!s.building.kind).map(s=>({id:s.building.id,loaded:!!s.model,fallback:s.fallback.visible,bounds:bounds(s.building.residential||s.building.id==="jobcenter"?s.fallback:s.model),glass:[...s.materials].filter(m=>/glass/i.test(m.name)).map(m=>({name:m.name,opacity:m.opacity,baseOpacity:m.userData.baseOpacity}))})),city:cityAssetSlots.map(s=>({file:s.file,loaded:!!s.model,fallback:s.fallback.visible,bounds:bounds(s.model)})),monument:kiesingerMonument?{bounds:bounds(kiesingerMonument),scale:kiesingerMonument.scale.y,loaded:!!kiesingerMonument.getObjectByName("KiesingerSculpture")}:null,banners:landmarkBanners.map(({kind,mesh})=>({kind,bounds:bounds(mesh)})),vehicles:[...trafficCarMeshes.values(),...policeVehicleMeshes.values()].map(s=>({id:s.state.id,kind:s.kind,loaded:!!s.model,fallback:s.fallback.visible,bounds:bounds(s.model),wheels:s.wheels.map(w=>({name:w.node.name,angle:w.node.rotation.x,radius:w.radius})),steering:s.steering.map(o=>o.rotation.y),brakes:s.brakes.map(m=>m.emissiveIntensity),beacons:s.beacons.map(b=>b.material.emissiveIntensity)})),sources:[...localModels.keys()],render:{...renderer.info.render},memory:{...renderer.info.memory}};
   }
   // Prune complete off-camera groups, including the many meshes in distant stand-ins.
   const renderFrustum=new T.Frustum(),renderViewMatrix=new T.Matrix4(),trainRenderSphere=new T.Sphere();
@@ -2021,7 +2142,7 @@ function showRendererFailure(error){
     leaveAmtDirectMode();syncChar(playerMesh,bridge.player,0);playerMesh.rotation.y=bridge.player.facing;
     const px=X(bridge.player.x),pz=Z(bridge.player.y),elevation=bridge.stationElevation(bridge.player.x,bridge.player.y);
     camera.position.set(px,11.5+elevation,pz+14);camera.lookAt(px,1+elevation,pz-2.7);
-    updateGroupVisibility();updateBuildingOcclusion();
+    updateGroupVisibility();updateBuildingOcclusion(undefined,streetPlayerSightlineTargets());
   }
   const buildingLevels=createBuildingLevels({THREE:T,renderer,scene,camera,bridge,mobile:amtMobile,reducedMotion:amtReducedMotion,
     getDoor:id=>buildingSlots.find(slot=>slot.building.id===id)?.door,
@@ -2054,7 +2175,7 @@ function showRendererFailure(error){
     // Direct office entry skipped city GLBs; its existing procedural buildings make the exit playable immediately.
     bridge.buildings.forEach(building);buildingSlots.forEach(mountBuildingDoor);
   }
-  window.Germany3D={ready:true,isWorldPointVisible,isVehicleVisible,pickAmtInteraction,get amtPotatoMirror(){return amtPotatoMirror.inspect()},clearAmtFloor(){clearAmtWalkDetails();amtFloorEffect.update(null);amtPortraitMelt.update(null);amtLampWear.update(null);amtPotatoMirror.update(null);if(amtDirectRoute&&!window.BuergeramtLevel?.active)renderer.clear()},get amtLamps(){return amtLampWear.inspect()},get amtPortraitMelt(){return amtPortraitMelt.inspect()},get amtFloor(){return {...amtFloorEffect.inspect(),opacity:floor.opacity,transparent:floor.transparent,depthWrite:floor.depthWrite}},prepareNearbyAssets,prepareOfficeAssets:loadAmtImages,clearAmtOmenSplat,enterBuergeramt,clearAmtGaussianAnimations(){amtMouthSplat?.dispose();amtMouthSplat=null;amtGaussian.clear();restoreAmtCharacterLayers()},
+  window.Germany3D={ready:true,isWorldPointVisible,isVehicleVisible,pickAmtInteraction,requestStreetReaction,hasStreetReaction,get amtPotatoMirror(){return amtPotatoMirror.inspect()},clearAmtFloor(){clearAmtWalkDetails();amtFloorEffect.update(null);amtPortraitMelt.update(null);amtLampWear.update(null);amtPotatoMirror.update(null);if(amtDirectRoute&&!window.BuergeramtLevel?.active)renderer.clear()},get amtLamps(){return amtLampWear.inspect()},get amtPortraitMelt(){return amtPortraitMelt.inspect()},get amtFloor(){return {...amtFloorEffect.inspect(),opacity:floor.opacity,transparent:floor.transparent,depthWrite:floor.depthWrite}},prepareNearbyAssets,prepareOfficeAssets:loadAmtImages,clearAmtOmenSplat,enterBuergeramt,clearAmtGaussianAnimations(){amtMouthSplat?.dispose();amtMouthSplat=null;amtGaussian.clear();restoreAmtCharacterLayers()},
   leaveAmtDirectMode,enterJobcenter,leaveJobcenter:()=>jobcenter.close(),get jobcenter(){return jobcenter.inspect()},
   enterBuilding:(id,done)=>buildingLevels.enter(id,done,true),leaveBuilding:(id,config)=>buildingLevels.leave(id,config),
   cancelLevelTransition:id=>buildingLevels.cancel(id),
@@ -2064,28 +2185,34 @@ function showRendererFailure(error){
   get nearbyAssetsReady(){updateAssetView();return cityModelJobs.every(job=>job.state==="settled"||cityModelDistance(job)>30&&!isCityAssetVisible(job))},
   get officeAssetsReady(){return amtImagesRequested&&officeAssetPending===0},get officeAssetStatus(){return {total:officeAssetTotal,pending:officeAssetPending,failed:officeAssetFailures}},
   get neighborAssetStatus(){const paint=[...npcMeshes.values()].map(q=>q.userData.neighborPaint).filter(Boolean).map(p=>p.inspect());return {total:paint.length,settled:paint.filter(p=>p.settled).length,failed:paint.filter(p=>p.failed).length}},
-  get startupReady(){return startupModelsReady()},get startupStatus(){return {total:startupModelJobs.size,pending:[...startupModelJobs].filter(job=>job.state!=="settled").length,active:cityModelActive,failed:[...startupModelJobs].filter(job=>job.failed).length}},
+  get startupReady(){return startupModelsReady()&&streetStartupPresented()},get startupStatus(){return {total:startupModelJobs.size,pending:[...startupModelJobs].filter(job=>job.state!=="settled").length,active:cityModelActive,failed:[...startupModelJobs].filter(job=>job.failed).length}},
   prepareDirectArrival:prepareLevelExterior,
   get buildingVisibility(){return buildingSlots.map(slot=>({id:slot.building.id,opacity:slot.opacity,obstructing:!!slot.obstructing}))},sync(){
     const levelNow=performance.now(),levelDt=(levelNow-previousLevelTime)/1000;previousLevelTime=levelNow;
+    if(!cityModelsEnabled()||jobcenter.active||buildingLevels.office)releaseStreetPaintViews();
     if(buildingLevels.render(levelDt)){showMissionPointer(false);previousOcclusionTime=levelNow;return}
     if(jobcenter.render()){showMissionPointer(false);previousOcclusionTime=performance.now();return}
     if(buildingLevels.active)return;
     if(amtDirectRoute&&!window.BuergeramtLevel?.active){clearAmtOmenSplat();amtMouthSplat?.dispose();amtMouthSplat=null;amtGaussian.clear();loadAmtImages();return}
     if(renderAmt()){showMissionPointer(false);if(buergeramtDoorGlow){buergeramtDoorGlow.light.intensity=0;buergeramtDoorGlow.lastTime=performance.now()}previousOcclusionTime=performance.now();return}
-    prepareNearbyAssets();
+    // Register actual new bodies before the existing admission scan. In particular,
+    // police can acquire their own standing lease as soon as their real actor exists.
+    const ns=bridge.getNPCs(),ps=bridge.getPolice();
+    let freshStreetBodies=false;
+    for(const actor of ns)if(!npcMeshes.has(actor)){const root=npcAppearance(actor);scene.add(root);npcMeshes.set(actor,root);freshStreetBodies=true}
+    for(const actor of ps)if(!policeMeshes.has(actor)){const root=character("police");scene.add(root);policeMeshes.set(actor,root);freshStreetBodies=true}
+    prepareNearbyAssets(freshStreetBodies);
     if(!document.hidden&&!bridge.getHUDState?.().paused)neighborHaloTime+=Math.min(.1,Math.max(0,levelDt));
     syncNeighborHalo();
     updateMissionPointer();
-    syncChar(playerMesh,bridge.player,0);
-    playerMesh.rotation.y=bridge.player.facing;
+    if(!syncStreetPaint(playerMesh,bridge.player,levelDt)){syncChar(playerMesh,bridge.player,0);playerMesh.rotation.y=bridge.player.facing;}
     for(const slot of trainSlots){for(let i=0;i<slot.cars.length;i++){const car=slot.train.cars[i],group=slot.cars[i].group,jolt=Math.sin(performance.now()*.04+i)*slot.train.bump*.1;group.position.set(X(car.x),.07+jolt,Z(car.y));group.rotation.y=Math.PI/2-car.angle}for(let i=0;i<slot.gangways.length;i++){const a=slot.train.cars[i],b=slot.train.cars[i+1],ax=X(a.x),az=Z(a.y),bx=X(b.x),bz=Z(b.y),mesh=slot.gangways[i],length=Math.hypot(bx-ax,bz-az);mesh.position.set((ax+bx)/2,.54,(az+bz)/2);mesh.rotation.y=Math.atan2(bx-ax,bz-az);mesh.scale.z=Math.max(.18,length-4.64)}}
-    const ns=bridge.getNPCs(),streetNow=performance.now()/1000;
+    const streetNow=performance.now()/1000;
     let streetBuildBudget=2;
     ns.forEach(n=>{
       let q=npcMeshes.get(n),kind=n.special||n.spriteKind;
-      if(n.special&&q?.userData.streetCharacter){retireNpcMesh(q);npcMeshes.delete(n);q=null}
-      if(streetCharacters&&!n.special&&!n.wisdomId&&!n.jwdRole&&!q?.userData.streetCharacter&&!streetFailedStates.has(n)&&streetBuildBudget>0&&Math.hypot(n.x-bridge.player.x,n.y-bridge.player.y)*S<38){
+      if((n.special||registeredStreetPaint(n))&&q?.userData.streetCharacter){retireNpcMesh(q);npcMeshes.delete(n);q=null}
+      if(streetCharacters&&!registeredStreetPaint(n)&&!n.special&&!n.wisdomId&&!n.jwdRole&&!q?.userData.streetCharacter&&!streetFailedStates.has(n)&&streetBuildBudget>0&&Math.hypot(n.x-bridge.player.x,n.y-bridge.player.y)*S<38){
         streetBuildBudget--;
         const candidate=streetCharacters.create(n);
         if(candidate){retireNpcMesh(q);q=candidate;scene.add(q);npcMeshes.set(n,q)}else streetFailedStates.add(n);
@@ -2099,8 +2226,9 @@ function showRendererFailure(error){
           streetFailedStates.add(n);retireNpcMesh(q);npcMeshes.delete(n);q=null;
         }
       }
-      if(kind&&!q?.userData[kind+"Sprite"]){const sprite=npcSprite(n);if(sprite){if(q)scene.remove(q);q=sprite;scene.add(q);npcMeshes.set(n,q)}}
+      if(kind&&!q?.userData[kind+"Sprite"]&&!q?.userData.streetPaintView?.paint.inspect().loaded){const sprite=npcSprite(n);if(sprite){if(q)retireNpcMesh(q);q=sprite;scene.add(q);npcMeshes.set(n,q)}}
       if(!q){q=npcAppearance(n);scene.add(q);npcMeshes.set(n,q)}
+      if(syncStreetPaint(q,n,levelDt))return;
       if(n.jwdRole){q.userData.neighborPaint?.restore();syncJwdCharacter(q,n);q.userData.neighborPaint?.sync(streetNow,bridge.getHUDState?.(),bridge.getNeighborDialogue?.(),amtReducedMotion.matches)}
       else if(q.userData.borderPourerSprite)syncBorderPourer(q,n);
       else if(q.userData.merkelSprite)syncMerkel(q,n);
@@ -2109,8 +2237,8 @@ function showRendererFailure(error){
       else if(n.spriteKind&&q.userData[n.spriteKind+"Sprite"])syncAtlasSprite(q,n,1.21);
       else syncChar(q,n);
     });
-    for(const [n,q] of npcMeshes)if(!ns.includes(n)){if(q.userData.streetCharacter)streetCharacters?.remove(q);else if(n.wisdomId||n.jwdRole)retireNpcMesh(q);else scene.remove(q);npcMeshes.delete(n)}
-    const ps=bridge.getPolice();ps.forEach(p=>{let q=policeMeshes.get(p);if(!q){q=character("police");scene.add(q);policeMeshes.set(p,q)}syncChar(q,p,.04)});for(const [p,q] of policeMeshes)if(!ps.includes(p)){scene.remove(q);policeMeshes.delete(p)}
+    for(const [n,q] of npcMeshes)if(!ns.includes(n)){retireNpcMesh(q);npcMeshes.delete(n)}
+    ps.forEach(p=>{let q=policeMeshes.get(p);if(!q){q=character("police");scene.add(q);policeMeshes.set(p,q)}if(!syncStreetPaint(q,p,levelDt))syncChar(q,p,.04)});for(const [p,q] of policeMeshes)if(!ps.includes(p)){retireNpcMesh(q);policeMeshes.delete(p)}
     const traffic=bridge.getTrafficCars?.()||[];traffic.forEach(car=>{let slot=trafficCarMeshes.get(car);if(!slot){slot=makeTrafficCarSlot(car);trafficCarMeshes.set(car,slot)}const sink=car.vortexSink||0,crush=car.vortexCrush||0,scale=Math.max(.055,1-sink*.93),impact=car.vortexImpact||0;if(impact&&impact!==slot.vortexImpact){slot.vortexImpact=impact;strikeWirtschaftswunder(impact)}slot.group.visible=car.vortexPhase!=="swallowed";slot.group.position.set(X(car.x),(bridge.vehicleElevation?.(car.x,car.y)||0)+.07-sink*.72,Z(car.y));syncVehicleScale(slot,scale,crush);slot.group.rotation.order="YXZ";slot.group.rotation.set(vehicleRoadPitch(car)-sink*1.18,Math.PI/2-car.angle,Math.sin((car.vortexSpin||0)*1.7)*sink*.62);syncVehicleWheels(slot)});for(const [car,slot] of trafficCarMeshes)if(!traffic.includes(car)){removeVehicleSlot(slot);trafficCarMeshes.delete(car)}
     const vehicles=bridge.getPoliceVehicles?.()||[];vehicles.forEach(car=>{let slot=policeVehicleMeshes.get(car);if(!slot){slot=makePoliceCarSlot(car);policeVehicleMeshes.set(car,slot)}slot.group.position.set(X(car.x),(bridge.vehicleElevation?.(car.x,car.y)||0)+.07,Z(car.y));slot.group.rotation.order="YXZ";slot.group.rotation.set(vehicleRoadPitch(car),Math.PI/2-car.angle,0);syncVehicleWheels(slot)});for(const [car,slot] of policeVehicleMeshes)if(!vehicles.includes(car)){removeVehicleSlot(slot);policeVehicleMeshes.delete(car)}
     const helicopters=bridge.getPoliceHelicopters?.()||[];helicopters.forEach(helicopter=>{let slot=policeHelicopterMeshes.get(helicopter);if(!slot){slot=makePoliceHelicopterSlot(helicopter);policeHelicopterMeshes.set(helicopter,slot)}slot.group.position.set(X(helicopter.x),6.8+Math.sin(performance.now()*.003+helicopter.phase)*.18,Z(helicopter.y));slot.group.rotation.y=Math.PI/2-helicopter.angle;slot.rotor.rotation.y=helicopter.rotor;slot.beam.visible=helicopter.spotlight});for(const [helicopter,slot] of policeHelicopterMeshes)if(!helicopters.includes(helicopter)){slot.retired=true;world.remove(slot.group);policeHelicopterMeshes.delete(helicopter)}
@@ -2140,7 +2268,7 @@ function showRendererFailure(error){
     parkCameraFrame+=(parkTarget-parkCameraFrame)*(1-Math.exp(-6*cameraStep));previousCameraTime=now;
     if(parkCameraFrame>.001){const narrow=Math.max(0,Math.min(1,.95/camera.aspect-1)),cx=X(park.x+park.w/2),cz=Z(park.y+park.h/2),focus=parkCameraFrame*(1-.65*narrow);camera.position.set(px+(cx-px)*focus,11.5+(5+2*narrow)*parkCameraFrame,pz+14+2*narrow*parkCameraFrame);camera.lookAt(px+(cx-px)*focus,1+parkCameraFrame,pz-2.7+(cz-(pz-2.7))*parkCameraFrame)}
     if(Math.max(lawPickupCameraFrame,neighborTourCameraFrame)>.001)camera.rotateX(-.16*Math.max(lawPickupCameraFrame,neighborTourCameraFrame));
-    updateGroupVisibility();updateBuergeramtDoorGlow(now);updateBuildingOcclusion();updateWirtschaftswunder(now);updateMissionPointer();renderer.render(scene,camera);
+    updateGroupVisibility();updateBuergeramtDoorGlow(now);updateBuildingOcclusion(undefined,streetPlayerSightlineTargets());updateWirtschaftswunder(now);updateMissionPointer();renderer.render(scene,camera);
     if(missionPointer.visible){renderer.autoClear=false;renderer.clearDepth();renderer.info.autoReset=false;renderer.render(missionHudScene,missionHudCamera);renderer.info.autoReset=true;renderer.autoClear=true}
   },layoutMissionPointer,inspectAssets,setAmtQr,get amtLipSplat(){return amtMouthSplat?.inspect()||null},get amtGaussian(){return amtGaussian.inspect()},get amtCinematicReady(){const status=amtOmenSplat?.inspect();return amtOmenSkipped||!!status?.ready||!!status?.failure},get amtOmenSplat(){return {visit:amtOmenVisit,loading:!!amtOmenRequest,skipped:amtOmenSkipped,failure:amtOmenFailure,...(amtOmenSplat?.inspect()||{ready:false,visible:false})}},get amtOmenStaging(){return {isolation:amtIsolation.value,environmentVisible:amtEnvironment.visible}},get amtOffice(){return officeDetail?.inspect()||null},get amtCharacters(){return [...amtCharacters.map(actor=>({name:actor.name,id:actor.animationId??actor.id,...amtSnapshot(actor),frame:actor.frame,loaded:!!actor.mesh.material.map?.image,mapped:!!actor.mesh.material.map,visible:actor.mesh.visible,detail:actor.mesh.material.map===actor.detail,texelHeight:actor.mesh.material.map?.image?.height||0,breath:actor.mesh.material.userData.breath.value})),...amtMoving.map(actor=>({name:actor.id,...amtSnapshot(actor),frame:actor.cell,loaded:!!actor.mesh.material.map?.image,mapped:!!actor.mesh.material.map,visible:actor.mesh.visible,detail:actor.mesh.material.map===actor.detail||actor.mesh.material.map===actor.walkDetail||actor.mesh.material.map===actor.turnDetail,turnPrepared:!!actor.turnDetail,turnReady:!!actor.turnDetail?.image,texelHeight:actor.mesh.material.map?.image?.height||0,breath:actor.mesh.material.userData.breath.value,tint:actor.mesh.material.color.getHexString(),position:[actor.mesh.position.x,actor.mesh.position.z]}))]}};
   app.classList.add("three-ready");

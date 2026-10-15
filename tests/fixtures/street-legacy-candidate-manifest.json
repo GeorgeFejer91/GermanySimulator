@@ -1,0 +1,130 @@
+{
+  "schemaVersion": 1,
+  "status": "source-draft-unexecuted-not-default",
+  "characters": {
+    "quiz-hartmut-keller": {
+      "id": "hartmut-keller",
+      "name": "Hartmut Keller",
+      "cell": [
+        128,
+        160
+      ],
+      "pivot": [
+        64,
+        150
+      ],
+      "grid": [
+        16,
+        12
+      ],
+      "clips": {
+        "down": {
+          "offset": 0,
+          "count": 16,
+          "seconds": 0.8
+        },
+        "right": {
+          "offset": 16,
+          "count": 16,
+          "seconds": 0.8
+        },
+        "up": {
+          "offset": 32,
+          "count": 16,
+          "seconds": 0.8
+        },
+        "left": {
+          "offset": 48,
+          "count": 16,
+          "seconds": 0.8
+        },
+        "idle": {
+          "offset": 64,
+          "count": 8,
+          "seconds": 2
+        },
+        "greet": {
+          "offset": 72,
+          "count": 16,
+          "seconds": 1
+        },
+        "wait": {
+          "offset": 88,
+          "count": 8,
+          "seconds": 2
+        },
+        "work": {
+          "offset": 96,
+          "count": 16,
+          "seconds": 1.6
+        },
+        "review": {
+          "offset": 112,
+          "count": 16,
+          "seconds": 1.1
+        },
+        "success": {
+          "offset": 128,
+          "count": 16,
+          "seconds": 0.9
+        },
+        "failure": {
+          "offset": 144,
+          "count": 16,
+          "seconds": 1
+        },
+        "look": {
+          "offset": 160,
+          "count": 8,
+          "seconds": 0.8
+        },
+        "talk": {
+          "offset": 168,
+          "count": 7,
+          "seconds": 1
+        }
+      },
+      "clipLayout": "simulation-only-virtual-slots",
+      "figureHeight": 136,
+      "figureWorldHeight": 1.6,
+      "strideDistance": 28.571428571428577,
+      "standing": {
+        "file": "./assets/characters/street/hartmut-keller-standing.webp",
+        "sha256": "6f8aa4b5a92ce1b273c756d2d32edddfd43b924f48ab3f37d41ce265a3382f1e",
+        "width": 128,
+        "height": 160
+      },
+      "motionRig": {
+        "file": "./assets/characters/street/hartmut-keller-rig.json",
+        "sha256": "e92ca5e03ad79968be416dd0593eb70480db19da2ca5258a66e6d0b6c07d00c2",
+        "variants": {
+          "desktop": {
+            "file": "./assets/characters/street/hartmut-keller-parts.webp",
+            "sha256": "9e5949f957d019c07258211ede80073ffbd6e8d4610a76c15f7424759be1e236",
+            "width": 2048,
+            "height": 1560,
+            "bytes": 1592758,
+            "decodedBytes": 12779520
+          },
+          "mobile": {
+            "file": "./assets/characters/street/hartmut-keller-parts-mobile.webp",
+            "sha256": "1353d40abc9e2df24e2956b22bedc029b803c18ce218a69b986db08424ef8088",
+            "width": 1024,
+            "height": 780,
+            "bytes": 441170,
+            "decodedBytes": 3194880
+          }
+        }
+      },
+      "speech": {
+        "clips": {
+          "talk": {
+            "offset": 168,
+            "count": 7,
+            "seconds": 1
+          }
+        }
+      }
+    }
+  }
+}
