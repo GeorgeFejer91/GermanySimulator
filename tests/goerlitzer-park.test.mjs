@@ -70,7 +70,7 @@ for(const radius of [12,16,38]){
 }
 
 let opened;
-Object.assign(sandbox,{state:{dialogue:false,modal:false},openDialogue:(...args)=>{opened=args}});
+Object.assign(sandbox,{neighborActivityActive:()=>false,state:{dialogue:false,modal:false},openDialogue:(...args)=>{opened=args}});
 Object.assign(layout.player,{x:park.plaqueX,y:park.plaqueY});
 vm.runInNewContext(`${between(game,"function interact(){","function collect(){")}\ninteract();`,sandbox);
 assert.equal(opened?.[1],park.lines,"E interaction must open every sourced line from the outside placard");

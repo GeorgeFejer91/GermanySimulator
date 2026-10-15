@@ -19,7 +19,7 @@ function fn(name,code=source){
 function harness(direct=false){
  const classes=new Set(direct?['amt-direct-mode']:[]),elements=new Map(),events=[],visits=[],keys={KeyW:true,KeyE:true};
  const element=id=>{if(!elements.has(id))elements.set(id,{hidden:false,textContent:''});return elements.get(id)};
- const h={console,Math,WORLD:{w:10960,h:5360},RAIL_GUTTER:560,WALKWAY_WIDTH:84,SIDEWALK_WIDTH:72,TREE_RADIUS:38,TRAIN_CAR_HALF_LENGTH:122,TRAIN_CAR_HALF_WIDTH:46,
+ const h={console,Math,neighborActivityActive:()=>false,WORLD:{w:10960,h:5360},RAIL_GUTTER:560,WALKWAY_WIDTH:84,SIDEWALK_WIDTH:72,TREE_RADIUS:38,TRAIN_CAR_HALF_LENGTH:122,TRAIN_CAR_HALF_WIDTH:46,
   horizontalRoads:[{x:560,y:1380,w:9840,h:260},{x:560,y:2560,w:9840,h:240},{x:560,y:3560,w:9840,h:220}],
   offsetWorldPoint:p=>({...p,x:p.x+560,y:p.y+560}),props:[],normObjects:[],trees:[],trains:[],trafficCars:[],policeVehicles:[],police:[],npcs:[],grassAreas:[],walkways:[],
   goerlitzerPark:{x:10000,y:4000,w:100,h:100,plaqueX:10000,plaqueY:4000},wirtschaftswunderSite:{x:10000,y:4200,collisionRadius:142},kiesingerMemorial:{x:10000,y:4500},

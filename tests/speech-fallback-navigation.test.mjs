@@ -93,7 +93,7 @@ assert.equal(activeCancel,1,"replacing active speech must still cancel it");
 const order=[],recorded={text:"Recorded line",recording:"line.mp3",start:()=>order.push("text")};
 let resumeAudio;
 const recordingContext=vm.createContext({
- item:recorded,stimulusEligible:()=>true,prepareRecording:()=>Promise.resolve({duration:2}),
+ setTimeout:()=>1,clearTimeout:()=>{},item:recorded,stimulusEligible:()=>true,prepareRecording:()=>Promise.resolve({duration:2}),
  ensureAudio:()=>({state:"suspended",resume:()=>new Promise(resolve=>resumeAudio=resolve),currentTime:0,
   createBufferSource:()=>({connect:target=>target,start:()=>order.push("audio")}),
   createGain:()=>({gain:{setValueAtTime(){},linearRampToValueAtTime(){}},connect:target=>target})}),

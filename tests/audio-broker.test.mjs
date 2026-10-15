@@ -22,6 +22,7 @@ vm.runInContext(`
  const stimulusQueue=[];
  const state={voiceOn:true};
  const STIMULUS_PRIORITY={CRITICAL:5};
+ const citySpeechAllowed=()=>true;
  const AUDIO_MIX={AMBIENT_TTL_MS:4000,MAX_TRANSIENT_QUEUE:4};
  let nextAmbientAt=0,activeStimulus=null;
  function pumpStimuli(){}
@@ -101,10 +102,10 @@ border.api.player.y=1681;
 assert.equal(borderCue[5].isEligible(),false,"a queued Germany cue must die after crossing back into Berlin");
 border.api.player.y=1400;
 assert.equal(borderCue[5].isEligible(),false,"a queued border cue must die after leaving the border area");
-assert.match(game,/source\.connect\(gain\)\.connect\(foregroundOutput\(\)\)/,"recorded foreground audio must use the shared bus");
+assert.match(game,/source\.connect\(gain\)\.connect\(item\.distanceGain\|\|foregroundOutput\(\)\)/,"recorded foreground audio must use the shared bus");
 assert.match(game,/masterBus\.connect\(limiter\)\.connect\(a\.destination\)/,"Web Audio buses must pass through the shared output limiter");
 assert.doesNotMatch(sourceOf("playRecordedStimulus"),/audio\.destination/,"recorded foreground sources must never connect directly to the destination");
-assert.doesNotMatch(sourceOf("requestTrainAnnouncement"),/gain|volume/,"train distance must affect eligibility, not accepted playback gain");
+assert.match(sourceOf("playRecordedStimulus"),/item\.distanceGain\.connect\(foregroundOutput\(\)\)/,"train distance gain must feed the same normalized foreground bus");
 
 let scheduled=0;
 const completion=vm.createContext({performance:{now:()=>1000},clearTimeout:()=>{},setTimeout:()=>{scheduled++;return 1},clearSubtitle:()=>{},AUDIO_MIX:{AMBIENT_GAP_MS:2500,REQUIRED_GAP_MS:250}});
