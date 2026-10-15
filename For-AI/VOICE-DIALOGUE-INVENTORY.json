@@ -41,7 +41,8 @@
         "game.js npcLines / npcDenglisch by region",
         "game.js pedestrianBarks[region] by surface",
         "game.js crowdArchetypes[archetype].barks[region]",
-        "game.js quizApproaches when this instance is selected as a quizzer"
+        "game.js quizApproaches when this instance is selected as a quizzer",
+        "game.js crowdArchetypes fallback; actor-owned crowdCharacterBarks[crowd-baerbel-brezel] regional lines"
       ]
     },
     {
@@ -50,7 +51,8 @@
         "game.js npcLines / npcDenglisch by region",
         "game.js pedestrianBarks[region] by surface",
         "game.js crowdArchetypes[archetype].barks[region]",
-        "game.js quizApproaches when this instance is selected as a quizzer"
+        "game.js quizApproaches when this instance is selected as a quizzer",
+        "game.js crowdArchetypes fallback; actor-owned crowdCharacterBarks[crowd-brigitte-bueroklammer] regional lines"
       ]
     },
     {
@@ -67,7 +69,8 @@
         "game.js npcLines / npcDenglisch by region",
         "game.js pedestrianBarks[region] by surface",
         "game.js crowdArchetypes[archetype].barks[region]",
-        "game.js quizApproaches when this instance is selected as a quizzer"
+        "game.js quizApproaches when this instance is selected as a quizzer",
+        "game.js crowdArchetypes fallback; actor-owned crowdCharacterBarks[crowd-elfriede-eingabe] regional lines"
       ]
     },
     {
@@ -76,7 +79,8 @@
         "game.js npcLines / npcDenglisch by region",
         "game.js pedestrianBarks[region] by surface",
         "game.js crowdArchetypes[archetype].barks[region]",
-        "game.js quizApproaches when this instance is selected as a quizzer"
+        "game.js quizApproaches when this instance is selected as a quizzer",
+        "game.js crowdArchetypes fallback; actor-owned crowdCharacterBarks[crowd-guenther-gartenzaun] regional lines"
       ]
     },
     {
@@ -85,7 +89,8 @@
         "game.js npcLines / npcDenglisch by region",
         "game.js pedestrianBarks[region] by surface",
         "game.js crowdArchetypes[archetype].barks[region]",
-        "game.js quizApproaches when this instance is selected as a quizzer"
+        "game.js quizApproaches when this instance is selected as a quizzer",
+        "game.js crowdArchetypes fallback; actor-owned crowdCharacterBarks[crowd-hildegard-brotzeit] regional lines"
       ]
     },
     {
@@ -103,7 +108,8 @@
         "game.js npcLines / npcDenglisch by region",
         "game.js pedestrianBarks[region] by surface",
         "game.js crowdArchetypes[archetype].barks[region]",
-        "game.js quizApproaches when this instance is selected as a quizzer"
+        "game.js quizApproaches when this instance is selected as a quizzer",
+        "game.js crowdArchetypes fallback; actor-owned crowdCharacterBarks[crowd-irmgard-aktenordner] regional lines"
       ]
     },
     {
@@ -112,7 +118,8 @@
         "game.js npcLines / npcDenglisch by region",
         "game.js pedestrianBarks[region] by surface",
         "game.js crowdArchetypes[archetype].barks[region]",
-        "game.js quizApproaches when this instance is selected as a quizzer"
+        "game.js quizApproaches when this instance is selected as a quizzer",
+        "game.js crowdArchetypes fallback; actor-owned crowdCharacterBarks[crowd-klaus-dieter-knoedel] regional lines"
       ]
     },
     {
@@ -121,7 +128,8 @@
         "game.js npcLines / npcDenglisch by region",
         "game.js pedestrianBarks[region] by surface",
         "game.js crowdArchetypes[archetype].barks[region]",
-        "game.js quizApproaches when this instance is selected as a quizzer"
+        "game.js quizApproaches when this instance is selected as a quizzer",
+        "game.js crowdArchetypes fallback; actor-owned crowdCharacterBarks[crowd-manfred-mittagsruhe] regional lines"
       ]
     },
     {
@@ -130,7 +138,8 @@
         "game.js npcLines / npcDenglisch by region",
         "game.js pedestrianBarks[region] by surface",
         "game.js crowdArchetypes[archetype].barks[region]",
-        "game.js quizApproaches when this instance is selected as a quizzer"
+        "game.js quizApproaches when this instance is selected as a quizzer",
+        "game.js crowdArchetypes fallback; actor-owned crowdCharacterBarks[crowd-ruediger-rasenkante] regional lines"
       ]
     },
     {
@@ -601,6 +610,98 @@
         }
       }
     ],
+    "crowdCharacterBarks": {
+      "crowd-baerbel-brezel": {
+        "berlin": [
+          "Die Brezel ist rund; your Anspruch braucht trotzdem ein Formular mit Ecken.",
+          "Salz ist nur nach Antrag zuständig; please reichen Sie die Krümel geordnet ein."
+        ],
+        "germany": [
+          "Die Brezel ist rund; Ihr Anspruch braucht trotzdem ein Formular mit Ecken.",
+          "Salz ist nur nach Antrag zuständig; bitte reichen Sie die Krümel geordnet ein."
+        ]
+      },
+      "crowd-brigitte-bueroklammer": {
+        "berlin": [
+          "Die Büroklammer hält den Vorgang, not Ihre Schlange; bitte ziehen Sie eine Nummer.",
+          "Ich habe Ihre Unterlagen geheftet; the loose page needs einen eigenen Antrag."
+        ],
+        "germany": [
+          "Die Büroklammer hält den Vorgang, nicht Ihre Schlange; bitte ziehen Sie eine Nummer.",
+          "Ich habe Ihre Unterlagen geheftet; das lose Blatt braucht einen eigenen Antrag."
+        ]
+      },
+      "crowd-elfriede-eingabe": {
+        "berlin": [
+          "Ihre Eingabe ist gespeichert, but the button says noch nicht wirksam.",
+          "Bitte bestätigen Sie den Klick schriftlich; the Screenshot braucht einen Eingangsstempel."
+        ],
+        "germany": [
+          "Ihre Eingabe ist gespeichert, aber die Schaltfläche erklärt sie noch nicht für wirksam.",
+          "Bitte bestätigen Sie den Klick schriftlich; der Screenshot braucht einen Eingangsstempel."
+        ]
+      },
+      "crowd-guenther-gartenzaun": {
+        "berlin": [
+          "Der Zaun endet hier; your Schuhwerk needs eine schriftliche Grenzübertrittserlaubnis.",
+          "Ich habe den Grenzverlauf notiert. Your Schatten wartet bitte auf Genehmigung."
+        ],
+        "germany": [
+          "Der Zaun endet hier; für Ihren Schuh gibt es keine schriftliche Grenzübertrittserlaubnis.",
+          "Ich habe den Grenzverlauf notiert. Ihr Schatten wartet bitte auf Genehmigung."
+        ]
+      },
+      "crowd-hildegard-brotzeit": {
+        "berlin": [
+          "Die Brotzeit beginnt erst nach der Pausenmarke; the Brezel is zur Aktenlage.",
+          "Der Senf ist beantragt, not bewilligt; bitte warten Sie neben der Serviette."
+        ],
+        "germany": [
+          "Die Brotzeit beginnt erst nach der Pausenmarke; die Brezel liegt hier nur zur Aktenlage.",
+          "Der Senf ist beantragt, nicht bewilligt; bitte warten Sie neben der Serviette."
+        ]
+      },
+      "crowd-irmgard-aktenordner": {
+        "berlin": [
+          "Der Aktenordner ist alphabetisch; your Anliegen kommt erst nach Register Z.",
+          "Bitte legen Sie den Nachweis in dreifacher Ausfertigung vor; the Rücken ist not a mailbox."
+        ],
+        "germany": [
+          "Der Aktenordner ist alphabetisch; Ihr Anliegen kommt erst nach Register Z.",
+          "Bitte legen Sie den Nachweis in dreifacher Ausfertigung vor; der Rücken ist kein Briefkasten."
+        ]
+      },
+      "crowd-klaus-dieter-knoedel": {
+        "berlin": [
+          "Der Knödel steht auf Formblatt K 7; even die Soße braucht einen Stempel.",
+          "Bitte reichen Sie den Teller as Nachweis ein; ohne Antrag bleibt der Knödel im Vorverfahren."
+        ],
+        "germany": [
+          "Der Knödel darf erst nach Formular K 7 auf den Teller; die Soße braucht einen Eingangsstempel.",
+          "Bitte reichen Sie den Teller als Nachweis ein; ohne Antrag bleibt der Knödel im Vorverfahren."
+        ]
+      },
+      "crowd-manfred-mittagsruhe": {
+        "berlin": [
+          "Die Mittagsruhe läuft bis drei; even Ihr Flüstern needs einen Termin.",
+          "Bitte stellen Sie die Bohrmaschine auf lautlos; the Formular war lauter als Sie."
+        ],
+        "germany": [
+          "Die Mittagsruhe dauert bis drei; auch Ihr Flüstern braucht einen Termin.",
+          "Bitte stellen Sie die Bohrmaschine auf lautlos; das Formular war lauter als Sie."
+        ]
+      },
+      "crowd-ruediger-rasenkante": {
+        "berlin": [
+          "Die Rasenkante ist not an invitation; your Schuh steht im Zuständigkeitsbereich.",
+          "Ein Halm liegt quer. Bitte melden Sie den Vorfall with Lageplan und Maßstab."
+        ],
+        "germany": [
+          "Die Rasenkante ist keine Einladung; Ihr Schuh steht im Zuständigkeitsbereich.",
+          "Ein Halm liegt quer. Bitte melden Sie den Vorfall mit Lageplan und Maßstab."
+        ]
+      }
+    },
     "innerMonologues": {
       "berlin": {
         "train": [

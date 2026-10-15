@@ -2,6 +2,7 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import {readFileSync} from 'node:fs';
 import vm from 'node:vm';
+import {neighborProtectionSource} from './quiz-harness.mjs';
 
 const source=readFileSync(new URL('../game.js',import.meta.url),'utf8');
 const catalogSource=readFileSync(new URL('../For-AI/AUDIO-TEXT-LIBRARY.js',import.meta.url),'utf8');
@@ -22,9 +23,9 @@ function fixture(){
  const node=id=>{if(!elements.has(id))elements.set(id,{hidden:true,disabled:false,textContent:'',dataset:{},classList:{add(){},remove(){},toggle(){},contains(){return false}}});return elements.get(id)};
  const actor={id:'fixture-klein-A',voiceId:'stadt-klaus-dieter-klein'},other={id:'fixture-klein-B',voiceId:actor.voiceId};
  const path='./assets/voices/city-dialogue/stadt-klaus-dieter-klein-01.mp3',clip=catalog.recordings[path];
- Object.assign(scope,{state:{voiceOn:true,dialogue:false,modal:false,lang:'en',region:'germany'},npcs:[actor,other],activeStimulus:null,textOnlyBark:null,recordedSpeechSource:null,recordedSpeechGain:null,stimulusGeneration:0,stimulusSequence:0,stimulusQueue:[],stimulusLastServed:new Map(),nextAmbientAt:0,stimulusTimer:null,
+ Object.assign(scope,{state:{voiceOn:true,started:true,mission:1,dialogue:false,modal:false,lang:'en',region:'germany'},player:{x:0,y:0},npcs:[actor,other],activeStimulus:null,textOnlyBark:null,recordedSpeechSource:null,recordedSpeechGain:null,stimulusGeneration:0,stimulusSequence:0,stimulusQueue:[],stimulusLastServed:new Map(),nextAmbientAt:0,stimulusTimer:null,
   speechCatalog:catalog,STIMULUS_PRIORITY:{AMBIENT:1,REACTIVE:2,CRITICAL:3},AUDIO_MIX:{AMBIENT_TTL_MS:4000,MAX_TRANSIENT_QUEUE:4,REQUIRED_GAP_MS:250,AMBIENT_GAP_MS:2500,ATTACK_SECONDS:.01,FOREGROUND:1},AUDIO_CLASS:{TEXT:'text'},
-  document:{hidden:false,getElementById:node,querySelector:node},jwd:{tour:null},performance,
+  document:{hidden:false,getElementById:node,querySelector:node},jwd:{tour:null,allocated:true,met:new Set(['jwd-swabian','jwd-parent','jwd-watcher'])},performance,
   setTimeout(callback,delay){let timer;timer=setTimeout(()=>{timers.delete(timer);callback()},delay);timers.add(timer);return timer},clearTimeout(timer){clearTimeout(timer);timers.delete(timer)},
   prepareRecording(url){let accept,reject;const promise=new Promise((a,b)=>{accept=a;reject=b});deferred.push({url,accept,reject});return promise},
   foregroundOutput:()=>({}),setAudioText(){},clearSubtitle(){scope.caption=null},startSubtitle(item){scope.caption=item.text},uiTone(){},cancelHumorScold(){},cancelJwdTour(){throw Error('Unexpected tour')},requestCharacterReaction(){},
@@ -32,7 +33,7 @@ function fixture(){
  scope.audio={state:'running',currentTime:10,resume(){this.state='running';return Promise.resolve()},
   createGain(){return{gain:{setValueAtTime(){},linearRampToValueAtTime(){}},connect(target){return target}}},
   createBufferSource(){const s={buffer:null,onended:null,stops:0,startAt:null,connect(target){return target},start(time){this.startAt=time},stop(){this.stops++}};sources.push(s);return s}};
- vm.runInContext(functions,scope,{filename:'canonical-street-speech-production-slices'});
+ vm.runInContext(neighborProtectionSource+functions,scope,{filename:'canonical-street-speech-production-slices'});
  const request=(owner=actor,extra={})=>{scope.speak(clip.source,{candidateVoiceId:owner?.voiceId||actor.voiceId,voiceKey:'Fixture owned speaker',actor:owner,subtitle:clip.english,...extra});return scope.activeStimulus};
  const flush=()=>new Promise(done=>setImmediate(done));
  const start=async(index=0,duration=2)=>{deferred[index].accept({duration,length:duration*48000,numberOfChannels:1});await flush();await flush()};
@@ -95,4 +96,25 @@ actorTest('Actual quiz answer captures physical owner before clear and keeps rew
  vm.runInContext(fn(source,'answerCitizenshipQuiz'),f.h);const q={answer:1,type:'civic',source:'OWNED',choices:['A','B','C','D']};Object.assign(f.h.state,{quizQuestion:q,quizCopy:q,quizCharacter:{name:'Owned Persona',title:'Own Title',voiceId:f.actor.voiceId},quizNpc:f.actor});f.h.answerCitizenshipQuiz(0);f.h.answerCitizenshipQuiz(0);
  const bark=events.find(e=>e.bark).bark;assert.equal(bark[5].actor,f.actor);assert.equal(bark[5].candidateVoiceId,f.actor.voiceId);assert.equal(f.h.state.quizNpc,null);assert.equal(events.filter(e=>e.n).length,1);assert.equal(events.find(e=>e.n).n,-1);
  return{capturedBeforeClear:true,wrongAnswerOnce:true,bodyOrRewardChanges:false};
+});
+
+actorTest('Neighbor protection rejects city speech and silent captions while retaining owned dialogue',async f=>{
+ f.h.jwd.tour={actor:{id:'jwd-parent'}};
+ for(const family of ['pedestrian','quiz','quiz-result','police','train']){
+  assert.equal(f.h.stimulusEligible({family}),false);
+  assert.equal(f.request(f.actor,{family}),null);assert.equal(f.h.stimulusQueue.length,0);assert.equal(f.deferred.length,0);
+  let captionStarted=false;f.h.state.voiceOn=false;
+  assert.equal(f.h.showWorldBark('CITY',f.clip.source,true,'','',{family,start:()=>captionStarted=true}),false);
+  assert.equal(captionStarted,false);assert.equal(f.h.textOnlyBark,null);assert.equal(f.node('police-bark').hidden,true);f.h.state.voiceOn=true;
+ }
+ assert.equal(f.h.stimulusEligible({family:'dialogue'}),true);
+ const dialogue=f.request();assert.equal(dialogue.actor,f.actor);await f.start();assert.equal(f.h.getStreetSpeech(f.actor).speechStatus,'playing');
+});
+
+actorTest('Protection entered during native decode retires city request; leaving permits same actor',async f=>{
+ let done=0;const item=f.request(f.actor,{family:'pedestrian',done:()=>done++});assert(item);assert.equal(f.deferred.length,1);
+ f.h.jwd.met.clear();Object.assign(f.h.player,{x:f.h.jwdLane.x,y:f.h.jwdLane.y});
+ assert.equal(f.h.stimulusEligible(item),false);await f.start();assert.equal(f.sources.length,0);assert.equal(done,1);assert.equal(f.h.activeStimulus,null);assert.equal(f.h.getStreetSpeech(f.actor),null);
+ f.h.player.x=f.h.jwdLane.x-121;assert.equal(f.h.stimulusEligible({family:'pedestrian'}),true);
+ const retry=f.request(f.actor,{family:'pedestrian'});assert.equal(retry.actor,f.actor);await f.start(1);assert.equal(f.sources.length,1);assert.equal(f.h.getStreetSpeech(f.actor).speechStatus,'playing');
 });

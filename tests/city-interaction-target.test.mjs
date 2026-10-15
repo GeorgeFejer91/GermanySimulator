@@ -14,7 +14,8 @@ const target=source.includes('function cityInteractionTarget(){')
 const interaction=extract('function interact(){','\nfunction collect(){');
 const hint=extract('function nearestInteract(){','\nfunction draw(){');
 const keydown=extract('function keydown(e){','function keyup(e){');
-const functions=[target,interaction,hint,keydown].join('\n');
+const neighborActivity=extract('function neighborActivityActive(){','\nfunction citySpeechAllowed(');
+const functions=[neighborActivity,target,interaction,hint,keydown].join('\n');
 const building=(id,d)=>({id,name:id.toUpperCase(),doorX:d,doorY:0});
 const person=(name,d,extra={})=>({id:name,name,x:d,y:0,line:0,voiceId:'fixture-voice',...extra});
 const prop=(id,d,extra={})=>({id,label:id.toUpperCase(),x:d,y:0,...extra});
@@ -24,7 +25,8 @@ function observe(options={}){
  const state={started:true,gameOver:false,dialogue:false,modal:false,lang:'de',region:'berlin',mission:0,stadtbild:0,...options.state};
  const context={
   window:{Germany3D:{levelTransition:{active:!!options.transition}},GermanyHUD:{paused:!!options.paused}},
-  state,jwd:{tour:options.tour||null},player:{x:0,y:0},keys:{},
+  state,jwd:{tour:options.tour||null,allocated:!!options.allocated,met:new Set(options.met||[])},
+  jwdLane:options.jwdLane||{x:0,y:0,w:300,h:300},player:{x:0,y:0},keys:{},
   buildings:options.buildings||[],npcs:options.npcs||[],props:options.props||[],normObjects:options.normObjects||[],
   goerlitzerPark:{plaqueX:options.park??10000,plaqueY:0,lines:['fixture plaque']},
   kiesingerMemorial:{x:options.memorial??10000,y:-195},KIESINGER_PLAQUE_LINES:['fixture memorial'],
@@ -34,6 +36,7 @@ function observe(options={}){
   currentMission:()=>({target:'buergeramt',form:'a38'}),
   interactBuilding:b=>events.push('building:'+b.id),
   talkJwdNeighbor:n=>events.push('neighbor:'+n.id),
+  visitJwdHome:()=>events.push('visit-home'),
   speakJwdTourLine:()=>events.push('tour-line'),
   microInteract:p=>events.push('prop:'+p.id),
   openDialogue:name=>events.push('dialogue:'+name),
@@ -66,3 +69,19 @@ const checks=[
 ];
 assert.equal(checks.length,10);
 for(const[name,run]of checks)test(name,run);
+
+test('unfinished local neighbor introductions suppress unrelated target hints and E actions',()=>{
+ check('protected introductions',{allocated:true,state:{mission:1},buildings:[building('office',20)],npcs:[person('PERSON',10)],props:[prop('fax',5)]},result('',[]));
+});
+
+test('protected neighbor introductions preserve home and neighbor access',()=>{
+ const options={allocated:true,state:{mission:1},buildings:[building('office',5),{...building('jwd-home',80),residential:true}]};
+ check('home remains reachable',options,result('E · JWD-HOME',['visit-home']));
+ check('neighbor retains precedence',{...options,npcs:[person('HEIKO',40,{jwdRole:'parent'})]},result('E · HEIKO',['neighbor:HEIKO']));
+});
+
+test('finished introductions or leaving the local area restore ordinary targets',()=>{
+ const options={allocated:true,state:{mission:1},buildings:[building('office',20)]};
+ check('all neighbors introduced',{...options,met:['parent','watcher','swabian']},result('E · OFFICE',['building:office']));
+ check('outside local introduction area',{...options,jwdLane:{x:500,y:500,w:300,h:300}},result('E · OFFICE',['building:office']));
+});

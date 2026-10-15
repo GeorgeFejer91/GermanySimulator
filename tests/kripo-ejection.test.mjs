@@ -23,7 +23,7 @@ function harness(direct=false){
   horizontalRoads:[{x:560,y:1380,w:9840,h:260},{x:560,y:2560,w:9840,h:240},{x:560,y:3560,w:9840,h:220}],
   offsetWorldPoint:p=>({...p,x:p.x+560,y:p.y+560}),props:[],normObjects:[],trees:[],trains:[],trafficCars:[],policeVehicles:[],police:[],npcs:[],grassAreas:[],walkways:[],
   goerlitzerPark:{x:10000,y:4000,w:100,h:100,plaqueX:10000,plaqueY:4000},wirtschaftswunderSite:{x:10000,y:4200,collisionRadius:142},kiesingerMemorial:{x:10000,y:4500},
-  player:{x:1800,y:1700,r:16,energy:81,vx:30,vy:-20,facing:0},jwd:{tour:null},state:{started:true,modal:true,dialogue:false,mission:0,forms:0,wanted:2,germanness:7,pfand:3,day:2,voiceOn:false,subtitlesOn:true,region:'berlin'},
+  player:{x:1800,y:1700,r:16,energy:81,vx:30,vy:-20,facing:0},jwd:{tour:null,allocated:false,met:new Set()},state:{started:true,modal:true,dialogue:false,mission:0,forms:0,wanted:2,germanness:7,pfand:3,day:2,voiceOn:false,subtitlesOn:true,region:'berlin'},
   OFFENSE_TIMING:{policeContactCooldown:5.8},keys,pendingOfficeEntry:null,stationElevation:()=>0,regionOf:y=>y>1680?'berlin':'germany',clamp:(n,a,b)=>Math.max(a,Math.min(b,n)),dist:(ax,ay,bx,by)=>Math.hypot(ax-bx,ay-by),
   document:{body:{classList:{contains:k=>classes.has(k),remove:k=>classes.delete(k)}},getElementById:element},
   clearInput(){for(const code in keys)keys[code]=false},toast:text=>events.push(['toast',text]),updateHud:()=>events.push(['hud']),
@@ -32,10 +32,11 @@ function harness(direct=false){
   currentMission:()=>({target:'buergeramt',form:'a38'}),window:{Germany3D:{officeAssetsReady:true,leaveAmtDirectMode:()=>events.push(['city-ready']),enterBuergeramt:done=>done(),prepareOfficeAssets:()=>events.push(['prepare-office'])},BuergeramtLevel:{requestFullscreen(){},open:options=>visits.push(options)}}
  };
  vm.createContext(h);
+ const lane=source.split('\n').find(line=>line.startsWith('const jwdLane='));assert.ok(lane,'actual JWD lane declaration');
  const buildings=source.slice(source.indexOf('const buildings='),source.indexOf('const grassAreas='));
  const paths=source.slice(source.indexOf('for(const b of buildings){'),source.indexOf('walkways.push({x:goerlitzerPark'));
- const names=['normObjectRadius','propRadius','staticBlocked','signedRectDistance','trainCarDistance','vehicleBodyDistance','responderBlocked','amtExitPosition','returnFromAmt','wanted','showAmtDirectResult','cancelAmtAppointment','bureaucrat','interactBuilding','interact'];
- vm.runInContext(`${buildings}\n${paths}\n${names.map(name=>fn(name)).join('\n')}\nglobalThis.office=buildings.find(b=>b.id==='buergeramt');`,h);
+ const names=['normObjectRadius','propRadius','staticBlocked','signedRectDistance','trainCarDistance','vehicleBodyDistance','responderBlocked','amtExitPosition','returnFromAmt','wanted','showAmtDirectResult','cancelAmtAppointment','bureaucrat','interactBuilding','neighborActivityActive','cityInteractionTarget','interact'];
+ vm.runInContext(`${lane}\n${buildings}\n${paths}\n${names.map(name=>fn(name)).join('\n')}\nglobalThis.office=buildings.find(b=>b.id==='buergeramt');`,h);
  if(direct){const start=source.indexOf(' const directConfig=');vm.runInContext(source.slice(start,source.indexOf('\n function restartAmt',start))+'\nglobalThis.directConfig=directConfig;',h)}
  return Object.assign(h,{events,visits,classes,elements});
 }

@@ -208,8 +208,12 @@ for(const vertical of [false,true]){
 {
  const h=harness();Object.assign(h,{window:{},matchMedia:()=>({matches:true}),location:{search:""},URLSearchParams,offsetWorldPoint:item=>({...item,x:item.x+560,y:item.y+560}),npcSpriteAtlases:{},npcLines:[""],crowdArchetypeOrder:[{id:"towel-man",label:"TOWEL",sprite:"towelMan"}]});
  vm.runInContext(readFileSync(new URL("../goerlitzer-park.js",import.meta.url),"utf8"),h);h.goerlitzerPark=h.window.GoerlitzerPark;
+ vm.runInContext(readFileSync(new URL("../For-AI/QUIZ-CHARACTER-DICTIONARY.js",import.meta.url),"utf8"),h);
  const between=(start,end)=>source.slice(source.indexOf(start),source.indexOf(end,source.indexOf(start)+start.length)),line=prefix=>source.split(/\r?\n/).find(text=>text.startsWith(prefix));
+ vm.runInContext(line("const quizCharacterLibrary="),h);
  vm.runInContext(`${between("const horizontalRoads=","const OFFENSE_TIMING=")}\n${line("const BORDER_Y=")}\n${line("const borderGates=")}\n${line("const wirtschaftswunderSite=")}\n${line("const kiesingerMemorial=")}\n${between("const STATION_RISE=","const TRAIN_CAR_OFFSETS=")}\n${between("const desktopBillboards=","const stableSpriteRoot=")}\n${between("const buildings=","const missions=")}\n${between("const WURST_TYPES=","const state=")}\n${between("const npcs=","window.Germany3DBridge=")}\ninitializePedestrianRoutes();globalThis.city={npcs,buildings,props,trees,aliceDumpster};`,h);
+ assert.equal(h.city.npcs.filter(n=>n.crowd).length,110,"physical fixture retains the complete shipped crowd");
+ assert.equal(h.city.npcs.filter(n=>n.crowd&&n.quizzer).length,22,"physical fixture retains all quiz actors");
  const citizens=h.city.npcs.filter(n=>!n.special);assert.ok(citizens.length>60,"check the whole shipped crowd rather than two synthetic actors");
  for(const n of citizens){assert.ok(h.pedestrianRouteContains(n,n.x,n.y),`${n.name} must start with full-body pavement clearance`);assert.equal(h.staticBlocked(n.x,n.y,13),false,`${n.name} spawn must clear every static footprint`);assert.equal(h.responderBlocked(n.x,n.y,13,n,n.x,n.y),false,`${n.name} spawn cannot overlap another solid body`)}
  for(let frame=0;frame<120;frame++)for(const n of citizens){

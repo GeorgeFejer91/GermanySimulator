@@ -11,6 +11,15 @@ function productionSlice(start,end){
  return gameSource.slice(first,last);
 }
 
+// Keep the actual area geometry and guards shared by both controller/broker fixtures.
+// The block avoids redeclaring world constants when spawnCityCrowd loads its producers.
+const gutter=gameSource.match(/RAIL_GUTTER=\d+/)?.[0];
+const offset=gameSource.split('\n').find(line=>line.startsWith('const offsetWorldPoint='));
+const lane=gameSource.split('\n').find(line=>line.startsWith('const jwdLane='));
+assert.ok(gutter&&offset&&lane,'current neighbor protection geometry');
+export const neighborProtectionSource='{const '+gutter+';'+offset+lane+'globalThis.jwdLane=jwdLane;}'+
+ productionSlice('function neighborActivityActive(','function speechActorCurrent(');
+
 // Executes current controller/data producers. DOM, media delivery, movement,
 // reactions and point sinks are doubles; this cannot establish rendered play.
 export function createQuizHarness(region='germany'){
@@ -24,7 +33,7 @@ export function createQuizHarness(region='germany'){
  const npcs=[],effects={speech:[],reactions:[],points:[],feedback:[]};
  const randomMath=Object.create(Math);randomMath.random=()=>.999999;
  const scope=vm.createContext({window:{},npcs,Math:randomMath,
-  player:{x:0,y:0},jwd:{tour:null},crowdIndex:0,npcSpriteAtlases:{},
+  player:{x:0,y:0},jwd:{tour:null,allocated:true,met:new Set(['jwd-swabian','jwd-parent','jwd-watcher'])},crowdIndex:0,npcSpriteAtlases:{},
   STIMULUS_PRIORITY:{CRITICAL:5},
   document:{getElementById:node,createElement:createNode,
    querySelector:()=>node('portrait-frame'),querySelectorAll:()=>node('quiz-choices').children},
@@ -43,7 +52,7 @@ export function createQuizHarness(region='germany'){
  assert.ok(stateDeclaration&&limits&&pick,'current state, interest limits and random picker');
  vm.runInContext(stateDeclaration+'const '+limits+';const '+pick+';globalThis.state=state;',scope);
  Object.assign(scope.state,{region,started:true,quizTimer:0});
- vm.runInContext(productionSlice('function speechClip(','const WURST_TYPES=')+
+ vm.runInContext(neighborProtectionSource+productionSlice('function speechClip(','const WURST_TYPES=')+
   productionSlice('const crowdArchetypes=','const germannessVoice=')+
   productionSlice('const citizenshipQuestions=','const violationPools=')+
   productionSlice('const npcLines=','const merzLines=')+

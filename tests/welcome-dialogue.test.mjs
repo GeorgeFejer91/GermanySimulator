@@ -28,7 +28,7 @@ function briefing(region, voiceOn, lang) {
   };
   const speech = [], stops = [], objectives = [];
   const state = {region, voiceOn, lang};
-  const context = vm.createContext({window: {}, state,
+  const context = vm.createContext({window: {}, state, textOnlyBark: null,
     document: {getElementById: element, querySelector: element},
     stopSpeech: (...args) => stops.push(args), speak: (text, options) => speech.push({text, options}),
     STIMULUS_PRIORITY: {CRITICAL: 3}, toast: text => objectives.push(text),

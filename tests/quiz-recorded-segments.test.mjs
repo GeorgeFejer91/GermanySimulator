@@ -45,7 +45,7 @@ const started=[],events=[];
 const audio={state:"running",currentTime:10,createBufferSource:()=>({connect:target=>target,start:when=>started.push(when),stop(){events.push("stop")}}),createGain:()=>({gain:{setValueAtTime(){},linearRampToValueAtTime(){}},connect:target=>target})};
 const item={text:"approach context question",recordingSequence:["a.mp3","b.mp3","c.mp3"],start:()=>events.push("reveal")};
 const playback=vm.createContext({
- item,Promise,Array,stimulusEligible:()=>true,ensureAudio:()=>audio,foregroundOutput:()=>({}),
+ setTimeout:()=>1,clearTimeout:()=>{},item,Promise,Array,stimulusEligible:()=>true,ensureAudio:()=>audio,foregroundOutput:()=>({}),
  prepareRecording:path=>Promise.resolve({duration:{"a.mp3":1,"b.mp3":2,"c.mp3":3}[path]}),
  startSubtitle:()=>events.push("subtitle"),finishStimulus:()=>events.push("done"),
  playSyntheticStimulus:()=>events.push("synthetic")
@@ -63,7 +63,7 @@ assert.equal(events.filter(event=>event==="stop").length,3,"cancellation must st
 
 const broken={text:"whole quiz prompt",recordingSequence:["a.mp3","missing.mp3"]};
 const fallback=vm.createContext({
- item:broken,Promise,Array,stimulusEligible:()=>true,ensureAudio:()=>audio,foregroundOutput:()=>({}),
+ setTimeout:()=>1,clearTimeout:()=>{},item:broken,Promise,Array,stimulusEligible:()=>true,ensureAudio:()=>audio,foregroundOutput:()=>({}),
  prepareRecording:path=>path==="missing.mp3"?Promise.reject(new Error("404")):Promise.resolve({duration:1}),
  startSubtitle:()=>{},finishStimulus:()=>{},playSyntheticStimulus:received=>events.push(received.text)
 });
@@ -73,7 +73,7 @@ assert.equal(events.at(-1),"whole quiz prompt","a missing segment must retain th
 
 for(const candidate of ["character.mp3",null]){
  const barks=[],lookups=[];
- const answer=vm.createContext({
+ const answer=vm.createContext({citySpeechAllowed:()=>true,
   state:{voiceOn:true,quizQuestion:{answer:1},quizCopy:{choices:["A","B"]},quizCharacter:{name:"Brigitte Neumann",title:"STADTBILDWACHT",voiceId:"quiz-brigitte-neumann"},quizNpc:{},quizVoiceToken:0,modal:true},
   document:{getElementById:()=>({hidden:false})},
   speechCatalog:{candidateClip:(voiceId,text)=>{lookups.push([voiceId,text]);return candidate}},

@@ -328,7 +328,7 @@ test('replaced neighbor introduction cannot grant stale completion credit',()=>{
 
 
 test('recorded neighbor cue starts after decoding and its real audio clock owns mouth energy',async()=>{
- const h=harness();h.awardAnmeldung();h.jwdState.visited=true;h.state.voiceOn=true;h.state.dialogueVoiceToken=7;h.activeStimulus=null;h.stimulusGeneration=1;h.document.hidden=false;h.AUDIO_CLASS={TEXT:'text'};h.AUDIO_MIX={ATTACK_SECONDS:.02,FOREGROUND:1};h.stimulusEligible=()=>true;h.startSubtitle=()=>{};h.foregroundOutput=()=>({});
+ const h=harness();h.setTimeout=()=>1;h.clearTimeout=()=>{};h.awardAnmeldung();h.jwdState.visited=true;h.state.voiceOn=true;h.state.dialogueVoiceToken=7;h.activeStimulus=null;h.stimulusGeneration=1;h.document.hidden=false;h.AUDIO_CLASS={TEXT:'text'};h.AUDIO_MIX={ATTACK_SECONDS:.02,FOREGROUND:1};h.stimulusEligible=()=>true;h.startSubtitle=()=>{};h.foregroundOutput=()=>({});
  let decode,sourceNode;h.prepareRecording=()=>new Promise(resolve=>decode=resolve);const gain={gain:{setValueAtTime(){},linearRampToValueAtTime(){}},connect(){return this}};
  h.audio={state:'running',currentTime:3,createGain:()=>gain,createBufferSource:()=>sourceNode={connect(){return gain},start(){this.started=true}}};h.ensureAudio=()=>h.audio;
  h.finishStimulus=(item,generation)=>{if(h.activeStimulus===item&&generation===h.stimulusGeneration)h.activeStimulus=null};vm.runInContext(fn('playRecordedStimulus'),h);
@@ -394,7 +394,7 @@ test('tours wait for the follower, reject premature E and stale receipts, cancel
 });
 
 test('automatic tour lines wait for their own completion receipt and caption time, without acknowledgment',()=>{
- const h=harness(true);h.awardAnmeldung();h.state.mission=1;h.jwdState.visited=true;h.state.voiceOn=true;
+ const h=harness(true);h.awardAnmeldung();h.state.mission=1;h.jwdState.visited=true;h.state.voiceOn=true;h.textOnlyBark=null;
  h.speechCatalog={voices:{}};h.STIMULUS_PRIORITY={CRITICAL:1};h.stopSpeech=()=>{};h.requestCharacterReaction=()=>{};
  for(const id of ['dialogue','dialogue-next','dialogue-speak'])h.document.getElementById(id).classList={toggle(){}};
  const receipts=[];h.speak=(text,options)=>{options.start?.();receipts.push(options.done)};

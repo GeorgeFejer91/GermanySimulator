@@ -23,16 +23,38 @@ assert.match(game,/Object\.freeze\(\["towel-man","towel-woman"\]/,"only the acce
 for(const removed of ["bioVegan","wasteMarshal","quietHours","cargoParent","dinInspector","potato"])assert.doesNotMatch(game,new RegExp(removed),`${removed} must not remain in the runtime`);
 const context=vm.createContext({window:{},npcs:[],crowdIndex:0,npcLines:['fixture']});
 vm.runInContext(readFileSync('street-wisdom.js','utf8'),context);context.StreetWisdom=context.window.StreetWisdom;
+vm.runInContext(readFileSync('For-AI/QUIZ-CHARACTER-DICTIONARY.js','utf8'),context);
+vm.runInContext(game.split(/\r?\n/).find(line=>line.startsWith('const quizCharacterLibrary=')),context);
+vm.runInContext(game.match(/function quizCharacterForActor\([\s\S]*?\n\}/)[0],context);
 for(const name of ['crowdNames','crowdVoiceIds'])vm.runInContext(game.match(new RegExp(`const ${name}=[^\\n]+;`))[0],context);
 const archetypeStart=game.indexOf('const crowdArchetypes='),archetypeEnd=game.indexOf('\n',game.indexOf('const crowdArchetypeOrder='));
 vm.runInContext(game.slice(archetypeStart,archetypeEnd)+game.match(/function addCrowdPedestrian\([\s\S]*?\n\}/)[0],context);
 for(let i=0;i<24;i++)vm.runInContext('addCrowdPedestrian(100,100,12,0,0,200)',context);
-assert.equal(new Set(context.npcs.map(n=>n.voiceId)).size,9,'all remaining names rotate through the crowd');
-const profiles=JSON.parse(readFileSync('For-AI/VOICE-CAST.json')).roleProfiles;
-for(const person of context.npcs){
+// Quiz identity overlays preserve physical spawns while adding the fixed quiz voices.
+const ordinary=context.npcs.filter(n=>!n.quizzer),quiz=context.npcs.filter(n=>n.quizzer);
+assert.equal(context.npcs.length,24,'retain all requested physical crowd spawns');
+assert.equal(ordinary.length,16);assert.equal(quiz.length,8);
+assert.equal(new Set(ordinary.map(n=>n.voiceId)).size,9,'all remaining ordinary names rotate through the crowd');
+assert.equal(new Set(quiz.map(n=>n.voiceId)).size,8,'every sampled quiz actor owns its fixed persona voice');
+assert.equal(new Set(context.npcs.map(n=>n.voiceId)).size,17,'quiz voices extend the nine ordinary identities');
+const cast=JSON.parse(readFileSync('For-AI/VOICE-CAST.json')),profiles=cast.roleProfiles;
+for(const person of ordinary){
  assert(!context.StreetWisdom.definitions.some(d=>d.voiceId===person.voiceId),'adviser identities are reserved');
  assert.equal(profiles.find(p=>p.voiceId===person.voiceId).gender,person.spriteKind==='towelMan'?'male':'female');
  assert.equal(profiles.find(p=>p.voiceId===person.voiceId).fullName.toUpperCase(),person.fullName);
+}
+vm.runInContext(readFileSync('For-AI/AUDIO-TEXT-LIBRARY.js','utf8'),context);
+const painted=JSON.parse(readFileSync('assets/characters/street/manifest.json')).characters;
+for(const person of quiz){
+ const identity=context.window.GermanySimulatorQuizCharacters.characters[Math.floor(context.npcs.indexOf(person)/3)%9],profile=profiles.find(p=>p.voiceId===person.voiceId),binding=cast.productionVoices[person.voiceId],catalogBinding=context.window.GermanySimulatorAudioText.productionVoices[person.voiceId];
+ assert.equal(person.quizCharacterId,identity.id);assert.equal(person.voiceId,identity.voiceId);assert.equal(person.name,identity.name);assert.equal(person.fullName,identity.name);
+ assert.equal(context.quizCharacterForActor(person),identity,'controller resolves the same dictionary record, including categories');
+ assert(identity.categories.length>0&&identity.categories.every(category=>['civic','traffic','technik','grammar-b1','grammar-b2','grammar-c1'].includes(category)));
+ assert(!context.StreetWisdom.definitions.some(d=>d.voiceId===person.voiceId),'quiz identities cannot borrow reserved advisers');
+ assert(profile&&binding&&catalogBinding,'quiz actor requires its selected public profile');
+ assert.equal(profile.fullName,identity.name.replace(/^Dr\. /,''));assert.equal(binding.profileId,profile.secretTunnelProfileId);
+ for(const key of ['profileId','referenceSha256','renderer','modelRevision']){assert(binding[key],key);assert.equal(catalogBinding[key],binding[key],key)}
+ assert(painted[person.voiceId]?.aliases.includes(identity.id),'quiz persona owns its admitted painted standing body');
 }
 assert.match(game,/region=state\.region,archetype=[^;]*surface===\"sidewalk\"&&archetype\?archetype\.barks\[region\]/,"nearby pedestrians must use archetype-specific speech captured in the trigger region");
 assert.match(game,/dist\(player\.x,player\.y,n\.x,n\.y\)<\(n\.audioRadius\|\|NPC_COMPLAINT_DISTANCE\)/,"personal speech must be radius-triggered");

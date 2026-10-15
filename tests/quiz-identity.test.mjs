@@ -65,3 +65,36 @@ test('actual home/office layouts defer distantC1 without losing it or relabellin
   f.state.quizBag=[civic,c1];f.scope.updateQuizEncounters(.1);const actor=f.state.quizApproach;assert(actor);assert.equal(f.state.quizApproachQuestion.source,f.scope.questions[civic].source);assert(Math.hypot(actor.x-point.x,actor.y-point.y)<=650);assert.deepEqual([...f.state.quizBag],[civic,c1]);
  }
 });
+
+test('neighbor introductions, tours and owned dialogue defer quiz without spending or relabelling',()=>{
+ for(const reason of ['introduction','tour','dialogue']){
+  const f=fixture(),{actor}=f.knownActor(),q=f.seedQuestion(),before=identity(actor);
+  f.state.mission=1;f.scope.jwd.met.clear();
+  if(reason==='introduction')Object.assign(f.scope.player,{x:f.scope.jwdLane.x,y:f.scope.jwdLane.y});
+  if(reason==='tour')f.scope.jwd.tour={actor:{id:'jwd-parent'}};
+  if(reason==='dialogue'){f.state.dialogue=true;f.state.characterSpeaker={id:'jwd-parent',jwdRole:'parent'}}
+  Object.assign(actor,f.scope.player);assert.equal(f.scope.neighborActivityActive(),true);
+  f.scope.updateQuizEncounters(.1);assert.equal(f.state.quizApproach,null);
+  assert.equal(f.scope.startCitizenshipQuiz(actor),false);assert.equal(f.state.quizBag.length,1);
+  assert.equal(f.state.quizQuestion??null,null);assert.equal(f.effects.speech.length,0);assert.equal(f.effects.points.length,0);assert.deepEqual(identity(actor),before);
+  f.scope.jwd.tour=null;f.state.dialogue=false;f.scope.jwd.met=new Set(['jwd-swabian','jwd-parent','jwd-watcher']);
+  f.scope.updateQuizEncounters(.1);assert.equal(f.state.quizApproach,actor);assert.equal(f.state.quizApproachQuestion,q);
+  f.scope.advanceApproach(.1);assert.equal(f.state.quizNpc,actor);assert.equal(f.state.quizQuestion,q);assert.equal(f.state.quizBag.length,0);
+ }
+});
+
+test('actual inclusive neighbor margin and introduction prerequisites control quiz admission',()=>{
+ const lane=fixture().scope.jwdLane,mid={x:lane.x+lane.w/2,y:lane.y+lane.h/2};
+ const edges=[{x:lane.x-120,y:mid.y},{x:lane.x+lane.w+120,y:mid.y},{x:mid.x,y:lane.y-120},{x:mid.x,y:lane.y+lane.h+120}];
+ for(let index=0;index<edges.length;index++)for(const outside of [false,true]){
+  const f=fixture(),{actor}=f.knownActor();f.seedQuestion();f.state.mission=1;f.scope.jwd.met.clear();Object.assign(f.scope.player,edges[index]);
+  if(outside)f.scope.player[index<2?'x':'y']+=index%2?1:-1;
+  Object.assign(actor,f.scope.player);assert.equal(f.scope.neighborActivityActive(),!outside);
+  assert.equal(f.scope.startCitizenshipQuiz(actor),outside);assert.equal(f.state.quizBag.length,outside?0:1);
+ }
+ for(const reason of ['unallocated','mission-zero','all-met']){
+  const f=fixture(),{actor}=f.knownActor();f.seedQuestion();f.state.mission=1;f.scope.jwd.met.clear();Object.assign(f.scope.player,mid);Object.assign(actor,mid);
+  if(reason==='unallocated')f.scope.jwd.allocated=false;else if(reason==='mission-zero')f.state.mission=0;else f.scope.jwd.met=new Set(['jwd-swabian','jwd-parent','jwd-watcher']);
+  assert.equal(!!f.scope.neighborActivityActive(),false);assert.equal(f.scope.startCitizenshipQuiz(actor),true);assert.equal(f.state.quizBag.length,0);
+ }
+});

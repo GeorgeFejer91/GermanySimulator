@@ -254,6 +254,6 @@ function createPaintSplat(T,paintGlsl,profileValues){
  };
 }
 let recordingModule;
-const loadRecording=(path,sha)=>{recordingModule??=import('./buergeramt-lipsync.js?v=20261013-mouth-audit');return recordingModule.then(m=>m.resolveMouthTrack(path,sha))};
+const loadRecording=(path,sha)=>{recordingModule??=import('./buergeramt-lipsync.js?v=20261015-office-mouth-233');return recordingModule.then(m=>m.resolveMouthTrack(path,sha))};
 global.GermanyAmtLips={createTrack,score,poseAt,mouths,clerkPaintFrame,displayedMouth,displayedMouthFrame,displayedMouthAngle,displayedMouthProfile,setProfiles,installMask,createPaintSplat,loadRecording};
 })(typeof window!=="undefined"?window:globalThis);

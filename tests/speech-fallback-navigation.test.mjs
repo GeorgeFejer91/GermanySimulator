@@ -97,7 +97,7 @@ assert.equal(activeCancel,1,"replacing active speech must still cancel it");
 const order=[],recorded={text:"Recorded line",recording:"line.mp3",start:()=>order.push("text")};
 let resumeAudio;
 const recordingContext=vm.createContext({
- item:recorded,stimulusEligible:()=>true,prepareRecording:()=>Promise.resolve({duration:2}),
+ setTimeout:()=>1,clearTimeout:()=>{},item:recorded,stimulusEligible:()=>true,prepareRecording:()=>Promise.resolve({duration:2}),
  ensureAudio:()=>({state:"suspended",resume:()=>new Promise(resolve=>resumeAudio=resolve),currentTime:0,
   createBufferSource:()=>({connect:target=>target,start:()=>order.push("audio")}),
   createGain:()=>({gain:{setValueAtTime(){},linearRampToValueAtTime(){}},connect:target=>target})}),
@@ -141,14 +141,15 @@ function captionDialogueFixture(){
   window:{},document:{getElementById:element,querySelector:element},performance:{now:()=>100},
   activeStimulus:null,textOnlyBark:null,recordedSpeechSource:null,recordedSpeechGain:null,stimulusTimer:null,stimulusGeneration:0,stimulusQueue:[],subtitleFrame:0,
   speechCatalog:captionLibrary,audioTextLibrary:captionLibrary,subtitleEnglish:new Map(),dynamicEnglishSubtitle:()=>"",
-  STIMULUS_PRIORITY:{AMBIENT:1,REACTIVE:2,CRITICAL:3},jwd:{tour:null},
+  STIMULUS_PRIORITY:{AMBIENT:1,REACTIVE:2,CRITICAL:3},jwd:{tour:null,allocated:false,met:new Set()},
+  player:{x:0,y:0},jwdLane:{x:0,y:0,w:300,h:300},
   setTimeout(callback,delay){pending.push({callback,delay,cancelled:false});return pending.length},
   clearTimeout(id){if(pending[id-1])pending[id-1].cancelled=true},requestAnimationFrame:()=>1,cancelAnimationFrame(){},
   uiTone(){},cancelHumorScold(){},setAudioText(){},requestCharacterReaction(){},
   queueStimulus(value){c.activeStimulus=value;value.start?.()},speechClip:id=>captionLibrary.clips[id],
  };
  vm.createContext(c);
- vm.runInContext(["englishSubtitle","clearSubtitle","setSubtitle","startSubtitle","speak","speakRecorded","speakMerkelLine","speakMerzLine",
+ vm.runInContext(["neighborActivityActive","citySpeechAllowed","englishSubtitle","clearSubtitle","setSubtitle","startSubtitle","speak","speakRecorded","speakMerkelLine","speakMerzLine",
   "stopRecordedSpeech","hideWorldBark","stopSpeech","showWorldBark","openDialogue","setDialogueVoiceBusy","speakDialogueLine","renderDialogue","nextDialogue"].map(sourceOf).join("\n"),c);
  const merkelStart=game.indexOf("MERKEL_RECORDINGS=Object.freeze(");
  assert.notEqual(merkelStart,-1,"authored Merkel recordings map is required");

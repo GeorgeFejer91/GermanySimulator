@@ -13,7 +13,7 @@ const source=readFileSync(path.join(root,'game.js'),'utf8');
 const marker='requestAnimationFrame(loop);\n})();';
 if(!source.includes(marker))throw new Error('City loop insertion point changed');
 const probe=`window.__amtAudioHandoff={
- ready(){startupNpcsCaptured=true;window.Germany3D={startupReady:true,sync(){},isWorldPointVisible(){return false}};refreshStartup()},
+ ready(){startupNpcsCaptured=true;window.Germany3D={startupReady:true,layoutMissionPointer(){},sync(){},isWorldPointVisible(){return false}};refreshStartup()},
  prepare(){stopSpeech();state.started=true;state.modal=false;document.getElementById('intro').classList.add('hidden');document.getElementById('humor-modal').hidden=true},
  startTrain(){queueStimulus({family:'train',priority:STIMULUS_PRIORITY.CRITICAL,ambient:false,recording:'./test-train.wav',start:()=>{window.__trainStartedAt=performance.now()},done:()=>{window.__trainEndedAt=performance.now();setTimeout(()=>{window.BuergeramtLevel.update(.1);window.__gap50={busy:audioTextActive(),speech:window.__officeSpeech.length}},50);setTimeout(()=>{window.BuergeramtLevel.update(.1);window.__gap350={busy:audioTextActive(),speech:window.__officeSpeech.length}},350)}})},
  enter(){bureaucrat({id:'buergeramt'},missions[0])},
@@ -37,6 +37,8 @@ try{
   const context=await browser.newContext({viewport,isMobile:name==='mobile',hasTouch:name==='mobile'});
   const page=await context.newPage(),errors=[];
   await page.addInitScript(()=>{
+   const play=HTMLMediaElement.prototype.play;HTMLMediaElement.prototype.play=function(...args){this.muted=true;this.volume=0;return play.apply(this,args)};
+   const connect=AudioNode.prototype.connect;AudioNode.prototype.connect=function(target,...args){if(target===this.context.destination){const mute=this.context.createGain();mute.gain.value=0;connect.call(mute,target);return connect.call(this,mute,...args)}return connect.call(this,target,...args)};
    window.__officeSpeech=[];
    window.__audioContexts=0;
    window.AudioContext=new Proxy(window.AudioContext,{construct(target,args){window.__audioContexts++;return Reflect.construct(target,args)}});
@@ -65,11 +67,11 @@ try{
    for(let i=0;i<90;i++)level.update(.1);
    return{before,after:window.__officeSpeech.length,audioContexts,afterAudioContexts:window.__audioContexts,...probe.snapshot()};
   });
-  if(result.office!=='walk-sign'||!result.cityBusy||result.family!=='train'||!result.trainTextHidden||result.after!==result.before||result.afterAudioContexts!==result.audioContexts)throw new Error(`${name}: office audio started or train displayed text: ${JSON.stringify(result)}`);
-  await page.waitForFunction(()=>window.__amtAudioHandoff.snapshot().gap350!==null,null,{timeout:10000});
+  if(result.cityBusy||result.family==='train'||!result.trainTextHidden||result.afterAudioContexts!==result.audioContexts+1||result.trainEndedAt!==null||errors.length)throw new Error(name+': city audio did not cancel cleanly: '+JSON.stringify({result,errors}));
+  await page.waitForFunction(()=>window.__officeSpeech.length>0,null,{timeout:10000});
   const final=await page.evaluate(()=>window.__amtAudioHandoff.snapshot());
-  if(!final.gap50.busy||final.gap50.speech!==result.before||final.gap350.busy||final.gap350.speech!==result.before+1||errors.length)throw new Error(`${name}: audio gap failed: ${JSON.stringify({final,errors})}`);
-  console.log(JSON.stringify({name,trainMs:Math.round(final.trainEndedAt-final.trainStartedAt),gap50:final.gap50,gap350:final.gap350}));
+  if(final.cityBusy||final.family==='train'||final.trainEndedAt!==null||errors.length)throw new Error(name+': stale train ownership after entry: '+JSON.stringify({final,errors}));
+  console.log(JSON.stringify({name,trainCancelled:true,officeSpeech:final.speech}));
   await context.close();
  }
 }finally{await browser.close();await new Promise(resolve=>server.close(resolve))}

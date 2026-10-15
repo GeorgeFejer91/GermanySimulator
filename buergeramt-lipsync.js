@@ -1,4 +1,4 @@
-import {speechMouthTracks} from './assets/buergeramt/speech/mouth-cues.js?v=20261013-kripo-ending';
+import {speechMouthTracks} from './assets/buergeramt/speech/mouth-cues.js?v=20261015-office-mouth-233';
 import {sampleTimedMouth,neutralMouth as neutral} from './speech-mouth.js?v=20261013-mouth-audit';
 export {sampleTimedMouth};
 const omenTrack=Object.values(speechMouthTracks).find(t=>t.clipId==='aktenkurier-omen-candidate-02');
