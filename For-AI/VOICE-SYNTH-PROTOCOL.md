@@ -2,6 +2,22 @@
 
 `VOICE-CAST.json` owns character identities and **`productionVoices`**, the fixed generation bindings. `AUDIO-TEXT-LIBRARY.js` owns clip IDs, exact spoken text, English subtitles, asset paths and trigger families; its compact production table is generated from the cast. `game.js` owns trigger timing. The existing stimulus broker owns playback, textbox, and subtitle timing. Fixed character dialogue uses recordings. The scoped browser-local name exceptions are documented below.
 
+## Current Maaslos speech and cleanup (2026-10-15)
+
+Heiko owns 36 exact German/English pairs: the approved 35-line hesitant, falsely friendly rewrite plus one personal pre-move-in reply. Inga owns 34 pairs, including her own pre-move-in onboarding reply. Those early interactions retain the allocation/home-visit guard, stable voice and speaker, and award neither a tour nor introduction credit. Appending the two sources preserves all earlier clip IDs. The cast and manifests own exact coverage; missing takes remain captions. The finite ASR spelling normalization also recognizes the documented [noch mal / nochmal alternatives](https://www.duden.de/rechtschreibung/noch_mal); it does not accept synonyms such as nochmals or remove negation. The exact [kennenzulernen / kennen zu lernen spelling pair](https://www.duden.de/rechtschreibung/kennenlernen) is likewise normalized without accepting reordered words or missing particles.
+
+Heiko's authoring helper permits a bounded render-only contraction expansion for one held source: for example, `du’s` becomes `du es`. Authored German/English text and clip IDs remain unchanged. Freeze and retain the actual inference text and SHA-256, canonical source SHA-256, and `finite-authored-apostrophe-contractions-v1` policy in the request, native annotation and manifest. The CLI must receive that actual input; the curator rejects missing, altered or semantically different render-input fields. Final unprompted encoded-audio word checks remain mandatory. This does not authorize synonyms, missing words or transcript edits.
+
+Heiko story21 and story33, and Hartmut story01, each have a separately verified recognition-input transform for a native ASR window-boundary failure. The delivered MP3 stays unchanged. Only the recognizer's lossless 16 kHz mono/16-bit PCM input receives exactly 16,000 leading zero samples; every original speech sample must remain byte-for-byte intact. Preserve the original failed transcript and receipt, the new full unprompted transcript, both PCM/input/receipt hashes, the model/binary hashes and exact sample counts in `asrInputTransform`. The curator permits only these three reviewed source/owner pairs; another clip needs its own sample/hash proof and admission review. Playback duration, captions and 40 Hz mouth cues use the original delivered audio, never the diagnostic silence. This verification does not establish perceptual listening.
+
+The finite normalizer also equates only the singular compound `Feedback-Gespräch` with `Feedbackgespräch`, consistent with the optional clarifying compound hyphen in [German orthography §45](https://grammis.ids-mannheim.de/rechtschreibung/6159). It does not merge plain-space words, accept other spellings or erase missing words.
+
+Both parents use the same offline cleanup authority, `tools/neighbor-voice-processing.mjs` (`cleanProcessing` / `encodeVoice`), for existing and future recordings. Its smoothed downward expander reduces quiet-passage noise, with a 2 ms attack and 150 ms release; the first 300 ms remain unfiltered to protect quiet opening syllables. The selected cast processing string records the exact filter. Encode from hash-verified original native takes once, then normalize and verify the final 24 kHz mono / 64 kbps MP3, independent unprompted words, duration, levels and 40 Hz mouth cues. Do not process an already-cleaned MP3 again. Preserve original and rejected takes privately. Automated signal/word checks do not establish perceived quality or speaker identity.
+
+The cleanup command stages privately and validates the actual candidate receipts against their staged asset tree through the same curator used for canonical assets. Before replacing files it checks current, staged and backup hashes; failed application restores verified originals and records recovery state. Catalog sync and publication remain the integrator's responsibility. A new unused request seed preserves frozen requests when processing or source coverage changes; compatible native sources can still be reused without new inference.
+
+Hartmut retains stable voice/actor IDs `jwd-theodore-maaslos` / `jwd-theodore` and all seven authored lines. His selected `GS Hartmut Maaslos (CC0 child character)` profile uses the CC0 performed child-character source and verified reference hashes recorded in the cast. The source's biological speaker age is unverified. The former adult-actor profile remains archived. CC0 requires no attribution credit; source/license provenance stays in technical metadata. Perceptual listening remains a separate check.
+
 ## Fixed voices and the agent workflow (2026-10-11)
 
 ### JWD neighbor speech production (2026-10-13)
@@ -132,8 +148,8 @@ The neighborhood identities are `jwd-heiko-maaslos`, `jwd-inga-maaslos` and
 `jwd-swabian`. Their exact introductions and complaint pools live in `game.js`
 `jwdCopy`, with source/translation ownership in the cast. Inga uses the
 user-selected saved `GS Inga Maaslos` UUID `04e241f5e0734684ba3626aa669a70c1`.
-Heiko retains the existing browser dialogue policy while dedicated profile
-selection is pending in this published scope. Frau Schwabingen uses the explicit
+Heiko uses the selected dedicated `GS Heiko Maaslos` UUID
+`36a68103506a4417987cfd9a1ab71905`, with exact captions for unavailable takes. Frau Schwabingen uses the explicit
 new selection above. Missing or rejected selected-neighbor takes use captions,
 without changing their voice.
 
@@ -151,7 +167,7 @@ Nachbarschafts-offsite phrase. They must never erase extra words or negation.
 The curator derives the existing catalog's strict exact-text entries and 40 Hz
 final-encoded RMS mouth cues from this manifest. No runtime synthesis service,
 source reference audio or authoring model ships.
-All eleven Inga lines are accepted: 615,460 encoded bytes / 75.96 seconds,
+The initial 14 October checkpoint accepted eleven Inga lines: 615,460 encoded bytes / 75.96 seconds,
 −18.28 to −18.11 LUFS and a maximum −3.95 dBTP. Both reference hashes and all
 63 production bindings were verified against the live native profile catalog.
 Perceptual listening remains NOT RUN.

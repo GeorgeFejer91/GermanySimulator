@@ -85,12 +85,12 @@ for(const person of cast.characters){
 }
 const neighborContext=vm.createContext({});
 vm.runInContext(game.slice(game.indexOf('const jwdCopy='),game.indexOf('function currentMission('))+';globalThis.copy=jwdCopy;',neighborContext);
+const fixedNeighborBindings={'jwd-parent':'jwd-heiko-maaslos','jwd-watcher':'jwd-inga-maaslos','jwd-swabian':'jwd-frau-schwabingen','jwd-theodore':'jwd-theodore-maaslos','jwd-burglar':'jwd-ede-einbruch'};
 for(const asset of cast.existingAssetProfiles){
  if(asset.gameRole==='jwd-neighbor'){
-  assert.ok(namedNpcs.includes(`id:"${asset.gameCharacterId}"`)||asset.gameCharacterId==='jwd-theodore'&&game.includes("id:'jwd-theodore'"));assert.ok(game.includes(`:"${asset.voiceId}"`)||game.includes(`:'${asset.voiceId}'`));assert.equal(voices[asset.voiceId].name,asset.fullName);assert.equal(voices[asset.voiceId].gender,asset.gender);
+  assert.ok(game.includes(`id:"${asset.gameCharacterId}"`)||game.includes(`id:'${asset.gameCharacterId}'`),"selected neighbor actor exists in the actual runtime");assert.ok(game.includes(`:"${asset.voiceId}"`)||game.includes(`:'${asset.voiceId}'`));assert.equal(voices[asset.voiceId].name,asset.fullName);assert.equal(voices[asset.voiceId].gender,asset.gender);
   for(const line of asset.dialogue){const locator=line.locator.match(/^game\.js jwdCopy\.([a-zA-Z]+)\.de\[(\d+)\]$/);if(locator){assert.equal(neighborContext.copy[locator[1]].de[+locator[2]],line.text);assert.equal(neighborContext.copy[locator[1]].en[+locator[2]],line.english)}else if(line.locator.startsWith('neighbor-story.js ')){assert.ok(line.text&&line.english,'exact tour lines and owners are checked below')}else{assert.match(line.locator,/^game\.js guided tour (repeat invitation|follow invitation|free play)$/);assert.ok(game.includes(line.text)&&game.includes(line.english),line.locator+' matches runtime')}}
-  if(asset.fallback==='browser-name'){assert.ok(['jwd-heiko-maaslos','jwd-frau-schwabingen','jwd-theodore-maaslos'].includes(asset.voiceId));assert.equal(cast.productionVoices[asset.voiceId],undefined,'unselected neighbor profiles must not masquerade as approved production voices');assert.equal(voices[asset.voiceId].profileId,undefined);continue}
-  assert.ok(['jwd-inga-maaslos','jwd-frau-schwabingen'].includes(asset.voiceId));assert.equal(asset.fallback,'captions');assert.ok(cast.productionVoices[asset.voiceId],'the neighbor has a selected fixed production profile');
+  assert.equal(fixedNeighborBindings[asset.gameCharacterId],asset.voiceId,'each selected neighbor owns their fixed voice');assert.equal(asset.fallback,'captions');assert.ok(cast.productionVoices[asset.voiceId],'the neighbor has a selected fixed production profile');
  }
  assert.equal(voices[asset.voiceId].profileId,cast.productionVoices[asset.voiceId].profileId);
  assert.equal(voices[asset.voiceId].profileName,cast.productionVoices[asset.voiceId].profileName);

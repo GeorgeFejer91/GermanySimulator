@@ -1,5 +1,7 @@
 # Speech catalog and subtitle authority
 
+Heiko and Inga also own their personal replies before the home-visit prerequisite is fulfilled. The existing guard remains; these replies grant no introduction credit. Heiko now has 36 cast-owned pairs and Inga 34, with prior clip IDs unchanged. Their existing and future recordings use the one approved offline cleanup recipe in [the voice protocol](./VOICE-SYNTH-PROTOCOL.md#current-maaslos-speech-and-cleanup-2026-10-15); no runtime filter or second audio clock is added.
+
 The guided neighborhood story in `neighbor-story.js` pairs every stop and travel
 line with its exact English caption and stable speaker. `VOICE-CAST.json` also
 indexes these authored lines. Theodore Maaslos is `jwd-theodore-maaslos`, actor

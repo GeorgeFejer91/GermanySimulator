@@ -47,8 +47,16 @@ jobs:
         run: node --test tests/buergeramt-potato-mirror.test.mjs
       - name: Check law pickup and sirens
         run: node --test tests/law-pickup.test.mjs tests/police-audio.test.mjs tests/police-escalation.test.mjs
+      - name: Check neighbor voice authoring and staged assets
+        run: |
+          if ! command -v ffmpeg >/dev/null; then
+            sudo apt-get update
+            sudo apt-get install --no-install-recommends -y ffmpeg
+          fi
+          node --test tests/neighbor-voice-processing.test.mjs tests/neighbor-prerequisite-speech.test.mjs tests/neighbor-staged-assets.test.mjs tests/neighbor-voice-builder.test.mjs tests/neighbor-asr-input-transform.test.mjs
       - name: Check fixed character voices
         run: |
+          python tests/test_sync_music_cast_index.py
           node tools/curate-voice-library.mjs --check
           node --test tests/buergeramt-ambient.test.mjs
           node --test tests/voice-consistency.test.mjs tests/voice-cast.test.mjs tests/voice-candidate-preview.test.mjs tests/street-wisdom.test.mjs tests/street-wisdom-encounters.test.mjs tests/law-voice-assets.test.mjs tests/knick-generation-receipts.test.mjs

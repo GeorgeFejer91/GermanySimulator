@@ -173,7 +173,7 @@ test('dense gait preserves distance per cycle and visits all 32 distinct samples
   assert.equal(frames.at(-1),0);
 });
 
-test('Theodore has a distinct smaller paint family and matching shorter stride',()=>{
+test('Hartmut has a distinct smaller paint family and matching shorter stride',()=>{
   const actor={id:'jwd-theodore',jwdRole:'child',x:0,y:0},playback={};
   neighborFrame(actor,playback,null,0,true);actor.x=5.76;
   assert.equal(neighborFrame(actor,playback,null,.1,true).frame,16);

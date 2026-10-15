@@ -16,12 +16,24 @@ const namedBlock=game.slice(game.indexOf("const npcs=["),game.indexOf("].map(n=>
 const physicalNames=[...namedBlock.matchAll(/name:"([^"]+)"/g)].map(match=>match[1].split(" · ")[0]);
 vm.runInContext(game.slice(game.indexOf('const jwdCopy='),game.indexOf('function currentMission('))+';globalThis.neighborCopy=jwdCopy;',context);
 const neighborRoles=cast.existingAssetProfiles.filter(person=>person.gameRole==='jwd-neighbor');
-assert.equal(neighborRoles.length,4,'the neighborhood sprite/dialogue cast includes Theodore');
+assert.equal(neighborRoles.length,5,'the neighborhood dialogue cast includes Hartmut and Ede');
 for(const person of neighborRoles){
- const entry=profiles.find(profile=>profile.id===person.gameCharacterId);assert.ok(entry,`missing neighbor gallery ${person.voiceId}`);assert.equal(entry.voiceId,person.voiceId);const name=person.gameCharacterId==='jwd-theodore'?game.match(/id:'jwd-theodore',name:'([^']+)'/)[1]:namedBlock.match(new RegExp(`id:"${person.gameCharacterId}",name:"([^\"]+)"`))[1];assert.equal(entry.name,name);assert.equal(context.window.GermanySimulatorAudioText.voices[person.voiceId].name,person.fullName);
- const introduction=person.dialogue[0],topic=introduction.locator.match(/jwdCopy\.([a-zA-Z]+)\.de/);if(topic)assert.equal(introduction.text,context.neighborCopy[topic[1]].de[0]);for(const region of ['berlin','germany'])assert.equal(entry.lines(region)[0].text,introduction.text,'gallery intro matches exact current authored text');assert.match(entry.movement,/procedural silhouette, not the runtime painted atlas/);
+ const entry=profiles.find(profile=>profile.id===person.gameCharacterId);assert.ok(entry,`missing neighbor gallery ${person.voiceId}`);assert.equal(entry.voiceId,person.voiceId);const name=game.match(new RegExp(`id:["']${person.gameCharacterId}["'],name:["']([^"']+)`))[1];assert.equal(entry.name,name);assert.equal(context.window.GermanySimulatorAudioText.voices[person.voiceId].name,person.fullName);
+ const introduction=person.dialogue[0],topic=introduction.locator.match(/jwdCopy\.([a-zA-Z]+)\.de/);if(topic)assert.equal(introduction.text,context.neighborCopy[topic[1]].de[0]);for(const region of ['berlin','germany'])assert.equal(entry.lines(region)[0].text,introduction.text,'gallery intro matches exact current authored text');if(person.voiceId==='jwd-ede-einbruch')assert.match(entry.movement,/procedural costume/);else assert.match(entry.movement,/procedural silhouette, not the runtime painted atlas/);
  const tourText=person.dialogue.filter(item=>item.locator.startsWith('neighbor-story.js ')).map(item=>item.text);for(const text of tourText)assert.ok(entry.lines('germany').some(row=>row.text===text),'every owned tour utterance has a review entry');
- if(person.voiceId==='jwd-inga-maaslos'){assert.equal(entry.lines('berlin').filter(row=>row.clip).length,11);assert.match(entry.voice,/Eleven exact authored German takes/)}else if(person.voiceId==='jwd-frau-schwabingen'){assert.equal(entry.lines('berlin').filter(row=>row.clip).length,33);assert.match(entry.voice,/Exaggerated written Swabian/);for(const owned of person.dialogue)assert.ok(entry.lines('berlin').some(row=>row.text===owned.text&&row.clip),'every dialect line has a recorded preview')}else{assert.equal(entry.lines('berlin')[0].clip,'');assert.match(entry.voice,/Browser-generated speech/)}
+ if(person.voiceId==='jwd-inga-maaslos'){
+  const manifest=JSON.parse(source('assets/voices/neighbors/inga-manifest.json'));
+  assert.equal(person.dialogue.length,34);assert.equal(manifest.requestedLineCount,34);
+  assert.equal(manifest.clips.length,31);assert.equal(manifest.heldPrivate.length,3);
+  assert.deepEqual(manifest.heldPrivate.map(row=>row.clipId).sort(),['inga-story-20','inga-story-30','inga-story-34']);
+  assert.equal(entry.lines('berlin').filter(row=>row.clip).length,31);assert.match(entry.voice,/31 of 34/);
+  assert.equal(context.window.GermanySimulatorAudioText.productionVoices[person.voiceId].fallback,'captions');
+  for(const owned of person.dialogue){
+   const row=entry.lines('berlin').find(row=>row.text===owned.text);assert.ok(row,'every authored Inga line stays reviewable');
+   const accepted=manifest.clips.find(clip=>clip.text===owned.text&&clip.english===owned.english);
+   assert.equal(row.clip,accepted?'./'+accepted.file:'','held speech cannot borrow another recording');
+  }
+ }else if(person.voiceId==='jwd-frau-schwabingen'){assert.equal(entry.lines('berlin').filter(row=>row.clip).length,33);assert.match(entry.voice,/Exaggerated written Swabian/);for(const owned of person.dialogue)assert.ok(entry.lines('berlin').some(row=>row.text===owned.text&&row.clip),'every dialect line has a recorded preview')}else{const count=person.voiceId==='jwd-heiko-maaslos'?36:person.voiceId==='jwd-ede-einbruch'?2:7;assert.equal(entry.lines('berlin').filter(row=>row.clip).length,count);assert.match(entry.voice,/selected GS Heiko|Dedicated GS Hartmut|Dedicated GS Ede/);for(const owned of person.dialogue)assert.ok(entry.lines('berlin').some(row=>row.text===owned.text&&row.clip),'each owned line has its exact recorded preview')}
 }
 const listed=profiles.map(person=>person.name.toLocaleUpperCase());
 for(const name of physicalNames)assert.ok(listed.some(label=>label.includes(name)),`missing physical NPC ${name}`);

@@ -80,7 +80,7 @@ test('Schwabingen owns her dialect early greeting and both tour invitations with
   assert.equal(tour.jwdState.met.size,Number(repeat),'invitation cannot grant another introduction');
  }
  const parent=harness(true);parent.awardAnmeldung();parent.jwdState.visited=true;parent.startJwdTour(parent.actors.find(n=>n.id==='jwd-parent'),false);
- assert.match(parent.dialogue.lines[1],/^Kommen Sie mit/,'another neighbor retains their own speech');
+ assert.equal(parent.dialogue.lines[1],'Kommen Sie kurz mit, ich zeige Ihnen das lieber direkt. Dann müssen Sie nicht hinterher noch mal fragen. Ist ja netter, wenn wir das eben zusammen … also, hier lang.','another neighbor retains their own approved speech');
 });
 
 test('registration, certificate handoff and valid A38 submission lead straight to home and neighbors',()=>{
@@ -266,7 +266,7 @@ test('neighbors use the free passing side of the shared garden path',()=>{
  }
 });
 
-test('Theodore recovers from the paved lane edge when the follower yields to a waiting burglar',()=>{
+test('Hartmut recovers from the paved lane edge when the follower yields to a waiting burglar',()=>{
  for(const dt of [1/60,1/30,.1])for(const avoid of [-1,1]){
   const h=harness(true),parent=h.actors.find(n=>n.id==='jwd-parent');
   // Exact public-entry touch-run obstruction; both other characters stay put.
@@ -310,7 +310,7 @@ test('neighbor speech waits for actual start, owns each cue, pauses, and credits
  h.renderDialogue=()=>h.speakDialogueLine(h.state.dialogueData.lines[h.state.dialogueData.i]);
  const neighbor=h.actors.find(n=>n.id==='jwd-parent');h.talkJwdNeighbor(neighbor);h.state.dialogueData.i=0;
  assert.equal(h.getNeighborDialogue().line,h.dialogue.lines[0],'mouth-shape estimates receive the actual spoken words');assert.equal(h.getNeighborDialogue().lineIndex,0);
- assert.equal(h.dialogue.voiceId,'jwd-heiko-maaslos');assert.equal(h.dialogue.subtitles[0].startsWith('Dear neighbor'),true);
+ assert.equal(h.dialogue.voiceId,'jwd-heiko-maaslos');assert.equal(h.dialogue.subtitles[0].startsWith('Oh, lovely that you are here.'),true);
  h.speakMerzLine=()=>assert.fail("Heiko must not use Merz speech routing");h.renderDialogue();const first=h.activeStimulus;assert.equal(first.masculine,true,"Heiko fallback respects catalog male gender");h.playSyntheticStimulus(first,1);assert.equal(h.getNeighborDialogue().speaking,false,'queued synthesis cannot move the mouth');
  utterance.onstart();assert.equal(h.getNeighborDialogue().speaking,true);now+=500;assert.equal(h.getNeighborDialogue().mediaTime,.5);
  h.speechSynthesis.paused=true;const frozen=h.getNeighborDialogue().mediaTime;now+=500;assert.equal(h.getNeighborDialogue().mediaTime,frozen);assert.equal(h.getNeighborDialogue().paused,true);h.speechSynthesis.paused=false;
@@ -344,7 +344,7 @@ test('all introductions require arrival at the standing halo; Heiko summons the 
    const actor=h.actors.find(n=>n.id===id);h.talkJwdNeighbor(actor);assert.equal(h.jwdState.met.has(id),false);
    h.finish();assert.equal(h.jwdState.met.has(id),false,'invitation is not mission credit');
    const result=completeTour(h,dt);assert.equal(h.jwdState.met.has(id),true);
-   if(id==='jwd-parent')assert.ok(result.speakers.has('THEODORE MAASLOS'));
+   if(id==='jwd-parent')assert.ok(result.speakers.has('HARTMUT MAASLOS'));
   }
   assert.equal(h.currentMission().target,'hausverwaltung');assert.equal(h.jwdState.met.size,3);
  }

@@ -10,6 +10,11 @@ from pathlib import Path
 
 GAME = Path(__file__).resolve().parents[1]
 INDEX = "GERMANY-SIMULATOR-CAST-INDEX.json"
+HISTORICAL_PROFILES = {
+    "amt-erna-frist": ("88c9f2638a954f59b33a74dc6ec48f10", "Erna Frist"),
+    "amt-ottilie-durchschlag": ("1ec70124423e4b9c985866dc0b978a28", "Ottilie Durchschlag"),
+    "amt-hedwig-zustaendig": ("5dfbf1a66def407fa5ec2a700c1fd311", "Hedwig Zuständig"),
+}
 PATRONS = {
     "amt-konrad-wohnungszettel", "amt-mechthild-elternbogen",
     "amt-wolfram-rentenbescheid",
@@ -26,14 +31,24 @@ def main() -> None:
     people = {person["voiceId"]: person for person in cast["characters"] + cast["roleProfiles"]}
     path = args.music_root.resolve(strict=True) / INDEX
     index = json.loads(path.read_text(encoding="utf-8"))
-    if len(people) != index["profileCount"] or len(index["profiles"]) != len(people):
-        raise RuntimeError("Game and Music cast profile counts differ")
+    rows = index["profiles"]
+    if index["profileCount"] != len(rows):
+        raise RuntimeError("Music cast profileCount differs from its rows")
+    if len(people) != len(cast["characters"]) + len(cast["roleProfiles"]):
+        raise RuntimeError("Game cast contains duplicate voice IDs")
+    archived_ids = set(cast["preservedProfileIds"]) | {row["profileId"] for row in cast["retiredProfiles"]}
     seen = set()
     for row in index["profiles"]:
         voice_id = row["voiceId"]
-        if voice_id in seen or voice_id not in people:
-            raise RuntimeError(f"Music cast contains an unknown or duplicate voice ID: {voice_id}")
+        if voice_id in seen:
+            raise RuntimeError(f"Music cast contains a duplicate voice ID: {voice_id}")
         seen.add(voice_id)
+        if voice_id not in people:
+            historical = HISTORICAL_PROFILES.get(voice_id)
+            if (historical != (row["profileId"], row["fullName"]) or
+                    row["profileId"] not in archived_ids or voice_id in cast["productionVoices"]):
+                raise RuntimeError(f"Music cast contains an unverified historical voice ID: {voice_id}")
+            continue
         person = people[voice_id]
         profile_id = person.get("secretTunnel", {}).get("profileId") or person.get("secretTunnelProfileId")
         reference = person["reference"]
@@ -50,6 +65,8 @@ def main() -> None:
             row["candidateProfiles"] = candidates
         if voice_id in PATRONS:
             row["runtimeStatus"] = person["status"]
+    if not people.keys() <= seen:
+        raise RuntimeError("Music cast is missing a current game voice ID")
     index["castSourceSha256"] = hashlib.sha256(game_cast_path.read_bytes()).hexdigest()
     # The existing corpus rows retain historical evidence; generation uses the
     # current, hash-bound production projection rather than those primary UUIDs.
@@ -62,10 +79,10 @@ def main() -> None:
     if args.check:
         if path.read_text(encoding="utf-8") != rendered:
             raise RuntimeError("Music cast index differs from the game cast")
-        print(f"Verified {len(seen)} Music cast profiles")
+        print(f"Verified {len(people)} current / {len(seen) - len(people)} historical Music cast profiles")
     else:
         path.write_text(rendered, encoding="utf-8")
-        print(f"Updated {len(seen)} Music cast profiles")
+        print(f"Updated {len(people)} current / {len(seen) - len(people)} historical Music cast profiles")
 
 
 if __name__ == "__main__":

@@ -7,6 +7,7 @@ This document owns level lookup and compartmentalization. Root `For-AI/` owns sh
 | Level ID | Task names and boundary | Instructions | Context and source map |
 | --- | --- | --- | --- |
 | `city` | Open world, Berlin/Bayern, JWD home/neighbors/gardens, streets, landmarks, traffic, quizzes and city paperwork. Excludes the two interiors below. | [City AGENTS](../levels/city/AGENTS.md) | [City guide](../levels/city/For-AI/README.md) |
+| `neighbors` | Heiko, Inga, Frau Schwabingen, Hartmut and recurring visitor Ede character context; runtime belongs to city. | [Neighbor AGENTS](../levels/neighbors/AGENTS.md) | [Neighbor guide](../levels/neighbors/For-AI/README.md) |
 | `buergeramt` | First Bürgeramt interior, queue, Schalter, Anmeldung interview, fever cast and QR/phone companion. Later city paperwork is not a separate level. | [Bürgeramt AGENTS](../levels/buergeramt/AGENTS.md) | [Bürgeramt guide](../levels/buergeramt/For-AI/README.md) |
 | `jobcenter` | Optional Jobcenter interior/flame encounter and its entry/return boundary. | [Jobcenter AGENTS](../levels/jobcenter/AGENTS.md) | [Jobcenter guide](../levels/jobcenter/For-AI/README.md) |
 

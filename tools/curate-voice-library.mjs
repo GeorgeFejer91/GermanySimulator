@@ -69,8 +69,47 @@ export function runtimeBlock(cast){
   'const neighborVoices=Object.freeze('+JSON.stringify(Object.fromEntries(cast.existingAssetProfiles.filter(p=>p.gameRole==='jwd-neighbor').map(p=>[p.voiceId,{name:p.fullName,gameCharacterId:p.gameCharacterId,gender:p.gender,fallback:p.fallback,status:p.status}])))+');\n'+
   'function productionClip(clip){const exception=productionExceptions[clip.id],binding=exception?.voiceId===clip.voiceId?exception:productionVoices[clip.voiceId];if(!binding)return !clip.fixedProduction;if(clip.profileId!==binding.profileId)return false;const expected={renderer:binding.renderer,modelRevision:binding.modelRevision,referenceSha256:clip.referenceHashKind==="uploaded-original"?binding.originalSha256:binding.referenceSha256,referenceOriginalSha256:binding.originalSha256,processing:binding.processing??null};return Object.entries(expected).every(([key,value])=>(!clip.fixedProduction&&clip[key]===undefined)||clip[key]===value)}\n';
 }
-export const neighborSpokenWords=text=>text.normalize('NFKC').toLocaleLowerCase('de').replace(/people\s*(?:&|and)\s*culture/g,'people and culture').replace(/\bmaslos\b/g,'maaslos').replace(/[-‐‑–—]/g,' ').replace(/[^\p{L}\p{N}]+/gu,' ').trim().replace(/\s+/g,' ').replace(/nachbarschafts offside\b/g,'nachbarschafts offsite');
-export function neighborRecordingsBlock(cast,manifests){
+export const neighborSpokenWords=text=>text.normalize('NFKC')
+ .toLocaleLowerCase('de')
+ .replace(/(?<!\p{L})(sie|du|er|haben|ich|man|meinen|sag|sehen|wir|gibt)[’']s(?!\p{L})/gu,'$1 es')
+ .replace(/people\s*(?:&|and)\s*culture/g,'people and culture')
+ .replace(/(?<!\p{L})(?:maslos|maßlos)(?!\p{L})/gu,'maaslos')
+ .replace(/(?<!\p{L})(daß|muß|bißchen)(?!\p{L})/gu,word=>({daß:'dass',muß:'muss',bißchen:'bisschen'})[word])
+ .replace(/(?<!\p{L})feedback[-‐‑–—]gespräch(?!\p{L})/gu,'feedbackgespräch')
+ .replace(/[-‐‑–—]/g,' ')
+ .replace(/[^\p{L}\p{N}]+/gu,' ')
+ .trim().replace(/\s+/g,' ')
+ .replace(/\bso was\b/g,'sowas')
+ .replace(/\bnoch mal\b/g,'nochmal')
+ .replace(/\bkennen zu lernen\b/g,'kennenzulernen')
+ .replace(/nachbarschafts offside\b/g,'nachbarschafts offsite')
+ .replace(/\b\d+\b/g,number=>Number(number)<100?spokenWords(number):number);
+
+export function validNeighborAsrInputTransform(clip,person){
+ const transform=clip.asrInputTransform;
+ if(transform===undefined)return clip.asrUnframedTranscript===undefined;
+ const reviewedSources={
+  'jwd-heiko-maaslos':{'heiko-story-21':20,'heiko-story-33':32},
+  'jwd-theodore-maaslos':{'theodore-story-01':0}
+ };
+ const sourceIndex=reviewedSources[clip.voiceId]?.[clip.clipId];
+ if(!transform||!Number.isInteger(sourceIndex)||person.dialogue[sourceIndex]?.text!==clip.text)return false;
+ const textSha=createHash('sha256').update(clip.text).digest('hex');
+ const hashes=['sourceMp3Sha256','decodedPcmSha256','paddedPcmSha256','asrInputWavSha256','asrReceiptSha256','asrModelSha256','asrBinarySha256','priorAsrReceiptSha256','priorAsrInputWavSha256'];
+ return transform.kind==='leading-zero-silence-v1'&&transform.seconds===1&&
+  transform.sampleRate===16000&&transform.channels===1&&transform.bitsPerSample===16&&
+  Number.isInteger(transform.originalSampleCount)&&transform.originalSampleCount>0&&
+  transform.prefixSampleCount===16000&&transform.paddedSampleCount===transform.originalSampleCount+16000&&
+  Math.abs(transform.originalSampleCount-clip.durationSeconds*16000)<=1&&
+  transform.sourceMp3Sha256===clip.sha256&&clip.sourceSha256===textSha&&
+  hashes.every(key=>typeof transform[key]==='string'&&/^[a-f0-9]{64}$/.test(transform[key]))&&
+  transform.decodedPcmSha256!==transform.paddedPcmSha256&&
+  transform.asrModelSha256===clip.asrModelSha256&&clip.asrLanguageId==='de'&&clip.asrScriptPrompt===null&&
+  transform.speechSamplesUnmodified===true&&transform.zeroPrefixVerified===true&&transform.priorAsrWordExact===false&&
+  typeof clip.asrUnframedTranscript==='string'&&clip.asrUnframedTranscript.trim().length>0&&
+  neighborSpokenWords(clip.asrUnframedTranscript)!==neighborSpokenWords(clip.text);
+}
+export function neighborRecordingsBlock(cast,manifests,assetRoot=root){
  const entries={},bindings=[],bindingIndices=new Map(),seen=new Set();
  for(const manifest of manifests){
   const person=cast.existingAssetProfiles.find(p=>p.voiceId===manifest.voiceId&&p.gameRole==='jwd-neighbor');
@@ -78,11 +117,17 @@ export function neighborRecordingsBlock(cast,manifests){
   for(const clip of manifest.clips){
    requireMatch(matchesProduction(cast,clip)&&clip.renderer==='omnivoice-rs','Wrong fixed neighbor production receipt');
    requireMatch(person.gameCharacterId===clip.actorId&&person.dialogue.some(line=>line.text===clip.text&&line.english===clip.english),`Wrong neighbor source/speaker: ${clip.clipId}`);
+   requireMatch(validNeighborAsrInputTransform(clip,person),'Unverified neighbor ASR input transform');
+   if(['actualInferenceText','actualInferenceSha256','canonicalSourceSha256','renderNormalizationPolicy'].some(key=>clip[key]!==undefined)){
+    const expanded=clip.text.replace(/(?<!\p{L})(sie|du|er|haben|ich|man|meinen|sag|sehen|wir|gibt)[’']s(?!\p{L})/giu,(_,base)=>base+' es');
+    const textHash=text=>createHash('sha256').update(text).digest('hex');
+    requireMatch(clip.voiceId==='jwd-heiko-maaslos'&&clip.renderNormalizationPolicy==='finite-authored-apostrophe-contractions-v1'&&expanded!==clip.text&&clip.actualInferenceText===expanded&&clip.canonicalSourceSha256===textHash(clip.text)&&clip.actualInferenceSha256===textHash(expanded)&&neighborSpokenWords(expanded)===neighborSpokenWords(clip.text),'Unverified neighbor render input');
+   }
    const exact=typeof clip.asr==='string'&&neighborSpokenWords(clip.asr)===neighborSpokenWords(clip.text);
    const dialectAdvisory=clip.voiceId==='jwd-frau-schwabingen'&&cast.productionVoices[clip.voiceId]?.asrPolicy==='dialect-advisory'&&clip.asrVerificationMode==='dialect-advisory';
    requireMatch(clip.nativeCompletion?.completed===true&&clip.asrWordExact===exact&&clip.asrScriptPrompt===null&&/^[a-f0-9]{64}$/.test(clip.asrModelSha256)&&typeof clip.asr==='string'&&clip.asr.trim().length>0&&(exact||dialectAdvisory),'Missing independent final-encoding neighbor ASR or authorized dialect-advisory receipt');
    requireMatch(Math.abs(clip.integratedLufs+18)<=.3&&clip.truePeakDbtp<=-1.5&&clip.approval?.status==='user-approved','Unverified neighbor take');
-   requireMatch(clip.file===`assets/voices/neighbors/${clip.clipId}.mp3`&&hash(resolve(root,clip.file))===clip.sha256,'Neighbor audio hash/path drift');
+   requireMatch(clip.file===`assets/voices/neighbors/${clip.clipId}.mp3`&&hash(resolve(assetRoot,clip.file))===clip.sha256,'Neighbor audio hash/path drift');
    requireMatch(clip.mouthHz===40&&clip.mouthEnergy.length===Math.ceil(clip.durationSeconds*40)&&clip.mouthEnergy.every(value=>Number.isInteger(value)&&value>=0&&value<=255),'Invalid encoded-media mouth cue');
    const key=clip.voiceId+'\0'+clip.text;requireMatch(!seen.has(key),'Duplicate neighbor recording');seen.add(key);
    const {clipId,voiceId,actorId,profileId,renderer,modelRevision,referenceSha256,referenceOriginalSha256,processing,sha256,mouthHz,mouthEnergy}=clip;

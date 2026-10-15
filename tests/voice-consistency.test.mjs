@@ -5,6 +5,7 @@ import {tmpdir} from 'node:os';
 import {join} from 'node:path';
 import {execFileSync} from 'node:child_process';
 import vm from 'node:vm';
+import {createHash} from 'node:crypto';
 import {archiveFiles,fixedRecordingsBlock,matchesProduction,neighborRecordingsBlock,neighborSpokenWords,runtimeBlock,spokenWords,streetRulesBlock,verifyProfiles,writeArchiveMetadata} from '../tools/curate-voice-library.mjs';
 import {harness} from './amt-harness.mjs';
 const cast=JSON.parse(readFileSync('For-AI/VOICE-CAST.json'));
@@ -33,6 +34,29 @@ test('neighbor takes bind exact speaker/text, unprompted encoded words and measu
  assert.equal(neighborSpokenWords('Inga Maaslos, People & Culture.'),neighborSpokenWords('Inga Maslos, People and Culture.'));
  assert.notEqual(neighborSpokenWords('Inga Maaslos'),neighborSpokenWords('Inga Maslow'));
  assert.notEqual(neighborSpokenWords('Sie möchten dazugehören'),neighborSpokenWords('Sie möchten nicht dazugehören'));
+});
+
+test('neighbor render-input receipts permit only a truthful finite contraction expansion',()=>{
+ const manifest=JSON.parse(readFileSync('assets/voices/neighbors/heiko-manifest.json'));
+ const original=manifest.clips.find(clip=>/[’']s\b/u.test(clip.text));assert.ok(original);
+ const expanded=original.text.replace(/(?<!\p{L})(sie|du|er|haben|ich|man|meinen|sag|sehen|wir|gibt)[’']s(?!\p{L})/giu,(_,base)=>base+' es');
+ assert.notEqual(expanded,original.text);
+ const textHash=text=>createHash('sha256').update(text).digest('hex');
+ const clip={...original,actualInferenceText:expanded,actualInferenceSha256:textHash(expanded),canonicalSourceSha256:textHash(original.text),renderNormalizationPolicy:'finite-authored-apostrophe-contractions-v1'};
+ const check=take=>neighborRecordingsBlock(cast,[{...manifest,requestedLineCount:1,heldPrivate:[],clips:[take]}]);
+ assert.doesNotThrow(()=>check(clip));
+ for(const change of [{actualInferenceText:expanded+' nicht'},{actualInferenceSha256:'0'.repeat(64)},{canonicalSourceSha256:'0'.repeat(64)},{renderNormalizationPolicy:'unreviewed'},{renderNormalizationPolicy:undefined},{actualInferenceText:original.text,actualInferenceSha256:textHash(original.text)}])assert.throws(()=>check({...clip,...change}),/Unverified neighbor render input/);
+ for(const key of ['actualInferenceText','actualInferenceSha256','canonicalSourceSha256']){const partial={...clip};delete partial[key];assert.throws(()=>check(partial),/Unverified neighbor render input/)}
+ assert.doesNotThrow(()=>check(original),'unchanged historical receipts stay valid');
+});
+
+test('optional Feedback compound hyphen preserves words without accepting a different garden noun',()=>{
+ for(const hyphen of ['-','‐','‑','–','—'])assert.equal(neighborSpokenWords(`Feedback${hyphen}Gespräch`),neighborSpokenWords('Feedbackgespräch'));
+ assert.notEqual(neighborSpokenWords('Feedback Gespräch'),neighborSpokenWords('Feedbackgespräch'));
+ assert.notEqual(neighborSpokenWords('Feedback-Gespräche'),neighborSpokenWords('Feedbackgespräch'));
+ assert.notEqual(neighborSpokenWords('kein Feedback-Gespräch'),neighborSpokenWords('Feedbackgespräch'));
+ assert.notEqual(neighborSpokenWords('Gartenswerk'),neighborSpokenWords('Gartenzwerg'));
+ assert.notEqual(neighborSpokenWords('Garten-Werk'),neighborSpokenWords('Gartenzwerg'));
 });
 
 test('fixed runtime takes reject engine, model, reference and processing drift even with the same profile',()=>{
@@ -229,4 +253,27 @@ test('default and both audition modes never revive archived clerk speech',()=>{
   assert.equal(catalog.candidateClip('amt-horst-stempelmann','Wer die Finsternis sieht, hat sie selbst gewählt!'),'./assets/voices/horst-stempelmann/omen-candidate-02.mp3');
  }
  assert(readFileSync('For-AI/AUDIO-TEXT-LIBRARY.js','utf8').replace(/\r\n/g,'\n').includes(runtimeBlock(cast)));
+});
+
+test('neighbor ASR orthography preserves number values, boundaries and negation',()=>{
+ assert.equal(neighborSpokenWords('Theodor, acht, sechs Sprachen.'),neighborSpokenWords('Theodor, 8, 6 Sprachen.'));
+ assert.equal(neighborSpokenWords('Dass er das weiß.'),neighborSpokenWords('Daß er das weiß.'));
+ assert.equal(neighborSpokenWords('Maaslos muss ein bisschen warten.'),neighborSpokenWords('Maßlos muß ein bißchen warten.'));
+ assert.notEqual(neighborSpokenWords('Maße'),neighborSpokenWords('Masse'));
+ assert.notEqual(neighborSpokenWords('Er muss warten.'),neighborSpokenWords('Er musste warten.'));
+ assert.equal(neighborSpokenWords('Bei uns machen wir’s auch. Haben Sie’s gesehen?'),neighborSpokenWords('Bei uns machen wir es auch. Haben Sie es gesehen?'));
+ assert.equal(neighborSpokenWords("Wenn er's weiß, gibt's keine Fragen."),neighborSpokenWords('Wenn er es weiß, gibt es keine Fragen.'));
+ assert.equal(neighborSpokenWords('Man schiebt so was weiter.'),neighborSpokenWords('Man schiebt sowas weiter.'));
+ // Duden lists noch mal / nochmal as alternative spellings, not lexical substitutions.
+ // https://www.duden.de/rechtschreibung/noch_mal
+ assert.equal(neighborSpokenWords('Wir besprechen das noch mal.'),neighborSpokenWords('Wir besprechen das nochmal.'));
+ for(const changed of ['nochmals','noch einmal','noch mal nicht','nochmals nicht'])assert.notEqual(neighborSpokenWords('nochmal'),neighborSpokenWords(changed));
+ // https://www.duden.de/rechtschreibung/kennenlernen lists this exact infinitive spelling pair.
+ assert.equal(neighborSpokenWords('Zeit, uns kennenzulernen.'),neighborSpokenWords('Zeit, uns kennen zu lernen.'));
+ for(const changed of ['kennen zu lernen nicht','lernen zu kennen','kennen zulernen','zu lernen'])assert.notEqual(neighborSpokenWords('kennenzulernen'),neighborSpokenWords(changed));
+ assert.notEqual(neighborSpokenWords('so etwas'),neighborSpokenWords('sowas'));
+ assert.notEqual(neighborSpokenWords('so was nicht'),neighborSpokenWords('sowas'));
+ for(const [source,changed] of [["Peter's Auto",'Peter es Auto'],['wir s','wir es'],['wirs','wir es'],['machen wir’s nicht','machen wir es'],['das','da es']])assert.notEqual(neighborSpokenWords(source),neighborSpokenWords(changed));
+ assert.equal(neighborSpokenWords('zweiundzwanzig Minuten'),neighborSpokenWords('22 Minuten'));
+ for(const [source,changed] of [['acht Sprachen','6 Sprachen'],['acht Sprachen','18 Sprachen'],['sechs Sprachen','sechs nicht Sprachen'],['elf Minuten Freizeit','11 Minuten'],['einundzwanzig','zwei eins'],['achtzehn','acht zehn'],['Maaslos','Masloss']])assert.notEqual(neighborSpokenWords(source),neighborSpokenWords(changed));
 });
