@@ -5,7 +5,7 @@ import {readFileSync} from 'node:fs';
 import {resolve} from 'node:path';
 import {fileURLToPath} from 'node:url';
 import vm from 'node:vm';
-import {policeManifestAuthority,policeRecordingsBlock} from '../tools/curate-voice-library.mjs';
+import {policeManifestAuthority,policeRecordingsBlock,voiceGapManifestAuthority} from '../tools/curate-voice-library.mjs';
 
 const root=fileURLToPath(new URL('../',import.meta.url));
 const read=relative=>readFileSync(resolve(root,relative),'utf8');
@@ -16,6 +16,7 @@ const manifest={...JSON.parse(read(relative)),provenanceManifest:relative,proven
 const context={window:{},location:{search:''},URLSearchParams};
 vm.runInNewContext(read('For-AI/AUDIO-TEXT-LIBRARY.js'),context,{timeout:1000});
 const catalog=context.window.GermanySimulatorAudioText;
+const gap=JSON.parse(read('assets/voices/police-dialogue/polizei-heinrich-wachtmeister-gap-manifest.json'));
 
 test('police defaults resolve only exact approved actor, source and final bytes',()=>{
  const jobs=policeManifestAuthority(cast,manifest,root);
@@ -33,9 +34,13 @@ test('police defaults resolve only exact approved actor, source and final bytes'
   for(const key of ['voiceId','actorId','profileId','sha256','english'])assert.equal(row[key],clip[key]);
   assert.equal(row.source,clip.text);
  }
+ voiceGapManifestAuthority(cast,gap,root);
+ assert.deepEqual(gap.clips.map(row=>row.clipId).sort(),['polizei-heinrich-wachtmeister-berlin-04','polizei-heinrich-wachtmeister-germany-04']);
  for(const held of manifest.heldPrivate){
-  assert.equal(catalog.recordedClip(held.voiceId,held.text),null,held.clipId);
-  assert.equal(catalog.candidateClip(held.voiceId,held.text),null,held.clipId);
+  const replacement=gap.clips.find(row=>row.clipId===held.clipId),path=replacement?'./'+replacement.file:null;
+  if(replacement){assert.equal(replacement.voiceId,held.voiceId);assert.equal(replacement.text,held.text);assert.equal(replacement.english,held.english);assert.equal(catalog.recordings[path].sha256,replacement.sha256);}
+  assert.equal(catalog.recordedClip(held.voiceId,held.text),path,held.clipId);
+  assert.equal(catalog.candidateClip(held.voiceId,held.text),path,held.clipId);
  }
  assert.doesNotMatch(JSON.stringify(manifest),/[A-Za-z]:\\|\/Users\/|\\Users\\/);
 });

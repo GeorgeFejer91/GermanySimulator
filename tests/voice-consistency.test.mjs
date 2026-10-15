@@ -133,12 +133,12 @@ test('a fixed recording cannot use a script-prompted transcript as independent e
 test('failed fixed-voice integration leaves the complete playable catalogue unchanged',()=>{
  const scratch=mkdtempSync(join(tmpdir(),'voice-sync-'));
  try{
-  for(const folder of ['For-AI','tools','assets/voices/candidate-dialogue','assets/voices/knick','assets/voices/quiz-segments'])mkdirSync(join(scratch,folder),{recursive:true});
-  for(const path of ['For-AI/AUDIO-TEXT-LIBRARY.js','For-AI/QUIZ-CHARACTER-DICTIONARY.js','tools/curate-voice-library.mjs','street-wisdom.js','game.js'])writeFileSync(join(scratch,path),readFileSync(path));
-  const quizManifestPath='assets/voices/quiz-segments/quiz-german9-manifest.json';
-  writeFileSync(join(scratch,quizManifestPath),readFileSync(quizManifestPath));
-  const quizManifest=JSON.parse(readFileSync(quizManifestPath,'utf8'));
-  for(const clip of quizManifest.clips)writeFileSync(join(scratch,clip.file),readFileSync(clip.file));
+  for(const folder of ['For-AI','tools','assets/voices/candidate-dialogue','assets/voices/knick','assets/voices/quiz-segments','assets/voices/traffic-dialogue','assets/voices/police-dialogue'])mkdirSync(join(scratch,folder),{recursive:true});
+  for(const path of ['For-AI/AUDIO-TEXT-LIBRARY.js','For-AI/QUIZ-CHARACTER-DICTIONARY.js','tools/curate-voice-library.mjs','tools/traffic4-license-evidence.mjs','tools/police8-continuation-evidence.mjs','street-wisdom.js','game.js'])writeFileSync(join(scratch,path),readFileSync(path));
+  for(const path of ['assets/voices/quiz-segments/quiz-german9-manifest.json','assets/voices/traffic-dialogue/verkehr-dieter-hupfer-gap-manifest.json','assets/voices/police-dialogue/polizei-heinrich-wachtmeister-gap-manifest.json']){
+   writeFileSync(join(scratch,path),readFileSync(path));
+   for(const clip of JSON.parse(readFileSync(path,'utf8')).clips)writeFileSync(join(scratch,clip.file),readFileSync(clip.file));
+  }
   const altered=JSON.parse(JSON.stringify(cast));altered.productionVoices['amt-brunhilde-knick'].profileName='Changed projection for failed transaction';
   writeFileSync(join(scratch,'For-AI/VOICE-CAST.json'),JSON.stringify(altered));
   writeFileSync(join(scratch,'assets/voices/candidate-dialogue/manifest.json'),JSON.stringify({clips:[]}));
@@ -189,14 +189,19 @@ test('archive metadata cannot follow a junction or hardlink into live files',()=
  }finally{rmSync(scratch,{recursive:true,force:true});}
 });
 
-test('redundant generation bindings and traffic recordings are removed',()=>{
- const window={};vm.runInNewContext(readFileSync('For-AI/AUDIO-TEXT-LIBRARY.js','utf8'),{window});const voices=window.GermanySimulatorAudioText.voices;
+test('redundant bindings stay removed and selected traffic replacements resolve',()=>{
+ const window={};vm.runInNewContext(readFileSync('For-AI/AUDIO-TEXT-LIBRARY.js','utf8'),{window});const catalog=window.GermanySimulatorAudioText,voices=catalog.voices;
  assert.equal(Object.values(voices).filter(voice=>voice.engine==='qwen').length,0);
  for(const id of ['frau-knick','merz-character','merkel-character','soeder-character','weidel-character'])assert.equal(voices[id],undefined);
  assert.equal(voices['amt-brunhilde-knick'].generationAllowed,true);
  assert.equal(matchesProduction(cast,{voiceId:'frau-knick',profileId:'a137f87bde844d36b18e3a59c412cf2c'}),false);
+ const admitted=JSON.parse(readFileSync('assets/voices/traffic-dialogue/verkehr-dieter-hupfer-gap-manifest.json')).clips;
+ assert.equal(admitted.length,3);
  for(const id of ['traffic-berlin-01','traffic-berlin-02','traffic-germany-01','traffic-germany-02']){
-  const clip=window.GermanySimulatorAudioText.clips[id];assert(clip.text&&clip.english);assert.equal(clip.recording,null);assert.equal(clip.path,undefined);
+  const clip=catalog.clips[id],selected=admitted.find(row=>row.clipId===id),path=selected?'./'+selected.file:null;
+  assert(clip.text&&clip.english);assert.equal(clip.recording,path);assert.equal(clip.path,path||undefined);
+  assert.equal(catalog.candidateClip('verkehr-dieter-hupfer',clip.text),path);
+  if(selected)assert.equal(catalog.recordings[path].profileId,cast.productionVoices['verkehr-dieter-hupfer'].profileId);
  }
  assert.equal(window.GermanySimulatorAudioText.speechFamilies.traffic.profileVoiceId,'verkehr-dieter-hupfer');
 });

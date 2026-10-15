@@ -40,6 +40,27 @@ Generation completed for all 27 remaining first takes. Processing was interrupte
 
 Heinrich Wachtmeister retains his selected profile for twelve authored regional police lines. All twelve first takes reached native EOS; four passed the strict final encoding and literal word checks and now resolve through the existing default lookup. Eight remain captions. The public police manifest binds the successful bounded phases, exact source/request/profile hashes and clip-specific selection. A normalized-only transcript does not override a false literal-word flag. Matching approved recordings intentionally take priority over their old opt-in previews; unrelated preview lookups remain unchanged. Perceptual listening remains unverified.
 
+## Additional traffic and police defaults (2026-10-15)
+
+Three Dieter Hupfer traffic recordings and two Heinrich Wachtmeister police
+recordings now supplement the earlier defaults through the existing exact
+voice/text lookup. Their typed gap manifests account for all twelve native
+attempts: traffic 4 generated / 3 admitted / 1 held and police 8 generated /
+2 admitted / 6 held. The five admitted takes retain selected profiles, native
+EOS, literal final-audio words, source-owned captions, levels and receipt hashes.
+Seven other takes stay private; a normalized-only match cannot replace the
+literal-word or exact-cue requirements. No retry or transcript rewrite is part
+of admission. All 593 previous recording objects remain unchanged, for 598 total.
+
+Traffic processing retains its original failed render and unknown-license raw
+receipts alongside the separately verified CC0 source-resolution proof. That
+processing-only recovery made no further native generation calls. Police take
+two retains take-one lineage, the earlier zero-call resource failure and the
+successful bounded continuation. Neither recovery rewrites historical outcomes.
+Both references are CC0; no attribution credit is required. Model terms and
+source hashes remain in technical provenance. Use selection is authorized by
+the whole-game cloning request; perceptual listening remains unperformed.
+
 ## Finite German quiz questions (2026-10-15)
 
 The German9 manifest at `assets/voices/quiz-segments/quiz-german9-manifest.json` accounts for nine genuine first takes: four admitted question recordings for Gisela Becker, Rüdiger Schmidt, Sabine Krüger and Heike Hoffmann, and five held takes. All nine reached native EOS; the admitted four passed unprompted literal German transcription, final encoding levels, exact caption cues and existing selected-profile ownership. Their separate catalog anchor preserves all589 earlier recording objects and previews, bringing the catalog to593 recordings. Private source audio, failed takes and authoring paths do not ship. Listening remains unperformed.

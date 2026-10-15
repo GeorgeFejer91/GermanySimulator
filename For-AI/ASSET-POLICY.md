@@ -2,6 +2,16 @@
 
 ## Decision
 
+The five additional traffic/police defaults total 279,004 encoded MP3 bytes.
+Silent forced-broker checks on Chromium desktop and Android emulation observed
+no target recording fetch at startup, then one fetch/decode per requested clip,
+native source end, exact captions and broker release. The five decoded buffers
+totaled 3,019,948 Float32 bytes at the observed 44.1 kHz mono context rate on each
+platform. The existing exact voice/text lookup, broker and 16 MiB decoded-recording
+cache remain the load, cancellation and retention owners. These are audio asset
+delivery checks; they establish neither natural triggers nor perceived quality,
+physical-device performance or a whole-browser memory cap.
+
 The office turning update adds no art, engine or independent frame loop. Its
 existing owner presents active office frames at display cadence; city/title
 deadlines, 20 Hz floor transport, bounded 60 Hz action-cloud generation, the

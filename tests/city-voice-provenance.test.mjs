@@ -28,7 +28,8 @@ async function fixture(t){
  const outer=mkdtempSync(resolve(tmpdir(),'gs-city-admission-test-')),game=resolve(outer,'destination'),authoring=resolve(outer,'authoring'),review=resolve(outer,'synthetic-review');
  t.after(()=>{assert.ok(resolve(outer).startsWith(resolve(tmpdir())+sep));rmSync(outer,{recursive:true,force:true})});
  const quizManifest='assets/voices/quiz-segments/quiz-german9-manifest.json';
- const fixtureFiles=['game.js','For-AI/VOICE-CAST.json','For-AI/AUDIO-TEXT-LIBRARY.js','For-AI/QUIZ-CHARACTER-DICTIONARY.js','street-wisdom.js','tools/curate-voice-library.mjs','tools/build-knick-voice.py',quizManifest,...json(resolve(root,quizManifest)).clips.map(clip=>clip.file)];
+ const gapManifests=['assets/voices/traffic-dialogue/verkehr-dieter-hupfer-gap-manifest.json','assets/voices/police-dialogue/polizei-heinrich-wachtmeister-gap-manifest.json'];
+ const fixtureFiles=['game.js','For-AI/VOICE-CAST.json','For-AI/AUDIO-TEXT-LIBRARY.js','For-AI/QUIZ-CHARACTER-DICTIONARY.js','street-wisdom.js','tools/curate-voice-library.mjs','tools/traffic4-license-evidence.mjs','tools/police8-continuation-evidence.mjs','tools/build-knick-voice.py',quizManifest,...json(resolve(root,quizManifest)).clips.map(clip=>clip.file),...gapManifests,...gapManifests.flatMap(path=>json(resolve(root,path)).clips.map(clip=>clip.file))];
  for(const base of [game,authoring])for(const path of fixtureFiles){mkdirSync(dirname(resolve(base,path)),{recursive:true});copyFileSync(resolve(root,path),resolve(base,path))}
  const reduceCatalog=base=>{
   const catalogPath=resolve(base,'For-AI/AUDIO-TEXT-LIBRARY.js');let catalog=readFileSync(catalogPath,'utf8');

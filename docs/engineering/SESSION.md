@@ -1,3 +1,74 @@
+# Five fixed traffic/police recordings — 2026-10-15
+
+Integrator scope starts from clean `dc46e26` in the separate voice admission
+worktree. Stage only three Dieter Hupfer traffic clips and two Heinrich
+Wachtmeister police clips, their typed gap manifests, the catalog, reviewed
+curator with its two evidence modules, portable public regression tests, owning
+voice/license documentation and the audio-catalog cache tag in `index.html`.
+Update existing voice-consistency fixture dependencies and English recorded-count
+expectations for the new approved traffic coverage; preserve held/retired checks.
+Include the new public cases in Pages CI. Extend the city fixture's actual import
+and manifest/media closure and migrate police default/preview expectations to
+the exact two new selections; retain the old manifest and six current holds.
+Preserve the existing 593 recording objects, four police defaults, four quiz
+question defaults, 15 caption policies, source dialogue, profile/reference IDs
+and the speech cleanup fix. Other seven generated takes remain private holds.
+No generation, ASR retry, transcript/flag rewrite or cue invention is permitted.
+Actual read-only collectors report traffic 4/4/3/1 and police 8/8/2/6 for
+requested/generated/selected/held; both revalidate actual media/provenance and
+retain original failed terminals. The traffic wrapper additionally binds the two
+adjacent imported evidence files before/after collection. Accepted cast is `0e6`;
+the older original-root hint is not an accepted runtime source. Admission is only
+into this reviewed checkout; the phone/speech checkout stays frozen for gameplay.
+Check typed conservation, actual media hashes, the portable rejection tests and
+existing curator/voice tests before publication. Browser playback is silent and
+device/listening acceptance remains separate. Physics/Camera omitted: no world,
+movement, collision, renderer, placement or character art changes.
+
+Initial execution: both admissions succeed, preserving all immutable input pins;
+the 14 portable public cases and full curator check pass. Related tests expose
+three fixture/expectation failures: copied curator missing its two real imports,
+and two legacy assertions still requiring zero approved traffic recordings.
+Retain the failed output; fix the fixture closure and assert exact admitted paths
+with the held traffic slot still empty, rather than bypassing these checks.
+
+Corrected related suite: 36/36 pass. Deliberately removing the production literal
+flag guard makes the new public suite fail at its false-literal assertions;
+restore the exact curator bytes before further checks. Independent catalog
+comparison preserves all 593 recording objects and all unrelated public exports,
+adding five recordings for 598 total. The separate clip index grows from 601 to
+603: three existing traffic rows gain their owned recording fields, and two
+police rows are appended. All existing German/English source pairs are unchanged.
+The five files total 279,004 encoded bytes, loaded only through the existing
+exact voice/text lookup. The initial conservation probe confused clip-index rows
+with recording objects; retain that failed probe and use these actual counts.
+
+The wider affected suite initially fails on another copied-curator import closure
+and historical police-null expectations. After supplying the real dependencies
+and distinguishing the exact two later selections from the six current holds,
+all 27 cases pass, including city installation/rollback and preview precedence.
+Update the owning traffic delivery paragraph to reflect its existing fixed
+caption fallback and the three admitted defaults.
+Correct the descriptive traffic/police delivery strings and police gameplay
+paragraph as well; these metadata edits do not control lookup or fallback.
+
+Actual silent browser validation passes all five clips on desktop and Android
+emulation: 10 clip/platform cases, 16 scoped checks, no page errors or target
+preload, exact transferred hashes, one decode/source per clip, native end, exact
+caption start and broker release without browser speech. Observed buffers total
+3,019,948 Float32 bytes per platform at 44.1 kHz mono. The supervisor exits 0 in
+47.9698 seconds; root and 15 sampled children retire with zero kills, timeouts,
+unknown census rows or pin changes. These are forced broker calls after real
+startup, not natural police/traffic encounters, screenshots, listening or a
+physical Android test. Prior test-tool failures remain failed: generated-hook
+escaping prevented startup, then a premature mute assertion expected the lazy
+output graph before playback. The corrected fixture compiles the exact served
+game and checks installed interception before playback plus retained zero-gain
+routes during every native cue. No production change or timeout increase fixes
+those test-tool failures. ROOT compiles the exact served script before the
+corrected fixture runs; the fixture then checks the live mute routes. Required
+voice/source checks pass before publication.
+
 # Synthetic speech callback ownership — 2026-10-15
 
 Integrator scope starts from clean deployed `f163143`. Change only the early

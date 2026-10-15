@@ -232,6 +232,25 @@ Secret Tunnel 6's installed OmniVoice Rust runtime rendered the exact authored t
 
 The four former synthesized traffic recordings were removed on 2026-10-11 at the user’s request. Their exact files, hashes, reference and model credits remain in the private voice archive. The game retains the four authored German shouts, English translations and existing browser-speech fallback. The synthetic horn is code-generated. The CC0 Thorsten source clips above still supply the selected Dieter Hupfer reference.
 
+On 2026-10-15, three new exact-text Dieter Hupfer recordings were admitted under
+the whole-game fixed-voice cloning request. The current reference is CC0-1.0;
+Chatterbox Multilingual V2 0.1.7 uses MIT. The
+[traffic gap manifest](traffic-dialogue/verkehr-dieter-hupfer-gap-manifest.json)
+owns the exact reference, model revision, source components and three shipping
+hashes. It preserves the failed original render and unknown-license raw receipt
+beside the verified CC0 processing recovery; the fourth generated take stays
+private. CC0 requires no attribution credit. Listening remains unperformed.
+
+## Additional Heinrich Wachtmeister police recordings
+
+Two additional recordings use Heinrich's existing selected CC0-1.0 reference
+and the same MIT Chatterbox renderer. The
+[police gap manifest](police-dialogue/polizei-heinrich-wachtmeister-gap-manifest.json)
+records exact source/model hashes, historical take-one lineage and the bounded
+take-two continuation. Two of eight generated takes are admitted, six held
+privately. These supplement the four earlier defaults without replacing their
+receipts. CC0 requires no attribution credit. Listening remains unperformed.
+
 ## Horst Stempelmann · official omen audio, candidate 2
 
 `horst-stempelmann/omen-candidate-02.mp3` is the user-approved default recording

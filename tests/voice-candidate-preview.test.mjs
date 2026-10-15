@@ -115,7 +115,7 @@ assert.equal(new Set(crowdClips.map(clip=>clip.voiceId)).size,12);
 assert.equal(on.candidatePreviewEnabled,true);
 assert.equal(off.candidatePreviewEnabled,false);
 const keys=new Set();
-const policeDefaults=JSON.parse(source('assets/voices/police-dialogue/polizei-heinrich-wachtmeister-manifest.json')).clips;
+const policeDefaults=['assets/voices/police-dialogue/polizei-heinrich-wachtmeister-manifest.json','assets/voices/police-dialogue/polizei-heinrich-wachtmeister-gap-manifest.json'].flatMap(path=>JSON.parse(source(path)).clips);
 for(const clip of originalCandidates){
  const key=clip.voiceId+"\0"+clip.text;
  assert.ok(!keys.has(key),`duplicate candidate ${clip.clipId}`);
