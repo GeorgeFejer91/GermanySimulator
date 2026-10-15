@@ -121,6 +121,96 @@ for(const voices of [[genericB,genericA],[genericA,genericB]]){
  browserVoices=voices;assert.equal(narrate("Formular.","FINANZAMT").voice,genericA,"unnamed mobile-system voice lists use stable identity order");utterance.onend();
 }
 
+function syntheticRetryFixture(){
+ const spoken=[],timers=[],intervals=[],starts=[],completed=[],captions=[],subtitleUpdates=[];
+ const c={Math,performance:{now:()=>100},state:{dialogue:false},window:{speechSynthesis:{}},
+  SpeechSynthesisUtterance:class{constructor(text){this.text=text;this.voice=null}},
+  speechSynthesis:{speaking:true,pending:false,paused:false,
+   getVoices:()=>[{lang:"de-DE",name:"Local German",localService:true}],
+   speak:value=>spoken.push(value),cancel(){}},
+  setTimeout(callback,delay){timers.push({callback,delay,cancelled:false});return timers.length},
+  clearTimeout(id){if(timers[id-1])timers[id-1].cancelled=true},
+  setInterval(callback,delay){intervals.push({callback,delay,cancelled:false});return intervals.length},
+  clearInterval(id){if(intervals[id-1])intervals[id-1].cancelled=true},
+  stimulusGeneration:1,activeStimulus:null,stimulusTimer:null,stimulusQueue:[],nextAmbientAt:0,
+  recordedSpeechSource:null,recordedSpeechGain:null,
+  AUDIO_MIX:{REQUIRED_GAP_MS:250,AMBIENT_GAP_MS:1000},
+  stimulusEligible:()=>true,setSubtitle(value){subtitleUpdates.push(value)},clearSubtitle(){subtitleUpdates.push(null)},
+  startSubtitle(value){captions.push(value.text);value.subtitleParts=[value.text]},
+  stopRecordedSpeech(){},setAudioText(){},hideWorldBark(){},cancelHumorScold(){},
+  pumpStimuli(){assert.fail("unexpected queued stimulus")}
+ };
+ vm.createContext(c);vm.runInContext(catalog,c);c.speechCatalog=c.window.GermanySimulatorAudioText;
+ vm.runInContext(["voiceHash","officialComputerVoice","finishStimulus","playCaptionStimulus","playSyntheticStimulus","stopSpeech"].map(sourceOf).join("\n"),c);
+ return {c,spoken,timers,intervals,starts,completed,captions,subtitleUpdates,
+  play(text){const value={text,family:"dialogue",start:()=>starts.push(text),done:()=>completed.push(text)};
+   c.activeStimulus=value;c.playSyntheticStimulus(value,c.stimulusGeneration);return value}
+ };
+}
+
+test("obsolete synthetic error cannot retry after cancellation and replacement",()=>{
+ const f=syntheticRetryFixture();f.play("Obsolete line");const obsolete=f.spoken.at(-1);
+ f.c.stopSpeech();const replacement=f.play("Current line");
+ const spokenBefore=f.spoken.length,timersBefore=f.timers.length;
+ obsolete.onerror({error:"network"});
+ assert.equal(f.spoken.length,spokenBefore,"obsolete error must not enqueue audible work");
+ assert.equal(f.timers.length,timersBefore,"obsolete error must not arm a new watchdog");
+ assert.equal(f.c.activeStimulus,replacement);assert.deepEqual(f.starts,[]);assert.deepEqual(f.completed,[]);
+ const current=f.spoken.at(-1);current.onstart();current.onend();
+ assert.deepEqual(f.starts,["Current line"]);assert.deepEqual(f.completed,["Current line"]);
+});
+
+test("started obsolete error clears its timers without touching a replacement",()=>{
+ const f=syntheticRetryFixture(),oldItem=f.play("Started obsolete line"),obsolete=f.spoken.at(-1);
+ obsolete.onstart();
+ const oldInterval=f.intervals.at(-1),oldWatchdog=f.timers.at(-1);
+ assert.ok(oldInterval);assert.equal(oldInterval.delay,180);assert.equal(oldInterval.cancelled,false);
+ assert.ok(oldWatchdog);assert.equal(oldWatchdog.cancelled,false);
+ assert.equal(oldItem.speechStarted,true);assert.deepEqual(f.starts,["Started obsolete line"]);
+ f.c.stopSpeech();const replacement=f.play("Replacement line"),current=f.spoken.at(-1);current.onstart();
+ const replacementWatchdog=f.timers.at(-1),replacementInterval=f.intervals.at(-1);
+ assert.notEqual(replacementInterval,oldInterval);assert.equal(replacementInterval.cancelled,false);
+ const spokenBefore=f.spoken.length,timersBefore=f.timers.length,updatesBefore=f.subtitleUpdates.slice();
+ obsolete.onerror({error:"network"});
+ assert.equal(oldInterval.cancelled,true,"the sole late error must retire its caption interval");
+ assert.equal(oldWatchdog.cancelled,true,"the sole late error must retire its watchdog");
+ assert.equal(replacementWatchdog.cancelled,false,"replacement watchdog must remain owned by its request");
+ assert.equal(replacementInterval.cancelled,false,"replacement caption interval must not be cleared");
+ assert.equal(f.timers.length,timersBefore);assert.equal(f.spoken.length,spokenBefore);
+ assert.equal(f.c.activeStimulus,replacement);assert.deepEqual(f.completed,[]);
+ assert.deepEqual(f.starts,["Started obsolete line","Replacement line"]);assert.deepEqual(f.subtitleUpdates,updatesBefore);
+ // Deliver an already queued interval tick after retirement; no utterance onend is supplied.
+ oldInterval.callback();assert.deepEqual(f.subtitleUpdates,updatesBefore);assert.deepEqual(f.completed,[]);
+ current.onend();
+ assert.deepEqual(f.starts,["Started obsolete line","Replacement line"]);
+ assert.deepEqual(f.completed,["Replacement line"]);assert.equal(f.c.activeStimulus,null);
+});
+
+test("finished prestart attempt cannot retry while its caption reading owns the item",()=>{
+ const f=syntheticRetryFixture(),item=f.play("Readable fallback");const obsolete=f.spoken.at(-1);
+ f.timers.find(timer=>timer.delay===4000).callback();
+ assert.equal(item.subtitleMode,"silent");assert.equal(f.c.activeStimulus,item);
+ assert.deepEqual(f.starts,["Readable fallback"]);assert.deepEqual(f.completed,[]);
+ const reading=f.timers.find(timer=>timer.delay===3200);assert.ok(reading);
+ const spokenBefore=f.spoken.length,timersBefore=f.timers.length;
+ obsolete.onerror({error:"voice-unavailable"});
+ assert.equal(f.spoken.length,spokenBefore,"finished synthetic attempt must not restart speech over its caption");
+ assert.equal(f.timers.length,timersBefore);assert.equal(reading.cancelled,false);
+ assert.equal(f.c.activeStimulus,item);assert.deepEqual(f.completed,[]);
+ reading.callback();assert.deepEqual(f.completed,["Readable fallback"]);assert.equal(f.c.activeStimulus,null);
+});
+
+test("current unfinished prestart error still retries exact text with the browser default",()=>{
+ const f=syntheticRetryFixture(),item=f.play("Current fallback line"),first=f.spoken.at(-1);
+ first.onerror({error:"synthesis-failed"});
+ assert.equal(f.spoken.length,2);const fallback=f.spoken.at(-1);
+ assert.notEqual(fallback,first);assert.equal(fallback.voice,null);assert.equal(fallback.text,item.text);
+ for(const key of ["lang","rate","pitch","volume"])assert.equal(fallback[key],first[key]);
+ assert.equal(f.c.activeStimulus,item);assert.deepEqual(f.starts,[]);assert.deepEqual(f.completed,[]);
+ fallback.onstart();fallback.onend();fallback.onend();
+ assert.deepEqual(f.starts,[item.text]);assert.deepEqual(f.completed,[item.text]);assert.equal(f.c.activeStimulus,null);
+});
+
 let idleCancel=0,activeCancel=0;
 const stopContext=vm.createContext({
  state:{dialogue:false},

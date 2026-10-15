@@ -1,3 +1,49 @@
+# Synthetic speech callback ownership — 2026-10-15
+
+Integrator scope starts from clean deployed `f163143`. Change only the early
+ownership/finished guard in `game.js`'s synthetic utterance error callback,
+four regression cases in the existing speech fallback navigation harness, the
+game script cache tag in `index.html`, and this record. A retained error from
+cancelled/replaced speech or a completed
+prestart attempt must not enqueue another utterance or watchdog. Preserve valid
+current default-voice fallback, exact text/settings, narrator policy, captions,
+queue completion and all clocks. No asset, profile, world, geometry, movement,
+camera or UI changes; Physics/Camera reviews omitted for this audio-only scope.
+First run the new cases against the unchanged production source to demonstrate
+the defects, then apply the reviewed single guard and run focused speech checks.
+This is controlled callback/VM evidence, not real browser speech or listening.
+
+Observed RED/GREEN: unchanged `8191674d` with the new tests fails both stale
+enqueue cases (7 pass / 2 fail); candidate `910d24ca` passes all 9 cases.
+Cancellation changes generation/owner; the late error must enqueue nothing.
+The startup watchdog hands the still-current item to caption reading; the late
+error must preserve that reading. A valid unfinished current error still retries
+the exact text/settings and completes once. Six related audio/subtitle suites
+pass 43/43. The configured quality-limit files are absent. The first silent
+browser attempt completed zero checks because its process observer timed out;
+its failure and subsequent retirement check are retained in ignored output.
+The failed run remains distinct from later successful browser evidence.
+
+Independent review subsequently held `910d24ca`: after actual utterance start,
+its early stale return can skip the closure's interval/watchdog cleanup. Those
+earlier green tests used a no-op interval boundary and do not cover this case.
+The accepted `5237170a` successor calls existing `finish()` before returning and
+tracks old and replacement timers in a fourth case. Both independent source
+reviews pass. Actual counterfactuals with the final tests reject original
+`8191674d` on both stale-enqueue cases and reject `910d24ca` on timer retirement;
+the accepted source passes 10/10 plus the 43 related checks. A delivered retired
+tick at fixed fixture time is not independent timing/guard-mutation evidence.
+
+Silent browser checks pass nine existing audio-hygiene assertions each on desktop
+and Android portrait emulation, including real directional input, native MP3
+start/distance release and dialogue takeover. Starting positions are fixtures.
+The configured default graphics backend is requested but not asserted; no speed,
+natural-route, physical-device or perceptual listening claim. Four screenshots
+were inspected. The reviewed observer completed in 33.907 seconds with root and
+observed children retired, no timeout/cleanup kill, errors or source-pin changes.
+Ignored evidence: `output/synthetic-speech-lifecycle/`. Refresh only the game cache
+tag for delivery; no HTML geometry, labels, fonts or text fitting changes.
+
 # Phone visibility instruction — 2026-10-15
 
 Integrator scope starts from clean published `1fbc382`. Change only the existing
