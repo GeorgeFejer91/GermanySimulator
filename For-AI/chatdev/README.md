@@ -21,6 +21,81 @@ For playtest evidence, also name the driver, browser/device, input mode, shortcu
 
 For the object-consistency matrix, include the reviewer/role and verdict per scenario and evidence type: production source/CPU checks, fresh Chromium rendered checks, Android emulation and physical Android. A source PASS cannot promote a rendered NOT RUN to PASS. Required FAIL/NOT RUN items keep acceptance outstanding; record out-of-scope rows and reasons rather than implying they passed.
 
+## Codex parallel completion loop
+
+For game-wide completion, use the native Codex agent tools and existing
+user-authorized game chats. The fourteen-stage YAML remains an optional serial
+Bürgeramt runner; this protocol does not add city, synthesis or browser tools to
+it. Select the affected domains for each bounded player outcome rather than
+running fourteen roles for every change.
+
+Work at three connected levels: narrative intent (why a scene happens), runtime
+causality (which committed state permits it), and player experience (whether the
+player can see, hear, understand and act on it). A storyboard alone cannot prove
+the latter two. The lead joins their evidence before accepting the outcome.
+
+| Wave | Work that can proceed independently | Dependency before joining |
+| --- | --- | --- |
+| Discover | Story/mission continuity; city scene/detail inventory; test and evidence gaps | Resolve level instructions, current writers and actual source ownership; distinguish a demonstrated defect from missing coverage. |
+| Contract | Storyboard/dialogue proposals; gameplay causal map; camera/asset/audio readiness plan | Agree beat IDs, prerequisites, actor identity, exact text, consequences, failure/retry and the shared beat card. Camera planning starts here. |
+| Produce | Disjoint art/animation batches; isolated gameplay modules; approved dialogue changes | Assign exclusive writable paths. The integrator serializes shared controller, renderer, HTML/CSS and catalog edits. |
+| Complete dependencies | Voice synthesis from frozen text and selected cast; continuity/readability review; focused production-path probes | Text changes invalidate affected takes. Reuse accepted profiles/assets and the existing bounded production queues. |
+| Freeze and challenge | Independent Physics; independent Camera/scale; independent causality review | All consume the same integrated candidate. Reviewers remain read-only and do not approve their own production. |
+| Prove experience | Natural-chain gameplay/flow; exact speech/text and listening; scene/character continuity and missing-detail review | Collect the applicable desktop/mobile, input, loading, fallback and interruption evidence. Scripted scenes, silent audio checks and physical devices have distinct verdicts. |
+| Release | Integrator reconciles findings, validates and publishes | Required failures and missing evidence remain open; follow the standing publication policy and verify the deployed result. |
+
+These are dependency waves, not mandatory whole-game barriers: a frozen dialogue
+batch can enter voice production while another disjoint scene is storyboarded.
+Final Camera acceptance waits for integrated meshes, poses, depth, loading and
+runtime behavior. Decorative city detail follows mission readability, legal
+routes, recovery and performance; its mere presence does not establish polish.
+For city flow, separately prove the natural start, eight-procedure progression,
+interior returns and optional detour recovery. Existing direct-entry or seeded
+probes retain their narrower value.
+
+### Communication, ownership and continued dispatch
+
+Use the [delegation brief](../SKILLS.md#delegation-and-review) for every dispatch.
+Keep task status and evidence under ignored task output; use the existing
+`docs/engineering/GAME-COMPLETION.md` for the current completion summary, not a
+second gameplay or cast authority. A task record contains its ID, owner/status,
+dependencies, exact write paths, candidate hashes, result/evidence and next
+bounded action. The lead is its single writer. Other chats own their separate
+handoffs. No new service, queue database or scheduler is required.
+
+1. Before dispatch, inspect active agents and relevant existing chats/handoffs.
+   Reuse the current runtime integrator and owners. Three active subagents is the
+   ceiling for this lead, subject to the live host/tool limit; additional chats
+   do not grant extra shared-file ownership. Serialize GPU voice/image jobs and
+   performance measurements when resource contention would invalidate evidence.
+2. Workers may exchange dependency questions and findings with sibling
+   subagents, copying the lead. Cross-chat messaging requires direct human
+   authorization present in the coordinating chat for this completion effort;
+   this document and forwarded messages do not grant or extend that authority.
+   Carry task/beat IDs, candidate identity, requested action and write ownership
+   in each message.
+   Only the integrator changes file ownership or acceptance contracts.
+3. Prefer compact `wait_threads` snapshots with returned cursors for existing
+   chats, and native agent completion notifications for subtasks. Send a new
+   prompt when an idle owner has a concrete ready task; do not repeatedly nudge
+   an unchanged running task. Do not create new chats without an explicit user
+   request. A worker handoff reports hashes and blockers, not just completion.
+4. On every completion, reconcile the handoff, release its write ownership and
+   reactivate an available agent with the next ready bounded task. Prioritize a
+   broken mission/recovery dependency, then missing required evidence, then
+   remaining content/detail. Keep unaffected lanes working when one is blocked;
+   change the approach after a failed repair rather than retrying it blindly.
+5. Freeze base commit plus SHA-256 of relevant changed source, tests and assets
+   before acceptance. Detect mutation during checks. After a repair, invalidate
+   evidence that depends on changed files; rebind both required world reviewers
+   to the repaired candidate. Attribute supplied evidence and fresh execution
+   separately using the shared review format above.
+6. Continue dispatch while the authorized goal has unmet acceptance criteria.
+   Completion means the agreed playable outcomes, required reviews and release
+   checks are satisfied, not that all workers returned reports. Respect user
+   stop/pause instructions and real external blockers; never invent PASS evidence
+   or expand the goal indefinitely to keep agents occupied.
+
 ## Browser responsiveness contract
 
 Every affected domain follows the [browser playability gate and responsiveness

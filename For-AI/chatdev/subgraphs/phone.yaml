@@ -29,29 +29,41 @@ graph:
           Read For-AI/chatdev/WEBGPT-HANDOFF.md for accepted PHONE findings
           and cite their task IDs in your report.
           Use no camera or microphone. A physical game QR opens the fictional
-          Berlin-style service page, which sends a scan event on connection and
-          displays the newly assigned ticket without waiting for name entry.
-          Required name entry follows the ticket before Frau Knick's call;
-          another scan creates a fresh ticket, while retries of one scan ID
-          return its original ticket.
-          Keep the page visible and connected; signal forfeiture on
-          backgrounding. Submitting the ordinary name form silently unlocks Web
+          Berlin-style name form. A scan allocates no number; a valid submitted
+          name reserves its peer's code. Display a received code before sending
+          ticket-received with its exact scan ID/code. Retries reuse that
+          reservation; independent peers retain independent tickets. The phone
+          shows only the code, leaving desk matching to the four-row Anzeige.
+          Before counter admission, hiding/disconnecting forfeits that ticket.
+          At the counter send actual phone-hidden/phone-visible metadata;
+          hidden evidence permits progression, while disconnection alone is
+          unknown. A visible return permits another call. Submitting the
+          ordinary name form silently unlocks Web
           Audio and requests fullscreen and wake lock where supported. Do not
           reveal the audio preparation through setup copy, a test tone, or early
           vibration. Browser APIs cannot detect volume or Do Not Disturb settings.
           The phone shows
-          an animated POLIZEI call, full-screen where supported, with ringing,
-          repeated vibration, and a visible line matching every spoken line.
+          the current phone-family incoming-call screen with Unbekannte Nummer,
+          full-screen where supported, ringing and repeated vibration. The
+          police identity is revealed only after Answer. Keep exact police
+          captions on the desktop, with no telephone transcript on the phone.
+          An unanswered visible call never expires itself; decline stops that
+          pressure and permits a later round. Preserve Hang Up and the current
+          role/round-validated call-end/call-ended ending receipts.
           Reply to host sync-ping with the same bounded sync-pong ID and local
           receive/send timestamps for four-timestamp clock-offset estimation.
-          Report police-start from the actual speech start or visible fallback,
+          Report police-start from actual recording/browser-greeting onset or
+          the bounded caption fallback,
           including its local timestamp and receipt-to-start delay; send
           police-done with local end timestamp, line duration, and delivery mode.
-          Limit speech startup silence with a readable fallback. Do not add a
-          fixed queue pause after one line. Keep the exact visible text up while
-          its audio plays.
-          Frau Knick uses these receipts to take her turn; retain the opening
-          and one later overlap. Translate device timestamps only through the
+          Only the name-bearing greeting uses browser synthesis inside Answer;
+          fixed police dialogue uses the approved recordings with bounded
+          caption fallback, never a substitute machine voice. Limit startup
+          silence and preserve the exact desktop caption through playback.
+          Frau Knick uses these receipts to take her turn. The personalized
+          opening and final police demand finish naturally; current indexed
+          cutoff deadlines and observed onsets own intermediate overlaps.
+          Translate device timestamps only through the
           measured clock offset, with its uncertainty.
           Validate message
           types, session, sequence, and payload length. Never promise an OS lock.

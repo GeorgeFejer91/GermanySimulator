@@ -21,8 +21,13 @@ graph:
           Require its actual beat ID, candidate revision and compact contract
           in this invocation; report a missing handoff. Report action
           start/stop and interrupt/cleanup boundaries used by Gameplay and
-          Soundscape. For `omen`, bind approach, arrival/stare, abrupt release
-          and ordinary walk to the same event.
+          Soundscape. For `omen`, bind approach, arrival/line, actual
+          speech/fallback completion, extended stare and gradual reverse
+          depth/audio envelope to the same event. Settle motion, flatten depth
+          and hold the opaque flat body until the registered painting takes
+          ownership, then use a planted turn and silent slow retreat.
+          Room/view recovery precedes ordinary walking and queue resumption;
+          follow the phase boundaries in For-AI/BUERGERAMT.md.
           Read For-AI/SPRITE-GENERATION-PROTOCOL.md, the Bürgeramt source
           provenance and atlas build report, and the existing renderer.
           Route art production through animate-2d-characters and ImageGen.

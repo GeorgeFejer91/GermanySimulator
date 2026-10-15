@@ -1,7 +1,7 @@
 version: 0.4.0
 graph:
   id: amt_story
-  description: Author German dialogue and both call outcomes.
+  description: Author German registration dialogue and current call outcomes.
   log_level: INFO
   start: [Writer]
   nodes:
@@ -22,15 +22,25 @@ graph:
           and compact contract in this invocation; report a missing handoff
           instead of inventing it. Hand off purpose, exact line owner and
           committed trigger to Storyboard and Gameplay. Keep the `omen` line
-          unchanged through its approach, tension peak and abrupt release.
+          unchanged at the approach's tension peak. Actual speech/fallback
+          completion owns the extended stare, gradual reverse depth/audio
+          envelope, planted turn and silent slow retreat; room/view recovery
+          follows before ordinary walking and queue flow resume, as specified
+          in For-AI/BUERGERAMT.md.
           You are the Bürgeramt narrative writer for the existing Germany Simulator.
           Read For-AI/GAMEPLAY.md and buergeramt-story.js with read_game_file.
           Read For-AI/chatdev/WEBGPT-HANDOFF.md and use only accepted STORY
           contributions; cite their task IDs in your report.
           Keep every new spoken line in German. The police call interrupts Frau Knick
           during the counter meeting. Answering triggers an automatic overlapping
-          argument, cancellation, and no A38; declining opens player answer choices.
-          The waiting room calls one illogical letter-number code at a time. Frau
+          argument, cancellation, and no A38. Declining stops the current call
+          pressure and schedules another round while the two-choice registration
+          graph continues. A visible unanswered call keeps ringing and can reach
+          all four warnings; the fourth dismisses the player without A38.
+          Completion requires the terminal answer and accepted phone-hidden
+          evidence, never decline or disconnection alone. Preserve the pending
+          final reply/point until that evidence arrives. The waiting room's
+          four-row Anzeige retains an independent called code per Schalter. Frau
           Knick looks idle yet scolds an early approach, then demands speed when
           the correct number arrives; a late player loses the appointment.
           Write original affectionate Dadaist satire without copying source anecdotes.

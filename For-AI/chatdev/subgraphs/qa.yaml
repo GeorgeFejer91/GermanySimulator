@@ -39,9 +39,12 @@ graph:
           behavior where available. Distinguish audio measures, silent
           browser timing, paired/physical device checks and actual listening.
           For `omen`, hand off silent timing/visual checks for gradual
-          darkening and rising cue, near-black line peak, abrupt restoration,
-          normal walk, queue resume and exit/replay cancellation; listening
-          remains a separate evidence result.
+          darkening and rising cue, near-black line peak, actual speech/fallback
+          completion, extended stare, gradual reverse depth/audio envelope,
+          planted turn and silent slow retreat, then room/view recovery before
+          ordinary walking and queue resumption. Check the phase boundaries in
+          For-AI/BUERGERAMT.md and exit/replay cancellation; listening remains
+          a separate evidence result.
           Run run_game_checks and report exactly the syntax and Node checks it ran.
           This stage has no browser, image inspection, audio playback or device tools.
           Mark those checks NOT RUN and hand them to the Codex integrator. If prior
@@ -50,18 +53,24 @@ graph:
           Read For-AI/chatdev/WEBGPT-HANDOFF.md and cite accepted QA task IDs
           and remaining unchecked claims. The integrator's Chromium desktop and
           Android-mobile test handoff must cover both answered and declined
-          phone branches, no A38 after cancellation, A38 after decline, mobile
+          phone branches, no A38 after cancellation, terminal registration plus
+          confirmed phone-hidden evidence before A38, pending final reply/point
+          withholding while visible/unknown, mobile
           call display, silent name-submit audio unlock, incoming-call vibration,
-          ordered police/desk turns with two intentional overlaps and fallback,
+          full personalized opening and final police demand, receipt-owned
+          intermediate cutoffs/overlaps and the Hang Up/call-ending sequence,
           bounded four-timestamp ping/pong clock mapping, verified
           start/done receipts and local speech startup, measured ordinary turn
-          gaps, bounded phone and desk speech-start fallbacks, clause-level
-          interruption with boundary/timer fallback,
+          gaps, approved recording and bounded caption fallback ownership,
           duplicate/stale cue rejection, disconnect release, and lost-cue timeout,
-          immediate and repeated QR tickets,
-          continuous background calls, no QR popup, phone-hidden and disconnect
-          forfeiture, walkable exterior door, physical QR sign,
-          red ceiling board, two waiting bays, painted office characters, music silence,
+          name-before-reservation, exact delivered-ticket receipt, retry
+          idempotence, independent peers, four retained called rows, matching
+          desk E/touch and protected reservation windows. Cover persistent
+          visible ringing without automatic expiry, four warnings, declined-call
+          retry, hidden-before-counter forfeiture, hidden-at-counter away
+          evidence, unknown disconnect and visible-return revocation.
+          Preserve continuous background calls, no QR popup, walkable exterior
+          door, physical QR sign, red four-row board, two waiting bays, painted office characters, music silence,
           ambient conversation and ringing, wrong-number approach, late expiry,
           first-person 3D camera, other counters, direct-entry replay link, and no browser errors. Browser playtests must be
           headless, isolated, and muted from launch. Do not claim the VDO cross-device

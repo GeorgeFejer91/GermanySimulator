@@ -22,16 +22,23 @@ graph:
           for a changed cue in this invocation; report a missing handoff.
           Read game.js, buergeramt.js, buergeramt-phone.js,
           buergeramt.css and For-AI/ASSET-POLICY.md. Specify bounded
-          player controls for office effects, spoken dialogue and phone
-          output, with safe defaults, clear mute behavior and no surprise
-          loud cue. Browser speech synthesis cannot route through a Web
-          Audio GainNode; its utterance volume needs the same preference.
+          existing player controls for office effects, hum and spoken dialogue,
+          with clear mute behavior and no surprise loud cue. Phone ring/static
+          output and the name-bearing browser greeting retain full browser
+          gain with authored relative envelopes, no visible phone-volume
+          control or saved preference; the OS owns device volume. Browser
+          speech cannot route through a Web Audio GainNode; office utterances
+          retain the voice level captured at their start.
           Phone and game run on separate devices, so do not claim a
           shared audio bus. Keep ambience below voices and preserve the
           existing game music mute contract and ordinary office silence.
           The `omen` buildup is a bounded scene-only exception on the
-          existing effects bus; keep its peak beneath the spoken line and
-          cut it with the restored light and ordinary sound.
+          existing effects bus; keep its peak beneath the spoken line. Actual
+          speech/fallback completion owns an extended threatening stare, then
+          the shared reverse depth/audio envelope drains score pressure to a
+          near-silent endpoint before source cleanup. Keep the planted turn
+          and slow retreat silent, with room/view recovery afterward, as
+          specified in For-AI/BUERGERAMT.md; add no attack or resolving chord.
           For each changed cue ID and candidate revision, specify its bus,
           priority, ducking, finite level and overlap with voice, as well as
           mute, fallback and cancellation. Report exact UI and test
