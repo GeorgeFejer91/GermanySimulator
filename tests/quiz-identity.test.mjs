@@ -10,15 +10,15 @@ const category=q=>q.type==='fahrschule'?'traffic':q.type==='grammar'?'grammar-'+
 
 // Existing public VM harness; DOM, broker, movement, reaction and reward sinks are doubles.
 // No street renderer import or art-admission claim is needed for these controller cases.
-test('spawn identity uses fixed9 personas while physical fields/density remain original',()=>{
+test('spawn identity uses fixed9 personas and declared fallback families while physical fields/density remain original',()=>{
  const before=fixture(),after=fixture();
  vm.runInContext(reference,before.scope);
  for(let index=0;index<81;index++)for(const f of [before,after])f.scope.addCrowdPedestrian(index*21,70,(index%2?1:-1)*15,0,-20,2000);
  for(let index=0;index<81;index++){
-  const actor=after.npcs[index];assert.deepEqual(physical(actor),physical(before.npcs[index]));
+  const actor=after.npcs[index];
   assert.equal(actor.quizzer,before.npcs[index].quizzer);
-  if(actor.quizzer){const person=after.scope.people[Math.floor(index/3)%9];assert.equal(actor.quizCharacterId,person.id);assert.equal(actor.voiceId,person.voiceId);assert.equal(actor.name,person.name);assert.equal(actor.fullName,person.name)}
-  else assert.deepEqual(identity(actor),identity(before.npcs[index]));
+  if(actor.quizzer){const person=after.scope.people[Math.floor(index/3)%9];assert.ok(['towelMan','towelWoman'].includes(person.fallbackSpriteKind));assert.deepEqual(physical(actor),{...physical(before.npcs[index]),spriteKind:person.fallbackSpriteKind});assert.equal(actor.quizCharacterId,person.id);assert.equal(actor.voiceId,person.voiceId);assert.equal(actor.name,person.name);assert.equal(actor.fullName,person.name)}
+  else{assert.deepEqual(physical(actor),physical(before.npcs[index]));assert.deepEqual(identity(actor),identity(before.npcs[index]));}
  }
  const city=fixture();spawnCityCrowd(city);assert.equal(city.npcs.length,110);assert.equal(city.npcs.filter(n=>n.quizzer).length,22);assert.equal(new Set(city.npcs.filter(n=>n.quizzer).map(n=>n.quizCharacterId)).size,9);
 });

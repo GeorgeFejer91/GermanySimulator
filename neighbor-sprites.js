@@ -94,7 +94,7 @@ export function createNeighborSprite(T,actor,host,queueAsset,camera){
   const name=NEIGHBOR_PAINT[actor.jwdRole];if(!name)return null;
   const owner={retired:false},playback={},fallback=host.children.slice();
   let sprite=null,texture=null,standing=null,lastTime=null,lastPose=null,mouthUniforms=null,lastMirrored=false,settled=false,failed=false;
-  for(const mesh of fallback)mesh.visible=false;
+  for(const mesh of fallback)mesh.visible=true;
   const cameraRight=T.Vector3?new T.Vector3(1,0,0):null;
   queueAsset(()=>({x:host.position.x,z:host.position.z}),2,()=>new Promise(resolve=>{
     new T.TextureLoader().load(`./assets/characters/neighbors/${name}-standing.png`,loaded=>{
@@ -147,7 +147,7 @@ export function createNeighborSprite(T,actor,host,queueAsset,camera){
       const dt=lastTime==null?0:Math.min(.1,Math.max(0,now-lastTime));lastTime=now;
       const running=!!hud?.started&&!hud.paused&&!document.hidden&&(!hud.busy||dialogue?.id===actor.id);
       const pose=neighborFrame(actor,playback,dialogue,dt,running,reducedMotion);lastPose=pose;
-      for(const mesh of fallback)mesh.visible=false;
+      for(const mesh of fallback)mesh.visible=!sprite&&!standing&&pose.visible;
       if(standing){standing.visible=!sprite;standing.quaternion.copy(host.quaternion).invert().multiply(camera.quaternion);const pivot=standing.geometry.parameters.height*(PIVOT/CELL_HEIGHT-.5);standing.position.set(0,pivot,0).applyQuaternion(standing.quaternion)}
       if(!sprite)return;
       sprite.visible=pose.visible;
@@ -168,8 +168,8 @@ export function createNeighborSprite(T,actor,host,queueAsset,camera){
       const pivot=sprite.geometry.parameters.height*(PIVOT/CELL_HEIGHT-.5);
       sprite.position.set(0,pivot,0).applyQuaternion(sprite.quaternion);
     },
-    restore(){for(const mesh of fallback)mesh.visible=false},
-    inspect(){return {loaded:!!sprite,settled,failed,standing:!!standing?.visible,visible:!!sprite?.visible||!!standing?.visible,row:lastPose?.row??0,frame:lastPose?.frame??0,
+    restore(){for(const mesh of fallback)mesh.visible=!sprite&&!standing},
+    inspect(){return {loaded:!!sprite,settled,failed,standing:!!standing?.visible,fallback:fallback.some(mesh=>mesh.visible),visible:!!sprite?.visible||!!standing?.visible||fallback.some(mesh=>mesh.visible),row:lastPose?.row??0,frame:lastPose?.frame??0,
       state:lastPose?.state,cueToken:lastPose?.cueToken,mouthOpen:lastPose?.mouthOpen||0,distance:playback.distance||0,
       frames:CLIP_COUNTS[lastPose?.row??4],height:actor.jwdRole==='child'?1.088:1.6,mirrored:lastMirrored}},
     dispose(){owner.retired=true;texture?.dispose();sprite?.material.dispose();sprite?.geometry.dispose();if(sprite)host.remove(sprite);standing?.material.map.dispose();standing?.material.dispose();standing?.geometry.dispose();if(standing)host.remove(standing);sprite=null;texture=null;standing=null}

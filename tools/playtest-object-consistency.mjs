@@ -12,6 +12,7 @@ const root=fileURLToPath(new URL('..',import.meta.url)).replace(/[\\/]$/,'');
 const output=resolve(process.env.PLAYTEST_OUTPUT||'output/object-consistency');mkdirSync(output,{recursive:true});
 const source=readFileSync(resolve(root,'world3d.js'),'utf8');
 const pickupCamera=process.argv.includes('--pickup-camera');
+const geometryOnly=process.argv.includes('--geometry-only');
 function production(name){const start=source.indexOf(`  function ${name}(`),end=source.indexOf('\n  }',start);if(start<0||end<start)throw Error(name);return source.slice(start,end+4)}
 async function settleVisibility(page,id,obstructing){
  // Capture the actual completed state rather than assuming software-rendered
@@ -23,11 +24,12 @@ const mime={'.js':'text/javascript','.html':'text/html','.css':'text/css','.glb'
 const server=createServer((request,response)=>{try{const file=resolve(root,'.'+decodeURIComponent(new URL(request.url,'http://localhost').pathname));if(!file.startsWith(root+sep))throw Error('path');let bytes=readFileSync(file);if(pickupCamera&&file===resolve(root,'world3d.js'))bytes=bytes.toString().replace('vehicles.some(car=>car.lawPickup&&Math.hypot(car.x-bridge.player.x,car.y-bridge.player.y)<500)','!!window.__pickupCameraProbe');response.writeHead(200,{'Content-Type':mime[extname(file)]||'application/octet-stream'});response.end(bytes)}catch{response.writeHead(404);response.end()}});
 await new Promise(done=>server.listen(0,'127.0.0.1',done));
 let browser;
-const report={pickupCameraEligibilityForced:pickupCamera,revision:Object.fromEntries(['world3d.js','game.js','3d.html'].map(file=>[file,createHash('sha256').update(readFileSync(resolve(root,file))).digest('hex')])),cases:[],limits:['Android emulation only; no physical device','City screenshots use diagnostic player placement with simulation paused at opening screen','Diagnostic animation-frame requests are limited to about 2 fps; no gameplay performance claim','External ChatDev stages were not executed']};
+const report={geometryOnly,pickupCameraEligibilityForced:pickupCamera,revision:Object.fromEntries(['world3d.js','game.js','3d.html'].map(file=>[file,createHash('sha256').update(readFileSync(resolve(root,file))).digest('hex')])),cases:[],limits:['Android emulation only; no physical device','City screenshots use diagnostic player placement with simulation paused at opening screen','Diagnostic animation-frame requests are limited to about 2 fps; no gameplay performance claim','External ChatDev stages were not executed']};
 try{
  browser=await chromium.launch({headless:true,executablePath:process.env.CHROMIUM_PATH,args:process.env.PLAYTEST_GPU==='hardware'?['--mute-audio']:['--mute-audio','--use-gl=angle','--use-angle=swiftshader']});
  for(const [name,viewport] of [['desktop',{width:1280,height:800}],['android-emulated',{width:390,height:844}],['android-landscape-emulated',{width:844,height:390}]]){
   const context=await browser.newContext({viewport,isMobile:name!=='desktop',hasTouch:name!=='desktop'});
+  try{
   context.setDefaultTimeout(120000);context.setDefaultNavigationTimeout(120000);
   console.log(JSON.stringify({stage:'start',view:name}));
   await context.addInitScript(()=>{
@@ -40,11 +42,14 @@ try{
    const speak=speechSynthesis.speak.bind(speechSynthesis);speechSynthesis.speak=utterance=>{utterance.volume=0;speak(utterance)};
   });
   const page=await context.newPage(),errors=[];page.on('pageerror',error=>errors.push(error.message));
+  if(geometryOnly)await page.route(`http://127.0.0.1:${server.address().port}/index.html`,route=>route.fulfill({status:200,contentType:'text/html',body:'<!doctype html><meta charset="utf-8"><title>Production geometry fixture only</title>'}));
   await page.goto(`http://127.0.0.1:${server.address().port}/index.html`,{waitUntil:'domcontentloaded'});
+  if(!geometryOnly){
   await page.waitForFunction(()=>window.Germany3D?.ready,null,{timeout:60000});
   await page.waitForFunction(()=>Germany3D.startupReady&&Germany3DBridge.startupAssetsReady,null,{timeout:60000});
   if(pickupCamera)await page.evaluate(()=>window.__pickupCameraProbe=true);
-  const fixture=await page.evaluate(async ({occlusion,fade,atlas,vehicleView,vehicleScale,url})=>{
+  }
+  const fixture=await page.evaluate(async ({occlusion,fade,atlas,vehicleView,vehicleScale,personMaterial,personCharacter,playerTargets,visibility,url})=>{
    const T=await import(url),X=x=>x,Z=y=>y,S=.02;
    const bridge={player:{x:0,y:0},stationElevation:()=>0};
    const camera=new T.PerspectiveCamera(48,1,.1,100);camera.position.set(0,10,10);
@@ -72,6 +77,33 @@ try{
    buildingSlots.push(tall);tall.mesh.material.opacity=1;tall.opacity=1;previousOcclusionTime=0;updateBuildingOcclusion(1000/60);check('smooth-first-frame',tall.opacity>.03&&tall.opacity<1);
    const rates=[];for(const fps of [30,60,120]){tall.opacity=1;previousOcclusionTime=0;for(let i=1;i<=fps/2;i++)updateBuildingOcclusion(i*1000/fps);rates.push(tall.opacity)}check('elapsed-time-fade-parity',Math.max(...rates)-Math.min(...rates)<1e-8);
    tall.group.visible=false;previousOcclusionTime=0;tall.opacity=.03;updateBuildingOcclusion(1000/60);check('smooth-restore',tall.opacity>.03&&tall.opacity<1);
+   // Actual fallback paint, facing and target functions; a narrow opaque blocker
+   // separates the pitched head ray from every obsolete vertical-body sample.
+   buildingSlots.length=0;
+   const personFallbackMaterials=new Map(),personFallbackMaterial=eval(`(${personMaterial.trim()})`),character=eval(`(${personCharacter.trim()})`);
+   const playerMesh=character('player'),personScene=new T.Scene();personScene.add(playerMesh);playerMesh.rotation.y=1.2;
+   const forEachStreetBody=visit=>visit(bridge.player,playerMesh),jwdScenery=[],trainSlots=[];
+   const renderFrustum=new T.Frustum(),renderViewMatrix=new T.Matrix4(),trainRenderSphere=new T.Sphere();
+   const updateGroupVisibility=eval(`(${visibility.trim()})`),streetPlayerSightlineTargets=eval(`(${playerTargets.trim()})`);
+   camera.position.set(0,11.5,14);camera.lookAt(0,1,-2.7);updateGroupVisibility();
+   const fallback=playerMesh.userData.personFallback,targets=streetPlayerSightlineTargets();
+   check('fallback-targets-exist',targets?.length===6);
+   const ink=fallback.material.map.image.getContext('2d');
+   check('fallback-source-anchors-opaque',fallback.userData.playerOcclusionPixels.every(([x,y])=>ink.getImageData(x,y,1,1).data[3]===255));
+   const head=targets[0].clone();check('fallback-head-is-pitched',Math.abs(head.x)<1e-6&&Math.abs(head.y-1.162)<.003&&Math.abs(head.z+.730)<.003);
+   const blockerPoint=camera.position.clone().lerp(head,.8),headBlocker=slot(blockerPoint.x,blockerPoint.y,blockerPoint.z,.08,.08,.08);
+   check('pitched-head-old-rays-miss',!buildingObstructsPlayer(headBlocker));
+   check('pitched-head-opaque-blocker-detected',buildingObstructsPlayer(headBlocker,targets));
+   check('pitched-head-clear-side-no-fade',!buildingObstructsPlayer(slot(blockerPoint.x+1,blockerPoint.y,blockerPoint.z,.08,.08,.08),targets));
+   check('pitched-head-glass-no-fade',!buildingObstructsPlayer(slot(blockerPoint.x,blockerPoint.y,blockerPoint.z,.08,.08,.08,.42),targets));
+   const behind=camera.position.clone().lerp(head,1.2);check('pitched-head-behind-player-no-fade',!buildingObstructsPlayer(slot(behind.x,behind.y,behind.z,.08,.08,.08),targets));
+   playerMesh.visible=false;check('hidden-fallback-no-paint-targets',streetPlayerSightlineTargets()===null);playerMesh.visible=true;
+   const ownTargets=[new T.Vector3(10,20,30)];playerMesh.userData.streetPaintView={host:{visible:true},paint:{occlusionTargets:()=>ownTargets}};
+   check('registered-own-targets-preserved',streetPlayerSightlineTargets()===ownTargets);delete playerMesh.userData.streetPaintView;
+   playerMesh.position.set(3,2,4);playerMesh.rotation.y=.7;updateGroupVisibility();const moved=streetPlayerSightlineTargets();
+   check('fallback-targets-use-fresh-parent-transform',moved[0].distanceTo(head.clone().add(new T.Vector3(3,2,4)))<1e-6);
+   check('collision-root-pose-unchanged',playerMesh.position.equals(new T.Vector3(3,2,4))&&Math.abs(playerMesh.rotation.y-.7)<1e-12);
+   for(const material of personFallbackMaterials.values()){material.map.dispose();material.dispose()}fallback.geometry.dispose();
    // Pixel checks use the actual production sprite material and ordinary depth.
    const painted=document.createElement('canvas');painted.width=painted.height=16;painted.getContext('2d').fillStyle='#ff0000';painted.getContext('2d').fillRect(2,2,12,12);
    bridge.getNpcSpriteCanvas=()=>painted;bridge.npcSpriteGrids={probe:{cols:1,rows:1,frameWidth:16,frameHeight:16}};
@@ -93,7 +125,14 @@ try{
    syncVehicleScale(vehicleSlot);check('live-traffic-retains-scale',vehicleSlot.group.scale.toArray().every(v=>v===1.4));
    syncVehicleScale(vehicleSlot,.4,.6);check('vortex-multiplies-base-scale',Math.abs(vehicleSlot.group.scale.x-1.4*.4*(1+.6*.82))<1e-12);syncVehicleScale(vehicleSlot);check('vortex-restores-base-scale',vehicleSlot.group.scale.toArray().every(v=>v===1.4));
    renderer.dispose();return{checks,fadeAtHalfSecond:rates};
-  },{occlusion:production('buildingObstructsPlayer'),fade:production('updateBuildingOcclusion'),atlas:production('atlasSprite'),vehicleView:production('isVehicleVisible'),vehicleScale:production('syncVehicleScale'),url:source.match(/const THREE_URL="([^"]+)"/)[1]});
+  },{occlusion:production('buildingObstructsPlayer'),fade:production('updateBuildingOcclusion'),atlas:production('atlasSprite'),vehicleView:production('isVehicleVisible'),vehicleScale:production('syncVehicleScale'),personMaterial:production('personFallbackMaterial'),personCharacter:production('character'),playerTargets:production('streetPlayerSightlineTargets'),visibility:production('updateGroupVisibility'),url:source.match(/const THREE_URL="([^"]+)"/)[1]});
+  if(geometryOnly){
+   if(errors.length)throw Error(errors.join('\n'));
+   report.cases.push({name,verdict:'PASS',fixture,errors,scope:'Production geometry only; full-world startup/readiness/city NOT RUN'});
+   writeFileSync(resolve(output,'report.json'),JSON.stringify(report,null,2));
+   console.log(JSON.stringify({stage:'geometry-complete',view:name,geometryChecks:fixture.checks.length}));
+   continue;
+  }
   await page.evaluate(()=>document.getElementById('intro').classList.add('hidden'));
   const city=[];
   // Exercise the distinct native power-plant and uniformly fitted landmark
@@ -154,6 +193,10 @@ try{
   await fallback.close();
   if(errors.length)throw Error(errors.join('\n'));
   report.cases.push({name,verdict:'PASS',fixture,city,landmark,rathaus,diagnostic,fallbackBlocked,fallbackRestored,fallbackLandmark,render:assets.render});await context.close();console.log(JSON.stringify({stage:'complete',view:name}));
+  }finally{if(geometryOnly)await context.close();}
  }
  writeFileSync(resolve(output,'report.json'),JSON.stringify(report,null,2));console.log(JSON.stringify({verdict:'PASS',cases:report.cases.map(c=>({name:c.name,geometryChecks:c.fixture.checks.length})),output,limits:report.limits}));
+}catch(error){
+ if(geometryOnly){report.verdict='FAIL';report.error=String(error.stack||error);writeFileSync(resolve(output,'report.json'),JSON.stringify(report,null,2));}
+ throw error;
 }finally{await browser?.close();await new Promise(done=>server.close(done))}

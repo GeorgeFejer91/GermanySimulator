@@ -50,9 +50,9 @@ async function fixture(t){
   ["'For-AI/AUDIO-TEXT-LIBRARY.js':'ff557f6f9efd50910147eefe1b2233c17c1f16b6d7672dbd989d7ba8cc5d3807',",`'For-AI/AUDIO-TEXT-LIBRARY.js':'${hash(readFileSync(authoringCatalogPath))}',`],
   ["'tools/build-knick-voice.py':'122d93bac3016f44b24cf04b97b7a2462d216226e33c9d6d6e05c5ae11a89349'",`'tools/build-knick-voice.py':'${hash(readFileSync(authoringProducer))}'`],
  ];
- let testOnlySource=canonicalCuratorSource;
- for(const [before,after] of replacements){assert.equal(testOnlySource.split(before).length-1,1,`expected one test pin literal: ${before}`);testOnlySource=testOnlySource.replace(before,after)}
- let restoredSource=testOnlySource;for(const [before,after] of replacements)restoredSource=restoredSource.replace(after,before);
+ let testOnlySource=canonicalCuratorSource;const edits=[];
+ for(const [before,after] of replacements){assert.equal(testOnlySource.split(before).length-1,1,`expected one test pin literal: ${before}`);const index=testOnlySource.indexOf(before);edits.push({index,before,after});testOnlySource=testOnlySource.slice(0,index)+after+testOnlySource.slice(index+before.length)}
+ let restoredSource=testOnlySource;for(const {index,before,after} of edits.toReversed()){assert.equal(restoredSource.slice(index,index+after.length),after);restoredSource=restoredSource.slice(0,index)+before+restoredSource.slice(index+after.length)}
  assert.equal(restoredSource,canonicalCuratorSource,'test-only curator differs from canonical outside explicit hash literals');
  assert.match(canonicalCuratorSource,/const cityAuthoringHelperSha256='122d93bac3016f44b24cf04b97b7a2462d216226e33c9d6d6e05c5ae11a89349';/,'canonical production helper pin must stay frozen at 122d');
  writeFileSync(testCuratorPath,testOnlySource);

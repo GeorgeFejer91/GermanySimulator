@@ -9,7 +9,7 @@ import test from 'node:test';
 
 const sourceRoot=resolve(process.env.GS_CROWD_TEST_ROOT??resolve(dirname(fileURLToPath(import.meta.url)),'..'));
 const curatorPath=resolve(process.env.GS_CROWD_TEST_CURATOR??resolve(sourceRoot,'tools/curate-voice-library.mjs'));
-const {crowdCandidateBlock,crowdRecordingsBlock,crowdRemainingSeed,verifyCrowdRemainingSeed,verifyCrowdGenerationManifestLedger,verifyCrowdMouthEnergySubset}=await import(pathToFileURL(curatorPath).href);
+const {crowdCandidateBlock,crowdRecordingsBlock,crowdRemainingSeed,verifyCrowdRemainingSeed,verifyCrowdGenerationManifestLedger,verifyCrowdMouthEnergySubset,crowdExpandedMouthEnergyFromCatalog,verifyCrowdRemainingMouthRows}=await import(pathToFileURL(curatorPath).href);
 const readJson=file=>JSON.parse(readFileSync(resolve(sourceRoot,file),'utf8').replace(/^\uFEFF/,''));
 const digest=file=>createHash('sha256').update(readFileSync(resolve(sourceRoot,file))).digest('hex');
 const cast=readJson('For-AI/VOICE-CAST.json');
@@ -82,4 +82,17 @@ test('seven measured mouth rows remain a strict subset when untrusted future row
  const changed=structuredClone(supplement),id=Object.keys(changed.clips)[0];changed.clips[id].english+=' TEST_ONLY_STALE';
  assert.throws(()=>verifyCrowdMouthEnergySubset(changed,firstSeven,sourceRoot),/Foreign crowd mouth english/);
  assert.equal(JSON.stringify(firstSeven),before);
+});
+
+test('both anchored mouth supplements retain disjoint final-byte ownership',()=>{
+ const manifests=readdirSync(resolve(sourceRoot,'assets/voices/candidate-dialogue')).filter(name=>name.endsWith('-crowd-manifest.json')).map(name=>{const relative=`assets/voices/candidate-dialogue/${name}`;return {...readJson(relative),provenanceManifest:relative,provenanceManifestSha256:digest(relative)};});
+ const next=readJson('assets/voices/candidate-dialogue/crowd-remaining27-mouth-energy.json');
+ const original=verifyCrowdMouthEnergySubset(supplement,manifests,sourceRoot),remaining=verifyCrowdRemainingMouthRows(next,manifests,sourceRoot);
+ assert.equal(Object.keys(original).length,7);assert.equal(Object.keys(remaining).length,11);
+ assert.ok(Object.keys(remaining).every(id=>!Object.hasOwn(original,id)));
+ const expanded=crowdExpandedMouthEnergyFromCatalog(readFileSync(resolve(sourceRoot,'For-AI/AUDIO-TEXT-LIBRARY.js'),'utf8'),manifests,sourceRoot);
+ assert.deepEqual(expanded,{...original,...remaining});
+ for(const mutate of [row=>{delete row.clips[Object.keys(row.clips)[0]]},row=>{row.clips[Object.keys(row.clips)[0]].profileId='foreign'},row=>{row.clips[Object.keys(row.clips)[0]].mouthEnergy[0]=256}]){
+  const changed=structuredClone(next);mutate(changed);assert.throws(()=>verifyCrowdRemainingMouthRows(changed,manifests,sourceRoot));
+ }
 });

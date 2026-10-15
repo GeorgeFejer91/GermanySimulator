@@ -685,6 +685,12 @@ function updateRegion(){
  if(next!==state.region&&state.regionCooldown<=0){state.regionCooldown=1;showBorder(next)}
 }
 function cityNpcDialogue(n){const owned=speechCatalog.cityDialogue?.[n.id],rows=owned?.[state.region];if(owned?.voiceId!==n.voiceId||!Array.isArray(rows)||rows.length!==2||rows.some(row=>typeof row.text!=="string"||!row.text.trim()||typeof row.english!=="string"||!row.english.trim()))return null;return rows}
+function personalCrowdDialogue(n){
+ if(!n?.crowd||n.special||n.wisdomId||n.jwdRole||n.quizzer||n.quizCharacterId||!crowdArchetypeById[n.archetype])return null;
+ const region=state.region,lines=crowdCharacterBarks[n.voiceId]?.[region],english=speechCatalog.pools?.crowdPersonalized?.[n.voiceId]?.[region];
+ if(!Array.isArray(lines)||lines.length!==2||lines.some(line=>typeof line!=="string"||!line.trim())||!Array.isArray(english)||english.length!==2||english.some(line=>typeof line!=="string"||!line.trim()))return null;
+ return lines.map((text,index)=>({text,english:english[index]}));
+}
 function worldNpcLine(index){return state.region==="berlin"?npcDenglisch[index]:npcLines[index]}
 
 
@@ -844,7 +850,7 @@ let crowdIndex=0;
 function addCrowdPedestrian(x,y,vx,vy,min,max,canQuiz=true){
  const j=crowdIndex++,archetype=crowdArchetypeOrder[j%crowdArchetypeOrder.length],vertical=!!vy,dedicated=new Set((globalThis.StreetWisdom?.definitions||[]).map(person=>person.voiceId)),identities=crowdVoiceIds.map((voiceId,index)=>index).filter(index=>!dedicated.has(crowdVoiceIds[index])&&index%2===(archetype.sprite==="towelMan"?1:0)),identityIndex=identities[Math.floor(j/2)%identities.length],fullName=crowdNames[identityIndex],voiceId=crowdVoiceIds[identityIndex];
  const character=canQuiz&&j%3===0&&quizCharacterLibrary.characters.length?quizCharacterLibrary.characters[Math.floor(j/3)%quizCharacterLibrary.characters.length]:null;
- npcs.push({id:`${voiceId}-${j}`,x,y,name:`${fullName} · ${archetype.label}`,fullName,voiceId,line:(j*7+2)%npcLines.length,vx,vy,min,max,crowd:true,quizzer:!!character,pause:0,barkAt:0,archetype:archetype.id,spriteKind:archetype.sprite,spriteFrame:(j*4)%32,spriteRow:vertical?(vy>0?1:2):0,spriteFlip:vertical?false:vx<0,animTime:(j%16)/16,audioRadius:96,...(character?{quizCharacterId:character.id,name:character.name,fullName:character.name,voiceId:character.voiceId}:{})})
+ npcs.push({id:`${voiceId}-${j}`,x,y,name:`${fullName} · ${archetype.label}`,fullName,voiceId,line:(j*7+2)%npcLines.length,vx,vy,min,max,crowd:true,quizzer:!!character,pause:0,barkAt:0,archetype:archetype.id,spriteKind:character?.fallbackSpriteKind??archetype.sprite,spriteFrame:(j*4)%32,spriteRow:vertical?(vy>0?1:2):0,spriteFlip:vertical?false:vx<0,animTime:(j%16)/16,audioRadius:96,...(character?{quizCharacterId:character.id,name:character.name,fullName:character.name,voiceId:character.voiceId}:{})})
 }
 function requestCharacterReaction(n,names,options={}){return globalThis.CharacterInteractions?.request(n,names,npcSpriteAtlases[n?.spriteKind]?.tourist,options)||false}
 function updateCharacterReaction(n,dt){return globalThis.CharacterInteractions?.advance(n,dt,npcSpriteAtlases[n?.spriteKind]?.tourist)||false}
@@ -2142,7 +2148,10 @@ function interact(){if(window.Germany3D?.levelTransition?.active)return;if(state
  }else if(n.id?.startsWith("city-")){
    const rows=cityNpcDialogue(n);if(!rows)return;
    openDialogue(n.name,rows.map(row=>row.text),"!",()=>innerMonologue("lost",.55),n.voiceId,rows.map(row=>row.english),false,false,n);
- }else openDialogue(n.name,[worldNpcLine(n.line),worldNpcLine((n.line+3)%npcLines.length)],"!",()=>innerMonologue("lost",.55),n.voiceId,undefined,false,false,n);
+ }else{
+   const rows=personalCrowdDialogue(n);
+   openDialogue(n.name,rows?rows.map(row=>row.text):[worldNpcLine(n.line),worldNpcLine((n.line+3)%npcLines.length)],"!",()=>innerMonologue("lost",.55),n.voiceId,rows?.map(row=>row.english),false,false,n);
+ }
  return
 }if(target?.kind==="prop"){microInteract(target.object);return}if(target?.kind==="norm"){const o=target.object;if(state.mission===5){o.fixed=true;state.stadtbild++;toast("STADTBILD NORMIERT · "+o.label);updateHud()}else{toast("DAS IST NOCH NICHT IHR VORGANG");innerMonologue("wrongTask")};return}toast("HIER IST NIEMAND ZUSTÄNDIG");innerMonologue("lost")}
 function collect(){for(const p of pickups){if(p.taken||dist(player.x,player.y,p.x,p.y)>34)continue;p.taken=true;uiTone(p.type==="pfand"?660:880,.1,"square",.04);if(p.type==="pfand"){state.pfand++;addGermanness(1,"PFAND +1 · VERMÖGEN WIEDER LIQUID")}else if(p.wurstType&&!state.wurstBadges.has(p.wurstType)){state.wurstBadges.add(p.wurstType);if(state.wurstBadges.size===Math.ceil(WURST_IDS.length/2))queueWurstSong();player.energy=clamp(player.energy+p.value,0,100);announceWurst(WURST_TYPES[p.wurstType]);addGermanness(1,"EXTRA WURST · "+p.short);particles.push({x:p.x,y:p.y,t:1.4,text:"EXTRA WURST! + "+p.short})}else{player.energy=clamp(player.energy+p.value,0,100);toast(p.label+" +"+p.value+" ENERGIE");particles.push({x:p.x,y:p.y,t:1,text:"+ "+p.label})}updateHud()}}

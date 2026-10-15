@@ -23,7 +23,7 @@ function harness(){
  const files=new Map(publicBytes),directories=new Set(),deniedCalls=[];
  const read=(path,encoding)=>{const key=resolve(String(path));assert(files.has(key),'Unexpected file read: '+key);const bytes=files.get(key);return encoding?bytes.toString(encoding):Buffer.from(bytes)};
  const forbidden=(...args)=>{deniedCalls.push(args);throw Error('Contract fixture forbids process or filesystem mutation')};
- const context=vm.createContext({root,resolve,sep,vm,createHash,readFileSync:read,
+ const context=vm.createContext({root,executedCuratorPath:candidate,resolve,sep,vm,createHash,readFileSync:read,
   existsSync:path=>files.has(resolve(path))||directories.has(resolve(path)),
   realpathSync:path=>{const key=resolve(path);assert(files.has(key)||directories.has(key),'Unknown synthetic path');return key},
   lstatSync:path=>{assert(files.has(resolve(path))||directories.has(resolve(path)));return{isSymbolicLink:()=>false}},
@@ -31,7 +31,9 @@ function harness(){
  const rootLine="export const root=resolve(dirname(fileURLToPath(import.meta.url)),'..');";
  const mainGuard="if(process.argv[1]&&resolve(process.argv[1])===fileURLToPath(import.meta.url))main();";
  assert.equal(candidateSource.split(rootLine).length,2);assert.equal(candidateSource.split(mainGuard).length,2);
- const callable=candidateSource.replace(/^import .*;\r?\n/gm,'').replace(rootLine,'').replace(mainGuard,'').replace(/^export /gm,'');
+ const moduleHash='hash(fileURLToPath(import.meta.url))';
+ assert.equal(candidateSource.split(moduleHash).length,2,'One explicit executed-curator identity dependency');
+ const callable=candidateSource.replace(/^import .*;\r?\n/gm,'').replace(rootLine,'').replace(mainGuard,'').replace(moduleHash,'hash(executedCuratorPath)').replace(/^export /gm,'');
  assert(!callable.includes('import.meta'),'No hidden module-location rewrite');
  vm.runInContext(callable+'\nthis.api={crowdSourceMap,crowdPublicClip,crowdPublicPlan,prepareCrowdDefaultManifest,crowdRecordingsBlock,crowdCandidateBlock,crowdAuthoringHelperSha256};',context,{timeout:2000});
  const put=(path,value)=>{const key=resolve(path),bytes=Buffer.isBuffer(value)?value:Buffer.from(JSON.stringify(value));files.set(key,bytes);return{path:key,sha256:digest(bytes)}};
