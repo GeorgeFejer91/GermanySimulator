@@ -260,3 +260,13 @@ footer{bottom:calc(var(--subtitle-height) + 8px)}
 body.level-transitioning #app>:not(#world3d){visibility:hidden!important;pointer-events:none!important}
 body.level-transitioning #world3d{filter:none!important}
 body.office-inside :is(.interact-hint,.control-dock){display:none!important}
+
+#bureaucracy-form{width:min(720px,100%);min-width:0}
+#form-title,#form-fields .field>span,#form-fields .check>span{min-width:0;overflow-wrap:break-word}
+#form-fields .check>span{flex:1}
+#form-fields .check>input{flex:none}
+#form-fields{grid-template-columns:repeat(2,minmax(0,1fr))}
+#form-fields .field{min-width:0}
+#bureaucracy-form .paper-actions{flex-wrap:wrap}
+#form-error{min-width:0;overflow-wrap:break-word}
+@media(max-width:760px){#form-fields{grid-template-columns:minmax(0,1fr)}}

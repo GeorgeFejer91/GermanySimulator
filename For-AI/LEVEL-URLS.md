@@ -6,6 +6,8 @@ This is the maintained catalogue of public level and named-area links. George re
 
 Production HTTP, static social metadata, aliases and PNG dimensions checked 2026-10-14T17:32:34.753Z. Browser evidence and its device limits are recorded below. Platform caches may retain an earlier preview.
 
+Rechecked 2026-10-15 using HTTP, initial HTML and PNG metadata: all 31 catalogue entries and two aliases pass (67 bare/slash/encoded route cases; 31 distinct 1200 × 630 PNGs). Every route resolves the same 29 external scripts as the public root. This fresh audit covers packaging only; the browser results below retain their stated revisions and device limits, and no new gameplay, natural-flow, physical-device, comical-image or platform-preview acceptance is inferred. Root `/` and the legacy query return HTTP 200 with their existing preview metadata but lack a canonical link; the generated direct pages have correct canonicals.
+
 | Level / area | Permanent direct URL | Aliases | Share image | Live checks |
 | --- | --- | --- | --- | --- |
 | Grand Theft Amt | [/city/](https://germanysimulator.de/city/) | — | [PNG](https://germanysimulator.de/assets/social-preview.png) | HTTP, static metadata and PNG PASS · 2026-10-14 |

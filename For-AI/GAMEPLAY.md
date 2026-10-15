@@ -264,6 +264,10 @@ Review relevant access barriers using the [Xbox Accessibility Guidelines](https:
 
 ## Systems
 
+City paperwork opens only for the current mission’s form. Each visible presentation owns one mission/type receipt; valid submission consumes that receipt before rewards or return callbacks. Invalid fields retain the same presentation for retry. Hidden, stale, duplicated, cancelled and replaced forms cannot advance a mission. Leaving an indoor visit or restarting the direct Bürgeramt episode retires the old receipt; a departed ordinary-office dialogue cannot reopen it. Required declarations retain their complete German labels. Narrow and enlarged layouts wrap the form’s fields and actions, and the existing Pretext measurements cover its visible labels.
+
+Direct Bürgeramt entry remembers the page/query entry route through its return to the city. Accepted A38 submission shows its completion and replay panel once. Normal city entry instead starts the neighborhood monologue; the two completion presentations cannot overlap. Direct replay clears the old form and result before starting a fresh episode.
+
 The spoken welcome after the humor declaration (including the `S` skip) has
 exactly two popups: goal/forms, then street/crossing/Brandmauer rules. The full
 regional text is readable immediately and each page starts its matching browser

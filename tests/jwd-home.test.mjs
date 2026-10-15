@@ -94,10 +94,15 @@ test('registration, certificate handoff and valid A38 submission lead straight t
  office.links[0].message({type:'phone-hidden'});settle();
  assert.equal(office.level.stage,'success');assert.equal(city.jwdState.allocated,true);assert.equal(city.jwdState.visited,false);
  office.action(0);office.tick(10000);assert.ok(formOpened,'the certificate handoff opens A38');
- city.forms={a38:{code:'A38'}};city.state.forms=0;city.setTimeout=fn=>fn();city.document.body={classList:{contains:()=>false}};
+ city.directBuergeramt=false;city.state.forms=0;city.setTimeout=fn=>fn();city.document.body={classList:{contains:()=>false}};
+ city.document.createElement=()=>({children:[],append(...children){this.children.push(...children)}});
+ city.document.getElementById('form-fields').append=()=>{};
+ const form=city.document.getElementById('bureaucracy-form');form.dataset={};
+ const block=(a,b)=>source.slice(source.indexOf(a),source.indexOf(b,source.indexOf(a)));
+ vm.runInContext(block('const forms=','function resize(')+block('const formEnglish=','function localize(')+fn('showForm'),city);city.showForm('a38');
  city.indoorVisit=null;vm.runInContext(fn('leaveIndoorBuilding'),city);
  vm.runInContext(source.split('\n').find(line=>line.startsWith('document.getElementById("bureaucracy-form").onsubmit=')),city);
- const submit=valid=>city.document.getElementById('bureaucracy-form').onsubmit({preventDefault(){},currentTarget:{reportValidity:()=>valid,dataset:{type:'a38'}}});
+ const submit=valid=>{form.reportValidity=()=>valid;form.onsubmit({preventDefault(){},currentTarget:form})};
  submit(false);assert.equal(city.currentMission().target,'buergeramt');
  city.state.lang='en';submit(true);assert.equal(city.state.forms,1);assert.equal(city.currentMission().target,'jwd-home');assert.equal(city.getMissionWaypoint(),null,'monologue owns attention before guidance');assert.match(city.dialogue.lines[0],/officially gemeldet/);assert.match(city.dialogue.subtitles[0],/officially registered.*Maybe my neighbors are nice/);city.finish();assert.equal(city.getMissionWaypoint().id,'jwd-home');
  city.visitJwdHome();city.finish();assert.equal(city.currentMission().target,'jwd-neighbors');

@@ -78,6 +78,7 @@ utterance.onend();
 
 let idleCancel=0,activeCancel=0;
 const stopContext=vm.createContext({
+ state:{dialogue:false},
  window:{speechSynthesis:{}},speechSynthesis:{speaking:false,pending:false,cancel:()=>idleCancel++},
  clearTimeout:()=>{},stimulusQueue:[],stimulusTimer:null,stimulusGeneration:0,activeStimulus:null,
  stopRecordedSpeech:()=>{},setAudioText:()=>{},clearSubtitle:()=>{},hideWorldBark:()=>{},cancelHumorScold:()=>{}
