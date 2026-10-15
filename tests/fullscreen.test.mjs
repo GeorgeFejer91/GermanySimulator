@@ -37,6 +37,8 @@ test('permitted load entry, missing APIs, hidden pages, and WebKit fallback',asy
  const webkit=harness({allowed:true,webkit:true});await settle();assert.ok(webkit.doc.webkitFullscreenElement);await webkit.window.GermanyFullscreen.toggle();assert.equal(webkit.doc.webkitFullscreenElement,null);
 });
 test('all entry pages share fullscreen and the call screen has only answer/decline actions',()=>{
- for(const file of ['index.html','3d.html','buergeramt-phone.html'])assert.match(readFileSync(new URL('../'+file,import.meta.url),'utf8'),/src="\.\/fullscreen\.js\?/);
+ for(const file of ['index.html','buergeramt-phone.html'])assert.match(readFileSync(new URL('../'+file,import.meta.url),'utf8'),/src="\.\/fullscreen\.js\?/);
+ const compatibility=readFileSync(new URL("../3d.html",import.meta.url),"utf8");
+ assert.doesNotMatch(compatibility,/fullscreen\.js|GermanyFullscreen|requestFullscreen/,"compatibility entry leaves fullscreen to the maintained game");
  const phone=readFileSync(new URL('../buergeramt-phone.html',import.meta.url),'utf8');assert.doesNotMatch(phone,/phone-call-silence/);assert.doesNotMatch(phone,/id="phone-silence"/);assert.match(phone,/id="phone-answer"/);assert.match(phone,/id="phone-decline"/);
 });

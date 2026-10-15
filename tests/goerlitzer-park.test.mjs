@@ -80,20 +80,13 @@ vm.runInNewContext(`${between(game,"function neighborActivityActive(","function 
 ${between(game,"function cityInteractionTarget(){","function collect(){")}\ninteract();`,sandbox);
 assert.equal(opened?.[1],park.lines,"E interaction must open every sourced line from the outside placard");
 
-for(const [html,next] of [[index,"game.js"],[diagnostic,"const goerlitzerPark="]]){
- const position=html.indexOf('src="./goerlitzer-park.js');
- assert.ok(position>=0&&position<html.indexOf(next),"shared data must load before its entry-point consumer");
-}
-const debugSandbox={window:{},clearInput:()=>{}};
-vm.runInNewContext(shared,debugSandbox);
-vm.runInNewContext(`${line(diagnostic,"function clearInput(").split('addEventListener(')[0]}\n${between(diagnostic,"const goerlitzerPark=","const dist=")}\n${line(diagnostic,"function blocked(")}\nglobalThis.blocked=blocked;`,debugSandbox);
-const debugBridge=debugSandbox.window.Germany3DBridge;
-debugBridge.getInput().KeyW=true;debugBridge.clearInput();
-assert.equal(debugBridge.getInput().KeyW,false,"diagnostic bridge must release held movement input");
-assert.equal(debugBridge.goerlitzerPark,debugSandbox.window.GoerlitzerPark,"diagnostic must use the same data authority");
-for(const tree of debugBridge.goerlitzerPark.trees)assert.ok(debugBridge.trees.includes(tree),"diagnostic must not offset park trees twice");
-assert.equal(debugSandbox.blocked(park.x+park.w/2,park.y+park.h/2),true,"diagnostic must also close the interior");
-assert.equal(debugSandbox.blocked(park.plaqueX,park.plaqueY),false,"diagnostic must retain the outside placard approach");
+const sharedPosition=index.indexOf('src="./goerlitzer-park.js');
+assert.ok(sharedPosition>=0&&sharedPosition<index.indexOf('src="./game.js'),"shared park data loads before its canonical consumer");
+assert.doesNotMatch(diagnostic,/GoerlitzerPark|function blocked\(|Germany3DBridge/,"compatibility entry has no parallel park, collision or input controller");
+const clearInputSource=game.match(/function clearInput\(\)\{[^}]+\}/)?.[0];assert.ok(clearInputSource);
+const inputScope={keys:{KeyW:true}};vm.runInNewContext(clearInputSource+';clearInput()',inputScope);
+assert.equal(inputScope.keys.KeyW,false,"canonical park input releases held movement");
+assert.match(game,/addEventListener\("blur",clearInput\)/,"canonical focus loss owns input release");
 
 vm.runInNewContext(subtitles,sandbox);
 assert.equal(park.lines.length,6,"the cost information and closure instructions must remain complete");

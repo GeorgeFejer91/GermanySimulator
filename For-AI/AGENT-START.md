@@ -4,7 +4,7 @@ Read this routing page before repository work. Use [`README.md`](./README.md) on
 
 ## Authority and product
 
-Root [`AGENTS.md`](../AGENTS.md) defines repository-wide rules. This directory owns shared context; [`LEVELS.md`](./LEVELS.md) routes scoped level context. Runtime authority remains the canonical root game: `index.html`, `game.js`, `styles.css`, `3d.html`, `world3d.js`, and `assets/`. Level directories belong to this same tree; their presence does not mean existing source has moved.
+Root [`AGENTS.md`](../AGENTS.md) defines repository-wide rules. This directory owns shared context; [`LEVELS.md`](./LEVELS.md) routes scoped level context. Runtime authority remains the canonical root game: `index.html`, `game.js`, `styles.css`, `world3d.js`, and `assets/`. The public `3d.html` path is a compatibility entry to `index.html`, preserving query and hash; it has no separate game controller. Level directories belong to this same tree; their presence does not mean existing source has moved.
 
 This is the standalone 3D “Grand Theft Amt” game, with keyboard and touch controls, a fictional three-day administration deadline, regional Berlin Denglisch, forms, wanted levels, and police. Extend it in place. Do not replace it with the retired flat Canvas prototype or a different game direction. `world3d.js` is the renderer; registered character sprites remain intentional 3D assets. Device-tilt control was removed.
 

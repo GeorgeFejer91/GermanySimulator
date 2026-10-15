@@ -38,7 +38,7 @@ for(let crossingId=0;crossingId<crossings.length;crossingId++){
 }
 assert.match(renderer,/for\(let i=0;i<8;i\+=2\)/,"WebGL should render four zebra stripes per crossing");
 assert.match(renderer,/g\.rotation\.y=\(light\.turn\|\|0\)\*Math\.PI\/2/,"WebGL signal heads must face their waiting pedestrian");
-assert.match(diagnostic,/crossings\.push\(\{x:v\.x,y:h\.y-80,w:v\.w,h:80\}\)/,"the direct 3D diagnostic must mirror the canonical crossing layout");
+assert.doesNotMatch(diagnostic,/crossings\.push|trafficLights|Germany3DBridge/,"compatibility entry delegates crossing/signal state to the sampled canonical simulation");
 
 const eventStart=game.includes("function crossingBank")?game.indexOf("function crossingBank"):game.indexOf("function updateGermannessEvents");
 const eventEnd=game.indexOf("function useLawPower",eventStart);

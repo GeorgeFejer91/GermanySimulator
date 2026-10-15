@@ -24,14 +24,11 @@ test('R doubles city walking speed, including diagonals and low energy, without 
  assert.equal(cityDistance({KeyR:true}),0);
 });
 
-test('R doubles diagnostic movement and still stops at a building',()=>{
- const diagnostic=source('3d.html'),start=diagnostic.indexOf('function update(dt){')+'function update(dt){'.length;
- const step=new Function('keys','player','dt','blocked',diagnostic.slice(start,diagnostic.indexOf('const signalClock=',start)));
- for(const movement of [{ArrowUp:true},{ArrowUp:true,ArrowRight:true}]){
-  const walk={x:0,y:0},run={x:0,y:0};step(movement,walk,.05,()=>false);step({...movement,KeyR:true},run,.05,()=>false);
-  assert.equal(Math.hypot(run.x,run.y),Math.hypot(walk.x,walk.y)*2);
- }
- const player={x:0,y:0};step({ArrowRight:true,KeyR:true},player,.05,x=>x>=10&&x<=400);assert.equal(player.x,0);
+test('compatibility entry delegates running input and collision ownership to the canonical game',()=>{
+ const compatibility=source('3d.html');
+ assert.match(compatibility,/href="\.\/index\.html"/);
+ assert.doesNotMatch(compatibility,/data-key=|function update\(|Germany3DBridge/,"compatibility entry cannot override canonical movement or collision");
+ assert.match(game,/bumped=movePlayerGround\(sx\*speed\*dt,-fy\*speed\*dt\)/,"run-scaled movement must still pass through the canonical ground collision owner");
 });
 
 test('R doubles office movement and releases on keyup, blur, and hidden tab',()=>{

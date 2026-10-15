@@ -34,11 +34,9 @@ assert.ok(roadsDeclaration&&stationDeclaration.includes("const stations=Object.f
 const stationWorld=vm.createContext({RAIL_GUTTER:560,CITY:{w:9840,h:4240},crossings:[]});
 vm.runInContext(`${roadsDeclaration[0]}\n${stationDeclaration}\nglobalThis.layout={horizontalRoads,verticalRoads,stations,stationElevation,STATION_RISE}`,stationWorld);
 const {horizontalRoads,verticalRoads,stations,stationElevation,STATION_RISE}=stationWorld.layout;
-const jwdStop=stations.find(s=>s.id==='suedwest'),diagnosticStation=vm.runInNewContext(diagnostic.match(/const stations=([^;]+);/)[1]);
+const jwdStop=stations.find(s=>s.id==='suedwest');
 assert.equal(jwdStop.name,'JWD','the neighborhood station must use its current locality name');
-assert.deepEqual(JSON.parse(JSON.stringify(diagnosticStation)),[JSON.parse(JSON.stringify(jwdStop))],'the diagnostic JWD platform must match the canonical stop and access geometry');
-const diagnosticElevation=vm.runInNewContext(`const stations=${JSON.stringify(diagnosticStation)};${diagnostic.match(/function stationElevation\(x,y\)\{[^\n]+/)[0]};stationElevation`);
-for(let y=4780;y<=5060;y+=5)for(const x of [1140,1669,1670,1740,1810,1811,2340])assert.equal(diagnosticElevation(x,y),stationElevation(x,y),'JWD preview feet must follow the same platform and entrance steps');
+assert.doesNotMatch(diagnostic,/const stations=|function stationElevation\(/,"compatibility entry has no duplicate platform/elevation authority");
 assert.equal(stations.length,2*(horizontalRoads.length+verticalRoads.length),"every road end needs its own station");
 assert.deepEqual(Array.from(stations.filter(s=>s.side==="north"||s.side==="south"),s=>s.id).filter(id=>["nordwest","nordost","suedwest","suedost"].includes(id)).sort(),["nordost","nordwest","suedost","suedwest"]);
 for(const road of verticalRoads)for(const side of ["north","south"]){const center=road.x+road.w/2,matches=stations.filter(s=>s.side===side&&s.accessX+s.accessW/2===center);assert.equal(matches.length,1,`${side} end of vertical road ${center} needs one station`);const s=matches[0];assert.ok(s.accessX>=s.x&&s.accessX+s.accessW<=s.x+s.w);assert.ok(side==="north"?s.accessY+s.accessH===560&&s.y-232>46:s.accessY===4800&&5128-s.y-s.h>46)}
@@ -66,9 +64,9 @@ assert.doesNotMatch(game,/preserveTrain|stopSpeech\(false,true\)/,"conversations
 assert.match(game,/BACKGROUND:\.22/,"sound effects and music must share the normalized background multiplier");
 assert.match(game,/function applyAudioDucking\(\).*musicDucked\|\|audioTextActive\(\).*soundEffectBus/s,"audio text must duck both background music and the sound-effect bus");
 assert.doesNotMatch(game,/nextTrainAnnouncement/,"recorded train announcements must not create or display generated announcement text");
-assert.match(diagnostic,/carOffsets=\[780,520,260,0,-260,-520,-780\]/,"the direct 3D diagnostic must mirror the full-length seven-car articulation contract");
-assert.match(diagnostic,/RAIL_GUTTER=560/,"the direct 3D diagnostic must mirror the perimeter clearance");
-assert.match(diagnostic,/function updateDiagnosticTrains\(dt\)/,"the direct 3D diagnostic must mirror the stop, bump, and reversal protocol");
+assert.doesNotMatch(diagnostic,/carOffsets=/,"compatibility entry cannot own a separate consist; canonical seven-car contract is checked above");
+assert.doesNotMatch(diagnostic,/RAIL_GUTTER=/,"compatibility entry cannot own separate rail-clearance data");
+assert.doesNotMatch(diagnostic,/updateDiagnosticTrains/,"compatibility entry cannot run a second train simulation");
 assert.match(renderer,/open-l-gauge-nwagen\/n-wagen-coach\.glb/,"the five middle coaches must use the local German n-Wagen asset");
 assert.match(renderer,/sourceIndex===1\?\{x:1\.12,y:1\.28,z:4\.82\}/,"the German passenger coaches must be fitted as full-length cars");
 assert.ok(coachStat.size>100000,"the licensed n-Wagen GLB must be present locally");

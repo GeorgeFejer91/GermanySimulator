@@ -16,16 +16,8 @@ for(const [family,kinds] of Object.entries(families))for(const kind of kinds){
  deliveryBytes+=bytes.length;masterPixels+=manifest.image_size[0]*manifest.image_size[1];
 }
 assert.ok(deliveryBytes<=10_100_000,'accepted character delivery cannot grow above 10.1 MB');
-const diagnostic=readFileSync('3d.html','utf8');
-const diagnosticLoop=diagnostic.match(/function loop\(t\)\{[^\n]+?\}requestAnimationFrame/)?.[0].replace(/requestAnimationFrame$/,'');
-assert.ok(diagnosticLoop);
-let diagnosticUpdates=0,diagnosticRenders=0;
-const diagnosticDocument={hidden:true};
-const runDiagnostic=new Function('document','window','requestAnimationFrame','update',`let last=0,nextFrameAt=0;${diagnosticLoop};return loop`)(diagnosticDocument,{Germany3D:{sync:()=>diagnosticRenders++}},()=>{},()=>diagnosticUpdates++);
-runDiagnostic(1000);assert.equal(diagnosticUpdates,0);assert.equal(diagnosticRenders,0);
-diagnosticDocument.hidden=false;runDiagnostic(1017);runDiagnostic(1018);
-assert.equal(diagnosticUpdates,1);assert.equal(diagnosticRenders,1,'diagnostic obeys the same hidden/refresh work contract');
-assert.match(diagnostic,/addEventListener\("blur",clearInput\)/);
+const compatibility=readFileSync('3d.html','utf8');
+assert.doesNotMatch(compatibility,/requestAnimationFrame\(|function loop\(|addEventListener\(/,"compatibility entry must not add simulation, rendering or input work");
 const game=readFileSync('game.js','utf8'),world=readFileSync('world3d.js','utf8');
 const placardFontSource=world.slice(world.indexOf('  const placardFontLoad='),world.indexOf('  function buildingPlacard('));
 async function preparePlacardFont(existingFaces,{failed=false,cssFailed=false}={}){

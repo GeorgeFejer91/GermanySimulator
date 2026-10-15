@@ -10,7 +10,7 @@ const modelUrl=new URL("../assets/models/bundestag/bundestag.glb",import.meta.ur
 const model=readFileSync(modelUrl);
 
 assert.match(game,/id:"bundestag".*x:7680,y:3320,w:1200,h:876.*doorX:8280,doorY:4226/,"the Bundestag must occupy the enlarged, clear southeast Berlin parcel");
-assert.match(diagnostic,/id:"bundestag".*x:7680,y:3320,w:1200,h:876/,"the direct 3D diagnostic must mirror the landmark placement");
+assert.doesNotMatch(diagnostic,/id:"bundestag"|Germany3DBridge/,"compatibility entry has no alternate landmark catalogue; canonical model/placement remain checked");
 assert.match(renderer,/bundestag:"\.\/assets\/models\/bundestag\/bundestag\.glb"/,"the WebGL renderer must use the local landmark GLB");
 const size=statSync(modelUrl).size;
 assert.ok(size>100_000&&size<2_500_000,"the detailed landmark must remain within its 2.5 MB budget");

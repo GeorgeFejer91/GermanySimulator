@@ -67,10 +67,10 @@ test('city entry/exit preserves missions and rejects an occupied ejection point'
   assert.equal(state.modal,false);assert.equal(state.mission,4);assert.equal(state.forms,2);assert.equal(player.y,occupied?230:265);
  }
 });
-test('root and diagnostic reserve the same clear roadside parcel and usable entrance',()=>{
+test('canonical game reserves the clear Jobcenter parcel and compatibility entry owns no alternate parcel',()=>{
  const diagnostic=readFileSync(new URL('../3d.html',import.meta.url),'utf8');
  const line=s=>s.split(/\r?\n/).find(l=>l.startsWith('{id:"jobcenter"'));
- assert.equal(line(game),line(diagnostic));
+ assert.doesNotMatch(diagnostic,/{id:"jobcenter"|Germany3DBridge/,"compatibility entry cannot reserve an alternate Jobcenter parcel");
  const b=vm.runInNewContext('('+line(game).trim().replace(/,$/,'')+')');
  assert.ok(b.x>=9180+72,'east sidewalk has full body clearance');assert.ok(b.x+b.w<9840);
  assert.ok(b.doorY>b.y+b.h+16);assert.ok(b.doorY<2000-72);

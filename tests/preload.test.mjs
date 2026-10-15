@@ -34,15 +34,16 @@ test('menu image decoding also holds readiness, and a missing image settles with
   await new Promise(setImmediate);f.api.update({ready:true});assert.equal(f.node('app').inert,true);
   finish();await new Promise(setImmediate);f.api.update({ready:true});assert.equal(f.node('app').inert,false);
 });
-test('both game entry points and all engine dependencies resolve from the shipped vendor tree',()=>{
+test('canonical game and engine dependencies resolve locally while compatibility entry loads no engine',()=>{
   for(const file of JSON.parse(readFileSync('assets/vendor/three/0.186.0/manifest.json')).files){
     const bytes=readFileSync('assets/vendor/three/0.186.0/'+file.file);assert.equal(bytes.length,file.bytes);assert.equal(createHash('sha256').update(bytes).digest('hex'),file.sha256);
   }
-  for(const page of ['index.html','3d.html']){
+  for(const page of ['index.html']){
     const html=readFileSync(page,'utf8');assert.ok(!html.includes('cdn.jsdelivr.net/npm/three@'));
     const map=JSON.parse(html.match(/<script type="importmap">(.*?)<\/script>/)[1]);assert.ok(existsSync(map.imports.three));
     for(const imported of readFileSync('assets/vendor/spark/2.3.1/spark.module.js','utf8').matchAll(/from ["'](three\/addons\/[^"']+)["']/g))assert.ok(existsSync(map.imports['three/addons/']+imported[1].slice('three/addons/'.length)),imported[1]+' remains available for office cinematics');
   }
+  const compatibility=readFileSync("3d.html","utf8");assert.doesNotMatch(compatibility,/type="importmap"|<script[^>]+src=/,"compatibility entry cannot start a second engine/dependency load");
   for(const path of ['build/three.core.js','examples/jsm/loaders/GLTFLoader.js','examples/jsm/utils/BufferGeometryUtils.js','examples/jsm/utils/SkeletonUtils.js','LICENSE'])assert.ok(existsSync('assets/vendor/three/0.186.0/'+path));
   const html=readFileSync('index.html','utf8');assert.match(html,/<main id="app" inert>/);assert.match(html,/<body class="preloading">/);
   assert.ok(!readFileSync('styles.css','utf8').includes('@import'));

@@ -2,6 +2,8 @@
 
 This is the maintained catalogue of public level and named-area links. George requires a permanent direct URL and a unique comical share-preview image for every new level. Update this catalogue in the same change as level creation, renaming, routing, hosting or preview changes. Existing links are compatibility contracts: retain old paths as aliases when names change.
 
+The existing `/3d.html` link is a compatibility entry to the maintained `index.html` city game. It preserves query and hash and replaces the compatibility history entry, including for relative `file://` entry. Its raw HTML retains the city share metadata and existing root preview; it is not a new level or an independent renderer/controller. Historical HTTP and browser checks below retain their original revisions and do not prove this routing change.
+
 ## Current public checks
 
 Production HTTP, static social metadata, aliases and PNG dimensions checked 2026-10-14T17:32:34.753Z. Browser evidence and its device limits are recorded below. Platform caches may retain an earlier preview.

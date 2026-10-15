@@ -1,3 +1,56 @@
+# Canonical game compatibility entry — 2026-10-16
+
+Start from clean `ba6d585` in the isolated canonical entry checkout. Integrate
+only the reviewed 16-file entry proposal and its dependent two preview-tool
+repairs, plus this scope record: `3d.html`, AGENT-START, LEVEL-URLS, README,
+twelve existing tests and the mission-pointer/object-consistency probes. Preserve
+all voice345 recordings, cast/catalog/cache tags, mission/controller/renderer,
+assets, phone and current CI. The legacy URL must retain query/hash and use
+replace history into the maintained game, with static city metadata and an
+ordinary manual link. No second controller or new level is introduced.
+
+First install the two new alias cases in the existing level-page suite while
+the old entry remains, record the expected failures, then apply the complete
+18-file candidate and run the changed tests plus canonical runtime/physics
+checks. Preserve every original feature assertion through its mapped owner.
+Actual navigation/Back/fallback/file and desktop/Android entry rendering remain
+required; source/VM results do not establish natural mission or physical devices.
+The two existing preview tools remain scripted geometry/mission probes. Any
+world reviewer scope omission must be explicit; no renderer or geometry changes
+are planned. Frozen phone dc46 and voice ba6 checkouts remain unchanged.
+
+Actual original-entry RED: four existing level-page checks pass and both new
+compatibility cases fail (6 total, 2 failures). Applying all 37 unique reviewed
+operations across 18 files reproduces every frozen after hash and exact inverse.
+The 12 changed test files plus unchanged runtime-smoothness and object-physics
+checks then pass 63/63, without skips, in 51.974 seconds. The existing level-page
+builder creates 31 destinations and aliases; built root/compatibility HTML,
+voice catalog, both new voice manifests and all five new MP3s match source bytes.
+The silent v3 browser probe passes eight entry cases in 22.971 seconds active
+and 28.583 seconds overall. Desktop and Android portrait emulation each load
+root and alias, preserve query/hash, reach shared startup readiness and accept
+a real mouse click or touch tap on Start into HUM sheet 1. Each viewport's two
+title PNGs are byte-identical. Back restores the sentinel; the repository prefix,
+JavaScript-disabled manual anchor and file redirect destination are checked.
+Onboarding is incomplete and gameplay is unstarted. The file case records CORS
+and module failures; it proves the destination only. Blocked Google Fonts CSS
+also produces recorded console resource errors on HTTP pages.
+
+The held root and nineteen sampled owned children retire with no cleanup kills,
+survivors, unknown census rows, timeout, supervisor error or changed pins.
+Preflight is 1364.2 MiB physical / 29953.9 MiB virtual against chosen 1024/6000
+operational floors; peak usage is unknown. The separate ordinary-conversation
+probe remains unrun after its 2048 MiB preflight hold. Entry-only Physics source
+and actual artifact reviews pass; movement, collision and rendering owners are
+unchanged, so this change does not claim a new full-world replay. Natural mission,
+animation, physical-device and listening acceptance remain separate. Updated
+preview tools retain their declared scripted/paused scope and were syntax-checked
+without claiming an actual mission-pointer or object-consistency browser run.
+Independent Camera review inspects all four original title PNGs and passes the
+entry-only readability/route comparison, with no clipping at either tested size.
+HUM visibility/title are DOM assertions; no HUM screenshot was captured. This
+routing-only acceptance does not replace broader world or animation validation.
+
 # Copied-validator dependency closure — 2026-10-16
 
 Separate documentation-only scope after voice commit `3459338`: change only

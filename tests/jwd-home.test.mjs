@@ -174,10 +174,10 @@ test('burglar gets around a blocked lane at 60/30/10 Hz and can inspect an occup
  }
 });
 
-test('diagnostic renderer retains the same residential plots, residents and paved lane',()=>{
- const diagnostic=readFileSync(new URL('../3d.html',import.meta.url),'utf8');
- for(const line of source.split('\n').filter(l=>l.includes('residential:true')||/jwdRole:"(swabian|parent|watcher)"/.test(l)))assert.ok(diagnostic.includes(line.trim()));
- assert.ok(diagnostic.includes('offsetWorldPoint({x:40,y:3890,w:1010,h:340})'));
+test('compatibility entry delegates residential plots and interactive residents to the canonical game',()=>{
+ const compatibility=readFileSync(new URL('../3d.html',import.meta.url),'utf8');
+ assert.doesNotMatch(compatibility,/jwdRole:|residential:true|const npcs=|Germany3DBridge/,"compatibility entry has no scenery-only or alternate neighbor roster");
+ assert.match(compatibility,/href="\.\/index\.html"/,"retained public link reaches the canonical home and tour controller");
 });
 
 test('burglar plants his feet at an occupied retreat doorway and leaves when it clears',()=>{

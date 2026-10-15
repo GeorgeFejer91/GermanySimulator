@@ -44,7 +44,5 @@ sandbox.speakMerkelLine('Eine noch nicht aufgenommene Zeile.');assert.equal(call
 sandbox.showWorldBark('FRIEDRICH MERZ',lines[0],false);assert.notEqual(calls.pop().mode,'recording','other speakers must never inherit Merkel recordings');
 sandbox.state.voiceOn=false;sandbox.speakDialogueLine(lines[0],()=>{});assert.equal(calls.length,0);
 const diagnostic=readFileSync(new URL('3d.html',root),'utf8');
-const diagnosticPath=diagnostic.match(/merkelRecording=new Audio\("([^"\n]+)"\)/)[1].replace(/^\.\//,'');
-assert.equal(diagnosticPath,manifest.clips.find(clip=>clip.text==='Wir schaffen das.').path,'the diagnostic entry must use the current exact recording after retiring the former excerpt');
-assert.ok(readFileSync(new URL(diagnosticPath,root)).length);
+assert.doesNotMatch(diagnostic,/merkelRecording|new Audio\(|MERKEL_AUDIO_LINE/,"compatibility entry cannot retain a separate Merkel player; all nine canonical exact-line/profile/EN/hash/trigger checks remain above");
 console.log('GS Merkel: nine exact lines, profile/hash/subtitle ownership, both triggers, voice off and browser fallback passed');

@@ -20,11 +20,17 @@ async function settleVisibility(page,id,obstructing){
  // separate production-function checks below.
  await page.waitForFunction(({id,obstructing})=>{Germany3D.sync();Germany3D.prepareNearbyAssets();const state=Germany3D.buildingVisibility.find(b=>b.id===id);return Germany3D.nearbyAssetsReady&&state.obstructing===obstructing&&(obstructing?state.opacity<=.04:state.opacity>=.99)},{id,obstructing},{polling:200,timeout:30000});
 }
+async function awaitCanonicalEntry(page,requestedUrl){
+ await page.waitForFunction(()=>window.Germany3D?.ready,null,{timeout:60000});
+ await page.waitForFunction(()=>Germany3D.startupReady&&Germany3DBridge.startupAssetsReady,null,{timeout:60000});
+ const finalUrl=page.url();if(finalUrl!==new URL('./index.html',requestedUrl).href)throw Error('Requested entry did not reach the maintained canonical city: '+finalUrl);
+ return{requestedUrl,finalUrl,scope:'Same maintained renderer; startup ready, gameplay remains paused at opening screen'};
+}
 const mime={'.js':'text/javascript','.html':'text/html','.css':'text/css','.glb':'model/gltf-binary','.png':'image/png','.webp':'image/webp','.svg':'image/svg+xml','.json':'application/json','.woff2':'font/woff2','.mp3':'audio/mpeg'};
 const server=createServer((request,response)=>{try{const file=resolve(root,'.'+decodeURIComponent(new URL(request.url,'http://localhost').pathname));if(!file.startsWith(root+sep))throw Error('path');let bytes=readFileSync(file);if(pickupCamera&&file===resolve(root,'world3d.js'))bytes=bytes.toString().replace('vehicles.some(car=>car.lawPickup&&Math.hypot(car.x-bridge.player.x,car.y-bridge.player.y)<500)','!!window.__pickupCameraProbe');response.writeHead(200,{'Content-Type':mime[extname(file)]||'application/octet-stream'});response.end(bytes)}catch{response.writeHead(404);response.end()}});
 await new Promise(done=>server.listen(0,'127.0.0.1',done));
 let browser;
-const report={geometryOnly,pickupCameraEligibilityForced:pickupCamera,revision:Object.fromEntries(['world3d.js','game.js','3d.html'].map(file=>[file,createHash('sha256').update(readFileSync(resolve(root,file))).digest('hex')])),cases:[],limits:['Android emulation only; no physical device','City screenshots use diagnostic player placement with simulation paused at opening screen','Diagnostic animation-frame requests are limited to about 2 fps; no gameplay performance claim','External ChatDev stages were not executed']};
+const report={geometryOnly,pickupCameraEligibilityForced:pickupCamera,revision:Object.fromEntries(['world3d.js','game.js','3d.html'].map(file=>[file,createHash('sha256').update(readFileSync(resolve(root,file))).digest('hex')])),cases:[],limits:['Android emulation only; no physical device','City screenshots use diagnostic player placement with simulation paused at opening screen','Diagnostic animation-frame requests are limited to about 2 fps; no gameplay performance claim','External ChatDev stages were not executed','Root and compatibility URLs sample the same maintained renderer; landmark comparison is route consistency, not independent-prototype parity']};
 try{
  browser=await chromium.launch({headless:true,executablePath:process.env.CHROMIUM_PATH,args:process.env.PLAYTEST_GPU==='hardware'?['--mute-audio']:['--mute-audio','--use-gl=angle','--use-angle=swiftshader']});
  for(const [name,viewport] of [['desktop',{width:1280,height:800}],['android-emulated',{width:390,height:844}],['android-landscape-emulated',{width:844,height:390}]]){
@@ -43,10 +49,11 @@ try{
   });
   const page=await context.newPage(),errors=[];page.on('pageerror',error=>errors.push(error.message));
   if(geometryOnly)await page.route(`http://127.0.0.1:${server.address().port}/index.html`,route=>route.fulfill({status:200,contentType:'text/html',body:'<!doctype html><meta charset="utf-8"><title>Production geometry fixture only</title>'}));
-  await page.goto(`http://127.0.0.1:${server.address().port}/index.html`,{waitUntil:'domcontentloaded'});
+  const requestedRootUrl=`http://127.0.0.1:${server.address().port}/index.html`;
+  await page.goto(requestedRootUrl,{waitUntil:'domcontentloaded'});
+  let rootEntry=null;
   if(!geometryOnly){
-  await page.waitForFunction(()=>window.Germany3D?.ready,null,{timeout:60000});
-  await page.waitForFunction(()=>Germany3D.startupReady&&Germany3DBridge.startupAssetsReady,null,{timeout:60000});
+  rootEntry=await awaitCanonicalEntry(page,requestedRootUrl);
   if(pickupCamera)await page.evaluate(()=>window.__pickupCameraProbe=true);
   }
   const fixture=await page.evaluate(async ({occlusion,fade,atlas,vehicleView,vehicleScale,personMaterial,personCharacter,playerTargets,visibility,url})=>{
@@ -162,17 +169,20 @@ try{
   if(errors.length)throw Error(errors.join('\n'));
   await page.close();
   const direct=await context.newPage();direct.on('pageerror',error=>errors.push(`3d.html: ${error.message}`));
-  await direct.goto(`http://127.0.0.1:${server.address().port}/3d.html`,{waitUntil:'domcontentloaded'});
-  await direct.waitForFunction(()=>window.Germany3D?.ready,null,{timeout:60000});
+  const requestedAliasUrl=`http://127.0.0.1:${server.address().port}/3d.html`;
+  await direct.goto(requestedAliasUrl,{waitUntil:'domcontentloaded'});
+  const aliasEntry=await awaitCanonicalEntry(direct,requestedAliasUrl);
+  await direct.evaluate(()=>document.getElementById('intro').classList.add('hidden'));
   await direct.evaluate(()=>{const b=Germany3DBridge.buildings.find(b=>b.id==='bundestag');Germany3DBridge.player.x=b.doorX;Germany3DBridge.player.y=b.doorY+80;Germany3D.sync();Germany3D.prepareNearbyAssets()});
   await direct.waitForFunction(()=>{Germany3D.prepareNearbyAssets();return Germany3D.nearbyAssetsReady&&Germany3D.inspectAssets().buildings.find(b=>b.id==='bundestag')?.loaded},null,{timeout:60000});
   const diagnostic=await direct.evaluate(()=>{const b=Germany3DBridge.buildings.find(b=>b.id==='bundestag');Germany3DBridge.player.x=b.doorX;Germany3DBridge.player.y=b.doorY+80;Germany3D.sync();return Germany3D.inspectAssets().buildings.find(b=>b.id==='bundestag')});
-  if(Math.abs(diagnostic.bounds.height-landmark.bounds.height)>.001)throw Error('3d.html landmark mismatch');
+  if(Math.abs(diagnostic.bounds.height-landmark.bounds.height)>.001)throw Error('Compatibility entry canonical landmark mismatch');
   await direct.screenshot({path:resolve(output,`${name}-3d-landmark.png`)});await direct.close();
   const fallback=await context.newPage();fallback.on('pageerror',error=>errors.push(`fallback: ${error.message}`));
   await fallback.route('**/assets/models/**/*.glb*',route=>route.abort());
-  await fallback.goto(`http://127.0.0.1:${server.address().port}/index.html`,{waitUntil:'domcontentloaded'});
-  await fallback.waitForFunction(()=>window.Germany3D?.ready,null,{timeout:60000});
+  const requestedFallbackUrl=`http://127.0.0.1:${server.address().port}/index.html`;
+  await fallback.goto(requestedFallbackUrl,{waitUntil:'domcontentloaded'});
+  const fallbackEntry=await awaitCanonicalEntry(fallback,requestedFallbackUrl);
   await fallback.evaluate(()=>{document.getElementById('intro').classList.add('hidden');const b=Germany3DBridge.buildings.find(b=>b.id==='buergeramt');Germany3DBridge.player.x=b.x+b.w/2;Germany3DBridge.player.y=b.y-24;Germany3D.sync()});
   await settleVisibility(fallback,'buergeramt',true);
   const fallbackBlocked=await fallback.evaluate(()=>({...Germany3D.buildingVisibility.find(b=>b.id==='buergeramt'),...Germany3D.inspectAssets().buildings.find(b=>b.id==='buergeramt')}));
@@ -192,7 +202,7 @@ try{
   if(fallbackPlantHall.opacity>.04)throw Error(`${name} fallback plant hall hides legs without fading`);
   await fallback.close();
   if(errors.length)throw Error(errors.join('\n'));
-  report.cases.push({name,verdict:'PASS',fixture,city,landmark,rathaus,diagnostic,fallbackBlocked,fallbackRestored,fallbackLandmark,render:assets.render});await context.close();console.log(JSON.stringify({stage:'complete',view:name}));
+  report.cases.push({name,entryRoutes:{root:rootEntry,compatibility:aliasEntry,fallback:fallbackEntry},verdict:'PASS',fixture,city,landmark,rathaus,diagnostic,fallbackBlocked,fallbackRestored,fallbackLandmark,render:assets.render});await context.close();console.log(JSON.stringify({stage:'complete',view:name}));
   }finally{if(geometryOnly)await context.close();}
  }
  writeFileSync(resolve(output,'report.json'),JSON.stringify(report,null,2));console.log(JSON.stringify({verdict:'PASS',cases:report.cases.map(c=>({name:c.name,geometryChecks:c.fixture.checks.length})),output,limits:report.limits}));
