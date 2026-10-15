@@ -124,7 +124,7 @@
 
 #germanness-hud:has(.anmeldung-medal:not([hidden])){grid-template-columns:5.7rem minmax(0,1fr);grid-template-areas:"label label" "medal value" "medal meter" "medal law"}
 #germanness-hud .anmeldung-medal{grid-area:medal;white-space:normal;overflow:visible;text-overflow:clip;margin:0;position:relative;align-self:center;display:grid;place-items:center;width:5.7rem;min-height:4.7rem;padding:.8rem .25rem .4rem;border:1px solid #947119;background:linear-gradient(125deg,#b88c2b,#fff7c8 28%,#d6b050 48%,#fff0ad 74%,#ae7a1e);box-shadow:1px 2px 0 #51431c55;color:#332b17;clip-path:polygon(0 0,78% 0,100% 23%,100% 100%,0 100%)}
-.anmeldung-medal[hidden]{display:none}
+#germanness-hud .anmeldung-medal[hidden]{display:none}
 /* Keep the shallow phone's centre clear for the guide's visible performance. */
 @media (orientation:landscape) and (max-height:500px) and (pointer:coarse){
  #app.neighbor-tour .interact-hint{left:8px;right:auto;transform:none;max-width:min(280px,calc(var(--humor-viewport-width,100vw)*.35));text-align:left}
