@@ -78,7 +78,7 @@ or narrowing the garden paths. The architecture remains a fictional Berlin
 villa suburb; the [district's history of Schlachtensee's landhouses](https://www.berlin.de/ba-steglitz-zehlendorf/aktuelles/pressemitteilungen/2020/pressemitteilung.1024262.php)
 and [Reddit residents' suburban descriptions](https://www.reddit.com/r/berlin/comments/yzbc0y/)
 are references, not a claim that every Berlin suburb looks alike.
-Frau Schwabingen is a house-proud Swabian Kehrwoche enthusiast. Heiko Maaslos is a professor of systems engineering (Systemtechnik). His awkwardly assembled clauses and supposedly helpful explanations presume he is right: selective measurements, engineering vocabulary and assumed agreement justify his intrusions. His wife Inga Maaslos works in fictional People & Culture and recasts imposed chores as positive opportunities chosen by the newcomer. Their arrogant, half-lidded expressions and status anxiety underline their demands. Eight-year-old Theodore speaks six languages; his parents worry about his Latin milestones. Theodore has a visibly smaller child sprite and his own preference for playing on the paving stones. These are fictional identities and authored personalities. Dialogue retains Berlin Denglisch and the existing English subtitle path.
+Frau Schwabingen is a house-proud Swabian Kehrwoche enthusiast. Heiko Maaslos is a professor of systems engineering (Systemtechnik). His awkwardly assembled clauses and supposedly helpful explanations presume he is right: selective measurements, engineering vocabulary and assumed agreement justify his intrusions. His wife Inga Maaslos works in fictional People & Culture and recasts imposed chores as positive opportunities chosen by the newcomer. Their arrogant, half-lidded expressions and status anxiety underline their demands. Eight-year-old Hartmut speaks six languages; his parents worry about his Latin milestones. Hartmut has a visibly smaller child sprite and his own preference for playing on the paving stones. These are fictional identities and authored personalities. Dialogue retains Berlin Denglisch and the existing English subtitle path.
 Frau Schwabingen's written and spoken German is deliberately exaggerated
 Swabian: “Ha noi”, “des”, “ond”, “net”, “dr”, “gell” and house/garden diminutives.
 Her early greeting, tour invitations, walking remarks, stop explanations and
@@ -106,7 +106,7 @@ selective rule enforcement and backhanded compliments. Heiko frames intrusions
 as assistance: formal concern, a selective account of earlier conversations,
 claimed agreement through silence, then responsibility shifted to the listener.
 His original fictional dialogue never reproduces private correspondence or its
-identifying details. Heiko values Theodore's
+identifying details. Heiko values Hartmut's
 six languages but orders his zipper away from the paintwork; Inga
 defends the car's moral standing while relocating play behind the garage.
 The parked cars offer a readable laminated notice; decorative hedges and gnomes
@@ -135,7 +135,7 @@ speech data. Each adult has a full introductory route and three shorter repeat
 routes: twelve tours, thirty-one stops and sixty-four utterances in total.
 Schwabingen demonstrates sweeping, street responsibilities, manual weed
 removal and hedge/bird protection. Heiko moves from his car to winter service,
-the overhanging hedge, his doorway and Theodore's play route. Inga leads from
+the overhanging hedge, his doorway and Hartmut's play route. Inga leads from
 her EV to the player's shutters and garden, then her own front door, converting
 environmental concern and voluntary chores into personal status tests. The
 verified federal and Berlin rules, their limitations and the characters' private
@@ -151,7 +151,7 @@ ground displacement rather than a timer on a stationary body. The player follows
 the route instead of receiving a remote sequence of completed stops.
 If another body blocks a leg, the guide plants their feet and the hint asks the
 player to make room. Cross-lane recovery includes the full body-clear paved
-width and a short backtrack, so Theodore can pass a waiting burglar without
+width and a short backtrack, so Hartmut can pass a waiting burglar without
 walking through Heiko. Every candidate segment still uses the ordinary collision
 checks; an occupied escape route waits until it is clear.
 Within the guide's 185-unit follow range, the sausage pointer yields to the
@@ -159,12 +159,12 @@ character and the follow hint; it returns if the player falls behind. Shallow
 phone landscape tours lift the scene and place the hint and dialogue actions
 at the side edges so gestures remain visible above the touch controls.
 
-Heiko calls Theodore through the Maaslos doorway before the child's first reply.
+Heiko calls Hartmut through the Maaslos doorway before the child's first reply.
 The smaller child walks out, contradicts his father's productivity schedule and
 leads both adults to the paving-stone islands beside the player's fallen gnome.
-Theodore owns his replies and travel cue; Heiko retains his own lines even when
+Hartmut owns his replies and travel cue; Heiko retains his own lines even when
 the child leads. The child-led leg and its final exchange are required before
-Heiko's introduction can finish. Theodore briefly remains by the play area and
+Heiko's introduction can finish. Hartmut briefly remains by the play area and
 returns to the doorway; he does not become a fourth adult mission requirement.
 Heiko's third repeat route recalls him for another short game.
 

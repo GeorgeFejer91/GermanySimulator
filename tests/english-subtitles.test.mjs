@@ -20,11 +20,12 @@ const streetDirectory=join(root,'assets/voices/street-wisdom'),streetCount=exist
 const playerDirectory=join(root,'assets/voices/player-replies'),playerCount=existsSync(playerDirectory)?readdirSync(playerDirectory).filter(file=>file.endsWith('-manifest.json')).reduce((n,file)=>n+JSON.parse(readFileSync(join(playerDirectory,file),'utf8')).clips.length,0):0;
 const ambientDirectory=join(root,'assets/voices/office-ambient'),ambientCount=existsSync(ambientDirectory)?readdirSync(ambientDirectory).filter(file=>file.endsWith('-manifest.json')).reduce((n,file)=>n+JSON.parse(readFileSync(join(ambientDirectory,file),'utf8')).clips.length,0):0;
 const neighborDirectory=join(root,'assets/voices/neighbors'),neighborCount=existsSync(neighborDirectory)?readdirSync(neighborDirectory).filter(file=>file.endsWith('-manifest.json')).reduce((n,file)=>n+JSON.parse(readFileSync(join(neighborDirectory,file),'utf8')).clips.length,0):0;
+const cityDirectory=join(root,'assets/voices/city-dialogue'),cityCount=existsSync(cityDirectory)?readdirSync(cityDirectory).filter(file=>file.endsWith('-manifest.json')).reduce((n,file)=>n+JSON.parse(readFileSync(join(cityDirectory,file),'utf8')).clips.length,0):0;
 // Two retired phone-button replies remain archived on disk; the fifth police line is new.
-assert.equal(Object.keys(library.clips).length,114+knickCount+playerCount+ambientCount+neighborCount,"recorded and text-only dialogue need stable IDs, including the Jobcenter overlord and neighbors");
+assert.equal(Object.keys(library.clips).length,114+knickCount+playerCount+ambientCount+neighborCount+cityCount,"recorded and text-only dialogue need stable IDs, including the Jobcenter overlord and neighbors");
 const recordedClips=Object.values(library.clips).filter(clip=>clip.recording);
-assert.equal(recordedClips.length,99+knickCount+streetCount+playerCount+ambientCount+neighborCount,"retired clerk, traffic and phone-button takes must not enter the runtime catalog");
-assert.equal(new Set(recordedClips.map(clip=>clip.path)).size,99+knickCount+streetCount+playerCount+ambientCount+neighborCount,"recorded clip paths must be unique");
+assert.equal(recordedClips.length,99+knickCount+streetCount+playerCount+ambientCount+neighborCount+cityCount,"retired clerk, traffic and phone-button takes must not enter the runtime catalog");
+assert.equal(new Set(recordedClips.map(clip=>clip.path)).size,99+knickCount+streetCount+playerCount+ambientCount+neighborCount+cityCount,"recorded clip paths must be unique");
 for(const clip of Object.values(library.clips)){
  assert.ok(library.voices[clip.voiceId],`${clip.id} needs a registered voice ID`);
  if(clip.targetVoiceId)assert.ok(library.voices[clip.targetVoiceId]?.profileId,`${clip.id} needs a saved replacement profile`);

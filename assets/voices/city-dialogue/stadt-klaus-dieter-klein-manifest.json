@@ -1,0 +1,1057 @@
+{
+  "voiceId": "stadt-klaus-dieter-klein",
+  "requestedLineCount": 4,
+  "generatedLineCount": 4,
+  "clips": [
+    {
+      "clipId": "stadt-klaus-dieter-klein-01",
+      "voiceId": "stadt-klaus-dieter-klein",
+      "actorId": "city-klaus-dieter-klein",
+      "region": "germany",
+      "slot": 0,
+      "sourceLocator": "For-AI/VOICE-CAST.json characters[gameCharacterId=city-klaus-dieter-klein].dialogue[region=germany,slot=0]",
+      "text": "Ich würde erst das richtige Formular nehmen. Mit dem falschen können Sie sehr ordentlich in die falsche Richtung arbeiten.",
+      "english": "I would start with the right form. With the wrong one, you can work very neatly in the wrong direction.",
+      "sourceSha256": "8256b242c410a684bf53e400b91aa200683ee100feb2fe1426754ce20c9f7f19",
+      "profileId": "8182da73a54c429391924d62ee339037",
+      "referenceSha256": "f39a69c03ca05dc5af6d3a81020e931eeccc0e1aa497d6aa2355f7b8fc16234b",
+      "referenceOriginalSha256": "a0de93a250f749c1bcd7f7cda9b12c2810c97dbe9426b602b2973b8c76fb9b3b",
+      "renderer": "ResembleAI/Chatterbox Multilingual V2 0.1.7",
+      "modelRevision": "5bb1f6ee58e50c3b8d408bc82a6d3740c2db6e18",
+      "processing": null,
+      "seed": 71000,
+      "synthesisAttempt": 1,
+      "authoringHelperSha256": "122d93bac3016f44b24cf04b97b7a2462d216226e33c9d6d6e05c5ae11a89349",
+      "rendererInputText": "Ich würde erst das richtige Formular nehmen. Mit dem falschen können Sie sehr ordentlich in die falsche Richtung arbeiten.",
+      "decode": {
+        "maxSpeechTokens": 388,
+        "attentionHooksBefore": 0,
+        "generatedSpeechTokens": 175,
+        "eosReached": true,
+        "t3InferenceSeconds": 7.8,
+        "temporaryAnalyzerHooksRemoved": 6,
+        "attentionHooksAfter": 0
+      },
+      "rendererInputBasis": "exact authored source",
+      "requestSha256": "061c060225a4993f86be27bc05cdd3d99bfd18528a0781995092b0e819e433a9",
+      "profileJsonSha256": "254f66cd5989e7bf93673a4a1ecd89a8be868c27b36c87e1780ae8fc8fffb9a7",
+      "rawSha256": "4a6c124f1df56d3490d4b2c4ce48c5c91f848644413ee74eafa8f8fc06fa7dc7",
+      "modelLicense": "MIT",
+      "referenceLicense": "unknown; selected profile does not record reference license",
+      "durationSeconds": 6.94,
+      "renderSeconds": 8.97,
+      "synthesis": {
+        "exaggeration": 0.5,
+        "exaggerationReason": null,
+        "temperature": 0.65,
+        "repetitionPenalty": 3,
+        "cfgWeight": 0.6,
+        "languageId": "de",
+        "device": "cuda",
+        "precision": "fp16",
+        "t3WeightPrecision": "float16",
+        "conditioningPrecision": "float32",
+        "autocastPrecision": "float16",
+        "conditioningCached": true,
+        "referenceReconditionedForProfile": "8182da73a54c429391924d62ee339037",
+        "referenceConditioningVerifiedFloat32": true,
+        "modelSessionReused": false,
+        "cpuThreads": 2,
+        "inferenceMode": true
+      },
+      "listening": "pending",
+      "status": "eligible exact-text recording; human listening pending",
+      "processingSha256": null,
+      "normalization": {
+        "targetLufs": -18,
+        "targetTruePeakDbtp": -1.5,
+        "filter": "loudnorm=I=-16.07:TP=-1.8:LRA=11:linear=false",
+        "iterations": 3
+      },
+      "integratedLufs": -18.22,
+      "truePeakDbtp": -2.15,
+      "asr": "Ich würde erst das richtige Formular nehmen. Mit dem falschen können Sie sehr ordentlich in die falsche Richtung arbeiten.",
+      "asrWordExact": true,
+      "asrLiteralWordExact": true,
+      "asrNormalization": "case/punctuation, German numeric and A38 spoken equivalents, guarded full-hour and date-ordinal equivalents, section sign/Paragraf orthography, German compound spacing",
+      "asrModel": "independent faster-whisper, cached local model, cpu int8 (effective int8_float32), no script prompt",
+      "asrCpuThreads": 2,
+      "asrDevice": "cpu",
+      "asrEffectiveComputeType": "int8_float32",
+      "asrLanguageId": "de",
+      "asrComputeType": "int8",
+      "asrScriptPrompt": null,
+      "asrBeamSize": 1,
+      "asrReadings": [
+        {
+          "beamSize": 1,
+          "transcript": "Ich würde erst das richtige Formular nehmen. Mit dem falschen können Sie sehr ordentlich in die falsche Richtung arbeiten.",
+          "transcribeSeconds": 10.58,
+          "words": [
+            {
+              "word": " Ich",
+              "start": 0,
+              "end": 0.18
+            },
+            {
+              "word": " würde",
+              "start": 0.18,
+              "end": 0.38
+            },
+            {
+              "word": " erst",
+              "start": 0.38,
+              "end": 0.64
+            },
+            {
+              "word": " das",
+              "start": 0.64,
+              "end": 0.8
+            },
+            {
+              "word": " richtige",
+              "start": 0.8,
+              "end": 1.1
+            },
+            {
+              "word": " Formular",
+              "start": 1.1,
+              "end": 1.64
+            },
+            {
+              "word": " nehmen.",
+              "start": 1.64,
+              "end": 1.98
+            },
+            {
+              "word": " Mit",
+              "start": 2.28,
+              "end": 2.7
+            },
+            {
+              "word": " dem",
+              "start": 2.7,
+              "end": 2.84
+            },
+            {
+              "word": " falschen",
+              "start": 2.84,
+              "end": 3.24
+            },
+            {
+              "word": " können",
+              "start": 3.24,
+              "end": 3.6
+            },
+            {
+              "word": " Sie",
+              "start": 3.6,
+              "end": 3.78
+            },
+            {
+              "word": " sehr",
+              "start": 3.78,
+              "end": 4
+            },
+            {
+              "word": " ordentlich",
+              "start": 4,
+              "end": 4.48
+            },
+            {
+              "word": " in",
+              "start": 4.48,
+              "end": 4.64
+            },
+            {
+              "word": " die",
+              "start": 4.64,
+              "end": 4.74
+            },
+            {
+              "word": " falsche",
+              "start": 4.74,
+              "end": 5.1
+            },
+            {
+              "word": " Richtung",
+              "start": 5.1,
+              "end": 5.38
+            },
+            {
+              "word": " arbeiten.",
+              "start": 5.38,
+              "end": 5.88
+            }
+          ]
+        }
+      ],
+      "asrModelSha256": "e76620f83d5f5b69efd3d87e3dc180c1bd21df9fbebacfd4335e5e1efcc018da",
+      "asrModelDirectoryName": "voice-asr-model",
+      "wordCues": [
+        {
+          "at": 0,
+          "charIndex": 0,
+          "word": "Ich",
+          "end": 0.18
+        },
+        {
+          "at": 0.18,
+          "charIndex": 4,
+          "word": "würde",
+          "end": 0.38
+        },
+        {
+          "at": 0.38,
+          "charIndex": 10,
+          "word": "erst",
+          "end": 0.64
+        },
+        {
+          "at": 0.64,
+          "charIndex": 15,
+          "word": "das",
+          "end": 0.8
+        },
+        {
+          "at": 0.8,
+          "charIndex": 19,
+          "word": "richtige",
+          "end": 1.1
+        },
+        {
+          "at": 1.1,
+          "charIndex": 28,
+          "word": "Formular",
+          "end": 1.64
+        },
+        {
+          "at": 1.64,
+          "charIndex": 37,
+          "word": "nehmen",
+          "end": 1.98
+        },
+        {
+          "at": 2.28,
+          "charIndex": 45,
+          "word": "Mit",
+          "end": 2.7
+        },
+        {
+          "at": 2.7,
+          "charIndex": 49,
+          "word": "dem",
+          "end": 2.84
+        },
+        {
+          "at": 2.84,
+          "charIndex": 53,
+          "word": "falschen",
+          "end": 3.24
+        },
+        {
+          "at": 3.24,
+          "charIndex": 62,
+          "word": "können",
+          "end": 3.6
+        },
+        {
+          "at": 3.6,
+          "charIndex": 69,
+          "word": "Sie",
+          "end": 3.78
+        },
+        {
+          "at": 3.78,
+          "charIndex": 73,
+          "word": "sehr",
+          "end": 4
+        },
+        {
+          "at": 4,
+          "charIndex": 78,
+          "word": "ordentlich",
+          "end": 4.48
+        },
+        {
+          "at": 4.48,
+          "charIndex": 89,
+          "word": "in",
+          "end": 4.64
+        },
+        {
+          "at": 4.64,
+          "charIndex": 92,
+          "word": "die",
+          "end": 4.74
+        },
+        {
+          "at": 4.74,
+          "charIndex": 96,
+          "word": "falsche",
+          "end": 5.1
+        },
+        {
+          "at": 5.1,
+          "charIndex": 104,
+          "word": "Richtung",
+          "end": 5.38
+        },
+        {
+          "at": 5.38,
+          "charIndex": 113,
+          "word": "arbeiten",
+          "end": 5.88
+        }
+      ],
+      "sha256": "2889011ae184b9f8593f05ce2262ae5acf9d4c2e92d26c84d8ca977e514d31af",
+      "bytes": 112172,
+      "sampleRateHz": 48000,
+      "channels": 1,
+      "bitrateBitsPerSecond": 128000,
+      "file": "assets/voices/city-dialogue/stadt-klaus-dieter-klein-01.mp3",
+      "approval": {
+        "status": "user-approved",
+        "date": "2026-10-15",
+        "instruction": "The user requested completion of every character voice with each selected profile and authorized cloning from freely licensed source audio. This records that whole-game use authorization for these exact three processed takes selected after technical and word checks; perceptual listening has not been performed.",
+        "scope": "whole-game-fixed-voice-cloning",
+        "clipId": "stadt-klaus-dieter-klein-01",
+        "encodedSha256": "2889011ae184b9f8593f05ce2262ae5acf9d4c2e92d26c84d8ca977e514d31af"
+      }
+    },
+    {
+      "clipId": "stadt-klaus-dieter-klein-02",
+      "voiceId": "stadt-klaus-dieter-klein",
+      "actorId": "city-klaus-dieter-klein",
+      "region": "germany",
+      "slot": 1,
+      "sourceLocator": "For-AI/VOICE-CAST.json characters[gameCharacterId=city-klaus-dieter-klein].dialogue[region=germany,slot=1]",
+      "text": "Wenn das Feld zu klein ist, schreiben Sie kleiner. Der Vorgang wird davon nicht kleiner, aber er passt besser in den Ordner.",
+      "english": "If the box is too small, write smaller. That does not make the case smaller, but it fits in the folder better.",
+      "sourceSha256": "78416bbc9d74de68fc6b92bc5aef3a27a772b3c4925b8ed9e7cd89b62f80c4da",
+      "profileId": "8182da73a54c429391924d62ee339037",
+      "referenceSha256": "f39a69c03ca05dc5af6d3a81020e931eeccc0e1aa497d6aa2355f7b8fc16234b",
+      "referenceOriginalSha256": "a0de93a250f749c1bcd7f7cda9b12c2810c97dbe9426b602b2973b8c76fb9b3b",
+      "renderer": "ResembleAI/Chatterbox Multilingual V2 0.1.7",
+      "modelRevision": "5bb1f6ee58e50c3b8d408bc82a6d3740c2db6e18",
+      "processing": null,
+      "seed": 71001,
+      "synthesisAttempt": 1,
+      "authoringHelperSha256": "122d93bac3016f44b24cf04b97b7a2462d216226e33c9d6d6e05c5ae11a89349",
+      "rendererInputText": "Wenn das Feld zu klein ist, schreiben Sie kleiner. Der Vorgang wird davon nicht kleiner, aber er passt besser in den Ordner.",
+      "decode": {
+        "maxSpeechTokens": 424,
+        "attentionHooksBefore": 0,
+        "generatedSpeechTokens": 165,
+        "eosReached": true,
+        "t3InferenceSeconds": 7.56,
+        "temporaryAnalyzerHooksRemoved": 3,
+        "attentionHooksAfter": 0
+      },
+      "rendererInputBasis": "exact authored source",
+      "requestSha256": "061c060225a4993f86be27bc05cdd3d99bfd18528a0781995092b0e819e433a9",
+      "profileJsonSha256": "254f66cd5989e7bf93673a4a1ecd89a8be868c27b36c87e1780ae8fc8fffb9a7",
+      "rawSha256": "bd7f5e68f6a73d1a534ad12443f9276e7868459b1f8056e22146ee0116ce8aa8",
+      "modelLicense": "MIT",
+      "referenceLicense": "unknown; selected profile does not record reference license",
+      "durationSeconds": 6.54,
+      "renderSeconds": 8.7,
+      "synthesis": {
+        "exaggeration": 0.5,
+        "exaggerationReason": null,
+        "temperature": 0.65,
+        "repetitionPenalty": 3,
+        "cfgWeight": 0.6,
+        "languageId": "de",
+        "device": "cuda",
+        "precision": "fp16",
+        "t3WeightPrecision": "float16",
+        "conditioningPrecision": "float32",
+        "autocastPrecision": "float16",
+        "conditioningCached": true,
+        "referenceReconditionedForProfile": "8182da73a54c429391924d62ee339037",
+        "referenceConditioningVerifiedFloat32": true,
+        "modelSessionReused": false,
+        "cpuThreads": 2,
+        "inferenceMode": true
+      },
+      "listening": "pending",
+      "status": "eligible exact-text recording; human listening pending",
+      "processingSha256": null,
+      "normalization": {
+        "targetLufs": -18,
+        "targetTruePeakDbtp": -1.5,
+        "filter": "loudnorm=I=-15.73:TP=-1.8:LRA=11:linear=false",
+        "iterations": 3
+      },
+      "integratedLufs": -18.17,
+      "truePeakDbtp": -2.14,
+      "asr": "Wenn das Feld zu klein ist, schreiben sie kleiner. Der Vorgang wird davon nicht kleiner, aber er passt besser in den Ordner.",
+      "asrWordExact": true,
+      "asrLiteralWordExact": true,
+      "asrNormalization": "case/punctuation, German numeric and A38 spoken equivalents, guarded full-hour and date-ordinal equivalents, section sign/Paragraf orthography, German compound spacing",
+      "asrModel": "independent faster-whisper, cached local model, cpu int8 (effective int8_float32), no script prompt",
+      "asrCpuThreads": 2,
+      "asrDevice": "cpu",
+      "asrEffectiveComputeType": "int8_float32",
+      "asrLanguageId": "de",
+      "asrComputeType": "int8",
+      "asrScriptPrompt": null,
+      "asrBeamSize": 1,
+      "asrReadings": [
+        {
+          "beamSize": 1,
+          "transcript": "Wenn das Feld zu klein ist, schreiben sie kleiner. Der Vorgang wird davon nicht kleiner, aber er passt besser in den Ordner.",
+          "transcribeSeconds": 10.55,
+          "words": [
+            {
+              "word": " Wenn",
+              "start": 0,
+              "end": 0.16
+            },
+            {
+              "word": " das",
+              "start": 0.16,
+              "end": 0.3
+            },
+            {
+              "word": " Feld",
+              "start": 0.3,
+              "end": 0.5
+            },
+            {
+              "word": " zu",
+              "start": 0.5,
+              "end": 0.64
+            },
+            {
+              "word": " klein",
+              "start": 0.64,
+              "end": 0.9
+            },
+            {
+              "word": " ist,",
+              "start": 0.9,
+              "end": 1.14
+            },
+            {
+              "word": " schreiben",
+              "start": 1.28,
+              "end": 1.54
+            },
+            {
+              "word": " sie",
+              "start": 1.54,
+              "end": 1.7
+            },
+            {
+              "word": " kleiner.",
+              "start": 1.7,
+              "end": 2.02
+            },
+            {
+              "word": " Der",
+              "start": 2.36,
+              "end": 2.8
+            },
+            {
+              "word": " Vorgang",
+              "start": 2.8,
+              "end": 3.14
+            },
+            {
+              "word": " wird",
+              "start": 3.14,
+              "end": 3.26
+            },
+            {
+              "word": " davon",
+              "start": 3.26,
+              "end": 3.52
+            },
+            {
+              "word": " nicht",
+              "start": 3.52,
+              "end": 3.7
+            },
+            {
+              "word": " kleiner,",
+              "start": 3.7,
+              "end": 4.04
+            },
+            {
+              "word": " aber",
+              "start": 4.3,
+              "end": 4.58
+            },
+            {
+              "word": " er",
+              "start": 4.58,
+              "end": 4.76
+            },
+            {
+              "word": " passt",
+              "start": 4.76,
+              "end": 4.92
+            },
+            {
+              "word": " besser",
+              "start": 4.92,
+              "end": 5.22
+            },
+            {
+              "word": " in",
+              "start": 5.22,
+              "end": 5.34
+            },
+            {
+              "word": " den",
+              "start": 5.34,
+              "end": 5.46
+            },
+            {
+              "word": " Ordner.",
+              "start": 5.46,
+              "end": 5.8
+            }
+          ]
+        }
+      ],
+      "asrModelSha256": "e76620f83d5f5b69efd3d87e3dc180c1bd21df9fbebacfd4335e5e1efcc018da",
+      "asrModelDirectoryName": "voice-asr-model",
+      "wordCues": [
+        {
+          "at": 0,
+          "charIndex": 0,
+          "word": "Wenn",
+          "end": 0.16
+        },
+        {
+          "at": 0.16,
+          "charIndex": 5,
+          "word": "das",
+          "end": 0.3
+        },
+        {
+          "at": 0.3,
+          "charIndex": 9,
+          "word": "Feld",
+          "end": 0.5
+        },
+        {
+          "at": 0.5,
+          "charIndex": 14,
+          "word": "zu",
+          "end": 0.64
+        },
+        {
+          "at": 0.64,
+          "charIndex": 17,
+          "word": "klein",
+          "end": 0.9
+        },
+        {
+          "at": 0.9,
+          "charIndex": 23,
+          "word": "ist",
+          "end": 1.14
+        },
+        {
+          "at": 1.28,
+          "charIndex": 28,
+          "word": "schreiben",
+          "end": 1.54
+        },
+        {
+          "at": 1.54,
+          "charIndex": 38,
+          "word": "Sie",
+          "end": 1.7
+        },
+        {
+          "at": 1.7,
+          "charIndex": 42,
+          "word": "kleiner",
+          "end": 2.02
+        },
+        {
+          "at": 2.36,
+          "charIndex": 51,
+          "word": "Der",
+          "end": 2.8
+        },
+        {
+          "at": 2.8,
+          "charIndex": 55,
+          "word": "Vorgang",
+          "end": 3.14
+        },
+        {
+          "at": 3.14,
+          "charIndex": 63,
+          "word": "wird",
+          "end": 3.26
+        },
+        {
+          "at": 3.26,
+          "charIndex": 68,
+          "word": "davon",
+          "end": 3.52
+        },
+        {
+          "at": 3.52,
+          "charIndex": 74,
+          "word": "nicht",
+          "end": 3.7
+        },
+        {
+          "at": 3.7,
+          "charIndex": 80,
+          "word": "kleiner",
+          "end": 4.04
+        },
+        {
+          "at": 4.3,
+          "charIndex": 89,
+          "word": "aber",
+          "end": 4.58
+        },
+        {
+          "at": 4.58,
+          "charIndex": 94,
+          "word": "er",
+          "end": 4.76
+        },
+        {
+          "at": 4.76,
+          "charIndex": 97,
+          "word": "passt",
+          "end": 4.92
+        },
+        {
+          "at": 4.92,
+          "charIndex": 103,
+          "word": "besser",
+          "end": 5.22
+        },
+        {
+          "at": 5.22,
+          "charIndex": 110,
+          "word": "in",
+          "end": 5.34
+        },
+        {
+          "at": 5.34,
+          "charIndex": 113,
+          "word": "den",
+          "end": 5.46
+        },
+        {
+          "at": 5.46,
+          "charIndex": 117,
+          "word": "Ordner",
+          "end": 5.8
+        }
+      ],
+      "sha256": "4f983233e8f934cf3ff1f7ec5a21b801876407463a1b2e596f5d942798c324c7",
+      "bytes": 105644,
+      "sampleRateHz": 48000,
+      "channels": 1,
+      "bitrateBitsPerSecond": 128000,
+      "file": "assets/voices/city-dialogue/stadt-klaus-dieter-klein-02.mp3",
+      "approval": {
+        "status": "user-approved",
+        "date": "2026-10-15",
+        "instruction": "The user requested completion of every character voice with each selected profile and authorized cloning from freely licensed source audio. This records that whole-game use authorization for these exact three processed takes selected after technical and word checks; perceptual listening has not been performed.",
+        "scope": "whole-game-fixed-voice-cloning",
+        "clipId": "stadt-klaus-dieter-klein-02",
+        "encodedSha256": "4f983233e8f934cf3ff1f7ec5a21b801876407463a1b2e596f5d942798c324c7"
+      }
+    },
+    {
+      "clipId": "stadt-klaus-dieter-klein-03",
+      "voiceId": "stadt-klaus-dieter-klein",
+      "actorId": "city-klaus-dieter-klein",
+      "region": "berlin",
+      "slot": 0,
+      "sourceLocator": "For-AI/VOICE-CAST.json characters[gameCharacterId=city-klaus-dieter-klein].dialogue[region=berlin,slot=0]",
+      "text": "Ich würde erst das richtige Formular nehmen. With the wrong one können Sie sehr ordentlich in the wrong direction arbeiten.",
+      "english": "I would start with the right form. With the wrong one, you can work very neatly in the wrong direction.",
+      "sourceSha256": "0fb775f2b06a4279eb18756aae5c3e2a894d1018addfcb9e013ebe3ecc68a94d",
+      "profileId": "8182da73a54c429391924d62ee339037",
+      "referenceSha256": "f39a69c03ca05dc5af6d3a81020e931eeccc0e1aa497d6aa2355f7b8fc16234b",
+      "referenceOriginalSha256": "a0de93a250f749c1bcd7f7cda9b12c2810c97dbe9426b602b2973b8c76fb9b3b",
+      "renderer": "ResembleAI/Chatterbox Multilingual V2 0.1.7",
+      "modelRevision": "5bb1f6ee58e50c3b8d408bc82a6d3740c2db6e18",
+      "processing": null,
+      "seed": 171002,
+      "synthesisAttempt": 2,
+      "authoringHelperSha256": "122d93bac3016f44b24cf04b97b7a2462d216226e33c9d6d6e05c5ae11a89349",
+      "rendererInputText": "Ich würde erst das richtige Formular nehmen. With the wrong one können Sie sehr ordentlich in the wrong direction arbeiten.",
+      "decode": {
+        "maxSpeechTokens": 400,
+        "attentionHooksBefore": 0,
+        "generatedSpeechTokens": 168,
+        "eosReached": true,
+        "t3InferenceSeconds": 7.05,
+        "temporaryAnalyzerHooksRemoved": 6,
+        "attentionHooksAfter": 0
+      },
+      "rendererInputBasis": "exact authored source",
+      "requestSha256": "061c060225a4993f86be27bc05cdd3d99bfd18528a0781995092b0e819e433a9",
+      "profileJsonSha256": "254f66cd5989e7bf93673a4a1ecd89a8be868c27b36c87e1780ae8fc8fffb9a7",
+      "rawSha256": "6d2b73af062b7deffc54ec247b79ec21683a3818e4b2efb78a0097be7db1473b",
+      "modelLicense": "MIT",
+      "referenceLicense": "unknown; selected profile does not record reference license",
+      "durationSeconds": 6.66,
+      "renderSeconds": 8.36,
+      "synthesis": {
+        "exaggeration": 0.5,
+        "exaggerationReason": null,
+        "temperature": 0.65,
+        "repetitionPenalty": 3,
+        "cfgWeight": 0.6,
+        "languageId": "de",
+        "device": "cuda",
+        "precision": "fp16",
+        "t3WeightPrecision": "float16",
+        "conditioningPrecision": "float32",
+        "autocastPrecision": "float16",
+        "conditioningCached": true,
+        "referenceReconditionedForProfile": "8182da73a54c429391924d62ee339037",
+        "referenceConditioningVerifiedFloat32": true,
+        "modelSessionReused": false,
+        "cpuThreads": 2,
+        "inferenceMode": true
+      },
+      "listening": "pending",
+      "status": "eligible exact-text recording; human listening pending",
+      "processingSha256": null,
+      "normalization": {
+        "targetLufs": -18,
+        "targetTruePeakDbtp": -1.5,
+        "filter": "loudnorm=I=-16.69:TP=-1.8:LRA=11:linear=false",
+        "iterations": 3
+      },
+      "integratedLufs": -18.17,
+      "truePeakDbtp": -2.19,
+      "asr": "Ich würde erst das richtige Formular nehmen. With the wrong one können Sie sehr ordentlich in the wrong direction arbeiten.",
+      "asrWordExact": true,
+      "asrLiteralWordExact": true,
+      "asrNormalization": "case/punctuation, German numeric and A38 spoken equivalents, guarded full-hour and date-ordinal equivalents, section sign/Paragraf orthography, German compound spacing",
+      "asrModel": "independent faster-whisper, cached local model, cpu int8 (effective int8_float32), no script prompt",
+      "asrCpuThreads": 2,
+      "asrDevice": "cpu",
+      "asrEffectiveComputeType": "int8_float32",
+      "asrLanguageId": "de",
+      "asrComputeType": "int8",
+      "asrScriptPrompt": null,
+      "asrBeamSize": 1,
+      "asrReadings": [
+        {
+          "beamSize": 1,
+          "transcript": "Ich würde erst das richtige Formular nehmen. With the wrong one können Sie sehr ordentlich in the wrong direction arbeiten.",
+          "transcribeSeconds": 10.17,
+          "words": [
+            {
+              "word": " Ich",
+              "start": 0,
+              "end": 0.2
+            },
+            {
+              "word": " würde",
+              "start": 0.2,
+              "end": 0.4
+            },
+            {
+              "word": " erst",
+              "start": 0.4,
+              "end": 0.7
+            },
+            {
+              "word": " das",
+              "start": 0.7,
+              "end": 0.9
+            },
+            {
+              "word": " richtige",
+              "start": 0.9,
+              "end": 1.22
+            },
+            {
+              "word": " Formular",
+              "start": 1.22,
+              "end": 1.7
+            },
+            {
+              "word": " nehmen.",
+              "start": 1.7,
+              "end": 2.04
+            },
+            {
+              "word": " With",
+              "start": 2.38,
+              "end": 2.72
+            },
+            {
+              "word": " the",
+              "start": 2.72,
+              "end": 2.84
+            },
+            {
+              "word": " wrong",
+              "start": 2.84,
+              "end": 3.04
+            },
+            {
+              "word": " one",
+              "start": 3.04,
+              "end": 3.32
+            },
+            {
+              "word": " können",
+              "start": 3.32,
+              "end": 3.8
+            },
+            {
+              "word": " Sie",
+              "start": 3.8,
+              "end": 3.94
+            },
+            {
+              "word": " sehr",
+              "start": 3.94,
+              "end": 4.14
+            },
+            {
+              "word": " ordentlich",
+              "start": 4.14,
+              "end": 4.6
+            },
+            {
+              "word": " in",
+              "start": 4.6,
+              "end": 4.74
+            },
+            {
+              "word": " the",
+              "start": 4.74,
+              "end": 4.84
+            },
+            {
+              "word": " wrong",
+              "start": 4.84,
+              "end": 5.04
+            },
+            {
+              "word": " direction",
+              "start": 5.04,
+              "end": 5.3
+            },
+            {
+              "word": " arbeiten.",
+              "start": 5.3,
+              "end": 5.96
+            }
+          ]
+        }
+      ],
+      "asrModelSha256": "e76620f83d5f5b69efd3d87e3dc180c1bd21df9fbebacfd4335e5e1efcc018da",
+      "asrModelDirectoryName": "voice-asr-model",
+      "wordCues": [
+        {
+          "at": 0,
+          "charIndex": 0,
+          "word": "Ich",
+          "end": 0.2
+        },
+        {
+          "at": 0.2,
+          "charIndex": 4,
+          "word": "würde",
+          "end": 0.4
+        },
+        {
+          "at": 0.4,
+          "charIndex": 10,
+          "word": "erst",
+          "end": 0.7
+        },
+        {
+          "at": 0.7,
+          "charIndex": 15,
+          "word": "das",
+          "end": 0.9
+        },
+        {
+          "at": 0.9,
+          "charIndex": 19,
+          "word": "richtige",
+          "end": 1.22
+        },
+        {
+          "at": 1.22,
+          "charIndex": 28,
+          "word": "Formular",
+          "end": 1.7
+        },
+        {
+          "at": 1.7,
+          "charIndex": 37,
+          "word": "nehmen",
+          "end": 2.04
+        },
+        {
+          "at": 2.38,
+          "charIndex": 45,
+          "word": "With",
+          "end": 2.72
+        },
+        {
+          "at": 2.72,
+          "charIndex": 50,
+          "word": "the",
+          "end": 2.84
+        },
+        {
+          "at": 2.84,
+          "charIndex": 54,
+          "word": "wrong",
+          "end": 3.04
+        },
+        {
+          "at": 3.04,
+          "charIndex": 60,
+          "word": "one",
+          "end": 3.32
+        },
+        {
+          "at": 3.32,
+          "charIndex": 64,
+          "word": "können",
+          "end": 3.8
+        },
+        {
+          "at": 3.8,
+          "charIndex": 71,
+          "word": "Sie",
+          "end": 3.94
+        },
+        {
+          "at": 3.94,
+          "charIndex": 75,
+          "word": "sehr",
+          "end": 4.14
+        },
+        {
+          "at": 4.14,
+          "charIndex": 80,
+          "word": "ordentlich",
+          "end": 4.6
+        },
+        {
+          "at": 4.6,
+          "charIndex": 91,
+          "word": "in",
+          "end": 4.74
+        },
+        {
+          "at": 4.74,
+          "charIndex": 94,
+          "word": "the",
+          "end": 4.84
+        },
+        {
+          "at": 4.84,
+          "charIndex": 98,
+          "word": "wrong",
+          "end": 5.04
+        },
+        {
+          "at": 5.04,
+          "charIndex": 104,
+          "word": "direction",
+          "end": 5.3
+        },
+        {
+          "at": 5.3,
+          "charIndex": 114,
+          "word": "arbeiten",
+          "end": 5.96
+        }
+      ],
+      "sha256": "762a969a2a986e0bd4554384a9dca01960fe6b2d0578c9699788f554b1609ad4",
+      "bytes": 107564,
+      "sampleRateHz": 48000,
+      "channels": 1,
+      "bitrateBitsPerSecond": 128000,
+      "file": "assets/voices/city-dialogue/stadt-klaus-dieter-klein-03.mp3",
+      "approval": {
+        "status": "user-approved",
+        "date": "2026-10-15",
+        "instruction": "The user requested completion of every character voice with each selected profile and authorized cloning from freely licensed source audio. This records that whole-game use authorization for these exact three processed takes selected after technical and word checks; perceptual listening has not been performed.",
+        "scope": "whole-game-fixed-voice-cloning",
+        "clipId": "stadt-klaus-dieter-klein-03",
+        "encodedSha256": "762a969a2a986e0bd4554384a9dca01960fe6b2d0578c9699788f554b1609ad4"
+      }
+    }
+  ],
+  "heldPrivate": [
+    {
+      "clipId": "stadt-klaus-dieter-klein-04",
+      "voiceId": "stadt-klaus-dieter-klein",
+      "actorId": "city-klaus-dieter-klein",
+      "region": "berlin",
+      "slot": 1,
+      "sourceLocator": "For-AI/VOICE-CAST.json characters[gameCharacterId=city-klaus-dieter-klein].dialogue[region=berlin,slot=1]",
+      "text": "If das Feld is too small, schreiben Sie kleiner. The case wird davon nicht kleiner, aber er passt better in den Ordner.",
+      "english": "If the box is too small, write smaller. That does not make the case smaller, but it fits in the folder better.",
+      "sourceSha256": "ac6830f6cb56ce29ca115414f0eab30a12b4465c7b33d0317b3ddbf94821459d",
+      "profileId": "8182da73a54c429391924d62ee339037",
+      "referenceSha256": "f39a69c03ca05dc5af6d3a81020e931eeccc0e1aa497d6aa2355f7b8fc16234b",
+      "referenceOriginalSha256": "a0de93a250f749c1bcd7f7cda9b12c2810c97dbe9426b602b2973b8c76fb9b3b",
+      "renderer": "ResembleAI/Chatterbox Multilingual V2 0.1.7",
+      "modelRevision": "5bb1f6ee58e50c3b8d408bc82a6d3740c2db6e18",
+      "processing": null,
+      "reason": "not selected for this admission; selected production caption fallback"
+    }
+  ],
+  "cityProvenance": {
+    "request": {
+      "text": "{\r\n  \"requestedLineCount\": 4,\r\n  \"sourceSha256\": {\r\n    \"game.js\": \"c1510ca78f329b4cd35430791e2e1fecf1175def445c16806c531fc1b0b1e79e\",\r\n    \"For-AI/VOICE-CAST.json\": \"e8ef5bdab86e4390ef5329ac73fcb91afb897c562b93282798c049c7b3ef223b\",\r\n    \"For-AI/AUDIO-TEXT-LIBRARY.js\": \"70a314d92031bb1b4ea42661f8464e6f52683fb02a09e57748b5161f0896260c\"\r\n  },\r\n  \"jobs\": [\r\n    {\r\n      \"clipId\": \"stadt-klaus-dieter-klein-01\",\r\n      \"voiceId\": \"stadt-klaus-dieter-klein\",\r\n      \"actorId\": \"city-klaus-dieter-klein\",\r\n      \"region\": \"germany\",\r\n      \"slot\": 0,\r\n      \"sourceLocator\": \"For-AI/VOICE-CAST.json characters[gameCharacterId=city-klaus-dieter-klein].dialogue[region=germany,slot=0]\",\r\n      \"text\": \"Ich würde erst das richtige Formular nehmen. Mit dem falschen können Sie sehr ordentlich in die falsche Richtung arbeiten.\",\r\n      \"english\": \"I would start with the right form. With the wrong one, you can work very neatly in the wrong direction.\",\r\n      \"sourceSha256\": \"8256b242c410a684bf53e400b91aa200683ee100feb2fe1426754ce20c9f7f19\",\r\n      \"profileId\": \"8182da73a54c429391924d62ee339037\",\r\n      \"referenceSha256\": \"f39a69c03ca05dc5af6d3a81020e931eeccc0e1aa497d6aa2355f7b8fc16234b\",\r\n      \"referenceOriginalSha256\": \"a0de93a250f749c1bcd7f7cda9b12c2810c97dbe9426b602b2973b8c76fb9b3b\",\r\n      \"renderer\": \"ResembleAI/Chatterbox Multilingual V2 0.1.7\",\r\n      \"modelRevision\": \"5bb1f6ee58e50c3b8d408bc82a6d3740c2db6e18\",\r\n      \"processing\": null\r\n    },\r\n    {\r\n      \"clipId\": \"stadt-klaus-dieter-klein-02\",\r\n      \"voiceId\": \"stadt-klaus-dieter-klein\",\r\n      \"actorId\": \"city-klaus-dieter-klein\",\r\n      \"region\": \"germany\",\r\n      \"slot\": 1,\r\n      \"sourceLocator\": \"For-AI/VOICE-CAST.json characters[gameCharacterId=city-klaus-dieter-klein].dialogue[region=germany,slot=1]\",\r\n      \"text\": \"Wenn das Feld zu klein ist, schreiben Sie kleiner. Der Vorgang wird davon nicht kleiner, aber er passt besser in den Ordner.\",\r\n      \"english\": \"If the box is too small, write smaller. That does not make the case smaller, but it fits in the folder better.\",\r\n      \"sourceSha256\": \"78416bbc9d74de68fc6b92bc5aef3a27a772b3c4925b8ed9e7cd89b62f80c4da\",\r\n      \"profileId\": \"8182da73a54c429391924d62ee339037\",\r\n      \"referenceSha256\": \"f39a69c03ca05dc5af6d3a81020e931eeccc0e1aa497d6aa2355f7b8fc16234b\",\r\n      \"referenceOriginalSha256\": \"a0de93a250f749c1bcd7f7cda9b12c2810c97dbe9426b602b2973b8c76fb9b3b\",\r\n      \"renderer\": \"ResembleAI/Chatterbox Multilingual V2 0.1.7\",\r\n      \"modelRevision\": \"5bb1f6ee58e50c3b8d408bc82a6d3740c2db6e18\",\r\n      \"processing\": null\r\n    },\r\n    {\r\n      \"clipId\": \"stadt-klaus-dieter-klein-03\",\r\n      \"voiceId\": \"stadt-klaus-dieter-klein\",\r\n      \"actorId\": \"city-klaus-dieter-klein\",\r\n      \"region\": \"berlin\",\r\n      \"slot\": 0,\r\n      \"sourceLocator\": \"For-AI/VOICE-CAST.json characters[gameCharacterId=city-klaus-dieter-klein].dialogue[region=berlin,slot=0]\",\r\n      \"text\": \"Ich würde erst das richtige Formular nehmen. With the wrong one können Sie sehr ordentlich in the wrong direction arbeiten.\",\r\n      \"english\": \"I would start with the right form. With the wrong one, you can work very neatly in the wrong direction.\",\r\n      \"sourceSha256\": \"0fb775f2b06a4279eb18756aae5c3e2a894d1018addfcb9e013ebe3ecc68a94d\",\r\n      \"profileId\": \"8182da73a54c429391924d62ee339037\",\r\n      \"referenceSha256\": \"f39a69c03ca05dc5af6d3a81020e931eeccc0e1aa497d6aa2355f7b8fc16234b\",\r\n      \"referenceOriginalSha256\": \"a0de93a250f749c1bcd7f7cda9b12c2810c97dbe9426b602b2973b8c76fb9b3b\",\r\n      \"renderer\": \"ResembleAI/Chatterbox Multilingual V2 0.1.7\",\r\n      \"modelRevision\": \"5bb1f6ee58e50c3b8d408bc82a6d3740c2db6e18\",\r\n      \"processing\": null\r\n    },\r\n    {\r\n      \"clipId\": \"stadt-klaus-dieter-klein-04\",\r\n      \"voiceId\": \"stadt-klaus-dieter-klein\",\r\n      \"actorId\": \"city-klaus-dieter-klein\",\r\n      \"region\": \"berlin\",\r\n      \"slot\": 1,\r\n      \"sourceLocator\": \"For-AI/VOICE-CAST.json characters[gameCharacterId=city-klaus-dieter-klein].dialogue[region=berlin,slot=1]\",\r\n      \"text\": \"If das Feld is too small, schreiben Sie kleiner. The case wird davon nicht kleiner, aber er passt better in den Ordner.\",\r\n      \"english\": \"If the box is too small, write smaller. That does not make the case smaller, but it fits in the folder better.\",\r\n      \"sourceSha256\": \"ac6830f6cb56ce29ca115414f0eab30a12b4465c7b33d0317b3ddbf94821459d\",\r\n      \"profileId\": \"8182da73a54c429391924d62ee339037\",\r\n      \"referenceSha256\": \"f39a69c03ca05dc5af6d3a81020e931eeccc0e1aa497d6aa2355f7b8fc16234b\",\r\n      \"referenceOriginalSha256\": \"a0de93a250f749c1bcd7f7cda9b12c2810c97dbe9426b602b2973b8c76fb9b3b\",\r\n      \"renderer\": \"ResembleAI/Chatterbox Multilingual V2 0.1.7\",\r\n      \"modelRevision\": \"5bb1f6ee58e50c3b8d408bc82a6d3740c2db6e18\",\r\n      \"processing\": null\r\n    }\r\n  ],\r\n  \"approvedExistingReuse\": [],\r\n  \"authoredPlanSha256\": \"5c0743b91e7c61d73aff62f909a97a78f6e0ee3b02f82e64de22b72409759d77\",\r\n  \"authoredPlanSourceSha256\": {\r\n    \"game.js\": \"c1510ca78f329b4cd35430791e2e1fecf1175def445c16806c531fc1b0b1e79e\",\r\n    \"For-AI/VOICE-CAST.json\": \"e8ef5bdab86e4390ef5329ac73fcb91afb897c562b93282798c049c7b3ef223b\",\r\n    \"For-AI/AUDIO-TEXT-LIBRARY.js\": \"70a314d92031bb1b4ea42661f8464e6f52683fb02a09e57748b5161f0896260c\"\r\n  }\r\n}\r\n",
+      "sha256": "061c060225a4993f86be27bc05cdd3d99bfd18528a0781995092b0e819e433a9"
+    },
+    "takes": {
+      "stadt-klaus-dieter-klein-01": {
+        "raw": {
+          "text": "{\r\n  \"clipId\": \"stadt-klaus-dieter-klein-01\",\r\n  \"voiceId\": \"stadt-klaus-dieter-klein\",\r\n  \"actorId\": \"city-klaus-dieter-klein\",\r\n  \"region\": \"germany\",\r\n  \"slot\": 0,\r\n  \"sourceLocator\": \"For-AI/VOICE-CAST.json characters[gameCharacterId=city-klaus-dieter-klein].dialogue[region=germany,slot=0]\",\r\n  \"text\": \"Ich würde erst das richtige Formular nehmen. Mit dem falschen können Sie sehr ordentlich in die falsche Richtung arbeiten.\",\r\n  \"english\": \"I would start with the right form. With the wrong one, you can work very neatly in the wrong direction.\",\r\n  \"sourceSha256\": \"8256b242c410a684bf53e400b91aa200683ee100feb2fe1426754ce20c9f7f19\",\r\n  \"profileId\": \"8182da73a54c429391924d62ee339037\",\r\n  \"referenceSha256\": \"f39a69c03ca05dc5af6d3a81020e931eeccc0e1aa497d6aa2355f7b8fc16234b\",\r\n  \"referenceOriginalSha256\": \"a0de93a250f749c1bcd7f7cda9b12c2810c97dbe9426b602b2973b8c76fb9b3b\",\r\n  \"renderer\": \"ResembleAI/Chatterbox Multilingual V2 0.1.7\",\r\n  \"modelRevision\": \"5bb1f6ee58e50c3b8d408bc82a6d3740c2db6e18\",\r\n  \"processing\": null,\r\n  \"seed\": 71000,\r\n  \"synthesisAttempt\": 1,\r\n  \"authoringHelperSha256\": \"122d93bac3016f44b24cf04b97b7a2462d216226e33c9d6d6e05c5ae11a89349\",\r\n  \"rendererInputText\": \"Ich würde erst das richtige Formular nehmen. Mit dem falschen können Sie sehr ordentlich in die falsche Richtung arbeiten.\",\r\n  \"decode\": {\r\n    \"maxSpeechTokens\": 388,\r\n    \"attentionHooksBefore\": 0,\r\n    \"generatedSpeechTokens\": 175,\r\n    \"eosReached\": true,\r\n    \"t3InferenceSeconds\": 7.8,\r\n    \"temporaryAnalyzerHooksRemoved\": 6,\r\n    \"attentionHooksAfter\": 0\r\n  },\r\n  \"rendererInputBasis\": \"exact authored source\",\r\n  \"requestSha256\": \"061c060225a4993f86be27bc05cdd3d99bfd18528a0781995092b0e819e433a9\",\r\n  \"profileJsonSha256\": \"254f66cd5989e7bf93673a4a1ecd89a8be868c27b36c87e1780ae8fc8fffb9a7\",\r\n  \"rawSha256\": \"4a6c124f1df56d3490d4b2c4ce48c5c91f848644413ee74eafa8f8fc06fa7dc7\",\r\n  \"modelLicense\": \"MIT\",\r\n  \"referenceLicense\": \"unknown; selected profile does not record reference license\",\r\n  \"durationSeconds\": 6.94,\r\n  \"renderSeconds\": 8.97,\r\n  \"synthesis\": {\r\n    \"exaggeration\": 0.5,\r\n    \"exaggerationReason\": null,\r\n    \"temperature\": 0.65,\r\n    \"repetitionPenalty\": 3.0,\r\n    \"cfgWeight\": 0.6,\r\n    \"languageId\": \"de\",\r\n    \"device\": \"cuda\",\r\n    \"precision\": \"fp16\",\r\n    \"t3WeightPrecision\": \"float16\",\r\n    \"conditioningPrecision\": \"float32\",\r\n    \"autocastPrecision\": \"float16\",\r\n    \"conditioningCached\": true,\r\n    \"referenceReconditionedForProfile\": \"8182da73a54c429391924d62ee339037\",\r\n    \"referenceConditioningVerifiedFloat32\": true,\r\n    \"modelSessionReused\": false,\r\n    \"cpuThreads\": 2,\r\n    \"inferenceMode\": true\r\n  },\r\n  \"listening\": \"pending\",\r\n  \"status\": \"private candidate\"\r\n}\r\n",
+          "sha256": "e673b2ffc70e368fe7b1e5b4479cf7b508561289be180d6c6499fe96f16d4af1"
+        },
+        "encoded": {
+          "text": "{\r\n  \"clipId\": \"stadt-klaus-dieter-klein-01\",\r\n  \"voiceId\": \"stadt-klaus-dieter-klein\",\r\n  \"actorId\": \"city-klaus-dieter-klein\",\r\n  \"region\": \"germany\",\r\n  \"slot\": 0,\r\n  \"sourceLocator\": \"For-AI/VOICE-CAST.json characters[gameCharacterId=city-klaus-dieter-klein].dialogue[region=germany,slot=0]\",\r\n  \"text\": \"Ich würde erst das richtige Formular nehmen. Mit dem falschen können Sie sehr ordentlich in die falsche Richtung arbeiten.\",\r\n  \"english\": \"I would start with the right form. With the wrong one, you can work very neatly in the wrong direction.\",\r\n  \"sourceSha256\": \"8256b242c410a684bf53e400b91aa200683ee100feb2fe1426754ce20c9f7f19\",\r\n  \"profileId\": \"8182da73a54c429391924d62ee339037\",\r\n  \"referenceSha256\": \"f39a69c03ca05dc5af6d3a81020e931eeccc0e1aa497d6aa2355f7b8fc16234b\",\r\n  \"referenceOriginalSha256\": \"a0de93a250f749c1bcd7f7cda9b12c2810c97dbe9426b602b2973b8c76fb9b3b\",\r\n  \"renderer\": \"ResembleAI/Chatterbox Multilingual V2 0.1.7\",\r\n  \"modelRevision\": \"5bb1f6ee58e50c3b8d408bc82a6d3740c2db6e18\",\r\n  \"processing\": null,\r\n  \"seed\": 71000,\r\n  \"synthesisAttempt\": 1,\r\n  \"authoringHelperSha256\": \"122d93bac3016f44b24cf04b97b7a2462d216226e33c9d6d6e05c5ae11a89349\",\r\n  \"rendererInputText\": \"Ich würde erst das richtige Formular nehmen. Mit dem falschen können Sie sehr ordentlich in die falsche Richtung arbeiten.\",\r\n  \"decode\": {\r\n    \"maxSpeechTokens\": 388,\r\n    \"attentionHooksBefore\": 0,\r\n    \"generatedSpeechTokens\": 175,\r\n    \"eosReached\": true,\r\n    \"t3InferenceSeconds\": 7.8,\r\n    \"temporaryAnalyzerHooksRemoved\": 6,\r\n    \"attentionHooksAfter\": 0\r\n  },\r\n  \"rendererInputBasis\": \"exact authored source\",\r\n  \"requestSha256\": \"061c060225a4993f86be27bc05cdd3d99bfd18528a0781995092b0e819e433a9\",\r\n  \"profileJsonSha256\": \"254f66cd5989e7bf93673a4a1ecd89a8be868c27b36c87e1780ae8fc8fffb9a7\",\r\n  \"rawSha256\": \"4a6c124f1df56d3490d4b2c4ce48c5c91f848644413ee74eafa8f8fc06fa7dc7\",\r\n  \"modelLicense\": \"MIT\",\r\n  \"referenceLicense\": \"unknown; selected profile does not record reference license\",\r\n  \"durationSeconds\": 6.94,\r\n  \"renderSeconds\": 8.97,\r\n  \"synthesis\": {\r\n    \"exaggeration\": 0.5,\r\n    \"exaggerationReason\": null,\r\n    \"temperature\": 0.65,\r\n    \"repetitionPenalty\": 3.0,\r\n    \"cfgWeight\": 0.6,\r\n    \"languageId\": \"de\",\r\n    \"device\": \"cuda\",\r\n    \"precision\": \"fp16\",\r\n    \"t3WeightPrecision\": \"float16\",\r\n    \"conditioningPrecision\": \"float32\",\r\n    \"autocastPrecision\": \"float16\",\r\n    \"conditioningCached\": true,\r\n    \"referenceReconditionedForProfile\": \"8182da73a54c429391924d62ee339037\",\r\n    \"referenceConditioningVerifiedFloat32\": true,\r\n    \"modelSessionReused\": false,\r\n    \"cpuThreads\": 2,\r\n    \"inferenceMode\": true\r\n  },\r\n  \"listening\": \"pending\",\r\n  \"status\": \"eligible exact-text recording; human listening pending\",\r\n  \"processingSha256\": null,\r\n  \"normalization\": {\r\n    \"targetLufs\": -18,\r\n    \"targetTruePeakDbtp\": -1.5,\r\n    \"filter\": \"loudnorm=I=-16.07:TP=-1.8:LRA=11:linear=false\",\r\n    \"iterations\": 3\r\n  },\r\n  \"integratedLufs\": -18.22,\r\n  \"truePeakDbtp\": -2.15,\r\n  \"asr\": \"Ich würde erst das richtige Formular nehmen. Mit dem falschen können Sie sehr ordentlich in die falsche Richtung arbeiten.\",\r\n  \"asrWordExact\": true,\r\n  \"asrLiteralWordExact\": true,\r\n  \"asrNormalization\": \"case/punctuation, German numeric and A38 spoken equivalents, guarded full-hour and date-ordinal equivalents, section sign/Paragraf orthography, German compound spacing\",\r\n  \"asrModel\": \"independent faster-whisper, cached local model, cpu int8 (effective int8_float32), no script prompt\",\r\n  \"asrCpuThreads\": 2,\r\n  \"asrDevice\": \"cpu\",\r\n  \"asrEffectiveComputeType\": \"int8_float32\",\r\n  \"asrLanguageId\": \"de\",\r\n  \"asrComputeType\": \"int8\",\r\n  \"asrScriptPrompt\": null,\r\n  \"asrBeamSize\": 1,\r\n  \"asrReadings\": [\r\n    {\r\n      \"beamSize\": 1,\r\n      \"transcript\": \"Ich würde erst das richtige Formular nehmen. Mit dem falschen können Sie sehr ordentlich in die falsche Richtung arbeiten.\",\r\n      \"transcribeSeconds\": 10.58,\r\n      \"words\": [\r\n        {\r\n          \"word\": \" Ich\",\r\n          \"start\": 0.0,\r\n          \"end\": 0.18\r\n        },\r\n        {\r\n          \"word\": \" würde\",\r\n          \"start\": 0.18,\r\n          \"end\": 0.38\r\n        },\r\n        {\r\n          \"word\": \" erst\",\r\n          \"start\": 0.38,\r\n          \"end\": 0.64\r\n        },\r\n        {\r\n          \"word\": \" das\",\r\n          \"start\": 0.64,\r\n          \"end\": 0.8\r\n        },\r\n        {\r\n          \"word\": \" richtige\",\r\n          \"start\": 0.8,\r\n          \"end\": 1.1\r\n        },\r\n        {\r\n          \"word\": \" Formular\",\r\n          \"start\": 1.1,\r\n          \"end\": 1.64\r\n        },\r\n        {\r\n          \"word\": \" nehmen.\",\r\n          \"start\": 1.64,\r\n          \"end\": 1.98\r\n        },\r\n        {\r\n          \"word\": \" Mit\",\r\n          \"start\": 2.28,\r\n          \"end\": 2.7\r\n        },\r\n        {\r\n          \"word\": \" dem\",\r\n          \"start\": 2.7,\r\n          \"end\": 2.84\r\n        },\r\n        {\r\n          \"word\": \" falschen\",\r\n          \"start\": 2.84,\r\n          \"end\": 3.24\r\n        },\r\n        {\r\n          \"word\": \" können\",\r\n          \"start\": 3.24,\r\n          \"end\": 3.6\r\n        },\r\n        {\r\n          \"word\": \" Sie\",\r\n          \"start\": 3.6,\r\n          \"end\": 3.78\r\n        },\r\n        {\r\n          \"word\": \" sehr\",\r\n          \"start\": 3.78,\r\n          \"end\": 4.0\r\n        },\r\n        {\r\n          \"word\": \" ordentlich\",\r\n          \"start\": 4.0,\r\n          \"end\": 4.48\r\n        },\r\n        {\r\n          \"word\": \" in\",\r\n          \"start\": 4.48,\r\n          \"end\": 4.64\r\n        },\r\n        {\r\n          \"word\": \" die\",\r\n          \"start\": 4.64,\r\n          \"end\": 4.74\r\n        },\r\n        {\r\n          \"word\": \" falsche\",\r\n          \"start\": 4.74,\r\n          \"end\": 5.1\r\n        },\r\n        {\r\n          \"word\": \" Richtung\",\r\n          \"start\": 5.1,\r\n          \"end\": 5.38\r\n        },\r\n        {\r\n          \"word\": \" arbeiten.\",\r\n          \"start\": 5.38,\r\n          \"end\": 5.88\r\n        }\r\n      ]\r\n    }\r\n  ],\r\n  \"asrModelSha256\": \"e76620f83d5f5b69efd3d87e3dc180c1bd21df9fbebacfd4335e5e1efcc018da\",\r\n  \"asrModelDirectoryName\": \"voice-asr-model\",\r\n  \"wordCues\": [\r\n    {\r\n      \"at\": 0.0,\r\n      \"charIndex\": 0,\r\n      \"word\": \"Ich\",\r\n      \"end\": 0.18\r\n    },\r\n    {\r\n      \"at\": 0.18,\r\n      \"charIndex\": 4,\r\n      \"word\": \"würde\",\r\n      \"end\": 0.38\r\n    },\r\n    {\r\n      \"at\": 0.38,\r\n      \"charIndex\": 10,\r\n      \"word\": \"erst\",\r\n      \"end\": 0.64\r\n    },\r\n    {\r\n      \"at\": 0.64,\r\n      \"charIndex\": 15,\r\n      \"word\": \"das\",\r\n      \"end\": 0.8\r\n    },\r\n    {\r\n      \"at\": 0.8,\r\n      \"charIndex\": 19,\r\n      \"word\": \"richtige\",\r\n      \"end\": 1.1\r\n    },\r\n    {\r\n      \"at\": 1.1,\r\n      \"charIndex\": 28,\r\n      \"word\": \"Formular\",\r\n      \"end\": 1.64\r\n    },\r\n    {\r\n      \"at\": 1.64,\r\n      \"charIndex\": 37,\r\n      \"word\": \"nehmen\",\r\n      \"end\": 1.98\r\n    },\r\n    {\r\n      \"at\": 2.28,\r\n      \"charIndex\": 45,\r\n      \"word\": \"Mit\",\r\n      \"end\": 2.7\r\n    },\r\n    {\r\n      \"at\": 2.7,\r\n      \"charIndex\": 49,\r\n      \"word\": \"dem\",\r\n      \"end\": 2.84\r\n    },\r\n    {\r\n      \"at\": 2.84,\r\n      \"charIndex\": 53,\r\n      \"word\": \"falschen\",\r\n      \"end\": 3.24\r\n    },\r\n    {\r\n      \"at\": 3.24,\r\n      \"charIndex\": 62,\r\n      \"word\": \"können\",\r\n      \"end\": 3.6\r\n    },\r\n    {\r\n      \"at\": 3.6,\r\n      \"charIndex\": 69,\r\n      \"word\": \"Sie\",\r\n      \"end\": 3.78\r\n    },\r\n    {\r\n      \"at\": 3.78,\r\n      \"charIndex\": 73,\r\n      \"word\": \"sehr\",\r\n      \"end\": 4.0\r\n    },\r\n    {\r\n      \"at\": 4.0,\r\n      \"charIndex\": 78,\r\n      \"word\": \"ordentlich\",\r\n      \"end\": 4.48\r\n    },\r\n    {\r\n      \"at\": 4.48,\r\n      \"charIndex\": 89,\r\n      \"word\": \"in\",\r\n      \"end\": 4.64\r\n    },\r\n    {\r\n      \"at\": 4.64,\r\n      \"charIndex\": 92,\r\n      \"word\": \"die\",\r\n      \"end\": 4.74\r\n    },\r\n    {\r\n      \"at\": 4.74,\r\n      \"charIndex\": 96,\r\n      \"word\": \"falsche\",\r\n      \"end\": 5.1\r\n    },\r\n    {\r\n      \"at\": 5.1,\r\n      \"charIndex\": 104,\r\n      \"word\": \"Richtung\",\r\n      \"end\": 5.38\r\n    },\r\n    {\r\n      \"at\": 5.38,\r\n      \"charIndex\": 113,\r\n      \"word\": \"arbeiten\",\r\n      \"end\": 5.88\r\n    }\r\n  ],\r\n  \"sha256\": \"2889011ae184b9f8593f05ce2262ae5acf9d4c2e92d26c84d8ca977e514d31af\",\r\n  \"bytes\": 112172,\r\n  \"sampleRateHz\": 48000,\r\n  \"channels\": 1,\r\n  \"bitrateBitsPerSecond\": 128000,\r\n  \"file\": \"assets/voices/city-dialogue/stadt-klaus-dieter-klein-01.mp3\"\r\n}\r\n",
+          "sha256": "db3c65a4721f5e470c35588072c07128b57b0065beba7768c82ff24fe26e6097"
+        }
+      },
+      "stadt-klaus-dieter-klein-02": {
+        "raw": {
+          "text": "{\r\n  \"clipId\": \"stadt-klaus-dieter-klein-02\",\r\n  \"voiceId\": \"stadt-klaus-dieter-klein\",\r\n  \"actorId\": \"city-klaus-dieter-klein\",\r\n  \"region\": \"germany\",\r\n  \"slot\": 1,\r\n  \"sourceLocator\": \"For-AI/VOICE-CAST.json characters[gameCharacterId=city-klaus-dieter-klein].dialogue[region=germany,slot=1]\",\r\n  \"text\": \"Wenn das Feld zu klein ist, schreiben Sie kleiner. Der Vorgang wird davon nicht kleiner, aber er passt besser in den Ordner.\",\r\n  \"english\": \"If the box is too small, write smaller. That does not make the case smaller, but it fits in the folder better.\",\r\n  \"sourceSha256\": \"78416bbc9d74de68fc6b92bc5aef3a27a772b3c4925b8ed9e7cd89b62f80c4da\",\r\n  \"profileId\": \"8182da73a54c429391924d62ee339037\",\r\n  \"referenceSha256\": \"f39a69c03ca05dc5af6d3a81020e931eeccc0e1aa497d6aa2355f7b8fc16234b\",\r\n  \"referenceOriginalSha256\": \"a0de93a250f749c1bcd7f7cda9b12c2810c97dbe9426b602b2973b8c76fb9b3b\",\r\n  \"renderer\": \"ResembleAI/Chatterbox Multilingual V2 0.1.7\",\r\n  \"modelRevision\": \"5bb1f6ee58e50c3b8d408bc82a6d3740c2db6e18\",\r\n  \"processing\": null,\r\n  \"seed\": 71001,\r\n  \"synthesisAttempt\": 1,\r\n  \"authoringHelperSha256\": \"122d93bac3016f44b24cf04b97b7a2462d216226e33c9d6d6e05c5ae11a89349\",\r\n  \"rendererInputText\": \"Wenn das Feld zu klein ist, schreiben Sie kleiner. Der Vorgang wird davon nicht kleiner, aber er passt besser in den Ordner.\",\r\n  \"decode\": {\r\n    \"maxSpeechTokens\": 424,\r\n    \"attentionHooksBefore\": 0,\r\n    \"generatedSpeechTokens\": 165,\r\n    \"eosReached\": true,\r\n    \"t3InferenceSeconds\": 7.56,\r\n    \"temporaryAnalyzerHooksRemoved\": 3,\r\n    \"attentionHooksAfter\": 0\r\n  },\r\n  \"rendererInputBasis\": \"exact authored source\",\r\n  \"requestSha256\": \"061c060225a4993f86be27bc05cdd3d99bfd18528a0781995092b0e819e433a9\",\r\n  \"profileJsonSha256\": \"254f66cd5989e7bf93673a4a1ecd89a8be868c27b36c87e1780ae8fc8fffb9a7\",\r\n  \"rawSha256\": \"bd7f5e68f6a73d1a534ad12443f9276e7868459b1f8056e22146ee0116ce8aa8\",\r\n  \"modelLicense\": \"MIT\",\r\n  \"referenceLicense\": \"unknown; selected profile does not record reference license\",\r\n  \"durationSeconds\": 6.54,\r\n  \"renderSeconds\": 8.7,\r\n  \"synthesis\": {\r\n    \"exaggeration\": 0.5,\r\n    \"exaggerationReason\": null,\r\n    \"temperature\": 0.65,\r\n    \"repetitionPenalty\": 3.0,\r\n    \"cfgWeight\": 0.6,\r\n    \"languageId\": \"de\",\r\n    \"device\": \"cuda\",\r\n    \"precision\": \"fp16\",\r\n    \"t3WeightPrecision\": \"float16\",\r\n    \"conditioningPrecision\": \"float32\",\r\n    \"autocastPrecision\": \"float16\",\r\n    \"conditioningCached\": true,\r\n    \"referenceReconditionedForProfile\": \"8182da73a54c429391924d62ee339037\",\r\n    \"referenceConditioningVerifiedFloat32\": true,\r\n    \"modelSessionReused\": false,\r\n    \"cpuThreads\": 2,\r\n    \"inferenceMode\": true\r\n  },\r\n  \"listening\": \"pending\",\r\n  \"status\": \"private candidate\"\r\n}\r\n",
+          "sha256": "309212309287ac2b456916b8e053691db175e538fce453cbb99302b66dfcb29e"
+        },
+        "encoded": {
+          "text": "{\r\n  \"clipId\": \"stadt-klaus-dieter-klein-02\",\r\n  \"voiceId\": \"stadt-klaus-dieter-klein\",\r\n  \"actorId\": \"city-klaus-dieter-klein\",\r\n  \"region\": \"germany\",\r\n  \"slot\": 1,\r\n  \"sourceLocator\": \"For-AI/VOICE-CAST.json characters[gameCharacterId=city-klaus-dieter-klein].dialogue[region=germany,slot=1]\",\r\n  \"text\": \"Wenn das Feld zu klein ist, schreiben Sie kleiner. Der Vorgang wird davon nicht kleiner, aber er passt besser in den Ordner.\",\r\n  \"english\": \"If the box is too small, write smaller. That does not make the case smaller, but it fits in the folder better.\",\r\n  \"sourceSha256\": \"78416bbc9d74de68fc6b92bc5aef3a27a772b3c4925b8ed9e7cd89b62f80c4da\",\r\n  \"profileId\": \"8182da73a54c429391924d62ee339037\",\r\n  \"referenceSha256\": \"f39a69c03ca05dc5af6d3a81020e931eeccc0e1aa497d6aa2355f7b8fc16234b\",\r\n  \"referenceOriginalSha256\": \"a0de93a250f749c1bcd7f7cda9b12c2810c97dbe9426b602b2973b8c76fb9b3b\",\r\n  \"renderer\": \"ResembleAI/Chatterbox Multilingual V2 0.1.7\",\r\n  \"modelRevision\": \"5bb1f6ee58e50c3b8d408bc82a6d3740c2db6e18\",\r\n  \"processing\": null,\r\n  \"seed\": 71001,\r\n  \"synthesisAttempt\": 1,\r\n  \"authoringHelperSha256\": \"122d93bac3016f44b24cf04b97b7a2462d216226e33c9d6d6e05c5ae11a89349\",\r\n  \"rendererInputText\": \"Wenn das Feld zu klein ist, schreiben Sie kleiner. Der Vorgang wird davon nicht kleiner, aber er passt besser in den Ordner.\",\r\n  \"decode\": {\r\n    \"maxSpeechTokens\": 424,\r\n    \"attentionHooksBefore\": 0,\r\n    \"generatedSpeechTokens\": 165,\r\n    \"eosReached\": true,\r\n    \"t3InferenceSeconds\": 7.56,\r\n    \"temporaryAnalyzerHooksRemoved\": 3,\r\n    \"attentionHooksAfter\": 0\r\n  },\r\n  \"rendererInputBasis\": \"exact authored source\",\r\n  \"requestSha256\": \"061c060225a4993f86be27bc05cdd3d99bfd18528a0781995092b0e819e433a9\",\r\n  \"profileJsonSha256\": \"254f66cd5989e7bf93673a4a1ecd89a8be868c27b36c87e1780ae8fc8fffb9a7\",\r\n  \"rawSha256\": \"bd7f5e68f6a73d1a534ad12443f9276e7868459b1f8056e22146ee0116ce8aa8\",\r\n  \"modelLicense\": \"MIT\",\r\n  \"referenceLicense\": \"unknown; selected profile does not record reference license\",\r\n  \"durationSeconds\": 6.54,\r\n  \"renderSeconds\": 8.7,\r\n  \"synthesis\": {\r\n    \"exaggeration\": 0.5,\r\n    \"exaggerationReason\": null,\r\n    \"temperature\": 0.65,\r\n    \"repetitionPenalty\": 3.0,\r\n    \"cfgWeight\": 0.6,\r\n    \"languageId\": \"de\",\r\n    \"device\": \"cuda\",\r\n    \"precision\": \"fp16\",\r\n    \"t3WeightPrecision\": \"float16\",\r\n    \"conditioningPrecision\": \"float32\",\r\n    \"autocastPrecision\": \"float16\",\r\n    \"conditioningCached\": true,\r\n    \"referenceReconditionedForProfile\": \"8182da73a54c429391924d62ee339037\",\r\n    \"referenceConditioningVerifiedFloat32\": true,\r\n    \"modelSessionReused\": false,\r\n    \"cpuThreads\": 2,\r\n    \"inferenceMode\": true\r\n  },\r\n  \"listening\": \"pending\",\r\n  \"status\": \"eligible exact-text recording; human listening pending\",\r\n  \"processingSha256\": null,\r\n  \"normalization\": {\r\n    \"targetLufs\": -18,\r\n    \"targetTruePeakDbtp\": -1.5,\r\n    \"filter\": \"loudnorm=I=-15.73:TP=-1.8:LRA=11:linear=false\",\r\n    \"iterations\": 3\r\n  },\r\n  \"integratedLufs\": -18.17,\r\n  \"truePeakDbtp\": -2.14,\r\n  \"asr\": \"Wenn das Feld zu klein ist, schreiben sie kleiner. Der Vorgang wird davon nicht kleiner, aber er passt besser in den Ordner.\",\r\n  \"asrWordExact\": true,\r\n  \"asrLiteralWordExact\": true,\r\n  \"asrNormalization\": \"case/punctuation, German numeric and A38 spoken equivalents, guarded full-hour and date-ordinal equivalents, section sign/Paragraf orthography, German compound spacing\",\r\n  \"asrModel\": \"independent faster-whisper, cached local model, cpu int8 (effective int8_float32), no script prompt\",\r\n  \"asrCpuThreads\": 2,\r\n  \"asrDevice\": \"cpu\",\r\n  \"asrEffectiveComputeType\": \"int8_float32\",\r\n  \"asrLanguageId\": \"de\",\r\n  \"asrComputeType\": \"int8\",\r\n  \"asrScriptPrompt\": null,\r\n  \"asrBeamSize\": 1,\r\n  \"asrReadings\": [\r\n    {\r\n      \"beamSize\": 1,\r\n      \"transcript\": \"Wenn das Feld zu klein ist, schreiben sie kleiner. Der Vorgang wird davon nicht kleiner, aber er passt besser in den Ordner.\",\r\n      \"transcribeSeconds\": 10.55,\r\n      \"words\": [\r\n        {\r\n          \"word\": \" Wenn\",\r\n          \"start\": 0.0,\r\n          \"end\": 0.16\r\n        },\r\n        {\r\n          \"word\": \" das\",\r\n          \"start\": 0.16,\r\n          \"end\": 0.3\r\n        },\r\n        {\r\n          \"word\": \" Feld\",\r\n          \"start\": 0.3,\r\n          \"end\": 0.5\r\n        },\r\n        {\r\n          \"word\": \" zu\",\r\n          \"start\": 0.5,\r\n          \"end\": 0.64\r\n        },\r\n        {\r\n          \"word\": \" klein\",\r\n          \"start\": 0.64,\r\n          \"end\": 0.9\r\n        },\r\n        {\r\n          \"word\": \" ist,\",\r\n          \"start\": 0.9,\r\n          \"end\": 1.14\r\n        },\r\n        {\r\n          \"word\": \" schreiben\",\r\n          \"start\": 1.28,\r\n          \"end\": 1.54\r\n        },\r\n        {\r\n          \"word\": \" sie\",\r\n          \"start\": 1.54,\r\n          \"end\": 1.7\r\n        },\r\n        {\r\n          \"word\": \" kleiner.\",\r\n          \"start\": 1.7,\r\n          \"end\": 2.02\r\n        },\r\n        {\r\n          \"word\": \" Der\",\r\n          \"start\": 2.36,\r\n          \"end\": 2.8\r\n        },\r\n        {\r\n          \"word\": \" Vorgang\",\r\n          \"start\": 2.8,\r\n          \"end\": 3.14\r\n        },\r\n        {\r\n          \"word\": \" wird\",\r\n          \"start\": 3.14,\r\n          \"end\": 3.26\r\n        },\r\n        {\r\n          \"word\": \" davon\",\r\n          \"start\": 3.26,\r\n          \"end\": 3.52\r\n        },\r\n        {\r\n          \"word\": \" nicht\",\r\n          \"start\": 3.52,\r\n          \"end\": 3.7\r\n        },\r\n        {\r\n          \"word\": \" kleiner,\",\r\n          \"start\": 3.7,\r\n          \"end\": 4.04\r\n        },\r\n        {\r\n          \"word\": \" aber\",\r\n          \"start\": 4.3,\r\n          \"end\": 4.58\r\n        },\r\n        {\r\n          \"word\": \" er\",\r\n          \"start\": 4.58,\r\n          \"end\": 4.76\r\n        },\r\n        {\r\n          \"word\": \" passt\",\r\n          \"start\": 4.76,\r\n          \"end\": 4.92\r\n        },\r\n        {\r\n          \"word\": \" besser\",\r\n          \"start\": 4.92,\r\n          \"end\": 5.22\r\n        },\r\n        {\r\n          \"word\": \" in\",\r\n          \"start\": 5.22,\r\n          \"end\": 5.34\r\n        },\r\n        {\r\n          \"word\": \" den\",\r\n          \"start\": 5.34,\r\n          \"end\": 5.46\r\n        },\r\n        {\r\n          \"word\": \" Ordner.\",\r\n          \"start\": 5.46,\r\n          \"end\": 5.8\r\n        }\r\n      ]\r\n    }\r\n  ],\r\n  \"asrModelSha256\": \"e76620f83d5f5b69efd3d87e3dc180c1bd21df9fbebacfd4335e5e1efcc018da\",\r\n  \"asrModelDirectoryName\": \"voice-asr-model\",\r\n  \"wordCues\": [\r\n    {\r\n      \"at\": 0.0,\r\n      \"charIndex\": 0,\r\n      \"word\": \"Wenn\",\r\n      \"end\": 0.16\r\n    },\r\n    {\r\n      \"at\": 0.16,\r\n      \"charIndex\": 5,\r\n      \"word\": \"das\",\r\n      \"end\": 0.3\r\n    },\r\n    {\r\n      \"at\": 0.3,\r\n      \"charIndex\": 9,\r\n      \"word\": \"Feld\",\r\n      \"end\": 0.5\r\n    },\r\n    {\r\n      \"at\": 0.5,\r\n      \"charIndex\": 14,\r\n      \"word\": \"zu\",\r\n      \"end\": 0.64\r\n    },\r\n    {\r\n      \"at\": 0.64,\r\n      \"charIndex\": 17,\r\n      \"word\": \"klein\",\r\n      \"end\": 0.9\r\n    },\r\n    {\r\n      \"at\": 0.9,\r\n      \"charIndex\": 23,\r\n      \"word\": \"ist\",\r\n      \"end\": 1.14\r\n    },\r\n    {\r\n      \"at\": 1.28,\r\n      \"charIndex\": 28,\r\n      \"word\": \"schreiben\",\r\n      \"end\": 1.54\r\n    },\r\n    {\r\n      \"at\": 1.54,\r\n      \"charIndex\": 38,\r\n      \"word\": \"Sie\",\r\n      \"end\": 1.7\r\n    },\r\n    {\r\n      \"at\": 1.7,\r\n      \"charIndex\": 42,\r\n      \"word\": \"kleiner\",\r\n      \"end\": 2.02\r\n    },\r\n    {\r\n      \"at\": 2.36,\r\n      \"charIndex\": 51,\r\n      \"word\": \"Der\",\r\n      \"end\": 2.8\r\n    },\r\n    {\r\n      \"at\": 2.8,\r\n      \"charIndex\": 55,\r\n      \"word\": \"Vorgang\",\r\n      \"end\": 3.14\r\n    },\r\n    {\r\n      \"at\": 3.14,\r\n      \"charIndex\": 63,\r\n      \"word\": \"wird\",\r\n      \"end\": 3.26\r\n    },\r\n    {\r\n      \"at\": 3.26,\r\n      \"charIndex\": 68,\r\n      \"word\": \"davon\",\r\n      \"end\": 3.52\r\n    },\r\n    {\r\n      \"at\": 3.52,\r\n      \"charIndex\": 74,\r\n      \"word\": \"nicht\",\r\n      \"end\": 3.7\r\n    },\r\n    {\r\n      \"at\": 3.7,\r\n      \"charIndex\": 80,\r\n      \"word\": \"kleiner\",\r\n      \"end\": 4.04\r\n    },\r\n    {\r\n      \"at\": 4.3,\r\n      \"charIndex\": 89,\r\n      \"word\": \"aber\",\r\n      \"end\": 4.58\r\n    },\r\n    {\r\n      \"at\": 4.58,\r\n      \"charIndex\": 94,\r\n      \"word\": \"er\",\r\n      \"end\": 4.76\r\n    },\r\n    {\r\n      \"at\": 4.76,\r\n      \"charIndex\": 97,\r\n      \"word\": \"passt\",\r\n      \"end\": 4.92\r\n    },\r\n    {\r\n      \"at\": 4.92,\r\n      \"charIndex\": 103,\r\n      \"word\": \"besser\",\r\n      \"end\": 5.22\r\n    },\r\n    {\r\n      \"at\": 5.22,\r\n      \"charIndex\": 110,\r\n      \"word\": \"in\",\r\n      \"end\": 5.34\r\n    },\r\n    {\r\n      \"at\": 5.34,\r\n      \"charIndex\": 113,\r\n      \"word\": \"den\",\r\n      \"end\": 5.46\r\n    },\r\n    {\r\n      \"at\": 5.46,\r\n      \"charIndex\": 117,\r\n      \"word\": \"Ordner\",\r\n      \"end\": 5.8\r\n    }\r\n  ],\r\n  \"sha256\": \"4f983233e8f934cf3ff1f7ec5a21b801876407463a1b2e596f5d942798c324c7\",\r\n  \"bytes\": 105644,\r\n  \"sampleRateHz\": 48000,\r\n  \"channels\": 1,\r\n  \"bitrateBitsPerSecond\": 128000,\r\n  \"file\": \"assets/voices/city-dialogue/stadt-klaus-dieter-klein-02.mp3\"\r\n}\r\n",
+          "sha256": "493fcb4abba3bb0537c62777c359ff6e5307f6b58b02480fa40e777dfdd6fe62"
+        }
+      },
+      "stadt-klaus-dieter-klein-03": {
+        "raw": {
+          "text": "{\r\n  \"clipId\": \"stadt-klaus-dieter-klein-03\",\r\n  \"voiceId\": \"stadt-klaus-dieter-klein\",\r\n  \"actorId\": \"city-klaus-dieter-klein\",\r\n  \"region\": \"berlin\",\r\n  \"slot\": 0,\r\n  \"sourceLocator\": \"For-AI/VOICE-CAST.json characters[gameCharacterId=city-klaus-dieter-klein].dialogue[region=berlin,slot=0]\",\r\n  \"text\": \"Ich würde erst das richtige Formular nehmen. With the wrong one können Sie sehr ordentlich in the wrong direction arbeiten.\",\r\n  \"english\": \"I would start with the right form. With the wrong one, you can work very neatly in the wrong direction.\",\r\n  \"sourceSha256\": \"0fb775f2b06a4279eb18756aae5c3e2a894d1018addfcb9e013ebe3ecc68a94d\",\r\n  \"profileId\": \"8182da73a54c429391924d62ee339037\",\r\n  \"referenceSha256\": \"f39a69c03ca05dc5af6d3a81020e931eeccc0e1aa497d6aa2355f7b8fc16234b\",\r\n  \"referenceOriginalSha256\": \"a0de93a250f749c1bcd7f7cda9b12c2810c97dbe9426b602b2973b8c76fb9b3b\",\r\n  \"renderer\": \"ResembleAI/Chatterbox Multilingual V2 0.1.7\",\r\n  \"modelRevision\": \"5bb1f6ee58e50c3b8d408bc82a6d3740c2db6e18\",\r\n  \"processing\": null,\r\n  \"seed\": 171002,\r\n  \"synthesisAttempt\": 2,\r\n  \"authoringHelperSha256\": \"122d93bac3016f44b24cf04b97b7a2462d216226e33c9d6d6e05c5ae11a89349\",\r\n  \"rendererInputText\": \"Ich würde erst das richtige Formular nehmen. With the wrong one können Sie sehr ordentlich in the wrong direction arbeiten.\",\r\n  \"decode\": {\r\n    \"maxSpeechTokens\": 400,\r\n    \"attentionHooksBefore\": 0,\r\n    \"generatedSpeechTokens\": 168,\r\n    \"eosReached\": true,\r\n    \"t3InferenceSeconds\": 7.05,\r\n    \"temporaryAnalyzerHooksRemoved\": 6,\r\n    \"attentionHooksAfter\": 0\r\n  },\r\n  \"rendererInputBasis\": \"exact authored source\",\r\n  \"requestSha256\": \"061c060225a4993f86be27bc05cdd3d99bfd18528a0781995092b0e819e433a9\",\r\n  \"profileJsonSha256\": \"254f66cd5989e7bf93673a4a1ecd89a8be868c27b36c87e1780ae8fc8fffb9a7\",\r\n  \"rawSha256\": \"6d2b73af062b7deffc54ec247b79ec21683a3818e4b2efb78a0097be7db1473b\",\r\n  \"modelLicense\": \"MIT\",\r\n  \"referenceLicense\": \"unknown; selected profile does not record reference license\",\r\n  \"durationSeconds\": 6.66,\r\n  \"renderSeconds\": 8.36,\r\n  \"synthesis\": {\r\n    \"exaggeration\": 0.5,\r\n    \"exaggerationReason\": null,\r\n    \"temperature\": 0.65,\r\n    \"repetitionPenalty\": 3.0,\r\n    \"cfgWeight\": 0.6,\r\n    \"languageId\": \"de\",\r\n    \"device\": \"cuda\",\r\n    \"precision\": \"fp16\",\r\n    \"t3WeightPrecision\": \"float16\",\r\n    \"conditioningPrecision\": \"float32\",\r\n    \"autocastPrecision\": \"float16\",\r\n    \"conditioningCached\": true,\r\n    \"referenceReconditionedForProfile\": \"8182da73a54c429391924d62ee339037\",\r\n    \"referenceConditioningVerifiedFloat32\": true,\r\n    \"modelSessionReused\": false,\r\n    \"cpuThreads\": 2,\r\n    \"inferenceMode\": true\r\n  },\r\n  \"listening\": \"pending\",\r\n  \"status\": \"private candidate\"\r\n}\r\n",
+          "sha256": "bb7ed10605f6929b69aeb3f047a958ca0ebd0cf9e3862052e2bd87421f4813e7"
+        },
+        "encoded": {
+          "text": "{\r\n  \"clipId\": \"stadt-klaus-dieter-klein-03\",\r\n  \"voiceId\": \"stadt-klaus-dieter-klein\",\r\n  \"actorId\": \"city-klaus-dieter-klein\",\r\n  \"region\": \"berlin\",\r\n  \"slot\": 0,\r\n  \"sourceLocator\": \"For-AI/VOICE-CAST.json characters[gameCharacterId=city-klaus-dieter-klein].dialogue[region=berlin,slot=0]\",\r\n  \"text\": \"Ich würde erst das richtige Formular nehmen. With the wrong one können Sie sehr ordentlich in the wrong direction arbeiten.\",\r\n  \"english\": \"I would start with the right form. With the wrong one, you can work very neatly in the wrong direction.\",\r\n  \"sourceSha256\": \"0fb775f2b06a4279eb18756aae5c3e2a894d1018addfcb9e013ebe3ecc68a94d\",\r\n  \"profileId\": \"8182da73a54c429391924d62ee339037\",\r\n  \"referenceSha256\": \"f39a69c03ca05dc5af6d3a81020e931eeccc0e1aa497d6aa2355f7b8fc16234b\",\r\n  \"referenceOriginalSha256\": \"a0de93a250f749c1bcd7f7cda9b12c2810c97dbe9426b602b2973b8c76fb9b3b\",\r\n  \"renderer\": \"ResembleAI/Chatterbox Multilingual V2 0.1.7\",\r\n  \"modelRevision\": \"5bb1f6ee58e50c3b8d408bc82a6d3740c2db6e18\",\r\n  \"processing\": null,\r\n  \"seed\": 171002,\r\n  \"synthesisAttempt\": 2,\r\n  \"authoringHelperSha256\": \"122d93bac3016f44b24cf04b97b7a2462d216226e33c9d6d6e05c5ae11a89349\",\r\n  \"rendererInputText\": \"Ich würde erst das richtige Formular nehmen. With the wrong one können Sie sehr ordentlich in the wrong direction arbeiten.\",\r\n  \"decode\": {\r\n    \"maxSpeechTokens\": 400,\r\n    \"attentionHooksBefore\": 0,\r\n    \"generatedSpeechTokens\": 168,\r\n    \"eosReached\": true,\r\n    \"t3InferenceSeconds\": 7.05,\r\n    \"temporaryAnalyzerHooksRemoved\": 6,\r\n    \"attentionHooksAfter\": 0\r\n  },\r\n  \"rendererInputBasis\": \"exact authored source\",\r\n  \"requestSha256\": \"061c060225a4993f86be27bc05cdd3d99bfd18528a0781995092b0e819e433a9\",\r\n  \"profileJsonSha256\": \"254f66cd5989e7bf93673a4a1ecd89a8be868c27b36c87e1780ae8fc8fffb9a7\",\r\n  \"rawSha256\": \"6d2b73af062b7deffc54ec247b79ec21683a3818e4b2efb78a0097be7db1473b\",\r\n  \"modelLicense\": \"MIT\",\r\n  \"referenceLicense\": \"unknown; selected profile does not record reference license\",\r\n  \"durationSeconds\": 6.66,\r\n  \"renderSeconds\": 8.36,\r\n  \"synthesis\": {\r\n    \"exaggeration\": 0.5,\r\n    \"exaggerationReason\": null,\r\n    \"temperature\": 0.65,\r\n    \"repetitionPenalty\": 3.0,\r\n    \"cfgWeight\": 0.6,\r\n    \"languageId\": \"de\",\r\n    \"device\": \"cuda\",\r\n    \"precision\": \"fp16\",\r\n    \"t3WeightPrecision\": \"float16\",\r\n    \"conditioningPrecision\": \"float32\",\r\n    \"autocastPrecision\": \"float16\",\r\n    \"conditioningCached\": true,\r\n    \"referenceReconditionedForProfile\": \"8182da73a54c429391924d62ee339037\",\r\n    \"referenceConditioningVerifiedFloat32\": true,\r\n    \"modelSessionReused\": false,\r\n    \"cpuThreads\": 2,\r\n    \"inferenceMode\": true\r\n  },\r\n  \"listening\": \"pending\",\r\n  \"status\": \"eligible exact-text recording; human listening pending\",\r\n  \"processingSha256\": null,\r\n  \"normalization\": {\r\n    \"targetLufs\": -18,\r\n    \"targetTruePeakDbtp\": -1.5,\r\n    \"filter\": \"loudnorm=I=-16.69:TP=-1.8:LRA=11:linear=false\",\r\n    \"iterations\": 3\r\n  },\r\n  \"integratedLufs\": -18.17,\r\n  \"truePeakDbtp\": -2.19,\r\n  \"asr\": \"Ich würde erst das richtige Formular nehmen. With the wrong one können Sie sehr ordentlich in the wrong direction arbeiten.\",\r\n  \"asrWordExact\": true,\r\n  \"asrLiteralWordExact\": true,\r\n  \"asrNormalization\": \"case/punctuation, German numeric and A38 spoken equivalents, guarded full-hour and date-ordinal equivalents, section sign/Paragraf orthography, German compound spacing\",\r\n  \"asrModel\": \"independent faster-whisper, cached local model, cpu int8 (effective int8_float32), no script prompt\",\r\n  \"asrCpuThreads\": 2,\r\n  \"asrDevice\": \"cpu\",\r\n  \"asrEffectiveComputeType\": \"int8_float32\",\r\n  \"asrLanguageId\": \"de\",\r\n  \"asrComputeType\": \"int8\",\r\n  \"asrScriptPrompt\": null,\r\n  \"asrBeamSize\": 1,\r\n  \"asrReadings\": [\r\n    {\r\n      \"beamSize\": 1,\r\n      \"transcript\": \"Ich würde erst das richtige Formular nehmen. With the wrong one können Sie sehr ordentlich in the wrong direction arbeiten.\",\r\n      \"transcribeSeconds\": 10.17,\r\n      \"words\": [\r\n        {\r\n          \"word\": \" Ich\",\r\n          \"start\": 0.0,\r\n          \"end\": 0.2\r\n        },\r\n        {\r\n          \"word\": \" würde\",\r\n          \"start\": 0.2,\r\n          \"end\": 0.4\r\n        },\r\n        {\r\n          \"word\": \" erst\",\r\n          \"start\": 0.4,\r\n          \"end\": 0.7\r\n        },\r\n        {\r\n          \"word\": \" das\",\r\n          \"start\": 0.7,\r\n          \"end\": 0.9\r\n        },\r\n        {\r\n          \"word\": \" richtige\",\r\n          \"start\": 0.9,\r\n          \"end\": 1.22\r\n        },\r\n        {\r\n          \"word\": \" Formular\",\r\n          \"start\": 1.22,\r\n          \"end\": 1.7\r\n        },\r\n        {\r\n          \"word\": \" nehmen.\",\r\n          \"start\": 1.7,\r\n          \"end\": 2.04\r\n        },\r\n        {\r\n          \"word\": \" With\",\r\n          \"start\": 2.38,\r\n          \"end\": 2.72\r\n        },\r\n        {\r\n          \"word\": \" the\",\r\n          \"start\": 2.72,\r\n          \"end\": 2.84\r\n        },\r\n        {\r\n          \"word\": \" wrong\",\r\n          \"start\": 2.84,\r\n          \"end\": 3.04\r\n        },\r\n        {\r\n          \"word\": \" one\",\r\n          \"start\": 3.04,\r\n          \"end\": 3.32\r\n        },\r\n        {\r\n          \"word\": \" können\",\r\n          \"start\": 3.32,\r\n          \"end\": 3.8\r\n        },\r\n        {\r\n          \"word\": \" Sie\",\r\n          \"start\": 3.8,\r\n          \"end\": 3.94\r\n        },\r\n        {\r\n          \"word\": \" sehr\",\r\n          \"start\": 3.94,\r\n          \"end\": 4.14\r\n        },\r\n        {\r\n          \"word\": \" ordentlich\",\r\n          \"start\": 4.14,\r\n          \"end\": 4.6\r\n        },\r\n        {\r\n          \"word\": \" in\",\r\n          \"start\": 4.6,\r\n          \"end\": 4.74\r\n        },\r\n        {\r\n          \"word\": \" the\",\r\n          \"start\": 4.74,\r\n          \"end\": 4.84\r\n        },\r\n        {\r\n          \"word\": \" wrong\",\r\n          \"start\": 4.84,\r\n          \"end\": 5.04\r\n        },\r\n        {\r\n          \"word\": \" direction\",\r\n          \"start\": 5.04,\r\n          \"end\": 5.3\r\n        },\r\n        {\r\n          \"word\": \" arbeiten.\",\r\n          \"start\": 5.3,\r\n          \"end\": 5.96\r\n        }\r\n      ]\r\n    }\r\n  ],\r\n  \"asrModelSha256\": \"e76620f83d5f5b69efd3d87e3dc180c1bd21df9fbebacfd4335e5e1efcc018da\",\r\n  \"asrModelDirectoryName\": \"voice-asr-model\",\r\n  \"wordCues\": [\r\n    {\r\n      \"at\": 0.0,\r\n      \"charIndex\": 0,\r\n      \"word\": \"Ich\",\r\n      \"end\": 0.2\r\n    },\r\n    {\r\n      \"at\": 0.2,\r\n      \"charIndex\": 4,\r\n      \"word\": \"würde\",\r\n      \"end\": 0.4\r\n    },\r\n    {\r\n      \"at\": 0.4,\r\n      \"charIndex\": 10,\r\n      \"word\": \"erst\",\r\n      \"end\": 0.7\r\n    },\r\n    {\r\n      \"at\": 0.7,\r\n      \"charIndex\": 15,\r\n      \"word\": \"das\",\r\n      \"end\": 0.9\r\n    },\r\n    {\r\n      \"at\": 0.9,\r\n      \"charIndex\": 19,\r\n      \"word\": \"richtige\",\r\n      \"end\": 1.22\r\n    },\r\n    {\r\n      \"at\": 1.22,\r\n      \"charIndex\": 28,\r\n      \"word\": \"Formular\",\r\n      \"end\": 1.7\r\n    },\r\n    {\r\n      \"at\": 1.7,\r\n      \"charIndex\": 37,\r\n      \"word\": \"nehmen\",\r\n      \"end\": 2.04\r\n    },\r\n    {\r\n      \"at\": 2.38,\r\n      \"charIndex\": 45,\r\n      \"word\": \"With\",\r\n      \"end\": 2.72\r\n    },\r\n    {\r\n      \"at\": 2.72,\r\n      \"charIndex\": 50,\r\n      \"word\": \"the\",\r\n      \"end\": 2.84\r\n    },\r\n    {\r\n      \"at\": 2.84,\r\n      \"charIndex\": 54,\r\n      \"word\": \"wrong\",\r\n      \"end\": 3.04\r\n    },\r\n    {\r\n      \"at\": 3.04,\r\n      \"charIndex\": 60,\r\n      \"word\": \"one\",\r\n      \"end\": 3.32\r\n    },\r\n    {\r\n      \"at\": 3.32,\r\n      \"charIndex\": 64,\r\n      \"word\": \"können\",\r\n      \"end\": 3.8\r\n    },\r\n    {\r\n      \"at\": 3.8,\r\n      \"charIndex\": 71,\r\n      \"word\": \"Sie\",\r\n      \"end\": 3.94\r\n    },\r\n    {\r\n      \"at\": 3.94,\r\n      \"charIndex\": 75,\r\n      \"word\": \"sehr\",\r\n      \"end\": 4.14\r\n    },\r\n    {\r\n      \"at\": 4.14,\r\n      \"charIndex\": 80,\r\n      \"word\": \"ordentlich\",\r\n      \"end\": 4.6\r\n    },\r\n    {\r\n      \"at\": 4.6,\r\n      \"charIndex\": 91,\r\n      \"word\": \"in\",\r\n      \"end\": 4.74\r\n    },\r\n    {\r\n      \"at\": 4.74,\r\n      \"charIndex\": 94,\r\n      \"word\": \"the\",\r\n      \"end\": 4.84\r\n    },\r\n    {\r\n      \"at\": 4.84,\r\n      \"charIndex\": 98,\r\n      \"word\": \"wrong\",\r\n      \"end\": 5.04\r\n    },\r\n    {\r\n      \"at\": 5.04,\r\n      \"charIndex\": 104,\r\n      \"word\": \"direction\",\r\n      \"end\": 5.3\r\n    },\r\n    {\r\n      \"at\": 5.3,\r\n      \"charIndex\": 114,\r\n      \"word\": \"arbeiten\",\r\n      \"end\": 5.96\r\n    }\r\n  ],\r\n  \"sha256\": \"762a969a2a986e0bd4554384a9dca01960fe6b2d0578c9699788f554b1609ad4\",\r\n  \"bytes\": 107564,\r\n  \"sampleRateHz\": 48000,\r\n  \"channels\": 1,\r\n  \"bitrateBitsPerSecond\": 128000,\r\n  \"file\": \"assets/voices/city-dialogue/stadt-klaus-dieter-klein-03.mp3\"\r\n}\r\n",
+          "sha256": "7430b99136aedd8875eddbecbe1b43104518059a34f9915f7f5dd62a821565cc"
+        }
+      }
+    }
+  }
+}
