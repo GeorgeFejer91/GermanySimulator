@@ -10,7 +10,7 @@ const root = resolve('.'), out = resolve('output/playwright/welcome');
 mkdirSync(out, {recursive: true});
 const mime = {'.html': 'text/html', '.js': 'text/javascript', '.css': 'text/css',
   '.json': 'application/json', '.webp': 'image/webp', '.mp3': 'audio/mpeg', '.ttf': 'font/ttf'};
-const files = ['game.js', 'game-hud.js', 'styles.css', 'index.html'];
+const files = ['game.js', 'game-hud.js', 'game-hud.css', 'styles.css', 'index.html'];
 const report = {complete: false, hashes: Object.fromEntries(files.map(file => [file,
   createHash('sha256').update(readFileSync(resolve(root, file))).digest('hex')])), cases: [],
   limits: ['S uses the production welcome path while skipping the humor form',
@@ -35,14 +35,14 @@ const cases = [
   ['desktop', 1280, 800], ['wide', 1920, 1080], ['android-portrait', 390, 844],
   ['android-landscape', 844, 390], ['reflow-320', 320, 640],
   ['zoom-200', 640, 1280, 'zoom'], ['text-200', 320, 900, 'text'],
-  ['text-spacing', 390, 844, 'spacing'], ['muted', 390, 844, 'muted'],
+  ['reduced-motion', 390, 844, 'reduced'], ['text-spacing', 390, 844, 'spacing'], ['muted', 390, 844, 'muted'],
   ['germany-en', 320, 700, 'germany'], ['landscape-text-200', 844, 390, 'text'],
 ];
 try {
   for (const [name, width, height, mode] of cases) {
     if (process.env.WELCOME_CASE && name !== process.env.WELCOME_CASE) continue;
     const mobile = name.startsWith('android') || width < 500;
-    const context = await browser.newContext({viewport: {width, height}, isMobile: mobile, hasTouch: mobile});
+    const context = await browser.newContext({viewport: {width, height}, isMobile: mobile, hasTouch: mobile, reducedMotion: mode === 'reduced' ? 'reduce' : 'no-preference'});
     const page = await context.newPage(), errors = [];
     page.on('pageerror', error => errors.push(error.message));
     await context.addInitScript(() => {
@@ -57,8 +57,9 @@ try {
         }
         return connect.call(this, target, ...args);
       };
+      window.SpeechSynthesisUtterance = class {constructor(text) {this.text = text}};
       Object.defineProperty(window, 'speechSynthesis', {configurable: true, value: {
-        speaking: false, pending: false, getVoices: () => [], cancel() {this.speaking = false},
+        speaking: false, pending: false, getVoices: () => [{name:"Microsoft Katja - German (Germany)",lang:"de-DE",localService:true}], cancel() {this.speaking = false},
         speak(utterance) {this.speaking = true; __spoken.push(utterance)},
       }});
     });
@@ -77,6 +78,32 @@ try {
         else __welcomeTest.state.voiceOn = false;
         __welcomeTest.openHumorWelcome();
       }, mode);
+      const motion = await page.evaluate(() => {
+        const sheet = document.getElementById('dialogue'), machine = document.querySelector('.welcome-fax-machine');
+        const animation = sheet.getAnimations().find(a => a.animationName === 'welcome-fax-feed');
+        const result = {visible: getComputedStyle(machine).display !== 'none', animated: !!animation};
+        if (animation) {
+          animation.pause(); animation.currentTime = 100;
+          result.earlyTop = sheet.getBoundingClientRect().top;
+          animation.currentTime = 600; result.middleTop = sheet.getBoundingClientRect().top;
+          animation.finish(); result.finalTop = sheet.getBoundingClientRect().top;
+          result.machineTop = machine.getBoundingClientRect().top;
+        }
+        return result;
+      });
+      assert.equal(motion.visible, true, name + ': fixed fax outlet');
+      assert.equal(motion.animated, mode !== 'reduced', name + ': reduced motion keeps paper immediately readable');
+      if (motion.animated) {
+        assert(motion.earlyTop > motion.middleTop && motion.middleTop > motion.finalTop, name + ': paper feeds upward');
+        assert(motion.earlyTop > motion.machineTop, name + ': sheet starts behind the stationary outlet');
+      }
+      if (name === 'desktop') {
+        for (const [frame, time] of [['early', 100], ['middle', 600]]) {
+          await page.evaluate(time => {const animation = document.getElementById('dialogue').getAnimations()[0]; animation.pause(); animation.currentTime = time}, time);
+          await page.screenshot({path: resolve(out, 'fax-feed-' + frame + '.png')});
+        }
+        await page.evaluate(() => document.getElementById('dialogue').getAnimations()[0].finish());
+      }
       const pages = [];
       for (let index = 0; index < 2; index++) {
         await page.waitForFunction(() => document.getElementById('dialogue-text').dataset.measurement === 'pretext-0.0.9');
@@ -135,11 +162,18 @@ try {
         if (mobile) await nextTap(page); else await page.locator('#dialogue-next').click();
       }
       assert.equal(await page.locator('#dialogue').isVisible(), false, name);
+      assert.equal(await page.locator('.welcome-fax-machine').isVisible(), false, name + ': outlet clears with briefing');
       assert.equal(await page.evaluate(() => __welcomeTest.state.modal), false, name);
       if (mobile) assert.equal(await page.locator('.control-dock').isVisible(), true, `${name}: controls return`);
+      if (name === 'desktop') {
+        await page.evaluate(() => __welcomeTest.openHumorWelcome());
+        await page.keyboard.press('e'); await page.keyboard.press('e');
+        assert.equal(await page.locator('#dialogue').isVisible(), false, 'E can finish during the feed');
+        assert.equal(await page.locator('.welcome-fax-machine').isVisible(), false, 'early finish clears the outlet');
+      }
       assert.deepEqual(errors, [], name);
-      report.cases.push({name, pages, errors});
-      console.log(`${name}: two readable popups, one action, exact automatic narration`);
+      report.cases.push({name, motion, pages, errors});
+      console.log(`${name}: fax feed, two readable sheets, one action, exact automatic narration`);
     } catch (error) {
       await page.screenshot({path: resolve(out, `${name}-failure.png`)});
       throw error;

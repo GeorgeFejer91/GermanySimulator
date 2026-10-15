@@ -30,7 +30,7 @@
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=UnifrakturCook:wght@700&amp;display=swap" media="print" onload="this.media='all'">
   <link rel="stylesheet" href="./styles.css?v=20261015-city-dialogue-fit">
   <link rel="stylesheet" href="./buergeramt.css?v=20261014-level-links">
-  <link rel="stylesheet" href="./game-hud.css?v=20261015-award-visibility">
+  <link rel="stylesheet" href="./game-hud.css?v=20261015-welcome-fax">
 </head>
 <body class="preloading">
 <section id="preload" aria-label="Spiel wird geladen" aria-busy="true">
@@ -90,6 +90,7 @@
   <section id="border-alert" class="border-alert" hidden aria-live="polite"><small>BRANDMAUER</small><b id="border-title">DEUTSCHLAND</b><p id="border-copy">BERLIN LIEGT HINTER DER BRANDMAUER. AB HIER NUR NOCH DEUTSCH.</p></section>
   <div id="interact-hint" class="interact-hint" hidden>INTERAGIEREN · E</div>
   <section id="dialogue" class="dialogue" hidden><div id="portrait" class="portrait">§</div><div class="dialogue-copy" tabindex="0"><small id="speaker">SACHBEARBEITUNG</small><p id="dialogue-text"></p><span id="voice-state" class="voice-state">SPRECHENDE BEHÖRDE</span></div><div class="dialogue-actions"><button id="dialogue-speak" type="button" aria-label="Repeat spoken dialogue">🔊</button><button id="dialogue-next" type="button">WEITER</button></div></section>
+  <div class="welcome-fax-machine" aria-hidden="true"></div>
   <section id="form-modal" class="modal" hidden><form id="bureaucracy-form" class="paper"><div class="paper-head"><span>BUNDESREPUBLIK · SPIELFORMULAR</span><span id="form-code">A38</span></div><h2 id="form-title">Antrag auf Antragstellung</h2><p id="form-subtitle"></p><div id="form-fields" class="form-fields"></div><div class="paper-actions"><span id="form-error"></span><button type="submit">EINREICHEN</button></div></form></section>
   <section id="amt-level" class="amt-level" hidden role="region" aria-labelledby="amt-title"><div class="amt-room" aria-hidden="true"><div class="amt-back-wall"><div class="amt-clock">12:00</div><div class="amt-sign">BÜRGERAMT <span id="amt-room-counter">AUFRUF</span></div><div class="amt-window"><div class="amt-clerk">§</div></div><div class="amt-floor"></div></div></div><div class="amt-sheet"><header><span>ANMELDUNG · VORGANG 1/8</span><button id="amt-exit" type="button">AMT VERLASSEN</button></header><small id="amt-status" role="status"></small><h2 id="amt-title"><span id="amt-speaker"></span></h2><p id="amt-line"></p><div id="amt-actions" class="amt-actions"></div></div></section>
   <div id="amt-walk-hud" class="amt-walk-hud" hidden><div class="amt-walk-top"><b id="amt-objective">BÜRGERAMT · EINGANG</b><button id="amt-leave" type="button">AMT VERLASSEN</button><a id="amt-compact-reset" href="?geheim=buergeramt">NEU STARTEN</a></div><div class="amt-reticle" aria-hidden="true">+</div><div class="amt-walk-bottom"><span>↑↓ / WASD · GEHEN &nbsp; ←→ · DREHEN &nbsp; MAUS · BLICK &nbsp; E · INTERAGIEREN</span><strong id="amt-nearby">ZUR EINGANGSTÜR</strong></div><div id="amt-ambient" class="amt-ambient" aria-live="polite" tabindex="0"></div>

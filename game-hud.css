@@ -146,6 +146,41 @@
 .anmeldung-medal i{position:absolute;top:.3rem;left:.4rem;width:2.9rem;border-top:3px double #7c641e}
 #germanness-hud .anmeldung-medal-label{display:block;width:100%;font:700 .625rem/1.35 "Courier New",monospace;text-align:center;white-space:normal;overflow-wrap:normal;word-break:normal}
 
+.dialogue.welcome:not([hidden]){
+ bottom:calc(var(--subtitle-height) + 62px);
+ max-height:calc(var(--humor-viewport-height,100dvh) - var(--subtitle-height) - var(--welcome-top,100px) - 82px);
+ padding:18px 24px;border:1px solid #746d5e;border-inline:9px dotted #c0b7a3;
+ background:repeating-linear-gradient(0deg,transparent 0 3px,#71685008 3px 4px),#f6f0df;
+ box-shadow:3px 4px 0 #24211c45;
+ animation:welcome-fax-feed 1.1s linear both;
+}
+.dialogue.welcome small{padding-bottom:10px;border-bottom:1px dashed #a69b85;font-family:"Courier New",monospace;letter-spacing:.08em}
+.dialogue.welcome p{font-family:"Courier New",monospace;font-weight:400}
+.dialogue.welcome #dialogue-next{border-color:#746d5e;background:#eee8d8;color:#28261f;font-family:"Courier New",monospace}
+.dialogue.welcome #dialogue-next:focus-visible{outline:3px solid #833a31;outline-offset:2px}
+.welcome-fax-machine{display:none;position:fixed;z-index:31;left:50%;bottom:calc(var(--subtitle-height) + 8px);transform:translateX(-50%);width:min(720px,calc(100% - 12px));height:56px;pointer-events:none;border:2px solid #49463e;border-top:7px solid #656158;background:linear-gradient(#b0aa9c,#8c877b);box-shadow:3px 4px 0 #24211c45}
+.dialogue.welcome:not([hidden])+.welcome-fax-machine{display:block}
+.welcome-fax-machine::before{content:"";position:absolute;top:0;left:12px;right:12px;height:8px;border-top:2px solid #25241f;background:#292823;box-shadow:0 3px 0 #cbc4b3}
+.welcome-fax-machine::after{content:"";position:absolute;inset:19px 14px 7px;background:radial-gradient(circle at 7px 50%,#b9d887 0 3px,#4e5b37 4px 6px,transparent 7px),repeating-linear-gradient(90deg,#37362f 0 9px,transparent 9px 15px) right center/55px 12px no-repeat,linear-gradient(#c8c1af,#c8c1af) center/80px 10px no-repeat}
+@keyframes welcome-fax-feed{
+ 0%{translate:0 calc(100% + 76px)}
+ 12%{translate:0 calc(88% + 60px)}
+ 16%{translate:0 calc(88% + 60px)}
+ 40%{translate:0 calc(60% + 35px)}
+ 44%{translate:0 calc(60% + 35px)}
+ 72%{translate:0 27%}
+ 76%{translate:0 27%}
+ 100%{translate:0 0}
+}
+@media(max-width:480px){.dialogue.welcome:not([hidden]){padding:12px 14px;border-inline-width:6px}}
+@media(orientation:landscape) and (max-height:500px){
+ .dialogue.welcome:not([hidden]){bottom:calc(var(--subtitle-height) + 34px);max-height:calc(var(--humor-viewport-height,100dvh) - var(--subtitle-height) - var(--welcome-top,100px) - 50px);padding:8px 14px;gap:6px}
+ .welcome-fax-machine{height:28px;border-top-width:4px}
+ .welcome-fax-machine::before{height:4px;box-shadow:0 2px 0 #cbc4b3}
+ .welcome-fax-machine::after{inset:10px 14px 3px;background-size:auto,55px 8px,80px 6px}
+}
+@media(prefers-reduced-motion:reduce){.dialogue.welcome:not([hidden]){animation:none}}
+
 #app:has(.dialogue.neighbor:not([hidden])) .interact-hint{display:none}
 @media(orientation:landscape) and (max-height:500px){
  .dialogue.neighbor:not([hidden]){left:auto;right:8px;transform:none;max-width:calc(50vw - 16px)}
