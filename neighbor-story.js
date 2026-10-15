@@ -137,7 +137,7 @@
      guide('inga-free-dinosaur',"Hartmut hat heute gesagt, er wolle ein Dinosaurier sein. Wir haben gefragt, bis wann. Jetzt sagt er, Erwachsene seien ausgestorben, hätten es aber noch nicht bemerkt. Das ist sprachlich erstaunlich präzise.","Hartmut said today that he wanted to be a dinosaur. We asked by when. Now he says adults are extinct but have not noticed yet. That is linguistically remarkably precise.")
     ]},
     {id:'inga-free-islands',point:{x:1090,y:4710},lookAt:{x:1157,y:4747},gesture:'listen',walkLines:[guide('inga-free-walk','Zu den Platten. Diesmal gehen wir ohne Agenda. Fast.','To the paving stones. This time we are walking without an agenda. Almost.')],lines:[
-     guide('inga-free-referee','Hier sind seine Inseln. Der liegende Gartenzwerg ist Schiedsrichter, offenbar ohne Feedbackgespräch. Vielleicht lassen wir das heute einfach so. Bitte erzählen Sie Heiko nicht, dass ich einen Prozess ohne Abschlussbericht zugelassen habe.','Here are his islands. The fallen garden gnome is the referee, apparently without a feedback meeting. Perhaps we will simply leave it that way today. Please do not tell Heiko I allowed a process without a final report.')
+     guide('inga-free-referee','Hier sind seine Inseln. Der liegende Zwerg ist Schiedsrichter, offenbar ohne Feedbackgespräch. Vielleicht lassen wir das heute einfach so. Bitte erzählen Sie Heiko nicht, dass ich einen Prozess ohne Abschlussbericht zugelassen habe.','Here are his islands. The fallen gnome is the referee, apparently without a feedback meeting. Perhaps we will simply leave it that way today. Please do not tell Heiko I allowed a process without a final report.')
     ]}
    ]}
   ]

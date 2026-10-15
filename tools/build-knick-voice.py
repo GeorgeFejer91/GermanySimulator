@@ -4,7 +4,9 @@ Uses existing local authoring environments; never downloads a model, creates a
 profile, edits dialogue, or grants listening approval. Failed takes stay private.
 Run --plan first, --render in the Chatterbox environment, then --process in the
 faster-whisper environment. Knick is the default; --request-file supports the
-curated street-wisdom and office reply families. --check verifies the resulting shipped manifest.
+curated street-wisdom, office reply and bounded city dialogue families. City
+processing remains private pending the reviewed curator export. --check verifies
+the existing shipped families.
 """
 import argparse
 import gc
@@ -247,10 +249,18 @@ def configure_request(args):
     if args.request_file:
         plan = read(args.request_file)
         assert not args.ambient, "Custom families own their authored queues"
-        assert plan["family"] in ("street-wisdom", "office-replies", "office-ambient", "office-monologue", "office-mirror")
+        assert plan["family"] in ("street-wisdom", "office-replies", "office-ambient", "office-monologue", "office-mirror", "city-dialogue")
         if plan["family"] in ("office-monologue", "office-mirror"):
             assert not getattr(args, "sentence_rescue", False), "The player monologue requires one whole-text synthesis call, never joined sentence takes"
-        if plan["family"] == "office-ambient":
+        if plan["family"] == "city-dialogue":
+            assert VOICE.startswith("stadt-"), "City family requires an owned city voice"
+            assert plan["publicAssetFamily"] == "assets/voices/city-dialogue", "City public asset scope changed"
+            assert plan["privateReviewFamily"] == "GermanySimulator city dialogue review 2026-10-15", "City private review scope changed"
+            assert set(plan["sourceSha256"]) == {"game.js", "For-AI/VOICE-CAST.json", "For-AI/AUDIO-TEXT-LIBRARY.js"}, "City source set changed"
+            assert not (args.sentence_rescue or args.eos_after_alignment or args.benchmark_hooks), "City dialogue uses the unchanged whole-take native recipe"
+            assert not (args.manifest or args.check), "City public export awaits the reviewed curator interface"
+            SOURCE_FILES = ("game.js", "For-AI/VOICE-CAST.json", "For-AI/AUDIO-TEXT-LIBRARY.js")
+        elif plan["family"] == "office-ambient":
             assert VOICE.startswith("amt-")
             assert plan["publicAssetFamily"] == "assets/voices/office-ambient"
             assert plan["privateReviewFamily"] == "GermanySimulator office ambient review 2026-10-12"
@@ -443,9 +453,68 @@ def reference_license(profile_record):
                 else "unknown; selected profile does not record reference license"))
 
 
+def city_dialogue_sources():
+    """Owned city slots cross-checked against the actual caller and public export."""
+    source = (ROOT / "game.js").read_text(encoding="utf-8")
+    selector = 'function cityNpcDialogue(n){const owned=speechCatalog.cityDialogue?.[n.id],rows=owned?.[state.region];if(owned?.voiceId!==n.voiceId||!Array.isArray(rows)||rows.length!==2||rows.some(row=>typeof row.text!=="string"||!row.text.trim()||typeof row.english!=="string"||!row.english.trim()))return null;return rows}'
+    caller = (' }else if(n.id?.startsWith("city-")){\n'
+              '   const rows=cityNpcDialogue(n);if(!rows)return;\n'
+              '   openDialogue(n.name,rows.map(row=>row.text),"!",()=>innerMonologue("lost",.55),n.voiceId,rows.map(row=>row.english));\n')
+    assert selector in source and caller in source, "Owned city selector/caller/caption contract changed"
+    start = source.index("const npcs=[")
+    stop = source.index("].map(n=>", start)
+    actors = re.findall(r'\{[^\n{}]*id:"(city-[a-z-]+)"[^\n{}]*fullName:"([^\"]+)"[^\n{}]*voiceId:"([^\"]+)"[^\n{}]*line:\d+[^\n{}]*\}', source[start:stop])
+    cast = read(ROOT / "For-AI/VOICE-CAST.json")
+    people = [person for person in cast["characters"] if person["gameCharacterId"].startswith("city-")]
+    owners = {person["gameCharacterId"]: person for person in people}
+    assert len(actors) == len(people) == len(owners) == 19 and len({row[0] for row in actors}) == 19 and {row[0] for row in actors} == set(owners), "City actor ownership changed"
+    assert len({person["voiceId"] for person in people}) == 19, "City selected voices must be distinct"
+    js = 'global.window={};require("./For-AI/AUDIO-TEXT-LIBRARY.js");console.log(JSON.stringify(window.GermanySimulatorAudioText.cityDialogue??null));'
+    exported = json.loads(subprocess.check_output(["node", "-e", js], cwd=ROOT, encoding="utf-8"))
+    assert isinstance(exported, dict) and set(exported) == set(owners), "Missing/foreign city public export"
+    authored = []
+    for actor_id, name, voice_id in actors:
+        owner, public = owners[actor_id], exported[actor_id]
+        assert owner["voiceId"] == voice_id == "stadt-" + actor_id[5:] and owner["fullName"] == name, "City actor/selected voice identity changed"
+        assert set(public) == {"voiceId", "germany", "berlin"} and public["voiceId"] == voice_id, "City public owner/voice mismatch"
+        assert len(owner["dialogue"]) == 4, "City owner needs four regional slots"
+        binding = cast["productionVoices"][voice_id]
+        assert binding["renderer"] == "ResembleAI/Chatterbox Multilingual V2 0.1.7" and binding["modelRevision"] == "5bb1f6ee58e50c3b8d408bc82a6d3740c2db6e18"
+        assert binding.get("processing") is None, "City dry delivery must not inherit an undertone"
+        for region in ("germany", "berlin"):
+            assert len(public[region]) == 2, "Incomplete city public slots"
+            for slot in (0, 1):
+                rows = [row for row in owner["dialogue"] if row["region"] == region and row["slot"] == slot]
+                assert len(rows) == 1, "Missing/duplicate city cast region slot"
+                row, clip = rows[0], public[region][slot]
+                text, english = row["text"], row["english"]
+                locator = f"For-AI/VOICE-CAST.json characters[gameCharacterId={actor_id}].dialogue[region={region},slot={slot}]"
+                ordinal = (0 if region == "germany" else 2) + slot + 1
+                clip_id = voice_id + f"-{ordinal:02}"
+                assert isinstance(text, str) and text.strip() and isinstance(english, str) and english.strip() and row["locator"] == locator, "City owned source/English/locator changed"
+                assert clip == {"id": clip_id, "text": text, "english": english}, "City public source/English/stable slot mismatch"
+                authored.append({"clipId": clip_id, "voiceId": voice_id, "actorId": actor_id,
+                                 "region": region, "slot": slot, "sourceLocator": locator,
+                                 "text": text, "english": english, "sourceSha256": hashlib.sha256(text.encode("utf-8")).hexdigest(),
+                                 "profileId": binding["profileId"], "referenceSha256": binding["referenceSha256"],
+                                 "referenceOriginalSha256": binding["originalSha256"], "renderer": binding["renderer"],
+                                 "modelRevision": binding["modelRevision"], "processing": None})
+    assert len(authored) == 76 and len({job["clipId"] for job in authored}) == 76
+    return authored
+
+
 def jobs(ambient=False, music_root=None):
     if CUSTOM_PLAN:
         REUSE_EVIDENCE.clear()
+        if CUSTOM_PLAN["family"] == "city-dialogue":
+            authored = {job["clipId"]: job for job in city_dialogue_sources()}
+            requested = CUSTOM_PLAN["jobs"]
+            assert requested and len({job["clipId"] for job in requested}) == len(requested), "City requests must be a finite unique subset"
+            for job in requested:
+                assert job["clipId"] in authored and job == authored[job["clipId"]], "City source, translation, actor or selected binding drift"
+            selected = [dict(job) for job in requested if job["voiceId"] == VOICE]
+            assert selected, "No authored city request for selected voice"
+            return selected
         if CUSTOM_PLAN["family"] in ("office-monologue", "office-mirror"):
             js = 'global.window={};require("./buergeramt-story.js");console.log(JSON.stringify(window.BuergeramtStory));'
             story = json.loads(subprocess.check_output(["node", "-e", js], cwd=ROOT, encoding="utf-8"))
@@ -1322,7 +1391,7 @@ def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--music-root", type=Path, required=True)
     parser.add_argument("--voice-id", default="amt-brunhilde-knick", help="Selected production voice, or all for one cached-model family batch; other characters require --request-file")
-    parser.add_argument("--request-file", type=Path, help="Frozen street-wisdom or office-replies plan; shared synthesis and audit pipeline")
+    parser.add_argument("--request-file", type=Path, help="Frozen authored street, office or city plan; shared synthesis and audit pipeline")
     parser.add_argument("--model-dir", type=Path)
     parser.add_argument("--asr-model", type=Path)
     parser.add_argument("--ffmpeg", type=Path)
@@ -1346,7 +1415,10 @@ def main():
     args = parser.parse_args()
     if args.voice_id == "all":
         assert args.request_file and not args.ambient, "All-voice batches require a frozen custom family plan"
-        for voice in dict.fromkeys(job["voiceId"] for job in read(args.request_file)["jobs"]):
+        plan = read(args.request_file)
+        if plan["family"] == "city-dialogue":
+            assert plan["jobs"], "City requests must be a finite unique subset"
+        for voice in dict.fromkeys(job["voiceId"] for job in plan["jobs"]):
             args.voice_id = voice
             execute(args)
     else:
@@ -1388,6 +1460,8 @@ def execute(args):
         frozen_plan = {"requestedLineCount": len(queue), "sourceSha256": hashes, "jobs": queue, "approvedExistingReuse": REUSE_EVIDENCE}
         if CUSTOM_PLAN:
             frozen_plan.update({"authoredPlanSha256": sha(args.request_file), "authoredPlanSourceSha256": CUSTOM_PLAN["sourceSha256"]})
+        if CUSTOM_PLAN and CUSTOM_PLAN["family"] == "city-dialogue" and (private / "requests.json").exists():
+            assert read(private / "requests.json") == frozen_plan, "City request already frozen; use the existing explicit source reconciliation"
         write(private / "requests.json", frozen_plan)
         print(json.dumps({"requestedLineCount": len(queue), "registrationLineCount": sum("registration-" in job["clipId"] for job in queue), "privateRoot": str(private)}, ensure_ascii=False))
         return
@@ -1406,7 +1480,8 @@ def execute(args):
     elif args.benchmark_asr:
         benchmark_asr(args, private)
     else:
-        process(args, queue[:args.limit] if args.limit else queue, private, queue)
+        process(args, queue[:args.limit] if args.limit else queue, private, queue,
+                publish_manifest=not (CUSTOM_PLAN and CUSTOM_PLAN["family"] == "city-dialogue"))
 
 
 if __name__ == "__main__":

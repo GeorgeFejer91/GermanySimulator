@@ -663,6 +663,7 @@ function updateRegion(){
  state.regionCooldown=Math.max(0,state.regionCooldown-.016);
  if(next!==state.region&&state.regionCooldown<=0){state.regionCooldown=1;showBorder(next)}
 }
+function cityNpcDialogue(n){const owned=speechCatalog.cityDialogue?.[n.id],rows=owned?.[state.region];if(owned?.voiceId!==n.voiceId||!Array.isArray(rows)||rows.length!==2||rows.some(row=>typeof row.text!=="string"||!row.text.trim()||typeof row.english!=="string"||!row.english.trim()))return null;return rows}
 function worldNpcLine(index){return state.region==="berlin"?npcDenglisch[index]:npcLines[index]}
 
 
@@ -877,7 +878,7 @@ const pickups=[
 const normObjects=[{x:2210,y:1190,type:"bin",fixed:false,label:"MÜLLTONNE 4,6° SCHIEF"},{x:1650,y:650,type:"chairs",fixed:false,label:"STÜHLE NICHT FLUCHTGERECHT"},{x:570,y:1140,type:"hedge",fixed:false,label:"HECKE 3 CM ZU INDIVIDUELL"}].map(offsetWorldPoint);
 const jwd={allocated:false,visited:false,met:new Set(),visit:0,atHome:false,exitPending:false,complaint:0,burglarVisit:0,burglar:null,visitor:null,gardenCooldown:0,tour:null,tourSequence:0,child:null};
 const jwdCopy={
- watcherPremature:{"de":["Wie schön, dass Sie sich schon einbringen möchten! Erst schließen Sie bitte Ihren Einzug ab, dann starten wir Ihr neighborhood onboarding. Ich notiere Ihr Interesse schon einmal. Das ist jetzt Ihr commitment, ja?"],"en":["How lovely that you already want to get involved! Please finish your move-in first, then we will start your neighborhood onboarding. I will make a note of your interest. That is your commitment now, yes?"]},
+ watcherPremature:{"de":["Wie schön, dass Sie sich schon einbringen möchten! Erst schließen Sie bitte Ihren Einzug ab, dann starten wir Ihr neighborhood onboarding. Ich notiere Ihr Interesse schon einmal. Das notiere ich als Ihr commitment."],"en":["How lovely that you already want to get involved! Please finish your move-in first, then we will start your neighborhood onboarding. I will make a note of your interest. I will record that as your commitment."]},
  parentPremature:{"de":["Ach, Sie möchten schon … die Sache mit Ihrem Einzug klären Sie dann erst, ja? Ich sage Ihnen das nur, damit wir nachher nicht alles zweimal … Wir haben ja noch Zeit, uns kennenzulernen. Sie wissen ja, wie das ist."],"en":["Oh, you would like to already … you will sort out your move-in first, yes? I am only telling you so we do not have to go through everything twice afterwards … We still have time to get to know each other. You know how it is."]},
  carNote:{de:["LAMINIERTER HINWEIS: Kinder sind uns jederzeit willkommen. Hände, Reißverschlüsse, Fahrräder und spontane Zuneigungsbekundungen bitte vom Lack fernhalten.","Vielen Dank für Ihr Verständnis. Wir gehen davon aus, dass Sie diesen Hinweis mit Ihrer Kenntnisnahme akzeptiert haben."],en:["LAMINATED NOTICE: Children are always welcome. Please keep hands, zippers, bicycles and spontaneous displays of affection away from the paintwork.","Thank you for your understanding. We assume that by reading this notice you have accepted it."]},
  villa:{de:["Aus dem Vorgarten: Sie suchen Ihre neuen Nachbarn? Familie Schwabingen und Familie Maaslos wohnen am nächsten Weg. Das kleine Haus dazwischen ist Ihres.","Und bleiben Sie bitte auf den Platten. Dieser Rasen hat eine längere Familiengeschichte als wir."],en:["From the front garden: looking for your new neighbors? The Schwabingens and the Maaslos family live on the next lane. The little house between them is yours.","And please stay on the paving stones. This lawn has a longer family history than we do."]},
@@ -1750,7 +1751,7 @@ function startCitizenshipQuiz(n){
 }
 function answerCitizenshipQuiz(index){
  const q=state.quizQuestion,copy=state.quizCopy||q,character=state.quizCharacter;if(!q)return;requestCharacterReaction(state.quizNpc,["review",index===q.answer?"jumping":"failed"]);state.quizVoiceToken=(state.quizVoiceToken||0)+1;document.getElementById("quiz-modal").hidden=true;state.modal=false;state.quizQuestion=null;state.quizCopy=null;state.quizNpc=null;state.quizCharacter=null;
-  if(index===q.answer){uiTone(980,.1,"square",.04);addGermanness(1,"RICHTIG · "+(q.type==="fahrschule"?q.source:"AUFGABE "+q.source))}else{uiTone(170,.16,"sawtooth",.045);const feedback=speechClip("quiz-wrong-answer"),characterTake=character?.voiceId&&speechCatalog.candidateClip?.(character.voiceId,feedback.text);showWorldBark(character?character.name+" · "+character.title:"ENTTÄUSCHTER PRÜFUNGSBEAUFTRAGTER",feedback.text,true,characterTake||feedback.recording,"",{family:"quiz-result",priority:STIMULUS_PRIORITY.CRITICAL,ambient:false});addGermanness(-1,"FALSCH · RICHTIG: "+copy.choices[q.answer])}
+  if(index===q.answer){uiTone(980,.1,"square",.04);addGermanness(1,"RICHTIG · "+(q.type==="fahrschule"?q.source:"AUFGABE "+q.source))}else{uiTone(170,.16,"sawtooth",.045);const feedback=speechClip("quiz-wrong-answer");showWorldBark(character?character.name+" · "+character.title:"ENTTÄUSCHTER PRÜFUNGSBEAUFTRAGTER",feedback.text,true,character?"":feedback.recording,"",{family:"quiz-result",candidateVoiceId:character?.voiceId||feedback.voiceId,subtitle:feedback.english,priority:STIMULUS_PRIORITY.CRITICAL,ambient:false});addGermanness(-1,"FALSCH · RICHTIG: "+copy.choices[q.answer])}
 }
 document.getElementById("quiz-choices").addEventListener("click",event=>{const button=event.target.closest("button[data-answer]");if(button&&!button.disabled)answerCitizenshipQuiz(Number(button.dataset.answer))});
 function updateQuizEncounters(dt){
@@ -2029,6 +2030,9 @@ function interact(){if(window.Germany3D?.levelTransition?.active)return;if(state
    bayernBark(n,true);
  }else if(n.special==="alice"){
    aliceBark(n,true);
+ }else if(n.id?.startsWith("city-")){
+   const rows=cityNpcDialogue(n);if(!rows)return;
+   openDialogue(n.name,rows.map(row=>row.text),"!",()=>innerMonologue("lost",.55),n.voiceId,rows.map(row=>row.english));
  }else openDialogue(n.name,[worldNpcLine(n.line),worldNpcLine((n.line+3)%npcLines.length)],"!",()=>innerMonologue("lost",.55),n.voiceId);
  return
 }for(const p of props)if(p.id&&p.interactive!==false&&dist(player.x,player.y,p.x,p.y)<96){microInteract(p);return}for(const o of normObjects)if(!o.fixed&&dist(player.x,player.y,o.x,o.y)<92){if(state.mission===5){o.fixed=true;state.stadtbild++;toast("STADTBILD NORMIERT · "+o.label);updateHud()}else{toast("DAS IST NOCH NICHT IHR VORGANG");innerMonologue("wrongTask")};return}toast("HIER IST NIEMAND ZUSTÄNDIG");innerMonologue("lost")}

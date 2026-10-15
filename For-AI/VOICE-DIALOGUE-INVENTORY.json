@@ -4,7 +4,9 @@
   "source": [
     "game.js",
     "buergeramt-story.js",
-    "buergeramt.js"
+    "buergeramt.js",
+    "For-AI/VOICE-CAST.json",
+    "For-AI/AUDIO-TEXT-LIBRARY.js"
   ],
   "fixedCharacterDialogueCount": 93,
   "dynamicIdentityVoiceIds": [
@@ -250,6 +252,198 @@
     }
   ],
   "pools": {
+    "cityDialogue": {
+      "stadt-klaus-dieter-klein": {
+        "germany": [
+          "Ich würde erst das richtige Formular nehmen. Mit dem falschen können Sie sehr ordentlich in die falsche Richtung arbeiten.",
+          "Wenn das Feld zu klein ist, schreiben Sie kleiner. Der Vorgang wird davon nicht kleiner, aber er passt besser in den Ordner."
+        ],
+        "berlin": [
+          "Ich würde erst das richtige Formular nehmen. With the wrong one können Sie sehr ordentlich in the wrong direction arbeiten.",
+          "If das Feld is too small, schreiben Sie kleiner. The case wird davon nicht kleiner, aber er passt better in den Ordner."
+        ]
+      },
+      "stadt-brigitte-mueller": {
+        "germany": [
+          "Bevor Sie um den Bauzaun gehen, klären Sie bitte, auf welcher Seite Ihr Anliegen liegt. Sonst erklären Sie es am falschen Zaun.",
+          "Die Baustelle ist nicht fertig. Die Liste, warum sie nicht fertig ist, können wir aber schon abheften."
+        ],
+        "berlin": [
+          "Before Sie um den Bauzaun gehen, klären Sie bitte, on which side Ihr Anliegen liegt. Otherwise erklären Sie es am falschen Zaun.",
+          "Die Baustelle is not finished. Die Liste, why sie nicht fertig ist, können wir aber schon file away."
+        ]
+      },
+      "stadt-wolfgang-schulz": {
+        "germany": [
+          "Ich komme immer eine Viertelstunde zu früh. Dann bin ich pünktlich, wenn mir einfällt, was ich vergessen habe.",
+          "Spontan geht bei mir nur mit Termin. Sonst weiß ich vorher gar nicht, wie lange ich offen für Überraschungen sein soll."
+        ],
+        "berlin": [
+          "Ich komme always eine Viertelstunde too early. Dann bin ich on time, wenn mir einfällt, was ich vergessen habe.",
+          "Spontaneous geht bei mir nur mit Termin. Otherwise weiß ich vorher gar nicht, how long ich open für Überraschungen sein soll."
+        ]
+      },
+      "stadt-ursula-neumann": {
+        "germany": [
+          "Sie stehen genau da, wo ich vorbeigehen wollte. Nein, noch wollte ich nicht vorbeigehen. Ich möchte mir das aber freihalten.",
+          "Ein Schritt zur Seite wäre freundlich. Dort hatte ich allerdings für den Rückweg Platz gelassen."
+        ],
+        "berlin": [
+          "Sie stehen exactly da, wo ich vorbeigehen wollte. No, noch wollte ich nicht vorbei. Ich möchte keep that option clear.",
+          "One step zur Seite wäre friendly. Dort hatte ich allerdings space für den Rückweg gelassen."
+        ]
+      },
+      "stadt-manfred-din": {
+        "germany": [
+          "Die Pflasterfuge ist nicht schief. Sie führt nur einen anderen Winkelstandard. Wir sollten uns trotzdem erst auf einen einigen.",
+          "Stellen Sie sich bitte parallel zur Bordsteinkante. Dann erkennt man wenigstens, ob Sie ungeordnet warten oder ordentlich im Weg stehen."
+        ],
+        "berlin": [
+          "Die Pflasterfuge is not crooked. Sie führt nur einen different Winkelstandard. We should trotzdem erst agree on one.",
+          "Please stellen Sie sich parallel zur Bordsteinkante. Dann erkennt man wenigstens, whether Sie ungeordnet warten or properly im Weg stehen."
+        ]
+      },
+      "stadt-irmgard-aktenstapel": {
+        "germany": [
+          "Den Bauzaun kannte ich schon, als das Formular noch grün war. Jetzt ist beides grau. So hält man die Unterlagen aktuell.",
+          "Werfen Sie die alte Bescheinigung nicht weg. Wenn die neue wieder ausläuft, braucht man etwas, mit dem man den Stapel gerade hält."
+        ],
+        "berlin": [
+          "Den Bauzaun kannte ich schon, als das Formular noch green war. Now ist beides grey. So hält man die Unterlagen up to date.",
+          "Do not werfen Sie die alte Bescheinigung weg. Wenn die neue wieder expires, braucht man etwas, to keep den Stapel straight."
+        ]
+      },
+      "stadt-guenther-tuev": {
+        "germany": [
+          "Halt! Mit dem Schuh schon auf der Kante und dem Plan noch auf dem Gehweg. Erst für eine ordentliche Laufrichtung entscheiden!",
+          "Nicht einfach loslaufen! Ich habe Ihren ersten Schritt noch gar nicht zu Ende geprüft."
+        ],
+        "berlin": [
+          "Stop! Mit dem Schuh schon auf der Kante und the plan noch auf dem Gehweg. First decide on eine proper Laufrichtung!",
+          "Do not einfach loslaufen! Ich habe Ihren first step noch gar nicht fertig inspected."
+        ]
+      },
+      "stadt-hannelore-sparkasse": {
+        "germany": [
+          "Für den Umweg bekomme ich keine Zinsen. Gehen Sie bitte zur Seite, bevor hier noch mehr Zeit unverzinst herumliegt.",
+          "Sie können gern hier warten. Rechnen Sie nur Ihre Wartefläche nicht zu meinem Durchgang dazu."
+        ],
+        "berlin": [
+          "Für den Umweg bekomme ich no interest. Please gehen Sie zur Seite, before hier noch mehr Zeit unverzinst herumliegt.",
+          "Sie können gern hier wait. Just rechnen Sie Ihre Wartefläche nicht into meinen Durchgang."
+        ]
+      },
+      "stadt-karl-heinz-post": {
+        "germany": [
+          "Der Briefkasten ist zuständig, solange der Brief nicht drin ist. Danach müssen Sie warten, bis jemand anders zuständig ist.",
+          "Eine Zustellung bedeutet, dass ich etwas abgegeben habe. Dass Sie es auch bekommen haben, müssten Sie bitte mit der Zustellung klären."
+        ],
+        "berlin": [
+          "Der Briefkasten is responsible, solange der Brief nicht drin ist. After that müssen Sie warten, until jemand anders responsible ist.",
+          "Eine delivery bedeutet, dass ich etwas abgegeben habe. Whether Sie es auch bekommen haben, müssten Sie bitte mit der delivery klären."
+        ]
+      },
+      "stadt-herbert-rasenaufsicht": {
+        "germany": [
+          "Runter vom Grün! Das Gras soll sich hier ordentlich ausbreiten, aber doch nicht unter Leuten.",
+          "Gehen Sie auf den Weg! Und nehmen Sie den Fuß vom Wegrand. Ich trenne hier gerade Grünfläche und Gehabsicht."
+        ],
+        "berlin": [
+          "Get off dem Grün! Das Gras soll sich hier properly ausbreiten, aber doch nicht under people.",
+          "Go auf den Weg! Und nehmen Sie den Fuß vom Wegrand. Ich trenne hier gerade green space und walking intention."
+        ]
+      },
+      "stadt-waltraud-ordnung": {
+        "germany": [
+          "Jetzt bleiben Sie doch nicht mitten im Durchgang stehen! Und bitte auch nicht einfach weitergehen, während ich Ihnen etwas sage!",
+          "Wenn jeder hier so einen halben Schritt macht, steht nachher die ganze Straße versetzt. Das kann ich nicht für alle wieder gerade erklären!"
+        ],
+        "berlin": [
+          "Do not jetzt mitten im Durchgang stehen bleiben! And bitte auch nicht einfach walk away, während ich Ihnen etwas sage!",
+          "If jeder hier so einen half step macht, steht nachher die ganze Straße out of alignment. Ich kann das nicht für alle straight erklären!"
+        ]
+      },
+      "stadt-erwin-archiv": {
+        "germany": [
+          "Die Baustelle ist im Archiv schon abgeschlossen. Draußen braucht sie offenbar noch eine Durchschrift davon.",
+          "Stellen Sie Ihre Frage hinten an den Stapel. Die unterste wartet seit Jahren, die kennt den Ablauf."
+        ],
+        "berlin": [
+          "Die Baustelle is already closed im Archiv. Outside braucht sie apparently noch eine Durchschrift davon.",
+          "Put Ihre Frage hinten an den Stapel. The bottom one wartet seit Jahren, die knows the procedure."
+        ]
+      },
+      "stadt-renate-termin": {
+        "germany": [
+          "Ohne Termin brauchen Sie hier nicht so lange zu überlegen! Für spontanes Nachfragen ist der spontane Zeitraum längst vergeben.",
+          "Sie hatten nur eine kurze Frage? Dann hätten Sie bitte auch nur kurz zu spät kommen dürfen!"
+        ],
+        "berlin": [
+          "Without Termin brauchen Sie hier nicht so lange zu überlegen! For spontaneous Nachfragen ist der spontaneous Zeitraum längst booked.",
+          "You had nur eine short question? Dann hätten Sie bitte auch nur briefly zu spät kommen dürfen!"
+        ]
+      },
+      "stadt-heinz-mietnachweis": {
+        "germany": [
+          "Ein Mietnachweis beweist vor allem, dass Sie mit einem Nachweis angekommen sind. Nach der Miete fragt dann wieder ein anderer.",
+          "Früher brauchten Sie nur die alte Bescheinigung. Jetzt brauchen Sie die alte, um zu beweisen, dass die neue überhaupt neu ist."
+        ],
+        "berlin": [
+          "Ein Mietnachweis mainly proves, dass Sie mit einem Nachweis angekommen sind. About the rent fragt dann wieder somebody else.",
+          "Before brauchten Sie nur die alte Bescheinigung. Now brauchen Sie die alte, to prove dass die neue überhaupt new ist."
+        ]
+      },
+      "stadt-monika-zebra": {
+        "germany": [
+          "Ich warte hier lieber, bis alle fertig sind mit ihrem Vorrang. Danach kann ich in Ruhe rüber.",
+          "Auf dem Zebrastreifen haben wir alle Platz. Bloß nicht gleichzeitig an derselben Stelle. Das könnte man sich doch vorher kurz aufteilen."
+        ],
+        "berlin": [
+          "Ich warte hier lieber, until alle fertig sind mit their priority. After that kann ich in Ruhe rüber.",
+          "On dem Zebrastreifen haben wir alle space. Just nicht gleichzeitig an derselben Stelle. We could doch vorher kurz allocate that."
+        ]
+      },
+      "stadt-joachim-fundsache": {
+        "germany": [
+          "Das ist nicht mein verlorener Gegenstand. Wenn Sie den Besitzer suchen, verlieren Sie bitte nicht auch noch meine Zeit.",
+          "Die Zuständigkeit liegt hier irgendwo. Falls Sie sie finden, geben Sie sie bitte nicht bei mir ab."
+        ],
+        "berlin": [
+          "That is nicht mein lost Gegenstand. If Sie den Besitzer suchen, verlieren Sie bitte nicht auch noch my time.",
+          "Die responsibility liegt hier irgendwo. If Sie sie finden, geben Sie sie bitte not bei mir ab."
+        ]
+      },
+      "stadt-ute-ruhe": {
+        "germany": [
+          "Könnten Sie einen Schritt leiser treten? Man hört schon von hier, dass Sie noch etwas vorhaben.",
+          "Lassen Sie die Lücke bitte frei. Ich brauche nicht viel Platz, nur genau den, den gerade keiner benutzt."
+        ],
+        "berlin": [
+          "Could Sie einen Schritt more quietly treten? Man hört schon von hier, dass Sie still have plans.",
+          "Please lassen Sie die Lücke clear. Ich brauche nicht much space, nur genau den, den gerade nobody uses."
+        ]
+      },
+      "stadt-norbert-faxrolle": {
+        "germany": [
+          "Ich habe es gefaxt. Dass das Gerät seit Dienstag kein Papier hat, ändert nichts daran, dass ich meinen Teil versucht habe.",
+          "Das Original ist auf dem Fax verschwunden. Nehmen Sie die Kopie, da sieht man wenigstens noch, was ursprünglich gefehlt hat."
+        ],
+        "berlin": [
+          "I have gefaxt it. Dass das Gerät seit Tuesday kein Papier hat, ändert nichts daran, dass ich my part versucht habe.",
+          "The Original ist auf dem Fax verschwunden. Take die Kopie, da sieht man wenigstens noch, what originally was missing."
+        ]
+      },
+      "stadt-edeltraud-trennung": {
+        "germany": [
+          "Die Terminfrage und die Baustellenfrage bitte getrennt. Sonst erzählen Sie dem Kalender, warum der Bauzaun im Weg steht.",
+          "Sortieren Sie erst, was Sie wissen wollen, und dann, wer es wissen soll. Im Moment haben Sie beides bei mir abgelegt."
+        ],
+        "berlin": [
+          "Die appointment question und die Baustellenfrage bitte separate. Otherwise erzählen Sie dem Kalender, why der Bauzaun im Weg steht.",
+          "First sortieren Sie, what Sie wissen wollen, und dann, who es wissen soll. Right now haben Sie beides bei mir abgelegt."
+        ]
+      }
+    },
     "npcLines": [
       "Also das ist jetzt aber auch nicht so gedacht.",
       "Kann man machen. Muss man aber wirklich nicht.",

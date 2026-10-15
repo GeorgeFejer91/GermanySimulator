@@ -28,9 +28,30 @@ function declaration(name,source=game){
  throw new Error(`Unterminated game declaration ${name}`);
 }
 
+function cityDialoguePool(){
+ const people=cast.characters.filter(person=>person.gameCharacterId?.startsWith("city-")),table=catalog.cityDialogue;
+ if(people.length!==19||new Set(people.map(person=>person.gameCharacterId)).size!==19||new Set(people.map(person=>person.voiceId)).size!==19||!table||Object.keys(table).length!==19)throw new Error("Expected nineteen distinct city dialogue owners and public exports");
+ return Object.fromEntries(people.map(person=>{
+  const actor=person.gameCharacterId,owned=table[actor];
+  if(person.voiceId!=="stadt-"+actor.slice(5)||!cast.productionVoices[person.voiceId]||!Array.isArray(person.dialogue)||person.dialogue.length!==4||owned?.voiceId!==person.voiceId||Object.keys(owned).sort().join(",")!=="berlin,germany,voiceId")throw new Error("City inventory actor/voice mismatch: "+actor);
+  const regions=Object.fromEntries(["germany","berlin"].map(region=>{
+   const exported=owned[region];if(!Array.isArray(exported)||exported.length!==2)throw new Error("Incomplete city inventory region: "+actor+" "+region);
+   return[region,[0,1].map(slot=>{
+    const rows=person.dialogue.filter(row=>row.region===region&&row.slot===slot),clip=exported[slot];
+    if(rows.length!==1)throw new Error("Missing/duplicate city inventory slot: "+actor+" "+region+" "+slot);
+    const row=rows[0],id=person.voiceId+"-"+String((region==="berlin"?2:0)+slot+1).padStart(2,"0"),locator="For-AI/VOICE-CAST.json characters[gameCharacterId="+actor+"].dialogue[region="+region+",slot="+slot+"]";
+    if(typeof row.text!=="string"||!row.text.trim()||typeof row.english!=="string"||!row.english.trim()||row.locator!==locator||!clip||Object.keys(clip).sort().join(",")!=="english,id,text"||clip.id!==id||clip.text!==row.text||clip.english!==row.english)throw new Error("City inventory source/export mismatch: "+locator);
+    return row.text;
+   })];
+  }));
+  return[person.voiceId,regions];
+ }));
+}
+
 const questions=declaration("citizenshipQuestions");
 const berlinQuestions=declaration("berlinCitizenshipQuestions");
 const pools={
+ cityDialogue:cityDialoguePool(),
  npcLines:declaration("npcLines"),
  npcDenglisch:declaration("npcDenglisch"),
  policeBarks:declaration("policeBarks"),
@@ -50,7 +71,7 @@ const pools={
 const inventory={
  schemaVersion:1,
  explanation:"Exact currently authored source pools. Quiz speech concatenates one regional approach, one category context and one regional question; the combinations are generated at runtime. Fixed NPC lines and their owners are in VOICE-CAST.json. Bürgeramt clerk and Kriminalpolizei phone dialogue from buergeramt-story.js are inventoried separately; additional call-status sentences in buergeramt.js remain context-dependent.",
- source:["game.js","buergeramt-story.js","buergeramt.js"],
+ source:["game.js","buergeramt-story.js","buergeramt.js","For-AI/VOICE-CAST.json","For-AI/AUDIO-TEXT-LIBRARY.js"],
  fixedCharacterDialogueCount:cast.dialogueCount,
  dynamicIdentityVoiceIds:cast.roleProfiles.map(person=>({voiceId:person.voiceId,sourcePools:person.dialogueSources})),
  pools,

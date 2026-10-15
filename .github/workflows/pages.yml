@@ -59,7 +59,7 @@ jobs:
           python tests/test_sync_music_cast_index.py
           node tools/curate-voice-library.mjs --check
           node --test tests/buergeramt-ambient.test.mjs
-          node --test tests/voice-consistency.test.mjs tests/voice-cast.test.mjs tests/voice-candidate-preview.test.mjs tests/street-wisdom.test.mjs tests/street-wisdom-encounters.test.mjs tests/law-voice-assets.test.mjs tests/knick-generation-receipts.test.mjs
+          node --test tests/city-dialogue.test.mjs tests/city-voice-provenance.test.mjs tests/voice-consistency.test.mjs tests/voice-cast.test.mjs tests/voice-candidate-preview.test.mjs tests/street-wisdom.test.mjs tests/street-wisdom-encounters.test.mjs tests/law-voice-assets.test.mjs tests/knick-generation-receipts.test.mjs
       - name: Check game and browser regressions
         run: node --test tests/preload.test.mjs tests/browser-performance.test.mjs tests/runtime-smoothness.test.mjs tests/object-physics-consistency.test.mjs tests/police-driving.test.mjs tests/vehicle-lifecycle.test.mjs tests/train-consists.test.mjs tests/ambient-traffic.test.mjs tests/browser-responsiveness.test.mjs tests/asset-streaming.test.mjs tests/tourist-animation.test.mjs tests/intro-music.test.mjs tests/splat-preview.test.mjs tests/crossing-layout.test.mjs tests/browser-benchmark.test.mjs tests/touch-controls.test.mjs tests/english-subtitles.test.mjs tests/merkel-voice.test.mjs tests/mission-fax.test.mjs tests/mission-pointer.test.mjs tests/buergeramt-door-radiance.test.mjs tests/buergeramt-entry.test.mjs
       - name: Check office oil-floor lifetime

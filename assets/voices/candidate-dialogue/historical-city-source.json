@@ -1,0 +1,832 @@
+{
+  "schemaVersion": 1,
+  "purpose": "Historical city audition source snapshot only; not an active cast or generation/listening approval",
+  "historicalSource": {
+    "path": "For-AI/VOICE-CAST.json",
+    "commit": "415e95d9159837240c74870f3b0281be52434f68",
+    "gitBlob": "786775713b56b962a2c1e4d97ab6284ed108f45f",
+    "sha256": "119cad66ca6fe2d1d3257353f325f1e8550caa983566b7c9de42a0efc85a3a16"
+  },
+  "candidateManifestSha256": "8776fb4bc3a48b79788c09df96c11454e22cf6a45bc0a3f5e879f7fa4beab851",
+  "bindings": [
+    {
+      "actorId": "city-klaus-dieter-klein",
+      "voiceId": "stadt-klaus-dieter-klein",
+      "profileId": "8182da73a54c429391924d62ee339037",
+      "referenceSha256": "a0de93a250f749c1bcd7f7cda9b12c2810c97dbe9426b602b2973b8c76fb9b3b",
+      "referenceHashKind": "uploaded-original"
+    },
+    {
+      "actorId": "city-brigitte-mueller",
+      "voiceId": "stadt-brigitte-mueller",
+      "profileId": "8ddc4332b0814aff81e841e116c3b765",
+      "referenceSha256": "6a1d75a9744802aeda79b9219dac09256c9eefc5c862af66bfee3d27d5b6778d",
+      "referenceHashKind": "uploaded-original"
+    },
+    {
+      "actorId": "city-wolfgang-schulz",
+      "voiceId": "stadt-wolfgang-schulz",
+      "profileId": "06c942339c3144298f6ce8ed7f09bf48",
+      "referenceSha256": "fa0650538001ac77d41584c3742fcc0ceb262ba43e7206a66dbd2ab1e33d9161",
+      "referenceHashKind": "uploaded-original"
+    },
+    {
+      "actorId": "city-ursula-neumann",
+      "voiceId": "stadt-ursula-neumann",
+      "profileId": "5bd2927872e147fc978f49fa8fd893d2",
+      "referenceSha256": "23e4afaf59ef15cb0988feea0439793450268aa5dd9e916c69834b48df647747",
+      "referenceHashKind": "uploaded-original"
+    },
+    {
+      "actorId": "city-manfred-din",
+      "voiceId": "stadt-manfred-din",
+      "profileId": "ce35631d413c42fe83a7637174c3e4a1",
+      "referenceSha256": "d1e62cfd22ce22467c3ce9c3dcc9e19cbbae6e7232b89c1916454ba6ccf4450f",
+      "referenceHashKind": "uploaded-original"
+    },
+    {
+      "actorId": "city-irmgard-aktenstapel",
+      "voiceId": "stadt-irmgard-aktenstapel",
+      "profileId": "c166075128d247fabf12e786bfaa60a6",
+      "referenceSha256": "153b6e889f1217735fd500e13c6087db487f699735408121b2c21fc004b7813e",
+      "referenceHashKind": "uploaded-original"
+    },
+    {
+      "actorId": "city-guenther-tuev",
+      "voiceId": "stadt-guenther-tuev",
+      "profileId": "e3b5de97e2e34fdcbbe48962ba16667e",
+      "referenceSha256": "718d21fd8dc250521a21882f86795cf8652845df7c128e655c0e2e771ac3207e",
+      "referenceHashKind": "uploaded-original"
+    },
+    {
+      "actorId": "city-hannelore-sparkasse",
+      "voiceId": "stadt-hannelore-sparkasse",
+      "profileId": "112312dbaaab44bb90e639b531b69d27",
+      "referenceSha256": "caa317b927b7d986a52aec26a204cafe1ec65606cec4cee57ac1653effdf1952",
+      "referenceHashKind": "uploaded-original"
+    },
+    {
+      "actorId": "city-karl-heinz-post",
+      "voiceId": "stadt-karl-heinz-post",
+      "profileId": "45fd0a83c5c9448e85af11b4e7407c6e",
+      "referenceSha256": "2eebd1592e154c1359829d4415d88bcdeaf98b560121b06ee47b62fe65f8fb08",
+      "referenceHashKind": "uploaded-original"
+    },
+    {
+      "actorId": "city-herbert-rasenaufsicht",
+      "voiceId": "stadt-herbert-rasenaufsicht",
+      "profileId": "8968878634994c25a5578fd9c2244110",
+      "referenceSha256": "b8fd86e3751434f24f93dab162f8ea81ea8df0e8134ddab6bc032253de6d2d85",
+      "referenceHashKind": "uploaded-original"
+    },
+    {
+      "actorId": "city-waltraud-ordnung",
+      "voiceId": "stadt-waltraud-ordnung",
+      "profileId": "fef10195763e41fdbdf7a82382610513",
+      "referenceSha256": "2ef53e200a7a031eddb7bc70204ec23ecaef4936dd751cf046bbcde5f91d2b55",
+      "referenceHashKind": "uploaded-original"
+    },
+    {
+      "actorId": "city-erwin-archiv",
+      "voiceId": "stadt-erwin-archiv",
+      "profileId": "dd2102af797e486fb66d67ac2cde26bc",
+      "referenceSha256": "151ae01fd25433a25d40452ba4be9fbebd14336053332b9a0333ce4b7ac1cac5",
+      "referenceHashKind": "uploaded-original"
+    },
+    {
+      "actorId": "city-renate-termin",
+      "voiceId": "stadt-renate-termin",
+      "profileId": "21f2fc63a2f34d3b81462ca72933e51e",
+      "referenceSha256": "738caada9bedbce8b48a277940d6a2065bbfb1a8d14ab0557b6854bfc9825701",
+      "referenceHashKind": "uploaded-original"
+    },
+    {
+      "actorId": "city-heinz-mietnachweis",
+      "voiceId": "stadt-heinz-mietnachweis",
+      "profileId": "bd866bed39104f52a7c3c03c566c241d",
+      "referenceSha256": "7fdd251dc6d7e8d870e85c736a09824550b8b578c3a39e067a75b7d948f5d1bb",
+      "referenceHashKind": "uploaded-original"
+    },
+    {
+      "actorId": "city-monika-zebra",
+      "voiceId": "stadt-monika-zebra",
+      "profileId": "3cb9ea9f6c3e40428ce73acfe639a1ee",
+      "referenceSha256": "caa317b927b7d986a52aec26a204cafe1ec65606cec4cee57ac1653effdf1952",
+      "referenceHashKind": "uploaded-original"
+    },
+    {
+      "actorId": "city-joachim-fundsache",
+      "voiceId": "stadt-joachim-fundsache",
+      "profileId": "d87b222e98574a8d8ec180f029e8a414",
+      "referenceSha256": "36dc3144368143e0894dc1f400bdffe82e6842b2ae3d54a7fb03a3b7c94c55bf",
+      "referenceHashKind": "uploaded-original"
+    },
+    {
+      "actorId": "city-ute-ruhe",
+      "voiceId": "stadt-ute-ruhe",
+      "profileId": "cfdd8b4cda6646daa197e0291e146988",
+      "referenceSha256": "6c961945eb1b63cdcc477bd8ba2e5dd840682a6335c9632ff6d14b44fca22ab8",
+      "referenceHashKind": "uploaded-original"
+    },
+    {
+      "actorId": "city-norbert-faxrolle",
+      "voiceId": "stadt-norbert-faxrolle",
+      "profileId": "c00d72eba1514bcfa27d2b420db2d960",
+      "referenceSha256": "74b5a6e705fd5e5d1a351a907bf97a3d5420de4803a52a24e1854e48aa70d8b4",
+      "referenceHashKind": "uploaded-original"
+    },
+    {
+      "actorId": "city-edeltraud-trennung",
+      "voiceId": "stadt-edeltraud-trennung",
+      "profileId": "5590c81828c04845822da28d02d84689",
+      "referenceSha256": "03e67d1d6614504d1954e447ed6064f4e8df0cc6f07caa158e9215ef4f48cad4",
+      "referenceHashKind": "uploaded-original"
+    }
+  ],
+  "links": [
+    {
+      "clipId": "stadt-klaus-dieter-klein-01",
+      "actorId": "city-klaus-dieter-klein",
+      "voiceId": "stadt-klaus-dieter-klein",
+      "region": "germany",
+      "slot": 0,
+      "sourceLocator": "game.js npcLines[0]",
+      "spokenSha256": "fb5400e717b0fd6edc32bab8f5039a60ba190392ce6980538f066141ac1f060f"
+    },
+    {
+      "clipId": "stadt-klaus-dieter-klein-02",
+      "actorId": "city-klaus-dieter-klein",
+      "voiceId": "stadt-klaus-dieter-klein",
+      "region": "germany",
+      "slot": 1,
+      "sourceLocator": "game.js npcLines[3]",
+      "spokenSha256": "703970a1f964cd046878e4c560d3663365e63fa240db6226fbebe5bc8b3bb0a5"
+    },
+    {
+      "clipId": "stadt-klaus-dieter-klein-03",
+      "actorId": "city-klaus-dieter-klein",
+      "voiceId": "stadt-klaus-dieter-klein",
+      "region": "berlin",
+      "slot": 0,
+      "sourceLocator": "game.js npcDenglisch[0]",
+      "spokenSha256": "aa6b799c0ea4fa3a71b3a37416549ced8325c2037ec941a2946e37a828cece41"
+    },
+    {
+      "clipId": "stadt-klaus-dieter-klein-04",
+      "actorId": "city-klaus-dieter-klein",
+      "voiceId": "stadt-klaus-dieter-klein",
+      "region": "berlin",
+      "slot": 1,
+      "sourceLocator": "game.js npcDenglisch[3]",
+      "spokenSha256": "66c537e0fb90f9eba766dd1097707cdd691f1249d7b634021ee3279a81a407d1"
+    },
+    {
+      "clipId": "stadt-brigitte-mueller-01",
+      "actorId": "city-brigitte-mueller",
+      "voiceId": "stadt-brigitte-mueller",
+      "region": "germany",
+      "slot": 0,
+      "sourceLocator": "game.js npcLines[3]",
+      "spokenSha256": "703970a1f964cd046878e4c560d3663365e63fa240db6226fbebe5bc8b3bb0a5"
+    },
+    {
+      "clipId": "stadt-brigitte-mueller-02",
+      "actorId": "city-brigitte-mueller",
+      "voiceId": "stadt-brigitte-mueller",
+      "region": "germany",
+      "slot": 1,
+      "sourceLocator": "game.js npcLines[6]",
+      "spokenSha256": "1b977075ca9529e54b82a974e9cc573f9d0bf11ab0c510bf88f446949d5679de"
+    },
+    {
+      "clipId": "stadt-brigitte-mueller-03",
+      "actorId": "city-brigitte-mueller",
+      "voiceId": "stadt-brigitte-mueller",
+      "region": "berlin",
+      "slot": 0,
+      "sourceLocator": "game.js npcDenglisch[3]",
+      "spokenSha256": "66c537e0fb90f9eba766dd1097707cdd691f1249d7b634021ee3279a81a407d1"
+    },
+    {
+      "clipId": "stadt-brigitte-mueller-04",
+      "actorId": "city-brigitte-mueller",
+      "voiceId": "stadt-brigitte-mueller",
+      "region": "berlin",
+      "slot": 1,
+      "sourceLocator": "game.js npcDenglisch[6]",
+      "spokenSha256": "a44c0e88d537b3be6ca336a1b8d04bc9f012ce3453c05da86885195ace89cba3"
+    },
+    {
+      "clipId": "stadt-wolfgang-schulz-01",
+      "actorId": "city-wolfgang-schulz",
+      "voiceId": "stadt-wolfgang-schulz",
+      "region": "germany",
+      "slot": 0,
+      "sourceLocator": "game.js npcLines[6]",
+      "spokenSha256": "1b977075ca9529e54b82a974e9cc573f9d0bf11ab0c510bf88f446949d5679de"
+    },
+    {
+      "clipId": "stadt-wolfgang-schulz-02",
+      "actorId": "city-wolfgang-schulz",
+      "voiceId": "stadt-wolfgang-schulz",
+      "region": "germany",
+      "slot": 1,
+      "sourceLocator": "game.js npcLines[9]",
+      "spokenSha256": "1e9a1b145f26c8632744f0b1f75fae8818f097b93f8c1d6646a3ca2d21be657e"
+    },
+    {
+      "clipId": "stadt-wolfgang-schulz-03",
+      "actorId": "city-wolfgang-schulz",
+      "voiceId": "stadt-wolfgang-schulz",
+      "region": "berlin",
+      "slot": 0,
+      "sourceLocator": "game.js npcDenglisch[6]",
+      "spokenSha256": "a44c0e88d537b3be6ca336a1b8d04bc9f012ce3453c05da86885195ace89cba3"
+    },
+    {
+      "clipId": "stadt-wolfgang-schulz-04",
+      "actorId": "city-wolfgang-schulz",
+      "voiceId": "stadt-wolfgang-schulz",
+      "region": "berlin",
+      "slot": 1,
+      "sourceLocator": "game.js npcDenglisch[9]",
+      "spokenSha256": "741ddbe5b8bc38260b66cb1641ec171ca0f9c9618dd42ba14940c01a25d9ee00"
+    },
+    {
+      "clipId": "stadt-ursula-neumann-01",
+      "actorId": "city-ursula-neumann",
+      "voiceId": "stadt-ursula-neumann",
+      "region": "germany",
+      "slot": 0,
+      "sourceLocator": "game.js npcLines[2]",
+      "spokenSha256": "5da8c5c8a73fd144da62060277758a144a80260443ae1b0de4a61d290bc3c97c"
+    },
+    {
+      "clipId": "stadt-ursula-neumann-02",
+      "actorId": "city-ursula-neumann",
+      "voiceId": "stadt-ursula-neumann",
+      "region": "germany",
+      "slot": 1,
+      "sourceLocator": "game.js npcLines[5]",
+      "spokenSha256": "d0dddb59ca37caac7a6e96e145924ecd41d29b0e993c0ccfa5c9af5108077156"
+    },
+    {
+      "clipId": "stadt-ursula-neumann-03",
+      "actorId": "city-ursula-neumann",
+      "voiceId": "stadt-ursula-neumann",
+      "region": "berlin",
+      "slot": 0,
+      "sourceLocator": "game.js npcDenglisch[2]",
+      "spokenSha256": "f02ee145daf8ec67b153912b8f51a6053d1aeab7d79085bae171da50146d60a0"
+    },
+    {
+      "clipId": "stadt-ursula-neumann-04",
+      "actorId": "city-ursula-neumann",
+      "voiceId": "stadt-ursula-neumann",
+      "region": "berlin",
+      "slot": 1,
+      "sourceLocator": "game.js npcDenglisch[5]",
+      "spokenSha256": "ef74b70cb04df82847b7033f2999bd3675b33be89e66dfd2a05dd90217c41215"
+    },
+    {
+      "clipId": "stadt-manfred-din-01",
+      "actorId": "city-manfred-din",
+      "voiceId": "stadt-manfred-din",
+      "region": "germany",
+      "slot": 0,
+      "sourceLocator": "game.js npcLines[8]",
+      "spokenSha256": "ab7c074aa112bbc6c1c57df40516b9c9f65b7d2929d5ea4a2769b346e3c4dca3"
+    },
+    {
+      "clipId": "stadt-manfred-din-02",
+      "actorId": "city-manfred-din",
+      "voiceId": "stadt-manfred-din",
+      "region": "germany",
+      "slot": 1,
+      "sourceLocator": "game.js npcLines[1]",
+      "spokenSha256": "3f08598e7c8a0752f0c02965a9789744e23f2d8c50e6d92b2a2b9fa9a7c3c9f4"
+    },
+    {
+      "clipId": "stadt-manfred-din-03",
+      "actorId": "city-manfred-din",
+      "voiceId": "stadt-manfred-din",
+      "region": "berlin",
+      "slot": 0,
+      "sourceLocator": "game.js npcDenglisch[8]",
+      "spokenSha256": "0f67671f594d76418978bdf1943b32f4c9ba48abbacd2efda7f6c72056eb3322"
+    },
+    {
+      "clipId": "stadt-manfred-din-04",
+      "actorId": "city-manfred-din",
+      "voiceId": "stadt-manfred-din",
+      "region": "berlin",
+      "slot": 1,
+      "sourceLocator": "game.js npcDenglisch[1]",
+      "spokenSha256": "fe5202d41d618036e0e1787dea7683dba9dd5bdac69e41eac636bdddb6ab5e9b"
+    },
+    {
+      "clipId": "stadt-irmgard-aktenstapel-01",
+      "actorId": "city-irmgard-aktenstapel",
+      "voiceId": "stadt-irmgard-aktenstapel",
+      "region": "germany",
+      "slot": 0,
+      "sourceLocator": "game.js npcLines[3]",
+      "spokenSha256": "703970a1f964cd046878e4c560d3663365e63fa240db6226fbebe5bc8b3bb0a5"
+    },
+    {
+      "clipId": "stadt-irmgard-aktenstapel-02",
+      "actorId": "city-irmgard-aktenstapel",
+      "voiceId": "stadt-irmgard-aktenstapel",
+      "region": "germany",
+      "slot": 1,
+      "sourceLocator": "game.js npcLines[6]",
+      "spokenSha256": "1b977075ca9529e54b82a974e9cc573f9d0bf11ab0c510bf88f446949d5679de"
+    },
+    {
+      "clipId": "stadt-irmgard-aktenstapel-03",
+      "actorId": "city-irmgard-aktenstapel",
+      "voiceId": "stadt-irmgard-aktenstapel",
+      "region": "berlin",
+      "slot": 0,
+      "sourceLocator": "game.js npcDenglisch[3]",
+      "spokenSha256": "66c537e0fb90f9eba766dd1097707cdd691f1249d7b634021ee3279a81a407d1"
+    },
+    {
+      "clipId": "stadt-irmgard-aktenstapel-04",
+      "actorId": "city-irmgard-aktenstapel",
+      "voiceId": "stadt-irmgard-aktenstapel",
+      "region": "berlin",
+      "slot": 1,
+      "sourceLocator": "game.js npcDenglisch[6]",
+      "spokenSha256": "a44c0e88d537b3be6ca336a1b8d04bc9f012ce3453c05da86885195ace89cba3"
+    },
+    {
+      "clipId": "stadt-guenther-tuev-01",
+      "actorId": "city-guenther-tuev",
+      "voiceId": "stadt-guenther-tuev",
+      "region": "germany",
+      "slot": 0,
+      "sourceLocator": "game.js npcLines[8]",
+      "spokenSha256": "ab7c074aa112bbc6c1c57df40516b9c9f65b7d2929d5ea4a2769b346e3c4dca3"
+    },
+    {
+      "clipId": "stadt-guenther-tuev-02",
+      "actorId": "city-guenther-tuev",
+      "voiceId": "stadt-guenther-tuev",
+      "region": "germany",
+      "slot": 1,
+      "sourceLocator": "game.js npcLines[1]",
+      "spokenSha256": "3f08598e7c8a0752f0c02965a9789744e23f2d8c50e6d92b2a2b9fa9a7c3c9f4"
+    },
+    {
+      "clipId": "stadt-guenther-tuev-03",
+      "actorId": "city-guenther-tuev",
+      "voiceId": "stadt-guenther-tuev",
+      "region": "berlin",
+      "slot": 0,
+      "sourceLocator": "game.js npcDenglisch[8]",
+      "spokenSha256": "0f67671f594d76418978bdf1943b32f4c9ba48abbacd2efda7f6c72056eb3322"
+    },
+    {
+      "clipId": "stadt-guenther-tuev-04",
+      "actorId": "city-guenther-tuev",
+      "voiceId": "stadt-guenther-tuev",
+      "region": "berlin",
+      "slot": 1,
+      "sourceLocator": "game.js npcDenglisch[1]",
+      "spokenSha256": "fe5202d41d618036e0e1787dea7683dba9dd5bdac69e41eac636bdddb6ab5e9b"
+    },
+    {
+      "clipId": "stadt-hannelore-sparkasse-01",
+      "actorId": "city-hannelore-sparkasse",
+      "voiceId": "stadt-hannelore-sparkasse",
+      "region": "germany",
+      "slot": 0,
+      "sourceLocator": "game.js npcLines[5]",
+      "spokenSha256": "d0dddb59ca37caac7a6e96e145924ecd41d29b0e993c0ccfa5c9af5108077156"
+    },
+    {
+      "clipId": "stadt-hannelore-sparkasse-02",
+      "actorId": "city-hannelore-sparkasse",
+      "voiceId": "stadt-hannelore-sparkasse",
+      "region": "germany",
+      "slot": 1,
+      "sourceLocator": "game.js npcLines[8]",
+      "spokenSha256": "ab7c074aa112bbc6c1c57df40516b9c9f65b7d2929d5ea4a2769b346e3c4dca3"
+    },
+    {
+      "clipId": "stadt-hannelore-sparkasse-03",
+      "actorId": "city-hannelore-sparkasse",
+      "voiceId": "stadt-hannelore-sparkasse",
+      "region": "berlin",
+      "slot": 0,
+      "sourceLocator": "game.js npcDenglisch[5]",
+      "spokenSha256": "ef74b70cb04df82847b7033f2999bd3675b33be89e66dfd2a05dd90217c41215"
+    },
+    {
+      "clipId": "stadt-hannelore-sparkasse-04",
+      "actorId": "city-hannelore-sparkasse",
+      "voiceId": "stadt-hannelore-sparkasse",
+      "region": "berlin",
+      "slot": 1,
+      "sourceLocator": "game.js npcDenglisch[8]",
+      "spokenSha256": "0f67671f594d76418978bdf1943b32f4c9ba48abbacd2efda7f6c72056eb3322"
+    },
+    {
+      "clipId": "stadt-karl-heinz-post-01",
+      "actorId": "city-karl-heinz-post",
+      "voiceId": "stadt-karl-heinz-post",
+      "region": "germany",
+      "slot": 0,
+      "sourceLocator": "game.js npcLines[7]",
+      "spokenSha256": "347f9b3ee5fd62b3a49248a83d957be723f65ec2ef808e4cfdeb4769b68fc7b9"
+    },
+    {
+      "clipId": "stadt-karl-heinz-post-02",
+      "actorId": "city-karl-heinz-post",
+      "voiceId": "stadt-karl-heinz-post",
+      "region": "germany",
+      "slot": 1,
+      "sourceLocator": "game.js npcLines[0]",
+      "spokenSha256": "fb5400e717b0fd6edc32bab8f5039a60ba190392ce6980538f066141ac1f060f"
+    },
+    {
+      "clipId": "stadt-karl-heinz-post-03",
+      "actorId": "city-karl-heinz-post",
+      "voiceId": "stadt-karl-heinz-post",
+      "region": "berlin",
+      "slot": 0,
+      "sourceLocator": "game.js npcDenglisch[7]",
+      "spokenSha256": "e6436a12f8cc8fbe4d7901aa3778d416dd400d44e6a0b437eb0d3da56978794b"
+    },
+    {
+      "clipId": "stadt-karl-heinz-post-04",
+      "actorId": "city-karl-heinz-post",
+      "voiceId": "stadt-karl-heinz-post",
+      "region": "berlin",
+      "slot": 1,
+      "sourceLocator": "game.js npcDenglisch[0]",
+      "spokenSha256": "aa6b799c0ea4fa3a71b3a37416549ced8325c2037ec941a2946e37a828cece41"
+    },
+    {
+      "clipId": "stadt-herbert-rasenaufsicht-01",
+      "actorId": "city-herbert-rasenaufsicht",
+      "voiceId": "stadt-herbert-rasenaufsicht",
+      "region": "germany",
+      "slot": 0,
+      "sourceLocator": "game.js npcLines[8]",
+      "spokenSha256": "ab7c074aa112bbc6c1c57df40516b9c9f65b7d2929d5ea4a2769b346e3c4dca3"
+    },
+    {
+      "clipId": "stadt-herbert-rasenaufsicht-02",
+      "actorId": "city-herbert-rasenaufsicht",
+      "voiceId": "stadt-herbert-rasenaufsicht",
+      "region": "germany",
+      "slot": 1,
+      "sourceLocator": "game.js npcLines[1]",
+      "spokenSha256": "3f08598e7c8a0752f0c02965a9789744e23f2d8c50e6d92b2a2b9fa9a7c3c9f4"
+    },
+    {
+      "clipId": "stadt-herbert-rasenaufsicht-03",
+      "actorId": "city-herbert-rasenaufsicht",
+      "voiceId": "stadt-herbert-rasenaufsicht",
+      "region": "berlin",
+      "slot": 0,
+      "sourceLocator": "game.js npcDenglisch[8]",
+      "spokenSha256": "0f67671f594d76418978bdf1943b32f4c9ba48abbacd2efda7f6c72056eb3322"
+    },
+    {
+      "clipId": "stadt-herbert-rasenaufsicht-04",
+      "actorId": "city-herbert-rasenaufsicht",
+      "voiceId": "stadt-herbert-rasenaufsicht",
+      "region": "berlin",
+      "slot": 1,
+      "sourceLocator": "game.js npcDenglisch[1]",
+      "spokenSha256": "fe5202d41d618036e0e1787dea7683dba9dd5bdac69e41eac636bdddb6ab5e9b"
+    },
+    {
+      "clipId": "stadt-waltraud-ordnung-01",
+      "actorId": "city-waltraud-ordnung",
+      "voiceId": "stadt-waltraud-ordnung",
+      "region": "germany",
+      "slot": 0,
+      "sourceLocator": "game.js npcLines[8]",
+      "spokenSha256": "ab7c074aa112bbc6c1c57df40516b9c9f65b7d2929d5ea4a2769b346e3c4dca3"
+    },
+    {
+      "clipId": "stadt-waltraud-ordnung-02",
+      "actorId": "city-waltraud-ordnung",
+      "voiceId": "stadt-waltraud-ordnung",
+      "region": "germany",
+      "slot": 1,
+      "sourceLocator": "game.js npcLines[1]",
+      "spokenSha256": "3f08598e7c8a0752f0c02965a9789744e23f2d8c50e6d92b2a2b9fa9a7c3c9f4"
+    },
+    {
+      "clipId": "stadt-waltraud-ordnung-03",
+      "actorId": "city-waltraud-ordnung",
+      "voiceId": "stadt-waltraud-ordnung",
+      "region": "berlin",
+      "slot": 0,
+      "sourceLocator": "game.js npcDenglisch[8]",
+      "spokenSha256": "0f67671f594d76418978bdf1943b32f4c9ba48abbacd2efda7f6c72056eb3322"
+    },
+    {
+      "clipId": "stadt-waltraud-ordnung-04",
+      "actorId": "city-waltraud-ordnung",
+      "voiceId": "stadt-waltraud-ordnung",
+      "region": "berlin",
+      "slot": 1,
+      "sourceLocator": "game.js npcDenglisch[1]",
+      "spokenSha256": "fe5202d41d618036e0e1787dea7683dba9dd5bdac69e41eac636bdddb6ab5e9b"
+    },
+    {
+      "clipId": "stadt-erwin-archiv-01",
+      "actorId": "city-erwin-archiv",
+      "voiceId": "stadt-erwin-archiv",
+      "region": "germany",
+      "slot": 0,
+      "sourceLocator": "game.js npcLines[3]",
+      "spokenSha256": "703970a1f964cd046878e4c560d3663365e63fa240db6226fbebe5bc8b3bb0a5"
+    },
+    {
+      "clipId": "stadt-erwin-archiv-02",
+      "actorId": "city-erwin-archiv",
+      "voiceId": "stadt-erwin-archiv",
+      "region": "germany",
+      "slot": 1,
+      "sourceLocator": "game.js npcLines[6]",
+      "spokenSha256": "1b977075ca9529e54b82a974e9cc573f9d0bf11ab0c510bf88f446949d5679de"
+    },
+    {
+      "clipId": "stadt-erwin-archiv-03",
+      "actorId": "city-erwin-archiv",
+      "voiceId": "stadt-erwin-archiv",
+      "region": "berlin",
+      "slot": 0,
+      "sourceLocator": "game.js npcDenglisch[3]",
+      "spokenSha256": "66c537e0fb90f9eba766dd1097707cdd691f1249d7b634021ee3279a81a407d1"
+    },
+    {
+      "clipId": "stadt-erwin-archiv-04",
+      "actorId": "city-erwin-archiv",
+      "voiceId": "stadt-erwin-archiv",
+      "region": "berlin",
+      "slot": 1,
+      "sourceLocator": "game.js npcDenglisch[6]",
+      "spokenSha256": "a44c0e88d537b3be6ca336a1b8d04bc9f012ce3453c05da86885195ace89cba3"
+    },
+    {
+      "clipId": "stadt-renate-termin-01",
+      "actorId": "city-renate-termin",
+      "voiceId": "stadt-renate-termin",
+      "region": "germany",
+      "slot": 0,
+      "sourceLocator": "game.js npcLines[9]",
+      "spokenSha256": "1e9a1b145f26c8632744f0b1f75fae8818f097b93f8c1d6646a3ca2d21be657e"
+    },
+    {
+      "clipId": "stadt-renate-termin-02",
+      "actorId": "city-renate-termin",
+      "voiceId": "stadt-renate-termin",
+      "region": "germany",
+      "slot": 1,
+      "sourceLocator": "game.js npcLines[2]",
+      "spokenSha256": "5da8c5c8a73fd144da62060277758a144a80260443ae1b0de4a61d290bc3c97c"
+    },
+    {
+      "clipId": "stadt-renate-termin-03",
+      "actorId": "city-renate-termin",
+      "voiceId": "stadt-renate-termin",
+      "region": "berlin",
+      "slot": 0,
+      "sourceLocator": "game.js npcDenglisch[9]",
+      "spokenSha256": "741ddbe5b8bc38260b66cb1641ec171ca0f9c9618dd42ba14940c01a25d9ee00"
+    },
+    {
+      "clipId": "stadt-renate-termin-04",
+      "actorId": "city-renate-termin",
+      "voiceId": "stadt-renate-termin",
+      "region": "berlin",
+      "slot": 1,
+      "sourceLocator": "game.js npcDenglisch[2]",
+      "spokenSha256": "f02ee145daf8ec67b153912b8f51a6053d1aeab7d79085bae171da50146d60a0"
+    },
+    {
+      "clipId": "stadt-heinz-mietnachweis-01",
+      "actorId": "city-heinz-mietnachweis",
+      "voiceId": "stadt-heinz-mietnachweis",
+      "region": "germany",
+      "slot": 0,
+      "sourceLocator": "game.js npcLines[1]",
+      "spokenSha256": "3f08598e7c8a0752f0c02965a9789744e23f2d8c50e6d92b2a2b9fa9a7c3c9f4"
+    },
+    {
+      "clipId": "stadt-heinz-mietnachweis-02",
+      "actorId": "city-heinz-mietnachweis",
+      "voiceId": "stadt-heinz-mietnachweis",
+      "region": "germany",
+      "slot": 1,
+      "sourceLocator": "game.js npcLines[4]",
+      "spokenSha256": "6c2b3b0a17ec41598f88960cb793eb08ee61603e7927954a1eab4939eb8f6dc3"
+    },
+    {
+      "clipId": "stadt-heinz-mietnachweis-03",
+      "actorId": "city-heinz-mietnachweis",
+      "voiceId": "stadt-heinz-mietnachweis",
+      "region": "berlin",
+      "slot": 0,
+      "sourceLocator": "game.js npcDenglisch[1]",
+      "spokenSha256": "fe5202d41d618036e0e1787dea7683dba9dd5bdac69e41eac636bdddb6ab5e9b"
+    },
+    {
+      "clipId": "stadt-heinz-mietnachweis-04",
+      "actorId": "city-heinz-mietnachweis",
+      "voiceId": "stadt-heinz-mietnachweis",
+      "region": "berlin",
+      "slot": 1,
+      "sourceLocator": "game.js npcDenglisch[4]",
+      "spokenSha256": "7e1357790c27a1149fba633e7964c299267b9870f07f252b12478c3b34b6c1db"
+    },
+    {
+      "clipId": "stadt-monika-zebra-01",
+      "actorId": "city-monika-zebra",
+      "voiceId": "stadt-monika-zebra",
+      "region": "germany",
+      "slot": 0,
+      "sourceLocator": "game.js npcLines[8]",
+      "spokenSha256": "ab7c074aa112bbc6c1c57df40516b9c9f65b7d2929d5ea4a2769b346e3c4dca3"
+    },
+    {
+      "clipId": "stadt-monika-zebra-02",
+      "actorId": "city-monika-zebra",
+      "voiceId": "stadt-monika-zebra",
+      "region": "germany",
+      "slot": 1,
+      "sourceLocator": "game.js npcLines[1]",
+      "spokenSha256": "3f08598e7c8a0752f0c02965a9789744e23f2d8c50e6d92b2a2b9fa9a7c3c9f4"
+    },
+    {
+      "clipId": "stadt-monika-zebra-03",
+      "actorId": "city-monika-zebra",
+      "voiceId": "stadt-monika-zebra",
+      "region": "berlin",
+      "slot": 0,
+      "sourceLocator": "game.js npcDenglisch[8]",
+      "spokenSha256": "0f67671f594d76418978bdf1943b32f4c9ba48abbacd2efda7f6c72056eb3322"
+    },
+    {
+      "clipId": "stadt-monika-zebra-04",
+      "actorId": "city-monika-zebra",
+      "voiceId": "stadt-monika-zebra",
+      "region": "berlin",
+      "slot": 1,
+      "sourceLocator": "game.js npcDenglisch[1]",
+      "spokenSha256": "fe5202d41d618036e0e1787dea7683dba9dd5bdac69e41eac636bdddb6ab5e9b"
+    },
+    {
+      "clipId": "stadt-joachim-fundsache-01",
+      "actorId": "city-joachim-fundsache",
+      "voiceId": "stadt-joachim-fundsache",
+      "region": "germany",
+      "slot": 0,
+      "sourceLocator": "game.js npcLines[7]",
+      "spokenSha256": "347f9b3ee5fd62b3a49248a83d957be723f65ec2ef808e4cfdeb4769b68fc7b9"
+    },
+    {
+      "clipId": "stadt-joachim-fundsache-02",
+      "actorId": "city-joachim-fundsache",
+      "voiceId": "stadt-joachim-fundsache",
+      "region": "germany",
+      "slot": 1,
+      "sourceLocator": "game.js npcLines[0]",
+      "spokenSha256": "fb5400e717b0fd6edc32bab8f5039a60ba190392ce6980538f066141ac1f060f"
+    },
+    {
+      "clipId": "stadt-joachim-fundsache-03",
+      "actorId": "city-joachim-fundsache",
+      "voiceId": "stadt-joachim-fundsache",
+      "region": "berlin",
+      "slot": 0,
+      "sourceLocator": "game.js npcDenglisch[7]",
+      "spokenSha256": "e6436a12f8cc8fbe4d7901aa3778d416dd400d44e6a0b437eb0d3da56978794b"
+    },
+    {
+      "clipId": "stadt-joachim-fundsache-04",
+      "actorId": "city-joachim-fundsache",
+      "voiceId": "stadt-joachim-fundsache",
+      "region": "berlin",
+      "slot": 1,
+      "sourceLocator": "game.js npcDenglisch[0]",
+      "spokenSha256": "aa6b799c0ea4fa3a71b3a37416549ced8325c2037ec941a2946e37a828cece41"
+    },
+    {
+      "clipId": "stadt-ute-ruhe-01",
+      "actorId": "city-ute-ruhe",
+      "voiceId": "stadt-ute-ruhe",
+      "region": "germany",
+      "slot": 0,
+      "sourceLocator": "game.js npcLines[5]",
+      "spokenSha256": "d0dddb59ca37caac7a6e96e145924ecd41d29b0e993c0ccfa5c9af5108077156"
+    },
+    {
+      "clipId": "stadt-ute-ruhe-02",
+      "actorId": "city-ute-ruhe",
+      "voiceId": "stadt-ute-ruhe",
+      "region": "germany",
+      "slot": 1,
+      "sourceLocator": "game.js npcLines[8]",
+      "spokenSha256": "ab7c074aa112bbc6c1c57df40516b9c9f65b7d2929d5ea4a2769b346e3c4dca3"
+    },
+    {
+      "clipId": "stadt-ute-ruhe-03",
+      "actorId": "city-ute-ruhe",
+      "voiceId": "stadt-ute-ruhe",
+      "region": "berlin",
+      "slot": 0,
+      "sourceLocator": "game.js npcDenglisch[5]",
+      "spokenSha256": "ef74b70cb04df82847b7033f2999bd3675b33be89e66dfd2a05dd90217c41215"
+    },
+    {
+      "clipId": "stadt-ute-ruhe-04",
+      "actorId": "city-ute-ruhe",
+      "voiceId": "stadt-ute-ruhe",
+      "region": "berlin",
+      "slot": 1,
+      "sourceLocator": "game.js npcDenglisch[8]",
+      "spokenSha256": "0f67671f594d76418978bdf1943b32f4c9ba48abbacd2efda7f6c72056eb3322"
+    },
+    {
+      "clipId": "stadt-norbert-faxrolle-01",
+      "actorId": "city-norbert-faxrolle",
+      "voiceId": "stadt-norbert-faxrolle",
+      "region": "germany",
+      "slot": 0,
+      "sourceLocator": "game.js npcLines[4]",
+      "spokenSha256": "6c2b3b0a17ec41598f88960cb793eb08ee61603e7927954a1eab4939eb8f6dc3"
+    },
+    {
+      "clipId": "stadt-norbert-faxrolle-02",
+      "actorId": "city-norbert-faxrolle",
+      "voiceId": "stadt-norbert-faxrolle",
+      "region": "germany",
+      "slot": 1,
+      "sourceLocator": "game.js npcLines[7]",
+      "spokenSha256": "347f9b3ee5fd62b3a49248a83d957be723f65ec2ef808e4cfdeb4769b68fc7b9"
+    },
+    {
+      "clipId": "stadt-norbert-faxrolle-03",
+      "actorId": "city-norbert-faxrolle",
+      "voiceId": "stadt-norbert-faxrolle",
+      "region": "berlin",
+      "slot": 0,
+      "sourceLocator": "game.js npcDenglisch[4]",
+      "spokenSha256": "7e1357790c27a1149fba633e7964c299267b9870f07f252b12478c3b34b6c1db"
+    },
+    {
+      "clipId": "stadt-norbert-faxrolle-04",
+      "actorId": "city-norbert-faxrolle",
+      "voiceId": "stadt-norbert-faxrolle",
+      "region": "berlin",
+      "slot": 1,
+      "sourceLocator": "game.js npcDenglisch[7]",
+      "spokenSha256": "e6436a12f8cc8fbe4d7901aa3778d416dd400d44e6a0b437eb0d3da56978794b"
+    },
+    {
+      "clipId": "stadt-edeltraud-trennung-01",
+      "actorId": "city-edeltraud-trennung",
+      "voiceId": "stadt-edeltraud-trennung",
+      "region": "germany",
+      "slot": 0,
+      "sourceLocator": "game.js npcLines[6]",
+      "spokenSha256": "1b977075ca9529e54b82a974e9cc573f9d0bf11ab0c510bf88f446949d5679de"
+    },
+    {
+      "clipId": "stadt-edeltraud-trennung-02",
+      "actorId": "city-edeltraud-trennung",
+      "voiceId": "stadt-edeltraud-trennung",
+      "region": "germany",
+      "slot": 1,
+      "sourceLocator": "game.js npcLines[9]",
+      "spokenSha256": "1e9a1b145f26c8632744f0b1f75fae8818f097b93f8c1d6646a3ca2d21be657e"
+    },
+    {
+      "clipId": "stadt-edeltraud-trennung-03",
+      "actorId": "city-edeltraud-trennung",
+      "voiceId": "stadt-edeltraud-trennung",
+      "region": "berlin",
+      "slot": 0,
+      "sourceLocator": "game.js npcDenglisch[6]",
+      "spokenSha256": "a44c0e88d537b3be6ca336a1b8d04bc9f012ce3453c05da86885195ace89cba3"
+    },
+    {
+      "clipId": "stadt-edeltraud-trennung-04",
+      "actorId": "city-edeltraud-trennung",
+      "voiceId": "stadt-edeltraud-trennung",
+      "region": "berlin",
+      "slot": 1,
+      "sourceLocator": "game.js npcDenglisch[9]",
+      "spokenSha256": "741ddbe5b8bc38260b66cb1641ec171ca0f9c9618dd42ba14940c01a25d9ee00"
+    }
+  ]
+}

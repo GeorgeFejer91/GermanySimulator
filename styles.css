@@ -244,6 +244,10 @@ footer{bottom:calc(var(--subtitle-height) + 8px)}
 .dialogue:not([hidden]){max-width:calc(100% - 16px)}
 .dialogue .dialogue-actions{display:flex;flex-wrap:wrap;min-width:0}
 .dialogue .dialogue-actions button{flex:1 1 auto;min-width:0;max-width:100%;white-space:normal;overflow-wrap:anywhere}
+@media(max-width:240px){
+ .dialogue:not([hidden]):not(.welcome){width:calc(100% - 8px);max-width:calc(100% - 8px);padding-inline:2px}
+ .dialogue:not(.welcome) .dialogue-actions button{padding-inline:2px;overflow-wrap:normal;word-break:normal}
+}
 .dialogue.welcome:not([hidden]){left:50%;right:auto;bottom:calc(var(--subtitle-height) + 12px);transform:translateX(-50%);width:min(680px,calc(100% - 24px));max-height:calc(var(--humor-viewport-height,100dvh) - var(--subtitle-height) - var(--welcome-top,100px) - 32px);grid-template-columns:minmax(0,1fr);grid-template-rows:minmax(0,1fr) auto;gap:12px}
 .dialogue.welcome .dialogue-copy{display:block;overflow:auto;overscroll-behavior:contain;touch-action:pan-y}
 .dialogue.welcome small{display:block;font-size:.875rem;line-height:1.4;overflow-wrap:break-word}

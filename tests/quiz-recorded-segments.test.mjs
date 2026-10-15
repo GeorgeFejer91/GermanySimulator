@@ -9,8 +9,10 @@ const manifest=JSON.parse(readFileSync(new URL("../assets/voices/quiz-segments/m
 function sourceOf(source,name){
  const start=source.indexOf(`function ${name}(`);
  assert.notEqual(start,-1);
+ const body=source.indexOf("){",start)+1;
+ assert.ok(body>start,`${name} body follows its parameters`);
  let depth=0,opened=false;
- for(let i=start;i<source.length;i++){
+ for(let i=body;i<source.length;i++){
   if(source[i]==="{"){depth++;opened=true}
   else if(source[i]==="}"&&opened&&--depth===0)return source.slice(start,i+1);
  }
@@ -20,11 +22,11 @@ function sourceOf(source,name){
 const lookup=vm.createContext({});
 vm.runInContext(`const candidatePreviewEnabled=true,quizSegmentDialogue={"quiz-brigitte-neumann\\u0000approach":"a.mp3","quiz-brigitte-neumann\\u0000context":"b.mp3","quiz-brigitte-neumann\\u0000question":"c.mp3"},candidateDialogue={},approvedDialogue={};${sourceOf(catalog,"candidateSequence")};globalThis.find=candidateSequence`,lookup);
 assert.deepEqual(Array.from(lookup.find("quiz-brigitte-neumann",["approach","context","question"])),["a.mp3","b.mp3","c.mp3"]);
-assert.equal(lookup.find("quiz-brigitte-neumann",["approach","context","missing"]),null,"a partial prompt must use the full browser voice");
+assert.equal(lookup.find("quiz-brigitte-neumann",["approach","context","missing"]),null,"a partial prompt cannot borrow incomplete recordings");
 assert.equal(lookup.find("another-voice",["approach","context","question"]),null,"segments must all belong to the selected character");
 const lookupOff=vm.createContext({});
 vm.runInContext(`const candidatePreviewEnabled=false,quizSegmentDialogue={"quiz-brigitte-neumann\\u0000approach":"a.mp3"},candidateDialogue={},approvedDialogue={};${sourceOf(catalog,"candidateSequence")};globalThis.find=candidateSequence`,lookupOff);
-assert.equal(lookupOff.find("quiz-brigitte-neumann",["approach"]),null,"ordinary gameplay must keep browser speech");
+assert.equal(lookupOff.find("quiz-brigitte-neumann",["approach"]),null,"preview segments require opt-in; the caller owns fallback policy");
 assert.equal(manifest.segmentCount,3);
 const segmentMap=vm.createContext({Object});
 const segmentStart=catalog.indexOf("const quizSegmentDialogue=");
@@ -67,21 +69,24 @@ const fallback=vm.createContext({
 });
 vm.runInContext(`const AUDIO_CLASS={TEXT:"audio-text"},AUDIO_MIX={ATTACK_SECONDS:.12,FOREGROUND:1};let stimulusGeneration=1,activeStimulus=item,recordedSpeechSource=null,recordedSpeechGain=null;${sourceOf(game,"playRecordedStimulus")};playRecordedStimulus(item,1)`,fallback);
 await new Promise(resolve=>setImmediate(resolve));
-assert.equal(events.at(-1),"whole quiz prompt","a missing segment must replay the complete text through browser speech");
+assert.equal(events.at(-1),"whole quiz prompt","a missing segment must retain the complete text for the fixed-voice fallback policy");
 
 for(const candidate of ["character.mp3",null]){
  const barks=[],lookups=[];
  const answer=vm.createContext({
-  state:{quizQuestion:{answer:1},quizCopy:{choices:["A","B"]},quizCharacter:{name:"Brigitte Neumann",title:"STADTBILDWACHT",voiceId:"quiz-brigitte-neumann"},quizNpc:{},quizVoiceToken:0,modal:true},
+  state:{voiceOn:true,quizQuestion:{answer:1},quizCopy:{choices:["A","B"]},quizCharacter:{name:"Brigitte Neumann",title:"STADTBILDWACHT",voiceId:"quiz-brigitte-neumann"},quizNpc:{},quizVoiceToken:0,modal:true},
   document:{getElementById:()=>({hidden:false})},
   speechCatalog:{candidateClip:(voiceId,text)=>{lookups.push([voiceId,text]);return candidate}},
-  speechClip:()=>({text:"Nein! Nein! Nein!",recording:"legacy.mp3"}),
-  requestCharacterReaction(){},uiTone(){},addGermanness(){},showWorldBark:(...args)=>barks.push(args),
+  speechClip:()=>({text:"Nein! Nein! Nein!",english:"No! No! No!",voiceId:"quiz-sting",recording:"legacy.mp3"}),
+  requestCharacterReaction(){},uiTone(){},addGermanness(){},speakRecorded:(text,path,options)=>barks.push({text,path,options}),speak:(text,options)=>barks.push({text,path:null,options}),
   STIMULUS_PRIORITY:{CRITICAL:1}
  });
- vm.runInContext(`${sourceOf(game,"answerCitizenshipQuiz")};answerCitizenshipQuiz(0)`,answer);
+ vm.runInContext(`${sourceOf(game,"showWorldBark")};${sourceOf(game,"answerCitizenshipQuiz")};answerCitizenshipQuiz(0)`,answer);
  assert.deepEqual(Array.from(lookups[0]),["quiz-brigitte-neumann","Nein! Nein! Nein!"],"feedback lookup must use the shown quiz character and exact words");
- assert.equal(barks[0][3],candidate||"legacy.mp3","character take should replace the shared sting only when present");
+ assert.equal(barks[0].path,candidate,"a known character never borrows the generic sting when their take is missing");
+ assert.equal(barks[0].text,"Nein! Nein! Nein!");
+ assert.equal(barks[0].options.candidateVoiceId,"quiz-brigitte-neumann","missing and successful takes retain the selected speaker");
+ assert.equal(barks[0].options.subtitle,"No! No! No!","caption ownership survives missing recordings");
 }
 
 console.log("Composite quiz recording and fallback contracts OK");

@@ -25,6 +25,40 @@ for(const person of cast.roleProfiles.filter(person=>person.voiceId.startsWith("
  assert.ok(archetype,`missing crowd archetype ${person.voiceId}`);
  for(const lines of Object.values(archetype.barks))for(const line of lines)authored.add(person.voiceId+"\0"+line);
 }
+
+// This immutable source receipt describes only the displaced city auditions.
+// Current recording completeness is a separate strict production coverage gate.
+const historicalBytes=source("assets/voices/candidate-dialogue/historical-city-source.json");
+const historical=JSON.parse(historicalBytes),digest=value=>createHash("sha256").update(value).digest("hex");
+assert.equal(historical.schemaVersion,1);
+assert.deepEqual(historical.historicalSource,{
+ path:"For-AI/VOICE-CAST.json",commit:"415e95d9159837240c74870f3b0281be52434f68",
+ gitBlob:"786775713b56b962a2c1e4d97ab6284ed108f45f",sha256:"119cad66ca6fe2d1d3257353f325f1e8550caa983566b7c9de42a0efc85a3a16"
+});
+assert.equal(historical.candidateManifestSha256,digest(source("assets/voices/candidate-dialogue/manifest.json")));
+assert.equal(historical.bindings.length,19);assert.equal(historical.links.length,76);
+const historicalBindings=new Map(),historicalCity=new Map(),historicalSlots=new Set();
+for(const binding of historical.bindings){
+ assert.match(binding.actorId,/^city-[a-z-]+$/);assert.equal(binding.voiceId,"stadt-"+binding.actorId.slice(5));
+ assert.match(binding.profileId,/^[a-f0-9]{32}$/);assert.match(binding.referenceSha256,/^[a-f0-9]{64}$/);
+ assert.equal(binding.referenceHashKind,"uploaded-original");assert.ok(!historicalBindings.has(binding.voiceId));
+ historicalBindings.set(binding.voiceId,binding);
+}
+for(const row of historical.links){
+ const binding=historicalBindings.get(row.voiceId),clip=manifest.clips.find(clip=>clip.clipId===row.clipId);
+ assert.ok(binding&&clip,"historical clip link "+row.clipId);assert.equal(row.actorId,binding.actorId);
+ assert.ok(row.region==="germany"||row.region==="berlin");assert.ok(row.slot===0||row.slot===1);
+ assert.equal(row.clipId,row.voiceId+"-"+String((row.region==="berlin"?2:0)+row.slot+1).padStart(2,"0"),"historical slot "+row.clipId);
+ const slot=row.actorId+"\0"+row.region+"\0"+row.slot;assert.ok(!historicalSlots.has(slot));historicalSlots.add(slot);
+ assert.match(row.sourceLocator,row.region==="berlin"?/^game\.js npcDenglisch\[[0-9]\]$/:/^game\.js npcLines\[[0-9]\]$/,"historical source locator");
+ assert.equal(row.spokenSha256,digest(clip.text),"historical spoken source "+row.clipId);
+ for(const field of ["voiceId","profileId","referenceSha256","referenceHashKind"])assert.equal(clip[field],binding[field],"historical "+field+" "+row.clipId);
+ const key=row.voiceId+"\0"+clip.text;assert.ok(!historicalCity.has(key));historicalCity.set(key,row);
+}
+for(const binding of historicalBindings.values())assert.equal(historical.links.filter(row=>row.actorId===binding.actorId).length,4);
+// Reviewed source artifact pin also protects precise source indices and snapshot links.
+assert.equal(digest(historicalBytes),"ed2beb0131f98161ba0cd3ee3ab649e3addc9d48a36bade37d8f0432ac2658c6","historical receipt changed; review its committed source, not current scripts");
+
 const library=source("For-AI/AUDIO-TEXT-LIBRARY.js").toString();
 const load=search=>{
  const context=vm.createContext({window:{},location:{search},URLSearchParams});
@@ -85,9 +119,10 @@ for(const clip of originalCandidates){
  const key=clip.voiceId+"\0"+clip.text;
  assert.ok(!keys.has(key),`duplicate candidate ${clip.clipId}`);
  keys.add(key);
- assert.ok(clip.retiredReason||authored.has(key)||clip.voiceId==="amt-brunhilde-knick"&&(officeStory.includes(clip.text)||officeRuntime.includes(clip.text)),`unowned line ${clip.clipId}`);
- assert.equal(clip.profileId,owners.get(clip.voiceId)?.profileId,`profile binding ${clip.clipId}`);
- assert.equal(clip.referenceSha256,owners.get(clip.voiceId)?.referenceSha256,`reference binding ${clip.clipId}`);
+ assert.ok(clip.retiredReason||historicalCity.has(key)||authored.has(key)||clip.voiceId==="amt-brunhilde-knick"&&(officeStory.includes(clip.text)||officeRuntime.includes(clip.text)),`unowned line ${clip.clipId}`);
+ const owner=historicalBindings.get(clip.voiceId)||owners.get(clip.voiceId);
+ assert.equal(clip.profileId,owner?.profileId,`profile binding ${clip.clipId}`);
+ assert.equal(clip.referenceSha256,owner?.referenceSha256,`reference binding ${clip.clipId}`);
  const official=off.candidateClip(clip.voiceId,clip.text);
  const selected=cast.productionVoices[clip.voiceId],oldProfile=selected&&clip.profileId!==selected.profileId;
  assert.equal(on.candidateClip(clip.voiceId,clip.text),official||(clip.retiredReason||oldProfile?null:clip.path));
@@ -97,7 +132,8 @@ for(const clip of originalCandidates){
  if(clip.archiveRelativePath)assert.equal(clip.archiveRelativePath,'assets/'+clip.path);
  else assert.equal(createHash("sha256").update(source(clip.path)).digest("hex"),clip.sha256);
 }
-for(const person of cast.characters)for(const line of person.dialogue){
+// Historical auditions do not establish current personalized city production coverage.
+for(const person of cast.characters.filter(person=>!person.gameCharacterId?.startsWith("city-")))for(const line of person.dialogue){
  assert.ok(keys.has(person.voiceId+"\0"+line.text),`missing fixed-character audition ${person.voiceId}: ${line.text}`);
 }
 const officeContext=vm.createContext({window:{}});

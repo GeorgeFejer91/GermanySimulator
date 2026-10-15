@@ -24,9 +24,9 @@ for(const person of neighborRoles){
  if(person.voiceId==='jwd-inga-maaslos'){
   const manifest=JSON.parse(source('assets/voices/neighbors/inga-manifest.json'));
   assert.equal(person.dialogue.length,34);assert.equal(manifest.requestedLineCount,34);
-  assert.equal(manifest.clips.length,31);assert.equal(manifest.heldPrivate.length,3);
-  assert.deepEqual(manifest.heldPrivate.map(row=>row.clipId).sort(),['inga-story-20','inga-story-30','inga-story-34']);
-  assert.equal(entry.lines('berlin').filter(row=>row.clip).length,31);assert.match(entry.voice,/31 of 34/);
+  assert.equal(manifest.clips.length,34);assert.equal(manifest.heldPrivate.length,0);
+  assert.deepEqual(manifest.heldPrivate,[]);assert.equal(entry.lines('berlin').length,34);assert.equal(entry.lines('germany').length,34);
+  assert.equal(entry.lines('berlin').filter(row=>row.clip).length,34);assert.match(entry.voice,/All 34 authored lines/);
   assert.equal(context.window.GermanySimulatorAudioText.productionVoices[person.voiceId].fallback,'captions');
   for(const owned of person.dialogue){
    const row=entry.lines('berlin').find(row=>row.text===owned.text);assert.ok(row,'every authored Inga line stays reviewable');
@@ -34,6 +34,14 @@ for(const person of neighborRoles){
    assert.equal(row.clip,accepted?'./'+accepted.file:'','held speech cannot borrow another recording');
   }
  }else if(person.voiceId==='jwd-frau-schwabingen'){assert.equal(entry.lines('berlin').filter(row=>row.clip).length,33);assert.match(entry.voice,/Exaggerated written Swabian/);for(const owned of person.dialogue)assert.ok(entry.lines('berlin').some(row=>row.text===owned.text&&row.clip),'every dialect line has a recorded preview')}else{const count=person.voiceId==='jwd-heiko-maaslos'?36:person.voiceId==='jwd-ede-einbruch'?2:7;assert.equal(entry.lines('berlin').filter(row=>row.clip).length,count);assert.match(entry.voice,/selected GS Heiko|Dedicated GS Hartmut|Dedicated GS Ede/);for(const owned of person.dialogue)assert.ok(entry.lines('berlin').some(row=>row.text===owned.text&&row.clip),'each owned line has its exact recorded preview')}
+}
+for(const person of cast.characters.filter(person=>person.gameCharacterId.startsWith('city-'))){
+ const entry=profiles.find(profile=>profile.id===person.gameCharacterId);assert.equal(entry.voiceId,person.voiceId);
+ for(const region of ['germany','berlin']){
+  const rows=entry.lines(region).filter(row=>row.trigger==='E · personal dialogue');
+  assert.deepEqual(JSON.parse(JSON.stringify(rows.map(row=>row.text))),person.dialogue.filter(row=>row.region===region).sort((a,b)=>a.slot-b.slot).map(row=>row.text),'gallery follows the exact personal regional E dialogue');
+  assert.equal(rows.length,2);for(const row of rows)assert.equal(row.clip,context.window.GermanySimulatorAudioText.recordedClip(person.voiceId,row.text)||'');
+ }
 }
 const listed=profiles.map(person=>person.name.toLocaleUpperCase());
 for(const name of physicalNames)assert.ok(listed.some(label=>label.includes(name)),`missing physical NPC ${name}`);
