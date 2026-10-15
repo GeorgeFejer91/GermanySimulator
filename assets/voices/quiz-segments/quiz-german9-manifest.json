@@ -1,0 +1,930 @@
+{
+  "schemaVersion": 1,
+  "voiceId": "quiz-german9-finite",
+  "profileId": "multiple-existing-quiz-profiles",
+  "fallback": "existing quiz presentation remains unchanged",
+  "status": "finite German9 proposal; only EOS, literal exact German ASR, levels, cues and source-bound takes accepted; held rows remain private",
+  "requestedLineCount": 9,
+  "generatedLineCount": 9,
+  "lineCount": 4,
+  "clips": [
+    {
+      "clipId": "quiz-gisela-becker-question-24-germany",
+      "voiceId": "quiz-gisela-becker",
+      "actorId": "gisela-becker",
+      "quizCharacterId": "gisela-becker",
+      "region": "germany",
+      "slot": 0,
+      "questionId": "24",
+      "questionCategory": "civic",
+      "segment": "question",
+      "sourceLocator": "game.js citizenshipQuestions[0].question",
+      "englishSourceLocator": "For-AI/AUDIO-TEXT-LIBRARY.js questions[\"24\"]",
+      "text": "Wie viele Bundesländer hat die Bundesrepublik Deutschland?",
+      "english": "How many federal states does the Federal Republic of Germany have?",
+      "profileId": "d37d406544a546fb8e5d1839bf3af558",
+      "referenceSha256": "f50e0f1a36ba71ffa8e8419d02b0c2e132beb47246dfd79469b72681e05e30f8",
+      "referenceOriginalSha256": "aa5c45c11866075d29dce803d542521f21397070bb4ab97025046c5d87dd93fc",
+      "renderer": "ResembleAI/Chatterbox Multilingual V2 0.1.7",
+      "modelRevision": "5bb1f6ee58e50c3b8d408bc82a6d3740c2db6e18",
+      "processing": null,
+      "seed": 71000,
+      "synthesisAttempt": 1,
+      "authoringHelperSha256": "722853a79b5838c480fbf93c8f036f6d96a82eb62f9c40b4943cbb797d437fe0",
+      "rendererInputText": "Wie viele Bundesländer hat die Bundesrepublik Deutschland?",
+      "decode": {
+        "maxSpeechTokens": 250,
+        "attentionHooksBefore": 0,
+        "generatedSpeechTokens": 86,
+        "eosReached": true,
+        "eosKind": "analyzer-forced",
+        "eosSuppressionObservedSteps": 65,
+        "modelEosRestoredSteps": 0,
+        "alignmentFirstCompletedStep": 64,
+        "nativeAnalyzerSourceSha256": "d8430efa92aedb8e59b782c1d299fe7238570eecea9d293c0981a5ee2e82c8c7",
+        "eosPolicy": "Native analyzer unchanged; observation only",
+        "t3InferenceSeconds": 4.84,
+        "temporaryAnalyzerHooksRemoved": 6,
+        "attentionHooksAfter": 0,
+        "eosTraceSha256": "44d812a4b8ed512f49d2eac9cc117f69ff73e0ea87158458266c7c2f79adf5d6"
+      },
+      "rendererInputBasis": "exact authored source",
+      "requestSha256": "0d650688ae679bc390b1a0464f9702a16963a70cf92517eadfd8f78908c882fa",
+      "profileJsonSha256": "512608e6dab01e197bac83065c35305197b4e1661d1534f2fdb063cb4ec1c5e0",
+      "rawSha256": "c4c918180cb5f327f7a26514ef051cedcabaa47f3562af58db569b73a3710377",
+      "modelLicense": "MIT",
+      "referenceLicense": "CC0-1.0",
+      "durationSeconds": 3.4,
+      "renderSeconds": 6.34,
+      "synthesis": {
+        "exaggeration": 0.5,
+        "exaggerationReason": null,
+        "temperature": 0.65,
+        "repetitionPenalty": 3,
+        "cfgWeight": 0.6,
+        "languageId": "de",
+        "device": "cuda",
+        "precision": "fp16",
+        "t3WeightPrecision": "float16",
+        "conditioningPrecision": "float32",
+        "autocastPrecision": "float16",
+        "conditioningCached": true,
+        "referenceReconditionedForProfile": "d37d406544a546fb8e5d1839bf3af558",
+        "referenceConditioningVerifiedFloat32": true,
+        "modelSessionReused": false,
+        "cpuThreads": 2,
+        "inferenceMode": true
+      },
+      "listening": "pending",
+      "status": "eligible exact-text recording; human listening pending",
+      "processingSha256": null,
+      "normalization": {
+        "targetLufs": -18,
+        "targetTruePeakDbtp": -1.5,
+        "filter": "loudnorm=I=-17.36:TP=-1.8:LRA=11:linear=false",
+        "iterations": 2
+      },
+      "integratedLufs": -18.01,
+      "truePeakDbtp": -2.24,
+      "asr": "Wie viele Bundesländer hat die Bundesrepublik Deutschland?",
+      "asrWordExact": true,
+      "asrLiteralWordExact": true,
+      "asrNormalization": "case/punctuation, German numeric and A38 spoken equivalents, guarded full-hour and date-ordinal equivalents, section sign/Paragraf orthography, German compound spacing",
+      "asrModel": "independent faster-whisper, cached local model, cpu int8 (effective int8_float32), no script prompt",
+      "asrCpuThreads": 1,
+      "asrDevice": "cpu",
+      "asrEffectiveComputeType": "int8_float32",
+      "asrLanguageId": "de",
+      "asrComputeType": "int8",
+      "asrScriptPrompt": null,
+      "asrBeamSize": 1,
+      "asrReadings": [
+        {
+          "beamSize": 1,
+          "transcript": "Wie viele Bundesländer hat die Bundesrepublik Deutschland?",
+          "transcribeSeconds": 16.64,
+          "words": [
+            {
+              "word": " Wie",
+              "start": 0,
+              "end": 0.22
+            },
+            {
+              "word": " viele",
+              "start": 0.22,
+              "end": 0.52
+            },
+            {
+              "word": " Bundesländer",
+              "start": 0.52,
+              "end": 1.2
+            },
+            {
+              "word": " hat",
+              "start": 1.2,
+              "end": 1.38
+            },
+            {
+              "word": " die",
+              "start": 1.38,
+              "end": 1.48
+            },
+            {
+              "word": " Bundesrepublik",
+              "start": 1.48,
+              "end": 2.24
+            },
+            {
+              "word": " Deutschland?",
+              "start": 2.24,
+              "end": 2.64
+            }
+          ]
+        }
+      ],
+      "asrModelSha256": "e76620f83d5f5b69efd3d87e3dc180c1bd21df9fbebacfd4335e5e1efcc018da",
+      "asrModelDirectoryName": "voice-asr-model",
+      "wordCues": [
+        {
+          "at": 0,
+          "charIndex": 0,
+          "word": "Wie",
+          "end": 0.22
+        },
+        {
+          "at": 0.22,
+          "charIndex": 4,
+          "word": "viele",
+          "end": 0.52
+        },
+        {
+          "at": 0.52,
+          "charIndex": 10,
+          "word": "Bundesländer",
+          "end": 1.2
+        },
+        {
+          "at": 1.2,
+          "charIndex": 23,
+          "word": "hat",
+          "end": 1.38
+        },
+        {
+          "at": 1.38,
+          "charIndex": 27,
+          "word": "die",
+          "end": 1.48
+        },
+        {
+          "at": 1.48,
+          "charIndex": 31,
+          "word": "Bundesrepublik",
+          "end": 2.24
+        },
+        {
+          "at": 2.24,
+          "charIndex": 46,
+          "word": "Deutschland",
+          "end": 2.64
+        }
+      ],
+      "sha256": "56b7cdf54fcdf420406523184e80bfbbc6749d0d98b19697d83d9ae47a15c53e",
+      "bytes": 55340,
+      "sampleRateHz": 48000,
+      "channels": 1,
+      "bitrateBitsPerSecond": 128000,
+      "file": "assets/voices/quiz-segments/quiz-gisela-becker-question-24-germany.mp3",
+      "approval": {
+        "status": "user-approved",
+        "scope": "ROOT-sealed-finite-German9",
+        "grantId": "ROOT-finite-quiz-German9-shortpath-20261015-v3",
+        "clipId": "quiz-gisela-becker-question-24-germany",
+        "encodedSha256": "56b7cdf54fcdf420406523184e80bfbbc6749d0d98b19697d83d9ae47a15c53e",
+        "listeningConfirmed": false
+      }
+    },
+    {
+      "clipId": "quiz-ruediger-schmidt-question-g-b2-01-germany",
+      "voiceId": "quiz-ruediger-schmidt",
+      "actorId": "ruediger-schmidt",
+      "quizCharacterId": "ruediger-schmidt",
+      "region": "germany",
+      "slot": 59,
+      "questionId": "G-B2-01",
+      "questionCategory": "grammar-b2",
+      "segment": "question",
+      "sourceLocator": "game.js citizenshipQuestions[59].question",
+      "englishSourceLocator": "For-AI/AUDIO-TEXT-LIBRARY.js questions[\"G-B2-01\"]",
+      "text": "Welche Zeitfolge ist korrekt?",
+      "english": "Which sequence of tenses is correct?",
+      "profileId": "394ec6ba22564d8887e5d29121abe932",
+      "referenceSha256": "abd1b50a64b82e4ec6ff903c4d286094fb9cbca2f756a1b35e45f6b455729ee7",
+      "referenceOriginalSha256": "718d21fd8dc250521a21882f86795cf8652845df7c128e655c0e2e771ac3207e",
+      "renderer": "ResembleAI/Chatterbox Multilingual V2 0.1.7",
+      "modelRevision": "5bb1f6ee58e50c3b8d408bc82a6d3740c2db6e18",
+      "processing": null,
+      "seed": 71000,
+      "synthesisAttempt": 1,
+      "authoringHelperSha256": "722853a79b5838c480fbf93c8f036f6d96a82eb62f9c40b4943cbb797d437fe0",
+      "rendererInputText": "Welche Zeitfolge ist korrekt?",
+      "decode": {
+        "maxSpeechTokens": 250,
+        "attentionHooksBefore": 0,
+        "generatedSpeechTokens": 62,
+        "eosReached": true,
+        "eosKind": "model-sampled",
+        "eosSuppressionObservedSteps": 41,
+        "modelEosRestoredSteps": 0,
+        "alignmentFirstCompletedStep": 40,
+        "nativeAnalyzerSourceSha256": "d8430efa92aedb8e59b782c1d299fe7238570eecea9d293c0981a5ee2e82c8c7",
+        "eosPolicy": "Native analyzer unchanged; observation only",
+        "t3InferenceSeconds": 3.09,
+        "temporaryAnalyzerHooksRemoved": 3,
+        "attentionHooksAfter": 0,
+        "eosTraceSha256": "4ea8006548ddda93195cafe8b622438bfc7e729a658fc75ff8f866fc957a53ea"
+      },
+      "rendererInputBasis": "exact authored source",
+      "requestSha256": "391ef2e479494baee6bd43c3a899a24ce61eaa0ae2180d9fc75b2487534b33a4",
+      "profileJsonSha256": "a27c86b89601c70b836748b0f2216612e83c040311a6f8478c7a7ecc94dc4f5b",
+      "rawSha256": "64b4484d957816fc9bc3cca0a6407ba719fa50aa6aa2054666de1d13566f6be1",
+      "modelLicense": "MIT",
+      "referenceLicense": "CC0-1.0",
+      "durationSeconds": 2.44,
+      "renderSeconds": 5.08,
+      "synthesis": {
+        "exaggeration": 0.5,
+        "exaggerationReason": null,
+        "temperature": 0.65,
+        "repetitionPenalty": 3,
+        "cfgWeight": 0.6,
+        "languageId": "de",
+        "device": "cuda",
+        "precision": "fp16",
+        "t3WeightPrecision": "float16",
+        "conditioningPrecision": "float32",
+        "autocastPrecision": "float16",
+        "conditioningCached": true,
+        "referenceReconditionedForProfile": "394ec6ba22564d8887e5d29121abe932",
+        "referenceConditioningVerifiedFloat32": true,
+        "modelSessionReused": true,
+        "cpuThreads": 2,
+        "inferenceMode": true
+      },
+      "listening": "pending",
+      "status": "eligible exact-text recording; human listening pending",
+      "processingSha256": null,
+      "normalization": {
+        "targetLufs": -18,
+        "targetTruePeakDbtp": -1.5,
+        "filter": "volume=1.4338377160558098,alimiter=limit=0.78:attack=1:release=80:level=false:latency=true",
+        "iterations": 3
+      },
+      "integratedLufs": -18.15,
+      "truePeakDbtp": -2.53,
+      "asr": "Welche Zeitfolge ist korrekt?",
+      "asrWordExact": true,
+      "asrLiteralWordExact": true,
+      "asrNormalization": "case/punctuation, German numeric and A38 spoken equivalents, guarded full-hour and date-ordinal equivalents, section sign/Paragraf orthography, German compound spacing",
+      "asrModel": "independent faster-whisper, cached local model, cpu int8 (effective int8_float32), no script prompt",
+      "asrCpuThreads": 1,
+      "asrDevice": "cpu",
+      "asrEffectiveComputeType": "int8_float32",
+      "asrLanguageId": "de",
+      "asrComputeType": "int8",
+      "asrScriptPrompt": null,
+      "asrBeamSize": 1,
+      "asrReadings": [
+        {
+          "beamSize": 1,
+          "transcript": "Welche Zeitfolge ist korrekt?",
+          "transcribeSeconds": 15.89,
+          "words": [
+            {
+              "word": " Welche",
+              "start": 0,
+              "end": 0.52
+            },
+            {
+              "word": " Zeitfolge",
+              "start": 0.52,
+              "end": 1.16
+            },
+            {
+              "word": " ist",
+              "start": 1.16,
+              "end": 1.34
+            },
+            {
+              "word": " korrekt?",
+              "start": 1.34,
+              "end": 1.84
+            }
+          ]
+        }
+      ],
+      "asrModelSha256": "e76620f83d5f5b69efd3d87e3dc180c1bd21df9fbebacfd4335e5e1efcc018da",
+      "asrModelDirectoryName": "voice-asr-model",
+      "wordCues": [
+        {
+          "at": 0,
+          "charIndex": 0,
+          "word": "Welche",
+          "end": 0.52
+        },
+        {
+          "at": 0.52,
+          "charIndex": 7,
+          "word": "Zeitfolge",
+          "end": 1.16
+        },
+        {
+          "at": 1.16,
+          "charIndex": 17,
+          "word": "ist",
+          "end": 1.34
+        },
+        {
+          "at": 1.34,
+          "charIndex": 21,
+          "word": "korrekt",
+          "end": 1.84
+        }
+      ],
+      "sha256": "f8519bb9ebf21417b29c48fdbc1c273affce37e065c9b9932265dfaaa8a930af",
+      "bytes": 39980,
+      "sampleRateHz": 48000,
+      "channels": 1,
+      "bitrateBitsPerSecond": 128000,
+      "file": "assets/voices/quiz-segments/quiz-ruediger-schmidt-question-g-b2-01-germany.mp3",
+      "approval": {
+        "status": "user-approved",
+        "scope": "ROOT-sealed-finite-German9",
+        "grantId": "ROOT-finite-quiz-German9-shortpath-20261015-v3",
+        "clipId": "quiz-ruediger-schmidt-question-g-b2-01-germany",
+        "encodedSha256": "f8519bb9ebf21417b29c48fdbc1c273affce37e065c9b9932265dfaaa8a930af",
+        "listeningConfirmed": false
+      }
+    },
+    {
+      "clipId": "quiz-sabine-krueger-question-g-b1-01-germany",
+      "voiceId": "quiz-sabine-krueger",
+      "actorId": "sabine-krueger",
+      "quizCharacterId": "sabine-krueger",
+      "region": "germany",
+      "slot": 49,
+      "questionId": "G-B1-01",
+      "questionCategory": "grammar-b1",
+      "segment": "question",
+      "sourceLocator": "game.js citizenshipQuestions[49].question",
+      "englishSourceLocator": "For-AI/AUDIO-TEXT-LIBRARY.js questions[\"G-B1-01\"]",
+      "text": "Welche Version ist grammatisch richtig?",
+      "english": "Which version is grammatically correct?",
+      "profileId": "c6a6e6b4ad1842388b7ac88eb0b71cf6",
+      "referenceSha256": "c9c4164bc0cdfd07490a934a1b42beda0a046894263cb19229c5468303e5f3d6",
+      "referenceOriginalSha256": "2ef53e200a7a031eddb7bc70204ec23ecaef4936dd751cf046bbcde5f91d2b55",
+      "renderer": "ResembleAI/Chatterbox Multilingual V2 0.1.7",
+      "modelRevision": "5bb1f6ee58e50c3b8d408bc82a6d3740c2db6e18",
+      "processing": null,
+      "seed": 71000,
+      "synthesisAttempt": 1,
+      "authoringHelperSha256": "722853a79b5838c480fbf93c8f036f6d96a82eb62f9c40b4943cbb797d437fe0",
+      "rendererInputText": "Welche Version ist grammatisch richtig?",
+      "decode": {
+        "maxSpeechTokens": 250,
+        "attentionHooksBefore": 0,
+        "generatedSpeechTokens": 97,
+        "eosReached": true,
+        "eosKind": "analyzer-forced",
+        "eosSuppressionObservedSteps": 47,
+        "modelEosRestoredSteps": 0,
+        "alignmentFirstCompletedStep": 48,
+        "nativeAnalyzerSourceSha256": "d8430efa92aedb8e59b782c1d299fe7238570eecea9d293c0981a5ee2e82c8c7",
+        "eosPolicy": "Native analyzer unchanged; observation only",
+        "t3InferenceSeconds": 4.36,
+        "temporaryAnalyzerHooksRemoved": 3,
+        "attentionHooksAfter": 0,
+        "eosTraceSha256": "032103b5428d0439e2d27e7e416b92deb52afc9c23b88d9013b0d337665974a3"
+      },
+      "rendererInputBasis": "exact authored source",
+      "requestSha256": "31f6ecfe3cb15d704df6558b36f5234e9ce55a22210249c80eaaba026640a3fe",
+      "profileJsonSha256": "6051f852f6c584c053a2b77dec3eaf4ee0fd28ffe8baaa5d9dffc54f3f11f1c4",
+      "rawSha256": "7cf8ac3bbb50b9acbf0f4fd46bf07f095db54fa13c73fc0da14884cd840eec0b",
+      "modelLicense": "MIT",
+      "referenceLicense": "CC0-1.0",
+      "durationSeconds": 3.82,
+      "renderSeconds": 5.94,
+      "synthesis": {
+        "exaggeration": 0.5,
+        "exaggerationReason": null,
+        "temperature": 0.65,
+        "repetitionPenalty": 3,
+        "cfgWeight": 0.6,
+        "languageId": "de",
+        "device": "cuda",
+        "precision": "fp16",
+        "t3WeightPrecision": "float16",
+        "conditioningPrecision": "float32",
+        "autocastPrecision": "float16",
+        "conditioningCached": true,
+        "referenceReconditionedForProfile": "c6a6e6b4ad1842388b7ac88eb0b71cf6",
+        "referenceConditioningVerifiedFloat32": true,
+        "modelSessionReused": true,
+        "cpuThreads": 2,
+        "inferenceMode": true
+      },
+      "listening": "pending",
+      "status": "eligible exact-text recording; human listening pending",
+      "processingSha256": null,
+      "normalization": {
+        "targetLufs": -18,
+        "targetTruePeakDbtp": -1.5,
+        "filter": "loudnorm=I=-18.0:TP=-1.8:LRA=11:linear=false",
+        "iterations": 1
+      },
+      "integratedLufs": -18.1,
+      "truePeakDbtp": -2.09,
+      "asr": "Welche Version ist grammatisch richtig?",
+      "asrWordExact": true,
+      "asrLiteralWordExact": true,
+      "asrNormalization": "case/punctuation, German numeric and A38 spoken equivalents, guarded full-hour and date-ordinal equivalents, section sign/Paragraf orthography, German compound spacing",
+      "asrModel": "independent faster-whisper, cached local model, cpu int8 (effective int8_float32), no script prompt",
+      "asrCpuThreads": 1,
+      "asrDevice": "cpu",
+      "asrEffectiveComputeType": "int8_float32",
+      "asrLanguageId": "de",
+      "asrComputeType": "int8",
+      "asrScriptPrompt": null,
+      "asrBeamSize": 1,
+      "asrReadings": [
+        {
+          "beamSize": 1,
+          "transcript": "Welche Version ist grammatisch richtig?",
+          "transcribeSeconds": 16.3,
+          "words": [
+            {
+              "word": " Welche",
+              "start": 0,
+              "end": 0.28
+            },
+            {
+              "word": " Version",
+              "start": 0.28,
+              "end": 0.64
+            },
+            {
+              "word": " ist",
+              "start": 0.64,
+              "end": 0.94
+            },
+            {
+              "word": " grammatisch",
+              "start": 0.94,
+              "end": 1.54
+            },
+            {
+              "word": " richtig?",
+              "start": 1.54,
+              "end": 1.86
+            }
+          ]
+        }
+      ],
+      "asrModelSha256": "e76620f83d5f5b69efd3d87e3dc180c1bd21df9fbebacfd4335e5e1efcc018da",
+      "asrModelDirectoryName": "voice-asr-model",
+      "wordCues": [
+        {
+          "at": 0,
+          "charIndex": 0,
+          "word": "Welche",
+          "end": 0.28
+        },
+        {
+          "at": 0.28,
+          "charIndex": 7,
+          "word": "Version",
+          "end": 0.64
+        },
+        {
+          "at": 0.64,
+          "charIndex": 15,
+          "word": "ist",
+          "end": 0.94
+        },
+        {
+          "at": 0.94,
+          "charIndex": 19,
+          "word": "grammatisch",
+          "end": 1.54
+        },
+        {
+          "at": 1.54,
+          "charIndex": 31,
+          "word": "richtig",
+          "end": 1.86
+        }
+      ],
+      "sha256": "d6085975baba9c17328052f474b6c9bb54fd7bb3a52b945d7f78aa30eeed4d33",
+      "bytes": 62252,
+      "sampleRateHz": 48000,
+      "channels": 1,
+      "bitrateBitsPerSecond": 128000,
+      "file": "assets/voices/quiz-segments/quiz-sabine-krueger-question-g-b1-01-germany.mp3",
+      "approval": {
+        "status": "user-approved",
+        "scope": "ROOT-sealed-finite-German9",
+        "grantId": "ROOT-finite-quiz-German9-shortpath-20261015-v3",
+        "clipId": "quiz-sabine-krueger-question-g-b1-01-germany",
+        "encodedSha256": "d6085975baba9c17328052f474b6c9bb54fd7bb3a52b945d7f78aa30eeed4d33",
+        "listeningConfirmed": false
+      }
+    },
+    {
+      "clipId": "quiz-heike-hoffmann-question-24-germany",
+      "voiceId": "quiz-heike-hoffmann",
+      "actorId": "heike-hoffmann",
+      "quizCharacterId": "heike-hoffmann",
+      "region": "germany",
+      "slot": 0,
+      "questionId": "24",
+      "questionCategory": "civic",
+      "segment": "question",
+      "sourceLocator": "game.js citizenshipQuestions[0].question",
+      "englishSourceLocator": "For-AI/AUDIO-TEXT-LIBRARY.js questions[\"24\"]",
+      "text": "Wie viele Bundesländer hat die Bundesrepublik Deutschland?",
+      "english": "How many federal states does the Federal Republic of Germany have?",
+      "profileId": "299c6b7ec1594f2ea9a4fa8b5a92d13f",
+      "referenceSha256": "95ae6d914774881a3ae0fbca4f59a606dd7896003d46e7322d45d5ccf8329ea2",
+      "referenceOriginalSha256": "d976ef0fc54d9590420996a7aad7d9b789a3b70bb2e99e096f18dd0cd209b119",
+      "renderer": "ResembleAI/Chatterbox Multilingual V2 0.1.7",
+      "modelRevision": "5bb1f6ee58e50c3b8d408bc82a6d3740c2db6e18",
+      "processing": null,
+      "seed": 71000,
+      "synthesisAttempt": 1,
+      "authoringHelperSha256": "722853a79b5838c480fbf93c8f036f6d96a82eb62f9c40b4943cbb797d437fe0",
+      "rendererInputText": "Wie viele Bundesländer hat die Bundesrepublik Deutschland?",
+      "decode": {
+        "maxSpeechTokens": 250,
+        "attentionHooksBefore": 0,
+        "generatedSpeechTokens": 102,
+        "eosReached": true,
+        "eosKind": "model-sampled",
+        "eosSuppressionObservedSteps": 80,
+        "modelEosRestoredSteps": 0,
+        "alignmentFirstCompletedStep": 79,
+        "nativeAnalyzerSourceSha256": "d8430efa92aedb8e59b782c1d299fe7238570eecea9d293c0981a5ee2e82c8c7",
+        "eosPolicy": "Native analyzer unchanged; observation only",
+        "t3InferenceSeconds": 4.72,
+        "temporaryAnalyzerHooksRemoved": 3,
+        "attentionHooksAfter": 0,
+        "eosTraceSha256": "cec83930bca2a5463f9b452d084e1ce3f7db66aee2cdb41644209eaafd3d6ef5"
+      },
+      "rendererInputBasis": "exact authored source",
+      "requestSha256": "b069e1912ce6552808332b11df26c2991e1657aa40c0982ae951868efb410e88",
+      "profileJsonSha256": "f83bfb51d7532c71323568f3effd2066f377837ed30853ce1db2e1a3cf700c4d",
+      "rawSha256": "f5d074354084450bee67c721b98381a9acb492ca3a057726b63d609a636bd8ab",
+      "modelLicense": "MIT",
+      "referenceLicense": "CC0-1.0",
+      "durationSeconds": 4.02,
+      "renderSeconds": 6.03,
+      "synthesis": {
+        "exaggeration": 0.5,
+        "exaggerationReason": null,
+        "temperature": 0.65,
+        "repetitionPenalty": 3,
+        "cfgWeight": 0.6,
+        "languageId": "de",
+        "device": "cuda",
+        "precision": "fp16",
+        "t3WeightPrecision": "float16",
+        "conditioningPrecision": "float32",
+        "autocastPrecision": "float16",
+        "conditioningCached": true,
+        "referenceReconditionedForProfile": "299c6b7ec1594f2ea9a4fa8b5a92d13f",
+        "referenceConditioningVerifiedFloat32": true,
+        "modelSessionReused": true,
+        "cpuThreads": 2,
+        "inferenceMode": true
+      },
+      "listening": "pending",
+      "status": "eligible exact-text recording; human listening pending",
+      "processingSha256": null,
+      "normalization": {
+        "targetLufs": -18,
+        "targetTruePeakDbtp": -1.5,
+        "filter": "loudnorm=I=-16.18:TP=-1.8:LRA=11:linear=false",
+        "iterations": 2
+      },
+      "integratedLufs": -18.02,
+      "truePeakDbtp": -2.25,
+      "asr": "Wie viele Bundesländer hat die Bundesrepublik Deutschland?",
+      "asrWordExact": true,
+      "asrLiteralWordExact": true,
+      "asrNormalization": "case/punctuation, German numeric and A38 spoken equivalents, guarded full-hour and date-ordinal equivalents, section sign/Paragraf orthography, German compound spacing",
+      "asrModel": "independent faster-whisper, cached local model, cpu int8 (effective int8_float32), no script prompt",
+      "asrCpuThreads": 1,
+      "asrDevice": "cpu",
+      "asrEffectiveComputeType": "int8_float32",
+      "asrLanguageId": "de",
+      "asrComputeType": "int8",
+      "asrScriptPrompt": null,
+      "asrBeamSize": 1,
+      "asrReadings": [
+        {
+          "beamSize": 1,
+          "transcript": "Wie viele Bundesländer hat die Bundesrepublik Deutschland?",
+          "transcribeSeconds": 15.83,
+          "words": [
+            {
+              "word": " Wie",
+              "start": 0,
+              "end": 0.26
+            },
+            {
+              "word": " viele",
+              "start": 0.26,
+              "end": 0.64
+            },
+            {
+              "word": " Bundesländer",
+              "start": 0.64,
+              "end": 1.5
+            },
+            {
+              "word": " hat",
+              "start": 1.5,
+              "end": 1.72
+            },
+            {
+              "word": " die",
+              "start": 1.72,
+              "end": 1.86
+            },
+            {
+              "word": " Bundesrepublik",
+              "start": 1.86,
+              "end": 2.76
+            },
+            {
+              "word": " Deutschland?",
+              "start": 2.76,
+              "end": 3.22
+            }
+          ]
+        }
+      ],
+      "asrModelSha256": "e76620f83d5f5b69efd3d87e3dc180c1bd21df9fbebacfd4335e5e1efcc018da",
+      "asrModelDirectoryName": "voice-asr-model",
+      "wordCues": [
+        {
+          "at": 0,
+          "charIndex": 0,
+          "word": "Wie",
+          "end": 0.26
+        },
+        {
+          "at": 0.26,
+          "charIndex": 4,
+          "word": "viele",
+          "end": 0.64
+        },
+        {
+          "at": 0.64,
+          "charIndex": 10,
+          "word": "Bundesländer",
+          "end": 1.5
+        },
+        {
+          "at": 1.5,
+          "charIndex": 23,
+          "word": "hat",
+          "end": 1.72
+        },
+        {
+          "at": 1.72,
+          "charIndex": 27,
+          "word": "die",
+          "end": 1.86
+        },
+        {
+          "at": 1.86,
+          "charIndex": 31,
+          "word": "Bundesrepublik",
+          "end": 2.76
+        },
+        {
+          "at": 2.76,
+          "charIndex": 46,
+          "word": "Deutschland",
+          "end": 3.22
+        }
+      ],
+      "sha256": "80b2a9428627413cc99a8a6b5662ee1f8a1c9cfee866ff44edad583ba03695da",
+      "bytes": 65324,
+      "sampleRateHz": 48000,
+      "channels": 1,
+      "bitrateBitsPerSecond": 128000,
+      "file": "assets/voices/quiz-segments/quiz-heike-hoffmann-question-24-germany.mp3",
+      "approval": {
+        "status": "user-approved",
+        "scope": "ROOT-sealed-finite-German9",
+        "grantId": "ROOT-finite-quiz-German9-shortpath-20261015-v3",
+        "clipId": "quiz-heike-hoffmann-question-24-germany",
+        "encodedSha256": "80b2a9428627413cc99a8a6b5662ee1f8a1c9cfee866ff44edad583ba03695da",
+        "listeningConfirmed": false
+      }
+    }
+  ],
+  "heldPrivate": [
+    {
+      "clipId": "quiz-uwe-moeller-question-24-germany",
+      "voiceId": "quiz-uwe-moeller",
+      "actorId": "uwe-moeller",
+      "quizCharacterId": "uwe-moeller",
+      "region": "germany",
+      "slot": 0,
+      "questionId": "24",
+      "questionCategory": "civic",
+      "segment": "question",
+      "sourceLocator": "game.js citizenshipQuestions[0].question",
+      "englishSourceLocator": "For-AI/AUDIO-TEXT-LIBRARY.js questions[\"24\"]",
+      "text": "Wie viele Bundesländer hat die Bundesrepublik Deutschland?",
+      "english": "How many federal states does the Federal Republic of Germany have?",
+      "profileId": "58566fe420a14f77b44253b9ee2fc780",
+      "referenceSha256": "13ce940fbe69a9d8575a258710ee2b57cc85784230c22d2428461d97cdf35cdb",
+      "referenceOriginalSha256": "f0e22a08d36beb2001646eac2b9a88d4e3d6f89e59d9209efa268f456639f495",
+      "renderer": "ResembleAI/Chatterbox Multilingual V2 0.1.7",
+      "modelRevision": "5bb1f6ee58e50c3b8d408bc82a6d3740c2db6e18",
+      "processing": null,
+      "reason": "held private; literal exact German ASR gate failed"
+    },
+    {
+      "clipId": "quiz-brigitte-neumann-question-kl-01-germany",
+      "voiceId": "quiz-brigitte-neumann",
+      "actorId": "brigitte-neumann",
+      "quizCharacterId": "brigitte-neumann",
+      "region": "germany",
+      "slot": 35,
+      "questionId": "KL-01",
+      "questionCategory": "technik",
+      "segment": "question",
+      "sourceLocator": "game.js citizenshipQuestions[35].question",
+      "englishSourceLocator": "For-AI/AUDIO-TEXT-LIBRARY.js questions[\"KL-01\"]",
+      "text": "Was erfand Friedrich Fischer 1883 in Schweinfurt für die Kugellagerfertigung?",
+      "english": "What did Friedrich Fischer invent in Schweinfurt in 1883 for ball-bearing production?",
+      "profileId": "a07f2eac0069402c911973d0dff9c122",
+      "referenceSha256": "5ef203d60f666ffdcd1d0f0dfba0cb0dde24dc4c569b87f39bd4374e3fe77398",
+      "referenceOriginalSha256": "6a1d75a9744802aeda79b9219dac09256c9eefc5c862af66bfee3d27d5b6778d",
+      "renderer": "ResembleAI/Chatterbox Multilingual V2 0.1.7",
+      "modelRevision": "5bb1f6ee58e50c3b8d408bc82a6d3740c2db6e18",
+      "processing": null,
+      "reason": "held private; literal exact German ASR gate failed"
+    },
+    {
+      "clipId": "quiz-klaus-dieter-wagner-question-fs-01-germany",
+      "voiceId": "quiz-klaus-dieter-wagner",
+      "actorId": "klaus-dieter-wagner",
+      "quizCharacterId": "klaus-dieter-wagner",
+      "region": "germany",
+      "slot": 39,
+      "questionId": "FS-01",
+      "questionCategory": "traffic",
+      "segment": "question",
+      "sourceLocator": "game.js citizenshipQuestions[39].question",
+      "englishSourceLocator": "For-AI/AUDIO-TEXT-LIBRARY.js questions[\"FS-01\"]",
+      "text": "Vor Ihnen fährt ein Fahrschulwagen seit zwölf Minuten exakt 29 km/h in einer Tempo-30-Zone. Was tun Sie?",
+      "english": "A driving-school car ahead of you has driven at exactly 29 km/h in a 30 zone for twelve minutes. What do you do?",
+      "profileId": "ac419e527d1840f5b41d7fbffca39f69",
+      "referenceSha256": "58112da05093de4c6451f222bb9b71b64df01f0474af992fe8cbc5bfdb62fd66",
+      "referenceOriginalSha256": "b8fd86e3751434f24f93dab162f8ea81ea8df0e8134ddab6bc032253de6d2d85",
+      "renderer": "ResembleAI/Chatterbox Multilingual V2 0.1.7",
+      "modelRevision": "5bb1f6ee58e50c3b8d408bc82a6d3740c2db6e18",
+      "processing": null,
+      "reason": "held private; literal exact German ASR gate failed"
+    },
+    {
+      "clipId": "quiz-dietmar-schulz-question-g-c1-01-germany",
+      "voiceId": "quiz-dietmar-schulz",
+      "actorId": "dietmar-schulz",
+      "quizCharacterId": "dietmar-schulz",
+      "region": "germany",
+      "slot": 69,
+      "questionId": "G-C1-01",
+      "questionCategory": "grammar-c1",
+      "segment": "question",
+      "sourceLocator": "game.js citizenshipQuestions[69].question",
+      "englishSourceLocator": "For-AI/AUDIO-TEXT-LIBRARY.js questions[\"G-C1-01\"]",
+      "text": "Welche indirekte Rede im Konjunktiv I ist korrekt?",
+      "english": "Which reported-speech sentence correctly uses Konjunktiv I?",
+      "profileId": "1f6c2d42bfeb4a63831a616feec67c9a",
+      "referenceSha256": "c1b1a31b2b7ea7114a81d648560b61157906acde4cfe4a261455958e03f6df77",
+      "referenceOriginalSha256": "fa0650538001ac77d41584c3742fcc0ceb262ba43e7206a66dbd2ab1e33d9161",
+      "renderer": "ResembleAI/Chatterbox Multilingual V2 0.1.7",
+      "modelRevision": "5bb1f6ee58e50c3b8d408bc82a6d3740c2db6e18",
+      "processing": null,
+      "reason": "held private; literal exact German ASR gate failed"
+    },
+    {
+      "clipId": "quiz-hartmut-keller-question-fs-01-germany",
+      "voiceId": "quiz-hartmut-keller",
+      "actorId": "hartmut-keller",
+      "quizCharacterId": "hartmut-keller",
+      "region": "germany",
+      "slot": 39,
+      "questionId": "FS-01",
+      "questionCategory": "traffic",
+      "segment": "question",
+      "sourceLocator": "game.js citizenshipQuestions[39].question",
+      "englishSourceLocator": "For-AI/AUDIO-TEXT-LIBRARY.js questions[\"FS-01\"]",
+      "text": "Vor Ihnen fährt ein Fahrschulwagen seit zwölf Minuten exakt 29 km/h in einer Tempo-30-Zone. Was tun Sie?",
+      "english": "A driving-school car ahead of you has driven at exactly 29 km/h in a 30 zone for twelve minutes. What do you do?",
+      "profileId": "0a1ca192e46a476ca372b33f2d370a70",
+      "referenceSha256": "a7950f0038cd160827f94249241b4fcb8926942e8df986d6843f63d0624be6c0",
+      "referenceOriginalSha256": "66f055dd3a4e161537c62b12c28960fdc87ba75f044f4796cf26c89e03278402",
+      "renderer": "ResembleAI/Chatterbox Multilingual V2 0.1.7",
+      "modelRevision": "5bb1f6ee58e50c3b8d408bc82a6d3740c2db6e18",
+      "processing": null,
+      "reason": "held private; literal exact German ASR gate failed"
+    }
+  ],
+  "approvedExistingReuse": [],
+  "quizAdmission": {
+    "status": "ROOT-verified-finite-quiz-german9",
+    "grantId": "ROOT-finite-quiz-German9-shortpath-20261015-v3",
+    "authoritySha256": "0e509a29631667254f11cb85e8694f050daa7cafb52c24af47684b1e4eee29b4",
+    "authoredPlanSha256": "a17982691b6bc3d60631c88c9337821beec0e045196948c20cd669ccfee885a9",
+    "requestSha256": "a17982691b6bc3d60631c88c9337821beec0e045196948c20cd669ccfee885a9",
+    "frozenRequests": {
+      "quiz-gisela-becker-question-24-germany": "0d650688ae679bc390b1a0464f9702a16963a70cf92517eadfd8f78908c882fa",
+      "quiz-ruediger-schmidt-question-g-b2-01-germany": "391ef2e479494baee6bd43c3a899a24ce61eaa0ae2180d9fc75b2487534b33a4",
+      "quiz-sabine-krueger-question-g-b1-01-germany": "31f6ecfe3cb15d704df6558b36f5234e9ce55a22210249c80eaaba026640a3fe",
+      "quiz-uwe-moeller-question-24-germany": "46bf9417b8cdd92adfd9d31871dc371c17e1338206a0906f7f5381bcafb76f3c",
+      "quiz-brigitte-neumann-question-kl-01-germany": "9fc50137182715ca796367b3eaba8b41350c60339a11a756352e6a7d793626e8",
+      "quiz-klaus-dieter-wagner-question-fs-01-germany": "b5e6d5fac9741b6aa84c3c4d23a878a4824429ce6951b2ab7f55741b25686a9e",
+      "quiz-heike-hoffmann-question-24-germany": "b069e1912ce6552808332b11df26c2991e1657aa40c0982ae951868efb410e88",
+      "quiz-dietmar-schulz-question-g-c1-01-germany": "f17d16ca61f5118029754eefbaa20a91c7db599f06aeb25717bd202db7b15d89",
+      "quiz-hartmut-keller-question-fs-01-germany": "7a688300e6ec84f5f94dc0abf63d33b5ec9bbd7c7f29c86cb5c305279fe3e216"
+    },
+    "frozenRequestsSha256": "0252d1e55a813516b75369f56bf3849f9215cc95015dcb335e41c468a9b6917f",
+    "sourceCommit": "4a823f488b6d618b74f0b7f1be253b57a3002f02",
+    "sourcePins": {
+      "game.js": "2e0b82b73ab2c23d4922d28650edda6ebff730c88d0f1400348b1317e3339cf5",
+      "For-AI/VOICE-CAST.json": "8f30c7f7f61396d9462b61affc9d2aa116218d1023d04a6b191634e2f44a134f",
+      "For-AI/AUDIO-TEXT-LIBRARY.js": "267388a27742baa2ed1be1515d5fb5095e4618c32f357541912336e2c1bc9980",
+      "For-AI/QUIZ-CHARACTER-DICTIONARY.js": "d73c92953858a2a9db32cc46abad04b202584015e3a6cac61cc4666d7c28e56a"
+    },
+    "inventorySha256": "5dd43058e4ede0b251fed756633a67c9239273e44808098c749fd64f3c8c6739",
+    "terminals": {
+      "plan": {
+        "sha256": "cc143c43de7a496ff93d60db00ce4513c8e10e5fce6febade5d687b594315595",
+        "exitCode": 0,
+        "rootRetired": true,
+        "timedOut": false,
+        "summarySha256": "765448692f1aed112dcb2f217934cd3733a3f68b585b7282affd0f0e188c6efa"
+      },
+      "render": {
+        "sha256": "dc26f19679a5e8950ea7da2de057892ce11c4a0bb1438025b43f7e95583c28b6",
+        "exitCode": 0,
+        "rootRetired": true,
+        "timedOut": false,
+        "summarySha256": "431f2ef84432ff98689cc16f60b62d75be3c2949cace62ef783397fe8206bf44"
+      },
+      "process": {
+        "sha256": "9df17ba92fc9efc96f599cbe8e132c54166014198c4c26e29667d1bc92bdae6f",
+        "exitCode": 0,
+        "rootRetired": true,
+        "timedOut": false,
+        "summarySha256": "9eb06c754a600a6a158236c4ee9e728c00c534f01ae15af9c8e59ddcd02b3d38"
+      }
+    },
+    "takes": {
+      "quiz-gisela-becker-question-24-germany": {
+        "rawReceiptSha256": "85df04bdf954b149bed9d96d7c0c480a2d160dea8720bd7b0a65bb004cab5ffb",
+        "encodedReceiptSha256": "18eb9a077d62f2e39a967e79f196d38b4ded971f88f99e2a66a2860b8c3e8b72",
+        "rawSha256": "c4c918180cb5f327f7a26514ef051cedcabaa47f3562af58db569b73a3710377",
+        "encodedSha256": "56b7cdf54fcdf420406523184e80bfbbc6749d0d98b19697d83d9ae47a15c53e",
+        "profileJsonSha256": "512608e6dab01e197bac83065c35305197b4e1661d1534f2fdb063cb4ec1c5e0"
+      },
+      "quiz-ruediger-schmidt-question-g-b2-01-germany": {
+        "rawReceiptSha256": "9b8326f3200455d268b89da4f3d9155df94e4809cdf253aa168bb4b71c0548cb",
+        "encodedReceiptSha256": "20ccc5ef185d8467b6074275139a6802b36656a1376259be7dc2174d87511a2b",
+        "rawSha256": "64b4484d957816fc9bc3cca0a6407ba719fa50aa6aa2054666de1d13566f6be1",
+        "encodedSha256": "f8519bb9ebf21417b29c48fdbc1c273affce37e065c9b9932265dfaaa8a930af",
+        "profileJsonSha256": "a27c86b89601c70b836748b0f2216612e83c040311a6f8478c7a7ecc94dc4f5b"
+      },
+      "quiz-sabine-krueger-question-g-b1-01-germany": {
+        "rawReceiptSha256": "6990c94052e643e445aab31e08a84bdfbfef5e5953eef6ab23c3005cba424905",
+        "encodedReceiptSha256": "a78e65f2a397b028a996e2eff08d870eb3d1f064f30d5724a90ba8e692571b8e",
+        "rawSha256": "7cf8ac3bbb50b9acbf0f4fd46bf07f095db54fa13c73fc0da14884cd840eec0b",
+        "encodedSha256": "d6085975baba9c17328052f474b6c9bb54fd7bb3a52b945d7f78aa30eeed4d33",
+        "profileJsonSha256": "6051f852f6c584c053a2b77dec3eaf4ee0fd28ffe8baaa5d9dffc54f3f11f1c4"
+      },
+      "quiz-heike-hoffmann-question-24-germany": {
+        "rawReceiptSha256": "3b96f7fa1ace78071ea2159b27a295fe429988925012da251c0a3efbc7c5e78c",
+        "encodedReceiptSha256": "0f52206d9560225f60445abdff90c52d20528de27e719aced6fb89f5c793e7bd",
+        "rawSha256": "f5d074354084450bee67c721b98381a9acb492ca3a057726b63d609a636bd8ab",
+        "encodedSha256": "80b2a9428627413cc99a8a6b5662ee1f8a1c9cfee866ff44edad583ba03695da",
+        "profileJsonSha256": "f83bfb51d7532c71323568f3effd2066f377837ed30853ce1db2e1a3cf700c4d"
+      }
+    }
+  }
+}
