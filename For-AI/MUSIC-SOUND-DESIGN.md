@@ -52,6 +52,10 @@ When speech drives the score, hand off its authored rate/pitch, semantic word or
 
 When a visual transformation and a score are one dramatic process, define their shared control signal before rendering audio. The existing controller owns proximity/progress, pressure, pulse phase, semantic accents and release. Both sound and animation project those values; avoid a baked riser or an unrelated animation beat that can reach its climax early. Author stationary compatible layers, then let committed motion and speech shape their density, spectral aggression and envelopes. Reduced motion removes visual cycling without disabling the score. A withheld payoff is explicit: build expectation, hold for the owning event, and cut to the ordinary scene without an impact or resolving chord.
 
+## Welcome fax feed (`welcome-fax-feed`, 2026-10-15)
+
+`openHumorWelcome` commits one existing `playFaxTransition` cue alongside the initial paper reveal. The HUD owns its single cancellable handle; repeated measurement does not retrigger it, and page two does not start another feed. The existing synthesized motor, nine short chirps and paper texture have a native 1.08-second maximum, matching the 1.1-second CSS feed without claiming sample-accurate CSS/Web Audio synchronization. Effects share the established ducking/master graph beneath the unchanged narrator. Reduced motion removes visual travel while retaining the cue; voice-off also retains this nonverbal effect. Continue/E, replacement, hidden-page and pagehide cleanup stop the cue without advancing a mission or waiting for audio. No asset, bus, scheduler or background loop is added. Native muted source/cancellation evidence and deterministic ownership checks are distinct from listening and physical-device evidence.
+
 ## Bürgeramt example and boundary
 
 The `amt-queue-call` beat belongs to the episode's committed board update, not

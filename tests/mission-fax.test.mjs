@@ -22,7 +22,7 @@ function hud({reduced=true,audioRate=1}={}){
  function advance(ms){const end=now+ms;for(let count=0;count<10000;count++){const next=[...tasks].filter(([,t])=>t.at<=end).sort((a,b)=>a[1].at-b[1].at)[0];if(!next){now=end;return}tasks.delete(next[0]);now=next[1].at;next[1].fn()}throw Error('unbounded timer work')}
  const refresh=()=>{context.window.GermanyHUD.refresh();advance(20)};
  advance(20);
- return{node,state,document,advance,refresh,events,get feeds(){return feeds},get cancellations(){return cancellations},get maskFrames(){return maskFrames}};
+ return{controller:context.window.GermanyHUD,node,state,document,advance,refresh,events,get feeds(){return feeds},get cancellations(){return cancellations},get maskFrames(){return maskFrames}};
 }
 
 test('Gaussian frames follow audio elapsed time and leave no idle mask work',()=>{
@@ -81,4 +81,18 @@ test('fax sound supplies its audio clock, effects bus and cancellation for all s
  const sources=[],outputs=[],param={setValueAtTime(){},linearRampToValueAtTime(){},exponentialRampToValueAtTime(){}},bus={},a={currentTime:5,state:'running',sampleRate:100,createGain(){return{gain:param,connect(target){outputs.push(target);return target},disconnect(){}}},createOscillator(){const n={frequency:param,connect(target){return target},start(t){n.startAt=t},stop(t){n.stopAt=t}};sources.push(n);return n},createBufferSource(){return a.createOscillator()},createBuffer:(_,size)=>({getChannelData:()=>new Float32Array(size)}),createBiquadFilter:()=>({frequency:{},Q:{},connect:target=>target})};
  const context=vm.createContext({ensureAudio:()=>a,soundEffectOutput:()=>bus,performance:{now:()=>0}});vm.runInContext(fn+';globalThis.feed=playSynthFaxFeed()',context);
  assert.equal(sources.length,11);assert.equal(context.feed.duration,1.08);assert(outputs.includes(bus));a.currentTime=5.5;assert.equal(context.feed.elapsed(),.5);context.feed.cancel();assert(sources.every(n=>n.stopAt===undefined));
+});
+
+for(const reduced of [true,false])test(`welcome fax starts once and cancels on replay, exit and background; reduced ${reduced}`,()=>{
+ const h=hud({reduced});h.node('dialogue').hidden=false;h.node('dialogue').classList.add('welcome');h.state.busy=true;h.refresh();
+ const feeds=h.feeds,cancels=h.cancellations;
+ h.controller.welcomeFax();assert.equal(h.feeds,feeds+1);
+ h.refresh();h.refresh();assert.equal(h.feeds,feeds+1,'HUD refresh cannot retrigger the welcome feed');
+ h.controller.welcomeFax();assert.equal(h.feeds,feeds+2);assert.equal(h.cancellations,cancels+1,'replay stops the old cue');
+ h.controller.stopWelcomeFax();h.controller.stopWelcomeFax();assert.equal(h.cancellations,cancels+2,'Continue cleanup is idempotent');
+ h.controller.welcomeFax();h.node('dialogue').hidden=true;h.refresh();assert.equal(h.cancellations,cancels+3,'closing the paper stops its cue');
+ h.node('dialogue').hidden=false;h.controller.welcomeFax();h.node('dialogue').classList.remove('welcome');h.refresh();assert.equal(h.cancellations,cancels+4,'another speaker cannot retain fax audio');
+ h.node('dialogue').classList.add('welcome');h.controller.welcomeFax();h.document.hidden=true;h.events.get('visibilitychange')();assert.equal(h.cancellations,cancels+5,'backgrounding cancels immediately');
+ const hiddenFeeds=h.feeds;h.controller.welcomeFax();assert.equal(h.feeds,hiddenFeeds,'a hidden page cannot start another feed');
+ h.document.hidden=false;h.controller.welcomeFax();h.events.get('pagehide')();assert.equal(h.cancellations,cancels+6,'navigation stops the owned cue');
 });

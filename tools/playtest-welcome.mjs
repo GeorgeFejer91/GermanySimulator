@@ -47,6 +47,12 @@ try {
     page.on('pageerror', error => errors.push(error.message));
     await context.addInitScript(() => {
       window.__spoken = [];
+      window.__nativeStarts = [];
+      for (const Type of [OscillatorNode, AudioBufferSourceNode]) {
+        const start = Type.prototype.start;
+        Type.prototype.start = function (...args) {window.__nativeStarts.push(Type.name);return start.apply(this,args)};
+      }
+
       const play = HTMLMediaElement.prototype.play;
       HTMLMediaElement.prototype.play = function (...args) {this.muted = true; return play.apply(this, args)};
       const connect = AudioNode.prototype.connect;
@@ -71,6 +77,15 @@ try {
       if (mode === 'text') await page.addStyleTag({content: 'html{font-size:32px!important}'});
       if (mode === 'spacing') await page.addStyleTag({content:
         '.dialogue.welcome small,.dialogue.welcome p,.dialogue.welcome button{line-height:1.5!important;letter-spacing:.12em!important;word-spacing:.16em!important}.dialogue.welcome p{margin-bottom:2em}'});
+      await page.evaluate(() => {
+        window.__faxCues=[];
+        const start=Germany3DBridge.playFaxTransition;
+        Germany3DBridge.playFaxTransition=()=>{
+          const at=__nativeStarts.length,handle=start(),receipt={duration:handle.duration,sources:__nativeStarts.slice(at),cancelled:0};
+          __faxCues.push(receipt);
+          return {...handle,cancel(){receipt.cancelled++;handle.cancel()}};
+        };
+      });
       await page.keyboard.press('s');
       await page.waitForFunction(() => __welcomeTest.state.dialogueData?.portrait === 'DE');
       if (mode === 'germany' || mode === 'muted') await page.evaluate(mode => {
@@ -107,6 +122,10 @@ try {
         }
         await page.evaluate(() => document.getElementById('dialogue').getAnimations()[0].finish());
       }
+      const faxAudio=await page.evaluate(()=>__faxCues.at(-1));
+      assert.equal(faxAudio.duration,1.08,name + ': bounded fax cue');
+      assert.equal(faxAudio.sources.filter(kind=>kind==='OscillatorNode').length,10,name + ': native motor and chirps');
+      assert.equal(faxAudio.sources.filter(kind=>kind==='AudioBufferSourceNode').length,1,name + ': native paper texture');
       const pages = [];
       for (let index = 0; index < 2; index++) {
         await page.waitForFunction(() => document.getElementById('dialogue-text').dataset.measurement === 'pretext-0.0.9');
@@ -174,8 +193,10 @@ try {
         assert.equal(await page.locator('#dialogue').isVisible(), false, 'E can finish during the feed');
         assert.equal(await page.locator('.welcome-fax-machine').isVisible(), false, 'early finish clears the outlet');
       }
+      const cueReceipts=await page.evaluate(()=>__faxCues);
+      assert(cueReceipts.every(cue=>cue.cancelled===1),name + ': exit stops every owned fax cue exactly once');
       assert.deepEqual(errors, [], name);
-      report.cases.push({name, motion, pages, errors});
+      report.cases.push({name, motion, faxAudio, cueReceipts, pages, errors});
       console.log(`${name}: fax feed, two readable sheets, one action, exact automatic narration`);
     } catch (error) {
       await page.screenshot({path: resolve(out, `${name}-failure.png`)});

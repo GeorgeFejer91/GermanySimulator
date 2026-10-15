@@ -11,6 +11,7 @@ const alerts=['toast','police-bark','violation-alert','wurst-alert','law-unlock-
 const cache=new Map();
 let pending=true,mission='',timer=0,reminderAt=0,queued=false,manual=false,language='';
 let motion=0,motionTimer=0,sound=null,departing=false,mask=null,kernel=null;
+let welcomeSound=null;
 const FAX_READ_MS=12000,FAX_GAP_MS=150000;
 const visible=el=>!el.hidden&&(el.id!=='toast'||el.classList.contains('show'));
 const active=()=>{const s=window.Germany3DBridge?.getHUDState();return s?.started&&!s.busy&&!document.hidden&&!document.body.classList.contains('amt-inside')};
@@ -73,11 +74,14 @@ addEventListener('keydown',event=>{
  if(event.code==='KeyM'&&(active()||manual)){event.preventDefault();event.stopImmediatePropagation();if(manual)closeFile();else openFile()}
  else if(event.code==='Escape'&&!fax.hidden&&!manual){event.preventDefault();pending=false;hideFax(true,()=>reminder(true))}
 },true);
-window.GermanyHUD={get paused(){return manual},refresh:schedule};
+function stopWelcomeFax(){welcomeSound?.cancel();welcomeSound=null}
+function welcomeFax(){stopWelcomeFax();const dialogue=byId('dialogue');if(document.hidden||dialogue.hidden||!dialogue.classList.contains('welcome'))return;welcomeSound=window.Germany3DBridge?.playFaxTransition()||null}
+window.GermanyHUD={get paused(){return manual},refresh:schedule,welcomeFax,stopWelcomeFax};
 
 function sync(){
  queued=false;
  const state=window.Germany3DBridge?.getHUDState();if(!state)return;
+ if(byId('dialogue').hidden||!byId('dialogue').classList.contains('welcome'))stopWelcomeFax();
  setHidden(rail,!state.started||document.body.classList.contains('amt-inside'));rail.classList.toggle('city-busy',!active());
  if(!manual){if(!rail.hidden){if(subtitles.parentElement!==rail)rail.append(subtitles)}else if(subtitles.parentElement===rail)subtitleAnchor.after(subtitles)}
  byId('app').classList.toggle('neighbor-tour',!!state.missionKey?.startsWith('jwd-tour-'));
@@ -174,7 +178,7 @@ observer.observe(document.body,{attributes:true,attributeFilter:['class']});
 observer.observe(document.documentElement,{attributes:true,attributeFilter:['style','lang']});
 const bounds=new ResizeObserver(schedule);for(const el of [byId('mission-guide'),subtitles,file,rail,byId('bureaucracy-form'),document.querySelector('.control-dock')])bounds.observe(el);
 addEventListener('resize',schedule,{passive:true});
-document.addEventListener('visibilitychange',()=>{if(document.hidden){queued=false;const wasVisible=!fax.hidden;hideFax();if(wasVisible){pending=false;reminderAt=performance.now()+FAX_GAP_MS}if(manual)closeFile()}else schedule()});
-addEventListener('pagehide',()=>{hideFax();cache.clear();mask=kernel=null});
+document.addEventListener('visibilitychange',()=>{if(document.hidden){stopWelcomeFax();queued=false;const wasVisible=!fax.hidden;hideFax();if(wasVisible){pending=false;reminderAt=performance.now()+FAX_GAP_MS}if(manual)closeFile()}else schedule()});
+addEventListener('pagehide',()=>{stopWelcomeFax();hideFax();cache.clear();mask=kernel=null});
 addEventListener('pageshow',schedule);
 document.fonts.ready.then(()=>{cache.clear();schedule()});schedule();

@@ -26,9 +26,9 @@ function briefing(region, voiceOn, lang) {
     }
     return elements.get(id);
   };
-  const speech = [], stops = [], objectives = [];
+  const speech = [], stops = [], objectives = [], fax = [];
   const state = {region, voiceOn, lang};
-  const context = vm.createContext({window: {}, state,
+  const context = vm.createContext({window: {GermanyHUD:{welcomeFax:()=>fax.push("start"),stopWelcomeFax:()=>fax.push("stop")}}, state,
     document: {getElementById: element, querySelector: element},
     stopSpeech: (...args) => stops.push(args), speak: (text, options) => speech.push({text, options}),
     STIMULUS_PRIORITY: {CRITICAL: 3}, toast: text => objectives.push(text),
@@ -39,7 +39,7 @@ function briefing(region, voiceOn, lang) {
   context.subtitleEnglish = new Map(Object.entries(context.window.GermanySimulatorAudioText.lines));
   vm.runInContext(['openDialogue', 'setDialogueVoiceBusy', 'speakDialogueLine', 'renderDialogue',
     'nextDialogue', 'openHumorWelcome', 'finishHumorCertification'].map(sourceOf).join('\n'), context);
-  return {context, state, element, speech, stops, objectives};
+  return {context, state, element, speech, stops, objectives, fax};
 }
 
 for (const region of ['berlin', 'germany']) {
@@ -48,6 +48,7 @@ for (const region of ['berlin', 'germany']) {
       const b = briefing(region, voiceOn, 'en');
       vm.runInContext('finishHumorCertification()', b.context);
       assert.equal(b.state.started, true);
+      assert.deepEqual(b.fax, ['start'], 'opening the welcome starts one fax cue even with voice off');
       assert.equal(b.state.dialogueData.lines.length, 2);
       assert.equal(b.element('dialogue').hidden, false, 'text must appear before speech starts');
       assert.equal(b.element('dialogue').classList.contains('welcome'), true);
@@ -63,6 +64,7 @@ for (const region of ['berlin', 'germany']) {
       const staleDone = b.speech[0].options.done;
       vm.runInContext('nextDialogue()', b.context);
       assert.equal(b.state.dialogueData.i, 1);
+      assert.deepEqual(b.fax, ['start','stop'], 'Continue cancels the feed without replaying it on page two');
       assert.equal(b.element('dialogue').hidden, false);
       assert.equal(b.element('dialogue-next').textContent, 'NEXT');
       assert.match(b.element('dialogue-text').textContent, /Polizeistern.*Zebrastreifen.*Brandmauer/);
