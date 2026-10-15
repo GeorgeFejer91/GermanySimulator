@@ -1,3 +1,16 @@
+# Copied-validator dependency closure — 2026-10-16
+
+Separate documentation-only scope after voice commit `3459338`: change only
+`For-AI/chatdev/README.md` shared-contract item 2 and this session record. Adopt
+the two reviewed sentences requiring copied helper constants/imports/aliases
+and reachable valid/failure dependency paths in briefs and review. Preserve
+owner, concurrency, existing gates and runtime behavior. Check the exact current
+base, unique replacement, full-file inverse and final diff; no runtime, browser
+or measured workflow-effectiveness claim applies. Physics/Camera do not apply
+to this instruction-only change. Initial worktree is clean at `3459338`.
+Validation preserves the reviewed raw base `093d259b` and candidate `f258fcca`,
+with one unique replacement, exact full-file inverse and clean final diff.
+
 # Five fixed traffic/police recordings — 2026-10-15
 
 Integrator scope starts from clean `dc46e26` in the separate voice admission
