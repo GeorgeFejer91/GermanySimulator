@@ -252,6 +252,7 @@ const questions=Object.freeze({
 });
 
 const lines=Object.freeze({
+ "Wenn die Zahl wieder rückwärts läuft, bleibe ich hier. Für Fluchtwege ist Schalter zwei zuständig.":"If the number starts running backwards again, I am staying here. Counter two is responsible for escape routes.",
  "GÖRLITZER PARK. Please enjoy die Grünanlage from outside. Parkbenutzung ist nur durch amtlich genehmigtes Anschauen zulässig.":"GÖRLITZER PARK. Please enjoy the park from outside. Park use is permitted only through officially authorized viewing.",
  "BAUKOSTEN · CDU-geführter Berliner Senat (CDU/SPD). Zaun und Tore kosteten laut dpa vom 25. Februar 2026 knapp 1,8 Millionen Euro. Öffentliche Berliner Mittel, keine Ausgaben der CDU-Parteikasse.":"CONSTRUCTION COSTS · CDU-led Berlin Senate (CDU/SPD). According to dpa on 25 February 2026, the fence and gates cost just under €1.8 million. Berlin public funds, not CDU party funds.",
  "WACHSCHUTZ · Laut Senatsantwort vom 18. März 2026: 192.227 Euro netto für 2025 und 59.217 Euro netto für Januar 2026. Together: 251.444 Euro netto, einschließlich Bau- und Zaunbewachung. Kein reiner Nachtpatrouillen-Betrag.":"SECURITY · The Senate's reply of 18 March 2026 reports €192,227 net for 2025 and €59,217 net for January 2026: €251,444 net together, including construction and fence guards. This is not solely night-patrol spending.",
