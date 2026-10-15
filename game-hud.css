@@ -163,14 +163,14 @@
 .welcome-fax-machine::before{content:"";position:absolute;top:0;left:12px;right:12px;height:8px;border-top:2px solid #25241f;background:#292823;box-shadow:0 3px 0 #cbc4b3}
 .welcome-fax-machine::after{content:"";position:absolute;inset:19px 14px 7px;background:radial-gradient(circle at 7px 50%,#b9d887 0 3px,#4e5b37 4px 6px,transparent 7px),repeating-linear-gradient(90deg,#37362f 0 9px,transparent 9px 15px) right center/55px 12px no-repeat,linear-gradient(#c8c1af,#c8c1af) center/80px 10px no-repeat}
 @keyframes welcome-fax-feed{
- 0%{translate:0 calc(100% + 76px)}
- 12%{translate:0 calc(88% + 60px)}
- 16%{translate:0 calc(88% + 60px)}
- 40%{translate:0 calc(60% + 35px)}
- 44%{translate:0 calc(60% + 35px)}
- 72%{translate:0 27%}
- 76%{translate:0 27%}
- 100%{translate:0 0}
+ 0%{translate:0 calc(100% + 76px);clip-path:inset(0 0 calc(100% + 76px) 0)}
+ 12%{translate:0 calc(88% + 60px);clip-path:inset(0 0 calc(88% + 60px) 0)}
+ 16%{translate:0 calc(88% + 60px);clip-path:inset(0 0 calc(88% + 60px) 0)}
+ 40%{translate:0 calc(60% + 35px);clip-path:inset(0 0 calc(60% + 35px) 0)}
+ 44%{translate:0 calc(60% + 35px);clip-path:inset(0 0 calc(60% + 35px) 0)}
+ 72%{translate:0 27%;clip-path:inset(0 0 27% 0)}
+ 76%{translate:0 27%;clip-path:inset(0 0 27% 0)}
+ 100%{translate:0 0;clip-path:inset(0 0 0 0)}
 }
 @media(max-width:480px){.dialogue.welcome:not([hidden]){padding:12px 14px;border-inline-width:6px}}
 @media(orientation:landscape) and (max-height:500px){

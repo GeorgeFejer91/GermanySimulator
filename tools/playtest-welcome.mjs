@@ -86,6 +86,8 @@ try {
           animation.pause(); animation.currentTime = 100;
           result.earlyTop = sheet.getBoundingClientRect().top;
           animation.currentTime = 600; result.middleTop = sheet.getBoundingClientRect().top;
+          const outlet = machine.getBoundingClientRect(), pointY = Math.min(innerHeight - 1, outlet.bottom + 8);
+          result.paperBelowOutlet = !!document.elementFromPoint(outlet.left + outlet.width / 2, pointY)?.closest('#dialogue');
           animation.finish(); result.finalTop = sheet.getBoundingClientRect().top;
           result.machineTop = machine.getBoundingClientRect().top;
         }
@@ -96,6 +98,7 @@ try {
       if (motion.animated) {
         assert(motion.earlyTop > motion.middleTop && motion.middleTop > motion.finalTop, name + ': paper feeds upward');
         assert(motion.earlyTop > motion.machineTop, name + ': sheet starts behind the stationary outlet');
+        assert.equal(motion.paperBelowOutlet, false, name + ': no paper may escape below the outlet');
       }
       if (name === 'desktop') {
         for (const [frame, time] of [['early', 100], ['middle', 600]]) {
