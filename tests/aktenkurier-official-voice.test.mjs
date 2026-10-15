@@ -58,15 +58,18 @@ test('hiding pauses native playback and resumes it without a new utterance',()=>
  h.tick(23000);assert.equal(h.level.omen.phase,'blackout');h.document.hidden=false;h.document.dispatchEvent(new Event('visibilitychange'));h.tick(16);
  assert.equal(player.paused,false);assert.equal(h.level.omen.speech.paused,false);assert.equal(h.synth.current,null);
 });
-test('a missing recording uses the same browser words without rewinding the life contour',()=>{
+test('a missing recording keeps exact captions without rewinding the life contour',()=>{
  const {h,player}=recorded();player.at(3.5);const before=h.level.omen.speech.progress;player.onerror();h.tick(16);
- assert.equal(player.src,'');assert.equal(h.synth.current.text,text);h.synth.boundary(0);h.level.update(0);
- assert(h.level.omen.speech.progress>=before);player.at(4.5);player.end();assert.equal(h.level.omen.phase,'blackout');
- h.synth.end();assert.equal(h.level.omen.phase,'glare');
+ assert.equal(player.src,'');assert.equal(h.synth.current,null);assert.equal(h.level.omen.speech.mode,'fallback');assert.equal(h.level.omen.speech.timing,'estimated');assert.equal(h.node('amt-line').textContent,text);
+ assert(h.level.omen.speech.progress>=before);const captionProgress=h.level.omen.speech.progress;player.at(4.5);player.end();
+ assert.equal(h.level.omen.speech.progress,captionProgress);assert.equal(h.level.omen.phase,'blackout');
+ h.tick(4000);assert.equal(h.level.omen.phase,'glare');
 });
-test('a recording that never starts is stopped before browser fallback; late events are ignored',()=>{
- const {h,player}=recorded({start:false});h.tick(1816);assert.equal(player.src,'');assert.equal(h.synth.current.text,text);
+test('a recording that never starts falls back to exact captions; late events are ignored',()=>{
+ const {h,player}=recorded({start:false});h.tick(1816);assert.equal(player.src,'');assert.equal(h.synth.current,null);
+ assert.equal(h.level.omen.speech.mode,'fallback');assert.equal(h.level.omen.speech.timing,'estimated');assert.equal(h.node('amt-line').textContent,text);
  const before=h.level.omen.speech.charIndex;player.onplaying?.();player.at(4.5);player.end();assert.equal(h.level.omen.phase,'blackout');assert.equal(h.level.omen.speech.charIndex,before);
+ h.tick(4000);assert.equal(h.level.omen.phase,'glare');
 });
 test('replay cancels playback and stale recording callbacks cannot release the new encounter',()=>{
  const {h,player}=recorded();h.level.replay(h.config);assert.equal(player.paused,true);assert.equal(player.src,'');
@@ -79,9 +82,10 @@ test('hiding during recording startup does not consume its timeout or start fall
  h.document.hidden=false;h.document.dispatchEvent(new Event('visibilitychange'));player.onplaying();
  assert.equal(h.level.omen.speech.recording,path);assert.equal(h.level.omen.speech.paused,false);player.end();assert.equal(h.level.omen.phase,'glare');
 });
-test('a recording stall is bounded and releases through the same-text browser fallback',()=>{
- const {h,player}=recorded();h.tick(20016);assert.equal(player.src,'');assert.equal(h.synth.current.text,text);
- assert.equal(h.level.omen.phase,'blackout');h.synth.end();assert.equal(h.level.omen.phase,'glare');
+test('a recording stall is bounded and releases through exact captions',()=>{
+ const {h,player}=recorded();h.tick(20016);assert.equal(player.src,'');assert.equal(h.synth.current,null);
+ assert.equal(h.level.omen.speech.mode,'fallback');assert.equal(h.level.omen.speech.timing,'estimated');assert.equal(h.node('amt-line').textContent,text);
+ assert.equal(h.level.omen.phase,'blackout');h.tick(4000);assert.equal(h.level.omen.phase,'glare');
 });
 test('voice-off never creates or loads the official recording',()=>{
  const {h,players}=recorded({voice:false});assert.equal(players.length,0);assert.equal(h.level.omen.speech.mode,'fallback');assert.equal(h.node('amt-line').textContent,text);

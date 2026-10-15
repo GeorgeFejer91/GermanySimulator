@@ -133,8 +133,12 @@ test('a fixed recording cannot use a script-prompted transcript as independent e
 test('failed fixed-voice integration leaves the complete playable catalogue unchanged',()=>{
  const scratch=mkdtempSync(join(tmpdir(),'voice-sync-'));
  try{
-  for(const folder of ['For-AI','tools','assets/voices/candidate-dialogue','assets/voices/knick'])mkdirSync(join(scratch,folder),{recursive:true});
-  for(const path of ['For-AI/AUDIO-TEXT-LIBRARY.js','tools/curate-voice-library.mjs','street-wisdom.js','game.js'])writeFileSync(join(scratch,path),readFileSync(path));
+  for(const folder of ['For-AI','tools','assets/voices/candidate-dialogue','assets/voices/knick','assets/voices/quiz-segments'])mkdirSync(join(scratch,folder),{recursive:true});
+  for(const path of ['For-AI/AUDIO-TEXT-LIBRARY.js','For-AI/QUIZ-CHARACTER-DICTIONARY.js','tools/curate-voice-library.mjs','street-wisdom.js','game.js'])writeFileSync(join(scratch,path),readFileSync(path));
+  const quizManifestPath='assets/voices/quiz-segments/quiz-german9-manifest.json';
+  writeFileSync(join(scratch,quizManifestPath),readFileSync(quizManifestPath));
+  const quizManifest=JSON.parse(readFileSync(quizManifestPath,'utf8'));
+  for(const clip of quizManifest.clips)writeFileSync(join(scratch,clip.file),readFileSync(clip.file));
   const altered=JSON.parse(JSON.stringify(cast));altered.productionVoices['amt-brunhilde-knick'].profileName='Changed projection for failed transaction';
   writeFileSync(join(scratch,'For-AI/VOICE-CAST.json'),JSON.stringify(altered));
   writeFileSync(join(scratch,'assets/voices/candidate-dialogue/manifest.json'),JSON.stringify({clips:[]}));

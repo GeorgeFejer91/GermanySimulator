@@ -27,12 +27,13 @@ const planCache=new Map();
 async function fixture(t){
  const outer=mkdtempSync(resolve(tmpdir(),'gs-city-admission-test-')),game=resolve(outer,'destination'),authoring=resolve(outer,'authoring'),review=resolve(outer,'synthetic-review');
  t.after(()=>{assert.ok(resolve(outer).startsWith(resolve(tmpdir())+sep));rmSync(outer,{recursive:true,force:true})});
- const fixtureFiles=['game.js','For-AI/VOICE-CAST.json','For-AI/AUDIO-TEXT-LIBRARY.js','street-wisdom.js','tools/curate-voice-library.mjs','tools/build-knick-voice.py'];
+ const quizManifest='assets/voices/quiz-segments/quiz-german9-manifest.json';
+ const fixtureFiles=['game.js','For-AI/VOICE-CAST.json','For-AI/AUDIO-TEXT-LIBRARY.js','For-AI/QUIZ-CHARACTER-DICTIONARY.js','street-wisdom.js','tools/curate-voice-library.mjs','tools/build-knick-voice.py',quizManifest,...json(resolve(root,quizManifest)).clips.map(clip=>clip.file)];
  for(const base of [game,authoring])for(const path of fixtureFiles){mkdirSync(dirname(resolve(base,path)),{recursive:true});copyFileSync(resolve(root,path),resolve(base,path))}
  const reduceCatalog=base=>{
   const catalogPath=resolve(base,'For-AI/AUDIO-TEXT-LIBRARY.js');let catalog=readFileSync(catalogPath,'utf8');
   const start=catalog.indexOf('const recordings=Object.freeze({'),end=catalog.indexOf('\n});',start);assert.ok(start>=0&&end>start);
-  catalog=(catalog.slice(0,start)+'const recordings=Object.freeze({'+catalog.slice(end))
+  catalog=(catalog.slice(0,start)+'const recordings=Object.freeze({\n ...quizGerman9Recordings,'+catalog.slice(end))
    .replace(/const neighborRecordings=Object\.freeze\([^\n]*\);\n/,curator.neighborRecordingsBlock(cast,[]))
    .replace(/const cityRecordings=Object\.freeze\([^\n]*\);\n/,curator.cityRecordingsBlock(cast,[],base,base))
    .replace(/const cityAdmissionReceipts=Object\.freeze\(\{[^\n]*\}\);\n/,'const cityAdmissionReceipts=Object.freeze({});\n')

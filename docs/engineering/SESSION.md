@@ -1150,3 +1150,7 @@ Final combined Node regression run02 passes1255/1255 with0failures/0skips across
 
 The merged fixed-speaker fixture now loads the real officialComputerVoice helper introduced on main. Its first run failed with ReferenceError before reaching the existing narrator assertions; those assertions remain unchanged. Scope includes this fixture dependency repair.
 The narrator exception fixture supplies a real-shaped installed German voice; current main intentionally captions when no browser voice exists. This restores the existing audible-selection assertion under its intended available-voice condition without changing the production fallback.
+
+Combined regression fixtures now include their shipped quiz manifest, four MP3s and dictionary, retain quiz entries when reducing the unrelated catalog, and supply officialDialogue in extracted sequence lookups. Existing failure/rollback and ownership assertions remain intact; these repairs address missing new dependencies in isolated fixtures.
+
+Combined Node run: 1274 checks,1270 PASS and4 stale-policy expectations. English totals now include the four manifest-owned quiz clips. The three omen fallback checks now assert exact captions, no generic synthesis, preserved monotonic life progress, detached late media callbacks and timed completion under the accepted fixed-speaker policy. A first adapted test incorrectly called a time-advancing update while asserting unchanged callback state; removing that unrelated update retains the strict stale-callback equality. No runtime change.
