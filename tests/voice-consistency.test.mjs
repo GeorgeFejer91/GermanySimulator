@@ -134,7 +134,7 @@ test('failed fixed-voice integration leaves the complete playable catalogue unch
  const scratch=mkdtempSync(join(tmpdir(),'voice-sync-'));
  try{
   for(const folder of ['For-AI','tools','assets/voices/candidate-dialogue','assets/voices/knick'])mkdirSync(join(scratch,folder),{recursive:true});
-  for(const path of ['For-AI/AUDIO-TEXT-LIBRARY.js','tools/curate-voice-library.mjs','street-wisdom.js'])writeFileSync(join(scratch,path),readFileSync(path));
+  for(const path of ['For-AI/AUDIO-TEXT-LIBRARY.js','tools/curate-voice-library.mjs','street-wisdom.js','game.js'])writeFileSync(join(scratch,path),readFileSync(path));
   const altered=JSON.parse(JSON.stringify(cast));altered.productionVoices['amt-brunhilde-knick'].profileName='Changed projection for failed transaction';
   writeFileSync(join(scratch,'For-AI/VOICE-CAST.json'),JSON.stringify(altered));
   writeFileSync(join(scratch,'assets/voices/candidate-dialogue/manifest.json'),JSON.stringify({clips:[]}));

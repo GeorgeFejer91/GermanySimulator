@@ -2295,7 +2295,8 @@
         "game.js npcLines / npcDenglisch by region",
         "game.js pedestrianBarks[region] by surface",
         "game.js crowdArchetypes[archetype].barks[region]",
-        "game.js quizApproaches when this instance is selected as a quizzer"
+        "game.js quizApproaches when this instance is selected as a quizzer",
+        "game.js crowdArchetypes fallback; actor-owned crowdCharacterBarks[crowd-baerbel-brezel] regional lines"
       ],
       "runtimeArchetype": "towel-woman",
       "runtimeBinding": "game.js addCrowdPedestrian assigns this voiceId to the named NPC; all speech must use this identity rather than the shared sprite archetype."
@@ -2348,7 +2349,8 @@
         "game.js npcLines / npcDenglisch by region",
         "game.js pedestrianBarks[region] by surface",
         "game.js crowdArchetypes[archetype].barks[region]",
-        "game.js quizApproaches when this instance is selected as a quizzer"
+        "game.js quizApproaches when this instance is selected as a quizzer",
+        "game.js crowdArchetypes fallback; actor-owned crowdCharacterBarks[crowd-brigitte-bueroklammer] regional lines"
       ],
       "runtimeArchetype": "towel-woman",
       "runtimeBinding": "game.js addCrowdPedestrian assigns this voiceId to the named NPC; all speech must use this identity rather than the shared sprite archetype."
@@ -2450,7 +2452,8 @@
         "game.js npcLines / npcDenglisch by region",
         "game.js pedestrianBarks[region] by surface",
         "game.js crowdArchetypes[archetype].barks[region]",
-        "game.js quizApproaches when this instance is selected as a quizzer"
+        "game.js quizApproaches when this instance is selected as a quizzer",
+        "game.js crowdArchetypes fallback; actor-owned crowdCharacterBarks[crowd-elfriede-eingabe] regional lines"
       ],
       "runtimeArchetype": "towel-woman",
       "runtimeBinding": "game.js addCrowdPedestrian assigns this voiceId to the named NPC; all speech must use this identity rather than the shared sprite archetype."
@@ -2498,7 +2501,8 @@
         "game.js npcLines / npcDenglisch by region",
         "game.js pedestrianBarks[region] by surface",
         "game.js crowdArchetypes[archetype].barks[region]",
-        "game.js quizApproaches when this instance is selected as a quizzer"
+        "game.js quizApproaches when this instance is selected as a quizzer",
+        "game.js crowdArchetypes fallback; actor-owned crowdCharacterBarks[crowd-guenther-gartenzaun] regional lines"
       ],
       "runtimeArchetype": "towel-man",
       "runtimeBinding": "game.js addCrowdPedestrian assigns this voiceId to the named NPC; all speech must use this identity rather than the shared sprite archetype."
@@ -2551,7 +2555,8 @@
         "game.js npcLines / npcDenglisch by region",
         "game.js pedestrianBarks[region] by surface",
         "game.js crowdArchetypes[archetype].barks[region]",
-        "game.js quizApproaches when this instance is selected as a quizzer"
+        "game.js quizApproaches when this instance is selected as a quizzer",
+        "game.js crowdArchetypes fallback; actor-owned crowdCharacterBarks[crowd-hildegard-brotzeit] regional lines"
       ],
       "runtimeArchetype": "towel-woman",
       "runtimeBinding": "game.js addCrowdPedestrian assigns this voiceId to the named NPC; all speech must use this identity rather than the shared sprite archetype."
@@ -2659,7 +2664,8 @@
         "game.js npcLines / npcDenglisch by region",
         "game.js pedestrianBarks[region] by surface",
         "game.js crowdArchetypes[archetype].barks[region]",
-        "game.js quizApproaches when this instance is selected as a quizzer"
+        "game.js quizApproaches when this instance is selected as a quizzer",
+        "game.js crowdArchetypes fallback; actor-owned crowdCharacterBarks[crowd-irmgard-aktenordner] regional lines"
       ],
       "runtimeArchetype": "towel-woman",
       "runtimeBinding": "game.js addCrowdPedestrian assigns this voiceId to the named NPC; all speech must use this identity rather than the shared sprite archetype."
@@ -2712,7 +2718,8 @@
         "game.js npcLines / npcDenglisch by region",
         "game.js pedestrianBarks[region] by surface",
         "game.js crowdArchetypes[archetype].barks[region]",
-        "game.js quizApproaches when this instance is selected as a quizzer"
+        "game.js quizApproaches when this instance is selected as a quizzer",
+        "game.js crowdArchetypes fallback; actor-owned crowdCharacterBarks[crowd-klaus-dieter-knoedel] regional lines"
       ],
       "runtimeArchetype": "towel-man",
       "runtimeBinding": "game.js addCrowdPedestrian assigns this voiceId to the named NPC; all speech must use this identity rather than the shared sprite archetype."
@@ -2765,7 +2772,8 @@
         "game.js npcLines / npcDenglisch by region",
         "game.js pedestrianBarks[region] by surface",
         "game.js crowdArchetypes[archetype].barks[region]",
-        "game.js quizApproaches when this instance is selected as a quizzer"
+        "game.js quizApproaches when this instance is selected as a quizzer",
+        "game.js crowdArchetypes fallback; actor-owned crowdCharacterBarks[crowd-manfred-mittagsruhe] regional lines"
       ],
       "runtimeArchetype": "towel-man",
       "runtimeBinding": "game.js addCrowdPedestrian assigns this voiceId to the named NPC; all speech must use this identity rather than the shared sprite archetype."
@@ -2818,7 +2826,8 @@
         "game.js npcLines / npcDenglisch by region",
         "game.js pedestrianBarks[region] by surface",
         "game.js crowdArchetypes[archetype].barks[region]",
-        "game.js quizApproaches when this instance is selected as a quizzer"
+        "game.js quizApproaches when this instance is selected as a quizzer",
+        "game.js crowdArchetypes fallback; actor-owned crowdCharacterBarks[crowd-ruediger-rasenkante] regional lines"
       ],
       "runtimeArchetype": "towel-man",
       "runtimeBinding": "game.js addCrowdPedestrian assigns this voiceId to the named NPC; all speech must use this identity rather than the shared sprite archetype."

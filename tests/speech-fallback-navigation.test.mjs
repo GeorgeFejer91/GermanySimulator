@@ -1,5 +1,6 @@
 import assert from "node:assert/strict";
 import vm from "node:vm";
+import test from "node:test";
 import {readFileSync} from "node:fs";
 
 const game=readFileSync(new URL("../game.js",import.meta.url),"utf8");
@@ -8,7 +9,10 @@ function sourceOf(name){
  const start=game.indexOf(`function ${name}(`);
  assert.notEqual(start,-1,`${name} is missing`);
  let depth=0,opened=false;
- for(let index=start;index<game.length;index++){
+ const signature=game.slice(start).match(/\)\s*\{/);
+ assert.ok(signature,`${name} body is missing`);
+ const body=game.indexOf("{",start+signature.index);
+ for(let index=body;index<game.length;index++){
   if(game[index]==="{"){depth++;opened=true}
   else if(game[index]==="}"&&opened&&--depth===0)return game.slice(start,index+1);
  }
@@ -111,3 +115,94 @@ assert.match(sourceOf("nextDialogue"),/if\(state\.dialogueVoiceBusy\).*stopSpeec
 assert.doesNotMatch(sourceOf("nextDialogue"),/state\.dialogueVoiceBusy\)return/,"an unfinished voice must not block WEITER or E");
 
 console.log("Synthetic speech fallback and dialogue cancellation OK");
+
+const captionLibraryContext={window:{}};
+vm.runInNewContext(readFileSync(new URL("../For-AI/AUDIO-TEXT-LIBRARY.js",import.meta.url),"utf8"),captionLibraryContext);
+const captionLibrary=captionLibraryContext.window.GermanySimulatorAudioText;
+const cityCaption=captionLibrary.cityDialogue["city-ute-ruhe"];
+assert.ok(cityCaption?.germany?.length===2,"the ordinary city caption fixture must use current authored rows");
+const recordedCaption=voiceId=>{
+ const clip=Object.values(captionLibrary.clips).find(clip=>clip.voiceId===voiceId&&clip.recording&&clip.english);
+ assert.ok(clip,`current authored ${voiceId} recording is required`);
+ return {text:clip.text,english:clip.english};
+};
+
+function captionDialogueFixture(){
+ const elements=new Map(),pending=[],classes=()=>{
+  const values=new Set();return {add:(...names)=>names.forEach(name=>values.add(name)),remove:(...names)=>names.forEach(name=>values.delete(name)),
+   toggle(name,on){if(on??!values.has(name))values.add(name);else values.delete(name)}};
+ };
+ const element=id=>{
+  if(!elements.has(id))elements.set(id,{textContent:"",hidden:true,disabled:false,dataset:{},scrollTop:0,classList:classes()});
+  return elements.get(id);
+ };
+ let completed=0,sourceStops=0;
+ const c={state:{voiceOn:false,lang:"en",region:"germany",subtitlesOn:true,dialogue:false,modal:false},
+  window:{},document:{getElementById:element,querySelector:element},performance:{now:()=>100},
+  activeStimulus:null,textOnlyBark:null,recordedSpeechSource:null,recordedSpeechGain:null,stimulusTimer:null,stimulusGeneration:0,stimulusQueue:[],subtitleFrame:0,
+  speechCatalog:captionLibrary,audioTextLibrary:captionLibrary,subtitleEnglish:new Map(),dynamicEnglishSubtitle:()=>"",
+  STIMULUS_PRIORITY:{AMBIENT:1,REACTIVE:2,CRITICAL:3},jwd:{tour:null},
+  setTimeout(callback,delay){pending.push({callback,delay,cancelled:false});return pending.length},
+  clearTimeout(id){if(pending[id-1])pending[id-1].cancelled=true},requestAnimationFrame:()=>1,cancelAnimationFrame(){},
+  uiTone(){},cancelHumorScold(){},setAudioText(){},requestCharacterReaction(){},
+  queueStimulus(value){c.activeStimulus=value;value.start?.()},speechClip:id=>captionLibrary.clips[id],
+ };
+ vm.createContext(c);
+ vm.runInContext(["englishSubtitle","clearSubtitle","setSubtitle","startSubtitle","speak","speakRecorded","speakMerkelLine","speakMerzLine",
+  "stopRecordedSpeech","hideWorldBark","stopSpeech","showWorldBark","openDialogue","setDialogueVoiceBusy","speakDialogueLine","renderDialogue","nextDialogue"].map(sourceOf).join("\n"),c);
+ const merkelStart=game.indexOf("MERKEL_RECORDINGS=Object.freeze(");
+ assert.notEqual(merkelStart,-1,"authored Merkel recordings map is required");
+ vm.runInContext(game.match(/^const MERZ_RECORDINGS=.*$/m)[0]+"\nconst "+game.slice(merkelStart,game.indexOf("\n",merkelStart)),c);
+ return {c,element,pending,
+  open:(speaker="FRAU RUHE",lines=cityCaption.germany,voiceId=cityCaption.voiceId)=>c.openDialogue(speaker,lines.map(line=>line.text),"!",()=>completed++,voiceId,lines.map(line=>line.english)),
+  source:()=>({onended:()=>{},stop(){sourceStops++}}),
+  get completed(){return completed},get sourceStops(){return sourceStops}};
+}
+
+for(const [speaker,voiceId,line]of [
+ ["FRAU RUHE",cityCaption.voiceId,cityCaption.germany[0]],
+ ["FRIEDRICH MERZ · SATIRE","merz",recordedCaption("merz")],
+ ["ANGELA MERKEL · SATIRE","merkel",recordedCaption("merkel")],
+])test(`voice-off ${voiceId} final close retires its caption and stale callback`,()=>{
+ const f=captionDialogueFixture();f.open(speaker,[line],voiceId);
+ const packet=f.c.state.dialogueData,token=f.c.state.dialogueVoiceToken,pending=f.pending.at(-1);
+ assert.equal(f.element("english-subtitle").textContent,line.english);
+ assert.equal(f.c.textOnlyBark.text,line.text);assert.equal(f.c.state.dialogueVoiceBusy,false);
+ f.c.nextDialogue();
+ assert.equal(f.c.state.dialogue,false);assert.equal(f.c.state.modal,false);assert.equal(f.completed,1);
+ assert.equal(f.c.textOnlyBark,null,"early acknowledgement must retire its own caption");
+ assert.equal(f.element("english-subtitle").hidden,true);assert.equal(f.element("english-subtitle").textContent,"");
+ assert.ok(pending.cancelled,"early acknowledgement must cancel its reading timer");
+ // Deliberate retained-callback delivery challenges ownership; this is not a real timer race.
+ pending.callback();assert.equal(packet.lineComplete,false,"obsolete callback must not complete a closed packet");assert.equal(f.completed,1);assert.ok(f.c.state.dialogueVoiceToken>token);
+ f.open(speaker,[line],voiceId);const replacement=f.c.textOnlyBark;pending.callback();
+ assert.equal(f.c.textOnlyBark,replacement);assert.equal(f.c.state.dialogueData.lineComplete,false);
+ assert.equal(f.element("english-subtitle").textContent,line.english);
+});
+
+test("voice-off next page keeps new caption when a cancelled callback is delivered",()=>{
+ const f=captionDialogueFixture();f.open();const old=f.pending.at(-1);
+ f.c.nextDialogue();const current=f.c.textOnlyBark;
+ assert.ok(old.cancelled);assert.equal(f.c.state.dialogueData.i,1);assert.equal(current.text,cityCaption.germany[1].text);
+ old.callback();assert.equal(f.c.textOnlyBark,current);assert.equal(f.c.state.dialogueData.lineComplete,false);
+ assert.equal(f.element("english-subtitle").textContent,cityCaption.germany[1].english);assert.equal(f.completed,0);
+});
+
+test("closing voice-off dialogue preserves an unrelated train source and caption",()=>{
+ const f=captionDialogueFixture();f.open("FRAU RUHE",[cityCaption.germany[0]]);
+ const train={family:"train",text:"Independent train announcement"},source=f.source();
+ f.c.activeStimulus=train;f.c.recordedSpeechSource=source;
+ f.c.showWorldBark("BAHN",train.text,false,"","",{subtitle:"Independent train caption",family:"train"});
+ const foreign=f.c.textOnlyBark,pending=f.pending.at(-1);f.c.nextDialogue();
+ assert.equal(f.c.activeStimulus,train);assert.equal(f.c.recordedSpeechSource,source);assert.equal(f.sourceStops,0);
+ assert.equal(f.c.textOnlyBark,foreign);assert.equal(f.element("english-subtitle").textContent,"Independent train caption");
+ assert.equal(pending.cancelled,false);assert.equal(f.completed,1);
+});
+
+test("voice-on final acknowledgement still cancels its active recording",()=>{
+ const f=captionDialogueFixture();f.c.state.voiceOn=true;f.open("FRAU RUHE",[cityCaption.germany[0]]);
+ assert.equal(f.c.state.dialogueVoiceBusy,true);const token=f.c.state.dialogueVoiceToken;
+ const source=f.source();f.c.recordedSpeechSource=source;f.c.nextDialogue();
+ assert.equal(f.sourceStops,1);assert.equal(source.onended,null);assert.equal(f.c.activeStimulus,null);
+ assert.equal(f.c.recordedSpeechSource,null);assert.ok(f.c.state.dialogueVoiceToken>token);assert.equal(f.completed,1);
+});

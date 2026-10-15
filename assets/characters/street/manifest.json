@@ -591,18 +591,54 @@
         "player-default"
       ],
       "occlusionSamples": [
-        [64, 23],
-        [48, 43],
-        [80, 43],
-        [64, 72],
-        [50, 78],
-        [78, 78],
-        [30, 94],
-        [98, 94],
-        [53, 110],
-        [75, 110],
-        [48, 142],
-        [80, 142]
+        [
+          64,
+          23
+        ],
+        [
+          48,
+          43
+        ],
+        [
+          80,
+          43
+        ],
+        [
+          64,
+          72
+        ],
+        [
+          50,
+          78
+        ],
+        [
+          78,
+          78
+        ],
+        [
+          30,
+          94
+        ],
+        [
+          98,
+          94
+        ],
+        [
+          53,
+          110
+        ],
+        [
+          75,
+          110
+        ],
+        [
+          48,
+          142
+        ],
+        [
+          80,
+          142
+        ]
       ],
       "standing": {
         "file": "./assets/characters/street/spieler-hans-peter-mustermann-standing.webp",
@@ -724,6 +760,315 @@
       "standing": {
         "file": "./assets/characters/street/quiz-brigitte-neumann-standing.webp",
         "sha256": "df33b590718ab69d6c01bcf19c9f3001346be0d294759592d9ca61a52dfa05e2",
+        "width": 128,
+        "height": 160
+      }
+    },
+    "stadt-karl-heinz-post": {
+      "id": "stadt-karl-heinz-post",
+      "standingOnly": true,
+      "cell": [
+        128,
+        160
+      ],
+      "pivot": [
+        64,
+        150
+      ],
+      "figureHeight": 136,
+      "figureWorldHeight": 1.6,
+      "aliases": [
+        "stadt-karl-heinz-post",
+        "city-karl-heinz-post"
+      ],
+      "standing": {
+        "file": "./assets/characters/street/stadt-karl-heinz-post-standing.webp",
+        "sha256": "6c5a8a033a432a9cbac17df85bb2322a4b88a7edc54c870d818433a925900877",
+        "width": 128,
+        "height": 160
+      }
+    },
+    "stadt-herbert-rasenaufsicht": {
+      "id": "stadt-herbert-rasenaufsicht",
+      "standingOnly": true,
+      "cell": [
+        128,
+        160
+      ],
+      "pivot": [
+        64,
+        150
+      ],
+      "figureHeight": 136,
+      "figureWorldHeight": 1.6,
+      "aliases": [
+        "stadt-herbert-rasenaufsicht",
+        "city-herbert-rasenaufsicht"
+      ],
+      "standing": {
+        "file": "./assets/characters/street/stadt-herbert-rasenaufsicht-standing.webp",
+        "sha256": "0132e764e393d9376a3a2bae101490e40af74cc9e53aa9385eb354d421795b65",
+        "width": 128,
+        "height": 160
+      }
+    },
+    "stadt-waltraud-ordnung": {
+      "id": "stadt-waltraud-ordnung",
+      "standingOnly": true,
+      "cell": [
+        128,
+        160
+      ],
+      "pivot": [
+        64,
+        150
+      ],
+      "figureHeight": 136,
+      "figureWorldHeight": 1.6,
+      "aliases": [
+        "stadt-waltraud-ordnung",
+        "city-waltraud-ordnung"
+      ],
+      "standing": {
+        "file": "./assets/characters/street/stadt-waltraud-ordnung-standing.webp",
+        "sha256": "3160fd37025e0a88ece7221cb8b8692ae7a048a089cd2349ea6deb5d51c40512",
+        "width": 128,
+        "height": 160
+      }
+    },
+    "stadt-erwin-archiv": {
+      "id": "stadt-erwin-archiv",
+      "standingOnly": true,
+      "cell": [
+        128,
+        160
+      ],
+      "pivot": [
+        64,
+        150
+      ],
+      "figureHeight": 136,
+      "figureWorldHeight": 1.6,
+      "aliases": [
+        "stadt-erwin-archiv",
+        "city-erwin-archiv"
+      ],
+      "standing": {
+        "file": "./assets/characters/street/stadt-erwin-archiv-standing.webp",
+        "sha256": "9354ae7f338d78b5f1dd0ba80229f52550694ab3cf06a58b43381bc34ec3745f",
+        "width": 128,
+        "height": 160
+      }
+    },
+    "stadt-renate-termin": {
+      "id": "stadt-renate-termin",
+      "standingOnly": true,
+      "cell": [
+        128,
+        160
+      ],
+      "pivot": [
+        64,
+        150
+      ],
+      "figureHeight": 136,
+      "figureWorldHeight": 1.6,
+      "aliases": [
+        "stadt-renate-termin",
+        "city-renate-termin"
+      ],
+      "standing": {
+        "file": "./assets/characters/street/stadt-renate-termin-standing.webp",
+        "sha256": "555be43f14ae488422032e1b6b68dc429c6d6052607991daf5e7834d04c2b1da",
+        "width": 128,
+        "height": 160
+      }
+    },
+    "stadt-heinz-mietnachweis": {
+      "id": "stadt-heinz-mietnachweis",
+      "standingOnly": true,
+      "cell": [
+        128,
+        160
+      ],
+      "pivot": [
+        64,
+        150
+      ],
+      "figureHeight": 136,
+      "figureWorldHeight": 1.6,
+      "aliases": [
+        "stadt-heinz-mietnachweis",
+        "city-heinz-mietnachweis"
+      ],
+      "standing": {
+        "file": "./assets/characters/street/stadt-heinz-mietnachweis-standing.webp",
+        "sha256": "d5ee469f4ac830b9fd6e334cfa8b80027b3956cbe0790f1201f11ca8e7a5c2de",
+        "width": 128,
+        "height": 160
+      }
+    },
+    "stadt-monika-zebra": {
+      "id": "stadt-monika-zebra",
+      "standingOnly": true,
+      "cell": [
+        128,
+        160
+      ],
+      "pivot": [
+        64,
+        150
+      ],
+      "figureHeight": 136,
+      "figureWorldHeight": 1.6,
+      "aliases": [
+        "stadt-monika-zebra",
+        "city-monika-zebra"
+      ],
+      "standing": {
+        "file": "./assets/characters/street/stadt-monika-zebra-standing.webp",
+        "sha256": "a36c61d1412fa77a7ecc7cf6431cbd12a137313b87015245b2008a3b2a60d92a",
+        "width": 128,
+        "height": 160
+      }
+    },
+    "stadt-joachim-fundsache": {
+      "id": "stadt-joachim-fundsache",
+      "standingOnly": true,
+      "cell": [
+        128,
+        160
+      ],
+      "pivot": [
+        64,
+        150
+      ],
+      "figureHeight": 136,
+      "figureWorldHeight": 1.6,
+      "aliases": [
+        "stadt-joachim-fundsache",
+        "city-joachim-fundsache"
+      ],
+      "standing": {
+        "file": "./assets/characters/street/stadt-joachim-fundsache-standing.webp",
+        "sha256": "3c755601eb6d186a2a4d02393e1f00529e7b9668549d80e3d3e880306cca72eb",
+        "width": 128,
+        "height": 160
+      }
+    },
+    "stadt-norbert-faxrolle": {
+      "id": "stadt-norbert-faxrolle",
+      "standingOnly": true,
+      "cell": [
+        128,
+        160
+      ],
+      "pivot": [
+        64,
+        150
+      ],
+      "figureHeight": 136,
+      "figureWorldHeight": 1.6,
+      "aliases": [
+        "stadt-norbert-faxrolle",
+        "city-norbert-faxrolle"
+      ],
+      "standing": {
+        "file": "./assets/characters/street/stadt-norbert-faxrolle-standing.webp",
+        "sha256": "22d7876037a35b1f47e1aef955df5e27d23befb9161940f251220b349188d05a",
+        "width": 128,
+        "height": 160
+      }
+    },
+    "stadt-edeltraud-trennung": {
+      "id": "stadt-edeltraud-trennung",
+      "standingOnly": true,
+      "cell": [
+        128,
+        160
+      ],
+      "pivot": [
+        64,
+        150
+      ],
+      "figureHeight": 136,
+      "figureWorldHeight": 1.6,
+      "aliases": [
+        "stadt-edeltraud-trennung",
+        "city-edeltraud-trennung"
+      ],
+      "standing": {
+        "file": "./assets/characters/street/stadt-edeltraud-trennung-standing.webp",
+        "sha256": "2990aea2b4525149c1092497dbfe3184da3fa15d17a2a5a97b668d3428c7938f",
+        "width": 128,
+        "height": 160
+      }
+    },
+    "crowd-elfriede-eingabe": {
+      "id": "crowd-elfriede-eingabe",
+      "standingOnly": true,
+      "cell": [
+        128,
+        160
+      ],
+      "pivot": [
+        64,
+        150
+      ],
+      "figureHeight": 136,
+      "figureWorldHeight": 1.6,
+      "aliases": [
+        "crowd-elfriede-eingabe"
+      ],
+      "standing": {
+        "file": "./assets/characters/street/crowd-elfriede-eingabe-standing.webp",
+        "sha256": "754a9633ddb3a3f5c1b720039d53ec5b7ce4dbb9f935f7ba1cd4b7e5321a9852",
+        "width": 128,
+        "height": 160
+      }
+    },
+    "crowd-manfred-mittagsruhe": {
+      "id": "crowd-manfred-mittagsruhe",
+      "standingOnly": true,
+      "cell": [
+        128,
+        160
+      ],
+      "pivot": [
+        64,
+        150
+      ],
+      "figureHeight": 136,
+      "figureWorldHeight": 1.6,
+      "aliases": [
+        "crowd-manfred-mittagsruhe"
+      ],
+      "standing": {
+        "file": "./assets/characters/street/crowd-manfred-mittagsruhe-standing.webp",
+        "sha256": "f59265531430c17131fccc29321515a927f2d80c34e5887054688d9d41d9bd70",
+        "width": 128,
+        "height": 160
+      }
+    },
+    "crowd-ruediger-rasenkante": {
+      "id": "crowd-ruediger-rasenkante",
+      "standingOnly": true,
+      "cell": [
+        128,
+        160
+      ],
+      "pivot": [
+        64,
+        150
+      ],
+      "figureHeight": 136,
+      "figureWorldHeight": 1.6,
+      "aliases": [
+        "crowd-ruediger-rasenkante"
+      ],
+      "standing": {
+        "file": "./assets/characters/street/crowd-ruediger-rasenkante-standing.webp",
+        "sha256": "6d02f04c68241bda3da1363154c2c7b1cd9b049269286e3a617f2958bd0a36e4",
         "width": 128,
         "height": 160
       }

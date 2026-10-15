@@ -398,7 +398,7 @@ function validateThreeRigBuffers(geometry,vertices,triangles){
 export function loadStreetCharacterManifest(){
   if(Object.keys(characters).length)return Promise.resolve(characters);
   if(!manifestPromise)manifestPromise=(async()=>{
-    const response=await fetch(MANIFEST_URL,{signal:AbortSignal.timeout(15000)});
+    const response=await fetch(MANIFEST_URL,{cache:'no-cache',signal:AbortSignal.timeout(15000)});
     if(!response.ok)throw new Error(`Street manifest HTTP ${response.status}`);
     const body=await response.text();
     if(body.length>262144)throw new RangeError('Street manifest exceeds 256 KiB');

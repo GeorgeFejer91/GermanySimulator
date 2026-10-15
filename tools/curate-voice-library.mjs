@@ -10,6 +10,42 @@ export const root=resolve(dirname(fileURLToPath(import.meta.url)),'..');
 const json=path=>JSON.parse(readFileSync(path,'utf8').replace(/^\uFEFF/,''));
 const hash=path=>createHash('sha256').update(readFileSync(path)).digest('hex');
 const requireMatch=(ok,why)=>{if(!ok)throw Error(why)};
+export function crowdCandidateBlock(cast,manifests,sourceRoot=root){
+ const game=readFileSync(resolve(sourceRoot,'game.js'),'utf8'),catalogSource=readFileSync(resolve(sourceRoot,'For-AI/AUDIO-TEXT-LIBRARY.js'),'utf8');
+ requireMatch(game.includes('personalizedLines=surface==="sidewalk"&&archetype?crowdCharacterBarks[n.voiceId]?.[region]:null')&&game.includes('variantPool=personalizedLines?`pedestrian-personalized:${n.voiceId}:${region}:${surface}`:family')&&game.includes('family=archetype?`pedestrian:${archetype.id}:${region}:${surface}`:`pedestrian:${region}:${surface}`'),'Crowd personalized selection or shared arbitration family changed');
+ const match=game.match(/const crowdCharacterBarks=(Object\.freeze\([\s\S]*?\));\nconst crowdArchetypeById/);requireMatch(match,'Missing actor-owned crowd German dialogue');
+ const barks=vm.runInNewContext(match[1]),window={};vm.runInNewContext(catalogSource,{window});
+ const subtitles=window.GermanySimulatorAudioText.pools.crowdPersonalized,roles=Object.fromEntries(cast.roleProfiles.map(row=>[row.gameRole,row]));
+ const entries={},seen=new Set(),seenVoices=new Set();
+ for(const manifest of manifests){
+  const voice=manifest.voiceId,owner=roles[voice],binding=cast.productionVoices[voice];
+  requireMatch(owner&&binding&&owner.voiceId===voice&&Object.hasOwn(barks,voice)&&!seenVoices.has(voice),'Crowd manifest voice has no unique actor-owned source/profile');seenVoices.add(voice);
+  requireMatch(manifest.profileId===binding.profileId&&manifest.requestedLineCount===4&&Array.isArray(manifest.clips)&&Array.isArray(manifest.heldPrivate)&&Number.isInteger(manifest.generatedLineCount)&&manifest.generatedLineCount>=manifest.clips.length&&manifest.generatedLineCount<=4&&manifest.lineCount===manifest.clips.length,'Unaccounted crowd dialogue requests');
+  const expected=new Map();
+  for(const region of ['berlin','germany'])for(let slot=0;slot<2;slot++){
+   const clipId=`${voice}-${region}-${String(slot+1).padStart(2,'0')}`;
+   expected.set(clipId,{clipId,voiceId:voice,actorId:voice,region,slot,sourceLocator:`game.js crowdCharacterBarks[${voice}].${region}[${slot}]`,text:barks[voice][region][slot],english:subtitles[voice][region][slot],profileId:binding.profileId,referenceSha256:binding.referenceSha256,referenceOriginalSha256:binding.originalSha256,renderer:binding.renderer,modelRevision:binding.modelRevision,processing:binding.processing??null});
+  }
+  const records=[...manifest.clips,...manifest.heldPrivate],identities=records.map(row=>row.clipId);
+  requireMatch(records.length===4&&new Set(identities).size===4&&identities.every(id=>expected.has(id))&&expected.size===4,'Crowd manifest must account for exactly four unique owned region slots');
+  for(const row of records){
+   const source=expected.get(row.clipId);
+   requireMatch(source&&Object.entries(source).every(([field,value])=>row[field]===value),'Crowd accepted/held row ownership, profile, text, subtitle or slot differs from source');
+  }
+  requireMatch(manifest.heldPrivate.every(row=>typeof row.reason==='string'&&row.reason.length>0),'Crowd held row must retain its private hold reason');
+  for(const clip of manifest.clips){
+   const region=clip.region,slot=clip.slot;
+   requireMatch(['berlin','germany'].includes(region)&&[0,1].includes(slot),'Invalid crowd region/slot');
+   const expectedId=`${voice}-${region}-${String(slot+1).padStart(2,'0')}`,locator=`game.js crowdCharacterBarks[${voice}].${region}[${slot}]`;
+   requireMatch(clip.clipId===expectedId&&clip.actorId===voice&&clip.voiceId===voice&&clip.text===barks[voice][region][slot]&&clip.english===subtitles[voice][region][slot]&&clip.sourceLocator===locator,'Crowd clip text, subtitle, actor or stable slot differs from source');
+   requireMatch(matchesProduction(cast,clip)&&clip.referenceOriginalSha256===binding.originalSha256,'Crowd clip selected profile/reference changed');
+   fixedTakeAuthority(cast,clip);
+   requireMatch(clip.file===`assets/voices/candidate-dialogue/${expectedId}.mp3`&&hash(resolve(sourceRoot,clip.file))===clip.sha256,'Crowd candidate asset path or bytes changed');
+   const key=voice+'\u0000'+clip.text;requireMatch(!seen.has(key),'Duplicate crowd candidate line');seen.add(key);entries[key]=clip.file;
+  }
+ }
+ return 'const crowdCandidateDialogue=Object.freeze('+JSON.stringify(entries)+');\n';
+}
 const originalFile=path=>{const names=readdirSync(path).filter(name=>/^original\.[a-z0-9]+$/i.test(name));requireMatch(names.length===1,'Missing/ambiguous original audio');return resolve(path,names[0])};
 export function matchesProduction(cast,clip,requireReceipt=true){
  const selected=cast.productionVoices[clip.voiceId];
@@ -291,11 +327,28 @@ const cityAuthoringHelperSha256='122d93bac3016f44b24cf04b97b7a2462d216226e33c9d6
 const citySourceFiles=['game.js','For-AI/VOICE-CAST.json','For-AI/AUDIO-TEXT-LIBRARY.js'];
 const textHash=text=>createHash('sha256').update(text).digest('hex');
 const sameJson=(a,b)=>JSON.stringify(a)===JSON.stringify(b);
+const cityFrozenAuthoringPins=Object.freeze({'game.js':'c1510ca78f329b4cd35430791e2e1fecf1175def445c16806c531fc1b0b1e79e','For-AI/VOICE-CAST.json':'e8ef5bdab86e4390ef5329ac73fcb91afb897c562b93282798c049c7b3ef223b','For-AI/AUDIO-TEXT-LIBRARY.js':'ff557f6f9efd50910147eefe1b2233c17c1f16b6d7672dbd989d7ba8cc5d3807','tools/build-knick-voice.py':'122d93bac3016f44b24cf04b97b7a2462d216226e33c9d6d6e05c5ae11a89349'});
+export function verifyCityAuthoringRoot(authoringRoot){
+ const sourceRoot=realpathSync(authoringRoot);
+ requireMatch(Object.entries(cityFrozenAuthoringPins).every(([path,digest])=>hash(resolve(sourceRoot,path))===digest),'City authoring root is not the frozen723 source');
+ requireMatch(cityAuthoringHelperSha256===cityFrozenAuthoringPins['tools/build-knick-voice.py'],'City authoring producer pin changed');
+ return sourceRoot;
+}
+export function verifyCityAdmissionTarget(cast,authoringRoot,destinationRoot=root){
+ const frozenRoot=verifyCityAuthoringRoot(authoringRoot),targetRoot=realpathSync(destinationRoot);
+ requireMatch(frozenRoot!==targetRoot&&!frozenRoot.startsWith(targetRoot+sep)&&!targetRoot.startsWith(frozenRoot+sep),'City authoring and destination roots alias');
+ const frozenCast=json(resolve(frozenRoot,'For-AI/VOICE-CAST.json')),authoringRows=cityDialogueSources(frozenCast,frozenRoot),targetRows=cityDialogueSources(cast,targetRoot);
+ requireMatch(authoringRows.length===76&&sameJson(authoringRows,targetRows),'City target source, English, profile, reference, or caller differs from frozen723');
+ return {authoringRoot:frozenRoot,destinationRoot:targetRoot,authoringRows,targetRows};
+}
 export function cityDialogueSources(cast,sourceRoot=root){
  const source=readFileSync(resolve(sourceRoot,'game.js'),'utf8'),window={},expected=cityDialogueTable(cast);
  const selector='function cityNpcDialogue(n){const owned=speechCatalog.cityDialogue?.[n.id],rows=owned?.[state.region];if(owned?.voiceId!==n.voiceId||!Array.isArray(rows)||rows.length!==2||rows.some(row=>typeof row.text!=="string"||!row.text.trim()||typeof row.english!=="string"||!row.english.trim()))return null;return rows}';
- const caller=' }else if(n.id?.startsWith("city-")){\n   const rows=cityNpcDialogue(n);if(!rows)return;\n   openDialogue(n.name,rows.map(row=>row.text),"!",()=>innerMonologue("lost",.55),n.voiceId,rows.map(row=>row.english));\n';
- requireMatch(source.includes(selector)&&source.includes(caller),'Owned city selector/caller/caption contract changed');
+ const callers=[
+  ' }else if(n.id?.startsWith("city-")){\n   const rows=cityNpcDialogue(n);if(!rows)return;\n   openDialogue(n.name,rows.map(row=>row.text),"!",()=>innerMonologue("lost",.55),n.voiceId,rows.map(row=>row.english));\n',
+  ' }else if(n.id?.startsWith("city-")){\n   const rows=cityNpcDialogue(n);if(!rows)return;\n   openDialogue(n.name,rows.map(row=>row.text),"!",()=>innerMonologue("lost",.55),n.voiceId,rows.map(row=>row.english),false,false,n);\n'
+ ];
+ requireMatch(source.includes(selector)&&callers.filter(caller=>source.includes(caller)).length===1,'Owned city selector/caller/caption contract changed');
  vm.runInNewContext(readFileSync(resolve(sourceRoot,'For-AI/AUDIO-TEXT-LIBRARY.js'),'utf8'),{window});
  requireMatch(sameJson(window.GermanySimulatorAudioText.cityDialogue,expected),'Missing/stale owned city public export');
  const start=source.indexOf('const npcs=['),stop=source.indexOf('].map(n=>',start);requireMatch(start>=0&&stop>start,'Missing city actor declaration');
@@ -515,14 +568,26 @@ export function prepareCityManifest(cast,voiceId,reviewRoot,authoringHelperPath,
  const manifest={voiceId,requestedLineCount:request.jobs.length,generatedLineCount:request.jobs.filter(job=>existsSync(resolve(base,voiceId,'raw',job.clipId+'.json'))).length,clips,heldPrivate};
  return cityManifestProof(cast,manifest,reviewRoot,authoringHelperPath,sourceRoot);
 }
-export function admitCityManifest(cast,manifest,reviewRoot,authoringHelperPath,sourceRoot=root){
- const verified=cityManifestProof(cast,manifest,reviewRoot,authoringHelperPath,sourceRoot),directory=resolve(sourceRoot,'assets/voices/city-dialogue');
+export function cityAdmissionRoots(reviewRoot,authoringRoot,destinationRoot=root){
+ const roots=[['private review',realpathSync(reviewRoot)],['frozen authoring',realpathSync(authoringRoot)],['current destination',realpathSync(destinationRoot)]];
+ const key=path=>process.platform==='win32'?path.toLocaleLowerCase('en-US'):path;
+ const nested=(child,parent)=>{child=key(child);parent=key(parent);return child===parent||child.startsWith(parent.endsWith(sep)?parent:parent+sep)};
+ for(let i=0;i<roots.length;i++)for(let j=i+1;j<roots.length;j++)requireMatch(!nested(roots[i][1],roots[j][1])&&!nested(roots[j][1],roots[i][1]),`City ${roots[i][0]} and ${roots[j][0]} roots alias or nest`);
+ return Object.fromEntries(roots.map(([name,path])=>[name,path]));
+}
+export function admitCityManifest(cast,manifest,reviewRoot,authoringHelperPath,authoringRoot,destinationRoot=root){
+ const separated=cityAdmissionRoots(reviewRoot,authoringRoot,destinationRoot),compatibility=verifyCityAdmissionTarget(cast,separated['frozen authoring'],separated['current destination']),sourceRoot=compatibility.authoringRoot;
+ const authoringCast=json(resolve(sourceRoot,'For-AI/VOICE-CAST.json'));
+ requireMatch(realpathSync(authoringHelperPath)===realpathSync(resolve(sourceRoot,'tools/build-knick-voice.py')),'City producer helper must come from frozen723 authoring root');
+ const verified=cityManifestProof(authoringCast,manifest,reviewRoot,authoringHelperPath,sourceRoot),request=citySnapshot(verified.cityProvenance?.request,'request'),targetById=new Map(compatibility.targetRows.map(row=>[row.clipId,row]));
+ requireMatch(request.jobs.every(job=>sameJson(job,targetById.get(job.clipId))),'City admission job differs from current destination source/profile/English');
  requireMatch(verified.clips.length>0,'City admission requires an eligible recording');
- const parent=realpathSync(resolve(sourceRoot,'assets/voices'));
- requireMatch(parent.startsWith(realpathSync(sourceRoot)+sep),'City asset parent escapes runtime');
+ const directory=resolve(destinationRoot,'assets/voices/city-dialogue');
+ const parent=realpathSync(resolve(destinationRoot,'assets/voices'));
+ requireMatch(parent.startsWith(realpathSync(destinationRoot)+sep),'City asset parent escapes runtime');
  if(existsSync(directory))requireMatch(!lstatSync(directory).isSymbolicLink()&&realpathSync(directory).startsWith(parent+sep),'Linked city asset directory');
- const bytes=JSON.stringify(verified,null,2)+'\n',relative=`assets/voices/city-dialogue/${verified.voiceId}-manifest.json`,manifestPath=resolve(sourceRoot,relative),manifestTemporary=manifestPath+'.city-admit.tmp',created=[];
- const catalogPath=resolve(sourceRoot,'For-AI/AUDIO-TEXT-LIBRARY.js'),catalogSource=readFileSync(catalogPath,'utf8'),admissions=cityAdmissions(catalogSource),catalogTemporary=catalogPath+'.city-admit.tmp';
+ const bytes=JSON.stringify(verified,null,2)+'\n',relative=`assets/voices/city-dialogue/${verified.voiceId}-manifest.json`,manifestPath=resolve(destinationRoot,relative),manifestTemporary=manifestPath+'.city-admit.tmp',created=[];
+ const catalogPath=resolve(destinationRoot,'For-AI/AUDIO-TEXT-LIBRARY.js'),catalogSource=readFileSync(catalogPath,'utf8'),admissions=cityAdmissions(catalogSource),catalogTemporary=catalogPath+'.city-admit.tmp';
  requireMatch(!lstatSync(catalogPath).isSymbolicLink()&&lstatSync(catalogPath).nlink===1&&!existsSync(catalogTemporary),'Linked catalog or occupied city admission temporary file');
  const priorManifest=existsSync(manifestPath)?readFileSync(manifestPath,'utf8'):null;
  if(priorManifest!==null){requireMatch(admissions[relative]===textHash(priorManifest),'Existing city manifest has no authentic admission anchor');const prior=JSON.parse(priorManifest);requireMatch([...prior.clips,...prior.heldPrivate].every(row=>[...verified.clips,...verified.heldPrivate].some(next=>next.clipId===row.clipId))&&prior.clips.every(row=>verified.clips.some(next=>next.clipId===row.clipId&&next.sha256===row.sha256)),'City admission cannot discard prior slots or replace an admitted take');}
@@ -530,14 +595,14 @@ export function admitCityManifest(cast,manifest,reviewRoot,authoringHelperPath,s
  const anchor='const cityAdmissionReceipts=Object.freeze('+JSON.stringify(admissions)+');\n';
  const nextCatalog=catalogSource.match(cityAdmissionPattern)?catalogSource.replace(cityAdmissionPattern,()=>anchor):catalogSource.replace('const recordings=Object.freeze({',()=>anchor+'const recordings=Object.freeze({');
  requireMatch(nextCatalog.includes(anchor),'Missing existing recording catalog anchor');
- for(const clip of verified.clips){const path=resolve(sourceRoot,clip.file);if(existsSync(path))requireMatch(!lstatSync(path).isSymbolicLink()&&lstatSync(path).nlink===1&&hash(path)===clip.sha256,'City admission refuses to replace an existing different/linked recording');}
+ for(const clip of verified.clips){const path=resolve(destinationRoot,clip.file);if(existsSync(path))requireMatch(!lstatSync(path).isSymbolicLink()&&lstatSync(path).nlink===1&&hash(path)===clip.sha256,'City admission refuses to replace an existing different/linked recording');}
  requireMatch(!existsSync(manifestTemporary),'Occupied city manifest temporary file');
  if(existsSync(manifestPath))requireMatch(!lstatSync(manifestPath).isSymbolicLink()&&lstatSync(manifestPath).nlink===1,'Linked city manifest');
  mkdirSync(directory,{recursive:true});
  let manifestInstalled=false;
  try{
-  for(const clip of verified.clips){const target=resolve(sourceRoot,clip.file);if(!existsSync(target)){created.push(target);copyFileSync(resolve(reviewRoot,verified.voiceId,'encoded',clip.clipId+'.mp3'),target,constants.COPYFILE_EXCL)}requireMatch(hash(target)===clip.sha256,'City installed audio hash drift');}
-  cityRecordingsBlock(cast,[{...verified,provenanceManifest:relative,provenanceManifestSha256:textHash(bytes)}],sourceRoot,sourceRoot);
+  for(const clip of verified.clips){const target=resolve(destinationRoot,clip.file);if(!existsSync(target)){created.push(target);copyFileSync(resolve(reviewRoot,verified.voiceId,'encoded',clip.clipId+'.mp3'),target,constants.COPYFILE_EXCL)}requireMatch(hash(target)===clip.sha256,'City installed audio hash drift');}
+  cityRecordingsBlock(cast,[{...verified,provenanceManifest:relative,provenanceManifestSha256:textHash(bytes)}],destinationRoot,destinationRoot);
   if(priorManifest!==bytes){created.push(manifestTemporary);writeFileSync(manifestTemporary,bytes,{flag:'wx'});renameSync(manifestTemporary,manifestPath);manifestInstalled=true;}
   requireMatch(readFileSync(manifestPath,'utf8')===bytes,'City installed manifest bytes drift');
   if(nextCatalog!==catalogSource){requireMatch(readFileSync(catalogPath,'utf8')===catalogSource,'Catalog changed during city admission');created.push(catalogTemporary);writeFileSync(catalogTemporary,nextCatalog,{flag:'wx'});renameSync(catalogTemporary,catalogPath)}
@@ -560,11 +625,15 @@ export function main(args=process.argv.slice(2)){
   console.log(JSON.stringify(prepareCityManifest(cast,cityProposal,resolve(value('--city-review-root')),resolve(value('--city-authoring-helper')),json(resolve(value('--city-use-authorization')))),null,2));return;
  }
  if(cityAdmission){
-  requireMatch(!args.includes('--sync')&&!args.includes('--archive-assets')&&!args.includes('--archive-profiles')&&value('--city-review-root')&&value('--city-authoring-helper'),'City admission requires explicit proof paths and a separate catalog sync');
-  console.log(JSON.stringify(admitCityManifest(cast,json(resolve(cityAdmission)),resolve(value('--city-review-root')),resolve(value('--city-authoring-helper')))));return;
+  requireMatch(!args.includes('--sync')&&!args.includes('--archive-assets')&&!args.includes('--archive-profiles')&&value('--city-review-root')&&value('--city-authoring-helper')&&value('--city-authoring-root'),'City admission requires explicit proof, frozen authoring root, and helper paths; destination is this checkout');
+  console.log(JSON.stringify(admitCityManifest(cast,json(resolve(cityAdmission)),resolve(value('--city-review-root')),resolve(value('--city-authoring-helper')),resolve(value('--city-authoring-root')),root)));return;
  }
  const manifest=json(resolve(root,'assets/voices/candidate-dialogue/manifest.json'));
  const catalogPath=resolve(root,'For-AI/AUDIO-TEXT-LIBRARY.js');let source=readFileSync(catalogPath,'utf8').replace(/\r\n/g,'\n');
+ const crowdDir=resolve(root,'assets/voices/candidate-dialogue'),crowdManifests=readdirSync(crowdDir).filter(name=>name.endsWith('-crowd-manifest.json')).sort().map(name=>json(resolve(crowdDir,name)));
+ const crowdBlock=crowdCandidateBlock(cast,crowdManifests,root),crowdPattern=/const crowdCandidateDialogue=Object\.freeze\(\{[^\n]*\}\);\n/;
+ if(args.includes('--sync'))source=source.replace(crowdPattern,()=>crowdBlock);
+ else requireMatch(source.match(crowdPattern)?.[0]===crowdBlock,'Crowd candidate projection stale; run --sync');
  const marker=/\/\/ Generated by tools\/curate-voice-library\.mjs --sync from VOICE-CAST\.json\.\n[\s\S]*?function productionClip\(clip\)\{[^\n]+\}\n/;
  const expected=runtimeBlock(cast);
  if(args.includes('--sync')){source=source.replace(marker,'');source=source.replace('const legacyVoices=',()=>expected+'const legacyVoices=');}

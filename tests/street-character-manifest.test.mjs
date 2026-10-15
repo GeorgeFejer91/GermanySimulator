@@ -7,9 +7,9 @@ import { registerStreetCharacterManifest, resolveStreetCharacter, advanceStreetA
 const manifest = JSON.parse(await readFile(new URL('../assets/characters/street/manifest.json', import.meta.url), 'utf8'));
 const entries = Object.entries(manifest.characters);
 
-test('all thirty installed standing sprites match shipped manifest hashes and literal identity aliases', async () => {
+test('all forty-three installed standing sprites match shipped manifest hashes and literal identity aliases', async () => {
   assert.equal(manifest.schemaVersion, 1);
-  assert.equal(entries.length, 30);
+  assert.equal(entries.length, 43);
   registerStreetCharacterManifest(manifest);
   const aliases = new Set();
   let encodedBytes = 0;
@@ -34,7 +34,7 @@ test('all thirty installed standing sprites match shipped manifest hashes and li
       assert.equal(resolveStreetCharacter({ id: alias }), id);
     }
   }
-  assert.equal(encodedBytes, 525206);
+  assert.equal(encodedBytes, 734544);
   assert.equal(resolveStreetCharacter({ id: 'player-default' }), 'spieler-hans-peter-mustermann');
   assert.equal(resolveStreetCharacter({ voiceId: 'polizei-heinrich-wachtmeister', id: 'police-27' }), 'polizei-heinrich-wachtmeister');
   assert.equal(resolveStreetCharacter({ id: 'crowd-baerbel-brezel-7' }), null);
