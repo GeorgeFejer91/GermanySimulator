@@ -1,3 +1,27 @@
+# Phone visibility instruction — 2026-10-15
+
+Integrator scope starts from clean published `1fbc382`. Change only the existing
+phone-ticket paragraph in `buergeramt-phone.html` and this session record. Keep
+the page visible after the number is called until its incoming-call panel appears;
+the number call alone does not confirm counter admission. Preserve all transport,
+ticket, visibility, call, timeout, media and layout code, existing local Pretext
+0.0.9, controls and assets. Six source dependencies match the independently
+reviewed proposal. Check the existing phone lifecycle suite and actual
+Pretext/font/render fit at desktop, mobile portrait/landscape, 320 CSS px, 200%
+enlargement and text spacing. Physics/Camera review omitted: no world, animation,
+geometry, movement, camera or renderer changes.
+
+Validation: existing phone lifecycle suite passes 18/18. Silent headless Chrome
+checks pass seven contexts: desktop, Android portrait/landscape emulation, 320 CSS
+px, 200% CSS zoom, 200% instruction text and expanded text spacing. The real form
+receives a simulated transport ticket and number call; production phone logic,
+CSS and Pretext remain unchanged. The complete instruction stays visible with
+natural page scrolling, no horizontal overflow or internal clipping. Actual Arial
+fonts are ready; Pretext and DOM line counts agree in all six ordinary-spacing
+cases. Expanded word spacing is judged by rendered bounds. No model downloads,
+speech generation or physical-device/full-call acceptance is claimed. Local
+screenshots and report: ignored `output/phone-copy-fit/`; browser/server closed.
+
 # Frau Schwabingen dialect and selected voice — 2026-10-14
 
 Scope starts from clean published `6d07df6` in the attached integration worktree.
