@@ -70,7 +70,9 @@ test('interleaved callers keep independent two-slot bags without changing arbitr
 
 test('candidate voice lookup remains opt-in and returns no public default for a crowd take',()=>{
  const row=request.jobs[0],projection=`const crowdCandidateDialogue=Object.freeze({[${JSON.stringify(row.voiceId+'\u0000'+row.text)}]:${JSON.stringify('assets/voices/candidate-dialogue/'+row.clipId+'.mp3')}});`;
- const projected=catalogSource.replace('const crowdCandidateDialogue=Object.freeze({});',projection);
+ const pattern=/const crowdCandidateDialogue=Object\.freeze\(\{[^\n]*\}\);/;
+ assert.ok(pattern.test(catalogSource),'crowd preview projection exists');
+ const projected=catalogSource.replace(pattern,()=>projection);
  const preview={window:{},location:{search:'?voicePreview=1'},URLSearchParams};vm.runInNewContext(projected,preview);
  assert.equal(preview.window.GermanySimulatorAudioText.candidateClip(row.voiceId,row.text),`assets/voices/candidate-dialogue/${row.clipId}.mp3`);
  const normal={window:{},location:{search:''},URLSearchParams};vm.runInNewContext(projected,normal);

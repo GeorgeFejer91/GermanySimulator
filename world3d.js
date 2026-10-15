@@ -11,7 +11,7 @@ import {createJobcenterBuilding,createJobcenterEncounter} from './jobcenter.js?v
 import {createLevelDoor} from './level-transitions.js?v=20261014-building-levels';
 import {createBuildingLevels} from './building-levels.js?v=20261014-building-levels';
 import {createNeighborSprite} from './neighbor-sprites.js?v=20261014-neighbor-halo';
-import {loadStreetCharacterManifest,resolveStreetCharacter,createStreetCharacterSprite,advanceStreetAnimation,requestStreetReaction as requestPaintedStreetReaction,hasStreetReaction as hasPaintedStreetReaction,cancelStreetReaction as cancelPaintedStreetReaction} from './street-character-sprites.js?v=20261015-street-standing-43';
+import {loadStreetCharacterManifest,resolveStreetCharacter,createStreetCharacterSprite,advanceStreetAnimation,acceptsStreetSimulation,acceptStreetSimulationSegment,tickStreetSimulation,invalidateStreetSimulation,inspectStreetSimulation,requestStreetReaction as requestPaintedStreetReaction,hasStreetReaction as hasPaintedStreetReaction,cancelStreetReaction as cancelPaintedStreetReaction} from './street-character-sprites.js?v=20261015-street-contact-v20-police-v2';
 const THREE_URL="./assets/vendor/three/0.186.0/build/three.module.min.js";
 const GLTF_LOADER_URL="./assets/vendor/three/0.186.0/examples/jsm/loaders/GLTFLoader.js";
 function buergeramtDoorRadiance(time,reducedMotion=false){
@@ -1291,6 +1291,27 @@ function showRendererFailure(error){
   function pickup(item){const type=item.type,g=new T.Group();if(type==="pfand"){const m=new T.Mesh(new T.CylinderGeometry(.07,.09,.5,9),mat(0x566153)),fallback=new T.Group();m.position.y=.25;fallback.add(m);g.add(fallback);installCityModel(g,fallback,"pfand-bottle",{x:.18,y:.55,z:.18},item)}else if(item.wurstType){const m=mat(item.color),pieces=item.pieces||1;for(let i=0;i<pieces;i++){const q=new T.Mesh(new T.CapsuleGeometry(.065,.32,4,8),m);q.rotation.z=Math.PI/2;q.position.set(pieces===4?(i-1.5)*.18:0,.2+(i-(pieces-1)/2)*.13,0);g.add(q)}const seal=new T.Mesh(new T.TorusGeometry(.15,.035,8,18),mat(0xe4ddce));seal.rotation.x=Math.PI/2;seal.position.y=.6;g.add(seal)}else{const col=type==="currywurst"?0x805143:type==="bratwurst"?0x9a7653:0x8a694b,m=mat(col),q=new T.Mesh(type==="brezel"?new T.TorusGeometry(.18,.055,8,18):new T.CapsuleGeometry(.08,.4,4,8),m);q.rotation.z=type==="brezel"?0:Math.PI/2;q.position.y=.2;g.add(q)}return g}
 
   let streetPaintManifest=null,streetPaintManifestError=null;
+  function installStreetMotionObserver(manifest){
+    if(!bridge.setStreetMotionObserver)return;
+    const enabled=Object.values(manifest).some(person=>person.standingOnly!==true&&person.motionRig?.contactPlayback?.schemaVersion===1);
+    bridge.setStreetMotionObserver(enabled?{
+      accepts:acceptsStreetSimulation,
+      accepted(actor,fromX,fromY,toX,toY){
+        acceptStreetSimulationSegment(actor,{fromRoot:[X(fromX),bridge.stationElevation(fromX,fromY),Z(fromY)],
+          toRoot:[X(toX),bridge.stationElevation(toX,toY),Z(toY)],distance2d:Math.hypot(toX-fromX,toY-fromY),dx:toX-fromX,dy:toY-fromY});
+      },
+      tick(actor,dt,paused,speechPaused=paused){
+        const options={rootWorld:[X(actor.x),bridge.stationElevation(actor.x,actor.y),Z(actor.y)],paused,
+          reducedMotion:amtReducedMotion.matches,waiting:actor.pause>0,working:!!actor.jwdWorking,speaking:false};
+        const speech=bridge.getStreetSpeech?.(actor);
+        if(speech)Object.assign(options,{speechStatus:speech.speechStatus,cueToken:speech.cueToken,mediaTime:speech.mediaTime,
+          mediaDuration:speech.mediaDuration,mouthOpen:speech.mouthOpen,speechPaused:speechPaused||speech.paused===true});
+        tickStreetSimulation(actor,dt,options);
+      },
+      discontinuity:invalidateStreetSimulation,
+      failed(actor,reason){invalidateStreetSimulation(actor,'OBSERVER_ERROR: '+reason)},
+    }:null);
+  }
   const streetPaintOwner={retired:false};
   function registeredStreetPaint(actor){
     if(actor.special||actor.jwdRole&&actor.jwdRole!=='burglar'||['tourist-guenther-liegestuhl','touristin-walburga-handtuch'].includes(actor.voiceId))return null;
@@ -1360,7 +1381,7 @@ function showRendererFailure(error){
       options.mediaTime=speech.mediaTime;options.mediaDuration=speech.mediaDuration;
       options.mouthOpen=speech.mouthOpen;options.paused=paused||speech.paused===true;
     }
-    advanceStreetAnimation(actor,paused||dt<=0?0:Math.hypot(dx,dy),Math.max(0,Math.min(.1,dt)),options);
+    if(!acceptsStreetSimulation(actor)||!inspectStreetSimulation(actor).owned)advanceStreetAnimation(actor,paused||dt<=0?0:Math.hypot(dx,dy),Math.max(0,Math.min(.1,dt)),options);
     view.host.position.set(X(actor.x),bridge.stationElevation(actor.x,actor.y),Z(actor.y));
     view.paint.sync();
     const loaded=view.paint.inspect().loaded;
@@ -1400,7 +1421,7 @@ function showRendererFailure(error){
   const streetManifestJob=queueCityAsset(()=>({x:X(bridge.player.x),z:Z(bridge.player.y)}),0,async()=>{
     try{
       const manifest=await loadStreetCharacterManifest();if(streetPaintOwner.retired)return false;
-      streetPaintManifest=manifest;prepareStreetPaint();
+      streetPaintManifest=manifest;installStreetMotionObserver(manifest);prepareStreetPaint();
       if(!startupModelsReady()||bridge.preparingStart)captureStartupAssets();
       return true;
     }catch(error){streetPaintManifestError=String(error?.message||error);console.warn('Street paint manifest unavailable; keeping existing bodies',error);return false}

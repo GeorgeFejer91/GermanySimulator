@@ -3,6 +3,7 @@ import assert from 'node:assert/strict';
 import {readFileSync} from 'node:fs';
 import {createHash} from 'node:crypto';
 import vm from 'node:vm';
+import {motionObserverSource} from './street-simulation-fixture-source.mjs';
 import {stepJobcenter,sampleJobcenterEnvelope,sampleJobcenterMouth,createJobcenterEncounter,createJobcenterBuilding} from '../jobcenter.js';
 import * as T from '../assets/vendor/three/0.186.0/build/three.module.min.js';
 const game=readFileSync(new URL('../game.js',import.meta.url),'utf8');
@@ -61,7 +62,7 @@ test('city entry/exit preserves missions and rejects an occupied ejection point'
  for(const occupied of [false,true]){
   let config;const player={x:100,y:230,r:16,vx:10,vy:20},state={modal:false,mission:4,forms:2,voiceOn:true,subtitlesOn:false};
   const h={player,state,window:{Germany3D:{enterJobcenter:c=>(config=c,true)}},speechClip:()=>({text:data.text,recording:'voice'}),speechCatalog:{recordings:{}},stopSpeech(){},stopPoliceChaseLoop(){},clearInput(){},setAmtMusicMuted(){},clearSubtitle(){},updateHud(){},responderBlocked:()=>occupied};
-  vm.createContext(h);vm.runInContext(entry,h);h.enterJobcenter({doorX:100,doorY:200});
+  vm.createContext(h);vm.runInContext(motionObserverSource(game)+entry,h);h.enterJobcenter({doorX:100,doorY:200});
   assert.equal(state.modal,true);assert.equal(player.vx,0);config.onClose('ended');
   assert.equal(state.modal,false);assert.equal(state.mission,4);assert.equal(state.forms,2);assert.equal(player.y,occupied?230:265);
  }

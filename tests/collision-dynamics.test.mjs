@@ -1,5 +1,6 @@
 import assert from "node:assert/strict";
 import {readFileSync} from "node:fs";
+import {motionObserverSource} from './street-simulation-fixture-source.mjs';
 
 const game=readFileSync("game.js","utf8");
 
@@ -10,7 +11,7 @@ assert.match(game,/function responderBlocked\(x,y,r,self,/);
 assert.match(game,/trainAt\(x,y,r\)/,"ground actors must not pass through trains");
 const moveSource=game.match(/function moveGroundResponder\(entity,dx,dy,r\)\{[\s\S]*?\n\}/)?.[0];
 assert.ok(moveSource,"shared ground responder movement must exist");
-const moveGroundResponder=new Function("responderBlocked",`return (${moveSource})`);
+const moveGroundResponder=new Function("responderBlocked",`${motionObserverSource(game)}\nreturn (${moveSource})`);
 const sidestep={x:0,y:0,avoid:1};
 assert.equal(moveGroundResponder((x)=>x>0)(sidestep,2,0,12),true,"an actor blocked ahead must keep moving around the barrier");
 assert.deepEqual(sidestep,{x:0,y:1.44,avoid:1},"a zero-length axis must not mask the collision-avoidance sidestep");
@@ -46,7 +47,7 @@ assert.match(game,/steeringTarget=clamp\(turn\*1\.6,-\.62,\.62\)/,"pursuit cars 
 assert.match(game,/pushPlayer\(contactDx\/contactDistance\*105,contactDy\/contactDistance\*105\)/,"car impacts must use stepped player displacement");
 const pushSource=game.match(/function pushPlayer\(dx,dy\)\{[^\n]+\}/)?.[0];
 assert.ok(pushSource,"stepped player knockback must exist");
-const pushed={x:16,y:100,r:8},pushPlayer=new Function("player","WORLD","clamp","blocked","dynamicBlocker","blockingPedestrian",`return (${pushSource})`)(pushed,{w:1000,h:1000},(v,a,b)=>Math.max(a,Math.min(b,v)),x=>x>=40&&x<=50,()=>false,()=>false);
+const pushed={x:16,y:100,r:8},pushPlayer=new Function("player","WORLD","clamp","blocked","dynamicBlocker","blockingPedestrian",`${motionObserverSource(game)}\nreturn (${pushSource})`)(pushed,{w:1000,h:1000},(v,a,b)=>Math.max(a,Math.min(b,v)),x=>x>=40&&x<=50,()=>false,()=>false);
 pushPlayer(105,0);
 assert.ok(pushed.x>16&&pushed.x<40,"knockback must stop at a narrow wall between its start and destination");
 assert.match(game,/rail\.distance<TRAIN_CAR_HALF_WIDTH\+obstacle\.radius\+6/,"train obstruction checks must include full obstacle width");

@@ -1,4 +1,5 @@
 // Pure source-bound geometry. Playback, asset leases and world movement belong to the host.
+export {initializeStreetContactPlayback,advanceStreetContactPlayback} from './contact-playback.mjs?v=20261015-street-contact-v20-police-v2';
 const DIRECTIONS=['down','right','up','left'];
 export const STREET_RIG_LIMITS=Object.freeze({vertices:256,triangles:128});
 const MAX_VERTICES=STREET_RIG_LIMITS.vertices,MAX_TRIANGLES=STREET_RIG_LIMITS.triangles,MAX_PARTS=16,MAX_POLYGONS=128,POLYGON_VERTICES=12;
@@ -9,6 +10,7 @@ function vector(value,length,label){requireValue(Array.isArray(value)&&value.len
 
 export function validateStreetCharacterRigDefinition(def){
   requireValue(def&&def.schemaVersion===1&&def.format==='gs-painted-parts','unsupported definition');
+  if(def.contactPlayback!==undefined)requireValue(def.contactPlayback&&def.contactPlayback.schemaVersion===1&&Object.keys(def.contactPlayback).length===1,'unsupported contact playback opt-in');
   requireValue(typeof def.id==='string'&&def.id.length>0,'identity missing');
   const skeleton=def.skeleton;
   requireValue(skeleton&&Array.isArray(skeleton.legs)&&skeleton.legs.length===2,'two physical legs required');

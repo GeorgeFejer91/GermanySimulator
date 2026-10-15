@@ -20,6 +20,7 @@ function validateImage(image){
 function validateMotionRig(rig){
   if(!rig||!/^\.\/assets\/characters\/street\/[a-z0-9_/-]+\.json$/i.test(rig.file)||rig.file.includes('..'))throw new TypeError('Invalid street rig path');
   if(typeof rig.sha256!=='string'||!/^[a-f0-9]{64}$/i.test(rig.sha256))throw new TypeError('Invalid street rig hash');
+  if(rig.contactPlayback!==undefined&&(!rig.contactPlayback||rig.contactPlayback.schemaVersion!==1||Object.keys(rig.contactPlayback).length!==1))throw new TypeError('Invalid accepted-step contact opt-in');
   for(const variant of ['desktop','mobile']){
     const atlas=rig.variants?.[variant];validateImage(atlas);
     if(atlas.width>2048||atlas.height>2048||atlas.width*atlas.height*4>16777216)throw new RangeError('Street rig atlas exceeds 2048 / 16 MiB');
@@ -99,6 +100,163 @@ export function resolveStreetCharacter(actor){
 function playback(actor){
   if(!playbackByActor.has(actor))playbackByActor.set(actor,{distance:0,age:0,direction:'down',current:null,pending:null,pose:null,cueToken:null,retiredCues:[]});
   return playbackByActor.get(actor);
+}
+
+function acceptedContactRoot(state,options){
+  const value=options.rootWorld;
+  const valid=Array.isArray(value)&&value.length===3&&[0,1,2].every(i=>Object.hasOwn(value,i)&&Number.isFinite(value[i]));
+  state.contactRootWorld=valid?value.slice():null;
+}
+
+function projectContactPose(state,pose){
+  if(!state.contactBinding||!pose?.rigPose)return pose;
+  const result=state.contactResult;
+  if(!result?.ok){
+    const {contacts,...rest}=pose.rigPose;
+    pose.rigPose={...rest,contactFailure:result?.code||'CONTACT_RESULT_UNAVAILABLE'};
+    return pose;
+  }
+  const {contactFailure,...rest}=pose.rigPose;
+  pose.rigPose={...rest,contacts:result.contacts,direction:result.physicalViewDirection,
+    forwardWorld:result.contacts.forwardWorld,contactSourcePhase:result.contactSourcePhase};
+  return pose;
+}
+
+function advanceContacts(state,pose,acceptedDistance2d,dt,paused){
+  const binding=state.contactBinding;
+  if(!binding)return pose;
+  if(state.simulationHeld){state.contactResult={ok:false,contacts:null,code:state.simulationHeld};return projectContactPose(state,pose)}
+  if(state.simulationUpdating&&state.acceptedSegmentCount>0)return projectContactPose(state,pose);
+  if(binding.retirementRequired){
+    state.contactResult={ok:false,contacts:null,code:'CONTACT_DEFINITION_RETIREMENT_REQUIRED'};
+    return projectContactPose(state,pose);
+  }
+  state.contactResult=binding.module.advanceStreetContactPlayback(state,binding.definition,{
+    rootWorld:state.contactRootWorld,totalDistance2d:state.distance,acceptedDistance2d,dt,paused});
+  return projectContactPose(state,pose);
+}
+
+function stageContacts(resources,person,id,actor){
+  const state=playback(actor);
+  if(resources.definition.contactPlayback!==undefined&&(!state.simulationOwned||state.simulationHeld))throw new Error('Accepted-step simulation admission unavailable or source handover required');
+  if(resources.definition.contactPlayback===undefined){
+    if(state.contactBinding)throw new Error('Street contact definition retirement required before downgrade');
+    return null;
+  }
+  const key=`${id}:${person.motionRig.file}:${person.motionRig.sha256}`;
+  let binding=state.contactBinding,result,temporary=null,committed=false,released=false;
+  if(binding){
+    if(binding.retirementRequired)throw new Error('Street contact definition retirement required');
+    if(binding.key!==key||binding.definition.id!==resources.definition.id||binding.definition.sourceSha256!==resources.definition.sourceSha256)throw new Error('Street contact definition retirement required');
+    result=state.contactResult;
+  }else{
+    if(!state.contactRootWorld)throw new Error('Street contact motion requires accepted options.rootWorld before admission');
+    temporary={distance:state.distance};
+    result=resources.module.initializeStreetContactPlayback(temporary,resources.definition,{
+      rootWorld:state.contactRootWorld,totalDistance2d:state.distance,initialPhysicalForwardWorld:[0,0,1]});
+    binding={key,module:resources.module,definition:resources.definition,visualReferences:0};
+  }
+  if(!result?.ok)throw new Error(`Street contact admission failed: ${result?.code||'missing result'}`);
+  return {
+    isInitialAdmission:temporary!==null,
+    read(){
+      if(released)throw new Error('Street contact visual lease released');
+      const current=committed?state.contactResult:result;
+      if(!current?.ok)throw new Error(`Street contact motion failed: ${current?.code||'missing result'}`);
+      return current;
+    },
+    commit(){
+      if(released||committed)return;
+      if(temporary){
+        if(state.contactBinding)throw new Error('Street contact staged admission superseded');
+        state.streetContactPlayback=temporary.streetContactPlayback;
+        state.contactBinding=binding;state.contactResult=result;
+      }else if(state.contactBinding!==binding)throw new Error('Street contact binding changed');
+      binding.visualReferences++;committed=true;projectContactPose(state,state.pose);
+    },
+    release(){if(released)return;released=true;if(committed)binding.visualReferences--}
+  };
+}
+
+function contactInspection(actor){
+  const state=playbackByActor.get(actor),binding=state?.contactBinding,result=state?.contactResult;
+  return binding?{visualReferences:binding.visualReferences,key:binding.key,ok:result?.ok===true,
+    code:result?.code||null,admissionDistance2d:result?.admissionDistance2d,
+    nominalDistance2d:state.distance,contactSourcePhase:result?.contactSourcePhase,
+    contactTotalPhase:result?.contactTotalPhase,physicalViewDirection:result?.physicalViewDirection}:null;
+}
+
+export function acceptsStreetSimulation(actor){
+  const person=characters[resolveStreetCharacter(actor)];
+  return person?.standingOnly!==true&&person?.motionRig?.contactPlayback?.schemaVersion===1;
+}
+
+export function inspectStreetSimulation(actor){
+  const state=playbackByActor.get(actor);
+  return {owned:state?.simulationOwned===true,generation:state?.simulationGeneration||0,
+    held:state?.simulationHeld||null,distance:state?.distance||0,
+    pendingAcceptedDistance:state?.acceptedStepDistance||0,acceptedSegments:state?.acceptedSegmentCount||0,
+    contact:contactInspection(actor)};
+}
+
+export function invalidateStreetSimulation(actor,reason='EXPLICIT_DISCONTINUITY'){
+  if(!acceptsStreetSimulation(actor))return false;
+  const state=playback(actor);state.simulationOwned=true;
+  if(state.simulationHeld)return false;
+  state.simulationGeneration=(state.simulationGeneration||0)+1;
+  state.simulationHeld=String(reason).slice(0,160);state.acceptedStepDistance=0;state.acceptedSegmentCount=0;
+  if(state.contactBinding)state.contactBinding.retirementRequired=true;
+  state.contactBinding=null;delete state.streetContactPlayback;
+  state.contactResult={ok:false,contacts:null,code:'SOURCE_HANDOVER_REQUIRED',reason:state.simulationHeld};
+  if(state.pose?.rigPose){const {contacts,...rest}=state.pose.rigPose;state.pose.rigPose={...rest,contactFailure:'SOURCE_HANDOVER_REQUIRED'}}
+  return true;
+}
+
+export function readmitStreetSimulationGeneration(actor,{rootWorld,standingSha256}){
+  if(!acceptsStreetSimulation(actor)||!validRoot(rootWorld))return false;
+  const person=characters[resolveStreetCharacter(actor)],state=playback(actor);
+  if(!state.simulationHeld||standingSha256!==person.standing?.sha256)return false;
+  state.contactRootWorld=rootWorld.slice();state.simulationHeld=null;
+  state.contactResult=null;state.rigSettle=1;state.direction='down';state.rigForwardWorld=[0,0,1];
+  return true;
+}
+
+function validRoot(root){return Array.isArray(root)&&root.length===3&&[0,1,2].every(i=>Object.hasOwn(root,i)&&Number.isFinite(root[i]))}
+function sameRoot(a,b){return validRoot(a)&&validRoot(b)&&a.every((v,i)=>Math.abs(v-b[i])<=1e-8)}
+function rejectStreetSegment(actor,reason){invalidateStreetSimulation(actor,reason);return false}
+
+export function acceptStreetSimulationSegment(actor,{fromRoot,toRoot,distance2d,dx,dy}){
+  if(!acceptsStreetSimulation(actor))return false;
+  const state=playback(actor);state.simulationOwned=true;
+  if(state.simulationHeld)return false;
+  const id=resolveStreetCharacter(actor),person=characters[id];
+  if(state.contactBinding&&state.contactBinding.key!==`${id}:${person.motionRig.file}:${person.motionRig.sha256}`)return rejectStreetSegment(actor,'CONTACT_DEFINITION_RETIREMENT_REQUIRED');
+  if(!validRoot(fromRoot)||!validRoot(toRoot)||!Number.isFinite(distance2d)||distance2d<=0||!Number.isFinite(dx)||!Number.isFinite(dy))return rejectStreetSegment(actor,'INVALID_ACCEPTED_SEGMENT');
+  if(state.contactRootWorld&&!sameRoot(state.contactRootWorld,fromRoot))return rejectStreetSegment(actor,'UNOBSERVED_COORDINATE_DISCONTINUITY');
+  const measured=Math.hypot(toRoot[0]-fromRoot[0],toRoot[2]-fromRoot[2]);
+  if(Math.abs(Math.hypot(dx,dy)-distance2d)>1e-8||measured<=0||Math.abs(toRoot[1]-fromRoot[1])>1e-8)return rejectStreetSegment(actor,'ACCEPTED_ROOT_OR_ELEVATION_MISMATCH');
+  state.distance+=distance2d;state.acceptedStepDistance=(state.acceptedStepDistance||0)+distance2d;
+  state.acceptedSegmentCount=(state.acceptedSegmentCount||0)+1;
+  state.direction=Math.abs(dx)>Math.abs(dy)?dx>0?'right':'left':dy>0?'down':'up';
+  state.rigForwardWorld=[dx/distance2d,0,dy/distance2d];state.contactRootWorld=toRoot.slice();
+  if(state.contactBinding){
+    state.contactResult=state.contactBinding.module.advanceStreetContactPlayback(state,state.contactBinding.definition,
+      {rootWorld:toRoot,totalDistance2d:state.distance,acceptedDistance2d:distance2d,dt:0,paused:false});
+    if(!state.contactResult.ok)invalidateStreetSimulation(actor,state.contactResult.code);
+    else projectContactPose(state,state.pose);
+  }
+  return !state.simulationHeld;
+}
+
+export function tickStreetSimulation(actor,dt,options){
+  if(!acceptsStreetSimulation(actor))return false;
+  const state=playback(actor);state.simulationOwned=true;
+  if(!state.simulationHeld&&(!validRoot(options.rootWorld)||state.contactRootWorld&&!sameRoot(state.contactRootWorld,options.rootWorld)))invalidateStreetSimulation(actor,'UNOBSERVED_COORDINATE_DISCONTINUITY');
+  if(!state.simulationHeld)state.contactRootWorld=options.rootWorld.slice();
+  state.simulationUpdating=true;
+  try{advanceStreetAnimation(actor,state.acceptedStepDistance||0,dt,{...options,simulationOwned:true})}
+  finally{state.simulationUpdating=false;state.acceptedStepDistance=0;state.acceptedSegmentCount=0}
+  return !state.simulationHeld;
 }
 
 export function hasStreetReaction(actor){
@@ -226,10 +384,14 @@ export function advanceStreetAnimation(actor,actualDistance,dt,options={}){
   const person=characters[resolveStreetCharacter(actor)];
   if(!person)return {holdPosition:false,visible:false,clip:'idle',frame:0,slot:0};
   const state=playback(actor),paused=options.paused===true;
+  if(acceptsStreetSimulation(actor)&&!options.simulationOwned)return state.pose||{holdPosition:false,visible:true,clip:'standing',frame:0,slot:0,direction:'down',moving:false};
+  if(person.motionRig)acceptedContactRoot(state,options);
   const seconds=Number.isFinite(dt)?Math.max(0,dt):0;
   const dx=options.dx??(actor.x-state.x),dy=options.dy??(actor.y-state.y);
   state.x=actor.x;state.y=actor.y;
-  const speech=speechState(state,options,paused);
+  const speechPaused=options.speechPaused===undefined?paused:options.speechPaused===true;
+  const speech=speechState(state,options,speechPaused||!!state.simulationHeld);
+  const advancingSpeech=speech.speechStatus==='playing'&&speech.speaking&&!state.simulationHeld;
   if(person.standingOnly===true){
     const moving=!paused&&Number.isFinite(actualDistance)&&actualDistance>.0001;
     if(moving)state.distance+=actualDistance;
@@ -238,14 +400,14 @@ export function advanceStreetAnimation(actor,actualDistance,dt,options={}){
       mouthOpen:0,holdPosition:false,visible:true};
     return state.pose;
   }
-  if(paused&&state.pose){
+  if(paused&&state.pose&&!advancingSpeech){
     const pose={...state.pose,...speech};
     if(!speech.speaking&&state.pose.speaking&&pose.clip==='talk'&&!person.motionRig&&person.speech?.clips?.talk){pose.frame=0;pose.slot=person.speech.clips.talk.offset}
-    state.pose=pose;return pose;
+    state.pose=advanceContacts(state,pose,0,seconds,true);return state.pose;
   }
   const moving=!paused&&Number.isFinite(actualDistance)&&actualDistance>.0001;
   if(moving){
-    state.distance+=actualDistance;
+    if(!options.simulationOwned)state.distance+=actualDistance;
     if(Math.abs(dx)+Math.abs(dy)>.0001)state.direction=Math.abs(dx)>Math.abs(dy)?dx>0?'right':'left':dy>0?'down':'up';
     if(person.motionRig){
       const length=Math.hypot(dx,dy);
@@ -256,10 +418,10 @@ export function advanceStreetAnimation(actor,actualDistance,dt,options={}){
   if(moving){
     const clip=person.clips[state.direction];
     selected={clip:state.direction,frame:Math.floor(state.distance/(person.strideDistance||17)*clip.count)%clip.count};
-  }else if(!paused)selected=reactionFrame(state,person,seconds,options.reducedMotion);
+  }else if(!paused||advancingSpeech)selected=reactionFrame(state,person,seconds,options.reducedMotion);
   if(!selected){
     const name=speech.speaking&&person.clips.talk?'talk':options.waiting&&person.clips.wait?'wait':options.working&&person.clips.work?'work':'idle';
-    if(state.pose?.clip!==name)state.age=0;else if(!paused)state.age+=seconds;
+    if(state.pose?.clip!==name)state.age=0;else if(!paused||advancingSpeech)state.age+=seconds;
     const clip=person.clips[name];
     selected={clip:name,frame:options.reducedMotion?0:Math.floor(state.age/(clip.seconds||2)*clip.count)%clip.count};
     if(name==='talk')selected.frame=0;
@@ -269,7 +431,8 @@ export function advanceStreetAnimation(actor,actualDistance,dt,options={}){
   if(speech.speaking&&registered){clip=registered;frame=Math.round(speech.mouthOpen*(clip.count-1))}
   const pose={...selected,frame,slot:clip.offset+frame,direction:state.direction,moving,...speech,
     mouthOpen:registered&&speech.speaking?speech.mouthOpen:0,holdPosition:!!(state.current||state.pending),visible:true};
-  if(person.motionRig){
+  if(paused&&state.pose?.rigPose){pose.rigPose=state.pose.rigPose;pose.settling=state.pose.settling}
+  else if(person.motionRig){
     const previous=state.rigSettle??1;
     const settle=options.reducedMotion?(moving?0:1):Math.max(0,Math.min(1,previous+(moving?-seconds:seconds)/.12));
     state.rigSettle=settle;
@@ -277,7 +440,7 @@ export function advanceStreetAnimation(actor,actualDistance,dt,options={}){
     pose.rigPose={direction:state.direction,forwardWorld:state.rigForwardWorld,phase:(state.distance/person.strideDistance)%1,mode:settle===1?'hold':moving&&settle===0?'walk':'settle',settle};
     pose.settling=settle>0&&settle<1;
   }
-  state.pose=pose;return pose;
+  state.pose=advanceContacts(state,pose,moving?actualDistance:0,seconds,paused);return state.pose;
 }
 
 async function boundedRigJson(response){
@@ -303,12 +466,14 @@ function acquireRigDefinition(id,person){
     entry.promise=new Promise((resolve,reject)=>{
       entry.reject=reject;
       (async()=>{
-        rigModulePromise??=import('./street-character-rig.js');
+        rigModulePromise??=import('./street-character-rig.js?v=20261015-street-contact-v20-police-v2');
         const [module,definition]=await Promise.all([rigModulePromise,fetch(`${meta.file}?v=${meta.sha256}`,{signal:entry.controller.signal}).then(boundedRigJson)]);
         if(entry.retired)return;
         const limits=module.STREET_RIG_LIMITS;
         if(!limits||!Number.isInteger(limits.vertices)||!Number.isInteger(limits.triangles)||limits.vertices<1||limits.triangles<1||limits.vertices>RIG_BUFFER_LIMITS.vertices||limits.triangles>RIG_BUFFER_LIMITS.triangles)throw new RangeError('Street rig module exceeds fixed renderer capacity');
         module.validateStreetCharacterRigDefinition(definition);
+        if((definition.contactPlayback!==undefined)!==(meta.contactPlayback!==undefined))throw new TypeError('Street accepted-step metadata/definition opt-in mismatch');
+        if(definition.contactPlayback!==undefined&&(typeof module.initializeStreetContactPlayback!=='function'||typeof module.advanceStreetContactPlayback!=='function'||meta.contactPlayback?.schemaVersion!==1))throw new TypeError('Street contact definition lacks matching accepted-step opt-in');
         if(definition.mouthRegistration!==undefined&&typeof module.createStreetCharacterRigSampler!=='function')throw new TypeError('Street rig mouth factory unavailable');
         if(definition.id!==person.id&&definition.id!==id)throw new TypeError('Street rig identity mismatch');
         if(definition.gait.strideDistance!==person.strideDistance)throw new RangeError('Street rig stride mismatch');
@@ -329,9 +494,17 @@ function rigSampler(resources,person){
   return {...resources,person,sample,packet:null,ordered:null,upperStatus:'closed neutral',pose:{direction:'down',phase:0,mode:'hold',settle:1,upper:null,mouth:null},mouth:{opening:0,shape:'open',sourceId:null,profileSha256:null},upper:{clip:'',frame:0},sampleFrame:{rootWorld:null,forwardWorld:null,camera:null}};
 }
 
-function sampleRig(rig,actor,frame){
-  const current=playbackByActor.get(actor)?.pose,source=current?.rigPose;
+function sampleRig(rig,actor,frame,firstNeutral=false){
+  const current=firstNeutral?null:playbackByActor.get(actor)?.pose,source=current?.rigPose;
   const p=rig.pose;p.direction=source?.direction||'down';p.phase=source?.phase||0;p.mode=source?.mode||'hold';p.settle=source?.settle??1;p.upper=null;
+  if(rig.definition.contactPlayback!==undefined){
+    if(!rig.contactLease)throw new Error('Street contact motion has no admitted simulation binding');
+    const result=rig.contactLease.read();p.contacts=result.contacts;p.direction=result.physicalViewDirection;
+    if(firstNeutral){
+      if(!rig.contactLease.isInitialAdmission||result.physicalViewDirection!=='down'||result.contactSourcePhase!==result.sourceNeutralPhaseOffset)throw new Error('First neutral sample requires actual initial own front contacts');
+      p.direction='down';p.phase=result.sourceNeutralPhaseOffset;p.mode='hold';p.settle=1;
+    }
+  }else delete p.contacts;
   const clip=rig.definition.views[p.direction].upperClips?.[current?.clip];
   if(current&&clip&&!current.moving&&current.clip!=='talk'){
     const count=rig.person.clips[current.clip].count;
@@ -343,7 +516,7 @@ function sampleRig(rig,actor,frame){
   if(profile&&neutralPaint&&!p.upper&&current?.speechStatus==='playing'&&current.speaking===true&&Number.isFinite(current.mouthCue)&&current.mouthCue>0){
     Object.assign(rig.mouth,{opening:current.mouthCue,shape:'open',sourceId:profile.sourceId,profileSha256:profile.profileSha256});p.mouth=rig.mouth;
   }
-  rig.sampleFrame.rootWorld=frame.rootWorld;rig.sampleFrame.camera=frame.camera;rig.sampleFrame.forwardWorld=source?.forwardWorld||frame.forwardWorld;
+  rig.sampleFrame.rootWorld=frame.rootWorld;rig.sampleFrame.camera=frame.camera;rig.sampleFrame.forwardWorld=p.contacts?.forwardWorld||source?.forwardWorld||frame.forwardWorld;
   rig.packet=rig.sample?rig.sample(p,rig.sampleFrame,rig.packet):rig.module.sampleStreetCharacterRig(rig.definition,p,rig.sampleFrame,rig.packet);
   rig.ordered=rig.module.orderStreetCharacterRigPacket(rig.packet,frame.camera.position,rig.ordered);
   if(rig.ordered.vertexCount>RIG_BUFFER_LIMITS.vertices||rig.ordered.triangleCount>RIG_BUFFER_LIMITS.triangles)throw new RangeError('Street rig packet exceeds fixed renderer capacity');
@@ -375,10 +548,10 @@ function threeRigFrame(host,camera,frame){
   }
 }
 
-function applyThreeRig(sprite,rig,actor,host,camera){
+function applyThreeRig(sprite,rig,actor,host,camera,firstNeutral=false){
   threeRigFrame(host,camera,rig.frame);
   const pose=playbackByActor.get(actor)?.pose?.rigPose;rig.frame.forwardWorld=pose?.forwardWorld||rigForwards[pose?.direction||'down'];
-  const packet=sampleRig(rig,actor,rig.frame),geometry=sprite.geometry,p=geometry.attributes.position.array,uv=geometry.attributes.uv.array;
+  const packet=sampleRig(rig,actor,rig.frame,firstNeutral),geometry=sprite.geometry,p=geometry.attributes.position.array,uv=geometry.attributes.uv.array;
   validateThreeRigBuffers(geometry,packet.vertexCount,packet.triangleCount);
   const inverse=rig.hostInverse.copy(host.matrixWorld).invert().elements;
   for(let i=0;i<packet.vertexCount;i++){
@@ -469,7 +642,7 @@ export function createStreetCharacterSprite(T,actor,host,queueAsset,camera){
       try{applyThreeRig(sprite,rig,actor,host,camera)}
       catch(cause){
         failed=motionFailed=true;error=motionError=String(cause?.message||cause);
-        motionLease?.release();motionLease=null;rigLease?.release();rigLease=null;rig=null;stage='standing';sprite.material.map=sprite.userData.standingTexture;
+        motionLease?.release();motionLease=null;rig?.contactLease?.release();rigLease?.release();rigLease=null;rig=null;stage='standing';sprite.material.map=sprite.userData.standingTexture;
         standingRigGeometry(sprite.geometry,person);applyPose(sprite,person,pose,host,camera,true);
         console.warn('Street character rig unavailable',id,cause);
       }
@@ -494,7 +667,8 @@ export function createStreetCharacterSprite(T,actor,host,queueAsset,camera){
         if(owner.retired)return false;
         if(resources){
           const candidate=rigSampler(resources,person);candidate.frame={rootWorld:[0,0,0],forwardWorld:rigForwards.down,camera:{position:[0,0,0],right:[1,0,0],up:[0,1,0],forward:[0,0,-1]}};candidate.hostInverse=new T.Matrix4();
-          applyThreeRig(sprite,candidate,actor,host,camera);rig=candidate;sprite.material.map=texture;stage='rig';
+          candidate.contactLease=stageContacts(resources,person,id,actor);
+          applyThreeRig(sprite,candidate,actor,host,camera,candidate.contactLease?.isInitialAdmission===true);candidate.contactLease?.commit();rig=candidate;sprite.material.map=texture;stage='rig';
           sync();return stage==='rig';
         }
         const previous={map:sprite.material.map,stage,position:sprite.position.clone(),quaternion:sprite.quaternion.clone(),visible:sprite.visible,uv:sprite.geometry.attributes.uv.array.slice()};
@@ -572,7 +746,7 @@ export function createStreetCharacterSprite(T,actor,host,queueAsset,camera){
       if(owner.retired)return;owner.retired=true;
       lease?.release();lease=null;
       motionLease?.release();motionLease=null;
-      rigLease?.release();rigLease=null;rig=null;
+      rig?.contactLease?.release();rigLease?.release();rigLease=null;rig=null;
       removePaint();
     }
   };
@@ -655,7 +829,11 @@ export function createStreetCharacterCanvasSprite(actor,queueAsset){
         motionLease=acquireCanvasImage(ImageType,id,variant,person.motionRig?person.motionRig.variants[variant]:person.variants[variant]);
         const decoded=await motionLease.promise;
         if(owner.retired)return false;
-        if(resources){rig=rigSampler(resources,person);rigImage=decoded;stage='rig';return true}
+        if(resources){
+          const candidate=rigSampler(resources,person);candidate.contactLease=stageContacts(resources,person,id,actor);
+          if(candidate.contactLease){const result=candidate.contactLease.read();sampleRig(candidate,actor,{rootWorld:result.contacts.rootWorld,forwardWorld:[0,0,1],camera:resources.definition.reference.camera},candidate.contactLease.isInitialAdmission)}
+          candidate.contactLease?.commit();rig=candidate;rigImage=decoded;stage='rig';return true
+        }
         image=decoded;stage='motion';
         const standingLease=lease;lease=motionLease;motionLease=null;standingLease.release();
         return true;
@@ -700,7 +878,7 @@ export function createStreetCharacterCanvasSprite(actor,queueAsset){
         return projected.visible&&drawRigTriangles(ctx,rigImage,projected);
       }catch(cause){
         failed=motionFailed=true;error=motionError=String(cause?.message||cause);stage='standing';
-        motionLease?.release();motionLease=null;rigLease?.release();rigLease=null;rig=null;rigImage=null;
+        motionLease?.release();motionLease=null;rig?.contactLease?.release();rigLease?.release();rigLease=null;rig=null;rigImage=null;
         console.warn('Street Canvas rig unavailable',id,cause);return false;
       }
     },
@@ -722,7 +900,7 @@ export function createStreetCharacterCanvasSprite(actor,queueAsset){
     dispose(){
       if(owner.retired)return;owner.retired=true;
       lease?.release();lease=null;motionLease?.release();motionLease=null;image=null;stage=null;
-      rigLease?.release();rigLease=null;rig=null;rigImage=null;
+      rig?.contactLease?.release();rigLease?.release();rigLease=null;rig=null;rigImage=null;
     }
   };
 }

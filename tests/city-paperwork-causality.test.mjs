@@ -6,6 +6,7 @@ import assert from 'node:assert/strict';
 import {readFileSync} from 'node:fs';
 import {resolve} from 'node:path';
 import vm from 'node:vm';
+import {motionObserverSource} from './street-simulation-fixture-source.mjs';
 
 const source=readFileSync(process.env.CITY_PAPERWORK_SOURCE?resolve(process.env.CITY_PAPERWORK_SOURCE):new URL('../game.js',import.meta.url),'utf8');
 const between=(start,end)=>{
@@ -24,7 +25,7 @@ function fixture(){
   const scope=vm.createContext({state,directBuergeramt:false,document:{getElementById:node,createElement:create,body:{classList:{contains:()=>false}}},
     jwd:{allocated:false},leaveIndoorBuilding(){},uiTone(){},setTimeout(){},toast(){},updateHud(){},
     endGame(win){if(win)wins++},anmeldungNeighborhoodMonologue(){},showAmtDirectResult(){}});
-  vm.runInContext(between('const missions=','const rules=')+between('const forms=','function resize(')+
+  vm.runInContext(motionObserverSource(source)+between('const missions=','const rules=')+between('const forms=','function resize(')+
     between('const formEnglish=','function localize(')+between('function showForm(','let anmeldungAwarded='),scope);
   const handler=source.split('\n').find(line=>line.startsWith('document.getElementById("bureaucracy-form").onsubmit='));
   assert.ok(handler,'production submit handler exists');vm.runInContext(handler,scope);

@@ -16,7 +16,7 @@ function fn(text,name){
   if(c==='{')depth++;if(c==='}'&&!--depth)return text.slice(start,i+1);
  }throw Error('Function boundary '+name);
 }
-const functions=['speechActorCurrent','getStreetSpeech','stimulusEligible','chooseStimulusIndex','queueStimulus','finishStimulus','playCaptionStimulus','playSyntheticStimulus','playRecordedStimulus','pumpStimuli','ensureAudio','speak','speakRecorded','stopRecordedSpeech','hideWorldBark','stopSpeech','showWorldBark','openDialogue','setDialogueVoiceBusy','speakDialogueLine','renderDialogue','nextDialogue'].map(n=>fn(source,n)).join('\n');
+const functions=['recordedMouthOpening','speechActorCurrent','getStreetSpeech','stimulusEligible','chooseStimulusIndex','queueStimulus','finishStimulus','playCaptionStimulus','playSyntheticStimulus','playRecordedStimulus','pumpStimuli','ensureAudio','speak','speakRecorded','stopRecordedSpeech','hideWorldBark','stopSpeech','showWorldBark','openDialogue','setDialogueVoiceBusy','speakDialogueLine','renderDialogue','nextDialogue'].map(n=>fn(source,n)).join('\n');
 function fixture(){
  const scope={window:{},URLSearchParams,location:{search:''}};vm.createContext(scope);vm.runInContext(catalogSource,scope);const catalog=scope.window.GermanySimulatorAudioText;
  const deferred=[],sources=[],timers=new Set(),elements=new Map();

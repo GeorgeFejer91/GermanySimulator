@@ -141,7 +141,10 @@ test('failed fixed-voice integration leaves the complete playable catalogue unch
   const clip=JSON.parse(readFileSync('assets/voices/knick/manifest.json')).clips[0];
   clip.decode={...clip.decode,eosReached:false};delete clip.reusedApproved;
   writeFileSync(join(scratch,'assets/voices/knick/manifest.json'),JSON.stringify({requestedLineCount:1,generatedLineCount:1,clips:[clip],heldPrivate:[]}));
-  const catalog=join(scratch,'For-AI/AUDIO-TEXT-LIBRARY.js'),before=readFileSync(catalog);
+  const catalog=join(scratch,'For-AI/AUDIO-TEXT-LIBRARY.js');
+  // This fixture isolates Knick's failed transaction and supplies no crowd assets.
+  writeFileSync(catalog,readFileSync(catalog,'utf8').replace(/const crowdMouthEnergyReceipt=Object\.freeze\(\{[^\n]*\}\);\n/,''));
+  const before=readFileSync(catalog);
   assert.throws(()=>execFileSync(process.execPath,[join(scratch,'tools/curate-voice-library.mjs'),'--sync'],{stdio:'pipe'}),/Missing or incomplete Knick generation receipt/);
   assert.deepEqual(readFileSync(catalog),before);
  }finally{assert(scratch.startsWith(join(tmpdir(),'voice-sync-')));rmSync(scratch,{recursive:true,force:true});}

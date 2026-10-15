@@ -66,7 +66,7 @@ jobs:
         run: node --test tests/preload.test.mjs tests/browser-performance.test.mjs tests/runtime-smoothness.test.mjs tests/object-physics-consistency.test.mjs tests/police-driving.test.mjs tests/vehicle-lifecycle.test.mjs tests/train-consists.test.mjs tests/ambient-traffic.test.mjs tests/browser-responsiveness.test.mjs tests/asset-streaming.test.mjs tests/tourist-animation.test.mjs tests/intro-music.test.mjs tests/splat-preview.test.mjs tests/crossing-layout.test.mjs tests/browser-benchmark.test.mjs tests/touch-controls.test.mjs tests/english-subtitles.test.mjs tests/merkel-voice.test.mjs tests/mission-fax.test.mjs tests/mission-pointer.test.mjs tests/buergeramt-door-radiance.test.mjs tests/buergeramt-entry.test.mjs
       - name: Check personalized city dialogue and street sprites
         run: |
-          node --test tests/city-admission-roots.test.mjs tests/crowd-dialogue-source.test.mjs tests/quiz-identity.test.mjs tests/speech-fallback-navigation.test.mjs tests/city-interaction-target.test.mjs tests/street*.test.mjs
+          node --test tests/city-admission-roots.test.mjs tests/crowd-dialogue-source.test.mjs tests/crowd-defaults.test.mjs tests/recorded-mouth-energy.test.mjs tests/quiz-identity.test.mjs tests/speech-fallback-navigation.test.mjs tests/city-interaction-target.test.mjs tests/street*.test.mjs
           python -B tests/test_crowd_producer_contract.py
       - name: Check office oil-floor lifetime
         run: node --test tests/buergeramt-floor.test.mjs tests/buergeramt-restoration.test.mjs tests/buergeramt-goop-phone.test.mjs tests/buergeramt-portrait-melt.test.mjs tests/buergeramt-lamps.test.mjs

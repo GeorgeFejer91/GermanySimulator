@@ -3,6 +3,17 @@
 const canvas=document.getElementById("game"),ctx=canvas.getContext("2d"),keys=Object.create(null),CITY={w:9840,h:4240},RAIL_GUTTER=560,WORLD={w:CITY.w+RAIL_GUTTER*2,h:CITY.h+RAIL_GUTTER*2};
 const offsetWorldPoint=item=>({...item,x:item.x+RAIL_GUTTER,y:item.y+RAIL_GUTTER});
 const player={id:"player-default",fullName:"Hans-Peter Mustermann",voiceId:"spieler-hans-peter-mustermann",x:1800+RAIL_GUTTER,y:1760+RAIL_GUTTER,r:16,energy:100,facing:0,vx:0,vy:0};
+let streetMotionObserver=null;
+function streetMotionFailure(actor,error){try{streetMotionObserver?.failed(actor,String(error?.message||error))}catch(failure){console.warn('Street simulation observer failed',failure)}}
+function notifyStreetAccepted(actor,x,y){if(!streetMotionObserver)return;try{if(streetMotionObserver.accepts(actor))streetMotionObserver.accepted(actor,x,y,actor.x,actor.y)}catch(error){streetMotionFailure(actor,error)}}
+function notifyStreetDiscontinuity(actor,reason){if(!streetMotionObserver)return;try{if(streetMotionObserver.accepts(actor))streetMotionObserver.discontinuity(actor,reason)}catch(error){streetMotionFailure(actor,error)}}
+function finishStreetSimulationTick(dt){
+ if(!streetMotionObserver)return;
+ const speechPaused=document.hidden||!state.started||state.gameOver||!!window.GermanyHUD?.paused||!!window.Germany3D?.levelTransition?.active;
+ const paused=speechPaused||state.modal;
+ const tick=actor=>{try{if(streetMotionObserver.accepts(actor))streetMotionObserver.tick(actor,dt,paused,speechPaused)}catch(error){streetMotionFailure(actor,error)}};
+ tick(player);for(const actor of npcs)tick(actor);for(const actor of police)tick(actor);
+}
 const speechCatalog=window.GermanySimulatorAudioText;
 function speechClip(id){const clip=speechCatalog.clips[id];if(!clip)throw new Error(`Unknown speech clip: ${id}`);return clip}
 const GERMANNESS_MAX=15,LAW_POWER_THRESHOLD=9;
@@ -1138,11 +1149,11 @@ function arrestPlayer(){
   // Never put a waking body inside a visitor. Search the same open porch/lane.
   for(const dy of [30,65,100])for(const dx of [0,-40,40,-80,80]){const point={x:home.doorX+dx,y:home.doorY+dy};if(!spawn&&!responderBlocked(point.x,point.y,player.r,player))spawn=point}
   if(!spawn)for(let y=jwdLane.y+player.r;y<=jwdLane.y+jwdLane.h-player.r&&!spawn;y+=35)for(let x=jwdLane.x+player.r;x<=jwdLane.x+jwdLane.w-player.r&&!spawn;x+=35)if(!responderBlocked(x,y,player.r,player))spawn={x,y};
-  if(spawn){player.x=spawn.x;player.y=spawn.y}
-  state.wanted=0;police=[];state.region="berlin";state.runTimer=state.roadTimer=state.grassTimer=state.evasionTimer=0;state.pettyAuditTimer=24;
+  if(spawn){player.x=spawn.x;player.y=spawn.y;notifyStreetDiscontinuity(player,"arrest-respawn")}
+  state.wanted=0;clearPoliceActors();police=[];state.region="berlin";state.runTimer=state.roadTimer=state.grassTimer=state.evasionTimer=0;state.pettyAuditTimer=24;
   jwd.atHome=false;beginJwdVisit();state.offence="HAUSARREST · JWD";
   toast(state.lang==="en"?"YOU WAKE UP AT HOME · THE NEIGHBORS ARE WAITING":"ZU HAUSE AUFGEWACHT · DIE NACHBARN WARTEN SCHON");
- }else{player.x=policePath.x1;player.y=policePath.y1;state.wanted=Math.max(0,state.wanted-1);state.offence="PERSONALIEN FESTGESTELLT · HINWEIS ERTEILT";toast(state.lang==="en"?"POLICE ACTION · ESCORTED TO THE STATION GARDEN":"POLIZEILICHE MASSNAHME · IN DEN WACHEN-SCHREBERGARTEN BEGLEITET")}
+ }else{player.x=policePath.x1;player.y=policePath.y1;notifyStreetDiscontinuity(player,"police-transfer");state.wanted=Math.max(0,state.wanted-1);state.offence="PERSONALIEN FESTGESTELLT · HINWEIS ERTEILT";toast(state.lang==="en"?"POLICE ACTION · ESCORTED TO THE STATION GARDEN":"POLIZEILICHE MASSNAHME · IN DEN WACHEN-SCHREBERGARTEN BEGLEITET")}
  syncPoliceResponse();uiTone(180,.18,"sawtooth",.05);updateHud();
 }
 function jwdLaneDetour(thief,tx,ty){
@@ -1207,14 +1218,22 @@ function getMissionWaypoint(){
  const office=buildings.find(b=>b.id===mission.target);
  return office?{id:office.id,x:office.doorX,y:office.doorY}:null;
 }
+function recordedMouthOpening(clip,mediaTime){
+ const energy=clip?.mouthEnergy,hz=clip?.mouthHz;
+ if(!energy||!Number.isSafeInteger(energy.length)||energy.length===0||!Number.isFinite(hz)||hz<=0||!Number.isFinite(mediaTime)||mediaTime<0)return 0;
+ const index=Math.floor(mediaTime*hz);
+ if(!Number.isSafeInteger(index)||index<0||index>=energy.length||!Object.hasOwn(energy,index))return 0;
+ const value=energy[index];
+ return Number.isFinite(value)?Math.max(0,Math.min(1,value/255)):0;
+}
 function getNeighborDialogue(){
  if(!state.dialogue||!state.characterSpeaker?.jwdRole)return null;
  const item=activeStimulus,owned=!!item&&item.cueToken===state.dialogueVoiceToken&&item.family==="dialogue",paused=document.hidden||!!window.GermanyHUD?.paused||(owned&&item.subtitleMode==="recorded"?audio?.state!=="running":owned&&item.subtitleMode==="synthetic"?!!speechSynthesis.paused:false),speaking=!!(state.voiceOn&&owned&&item.speechStarted&&item.subtitleMode!=="silent");
  const clock=owned?Math.max(0,item.subtitleElapsed?.()||0):0;if(!paused)state.neighborSpeechTime=clock;
- const mediaTime=paused?state.neighborSpeechTime||0:clock,energy=item?.clip?.mouthEnergy,mouthOpen=energy&&item.clip.mouthHz?Math.min(1,Math.max(0,(energy[Math.min(energy.length-1,Math.floor(mediaTime*item.clip.mouthHz))]||0)/255)):undefined;
+ const mediaTime=paused?state.neighborSpeechTime||0:clock,mouthOpen=item?.clip?.mouthEnergy==null?undefined:recordedMouthOpening(item.clip,mediaTime);
  return{id:state.characterSpeaker.id,active:true,speaking,line:state.dialogueData.lines[state.dialogueData.i]||"",lineIndex:state.dialogueData.i,mediaTime,mediaDuration:owned?item.subtitleDuration||0:0,cueToken:state.dialogueVoiceToken,paused:!!paused,mouthOpen:speaking?mouthOpen:0};
 }
-window.Germany3DBridge={getNeighborStandingSpot,getNeighborDialogue,getStreetSpeech,getInput:()=>keys,jwdGardens,jwdNeighborhood,getMissionWaypoint,playFaxTransition:()=>playSynthFaxFeed(),getHUDState:()=>({started:state.started,busy:state.modal||state.gameOver,paused:!!window.GermanyHUD?.paused,missionKey:jwd.tour?"jwd-tour-"+jwd.tour.id:state.dialogue&&state.characterSpeaker?.jwdRole&&npcs.includes(state.characterSpeaker)&&state.dialogueData?.speaker===state.characterSpeaker.name&&state.dialogueData.voiceId&&state.dialogueData.voiceId===jwdVoice(state.characterSpeaker)?"jwd-tour-dialogue":getNeighborStandingSpot()?"jwd-tour-halo":null,lang:state.lang,energy:Math.round(player.energy),wanted:state.wanted}),clearInput,get preparingStart(){return !state.started&&(pendingNeighborEntry||!document.getElementById("intro").classList.contains("hidden"))},queueAssetLoad,prepareNearbyAssets:prepareNearbyNpcAssets,get assetLoadStatus(){return {active:assetLoadActive,pending:assetQueue.length}},refreshStartup,get startupAssetsReady(){return startupNpcAssetsReady()},get characterAssetStatus(){return {required:[...startupNpcKinds],settled:[...npcAssetLoads].filter(([,e])=>e.settled).map(([k])=>k),failed:[...npcAssetLoads].filter(([,e])=>e.failed).map(([k])=>k)}},WORLD,player,roads,vehicleApproaches,vehicleElevation,crossings,crossingSigns,trafficLights,buildings,grassAreas,walkways,stations,stationElevation,trees,TREE_RADIUS,TREE_ROAD_CLEARANCE,SIDEWALK_WIDTH,schreber,policeGarden,policePath,kiesingerMemorial,goerlitzerPark,wirtschaftswunderSite,BORDER_Y,BORDER_BAND,borderGates,borderSegments,railLoops,railTracks,trains,fireSources,props,pickups,normObjects,getNPCs:()=>npcs,getPolice:()=>police,getTrafficCars:()=>trafficCars,getPoliceVehicles:()=>policeVehicles,VEHICLE_RENDER_SCALE,getPoliceHelicopters:()=>policeHelicopters,getNpcSpriteCanvas:key=>npcSpriteAtlases[key]?.canvas||null,npcSpriteGrids:Object.fromEntries(Object.entries(npcSpriteAtlases).map(([key,{cols,rows,frameWidth,frameHeight,pivot}])=>[key,{cols,rows,frameWidth,frameHeight,pivot}]))};
+window.Germany3DBridge={setStreetMotionObserver:observer=>{streetMotionObserver=observer},getNeighborStandingSpot,getNeighborDialogue,getStreetSpeech,getInput:()=>keys,jwdGardens,jwdNeighborhood,getMissionWaypoint,playFaxTransition:()=>playSynthFaxFeed(),getHUDState:()=>({started:state.started,busy:state.modal||state.gameOver,paused:!!window.GermanyHUD?.paused,missionKey:jwd.tour?"jwd-tour-"+jwd.tour.id:state.dialogue&&state.characterSpeaker?.jwdRole&&npcs.includes(state.characterSpeaker)&&state.dialogueData?.speaker===state.characterSpeaker.name&&state.dialogueData.voiceId&&state.dialogueData.voiceId===jwdVoice(state.characterSpeaker)?"jwd-tour-dialogue":getNeighborStandingSpot()?"jwd-tour-halo":null,lang:state.lang,energy:Math.round(player.energy),wanted:state.wanted}),clearInput,get preparingStart(){return !state.started&&(pendingNeighborEntry||!document.getElementById("intro").classList.contains("hidden"))},queueAssetLoad,prepareNearbyAssets:prepareNearbyNpcAssets,get assetLoadStatus(){return {active:assetLoadActive,pending:assetQueue.length}},refreshStartup,get startupAssetsReady(){return startupNpcAssetsReady()},get characterAssetStatus(){return {required:[...startupNpcKinds],settled:[...npcAssetLoads].filter(([,e])=>e.settled).map(([k])=>k),failed:[...npcAssetLoads].filter(([,e])=>e.failed).map(([k])=>k)}},WORLD,player,roads,vehicleApproaches,vehicleElevation,crossings,crossingSigns,trafficLights,buildings,grassAreas,walkways,stations,stationElevation,trees,TREE_RADIUS,TREE_ROAD_CLEARANCE,SIDEWALK_WIDTH,schreber,policeGarden,policePath,kiesingerMemorial,goerlitzerPark,wirtschaftswunderSite,BORDER_Y,BORDER_BAND,borderGates,borderSegments,railLoops,railTracks,trains,fireSources,props,pickups,normObjects,getNPCs:()=>npcs,getPolice:()=>police,getTrafficCars:()=>trafficCars,getPoliceVehicles:()=>policeVehicles,VEHICLE_RENDER_SCALE,getPoliceHelicopters:()=>policeHelicopters,getNpcSpriteCanvas:key=>npcSpriteAtlases[key]?.canvas||null,npcSpriteGrids:Object.fromEntries(Object.entries(npcSpriteAtlases).map(([key,{cols,rows,frameWidth,frameHeight,pivot}])=>[key,{cols,rows,frameWidth,frameHeight,pivot}]))};
 const forms={
 a38:{code:"A38/1",title:"Passierschein A38 zur Beantragung eines weiteren Antrags",subtitle:"Bitte vollständig ausfüllen. Unvollständige Vollständigkeit gilt als unvollständig.",fields:[["text","VOLLSTÄNDIGER NAME"],["text","GEBURTSORT IN HEUTIGEN GEMEINDEGRENZEN"],["select","MELDESTATUS",["gemeldet","noch nicht gemeldet","gefühltermaßen gemeldet"]],["text","AKTENZEICHEN, FALLS BEREITS VORHANDEN"],["check","Ich bestätige, dass ich dieses Formular freiwillig unfreiwillig ausfülle."]]},
 wohnung:{code:"WGB-88",title:"Wohnungsgeberbestätigung zur Bestätigung einer Wohnung",subtitle:"Bestätigen Sie, dass Ihre Wohnung tatsächlich eine Wohnung ist.",fields:[["text","ANSCHRIFT"],["text","WOHNUNGSGEBENDER WOHNUNGSGEBER"],["select","ART DER ÜBERLASSUNG",["vermietet","untervermietet","mysteriös überlassen"]],["text","TATSÄCHLICHES DATUM DER TATSACHE DES EINZUGS"],["check","Ich bestätige das Vorhandensein von Wänden und mindestens einer Tür."]]},
@@ -1257,7 +1276,7 @@ function staticBlocked(x,y,r=player.r){if(x<r+9||y<r+9||x>WORLD.w-r-9||y>WORLD.h
 function trainCarDistance(x,y,car){const dx=x-car.x,dy=y-car.y,c=Math.cos(car.angle),s=Math.sin(car.angle),along=dx*c+dy*s,across=-dx*s+dy*c;return Math.hypot(Math.max(0,Math.abs(along)-TRAIN_CAR_HALF_LENGTH),Math.max(0,Math.abs(across)-TRAIN_CAR_HALF_WIDTH))}
 function trainAt(x,y,r){for(const train of trains)for(const car of train.cars)if(trainCarDistance(x,y,car)<r)return car;return null}
 function dynamicBlocker(x,y,fromX,fromY){for(const train of trains)for(const item of train.cars){const next=trainCarDistance(x,y,item),previous=trainCarDistance(fromX,fromY,item);if(groundContactBlocks(next,previous,player.r))return item}for(const item of [...trafficCars,...policeVehicles]){if(item.vortexPhase==="swallowed")continue;if(groundContactBlocks(vehicleBodyDistance(x,y,item),vehicleBodyDistance(fromX,fromY,item),player.r))return item}for(const item of police)if(groundContactBlocks(dist(x,y,item.x,item.y),dist(fromX,fromY,item.x,item.y),player.r+14))return item;return null}
-function pushPlayer(dx,dy){const steps=Math.ceil(Math.hypot(dx,dy)),stepX=dx/steps,stepY=dy/steps;for(let i=0;i<steps;i++){const nx=clamp(player.x+stepX,player.r+9,WORLD.w-player.r-9),ny=clamp(player.y+stepY,player.r+9,WORLD.h-player.r-9);if(blocked(nx,ny)||dynamicBlocker(nx,ny,player.x,player.y)||blockingPedestrian(nx,ny))break;player.x=nx;player.y=ny}}
+function pushPlayer(dx,dy){const beforeX=player.x,beforeY=player.y;const steps=Math.ceil(Math.hypot(dx,dy)),stepX=dx/steps,stepY=dy/steps;for(let i=0;i<steps;i++){const nx=clamp(player.x+stepX,player.r+9,WORLD.w-player.r-9),ny=clamp(player.y+stepY,player.r+9,WORLD.h-player.r-9);if(blocked(nx,ny)||dynamicBlocker(nx,ny,player.x,player.y)||blockingPedestrian(nx,ny))break;player.x=nx;player.y=ny}if(player.x!==beforeX||player.y!==beforeY)notifyStreetDiscontinuity(player,"forced-push")}
 function groundContactBlocks(next,previous,clearance){return next<clearance-1e-6&&(previous>=clearance-1e-6||next<=previous+1e-6)}
 function signedRectDistance(x,y,b){return Math.max(b.x-x,x-b.x-b.w,b.y-y,y-b.y-b.h)}
 // Full loaded/fallback cars, including wheels and supported station pitch: 3.76 by 2.04 rendered world units.
@@ -1306,7 +1325,7 @@ function responderBlocked(x,y,r,self,fromX=self?.x,fromY=self?.y){
 function moveGroundResponder(entity,dx,dy,r){
  if(!dx&&!dy)return false;
  const beforeX=entity.x,beforeY=entity.y,steps=Math.max(1,Math.ceil(Math.hypot(dx,dy))),stepX=dx/steps,stepY=dy/steps;
- const attempt=(sx,sy)=>{if((!sx&&!sy)||responderBlocked(entity.x+sx,entity.y+sy,r,entity,entity.x,entity.y))return false;entity.x+=sx;entity.y+=sy;return true};
+ const attempt=(sx,sy)=>{if((!sx&&!sy)||responderBlocked(entity.x+sx,entity.y+sy,r,entity,entity.x,entity.y))return false;const fromX=entity.x,fromY=entity.y;entity.x+=sx;entity.y+=sy;notifyStreetAccepted(entity,fromX,fromY);return true};
  if(!entity.avoid)entity.avoid=entity.crowd?1:Math.random()<.5?-1:1;
  for(let i=0;i<steps;i++){
   const movedX=attempt(stepX,0),movedY=attempt(0,stepY),mainBlocked=Math.abs(stepX)>=Math.abs(stepY)?!!stepX&&!movedX:!!stepY&&!movedY;
@@ -1320,7 +1339,7 @@ function moveGroundResponder(entity,dx,dy,r){
 }
 function blocked(x,y){return groundStaticMotionBlocked(x,y,player.r,player.x,player.y)||Math.abs(stationElevation(x,y)-stationElevation(player.x,player.y))>.11}
 function blockingPedestrian(x,y){let nearest=null,best=player.r+13;for(const n of npcs){const d=dist(x,y,n.x,n.y);if(d<best&&groundContactBlocks(d,dist(player.x,player.y,n.x,n.y),player.r+13)){nearest=n;best=d}}return nearest}
-function movePlayerGround(dx,dy){const steps=Math.max(1,Math.ceil(Math.hypot(dx,dy))),sx=dx/steps,sy=dy/steps;let bumped=null;for(let i=0;i<steps;i++){if(sx){const nx=player.x+sx,hit=blockingPedestrian(nx,player.y);if(!blocked(nx,player.y)&&!hit&&!dynamicBlocker(nx,player.y,player.x,player.y))player.x=nx;else bumped=bumped||hit}if(sy){const ny=player.y+sy,hit=blockingPedestrian(player.x,ny);if(!blocked(player.x,ny)&&!hit&&!dynamicBlocker(player.x,ny,player.x,player.y))player.y=ny;else bumped=bumped||hit}}return bumped}
+function movePlayerGround(dx,dy){const steps=Math.max(1,Math.ceil(Math.hypot(dx,dy))),sx=dx/steps,sy=dy/steps;let bumped=null;for(let i=0;i<steps;i++){if(sx){const nx=player.x+sx,hit=blockingPedestrian(nx,player.y);if(!blocked(nx,player.y)&&!hit&&!dynamicBlocker(nx,player.y,player.x,player.y)){const fromX=player.x;player.x=nx;notifyStreetAccepted(player,fromX,player.y)}else bumped=bumped||hit}if(sy){const ny=player.y+sy,hit=blockingPedestrian(player.x,ny);if(!blocked(player.x,ny)&&!hit&&!dynamicBlocker(player.x,ny,player.x,player.y)){const fromY=player.y;player.y=ny;notifyStreetAccepted(player,player.x,fromY)}else bumped=bumped||hit}}return bumped}
 function pedestrianLane(n){
  const b=n.routeBounds,direction=Math.sign(n.vx||n.vy);let side=n.wisdomId?-1:1;
  if(n.wisdomId&&npcs.some(other=>{if(other===n||other.wisdomId||other.special||other.arrested||!!other.vx!==!!n.vx||Math.sign(other.vx||other.vy)!==-direction)return false;const ahead=(n.vx?other.x-n.x:other.y-n.y)*direction;return ahead>=-28&&ahead<96&&pedestrianRouteContains(n,other.x,other.y)}))side=1;
@@ -1351,7 +1370,7 @@ function initializePedestrianRoutes(){
   const along=clamp(n.vx?n.x:n.y,n.min,n.max),lane=pedestrianLane(n);let placed=false;
   for(let offset=0;offset<=n.max-n.min&&!placed;offset+=16)for(const sign of offset?[1,-1]:[1])for(const cross of [lane,n.vx?best.y+best.h/2:best.x+best.w/2,n.vx?best.y+best.h/2-16:best.x+best.w/2+16]){
    const position=along+offset*sign,x=n.vx?position:cross,y=n.vx?cross:position;if(position<n.min||position>n.max||!pedestrianRouteContains(n,x,y)||responderBlocked(x,y,13,n,x,y))continue;
-   n.x=x;n.y=y;placed=true;break
+   n.x=x;n.y=y;notifyStreetDiscontinuity(n,"route-recovery");placed=true;break
   }
   n.unplaced=!placed;
  }
@@ -1433,8 +1452,8 @@ function rememberVariant(pool,values,value){let state=stimulusBags.get(pool);if(
 function neighborActivityActive(){return !!jwd.tour||state.dialogue&&!!state.characterSpeaker?.jwdRole||jwd.allocated&&state.mission>0&&jwd.met.size<3&&player.x>=jwdLane.x-120&&player.x<=jwdLane.x+jwdLane.w+120&&player.y>=jwdLane.y-120&&player.y<=jwdLane.y+jwdLane.h+120}
 function citySpeechAllowed(family){return family==="dialogue"||!neighborActivityActive()}
 function speechActorCurrent(item){
- const actor=item.actor,binding=speechCatalog.productionVoices?.[item.actorVoiceId];
- return !!actor&&npcs.includes(actor)&&actor.id===item.actorId&&actor.voiceId===item.actorVoiceId&&(item.candidateVoiceId||item.clip?.voiceId||item.voiceKey)===item.actorVoiceId&&binding?.profileId===item.actorProfileId&&binding?.referenceSha256===item.actorReferenceSha256&&binding?.renderer===item.actorRenderer&&binding?.modelRevision===item.actorModelRevision;
+ const actor=item.actor,binding=speechCatalog.productionVoices?.[item.actorVoiceId],policeActor=item.family==="police"&&police.includes(actor)&&!("id" in actor)&&!actor.pickupCar&&actor.voiceId==="polizei-heinrich-wachtmeister"&&item.actorId===null,npcActor=npcs.includes(actor)&&typeof actor.id==="string"&&actor.id===item.actorId;
+ return !!actor&&(policeActor||npcActor)&&actor.voiceId===item.actorVoiceId&&(item.candidateVoiceId||item.clip?.voiceId||item.voiceKey)===item.actorVoiceId&&binding?.profileId===item.actorProfileId&&binding?.referenceSha256===item.actorReferenceSha256&&binding?.renderer===item.actorRenderer&&binding?.modelRevision===item.actorModelRevision;
 }
 function getStreetSpeech(actor){
  const item=activeStimulus;
@@ -1446,15 +1465,15 @@ function getStreetSpeech(actor){
  if(!item.speechStarted||item.subtitleMode!=="recorded"||!recordedSpeechSource)return {...projection,speechStatus:"queued"};
  const duration=Number(item.subtitleDuration),elapsed=Number(item.subtitleElapsed?.());
  if(!Number.isFinite(duration)||duration<=0||!Number.isFinite(elapsed))return null;
- const paused=document.hidden||!!window.GermanyHUD?.paused||audio?.state!=="running",mediaTime=Math.max(0,Math.min(duration,elapsed)),clip=item.recordingSequence?null:speechCatalog.recordings[item.recording],energy=clip?.mouthEnergy,hz=Number(clip?.mouthHz);
- const mouthOpen=!paused&&mediaTime>.025&&mediaTime<duration-.015&&energy?.length&&Number.isFinite(hz)&&hz>0?Math.max(0,Math.min(1,(Number(energy[Math.min(energy.length-1,Math.floor(mediaTime*hz))])||0)/255)):0;
+ const paused=document.hidden||!!window.GermanyHUD?.paused||audio?.state!=="running",mediaTime=Math.max(0,Math.min(duration,elapsed)),clip=item.recordingSequence?null:speechCatalog.recordings[item.recording];
+ const mouthOpen=!paused&&mediaTime>.025&&mediaTime<duration-.015?recordedMouthOpening(clip,mediaTime):0;
  return {...projection,speechStatus:paused?"paused":"playing",mediaTime,mediaDuration:duration,mouthOpen,paused:!!paused};
 }
 function stimulusEligible(item,now=performance.now()){return citySpeechAllowed(item.family)&&(!item.expiresAt||now<=item.expiresAt)&&(!item.isEligible||item.isEligible())}
 function chooseStimulusIndex(queue,lastServed,now=performance.now()){let best=-1;for(let i=0;i<queue.length;i++){const item=queue[i];if(!stimulusEligible(item,now)||item.ambient&&now<nextAmbientAt)continue;if(best<0){best=i;continue}const current=queue[best],served=lastServed.get(item.family)||0,currentServed=lastServed.get(current.family)||0;if(item.priority>current.priority||item.priority===current.priority&&(served<currentServed||served===currentServed&&item.queuedAt<current.queuedAt))best=i}return best}
 function hasStimulusFamily(family){return activeStimulus?.family===family||stimulusQueue.some(item=>item.family===family)}
 function stimulusBusy(){return !!activeStimulus||stimulusQueue.length>0||audioTextActive()}
-function queueStimulus(item){if(!state.voiceOn||!stimulusEligible(item))return false;const now=performance.now(),request={priority:STIMULUS_PRIORITY.CRITICAL,ambient:false,queuedAt:now,...item},transient=request.priority<STIMULUS_PRIORITY.CRITICAL;if(request.actor){const actor=request.actor,voiceId=request.candidateVoiceId||request.clip?.voiceId||request.voiceKey,binding=speechCatalog.productionVoices?.[voiceId];if(npcs.includes(actor)&&typeof actor.id==="string"&&actor.id&&actor.voiceId===voiceId&&binding?.profileId&&binding?.referenceSha256)Object.assign(request,{actorId:actor.id,actorVoiceId:voiceId,actorProfileId:binding.profileId,actorReferenceSha256:binding.referenceSha256,actorRenderer:binding.renderer,actorModelRevision:binding.modelRevision,actorGeneration:stimulusGeneration,actorCueToken:Object.freeze({}),actorSpeechStatus:"queued"});else request.actor=null}if(transient&&activeStimulus?.family===request.family)return false;if(transient)request.expiresAt=request.expiresAt||now+AUDIO_MIX.AMBIENT_TTL_MS;for(let i=stimulusQueue.length-1;i>=0;i--)if(!stimulusEligible(stimulusQueue[i],now)||stimulusQueue[i].family===request.family&&(transient?stimulusQueue[i].priority<STIMULUS_PRIORITY.CRITICAL:stimulusQueue[i].ambient))stimulusQueue.splice(i,1);if(transient){const pending=stimulusQueue.map((queued,index)=>({queued,index})).filter(entry=>entry.queued.priority<STIMULUS_PRIORITY.CRITICAL);if(pending.length>=AUDIO_MIX.MAX_TRANSIENT_QUEUE){pending.sort((a,b)=>a.queued.priority-b.queued.priority||a.queued.queuedAt-b.queued.queuedAt);if(request.priority<pending[0].queued.priority)return false;stimulusQueue.splice(pending[0].index,1)}}stimulusQueue.push(request);pumpStimuli();return true}
+function queueStimulus(item){if(!state.voiceOn||!stimulusEligible(item))return false;const now=performance.now(),request={priority:STIMULUS_PRIORITY.CRITICAL,ambient:false,queuedAt:now,...item},transient=request.priority<STIMULUS_PRIORITY.CRITICAL;if(request.actor){const actor=request.actor,voiceId=request.candidateVoiceId||request.clip?.voiceId||request.voiceKey,binding=speechCatalog.productionVoices?.[voiceId];const policeActor=request.family==="police"&&police.includes(actor)&&!("id" in actor)&&!actor.pickupCar&&actor.voiceId==="polizei-heinrich-wachtmeister"&&voiceId===actor.voiceId,npcActor=npcs.includes(actor)&&typeof actor.id==="string"&&actor.id&&actor.voiceId===voiceId;if((npcActor||policeActor)&&binding?.profileId&&binding?.referenceSha256)Object.assign(request,{actorId:policeActor?null:actor.id,actorVoiceId:voiceId,actorProfileId:binding.profileId,actorReferenceSha256:binding.referenceSha256,actorRenderer:binding.renderer,actorModelRevision:binding.modelRevision,actorGeneration:stimulusGeneration,actorCueToken:Object.freeze({}),actorSpeechStatus:"queued"});else request.actor=null}if(transient&&activeStimulus?.family===request.family)return false;if(transient)request.expiresAt=request.expiresAt||now+AUDIO_MIX.AMBIENT_TTL_MS;for(let i=stimulusQueue.length-1;i>=0;i--)if(!stimulusEligible(stimulusQueue[i],now)||stimulusQueue[i].family===request.family&&(transient?stimulusQueue[i].priority<STIMULUS_PRIORITY.CRITICAL:stimulusQueue[i].ambient))stimulusQueue.splice(i,1);if(transient){const pending=stimulusQueue.map((queued,index)=>({queued,index})).filter(entry=>entry.queued.priority<STIMULUS_PRIORITY.CRITICAL);if(pending.length>=AUDIO_MIX.MAX_TRANSIENT_QUEUE){pending.sort((a,b)=>a.queued.priority-b.queued.priority||a.queued.queuedAt-b.queued.queuedAt);if(request.priority<pending[0].queued.priority)return false;stimulusQueue.splice(pending[0].index,1)}}stimulusQueue.push(request);pumpStimuli();return true}
 function voiceHash(text){let h=0;for(let i=0;i<text.length;i++)h=(h*31+text.charCodeAt(i))>>>0;return h}
 function prepareRecording(url){const cached=recordingPromises.get(url);if(cached){recordingPromises.delete(url);recordingPromises.set(url,cached);return cached}const a=ensureAudio(),promise=queueAssetLoad(()=>fetch(url).then(r=>{if(!r.ok)throw new Error("Recorded voice unavailable: "+url);return r.arrayBuffer()}).then(data=>a.decodeAudioData(data)),{foreground:true}).then(buffer=>{promise.decodedBytes=buffer.length*buffer.numberOfChannels*4;let bytes=0;for(const p of recordingPromises.values())bytes+=p.decodedBytes||0;for(const [key,p] of recordingPromises){if(bytes<=16*1024*1024)break;if(p.decodedBytes){bytes-=p.decodedBytes;recordingPromises.delete(key)}}return buffer}).catch(error=>{recordingPromises.delete(url);throw error});recordingPromises.set(url,promise);return promise}
 const TRAIN_PLAYER_OBSTRUCTION_AUDIO=TRAIN_ANNOUNCEMENT_AUDIO[0];
@@ -1622,7 +1641,17 @@ function announceCurrentRule(speaker=null,manual=false){
  const index=definition.ruleIndices[(person.wisdomRuleCursor||0)%definition.ruleIndices.length],clip=speechClip(`rule-${String(index+1).padStart(2,"0")}`),eligible=()=>state.started&&!state.modal&&!state.gameOver&&!window.BuergeramtLevel?.active&&!person.arrested&&!person.lawPending&&npcs.includes(person)&&dist(player.x,player.y,person.x,person.y)<=180;
  showWorldBark(person.name+" · REGEL DES AUGENBLICKS",clip.text,false,"","",{family:"rule",candidateVoiceId:person.voiceId,actor:person,subtitle:clip.english,priority:manual?STIMULUS_PRIORITY.NEARBY:STIMULUS_PRIORITY.AMBIENT,ambient:!manual,isEligible:eligible,start:()=>{person.wisdomSpokeAt=performance.now()/1000;person.wisdomRuleCursor=(person.wisdomRuleCursor||0)+1;person.pause=Math.max(person.pause||0,clip.text.length*.045+1);state.rule=index;state.ruleTimer=0;updateHud()}});return true;
 }
-function policeBark(force=false,offence=""){const now=performance.now(),region=state.region,lines=policeBarks[region]||policeBarks.germany;if(!force&&(now-(policeBark.last||0)<2300||hasStimulusFamily("police")))return;const line=offence.includes("RASEN")||offence.includes("GRÜN")||offence.includes("FUSSBODEN")?lines[1]:nextVariant("police:"+region,lines);showWorldBark("POLIZEI",line,true,"","",{family:"police",candidateVoiceId:"polizei-heinrich-wachtmeister",priority:STIMULUS_PRIORITY.REACTIVE,ambient:true,isEligible:()=>state.started&&!state.modal&&!state.gameOver&&state.region===region&&state.wanted>0&&(force||police.some(p=>dist(player.x,player.y,p.x,p.y)<400)),start:()=>policeBark.last=performance.now()})}
+function cancelActorStimulus(actor){
+ let removed=false;for(let i=stimulusQueue.length-1;i>=0;i--)if(stimulusQueue[i].actor===actor){stimulusQueue[i].actorSpeechStatus="cancelled";stimulusQueue.splice(i,1);removed=true}
+ const item=activeStimulus;if(item?.actor!==actor)return removed;
+ item.actorSpeechStatus="cancelled";clearTimeout(item.loadingTimer);clearTimeout(stimulusTimer);
+  activeStimulus=null;if("speechSynthesis" in window&&(speechSynthesis.speaking||speechSynthesis.pending))speechSynthesis.cancel();
+  stopRecordedSpeech();item.distanceGain?.disconnect();clearSubtitle();hideWorldBark();
+ stimulusTimer=setTimeout(()=>{for(let i=stimulusQueue.length-1;i>=0;i--)if(!stimulusEligible(stimulusQueue[i]))stimulusQueue.splice(i,1);if(stimulusQueue.length)pumpStimuli();else setAudioText()},AUDIO_MIX.REQUIRED_GAP_MS);return true
+}
+function removePoliceActor(actor){cancelActorStimulus(actor);const index=police.indexOf(actor);if(index<0)return false;police.splice(index,1);return true}
+function clearPoliceActors(){for(const actor of police.slice())removePoliceActor(actor)}
+function policeBark(force=false,offence="",actor=null){if(actor&&(!police.includes(actor)||("id" in actor)||actor.pickupCar||actor.voiceId!=="polizei-heinrich-wachtmeister"))return false;const now=performance.now(),region=state.region,lines=policeBarks[region]||policeBarks.germany;if(!force&&(now-(policeBark.last||0)<2300||hasStimulusFamily("police")))return false;const line=offence.includes("RASEN")||offence.includes("GRÜN")||offence.includes("FUSSBODEN")?lines[1]:nextVariant("police:"+region,lines),isEligible=()=>state.started&&!state.modal&&!state.gameOver&&state.region===region&&state.wanted>0&&(actor?police.includes(actor)&&!("id" in actor)&&!actor.pickupCar&&actor.voiceId==="polizei-heinrich-wachtmeister"&&dist(player.x,player.y,actor.x,actor.y)<400:force||police.some(p=>dist(player.x,player.y,p.x,p.y)<400));return showWorldBark("POLIZEI",line,true,"","",{family:"police",candidateVoiceId:"polizei-heinrich-wachtmeister",actor,priority:STIMULUS_PRIORITY.REACTIVE,ambient:true,isEligible,start:()=>policeBark.last=performance.now()})}
 function jaywalkerBark(){if(hasStimulusFamily("jaywalker"))return;const person=nearestPedestrian();if(!person||person.arrested||person.wisdomId)return;const region=state.region,lines=jaywalkerBarks[region]||jaywalkerBarks.germany;showWorldBark(person.name,nextVariant("jaywalker:"+region,lines),true,"","",{family:"jaywalker",candidateVoiceId:person.voiceId,actor:person,priority:STIMULUS_PRIORITY.REACTIVE,ambient:true,isEligible:()=>state.started&&!state.modal&&!state.gameOver&&state.region===region&&playerSurface()==="road"&&!person.arrested&&!person.lawPending&&npcs.includes(person)&&dist(player.x,player.y,person.x,person.y)<360})}
 function pedestrianBark(n,surface="sidewalk"){
  if(n?.jwdRole)return false;
@@ -1779,7 +1808,7 @@ function useLawPower(){
  const car=responseSpawn("car",0),pickup=nearestDrivingRoad(target.x,target.y);if(!car||!pickup){toast("STREIFENWAGEN WARTET AUF FREIE ZUFAHRT");return}
  const road=pickup.road;if(road.w>road.h)pickup.x=clamp(pickup.x+car.entryDir*90,road.x+103,road.x+road.w-103);else pickup.y=clamp(pickup.y+(Math.sign(target.y-horizontalRoads[car.roadIndex].y)||1)*90,road.y+103,road.y+road.h-103);
  const quote=nextLawPowerLine(),recording=speechClip(`law-${String(lastLawPowerLine+1).padStart(2,"0")}`).recording+"?v=20261012-short";state.lawCooldown=14;state.wanted=0;state.wantedCooldown=0;state.offence="ZUSTÄNDIGKEIT ERFOLGREICH UMGELENKT";syncPoliceResponse();
- police.length=0;target.lawPending=true;if(state.quizApproach===target){state.quizApproach=null;state.quizApproachQuestion=null}
+ clearPoliceActors();target.lawPending=true;if(state.quizApproach===target){state.quizApproach=null;state.quizApproachQuestion=null}
  car.lawPickup={target,parking:pickup,phase:"approach",officer:null};policeVehicles.push(car);
  hideWorldBark();speakRecorded(quote,recording,{family:"law",candidateVoiceId:player.voiceId,urgent:true,hideCaption:true});toast("§-MACHT AKTIV · "+target.name+" WIRD ABGEHOLT");updateHud();
 }
@@ -1909,7 +1938,7 @@ function walkPickupActor(actor,target,speed,dt,r,stop=6){
 function updateLawPickup(car,dt){
  const pickup=car.lawPickup;if(!pickup||car.retiring)return;
  const n=pickup.target;
- if(!npcs.includes(n)&&pickup.phase!=="return"){if(pickup.officer){const i=police.indexOf(pickup.officer);if(i>=0)police.splice(i,1)}n.lawPending=false;retirePoliceVehicle(car);return}
+ if(!npcs.includes(n)&&pickup.phase!=="return"){if(pickup.officer)removePoliceActor(pickup.officer);n.lawPending=false;retirePoliceVehicle(car);return}
  if(pickup.phase==="approach"){
   if(car.lifecycle==="entering"||dist(car.x,car.y,pickup.parking.x,pickup.parking.y)>65||Math.abs(car.driveSpeed||0)>3)return;
   const c=Math.cos(car.angle),s=Math.sin(car.angle),preferred=(-s*(n.x-car.x)+c*(n.y-car.y))>=0?1:-1;
@@ -1930,7 +1959,7 @@ function updateLawPickup(car,dt){
   if(dist(n.x,n.y,rear.x,rear.y)<9&&dist(p.x,p.y,n.x,n.y)<170){npcs.splice(npcs.indexOf(n),1);car.passengerName=n.name;pickup.phase="return";pickup.boardingTime=.65}
  }else if(pickup.phase==="return"){
   pickup.boardingTime-=dt;const door=policeCarDoor(car,pickup.side,-pickup.personAlong);if(pickup.boardingTime>0||walkPickupActor(p,door,95,dt,14)>9)return;
-  const i=police.indexOf(p);if(i>=0)police.splice(i,1);pickup.officer=null;pickup.phase="depart";retirePoliceVehicle(car);toast(car.passengerName+" · IM STREIFENWAGEN ABGEFÜHRT")
+  removePoliceActor(p);pickup.officer=null;pickup.phase="depart";retirePoliceVehicle(car);toast(car.passengerName+" · IM STREIFENWAGEN ABGEFÜHRT")
  }
 }
 function syncPoliceResponse(){
@@ -2001,7 +2030,7 @@ function amtExitPosition(){
  return null;
 }
 function returnFromAmt(){
- const exit=amtExitPosition();if(exit){player.x=exit.x;player.y=exit.y}
+ const exit=amtExitPosition();if(exit){player.x=exit.x;player.y=exit.y;notifyStreetDiscontinuity(player,"building-exit")}
  player.vx=player.vy=0;player.facing=Math.PI;clearInput();state.modal=false;
  document.body.classList.remove('amt-direct-mode');
  for(const id of ['amt-direct-result','amt-direct-reset','amt-compact-reset'])document.getElementById(id).hidden=true;
@@ -2019,7 +2048,7 @@ function enterIndoorBuilding(b,enter){
 function leaveIndoorBuilding(){
  state.activeForm=null;const visit=indoorVisit;if(!visit)return;indoorVisit=null;
  const onReturn=()=>{const b=visit.building,x=b.doorX,y=b.doorY+35,clear=!responderBlocked(x,y,player.r,player,null,null);
-  player.x=clear?x:visit.x;player.y=clear?y:visit.y;player.vx=player.vy=0;clearInput();state.modal=false;};
+  player.x=clear?x:visit.x;player.y=clear?y:visit.y;notifyStreetDiscontinuity(player,"indoor-return");player.vx=player.vy=0;clearInput();state.modal=false;};
  if(!window.Germany3D?.leaveBuilding?.(visit.building.id,{mode:'voluntary',onReturn}))onReturn();
 }
 function buildingDialogue(b,lines,avatar,done){
@@ -2033,7 +2062,7 @@ function cancelAmtAppointment(outcome){
   return;
  }
  const exit=amtExitPosition();
- if(exit){player.x=exit.x;player.y=exit.y}
+ if(exit){player.x=exit.x;player.y=exit.y;notifyStreetDiscontinuity(player,"building-exit")}
  player.vx=player.vy=0;player.facing=Math.PI;clearInput();pendingOfficeEntry=null;
  document.body.classList.remove("amt-direct-mode");
  for(const id of ["amt-direct-result","amt-direct-reset","amt-compact-reset","form-modal"])document.getElementById(id).hidden=true;
@@ -2068,7 +2097,7 @@ function enterJobcenter(b){
  stopSpeech();stopPoliceChaseLoop();state.modal=true;clearInput();player.vx=player.vy=0;setAmtMusicMuted(true);
  const opened=window.Germany3D.enterJobcenter({recording:clip.recording,text:clip.text,english:record?.english,duration:26.783,effects:()=>({context:ensureAudio(),output:soundEffectOutput()}),voiceOn:()=>state.voiceOn,subtitlesOn:()=>state.subtitlesOn,onClose:()=>{
   const x=b.doorX,y=b.doorY+65,clear=!responderBlocked(x,y,player.r,player,null,null);
-  player.x=clear?x:entry.x;player.y=clear?y:entry.y;player.facing=0;player.vx=player.vy=0;
+  player.x=clear?x:entry.x;player.y=clear?y:entry.y;notifyStreetDiscontinuity(player,"jobcenter-return");player.facing=0;player.vx=player.vy=0;
   clearInput();clearSubtitle();state.modal=false;setAmtMusicMuted(false);updateHud();
  }});
  if(!opened){state.modal=false;setAmtMusicMuted(false)}
@@ -2126,7 +2155,8 @@ function endGame(win){
  document.getElementById("end-copy").textContent=win?(en?"You have completed enough forms, survived the rules, and demonstrated a suspicious amount of patience. Confirmation of your confirmation will arrive by post.":"Sie haben genügend Formulare ausgefüllt, Regeln überlebt und verdächtig viel Geduld nachgewiesen. Die Bestätigung Ihrer Bestätigung erhalten Sie auf dem Postweg."):(en?"The three-day deadline has expired. Your file was closed for failing to be complete in time. Please join the queue again.":"Die Drei-Tage-Frist ist abgelaufen. Ihr Vorgang wurde wegen fehlender rechtzeitiger Vollständigkeit geschlossen. Bitte stellen Sie sich erneut an.");
  document.getElementById("restart").textContent=en?"ANOTHER PROCEDURE":"NOCH EIN VORGANG";
 }document.getElementById("restart").onclick=()=>location.reload();
-function update(dt){
+function update(dt){try{updateCitySimulation(dt)}finally{finishStreetSimulationTick(dt)}}
+function updateCitySimulation(dt){
  if(window.GermanyHUD?.paused||window.Germany3D?.levelTransition?.active){updateTrainAnnouncement(0);return}
  if(state.started&&!state.gameOver)updateJwdPerformance(dt);
  if(state.started&&state.modal&&!state.gameOver)for(const n of npcs){const m=npcSpriteAtlases[n.spriteKind]?.tourist;if(!m?.interactions)continue;if(n===state.quizNpc||n===state.characterSpeaker){if(!n.characterInteraction&&!n.interactionRequest)requestCharacterReaction(n,"waiting")}if(n.touristTurn&&n.interactionRequest)TouristAnimations.advance(n,0,dt,m);else updateCharacterReaction(n,dt)}
@@ -2202,9 +2232,9 @@ function update(dt){
 
  for(let i=police.length-1;i>=0;i--){
    const p=police[i];if(p.pickupCar)continue;const target=player,rdx=target.x-p.x,rdy=target.y-p.y,d=Math.hypot(rdx,rdy)||1,step=p.speed*dt;moveGroundResponder(p,rdx/d*step,rdy/d*step,14);
-   if(d<260&&performance.now()>(p.barkAt||0)){p.barkAt=performance.now()+2200+Math.random()*1800;policeBark()}
-   if(d<player.r+14+4){police.splice(i,1);if(state.policeContactCooldown>0)continue;arrestPlayer();break}
-   else if(state.wanted<2&&d>520)police.splice(i,1)
+   if(d<260&&performance.now()>(p.barkAt||0)){p.barkAt=performance.now()+2200+Math.random()*1800;policeBark(false,"",p)}
+   if(d<player.r+14+4){removePoliceActor(p);if(state.policeContactCooldown>0)continue;arrestPlayer();break}
+   else if(state.wanted<2&&d>520)removePoliceActor(p)
  }
 
  for(const n of npcs){
@@ -2923,7 +2953,7 @@ function finishHumorCertification(openWelcome=true){humorModal.hidden=true;state
 let pendingStart=null,pendingOfficeEntry=null,pendingJobcenterEntry=document.documentElement.dataset.directLevel==="jobcenter"||new URLSearchParams(location.search).get("geheim")==="jobcenter",pendingNeighborEntry=document.documentElement.dataset.directLevel==="neighbors"||new URLSearchParams(location.search).get("geheim")==="nachbarn";
 function prepareNeighborsDirect(){
  const entry=jwdGardens.gateAside;
- player.x=entry.x;player.y=entry.y;player.vx=player.vy=0;
+ player.x=entry.x;player.y=entry.y;notifyStreetDiscontinuity(player,"direct-arrival");player.vx=player.vy=0;
  state.mission=1;state.forms=1;state.germanness=3;state.modal=true;state.region=regionOf(player.y);
  allocateJwdHome();jwd.visited=true;jwd.visit=1;jwd.atHome=true;jwd.exitPending=false;jwd.gardenCooldown=38;
  anmeldungAwarded=true;renderAnmeldungBadge();document.getElementById("intro").classList.add("hidden");
@@ -2949,7 +2979,7 @@ function enterDirectLevel(){
    if(!spawn&&!responderBlocked(x,y,player.r,player,null,null))spawn={x,y};
   }
   if(!spawn)throw Error('No clear direct-level arrival: '+id);
-  Object.assign(player,spawn,{vx:0,vy:0,facing:0});
+  Object.assign(player,spawn,{vx:0,vy:0,facing:0});notifyStreetDiscontinuity(player,"direct-level-arrival");
  }
  state.region=regionOf(player.y);stopSpeech();clearInput();window.Germany3D?.prepareDirectArrival?.();
  document.getElementById('intro').classList.add('hidden');finishHumorCertification(false);

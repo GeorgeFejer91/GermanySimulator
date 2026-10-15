@@ -36,7 +36,8 @@ async function fixture(t){
    .replace(/const neighborRecordings=Object\.freeze\([^\n]*\);\n/,curator.neighborRecordingsBlock(cast,[]))
    .replace(/const cityRecordings=Object\.freeze\([^\n]*\);\n/,curator.cityRecordingsBlock(cast,[],base,base))
    .replace(/const cityAdmissionReceipts=Object\.freeze\(\{[^\n]*\}\);\n/,'const cityAdmissionReceipts=Object.freeze({});\n')
-   .replace(/const cityMouthEnergyReceipt=Object\.freeze\(\{[^\n]*\}\);\n/,'');
+   .replace(/const cityMouthEnergyReceipt=Object\.freeze\(\{[^\n]*\}\);\n/,'')
+   .replace(/const crowdMouthEnergyReceipt=Object\.freeze\(\{[^\n]*\}\);\n/,'');
   save(catalogPath,catalog);save(resolve(base,'assets/voices/candidate-dialogue/manifest.json'),{clips:[]});return catalogPath;
  };
  const catalogPath=reduceCatalog(game),authoringCatalogPath=reduceCatalog(authoring);mkdirSync(review,{recursive:true});

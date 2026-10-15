@@ -2,6 +2,7 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import {readFileSync} from 'node:fs';
 import vm from 'node:vm';
+import {motionObserverSource} from './street-simulation-fixture-source.mjs';
 const source=readFileSync(new URL('../game.js',import.meta.url),'utf8');
 const between=(start,end)=>source.slice(source.indexOf(start),source.indexOf(end,source.indexOf(start)));
 
@@ -12,7 +13,7 @@ function fixture(){
     stopSpeech(){},clearInput(){},responderBlocked:()=>false,openDialogue:(...args)=>calls.dialogs.push(args),document:{getElementById:element,createElement:create,body:{classList:{contains:()=>false}}},
     uiTone(){},setTimeout(){},toast(){},updateHud(){},jwd:{allocated:false},endGame(){},anmeldungNeighborhoodMonologue(){},showAmtDirectResult(){}};
   const context=vm.createContext(f);
-  vm.runInContext(between('const missions=','const rules=')+between('const forms=','function resize(')+between('const formEnglish=','function localize(')+between('function showForm(','let anmeldungAwarded=')+between('let indoorVisit=null;','function cancelAmtAppointment(')+between('function bureaucrat(','function microInteract('),context);
+  vm.runInContext(motionObserverSource(source)+between('const missions=','const rules=')+between('const forms=','function resize(')+between('const formEnglish=','function localize(')+between('function showForm(','let anmeldungAwarded=')+between('let indoorVisit=null;','function cancelAmtAppointment(')+between('function bureaucrat(','function microInteract('),context);
   const showForm=context.showForm;context.showForm=type=>{calls.forms.push(type);showForm(type)};
   const submit=source.split('\n').find(line=>line.startsWith('document.getElementById("bureaucracy-form").onsubmit='));vm.runInContext(submit,context);
   return {...f,calls,context,element};

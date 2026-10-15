@@ -3,6 +3,7 @@ import assert from 'node:assert/strict';
 import vm from 'node:vm';
 import {readFileSync} from 'node:fs';
 import {harness as officeHarness} from './amt-harness.mjs';
+import {motionObserverSource,policeRemovalSource} from './street-simulation-fixture-source.mjs';
 const source=readFileSync(new URL('../game.js',import.meta.url),'utf8');
 function fn(name){
  const start=source.indexOf(`function ${name}(`),open=source.indexOf('{',start);assert.ok(start>=0);
@@ -13,14 +14,14 @@ function fn(name){
 function harness(tours=false){
  const nodes=new Map(),node=id=>{if(!nodes.has(id))nodes.set(id,{textContent:'',hidden:false});return nodes.get(id)};
  const h={WORLD:{w:10960,h:5360},RAIL_GUTTER:560,TREE_RADIUS:38,player:{x:2360,y:2320,r:16,energy:100},state:{started:true,mission:0,lang:'de',wanted:3,germanness:0},window:{},document:{getElementById:node},localStorage:{setItem(){}},anmeldungAwarded:false,
-  goerlitzerPark:{x:10000,y:4000,w:100,h:100},wirtschaftswunderSite:{x:10000,y:4200,collisionRadius:142},kiesingerMemorial:{x:10000,y:4500},props:[],normObjects:[],trees:[],walkways:[],grassAreas:[],trains:[],trafficCars:[],policeVehicles:[],police:[],stationElevation:()=>0,
+  goerlitzerPark:{x:10000,y:4000,w:100,h:100},wirtschaftswunderSite:{x:10000,y:4200,collisionRadius:142},kiesingerMemorial:{x:10000,y:4500},props:[],normObjects:[],trees:[],walkways:[],grassAreas:[],trains:[],trafficCars:[],policeVehicles:[],police:[],activeStimulus:null,stimulusQueue:[],stimulusGeneration:0,stationElevation:()=>0,
   policePath:{x1:4810,y1:4410},OFFENSE_TIMING:{policeContactCooldown:5.8},dist:(ax,ay,bx,by)=>Math.hypot(ax-bx,ay-by),clamp:(n,a,b)=>Math.max(a,Math.min(b,n)),offsetWorldPoint:b=>({...b,x:b.x+560,y:b.y+560}),updateHud(){},clearInput(){},syncPoliceResponse(){},uiTone(){},toast(){},renderAnmeldungBadge(){}};
  h.addGermanness=amount=>{h.state.germanness=Math.min(15,h.state.germanness+amount)};
  h.openDialogue=(speaker,lines,portrait,done,voiceId,subtitles,roaming=false)=>{h.state.modal=!roaming;h.state.dialogue=true;h.dialogue=h.state.dialogueData={speaker,lines,done,voiceId,subtitles,roaming,i:0}};
  h.finish=()=>{const done=h.dialogue?.done;h.dialogue=null;h.state.modal=h.state.dialogue=false;done?.()};
  vm.createContext(h);vm.runInContext(readFileSync(new URL('../jwd-gardens.js',import.meta.url),'utf8'),h);if(tours)vm.runInContext(readFileSync(new URL('../neighbor-story.js',import.meta.url),'utf8'),h);
  const between=(a,b)=>source.slice(source.indexOf(a),source.indexOf(b,source.indexOf(a)+a.length));
- vm.runInContext(between('const buildings=','const grassAreas=')+between('const missions=','const rules=')+source.split('\n').find(l=>l.startsWith('const jwdGardens='))+source.split('\n').find(l=>l.startsWith('const jwdLane=')).replace('walkways.push(jwdLane);','')+
+ vm.runInContext(motionObserverSource(source)+policeRemovalSource(source)+between('const buildings=','const grassAreas=')+between('const missions=','const rules=')+source.split('\n').find(l=>l.startsWith('const jwdGardens='))+source.split('\n').find(l=>l.startsWith('const jwdLane=')).replace('walkways.push(jwdLane);','')+
   between('const jwdNeighborhood=','for(const b of buildings)')+between('const npcs=',' {x:520,y:720')+'].map(offsetWorldPoint);'+between('const jwd=','window.Germany3DBridge=')+
   ['groundCircleCandidates','propRadius','normObjectRadius','staticBlocked','groundContactBlocks','signedRectDistance','groundStaticMotionBlocked','pedestrianRouteContains','responderBlocked','moveGroundResponder','awardAnmeldung','anmeldungNeighborhoodMonologue','microInteract'].map(fn).join('\n')+';globalThis.jwdState=jwd;globalThis.actors=npcs;globalThis.homes=buildings;globalThis.lane=jwdLane;globalThis.gardens=jwdGardens;',h);
  for(const n of h.actors){n.routeBounds=h.lane;n.gardenPaths=h.gardens.paths;Object.assign(n,h.gardens.stations[n.id],{jwdActivity:"wash",jwdWorking:true,activityPhase:0})}

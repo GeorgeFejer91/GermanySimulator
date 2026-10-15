@@ -46,6 +46,130 @@ export function crowdCandidateBlock(cast,manifests,sourceRoot=root){
  }
  return 'const crowdCandidateDialogue=Object.freeze('+JSON.stringify(entries)+');\n';
 }
+// SOURCE FRAGMENT for the existing curator; not a second executable pipeline.
+const crowdAuthoringHelperSha256='92fb925a7ebfa742d70c4a5b9ec3c9d8640a0d46b8f5c9c80bf1ed63f41546af';
+const crowdAdmissionPattern=/const crowdAdmissions=Object\.freeze\((\{[^\n]*\})\);\n/;
+const crowdAdmissions=source=>JSON.parse(source.match(crowdAdmissionPattern)?.[1]||'{}');
+function crowdSourceMap(cast,sourceRoot=root){
+ const source=readFileSync(resolve(sourceRoot,'game.js'),'utf8'),window={};
+ const match=source.match(/const crowdCharacterBarks=(Object\.freeze\([\s\S]*?\));\nconst crowdArchetypeById/);
+ requireMatch(match,'Missing genuine crowd source map');
+ const barks=vm.runInNewContext(match[1]);vm.runInNewContext(readFileSync(resolve(sourceRoot,'For-AI/AUDIO-TEXT-LIBRARY.js'),'utf8'),{window});
+ const roles=Object.fromEntries(cast.roleProfiles.map(row=>[row.gameRole,row])),rows=[];
+ for(const [actorId,regions] of Object.entries(barks)){
+  const owner=roles[actorId],binding=cast.productionVoices[actorId];
+  requireMatch(owner?.voiceId===actorId&&owner.secretTunnelProfileId===binding?.profileId&&owner.runtimeArchetype!=='street-wisdom'&&owner.dialogueSources.some(line=>line.includes(`actor-owned crowdCharacterBarks[${actorId}]`)),'Crowd source owner/profile changed');
+  for(const region of ['berlin','germany']){
+   requireMatch(regions[region]?.length===2&&window.GermanySimulatorAudioText.pools.crowdPersonalized[actorId]?.[region]?.length===2,'Crowd requires exactly two owned source/English lines per region');
+   for(let slot=0;slot<2;slot++){
+   const text=regions[region]?.[slot],english=window.GermanySimulatorAudioText.pools.crowdPersonalized[actorId]?.[region]?.[slot];
+   requireMatch(typeof text==='string'&&text.trim()&&typeof english==='string'&&english.trim(),'Missing crowd source/English slot');
+   const clipId=`${actorId}-${region}-${String(slot+1).padStart(2,'0')}`;
+   rows.push({clipId,voiceId:actorId,actorId,region,slot,sourceLocator:`game.js crowdCharacterBarks[${actorId}].${region}[${slot}]`,text,english,profileId:binding.profileId,referenceSha256:binding.referenceSha256,referenceOriginalSha256:binding.originalSha256,renderer:binding.renderer,modelRevision:binding.modelRevision,processing:binding.processing??null});
+   }
+  }
+ }
+ requireMatch(rows.length===36&&new Set(rows.map(row=>row.clipId)).size===36,'Crowd native full36 source count changed');
+ return new Map(rows.map(row=>[row.clipId,row]));
+}
+function crowdFullPlan(cast,snapshot,sourceRoot=root){
+ requireMatch(typeof snapshot?.text==='string'&&snapshot.sha256===textHash(snapshot.text),'Crowd full36 request bytes changed');
+ const plan=JSON.parse(snapshot.text),authored=crowdSourceMap(cast,sourceRoot);
+ requireMatch(plan.family==='crowd-dialogue'&&plan.publicAssetFamily==='assets/voices/candidate-dialogue'&&plan.privateReviewFamily==='GermanySimulator crowd dialogue review 2026-10-15'&&plan.requestedLineCount===36&&plan.jobs?.length===36&&new Set(plan.jobs.map(row=>row.clipId)).size===36,'Not the genuine complete crowd request');
+ for(const row of plan.jobs){const source=authored.get(row.clipId);requireMatch(source&&Object.keys(row).length===Object.keys(source).length&&Object.entries(source).every(([key,value])=>sameJson(row[key],value)),'Crowd full36 text/English/owner/selected profile drift');}
+ return {plan,authored};
+}
+function crowdExactCues(clip){
+ // Same caption geometry rules as cityClipAuthority; no city proof/alias changes.
+ const words=[...clip.text.matchAll(/[\p{L}\p{N}_]+/gu)];let end=0,index=-1;
+ requireMatch(Array.isArray(clip.wordCues)&&words.length>0&&clip.wordCues.length===words.length&&clip.wordCues.every((cue,i)=>{const valid=Object.keys(cue).length===4&&cue.word===words[i][0]&&cue.charIndex===words[i].index&&Number.isFinite(cue.at)&&Number.isFinite(cue.end)&&cue.at>=end&&cue.end>cue.at&&cue.end<=clip.durationSeconds+.05&&cue.charIndex>index;end=cue.end;index=cue.charIndex;return valid;}),'Incomplete crowd exact final-caption cues');
+}
+function crowdDefaultClipAuthority(cast,clip,proof,requestSha256){
+ fixedTakeAuthority(cast,clip);crowdExactCues(clip);
+ requireMatch(clip.file===`assets/voices/candidate-dialogue/${clip.clipId}.mp3`,'Crowd public file must be its canonical relative asset path');
+ requireMatch(clip.authoringHelperSha256===crowdAuthoringHelperSha256&&clip.requestSha256===requestSha256&&clip.rendererInputText===clip.text&&clip.rendererInputBasis==='exact authored source'&&clip.synthesisAttempt===1&&clip.seed===71000,'Crowd clip is not the named current-generation first take');
+ requireMatch(!['rescueParts','deliveryEditing','benchmarkOnly','recognitionVerification','actualInferenceText','nativeCompletion','exceptionAuthority','joinRetakeAuthority'].some(key=>key in clip),'Unsupported crowd edited/substituted take');
+ const synth=clip.synthesis,decode=clip.decode,approval=clip.approval;
+ requireMatch(synth?.languageId==='de'&&synth.device==='cuda'&&synth.precision==='fp16'&&synth.t3WeightPrecision==='float16'&&synth.conditioningPrecision==='float32'&&synth.referenceReconditionedForProfile===clip.profileId&&synth.referenceConditioningVerifiedFloat32===true&&synth.inferenceMode===true&&synth.cpuThreads===2&&synth.exaggeration===.5&&synth.temperature===.65&&synth.repetitionPenalty===3&&synth.cfgWeight===.6,'Crowd native conditioning/recipe drift');
+ requireMatch(decode?.eosReached===true&&decode.attentionHooksBefore===0&&decode.attentionHooksAfter===0&&Number.isInteger(decode.generatedSpeechTokens)&&decode.generatedSpeechTokens>0&&decode.generatedSpeechTokens<=decode.maxSpeechTokens&&decode.maxSpeechTokens===proof.maxSpeechTokens&&!decode.modelEosRestoredSteps,'Crowd native EOS/token/hook proof missing');
+ requireMatch(clip.asrLiteralWordExact===true&&clip.asrDevice==='cpu'&&clip.asrCpuThreads===1&&['int8','int8_float32'].includes(clip.asrEffectiveComputeType)&&clip.asrModelSha256===proof.asrModelSha256&&clip.asrBeamSize===proof.asrBeamSize&&Number.isInteger(proof.asrReadings)&&proof.asrReadings>=1&&proof.asrReadings<=2&&clip.sampleRateHz===48000&&clip.channels===1&&clip.bitrateBitsPerSecond===128000&&Number.isInteger(clip.bytes)&&clip.bytes>0&&Number.isFinite(clip.durationSeconds)&&clip.durationSeconds>0&&clip.referenceLicense==='CC0-1.0'&&clip.modelLicense==='MIT','Crowd final native encoding/ASR/license missing');
+ requireMatch(clip.listening==='pending'&&!clip.listeningConfirmed&&!clip.listeningVerified&&!approval?.listeningConfirmed&&!approval?.listeningVerified,'Crowd human listening is not supplied');
+ requireMatch(sameJson(Object.keys(approval||{}).sort(),['clipId','date','encodedSha256','instruction','scope','status'])&&approval.status==='user-approved'&&approval.scope==='whole-game-fixed-voice-cloning'&&/^\d{4}-\d{2}-\d{2}$/.test(approval.date)&&approval.instruction?.trim()&&approval.clipId===clip.clipId&&approval.encodedSha256===clip.sha256,'Missing clip/hash-specific crowd use selection');
+ for(const key of ['rawReceiptSha256','encodedReceiptSha256','rawSha256','encodedSha256','profileJsonSha256'])requireMatch(/^[a-f0-9]{64}$/.test(proof?.[key]),'Missing ROOT-verified private crowd byte proof');
+ requireMatch(proof.rawSha256===clip.rawSha256&&proof.encodedSha256===clip.sha256&&proof.profileJsonSha256===clip.profileJsonSha256,'Crowd private/public byte lineage drift');
+}
+const crowdPublicJobFields=['clipId','voiceId','actorId','region','slot','sourceLocator','text','english','profileId','referenceSha256','referenceOriginalSha256','renderer','modelRevision','processing'];
+const crowdPublicFields=(value,keys)=>Object.fromEntries(keys.filter(key=>Object.hasOwn(value,key)).map(key=>[key,value[key]]));
+function crowdPublicClip(clip){
+ const row=crowdPublicFields(clip,[...crowdPublicJobFields,'seed','synthesisAttempt','authoringHelperSha256','rendererInputText','rendererInputBasis','requestSha256','profileJsonSha256','rawSha256','modelLicense','referenceLicense','durationSeconds','renderSeconds','processingSha256','integratedLufs','truePeakDbtp','asr','asrWordExact','asrLiteralWordExact','asrNormalization','asrModelSha256','asrLanguageId','asrComputeType','asrEffectiveComputeType','asrCpuThreads','asrDevice','asrScriptPrompt','asrBeamSize','file','sha256','bytes','sampleRateHz','channels','bitrateBitsPerSecond']);
+ row.decode=crowdPublicFields(clip.decode,['maxSpeechTokens','attentionHooksBefore','generatedSpeechTokens','eosReached','t3InferenceSeconds','temporaryAnalyzerHooksRemoved','attentionHooksAfter']);
+ row.synthesis=crowdPublicFields(clip.synthesis,['exaggeration','temperature','repetitionPenalty','cfgWeight','languageId','device','precision','t3WeightPrecision','conditioningPrecision','autocastPrecision','conditioningCached','referenceReconditionedForProfile','referenceConditioningVerifiedFloat32','modelSessionReused','cpuThreads','inferenceMode']);
+ row.wordCues=clip.wordCues.map(cue=>crowdPublicFields(cue,['at','end','charIndex','word']));
+ row.approval=crowdPublicFields(clip.approval,['status','scope','date','instruction','clipId','encodedSha256']);
+ row.listening='pending';row.status='eligible exact-text recording; human listening pending';
+ return row;
+}
+function crowdPublicPlan(cast,proof,sourceRoot=root){
+ requireMatch(/^[a-f0-9]{64}$/.test(proof?.nativeSha256)&&sameJson(Object.keys(proof.sourceSha256||{}).sort(),['For-AI/AUDIO-TEXT-LIBRARY.js','For-AI/VOICE-CAST.json','game.js'])&&Object.values(proof.sourceSha256).every(value=>/^[a-f0-9]{64}$/.test(value)),'Invalid public crowd native-plan digest/source pins');
+ const authored=crowdSourceMap(cast,sourceRoot);
+ requireMatch(proof.jobs?.length===36&&new Set(proof.jobs.map(row=>row.clipId)).size===36,'Incomplete public crowd source slots');
+ for(const row of proof.jobs){const source=authored.get(row.clipId);requireMatch(source&&Object.keys(row).length===crowdPublicJobFields.length&&Object.entries(source).every(([key,value])=>sameJson(row[key],value)),'Public crowd source/English/selected binding drift');}
+ return {authored};
+}
+// Read and validate actual native receipts only when ROOT supplies real outcomes.
+// Return public-safe hashes; private ASR reading payloads are never copied here.
+export function prepareCrowdDefaultManifest(cast,manifest,authorityProof,sourceRoot=root){
+ crowdCandidateBlock(cast,[],sourceRoot); // Existing caller/selection authority, without reading candidate assets.
+ requireMatch(authorityProof?.sha256===hash(authorityProof.path),'Crowd ROOT authority bytes changed');
+ const authority=json(authorityProof.path);
+ requireMatch(authority.status==='ROOT_SEALED_FINITE_CROWD9'&&authority.executorThread==='01a13cd8-cbde-75b3-9876-7d75cbe6bef1'&&authority.grantId&&/^[a-f0-9]{40}$/.test(authority.sourceCommit)&&authority.helperSha256===crowdAuthoringHelperSha256&&authority.maximumNativeCalls===9&&authority.maximumCallsPerClip===1&&authority.maximumAsrReadings===18&&authority.automaticRetries===0,'Not the reviewed finite crowd generation authority');
+ requireMatch(hash(authority.requestPath)===authority.requestSha256,'Genuine crowd full36 request changed');
+ const fullPlan={text:readFileSync(authority.requestPath,'utf8'),sha256:authority.requestSha256},{plan,authored}=crowdFullPlan(cast,fullPlan,sourceRoot);
+ requireMatch(sameJson(plan.sourceSha256,authority.sourceSha256),'Crowd full36 plan differs from sealed generation source pins');
+ const voice=manifest.voiceId,owned=plan.jobs.filter(row=>row.voiceId===voice),family=resolve(authority.musicRoot,plan.privateReviewFamily);
+ requireMatch(owned.length===4&&manifest.profileId===cast.productionVoices[voice]?.profileId&&realpathSync(family)===family,'Crowd private family/voice alias or owner drift');
+ const privateFile=relative=>{const file=resolve(family,voice,relative);requireMatch(realpathSync(file)===file&&file.startsWith(family+sep)&&!lstatSync(file).isSymbolicLink(),'Crowd private receipt/media alias');return file;};
+ const requestPath=privateFile('requests.json'),requestSha256=hash(requestPath),request=json(requestPath);
+ requireMatch(request.requestedLineCount===4&&sameJson(request.jobs,owned)&&request.authoredPlanSha256===authority.requestSha256&&sameJson(request.sourceSha256,plan.sourceSha256)&&sameJson(request.authoredPlanSourceSha256,plan.sourceSha256),'Crowd native four-slot plan differs from genuine full36 source');
+ const takes={};
+ for(const clip of manifest.clips){
+  const job=authored.get(clip.clipId);requireMatch(job&&Object.hasOwn(authority.tokenCaps,clip.clipId)&&job.region==='germany'&&job.slot===0&&Object.entries(job).every(([key,value])=>sameJson(clip[key],value)),'Clip outside actual first9 owned source');
+  const rawPath=privateFile(`raw/${clip.clipId}.json`),encodedPath=privateFile(`encoded/${clip.clipId}.json`),raw=json(rawPath),encoded=json(encodedPath);
+  for(const [key,value] of Object.entries(job))requireMatch(sameJson(raw[key],value)&&sameJson(encoded[key],value),'Actual crowd receipt source/owner/profile drift');
+  for(const [key,value] of Object.entries(raw))if(!['durationSeconds','status'].includes(key))requireMatch(sameJson(encoded[key],value),'Crowd raw/encoded lineage drift: '+key);
+  for(const [key,value] of Object.entries(encoded))if(key!=='asrReadings'||clip[key]!==undefined)requireMatch(sameJson(clip[key],value),'Crowd public clip changed an actual encoded receipt field: '+key);
+  requireMatch(raw.requestSha256===requestSha256&&raw.profileJsonSha256===authority.profileBindings[voice]?.profileJsonSha256&&raw.decode?.maxSpeechTokens===authority.tokenCaps[clip.clipId]&&encoded.asrModelSha256===authority.asrModelSha256&&encoded.asrReadings?.length>=1&&encoded.asrReadings.length<=2&&sameJson(encoded.asrReadings.map(row=>row.beamSize),encoded.asrReadings.length===1?[1]:[1,5])&&encoded.asrReadings.at(-1).transcript===encoded.asr,'Crowd actual private decoder/ASR evidence changed');
+  requireMatch(hash(privateFile(`raw/${clip.clipId}.wav`))===raw.rawSha256&&hash(privateFile(`encoded/${clip.clipId}.mp3`))===encoded.sha256&&readFileSync(privateFile(`encoded/${clip.clipId}.mp3`)).length===encoded.bytes,'Crowd actual private audio bytes changed');
+  const proof={rawReceiptSha256:hash(rawPath),encodedReceiptSha256:hash(encodedPath),rawSha256:raw.rawSha256,encodedSha256:encoded.sha256,profileJsonSha256:raw.profileJsonSha256,maxSpeechTokens:raw.decode.maxSpeechTokens,asrModelSha256:encoded.asrModelSha256,asrBeamSize:encoded.asrBeamSize,asrReadings:encoded.asrReadings.length};
+  crowdDefaultClipAuthority(cast,clip,proof,requestSha256);takes[clip.clipId]=proof;
+ }
+ const records=[...manifest.clips,...manifest.heldPrivate],ids=records.map(row=>row.clipId);
+ requireMatch(manifest.requestedLineCount===4&&manifest.clips.length===1&&manifest.lineCount===1&&records.length===4&&new Set(ids).size===4&&manifest.generatedLineCount===1,'Actual successful first9 manifest accounting changed');
+ for(const row of records){const job=owned.find(job=>job.clipId===row.clipId);requireMatch(job&&Object.entries(job).every(([key,value])=>sameJson(row[key],value)),'Crowd manifest slot changed from full36 source');}
+ requireMatch(manifest.heldPrivate.every(row=>row.region!=='germany'||row.slot!==0)&&manifest.heldPrivate.every(row=>row.reason==='not rendered; selected production fallback'&&(!row.failedGates||row.failedGates.length===0)),'Unrendered crowd slots must remain pending, not failed recordings');
+ // Explicit public contract: no structured clone of private manifests/receipts.
+ // Native request bytes keep their own digest; the public source projection is
+ // not represented as byte-identical to that original private request file.
+ const publicPlan={nativeSha256:fullPlan.sha256,sourceSha256:crowdPublicFields(plan.sourceSha256,['game.js','For-AI/VOICE-CAST.json','For-AI/AUDIO-TEXT-LIBRARY.js']),jobs:plan.jobs.map(job=>crowdPublicFields(job,crowdPublicJobFields))};
+ const result={schemaVersion:1,voiceId:voice,profileId:manifest.profileId,fallback:cast.productionVoices[voice].fallback??'captions',status:'same-profile technical and independent ASR audit; perceptual listening not independently verified',requestedLineCount:4,generatedLineCount:1,lineCount:1,clips:manifest.clips.map(crowdPublicClip),heldPrivate:manifest.heldPrivate.map(row=>({...crowdPublicFields(row,crowdPublicJobFields),reason:'not rendered; selected production fallback'})),approvedExistingReuse:[]};
+ result.crowdAdmission={status:'ROOT-verified-current-generation',authoritySha256:authorityProof.sha256,adapterSha256:authority.adapterSha256,helperSha256:crowdAuthoringHelperSha256,fullPlan:publicPlan,requestSha256,takes};
+ return result;
+}
+export function crowdRecordingsBlock(cast,manifests,assetRoot=root,sourceRoot=root,mouthRows=null){
+ // Existing validator retains all four unique source slots and selected binding.
+ crowdCandidateBlock(cast,manifests,sourceRoot);
+ const clips=[];
+ for(const manifest of manifests){
+  const selected=manifest.clips.filter(clip=>clip.approval?.status==='user-approved');if(!selected.length)continue;
+  const admission=manifest.crowdAdmission;
+  requireMatch(admission?.status==='ROOT-verified-current-generation'&&admission.helperSha256===crowdAuthoringHelperSha256&&/^[a-f0-9]{64}$/.test(admission.authoritySha256)&&/^[a-f0-9]{64}$/.test(admission.adapterSha256),'Missing current-generation crowd admission');
+  const {authored}=crowdPublicPlan(cast,admission.fullPlan,sourceRoot);
+  requireMatch(Object.keys(admission.takes).length===selected.length,'Crowd admitted take coverage changed');
+  for(const clip of selected){const job=authored.get(clip.clipId);requireMatch(job&&Object.entries(job).every(([key,value])=>sameJson(clip[key],value)),'Default crowd source/English/owner drift');crowdDefaultClipAuthority(cast,clip,admission.takes[clip.clipId],admission.requestSha256);clips.push({...clip,...(mouthRows?.[clip.clipId]?{mouthHz:40,mouthEnergy:mouthRows[clip.clipId].mouthEnergy}:{}),provenanceManifest:manifest.provenanceManifest,provenanceManifestSha256:manifest.provenanceManifestSha256});}
+ }
+ return fixedRecordingsBlock(cast,{clips},'crowd-dialogue',assetRoot);
+}
+
 const originalFile=path=>{const names=readdirSync(path).filter(name=>/^original\.[a-z0-9]+$/i.test(name));requireMatch(names.length===1,'Missing/ambiguous original audio');return resolve(path,names[0])};
 export function matchesProduction(cast,clip,requireReceipt=true){
  const selected=cast.productionVoices[clip.voiceId];
@@ -267,8 +391,8 @@ function fixedTakeAuthority(cast,clip){
   requireMatch(clip.asrScriptPrompt===null&&clip.asrLanguageId==='de'&&clip.asrComputeType==='int8'&&/^[a-f0-9]{64}$/.test(clip.asrModelSha256)&&[1,2,4].includes(clip.asrCpuThreads),`Missing independent final-encoding ASR receipt: ${clip.clipId}`);
 }
 export function fixedRecordingsBlock(cast,manifest,family='knick',assetRoot=root){
- requireMatch(['knick','street-wisdom','player-replies','office-ambient','city-dialogue'].includes(family),'Unknown fixed recording family');
- const entries={},seen=new Set(),street=family==='street-wisdom'?streetAuthority():null,ambient=family==='office-ambient',city=family==='city-dialogue';
+ requireMatch(['knick','street-wisdom','player-replies','office-ambient','city-dialogue','crowd-dialogue'].includes(family),'Unknown fixed recording family');
+ const entries={},seen=new Set(),street=family==='street-wisdom'?streetAuthority():null,ambient=family==='office-ambient',city=family==='city-dialogue',crowd=family==='crowd-dialogue',assetFamily=crowd?'candidate-dialogue':family;
  let ambientRows=null,ambientPeople=null;
  if(ambient){const window={};vm.runInNewContext(readFileSync(resolve(root,'buergeramt-story.js'),'utf8'),{window});const story=window.BuergeramtStory;ambientRows=story.ambient;ambientPeople={...story.characters,...Object.fromEntries(['renter','parent','pensioner'].map((actor,i)=>[actor,Object.values(story.patrons)[i]])),...Object.fromEntries(Object.entries(story.clerks).map(([desk,person])=>['clerk-'+desk,person]))};}
  let replies=null;
@@ -288,7 +412,7 @@ export function fixedRecordingsBlock(cast,manifest,family='knick',assetRoot=root
   const binding=cast.productionVoices[clip.voiceId];
   fixedTakeAuthority(cast,clip);
   requireMatch(clip.english?.trim()&&clip.approval?.status==='user-approved',`Missing Knick subtitle/use approval: ${clip.clipId}`);
-  requireMatch(clip.file.startsWith(`assets/voices/${family}/`)&&resolve(root,clip.file).startsWith(resolve(root,`assets/voices/${family}`)+sep),`Invalid fixed asset path: ${clip.clipId}`);
+  requireMatch(clip.file.startsWith(`assets/voices/${assetFamily}/`)&&resolve(root,clip.file).startsWith(resolve(root,`assets/voices/${assetFamily}`)+sep),`Invalid fixed asset path: ${clip.clipId}`);
   requireMatch(hash(resolve(assetRoot,clip.file))===clip.sha256,`Knick audio hash drift: ${clip.clipId}`);
   const key=clip.voiceId+'\0'+clip.text;requireMatch(!seen.has(key),`Duplicate Knick line: ${clip.clipId}`);seen.add(key);
   let id=clip.clipId;
@@ -304,7 +428,7 @@ export function fixedRecordingsBlock(cast,manifest,family='knick',assetRoot=root
    requireMatch(Number.isInteger(index)&&person&&clip.actorId===person.id&&clip.voiceId===person.voiceId&&clip.clipId===`${person.id}-rule-${String(index+1).padStart(2,'0')}`&&clip.text===street.catalog.rules[index][1]&&clip.english===street.catalog.ruleEnglish[index],`Wrong street rule ownership/text: ${clip.clipId}`);
    id=`rule-${String(index+1).padStart(2,'0')}`;
   }
-  entries['./'+clip.file]={id,...(street||replies||ambient||city?{clipId:clip.clipId,actorId:clip.actorId}:{}),voiceId:clip.voiceId,profileId:clip.profileId,fixedProduction:true,renderer:clip.renderer,modelRevision:clip.modelRevision,referenceSha256:clip.referenceSha256,referenceOriginalSha256:clip.referenceOriginalSha256,processing:clip.processing??null,source:clip.text,english:clip.english,...(city?{provenanceManifestSha256:clip.provenanceManifestSha256}:{}),...(city&&clip.mouthEnergy?{mouthHz:clip.mouthHz,mouthEnergy:clip.mouthEnergy}:{}),trigger:family==='knick'?'buergeramt-exact-dialogue':city?'city-exact-dialogue':replies?'buergeramt-player-reply':ambient?'buergeramt-ambient':'nearby-street-rule',durationMs:Math.round(clip.durationSeconds*1000),wordCues:clip.wordCues,sha256:clip.sha256,approval:clip.approval,provenanceManifest:clip.provenanceManifest};
+  entries['./'+clip.file]={id,...(street||replies||ambient||city||crowd?{clipId:clip.clipId,actorId:clip.actorId}:{}),voiceId:clip.voiceId,profileId:clip.profileId,fixedProduction:true,renderer:clip.renderer,modelRevision:clip.modelRevision,referenceSha256:clip.referenceSha256,referenceOriginalSha256:clip.referenceOriginalSha256,processing:clip.processing??null,source:clip.text,english:clip.english,...(city||crowd?{provenanceManifestSha256:clip.provenanceManifestSha256}:{}),...((city||crowd)&&clip.mouthEnergy?{mouthHz:clip.mouthHz,mouthEnergy:clip.mouthEnergy}:{}),trigger:family==='knick'?'buergeramt-exact-dialogue':city?'city-exact-dialogue':crowd?'crowd-owned-exact-dialogue':replies?'buergeramt-player-reply':ambient?'buergeramt-ambient':'nearby-street-rule',durationMs:Math.round(clip.durationSeconds*1000),wordCues:clip.wordCues,sha256:clip.sha256,approval:clip.approval,provenanceManifest:clip.provenanceManifest};
  }
  // Encode repeated receipts once, then expand the same complete fields into
  // every runtime entry. Receipts come from takes, never the current cast alias.
@@ -321,7 +445,7 @@ export function fixedRecordingsBlock(cast,manifest,family='knick',assetRoot=root
  }
  // Tuples remove repeated field names in delivery, without rounding cue times
  // or changing the objects consumed by caption scheduling.
- return `const ${family==='knick'?'knick':city?'city':replies?'playerReply':ambient?'officeAmbient':'streetWisdom'}Recordings=Object.freeze((()=>{const r=`+JSON.stringify(receipts)+';const w=cues=>cues.map(([at,end,charIndex,word])=>({at,end,charIndex,word}));return{'+rows.join(',')+'}})());\n';
+ return `const ${family==='knick'?'knick':city?'city':crowd?'crowd':replies?'playerReply':ambient?'officeAmbient':'streetWisdom'}Recordings=Object.freeze((()=>{const r=`+JSON.stringify(receipts)+';const w=cues=>cues.map(([at,end,charIndex,word])=>({at,end,charIndex,word}));return{'+rows.join(',')+'}})());\n';
 }
 const cityAuthoringHelperSha256='122d93bac3016f44b24cf04b97b7a2462d216226e33c9d6d6e05c5ae11a89349';
 const citySourceFiles=['game.js','For-AI/VOICE-CAST.json','For-AI/AUDIO-TEXT-LIBRARY.js'];
@@ -495,6 +619,37 @@ function cityMouthEnergyFromCatalog(source,manifests,assetRoot){
  requireMatch(!lstatSync(path).isSymbolicLink()&&hash(path)===receipts[cityMouthEnergyPath],'City mouth supplement hash drift');
  const supplement=json(path);cityMouthEnergyRows(supplement,manifests,assetRoot);return supplement;
 }
+const crowdMouthEnergyPath='assets/voices/candidate-dialogue/crowd-mouth-energy.json';
+const crowdMouthEnergyPattern=/const crowdMouthEnergyReceipt=Object\.freeze\((\{[^\n]*\})\);\n/;
+const crowdMouthClipIds=['crowd-baerbel-brezel-germany-01','crowd-brigitte-bueroklammer-germany-01','crowd-elfriede-eingabe-germany-01','crowd-guenther-gartenzaun-germany-01','crowd-hildegard-brotzeit-germany-01','crowd-manfred-mittagsruhe-germany-01','crowd-ruediger-rasenkante-germany-01'];
+function crowdMouthEnergyRows(supplement,manifests,assetRoot){
+ if(!supplement)return null;
+ requireMatch(supplement.kind==='crowd-final-mp3-mouth-energy-supplement-v1'&&[cityEnergyBuilderSha256,cityEnergyCanonicalBuilderSha256].includes(supplement.recipeBuilderSha256)&&supplement.recipeCanonicalBuilderSha256===cityEnergyCanonicalBuilderSha256&&[cityEnergyBuilderSha256,cityEnergyCanonicalBuilderSha256].includes(supplement.admissionRecipeBuilderSha256)&&supplement.recipeLineSha256===cityEnergyLineSha256&&supplement.ffmpegSha256===cityEnergyFfmpegSha256&&/^[a-f0-9]{64}$/.test(supplement.measurementSha256),'Foreign crowd mouth recipe/measurement');
+ const clips=manifests.flatMap(manifest=>manifest.clips.filter(clip=>clip.approval?.status==='user-approved').map(clip=>({...clip,encodedReceiptSha256:manifest.crowdAdmission.takes[clip.clipId]?.encodedReceiptSha256,provenanceManifestSha256:manifest.provenanceManifestSha256}))),selectedClips=clips.filter(clip=>crowdMouthClipIds.includes(clip.clipId)),rows=supplement.clips;
+ requireMatch(sameJson(selectedClips.map(clip=>clip.clipId).sort(),crowdMouthClipIds)&&rows&&sameJson(Object.keys(rows).sort(),crowdMouthClipIds),'Incomplete/extra crowd mouth supplement');
+ for(const clip of selectedClips){const row=rows[clip.clipId];for(const key of ['clipId','voiceId','actorId','profileId','referenceSha256','file','sha256','encodedReceiptSha256','text','english'])requireMatch(row[key]===clip[key],`Foreign crowd mouth ${key}: ${clip.clipId}`);requireMatch(hash(resolve(assetRoot,clip.file))===clip.sha256&&row.mouthHz===40&&Number.isInteger(row.sampleCount)&&row.sampleCount>0&&row.sampleCount<=240000&&Number.isFinite(row.durationSeconds)&&row.durationSeconds===row.sampleCount/24000&&/^[a-f0-9]{64}$/.test(row.pcmSha256)&&Array.isArray(row.mouthEnergy)&&row.mouthEnergy.length===Math.ceil(row.sampleCount/600)&&row.mouthEnergy.every(value=>Number.isInteger(value)&&value>=0&&value<=255)&&row.energySha256===textHash(Buffer.from(row.mouthEnergy)),'Invalid crowd measured mouth bins');}
+ return rows;
+}
+function crowdMouthEnergyFromCatalog(source,manifests,assetRoot){
+ const anchor=source.match(crowdMouthEnergyPattern);if(!anchor)return null;const receipts=JSON.parse(anchor[1]);requireMatch(sameJson(Object.keys(receipts),[crowdMouthEnergyPath]),'Foreign crowd mouth supplement anchor');const path=resolve(assetRoot,crowdMouthEnergyPath);requireMatch(!lstatSync(path).isSymbolicLink()&&hash(path)===receipts[crowdMouthEnergyPath],'Crowd mouth supplement hash drift');const supplement=json(path);crowdMouthEnergyRows(supplement,manifests,assetRoot);return supplement.clips;
+}
+function crowdMouthSnapshot(cast,manifests,sourceRoot,ffmpegPath){
+ const catalogPath=resolve(sourceRoot,'For-AI/AUDIO-TEXT-LIBRARY.js'),castPath=resolve(sourceRoot,'For-AI/VOICE-CAST.json'),gamePath=resolve(sourceRoot,'game.js'),builderPath=resolve(sourceRoot,'tools/build-neighbor-voices.mjs');return{catalogSha256:textHash(readFileSync(catalogPath,'utf8').replace(/\r\n/g,'\n')),castSha256:hash(castPath),gameSha256:hash(gamePath),builderSha256:hash(builderPath),ffmpegSha256:hash(ffmpegPath),manifests:Object.fromEntries(manifests.map(row=>[row.provenanceManifest,hash(resolve(sourceRoot,row.provenanceManifest))]).sort(([a],[b])=>a.localeCompare(b))),clips:Object.fromEntries(manifests.flatMap(row=>row.clips.filter(clip=>clip.approval?.status==='user-approved').map(clip=>[clip.clipId,{sha256:hash(resolve(sourceRoot,clip.file)),manifestSha256:row.provenanceManifestSha256,encodedReceiptSha256:row.crowdAdmission.takes[clip.clipId]?.encodedReceiptSha256}])).sort(([a],[b])=>a.localeCompare(b)))};
+}
+export function measureCrowdMouthEnergy(cast,ffmpegPath,runDirectory,sourceRoot=root){
+ const catalogPath=resolve(sourceRoot,'For-AI/AUDIO-TEXT-LIBRARY.js'),catalogSource=readFileSync(catalogPath,'utf8').replace(/\r\n/g,'\n'),admissions=crowdAdmissions(catalogSource),directory=resolve(sourceRoot,'assets/voices/candidate-dialogue'),manifests=readdirSync(directory).filter(name=>name.endsWith('-crowd-manifest.json')).sort().map(name=>{const relative=`assets/voices/candidate-dialogue/${name}`,path=resolve(sourceRoot,relative),sha256=hash(path),manifest=json(path);if(manifest.clips.some(clip=>clip.approval?.status==='user-approved'))requireMatch(admissions[relative]===sha256,'Unadmitted crowd mouth source manifest');return {...manifest,provenanceManifest:relative,provenanceManifestSha256:sha256}});crowdRecordingsBlock(cast,manifests,sourceRoot,sourceRoot);const clips=manifests.flatMap(manifest=>manifest.clips.filter(clip=>clip.approval?.status==='user-approved').map(clip=>({...clip,encodedReceiptSha256:manifest.crowdAdmission.takes[clip.clipId]?.encodedReceiptSha256,provenanceManifestSha256:manifest.provenanceManifestSha256}))).sort((a,b)=>a.clipId.localeCompare(b.clipId));requireMatch(sameJson(clips.map(clip=>clip.clipId),crowdMouthClipIds)&&hash(ffmpegPath)===cityEnergyFfmpegSha256,'Crowd measurement set/decoder drift');const builderPath=resolve(sourceRoot,'tools/build-neighbor-voices.mjs'),builder=readFileSync(builderPath,'utf8');requireMatch([cityEnergyBuilderSha256,cityEnergyCanonicalBuilderSha256].includes(hash(builderPath))&&textHash(builder.replace(/\r\n/g,'\n'))===cityEnergyCanonicalBuilderSha256,'Crowd measurement builder drift');const lines=builder.split(/\r?\n/).filter(line=>line.startsWith('function energy(path){'));requireMatch(lines.length===1&&textHash(lines[0])===cityEnergyLineSha256,'Crowd measurement recipe drift');
+ const runPath=resolve(runDirectory);mkdirSync(runPath);const sourceBefore=crowdMouthSnapshot(cast,manifests,sourceRoot,ffmpegPath),results=[];let decoderCalls=0;const measurementBegan=Date.now();try{for(const [index,clip] of clips.entries()){requireMatch(Date.now()-measurementBegan<120000,'Crowd mouth measurement decoder wall budget');const manifest=manifests.find(row=>row.clips.some(item=>item.clipId===clip.clipId)),mp3=resolve(sourceRoot,clip.file);requireMatch(hash(mp3)===clip.sha256,'Crowd measurement MP3 changed');let decoded=null,calls=0;const decode=(args,binary)=>{requireMatch(binary&&calls++===0&&sameJson(Array.from(args),['-hide_banner','-loglevel','error','-i',mp3,'-f','f32le','-ac','1','-ar','24000','pipe:1']),'Changed crowd measurement decoder request');decoderCalls++;const result=spawnSync(ffmpegPath,['-nostdin','-threads','1',...args],{encoding:null,windowsHide:true,timeout:10000,maxBuffer:1048576}),bytes=result.stdout??Buffer.alloc(0),outcome={clipId:clip.clipId,pid:result.pid??null,status:result.status??null,signal:result.signal??null,error:result.error?.code??null,stdoutBytes:bytes.length,stdoutSha256:textHash(bytes),exitRecordedBeforeValidation:true};writeFileSync(resolve(runPath,`decode-${String(index+1).padStart(2,'0')}.json`),JSON.stringify(outcome,null,2)+'\n',{flag:'wx'});requireMatch(!result.error&&result.status===0&&!result.signal&&bytes.length>0&&bytes.length<=1048576&&bytes.length%4===0,'Crowd measurement decoder failed');const sampleCount=bytes.length/4;requireMatch(sampleCount<=240000,'Crowd measurement duration exceeds bound');for(let i=0;i<bytes.length;i+=4)requireMatch(Number.isFinite(bytes.readFloatLE(i)),'Nonfinite crowd measurement PCM');decoded={pcmSha256:textHash(bytes),sampleCount,durationSeconds:sampleCount/24000};return bytes;};const energy=vm.runInNewContext('('+lines[0]+')',{ffmpeg:decode,Float32Array,Math},{timeout:1000})(mp3);requireMatch(calls===1&&decoded&&energy.mouthHz===40&&energy.durationSeconds===decoded.durationSeconds,'Crowd measurement recipe output invalid');results.push({clipId:clip.clipId,file:clip.file,sha256:clip.sha256,voiceId:clip.voiceId,actorId:clip.actorId,profileId:clip.profileId,referenceSha256:clip.referenceSha256,text:clip.text,english:clip.english,encodedReceiptSha256:clip.encodedReceiptSha256,manifestSha256:manifest.provenanceManifestSha256,decoded,measurement:{mouthHz:40,mouthEnergy:Array.from(energy.mouthEnergy)}});}
+ const sourceAfter=crowdMouthSnapshot(cast,manifests,sourceRoot,ffmpegPath);requireMatch(sameJson(sourceBefore,sourceAfter),'Crowd source changed during measurement');const measurement={kind:'crowd-final-mp3-mouth-energy-7-measurement-candidate-v1',status:'MEASURED CANDIDATE ONLY',admission:'NOT PERFORMED',decodeCalls:7,inputCatalogSha256:sourceBefore.catalogSha256,recipeFileSha256:hash(builderPath),recipeFunctionLineSha256:cityEnergyLineSha256,ffmpegSha256:cityEnergyFfmpegSha256,sourceBefore,sourceAfter,results};const bytes=JSON.stringify(measurement,null,2)+'\n',measurementPath=resolve(runPath,'measurement.json');writeFileSync(measurementPath,bytes,{flag:'wx'});const terminal={status:measurement.status,decodeCalls:7,path:measurementPath,sha256:textHash(bytes),admission:'NOT PERFORMED'};writeFileSync(resolve(runPath,'terminal.json'),JSON.stringify(terminal,null,2)+'\n',{flag:'wx'});return terminal;
+ }catch(error){const terminal={status:'FAILED',decodeCalls:decoderCalls,error:String(error?.message??error),admission:'NOT PERFORMED'};writeFileSync(resolve(runPath,'terminal.json'),JSON.stringify(terminal,null,2)+'\n',{flag:'wx'});throw error;}
+}
+export function admitCrowdMouthEnergy(cast,measurement,measurementSha256,ffmpegPath,sourceRoot=root){
+ const catalogPath=resolve(sourceRoot,'For-AI/AUDIO-TEXT-LIBRARY.js'),catalogSource=readFileSync(catalogPath,'utf8').replace(/\r\n/g,'\n');requireMatch(!catalogSource.match(crowdMouthEnergyPattern),'Crowd mouth supplement already admitted');const supplementPath=resolve(sourceRoot,crowdMouthEnergyPath),supplementTemporary=supplementPath+'.crowd-mouth.tmp',catalogTemporary=catalogPath+'.crowd-mouth.tmp';requireMatch(!existsSync(supplementPath)&&!existsSync(supplementTemporary)&&!existsSync(catalogTemporary)&&!lstatSync(catalogPath).isSymbolicLink()&&lstatSync(catalogPath).nlink===1,'Occupied or linked crowd mouth destination');
+ const admissions=crowdAdmissions(catalogSource),directory=resolve(sourceRoot,'assets/voices/candidate-dialogue'),manifests=readdirSync(directory).filter(name=>name.endsWith('-crowd-manifest.json')).sort().map(name=>{const relative=`assets/voices/candidate-dialogue/${name}`,path=resolve(sourceRoot,relative),sha256=hash(path),manifest=json(path);if(manifest.clips.some(clip=>clip.approval?.status==='user-approved'))requireMatch(admissions[relative]===sha256,'Unadmitted crowd mouth source manifest');return {...manifest,provenanceManifest:relative,provenanceManifestSha256:sha256}});crowdRecordingsBlock(cast,manifests,sourceRoot,sourceRoot);const clips=manifests.flatMap(manifest=>manifest.clips.filter(clip=>clip.approval?.status==='user-approved').map(clip=>({...clip,encodedReceiptSha256:manifest.crowdAdmission.takes[clip.clipId]?.encodedReceiptSha256,provenanceManifestSha256:manifest.provenanceManifestSha256}))).sort((a,b)=>a.clipId.localeCompare(b.clipId));
+ requireMatch(sameJson(clips.map(clip=>clip.clipId),crowdMouthClipIds)&&/^[a-f0-9]{64}$/.test(measurementSha256)&&measurement.kind==='crowd-final-mp3-mouth-energy-7-measurement-candidate-v1'&&measurement.status==='MEASURED CANDIDATE ONLY'&&measurement.admission==='NOT PERFORMED'&&measurement.decodeCalls===7&&measurement.inputCatalogSha256===textHash(catalogSource)&&[cityEnergyBuilderSha256,cityEnergyCanonicalBuilderSha256].includes(measurement.recipeFileSha256)&&measurement.recipeFunctionLineSha256===cityEnergyLineSha256&&measurement.ffmpegSha256===cityEnergyFfmpegSha256&&measurement.results.length===7&&sameJson(measurement.sourceBefore,measurement.sourceAfter)&&measurement.sourceBefore.catalogSha256===textHash(catalogSource)&&sameJson(measurement.sourceBefore,crowdMouthSnapshot(cast,manifests,sourceRoot,ffmpegPath)),'Foreign/incomplete crowd mouth measurement');const measured=new Map(measurement.results.map(row=>[row.clipId,row]));requireMatch(measured.size===7&&sameJson([...measured.keys()].sort(),crowdMouthClipIds)&&hash(ffmpegPath)===cityEnergyFfmpegSha256,'Missing/extra crowd measurement or foreign decoder');
+ const builderPath=resolve(sourceRoot,'tools/build-neighbor-voices.mjs'),builder=readFileSync(builderPath,'utf8'),admissionRecipeBuilderSha256=hash(builderPath);requireMatch([cityEnergyBuilderSha256,cityEnergyCanonicalBuilderSha256].includes(admissionRecipeBuilderSha256)&&textHash(builder.replace(/\r\n/g,'\n'))===cityEnergyCanonicalBuilderSha256,'Crowd mouth builder drift');const lines=builder.split(/\r?\n/).filter(line=>line.startsWith('function energy(path){'));requireMatch(lines.length===1&&textHash(lines[0])===cityEnergyLineSha256&&new Uint8Array(new Uint32Array([0x01020304]).buffer)[0]===4,'Crowd mouth energy recipe/endian drift');
+ const began=Date.now(),rows={};for(const clip of clips){requireMatch(Date.now()-began<120000,'Crowd mouth admission decoder wall budget');const manifest=manifests.find(row=>row.clips.some(item=>item.clipId===clip.clipId)),found=measured.get(clip.clipId);requireMatch(found&&found.sha256===clip.sha256&&found.file===clip.file&&found.voiceId===clip.voiceId&&found.actorId===clip.actorId&&found.profileId===clip.profileId&&found.referenceSha256===clip.referenceSha256&&found.encodedReceiptSha256===clip.encodedReceiptSha256&&found.manifestSha256===manifest.provenanceManifestSha256,'Foreign measured crowd identity/manifest');const mp3=resolve(sourceRoot,clip.file);requireMatch(hash(mp3)===clip.sha256,'Crowd mouth MP3 changed');let decoded=null,calls=0;const decode=(args,binary)=>{requireMatch(binary&&calls++===0&&sameJson(Array.from(args),['-hide_banner','-loglevel','error','-i',mp3,'-f','f32le','-ac','1','-ar','24000','pipe:1']),'Changed crowd mouth decoder request');const result=spawnSync(ffmpegPath,['-nostdin','-threads','1',...args],{encoding:null,windowsHide:true,timeout:10000,maxBuffer:1048576});requireMatch(!result.error&&result.status===0&&!result.signal&&result.stdout?.length>0&&result.stdout.length<=1048576&&result.stdout.length%4===0,'Crowd mouth decoder failed');const bytes=result.stdout,sampleCount=bytes.length/4;requireMatch(sampleCount<=240000,'Crowd mouth decoded duration exceeds bound');for(let i=0;i<bytes.length;i+=4)requireMatch(Number.isFinite(bytes.readFloatLE(i)),'Nonfinite crowd mouth PCM');decoded={pcmSha256:textHash(bytes),sampleCount,durationSeconds:sampleCount/24000};return bytes;};const energy=vm.runInNewContext('('+lines[0]+')',{ffmpeg:decode,Float32Array,Math},{timeout:1000})(mp3);requireMatch(calls===1&&decoded&&found.decoded.pcmSha256===decoded.pcmSha256&&found.decoded.sampleCount===decoded.sampleCount&&found.decoded.durationSeconds===decoded.durationSeconds&&energy.mouthHz===40&&energy.durationSeconds===decoded.durationSeconds&&sameJson(Array.from(energy.mouthEnergy),found.measurement.mouthEnergy),'Crowd mouth bins differ from actual final MP3');rows[clip.clipId]={clipId:clip.clipId,voiceId:clip.voiceId,actorId:clip.actorId,profileId:clip.profileId,referenceSha256:clip.referenceSha256,text:clip.text,english:clip.english,file:clip.file,sha256:clip.sha256,encodedReceiptSha256:clip.encodedReceiptSha256,pcmSha256:decoded.pcmSha256,sampleCount:decoded.sampleCount,durationSeconds:decoded.durationSeconds,mouthHz:40,mouthEnergy:Array.from(energy.mouthEnergy),energySha256:textHash(Buffer.from(energy.mouthEnergy))};}
+ requireMatch(hash(ffmpegPath)===cityEnergyFfmpegSha256&&hash(builderPath)===admissionRecipeBuilderSha256,'Crowd mouth decoder/recipe changed during admission');const supplement={kind:'crowd-final-mp3-mouth-energy-supplement-v1',recipeBuilderSha256:measurement.recipeFileSha256,recipeCanonicalBuilderSha256:cityEnergyCanonicalBuilderSha256,admissionRecipeBuilderSha256,recipeLineSha256:cityEnergyLineSha256,ffmpegSha256:cityEnergyFfmpegSha256,measurementSha256,clips:rows};crowdMouthEnergyRows(supplement,manifests,sourceRoot);crowdRecordingsBlock(cast,manifests,sourceRoot,sourceRoot,rows);const bytes=JSON.stringify(supplement,null,2)+'\n',anchor='const crowdMouthEnergyReceipt=Object.freeze('+JSON.stringify({[crowdMouthEnergyPath]:textHash(bytes)})+');\n',nextCatalog=catalogSource.replace('const recordings=Object.freeze({',()=>anchor+'const recordings=Object.freeze({');requireMatch(nextCatalog.includes(anchor)&&readFileSync(catalogPath,'utf8').replace(/\r\n/g,'\n')===catalogSource,'Catalog changed before crowd mouth admission');let installed=false;try{writeFileSync(supplementTemporary,bytes,{flag:'wx'});renameSync(supplementTemporary,supplementPath);installed=true;writeFileSync(catalogTemporary,nextCatalog,{flag:'wx'});renameSync(catalogTemporary,catalogPath);}catch(error){if(existsSync(catalogTemporary))unlinkSync(catalogTemporary);if(existsSync(supplementTemporary))unlinkSync(supplementTemporary);if(installed)unlinkSync(supplementPath);throw error}return{clips:7,supplement:crowdMouthEnergyPath,sha256:textHash(bytes),catalogSync:'REQUIRED',cityRows:'UNCHANGED'};
+}
 export function admitCityMouthEnergy(cast,measurement,measurementSha256,ffmpegPath,sourceRoot=root){
  const catalogPath=resolve(sourceRoot,'For-AI/AUDIO-TEXT-LIBRARY.js'),catalogSource=readFileSync(catalogPath,'utf8').replace(/\r\n/g,'\n');
  requireMatch(!catalogSource.match(cityMouthEnergyPattern),'City mouth supplement already admitted');
@@ -610,12 +765,100 @@ export function admitCityManifest(cast,manifest,reviewRoot,authoringHelperPath,a
  return {voiceId:verified.voiceId,accepted:verified.clips.length,held:verified.heldPrivate.length,manifest:manifestPath,listening:'NOT RUN'};
 }
 
+// SOURCE FRAGMENT for the same curator as the reviewed v2 sanitizer.
+// No CLI, synthesis, decoder, ASR, native manifest/export or write operation.
+export function collectCrowd9PrivateManifestProposals(cast,authorityProof,terminalProofs,selectionProof=null,sourceRoot=root){
+ requireMatch(authorityProof?.sha256===hash(authorityProof.path),'Collector authority changed');
+ const authority=json(authorityProof.path),phases=['plan','render','process'];
+ requireMatch(authority.status==='ROOT_SEALED_FINITE_CROWD9'&&authority.executorThread==='01a13cd8-cbde-75b3-9876-7d75cbe6bef1'&&authority.helperSha256===crowdAuthoringHelperSha256&&authority.maximumNativeCalls===9&&authority.maximumCallsPerClip===1&&authority.maximumAsrReadings===18&&authority.automaticRetries===0,'Collector scope differs from actual first9 grant');
+ const terminalHashes={};
+ for(const phase of phases){
+  const proof=terminalProofs?.[phase];requireMatch(proof?.sha256===hash(proof.path),'Missing/changed ROOT terminal evidence: '+phase);
+  const terminal=json(proof.path);
+  requireMatch(terminal.phase===phase&&terminal.specificationSha256===authorityProof.sha256&&terminal.producerSha256===authority.adapterSha256&&terminal.exitCode===0&&terminal.rootRetired===true&&terminal.timedOut===false&&!terminal.supervisorError&&terminal.logsComplete===true&&Array.isArray(terminal.survivingOwnedChildren)&&terminal.survivingOwnedChildren.length===0&&Array.isArray(terminal.ownedCleanupKills)&&terminal.ownedCleanupKills.length===0&&Array.isArray(terminal.postflightPinFailures)&&terminal.postflightPinFailures.length===0&&terminal.postflightProtectedPinsChecked===Object.keys(authority.protectedPublicPins).length,'ROOT phase not completed/retired with preservation: '+phase);
+  terminalHashes[phase]=proof.sha256;
+ }
+ requireMatch(hash(authority.requestPath)===authority.requestSha256,'Collector full36 native request changed');
+ const fullPlan={text:readFileSync(authority.requestPath,'utf8'),sha256:authority.requestSha256},{plan,authored}=crowdFullPlan(cast,fullPlan,sourceRoot);
+ requireMatch(sameJson(plan.sourceSha256,authority.sourceSha256),'Collector generation source pins differ');
+ const family=resolve(authority.musicRoot,plan.privateReviewFamily);
+ requireMatch(realpathSync(family)===family,'Collector private family canonical path changed');
+ const privateFile=relative=>{const path=resolve(family,relative);requireMatch(path.startsWith(family+sep)&&realpathSync(path)===path&&!lstatSync(path).isSymbolicLink(),'Collector private path escaped or aliased');return path;};
+ const summaries={},summaryHashes={};
+ for(const phase of phases){
+  const file=privateFile(`_batch9-control/${phase}-summary.json`),summary=json(file);
+  requireMatch(summary.phase===phase&&summary.authoritySha256===authorityProof.sha256&&summary.adapterSha256===authority.adapterSha256&&summary.helperSha256===crowdAuthoringHelperSha256&&summary.publicExports===0&&summary.humanListeningVerified===false&&summary.automaticRetries===0&&summary.rows?.length===9,'Actual completed adapter summary missing/binding changed: '+phase);
+  summaries[phase]=summary;summaryHashes[phase]=hash(file);
+ }
+ const selectedJobs=plan.jobs.filter(row=>Object.hasOwn(authority.tokenCaps,row.clipId));
+ requireMatch(selectedJobs.length===9&&new Set(selectedJobs.map(row=>row.voiceId)).size===9&&selectedJobs.every(row=>row.region==='germany'&&row.slot===0),'Collector must account for exactly actual first9 Germany0 jobs');
+ const allowedIds=new Set(selectedJobs.map(row=>row.clipId));
+ for(const phase of ['render','process'])requireMatch(new Set(summaries[phase].rows.map(row=>row.clipId)).size===9&&summaries[phase].rows.every(row=>allowedIds.has(row.clipId)),'Duplicate/out-of-scope summary slot: '+phase);
+ requireMatch(new Set(summaries.plan.rows.map(row=>row.voiceId)).size===9&&summaries.plan.rows.every(row=>selectedJobs.some(job=>job.voiceId===row.voiceId)),'Native plan summary voice coverage changed');
+ let selection=null;const selections=new Map();
+ if(selectionProof){
+  requireMatch(selectionProof.sha256===hash(selectionProof.path),'ROOT clip/hash selection changed');selection=json(selectionProof.path);
+  requireMatch(selection.status==='user-approved'&&selection.scope==='whole-game-fixed-voice-cloning'&&/^\d{4}-\d{2}-\d{2}$/.test(selection.date)&&selection.instruction?.trim()&&Array.isArray(selection.clips),'Missing ROOT use selection');
+  for(const row of selection.clips){requireMatch(allowedIds.has(row.clipId)&&!selections.has(row.clipId)&&/^[a-f0-9]{64}$/.test(row.encodedSha256),'Selection duplicate/outside actual first9');selections.set(row.clipId,row.encodedSha256);}
+ }
+ const proposals=[],inventory=[];let selectedCount=0,eligibleCount=0;
+ for(const job of selectedJobs){
+  const owned=plan.jobs.filter(row=>row.voiceId===job.voiceId),voice=job.voiceId;
+  requireMatch(owned.length===4&&authored.has(job.clipId),'Invalid owned four-slot request');
+  const requestPath=privateFile(`${voice}/requests.json`),requestHash=hash(requestPath),request=json(requestPath),planRow=summaries.plan.rows.find(row=>row.voiceId===voice);
+  requireMatch(planRow.frozenRequestPath===requestPath&&planRow.sha256===requestHash&&summaries.plan.frozenRequestPins?.[requestPath]===requestHash&&request.requestedLineCount===4&&sameJson(request.jobs,owned)&&request.authoredPlanSha256===authority.requestSha256&&sameJson(request.sourceSha256,plan.sourceSha256)&&sameJson(request.authoredPlanSourceSha256,plan.sourceSha256),'Actual native four-slot plan changed');
+  const pending=owned.filter(row=>row.clipId!==job.clipId).map(row=>({...row,reason:'not rendered; selected production fallback'}));
+  for(const row of pending){
+   for(const [folder,extension] of [['raw','json'],['raw','wav'],['encoded','json'],['encoded','mp3']])requireMatch(!existsSync(resolve(family,voice,folder,`${row.clipId}.${extension}`)),'One of the remaining27 has an artifact');
+   requireMatch(!existsSync(resolve(family,voice,'encoded',`${row.clipId}-processed.wav`)),'One of the remaining27 has a native processing intermediate');
+  }
+  const rawPath=privateFile(`${voice}/raw/${job.clipId}.json`),raw=json(rawPath),rawHash=hash(rawPath),render=summaries.render.rows.find(row=>row.clipId===job.clipId),processed=summaries.process.rows.find(row=>row.clipId===job.clipId);
+  requireMatch(Object.entries(job).every(([key,value])=>sameJson(raw[key],value))&&raw.authoringHelperSha256===crowdAuthoringHelperSha256&&raw.requestSha256===requestHash&&raw.seed===71000&&raw.synthesisAttempt===1&&render.receiptSha256===rawHash&&render.rawSha256===raw.rawSha256&&render.profileId===job.profileId&&render.actualTakeWithinGrant===1&&render.globalHistoricalOrdinal===null&&render.nativeEosReached===(raw.decode?.eosReached===true)&&processed.receiptSha256===rawHash&&processed.rawSha256===raw.rawSha256,'Actual raw receipt/summary ownership or first-take evidence changed');
+  requireMatch(hash(privateFile(`${voice}/raw/${job.clipId}.wav`))===raw.rawSha256,'Actual raw audio hash changed');
+  const gates=[];let encoded=null,encodedHash=null;
+  if(raw.decode?.eosReached!==true){
+   gates.push('missing or failed native EOS');
+   requireMatch(processed.asrReadings===0&&!existsSync(resolve(family,voice,'encoded',`${job.clipId}.json`))&&!existsSync(resolve(family,voice,'encoded',`${job.clipId}.mp3`))&&!existsSync(resolve(family,voice,'encoded',`${job.clipId}-processed.wav`)),'Non-EOS take unexpectedly encoded or audited');
+  }else{
+   const path=privateFile(`${voice}/encoded/${job.clipId}.json`);encoded=json(path);encodedHash=hash(path);
+   requireMatch(processed.encodedReceiptSha256===encodedHash&&processed.encodedSha256===encoded.sha256&&Object.entries(job).every(([key,value])=>sameJson(encoded[key],value))&&encoded.rawSha256===raw.rawSha256&&encoded.requestSha256===requestHash&&encoded.authoringHelperSha256===crowdAuthoringHelperSha256,'Actual final encoding receipt/summary changed');
+   requireMatch(hash(privateFile(`${voice}/encoded/${job.clipId}.mp3`))===encoded.sha256,'Actual encoded bytes changed');
+   requireMatch(processed.asrWordExact===encoded.asrWordExact&&processed.asrReadings===encoded.asrReadings?.length&&processed.wordCueCount===encoded.wordCues?.length&&processed.levelsPass===(Math.abs(encoded.integratedLufs+18)<=.3&&encoded.truePeakDbtp<=-1.5),'Actual final gates differ from completed process summary');
+   if(encoded.asrWordExact!==true)gates.push('independent spoken-word equivalence');
+   if(encoded.asrLiteralWordExact!==true)gates.push('literal exact ASR required by current first9 contract');
+   if(Math.abs(encoded.integratedLufs+18)>.3||!Number.isFinite(encoded.integratedLufs)||encoded.truePeakDbtp>-1.5||!Number.isFinite(encoded.truePeakDbtp))gates.push('encoded loudness/true peak');
+   try{crowdExactCues(encoded);}catch(error){requireMatch(error.message==='Incomplete crowd exact final-caption cues','Unexpected caption integrity error');gates.push('incomplete exact final-caption cues');}
+  }
+  const eligible=gates.length===0;if(eligible){fixedTakeAuthority(cast,encoded);eligibleCount++;}
+  const selected=selections.has(job.clipId);
+  requireMatch(!selected||eligible&&selections.get(job.clipId)===encoded.sha256,'ROOT selection includes a failed candidate or wrong encoded hash');
+  let proposal;
+  if(selected){
+   const approval={status:'user-approved',scope:selection.scope,date:selection.date,instruction:selection.instruction,clipId:job.clipId,encodedSha256:encoded.sha256};
+   const {asrReadings,...actualEncodedFields}=encoded;
+   proposal=prepareCrowdDefaultManifest(cast,{schemaVersion:1,voiceId:voice,profileId:job.profileId,requestedLineCount:4,generatedLineCount:1,lineCount:1,clips:[{...actualEncodedFields,approval}],heldPrivate:pending},authorityProof,sourceRoot);
+   selectedCount++;
+  }else{
+   const held={...job,reason:eligible?'technically verified; awaiting clip/hash-specific use selection':'held private; selected production fallback',failedGates:gates};
+   proposal={schemaVersion:1,voiceId:voice,profileId:job.profileId,fallback:cast.productionVoices[voice].fallback??'captions',status:'private partial proposal; no default admission',requestedLineCount:4,generatedLineCount:1,lineCount:0,clips:[],heldPrivate:[held,...pending],approvedExistingReuse:[]};
+  }
+  proposals.push(proposal);
+  inventory.push({clipId:job.clipId,voiceId:voice,rawReceiptSha256:rawHash,rawSha256:raw.rawSha256,nativeEosReached:raw.decode?.eosReached===true,encodedReceiptSha256:encodedHash,encodedSha256:encoded?.sha256??null,technicalEligible:eligible,selectedForUse:selected,failedGates:gates,unrenderedOwnedSlots:3,humanListeningVerified:false});
+ }
+ requireMatch(proposals.length===9&&proposals.reduce((n,row)=>n+row.requestedLineCount,0)===36&&proposals.reduce((n,row)=>n+row.generatedLineCount,0)===9&&proposals.every(row=>row.clips.length+row.heldPrivate.length===4),'Nine partial manifests do not account for genuine36 scope');
+ return {status:'private proposal collection only; no public copy/write/admission',authoritySha256:authorityProof.sha256,nativeFullPlanSha256:authority.requestSha256,terminalSha256:terminalHashes,adapterSummarySha256:summaryHashes,selectionSha256:selectionProof?.sha256??null,counts:{requested:36,generated:9,unrendered:27,technicalEligible:eligibleCount,selectedClips:selectedCount,heldGenerated:9-selectedCount,humanListeningVerified:0},inventory,partialManifestProposals:proposals};
+}
+
 export function main(args=process.argv.slice(2)){
  requireMatch(!(args.includes('--sync')&&args.includes('--rename-production')),'Rename production profiles first, then sync their verified bindings');
  const value=name=>{const i=args.indexOf(name);return i<0?null:args[i+1]};
  const cast=json(resolve(root,'For-AI/VOICE-CAST.json'));
  requireMatch(new Set(Object.values(cast.productionVoices).map(p=>p.profileId)).size===Object.keys(cast.productionVoices).length,'Production characters share a profile UUID');
  const cityProposal=value('--prepare-city-manifest'),cityAdmission=value('--admit-city-manifest'),cityMouthAdmission=value('--admit-city-mouth-energy');
+ const crowdMouthAdmission=value('--admit-crowd-mouth-energy');
+ const crowdMouthMeasurement=value('--measure-crowd-mouth-energy');
+ if(crowdMouthMeasurement){requireMatch(!crowdMouthAdmission&&!cityMouthAdmission&&!cityProposal&&!cityAdmission&&!args.includes('--sync')&&value('--crowd-mouth-ffmpeg'),'Crowd mouth measurement requires its pinned decoder and cannot sync/admit');console.log(JSON.stringify(measureCrowdMouthEnergy(cast,resolve(value('--crowd-mouth-ffmpeg')),resolve(crowdMouthMeasurement))));return;}
+ if(crowdMouthAdmission){requireMatch(!cityMouthAdmission&&!cityProposal&&!cityAdmission&&!args.includes('--sync')&&!args.includes('--archive-assets')&&!args.includes('--archive-profiles')&&value('--crowd-mouth-ffmpeg'),'Crowd mouth admission requires measured receipt and pinned decoder, then separate catalog sync');const path=resolve(crowdMouthAdmission);console.log(JSON.stringify(admitCrowdMouthEnergy(cast,json(path),hash(path),resolve(value('--crowd-mouth-ffmpeg')))));return;}
  if(cityMouthAdmission){
   requireMatch(!cityProposal&&!cityAdmission&&!args.includes('--sync')&&!args.includes('--archive-assets')&&!args.includes('--archive-profiles')&&value('--city-mouth-ffmpeg'),'City mouth admission requires measured receipt and pinned decoder, then separate catalog sync');
   const path=resolve(cityMouthAdmission);console.log(JSON.stringify(admitCityMouthEnergy(cast,json(path),hash(path),resolve(value('--city-mouth-ffmpeg')))));return;
@@ -630,10 +873,16 @@ export function main(args=process.argv.slice(2)){
  }
  const manifest=json(resolve(root,'assets/voices/candidate-dialogue/manifest.json'));
  const catalogPath=resolve(root,'For-AI/AUDIO-TEXT-LIBRARY.js');let source=readFileSync(catalogPath,'utf8').replace(/\r\n/g,'\n');
- const crowdDir=resolve(root,'assets/voices/candidate-dialogue'),crowdManifests=readdirSync(crowdDir).filter(name=>name.endsWith('-crowd-manifest.json')).sort().map(name=>json(resolve(crowdDir,name)));
+ const crowdDir=resolve(root,'assets/voices/candidate-dialogue'),crowdAdmitted=crowdAdmissions(source),crowdManifests=readdirSync(crowdDir).filter(name=>name.endsWith('-crowd-manifest.json')).sort().map(name=>{const relative=`assets/voices/candidate-dialogue/${name}`,file=resolve(root,relative),sha256=hash(file),manifest=json(file);if(manifest.clips.some(clip=>clip.approval?.status==='user-approved'))requireMatch(crowdAdmitted[relative]===sha256,'Crowd default manifest lacks verified ROOT private admission');return {...manifest,provenanceManifest:relative,provenanceManifestSha256:sha256};});
  const crowdBlock=crowdCandidateBlock(cast,crowdManifests,root),crowdPattern=/const crowdCandidateDialogue=Object\.freeze\(\{[^\n]*\}\);\n/;
  if(args.includes('--sync'))source=source.replace(crowdPattern,()=>crowdBlock);
  else requireMatch(source.match(crowdPattern)?.[0]===crowdBlock,'Crowd candidate projection stale; run --sync');
+ const crowdMouth=crowdMouthEnergyFromCatalog(source,crowdManifests,root);
+ const crowdDefaults=crowdRecordingsBlock(cast,crowdManifests,root,root,crowdMouth),crowdDefaultsPattern=/const crowdRecordings=Object\.freeze\([^\n]*\);\n/;
+ if(args.includes('--sync')){
+  source=source.replace(crowdDefaultsPattern,'').replace('const recordings=Object.freeze({',()=>crowdDefaults+'const recordings=Object.freeze({');
+  if(!source.includes(' ...crowdRecordings,'))source=source.replace('const recordings=Object.freeze({','const recordings=Object.freeze({\n ...crowdRecordings,');
+ }else requireMatch(source.match(crowdDefaultsPattern)?.[0]===crowdDefaults,'Owned crowd default projection stale; run --sync');
  const marker=/\/\/ Generated by tools\/curate-voice-library\.mjs --sync from VOICE-CAST\.json\.\n[\s\S]*?function productionClip\(clip\)\{[^\n]+\}\n/;
  const expected=runtimeBlock(cast);
  if(args.includes('--sync')){source=source.replace(marker,'');source=source.replace('const legacyVoices=',()=>expected+'const legacyVoices=');}

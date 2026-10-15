@@ -2,6 +2,7 @@ import assert from 'node:assert/strict';
 import {readFileSync} from 'node:fs';
 import test from 'node:test';
 import vm from 'node:vm';
+import {motionObserverSource} from './street-simulation-fixture-source.mjs';
 
 const source=readFileSync(new URL('../game.js',import.meta.url),'utf8');
 function fn(name,code=source){
@@ -36,7 +37,7 @@ function harness(direct=false){
  const buildings=source.slice(source.indexOf('const buildings='),source.indexOf('const grassAreas='));
  const paths=source.slice(source.indexOf('for(const b of buildings){'),source.indexOf('walkways.push({x:goerlitzerPark'));
  const names=['normObjectRadius','propRadius','staticBlocked','signedRectDistance','trainCarDistance','vehicleBodyDistance','responderBlocked','amtExitPosition','returnFromAmt','wanted','showAmtDirectResult','cancelAmtAppointment','bureaucrat','interactBuilding','neighborActivityActive','cityInteractionTarget','interact'];
- vm.runInContext(`${lane}\n${buildings}\n${paths}\n${names.map(name=>fn(name)).join('\n')}\nglobalThis.office=buildings.find(b=>b.id==='buergeramt');`,h);
+ vm.runInContext(motionObserverSource(source)+`${lane}\n${buildings}\n${paths}\n${names.map(name=>fn(name)).join('\n')}\nglobalThis.office=buildings.find(b=>b.id==='buergeramt');`,h);
  if(direct){const start=source.indexOf(' const directConfig=');vm.runInContext(source.slice(start,source.indexOf('\n function restartAmt',start))+'\nglobalThis.directConfig=directConfig;',h)}
  return Object.assign(h,{events,visits,classes,elements});
 }
